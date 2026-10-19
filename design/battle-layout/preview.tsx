@@ -41,6 +41,13 @@ const enemies = ENCOUNTERS[1].enemies.map((enemy, index) => ({
 }));
 const params = new URLSearchParams(location.search);
 
+// A rotated 3:4 rectangle has visible height H*cos(a) + W*abs(sin(a)).
+// Uniform compensation preserves the original ratio while matching creature-frame height.
+function fanScale(index: number) {
+  const radians = ((index - 2) * 4 * Math.PI) / 180;
+  return 1 / (Math.cos(radians) + 0.75 * Math.abs(Math.sin(radians)));
+}
+
 type Inspection = { title: string; content: ReactNode; artwork: ReactNode };
 function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?: boolean }) {
   const [selected, setSelected] = useState<Card | null>(targeting ? hand[2]! : null);
@@ -91,6 +98,10 @@ function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?
     const keys = (event: KeyboardEvent) => {
       if (inspection || pause) return;
       if (event.key === "Escape") setSelected(null);
+      if (selected && event.key === "Enter") {
+        event.preventDefault();
+        setSelected(null);
+      }
       if (selected && /^(a|d)$/i.test(event.key)) {
         event.preventDefault();
         const prefix = allyTarget ? "ally" : "enemy";
@@ -188,7 +199,11 @@ function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?
                     if (selected && !allyTarget) setTarget(enemy.id);
                   }}
                   onClick={() =>
-                    selected ? setTarget(enemy.id) : inspectCreature(enemy.species, enemy.name)
+                    selected
+                      ? !allyTarget && def?.effect !== "teamGuard"
+                        ? setSelected(null)
+                        : undefined
+                      : inspectCreature(enemy.species, enemy.name)
                   }
                 />
               </TooltipTrigger>
@@ -213,7 +228,9 @@ function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?
             <span>
               {def.name} · {def.cost} mana
             </span>
-            <Button onClick={() => setSelected(null)}>Play · Enter</Button>
+            {def.effect === "teamGuard" ? (
+              <Button onClick={() => setSelected(null)}>Play · Enter</Button>
+            ) : null}
             <Button variant="outline" onClick={() => setSelected(null)}>
               Cancel
             </Button>
@@ -240,7 +257,7 @@ function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?
                     if (selected && allyTarget) setTarget(creature.id);
                   }}
                   onClick={() =>
-                    selected && allyTarget ? setTarget(creature.id) : inspectCreature(creature.species)
+                    selected && allyTarget ? setSelected(null) : inspectCreature(creature.species)
                   }
                 />
               </TooltipTrigger>
@@ -272,6 +289,7 @@ function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?
               style={
                 {
                   "--fan-angle": `${(index - 2) * 4}deg`,
+                  "--fan-fit": fanScale(index),
                   "--fan-drop": `${Math.abs(index - 2) * 7}px`,
                   "--fan-order": index,
                 } as React.CSSProperties

@@ -129,7 +129,7 @@
 .sample-hand-slot {
   flex: 0 0 var(--sample-hand);
   width: var(--sample-hand);
-  transform: translateY(var(--fan-drop)) rotate(var(--fan-angle));
+  transform: translateY(var(--fan-drop)) rotate(var(--fan-angle)) scale(var(--fan-fit));
   transform-origin: 50% 100%;
   position: relative;
   z-index: var(--fan-order);
@@ -148,10 +148,10 @@
 }
 .sample-hand-slot .action-card:hover,
 .sample-hand-slot .action-card:focus-visible {
-  transform: translateY(-12px) rotate(calc(var(--fan-angle) * -1));
+  transform: translateY(-12px) rotate(calc(var(--fan-angle) * -1)) scale(calc(1 / var(--fan-fit)));
 }
 .sample-hand-slot .action-card.selected {
-  transform: translateY(-20px) rotate(calc(var(--fan-angle) * -1));
+  transform: translateY(-20px) rotate(calc(var(--fan-angle) * -1)) scale(calc(1 / var(--fan-fit)));
 }
 .sample-target-line {
   position: absolute;

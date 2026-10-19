@@ -8,11 +8,11 @@ Do not add slogans, decorative headings, branding/navigation bars, footers, prot
 
 The current design review selects the following direction. These choices supersede the earlier flat-hand layout, but gameplay screens have not yet been changed to match. Compare the isolated samples at `/design/battle-layout/index.html?compare=1` using the development server before choosing exact scale and spacing.
 
-- Layout A selected: more breathing room. Hand cards match creature artwork height while retaining their 3:4 portrait ratio; creature artwork remains 4:3 landscape.
+- Layout A selected: more breathing room. Hand cards match the creature frames' rendered height, including fan rotation, hover and selection. Only uniform scale is used: action cards retain their 3:4 portrait ratio, and creatures retain 4:3 landscape.
 - No visible battle, turn or draw/discard counters. Mana uses Alchemy's full/spent crystal artwork and hover glint.
 - Slightly fanned, overlapping hand. The focused card rises above neighbors; selection stays raised in its hand slot.
 - Health bars only on the battlefield. HP numbers live in hover/pinned detail; block and marks stay external icon/number readouts. No enemy intents are shown. Bar forecasts show expected health changes without battlefield HP numerals.
-- External actor/target outlines with a thin targeting line between artwork edges.
+- External actor/target outlines with a thin targeting line between artwork edges. Targeted cards confirm by clicking the target or pressing Enter/controller A, with no separate Play button. Team-wide cards retain a Play action.
 - Centered pinned inspection.
 - Rewards commit immediately on the final choice, with effects available beforehand.
 - Confirm abandoning a run. End turn stays immediate, and spending the last mana still advances automatically.
