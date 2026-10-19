@@ -13,6 +13,7 @@ These are the agreed directions from the design review. They supersede the proto
 - Pre-battle selection shows separate active and reserve rows beneath the enemies. Select either creature first, then a creature in the other roster row to swap them.
 - Reserve cards are smaller than enemy and active cards, emphasizing the active team while preserving artwork ratios.
 - A Deck button opens an inspection dialog for the active team's nine action cards.
+- Remember the previous active three when entering the next battle's team selection.
 
 ## Keyword XP and talents
 
@@ -27,6 +28,9 @@ These are the agreed directions from the design review. They supersede the proto
 - Every talent can eventually be unlocked; there is no limited active-talent loadout.
 - Complete every talent in a row to open the next row; choose purchase order within the current row.
 - The Talents screen uses keyword tabs across the top, with the selected keyword's talent rows below.
+- Each talent shows an icon and name; its effect is available in the hover/focus tooltip.
+- Clicking an available talent purchases it immediately, without a detail-dialog purchase step or confirmation.
+- Reset operates on the entire keyword category, refunding all spent points in that category while retaining its XP. Reset is available at any time, including during an expedition; talent effects update immediately. Individual-talent refunds are not the chosen interaction.
 - Start with Alchemy's point pacing: the first point costs 20 keyword XP, then another 40, then 60, increasing by 20 each time. Total XP for point n is 10 × n × (n + 1). This is initial tuning for playtesting.
 - Keyword list, talents per row, and exact talent effects remain open.
 - XP settlement when abandoning an unfinished battle and the treatment of automatic/repeated card plays remain open.
