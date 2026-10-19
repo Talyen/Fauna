@@ -1,8 +1,9 @@
 import { test, expect, type Page, type Locator } from "@playwright/test";
+import { produce } from "immer";
 import { createGame } from "../../src/game/engine";
 import { definition, species } from "../../src/game/content";
 import type { GameState } from "../../src/game/types";
-import { policy, winBattle, run } from "../unit/helpers";
+import { accept, policy, winBattle, run } from "../unit/helpers";
 async function seed(page: Page, state = createGame(7)) {
   await page.addInitScript((data) => localStorage.setItem("fauna.save.v1", data), JSON.stringify(state));
 }
@@ -30,12 +31,13 @@ async function playStep(
     await activate(page.getByRole("button", { name: `Upgrade ${def.name}`, exact: true }));
   } else if (command.type === "play") {
     await activate(page.locator(`[data-card-id="${command.cardId}"]`));
+    await expect(page.locator(".app")).toHaveAttribute("data-selected-card", command.cardId);
     if (command.targetId) {
       const name = command.targetId.startsWith("enemy")
         ? s.battle!.enemies.find((e) => e.id === command.targetId)!.name
         : species(s.team.find((c) => c.id === command.targetId)!.species).name;
       await activate(page.getByRole("button", { name: `Target ${name}`, exact: true }));
-    }
+    } else await activate(page.getByRole("button", { name: /^Play ·/ }));
   } else await activate(page.getByRole("button", { name: "End turn" }));
 }
 test("complete draft-to-boss journey, upgrade, unlock, and durable resume", async ({ page }) => {
@@ -185,13 +187,18 @@ test("combat tokens, local font and modal focus remain readable and isolated", a
   await expect(page.locator(".health-number").first()).toHaveCSS("color", "rgb(248, 113, 113)");
   await expect(page.locator('[data-damage-type="nature"]').first()).toHaveCSS("color", "rgb(52, 211, 153)");
   await expect(page.locator('[data-damage-type="fire"]').first()).toHaveCSS("color", "rgb(251, 146, 60)");
-  await expect(page.locator('[data-combat-tone="block"]').first()).toHaveCSS("color", "rgb(125, 211, 252)");
+  await page.locator('.hand .action-card[data-effect="teamGuard"]').first().focus();
+  await expect(page.getByRole("tooltip")).toBeVisible();
+  await expect(page.getByRole("tooltip").locator('[data-combat-tone="block"]').first()).toHaveCSS(
+    "color",
+    "rgb(125, 211, 252)",
+  );
   const card = page.locator(".hand .action-card").first();
   const before = await state(page);
   await card.focus();
   await page.keyboard.press("i");
   await expect(page.getByRole("button", { name: "Close inspection" })).toBeFocused();
-  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("s");
   await expect(page.getByRole("button", { name: "Close inspection" })).toBeFocused();
   await page.keyboard.press("Tab");
   await expect(page.getByRole("button", { name: "Close inspection" })).toBeFocused();
@@ -314,4 +321,216 @@ test("the expanded roster keeps three recruitment choices inside their panel", a
     expect(box!.x + box!.width).toBeLessThanOrEqual(panel!.x + panel!.width + 1);
   }
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test("art-only cards expose rules through hover and focus without overlays", async ({ page }) => {
+  await seed(page, run(7));
+  await page.goto("/");
+  expect(
+    await page
+      .locator(".creature-card, .action-card")
+      .evaluateAll((cards) =>
+        cards.every(
+          (card) =>
+            card.children.length === 1 &&
+            card.firstElementChild?.tagName === "IMG" &&
+            card.textContent === "",
+        ),
+      ),
+  ).toBe(true);
+  const card = page.locator('.hand .action-card[data-effect="attack"]').first();
+  await card.hover();
+  await expect(page.getByRole("tooltip")).toBeVisible();
+  await expect(page.getByRole("tooltip")).toContainText("1 energy");
+  await expect(page.getByRole("tooltip")).toContainText("damage");
+  await page.getByRole("tooltip").hover();
+  await expect(page.getByRole("tooltip")).toBeVisible();
+  await card.focus();
+  await page.keyboard.press("i");
+  await expect(page.getByRole("dialog")).toContainText("1 energy");
+  await page.screenshot({ path: "reports/art-only-inspection-1280.png" });
+  await page.keyboard.press("Escape");
+  await expect(card).toBeFocused();
+});
+test("A/D previews, wraps and confirms exact outcomes without spending on selection", async ({ page }) => {
+  await seed(page, run(7));
+  await page.goto("/");
+  const before = await state(page);
+  const attack = before.cards.find(
+    (c) => before.battle!.hand.includes(c.id) && definition(c.definitionId).effect === "attack",
+  )!;
+  await page.locator(`[data-card-id="${attack.id}"]`).click();
+  await expect(page.locator('[data-enemy-id="enemy-0"]')).toBeFocused();
+  await expect(page.getByRole("status", { name: "Target preview" })).toBeVisible();
+  expect(await state(page)).toEqual(before);
+  await page.keyboard.press("d");
+  await expect(page.locator('[data-enemy-id="enemy-1"]')).toBeFocused();
+  await page.keyboard.press("ArrowLeft");
+  await expect(page.locator('[data-enemy-id="enemy-1"]')).toBeFocused();
+  await page.keyboard.press("d");
+  await expect(page.locator('[data-enemy-id="enemy-0"]')).toBeFocused();
+  await page.keyboard.press("a");
+  await expect(page.locator('[data-enemy-id="enemy-1"]')).toBeFocused();
+  const previewBox = await page.getByRole("status", { name: "Target preview" }).boundingBox();
+  const confirmBox = await page.locator(".confirm-play").boundingBox();
+  expect(previewBox!.y + previewBox!.height).toBeLessThanOrEqual(confirmBox!.y);
+  await page.screenshot({ path: "reports/target-preview-1280.png" });
+  await page.keyboard.press("Escape");
+  await expect(page.locator(`[data-card-id="${attack.id}"]`)).toBeFocused();
+  expect(await state(page)).toEqual(before);
+  await page.keyboard.press("Enter");
+  await expect(page.locator('[data-enemy-id="enemy-1"]')).toBeFocused();
+  await page.keyboard.press("Enter");
+  const after = await state(page);
+  expect(after.revision).toBe(before.revision + 1);
+  expect(after.battle!.energy).toBe(before.battle!.energy - 1);
+  await expect(page.locator('[data-actor-id="enemy-1"] .combat-burst')).toBeVisible();
+  await page.screenshot({ path: "reports/floating-feedback-1280.png" });
+  await page.waitForTimeout(1600);
+  await expect(page.locator(".combat-burst")).toHaveCount(0);
+  await page.reload();
+  await expect(page.getByRole("main", { name: "Battle 1" })).toBeVisible();
+  await expect(page.locator(".combat-burst")).toHaveCount(0);
+});
+test("team-wide cards preview and require confirmation", async ({ page }) => {
+  await seed(page, run(7));
+  await page.goto("/");
+  const before = await state(page);
+  await page.locator('.hand .action-card[data-effect="teamGuard"]').first().click();
+  await expect(page.getByRole("status", { name: "Target preview" })).toHaveCount(3);
+  expect(await state(page)).toEqual(before);
+  await page.keyboard.press("Enter");
+  const after = await state(page);
+  expect(after.team.every((c) => c.block === 5)).toBe(true);
+  expect(after.battle!.energy).toBe(2);
+  await expect(page.locator(".block-badge")).toHaveCount(3);
+});
+test("glossary, controls and enlarged text stay usable and persist independently", async ({ page }) => {
+  await seed(page, run(7));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Open menu" }).click();
+  await page.getByRole("button", { name: "Glossary & controls" }).click();
+  await expect(page.getByRole("dialog")).toContainText("A/D cycles valid targets");
+  await expect(page.getByRole("dialog")).toContainText("Marks");
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("button", { name: "Glossary & controls" })).toBeFocused();
+  await page.getByRole("button", { name: "Text size 100%" }).click();
+  await page.getByRole("button", { name: "Text size 125%" }).click();
+  await page.getByRole("button", { name: "Resume" }).click();
+  await page.locator(".hand .action-card").first().focus();
+  await expect(page.getByRole("tooltip")).toBeVisible();
+  await expect(page.getByRole("tooltip").locator(".action-effect")).toHaveCSS("font-size", "24px");
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.screenshot({ path: "reports/text-150-1280.png", fullPage: true });
+  await page.reload();
+  await page.getByRole("button", { name: "Open menu" }).click();
+  await expect(page.getByRole("button", { name: "Text size 150%" })).toBeVisible();
+});
+
+test("target cycling skips knockouts and announces a lethal preview", async ({ page }) => {
+  const fixture = produce(run(7), (d) => {
+    d.battle!.enemies[0]!.health = 0;
+    d.battle!.enemies[1]!.health = 1;
+  });
+  await seed(page, fixture);
+  await page.goto("/");
+  await page.locator('.hand .action-card[data-effect="attack"]').first().click();
+  await expect(page.locator('[data-enemy-id="enemy-1"]')).toBeFocused();
+  await expect(page.getByRole("status", { name: "Target preview" })).toContainText("Knockout");
+  await page.keyboard.press("a");
+  await expect(page.locator('[data-enemy-id="enemy-1"]')).toBeFocused();
+  await page.keyboard.press("d");
+  await expect(page.locator('[data-enemy-id="enemy-1"]')).toBeFocused();
+  expect(await state(page)).toEqual(fixture);
+  await page.keyboard.press("Enter");
+  await expect(page.getByRole("heading", { name: "Recruit", exact: true })).toBeVisible();
+});
+
+test("tooltips show adjusted final values and navigation follows battle rows", async ({ page }) => {
+  const fixture = produce(run(7), (d) => {
+    const attack = d.cards.find((c) => c.definitionId === "emberfox-attack")!;
+    attack.level = 1;
+    const guard = d.cards.find((c) => c.definitionId === "mossback-teamGuard")!;
+    d.battle!.hand = [attack.id, guard.id];
+    d.battle!.draw = d.cards.filter((c) => c.id !== attack.id && c.id !== guard.id).map((c) => c.id);
+    d.battle!.discard = [];
+  });
+  await seed(page, fixture);
+  await page.goto("/");
+  const attack = page.locator('.hand [data-effect="attack"]');
+  await attack.focus();
+  await expect(page.getByRole("tooltip")).toContainText("Deal 12 Fire damage.");
+  await page.keyboard.press("w");
+  expect(await page.locator(".player-row").evaluate((row) => row.contains(document.activeElement))).toBe(
+    true,
+  );
+  await page.keyboard.press("w");
+  expect(await page.locator(".enemy-row").evaluate((row) => row.contains(document.activeElement))).toBe(true);
+  await page.keyboard.press("s");
+  expect(await page.locator(".player-row").evaluate((row) => row.contains(document.activeElement))).toBe(
+    true,
+  );
+  await page.keyboard.press("s");
+  expect(await page.locator(".hand").evaluate((row) => row.contains(document.activeElement))).toBe(true);
+  await page.locator('.hand [data-effect="teamGuard"]').focus();
+  await expect(page.getByRole("tooltip")).toContainText("Give every living ally 5 block");
+  await attack.click();
+  await page.getByRole("button", { name: "Target Bramble Imp", exact: true }).click();
+  await page.locator('.player-row [data-species="emberfox"]').focus();
+  await expect(page.getByRole("tooltip")).toContainText("Deal 10 Fire damage.");
+});
+test("enemy feedback appears in short sequential attacks after immediate commitment", async ({ page }) => {
+  const fixture = produce(run(7), (d) => {
+    d.battle!.enemies[0]!.targetId = "ally-0";
+    d.battle!.enemies[1]!.targetId = "ally-1";
+  });
+  await seed(page, fixture);
+  await page.goto("/");
+  await page.getByRole("button", { name: "End turn" }).click();
+  const committed = await state(page);
+  expect(committed.battle!.turn).toBe(2);
+  expect(committed.team[0]!.health).toBe(28);
+  expect(committed.team[1]!.health).toBe(20);
+  await expect(page.locator('[data-actor-id="ally-0"] .combat-burst')).toBeVisible();
+  await expect(page.locator('[data-actor-id="ally-1"] .combat-burst')).toHaveCount(0);
+  await expect(page.locator('[data-actor-id="ally-1"] .combat-burst')).toBeVisible();
+});
+
+test("three enemies with block forecasts keep the hand inside the handheld viewport", async ({ page }) => {
+  const reward = winBattle(run(7));
+  const second = accept(reward, { type: "upgrade", cardId: reward.cards[0]!.id });
+  const fixture = produce(second, (d) => {
+    d.team.forEach((c) => (c.block = 5));
+    d.battle!.enemies.forEach((e, i) => (e.targetId = `ally-${i}`));
+  });
+  await seed(page, fixture);
+  await page.goto("/");
+  await expect(page.locator(".intent-block")).toHaveCount(3);
+  expect(
+    await page.evaluate(
+      () =>
+        document.documentElement.scrollHeight <= innerHeight &&
+        document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+  await page.screenshot({ path: "reports/block-forecasts-1280.png", fullPage: true });
+});
+
+test("closing during the enemy sequence resumes its committed turn without replay", async ({
+  page,
+  context,
+}) => {
+  await seed(page, run(7));
+  await page.goto("/");
+  const before = await state(page);
+  await page.getByRole("button", { name: "End turn" }).click();
+  await page.close();
+  const resumed = await context.newPage();
+  await resumed.goto("/");
+  const after = await state(resumed);
+  expect(after.revision).toBe(before.revision + 1);
+  expect(after.battle!.turn).toBe(before.battle!.turn + 1);
+  await expect(resumed.locator(".combat-burst")).toHaveCount(0);
+  await resumed.waitForTimeout(700);
+  await expect(resumed.locator(".combat-burst")).toHaveCount(0);
 });

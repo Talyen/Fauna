@@ -12,6 +12,31 @@ export function moveFocus(direction: "left" | "right" | "up" | "down") {
     buttons[0]!.focus();
     return;
   }
+  if (root === document && current.closest(".battle-screen")) {
+    const rows = Array.from(document.querySelectorAll<HTMLElement>(".enemy-row, .player-row, .hand"));
+    const rowIndex = rows.findIndex((row) => row.contains(current));
+    if (rowIndex >= 0) {
+      if (direction === "left" || direction === "right") {
+        const peers = buttons.filter((button) => rows[rowIndex]!.contains(button));
+        const index = peers.indexOf(current);
+        peers[(index + (direction === "left" ? -1 : 1) + peers.length) % peers.length]?.focus();
+        return;
+      }
+      const next = rows[rowIndex + (direction === "up" ? -1 : 1)];
+      if (next) {
+        const x = current.getBoundingClientRect().x + current.getBoundingClientRect().width / 2;
+        buttons
+          .filter((button) => next.contains(button))
+          .sort(
+            (a, b) =>
+              Math.abs(a.getBoundingClientRect().x + a.getBoundingClientRect().width / 2 - x) -
+              Math.abs(b.getBoundingClientRect().x + b.getBoundingClientRect().width / 2 - x),
+          )[0]
+          ?.focus();
+      }
+      return;
+    }
+  }
   const r = current.getBoundingClientRect(),
     x = r.x + r.width / 2,
     y = r.y + r.height / 2;
@@ -31,7 +56,12 @@ export function moveFocus(direction: "left" | "right" | "up" | "down") {
       score = cost;
     }
   }
-  best?.focus();
+  if (best) best.focus();
+  else if (root instanceof HTMLElement)
+    root.scrollBy({
+      top: direction === "up" ? -100 : direction === "down" ? 100 : 0,
+      left: direction === "left" ? -100 : direction === "right" ? 100 : 0,
+    });
 }
 export function gamepadActions(pad: Pick<Gamepad, "buttons" | "axes">): InputAction[] {
   const pressed = (i: number) => pad.buttons[i]?.pressed ?? false;
@@ -51,12 +81,25 @@ export function connectInput(
   onMode: (mode: "keyboard" | "controller" | "pointer") => void,
 ) {
   const keyboard = (event: KeyboardEvent) => {
-    if (event.defaultPrevented || event.target instanceof HTMLInputElement) return;
+    if (
+      event.altKey ||
+      event.ctrlKey ||
+      event.metaKey ||
+      event.defaultPrevented ||
+      event.target instanceof HTMLInputElement ||
+      event.target instanceof HTMLTextAreaElement ||
+      (event.target instanceof HTMLElement && event.target.isContentEditable)
+    )
+      return;
     const mapping: Record<string, InputAction> = {
-      ArrowLeft: "left",
-      ArrowRight: "right",
-      ArrowUp: "up",
-      ArrowDown: "down",
+      a: "left",
+      A: "left",
+      d: "right",
+      D: "right",
+      w: "up",
+      W: "up",
+      s: "down",
+      S: "down",
       Escape: "back",
       i: "inspect",
       I: "inspect",
@@ -69,7 +112,7 @@ export function connectInput(
     }
   };
   const pointer = () => onMode("pointer");
-  window.addEventListener("keydown", keyboard);
+  window.addEventListener("keydown", keyboard, true);
   window.addEventListener("pointerdown", pointer);
   let frame = 0;
   let previous = new Set<InputAction>();
@@ -93,7 +136,7 @@ export function connectInput(
   frame = requestAnimationFrame(poll);
   return () => {
     cancelAnimationFrame(frame);
-    window.removeEventListener("keydown", keyboard);
+    window.removeEventListener("keydown", keyboard, true);
     window.removeEventListener("pointerdown", pointer);
   };
 }

@@ -9,7 +9,15 @@ const DAMAGE_ICONS = {
   nature: Leaf,
   light: Sun,
 } as const;
-export function DamageValue({ type, amount }: { type: DamageType; amount: number }) {
+export function DamageValue({
+  type,
+  amount,
+  signed = false,
+}: {
+  type: DamageType;
+  amount: number;
+  signed?: boolean;
+}) {
   const Icon = DAMAGE_ICONS[type];
   return (
     <span
@@ -18,12 +26,23 @@ export function DamageValue({ type, amount }: { type: DamageType; amount: number
       aria-label={`${amount} ${DAMAGE_LABELS[type]} damage`}
     >
       <Icon aria-hidden="true" />
-      <span>{amount}</span>
+      <span>
+        {signed && amount > 0 ? "−" : ""}
+        {amount}
+      </span>
     </span>
   );
 }
-export function CardRules({ card, level = 0 }: { card: CardDefinition; level?: number }) {
-  const text = cardText(card, level),
+export function CardRules({
+  card,
+  level = 0,
+  value,
+}: {
+  card: CardDefinition;
+  level?: number;
+  value?: number;
+}) {
+  const text = cardText(card, level, value),
     period = text.indexOf(".");
   const tone =
     card.effect === "attack"

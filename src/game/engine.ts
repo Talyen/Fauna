@@ -1,4 +1,5 @@
 import { freeze, produce } from "immer";
+import { actionValue } from "./rules";
 import {
   CARDS,
   ENCOUNTERS,
@@ -202,7 +203,7 @@ export function dispatch(state: GameState, command: Command): CommandResult {
         const card = draft.cards.find((c) => c.id === command.cardId)!;
         const def = definition(card.definitionId);
         const actor = draft.team.find((c) => c.id === card.ownerId)!;
-        let value = def.value + card.level * 2;
+        let value = actionValue(card, actor);
         battle.energy -= def.cost;
         battle.hand.splice(battle.hand.indexOf(card.id), 1);
         battle.discard.push(card.id);
@@ -214,31 +215,32 @@ export function dispatch(state: GameState, command: Command): CommandResult {
         });
         if (def.effect === "attack") {
           const enemy = battle.enemies.find((e) => e.id === command.targetId)!;
-          value += enemy.marks * 3 + (actor.species === "emberfox" && !actor.attacked ? 2 : 0);
+          value += enemy.marks * 3;
           enemy.marks = 0;
+          const removed = Math.min(enemy.health, value);
           enemy.health = Math.max(0, enemy.health - value);
           actor.attacked = true;
           events.push({
             kind: "damage",
-            text: `${enemy.name} takes ${value} ${DAMAGE_LABELS[def.damageType]} damage.`,
+            text: `${enemy.name} takes ${removed} ${DAMAGE_LABELS[def.damageType]} damage.`,
             damageType: def.damageType,
             targetId: enemy.id,
-            amount: value,
+            amount: removed,
           });
+          if (enemy.health === 0)
+            events.push({ kind: "knockout", targetId: enemy.id, text: `${enemy.name} is knocked out.` });
         }
         if (def.effect === "mark") {
           const enemy = battle.enemies.find((e) => e.id === command.targetId)!;
-          value += actor.species === "stormfin" ? 1 : 0;
           enemy.marks += value;
           events.push({
-            kind: "action",
+            kind: "mark",
             text: `${enemy.name} gains ${value} marks.`,
             targetId: enemy.id,
             amount: value,
           });
         }
         if (def.effect === "guard" || def.effect === "teamGuard") {
-          value += actor.species === "mossback" ? 2 : 0;
           const targets =
             def.effect === "teamGuard" ? living(draft) : draft.team.filter((c) => c.id === command.targetId);
           for (const target of targets) {
@@ -253,7 +255,6 @@ export function dispatch(state: GameState, command: Command): CommandResult {
         }
         if (def.effect === "heal") {
           const target = draft.team.find((c) => c.id === command.targetId)!;
-          value += actor.species === "silkmoth" ? 2 : 0;
           const amount = Math.min(value, species(target.species).health - target.health);
           target.health += amount;
           events.push({
@@ -274,7 +275,15 @@ export function dispatch(state: GameState, command: Command): CommandResult {
           if (!target) break;
           const blocked = Math.min(target.block, enemy.damage);
           target.block -= blocked;
-          const amount = enemy.damage - blocked;
+          const amount = Math.min(target.health, enemy.damage - blocked);
+          if (blocked > 0)
+            events.push({
+              kind: "block",
+              actorId: enemy.id,
+              targetId: target.id,
+              amount: -blocked,
+              text: `${species(target.species).name} blocks ${blocked} damage.`,
+            });
           target.health = Math.max(0, target.health - amount);
           events.push({
             kind: "damage",
@@ -285,14 +294,17 @@ export function dispatch(state: GameState, command: Command): CommandResult {
             amount,
           });
           if (target.species === "briartooth" && amount > 0) {
+            const reflected = Math.min(enemy.health, 2);
             enemy.health = Math.max(0, enemy.health - 2);
             events.push({
               kind: "damage",
-              text: `Thorns deal 2 Nature damage to ${enemy.name}.`,
+              text: `Thorns deal ${reflected} Nature damage to ${enemy.name}.`,
               damageType: "nature",
               targetId: enemy.id,
-              amount: 2,
+              amount: reflected,
             });
+            if (enemy.health === 0)
+              events.push({ kind: "knockout", targetId: enemy.id, text: `${enemy.name} is knocked out.` });
           }
           if (target.health === 0) {
             events.push({

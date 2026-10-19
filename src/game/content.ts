@@ -139,8 +139,7 @@ export function definition(id: string): CardDefinition {
   if (!result) throw new Error(`Unknown card: ${id}`);
   return result;
 }
-export function cardText(card: CardDefinition, level = 0): string {
-  const value = card.value + level * 2;
+export function cardText(card: CardDefinition, level = 0, value = card.value + level * 2): string {
   switch (card.effect) {
     case "attack":
       return `Deal ${value} ${DAMAGE_LABELS[card.damageType]} damage. Consume marks for +3 damage each.`;

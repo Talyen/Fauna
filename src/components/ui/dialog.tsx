@@ -25,8 +25,8 @@ export const DialogDescription = React.forwardRef<
 DialogDescription.displayName = "DialogDescription";
 export const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & { closeLabel?: string }
+>(({ className, children, closeLabel = "Close inspection", ...props }, ref) => (
   <DialogPrimitive.Portal>
     <DialogPrimitive.Overlay className="dialog-overlay fixed inset-0 z-50 bg-black/80" />
     <DialogPrimitive.Content
@@ -43,7 +43,7 @@ export const DialogContent = React.forwardRef<
           variant="ghost"
           size="icon"
           className="dialog-close absolute right-2 top-2"
-          aria-label="Close inspection"
+          aria-label={closeLabel}
         >
           <X aria-hidden="true" />
         </Button>

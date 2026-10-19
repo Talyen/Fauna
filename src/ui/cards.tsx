@@ -1,12 +1,12 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { Heart, Shield, Crosshair } from "lucide-react";
 import { Button } from "../components/ui/button";
-import { CardRules } from "./combat-values";
-import { motion } from "motion/react";
+import { ActionDetails, CreatureDetails } from "./card-details";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../components/ui/tooltip";
+import { actionValue } from "../game/rules";
 import { cardText, definition, species } from "../game/content";
 import type { SpeciesId } from "../game/content";
 import type { Card, Creature, Enemy } from "../game/types";
-const MotionButton = motion.create(Button);
 type CreatureProps = {
   kind: SpeciesId;
   name?: string;
@@ -22,6 +22,13 @@ type CreatureProps = {
   intent?: ReactNode;
   presentation?: boolean;
   enemyId?: string;
+  actorId?: string;
+  onPreview?: () => void;
+  preview?: ReactNode;
+  feedback?: ReactNode;
+  cards?: readonly Card[];
+  actor?: Creature;
+  tooltips?: boolean;
 };
 export function CreatureCard({
   kind,
@@ -38,67 +45,109 @@ export function CreatureCard({
   intent,
   presentation = false,
   enemyId,
+  actorId,
+  onPreview,
+  preview,
+  feedback,
+  cards,
+  actor,
+  tooltips = true,
 }: CreatureProps) {
+  const [tooltipOpen, setTooltipOpen] = useState(false);
   const info = species(kind);
   const Component = presentation ? "div" : Button;
+  const artwork = (
+    <Component
+      variant={presentation ? undefined : "art"}
+      size={presentation ? undefined : "card"}
+      className={`creature-card ${selected ? "selected" : ""}`}
+      data-species={kind}
+      data-enemy-id={enemyId}
+      aria-label={label ?? info.name}
+      aria-pressed={presentation ? undefined : selected}
+      aria-disabled={presentation ? undefined : disabled}
+      onClick={() => {
+        setTooltipOpen(false);
+        if (!disabled) onClick?.();
+      }}
+      onFocus={onPreview}
+      onPointerEnter={onPreview}
+      onContextMenu={
+        onInspect
+          ? (event) => {
+              event.preventDefault();
+              onInspect();
+            }
+          : undefined
+      }
+    >
+      <img src={`./art/${kind}.svg`} width="800" height="600" alt="" draggable={false} />
+    </Component>
+  );
   return (
-    <div className={`creature-wrap ${health === 0 ? "knocked-out" : ""}`}>
+    <div className={`creature-wrap ${health === 0 ? "knocked-out" : ""}`} data-actor-id={actorId ?? enemyId}>
       {intent ? <div className="intent">{intent}</div> : null}
-      <Component
-        variant={presentation ? undefined : "art"}
-        size={presentation ? undefined : "card"}
-        className={`creature-card ${selected ? "selected" : ""}`}
-        data-species={kind}
-        data-enemy-id={enemyId}
-        aria-label={label ?? info.name}
-        aria-pressed={presentation ? undefined : selected}
-        disabled={presentation ? undefined : disabled}
-        onClick={onClick}
-        onContextMenu={
-          onInspect
-            ? (event) => {
-                event.preventDefault();
-                onInspect();
-              }
-            : undefined
-        }
-      >
-        <img src={`./art/${kind}.svg`} width="800" height="600" alt="" draggable={false} />
-        <div className="creature-shade" />
-        <div className="creature-caption">
-          <strong className="creature-name">{name ?? info.name}</strong>
-          {health !== undefined ? (
-            <span className="health-number" aria-label={`${health} of ${maxHealth ?? info.health} health`}>
-              <Heart aria-hidden="true" /> {health}/{maxHealth ?? info.health}
+      {presentation ? (
+        artwork
+      ) : (
+        <Tooltip open={tooltips && tooltipOpen} onOpenChange={setTooltipOpen}>
+          <TooltipTrigger asChild>{artwork}</TooltipTrigger>
+          <TooltipContent>
+            <CreatureDetails
+              kind={kind}
+              name={name}
+              health={health}
+              maxHealth={maxHealth}
+              block={block}
+              marks={marks}
+              cards={cards}
+              actor={actor}
+            />
+            {intent ? <p>{intent}</p> : null}
+          </TooltipContent>
+        </Tooltip>
+      )}
+      {preview ? (
+        preview
+      ) : health !== undefined && (actorId || enemyId) ? (
+        <div className="creature-readout">
+          <span className="health-number" aria-label={`${health} of ${maxHealth ?? info.health} health`}>
+            <Heart aria-hidden="true" />
+            {health}/{maxHealth ?? info.health}
+          </span>
+          {block > 0 ? (
+            <span className="block-badge" aria-label={`${block} block`}>
+              <Shield aria-hidden="true" />
+              {block}
+            </span>
+          ) : null}
+          {marks > 0 ? (
+            <span className="mark-badge" aria-label={`${marks} marks`}>
+              <Crosshair aria-hidden="true" />
+              {marks}
             </span>
           ) : null}
         </div>
-        {health !== undefined ? (
-          <span className="health-track" aria-hidden="true">
-            <span style={{ width: `${(health / (maxHealth ?? info.health)) * 100}%` }} />
-          </span>
-        ) : null}
-        {block > 0 ? (
-          <span className="block-badge">
-            <Shield aria-hidden="true" />
-            {block} Block
-          </span>
-        ) : null}
-        {marks > 0 ? (
-          <span className="mark-badge">
-            <Crosshair aria-hidden="true" />
-            {marks} Marks
-          </span>
-        ) : null}
-      </Component>
+      ) : null}
+      {feedback}
     </div>
   );
 }
+
 export function AllyCard({
   creature,
   ...props
 }: { creature: Creature } & Omit<CreatureProps, "kind" | "health" | "block">) {
-  return <CreatureCard kind={creature.species} health={creature.health} block={creature.block} {...props} />;
+  return (
+    <CreatureCard
+      actorId={creature.id}
+      actor={creature}
+      kind={creature.species}
+      health={creature.health}
+      block={creature.block}
+      {...props}
+    />
+  );
 }
 export function EnemyCard({
   enemy,
@@ -129,6 +178,10 @@ export function ActionCard({
   onInspect,
   ownerName,
   presentation = false,
+  label,
+  upgrade = false,
+  actor,
+  tooltips = true,
 }: {
   card: Card;
   selected?: boolean;
@@ -137,22 +190,32 @@ export function ActionCard({
   onInspect?: () => void;
   ownerName: string;
   presentation?: boolean;
+  label?: string;
+  upgrade?: boolean;
+  actor?: Creature;
+  tooltips?: boolean;
 }) {
+  const [tooltipOpen, setTooltipOpen] = useState(false);
   const def = definition(card.definitionId);
-  const Component = presentation ? motion.div : MotionButton;
-  return (
+  const Component = presentation ? "div" : Button;
+  const artwork = (
     <Component
       variant={presentation ? undefined : "art"}
       size={presentation ? undefined : "card"}
       tabIndex={presentation ? undefined : 0}
-      layout
       className={`action-card ${selected ? "selected" : ""}`}
       data-card-id={card.id}
       data-effect={def.effect}
-      aria-label={`${def.name}${card.level ? ` +${card.level}` : ""}, ${ownerName}, ${cardText(def, card.level)}`}
+      aria-label={
+        label ??
+        `${def.name}${card.level ? ` +${card.level}` : ""}, ${ownerName}, ${def.cost} energy, ${cardText(def, card.level, actionValue(card, actor ?? { species: def.species, attacked: false }))}`
+      }
       aria-pressed={presentation ? undefined : selected}
       aria-disabled={presentation ? undefined : disabled}
-      onClick={onClick}
+      onClick={() => {
+        setTooltipOpen(false);
+        onClick();
+      }}
       onContextMenu={
         onInspect
           ? (event) => {
@@ -161,21 +224,30 @@ export function ActionCard({
             }
           : undefined
       }
-      whileHover={presentation ? undefined : { y: -8 }}
-      whileFocus={presentation ? undefined : { y: -8 }}
     >
       <img src={`./art/${def.species}-action.svg`} width="600" height="800" alt="" draggable={false} />
-      <div className="action-shade" />
-      <span className="energy-cost" aria-label={`${def.cost} energy`}>
-        {def.cost}
-      </span>
-      <div className="action-copy">
-        <strong>
-          {def.name}
-          {card.level ? ` +${card.level}` : ""}
-        </strong>
-        <CardRules card={def} level={card.level} />
-      </div>
     </Component>
+  );
+  return presentation ? (
+    artwork
+  ) : (
+    <Tooltip open={tooltips && tooltipOpen} onOpenChange={setTooltipOpen}>
+      <TooltipTrigger asChild>{artwork}</TooltipTrigger>
+      <TooltipContent>
+        <ActionDetails card={card} ownerName={ownerName} actor={actor} />
+        {upgrade ? (
+          card.level >= 3 ? (
+            <p>Maximum upgrade.</p>
+          ) : (
+            <>
+              <p>After upgrade:</p>
+              <ActionDetails card={{ ...card, level: card.level + 1 }} ownerName={ownerName} actor={actor} />
+            </>
+          )
+        ) : disabled ? (
+          <p>Not enough energy.</p>
+        ) : null}
+      </TooltipContent>
+    </Tooltip>
   );
 }

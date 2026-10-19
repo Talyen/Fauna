@@ -53,7 +53,7 @@ export type Command =
   | { type: "newRun"; seed: number }
   | { type: "abandon" };
 export interface GameEvent {
-  kind: "action" | "damage" | "block" | "heal" | "knockout" | "turn" | "reward" | "victory";
+  kind: "action" | "mark" | "damage" | "block" | "heal" | "knockout" | "turn" | "reward" | "victory";
   text: string;
   actorId?: string;
   targetId?: string;
