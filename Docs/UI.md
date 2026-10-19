@@ -14,7 +14,7 @@ The current design review selects the following direction. These choices superse
 - Health bars only on the battlefield. HP numbers live in hover/pinned detail; block and marks stay external icon/number readouts. No enemy intents are shown. Bar forecasts show expected health changes without battlefield HP numerals.
 - External actor/target outlines with a thin targeting line between artwork edges. Targeted cards confirm by clicking the target or pressing Enter/controller A, with no separate Play button. Team-wide cards retain a Play action.
 - Centered pinned inspection.
-- Rewards commit immediately on the final choice, with effects available beforehand.
+- Reward progression is being redesigned around roster training, recruitment, permanent currency and run-wide relics. See [expedition design decisions](EXPEDITION_DESIGN.md). Final reward choices remain direct commitments, with effects available beforehand.
 - Confirm abandoning a run. End turn stays immediate, and spending the last mana still advances automatically.
 
 The original A/B comparison used identical fixtures and artwork. A was selected, then revised to match hand/creature heights, hide pile counts and enemy intents, and keep HP numbers in details. The review page now shows this selected layout. Samples have no gameplay, audio, platform services or save access. Their Play and End turn controls only clear the sample selection. The baseline specification below describes the currently implemented game until this direction is applied.
