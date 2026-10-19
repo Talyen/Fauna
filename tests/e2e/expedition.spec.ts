@@ -102,7 +102,7 @@ test("keyboard targeting, enlarged inspection, cancel, and menu focus", async ({
   await page.keyboard.press("Escape");
   await expect(page.locator(".cancel-target")).toHaveCount(0);
   await page.keyboard.press("Escape");
-  await expect(page.getByRole("main", { name: "Pause menu" })).toBeVisible();
+  await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Resume" })).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(page.getByRole("main", { name: "Battle 1" })).toBeVisible();
@@ -140,7 +140,7 @@ test("standard gamepad edge handling, navigation, inspect, confirm, and back", a
   await expect(page.locator(".app")).toHaveAttribute("data-input", "controller");
   await press(1);
   await press(1);
-  await expect(page.getByRole("main", { name: "Pause menu" })).toBeVisible();
+  await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
   await press(0);
   await press(15);
   await expect(page.getByRole("main", { name: "Battle 1" })).toBeVisible();
@@ -665,4 +665,116 @@ test("real audio output, hit recoil, reduced motion, and mute follow combat outc
   await page.reload();
   await page.getByRole("button", { name: "Open menu" }).click();
   await expect(page.getByRole("button", { name: "Sound off", exact: true })).toBeVisible();
+});
+
+test("design-system states preserve layout, hit areas and focus ownership", async ({ page }) => {
+  await seed(page, run(7));
+  await page.goto("/");
+  const geometry = () =>
+    page.locator(".enemy-row,.player-row,.hand-toolbar").evaluateAll((elements) =>
+      elements.map((element) => {
+        const box = element.getBoundingClientRect();
+        return { y: box.y, height: box.height };
+      }),
+    );
+  for (const viewport of [
+    { width: 1280, height: 800 },
+    { width: 1920, height: 1080 },
+  ]) {
+    await page.setViewportSize(viewport);
+    await page.mouse.move(0, 0);
+    const before = await geometry();
+    const attack = page.locator('.hand .action-card[data-effect="attack"]').first();
+    await attack.click();
+    await expect(page.locator(".target-preview")).toBeVisible();
+    expect(await geometry()).toEqual(before);
+    await expect(attack).toHaveCSS("transform", "matrix(1, 0, 0, 1, 0, -12)");
+    await page.screenshot({ path: `reports/system-target-${viewport.width}.png` });
+    const selected = await attack.boundingBox();
+    const sibling = await page.locator(".hand .action-card:not(.selected)").first().boundingBox();
+    expect(selected!.y).toBeLessThan(sibling!.y);
+    await expect(attack).toHaveCSS("outline-style", "none");
+    expect(await attack.evaluate((element) => getComputedStyle(element).boxShadow)).not.toBe("none");
+    await page.getByRole("button", { name: "Open menu" }).click();
+    await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("dialog", { name: "Pause menu" })).not.toBeVisible();
+    await expect(attack).toHaveAttribute("aria-pressed", "true");
+    await page.getByRole("button", { name: "Cancel", exact: true }).click();
+    await expect(attack).toBeFocused();
+    expect(await geometry()).toEqual(before);
+    await page.keyboard.press("Escape");
+    const pause = page.getByRole("dialog", { name: "Pause menu" });
+    await expect(pause).toBeVisible();
+    // The board remains mounted behind a modal, and cannot receive input through it.
+    expect(await page.locator(".battle-screen").count()).toBe(1);
+    const current = await state(page);
+    await pause.getByRole("button", { name: "Glossary & controls" }).click();
+    await expect(page.getByRole("dialog", { name: "Glossary & controls" })).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(pause.getByRole("button", { name: "Glossary & controls" })).toBeFocused();
+    for (const button of await pause.getByRole("button").all()) {
+      const box = await button.boundingBox();
+      expect(box!.height).toBeGreaterThanOrEqual(44);
+      expect(box!.width).toBeGreaterThanOrEqual(44);
+    }
+    await page.screenshot({ path: `reports/system-pause-${viewport.width}.png` });
+    await pause.getByRole("button", { name: "Resume" }).click();
+    await expect(attack).toBeFocused();
+    await page.keyboard.press("Tab");
+    await attack.focus();
+    await expect(attack).toHaveCSS("outline-style", "dashed");
+    expect((await state(page)).revision).toBe(current.revision);
+    const hand = await page.locator(".hand-section").boundingBox();
+    expect(hand!.y + hand!.height).toBeLessThanOrEqual(viewport.height - 16);
+    await attack.blur();
+    await page.mouse.move(0, 0);
+    await page.screenshot({ path: `reports/system-battle-${viewport.width}.png` });
+  }
+});
+
+test("draft and reward screens share artwork inspection and fit both target sizes", async ({ browser }) => {
+  const reward = winBattle(run(7));
+  for (const viewport of [
+    { width: 1280, height: 800 },
+    { width: 1920, height: 1080 },
+  ]) {
+    for (const phase of ["draft", "reward"] as const) {
+      const page = await browser.newPage({ viewport });
+      await seed(page, phase === "draft" ? createGame(7) : reward);
+      await page.goto("/");
+      await page.evaluate(() => document.fonts.ready);
+      expect(
+        await page.evaluate(
+          () =>
+            document.documentElement.scrollHeight <= innerHeight &&
+            document.documentElement.scrollWidth <= innerWidth,
+        ),
+      ).toBe(true);
+      await page.screenshot({ path: `reports/system-${phase}-${viewport.width}.png` });
+      const card = page
+        .locator(phase === "draft" ? ".creature-card" : ".upgrade-options .action-card")
+        .first();
+      const before = await state(page);
+      await card.click({ button: "right" });
+      const inspector = page.getByRole("dialog");
+      await expect(inspector).toBeVisible();
+      const box = await inspector.boundingBox();
+      expect(box!.x).toBeGreaterThanOrEqual(24);
+      expect(box!.y).toBeGreaterThanOrEqual(24);
+      expect(box!.y + box!.height).toBeLessThanOrEqual(viewport.height - 24);
+      const artwork = inspector.locator(".creature-card,.action-card").first();
+      expect(await artwork.locator(":scope > :not(img)").count()).toBe(0);
+      expect(
+        await artwork.evaluate(
+          (element) => element.hasAttribute("variant") || element.hasAttribute("tabindex"),
+        ),
+      ).toBe(false);
+      await page.screenshot({ path: `reports/system-${phase}-inspection-${viewport.width}.png` });
+      await page.keyboard.press("Escape");
+      await expect(card).toBeFocused();
+      expect((await state(page)).revision).toBe(before.revision);
+      await page.close();
+    }
+  }
 });

@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Heart, Shield, Crosshair } from "lucide-react";
-import { Button } from "../components/ui/button";
+import { ArtCard } from "./art-card";
 import { ActionDetails, CreatureDetails } from "./card-details";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../components/ui/tooltip";
 import { actionValue } from "../game/rules";
@@ -58,12 +58,12 @@ export function CreatureCard({
     if (!tooltips) setTooltipOpen(false);
   }, [tooltips]);
   const info = species(kind);
-  const Component = presentation ? "div" : Button;
   const artwork = (
-    <Component
-      variant={presentation ? undefined : "art"}
-      size={presentation ? undefined : "card"}
-      className={`creature-card ${selected ? "selected" : ""}`}
+    <ArtCard
+      aspect="creature"
+      artwork={`./art/${kind}.svg`}
+      presentation={presentation}
+      className={selected ? "selected" : undefined}
       data-species={kind}
       data-enemy-id={enemyId}
       aria-label={label ?? info.name}
@@ -79,13 +79,12 @@ export function CreatureCard({
         onInspect
           ? (event) => {
               event.preventDefault();
+              event.currentTarget.focus();
               onInspect();
             }
           : undefined
       }
-    >
-      <img src={`./art/${kind}.svg`} width="800" height="600" alt="" draggable={false} />
-    </Component>
+    />
   );
   return (
     <div className={`creature-wrap ${health === 0 ? "knocked-out" : ""}`} data-actor-id={actorId ?? enemyId}>
@@ -203,13 +202,13 @@ export function ActionCard({
     if (!tooltips) setTooltipOpen(false);
   }, [tooltips]);
   const def = definition(card.definitionId);
-  const Component = presentation ? "div" : Button;
   const artwork = (
-    <Component
-      variant={presentation ? undefined : "art"}
-      size={presentation ? undefined : "card"}
+    <ArtCard
+      aspect="action"
+      artwork={`./art/${def.species}-action.svg`}
+      presentation={presentation}
       tabIndex={presentation ? undefined : 0}
-      className={`action-card ${selected ? "selected" : ""}`}
+      className={selected ? "selected" : undefined}
       data-card-id={card.id}
       data-effect={def.effect}
       aria-label={
@@ -226,13 +225,12 @@ export function ActionCard({
         onInspect
           ? (event) => {
               event.preventDefault();
+              event.currentTarget.focus();
               onInspect();
             }
           : undefined
       }
-    >
-      <img src={`./art/${def.species}-action.svg`} width="600" height="800" alt="" draggable={false} />
-    </Component>
+    />
   );
   return presentation ? (
     artwork

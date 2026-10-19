@@ -28,15 +28,8 @@ export const DialogContent = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & { closeLabel?: string }
 >(({ className, children, closeLabel = "Close inspection", ...props }, ref) => (
   <DialogPrimitive.Portal>
-    <DialogPrimitive.Overlay className="dialog-overlay fixed inset-0 z-50 bg-black/80" />
-    <DialogPrimitive.Content
-      ref={ref}
-      className={cn(
-        "dialog-content fixed left-1/2 top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-lg border border-border bg-popover p-6 text-popover-foreground",
-        className,
-      )}
-      {...props}
-    >
+    <DialogPrimitive.Overlay className="dialog-overlay" />
+    <DialogPrimitive.Content ref={ref} className={cn("dialog-content", className)} {...props}>
       {children}
       <DialogPrimitive.Close asChild>
         <Button

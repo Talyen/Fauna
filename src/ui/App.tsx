@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useStore } from "zustand";
 import type { Session } from "../application/session";
 import { Menu } from "lucide-react";
+import { returnFocus } from "./focus";
 import { Button } from "../components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../components/ui/dialog";
 import { DamageValue } from "./combat-values";
@@ -39,7 +40,7 @@ function Inspector({ item, session, onClose }: { item: Inspection; session: Sess
         className={`inspection ${"card" in item ? "single-card" : ""}`}
         onCloseAutoFocus={(event) => {
           event.preventDefault();
-          if (opener?.isConnected) opener.focus();
+          returnFocus(opener);
         }}
       >
         <DialogTitle className="sr-only">
@@ -106,6 +107,11 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
   const [recruit, setRecruit] = useState<SpeciesId | null>(null);
   const [mode, setMode] = useState<"keyboard" | "controller" | "pointer">("pointer");
   const [showMenu, setShowMenu] = useState(false);
+  const pauseOpener = useRef<HTMLElement | null>(null);
+  const setMenuOpen = useCallback((open: boolean) => {
+    if (open) pauseOpener.current = document.activeElement as HTMLElement | null;
+    setShowMenu(open);
+  }, []);
   const [showGlossary, setShowGlossary] = useState(false);
   const glossaryOpener = useRef<HTMLButtonElement | null>(null);
   const [enemyTarget, setEnemyTarget] = useState<string | null>(null);
@@ -174,6 +180,12 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     const selector = targetId ? `[data-actor-id="${targetId}"] .creature-card` : ".confirm-play";
     root.current?.querySelector<HTMLElement>(selector)?.focus();
   }, [selected, targetId]);
+  const cancelSelection = useCallback(() => {
+    if (!selected) return;
+    const opener = root.current?.querySelector<HTMLElement>(`[data-card-id="${selected}"]`) ?? null;
+    setSelected(null);
+    returnFocus(opener);
+  }, [selected]);
   const send = useCallback(
     (command: Parameters<Session["command"]>[0]) => {
       if (!session.command(command)) return false;
@@ -213,11 +225,10 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
       if (input === "back") {
         if (showGlossary) setShowGlossary(false);
         else if (inspection) setInspection(null);
-        else if (selected) {
-          setSelected(null);
-          root.current?.querySelector<HTMLElement>(`[data-card-id="${selected}"]`)?.focus();
-        } else if (recruit) setRecruit(null);
-        else setShowMenu((v) => !v);
+        else if (showMenu) setShowMenu(false);
+        else if (selected) cancelSelection();
+        else if (recruit) setRecruit(null);
+        else setMenuOpen(!showMenu);
         return;
       }
       if (inspection || showMenu || showGlossary) return;
@@ -238,6 +249,8 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     },
     [
       inspection,
+      cancelSelection,
+      setMenuOpen,
       selected,
       recruit,
       showMenu,
@@ -254,7 +267,10 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     actionRef.current = action;
   }, [action]);
   useEffect(() => connectInput((input) => actionRef.current(input), setMode), []);
+  const focusedPhase = useRef<string | null>(null);
   useEffect(() => {
+    if (showMenu || focusedPhase.current === game.phase) return;
+    focusedPhase.current = game.phase;
     if (game.phase === "victory" || game.phase === "defeat")
       root.current?.querySelector<HTMLElement>(".end-screen button:not(.creature-card)")?.focus();
     else if (game.phase !== "battle" || mode !== "pointer")
@@ -290,7 +306,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
         size="icon"
         className="menu-button"
         aria-label="Open menu"
-        onClick={() => setShowMenu((v) => !v)}
+        onClick={() => setMenuOpen(!showMenu)}
       >
         <Menu aria-hidden="true" />
       </Button>
@@ -319,51 +335,6 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           >
             {view.loadFailed ? "Retry loading" : "Start fresh"}
           </Button>
-        </main>
-      ) : showMenu ? (
-        <main className="menu-panel" aria-label="Pause menu">
-          <Button variant="default" onClick={() => setShowMenu(false)}>
-            Resume
-          </Button>
-          {["battle", "reward"].includes(game.phase) ? (
-            <Button
-              variant="outline"
-              onClick={() => {
-                send({ type: "abandon" });
-                setShowMenu(false);
-              }}
-            >
-              End run
-            </Button>
-          ) : null}
-          <Button
-            variant="outline"
-            onClick={(event) => {
-              glossaryOpener.current = event.currentTarget;
-              setShowGlossary(true);
-            }}
-          >
-            Glossary & controls
-          </Button>
-          <Button
-            variant="outline"
-            aria-label={`Text size ${textScale * 100}%`}
-            onClick={() => setTextScale(textScale === 1 ? 1.25 : textScale === 1.25 ? 1.5 : 1)}
-          >
-            Text size {textScale * 100}%
-          </Button>
-          <Button
-            variant="outline"
-            aria-pressed={soundEnabled}
-            onClick={() => setSoundEnabled((value) => !value)}
-          >
-            Sound {soundEnabled ? "on" : "off"}
-          </Button>
-          {desktop ? (
-            <Button variant="outline" onClick={() => void session.quit()}>
-              Save & quit
-            </Button>
-          ) : null}
         </main>
       ) : game.phase === "draft" ? (
         <main className="draft-screen">
@@ -417,12 +388,16 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                 }
                 feedback={<CombatFeedback bursts={bursts} targetId={enemy.id} />}
                 onClick={() => {
-                  if (enemy.health === 0) return;
-                  if (selected && targetEnemy) send({ type: "play", cardId: selected, targetId: enemy.id });
+                  if (enemy.health > 0 && selected && targetEnemy)
+                    send({ type: "play", cardId: selected, targetId: enemy.id });
                   else setInspection({ species: enemy.species, enemyId: enemy.id });
                 }}
                 onInspect={() => setInspection({ species: enemy.species, enemyId: enemy.id })}
-                label={selected && targetEnemy ? `Target ${enemy.name}` : `Inspect ${enemy.name}`}
+                label={
+                  selected && targetEnemy && enemy.health > 0
+                    ? `Target ${enemy.name}`
+                    : `Inspect ${enemy.name}`
+                }
               />
             ))}
           </section>
@@ -440,7 +415,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                 >
                   Play{mode === "controller" ? " · A" : " · Enter"}
                 </Button>
-                <Button variant="outline" className="cancel-target" onClick={() => setSelected(null)}>
+                <Button variant="outline" className="cancel-target" onClick={cancelSelection}>
                   Cancel
                 </Button>
               </>
@@ -464,13 +439,13 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                 }
                 feedback={<CombatFeedback bursts={bursts} targetId={c.id} />}
                 onClick={() => {
-                  if (c.health === 0) return;
-                  if (selected && targetAlly) send({ type: "play", cardId: selected, targetId: c.id });
+                  if (c.health > 0 && selected && targetAlly)
+                    send({ type: "play", cardId: selected, targetId: c.id });
                   else setInspection({ species: c.species });
                 }}
                 onInspect={() => setInspection({ species: c.species })}
                 label={
-                  selected && targetAlly
+                  selected && targetAlly && c.health > 0
                     ? `Target ${species(c.species).name}`
                     : `Inspect ${species(c.species).name}`
                 }
@@ -571,6 +546,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                       actor={{ ...game.team.find((c) => c.id === card.ownerId)!, attacked: false }}
                       label={`Upgrade ${def.name}`}
                       upgrade
+                      onInspect={() => setInspection({ card })}
                       disabled={card.level >= 3}
                       onClick={() => {
                         if (card.level < 3) send({ type: "upgrade", cardId: card.id });
@@ -600,6 +576,63 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           </Button>
         </main>
       )}
+
+      <Dialog open={showMenu} onOpenChange={setMenuOpen}>
+        <DialogContent
+          className="menu-panel"
+          closeLabel="Close menu"
+          onCloseAutoFocus={(event) => {
+            event.preventDefault();
+            returnFocus(pauseOpener.current);
+          }}
+        >
+          <DialogTitle className="sr-only">Pause menu</DialogTitle>
+          <DialogDescription className="sr-only">Expedition settings</DialogDescription>
+          <Button variant="default" onClick={() => setShowMenu(false)}>
+            Resume
+          </Button>
+          <Button
+            variant="outline"
+            onClick={(event) => {
+              glossaryOpener.current = event.currentTarget;
+              setShowGlossary(true);
+            }}
+          >
+            Glossary & controls
+          </Button>
+          <Button
+            variant="outline"
+            aria-label={`Text size ${textScale * 100}%`}
+            onClick={() => setTextScale(textScale === 1 ? 1.25 : textScale === 1.25 ? 1.5 : 1)}
+          >
+            Text size {textScale * 100}%
+          </Button>
+          <Button
+            variant="outline"
+            aria-pressed={soundEnabled}
+            onClick={() => setSoundEnabled((value) => !value)}
+          >
+            Sound {soundEnabled ? "on" : "off"}
+          </Button>
+          {desktop ? (
+            <Button variant="outline" onClick={() => void session.quit()}>
+              Save & quit
+            </Button>
+          ) : null}
+          {["battle", "reward"].includes(game.phase) ? (
+            <Button
+              variant="destructive"
+              onClick={() => {
+                send({ type: "abandon" });
+                setShowMenu(false);
+              }}
+            >
+              End run
+            </Button>
+          ) : null}
+        </DialogContent>
+      </Dialog>
+
       {showGlossary ? (
         <Dialog open onOpenChange={setShowGlossary}>
           <DialogContent
@@ -607,7 +640,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
             closeLabel="Close glossary"
             onCloseAutoFocus={(event) => {
               event.preventDefault();
-              glossaryOpener.current?.focus();
+              returnFocus(glossaryOpener.current);
             }}
           >
             <DialogTitle>Glossary & controls</DialogTitle>

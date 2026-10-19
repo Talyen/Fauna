@@ -1,4 +1,4 @@
-# UI and typography
+# Fauna design system
 
 Fauna's screens are game surfaces. Show the cards, decision-relevant state, and actions required to play. The background is solid black (`#000`).
 
@@ -40,14 +40,43 @@ shadcn/ui is the chosen standard for the whole UI. Its source-owned primitives a
 
 Use the Radix-backed component family demonstrated in the selected preview consistently. Add only components with actual consumers. Do not introduce Mantine, React Aria, or a second visual component system alongside it. Controls and interactive gameplay cards compose the shared Button; inspection uses the Radix-backed Dialog. Source attribution is in `Docs/SHADCN-LICENSE.txt`.
 
+## Ownership and enforcement
+
+This document is the interface contract. `src/ui/tokens.css` is the visual-value owner; `src/ui/styles.css` composes layouts and states from those tokens. Source-owned shadcn primitives live in `src/components/ui/`; gameplay artwork surfaces all compose `src/ui/art-card.tsx`. An artwork surface accepts one image, never arbitrary children. Static inspection art is inert and never receives button-only attributes or handlers.
+
+`npm run check` runs `scripts/ui-contract.mjs`. It rejects literal CSS colors, numeric font sizes/radii outside the token owner, raw controls in screens, direct Radix imports outside primitives, artwork outside ArtCard, inline JSX styles, hard-coded utility color palettes, and known competing component libraries. These are source-policy checks, not a substitute for rendered review. CI runs the same check. Changes to the contract must update this document, its token/component owner, and the relevant browser checks together.
+
+## Layout standard
+
+- Battle uses a centered board up to 1280px wide. Enemy row stays above player row; a flat, centered hand sits against the bottom safe area. Mana and End turn occupy opposite ends of the hand toolbar and keep their positions during selection.
+- Reserve space for targeting controls and creature readouts. Showing a preview must not move rows or the toolbar. Health, block and marks use external readouts; forecast replaces the readout in the same slot. Portrait sizes shrink at short desktop/handheld heights, preserving both artwork ratios. At 100% text size, 1280×800 and 1920×1080 must fit without page scrolling, including three enemy intents and absorption forecasts.
+- Hand hover/focus lifts a card by 8px; selection lifts it by 12px. Neighbors keep their slots. The selected card stays selected when the pointer leaves it. Motion is 150ms; reduced motion changes state instantly.
+- Draft centers its choices and Start run; reward options are two decision groups; results center the outcome and New run. Layout space serves decisions, never decoration.
+- Pause is a compact centered modal over the mounted game. Inspection and glossary use the same modal material, bounds, close control and scrolling policy. Only their content width differs. Long text scrolls within the reading surface; enlarged text may expand the game vertically rather than clipping controls.
+
+## Interaction states
+
+| State        | Standard                                                                       |
+| ------------ | ------------------------------------------------------------------------------ |
+| Idle         | Thin neutral artwork border; neutral controls.                                 |
+| Hover        | Control surface brightens; hand card lifts. No change to committed state.      |
+| Focus        | External white dashed outline; semantic keyboard/controller navigation.        |
+| Selected     | External white solid ring and hand lift; focus can remain visible separately.  |
+| Valid target | White artwork border; exact outcome in the external preview slot.              |
+| Unavailable  | Dimmed artwork; inspection remains available. A disabled command never runs.   |
+| Knocked out  | Grayscale, dimmed artwork, zero health; excluded from valid targets.           |
+| Error        | Concise actionable message; Retry when available. No permanent success chrome. |
+
+All non-art controls have at least a 44×44px hit area, including close, cancel and icon controls. Default actions are white, secondary actions neutral, and destructive End run sits after settings in red. Use verbs for commands, sentence case, and explicit accessible names for icon-only buttons. No hover-only actions. Closing a dialog returns to its connected, enabled opener; a removed opener falls back to a current game control. Cancel button and Escape/B restore the selected hand card. Pause and reading never change the save revision.
+
 ## Tokens
 
-`src/ui/styles.css` owns semantic shadcn theme tokens and combat colors.
+`src/ui/tokens.css` owns semantic shadcn theme tokens and combat colors.
 
-- Typography: locally bundled Inter Variable, regular rules, medium controls, semibold names, tabular numbers. 16px rules/controls, 20–24px names, 14px secondary information. Inspection enlarges rules to 18px and names to 26px. Font license: `Docs/FONT-LICENSE.txt`.
+- Typography: locally bundled Inter Variable, regular rules, medium controls, semibold names, tabular numbers. 16px rules/controls, 20px names, 24px screen headings, 14px secondary information. Inspection enlarges rules to 18px and names to 28px. Font license: `Docs/FONT-LICENSE.txt`.
 - Spacing: a 4px grid, using layout instead of decorative separators or panels.
 - Color: pure black canvas, #111 controls, #f2f2f2 text, #b0b0b0 secondary text, #404040 borders. White primary actions. Solid selection outline, separate dashed focus outline, white targetable border. Disabled/unaffordable cards dim; knockout adds grayscale and zero health.
-- Geometry: 6px corners, thin borders, no decorative shadows, glows or textures. Artwork has no UI scrim.
+- Geometry: 6px corners, thin borders, no decorative shadows, glows or textures (the external selection ring is an interaction indicator). Artwork has no UI scrim.
 - Motion: 150ms purposeful transitions; respect reduced motion. Gameplay commits before visual feedback and input never waits on animations.
 - Icons: Lucide, with labels/numbers so color is never the only cue.
 
@@ -76,3 +105,9 @@ Use shadcn/ui for dialogs, tooltips, menus, sliders, and shared controls, compos
 Adapt Alchemy's outcome-driven impact/cue selection and bounded recoil rather than copying its artwork or audio assets. Each presented action selects one strongest nonzero cue, with damage winning ties over healing and block. Positive health loss applies a short 180ms, 4px portrait recoil; fully absorbed and ineffective hits have no health-loss recoil. Recoil is bounded per creature and disabled with reduced motion. Floating feedback retains its damage type and timing.
 
 Original synthesized cues distinguish damage families, healing, gaining block, absorption and marks. Audio unlocks on user interaction and is optional; unavailable devices or autoplay denial cannot interrupt play. Desktop autoplay supports controller-only play. Pause offers a persistent Sound on/off setting. Sounds, animation handles, listeners and pending timers are disposed on teardown; visual aggregation never invents extra impacts or sounds.
+
+## Required review
+
+For every interface change, run check, unit tests and build, then the relevant Playwright journeys. Review actual rendered draft, battle, targeting, rewards, Pause and inspection at 1280×800 and 1920×1080. Check 150% text, reduced motion, focus return, input cancellation and unavailable/knockout states. The browser suite enforces ratios, artwork-only surfaces, row ordering, viewport fit, stable target previews, control hit areas, semantic colors, modal focus ownership, and full expedition flows. Screenshots are review evidence, not pixel-golden approvals.
+
+Browser controller simulation does not verify physical controller behavior. Report macOS desktop, Windows packaging, physical controller, Steam client and Steam Deck verification separately.

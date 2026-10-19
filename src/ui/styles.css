@@ -1,5 +1,9 @@
 @import "tailwindcss";
+@import "./tokens.css";
 @theme inline {
+  --text-base: var(--text-body);
+  --text-sm: var(--text-secondary);
+  --text-xl: var(--text-heading);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
@@ -12,46 +16,14 @@
   --color-popover-foreground: var(--foreground);
   --color-muted-foreground: var(--muted-foreground);
   --color-destructive: var(--destructive);
-  --color-destructive-foreground: #000;
+  --color-destructive-foreground: var(--background);
   --color-border: var(--line);
   --color-input: var(--line);
-  --color-ring: #fff;
+  --color-ring: var(--selected);
   --radius-md: var(--radius);
   --radius-lg: var(--radius);
 }
-:root {
-  color-scheme: dark;
-  --background: #000;
-  --foreground: #f2f2f2;
-  --primary: #f2f2f2;
-  --primary-foreground: #111;
-  --secondary: #111;
-  --accent: #292929;
-  --popover: #080808;
-  --destructive: #f87171;
-  --bg: #000;
-  --surface: #111;
-  --text: #f2f2f2;
-  --muted: #202020;
-  --muted-foreground: #b0b0b0;
-  --line: #404040;
-  --selected: #fff;
-  --health: #f87171;
-  --block: #7dd3fc;
-  --marks: #f2f2f2;
-  --font-ui: "Inter Variable", Inter, sans-serif;
-  --font-name: var(--font-ui);
-  --font-number: var(--font-ui);
-  --text-rule: calc(16px * var(--text-scale, 1));
-  --text-name: calc(20px * var(--text-scale, 1));
-  --radius: 6px;
-  font-family: var(--font-ui);
-  font-size: calc(16px * var(--text-scale, 1));
-  line-height: 1.4;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-}
+
 * {
   box-sizing: border-box;
 }
@@ -78,7 +50,7 @@ p {
 h1,
 h2 {
   font-family: var(--font-ui);
-  font-size: calc(22px * var(--text-scale, 1));
+  font-size: var(--text-title);
   font-weight: 600;
   line-height: 1.3;
 }
@@ -87,58 +59,74 @@ strong {
 }
 .app {
   min-height: 100dvh;
-  background: #000;
+  background: var(--background);
   position: relative;
-  padding: 24px 40px;
+  padding: var(--space-6) var(--space-10);
 }
 .menu-button {
   position: absolute;
   right: 20px;
   top: 16px;
   z-index: 2;
-  background: transparent;
-  border: 0;
-  font-size: calc(20px * var(--text-scale, 1));
-  padding: 6px 10px;
 }
 .loading,
 .recovery {
-  padding: 48px;
+  padding: var(--space-12);
 }
 .recovery {
   max-width: 600px;
   margin: 15vh auto;
 }
 .recovery p {
-  margin: 20px 0;
+  margin: var(--space-5) 0;
   color: var(--muted-foreground);
 }
 .notice,
 .error-banner {
-  font-size: calc(14px * var(--text-scale, 1));
-  padding: 8px 12px;
+  font-size: var(--text-secondary);
+  padding: var(--space-2) var(--space-3);
   margin: 0 64px 14px 0;
   display: flex;
   align-items: center;
-  gap: 16px;
-  background: #161616;
+  gap: var(--space-4);
+  background: var(--notice);
 }
 .error-banner {
-  color: #ffc4ad;
+  color: var(--error);
 }
 .notice {
   color: var(--muted-foreground);
 }
-.menu-panel {
+/* All modal geometry is shared; only content-specific width varies. */
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: var(--overlay);
+}
+.dialog-content {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+  width: min(720px, calc(100vw - var(--space-12)));
+  max-height: calc(100dvh - var(--space-12));
+  overflow-y: auto;
+  padding: var(--space-12) var(--space-6) var(--space-6);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--popover);
+  color: var(--foreground);
+}
+.dialog-content.menu-panel {
+  width: min(388px, calc(100vw - var(--space-12)));
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  align-items: center;
-  justify-content: center;
-  min-height: calc(100dvh - 48px);
+  gap: var(--space-3);
 }
-.menu-panel button {
-  width: 180px;
+.menu-panel > button:not(.dialog-close) {
+  width: 100%;
 }
 .draft-screen {
   max-width: 1440px;
@@ -148,16 +136,16 @@ strong {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 28px;
+  gap: var(--space-7);
 }
 .draft-screen h1 {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: var(--space-4);
 }
 .selection-count {
   color: var(--muted-foreground);
-  font-size: calc(16px * var(--text-scale, 1));
+  font-size: var(--text-body);
   font-weight: 400;
   font-variant-numeric: tabular-nums;
 }
@@ -165,31 +153,34 @@ strong {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 20px;
+  gap: var(--space-5);
 }
 .draft-grid:has(> :nth-child(6)) {
   grid-template-columns: repeat(6, minmax(0, 1fr));
 }
 .trait-description {
-  font-size: calc(14px * var(--text-scale, 1));
+  font-size: var(--text-secondary);
   line-height: 1.5;
   color: var(--muted-foreground);
-  margin-top: 12px;
+  margin-top: var(--space-3);
 }
 .creature-wrap {
   min-width: 0;
 }
-.creature-card {
-  aspect-ratio: 4/3;
-  width: 100%;
+.creature-card,
+.action-card {
   padding: 0;
   position: relative;
   display: block;
   overflow: hidden;
-  border: 1px solid #555;
+  border: 1px solid var(--border-art);
   text-align: left;
-  background: #111;
+  background: var(--surface);
   border-radius: var(--radius);
+}
+.creature-card {
+  aspect-ratio: var(--art-creature-ratio);
+  width: 100%;
 }
 .creature-card > img,
 .action-card > img {
@@ -205,24 +196,19 @@ strong {
   margin-left: auto;
   font-family: var(--font-number);
   font-variant-numeric: tabular-nums;
-  font-size: calc(16px * var(--text-scale, 1));
+  font-size: var(--text-body);
   white-space: nowrap;
   color: var(--health);
 }
 
 .selected {
-  outline: 2px solid var(--selected);
-  outline-offset: 3px;
+  box-shadow:
+    0 0 0 3px var(--background),
+    0 0 0 5px var(--selected);
 }
 .block-badge,
 .mark-badge {
-  position: absolute;
-  right: 8px;
-  top: 8px;
-  font-size: calc(14px * var(--text-scale, 1));
-  background: #000d;
-  padding: 3px 6px;
-  border-radius: 2px;
+  font-size: var(--text-secondary);
   font-variant-numeric: tabular-nums;
 }
 .block-badge {
@@ -238,7 +224,7 @@ strong {
 .intent {
   height: 30px;
   text-align: center;
-  font-size: calc(14px * var(--text-scale, 1));
+  font-size: var(--text-secondary);
   font-variant-numeric: tabular-nums;
 }
 .battle-screen {
@@ -250,32 +236,35 @@ strong {
 }
 .battle-status {
   display: flex;
-  gap: 24px;
-  font-size: calc(14px * var(--text-scale, 1));
+  gap: var(--space-6);
+  font-size: var(--text-secondary);
   color: var(--muted-foreground);
-  padding: 0 50px 14px 0;
+  padding: 0 52px var(--space-3) 0;
   font-variant-numeric: tabular-nums;
 }
 .enemy-row,
 .player-row {
   display: flex;
   justify-content: center;
-  gap: 24px;
+  gap: var(--space-6);
 }
 .enemy-row .creature-wrap,
 .player-row .creature-wrap {
   width: clamp(190px, 19vw, 270px);
 }
 .target-control {
-  height: 44px;
+  flex: 1;
+  min-height: 64px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  align-content: center;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
 }
 .cancel-target {
-  font-size: calc(14px * var(--text-scale, 1));
-  padding: 3px 12px;
-  background: transparent;
+  font-size: var(--text-body);
 }
 .targeting .creature-wrap:not(.knocked-out) .creature-card {
   border-color: var(--selected);
@@ -283,26 +272,26 @@ strong {
 .hand-section {
   width: 100%;
   max-width: 1030px;
-  margin: 24px auto 0;
+  margin: var(--space-6) auto 0;
 }
 .hand-toolbar {
   display: flex;
   align-items: center;
-  gap: 24px;
-  margin-bottom: 16px;
+  gap: var(--space-6);
+  margin-bottom: var(--space-4);
 }
 .mana-display {
-  font-size: calc(16px * var(--text-scale, 1));
+  font-size: var(--text-body);
   white-space: nowrap;
 }
 .mana-display strong {
   font-family: var(--font-number);
-  font-size: calc(22px * var(--text-scale, 1));
+  font-size: var(--text-title);
   font-variant-numeric: tabular-nums;
   margin-right: 6px;
 }
 .pile-counts {
-  font-size: calc(14px * var(--text-scale, 1));
+  font-size: var(--text-secondary);
   color: var(--muted-foreground);
   font-variant-numeric: tabular-nums;
 }
@@ -311,49 +300,42 @@ strong {
   position: relative;
 }
 .end-turn small {
-  margin-left: 12px;
-  font-size: calc(14px * var(--text-scale, 1));
+  margin-left: var(--space-3);
+  font-size: var(--text-secondary);
 }
 .hand {
   display: flex;
   justify-content: center;
-  gap: 14px;
+  gap: var(--space-4);
   min-height: 160px;
-  padding: 0 4px 8px;
+  padding: var(--space-4) var(--space-3) var(--space-2);
+  isolation: isolate;
+}
+.hand .action-card {
+  transition: transform var(--motion-fast) ease-out;
+}
+.hand .action-card:hover,
+.hand .action-card:focus-visible {
+  transform: translateY(-8px);
+  z-index: 1;
+}
+.hand .action-card.selected {
+  transform: translateY(-12px);
+  z-index: 2;
 }
 .action-card {
-  position: relative;
-  aspect-ratio: 3/4;
+  aspect-ratio: var(--art-action-ratio);
   width: 180px;
   flex: 0 0 auto;
-  display: block;
-  text-align: left;
-  background: #111;
-  padding: 0;
-  border: 1px solid #555;
-  border-radius: var(--radius);
-  font-family: var(--font-ui);
 }
-
 .action-effect {
   font-weight: 400;
   font-size: var(--text-rule);
   line-height: 1.4;
-  color: #eee;
+  color: var(--foreground);
 }
 .action-card[aria-disabled="true"] {
   opacity: 0.45;
-}
-.inspection {
-  max-height: calc(100dvh - 48px);
-  overflow-y: auto;
-  max-width: calc(100vw - 48px);
-  width: 720px;
-  padding: 42px 24px 24px;
-  background: #080808;
-  color: var(--text);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
 }
 .inspection > .creature-wrap {
   max-width: 300px;
@@ -365,21 +347,21 @@ strong {
 }
 .inspection .trait-description {
   text-align: center;
-  margin: 16px auto;
+  margin: var(--space-4) auto;
   max-width: 400px;
 }
 .inspection.single-card {
-  width: 350px;
+  width: min(350px, calc(100vw - var(--space-12)));
 }
 .inspection.single-card > .action-card {
   width: 280px;
   margin: auto;
-  --text-name: calc(26px * var(--text-scale, 1));
-  --text-rule: calc(18px * var(--text-scale, 1));
+  --text-name: var(--text-result);
+  --text-rule: var(--text-inspection);
 }
 .inspection > p:not(.trait-description) {
   text-align: center;
-  margin-top: 12px;
+  margin-top: var(--space-3);
 }
 .reward-screen {
   max-width: 1200px;
@@ -388,29 +370,29 @@ strong {
 .reward-columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 48px;
+  gap: var(--space-12);
 }
 .reward-columns h1 {
-  margin-bottom: 20px;
+  margin-bottom: var(--space-5);
 }
 .recruit-options {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+  gap: var(--space-5);
 }
 .replace-options {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 24px;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
 }
 .replace-options button {
-  font-size: calc(14px * var(--text-scale, 1));
+  font-size: var(--text-secondary);
 }
 .upgrade-options {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--space-2);
 }
 
 .end-screen {
@@ -419,18 +401,18 @@ strong {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 28px;
+  gap: var(--space-7);
 }
 .end-screen h1 {
-  font-size: calc(28px * var(--text-scale, 1));
+  font-size: var(--text-result);
 }
 .unlock-card {
   width: 240px;
 }
 .unlock-card p {
   text-align: center;
-  margin-top: 12px;
-  font-size: calc(16px * var(--text-scale, 1));
+  margin-top: var(--space-3);
+  font-size: var(--text-body);
   color: var(--muted-foreground);
 }
 .sr-only {
@@ -443,35 +425,33 @@ strong {
 }
 @media (max-height: 850px) and (min-width: 900px) {
   .app {
-    padding: 20px 40px;
+    padding: var(--space-4) var(--space-10);
   }
   .battle-screen {
-    min-height: calc(100dvh - 40px);
+    --readout-height: 48px;
+    min-height: calc(100dvh - 32px);
   }
   .battle-status {
-    padding-bottom: 8px;
+    padding-bottom: var(--space-2);
   }
   .enemy-row .creature-wrap,
   .player-row .creature-wrap {
-    width: 184px;
-  }
-  .target-control {
-    height: 48px;
+    width: 168px;
   }
   .hand-section {
-    margin-top: 16px;
+    margin-top: var(--space-4);
   }
   .hand-toolbar {
-    margin-bottom: 14px;
+    margin-bottom: 0;
   }
   .action-card {
-    width: 180px;
-    --text-name: calc(20px * var(--text-scale, 1));
-    --text-rule: calc(16px * var(--text-scale, 1));
+    width: 144px;
+    --text-name: var(--text-heading);
+    --text-rule: var(--text-body);
   }
 
   .health-number {
-    font-size: calc(14px * var(--text-scale, 1));
+    font-size: var(--text-secondary);
   }
 
   .reward-screen {
@@ -491,33 +471,33 @@ strong {
     max-width: 850px;
   }
   .draft-screen {
-    padding: 32px 0;
+    padding: var(--space-8) 0;
   }
 }
 @media (max-width: 700px) {
   .app {
-    padding: 48px 16px 16px;
+    padding: var(--space-12) var(--space-4) var(--space-4);
   }
   .draft-screen {
     min-height: auto;
-    gap: 24px;
-    padding: 12px 0;
+    gap: var(--space-6);
+    padding: var(--space-3) 0;
   }
   .draft-grid,
   .draft-grid:has(> :nth-child(6)) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px 12px;
+    gap: var(--space-5) var(--space-3);
   }
 
   .health-number {
-    font-size: calc(14px * var(--text-scale, 1));
+    font-size: var(--text-secondary);
   }
   .trait-description {
-    font-size: calc(14px * var(--text-scale, 1));
+    font-size: var(--text-secondary);
   }
   .enemy-row,
   .player-row {
-    gap: 12px;
+    gap: var(--space-3);
   }
   .enemy-row .creature-wrap,
   .player-row .creature-wrap {
@@ -525,46 +505,41 @@ strong {
   }
 
   .battle-status {
-    font-size: calc(13px * var(--text-scale, 1));
+    font-size: var(--text-secondary);
   }
   .intent {
-    font-size: calc(12px * var(--text-scale, 1));
+    font-size: var(--text-secondary);
     height: 28px;
   }
   .battle-screen {
     min-height: calc(100dvh - 64px);
   }
   .hand-toolbar {
-    gap: 12px;
+    gap: var(--space-3);
   }
   .mana-display {
-    font-size: calc(14px * var(--text-scale, 1));
+    font-size: var(--text-secondary);
   }
   .mana-display strong {
-    font-size: calc(18px * var(--text-scale, 1));
+    font-size: var(--text-inspection);
   }
   .pile-counts {
-    font-size: calc(12px * var(--text-scale, 1));
+    font-size: var(--text-secondary);
   }
   .end-turn {
-    padding: 8px 12px;
+    padding: var(--space-2) var(--space-3);
     min-width: auto;
-    font-size: calc(14px * var(--text-scale, 1));
+    font-size: var(--text-secondary);
   }
   .hand {
     justify-content: start;
     overflow-x: auto;
-    padding-top: 8px;
+    padding-top: var(--space-2);
   }
   .action-card {
     width: 150px;
-    --text-rule: calc(16px * var(--text-scale, 1));
-    --text-name: calc(18px * var(--text-scale, 1));
-  }
-  .inspection {
-    max-height: calc(100dvh - 24px);
-    overflow: auto;
-    max-width: calc(100vw - 24px);
+    --text-rule: var(--text-body);
+    --text-name: var(--text-inspection);
   }
 
   .inspection.single-card > .action-card {
@@ -572,7 +547,7 @@ strong {
   }
   .reward-columns {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: var(--space-8);
   }
   .reward-screen {
     margin: 10px 0;
@@ -593,31 +568,31 @@ strong {
 /* Combat colors share Alchemy's families; green foregrounds are lighter for legibility. */
 [data-damage-type="physical"],
 [data-combat-tone="physical"] {
-  color: #cbd5e1;
+  color: var(--damage-physical);
 }
 [data-damage-type="fire"],
 [data-combat-tone="fire"] {
-  color: #fb923c;
+  color: var(--damage-fire);
 }
 [data-damage-type="ice"],
 [data-combat-tone="ice"] {
-  color: #67e8f9;
+  color: var(--damage-ice);
 }
 [data-damage-type="lightning"],
 [data-combat-tone="lightning"] {
-  color: #fcd34d;
+  color: var(--damage-lightning);
 }
 [data-damage-type="poison"],
 [data-combat-tone="poison"] {
-  color: #86efac;
+  color: var(--damage-poison);
 }
 [data-damage-type="nature"],
 [data-combat-tone="nature"] {
-  color: #34d399;
+  color: var(--damage-nature);
 }
 [data-damage-type="light"],
 [data-combat-tone="light"] {
-  color: #fde68a;
+  color: var(--damage-light);
 }
 [data-combat-tone="health"] {
   color: var(--health);
@@ -631,7 +606,7 @@ strong {
 .mark-badge {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--space-1);
 }
 .health-number svg,
 .damage-value svg,
@@ -645,25 +620,25 @@ strong {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: var(--space-1);
 }
 button:focus-visible {
-  outline: 2px dashed #fff;
+  outline: 2px dashed var(--selected);
   outline-offset: 6px;
 }
 button {
-  transition-duration: 150ms;
+  transition-duration: var(--motion-fast);
 }
 
 .creature-wrap {
   position: relative;
 }
 .creature-readout {
-  min-height: 28px;
+  min-height: var(--readout-height, 56px);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: var(--space-3);
   font-variant-numeric: tabular-nums;
 }
 .creature-readout .health-number {
@@ -678,12 +653,12 @@ button {
 .card-details {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  font-size: calc(16px * var(--text-scale, 1));
+  gap: var(--space-2);
+  font-size: var(--text-body);
   line-height: 1.5;
 }
 .card-details > strong {
-  font-size: calc(20px * var(--text-scale, 1));
+  font-size: var(--text-heading);
 }
 .card-details > p {
   color: var(--muted-foreground);
@@ -698,36 +673,30 @@ button {
   overflow: auto;
 }
 .inspection > .card-details {
-  margin-top: 16px;
+  margin-top: var(--space-4);
 }
 
-.target-control {
-  gap: 12px;
-  min-height: 48px;
-  height: auto;
-  padding: 4px 0;
-}
 .target-preview {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 8px;
-  min-height: 28px;
-  font-size: calc(14px * var(--text-scale, 1));
+  gap: var(--space-2);
+  min-height: var(--readout-height, 56px);
+  font-size: var(--text-secondary);
   font-variant-numeric: tabular-nums;
 }
 .target-preview span {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--space-1);
 }
 .target-preview svg {
   width: 16px;
   height: 16px;
 }
 .creature-wrap:has(.target-preview) .creature-card {
-  border: 2px solid #fff;
+  border: 2px solid var(--selected);
 }
 .combat-feedback {
   pointer-events: none;
@@ -739,25 +708,25 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: var(--space-1);
 }
 .combat-burst {
   display: flex;
-  gap: 8px;
+  gap: var(--space-2);
   align-items: center;
   white-space: nowrap;
-  animation: combat-rise 1400ms ease-out both;
+  animation: combat-rise var(--feedback-duration) ease-out both;
 }
 .combat-number {
   display: inline-flex;
-  gap: 4px;
+  gap: var(--space-1);
   align-items: center;
-  font-size: calc(24px * var(--text-scale, 1));
+  font-size: var(--text-title);
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   text-shadow:
-    0 1px 2px #000,
-    0 0 4px #000;
+    0 1px 2px var(--background),
+    0 0 4px var(--background);
 }
 .combat-number svg,
 .combat-number .damage-value svg {
@@ -777,24 +746,17 @@ button {
     transform: translateY(-24px);
   }
 }
-.glossary {
-  max-height: calc(100dvh - 48px);
-  overflow: auto;
-  width: min(720px, calc(100vw - 32px));
-  max-width: none;
-  padding-top: 48px;
-}
 .glossary dl {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-top: 24px;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
 }
 .glossary dt {
   font-weight: 600;
 }
 .glossary dd {
-  margin: 4px 0 0;
+  margin: var(--space-1) 0 0;
   color: var(--muted-foreground);
 }
 @media (prefers-reduced-motion: reduce) {
@@ -805,7 +767,7 @@ button {
 .upgrade-options {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
+  gap: var(--space-3);
 }
 .upgrade-options .action-card {
   width: 100%;
@@ -813,13 +775,10 @@ button {
   height: auto;
   padding: 0;
 }
-.menu-panel button {
-  width: min(340px, 80vw);
-}
 .intent-block {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--space-1);
 }
 .intent-block svg {
   width: 14px;
@@ -835,6 +794,10 @@ button {
   opacity: 0.45;
 }
 .inspection .card-details {
-  --text-rule: calc(18px * var(--text-scale, 1));
-  font-size: calc(18px * var(--text-scale, 1));
+  --text-rule: var(--text-inspection);
+  font-size: var(--text-inspection);
+}
+
+.inspection .card-details > strong {
+  font-size: var(--text-result);
 }
