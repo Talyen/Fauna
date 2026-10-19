@@ -23,15 +23,15 @@ Browser and desktop profiles are separate. Desktop saves live in Electron's Faun
 
 ## Play
 
-Choose three creatures, then enter the wilds. Every creature contributes three cards. Draw five and spend up to three energy each turn. Select a card and an enemy or ally; team guard cards act immediately. Enemy intents reveal their next attack and target. Marks amplify the next hit, block absorbs attacks, and each creature has a passive trait.
+Choose three creatures, then start the run. Every creature contributes three cards. Draw five and spend up to three energy each turn. Select a card and an enemy or ally; team guard cards act immediately. Enemy intents reveal their next attack and target. Marks amplify the next hit, block absorbs attacks, and each creature has a passive trait.
 
 Knocked-out creatures cannot act and their cards leave circulation for that battle. Defeat the enemy row to restore the team and choose one reward. Recruitment replaces a creature and its cards, including upgrades. Strengthening a card adds two to its effect, up to three upgrades. Defeating the boss unlocks Moonhart; losing or ending a run preserves discoveries.
 
-- Mouse: select cards and targets. Use the magnifying button on any hand card for an enlarged inspection.
-- Keyboard: arrows navigate, Enter/Space activate, I inspects a focused action card, Escape cancels or opens the menu. Tab remains available.
-- Standard controller: D-pad/left stick navigate, south/A confirms, east/B backs out, west/X inspects, north/Y ends the turn. Prompts currently use Xbox-style labels. Other mappings are not yet supported.
+- Mouse: select cards and targets. Right-click any card to inspect it.
+- Keyboard: arrows navigate, Enter/Space activate, I inspects a focused card, Escape cancels or opens the menu. Tab remains available.
+- Standard controller: D-pad/left stick navigate, south/A confirms, east/B backs out, west/X inspects, north/Y ends the turn. Button mapping follows standard Xbox-style positions. Non-standard mappings are not yet supported.
 
-Gameplay settles before visual feedback. Accepted commands automatically save; the header reports status and offers retry on failure. Desktop close requests wait for queued saves. Browsers warn about closing while saves are pending, but abrupt browser/process termination cannot guarantee completion of queued writes.
+Gameplay settles before visual feedback. Accepted commands automatically save; a save failure exposes a retry action. Desktop close requests wait for queued saves. Browsers warn about closing while saves are pending, but abrupt browser/process termination cannot guarantee completion of queued writes.
 
 ## Verify
 
@@ -56,6 +56,7 @@ The Windows job creates an **unpacked x64 application**, not a signed release in
 
 - [Architecture and saves](Docs/ARCHITECTURE.md)
 - [Content and artwork](Docs/CONTENT.md)
+- [UI and typography](Docs/UI.md)
 - [Release and verification boundaries](Docs/RELEASE.md)
 
 Alchemy informed the technology choices and architectural patterns. Fauna has its own implementation and no dependency on Alchemy or its assets.

@@ -12,23 +12,17 @@ try {
     env: { ...process.env, FAUNA_SMOKE_USER_DATA: userData },
   });
   const window = await app.firstWindow();
-  await window.getByRole("heading", { name: "A little wild. Better together." }).waitFor({ timeout: 60000 });
+  await window.getByRole("heading", { name: /^Choose 3/ }).waitFor({ timeout: 60000 });
   for (const name of ["Mossback", "Emberfox", "Stormfin"])
     await window.getByRole("button", { name: `Choose ${name}`, exact: true }).click();
-  await window.getByRole("button", { name: "Enter the wilds" }).click();
-  await window.getByRole("heading", { name: "The overgrown trail" }).waitFor();
-  await window.getByRole("status").filter({ hasText: "Saved" }).waitFor();
-  let attack = window
-    .locator(".hand .action-card")
-    .filter({ hasText: /ATTACK/ })
-    .first();
+  await window.getByRole("button", { name: "Start run" }).click();
+  await window.getByRole("main", { name: "Battle 1" }).waitFor();
+  await window.locator('.app[data-save-status="saved"]').waitFor();
+  let attack = window.locator('.hand .action-card[data-effect="attack"]').first();
   if (!(await attack.count())) {
     await window.getByRole("button", { name: "End turn" }).click();
-    await window.locator(".save-status").filter({ hasText: "Saved" }).waitFor();
-    attack = window
-      .locator(".hand .action-card")
-      .filter({ hasText: /ATTACK/ })
-      .first();
+    await window.locator('.app[data-save-status="saved"]').waitFor();
+    attack = window.locator('.hand .action-card[data-effect="attack"]').first();
   }
   const before = await window.evaluate(async () =>
     JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
@@ -43,7 +37,7 @@ try {
     env: { ...process.env, FAUNA_SMOKE_USER_DATA: userData },
   });
   const resumed = await app.firstWindow();
-  await resumed.getByRole("heading", { name: "The overgrown trail" }).waitFor({ timeout: 60000 });
+  await resumed.getByRole("main", { name: "Battle 1" }).waitFor({ timeout: 60000 });
   const after = await resumed.evaluate(async () =>
     JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
   );

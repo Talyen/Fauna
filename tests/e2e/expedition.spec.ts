@@ -7,7 +7,7 @@ async function seed(page: Page, state = createGame(7)) {
   await page.addInitScript((data) => localStorage.setItem("fauna.save.v1", data), JSON.stringify(state));
 }
 async function saved(page: Page) {
-  await expect(page.locator(".save-status")).toHaveText("◌ Saved");
+  await expect(page.locator(".app")).toHaveAttribute("data-save-status", "saved");
 }
 async function state(page: Page): Promise<GameState> {
   await saved(page);
@@ -16,8 +16,8 @@ async function state(page: Page): Promise<GameState> {
 async function draft(page: Page) {
   for (const name of ["Mossback", "Emberfox", "Stormfin"])
     await page.getByRole("button", { name: `Choose ${name}`, exact: true }).click();
-  await page.getByRole("button", { name: "Enter the wilds" }).click();
-  await expect(page.getByRole("heading", { name: "The overgrown trail" })).toBeVisible();
+  await page.getByRole("button", { name: "Start run" }).click();
+  await expect(page.getByRole("main", { name: "Battle 1" })).toBeVisible();
 }
 async function playStep(
   page: Page,
@@ -51,7 +51,7 @@ test("complete draft-to-boss journey, upgrade, unlock, and durable resume", asyn
     expect(s.phase).not.toBe("defeat");
     await playStep(page);
   }
-  await expect(page.getByRole("heading", { name: "The wilds remember your kindness." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Victory" })).toBeVisible();
   await page.screenshot({ path: "reports/victory-1280.png", fullPage: true });
   const won = await state(page);
   expect(won.wins).toBe(1);
@@ -60,8 +60,8 @@ test("complete draft-to-boss journey, upgrade, unlock, and durable resume", asyn
   page.removeAllListeners("pageerror");
   const fresh = await page.context().newPage();
   await fresh.goto("/");
-  await expect(fresh.getByRole("heading", { name: "The wilds remember your kindness." })).toBeVisible();
-  await fresh.getByRole("button", { name: "Begin another expedition" }).click();
+  await expect(fresh.getByRole("heading", { name: "Victory" })).toBeVisible();
+  await fresh.getByRole("button", { name: "New run" }).click();
   await expect(fresh.getByRole("button", { name: "Choose Moonhart", exact: true })).toBeVisible();
   expect(errors).toEqual([]);
 });
@@ -82,17 +82,14 @@ test("recruitment replaces cards and survives closing the page during feedback",
   await page.close();
   const resumed = await context.newPage();
   await resumed.goto("/");
-  await expect(resumed.getByRole("heading", { name: "Beyond the fernwood" })).toBeVisible();
+  await expect(resumed.getByRole("main", { name: "Battle 2" })).toBeVisible();
   expect((await state(resumed)).revision).toBe(before.revision);
 });
 test("keyboard targeting, enlarged inspection, cancel, and menu focus", async ({ page }) => {
   await seed(page);
   await page.goto("/");
   await draft(page);
-  const card = page
-    .locator(".hand .action-card")
-    .filter({ hasText: /ATTACK/ })
-    .first();
+  const card = page.locator('.hand .action-card[data-effect="attack"]').first();
   await card.focus();
   await page.keyboard.press("i");
   await expect(page.getByRole("dialog")).toBeVisible();
@@ -103,10 +100,10 @@ test("keyboard targeting, enlarged inspection, cancel, and menu focus", async ({
   await page.keyboard.press("Escape");
   await expect(page.locator(".cancel-target")).toHaveCount(0);
   await page.keyboard.press("Escape");
-  await expect(page.getByRole("heading", { name: "Take a breath." })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Return to game" })).toBeFocused();
+  await expect(page.getByRole("main", { name: "Pause menu" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Resume" })).toBeFocused();
   await page.keyboard.press("Enter");
-  await expect(page.getByRole("heading", { name: "The overgrown trail" })).toBeVisible();
+  await expect(page.getByRole("main", { name: "Battle 1" })).toBeVisible();
 });
 test("standard gamepad edge handling, navigation, inspect, confirm, and back", async ({ page }) => {
   await seed(page, run(7));
@@ -117,7 +114,7 @@ test("standard gamepad edge handling, navigation, inspect, confirm, and back", a
     Object.assign(window, { testPad: pad });
   });
   await page.goto("/");
-  await expect(page.getByRole("heading", { name: "The overgrown trail" })).toBeVisible();
+  await expect(page.getByRole("main", { name: "Battle 1" })).toBeVisible();
   const press = async (index: number) => {
     await page.evaluate((i) => {
       (window as unknown as { testPad: { buttons: { pressed: boolean }[] } }).testPad.buttons[i]!.pressed =
@@ -130,10 +127,7 @@ test("standard gamepad edge handling, navigation, inspect, confirm, and back", a
     }, index);
     await page.waitForTimeout(40);
   };
-  const card = page
-    .locator(".hand .action-card")
-    .filter({ hasText: /ATTACK/ })
-    .first();
+  const card = page.locator('.hand .action-card[data-effect="attack"]').first();
   await card.focus();
   await press(2);
   await expect(page.getByRole("dialog")).toBeVisible();
@@ -144,10 +138,10 @@ test("standard gamepad edge handling, navigation, inspect, confirm, and back", a
   await expect(page.locator(".app")).toHaveAttribute("data-input", "controller");
   await press(1);
   await press(1);
-  await expect(page.getByRole("heading", { name: "Take a breath." })).toBeVisible();
+  await expect(page.getByRole("main", { name: "Pause menu" })).toBeVisible();
   await press(0);
   await press(15);
-  await expect(page.getByRole("heading", { name: "The overgrown trail" })).toBeVisible();
+  await expect(page.getByRole("main", { name: "Battle 1" })).toBeVisible();
 });
 test("handheld and desktop composition preserve artwork, rows, hand, and readable inspection", async ({
   page,
@@ -188,7 +182,7 @@ test("corrupt primary recovers backup; all invalid saves require explicit recove
   );
   await page.goto("/");
   await expect(page.getByText("Recovered your expedition from a backup.")).toBeVisible();
-  await expect(page.getByRole("heading", { name: "The overgrown trail" })).toBeVisible();
+  await expect(page.getByRole("main", { name: "Battle 1" })).toBeVisible();
 });
 test("controller-equivalent draft-to-boss journey and held-confirm protection", async ({ page }) => {
   await seed(page);
@@ -223,7 +217,7 @@ test("controller-equivalent draft-to-boss journey and held-confirm protection", 
   await press(0);
   expect((await state(page)).selected).toEqual(["mossback", "emberfox", "stormfin"]);
   await press(13);
-  await expect(page.getByRole("button", { name: "Enter the wilds" })).toBeFocused();
+  await expect(page.getByRole("button", { name: "Start run" })).toBeFocused();
   await press(0);
   for (let i = 0; i < 150; i++) {
     const s = await state(page);
@@ -234,7 +228,7 @@ test("controller-equivalent draft-to-boss journey and held-confirm protection", 
       await press(0);
     });
   }
-  await expect(page.getByRole("heading", { name: "The wilds remember your kindness." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Victory" })).toBeVisible();
   expect((await state(page)).wins).toBe(1);
 });
 test("combat committed during feedback resumes once after immediate page close", async ({
@@ -265,7 +259,7 @@ test("explicit all-invalid recovery and failed browser writes retain the live ex
     localStorage.setItem("fauna.save.v1", "broken");
   });
   await page.goto("/");
-  await expect(page.getByRole("heading", { name: "A page out of place" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Save unavailable" })).toBeVisible();
   await page.getByRole("button", { name: "Start fresh" }).click();
   await expect(page.getByRole("button", { name: "Choose Mossback", exact: true })).toBeVisible();
   await page.evaluate(() => {

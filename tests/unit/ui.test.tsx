@@ -16,7 +16,7 @@ describe("player interface", () => {
     await session.load();
     render(<App session={session} />);
     const user = userEvent.setup();
-    const enter = screen.getByRole("button", { name: "Enter the wilds" });
+    const enter = screen.getByRole("button", { name: "Start run" });
     expect((enter as HTMLButtonElement).disabled).toBe(true);
     for (const name of ["Mossback", "Emberfox", "Stormfin"])
       await user.click(screen.getByRole("button", { name: `Choose ${name}` }));
