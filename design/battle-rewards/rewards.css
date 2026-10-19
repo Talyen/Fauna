@@ -1,0 +1,115 @@
+.reward-sample {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 48px 32px;
+  background: var(--background);
+}
+.reward-content {
+  width: min(640px, 100%);
+}
+.reward-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+.reward-heading h1 {
+  font-size: var(--text-title);
+  font-weight: 500;
+}
+.reward-currency {
+  font-variant-numeric: tabular-nums;
+}
+.reward-xp {
+  display: grid;
+  gap: 24px;
+}
+.reward-keyword-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.reward-keyword-label svg {
+  width: 18px;
+  height: 18px;
+  color: var(--keyword-color);
+}
+.reward-keyword-label > :last-child {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+.reward-progress {
+  height: 4px;
+  background: var(--muted);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.reward-progress > span {
+  display: block;
+  height: 100%;
+  background: var(--keyword-color);
+}
+.reward-progress-detail {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-secondary);
+  color: var(--muted-foreground);
+  margin-top: 8px;
+  font-variant-numeric: tabular-nums;
+}
+.reward-heading h1:focus {
+  outline: none;
+}
+.reward-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: var(--control-height);
+  margin-top: 40px;
+}
+.reward-recruits {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+.reward-result {
+  color: var(--muted-foreground);
+}
+.reward-relic-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.reward-relic {
+  flex-direction: column;
+  white-space: normal;
+  gap: 12px;
+  padding: 16px 8px 8px;
+  border: 1px solid transparent;
+}
+.reward-relic[aria-pressed="true"] {
+  border-color: var(--selected);
+}
+.reward-relic[aria-disabled="true"][aria-pressed="false"] {
+  opacity: 0.45;
+}
+.reward-relic .reward-relic-icon {
+  height: 64px;
+  display: grid;
+  place-items: center;
+}
+.reward-relic .reward-relic-icon svg {
+  width: 48px;
+  height: 48px;
+  stroke-width: 1.25;
+}
+.reward-relic-state {
+  height: 20px;
+}
+@media (max-height: 850px) {
+  .reward-sample {
+    padding: 32px;
+  }
+}
