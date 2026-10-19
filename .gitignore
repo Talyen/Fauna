@@ -1,0 +1,9 @@
+node_modules/
+dist/
+release/
+reports/
+playwright-report/
+test-results/
+.integration-lock/
+*.log
+.DS_Store
