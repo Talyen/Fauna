@@ -10,6 +10,9 @@ These are the agreed directions from the design review. They supersede the proto
 - Team selection is the first step of beginning each battle. It is a separate destination/phase, not a post-battle reward step.
 - Reveal the enemy lineup before team selection. Enemy intents remain hidden.
 - Choose the active three, then begin combat. Team swaps happen outside combat.
+- Pre-battle selection shows separate active and reserve rows beneath the enemies. Select either creature first, then a creature in the other roster row to swap them.
+- Reserve cards are smaller than enemy and active cards, emphasizing the active team while preserving artwork ratios.
+- A Deck button opens an inspection dialog for the active team's nine action cards.
 
 ## Keyword XP and talents
 
@@ -54,6 +57,7 @@ Ordinary victory → XP and materials/currency → recruitment → relic choice 
 - XP and materials/currency share one screen. Specific material types and uses remain undefined.
 - Recruitment and relic choice each have their own screen; relic choice appears only when a relic is awarded.
 - Relic effects remain in hover/focus tooltips.
+- Keep keyword XP progress numbers visible beneath the bars on the XP reward screen.
 - Team selection belongs to the next battle, separate from the reward screens.
 - No layout for these redesigned screens has been approved yet.
 - Do not turn these design decisions into gameplay changes as part of the visual sample work.

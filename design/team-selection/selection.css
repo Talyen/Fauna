@@ -1,0 +1,56 @@
+.team-sample {
+  --team-card-width: min(360px, calc((100dvh - 236px) * 4 / 8.16));
+  min-height: 100dvh;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+  background: var(--background);
+}
+.team-row {
+  display: grid;
+  grid-template-columns: repeat(3, var(--team-card-width));
+  gap: 24px;
+  justify-content: center;
+}
+.team-reserve-row {
+  grid-template-columns: repeat(3, calc(var(--team-card-width) * 0.72));
+}
+.team-roster-group h2 {
+  color: var(--muted-foreground);
+  font-size: var(--text-secondary);
+  font-weight: 400;
+  width: calc(var(--team-card-width) * 3 + 48px);
+  margin: 0 auto 8px;
+}
+.team-picked {
+  outline: 2px solid var(--selected);
+  outline-offset: 4px;
+}
+.team-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  width: calc(var(--team-card-width) * 3 + 48px);
+  margin: 0 auto;
+}
+.team-deck {
+  width: min(640px, calc(100vw - 48px));
+}
+.team-deck-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  justify-items: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+.team-deck-grid .action-card {
+  width: min(112px, calc((100dvh - 220px) / 4));
+}
+.team-inspection {
+  width: min(440px, calc(100vw - 48px));
+}
+.team-inspection > .card-details {
+  margin-top: 16px;
+}
