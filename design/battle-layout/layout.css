@@ -1,0 +1,292 @@
+/* Review-only compositions. Gameplay screens are intentionally unchanged. */
+.sample-board {
+  --sample-creature: 336px;
+  --sample-hand: 124px;
+  height: 100dvh;
+  padding: 24px 32px;
+  display: grid;
+  grid-template-rows: 44px auto minmax(64px, 1fr) auto auto;
+  position: relative;
+  isolation: isolate;
+  background: var(--background);
+}
+.sample-board.sample-b {
+  --sample-creature: 368px;
+  --sample-hand: 116px;
+}
+.sample-status {
+  display: flex;
+  align-items: start;
+  gap: 24px;
+  color: var(--muted-foreground);
+  font-size: var(--text-secondary);
+}
+.sample-status button {
+  margin-left: auto;
+  margin-top: -8px;
+}
+.sample-enemies,
+.sample-players {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  gap: 24px;
+}
+.sample-b .sample-enemies,
+.sample-b .sample-players {
+  gap: 20px;
+}
+.sample-creature {
+  width: var(--sample-creature);
+  flex: 0 0 auto;
+}
+.sample-intent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 24px;
+  margin-bottom: 8px;
+  font-size: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+.sample-health {
+  height: 36px;
+  padding-top: 8px;
+}
+.sample-health-track {
+  height: 4px;
+  position: relative;
+  background: var(--muted);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.sample-health-track > span {
+  position: absolute;
+  top: 0;
+  height: 100%;
+}
+.sample-health-fill {
+  left: 0;
+  background: var(--health);
+}
+.sample-health-loss {
+  background: repeating-linear-gradient(120deg, var(--health) 0 2px, var(--muted) 2px 5px);
+}
+.sample-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding-top: 4px;
+  font-size: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+.sample-stats > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.sample-stats svg {
+  width: 14px;
+  height: 14px;
+}
+.sample-acting .creature-card {
+  box-shadow:
+    0 0 0 3px var(--background),
+    0 0 0 5px var(--selected);
+}
+.sample-target .creature-card {
+  border-color: var(--selected);
+  outline: 1px solid var(--selected);
+  outline-offset: 2px;
+}
+.sample-command {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  z-index: 2;
+}
+.sample-command > span {
+  background: var(--background);
+  padding: 4px 8px;
+}
+.sample-hand-section {
+  width: min(1040px, 100%);
+  margin: 16px auto 0;
+}
+.sample-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  height: 44px;
+}
+.sample-toolbar strong {
+  font-size: var(--text-title);
+  margin-right: 8px;
+  font-variant-numeric: tabular-nums;
+}
+.sample-toolbar > button {
+  margin-left: auto;
+}
+.sample-piles {
+  color: var(--muted-foreground);
+  font-size: var(--text-secondary);
+}
+.sample-fan {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  height: calc(var(--sample-hand) * 4 / 3 + 36px);
+  margin-top: 8px;
+  padding-top: 16px;
+}
+.sample-hand-slot {
+  flex: 0 0 var(--sample-hand);
+  width: var(--sample-hand);
+  transform: translateY(var(--fan-drop)) rotate(var(--fan-angle));
+  transform-origin: 50% 100%;
+  position: relative;
+  z-index: var(--fan-order);
+}
+.sample-hand-slot + .sample-hand-slot {
+  margin-left: -16px;
+}
+.sample-hand-slot .action-card {
+  width: 100%;
+  transition: transform var(--motion-fast) ease-out;
+}
+.sample-hand-slot:hover,
+.sample-hand-slot:focus-within,
+.sample-hand-slot:has(.selected) {
+  z-index: 10;
+}
+.sample-hand-slot .action-card:hover,
+.sample-hand-slot .action-card:focus-visible {
+  transform: translateY(-12px) rotate(calc(var(--fan-angle) * -1));
+}
+.sample-hand-slot .action-card.selected {
+  transform: translateY(-20px) rotate(calc(var(--fan-angle) * -1));
+}
+.sample-target-line {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: visible;
+}
+.sample-target-line path {
+  fill: none;
+  stroke: var(--selected);
+  stroke-width: 1.5;
+  opacity: 0.8;
+}
+.sample-target-line marker path {
+  stroke-width: 1.5;
+  opacity: 1;
+}
+.sample-inspection {
+  width: min(440px, calc(100vw - 48px));
+}
+.sample-inspection > .action-card {
+  width: 200px;
+  margin: auto;
+}
+.sample-inspection > .card-details {
+  margin-top: 16px;
+}
+.sample-gallery {
+  padding: 24px;
+}
+.sample-gallery > header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.sample-gallery > header > span {
+  color: var(--muted-foreground);
+  font-size: var(--text-secondary);
+  margin-right: auto;
+}
+.sample-comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+.sample-caption {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.sample-caption h2 {
+  font-size: var(--text-heading);
+}
+.sample-caption a {
+  color: var(--muted-foreground);
+  font-size: var(--text-secondary);
+  text-decoration: underline;
+}
+.sample-window {
+  aspect-ratio: 8/5;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.sample-window iframe {
+  width: 1280px;
+  height: 800px;
+  border: 0;
+  transform-origin: 0 0;
+  transform: scale(var(--preview-scale, 1));
+}
+@media (max-height: 850px) {
+  .sample-board {
+    --sample-creature: 224px;
+    --sample-hand: 102px;
+    padding: 16px 24px;
+    grid-template-rows: 44px auto minmax(48px, 1fr) auto auto;
+  }
+  .sample-board.sample-b {
+    --sample-creature: 244px;
+    --sample-hand: 90px;
+  }
+  .sample-hand-section {
+    margin-top: 12px;
+  }
+  .sample-enemies,
+  .sample-players {
+    gap: 24px;
+  }
+}
+@media (max-width: 1100px) {
+  .sample-comparison {
+    grid-template-columns: 1fr;
+  }
+  .sample-gallery > header {
+    flex-wrap: wrap;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sample-hand-slot .action-card {
+    transition: none;
+  }
+}
+
+@media (max-height: 850px) {
+  .sample-b .sample-health {
+    height: 32px;
+    padding-top: 4px;
+  }
+  .sample-b .sample-hand-section {
+    margin-top: 8px;
+  }
+  .sample-board.sample-b {
+    grid-template-rows: 44px auto minmax(44px, 1fr) auto auto;
+  }
+}

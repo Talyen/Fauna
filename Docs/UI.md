@@ -4,6 +4,20 @@ Fauna's screens are game surfaces. Show the cards, decision-relevant state, and 
 
 Do not add slogans, decorative headings, branding/navigation bars, footers, prototype labels, permanent save-success indicators, repeated instructions, or an always-visible narrative combat log. Detailed rules belong in hover/focus tooltips or pinned inspection. Show save errors and recovery notices when they require attention.
 
+## Approved direction — layout samples before implementation
+
+The current design review selects the following direction. These choices supersede the earlier flat-hand layout, but gameplay screens have not yet been changed to match. Compare the isolated samples at `/design/battle-layout/index.html?compare=1` using the development server before choosing exact scale and spacing.
+
+- Creatures first: larger creature rows and a smaller hand.
+- Slightly fanned, overlapping hand. The focused card rises above neighbors; selection stays raised in its hand slot.
+- Thin red health bars and current/max numbers beneath artwork; block and marks stay external icon/number readouts.
+- External actor/target outlines with a thin targeting line between artwork edges.
+- Centered pinned inspection.
+- Rewards commit immediately on the final choice, with effects available beforehand.
+- Confirm abandoning a run. End turn stays immediate, and spending the last mana still advances automatically.
+
+A and B use identical fixtures and artwork. A leaves more space between elements; B gives creatures more space and further reduces the hand. Samples have no gameplay, audio, platform services or save access. Their Play and End turn controls only clear the sample selection. The baseline specification below describes the currently implemented game until this direction is applied.
+
 ## Screen content
 
 - Draft: choose-three heading/count, artwork-only creature choices with names/health/passives in tooltips, Start run.

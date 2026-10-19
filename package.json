@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "dev:desktop": "node scripts/dev-desktop.mjs",
-    "check": "tsc --noEmit && oxlint src tests scripts desktop --deny-warnings && prettier --check . && node scripts/boundaries.mjs && node scripts/ui-contract.mjs",
+    "check": "tsc --noEmit && oxlint src tests scripts desktop design --deny-warnings && prettier --check . && node scripts/boundaries.mjs && node scripts/ui-contract.mjs",
     "format": "prettier --write .",
     "test": "vitest run",
     "build": "vite build",
