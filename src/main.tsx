@@ -4,12 +4,13 @@ import { createSession } from "./application/session";
 import { createPlatform } from "./platform";
 import { validateContent } from "./game/save";
 import { App } from "./ui/App";
+import "@fontsource-variable/inter/wght.css";
 import "./ui/styles.css";
 validateContent();
 const platform = createPlatform();
 const session = createSession(platform, Date.now() >>> 0);
 createRoot(document.getElementById("root")!).render(
-  <MotionConfig reducedMotion="user">
+  <MotionConfig reducedMotion="user" transition={{ duration: 0.15 }}>
     <App session={session} desktop={platform.desktop} />
   </MotionConfig>,
 );

@@ -1,4 +1,4 @@
-import type { SpeciesId } from "./content";
+import type { SpeciesId, DamageType } from "./content";
 export interface Creature {
   id: string;
   species: SpeciesId;
@@ -58,6 +58,7 @@ export interface GameEvent {
   actorId?: string;
   targetId?: string;
   amount?: number;
+  damageType?: DamageType;
 }
 export type CommandResult =
   | { accepted: true; state: GameState; events: GameEvent[] }

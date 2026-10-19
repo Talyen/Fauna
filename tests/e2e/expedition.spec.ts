@@ -172,6 +172,33 @@ test("handheld and desktop composition preserve artwork, rows, hand, and readabl
   await page.keyboard.press("i");
   await page.screenshot({ path: "reports/inspection.png", fullPage: true });
 });
+test("combat tokens, local font and modal focus remain readable and isolated", async ({ page }) => {
+  await seed(page, run(7));
+  await page.goto("/");
+  await page.evaluate(() => document.fonts.ready);
+  await expect(page.locator(".app")).toHaveCSS("background-color", "rgb(0, 0, 0)");
+  expect(
+    await page.evaluate(() =>
+      [...document.fonts].some((font) => font.family.includes("Inter Variable") && font.status === "loaded"),
+    ),
+  ).toBe(true);
+  await expect(page.locator(".health-number").first()).toHaveCSS("color", "rgb(248, 113, 113)");
+  await expect(page.locator('[data-damage-type="nature"]').first()).toHaveCSS("color", "rgb(52, 211, 153)");
+  await expect(page.locator('[data-damage-type="fire"]').first()).toHaveCSS("color", "rgb(251, 146, 60)");
+  await expect(page.locator('[data-combat-tone="block"]').first()).toHaveCSS("color", "rgb(125, 211, 252)");
+  const card = page.locator(".hand .action-card").first();
+  const before = await state(page);
+  await card.focus();
+  await page.keyboard.press("i");
+  await expect(page.getByRole("button", { name: "Close inspection" })).toBeFocused();
+  await page.keyboard.press("ArrowDown");
+  await expect(page.getByRole("button", { name: "Close inspection" })).toBeFocused();
+  await page.keyboard.press("Tab");
+  await expect(page.getByRole("button", { name: "Close inspection" })).toBeFocused();
+  await page.keyboard.press("Escape");
+  await expect(card).toBeFocused();
+  expect((await state(page)).revision).toBe(before.revision);
+});
 test("corrupt primary recovers backup; all invalid saves require explicit recovery", async ({ page }) => {
   await page.addInitScript(
     (data) => {

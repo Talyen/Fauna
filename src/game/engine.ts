@@ -1,5 +1,13 @@
 import { freeze, produce } from "immer";
-import { CARDS, ENCOUNTERS, INITIAL_SPECIES, definition, species } from "./content";
+import {
+  CARDS,
+  ENCOUNTERS,
+  INITIAL_SPECIES,
+  definition,
+  species,
+  enemyDamageType,
+  DAMAGE_LABELS,
+} from "./content";
 import type { Card, Command, CommandResult, GameEvent, GameState } from "./types";
 export function createGame(seed = 1): GameState {
   return freeze(
@@ -212,7 +220,8 @@ export function dispatch(state: GameState, command: Command): CommandResult {
           actor.attacked = true;
           events.push({
             kind: "damage",
-            text: `${enemy.name} takes ${value} damage.`,
+            text: `${enemy.name} takes ${value} ${DAMAGE_LABELS[def.damageType]} damage.`,
+            damageType: def.damageType,
             targetId: enemy.id,
             amount: value,
           });
@@ -269,7 +278,8 @@ export function dispatch(state: GameState, command: Command): CommandResult {
           target.health = Math.max(0, target.health - amount);
           events.push({
             kind: "damage",
-            text: `${enemy.name} hits ${species(target.species).name} for ${amount}${blocked ? ` (${blocked} blocked)` : ""}.`,
+            text: `${enemy.name} hits ${species(target.species).name} for ${amount} ${DAMAGE_LABELS[enemyDamageType(draft.encounter, enemy.id)]} damage${blocked ? ` (${blocked} blocked)` : ""}.`,
+            damageType: enemyDamageType(draft.encounter, enemy.id),
             actorId: enemy.id,
             targetId: target.id,
             amount,
@@ -278,7 +288,8 @@ export function dispatch(state: GameState, command: Command): CommandResult {
             enemy.health = Math.max(0, enemy.health - 2);
             events.push({
               kind: "damage",
-              text: `Thorns deal 2 damage to ${enemy.name}.`,
+              text: `Thorns deal 2 Nature damage to ${enemy.name}.`,
+              damageType: "nature",
               targetId: enemy.id,
               amount: 2,
             });

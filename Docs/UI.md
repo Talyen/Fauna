@@ -18,15 +18,35 @@ Creature art remains 4:3 landscape and action art 3:4 portrait, full bleed. Use 
 
 shadcn/ui is the chosen standard for the whole UI. Its source-owned primitives and semantic theme tokens must underpin controls and specialized gameplay components alike. Creature cards, action cards, the hand, and targeting keep their game-specific compositions and artwork ratios; they are not generic website panels.
 
-Use the Radix-backed component family demonstrated in the selected preview consistently. Add only components with actual consumers. Do not introduce Mantine, React Aria, or a second visual component system alongside it. Current native controls still require migration; the library choice does not imply that migration is complete.
+Use the Radix-backed component family demonstrated in the selected preview consistently. Add only components with actual consumers. Do not introduce Mantine, React Aria, or a second visual component system alongside it. Controls and interactive gameplay cards compose the shared Button; inspection uses the Radix-backed Dialog. Source attribution is in `Docs/SHADCN-LICENSE.txt`.
 
 ## Tokens
 
-`src/ui/styles.css` owns the design tokens. The current neutral baseline uses Arial/Helvetica/sans-serif for UI and names, with tabular numbers. The component-library decision is locked; a final typeface and refinements to the remaining visual tokens are still open.
+`src/ui/styles.css` owns semantic shadcn theme tokens and combat colors.
 
-- Type: 14px rules and secondary state, 16px controls/health, 20px card names, 22px screen prompts and energy. Enlarge inspection text to 18px rules and 26px names.
-- Spacing: 4, 8, 12, 16, 24, 32px, using layout instead of separators or panels to establish groups.
-- Color: black canvas, `#111` control surface, `#f2f2f2` text, `#b0b0b0` secondary text, `#404040` control borders. White outlines communicate selection/focus; green health, blue block, and pink marks retain numeric/text equivalents.
-- Geometry: 3px radius; no decorative shadows, glows, textures, or background gradients. Artwork may have a local scrim for readable card text.
+- Typography: locally bundled Inter Variable, regular rules, medium controls, semibold names, tabular numbers. 16px rules/controls, 20–24px names, 14px secondary information. Inspection enlarges rules to 18px and names to 26px. Font license: `Docs/FONT-LICENSE.txt`.
+- Spacing: a 4px grid, using layout instead of decorative separators or panels.
+- Color: pure black canvas, #111 controls, #f2f2f2 text, #b0b0b0 secondary text, #404040 borders. White primary actions. Solid selection outline, separate dashed focus outline, white targetable border. Disabled/unaffordable cards dim; knockout adds grayscale and zero health.
+- Geometry: 6px corners, thin borders, no decorative shadows, glows or textures. Artwork may have a local text scrim.
+- Motion: 150ms purposeful transitions; respect reduced motion. Gameplay commits before visual feedback and input never waits on animations.
+- Icons: Lucide, with labels/numbers so color is never the only cue.
+
+## Combat vocabulary
+
+Adapted from Alchemy's `src/lib/game-data/keywords.ts` palette and `src/features/alchemy/shared/config/metadata.ts` icon pairings. Health uses red (#f87171, Heart), block sky blue (#7dd3fc, Shield), and marks stay neutral (Crosshair). Damage color follows the attack type, independent of lost health:
+
+| Type      | Foreground | Icon         |
+| --------- | ---------- | ------------ |
+| Physical  | #cbd5e1    | Swords       |
+| Fire      | #fb923c    | Flame        |
+| Ice       | #67e8f9    | Snowflake    |
+| Lightning | #fcd34d    | Zap          |
+| Poison    | #86efac    | FlaskConical |
+| Nature    | #34d399    | Leaf         |
+| Light     | #fde68a    | Sun          |
+
+Poison and Nature use lighter foregrounds from Alchemy's green/emerald families for readable text on black and artwork. Attack rules spell out the type; enemy intents combine the type icon, damage number and target. Healing and block clauses use their own colors; secondary rules stay neutral.
+
+Types are content metadata, carried on damage presentation events. Existing version-one saves derive enemy types from encounter content. Types add no resistances, status effects, or damage arithmetic. Ice and Poison are reserved vocabulary until authored attacks use them.
 
 Use shadcn/ui for dialogs, tooltips, menus, sliders, and shared controls, composing gameplay cards from the same primitives and tokens. Gamepad navigation remains an application responsibility and must be verified through these compositions. Adopting a library is not a reason to add more controls or containers.

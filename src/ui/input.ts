@@ -1,6 +1,6 @@
 export type InputAction = "left" | "right" | "up" | "down" | "confirm" | "back" | "inspect" | "endTurn";
 export function moveFocus(direction: "left" | "right" | "up" | "down") {
-  const root = document.querySelector("dialog[open]") ?? document;
+  const root = document.querySelector('[role="dialog"][data-state="open"], dialog[open]') ?? document;
   const buttons = Array.from(
     root.querySelectorAll<HTMLElement>(
       'button:not(:disabled):not([tabindex="-1"]), input:not(:disabled), [tabindex="0"]',
@@ -51,7 +51,7 @@ export function connectInput(
   onMode: (mode: "keyboard" | "controller" | "pointer") => void,
 ) {
   const keyboard = (event: KeyboardEvent) => {
-    if (event.target instanceof HTMLInputElement) return;
+    if (event.defaultPrevented || event.target instanceof HTMLInputElement) return;
     const mapping: Record<string, InputAction> = {
       ArrowLeft: "left",
       ArrowRight: "right",

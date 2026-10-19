@@ -66,7 +66,28 @@ describe("game commands", () => {
     expect(r.state.battle!.enemies[0]!.health).toBe(2);
     expect(r.state.battle!.enemies[0]!.marks).toBe(0);
     expect(r.events.map((e) => e.kind)).toEqual(["action", "damage"]);
+    expect(r.events.find((e) => e.kind === "damage")?.damageType).toBe("fire");
     expect(r.state.battle!.discard).toContain(attack.id);
+  });
+  it("derives enemy and reflected damage types after a version-one save round trip", () => {
+    let initial = createGame(42);
+    for (const kind of ["briartooth", "emberfox", "stormfin"] as const)
+      initial = accept(initial, { type: "draft", species: kind });
+    initial = accept(initial, { type: "start" });
+    const s = decodeSave(
+      encodeSave(
+        produce(initial, (d) => {
+          d.battle!.enemies.forEach((e) => {
+            e.targetId = "ally-0";
+          });
+        }),
+      ),
+    );
+    const r = dispatch(s, { type: "endTurn" });
+    expect(r.accepted).toBe(true);
+    const damage = r.events.filter((e) => e.kind === "damage");
+    expect(damage.map((e) => e.damageType)).toEqual(["nature", "nature", "fire", "nature"]);
+    expect(r.state.team[0]!.health).toBe(22);
   });
   it("removes knocked-out creature cards from every zone and never draws them again", () => {
     let s = run();

@@ -1,7 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
 import type { Session } from "../application/session";
-import { CARDS, SPECIES, cardText, definition, species } from "../game/content";
+import { Menu } from "lucide-react";
+import { Button } from "../components/ui/button";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../components/ui/dialog";
+import { DamageValue, CardRules } from "./combat-values";
+import { CARDS, SPECIES, definition, species, enemyDamageType } from "../game/content";
 import type { SpeciesId } from "../game/content";
 import { ActionCard, AllyCard, CreatureCard, EnemyCard } from "./cards";
 import { connectInput, moveFocus } from "./input";
@@ -10,79 +14,79 @@ import type { Card } from "../game/types";
 
 type Inspection = { card: Card } | { species: SpeciesId; enemyId?: string };
 function Inspector({ item, session, onClose }: { item: Inspection; session: Session; onClose: () => void }) {
-  const ref = useRef<HTMLDialogElement>(null);
+  const [opener] = useState(() => document.activeElement as HTMLElement | null);
   const game = useStore(session.store, (s) => s.game);
   const kind = "card" in item ? definition(item.card.definitionId).species : item.species;
   const creature = species(kind);
   const enemy = "enemyId" in item ? game.battle?.enemies.find((e) => e.id === item.enemyId) : undefined;
-  useEffect(() => {
-    const opener = document.activeElement as HTMLElement | null;
-    ref.current?.showModal();
-    return () => {
-      if (opener?.isConnected) opener.focus();
-    };
-  }, []);
   return (
-    <dialog
-      ref={ref}
-      className={`inspection ${"card" in item ? "single-card" : ""}`}
-      onCancel={onClose}
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
+    <Dialog
+      open
+      onOpenChange={(open) => {
+        if (!open) onClose();
       }}
-      aria-label={
-        "card" in item
-          ? `${definition(item.card.definitionId).name} details`
-          : `${enemy?.name ?? creature.name} details`
-      }
     >
-      <button className="close-button" aria-label="Close inspection" onClick={onClose} autoFocus>
-        ×
-      </button>
-      {"card" in item ? (
-        <>
-          <ActionCard card={item.card} ownerName={creature.name} onClick={() => {}} presentation />
-          <p className="trait-description">{creature.description}</p>
-        </>
-      ) : (
-        <>
-          <CreatureCard
-            kind={kind}
-            name={enemy?.name}
-            health={enemy?.health ?? creature.health}
-            maxHealth={enemy?.maxHealth ?? creature.health}
-            presentation
-          />
-          {enemy ? (
-            <p>
-              Attack {enemy.damage} → {species(game.team.find((c) => c.id === enemy.targetId)!.species).name}
-            </p>
-          ) : (
-            <>
-              <p className="trait-description">{creature.description}</p>
-              <div className="inspection-cards">
-                {CARDS.filter((c) => c.species === kind).map((def) => (
-                  <ActionCard
-                    key={def.id}
-                    card={
-                      game.cards.find((c) => c.definitionId === def.id) ?? {
-                        id: def.id,
-                        definitionId: def.id,
-                        ownerId: kind,
-                        level: 0,
+      <DialogContent
+        className={`inspection ${"card" in item ? "single-card" : ""}`}
+        onCloseAutoFocus={(event) => {
+          event.preventDefault();
+          if (opener?.isConnected) opener.focus();
+        }}
+      >
+        <DialogTitle className="sr-only">
+          {"card" in item
+            ? `${definition(item.card.definitionId).name} details`
+            : `${enemy?.name ?? creature.name} details`}
+        </DialogTitle>
+        <DialogDescription className="sr-only">
+          {enemy ? "Enemy attack" : creature.description}
+        </DialogDescription>
+        {"card" in item ? (
+          <>
+            <ActionCard card={item.card} ownerName={creature.name} onClick={() => {}} presentation />
+            <p className="trait-description">{creature.description}</p>
+          </>
+        ) : (
+          <>
+            <CreatureCard
+              kind={kind}
+              name={enemy?.name}
+              health={enemy?.health ?? creature.health}
+              maxHealth={enemy?.maxHealth ?? creature.health}
+              presentation
+            />
+            {enemy ? (
+              <p>
+                <DamageValue type={enemyDamageType(game.encounter, enemy.id)} amount={enemy.damage} /> →{" "}
+                {species(game.team.find((c) => c.id === enemy.targetId)!.species).name}
+              </p>
+            ) : (
+              <>
+                <p className="trait-description">{creature.description}</p>
+                <div className="inspection-cards">
+                  {CARDS.filter((c) => c.species === kind).map((def) => (
+                    <ActionCard
+                      key={def.id}
+                      card={
+                        game.cards.find((c) => c.definitionId === def.id) ?? {
+                          id: def.id,
+                          definitionId: def.id,
+                          ownerId: kind,
+                          level: 0,
+                        }
                       }
-                    }
-                    ownerName={creature.name}
-                    onClick={() => {}}
-                    presentation
-                  />
-                ))}
-              </div>
-            </>
-          )}
-        </>
-      )}
-    </dialog>
+                      ownerName={creature.name}
+                      onClick={() => {}}
+                      presentation
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+          </>
+        )}
+      </DialogContent>
+    </Dialog>
   );
 }
 export function App({ session, desktop = false }: { session: Session; desktop?: boolean }) {
@@ -175,9 +179,15 @@ export function App({ session, desktop = false }: { session: Session; desktop?: 
       data-phase={game.phase}
       data-save-status={view.saveStatus}
     >
-      <button className="menu-button" aria-label="Open menu" onClick={() => setShowMenu((v) => !v)}>
-        ☰
-      </button>
+      <Button
+        variant="ghost"
+        size="icon"
+        className="menu-button"
+        aria-label="Open menu"
+        onClick={() => setShowMenu((v) => !v)}
+      >
+        <Menu aria-hidden="true" />
+      </Button>
       {view.notice && !view.recoveryRequired ? (
         <p className="notice" role="status">
           {view.notice}
@@ -187,7 +197,9 @@ export function App({ session, desktop = false }: { session: Session; desktop?: 
         <div className="error-banner" role="alert">
           {view.error}
           {view.saveStatus === "error" ? (
-            <button onClick={() => session.retrySave()}>Retry save</button>
+            <Button variant="outline" onClick={() => session.retrySave()}>
+              Retry save
+            </Button>
           ) : null}
         </div>
       ) : null}
@@ -195,29 +207,34 @@ export function App({ session, desktop = false }: { session: Session; desktop?: 
         <main className="recovery">
           <h1>Save unavailable</h1>
           <p>{view.loadFailed ? view.error : view.notice}</p>
-          <button
-            className="primary"
+          <Button
+            variant="default"
             onClick={() => (view.loadFailed ? void session.load() : session.startFresh())}
           >
             {view.loadFailed ? "Retry loading" : "Start fresh"}
-          </button>
+          </Button>
         </main>
       ) : showMenu ? (
         <main className="menu-panel" aria-label="Pause menu">
-          <button className="primary" onClick={() => setShowMenu(false)}>
+          <Button variant="default" onClick={() => setShowMenu(false)}>
             Resume
-          </button>
+          </Button>
           {["battle", "reward"].includes(game.phase) ? (
-            <button
+            <Button
+              variant="outline"
               onClick={() => {
                 send({ type: "abandon" });
                 setShowMenu(false);
               }}
             >
               End run
-            </button>
+            </Button>
           ) : null}
-          {desktop ? <button onClick={() => void session.quit()}>Save & quit</button> : null}
+          {desktop ? (
+            <Button variant="outline" onClick={() => void session.quit()}>
+              Save & quit
+            </Button>
+          ) : null}
         </main>
       ) : game.phase === "draft" ? (
         <main className="draft-screen">
@@ -240,13 +257,14 @@ export function App({ session, desktop = false }: { session: Session; desktop?: 
               </article>
             ))}
           </div>
-          <button
-            className="primary start-run"
+          <Button
+            variant="default"
+            className="start-run"
             disabled={game.selected.length !== 3}
             onClick={() => send({ type: "start" })}
           >
             Start run
-          </button>
+          </Button>
         </main>
       ) : game.phase === "battle" && game.battle ? (
         <main className="battle-screen" aria-label={`Battle ${game.encounter + 1}`}>
@@ -259,7 +277,12 @@ export function App({ session, desktop = false }: { session: Session; desktop?: 
               <EnemyCard
                 key={enemy.id}
                 enemy={enemy}
-                intent={`${enemy.damage} → ${species(game.team.find((c) => c.id === enemy.targetId)!.species).name}`}
+                intent={
+                  <>
+                    <DamageValue type={enemyDamageType(game.encounter, enemy.id)} amount={enemy.damage} /> →{" "}
+                    {species(game.team.find((c) => c.id === enemy.targetId)!.species).name}
+                  </>
+                }
                 onClick={() => {
                   if (selected && targetEnemy) send({ type: "play", cardId: selected, targetId: enemy.id });
                   else setInspection({ species: enemy.species, enemyId: enemy.id });
@@ -271,9 +294,9 @@ export function App({ session, desktop = false }: { session: Session; desktop?: 
           </section>
           <div className="target-control">
             {selected ? (
-              <button className="cancel-target" onClick={() => setSelected(null)}>
+              <Button variant="outline" className="cancel-target" onClick={() => setSelected(null)}>
                 Cancel
-              </button>
+              </Button>
             ) : null}
           </div>
           <section className={`player-row ${targetAlly ? "targeting" : ""}`} aria-label="Player row">
@@ -303,9 +326,9 @@ export function App({ session, desktop = false }: { session: Session; desktop?: 
               <span className="pile-counts">
                 Draw {game.battle.draw.length} · Discard {game.battle.discard.length}
               </span>
-              <button className="primary end-turn" onClick={() => send({ type: "endTurn" })}>
+              <Button variant="default" className="end-turn" onClick={() => send({ type: "endTurn" })}>
                 End turn{mode === "controller" ? <small>Y</small> : null}
-              </button>
+              </Button>
             </div>
             <div className="hand">
               {game.battle.hand.map((id) => {
@@ -362,15 +385,18 @@ export function App({ session, desktop = false }: { session: Session; desktop?: 
               {recruit ? (
                 <div className="replace-options">
                   {game.team.map((c) => (
-                    <button
+                    <Button
+                      variant="outline"
                       key={c.id}
                       title="Replaces this creature and its cards, including upgrades"
                       onClick={() => send({ type: "recruit", species: recruit, replaceId: c.id })}
                     >
                       Replace {species(c.species).name}
-                    </button>
+                    </Button>
                   ))}
-                  <button onClick={() => setRecruit(null)}>Cancel</button>
+                  <Button variant="outline" onClick={() => setRecruit(null)}>
+                    Cancel
+                  </Button>
                 </div>
               ) : null}
             </section>
@@ -380,7 +406,8 @@ export function App({ session, desktop = false }: { session: Session; desktop?: 
                 {game.cards.map((card) => {
                   const def = definition(card.definitionId);
                   return (
-                    <button
+                    <Button
+                      variant="outline"
                       key={card.id}
                       disabled={card.level >= 3}
                       onClick={() => send({ type: "upgrade", cardId: card.id })}
@@ -391,9 +418,10 @@ export function App({ session, desktop = false }: { session: Session; desktop?: 
                         {card.level ? ` +${card.level}` : ""}
                       </strong>
                       <span>
-                        {cardText(def, card.level)} <b>→ {def.value + (card.level + 1) * 2}</b>
+                        <CardRules card={def} level={card.level} />{" "}
+                        <b>→ {def.value + (card.level + 1) * 2}</b>
                       </span>
-                    </button>
+                    </Button>
                   );
                 })}
               </div>
@@ -413,9 +441,9 @@ export function App({ session, desktop = false }: { session: Session; desktop?: 
               <p>Unlocked</p>
             </div>
           ) : null}
-          <button className="primary" onClick={() => send({ type: "newRun", seed: Date.now() >>> 0 })}>
+          <Button variant="default" onClick={() => send({ type: "newRun", seed: Date.now() >>> 0 })}>
             New run
-          </button>
+          </Button>
         </main>
       )}
       {inspection ? (

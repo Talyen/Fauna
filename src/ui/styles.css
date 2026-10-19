@@ -1,21 +1,50 @@
 @import "tailwindcss";
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: #000;
+  --color-border: var(--line);
+  --color-input: var(--line);
+  --color-ring: #fff;
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius);
+}
 :root {
   color-scheme: dark;
+  --background: #000;
+  --foreground: #f2f2f2;
+  --primary: #f2f2f2;
+  --primary-foreground: #111;
+  --secondary: #111;
+  --accent: #292929;
+  --popover: #080808;
+  --destructive: #f87171;
   --bg: #000;
   --surface: #111;
   --text: #f2f2f2;
-  --muted: #b0b0b0;
+  --muted: #202020;
+  --muted-foreground: #b0b0b0;
   --line: #404040;
   --selected: #fff;
-  --health: #9bc47b;
-  --block: #99cddd;
-  --marks: #e6b1cd;
-  --font-ui: Arial, Helvetica, sans-serif;
+  --health: #f87171;
+  --block: #7dd3fc;
+  --marks: #f2f2f2;
+  --font-ui: "Inter Variable", Inter, sans-serif;
   --font-name: var(--font-ui);
   --font-number: var(--font-ui);
-  --text-rule: 14px;
+  --text-rule: 16px;
   --text-name: 20px;
-  --radius: 3px;
+  --radius: 6px;
   font-family: var(--font-ui);
   font-size: 16px;
   line-height: 1.4;
@@ -30,26 +59,15 @@ body {
   margin: 0;
   background: var(--bg);
 }
-button {
-  font: inherit;
-  color: inherit;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 9px 16px;
-  cursor: pointer;
-  touch-action: manipulation;
-}
-button:hover:not(:disabled) {
-  border-color: #999;
-}
-button:disabled {
-  opacity: 0.35;
-  cursor: default;
-}
-button:focus-visible {
-  outline: 2px solid var(--selected);
-  outline-offset: 4px;
+@layer base {
+  button {
+    font: inherit;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+  button:disabled {
+    cursor: default;
+  }
 }
 h1,
 h2,
@@ -83,16 +101,6 @@ strong {
   font-size: 20px;
   padding: 6px 10px;
 }
-.primary {
-  background: #eee;
-  color: #111;
-  border-color: #eee;
-  font-weight: 600;
-  min-width: 110px;
-}
-.primary:hover:not(:disabled) {
-  background: #fff;
-}
 .loading,
 .recovery {
   padding: 48px;
@@ -103,7 +111,7 @@ strong {
 }
 .recovery p {
   margin: 20px 0;
-  color: var(--muted);
+  color: var(--muted-foreground);
 }
 .notice,
 .error-banner {
@@ -119,7 +127,7 @@ strong {
   color: #ffc4ad;
 }
 .notice {
-  color: var(--muted);
+  color: var(--muted-foreground);
 }
 .menu-panel {
   display: flex;
@@ -148,7 +156,7 @@ strong {
   gap: 16px;
 }
 .selection-count {
-  color: var(--muted);
+  color: var(--muted-foreground);
   font-size: 16px;
   font-weight: 400;
   font-variant-numeric: tabular-nums;
@@ -165,7 +173,7 @@ strong {
 .trait-description {
   font-size: 14px;
   line-height: 1.5;
-  color: var(--muted);
+  color: var(--muted-foreground);
   margin-top: 12px;
 }
 .creature-wrap {
@@ -205,19 +213,23 @@ strong {
   display: flex;
   align-items: end;
   justify-content: space-between;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 4px;
 }
 .creature-name {
+  flex: 1 1 100%;
   font-family: var(--font-name);
   font-size: var(--text-name);
   font-weight: 600;
   line-height: 1.1;
 }
 .health-number {
+  margin-left: auto;
   font-family: var(--font-number);
   font-variant-numeric: tabular-nums;
   font-size: 16px;
   white-space: nowrap;
+  color: var(--health);
 }
 .health-track {
   position: absolute;
@@ -275,7 +287,7 @@ strong {
   display: flex;
   gap: 24px;
   font-size: 14px;
-  color: var(--muted);
+  color: var(--muted-foreground);
   padding: 0 50px 14px 0;
   font-variant-numeric: tabular-nums;
 }
@@ -326,7 +338,7 @@ strong {
 }
 .pile-counts {
   font-size: 14px;
-  color: var(--muted);
+  color: var(--muted-foreground);
   font-variant-numeric: tabular-nums;
 }
 .end-turn {
@@ -347,7 +359,7 @@ strong {
 .action-card {
   position: relative;
   aspect-ratio: 3/4;
-  width: clamp(145px, 13vw, 180px);
+  width: 180px;
   flex: 0 0 auto;
   display: block;
   text-align: left;
@@ -395,6 +407,7 @@ strong {
   font-weight: 600;
 }
 .action-effect {
+  font-weight: 400;
   font-size: var(--text-rule);
   line-height: 1.4;
   color: #eee;
@@ -403,9 +416,8 @@ strong {
   opacity: 0.45;
 }
 .inspection {
-  position: fixed;
-  inset: 0;
-  margin: auto;
+  max-height: calc(100dvh - 48px);
+  overflow-y: auto;
   max-width: calc(100vw - 48px);
   width: 720px;
   padding: 42px 24px 24px;
@@ -413,18 +425,6 @@ strong {
   color: var(--text);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-}
-.inspection::backdrop {
-  background: #000b;
-}
-.close-button {
-  position: absolute;
-  right: 8px;
-  top: 4px;
-  font-size: 24px;
-  border: 0;
-  background: transparent;
-  padding: 0 10px;
 }
 .inspection > .creature-wrap {
   max-width: 300px;
@@ -496,13 +496,16 @@ strong {
   font-size: 14px;
   padding: 10px 14px;
   line-height: 1.4;
+  height: auto;
+  align-items: start;
+  white-space: normal;
 }
 .upgrade-options button strong {
   font-family: var(--font-name);
   font-size: 18px;
 }
-.upgrade-options button span {
-  color: var(--muted);
+.upgrade-options button > span {
+  color: var(--muted-foreground);
 }
 .upgrade-options b {
   color: var(--text);
@@ -527,7 +530,7 @@ strong {
   text-align: center;
   margin-top: 12px;
   font-size: 16px;
-  color: var(--muted);
+  color: var(--muted-foreground);
 }
 .sr-only {
   position: absolute;
@@ -561,9 +564,9 @@ strong {
     margin-bottom: 14px;
   }
   .action-card {
-    width: 158px;
-    --text-name: 19px;
-    --text-rule: 14px;
+    width: 180px;
+    --text-name: 20px;
+    --text-rule: 16px;
   }
   .creature-name {
     font-size: 20px;
@@ -577,7 +580,7 @@ strong {
   .inspection-cards .action-card {
     width: 180px;
     --text-name: 20px;
-    --text-rule: 14px;
+    --text-rule: 16px;
   }
   .reward-screen {
     margin-top: 28px;
@@ -677,7 +680,7 @@ strong {
   }
   .action-card {
     width: 150px;
-    --text-rule: 14px;
+    --text-rule: 16px;
     --text-name: 18px;
   }
   .inspection {
@@ -710,4 +713,69 @@ strong {
     transition: none !important;
     animation: none !important;
   }
+}
+
+/* Combat colors share Alchemy's families; green foregrounds are lighter for legibility. */
+[data-damage-type="physical"],
+[data-combat-tone="physical"] {
+  color: #cbd5e1;
+}
+[data-damage-type="fire"],
+[data-combat-tone="fire"] {
+  color: #fb923c;
+}
+[data-damage-type="ice"],
+[data-combat-tone="ice"] {
+  color: #67e8f9;
+}
+[data-damage-type="lightning"],
+[data-combat-tone="lightning"] {
+  color: #fcd34d;
+}
+[data-damage-type="poison"],
+[data-combat-tone="poison"] {
+  color: #86efac;
+}
+[data-damage-type="nature"],
+[data-combat-tone="nature"] {
+  color: #34d399;
+}
+[data-damage-type="light"],
+[data-combat-tone="light"] {
+  color: #fde68a;
+}
+[data-combat-tone="health"] {
+  color: var(--health);
+}
+[data-combat-tone="block"] {
+  color: var(--block);
+}
+.health-number,
+.damage-value,
+.block-badge,
+.mark-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.health-number svg,
+.damage-value svg,
+.block-badge svg,
+.mark-badge svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+.intent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+button:focus-visible {
+  outline: 2px dashed #fff;
+  outline-offset: 6px;
+}
+button {
+  transition-duration: 150ms;
 }

@@ -9,14 +9,26 @@ export interface Species {
   trait: string;
   description: string;
 }
-export interface CardDefinition {
+export const DAMAGE_TYPES = ["physical", "fire", "ice", "lightning", "poison", "nature", "light"] as const;
+export type DamageType = (typeof DAMAGE_TYPES)[number];
+export const DAMAGE_LABELS: Record<DamageType, string> = {
+  physical: "Physical",
+  fire: "Fire",
+  ice: "Ice",
+  lightning: "Lightning",
+  poison: "Poison",
+  nature: "Nature",
+  light: "Light",
+};
+interface CardBase {
   id: string;
   species: SpeciesId;
   name: string;
-  effect: Effect;
   value: number;
   cost: number;
 }
+export type CardDefinition = CardBase &
+  ({ effect: "attack"; damageType: DamageType } | { effect: Exclude<Effect, "attack"> });
 export const SPECIES: readonly Species[] = [
   {
     id: "mossback",
@@ -73,7 +85,13 @@ export const SPECIES: readonly Species[] = [
     description: "Start each battle with 4 block.",
   },
 ];
-const card = (species: SpeciesId, name: string, effect: Effect, value: number, cost = 1): CardDefinition => ({
+const card = (
+  species: SpeciesId,
+  name: string,
+  effect: Exclude<Effect, "attack">,
+  value: number,
+  cost = 1,
+): CardDefinition => ({
   id: `${species}-${effect}`,
   species,
   name,
@@ -81,23 +99,32 @@ const card = (species: SpeciesId, name: string, effect: Effect, value: number, c
   value,
   cost,
 });
+const attack = (species: SpeciesId, name: string, value: number, damageType: DamageType): CardDefinition => ({
+  id: `${species}-attack`,
+  species,
+  name,
+  effect: "attack",
+  value,
+  cost: 1,
+  damageType,
+});
 export const CARDS: readonly CardDefinition[] = [
-  card("mossback", "Bramble Bash", "attack", 6),
+  attack("mossback", "Bramble Bash", 6, "nature"),
   card("mossback", "Shelter", "guard", 7),
   card("mossback", "Forest Mantle", "teamGuard", 3),
-  card("emberfox", "Cinder Strike", "attack", 8),
+  attack("emberfox", "Cinder Strike", 8, "fire"),
   card("emberfox", "Warm Embers", "heal", 5),
   card("emberfox", "Soot Signal", "mark", 2),
-  card("stormfin", "Arc Bite", "attack", 7),
+  attack("stormfin", "Arc Bite", 7, "lightning"),
   card("stormfin", "Storm Sign", "mark", 2),
   card("stormfin", "Static Veil", "guard", 6),
-  card("silkmoth", "Glimmer", "attack", 5),
+  attack("silkmoth", "Glimmer", 5, "light"),
   card("silkmoth", "Mending Light", "heal", 8),
   card("silkmoth", "Silken Ward", "guard", 7),
-  card("briartooth", "Thornlash", "attack", 8),
+  attack("briartooth", "Thornlash", 8, "physical"),
   card("briartooth", "Briar Coat", "guard", 7),
   card("briartooth", "Hunter’s Sign", "mark", 2),
-  card("moonhart", "Moonbeam", "attack", 8),
+  attack("moonhart", "Moonbeam", 8, "light"),
   card("moonhart", "Silver Light", "heal", 7),
   card("moonhart", "Night Shelter", "teamGuard", 4),
 ];
@@ -116,7 +143,7 @@ export function cardText(card: CardDefinition, level = 0): string {
   const value = card.value + level * 2;
   switch (card.effect) {
     case "attack":
-      return `Deal ${value} damage. Consume marks for +3 damage each.`;
+      return `Deal ${value} ${DAMAGE_LABELS[card.damageType]} damage. Consume marks for +3 damage each.`;
     case "mark":
       return `Apply ${value} marks. The next attack consumes them.`;
     case "guard":
@@ -131,20 +158,35 @@ export const ENCOUNTERS = [
   {
     name: "The overgrown trail",
     enemies: [
-      { name: "Bramble Imp", species: "briartooth" as const, health: 18, damage: 4 },
-      { name: "Cinder Wisp", species: "emberfox" as const, health: 16, damage: 4 },
+      { damageType: "nature", name: "Bramble Imp", species: "briartooth" as const, health: 18, damage: 4 },
+      { damageType: "fire", name: "Cinder Wisp", species: "emberfox" as const, health: 16, damage: 4 },
     ],
   },
   {
     name: "Beyond the fernwood",
     enemies: [
-      { name: "Thicket Stalker", species: "stormfin" as const, health: 24, damage: 5 },
-      { name: "Dusk Moth", species: "silkmoth" as const, health: 22, damage: 5 },
-      { name: "Moss Imp", species: "mossback" as const, health: 18, damage: 4 },
+      {
+        damageType: "physical",
+        name: "Thicket Stalker",
+        species: "stormfin" as const,
+        health: 24,
+        damage: 5,
+      },
+      { damageType: "light", name: "Dusk Moth", species: "silkmoth" as const, health: 22, damage: 5 },
+      { damageType: "nature", name: "Moss Imp", species: "mossback" as const, health: 18, damage: 4 },
     ],
   },
   {
     name: "Heart of the wilds",
-    enemies: [{ name: "The Hollow Crown", species: "moonhart" as const, health: 68, damage: 10 }],
+    enemies: [
+      { damageType: "light", name: "The Hollow Crown", species: "moonhart" as const, health: 68, damage: 10 },
+    ],
   },
 ] as const;
+
+export function enemyDamageType(encounter: number, id: string): DamageType {
+  const index = Number(id.slice(6));
+  const entry = ENCOUNTERS[encounter]?.enemies[index];
+  if (!entry || id !== `enemy-${index}`) throw new Error("Unknown enemy identity.");
+  return entry.damageType;
+}

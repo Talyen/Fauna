@@ -1,7 +1,12 @@
+import type { ReactNode } from "react";
+import { Heart, Shield, Crosshair } from "lucide-react";
+import { Button } from "../components/ui/button";
+import { CardRules } from "./combat-values";
 import { motion } from "motion/react";
 import { cardText, definition, species } from "../game/content";
 import type { SpeciesId } from "../game/content";
 import type { Card, Creature, Enemy } from "../game/types";
+const MotionButton = motion.create(Button);
 type CreatureProps = {
   kind: SpeciesId;
   name?: string;
@@ -14,7 +19,7 @@ type CreatureProps = {
   onClick?: () => void;
   onInspect?: () => void;
   label?: string;
-  intent?: string;
+  intent?: ReactNode;
   presentation?: boolean;
   enemyId?: string;
 };
@@ -35,15 +40,13 @@ export function CreatureCard({
   enemyId,
 }: CreatureProps) {
   const info = species(kind);
-  const Component = presentation ? "div" : "button";
+  const Component = presentation ? "div" : Button;
   return (
     <div className={`creature-wrap ${health === 0 ? "knocked-out" : ""}`}>
-      {intent ? (
-        <div className="intent" aria-label={`Next attack: ${intent}`}>
-          {intent}
-        </div>
-      ) : null}
+      {intent ? <div className="intent">{intent}</div> : null}
       <Component
+        variant={presentation ? undefined : "art"}
+        size={presentation ? undefined : "card"}
         className={`creature-card ${selected ? "selected" : ""}`}
         data-species={kind}
         data-enemy-id={enemyId}
@@ -66,7 +69,7 @@ export function CreatureCard({
           <strong className="creature-name">{name ?? info.name}</strong>
           {health !== undefined ? (
             <span className="health-number" aria-label={`${health} of ${maxHealth ?? info.health} health`}>
-              {health}/{maxHealth ?? info.health}
+              <Heart aria-hidden="true" /> {health}/{maxHealth ?? info.health}
             </span>
           ) : null}
         </div>
@@ -75,8 +78,18 @@ export function CreatureCard({
             <span style={{ width: `${(health / (maxHealth ?? info.health)) * 100}%` }} />
           </span>
         ) : null}
-        {block > 0 ? <span className="block-badge">{block} Block</span> : null}
-        {marks > 0 ? <span className="mark-badge">{marks} Marks</span> : null}
+        {block > 0 ? (
+          <span className="block-badge">
+            <Shield aria-hidden="true" />
+            {block} Block
+          </span>
+        ) : null}
+        {marks > 0 ? (
+          <span className="mark-badge">
+            <Crosshair aria-hidden="true" />
+            {marks} Marks
+          </span>
+        ) : null}
       </Component>
     </div>
   );
@@ -91,7 +104,7 @@ export function EnemyCard({
   enemy,
   intent,
   ...props
-}: { enemy: Enemy; intent: string } & Omit<
+}: { enemy: Enemy; intent: ReactNode } & Omit<
   CreatureProps,
   "kind" | "health" | "maxHealth" | "marks" | "name" | "intent"
 >) {
@@ -126,9 +139,11 @@ export function ActionCard({
   presentation?: boolean;
 }) {
   const def = definition(card.definitionId);
-  const Component = presentation ? motion.div : motion.button;
+  const Component = presentation ? motion.div : MotionButton;
   return (
     <Component
+      variant={presentation ? undefined : "art"}
+      size={presentation ? undefined : "card"}
       tabIndex={presentation ? undefined : 0}
       layout
       className={`action-card ${selected ? "selected" : ""}`}
@@ -159,7 +174,7 @@ export function ActionCard({
           {def.name}
           {card.level ? ` +${card.level}` : ""}
         </strong>
-        <span className="action-effect">{cardText(def, card.level)}</span>
+        <CardRules card={def} level={card.level} />
       </div>
     </Component>
   );
