@@ -16,7 +16,7 @@ describe("game commands", () => {
     s = run();
     expect(s.cards).toHaveLength(9);
     expect(s.battle!.hand).toHaveLength(5);
-    expect(s.battle!.energy).toBe(3);
+    expect(s.battle!.mana).toBe(3);
   });
   it("rejects a fourth draft choice without changing state or RNG", () => {
     let s = createGame();
@@ -33,7 +33,7 @@ describe("game commands", () => {
     expect(JSON.stringify(s)).toBe(before);
     expect(Object.isFrozen(s.battle!.hand)).toBe(true);
   });
-  it("rejects wrong targets, absent cards, and insufficient energy before consuming RNG", () => {
+  it("rejects wrong targets, absent cards, and insufficient mana before consuming RNG", () => {
     const s = run();
     const attack = s.cards.find(
       (c) => s.battle!.hand.includes(c.id) && definition(c.definitionId).effect === "attack",
@@ -47,11 +47,11 @@ describe("game commands", () => {
       expect(result.state).toBe(s);
     }
     const empty = produce(s, (d) => {
-      d.battle!.energy = 0;
+      d.battle!.mana = 0;
     });
     expect(dispatch(empty, { type: "play", cardId: attack.id, targetId: "enemy-0" }).state).toBe(empty);
   });
-  it("spends energy, consumes marks, applies traits, and commits ordered feedback", () => {
+  it("spends mana, consumes marks, applies traits, and commits ordered feedback", () => {
     let s = run();
     const attack = s.cards.find((c) => c.definitionId === "emberfox-attack")!;
     s = produce(s, (d) => {
@@ -62,7 +62,7 @@ describe("game commands", () => {
     });
     const r = dispatch(s, { type: "play", cardId: attack.id, targetId: "enemy-0" });
     expect(r.accepted).toBe(true);
-    expect(r.state.battle!.energy).toBe(2);
+    expect(r.state.battle!.mana).toBe(2);
     expect(r.state.battle!.enemies[0]!.health).toBe(2);
     expect(r.state.battle!.enemies[0]!.marks).toBe(0);
     expect(r.events.map((e) => e.kind)).toEqual(["action", "damage"]);
@@ -117,7 +117,7 @@ describe("game commands", () => {
     s = accept(s, { type: "endTurn" });
     expect(s.team[0]!.health).toBe(32);
     expect(s.team[0]!.block).toBe(0);
-    expect(s.battle!.energy).toBe(3);
+    expect(s.battle!.mana).toBe(3);
     expect(s.battle!.turn).toBe(2);
   });
   it("ends the expedition when the whole team falls", () => {
@@ -203,7 +203,7 @@ describe("game commands", () => {
   });
 });
 describe("save validation", () => {
-  it.each(["not json", "{}", JSON.stringify({ ...createGame(), version: 2 }), "x".repeat(100001)])(
+  it.each(["not json", "{}", JSON.stringify({ ...createGame(), version: 999 }), "x".repeat(100001)])(
     "rejects malformed or unsupported saves",
     (raw) => {
       expect(() => decodeSave(raw)).toThrow();
@@ -252,7 +252,7 @@ describe("creature traits and deck circulation", () => {
     const knocked = produce(s, (d) => {
       d.team[2]!.health = 0;
       d.battle!.hand = [heal.id];
-      d.battle!.energy = 3;
+      d.battle!.mana = 3;
     });
     expect(dispatch(knocked, { type: "play", cardId: heal.id, targetId: "ally-2" }).accepted).toBe(false);
   });

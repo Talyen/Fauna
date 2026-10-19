@@ -24,14 +24,14 @@ export interface Enemy {
 }
 export interface Battle {
   turn: number;
-  energy: number;
+  mana: number;
   draw: string[];
   hand: string[];
   discard: string[];
   enemies: Enemy[];
 }
 export interface GameState {
-  version: 1;
+  version: 2;
   revision: number;
   rng: number;
   phase: "draft" | "battle" | "reward" | "victory" | "defeat";

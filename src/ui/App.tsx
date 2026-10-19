@@ -118,7 +118,22 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     setEnemyTarget(null);
     setAllyTarget(null);
   }, [game.encounter, game.phase === "draft"]);
-  const bursts = useCombatFeedback(session);
+  const root = useRef<HTMLDivElement>(null);
+  const [soundEnabled, setSoundEnabled] = useState(() => {
+    try {
+      return localStorage.getItem("fauna.sound.enabled") !== "false";
+    } catch {
+      return true;
+    }
+  });
+  useEffect(() => {
+    try {
+      localStorage.setItem("fauna.sound.enabled", String(soundEnabled));
+    } catch {
+      /* Optional preference. */
+    }
+  }, [soundEnabled]);
+  const bursts = useCombatFeedback(session, root, soundEnabled);
   const [textScale, setTextScale] = useState(() => {
     try {
       const n = Number(localStorage.getItem("fauna.text-scale"));
@@ -159,7 +174,6 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     const selector = targetId ? `[data-actor-id="${targetId}"] .creature-card` : ".confirm-play";
     root.current?.querySelector<HTMLElement>(selector)?.focus();
   }, [selected, targetId]);
-  const root = useRef<HTMLDivElement>(null);
   const send = useCallback(
     (command: Parameters<Session["command"]>[0]) => {
       if (!session.command(command)) return false;
@@ -207,7 +221,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
         return;
       }
       if (inspection || showMenu || showGlossary) return;
-      if (input === "endTurn" && game.phase === "battle" && !selected) send({ type: "endTurn" });
+      if (input === "endTurn" && game.phase === "battle") send({ type: "endTurn" });
       if (input === "inspect") {
         const focused = document.activeElement as HTMLElement | null;
         const id = focused?.closest<HTMLElement>("[data-card-id]")?.dataset.cardId ?? selected;
@@ -338,6 +352,13 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           >
             Text size {textScale * 100}%
           </Button>
+          <Button
+            variant="outline"
+            aria-pressed={soundEnabled}
+            onClick={() => setSoundEnabled((value) => !value)}
+          >
+            Sound {soundEnabled ? "on" : "off"}
+          </Button>
           {desktop ? (
             <Button variant="outline" onClick={() => void session.quit()}>
               Save & quit
@@ -409,7 +430,8 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
             {selected ? (
               <>
                 <span className="selected-action">
-                  {selectedDef?.name} · {selectedDef?.cost} energy
+                  {selectedDef?.name} · {selectedDef?.cost} mana
+                  {selectedDef?.cost === game.battle.mana ? " · ends turn" : ""}
                 </span>
                 <Button
                   className="confirm-play"
@@ -457,18 +479,13 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           </section>
           <section className="hand-section" aria-label="Action hand">
             <div className="hand-toolbar">
-              <span className="energy-display" aria-label={`${game.battle.energy} of 3 energy`}>
-                <strong>{game.battle.energy}/3</strong> Energy
+              <span className="mana-display" aria-label={`${game.battle.mana} of 3 mana`}>
+                <strong>{game.battle.mana}/3</strong> Mana
               </span>
               <span className="pile-counts">
                 Draw {game.battle.draw.length} · Discard {game.battle.discard.length}
               </span>
-              <Button
-                variant="default"
-                className="end-turn"
-                disabled={!!selected}
-                onClick={() => send({ type: "endTurn" })}
-              >
+              <Button variant="default" className="end-turn" onClick={() => send({ type: "endTurn" })}>
                 End turn{mode === "controller" ? <small>Y</small> : null}
               </Button>
             </div>
@@ -484,10 +501,10 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                     ownerName={species(owner.species).name}
                     actor={owner}
                     selected={selected === id}
-                    disabled={game.battle!.energy < definition(card.definitionId).cost}
+                    disabled={game.battle!.mana < definition(card.definitionId).cost}
                     onInspect={() => setInspection({ card })}
                     onClick={() => {
-                      if (game.battle!.energy < definition(card.definitionId).cost) {
+                      if (game.battle!.mana < definition(card.definitionId).cost) {
                         setInspection({ card });
                         return;
                       }

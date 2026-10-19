@@ -1,4 +1,5 @@
 import { freeze } from "immer";
+import { dispatch } from "./engine";
 import { z } from "zod";
 import { CARDS, ENCOUNTERS, INITIAL_SPECIES, SPECIES, species } from "./content";
 import type { GameState } from "./types";
@@ -6,7 +7,7 @@ const natural = z.number().int().min(0).max(1_000_000);
 const id = z.string().min(1).max(120);
 const speciesId = z.enum(["mossback", "emberfox", "stormfin", "silkmoth", "briartooth", "moonhart"]);
 const shape = z.object({
-  version: z.literal(1),
+  version: z.literal(2),
   revision: z.number().int().nonnegative().max(Number.MAX_SAFE_INTEGER),
   rng: z.number().int().min(0).max(0xffffffff),
   phase: z.enum(["draft", "battle", "reward", "victory", "defeat"]),
@@ -23,7 +24,7 @@ const shape = z.object({
   battle: z
     .object({
       turn: z.number().int().min(1).max(1_000_000),
-      energy: z.number().int().min(0).max(3),
+      mana: z.number().int().min(0).max(3),
       draw: z.array(id).max(9),
       hand: z.array(id).max(9),
       discard: z.array(id).max(9),
@@ -45,12 +46,32 @@ const shape = z.object({
     })
     .nullable(),
 });
+const legacyShape = shape.extend({
+  version: z.literal(1),
+  battle: shape.shape.battle
+    .unwrap()
+    .omit({ mana: true })
+    .extend({ energy: z.number().int().min(0).max(3) })
+    .nullable(),
+});
+
 function unique(values: unknown[]) {
   return new Set(values).size === values.length;
 }
 export function decodeSave(raw: string): GameState {
   if (raw.length > 100_000) throw new Error("Save exceeds the supported size.");
-  const s = shape.parse(JSON.parse(raw));
+  const input: unknown = JSON.parse(raw);
+  const legacy = legacyShape.safeParse(input);
+  const converted = legacy.success
+    ? {
+        ...legacy.data,
+        version: 2,
+        battle: legacy.data.battle
+          ? (({ energy, ...battle }) => ({ ...battle, mana: energy }))(legacy.data.battle)
+          : null,
+      }
+    : input;
+  const s = shape.parse(converted);
   const invalid = (condition: boolean) => {
     if (condition) throw new Error("Save contains inconsistent game data.");
   };
@@ -87,6 +108,7 @@ export function decodeSave(raw: string): GameState {
   else invalid(s.team.length !== 3 || s.cards.length !== 9 || !s.battle);
   if (s.battle) {
     const b = s.battle;
+    invalid(!legacy.success && s.phase === "battle" && b.mana === 0);
     const encounter = ENCOUNTERS[s.encounter]!;
     invalid(b.enemies.length !== encounter.enemies.length || !unique(b.enemies.map((e) => e.id)));
     b.enemies.forEach((e, i) => {
@@ -115,7 +137,10 @@ export function decodeSave(raw: string): GameState {
     if (s.phase === "reward" || s.phase === "victory") invalid(b.enemies.some((e) => e.health > 0));
   }
   invalid((s.phase === "reward" && s.encounter === 2) || (s.phase === "victory" && s.encounter !== 2));
-  return freeze(s, true) as GameState;
+  const frozen = freeze(s, true) as GameState;
+  if (legacy.success && frozen.phase === "battle" && frozen.battle!.mana === 0)
+    return dispatch(frozen, { type: "endTurn" }).state;
+  return frozen;
 }
 export function encodeSave(state: GameState): string {
   return JSON.stringify(state);

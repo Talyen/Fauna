@@ -7,18 +7,18 @@ Do not add slogans, decorative headings, branding/navigation bars, footers, prot
 ## Screen content
 
 - Draft: choose-three heading/count, artwork-only creature choices with names/health/passives in tooltips, Start run.
-- Battle: encounter/turn, enemy intents, both creature rows, shared hand, energy, draw/discard counts, End turn, and conditional target cancellation.
+- Battle: encounter/turn, enemy intents, both creature rows, shared hand, mana, draw/discard counts, End turn, and conditional target cancellation.
 - Rewards: recruitment choices and upgrade choices with their actual effects; replacement actions appear after choosing a recruit.
-- Pause: Resume, End run when active, Glossary & controls, 100/125/150% text size, and desktop Save & quit.
+- Pause: Resume, End run when active, Glossary & controls, 100/125/150% text size, Sound on/off, and desktop Save & quit.
 - Results: Victory or Defeat, first-win roster unlock, New run.
 
 Creature art remains 4:3 landscape and action art 3:4 portrait, full bleed. Every card surface contains artwork only: no names, rules, costs, stats, badges, health bars, or readability scrims. Selection/focus borders are external interaction indicators. Combat readouts (health, active block/marks) sit outside creature artwork; enemy intent sits above the row. Passive details and names live in standard shadcn/Radix tooltips, opened by hover or keyboard/controller focus. Card tooltips include owner, cost, upgrade and the final trait/upgrade-adjusted effect with no bonus breakdown. Target-specific marks and healing caps are reflected in exact target previews. The tooltip and command share the same intrinsic-value calculation. Rewards also use artwork-only cards; upgrade tooltips show before/after effects.
 
-Use readable 16px tooltip text, collision-aware portal positioning and hoverable content. Right-click, I or controller X opens pinned inspection. Escape/B closes or cancels one interaction layer. Glossary is a pause-menu destination, not permanent battlefield chrome.
+Use readable 16px tooltip text and collision-aware portal positioning. Noninteractive tooltip surfaces do not intercept pointer actions on the battlefield; Radix hover grace retains readable content, and pinned inspection provides persistent interactive reading. Right-click, I or controller X opens pinned inspection. Escape/B closes or cancels one interaction layer. Glossary is a pause-menu destination, not permanent battlefield chrome.
 
 ## Targeting and previews
 
-Select a card to enter preview mode. No energy, RNG, save revision or committed game state changes. A/D wraps across valid living targets. Remember the last valid target separately for enemies and teammates within a battle; fall back to the first living target. W/S moves between enemy, player and hand rows; A/D moves within a row when not targeting. Tab also navigates controls; arrow keys are not gameplay controls. Controller left/right does the same. Hover/focus selects the preview target; clicking that target or Enter/controller A confirms. Team-wide cards also require confirmation after preview. Escape/B cancels and restores the hand focus. End turn is unavailable while targeting.
+Select a card to enter preview mode. No mana, RNG, save revision or committed game state changes. A/D wraps across valid living targets. Remember the last valid target separately for enemies and teammates within a battle; fall back to the first living target. W/S moves between enemy, player and hand rows; A/D moves within a row when not targeting. Tab also navigates controls; arrow keys are not gameplay controls. Controller left/right does the same. Hover/focus selects the preview target; clicking that target or Enter/controller A confirms. Team-wide cards also require confirmation after preview. Escape/B cancels and restores the hand focus. End turn commits immediately, including while targeting; it never opens a confirmation. Playing the last mana automatically resolves the enemy turn. The selected-action readout flags a last-mana play.
 
 Previews call the authoritative pure gameplay command and discard its result. Target readouts show exact health/block/mark changes and knockouts, including traits, upgrades, mark consumption and capped healing. General card tooltips are suppressed during targeting to keep targets and confirmation controls reachable. I/X remains available for pinned rules.
 
@@ -70,3 +70,9 @@ Poison and Nature use lighter foregrounds from Alchemy's green/emerald families 
 Types are content metadata, carried on damage presentation events. Existing version-one saves derive enemy types from encounter content. Types add no resistances, status effects, or damage arithmetic. Ice and Poison are reserved vocabulary until authored attacks use them.
 
 Use shadcn/ui for dialogs, tooltips, menus, sliders, and shared controls, composing gameplay cards from the same primitives and tokens. Gamepad navigation remains an application responsibility and must be verified through these compositions. Adopting a library is not a reason to add more controls or containers.
+
+## Combat movement and sound
+
+Adapt Alchemy's outcome-driven impact/cue selection and bounded recoil rather than copying its artwork or audio assets. Each presented action selects one strongest nonzero cue, with damage winning ties over healing and block. Positive health loss applies a short 180ms, 4px portrait recoil; fully absorbed and ineffective hits have no health-loss recoil. Recoil is bounded per creature and disabled with reduced motion. Floating feedback retains its damage type and timing.
+
+Original synthesized cues distinguish damage families, healing, gaining block, absorption and marks. Audio unlocks on user interaction and is optional; unavailable devices or autoplay denial cannot interrupt play. Desktop autoplay supports controller-only play. Pause offers a persistent Sound on/off setting. Sounds, animation handles, listeners and pending timers are disposed on teardown; visual aggregation never invents extra impacts or sounds.

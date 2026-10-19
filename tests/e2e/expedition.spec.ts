@@ -282,7 +282,7 @@ test("combat committed during feedback resumes once after immediate page close",
   await resumed.goto("/");
   const after = await state(resumed);
   expect(after.revision).toBe(before.revision + 1);
-  expect(after.battle!.energy).toBe(before.battle!.energy - 1);
+  expect(after.battle!.mana).toBe(before.battle!.mana - 1);
   expect(after.battle!.discard).toContain(attack.id);
   expect(after.battle!.enemies[0]!.health).toBeLessThan(before.battle!.enemies[0]!.health);
 });
@@ -341,13 +341,14 @@ test("art-only cards expose rules through hover and focus without overlays", asy
   const card = page.locator('.hand .action-card[data-effect="attack"]').first();
   await card.hover();
   await expect(page.getByRole("tooltip")).toBeVisible();
-  await expect(page.getByRole("tooltip")).toContainText("1 energy");
+  await expect(page.getByRole("tooltip")).toContainText("1 mana");
   await expect(page.getByRole("tooltip")).toContainText("damage");
-  await page.getByRole("tooltip").hover();
+  const tooltipBox = await page.getByRole("tooltip").boundingBox();
+  await page.mouse.move(tooltipBox!.x + tooltipBox!.width / 2, tooltipBox!.y + tooltipBox!.height / 2);
   await expect(page.getByRole("tooltip")).toBeVisible();
   await card.focus();
   await page.keyboard.press("i");
-  await expect(page.getByRole("dialog")).toContainText("1 energy");
+  await expect(page.getByRole("dialog")).toContainText("1 mana");
   await page.screenshot({ path: "reports/art-only-inspection-1280.png" });
   await page.keyboard.press("Escape");
   await expect(card).toBeFocused();
@@ -383,7 +384,7 @@ test("A/D previews, wraps and confirms exact outcomes without spending on select
   await page.keyboard.press("Enter");
   const after = await state(page);
   expect(after.revision).toBe(before.revision + 1);
-  expect(after.battle!.energy).toBe(before.battle!.energy - 1);
+  expect(after.battle!.mana).toBe(before.battle!.mana - 1);
   await expect(page.locator('[data-actor-id="enemy-1"] .combat-burst')).toBeVisible();
   await page.screenshot({ path: "reports/floating-feedback-1280.png" });
   await page.waitForTimeout(1600);
@@ -402,7 +403,7 @@ test("team-wide cards preview and require confirmation", async ({ page }) => {
   await page.keyboard.press("Enter");
   const after = await state(page);
   expect(after.team.every((c) => c.block === 5)).toBe(true);
-  expect(after.battle!.energy).toBe(2);
+  expect(after.battle!.mana).toBe(2);
   await expect(page.locator(".block-badge")).toHaveCount(3);
 });
 test("glossary, controls and enlarged text stay usable and persist independently", async ({ page }) => {
@@ -533,4 +534,135 @@ test("closing during the enemy sequence resumes its committed turn without repla
   await expect(resumed.locator(".combat-burst")).toHaveCount(0);
   await resumed.waitForTimeout(700);
   await expect(resumed.locator(".combat-burst")).toHaveCount(0);
+});
+
+test("last mana advances and saves exactly one turn, while preview is uncommitted", async ({
+  page,
+  context,
+}) => {
+  const fixture = produce(run(7), (d) => {
+    const card = d.cards.find((c) => c.definitionId === "mossback-attack")!;
+    d.battle!.hand = [card.id];
+    d.battle!.draw = d.cards.filter((c) => c.id !== card.id).map((c) => c.id);
+    d.battle!.discard = [];
+    d.battle!.mana = 1;
+  });
+  await seed(page, fixture);
+  await page.goto("/");
+  await expect(page.getByLabel("1 of 3 mana")).toBeVisible();
+  await page.locator(".hand .action-card").click();
+  await expect(page.locator(".selected-action")).toContainText("ends turn");
+  expect(await state(page)).toEqual(fixture);
+  await page.getByRole("button", { name: "Target Bramble Imp", exact: true }).click();
+  await page.close();
+  const resumed = await context.newPage();
+  await resumed.goto("/");
+  const after = await state(resumed);
+  expect(after.revision).toBe(fixture.revision + 1);
+  expect(after.battle!.turn).toBe(2);
+  expect(after.battle!.mana).toBe(3);
+  expect(after.battle!.hand).toHaveLength(5);
+  await expect(resumed.getByLabel("3 of 3 mana")).toBeVisible();
+  await expect(resumed.locator(".combat-burst")).toHaveCount(0);
+});
+test("End turn commits immediately even with a card selected and mana remaining", async ({ page }) => {
+  await seed(page, run(7));
+  await page.goto("/");
+  const before = await state(page);
+  await page.locator('.hand [data-effect="attack"]').first().click();
+  await page.getByRole("button", { name: "End turn" }).click();
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+  const after = await state(page);
+  expect(after.battle!.turn).toBe(2);
+  expect(after.battle!.mana).toBe(3);
+  expect(after.battle!.enemies.map((e) => e.health)).toEqual(before.battle!.enemies.map((e) => e.health));
+});
+test("real audio output, hit recoil, reduced motion, and mute follow combat outcomes", async ({ page }) => {
+  await page.addInitScript(() => {
+    const observed = { peak: 0, contexts: [] as AudioContext[], impacts: [] as string[] };
+    Object.assign(window, { combatObserved: observed });
+    const Native = window.AudioContext;
+    class ObservedAudio extends Native {
+      constructor(options?: AudioContextOptions) {
+        super(options);
+        observed.contexts.push(this);
+        const analyser = this.createAnalyser();
+        analyser.connect(this.destination);
+        const create = this.createGain.bind(this);
+        this.createGain = () => {
+          const gain = create();
+          gain.connect = new Proxy(gain.connect, {
+            apply: (method, receiver, args) =>
+              Reflect.apply(
+                method,
+                receiver,
+                args[0] === this.destination ? [analyser, ...args.slice(1)] : args,
+              ),
+          });
+          return gain;
+        };
+        const samples = new Float32Array(analyser.fftSize);
+        const timer = setInterval(() => {
+          if (this.state === "closed") {
+            clearInterval(timer);
+            return;
+          }
+          analyser.getFloatTimeDomainData(samples);
+          for (const sample of samples) observed.peak = Math.max(observed.peak, Math.abs(sample));
+        }, 5);
+      }
+    }
+    window.AudioContext = ObservedAudio;
+    const animate = Element.prototype.animate;
+    Element.prototype.animate = function (frames, options) {
+      if (this.matches(".creature-card"))
+        observed.impacts.push(this.closest<HTMLElement>("[data-actor-id]")?.dataset.actorId ?? "");
+      return animate.call(this, frames, options);
+    };
+  });
+  const fixture = produce(run(7), (d) => {
+    const cards = d.cards.filter((c) =>
+      ["mossback-attack", "emberfox-attack", "stormfin-attack"].includes(c.definitionId),
+    );
+    d.battle!.hand = cards.map((c) => c.id);
+    d.battle!.draw = d.cards.filter((c) => !cards.some((card) => card.id === c.id)).map((c) => c.id);
+    d.battle!.discard = [];
+  });
+  await seed(page, fixture);
+  await page.goto("/");
+  await page.locator('.hand [data-card-id="ally-0:mossback-attack"]').click();
+  await page.getByRole("button", { name: "Target Bramble Imp", exact: true }).click();
+  const observed = () =>
+    page.evaluate(
+      () =>
+        (
+          window as unknown as {
+            combatObserved: { peak: number; contexts: AudioContext[]; impacts: string[] };
+          }
+        ).combatObserved,
+    );
+  await expect.poll(async () => (await observed()).peak).toBeGreaterThan(0.001);
+  expect((await observed()).impacts).toContain("enemy-0");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const count = (await observed()).impacts.length;
+  await page.locator('.hand [data-card-id="ally-1:emberfox-attack"]').click();
+  await page.getByRole("button", { name: "Target Cinder Wisp", exact: true }).click();
+  expect((await observed()).impacts).toHaveLength(count);
+  await page.getByRole("button", { name: "Open menu" }).click();
+  await page.getByRole("button", { name: "Sound on", exact: true }).click();
+  await page.getByRole("button", { name: "Resume" }).click();
+  const contexts = (await observed()).contexts.length;
+  await page.getByRole("button", { name: "End turn" }).click();
+  await page.waitForTimeout(400);
+  expect((await observed()).contexts).toHaveLength(contexts);
+  expect(
+    await page.evaluate(() =>
+      (window as unknown as { combatObserved: { contexts: AudioContext[] } }).combatObserved.contexts.every(
+        (context) => context.state === "closed",
+      ),
+    ),
+  ).toBe(true);
+  await page.reload();
+  await page.getByRole("button", { name: "Open menu" }).click();
+  await expect(page.getByRole("button", { name: "Sound off", exact: true })).toBeVisible();
 });

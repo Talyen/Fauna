@@ -210,3 +210,25 @@ describe("desktop close handshake", () => {
     await failure.dispose();
   });
 });
+
+it("persists primary legacy migration without replaying its exhausted turn", async () => {
+  const original = run(7);
+  const { mana, ...battle } = original.battle!;
+  const legacy = JSON.stringify({ ...original, version: 1, battle: { ...battle, energy: 0 } });
+  const memory = new MemoryStorage();
+  memory.setItem("fauna.save.v1", legacy);
+  const session = createSession(createBrowserPlatform(memory));
+  await session.load();
+  await session.flush();
+  const migrated = session.store.getState().game;
+  expect(migrated.version).toBe(2);
+  expect(migrated.battle!.mana).toBe(mana);
+  expect(migrated.battle!.turn).toBe(original.battle!.turn + 1);
+  expect(session.store.getState().events).toEqual([]);
+  expect(memory.getItem("fauna.save.v1.backup1")).toBe(legacy);
+  await session.dispose();
+  const resumed = createSession(createBrowserPlatform(memory));
+  await resumed.load();
+  expect(resumed.store.getState().game).toEqual(migrated);
+  await resumed.dispose();
+});

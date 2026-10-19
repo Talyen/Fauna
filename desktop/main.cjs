@@ -42,7 +42,7 @@ app.whenReady().then(async () => {
     height: 1000,
     minWidth: 900,
     minHeight: 700,
-    backgroundColor: "#101b18",
+    backgroundColor: "#000000",
     autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, "preload.cjs"),
@@ -50,6 +50,7 @@ app.whenReady().then(async () => {
       nodeIntegration: false,
       sandbox: true,
       webSecurity: true,
+      autoplayPolicy: "no-user-gesture-required",
     },
   });
   const authorize = (event) => {

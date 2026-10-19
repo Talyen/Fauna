@@ -13,7 +13,7 @@ import type { Card, Command, CommandResult, GameEvent, GameState } from "./types
 export function createGame(seed = 1): GameState {
   return freeze(
     {
-      version: 1,
+      version: 2,
       revision: 0,
       rng: seed >>> 0,
       phase: "draft",
@@ -76,7 +76,7 @@ function beginBattle(state: GameState) {
   }
   state.battle = {
     turn: 1,
-    energy: 3,
+    mana: 3,
     draw: shuffle(
       state,
       state.cards.map((c) => c.id),
@@ -122,10 +122,81 @@ function settle(state: GameState, events: GameEvent[]): boolean {
   }
   return false;
 }
+function finishTurn(draft: GameState, events: GameEvent[]) {
+  const battle = draft.battle!;
+  for (const enemy of battle.enemies) {
+    if (enemy.health <= 0) continue;
+    const target = living(draft).find((c) => c.id === enemy.targetId) ?? living(draft)[0];
+    if (!target) break;
+    const blocked = Math.min(target.block, enemy.damage);
+    target.block -= blocked;
+    const amount = Math.min(target.health, enemy.damage - blocked);
+    if (blocked > 0)
+      events.push({
+        kind: "block",
+        actorId: enemy.id,
+        targetId: target.id,
+        amount: -blocked,
+        text: `${species(target.species).name} blocks ${blocked} damage.`,
+      });
+    target.health = Math.max(0, target.health - amount);
+    events.push({
+      kind: "damage",
+      text: `${enemy.name} hits ${species(target.species).name} for ${amount} ${DAMAGE_LABELS[enemyDamageType(draft.encounter, enemy.id)]} damage${blocked ? ` (${blocked} blocked)` : ""}.`,
+      damageType: enemyDamageType(draft.encounter, enemy.id),
+      actorId: enemy.id,
+      targetId: target.id,
+      amount,
+    });
+    if (target.species === "briartooth" && amount > 0) {
+      const reflected = Math.min(enemy.health, 2);
+      enemy.health = Math.max(0, enemy.health - 2);
+      events.push({
+        kind: "damage",
+        text: `Thorns deal ${reflected} Nature damage to ${enemy.name}.`,
+        damageType: "nature",
+        targetId: enemy.id,
+        amount: reflected,
+      });
+      if (enemy.health === 0)
+        events.push({ kind: "knockout", targetId: enemy.id, text: `${enemy.name} is knocked out.` });
+    }
+    if (target.health === 0) {
+      events.push({
+        kind: "knockout",
+        text: `${species(target.species).name} is knocked out.`,
+        targetId: target.id,
+      });
+      const removed = new Set(draft.cards.filter((c) => c.ownerId === target.id).map((c) => c.id));
+      battle.draw = battle.draw.filter((id) => !removed.has(id));
+      battle.hand = battle.hand.filter((id) => !removed.has(id));
+      battle.discard = battle.discard.filter((id) => !removed.has(id));
+    }
+    if (settle(draft, events)) break;
+  }
+  if (draft.phase !== "battle") return;
+  for (const c of draft.team) {
+    c.block = 0;
+    c.attacked = false;
+  }
+  battle.discard.push(...battle.hand.splice(0));
+  battle.mana = 3;
+  battle.turn++;
+  draw(draft, 5);
+  intents(draft);
+  events.push({ kind: "turn", text: `Turn ${battle.turn}. Three mana restored.` });
+}
+
 function reject(state: GameState, reason: string): CommandResult {
   return { accepted: false, state, reason, events: [] };
 }
 export function dispatch(state: GameState, command: Command): CommandResult {
+  return resolve(state, command, true);
+}
+export function previewCard(state: GameState, cardId: string, targetId?: string): CommandResult {
+  return resolve(state, { type: "play", cardId, targetId }, false);
+}
+function resolve(state: GameState, command: Command, autoEndTurn: boolean): CommandResult {
   const b = state.battle;
   if (
     command.type === "newRun" &&
@@ -149,7 +220,7 @@ export function dispatch(state: GameState, command: Command): CommandResult {
     const actor = state.team.find((c) => c.id === card.ownerId);
     if (!actor || actor.health <= 0) return reject(state, "That creature is knocked out.");
     const def = definition(card.definitionId);
-    if (b!.energy < def.cost) return reject(state, "Not enough energy.");
+    if (b!.mana < def.cost) return reject(state, "Not enough mana.");
     if (
       (def.effect === "attack" || def.effect === "mark") &&
       !b!.enemies.some((e) => e.id === command.targetId && e.health > 0)
@@ -204,7 +275,7 @@ export function dispatch(state: GameState, command: Command): CommandResult {
         const def = definition(card.definitionId);
         const actor = draft.team.find((c) => c.id === card.ownerId)!;
         let value = actionValue(card, actor);
-        battle.energy -= def.cost;
+        battle.mana -= def.cost;
         battle.hand.splice(battle.hand.indexOf(card.id), 1);
         battle.discard.push(card.id);
         events.push({
@@ -265,71 +336,11 @@ export function dispatch(state: GameState, command: Command): CommandResult {
           });
         }
         settle(draft, events);
+        if (autoEndTurn && draft.phase === "battle" && battle.mana === 0) finishTurn(draft, events);
         break;
       }
       case "endTurn": {
-        const battle = draft.battle!;
-        for (const enemy of battle.enemies) {
-          if (enemy.health <= 0) continue;
-          const target = living(draft).find((c) => c.id === enemy.targetId) ?? living(draft)[0];
-          if (!target) break;
-          const blocked = Math.min(target.block, enemy.damage);
-          target.block -= blocked;
-          const amount = Math.min(target.health, enemy.damage - blocked);
-          if (blocked > 0)
-            events.push({
-              kind: "block",
-              actorId: enemy.id,
-              targetId: target.id,
-              amount: -blocked,
-              text: `${species(target.species).name} blocks ${blocked} damage.`,
-            });
-          target.health = Math.max(0, target.health - amount);
-          events.push({
-            kind: "damage",
-            text: `${enemy.name} hits ${species(target.species).name} for ${amount} ${DAMAGE_LABELS[enemyDamageType(draft.encounter, enemy.id)]} damage${blocked ? ` (${blocked} blocked)` : ""}.`,
-            damageType: enemyDamageType(draft.encounter, enemy.id),
-            actorId: enemy.id,
-            targetId: target.id,
-            amount,
-          });
-          if (target.species === "briartooth" && amount > 0) {
-            const reflected = Math.min(enemy.health, 2);
-            enemy.health = Math.max(0, enemy.health - 2);
-            events.push({
-              kind: "damage",
-              text: `Thorns deal ${reflected} Nature damage to ${enemy.name}.`,
-              damageType: "nature",
-              targetId: enemy.id,
-              amount: reflected,
-            });
-            if (enemy.health === 0)
-              events.push({ kind: "knockout", targetId: enemy.id, text: `${enemy.name} is knocked out.` });
-          }
-          if (target.health === 0) {
-            events.push({
-              kind: "knockout",
-              text: `${species(target.species).name} is knocked out.`,
-              targetId: target.id,
-            });
-            const removed = new Set(draft.cards.filter((c) => c.ownerId === target.id).map((c) => c.id));
-            battle.draw = battle.draw.filter((id) => !removed.has(id));
-            battle.hand = battle.hand.filter((id) => !removed.has(id));
-            battle.discard = battle.discard.filter((id) => !removed.has(id));
-          }
-          if (settle(draft, events)) break;
-        }
-        if (draft.phase !== "battle") break;
-        for (const c of draft.team) {
-          c.block = 0;
-          c.attacked = false;
-        }
-        battle.discard.push(...battle.hand.splice(0));
-        battle.energy = 3;
-        battle.turn++;
-        draw(draft, 5);
-        intents(draft);
-        events.push({ kind: "turn", text: `Turn ${battle.turn}. Three energy restored.` });
+        finishTurn(draft, events);
         break;
       }
       case "upgrade": {

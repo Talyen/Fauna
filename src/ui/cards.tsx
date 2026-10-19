@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Heart, Shield, Crosshair } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { ActionDetails, CreatureDetails } from "./card-details";
@@ -54,6 +54,9 @@ export function CreatureCard({
   tooltips = true,
 }: CreatureProps) {
   const [tooltipOpen, setTooltipOpen] = useState(false);
+  useEffect(() => {
+    if (!tooltips) setTooltipOpen(false);
+  }, [tooltips]);
   const info = species(kind);
   const Component = presentation ? "div" : Button;
   const artwork = (
@@ -90,7 +93,7 @@ export function CreatureCard({
       {presentation ? (
         artwork
       ) : (
-        <Tooltip open={tooltips && tooltipOpen} onOpenChange={setTooltipOpen}>
+        <Tooltip open={tooltips && tooltipOpen} onOpenChange={(open) => setTooltipOpen(tooltips && open)}>
           <TooltipTrigger asChild>{artwork}</TooltipTrigger>
           <TooltipContent>
             <CreatureDetails
@@ -196,6 +199,9 @@ export function ActionCard({
   tooltips?: boolean;
 }) {
   const [tooltipOpen, setTooltipOpen] = useState(false);
+  useEffect(() => {
+    if (!tooltips) setTooltipOpen(false);
+  }, [tooltips]);
   const def = definition(card.definitionId);
   const Component = presentation ? "div" : Button;
   const artwork = (
@@ -208,7 +214,7 @@ export function ActionCard({
       data-effect={def.effect}
       aria-label={
         label ??
-        `${def.name}${card.level ? ` +${card.level}` : ""}, ${ownerName}, ${def.cost} energy, ${cardText(def, card.level, actionValue(card, actor ?? { species: def.species, attacked: false }))}`
+        `${def.name}${card.level ? ` +${card.level}` : ""}, ${ownerName}, ${def.cost} mana, ${cardText(def, card.level, actionValue(card, actor ?? { species: def.species, attacked: false }))}`
       }
       aria-pressed={presentation ? undefined : selected}
       aria-disabled={presentation ? undefined : disabled}
@@ -231,7 +237,7 @@ export function ActionCard({
   return presentation ? (
     artwork
   ) : (
-    <Tooltip open={tooltips && tooltipOpen} onOpenChange={setTooltipOpen}>
+    <Tooltip open={tooltips && tooltipOpen} onOpenChange={(open) => setTooltipOpen(tooltips && open)}>
       <TooltipTrigger asChild>{artwork}</TooltipTrigger>
       <TooltipContent>
         <ActionDetails card={card} ownerName={ownerName} actor={actor} />
@@ -245,7 +251,7 @@ export function ActionCard({
             </>
           )
         ) : disabled ? (
-          <p>Not enough energy.</p>
+          <p>Not enough mana.</p>
         ) : null}
       </TooltipContent>
     </Tooltip>

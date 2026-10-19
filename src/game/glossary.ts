@@ -10,13 +10,13 @@ export const GLOSSARY = [
       "Absorbs incoming damage before health. Each point absorbs one damage and is spent. Remaining block expires at the start of your next turn.",
   },
   {
-    term: "Energy",
-    definition: "The shared resource spent to play action cards. Your team starts each turn with 3 energy.",
+    term: "Mana",
+    definition: "The shared resource spent to play action cards. Your team starts each turn with 3 mana.",
   },
   {
     term: "Action card",
     definition:
-      "A card belonging to one creature. That creature acts when you play it. Its cost is paid from the shared energy pool.",
+      "A card belonging to one creature. That creature acts when you play it. Its cost is paid from the shared mana pool.",
   },
   {
     term: "Attack",
@@ -40,7 +40,7 @@ export const GLOSSARY = [
   {
     term: "Turn",
     definition:
-      "Play cards using shared energy, then End turn to resolve the telegraphed enemy actions. Discard remaining hand cards; refill energy and draw 5 cards for the next turn.",
+      "Play cards using shared mana. Spending your last mana automatically resolves the enemy turn. You can also press End turn at any time without confirmation. Discard remaining hand cards; refill mana and draw 5 cards for the next turn.",
   },
   {
     term: "Battle",

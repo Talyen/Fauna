@@ -291,11 +291,11 @@ strong {
   gap: 24px;
   margin-bottom: 16px;
 }
-.energy-display {
+.mana-display {
   font-size: calc(16px * var(--text-scale, 1));
   white-space: nowrap;
 }
-.energy-display strong {
+.mana-display strong {
   font-family: var(--font-number);
   font-size: calc(22px * var(--text-scale, 1));
   font-variant-numeric: tabular-nums;
@@ -537,10 +537,10 @@ strong {
   .hand-toolbar {
     gap: 12px;
   }
-  .energy-display {
+  .mana-display {
     font-size: calc(14px * var(--text-scale, 1));
   }
-  .energy-display strong {
+  .mana-display strong {
     font-size: calc(18px * var(--text-scale, 1));
   }
   .pile-counts {
@@ -692,6 +692,7 @@ button {
   display: block;
 }
 .game-tooltip {
+  pointer-events: none;
   width: min(calc(360px * var(--text-scale, 1)), calc(100vw - 32px));
   max-height: var(--radix-tooltip-content-available-height);
   overflow: auto;

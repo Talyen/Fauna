@@ -20,7 +20,7 @@ export function victoryReady(s = run()) {
     d.battle!.hand = [attack.id];
     d.battle!.draw = d.cards.filter((c) => c.id !== attack.id).map((c) => c.id);
     d.battle!.discard = [];
-    d.battle!.energy = 3;
+    d.battle!.mana = 3;
   });
 }
 export function winBattle(s = run()) {
@@ -43,10 +43,10 @@ export function policy(s: GameState): Command {
   const enemy = b.enemies.filter((e) => e.health > 0).sort((a, b) => a.health - b.health)[0]!;
   const cards = b.hand
     .map((id) => s.cards.find((c) => c.id === id)!)
-    .filter((c) => definition(c.definitionId).cost <= b.energy);
+    .filter((c) => definition(c.definitionId).cost <= b.mana);
   const attacks = cards.filter((c) => definition(c.definitionId).effect === "attack");
   const mark = cards.find((c) => definition(c.definitionId).effect === "mark");
-  if (mark && attacks.length && b.energy >= 2 && enemy.health > 15 && enemy.marks === 0)
+  if (mark && attacks.length && b.mana >= 2 && enemy.health > 15 && enemy.marks === 0)
     return { type: "play", cardId: mark.id, targetId: enemy.id };
   const attack = attacks.sort(
     (a, b) =>

@@ -19,7 +19,7 @@ export function ActionDetails({
         {card.level ? ` +${card.level}` : ""}
       </strong>
       <p>
-        {ownerName} · {def.cost} energy
+        {ownerName} · {def.cost} mana
       </p>
       <CardRules
         card={def}
@@ -65,7 +65,7 @@ export function CreatureDetails({
               <div key={c.id}>
                 <strong>
                   {c.name}
-                  {level ? ` +${level}` : ""} · {c.cost} energy
+                  {level ? ` +${level}` : ""} · {c.cost} mana
                 </strong>
                 <CardRules
                   card={c}

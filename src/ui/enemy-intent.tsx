@@ -23,7 +23,7 @@ export function EnemyIntent({
         <span
           className="intent-block"
           data-combat-tone="block"
-          aria-label={`${Math.abs(blocked.amount!)}, ${damage?.amount ?? 0} health lost`}
+          aria-label={`${Math.abs(blocked.amount!)} blocked, ${damage?.amount ?? 0} health lost`}
         >
           <Shield aria-hidden="true" />
           {Math.abs(blocked.amount!)}

@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type RefObject } from "react";
+import { createCombatAudio, selectCombatCue } from "./combat-audio";
+import { createCombatImpacts } from "./combat-impact";
 import { Crosshair, Heart, Shield, Skull } from "lucide-react";
 import type { Session } from "../application/session";
 import type { GameEvent } from "../game/types";
@@ -56,9 +58,20 @@ export function feedbackFrames(events: readonly GameEvent[]): GameEvent[][] {
     frame.some((e) => e.targetId && ["damage", "heal", "block", "mark", "knockout"].includes(e.kind)),
   );
 }
-export function useCombatFeedback(session: Session) {
+export function useCombatFeedback(
+  session: Session,
+  root: RefObject<HTMLDivElement | null>,
+  soundEnabled: boolean,
+) {
   const [bursts, setBursts] = useState<Burst[]>([]);
   useEffect(() => {
+    const audio = createCombatAudio(),
+      impacts = createCombatImpacts(() => root.current);
+    const unlock = () => {
+      if (soundEnabled) audio.unlock();
+    };
+    window.addEventListener("pointerdown", unlock);
+    window.addEventListener("keydown", unlock);
     const pending = new Set<ReturnType<typeof setTimeout>>();
     const cancelPending = () => {
       pending.forEach(clearTimeout);
@@ -70,13 +83,25 @@ export function useCombatFeedback(session: Session) {
       cancelPending();
       if (current.game.phase !== "battle") {
         setBursts([]);
+        const cue = selectCombatCue(current.events);
+        if (soundEnabled && cue) {
+          audio.unlock();
+          audio.play(cue);
+        }
         return;
       }
       feedbackFrames(current.events).forEach((events, index) => {
-        const show = () =>
+        const show = () => {
           setBursts((items) =>
             appendFeedback(items, events, `${current.game.revision}:${index}`, performance.now()),
           );
+          impacts.present(events);
+          const cue = selectCombatCue(events);
+          if (soundEnabled && cue) {
+            audio.unlock();
+            audio.play(cue);
+          }
+        };
         if (index === 0) show();
         else {
           const timer = setTimeout(() => {
@@ -100,8 +125,12 @@ export function useCombatFeedback(session: Session) {
       unsubscribe();
       cancelPending();
       clearInterval(interval);
+      window.removeEventListener("pointerdown", unlock);
+      window.removeEventListener("keydown", unlock);
+      audio.dispose();
+      impacts.dispose();
     };
-  }, [session]);
+  }, [session, root, soundEnabled]);
   return bursts;
 }
 

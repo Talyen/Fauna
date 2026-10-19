@@ -9,7 +9,9 @@ describe("desktop storage", () => {
     const directory = await mkdtemp(path.join(tmpdir(), "fauna-storage-"));
     try {
       const storage = createStorage(directory);
-      const values = [1, 2, 3].map((revision) => JSON.stringify({ version: 1, revision }));
+      const values = [1, 2, 3].map((revision) =>
+        JSON.stringify({ version: revision === 1 ? 1 : 2, revision }),
+      );
       const writes = values.map((data) => storage.write(data));
       await storage.drain();
       await Promise.all(writes);
@@ -20,6 +22,7 @@ describe("desktop storage", () => {
       await writeFile(path.join(directory, "expedition.json"), "corrupt");
       expect((await storage.readCandidates())[1].data).toBe(values[1]);
       await expect(storage.write("broken")).rejects.toThrow();
+      await expect(storage.write(JSON.stringify({ version: 999 }))).rejects.toThrow();
       await expect(storage.write("x".repeat(100001))).rejects.toThrow();
     } finally {
       await rm(directory, { recursive: true });
