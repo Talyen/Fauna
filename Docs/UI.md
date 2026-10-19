@@ -8,15 +8,16 @@ Do not add slogans, decorative headings, branding/navigation bars, footers, prot
 
 The current design review selects the following direction. These choices supersede the earlier flat-hand layout, but gameplay screens have not yet been changed to match. Compare the isolated samples at `/design/battle-layout/index.html?compare=1` using the development server before choosing exact scale and spacing.
 
-- Creatures first: larger creature rows and a smaller hand.
+- Layout A selected: more breathing room. Hand cards match creature artwork height while retaining their 3:4 portrait ratio; creature artwork remains 4:3 landscape.
+- No visible battle, turn or draw/discard counters. Mana uses Alchemy's full/spent crystal artwork and hover glint.
 - Slightly fanned, overlapping hand. The focused card rises above neighbors; selection stays raised in its hand slot.
-- Thin red health bars and current/max numbers beneath artwork; block and marks stay external icon/number readouts.
+- Health bars only on the battlefield. HP numbers live in hover/pinned detail; block and marks stay external icon/number readouts. No enemy intents are shown. Bar forecasts show expected health changes without battlefield HP numerals.
 - External actor/target outlines with a thin targeting line between artwork edges.
 - Centered pinned inspection.
 - Rewards commit immediately on the final choice, with effects available beforehand.
 - Confirm abandoning a run. End turn stays immediate, and spending the last mana still advances automatically.
 
-A and B use identical fixtures and artwork. A leaves more space between elements; B gives creatures more space and further reduces the hand. Samples have no gameplay, audio, platform services or save access. Their Play and End turn controls only clear the sample selection. The baseline specification below describes the currently implemented game until this direction is applied.
+The original A/B comparison used identical fixtures and artwork. A was selected, then revised to match hand/creature heights, hide pile counts and enemy intents, and keep HP numbers in details. The review page now shows this selected layout. Samples have no gameplay, audio, platform services or save access. Their Play and End turn controls only clear the sample selection. The baseline specification below describes the currently implemented game until this direction is applied.
 
 ## Screen content
 

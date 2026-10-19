@@ -1,7 +1,7 @@
 /* Review-only compositions. Gameplay screens are intentionally unchanged. */
 .sample-board {
-  --sample-creature: 336px;
-  --sample-hand: 124px;
+  --sample-creature: min(336px, calc((100dvh - 280px) * 4 / 9));
+  --sample-hand: calc(var(--sample-creature) * 9 / 16);
   height: 100dvh;
   padding: 24px 32px;
   display: grid;
@@ -12,7 +12,6 @@
 }
 .sample-board.sample-b {
   --sample-creature: 368px;
-  --sample-hand: 116px;
 }
 .sample-status {
   display: flex;
@@ -39,16 +38,6 @@
 .sample-creature {
   width: var(--sample-creature);
   flex: 0 0 auto;
-}
-.sample-intent {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  height: 24px;
-  margin-bottom: 8px;
-  font-size: var(--text-secondary);
-  font-variant-numeric: tabular-nums;
 }
 .sample-health {
   height: 36px;
@@ -114,33 +103,27 @@
   padding: 4px 8px;
 }
 .sample-hand-section {
-  width: min(1040px, 100%);
+  position: relative;
+  width: min(1280px, 100%);
   margin: 16px auto 0;
 }
 .sample-toolbar {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
-  gap: 24px;
-  height: 44px;
+  justify-content: space-between;
+  pointer-events: none;
 }
-.sample-toolbar strong {
-  font-size: var(--text-title);
-  margin-right: 8px;
-  font-variant-numeric: tabular-nums;
-}
-.sample-toolbar > button {
-  margin-left: auto;
-}
-.sample-piles {
-  color: var(--muted-foreground);
-  font-size: var(--text-secondary);
+.sample-toolbar > * {
+  pointer-events: auto;
 }
 .sample-fan {
   display: flex;
   justify-content: center;
   align-items: start;
   height: calc(var(--sample-hand) * 4 / 3 + 36px);
-  margin-top: 8px;
+  margin-top: 0;
   padding-top: 16px;
 }
 .sample-hand-slot {
@@ -152,7 +135,7 @@
   z-index: var(--fan-order);
 }
 .sample-hand-slot + .sample-hand-slot {
-  margin-left: -16px;
+  margin-left: -40px;
 }
 .sample-hand-slot .action-card {
   width: 100%;
@@ -215,7 +198,8 @@
 }
 .sample-comparison {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1280px);
+  justify-content: center;
   gap: 24px;
 }
 .sample-caption {
@@ -247,14 +231,12 @@
 }
 @media (max-height: 850px) {
   .sample-board {
-    --sample-creature: 224px;
-    --sample-hand: 102px;
+    --sample-creature: min(224px, calc((100dvh - 248px) * 4 / 9));
     padding: 16px 24px;
     grid-template-rows: 44px auto minmax(48px, 1fr) auto auto;
   }
   .sample-board.sample-b {
-    --sample-creature: 244px;
-    --sample-hand: 90px;
+    --sample-creature: 240px;
   }
   .sample-hand-section {
     margin-top: 12px;

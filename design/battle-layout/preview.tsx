@@ -1,19 +1,20 @@
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
-import { Heart, Shield, Menu, Crosshair } from "lucide-react";
+import { Shield, Menu, Crosshair } from "lucide-react";
 import { Button } from "../../src/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "../../src/components/ui/dialog";
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "../../src/components/ui/tooltip";
 import { ArtCard } from "../../src/ui/art-card";
 import { ActionCard } from "../../src/ui/cards";
+import { ManaCrystals } from "./mana-crystals";
 import { ActionDetails, CreatureDetails } from "../../src/ui/card-details";
-import { DamageValue } from "../../src/ui/combat-values";
 import { definition, species, ENCOUNTERS, type SpeciesId } from "../../src/game/content";
 import { actionValue } from "../../src/game/rules";
 import type { Card, Creature } from "../../src/game/types";
 import "@fontsource-variable/inter/wght.css";
 import "../../src/ui/styles.css";
 import "./layout.css";
+import "./mana-crystals.css";
 
 // Deliberately frozen presentation fixtures: no session, commands, persistence or audio.
 const team: Creature[] = [
@@ -140,11 +141,6 @@ function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?
           ) : null}
         </div>
         <div className="sample-stats">
-          <span data-combat-tone="health">
-            <Heart aria-hidden="true" />
-            {health}
-            {next !== health ? ` → ${next}` : ""}/{max}
-          </span>
           {block > 0 ? (
             <span data-combat-tone="block">
               <Shield aria-hidden="true" />
@@ -168,23 +164,17 @@ function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?
   return (
     <div className={`sample-board sample-${variant}`} ref={board}>
       <header className="sample-status">
-        <span>Battle 2/3</span>
-        <span>Turn 4</span>
         <Button variant="ghost" size="icon" aria-label="Open menu" onClick={() => setPause(true)}>
           <Menu />
         </Button>
       </header>
       <section className="sample-enemies" aria-label="Enemy row">
-        {enemies.map((enemy, index) => (
+        {enemies.map((enemy) => (
           <article
             key={enemy.id}
             className={`sample-creature ${selected && !allyTarget && targetKey === enemy.id ? "sample-target" : ""}`}
             data-sample-actor={enemy.id}
           >
-            <div className="sample-intent">
-              <DamageValue type={enemy.damageType} amount={enemy.damage} />
-              <span>→ {species(team[index]!.species).name}</span>
-            </div>
             <Tooltip>
               <TooltipTrigger asChild>
                 <ArtCard
@@ -271,10 +261,7 @@ function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?
       </section>
       <section className="sample-hand-section" aria-label="Action hand">
         <div className="sample-toolbar">
-          <span>
-            <strong>2/3</strong> Mana
-          </span>
-          <span className="sample-piles">Draw 2 · Discard 2</span>
+          <ManaCrystals mana={2} />
           <Button onClick={() => setSelected(null)}>End turn</Button>
         </div>
         <div className="sample-fan">
@@ -380,7 +367,7 @@ function Gallery() {
   return (
     <main className="sample-gallery" ref={root}>
       <header>
-        <h1>Battle layout samples</h1>
+        <h1>Selected battle layout</h1>
         <span>No gameplay or save changes</span>
         <Button variant={targeting ? "outline" : "default"} onClick={() => setTargeting(false)}>
           Idle
@@ -390,10 +377,10 @@ function Gallery() {
         </Button>
       </header>
       <div className="sample-comparison">
-        {(["a", "b"] as const).map((variant) => (
+        {(["a"] as const).map((variant) => (
           <section key={variant}>
             <div className="sample-caption">
-              <h2>{variant === "a" ? "A · More breathing room" : "B · Larger creatures"}</h2>
+              <h2>{variant === "a" ? "A · Equal-height cards" : "B · Larger creatures"}</h2>
               <a
                 href={`/design/battle-layout/index.html?variant=${variant}${targeting ? "&state=target" : ""}`}
                 target="_blank"
