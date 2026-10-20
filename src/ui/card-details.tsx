@@ -1,5 +1,5 @@
 import { KeywordText } from "./keyword-text";
-import { definition, species, type SpeciesId } from "../game/content";
+import { definition, enemyCard, species, type SpeciesId } from "../game/content";
 import { actionValue, cardFollowups } from "../game/rules";
 import type { Creature, Card, GameState } from "../game/types";
 import { CardRules } from "./combat-values";
@@ -26,13 +26,17 @@ export function ActionDetails({
   ownerName,
   actor,
   modifiers,
+  enemy = false,
+  enemyValue,
 }: {
   card: Card;
+  enemy?: boolean;
+  enemyValue?: number;
   ownerName: string;
   actor?: Creature;
   modifiers?: GameState;
 }) {
-  const def = definition(card.definitionId);
+  const def = enemy ? enemyCard(definition(card.definitionId)) : definition(card.definitionId);
   return (
     <div className="card-details">
       <strong>
@@ -40,14 +44,20 @@ export function ActionDetails({
         {card.level ? ` +${card.level}` : ""}
       </strong>
       <p>
-        <KeywordText text={`${ownerName} · ${def.cost} mana`} />
+        <KeywordText text={enemy ? ownerName : `${ownerName} · ${def.cost} mana`} />
       </p>
       <CardRules
         card={def}
         level={card.level}
-        value={actionValue(card, actor ?? { species: def.species, attacked: false }, modifiers)}
+        value={
+          enemyValue ??
+          actionValue(card, actor ?? { species: def.species, attacked: false }, modifiers) +
+            (def.effect === "attack" && (def.damageType === "physical" || def.damageType === "stun")
+              ? (actor?.combat?.forge ?? 0)
+              : 0)
+        }
       />
-      <Followups card={card} modifiers={modifiers} />
+      {!enemy ? <Followups card={card} modifiers={modifiers} /> : null}
     </div>
   );
 }

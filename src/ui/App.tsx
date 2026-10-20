@@ -1,3 +1,4 @@
+import { Campfire } from "./campfire";
 import { AudioSettings } from "./audio-settings";
 import { useAudioPreferences } from "./audio-preferences";
 import { useGameAudio } from "./game-audio";
@@ -35,7 +36,7 @@ import type { SpeciesId } from "../game/content";
 import "./mana-crystals.css";
 
 type Route = "home" | "play" | "talents" | "collection";
-type Modal = "settings" | "glossary" | "endRun" | "deck" | "swap" | "lineup" | null;
+type Modal = "settings" | "glossary" | "endRun" | "deck" | "swap" | "lineup" | "draw" | "discard" | null;
 export function App(props: { session: Session; desktop?: boolean }) {
   return (
     <TooltipProvider delayDuration={300} skipDelayDuration={100} disableHoverableContent>
@@ -75,6 +76,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     !["victory", "defeat"].includes(game.phase) && (game.team.length > 0 || game.selected.length > 0);
   const canManageLineup =
     game.phase === "teamSelection" ||
+    game.phase === "campfire" ||
     (["recruit", "relic"].includes(game.phase) && game.reward?.outcome === "next");
   const paused = route !== "play" || menu || modal !== null || inspection !== null;
   const { bursts, deny } = useCombatFeedback(session, root, playSound, paused);
@@ -145,7 +147,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
       action === "inspect" &&
       !inspection &&
       (!menu || modal === "lineup") &&
-      (!modal || ["deck", "swap", "lineup"].includes(modal))
+      (!modal || ["deck", "draw", "discard", "swap", "lineup"].includes(modal))
     ) {
       const focused = document.activeElement as HTMLElement | null;
       const card = game.cards.find(
@@ -304,7 +306,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           className={
             modal === "swap" || modal === "lineup"
               ? "swap-dialog"
-              : modal === "deck"
+              : modal === "deck" || modal === "draw" || modal === "discard"
                 ? "deck-dialog"
                 : modal === "settings"
                   ? "settings-dialog"
@@ -315,13 +317,17 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
               ? "Close Swap"
               : modal === "lineup"
                 ? "Close Lineup"
-                : modal === "deck"
-                  ? "Close deck"
-                  : modal === "settings"
-                    ? "Close settings"
-                    : modal === "glossary"
-                      ? "Close glossary"
-                      : "Close dialog"
+                : modal === "draw"
+                  ? "Close draw pile"
+                  : modal === "discard"
+                    ? "Close discard pile"
+                    : modal === "deck"
+                      ? "Close deck"
+                      : modal === "settings"
+                        ? "Close settings"
+                        : modal === "glossary"
+                          ? "Close glossary"
+                          : "Close dialog"
           }
           onCloseAutoFocus={(event) => {
             event.preventDefault();
@@ -333,13 +339,17 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
               ? "Swap"
               : modal === "lineup"
                 ? "Lineup"
-                : modal === "deck"
-                  ? "Deck"
-                  : modal === "settings"
-                    ? "Settings"
-                    : modal === "glossary"
-                      ? "Glossary & controls"
-                      : ""}
+                : modal === "draw"
+                  ? "Draw Pile"
+                  : modal === "discard"
+                    ? "Discard Pile"
+                    : modal === "deck"
+                      ? "Deck"
+                      : modal === "settings"
+                        ? "Settings"
+                        : modal === "glossary"
+                          ? "Glossary & controls"
+                          : ""}
           </DialogTitle>
           <DialogDescription className="sr-only">Game information and controls</DialogDescription>
           {modal === "swap" || modal === "lineup" ? (
@@ -351,8 +361,8 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
               inspect={setInspection}
               close={() => setModal(null)}
             />
-          ) : modal === "deck" ? (
-            <DeckCards game={game} inspect={setInspection} />
+          ) : modal === "deck" || modal === "draw" || modal === "discard" ? (
+            <DeckCards game={game} inspect={setInspection} pile={modal === "deck" ? undefined : modal} />
           ) : modal === "settings" ? (
             <div className="settings-controls">
               <DiagnosticViewer diagnostics={session.diagnostics} desktop={desktop} />
@@ -515,10 +525,13 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
               <Draft game={game} send={send} inspect={setInspection} />
             ) : game.phase === "teamSelection" ? (
               <TeamSelection game={game} send={send} inspect={setInspection} deck={() => openModal("deck")} />
+            ) : game.phase === "campfire" ? (
+              <Campfire game={game} send={send} />
             ) : game.phase === "battle" ? (
               <BattleScreen
                 key={game.encounter}
-                clearSelection={modal === "swap"}
+                clearSelection={menu || modal !== null || inspection !== null}
+                openPile={(pile) => openModal(pile)}
                 actions={
                   <Button
                     variant="outline"

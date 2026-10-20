@@ -25,7 +25,7 @@ export const GLOSSARY = [
   {
     term: "Damage",
     definition:
-      "Reduces block, then health. Physical, Fire, Ice, Lightning, Poison, Nature, and Light identify damage types; they currently have no resistance or status rules.",
+      "Attacks can Dodge or critically hit. Block absorbs damage first; Armor then reduces Physical and Stun damage. Positive damage removes 1 Armor. Burn, Poison, Bleed, Stun, and Freeze hits add their matching buildup. There are no elemental reactions.",
   },
   {
     term: "Hit",
@@ -35,12 +35,17 @@ export const GLOSSARY = [
   {
     term: "Turn",
     definition:
-      "Play cards using shared mana. Spending your last mana automatically resolves the enemy turn. You can also press End turn at any time without confirmation. Discard remaining hand cards; refill mana and draw 5 cards for the next turn.",
+      "Play cards using shared mana. Spending your last mana automatically resolves the enemy turn. You can also press End turn at any time without confirmation. Discard remaining hand cards; restore 4 Mana and draw 4 cards for the next turn. The hand holds 7; overflow waits in order and survives turn changes.",
+  },
+  {
+    term: "Death's Door",
+    definition:
+      "Each allied creature survives fatal damage once per battle at 1 Health, with 2 grace turns. Fatal packets during that window still leave 1 Health; later damage can knock it out. Reserve turns also spend grace.",
   },
   {
     term: "Battle",
     definition:
-      "One encounter. Defeat every enemy to win. This prototype restores all teammate health after victory. Temporary block does not carry into the next battle.",
+      "One encounter. Defeat every enemy to win. Health and knockouts persist between destinations. Campfire Rest restores 30% of each creature's maximum Health, including knocked-out creatures. Combat effects and Block reset for the next battle.",
   },
   {
     term: "Draw / discard",
@@ -79,11 +84,10 @@ export const GLOSSARY = [
   },
   {
     term: "Currency",
-    definition: KEYWORD_DEFINITIONS.currency.description,
+    definition:
+      "Battle-earned currency is permanent. Gold is a currency, not a keyword or talent category. Spending is not implemented.",
   },
   ...KEYWORD_IDS.filter(
-    (id) =>
-      KEYWORD_DEFINITIONS[id].availability === "active" &&
-      !["health", "block", "mana", "currency"].includes(id),
+    (id) => KEYWORD_DEFINITIONS[id].availability === "active" && !["health", "block", "mana"].includes(id),
   ).map((id) => ({ term: KEYWORD_DEFINITIONS[id].label, definition: KEYWORD_DEFINITIONS[id].description })),
 ] as const;

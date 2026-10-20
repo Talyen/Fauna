@@ -35,6 +35,18 @@ export function TeamSelection({ game, send, inspect, deck }: Props & { deck: () 
           <p>{route.step === 3 ? "Boss" : `Encounter ${route.step + 1} of 3`}</p>
         </header>
         <section className="destination-grid" data-nav-row aria-label="Destinations">
+          {route.step === 3 && !route.campfireUsed ? (
+            <div className="destination-option">
+              <ArtCard
+                aspect="creature"
+                artwork={assetUrl("location.ember-grove")}
+                aria-label="Visit Campfire"
+                onClick={() => send({ type: "visitCampfire" })}
+              />
+              <h2>Campfire</h2>
+              <p>Rest</p>
+            </div>
+          ) : null}
           {route.offers.map((offer) => (
             <div className="destination-option" key={offer.location}>
               <ArtCard
@@ -385,10 +397,24 @@ export function Collection({
     </main>
   );
 }
-export function DeckCards({ game, inspect }: { game: GameState; inspect: Props["inspect"] }) {
+export function DeckCards({
+  game,
+  inspect,
+  pile,
+}: {
+  game: GameState;
+  inspect: Props["inspect"];
+  pile?: "draw" | "discard";
+}) {
+  const cards = game.cards
+    .filter((card) => !pile || game.battle?.[pile].includes(card.id))
+    .sort((a, b) => a.definitionId.localeCompare(b.definitionId) || a.id.localeCompare(b.id));
   return (
     <div className="deck-grid">
-      {game.cards.map((card) => {
+      {cards.length === 0 ? (
+        <p>{pile === "draw" ? "Draw Pile" : pile === "discard" ? "Discard Pile" : "Deck"} is empty.</p>
+      ) : null}
+      {cards.map((card) => {
         const owner = game.team.find((c) => c.id === card.ownerId)!;
         return (
           <ActionCard

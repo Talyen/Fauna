@@ -15,12 +15,18 @@ export const DAMAGE_LABELS = Object.fromEntries(DAMAGE_TYPES.map((id) => [id, ke
   DamageType,
   string
 >;
+export type CardEffect =
+  | { kind: "damage"; damageType: DamageType; amount: number; leech?: boolean }
+  | { kind: "status"; status: "armor" | "forge" | "thorns" | "dodge"; amount: number }
+  | { kind: "draw" | "mana" | "cleanse" | "purge"; amount: number };
 interface CardBase {
   id: string;
   species: SpeciesId;
   name: string;
   value: number;
   cost: number;
+  leech?: boolean;
+  effects?: readonly CardEffect[];
 }
 export type CardDefinition = CardBase &
   ({ effect: "attack"; damageType: DamageType } | { effect: Exclude<Effect, "attack"> });
@@ -68,7 +74,8 @@ export const SPECIES: readonly Species[] = [
     health: 30,
     color: "#c7b76b",
     trait: "Thorns",
-    description: "When hit, deal 2 damage back to the attacker.",
+    description:
+      "Start each battle with 2 Thorns. When an attack removes Health, retaliate with current Thorns, then lose 1 stack.",
   },
   {
     id: "moonhart",
@@ -104,25 +111,59 @@ const attack = (species: SpeciesId, name: string, value: number, damageType: Dam
   damageType,
 });
 export const CARDS: readonly CardDefinition[] = [
-  attack("mossback", "Bramble Bash", 6, "nature"),
-  card("mossback", "Shelter", "guard", 7),
+  {
+    ...attack("mossback", "Bramble Bash", 6, "nature"),
+    effects: [{ kind: "damage", damageType: "poison", amount: 2 }],
+  },
+  { ...card("mossback", "Shelter", "guard", 7), effects: [{ kind: "status", status: "armor", amount: 1 }] },
   card("mossback", "Forest Mantle", "teamGuard", 3),
-  attack("emberfox", "Cinder Strike", 8, "fire"),
+  {
+    ...attack("emberfox", "Cinder Strike", 8, "fire"),
+    effects: [{ kind: "damage", damageType: "burn", amount: 2 }],
+  },
   card("emberfox", "Warm Embers", "heal", 5),
-  card("emberfox", "Ember Ward", "guard", 6),
-  attack("stormfin", "Arc Bite", 7, "lightning"),
-  card("stormfin", "Storm Shelter", "teamGuard", 3),
-  card("stormfin", "Static Veil", "guard", 6),
+  {
+    ...card("emberfox", "Ember Ward", "guard", 6),
+    effects: [{ kind: "status", status: "forge", amount: 1 }],
+  },
+  {
+    ...attack("stormfin", "Arc Bite", 7, "lightning"),
+    effects: [{ kind: "damage", damageType: "stun", amount: 3 }],
+  },
+  { ...card("stormfin", "Storm Shelter", "teamGuard", 3), effects: [{ kind: "draw", amount: 1 }] },
+  {
+    ...card("stormfin", "Static Veil", "guard", 6),
+    effects: [{ kind: "status", status: "dodge", amount: 10 }],
+  },
   attack("silkmoth", "Glimmer", 5, "light"),
   card("silkmoth", "Mending Light", "heal", 8),
-  card("silkmoth", "Silken Ward", "guard", 7),
-  attack("briartooth", "Thornlash", 8, "physical"),
-  card("briartooth", "Briar Coat", "guard", 7),
+  { ...card("silkmoth", "Silken Ward", "guard", 7), effects: [{ kind: "cleanse", amount: 1 }] },
+  {
+    ...attack("briartooth", "Thornlash", 8, "physical"),
+    leech: true,
+    effects: [{ kind: "damage", damageType: "bleed", amount: 2, leech: true }],
+  },
+  {
+    ...card("briartooth", "Briar Coat", "guard", 7),
+    effects: [{ kind: "status", status: "thorns", amount: 1 }],
+  },
   card("briartooth", "Briar Shelter", "teamGuard", 3),
-  attack("moonhart", "Moonbeam", 8, "light"),
-  card("moonhart", "Silver Light", "heal", 7),
+  {
+    ...attack("moonhart", "Moonbeam", 8, "light"),
+    effects: [
+      { kind: "damage", damageType: "freeze", amount: 4 },
+      { kind: "purge", amount: 1 },
+    ],
+  },
+  { ...card("moonhart", "Silver Light", "heal", 7), effects: [{ kind: "mana", amount: 1 }] },
   card("moonhart", "Night Shelter", "teamGuard", 4),
 ];
+export function enemyCard(card: CardDefinition): CardDefinition {
+  return {
+    ...card,
+    effects: card.effects?.filter((effect) => ["damage", "status", "cleanse", "purge"].includes(effect.kind)),
+  };
+}
 export const INITIAL_SPECIES = SPECIES.slice(0, 5).map((s) => s.id);
 export function species(id: SpeciesId): Species {
   const result = SPECIES.find((s) => s.id === id);
@@ -135,16 +176,36 @@ export function definition(id: string): CardDefinition {
   return result;
 }
 export function cardText(card: CardDefinition, level = 0, value = card.value + level * 2): string {
+  let text: string;
   switch (card.effect) {
     case "attack":
-      return `Deal ${value} ${DAMAGE_LABELS[card.damageType]} damage.`;
+      text = `Deal ${value} ${DAMAGE_LABELS[card.damageType]} damage.`;
+      break;
     case "guard":
-      return `Give an ally ${value} block this turn.`;
+      text = `Give an ally ${value} Block.`;
+      break;
     case "heal":
-      return `Restore ${value} health to a living ally.`;
+      text = `Restore ${value} Health to a living ally.`;
+      break;
     case "teamGuard":
-      return `Give every living ally ${value} block this turn.`;
+      text = `Give every living ally ${value} Block.`;
+      break;
   }
+  for (const effect of card.effects ?? []) {
+    text +=
+      " " +
+      (effect.kind === "damage"
+        ? `Deal ${effect.amount} ${DAMAGE_LABELS[effect.damageType]} damage${effect.leech ? " with Leech" : ""}.`
+        : effect.kind === "status"
+          ? `Acting creature gains ${effect.amount} ${keywordLabel(effect.status)}.`
+          : effect.kind === "draw"
+            ? `Draw ${effect.amount}.`
+            : effect.kind === "mana"
+              ? `Restore ${effect.amount} Mana.`
+              : `${effect.kind === "cleanse" ? "Cleanse acting creature" : "Purge target"}: remove ${effect.amount} effect${effect.amount === 1 ? "" : "s"}.`);
+  }
+  if (card.leech) text += " Leech.";
+  return text;
 }
 /** Stable legacy route; new expeditions use the saved offers in destinations.ts. */
 export const ENCOUNTERS = [

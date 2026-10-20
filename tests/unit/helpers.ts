@@ -1,3 +1,4 @@
+import { controlled } from "../../src/game/combat";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
 import { CARDS, definition, species, type SpeciesId } from "../../src/game/content";
@@ -48,7 +49,14 @@ export function accept(s: GameState, c: Command) {
 }
 export function victoryReady(s = run()) {
   return produce(s, (d) => {
-    d.battle!.enemies.forEach((e, i) => (e.health = i === 0 ? 1 : 0));
+    d.battle!.enemies.forEach((e, i) => {
+      e.health = i === 0 ? 1 : 0;
+      e.block = 0;
+      e.combat.armor = 0;
+      e.combat.controlled = i === 0 ? "stun" : null;
+      e.combat.cooldown = 0;
+      e.combat.skipped = false;
+    });
     const attack = d.cards.find((c) => definition(c.definitionId).effect === "attack")!;
     d.battle!.hand = [attack.id];
     d.battle!.buffer = [];
@@ -67,11 +75,16 @@ export function policy(s: GameState): Command {
     return { type: "beginBattle", destination: s.expedition?.offers[0]?.location };
   if (s.phase === "recruit") return { type: "skipRecruit" };
   if (s.phase === "relic") return { type: "chooseRelic", relic: s.reward!.relics[0]! };
+  if (s.phase === "campfire") return { type: "rest" };
   const b = s.battle!;
   const enemy = b.enemies.filter((e) => e.health > 0).sort((a, b) => a.health - b.health)[0]!;
   const cards = b.hand
     .map((id) => s.cards.find((c) => c.id === id)!)
-    .filter((c) => definition(c.definitionId).cost <= b.mana);
+    .filter(
+      (c) =>
+        definition(c.definitionId).cost <= b.mana &&
+        s.team.some((unit) => unit.id === c.ownerId && unit.health > 0 && !controlled(unit)),
+    );
   const attacks = cards.filter((c) => definition(c.definitionId).effect === "attack");
   const attack = attacks.sort(
     (a, b) =>

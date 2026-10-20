@@ -1,11 +1,29 @@
 import type { SpeciesId, DamageType } from "./content";
 import type { Keyword, KeywordXP, RelicId } from "./progression";
+export interface CombatState {
+  armor: number;
+  forge: number;
+  thorns: number;
+  dodge: number;
+  burn: number;
+  poison: number;
+  bleed: number;
+  stun: number;
+  freeze: number;
+  controlled: "stun" | "freeze" | null;
+  cooldown: number;
+  skipped: boolean;
+  deathDoorUsed: boolean;
+  grace: number;
+  bleedLeech: { sourceId: string; amount: number }[];
+}
 export interface Creature {
   id: string;
   species: SpeciesId;
   health: number;
   block: number;
   attacked: boolean;
+  combat?: CombatState;
 }
 export interface Card {
   id: string;
@@ -21,10 +39,14 @@ export interface Enemy {
   maxHealth: number;
   damage: number;
   targetId: string;
+  block: number;
+  combat: CombatState;
+  lastAbility: string | null;
 }
 export interface Battle {
   turn: number;
   mana: number;
+  maxMana: number;
   draw: string[];
   hand: string[];
   buffer: string[];
@@ -47,11 +69,11 @@ export interface JourneySummary {
   lastBattle: { xp: KeywordXP; currency: number } | null;
 }
 export interface GameState {
-  version: 11;
+  version: 12;
   discovery: { encountered: SpeciesId[]; recruited: SpeciesId[] };
   revision: number;
   rng: number;
-  phase: "draft" | "teamSelection" | "battle" | "recruit" | "relic" | "victory" | "defeat";
+  phase: "draft" | "teamSelection" | "battle" | "recruit" | "relic" | "campfire" | "victory" | "defeat";
   unlocked: SpeciesId[];
   wins: number;
   selected: SpeciesId[];
@@ -65,6 +87,7 @@ export interface GameState {
   encounter: number;
   expedition: {
     biome: number;
+    campfireUsed?: boolean;
     step: number;
     offers: { location: string; pack: number }[];
     chosen: string | null;
@@ -86,6 +109,8 @@ export type Command =
   | { type: "swap"; activeId: string; reserve: string }
   | { type: "play"; cardId: string; targetId?: string }
   | { type: "endTurn" }
+  | { type: "visitCampfire" }
+  | { type: "rest" }
   | { type: "recruit"; species: SpeciesId; replace?: string }
   | { type: "skipRecruit" }
   | { type: "chooseRelic"; relic: RelicId }
@@ -95,7 +120,7 @@ export type Command =
   | { type: "newRun"; seed: number }
   | { type: "abandon" };
 export interface GameEvent {
-  kind: "action" | "damage" | "block" | "heal" | "knockout" | "turn" | "reward" | "victory";
+  kind: "action" | "damage" | "block" | "heal" | "knockout" | "turn" | "reward" | "victory" | "status";
   text: string;
   actorId?: string;
   targetId?: string;

@@ -4,7 +4,7 @@ import { Tooltip, TooltipTrigger, TooltipContent } from "../components/ui/toolti
 /** Adapted from Alchemy's ManaPanel: independent full/spent art and masked hover glints. */
 export function ManaCrystals({
   mana,
-  maximum = 3,
+  maximum = 4,
   previewCost = 0,
 }: {
   mana: number;

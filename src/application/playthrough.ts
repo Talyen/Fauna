@@ -1,3 +1,4 @@
+import { controlled } from "../game/combat";
 import { createSession, type Session } from "./session";
 import { createGame } from "../game/engine";
 import { decodeSave, encodeSave } from "../game/save";
@@ -50,7 +51,10 @@ function actor(config: JourneyConfig) {
     switch (state.phase) {
       case "draft":
         return state.selected.length ? { type: "start" } : { type: "draft", species: config.starter };
+      case "campfire":
+        return { type: "rest" };
       case "teamSelection":
+        if (state.expedition?.step === 3 && !state.expedition.campfireUsed) return { type: "visitCampfire" };
         return {
           type: "beginBattle",
           destination: state.expedition ? pick(state.expedition.offers).location : undefined,
@@ -68,15 +72,15 @@ function actor(config: JourneyConfig) {
         return { type: "newRun", seed: (config.seed + state.revision) >>> 0 };
       case "battle": {
         const battle = state.battle!;
-        const fallen = state.team.find((creature) => creature.health === 0);
-        const reserve = state.reserves.find((creature) => creature.health > 0);
+        const fallen = state.team.find((creature) => creature.health === 0 || controlled(creature));
+        const reserve = state.reserves.find((creature) => creature.health > 0 && !controlled(creature));
         if (fallen && reserve) return { type: "swap", activeId: fallen.id, reserve: reserve.id };
         const options: { command: Command; score: number }[] = [];
         for (const id of battle.hand) {
           const card = state.cards.find((entry) => entry.id === id)!;
           const owner = state.team.find((creature) => creature.id === card.ownerId)!;
           const def = definition(card.definitionId);
-          if (owner.health === 0 || def.cost > battle.mana) continue;
+          if (owner.health === 0 || controlled(owner) || def.cost > battle.mana) continue;
           if (def.effect === "attack")
             for (const enemy of battle.enemies.filter((entry) => entry.health > 0))
               options.push({

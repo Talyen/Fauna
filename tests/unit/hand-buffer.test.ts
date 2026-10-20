@@ -7,15 +7,15 @@ import { accept, run } from "./helpers";
 
 function buffered() {
   return produce(run(), (d) => {
-    d.battle!.hand = d.cards.slice(0, 5).map((card) => card.id);
-    d.battle!.buffer = d.cards.slice(5, 7).map((card) => card.id);
-    d.battle!.draw = d.cards.slice(7).map((card) => card.id);
+    d.battle!.hand = d.cards.slice(0, 7).map((card) => card.id);
+    d.battle!.buffer = d.cards.slice(7, 9).map((card) => card.id);
+    d.battle!.draw = d.cards.slice(9).map((card) => card.id);
     d.battle!.discard = [];
   });
 }
 
 describe("hidden hand overflow", () => {
-  it("caps opening draws at five and puts the extra Wind Feather draw in the buffer", () => {
+  it("draws four opening cards plus Wind Feather without exceeding the seven-card hand", () => {
     const s = accept(
       produce(run(), (d) => {
         d.phase = "teamSelection";
@@ -25,8 +25,8 @@ describe("hidden hand overflow", () => {
       { type: "beginBattle" },
     );
     expect(s.battle!.hand).toHaveLength(5);
-    expect(s.battle!.buffer).toHaveLength(1);
-    expect(s.battle!.draw).toHaveLength(3);
+    expect(s.battle!.buffer).toHaveLength(0);
+    expect(s.battle!.draw).toHaveLength(4);
     expect(decodeSave(encodeSave(s))).toEqual(s);
   });
 
@@ -41,34 +41,32 @@ describe("hidden hand overflow", () => {
     const preview = previewPlay(s, s.battle!.hand[0]!, "enemy-0");
     expect(preview.state.battle!.hand.at(-1)).toBe(first);
     expect(encodeSave(s)).toBe(before);
-    const rng = s.rng;
     s = accept(s, { type: "play", cardId: s.battle!.hand[0]!, targetId: "enemy-0" });
-    expect(s.battle!.hand).toHaveLength(5);
+    expect(s.battle!.hand).toHaveLength(7);
     expect(s.battle!.hand.at(-1)).toBe(first);
     expect(s.battle!.buffer).toEqual([second]);
-    expect(s.rng).toBe(rng);
+    expect(s.rng).toBe(preview.state.rng);
     s = accept(s, { type: "play", cardId: s.battle!.hand[0]!, targetId: "ally-0" });
-    expect(s.battle!.hand).toHaveLength(5);
+    expect(s.battle!.hand).toHaveLength(7);
     expect(s.battle!.hand.at(-1)).toBe(second);
     expect(s.battle!.buffer).toEqual([]);
     expect(decodeSave(encodeSave(s))).toEqual(s);
   });
 
   it.each([false, true])(
-    "discards hand and buffer together on explicit or automatic turn end (automatic %s)",
+    "discards the hand while preserving oldest buffered cards on explicit or automatic turn end (automatic %s)",
     (automatic) => {
       const s = produce(buffered(), (d) => {
         if (automatic) d.battle!.mana = 1;
       });
       const queued = [...s.battle!.buffer];
-      const top = [...s.battle!.draw].reverse();
       const next = accept(
         s,
         automatic ? { type: "play", cardId: s.battle!.hand[0]!, targetId: "enemy-0" } : { type: "endTurn" },
       );
       expect(next.battle!.turn).toBe(2);
-      expect(next.battle!.hand).toHaveLength(5);
-      expect(next.battle!.hand.slice(0, top.length)).toEqual(top);
+      expect(next.battle!.hand).toHaveLength(automatic ? 5 : 6);
+      expect(next.battle!.hand.slice(0, automatic ? 1 : 2)).toEqual(automatic ? queued.slice(1) : queued);
       expect(next.battle!.buffer).toEqual([]);
       expect(
         queued.every((id) =>
@@ -87,7 +85,7 @@ describe("hidden hand overflow", () => {
       d.battle!.buffer = [owned[0]!.id];
       d.battle!.hand = d.cards
         .filter((card) => card.id !== owned[0]!.id)
-        .slice(0, 5)
+        .slice(0, 7)
         .map((card) => card.id);
       d.battle!.draw = d.cards
         .filter((card) => ![...d.battle!.hand, ...d.battle!.buffer].includes(card.id))

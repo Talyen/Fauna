@@ -22,7 +22,7 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Physical",
       "damage",
       "active",
-      "Physical damage. No resistance or status effect is implied.",
+      "Physical damage gains Forge and is reduced by Armor after Block. Attacks have a 5% critical chance for double damage.",
     ),
     fire: entry("Fire", "damage", "active", "Fire damage. Does not apply Burn."),
     ice: entry("Ice", "damage", "active", "Ice damage. Does not apply Freeze."),
@@ -31,7 +31,7 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Poison",
       "damage",
       "active",
-      "Poison damage. Currently immediate damage only; no damage over time.",
+      "Poison hits add damage dealt as Poison. At turn start it deals its stacks as damage, then loses 20% (at least 1).",
     ),
     nature: entry("Nature", "damage", "active", "Nature damage. No resistance or status effect is implied."),
     light: entry("Light", "damage", "active", "Light damage. No resistance or status effect is implied.", [
@@ -47,13 +47,13 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Mana",
       "resource",
       "active",
-      "The shared resource spent to play action cards. Your team starts each turn with 3 mana.",
+      "The shared resource spent to play action cards. Your team starts each turn with 4 Mana. Mana is shared; each turn draws 4 cards, with up to 7 in hand.",
     ),
     block: entry(
       "Block",
       "status",
       "active",
-      "Absorbs incoming damage before health. Each point absorbs one damage and is spent. Remaining block expires at the start of your next turn.",
+      "Absorbs incoming damage before health. Each point absorbs one damage and is spent. Remaining Block halves at the start of your next turn, rounded normally.",
     ),
     heal: entry(
       "Healing",
@@ -66,31 +66,24 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Thorns",
       "effect",
       "active",
-      "Briartooth's passive deals 2 Nature damage back to an attacker when an attack removes health. Fully blocked hits do not trigger it.",
+      "Thorns retaliate with Nature damage when an opposing attack removes Health, then lose 1 stack. Briartooth begins battle with 2 Thorns.",
       ["Thorn"],
-    ),
-    currency: entry(
-      "Currency",
-      "resource",
-      "active",
-      "Battle-earned currency is permanent. Spending will be added in a future update.",
-      ["Gold"],
     ),
     dodge: entry(
       "Dodge",
       "status",
-      "planned",
-      "Proposed: avoid an attack before damage and attached status effects resolve.",
+      "active",
+      "Both sides have a 5% chance to avoid each attack packet before defenses. Controlled targets cannot Dodge. Total Dodge is capped at 75%.",
       ["Dodges", "Dodged", "Dodging"],
     ),
     armor: entry(
       "Armor",
       "status",
-      "planned",
-      "Proposed: reduce incoming Physical and Stun damage; lose a stack when damaged.",
+      "active",
+      "Reduce incoming Physical and Stun damage; lose a stack when damaged.",
     ),
-    forge: entry("Forge", "status", "planned", "Proposed: increase Physical and Stun damage."),
-    burn: entry("Burn", "status", "planned", "Proposed: deal damage each turn, then halve the stacks.", [
+    forge: entry("Forge", "status", "active", "Increase Physical and Stun damage."),
+    burn: entry("Burn", "damage", "active", "Deal damage each turn, then halve the stacks.", [
       "Burns",
       "Burning",
       "Burned",
@@ -98,52 +91,31 @@ export const KEYWORD_DEFINITIONS = freeze(
     freeze: entry(
       "Freeze",
       "status",
-      "planned",
-      "Proposed: build toward Frozen, which skips a turn. Fauna's threshold is undecided.",
+      "active",
+      "Damage builds toward Frozen: skip one turn at half an ally's maximum Health or an enemy's pre-hit Health. Recovery grants 3 turns of shared Stun/Freeze immunity.",
       ["Freezes", "Frozen"],
     ),
-    bleed: entry("Bleed", "status", "planned", "Proposed: repeat damage next turn, then clear.", [
-      "Bleeds",
-      "Bleeding",
-    ]),
+    bleed: entry("Bleed", "damage", "active", "Repeat damage next turn, then clear.", ["Bleeds", "Bleeding"]),
     stun: entry(
       "Stun",
       "status",
-      "planned",
-      "Proposed: build toward Stunned, which skips a turn. Fauna's threshold is undecided.",
+      "active",
+      "Damage builds toward Stunned: skip one turn at half an ally's maximum Health or an enemy's pre-hit Health. Recovery grants 3 turns of shared Stun/Freeze immunity.",
       ["Stunned"],
     ),
-    leech: entry("Leech", "effect", "planned", "Proposed: restore health based on damage actually dealt.", [
-      "Leeches",
-      "Leeching",
-    ]),
-    wish: entry("Wish", "card", "planned", "Proposed: choose an action card from an offer."),
-    consume: entry(
-      "Consume",
-      "card",
-      "planned",
-      "Proposed: remove the played card for the remainder of the battle.",
-      ["Consumed"],
+    leech: entry(
+      "Leech",
+      "effect",
+      "active",
+      "Restore half the Health damage dealt, rounded normally. Bleed pays Leech with its later tick.",
+      ["Leeches", "Leeching"],
     ),
-    archery: entry(
-      "Archery",
-      "card",
-      "planned",
-      "Proposed: a ranged attack tag, independent of damage type.",
-    ),
-    companion: entry(
-      "Companion",
-      "card",
-      "planned",
-      "Proposed: summon an additional ally. Its relationship to deployed creatures is undecided.",
-      ["Companions"],
-    ),
-    cleanse: entry("Cleanse", "effect", "planned", "Proposed: remove harmful effects from an ally.", [
+    cleanse: entry("Cleanse", "effect", "active", "Remove harmful effects from an ally.", [
       "Cleanses",
       "Cleansed",
       "Cleansing",
     ]),
-    purge: entry("Purge", "effect", "planned", "Proposed: remove beneficial effects from an enemy.", [
+    purge: entry("Purge", "effect", "active", "Remove beneficial effects from an enemy.", [
       "Purges",
       "Purged",
       "Purging",
@@ -166,10 +138,26 @@ export const DAMAGE_TYPES = freeze([
   "poison",
   "nature",
   "light",
+  "burn",
+  "freeze",
+  "bleed",
+  "stun",
 ] as const);
 export type DamageType = (typeof DAMAGE_TYPES)[number];
 // Vocabulary alone does not grant XP or talents.
-export const PROGRESSION_KEYWORDS = freeze([...DAMAGE_TYPES, "block", "heal"] as const);
+export const PROGRESSION_KEYWORDS = freeze([
+  ...DAMAGE_TYPES,
+  "block",
+  "heal",
+  "armor",
+  "forge",
+  "thorns",
+  "dodge",
+  "leech",
+  "mana",
+  "cleanse",
+  "purge",
+] as const);
 export type ProgressionKeyword = (typeof PROGRESSION_KEYWORDS)[number];
 export const EFFECT_KEYWORDS = freeze(
   {
@@ -180,12 +168,23 @@ export const EFFECT_KEYWORDS = freeze(
   } as const,
   true,
 );
-export function definitionKeywords(
-  definition:
-    | { effect: "attack"; damageType: DamageType }
-    | { effect: Exclude<keyof typeof EFFECT_KEYWORDS, "attack"> },
-): ProgressionKeyword[] {
-  return definition.effect === "attack" ? [definition.damageType] : [...EFFECT_KEYWORDS[definition.effect]];
+export function definitionKeywords(definition: {
+  effect: keyof typeof EFFECT_KEYWORDS;
+  damageType?: DamageType;
+  leech?: boolean;
+  effects?: readonly { kind: string; status?: string; damageType?: DamageType; leech?: boolean }[];
+}): ProgressionKeyword[] {
+  const result: ProgressionKeyword[] =
+    definition.effect === "attack" ? [definition.damageType!] : [...EFFECT_KEYWORDS[definition.effect]];
+  for (const effect of definition.effects ?? []) {
+    const keyword =
+      effect.kind === "damage" ? effect.damageType : effect.kind === "status" ? effect.status : effect.kind;
+    if (PROGRESSION_KEYWORDS.includes(keyword as ProgressionKeyword))
+      result.push(keyword as ProgressionKeyword);
+    if (effect.leech) result.push("leech");
+  }
+  if (definition.leech) result.push("leech");
+  return [...new Set(result)];
 }
 
 export interface KeywordTextPart {

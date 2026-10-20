@@ -43,6 +43,7 @@ export function RosterPicker({
       health={creature.health}
       maxHealth={species(creature.species).health}
       block={creature.block}
+      combat={creature.combat}
       selected={selected === creature.id}
       disabled={!lineup && !isActive && creature.health === 0}
       label={`${species(creature.species).name}, ${isActive ? (lineup ? "starting" : "deployed") : "reserve"}`}

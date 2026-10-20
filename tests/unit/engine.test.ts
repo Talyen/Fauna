@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
+import { combat, hit } from "../../src/game/combat";
 import { definition, species, SPECIES } from "../../src/game/content";
 import { decodeSave, encodeSave, validateContent } from "../../src/game/save";
 import { accept, policy, run, teamRun, winBattle } from "./helpers";
@@ -19,7 +20,7 @@ describe("game commands", () => {
     expect(s.team).toHaveLength(1);
     expect(s.cards).toHaveLength(3);
     expect(s.battle!.hand).toHaveLength(3);
-    expect(s.battle!.mana).toBe(3);
+    expect(s.battle!.mana).toBe(4);
   });
   it("replaces the chosen starter without accumulating choices or consuming RNG", () => {
     let s = createGame();
@@ -66,40 +67,30 @@ describe("game commands", () => {
     });
     const r = dispatch(s, { type: "play", cardId: attack.id, targetId: "enemy-0" });
     expect(r.accepted).toBe(true);
-    expect(r.state.battle!.mana).toBe(2);
-    expect(r.state.battle!.enemies[0]!.health).toBe(8);
-    expect(r.events.map((e) => e.kind)).toEqual(["action", "damage"]);
+    expect(r.state.battle!.mana).toBe(3);
+    expect(r.state.battle!.enemies[0]!.health).toBe(6);
+    expect(r.events.map((e) => e.kind)).toEqual(["action", "damage", "damage", "damage", "status", "damage"]);
     expect(r.events.find((e) => e.kind === "damage")?.damageType).toBe("fire");
     expect(r.state.battle!.discard).toContain(attack.id);
   });
-  it("derives enemy and reflected damage types after a current save round trip", () => {
-    const initial = teamRun(42, ["briartooth", "emberfox", "stormfin"]);
-    const s = decodeSave(
-      encodeSave(
-        produce(initial, (d) => {
-          d.battle!.enemies.forEach((e) => {
-            e.targetId = "ally-0";
-          });
-        }),
-      ),
-    );
-    const r = dispatch(s, { type: "endTurn" });
-    expect(r.accepted).toBe(true);
-    const damage = r.events.filter((e) => e.kind === "damage");
-    expect(damage.map((e) => e.damageType)).toEqual([
-      "nature",
-      "nature",
-      "fire",
-      "nature",
-      "light",
-      "nature",
-    ]);
-    expect(r.state.team[0]!.health).toBe(18);
+  it("persists enemy repertoire history and never repeats consecutive abilities", () => {
+    let s = decodeSave(encodeSave(run()));
+    for (let turn = 0; turn < 4 && s.phase === "battle"; turn++) {
+      const previous = s.battle!.enemies.map((enemy) => enemy.lastAbility);
+      s = accept(s, { type: "endTurn" });
+      s.battle!.enemies.forEach((enemy, index) => {
+        if (enemy.health > 0 && !enemy.combat.skipped) {
+          expect(enemy.lastAbility).not.toBe(previous[index]);
+          expect(definition(enemy.lastAbility!).species).toBe(enemy.species);
+        }
+      });
+      expect(decodeSave(encodeSave(s))).toEqual(s);
+    }
   });
   it("keeps knockout slots inert and never draws them while living creatures remain", () => {
     let s = run();
     s = produce(s, (d) => {
-      d.team[0]!.health = 1;
+      d.team[0]!.health = 0;
       d.battle!.enemies.forEach((e) => (e.targetId = "ally-0"));
     });
     s = accept(s, { type: "endTurn" });
@@ -112,29 +103,35 @@ describe("game commands", () => {
       s = accept(s, { type: "endTurn" });
     }
   });
-  it("grants guard bonuses and removes residual block at the next player turn", () => {
+  it("grants guard bonuses and halves residual Block at the next player turn", () => {
     let s = run();
     const guard = s.cards.find((c) => c.definitionId === "mossback-guard")!;
     s = produce(s, (d) => {
       d.battle!.hand = [guard.id];
       d.battle!.draw = d.cards.filter((c) => c.id !== guard.id).map((c) => c.id);
-      d.battle!.enemies.forEach((e) => (e.targetId = "ally-0"));
+      d.battle!.enemies.forEach((e) => {
+        e.targetId = "ally-0";
+        e.combat.controlled = "stun";
+      });
     });
     s = accept(s, { type: "play", cardId: guard.id, targetId: "ally-0" });
     expect(s.team[0]!.block).toBe(9);
     s = accept(s, { type: "endTurn" });
-    expect(s.team[0]!.health).toBe(29);
-    expect(s.team[0]!.block).toBe(0);
-    expect(s.battle!.mana).toBe(3);
+    expect(s.team[0]!.health).toBe(32);
+    expect(s.team[0]!.block).toBe(5);
+    expect(s.battle!.mana).toBe(4);
     expect(s.battle!.turn).toBe(2);
   });
   it("ends the expedition when the whole team falls", () => {
     let s = run();
     s = produce(s, (d) => {
-      d.team.forEach((c) => (c.health = 1));
+      d.team.forEach((c) => {
+        c.health = 1;
+        combat(c).deathDoorUsed = true;
+      });
       d.battle!.enemies[0]!.damage = 100;
     });
-    for (let i = 0; i < 3 && s.phase === "battle"; i++) s = accept(s, { type: "endTurn" });
+    for (let i = 0; i < 20 && s.phase === "battle"; i++) s = accept(s, { type: "endTurn" });
     expect(s.phase).toBe("defeat");
     expect(s.reward!.outcome).toBe("defeat");
     expect(dispatch(s, { type: "endTurn" }).accepted).toBe(false);
@@ -246,7 +243,7 @@ describe("creature traits and deck circulation", () => {
       d.battle!.draw = d.cards.filter((c) => ![attack.id, heal.id].includes(c.id)).map((c) => c.id);
     });
     s = accept(s, { type: "play", cardId: attack.id, targetId: "enemy-0" });
-    expect(s.battle!.enemies[0]!.health).toBe(10);
+    expect(s.battle!.enemies[0]!.health).toBe(7);
     s = accept(s, { type: "play", cardId: heal.id, targetId: "ally-2" });
     expect(s.team[2]!.health).toBe(20);
     const knocked = produce(s, (d) => {
@@ -259,13 +256,16 @@ describe("creature traits and deck circulation", () => {
   it("deals Thorns only for health damage and grants Moonlit starting block", () => {
     let s = teamRun(3, ["briartooth", "moonhart", "mossback"]);
     expect(s.team[1]!.block).toBe(4);
+    const events: Parameters<typeof hit>[5] = [];
     s = produce(s, (d) => {
-      d.battle!.enemies.forEach((e) => (e.targetId = "ally-0"));
       d.team[0]!.block = 4;
+      hit(d, d.battle!.enemies[0]!, d.team[0]!, 4, "nature", events, { retaliation: true });
+      expect(d.battle!.enemies[0]!.health).toBe(18);
+      d.rng = 1;
+      hit(d, d.battle!.enemies[1]!, d.team[0]!, 4, "fire", events);
     });
-    s = accept(s, { type: "endTurn" });
-    expect(s.battle!.enemies[0]!.health).toBe(18);
     expect(s.battle!.enemies[1]!.health).toBe(14);
+    expect(s.team[0]!.combat!.thorns).toBe(1);
   });
   it("reshuffles deterministically and retains every live card exactly once across zones", () => {
     let s = run(8);
@@ -275,7 +275,7 @@ describe("creature traits and deck circulation", () => {
     expect(new Set(zones).size).toBe(9);
     expect(zones).toHaveLength(9);
     expect(s.battle!.hand).not.toEqual(firstHand);
-    expect(s.battle!.hand).toHaveLength(5);
-    expect(s.battle!.discard).toHaveLength(0);
+    expect(s.battle!.hand).toHaveLength(4);
+    expect(s.battle!.discard).toHaveLength(4);
   });
 });

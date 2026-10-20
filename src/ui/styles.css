@@ -256,14 +256,15 @@ button {
   transition-duration: var(--motion-fast);
 }
 .battle-screen {
-  min-height: calc(100dvh - var(--screen-item-gap) * 2);
+  height: calc(100dvh - var(--screen-item-gap) * 2);
+  overflow-y: auto;
   padding-bottom: calc(var(--battle-hand-height) - var(--hand-rest-inset) + var(--screen-item-gap));
   margin: auto;
   display: flex;
   flex-direction: column;
   position: relative;
   isolation: isolate;
-  justify-content: center;
+  justify-content: flex-start;
   gap: var(--screen-item-gap);
 }
 .enemy-row,
@@ -854,10 +855,6 @@ button {
 [data-keyword="thorns"] {
   color: var(--keyword-thorns);
 }
-[data-combat-tone="currency"],
-[data-keyword="currency"] {
-  color: var(--keyword-currency);
-}
 [data-combat-tone="dodge"],
 [data-keyword="dodge"] {
   color: var(--keyword-dodge);
@@ -889,22 +886,6 @@ button {
 [data-combat-tone="leech"],
 [data-keyword="leech"] {
   color: var(--keyword-leech);
-}
-[data-combat-tone="wish"],
-[data-keyword="wish"] {
-  color: var(--keyword-wish);
-}
-[data-combat-tone="consume"],
-[data-keyword="consume"] {
-  color: var(--keyword-consume);
-}
-[data-combat-tone="archery"],
-[data-keyword="archery"] {
-  color: var(--keyword-archery);
-}
-[data-combat-tone="companion"],
-[data-keyword="companion"] {
-  color: var(--keyword-companion);
 }
 [data-combat-tone="cleanse"],
 [data-keyword="cleanse"] {
@@ -1256,4 +1237,52 @@ button {
 .collection-entry p {
   font-size: var(--text-secondary);
   color: var(--muted-foreground);
+}
+
+.combat-status {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--screen-item-gap);
+  font-size: var(--text-secondary);
+}
+.battle-piles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--screen-section-gap);
+}
+.battle-piles p {
+  text-align: center;
+  margin-top: var(--screen-item-gap);
+}
+.campfire-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--screen-section-gap);
+}
+.campfire-roster {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--screen-item-gap);
+}
+.campfire-roster > div {
+  width: var(--art-landscape-width);
+  text-align: center;
+}
+
+@media (min-width: 1500px) {
+  .battle-screen {
+    justify-content: center;
+  }
+  .battle-piles {
+    position: absolute;
+    inset: var(--screen-section-gap) 0 auto;
+    pointer-events: none;
+  }
+  .battle-piles > div {
+    pointer-events: auto;
+  }
 }

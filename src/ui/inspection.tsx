@@ -1,3 +1,5 @@
+import { CombatStatus } from "./combat-status";
+import { enemyInspectionValue } from "../game/rules";
 import { assetUrl } from "./assets";
 import { KeywordText } from "./keyword-text";
 import { useLayoutEffect, useRef, useState } from "react";
@@ -204,8 +206,23 @@ export function Inspector({
             <DialogDescription className="sr-only">
               Action artwork and final effect. Previous and Next browse this species' cards.
             </DialogDescription>
-            <ActionCard card={card} ownerName={creature.name} actor={actor} presentation onClick={() => {}} />
-            <ActionDetails card={card} ownerName={creature.name} modifiers={game} actor={actor} />
+            <ActionCard
+              card={card}
+              ownerName={creature.name}
+              actor={actor}
+              enemy={!!enemy}
+              enemyValue={enemy ? enemyInspectionValue(enemy, definition(card.definitionId)) : undefined}
+              presentation
+              onClick={() => {}}
+            />
+            <ActionDetails
+              card={card}
+              ownerName={creature.name}
+              modifiers={enemy ? undefined : game}
+              enemy={!!enemy}
+              enemyValue={enemy ? enemyInspectionValue(enemy, definition(card!.definitionId)) : undefined}
+              actor={actor}
+            />
             <nav className="inspection-action-navigation" aria-label="Action cards">
               <Button variant="ghost" size="icon" aria-label="Previous action" onClick={() => cycle(-1)}>
                 <ChevronLeft aria-hidden="true" />
@@ -242,6 +259,14 @@ export function Inspector({
                 health
                 {!enemy && ally?.block ? ` · ${ally.block} block` : ""}
               </p>
+              <CombatStatus
+                combat={
+                  ally?.combat ??
+                  (enemy && "combat" in enemy
+                    ? (enemy.combat as import("../game/types").CombatState)
+                    : undefined)
+                }
+              />
               {enemy ? <h2 className="inspection-kit-label">Species kit · {creature.name}</h2> : null}
               <div className="inspection-passive">
                 <strong>{creature.trait}</strong>
@@ -256,7 +281,11 @@ export function Inspector({
                     card={action}
                     ownerName={creature.name}
                     actor={actor}
-                    modifiers={game}
+                    modifiers={enemy ? undefined : game}
+                    enemy={!!enemy}
+                    enemyValue={
+                      enemy ? enemyInspectionValue(enemy, definition(action.definitionId)) : undefined
+                    }
                     onClick={() => setSelected(index)}
                     onInspect={() => setSelected(index)}
                   />

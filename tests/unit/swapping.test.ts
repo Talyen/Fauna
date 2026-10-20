@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
+import { combat } from "../../src/game/combat";
 import { dispatch } from "../../src/game/engine";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { CARDS, species } from "../../src/game/content";
@@ -33,7 +34,7 @@ describe("free combat swaps", () => {
     });
     const after = accept(before, { type: "swap", activeId: "ally-1", reserve: "recruit-silkmoth" });
     expect(after.rng).toBe(before.rng);
-    expect(after.battle!.mana).toBe(3);
+    expect(after.battle!.mana).toBe(4);
     expect(after.battle!.turn).toBe(1);
     for (const zone of ["hand", "draw", "discard"] as const)
       expect(after.battle![zone]).toEqual(before.battle![zone]);
@@ -61,14 +62,14 @@ describe("free combat swaps", () => {
     s = accept(s, { type: "swap", activeId: s.team[1]!.id, reserve: "recruit-silkmoth" });
     s = accept(s, { type: "endTurn" });
     const fox = s.reserves.find((c) => c.species === "emberfox")!;
-    expect(fox.block).toBe(0);
+    expect(fox.block).toBe(3);
     expect(fox.attacked).toBe(false);
     expect(decodeSave(encodeSave(s))).toEqual(s);
   });
   it("allows recovery after the deployed row falls, but rejects knocked-out reserves", () => {
     let s = produce(withReserves(), (d) => {
       d.team.forEach((c) => {
-        c.health = 1;
+        c.health = 0;
         c.block = 0;
       });
       d.encounter = 1;
@@ -78,14 +79,14 @@ describe("free combat swaps", () => {
     s = accept({ ...s, phase: "teamSelection", battle: null }, { type: "beginBattle" });
     s = produce(s, (d) =>
       d.team.forEach((c) => {
-        c.health = 1;
+        c.health = 0;
         c.block = 0;
       }),
     );
     s = accept(s, { type: "endTurn" });
     expect(s.team.every((c) => c.health === 0)).toBe(true);
     expect(s.phase).toBe("battle");
-    expect(s.battle!.mana).toBe(3);
+    expect(s.battle!.mana).toBe(4);
     expect(decodeSave(encodeSave(s))).toEqual(s);
     const ids = [...s.battle!.hand];
     const slot = s.cards.find((c) => ids.includes(c.id))!.ownerId;
@@ -107,12 +108,13 @@ describe("free combat swaps", () => {
       d.team.forEach((c) => {
         c.health = 1;
         c.block = 0;
+        combat(c).deathDoorUsed = true;
       });
       d.reserves.forEach((c) => {
         c.health = 0;
       });
     });
-    for (let i = 0; i < 3 && s.phase === "battle"; i++) s = accept(s, { type: "endTurn" });
+    for (let i = 0; i < 20 && s.phase === "battle"; i++) s = accept(s, { type: "endTurn" });
     expect(s.reward!.outcome).toBe("defeat");
     expect(decodeSave(encodeSave(s))).toEqual(s);
   });

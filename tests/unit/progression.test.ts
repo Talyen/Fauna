@@ -22,7 +22,9 @@ describe("keyword progression and rewards", () => {
     expect(dispatch(result.state, { type: "play", cardId: card.id, targetId: def }).accepted).toBe(false);
     const won = winBattle(result.state);
     expect(Object.values(won.battleXP)).toEqual([]);
-    expect(Object.values(won.keywordXP).reduce((a, b) => a + b, 0)).toBe(2);
+    expect(Object.values(won.keywordXP).reduce((a, b) => a + b, 0)).toBe(
+      keywords.length + cardKeywords({ definitionId: "mossback-attack" }).length,
+    );
     const resumed = decodeSave(encodeSave(won));
     expect(resumed).toEqual(won);
     const next = accept(resumed, { type: "skipRecruit" });
@@ -136,7 +138,7 @@ describe("keyword progression and rewards", () => {
     });
     s = accept(s, { type: "beginBattle" });
     expect(s.battle!.hand).toHaveLength(5);
-    expect(s.battle!.buffer).toHaveLength(1);
+    expect(s.battle!.buffer).toHaveLength(0);
     expect(s.team.find((c) => c.species === "emberfox")!.block).toBe(5);
     s = accept(s, { type: "resetTalents", keyword: "fire" });
     expect(s.team.find((c) => c.species === "emberfox")!.block).toBe(5);
@@ -199,12 +201,12 @@ it("resolves talent followups once, without replaying opening grants on purchase
   const result = dispatch(s, { type: "play", cardId: s.battle!.hand[0]!, targetId: "enemy-0" });
   expect(result.accepted).toBe(true);
   s = result.state;
-  expect(s.battle!.enemies[0]!.health).toBe(6);
-  expect(s.team[1]!.health).toBe(21);
+  expect(s.battle!.enemies[0]!.health).toBe(4);
+  expect(s.team[1]!.health).toBe(18);
   expect(s.team[1]!.block).toBe(2);
   expect(s.battleXP.fire).toBe(1);
   s = accept(s, { type: "resetTalents", keyword: "fire" });
-  expect(s.team[1]!.health).toBe(21);
+  expect(s.team[1]!.health).toBe(18);
   expect(s.team[1]!.block).toBe(2);
 });
 

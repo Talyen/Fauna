@@ -57,7 +57,7 @@ The design system uses `--screen-section-gap` (24px) between heading, body and f
 
 Battle uses the fixed artwork sizes specified above. Health bars are centered with an inset equal to the artwork corner radius on each side. Mana sits in the lower-left corner, with 18px crystals and a 44px control target; Swap sits above End turn in the lower-right corner. The five-card hand rests low in the viewport. Its symmetric quadratic fan has a smooth curve; the middle card meets the bottom viewport edge and the outer two cards extend below it. Clipping is intentional, does not create page scroll, and never changes card size. Short viewports may scroll the combatants above the fixed hand and controls. Inspection scrolls rather than squeezing its artwork.
 
-Review 1280×720, 1280×800, 1920×1080, 1024×768 (4:3), short 1024×600/960×540 windows, and 2560×1080/3440×1440 ultrawide. Include 150% text, reduced motion, inspection focus return, recruitment replacement cancellation, a full five-card hand with hidden overflow, and reachable controls.
+Review 1280×720, 1280×800, 1920×1080, 1024×768 (4:3), short 1024×600/960×540 windows, and 2560×1080/3440×1440 ultrawide. Include 150% text, reduced motion, inspection focus return, recruitment replacement cancellation, a full seven-card hand with hidden overflow, and reachable controls.
 
 ## Tokens
 
@@ -90,7 +90,7 @@ Palette and icon pairings are adapted from `Alchemy: src/lib/game-data/keywords.
 
 Poison and Nature use lighter foregrounds from Alchemy's green/emerald families for readable text on black and artwork. Tooltip attack rules spell out the type; floating feedback and target previews retain the damage type. Enemy intents are hidden. Keyword words in rules use their assigned colors, including secondary clauses; other prose stays neutral. Healing has a rose identity, distinct from Health.
 
-Types are content metadata, carried on damage presentation events. Enemy types derive from encounter content. Types add no resistances, status effects, or damage arithmetic. Ice and Poison are reserved vocabulary until authored attacks use them.
+Types are content metadata, carried on damage presentation events. Enemy types derive from the resolved species ability. Explicit Burn, Poison, Bleed, Stun and Freeze packets use the combat rules in [Keywords](KEYWORDS.md). Original Fire, Ice and Lightning identities do not implicitly add these effects.
 
 Use shadcn/ui for dialogs, tooltips, menus, sliders, and shared controls, composing gameplay cards from the same primitives and tokens. Gamepad navigation remains an application responsibility and must be verified through these compositions. Adopting a library is not a reason to add more controls or containers.
 
@@ -123,3 +123,9 @@ The shared [keyword catalog](KEYWORDS.md) assigns every current and planned keyw
 Collection has All, Known and Unknown shadcn tabs. Known creatures reuse inspection and display concise Encountered, Recruited and Starter states independently. Unknown creatures remain locked and reveal no kit details. Filters are transient; inspection restores its connected opener. Browsing never grants discovery.
 
 Settings contains a Sound switch, Master/Music/Sound effects volume controls in 10-point steps, and Mute in background. Increment/decrement buttons retain native keyboard/controller activation and readable percentage outputs. Audio preferences persist separately from progression; setting changes apply live without replaying actions. Diagnostics offers explicit local copy with actionable failure feedback. Rendered review and a listening pass remain required for these flows; DOM and runtime tests alone do not establish acceptance.
+
+## Piles, effects and Campfire
+
+Draw Pile and Discard Pile use blank portrait ArtCard surfaces, with names and counts outside the art. Each opens the existing Deck-style dialog, including empty state and nested action inspection. Cards sort independently of draw order. Escape closes only the current inspection level and returns focus to its connected opener. Pile browsing never commits commands.
+
+Combat effects remain visible below creature artwork, including defenses, periodic stacks, control/immunity and Death's Door grace. Status notices also enter committed feedback and the accessible battle log; sound is supplementary. Campfire displays the whole roster with current Health and the exact capped recovery before its single Rest action. Successful Rest returns to the existing boss offer and removes the used Campfire choice.

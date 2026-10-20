@@ -9,6 +9,10 @@ const DAMAGE_ICONS = {
   poison: FlaskConical,
   nature: Leaf,
   light: Sun,
+  burn: Flame,
+  freeze: Snowflake,
+  bleed: Swords,
+  stun: Zap,
 } as const;
 export function DamageValue({
   type,

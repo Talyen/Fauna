@@ -16,14 +16,14 @@ These are the agreed directions from the design review. They supersede the proto
 - Living reserves can replace knocked-out deployed creatures. Fallen creatures remain unavailable for the battle.
 - If the deployed row falls, remaining enemy attacks stop and the next player turn begins with restored Mana. Healthy reserves can still enter through Swap. Defeat requires the whole roster to fall.
 - Knocked-out card slots remain inert in saved battle zones and are skipped by ordinary draws. When the entire deployed row falls, the next hand reserves slots for incoming creatures so recovery does not require a free extra draw. These slots never render as playable cards for knocked-out owners.
-- Victory restores the full roster. The next battle deploys the saved starting lineup.
+- Victory preserves roster Health and knockouts. The next battle deploys the saved starting lineup; combat effects reset.
 - Recruitment at five requires choosing one creature to release, or skipping. Replacing a starting creature updates that individual’s lineup entry.
 
 ## Biomes and destinations
 
 - New journeys travel through Fernwood, then Moonwater Marsh. Each biome has three ordinary encounters followed by its boss; only the final boss completes the journey and unlocks Moonhart.
-- After each ordinary victory and its rewards, choose from three fresh locations in the current biome. The immediately visited location is excluded from the next offer. Boss steps offer one location. There is no branching map or Elite category.
-- Each location uses a 4:3 illustration with its name and **Combat** or **Boss** below the artwork. Keep Combat visible in preparation for future non-combat destinations; those destinations are not implemented yet. A quiet heading shows the biome and current encounter within it.
+- After each ordinary victory and its rewards, choose from three fresh locations in the current biome. The immediately visited location is excluded from the next offer. Boss steps offer one location. There is no branching map or Elite category. A Campfire is available once in each biome beside its boss offer. Rest heals every roster creature by 30% of maximum Health, including knockouts, then returns to that boss offer without advancing combat progress.
+- Each location uses a 4:3 illustration with its name and **Combat** or **Boss** below the artwork. Campfire uses Rest beneath its location art; entering it commits a saved visit and exposes Rest as its only option. A quiet heading shows the biome and current encounter within it.
 - Opening a location is inspection, not commitment. Show its exact enemy group; inspect each creature's battle health and collectible kit in the same dialog. Back/Escape returns action → creature → location → destination screen. Begin battle commits the inspected location directly.
 - Seeded gameplay chooses location offers and packs once when entering the choice screen. Save those offers and the chosen location. Inspection, cancellation, menus, and reload never reroll enemies or consume randomness.
 - Location pools contain themed packs; identities are stable while inhabitants vary between runs. Initial enemy stats grow with chapter progress, with easier first encounters for a single starter. These values are playtest tuning, not final balance.
@@ -45,7 +45,7 @@ These are the agreed directions from the design review. They supersede the proto
 - Clicking an available talent purchases it immediately, without a detail-dialog purchase step or confirmation.
 - Reset operates on the entire keyword category, refunding all spent points in that category while retaining its XP. Reset is available at any time, including during an journey; talent effects update immediately. Individual-talent refunds are not the chosen interaction.
 - Use Alchemy’s current point pacing: cumulative thresholds are 10, 40, 100, 180, and 280 keyword XP. Total XP for point n is 10 × n × (n + 1) − 10 × min(n, 2). This is initial tuning for playtesting.
-- The approved catalog uses the seven damage types plus Block and Healing. Each category has ten unique talents in four widening rows of 1, 2, 3, and 4, following Alchemy. The current implementation still uses six shared talents per category in `src/game/progression.ts`; the new catalog and screen remain to be implemented.
+- The original distinct-tree direction used the seven original damage types plus Block and Healing. The current combat foundation also enables Burn, Freeze, Bleed, Stun, Armor, Forge, Thorns, Dodge, Leech, Mana, Cleanse and Purge; Gold is currency only. Wish, Consume, Companion and Archery are excluded. Each category has ten unique talents in four widening rows of 1, 2, 3, and 4, following Alchemy. The current implementation still uses six shared talents per category in `src/game/progression.ts`; the new catalog and screen remain to be implemented.
 - Abandonment banks the XP earned by accepted plays, with no victory currency or relics. There are currently no automatic or repeated card plays; each accepted play awards keyword XP once.
 
 ## Recruitment
@@ -84,3 +84,7 @@ Final victory or defeat → Journey results. Ending a started journey voluntaril
 - Material types remain undefined and are not shown. The shared Victory shell shows compact automatic earnings and one destination-specific choice: recruitment or relics. It has one Skip action, no Continue action. Full-roster replacement changes the contents of that same screen and may be canceled before committing.
 
 See [UI design system](UI.md) for composition and interaction rules.
+
+## Turn and combat foundation
+
+Each turn restores four shared Mana and draws four cards, with a seven-card hand and FIFO overflow retained across turns. Block halves rather than clearing. Creatures share Alchemy's core packet, status and crowd-control rules through the [keyword contract](KEYWORDS.md), with no elemental reactions. Their individual effects persist while in reserve and cannot be refreshed by free swaps. Enemy actions use a non-repeating species repertoire without showing the next ability. Draw and discard piles are inspectable without revealing draw order or changing gameplay.

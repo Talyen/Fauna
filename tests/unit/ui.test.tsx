@@ -1,3 +1,4 @@
+import { combat, hit } from "../../src/game/combat";
 import { assetUrl } from "../../src/ui/assets";
 import { ActionCard } from "../../src/ui/cards";
 import { TooltipProvider } from "../../src/components/ui/tooltip";
@@ -34,8 +35,8 @@ describe("player interface", () => {
       },
     );
     const game = produce(run(), (d) => {
-      d.battle!.hand = d.cards.slice(0, 5).map((card) => card.id);
-      d.battle!.buffer = d.cards.slice(5).map((card) => card.id);
+      d.battle!.hand = d.cards.slice(0, 7).map((card) => card.id);
+      d.battle!.buffer = d.cards.slice(7).map((card) => card.id);
       d.battle!.draw = [];
       d.battle!.discard = [];
     });
@@ -45,13 +46,13 @@ describe("player interface", () => {
     render(<App session={session} />);
     const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: "Continue" }));
-    expect(document.querySelectorAll(".hand .action-card")).toHaveLength(5);
+    expect(document.querySelectorAll(".hand .action-card")).toHaveLength(7);
     expect(screen.queryByText(/buffer/i)).toBeNull();
     await user.click(document.querySelector<HTMLButtonElement>('.hand .action-card[data-effect="attack"]')!);
     await user.click(document.querySelector<HTMLButtonElement>(".enemy-row .creature-card")!);
     expect(session.store.getState().game.battle!.hand).toContain(game.battle!.buffer[0]);
-    expect(session.store.getState().game.battle!.buffer).toHaveLength(3);
-    expect(document.querySelectorAll(".hand .action-card")).toHaveLength(5);
+    expect(session.store.getState().game.battle!.buffer).toHaveLength(1);
+    expect(document.querySelectorAll(".hand .action-card")).toHaveLength(7);
     await user.click(screen.getByRole("button", { name: "End turn" }));
     expect(session.store.getState().game.battle!.buffer).toEqual([]);
     expect(document.querySelectorAll(".hand .action-card")).toHaveLength(5);
@@ -275,7 +276,12 @@ it("previews Block depletion, exact health loss and knockout without visible HP 
       if (i > 0) enemy.health = 0;
     });
   });
-  const result = dispatch(before, { type: "endTurn" });
+  const after = produce(before, (d) => {
+    combat(d.team[0]!).deathDoorUsed = true;
+    d.rng = 1;
+    hit(d, d.battle!.enemies[0]!, d.team[0]!, 8, "nature", []);
+  });
+  const result = { accepted: true as const, state: after, events: [] };
   render(<TargetPreview before={before} result={result} targetId="ally-0" />);
   expect(screen.getByLabelText("Block 5 to 0")).toBeTruthy();
   expect(screen.getByLabelText("Knockout")).toBeTruthy();

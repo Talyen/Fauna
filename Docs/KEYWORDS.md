@@ -1,38 +1,27 @@
 # Keywords
 
-Fauna's keyword foundation adapts Alchemy's catalog, effect-derived classification, word aliases, and consistent color families. `src/game/keywords.ts` owns stable IDs, labels, definitions, availability, damage types, and effect-to-keyword classification. `src/ui/tokens.css` owns a `--keyword-<id>` foreground for every entry. Shared selectors in `styles.css` apply that identity to keyword text, battle values, feedback, and progression. Existing damage, health and block tokens alias the keyword palette. Labels always accompany color; color is not the only way to identify a rule.
+`src/game/keywords.ts` owns stable keyword IDs, labels, descriptions, aliases, damage types and effect classification. `src/ui/tokens.css` owns their semantic foregrounds. Color always accompanies readable labels. `KeywordText` highlights whole words while preserving text; it never assigns effects or XP.
 
-## Current rules
+## Combat rules
 
-Physical, Fire, Ice, Lightning, Poison, Nature, and Light identify immediate damage. They imply no resistance, status application, or elemental matchups. Ice and Poison remain available vocabulary with no authored player attacks yet. Health, Mana, Block, Healing, Thorns, and Currency describe working rules. Their precise definitions live in the catalog and feed the menu Glossary.
+Fauna adapts Alchemy's combat foundations to individual creatures. Physical, Fire, Ice, Lightning, Nature and Light are direct damage types. Light retains Holy as a presentation alias. Fire, Ice and Lightning do not implicitly inflict Burn, Freeze or Stun; those are explicit separate packets in a card's rules.
 
-Card keywords come from authored effects, never from their names or description text. Attacks classify by damage type; guard and team guard classify as Block; healing effects classify as Healing. Only the nine progression categories earn XP and own talents. Resource mentions, passives, secondary clauses, and planned keywords do not grant additional XP. Planned vocabulary does not imply implemented card effects.
+Burn, Poison and Bleed hits deal immediate damage and add their resolved damage as stacks. At the owner's turn window, Burn deals its stacks and halves (one clears); Poison deals its stacks and loses 20%, rounded normally with a minimum decay of one; Bleed deals its stacks once and clears. Ticks bypass Block, cannot Dodge or crit, do not add stacks, and stop on knockout. Different statuses do not trigger elemental reactions.
 
-`KeywordText` colors whole words and aliases while preserving the original sentence and casing. Active vocabulary alone is automatically highlighted. `Keyword` renders a catalog label. Neither component adds an interaction or extra tooltip; definitions remain in the menu Glossary. Card rules, passive descriptions, talents, and glossary prose share this renderer.
+Stun and Freeze deal damage and build toward one skipped action window. Allies use half maximum Health as the threshold; enemies use half their Health before that packet. A fatal hit cannot control a defeated target. Both share three turns of immunity after recovery. Active control and immunity prevent further buildup, while typed damage still resolves. Living enemies regenerate one Health after allied status ticks, including on skipped actions. Reserve creatures tick and expire effects normally; swapping neither cleanses nor refreshes them.
 
-## Alchemy vocabulary carried forward
+Attacks have a base 5% Dodge chance before defenses and allied attacks have a 5% critical chance for double damage. Controlled targets cannot Dodge. Extra Dodge is capped so total chance never exceeds 75%. Block absorbs damage before Health and halves at the owner's next turn, rounded normally. Armor reduces Physical and Stun damage after Block and loses one stack when positive damage gets through. Forge adds to Physical and Stun attacks and is not consumed. Thorns retaliate with Nature damage after an attack removes Health, then lose one stack; retaliation cannot trigger another retaliation.
 
-The following entries have assigned colors and proposed descriptions, but remain **planned**: Dodge, Armor, Forge, Burn, Freeze, Bleed, Stun, Leech, Wish, Consume, Archery, and Companion. They have no resolver, saved stacks, XP category, or player-facing glossary entry yet. The catalog's proposals preserve Alchemy's broad roles without presenting its hero-based rules as working creature rules.
+Leech restores half actual Health lost, capped by overkill and maximum Health. Bleed defers its Leech until the later Bleed tick; cleansing Bleed cancels that pending payout. Healing does not revive during combat. Cleanse removes harmful categories in Burn, Poison, Bleed, Stun, Freeze order, handling active control first. Purge removes Block first, then Armor, Forge, Thorns and bonus Dodge. Both remove up to the card's stated number of categories.
 
-Alchemy's Holy maps to Fauna's existing Light, and Gold maps to Currency; those words are presentation aliases, not new saved identities. Fire and Ice remain distinct from Burn and Freeze. Poison currently names immediate damage rather than Alchemy's damage-over-time status. Thorns describes Briartooth's existing passive rather than Alchemy's consumable stacks. Healing and Lightning extend the catalog for Fauna.
+Each allied creature has Death's Door once per battle: fatal damage leaves one Health with two grace turns. Fatal packets during grace still leave one Health; subsequent damage can knock it out after grace expires. Reserve turns also spend grace. Combat effects, immunity and Death's Door reset for each battle; Health and knockouts persist between destinations.
 
-Before implementing the planned mechanics, decide creature-level timing and duration, stack decay and caps, blocked-hit interactions, knockout and swap behavior, and effect ordering. Freeze/Stun thresholds, Dodge chance, Leech ratio, Wish ownership/deck lifetime, and Companion's relationship to deployed and reserve creatures remain open design decisions. No values for these rules are committed by adding vocabulary.
+## Classification and progression
 
-## Cleanse and Purge
+Card XP comes from structured primary and supplemental effects and Leech metadata, once per distinct eligible keyword on an accepted play. Descriptions derive from those same effects. Damage identities, Block, Healing, Armor, Forge, Thorns, Dodge, Leech, Mana, Cleanse and Purge are eligible progression categories. The existing shared talent effects remain; distinct trees are separate content work.
 
-Two additional planned effect keywords complete the removal vocabulary:
-
-- **Cleanse** removes harmful effects from an ally. Its assigned color is teal (`--keyword-cleanse`). Alchemy implements cleansing outside its formal keyword catalog; Fauna gives it an explicit keyword identity.
-- **Purge** removes beneficial effects from an enemy. Its assigned color is fuchsia (`--keyword-purge`).
-
-Both have labels, word aliases and shared color selectors. Like the other planned mechanics, they have no battle resolver, authored cards, XP category or player-facing glossary entry yet. Removal amounts and eligible effects will be defined with the battle implementation. Other suggested keywords remain deferred.
+Gold remains permanent currency and a battle reward. It is not a keyword, does not receive keyword highlighting, earns no keyword XP and has no talent tree. Wish, Consume, Companion and Archery are excluded from Fauna's catalog, cards and mechanics.
 
 ## Extending the system
 
-1. Add a stable catalog ID with a label, category, definition, availability, and any word aliases. Aliases must be unique among active keywords.
-2. Assign its foreground in `tokens.css` and connect its `data-keyword` and `data-combat-tone` selectors in `styles.css`. Preserve readable contrast on game surfaces. Alchemy's darker green, brown and red foregrounds use lighter members of the same families here.
-3. Implement gameplay in the domain owner before marking the entry active. Update effect classification when the authored effect actually grants that keyword. Keep text and resolver behavior consistent.
-4. Add progression eligibility deliberately; adding catalog vocabulary alone must not create talents or alter save validation. Change current save schemas and fixtures together if new saved state or progression identities are introduced; development saves are disposable and do not require migrations.
-5. Test player outcomes, timing, preview parity, save/resume and rejected-command invariants as appropriate. CI owns full static, rendered and platform verification.
-
-The foundation imports no Alchemy runtime, UI controls, plasma, shine effects, or dependencies. Fauna keeps its shadcn controls, artwork surfaces and visual policies.
+Implement rules in the pure gameplay owner before exposing a keyword. Add structured effect classification, generated wording, current-format save validation and semantic presentation together. Cover actual outcomes, timing, preview parity, rejected commands, swaps and resume at their owning boundaries. Development saves are disposable: reject obsolete versions without migrations. Full static, rendered and platform verification remain CI-owned.

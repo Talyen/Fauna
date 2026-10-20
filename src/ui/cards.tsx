@@ -1,3 +1,4 @@
+import { CombatStatus } from "./combat-status";
 import { assetUrl } from "./assets";
 import { useEffect, useState, type ReactNode } from "react";
 import { BattleReadout } from "./target-preview";
@@ -5,7 +6,7 @@ import { ArtCard } from "./art-card";
 import { ActionDetails, CreatureDetails } from "./card-details";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../components/ui/tooltip";
 import { actionValue } from "../game/rules";
-import { cardText, definition, species } from "../game/content";
+import { cardText, definition, enemyCard, species } from "../game/content";
 import type { SpeciesId } from "../game/content";
 import type { Card, Creature, Enemy, GameState } from "../game/types";
 type CreatureProps = {
@@ -28,6 +29,7 @@ type CreatureProps = {
   tooltips?: boolean;
   readout?: boolean;
   invalidTarget?: boolean;
+  combat?: import("../game/types").CombatState;
 };
 export function CreatureCard({
   kind,
@@ -49,6 +51,7 @@ export function CreatureCard({
   tooltips = true,
   readout = true,
   invalidTarget = false,
+  combat,
 }: CreatureProps) {
   const [tooltipOpen, setTooltipOpen] = useState(false);
   useEffect(() => {
@@ -107,6 +110,7 @@ export function CreatureCard({
       ) : readout && health !== undefined && (actorId || enemyId) ? (
         <BattleReadout health={health} maxHealth={maxHealth ?? info.health} block={block} />
       ) : null}
+      <CombatStatus combat={combat} />
       {feedback}
     </div>
   );
@@ -122,6 +126,7 @@ export function AllyCard({
       kind={creature.species}
       health={creature.health}
       block={creature.block}
+      combat={creature.combat}
       {...props}
     />
   );
@@ -137,6 +142,8 @@ export function EnemyCard({
       name={enemy.name}
       health={enemy.health}
       maxHealth={enemy.maxHealth}
+      block={enemy.block}
+      combat={enemy.combat}
       {...props}
     />
   );
@@ -154,8 +161,12 @@ export function ActionCard({
   actor,
   tooltips = true,
   onDenied,
+  enemy = false,
+  enemyValue,
 }: {
   card: Card;
+  enemy?: boolean;
+  enemyValue?: number;
   selected?: boolean;
   disabled?: boolean;
   onClick: () => void;
@@ -172,7 +183,7 @@ export function ActionCard({
   useEffect(() => {
     if (!tooltips) setTooltipOpen(false);
   }, [tooltips]);
-  const def = definition(card.definitionId);
+  const def = enemy ? enemyCard(definition(card.definitionId)) : definition(card.definitionId);
   const artwork = (
     <ArtCard
       aspect="action"
@@ -184,7 +195,7 @@ export function ActionCard({
       data-effect={def.effect}
       aria-label={
         label ??
-        `${def.name}${card.level ? ` +${card.level}` : ""}, ${ownerName}, ${def.cost} mana, ${cardText(def, card.level, actionValue(card, actor ?? { species: def.species, attacked: false }, modifiers))}`
+        `${def.name}${card.level ? ` +${card.level}` : ""}, ${ownerName}, ${enemy ? "" : `${def.cost} mana, `}${cardText(def, card.level, enemyValue ?? actionValue(card, actor ?? { species: def.species, attacked: false }, modifiers))}`
       }
       aria-pressed={presentation ? undefined : selected}
       aria-disabled={presentation ? undefined : disabled}
@@ -217,7 +228,14 @@ export function ActionCard({
     <Tooltip open={tooltips && tooltipOpen} onOpenChange={(open) => setTooltipOpen(tooltips && open)}>
       <TooltipTrigger asChild>{artwork}</TooltipTrigger>
       <TooltipContent side="top">
-        <ActionDetails card={card} ownerName={ownerName} actor={actor} modifiers={modifiers} />
+        <ActionDetails
+          card={card}
+          ownerName={ownerName}
+          actor={actor}
+          modifiers={modifiers}
+          enemy={enemy}
+          enemyValue={enemyValue}
+        />
       </TooltipContent>
     </Tooltip>
   );

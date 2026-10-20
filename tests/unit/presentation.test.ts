@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { previewPlay } from "../../src/game/preview";
+import { combat, hit } from "../../src/game/combat";
 import { dispatch } from "../../src/game/engine";
 import { appendFeedback } from "../../src/ui/combat-feedback";
 import { run } from "./helpers";
@@ -29,8 +30,13 @@ describe("uncommitted previews", () => {
       d.team[0]!.block = 2;
       d.battle!.enemies.forEach((e) => (e.targetId = "ally-0"));
     });
-    const result = dispatch(state, { type: "endTurn" });
-    expect(result.events.filter((e) => e.targetId === "ally-0").map((e) => [e.kind, e.amount])).toEqual([
+    const events: Parameters<typeof hit>[5] = [];
+    produce(state, (d) => {
+      d.rng = 1;
+      combat(d.team[0]!).deathDoorUsed = true;
+      hit(d, d.battle!.enemies[0]!, d.team[0]!, 4, "nature", events);
+    });
+    expect(events.filter((e) => e.targetId === "ally-0").map((e) => [e.kind, e.amount])).toEqual([
       ["block", -2],
       ["damage", 1],
       ["knockout", undefined],

@@ -95,7 +95,6 @@
   --keyword-block: #7dd3fc;
   --keyword-heal: #fda4af;
   --keyword-thorns: #6ee7b7;
-  --keyword-currency: #fde047;
   --keyword-dodge: #bef264;
   --keyword-armor: #9ca3af;
   --keyword-forge: #fdba74;
@@ -104,10 +103,6 @@
   --keyword-bleed: #f87171;
   --keyword-stun: #fcd34d;
   --keyword-leech: #fb7185;
-  --keyword-wish: #f0abfc;
-  --keyword-consume: #a78bfa;
-  --keyword-archery: #a3e635;
-  --keyword-companion: #fdba74;
   --keyword-cleanse: #5eead4;
   --keyword-purge: #e879f9;
   --damage-physical: var(--keyword-physical);

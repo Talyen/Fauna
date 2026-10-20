@@ -24,7 +24,7 @@ export function appendFeedback(
     .filter((b) => now - b.started < LIFETIME)
     .map((b) => ({ ...b, entries: b.entries.map((e) => ({ ...e })) }));
   for (const event of events) {
-    if (!event.targetId || !["damage", "heal", "block", "knockout"].includes(event.kind)) continue;
+    if (!event.targetId || !["damage", "heal", "block", "knockout", "status"].includes(event.kind)) continue;
     let burst = bursts.find((b) => b.targetId === event.targetId && now - b.started < 250);
     if (!burst) {
       burst = { id: `${id}-${event.targetId}`, targetId: event.targetId, started: now, entries: [] };
@@ -34,9 +34,11 @@ export function appendFeedback(
       (e) =>
         e.kind === event.kind &&
         e.damageType === event.damageType &&
+        (event.kind !== "status" || e.text === event.text) &&
         Math.sign(e.amount ?? 0) === Math.sign(event.amount ?? 0),
     );
-    if (match && event.kind !== "knockout") match.amount = (match.amount ?? 0) + (event.amount ?? 0);
+    if (match && event.kind !== "knockout" && event.kind !== "status")
+      match.amount = (match.amount ?? 0) + (event.amount ?? 0);
     else if (!match) burst.entries.push({ ...event });
   }
   bursts = bursts.filter(
@@ -56,7 +58,7 @@ export function feedbackFrames(events: readonly GameEvent[]): GameEvent[][] {
     frames[frames.length - 1]!.push(event);
   }
   return frames.filter((frame) =>
-    frame.some((e) => e.targetId && ["damage", "heal", "block", "knockout"].includes(e.kind)),
+    frame.some((e) => e.targetId && ["damage", "heal", "block", "knockout", "status"].includes(e.kind)),
   );
 }
 export function useCombatFeedback(
@@ -161,6 +163,8 @@ export function CombatFeedback({ bursts, targetId }: { bursts: readonly Burst[];
                 >
                   {e.kind === "damage" ? (
                     <DamageValue type={e.damageType ?? "physical"} amount={e.amount ?? 0} signed />
+                  ) : e.kind === "status" ? (
+                    e.text
                   ) : (
                     <>
                       <Icon />

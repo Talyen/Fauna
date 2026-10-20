@@ -922,7 +922,7 @@ test("battle tooltips, pointer targeting, Mana forecast and corners follow the d
   await expect(page.locator(".player-row .invalid-target")).toHaveCount(3);
   await expect(page.locator('.mana-gem[data-preview-spent="true"]')).toHaveCount(1);
   await expect(page.locator(".knockout-preview")).toHaveCount(1);
-  expect((await state(page)).battle!.mana).toBe(3);
+  expect((await state(page)).battle!.mana).toBe(4);
   await page.mouse.move(0, 0);
   await expect(page.locator(".game-tooltip")).toHaveCount(0);
   for (const [width, height] of [
@@ -1193,7 +1193,7 @@ test("a fallen deployed row resumes with no playable cards and can recover throu
   s = accept(s, { type: "beginBattle" });
   s = produce(s, (d) =>
     d.team.forEach((c) => {
-      c.health = 1;
+      c.health = 0;
       c.block = 0;
     }),
   );
@@ -1215,7 +1215,7 @@ test("a fallen deployed row resumes with no playable cards and can recover throu
   await page.getByRole("button", { name: "Silkmoth, reserve", exact: true }).click();
   await expect(page.locator(".hand .action-card").first()).toBeVisible();
   const restored = await state(page);
-  expect(restored.battle!.mana).toBe(3);
+  expect(restored.battle!.mana).toBe(4);
   expect(restored.battle!.hand).toEqual(fallen.battle!.hand);
   await page.getByRole("button", { name: "Swap", exact: true }).click();
   await expect(
@@ -1323,7 +1323,10 @@ for (const [width, height] of [
       dialog.getByRole("heading", { name: "Species kit · Briartooth", exact: true }),
     ).toBeVisible();
     await expect(
-      dialog.getByText("When hit, deal 2 damage back to the attacker.", { exact: true }),
+      dialog.getByText(
+        "Start each battle with 2 Thorns. When an attack removes Health, retaliate with current Thorns, then lose 1 stack.",
+        { exact: true },
+      ),
     ).toBeVisible();
     await dialog
       .locator("img")
@@ -1405,8 +1408,8 @@ for (const [width, height] of [
     await page.setViewportSize({ width, height });
     await page.emulateMedia({ reducedMotion: "reduce" });
     const fixture = produce(run(), (d) => {
-      d.battle!.hand = d.cards.slice(0, 5).map((card) => card.id);
-      d.battle!.buffer = d.cards.slice(5).map((card) => card.id);
+      d.battle!.hand = d.cards.slice(0, 7).map((card) => card.id);
+      d.battle!.buffer = d.cards.slice(7).map((card) => card.id);
       d.battle!.draw = [];
       d.battle!.discard = [];
     });
@@ -1445,13 +1448,13 @@ for (const [width, height] of [
     const fan = await page
       .locator(".hand-slot")
       .evaluateAll((elements) => elements.map((el) => el.getBoundingClientRect().toJSON()));
-    expect(Math.abs(fan[0]!.top - fan[4]!.top)).toBeLessThan(1);
-    expect(Math.abs(fan[1]!.top - fan[3]!.top)).toBeLessThan(1);
+    expect(Math.abs(fan[0]!.top - fan[6]!.top)).toBeLessThan(1);
+    expect(Math.abs(fan[1]!.top - fan[5]!.top)).toBeLessThan(1);
     expect(fan[0]!.top).toBeGreaterThan(fan[1]!.top);
     expect(fan[1]!.top).toBeGreaterThan(fan[2]!.top);
     expect(fan[0]!.bottom).toBeGreaterThan(height);
-    expect(fan[0]!.bottom).toBeLessThan(height + 48);
-    expect(Math.abs(fan[2]!.bottom - height)).toBeLessThan(1);
+    expect(fan[0]!.bottom).toBeLessThan(height + 64);
+    expect(Math.abs(fan[3]!.bottom - height)).toBeLessThan(1);
     const creatureArea = await page.locator(".player-row .creature-card").first().evaluate(area);
     for (const card of await page.locator(".hand .action-card").all())
       expect(Math.abs((await card.evaluate(area)) / creatureArea - (0.9 / 1.1) ** 2)).toBeLessThan(0.025);

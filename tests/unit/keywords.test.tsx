@@ -23,26 +23,26 @@ import { run } from "./helpers";
 describe("keyword foundation", () => {
   it("classifies authored effects without reading names or rules text, using only current talent categories", () => {
     const expected = [
-      "nature",
-      "block",
-      "block",
-      "fire",
-      "heal",
-      "block",
-      "lightning",
-      "block",
-      "block",
-      "light",
-      "heal",
-      "block",
-      "physical",
-      "block",
-      "block",
-      "light",
-      "heal",
-      "block",
+      ["nature", "poison"],
+      ["block", "armor"],
+      ["block"],
+      ["fire", "burn"],
+      ["heal"],
+      ["block", "forge"],
+      ["lightning", "stun"],
+      ["block"],
+      ["block", "dodge"],
+      ["light"],
+      ["heal"],
+      ["block", "cleanse"],
+      ["physical", "bleed", "leech"],
+      ["block", "thorns"],
+      ["block"],
+      ["light", "freeze", "purge"],
+      ["heal", "mana"],
+      ["block"],
     ];
-    expect(CARDS.map((card) => cardKeywords({ definitionId: card.id }))).toEqual(expected.map((id) => [id]));
+    expect(CARDS.map((card) => cardKeywords({ definitionId: card.id }))).toEqual(expected);
     expect(definitionKeywords({ effect: "attack", damageType: "poison" })).toEqual(["poison"]);
     expect(KEYWORDS).toEqual([
       "physical",
@@ -52,10 +52,27 @@ describe("keyword foundation", () => {
       "poison",
       "nature",
       "light",
+      "burn",
+      "freeze",
+      "bleed",
+      "stun",
       "block",
       "heal",
+      "armor",
+      "forge",
+      "thorns",
+      "dodge",
+      "leech",
+      "mana",
+      "cleanse",
+      "purge",
     ]);
-    expect(TALENTS).toHaveLength(54);
+    expect(TALENTS).toHaveLength(126);
+    for (const id of ["currency", "gold", "wish", "consume", "companion", "archery"]) {
+      expect(isKeywordId(id)).toBe(false);
+      expect(KEYWORDS).not.toContain(id);
+      expect(TALENTS.some((talent) => talent.id.startsWith(`${id}.`))).toBe(false);
+    }
     expect(isKeywordId("mark")).toBe(false);
     expect(CARDS.every((card) => String(card.effect) !== "mark")).toBe(true);
     const state = run();
@@ -80,12 +97,13 @@ describe("keyword foundation", () => {
     expect(parts.filter((part) => part.keyword).map((part) => [part.text, part.keyword])).toEqual([
       ["Health", "health"],
       ["Healing", "heal"],
+      ["Burn", "burn"],
     ]);
     expect(
       keywordText("Holy and Gold")
         .filter((part) => part.keyword)
         .map((part) => part.keyword),
-    ).toEqual(["light", "currency"]);
+    ).toEqual(["light"]);
     expect(keywordText(text)).toEqual(parts);
     expect(keywordText("")).toEqual([]);
     expect(isKeywordId("constructor")).toBe(false);
@@ -98,7 +116,7 @@ describe("keyword foundation", () => {
     const attack = CARDS.find((card) => card.id === "emberfox-attack")!;
     const html = renderToStaticMarkup(<CardRules card={attack} value={13} />);
     expect(html).toContain('data-keyword="fire">Fire</span>');
-    expect(html.replace(/<[^>]+>/g, "")).toBe("Deal 13 Fire damage.");
+    expect(html.replace(/<[^>]+>/g, "")).toBe("Deal 13 Fire damage. Deal 2 Burn damage.");
     expect(html).not.toContain('data-keyword="consume"');
     const unsafe = renderToStaticMarkup(<KeywordText text={"<script>Fire</script>"} />);
     expect(unsafe).toContain("&lt;script&gt;");

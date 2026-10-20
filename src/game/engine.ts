@@ -1,13 +1,28 @@
 import { freeze, produce } from "immer";
 import { KEYWORDS, RELICS, cardKeywords, canBuyTalent, hasTalent } from "./progression";
-import { actionValue, cardFollowups } from "./rules";
-import { CARDS, INITIAL_SPECIES, definition, species, DAMAGE_LABELS } from "./content";
+import {
+  combat,
+  freshCombat,
+  grantStatus,
+  hit,
+  restoreHealth,
+  removeEffects,
+  roll,
+  startAction,
+  tickStatuses,
+  controlled,
+  TURN_MANA,
+  TURN_DRAW,
+  HAND_LIMIT,
+} from "./combat";
+import { actionValue, cardFollowups, enemyAbilityValue } from "./rules";
+import { CARDS, INITIAL_SPECIES, definition, species, enemyCard } from "./content";
 import { BIOMES, bossEncounter, encounterSource, finalEncounter, location } from "./destinations";
 import type { Card, Command, CommandResult, GameEvent, GameState } from "./types";
 export function createGame(seed = 1): GameState {
   return freeze(
     {
-      version: 11,
+      version: 12,
       discovery: { encountered: [], recruited: [] },
       revision: 0,
       rng: seed >>> 0,
@@ -34,10 +49,7 @@ export function createGame(seed = 1): GameState {
     true,
   ) as GameState;
 }
-function random(state: GameState): number {
-  state.rng = (Math.imul(state.rng, 1664525) + 1013904223) >>> 0;
-  return state.rng / 4294967296;
-}
+const random = roll;
 function shuffle<T>(state: GameState, cards: T[]): T[] {
   for (let i = cards.length - 1; i > 0; i--) {
     const j = Math.floor(random(state) * (i + 1));
@@ -61,9 +73,6 @@ function offerDestinations(state: GameState) {
   }));
   route.chosen = null;
 }
-function damageType(state: GameState, id: string) {
-  return encounterSource(state).enemies[Number(id.slice(6))]!.damageType;
-}
 function living(state: GameState) {
   return state.team.filter((c) => c.health > 0);
 }
@@ -75,12 +84,13 @@ function ownedCards(id: string, kind: GameState["team"][number]["species"]): Car
     level: 0,
   }));
 }
-export const MAX_HAND_SIZE = 5;
+export const MAX_HAND_SIZE = HAND_LIMIT;
 function fillHand(state: GameState) {
   const battle = state.battle!;
   while (battle.hand.length < MAX_HAND_SIZE && battle.buffer.length) battle.hand.push(battle.buffer.shift()!);
 }
 function draw(state: GameState, count: number) {
+  fillHand(state);
   const b = state.battle!;
   // Knocked-out owners retain inert slots, so replacing them cannot refresh spent cards.
   const alive = living(state);
@@ -103,8 +113,8 @@ function draw(state: GameState, count: number) {
 function intents(state: GameState) {
   const alive = living(state);
   for (const enemy of state.battle!.enemies) {
-    if (enemy.health > 0 && alive.length)
-      enemy.targetId = alive[Math.floor(random(state) * alive.length)]!.id;
+    if (enemy.health > 0)
+      enemy.targetId = alive.length ? alive[Math.floor(random(state) * alive.length)]!.id : state.team[0]!.id;
   }
 }
 export function beginBattle(state: GameState) {
@@ -116,7 +126,8 @@ export function beginBattle(state: GameState) {
   state.reserves = all.filter((c) => !state.lineup.includes(c.id));
   rebuildCards(state);
   for (const c of [...state.team, ...state.reserves]) {
-    c.health = species(c.species).health;
+    c.combat = freshCombat();
+    if (c.species === "briartooth" && state.team.includes(c)) c.combat.thorns = 2;
     c.block =
       (state.team.includes(c) && c.species === "moonhart" ? 4 : 0) +
       (state.team.includes(c) && state.relics.includes("river-shell") ? 3 : 0);
@@ -131,7 +142,8 @@ export function beginBattle(state: GameState) {
   }
   state.battle = {
     turn: 1,
-    mana: 3,
+    mana: TURN_MANA,
+    maxMana: TURN_MANA,
     draw: shuffle(
       state,
       state.cards.map((c) => c.id),
@@ -147,10 +159,13 @@ export function beginBattle(state: GameState) {
       maxHealth: e.health,
       damage: e.damage,
       targetId: "",
+      block: e.species === "moonhart" ? 4 : 0,
+      combat: { ...freshCombat(), thorns: e.species === "briartooth" ? 2 : 0 },
+      lastAbility: null,
     })),
   };
   state.phase = "battle";
-  draw(state, state.relics.includes("wind-feather") ? 6 : 5);
+  draw(state, TURN_DRAW + (state.relics.includes("wind-feather") ? 1 : 0));
   state.reward = null;
   state.battleXP = {};
   intents(state);
@@ -215,8 +230,12 @@ function settle(state: GameState, events: GameEvent[]): boolean {
   }
   if (state.battle!.enemies.every((e) => e.health <= 0)) {
     for (const creature of [...state.team, ...state.reserves]) {
-      creature.health = species(creature.species).health;
       creature.block = 0;
+      creature.combat = freshCombat();
+    }
+    for (const enemy of state.battle!.enemies) {
+      enemy.combat = freshCombat();
+      enemy.block = 0;
     }
     finishBattle(state, false);
     events.push({
@@ -242,6 +261,7 @@ function afterRewards(state: GameState) {
   if (state.expedition) {
     if (state.expedition.step === 3) {
       state.expedition.biome++;
+      state.expedition.campfireUsed = false;
       state.expedition.step = 0;
     } else state.expedition.step++;
     offerDestinations(state);
@@ -277,65 +297,112 @@ function rebuildCards(state: GameState) {
     state.battle.draw = state.cards.map((c) => c.id);
   }
 }
+function applyExtras(
+  state: GameState,
+  actor: import("./combat").Combatant,
+  def: import("./content").CardDefinition,
+  events: GameEvent[],
+  enemy = false,
+  target?: import("./combat").Combatant,
+) {
+  for (const effect of def.effects ?? []) {
+    if (actor.health <= 0) break;
+    switch (effect.kind) {
+      case "damage":
+        if (target)
+          hit(state, actor, target, effect.amount, effect.damageType, events, { leech: effect.leech });
+        break;
+      case "status":
+        grantStatus(actor, effect.status, effect.amount, events);
+        break;
+      case "cleanse":
+        removeEffects(actor, "cleanse", effect.amount, events);
+        break;
+      case "purge":
+        if (target) removeEffects(target, "purge", effect.amount, events);
+        break;
+      case "draw":
+        if (!enemy) draw(state, effect.amount);
+        break;
+      case "mana":
+        if (!enemy) state.battle!.mana = Math.min(state.battle!.maxMana, state.battle!.mana + effect.amount);
+        break;
+    }
+  }
+}
 function finishTurn(draft: GameState, events: GameEvent[]) {
   const battle = draft.battle!;
-  for (const enemy of battle.enemies) {
-    if (enemy.health <= 0) continue;
-    const target = living(draft).find((c) => c.id === enemy.targetId) ?? living(draft)[0];
-    if (!target) break;
-    const blocked = Math.min(target.block, enemy.damage);
-    target.block -= blocked;
-    const amount = Math.min(target.health, enemy.damage - blocked);
-    if (blocked > 0)
+  // Enemy-phase draws and existing overflow survive into the next player turn.
+  battle.discard.push(...battle.hand.splice(0));
+  for (let pass = 0; pass < 3; pass++) {
+    for (const enemy of battle.enemies) {
+      if (enemy.health <= 0) continue;
+      tickStatuses(draft, enemy, events);
+      if (settle(draft, events)) return;
+      enemy.block = Math.round(enemy.block / 2);
+      if (!startAction(enemy, events)) continue;
+      const target = living(draft).find((c) => c.id === enemy.targetId) ?? living(draft)[0];
+      if (!target) break;
+      const abilities = CARDS.filter(
+        (card) => card.species === enemy.species && card.id !== enemy.lastAbility,
+      );
+      const def = enemyCard(abilities[Math.floor(random(draft) * abilities.length)]!);
+      const value = enemyAbilityValue(enemy, def);
+      enemy.lastAbility = def.id;
       events.push({
-        kind: "block",
+        kind: "action",
         actorId: enemy.id,
         targetId: target.id,
-        amount: -blocked,
-        text: `${species(target.species).name} blocks ${blocked} damage.`,
+        text: `${enemy.name} uses ${def.name}.`,
       });
-    target.health = Math.max(0, target.health - amount);
-    events.push({
-      kind: "damage",
-      text: `${enemy.name} hits ${species(target.species).name} for ${amount} ${DAMAGE_LABELS[damageType(draft, enemy.id)]} damage${blocked ? ` (${blocked} blocked)` : ""}.`,
-      damageType: damageType(draft, enemy.id),
-      actorId: enemy.id,
-      targetId: target.id,
-      amount,
-    });
-    if (target.species === "briartooth" && amount > 0) {
-      const reflected = Math.min(enemy.health, 2);
-      enemy.health = Math.max(0, enemy.health - 2);
-      events.push({
-        kind: "damage",
-        text: `Thorns deal ${reflected} Nature damage to ${enemy.name}.`,
-        damageType: "nature",
-        targetId: enemy.id,
-        amount: reflected,
-      });
-      if (enemy.health === 0)
-        events.push({ kind: "knockout", targetId: enemy.id, text: `${enemy.name} is knocked out.` });
+      if (def.effect === "attack")
+        hit(draft, enemy, target, value, def.damageType, events, { leech: def.leech });
+      else if (def.effect === "heal") {
+        const injured = battle.enemies
+          .filter((e) => e.health > 0)
+          .sort((a, b) => a.health / a.maxHealth - b.health / b.maxHealth)[0]!;
+        restoreHealth(injured, value, events);
+      } else {
+        for (const unit of def.effect === "teamGuard"
+          ? battle.enemies.filter((e) => e.health > 0)
+          : [enemy]) {
+          const amount = value;
+          unit.block = Math.min(1_000_000, unit.block + amount);
+          events.push({
+            kind: "block",
+            targetId: unit.id,
+            amount,
+            text: `${unit.name} gains ${amount} Block.`,
+          });
+        }
+      }
+      applyExtras(draft, enemy, def, events, true, target);
+      if (settle(draft, events)) return;
     }
-    if (target.health === 0) {
-      events.push({
-        kind: "knockout",
-        text: `${species(target.species).name} is knocked out.`,
-        targetId: target.id,
-      });
+    for (const c of [...draft.team, ...draft.reserves]) {
+      if (c.health <= 0) continue;
+      tickStatuses(draft, c, events);
+      if (settle(draft, events)) return;
     }
-    if (settle(draft, events)) break;
+    for (const enemy of battle.enemies) restoreHealth(enemy, 1, events);
+    for (const c of [...draft.team, ...draft.reserves]) {
+      const stats = combat(c);
+      if (stats.grace > 0) stats.grace--;
+      c.block = Math.round(c.block / 2);
+      c.attacked = false;
+      startAction(c, events);
+    }
+    battle.mana = battle.maxMana;
+    battle.turn++;
+    intents(draft);
+    if (
+      living(draft).some((c) => !controlled(c)) ||
+      draft.reserves.some((c) => c.health > 0 && !controlled(c))
+    )
+      break;
   }
-  if (draft.phase !== "battle") return;
-  for (const c of [...draft.team, ...draft.reserves]) {
-    c.block = 0;
-    c.attacked = false;
-  }
-  battle.discard.push(...battle.hand.splice(0), ...battle.buffer.splice(0));
-  battle.mana = 3;
-  battle.turn++;
-  draw(draft, 5);
-  intents(draft);
-  events.push({ kind: "turn", text: `Turn ${battle.turn}. Three mana restored.` });
+  draw(draft, TURN_DRAW);
+  events.push({ kind: "turn", text: `Turn ${battle.turn}. ${battle.maxMana} Mana restored.` });
 }
 
 function reject(state: GameState, reason: string): CommandResult {
@@ -365,6 +432,7 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
     if (!card || !b!.hand.includes(card.id)) return reject(state, "That card is not in your hand.");
     const actor = state.team.find((c) => c.id === card.ownerId);
     if (!actor || actor.health <= 0) return reject(state, "That creature is knocked out.");
+    if (controlled(actor)) return reject(state, "That creature is Stunned or Frozen.");
     const def = definition(card.definitionId);
     if (b!.mana < def.cost) return reject(state, "Not enough mana.");
     if (def.effect === "attack" && !b!.enemies.some((e) => e.id === command.targetId && e.health > 0))
@@ -375,6 +443,15 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
     )
       return reject(state, "Choose a living ally.");
   }
+  if (
+    command.type === "visitCampfire" &&
+    (state.phase !== "teamSelection" ||
+      !state.expedition ||
+      state.expedition.step !== 3 ||
+      state.expedition.campfireUsed)
+  )
+    return reject(state, "There is no available Campfire.");
+  if (command.type === "rest" && state.phase !== "campfire") return reject(state, "Rest at a Campfire.");
   if (command.type === "newRun" && !["draft", "victory", "defeat"].includes(state.phase))
     return reject(state, "End the current journey first.");
   if (
@@ -393,7 +470,7 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
     return reject(state, "Choose an active creature and a reserve.");
   if (
     command.type === "setLineup" &&
-    (!["teamSelection", "recruit", "relic"].includes(state.phase) ||
+    (!["teamSelection", "recruit", "relic", "campfire"].includes(state.phase) ||
       ![...state.team, ...state.reserves].some(
         (c) => c.id === command.activeId && state.lineup.includes(c.id),
       ) ||
@@ -432,7 +509,7 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
     return reject(state, "There are no talents to reset in this category.");
   if (
     command.type === "abandon" &&
-    !["battle", "teamSelection", "recruit", "relic"].includes(state.phase) &&
+    !["battle", "teamSelection", "recruit", "relic", "campfire"].includes(state.phase) &&
     !(state.phase === "draft" && state.selected.length > 0)
   )
     return reject(state, "There is no journey to end.");
@@ -465,6 +542,15 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
         beginBattle(draft);
         events.push({ kind: "turn", text: "Your journey begins." });
         break;
+      case "visitCampfire":
+        draft.phase = "campfire";
+        break;
+      case "rest":
+        for (const creature of [...draft.team, ...draft.reserves])
+          restoreHealth(creature, Math.round(species(creature.species).health * 0.3), events, true);
+        draft.expedition!.campfireUsed = true;
+        draft.phase = "teamSelection";
+        break;
       case "play": {
         const battle = draft.battle!;
         const card = draft.cards.find((c) => c.id === command.cardId)!;
@@ -484,24 +570,14 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
         });
         if (def.effect === "attack") {
           const enemy = battle.enemies.find((e) => e.id === command.targetId)!;
-          const removed = Math.min(enemy.health, value);
-          enemy.health = Math.max(0, enemy.health - value);
+          hit(draft, actor, enemy, value, def.damageType, events, { leech: def.leech });
           actor.attacked = true;
-          events.push({
-            kind: "damage",
-            text: `${enemy.name} takes ${removed} ${DAMAGE_LABELS[def.damageType]} damage.`,
-            damageType: def.damageType,
-            targetId: enemy.id,
-            amount: removed,
-          });
-          if (enemy.health === 0)
-            events.push({ kind: "knockout", targetId: enemy.id, text: `${enemy.name} is knocked out.` });
         }
         if (def.effect === "guard" || def.effect === "teamGuard") {
           const targets =
             def.effect === "teamGuard" ? living(draft) : draft.team.filter((c) => c.id === command.targetId);
           for (const target of targets) {
-            target.block += value;
+            target.block = Math.min(1_000_000, target.block + value);
             events.push({
               kind: "block",
               text: `${species(target.species).name} gains ${value} block.`,
@@ -521,9 +597,17 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
             amount,
           });
         }
+        applyExtras(
+          draft,
+          actor,
+          def,
+          events,
+          false,
+          battle.enemies.find((e) => e.id === command.targetId),
+        );
         const followups = cardFollowups(card, draft);
         if (actor.health > 0 && followups.block > 0) {
-          actor.block += followups.block;
+          actor.block = Math.min(1_000_000, actor.block + followups.block);
           events.push({
             kind: "block",
             targetId: actor.id,

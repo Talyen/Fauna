@@ -1,3 +1,6 @@
+import { controlled } from "../game/combat";
+import { ArtCard } from "./art-card";
+import { assetUrl } from "./assets";
 import {
   useCallback,
   useEffect,
@@ -47,6 +50,7 @@ export function BattleScreen({
   onDenied,
   actions,
   clearSelection = false,
+  openPile,
 }: {
   game: GameState;
   send: (command: Command) => boolean;
@@ -58,6 +62,7 @@ export function BattleScreen({
   onDenied: (element: HTMLElement) => void;
   actions?: ReactNode;
   clearSelection?: boolean;
+  openPile?: (pile: "draw" | "discard") => void;
 }) {
   const [selected, setSelected] = useState<string | null>(null);
   useEffect(() => {
@@ -268,7 +273,7 @@ export function BattleScreen({
                   modifiers={game}
                   ownerName={species(owner.species).name}
                   selected={selected === id}
-                  disabled={battle.mana < definition(card.definitionId).cost}
+                  disabled={battle.mana < definition(card.definitionId).cost || controlled(owner)}
                   onDenied={onDenied}
                   onInspect={() => inspect({ card })}
                   onClick={() => setSelected((old) => (old === id ? null : id))}
@@ -278,8 +283,23 @@ export function BattleScreen({
           })}
         </div>
       </section>
+      <section className="battle-piles" data-nav-row aria-label="Card piles">
+        {(["draw", "discard"] as const).map((pile) => (
+          <div key={pile}>
+            <ArtCard
+              aspect="action"
+              artwork={assetUrl("relic.placeholder")}
+              aria-label={`Inspect ${pile === "draw" ? "Draw Pile" : "Discard Pile"}, ${battle[pile].length} cards`}
+              onClick={() => openPile?.(pile)}
+            />
+            <p>
+              {pile === "draw" ? "Draw Pile" : "Discard Pile"} · {battle[pile].length}
+            </p>
+          </div>
+        ))}
+      </section>
       <div className="hand-toolbar">
-        <ManaCrystals mana={battle.mana} previewCost={def?.cost ?? 0} />
+        <ManaCrystals mana={battle.mana} maximum={battle.maxMana} previewCost={def?.cost ?? 0} />
         <div className="battle-actions">
           {actions}
           <Button className="end-turn" onClick={() => play({ type: "endTurn" })}>

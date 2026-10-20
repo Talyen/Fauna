@@ -127,7 +127,7 @@ describe("journey earnings and results", () => {
       d.team[0]!.health = 1;
       d.battleXP = { block: 2 };
     });
-    s = accept(s, { type: "endTurn" });
+    for (let turn = 0; turn < 20 && s.phase === "battle"; turn++) s = accept(s, { type: "endTurn" });
     expect(s.phase).toBe("defeat");
     expect(s.journey).toMatchObject({ outcome: "defeat", victories: 0, currency: 0, xp: { block: 2 } });
     expect(decodeSave(encodeSave(s))).toEqual(s);

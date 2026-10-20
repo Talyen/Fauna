@@ -63,7 +63,7 @@ describe("one-starter expeditions", () => {
     let s = accept(accept(accept(createGame(7), { type: "draft", species: kind }), { type: "start" }), {
       type: "beginBattle",
     });
-    for (let i = 0; i < 200 && !["victory", "defeat"].includes(s.phase); i++) {
+    for (let i = 0; i < 400 && !["victory", "defeat"].includes(s.phase); i++) {
       s = accept(
         s,
         s.phase === "recruit" && s.roster.length < 5

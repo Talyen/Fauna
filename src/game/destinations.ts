@@ -117,7 +117,7 @@ export function encounterSource(
       ? { health: 8 + route.step * 5, damage: 2 + route.step }
       : { health: 20 + route.step * 2, damage: 4 };
   const leader = route.biome === 0 ? { health: 36, damage: 5 } : { health: 68, damage: 10 };
-  const companion = { health: 18, damage: 3 };
+  const escort = { health: 18, damage: 3 };
   return {
     name: place.name,
     enemies: pack.map((kind, index) => ({
@@ -128,7 +128,7 @@ export function encounterSource(
             : "The Hollow Crown"
           : species(kind).name,
       species: kind,
-      ...(boss ? (index === 0 ? leader : companion) : ordinary),
+      ...(boss ? (index === 0 ? leader : escort) : ordinary),
       damageType:
         kind === "emberfox"
           ? "fire"

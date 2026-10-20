@@ -45,6 +45,18 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
       error(card.id, "cost", "Unsupported Mana cost.");
     if (!Number.isSafeInteger(card.value) || card.value < 1 || card.value > 1_000_000)
       error(card.id, "value", "Unsupported effect amount.");
+    for (const tag of [card.leech])
+      if (tag !== undefined && typeof tag !== "boolean") error(card.id, "tags", "Invalid card tag.");
+    for (const effect of card.effects ?? []) {
+      if (!Number.isSafeInteger(effect.amount) || effect.amount < 1 || effect.amount > 100)
+        error(card.id, "effects", "Unsupported supplemental amount.");
+      if (!["damage", "status", "draw", "mana", "cleanse", "purge"].includes(effect.kind))
+        error(card.id, "effects", "Unknown supplemental effect.");
+      if (effect.kind === "damage" && !DAMAGE_TYPES.includes(effect.damageType))
+        error(card.id, "effects", "Unknown supplemental damage type.");
+      if (effect.kind === "status" && !["armor", "forge", "thorns", "dodge"].includes(effect.status))
+        error(card.id, "effects", "Unknown granted status.");
+    }
     if (!Object.hasOwn(EFFECT_KEYWORDS, card.effect)) error(card.id, "effect", "Unknown effect.");
     else if (card.effect === "attack" && !DAMAGE_TYPES.includes(card.damageType))
       error(card.id, "damageType", "Unknown damage type.");
