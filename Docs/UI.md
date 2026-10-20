@@ -55,7 +55,7 @@ The shared page layout centers actual content, wraps real items, and scrolls whe
 
 The design system uses `--screen-section-gap` (24px) between heading, body and footer, and `--screen-item-gap` (12px) between closely related content. Page gutters are fixed at 32px horizontally and 24px vertically. Dialogs reserve separate room for the close control. The choice heading sits directly above its recruit or relic row, separate from the Victory heading and earnings. Victory choice rows reserve only the space needed by the portrait art and its label, keeping headings and Skip aligned without oversized padding. Currency and materials occupy their own row above a centered keyword grid. Keyword XP uses the same keyword name, level and progress bar on Victory and Journey results, following Alchemy's talent XP presentation.
 
-Battle uses the fixed artwork sizes specified above. Health bars are centered with an inset equal to the artwork corner radius on each side. Mana sits in the lower-left corner, with 18px crystals and a 44px control target; Swap sits above End turn in the lower-right corner. The five-card hand rests low in the viewport. Its symmetric quadratic fan has a smooth curve; the middle card meets the bottom viewport edge and the outer two cards extend below it. Clipping is intentional, does not create page scroll, and never changes card size. Short viewports may scroll the combatants above the fixed hand and controls. Inspection scrolls rather than squeezing its artwork.
+Battle uses the fixed artwork sizes specified above. Health bars are centered with an inset equal to the artwork corner radius on each side. Mana sits in the lower-left corner, with 18px crystals and a 44px control target; Swap sits above End turn in the lower-right corner. The seven-card hand rests low in the viewport. Its symmetric quadratic fan has a smooth curve; the middle card meets the bottom viewport edge and the outer two cards extend below it. Clipping is intentional, does not create page scroll, and never changes card size. Short viewports may scroll the combatants above the fixed hand and controls. Inspection scrolls rather than squeezing its artwork.
 
 Review 1280×720, 1280×800, 1920×1080, 1024×768 (4:3), short 1024×600/960×540 windows, and 2560×1080/3440×1440 ultrawide. Include 150% text, reduced motion, inspection focus return, recruitment replacement cancellation, a full seven-card hand with hidden overflow, and reachable controls.
 
@@ -72,7 +72,7 @@ The color policy rejects raw hexadecimal/function/named colors in player UI, dir
 - Motion: 150ms purposeful transitions; respect reduced motion. Gameplay commits before visual feedback and input never waits on animations.
 - Icons: Lucide, with labels/numbers so color is never the only cue.
 
-The hand shows at most five playable cards. Extra draws remain entirely hidden in an unplayable buffer, with no count, controls or inspection view. Playing a card fills the open slot from the buffer in draw order. Ending the turn discards both hand and buffer.
+The hand shows at most seven playable cards. Extra draws remain entirely hidden in an unplayable buffer, with no count, controls or inspection view. Playing a card fills the open slot from the buffer in draw order. Ending the turn discards the visible hand and retains the buffer.
 
 ## Combat vocabulary
 

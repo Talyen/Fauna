@@ -2,7 +2,7 @@
 
 `src/game/destinations.ts` owns biome locations, enemy packs, and initial encounter scaling. `src/game/content.ts` retains the stable legacy encounters and owns the species roster, card definitions, displayed effect descriptions, and encounter templates. Each species contributes exactly three unique card definitions. Content validation runs at startup and in tests. Keep IDs stable once saves are supported.
 
-The first five species begin unlocked. Moonhart unlocks after the first journey victory. Each deployed creature contributes three cards, so the starting three-card deck grows to nine cards with a full lineup; recruitment adds defeated species to the five-slot roster. Only the deployed lineup of up to three creatures contributes cards, and free combat swaps replace cards in their existing zones. Starting lineups are remembered and optionally editable from the menu between battles. The prototype intentionally restores all creatures after each battle and has no positioning or elemental chart.
+The first five species begin unlocked. Moonhart unlocks after the first journey victory. Each deployed creature contributes three cards, so the starting three-card deck grows to nine cards with a full lineup; recruitment adds defeated species to the five-slot roster. Only the deployed lineup of up to three creatures contributes cards, and free combat swaps replace cards in their existing zones. Starting lineups are remembered and optionally editable from the menu between battles. Health and knockouts persist between battles; Campfire restores 30% maximum Health once per biome. There is no positioning or elemental chart.
 
 ## Artwork contracts
 
@@ -19,7 +19,7 @@ The initial asset set was authored by `scripts/create-placeholders.mjs`. Running
 
 ## Keyword artwork
 
-`public/art/keywords/` contains unchanged optimized portrait artwork copied from Alchemy for the Talents keyword overview. Use portrait ArtCards with contain rendering; the source images are 420 × 563 pixels.
+`public/art/keywords/` contains unchanged optimized portrait artwork copied from Alchemy for optional keyword illustrations. Talents currently uses text tabs and does not require artwork for each category. Use portrait ArtCards with contain rendering; the source images are 420 × 563 pixels.
 
 | Fauna keyword | Local file       | Alchemy source         |
 | ------------- | ---------------- | ---------------------- |
@@ -33,7 +33,7 @@ The initial asset set was authored by `scripts/create-placeholders.mjs`. Running
 | Block         | `block.webp`     | `talent-block.webp`    |
 | Healing       | `heal.webp`      | `talent-health.webp`   |
 
-Source directory: `Alchemy: src/assets/optimized/`. Artwork reuse does not import Alchemy's keyword mechanics. All nine talent categories have matching artwork.
+Source directory: `Alchemy: src/assets/optimized/`. Artwork reuse does not import Alchemy's keyword mechanics. The nine original keyword illustrations are registered; additional talent categories do not require illustrations.
 
 ## Composition
 

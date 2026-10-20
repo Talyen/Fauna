@@ -637,7 +637,7 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
       case "setLineup": {
         const outgoing = [...draft.team, ...draft.reserves].find((c) => c.id === command.activeId)!;
         draft.lineup[draft.lineup.indexOf(outgoing.id)] = command.reserve;
-        if (draft.phase === "teamSelection") prepareLineup(draft);
+        if (draft.phase === "teamSelection" || draft.phase === "campfire") prepareLineup(draft);
         break;
       }
       case "swap": {

@@ -264,3 +264,24 @@ it("allows Dodge again after the control skip resolves while shared buildup immu
   expect(next.battle!.enemies[0]!.combat.cooldown).toBe(3);
   expect(events.at(-1)!.text).toContain("Dodges");
 });
+
+it("keeps Campfire lineup changes resumable before and after Rest", () => {
+  let state = produce(run(), (s) => {
+    s.phase = "teamSelection";
+    s.battle = null;
+    s.encounter = 3;
+    s.expedition = { biome: 0, step: 3, offers: [{ location: "hollow-heart", pack: 0 }], chosen: null };
+    s.roster.push("silkmoth");
+    s.reserves.push({ id: "reserve-moth", species: "silkmoth", health: 5, block: 0, attacked: false });
+  });
+  state = accept(state, { type: "visitCampfire" });
+  const outgoing = state.team[0]!.id;
+  state = accept(state, { type: "setLineup", activeId: outgoing, reserve: "reserve-moth" });
+  expect(state.team[0]!.id).toBe("reserve-moth");
+  expect(state.cards.filter((card) => card.ownerId === "reserve-moth")).toHaveLength(3);
+  state = decodeSave(encodeSave(state));
+  state = accept(state, { type: "rest" });
+  expect(decodeSave(encodeSave(state))).toEqual(state);
+  expect(state.team[0]!.health).toBe(12);
+  expect(state.reserves[0]!.id).toBe(outgoing);
+});

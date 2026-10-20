@@ -37,7 +37,8 @@ try {
   if ((await window.locator(".inspection-thumbnails .action-card").count()) !== 3)
     throw new Error("Creature inspection did not expose three portrait actions.");
   await window.locator(".inspection-thumbnails .action-card").first().click();
-  await window.getByRole("button", { name: "Next action", exact: true }).click();
+  await window.keyboard.press("d");
+  await window.getByRole("dialog", { name: "Shelter details", exact: true }).waitFor();
   await window.getByRole("button", { name: "Back", exact: true }).click();
   await window.getByRole("button", { name: "Close inspection", exact: true }).click();
   // Exercise free swaps through the actual renderer and current-format desktop storage.
@@ -53,7 +54,14 @@ try {
       const id = `ally-${state.team.length}`;
       state.roster.push(kind);
       state.lineup.push(id);
-      state.team.push({ id, species: kind, health, block: 0, attacked: false });
+      state.team.push({
+        id,
+        species: kind,
+        health,
+        block: 0,
+        attacked: false,
+        combat: structuredClone(state.team[0].combat),
+      });
       for (const effect of effects) {
         const definitionId = `${kind}-${effect}`;
         const card = { id: `${id}:${definitionId}`, definitionId, ownerId: id, level: 0 };
@@ -66,6 +74,7 @@ try {
       id: `recruit-${kind}`,
       species: kind,
       health: 20,
+      combat: structuredClone(state.team[0].combat),
       block: 0,
       attacked: false,
     }));
@@ -81,9 +90,9 @@ try {
     JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
   );
   if (
-    swapped.version !== 11 ||
+    swapped.version !== 12 ||
     swapped.team[0].species !== "silkmoth" ||
-    swapped.battle.mana !== 3 ||
+    swapped.battle.mana !== 4 ||
     swapped.lineup[0] !== "ally-0"
   )
     throw new Error("Desktop combat swap or lineup persistence failed.");
@@ -129,7 +138,7 @@ try {
   );
   if (
     after.revision !== before.revision + 1 ||
-    after.battle.mana !== 3 ||
+    after.battle.mana !== 4 ||
     after.battle.turn !== before.battle.turn + 1 ||
     after.battle.enemies[0].health >= before.battle.enemies[0].health
   )

@@ -11,9 +11,9 @@ describe("desktop storage", () => {
     const directory = await mkdtemp(path.join(tmpdir(), "fauna-storage-"));
     try {
       const storage = createStorage(directory);
-      const values = [1, 2, 3, 4, 5, 6, 7].map((revision) => JSON.stringify({ version: 11, revision }));
+      const values = [1, 2, 3, 4, 5, 6, 7].map((revision) => encodeSave({ ...createGame(), revision }));
       await storage.write(encodeSave(createGame()));
-      await expect(storage.write(JSON.stringify({ version: 10 }))).rejects.toThrow("Unsupported");
+      await expect(storage.write(JSON.stringify({ version: 11 }))).rejects.toThrow("Unsupported");
       const writes = values.map((data) => storage.write(data));
       await storage.drain();
       await Promise.all(writes);

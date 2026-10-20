@@ -21,8 +21,9 @@ try {
     requireAsset(`action.${species.id}`);
   }
   for (const place of contentCatalog.locations) requireAsset(`location.${place.id}`);
-  for (const keyword of new Set(contentCatalog.talents.map((talent) => talent.keyword)))
-    requireAsset(`keyword.${keyword}`);
+  // Keyword tabs use text; illustrations are optional selections, not a talent prerequisite.
+  for (const entry of manifest.assets.filter((asset) => asset.id.startsWith("keyword.")))
+    requireAsset(entry.id);
   requireAsset("relic.placeholder");
   requireAsset("mana.full");
   requireAsset("mana.empty");
