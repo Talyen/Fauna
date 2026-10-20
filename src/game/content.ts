@@ -1,5 +1,7 @@
+import { DAMAGE_TYPES, keywordLabel, type DamageType, EFFECT_KEYWORDS } from "./keywords";
+export { DAMAGE_TYPES, type DamageType } from "./keywords";
 export type SpeciesId = "mossback" | "emberfox" | "stormfin" | "silkmoth" | "briartooth" | "moonhart";
-export type Effect = "attack" | "mark" | "guard" | "heal" | "teamGuard";
+export type Effect = keyof typeof EFFECT_KEYWORDS;
 export interface Species {
   id: SpeciesId;
   name: string;
@@ -9,17 +11,10 @@ export interface Species {
   trait: string;
   description: string;
 }
-export const DAMAGE_TYPES = ["physical", "fire", "ice", "lightning", "poison", "nature", "light"] as const;
-export type DamageType = (typeof DAMAGE_TYPES)[number];
-export const DAMAGE_LABELS: Record<DamageType, string> = {
-  physical: "Physical",
-  fire: "Fire",
-  ice: "Ice",
-  lightning: "Lightning",
-  poison: "Poison",
-  nature: "Nature",
-  light: "Light",
-};
+export const DAMAGE_LABELS = Object.fromEntries(DAMAGE_TYPES.map((id) => [id, keywordLabel(id)])) as Record<
+  DamageType,
+  string
+>;
 interface CardBase {
   id: string;
   species: SpeciesId;

@@ -1,3 +1,4 @@
+import { Keyword as KeywordLabel, KeywordText } from "./keyword-text";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui/tabs";
 import { useState } from "react";
 import { Coins, Gem, Feather, Shell, Leaf, Circle, Check, Sparkles } from "lucide-react";
@@ -151,7 +152,7 @@ export function Rewards({ game, send, inspect }: Props) {
             return (
               <div className="reward-keyword" key={keyword} data-combat-tone={keyword}>
                 <div className="reward-keyword-label">
-                  <span>{keywordLabel(keyword)}</span>
+                  <KeywordLabel id={keyword} />
                   <span>+{gain} XP</span>
                 </div>
                 <Progress
@@ -270,7 +271,7 @@ export function Talents({ game, send, back }: { game: GameState; send: Props["se
         <TabsList className="keyword-tabs" aria-label="Talent keywords">
           {KEYWORDS.map((id) => (
             <TabsTrigger key={id} value={id}>
-              {keywordLabel(id)}
+              <KeywordLabel id={id} />
             </TabsTrigger>
           ))}
         </TabsList>
@@ -317,7 +318,9 @@ export function Talents({ game, send, back }: { game: GameState; send: Props["se
                         <strong>
                           {keywordLabel(keyword)} · {t.name}
                         </strong>
-                        <p>{t.text}</p>
+                        <p>
+                          <KeywordText text={t.text} />
+                        </p>
                         <p>
                           {owned
                             ? "Unlocked"

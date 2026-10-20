@@ -1,3 +1,4 @@
+import { KeywordText } from "./keyword-text";
 import { definition, species, type SpeciesId } from "../game/content";
 import { actionValue, cardFollowups } from "../game/rules";
 import type { Creature, Card, GameState } from "../game/types";
@@ -9,12 +10,12 @@ function Followups({ card, modifiers }: { card: Pick<Card, "definitionId">; modi
     <>
       {block > 0 ? (
         <p>
-          Acting creature gains <span data-combat-tone="block">{block} Block</span>.
+          <KeywordText text={`Acting creature gains ${block} Block.`} />
         </p>
       ) : null}
       {heal > 0 ? (
         <p>
-          Acting creature restores <span data-combat-tone="health">{heal} Health</span>.
+          <KeywordText text={`Acting creature restores ${heal} Health.`} />
         </p>
       ) : null}
     </>
@@ -39,7 +40,7 @@ export function ActionDetails({
         {card.level ? ` +${card.level}` : ""}
       </strong>
       <p>
-        {ownerName} · {def.cost} mana
+        <KeywordText text={`${ownerName} · ${def.cost} mana`} />
       </p>
       <CardRules
         card={def}
@@ -73,7 +74,11 @@ export function CreatureDetails({
         {health ?? info.health}/{maxHealth ?? info.health} health{block ? ` · ${block} block` : ""}
         {marks ? ` · ${marks} marks` : ""}
       </p>
-      {!name ? <p>{info.description}</p> : null}
+      {!name ? (
+        <p>
+          <KeywordText text={info.description} />
+        </p>
+      ) : null}
     </div>
   );
 }

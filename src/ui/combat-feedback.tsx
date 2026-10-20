@@ -181,7 +181,9 @@ export function CombatFeedback({ bursts, targetId }: { bursts: readonly Burst[];
                 <span
                   key={i}
                   className="combat-number"
-                  data-combat-tone={e.kind === "heal" ? "health" : e.kind === "block" ? "block" : undefined}
+                  data-combat-tone={
+                    e.kind === "heal" || e.kind === "block" || e.kind === "mark" ? e.kind : undefined
+                  }
                 >
                   {e.kind === "damage" ? (
                     <DamageValue type={e.damageType ?? "physical"} amount={e.amount ?? 0} signed />

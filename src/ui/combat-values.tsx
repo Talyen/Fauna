@@ -1,3 +1,4 @@
+import { KeywordText } from "./keyword-text";
 import { Flame, FlaskConical, Leaf, Snowflake, Sun, Swords, Zap } from "lucide-react";
 import { cardText, DAMAGE_LABELS, type CardDefinition, type DamageType } from "../game/content";
 const DAMAGE_ICONS = {
@@ -42,20 +43,9 @@ export function CardRules({
   level?: number;
   value?: number;
 }) {
-  const text = cardText(card, level, value),
-    period = text.indexOf(".");
-  const tone =
-    card.effect === "attack"
-      ? card.damageType
-      : card.effect === "heal"
-        ? "health"
-        : card.effect === "guard" || card.effect === "teamGuard"
-          ? "block"
-          : undefined;
   return (
     <span className="action-effect">
-      <span data-combat-tone={tone}>{period < 0 ? text : text.slice(0, period + 1)}</span>
-      {period < 0 ? "" : text.slice(period + 1)}
+      <KeywordText text={cardText(card, level, value)} />
     </span>
   );
 }

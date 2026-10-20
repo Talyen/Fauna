@@ -43,7 +43,7 @@ export function BattleReadout({
           </span>
         ) : null}
         {marks > 0 ? (
-          <span>
+          <span data-combat-tone="mark">
             <Crosshair aria-hidden="true" />
             {marks}
           </span>
@@ -93,7 +93,7 @@ export function TargetPreview({
               {e.kind === "damage" ? (
                 <DamageValue type={e.damageType ?? "physical"} amount={e.amount ?? 0} signed />
               ) : (
-                <span data-combat-tone="health">
+                <span data-combat-tone="heal">
                   <Heart aria-hidden="true" />+{e.amount}
                 </span>
               )}

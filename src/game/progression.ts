@@ -1,21 +1,12 @@
-import { DAMAGE_TYPES, DAMAGE_LABELS, definition } from "./content";
+import { definition } from "./content";
+import { PROGRESSION_KEYWORDS, definitionKeywords, type ProgressionKeyword } from "./keywords";
+export { keywordLabel } from "./keywords";
 import type { Card, GameState } from "./types";
-export const KEYWORDS = [...DAMAGE_TYPES, "block", "heal", "mark"] as const;
-export type Keyword = (typeof KEYWORDS)[number];
+export const KEYWORDS = PROGRESSION_KEYWORDS;
+export type Keyword = ProgressionKeyword;
 export type KeywordXP = Partial<Record<Keyword, number>>;
-export const keywordLabel = (id: Keyword) =>
-  id in DAMAGE_LABELS
-    ? DAMAGE_LABELS[id as keyof typeof DAMAGE_LABELS]
-    : ({ block: "Block", heal: "Healing", mark: "Mark" } as const)[id as "block" | "heal" | "mark"];
 export function cardKeywords(card: Pick<Card, "definitionId">): Keyword[] {
-  const def = definition(card.definitionId);
-  return [
-    def.effect === "attack"
-      ? def.damageType
-      : def.effect === "guard" || def.effect === "teamGuard"
-        ? "block"
-        : def.effect,
-  ];
+  return definitionKeywords(definition(card.definitionId));
 }
 export const TALENT_EFFECTS = ["potency", "mastery", "shelter", "focus", "renewal", "opening"] as const;
 export type TalentEffect = (typeof TALENT_EFFECTS)[number];

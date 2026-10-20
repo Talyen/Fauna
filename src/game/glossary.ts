@@ -1,17 +1,17 @@
+import { KEYWORD_DEFINITIONS, KEYWORD_IDS } from "./keywords";
+
 export const GLOSSARY = [
   {
     term: "Health",
-    definition:
-      "A creature's remaining life. At zero health it is knocked out. Healing cannot exceed maximum health.",
+    definition: KEYWORD_DEFINITIONS.health.description,
   },
   {
     term: "Block",
-    definition:
-      "Absorbs incoming damage before health. Each point absorbs one damage and is spent. Remaining block expires at the start of your next turn.",
+    definition: KEYWORD_DEFINITIONS.block.description,
   },
   {
     term: "Mana",
-    definition: "The shared resource spent to play action cards. Your team starts each turn with 3 mana.",
+    definition: KEYWORD_DEFINITIONS.mana.description,
   },
   {
     term: "Action card",
@@ -34,8 +34,7 @@ export const GLOSSARY = [
   },
   {
     term: "Marks",
-    definition:
-      "A stack on an enemy. The next attack against it consumes all marks, adding 3 damage per mark. Marks last until consumed or the battle ends.",
+    definition: KEYWORD_DEFINITIONS.mark.description,
   },
   {
     term: "Turn",
@@ -84,6 +83,11 @@ export const GLOSSARY = [
   },
   {
     term: "Currency",
-    definition: "Battle-earned currency is permanent. Spending will be added in a future update.",
+    definition: KEYWORD_DEFINITIONS.currency.description,
   },
+  ...KEYWORD_IDS.filter(
+    (id) =>
+      KEYWORD_DEFINITIONS[id].availability === "active" &&
+      !["health", "block", "mana", "mark", "currency"].includes(id),
+  ).map((id) => ({ term: KEYWORD_DEFINITIONS[id].label, definition: KEYWORD_DEFINITIONS[id].description })),
 ] as const;

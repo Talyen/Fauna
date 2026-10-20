@@ -734,44 +734,117 @@ button {
     animation: none !important;
   }
 }
-/* Combat colors share Alchemy's families; green foregrounds are lighter for legibility. */
+/* Keyword identity owns text, combat feedback and progression colors. */
 [data-damage-type="physical"],
-[data-combat-tone="physical"] {
-  color: var(--damage-physical);
+[data-combat-tone="physical"],
+[data-keyword="physical"] {
+  color: var(--keyword-physical);
 }
 [data-damage-type="fire"],
-[data-combat-tone="fire"] {
-  color: var(--damage-fire);
+[data-combat-tone="fire"],
+[data-keyword="fire"] {
+  color: var(--keyword-fire);
 }
 [data-damage-type="ice"],
-[data-combat-tone="ice"] {
-  color: var(--damage-ice);
+[data-combat-tone="ice"],
+[data-keyword="ice"] {
+  color: var(--keyword-ice);
 }
 [data-damage-type="lightning"],
-[data-combat-tone="lightning"] {
-  color: var(--damage-lightning);
+[data-combat-tone="lightning"],
+[data-keyword="lightning"] {
+  color: var(--keyword-lightning);
 }
 [data-damage-type="poison"],
-[data-combat-tone="poison"] {
-  color: var(--damage-poison);
+[data-combat-tone="poison"],
+[data-keyword="poison"] {
+  color: var(--keyword-poison);
 }
 [data-damage-type="nature"],
-[data-combat-tone="nature"] {
-  color: var(--damage-nature);
+[data-combat-tone="nature"],
+[data-keyword="nature"] {
+  color: var(--keyword-nature);
 }
 [data-damage-type="light"],
-[data-combat-tone="light"] {
-  color: var(--damage-light);
+[data-combat-tone="light"],
+[data-keyword="light"] {
+  color: var(--keyword-light);
 }
-[data-combat-tone="health"] {
-  color: var(--health);
+[data-combat-tone="health"],
+[data-keyword="health"] {
+  color: var(--keyword-health);
 }
-[data-combat-tone="block"] {
-  color: var(--block);
+[data-combat-tone="mana"],
+[data-keyword="mana"] {
+  color: var(--keyword-mana);
 }
-
-[data-combat-tone="heal"] {
-  color: var(--health);
+[data-combat-tone="block"],
+[data-keyword="block"] {
+  color: var(--keyword-block);
+}
+[data-combat-tone="heal"],
+[data-keyword="heal"] {
+  color: var(--keyword-heal);
+}
+[data-combat-tone="mark"],
+[data-keyword="mark"] {
+  color: var(--keyword-mark);
+}
+[data-combat-tone="thorns"],
+[data-keyword="thorns"] {
+  color: var(--keyword-thorns);
+}
+[data-combat-tone="currency"],
+[data-keyword="currency"] {
+  color: var(--keyword-currency);
+}
+[data-combat-tone="dodge"],
+[data-keyword="dodge"] {
+  color: var(--keyword-dodge);
+}
+[data-combat-tone="armor"],
+[data-keyword="armor"] {
+  color: var(--keyword-armor);
+}
+[data-combat-tone="forge"],
+[data-keyword="forge"] {
+  color: var(--keyword-forge);
+}
+[data-combat-tone="burn"],
+[data-keyword="burn"] {
+  color: var(--keyword-burn);
+}
+[data-combat-tone="freeze"],
+[data-keyword="freeze"] {
+  color: var(--keyword-freeze);
+}
+[data-combat-tone="bleed"],
+[data-keyword="bleed"] {
+  color: var(--keyword-bleed);
+}
+[data-combat-tone="stun"],
+[data-keyword="stun"] {
+  color: var(--keyword-stun);
+}
+[data-combat-tone="leech"],
+[data-keyword="leech"] {
+  color: var(--keyword-leech);
+}
+[data-combat-tone="wish"],
+[data-keyword="wish"] {
+  color: var(--keyword-wish);
+}
+[data-combat-tone="consume"],
+[data-keyword="consume"] {
+  color: var(--keyword-consume);
+}
+[data-combat-tone="archery"],
+[data-keyword="archery"] {
+  color: var(--keyword-archery);
+}
+[data-combat-tone="companion"],
+[data-keyword="companion"] {
+  color: var(--keyword-companion);
 }
 .combat-feedback {
   pointer-events: none;

@@ -57,7 +57,7 @@ The color policy rejects raw hexadecimal/function/named colors in player UI, dir
 
 ## Combat vocabulary
 
-Adapted from Alchemy's `src/lib/game-data/keywords.ts` palette and `src/features/alchemy/shared/config/metadata.ts` icon pairings. Health uses red (#f87171, Heart), block sky blue (#7dd3fc, Shield), and marks stay neutral (Crosshair). Damage color follows the attack type, independent of lost health:
+Adapted from Alchemy's `src/lib/game-data/keywords.ts` palette and `src/features/alchemy/shared/config/metadata.ts` icon pairings. Health uses red (#f87171, Heart), block sky blue (#7dd3fc, Shield), and marks use violet (Crosshair). Damage color follows the attack type, independent of lost health:
 
 | Type      | Foreground | Icon         |
 | --------- | ---------- | ------------ |
@@ -69,7 +69,7 @@ Adapted from Alchemy's `src/lib/game-data/keywords.ts` palette and `src/features
 | Nature    | #34d399    | Leaf         |
 | Light     | #fde68a    | Sun          |
 
-Poison and Nature use lighter foregrounds from Alchemy's green/emerald families for readable text on black and artwork. Tooltip attack rules spell out the type; floating feedback and target previews retain the damage type. Enemy intents are hidden. Healing and block clauses use their own colors; secondary rules stay neutral.
+Poison and Nature use lighter foregrounds from Alchemy's green/emerald families for readable text on black and artwork. Tooltip attack rules spell out the type; floating feedback and target previews retain the damage type. Enemy intents are hidden. Keyword words in rules use their assigned colors, including secondary clauses; other prose stays neutral. Healing has a rose identity, distinct from Health.
 
 Types are content metadata, carried on damage presentation events. Existing version-one saves derive enemy types from encounter content. Types add no resistances, status effects, or damage arithmetic. Ice and Poison are reserved vocabulary until authored attacks use them.
 
@@ -96,3 +96,5 @@ Browser controller simulation does not verify physical controller behavior. Repo
 - Invalid targets dim slightly; knocked-out creatures retain their slots with dimmed grayscale artwork and empty health bars. Empty battlefield clicks cancel selection. A/D retains remembered valid targets.
 - Selected cards softly fade the Mana crystals they would spend. Actual Mana changes only after acceptance. Unavailable cards stay dimmed and inspectable; activation gives a short shake and quiet denial cue, without explanatory text. Sound and reduced-motion settings apply; rejected input never publishes gameplay or saves.
 - Mouse use stays hover-driven: no programmatic battle targeting focus, automatic hand focus, focus-only tooltip or focus lift. Navigation keys, Tab and controller navigation intentionally activate focus. After play, keyboard/controller focus moves to the nearest remaining hand slot. Pointer selection itself still lifts the selected card.
+
+The shared [keyword catalog](KEYWORDS.md) assigns every current and planned keyword a semantic `--keyword-<id>` foreground. Current resource and damage tokens alias that palette. Card prose, passives, glossary definitions, talent tabs and XP feedback consume the same identity. Planned keywords remain outside automatic prose highlighting and the player glossary until their rules are implemented.

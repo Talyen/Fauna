@@ -1,3 +1,4 @@
+import { KeywordText } from "./keyword-text";
 import { useLayoutEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -243,7 +244,9 @@ export function Inspector({
               {enemy ? <h2 className="inspection-kit-label">Species kit · {creature.name}</h2> : null}
               <div className="inspection-passive">
                 <strong>{creature.trait}</strong>
-                <p>{creature.description}</p>
+                <p>
+                  <KeywordText text={creature.description} />
+                </p>
               </div>
               <div className="inspection-thumbnails" ref={thumbnails} data-nav-row>
                 {cards.map((action, index) => (

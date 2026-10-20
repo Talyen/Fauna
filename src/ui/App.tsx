@@ -1,3 +1,4 @@
+import { KeywordText } from "./keyword-text";
 import { Switch } from "../components/ui/switch";
 import { RadioGroup, RadioGroupItem } from "../components/ui/radio-group";
 import {
@@ -363,8 +364,12 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
               <dl>
                 {GLOSSARY.map((entry) => (
                   <div key={entry.term}>
-                    <dt>{entry.term}</dt>
-                    <dd>{entry.definition}</dd>
+                    <dt>
+                      <KeywordText text={entry.term} />
+                    </dt>
+                    <dd>
+                      <KeywordText text={entry.definition} />
+                    </dd>
                   </div>
                 ))}
               </dl>
