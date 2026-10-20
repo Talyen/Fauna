@@ -41,27 +41,15 @@ describe("mana turn settlement", () => {
       d.battle!.mana = 1;
     });
     const result = dispatch(s, { type: "play", cardId: s.battle!.hand[0]!, targetId: "enemy-0" });
-    expect(result.state.phase).toBe("reward");
+    expect(result.state.phase).toBe("recruit");
     expect(result.state.battle!.turn).toBe(1);
     expect(result.events.some((e) => e.actorId?.startsWith("enemy-"))).toBe(false);
   });
-  it("migrates legacy energy saves and deterministically settles an exhausted legacy turn", () => {
-    const current = lastMana();
-    const legacy = { ...current, version: 1, battle: { ...current.battle!, energy: 1 } } as Record<
-      string,
-      unknown
-    >;
-    delete (legacy.battle as Record<string, unknown>).mana;
-    expect(decodeSave(JSON.stringify(legacy))).toEqual(current);
-    (legacy.battle as Record<string, unknown>).energy = 0;
-    const once = decodeSave(JSON.stringify(legacy));
-    expect(once.version).toBe(6);
-    expect(once.battle!.turn).toBe(2);
-    expect(once.battle!.mana).toBe(3);
-    expect(decodeSave(encodeSave(once))).toEqual(once);
-    expect(decodeSave(JSON.stringify(legacy))).toEqual(once);
-    (legacy.battle as Record<string, unknown>).energy = -1;
-    expect(() => decodeSave(JSON.stringify(legacy))).toThrow();
+  it("rejects exhausted committed turns instead of repairing them during load", () => {
+    const exhausted = produce(lastMana(), (d) => {
+      d.battle!.mana = 0;
+    });
+    expect(() => decodeSave(encodeSave(exhausted))).toThrow();
   });
 });
 describe("outcome-driven impact and sound", () => {

@@ -5,7 +5,7 @@ import { definition, species } from "../../src/game/content";
 import { location } from "../../src/game/destinations";
 import { RELICS } from "../../src/game/progression";
 import type { GameState } from "../../src/game/types";
-import { accept, policy, winBattle, run } from "../unit/helpers";
+import { accept, policy, winBattle, run, bossReward } from "../unit/helpers";
 const key = "fauna.save.v1";
 async function seed(page: Page, game = createGame(7)) {
   await page.goto("/");
@@ -38,9 +38,8 @@ async function step(page: Page, activate: (el: Locator) => Promise<void> = (el) 
         page.getByRole("button", { name: `Inspect ${location(c.destination)!.name}`, exact: true }),
       );
     await activate(page.getByRole("button", { name: "Begin battle", exact: true }));
-  } else if (c.type === "continueReward")
-    await activate(page.getByRole("button", { name: "Continue", exact: true }));
-  else if (c.type === "skipRecruit") await activate(page.getByRole("button", { name: "Skip", exact: true }));
+  } else if (c.type === "skipRecruit")
+    await activate(page.getByRole("button", { name: "Skip", exact: true }));
   else if (c.type === "chooseRelic")
     await activate(
       page.getByRole("button", {
@@ -368,11 +367,9 @@ test("recruitment adds a reserve, selection swaps its kit, and remembers active 
 }) => {
   await seed(page, winBattle());
   await resume(page);
-  await page.getByRole("button", { name: "Continue", exact: true }).click();
   await page.getByRole("button", { name: "Recruit Briartooth", exact: true }).click();
   expect((await state(page)).roster).toHaveLength(4);
-  expect((await state(page)).phase).toBe("relic");
-  await page.getByRole("button", { name: "Skip", exact: true }).click();
+  expect((await state(page)).phase).toBe("teamSelection");
   await expect(page.getByRole("button", { name: "Mossback, starting", exact: true })).toHaveCount(0);
   await page.getByRole("button", { name: "Open menu" }).click();
   await page.getByRole("button", { name: "Lineup", exact: true }).click();
@@ -524,14 +521,12 @@ test("last mana saves the full turn before immediate close and does not replay o
   await expect(reopened.locator(".combat-number")).toHaveCount(0);
 });
 test("rewards resume without duplicate XP, currency, recruitment or relics", async ({ page }) => {
-  const fixture = winBattle();
+  const fixture = bossReward();
   await seed(page, fixture);
   await resume(page);
   await page.reload();
   await resume(page);
   expect((await state(page)).currency).toBe(fixture.currency);
-  await page.getByRole("button", { name: "Continue", exact: true }).click();
-  await page.getByRole("button", { name: "Skip", exact: true }).click();
   const before = await state(page);
   await page.reload();
   await resume(page);
@@ -638,14 +633,13 @@ for (const [width, height] of [
       .locator(".collection-grid img")
       .evaluateAll((imgs) => Promise.all(imgs.map((img) => (img as HTMLImageElement).decode())));
     await page.screenshot({ path: `reports/implementation/collection-${width}.png` });
-    let reward = winBattle(fixture);
+    const reward = winBattle();
     await seed(page, reward);
     await resume(page);
     await fits(page);
     await page.screenshot({ path: `reports/implementation/rewards-${width}.png` });
-    await page.getByRole("button", { name: "Continue", exact: true }).click();
-    if ((await state(page)).phase === "recruit")
-      await page.getByRole("button", { name: "Skip", exact: true }).click();
+    await seed(page, bossReward());
+    await resume(page);
     await fits(page);
     await page.screenshot({ path: `reports/implementation/relic-${width}.png` });
     await page.getByRole("button", { name: "Skip", exact: true }).click();
@@ -1124,7 +1118,7 @@ for (const [width, height] of [
     await page.getByRole("button", { name: "Mossback, starting", exact: true }).click();
     const edited = await state(page);
     expect(edited.lineup[0]).toBe("silkmoth");
-    expect(edited.phase).toBe("reward");
+    expect(edited.phase).toBe("recruit");
     expect(edited.reward).toEqual(reward.reward);
     await page.reload();
     await resume(page);
@@ -1183,7 +1177,7 @@ test("a fallen deployed row resumes with no playable cards and can recover throu
 test("recruitment at five requires replacement and updates a released starter's lineup entry", async ({
   page,
 }) => {
-  const fixture = produce(accept(winBattle(), { type: "continueReward" }), (d) => {
+  const fixture = produce(winBattle(), (d) => {
     d.wins = 1;
     d.unlocked.push("moonhart");
     d.roster.push("silkmoth", "moonhart");
@@ -1208,7 +1202,7 @@ test("recruitment at five requires replacement and updates a released starter's 
   expect(recruited.roster).toHaveLength(5);
   expect(recruited.roster).not.toContain("mossback");
   expect(recruited.lineup[0]).toBe("briartooth");
-  expect(recruited.phase).toBe("relic");
+  expect(recruited.phase).toBe("teamSelection");
   await page.reload();
   await resume(page);
   expect((await state(page)).lineup).toEqual(recruited.lineup);

@@ -27,7 +27,6 @@ These are the agreed directions from the design review. They supersede the proto
 - Opening a location is inspection, not commitment. Show its exact enemy group; inspect each creature's battle health and collectible kit in the same dialog. Back/Escape returns action → creature → location → destination screen. Begin battle commits the inspected location directly.
 - Seeded gameplay chooses location offers and packs once when entering the choice screen. Save those offers and the chosen location. Inspection, cancellation, menus, and reload never reroll enemies or consume randomness.
 - Location pools contain themed packs; identities are stable while inhabitants vary between runs. Initial enemy stats grow with chapter progress, with easier first encounters for a single starter. These values are playtest tuning, not final balance.
-- Existing active saves keep their original fixed three-battle journey. New runs and unfinished old drafts use the biome flow.
 
 ## Keyword XP and talents
 
@@ -51,7 +50,7 @@ These are the agreed directions from the design review. They supersede the proto
 
 ## Recruitment
 
-- Recruit from defeated enemy species after a victory.
+- Recruit from defeated enemy species after an ordinary combat victory.
 - Recruiting adds a creature to the journey roster rather than forcing an immediate active-team replacement.
 - The roster has one creature per species. Already-owned species do not create duplicate recruits.
 - Recruitment remains a direct commitment on the final choice, without a separate confirmation.
@@ -66,13 +65,13 @@ These are the agreed directions from the design review. They supersede the proto
 - Initial battle item rewards focus on run-wide relics: passive effects for the whole journey.
 - When a battle awards a relic, offer a choice of three.
 - Choose one relic or skip the reward. Relics use 3:4 portrait artwork wherever displayed, matching hand cards. Use the shared blank placeholder until dedicated artwork is authored; names stay below the art and effects in hover/focus tooltips.
-- Starter tuning: Currency pays 20 per ordinary victory and 40 for each biome boss. Each ordinary victory offers three distinct unowned relics when three remain. Five starter relics are authored in `src/game/progression.ts`; their ownership lasts only for the journey. Currency spending and material types remain undefined and are not implemented.
+- Starter tuning: Currency pays 20 per ordinary victory and 40 for each biome boss. Only intermediate biome bosses offer three distinct unowned relics when three remain. Ordinary combat offers recruitment, never relics; intermediate bosses offer relics, never recruitment. Five starter relics are authored in `src/game/progression.ts`; their ownership lasts only for the journey. Currency spending and material types remain undefined and are not implemented.
 
 ## Screen flow and Journey results
 
-Journey is the player-facing name. Internal command IDs, route fields, filenames, and storage paths remain stable for compatibility.
+Journey is the player-facing name. Internal command IDs, route fields, filenames, and storage paths retain their existing names.
 
-Ordinary victory → recruitment (if available) → relic choice (if awarded) → fresh destinations. Compact last-battle currency and keyword XP earnings appear beside choices and remain visible on destinations until the next battle. No separate acknowledgement screen interrupts new journeys. If neither decision is available, proceed directly to destinations.
+Ordinary victory → shared Reward screen with recruitment (if available) → fresh destinations. Intermediate boss victory → the same Reward screen with relic choices (if available) → the next biome. Compact last-battle currency and keyword XP earnings appear beside choices and remain visible on destinations until the next battle. No separate acknowledgement screen interrupts new journeys. If neither decision is available, proceed directly to destinations.
 
 Final victory or defeat → Journey results. Ending a started journey voluntarily also opens results, labeled Returned home. Ending an unfinished starter choice simply returns to the main menu.
 
@@ -81,7 +80,7 @@ Final victory or defeat → Journey results. Ending a started journey voluntaril
 - Banking and totals update atomically with accepted gameplay commands. Browsing results never grants rewards or saves. Report actual retained earnings at progression caps.
 - Results offer a single centered Main menu action. Start a new journey only from the main menu.
 - New journey resets journey totals and roster/relics while preserving permanent progress. Main menu can reopen the last results until a new journey begins; this is not a multi-journey history.
-- Legacy saves preserve their reward/recruit/relic flow. Journey totals are unavailable for journeys that started before tracking existed; do not derive them from lifetime currency or XP.
-- Material types remain undefined and are not shown. Recruitment and relic choices remain separate screens and may be skipped; final choices commit immediately.
+- Development saves are disposable; obsolete formats are rejected rather than migrated. Journey totals are recorded from current-format journeys, never inferred from lifetime XP or currency.
+- Material types remain undefined and are not shown. The shared Reward shell shows compact automatic earnings and one destination-specific choice: recruitment or relics. It has one Skip action, no Continue action. Full-roster replacement changes the contents of that same screen and may be canceled before committing.
 
 See [UI design system](UI.md) for composition and interaction rules.

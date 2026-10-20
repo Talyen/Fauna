@@ -4,7 +4,7 @@ import { createGame, dispatch } from "../../src/game/engine";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { TALENTS, cardKeywords, talentPoints } from "../../src/game/progression";
 import { actionValue } from "../../src/game/rules";
-import { accept, run, winBattle, policy } from "./helpers";
+import { accept, run, winBattle, policy, bossReward } from "./helpers";
 describe("keyword progression and rewards", () => {
   it("awards keywords once per accepted play, banks once on victory, and never banks previews", () => {
     const s = run(),
@@ -25,9 +25,9 @@ describe("keyword progression and rewards", () => {
     expect(Object.values(won.keywordXP).reduce((a, b) => a + b, 0)).toBe(2);
     const resumed = decodeSave(encodeSave(won));
     expect(resumed).toEqual(won);
-    const next = accept(resumed, { type: "continueReward" });
+    const next = accept(resumed, { type: "skipRecruit" });
     expect(next.keywordXP).toEqual(won.keywordXP);
-    expect(dispatch(next, { type: "continueReward" }).accepted).toBe(false);
+    expect(dispatch(next, { type: "skipRelic" }).accepted).toBe(false);
   });
   it("banks defeat and abandonment XP without a victory payout", () => {
     const defeat = produce(run(), (d) => {
@@ -73,13 +73,12 @@ describe("keyword progression and rewards", () => {
     expect(decodeSave(encodeSave(s))).toEqual(s);
   });
   it("recruits only offered distinct species and preserves active choices across battles", () => {
-    let s = accept(winBattle(), { type: "continueReward" });
+    let s = winBattle();
     expect(dispatch(s, { type: "recruit", species: "silkmoth" }).accepted).toBe(false);
     s = accept(s, { type: "recruit", species: "briartooth" });
     expect(s.roster).toContain("briartooth");
     expect(s.team.map((c) => c.species)).toEqual(["mossback", "emberfox", "stormfin"]);
     expect(decodeSave(encodeSave(s))).toEqual(s);
-    s = accept(s, { type: "skipRelic" });
     s = accept(s, { type: "swap", activeId: "ally-0", reserve: "briartooth" });
     expect(
       s.cards
@@ -92,7 +91,7 @@ describe("keyword progression and rewards", () => {
   });
   it("requires a replacement at five and can replace either deployed or reserved species", () => {
     for (const replace of ["mossback", "silkmoth"] as const) {
-      let s = produce(accept(winBattle(), { type: "continueReward" }), (d) => {
+      let s = produce(winBattle(), (d) => {
         d.roster.push("silkmoth", "moonhart");
         d.reserves = ["silkmoth", "moonhart"].map((kind) => ({
           id: `recruit-${kind}`,
@@ -114,11 +113,11 @@ describe("keyword progression and rewards", () => {
       expect(s.roster).not.toContain(replace);
       expect(decodeSave(encodeSave(s))).toEqual(s);
     }
-    const s = accept(winBattle(), { type: "continueReward" });
+    const s = winBattle();
     expect(dispatch(s, { type: "recruit", species: "briartooth", replace: "mossback" }).accepted).toBe(false);
   });
   it("offers three unique unowned relics, commits one once, and applies opening effects only at battle start", () => {
-    let s = accept(accept(winBattle(), { type: "continueReward" }), { type: "skipRecruit" });
+    let s = bossReward();
     expect(s.phase).toBe("relic");
     expect(new Set(s.reward!.relics).size).toBe(3);
     const chosen = s.reward!.relics[0]!;
@@ -179,19 +178,6 @@ it("awards a team-wide Block play once rather than once per recipient", () => {
   expect(next.team.every((c) => c.block === 5)).toBe(true);
 });
 
-it("preserves in-progress version-two upgrades while adding validated progression defaults", () => {
-  const old = JSON.parse(encodeSave(run()));
-  old.version = 2;
-  old.cards[0].level = 2;
-  for (const key of ["roster", "keywordXP", "battleXP", "talents", "currency", "relics", "reward"])
-    delete old[key];
-  const migrated = decodeSave(JSON.stringify(old));
-  expect(migrated.version).toBe(6);
-  expect(migrated.phase).toBe("battle");
-  expect(migrated.roster).toEqual(migrated.team.map((c) => c.species));
-  expect(migrated.cards[0]!.level).toBe(2);
-  expect(decodeSave(encodeSave(migrated))).toEqual(migrated);
-});
 it("resolves talent followups once, without replaying opening grants on purchases or resets", () => {
   let s = produce(run(), (d) => {
     d.keywordXP.fire = 420;
@@ -228,12 +214,10 @@ it("final victory banks permanent rewards without offering recruitment or run-on
   expect(s.reward!.outcome).toBe("victory");
   expect(s.reward!.recruits).toEqual([]);
   expect(s.reward!.relics).toEqual([]);
-  s = accept(s, { type: "continueReward" });
   expect(s.phase).toBe("victory");
 });
 it("swapping one creature preserves unchanged teammates' legacy cards", () => {
-  let s = accept(accept(winBattle(), { type: "continueReward" }), { type: "recruit", species: "briartooth" });
-  s = accept(s, { type: "skipRelic" });
+  let s = accept(winBattle(), { type: "recruit", species: "briartooth" });
   s = produce(s, (d) => {
     d.cards.find((c) => c.definitionId === "emberfox-attack")!.level = 2;
   });

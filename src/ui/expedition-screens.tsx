@@ -1,7 +1,7 @@
 import { Keyword as KeywordLabel, KeywordText } from "./keyword-text";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui/tabs";
 import { useState } from "react";
-import { Coins, Check, Sparkles } from "lucide-react";
+import { Check, Sparkles } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../components/ui/tooltip";
 import { ActionCard, CreatureCard } from "./cards";
@@ -13,7 +13,6 @@ import {
   TALENTS,
   keywordLabel,
   keywordProgress,
-  talentPoints,
   availablePoints,
   canBuyTalent,
   type Keyword,
@@ -126,63 +125,15 @@ export function Draft({ game, send, inspect }: Props) {
 export function Rewards({ game, send, inspect }: Props) {
   const [incoming, setIncoming] = useState<SpeciesId | null>(null);
   const reward = game.reward!;
-  if (game.phase === "reward")
-    return (
-      <main className="reward-screen">
-        <header className="reward-heading">
-          <h1>{reward.outcome === "defeat" ? "Defeat" : "Rewards"}</h1>
-          {reward.currency > 0 ? (
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  aria-label={`${reward.currency} currency earned; ${game.currency} total`}
-                >
-                  <Coins aria-hidden="true" />+{reward.currency}
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>Currency · {game.currency} total · Kept between journeys</TooltipContent>
-            </Tooltip>
-          ) : null}
-        </header>
-        <section className="reward-xp" aria-label="Keyword XP earned">
-          {KEYWORDS.filter((keyword) => (reward.xp[keyword] ?? 0) > 0).map((keyword) => {
-            const gain = reward.xp[keyword]!,
-              total = game.keywordXP[keyword] ?? 0,
-              p = keywordProgress(total),
-              points = p.points - talentPoints(Math.max(0, total - gain));
-            return (
-              <div className="reward-keyword" key={keyword} data-combat-tone={keyword}>
-                <div className="reward-keyword-label">
-                  <KeywordLabel id={keyword} />
-                  <span>+{gain} XP</span>
-                </div>
-                <Progress
-                  value={p.current}
-                  maximum={p.required}
-                  label={`${keywordLabel(keyword)} talent progress`}
-                  tone={keyword}
-                />
-                <div className="reward-progress-detail">
-                  <span>{points > 0 ? `+${points} talent point${points === 1 ? "" : "s"}` : ""}</span>
-                  <span>
-                    {p.current} / {p.required} XP
-                  </span>
-                </div>
-              </div>
-            );
-          })}
-        </section>
-        <footer className="reward-footer">
-          <Button onClick={() => send({ type: "continueReward" })}>Continue</Button>
-        </footer>
-      </main>
-    );
-  if (game.phase === "recruit")
-    return (
-      <main className="reward-screen">
-        <h1>{incoming ? "Replace a creature" : "Recruit"}</h1>
+  const recruiting = game.phase === "recruit";
+  return (
+    <main className="reward-screen">
+      <header className="reward-heading">
+        <h1>Reward</h1>
+        <h2>{recruiting ? (incoming ? "Replace a creature" : "Recruit") : "Choose a relic"}</h2>
         <BattleEarnings game={game} />
+      </header>
+      {recruiting ? (
         <div className="recruit-options">
           {(incoming ? game.roster : reward.recruits.filter((kind) => !game.roster.includes(kind))).map(
             (kind) => (
@@ -200,52 +151,43 @@ export function Rewards({ game, send, inspect }: Props) {
             ),
           )}
         </div>
-        <footer className="reward-footer">
-          {incoming ? (
-            <Button variant="outline" onClick={() => setIncoming(null)}>
-              Cancel
-            </Button>
-          ) : (
-            <Button variant="ghost" onClick={() => send({ type: "skipRecruit" })}>
-              Skip
-            </Button>
-          )}
-        </footer>
-      </main>
-    );
-  return (
-    <main className="reward-screen">
-      <h1>Choose a relic</h1>
-      <BattleEarnings game={game} />
-      <div className="relic-options">
-        {reward.relics.map((id) => {
-          const relic = RELICS.find((r) => r.id === id)!;
-          return (
-            <div className="relic-option" key={id}>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <ArtCard
-                    aspect="action"
-                    artwork="./art/relic-placeholder.svg"
-                    className="relic-choice"
-                    aria-label={`Choose ${relic.name}`}
-                    onClick={() => send({ type: "chooseRelic", relic: id })}
-                  />
-                </TooltipTrigger>
-                <TooltipContent>
-                  <strong>{relic.name}</strong>
-                  <p>{relic.text}</p>
-                </TooltipContent>
-              </Tooltip>
-              <h2>{relic.name}</h2>
-            </div>
-          );
-        })}
-      </div>
+      ) : (
+        <div className="relic-options">
+          {reward.relics.map((id) => {
+            const relic = RELICS.find((r) => r.id === id)!;
+            return (
+              <div className="relic-option" key={id}>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <ArtCard
+                      aspect="action"
+                      artwork="./art/relic-placeholder.svg"
+                      className="relic-choice"
+                      aria-label={`Choose ${relic.name}`}
+                      onClick={() => send({ type: "chooseRelic", relic: id })}
+                    />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <strong>{relic.name}</strong>
+                    <p>{relic.text}</p>
+                  </TooltipContent>
+                </Tooltip>
+                <h2>{relic.name}</h2>
+              </div>
+            );
+          })}
+        </div>
+      )}
       <footer className="reward-footer">
-        <Button variant="ghost" onClick={() => send({ type: "skipRelic" })}>
-          Skip
-        </Button>
+        {incoming ? (
+          <Button variant="outline" onClick={() => setIncoming(null)}>
+            Cancel
+          </Button>
+        ) : (
+          <Button variant="ghost" onClick={() => send({ type: recruiting ? "skipRecruit" : "skipRelic" })}>
+            Skip
+          </Button>
+        )}
       </footer>
     </main>
   );

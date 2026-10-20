@@ -70,7 +70,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     !["victory", "defeat"].includes(game.phase) && (game.team.length > 0 || game.selected.length > 0);
   const canManageLineup =
     game.phase === "teamSelection" ||
-    (["reward", "recruit", "relic"].includes(game.phase) && game.reward?.outcome === "next");
+    (["recruit", "relic"].includes(game.phase) && game.reward?.outcome === "next");
   const paused = route !== "play" || menu || modal !== null || inspection !== null;
   const { bursts, deny } = useCombatFeedback(session, root, sound, paused);
   useEffect(() => {
@@ -517,7 +517,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                 controller={mode === "controller"}
                 navigateFocus={mode !== "pointer"}
               />
-            ) : game.phase === "reward" || game.phase === "recruit" || game.phase === "relic" ? (
+            ) : game.phase === "recruit" || game.phase === "relic" ? (
               <Rewards
                 key={`${game.encounter}-${game.phase}`}
                 game={game}

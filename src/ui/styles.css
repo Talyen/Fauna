@@ -535,11 +535,10 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--space-10);
+  margin-bottom: 0;
 }
-.reward-xp {
-  display: grid;
-  gap: var(--space-6);
+.reward-heading h2 {
+  font-size: var(--text-name);
 }
 .reward-keyword-label {
   display: flex;

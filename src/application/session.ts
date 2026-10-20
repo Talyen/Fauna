@@ -64,11 +64,6 @@ export function createSession(platform: Platform, seed = 1) {
                 : "Recovered your journey from a backup.",
             saveStatus: "saved",
           });
-          if (
-            (candidate.source === "primary" || candidate.source === "fauna.save.v1") &&
-            JSON.parse(candidate.data).version !== game.version
-          )
-            save(game);
           return;
         } catch {
           /* Try the next intact backup. */

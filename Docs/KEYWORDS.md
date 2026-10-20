@@ -32,7 +32,7 @@ Both have labels, word aliases and shared color selectors. Like the other planne
 1. Add a stable catalog ID with a label, category, definition, availability, and any word aliases. Aliases must be unique among active keywords.
 2. Assign its foreground in `tokens.css` and connect its `data-keyword` and `data-combat-tone` selectors in `styles.css`. Preserve readable contrast on game surfaces. Alchemy's darker green, brown and red foregrounds use lighter members of the same families here.
 3. Implement gameplay in the domain owner before marking the entry active. Update effect classification when the authored effect actually grants that keyword. Keep text and resolver behavior consistent.
-4. Add progression eligibility deliberately; adding catalog vocabulary alone must not create talents or alter save validation. Change save schemas, migrations and fixtures together if new saved state or progression identities are introduced.
+4. Add progression eligibility deliberately; adding catalog vocabulary alone must not create talents or alter save validation. Change current save schemas and fixtures together if new saved state or progression identities are introduced; development saves are disposable and do not require migrations.
 5. Test player outcomes, timing, preview parity, save/resume and rejected-command invariants as appropriate. CI owns full static, rendered and platform verification.
 
 The foundation imports no Alchemy runtime, UI controls, plasma, shine effects, or dependencies. Fauna keeps its shadcn controls, artwork surfaces and visual policies.

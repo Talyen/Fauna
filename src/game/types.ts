@@ -47,10 +47,10 @@ export interface JourneySummary {
   lastBattle: { xp: KeywordXP; currency: number } | null;
 }
 export interface GameState {
-  version: 6;
+  version: 7;
   revision: number;
   rng: number;
-  phase: "draft" | "teamSelection" | "battle" | "reward" | "recruit" | "relic" | "victory" | "defeat";
+  phase: "draft" | "teamSelection" | "battle" | "recruit" | "relic" | "victory" | "defeat";
   unlocked: SpeciesId[];
   wins: number;
   selected: SpeciesId[];
@@ -83,7 +83,6 @@ export type Command =
   | { type: "swap"; activeId: string; reserve: SpeciesId }
   | { type: "play"; cardId: string; targetId?: string }
   | { type: "endTurn" }
-  | { type: "continueReward" }
   | { type: "recruit"; species: SpeciesId; replace?: SpeciesId }
   | { type: "skipRecruit" }
   | { type: "chooseRelic"; relic: RelicId }

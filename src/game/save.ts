@@ -1,8 +1,7 @@
 import { freeze } from "immer";
 import { z } from "zod";
-import { createGame, dispatch } from "./engine";
 import { CARDS, INITIAL_SPECIES, SPECIES, species } from "./content";
-import { BIOMES, location, encounterSource, finalEncounter } from "./destinations";
+import { BIOMES, location, encounterSource, finalEncounter, bossEncounter } from "./destinations";
 import { KEYWORDS, RELICS, TALENTS, talentPoints } from "./progression";
 import type { GameState } from "./types";
 const natural = z.number().int().min(0).max(1_000_000);
@@ -34,31 +33,44 @@ const battle = z
       .max(3),
   })
   .nullable();
-const oldShape = z.object({
-  version: z.literal(2),
+const creature = z.object({ id, species: speciesId, health: natural, block: natural, attacked: z.boolean() });
+const currentShape = z.object({
+  version: z.literal(7),
   revision: z
     .number()
     .int()
     .nonnegative()
     .max(Number.MAX_SAFE_INTEGER - 1),
   rng: z.number().int().min(0).max(0xffffffff),
-  phase: z.enum(["draft", "battle", "reward", "victory", "defeat"]),
+  phase: z.enum(["draft", "teamSelection", "battle", "recruit", "relic", "victory", "defeat"]),
   unlocked: z.array(speciesId).min(5).max(6),
   wins: natural,
-  selected: z.array(speciesId).max(3),
-  team: z
-    .array(z.object({ id, species: speciesId, health: natural, block: natural, attacked: z.boolean() }))
-    .max(3),
+  selected: z.array(speciesId).max(1),
+  roster: z.array(speciesId).max(5),
+  team: z.array(creature).max(3),
+  reserves: z.array(creature).max(2),
+  lineup: z.array(speciesId).max(3),
   cards: z
     .array(z.object({ id, definitionId: id, ownerId: id, level: z.number().int().min(0).max(3) }))
     .max(9),
-  encounter: z.number().int().min(0).max(2),
+  encounter: z
+    .number()
+    .int()
+    .min(0)
+    .max(BIOMES.length * 4 - 1),
+  expedition: z
+    .object({
+      biome: z
+        .number()
+        .int()
+        .min(0)
+        .max(BIOMES.length - 1),
+      step: z.number().int().min(0).max(3),
+      offers: z.array(z.object({ location: id, pack: z.number().int().min(0).max(10) })).max(3),
+      chosen: id.nullable(),
+    })
+    .nullable(),
   battle,
-});
-const shape = oldShape.extend({
-  version: z.literal(3),
-  phase: z.enum(["draft", "teamSelection", "battle", "reward", "recruit", "relic", "victory", "defeat"]),
-  roster: z.array(speciesId).max(6),
   keywordXP: xp,
   battleXP: xp,
   talents: z.array(z.enum(TALENTS.map((t) => t.id))).max(TALENTS.length),
@@ -73,36 +85,14 @@ const shape = oldShape.extend({
       outcome: z.enum(["next", "victory", "defeat"]),
     })
     .nullable(),
-});
-const creatureShape = oldShape.shape.team.element;
-const v4Shape = shape.extend({
-  version: z.literal(4),
-  roster: z.array(speciesId).max(5),
-  reserves: z.array(creatureShape).max(2),
-  lineup: z.array(speciesId).max(3),
-});
-const v5Shape = v4Shape.extend({
-  version: z.literal(5),
-  encounter: z.number().int().min(0).max(7),
-  expedition: z
-    .object({
-      biome: z
-        .number()
-        .int()
-        .min(0)
-        .max(BIOMES.length - 1),
-      step: z.number().int().min(0).max(3),
-      offers: z.array(z.object({ location: id, pack: z.number().int().min(0).max(10) })).max(3),
-      chosen: id.nullable(),
-    })
-    .nullable(),
-});
-const currentShape = v5Shape.extend({
-  version: z.literal(6),
   journey: z
     .object({
       outcome: z.enum(["victory", "defeat", "returned"]).nullable(),
-      victories: z.number().int().min(0).max(8),
+      victories: z
+        .number()
+        .int()
+        .min(0)
+        .max(BIOMES.length * 4),
       currency: natural,
       xp,
       unlocks: z.array(speciesId).max(6),
@@ -113,94 +103,7 @@ const currentShape = v5Shape.extend({
 const unique = (values: unknown[]) => new Set(values).size === values.length;
 export function decodeSave(raw: string): GameState {
   if (raw.length > 100_000) throw new Error("Save exceeds the supported size.");
-  let input: unknown = JSON.parse(raw);
-  const legacy =
-    !!input &&
-    typeof input === "object" &&
-    "version" in input &&
-    (input.version === 1 || input.version === 2);
-  if (legacy) {
-    const value = input as Record<string, unknown>;
-    if (value.version === 1) {
-      const v1 = oldShape
-        .extend({
-          version: z.literal(1),
-          battle: battle
-            .unwrap()
-            .omit({ mana: true })
-            .extend({ energy: z.number().int().min(0).max(3) })
-            .nullable(),
-        })
-        .parse(value);
-      input = {
-        ...v1,
-        version: 2,
-        battle: v1.battle ? (({ energy, ...b }) => ({ ...b, mana: energy }))(v1.battle) : null,
-      };
-    }
-    const old = oldShape.parse(input);
-    input = {
-      ...createGame(old.rng),
-      ...old,
-      version: 3,
-      roster: old.team.map((c) => c.species),
-      reward:
-        old.phase === "reward"
-          ? {
-              xp: {},
-              currency: 0,
-              outcome: "next",
-              recruits: [...new Set(old.battle!.enemies.map((e) => e.species))].filter(
-                (kind) => !old.team.some((c) => c.species === kind),
-              ),
-              relics: [],
-            }
-          : null,
-    };
-  }
-  if (input && typeof input === "object" && "version" in input && input.version === 3) {
-    const old = shape.parse(input);
-    if (!unique(old.roster) || old.team.some((c) => !old.roster.includes(c.species)))
-      throw new Error("Legacy save contains an inconsistent roster.");
-    const roster = [
-      ...old.team.map((c) => c.species),
-      ...old.roster.filter((kind) => !old.team.some((c) => c.species === kind)),
-    ].slice(0, 5);
-    const zones = old.battle ? [...old.battle.hand, ...old.battle.draw, ...old.battle.discard] : [];
-    if (old.battle)
-      old.battle.discard.push(
-        ...old.cards
-          .filter((c) => !zones.includes(c.id) && old.team.some((t) => t.id === c.ownerId && t.health === 0))
-          .map((c) => c.id),
-      );
-    input = {
-      ...old,
-      version: 4,
-      roster,
-      lineup: old.team.map((c) => c.species),
-      reserves: roster
-        .filter((kind) => !old.team.some((c) => c.species === kind))
-        .map((kind) => ({
-          id: `recruit-${kind}`,
-          species: kind,
-          health: old.reward?.outcome === "defeat" ? 0 : species(kind).health,
-          block: 0,
-          attacked: false,
-        })),
-    };
-  }
-  if (input && typeof input === "object" && "version" in input && input.version === 4) {
-    const old = v4Shape.parse(input);
-    input = {
-      ...old,
-      version: 5,
-      expedition: old.phase === "draft" ? { biome: 0, step: 0, offers: [], chosen: null } : null,
-    };
-  }
-  if (input && typeof input === "object" && "version" in input && input.version === 5) {
-    input = { ...v5Shape.parse(input), version: 6, journey: null };
-  }
-  const s = currentShape.parse(input);
+  const s = currentShape.parse(JSON.parse(raw));
   const invalid = (condition: boolean) => {
     if (condition) throw new Error("Save contains inconsistent game data.");
   };
@@ -315,18 +218,18 @@ export function decodeSave(raw: string): GameState {
         s.cards.length !== s.team.length * 3 ||
         s.lineup.length !== s.team.length,
     );
-  // Older unfinished drafts retain their first choice; committed expeditions keep their full team.
-  if (s.phase === "draft") s.selected = s.selected.slice(0, 1);
   if (s.phase === "teamSelection")
     invalid(
       s.battle !== null || s.reward !== null || s.team.some((c, index) => c.species !== s.lineup[index]),
     );
-  if (["battle", "reward", "recruit", "relic"].includes(s.phase)) invalid(!s.battle);
-  const rewardPhase = ["reward", "recruit", "relic"].includes(s.phase);
+  if (["battle", "recruit", "relic"].includes(s.phase)) invalid(!s.battle);
+  const rewardPhase = ["recruit", "relic"].includes(s.phase);
   invalid(rewardPhase && !s.reward);
   invalid(!rewardPhase && s.reward !== null && !["victory", "defeat"].includes(s.phase));
   if (s.phase !== "battle") invalid(Object.values(s.battleXP).some((n) => n !== 0));
   if (s.reward) {
+    invalid(s.reward.recruits.length > 0 && s.reward.relics.length > 0);
+    invalid(bossEncounter(s) ? s.reward.recruits.length > 0 : s.reward.relics.length > 0);
     invalid(
       !unique(s.reward.recruits) ||
         !unique(s.reward.relics) ||
@@ -368,7 +271,7 @@ export function decodeSave(raw: string): GameState {
     if (s.phase === "battle") {
       const liveCards = s.cards;
       invalid(
-        (!legacy && b.mana === 0) ||
+        b.mana === 0 ||
           ![...s.team, ...s.reserves].some((c) => c.health > 0) ||
           !b.enemies.some((e) => e.health > 0) ||
           zones.length !== liveCards.length ||
@@ -380,10 +283,7 @@ export function decodeSave(raw: string): GameState {
     s.phase === "victory" &&
       (!finalEncounter(s) || s.wins === 0 || !s.battle || s.battle.enemies.some((e) => e.health > 0)),
   );
-  const state = freeze(s, true) as GameState;
-  return legacy && state.phase === "battle" && state.battle!.mana === 0
-    ? dispatch(state, { type: "endTurn" }).state
-    : state;
+  return freeze(s, true) as GameState;
 }
 export function encodeSave(state: GameState) {
   return JSON.stringify(state);

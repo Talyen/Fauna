@@ -130,24 +130,23 @@ describe("game commands", () => {
       d.battle!.enemies[0]!.damage = 100;
     });
     for (let i = 0; i < 3 && s.phase === "battle"; i++) s = accept(s, { type: "endTurn" });
-    expect(s.phase).toBe("reward");
+    expect(s.phase).toBe("defeat");
     expect(s.reward!.outcome).toBe("defeat");
     expect(dispatch(s, { type: "endTurn" }).accepted).toBe(false);
   });
   it("restores all creatures after victory and resumes at a reward", () => {
     const s = winBattle();
-    expect(s.phase).toBe("reward");
+    expect(s.phase).toBe("recruit");
     expect(s.team.every((c) => c.health === species(c.species).health)).toBe(true);
     expect(decodeSave(encodeSave(s))).toEqual(s);
     expect(dispatch(s, { type: "play", cardId: s.cards[0]!.id, targetId: "enemy-0" }).accepted).toBe(false);
   });
   it("recruits a defeated species into reserves and swaps its kit before the next battle", () => {
-    let s = accept(winBattle(), { type: "continueReward" });
+    let s = winBattle();
     expect(dispatch(s, { type: "recruit", species: "silkmoth" }).accepted).toBe(false);
     s = accept(s, { type: "recruit", species: "briartooth" });
     expect(s.roster).toHaveLength(4);
     expect(s.team[0]!.species).toBe("mossback");
-    s = accept(s, { type: "skipRelic" });
     s = accept(s, { type: "swap", activeId: "ally-0", reserve: "briartooth" });
     expect(s.team[0]!.species).toBe("briartooth");
     expect(s.cards.some((c) => c.definitionId.startsWith("mossback"))).toBe(false);
@@ -158,8 +157,7 @@ describe("game commands", () => {
     for (let battle = 0; battle < 3; battle++) {
       s = winBattle(s);
       const bank = s.currency;
-      s = accept(s, { type: "continueReward" });
-      expect(dispatch(s, { type: "continueReward" }).accepted).toBe(false);
+      expect(dispatch(s, { type: "skipRelic" }).accepted).toBe(false);
       expect(s.currency).toBe(bank);
       if (s.phase === "recruit") s = accept(s, { type: "skipRecruit" });
       if (s.phase === "relic") s = accept(s, { type: "skipRelic" });

@@ -5,7 +5,7 @@ import type { Command, GameState } from "../../src/game/types";
 export function run(seed = 42) {
   return teamRun(seed, ["mossback", "emberfox", "stormfin"]);
 }
-/** A progressed/legacy lineup fixture for multi-creature combat coverage. */
+/** A progressed lineup fixture for multi-creature combat coverage. */
 export function teamRun(seed: number, kinds: SpeciesId[]) {
   let s = createGame(seed);
   s = produce(s, (d) => {
@@ -64,7 +64,6 @@ export function winBattle(s = run()) {
 export function policy(s: GameState): Command {
   if (s.phase === "teamSelection")
     return { type: "beginBattle", destination: s.expedition?.offers[0]?.location };
-  if (s.phase === "reward") return { type: "continueReward" };
   if (s.phase === "recruit") return { type: "skipRecruit" };
   if (s.phase === "relic") return { type: "chooseRelic", relic: s.reward!.relics[0]! };
   const b = s.battle!;
@@ -101,4 +100,15 @@ export function policy(s: GameState): Command {
   }
   if (mark) return { type: "play", cardId: mark.id, targetId: enemy.id };
   return { type: "endTurn" };
+}
+
+/** A saved intermediate boss with its actual authored pack and a progressed three-creature team. */
+export function bossReward() {
+  const ready = produce(run(), (d) => {
+    d.phase = "teamSelection";
+    d.battle = null;
+    d.encounter = 3;
+    d.expedition = { biome: 0, step: 3, offers: [{ location: "hollow-heart", pack: 0 }], chosen: null };
+  });
+  return winBattle(accept(ready, { type: "beginBattle" }));
 }

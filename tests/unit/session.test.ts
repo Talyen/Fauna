@@ -211,24 +211,21 @@ describe("desktop close handshake", () => {
   });
 });
 
-it("persists primary legacy migration without replaying its exhausted turn", async () => {
-  const original = run(7);
-  const { mana, ...battle } = original.battle!;
-  const legacy = JSON.stringify({ ...original, version: 1, battle: { ...battle, energy: 0 } });
+it("rejects obsolete development saves and recovers a current-format backup without rewriting it", async () => {
+  const current = run(7);
+  const obsolete = JSON.stringify({ ...current, version: 6 });
   const memory = new MemoryStorage();
-  memory.setItem("fauna.save.v1", legacy);
+  memory.setItem("fauna.save.v1", obsolete);
+  memory.setItem("fauna.save.v1.backup1", JSON.stringify(current));
   const session = createSession(createBrowserPlatform(memory));
   await session.load();
   await session.flush();
-  const migrated = session.store.getState().game;
-  expect(migrated.version).toBe(6);
-  expect(migrated.battle!.mana).toBe(mana);
-  expect(migrated.battle!.turn).toBe(original.battle!.turn + 1);
+  expect(session.store.getState().game).toEqual(current);
   expect(session.store.getState().events).toEqual([]);
-  expect(memory.getItem("fauna.save.v1.backup1")).toBe(legacy);
+  expect(session.store.getState().notice).toContain("Recovered");
+  expect(memory.getItem("fauna.save.v1")).toBe(obsolete);
+  session.command({ type: "endTurn" });
+  await session.flush();
+  expect(JSON.parse(memory.getItem("fauna.save.v1")!).version).toBe(7);
   await session.dispose();
-  const resumed = createSession(createBrowserPlatform(memory));
-  await resumed.load();
-  expect(resumed.store.getState().game).toEqual(migrated);
-  await resumed.dispose();
 });

@@ -3,7 +3,7 @@ import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
 import { BIOMES, encounterSource } from "../../src/game/destinations";
 import { decodeSave, encodeSave } from "../../src/game/save";
-import { accept, run, winBattle } from "./helpers";
+import { accept, winBattle } from "./helpers";
 
 function start(seed = 7) {
   return accept(accept(createGame(seed), { type: "draft", species: "mossback" }), { type: "start" });
@@ -62,7 +62,7 @@ describe("biome destinations", () => {
       s = winBattle(enter(s));
       expect(["recruit", "relic", "teamSelection", "victory"]).toContain(s.phase);
       expect(s.currency).toBe(Math.floor(index / 4) * 100 + (index % 4 === 3 ? 100 : ((index % 4) + 1) * 20));
-      expect(s.expedition!.chosen).toBe(selected);
+      expect(s.expedition!.chosen).toBe(s.phase === "teamSelection" ? null : selected);
       expect(decodeSave(encodeSave(s))).toEqual(s);
       if (s.phase === "recruit") {
         s =
@@ -106,11 +106,7 @@ describe("biome destinations", () => {
       expect(() => decodeSave(encodeSave(produce(s, mutate)))).toThrow();
   });
 
-  it("preserves active version-four expeditions and allows abandonment before entering", () => {
-    const old = { ...run(), version: 4, expedition: undefined };
-    const migrated = decodeSave(JSON.stringify(old));
-    expect(migrated.expedition).toBeNull();
-    expect(migrated.battle).toEqual(old.battle);
+  it("allows abandonment before entering a destination", () => {
     const abandoned = accept(start(), { type: "abandon" });
     expect(decodeSave(encodeSave(abandoned))).toEqual(abandoned);
   });

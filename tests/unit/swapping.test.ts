@@ -128,7 +128,7 @@ describe("free combat swaps", () => {
     expect(dispatch(s, { type: "setLineup", activeId: "ally-0", reserve: "silkmoth" }).accepted).toBe(false);
   });
 });
-describe("optional starting lineup and save migration", () => {
+describe("optional starting lineup and save validation", () => {
   it("remembers the starting lineup independently of combat swaps and applies optional edits next battle", () => {
     let s = accept(withReserves(), { type: "swap", activeId: "ally-0", reserve: "silkmoth" });
     s = winBattle(s);
@@ -138,36 +138,11 @@ describe("optional starting lineup and save migration", () => {
     expect(s.lineup).toEqual(["briartooth", "emberfox", "stormfin"]);
     expect(s.battle).toEqual(snapshot);
     expect(decodeSave(encodeSave(s))).toEqual(s);
-    s = accept(s, { type: "continueReward" });
     if (s.phase === "recruit") s = accept(s, { type: "skipRecruit" });
     if (s.phase === "relic") s = accept(s, { type: "skipRelic" });
     s = accept(s, { type: "beginBattle" });
     expect(s.team.map((c) => c.species)).toEqual(s.lineup);
     expect(decodeSave(encodeSave(s))).toEqual(s);
-  });
-  it("migrates version-three combat, knockout slots and a six-species roster without replaying outcomes", () => {
-    const old = JSON.parse(encodeSave(withReserves()));
-    old.version = 3;
-    delete old.reserves;
-    delete old.lineup;
-    old.roster.push("moonhart");
-    old.unlocked.push("moonhart");
-    old.wins = 1;
-    old.team[0].health = 0;
-    for (const zone of ["hand", "draw", "discard"])
-      old.battle[zone] = old.battle[zone].filter(
-        (id: string) =>
-          !old.cards.some((c: { id: string; ownerId: string }) => c.id === id && c.ownerId === "ally-0"),
-      );
-    const next = decodeSave(JSON.stringify(old));
-    expect(next.version).toBe(6);
-    expect(next.roster).toHaveLength(5);
-    expect(next.reserves).toHaveLength(2);
-    expect(next.unlocked).toContain("moonhart");
-    expect(next.team[0]!.health).toBe(0);
-    expect(next.battle!.turn).toBe(old.battle.turn);
-    expect(next.revision).toBe(old.revision);
-    expect(decodeSave(encodeSave(next))).toEqual(next);
   });
   it("rejects duplicate reserve identities, missing lineup members and a sixth creature", () => {
     const s = withReserves();
@@ -192,7 +167,6 @@ describe("optional starting lineup and save migration", () => {
 it("restores the saved lineup after a tactical swap without retaining card owners from the bench", () => {
   let s = accept(withReserves(), { type: "swap", activeId: "ally-0", reserve: "silkmoth" });
   s = winBattle(s);
-  s = accept(s, { type: "continueReward" });
   if (s.phase === "recruit") s = accept(s, { type: "skipRecruit" });
   if (s.phase === "relic") s = accept(s, { type: "skipRelic" });
   expect(s.team.map((c) => c.species)).toEqual(["mossback", "emberfox", "stormfin"]);
@@ -210,7 +184,7 @@ it("restores the saved lineup after a tactical swap without retaining card owner
   expect(decodeSave(encodeSave(s))).toEqual(s);
 });
 
-it("does not repair missing live cards or missing roster members while migrating legacy saves", () => {
+it("rejects current saves with missing live cards or roster members", () => {
   for (const corrupt of [
     (s: Record<string, unknown>) => {
       (s.battle as { draw: string[] }).draw = [];
@@ -219,16 +193,13 @@ it("does not repair missing live cards or missing roster members while migrating
       s.roster = ["mossback", "emberfox"];
     },
   ]) {
-    const legacy = JSON.parse(encodeSave(withReserves()));
-    legacy.version = 3;
-    delete legacy.lineup;
-    delete legacy.reserves;
-    corrupt(legacy);
-    expect(() => decodeSave(JSON.stringify(legacy))).toThrow();
+    const current = JSON.parse(encodeSave(withReserves()));
+    corrupt(current);
+    expect(() => decodeSave(JSON.stringify(current))).toThrow();
   }
 });
 
-it("preserves a committed version-three defeat receipt even when the old roster had reserves", () => {
+it("round-trips a committed defeat receipt with knocked-out reserves", () => {
   let s = produce(withReserves(), (d) => {
     d.team.forEach((c) => {
       c.health = 1;
@@ -239,14 +210,7 @@ it("preserves a committed version-three defeat receipt even when the old roster 
     });
   });
   while (s.phase === "battle") s = accept(s, { type: "endTurn" });
-  const old = JSON.parse(encodeSave(s));
-  old.version = 3;
-  delete old.reserves;
-  delete old.lineup;
-  const migrated = decodeSave(JSON.stringify(old));
-  expect(migrated.reward).toEqual(s.reward);
-  expect(migrated.currency).toBe(s.currency);
-  expect(migrated.revision).toBe(s.revision);
-  expect(migrated.reserves.every((c) => c.health === 0)).toBe(true);
-  expect(decodeSave(encodeSave(migrated))).toEqual(migrated);
+  const restored = decodeSave(encodeSave(s));
+  expect(restored).toEqual(s);
+  expect(restored.reserves.every((c) => c.health === 0)).toBe(true);
 });

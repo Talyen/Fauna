@@ -55,9 +55,7 @@ export function JourneyResults({ game, home }: { game: GameState; home: () => vo
           ) : null}
         </section>
       ) : (
-        <p className="journey-kept">
-          Journey totals are unavailable for this older save. Permanent progress is kept.
-        </p>
+        <p className="journey-kept">Journey totals are unavailable. Permanent progress is kept.</p>
       )}
       <footer className="journey-results-actions" data-nav-row>
         <Button className="primary-menu-action" onClick={home}>

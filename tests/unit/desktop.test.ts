@@ -9,16 +9,16 @@ describe("desktop storage", () => {
     const directory = await mkdtemp(path.join(tmpdir(), "fauna-storage-"));
     try {
       const storage = createStorage(directory);
-      const values = [1, 2, 3, 4, 5, 6].map((revision) => JSON.stringify({ version: revision, revision }));
+      const values = [1, 2, 3, 4, 5, 6, 7].map((revision) => JSON.stringify({ version: 7, revision }));
       const writes = values.map((data) => storage.write(data));
       await storage.drain();
       await Promise.all(writes);
       expect((await storage.readCandidates()).map((c: { data: string }) => c.data)).toEqual(
         [...values].reverse().slice(0, 3),
       );
-      expect(await readFile(path.join(directory, "expedition.json"), "utf8")).toBe(values[5]);
+      expect(await readFile(path.join(directory, "expedition.json"), "utf8")).toBe(values[6]);
       await writeFile(path.join(directory, "expedition.json"), "corrupt");
-      expect((await storage.readCandidates())[1].data).toBe(values[4]);
+      expect((await storage.readCandidates())[1].data).toBe(values[5]);
       await expect(storage.write("broken")).rejects.toThrow();
       await expect(storage.write(JSON.stringify({ version: 999 }))).rejects.toThrow();
       await expect(storage.write("x".repeat(100001))).rejects.toThrow();

@@ -7,7 +7,7 @@ import type { Card, Command, CommandResult, GameEvent, GameState } from "./types
 export function createGame(seed = 1): GameState {
   return freeze(
     {
-      version: 6,
+      version: 7,
       revision: 0,
       rng: seed >>> 0,
       phase: "draft",
@@ -179,7 +179,7 @@ function finishBattle(state: GameState, defeated: boolean) {
     }
   }
   const relics =
-    defeated || outcome === "victory"
+    defeated || outcome === "victory" || !bossEncounter(state)
       ? []
       : shuffle(
           state,
@@ -190,20 +190,14 @@ function finishBattle(state: GameState, defeated: boolean) {
     currency,
     outcome,
     recruits:
-      defeated || outcome === "victory"
+      defeated || outcome === "victory" || bossEncounter(state)
         ? []
         : [...new Set(state.battle!.enemies.map((e) => e.species))].filter(
             (kind) => state.unlocked.includes(kind) && !state.roster.includes(kind),
           ),
     relics: relics.length === 3 ? relics : [],
   };
-  state.phase = "reward";
-  if (state.journey) {
-    if (outcome === "defeat") state.phase = "defeat";
-    else if (outcome === "victory") state.phase = "victory";
-    else if (state.reward.recruits.length) state.phase = "recruit";
-    else afterRecruit(state);
-  }
+  enterReward(state);
 }
 function settle(state: GameState, events: GameEvent[]): boolean {
   if (![...state.team, ...state.reserves].some((c) => c.health > 0)) {
@@ -249,8 +243,12 @@ function afterRewards(state: GameState) {
   state.reward = null;
   prepareLineup(state);
 }
-function afterRecruit(state: GameState) {
-  if (state.reward!.relics.length) state.phase = "relic";
+function enterReward(state: GameState) {
+  const reward = state.reward!;
+  if (reward.outcome === "defeat") state.phase = "defeat";
+  else if (reward.outcome === "victory") state.phase = "victory";
+  else if (reward.recruits.some((kind) => !state.roster.includes(kind))) state.phase = "recruit";
+  else if (reward.relics.length) state.phase = "relic";
   else afterRewards(state);
 }
 function rebuildCards(state: GameState) {
@@ -391,7 +389,7 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
     return reject(state, "Choose an active creature and a reserve.");
   if (
     command.type === "setLineup" &&
-    (!["teamSelection", "reward", "recruit", "relic"].includes(state.phase) ||
+    (!["teamSelection", "recruit", "relic"].includes(state.phase) ||
       ![...state.team, ...state.reserves].some(
         (c) => c.id === command.activeId && state.lineup.includes(c.species),
       ) ||
@@ -401,8 +399,6 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
       state.reward?.outcome === "victory")
   )
     return reject(state, "Choose a starting creature and a reserve between battles.");
-  if (command.type === "continueReward" && state.phase !== "reward")
-    return reject(state, "There are no battle rewards to continue.");
   if (
     command.type === "recruit" &&
     (state.phase !== "recruit" ||
@@ -433,7 +429,7 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
     return reject(state, "There are no talents to reset in this category.");
   if (
     command.type === "abandon" &&
-    !["battle", "teamSelection", "reward", "recruit", "relic"].includes(state.phase) &&
+    !["battle", "teamSelection", "recruit", "relic"].includes(state.phase) &&
     !(state.phase === "draft" && state.selected.length > 0)
   )
     return reject(state, "There is no journey to end.");
@@ -598,11 +594,6 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
         });
         break;
       }
-      case "continueReward":
-        if (draft.reward!.outcome === "defeat") draft.phase = "defeat";
-        else if (draft.reward!.recruits.length) draft.phase = "recruit";
-        else afterRecruit(draft);
-        break;
       case "recruit": {
         const recruited = {
           id: `recruit-${command.species}`,
@@ -640,11 +631,11 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
             draft.battle?.discard.push(...cards.map((card) => card.id));
           } else draft.reserves.push(recruited);
         }
-        afterRecruit(draft);
+        afterRewards(draft);
         break;
       }
       case "skipRecruit":
-        afterRecruit(draft);
+        afterRewards(draft);
         break;
       case "chooseRelic":
         draft.relics.push(command.relic);

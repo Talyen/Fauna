@@ -26,11 +26,15 @@ Task-scoped branch/worktree creation, commits, and local integration are authori
 - [Gameplay vocabulary](Docs/GLOSSARY.md): `src/game/glossary.ts`.
 - [Run and verification commands](README.md#verify), [release and platform verification boundaries](Docs/RELEASE.md).
 
+## Development saves
+
+Development saves are disposable. There are no released player saves to preserve. Do not add migrations, backward compatibility, or legacy reward flows unless the user explicitly requests them. Change the format/version and reject obsolete saves when needed; update development fixtures to the current contract. This does not authorize deleting unrelated files. Current-format validation, backup recovery, command/save ordering, and shutdown safety still require coverage.
+
 ## High-risk invariants
 
 - Gameplay in `src/game/` is platform independent. Keep I/O, clocks and ambient randomness outside it. Seeded randomness and committed plain immutable data determine outcomes; rejected commands retain state and RNG.
 - Application orchestration in `src/application/` owns commands and save ordering. Presentation consumes committed events and never settles gameplay, grants rewards, or saves previews. Animations cannot block command acceptance.
-- Change save schemas, validation, migrations and affected fixtures together. Preserve supported resume paths, stable content identities, backup recovery and serialized writes. Disposal revokes new commands while draining admitted saves; test lifecycle and ordering changes at their owning boundary.
+- Change current save schemas, validation and affected fixtures together; follow the disposable-development-save policy above. Preserve current-format resume paths, backup recovery and serialized writes. Disposal revokes new commands while draining admitted saves; test lifecycle and ordering changes at their owning boundary.
 - Keep displayed rules consistent with effects. Player actions need timely visible feedback and clear outcomes; essential meaning survives mute. Use concise labels and visible state rather than routine instructions or redundant success copy. Preserve accessible names and actionable errors.
 - Creature artwork is 4:3 landscape; action artwork is 3:4 portrait. Use `ArtCard` for artwork surfaces. Follow [UI rules](Docs/UI.md): black background, gameplay content only, no promotional copy or decorative page chrome.
 - Use `src/ui/tokens.css` for visual values and registered upstream shadcn primitives with their standard behaviors for all controls (see `scripts/shadcn-registry.json`). No homemade tabs, toggles, dialogs, or clickable layout elements. Preserve native keyboard behavior, modal focus ownership and focus return; gamepad navigation adapts to the primitives. The CI static gate (`npm run check:full`) enforces the source policy but cannot establish rendered interaction quality.

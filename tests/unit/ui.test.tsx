@@ -2,7 +2,7 @@ import { ActionCard } from "../../src/ui/cards";
 import { TooltipProvider } from "../../src/components/ui/tooltip";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
-import { accept, run, winBattle } from "./helpers";
+import { accept, run, winBattle, bossReward } from "./helpers";
 import { encounterSource, location } from "../../src/game/destinations";
 import { RELICS } from "../../src/game/progression";
 import { TargetPreview } from "../../src/ui/target-preview";
@@ -20,13 +20,15 @@ afterEach(() => {
 });
 describe("player interface", () => {
   it("offers blank portrait relic cards with external names and commits the chosen relic", async () => {
-    const game = accept(accept(winBattle(), { type: "continueReward" }), { type: "skipRecruit" });
+    const game = bossReward();
     localStorage.setItem("fauna.save.v1", JSON.stringify(game));
     const session = createSession(createBrowserPlatform(localStorage), 7);
     await session.load();
     render(<App session={session} />);
     const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+    expect(screen.getByRole("heading", { name: "Reward", level: 1 })).toBeTruthy();
+    expect(screen.queryByRole("button", { name: "Continue", exact: true })).toBeNull();
     for (const id of game.reward!.relics) {
       const relic = RELICS.find((entry) => entry.id === id)!;
       const card = screen.getByRole("button", { name: `Choose ${relic.name}`, exact: true });
@@ -54,9 +56,13 @@ describe("player interface", () => {
     render(<App session={session} />);
     const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+    expect(screen.getByRole("heading", { name: "Reward", level: 1 })).toBeTruthy();
     expect(screen.getByRole("heading", { name: "Recruit", exact: true })).toBeTruthy();
     expect(screen.getByLabelText("Last battle earnings").textContent).toContain("+20 currency");
     expect(screen.queryByRole("button", { name: "Continue", exact: true })).toBeNull();
+    await user.click(screen.getByRole("button", { name: "Skip", exact: true }));
+    expect(session.store.getState().game.phase).toBe("teamSelection");
+    expect(screen.queryByRole("heading", { name: "Choose a relic" })).toBeNull();
     await session.dispose();
   });
   it("reopens saved journey gains and starts fresh without losing permanent gains", async () => {

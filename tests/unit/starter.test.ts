@@ -19,13 +19,11 @@ describe("one-starter expeditions", () => {
     expect(decodeSave(encodeSave(accept(s, { type: "start" })))).toEqual(accept(s, { type: "start" }));
   });
 
-  it("resumes old unfinished drafts with one choice and preserves existing three-creature battles", () => {
-    const legacy = produce(createGame(), (d) => {
-      d.selected = ["mossback", "emberfox", "stormfin"];
+  it("rejects multiple starter choices and preserves current multi-creature battles", () => {
+    const invalid = produce(createGame(), (d) => {
+      d.selected = ["mossback", "emberfox"];
     });
-    const resumed = decodeSave(encodeSave(legacy));
-    expect(resumed.selected).toEqual(["mossback"]);
-    expect(accept(resumed, { type: "start" }).team).toHaveLength(1);
+    expect(() => decodeSave(encodeSave(invalid))).toThrow();
     expect(decodeSave(encodeSave(run()))).toEqual(run());
   });
 
@@ -39,7 +37,6 @@ describe("one-starter expeditions", () => {
       expect(s.lineup).toEqual(s.roster);
       expect(s.reserves).toEqual([]);
       expect(decodeSave(encodeSave(s))).toEqual(s);
-      s = accept(s, { type: "skipRelic" });
       expect(decodeSave(encodeSave(s))).toEqual(s);
     }
     expect(s.cards).toHaveLength(9);
@@ -48,7 +45,7 @@ describe("one-starter expeditions", () => {
   it("can skip recruitment and begin the next battle with one creature", () => {
     let s = accept(start(), { type: "beginBattle" });
     s = accept(winBattle(s), { type: "skipRecruit" });
-    s = accept(accept(s, { type: "skipRelic" }), { type: "beginBattle" });
+    s = accept(s, { type: "beginBattle" });
     expect(s.team).toHaveLength(1);
     expect(s.battle!.hand).toHaveLength(3);
     expect(decodeSave(encodeSave(s))).toEqual(s);
@@ -71,6 +68,7 @@ describe("one-starter expeditions", () => {
       expect(decodeSave(encodeSave(s))).toEqual(s);
     }
     expect(s.phase).toBe("victory");
-    expect(s.roster).toHaveLength(5);
+    expect(s.roster.length).toBeGreaterThanOrEqual(3);
+    expect(s.roster.length).toBeLessThanOrEqual(5);
   });
 });
