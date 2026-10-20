@@ -74,7 +74,7 @@ The hand shows at most five playable cards. Extra draws remain entirely hidden i
 
 ## Combat vocabulary
 
-Adapted from Alchemy's `src/lib/game-data/keywords.ts` palette and `src/features/alchemy/shared/config/metadata.ts` icon pairings. Health uses red (#f87171, Heart), block sky blue (#7dd3fc, Shield). Damage color follows the attack type, independent of lost health:
+Palette and icon pairings are adapted from `Alchemy: src/lib/game-data/keywords.ts` and `Alchemy: src/features/alchemy/shared/config/metadata.ts`. Health uses red (#f87171, Heart), block sky blue (#7dd3fc, Shield). Damage color follows the attack type, independent of lost health:
 
 | Type      | Foreground | Icon         |
 | --------- | ---------- | ------------ |

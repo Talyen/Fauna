@@ -7,3 +7,4 @@ test-results/
 .integration-lock/
 *.log
 .DS_Store
+.worktrees/

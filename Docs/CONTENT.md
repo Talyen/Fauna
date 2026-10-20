@@ -2,7 +2,7 @@
 
 `src/game/destinations.ts` owns biome locations, enemy packs, and initial encounter scaling. `src/game/content.ts` retains the stable legacy encounters and owns the species roster, card definitions, displayed effect descriptions, and encounter templates. Each species contributes exactly three unique card definitions. Content validation runs at startup and in tests. Keep IDs stable once saves are supported.
 
-The first five species begin unlocked. Moonhart unlocks after the first journey victory. Team composition changes the nine-card deck; recruitment adds defeated species to the five-slot roster. Only the active three contribute cards, and free combat swaps replace cards in their existing zones. Starting lineups are remembered and optionally editable from the menu between battles. The prototype intentionally restores all creatures after each battle and has no positioning or elemental chart.
+The first five species begin unlocked. Moonhart unlocks after the first journey victory. Each deployed creature contributes three cards, so the starting three-card deck grows to nine cards with a full lineup; recruitment adds defeated species to the five-slot roster. Only the deployed lineup of up to three creatures contributes cards, and free combat swaps replace cards in their existing zones. Starting lineups are remembered and optionally editable from the menu between battles. The prototype intentionally restores all creatures after each battle and has no positioning or elemental chart.
 
 ## Artwork contracts
 
@@ -15,7 +15,7 @@ Displayed artwork uses one equal-area size standard: 200×266⅔ portrait and 26
 
 These are separate compositions, not crops of one format into another. Replace the matching files in `public/art/` while retaining their names, or update the owning UI asset references together. Images use their native aspect ratio with no stretching. All text is rendered by the UI, not baked into artwork. Cards contain no text or UI overlays; names, stats and rules live in hover/focus details and centered inspection. Stacked inspection presents three portrait action thumbnails under the creature and passive. Selecting a thumbnail enlarges the complete action card in the same dialog, with Previous/Next cycling. Compact creature tooltips no longer list actions; enemy inspection labels collectible kit separately from battle state.
 
-The initial asset set was authored by `scripts/create-placeholders.mjs`. Running it intentionally rewrites all placeholder SVGs; do not run it over production art. Mana UI sprites were adapted from Alchemy; no creature artwork or fonts were copied from Alchemy.
+The initial asset set was authored by `scripts/create-placeholders.mjs`. Running it intentionally rewrites all placeholder SVGs; do not run it over production art. Mana UI sprites were adapted from Alchemy; no species illustrations or fonts were copied from Alchemy. Keyword artwork reuse is documented below.
 
 ## Keyword artwork
 
@@ -33,7 +33,7 @@ The initial asset set was authored by `scripts/create-placeholders.mjs`. Running
 | Block         | `block.webp`     | `talent-block.webp`    |
 | Healing       | `heal.webp`      | `talent-health.webp`   |
 
-Source files live in Alchemy's `src/assets/optimized/`. Artwork reuse does not import Alchemy's keyword mechanics. All nine talent categories have matching artwork.
+Source directory: `Alchemy: src/assets/optimized/`. Artwork reuse does not import Alchemy's keyword mechanics. All nine talent categories have matching artwork.
 
 ## Composition
 

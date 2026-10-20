@@ -1,0 +1,10 @@
+# Design references
+
+These samples record reviewed composition choices. They are not current rendered acceptance evidence. See the canonical [UI rules](../Docs/UI.md) and [required review](../Docs/UI.md#required-review).
+
+- [Battle layout and mana provenance](battle-layout/README.md)
+- [Menu options](menu-options/README.md)
+- [Creature inspection](inspection/README.md)
+- [Team selection](team-selection/README.md)
+- [Battle swaps](battle-swap/README.md)
+- [Battle rewards](battle-rewards/README.md)
