@@ -52,3 +52,51 @@ for (const [width, height, textScale] of [
     await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
   });
 }
+
+for (const width of [1280, 1920])
+  test(`illustrated Boons and independent tooltip sizing at ${width}`, async ({ page }) => {
+    const { run } = await import("../unit/helpers");
+    const fixture = structuredClone(run(7));
+    fixture.boons = ["tattered-pages", "bone-charm", "ironwood-buckler", "icy-heart"];
+    await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/");
+    await page.evaluate((data) => localStorage.setItem("fauna.save.v1", data), JSON.stringify(fixture));
+    await page.reload();
+    await page.getByRole("button", { name: "Settings", exact: true }).click();
+    await page.getByRole("radio", { name: "150%", exact: true }).click();
+    await page.getByRole("radio", { name: "Tooltip 125%", exact: true }).click();
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
+    await page.getByRole("button", { name: "Collection", exact: true }).click();
+    const art = page.getByRole("button", { name: "Inspect Mossback", exact: true });
+    await art.hover();
+    await expect(page.getByRole("tooltip")).toBeVisible();
+    expect(await page.getByRole("tooltip").evaluate((node) => getComputedStyle(node).fontSize)).toBe("20px");
+    expect(await art.evaluate((node) => node.getBoundingClientRect().width)).toBeCloseTo(266.667, 0);
+    await page.screenshot({ path: `reports/tooltip-independent-${width}.png` });
+    await page.getByRole("button", { name: "Back", exact: true }).click();
+    const opener = page.getByRole("button", { name: "Boons", exact: true });
+    await opener.focus();
+    await page.keyboard.press("Enter");
+    const dialog = page.getByRole("dialog", { name: "Boons", exact: true });
+    await expect(dialog.getByRole("heading", { name: "Tattered Pages", exact: true })).toBeVisible();
+    await expect(dialog).toContainText("Restore 3 Health when you defeat an enemy.");
+    await dialog
+      .locator("img")
+      .evaluateAll((images) => Promise.all(images.map((img) => (img as HTMLImageElement).decode())));
+    expect(
+      await dialog
+        .locator(".action-card")
+        .first()
+        .evaluate((node) => node.getBoundingClientRect().width),
+    ).toBeCloseTo(200, 0);
+    await page.screenshot({ path: `reports/owned-boons-${width}.png` });
+    await page.keyboard.press("Escape");
+    await expect(opener).toBeFocused();
+    expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(fixture);
+    await page.reload();
+    await page.getByRole("button", { name: "Settings", exact: true }).click();
+    await expect(page.getByRole("radio", { name: "Tooltip 125%", exact: true })).toBeChecked();
+    await expect(page.getByRole("radio", { name: "150%", exact: true })).toBeChecked();
+  });

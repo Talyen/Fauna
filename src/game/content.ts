@@ -17,7 +17,7 @@ export const DAMAGE_LABELS = Object.fromEntries(DAMAGE_TYPES.map((id) => [id, ke
 >;
 export type CardEffect =
   | { kind: "damage"; damageType: DamageType; amount: number; leech?: boolean }
-  | { kind: "status"; status: "armor" | "forge" | "thorns" | "dodge"; amount: number }
+  | { kind: "status"; status: "armor" | "thorns" | "dodge"; amount: number }
   | { kind: "draw" | "mana" | "cleanse" | "purge"; amount: number };
 interface CardBase {
   id: string;
@@ -122,10 +122,7 @@ export const CARDS: readonly CardDefinition[] = [
     effects: [{ kind: "damage", damageType: "burn", amount: 2 }],
   },
   card("emberfox", "Warm Embers", "heal", 5),
-  {
-    ...card("emberfox", "Ember Ward", "guard", 6),
-    effects: [{ kind: "status", status: "forge", amount: 1 }],
-  },
+  card("emberfox", "Ember Ward", "guard", 6),
   {
     ...attack("stormfin", "Arc Bite", 7, "lightning"),
     effects: [{ kind: "damage", damageType: "stun", amount: 3 }],

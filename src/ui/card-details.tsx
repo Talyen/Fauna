@@ -1,27 +1,9 @@
 import { CombatStatus } from "./combat-status";
 import { KeywordText } from "./keyword-text";
 import { definition, enemyCard, species, type SpeciesId } from "../game/content";
-import { actionValue, cardFollowups } from "../game/rules";
+import { actionValue, cardCost, physicalBonus } from "../game/rules";
 import type { Creature, Card, GameState } from "../game/types";
 import { CardRules } from "./combat-values";
-function Followups({ card, modifiers }: { card: Pick<Card, "definitionId">; modifiers?: GameState }) {
-  if (!modifiers) return null;
-  const { block, heal } = cardFollowups(card, modifiers);
-  return (
-    <>
-      {block > 0 ? (
-        <p>
-          <KeywordText text={`Acting creature gains ${block} Block.`} />
-        </p>
-      ) : null}
-      {heal > 0 ? (
-        <p>
-          <KeywordText text={`Acting creature restores ${heal} Health.`} />
-        </p>
-      ) : null}
-    </>
-  );
-}
 export function ActionDetails({
   card,
   ownerName,
@@ -45,20 +27,23 @@ export function ActionDetails({
         {card.level ? ` +${card.level}` : ""}
       </strong>
       <p>
-        <KeywordText text={enemy ? ownerName : `${ownerName} · ${def.cost} mana`} />
+        <KeywordText
+          text={enemy ? ownerName : `${ownerName} · ${modifiers ? cardCost(card, modifiers) : def.cost} mana`}
+        />
       </p>
       <CardRules
         card={def}
         level={card.level}
         value={
           enemyValue ??
-          actionValue(card, actor ?? { species: def.species, attacked: false }, modifiers) +
-            (def.effect === "attack" && (def.damageType === "physical" || def.damageType === "stun")
-              ? (actor?.combat?.forge ?? 0)
-              : 0)
+          Math.round(
+            actionValue(card, actor ?? { species: def.species, attacked: false }, modifiers) +
+              (modifiers && actor && def.effect === "attack" && def.damageType === "physical"
+                ? physicalBonus(actor, modifiers)
+                : 0),
+          )
         }
       />
-      {!enemy ? <Followups card={card} modifiers={modifiers} /> : null}
     </div>
   );
 }

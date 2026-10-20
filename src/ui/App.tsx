@@ -1,3 +1,6 @@
+import { BOONS } from "../game/progression";
+import { ArtCard } from "./art-card";
+import { assetUrl } from "./assets";
 import { Switch } from "../components/ui/switch";
 import { CreatureCard } from "./cards";
 import { species } from "../game/content";
@@ -40,7 +43,8 @@ import type { SpeciesId } from "../game/content";
 import "./mana-crystals.css";
 
 type Route = "home" | "play" | "talents" | "collection" | "unlocks";
-type Modal = "settings" | "glossary" | "endRun" | "deck" | "swap" | "lineup" | "draw" | "discard" | null;
+type Modal =
+  "boons" | "settings" | "glossary" | "endRun" | "deck" | "swap" | "lineup" | "draw" | "discard" | null;
 export function App(props: { session: Session; desktop?: boolean }) {
   return (
     <TooltipProvider>
@@ -73,6 +77,14 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     const n = Number(preference("fauna.text-scale", "1"));
     return [1, 1.25, 1.5].includes(n) ? n : 1;
   });
+  const [tooltipScale, setTooltipScale] = useState(() => {
+    const value = Number(preference("fauna.tooltip-scale", "1"));
+    return [1, 1.25, 1.5].includes(value) ? value : 1;
+  });
+  useEffect(() => {
+    document.documentElement.style.setProperty("--tooltip-scale", String(tooltipScale));
+    writePreference("fauna.tooltip-scale", String(tooltipScale));
+  }, [tooltipScale]);
   const origin = useRef<Route>("home"),
     pauseOpener = useRef<HTMLElement | null>(null),
     modalOpener = useRef<HTMLElement | null>(null);
@@ -81,7 +93,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
   const canManageLineup =
     game.phase === "teamSelection" ||
     game.phase === "campfire" ||
-    (["recruit", "relic"].includes(game.phase) && game.reward?.outcome === "next");
+    (["recruit", "boon"].includes(game.phase) && game.reward?.outcome === "next");
   const [autoEndTurn, setAutoEndTurn] = useState(() => preference("fauna.auto-end-turn", "true") !== "false");
   const [pendingUnlocks, setPendingUnlocks] = useState<SpeciesId[]>([]);
   const [reveals, setReveals] = useState<SpeciesId[]>([]);
@@ -290,6 +302,11 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
       <Button variant="ghost" onClick={() => navigate("collection")}>
         Collection
       </Button>
+      {active && game.boons.length > 0 ? (
+        <Button variant="ghost" onClick={() => openModal("boons")}>
+          Boons
+        </Button>
+      ) : null}
       <Button variant="ghost" onClick={() => openModal("glossary")}>
         Glossary
       </Button>
@@ -333,7 +350,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           className={
             modal === "swap" || modal === "lineup"
               ? "swap-dialog"
-              : modal === "deck" || modal === "draw" || modal === "discard"
+              : modal === "deck" || modal === "draw" || modal === "discard" || modal === "boons"
                 ? "deck-dialog"
                 : modal === "settings"
                   ? "settings-dialog"
@@ -352,9 +369,11 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                       ? "Close deck"
                       : modal === "settings"
                         ? "Close settings"
-                        : modal === "glossary"
-                          ? "Close glossary"
-                          : "Close dialog"
+                        : modal === "boons"
+                          ? "Close Boons"
+                          : modal === "glossary"
+                            ? "Close glossary"
+                            : "Close dialog"
           }
           onCloseAutoFocus={(event) => {
             event.preventDefault();
@@ -374,9 +393,11 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                       ? "Deck"
                       : modal === "settings"
                         ? "Settings"
-                        : modal === "glossary"
-                          ? "Glossary & controls"
-                          : ""}
+                        : modal === "boons"
+                          ? "Boons"
+                          : modal === "glossary"
+                            ? "Glossary & controls"
+                            : ""}
           </DialogTitle>
           <DialogDescription className="sr-only">Game information and controls</DialogDescription>
           {modal === "swap" || modal === "lineup" ? (
@@ -390,12 +411,34 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
             />
           ) : modal === "deck" || modal === "draw" || modal === "discard" ? (
             <DeckCards game={game} inspect={setInspection} pile={modal === "deck" ? undefined : modal} />
+          ) : modal === "boons" ? (
+            <div className="boon-options">
+              {game.boons.map((id) => {
+                const boon = BOONS.find((entry) => entry.id === id)!;
+                return (
+                  <section className="reward-option" key={id}>
+                    <ArtCard
+                      aspect="action"
+                      artwork={assetUrl(`boon.${id}`)}
+                      presentation
+                      aria-label={boon.name}
+                    />
+                    <h2>{boon.name}</h2>
+                    <p>
+                      <KeywordText text={boon.text} />
+                    </p>
+                  </section>
+                );
+              })}
+            </div>
           ) : modal === "settings" ? (
             <Settings
               audio={audioPreferences}
               updateAudio={updateAudioPreferences}
               scale={scale}
               setScale={setScale}
+              tooltipScale={tooltipScale}
+              setTooltipScale={setTooltipScale}
               diagnostics={session.diagnostics}
               desktop={desktop}
               autoEndTurn={autoEndTurn}
@@ -451,7 +494,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           <AlertDialogDescription>
             {game.phase === "draft"
               ? "Clear your starter choice and return to the main menu?"
-              : "Finish this journey and view your results? Your team and relics will not carry into the next journey. Permanent progress is kept."}
+              : "Finish this journey and view your results? Your team and boons will not carry into the next journey. Permanent progress is kept."}
           </AlertDialogDescription>
           <div className="confirm-actions">
             <AlertDialogCancel>Cancel</AlertDialogCancel>
@@ -601,7 +644,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                 controller={mode === "controller"}
                 navigateFocus={navigation}
               />
-            ) : game.phase === "recruit" || game.phase === "relic" ? (
+            ) : game.phase === "recruit" || game.phase === "boon" ? (
               <Rewards
                 key={`${game.encounter}-${game.phase}`}
                 game={game}

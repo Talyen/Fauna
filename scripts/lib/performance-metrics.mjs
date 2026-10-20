@@ -15,6 +15,7 @@ export function summarizeSample(sample) {
   const sorted = [...sample.frames].sort((a, b) => a - b);
   const percentile = (p) => sorted[Math.min(sorted.length - 1, Math.floor(sorted.length * p))];
   return {
+    startupMs: sample.startupMs ?? null,
     frames: sorted.length,
     p50: percentile(0.5),
     p95: percentile(0.95),
@@ -28,8 +29,8 @@ export function summarizeSample(sample) {
 }
 export function comparePerformance(before, after) {
   if (
-    before.format !== 1 ||
-    after.format !== 1 ||
+    before.format !== 2 ||
+    after.format !== 2 ||
     !before.complete ||
     !after.complete ||
     JSON.stringify(before.environment) !== JSON.stringify(after.environment)
@@ -60,6 +61,7 @@ export function comparePerformance(before, after) {
       baseline: a,
       treatment: b,
       p95Delta: b.p95 - a.p95,
+      startupDelta: a.startupMs === null || b.startupMs === null ? null : b.startupMs - a.startupMs,
       gapRatesPer30s: Object.fromEntries(
         [20, 33.3, 50, 100].map((n) => [
           n,

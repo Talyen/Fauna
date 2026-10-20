@@ -21,7 +21,7 @@ describe("hidden hand overflow", () => {
       produce(run(), (d) => {
         d.phase = "teamSelection";
         d.battle = null;
-        d.relics = ["wind-feather"];
+        d.boons = ["tattered-pages"];
       }),
       { type: "beginBattle" },
     );

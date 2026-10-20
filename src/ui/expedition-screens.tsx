@@ -1,5 +1,5 @@
 import { assetUrl } from "./assets";
-import { Keyword as KeywordLabel, KeywordText } from "./keyword-text";
+import { KeywordText } from "./keyword-text";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui/tabs";
 import { useLayoutEffect, useRef, useState } from "react";
 import { ArrowLeft, ChevronLeft, ChevronRight, Check, Sparkles } from "lucide-react";
@@ -11,7 +11,7 @@ import { returnFocus } from "./focus";
 import { SPECIES, species, type SpeciesId } from "../game/content";
 import {
   KEYWORDS,
-  RELICS,
+  BOONS,
   TALENTS,
   keywordLabel,
   keywordProgress,
@@ -158,7 +158,7 @@ export function Rewards({ game, send, inspect }: Props) {
       </header>
       <section className="reward-choices" ref={choices}>
         <div className="reward-choice-content">
-          <h2>{recruiting ? (incoming ? "Replace a creature" : "Choose a Recruit") : "Choose a Relic"}</h2>
+          <h2>{recruiting ? (incoming ? "Replace a creature" : "Choose a Recruit") : "Choose a Boon"}</h2>
           {recruiting ? (
             <div className="recruit-options">
               {(incoming
@@ -189,27 +189,27 @@ export function Rewards({ game, send, inspect }: Props) {
               ))}
             </div>
           ) : (
-            <div className="relic-options">
-              {reward.relics.map((id) => {
-                const relic = RELICS.find((r) => r.id === id)!;
+            <div className="boon-options">
+              {reward.boons.map((id) => {
+                const boon = BOONS.find((r) => r.id === id)!;
                 return (
                   <div className="reward-option" key={id}>
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <ArtCard
                           aspect="action"
-                          artwork={assetUrl("relic.placeholder")}
-                          className="relic-choice"
-                          aria-label={`Choose ${relic.name}`}
-                          onClick={() => send({ type: "chooseRelic", relic: id })}
+                          artwork={assetUrl(`boon.${id}`)}
+                          className="boon-choice"
+                          aria-label={`Choose ${boon.name}`}
+                          onClick={() => send({ type: "chooseBoon", boon: id })}
                         />
                       </TooltipTrigger>
                       <TooltipContent>
-                        <strong>{relic.name}</strong>
-                        <p>{relic.text}</p>
+                        <strong>{boon.name}</strong>
+                        <p>{boon.text}</p>
                       </TooltipContent>
                     </Tooltip>
-                    <h2>{relic.name}</h2>
+                    <h2>{boon.name}</h2>
                   </div>
                 );
               })}
@@ -223,7 +223,7 @@ export function Rewards({ game, send, inspect }: Props) {
             Cancel
           </Button>
         ) : (
-          <Button variant="ghost" onClick={() => send({ type: recruiting ? "skipRecruit" : "skipRelic" })}>
+          <Button variant="ghost" onClick={() => send({ type: recruiting ? "skipRecruit" : "skipBoon" })}>
             Skip
           </Button>
         )}
@@ -246,7 +246,7 @@ export function Talents({ game, send, back }: { game: GameState; send: Props["se
         <TabsList className="keyword-tabs" aria-label="Talent keywords">
           {KEYWORDS.map((id) => (
             <TabsTrigger key={id} value={id}>
-              <KeywordLabel id={id} />
+              <span data-keyword={id}>{keywordLabel(id)}</span>
             </TabsTrigger>
           ))}
         </TabsList>
@@ -264,7 +264,9 @@ export function Talents({ game, send, back }: { game: GameState; send: Props["se
             tone={keyword}
           />
           <div className="talent-tree">
-            {[0, 1, 2].map((row) => (
+            {[
+              ...new Set(TALENTS.filter((talent) => talent.keyword === keyword).map((talent) => talent.row)),
+            ].map((row) => (
               <div className="talent-row" key={row} data-nav-row aria-label={`Row ${row + 1}`}>
                 {TALENTS.filter((t) => t.keyword === keyword && t.row === row).map((t) => {
                   const owned = game.talents.includes(t.id),

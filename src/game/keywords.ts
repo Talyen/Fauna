@@ -22,7 +22,7 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Physical",
       "damage",
       "active",
-      "Physical damage gains Forge and is reduced by Armor after Block. Attacks have a 5% critical chance for double damage.",
+      "Physical damage is reduced by Armor after Block. Attacks have a 5% critical chance for double damage.",
     ),
     fire: entry("Fire", "damage", "active", "Fire damage. Does not apply Burn."),
     ice: entry("Ice", "damage", "active", "Ice damage. Does not apply Freeze."),
@@ -82,7 +82,6 @@ export const KEYWORD_DEFINITIONS = freeze(
       "active",
       "Reduce incoming Physical and Stun damage; lose a stack when damaged.",
     ),
-    forge: entry("Forge", "status", "active", "Increase Physical and Stun damage."),
     burn: entry("Burn", "damage", "active", "Deal damage each turn, then halve the stacks.", [
       "Burns",
       "Burning",
@@ -146,19 +145,34 @@ export const DAMAGE_TYPES = freeze([
 export type DamageType = (typeof DAMAGE_TYPES)[number];
 // Vocabulary alone does not grant XP or talents.
 export const PROGRESSION_KEYWORDS = freeze([
-  ...DAMAGE_TYPES,
+  "physical",
+  "burn",
+  "freeze",
+  "stun",
+  "poison",
+  "nature",
+  "light",
+  "bleed",
   "block",
   "heal",
   "armor",
-  "forge",
-  "thorns",
   "dodge",
   "leech",
   "mana",
-  "cleanse",
-  "purge",
 ] as const);
 export type ProgressionKeyword = (typeof PROGRESSION_KEYWORDS)[number];
+const progressionCategory: Partial<Record<KeywordId, ProgressionKeyword>> = {
+  fire: "burn",
+  ice: "freeze",
+  lightning: "stun",
+  thorns: "nature",
+  cleanse: "heal",
+  purge: "light",
+};
+export const progressionLabel = (id: ProgressionKeyword) =>
+  ({ burn: "Fire / Burn", freeze: "Ice / Freeze", stun: "Lightning / Stun" })[
+    id as "burn" | "freeze" | "stun"
+  ] ?? keywordLabel(id);
 export const EFFECT_KEYWORDS = freeze(
   {
     attack: [],
@@ -174,17 +188,22 @@ export function definitionKeywords(definition: {
   leech?: boolean;
   effects?: readonly { kind: string; status?: string; damageType?: DamageType; leech?: boolean }[];
 }): ProgressionKeyword[] {
-  const result: ProgressionKeyword[] =
+  const raw: string[] =
     definition.effect === "attack" ? [definition.damageType!] : [...EFFECT_KEYWORDS[definition.effect]];
   for (const effect of definition.effects ?? []) {
-    const keyword =
-      effect.kind === "damage" ? effect.damageType : effect.kind === "status" ? effect.status : effect.kind;
-    if (PROGRESSION_KEYWORDS.includes(keyword as ProgressionKeyword))
-      result.push(keyword as ProgressionKeyword);
-    if (effect.leech) result.push("leech");
+    raw.push(
+      effect.kind === "damage" ? effect.damageType! : effect.kind === "status" ? effect.status! : effect.kind,
+    );
+    if (effect.leech) raw.push("leech");
   }
-  if (definition.leech) result.push("leech");
-  return [...new Set(result)];
+  if (definition.leech) raw.push("leech");
+  return [
+    ...new Set(
+      raw
+        .map((id) => progressionCategory[id as KeywordId] ?? id)
+        .filter((id): id is ProgressionKeyword => PROGRESSION_KEYWORDS.includes(id as ProgressionKeyword)),
+    ),
+  ];
 }
 
 export interface KeywordTextPart {

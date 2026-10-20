@@ -145,7 +145,7 @@ describe("optional starting lineup and save validation", () => {
     expect(s.battle).toEqual(snapshot);
     expect(decodeSave(encodeSave(s))).toEqual(s);
     if (s.phase === "recruit") s = accept(s, { type: "skipRecruit" });
-    if (s.phase === "relic") s = accept(s, { type: "skipRelic" });
+    if (s.phase === "boon") s = accept(s, { type: "skipBoon" });
     s = accept(s, { type: "beginBattle" });
     expect(s.team.map((c) => c.id)).toEqual(s.lineup);
     expect(decodeSave(encodeSave(s))).toEqual(s);
@@ -174,7 +174,7 @@ it("restores the saved lineup after a tactical swap without retaining card owner
   let s = accept(withReserves(), { type: "swap", activeId: "ally-0", reserve: "recruit-silkmoth" });
   s = winBattle(s);
   if (s.phase === "recruit") s = accept(s, { type: "skipRecruit" });
-  if (s.phase === "relic") s = accept(s, { type: "skipRelic" });
+  if (s.phase === "boon") s = accept(s, { type: "skipBoon" });
   expect(s.team.map((c) => c.species)).toEqual(["mossback", "emberfox", "stormfin"]);
   expect(
     s.cards.every((card) =>

@@ -26,19 +26,19 @@ describe("keyword foundation", () => {
       ["nature", "poison"],
       ["block", "armor"],
       ["block"],
-      ["fire", "burn"],
+      ["burn"],
       ["heal"],
-      ["block", "forge"],
-      ["lightning", "stun"],
+      ["block"],
+      ["stun"],
       ["block"],
       ["block", "dodge"],
       ["light"],
       ["heal"],
-      ["block", "cleanse"],
+      ["block", "heal"],
       ["physical", "bleed", "leech"],
-      ["block", "thorns"],
+      ["block", "nature"],
       ["block"],
-      ["light", "freeze", "purge"],
+      ["light", "freeze"],
       ["heal", "mana"],
       ["block"],
     ];
@@ -46,29 +46,22 @@ describe("keyword foundation", () => {
     expect(definitionKeywords({ effect: "attack", damageType: "poison" })).toEqual(["poison"]);
     expect(KEYWORDS).toEqual([
       "physical",
-      "fire",
-      "ice",
-      "lightning",
+      "burn",
+      "freeze",
+      "stun",
       "poison",
       "nature",
       "light",
-      "burn",
-      "freeze",
       "bleed",
-      "stun",
       "block",
       "heal",
       "armor",
-      "forge",
-      "thorns",
       "dodge",
       "leech",
       "mana",
-      "cleanse",
-      "purge",
     ]);
-    expect(TALENTS).toHaveLength(126);
-    for (const id of ["currency", "gold", "wish", "consume", "companion", "archery"]) {
+    expect(TALENTS).toHaveLength(28);
+    for (const id of ["forge", "currency", "gold", "wish", "consume", "companion", "archery"]) {
       expect(isKeywordId(id)).toBe(false);
       expect(KEYWORDS).not.toContain(id);
       expect(TALENTS.some((talent) => talent.id.startsWith(`${id}.`))).toBe(false);

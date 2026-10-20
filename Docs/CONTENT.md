@@ -8,7 +8,7 @@ The first five species begin unlocked. Moonhart unlocks after the first journey 
 
 - **Creature cards: 4:3 landscape, full bleed.** Current placeholders are 800 × 600 SVGs.
 - **Location cards: 4:3 landscape.** Original 800 × 600 SVG placeholders in `public/art/locations/`, with names and encounter labels rendered outside the artwork. `scripts/create-location-placeholders.mjs` rewrites only these placeholders.
-- **Relic cards: 3:4 portrait, matching hand cards.** All current relic displays use the blank 600 × 800 `public/art/relic-placeholder.svg`. Replace with dedicated portrait illustrations later; keep names and effects outside the artwork.
+- **Boon cards: 3:4 portrait, matching hand cards.** Boon displays use dedicated portraits in `public/art/boons/`; keep names and effects outside the artwork.
 - **Action cards: 3:4 portrait, full bleed.** Current placeholders are 600 × 800 SVGs.
 
 Displayed artwork uses one equal-area size standard: 200×266⅔ portrait and 266⅔×200 landscape in CSS pixels, at every viewport. Battle explicitly enlarges creatures by 10% and reduces hand cards by 10%. Layouts reflow or scroll instead of scaling artwork; source asset resolution is independent of displayed size. See [layout rules](UI.md#layout-artwork-size-and-spacing).
@@ -56,3 +56,7 @@ Preparation reads and validates all selected sources before publication. Output 
 Runtime artwork/audio resolves stable IDs through the generated lookup. Ordinary development and production builds run output-only checks; they never regenerate media or need access to the library. Source checks are required after media authoring. Header, geometry and hash checks do not establish audio decoding, visual suitability, source-license clearance or listening acceptance. Retain upstream source-license metadata; the manifest records the shared-library selection and provenance, not a new license grant.
 
 Recorded sounds cover typed combat outcomes, healing, defense, rejected actions, knockouts, recruitment, talents and battle outcomes. Menu, biome and boss tracks are selected independently of Alchemy's routes. Runtime volume uses Master × Music or Master × Sound effects, with background mute and a convenient Sound toggle. Preferences are independent of saves. Audio follows committed commands, respects quiet previews, and never controls gameplay, saves or command admission. Current selections still require Fauna listening/mix review. See [Sound desk](DEVELOPMENT_TOOLS.md#prepared-media-and-sound-desk).
+
+## Boon selections
+
+Tattered Pages, Bone Charm, Ironwood Buckler and Icy Heart use the corresponding portrait WebP files copied from `Alchemy: src/assets/optimized/` into `public/art/boons/`. The manifest records each source, provenance and output hash. Prepared assets are Fauna-owned copies with no sibling runtime dependency. Effects and reward IDs are authored in `src/game/progression.ts`; intermediate-boss cadence is unchanged.

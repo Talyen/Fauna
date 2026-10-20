@@ -5,7 +5,7 @@ import { BattleReadout } from "./target-preview";
 import { ArtCard } from "./art-card";
 import { ActionDetails, CreatureDetails } from "./card-details";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../components/ui/tooltip";
-import { actionValue } from "../game/rules";
+import { actionValue, cardCost, physicalBonus } from "../game/rules";
 import { cardText, definition, enemyCard, species } from "../game/content";
 import type { SpeciesId } from "../game/content";
 import type { Card, Creature, Enemy, GameState } from "../game/types";
@@ -205,7 +205,7 @@ export function ActionCard({
       data-effect={def.effect}
       aria-label={
         label ??
-        `${def.name}${card.level ? ` +${card.level}` : ""}, ${ownerName}, ${enemy ? "" : `${def.cost} mana, `}${cardText(def, card.level, enemyValue ?? actionValue(card, actor ?? { species: def.species, attacked: false }, modifiers))}`
+        `${def.name}${card.level ? ` +${card.level}` : ""}, ${ownerName}, ${enemy ? "" : `${modifiers ? cardCost(card, modifiers) : def.cost} mana, `}${cardText(def, card.level, enemyValue ?? Math.round(actionValue(card, actor ?? { species: def.species, attacked: false }, modifiers) + (modifiers && actor && def.effect === "attack" && def.damageType === "physical" ? physicalBonus(actor, modifiers) : 0)))}`
       }
       aria-pressed={presentation ? undefined : selected}
       aria-disabled={presentation ? undefined : disabled}

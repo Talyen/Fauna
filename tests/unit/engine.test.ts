@@ -159,10 +159,10 @@ describe("game commands", () => {
     for (let battle = 0; battle < 3; battle++) {
       s = winBattle(s);
       const bank = s.currency;
-      expect(dispatch(s, { type: "skipRelic" }).accepted).toBe(false);
+      expect(dispatch(s, { type: "skipBoon" }).accepted).toBe(false);
       expect(s.currency).toBe(bank);
       if (s.phase === "recruit") s = accept(s, { type: "skipRecruit" });
-      if (s.phase === "relic") s = accept(s, { type: "skipRelic" });
+      if (s.phase === "boon") s = accept(s, { type: "skipBoon" });
       if (s.phase === "teamSelection") s = accept(s, { type: "beginBattle" });
     }
     expect(s.phase).toBe("victory");

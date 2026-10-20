@@ -4,7 +4,7 @@ import { produce } from "immer";
 import { createGame } from "../../src/game/engine";
 import { definition, species } from "../../src/game/content";
 import { location } from "../../src/game/destinations";
-import { RELICS } from "../../src/game/progression";
+import { BOONS } from "../../src/game/progression";
 import type { GameState } from "../../src/game/types";
 import { accept, policy, winBattle, run, bossReward } from "../unit/helpers";
 const key = "fauna.save.v1";
@@ -41,10 +41,10 @@ async function step(page: Page, activate: (el: Locator) => Promise<void> = (el) 
     await activate(page.getByRole("button", { name: "Begin battle", exact: true }));
   } else if (c.type === "skipRecruit")
     await activate(page.getByRole("button", { name: "Skip", exact: true }));
-  else if (c.type === "chooseRelic")
+  else if (c.type === "chooseBoon")
     await activate(
       page.getByRole("button", {
-        name: `Choose ${RELICS.find((r) => r.id === c.relic)!.name}`,
+        name: `Choose ${BOONS.find((r) => r.id === c.boon)!.name}`,
         exact: true,
       }),
     );
@@ -117,8 +117,8 @@ for (const width of [1280, 1920])
                 game.roster.length < 5
                   ? accept(game, { type: "recruit", species: game.reward!.recruits[0]! })
                   : accept(game, { type: "skipRecruit" });
-            if (game.phase === "relic")
-              game = accept(game, { type: "chooseRelic", relic: game.reward!.relics[0]! });
+            if (game.phase === "boon")
+              game = accept(game, { type: "chooseBoon", boon: game.reward!.boons[0]! });
           }
         } else {
           game = accept(game, { type: "beginBattle" });
@@ -151,7 +151,7 @@ for (const width of [1280, 1920])
           }),
         ).toBeVisible();
         await expect(page.getByLabel("Final team", { exact: true })).toHaveCount(0);
-        await expect(page.getByLabel("Relics collected", { exact: true })).toHaveCount(0);
+        await expect(page.getByLabel("Boons collected", { exact: true })).toHaveCount(0);
         await expect(page.getByLabel("New creature unlocks", { exact: true })).toHaveCount(0);
         expect(await state(page)).toEqual(game);
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
@@ -463,22 +463,19 @@ test("talents purchase immediately, gate rows, reset a category, and return to t
   page,
 }) => {
   const fixture = produce(run(7), (d) => {
-    d.keywordXP = { fire: 420, block: 20 };
+    d.keywordXP = { burn: 40, block: 20 };
   });
   await seed(page, fixture);
   await resume(page);
   await page.getByRole("button", { name: "Open menu" }).click();
   await page.getByRole("button", { name: "Talents", exact: true }).click();
-  await page.getByRole("tab", { name: "Fire", exact: true }).click();
-  await expect(page.getByRole("button", { name: "Shelter", exact: true })).toBeDisabled();
-  await page.getByRole("button", { name: "Potency", exact: true }).click();
-  await page.getByRole("button", { name: "Mastery", exact: true }).click();
-  await expect(page.getByRole("button", { name: "Shelter", exact: true })).toBeEnabled();
-  await page.getByRole("button", { name: "Shelter", exact: true }).click();
-  expect((await state(page)).talents).toHaveLength(3);
+  await page.getByRole("tab", { name: "Fire / Burn", exact: true }).click();
+  await page.getByRole("button", { name: "Melting Point", exact: true }).click();
+  await page.getByRole("button", { name: "Flashpoint", exact: true }).click();
+  expect((await state(page)).talents).toHaveLength(2);
   await page.getByRole("button", { name: "Reset category", exact: true }).click();
   expect((await state(page)).talents).toEqual([]);
-  expect((await state(page)).keywordXP.fire).toBe(420);
+  expect((await state(page)).keywordXP.burn).toBe(40);
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
   await page.getByRole("button", { name: "Resume", exact: true }).click();
@@ -556,7 +553,7 @@ test("last mana saves the full turn before immediate close and does not replay o
   expect(await state(reopened)).toEqual(committed);
   await expect(reopened.locator(".combat-number")).toHaveCount(0);
 });
-test("rewards resume without duplicate XP, currency, recruitment or relics", async ({ page }) => {
+test("rewards resume without duplicate XP, currency, recruitment or boons", async ({ page }) => {
   const fixture = bossReward();
   await seed(page, fixture);
   await resume(page);
@@ -566,18 +563,18 @@ test("rewards resume without duplicate XP, currency, recruitment or relics", asy
   const before = await state(page);
   await page.reload();
   await resume(page);
-  const relic = page.locator(".relic-choice").first();
+  const boon = page.locator(".boon-choice").first();
   await page.keyboard.press("Tab");
-  await relic.focus();
+  await boon.focus();
   await expect(page.getByRole("tooltip")).toBeVisible();
   await page.keyboard.press("Enter");
   const after = await state(page);
   expect(after.currency).toBe(before.currency);
   expect(after.keywordXP).toEqual(before.keywordXP);
-  expect(after.relics).toHaveLength(1);
+  expect(after.boons).toHaveLength(1);
   await page.reload();
   await resume(page);
-  expect((await state(page)).relics).toEqual(after.relics);
+  expect((await state(page)).boons).toEqual(after.boons);
 });
 test("corrupt saves recover backups and all-invalid saves require explicit recovery", async ({ page }) => {
   await page.goto("/");
@@ -642,7 +639,7 @@ for (const [width, height] of [
         combat: freshCombat(),
         attacked: false,
       }));
-      d.keywordXP.fire = 420;
+      d.keywordXP.burn = 420;
     });
     await seed(page, fixture);
     await resume(page);
@@ -670,7 +667,7 @@ for (const [width, height] of [
     await page.getByRole("button", { name: "Open menu" }).click();
     await page.getByRole("button", { name: "Talents", exact: true }).click();
     await fits(page);
-    await page.getByRole("tab", { name: "Fire", exact: true }).click();
+    await page.getByRole("tab", { name: "Fire / Burn", exact: true }).click();
     await page.waitForTimeout(180);
     await page.screenshot({ path: `reports/implementation/talents-${width}.png` });
     await page.keyboard.press("Escape");
@@ -688,7 +685,7 @@ for (const [width, height] of [
     await seed(page, bossReward());
     await resume(page);
     await fits(page);
-    await page.screenshot({ path: `reports/implementation/relic-${width}.png` });
+    await page.screenshot({ path: `reports/implementation/boon-${width}.png` });
     await page.getByRole("button", { name: "Skip", exact: true }).click();
     await fits(page);
     await page.screenshot({ path: `reports/implementation/team-${width}.png` });
@@ -785,7 +782,7 @@ test("five-card hand with hidden overflow, three enemies and a full bench preser
   let s = winBattle();
   while (s.phase !== "teamSelection") s = accept(s, policy(s));
   s = produce(s, (d) => {
-    d.relics = ["wind-feather"];
+    d.boons = ["tattered-pages"];
     d.wins = 1;
     d.unlocked.push("moonhart");
     d.roster = ["mossback", "emberfox", "stormfin", "silkmoth", "briartooth"];
@@ -849,7 +846,7 @@ test("shadcn tabs and settings retain native keyboard behavior and game navigati
   const physical = page.getByRole("tab", { name: "Physical", exact: true });
   await physical.focus();
   await page.keyboard.press("ArrowRight");
-  const fire = page.getByRole("tab", { name: "Fire", exact: true });
+  const fire = page.getByRole("tab", { name: "Fire / Burn", exact: true });
   await expect(fire).toBeFocused();
   await expect(fire).toHaveAttribute("aria-selected", "true");
   await expect(page.getByRole("tabpanel")).toHaveAttribute(
@@ -857,7 +854,7 @@ test("shadcn tabs and settings retain native keyboard behavior and game navigati
     (await fire.getAttribute("id")) as string,
   );
   await page.keyboard.press("d");
-  await expect(page.getByRole("tab", { name: "Ice", exact: true })).toBeFocused();
+  await expect(page.getByRole("tab", { name: "Ice / Freeze", exact: true })).toBeFocused();
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "Settings", exact: true }).click();
   await page.getByRole("tab", { name: "Sound", exact: true }).click();
@@ -1044,7 +1041,7 @@ test("controller navigation preserves its device mode and can confirm a pointer-
   await page.getByRole("button", { name: "Talents", exact: true }).click();
   await page.getByRole("tab", { name: "Physical", exact: true }).focus();
   await press(15);
-  await expect(page.getByRole("tab", { name: "Fire", exact: true })).toBeFocused();
+  await expect(page.getByRole("tab", { name: "Fire / Burn", exact: true })).toBeFocused();
   await expect(page.locator(".app")).toHaveAttribute("data-input", "controller");
   await press(1);
   await resume(page);

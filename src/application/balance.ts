@@ -10,7 +10,7 @@ export interface BalanceCase {
   seed: number;
   starter: SpeciesId;
   checkpoint?: string;
-  loadout?: { talents: string[]; relics: string[] };
+  loadout?: { talents: string[]; boons: string[] };
 }
 export const BALANCE_CONFIG = {
   policyVersion: BATTLE_POLICY_VERSION,
@@ -31,7 +31,7 @@ export async function balanceCase(
   const injected = structuredClone(base);
   if (config.loadout) {
     injected.talents = [...config.loadout.talents];
-    injected.relics = [...config.loadout.relics] as GameState["relics"];
+    injected.boons = [...config.loadout.boons] as GameState["boons"];
   }
   const initial = encodeSave(decodeSave(encodeSave(injected)));
   if (!config.checkpoint) {

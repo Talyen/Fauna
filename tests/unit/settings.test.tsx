@@ -37,6 +37,10 @@ it("applies slider and switch changes live, persists preferences, and preserves 
   try {
     await user.click(screen.getByRole("button", { name: "Settings" }));
     await user.click(screen.getByRole("radio", { name: "150%" }));
+    expect(document.documentElement.style.getPropertyValue("--tooltip-scale")).toBe("1");
+    await user.click(screen.getByRole("radio", { name: "Tooltip 125%" }));
+    expect(document.documentElement.style.getPropertyValue("--text-scale")).toBe("1.5");
+    expect(document.documentElement.style.getPropertyValue("--tooltip-scale")).toBe("1.25");
     await user.click(screen.getByRole("tab", { name: "Battle" }));
     expect(screen.getByRole("switch", { name: "Auto-end turn" }).getAttribute("aria-checked")).toBe("true");
     await user.click(screen.getByRole("switch", { name: "Auto-end turn" }));
@@ -63,6 +67,7 @@ it("applies slider and switch changes live, persists preferences, and preserves 
     render(<App session={session} />);
     await user.click(screen.getByRole("button", { name: "Settings" }));
     expect(screen.getByRole("radio", { name: "150%" }).getAttribute("aria-checked")).toBe("true");
+    expect(screen.getByRole("radio", { name: "Tooltip 125%" }).getAttribute("aria-checked")).toBe("true");
     await user.click(screen.getByRole("tab", { name: "Battle" }));
     expect(screen.getByRole("switch", { name: "Auto-end turn" }).getAttribute("aria-checked")).toBe("false");
     await user.click(screen.getByRole("tab", { name: "Sound" }));

@@ -33,7 +33,7 @@ export function useGameAudio(session: Session, preferences: AudioPreferences, ho
             : type === "play" || type === "endTurn"
               ? current.game.phase === "victory" ||
                 current.game.phase === "recruit" ||
-                current.game.phase === "relic"
+                current.game.phase === "boon"
                 ? "victory"
                 : current.game.phase === "defeat"
                   ? "defeat"
@@ -57,7 +57,7 @@ export function useGameAudio(session: Session, preferences: AudioPreferences, ho
   }, [session]);
   const game = session.store.getState().game;
   const track: MusicCue =
-    home || !["battle", "teamSelection", "recruit", "relic"].includes(game.phase)
+    home || !["battle", "teamSelection", "recruit", "boon"].includes(game.phase)
       ? "menu"
       : game.expedition?.step === 3
         ? "boss"

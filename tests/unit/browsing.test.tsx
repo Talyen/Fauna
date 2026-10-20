@@ -31,7 +31,7 @@ afterEach(() => {
 describe("menu browsing", () => {
   it("explains talents before hover and updates requirements after purchases and category reset", async () => {
     const game = produce(createGame(7), (draft) => {
-      draft.keywordXP.physical = 120;
+      draft.keywordXP.physical = 10;
     });
     localStorage.setItem("fauna.save.v1", JSON.stringify(game));
     const session = createSession(createBrowserPlatform(localStorage), 7);
@@ -40,35 +40,19 @@ describe("menu browsing", () => {
     render(<App session={session} />);
     try {
       await user.click(screen.getByRole("button", { name: "Talents" }));
-      const potency = screen.getByRole("button", { name: "Potency" });
-      expect(within(potency).getByText("Matching cards gain +1 to their effect.")).toBeTruthy();
-      expect(within(potency).getByText("Unlock · 1 point")).toBeTruthy();
-      const shelter = screen.getByRole("button", { name: "Shelter" });
-      expect(within(shelter).getByText("Requires all earlier rows")).toBeTruthy();
+      const slam = screen.getByRole("button", { name: "Shield Slam" });
+      expect(slam.textContent).toContain("Add half your Block to Physical damage.");
+      expect(within(slam).getByText("Unlock · 1 point")).toBeTruthy();
+      await user.click(slam);
+      expect(screen.getByRole("button", { name: "Shield Slam, unlocked" })).toBeTruthy();
+      const fists = screen.getByRole("button", { name: "Armored Fists" });
+      expect(within(fists).getByText("Requires 1 point")).toBeTruthy();
       const revision = session.store.getState().game.revision;
-      await user.click(shelter);
+      await user.click(fists);
       expect(session.store.getState().game.revision).toBe(revision);
-      await user.click(potency);
-      expect(
-        within(screen.getByRole("button", { name: "Potency, unlocked" })).getByText("Unlocked"),
-      ).toBeTruthy();
-      await user.click(screen.getByRole("button", { name: "Mastery" }));
-      expect(within(shelter).getByText("Unlock · 1 point")).toBeTruthy();
-      await user.click(shelter);
-      expect(
-        within(screen.getByRole("button", { name: "Guarded Focus" })).getByText("Requires 1 point"),
-      ).toBeTruthy();
-      expect(
-        within(screen.getByRole("button", { name: "Readiness" })).getByText(
-          "Requires 1 point and all earlier rows",
-        ),
-      ).toBeTruthy();
       await user.click(screen.getByRole("button", { name: "Reset category" }));
       expect(session.store.getState().game.talents).toEqual([]);
-      expect(
-        within(screen.getByRole("button", { name: "Potency" })).getByText("Unlock · 1 point"),
-      ).toBeTruthy();
-      expect(within(shelter).getByText("Requires all earlier rows")).toBeTruthy();
+      expect(within(fists).getByText("Unlock · 1 point")).toBeTruthy();
     } finally {
       cleanup();
       await session.dispose();

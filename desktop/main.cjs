@@ -42,8 +42,10 @@ const trusted = (url) => (dev ? url === `${dev}/` || url === dev : url === entry
 app.whenReady().then(async () => {
   storage = createStorage(process.env.FAUNA_SMOKE_USER_DATA || path.join(app.getPath("userData"), "saves"));
   window = new BrowserWindow({
-    width: 1440,
-    height: 1000,
+    width: !app.isPackaged && process.env.FAUNA_PERF_CAPTURE === "1" ? 1280 : 1440,
+    height: !app.isPackaged && process.env.FAUNA_PERF_CAPTURE === "1" ? 800 : 1000,
+    useContentSize: !app.isPackaged && process.env.FAUNA_PERF_CAPTURE === "1",
+    frame: app.isPackaged || process.env.FAUNA_PERF_CAPTURE !== "1",
     minWidth: 900,
     minHeight: 700,
     backgroundColor: "#000000",

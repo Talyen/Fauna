@@ -1,9 +1,9 @@
 import { controlled } from "../game/combat";
-import { actionValue } from "../game/rules";
+import { actionValue, cardCost, physicalBonus } from "../game/rules";
 import { definition, species } from "../game/content";
 import type { Command, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 2;
+export const BATTLE_POLICY_VERSION = 3;
 /** Only visible information enters scoring; no forecasts or gameplay RNG are sampled. */
 export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
   if (state.phase !== "battle" || !state.battle) return [];
@@ -25,19 +25,16 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
     const card = state.cards.find((c) => c.id === id)!;
     const actor = state.team.find((c) => c.id === card.ownerId);
     const def = definition(card.definitionId);
-    if (!actor || actor.health === 0 || controlled(actor) || def.cost > state.battle.mana) continue;
-    const value = actionValue(card, actor, state);
+    if (!actor || actor.health === 0 || controlled(actor) || cardCost(card, state) > state.battle.mana)
+      continue;
+    const value =
+      actionValue(card, actor, state) +
+      (def.effect === "attack" && def.damageType === "physical" ? physicalBonus(actor, state) : 0);
     if (def.effect === "attack") {
       for (const enemy of state.battle.enemies.filter((e) => e.health > 0)) {
         const physical = def.damageType === "physical" || def.damageType === "stun";
         // Rank ordinary landed hits; do not roll Dodge or Critical outcomes.
-        const effective = Math.max(
-          0,
-          value +
-            (physical ? (actor.combat?.forge ?? 0) : 0) -
-            enemy.block -
-            (physical ? enemy.combat.armor : 0),
-        );
+        const effective = Math.max(0, value - enemy.block - (physical ? enemy.combat.armor : 0));
         add(id, (effective >= enemy.health ? 2000 : 1000) + Math.min(value, enemy.health), enemy.id);
       }
     } else if (def.effect === "heal") {

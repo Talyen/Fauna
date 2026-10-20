@@ -27,7 +27,7 @@ describe("one-starter expeditions", () => {
     expect(decodeSave(encodeSave(run()))).toEqual(run());
   });
 
-  it("adds recruits to the first three lineup slots and saves the settled battle before relic choice", () => {
+  it("adds recruits to the first three lineup slots and saves the settled battle before boon choice", () => {
     let s = start();
     for (let index = 0; index < 2; index++) {
       s = accept(s, { type: "beginBattle" });

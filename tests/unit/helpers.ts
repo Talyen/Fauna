@@ -76,7 +76,7 @@ export function policy(s: GameState): Command {
   if (s.phase === "teamSelection")
     return { type: "beginBattle", destination: s.expedition?.offers[0]?.location };
   if (s.phase === "recruit") return { type: "skipRecruit" };
-  if (s.phase === "relic") return { type: "chooseRelic", relic: s.reward!.relics[0]! };
+  if (s.phase === "boon") return { type: "chooseBoon", boon: s.reward!.boons[0]! };
   if (s.phase === "campfire") return { type: "rest" };
   const b = s.battle!;
   const enemy = b.enemies.filter((e) => e.health > 0).sort((a, b) => a.health - b.health)[0]!;

@@ -7,7 +7,7 @@ import { produce } from "immer";
 import { createGame } from "../../src/game/engine";
 import { accept, run, teamRun, winBattle, bossReward } from "./helpers";
 import { encounterSource, location } from "../../src/game/destinations";
-import { RELICS } from "../../src/game/progression";
+import { BOONS } from "../../src/game/progression";
 import { TargetPreview } from "../../src/ui/target-preview";
 // @vitest-environment jsdom
 import { beforeEach, afterEach, describe, it, expect, vi } from "vitest";
@@ -59,7 +59,7 @@ describe("player interface", () => {
     expect(document.querySelectorAll(".hand .action-card")).toHaveLength(5);
     await session.dispose();
   });
-  it("offers blank portrait relic cards with external names and commits the chosen relic", async () => {
+  it("offers illustrated portrait boon cards with external names and commits the chosen boon", async () => {
     const game = bossReward();
     localStorage.setItem("fauna.save.v1", JSON.stringify(game));
     const session = createSession(createBrowserPlatform(localStorage), 7);
@@ -69,21 +69,21 @@ describe("player interface", () => {
     await user.click(screen.getByRole("button", { name: "Continue" }));
     expect(screen.getByRole("heading", { name: "Victory", level: 1 })).toBeTruthy();
     expect(screen.queryByRole("button", { name: "Continue" })).toBeNull();
-    for (const id of game.reward!.relics) {
-      const relic = RELICS.find((entry) => entry.id === id)!;
-      const card = screen.getByRole("button", { name: `Choose ${relic.name}` });
+    for (const id of game.reward!.boons) {
+      const boon = BOONS.find((entry) => entry.id === id)!;
+      const card = screen.getByRole("button", { name: `Choose ${boon.name}` });
       const image = card.querySelector("img")!;
-      expect(image.getAttribute("src")).toBe(assetUrl("relic.placeholder"));
+      expect(image.getAttribute("src")).toBe(assetUrl(`boon.${id}`));
       expect(image.getAttribute("width")).toBe("600");
       expect(image.getAttribute("height")).toBe("800");
       expect(card.textContent).toBe("");
-      expect(screen.getByRole("heading", { name: relic.name })).toBeTruthy();
+      expect(screen.getByRole("heading", { name: boon.name })).toBeTruthy();
     }
-    const chosen = game.reward!.relics[0]!;
+    const chosen = game.reward!.boons[0]!;
     await user.click(
-      screen.getByRole("button", { name: `Choose ${RELICS.find((entry) => entry.id === chosen)!.name}` }),
+      screen.getByRole("button", { name: `Choose ${BOONS.find((entry) => entry.id === chosen)!.name}` }),
     );
-    expect(session.store.getState().game.relics).toEqual([chosen]);
+    expect(session.store.getState().game.boons).toEqual([chosen]);
     expect(session.store.getState().game.phase).toBe("teamSelection");
     await session.dispose();
   });
@@ -110,7 +110,7 @@ describe("player interface", () => {
     expect(screen.queryByRole("button", { name: "Continue" })).toBeNull();
     await user.click(screen.getByRole("button", { name: "Skip" }));
     expect(session.store.getState().game.phase).toBe("teamSelection");
-    expect(screen.queryByRole("heading", { name: "Choose a Relic" })).toBeNull();
+    expect(screen.queryByRole("heading", { name: "Choose a Boon" })).toBeNull();
     await session.dispose();
   });
   it("reopens saved journey gains and starts fresh without losing permanent gains", async () => {
@@ -134,7 +134,7 @@ describe("player interface", () => {
     expect(screen.queryByText(/\+24 XP|talent point|4 \/ 40 XP/)).toBeNull();
     expect(screen.queryByLabelText("Final team")).toBeNull();
     expect(screen.queryByLabelText("New creature unlocks")).toBeNull();
-    expect(screen.queryByLabelText("Relics collected")).toBeNull();
+    expect(screen.queryByLabelText("Boons collected")).toBeNull();
     expect(screen.queryByText(/battles won/)).toBeNull();
     expect(session.store.getState().game).toEqual(game);
     await user.click(screen.getByRole("button", { name: "Main menu" }));

@@ -1,6 +1,6 @@
 import { CARDS, SPECIES, INITIAL_SPECIES, ENCOUNTERS } from "./content";
 import { LOCATIONS, BIOMES } from "./destinations";
-import { RELICS, TALENTS, TALENT_EFFECTS } from "./progression";
+import { BOONS, TALENTS, TALENT_EFFECTS } from "./progression";
 import { DAMAGE_TYPES, EFFECT_KEYWORDS, PROGRESSION_KEYWORDS, definitionKeywords } from "./keywords";
 
 export const contentCatalog = {
@@ -8,7 +8,7 @@ export const contentCatalog = {
   species: SPECIES,
   locations: LOCATIONS,
   biomes: BIOMES,
-  relics: RELICS,
+  boons: BOONS,
   talents: TALENTS,
 };
 export interface ContentIssue {
@@ -54,7 +54,7 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
         error(card.id, "effects", "Unknown supplemental effect.");
       if (effect.kind === "damage" && !DAMAGE_TYPES.includes(effect.damageType))
         error(card.id, "effects", "Unknown supplemental damage type.");
-      if (effect.kind === "status" && !["armor", "forge", "thorns", "dodge"].includes(effect.status))
+      if (effect.kind === "status" && !["armor", "thorns", "dodge"].includes(effect.status))
         error(card.id, "effects", "Unknown granted status.");
     }
     if (!Object.hasOwn(EFFECT_KEYWORDS, card.effect)) error(card.id, "effect", "Unknown effect.");
@@ -102,9 +102,9 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
     if (talent.id !== `${talent.keyword}.${talent.effect}` || !talent.text.trim())
       error(talent.id, "description", "Talent identity or description is inconsistent.");
   }
-  for (const relic of catalog.relics)
-    if (!relic.name.trim() || !relic.text.trim())
-      error(relic.id, "description", "Relic needs a name and effect description.");
+  for (const boon of catalog.boons)
+    if (!boon.name.trim() || !boon.text.trim())
+      error(boon.id, "description", "Boon needs a name and effect description.");
   for (const keyword of PROGRESSION_KEYWORDS)
     if (
       !catalog.cards.some(

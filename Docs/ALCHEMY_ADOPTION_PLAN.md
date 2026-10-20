@@ -18,7 +18,7 @@ Implementation is present on the task branch for all stages; local focused check
 
 Each stage should be a reviewable change in an isolated task worktree, integrated through `scripts/integrate.mjs` after the required local gate. Stages 4, 5, and 6 can proceed independently after their prerequisites. Keep save-contract edits together when stages overlap; re-read current main before integration.
 
-Out of scope: the distinct ten-talent catalog, new relic mechanics, difficulty modes, localization, Homestead, crafting, additional currencies, non-combat locations, cloud saves, achievements, and automatic battle play. The previously approved distinct-talent work remains separate; this plan changes its XP pacing only.
+Out of scope: the distinct ten-talent catalog, new boon mechanics, difficulty modes, localization, Homestead, crafting, additional currencies, non-combat locations, cloud saves, achievements, and automatic battle play. The previously approved distinct-talent work remains separate; this plan changes its XP pacing only.
 
 ## 1 Owned previews and worktrees
 
@@ -41,7 +41,7 @@ Reference: `Alchemy: scripts/agent-browser.mjs`, `Alchemy: scripts/lib/agent-bro
 
 Expand the existing `validateContent()` contract in `src/game/save.ts` into a pure, structured validator with a compact command-line report. Keep save decoding separate from authored-content checks while preserving existing startup validation. Avoid introducing a second definition of valid content.
 
-Validate species/card ownership, exactly three distinct cards per species, unique and known IDs, finite supported values and costs, recognized effects and keywords, encounter packs, location/biome references, relic and talent references, row prerequisites, and consistent keyword classification. Validate displayed effect amounts and descriptions where structured definitions permit it; use focused outcome tests for handwritten passive and talent descriptions. Do not claim arbitrary prose is proven correct by string matching.
+Validate species/card ownership, exactly three distinct cards per species, unique and known IDs, finite supported values and costs, recognized effects and keywords, encounter packs, location/biome references, boon and talent references, row prerequisites, and consistent keyword classification. Validate displayed effect amounts and descriptions where structured definitions permit it; use focused outcome tests for handwritten passive and talent descriptions. Do not claim arbitrary prose is proven correct by string matching.
 
 Add filesystem checks at the tooling boundary for registered artwork/media, required aspect ratios, and prepared manifests. Distinguish errors from advisory tuning warnings. Reports identify the content ID, field, and reason, with JSON for automation and concise text for development. CI runs comprehensive authored-content checks; retain the bounded default local gate.
 
@@ -63,7 +63,7 @@ Reference: `Alchemy: src/lib/error-logger.ts`, `Alchemy: src/features/alchemy/sh
 
 ## 4 Headless journeys and replay
 
-Build an opt-in Node runner around Fauna's production application session, commands, and save codec, using in-memory platform ports. Cover starter choice, destinations, card plays, end turn, swaps, recruitment and replacement, relic selection, talent purchases/resets, final results, and new journeys. Include repeated journeys with earned permanent progress and explicit save/resume checkpoints.
+Build an opt-in Node runner around Fauna's production application session, commands, and save codec, using in-memory platform ports. Cover starter choice, destinations, card plays, end turn, swaps, recruitment and replacement, boon selection, talent purchases/resets, final results, and new journeys. Include repeated journeys with earned permanent progress and explicit save/resume checkpoints.
 
 Use separate seeded randomness for actor decisions; observing choices must not consume gameplay RNG. Enemy intents remain hidden to the actor. Read only player-visible information when scoring choices; do not use internal target IDs or future offers. Begin with random-legal and simple heuristic policies, including reserve recovery. Report policy limitations rather than treating automated win rates as human balance.
 
@@ -74,7 +74,7 @@ Use per-scenario action/turn limits and an external child-process watchdog. A ha
 Acceptance:
 
 - Fixed inputs replay to the same outcomes, state, and RNG across save/resume.
-- Scenarios exercise a full roster, replacement cancellation, duplicate species, fallen deployed creatures with healthy reserves, relic choices, and both victory and defeat.
+- Scenarios exercise a full roster, replacement cancellation, duplicate species, fallen deployed creatures with healthy reserves, boon choices, and both victory and defeat.
 - Reports show starter/team composition, encounter reached, battle length, retained XP/currency, recruitment and swap decisions, failure reasons, and incomplete scenarios.
 - Focused CI cases protect command and replay contracts; large balance sweeps stay opt-in or in dedicated CI jobs. Simulation does not establish rendered quality.
 
@@ -106,13 +106,13 @@ Reference: `Alchemy: src/features/alchemy/meta/screens/collection-screen.tsx` an
 
 ## 7 Manifest-driven asset preparation
 
-Introduce a Fauna-owned manifest selecting source-library files and processing recipes for creature/action/location art, keyword art, relics, sound effects, music, and required interface media. Preserve existing placeholders until explicitly replaced. Share approved source files where appropriate, but keep Fauna's selections, output paths, recipes, and preparation receipts independent of Alchemy.
+Introduce a Fauna-owned manifest selecting source-library files and processing recipes for creature/action/location art, keyword art, boons, sound effects, music, and required interface media. Preserve existing placeholders until explicitly replaced. Share approved source files where appropriate, but keep Fauna's selections, output paths, recipes, and preparation receipts independent of Alchemy.
 
 Use a configurable library root and library-relative selections. Receipts record source hashes, selection/recipe identity, and output hashes. Validate every selected source before publishing outputs, stage generation before installation, and leave the last good prepared set usable after a missing source or failed conversion. Never delete library originals or unrelated local-only files. Limit any obsolete-output cleanup to manifest-owned outputs with explicit ownership evidence.
 
 Provide explicit prepare, full source-check, and output-only check commands. Ordinary development/builds consume prepared outputs without rewriting tracked sources. CI validates committed outputs and manifest consistency without downloading the source library. Record source provenance and usage rights per selection rather than assuming every shared library file is approved for shipping.
 
-Generate asset lookup data from the manifest and connect media completeness to content validation. Enforce separate 4:3 creature/location and 3:4 action/relic compositions; processing must not stretch or silently crop one into another. Source resolution does not change Fauna's fixed CSS display sizes. Prefer existing encoders/libraries where they fit; document any required new dependency and its concrete role.
+Generate asset lookup data from the manifest and connect media completeness to content validation. Enforce separate 4:3 creature/location and 3:4 action/boon compositions; processing must not stretch or silently crop one into another. Source resolution does not change Fauna's fixed CSS display sizes. Prefer existing encoders/libraries where they fit; document any required new dependency and its concrete role.
 
 Acceptance: missing/offloaded sources, changed recipes, corrupt outputs, conversion failure, duplicate outputs, and interrupted preparation fail safely; output-only checks work without the library; repeated preparation is stable. Test pipeline behavior with tiny fixture media rather than requiring the full production library.
 
@@ -146,3 +146,30 @@ Run focused tests that protect the changed contracts, followed by `npm run check
 CI owns full static checks, all unit/DOM suites, production builds, browser journeys and screenshots, Windows packaging, and packaged desktop smoke. Extend those suites for Collection, settings, diagnostics, and current-format save behavior. Inspect the rendered evidence for each UI change, including 1280×800, large text, reduced motion, keyboard and simulated controller navigation. Local previews, listening sessions, or broader local checks run when explicitly requested; their tools being implemented does not itself authorize running them.
 
 For each stage, report the integrated commit, focused/local checks, pending CI/rendered evidence, and any unresolved asset choices. Distinguish browser simulation, native desktop, Windows packaging, physical controllers, Steam client, and Steam Deck. Do not mark media quality accepted from hashes, geometry, or unit tests alone. Stop after the requested deliverable; remote publication remains separately authorized.
+
+## Follow-up adoption: approved implementation
+
+Replace the shared talent set with two talents per consolidated category, replace four relics with four illustrated Boons, and add independent tooltip sizing. The user delegated selection. Both talents are eventually available, either may be purchased first, and category reset preserves XP. Difficulty tiers are explicitly excluded; Forge is removed instead of expanded.
+
+| Category         | Selected talents               |
+| ---------------- | ------------------------------ |
+| Physical         | Shield Slam, Armored Fists     |
+| Fire / Burn      | Flashpoint, Melting Point      |
+| Ice / Freeze     | Bitter Cold, Glacial Barrier   |
+| Lightning / Stun | Guarded Counter, Shatter Guard |
+| Poison           | Necrosis, Torpor               |
+| Nature           | Bramblegrowth, Ecosystem       |
+| Light            | Faith Barrier, Blessed Leech   |
+| Bleed            | First Blood, Mortal Wound      |
+| Block            | Second Wind, Grounding         |
+| Healing          | Mending, Renewal               |
+| Armor            | Bulwark, Reactive Guard        |
+| Dodge            | Lightfoot, Catch Breath        |
+| Leech            | Deep Siphon, Desperate Siphon  |
+| Mana             | Wellspring, Dark Recovery      |
+
+Boons are Tattered Pages, Bone Charm, Ironwood Buckler and Icy Heart, including copied artwork and prepared receipts. Keep intermediate-boss choices of three and normal rewards. No result-screen inspection is added. Concise rules use percentages and implied ownership; exact resolution belongs in focused gameplay tests and the keyword contract.
+
+Development additions are seeded rendered interactions with replay and bounded shrinking, named browser routes, native Electron and cold startup captures, and reachable seeded-journey performance checkpoints with coverage inventories. Extend existing harnesses and application/save interfaces; never import Alchemy at runtime. See [Development tools](DEVELOPMENT_TOOLS.md#focused-routes-and-seeded-interactions) and [native performance](DEVELOPMENT_TOOLS.md#native-and-reachable-performance-scenarios).
+
+Delivery order: combat/catalog and save version 13; Boon art/menu and tooltip preference; tooling and focused regression/documentation coverage. Review the complete task diff, run selected formatting/smoke and docs checks, then commit and integrate through the shared lock. Broader rendered/native/performance checks follow the user's local-review authorization; Windows packaging remains CI-owned. Report actual checks and pending boundaries.
