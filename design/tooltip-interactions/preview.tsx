@@ -285,6 +285,9 @@ function TooltipStudy() {
       {storageFailed ? (
         <p role="status">Browser storage is unavailable. Choices remain for this visit only.</p>
       ) : null}
+      <Button variant="outline" asChild>
+        <a href="/design/artwork-interactions/index.html">Next batch: artwork cards</a>
+      </Button>
       <footer>
         <p>
           Baseline in individual comparisons: 150ms hover delay, above, 12px gap, no fade, neutral border.
