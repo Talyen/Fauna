@@ -9,7 +9,7 @@
     "npm": ">=11"
   },
   "scripts": {
-    "dev": "vite --host 127.0.0.1",
+    "dev": "node scripts/dev.mjs",
     "dev:desktop": "node scripts/dev-desktop.mjs",
     "check": "node scripts/check.mjs",
     "check:full": "tsc --noEmit && oxlint src tests scripts desktop design --deny-warnings && prettier --check . && node scripts/boundaries.mjs && node scripts/ui-contract.mjs",
