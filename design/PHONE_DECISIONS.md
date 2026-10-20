@@ -148,10 +148,13 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 
 ## Rewards and results
 
-- Earned amounts count upward to their final values over 400ms.
+- Earned amounts count upward to their final values over 400ms with ease-out timing.
 - Reward items arrive with a 75ms stagger per item; artwork fades in over 150ms without spatial movement.
 - Rewards commit immediately and controls remain usable immediately. Count-ups and staggered arrivals are presentation-only and cannot delay commands or grant rewards.
+- Interacting during the entrance finishes the presentation immediately and accepts the intended action without requiring a second activation.
+- Keyword level-ups briefly pulse the keyword icon in its own semantic color. Pulse size and duration remain undecided.
 - Reduced motion shows final values and all reward items immediately, without entrance animations.
+- Reduced motion also suppresses the level-up icon pulse.
 
 ## Empty states
 
