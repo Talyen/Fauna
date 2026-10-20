@@ -21,23 +21,23 @@ import { KeywordText } from "../../src/ui/keyword-text";
 import { run } from "./helpers";
 
 describe("keyword foundation", () => {
-  it("classifies authored effects without reading names or rules text, preserving saved talent categories", () => {
+  it("classifies authored effects without reading names or rules text, using only current talent categories", () => {
     const expected = [
       "nature",
       "block",
       "block",
       "fire",
       "heal",
-      "mark",
+      "block",
       "lightning",
-      "mark",
+      "block",
       "block",
       "light",
       "heal",
       "block",
       "physical",
       "block",
-      "mark",
+      "block",
       "light",
       "heal",
       "block",
@@ -54,10 +54,15 @@ describe("keyword foundation", () => {
       "light",
       "block",
       "heal",
-      "mark",
     ]);
-    expect(TALENTS).toHaveLength(60);
+    expect(TALENTS).toHaveLength(54);
+    expect(isKeywordId("mark")).toBe(false);
+    expect(CARDS.every((card) => String(card.effect) !== "mark")).toBe(true);
     const state = run();
+    const obsolete = { ...state, version: 9 };
+    expect(() => decodeSave(JSON.stringify(obsolete))).toThrow();
+    const removedXP = { ...state, keywordXP: { mark: 20 } };
+    expect(() => decodeSave(JSON.stringify(removedXP))).toThrow();
     expect(decodeSave(encodeSave(state))).toEqual(state);
     for (const id of KEYWORD_IDS.filter((id) => KEYWORD_DEFINITIONS[id].availability === "planned")) {
       expect(PROGRESSION_KEYWORDS).not.toContain(id);
@@ -73,11 +78,8 @@ describe("keyword foundation", () => {
     const parts = keywordText(text);
     expect(parts.map((part) => part.text).join("")).toBe(text);
     expect(parts.filter((part) => part.keyword).map((part) => [part.text, part.keyword])).toEqual([
-      ["Marked", "mark"],
-      ["MARKS", "mark"],
       ["Health", "health"],
       ["Healing", "heal"],
-      ["marks", "mark"],
     ]);
     expect(
       keywordText("Holy and Gold")
@@ -89,15 +91,14 @@ describe("keyword foundation", () => {
     expect(isKeywordId("constructor")).toBe(false);
     expect(isKeywordId("__proto__")).toBe(false);
     expect(isKeywordId("burn")).toBe(true);
-    expect(Object.isFrozen(KEYWORD_DEFINITIONS.mark.aliases)).toBe(true);
+    expect(Object.isFrozen(KEYWORD_DEFINITIONS.heal.aliases)).toBe(true);
   });
 
   it("renders the same keyword identity on card rules and prose without changing accessible text", () => {
     const attack = CARDS.find((card) => card.id === "emberfox-attack")!;
     const html = renderToStaticMarkup(<CardRules card={attack} value={13} />);
     expect(html).toContain('data-keyword="fire">Fire</span>');
-    expect(html).toContain('data-keyword="mark">marks</span>');
-    expect(html.replace(/<[^>]+>/g, "")).toBe("Deal 13 Fire damage. Consume marks for +3 damage each.");
+    expect(html.replace(/<[^>]+>/g, "")).toBe("Deal 13 Fire damage.");
     expect(html).not.toContain('data-keyword="consume"');
     const unsafe = renderToStaticMarkup(<KeywordText text={"<script>Fire</script>"} />);
     expect(unsafe).toContain("&lt;script&gt;");
@@ -106,16 +107,16 @@ describe("keyword foundation", () => {
       [],
       [
         { kind: "heal", targetId: "ally-0", amount: 2, text: "" },
-        { kind: "mark", targetId: "ally-0", amount: 1, text: "" },
+        { kind: "block", targetId: "ally-0", amount: 1, text: "" },
       ],
       1,
       0,
     );
     const feedback = renderToStaticMarkup(<CombatFeedback bursts={bursts} targetId="ally-0" />);
     expect(feedback).toContain('data-combat-tone="heal"');
-    expect(feedback).toContain('data-combat-tone="mark"');
-    const readout = renderToStaticMarkup(<BattleReadout health={10} maxHealth={20} marks={2} />);
-    expect(readout).toContain('data-combat-tone="mark"');
+    expect(feedback).toContain('data-combat-tone="block"');
+    const readout = renderToStaticMarkup(<BattleReadout health={10} maxHealth={20} block={2} />);
+    expect(readout).toContain('data-combat-tone="block"');
   });
 
   it("assigns every keyword a readable design token and shared selector, retaining damage labels", () => {

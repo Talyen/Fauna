@@ -12,7 +12,7 @@ describe("keyword progression and rewards", () => {
     const keywords = cardKeywords(card);
     const def = card.definitionId.endsWith("teamGuard")
       ? undefined
-      : card.definitionId.endsWith("attack") || card.definitionId.endsWith("mark")
+      : card.definitionId.endsWith("attack")
         ? "enemy-0"
         : "ally-0";
     const result = dispatch(s, { type: "play", cardId: card.id, targetId: def });

@@ -56,20 +56,18 @@ describe("game commands", () => {
     });
     expect(dispatch(empty, { type: "play", cardId: attack.id, targetId: "enemy-0" }).state).toBe(empty);
   });
-  it("spends mana, consumes marks, applies traits, and commits ordered feedback", () => {
+  it("spends mana, applies traits, and commits ordered feedback", () => {
     let s = run();
     const attack = s.cards.find((c) => c.definitionId === "emberfox-attack")!;
     s = produce(s, (d) => {
       d.battle!.hand = [attack.id];
       d.battle!.draw = d.cards.filter((c) => c.id !== attack.id).map((c) => c.id);
-      d.battle!.enemies[0]!.marks = 2;
       d.battle!.enemies[0]!.health = 18;
     });
     const r = dispatch(s, { type: "play", cardId: attack.id, targetId: "enemy-0" });
     expect(r.accepted).toBe(true);
     expect(r.state.battle!.mana).toBe(2);
-    expect(r.state.battle!.enemies[0]!.health).toBe(2);
-    expect(r.state.battle!.enemies[0]!.marks).toBe(0);
+    expect(r.state.battle!.enemies[0]!.health).toBe(8);
     expect(r.events.map((e) => e.kind)).toEqual(["action", "damage"]);
     expect(r.events.find((e) => e.kind === "damage")?.damageType).toBe("fire");
     expect(r.state.battle!.discard).toContain(attack.id);
@@ -238,17 +236,17 @@ describe("save validation", () => {
   });
 });
 describe("creature traits and deck circulation", () => {
-  it("applies Charged marks and Tender healing while rejecting revival of knocked-out allies", () => {
+  it("applies Charged Lightning damage and Tender healing while rejecting revival of knocked-out allies", () => {
     let s = teamRun(5, ["stormfin", "silkmoth", "mossback"]);
-    const mark = s.cards.find((c) => c.definitionId === "stormfin-mark")!,
+    const attack = s.cards.find((c) => c.definitionId === "stormfin-attack")!,
       heal = s.cards.find((c) => c.definitionId === "silkmoth-heal")!;
     s = produce(s, (d) => {
       d.team[2]!.health = 10;
-      d.battle!.hand = [mark.id, heal.id];
-      d.battle!.draw = d.cards.filter((c) => ![mark.id, heal.id].includes(c.id)).map((c) => c.id);
+      d.battle!.hand = [attack.id, heal.id];
+      d.battle!.draw = d.cards.filter((c) => ![attack.id, heal.id].includes(c.id)).map((c) => c.id);
     });
-    s = accept(s, { type: "play", cardId: mark.id, targetId: "enemy-0" });
-    expect(s.battle!.enemies[0]!.marks).toBe(3);
+    s = accept(s, { type: "play", cardId: attack.id, targetId: "enemy-0" });
+    expect(s.battle!.enemies[0]!.health).toBe(10);
     s = accept(s, { type: "play", cardId: heal.id, targetId: "ally-2" });
     expect(s.team[2]!.health).toBe(20);
     const knocked = produce(s, (d) => {

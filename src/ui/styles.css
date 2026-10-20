@@ -814,10 +814,6 @@ button {
 [data-keyword="heal"] {
   color: var(--keyword-heal);
 }
-[data-combat-tone="mark"],
-[data-keyword="mark"] {
-  color: var(--keyword-mark);
-}
 [data-combat-tone="thorns"],
 [data-keyword="thorns"] {
   color: var(--keyword-thorns);

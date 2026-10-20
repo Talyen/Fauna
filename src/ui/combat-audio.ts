@@ -1,6 +1,6 @@
 import type { DamageType } from "../game/content";
 import type { GameEvent } from "../game/types";
-export type CombatCue = DamageType | "heal" | "block" | "absorb" | "mark" | "deny";
+export type CombatCue = DamageType | "heal" | "block" | "absorb" | "deny";
 /** Alchemy-inspired outcome selection: one strongest meaningful cue per resolved action. */
 export function selectCombatCue(events: readonly GameEvent[]): CombatCue | undefined {
   let best: { cue: CombatCue; amount: number; priority: number } | undefined;
@@ -16,9 +16,7 @@ export function selectCombatCue(events: readonly GameEvent[]): CombatCue | undef
             ? event.amount! < 0
               ? "absorb"
               : "block"
-            : event.kind === "mark"
-              ? "mark"
-              : undefined;
+            : undefined;
     if (!cue) continue;
     const priority = event.kind === "damage" ? 0 : event.kind === "heal" ? 1 : 2;
     if (!best || amount > best.amount || (amount === best.amount && priority < best.priority))
@@ -38,7 +36,6 @@ const VOICES: Record<CombatCue, { wave: OscillatorType; start: number; end: numb
   heal: { wave: "sine", start: 440, end: 880, duration: 0.22 },
   block: { wave: "triangle", start: 260, end: 440, duration: 0.12 },
   absorb: { wave: "triangle", start: 170, end: 100, duration: 0.09 },
-  mark: { wave: "sine", start: 620, end: 460, duration: 0.08 },
 };
 /** Original synthesized prototype cues; no Alchemy media assets are copied. */
 export function createCombatAudio() {

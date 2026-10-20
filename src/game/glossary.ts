@@ -20,7 +20,7 @@ export const GLOSSARY = [
   },
   {
     term: "Attack",
-    definition: "An action that deals damage to an enemy. Attack traits and marks modify its damage.",
+    definition: "An action that deals damage to an enemy. Attack traits modify its damage.",
   },
   {
     term: "Damage",
@@ -33,10 +33,6 @@ export const GLOSSARY = [
       "An incoming damage action. Briartooth's passive retaliates only when the action removes health, not when block absorbs it entirely.",
   },
   {
-    term: "Marks",
-    definition: KEYWORD_DEFINITIONS.mark.description,
-  },
-  {
     term: "Turn",
     definition:
       "Play cards using shared mana. Spending your last mana automatically resolves the enemy turn. You can also press End turn at any time without confirmation. Discard remaining hand cards; refill mana and draw 5 cards for the next turn.",
@@ -44,7 +40,7 @@ export const GLOSSARY = [
   {
     term: "Battle",
     definition:
-      "One encounter. Defeat every enemy to win. This prototype restores all teammate health after victory. Temporary block and marks do not carry into the next battle.",
+      "One encounter. Defeat every enemy to win. This prototype restores all teammate health after victory. Temporary block does not carry into the next battle.",
   },
   {
     term: "Draw / discard",
@@ -88,6 +84,6 @@ export const GLOSSARY = [
   ...KEYWORD_IDS.filter(
     (id) =>
       KEYWORD_DEFINITIONS[id].availability === "active" &&
-      !["health", "block", "mana", "mark", "currency"].includes(id),
+      !["health", "block", "mana", "currency"].includes(id),
   ).map((id) => ({ term: KEYWORD_DEFINITIONS[id].label, definition: KEYWORD_DEFINITIONS[id].description })),
 ] as const;

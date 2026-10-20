@@ -17,8 +17,26 @@ These are separate compositions, not crops of one format into another. Replace t
 
 The initial asset set was authored by `scripts/create-placeholders.mjs`. Running it intentionally rewrites all placeholder SVGs; do not run it over production art. Mana UI sprites were adapted from Alchemy; no creature artwork or fonts were copied from Alchemy.
 
+## Keyword artwork
+
+`public/art/keywords/` contains unchanged optimized portrait artwork copied from Alchemy for the Talents keyword overview. Use portrait ArtCards with contain rendering; the source images are 420 × 563 pixels.
+
+| Fauna keyword | Local file       | Alchemy source         |
+| ------------- | ---------------- | ---------------------- |
+| Physical      | `physical.webp`  | `talent-physical.webp` |
+| Fire          | `fire.webp`      | `talent-burn.webp`     |
+| Ice           | `ice.webp`       | `talent-freeze.webp`   |
+| Lightning     | `lightning.webp` | `talent-stun.webp`     |
+| Poison        | `poison.webp`    | `talent-poison.webp`   |
+| Nature        | `nature.webp`    | `talent-nature.webp`   |
+| Light         | `light.webp`     | `talent-holy.webp`     |
+| Block         | `block.webp`     | `talent-block.webp`    |
+| Healing       | `heal.webp`      | `talent-health.webp`   |
+
+Source files live in Alchemy's `src/assets/optimized/`. Artwork reuse does not import Alchemy's keyword mechanics. All nine talent categories have matching artwork.
+
 ## Composition
 
-The enemy row is above the player row, and the portrait hand is at the bottom. Enemy intents remain hidden. Health bars, block/mark counts, acting outlines and targeting feedback sit outside the artwork. Defeated creatures remain visible but subdued. Important actions have visible outcomes, independent of sound. Outcome-driven floating numbers, recoil and optional synthesized sound present committed actions.
+The enemy row is above the player row, and the portrait hand is at the bottom. Enemy intents remain hidden. Health bars, block counts, acting outlines and targeting feedback sit outside the artwork. Defeated creatures remain visible but subdued. Important actions have visible outcomes, independent of sound. Outcome-driven floating numbers, recoil and optional synthesized sound present committed actions.
 
 Review the draft, ordinary encounters, three-enemy encounter, reward choices, enlarged inspection, and victory at 1920 × 1080 and 1280 × 800. Automatic geometry assertions supplement visual inspection; they do not establish physical handheld readability or performance.

@@ -73,9 +73,6 @@ export function policy(s: GameState): Command {
     .map((id) => s.cards.find((c) => c.id === id)!)
     .filter((c) => definition(c.definitionId).cost <= b.mana);
   const attacks = cards.filter((c) => definition(c.definitionId).effect === "attack");
-  const mark = cards.find((c) => definition(c.definitionId).effect === "mark");
-  if (mark && attacks.length && b.mana >= 2 && enemy.health > 15 && enemy.marks === 0)
-    return { type: "play", cardId: mark.id, targetId: enemy.id };
   const attack = attacks.sort(
     (a, b) =>
       definition(b.definitionId).value + b.level * 2 - (definition(a.definitionId).value + a.level * 2),
@@ -99,7 +96,6 @@ export function policy(s: GameState): Command {
       )[0]!;
     return { type: "play", cardId: guard.id, targetId: target.id };
   }
-  if (mark) return { type: "play", cardId: mark.id, targetId: enemy.id };
   return { type: "endTurn" };
 }
 

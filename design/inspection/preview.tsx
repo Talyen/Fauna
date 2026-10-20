@@ -153,7 +153,7 @@ function Preview() {
                 />
                 <div className="inspection-review-kit">
                   <p className="inspection-review-health">
-                    {enemy ? "15 / 22 health · 2 Marks" : "12 / 24 health · 5 Block"}
+                    {enemy ? "15 / 22 health" : "12 / 24 health · 5 Block"}
                   </p>
                   {enemy ? <h2 className="inspection-kit-label">Species kit</h2> : null}
                   <div className="inspection-review-passive">

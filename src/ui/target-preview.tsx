@@ -1,4 +1,4 @@
-import { Shield, Crosshair, Heart, Skull } from "lucide-react";
+import { Shield, Heart, Skull } from "lucide-react";
 import type { CommandResult, GameState } from "../game/types";
 import { species } from "../game/content";
 import { Progress } from "./progress";
@@ -7,7 +7,6 @@ export function BattleReadout({
   health,
   maxHealth,
   block = 0,
-  marks = 0,
   previous,
   previousBlock,
   knockout = false,
@@ -16,7 +15,6 @@ export function BattleReadout({
   health: number;
   maxHealth: number;
   block?: number;
-  marks?: number;
   previous?: number;
   previousBlock?: number;
   knockout?: boolean;
@@ -40,12 +38,6 @@ export function BattleReadout({
           >
             <Shield aria-hidden="true" />
             {previousBlock !== undefined && previousBlock !== block ? `${previousBlock} → ${block}` : block}
-          </span>
-        ) : null}
-        {marks > 0 ? (
-          <span data-combat-tone="mark">
-            <Crosshair aria-hidden="true" />
-            {marks}
           </span>
         ) : null}
         {children}
@@ -84,7 +76,6 @@ export function TargetPreview({
         block={"block" in next ? next.block : 0}
         previousBlock={"block" in old ? old.block : 0}
         knockout={old.health > 0 && next.health === 0}
-        marks={"marks" in next ? next.marks : 0}
       >
         {events
           .filter((e) => e.kind === "damage" || e.kind === "heal")

@@ -50,7 +50,7 @@ export const SPECIES: readonly Species[] = [
     health: 26,
     color: "#8cbecb",
     trait: "Charged",
-    description: "Mark cards apply 1 extra mark.",
+    description: "Lightning attacks deal 1 extra damage.",
   },
   {
     id: "silkmoth",
@@ -109,16 +109,16 @@ export const CARDS: readonly CardDefinition[] = [
   card("mossback", "Forest Mantle", "teamGuard", 3),
   attack("emberfox", "Cinder Strike", 8, "fire"),
   card("emberfox", "Warm Embers", "heal", 5),
-  card("emberfox", "Soot Signal", "mark", 2),
+  card("emberfox", "Ember Ward", "guard", 6),
   attack("stormfin", "Arc Bite", 7, "lightning"),
-  card("stormfin", "Storm Sign", "mark", 2),
+  card("stormfin", "Storm Shelter", "teamGuard", 3),
   card("stormfin", "Static Veil", "guard", 6),
   attack("silkmoth", "Glimmer", 5, "light"),
   card("silkmoth", "Mending Light", "heal", 8),
   card("silkmoth", "Silken Ward", "guard", 7),
   attack("briartooth", "Thornlash", 8, "physical"),
   card("briartooth", "Briar Coat", "guard", 7),
-  card("briartooth", "Hunter’s Sign", "mark", 2),
+  card("briartooth", "Briar Shelter", "teamGuard", 3),
   attack("moonhart", "Moonbeam", 8, "light"),
   card("moonhart", "Silver Light", "heal", 7),
   card("moonhart", "Night Shelter", "teamGuard", 4),
@@ -137,9 +137,7 @@ export function definition(id: string): CardDefinition {
 export function cardText(card: CardDefinition, level = 0, value = card.value + level * 2): string {
   switch (card.effect) {
     case "attack":
-      return `Deal ${value} ${DAMAGE_LABELS[card.damageType]} damage. Consume marks for +3 damage each.`;
-    case "mark":
-      return `Apply ${value} marks. The next attack consumes them.`;
+      return `Deal ${value} ${DAMAGE_LABELS[card.damageType]} damage.`;
     case "guard":
       return `Give an ally ${value} block this turn.`;
     case "heal":

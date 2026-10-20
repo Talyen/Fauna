@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef, useCallback, type RefObject } from "react";
 import { createCombatAudio, selectCombatCue } from "./combat-audio";
 import { createCombatImpacts } from "./combat-impact";
-import { Crosshair, Heart, Shield, Skull } from "lucide-react";
+import { Heart, Shield, Skull } from "lucide-react";
 import type { Session } from "../application/session";
 import type { GameEvent } from "../game/types";
 import { DamageValue } from "./combat-values";
@@ -23,7 +23,7 @@ export function appendFeedback(
     .filter((b) => now - b.started < LIFETIME)
     .map((b) => ({ ...b, entries: b.entries.map((e) => ({ ...e })) }));
   for (const event of events) {
-    if (!event.targetId || !["damage", "heal", "block", "mark", "knockout"].includes(event.kind)) continue;
+    if (!event.targetId || !["damage", "heal", "block", "knockout"].includes(event.kind)) continue;
     let burst = bursts.find((b) => b.targetId === event.targetId && now - b.started < 250);
     if (!burst) {
       burst = { id: `${id}-${event.targetId}`, targetId: event.targetId, started: now, entries: [] };
@@ -55,7 +55,7 @@ export function feedbackFrames(events: readonly GameEvent[]): GameEvent[][] {
     frames[frames.length - 1]!.push(event);
   }
   return frames.filter((frame) =>
-    frame.some((e) => e.targetId && ["damage", "heal", "block", "mark", "knockout"].includes(e.kind)),
+    frame.some((e) => e.targetId && ["damage", "heal", "block", "knockout"].includes(e.kind)),
   );
 }
 export function useCombatFeedback(
@@ -169,21 +169,12 @@ export function CombatFeedback({ bursts, targetId }: { bursts: readonly Burst[];
         .map((b) => (
           <div key={b.id} className="combat-burst">
             {b.entries.map((e, i) => {
-              const Icon =
-                e.kind === "heal"
-                  ? Heart
-                  : e.kind === "block"
-                    ? Shield
-                    : e.kind === "mark"
-                      ? Crosshair
-                      : Skull;
+              const Icon = e.kind === "heal" ? Heart : e.kind === "block" ? Shield : Skull;
               return (
                 <span
                   key={i}
                   className="combat-number"
-                  data-combat-tone={
-                    e.kind === "heal" || e.kind === "block" || e.kind === "mark" ? e.kind : undefined
-                  }
+                  data-combat-tone={e.kind === "heal" || e.kind === "block" ? e.kind : undefined}
                 >
                   {e.kind === "damage" ? (
                     <DamageValue type={e.damageType ?? "physical"} amount={e.amount ?? 0} signed />

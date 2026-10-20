@@ -7,7 +7,7 @@ import type { Card, Command, CommandResult, GameEvent, GameState } from "./types
 export function createGame(seed = 1): GameState {
   return freeze(
     {
-      version: 9,
+      version: 10,
       revision: 0,
       rng: seed >>> 0,
       phase: "draft",
@@ -143,7 +143,6 @@ export function beginBattle(state: GameState) {
       health: e.health,
       maxHealth: e.health,
       damage: e.damage,
-      marks: 0,
       targetId: "",
     })),
   };
@@ -365,10 +364,7 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
     if (!actor || actor.health <= 0) return reject(state, "That creature is knocked out.");
     const def = definition(card.definitionId);
     if (b!.mana < def.cost) return reject(state, "Not enough mana.");
-    if (
-      (def.effect === "attack" || def.effect === "mark") &&
-      !b!.enemies.some((e) => e.id === command.targetId && e.health > 0)
-    )
+    if (def.effect === "attack" && !b!.enemies.some((e) => e.id === command.targetId && e.health > 0))
       return reject(state, "Choose a living enemy.");
     if (
       (def.effect === "guard" || def.effect === "heal") &&
@@ -471,7 +467,7 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
         const card = draft.cards.find((c) => c.id === command.cardId)!;
         const def = definition(card.definitionId);
         const actor = draft.team.find((c) => c.id === card.ownerId)!;
-        let value = actionValue(card, actor, draft);
+        const value = actionValue(card, actor, draft);
         for (const keyword of cardKeywords(card))
           draft.battleXP[keyword] = Math.min(1_000_000, (draft.battleXP[keyword] ?? 0) + 1);
         battle.mana -= def.cost;
@@ -485,8 +481,6 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
         });
         if (def.effect === "attack") {
           const enemy = battle.enemies.find((e) => e.id === command.targetId)!;
-          value += enemy.marks * 3;
-          enemy.marks = 0;
           const removed = Math.min(enemy.health, value);
           enemy.health = Math.max(0, enemy.health - value);
           actor.attacked = true;
@@ -499,16 +493,6 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
           });
           if (enemy.health === 0)
             events.push({ kind: "knockout", targetId: enemy.id, text: `${enemy.name} is knocked out.` });
-        }
-        if (def.effect === "mark") {
-          const enemy = battle.enemies.find((e) => e.id === command.targetId)!;
-          enemy.marks += value;
-          events.push({
-            kind: "mark",
-            text: `${enemy.name} gains ${value} marks.`,
-            targetId: enemy.id,
-            amount: value,
-          });
         }
         if (def.effect === "guard" || def.effect === "teamGuard") {
           const targets =

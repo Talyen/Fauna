@@ -6,7 +6,7 @@ Screen composition is mostly center-aligned: headings, content groups, artwork c
 
 ## Shared components and enforcement
 
-Use source-owned shadcn/ui for every standard UI control and its interaction behavior. Current approved primitives: Button, Dialog, AlertDialog, Tooltip, Tabs, Switch, RadioGroup, and Progress. Talents uses Tabs with native roving focus; Settings uses a sound Switch and labeled text-size RadioGroup; End journey uses AlertDialog with Cancel initially focused and no outside-click dismissal. Preserve native Tab, arrow-key, Space, Enter, Escape, focus trapping and return behavior. W/A/S/D and gamepad navigation adapt to those components rather than replacing their state machines.
+Use source-owned shadcn/ui for every standard UI control and its interaction behavior. Current approved primitives: Button, Dialog, AlertDialog, Tooltip, Tabs, Switch, RadioGroup, and Progress. Settings uses a sound Switch and labeled text-size RadioGroup; End journey uses AlertDialog with Cancel initially focused and no outside-click dismissal. Preserve native Tab, arrow-key, Space, Enter, Escape, focus trapping and return behavior. W/A/S/D and gamepad navigation adapt to those components rather than replacing their state machines.
 
 `scripts/shadcn-registry.json` explicitly lists reviewed primitives and their Radix owners. New standard controls must come from upstream shadcn, retain provenance, and be registered during review. Do not build custom toggles, tabs, dropdowns, dialogs, or clickable layout elements. The check rejects raw native controls, handmade widget roles, direct Radix imports, unregistered primitives, competing UI libraries and inline visual styles. These source guards complement interaction tests; they cannot prove all behavior by static analysis.
 
@@ -18,7 +18,7 @@ ArtCard is the sole artwork surface: exactly one image, no text or UI overlays. 
 
 - Enemy row above active creatures, with a compact overlapping fan at the bottom. Hand cards match creature artwork-frame height even while rotated, raised, or selected. Uniform compensation preserves each original aspect ratio. Keep the chosen overlap.
 - Creature-first scale and spacing follow the reviewed A composition. Selection stays raised in its hand slot. Hover/focus lifts a card; selected cards lift further. The current composition fits 1920×1080 and 1280×800 at normal text size.
-- Health bars only on the battlefield. Numeric health appears only in hover/inspection and accessible descriptions. Block and Marks retain external icons and counts. Forecasts show health-bar changes and exact effect amounts without visible HP totals.
+- Health bars only on the battlefield. Numeric health appears only in hover/inspection and accessible descriptions. Block retains its external icon and count. Forecasts show health-bar changes and exact effect amounts without visible HP totals.
 - Hide enemy intents and battle, turn, draw and discard counters. Mana uses Alchemy's original full/spent crystals, sockets, fade and glint; provenance is in the battle-layout sample README.
 - Acting and targeted creatures use external outlines and a thin targeting line. Click the target or press Enter/controller A to commit targeted cards. Team-wide actions use Play. There is no extra targeted Play button.
 - A/D switches valid targets, remembering the last valid enemy/ally. W/S moves between rows; A/D moves within a row. I/controller X or right-click opens pinned inspection. Escape/controller B cancels, then opens Pause. End turn/controller Y is immediate; spending the final Mana automatically settles the enemy turn.
@@ -30,7 +30,7 @@ ArtCard is the sole artwork surface: exactly one image, no text or UI overlays. 
 
 Menus and Collection follow [menu design](MENU_DESIGN.md). Progression and rewards follow [journey design](EXPEDITION_DESIGN.md).
 
-- Main menu is a centered vertical list with a gold default Button for Continue/New journey/Resume and ghost Buttons for all other choices; launching never automatically resumes gameplay. Pause is a centered overlay. Talents is full screen with keyword tabs and rows; immediate purchase, whole-category reset, and Back to the originating menu.
+- Main menu is a centered vertical list with a gold default Button for Continue/New journey/Resume and ghost Buttons for all other choices; launching never automatically resumes gameplay. Pause is a centered overlay. Talents is full screen with a keyword artwork overview opening dedicated trees. Each tree has ten unique talents in rows of 1, 2, 3, and 4, with icon, name, and full effect visible. Back returns from a tree to the overview, then to the originating menu. Purchases are immediate and reset operates on the whole category. This approved direction replaces the current tabbed six-talent implementation.
 - Creature hover/focus details contain only name, exact health, current effects, and passive; no action lists. Creature inspection uses the stacked layout: 4:3 artwork above the passive and three 3:4 action thumbnails. All art remains full bleed without overlays. Enemy inspection shows battle state followed by a separately labeled Species kit with the collectible passive/cards; intents stay hidden.
 - Opening a thumbnail replaces the contents of the same shadcn Dialog. Previous/Next buttons outside artwork, A/D, and controller left/right cycle through the species' three actions. Back/Escape/controller B returns to the creature and restores focus to the current action thumbnail. A subsequent Back closes inspection and restores the original opener. X/outside-click closes the whole dialog using standard Dialog behavior. Direct hand/deck action inspection cycles the same kit and closes on Back; it does not introduce a creature parent view. Card rules show final effects with no bonus breakdown. Definitions stay exclusively in the menu Glossary.
 - Collection orders unlocked species first. Locked artwork is grayscale and noninteractive, with no tooltip or unlock requirement. Unlocked creatures open centered inspection.
@@ -74,7 +74,7 @@ The hand shows at most five playable cards. Extra draws remain entirely hidden i
 
 ## Combat vocabulary
 
-Adapted from Alchemy's `src/lib/game-data/keywords.ts` palette and `src/features/alchemy/shared/config/metadata.ts` icon pairings. Health uses red (#f87171, Heart), block sky blue (#7dd3fc, Shield), and marks use violet (Crosshair). Damage color follows the attack type, independent of lost health:
+Adapted from Alchemy's `src/lib/game-data/keywords.ts` palette and `src/features/alchemy/shared/config/metadata.ts` icon pairings. Health uses red (#f87171, Heart), block sky blue (#7dd3fc, Shield). Damage color follows the attack type, independent of lost health:
 
 | Type      | Foreground | Icon         |
 | --------- | ---------- | ------------ |
@@ -96,7 +96,7 @@ Use shadcn/ui for dialogs, tooltips, menus, sliders, and shared controls, compos
 
 Adapt Alchemy's outcome-driven impact/cue selection and bounded recoil rather than copying its artwork or audio assets. Each presented action selects one strongest nonzero cue, with damage winning ties over healing and block. Positive health loss applies a short 180ms, 4px portrait recoil; fully absorbed and ineffective hits have no health-loss recoil. Recoil is bounded per creature and disabled with reduced motion. Floating feedback retains its damage type and timing.
 
-Original synthesized cues distinguish damage families, healing, gaining block, absorption and marks. Audio unlocks on user interaction and is optional; unavailable devices or autoplay denial cannot interrupt play. Desktop autoplay supports controller-only play. Settings offers a persistent Sound on/off setting. Pausing cancels pending presentation without replaying it on resume. Sounds, animation handles, listeners and pending timers are disposed on teardown; visual aggregation never invents extra impacts or sounds.
+Original synthesized cues distinguish damage families, healing, gaining block, and absorption. Audio unlocks on user interaction and is optional; unavailable devices or autoplay denial cannot interrupt play. Desktop autoplay supports controller-only play. Settings offers a persistent Sound on/off setting. Pausing cancels pending presentation without replaying it on resume. Sounds, animation handles, listeners and pending timers are disposed on teardown; visual aggregation never invents extra impacts or sounds.
 
 ## Required review
 

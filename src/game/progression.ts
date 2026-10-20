@@ -84,6 +84,5 @@ export const RELICS = [
     name: "Living Seed",
     text: "Your creatures' healing cards restore 2 additional Health.",
   },
-  { id: "thorn-ring", name: "Thorn Ring", text: "Your creatures' Mark cards apply 1 additional Mark." },
 ] as const;
 export type RelicId = (typeof RELICS)[number]["id"];

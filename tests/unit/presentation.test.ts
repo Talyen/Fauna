@@ -5,21 +5,19 @@ import { dispatch } from "../../src/game/engine";
 import { appendFeedback } from "../../src/ui/combat-feedback";
 import { run } from "./helpers";
 describe("uncommitted previews", () => {
-  it("includes traits, upgrades and consumed marks without mutating the committed state", () => {
+  it("includes traits and upgrades without mutating the committed state", () => {
     const original = produce(run(), (d) => {
       const attack = d.cards.find((c) => c.definitionId === "emberfox-attack")!;
       attack.level = 1;
       d.battle!.hand = [attack.id];
-      d.battle!.enemies[0]!.health = 18;
-      d.battle!.enemies[0]!.marks = 2;
+      d.battle!.enemies[0]!.health = 12;
     });
     const serialized = JSON.stringify(original),
       card = original.battle!.hand[0]!;
     const preview = previewPlay(original, card, "enemy-0");
     expect(preview.accepted).toBe(true);
     expect(preview.state.battle!.enemies[0]!.health).toBe(0);
-    expect(preview.state.battle!.enemies[0]!.marks).toBe(0);
-    expect(preview.events.find((e) => e.kind === "damage")?.amount).toBe(18);
+    expect(preview.events.find((e) => e.kind === "damage")?.amount).toBe(12);
     expect(preview.events.some((e) => e.kind === "knockout" && e.targetId === "enemy-0")).toBe(true);
     expect(JSON.stringify(original)).toBe(serialized);
     expect(dispatch(original, { type: "play", cardId: card, targetId: "enemy-0" })).toEqual(preview);

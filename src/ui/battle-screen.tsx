@@ -75,7 +75,7 @@ export function BattleScreen({
   );
   const card = game.cards.find((c) => c.id === selected),
     def = card ? definition(card.definitionId) : null;
-  const enemyTarget = def?.effect === "attack" || def?.effect === "mark",
+  const enemyTarget = def?.effect === "attack",
     allyTarget = def?.effect === "heal" || def?.effect === "guard";
   const targets = enemyTarget
     ? battle.enemies.filter((e) => e.health > 0).map((e) => e.id)

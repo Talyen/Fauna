@@ -27,7 +27,6 @@ const battle = z
           health: natural,
           maxHealth: natural,
           damage: natural,
-          marks: natural,
           targetId: id,
         }),
       )
@@ -37,7 +36,7 @@ const battle = z
   .nullable();
 const creature = z.object({ id, species: speciesId, health: natural, block: natural, attacked: z.boolean() });
 const currentShape = z.object({
-  version: z.literal(9),
+  version: z.literal(10),
   revision: z
     .number()
     .int()

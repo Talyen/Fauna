@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
-import { Shield, Menu, Crosshair } from "lucide-react";
+import { Shield, Menu } from "lucide-react";
 import { Button } from "../../src/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "../../src/components/ui/dialog";
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "../../src/components/ui/tooltip";
@@ -156,11 +156,6 @@ function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?
             <span data-combat-tone="block">
               <Shield aria-hidden="true" />
               {block}
-            </span>
-          ) : null}
-          {previewing && def?.effect === "mark" ? (
-            <span>
-              <Crosshair aria-hidden="true" />+{actionValue(selected!, acting!)}
             </span>
           ) : null}
           {previewing && def?.effect === "guard" ? (

@@ -29,7 +29,6 @@
   --mana-glint: #e6faffcc;
   --health: var(--keyword-health);
   --block: var(--keyword-block);
-  --marks: var(--keyword-mark);
   --font-ui: "Inter Variable", Inter, sans-serif;
   --font-name: var(--font-ui);
   --font-number: var(--font-ui);
@@ -87,7 +86,6 @@
   --keyword-mana: #38bdf8;
   --keyword-block: #7dd3fc;
   --keyword-heal: #fda4af;
-  --keyword-mark: #c4b5fd;
   --keyword-thorns: #6ee7b7;
   --keyword-currency: #fde047;
   --keyword-dodge: #bef264;

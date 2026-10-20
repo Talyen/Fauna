@@ -62,13 +62,6 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Restore health to a living creature, up to its maximum health. Cannot revive a knocked-out creature.",
       ["Heal", "Heals", "Healed"],
     ),
-    mark: entry(
-      "Mark",
-      "status",
-      "active",
-      "A stack on an enemy. The next attack against it consumes all marks, adding 3 damage per mark. Marks last until consumed or the battle ends.",
-      ["Marks", "Marked"],
-    ),
     thorns: entry(
       "Thorns",
       "effect",
@@ -175,13 +168,12 @@ export const DAMAGE_TYPES = freeze([
   "light",
 ] as const);
 export type DamageType = (typeof DAMAGE_TYPES)[number];
-// Persisted XP and talent IDs retain their existing order and membership. Adding vocabulary must not grant talents.
-export const PROGRESSION_KEYWORDS = freeze([...DAMAGE_TYPES, "block", "heal", "mark"] as const);
+// Vocabulary alone does not grant XP or talents.
+export const PROGRESSION_KEYWORDS = freeze([...DAMAGE_TYPES, "block", "heal"] as const);
 export type ProgressionKeyword = (typeof PROGRESSION_KEYWORDS)[number];
 export const EFFECT_KEYWORDS = freeze(
   {
     attack: [],
-    mark: ["mark"],
     guard: ["block"],
     heal: ["heal"],
     teamGuard: ["block"],

@@ -40,12 +40,12 @@ These are the agreed directions from the design review. They supersede the proto
 - Talents mix straightforward stat bonuses with new interactions and combo effects. Specific effects are not yet selected.
 - Every talent can eventually be unlocked; there is no limited active-talent loadout.
 - Complete every talent in a row to open the next row; choose purchase order within the current row.
-- The Talents screen uses keyword tabs across the top, with the selected keyword's talent rows below.
-- Each talent shows an icon and name; its effect is available in the hover/focus tooltip.
+- The Talents screen opens on a keyword artwork overview, following Alchemy. Selecting a keyword opens its dedicated tree; Back returns to the overview.
+- Each talent shows its icon, name, and full effect directly on the talent. Every description explicitly names its category keyword. All talents have distinct effects; do not repeat a shared talent set across keywords.
 - Clicking an available talent purchases it immediately, without a detail-dialog purchase step or confirmation.
 - Reset operates on the entire keyword category, refunding all spent points in that category while retaining its XP. Reset is available at any time, including during an journey; talent effects update immediately. Individual-talent refunds are not the chosen interaction.
 - Start with Alchemy's point pacing: the first point costs 20 keyword XP, then another 40, then 60, increasing by 20 each time. Total XP for point n is 10 × n × (n + 1). This is initial tuning for playtesting.
-- The starter catalog uses the seven damage types plus Block, Healing, and Mark. Each category has three rows of two talents: Potency, Mastery, Shelter, Guarded Focus, Renewal, and Readiness. Effects and IDs live in `src/game/progression.ts` and remain tunable.
+- The approved catalog uses the seven damage types plus Block and Healing. Each category has ten unique talents in four widening rows of 1, 2, 3, and 4, following Alchemy. The current implementation still uses six shared talents per category in `src/game/progression.ts`; the new catalog and screen remain to be implemented.
 - Abandonment banks the XP earned by accepted plays, with no victory currency or relics. There are currently no automatic or repeated card plays; each accepted play awards keyword XP once.
 
 ## Recruitment
@@ -65,7 +65,7 @@ These are the agreed directions from the design review. They supersede the proto
 - Initial battle item rewards focus on run-wide relics: passive effects for the whole journey.
 - When a battle awards a relic, offer a choice of three.
 - Choose one relic or skip the reward. Relics use 3:4 portrait artwork wherever displayed, matching hand cards. Use the shared blank placeholder until dedicated artwork is authored; names stay below the art and effects in hover/focus tooltips.
-- Starter tuning: Currency pays 20 per ordinary victory and 40 for each biome boss. Only intermediate biome bosses offer three distinct unowned relics when three remain. Ordinary combat offers recruitment, never relics; intermediate bosses offer relics, never recruitment. Five starter relics are authored in `src/game/progression.ts`; their ownership lasts only for the journey. Currency spending and material types remain undefined and are not implemented.
+- Starter tuning: Currency pays 20 per ordinary victory and 40 for each biome boss. Only intermediate biome bosses offer three distinct unowned relics when three remain. Ordinary combat offers recruitment, never relics; intermediate bosses offer relics, never recruitment. Four starter relics are authored in `src/game/progression.ts`; their ownership lasts only for the journey. Currency spending and material types remain undefined and are not implemented.
 
 ## Screen flow and Journey results
 

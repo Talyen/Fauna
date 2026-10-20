@@ -47,8 +47,8 @@ try {
       throw new Error("The expedition did not begin with one starter.");
     // Continue swap coverage with a grown lineup and its complete card slots.
     for (const [kind, health, effects] of [
-      ["emberfox", 24, ["attack", "heal", "mark"]],
-      ["stormfin", 26, ["attack", "mark", "guard"]],
+      ["emberfox", 24, ["attack", "heal", "guard"]],
+      ["stormfin", 26, ["attack", "teamGuard", "guard"]],
     ]) {
       const id = `ally-${state.team.length}`;
       state.roster.push(kind);
@@ -81,7 +81,7 @@ try {
     JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
   );
   if (
-    swapped.version !== 9 ||
+    swapped.version !== 10 ||
     swapped.team[0].species !== "silkmoth" ||
     swapped.battle.mana !== 3 ||
     swapped.lineup[0] !== "ally-0"

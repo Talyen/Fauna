@@ -57,14 +57,12 @@ export function CreatureDetails({
   health,
   maxHealth,
   block = 0,
-  marks = 0,
 }: {
   kind: SpeciesId;
   name?: string;
   health?: number;
   maxHealth?: number;
   block?: number;
-  marks?: number;
 }) {
   const info = species(kind);
   return (
@@ -72,7 +70,6 @@ export function CreatureDetails({
       <strong>{name ?? info.name}</strong>
       <p>
         {health ?? info.health}/{maxHealth ?? info.health} health{block ? ` · ${block} block` : ""}
-        {marks ? ` · ${marks} marks` : ""}
       </p>
       {!name ? (
         <p>

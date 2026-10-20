@@ -20,7 +20,6 @@ export interface Enemy {
   health: number;
   maxHealth: number;
   damage: number;
-  marks: number;
   targetId: string;
 }
 export interface Battle {
@@ -48,7 +47,7 @@ export interface JourneySummary {
   lastBattle: { xp: KeywordXP; currency: number } | null;
 }
 export interface GameState {
-  version: 9;
+  version: 10;
   revision: number;
   rng: number;
   phase: "draft" | "teamSelection" | "battle" | "recruit" | "relic" | "victory" | "defeat";
@@ -95,7 +94,7 @@ export type Command =
   | { type: "newRun"; seed: number }
   | { type: "abandon" };
 export interface GameEvent {
-  kind: "action" | "mark" | "damage" | "block" | "heal" | "knockout" | "turn" | "reward" | "victory";
+  kind: "action" | "damage" | "block" | "heal" | "knockout" | "turn" | "reward" | "victory";
   text: string;
   actorId?: string;
   targetId?: string;

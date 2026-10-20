@@ -53,7 +53,7 @@ export function Inspector({
         ? encounterSource(game).enemies[enemyIndex]
         : undefined;
   const enemy = preview
-    ? { ...preview, maxHealth: preview.health, marks: 0 }
+    ? { ...preview, maxHealth: preview.health }
     : "enemyId" in item
       ? game.battle?.enemies.find((e) => e.id === item.enemyId)
       : undefined;
@@ -239,7 +239,6 @@ export function Inspector({
               <p className="inspection-health">
                 {enemy?.health ?? ally?.health ?? creature.health}/{enemy?.maxHealth ?? creature.health}{" "}
                 health
-                {enemy?.marks ? ` · ${enemy.marks} marks` : ""}
                 {!enemy && ally?.block ? ` · ${ally.block} block` : ""}
               </p>
               {enemy ? <h2 className="inspection-kit-label">Species kit · {creature.name}</h2> : null}

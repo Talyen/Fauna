@@ -13,7 +13,6 @@ type CreatureProps = {
   health?: number;
   maxHealth?: number;
   block?: number;
-  marks?: number;
   selected?: boolean;
   disabled?: boolean;
   onClick?: (element: HTMLElement) => void;
@@ -35,7 +34,6 @@ export function CreatureCard({
   health,
   maxHealth,
   block = 0,
-  marks = 0,
   selected = false,
   disabled = false,
   onClick,
@@ -99,21 +97,14 @@ export function CreatureCard({
         <Tooltip open={tooltips && tooltipOpen} onOpenChange={(open) => setTooltipOpen(tooltips && open)}>
           <TooltipTrigger asChild>{artwork}</TooltipTrigger>
           <TooltipContent side={enemyId ? "bottom" : "top"} sideOffset={enemyId && readout ? 44 : 8}>
-            <CreatureDetails
-              kind={kind}
-              name={name}
-              health={health}
-              maxHealth={maxHealth}
-              block={block}
-              marks={marks}
-            />
+            <CreatureDetails kind={kind} name={name} health={health} maxHealth={maxHealth} block={block} />
           </TooltipContent>
         </Tooltip>
       )}
       {preview ? (
         preview
       ) : readout && health !== undefined && (actorId || enemyId) ? (
-        <BattleReadout health={health} maxHealth={maxHealth ?? info.health} block={block} marks={marks} />
+        <BattleReadout health={health} maxHealth={maxHealth ?? info.health} block={block} />
       ) : null}
       {feedback}
     </div>
@@ -137,7 +128,7 @@ export function AllyCard({
 export function EnemyCard({
   enemy,
   ...props
-}: { enemy: Enemy } & Omit<CreatureProps, "kind" | "health" | "maxHealth" | "marks" | "name">) {
+}: { enemy: Enemy } & Omit<CreatureProps, "kind" | "health" | "maxHealth" | "name">) {
   return (
     <CreatureCard
       kind={enemy.species}
@@ -145,7 +136,6 @@ export function EnemyCard({
       name={enemy.name}
       health={enemy.health}
       maxHealth={enemy.maxHealth}
-      marks={enemy.marks}
       {...props}
     />
   );
