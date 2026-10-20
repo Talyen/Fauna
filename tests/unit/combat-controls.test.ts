@@ -85,6 +85,23 @@ describe("combat controls", () => {
     expect(chooseBattleCommand(hidden)).toEqual(chooseBattleCommand(state));
     expect(dispatch(state, chooseBattleCommand(state)).accepted).toBe(true);
   });
+  it("scores elemental finishers using visible bonuses without applying Physical armor to Fire", () => {
+    const state = produce(run(), (d) => {
+      const fire = d.cards.find((card) => card.definitionId === "emberfox-attack")!;
+      const other = d.cards.find((card) => card.definitionId === "mossback-attack")!;
+      d.battle!.hand = [other.id, fire.id];
+      d.battle!.enemies.forEach((enemy, index) => {
+        enemy.health = index === 0 ? 9 : index === 1 ? 1 : 1000;
+        enemy.block = 0;
+        enemy.combat.armor = index === 1 ? 0 : 100;
+      });
+    });
+    expect(chooseBattleCommand(state)).toMatchObject({
+      type: "play",
+      cardId: "ally-1:emberfox-attack",
+      targetId: "enemy-0",
+    });
+  });
   it("cancels even an already queued timer callback", () => {
     let callback = () => {};
     const action = vi.fn();
