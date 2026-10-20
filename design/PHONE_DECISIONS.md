@@ -131,10 +131,11 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 
 ## Lineup and Swap
 
-- The first selected creature uses the established gold selection ring plus a slight lift. Lift distance remains undecided.
+- The first selected creature uses the established gold selection ring plus a 4px lift over 150ms.
 - Hovering the selected creature strengthens the same ring, preserving the single highlighted-boundary treatment.
 - Unavailable swap choices use 45% opacity and remain inspectable.
 - After a successful swap, animate creatures between positions over 150ms. Committed gameplay updates immediately; motion is presentation-only, never blocks input and is skipped under reduced motion.
+- Swap movement uses ease-out timing and small opposing arcs to reduce overlap. Arc height remains undecided pending comparison.
 
 ## Empty states
 
