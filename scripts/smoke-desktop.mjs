@@ -40,7 +40,7 @@ try {
   await window.getByRole("button", { name: "Next action", exact: true }).click();
   await window.getByRole("button", { name: "Back", exact: true }).click();
   await window.getByRole("button", { name: "Close inspection", exact: true }).click();
-  // Exercise free swaps through the actual renderer and version-seven desktop storage.
+  // Exercise free swaps through the actual renderer and version-nine desktop storage.
   await window.evaluate(async () => {
     const state = JSON.parse((await window.faunaDesktop.readCandidates())[0].data);
     if (state.team.length !== 1 || state.cards.length !== 3)
@@ -52,7 +52,7 @@ try {
     ]) {
       const id = `ally-${state.team.length}`;
       state.roster.push(kind);
-      state.lineup.push(kind);
+      state.lineup.push(id);
       state.team.push({ id, species: kind, health, block: 0, attacked: false });
       for (const effect of effects) {
         const definitionId = `${kind}-${effect}`;
@@ -81,10 +81,10 @@ try {
     JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
   );
   if (
-    swapped.version !== 7 ||
+    swapped.version !== 9 ||
     swapped.team[0].species !== "silkmoth" ||
     swapped.battle.mana !== 3 ||
-    swapped.lineup[0] !== "mossback"
+    swapped.lineup[0] !== "ally-0"
   )
     throw new Error("Desktop combat swap or lineup persistence failed.");
   // Swap back so the existing automatic-turn smoke keeps its original combat fixture.

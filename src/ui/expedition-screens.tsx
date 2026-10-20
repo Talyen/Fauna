@@ -1,11 +1,12 @@
 import { Keyword as KeywordLabel, KeywordText } from "./keyword-text";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui/tabs";
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { Check, Sparkles } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../components/ui/tooltip";
 import { ActionCard, CreatureCard } from "./cards";
 import { ArtCard } from "./art-card";
+import { returnFocus } from "./focus";
 import { SPECIES, species, type SpeciesId } from "../game/content";
 import {
   KEYWORDS,
@@ -124,60 +125,80 @@ export function Draft({ game, send, inspect }: Props) {
 }
 export function Rewards({ game, send, inspect }: Props) {
   const [incoming, setIncoming] = useState<SpeciesId | null>(null);
+  const choices = useRef<HTMLDivElement>(null);
+  const returnTo = useRef<number | null>(null);
+  useLayoutEffect(() => {
+    const buttons = choices.current?.querySelectorAll<HTMLButtonElement>(".creature-card");
+    if (incoming) returnFocus(buttons?.[0] ?? null);
+    else if (returnTo.current !== null) {
+      returnFocus(buttons?.[returnTo.current] ?? null);
+      returnTo.current = null;
+    }
+  }, [incoming]);
   const reward = game.reward!;
   const recruiting = game.phase === "recruit";
   return (
     <main className="reward-screen">
       <header className="reward-heading">
         <h1>Reward</h1>
-        <h2>{recruiting ? (incoming ? "Replace a creature" : "Recruit") : "Choose a relic"}</h2>
+        <h2>{recruiting ? (incoming ? "Replace a creature" : "Choose a Recruit") : "Choose a relic"}</h2>
         <BattleEarnings game={game} />
       </header>
-      {recruiting ? (
-        <div className="recruit-options">
-          {(incoming ? game.roster : reward.recruits.filter((kind) => !game.roster.includes(kind))).map(
-            (kind) => (
-              <CreatureCard
-                key={kind}
-                kind={kind}
-                label={incoming ? `Release ${species(kind).name}` : `Recruit ${species(kind).name}`}
-                onInspect={() => inspect({ species: kind })}
-                onClick={() => {
-                  if (incoming) send({ type: "recruit", species: incoming, replace: kind });
-                  else if (game.roster.length === 5) setIncoming(kind);
-                  else send({ type: "recruit", species: kind });
-                }}
-              />
-            ),
-          )}
-        </div>
-      ) : (
-        <div className="relic-options">
-          {reward.relics.map((id) => {
-            const relic = RELICS.find((r) => r.id === id)!;
-            return (
-              <div className="relic-option" key={id}>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <ArtCard
-                      aspect="action"
-                      artwork="./art/relic-placeholder.svg"
-                      className="relic-choice"
-                      aria-label={`Choose ${relic.name}`}
-                      onClick={() => send({ type: "chooseRelic", relic: id })}
-                    />
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <strong>{relic.name}</strong>
-                    <p>{relic.text}</p>
-                  </TooltipContent>
-                </Tooltip>
-                <h2>{relic.name}</h2>
+      <div className="reward-choices" ref={choices}>
+        {recruiting ? (
+          <div className="recruit-options">
+            {(incoming
+              ? [...game.team, ...game.reserves].map((creature) => ({
+                  kind: creature.species,
+                  id: creature.id,
+                }))
+              : reward.recruits.map((kind, index) => ({ kind, id: String(index) }))
+            ).map(({ kind, id }) => (
+              <div className="reward-option" key={id}>
+                <CreatureCard
+                  kind={kind}
+                  label={incoming ? `Release ${species(kind).name}` : `Recruit ${species(kind).name}`}
+                  onInspect={() => inspect(incoming ? { species: kind, creatureId: id } : { species: kind })}
+                  onClick={() => {
+                    if (incoming) send({ type: "recruit", species: incoming, replace: id });
+                    else if (game.roster.length === 5) {
+                      returnTo.current = Number(id);
+                      setIncoming(kind);
+                    } else send({ type: "recruit", species: kind });
+                  }}
+                />
+                <h2>{species(kind).name}</h2>
               </div>
-            );
-          })}
-        </div>
-      )}
+            ))}
+          </div>
+        ) : (
+          <div className="relic-options">
+            {reward.relics.map((id) => {
+              const relic = RELICS.find((r) => r.id === id)!;
+              return (
+                <div className="reward-option" key={id}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <ArtCard
+                        aspect="action"
+                        artwork="./art/relic-placeholder.svg"
+                        className="relic-choice"
+                        aria-label={`Choose ${relic.name}`}
+                        onClick={() => send({ type: "chooseRelic", relic: id })}
+                      />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <strong>{relic.name}</strong>
+                      <p>{relic.text}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                  <h2>{relic.name}</h2>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
       <footer className="reward-footer">
         {incoming ? (
           <Button variant="outline" onClick={() => setIncoming(null)}>

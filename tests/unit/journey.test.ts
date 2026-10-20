@@ -68,7 +68,7 @@ describe("journey earnings and results", () => {
     expect(decodeSave(encodeSave(won))).toEqual(won);
   });
 
-  it("goes directly to destinations when no recruitment or relic decisions remain", () => {
+  it("offers defeated creatures even when the roster already contains every species", () => {
     const started = startedJourney();
     const s = produce(run(), (d) => {
       d.expedition = started.expedition;
@@ -94,7 +94,8 @@ describe("journey earnings and results", () => {
     expect(preview.state.phase).toBe("battle");
     expect(preview.state.journey!.currency).toBe(0);
     const won = winBattle(ready);
-    expect(won.phase).toBe("teamSelection");
+    expect(won.phase).toBe("recruit");
+    expect(won.reward!.recruits).toEqual(battle.battle!.enemies.map((enemy) => enemy.species));
     expect(won.journey!.lastBattle!.currency).toBe(20);
     expect(decodeSave(encodeSave(won))).toEqual(won);
   });
@@ -167,7 +168,7 @@ describe("journey earnings and results", () => {
     expect(s.currency).toBe(400);
   });
 
-  it.each([1, 2, 3, 4, 5, 6])("rejects obsolete development save version %s", (version) => {
+  it.each([1, 2, 3, 4, 5, 6, 7, 8])("rejects obsolete development save version %s", (version) => {
     expect(() => decodeSave(JSON.stringify({ ...startedJourney(), version }))).toThrow();
   });
 

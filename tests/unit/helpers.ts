@@ -15,7 +15,6 @@ export function teamRun(seed: number, kinds: SpeciesId[]) {
     }
     d.selected = [kinds[0]!];
     d.roster = [...kinds];
-    d.lineup = [...kinds];
     d.team = kinds.map((kind, i) => ({
       id: `ally-${i}`,
       species: kind,
@@ -23,6 +22,7 @@ export function teamRun(seed: number, kinds: SpeciesId[]) {
       block: 0,
       attacked: false,
     }));
+    d.lineup = d.team.map((c) => c.id);
     d.cards = d.team.flatMap((c) =>
       CARDS.filter((card) => card.species === c.species).map((card) => ({
         id: `${c.id}:${card.id}`,
@@ -51,6 +51,7 @@ export function victoryReady(s = run()) {
     d.battle!.enemies.forEach((e, i) => (e.health = i === 0 ? 1 : 0));
     const attack = d.cards.find((c) => definition(c.definitionId).effect === "attack")!;
     d.battle!.hand = [attack.id];
+    d.battle!.buffer = [];
     d.battle!.draw = d.cards.filter((c) => c.id !== attack.id).map((c) => c.id);
     d.battle!.discard = [];
     d.battle!.mana = 3;

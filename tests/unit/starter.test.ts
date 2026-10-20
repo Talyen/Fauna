@@ -34,7 +34,7 @@ describe("one-starter expeditions", () => {
       s = winBattle(s);
       s = accept(s, { type: "recruit", species: s.reward!.recruits[0]! });
       expect(s.team).toHaveLength(index + 2);
-      expect(s.lineup).toEqual(s.roster);
+      expect(s.team.map((c) => c.id)).toEqual(s.lineup);
       expect(s.reserves).toEqual([]);
       expect(decodeSave(encodeSave(s))).toEqual(s);
       expect(decodeSave(encodeSave(s))).toEqual(s);
@@ -64,7 +64,15 @@ describe("one-starter expeditions", () => {
       type: "beginBattle",
     });
     for (let i = 0; i < 200 && !["victory", "defeat"].includes(s.phase); i++) {
-      s = accept(s, s.phase === "recruit" ? { type: "recruit", species: s.reward!.recruits[0]! } : policy(s));
+      s = accept(
+        s,
+        s.phase === "recruit" && s.roster.length < 5
+          ? {
+              type: "recruit",
+              species: s.reward!.recruits.find((kind) => !s.roster.includes(kind)) ?? s.reward!.recruits[0]!,
+            }
+          : policy(s),
+      );
       expect(decodeSave(encodeSave(s))).toEqual(s);
     }
     expect(s.phase).toBe("victory");

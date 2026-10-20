@@ -18,18 +18,17 @@ import { TargetPreview } from "./target-preview";
 import { CombatFeedback, type Burst } from "./combat-feedback";
 import { ManaCrystals } from "./mana-crystals";
 export type Inspection =
-  { card: Card } | { species: GameState["selected"][number]; enemyId?: string } | { destination: string };
+  | { card: Card }
+  | { species: GameState["selected"][number]; enemyId?: string; creatureId?: string }
+  | { destination: string };
 export type Controls = MutableRefObject<((action: InputAction) => boolean) | null>;
 function FanSlot({ index, count, children }: { index: number; count: number; children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {
     const offset = index - (count - 1) / 2,
-      angle = offset * 4,
-      radians = (angle * Math.PI) / 180;
-    const scale = 1 / (Math.cos(radians) + 0.75 * Math.abs(Math.sin(radians)));
+      angle = offset * 4;
     const style = ref.current!.style;
     style.setProperty("--fan-angle", `${angle}deg`);
-    style.setProperty("--fan-fit", String(scale));
     style.setProperty("--fan-drop", `${Math.abs(offset) * 7}px`);
     style.setProperty("--fan-order", String(index));
   }, [index, count]);
@@ -247,9 +246,9 @@ export function BattleScreen({
                 if (allyTarget && creature.health > 0)
                   play({ type: "play", cardId: selected, targetId: creature.id });
                 else onDenied(element);
-              } else inspect({ species: creature.species });
+              } else inspect({ species: creature.species, creatureId: creature.id });
             }}
-            onInspect={() => inspect({ species: creature.species })}
+            onInspect={() => inspect({ species: creature.species, creatureId: creature.id })}
             label={
               selected && allyTarget && creature.health > 0
                 ? `Target ${species(creature.species).name}`

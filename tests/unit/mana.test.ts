@@ -30,7 +30,7 @@ describe("mana turn settlement", () => {
     expect(result.state.battle!.mana).toBe(3);
     expect(result.state.battle!.hand).toHaveLength(5);
     expect(result.events.filter((e) => e.actorId?.startsWith("enemy-") && e.kind === "damage")).toHaveLength(
-      2,
+      3,
     );
     expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
     expect(before.battle!.mana).toBe(1);

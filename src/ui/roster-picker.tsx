@@ -20,7 +20,7 @@ export function RosterPicker({
 }) {
   const [selected, setSelected] = useState<string | null>(null);
   const all = [...game.team, ...game.reserves];
-  const active = lineup ? game.lineup.map((kind) => all.find((c) => c.species === kind)!) : game.team;
+  const active = lineup ? game.lineup.map((id) => all.find((c) => c.id === id)!) : game.team;
   const reserves = all.filter((c) => !active.some((a) => a.id === c.id));
   const selectedActive = active.some((c) => c.id === selected);
   const choose = (creature: Creature, isActive: boolean) => {
@@ -30,7 +30,7 @@ export function RosterPicker({
     }
     const outgoing = isActive ? creature : active.find((c) => c.id === selected)!;
     const incoming = isActive ? reserves.find((c) => c.id === selected)! : creature;
-    if (send({ type: lineup ? "setLineup" : "swap", activeId: outgoing.id, reserve: incoming.species })) {
+    if (send({ type: lineup ? "setLineup" : "swap", activeId: outgoing.id, reserve: incoming.id })) {
       setSelected(null);
       close();
     }
@@ -47,7 +47,7 @@ export function RosterPicker({
       disabled={!lineup && !isActive && creature.health === 0}
       label={`${species(creature.species).name}, ${isActive ? (lineup ? "starting" : "deployed") : "reserve"}`}
       onClick={() => choose(creature, isActive)}
-      onInspect={() => inspect({ species: creature.species })}
+      onInspect={() => inspect({ species: creature.species, creatureId: creature.id })}
     />
   );
   return (

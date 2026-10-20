@@ -23,32 +23,32 @@ export const LOCATIONS: readonly {
     id: "briar-hollow",
     name: "Briar Hollow",
     packs: [
-      ["briartooth", "silkmoth"],
-      ["briartooth", "mossback"],
+      ["briartooth", "silkmoth", "mossback"],
+      ["briartooth", "mossback", "emberfox"],
     ],
   },
   {
     id: "mossy-stream",
     name: "Mossy Stream",
     packs: [
-      ["mossback", "stormfin"],
-      ["stormfin", "silkmoth"],
+      ["mossback", "stormfin", "silkmoth"],
+      ["stormfin", "silkmoth", "briartooth"],
     ],
   },
   {
     id: "ember-grove",
     name: "Ember Grove",
     packs: [
-      ["emberfox", "briartooth"],
-      ["emberfox", "mossback"],
+      ["emberfox", "briartooth", "mossback"],
+      ["emberfox", "mossback", "silkmoth"],
     ],
   },
   {
     id: "silken-clearing",
     name: "Silken Clearing",
     packs: [
-      ["silkmoth", "mossback"],
-      ["silkmoth", "emberfox"],
+      ["silkmoth", "mossback", "stormfin"],
+      ["silkmoth", "emberfox", "briartooth"],
     ],
   },
   { id: "hollow-heart", name: "Hollow Heart", packs: [["briartooth", "mossback"]] },

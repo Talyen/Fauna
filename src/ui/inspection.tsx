@@ -42,7 +42,8 @@ export function Inspector({
         ? item.species
         : pack!.enemies[destinationEnemy ?? 0]!.species;
   const creature = species(kind);
-  const ally = [...game.team, ...game.reserves].find((c) => c.species === kind);
+  const creatureId = rootCard?.ownerId ?? ("creatureId" in item ? item.creatureId : undefined);
+  const ally = creatureId ? [...game.team, ...game.reserves].find((c) => c.id === creatureId) : undefined;
   const enemyIndex =
     "enemyId" in item && item.enemyId?.startsWith("preview-") ? Number(item.enemyId.slice(8)) : -1;
   const preview =

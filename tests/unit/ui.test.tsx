@@ -19,6 +19,38 @@ afterEach(() => {
   localStorage.clear();
 });
 describe("player interface", () => {
+  it("keeps overflow invisible and unplayable while filling a hand slot after a play", async () => {
+    vi.stubGlobal(
+      "ResizeObserver",
+      class {
+        observe() {}
+        disconnect() {}
+      },
+    );
+    const game = produce(run(), (d) => {
+      d.battle!.hand = d.cards.slice(0, 5).map((card) => card.id);
+      d.battle!.buffer = d.cards.slice(5).map((card) => card.id);
+      d.battle!.draw = [];
+      d.battle!.discard = [];
+    });
+    localStorage.setItem("fauna.save.v1", JSON.stringify(game));
+    const session = createSession(createBrowserPlatform(localStorage), 7);
+    await session.load();
+    render(<App session={session} />);
+    const user = userEvent.setup();
+    await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+    expect(document.querySelectorAll(".hand .action-card")).toHaveLength(5);
+    expect(screen.queryByText(/buffer/i)).toBeNull();
+    await user.click(document.querySelector<HTMLButtonElement>('.hand .action-card[data-effect="attack"]')!);
+    await user.click(document.querySelector<HTMLButtonElement>(".enemy-row .creature-card")!);
+    expect(session.store.getState().game.battle!.hand).toContain(game.battle!.buffer[0]);
+    expect(session.store.getState().game.battle!.buffer).toHaveLength(3);
+    expect(document.querySelectorAll(".hand .action-card")).toHaveLength(5);
+    await user.click(screen.getByRole("button", { name: "End turn", exact: true }));
+    expect(session.store.getState().game.battle!.buffer).toEqual([]);
+    expect(document.querySelectorAll(".hand .action-card")).toHaveLength(5);
+    await session.dispose();
+  });
   it("offers blank portrait relic cards with external names and commits the chosen relic", async () => {
     const game = bossReward();
     localStorage.setItem("fauna.save.v1", JSON.stringify(game));
@@ -57,7 +89,8 @@ describe("player interface", () => {
     const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
     expect(screen.getByRole("heading", { name: "Reward", level: 1 })).toBeTruthy();
-    expect(screen.getByRole("heading", { name: "Recruit", exact: true })).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeTruthy();
+    expect(document.querySelectorAll(".recruit-options .creature-card")).toHaveLength(3);
     expect(screen.getByLabelText("Last battle earnings").textContent).toContain("+20 currency");
     expect(screen.queryByRole("button", { name: "Continue", exact: true })).toBeNull();
     await user.click(screen.getByRole("button", { name: "Skip", exact: true }));

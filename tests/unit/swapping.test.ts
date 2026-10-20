@@ -31,7 +31,7 @@ describe("free combat swaps", () => {
       d.team[1]!.attacked = true;
       d.battle!.enemies[0]!.targetId = "ally-1";
     });
-    const after = accept(before, { type: "swap", activeId: "ally-1", reserve: "silkmoth" });
+    const after = accept(before, { type: "swap", activeId: "ally-1", reserve: "recruit-silkmoth" });
     expect(after.rng).toBe(before.rng);
     expect(after.battle!.mana).toBe(3);
     expect(after.battle!.turn).toBe(1);
@@ -42,7 +42,7 @@ describe("free combat swaps", () => {
     expect(after.cards.filter((c) => c.ownerId === after.team[1]!.id).map((c) => c.definitionId)).toEqual(
       CARDS.filter((c) => c.species === "silkmoth").map((c) => c.id),
     );
-    const back = accept(after, { type: "swap", activeId: after.team[1]!.id, reserve: "emberfox" });
+    const back = accept(after, { type: "swap", activeId: after.team[1]!.id, reserve: "ally-1" });
     expect(back.team[1]).toEqual(before.team[1]);
     expect(back.battle!.hand).toEqual(before.battle!.hand);
     expect(decodeSave(encodeSave(back))).toEqual(back);
@@ -53,12 +53,12 @@ describe("free combat swaps", () => {
       d.team[1]!.block = 5;
     });
     for (let i = 0; i < 5; i++) {
-      s = accept(s, { type: "swap", activeId: s.team[1]!.id, reserve: "silkmoth" });
-      s = accept(s, { type: "swap", activeId: s.team[1]!.id, reserve: "emberfox" });
+      s = accept(s, { type: "swap", activeId: s.team[1]!.id, reserve: "recruit-silkmoth" });
+      s = accept(s, { type: "swap", activeId: s.team[1]!.id, reserve: "ally-1" });
     }
     expect(s.team[1]!.attacked).toBe(true);
     expect(s.team[1]!.block).toBe(5);
-    s = accept(s, { type: "swap", activeId: s.team[1]!.id, reserve: "silkmoth" });
+    s = accept(s, { type: "swap", activeId: s.team[1]!.id, reserve: "recruit-silkmoth" });
     s = accept(s, { type: "endTurn" });
     const fox = s.reserves.find((c) => c.species === "emberfox")!;
     expect(fox.block).toBe(0);
@@ -89,7 +89,7 @@ describe("free combat swaps", () => {
     expect(decodeSave(encodeSave(s))).toEqual(s);
     const ids = [...s.battle!.hand];
     const slot = s.cards.find((c) => ids.includes(c.id))!.ownerId;
-    s = accept(s, { type: "swap", activeId: slot, reserve: "silkmoth" });
+    s = accept(s, { type: "swap", activeId: slot, reserve: "recruit-silkmoth" });
     expect(
       s.cards.some(
         (c) => ids.includes(c.id) && c.ownerId === s.team.find((c) => c.species === "silkmoth")!.id,
@@ -97,7 +97,7 @@ describe("free combat swaps", () => {
     ).toBe(true);
     const outgoing = s.reserves.find((c) => c.health === 0)!;
     expect(
-      dispatch(s, { type: "swap", activeId: s.team.find((c) => c.health > 0)!.id, reserve: outgoing.species })
+      dispatch(s, { type: "swap", activeId: s.team.find((c) => c.health > 0)!.id, reserve: outgoing.id })
         .accepted,
     ).toBe(false);
     expect(decodeSave(encodeSave(s))).toEqual(s);
@@ -125,23 +125,25 @@ describe("free combat swaps", () => {
     ] as const) {
       expect(dispatch(s, { type: "swap", activeId, reserve }).state).toBe(s);
     }
-    expect(dispatch(s, { type: "setLineup", activeId: "ally-0", reserve: "silkmoth" }).accepted).toBe(false);
+    expect(dispatch(s, { type: "setLineup", activeId: "ally-0", reserve: "recruit-silkmoth" }).accepted).toBe(
+      false,
+    );
   });
 });
 describe("optional starting lineup and save validation", () => {
   it("remembers the starting lineup independently of combat swaps and applies optional edits next battle", () => {
-    let s = accept(withReserves(), { type: "swap", activeId: "ally-0", reserve: "silkmoth" });
+    let s = accept(withReserves(), { type: "swap", activeId: "ally-0", reserve: "recruit-silkmoth" });
     s = winBattle(s);
     expect(s.reserves.every((c) => c.health === species(c.species).health)).toBe(true);
     const snapshot = s.battle;
-    s = accept(s, { type: "setLineup", activeId: "ally-0", reserve: "briartooth" });
-    expect(s.lineup).toEqual(["briartooth", "emberfox", "stormfin"]);
+    s = accept(s, { type: "setLineup", activeId: "ally-0", reserve: "recruit-briartooth" });
+    expect(s.lineup).toEqual(["recruit-briartooth", "ally-1", "ally-2"]);
     expect(s.battle).toEqual(snapshot);
     expect(decodeSave(encodeSave(s))).toEqual(s);
     if (s.phase === "recruit") s = accept(s, { type: "skipRecruit" });
     if (s.phase === "relic") s = accept(s, { type: "skipRelic" });
     s = accept(s, { type: "beginBattle" });
-    expect(s.team.map((c) => c.species)).toEqual(s.lineup);
+    expect(s.team.map((c) => c.id)).toEqual(s.lineup);
     expect(decodeSave(encodeSave(s))).toEqual(s);
   });
   it("rejects duplicate reserve identities, missing lineup members and a sixth creature", () => {
@@ -165,7 +167,7 @@ describe("optional starting lineup and save validation", () => {
 });
 
 it("restores the saved lineup after a tactical swap without retaining card owners from the bench", () => {
-  let s = accept(withReserves(), { type: "swap", activeId: "ally-0", reserve: "silkmoth" });
+  let s = accept(withReserves(), { type: "swap", activeId: "ally-0", reserve: "recruit-silkmoth" });
   s = winBattle(s);
   if (s.phase === "recruit") s = accept(s, { type: "skipRecruit" });
   if (s.phase === "relic") s = accept(s, { type: "skipRelic" });

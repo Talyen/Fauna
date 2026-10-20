@@ -11,6 +11,8 @@ The first five species begin unlocked. Moonhart unlocks after the first journey 
 - **Relic cards: 3:4 portrait, matching hand cards.** All current relic displays use the blank 600 × 800 `public/art/relic-placeholder.svg`. Replace with dedicated portrait illustrations later; keep names and effects outside the artwork.
 - **Action cards: 3:4 portrait, full bleed.** Current placeholders are 600 × 800 SVGs.
 
+Displayed artwork uses one equal-area size standard: at 1280×800 CSS pixels, 200×266⅔ portrait and 266⅔×200 landscape. Shared viewport and constrained-layout scaling applies to both formats together; source asset resolution is independent of displayed size. See [responsive layout](UI.md#responsive-layout-and-artwork-size).
+
 These are separate compositions, not crops of one format into another. Replace the matching files in `public/art/` while retaining their names, or update the owning UI asset references together. Images use their native aspect ratio with no stretching. All text is rendered by the UI, not baked into artwork. Cards contain no text or UI overlays; names, stats and rules live in hover/focus details and centered inspection. Stacked inspection presents three portrait action thumbnails under the creature and passive. Selecting a thumbnail enlarges the complete action card in the same dialog, with Previous/Next cycling. Compact creature tooltips no longer list actions; enemy inspection labels collectible kit separately from battle state.
 
 The initial asset set was authored by `scripts/create-placeholders.mjs`. Running it intentionally rewrites all placeholder SVGs; do not run it over production art. Mana UI sprites were adapted from Alchemy; no creature artwork or fonts were copied from Alchemy.

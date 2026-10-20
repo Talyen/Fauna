@@ -28,6 +28,7 @@ export interface Battle {
   mana: number;
   draw: string[];
   hand: string[];
+  buffer: string[];
   discard: string[];
   enemies: Enemy[];
 }
@@ -47,16 +48,18 @@ export interface JourneySummary {
   lastBattle: { xp: KeywordXP; currency: number } | null;
 }
 export interface GameState {
-  version: 7;
+  version: 9;
   revision: number;
   rng: number;
   phase: "draft" | "teamSelection" | "battle" | "recruit" | "relic" | "victory" | "defeat";
   unlocked: SpeciesId[];
   wins: number;
   selected: SpeciesId[];
+  /** Species counts, including copies; individual state lives in team and reserves. */
   roster: SpeciesId[];
   reserves: Creature[];
-  lineup: SpeciesId[];
+  /** Creature IDs in starting order, independent of tactical combat swaps. */
+  lineup: string[];
   team: Creature[];
   cards: Card[];
   encounter: number;
@@ -79,11 +82,11 @@ export type Command =
   | { type: "draft"; species: SpeciesId }
   | { type: "start" }
   | { type: "beginBattle"; destination?: string }
-  | { type: "setLineup"; activeId: string; reserve: SpeciesId }
-  | { type: "swap"; activeId: string; reserve: SpeciesId }
+  | { type: "setLineup"; activeId: string; reserve: string }
+  | { type: "swap"; activeId: string; reserve: string }
   | { type: "play"; cardId: string; targetId?: string }
   | { type: "endTurn" }
-  | { type: "recruit"; species: SpeciesId; replace?: SpeciesId }
+  | { type: "recruit"; species: SpeciesId; replace?: string }
   | { type: "skipRecruit" }
   | { type: "chooseRelic"; relic: RelicId }
   | { type: "skipRelic" }

@@ -7,7 +7,7 @@ import type { Card, Command, CommandResult, GameEvent, GameState } from "./types
 export function createGame(seed = 1): GameState {
   return freeze(
     {
-      version: 7,
+      version: 9,
       revision: 0,
       rng: seed >>> 0,
       phase: "draft",
@@ -74,6 +74,11 @@ function ownedCards(id: string, kind: GameState["team"][number]["species"]): Car
     level: 0,
   }));
 }
+export const MAX_HAND_SIZE = 5;
+function fillHand(state: GameState) {
+  const battle = state.battle!;
+  while (battle.hand.length < MAX_HAND_SIZE && battle.buffer.length) battle.hand.push(battle.buffer.shift()!);
+}
 function draw(state: GameState, count: number) {
   const b = state.battle!;
   // Knocked-out owners retain inert slots, so replacing them cannot refresh spent cards.
@@ -89,7 +94,9 @@ function draw(state: GameState, count: number) {
     let index = b.draw.length - 1;
     while (index >= 0 && !eligible(b.draw[index]!)) index--;
     if (index < 0) break;
-    b.hand.push(b.draw.splice(index, 1)[0]!);
+    const card = b.draw.splice(index, 1)[0]!;
+    if (b.hand.length < MAX_HAND_SIZE) b.hand.push(card);
+    else b.buffer.push(card);
   }
 }
 function intents(state: GameState) {
@@ -102,8 +109,8 @@ function intents(state: GameState) {
 export function beginBattle(state: GameState) {
   const encounter = encounterSource(state);
   const all = [...state.team, ...state.reserves];
-  state.team = state.lineup.map((kind) => all.find((c) => c.species === kind)!);
-  state.reserves = all.filter((c) => !state.lineup.includes(c.species));
+  state.team = state.lineup.map((id) => all.find((c) => c.id === id)!);
+  state.reserves = all.filter((c) => !state.lineup.includes(c.id));
   rebuildCards(state);
   for (const c of [...state.team, ...state.reserves]) {
     c.health = species(c.species).health;
@@ -127,6 +134,7 @@ export function beginBattle(state: GameState) {
       state.cards.map((c) => c.id),
     ),
     hand: [],
+    buffer: [],
     discard: [],
     enemies: encounter.enemies.map((e, i) => ({
       id: `enemy-${i}`,
@@ -192,9 +200,7 @@ function finishBattle(state: GameState, defeated: boolean) {
     recruits:
       defeated || outcome === "victory" || bossEncounter(state)
         ? []
-        : [...new Set(state.battle!.enemies.map((e) => e.species))].filter(
-            (kind) => state.unlocked.includes(kind) && !state.roster.includes(kind),
-          ),
+        : state.battle!.enemies.map((e) => e.species),
     relics: relics.length === 3 ? relics : [],
   };
   enterReward(state);
@@ -221,8 +227,8 @@ function settle(state: GameState, events: GameEvent[]): boolean {
 }
 function prepareLineup(state: GameState) {
   const all = [...state.team, ...state.reserves];
-  state.team = state.lineup.map((kind) => all.find((c) => c.species === kind)!);
-  state.reserves = all.filter((c) => !state.lineup.includes(c.species));
+  state.team = state.lineup.map((id) => all.find((c) => c.id === id)!);
+  state.reserves = all.filter((c) => !state.lineup.includes(c.id));
   rebuildCards(state);
 }
 function afterRewards(state: GameState) {
@@ -247,7 +253,7 @@ function enterReward(state: GameState) {
   const reward = state.reward!;
   if (reward.outcome === "defeat") state.phase = "defeat";
   else if (reward.outcome === "victory") state.phase = "victory";
-  else if (reward.recruits.some((kind) => !state.roster.includes(kind))) state.phase = "recruit";
+  else if (reward.recruits.length > 0) state.phase = "recruit";
   else if (reward.relics.length) state.phase = "relic";
   else afterRewards(state);
 }
@@ -264,6 +270,7 @@ function rebuildCards(state: GameState) {
     );
   if (state.battle) {
     state.battle.hand = [];
+    state.battle.buffer = [];
     state.battle.discard = [];
     state.battle.draw = state.cards.map((c) => c.id);
   }
@@ -321,7 +328,7 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
     c.block = 0;
     c.attacked = false;
   }
-  battle.discard.push(...battle.hand.splice(0));
+  battle.discard.push(...battle.hand.splice(0), ...battle.buffer.splice(0));
   battle.mana = 3;
   battle.turn++;
   draw(draft, 5);
@@ -381,19 +388,17 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
     command.type === "swap" &&
     (!["battle", "teamSelection"].includes(state.phase) ||
       !state.team.some((c) => c.id === command.activeId) ||
-      !state.reserves.some(
-        (c) => c.species === command.reserve && (state.phase !== "battle" || c.health > 0),
-      ) ||
-      state.team.some((c) => c.species === command.reserve))
+      !state.reserves.some((c) => c.id === command.reserve && (state.phase !== "battle" || c.health > 0)) ||
+      state.team.some((c) => c.id === command.reserve))
   )
     return reject(state, "Choose an active creature and a reserve.");
   if (
     command.type === "setLineup" &&
     (!["teamSelection", "recruit", "relic"].includes(state.phase) ||
       ![...state.team, ...state.reserves].some(
-        (c) => c.id === command.activeId && state.lineup.includes(c.species),
+        (c) => c.id === command.activeId && state.lineup.includes(c.id),
       ) ||
-      !state.roster.includes(command.reserve) ||
+      ![...state.team, ...state.reserves].some((c) => c.id === command.reserve) ||
       state.lineup.includes(command.reserve) ||
       state.reward?.outcome === "defeat" ||
       state.reward?.outcome === "victory")
@@ -403,9 +408,8 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
     command.type === "recruit" &&
     (state.phase !== "recruit" ||
       !state.reward?.recruits.includes(command.species) ||
-      state.roster.includes(command.species) ||
       (state.roster.length === 5
-        ? !command.replace || !state.roster.includes(command.replace)
+        ? !command.replace || ![...state.team, ...state.reserves].some((c) => c.id === command.replace)
         : !!command.replace))
   )
     return reject(state, "Choose an offered species and, if full, a creature to release.");
@@ -452,7 +456,7 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
         draft.cards = draft.team.flatMap((c) => ownedCards(c.id, c.species));
         draft.journey = { outcome: null, victories: 0, currency: 0, xp: {}, unlocks: [], lastBattle: null };
         draft.roster = [...draft.selected];
-        draft.lineup = [...draft.selected];
+        draft.lineup = draft.team.map((c) => c.id);
         draft.phase = "teamSelection";
         if (draft.expedition) offerDestinations(draft);
         break;
@@ -550,6 +554,7 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
             text: `Acting creature restores ${restored} Health.`,
           });
         }
+        fillHand(draft);
         if (autoEndTurn) settle(draft, events);
         if (autoEndTurn && draft.phase === "battle" && battle.mana === 0) finishTurn(draft, events);
         break;
@@ -560,13 +565,13 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
       }
       case "setLineup": {
         const outgoing = [...draft.team, ...draft.reserves].find((c) => c.id === command.activeId)!;
-        draft.lineup[draft.lineup.indexOf(outgoing.species)] = command.reserve;
+        draft.lineup[draft.lineup.indexOf(outgoing.id)] = command.reserve;
         if (draft.phase === "teamSelection") prepareLineup(draft);
         break;
       }
       case "swap": {
         const index = draft.team.findIndex((c) => c.id === command.activeId);
-        const reserveIndex = draft.reserves.findIndex((c) => c.species === command.reserve);
+        const reserveIndex = draft.reserves.findIndex((c) => c.id === command.reserve);
         const outgoing = draft.team[index]!;
         const incoming = draft.reserves[reserveIndex]!;
         draft.team[index] = incoming;
@@ -582,7 +587,7 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
           for (const enemy of draft.battle!.enemies)
             if (enemy.targetId === outgoing.id) enemy.targetId = incoming.id;
         } else {
-          draft.lineup = draft.team.map((c) => c.species);
+          draft.lineup = draft.team.map((c) => c.id);
           if (draft.battle)
             for (const enemy of draft.battle.enemies)
               if (enemy.targetId === outgoing.id) enemy.targetId = incoming.id;
@@ -595,17 +600,22 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
         break;
       }
       case "recruit": {
+        const all = [...draft.team, ...draft.reserves];
+        let id = `recruit-${draft.revision}`;
+        for (let suffix = 1; all.some((creature) => creature.id === id); suffix++)
+          id = `recruit-${draft.revision}-${suffix}`;
         const recruited = {
-          id: `recruit-${command.species}`,
+          id,
           species: command.species,
           health: species(command.species).health,
           block: 0,
           attacked: false,
         };
         if (command.replace) {
-          draft.roster[draft.roster.indexOf(command.replace)] = command.species;
-          draft.lineup = draft.lineup.map((kind) => (kind === command.replace ? command.species : kind));
-          const index = draft.team.findIndex((c) => c.species === command.replace);
+          const released = [...draft.team, ...draft.reserves].find((c) => c.id === command.replace)!;
+          draft.roster[draft.roster.indexOf(released.species)] = command.species;
+          draft.lineup = draft.lineup.map((id) => (id === command.replace ? recruited.id : id));
+          const index = draft.team.findIndex((c) => c.id === command.replace);
           if (index >= 0) {
             const old = draft.team[index]!;
             draft.team[index] = recruited;
@@ -619,11 +629,11 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
             if (draft.battle)
               for (const enemy of draft.battle.enemies)
                 if (enemy.targetId === old.id) enemy.targetId = recruited.id;
-          } else draft.reserves[draft.reserves.findIndex((c) => c.species === command.replace)] = recruited;
+          } else draft.reserves[draft.reserves.findIndex((c) => c.id === command.replace)] = recruited;
         } else {
           draft.roster.push(command.species);
           if (draft.lineup.length < 3) {
-            draft.lineup.push(command.species);
+            draft.lineup.push(recruited.id);
             draft.team.push(recruited);
             const cards = ownedCards(recruited.id, recruited.species);
             draft.cards.push(...cards);

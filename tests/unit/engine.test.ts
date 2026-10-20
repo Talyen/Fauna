@@ -74,7 +74,7 @@ describe("game commands", () => {
     expect(r.events.find((e) => e.kind === "damage")?.damageType).toBe("fire");
     expect(r.state.battle!.discard).toContain(attack.id);
   });
-  it("derives enemy and reflected damage types after a version-one save round trip", () => {
+  it("derives enemy and reflected damage types after a current save round trip", () => {
     const initial = teamRun(42, ["briartooth", "emberfox", "stormfin"]);
     const s = decodeSave(
       encodeSave(
@@ -88,8 +88,15 @@ describe("game commands", () => {
     const r = dispatch(s, { type: "endTurn" });
     expect(r.accepted).toBe(true);
     const damage = r.events.filter((e) => e.kind === "damage");
-    expect(damage.map((e) => e.damageType)).toEqual(["nature", "nature", "fire", "nature"]);
-    expect(r.state.team[0]!.health).toBe(22);
+    expect(damage.map((e) => e.damageType)).toEqual([
+      "nature",
+      "nature",
+      "fire",
+      "nature",
+      "light",
+      "nature",
+    ]);
+    expect(r.state.team[0]!.health).toBe(18);
   });
   it("keeps knockout slots inert and never draws them while living creatures remain", () => {
     let s = run();
@@ -118,7 +125,7 @@ describe("game commands", () => {
     s = accept(s, { type: "play", cardId: guard.id, targetId: "ally-0" });
     expect(s.team[0]!.block).toBe(9);
     s = accept(s, { type: "endTurn" });
-    expect(s.team[0]!.health).toBe(32);
+    expect(s.team[0]!.health).toBe(29);
     expect(s.team[0]!.block).toBe(0);
     expect(s.battle!.mana).toBe(3);
     expect(s.battle!.turn).toBe(2);
@@ -143,11 +150,11 @@ describe("game commands", () => {
   });
   it("recruits a defeated species into reserves and swaps its kit before the next battle", () => {
     let s = winBattle();
-    expect(dispatch(s, { type: "recruit", species: "silkmoth" }).accepted).toBe(false);
+    expect(dispatch(s, { type: "recruit", species: "moonhart" }).accepted).toBe(false);
     s = accept(s, { type: "recruit", species: "briartooth" });
     expect(s.roster).toHaveLength(4);
     expect(s.team[0]!.species).toBe("mossback");
-    s = accept(s, { type: "swap", activeId: "ally-0", reserve: "briartooth" });
+    s = accept(s, { type: "swap", activeId: "ally-0", reserve: s.reserves[0]!.id });
     expect(s.team[0]!.species).toBe("briartooth");
     expect(s.cards.some((c) => c.definitionId.startsWith("mossback"))).toBe(false);
     expect(decodeSave(encodeSave(s))).toEqual(s);

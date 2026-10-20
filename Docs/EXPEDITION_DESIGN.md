@@ -4,12 +4,12 @@ These are the agreed directions from the design review. They supersede the proto
 
 ## Roster and battles
 
-- Begin with one chosen starter. An journey roster grows to five distinct species: up to three deployed and two reserves. Duplicate species are excluded.
+- Begin with one chosen starter. A journey roster grows to five creatures: up to three deployed and two reserves. Multiple copies of a species are allowed.
 - Starter selection uses a three-column artwork grid of unlocked species. Clicking opens inspection with a Choose action; choosing returns to the grid and marks the selected creature. Begin journey is a separate action, available after choosing one starter. Inspecting or canceling never changes the choice. Choosing another replaces it.
 - The starter supplies the remembered starting lineup. Recruits fill its second and third slots before joining reserves. The destination screen offers location artwork; inspection reveals the exact enemy group and Begin battle. Deck remains available without requiring team selection.
 - Lineup is an optional menu dialog between battles, including ordinary reward screens. Changes save immediately. Combat swaps do not overwrite this starting lineup.
 - Only deployed living creatures act and provide passive traits. Enemy intents remain hidden.
-- During your turn, Swap opens a centered dialog with three deployed creatures and two smaller reserves. Reserves are hidden on the battlefield.
+- During your turn, Swap opens a centered dialog with three deployed creatures and two reserves at the shared artwork size. Reserves are hidden on the battlefield.
 - Select either creature first, then one from the opposite group to commit immediately. Swaps are free and unlimited; no Mana, draw, shuffle, turn advancement, or confirmation.
 - A swap replaces the outgoing owner's three cards in their existing hand, draw, and discard positions. Spent cards stay spent. Legacy upgrades do not transfer to incoming creatures.
 - Creature identity, health, Block, and first-attack state stay with the creature. Normal turn expiration applies in reserve; swapping never heals, cleanses, or repeats opening bonuses.
@@ -17,7 +17,7 @@ These are the agreed directions from the design review. They supersede the proto
 - If the deployed row falls, remaining enemy attacks stop and the next player turn begins with restored Mana. Healthy reserves can still enter through Swap. Defeat requires the whole roster to fall.
 - Knocked-out card slots remain inert in saved battle zones and are skipped by ordinary draws. When the entire deployed row falls, the next hand reserves slots for incoming creatures so recovery does not require a free extra draw. These slots never render as playable cards for knocked-out owners.
 - Victory restores the full roster. The next battle deploys the saved starting lineup.
-- Recruitment at five requires choosing one creature to release, or skipping. Replacing a starting species updates its lineup entry.
+- Recruitment at five requires choosing one creature to release, or skipping. Replacing a starting creature updates that individual’s lineup entry.
 
 ## Biomes and destinations
 
@@ -52,9 +52,9 @@ These are the agreed directions from the design review. They supersede the proto
 
 - Recruit from defeated enemy species after an ordinary combat victory.
 - Recruiting adds a creature to the journey roster rather than forcing an immediate active-team replacement.
-- The roster has one creature per species. Already-owned species do not create duplicate recruits.
+- Each ordinary combat contains three enemies. Choose a Recruit shows those exact three entries in battle order, including repeated species and species already in the roster. Recruiting creates a new individual with independent identity and battle state.
 - Recruitment remains a direct commitment on the final choice, without a separate confirmation.
-- Recruit one defeated species or skip recruitment.
+- Recruit one defeated creature or skip recruitment.
 - When the roster is full, choose the incoming species, then choose an existing creature to release. The final replacement choice commits immediately; canceling before that choice preserves the roster.
 
 ## Currency and items

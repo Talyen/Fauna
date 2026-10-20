@@ -227,7 +227,7 @@ test("main menu, draft and pre-battle deck lead into the first battle", async ({
   const destination = page.locator("[data-destination]").first();
   await destination.focus();
   await page.keyboard.press("i");
-  await expect(page.getByRole("dialog").locator(".destination-enemies .creature-card")).toHaveCount(2);
+  await expect(page.getByRole("dialog").locator(".destination-enemies .creature-card")).toHaveCount(3);
   await page.keyboard.press("Escape");
   await expect(destination).toBeFocused();
   await page.getByRole("button", { name: "Deck", exact: true }).click();
@@ -312,18 +312,23 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     await activate(page.getByRole("button", { name: "Inspect Mossback", exact: true }));
     await activate(page.getByRole("button", { name: "Choose Mossback", exact: true }));
     await activate(page.getByRole("button", { name: "Begin journey", exact: true }));
-    expect((await state(page)).lineup).toEqual(["mossback"]);
+    expect((await state(page)).lineup).toEqual(["ally-0"]);
     for (let i = 0; i < 200; i++) {
       const s = await state(page);
       if (s.phase === "victory") break;
       expect(s.phase).not.toBe("defeat");
       expect(s.reward?.outcome).not.toBe("defeat");
-      if (s.phase === "recruit") {
+      if (s.phase === "recruit" && s.roster.length < 5) {
         await activate(
-          page.getByRole("button", { name: `Recruit ${species(s.reward!.recruits[0]!).name}`, exact: true }),
+          page
+            .getByRole("button", {
+              name: `Recruit ${species(s.reward!.recruits.find((kind) => !s.roster.includes(kind)) ?? s.reward!.recruits[0]!).name}`,
+              exact: true,
+            })
+            .first(),
         );
         const recruited = await state(page);
-        expect(recruited.lineup).toEqual(recruited.roster.slice(0, 3));
+        expect(recruited.lineup).toEqual(recruited.team.map((creature) => creature.id));
         expect(recruited.reserves).toHaveLength(Math.max(0, recruited.roster.length - 3));
       } else await step(page, activate);
     }
@@ -388,7 +393,7 @@ test("recruitment adds a reserve, selection swaps its kit, and remembers active 
   await expect(page.getByRole("button", { name: "Lineup", exact: true })).toBeFocused();
   await page.keyboard.press("Escape");
   const s = await state(page);
-  expect(s.lineup[0]).toBe("briartooth");
+  expect(s.team.find((c) => c.id === s.lineup[0])!.species).toBe("briartooth");
   expect(s.cards.some((c) => c.definitionId.startsWith("mossback"))).toBe(false);
   await page.reload();
   await resume(page);
@@ -739,7 +744,7 @@ test("real audio output, hit recoil, reduced motion, and mute follow combat outc
   await expect(page.getByRole("switch", { name: "Sound", exact: true })).not.toBeChecked();
 });
 
-test("six-card hand, three enemies and a full bench preserve fit and original artwork ratios", async ({
+test("five-card hand with hidden overflow, three enemies and a full bench preserve fit and original artwork ratios", async ({
   page,
 }) => {
   let s = winBattle();
@@ -761,13 +766,18 @@ test("six-card hand, three enemies and a full bench preserve fit and original ar
   await resume(page);
   await fits(page);
   await page.getByRole("button", { name: "Begin battle" }).click();
-  await expect(page.locator(".hand .action-card")).toHaveCount(6);
+  await expect(page.locator(".hand .action-card")).toHaveCount(5);
   await expect(page.locator(".enemy-row .creature-card")).toHaveCount(3);
   await fits(page);
-  const h = (await page.locator(".player-row .creature-card").first().boundingBox())!.height;
+  const area = await page
+    .locator(".player-row .creature-card")
+    .first()
+    .evaluate((el) => el.offsetWidth * el.offsetHeight);
   for (const card of await page.locator(".hand .action-card").all()) {
     await card.focus();
-    expect(Math.abs((await card.boundingBox())!.height - h)).toBeLessThan(1);
+    expect(Math.abs((await card.evaluate((el) => el.offsetWidth * el.offsetHeight)) / area - 1)).toBeLessThan(
+      0.025,
+    );
   }
 });
 test("enlarged text and keyboard/controller row navigation keep inspection and menu controls reachable", async ({
@@ -912,7 +922,7 @@ test("battle tooltips, pointer targeting, Mana forecast and corners follow the d
   await card.click();
   await enemy.click();
   await expect(page.locator(".enemy-row .knocked-out")).toHaveCount(1);
-  await expect(page.locator(".enemy-row .creature-card")).toHaveCount(2);
+  await expect(page.locator(".enemy-row .creature-card")).toHaveCount(3);
   expect(
     await page
       .locator(".hand .action-card")
@@ -1117,12 +1127,12 @@ for (const [width, height] of [
     await page.getByRole("button", { name: "Silkmoth, reserve", exact: true }).click();
     await page.getByRole("button", { name: "Mossback, starting", exact: true }).click();
     const edited = await state(page);
-    expect(edited.lineup[0]).toBe("silkmoth");
+    expect(edited.lineup[0]).toBe("recruit-silkmoth");
     expect(edited.phase).toBe("recruit");
     expect(edited.reward).toEqual(reward.reward);
     await page.reload();
     await resume(page);
-    expect((await state(page)).lineup[0]).toBe("silkmoth");
+    expect((await state(page)).lineup[0]).toBe("recruit-silkmoth");
   });
 
 test("a fallen deployed row resumes with no playable cards and can recover through a reserve swap", async ({
@@ -1201,7 +1211,7 @@ test("recruitment at five requires replacement and updates a released starter's 
   const recruited = await state(page);
   expect(recruited.roster).toHaveLength(5);
   expect(recruited.roster).not.toContain("mossback");
-  expect(recruited.lineup[0]).toBe("briartooth");
+  expect(recruited.team.find((c) => c.id === recruited.lineup[0])!.species).toBe("briartooth");
   expect(recruited.phase).toBe("teamSelection");
   await page.reload();
   await resume(page);
@@ -1299,4 +1309,90 @@ for (const [width, height] of [
     await page.keyboard.press("Escape");
     await page.mouse.click(5, 5);
     await expect(page.getByRole("dialog")).toHaveCount(0);
+  });
+
+for (const [width, height] of [
+  [1280, 800],
+  [1920, 1080],
+] as const)
+  for (const enlarged of [false, true])
+    test(`shared Reward anchors and three recruit choices at ${width}, enlarged ${enlarged}`, async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width, height });
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      const anchors: { heading: number; skip: number }[] = [];
+      for (const fixture of [winBattle(), bossReward()]) {
+        await seed(page, fixture);
+        await resume(page);
+        if (enlarged)
+          await page.locator("html").evaluate((el) => el.style.setProperty("--text-scale", "1.5"));
+        await expect(page.getByRole("heading", { name: "Reward", exact: true })).toBeVisible();
+        await page
+          .locator(".reward-screen img")
+          .evaluateAll((imgs) => Promise.all(imgs.map((img) => (img as HTMLImageElement).decode())));
+        const cards = page.locator(".reward-option");
+        await expect(cards).toHaveCount(3);
+        const first = (await cards.first().boundingBox())!,
+          last = (await cards.last().boundingBox())!;
+        expect(Math.abs(first.x + last.x + last.width - width)).toBeLessThan(1);
+        anchors.push({
+          heading: (await page.locator(".reward-heading").boundingBox())!.y,
+          skip: (await page.getByRole("button", { name: "Skip", exact: true }).boundingBox())!.y,
+        });
+        if (fixture.phase === "recruit") {
+          await expect(page.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeVisible();
+          await page.getByRole("button", { name: "Recruit Emberfox", exact: true }).click();
+          expect((await state(page)).roster.filter((kind) => kind === "emberfox")).toHaveLength(2);
+        } else await page.getByRole("button", { name: "Skip", exact: true }).click();
+      }
+      expect(Math.abs(anchors[0]!.heading - anchors[1]!.heading)).toBeLessThan(1);
+      expect(Math.abs(anchors[0]!.skip - anchors[1]!.skip)).toBeLessThan(1);
+    });
+
+for (const [width, height] of [
+  [1280, 720],
+  [1280, 800],
+  [1920, 1080],
+  [1024, 768],
+  [1024, 600],
+  [2560, 1080],
+  [3440, 1440],
+  [960, 540],
+] as const)
+  test(`equal-area battle and inspection remain usable at ${width}×${height}`, async ({ page }) => {
+    await page.setViewportSize({ width, height });
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    const fixture = produce(run(), (d) => {
+      d.battle!.hand = d.cards.slice(0, 5).map((card) => card.id);
+      d.battle!.buffer = d.cards.slice(5).map((card) => card.id);
+      d.battle!.draw = [];
+      d.battle!.discard = [];
+    });
+    await seed(page, fixture);
+    await resume(page);
+    await fits(page);
+    const area = (element: HTMLElement) => element.offsetWidth * element.offsetHeight;
+    const creatureArea = await page.locator(".player-row .creature-card").first().evaluate(area);
+    for (const card of await page.locator(".hand .action-card").all())
+      expect(Math.abs((await card.evaluate(area)) / creatureArea - 1)).toBeLessThan(0.025);
+    for (const control of await page.locator(".hand-toolbar button").all()) {
+      const bounds = (await control.boundingBox())!;
+      expect(bounds.y + bounds.height).toBeLessThanOrEqual(height);
+      expect(
+        await control.evaluate((el) => {
+          const r = el.getBoundingClientRect();
+          return el.contains(document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2));
+        }),
+      ).toBe(true);
+    }
+    const opener = page.locator(".player-row .creature-card").first();
+    await opener.click();
+    const dialog = page.getByRole("dialog");
+    const inspectedArea = await dialog.locator(".creature-card").evaluate(area);
+    for (const card of await dialog.locator(".action-card").all())
+      expect(Math.abs((await card.evaluate(area)) / inspectedArea - 1)).toBeLessThan(0.025);
+    await page.keyboard.press("Escape");
+    await expect(dialog).toHaveCount(0);
+    await expect(opener).toBeFocused();
   });

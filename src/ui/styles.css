@@ -67,7 +67,7 @@ strong {
 }
 .app {
   min-height: 100dvh;
-  padding: var(--space-6) var(--space-8);
+  padding: var(--page-block-gutter) var(--page-inline-gutter);
   background: var(--background);
   position: relative;
 }
@@ -141,7 +141,7 @@ strong {
   width: 100%;
 }
 .home-screen {
-  min-height: calc(100dvh - 48px);
+  min-height: var(--page-content-height);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -158,7 +158,7 @@ strong {
   gap: var(--space-2);
 }
 .draft-screen {
-  min-height: calc(100dvh - 48px);
+  min-height: var(--page-content-height);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -196,7 +196,7 @@ strong {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-5);
-  max-width: min(960px, calc((100dvh - 310px) * 2));
+  max-width: calc(var(--art-landscape-width) * 3 + var(--space-5) * 2);
   width: 100%;
 }
 .creature-wrap {
@@ -215,11 +215,13 @@ strong {
 }
 .creature-card {
   aspect-ratio: var(--art-creature-ratio);
-  width: 100%;
+  width: var(--art-landscape-width);
+  max-width: 100%;
 }
 .action-card {
   aspect-ratio: var(--art-action-ratio);
-  width: 180px;
+  width: var(--art-portrait-width);
+  max-width: 100%;
   flex: 0 0 auto;
 }
 .creature-card > img,
@@ -252,9 +254,20 @@ button {
   transition-duration: var(--motion-fast);
 }
 .battle-screen {
-  --battle-art-height: 252px;
+  --art-short-side: min(
+    var(--art-standard-short-side),
+    calc((100dvh - var(--battle-layout-reserve)) / 3.5),
+    calc((100vw - var(--page-inline-gutter) * 2 - var(--space-6) * 2) / 4),
+    calc(
+      (min(1280px, 100vw - var(--page-inline-gutter) * 2) + (5 - 1) * var(--hand-overlap) - var(--space-12)) /
+        5
+    )
+  );
+  --art-long-side: calc(var(--art-short-side) * 4 / 3);
+  --art-landscape-width: var(--art-long-side);
+  --art-portrait-width: var(--art-short-side);
   max-width: 1600px;
-  height: calc(100dvh - 48px);
+  height: var(--page-content-height);
   margin: auto;
   display: grid;
   grid-template-rows: auto minmax(48px, 1fr) auto auto;
@@ -270,7 +283,7 @@ button {
 }
 .enemy-row .creature-wrap,
 .player-row .creature-wrap {
-  width: calc(var(--battle-art-height) * 4 / 3);
+  width: var(--art-landscape-width);
 }
 .target-control {
   display: flex;
@@ -285,12 +298,11 @@ button {
   margin: var(--space-4) auto 0;
 }
 .hand-toolbar {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  min-height: var(--control-height);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  pointer-events: none;
 }
 .hand-toolbar > * {
   pointer-events: auto;
@@ -299,19 +311,19 @@ button {
   display: flex;
   justify-content: center;
   align-items: start;
-  height: calc(var(--battle-art-height) + 36px);
+  height: calc(var(--art-short-side) * 1.5 + 36px);
   padding-top: var(--space-4);
 }
 .hand-slot {
-  flex: 0 0 calc(var(--battle-art-height) * 3 / 4);
-  width: calc(var(--battle-art-height) * 3 / 4);
-  transform: translateY(var(--fan-drop)) rotate(var(--fan-angle)) scale(var(--fan-fit));
+  flex: 0 0 var(--art-portrait-width);
+  width: var(--art-portrait-width);
+  transform: translateY(var(--fan-drop)) rotate(var(--fan-angle));
   transform-origin: 50% 100%;
   position: relative;
   z-index: var(--fan-order);
 }
 .hand-slot + .hand-slot {
-  margin-left: -40px;
+  margin-left: calc(-1 * var(--hand-overlap));
 }
 .hand-slot .action-card {
   width: 100%;
@@ -324,10 +336,10 @@ button {
 }
 .hand-slot .action-card:hover,
 .hand-slot .action-card:focus-visible {
-  transform: translateY(-12px) rotate(calc(var(--fan-angle) * -1)) scale(calc(1 / var(--fan-fit)));
+  transform: translateY(-12px) rotate(calc(var(--fan-angle) * -1));
 }
 .hand-slot .action-card.selected {
-  transform: translateY(-20px) rotate(calc(var(--fan-angle) * -1)) scale(calc(1 / var(--fan-fit)));
+  transform: translateY(-20px) rotate(calc(var(--fan-angle) * -1));
 }
 .target-line {
   position: absolute;
@@ -422,13 +434,19 @@ button {
   overflow: auto;
 }
 .inspection {
-  width: min(420px, calc(100vw - var(--space-12)));
+  width: min(
+    calc(var(--art-portrait-width) * 3 + var(--space-4) * 2 + var(--space-6) * 2 + 2px),
+    calc(100vw - var(--space-12))
+  );
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
 }
+.inspection > * {
+  flex-shrink: 0;
+}
 .inspection-creature-art {
-  width: 320px;
+  width: var(--art-landscape-width);
   max-width: 100%;
   margin: auto;
 }
@@ -436,7 +454,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  width: 320px;
+  width: 100%;
   max-width: 100%;
   margin: auto;
 }
@@ -454,15 +472,18 @@ button {
   margin-bottom: var(--space-1);
 }
 .inspection-thumbnails {
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  justify-content: center;
   gap: var(--space-4);
 }
 .inspection-thumbnails .action-card {
-  width: 100%;
+  width: var(--art-portrait-width);
+  margin: auto;
 }
 .inspection > .action-card {
-  width: 216px;
+  width: var(--art-portrait-width);
   max-width: 100%;
   margin: auto;
 }
@@ -482,8 +503,8 @@ button {
 }
 
 .team-selection {
-  --selection-card: min(360px, calc((100dvh - 284px) * 4 / 8.16));
-  min-height: calc(100dvh - 48px);
+  --selection-card: var(--art-landscape-width);
+  min-height: var(--page-content-height);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -524,9 +545,10 @@ button {
   margin: 0 auto;
 }
 .reward-screen {
-  width: min(640px, 100%);
+  width: min(calc(var(--art-landscape-width) * 3 + var(--space-6) * 2), 100%);
+  container-type: inline-size;
   margin: auto;
-  min-height: calc(100dvh - 48px);
+  min-height: var(--page-content-height);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -561,29 +583,39 @@ button {
   gap: var(--space-3);
   margin-top: var(--space-10);
 }
-.recruit-options {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-6);
+.reward-choices {
+  --art-short-side: min(var(--art-standard-short-side), calc((100cqw - 2 * var(--space-6)) / 4));
+  --art-long-side: calc(var(--art-short-side) * 4 / 3);
+  --art-landscape-width: var(--art-long-side);
+  --art-portrait-width: var(--art-short-side);
   margin-top: var(--space-10);
+  min-height: calc(var(--art-long-side) + var(--space-3) + var(--text-name) * 2.6);
+  display: flex;
+  align-items: center;
 }
+.recruit-options,
 .relic-options {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: var(--space-6);
-  margin-top: var(--space-10);
+  width: 100%;
 }
-.relic-option {
+.reward-option {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
+  width: var(--art-landscape-width);
   min-width: 0;
   text-align: center;
+}
+.relic-options .reward-option {
+  width: var(--art-portrait-width);
 }
 .relic-choice {
   width: 100%;
 }
-.relic-option h2 {
+.reward-option h2 {
   font-size: var(--text-name);
 }
 .collection-screen,
@@ -600,7 +632,8 @@ button {
 }
 .collection-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  justify-content: center;
+  grid-template-columns: repeat(3, minmax(0, var(--art-landscape-width)));
   gap: var(--space-6);
 }
 .locked-species {
@@ -654,7 +687,7 @@ button {
   border-color: var(--line);
 }
 .end-screen {
-  min-height: calc(100dvh - 48px);
+  min-height: var(--page-content-height);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -670,7 +703,10 @@ button {
   margin-top: var(--space-3);
 }
 .deck-dialog {
-  width: min(640px, calc(100vw - 48px));
+  width: min(
+    calc(var(--art-portrait-width) * 3 + var(--space-4) * 2 + var(--space-6) * 2 + 2px),
+    calc(100vw - 48px)
+  );
 }
 .deck-grid {
   display: grid;
@@ -680,7 +716,7 @@ button {
   margin-top: var(--space-6);
 }
 .deck-grid .action-card {
-  width: min(112px, calc((100dvh - 220px) / 4));
+  width: var(--art-portrait-width);
 }
 .glossary dl {
   display: flex;
@@ -713,17 +749,9 @@ button {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
 }
-@media (max-height: 850px) {
-  .battle-screen {
-    --battle-art-height: min(168px, calc((100dvh - 280px) / 3));
-  }
-}
 @media (max-width: 900px) {
   .collection-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .battle-screen {
-    --battle-art-height: min(168px, 18vw);
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -984,17 +1012,18 @@ button {
 .swap-roster {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  justify-content: center;
   gap: var(--space-5);
 }
 .swap-reserves {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  width: 60%;
+  width: 100%;
   margin: auto;
 }
 
 .destinations-screen {
   width: min(1120px, 100%);
-  min-height: calc(100dvh - 48px);
+  min-height: var(--page-content-height);
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -1027,7 +1056,7 @@ button {
 }
 .journey-results {
   width: min(640px, 100%);
-  min-height: calc(100dvh - 48px);
+  min-height: var(--page-content-height);
   margin: auto;
   padding: var(--space-8) 0;
   display: flex;
@@ -1069,7 +1098,7 @@ button {
 }
 .destination-option {
   flex: 1;
-  max-width: 360px;
+  max-width: var(--art-landscape-width);
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -1099,7 +1128,7 @@ button {
 .destination-enemies > div {
   flex: 1;
   min-width: 0;
-  max-width: 280px;
+  max-width: var(--art-landscape-width);
   display: flex;
   flex-direction: column;
   gap: var(--space-2);

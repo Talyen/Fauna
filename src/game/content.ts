@@ -155,6 +155,7 @@ export const ENCOUNTERS = [
     enemies: [
       { damageType: "nature", name: "Bramble Imp", species: "briartooth" as const, health: 18, damage: 4 },
       { damageType: "fire", name: "Cinder Wisp", species: "emberfox" as const, health: 16, damage: 4 },
+      { damageType: "light", name: "Dusk Moth", species: "silkmoth" as const, health: 16, damage: 4 },
     ],
   },
   {
