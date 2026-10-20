@@ -112,6 +112,14 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 - Spending fades to the spent appearance over 150ms; refilling fades to the full appearance over 150ms.
 - Committed Mana values update immediately. Reduced motion removes the glint and makes spending/refill appearance changes immediate.
 
+## Draw and Discard Piles
+
+- Hover: gold border and 3.5% growth.
+- Keyboard/controller focus: solid gold outline and 3.5% growth. Preserve the single highlighted-boundary rule when focus overlaps hover.
+- Press: shrink 2%, matching buttons.
+- Empty piles remain inspectable and show the chosen empty-state icon inside their inspection view.
+- Pile counts remain hidden. Browsing never changes card order.
+
 ## Empty states
 
 - Use an icon only, with no visible message, accompanying action or hover/focus tooltip. Provide an accessible label that describes the empty state.
