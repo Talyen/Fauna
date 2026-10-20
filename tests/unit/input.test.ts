@@ -230,3 +230,30 @@ it("moves through settings rows without skipping the offset Sound switch", () =>
     root.remove();
   }
 });
+
+it("moves vertically from switches through slider rows without changing their values", () => {
+  const root = document.createElement("div");
+  root.className = "settings-controls";
+  root.innerHTML = `<div data-nav-row><button id="sound" role="switch">Sound</button></div>
+    <div data-nav-row><span id="master" role="slider" tabindex="0" aria-orientation="horizontal"></span></div>
+    <div data-nav-row><span id="music" role="slider" tabindex="0" aria-orientation="horizontal"></span></div>`;
+  document.body.append(root);
+  vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
+  const events = vi.fn();
+  root.addEventListener("keydown", events);
+  try {
+    root.querySelector<HTMLElement>("#sound")!.focus();
+    moveFocus("down");
+    expect(document.activeElement?.id).toBe("master");
+    moveFocus("down");
+    expect(document.activeElement?.id).toBe("music");
+    moveFocus("up");
+    expect(document.activeElement?.id).toBe("master");
+    expect(events).not.toHaveBeenCalled();
+    moveFocus("left");
+    expect(events.mock.calls[0]![0].key).toBe("ArrowLeft");
+    expect(document.activeElement?.id).toBe("master");
+  } finally {
+    root.remove();
+  }
+});

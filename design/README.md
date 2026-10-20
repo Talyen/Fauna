@@ -8,3 +8,5 @@ These samples record reviewed composition choices. They are not current rendered
 - [Team selection](team-selection/README.md)
 - [Battle swaps](battle-swap/README.md)
 - [Battle rewards](battle-rewards/README.md)
+
+- [Interactive button states](button-interactions/README.md)

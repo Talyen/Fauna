@@ -252,8 +252,36 @@ strong {
   outline: 2px dashed var(--selected);
   outline-offset: 6px;
 }
-button {
-  transition-duration: var(--motion-fast);
+.game-button {
+  transition:
+    scale var(--motion-hover) ease-out,
+    border-color var(--motion-hover) ease-out,
+    background-color var(--motion-hover) ease-out,
+    color var(--motion-hover) ease-out,
+    box-shadow var(--motion-hover) ease-out;
+}
+.game-button:not(:disabled):not([aria-disabled="true"]):hover,
+:root[data-focus="visible"] .game-button:not(:disabled):not([aria-disabled="true"]):focus {
+  scale: var(--hover-scale);
+}
+.game-button:is(.creature-card, .action-card)::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: var(--hover-frame-width) solid transparent;
+  border-radius: inherit;
+  pointer-events: none;
+  transition: border-color var(--motion-hover) ease-out;
+}
+.game-button:is(.creature-card, .action-card):not(:disabled):not([aria-disabled="true"]):hover,
+:root[data-focus="visible"]
+  .game-button:is(.creature-card, .action-card):not(:disabled):not([aria-disabled="true"]):focus {
+  border-color: var(--primary);
+}
+.game-button:is(.creature-card, .action-card):not(:disabled):not([aria-disabled="true"]):hover::after,
+:root[data-focus="visible"]
+  .game-button:is(.creature-card, .action-card):not(:disabled):not([aria-disabled="true"]):focus::after {
+  border-color: var(--primary);
 }
 .battle-screen {
   height: calc(100dvh - var(--screen-item-gap) * 2);
@@ -350,7 +378,11 @@ button {
 }
 .hand-slot .action-card {
   width: 100%;
-  transition: transform var(--motion-fast) ease-out;
+  transition:
+    transform var(--motion-hover) ease-out,
+    scale var(--motion-hover) ease-out,
+    border-color var(--motion-hover) ease-out,
+    box-shadow var(--motion-hover) ease-out;
 }
 .hand-slot:hover,
 .app[data-focus="visible"] .hand-slot:focus-within,
@@ -453,9 +485,53 @@ button {
 .game-tooltip {
   /* Radix modal layers set an inline pointer override; hover details must not intercept controls. */
   pointer-events: none !important;
-  width: min(calc(360px * var(--text-scale, 1)), calc(100vw - 32px));
+  width: max-content;
+  max-width: min(calc(var(--tooltip-max-width) * var(--text-scale, 1)), calc(100vw - var(--space-8)));
+  padding: var(--space-3);
+  border-radius: var(--tooltip-radius);
+  --tooltip-offset-x: 0px;
+  --tooltip-offset-y: var(--tooltip-travel);
+  overflow-wrap: anywhere;
   max-height: var(--radix-tooltip-content-available-height);
   overflow: auto;
+}
+.game-tooltip[data-side="bottom"] {
+  --tooltip-offset-y: calc(-1 * var(--tooltip-travel));
+}
+.game-tooltip[data-side="left"] {
+  --tooltip-offset-x: var(--tooltip-travel);
+  --tooltip-offset-y: 0px;
+}
+.game-tooltip[data-side="right"] {
+  --tooltip-offset-x: calc(-1 * var(--tooltip-travel));
+  --tooltip-offset-y: 0px;
+}
+.game-tooltip[data-state="instant-open"],
+.game-tooltip[data-state="delayed-open"] {
+  animation: tooltip-enter var(--tooltip-enter-duration) ease-out;
+}
+.game-tooltip[data-state="closed"] {
+  animation: tooltip-exit var(--tooltip-exit-duration) ease-out forwards;
+}
+@keyframes tooltip-enter {
+  from {
+    opacity: 0;
+    translate: var(--tooltip-offset-x) var(--tooltip-offset-y);
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@keyframes tooltip-exit {
+  from {
+    opacity: 1;
+    translate: 0 0;
+  }
+  to {
+    opacity: 0;
+    translate: var(--tooltip-offset-x) var(--tooltip-offset-y);
+  }
 }
 .inspection {
   width: min(
@@ -612,7 +688,6 @@ button {
 .reward-option h2 {
   font-size: var(--text-name);
 }
-.collection-screen,
 .talents-screen {
   max-width: 1000px;
   margin: auto;
@@ -628,11 +703,67 @@ button {
   justify-content: space-between;
   margin-bottom: var(--screen-section-gap);
 }
+.collection-screen {
+  width: 100%;
+  max-width: calc(var(--art-landscape-width) * 3 + var(--screen-item-gap) * 2);
+  min-height: var(--page-content-height);
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--screen-section-gap);
+}
+.collection-heading {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+.collection-heading > button {
+  justify-self: start;
+}
+.collection-heading h1 {
+  text-align: center;
+}
+.collection-tabs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--screen-section-gap);
+}
+.collection-content {
+  width: 100%;
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--screen-section-gap);
+}
+.collection-gallery {
+  min-height: calc(var(--art-long-side) * 2 + var(--screen-item-gap));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .collection-grid {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: var(--screen-section-gap);
+  gap: var(--screen-item-gap);
+}
+.collection-grid > * {
+  flex: 0 0 auto;
+}
+.collection-pagination {
+  min-height: var(--control-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--screen-item-gap);
+}
+.collection-pagination span {
+  color: var(--muted-foreground);
+  font-variant-numeric: tabular-nums;
 }
 .locked-species {
   filter: grayscale(1);
@@ -920,27 +1051,79 @@ button {
 
 .setting-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  gap: 24px;
+  gap: var(--screen-item-gap) var(--screen-section-gap);
   min-height: var(--control-height);
+  padding-block: var(--space-2);
 }
-.settings-controls fieldset {
-  border: 0;
-  padding: 0;
-  margin: 0;
+.setting-row + .setting-row {
+  border-top: 1px solid var(--border);
 }
-.settings-controls legend {
-  margin-bottom: 8px;
+.setting-label {
+  display: flex;
+  align-items: center;
+  gap: var(--screen-item-gap);
+  flex: 2 1 var(--settings-label-basis);
+  min-width: 0;
 }
-
+.setting-label svg,
+.settings-tabs svg {
+  width: var(--space-5);
+  height: var(--space-5);
+  flex-shrink: 0;
+  color: var(--primary);
+}
+.setting-control {
+  flex: 3 1 var(--settings-control-basis);
+  min-width: 0;
+  max-width: 100%;
+}
+.setting-toggle {
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.settings-heading {
+  color: var(--primary);
+  font-size: var(--text-body);
+  font-weight: 600;
+  margin-bottom: var(--screen-item-gap);
+}
 .settings-controls {
   display: grid;
-  gap: var(--space-6);
-  margin-top: var(--space-6);
+  gap: var(--screen-section-gap);
+  margin-top: var(--screen-section-gap);
+}
+.settings-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-1);
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+.settings-tabs button {
+  gap: var(--space-2);
+}
+.settings-panel {
+  margin-top: 0;
+  min-height: var(--settings-panel-min-height);
+}
+.text-size-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--screen-item-gap);
+}
+.text-size-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--control-height);
+  cursor: pointer;
 }
 .dialog-content.settings-dialog {
-  width: min(440px, calc(100vw - var(--space-12)));
+  width: min(var(--settings-dialog-width), calc(100vw - var(--space-12)));
 }
 
 /* Automatic focus and pointer interaction never expose navigation decoration,
@@ -948,7 +1131,8 @@ button {
 :root:not([data-focus="visible"]) :focus {
   outline: none;
   box-shadow: none;
-  transition-property: none;
+  /* Remove focus decoration immediately while retaining pointer hover motion. */
+  transition-property: scale, border-color, background-color, color, transform;
 }
 .app[data-focus="hidden"] .hand-slot .action-card:focus:not(:hover):not(.selected) {
   transform: none;
@@ -1188,7 +1372,8 @@ button {
 }
 .volume-controls output {
   min-width: 4ch;
-  text-align: center;
+  text-align: right;
+  color: var(--primary);
   font-variant-numeric: tabular-nums;
 }
 .diagnostic-viewer {
@@ -1280,4 +1465,10 @@ button {
   flex-direction: column;
   align-items: center;
   gap: var(--screen-item-gap);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .game-button {
+    scale: 1 !important;
+  }
 }

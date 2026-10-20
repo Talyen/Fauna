@@ -21,6 +21,7 @@ for (const width of [1280, 1920]) {
     await seed(page, encodeSave(run()), width === 1280 ? "1.5" : "1");
     await page.getByRole("button", { name: "Open menu" }).click();
     await page.getByRole("button", { name: "Settings", exact: true }).click();
+    await page.getByRole("tab", { name: "Battle", exact: true }).click();
     const setting = page.getByRole("switch", { name: "Auto-end turn", exact: true });
     await expect(setting).toBeChecked();
     await setting.focus();

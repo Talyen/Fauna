@@ -18,6 +18,7 @@
 | `npm run balance:playthrough`                                                    | [run-playthrough.mjs](run-playthrough.mjs); [journey runner](../src/application/playthrough.ts)                                                                |
 | `npm run audio:review`                                                           | [audio-review.mjs](audio-review.mjs); [tool workflows](../Docs/DEVELOPMENT_TOOLS.md)                                                                           |
 | `npm run dev:desktop`                                                            | [dev-desktop.mjs](dev-desktop.mjs)                                                                                                                             |
+| `npm run dev`                                                                    | [dev.mjs](dev.mjs): opens the local URL in Safari on macOS, or the default browser on other platforms                                                          |
 | `npm run test:desktop`                                                           | [smoke-desktop.mjs](smoke-desktop.mjs)                                                                                                                         |
 | Placeholder authoring                                                            | [create-placeholders.mjs](create-placeholders.mjs), [create-location-placeholders.mjs](create-location-placeholders.mjs); [artwork policy](../Docs/CONTENT.md) |
 

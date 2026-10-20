@@ -5,13 +5,11 @@ import { writePreference } from "../platform/preferences";
 import { useAutoplay } from "./autoplay";
 import { observeUnlocks } from "./unlock-reveals";
 import { Campfire } from "./campfire";
-import { AudioSettings } from "./audio-settings";
+import { Settings } from "./settings";
 import { useAudioPreferences } from "./audio-preferences";
 import { useGameAudio } from "./game-audio";
-import { DiagnosticViewer } from "./diagnostics";
 import { JourneyResults } from "./journey-results";
 import { KeywordText } from "./keyword-text";
-import { RadioGroup, RadioGroupItem } from "../components/ui/radio-group";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -45,7 +43,7 @@ type Route = "home" | "play" | "talents" | "collection" | "unlocks";
 type Modal = "settings" | "glossary" | "endRun" | "deck" | "swap" | "lineup" | "draw" | "discard" | null;
 export function App(props: { session: Session; desktop?: boolean }) {
   return (
-    <TooltipProvider delayDuration={300} skipDelayDuration={100} disableHoverableContent>
+    <TooltipProvider>
       <Game {...props} />
     </TooltipProvider>
   );
@@ -393,38 +391,19 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           ) : modal === "deck" || modal === "draw" || modal === "discard" ? (
             <DeckCards game={game} inspect={setInspection} pile={modal === "deck" ? undefined : modal} />
           ) : modal === "settings" ? (
-            <div className="settings-controls">
-              <DiagnosticViewer diagnostics={session.diagnostics} desktop={desktop} />
-              <AudioSettings value={audioPreferences} update={updateAudioPreferences} />
-              <label data-nav-row className="setting-row" htmlFor="auto-end-turn">
-                <span>Auto-end turn</span>
-                <Switch
-                  id="auto-end-turn"
-                  checked={autoEndTurn}
-                  onCheckedChange={(value) => {
-                    setAutoEndTurn(value);
-                    writePreference("fauna.auto-end-turn", String(value));
-                  }}
-                />
-              </label>
-              <fieldset>
-                <legend>Text size</legend>
-                <RadioGroup
-                  data-nav-row
-                  orientation="vertical"
-                  aria-label="Text size"
-                  value={String(scale)}
-                  onValueChange={(value) => setScale(Number(value))}
-                >
-                  {[1, 1.25, 1.5].map((value) => (
-                    <label className="setting-row" key={value}>
-                      <span>{value * 100}%</span>
-                      <RadioGroupItem value={String(value)} aria-label={`${value * 100}%`} />
-                    </label>
-                  ))}
-                </RadioGroup>
-              </fieldset>
-            </div>
+            <Settings
+              audio={audioPreferences}
+              updateAudio={updateAudioPreferences}
+              scale={scale}
+              setScale={setScale}
+              diagnostics={session.diagnostics}
+              desktop={desktop}
+              autoEndTurn={autoEndTurn}
+              setAutoEndTurn={(value) => {
+                setAutoEndTurn(value);
+                writePreference("fauna.auto-end-turn", String(value));
+              }}
+            />
           ) : modal === "glossary" ? (
             <>
               <p>

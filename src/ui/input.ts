@@ -11,7 +11,7 @@ export function moveFocus(direction: "left" | "right" | "up" | "down") {
       ),
     ).at(-1) ?? document;
   const focused = document.activeElement as HTMLElement | null;
-  const composite = focused?.closest('[role="tablist"], [role="radiogroup"]');
+  const composite = focused?.closest('[role="tablist"], [role="radiogroup"], [role="slider"]');
   if (composite && (root === document || root.contains(composite))) {
     const horizontal = composite.getAttribute("aria-orientation") !== "vertical";
     if (
@@ -45,7 +45,7 @@ export function moveFocus(direction: "left" | "right" | "up" | "down") {
   ) {
     const rows = Array.from(
       root.querySelectorAll<HTMLElement>(".enemy-row, .player-row, .hand, [data-nav-row]"),
-    ).filter((row) => row.getClientRects().length > 0 && row.querySelector("button"));
+    ).filter((row) => row.getClientRects().length > 0 && row.querySelector('button, [role="slider"]'));
     const rowIndex = rows.findIndex((row) => row.contains(current));
     if (rowIndex >= 0) {
       if (direction === "left" || direction === "right") {

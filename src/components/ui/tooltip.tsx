@@ -2,20 +2,86 @@
 import * as React from "react";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import { cn } from "@/lib/utils";
-export const TooltipProvider = TooltipPrimitive.Provider;
-export const Tooltip = TooltipPrimitive.Root;
-export const TooltipTrigger = TooltipPrimitive.Trigger;
+
+export function TooltipProvider(props: React.ComponentProps<typeof TooltipPrimitive.Provider>) {
+  return (
+    <TooltipPrimitive.Provider delayDuration={0} skipDelayDuration={0} disableHoverableContent {...props} />
+  );
+}
+
+const TooltipInteraction = React.createContext<((open: boolean) => void) | undefined>(undefined);
+
+export function Tooltip({
+  open: controlledOpen,
+  defaultOpen = false,
+  onOpenChange,
+  children,
+  ...props
+}: React.ComponentProps<typeof TooltipPrimitive.Root>) {
+  const [localOpen, setLocalOpen] = React.useState(defaultOpen);
+  const open = controlledOpen ?? localOpen;
+  const changeOpen = React.useCallback(
+    (next: boolean) => {
+      setLocalOpen(next);
+      onOpenChange?.(next);
+    },
+    [onOpenChange],
+  );
+  React.useEffect(() => {
+    if (!open) return;
+    const dismiss = () => changeOpen(false);
+    const onVisibilityChange = () => {
+      if (document.hidden) dismiss();
+    };
+    window.addEventListener("blur", dismiss);
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    return () => {
+      window.removeEventListener("blur", dismiss);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+    };
+  }, [open, changeOpen]);
+  return (
+    <TooltipPrimitive.Root {...props} open={open} onOpenChange={changeOpen}>
+      <TooltipInteraction.Provider value={changeOpen}>{children}</TooltipInteraction.Provider>
+    </TooltipPrimitive.Root>
+  );
+}
+
+export const TooltipTrigger = React.forwardRef<
+  React.ElementRef<typeof TooltipPrimitive.Trigger>,
+  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Trigger>
+>(({ onFocus, onPointerMove, ...props }, ref) => {
+  const changeOpen = React.useContext(TooltipInteraction);
+  return (
+    <TooltipPrimitive.Trigger
+      {...props}
+      ref={ref}
+      onFocus={(event) => {
+        onFocus?.(event);
+        if (document.documentElement.dataset.focus !== "visible") event.preventDefault();
+      }}
+      onPointerMove={(event) => {
+        onPointerMove?.(event);
+        // A fresh mouse move restores details dismissed by selecting the same card.
+        if (!event.defaultPrevented && event.pointerType === "mouse" && event.buttons === 0)
+          changeOpen?.(true);
+      }}
+    />
+  );
+});
+TooltipTrigger.displayName = "TooltipTrigger";
+
 export const TooltipContent = React.forwardRef<
   React.ElementRef<typeof TooltipPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
->(({ className, sideOffset = 8, ...props }, ref) => (
+>(({ className, sideOffset = 16, ...props }, ref) => (
   <TooltipPrimitive.Portal>
     <TooltipPrimitive.Content
       ref={ref}
       sideOffset={sideOffset}
       collisionPadding={16}
       className={cn(
-        "game-tooltip z-50 rounded-md border border-border bg-popover p-4 text-base text-popover-foreground",
+        "game-tooltip z-50 border border-border bg-card text-left text-base text-card-foreground",
         className,
       )}
       {...props}

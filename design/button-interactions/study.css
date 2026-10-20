@@ -1,0 +1,104 @@
+.button-study {
+  padding: var(--space-10);
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-ui);
+  font-size: var(--text-body);
+  min-height: 100dvh;
+}
+.study-heading p,
+.study-sample p,
+.study-instructions,
+.button-study footer {
+  color: var(--muted-foreground);
+  font-size: var(--text-secondary);
+  line-height: 1.6;
+}
+.study-heading p {
+  margin-top: var(--space-2);
+}
+.study-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--screen-section-gap);
+  margin-block: var(--screen-section-gap);
+}
+.study-controls label {
+  display: flex;
+  align-items: center;
+  gap: var(--screen-item-gap);
+  min-height: var(--control-height);
+  cursor: pointer;
+}
+.study-instructions {
+  margin-bottom: var(--screen-section-gap);
+}
+.study-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-8);
+}
+.study-sample {
+  padding-block: var(--screen-section-gap);
+  border-top: 1px solid var(--border);
+}
+.study-sample header {
+  min-height: 100px;
+}
+.study-sample h2 {
+  font-size: var(--text-heading);
+  margin-bottom: var(--space-2);
+}
+.study-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--screen-section-gap);
+  padding: var(--space-3);
+}
+.study-action {
+  width: 240px;
+}
+.study-sample output {
+  display: block;
+  margin-top: var(--space-6);
+  font-size: var(--text-secondary);
+}
+.button-study footer {
+  margin-top: var(--screen-section-gap);
+}
+.button-study footer p + p {
+  margin-top: var(--space-2);
+}
+#root .button-study [data-treatment="neutral"] .study-action,
+#root .button-study [data-treatment="gold"] .study-action {
+  scale: 1;
+}
+.button-study [data-treatment="gold"] .study-action:not(:disabled):is(:hover, :active, [data-held="true"]),
+:root[data-focus="visible"] .button-study [data-treatment="gold"] .study-action:not(:disabled):focus {
+  border-color: var(--primary);
+}
+.button-study [data-treatment="neutral"] .study-action:not(:disabled):is(:active, [data-held="true"]) {
+  border-color: var(--muted-foreground);
+}
+.button-study
+  :is([data-treatment="neutral"], [data-treatment="gold"])
+  .study-action:not(:disabled):is(:active, [data-held="true"]) {
+  background: var(--muted);
+  transition-duration: 0s;
+}
+.button-study
+  :is([data-treatment="neutral"], [data-treatment="gold"])
+  .study-action.bg-primary:not(:disabled):is(:active, [data-held="true"]) {
+  background: color-mix(in srgb, var(--primary) 80%, var(--background));
+}
+#root .button-study[data-reduced="true"] .study-action {
+  scale: 1;
+  transition: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  #root .button-study .study-action {
+    scale: 1;
+    transition: none;
+  }
+}

@@ -1,6 +1,7 @@
-import { Button } from "../components/ui/button";
-import { Switch } from "../components/ui/switch";
+import { AudioLines, Music, Volume2, VolumeX } from "lucide-react";
+import { Slider } from "../components/ui/slider";
 import type { AudioPreferences } from "./audio-preferences";
+import { SettingRow, SettingToggle } from "./settings-controls";
 export function AudioSettings({
   value,
   update,
@@ -9,58 +10,44 @@ export function AudioSettings({
   update: (patch: Partial<AudioPreferences>) => void;
 }) {
   return (
-    <fieldset>
-      <legend>Audio</legend>
-      <label data-nav-row className="setting-row" htmlFor="sound-setting">
-        <span>Sound</span>
-        <Switch
-          id="sound-setting"
-          checked={value.enabled}
-          onCheckedChange={(enabled) => update({ enabled })}
-        />
-      </label>
+    <section aria-label="Audio">
+      <h2 className="settings-heading">Audio</h2>
+      <SettingToggle
+        icon={Volume2}
+        label="Sound"
+        checked={value.enabled}
+        onChange={(enabled) => update({ enabled })}
+      />
       {(
         [
-          ["master", "Master"],
-          ["music", "Music"],
-          ["effects", "Sound effects"],
+          ["master", "Master", Volume2],
+          ["music", "Music", Music],
+          ["effects", "Sound effects", AudioLines],
         ] as const
-      ).map(([key, label]) => (
-        <div data-nav-row key={key} className="setting-row" role="group" aria-label={`${label} volume`}>
-          <span>{label}</span>
+      ).map(([key, label, icon]) => (
+        <SettingRow key={key} icon={icon} label={label}>
           <div className="volume-controls">
-            <Button
-              variant="outline"
-              size="icon"
-              aria-label={`Decrease ${label} volume`}
-              disabled={value[key] === 0}
-              onClick={() => update({ [key]: Math.max(0, value[key] - 10) })}
-            >
-              −
-            </Button>
-            <output aria-live="polite" aria-label={`${label} volume value`}>
-              {value[key]}%
-            </output>
-            <Button
-              variant="outline"
-              size="icon"
-              aria-label={`Increase ${label} volume`}
-              disabled={value[key] === 100}
-              onClick={() => update({ [key]: Math.min(100, value[key] + 10) })}
-            >
-              +
-            </Button>
+            <Slider
+              min={0}
+              max={100}
+              step={10}
+              value={[value[key]]}
+              onValueChange={([volume]) => {
+                if (volume !== undefined) update({ [key]: volume });
+              }}
+              aria-label={`${label} volume`}
+              aria-valuetext={`${value[key]}%`}
+            />
+            <output aria-label={`${label} volume value`}>{value[key]}%</output>
           </div>
-        </div>
+        </SettingRow>
       ))}
-      <label data-nav-row className="setting-row" htmlFor="background-mute">
-        <span>Mute in background</span>
-        <Switch
-          id="background-mute"
-          checked={value.muteInBackground}
-          onCheckedChange={(muteInBackground) => update({ muteInBackground })}
-        />
-      </label>
-    </fieldset>
+      <SettingToggle
+        icon={VolumeX}
+        label="Mute in background"
+        checked={value.muteInBackground}
+        onChange={(muteInBackground) => update({ muteInBackground })}
+      />
+    </section>
   );
 }
