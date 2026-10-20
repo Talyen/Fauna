@@ -1,9 +1,10 @@
-import { existsSync, mkdirSync, readFileSync, symlinkSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, symlinkSync, realpathSync } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { git, worktrees } from "./lib/git.mjs";
 
 export function createWorktree(root, slug, base = "main") {
+  root = realpathSync(root);
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug ?? "") || slug.length > 64)
     throw new Error(
       "Use a lowercase task name with letters, numbers and single hyphens (at most 64 characters).",

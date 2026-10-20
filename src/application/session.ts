@@ -1,3 +1,4 @@
+import { createDiagnostics } from "./diagnostics";
 import { createStore } from "zustand/vanilla";
 import { createGame, dispatch } from "../game/engine";
 import { decodeSave, encodeSave } from "../game/save";
@@ -13,8 +14,13 @@ export interface SessionView {
   error: string;
   saveStatus: "saved" | "saving" | "error";
   events: GameEvent[];
+  committedCommand: Command | null;
 }
 export function createSession(platform: Platform, seed = 1) {
+  const diagnostics = createDiagnostics(
+    platform.diagnostics,
+    typeof __FAUNA_BUILD__ === "string" ? __FAUNA_BUILD__ : "test",
+  );
   const store = createStore<SessionView>(() => ({
     game: createGame(seed),
     ready: false,
@@ -25,6 +31,7 @@ export function createSession(platform: Platform, seed = 1) {
     error: "",
     saveStatus: "saved",
     events: [],
+    committedCommand: null,
   }));
   let writes = Promise.resolve();
   let disposed = false;
@@ -38,7 +45,8 @@ export function createSession(platform: Platform, seed = 1) {
         if (!disposed && store.getState().game.revision === game.revision)
           store.setState({ saveStatus: "saved", error: "" });
       })
-      .catch(() => {
+      .catch((error) => {
+        diagnostics.record("save-write", error, store.getState().game);
         if (!disposed)
           store.setState({ saveStatus: "error", error: "Could not save. Keep the game open and retry." });
       });
@@ -66,6 +74,7 @@ export function createSession(platform: Platform, seed = 1) {
           });
           return;
         } catch {
+          diagnostics.record("validation", "Invalid current-format save candidate.", store.getState().game);
           /* Try the next intact backup. */
         }
       }
@@ -76,7 +85,8 @@ export function createSession(platform: Platform, seed = 1) {
           ? "Your previous save could not be read. Start fresh to continue; the old data will be rotated into backups."
           : "",
       });
-    } catch {
+    } catch (error) {
+      diagnostics.record("save-read", error, store.getState().game);
       if (!disposed && token === generation)
         store.setState({
           ready: true,
@@ -96,6 +106,7 @@ export function createSession(platform: Platform, seed = 1) {
   const removeCloseListener = platform.onCloseRequested?.(prepareClose);
   return {
     store: { getState: store.getState, getInitialState: store.getInitialState, subscribe: store.subscribe },
+    diagnostics,
     load,
     command(command: Command) {
       const view = store.getState();
@@ -105,7 +116,12 @@ export function createSession(platform: Platform, seed = 1) {
         store.setState({ error: result.reason });
         return false;
       }
-      store.setState({ game: result.state, events: result.events, error: "" });
+      store.setState({
+        game: result.state,
+        events: result.events,
+        committedCommand: Object.freeze({ ...command }),
+        error: "",
+      });
       save(result.state);
       return true;
     },
@@ -129,6 +145,7 @@ export function createSession(platform: Platform, seed = 1) {
     },
     dispose() {
       disposed = true;
+      diagnostics.dispose();
       removeCloseListener?.();
       generation++;
       return writes;

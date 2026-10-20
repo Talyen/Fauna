@@ -43,13 +43,20 @@ export const TALENTS = KEYWORDS.flatMap((keyword) =>
     row: Math.floor(index / 2),
   })),
 );
+export function xpThreshold(points: number) {
+  return 10 * points * (points + 1) - 10 * Math.min(points, 2);
+}
 export function talentPoints(xp: number) {
-  return Math.floor((Math.sqrt(1 + 0.4 * xp) - 1) / 2);
+  if (!Number.isSafeInteger(xp) || xp < 10) return 0;
+  let points = Math.floor((Math.sqrt(1 + 0.4 * (xp + 20)) - 1) / 2);
+  while (points > 0 && xpThreshold(points) > xp) points--;
+  while (xpThreshold(points + 1) <= xp) points++;
+  return points;
 }
 export function keywordProgress(xp: number) {
   const points = talentPoints(xp),
-    start = 10 * points * (points + 1),
-    end = 10 * (points + 1) * (points + 2);
+    start = xpThreshold(points),
+    end = xpThreshold(points + 1);
   return { points, current: xp - start, required: end - start };
 }
 export function hasTalent(state: Pick<GameState, "talents">, keyword: Keyword, effect: TalentEffect) {

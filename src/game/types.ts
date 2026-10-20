@@ -47,7 +47,8 @@ export interface JourneySummary {
   lastBattle: { xp: KeywordXP; currency: number } | null;
 }
 export interface GameState {
-  version: 10;
+  version: 11;
+  discovery: { encountered: SpeciesId[]; recruited: SpeciesId[] };
   revision: number;
   rng: number;
   phase: "draft" | "teamSelection" | "battle" | "recruit" | "relic" | "victory" | "defeat";

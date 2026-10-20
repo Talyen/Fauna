@@ -51,7 +51,7 @@ describe("keyword progression and rewards", () => {
     expect(decodeSave(encodeSave(ended))).toEqual(ended);
   });
   it("uses increasing per-keyword thresholds, gates rows, and resets a whole category without losing XP", () => {
-    expect([19, 20, 59, 60, 119, 120].map(talentPoints)).toEqual([0, 1, 1, 2, 2, 3]);
+    expect([9, 10, 39, 40, 99, 100].map(talentPoints)).toEqual([0, 1, 1, 2, 2, 3]);
     let s = produce(run(), (d) => {
       d.keywordXP = { fire: 420, block: 20 };
     });

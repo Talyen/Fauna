@@ -2,7 +2,7 @@
 
 Adopt Alchemy's audio, volume controls, Collection discovery, talent XP curve, headless playthroughs, content validation, manifest-driven asset preparation, owned previews and worktrees, and local diagnostics. Keep Fauna's creature roster, free combat swaps, command ownership, fixed artwork sizes, shadcn controls, and lightweight local verification policy.
 
-This is an implementation plan. It does not change current gameplay or authorize pushes, publication, or broader local validation. References were checked against Alchemy `6222f0523` and Fauna `96aef22`. Alchemy is a source reference; Fauna will have no runtime dependency on its sibling checkout.
+Implementation is present on the task branch for all stages; local focused checks and media preparation are covered during handoff. Full CI, rendered review, listening/mix acceptance and physical platform checks remain pending. This plan records the delivery scope. It does not change current gameplay or authorize pushes, publication, or broader local validation. References were checked against Alchemy `6222f0523` and Fauna `96aef22`. Alchemy is a source reference; Fauna will have no runtime dependency on its sibling checkout.
 
 ## Scope and delivery order
 

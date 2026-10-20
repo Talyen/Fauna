@@ -58,7 +58,7 @@
   transition-duration: 180ms;
 }
 .mana-glint {
-  mask-image: url("/ui/mana/full.webp");
+  mask-image: var(--mana-full-image);
   mask-size: 100% 100%;
   mask-repeat: no-repeat;
   background: linear-gradient(115deg, transparent 42%, var(--mana-glint) 50%, transparent 58%);
@@ -96,10 +96,10 @@
 }
 
 .mana-full {
-  background: url("/ui/mana/full.webp") center / contain no-repeat;
+  background: var(--mana-full-image) center / contain no-repeat;
 }
 .mana-empty {
-  background: url("/ui/mana/empty.webp") center / contain no-repeat;
+  background: var(--mana-empty-image) center / contain no-repeat;
 }
 
 .mana-gem[data-preview-spent="true"] .mana-full {

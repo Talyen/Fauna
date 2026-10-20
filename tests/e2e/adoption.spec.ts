@@ -1,0 +1,20 @@
+import { test, expect } from "@playwright/test";
+test("Collection filtering, audio preferences, and diagnostics remain menu-driven", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Collection", exact: true }).click();
+  await page.getByRole("tab", { name: "Unknown", exact: true }).click();
+  await expect(page.getByRole("img", { name: "Locked species" })).toHaveCount(1);
+  await page.getByRole("button", { name: "Back", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Collection", exact: true })).toBeFocused();
+  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.getByRole("button", { name: "Decrease Master volume", exact: true }).click();
+  await expect(page.getByLabel("Master volume value", { exact: true })).toHaveText("40%");
+  await page.getByRole("switch", { name: "Mute in background", exact: true }).click();
+  await page.getByRole("button", { name: "Diagnostics", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Copy diagnostics", exact: true })).toBeVisible();
+  await page.screenshot({ path: "reports/adoption-settings.png", fullPage: true });
+  await page.reload();
+  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await expect(page.getByLabel("Master volume value", { exact: true })).toHaveText("40%");
+  await expect(page.getByRole("switch", { name: "Mute in background", exact: true })).not.toBeChecked();
+});

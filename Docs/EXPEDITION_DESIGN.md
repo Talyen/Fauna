@@ -44,7 +44,7 @@ These are the agreed directions from the design review. They supersede the proto
 - Each talent shows its icon, name, and full effect directly on the talent. Every description explicitly names its category keyword. All talents have distinct effects; do not repeat a shared talent set across keywords.
 - Clicking an available talent purchases it immediately, without a detail-dialog purchase step or confirmation.
 - Reset operates on the entire keyword category, refunding all spent points in that category while retaining its XP. Reset is available at any time, including during an journey; talent effects update immediately. Individual-talent refunds are not the chosen interaction.
-- Start with Alchemy's point pacing: the first point costs 20 keyword XP, then another 40, then 60, increasing by 20 each time. Total XP for point n is 10 × n × (n + 1). This is initial tuning for playtesting.
+- Use Alchemy’s current point pacing: cumulative thresholds are 10, 40, 100, 180, and 280 keyword XP. Total XP for point n is 10 × n × (n + 1) − 10 × min(n, 2). This is initial tuning for playtesting.
 - The approved catalog uses the seven damage types plus Block and Healing. Each category has ten unique talents in four widening rows of 1, 2, 3, and 4, following Alchemy. The current implementation still uses six shared talents per category in `src/game/progression.ts`; the new catalog and screen remain to be implemented.
 - Abandonment banks the XP earned by accepted plays, with no victory currency or relics. There are currently no automatic or repeated card plays; each accepted play awards keyword XP once.
 
@@ -76,7 +76,7 @@ Ordinary victory → shared Victory screen with recruitment (if available) → f
 Final victory or defeat → Journey results. Ending a started journey voluntarily also opens results, labeled Returned home. Ending an unfinished starter choice simply returns to the main menu.
 
 - Results show only the outcome, keyword XP and permanent currencies/resources/items earned. Do not show the team, creature unlocks, journey-only relics, location, or journey statistics. Currency is the only authored permanent resource currently; do not invent item or material rewards.
-- Keyword totals include all settled battles and XP banked when returning home. Follow Alchemy’s results presentation: keyword name, level (earned points + 1), and progress bar only. Hide numeric XP gains/fractions and points-earned lines here; the Talents screen owns point availability. This is a presentation change; Fauna retains its current 20/60/120 total XP thresholds. Talents remain menu-driven; never prompt purchases here.
+- Keyword totals include all settled battles and XP banked when returning home. Follow Alchemy’s results presentation: keyword name, level (earned points + 1), and progress bar only. Hide numeric XP gains/fractions and points-earned lines here; the Talents screen owns point availability. Fauna uses the current 10/40/100 total XP thresholds. Talents remain menu-driven; never prompt purchases here.
 - Banking and totals update atomically with accepted gameplay commands. Browsing results never grants rewards or saves. Report actual retained earnings at progression caps.
 - Results offer a single centered Main menu action. Start a new journey only from the main menu.
 - New journey resets journey totals and roster/relics while preserving permanent progress. Main menu can reopen the last results until a new journey begins; this is not a multi-journey history.

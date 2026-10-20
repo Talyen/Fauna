@@ -1,3 +1,4 @@
+import { assetUrl } from "./assets";
 import { Keyword as KeywordLabel, KeywordText } from "./keyword-text";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui/tabs";
 import { useLayoutEffect, useRef, useState } from "react";
@@ -38,7 +39,7 @@ export function TeamSelection({ game, send, inspect, deck }: Props & { deck: () 
             <div className="destination-option" key={offer.location}>
               <ArtCard
                 aspect="creature"
-                artwork={`./art/locations/${offer.location}.svg`}
+                artwork={assetUrl(`location.${offer.location}`)}
                 data-destination={offer.location}
                 aria-label={`Inspect ${location(offer.location)!.name}`}
                 onClick={() => inspect({ destination: offer.location })}
@@ -185,7 +186,7 @@ export function Rewards({ game, send, inspect }: Props) {
                       <TooltipTrigger asChild>
                         <ArtCard
                           aspect="action"
-                          artwork="./art/relic-placeholder.svg"
+                          artwork={assetUrl("relic.placeholder")}
                           className="relic-choice"
                           aria-label={`Choose ${relic.name}`}
                           onClick={() => send({ type: "chooseRelic", relic: id })}
@@ -336,9 +337,11 @@ export function Collection({
   inspect: Props["inspect"];
   back: () => void;
 }) {
-  const ordered = [...SPECIES].sort(
-    (a, b) => Number(game.unlocked.includes(b.id)) - Number(game.unlocked.includes(a.id)),
-  );
+  const [filter, setFilter] = useState("all");
+  const known = (id: SpeciesId) => game.unlocked.includes(id) || game.discovery.encountered.includes(id);
+  const ordered = [...SPECIES]
+    .filter((entry) => filter === "all" || (filter === "known" ? known(entry.id) : !known(entry.id)))
+    .sort((a, b) => Number(known(b.id)) - Number(known(a.id)));
   return (
     <main className="collection-screen">
       <header className="page-heading">
@@ -347,28 +350,38 @@ export function Collection({
           Back
         </Button>
       </header>
-      <div className="collection-grid">
-        {ordered.map((creature) =>
-          game.unlocked.includes(creature.id) ? (
-            <CreatureCard
-              key={creature.id}
-              kind={creature.id}
-              onClick={() => inspect({ species: creature.id })}
-              onInspect={() => inspect({ species: creature.id })}
-              label={`Inspect ${creature.name}`}
-            />
-          ) : (
-            <div key={creature.id} className="locked-species">
-              <ArtCard
-                aspect="creature"
-                artwork={`./art/${creature.id}.svg`}
-                presentation
-                aria-label="Locked species"
-              />
-            </div>
-          ),
-        )}
-      </div>
+      <Tabs value={filter} onValueChange={setFilter}>
+        <TabsList aria-label="Collection filter">
+          <TabsTrigger value="all">All</TabsTrigger>
+          <TabsTrigger value="known">Known</TabsTrigger>
+          <TabsTrigger value="unknown">Unknown</TabsTrigger>
+        </TabsList>
+        <TabsContent value={filter}>
+          <div className="collection-grid">
+            {ordered.map((creature) =>
+              known(creature.id) ? (
+                <CreatureCard
+                  key={creature.id}
+                  kind={creature.id}
+                  onClick={() => inspect({ species: creature.id })}
+                  onInspect={() => inspect({ species: creature.id })}
+                  label={`Inspect ${creature.name}`}
+                />
+              ) : (
+                <div key={creature.id} className="locked-species">
+                  <ArtCard
+                    aspect="creature"
+                    artwork={assetUrl(`creature.${creature.id}`)}
+                    presentation
+                    aria-label="Locked species"
+                  />
+                </div>
+              ),
+            )}
+          </div>
+          {ordered.length === 0 ? <p>No creatures in this view.</p> : null}
+        </TabsContent>
+      </Tabs>
     </main>
   );
 }

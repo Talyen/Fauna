@@ -1,3 +1,8 @@
+export interface DiagnosticPort {
+  read(): string | null;
+  write(data: string): void;
+  copy(data: string): Promise<void>;
+}
 export interface SaveCandidate {
   source: string;
   data: string;
@@ -12,6 +17,7 @@ export interface SteamCapabilities {
   achievements?: { unlock(id: string): Promise<void> };
 }
 export interface Platform {
+  diagnostics?: DiagnosticPort;
   saves: SaveStorage;
   steam: SteamCapabilities;
   desktop: boolean;

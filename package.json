@@ -22,10 +22,19 @@
     "test:desktop": "node scripts/smoke-desktop.mjs",
     "package:win": "npm run build && npm run check:bundle && electron-builder --win --x64 --dir",
     "verify": "node scripts/check.mjs",
-    "verify:full": "npm run check:full && npm run docs:check && npm run test:full -- --reporter=default --reporter=json --outputFile.json=reports/vitest.json && npm run build && npm run check:bundle && npm run test:e2e",
+    "verify:full": "npm run check:full && npm run docs:check && npm run content:audit && npm run test:full -- --reporter=default --reporter=json --outputFile.json=reports/vitest.json && npm run build && npm run check:bundle && npm run test:e2e",
     "worktree": "node scripts/worktree.mjs",
     "docs:check": "node scripts/check-docs.mjs",
-    "check:bundle": "node scripts/check-bundle-budget.mjs"
+    "check:bundle": "node scripts/check-bundle-budget.mjs",
+    "preview:task": "node scripts/preview.mjs",
+    "assets:prepare": "node scripts/assets.mjs --prepare",
+    "assets:check": "node scripts/assets.mjs --sources",
+    "assets:check:outputs": "node scripts/assets.mjs --outputs",
+    "content:audit": "node scripts/content-audit.mjs",
+    "balance:playthrough": "node scripts/run-playthrough.mjs",
+    "predev": "npm run assets:check:outputs",
+    "prebuild": "npm run assets:check:outputs",
+    "audio:review": "node scripts/audio-review.mjs"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.3.0",
