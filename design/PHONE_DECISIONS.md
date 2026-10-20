@@ -55,6 +55,63 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 - For combatant wind-up, swing and hit reactions, use the [Alchemy direction](combat-motion/README.md). This supersedes the unanswered choice between no recoil, 2px recoil and 4px recoil. No recoil-distance option was selected in that question.
 - Numbers must retain meaningful committed outcomes; motion never gates input or gameplay. Presentation-only grouping must not mutate events or extend expired feedback.
 
+## Status effects
+
+- Icons only: names, counts and explanations appear in immediate hover/focus tooltips, not beside the icons. Accessible descriptions retain the same details. This supersedes the earlier tentative icon-plus-count direction.
+- Fixed catalog order, not dynamic urgency sorting.
+- Newly added status: scale from 90% to 110%, then settle at normal size over 200ms.
+- Existing status count changes: a small icon pulse, without replaying the full entrance bounce; tooltip data updates immediately.
+- When the effect ends: 150ms fade-out. Reaching zero uses removal feedback rather than also triggering a count-change pulse.
+- Reduced motion makes entrance/removal immediate and suppresses the pulse.
+
+## Targeting
+
+- Highlight only the current target; other valid candidates retain their normal border.
+- A thin, steady muted-gold line connects acting creature and target. No line glow or animation.
+- Invalid targets use 45% opacity and remain inspectable.
+- Preserve the single highlighted-boundary rule when targeting overlaps selection or hover. Target validity and action acceptance remain gameplay-owned.
+
+## Rejected action-card input
+
+- Attempting to play an unavailable card gives a brief sideways shake. Sound is supplementary.
+- Reduced motion uses a static border cue instead of shaking; do not add an extra ring.
+- Rejected input cannot change committed gameplay, RNG, Mana or saves. No shake duration or distance was chosen in this phone question; existing bounded values remain the implementation baseline pending rendered review.
+
+## Interface audio
+
+- Menu and settings activation uses a quiet, soft click. Hover and keyboard/controller focus navigation remain silent.
+- Rejected actions use a short, soft denial cue distinct from activation. All cues respect the Sound setting.
+- Audition candidates from the existing local library at `~/Documents/Asset Library/Sounds/Game Sources`; preserve source originals and use the project's asset manifest/preparation workflow. Verified candidates include Alchemy's `interface/toggles/toggle_on_02.wav`, `toggle_off_02.wav` and `interface/feedback/denied.wav` under `Projects/Alchemy/Sound Effects`. Discovery does not constitute listening approval or selection of a specific clip.
+
+## Error messages
+
+- Use a Lucide warning icon alongside a concise, plain-language message. Offer a relevant action such as Retry when available.
+- Action errors appear inline beside the affected control and remain until resolved or retried. Global errors, such as a failed save, use a persistent notice with Retry when available.
+- Error messages appear immediately, with no entrance animation.
+- Warning icons use muted red; message text uses the normal light text color.
+- Essential meaning remains visible without sound.
+
+## Screen loading
+
+- When opening a screen, show a spinner only if loading lasts longer than 200ms. Content appears as soon as it is ready; the delay applies only to the loading indicator.
+- Use a small neutral spinner beside the visible label “Loading…”.
+- During refresh, keep existing content visible at normal contrast and show a small loading indicator nearby.
+
+## Mana crystals
+
+- Keep the existing Alchemy crystal artwork and use a subtle hover glint.
+- Card-cost previews softly dim the crystals that would be spent; previewing never spends Mana.
+- Spending fades to the spent appearance over 150ms; refilling fades to the full appearance over 150ms.
+- Committed Mana values update immediately. Reduced motion removes the glint and makes spending/refill appearance changes immediate.
+
+## Empty states
+
+- Use an icon only, with no visible message, accompanying action or hover/focus tooltip. Provide an accessible label that describes the empty state.
+- Empty-state icons are 24px and muted gray.
+- Center the icon within the empty content area. It appears immediately, has no hover visual change and is replaced immediately when content becomes available.
+
 ## Shared preferences
+
+Continue the phone review in batches of independent questions so the user can answer several choices per turn.
 
 Reduced motion makes switch/radio/dialog/progress transitions immediate and disables spatial combat movement. Essential state remains visible without sound. None of these choices authorizes dropping keyboard accessibility, native control behavior, fixed artwork dimensions or the single highlighted-boundary treatment for selected-plus-hovered controls. Fine visual details still need review at a computer.
