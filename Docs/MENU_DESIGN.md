@@ -16,7 +16,7 @@ Implemented direction from the design review.
 - Journey results reopens the most recent completed, defeated, or voluntarily ended journey until starting a new one. End journey on a started journey opens results; clearing an unfinished starter choice returns to the main menu.
 - Settings and Glossary open as centered dialogs; closing them returns to the menu.
 
-Collection uses a responsive artwork grid. Locked species are noninteractive. Menu order is Continue/New journey, optional Lineup between battles, Talents, Collection, Glossary, Settings, then End journey when applicable. Pause also offers Main menu; desktop adds Save & quit.
+Collection follows Alchemy’s centered title, tabs, two-row gallery and pagination layout. Back sits to the left of the centered heading. The gallery shows up to three creatures per row, reducing columns to fit while retaining fixed artwork sizes. It reserves two portrait rows and a pagination footer so partial pages and filters keep the controls stable. Changing filters starts at the first page. Locked species are noninteractive. Menu order is Continue/New journey, optional Lineup between battles, Talents, Collection, Glossary, Settings, then End journey when applicable. Pause also offers Main menu; desktop adds Save & quit.
 
 See [UI rules](UI.md) and [journey design](EXPEDITION_DESIGN.md) for shared interaction and progression decisions.
 

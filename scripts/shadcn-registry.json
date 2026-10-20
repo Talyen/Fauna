@@ -6,5 +6,6 @@
   "switch": "@radix-ui/react-switch",
   "tabs": "@radix-ui/react-tabs",
   "tooltip": "@radix-ui/react-tooltip",
-  "progress": "@radix-ui/react-progress"
+  "progress": "@radix-ui/react-progress",
+  "slider": "@radix-ui/react-slider"
 }
