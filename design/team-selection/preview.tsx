@@ -11,12 +11,12 @@ import "../../src/ui/styles.css";
 import "./selection.css";
 
 type Slot = { row: "active" | "reserve"; index: number };
-function TeamSelection() {
+function TeamSelection({ hints = false, sample = "" }: { hints?: boolean; sample?: string }) {
   const [roster, setRoster] = useState<Record<Slot["row"], SpeciesId[]>>({
     active: ["mossback", "emberfox", "stormfin"],
     reserve: ["silkmoth", "briartooth", "moonhart"],
   });
-  const [selected, setSelected] = useState<Slot | null>(null);
+  const [selected, setSelected] = useState<Slot | null>(sample ? { row: "active", index: 1 } : null);
   const [deckOpen, setDeckOpen] = useState(false);
   const [inspection, setInspection] = useState<SpeciesId | null>(null);
   const [ready, setReady] = useState(false);
@@ -76,7 +76,11 @@ function TeamSelection() {
           aria-label={name ?? `${species(kind).name}, ${slot?.row}`}
           aria-pressed={slot ? selected?.row === slot.row && selected.index === slot.index : undefined}
           className={
-            slot && selected?.row === slot.row && selected.index === slot.index ? "team-picked" : undefined
+            slot && selected?.row === slot.row && selected.index === slot.index
+              ? "selected"
+              : hints && slot && selected && selected.row !== slot.row
+                ? "team-swap-partner"
+                : undefined
           }
           onClick={() => (slot ? choose(slot) : setInspection(kind))}
           onContextMenu={(event) => {
@@ -86,24 +90,25 @@ function TeamSelection() {
           }}
         />
       </TooltipTrigger>
-      <TooltipContent>
+      <TooltipContent side={row === 0 ? "bottom" : "top"}>
         <CreatureDetails kind={kind} name={name} />
       </TooltipContent>
     </Tooltip>
   );
   return (
     <main className="team-sample" ref={board}>
+      {sample ? <h1 className="sample-label">{sample}</h1> : null}
       <section className="team-row" aria-label="Enemy lineup">
         {ENCOUNTERS[1].enemies.map((enemy, index) => tile(enemy.species, 0, index, undefined, enemy.name))}
       </section>
-      <section className="team-roster-group" aria-labelledby="active-label">
-        <h2 id="active-label">Active</h2>
+      <section className="team-roster-group" aria-labelledby={`${sample}-active-label`}>
+        <h2 id={`${sample}-active-label`}>Active</h2>
         <div className="team-row">
           {roster.active.map((kind, index) => tile(kind, 1, index, { row: "active", index }))}
         </div>
       </section>
-      <section className="team-roster-group" aria-labelledby="reserve-label">
-        <h2 id="reserve-label">Reserves</h2>
+      <section className="team-roster-group" aria-labelledby={`${sample}-reserve-label`}>
+        <h2 id={`${sample}-reserve-label`}>Reserves</h2>
         <div className="team-row team-reserve-row">
           {roster.reserve.map((kind, index) => tile(kind, 2, index, { row: "reserve", index }))}
         </div>
@@ -176,8 +181,17 @@ function TeamSelection() {
     </main>
   );
 }
+const compare = new URLSearchParams(location.search).has("compare");
+
 createRoot(document.getElementById("root")!).render(
-  <TooltipProvider delayDuration={300}>
-    <TeamSelection />
+  <TooltipProvider delayDuration={300} disableHoverableContent>
+    {compare ? (
+      <div className="swap-comparison app" data-input="pointer">
+        <TeamSelection hints sample="A · Partner outlines" />
+        <TeamSelection sample="B · Selection only" />
+      </div>
+    ) : (
+      <TeamSelection />
+    )}
   </TooltipProvider>,
 );

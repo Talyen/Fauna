@@ -54,3 +54,32 @@
 .team-inspection > .card-details {
   margin-top: 16px;
 }
+
+.swap-comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  min-height: 100dvh;
+}
+.swap-comparison .team-sample {
+  --team-card-width: min(280px, calc((50vw - 112px) / 3), calc((100dvh - 300px) * 4 / 8.16));
+  padding: var(--space-6);
+  gap: var(--space-6);
+}
+.sample-label {
+  margin: 0 auto var(--space-4);
+  font-size: var(--text-secondary);
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+.team-swap-partner {
+  outline: 1px solid var(--muted-foreground);
+  outline-offset: 4px;
+}
+@media (max-width: 900px) {
+  .swap-comparison {
+    grid-template-columns: 1fr;
+  }
+  .swap-comparison .team-sample {
+    --team-card-width: min(280px, calc((100vw - 112px) / 3), calc((100dvh - 300px) * 4 / 8.16));
+  }
+}

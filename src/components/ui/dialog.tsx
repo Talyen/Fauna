@@ -5,6 +5,7 @@ import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "./button";
 export const Dialog = DialogPrimitive.Root;
+export const DialogTrigger = DialogPrimitive.Trigger;
 export const DialogTitle = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>

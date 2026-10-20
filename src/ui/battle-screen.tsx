@@ -47,6 +47,7 @@ export function BattleScreen({
   controller,
   navigateFocus,
   onDenied,
+  actions,
 }: {
   game: GameState;
   send: (command: Command) => boolean;
@@ -56,6 +57,7 @@ export function BattleScreen({
   controller: boolean;
   navigateFocus: boolean;
   onDenied: (element: HTMLElement) => void;
+  actions?: ReactNode;
 }) {
   const [selected, setSelected] = useState<string | null>(null);
   const [remembered, setRemembered] = useState<{ enemy?: string; ally?: string }>({});
@@ -253,6 +255,7 @@ export function BattleScreen({
       <section className="hand-section" aria-label="Action hand">
         <div className="hand-toolbar">
           <ManaCrystals mana={battle.mana} previewCost={def?.cost ?? 0} />
+          {actions}
           <Button className="end-turn" onClick={() => play({ type: "endTurn" })}>
             End turn{controller ? " · Y" : ""}
           </Button>
