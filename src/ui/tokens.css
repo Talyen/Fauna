@@ -44,6 +44,10 @@
   --error: #ffc4ad;
   --notice: var(--secondary);
   --control-height: 44px;
+  --settings-dialog-width: 800px;
+  --settings-label-basis: 200px;
+  --settings-control-basis: 300px;
+  --settings-panel-min-height: 360px;
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;

@@ -2,17 +2,27 @@ import { Component, useId, useState, useSyncExternalStore, type ReactNode } from
 import type { Diagnostics } from "../application/diagnostics";
 import { Button } from "../components/ui/button";
 
-export function DiagnosticViewer({ diagnostics, desktop }: { diagnostics: Diagnostics; desktop: boolean }) {
+export function DiagnosticViewer({
+  diagnostics,
+  desktop,
+  collapsible = true,
+}: {
+  diagnostics: Diagnostics;
+  desktop: boolean;
+  collapsible?: boolean;
+}) {
   const entries = useSyncExternalStore(diagnostics.subscribe, diagnostics.snapshot);
   const [status, setStatus] = useState("");
   const [open, setOpen] = useState(false);
   const id = useId();
   return (
     <section className="diagnostic-viewer" data-nav-row aria-label="Local diagnostics">
-      <Button variant="ghost" aria-expanded={open} aria-controls={id} onClick={() => setOpen(!open)}>
-        Diagnostics
-      </Button>
-      <div id={id} hidden={!open}>
+      {collapsible ? (
+        <Button variant="ghost" aria-expanded={open} aria-controls={id} onClick={() => setOpen(!open)}>
+          Diagnostics
+        </Button>
+      ) : null}
+      <div id={id} hidden={collapsible && !open}>
         <Button
           variant="outline"
           onClick={() =>

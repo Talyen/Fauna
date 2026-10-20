@@ -505,6 +505,7 @@ test("settings and glossary return to the pause menu; End journey requires confi
   await resume(page);
   await page.getByRole("button", { name: "Open menu" }).click();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.getByRole("tab", { name: "Sound", exact: true }).click();
   await page.getByRole("switch", { name: "Sound", exact: true }).click();
   await page.keyboard.press("Escape");
   await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
@@ -755,6 +756,7 @@ test("real audio output, hit recoil, reduced motion, and mute follow combat outc
   expect((await observed()).impacts).toHaveLength(count);
   await page.getByRole("button", { name: "Open menu" }).click();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.getByRole("tab", { name: "Sound", exact: true }).click();
   await page.getByRole("switch", { name: "Sound", exact: true }).click();
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "Resume" }).click();
@@ -771,6 +773,7 @@ test("real audio output, hit recoil, reduced motion, and mute follow combat outc
   ).toBe(true);
   await page.reload();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.getByRole("tab", { name: "Sound", exact: true }).click();
   await expect(page.getByRole("switch", { name: "Sound", exact: true })).not.toBeChecked();
 });
 
@@ -855,24 +858,27 @@ test("shadcn tabs and settings retain native keyboard behavior and game navigati
   await expect(page.getByRole("tab", { name: "Ice", exact: true })).toBeFocused();
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.getByRole("tab", { name: "Sound", exact: true }).click();
   const sound = page.getByRole("switch", { name: "Sound", exact: true });
   await sound.focus();
   await page.keyboard.press("Space");
   await expect(sound).not.toBeChecked();
+  await page.getByRole("tab", { name: "Display", exact: true }).click();
   const small = page.getByRole("radio", { name: "100%", exact: true });
   await small.focus();
-  await page.keyboard.down("ArrowDown");
+  await page.keyboard.down("ArrowRight");
   await expect(page.getByRole("radio", { name: "125%", exact: true })).toBeChecked();
-  await page.keyboard.up("ArrowDown");
-  await page.keyboard.press("s");
+  await page.keyboard.up("ArrowRight");
+  await page.keyboard.press("d");
   await expect(page.getByRole("radio", { name: "150%", exact: true })).toBeFocused();
   await expect(page.getByRole("radio", { name: "150%", exact: true })).toBeChecked();
   await page.keyboard.press("Escape");
   await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
   await page.reload();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
-  await expect(sound).not.toBeChecked();
   await expect(page.getByRole("radio", { name: "150%", exact: true })).toBeChecked();
+  await page.getByRole("tab", { name: "Sound", exact: true }).click();
+  await expect(sound).not.toBeChecked();
 });
 
 test("End journey uses alert-dialog cancellation, trapping and outside-click protection", async ({
