@@ -83,25 +83,25 @@ const steps = [
 type StepId = (typeof steps)[number]["id"];
 type Picks = Partial<Record<StepId, string>>;
 const storageKey = "fauna-design-artwork-picks-v1";
-const defaults = {
+const defaults: Record<StepId, string> = {
   frame: "2",
   motion: "still",
   ringGap: "3",
   ringWidth: "2",
   unavailable: "",
   knockout: "",
-  selectedHover: "ring",
+  selectedHover: reviewedArtworkChoices.selectedHover,
 };
 function loadPicks(): Picks {
   try {
-    const saved = JSON.parse(localStorage.getItem(storageKey) ?? "{}");
+    const saved = { ...reviewedArtworkChoices, ...JSON.parse(localStorage.getItem(storageKey) ?? "{}") };
     return Object.fromEntries(
       steps.flatMap((step) =>
         (step.options as readonly string[]).includes(saved?.[step.id]) ? [[step.id, saved[step.id]]] : [],
       ),
     );
   } catch {
-    return {};
+    return { ...reviewedArtworkChoices };
   }
 }
 function Sample({
@@ -388,6 +388,9 @@ function ArtworkStudy() {
       {storageFailed ? (
         <p role="status">Browser storage is unavailable. Choices remain for this visit only.</p>
       ) : null}
+      <Button variant="outline" asChild>
+        <a href="/design/tab-interactions/index.html">Next batch: tabs</a>
+      </Button>
       <footer>
         <p>
           {stepId === "selectedHover"

@@ -18,3 +18,5 @@ These samples record reviewed composition choices. They are not current rendered
 - [Tooltip review batch](tooltip-interactions/README.md)
 
 - [Artwork interaction batch](artwork-interactions/README.md)
+
+- [Tab interaction batch](tab-interactions/README.md)

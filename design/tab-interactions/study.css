@@ -1,0 +1,104 @@
+.tab-study .study-grid {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+.tab-sample {
+  padding-block: var(--space-6);
+  --review-tab-gap: 4px;
+  --review-tab-padding: 12px;
+  --review-tab-duration: 150ms;
+}
+.tab-sample[data-gap="8"] {
+  --review-tab-gap: 8px;
+}
+.tab-sample[data-gap="12"] {
+  --review-tab-gap: 12px;
+}
+.tab-sample[data-padding="16"] {
+  --review-tab-padding: 16px;
+}
+.tab-sample[data-padding="20"] {
+  --review-tab-padding: 20px;
+}
+.tab-sample[data-timing="0"] {
+  --review-tab-duration: 0s;
+}
+.tab-sample[data-timing="100"] {
+  --review-tab-duration: 100ms;
+}
+.tab-strip-width {
+  min-width: 0;
+}
+.tab-strip-width[data-narrow="true"] {
+  width: 260px;
+  max-width: 100%;
+}
+#root .tab-study .review-tab-list {
+  display: flex;
+  justify-content: flex-start;
+  gap: var(--review-tab-gap);
+  overflow-x: auto;
+  max-width: 100%;
+  padding: var(--space-3);
+  background: var(--secondary);
+}
+#root .tab-study .review-tab {
+  flex-shrink: 0;
+  gap: var(--space-2);
+  min-height: var(--control-height);
+  padding-inline: var(--review-tab-padding);
+  border: 2px solid transparent;
+  background: transparent;
+  color: var(--muted-foreground);
+  box-shadow: none;
+  outline: none;
+  transition:
+    background-color var(--review-tab-duration),
+    border-color var(--review-tab-duration),
+    color var(--review-tab-duration);
+}
+#root .tab-study .review-tab svg {
+  width: 20px;
+  height: 20px;
+}
+#root .tab-study .review-tab[data-state="active"] {
+  background: var(--background);
+  color: var(--foreground);
+  border-color: var(--primary);
+}
+#root .tab-study [data-fill="charcoal"] .review-tab[data-state="active"] {
+  background: var(--muted);
+}
+#root .tab-study [data-fill="gold"] .review-tab[data-state="active"] {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+#root .tab-study [data-hover="subtle"] .review-tab[data-state="inactive"]:hover {
+  background: var(--muted);
+  color: var(--foreground);
+}
+#root .tab-study [data-hover="stronger"] .review-tab[data-state="inactive"]:hover {
+  background: var(--accent);
+  color: var(--foreground);
+}
+#root .tab-study .review-tab[data-state="active"]:hover {
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+:root[data-focus="visible"] #root .tab-study .review-tab:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+  border-color: transparent;
+  box-shadow: none;
+}
+#root .tab-study .review-tab-panel {
+  padding-block: var(--space-4);
+  min-height: var(--control-height);
+  box-shadow: none;
+}
+#root .tab-study .tab-sample[data-reduced="true"] .review-tab {
+  transition: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  #root .tab-study .review-tab {
+    transition: none;
+  }
+}

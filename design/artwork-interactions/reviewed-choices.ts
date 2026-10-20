@@ -6,4 +6,5 @@ export const reviewedArtworkChoices = {
   ringWidth: "2",
   unavailable: "45",
   knockout: "45",
+  selectedHover: "stronger",
 } as const;
