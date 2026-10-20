@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Button } from "../../src/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../src/components/ui/tooltip";
@@ -18,6 +18,7 @@ afterEach(() => {
   cleanup();
   delete document.documentElement.dataset.focus;
   vi.unstubAllGlobals();
+  vi.useRealTimers();
 });
 
 function Details() {
@@ -34,6 +35,28 @@ function Details() {
 }
 
 describe("shared hover details", () => {
+  it("retains the native hover delay when immediate pointer restoration is disabled", () => {
+    vi.useFakeTimers();
+    render(
+      <TooltipProvider delayDuration={200}>
+        <Tooltip>
+          <TooltipTrigger asChild reopenOnPointerMove={false}>
+            <Button>Delayed details</Button>
+          </TooltipTrigger>
+          <TooltipContent>Delayed information</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>,
+    );
+    const trigger = screen.getByRole("button");
+    const movement = new Event("pointermove", { bubbles: true });
+    Object.defineProperties(movement, { pointerType: { value: "mouse" }, buttons: { value: 0 } });
+    fireEvent(trigger, movement);
+    act(() => vi.advanceTimersByTime(199));
+    expect(screen.queryByRole("tooltip")).toBeNull();
+    act(() => vi.advanceTimersByTime(1));
+    expect(screen.getByRole("tooltip")).toBeTruthy();
+  });
+
   it("dismisses on activation and restores on a fresh mouse move without leaving the card", async () => {
     render(<Details />);
     const user = userEvent.setup();

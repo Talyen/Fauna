@@ -219,8 +219,8 @@ function IconStudy() {
             state: these buttons issue commands.
           </p>
           <p>
-            Next: {hitAreaStep ? "tooltip timing" : "hit area"}, then a combined in-context review. No game UI
-            or game saves change. Mouse/keyboard only; controller review is pending.
+            Next: {hitAreaStep ? "the tooltip review batch" : "hit area"}, then a combined in-context review.
+            No game UI or game saves change. Mouse/keyboard only; controller review is pending.
           </p>
           <Button variant="outline" asChild>
             <a
@@ -233,6 +233,11 @@ function IconStudy() {
               {hitAreaStep ? "Review icon size" : "Next: hit area"}
             </a>
           </Button>
+          {hitAreaStep ? (
+            <Button asChild>
+              <a href="/design/tooltip-interactions/index.html">Next: tooltip review batch</a>
+            </Button>
+          ) : null}
         </footer>
       </main>
     </TooltipProvider>

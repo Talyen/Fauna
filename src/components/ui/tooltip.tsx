@@ -49,8 +49,8 @@ export function Tooltip({
 
 export const TooltipTrigger = React.forwardRef<
   React.ElementRef<typeof TooltipPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Trigger>
->(({ onFocus, onPointerMove, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Trigger> & { reopenOnPointerMove?: boolean }
+>(({ onFocus, onPointerMove, reopenOnPointerMove = true, ...props }, ref) => {
   const changeOpen = React.useContext(TooltipInteraction);
   return (
     <TooltipPrimitive.Trigger
@@ -63,7 +63,12 @@ export const TooltipTrigger = React.forwardRef<
       onPointerMove={(event) => {
         onPointerMove?.(event);
         // A fresh mouse move restores details dismissed by selecting the same card.
-        if (!event.defaultPrevented && event.pointerType === "mouse" && event.buttons === 0)
+        if (
+          reopenOnPointerMove &&
+          !event.defaultPrevented &&
+          event.pointerType === "mouse" &&
+          event.buttons === 0
+        )
           changeOpen?.(true);
       }}
     />

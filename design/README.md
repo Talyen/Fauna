@@ -14,3 +14,5 @@ These samples record reviewed composition choices. They are not current rendered
 - [Interactive UI review process and complete element queue](UI_REVIEW.md)
 
 - [Interactive icon button sizes](icon-buttons/README.md)
+
+- [Tooltip review batch](tooltip-interactions/README.md)

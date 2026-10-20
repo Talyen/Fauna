@@ -1,0 +1,38 @@
+.tooltip-demo {
+  padding-block: 72px var(--space-6);
+}
+.tooltip-review-content[data-state="instant-open"],
+.tooltip-review-content[data-state="delayed-open"] {
+  animation: none;
+}
+.tooltip-review-content[data-state="closed"] {
+  animation: none;
+}
+.tooltip-review-content[data-fade="100"]:is([data-state="instant-open"], [data-state="delayed-open"]) {
+  animation: tooltip-review-fade 100ms ease-out;
+}
+.tooltip-review-content[data-fade="150"]:is([data-state="instant-open"], [data-state="delayed-open"]) {
+  animation: tooltip-review-fade 150ms ease-out;
+}
+.tooltip-review-content[data-border="lighter"] {
+  border-color: var(--muted-foreground);
+}
+.tooltip-review-content[data-border="gold"] {
+  border-color: var(--primary);
+}
+.tooltip-review-content[data-reduced="true"] {
+  animation: none !important;
+}
+@keyframes tooltip-review-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tooltip-review-content {
+    animation: none !important;
+  }
+}

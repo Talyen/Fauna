@@ -11,3 +11,5 @@ The size choice persists in browser storage under `fauna-design-icon-size-v1`; s
 Open `/design/icon-buttons/index.html?step=hit-area`. Compare 44px, 48px and 52px square buttons with the same reviewed 20px glyph, icons and interaction treatment. Only the button dimensions change. Visible surfaces match clickable boundaries; there is no invisible padding. Dimensions describe the resting button; chosen hover growth and pressed shrink still apply. The recommendation is 44px to match existing control height; larger options trade space for easier pointing.
 
 Hit-area preferences use a separate browser-storage key, `fauna-design-icon-hit-area-v1`. No option is selected in advance. The icon-size review remains accessible using Review icon size; its stored preference is preserved. Other state previews remain identical across all candidates.
+
+The user chose a 44px square hit area on 2026-10-20. The [tooltip review batch](../tooltip-interactions/README.md) holds that hit area and the reviewed 20px icon constant while providing several independent decisions back to back.
