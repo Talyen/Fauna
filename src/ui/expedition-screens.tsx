@@ -2,7 +2,7 @@ import { assetUrl } from "./assets";
 import { Keyword as KeywordLabel, KeywordText } from "./keyword-text";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui/tabs";
 import { useLayoutEffect, useRef, useState } from "react";
-import { Check, Sparkles } from "lucide-react";
+import { ArrowLeft, ChevronLeft, ChevronRight, Check, Sparkles } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../components/ui/tooltip";
 import { ActionCard, CreatureCard } from "./cards";
@@ -350,48 +350,106 @@ export function Collection({
   back: () => void;
 }) {
   const [filter, setFilter] = useState("all");
+  const [page, setPage] = useState(0);
+  const [columns, setColumns] = useState(3);
+  const gridRef = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+    const measure = () => {
+      const tile = grid.querySelector(".creature-card");
+      const width = tile?.getBoundingClientRect().width ?? 0;
+      if (!width) return;
+      const gap = parseFloat(getComputedStyle(grid).columnGap) || 0;
+      setColumns(Math.max(1, Math.min(3, Math.floor((grid.clientWidth + gap + 0.5) / (width + gap)))));
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(grid);
+    return () => observer.disconnect();
+  }, [filter]);
   const known = (id: SpeciesId) => game.unlocked.includes(id) || game.discovery.encountered.includes(id);
   const ordered = [...SPECIES]
     .filter((entry) => filter === "all" || (filter === "known" ? known(entry.id) : !known(entry.id)))
     .sort((a, b) => Number(known(b.id)) - Number(known(a.id)));
+  const pageSize = columns * 2;
+  const totalPages = Math.max(1, Math.ceil(ordered.length / pageSize));
+  const activePage = Math.min(page, totalPages - 1);
+  if (page !== activePage) setPage(activePage);
   return (
     <main className="collection-screen">
-      <header className="page-heading">
-        <h1>Collection</h1>
-        <Button variant="ghost" onClick={back}>
-          Back
+      <header className="collection-heading">
+        <Button variant="ghost" size="icon" onClick={back} aria-label="Back">
+          <ArrowLeft aria-hidden="true" />
         </Button>
+        <h1>Collection</h1>
       </header>
-      <Tabs value={filter} onValueChange={setFilter}>
+      <Tabs
+        className="collection-tabs"
+        value={filter}
+        onValueChange={(value) => {
+          setFilter(value);
+          setPage(0);
+        }}
+      >
         <TabsList aria-label="Collection filter">
           <TabsTrigger value="all">All</TabsTrigger>
           <TabsTrigger value="known">Known</TabsTrigger>
           <TabsTrigger value="unknown">Unknown</TabsTrigger>
         </TabsList>
-        <TabsContent value={filter}>
-          <div className="collection-grid">
-            {ordered.map((creature) =>
-              known(creature.id) ? (
-                <CreatureCard
-                  key={creature.id}
-                  kind={creature.id}
-                  onClick={() => inspect({ species: creature.id })}
-                  onInspect={() => inspect({ species: creature.id })}
-                  label={`Inspect ${creature.name}`}
-                />
-              ) : (
-                <div key={creature.id} className="locked-species">
-                  <ArtCard
-                    aspect="creature"
-                    artwork={assetUrl(`creature.${creature.id}`)}
-                    presentation
-                    aria-label="Locked species"
+        <TabsContent className="collection-content" value={filter}>
+          <div className="collection-gallery">
+            <div className="collection-grid" ref={gridRef}>
+              {ordered.slice(activePage * pageSize, (activePage + 1) * pageSize).map((creature) =>
+                known(creature.id) ? (
+                  <CreatureCard
+                    key={creature.id}
+                    kind={creature.id}
+                    onClick={() => inspect({ species: creature.id })}
+                    onInspect={() => inspect({ species: creature.id })}
+                    label={`Inspect ${creature.name}`}
                   />
-                </div>
-              ),
-            )}
+                ) : (
+                  <div key={creature.id} className="locked-species">
+                    <ArtCard
+                      aspect="creature"
+                      artwork={assetUrl(`creature.${creature.id}`)}
+                      presentation
+                      aria-label="Locked species"
+                    />
+                  </div>
+                ),
+              )}
+            </div>
+            {ordered.length === 0 ? <p>No creatures in this view.</p> : null}
           </div>
-          {ordered.length === 0 ? <p>No creatures in this view.</p> : null}
+          <nav className="collection-pagination" aria-label="Collection pages">
+            {totalPages > 1 ? (
+              <>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  aria-label="Previous page"
+                  disabled={activePage === 0}
+                  onClick={() => setPage(activePage - 1)}
+                >
+                  <ChevronLeft aria-hidden="true" />
+                </Button>
+                <span role="status" aria-live="polite">
+                  {activePage + 1} / {totalPages}
+                </span>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  aria-label="Next page"
+                  disabled={activePage === totalPages - 1}
+                  onClick={() => setPage(activePage + 1)}
+                >
+                  <ChevronRight aria-hidden="true" />
+                </Button>
+              </>
+            ) : null}
+          </nav>
         </TabsContent>
       </Tabs>
     </main>
