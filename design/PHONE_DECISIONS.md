@@ -129,6 +129,13 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 - Keyboard/controller focus stays on the paging control rather than moving to the first creature.
 - Hide unavailable Previous/Next controls. If the focused paging control disappears at a boundary, move focus to the remaining paging control; if neither remains, use the Collection filter control as the fallback. Never leave focus on a removed element.
 
+## Lineup and Swap
+
+- The first selected creature uses the established gold selection ring plus a slight lift. Lift distance remains undecided.
+- Hovering the selected creature strengthens the same ring, preserving the single highlighted-boundary treatment.
+- Unavailable swap choices use 45% opacity and remain inspectable.
+- After a successful swap, animate creatures between positions over 150ms. Committed gameplay updates immediately; motion is presentation-only, never blocks input and is skipped under reduced motion.
+
 ## Empty states
 
 - Use an icon only, with no visible message, accompanying action or hover/focus tooltip. Provide an accessible label that describes the empty state.
