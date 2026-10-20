@@ -91,6 +91,10 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 - Warning icons use muted red; message text uses the normal light text color.
 - Essential meaning remains visible without sound.
 
+## Screen loading
+
+- When opening a screen, show a spinner only if loading lasts longer than 200ms. Content appears as soon as it is ready; the delay applies only to the loading indicator.
+
 ## Shared preferences
 
 Reduced motion makes switch/radio/dialog/progress transitions immediate and disables spatial combat movement. Essential state remains visible without sound. None of these choices authorizes dropping keyboard accessibility, native control behavior, fixed artwork dimensions or the single highlighted-boundary treatment for selected-plus-hovered controls. Fine visual details still need review at a computer.
