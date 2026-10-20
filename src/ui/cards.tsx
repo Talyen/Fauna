@@ -1,12 +1,12 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { Heart, Shield, Crosshair } from "lucide-react";
+import { BattleReadout } from "./target-preview";
 import { ArtCard } from "./art-card";
 import { ActionDetails, CreatureDetails } from "./card-details";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../components/ui/tooltip";
 import { actionValue } from "../game/rules";
 import { cardText, definition, species } from "../game/content";
 import type { SpeciesId } from "../game/content";
-import type { Card, Creature, Enemy } from "../game/types";
+import type { Card, Creature, Enemy, GameState } from "../game/types";
 type CreatureProps = {
   kind: SpeciesId;
   name?: string;
@@ -19,7 +19,6 @@ type CreatureProps = {
   onClick?: () => void;
   onInspect?: () => void;
   label?: string;
-  intent?: ReactNode;
   presentation?: boolean;
   enemyId?: string;
   actorId?: string;
@@ -28,7 +27,9 @@ type CreatureProps = {
   feedback?: ReactNode;
   cards?: readonly Card[];
   actor?: Creature;
+  modifiers?: GameState;
   tooltips?: boolean;
+  readout?: boolean;
 };
 export function CreatureCard({
   kind,
@@ -42,7 +43,6 @@ export function CreatureCard({
   onClick,
   onInspect,
   label,
-  intent,
   presentation = false,
   enemyId,
   actorId,
@@ -52,6 +52,8 @@ export function CreatureCard({
   cards,
   actor,
   tooltips = true,
+  readout = true,
+  modifiers,
 }: CreatureProps) {
   const [tooltipOpen, setTooltipOpen] = useState(false);
   useEffect(() => {
@@ -88,7 +90,6 @@ export function CreatureCard({
   );
   return (
     <div className={`creature-wrap ${health === 0 ? "knocked-out" : ""}`} data-actor-id={actorId ?? enemyId}>
-      {intent ? <div className="intent">{intent}</div> : null}
       {presentation ? (
         artwork
       ) : (
@@ -104,32 +105,15 @@ export function CreatureCard({
               marks={marks}
               cards={cards}
               actor={actor}
+              modifiers={modifiers}
             />
-            {intent ? <p>{intent}</p> : null}
           </TooltipContent>
         </Tooltip>
       )}
       {preview ? (
         preview
-      ) : health !== undefined && (actorId || enemyId) ? (
-        <div className="creature-readout">
-          <span className="health-number" aria-label={`${health} of ${maxHealth ?? info.health} health`}>
-            <Heart aria-hidden="true" />
-            {health}/{maxHealth ?? info.health}
-          </span>
-          {block > 0 ? (
-            <span className="block-badge" aria-label={`${block} block`}>
-              <Shield aria-hidden="true" />
-              {block}
-            </span>
-          ) : null}
-          {marks > 0 ? (
-            <span className="mark-badge" aria-label={`${marks} marks`}>
-              <Crosshair aria-hidden="true" />
-              {marks}
-            </span>
-          ) : null}
-        </div>
+      ) : readout && health !== undefined && (actorId || enemyId) ? (
+        <BattleReadout health={health} maxHealth={maxHealth ?? info.health} block={block} marks={marks} />
       ) : null}
       {feedback}
     </div>
@@ -153,12 +137,8 @@ export function AllyCard({
 }
 export function EnemyCard({
   enemy,
-  intent,
   ...props
-}: { enemy: Enemy; intent: ReactNode } & Omit<
-  CreatureProps,
-  "kind" | "health" | "maxHealth" | "marks" | "name" | "intent"
->) {
+}: { enemy: Enemy } & Omit<CreatureProps, "kind" | "health" | "maxHealth" | "marks" | "name">) {
   return (
     <CreatureCard
       kind={enemy.species}
@@ -167,7 +147,6 @@ export function EnemyCard({
       health={enemy.health}
       maxHealth={enemy.maxHealth}
       marks={enemy.marks}
-      intent={enemy.health > 0 ? intent : undefined}
       {...props}
     />
   );
@@ -181,7 +160,7 @@ export function ActionCard({
   ownerName,
   presentation = false,
   label,
-  upgrade = false,
+  modifiers,
   actor,
   tooltips = true,
 }: {
@@ -193,7 +172,7 @@ export function ActionCard({
   ownerName: string;
   presentation?: boolean;
   label?: string;
-  upgrade?: boolean;
+  modifiers?: GameState;
   actor?: Creature;
   tooltips?: boolean;
 }) {
@@ -213,7 +192,7 @@ export function ActionCard({
       data-effect={def.effect}
       aria-label={
         label ??
-        `${def.name}${card.level ? ` +${card.level}` : ""}, ${ownerName}, ${def.cost} mana, ${cardText(def, card.level, actionValue(card, actor ?? { species: def.species, attacked: false }))}`
+        `${def.name}${card.level ? ` +${card.level}` : ""}, ${ownerName}, ${def.cost} mana, ${cardText(def, card.level, actionValue(card, actor ?? { species: def.species, attacked: false }, modifiers))}`
       }
       aria-pressed={presentation ? undefined : selected}
       aria-disabled={presentation ? undefined : disabled}
@@ -238,19 +217,8 @@ export function ActionCard({
     <Tooltip open={tooltips && tooltipOpen} onOpenChange={(open) => setTooltipOpen(tooltips && open)}>
       <TooltipTrigger asChild>{artwork}</TooltipTrigger>
       <TooltipContent>
-        <ActionDetails card={card} ownerName={ownerName} actor={actor} />
-        {upgrade ? (
-          card.level >= 3 ? (
-            <p>Maximum upgrade.</p>
-          ) : (
-            <>
-              <p>After upgrade:</p>
-              <ActionDetails card={{ ...card, level: card.level + 1 }} ownerName={ownerName} actor={actor} />
-            </>
-          )
-        ) : disabled ? (
-          <p>Not enough mana.</p>
-        ) : null}
+        <ActionDetails card={card} ownerName={ownerName} actor={actor} modifiers={modifiers} />
+        {disabled ? <p>Not enough mana.</p> : null}
       </TooltipContent>
     </Tooltip>
   );

@@ -73,7 +73,7 @@ describe("game commands", () => {
     let initial = createGame(42);
     for (const kind of ["briartooth", "emberfox", "stormfin"] as const)
       initial = accept(initial, { type: "draft", species: kind });
-    initial = accept(initial, { type: "start" });
+    initial = accept(accept(initial, { type: "start" }), { type: "beginBattle" });
     const s = decodeSave(
       encodeSave(
         produce(initial, (d) => {
@@ -127,7 +127,8 @@ describe("game commands", () => {
       d.battle!.enemies[0]!.damage = 100;
     });
     for (let i = 0; i < 3 && s.phase === "battle"; i++) s = accept(s, { type: "endTurn" });
-    expect(s.phase).toBe("defeat");
+    expect(s.phase).toBe("reward");
+    expect(s.reward!.outcome).toBe("defeat");
     expect(dispatch(s, { type: "endTurn" }).accepted).toBe(false);
   });
   it("restores all creatures after victory and resumes at a reward", () => {
@@ -137,39 +138,38 @@ describe("game commands", () => {
     expect(decodeSave(encodeSave(s))).toEqual(s);
     expect(dispatch(s, { type: "play", cardId: s.cards[0]!.id, targetId: "enemy-0" }).accepted).toBe(false);
   });
-  it("recruitment replaces only one creature’s cards and clears their upgrades", () => {
-    let s = winBattle();
-    s = produce(s, (d) => {
-      d.cards.filter((c) => c.ownerId === "ally-0").forEach((c) => (c.level = 2));
-    });
-    const retained = s.cards.filter((c) => c.ownerId !== "ally-0");
-    s = accept(s, { type: "recruit", species: "silkmoth", replaceId: "ally-0" });
-    expect(s.encounter).toBe(1);
-    expect(s.team[0]!.species).toBe("silkmoth");
-    expect(
-      s.cards
-        .filter((c) => c.ownerId === "ally-0")
-        .every((c) => c.level === 0 && definition(c.definitionId).species === "silkmoth"),
-    ).toBe(true);
-    expect(s.cards.filter((c) => c.ownerId !== "ally-0")).toEqual(retained);
-    expect(dispatch(s, { type: "recruit", species: "briartooth", replaceId: "ally-0" }).accepted).toBe(false);
+  it("recruits a defeated species into reserves and swaps its kit before the next battle", () => {
+    let s = accept(winBattle(), { type: "continueReward" });
+    expect(dispatch(s, { type: "recruit", species: "silkmoth" }).accepted).toBe(false);
+    s = accept(s, { type: "recruit", species: "briartooth" });
+    expect(s.roster).toHaveLength(4);
+    expect(s.team[0]!.species).toBe("mossback");
+    s = accept(s, { type: "skipRelic" });
+    s = accept(s, { type: "swap", activeId: "ally-0", reserve: "briartooth" });
+    expect(s.team[0]!.species).toBe("briartooth");
+    expect(s.cards.some((c) => c.definitionId.startsWith("mossback"))).toBe(false);
+    expect(decodeSave(encodeSave(s))).toEqual(s);
   });
-  it("upgrades once, rejects duplicate rewards, unlocks Moonhart once, and preserves discoveries", () => {
-    let s = winBattle();
-    const card = s.cards[0]!;
-    s = accept(s, { type: "upgrade", cardId: card.id });
-    expect(s.cards[0]!.level).toBe(1);
-    expect(dispatch(s, { type: "upgrade", cardId: card.id }).accepted).toBe(false);
-    s = winBattle(s);
-    s = accept(s, { type: "upgrade", cardId: card.id });
-    s = winBattle(s);
+  it("settles rewards once, unlocks Moonhart once, and preserves permanent progress", () => {
+    let s = run();
+    for (let battle = 0; battle < 3; battle++) {
+      s = winBattle(s);
+      const bank = s.currency;
+      s = accept(s, { type: "continueReward" });
+      expect(dispatch(s, { type: "continueReward" }).accepted).toBe(false);
+      expect(s.currency).toBe(bank);
+      if (s.phase === "recruit") s = accept(s, { type: "skipRecruit" });
+      if (s.phase === "relic") s = accept(s, { type: "skipRelic" });
+      if (s.phase === "teamSelection") s = accept(s, { type: "beginBattle" });
+    }
     expect(s.phase).toBe("victory");
     expect(s.wins).toBe(1);
     expect(s.unlocked.filter((id) => id === "moonhart")).toHaveLength(1);
+    const bank = s.currency;
     s = accept(s, { type: "newRun", seed: 123 });
-    expect(s.phase).toBe("draft");
+    expect(s.currency).toBe(bank);
     expect(s.unlocked).toContain("moonhart");
-    expect(s.wins).toBe(1);
+    expect(s.roster).toEqual([]);
   });
   it("replays identical seeds and commands with identical results through complete expeditions", () => {
     let a = run(7),
@@ -193,7 +193,7 @@ describe("game commands", () => {
           });
           for (const index of [first, second, third])
             s = accept(s, { type: "draft", species: SPECIES[index]!.id });
-          s = accept(s, { type: "start" });
+          s = accept(accept(s, { type: "start" }), { type: "beginBattle" });
           for (let i = 0; i < 180 && !["victory", "defeat"].includes(s.phase); i++) {
             s = accept(s, policy(s));
             decodeSave(encodeSave(s));
@@ -237,7 +237,7 @@ describe("creature traits and deck circulation", () => {
     let s = createGame(5);
     for (const kind of ["stormfin", "silkmoth", "mossback"] as const)
       s = accept(s, { type: "draft", species: kind });
-    s = accept(s, { type: "start" });
+    s = accept(accept(s, { type: "start" }), { type: "beginBattle" });
     const mark = s.cards.find((c) => c.definitionId === "stormfin-mark")!,
       heal = s.cards.find((c) => c.definitionId === "silkmoth-heal")!;
     s = produce(s, (d) => {
@@ -263,7 +263,7 @@ describe("creature traits and deck circulation", () => {
     });
     for (const kind of ["briartooth", "moonhart", "mossback"] as const)
       s = accept(s, { type: "draft", species: kind });
-    s = accept(s, { type: "start" });
+    s = accept(accept(s, { type: "start" }), { type: "beginBattle" });
     expect(s.team[1]!.block).toBe(4);
     s = produce(s, (d) => {
       d.battle!.enemies.forEach((e) => (e.targetId = "ally-0"));

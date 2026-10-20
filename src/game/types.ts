@@ -1,4 +1,5 @@
 import type { SpeciesId, DamageType } from "./content";
+import type { Keyword, KeywordXP, RelicId } from "./progression";
 export interface Creature {
   id: string;
   species: SpeciesId;
@@ -30,26 +31,47 @@ export interface Battle {
   discard: string[];
   enemies: Enemy[];
 }
+export interface BattleReward {
+  xp: KeywordXP;
+  currency: number;
+  recruits: SpeciesId[];
+  relics: RelicId[];
+  outcome: "next" | "victory" | "defeat";
+}
 export interface GameState {
-  version: 2;
+  version: 3;
   revision: number;
   rng: number;
-  phase: "draft" | "battle" | "reward" | "victory" | "defeat";
+  phase: "draft" | "teamSelection" | "battle" | "reward" | "recruit" | "relic" | "victory" | "defeat";
   unlocked: SpeciesId[];
   wins: number;
   selected: SpeciesId[];
+  roster: SpeciesId[];
   team: Creature[];
   cards: Card[];
   encounter: number;
   battle: Battle | null;
+  keywordXP: KeywordXP;
+  battleXP: KeywordXP;
+  talents: string[];
+  currency: number;
+  relics: RelicId[];
+  reward: BattleReward | null;
 }
 export type Command =
   | { type: "draft"; species: SpeciesId }
   | { type: "start" }
+  | { type: "beginBattle" }
+  | { type: "swap"; activeId: string; reserve: SpeciesId }
   | { type: "play"; cardId: string; targetId?: string }
   | { type: "endTurn" }
-  | { type: "upgrade"; cardId: string }
-  | { type: "recruit"; species: SpeciesId; replaceId: string }
+  | { type: "continueReward" }
+  | { type: "recruit"; species: SpeciesId; replace?: SpeciesId }
+  | { type: "skipRecruit" }
+  | { type: "chooseRelic"; relic: RelicId }
+  | { type: "skipRelic" }
+  | { type: "buyTalent"; talentId: string }
+  | { type: "resetTalents"; keyword: Keyword }
   | { type: "newRun"; seed: number }
   | { type: "abandon" };
 export interface GameEvent {

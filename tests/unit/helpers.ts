@@ -6,7 +6,7 @@ export function run(seed = 42) {
   let s = createGame(seed);
   for (const kind of ["mossback", "emberfox", "stormfin"] as const)
     s = accept(s, { type: "draft", species: kind });
-  return accept(s, { type: "start" });
+  return accept(accept(s, { type: "start" }), { type: "beginBattle" });
 }
 export function accept(s: GameState, c: Command) {
   const result = dispatch(s, c);
@@ -29,16 +29,10 @@ export function winBattle(s = run()) {
   return accept(s, { type: "play", cardId: card, targetId: "enemy-0" });
 }
 export function policy(s: GameState): Command {
-  if (s.phase === "reward") {
-    const card = s.cards
-      .filter((c) => c.level < 3)
-      .sort(
-        (a, b) =>
-          Number(definition(b.definitionId).effect === "attack") -
-          Number(definition(a.definitionId).effect === "attack"),
-      )[0]!;
-    return { type: "upgrade", cardId: card.id };
-  }
+  if (s.phase === "teamSelection") return { type: "beginBattle" };
+  if (s.phase === "reward") return { type: "continueReward" };
+  if (s.phase === "recruit") return { type: "skipRecruit" };
+  if (s.phase === "relic") return { type: "chooseRelic", relic: s.reward!.relics[0]! };
   const b = s.battle!;
   const enemy = b.enemies.filter((e) => e.health > 0).sort((a, b) => a.health - b.health)[0]!;
   const cards = b.hand

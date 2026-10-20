@@ -1,6 +1,6 @@
 # Menus and navigation — design decisions
 
-Approved direction from the design review; not yet implemented in gameplay.
+Implemented direction from the design review.
 
 - The main menu uses a centered vertical list on a black background, a simple Fauna title, and gameplay destinations only. No promotional copy, decorative panels or reward previews.
 - Launching with a saved expedition opens the main menu with Continue selected. Do not automatically resume gameplay.
@@ -13,6 +13,6 @@ Approved direction from the design review; not yet implemented in gameplay.
 - Collection lists unlocked species first, followed by locked species.
 - Settings and Glossary open as centered dialogs; closing them returns to the menu.
 
-The Collection page layout, exact menu ordering, and locked-species click behavior remain open.
+Collection uses a responsive artwork grid. Locked species are noninteractive. Menu order is Continue/New expedition, Talents, Collection, Glossary, Settings, then End run when applicable. Pause also offers Main menu; desktop adds Save & quit.
 
 See [UI rules](UI.md) and [expedition design](EXPEDITION_DESIGN.md) for shared interaction and progression decisions.

@@ -1,7 +1,12 @@
 import { definition } from "./content";
-import type { Card, Creature } from "./types";
+import { cardKeywords, hasTalent } from "./progression";
+import type { Card, Creature, GameState } from "./types";
 /** Intrinsic effect value; target-specific marks and healing caps resolve in the command. */
-export function actionValue(card: Card, actor: Pick<Creature, "species" | "attacked">): number {
+export function actionValue(
+  card: Card,
+  actor: Pick<Creature, "species" | "attacked"> & Partial<Pick<Creature, "block">>,
+  state?: Pick<GameState, "talents" | "relics">,
+): number {
   const def = definition(card.definitionId);
   const bonus =
     def.effect === "attack" && actor.species === "emberfox" && !actor.attacked
@@ -13,5 +18,27 @@ export function actionValue(card: Card, actor: Pick<Creature, "species" | "attac
           : (def.effect === "guard" || def.effect === "teamGuard") && actor.species === "mossback"
             ? 2
             : 0;
-  return def.value + card.level * 2 + bonus;
+  let extra = 0;
+  if (state) {
+    for (const keyword of cardKeywords(card)) {
+      if (hasTalent(state, keyword, "potency")) extra++;
+      if (hasTalent(state, keyword, "mastery")) extra++;
+      if (hasTalent(state, keyword, "focus") && (actor.block ?? 0) > 0) extra += 2;
+    }
+    if (def.effect === "attack" && def.damageType === "fire" && state.relics.includes("emberstone")) extra++;
+    if (def.effect === "heal" && state.relics.includes("living-seed")) extra += 2;
+    if (def.effect === "mark" && state.relics.includes("thorn-ring")) extra++;
+  }
+  return def.value + card.level * 2 + bonus + extra;
+}
+
+/** Additional final effects from accepted card plays; previews and details share this calculation. */
+export function cardFollowups(card: Pick<Card, "definitionId">, state: Pick<GameState, "talents">) {
+  let block = 0,
+    heal = 0;
+  for (const keyword of cardKeywords(card)) {
+    if (hasTalent(state, keyword, "shelter")) block += 2;
+    if (hasTalent(state, keyword, "renewal")) heal++;
+  }
+  return { block, heal };
 }

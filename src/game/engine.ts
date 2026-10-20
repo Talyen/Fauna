@@ -1,5 +1,6 @@
 import { freeze, produce } from "immer";
-import { actionValue } from "./rules";
+import { KEYWORDS, RELICS, cardKeywords, canBuyTalent, hasTalent } from "./progression";
+import { actionValue, cardFollowups } from "./rules";
 import {
   CARDS,
   ENCOUNTERS,
@@ -13,13 +14,20 @@ import type { Card, Command, CommandResult, GameEvent, GameState } from "./types
 export function createGame(seed = 1): GameState {
   return freeze(
     {
-      version: 2,
+      version: 3,
       revision: 0,
       rng: seed >>> 0,
       phase: "draft",
       unlocked: [...INITIAL_SPECIES],
       wins: 0,
       selected: [],
+      roster: [],
+      keywordXP: {},
+      battleXP: {},
+      talents: [],
+      currency: 0,
+      relics: [],
+      reward: null,
       team: [],
       cards: [],
       encounter: 0,
@@ -32,7 +40,7 @@ function random(state: GameState): number {
   state.rng = (Math.imul(state.rng, 1664525) + 1013904223) >>> 0;
   return state.rng / 4294967296;
 }
-function shuffle(state: GameState, cards: string[]): string[] {
+function shuffle<T>(state: GameState, cards: T[]): T[] {
   for (let i = cards.length - 1; i > 0; i--) {
     const j = Math.floor(random(state) * (i + 1));
     [cards[i], cards[j]] = [cards[j]!, cards[i]!];
@@ -67,11 +75,17 @@ function intents(state: GameState) {
     if (enemy.health > 0) enemy.targetId = alive[Math.floor(random(state) * alive.length)]!.id;
   }
 }
-function beginBattle(state: GameState) {
+export function beginBattle(state: GameState) {
   const encounter = ENCOUNTERS[state.encounter]!;
   for (const c of state.team) {
     c.health = species(c.species).health;
-    c.block = c.species === "moonhart" ? 4 : 0;
+    c.block = (c.species === "moonhart" ? 4 : 0) + (state.relics.includes("river-shell") ? 3 : 0);
+    for (const keyword of KEYWORDS)
+      if (
+        hasTalent(state, keyword, "opening") &&
+        state.cards.some((card) => card.ownerId === c.id && cardKeywords(card).includes(keyword))
+      )
+        c.block += 2;
     c.attacked = false;
   }
   state.battle = {
@@ -95,32 +109,88 @@ function beginBattle(state: GameState) {
     })),
   };
   state.phase = "battle";
-  draw(state, 5);
+  draw(state, state.relics.includes("wind-feather") ? 6 : 5);
+  state.reward = null;
+  state.battleXP = {};
   intents(state);
+}
+function finishBattle(state: GameState, defeated: boolean) {
+  const xp = { ...state.battleXP };
+  for (const keyword of KEYWORDS)
+    state.keywordXP[keyword] = Math.min(1_000_000, (state.keywordXP[keyword] ?? 0) + (xp[keyword] ?? 0));
+  state.battleXP = {};
+  const currency = defeated ? 0 : state.encounter === 2 ? 40 : 20;
+  state.currency = Math.min(1_000_000, state.currency + currency);
+  const outcome = defeated ? "defeat" : state.encounter === 2 ? "victory" : "next";
+  if (outcome === "victory") {
+    state.wins++;
+    if (!state.unlocked.includes("moonhart")) state.unlocked.push("moonhart");
+  }
+  const relics =
+    defeated || outcome === "victory"
+      ? []
+      : shuffle(
+          state,
+          RELICS.filter((r) => !state.relics.includes(r.id)).map((r) => r.id),
+        ).slice(0, 3);
+  state.reward = {
+    xp,
+    currency,
+    outcome,
+    recruits:
+      defeated || outcome === "victory"
+        ? []
+        : [...new Set(state.battle!.enemies.map((e) => e.species))].filter(
+            (kind) => !state.roster.includes(kind),
+          ),
+    relics: relics.length === 3 ? relics : [],
+  };
+  state.phase = "reward";
 }
 function settle(state: GameState, events: GameEvent[]): boolean {
   if (!living(state).length) {
-    state.phase = "defeat";
+    finishBattle(state, true);
     events.push({ kind: "knockout", text: "Your expedition has ended." });
     return true;
   }
   if (state.battle!.enemies.every((e) => e.health <= 0)) {
-    for (const c of state.team) {
-      c.health = species(c.species).health;
-      c.block = 0;
+    for (const creature of state.team) {
+      creature.health = species(creature.species).health;
+      creature.block = 0;
     }
-    if (state.encounter === 2) {
-      state.phase = "victory";
-      state.wins++;
-      if (!state.unlocked.includes("moonhart")) state.unlocked.push("moonhart");
-      events.push({ kind: "victory", text: "The wilds are quiet. Expedition complete." });
-    } else {
-      state.phase = "reward";
-      events.push({ kind: "reward", text: "Trail cleared. Recruit a creature or strengthen a card." });
-    }
+    finishBattle(state, false);
+    events.push({
+      kind: state.reward!.outcome === "victory" ? "victory" : "reward",
+      text: "Battle complete. Rewards saved.",
+    });
     return true;
   }
   return false;
+}
+function afterRewards(state: GameState) {
+  if (state.reward!.outcome === "victory") {
+    state.phase = "victory";
+    return;
+  }
+  state.encounter++;
+  state.phase = "teamSelection";
+  state.battle = null;
+  state.reward = null;
+}
+function afterRecruit(state: GameState) {
+  if (state.reward!.relics.length) state.phase = "relic";
+  else afterRewards(state);
+}
+function rebuildCards(state: GameState) {
+  const previous = state.cards;
+  state.cards = state.team
+    .flatMap((c) => ownedCards(c.id, c.species))
+    .map((card) => previous.find((old) => old.id === card.id) ?? card);
+  if (state.battle) {
+    state.battle.hand = [];
+    state.battle.discard = [];
+    state.battle.draw = state.cards.map((c) => c.id);
+  }
 }
 function finishTurn(draft: GameState, events: GameEvent[]) {
   const battle = draft.battle!;
@@ -232,20 +302,53 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
     )
       return reject(state, "Choose a living ally.");
   }
+  if (command.type === "newRun" && !["draft", "victory", "defeat"].includes(state.phase))
+    return reject(state, "End the current expedition first.");
+  if (command.type === "beginBattle" && state.phase !== "teamSelection")
+    return reject(state, "Choose a team before battle.");
   if (
-    command.type === "upgrade" &&
-    (state.phase !== "reward" || !state.cards.some((c) => c.id === command.cardId && c.level < 3))
+    command.type === "swap" &&
+    (state.phase !== "teamSelection" ||
+      !state.team.some((c) => c.id === command.activeId) ||
+      !state.roster.includes(command.reserve) ||
+      state.team.some((c) => c.species === command.reserve))
   )
-    return reject(state, "Choose a card below upgrade level three.");
+    return reject(state, "Choose an active creature and a reserve.");
+  if (command.type === "continueReward" && state.phase !== "reward")
+    return reject(state, "There are no battle rewards to continue.");
   if (
     command.type === "recruit" &&
-    (state.phase !== "reward" ||
-      !state.unlocked.includes(command.species) ||
-      state.team.some((c) => c.species === command.species) ||
-      !state.team.some((c) => c.id === command.replaceId))
+    (state.phase !== "recruit" ||
+      !state.reward?.recruits.includes(command.species) ||
+      state.roster.includes(command.species) ||
+      (state.roster.length === 6
+        ? !command.replace || !state.roster.includes(command.replace)
+        : !!command.replace))
   )
-    return reject(state, "Choose an available species and a teammate to replace.");
-  if (command.type === "abandon" && !["battle", "reward"].includes(state.phase))
+    return reject(state, "Choose an offered species and, if full, a creature to release.");
+  if (command.type === "skipRecruit" && state.phase !== "recruit")
+    return reject(state, "There is no recruitment choice.");
+  if (
+    command.type === "chooseRelic" &&
+    (state.phase !== "relic" ||
+      !state.reward?.relics.includes(command.relic) ||
+      state.relics.includes(command.relic))
+  )
+    return reject(state, "Choose an offered relic.");
+  if (command.type === "skipRelic" && state.phase !== "relic")
+    return reject(state, "There is no relic reward.");
+  if (command.type === "buyTalent" && !canBuyTalent(state, command.talentId))
+    return reject(state, "That talent is not available.");
+  if (
+    command.type === "resetTalents" &&
+    (!KEYWORDS.includes(command.keyword) || !state.talents.some((id) => id.startsWith(`${command.keyword}.`)))
+  )
+    return reject(state, "There are no talents to reset in this category.");
+  if (
+    command.type === "abandon" &&
+    !["battle", "teamSelection", "reward", "recruit", "relic"].includes(state.phase) &&
+    !(state.phase === "draft" && state.selected.length > 0)
+  )
     return reject(state, "There is no expedition to end.");
   const events: GameEvent[] = [];
   const next = produce(state, (draft) => {
@@ -266,6 +369,10 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
           attacked: false,
         }));
         draft.cards = draft.team.flatMap((c) => ownedCards(c.id, c.species));
+        draft.roster = [...draft.selected];
+        draft.phase = "teamSelection";
+        break;
+      case "beginBattle":
         beginBattle(draft);
         events.push({ kind: "turn", text: "Your expedition begins." });
         break;
@@ -274,7 +381,9 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
         const card = draft.cards.find((c) => c.id === command.cardId)!;
         const def = definition(card.definitionId);
         const actor = draft.team.find((c) => c.id === card.ownerId)!;
-        let value = actionValue(card, actor);
+        let value = actionValue(card, actor, draft);
+        for (const keyword of cardKeywords(card))
+          draft.battleXP[keyword] = Math.min(1_000_000, (draft.battleXP[keyword] ?? 0) + 1);
         battle.mana -= def.cost;
         battle.hand.splice(battle.hand.indexOf(card.id), 1);
         battle.discard.push(card.id);
@@ -335,6 +444,26 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
             amount,
           });
         }
+        const followups = cardFollowups(card, draft);
+        if (actor.health > 0 && followups.block > 0) {
+          actor.block += followups.block;
+          events.push({
+            kind: "block",
+            targetId: actor.id,
+            amount: followups.block,
+            text: `Acting creature gains ${followups.block} Block.`,
+          });
+        }
+        const restored = Math.min(followups.heal, species(actor.species).health - actor.health);
+        if (actor.health > 0 && restored > 0) {
+          actor.health += restored;
+          events.push({
+            kind: "heal",
+            targetId: actor.id,
+            amount: restored,
+            text: `Acting creature restores ${restored} Health.`,
+          });
+        }
         settle(draft, events);
         if (autoEndTurn && draft.phase === "battle" && battle.mana === 0) finishTurn(draft, events);
         break;
@@ -343,33 +472,75 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
         finishTurn(draft, events);
         break;
       }
-      case "upgrade": {
-        draft.cards.find((c) => c.id === command.cardId)!.level++;
-        draft.encounter++;
-        beginBattle(draft);
-        events.push({ kind: "reward", text: "Card strengthened. A new trail awaits." });
+      case "swap": {
+        const creature = draft.team.find((c) => c.id === command.activeId)!;
+        creature.species = command.reserve;
+        creature.health = species(command.reserve).health;
+        creature.block = 0;
+        creature.attacked = false;
+        rebuildCards(draft);
         break;
       }
+      case "continueReward":
+        if (draft.reward!.outcome === "defeat") draft.phase = "defeat";
+        else if (draft.reward!.recruits.length) draft.phase = "recruit";
+        else afterRecruit(draft);
+        break;
       case "recruit": {
-        const target = draft.team.find((c) => c.id === command.replaceId)!;
-        target.species = command.species;
-        draft.cards = draft.cards.filter((c) => c.ownerId !== target.id);
-        draft.cards.push(...ownedCards(target.id, command.species));
-        draft.encounter++;
-        beginBattle(draft);
-        events.push({ kind: "reward", text: `${species(command.species).name} joins the expedition.` });
+        if (command.replace) {
+          draft.roster[draft.roster.indexOf(command.replace)] = command.species;
+          const active = draft.team.find((c) => c.species === command.replace);
+          if (active) {
+            active.species = command.species;
+            active.health = species(command.species).health;
+            active.block = 0;
+            active.attacked = false;
+            rebuildCards(draft);
+          }
+        } else draft.roster.push(command.species);
+        afterRecruit(draft);
         break;
       }
+      case "skipRecruit":
+        afterRecruit(draft);
+        break;
+      case "chooseRelic":
+        draft.relics.push(command.relic);
+        afterRewards(draft);
+        break;
+      case "skipRelic":
+        afterRewards(draft);
+        break;
+      case "buyTalent":
+        draft.talents.push(command.talentId);
+        break;
+      case "resetTalents":
+        draft.talents = draft.talents.filter((id) => !id.startsWith(`${command.keyword}.`));
+        break;
       case "newRun": {
         const fresh = createGame(command.seed);
         Object.assign(draft, fresh, {
           revision: state.revision + 1,
           unlocked: [...state.unlocked],
           wins: state.wins,
+          keywordXP: { ...state.keywordXP },
+          talents: [...state.talents],
+          currency: state.currency,
         });
         break;
       }
       case "abandon":
+        if (draft.phase === "draft") {
+          draft.selected = [];
+          break;
+        }
+        for (const keyword of KEYWORDS)
+          draft.keywordXP[keyword] = Math.min(
+            1_000_000,
+            (draft.keywordXP[keyword] ?? 0) + (draft.battleXP[keyword] ?? 0),
+          );
+        draft.battleXP = {};
+        draft.reward = null;
         draft.phase = "defeat";
         events.push({ kind: "knockout", text: "You return from the wilds. Discoveries are kept." });
         break;

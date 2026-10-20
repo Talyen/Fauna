@@ -4,6 +4,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 const userData = await mkdtemp(path.join(tmpdir(), "fauna-smoke-"));
 let app;
+let success = false;
 try {
   const packaged = process.argv.includes("--packaged");
   if (packaged && process.platform !== "win32") throw new Error("Packaged Windows startup requires Windows.");
@@ -13,11 +14,22 @@ try {
   });
   const window = await app.firstWindow();
   window.setDefaultTimeout(20000);
-  await window.getByRole("heading", { name: /^Choose 3/ }).waitFor({ timeout: 60000 });
+  await window.getByRole("button", { name: "Collection", exact: true }).click({ timeout: 60000 });
+  await window
+    .locator(".collection-grid img")
+    .evaluateAll((images) => Promise.all(images.map((image) => image.decode())));
+  await window.getByRole("button", { name: "Back", exact: true }).click();
+  await window.getByRole("button", { name: "New expedition", exact: true }).click();
   for (const name of ["Mossback", "Emberfox", "Stormfin"])
     await window.getByRole("button", { name: `Choose ${name}`, exact: true }).click();
-  await window.getByRole("button", { name: "Start run" }).click();
-  await window.getByRole("main", { name: "Battle 1" }).waitFor();
+  await window.getByRole("button", { name: "Start expedition" }).click();
+  await window.getByRole("button", { name: "Deck", exact: true }).click();
+  await window
+    .locator(".deck-grid img")
+    .evaluateAll((images) => Promise.all(images.map((image) => image.decode())));
+  await window.getByRole("button", { name: "Close deck", exact: true }).click();
+  await window.getByRole("button", { name: "Begin battle" }).click();
+  await window.getByRole("main", { name: "Battlefield" }).waitFor();
   await window.locator('.app[data-save-status="saved"]').waitFor();
   let attack = window.locator('.hand .action-card[data-effect="attack"]').first();
   if (!(await attack.count())) {
@@ -32,7 +44,8 @@ try {
     await window.faunaDesktop.writeSave(JSON.stringify(state));
   });
   await window.reload();
-  await window.getByRole("main", { name: "Battle 1" }).waitFor();
+  await window.getByRole("button", { name: "Continue", exact: true }).click();
+  await window.getByRole("main", { name: "Battlefield" }).waitFor();
   await window.locator('.app[data-save-status="saved"]').waitFor();
   const before = await window.evaluate(async () =>
     JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
@@ -48,7 +61,8 @@ try {
   });
   const resumed = await app.firstWindow();
   resumed.setDefaultTimeout(20000);
-  await resumed.getByRole("main", { name: "Battle 1" }).waitFor({ timeout: 60000 });
+  await resumed.getByRole("button", { name: "Continue", exact: true }).click({ timeout: 60000 });
+  await resumed.getByRole("main", { name: "Battlefield" }).waitFor();
   const after = await resumed.evaluate(async () =>
     JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
   );
@@ -83,8 +97,10 @@ try {
     }
   });
   if (audioState !== "running") throw new Error(`Controller-only desktop audio is blocked: ${audioState}`);
+  success = true;
   console.log("Desktop startup, draft, last-mana automatic turn quit/resume, and renderer isolation passed.");
 } finally {
-  await app?.close();
+  if (app && !success) app.process().kill("SIGKILL");
+  else await app?.close();
   await rm(userData, { recursive: true, force: true });
 }

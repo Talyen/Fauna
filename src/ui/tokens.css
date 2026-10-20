@@ -16,6 +16,7 @@
   --muted-foreground: #b0b0b0;
   --line: #404040;
   --selected: #fff;
+  --mana-glint: #e6faffcc;
   --health: #f87171;
   --block: #7dd3fc;
   --marks: var(--foreground);

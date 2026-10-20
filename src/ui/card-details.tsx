@@ -1,15 +1,35 @@
 import { CARDS, definition, species, type SpeciesId } from "../game/content";
-import { actionValue } from "../game/rules";
-import type { Creature, Card } from "../game/types";
+import { actionValue, cardFollowups } from "../game/rules";
+import type { Creature, Card, GameState } from "../game/types";
 import { CardRules } from "./combat-values";
+function Followups({ card, modifiers }: { card: Pick<Card, "definitionId">; modifiers?: GameState }) {
+  if (!modifiers) return null;
+  const { block, heal } = cardFollowups(card, modifiers);
+  return (
+    <>
+      {block > 0 ? (
+        <p>
+          Acting creature gains <span data-combat-tone="block">{block} Block</span>.
+        </p>
+      ) : null}
+      {heal > 0 ? (
+        <p>
+          Acting creature restores <span data-combat-tone="health">{heal} Health</span>.
+        </p>
+      ) : null}
+    </>
+  );
+}
 export function ActionDetails({
   card,
   ownerName,
   actor,
+  modifiers,
 }: {
   card: Card;
   ownerName: string;
   actor?: Creature;
+  modifiers?: GameState;
 }) {
   const def = definition(card.definitionId);
   return (
@@ -24,8 +44,9 @@ export function ActionDetails({
       <CardRules
         card={def}
         level={card.level}
-        value={actionValue(card, actor ?? { species: def.species, attacked: false })}
+        value={actionValue(card, actor ?? { species: def.species, attacked: false }, modifiers)}
       />
+      <Followups card={card} modifiers={modifiers} />
     </div>
   );
 }
@@ -38,6 +59,7 @@ export function CreatureDetails({
   marks = 0,
   cards,
   actor,
+  modifiers,
 }: {
   kind: SpeciesId;
   name?: string;
@@ -47,6 +69,7 @@ export function CreatureDetails({
   marks?: number;
   cards?: readonly Card[];
   actor?: Creature;
+  modifiers?: GameState;
 }) {
   const info = species(kind);
   return (
@@ -73,8 +96,10 @@ export function CreatureDetails({
                   value={actionValue(
                     { id: c.id, definitionId: c.id, ownerId: kind, level },
                     actor ?? { species: kind, attacked: false },
+                    modifiers,
                   )}
                 />
+                <Followups card={{ definitionId: c.id }} modifiers={modifiers} />
               </div>
             );
           })}

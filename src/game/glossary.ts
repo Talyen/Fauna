@@ -58,13 +58,27 @@ export const GLOSSARY = [
       "At zero health a creature cannot act or be healed during that battle. Its cards leave circulation. Losing all three teammates ends the expedition.",
   },
   {
-    term: "Upgrade",
+    term: "Keyword XP",
     definition:
-      "Permanently adds 2 to a card's base effect for this expedition, up to three upgrades. Recruitment removes the outgoing creature's cards and upgrades.",
+      "Playing an action card earns 1 XP for each of its keywords. Battle-end XP is permanent, including after defeat. Abandoning a battle banks the XP already earned without granting victory rewards.",
   },
   {
-    term: "Intent",
+    term: "Talents",
     definition:
-      "An enemy's next attack damage and chosen target. Enemies act in row order. If a target is knocked out before an enemy acts, it attacks the first living teammate instead.",
+      "Keyword XP earns points for that keyword's talents. The first point takes 20 XP, then another 40, then 60. Complete each row to open the next. Talents apply immediately to every matching creature. Reset a category at any time to refund all its points while retaining XP.",
+  },
+  {
+    term: "Reserves",
+    definition:
+      "Recruit up to six distinct species during an expedition. Choose three active creatures before each battle. Only the active three contribute cards. Select creatures across the active and reserve rows to swap them.",
+  },
+  {
+    term: "Relics",
+    definition:
+      "Passive effects lasting for the current expedition. When offered, choose one of three or skip. Relics end with the expedition.",
+  },
+  {
+    term: "Currency",
+    definition: "Battle-earned currency is permanent. Spending will be added in a future update.",
   },
 ] as const;

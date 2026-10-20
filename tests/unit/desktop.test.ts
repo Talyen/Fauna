@@ -9,9 +9,7 @@ describe("desktop storage", () => {
     const directory = await mkdtemp(path.join(tmpdir(), "fauna-storage-"));
     try {
       const storage = createStorage(directory);
-      const values = [1, 2, 3].map((revision) =>
-        JSON.stringify({ version: revision === 1 ? 1 : 2, revision }),
-      );
+      const values = [1, 2, 3].map((revision) => JSON.stringify({ version: revision, revision }));
       const writes = values.map((data) => storage.write(data));
       await storage.drain();
       await Promise.all(writes);

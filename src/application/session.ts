@@ -66,7 +66,7 @@ export function createSession(platform: Platform, seed = 1) {
           });
           if (
             (candidate.source === "primary" || candidate.source === "fauna.save.v1") &&
-            JSON.parse(candidate.data).version === 1
+            JSON.parse(candidate.data).version !== 3
           )
             save(game);
           return;

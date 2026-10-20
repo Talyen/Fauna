@@ -62,9 +62,14 @@ export function useCombatFeedback(
   session: Session,
   root: RefObject<HTMLDivElement | null>,
   soundEnabled: boolean,
+  paused = false,
 ) {
   const [bursts, setBursts] = useState<Burst[]>([]);
   useEffect(() => {
+    if (paused) {
+      setBursts([]);
+      return;
+    }
     const audio = createCombatAudio(),
       impacts = createCombatImpacts(() => root.current);
     const unlock = () => {
@@ -130,7 +135,7 @@ export function useCombatFeedback(
       audio.dispose();
       impacts.dispose();
     };
-  }, [session, root, soundEnabled]);
+  }, [session, root, soundEnabled, paused]);
   return bursts;
 }
 

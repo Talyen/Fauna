@@ -1,6 +1,8 @@
 export type InputAction = "left" | "right" | "up" | "down" | "confirm" | "back" | "inspect" | "endTurn";
 export function moveFocus(direction: "left" | "right" | "up" | "down") {
-  const root = document.querySelector('[role="dialog"][data-state="open"], dialog[open]') ?? document;
+  const root =
+    Array.from(document.querySelectorAll('[role="dialog"][data-state="open"], dialog[open]')).at(-1) ??
+    document;
   const buttons = Array.from(
     root.querySelectorAll<HTMLElement>(
       'button:not(:disabled):not([tabindex="-1"]), input:not(:disabled), [tabindex="0"]',
@@ -12,8 +14,10 @@ export function moveFocus(direction: "left" | "right" | "up" | "down") {
     buttons[0]!.focus();
     return;
   }
-  if (root === document && current.closest(".battle-screen")) {
-    const rows = Array.from(document.querySelectorAll<HTMLElement>(".enemy-row, .player-row, .hand"));
+  if (root === document && current.closest(".battle-screen, .team-selection, .talents-screen")) {
+    const rows = Array.from(
+      document.querySelectorAll<HTMLElement>(".enemy-row, .player-row, .hand, [data-nav-row]"),
+    ).filter((row) => row.getClientRects().length > 0 && row.querySelector("button"));
     const rowIndex = rows.findIndex((row) => row.contains(current));
     if (rowIndex >= 0) {
       if (direction === "left" || direction === "right") {
@@ -34,7 +38,7 @@ export function moveFocus(direction: "left" | "right" | "up" | "down") {
           )[0]
           ?.focus();
       }
-      return;
+      if (next) return;
     }
   }
   const r = current.getBoundingClientRect(),

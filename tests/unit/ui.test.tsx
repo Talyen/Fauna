@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { afterEach, describe, it, expect } from "vitest";
+import { afterEach, describe, it, expect, vi } from "vitest";
 import { render, screen, cleanup, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { App } from "../../src/ui/App";
@@ -16,11 +16,21 @@ describe("player interface", () => {
     await session.load();
     render(<App session={session} />);
     const user = userEvent.setup();
-    const enter = screen.getByRole("button", { name: "Start run" });
+    await user.click(screen.getByRole("button", { name: "New expedition" }));
+    const enter = screen.getByRole("button", { name: "Start expedition" });
     expect((enter as HTMLButtonElement).disabled).toBe(true);
     for (const name of ["Mossback", "Emberfox", "Stormfin"])
       await user.click(screen.getByRole("button", { name: `Choose ${name}` }));
     await user.click(enter);
+    expect(session.store.getState().game.phase).toBe("teamSelection");
+    vi.stubGlobal(
+      "ResizeObserver",
+      class {
+        observe() {}
+        disconnect() {}
+      },
+    );
+    await user.click(screen.getByRole("button", { name: "Begin battle" }));
     expect(session.store.getState().game.phase).toBe("battle");
     expect(screen.getByRole("region", { name: "Enemy row" })).toBeTruthy();
     await act(async () => {

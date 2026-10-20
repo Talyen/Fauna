@@ -1,6 +1,6 @@
 # Expedition progression — design decisions
 
-These are the agreed directions from the design review. They supersede the prototype's choice between recruiting an immediate replacement and adding +2 to one card. The new progression rules are **not implemented**. Layout samples remain separate from gameplay.
+These are the agreed directions from the design review. They supersede the prototype's choice between recruiting an immediate replacement and adding +2 to one card. The approved direction is implemented in gameplay. Isolated design samples remain available for comparison.
 
 ## Roster and battles
 
@@ -32,8 +32,8 @@ These are the agreed directions from the design review. They supersede the proto
 - Clicking an available talent purchases it immediately, without a detail-dialog purchase step or confirmation.
 - Reset operates on the entire keyword category, refunding all spent points in that category while retaining its XP. Reset is available at any time, including during an expedition; talent effects update immediately. Individual-talent refunds are not the chosen interaction.
 - Start with Alchemy's point pacing: the first point costs 20 keyword XP, then another 40, then 60, increasing by 20 each time. Total XP for point n is 10 × n × (n + 1). This is initial tuning for playtesting.
-- Keyword list, talents per row, and exact talent effects remain open.
-- XP settlement when abandoning an unfinished battle and the treatment of automatic/repeated card plays remain open.
+- The starter catalog uses the seven damage types plus Block, Healing, and Mark. Each category has three rows of two talents: Potency, Mastery, Shelter, Guarded Focus, Renewal, and Readiness. Effects and IDs live in `src/game/progression.ts` and remain tunable.
+- Abandonment banks the XP earned by accepted plays, with no victory currency or relics. There are currently no automatic or repeated card plays; each accepted play awards keyword XP once.
 
 ## Recruitment
 
@@ -52,18 +52,19 @@ These are the agreed directions from the design review. They supersede the proto
 - Initial battle item rewards focus on run-wide relics: passive effects for the whole expedition.
 - When a battle awards a relic, offer a choice of three.
 - Choose one relic or skip the reward.
-- Currency names/types, payout amounts, relic drop frequency, exact relic effects, and relic ownership/unlocks between runs remain open.
+- Starter tuning: Currency pays 20 per ordinary victory and 40 for the boss. Each ordinary victory offers three distinct unowned relics when three remain. Five starter relics are authored in `src/game/progression.ts`; their ownership lasts only for the expedition. Currency spending and material types remain undefined and are not implemented.
 
 ## Screen flow
 
 Ordinary victory → XP and materials/currency → recruitment → relic choice (if awarded) → next battle's team selection → combat.
+
+Final victory → XP and currency → expedition results. Recruitment and expedition-only relics are offered between battles.
 
 - XP and materials/currency share one screen. Specific material types and uses remain undefined.
 - Recruitment and relic choice each have their own screen; relic choice appears only when a relic is awarded.
 - Relic effects remain in hover/focus tooltips.
 - Keep keyword XP progress numbers visible beneath the bars on the XP reward screen.
 - Team selection belongs to the next battle, separate from the reward screens.
-- No layout for these redesigned screens has been approved yet.
-- Do not turn these design decisions into gameplay changes as part of the visual sample work.
+- Gameplay now uses the reviewed minimal layouts for the separate reward screens, smaller reserves, and full-screen talent/collection pages.
 
 See [UI design system](UI.md) for the approved battlefield composition and interaction rules.
