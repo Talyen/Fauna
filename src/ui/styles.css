@@ -1026,64 +1026,36 @@ button {
   height: 20px;
 }
 .journey-results {
-  width: min(1120px, 100%);
+  width: min(640px, 100%);
   min-height: calc(100dvh - 48px);
   margin: auto;
-  padding: var(--space-10) 0;
+  padding: var(--space-8) 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: var(--space-6);
 }
-.journey-results-heading,
-.journey-team,
-.journey-gains,
-.journey-relics,
-.journey-unlocks {
+.journey-gains {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-6);
 }
-.journey-results h2 {
-  font-size: var(--text-name);
-}
-.journey-results-heading p,
-.journey-creature p,
 .journey-kept {
   color: var(--muted-foreground);
   font-size: var(--text-secondary);
-}
-.journey-team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: var(--space-4);
-}
-.journey-creature {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-.journey-creature .creature-card {
-  width: 100%;
-}
-.journey-creature h3 {
-  font-size: var(--text-name);
+  text-align: center;
 }
 .journey-totals,
-.journey-relics > div,
-.journey-unlocks > div,
 .journey-results-actions {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: var(--space-3);
 }
 .journey-xp {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
   gap: var(--space-4) var(--space-6);
-}
-.journey-results-actions {
-  justify-content: flex-end;
 }
 .destination-heading p,
 .destination-option p {
@@ -1144,4 +1116,31 @@ button {
   .destination-enemies > div {
     flex-basis: 100%;
   }
+}
+
+/* Center screen composition; retain paired data alignment and spatial battle controls. */
+.draft-screen h1,
+.reward-screen h1,
+.page-heading h1,
+.destination-heading,
+.destination-option h2,
+.destination-option p,
+.destination-enemies h2,
+.journey-results-heading,
+.dialog-content > h2,
+.dialog-content > p,
+.recovery {
+  text-align: center;
+}
+.page-heading,
+.reward-heading {
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-3);
+}
+.selection-footer,
+.reward-footer,
+.destination-footer,
+.battle-earnings {
+  justify-content: center;
 }

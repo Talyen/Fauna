@@ -76,7 +76,7 @@ Ordinary victory → recruitment (if available) → relic choice (if awarded) �
 
 Final victory or defeat → Journey results. Ending a started journey voluntarily also opens results, labeled Returned home. Ending an unfinished starter choice simply returns to the main menu.
 
-- Results lead with the final deployed team and reserves, all inspectable, followed by biome/location reached, battles won, total currency and keyword XP earned, relics collected, and newly unlocked creatures.
+- Results show only the outcome, keyword XP and permanent currencies/resources/items earned. Do not show the team, creature unlocks, journey-only relics, location, or journey statistics. Currency is the only authored permanent resource currently; do not invent item or material rewards.
 - Keyword totals include all settled battles and XP banked when returning home. Show permanent keyword progress numbers and talent points earned beneath the bars. Talents remain menu-driven; never prompt purchases here.
 - Banking and totals update atomically with accepted gameplay commands. Browsing results never grants rewards or saves. Report actual retained earnings at progression caps.
 - New journey resets journey totals and roster/relics while preserving permanent progress. Main menu can reopen the last results until a new journey begins; this is not a multi-journey history.

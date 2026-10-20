@@ -32,7 +32,7 @@ describe("player interface", () => {
     expect(screen.queryByRole("button", { name: "Continue", exact: true })).toBeNull();
     await session.dispose();
   });
-  it("reopens saved journey results, inspects its team, and starts fresh without losing permanent gains", async () => {
+  it("reopens saved journey gains and starts fresh without losing permanent gains", async () => {
     const started = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
     const battle = produce(accept(started, { type: "beginBattle" }), (d) => {
       d.battleXP = { nature: 4 };
@@ -46,8 +46,10 @@ describe("player interface", () => {
     await user.click(screen.getByRole("button", { name: "Journey results", exact: true }));
     expect(screen.getByRole("heading", { name: "Returned home" })).toBeTruthy();
     expect(screen.getByLabelText("Journey gains").textContent).toContain("+4 XP");
-    await user.click(screen.getByRole("button", { name: "Inspect Mossback" }));
-    await user.keyboard("{Escape}");
+    expect(screen.queryByLabelText("Final team")).toBeNull();
+    expect(screen.queryByLabelText("New creature unlocks")).toBeNull();
+    expect(screen.queryByLabelText("Relics collected")).toBeNull();
+    expect(screen.queryByText(/battles won/)).toBeNull();
     expect(session.store.getState().game).toEqual(game);
     await user.click(screen.getByRole("button", { name: "Main menu", exact: true }));
     expect(screen.getByRole("button", { name: "Journey results" })).toBeTruthy();

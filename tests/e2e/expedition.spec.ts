@@ -145,16 +145,9 @@ for (const width of [1280, 1920])
             exact: true,
           }),
         ).toBeVisible();
-        await expect(page.locator(".journey-team-grid .creature-card")).toHaveCount(game.roster.length);
-        await page
-          .locator(".journey-team-grid img")
-          .evaluateAll((images) => Promise.all(images.map((image) => (image as HTMLImageElement).decode())));
-        const creature = page.locator(".journey-team-grid .creature-card").first();
-        await creature.focus();
-        await page.keyboard.press("i");
-        await expect(page.getByRole("dialog")).toBeVisible();
-        await page.keyboard.press("Escape");
-        await expect(creature).toBeFocused();
+        await expect(page.getByLabel("Final team", { exact: true })).toHaveCount(0);
+        await expect(page.getByLabel("Relics collected", { exact: true })).toHaveCount(0);
+        await expect(page.getByLabel("New creature unlocks", { exact: true })).toHaveCount(0);
         expect(await state(page)).toEqual(game);
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
         await page.screenshot({
