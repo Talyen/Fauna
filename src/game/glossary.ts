@@ -40,7 +40,7 @@ export const GLOSSARY = [
   {
     term: "Death's Door",
     definition:
-      "Each allied creature survives fatal damage once per battle at 1 Health, with 2 grace turns. Fatal packets during that window still leave 1 Health; later damage can knock it out. Reserve turns also spend grace.",
+      "Each allied creature survives fatal damage once per battle at 1 Health, with 2 grace turns. Fatal packets during those grace turns still leave 1 Health; later damage can knock it out. Reserve turns also spend grace.",
   },
   {
     term: "Battle",
