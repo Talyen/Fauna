@@ -1274,3 +1274,10 @@ button {
   gap: var(--screen-section-gap);
   padding: var(--page-block-gutter) var(--page-inline-gutter);
 }
+
+.unlock-creature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--screen-item-gap);
+}

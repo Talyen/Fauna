@@ -551,13 +551,15 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           {route === "unlocks" && reveals[0] ? (
             <main className="unlock-screen">
               <h1>Creature unlocked</h1>
-              <CreatureCard
-                kind={reveals[0]}
-                label={`Inspect ${species(reveals[0]).name}`}
-                onClick={() => setInspection({ species: reveals[0]! })}
-                onInspect={() => setInspection({ species: reveals[0]! })}
-              />
-              <h2>{species(reveals[0]).name}</h2>
+              <div className="unlock-creature">
+                <CreatureCard
+                  kind={reveals[0]}
+                  label={`Inspect ${species(reveals[0]).name}`}
+                  onClick={() => setInspection({ species: reveals[0]! })}
+                  onInspect={() => setInspection({ species: reveals[0]! })}
+                />
+                <h2>{species(reveals[0]).name}</h2>
+              </div>
               <Button
                 onClick={() => {
                   setReveals((old) => old.slice(1));
