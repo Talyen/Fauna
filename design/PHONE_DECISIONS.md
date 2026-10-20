@@ -77,6 +77,17 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 - Reduced motion uses a static border cue instead of shaking; do not add an extra ring.
 - Rejected input cannot change committed gameplay, RNG, Mana or saves. No shake duration or distance was chosen in this phone question; existing bounded values remain the implementation baseline pending rendered review.
 
+## Interface audio
+
+- Menu and settings activation uses a quiet, soft click. Hover and keyboard/controller focus navigation remain silent.
+- Rejected actions use a short, soft denial cue distinct from activation. All cues respect the Sound setting.
+- Audition candidates from the existing local library at `~/Documents/Asset Library/Sounds/Game Sources`; preserve source originals and use the project's asset manifest/preparation workflow. Verified candidates include Alchemy's `interface/toggles/toggle_on_02.wav`, `toggle_off_02.wav` and `interface/feedback/denied.wav` under `Projects/Alchemy/Sound Effects`. Discovery does not constitute listening approval or selection of a specific clip.
+
+## Error messages
+
+- Use a Lucide warning icon alongside a concise, plain-language message. Offer a relevant action such as Retry when available.
+- Essential meaning remains visible without sound.
+
 ## Shared preferences
 
 Reduced motion makes switch/radio/dialog/progress transitions immediate and disables spatial combat movement. Essential state remains visible without sound. None of these choices authorizes dropping keyboard accessibility, native control behavior, fixed artwork dimensions or the single highlighted-boundary treatment for selected-plus-hovered controls. Fine visual details still need review at a computer.
