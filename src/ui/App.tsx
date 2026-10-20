@@ -39,7 +39,7 @@ type Route = "home" | "play" | "talents" | "collection";
 type Modal = "settings" | "glossary" | "endRun" | "deck" | "swap" | "lineup" | "draw" | "discard" | null;
 export function App(props: { session: Session; desktop?: boolean }) {
   return (
-    <TooltipProvider delayDuration={300} skipDelayDuration={100} disableHoverableContent>
+    <TooltipProvider>
       <Game {...props} />
     </TooltipProvider>
   );

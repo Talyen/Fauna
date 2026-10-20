@@ -102,7 +102,7 @@ export function CreatureCard({
       ) : (
         <Tooltip open={tooltips && tooltipOpen} onOpenChange={(open) => setTooltipOpen(tooltips && open)}>
           <TooltipTrigger asChild>{artwork}</TooltipTrigger>
-          <TooltipContent side={enemyId ? "bottom" : "top"} sideOffset={enemyId && readout ? 44 : 8}>
+          <TooltipContent side={enemyId ? "bottom" : "top"} sideOffset={enemyId && readout ? 44 : 16}>
             <CreatureDetails
               kind={kind}
               name={name}

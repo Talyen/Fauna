@@ -252,8 +252,36 @@ strong {
   outline: 2px dashed var(--selected);
   outline-offset: 6px;
 }
-button {
-  transition-duration: var(--motion-fast);
+.game-button {
+  transition:
+    scale var(--motion-hover) ease-out,
+    border-color var(--motion-hover) ease-out,
+    background-color var(--motion-hover) ease-out,
+    color var(--motion-hover) ease-out,
+    box-shadow var(--motion-hover) ease-out;
+}
+.game-button:not(:disabled):not([aria-disabled="true"]):hover,
+:root[data-focus="visible"] .game-button:not(:disabled):not([aria-disabled="true"]):focus {
+  scale: var(--hover-scale);
+}
+.game-button:is(.creature-card, .action-card)::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: var(--hover-frame-width) solid transparent;
+  border-radius: inherit;
+  pointer-events: none;
+  transition: border-color var(--motion-hover) ease-out;
+}
+.game-button:is(.creature-card, .action-card):not(:disabled):not([aria-disabled="true"]):hover,
+:root[data-focus="visible"]
+  .game-button:is(.creature-card, .action-card):not(:disabled):not([aria-disabled="true"]):focus {
+  border-color: var(--primary);
+}
+.game-button:is(.creature-card, .action-card):not(:disabled):not([aria-disabled="true"]):hover::after,
+:root[data-focus="visible"]
+  .game-button:is(.creature-card, .action-card):not(:disabled):not([aria-disabled="true"]):focus::after {
+  border-color: var(--primary);
 }
 .battle-screen {
   height: calc(100dvh - var(--screen-item-gap) * 2);
@@ -350,7 +378,11 @@ button {
 }
 .hand-slot .action-card {
   width: 100%;
-  transition: transform var(--motion-fast) ease-out;
+  transition:
+    transform var(--motion-hover) ease-out,
+    scale var(--motion-hover) ease-out,
+    border-color var(--motion-hover) ease-out,
+    box-shadow var(--motion-hover) ease-out;
 }
 .hand-slot:hover,
 .app[data-focus="visible"] .hand-slot:focus-within,
@@ -453,9 +485,53 @@ button {
 .game-tooltip {
   /* Radix modal layers set an inline pointer override; hover details must not intercept controls. */
   pointer-events: none !important;
-  width: min(calc(360px * var(--text-scale, 1)), calc(100vw - 32px));
+  width: max-content;
+  max-width: min(calc(var(--tooltip-max-width) * var(--text-scale, 1)), calc(100vw - var(--space-8)));
+  padding: var(--space-3);
+  border-radius: var(--tooltip-radius);
+  --tooltip-offset-x: 0px;
+  --tooltip-offset-y: var(--tooltip-travel);
+  overflow-wrap: anywhere;
   max-height: var(--radix-tooltip-content-available-height);
   overflow: auto;
+}
+.game-tooltip[data-side="bottom"] {
+  --tooltip-offset-y: calc(-1 * var(--tooltip-travel));
+}
+.game-tooltip[data-side="left"] {
+  --tooltip-offset-x: var(--tooltip-travel);
+  --tooltip-offset-y: 0px;
+}
+.game-tooltip[data-side="right"] {
+  --tooltip-offset-x: calc(-1 * var(--tooltip-travel));
+  --tooltip-offset-y: 0px;
+}
+.game-tooltip[data-state="instant-open"],
+.game-tooltip[data-state="delayed-open"] {
+  animation: tooltip-enter var(--tooltip-enter-duration) ease-out;
+}
+.game-tooltip[data-state="closed"] {
+  animation: tooltip-exit var(--tooltip-exit-duration) ease-out forwards;
+}
+@keyframes tooltip-enter {
+  from {
+    opacity: 0;
+    translate: var(--tooltip-offset-x) var(--tooltip-offset-y);
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@keyframes tooltip-exit {
+  from {
+    opacity: 1;
+    translate: 0 0;
+  }
+  to {
+    opacity: 0;
+    translate: var(--tooltip-offset-x) var(--tooltip-offset-y);
+  }
 }
 .inspection {
   width: min(
@@ -948,7 +1024,8 @@ button {
 :root:not([data-focus="visible"]) :focus {
   outline: none;
   box-shadow: none;
-  transition-property: none;
+  /* Remove focus decoration immediately while retaining pointer hover motion. */
+  transition-property: scale, border-color, background-color, color, transform;
 }
 .app[data-focus="hidden"] .hand-slot .action-card:focus:not(:hover):not(.selected) {
   transform: none;
@@ -1258,5 +1335,11 @@ button {
   }
   .battle-piles > div {
     pointer-events: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .game-button {
+    scale: 1 !important;
   }
 }

@@ -61,6 +61,15 @@
   --text-title: calc(24px * var(--text-scale, 1));
   --text-result: calc(28px * var(--text-scale, 1));
   --motion-fast: 150ms;
+  /* Alchemy's interaction timings and card scale, independent of viewport size. */
+  --motion-hover: 200ms;
+  --hover-scale: 1.035;
+  --hover-frame-width: 3px;
+  --tooltip-enter-duration: 180ms;
+  --tooltip-exit-duration: 120ms;
+  --tooltip-radius: 20px;
+  --tooltip-max-width: 320px;
+  --tooltip-travel: 4px;
   --feedback-duration: 1400ms;
   /* Fixed CSS-pixel artwork sizes; layouts reflow instead of scaling artwork. */
   --art-standard-short-side: 200px;
