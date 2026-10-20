@@ -4,7 +4,7 @@ import { assetUrl } from "../../src/ui/assets";
 import { ActionCard } from "../../src/ui/cards";
 import { TooltipProvider } from "../../src/components/ui/tooltip";
 import { produce } from "immer";
-import { createGame, dispatch } from "../../src/game/engine";
+import { createGame } from "../../src/game/engine";
 import { accept, run, teamRun, winBattle, bossReward } from "./helpers";
 import { encounterSource, location } from "../../src/game/destinations";
 import { RELICS } from "../../src/game/progression";

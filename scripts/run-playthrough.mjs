@@ -54,7 +54,7 @@ if (!args.includes("--worker")) {
       )) {
         const file = path.join(directory, entry.name);
         if (entry.isDirectory()) await fingerprint(file);
-        else if (/\.ts$/.test(entry.name)) {
+        else if (entry.name.endsWith(".ts")) {
           hash.update(path.relative(root, file));
           hash.update(await readFile(file));
         }

@@ -9,7 +9,7 @@ function text(value) {
       .split(/\r?\n/)
       .find((line) => line.trim())
       ?.slice(0, 300)
-      .replace(/[&<>`*|\[\]]/g, (char) => `&#${char.charCodeAt(0)};`) ?? ""
+      .replace(/[&<>`*|[\]]/g, (char) => `&#${char.charCodeAt(0)};`) ?? ""
   );
 }
 function count(value) {

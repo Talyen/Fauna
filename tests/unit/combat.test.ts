@@ -12,7 +12,7 @@ import {
 import { dispatch } from "../../src/game/engine";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { cardKeywords } from "../../src/game/progression";
-import { accept, run, victoryReady, winBattle } from "./helpers";
+import { accept, run, victoryReady } from "./helpers";
 
 function packet(
   type: Parameters<typeof hit>[4],
