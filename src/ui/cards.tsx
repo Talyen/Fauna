@@ -71,8 +71,8 @@ export function CreatureCard({
       }}
       onFocus={(event) => {
         if (
-          (event.currentTarget.closest<HTMLElement>(".app")?.dataset.input ??
-            document.documentElement.dataset.input) === "pointer"
+          (event.currentTarget.closest<HTMLElement>(".app")?.dataset.focus ??
+            document.documentElement.dataset.focus) !== "visible"
         )
           event.preventDefault();
         else onPreview?.();
@@ -189,8 +189,8 @@ export function ActionCard({
       aria-disabled={presentation ? undefined : disabled}
       onFocus={(event) => {
         if (
-          (event.currentTarget.closest<HTMLElement>(".app")?.dataset.input ??
-            document.documentElement.dataset.input) === "pointer"
+          (event.currentTarget.closest<HTMLElement>(".app")?.dataset.focus ??
+            document.documentElement.dataset.focus) !== "visible"
         )
           event.preventDefault();
       }}

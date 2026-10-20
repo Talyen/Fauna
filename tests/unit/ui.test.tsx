@@ -235,13 +235,7 @@ describe("player interface", () => {
       touched: false,
       value: 0,
     }));
-    expect(gamepadActions({ buttons, axes: [0.8, 0] })).toEqual([
-      "confirm",
-      "inspect",
-      "endTurn",
-      "right",
-      "up",
-    ]);
+    expect(gamepadActions({ buttons, axes: [0.8, 0] })).toEqual(["confirm", "inspect", "endTurn", "up"]);
     expect(gamepadActions({ buttons: [], axes: [0.1, -0.1] })).toEqual([]);
   });
 });

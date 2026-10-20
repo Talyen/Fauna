@@ -248,7 +248,7 @@ strong {
 .action-card[aria-disabled="true"] {
   opacity: 0.45;
 }
-button:focus-visible {
+:root[data-focus="visible"] button:focus {
   outline: 2px dashed var(--selected);
   outline-offset: 6px;
 }
@@ -352,12 +352,12 @@ button {
   transition: transform var(--motion-fast) ease-out;
 }
 .hand-slot:hover,
-.app:not([data-input="pointer"]) .hand-slot:focus-within,
+.app[data-focus="visible"] .hand-slot:focus-within,
 .hand-slot:has(.selected) {
   z-index: 10;
 }
 .hand-slot .action-card:hover,
-.hand-slot .action-card:focus-visible {
+.app[data-focus="visible"] .hand-slot .action-card:focus {
   transform: translateY(-12px) rotate(calc(var(--fan-angle) * -1));
 }
 .hand-slot .action-card.selected {
@@ -975,12 +975,14 @@ button {
   width: min(440px, calc(100vw - var(--space-12)));
 }
 
-/* Pointer interaction must not inherit keyboard focus decoration or hand lifts. */
-:root[data-input="pointer"] button:focus-visible,
-.app[data-input="pointer"] button:focus-visible {
+/* Automatic focus and pointer interaction never expose navigation decoration,
+   including shadcn rings in portaled dialogs and tab panels. */
+:root:not([data-focus="visible"]) :focus {
   outline: none;
+  box-shadow: none;
+  transition-property: none;
 }
-.app[data-input="pointer"] .hand-slot .action-card:focus-visible:not(:hover):not(.selected) {
+.app[data-focus="hidden"] .hand-slot .action-card:focus:not(:hover):not(.selected) {
   transform: none;
 }
 .creature-wrap:not(.knocked-out) .creature-card.invalid-target {

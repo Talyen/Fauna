@@ -1,3 +1,5 @@
+import { isAvailableFocusTarget } from "./focus";
+
 // Game navigation forwards arrow events to Radix without changing the active input device.
 const bridgedKeys = new WeakSet<KeyboardEvent>();
 export type InputAction = "left" | "right" | "up" | "down" | "confirm" | "back" | "inspect" | "endTurn";
@@ -30,7 +32,7 @@ export function moveFocus(direction: "left" | "right" | "up" | "down") {
     root.querySelectorAll<HTMLElement>(
       'button:not(:disabled):not([tabindex="-1"]), input:not(:disabled), [tabindex="0"]',
     ),
-  ).filter((e) => e.getClientRects().length > 0);
+  ).filter(isAvailableFocusTarget);
   if (!buttons.length) return;
   const current = document.activeElement as HTMLElement;
   if (!buttons.includes(current)) {
@@ -100,24 +102,38 @@ export function gamepadActions(pad: Pick<Gamepad, "buttons" | "axes">): InputAct
   if (pressed(1)) actions.push("back");
   if (pressed(2)) actions.push("inspect");
   if (pressed(3)) actions.push("endTurn");
-  if (pressed(14) || (pad.axes[0] ?? 0) < -0.55) actions.push("left");
-  if (pressed(15) || (pad.axes[0] ?? 0) > 0.55) actions.push("right");
-  if (pressed(12) || (pad.axes[1] ?? 0) < -0.55) actions.push("up");
-  if (pressed(13) || (pad.axes[1] ?? 0) > 0.55) actions.push("down");
+  // One direction per sample keeps diagonals from skipping grid items. The
+  // deliberate D-pad takes priority over an off-center stick.
+  const dpad = [14, 15, 12, 13].some(pressed);
+  const x = dpad ? Number(pressed(15)) - Number(pressed(14)) : (pad.axes[0] ?? 0);
+  const y = dpad ? Number(pressed(13)) - Number(pressed(12)) : (pad.axes[1] ?? 0);
+  if (Math.max(Math.abs(x), Math.abs(y)) > 0.55) {
+    if (Math.abs(x) > Math.abs(y)) actions.push(x < 0 ? "left" : "right");
+    else actions.push(y < 0 ? "up" : "down");
+  }
   return actions;
 }
 export function connectInput(
   onAction: (action: InputAction) => void,
-  onMode: (mode: "keyboard" | "controller" | "pointer") => void,
+  onMode: (mode: "keyboard" | "controller" | "pointer", navigation: boolean) => void,
 ) {
   let interactionMode: "keyboard" | "controller" | "pointer" | undefined;
-  const changeMode = (mode: "keyboard" | "controller" | "pointer") => {
-    if (mode === interactionMode) return;
+  let navigation = false;
+  let suspended = document.visibilityState === "hidden";
+  let disposed = false;
+  let previous = new Set<InputAction>();
+  let connected = new Set<number>();
+  const blocked = new Set<InputAction>();
+  const repeatAt = new Map<InputAction, number>();
+  const changeMode = (mode: "keyboard" | "controller" | "pointer", navigating = navigation) => {
+    if (mode !== "controller") for (const action of previous) blocked.add(action);
+    if (mode === interactionMode && navigating === navigation) return;
     interactionMode = mode;
-    onMode(mode);
+    navigation = navigating;
+    onMode(mode, navigation);
   };
   const keyboard = (event: KeyboardEvent) => {
-    if (bridgedKeys.has(event)) return;
+    if (suspended || bridgedKeys.has(event)) return;
     if (
       event.altKey ||
       event.ctrlKey ||
@@ -142,8 +158,8 @@ export function connectInput(
       I: "inspect",
     };
     const action = mapping[event.key];
-    if (
-      action ||
+    const navigating =
+      (action && ["left", "right", "up", "down"].includes(action)) ||
       [
         "Tab",
         "Enter",
@@ -156,11 +172,11 @@ export function connectInput(
         "End",
         "PageUp",
         "PageDown",
-      ].includes(event.key)
-    )
-      changeMode("keyboard");
+      ].includes(event.key);
+    if (action || navigating) changeMode("keyboard", navigating || navigation);
     if (action) {
       event.preventDefault();
+      if (event.repeat && (action === "back" || action === "inspect")) return;
       onAction(action);
     }
   };
@@ -174,39 +190,84 @@ export function connectInput(
     )
       event.stopPropagation();
   };
+  let pointerPosition: { x: number; y: number } | undefined;
   const pointer = (event: PointerEvent) => {
-    if (event.type === "pointermove" && !event.movementX && !event.movementY) return;
-    changeMode("pointer");
+    if (suspended) return;
+    const unchanged = pointerPosition?.x === event.clientX && pointerPosition?.y === event.clientY;
+    pointerPosition = { x: event.clientX, y: event.clientY };
+    if (event.type === "pointermove" && unchanged && !event.movementX && !event.movementY) return;
+    changeMode("pointer", false);
+  };
+  const wheel = () => {
+    if (!suspended) changeMode("pointer", false);
+  };
+  const suspend = () => {
+    suspended = true;
+    previous.clear();
+    connected.clear();
+    repeatAt.clear();
+    changeMode(interactionMode ?? "pointer", false);
+  };
+  const resume = () => {
+    suspended = document.visibilityState === "hidden";
+  };
+  const visibility = () => {
+    if (document.visibilityState === "hidden") suspend();
+    else resume();
   };
   window.addEventListener("keydown", keyboard, true);
   window.addEventListener("keyup", keyup, true);
   window.addEventListener("pointerdown", pointer, true);
   window.addEventListener("pointermove", pointer, true);
+  window.addEventListener("wheel", wheel, { capture: true, passive: true });
+  window.addEventListener("blur", suspend);
+  window.addEventListener("focus", resume);
+  document.addEventListener("visibilitychange", visibility);
   let frame = 0;
-  let previous = new Set<InputAction>();
-  let repeatAt = 0;
   const poll = (now: number) => {
+    if (disposed) return;
     const actions = new Set<InputAction>();
-    for (const pad of navigator.getGamepads?.() ?? []) {
-      if (pad && pad.mapping === "standard") for (const action of gamepadActions(pad)) actions.add(action);
+    const present = new Set<number>();
+    let pads: (Gamepad | null)[] = [];
+    try {
+      if (!suspended && document.hasFocus()) pads = navigator.getGamepads?.() ?? [];
+    } catch {
+      // Restricted browser contexts may deny controller access; other input remains usable.
     }
+    for (const [index, pad] of pads.entries()) {
+      if (!pad || pad.connected === false || pad.mapping !== "standard") continue;
+      present.add(index);
+      for (const action of gamepadActions(pad)) {
+        actions.add(action);
+        // A newly connected or resumed controller must release held controls.
+        if (!connected.has(index)) blocked.add(action);
+      }
+    }
+    connected = present;
+    for (const action of blocked) if (!actions.has(action)) blocked.delete(action);
     for (const action of actions) {
+      if (blocked.has(action) || disposed) continue;
       const directional = ["left", "right", "up", "down"].includes(action);
-      if (!previous.has(action) || (directional && now >= repeatAt)) {
-        changeMode("controller");
+      if (!previous.has(action) || (directional && now >= (repeatAt.get(action) ?? 0))) {
+        changeMode("controller", navigation || directional || action === "confirm" || action === "inspect");
         onAction(action);
-        if (directional) repeatAt = now + (previous.has(action) ? 160 : 350);
+        if (directional) repeatAt.set(action, now + (previous.has(action) ? 160 : 350));
       }
     }
     previous = actions;
-    frame = requestAnimationFrame(poll);
+    if (!disposed) frame = requestAnimationFrame(poll);
   };
   frame = requestAnimationFrame(poll);
   return () => {
+    disposed = true;
     cancelAnimationFrame(frame);
     window.removeEventListener("keydown", keyboard, true);
     window.removeEventListener("keyup", keyup, true);
     window.removeEventListener("pointerdown", pointer, true);
     window.removeEventListener("pointermove", pointer, true);
+    window.removeEventListener("wheel", wheel, true);
+    window.removeEventListener("blur", suspend);
+    window.removeEventListener("focus", resume);
+    document.removeEventListener("visibilitychange", visibility);
   };
 }

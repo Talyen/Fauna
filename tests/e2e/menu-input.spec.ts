@@ -1,0 +1,297 @@
+import { test, expect, type Page } from "@playwright/test";
+import { accept, run } from "../unit/helpers";
+import { createGame } from "../../src/game/engine";
+
+test("pointer menu transitions never display focus indicators", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "New journey", exact: true }).click();
+  await page.getByRole("button", { name: "Open menu" }).click();
+  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.keyboard.press("Escape");
+  const settings = page.getByRole("button", { name: "Settings", exact: true });
+  await expect(settings).toBeFocused();
+  await expect(settings).toHaveCSS("outline-style", "none");
+  await expect(settings).toHaveCSS("box-shadow", "none");
+  await page.keyboard.press("s");
+  const end = page.getByRole("button", { name: "Main menu", exact: true });
+  await expect(end).toBeFocused();
+  await expect(end).toHaveCSS("outline-style", "dashed");
+  await page.mouse.move(20, 20);
+  await expect(end).toHaveCSS("outline-style", "none");
+  await page.screenshot({ path: "reports/menu-pointer.png" });
+});
+
+test("held Escape closes only the current menu level", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "New journey", exact: true }).click();
+  await page.getByRole("button", { name: "Open menu" }).click();
+  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.keyboard.down("Escape");
+  await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
+  await page.keyboard.down("Escape");
+  await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
+  await page.keyboard.up("Escape");
+});
+
+test("short enlarged menus retain full control sizes and scroll to every action", async ({ page }) => {
+  await page.setViewportSize({ width: 960, height: 480 });
+  // A new journey's destination screen exposes the optional Lineup menu entry.
+  const game = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
+  await page.addInitScript((value) => {
+    localStorage.setItem("fauna.text-scale", "1.5");
+    localStorage.setItem("fauna.save.v1", value);
+  }, JSON.stringify(game));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await page.getByRole("button", { name: "Open menu" }).click();
+  const dialog = page.getByRole("dialog", { name: "Pause menu" });
+  const heights = await dialog
+    .locator("button:not(.dialog-close)")
+    .evaluateAll((buttons) => buttons.map((button) => button.getBoundingClientRect().height));
+  expect(heights.every((height) => height >= 44)).toBe(true);
+  for (const name of [
+    "Lineup",
+    "Talents",
+    "Collection",
+    "Glossary",
+    "Settings",
+    "End journey",
+    "Main menu",
+  ]) {
+    await page.keyboard.press("s");
+    const choice = page.getByRole("button", { name, exact: true });
+    await expect(choice).toBeFocused();
+    await expect(choice).toBeInViewport();
+  }
+  await page.screenshot({ path: "reports/menu-short.png" });
+});
+
+type SimulatedPad = { mapping: string; connected: boolean; axes: number[]; buttons: { pressed: boolean }[] };
+declare global {
+  interface Window {
+    menuPad: SimulatedPad;
+  }
+}
+async function controller(page: Page) {
+  await page.addInitScript(() => {
+    window.menuPad = {
+      mapping: "standard",
+      connected: true,
+      axes: [0, 0],
+      buttons: Array.from({ length: 16 }, () => ({ pressed: false })),
+    };
+    Object.defineProperty(navigator, "getGamepads", { value: () => [window.menuPad] });
+  });
+  const frames = () =>
+    page.evaluate(
+      () =>
+        new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))),
+    );
+  return {
+    frames,
+    press: async (index: number) => {
+      await page.evaluate((i) => {
+        window.menuPad.buttons[i]!.pressed = true;
+      }, index);
+      await frames();
+      await page.evaluate((i) => {
+        window.menuPad.buttons[i]!.pressed = false;
+      }, index);
+      await frames();
+    },
+  };
+}
+
+for (const [width, height, enlarged] of [
+  [1280, 800, false],
+  [1920, 1080, false],
+  [960, 540, true],
+] as const) {
+  test(`controller menu journey at ${width}x${height}, enlarged ${enlarged}`, async ({ page }) => {
+    await page.setViewportSize({ width, height });
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    const pad = await controller(page);
+    if (enlarged) await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.5"));
+    await page.goto("/");
+    await expect(page.getByRole("button", { name: "New journey", exact: true })).toBeFocused();
+    await pad.frames();
+    await pad.press(13);
+    await expect(page.getByRole("button", { name: "Talents", exact: true })).toBeFocused();
+    await pad.press(13);
+    await expect(page.getByRole("button", { name: "Collection", exact: true })).toBeFocused();
+    await pad.press(0);
+    await expect(page.getByRole("button", { name: "Back", exact: true })).toBeFocused();
+    await pad.press(13);
+    const card = page.locator(".collection-grid button:focus");
+    await expect(card).toHaveCount(1);
+    const opener = await card.getAttribute("aria-label");
+    await page.screenshot({ path: `reports/menu-collection-${width}.png` });
+    await pad.press(2);
+    await expect(page.locator(".creature-inspection")).toBeVisible();
+    await pad.press(0);
+    await expect(page.locator(".inspection.single-card")).toBeVisible();
+    await pad.press(15);
+    await pad.press(13);
+    await expect(page.getByRole("button", { name: "Previous action" })).toBeFocused();
+    await expect(page.getByRole("button", { name: "Previous action" })).toBeInViewport();
+    await page.screenshot({ path: `reports/menu-inspection-${width}.png` });
+    await pad.press(1);
+    await expect(page.locator(".inspection-thumbnails button:focus")).toHaveCount(1);
+    await pad.press(1);
+    await expect(page.getByRole("button", { name: opener!, exact: true })).toBeFocused();
+    await pad.press(1);
+    await expect(page.getByRole("button", { name: "Collection", exact: true })).toBeFocused();
+    await pad.press(13);
+    await expect(page.getByRole("button", { name: "Glossary", exact: true })).toBeFocused();
+    await pad.press(0);
+    const glossary = page.getByRole("dialog", { name: "Glossary & controls" });
+    await pad.press(13);
+    expect(await glossary.evaluate((el) => el.scrollTop)).toBeGreaterThan(0);
+    await pad.press(1);
+    await expect(page.getByRole("button", { name: "Glossary", exact: true })).toBeFocused();
+    await pad.press(13);
+    await pad.press(0);
+    const sound = page.getByRole("switch", { name: "Sound", exact: true });
+    await expect(sound).toBeFocused();
+    await pad.press(0);
+    await expect(sound).not.toBeChecked();
+    await pad.press(13);
+    await expect(page.locator('[role="radio"]:focus')).toHaveCount(1);
+    await page.screenshot({ path: `reports/menu-settings-${width}.png` });
+    await pad.press(13);
+    await expect(page.locator('[role="radio"]:focus')).toBeChecked();
+    await pad.press(1);
+    await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
+    await page.mouse.move(20, 20);
+    await expect(page.locator(".app")).toHaveAttribute("data-focus", "hidden");
+    const outlined = await page
+      .locator(":focus")
+      .evaluateAll((els) =>
+        els.some(
+          (el) => getComputedStyle(el).outlineStyle !== "none" || getComputedStyle(el).boxShadow !== "none",
+        ),
+      );
+    expect(outlined).toBe(false);
+  });
+}
+
+test("controller reconnection and background input cannot activate journey commands", async ({ page }) => {
+  const pad = await controller(page);
+  await page.addInitScript((value) => localStorage.setItem("fauna.save.v1", value), JSON.stringify(run()));
+  await page.goto("/");
+  await pad.frames();
+  await pad.press(0);
+  await expect(page.locator(".app")).toHaveAttribute("data-phase", "battle");
+  const revision = () =>
+    page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).revision as number);
+  const before = await revision();
+  await page.evaluate(() => {
+    window.dispatchEvent(new Event("blur"));
+    window.menuPad.buttons[3]!.pressed = true;
+  });
+  await pad.frames();
+  expect(await revision()).toBe(before);
+  await page.evaluate(() => window.dispatchEvent(new Event("focus")));
+  await pad.frames();
+  expect(await revision()).toBe(before);
+  await page.evaluate(() => {
+    window.menuPad.buttons[3]!.pressed = false;
+    window.menuPad.connected = false;
+  });
+  await pad.frames();
+  await page.evaluate(() => {
+    window.menuPad.buttons[3]!.pressed = true;
+    window.menuPad.connected = true;
+  });
+  await pad.frames();
+  expect(await revision()).toBe(before);
+  await page.evaluate(() => {
+    window.menuPad.buttons[3]!.pressed = false;
+  });
+  await pad.frames();
+  await pad.press(3);
+  await expect(page.locator(".app")).toHaveAttribute("data-save-status", "saved");
+  expect(await revision()).toBe(before + 1);
+});
+
+test("mouse use cancels held-stick navigation until release", async ({ page }) => {
+  const pad = await controller(page);
+  await page.goto("/");
+  await expect(page.getByRole("button", { name: "New journey", exact: true })).toBeFocused();
+  await pad.frames();
+  await page.evaluate(() => {
+    window.menuPad.axes = [0, 1];
+  });
+  await pad.frames();
+  await expect(page.getByRole("button", { name: "Talents", exact: true })).toBeFocused();
+  await page.getByRole("button", { name: "Collection", exact: true }).click();
+  await page.waitForTimeout(500);
+  await expect(page.getByRole("button", { name: "Back", exact: true })).toBeFocused();
+  await expect(page.locator(".app")).toHaveAttribute("data-focus", "hidden");
+  await page.evaluate(() => {
+    window.menuPad.axes = [0, 0];
+  });
+  await pad.frames();
+  await pad.press(13);
+  await expect(page.locator(".collection-grid button:focus")).toHaveCount(1);
+  await page.mouse.wheel(0, 80);
+  await expect(page.locator(".app")).toHaveAttribute("data-focus", "hidden");
+});
+
+test("controller cancellation preserves the journey and returns through Pause", async ({ page }) => {
+  const pad = await controller(page);
+  await page.addInitScript((value) => localStorage.setItem("fauna.save.v1", value), JSON.stringify(run()));
+  await page.goto("/");
+  await expect(page.getByRole("button", { name: "Continue", exact: true })).toBeFocused();
+  await pad.frames();
+  await pad.press(0);
+  await pad.press(1);
+  for (let i = 0; i < 5; i++) await pad.press(13);
+  await expect(page.getByRole("button", { name: "End journey", exact: true })).toBeFocused();
+  await pad.press(0);
+  const dialog = page.getByRole("alertdialog", { name: "End journey?" });
+  await expect(dialog.getByRole("button", { name: "Cancel", exact: true })).toBeFocused();
+  await pad.press(1);
+  await expect(page.getByRole("button", { name: "End journey", exact: true })).toBeFocused();
+  await pad.press(1);
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).revision)).toBe(
+    run().revision,
+  );
+});
+
+test("pointer use has no native or shadcn focus decoration in settings, tabs or confirmation", async ({
+  page,
+}) => {
+  await page.addInitScript((value) => localStorage.setItem("fauna.save.v1", value), JSON.stringify(run()));
+  await page.goto("/");
+  const noDecoration = async () => {
+    const styles = await page.locator(":focus").evaluateAll((elements) =>
+      elements.map((element) => {
+        const style = getComputedStyle(element);
+        return { outline: style.outlineStyle, shadow: style.boxShadow };
+      }),
+    );
+    expect(styles.length).toBeGreaterThan(0);
+    await expect(page.locator(".app")).toHaveAttribute("data-focus", "hidden");
+    expect(styles).toEqual(styles.map(() => ({ outline: "none", shadow: "none" })));
+  };
+  await noDecoration();
+  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await noDecoration();
+  await page.getByRole("radio", { name: "150%", exact: true }).click();
+  await noDecoration();
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
+  await noDecoration();
+  await page.getByRole("button", { name: "Talents", exact: true }).click();
+  await page.getByRole("tab", { name: "Fire", exact: true }).click();
+  await noDecoration();
+  await page.keyboard.press("Escape");
+  await page.getByRole("button", { name: "End journey", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Cancel", exact: true })).toBeFocused();
+  await noDecoration();
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("button", { name: "End journey", exact: true })).toBeFocused();
+  await noDecoration();
+});

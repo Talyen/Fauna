@@ -67,7 +67,7 @@
   opacity: 0;
 }
 .mana-gem:hover .mana-glint,
-.mana:focus-visible .mana-glint {
+:root[data-focus="visible"] .mana:focus .mana-glint {
   animation: mana-glint 650ms ease-out both;
 }
 @keyframes mana-glint {

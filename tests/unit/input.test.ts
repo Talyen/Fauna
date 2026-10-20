@@ -1,0 +1,199 @@
+// @vitest-environment jsdom
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { connectInput, gamepadActions, type InputAction } from "../../src/ui/input";
+
+afterEach(() => {
+  vi.unstubAllGlobals();
+  vi.restoreAllMocks();
+});
+function harness() {
+  vi.spyOn(document, "hasFocus").mockReturnValue(true);
+  let frame: FrameRequestCallback = () => {};
+  let pads: Array<Pick<Gamepad, "mapping" | "buttons" | "axes"> | null> = [];
+  vi.stubGlobal("navigator", { getGamepads: () => pads });
+  vi.stubGlobal("requestAnimationFrame", (callback: FrameRequestCallback) => {
+    frame = callback;
+    return 1;
+  });
+  vi.stubGlobal("cancelAnimationFrame", vi.fn());
+  const actions: InputAction[] = [];
+  const modes = vi.fn();
+  const dispose = connectInput((action) => actions.push(action), modes);
+  const tick = (now: number, buttons: number[] = [], axes = [0, 0]) => {
+    pads = [
+      {
+        mapping: "standard",
+        buttons: Array.from({ length: 16 }, (_, i) => ({ pressed: buttons.includes(i) }) as GamepadButton),
+        axes,
+      },
+    ];
+    frame(now);
+  };
+  tick(0);
+  return {
+    actions,
+    modes,
+    tick,
+    dispose,
+    disconnect: (now: number) => {
+      pads = [];
+      frame(now);
+    },
+  };
+}
+
+describe("player input ownership", () => {
+  it("does not unwind multiple menu levels when Escape or inspect is held", () => {
+    const h = harness();
+    try {
+      for (const key of ["Escape", "i"]) {
+        window.dispatchEvent(new KeyboardEvent("keydown", { key, bubbles: true }));
+        window.dispatchEvent(new KeyboardEvent("keydown", { key, repeat: true, bubbles: true }));
+      }
+      expect(h.actions).toEqual(["back", "inspect"]);
+    } finally {
+      h.dispose();
+    }
+  });
+  it("lets pointer interaction reclaim input from a held stick until it is released", () => {
+    const h = harness();
+    try {
+      h.tick(10, [], [1, 0]);
+      window.dispatchEvent(new Event("pointerdown"));
+      h.tick(500, [], [1, 0]);
+      expect(h.actions).toEqual(["right"]);
+      h.tick(510);
+      h.tick(520, [], [1, 0]);
+      expect(h.actions).toEqual(["right", "right"]);
+    } finally {
+      h.dispose();
+    }
+  });
+  it("suspends controller actions in the background and requires release on return", () => {
+    const h = harness();
+    try {
+      window.dispatchEvent(new Event("blur"));
+      h.tick(10, [0]);
+      window.dispatchEvent(new Event("focus"));
+      h.tick(20, [0]);
+      expect(h.actions).toEqual([]);
+      h.tick(30);
+      h.tick(40, [0]);
+      expect(h.actions).toEqual(["confirm"]);
+    } finally {
+      h.dispose();
+    }
+  });
+  it("requires release when a controller reconnects with confirm held", () => {
+    const h = harness();
+    try {
+      h.disconnect(10);
+      h.tick(20, [0]);
+      expect(h.actions).toEqual([]);
+      h.tick(30);
+      h.tick(40, [0]);
+      expect(h.actions).toEqual(["confirm"]);
+    } finally {
+      h.dispose();
+    }
+  });
+  it("keeps discrete controller buttons edge-triggered while directions repeat", () => {
+    const h = harness();
+    try {
+      h.tick(10, [0, 13]);
+      h.tick(200, [0, 13]);
+      h.tick(360, [0, 13]);
+      h.tick(520, [0, 13]);
+      expect(h.actions).toEqual(["confirm", "down", "down", "down"]);
+    } finally {
+      h.dispose();
+    }
+  });
+  it("resolves a diagonal stick to one direction and lets the D-pad override the stick", () => {
+    const pad = (buttons: number[], axes: number[]) => ({
+      buttons: Array.from({ length: 16 }, (_, i) => ({ pressed: buttons.includes(i) }) as GamepadButton),
+      axes,
+    });
+    expect(gamepadActions(pad([], [0.7, 0.9]))).toEqual(["down"]);
+    expect(gamepadActions(pad([14], [1, 0]))).toEqual(["left"]);
+    expect(gamepadActions(pad([], [0.2, -0.2]))).toEqual([]);
+  });
+});
+
+describe("navigation intent and lifecycle", () => {
+  it("does not expose focus for Escape after pointer use, but does for navigation", () => {
+    const h = harness();
+    try {
+      window.dispatchEvent(new Event("pointerdown"));
+      window.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
+      expect(h.modes).toHaveBeenLastCalledWith("keyboard", false);
+      window.dispatchEvent(new KeyboardEvent("keydown", { key: "Tab" }));
+      expect(h.modes).toHaveBeenLastCalledWith("keyboard", true);
+      window.dispatchEvent(new Event("pointerdown"));
+      expect(h.modes).toHaveBeenLastCalledWith("pointer", false);
+      h.tick(10, [1]);
+      expect(h.modes).toHaveBeenLastCalledWith("controller", false);
+      h.tick(20);
+      h.tick(30, [13]);
+      expect(h.modes).toHaveBeenLastCalledWith("controller", true);
+    } finally {
+      h.dispose();
+    }
+  });
+  it("survives denied controller access and keeps keyboard input available", () => {
+    const h = harness();
+    try {
+      vi.stubGlobal("navigator", {
+        getGamepads: () => {
+          throw new Error("Denied");
+        },
+      });
+      expect(() => h.disconnect(10)).not.toThrow();
+      window.dispatchEvent(new KeyboardEvent("keydown", { key: "s" }));
+      expect(h.actions).toEqual(["down"]);
+    } finally {
+      h.dispose();
+    }
+  });
+  it("revokes queued controller polls and keyboard listeners on disposal", () => {
+    const h = harness();
+    h.dispose();
+    h.tick(10, [0]);
+    window.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
+    expect(h.actions).toEqual([]);
+  });
+});
+
+it("removes indicators on the first mouse movement even when movement deltas are zero", () => {
+  const h = harness();
+  try {
+    window.dispatchEvent(new KeyboardEvent("keydown", { key: "Tab" }));
+    const move = new MouseEvent("pointermove", { clientX: 20, clientY: 20 });
+    window.dispatchEvent(move);
+    expect(h.modes).toHaveBeenLastCalledWith("pointer", false);
+    const count = h.modes.mock.calls.length;
+    h.tick(10, [13]);
+    window.dispatchEvent(new MouseEvent("pointermove", { clientX: 20, clientY: 20 }));
+    expect(h.modes.mock.calls.length).toBe(count + 1);
+    expect(h.modes).toHaveBeenLastCalledWith("controller", true);
+  } finally {
+    h.dispose();
+  }
+});
+
+it("checks browser focus even if a blur event was missed", () => {
+  const h = harness();
+  try {
+    vi.spyOn(document, "hasFocus").mockReturnValue(false);
+    h.tick(10, [0]);
+    expect(h.actions).toEqual([]);
+    vi.spyOn(document, "hasFocus").mockReturnValue(true);
+    h.tick(20, [0]);
+    expect(h.actions).toEqual([]);
+    h.tick(30);
+    h.tick(40, [0]);
+    expect(h.actions).toEqual(["confirm"]);
+  } finally {
+    h.dispose();
+  }
+});
