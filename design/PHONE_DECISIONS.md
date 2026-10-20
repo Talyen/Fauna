@@ -174,6 +174,14 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 - Empty-state icons are 24px and muted gray.
 - Center the icon within the empty content area. It appears immediately, has no hover visual change and is replaced immediately when content becomes available.
 
+## Text and numeric presentation
+
+- Creature and card names in inspection use semibold text.
+- Changing numeric readouts, such as currency, use equal-width (tabular) digits to prevent horizontal shifting.
+- Long names wrap onto another line rather than truncating with an ellipsis.
+- Rule paragraphs are left-aligned.
+- These choices apply to surrounding text and inspection; artwork remains free of text overlays. Preserve fixed text sizes, text-size settings and existing semantic colors.
+
 ## Shared preferences
 
 Continue the phone review in batches of independent questions so the user can answer several choices per turn.
