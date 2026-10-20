@@ -140,9 +140,9 @@ describe("keyword progression and rewards", () => {
     s = accept(s, { type: "beginBattle" });
     expect(s.battle!.hand).toHaveLength(5);
     expect(s.battle!.buffer).toHaveLength(0);
-    expect(s.team.find((c) => c.species === "emberfox")!.combat.armor).toBe(2);
+    expect(s.team.find((c) => c.species === "emberfox")!.combat!.armor).toBe(2);
     s = accept(s, { type: "resetTalents", keyword: "armor" });
-    expect(s.team.find((c) => c.species === "emberfox")!.combat.armor).toBe(2);
+    expect(s.team.find((c) => c.species === "emberfox")!.combat!.armor).toBe(2);
     expect(decodeSave(encodeSave(s))).toEqual(s);
   });
   it("rejects unknown/prototype map keys, invalid row purchases, and malformed receipts", () => {

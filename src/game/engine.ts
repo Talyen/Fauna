@@ -164,10 +164,12 @@ export function beginBattle(state: GameState) {
   state.phase = "battle";
   draw(state, TURN_DRAW + (state.boons.includes("tattered-pages") ? 1 : 0));
   if (hasTalent(state, "nature.ecosystem")) {
-    const index = state.battle.draw.findLastIndex((id) => {
+    let index = state.battle.draw.length - 1;
+    for (; index >= 0; index--) {
+      const id = state.battle.draw[index]!;
       const def = definition(state.cards.find((card) => card.id === id)!.definitionId);
-      return def.effect === "attack" && def.damageType === "nature";
-    });
+      if (def.effect === "attack" && def.damageType === "nature") break;
+    }
     if (index >= 0) {
       const id = state.battle.draw.splice(index, 1)[0]!;
       if (state.battle.hand.length < MAX_HAND_SIZE) state.battle.hand.push(id);
