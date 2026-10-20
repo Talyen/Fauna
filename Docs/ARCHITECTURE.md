@@ -1,12 +1,12 @@
 # Architecture
 
-`src/game/` owns content, commands, battle rules, seeded RNG, and save validation. It imports only its own modules, Immer, and Zod. It does not access the DOM, React, filesystem, Steam, clocks, or ambient randomness. `scripts/boundaries.mjs` checks that separation.
+`src/game/` owns content, commands, battle rules, seeded RNG, and save validation. It imports only its own modules, Immer, and Zod. It does not access the DOM, React, filesystem, Steam, clocks, or ambient randomness. `scripts/boundaries.mjs` parses source and checks resolved import paths and ambient capability references; CI also runs Knip for unused files, exports and dependencies.
 
 `dispatch(state, command)` returns either an accepted immutable state with ordered presentation events or a rejection retaining the original state. Validation occurs before RNG consumption or mutation. Gameplay and progression settle synchronously. Animation is a consumer of results; it cannot pay mana, damage a creature, grant a reward, or unlock content.
 
 `src/application/session.ts` owns the runtime store and serialized save queue. Commands install committed state and immediately enqueue its encoding. Load examines primary followed by backups; malformed saves never enter gameplay. All-invalid candidates require a fresh-start action; read I/O failures block commands until retry. Failed writes retain the live game and expose retry. Disposal revokes commands and unsubscribes the close handshake while draining admitted writes.
 
-`src/platform/` defines storage, desktop quit, and optional Steam cloud/achievement capabilities. The browser uses localStorage; desktop uses a sandboxed preload IPC bridge. Steam capabilities are unavailable in this milestone and gameplay does not require them.
+`src/platform/` defines storage, desktop quit, and optional Steam cloud/achievement capabilities. The browser uses localStorage; desktop uses a sandboxed preload IPC bridge. Steam is optional. Desktop adapters expose display preferences, account-scoped cloud transport and overlay state; gameplay never requires Steam. Cloud reconciliation belongs to the application and native calls run in an owned utility process.
 
 `src/ui/` consumes the session and owns transient targeting, inspection, menu, and input modality. Zustand subscriptions expose application state. Motion respects the user's reduced-motion preference. Standard gamepads and keyboard navigation feed semantic actions and share focus navigation.
 
@@ -22,9 +22,9 @@ A linear-congruential RNG is explicit state. Destination offers, shuffles and in
 
 Development saves are disposable: there are no released player saves to preserve. Do not implement migrations or backward compatibility unless explicitly requested. Obsolete formats are rejected and can be reset through the existing recovery flow. The canonical agent policy is in [AGENTS.md](../AGENTS.md#development-saves).
 
-Current save version 13 is validated by Zod and semantic checks for content IDs, ownership, unique card zones, health bounds, lineup completeness, destination offers, and phase/outcome coherence. Only the current format is supported in browser and desktop storage; fixtures track that format. Valid current-format backups remain recoverable.
+Current save version 14 is validated by Zod and semantic checks for content IDs, ownership, unique card zones, health bounds, lineup completeness, destination offers, and phase/outcome coherence. Only the current format is supported in browser and desktop storage; fixtures track that format. Valid current-format backups remain recoverable.
 
-Battle settlement banks actual retained currency and keyword XP once. Ordinary fights offer recruitment only; intermediate bosses offer boons only. The shared Reward screen consumes committed receipts and accepts a choice or Skip, with no acknowledgement phase or Continue command. No eligible choice advances immediately; final victory and defeat go directly to Journey results. The journey summary retains the outcome, battle count, gains, new unlocks, and last-battle receipt; opening results never grants rewards or saves.
+Battle settlement banks actual retained currency and keyword XP once. Ordinary fights offer recruitment only; intermediate bosses offer up to three unowned Boons only. The shared Reward screen consumes committed receipts and accepts a choice or Skip, with no acknowledgement phase or Continue command. No eligible choice advances immediately; final victory and defeat go directly to Journey results. The journey summary retains the outcome, battle count, gains, new unlocks, and last-battle receipt; opening results never grants rewards or saves.
 
 Hands contain at most seven cards. Extra draws enter a FIFO buffer, which cannot be played or inspected as a separate zone. Accepted plays refill newly open hand slots from that queue without RNG. End turn discards the visible hand, retains overflow, restores four Mana and draws four cards after promoting waiting cards. Swaps preserve buffered card slots and update their owner along with other zones. Save validation includes the buffer in zone uniqueness/completeness and rejects a waiting buffer alongside an unfilled hand.
 
@@ -65,3 +65,19 @@ Development victory uses an explicit session capability supplied only by develop
 Unlock reveals observe newly committed species additions that appear in journey unlock receipts. Consumption is transient for the mounted session; loading completed saves and reopening results never manufacture another reveal.
 
 Talent categories are consolidated independently of combat damage identities. The current format stores Boon IDs, first-Burn consumption, and periodic status attribution. Old development saves, including Forge state and relic fields, are rejected. No capability or local display preference is restored from progression.
+
+## Support visits and spending
+
+Each biome offers an optional Merchant after the first ordinary victory and Sheltered Spring after the second. These saved visits preserve the combat offers and do not replace or advance battles. Merchant stock contains up to two unowned Boons at 20 permanent currency each, with one purchase per visit. Spring offers 15% capped roster recovery or 10 retained currency. Entering commits a visit; leaving consumes it, and beginning the next battle forfeits it. Inspection is read-only. Commands address visit/slot identities and validate before mutation; reload cannot refresh stock or repeat benefits.
+
+Journey currency measures gross retained earnings, independently of the remaining wallet. Boss rewards contain up to three eligible unowned Boons and skip only an empty pool. Support state, stock, price bounds, receipts and phases are validated together in save version 14; obsolete development saves are rejected.
+
+## Cloud reconciliation and device preferences
+
+`src/application/cloud.ts` validates current gameplay payloads and hashed envelopes, compares causal ancestry, and owns explicit conflict resolution. It never merges progression fields. Each device writes two alternating remote slots; another device's slots are read-only. Unknown ancestry is a conflict. Replacements preserve competing snapshots locally before installation through the serialized save lane. Snapshot lineage is bounded to 64 ancestors and remote inventory to 32 device streams / 64 files, at most 1 MiB each. Invalid or oversized files pause upload; they are not deleted.
+
+Local saves remain authoritative offline. Cloud metadata is durably written after the local gameplay save and before upload; transport cannot hold the local save queue. Cloud errors report Pending separately from local save failure. Startup reconciles before command admission, with an explicit offline continuation after failure or a five-second wait. Late reads cannot replace a session after offline takeover. Shutdown drains admitted local writes and allows at most two seconds for uploads. A utility process contains blocking native transport and is terminated on owned app shutdown.
+
+`desktop/steam.cjs` pins an optional Steam account, isolates its local profile from standalone progress, and offers explicit standalone adoption. `desktop/steam-config.json` holds Fauna's own App ID; its default null disables real Steam. Browser, smoke, preview and performance profiles never access live Steam. Account changes reject transport and require restart. Without a Steam client, ordinary launch continues the last locally used Steam profile with sync unavailable; isolated automation ignores that pointer. A newly identified account always selects its own directory, and the standalone original remains separate. Overlay activation synchronously revokes commands, cancels targeting/Auto-play and opens the existing pause menu; closing the overlay does not resume automatically.
+
+`desktop/display.cjs` owns Windowed/Fullscreen and reachable window bounds, stored separately from progression and Cloud. Renderer settings use the typed authorized preload capability; automation has fixed isolated geometry. Native transitions and monitor removal never change artwork dimensions. After-pack fuses and browser snapshots are checked on the actual Windows artifact before the renderer-only packaged smoke; Node inspection is disabled.

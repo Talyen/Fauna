@@ -1,0 +1,230 @@
+const fs = require("node:fs/promises");
+const path = require("node:path");
+const { createHash, randomBytes } = require("node:crypto");
+const { createStorage } = require("./storage.cjs");
+const validName = (name) => typeof name === "string" && /^fauna-v1-[a-f0-9]{32}-[01]\.json$/.test(name);
+async function createSteam({
+  app,
+  utilityProcess,
+  directory,
+  isolated,
+  pause,
+  loadBinding = () => require("steamworks.js"),
+}) {
+  let available = false,
+    account = null,
+    worker,
+    overlay = null,
+    overlayActive = false;
+  let device,
+    profile = "",
+    sequence = 0,
+    dead = false,
+    transportStopped = false;
+  const requests = new Map();
+  const root = directory;
+  let lane = Promise.resolve();
+  async function atomic(file, data) {
+    await fs.mkdir(path.dirname(file), { recursive: true });
+    const handle = await fs.open(`${file}.tmp`, "w");
+    try {
+      await handle.writeFile(data, "utf8");
+      await handle.sync();
+    } finally {
+      await handle.close();
+    }
+    await fs.rename(`${file}.tmp`, file);
+  }
+  function request(operation, args = []) {
+    if (dead || transportStopped || !worker) return Promise.reject(new Error("Steam transport unavailable."));
+    const id = ++sequence;
+    return new Promise((resolve, reject) => {
+      const timer = setTimeout(() => {
+        requests.delete(id);
+        transportStopped = true;
+        worker.kill();
+        reject(new Error("Steam Cloud timed out. Local saves remain available; restart to reconnect."));
+      }, 5000);
+      requests.set(id, { resolve, reject, timer });
+      worker.postMessage({ id, operation, args });
+    });
+  }
+  if (!isolated) {
+    try {
+      const config = JSON.parse(await fs.readFile(path.join(__dirname, "steam-config.json"), "utf8"));
+      const appId = app.isPackaged ? config.appId : Number(process.env.FAUNA_STEAM_APP_ID || config.appId);
+      if (Number.isSafeInteger(appId) && appId > 0) {
+        const binding = loadBinding();
+        binding.electronEnableSteamOverlay();
+        const client = binding.init(appId);
+        const event = binding.SteamCallback?.GameOverlayActivated;
+        if (event !== undefined && client.callback?.register)
+          overlay = client.callback.register(event, ({ active }) => {
+            overlayActive = active === true;
+            pause(overlayActive);
+          });
+        else console.warn("[steam] Overlay callbacks unavailable; live overlay acceptance is pending.");
+        account = client.localplayer.getSteamId().steamId64.toString();
+        if (!/^\d{1,20}$/.test(account)) throw new Error("Invalid Steam account.");
+        profile = createHash("sha256").update(`fauna:${account}`).digest("hex").slice(0, 32);
+        worker = utilityProcess.fork(path.join(__dirname, "steam-worker.cjs"), [], {
+          serviceName: "Fauna cloud",
+        });
+        worker.on("message", ({ id, value, error }) => {
+          const entry = requests.get(id);
+          if (!entry) return;
+          requests.delete(id);
+          clearTimeout(entry.timer);
+          if (error) entry.reject(new Error(error));
+          else entry.resolve(value);
+        });
+        worker.on("exit", () => {
+          transportStopped = true;
+          for (const entry of requests.values()) {
+            clearTimeout(entry.timer);
+            entry.reject(new Error("Steam transport stopped."));
+          }
+          requests.clear();
+        });
+        const workerAccount = await request("init", [appId]);
+        if (account !== workerAccount) throw new Error("Steam account differs between processes.");
+        available = true;
+      }
+    } catch {
+      console.warn("[steam] Steam unavailable; local play remains available.");
+    }
+  }
+  if (!isolated) {
+    if (profile) {
+      try {
+        await atomic(path.join(root, "last-profile"), profile);
+      } catch {
+        /* Profile saving still reports its own actionable failures. */
+      }
+    } else {
+      try {
+        const previous = await fs.readFile(path.join(root, "last-profile"), "utf8");
+        if (/^[a-f0-9]{32}$/.test(previous)) profile = previous;
+      } catch {
+        /* A fresh standalone installation has no previous Steam profile. */
+      }
+    }
+  }
+  const profileDir = profile ? path.join(root, "profiles", profile) : root;
+  if (available) {
+    try {
+      try {
+        device = await fs.readFile(path.join(root, "device-id"), "utf8");
+      } catch (e) {
+        if (e.code !== "ENOENT") throw e;
+      }
+      if (!/^[a-f0-9]{32}$/.test(device ?? "")) {
+        device = randomBytes(16).toString("hex");
+        await atomic(path.join(root, "device-id"), device);
+      }
+    } catch {
+      available = false;
+      console.warn("[steam] Device identity unavailable; cloud sync disabled.");
+    }
+  }
+  const storage = createStorage(profileDir);
+  const offlineStorage = createStorage(root);
+  const metadata = path.join(profileDir, "cloud.json");
+  const importMarker = path.join(profileDir, "standalone-choice");
+  async function readOptional(file) {
+    try {
+      const stat = await fs.stat(file);
+      if (stat.size > 1_048_576) throw new Error("Cloud metadata exceeds supported size.");
+      return await fs.readFile(file, "utf8");
+    } catch (e) {
+      if (e.code === "ENOENT") return null;
+      throw e;
+    }
+  }
+  const serial = (fn) => {
+    const operation = lane.then(fn);
+    lane = operation.catch(() => {});
+    return operation;
+  };
+  const requireAvailable = () => {
+    if (!available || dead) throw new Error("Steam Cloud is unavailable.");
+  };
+  return {
+    storage,
+    overlay: () => overlayActive,
+    identity: async () => {
+      const local = available ? await storage.readCandidates() : [];
+      return {
+        available,
+        enabled: available ? await request("enabled") : false,
+        device: device ?? "",
+        profile,
+        importAvailable:
+          available &&
+          !local.length &&
+          !(await readOptional(importMarker)) &&
+          (await offlineStorage.readCandidates()).length > 0,
+      };
+    },
+    readLocal: () => serial(() => readOptional(metadata)),
+    writeLocal: (data) =>
+      serial(async () => {
+        requireAvailable();
+        if (typeof data !== "string" || Buffer.byteLength(data) > 1_048_576)
+          throw new Error("Invalid cloud metadata.");
+        await atomic(metadata, data);
+      }),
+    acknowledge: (id) =>
+      serial(async () => {
+        requireAvailable();
+        if (typeof id !== "string" || !/^[a-f0-9]{64}$/.test(id)) throw new Error("Invalid acknowledgement.");
+        await atomic(path.join(profileDir, "cloud-ack"), id);
+      }),
+    preserve: (records) =>
+      serial(async () => {
+        requireAvailable();
+        if (!Array.isArray(records) || records.length > 64) throw new Error("Invalid recovery set.");
+        for (const raw of records) {
+          if (typeof raw !== "string" || Buffer.byteLength(raw) > 1_048_576)
+            throw new Error("Invalid recovery snapshot.");
+          const hash = createHash("sha256").update(raw).digest("hex");
+          await atomic(path.join(profileDir, "recovery", `${hash}.json`), raw);
+        }
+      }),
+    importStandalone: async (use) => {
+      requireAvailable();
+      if (typeof use !== "boolean") throw new Error("Invalid import choice.");
+      const candidates = use ? await offlineStorage.readCandidates() : [];
+      /* The application chooses the first valid current-format candidate. */ if (!use)
+        await atomic(importMarker, "separate");
+      return candidates;
+    },
+    list: async () => {
+      requireAvailable();
+      return request("list");
+    },
+    read: async (name) => {
+      requireAvailable();
+      if (!validName(name)) throw new Error("Invalid cloud slot.");
+      return request("read", [name]);
+    },
+    write: async (name, data) => {
+      requireAvailable();
+      if (!validName(name) || !name.startsWith(`fauna-v1-${device}-`))
+        throw new Error("Cannot overwrite another device's slot.");
+      return request("write", [name, data]);
+    },
+    async dispose() {
+      dead = true;
+      overlay?.disconnect();
+      worker?.kill();
+      for (const entry of requests.values()) {
+        clearTimeout(entry.timer);
+        entry.reject(new Error("Steam transport disposed."));
+      }
+      requests.clear();
+      await lane;
+    },
+  };
+}
+module.exports = { createSteam, validName };

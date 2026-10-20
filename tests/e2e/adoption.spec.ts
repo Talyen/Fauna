@@ -100,3 +100,41 @@ for (const width of [1280, 1920])
     await expect(page.getByRole("radio", { name: "Tooltip 125%", exact: true })).toBeChecked();
     await expect(page.getByRole("radio", { name: "150%", exact: true })).toBeChecked();
   });
+
+for (const width of [1280, 1920])
+  test(`Merchant purchase resumes without duplicate spending at ${width}`, async ({ page }) => {
+    const { accept, winBattle } = await import("../unit/helpers");
+    const { createGame } = await import("../../src/game/engine");
+    let fixture = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
+    fixture = winBattle(accept(fixture, { type: "beginBattle" }));
+    fixture = accept(fixture, { type: "skipRecruit" });
+    const offers = fixture.expedition!.offers;
+    await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.addInitScript((save) => {
+      if (!localStorage.getItem("fauna.save.v1")) localStorage.setItem("fauna.save.v1", save);
+      localStorage.setItem("fauna.text-scale", "1.5");
+    }, JSON.stringify(fixture));
+    await page.goto("/");
+    await page.getByRole("button", { name: "Continue", exact: true }).click();
+    await page.getByRole("button", { name: "Inspect Merchant", exact: true }).click();
+    await page.keyboard.press("Escape");
+    expect(
+      JSON.parse((await page.evaluate(() => localStorage.getItem("fauna.save.v1"))) ?? "{}").revision,
+    ).toBe(fixture.revision);
+    await page.getByRole("button", { name: "Inspect Merchant", exact: true }).click();
+    await page.getByRole("button", { name: "Enter", exact: true }).click();
+    await page.getByRole("button", { name: "Buy · 20 currency", exact: true }).first().click();
+    await expect(page.getByRole("button", { name: "Owned", exact: true })).toBeDisabled();
+    await page.screenshot({ path: `reports/merchant-${width}.png`, fullPage: true });
+    await page.reload();
+    await page.getByRole("button", { name: "Continue", exact: true }).click();
+    await expect(page.getByRole("heading", { name: "Merchant", exact: true })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Owned", exact: true })).toBeDisabled();
+    await page.getByRole("button", { name: "Leave", exact: true }).click();
+    await expect(page.getByRole("button", { name: "Inspect Merchant", exact: true })).toHaveCount(0);
+    const saved = JSON.parse((await page.evaluate(() => localStorage.getItem("fauna.save.v1"))) ?? "{}");
+    expect(saved.currency).toBe(0);
+    expect(saved.journey.currency).toBe(20);
+    expect(saved.expedition.offers).toEqual(offers);
+  });

@@ -1,3 +1,5 @@
+import type { Session } from "../application/session";
+import { DisplaySettings, CloudStatus } from "./platform-settings";
 import { Monitor, Volume2, Bug, Scaling, StepForward } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
 import { RadioGroup, RadioGroupItem } from "../components/ui/radio-group";
@@ -8,6 +10,7 @@ import { DiagnosticViewer } from "./diagnostics";
 import { SettingRow, SettingToggle } from "./settings-controls";
 
 export function Settings({
+  session,
   audio,
   updateAudio,
   scale,
@@ -19,6 +22,7 @@ export function Settings({
   autoEndTurn,
   setAutoEndTurn,
 }: {
+  session?: Session;
   audio: AudioPreferences;
   updateAudio: (patch: Partial<AudioPreferences>) => void;
   scale: number;
@@ -52,6 +56,7 @@ export function Settings({
       </TabsList>
       <TabsContent value="display" className="settings-panel">
         <h2 className="settings-heading">Display</h2>
+        {session ? <DisplaySettings session={session} /> : null}
         <SettingRow icon={Scaling} label="Text size">
           <RadioGroup
             orientation="horizontal"
@@ -99,6 +104,7 @@ export function Settings({
       </TabsContent>
       <TabsContent value="diagnostics" className="settings-panel">
         <h2 className="settings-heading">Diagnostics</h2>
+        {session ? <CloudStatus session={session} /> : null}
         <DiagnosticViewer diagnostics={diagnostics} desktop={desktop} collapsible={false} />
       </TabsContent>
     </Tabs>

@@ -6,6 +6,9 @@ export function createPlatform(): Platform {
   if (!bridge) return createBrowserPlatform();
   return {
     desktop: true,
+    display: bridge.display,
+    cloud: bridge.cloud,
+    onOverlay: bridge.onOverlay,
     diagnostics: browserDiagnostics(),
     steam: { available: false },
     saves: { readCandidates: () => bridge.readCandidates(), write: (data) => bridge.writeSave(data) },

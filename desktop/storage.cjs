@@ -26,7 +26,7 @@ function createStorage(directory) {
         return Promise.reject(new Error("Invalid save payload."));
       try {
         const value = JSON.parse(data);
-        if (value.version !== 13) throw new Error("Unsupported save.");
+        if (value.version !== 14) throw new Error("Unsupported save.");
       } catch (error) {
         return Promise.reject(error);
       }

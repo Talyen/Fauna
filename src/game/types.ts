@@ -70,11 +70,12 @@ export interface JourneySummary {
   lastBattle: { xp: KeywordXP; currency: number } | null;
 }
 export interface GameState {
-  version: 13;
+  version: 14;
   discovery: { encountered: SpeciesId[]; recruited: SpeciesId[] };
   revision: number;
   rng: number;
-  phase: "draft" | "teamSelection" | "battle" | "recruit" | "boon" | "campfire" | "victory" | "defeat";
+  phase:
+    "draft" | "teamSelection" | "battle" | "recruit" | "boon" | "campfire" | "support" | "victory" | "defeat";
   unlocked: SpeciesId[];
   wins: number;
   selected: SpeciesId[];
@@ -92,6 +93,15 @@ export interface GameState {
     step: number;
     offers: { location: string; pack: number }[];
     chosen: string | null;
+  } | null;
+  support: {
+    id: string;
+    kind: "merchant" | "spring";
+    biome: number;
+    step: number;
+    resolved: boolean;
+    purchased: BoonId | null;
+    stock: { slot: string; boon: BoonId; price: number }[];
   } | null;
   battle: Battle | null;
   keywordXP: KeywordXP;
@@ -113,6 +123,10 @@ export type Command =
   | { type: "devWinBattle" }
   | { type: "visitCampfire" }
   | { type: "rest" }
+  | { type: "enterSupport"; visit: string }
+  | { type: "buyBoon"; visit: string; slot: string }
+  | { type: "springChoice"; visit: string; choice: "heal" | "currency" }
+  | { type: "leaveSupport"; visit: string }
   | { type: "recruit"; species: SpeciesId; replace?: string }
   | { type: "skipRecruit" }
   | { type: "chooseBoon"; boon: BoonId }

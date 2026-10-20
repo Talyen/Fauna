@@ -1,3 +1,4 @@
+import { MERCHANT_PRICE, SPRING_CURRENCY, springRecovery } from "./support";
 import { freeze, produce } from "immer";
 import { KEYWORDS, BOONS, cardKeywords, canBuyTalent, hasTalent } from "./progression";
 import {
@@ -23,7 +24,8 @@ import type { Card, Command, CommandResult, GameEvent, GameState } from "./types
 export function createGame(seed = 1): GameState {
   return freeze(
     {
-      version: 13,
+      version: 14,
+      support: null,
       discovery: { encountered: [], recruited: [] },
       revision: 0,
       rng: seed >>> 0,
@@ -73,6 +75,28 @@ function offerDestinations(state: GameState) {
     pack: Math.floor(random(state) * location(id)!.packs.length),
   }));
   route.chosen = null;
+  const kind = route.step === 1 ? "merchant" : route.step === 2 ? "spring" : null;
+  const stock =
+    kind === "merchant"
+      ? shuffle(
+          state,
+          BOONS.filter((b) => !state.boons.includes(b.id)),
+        )
+          .slice(0, 2)
+          .map((b, i) => ({ slot: `slot-${i}`, boon: b.id, price: MERCHANT_PRICE }))
+      : [];
+  state.support =
+    kind && (kind !== "merchant" || stock.length)
+      ? {
+          id: `support-${route.biome}-${route.step}`,
+          kind,
+          biome: route.biome,
+          step: route.step,
+          resolved: false,
+          purchased: null,
+          stock,
+        }
+      : null;
 }
 function living(state: GameState) {
   return state.team.filter((c) => c.health > 0);
@@ -228,7 +252,7 @@ function finishBattle(state: GameState, defeated: boolean) {
       defeated || outcome === "victory" || bossEncounter(state)
         ? []
         : state.battle!.enemies.map((e) => e.species),
-    boons: boons.length === 3 ? boons : [],
+    boons,
   };
   enterReward(state);
 }
@@ -482,7 +506,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
     return reject(state, "Choose an active creature and a reserve.");
   if (
     command.type === "setLineup" &&
-    (!["teamSelection", "recruit", "boon", "campfire"].includes(state.phase) ||
+    (!["teamSelection", "recruit", "boon", "campfire", "support"].includes(state.phase) ||
       ![...state.team, ...state.reserves].some(
         (c) => c.id === command.activeId && state.lineup.includes(c.id),
       ) ||
@@ -520,10 +544,43 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
     return reject(state, "There are no talents to reset in this category.");
   if (
     command.type === "abandon" &&
-    !["battle", "teamSelection", "recruit", "boon", "campfire"].includes(state.phase) &&
+    !["battle", "teamSelection", "recruit", "boon", "campfire", "support"].includes(state.phase) &&
     !(state.phase === "draft" && state.selected.length > 0)
   )
     return reject(state, "There is no journey to end.");
+  const visit = state.support;
+  if (
+    command.type === "enterSupport" &&
+    (state.phase !== "teamSelection" || !visit || visit.resolved || visit.id !== command.visit)
+  )
+    return reject(state, "That visit is unavailable.");
+  if (
+    ["buyBoon", "springChoice", "leaveSupport"].includes(command.type) &&
+    (state.phase !== "support" || !visit || !("visit" in command) || command.visit !== visit.id)
+  )
+    return reject(state, "That visit is no longer active.");
+  if (command.type === "buyBoon") {
+    const slot = visit?.stock.find((s) => s.slot === command.slot);
+    if (
+      visit?.kind !== "merchant" ||
+      visit.resolved ||
+      visit.purchased ||
+      !slot ||
+      state.boons.includes(slot.boon) ||
+      state.currency < slot.price
+    )
+      return reject(state, "That purchase is unavailable.");
+  }
+  if (
+    command.type === "springChoice" &&
+    (visit?.kind !== "spring" ||
+      visit.resolved ||
+      (command.choice !== "heal" && command.choice !== "currency") ||
+      (command.choice === "heal"
+        ? ![...state.team, ...state.reserves].some((c) => springRecovery(c) > 0)
+        : state.currency >= 1_000_000))
+  )
+    return reject(state, "That Spring choice is unavailable.");
   const events: GameEvent[] = [];
   const next = produce(state, (draft) => {
     draft.revision++;
@@ -547,7 +604,38 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         draft.phase = "teamSelection";
         if (draft.expedition) offerDestinations(draft);
         break;
+      case "enterSupport":
+        draft.phase = "support";
+        break;
+      case "leaveSupport":
+        draft.support!.resolved = true;
+        draft.phase = "teamSelection";
+        break;
+      case "buyBoon": {
+        const slot = draft.support!.stock.find((s) => s.slot === command.slot)!;
+        draft.currency -= slot.price;
+        draft.boons.push(slot.boon);
+        draft.support!.purchased = slot.boon;
+        draft.support!.resolved = true;
+        events.push({ kind: "reward", text: "Boon purchased for this journey." });
+        break;
+      }
+      case "springChoice":
+        if (command.choice === "heal") {
+          for (const c of [...draft.team, ...draft.reserves]) c.health += springRecovery(c);
+        } else {
+          const retained = Math.min(SPRING_CURRENCY, 1_000_000 - draft.currency);
+          draft.currency += retained;
+          if (draft.journey) draft.journey.currency += retained;
+        }
+        draft.support!.resolved = true;
+        events.push({
+          kind: "reward",
+          text: command.choice === "heal" ? "Your roster recovered Health." : "Currency saved.",
+        });
+        break;
       case "beginBattle":
+        draft.support = null;
         if (draft.journey) draft.journey.lastBattle = null;
         if (draft.expedition) draft.expedition.chosen = command.destination!;
         beginBattle(draft);
@@ -622,7 +710,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
       case "setLineup": {
         const outgoing = [...draft.team, ...draft.reserves].find((c) => c.id === command.activeId)!;
         draft.lineup[draft.lineup.indexOf(outgoing.id)] = command.reserve;
-        if (draft.phase === "teamSelection" || draft.phase === "campfire") prepareLineup(draft);
+        if (["teamSelection", "campfire", "support"].includes(draft.phase)) prepareLineup(draft);
         break;
       }
       case "swap": {
@@ -735,6 +823,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         break;
       }
       case "abandon":
+        draft.support = null;
         if (draft.phase === "draft") {
           draft.selected = [];
           break;

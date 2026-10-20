@@ -2,7 +2,7 @@
 
 Add stronger architecture checks and unused-code detection, hardened Electron packages, optional non-combat encounters, desktop display modes, Steam Cloud saves, and Steam overlay pause. Adapt Alchemy's patterns to Fauna's existing game, application, and platform owners. Fauna retains independent code, content selection, application identity, and saves.
 
-This is a planning deliverable. Implementation, dependency installation, Steam partner configuration, credentials, uploads, and publication are not performed by this change. The selected feature scope is approved; the concrete gameplay and conflict policies below are proposed implementation defaults. Repository references were checked against Fauna `b0f87b4` and Alchemy `7790d47fb`; implementation must re-read current contracts before editing.
+The implementation follows the selected scope and defaults below. Local focused checks accompany delivery; full CI, rendered/native package and live Steam acceptance remain separate evidence gates. Steam partner configuration, credentials, uploads and publication require separate authorization. Repository references were checked against Fauna `b0f87b4` and Alchemy `7790d47fb`; implementation must re-read current contracts before editing.
 
 ## Scope and delivery order
 
@@ -43,7 +43,7 @@ References: `Alchemy: lint/boundaries.js`, `Alchemy: lint/restricted-global-refe
 
 ## Electron package hardening
 
-Add a Fauna-owned after-pack hook using `@electron/fuses`. Disable RunAsNode, NODE_OPTIONS, and Node CLI inspection; require application loading from ASAR and enable supported ASAR integrity validation. Evaluate the remaining Alchemy settings, including cookie encryption and file-protocol privileges, against Fauna's actual `file:` renderer, preload, media and storage behavior. Apply only settings supported and verified for the pinned Electron runtime and target platform; document platform limitations rather than promising integrity enforcement everywhere.
+Add a Fauna-owned after-pack hook using `@electron/fuses`. Disable RunAsNode, NODE_OPTIONS, and Node CLI inspection; require application loading from ASAR and enable supported ASAR integrity validation. Evaluate the remaining Alchemy settings, including cookie encryption and file-protocol privileges, against Fauna's actual `file:` renderer, preload, media and storage behavior. Implementation retains file-protocol privileges for Fauna's existing trusted local renderer. Apply only settings supported and verified for the pinned Electron runtime and target platform; document platform limitations rather than promising integrity enforcement everywhere.
 
 If enabling a browser-process-specific V8 snapshot, install the corresponding snapshot beside every required runtime snapshot before setting its fuse. Adopt the snapshot preparation and fuse changes as one tested unit. Do not copy Alchemy's application name, paths, signing identity, or Steam metadata. Apply fuse changes before signing; preserve platform signing requirements and document that signing setup remains separate.
 

@@ -116,6 +116,7 @@ export function gamepadActions(pad: Pick<Gamepad, "buttons" | "axes">): InputAct
 export function connectInput(
   onAction: (action: InputAction) => void,
   onMode: (mode: "keyboard" | "controller" | "pointer", navigation: boolean) => void,
+  externallySuspended: () => boolean = () => false,
 ) {
   let interactionMode: "keyboard" | "controller" | "pointer" | undefined;
   let navigation = false;
@@ -133,6 +134,11 @@ export function connectInput(
     onMode(mode, navigation);
   };
   const keyboard = (event: KeyboardEvent) => {
+    if (externallySuspended() || (event.repeat && ["Enter", " ", "Escape"].includes(event.key))) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      return;
+    }
     if (suspended || bridgedKeys.has(event)) return;
     if (
       event.altKey ||
@@ -230,7 +236,7 @@ export function connectInput(
     const present = new Set<number>();
     let pads: (Gamepad | null)[] = [];
     try {
-      if (!suspended && document.hasFocus()) pads = navigator.getGamepads?.() ?? [];
+      if (!suspended && !externallySuspended() && document.hasFocus()) pads = navigator.getGamepads?.() ?? [];
     } catch {
       // Restricted browser contexts may deny controller access; other input remains usable.
     }

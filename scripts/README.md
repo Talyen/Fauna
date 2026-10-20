@@ -26,7 +26,8 @@ Additional opt-in tools:
 
 - `npm run balance:compare`: [balance-compare.mjs](balance-compare.mjs), [paired report math](lib/paired-balance.mjs), [production cases](../src/application/balance.ts).
 - `npm run perf`, `npm run perf:replay`, `npm run perf:compare`: [capture driver](run-performance.mjs), [metrics](lib/performance-metrics.mjs), [validated fixtures](../src/application/performance.ts).
-- `npm run verify:package`: [package gate](verify-package.mjs).
+- `npm run verify:package`: [package gate](verify-package.mjs), [after-pack hardening](../desktop/after-pack.cjs), [packaged renderer launcher](lib/packaged-desktop.mjs).
+- `npm run deadcode`: [Knip entrypoints](../knip.config.js); full CI static verification only.
 - `npm run context`: [owner lookup](agent-context.mjs).
 - `npm run review:status`, `npm run review:diff`: [bounded patch review](agent-review.mjs).
 - `npm run test:e2e:route`: [named route launcher](test-route.mjs), [route definitions](lib/test-routes.mjs).

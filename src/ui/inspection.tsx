@@ -20,7 +20,7 @@ export function Inspector({
   chooseStarter,
   enterDestination,
 }: {
-  item: Inspection;
+  item: Exclude<Inspection, { support: string }>;
   session: Session;
   controls: Controls;
   onClose: () => void;

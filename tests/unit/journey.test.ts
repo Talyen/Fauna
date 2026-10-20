@@ -170,7 +170,7 @@ describe("journey earnings and results", () => {
     expect(s.currency).toBe(400);
   });
 
-  it.each([1, 2, 3, 4, 5, 6, 7, 8])("rejects obsolete development save version %s", (version) => {
+  it.each([1, 2, 3, 4, 5, 6, 7, 8, 13])("rejects obsolete development save version %s", (version) => {
     expect(() => decodeSave(JSON.stringify({ ...startedJourney(), version }))).toThrow();
   });
 
@@ -178,7 +178,7 @@ describe("journey earnings and results", () => {
     const s = winBattle(accept(startedJourney(), { type: "beginBattle" }));
     for (const mutate of [
       (d: typeof s) => {
-        d.journey!.currency = d.currency + 1;
+        d.journey!.currency = d.journey!.victories * 40 + 21;
       },
       (d: typeof s) => {
         d.journey!.xp.nature = (d.keywordXP.nature ?? 0) + 1;

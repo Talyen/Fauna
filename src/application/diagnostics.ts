@@ -1,6 +1,6 @@
 import type { DiagnosticPort } from "../platform/ports";
 export type DiagnosticSource =
-  "startup" | "render" | "save-read" | "save-write" | "validation" | "audio" | "global";
+  "startup" | "render" | "save-read" | "save-write" | "validation" | "audio" | "cloud" | "global";
 export interface Diagnostic {
   source: DiagnosticSource;
   message: string;
@@ -28,9 +28,16 @@ export function createDiagnostics(port?: DiagnosticPort, identity = "development
           if (
             !entry ||
             typeof entry.message !== "string" ||
-            !["startup", "render", "save-read", "save-write", "validation", "audio", "global"].includes(
-              entry.source,
-            )
+            ![
+              "startup",
+              "render",
+              "save-read",
+              "save-write",
+              "validation",
+              "audio",
+              "cloud",
+              "global",
+            ].includes(entry.source)
           )
             return [];
           return [

@@ -1,7 +1,8 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, screen, utilityProcess } = require("electron");
 const path = require("node:path");
 const { pathToFileURL } = require("node:url");
-const { createStorage } = require("./storage.cjs");
+const { createSteam } = require("./steam.cjs");
+const { createDisplay } = require("./display.cjs");
 const { isDevelopmentUrl } = require("./dev-url.cjs");
 app.setName("Fauna");
 if (process.env.FAUNA_PREVIEW_USER_DATA || process.env.FAUNA_SMOKE_USER_DATA)
@@ -28,26 +29,51 @@ function requestClose() {
 }
 function finishClose() {
   closing = true;
-  Promise.resolve(storage?.drain()).then(() => {
+  Promise.all([storage?.drain(), display?.dispose(), steam?.dispose()]).then(() => {
     quitting = true;
     app.quit();
   });
 }
 let window;
 let storage;
+let display;
+let steam;
 const dev = app.isPackaged ? undefined : process.env.FAUNA_DEV_URL;
 if (dev && !isDevelopmentUrl(dev)) throw new Error("Untrusted development URL.");
 const entry = pathToFileURL(path.join(__dirname, "../dist/index.html")).href;
 const trusted = (url) => (dev ? url === `${dev}/` || url === dev : url === entry);
 app.whenReady().then(async () => {
-  storage = createStorage(process.env.FAUNA_SMOKE_USER_DATA || path.join(app.getPath("userData"), "saves"));
+  const isolated =
+    process.env.FAUNA_DISABLE_STEAM === "1" ||
+    !!process.env.FAUNA_SMOKE_USER_DATA ||
+    !!process.env.FAUNA_PREVIEW_USER_DATA ||
+    process.env.FAUNA_PERF_CAPTURE === "1";
+  steam = await createSteam({
+    app,
+    utilityProcess,
+    directory: process.env.FAUNA_SMOKE_USER_DATA || path.join(app.getPath("userData"), "saves"),
+    isolated,
+    pause: (active) => {
+      if (window && !window.isDestroyed()) window.webContents.send("fauna:overlay", active);
+    },
+  });
+  storage = steam.storage;
+  display = await createDisplay({
+    directory: app.getPath("userData"),
+    screen,
+    isolated,
+    notify: (state) => {
+      if (window && !window.isDestroyed()) window.webContents.send("fauna:display-state", state);
+    },
+  });
   window = new BrowserWindow({
     width: !app.isPackaged && process.env.FAUNA_PERF_CAPTURE === "1" ? 1280 : 1440,
     height: !app.isPackaged && process.env.FAUNA_PERF_CAPTURE === "1" ? 800 : 1000,
+    ...(!isolated ? display.bounds() : {}),
     useContentSize: !app.isPackaged && process.env.FAUNA_PERF_CAPTURE === "1",
     frame: app.isPackaged || process.env.FAUNA_PERF_CAPTURE !== "1",
-    minWidth: 900,
-    minHeight: 700,
+    minWidth: Math.min(900, screen.getPrimaryDisplay().workArea.width),
+    minHeight: Math.min(700, screen.getPrimaryDisplay().workArea.height),
     backgroundColor: "#000000",
     autoHideMenuBar: true,
     webPreferences: {
@@ -59,6 +85,7 @@ app.whenReady().then(async () => {
       autoplayPolicy: "no-user-gesture-required",
     },
   });
+  display.attach(window);
   const authorize = (event) => {
     if (
       closing ||
@@ -68,6 +95,34 @@ app.whenReady().then(async () => {
     )
       throw new Error("Unauthorized request.");
   };
+  for (const method of [
+    "identity",
+    "readLocal",
+    "writeLocal",
+    "acknowledge",
+    "preserve",
+    "importStandalone",
+    "list",
+    "read",
+    "write",
+  ]) {
+    ipcMain.handle(`fauna:cloud-${method}`, (event, ...args) => {
+      authorize(event);
+      return steam[method](...args);
+    });
+  }
+  ipcMain.handle("fauna:overlay-state", (event) => {
+    authorize(event);
+    return steam.overlay();
+  });
+  ipcMain.handle("fauna:display-read", (event) => {
+    authorize(event);
+    return display.read();
+  });
+  ipcMain.handle("fauna:display-set", (event, mode) => {
+    authorize(event);
+    return display.set(mode);
+  });
   ipcMain.handle("fauna:read", (event) => {
     authorize(event);
     return storage.readCandidates();

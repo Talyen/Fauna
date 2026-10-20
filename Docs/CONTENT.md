@@ -60,3 +60,7 @@ Recorded sounds cover typed combat outcomes, healing, defense, rejected actions,
 ## Boon selections
 
 Tattered Pages, Bone Charm, Ironwood Buckler and Icy Heart use the corresponding portrait WebP files copied from `Alchemy: src/assets/optimized/` into `public/art/boons/`. The manifest records each source, provenance and output hash. Prepared assets are Fauna-owned copies with no sibling runtime dependency. Effects and reward IDs are authored in `src/game/progression.ts`; intermediate-boss cadence is unchanged.
+
+## Support encounter content
+
+Merchant prices and Spring effects are owned by `src/game/support.ts`. Stock selects from the existing Boon catalog and persists with each visit. Merchant currently reuses the prepared Silken Clearing location illustration; Sheltered Spring reuses Mossy Stream. These are explicit existing placeholders, not newly approved source-library selections. Boon portraits retain their existing asset manifests and receipts. Replace location selections through the prepared-asset workflow when final art is selected.
