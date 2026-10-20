@@ -120,6 +120,12 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 - Empty piles remain inspectable and show the chosen empty-state icon inside their inspection view.
 - Pile counts remain hidden. Browsing never changes card order.
 
+## Collection paging
+
+- Page content changes immediately, without a crossfade, and the creature grid returns to its top.
+- Keyboard/controller focus stays on the paging control rather than moving to the first creature.
+- Hide unavailable Previous/Next controls. If the focused paging control disappears at a boundary, move focus to the remaining paging control; if neither remains, use the Collection filter control as the fallback. Never leave focus on a removed element.
+
 ## Empty states
 
 - Use an icon only, with no visible message, accompanying action or hover/focus tooltip. Provide an accessible label that describes the empty state.
