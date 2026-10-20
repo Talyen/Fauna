@@ -44,6 +44,7 @@ Gameplay settles before visual feedback. Accepted commands automatically save; a
 - [Script implementation map](scripts/README.md)
 - [Design references](design/README.md)
 - [Planned Alchemy feature adoption](Docs/ALCHEMY_ADOPTION_PLAN.md)
+- [Alchemy tools and platform adoption plan](Docs/ALCHEMY_PLATFORM_PLAN.md)
 - [Architecture and saves](Docs/ARCHITECTURE.md)
 - [Content and artwork](Docs/CONTENT.md)
 - [UI and typography](Docs/UI.md)
