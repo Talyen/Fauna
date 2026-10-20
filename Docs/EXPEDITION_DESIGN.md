@@ -46,7 +46,7 @@ These are the agreed directions from the design review. They supersede the proto
 - Reset operates on the entire keyword category, refunding all spent points in that category while retaining its XP. Reset is available at any time, including during an journey; talent effects update immediately. Individual-talent refunds are not the chosen interaction.
 - Use Alchemy’s current point pacing: cumulative thresholds are 10, 40, 100, 180, and 280 keyword XP. Total XP for point n is 10 × n × (n + 1) − 10 × min(n, 2). This is initial tuning for playtesting.
 - The original distinct-tree direction used the seven original damage types plus Block and Healing. The current combat foundation also enables Burn, Freeze, Bleed, Stun, Armor, Forge, Thorns, Dodge, Leech, Mana, Cleanse and Purge; Gold is currency only. Wish, Consume, Companion and Archery are excluded. Each category has ten unique talents in four widening rows of 1, 2, 3, and 4, following Alchemy. The current implementation still uses six shared talents per category in `src/game/progression.ts`; the new catalog and screen remain to be implemented.
-- Abandonment banks the XP earned by accepted plays, with no victory currency or relics. There are currently no automatic or repeated card plays; each accepted play awards keyword XP once.
+- Abandonment banks the XP earned by accepted plays, with no victory currency or relics. Auto-play dispatches ordinary accepted plays; each awards keyword XP once. There are no repeated card-play effects.
 
 ## Recruitment
 
@@ -88,3 +88,13 @@ See [UI design system](UI.md) for composition and interaction rules.
 ## Turn and combat foundation
 
 Each turn restores four shared Mana and draws four cards, with a seven-card hand and FIFO overflow retained across turns. Block halves rather than clearing. Creatures share Alchemy's core packet, status and crowd-control rules through the [keyword contract](KEYWORDS.md), with no elemental reactions. Their individual effects persist while in reserve and cannot be refreshed by free swaps. Enemy actions use a non-repeating species repertoire without showing the next ability. Draw and discard piles are inspectable without revealing draw order or changing gameplay.
+
+## Combat assistance
+
+Auto-end turn is enabled by default and advances only when Mana reaches zero. Its Settings switch persists separately from progression; disabling it allows free swaps before manually ending the turn. Victory and defeat settle immediately in either mode.
+
+Auto-play is explicitly enabled for one battle. It uses visible information to choose legal recovery swaps, healing, finishing attacks, other attacks and useful defenses, then ends turns when no useful play remains. Actions occur no faster than every 700 ms. Menus, inspection, focus loss and hidden pages pause it; manual play stops it. Rewards, destinations, recruitment and talents always remain player choices. It stops on completion, home navigation, save failure and shutdown.
+
+Leaving newly completed results opens each newly unlocked creature's portrait and inspectable kit before Main menu. The reveal grants no progress and does not repeat when reopening results or loading an existing completed journey. Results otherwise retain the earnings-only design.
+
+Development builds add Skip combat to the battle pause menu. It settles a normal victory with normal rewards and only XP already earned by actual plays; roster Health is preserved. It is unavailable in production and rejects repeated settlement.

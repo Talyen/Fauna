@@ -36,7 +36,7 @@ Desktop window close and application quit request a renderer flush first. The se
 
 The [contribution workflow](../CONTRIBUTING.md#worktrees-and-integration) owns worktree creation, the shared integration lock, combined-diff verification and retained-checkout policy. [Script owners](../scripts/README.md) locate the implementation. Integration is local evidence only; CI and release checks remain separate.
 
-Spending the final mana resolves the enemy turn inside the same command and revision. Victory takes precedence over automatic turn advancement. Card previews run the same card-effect resolution without settling battle rewards, advancing the enemy turn, or publishing/saving the preview state. This retains the final enemy health forecast even when committing the card will advance directly to destinations.
+With Auto-end turn enabled (the default), spending the final Mana resolves the enemy turn inside the same command and revision. The play command records its effective preference. Disabling it retains the player turn at zero Mana; normal victory/defeat settlement remains immediate. Preview resolution is independent of this setting. Victory takes precedence over automatic turn advancement. Card previews run the same card-effect resolution without settling battle rewards, advancing the enemy turn, or publishing/saving the preview state. This retains the final enemy health forecast even when committing the card will advance directly to destinations.
 
 ## Keyword foundation
 
@@ -55,3 +55,11 @@ Permanent discovery stores encountered and recruited species separately from sta
 Health and knockouts persist through victories, rewards, lineup changes and destination entry. Battle setup resets combat effects without restoring Health. A once-per-biome Campfire appears alongside the boss destination. Visiting it enters a saved Campfire phase; Rest restores 30% of maximum Health to every roster creature, including knockouts, and returns to the same boss offer. Rest does not advance the encounter or award currency/XP; its saved used flag prevents repeat healing and resets in the next biome.
 
 Draw and discard surfaces use blank portrait art and the existing modal/inspection owners. Pile viewers sort by definition and instance identity, never draw order. Browsing does not publish gameplay, consume RNG or save.
+
+## Automated and development combat
+
+The pure application battle policy scores only visible cards and creatures, using stable identity tie breaks and no gameplay RNG or hidden intentions. Headless heuristic runs and player Auto-play share it. The UI scheduler admits at most one command per 700 ms, pauses while obscured or unfocused, and cancels pending callbacks on manual takeover, completion, navigation home, save failure or disposal. It never makes reward or progression choices. Session disposal makes readiness unavailable before draining admitted saves.
+
+Development victory uses an explicit session capability supplied only by development startup. Ordinary dispatch rejects it. It marks enemies defeated and reuses ordinary settlement, events and saving, preserving roster Health and banking actual earned XP. Packaged desktop startup ignores development URLs.
+
+Unlock reveals observe newly committed species additions that appear in journey unlock receipts. Consumption is transient for the mounted session; loading completed saves and reopening results never manufacture another reveal.

@@ -22,4 +22,10 @@ See [UI rules](UI.md) and [journey design](EXPEDITION_DESIGN.md) for shared inte
 
 ## Shared menu treatment
 
-Main and pause menus use the same centered vertical list: shadcn default Button for Continue, New journey, or Resume; ghost Buttons for other choices. Use the charcoal/ivory/muted-gold semantic theme in `src/ui/tokens.css`. Settings uses Switch for Sound and RadioGroup for explicit text-size choices; changes save immediately. End journey uses AlertDialog with Cancel focused initially and no outside-click dismissal.
+Main and pause menus use the same centered vertical list: shadcn default Button for Continue, New journey, or Resume; ghost Buttons for other choices. Use the charcoal/ivory/muted-gold semantic theme in `src/ui/tokens.css`. Settings uses Switch for Sound and Auto-end turn, and RadioGroup for explicit text-size choices; changes save immediately. End journey uses AlertDialog with Cancel focused initially and no outside-click dismissal.
+
+## Battle assistance and reveals
+
+The battle action group includes the labeled Auto-play Switch, initially off for each battle. Manual card selection stops it; ordinary menus and inspection pause it. Development battle pause menus include Skip combat below the normal menu actions. Production menus contain no developer action.
+
+A live creature unlock opens an artwork-centered Creature unlocked screen when leaving results, with ordinary kit inspection and Continue. Continue advances through pending reveals and then Main menu. It does not add inspection to Journey results.

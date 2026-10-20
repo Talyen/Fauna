@@ -102,3 +102,24 @@ for (const width of [1280, 1920]) {
     await expect(page.getByRole("heading", { name: "Creature unlocked" })).toHaveCount(0);
   });
 }
+
+test("development skip wins once through normal rewards", async ({ page }) => {
+  test.skip(process.env.FAUNA_DEV_REVIEW !== "1", "Requires an explicitly owned development preview.");
+  const initial = run();
+  await seed(page, encodeSave(initial), "1");
+  await page.getByRole("button", { name: "Open menu" }).click();
+  await page.getByRole("button", { name: "Skip combat", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Choose a Recruit" })).toBeVisible();
+  await expect
+    .poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).currency))
+    .toBe(initial.currency + 20);
+  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!));
+  expect(saved.team.map((creature: { health: number }) => creature.health)).toEqual(
+    initial.team.map((c) => c.health),
+  );
+  expect(Object.values(saved.keywordXP).every((xp) => xp === 0)).toBe(true);
+  expect(saved.reward.xp).toEqual({});
+  await page.getByRole("button", { name: "Open menu" }).click();
+  await expect(page.getByRole("button", { name: "Skip combat", exact: true })).toHaveCount(0);
+  await page.screenshot({ path: "reports/dev-skip.png" });
+});

@@ -21,6 +21,17 @@
 | `npm run test:desktop`                                                           | [smoke-desktop.mjs](smoke-desktop.mjs)                                                                                                                         |
 | Placeholder authoring                                                            | [create-placeholders.mjs](create-placeholders.mjs), [create-location-placeholders.mjs](create-location-placeholders.mjs); [artwork policy](../Docs/CONTENT.md) |
 
+Additional opt-in tools:
+
+- `npm run balance:compare`: [balance-compare.mjs](balance-compare.mjs), [paired report math](lib/paired-balance.mjs), [production cases](../src/application/balance.ts).
+- `npm run perf`, `npm run perf:replay`, `npm run perf:compare`: [capture driver](run-performance.mjs), [metrics](lib/performance-metrics.mjs), [validated fixtures](../src/application/performance.ts).
+- `npm run verify:package`: [package gate](verify-package.mjs).
+- `npm run context`: [owner lookup](agent-context.mjs).
+- `npm run review:status`, `npm run review:diff`: [bounded patch review](agent-review.mjs).
+- Shared source identities, report-directory confinement and Node module loading: [tool-runtime.mjs](lib/tool-runtime.mjs).
+
+See [Development tools](../Docs/DEVELOPMENT_TOOLS.md) for scenarios, defaults, evidence and limitations.
+
 Documentation parsing, measured bundle checks, worktree setup, integration safeguards and CI summary patterns are adapted from the sibling Alchemy repository. They have no runtime dependency on that checkout. Fauna retains its own command policy, save rules, worktree retention and release identity.
 
 ## Bundle allowance
