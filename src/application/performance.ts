@@ -5,8 +5,8 @@ import { encodeSave, decodeSave } from "../game/save";
 import { battleChoices } from "./battle-policy";
 import type { Command, GameState } from "../game/types";
 
-export function performanceCases() {
-  const fixture = structuredClone(createGame(42));
+export function performanceCases(seed = 42) {
+  const fixture = structuredClone(createGame(seed));
   const kinds: SpeciesId[] = ["mossback", "emberfox", "stormfin", "silkmoth"];
   fixture.roster = kinds;
   fixture.selected = [kinds[0]!];

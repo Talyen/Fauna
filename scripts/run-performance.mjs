@@ -285,11 +285,11 @@ export async function main(args = process.argv.slice(2)) {
               {
                 id: "startup",
                 fixture: "cold-process-fresh-profile-v1",
-                initial: performanceCases()[0].initial,
+                initial: performanceCases(seed)[0].initial,
                 actions: [{ kind: "idle" }],
               },
             ]
-          : (suite === "reachable" ? await reachablePerformanceCases(seed) : performanceCases()).filter(
+          : (suite === "reachable" ? await reachablePerformanceCases(seed) : performanceCases(seed)).filter(
               (row) => !scenarioId || row.id === scenarioId,
             );
     } finally {

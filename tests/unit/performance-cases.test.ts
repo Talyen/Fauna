@@ -5,6 +5,7 @@ import { dispatch } from "../../src/game/engine";
 import type { Command } from "../../src/game/types";
 
 it("retains replayable current-format performance checkpoints", () => {
+  expect(performanceCases(17)[0]!.initial).not.toBe(performanceCases(42)[0]!.initial);
   for (const scenario of performanceCases()) {
     let state = decodeSave(scenario.initial);
     for (const action of scenario.actions) {
