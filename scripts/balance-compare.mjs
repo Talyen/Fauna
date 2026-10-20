@@ -6,6 +6,8 @@ import { ROOT, runtime, identity, hash, reportDirectory } from "./lib/tool-runti
 import { compareBalance } from "./lib/paired-balance.mjs";
 const load = async (file) => JSON.parse(await readFile(path.resolve(file), "utf8"));
 export async function worker(input, output) {
+  if (!output || !path.resolve(output).startsWith(path.join(ROOT, "reports") + path.sep))
+    throw new Error("Worker reports must remain under reports/.");
   const server = await runtime();
   try {
     const config = await load(input);

@@ -4,6 +4,7 @@ import { execFileSync } from "node:child_process";
 import os from "node:os";
 import path from "node:path";
 import { createHash } from "node:crypto";
+import { worker } from "../../scripts/balance-compare.mjs";
 import { compareBalance, pairedStats } from "../../scripts/lib/paired-balance.mjs";
 import { summarizeSample, comparePerformance } from "../../scripts/lib/performance-metrics.mjs";
 import {
@@ -155,4 +156,10 @@ it("keeps complete patch evidence for unusual filenames without staging or losin
   } finally {
     rmSync(root, { recursive: true, force: true });
   }
+});
+
+it("does not let the internal worker bypass report-directory confinement", async () => {
+  await expect(worker("unused.json", path.join(os.tmpdir(), "outside-fauna-report.json"))).rejects.toThrow(
+    "remain under reports",
+  );
 });
