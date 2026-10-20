@@ -7,8 +7,8 @@
   min-height: 100dvh;
 }
 .study-heading p,
-.study-sample p,
 .study-instructions,
+.study-recommendation,
 .button-study footer {
   color: var(--muted-foreground);
   font-size: var(--text-secondary);
@@ -17,13 +17,24 @@
 .study-heading p {
   margin-top: var(--space-2);
 }
-.study-controls {
+.study-tabs {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  overflow-x: auto;
+  margin-top: var(--screen-section-gap);
+}
+.study-controls,
+.study-role {
   display: flex;
   flex-wrap: wrap;
   gap: var(--screen-section-gap);
+}
+.study-controls {
   margin-block: var(--screen-section-gap);
 }
-.study-controls label {
+.study-controls label,
+.study-choice {
   display: flex;
   align-items: center;
   gap: var(--screen-item-gap);
@@ -31,38 +42,175 @@
   cursor: pointer;
 }
 .study-instructions {
-  margin-bottom: var(--screen-section-gap);
+  margin-top: var(--space-2);
 }
 .study-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--space-8);
+  margin-top: var(--screen-section-gap);
 }
 .study-sample {
-  padding-block: var(--screen-section-gap);
   border-top: 1px solid var(--border);
+  padding-block: var(--screen-section-gap);
 }
-.study-sample header {
-  min-height: 100px;
-}
-.study-sample h2 {
+.study-sample h3 {
   font-size: var(--text-heading);
-  margin-bottom: var(--space-2);
+  font-weight: 500;
 }
-.study-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--screen-section-gap);
-  padding: var(--space-3);
+.study-demo {
+  padding: var(--space-6) var(--space-3);
+  --study-fill: var(--secondary);
+  --study-ink: var(--secondary-foreground);
+  --study-edge: var(--border);
+  --study-hover-subtle: var(--muted);
+  --study-hover-strong: var(--accent);
+  --study-press-subtle: var(--muted);
+  --study-press-strong: var(--accent);
+  --study-duration: var(--motion-fast);
 }
-.study-action {
+.study-demo[data-role="primary"] {
+  --study-fill: var(--primary);
+  --study-ink: var(--primary-foreground);
+  --study-edge: transparent;
+  --study-hover-subtle: color-mix(in srgb, var(--primary) 90%, var(--background));
+  --study-hover-strong: color-mix(in srgb, var(--primary) 80%, var(--background));
+  --study-press-subtle: color-mix(in srgb, var(--primary) 90%, var(--background));
+  --study-press-strong: color-mix(in srgb, var(--primary) 80%, var(--background));
+}
+/* The study neutralizes production effects so each panel changes one variable. */
+#root .button-study .study-action {
   width: 240px;
+  min-height: var(--control-height);
+  height: auto;
+  background: var(--study-fill);
+  color: var(--study-ink);
+  border: 1px solid var(--study-edge);
+  scale: 1;
+  translate: none;
+  outline: none;
+  box-shadow: none;
+  transition:
+    background-color var(--study-duration),
+    border-color var(--study-duration),
+    scale var(--study-duration),
+    translate var(--study-duration);
 }
-.study-sample output {
+:root[data-focus="visible"] #root .button-study .study-action:focus {
+  outline: 2px dashed var(--ring);
+  outline-offset: 6px;
+}
+#root .study-demo[data-hover-fill="Subtle"] .study-action:not(:disabled):hover {
+  background: var(--study-hover-subtle);
+}
+#root .study-demo[data-hover-fill="Stronger"] .study-action:not(:disabled):hover {
+  background: var(--study-hover-strong);
+}
+#root .study-demo[data-hover-border="Lighter neutral"] .study-action:not(:disabled):hover {
+  border-color: var(--muted-foreground);
+}
+#root .study-demo[data-hover-border="Gold"] .study-action:not(:disabled):hover {
+  border-color: var(--primary);
+}
+#root .study-demo[data-hover-motion="Grow 3.5%"] .study-action:not(:disabled):hover {
+  scale: var(--study-grow, 1.035);
+}
+#root .study-demo[data-hover-motion="Lift 2px"] .study-action:not(:disabled):hover {
+  translate: 0 var(--study-lift, -2px);
+}
+:root[data-focus="visible"] #root .study-demo[data-focus-outline="Solid"] .study-action:focus {
+  outline-style: solid;
+}
+:root[data-focus="visible"] #root .study-demo[data-focus-outline="Double"] .study-action:focus {
+  outline: 3px double var(--ring);
+}
+:root[data-focus="visible"] #root .study-demo[data-focus-motion="Grow 3.5%"] .study-action:focus {
+  scale: var(--study-grow, 1.035);
+}
+:root[data-focus="visible"] #root .study-demo[data-focus-motion="Lift 2px"] .study-action:focus {
+  translate: 0 var(--study-lift, -2px);
+}
+:root
+  #root
+  .button-study
+  .study-demo[data-press-fill="Subtle"]
+  .study-action:not(:disabled):is(:active, [data-held="true"]) {
+  background: var(--study-press-subtle);
+}
+:root
+  #root
+  .button-study
+  .study-demo[data-press-fill="Stronger"]
+  .study-action:not(:disabled):is(:active, [data-held="true"]) {
+  background: var(--study-press-strong);
+}
+:root
+  #root
+  .button-study
+  .study-demo[data-press-motion="Shrink 2%"]
+  .study-action:not(:disabled):is(:active, [data-held="true"]) {
+  scale: var(--study-shrink, 0.98);
+}
+:root
+  #root
+  .button-study
+  .study-demo[data-press-motion="Lower 1px"]
+  .study-action:not(:disabled):is(:active, [data-held="true"]) {
+  translate: 0 var(--study-lower, 1px);
+}
+.study-demo[data-timing="Instant"] {
+  --study-duration: 0s;
+}
+.study-demo[data-timing="150ms"] {
+  --study-duration: 150ms;
+}
+.study-demo[data-timing="200ms"] {
+  --study-duration: 200ms;
+}
+#root .study-demo[data-unavailable="50%"] .study-action:disabled {
+  opacity: 0.5;
+}
+#root .study-demo[data-unavailable="65%"] .study-action:disabled {
+  opacity: 0.65;
+}
+#root .study-demo[data-unavailable="80%"] .study-action:disabled {
+  opacity: 0.8;
+}
+.study-demo output {
   display: block;
   margin-top: var(--space-6);
   font-size: var(--text-secondary);
+}
+.study-spinner {
+  animation: study-spin 1s linear infinite;
+}
+@keyframes study-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+.study-recommendation {
+  margin-block: var(--screen-section-gap);
+}
+.study-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--screen-item-gap);
+}
+.study-summary {
+  display: grid;
+  gap: var(--space-3);
+}
+.study-summary > div {
+  display: flex;
+  gap: var(--screen-item-gap);
+  flex-wrap: wrap;
+}
+.study-summary dt {
+  min-width: 180px;
+}
+.study-summary dd {
+  margin: 0;
 }
 .button-study footer {
   margin-top: var(--screen-section-gap);
@@ -70,35 +218,58 @@
 .button-study footer p + p {
   margin-top: var(--space-2);
 }
-#root .button-study [data-treatment="neutral"] .study-action,
-#root .button-study [data-treatment="gold"] .study-action {
-  scale: 1;
-}
-.button-study [data-treatment="gold"] .study-action:not(:disabled):is(:hover, :active, [data-held="true"]),
-:root[data-focus="visible"] .button-study [data-treatment="gold"] .study-action:not(:disabled):focus {
-  border-color: var(--primary);
-}
-.button-study [data-treatment="neutral"] .study-action:not(:disabled):is(:active, [data-held="true"]) {
-  border-color: var(--muted-foreground);
-}
-.button-study
-  :is([data-treatment="neutral"], [data-treatment="gold"])
-  .study-action:not(:disabled):is(:active, [data-held="true"]) {
-  background: var(--muted);
-  transition-duration: 0s;
-}
-.button-study
-  :is([data-treatment="neutral"], [data-treatment="gold"])
-  .study-action.bg-primary:not(:disabled):is(:active, [data-held="true"]) {
-  background: color-mix(in srgb, var(--primary) 80%, var(--background));
+.button-study[data-reduced="true"] {
+  --study-grow: 1;
+  --study-shrink: 1;
+  --study-lift: 0px;
+  --study-lower: 0px;
 }
 #root .button-study[data-reduced="true"] .study-action {
   scale: 1;
+  translate: none;
   transition: none;
 }
+.button-study[data-reduced="true"] .study-spinner {
+  animation: none;
+}
 @media (prefers-reduced-motion: reduce) {
+  .button-study {
+    --study-grow: 1;
+    --study-shrink: 1;
+    --study-lift: 0px;
+    --study-lower: 0px;
+  }
   #root .button-study .study-action {
     scale: 1;
+    translate: none;
     transition: none;
   }
+  .button-study .study-spinner {
+    animation: none;
+  }
+}
+
+:root[data-focus="visible"] #root .study-demo[data-focus-fill="Subtle"] .study-action:focus {
+  background: var(--study-hover-subtle);
+}
+:root[data-focus="visible"] #root .study-demo[data-focus-fill="Stronger"] .study-action:focus {
+  background: var(--study-hover-strong);
+}
+:root[data-focus="visible"] #root .study-demo[data-focus-border="Lighter neutral"] .study-action:focus {
+  border-color: var(--muted-foreground);
+}
+:root[data-focus="visible"] #root .study-demo[data-focus-border="Gold"] .study-action:focus {
+  border-color: var(--primary);
+}
+#root
+  .study-demo[data-press-border="Lighter neutral"]
+  .study-action:not(:disabled):is(:active, [data-held="true"]) {
+  border-color: var(--muted-foreground);
+}
+:root
+  #root
+  .button-study
+  .study-demo[data-press-border="Gold"]
+  .study-action:not(:disabled):is(:active, [data-held="true"]) {
+  border-color: var(--primary);
 }

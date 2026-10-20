@@ -1,9 +1,9 @@
 # Button interaction study
 
-Open `/design/button-interactions/index.html` through the development server. This isolated HTML entry uses the actual shared shadcn Button and Switch, theme tokens and current focus treatment. It does not load gameplay, audio or saves.
+Open `/design/button-interactions/index.html` through the development server. This isolated HTML entry uses the actual shared shadcn Button, Switch, RadioGroup and Tabs. It does not load gameplay, audio or game saves.
 
-Compare Current, A (neutral) and B (gold edge) with real pointer hover, held clicks and keyboard focus/activation. The unavailable switch disables demo actions; Try waiting simulates 1.2 seconds of work. Accepted-action counts make activation observable. Reduce motion removes growth and transitions; the operating-system preference also applies. Gamepad navigation is not connected.
+Review one behavior at a time: hover fill, hover border, hover movement, focus fill, focus border, focus outline, focus movement, pressed fill, pressed border, pressed movement, transition timing, unavailable contrast and busy indicator. Each has multiple playable options with all unrelated effects held constant. A visible dashed keyboard focus outline remains the baseline except when explicitly comparing focus outlines. Switch between supporting and primary buttons to test the same decision on each role. Reduced motion also respects the operating-system preference.
 
-The proposals are scoped to this study. No production button behavior or approved design decision changes until reviewed. Current intentionally inherits the latest shared styles. Primary actions remain gold; ordinary actions have visible neutral boundaries.
+Choose options independently with the radio controls; Clear this choice restores an undecided behavior. Provisional choices persist in browser storage under `fauna-design-button-picks-v1`; storage failure leaves the current session usable. Combine my choices applies only explicit choices and lists undecided behaviors. Unavailable and busy treatments can be previewed separately there. No production styles or approved design decisions change until the combination is reviewed. Mouse and native keyboard behavior are connected; gamepad navigation is not.
 
-For future component decisions in this review, provide a playable HTML comparison using real shadcn components before choosing the interaction treatment. Screenshots supplement the interaction review.
+The [component review queue](../UI_REVIEW.md) extends this method to every current UI element and its applicable states. For this review, playable HTML comparisons precede decisions; screenshots supplement them. Do not bundle independent variables into competing visual packages.

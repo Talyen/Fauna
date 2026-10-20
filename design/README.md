@@ -10,3 +10,5 @@ These samples record reviewed composition choices. They are not current rendered
 - [Battle rewards](battle-rewards/README.md)
 
 - [Interactive button states](button-interactions/README.md)
+
+- [Interactive UI review process and complete element queue](UI_REVIEW.md)
