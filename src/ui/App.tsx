@@ -58,6 +58,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     [modal, setModal] = useState<Modal>(null),
     [inspection, setInspection] = useState<Inspection | null>(null);
   const [mode, setMode] = useState<"pointer" | "keyboard" | "controller">("pointer");
+  const [navigation, setNavigation] = useState(false);
   const [sound, setSound] = useState(() => preference("fauna.sound.enabled", "true") !== "false");
   const [scale, setScale] = useState(() => {
     const n = Number(preference("fauna.text-scale", "1"));
@@ -167,21 +168,29 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
   });
   useEffect(() => {
     const previous = document.documentElement.dataset.input;
+    const previousFocus = document.documentElement.dataset.focus;
     document.documentElement.dataset.input = root.current?.dataset.input ?? "pointer";
+    document.documentElement.dataset.focus = "hidden";
     const disconnect = connectInput(
       (action) => actionRef.current(action),
-      (next) => {
+      (next, navigating) => {
         // Publish mode before native focus/click handlers, including Radix portals.
         if (root.current) root.current.dataset.input = next;
         document.documentElement.dataset.input = next;
+        document.documentElement.dataset.focus = navigating ? "visible" : "hidden";
         // Settle focus before a controller confirm in this same input callback.
-        flushSync(() => setMode(next));
+        flushSync(() => {
+          setMode(next);
+          setNavigation(navigating);
+        });
       },
     );
     return () => {
       disconnect();
       if (previous === undefined) delete document.documentElement.dataset.input;
       else document.documentElement.dataset.input = previous;
+      if (previousFocus === undefined) delete document.documentElement.dataset.focus;
+      else document.documentElement.dataset.focus = previousFocus;
     };
   }, []);
   useLayoutEffect(() => {
@@ -451,6 +460,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
       ref={root}
       className={`app ${route === "play" && game.phase === "battle" ? "in-battle" : ""}`}
       data-input={mode}
+      data-focus={navigation ? "visible" : "hidden"}
       data-route={route}
       data-phase={game.phase}
       data-save-status={view.saveStatus}
@@ -526,7 +536,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                 bursts={bursts}
                 onDenied={deny}
                 controller={mode === "controller"}
-                navigateFocus={mode !== "pointer"}
+                navigateFocus={navigation}
               />
             ) : game.phase === "recruit" || game.phase === "relic" ? (
               <Rewards
