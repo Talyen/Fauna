@@ -99,7 +99,7 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 
 ## Empty states
 
-- Use an icon only, with no visible message or action alongside it. Provide an accessible label that describes the empty state. Tooltip behavior remains undecided.
+- Use an icon only, with no visible message, accompanying action or hover/focus tooltip. Provide an accessible label that describes the empty state.
 
 ## Shared preferences
 
