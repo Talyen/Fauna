@@ -152,7 +152,9 @@ export async function verifyPackage(directory = path.join(ROOT, "release/win-unp
       .filter((name) => statSync(path.join(ROOT, "dist", name)).isFile())
       .map((name) => [`dist/${name.replaceAll("\\", "/")}`, readFileSync(path.join(ROOT, "dist", name))]),
   );
-  const result = verifyArchive((name) => extractFile(archive, name), {
+  // ASAR 3 traverses directories with the host separator, including on Windows.
+  const readArchive = (name) => extractFile(archive, path.normalize(name));
+  const result = verifyArchive(readArchive, {
     expected,
     receipt,
     desktopFiles,
@@ -160,7 +162,7 @@ export async function verifyPackage(directory = path.join(ROOT, "release/win-unp
     releaseTag,
   });
   for (const name of names.filter((name) => name.startsWith("dist/") && name.endsWith(".js")))
-    if (extractFile(archive, name).includes(Buffer.from("Skip combat")))
+    if (readArchive(name).includes(Buffer.from("Skip combat")))
       throw new Error("Development controls in production chunk.");
   return result;
 }
