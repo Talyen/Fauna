@@ -61,7 +61,7 @@ describe("menu browsing", () => {
     }
   });
 
-  it("names unlocked collection species outside artwork while keeping locked species anonymous", async () => {
+  it("keeps Collection artwork-only, reveals details on hover, and opens pinned inspection", async () => {
     const session = createSession(createBrowserPlatform(localStorage), 7);
     await session.load();
     const user = userEvent.setup();
@@ -71,7 +71,7 @@ describe("menu browsing", () => {
       const game = session.store.getState().game;
       for (const creature of SPECIES) {
         if (game.unlocked.includes(creature.id)) {
-          expect(screen.getByRole("heading", { name: creature.name })).toBeTruthy();
+          expect(screen.queryByRole("heading", { name: creature.name })).toBeNull();
           expect(screen.getByRole("button", { name: `Inspect ${creature.name}` }).textContent).toBe("");
         } else {
           expect(screen.queryByRole("heading", { name: creature.name })).toBeNull();
@@ -79,7 +79,13 @@ describe("menu browsing", () => {
         }
       }
       const creature = SPECIES.find((entry) => game.unlocked.includes(entry.id))!;
-      await user.click(screen.getByRole("button", { name: `Inspect ${creature.name}` }));
+      const card = screen.getByRole("button", { name: `Inspect ${creature.name}` });
+      await user.hover(card);
+      const tooltip = await screen.findByRole("tooltip");
+      expect(tooltip.textContent).toContain(creature.name);
+      expect(tooltip.textContent).toContain(creature.description);
+      expect(screen.queryByRole("dialog")).toBeNull();
+      await user.click(card);
       expect(screen.getByRole("dialog")).toBeTruthy();
       expect(session.store.getState().game.revision).toBe(game.revision);
     } finally {

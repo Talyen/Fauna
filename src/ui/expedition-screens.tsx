@@ -350,15 +350,13 @@ export function Collection({
       <div className="collection-grid">
         {ordered.map((creature) =>
           game.unlocked.includes(creature.id) ? (
-            <div className="collection-species" key={creature.id}>
-              <CreatureCard
-                kind={creature.id}
-                onClick={() => inspect({ species: creature.id })}
-                onInspect={() => inspect({ species: creature.id })}
-                label={`Inspect ${creature.name}`}
-              />
-              <h2>{creature.name}</h2>
-            </div>
+            <CreatureCard
+              key={creature.id}
+              kind={creature.id}
+              onClick={() => inspect({ species: creature.id })}
+              onInspect={() => inspect({ species: creature.id })}
+              label={`Inspect ${creature.name}`}
+            />
           ) : (
             <div key={creature.id} className="locked-species">
               <ArtCard
