@@ -95,6 +95,7 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 
 - When opening a screen, show a spinner only if loading lasts longer than 200ms. Content appears as soon as it is ready; the delay applies only to the loading indicator.
 - Use a small neutral spinner beside the visible label “Loading…”.
+- During refresh, keep existing content visible at normal contrast and show a small loading indicator nearby.
 
 ## Shared preferences
 
