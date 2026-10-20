@@ -153,6 +153,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
         setInspection({
           species: kind,
           enemyId: focused?.closest<HTMLElement>("[data-enemy-id]")?.dataset.enemyId,
+          creatureId: focused?.closest<HTMLElement>("[data-actor-id]")?.dataset.actorId,
         });
       return;
     }

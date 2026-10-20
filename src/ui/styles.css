@@ -1163,7 +1163,7 @@ button {
   justify-content: center;
 }
 .destination-enemies > div {
-  flex: 1;
+  flex: 0 0 var(--art-landscape-width);
   min-width: 0;
   max-width: var(--art-landscape-width);
   display: flex;

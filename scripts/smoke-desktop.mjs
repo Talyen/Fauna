@@ -40,7 +40,7 @@ try {
   await window.getByRole("button", { name: "Next action", exact: true }).click();
   await window.getByRole("button", { name: "Back", exact: true }).click();
   await window.getByRole("button", { name: "Close inspection", exact: true }).click();
-  // Exercise free swaps through the actual renderer and version-nine desktop storage.
+  // Exercise free swaps through the actual renderer and current-format desktop storage.
   await window.evaluate(async () => {
     const state = JSON.parse((await window.faunaDesktop.readCandidates())[0].data);
     if (state.team.length !== 1 || state.cards.length !== 3)

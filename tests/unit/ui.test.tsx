@@ -2,7 +2,7 @@ import { ActionCard } from "../../src/ui/cards";
 import { TooltipProvider } from "../../src/components/ui/tooltip";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
-import { accept, run, winBattle, bossReward } from "./helpers";
+import { accept, run, teamRun, winBattle, bossReward } from "./helpers";
 import { encounterSource, location } from "../../src/game/destinations";
 import { RELICS } from "../../src/game/progression";
 import { TargetPreview } from "../../src/ui/target-preview";
@@ -188,6 +188,45 @@ describe("player interface", () => {
       await session.flush();
     });
     expect(JSON.parse(localStorage.getItem("fauna.save.v1")!).phase).toBe("battle");
+    await session.dispose();
+  });
+  it("inspects the focused creature copy with its current health and Block using the keyboard", async () => {
+    vi.stubGlobal(
+      "ResizeObserver",
+      class {
+        observe() {}
+        disconnect() {}
+      },
+    );
+    const game = produce(teamRun(7, ["mossback", "mossback", "stormfin"]), (d) => {
+      d.team[0]!.health = 7;
+      d.team[1]!.health = 19;
+      d.team[1]!.block = 4;
+      d.roster.push("mossback");
+      d.reserves.push({ id: "reserve-copy", species: "mossback", health: 11, block: 2, attacked: false });
+    });
+    localStorage.setItem("fauna.save.v1", JSON.stringify(game));
+    const session = createSession(createBrowserPlatform(localStorage), 7);
+    await session.load();
+    render(<App session={session} />);
+    const user = userEvent.setup();
+    await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+    for (const [id, expected] of [
+      ["ally-0", "7/32 health"],
+      ["ally-1", "19/32 health · 4 block"],
+    ]) {
+      act(() =>
+        document.querySelector<HTMLButtonElement>(`.player-row [data-actor-id="${id}"] button`)!.focus(),
+      );
+      await user.keyboard("i");
+      expect(document.querySelector(".inspection-health")!.textContent).toBe(expected);
+      await user.keyboard("{Escape}");
+    }
+    await user.click(screen.getByRole("button", { name: "Swap", exact: true }));
+    act(() => screen.getByRole("button", { name: "Mossback, reserve", exact: true }).focus());
+    await user.keyboard("i");
+    expect(document.querySelector(".inspection-health")!.textContent).toBe("11/32 health · 2 block");
+    expect(session.store.getState().game).toEqual(game);
     await session.dispose();
   });
   it("maps standard controller buttons and sticks to semantic actions", () => {

@@ -158,6 +158,7 @@ export function Rewards({ game, send, inspect }: Props) {
                 <div className="reward-option" key={id}>
                   <CreatureCard
                     kind={kind}
+                    actorId={incoming ? id : undefined}
                     label={incoming ? `Release ${species(kind).name}` : `Recruit ${species(kind).name}`}
                     onInspect={() =>
                       inspect(incoming ? { species: kind, creatureId: id } : { species: kind })

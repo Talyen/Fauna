@@ -215,6 +215,27 @@ for (const width of [1280, 1920])
       await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
     });
 
+test("destination enemy artwork wraps at its fixed size in a narrow window", async ({ page }) => {
+  await page.setViewportSize({ width: 800, height: 800 });
+  const game = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
+  await seed(page, game);
+  await resume(page);
+  await page.locator("[data-destination]").first().click();
+  const cards = page.getByRole("dialog").locator(".destination-enemies .creature-card");
+  await expect(cards).toHaveCount(3);
+  for (const card of await cards.all()) {
+    const bounds = await card.boundingBox();
+    expect(bounds!.width).toBeCloseTo(800 / 3, 1);
+    expect(bounds!.height).toBeCloseTo(200, 1);
+  }
+  const first = await cards.nth(0).boundingBox();
+  const last = await cards.nth(2).boundingBox();
+  expect(last!.y).toBeGreaterThan(first!.y + first!.height);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.screenshot({ path: "reports/destinations/narrow-pack.png", fullPage: true });
+  expect(await state(page)).toEqual(game);
+});
+
 test("main menu, draft and pre-battle deck lead into the first battle", async ({ page }) => {
   await seed(page);
   await expect(page.getByRole("button", { name: "New journey", exact: true })).toBeFocused();
