@@ -1260,3 +1260,17 @@ button {
     pointer-events: auto;
   }
 }
+
+.autoplay-control {
+  display: flex;
+  align-items: center;
+  gap: var(--screen-item-gap);
+  min-height: var(--control-height);
+}
+.unlock-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--screen-section-gap);
+  padding: var(--page-block-gutter) var(--page-inline-gutter);
+}
