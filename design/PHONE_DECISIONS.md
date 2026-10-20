@@ -97,6 +97,13 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 - Use a small neutral spinner beside the visible label “Loading…”.
 - During refresh, keep existing content visible at normal contrast and show a small loading indicator nearby.
 
+## Mana crystals
+
+- Keep the existing Alchemy crystal artwork and use a subtle hover glint.
+- Card-cost previews softly dim the crystals that would be spent; previewing never spends Mana.
+- Spending fades to the spent appearance over 150ms; refilling fades to the full appearance over 150ms.
+- Committed Mana values update immediately. Reduced motion removes the glint and makes spending/refill appearance changes immediate.
+
 ## Empty states
 
 - Use an icon only, with no visible message, accompanying action or hover/focus tooltip. Provide an accessible label that describes the empty state.
