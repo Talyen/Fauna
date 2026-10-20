@@ -101,6 +101,7 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 
 - Use an icon only, with no visible message, accompanying action or hover/focus tooltip. Provide an accessible label that describes the empty state.
 - Empty-state icons are 24px and muted gray.
+- Center the icon within the empty content area. It appears immediately, has no hover visual change and is replaced immediately when content becomes available.
 
 ## Shared preferences
 
