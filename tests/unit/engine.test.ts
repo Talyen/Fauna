@@ -3,28 +3,32 @@ import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
 import { definition, species, SPECIES } from "../../src/game/content";
 import { decodeSave, encodeSave, validateContent } from "../../src/game/save";
-import { accept, policy, run, winBattle } from "./helpers";
+import { accept, policy, run, teamRun, winBattle } from "./helpers";
 describe("game commands", () => {
-  it("validates authored content and drafts three distinct unlocked species", () => {
+  it("validates authored content and starts with one unlocked creature and its three cards", () => {
     validateContent();
     let s = createGame();
     expect(dispatch(s, { type: "start" }).accepted).toBe(false);
     expect(dispatch(s, { type: "draft", species: "moonhart" }).accepted).toBe(false);
     s = accept(s, { type: "draft", species: "mossback" });
     s = accept(s, { type: "draft", species: "mossback" });
-    expect(s.selected).toEqual([]);
-    s = run();
-    expect(s.cards).toHaveLength(9);
-    expect(s.battle!.hand).toHaveLength(5);
+    expect(s.selected).toEqual(["mossback"]);
+    s = accept(accept(s, { type: "start" }), { type: "beginBattle" });
+    expect(s.roster).toEqual(["mossback"]);
+    expect(s.team).toHaveLength(1);
+    expect(s.cards).toHaveLength(3);
+    expect(s.battle!.hand).toHaveLength(3);
     expect(s.battle!.mana).toBe(3);
   });
-  it("rejects a fourth draft choice without changing state or RNG", () => {
+  it("replaces the chosen starter without accumulating choices or consuming RNG", () => {
     let s = createGame();
     for (const kind of ["mossback", "emberfox", "stormfin"] as const)
       s = accept(s, { type: "draft", species: kind });
-    const result = dispatch(s, { type: "draft", species: "silkmoth" });
+    expect(s.selected).toEqual(["stormfin"]);
+    const result = dispatch(s, { type: "draft", species: "moonhart" });
     expect(result.accepted).toBe(false);
     expect(result.state).toBe(s);
+    expect(s.rng).toBe(createGame().rng);
   });
   it("publishes deeply frozen state and leaves the previous state untouched", () => {
     const s = run();
@@ -70,10 +74,7 @@ describe("game commands", () => {
     expect(r.state.battle!.discard).toContain(attack.id);
   });
   it("derives enemy and reflected damage types after a version-one save round trip", () => {
-    let initial = createGame(42);
-    for (const kind of ["briartooth", "emberfox", "stormfin"] as const)
-      initial = accept(initial, { type: "draft", species: kind });
-    initial = accept(accept(initial, { type: "start" }), { type: "beginBattle" });
+    const initial = teamRun(42, ["briartooth", "emberfox", "stormfin"]);
     const s = decodeSave(
       encodeSave(
         produce(initial, (d) => {
@@ -188,13 +189,10 @@ describe("game commands", () => {
     for (let first = 0; first < 4; first++)
       for (let second = first + 1; second < 5; second++)
         for (let third = second + 1; third < 6; third++) {
-          let s = produce(createGame(first * 100 + second * 10 + third), (d) => {
-            d.unlocked.push("moonhart");
-            d.wins = 1;
-          });
-          for (const index of [first, second, third])
-            s = accept(s, { type: "draft", species: SPECIES[index]!.id });
-          s = accept(accept(s, { type: "start" }), { type: "beginBattle" });
+          let s = teamRun(
+            first * 100 + second * 10 + third,
+            [first, second, third].map((index) => SPECIES[index]!.id),
+          );
           for (let i = 0; i < 180 && !["victory", "defeat"].includes(s.phase); i++) {
             s = accept(s, policy(s));
             decodeSave(encodeSave(s));
@@ -235,10 +233,7 @@ describe("save validation", () => {
 });
 describe("creature traits and deck circulation", () => {
   it("applies Charged marks and Tender healing while rejecting revival of knocked-out allies", () => {
-    let s = createGame(5);
-    for (const kind of ["stormfin", "silkmoth", "mossback"] as const)
-      s = accept(s, { type: "draft", species: kind });
-    s = accept(accept(s, { type: "start" }), { type: "beginBattle" });
+    let s = teamRun(5, ["stormfin", "silkmoth", "mossback"]);
     const mark = s.cards.find((c) => c.definitionId === "stormfin-mark")!,
       heal = s.cards.find((c) => c.definitionId === "silkmoth-heal")!;
     s = produce(s, (d) => {
@@ -258,13 +253,7 @@ describe("creature traits and deck circulation", () => {
     expect(dispatch(knocked, { type: "play", cardId: heal.id, targetId: "ally-2" }).accepted).toBe(false);
   });
   it("deals Thorns only for health damage and grants Moonlit starting block", () => {
-    let s = produce(createGame(3), (d) => {
-      d.unlocked.push("moonhart");
-      d.wins = 1;
-    });
-    for (const kind of ["briartooth", "moonhart", "mossback"] as const)
-      s = accept(s, { type: "draft", species: kind });
-    s = accept(accept(s, { type: "start" }), { type: "beginBattle" });
+    let s = teamRun(3, ["briartooth", "moonhart", "mossback"]);
     expect(s.team[1]!.block).toBe(4);
     s = produce(s, (d) => {
       d.battle!.enemies.forEach((e) => (e.targetId = "ally-0"));

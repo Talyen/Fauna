@@ -1,12 +1,39 @@
 import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
-import { definition, species } from "../../src/game/content";
+import { CARDS, definition, species, type SpeciesId } from "../../src/game/content";
 import type { Command, GameState } from "../../src/game/types";
 export function run(seed = 42) {
+  return teamRun(seed, ["mossback", "emberfox", "stormfin"]);
+}
+/** A progressed/legacy lineup fixture for multi-creature combat coverage. */
+export function teamRun(seed: number, kinds: SpeciesId[]) {
   let s = createGame(seed);
-  for (const kind of ["mossback", "emberfox", "stormfin"] as const)
-    s = accept(s, { type: "draft", species: kind });
-  return accept(accept(s, { type: "start" }), { type: "beginBattle" });
+  s = produce(s, (d) => {
+    if (kinds.includes("moonhart")) {
+      d.unlocked.push("moonhart");
+      d.wins = 1;
+    }
+    d.selected = [kinds[0]!];
+    d.roster = [...kinds];
+    d.lineup = [...kinds];
+    d.team = kinds.map((kind, i) => ({
+      id: `ally-${i}`,
+      species: kind,
+      health: species(kind).health,
+      block: 0,
+      attacked: false,
+    }));
+    d.cards = d.team.flatMap((c) =>
+      CARDS.filter((card) => card.species === c.species).map((card) => ({
+        id: `${c.id}:${card.id}`,
+        definitionId: card.id,
+        ownerId: c.id,
+        level: 0,
+      })),
+    );
+    d.phase = "teamSelection";
+  });
+  return accept(s, { type: "beginBattle" });
 }
 export function accept(s: GameState, c: Command) {
   const result = dispatch(s, c);

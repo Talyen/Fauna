@@ -20,9 +20,9 @@ try {
     .evaluateAll((images) => Promise.all(images.map((image) => image.decode())));
   await window.getByRole("button", { name: "Back", exact: true }).click();
   await window.getByRole("button", { name: "New expedition", exact: true }).click();
-  for (const name of ["Mossback", "Emberfox", "Stormfin"])
-    await window.getByRole("button", { name: `Choose ${name}`, exact: true }).click();
-  await window.getByRole("button", { name: "Start expedition" }).click();
+  await window.getByRole("button", { name: "Inspect Mossback", exact: true }).click();
+  await window.getByRole("button", { name: "Choose Mossback", exact: true }).click();
+  await window.getByRole("button", { name: "Begin expedition" }).click();
   await window.getByRole("button", { name: "Deck", exact: true }).click();
   await window
     .locator(".deck-grid img")
@@ -42,6 +42,24 @@ try {
   // Exercise free swaps through the actual renderer and version-four desktop storage.
   await window.evaluate(async () => {
     const state = JSON.parse((await window.faunaDesktop.readCandidates())[0].data);
+    if (state.team.length !== 1 || state.cards.length !== 3)
+      throw new Error("The expedition did not begin with one starter.");
+    // Continue swap coverage with a grown lineup and its complete card slots.
+    for (const [kind, health, effects] of [
+      ["emberfox", 24, ["attack", "heal", "mark"]],
+      ["stormfin", 26, ["attack", "mark", "guard"]],
+    ]) {
+      const id = `ally-${state.team.length}`;
+      state.roster.push(kind);
+      state.lineup.push(kind);
+      state.team.push({ id, species: kind, health, block: 0, attacked: false });
+      for (const effect of effects) {
+        const definitionId = `${kind}-${effect}`;
+        const card = { id: `${id}:${definitionId}`, definitionId, ownerId: id, level: 0 };
+        state.cards.push(card);
+        state.battle.draw.push(card.id);
+      }
+    }
     state.roster.push("silkmoth", "briartooth");
     state.reserves = ["silkmoth", "briartooth"].map((kind) => ({
       id: `recruit-${kind}`,

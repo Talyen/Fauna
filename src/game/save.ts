@@ -213,7 +213,15 @@ export function decodeSave(raw: string): GameState {
         s.battle !== null ||
         s.reward !== null,
     );
-  else invalid(s.team.length !== 3 || s.cards.length !== 9 || s.roster.length < 3 || s.lineup.length !== 3);
+  else
+    invalid(
+      s.team.length < 1 ||
+        s.team.length !== Math.min(3, s.roster.length) ||
+        s.cards.length !== s.team.length * 3 ||
+        s.lineup.length !== s.team.length,
+    );
+  // Older unfinished drafts retain their first choice; committed expeditions keep their full team.
+  if (s.phase === "draft") s.selected = s.selected.slice(0, 1);
   if (s.phase === "teamSelection")
     invalid(
       s.battle !== null || s.reward !== null || s.team.some((c, index) => c.species !== s.lineup[index]),

@@ -168,20 +168,35 @@ strong {
   margin: auto;
 }
 .draft-screen h1 {
-  display: flex;
-  gap: var(--space-4);
-  align-items: center;
+  margin: 0;
 }
-.selection-count {
-  font-size: var(--text-body);
-  font-weight: 400;
-  color: var(--muted-foreground);
+.starter-option {
+  text-align: center;
+  min-width: 0;
+}
+.starter-option h2 {
+  font-size: var(--text-heading);
+  font-weight: 500;
+  margin: var(--space-3) 0 var(--space-1);
+}
+.starter-selection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: var(--space-6);
+  color: var(--primary);
+  font-size: var(--text-secondary);
+}
+.starter-selection svg {
+  width: var(--space-4);
+  height: var(--space-4);
 }
 .draft-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--space-5);
-  max-width: 960px;
+  max-width: min(960px, calc((100dvh - 310px) * 2));
   width: 100%;
 }
 .creature-wrap {

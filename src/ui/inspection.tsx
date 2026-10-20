@@ -17,11 +17,13 @@ export function Inspector({
   session,
   controls,
   onClose,
+  chooseStarter,
 }: {
   item: Inspection;
   session: Session;
   controls: Controls;
   onClose: () => void;
+  chooseStarter?: () => boolean;
 }) {
   const [opener] = useState(() => document.activeElement as HTMLElement | null);
   const game = useStore(session.store, (s) => s.game);
@@ -172,6 +174,15 @@ export function Inspector({
                 ))}
               </div>
             </div>
+            {chooseStarter ? (
+              <Button
+                onClick={() => {
+                  if (chooseStarter()) onClose();
+                }}
+              >
+                Choose {creature.name}
+              </Button>
+            ) : null}
           </>
         )}
       </DialogContent>

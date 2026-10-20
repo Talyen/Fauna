@@ -1,8 +1,8 @@
 # Fauna
 
-A single-player creature-collecting card battler for Steam. Three companions bring their cards to one shared deck. Find combinations, recruit new teammates, and reach the heart of the wilds.
+A single-player creature-collecting card battler for Steam. Choose a starter and recruit companions, combining their cards in one shared deck. Find combinations, recruit new teammates, and reach the heart of the wilds.
 
-This foundation contains a complete short expedition: draft three of five species, fight two encounters and a boss, collect keyword XP and currency, recruit reserves, and choose expedition relics, and unlock Moonhart on victory. The illustrations are original procedural SVG placeholders, not final production artwork.
+This foundation contains a complete short expedition: choose one of five starter species, fight two encounters and a boss, collect keyword XP and currency, recruit reserves, and choose expedition relics, and unlock Moonhart on victory. The illustrations are original procedural SVG placeholders, not final production artwork.
 
 ## Run
 
@@ -23,9 +23,9 @@ Browser and desktop profiles are separate. Desktop saves live in Electron's Faun
 
 ## Play
 
-Choose three creatures, then start the run. Every creature contributes three cards. Draw five and spend up to three mana each turn. Select a card and an enemy or ally; confirm team guard cards with Play. Enemy actions remain hidden. Marks amplify the next hit, block absorbs attacks, and each creature has a passive trait.
+Inspect the available creatures, choose one starter, then begin the expedition. Every creature contributes three cards. Draw up to five cards and spend up to three mana each turn. Select a card and an enemy or ally; confirm team guard cards with Play. Enemy actions remain hidden. Marks amplify the next hit, block absorbs attacks, and each creature has a passive trait.
 
-Knocked-out creatures cannot act and their cards leave circulation for that battle. Defeat the enemy row to restore the roster and receive XP/currency, optional recruitment, and a separate relic choice when offered. Recruit from defeated species into a five-species roster: three deployed, two reserves. The starting lineup is remembered and optionally editable from the menu between battles. Swap freely during combat; incoming cards replace outgoing cards in their current zones without healing, drawing, or spending Mana. Healthy reserves can replace fallen creatures; defeat requires the entire roster to fall. Keyword XP unlocks shared permanent talents; talents can be bought or reset at any time through the menu. Defeating the boss unlocks Moonhart; losing or ending a run preserves discoveries.
+Knocked-out creatures cannot act and their cards leave circulation for that battle. Defeat the enemy row to restore the roster and receive XP/currency, optional recruitment, and a separate relic choice when offered. Recruit from defeated species into a five-species roster. Recruits fill the starting lineup up to three creatures, then join the two reserves. The starting lineup is remembered and optionally editable from the menu between battles. Swap freely during combat; incoming cards replace outgoing cards in their current zones without healing, drawing, or spending Mana. Healthy reserves can replace fallen creatures; defeat requires the entire roster to fall. Keyword XP unlocks shared permanent talents; talents can be bought or reset at any time through the menu. Defeating the boss unlocks Moonhart; losing or ending a run preserves discoveries.
 
 - Mouse: select cards and targets. Right-click any card to inspect it.
 - Keyboard: W/A/S/D navigate, Enter/Space activate, I inspects a focused card, Escape cancels or opens the menu. Tab remains available.

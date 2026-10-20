@@ -24,6 +24,8 @@ ArtCard is the sole artwork surface: exactly one image, no text or UI overlays. 
 
 ## Other screens
 
+- Starter selection uses three artwork columns, names and an external Selected check beneath artwork. Clicking opens the shared creature inspection with Choose [creature]; choosing returns to the grid. Begin expedition remains separate and unavailable until one starter is chosen. Browsing, action inspection and cancellation preserve the choice. All unlocked species remain available; extra choices form additional rows.
+
 Menus and Collection follow [menu design](MENU_DESIGN.md). Progression and rewards follow [expedition design](EXPEDITION_DESIGN.md).
 
 - Main menu is a centered vertical list with a gold default Button for Continue/New expedition/Resume and ghost Buttons for all other choices; launching never automatically resumes gameplay. Pause is a centered overlay. Talents is full screen with keyword tabs and rows; immediate purchase, whole-category reset, and Back to the originating menu.

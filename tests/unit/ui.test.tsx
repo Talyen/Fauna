@@ -23,10 +23,12 @@ describe("player interface", () => {
     render(<App session={session} />);
     const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: "New expedition" }));
-    const enter = screen.getByRole("button", { name: "Start expedition" });
+    const enter = screen.getByRole("button", { name: "Begin expedition" });
     expect((enter as HTMLButtonElement).disabled).toBe(true);
-    for (const name of ["Mossback", "Emberfox", "Stormfin"])
-      await user.click(screen.getByRole("button", { name: `Choose ${name}` }));
+    await user.click(screen.getByRole("button", { name: "Inspect Mossback" }));
+    expect(session.store.getState().game.selected).toEqual([]);
+    await user.click(screen.getByRole("button", { name: "Choose Mossback" }));
+    expect(session.store.getState().game.selected).toEqual(["mossback"]);
     await user.click(enter);
     expect(session.store.getState().game.phase).toBe("teamSelection");
     vi.stubGlobal(

@@ -9,7 +9,7 @@ import {
   AlertDialogAction,
 } from "../components/ui/alert-dialog";
 import { buttonVariants } from "../components/ui/button";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
 import { flushSync } from "react-dom";
 import { Menu, ArrowLeftRight } from "lucide-react";
@@ -185,11 +185,13 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
       else document.documentElement.dataset.input = previous;
     };
   }, []);
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!view.ready || menu || modal || inspection || (route === "play" && mode === "pointer")) return;
     const buttons = Array.from(
       root.current?.querySelectorAll<HTMLElement>("main button:not(:disabled)") ?? [],
     ).filter((el) => el.getClientRects().length > 0);
+    // Screen transitions must not replace focus the player already moved onto the new screen.
+    if (buttons.includes(document.activeElement as HTMLElement)) return;
     (buttons.find((el) => el.classList.contains("primary-menu-action")) ?? buttons[0])?.focus();
   }, [route, game.phase, view.ready, view.recoveryRequired]);
   useEffect(() => {
@@ -416,6 +418,11 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           session={session}
           controls={inspectionControls}
           onClose={() => setInspection(null)}
+          chooseStarter={
+            route === "play" && game.phase === "draft" && !menu && "species" in inspection
+              ? () => send({ type: "draft", species: inspection.species })
+              : undefined
+          }
         />
       ) : null}
     </>

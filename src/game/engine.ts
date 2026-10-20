@@ -299,15 +299,10 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
     (!Number.isSafeInteger(command.seed) || command.seed < 0 || command.seed > 0xffffffff)
   )
     return reject(state, "Choose a valid expedition seed.");
-  if (
-    command.type === "draft" &&
-    (state.phase !== "draft" ||
-      !state.unlocked.includes(command.species) ||
-      (!state.selected.includes(command.species) && state.selected.length >= 3))
-  )
-    return reject(state, "Choose up to three unlocked creatures.");
-  if (command.type === "start" && (state.phase !== "draft" || state.selected.length !== 3))
-    return reject(state, "Choose three creatures first.");
+  if (command.type === "draft" && (state.phase !== "draft" || !state.unlocked.includes(command.species)))
+    return reject(state, "Choose an unlocked starter.");
+  if (command.type === "start" && (state.phase !== "draft" || state.selected.length !== 1))
+    return reject(state, "Choose one starter first.");
   if ((command.type === "play" || command.type === "endTurn") && (state.phase !== "battle" || !b))
     return reject(state, "There is no active battle.");
   if (command.type === "play") {
@@ -395,9 +390,7 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
     draft.revision++;
     switch (command.type) {
       case "draft": {
-        const i = draft.selected.indexOf(command.species);
-        if (i >= 0) draft.selected.splice(i, 1);
-        else draft.selected.push(command.species);
+        draft.selected = [command.species];
         break;
       }
       case "start":
@@ -582,7 +575,14 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
           } else draft.reserves[draft.reserves.findIndex((c) => c.species === command.replace)] = recruited;
         } else {
           draft.roster.push(command.species);
-          draft.reserves.push(recruited);
+          if (draft.lineup.length < 3) {
+            draft.lineup.push(command.species);
+            draft.team.push(recruited);
+            const cards = ownedCards(recruited.id, recruited.species);
+            draft.cards.push(...cards);
+            // The settled battle remains a valid receipt through recruitment and relic choice.
+            draft.battle?.discard.push(...cards.map((card) => card.id));
+          } else draft.reserves.push(recruited);
         }
         afterRecruit(draft);
         break;

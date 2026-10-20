@@ -4,8 +4,9 @@ These are the agreed directions from the design review. They supersede the proto
 
 ## Roster and battles
 
-- An expedition roster holds five distinct species: three deployed and two reserves. Duplicate species are excluded.
-- The initial draft supplies the remembered starting lineup. The encounter preview shows enemies, Deck, and Begin battle without requiring team selection.
+- Begin with one chosen starter. An expedition roster grows to five distinct species: up to three deployed and two reserves. Duplicate species are excluded.
+- Starter selection uses a three-column artwork grid of unlocked species. Clicking opens inspection with a Choose action; choosing returns to the grid and marks the selected creature. Begin expedition is a separate action, available after choosing one starter. Inspecting or canceling never changes the choice. Choosing another replaces it.
+- The starter supplies the remembered starting lineup. Recruits fill its second and third slots before joining reserves. The encounter preview shows enemies, Deck, and Begin battle without requiring team selection.
 - Lineup is an optional menu dialog between battles, including ordinary reward screens. Changes save immediately. Combat swaps do not overwrite this starting lineup.
 - Only deployed living creatures act and provide passive traits. Enemy intents remain hidden.
 - During your turn, Swap opens a centered dialog with three deployed creatures and two smaller reserves. Reserves are hidden on the battlefield.

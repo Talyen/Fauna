@@ -52,25 +52,34 @@ export function TeamSelection({ game, send, inspect, deck }: Props & { deck: () 
 export function Draft({ game, send, inspect }: Props) {
   return (
     <main className="draft-screen">
-      <h1>
-        Choose 3 <span className="selection-count">{game.selected.length}/3</span>
-      </h1>
-      <div className="draft-grid">
+      <h1>Choose your starter</h1>
+      <div className="draft-grid" data-nav-row>
         {SPECIES.filter((s) => game.unlocked.includes(s.id)).map((s) => (
-          <CreatureCard
-            key={s.id}
-            kind={s.id}
-            selected={game.selected.includes(s.id)}
-            disabled={game.selected.length === 3 && !game.selected.includes(s.id)}
-            onClick={() => send({ type: "draft", species: s.id })}
-            onInspect={() => inspect({ species: s.id })}
-            label={`Choose ${s.name}`}
-          />
+          <div className="starter-option" key={s.id}>
+            <CreatureCard
+              kind={s.id}
+              selected={game.selected.includes(s.id)}
+              onClick={() => inspect({ species: s.id })}
+              onInspect={() => inspect({ species: s.id })}
+              label={`Inspect ${s.name}`}
+              tooltips={false}
+            />
+            <h2>{s.name}</h2>
+            <span className="starter-selection">
+              {game.selected.includes(s.id) ? (
+                <>
+                  <Check aria-hidden="true" /> Selected
+                </>
+              ) : null}
+            </span>
+          </div>
         ))}
       </div>
-      <Button disabled={game.selected.length !== 3} onClick={() => send({ type: "start" })}>
-        Start expedition
-      </Button>
+      <footer className="selection-footer" data-nav-row>
+        <Button disabled={game.selected.length !== 1} onClick={() => send({ type: "start" })}>
+          Begin expedition
+        </Button>
+      </footer>
     </main>
   );
 }
