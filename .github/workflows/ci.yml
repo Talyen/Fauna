@@ -19,6 +19,7 @@ jobs:
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - run: npm run verify:full
+      - run: npm run test:interactions -- --seed 42 --steps 12 --out reports/interactions/ci
       - name: Summarize unit and browser results
         if: always()
         run: |

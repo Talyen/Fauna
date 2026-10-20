@@ -29,6 +29,8 @@ Additional opt-in tools:
 - `npm run verify:package`: [package gate](verify-package.mjs).
 - `npm run context`: [owner lookup](agent-context.mjs).
 - `npm run review:status`, `npm run review:diff`: [bounded patch review](agent-review.mjs).
+- `npm run test:e2e:route`: [named route launcher](test-route.mjs), [route definitions](lib/test-routes.mjs).
+- `npm run test:interactions`: [rendered seeded runner](run-interactions.mjs), [bounded reducer and replay validation](lib/interaction-replay.mjs).
 - Shared source identities, report-directory confinement and Node module loading: [tool-runtime.mjs](lib/tool-runtime.mjs).
 
 See [Development tools](../Docs/DEVELOPMENT_TOOLS.md) for scenarios, defaults, evidence and limitations.

@@ -55,7 +55,7 @@ it("rejects empty performance segments and incompatible replays", () => {
     summarizeSample({ ...sample, segments: [{ complete: true, duration: 10, frames: 0 }] }),
   ).toThrow();
   const report = {
-    format: 1,
+    format: 2,
     complete: true,
     environment: { viewport: 1280 },
     cases: [{ id: "battle", checkpointHash: "a", actionHash: "b", fixture: "v1", sample }],

@@ -1,8 +1,9 @@
-import { chromium } from "@playwright/test";
+import { chromium, _electron as electron } from "@playwright/test";
 import { preview } from "vite";
-import { readFile, writeFile, readdir } from "node:fs/promises";
+import { readFile, writeFile, readdir, mkdtemp, rm } from "node:fs/promises";
 import path from "node:path";
 import os from "node:os";
+import { performance } from "node:perf_hooks";
 import { pathToFileURL } from "node:url";
 import { ROOT, runtime, identity, hash, reportDirectory } from "./lib/tool-runtime.mjs";
 import { comparePerformance, summarizeSample } from "./lib/performance-metrics.mjs";
@@ -20,6 +21,7 @@ async function buildIdentity() {
     }
   }
   await walk(path.join(ROOT, "dist"));
+  await walk(path.join(ROOT, "desktop"));
   if (!files.length) throw new Error("Build the production renderer before capturing performance.");
   return hash(files.join("\n"));
 }
@@ -93,7 +95,7 @@ async function startSampler(page) {
     await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
   });
 }
-async function action(page, step) {
+export async function action(page, step) {
   if (step.kind === "click") await page.getByRole("button", { name: step.name, exact: true }).click();
   else if (step.kind === "play") {
     await page.locator(`[data-card-id=${JSON.stringify(step.command.cardId)}]`).click();
@@ -113,8 +115,10 @@ async function action(page, step) {
       .locator(`[data-actor-id=${JSON.stringify(step.command.reserve)}] .creature-card`)
       .click();
   } else throw new Error(`Unknown performance action: ${step.kind}`);
-  await page.waitForFunction((checkpoint) => {
-    const saved = localStorage.getItem("fauna.save.v1");
+  await page.waitForFunction(async (checkpoint) => {
+    const saved = window.faunaDesktop
+      ? (await window.faunaDesktop.readCandidates()).find((row) => row.source === "primary")?.data
+      : localStorage.getItem("fauna.save.v1");
     const canonical = (value) =>
       JSON.stringify(value, (_key, entry) =>
         entry && typeof entry === "object" && !Array.isArray(entry)
@@ -128,35 +132,80 @@ async function action(page, step) {
     return saved && canonical(JSON.parse(saved)) === canonical(JSON.parse(checkpoint));
   }, step.checkpoint);
 }
-async function capture(browser, url, scenario, measured) {
-  const context = await browser.newContext({
-    viewport: { width: 1280, height: 800 },
-    reducedMotion: "no-preference",
-  });
+async function capture(browser, url, scenario, measured, native = false, cold = false) {
+  let context, app, profile;
+  const launched = performance.now();
   try {
-    await context.addInitScript((initial) => {
-      localStorage.setItem("fauna.save.v1", initial);
+    let page;
+    const initialize = (initial) => {
+      if (!window.faunaDesktop) localStorage.setItem("fauna.save.v1", initial);
       localStorage.setItem("fauna.auto-end-turn", "false");
-      localStorage.setItem("fauna.audio.v1", JSON.stringify({ enabled: false }));
-    }, scenario.initial);
-    const page = await context.newPage();
+    };
+    if (native) {
+      profile = await mkdtemp(path.join(os.tmpdir(), "fauna-perf-"));
+      await writeFile(path.join(profile, "expedition.json"), scenario.initial);
+      const env = { ...process.env, FAUNA_SMOKE_USER_DATA: profile };
+      env.FAUNA_PERF_CAPTURE = "1";
+      delete env.FAUNA_DEV_URL;
+      delete env.FAUNA_PREVIEW_USER_DATA;
+      delete env.ELECTRON_RUN_AS_NODE;
+      app = await electron.launch({
+        ...(process.env.FAUNA_ELECTRON_EXECUTABLE
+          ? { executablePath: process.env.FAUNA_ELECTRON_EXECUTABLE }
+          : {}),
+        args: [ROOT, "--mute-audio"],
+        env,
+        timeout: 20000,
+      });
+      page = await app.firstWindow();
+      await app.evaluate(({ BrowserWindow }) => {
+        const window = BrowserWindow.getAllWindows()[0];
+        window.setContentSize(1280, 800);
+        window.webContents.setAudioMuted(true);
+      });
+      if (!cold) {
+        await page.evaluate(initialize, scenario.initial);
+        await page.reload();
+      }
+    } else {
+      context = await browser.newContext({
+        viewport: { width: 1280, height: 800 },
+        reducedMotion: "no-preference",
+      });
+      await context.addInitScript(initialize, scenario.initial);
+      page = await context.newPage();
+      await page.goto(url);
+    }
     page.setDefaultTimeout(15000);
-    await page.goto(url);
     await page.getByRole("button", { name: "Continue", exact: true }).waitFor();
-    if (scenario.id !== "menus") await page.getByRole("button", { name: "Continue", exact: true }).click();
+    const startupMs = performance.now() - launched;
+    if (scenario.id !== "menus" && scenario.id !== "startup")
+      await page.getByRole("button", { name: "Continue", exact: true }).click();
     await page.locator(".app[data-save-status=saved]").waitFor();
     await page.locator("img").evaluateAll((images) => Promise.all(images.map((img) => img.decode())));
+    const environment = await page.evaluate(() => ({
+      viewport: { width: innerWidth, height: innerHeight },
+      dpr: devicePixelRatio,
+      reducedMotion: matchMedia("(prefers-reduced-motion: reduce)").matches,
+    }));
     if (measured) await startSampler(page);
     for (const [i, step] of scenario.actions.entries()) {
       if (measured) await page.evaluate((name) => window.faunaPerf.segment(name), `${i}-${step.kind}`);
-      await action(page, step);
-      // Retain the action's ordinary feedback/transition window in its segment.
+      if (step.kind !== "idle") await action(page, step);
       await page.waitForTimeout(1200);
       if (measured) await page.evaluate(() => window.faunaPerf.end());
     }
-    if (measured) return await page.evaluate(() => window.faunaPerf.stop());
+    if (measured)
+      return {
+        ...(await page.evaluate(() => window.faunaPerf.stop())),
+        startupMs: cold ? startupMs : null,
+        nativeVersion: app ? await app.evaluate(() => process.versions.electron) : null,
+        environment,
+      };
   } finally {
-    await context.close();
+    await context?.close();
+    await app?.close();
+    if (profile) await rm(profile, { recursive: true, force: true });
   }
 }
 export async function main(args = process.argv.slice(2)) {
@@ -170,21 +219,47 @@ export async function main(args = process.argv.slice(2)) {
     return;
   }
   const replayMode = args[0] === "replay";
-  let prior, scenarioId, output;
+  let prior,
+    scenarioId,
+    output,
+    native = false,
+    cold = false,
+    suite = "fixed",
+    seed = 42;
   if (replayMode) {
     prior = await read(args[1]);
     output = args[2];
-    if (!prior.complete || prior.format !== 1) throw new Error("Cannot replay incomplete report.");
-  } else
-    for (let i = 0; i < args.length; i += 2) {
-      if (args[i] === "--scenario") scenarioId = args[i + 1];
-      else if (args[i] === "--out") output = args[i + 1];
-      else throw new Error("Usage: perf -- [--scenario battle|swap|menus] [--out directory]");
-      if (!args[i + 1]) throw new Error("Missing option value.");
+    native = prior.environment.runtime === "electron";
+    cold = prior.environment.cold;
+    suite = prior.environment.suite;
+    seed = prior.environment.seed;
+    if (!prior.complete || prior.format !== 2) throw new Error("Cannot replay incomplete report.");
+  } else {
+    for (let i = 0; i < args.length; i++) {
+      if (args[i] === "--electron") native = true;
+      else if (args[i] === "--cold") cold = true;
+      else if (["--scenario", "--out", "--suite", "--seed"].includes(args[i])) {
+        const flag = args[i],
+          value = args[++i];
+        if (!value) throw new Error("Missing option value.");
+        if (flag === "--scenario") scenarioId = value;
+        if (flag === "--out") output = value;
+        if (flag === "--suite") suite = value;
+        if (flag === "--seed") seed = Number(value);
+      } else
+        throw new Error(
+          "Usage: perf -- [--electron] [--cold] [--suite fixed|reachable] [--seed N] [--scenario ID] [--out reports/path]",
+        );
     }
+  }
+  if (!["fixed", "reachable"].includes(suite) || !Number.isInteger(seed) || seed < 0 || seed > 0xffffffff)
+    throw new Error("Invalid performance suite or seed.");
+  if (cold && (!native || suite !== "fixed" || (scenarioId && scenarioId !== "startup")))
+    throw new Error("Cold capture requires --electron and the fixed startup scenario.");
+  if (cold) scenarioId = "startup";
   const out = await reportDirectory(output, `reports/performance/capture-${Date.now()}`);
   const report = {
-    format: 1,
+    format: 2,
     complete: false,
     identity: await identity(),
     buildIdentity: await buildIdentity(),
@@ -200,10 +275,23 @@ export async function main(args = process.argv.slice(2)) {
     let scenarios;
     const loader = await runtime();
     try {
-      const { performanceCases } = await loader.ssrLoadModule("/src/application/performance.ts");
+      const { performanceCases, reachablePerformanceCases } = await loader.ssrLoadModule(
+        "/src/application/performance.ts",
+      );
       scenarios = prior
         ? prior.cases.map((row) => row.scenario)
-        : performanceCases().filter((row) => !scenarioId || row.id === scenarioId);
+        : cold
+          ? [
+              {
+                id: "startup",
+                fixture: "cold-process-fresh-profile-v1",
+                initial: performanceCases()[0].initial,
+                actions: [{ kind: "idle" }],
+              },
+            ]
+          : (suite === "reachable" ? await reachablePerformanceCases(seed) : performanceCases()).filter(
+              (row) => !scenarioId || row.id === scenarioId,
+            );
     } finally {
       await loader.close();
     }
@@ -214,10 +302,16 @@ export async function main(args = process.argv.slice(2)) {
     });
     const address = server.httpServer.address();
     const url = `http://127.0.0.1:${address.port}`;
-    browser = await chromium.launch({ args: ["--mute-audio"] });
+    if (!native) browser = await chromium.launch({ args: ["--mute-audio"] });
     report.environment = {
-      runtime: "chromium",
-      browser: browser.version(),
+      runtime: native ? "electron" : "chromium",
+      browser: native
+        ? (await import("electron/package.json", { with: { type: "json" } })).default.version
+        : browser.version(),
+      cold,
+      windowFrame: !native,
+      suite,
+      seed,
       platform: process.platform,
       architecture: process.arch,
       cpu: os.cpus()[0]?.model ?? null,
@@ -226,7 +320,7 @@ export async function main(args = process.argv.slice(2)) {
       reducedMotion: false,
       warmup: 1,
       runs: 1,
-      autoEndTurn: false,
+      autoEndTurn: cold,
       timingWindowMs: 1200,
     };
     for (const scenario of scenarios) {
@@ -239,8 +333,18 @@ export async function main(args = process.argv.slice(2)) {
         sample: null,
       };
       try {
-        await capture(browser, url, scenario, false);
-        record.sample = await capture(browser, url, scenario, true);
+        await capture(browser, url, scenario, false, native, cold);
+        record.sample = await capture(browser, url, scenario, true, native, cold);
+        if (
+          JSON.stringify(record.sample.environment.viewport) !==
+            JSON.stringify(report.environment.viewport) ||
+          record.sample.environment.reducedMotion !== false
+        )
+          throw new Error("Actual viewport/motion differs from capture settings.");
+        if (report.cases.length && record.sample.environment.dpr !== report.environment.dpr)
+          throw new Error("DPR changed during capture.");
+        report.environment.dpr = record.sample.environment.dpr;
+        if (record.sample.nativeVersion) report.environment.browser = record.sample.nativeVersion;
         const summary = summarizeSample(record.sample);
         report.cases.push(record);
         await writeFile(path.join(out, `${scenario.id}-sample.json`), JSON.stringify(record.sample));

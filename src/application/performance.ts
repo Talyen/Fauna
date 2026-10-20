@@ -87,11 +87,63 @@ export function performanceCases() {
       actions: [
         { kind: "click", name: "Collection", checkpoint: initial },
         { kind: "click", name: "Inspect Mossback", checkpoint: initial },
-        { kind: "click", name: "Close inspection", checkpoint: initial },
+        { kind: "click", name: "Back", checkpoint: initial },
         { kind: "click", name: "Back", checkpoint: initial },
         { kind: "click", name: "Settings", checkpoint: initial },
         { kind: "click", name: "Close settings", checkpoint: initial },
       ],
     },
   ];
+}
+
+/** Generate evidence through ordinary commands rather than granting a late-game fixture. */
+export async function reachablePerformanceCases(seed = 42) {
+  const { runJourney } = await import("./playthrough");
+  const journey = await runJourney(
+    {
+      seed,
+      runs: 3,
+      starter: "mossback",
+      policy: "heuristic",
+      maxActions: 5000,
+      maxTurns: 100,
+      resumeEvery: 17,
+    },
+    "performance-generation",
+  );
+  if (!journey.complete) throw new Error(`Performance journey incomplete: ${journey.reason}`);
+  const checkpoints = journey.steps
+    .filter((step) => step.accepted)
+    .map((step) => step.checkpoint)
+    .filter((checkpoint) => decodeSave(checkpoint).phase === "battle");
+  if (checkpoints.length < 2) throw new Error("Insufficient reachable battle checkpoints.");
+  const chosen = [checkpoints[0]!, checkpoints.at(-1)!];
+  return chosen.map((initial, index) => {
+    let state = decodeSave(initial);
+    const inventory = {
+      seed,
+      encounter: state.encounter,
+      turn: state.battle!.turn,
+      roster: state.roster,
+      talents: state.talents,
+      boons: state.boons,
+      hand: state.battle!.hand.map((id) => state.cards.find((card) => card.id === id)!.definitionId),
+    };
+    const actions = [];
+    for (let count = 0; count < 3 && state.phase === "battle"; count++) {
+      const command = battleChoices(state, false)[0] ?? { type: "endTurn" as const };
+      const result = dispatch(state, command);
+      if (!result.accepted) throw new Error(`Reachable performance command rejected: ${result.reason}`);
+      state = result.state;
+      actions.push({ kind: command.type, command, checkpoint: encodeSave(state) });
+    }
+    return {
+      id: `reachable-${index === 0 ? "early" : "late"}`,
+      fixture: "seeded-three-journey-v1",
+      initial,
+      inventory,
+      journey,
+      actions,
+    };
+  });
 }
