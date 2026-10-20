@@ -97,6 +97,10 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 - Use a small neutral spinner beside the visible label “Loading…”.
 - During refresh, keep existing content visible at normal contrast and show a small loading indicator nearby.
 
+## Empty states
+
+- Use an icon only, with no visible message or action alongside it. Provide an accessible label that describes the empty state. Tooltip behavior remains undecided.
+
 ## Shared preferences
 
 Reduced motion makes switch/radio/dialog/progress transitions immediate and disables spatial combat movement. Essential state remains visible without sound. None of these choices authorizes dropping keyboard accessibility, native control behavior, fixed artwork dimensions or the single highlighted-boundary treatment for selected-plus-hovered controls. Fine visual details still need review at a computer.
