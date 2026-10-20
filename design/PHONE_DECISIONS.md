@@ -112,6 +112,11 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 - Spending fades to the spent appearance over 150ms; refilling fades to the full appearance over 150ms.
 - Committed Mana values update immediately. Reduced motion removes the glint and makes spending/refill appearance changes immediate.
 
+## Hand motion
+
+- Use [Alchemy's draw, discard and hand reflow choreography](hand-motion/README.md), including its curved flip flights, batch speed and 320ms interrupted-pose-aware reflow. This supersedes the unanswered proposed 150ms hand reflow and independently chosen draw/discard options.
+- Retain Fauna's fixed card sizes, fan layout, shadcn controls and nonblocking committed gameplay. Production adoption and rendered acceptance remain pending.
+
 ## Draw and Discard Piles
 
 - Hover: gold border and 3.5% growth.
