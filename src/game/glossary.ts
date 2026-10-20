@@ -54,7 +54,7 @@ export const GLOSSARY = [
   {
     term: "Knockout",
     definition:
-      "At zero health a creature cannot act or be healed during that battle. Its cards cannot be played or normally drawn. A living reserve can replace it. Losing every creature in the roster ends the expedition.",
+      "At zero health a creature cannot act or be healed during that battle. Its cards cannot be played or normally drawn. A living reserve can replace it. Losing every creature in the roster ends the journey.",
   },
   {
     term: "Keyword XP",
@@ -79,7 +79,7 @@ export const GLOSSARY = [
   {
     term: "Relics",
     definition:
-      "Passive effects lasting for the current expedition. When offered, choose one of three or skip. Relics end with the expedition.",
+      "Passive effects lasting for the current journey. When offered, choose one of three or skip. Relics end with the journey.",
   },
   {
     term: "Currency",

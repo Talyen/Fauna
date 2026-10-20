@@ -2,7 +2,7 @@ import { ActionCard } from "../../src/ui/cards";
 import { TooltipProvider } from "../../src/components/ui/tooltip";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
-import { accept, run } from "./helpers";
+import { accept, run, winBattle } from "./helpers";
 import { encounterSource, location } from "../../src/game/destinations";
 import { TargetPreview } from "../../src/ui/target-preview";
 // @vitest-environment jsdom
@@ -18,6 +18,44 @@ afterEach(() => {
   localStorage.clear();
 });
 describe("player interface", () => {
+  it("shows compact battle earnings beside recruitment without an acknowledgement screen", async () => {
+    const started = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
+    const game = winBattle(accept(started, { type: "beginBattle" }));
+    localStorage.setItem("fauna.save.v1", JSON.stringify(game));
+    const session = createSession(createBrowserPlatform(localStorage), 7);
+    await session.load();
+    render(<App session={session} />);
+    const user = userEvent.setup();
+    await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+    expect(screen.getByRole("heading", { name: "Recruit", exact: true })).toBeTruthy();
+    expect(screen.getByLabelText("Last battle earnings").textContent).toContain("+20 currency");
+    expect(screen.queryByRole("button", { name: "Continue", exact: true })).toBeNull();
+    await session.dispose();
+  });
+  it("reopens saved journey results, inspects its team, and starts fresh without losing permanent gains", async () => {
+    const started = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
+    const battle = produce(accept(started, { type: "beginBattle" }), (d) => {
+      d.battleXP = { nature: 4 };
+    });
+    const game = accept(battle, { type: "abandon" });
+    localStorage.setItem("fauna.save.v1", JSON.stringify(game));
+    const session = createSession(createBrowserPlatform(localStorage), 7);
+    await session.load();
+    render(<App session={session} />);
+    const user = userEvent.setup();
+    await user.click(screen.getByRole("button", { name: "Journey results", exact: true }));
+    expect(screen.getByRole("heading", { name: "Returned home" })).toBeTruthy();
+    expect(screen.getByLabelText("Journey gains").textContent).toContain("+4 XP");
+    await user.click(screen.getByRole("button", { name: "Inspect Mossback" }));
+    await user.keyboard("{Escape}");
+    expect(session.store.getState().game).toEqual(game);
+    await user.click(screen.getByRole("button", { name: "Main menu", exact: true }));
+    expect(screen.getByRole("button", { name: "Journey results" })).toBeTruthy();
+    await user.click(screen.getByRole("button", { name: "New journey", exact: true }));
+    expect(session.store.getState().game.journey).toBeNull();
+    expect(session.store.getState().game.keywordXP.nature).toBe(4);
+    await session.dispose();
+  });
   it("browses a destination, enemy and action in one dialog without committing or rerolling", async () => {
     const game = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
     localStorage.setItem("fauna.save.v1", JSON.stringify(game));
@@ -46,8 +84,8 @@ describe("player interface", () => {
     await session.load();
     render(<App session={session} />);
     const user = userEvent.setup();
-    await user.click(screen.getByRole("button", { name: "New expedition" }));
-    const enter = screen.getByRole("button", { name: "Begin expedition" });
+    await user.click(screen.getByRole("button", { name: "New journey" }));
+    const enter = screen.getByRole("button", { name: "Begin journey" });
     expect((enter as HTMLButtonElement).disabled).toBe(true);
     await user.click(screen.getByRole("button", { name: "Inspect Mossback" }));
     expect(session.store.getState().game.selected).toEqual([]);
@@ -157,7 +195,11 @@ it("keeps creature hover details compact while retaining health, effects and the
   const { CreatureDetails } = await import("../../src/ui/card-details");
   render(<CreatureDetails kind="mossback" health={17} block={4} marks={2} />);
   expect(screen.getByText("17/32 health · 4 block · 2 marks")).toBeTruthy();
-  expect(screen.getByText("Guard cards grant 2 extra block.")).toBeTruthy();
+  expect(
+    screen.getByText(
+      (_, element) => element?.tagName === "P" && element.textContent === "Guard cards grant 2 extra block.",
+    ),
+  ).toBeTruthy();
   expect(screen.queryByText(/Bramble Bash/)).toBeNull();
   expect(screen.queryByText(/Shelter/)).toBeNull();
   expect(screen.queryByText(/Forest Mantle/)).toBeNull();

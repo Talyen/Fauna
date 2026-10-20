@@ -7,7 +7,7 @@ import type { Card, Command, CommandResult, GameEvent, GameState } from "./types
 export function createGame(seed = 1): GameState {
   return freeze(
     {
-      version: 5,
+      version: 6,
       revision: 0,
       rng: seed >>> 0,
       phase: "draft",
@@ -23,6 +23,7 @@ export function createGame(seed = 1): GameState {
       currency: 0,
       relics: [],
       reward: null,
+      journey: null,
       team: [],
       cards: [],
       encounter: 0,
@@ -144,17 +145,38 @@ export function beginBattle(state: GameState) {
   state.battleXP = {};
   intents(state);
 }
-function finishBattle(state: GameState, defeated: boolean) {
-  const xp = { ...state.battleXP };
-  for (const keyword of KEYWORDS)
-    state.keywordXP[keyword] = Math.min(1_000_000, (state.keywordXP[keyword] ?? 0) + (xp[keyword] ?? 0));
+function bankBattleXP(state: GameState) {
+  const xp: GameState["battleXP"] = {};
+  for (const keyword of KEYWORDS) {
+    const previous = state.keywordXP[keyword] ?? 0;
+    const total = Math.min(1_000_000, previous + (state.battleXP[keyword] ?? 0));
+    state.keywordXP[keyword] = total;
+    if (total > previous) {
+      xp[keyword] = total - previous;
+      if (state.journey) state.journey.xp[keyword] = (state.journey.xp[keyword] ?? 0) + total - previous;
+    }
+  }
   state.battleXP = {};
-  const currency = defeated ? 0 : bossEncounter(state) ? 40 : 20;
-  state.currency = Math.min(1_000_000, state.currency + currency);
+  return xp;
+}
+function finishBattle(state: GameState, defeated: boolean) {
+  const xp = bankBattleXP(state);
+  const previousCurrency = state.currency;
+  state.currency = Math.min(1_000_000, state.currency + (defeated ? 0 : bossEncounter(state) ? 40 : 20));
+  const currency = state.currency - previousCurrency;
   const outcome = defeated ? "defeat" : finalEncounter(state) ? "victory" : "next";
+  if (state.journey) {
+    state.journey.currency += currency;
+    state.journey.lastBattle = { xp, currency };
+    if (!defeated) state.journey.victories++;
+    if (outcome !== "next") state.journey.outcome = outcome;
+  }
   if (outcome === "victory") {
     state.wins++;
-    if (!state.unlocked.includes("moonhart")) state.unlocked.push("moonhart");
+    if (!state.unlocked.includes("moonhart")) {
+      state.unlocked.push("moonhart");
+      state.journey?.unlocks.push("moonhart");
+    }
   }
   const relics =
     defeated || outcome === "victory"
@@ -176,11 +198,17 @@ function finishBattle(state: GameState, defeated: boolean) {
     relics: relics.length === 3 ? relics : [],
   };
   state.phase = "reward";
+  if (state.journey) {
+    if (outcome === "defeat") state.phase = "defeat";
+    else if (outcome === "victory") state.phase = "victory";
+    else if (state.reward.recruits.length) state.phase = "recruit";
+    else afterRecruit(state);
+  }
 }
 function settle(state: GameState, events: GameEvent[]): boolean {
   if (![...state.team, ...state.reserves].some((c) => c.health > 0)) {
     finishBattle(state, true);
-    events.push({ kind: "knockout", text: "Your expedition has ended." });
+    events.push({ kind: "knockout", text: "Your journey has ended." });
     return true;
   }
   if (state.battle!.enemies.every((e) => e.health <= 0)) {
@@ -190,7 +218,7 @@ function settle(state: GameState, events: GameEvent[]): boolean {
     }
     finishBattle(state, false);
     events.push({
-      kind: state.reward!.outcome === "victory" ? "victory" : "reward",
+      kind: state.phase === "victory" || state.reward?.outcome === "victory" ? "victory" : "reward",
       text: "Battle complete. Rewards saved.",
     });
     return true;
@@ -318,7 +346,7 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
     command.type === "newRun" &&
     (!Number.isSafeInteger(command.seed) || command.seed < 0 || command.seed > 0xffffffff)
   )
-    return reject(state, "Choose a valid expedition seed.");
+    return reject(state, "Choose a valid journey seed.");
   if (command.type === "draft" && (state.phase !== "draft" || !state.unlocked.includes(command.species)))
     return reject(state, "Choose an unlocked starter.");
   if (command.type === "start" && (state.phase !== "draft" || state.selected.length !== 1))
@@ -344,7 +372,7 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
       return reject(state, "Choose a living ally.");
   }
   if (command.type === "newRun" && !["draft", "victory", "defeat"].includes(state.phase))
-    return reject(state, "End the current expedition first.");
+    return reject(state, "End the current journey first.");
   if (
     command.type === "beginBattle" &&
     (state.phase !== "teamSelection" ||
@@ -408,7 +436,7 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
     !["battle", "teamSelection", "reward", "recruit", "relic"].includes(state.phase) &&
     !(state.phase === "draft" && state.selected.length > 0)
   )
-    return reject(state, "There is no expedition to end.");
+    return reject(state, "There is no journey to end.");
   const events: GameEvent[] = [];
   const next = produce(state, (draft) => {
     draft.revision++;
@@ -426,15 +454,17 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
           attacked: false,
         }));
         draft.cards = draft.team.flatMap((c) => ownedCards(c.id, c.species));
+        draft.journey = { outcome: null, victories: 0, currency: 0, xp: {}, unlocks: [], lastBattle: null };
         draft.roster = [...draft.selected];
         draft.lineup = [...draft.selected];
         draft.phase = "teamSelection";
         if (draft.expedition) offerDestinations(draft);
         break;
       case "beginBattle":
+        if (draft.journey) draft.journey.lastBattle = null;
         if (draft.expedition) draft.expedition.chosen = command.destination!;
         beginBattle(draft);
-        events.push({ kind: "turn", text: "Your expedition begins." });
+        events.push({ kind: "turn", text: "Your journey begins." });
         break;
       case "play": {
         const battle = draft.battle!;
@@ -524,7 +554,7 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
             text: `Acting creature restores ${restored} Health.`,
           });
         }
-        settle(draft, events);
+        if (autoEndTurn) settle(draft, events);
         if (autoEndTurn && draft.phase === "battle" && battle.mana === 0) finishTurn(draft, events);
         break;
       }
@@ -646,12 +676,8 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
           draft.selected = [];
           break;
         }
-        for (const keyword of KEYWORDS)
-          draft.keywordXP[keyword] = Math.min(
-            1_000_000,
-            (draft.keywordXP[keyword] ?? 0) + (draft.battleXP[keyword] ?? 0),
-          );
-        draft.battleXP = {};
+        bankBattleXP(draft);
+        if (draft.journey) draft.journey.outcome = "returned";
         draft.reward = null;
         draft.phase = "defeat";
         events.push({ kind: "knockout", text: "You return from the wilds. Discoveries are kept." });

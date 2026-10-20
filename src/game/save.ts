@@ -81,7 +81,7 @@ const v4Shape = shape.extend({
   reserves: z.array(creatureShape).max(2),
   lineup: z.array(speciesId).max(3),
 });
-const currentShape = v4Shape.extend({
+const v5Shape = v4Shape.extend({
   version: z.literal(5),
   encounter: z.number().int().min(0).max(7),
   expedition: z
@@ -94,6 +94,19 @@ const currentShape = v4Shape.extend({
       step: z.number().int().min(0).max(3),
       offers: z.array(z.object({ location: id, pack: z.number().int().min(0).max(10) })).max(3),
       chosen: id.nullable(),
+    })
+    .nullable(),
+});
+const currentShape = v5Shape.extend({
+  version: z.literal(6),
+  journey: z
+    .object({
+      outcome: z.enum(["victory", "defeat", "returned"]).nullable(),
+      victories: z.number().int().min(0).max(8),
+      currency: natural,
+      xp,
+      unlocks: z.array(speciesId).max(6),
+      lastBattle: z.object({ xp, currency: natural }).nullable(),
     })
     .nullable(),
 });
@@ -184,10 +197,46 @@ export function decodeSave(raw: string): GameState {
       expedition: old.phase === "draft" ? { biome: 0, step: 0, offers: [], chosen: null } : null,
     };
   }
+  if (input && typeof input === "object" && "version" in input && input.version === 5) {
+    input = { ...v5Shape.parse(input), version: 6, journey: null };
+  }
   const s = currentShape.parse(input);
   const invalid = (condition: boolean) => {
     if (condition) throw new Error("Save contains inconsistent game data.");
   };
+  if (s.journey) {
+    const summary = s.journey;
+    invalid(
+      s.phase === "draft" ||
+        !unique(summary.unlocks) ||
+        summary.unlocks.some((kind) => !s.unlocked.includes(kind)),
+    );
+    invalid(
+      summary.currency > s.currency ||
+        KEYWORDS.some((keyword) => (summary.xp[keyword] ?? 0) > (s.keywordXP[keyword] ?? 0)),
+    );
+    invalid(
+      s.phase === "victory"
+        ? summary.outcome !== "victory"
+        : s.phase === "defeat"
+          ? !["defeat", "returned"].includes(summary.outcome ?? "")
+          : summary.outcome !== null,
+    );
+    // Choice screens retain the just-won battle; destinations have already advanced the encounter.
+    invalid(
+      summary.victories !==
+        s.encounter +
+          (s.phase === "victory" ||
+          (s.battle?.enemies.every((enemy) => enemy.health === 0) && summary.outcome !== "defeat")
+            ? 1
+            : 0),
+    );
+    if (summary.lastBattle)
+      invalid(
+        summary.lastBattle.currency > summary.currency ||
+          KEYWORDS.some((keyword) => (summary.lastBattle!.xp[keyword] ?? 0) > (summary.xp[keyword] ?? 0)),
+      );
+  }
   if (s.expedition) {
     const route = s.expedition,
       biome = BIOMES[route.biome]!;

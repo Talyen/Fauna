@@ -61,7 +61,7 @@ export function createSession(platform: Platform, seed = 1) {
             notice:
               candidate.source === "primary" || candidate.source === "fauna.save.v1"
                 ? ""
-                : "Recovered your expedition from a backup.",
+                : "Recovered your journey from a backup.",
             saveStatus: "saved",
           });
           if (

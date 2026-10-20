@@ -38,8 +38,16 @@ export interface BattleReward {
   relics: RelicId[];
   outcome: "next" | "victory" | "defeat";
 }
+export interface JourneySummary {
+  outcome: "victory" | "defeat" | "returned" | null;
+  victories: number;
+  currency: number;
+  xp: KeywordXP;
+  unlocks: SpeciesId[];
+  lastBattle: { xp: KeywordXP; currency: number } | null;
+}
 export interface GameState {
-  version: 5;
+  version: 6;
   revision: number;
   rng: number;
   phase: "draft" | "teamSelection" | "battle" | "reward" | "recruit" | "relic" | "victory" | "defeat";
@@ -65,6 +73,7 @@ export interface GameState {
   currency: number;
   relics: RelicId[];
   reward: BattleReward | null;
+  journey: JourneySummary | null;
 }
 export type Command =
   | { type: "draft"; species: SpeciesId }

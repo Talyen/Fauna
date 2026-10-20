@@ -1,11 +1,11 @@
-# Expedition progression — design decisions
+# Journey progression — design decisions
 
 These are the agreed directions from the design review. They supersede the prototype's choice between recruiting an immediate replacement and adding +2 to one card. The approved direction is implemented in gameplay. Isolated design samples remain available for comparison.
 
 ## Roster and battles
 
-- Begin with one chosen starter. An expedition roster grows to five distinct species: up to three deployed and two reserves. Duplicate species are excluded.
-- Starter selection uses a three-column artwork grid of unlocked species. Clicking opens inspection with a Choose action; choosing returns to the grid and marks the selected creature. Begin expedition is a separate action, available after choosing one starter. Inspecting or canceling never changes the choice. Choosing another replaces it.
+- Begin with one chosen starter. An journey roster grows to five distinct species: up to three deployed and two reserves. Duplicate species are excluded.
+- Starter selection uses a three-column artwork grid of unlocked species. Clicking opens inspection with a Choose action; choosing returns to the grid and marks the selected creature. Begin journey is a separate action, available after choosing one starter. Inspecting or canceling never changes the choice. Choosing another replaces it.
 - The starter supplies the remembered starting lineup. Recruits fill its second and third slots before joining reserves. The destination screen offers location artwork; inspection reveals the exact enemy group and Begin battle. Deck remains available without requiring team selection.
 - Lineup is an optional menu dialog between battles, including ordinary reward screens. Changes save immediately. Combat swaps do not overwrite this starting lineup.
 - Only deployed living creatures act and provide passive traits. Enemy intents remain hidden.
@@ -21,13 +21,13 @@ These are the agreed directions from the design review. They supersede the proto
 
 ## Biomes and destinations
 
-- New expeditions travel through Fernwood, then Moonwater Marsh. Each biome has three ordinary encounters followed by its boss; only the final boss completes the expedition and unlocks Moonhart.
+- New journeys travel through Fernwood, then Moonwater Marsh. Each biome has three ordinary encounters followed by its boss; only the final boss completes the journey and unlocks Moonhart.
 - After each ordinary victory and its rewards, choose from three fresh locations in the current biome. The immediately visited location is excluded from the next offer. Boss steps offer one location. There is no branching map or Elite category.
 - Each location uses a 4:3 illustration with its name and **Combat** or **Boss** below the artwork. Keep Combat visible in preparation for future non-combat destinations; those destinations are not implemented yet. A quiet heading shows the biome and current encounter within it.
 - Opening a location is inspection, not commitment. Show its exact enemy group; inspect each creature's battle health and collectible kit in the same dialog. Back/Escape returns action → creature → location → destination screen. Begin battle commits the inspected location directly.
 - Seeded gameplay chooses location offers and packs once when entering the choice screen. Save those offers and the chosen location. Inspection, cancellation, menus, and reload never reroll enemies or consume randomness.
 - Location pools contain themed packs; identities are stable while inhabitants vary between runs. Initial enemy stats grow with chapter progress, with easier first encounters for a single starter. These values are playtest tuning, not final balance.
-- Existing active saves keep their original fixed three-battle expedition. New runs and unfinished old drafts use the biome flow.
+- Existing active saves keep their original fixed three-battle journey. New runs and unfinished old drafts use the biome flow.
 
 ## Keyword XP and talents
 
@@ -36,15 +36,15 @@ These are the agreed directions from the design review. They supersede the proto
 - Keyword progression is shared across the collection. Talents benefit any creature using the relevant keyword, rather than belonging to individual species.
 - Each accepted card play earns 1 XP for each eligible keyword on that card, regardless of effect magnitude. A Fire + Block card earns 1 Fire XP and 1 Block XP.
 - Earned keyword XP becomes permanent after each battle, including defeat.
-- Talents are accessible through the main menu at any time. Purchases take effect immediately, including during an expedition.
-- Do not interrupt expeditions or prompt players to spend talent points.
+- Talents are accessible through the main menu at any time. Purchases take effect immediately, including during an journey.
+- Do not interrupt journeys or prompt players to spend talent points.
 - Talents mix straightforward stat bonuses with new interactions and combo effects. Specific effects are not yet selected.
 - Every talent can eventually be unlocked; there is no limited active-talent loadout.
 - Complete every talent in a row to open the next row; choose purchase order within the current row.
 - The Talents screen uses keyword tabs across the top, with the selected keyword's talent rows below.
 - Each talent shows an icon and name; its effect is available in the hover/focus tooltip.
 - Clicking an available talent purchases it immediately, without a detail-dialog purchase step or confirmation.
-- Reset operates on the entire keyword category, refunding all spent points in that category while retaining its XP. Reset is available at any time, including during an expedition; talent effects update immediately. Individual-talent refunds are not the chosen interaction.
+- Reset operates on the entire keyword category, refunding all spent points in that category while retaining its XP. Reset is available at any time, including during an journey; talent effects update immediately. Individual-talent refunds are not the chosen interaction.
 - Start with Alchemy's point pacing: the first point costs 20 keyword XP, then another 40, then 60, increasing by 20 each time. Total XP for point n is 10 × n × (n + 1). This is initial tuning for playtesting.
 - The starter catalog uses the seven damage types plus Block, Healing, and Mark. Each category has three rows of two talents: Potency, Mastery, Shelter, Guarded Focus, Renewal, and Readiness. Effects and IDs live in `src/game/progression.ts` and remain tunable.
 - Abandonment banks the XP earned by accepted plays, with no victory currency or relics. There are currently no automatic or repeated card plays; each accepted play awards keyword XP once.
@@ -52,7 +52,7 @@ These are the agreed directions from the design review. They supersede the proto
 ## Recruitment
 
 - Recruit from defeated enemy species after a victory.
-- Recruiting adds a creature to the expedition roster rather than forcing an immediate active-team replacement.
+- Recruiting adds a creature to the journey roster rather than forcing an immediate active-team replacement.
 - The roster has one creature per species. Already-owned species do not create duplicate recruits.
 - Recruitment remains a direct commitment on the final choice, without a separate confirmation.
 - Recruit one defeated species or skip recruitment.
@@ -60,25 +60,27 @@ These are the agreed directions from the design review. They supersede the proto
 
 ## Currency and items
 
-- All currency is permanent and carries between expeditions.
+- All currency is permanent and carries between journeys.
 - Currency funds meta progression. Specific purchases are **TBD**.
-- Spending permanent currency during an expedition is a possible future feature; spending locations and an in-run shop flow have not been selected.
-- Initial battle item rewards focus on run-wide relics: passive effects for the whole expedition.
+- Spending permanent currency during an journey is a possible future feature; spending locations and an in-run shop flow have not been selected.
+- Initial battle item rewards focus on run-wide relics: passive effects for the whole journey.
 - When a battle awards a relic, offer a choice of three.
 - Choose one relic or skip the reward.
-- Starter tuning: Currency pays 20 per ordinary victory and 40 for each biome boss. Each ordinary victory offers three distinct unowned relics when three remain. Five starter relics are authored in `src/game/progression.ts`; their ownership lasts only for the expedition. Currency spending and material types remain undefined and are not implemented.
+- Starter tuning: Currency pays 20 per ordinary victory and 40 for each biome boss. Each ordinary victory offers three distinct unowned relics when three remain. Five starter relics are authored in `src/game/progression.ts`; their ownership lasts only for the journey. Currency spending and material types remain undefined and are not implemented.
 
-## Screen flow
+## Screen flow and Journey results
 
-Ordinary victory → XP and materials/currency → recruitment → relic choice (if awarded) → fresh destination choices → location inspection → combat.
+Journey is the player-facing name. Internal command IDs, route fields, filenames, and storage paths remain stable for compatibility.
 
-Final victory → XP and currency → expedition results. Recruitment and expedition-only relics are offered between battles.
+Ordinary victory → recruitment (if available) → relic choice (if awarded) → fresh destinations. Compact last-battle currency and keyword XP earnings appear beside choices and remain visible on destinations until the next battle. No separate acknowledgement screen interrupts new journeys. If neither decision is available, proceed directly to destinations.
 
-- XP and materials/currency share one screen. Specific material types and uses remain undefined.
-- Recruitment and relic choice each have their own screen; relic choice appears only when a relic is awarded.
-- Relic effects remain in hover/focus tooltips.
-- Keep keyword XP progress numbers visible beneath the bars on the XP reward screen.
-- Optional Lineup management is available through the menu between battles and is never a reward step.
-- Gameplay now uses the reviewed minimal layouts for the separate reward screens, smaller reserves, and full-screen talent/collection pages.
+Final victory or defeat → Journey results. Ending a started journey voluntarily also opens results, labeled Returned home. Ending an unfinished starter choice simply returns to the main menu.
 
-See [UI design system](UI.md) for the approved battlefield composition and interaction rules.
+- Results lead with the final deployed team and reserves, all inspectable, followed by biome/location reached, battles won, total currency and keyword XP earned, relics collected, and newly unlocked creatures.
+- Keyword totals include all settled battles and XP banked when returning home. Show permanent keyword progress numbers and talent points earned beneath the bars. Talents remain menu-driven; never prompt purchases here.
+- Banking and totals update atomically with accepted gameplay commands. Browsing results never grants rewards or saves. Report actual retained earnings at progression caps.
+- New journey resets journey totals and roster/relics while preserving permanent progress. Main menu can reopen the last results until a new journey begins; this is not a multi-journey history.
+- Legacy saves preserve their reward/recruit/relic flow. Journey totals are unavailable for journeys that started before tracking existed; do not derive them from lifetime currency or XP.
+- Material types remain undefined and are not shown. Recruitment and relic choices remain separate screens and may be skipped; final choices commit immediately.
+
+See [UI design system](UI.md) for composition and interaction rules.

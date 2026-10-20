@@ -21,6 +21,7 @@ import {
 import type { Command, GameState } from "../game/types";
 import type { Inspection } from "./battle-screen";
 import { Progress } from "./progress";
+import { BattleEarnings } from "./battle-earnings";
 import { BIOMES, encounterSource, location } from "../game/destinations";
 type Props = { game: GameState; send: (command: Command) => boolean; inspect: (item: Inspection) => void };
 export function TeamSelection({ game, send, inspect, deck }: Props & { deck: () => void }) {
@@ -52,6 +53,7 @@ export function TeamSelection({ game, send, inspect, deck }: Props & { deck: () 
             </div>
           ))}
         </section>
+        <BattleEarnings game={game} />
         <footer className="destination-footer">
           <Button variant="outline" onClick={deck}>
             Deck
@@ -115,7 +117,7 @@ export function Draft({ game, send, inspect }: Props) {
       </div>
       <footer className="selection-footer" data-nav-row>
         <Button disabled={game.selected.length !== 1} onClick={() => send({ type: "start" })}>
-          Begin expedition
+          Begin journey
         </Button>
       </footer>
     </main>
@@ -139,7 +141,7 @@ export function Rewards({ game, send, inspect }: Props) {
                   <Coins aria-hidden="true" />+{reward.currency}
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>Currency · {game.currency} total · Kept between expeditions</TooltipContent>
+              <TooltipContent>Currency · {game.currency} total · Kept between journeys</TooltipContent>
             </Tooltip>
           ) : null}
         </header>
@@ -180,6 +182,7 @@ export function Rewards({ game, send, inspect }: Props) {
     return (
       <main className="reward-screen">
         <h1>{incoming ? "Replace a creature" : "Recruit"}</h1>
+        <BattleEarnings game={game} />
         <div className="recruit-options">
           {(incoming ? game.roster : reward.recruits.filter((kind) => !game.roster.includes(kind))).map(
             (kind) => (
@@ -213,6 +216,7 @@ export function Rewards({ game, send, inspect }: Props) {
   return (
     <main className="reward-screen">
       <h1>Choose a relic</h1>
+      <BattleEarnings game={game} />
       <div className="relic-options">
         {reward.relics.map((id) => {
           const relic = RELICS.find((r) => r.id === id)!,
@@ -394,23 +398,6 @@ export function Collection({
           ),
         )}
       </div>
-    </main>
-  );
-}
-export function EndScreen({ game, send, inspect, home }: Props & { home: () => void }) {
-  return (
-    <main className="end-screen">
-      <h1>{game.phase === "victory" ? "Victory" : "Expedition ended"}</h1>
-      {game.phase === "victory" && game.wins === 1 ? (
-        <div className="unlock-card">
-          <CreatureCard kind="moonhart" onClick={() => inspect({ species: "moonhart" })} />
-          <p>Unlocked</p>
-        </div>
-      ) : null}
-      <Button onClick={home}>Main menu</Button>
-      <Button variant="ghost" onClick={() => send({ type: "newRun", seed: Date.now() >>> 0 })}>
-        New expedition
-      </Button>
     </main>
   );
 }

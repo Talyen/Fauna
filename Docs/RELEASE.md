@@ -8,7 +8,7 @@ Before shipping:
 
 - Create Fauna-specific Steam App/depot configuration and credentials; implement optional cloud/achievement adapters against those IDs. Define cloud conflict handling before enabling uploads. Never use Alchemy's identities or saves.
 - Add release signing, installer/release identity checks, production artwork and audio, privacy/crash-reporting choices, and store material.
-- Validate a complete expedition with physical controllers, including disconnect/reconnect and device prompts. Current browser tests simulate standard gamepad input; prompts use Xbox-style labels.
+- Validate a complete journey with physical controllers, including disconnect/reconnect and device prompts. Current browser tests simulate standard gamepad input; prompts use Xbox-style labels.
 - Test on Steam Deck hardware through the intended Windows/Proton or native distribution path, including handheld text, overlay, sleep/resume, battery/performance, and offline startup. Native Linux/macOS packaging is not configured.
 - Verify Steam client behavior, cloud conflicts/recovery, and packaged quit/resume on Windows. Local macOS Electron testing does not establish Windows packaging or Steam behavior.
 

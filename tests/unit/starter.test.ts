@@ -33,7 +33,7 @@ describe("one-starter expeditions", () => {
     let s = start();
     for (let index = 0; index < 2; index++) {
       s = accept(s, { type: "beginBattle" });
-      s = accept(winBattle(s), { type: "continueReward" });
+      s = winBattle(s);
       s = accept(s, { type: "recruit", species: s.reward!.recruits[0]! });
       expect(s.team).toHaveLength(index + 2);
       expect(s.lineup).toEqual(s.roster);
@@ -47,7 +47,7 @@ describe("one-starter expeditions", () => {
 
   it("can skip recruitment and begin the next battle with one creature", () => {
     let s = accept(start(), { type: "beginBattle" });
-    s = accept(accept(winBattle(s), { type: "continueReward" }), { type: "skipRecruit" });
+    s = accept(winBattle(s), { type: "skipRecruit" });
     s = accept(accept(s, { type: "skipRelic" }), { type: "beginBattle" });
     expect(s.team).toHaveLength(1);
     expect(s.battle!.hand).toHaveLength(3);

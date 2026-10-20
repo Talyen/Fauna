@@ -2,7 +2,7 @@
 
 `src/game/destinations.ts` owns biome locations, enemy packs, and initial encounter scaling. `src/game/content.ts` retains the stable legacy encounters and owns the species roster, card definitions, displayed effect descriptions, and encounter templates. Each species contributes exactly three unique card definitions. Content validation runs at startup and in tests. Keep IDs stable once saves are supported.
 
-The first five species begin unlocked. Moonhart unlocks after the first expedition victory. Team composition changes the nine-card deck; recruitment adds defeated species to the five-slot roster. Only the active three contribute cards, and free combat swaps replace cards in their existing zones. Starting lineups are remembered and optionally editable from the menu between battles. The prototype intentionally restores all creatures after each battle and has no positioning or elemental chart.
+The first five species begin unlocked. Moonhart unlocks after the first journey victory. Team composition changes the nine-card deck; recruitment adds defeated species to the five-slot roster. Only the active three contribute cards, and free combat swaps replace cards in their existing zones. Starting lineups are remembered and optionally editable from the menu between battles. The prototype intentionally restores all creatures after each battle and has no positioning or elemental chart.
 
 ## Artwork contracts
 

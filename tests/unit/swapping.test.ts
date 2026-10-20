@@ -160,7 +160,7 @@ describe("optional starting lineup and save migration", () => {
           !old.cards.some((c: { id: string; ownerId: string }) => c.id === id && c.ownerId === "ally-0"),
       );
     const next = decodeSave(JSON.stringify(old));
-    expect(next.version).toBe(5);
+    expect(next.version).toBe(6);
     expect(next.roster).toHaveLength(5);
     expect(next.reserves).toHaveLength(2);
     expect(next.unlocked).toContain("moonhart");

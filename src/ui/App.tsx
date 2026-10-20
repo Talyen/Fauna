@@ -1,3 +1,4 @@
+import { JourneyResults } from "./journey-results";
 import { KeywordText } from "./keyword-text";
 import { Switch } from "../components/ui/switch";
 import { RadioGroup, RadioGroupItem } from "../components/ui/radio-group";
@@ -19,15 +20,7 @@ import { Button } from "../components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../components/ui/dialog";
 import { TooltipProvider } from "../components/ui/tooltip";
 import { BattleScreen, type Inspection, type Controls } from "./battle-screen";
-import {
-  Draft,
-  TeamSelection,
-  Rewards,
-  Talents,
-  Collection,
-  EndScreen,
-  DeckCards,
-} from "./expedition-screens";
+import { Draft, TeamSelection, Rewards, Talents, Collection, DeckCards } from "./expedition-screens";
 import { RosterPicker } from "./roster-picker";
 import { Inspector } from "./inspection";
 import { connectInput, moveFocus, type InputAction } from "./input";
@@ -228,8 +221,13 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           }
         }}
       >
-        {home ? (active ? "Continue" : "New expedition") : "Resume"}
+        {home ? (active ? "Continue" : "New journey") : "Resume"}
       </Button>
+      {home && ["victory", "defeat"].includes(game.phase) ? (
+        <Button variant="ghost" onClick={() => setRoute("play")}>
+          Journey results
+        </Button>
+      ) : null}
       {canManageLineup ? (
         <Button variant="ghost" onClick={() => openModal("lineup")}>
           Lineup
@@ -249,7 +247,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
       </Button>
       {active ? (
         <Button variant="ghost" onClick={() => openModal("endRun")}>
-          End run
+          End journey
         </Button>
       ) : null}
       {!home ? (
@@ -398,9 +396,11 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
             if (!menu) returnFocus(modalOpener.current);
           }}
         >
-          <AlertDialogTitle>End expedition?</AlertDialogTitle>
+          <AlertDialogTitle>End journey?</AlertDialogTitle>
           <AlertDialogDescription>
-            Return to the main menu? Your expedition team and relics will be lost. Permanent progress is kept.
+            {game.phase === "draft"
+              ? "Clear your starter choice and return to the main menu?"
+              : "Finish this journey and view your results? Your team and relics will not carry into the next journey. Permanent progress is kept."}
           </AlertDialogDescription>
           <div className="confirm-actions">
             <AlertDialogCancel>Cancel</AlertDialogCancel>
@@ -410,11 +410,11 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                 if (send({ type: "abandon" })) {
                   menuReturnLabel.current = null;
                   setMenu(false);
-                  setRoute("home");
+                  setRoute(game.phase === "draft" ? "home" : "play");
                 } else event.preventDefault();
               }}
             >
-              End run
+              End journey
             </AlertDialogAction>
           </div>
         </AlertDialogContent>
@@ -525,7 +525,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                 inspect={setInspection}
               />
             ) : (
-              <EndScreen game={game} send={send} inspect={setInspection} home={() => setRoute("home")} />
+              <JourneyResults game={game} send={send} inspect={setInspection} home={() => setRoute("home")} />
             )}
             <div className="sr-only" role="log" aria-live="polite">
               {view.events.map((event) => event.text).join(" ")}
