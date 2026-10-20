@@ -207,12 +207,12 @@ function TooltipStudy() {
                     </h3>
                     <Sample
                       settings={{ ...defaults, [step.id]: value }}
-                      label={step.labels[i]}
+                      label={step.labels[i] ?? value}
                       reduced={reduced}
                     />
                     <label className="study-choice">
                       <RadioGroupItem value={value} />
-                      Choose {step.labels[i].toLowerCase()}
+                      Choose {step.labels[i]?.toLowerCase() ?? value}
                     </label>
                   </section>
                 ))}
@@ -228,7 +228,7 @@ function TooltipStudy() {
                 <Button
                   variant="outline"
                   disabled={index === 0}
-                  onClick={() => setStepId(steps[index - 1].id)}
+                  onClick={() => setStepId(steps[index - 1]?.id ?? step.id)}
                 >
                   Previous decision
                 </Button>

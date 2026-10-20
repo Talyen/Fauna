@@ -567,6 +567,7 @@ test("rewards resume without duplicate XP, currency, recruitment or relics", asy
   await page.reload();
   await resume(page);
   const relic = page.locator(".relic-choice").first();
+  await page.keyboard.press("Tab");
   await relic.focus();
   await expect(page.getByRole("tooltip")).toBeVisible();
   await page.keyboard.press("Enter");
