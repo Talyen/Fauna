@@ -14,6 +14,7 @@ The current design review selects the following direction. These choices superse
 - Health bars only on the battlefield. HP numbers live in hover/pinned detail; block and marks stay external icon/number readouts. No enemy intents are shown. Bar forecasts show expected health changes without battlefield HP numerals.
 - External actor/target outlines with a thin targeting line between artwork edges. Targeted cards confirm by clicking the target or pressing Enter/controller A, with no separate Play button. Team-wide cards retain a Play action.
 - Centered pinned inspection.
+- Main menu, pause overlay and Collection navigation follow the [menu design decisions](MENU_DESIGN.md).
 - Reward progression is being redesigned around permanent keyword XP/talents, recruitment, permanent currency and run-wide relics. Creature training and milestone upgrades are retired. See [expedition design decisions](EXPEDITION_DESIGN.md). Final reward choices remain direct commitments, with effects available beforehand.
 - Confirm abandoning a run. End turn stays immediate, and spending the last mana still advances automatically.
 
