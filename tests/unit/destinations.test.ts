@@ -33,7 +33,9 @@ describe("biome destinations", () => {
         health: maxHealth,
         damage,
       })),
-    ).toEqual(preview.enemies.map(({ damageType: _, ...entry }) => entry));
+    ).toEqual(
+      preview.enemies.map(({ name, species, health, damage }) => ({ name, species, health, damage })),
+    );
     expect(decodeSave(encodeSave(battle))).toEqual(battle);
   });
 
