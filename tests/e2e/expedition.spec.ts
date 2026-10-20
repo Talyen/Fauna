@@ -53,7 +53,7 @@ async function step(page: Page, activate: (el: Locator) => Promise<void> = (el) 
     if (c.targetId) {
       await activate(
         c.targetId.startsWith("enemy-")
-          ? page.locator(`.enemy-row [data-enemy-id="${c.targetId}"]`)
+          ? page.locator(`.enemy-row [data-enemy-id="${c.targetId}"] .creature-card`)
           : page.locator(`.player-row [data-actor-id="${c.targetId}"] .creature-card`),
       );
     } else await activate(page.getByRole("button", { name: /^Play ·/ }));
@@ -124,7 +124,10 @@ for (const width of [1280, 1920])
           game = accept(game, { type: "beginBattle" });
           game = produce(game, (d) => {
             d.battleXP = { nature: 5, block: 3 };
-            if (outcome === "defeat") d.team[0]!.health = 1;
+            if (outcome === "defeat") {
+              d.team[0]!.health = 1;
+              d.team[0]!.combat!.deathDoorUsed = true;
+            }
           });
           game = accept(game, { type: outcome === "defeat" ? "endTurn" : "abandon" });
         }
@@ -256,7 +259,9 @@ test("main menu, draft and pre-battle deck lead into the first battle", async ({
   await page.getByRole("button", { name: "Deck", exact: true }).click();
   await expect(page.getByRole("dialog").locator(".action-card")).toHaveCount(3);
   await page.getByRole("dialog").locator(".action-card").first().click({ button: "right" });
-  await expect(page.getByRole("dialog").last().locator(".card-details")).toBeVisible();
+  await expect(page.locator(".inspection.single-card")).toBeVisible();
+  await page.locator(".inspection.single-card .action-card").hover();
+  await expect(page.getByRole("tooltip")).toContainText("Bramble Bash");
   await page.keyboard.press("Escape");
   await page.keyboard.press("Escape");
   await destination.click();
@@ -450,7 +455,7 @@ test("battle targeting uses remembered targets, forecasts bars, and has no targe
   await page.keyboard.press("Enter");
   expect((await state(page)).revision).toBe(before.revision + 1);
   await expect(page.locator(".health-number,.intent,.battle-status,.pile-counts")).toHaveCount(0);
-  await expect(page.getByRole("button", { name: /^Mana \d of 3$/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: /^Mana \d of 4$/ })).toBeVisible();
 });
 test("talents purchase immediately, gate rows, reset a category, and return to the paused battle", async ({
   page,
@@ -687,40 +692,31 @@ for (const [width, height] of [
 
 test("real audio output, hit recoil, reduced motion, and mute follow combat outcomes", async ({ page }) => {
   await page.addInitScript(() => {
-    const observed = { peak: 0, contexts: [] as AudioContext[], impacts: [] as string[] };
+    const observed = { peak: 0, media: [] as HTMLMediaElement[], impacts: [] as string[] };
     Object.assign(window, { combatObserved: observed });
-    const Native = window.AudioContext;
-    class ObservedAudio extends Native {
-      constructor(options?: AudioContextOptions) {
-        super(options);
-        observed.contexts.push(this);
-        const analyser = this.createAnalyser();
-        analyser.connect(this.destination);
-        const create = this.createGain.bind(this);
-        this.createGain = () => {
-          const gain = create();
-          gain.connect = new Proxy(gain.connect, {
-            apply: (method, receiver, args) =>
-              Reflect.apply(
-                method,
-                receiver,
-                args[0] === this.destination ? [analyser, ...args.slice(1)] : args,
-              ),
-          });
-          return gain;
-        };
+    const nativePlay = HTMLMediaElement.prototype.play;
+    const connected = new WeakSet<HTMLMediaElement>();
+    HTMLMediaElement.prototype.play = function () {
+      if (!connected.has(this) && this.src.includes("/sounds/")) {
+        connected.add(this);
+        observed.media.push(this);
+        const context = new AudioContext();
+        const analyser = context.createAnalyser();
+        context.createMediaElementSource(this).connect(analyser);
+        analyser.connect(context.destination);
+        void context.resume();
         const samples = new Float32Array(analyser.fftSize);
         const timer = setInterval(() => {
-          if (this.state === "closed") {
-            clearInterval(timer);
-            return;
-          }
           analyser.getFloatTimeDomainData(samples);
           for (const sample of samples) observed.peak = Math.max(observed.peak, Math.abs(sample));
+          if (this.paused) {
+            clearInterval(timer);
+            void context.close();
+          }
         }, 5);
       }
-    }
-    window.AudioContext = ObservedAudio;
+      return nativePlay.call(this);
+    };
     const animate = Element.prototype.animate;
     Element.prototype.animate = function (frames, options) {
       if (this.matches(".creature-card"))
@@ -745,7 +741,7 @@ test("real audio output, hit recoil, reduced motion, and mute follow combat outc
       () =>
         (
           window as unknown as {
-            combatObserved: { peak: number; contexts: AudioContext[]; impacts: string[] };
+            combatObserved: { peak: number; media: HTMLMediaElement[]; impacts: string[] };
           }
         ).combatObserved,
     );
@@ -761,14 +757,14 @@ test("real audio output, hit recoil, reduced motion, and mute follow combat outc
   await page.getByRole("switch", { name: "Sound", exact: true }).click();
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "Resume" }).click();
-  const contexts = (await observed()).contexts.length;
+  const mediaCount = (await observed()).media.length;
   await page.getByRole("button", { name: "End turn" }).click();
   await page.waitForTimeout(400);
-  expect((await observed()).contexts).toHaveLength(contexts);
+  expect((await observed()).media).toHaveLength(mediaCount);
   expect(
     await page.evaluate(() =>
-      (window as unknown as { combatObserved: { contexts: AudioContext[] } }).combatObserved.contexts.every(
-        (context) => context.state === "closed",
+      (window as unknown as { combatObserved: { media: HTMLMediaElement[] } }).combatObserved.media.every(
+        (media) => media.paused,
       ),
     ),
   ).toBe(true);

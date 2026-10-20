@@ -451,7 +451,8 @@ button {
   line-height: 1.4;
 }
 .game-tooltip {
-  pointer-events: none;
+  /* Radix modal layers set an inline pointer override; hover details must not intercept controls. */
+  pointer-events: none !important;
   width: min(calc(360px * var(--text-scale, 1)), calc(100vw - 32px));
   max-height: var(--radix-tooltip-content-available-height);
   overflow: auto;
@@ -616,6 +617,10 @@ button {
   max-width: 1000px;
   margin: auto;
   padding: var(--space-8) 0;
+}
+.talents-screen {
+  max-height: var(--page-content-height);
+  overflow-y: auto;
 }
 .page-heading {
   display: flex;

@@ -157,10 +157,11 @@ for (const [width, height, enlarged] of [
     await pad.press(13);
     await pad.press(0);
     const sound = page.getByRole("switch", { name: "Sound", exact: true });
+    await pad.press(13);
     await expect(sound).toBeFocused();
     await pad.press(0);
     await expect(sound).not.toBeChecked();
-    await pad.press(13);
+    for (let index = 0; index < 5; index++) await pad.press(13);
     await expect(page.locator('[role="radio"]:focus')).toHaveCount(1);
     await page.screenshot({ path: `reports/menu-settings-${width}.png` });
     await pad.press(13);
