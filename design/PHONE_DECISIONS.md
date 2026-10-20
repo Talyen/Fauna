@@ -146,6 +146,13 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 - Successful purchases update the owned state immediately, with a 150ms color transition and a 250ms gold flash on the existing border. Focus outline takes priority over the flash to preserve a single highlighted boundary.
 - Reduced motion makes the owned color transition immediate and suppresses the decorative border flash.
 
+## Rewards and results
+
+- Earned amounts count upward to their final values over 400ms.
+- Reward items arrive with a 75ms stagger per item; artwork fades in over 150ms without spatial movement.
+- Rewards commit immediately and controls remain usable immediately. Count-ups and staggered arrivals are presentation-only and cannot delay commands or grant rewards.
+- Reduced motion shows final values and all reward items immediately, without entrance animations.
+
 ## Empty states
 
 - Use an icon only, with no visible message, accompanying action or hover/focus tooltip. Provide an accessible label that describes the empty state.
