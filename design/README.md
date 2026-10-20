@@ -16,3 +16,5 @@ These samples record reviewed composition choices. They are not current rendered
 - [Interactive icon button sizes](icon-buttons/README.md)
 
 - [Tooltip review batch](tooltip-interactions/README.md)
+
+- [Artwork interaction batch](artwork-interactions/README.md)

@@ -9,3 +9,9 @@ Uses actual shadcn Button, Tooltip, RadioGroup, Switch and Tabs. The trigger opt
 Review batches are the default for subsequent elements in this design session. Keep each decision independent while making multiple steps available in advance. User selection does not auto-advance before they can finish experimenting. Do not require a chat turn between choices. Record and review the batch when the user returns.
 
 Mouse/keyboard and local checks are review evidence only. Controller, screen-context and full CI acceptance remain pending. The study does not load gameplay or game saves.
+
+## Reviewed choices
+
+On 2026-10-20 the user supplied: Immediate opening, Above, 8px distance, 100ms fade, Neutral border. [Recorded preferences](reviewed-choices.ts) hold this baseline in later studies. Immediate opening and a 100ms fade are compatible: information begins appearing immediately and settles over 100ms. Collision handling and reduced motion remain required. These are design preferences; production adoption is pending.
+
+The next [artwork interaction batch](../artwork-interactions/README.md) is ready for consecutive decisions.
