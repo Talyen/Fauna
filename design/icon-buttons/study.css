@@ -1,0 +1,18 @@
+#root .icon-study .study-action {
+  width: var(--control-height);
+  height: var(--control-height);
+  min-height: var(--control-height);
+  padding: 0;
+}
+#root .icon-study [data-icon-size="16"] .study-action svg {
+  width: 16px;
+  height: 16px;
+}
+#root .icon-study [data-icon-size="20"] .study-action svg {
+  width: 20px;
+  height: 20px;
+}
+#root .icon-study [data-icon-size="24"] .study-action svg {
+  width: 24px;
+  height: 24px;
+}
