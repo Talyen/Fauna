@@ -20,3 +20,6 @@ These samples record reviewed composition choices. They are not current rendered
 - [Artwork interaction batch](artwork-interactions/README.md)
 
 - [Tab interaction batch](tab-interactions/README.md)
+
+- [Phone design decisions](PHONE_DECISIONS.md)
+- [Alchemy combatant motion direction](combat-motion/README.md)
