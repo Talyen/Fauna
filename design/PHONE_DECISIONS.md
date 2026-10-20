@@ -42,6 +42,13 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 - Destructive confirmation action: red filled button; inherit ordinary dialog and button treatments otherwise.
 - Preserve shadcn/Radix modal focus ownership and focus return. Cancel receives initial focus in End journey; outside click does not dismiss that AlertDialog.
 
+## Screen navigation transitions
+
+- Moving between menu screens uses a 150ms crossfade.
+- Entering battle uses a 250ms fade, with no spatial movement.
+- Returning from inspection crossfades to the preserved parent over 150ms. Preserve parent state and native focus return; do not add a second sequential fade on top of the dialog closing transition.
+- Reduced motion makes these transitions immediate. Navigation and committed gameplay never wait for animation; outgoing surfaces cannot retain input or focus ownership during the transition.
+
 ## Progress bars
 
 - 8px track thickness, fully rounded caps.
