@@ -662,7 +662,8 @@ strong {
 }
 .reward-choices {
   margin-top: var(--screen-section-gap);
-  min-height: calc(var(--art-long-side) + var(--screen-item-gap) * 2 + var(--text-name) * 2.6);
+  /* One section title and two caption lines keep reward anchors aligned at large text. */
+  min-height: calc(var(--art-long-side) + var(--screen-item-gap) * 2 + var(--text-name) * 3.9);
   display: flex;
   align-items: center;
 }
