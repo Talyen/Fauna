@@ -61,11 +61,11 @@ These are the agreed directions from the design review. They supersede the proto
 
 - All currency is permanent and carries between journeys.
 - Currency funds meta progression. Specific purchases are **TBD**.
-- Spending permanent currency during a journey is a possible future feature; spending locations and an in-run shop flow have not been selected.
+- Each biome offers a Merchant after its first ordinary victory. Buy one of up to two unowned journey Boons for 20 permanent currency, or Leave. Currency spending is atomic and reduces the wallet, while journey earnings remain gross retained income.
 - Initial battle item rewards focus on run-wide boons: passive effects for the whole journey.
-- When a battle awards a boon, offer a choice of three.
+- When a battle awards a Boon, offer up to three distinct unowned choices.
 - Choose one boon or skip the reward. Boons use 3:4 portrait artwork wherever displayed, matching hand cards. Tattered Pages, Bone Charm, Ironwood Buckler and Icy Heart use copied Alchemy artwork; names stay below the art and effects in hover/focus tooltips. Owned Boons are inspectable from the menu during a journey.
-- Starter tuning: Currency pays 20 per ordinary victory and 40 for each biome boss. Only intermediate biome bosses offer three distinct unowned boons when three remain. Ordinary combat offers recruitment, never boons; intermediate bosses offer boons, never recruitment. Four Boons are authored in `src/game/progression.ts`; their ownership lasts only for the journey. Currency spending and material types remain undefined and are not implemented.
+- Starter tuning: Currency pays 20 per ordinary victory and 40 for each biome boss. Intermediate biome bosses offer up to three distinct unowned Boons; smaller nonempty pools remain available. Ordinary combat offers recruitment, never boons; intermediate bosses offer boons, never recruitment. Four Boons are authored in `src/game/progression.ts`; their ownership lasts only for the journey. Material types and permanent upgrade purchases remain undefined.
 
 ## Screen flow and Journey results
 
@@ -98,3 +98,9 @@ Auto-play is explicitly enabled for one battle. It uses visible information to c
 Leaving newly completed results opens each newly unlocked creature's portrait and inspectable kit before Main menu. The reveal grants no progress and does not repeat when reopening results or loading an existing completed journey. Results otherwise retain the earnings-only design.
 
 Development builds add Skip combat to the battle pause menu. It settles a normal victory with normal rewards and only XP already earned by actual plays; roster Health is preserved. It is unavailable in production and rejects repeated settlement.
+
+## Optional support visits
+
+Merchant and Sheltered Spring appear beside combat destinations after the first and second ordinary victories respectively. Neither replaces a battle. Inspecting and canceling is read-only; Enter commits the saved visit. Leave consumes it, even without taking a benefit, and beginning the next battle forfeits the opportunity. Returning preserves exact combat offers and enemy packs. There are no restocks or repeated visits in a biome.
+
+The Merchant offers up to two distinct unowned Boons for 20 currency each and allows one purchase. Bought Boons last only for that journey; they do not become permanent unlocks. Omit a Merchant with no eligible stock. Saved stock and prices cannot reroll on reload. The Spring offers one choice: restore 15% maximum Health to every roster creature, including knockouts, or retain up to 10 currency below the wallet cap. Disable an option with no benefit; Leave remains available. Recovery uses Campfire rounding and caps. No support choice grants keyword XP or recruitment. Campfire and all eight battles retain their ordinary rules.

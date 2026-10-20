@@ -1,3 +1,4 @@
+import { SupportOffer } from "./support-screen";
 import { assetUrl } from "./assets";
 import { KeywordText } from "./keyword-text";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui/tabs";
@@ -35,6 +36,7 @@ export function TeamSelection({ game, send, inspect, deck }: Props & { deck: () 
           <p>{route.step === 3 ? "Boss" : `Encounter ${route.step + 1} of 3`}</p>
         </header>
         <section className="destination-grid" data-nav-row aria-label="Destinations">
+          <SupportOffer game={game} inspect={inspect} />
           {route.step === 3 && !route.campfireUsed ? (
             <div className="destination-option">
               <ArtCard

@@ -52,6 +52,8 @@ export function useAutoplay(session: Session, paused: boolean, autoEndTurn: bool
       if (
         current.game.revision !== revision ||
         current.closing ||
+        current.overlayActive ||
+        current.cloud.blocking ||
         current.saveStatus === "error" ||
         current.game.phase !== "battle"
       )

@@ -1,3 +1,5 @@
+import { getCurrentFuseWire, FuseState } from "@electron/fuses";
+import hardening from "../desktop/after-pack.cjs";
 import { execFileSync } from "node:child_process";
 import { readFileSync, statSync, readdirSync } from "node:fs";
 import { createHash } from "node:crypto";
@@ -29,6 +31,14 @@ export const WINDOWS_RUNTIME_FILES = [
 export function verifyWindowsRuntime(size) {
   for (const name of WINDOWS_RUNTIME_FILES)
     if (!(size(name) > 0)) throw new Error(`Missing or empty Electron runtime: ${name}`);
+}
+export function verifyFuses(wire) {
+  for (const [index, enabled] of Object.entries(hardening.FUSES)) {
+    // Pinned Electron may predate a newer optional fuse; every present fuse must match.
+    if (wire[index] === undefined && Number(index) >= 8) continue;
+    if (wire[index] !== (enabled ? FuseState.ENABLE : FuseState.DISABLE))
+      throw new Error(`Unexpected Electron fuse ${index}`);
+  }
 }
 export function verifyPE(bytes) {
   if (bytes.length < 64 || bytes.toString("ascii", 0, 2) !== "MZ")
@@ -110,6 +120,20 @@ export async function verifyPackage(directory = path.join(ROOT, "release/win-unp
   if (expected.build.appId !== "com.fauna.game" || expected.build.productName !== "Fauna")
     throw new Error("Unexpected Fauna application identity.");
   verifyPE(readFileSync(path.join(directory, "Fauna.exe")));
+  verifyFuses(await getCurrentFuseWire(path.join(directory, "Fauna.exe")));
+  const snapshot = readFileSync(path.join(directory, "browser_v8_context_snapshot.bin"));
+  if (!snapshot.length || !snapshot.equals(readFileSync(path.join(directory, "v8_context_snapshot.bin"))))
+    throw new Error("Browser snapshot differs from the pinned runtime.");
+  const nativeRoot = path.join(
+    directory,
+    "resources/app.asar.unpacked/node_modules/steamworks.js/dist/win64",
+  );
+  for (const name of ["steamworksjs.win32-x64-msvc.node", "steam_api64.dll"]) {
+    const bytes = readFileSync(path.join(nativeRoot, name));
+    verifyPE(bytes);
+    if (!bytes.equals(readFileSync(path.join(ROOT, "node_modules/steamworks.js/dist/win64", name))))
+      throw new Error(`Steam native file differs: ${name}`);
+  }
   if (process.platform === "win32") {
     const details = JSON.parse(
       execFileSync(
@@ -144,7 +168,7 @@ export async function verifyPackage(directory = path.join(ROOT, "release/win-unp
   const receipt = await assets({ repository: ROOT, mode: "outputs" });
   const desktopFiles = Object.fromEntries(
     readdirSync(path.join(ROOT, "desktop"))
-      .filter((name) => name.endsWith(".cjs"))
+      .filter((name) => /\.(cjs|json)$/.test(name))
       .map((name) => [`desktop/${name}`, readFileSync(path.join(ROOT, "desktop", name))]),
   );
   const rendererFiles = Object.fromEntries(

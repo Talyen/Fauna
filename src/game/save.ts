@@ -67,7 +67,7 @@ const creature = z.object({
   combat: combatState.optional(),
 });
 const currentShape = z.object({
-  version: z.literal(13),
+  version: z.literal(14),
   discovery: z.object({ encountered: z.array(speciesId).max(6), recruited: z.array(speciesId).max(6) }),
   revision: z
     .number()
@@ -75,7 +75,17 @@ const currentShape = z.object({
     .nonnegative()
     .max(Number.MAX_SAFE_INTEGER - 1),
   rng: z.number().int().min(0).max(0xffffffff),
-  phase: z.enum(["draft", "teamSelection", "battle", "recruit", "boon", "campfire", "victory", "defeat"]),
+  phase: z.enum([
+    "draft",
+    "teamSelection",
+    "battle",
+    "recruit",
+    "boon",
+    "campfire",
+    "support",
+    "victory",
+    "defeat",
+  ]),
   unlocked: z.array(speciesId).min(5).max(6),
   wins: natural,
   selected: z.array(speciesId).max(1),
@@ -109,6 +119,19 @@ const currentShape = z.object({
       step: z.number().int().min(0).max(3),
       offers: z.array(z.object({ location: id, pack: z.number().int().min(0).max(10) })).max(3),
       chosen: id.nullable(),
+    })
+    .nullable(),
+  support: z
+    .object({
+      id,
+      kind: z.enum(["merchant", "spring"]),
+      biome: z.number().int().min(0).max(1),
+      step: z.number().int().min(1).max(2),
+      resolved: z.boolean(),
+      purchased: boonId.nullable(),
+      stock: z
+        .array(z.object({ slot: id, boon: boonId, price: z.number().int().min(1).max(1_000_000) }))
+        .max(2),
     })
     .nullable(),
   battle,
@@ -158,7 +181,7 @@ export function decodeSave(raw: string): GameState {
         summary.unlocks.some((kind) => !s.unlocked.includes(kind)),
     );
     invalid(
-      summary.currency > s.currency ||
+      summary.currency > summary.victories * 40 + 20 ||
         KEYWORDS.some((keyword) => (summary.xp[keyword] ?? 0) > (s.keywordXP[keyword] ?? 0)),
     );
     invalid(
@@ -198,7 +221,10 @@ export function decodeSave(raw: string): GameState {
     else {
       invalid(route.offers.length !== (route.step === 3 ? 1 : 3));
       invalid(
-        s.phase === "teamSelection" || s.phase === "campfire" || (s.phase === "defeat" && !s.battle)
+        s.phase === "teamSelection" ||
+          s.phase === "support" ||
+          s.phase === "campfire" ||
+          (s.phase === "defeat" && !s.battle)
           ? route.chosen !== null
           : !route.offers.some((offer) => offer.location === route.chosen),
       );
@@ -264,8 +290,29 @@ export function decodeSave(raw: string): GameState {
         s.cards.length !== s.team.length * 3 ||
         s.lineup.length !== s.team.length,
     );
-  if (s.phase === "teamSelection" || s.phase === "campfire")
+  if (s.phase === "teamSelection" || s.phase === "support" || s.phase === "campfire")
     invalid(s.battle !== null || s.reward !== null || s.team.some((c, index) => c.id !== s.lineup[index]));
+  if (s.phase === "support") invalid(!s.support || !s.expedition);
+  if (s.support) {
+    const v = s.support;
+    invalid(
+      !s.expedition ||
+        v.biome !== s.expedition.biome ||
+        v.step !== s.expedition.step ||
+        v.id !== `support-${v.biome}-${v.step}` ||
+        !["teamSelection", "support"].includes(s.phase) ||
+        (v.kind === "merchant"
+          ? v.step !== 1 || !v.stock.length
+          : v.step !== 2 || !!v.stock.length || v.purchased !== null) ||
+        !unique(v.stock.map((r) => r.slot)) ||
+        !unique(v.stock.map((r) => r.boon)) ||
+        v.stock.some(
+          (r, i) => r.slot !== `slot-${i}` || (s.boons.includes(r.boon) && v.purchased !== r.boon),
+        ) ||
+        (v.purchased !== null &&
+          (!v.resolved || !s.boons.includes(v.purchased) || !v.stock.some((r) => r.boon === v.purchased))),
+    );
+  }
   if (s.phase === "campfire")
     invalid(!s.expedition || s.expedition.step !== 3 || !!s.expedition.campfireUsed);
   if (["battle", "recruit", "boon"].includes(s.phase)) invalid(!s.battle);
@@ -289,7 +336,7 @@ export function decodeSave(raw: string): GameState {
     if (s.phase === "recruit") invalid(s.reward.recruits.length !== 3 || s.reward.outcome !== "next");
     if (s.phase === "boon")
       invalid(
-        s.reward.boons.length !== 3 ||
+        s.reward.boons.length < 1 ||
           s.reward.boons.some((r) => s.boons.includes(r)) ||
           s.reward.outcome === "defeat",
       );

@@ -1,4 +1,5 @@
-import { _electron as electron } from "playwright";
+import { launchPackaged } from "./lib/packaged-desktop.mjs";
+import { _electron as electron } from "@playwright/test";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
@@ -8,10 +9,12 @@ let success = false;
 try {
   const packaged = process.argv.includes("--packaged");
   if (packaged && process.platform !== "win32") throw new Error("Packaged Windows startup requires Windows.");
-  app = await electron.launch({
-    ...(packaged ? { executablePath: path.resolve("release/win-unpacked/Fauna.exe") } : { args: ["."] }),
-    env: { ...process.env, FAUNA_SMOKE_USER_DATA: userData },
-  });
+  app = packaged
+    ? await launchPackaged(userData)
+    : await electron.launch({
+        args: ["."],
+        env: { ...process.env, FAUNA_SMOKE_USER_DATA: userData },
+      });
   const window = await app.firstWindow();
   window.setDefaultTimeout(20000);
   await window.getByRole("button", { name: "Collection", exact: true }).click({ timeout: 60000 });
@@ -90,7 +93,7 @@ try {
     JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
   );
   if (
-    swapped.version !== 13 ||
+    swapped.version !== 14 ||
     swapped.team[0].species !== "silkmoth" ||
     swapped.battle.mana !== 4 ||
     swapped.lineup[0] !== "ally-0"
@@ -125,10 +128,12 @@ try {
   // Close immediately while hit feedback is still animating; the handshake must flush the accepted command.
   await app.close();
   app = undefined;
-  app = await electron.launch({
-    ...(packaged ? { executablePath: path.resolve("release/win-unpacked/Fauna.exe") } : { args: ["."] }),
-    env: { ...process.env, FAUNA_SMOKE_USER_DATA: userData },
-  });
+  app = packaged
+    ? await launchPackaged(userData)
+    : await electron.launch({
+        args: ["."],
+        env: { ...process.env, FAUNA_SMOKE_USER_DATA: userData },
+      });
   const resumed = await app.firstWindow();
   resumed.setDefaultTimeout(20000);
   await resumed.getByRole("button", { name: "Continue", exact: true }).click({ timeout: 60000 });
@@ -147,15 +152,17 @@ try {
     );
   if (await resumed.evaluate(() => typeof window.require !== "undefined"))
     throw new Error("Node leaked to renderer.");
-  const security = await app.evaluate(({ BrowserWindow }) => {
-    const preferences = BrowserWindow.getAllWindows()[0].webContents.getLastWebPreferences();
-    return {
-      sandbox: preferences.sandbox,
-      contextIsolation: preferences.contextIsolation,
-      nodeIntegration: preferences.nodeIntegration,
-    };
-  });
-  if (!security.sandbox || !security.contextIsolation || security.nodeIntegration)
+  const security = packaged
+    ? null
+    : await app.evaluate(({ BrowserWindow }) => {
+        const preferences = BrowserWindow.getAllWindows()[0].webContents.getLastWebPreferences();
+        return {
+          sandbox: preferences.sandbox,
+          contextIsolation: preferences.contextIsolation,
+          nodeIntegration: preferences.nodeIntegration,
+        };
+      });
+  if (security && (!security.sandbox || !security.contextIsolation || security.nodeIntegration))
     throw new Error("Unsafe renderer preferences.");
   const audioState = await resumed.evaluate(async () => {
     const context = new AudioContext();

@@ -15,7 +15,8 @@ export function useGameAudio(session: Session, preferences: AudioPreferences, ho
     owner.current = audio;
     audio.configure(currentPreferences.current);
     const unlock = () => audio.unlock();
-    const visibility = () => audio.background(document.hidden || !document.hasFocus());
+    const visibility = () =>
+      audio.background(session.store.getState().overlayActive || document.hidden || !document.hasFocus());
     window.addEventListener("pointerdown", unlock);
     window.addEventListener("keydown", unlock);
     document.addEventListener("visibilitychange", visibility);
@@ -23,6 +24,7 @@ export function useGameAudio(session: Session, preferences: AudioPreferences, ho
     window.addEventListener("blur", visibility);
     visibility();
     const unsubscribe = session.store.subscribe((current, previous) => {
+      if (current.overlayActive !== previous.overlayActive) visibility();
       if (!current.committedCommand || current.committedCommand === previous.committedCommand) return;
       const type = current.committedCommand.type;
       const cue: SoundCue | undefined =
@@ -57,7 +59,7 @@ export function useGameAudio(session: Session, preferences: AudioPreferences, ho
   }, [session]);
   const game = session.store.getState().game;
   const track: MusicCue =
-    home || !["battle", "teamSelection", "recruit", "boon"].includes(game.phase)
+    home || !["battle", "teamSelection", "recruit", "boon", "support", "campfire"].includes(game.phase)
       ? "menu"
       : game.expedition?.step === 3
         ? "boss"

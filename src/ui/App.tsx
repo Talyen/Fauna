@@ -1,10 +1,12 @@
+import { CloudRecovery } from "./platform-settings";
+import { SupportScreen, SupportInspector } from "./support-screen";
 import { BOONS } from "../game/progression";
 import { ArtCard } from "./art-card";
 import { assetUrl } from "./assets";
 import { Switch } from "../components/ui/switch";
 import { CreatureCard } from "./cards";
 import { species } from "../game/content";
-import { writePreference } from "../platform/preferences";
+import { readPreference, writePreference } from "../platform/preferences";
 import { useAutoplay } from "./autoplay";
 import { observeUnlocks } from "./unlock-reveals";
 import { Campfire } from "./campfire";
@@ -53,11 +55,7 @@ export function App(props: { session: Session; desktop?: boolean }) {
   );
 }
 function preference(key: string, fallback: string) {
-  try {
-    return localStorage.getItem(key) ?? fallback;
-  } catch {
-    return fallback;
-  }
+  return readPreference(key) ?? fallback;
 }
 function Game({ session, desktop = false }: { session: Session; desktop?: boolean }) {
   const view = useStore(session.store),
@@ -93,6 +91,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
   const canManageLineup =
     game.phase === "teamSelection" ||
     game.phase === "campfire" ||
+    game.phase === "support" ||
     (["recruit", "boon"].includes(game.phase) && game.reward?.outcome === "next");
   const [autoEndTurn, setAutoEndTurn] = useState(() => preference("fauna.auto-end-turn", "true") !== "false");
   const [pendingUnlocks, setPendingUnlocks] = useState<SpeciesId[]>([]);
@@ -101,7 +100,13 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     () => observeUnlocks(session, (ids) => setPendingUnlocks((old) => [...new Set([...old, ...ids])])),
     [session],
   );
-  const paused = route !== "play" || menu || modal !== null || inspection !== null;
+  const paused =
+    view.overlayActive ||
+    view.cloud.blocking ||
+    route !== "play" ||
+    menu ||
+    modal !== null ||
+    inspection !== null;
   const [autoplay, setAutoplay] = useAutoplay(session, paused, autoEndTurn);
   useEffect(() => {
     if (route !== "play") setAutoplay(false);
@@ -109,11 +114,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
   const { bursts, deny } = useCombatFeedback(session, root, playSound, paused);
   useEffect(() => {
     document.documentElement.style.setProperty("--text-scale", String(scale));
-    try {
-      localStorage.setItem("fauna.text-scale", String(scale));
-    } catch {
-      /* Optional preferences. */
-    }
+    writePreference("fauna.text-scale", String(scale));
   }, [scale]);
   const send = useCallback(
     (command: Command) => {
@@ -148,7 +149,26 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     setRoute(origin.current);
     if (origin.current === "play") setMenu(true);
   };
+  useEffect(() => {
+    if (!view.cloud.blocking) return;
+    setModal(null);
+    setInspection(null);
+    setMenu(false);
+    setAutoplay(false);
+  }, [view.cloud.blocking, setAutoplay]);
+  useEffect(() => {
+    if (!view.overlayActive) return;
+    setAutoplay(false);
+    if (route === "play") setMenu(true);
+  }, [view.overlayActive, route, setAutoplay]);
   const input = (action: InputAction) => {
+    if (session.store.getState().overlayActive) return;
+    if (session.store.getState().cloud.blocking) {
+      if (["left", "right", "up", "down"].includes(action))
+        moveFocus(action as "left" | "right" | "up" | "down");
+      else if (action === "confirm") (document.activeElement as HTMLElement | null)?.click();
+      return;
+    }
     if (inspection && inspectionControls.current?.(action)) return;
     if (action === "back") {
       if (inspection) {
@@ -193,7 +213,9 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
       );
       const kind = focused?.closest<HTMLElement>("[data-species]")?.dataset.species as SpeciesId | undefined;
       const destination = focused?.closest<HTMLElement>("[data-destination]")?.dataset.destination;
-      if (destination) setInspection({ destination });
+      const support = focused?.closest<HTMLElement>("[data-support]")?.dataset.support;
+      if (support) setInspection({ support });
+      else if (destination) setInspection({ destination });
       else if (card) setInspection({ card });
       else if (kind)
         setInspection({
@@ -227,6 +249,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           setNavigation(navigating);
         });
       },
+      () => session.store.getState().overlayActive,
     );
     return () => {
       disconnect();
@@ -252,7 +275,16 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     // Screen transitions must not replace focus the player already moved onto the new screen.
     if (buttons.includes(document.activeElement as HTMLElement)) return;
     (buttons.find((el) => el.classList.contains("primary-menu-action")) ?? buttons[0])?.focus();
-  }, [route, game.phase, view.ready, view.recoveryRequired]);
+  }, [
+    route,
+    game.phase,
+    view.ready,
+    view.recoveryRequired,
+    view.cloud.blocking,
+    view.cloud.status,
+    view.cloud.importAvailable,
+    view.cloud.candidates.length,
+  ]);
   useEffect(() => {
     const listener = (event: BeforeUnloadEvent) => {
       if (session.store.getState().saveStatus !== "saved") {
@@ -433,6 +465,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
             </div>
           ) : modal === "settings" ? (
             <Settings
+              session={session}
               audio={audioPreferences}
               updateAudio={updateAudioPreferences}
               scale={scale}
@@ -514,18 +547,22 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
         </AlertDialogContent>
       </AlertDialog>
       {!modal && inspection ? (
-        <Inspector
-          item={inspection}
-          session={session}
-          controls={inspectionControls}
-          onClose={() => setInspection(null)}
-          enterDestination={(destination) => send({ type: "beginBattle", destination })}
-          chooseStarter={
-            route === "play" && game.phase === "draft" && !menu && "species" in inspection
-              ? () => send({ type: "draft", species: inspection.species })
-              : undefined
-          }
-        />
+        "support" in inspection ? (
+          <SupportInspector game={game} send={send} close={() => setInspection(null)} />
+        ) : (
+          <Inspector
+            item={inspection}
+            session={session}
+            controls={inspectionControls}
+            onClose={() => setInspection(null)}
+            enterDestination={(destination) => send({ type: "beginBattle", destination })}
+            chooseStarter={
+              route === "play" && game.phase === "draft" && !menu && "species" in inspection
+                ? () => send({ type: "draft", species: inspection.species })
+                : undefined
+            }
+          />
+        )
       ) : null}
     </>
   );
@@ -554,7 +591,9 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           ) : null}
         </div>
       ) : null}
-      {view.loadFailed || view.recoveryRequired ? (
+      {view.cloud.blocking ? (
+        <CloudRecovery session={session} />
+      ) : view.loadFailed || view.recoveryRequired ? (
         <main className="recovery">
           <h1>Save unavailable</h1>
           <p>{view.loadFailed ? view.error : view.notice}</p>
@@ -610,12 +649,16 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
               <Draft game={game} send={send} inspect={setInspection} />
             ) : game.phase === "teamSelection" ? (
               <TeamSelection game={game} send={send} inspect={setInspection} deck={() => openModal("deck")} />
+            ) : game.phase === "support" ? (
+              <SupportScreen game={game} send={send} />
             ) : game.phase === "campfire" ? (
               <Campfire game={game} send={send} />
             ) : game.phase === "battle" ? (
               <BattleScreen
                 key={game.encounter}
-                clearSelection={menu || modal !== null || inspection !== null || autoplay}
+                clearSelection={
+                  view.overlayActive || menu || modal !== null || inspection !== null || autoplay
+                }
                 onManualStart={() => setAutoplay(false)}
                 openPile={(pile) => openModal(pile)}
                 actions={

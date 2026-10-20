@@ -12,8 +12,8 @@ export const routes = {
     grep: "Collection|inspection|discovery",
   },
   progression: {
-    files: ["tests/e2e/expedition.spec.ts"],
-    grep: "talent|boon|recruit|victory|journey|unlock",
+    files: ["tests/e2e/expedition.spec.ts", "tests/e2e/adoption.spec.ts"],
+    grep: "talent|boon|recruit|victory|journey|unlock|Merchant|Spring",
   },
   persistence: {
     files: ["tests/e2e/expedition.spec.ts", "tests/e2e/combat-controls.spec.ts"],

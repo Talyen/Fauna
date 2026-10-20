@@ -1,3 +1,4 @@
+import { createCloud, initialCloudView, type CloudView } from "./cloud";
 import { createDiagnostics } from "./diagnostics";
 import { createStore } from "zustand/vanilla";
 import { createGame, dispatch } from "../game/engine";
@@ -6,6 +7,8 @@ import type { Command, GameEvent, GameState } from "../game/types";
 import type { Platform } from "../platform/ports";
 export interface SessionView {
   game: GameState;
+  cloud: CloudView;
+  overlayActive: boolean;
   ready: boolean;
   closing: boolean;
   recoveryRequired: boolean;
@@ -23,6 +26,8 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
   );
   const store = createStore<SessionView>(() => ({
     game: createGame(seed),
+    cloud: initialCloudView,
+    overlayActive: false,
     ready: false,
     closing: false,
     recoveryRequired: false,
@@ -36,6 +41,42 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
   let writes = Promise.resolve();
   let disposed = false;
   let generation = 0;
+  const cloud = createCloud(
+    platform.cloud,
+    (view) => {
+      if (!disposed) {
+        const previous = store.getState();
+        if (view.error && view.error !== previous.cloud.error)
+          diagnostics.record("cloud", view.error, previous.game);
+        store.setState({ cloud: view });
+      }
+    },
+    async (data) => {
+      if (disposed || store.getState().closing) throw new Error("Session is closing.");
+      const game = decodeSave(data);
+      const installation = writes
+        .then(() => platform.saves.write(data))
+        .then(() => {
+          if (!disposed)
+            store.setState({
+              game,
+              ready: true,
+              recoveryRequired: false,
+              loadFailed: false,
+              saveStatus: "saved",
+              events: [],
+              committedCommand: null,
+              notice: "",
+              error: "",
+            });
+        });
+      writes = installation.catch(() => {});
+      await installation;
+    },
+  );
+  const removeOverlay = platform.onOverlay?.((overlayActive) => {
+    if (!disposed) store.setState({ overlayActive });
+  });
   const save = (game: GameState) => {
     const data = encodeSave(game);
     store.setState({ saveStatus: "saving" });
@@ -44,6 +85,7 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
       .then(() => {
         if (!disposed && store.getState().game.revision === game.revision)
           store.setState({ saveStatus: "saved", error: "" });
+        return cloud.commit(data);
       })
       .catch((error) => {
         diagnostics.record("save-write", error, store.getState().game);
@@ -72,6 +114,7 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
                 : "Recovered your journey from a backup.",
             saveStatus: "saved",
           });
+          await cloud.start(encodeSave(game));
           return;
         } catch {
           diagnostics.record("validation", "Invalid current-format save candidate.", store.getState().game);
@@ -85,6 +128,7 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
           ? "Your previous save could not be read. Start fresh to continue; the old data will be rotated into backups."
           : "",
       });
+      await cloud.start(null);
     } catch (error) {
       diagnostics.record("save-read", error, store.getState().game);
       if (!disposed && token === generation)
@@ -100,6 +144,7 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
     store.setState({ closing: true });
     await writes;
     const saved = store.getState().saveStatus !== "error";
+    if (saved) await cloud.flush();
     if (!saved) store.setState({ closing: false });
     return saved;
   };
@@ -107,10 +152,37 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
   return {
     store: { getState: store.getState, getInitialState: store.getInitialState, subscribe: store.subscribe },
     diagnostics,
+    display: platform.display,
     load,
+    cloud: {
+      offline: () => cloud.offline(),
+      choose: (id: string) => cloud.choose(id),
+      importStandalone: (use: boolean) => cloud.importStandalone(use),
+      async retry() {
+        if (
+          disposed ||
+          store.getState().closing ||
+          store.getState().loadFailed ||
+          store.getState().saveStatus === "error"
+        )
+          return;
+        store.setState({ cloud: { ...store.getState().cloud, blocking: true } });
+        await writes;
+        if (!disposed) await cloud.retry();
+      },
+    },
     command(command: Command) {
       const view = store.getState();
-      if (disposed || view.closing || !view.ready || view.recoveryRequired || view.loadFailed) return false;
+      if (
+        disposed ||
+        view.closing ||
+        view.overlayActive ||
+        view.cloud.blocking ||
+        !view.ready ||
+        view.recoveryRequired ||
+        view.loadFailed
+      )
+        return false;
       const result = dispatch(view.game, command, capabilities.development === true);
       if (!result.accepted) {
         store.setState({ error: result.reason });
@@ -147,6 +219,8 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
       disposed = true;
       store.setState({ ready: false, closing: true });
       diagnostics.dispose();
+      cloud.dispose();
+      removeOverlay?.();
       removeCloseListener?.();
       generation++;
       return writes;
