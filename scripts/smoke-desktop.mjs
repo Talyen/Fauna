@@ -32,7 +32,7 @@ try {
   await window.getByRole("button", { name: "Begin battle" }).click();
   await window.getByRole("main", { name: "Battlefield" }).waitFor();
   await window.locator('.app[data-save-status="saved"]').waitFor();
-  await window.getByRole("button", { name: "Inspect Mossback", exact: true }).click();
+  await window.locator(".player-row").getByRole("button", { name: "Inspect Mossback", exact: true }).click();
   await window.locator(".inspection-thumbnails .action-card").first().waitFor();
   if ((await window.locator(".inspection-thumbnails .action-card").count()) !== 3)
     throw new Error("Creature inspection did not expose three portrait actions.");
@@ -112,7 +112,7 @@ try {
     JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
   );
   await attack.click();
-  await window.getByRole("button", { name: `Target ${before.battle.enemies[0].name}`, exact: true }).click();
+  await window.locator('.enemy-row [data-enemy-id="enemy-0"]').click();
   // Close immediately while hit feedback is still animating; the handshake must flush the accepted command.
   await app.close();
   app = undefined;
@@ -163,7 +163,17 @@ try {
     "Desktop startup, draft, stacked inspection/action browsing, free swaps, lineup persistence, last-mana automatic turn quit/resume, and renderer isolation passed.",
   );
 } finally {
-  if (app && !success) app.process().kill("SIGKILL");
-  else await app?.close();
-  await rm(userData, { recursive: true, force: true });
+  if (app && !success) {
+    const child = app.process();
+    if (child.exitCode === null && child.signalCode === null)
+      await new Promise((resolve) => {
+        child.once("exit", resolve);
+        child.kill("SIGKILL");
+      });
+  } else await app?.close();
+  // Chromium can release profile files after its parent exits on Windows.
+  await rm(userData, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 }).catch((error) => {
+    if (success) throw error;
+    console.error(`Smoke profile cleanup failed: ${error.message}`);
+  });
 }

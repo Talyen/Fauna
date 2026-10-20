@@ -50,10 +50,11 @@ async function step(page: Page, activate: (el: Locator) => Promise<void> = (el) 
   else if (c.type === "play") {
     await activate(page.locator(`.hand [data-card-id="${c.cardId}"]`));
     if (c.targetId) {
-      const name = c.targetId.startsWith("enemy-")
-        ? s.battle!.enemies.find((e) => e.id === c.targetId)!.name
-        : species(s.team.find((a) => a.id === c.targetId)!.species).name;
-      await activate(page.getByRole("button", { name: `Target ${name}`, exact: true }));
+      await activate(
+        c.targetId.startsWith("enemy-")
+          ? page.locator(`.enemy-row [data-enemy-id="${c.targetId}"]`)
+          : page.locator(`.player-row [data-actor-id="${c.targetId}"] .creature-card`),
+      );
     } else await activate(page.getByRole("button", { name: /^Play ·/ }));
   } else await activate(page.getByRole("button", { name: /^End turn/ }));
 }
@@ -793,11 +794,14 @@ test("five-card hand with hidden overflow, three enemies and a full bench preser
   const area = await page
     .locator(".player-row .creature-card")
     .first()
-    .evaluate((el) => el.offsetWidth * el.offsetHeight);
+    .evaluate((el: HTMLElement) => el.offsetWidth * el.offsetHeight);
   for (const card of await page.locator(".hand .action-card").all()) {
     await card.focus();
     expect(
-      Math.abs((await card.evaluate((el) => el.offsetWidth * el.offsetHeight)) / area - (0.9 / 1.1) ** 2),
+      Math.abs(
+        (await card.evaluate((el: HTMLElement) => el.offsetWidth * el.offsetHeight)) / area -
+          (0.9 / 1.1) ** 2,
+      ),
     ).toBeLessThan(0.025);
   }
 });
@@ -1402,13 +1406,13 @@ for (const [width, height] of [
       await page
         .locator(".player-row .creature-card")
         .first()
-        .evaluate((el) => ({ width: el.offsetWidth, height: el.offsetHeight })),
+        .evaluate((el: HTMLElement) => ({ width: el.offsetWidth, height: el.offsetHeight })),
     ).toEqual({ width: 293, height: 220 });
     expect(
       await page
         .locator(".hand .action-card")
         .first()
-        .evaluate((el) => ({ width: el.offsetWidth, height: el.offsetHeight })),
+        .evaluate((el: HTMLElement) => ({ width: el.offsetWidth, height: el.offsetHeight })),
     ).toEqual({ width: 180, height: 240 });
     expect(
       await page

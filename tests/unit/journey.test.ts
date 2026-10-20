@@ -74,7 +74,7 @@ describe("journey earnings and results", () => {
       d.expedition = started.expedition;
       d.journey = started.journey;
       d.roster = [...INITIAL_SPECIES];
-      d.reserves = ["silkmoth", "briartooth"].map((kind) => ({
+      d.reserves = (["silkmoth", "briartooth"] as const).map((kind) => ({
         id: kind,
         species: kind as "silkmoth" | "briartooth",
         health: species(kind).health,

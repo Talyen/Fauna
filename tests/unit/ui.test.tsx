@@ -38,7 +38,7 @@ describe("player interface", () => {
     await session.load();
     render(<App session={session} />);
     const user = userEvent.setup();
-    await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+    await user.click(screen.getByRole("button", { name: "Continue" }));
     expect(document.querySelectorAll(".hand .action-card")).toHaveLength(5);
     expect(screen.queryByText(/buffer/i)).toBeNull();
     await user.click(document.querySelector<HTMLButtonElement>('.hand .action-card[data-effect="attack"]')!);
@@ -46,7 +46,7 @@ describe("player interface", () => {
     expect(session.store.getState().game.battle!.hand).toContain(game.battle!.buffer[0]);
     expect(session.store.getState().game.battle!.buffer).toHaveLength(3);
     expect(document.querySelectorAll(".hand .action-card")).toHaveLength(5);
-    await user.click(screen.getByRole("button", { name: "End turn", exact: true }));
+    await user.click(screen.getByRole("button", { name: "End turn" }));
     expect(session.store.getState().game.battle!.buffer).toEqual([]);
     expect(document.querySelectorAll(".hand .action-card")).toHaveLength(5);
     await session.dispose();
@@ -58,18 +58,18 @@ describe("player interface", () => {
     await session.load();
     render(<App session={session} />);
     const user = userEvent.setup();
-    await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+    await user.click(screen.getByRole("button", { name: "Continue" }));
     expect(screen.getByRole("heading", { name: "Victory", level: 1 })).toBeTruthy();
-    expect(screen.queryByRole("button", { name: "Continue", exact: true })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Continue" })).toBeNull();
     for (const id of game.reward!.relics) {
       const relic = RELICS.find((entry) => entry.id === id)!;
-      const card = screen.getByRole("button", { name: `Choose ${relic.name}`, exact: true });
+      const card = screen.getByRole("button", { name: `Choose ${relic.name}` });
       const image = card.querySelector("img")!;
       expect(image.getAttribute("src")).toBe("./art/relic-placeholder.svg");
       expect(image.getAttribute("width")).toBe("600");
       expect(image.getAttribute("height")).toBe("800");
       expect(card.textContent).toBe("");
-      expect(screen.getByRole("heading", { name: relic.name, exact: true })).toBeTruthy();
+      expect(screen.getByRole("heading", { name: relic.name })).toBeTruthy();
     }
     const chosen = game.reward!.relics[0]!;
     await user.click(
@@ -90,17 +90,17 @@ describe("player interface", () => {
     await session.load();
     render(<App session={session} />);
     const user = userEvent.setup();
-    await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+    await user.click(screen.getByRole("button", { name: "Continue" }));
     expect(screen.getByRole("heading", { name: "Victory", level: 1 })).toBeTruthy();
-    expect(screen.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "Choose a Recruit" })).toBeTruthy();
     expect(document.querySelectorAll(".recruit-options .creature-card")).toHaveLength(3);
     expect(screen.getByLabelText("Last battle earnings").textContent).toContain("+20 currency");
     const progress = screen.getByRole("progressbar", { name: "Nature level 2 progress" });
     expect(progress.getAttribute("aria-valuenow")).toBe("4");
     expect(progress.getAttribute("aria-valuemax")).toBe("40");
     expect(screen.queryByText(/keyword XP|talent point|4 \/ 40 XP/)).toBeNull();
-    expect(screen.queryByRole("button", { name: "Continue", exact: true })).toBeNull();
-    await user.click(screen.getByRole("button", { name: "Skip", exact: true }));
+    expect(screen.queryByRole("button", { name: "Continue" })).toBeNull();
+    await user.click(screen.getByRole("button", { name: "Skip" }));
     expect(session.store.getState().game.phase).toBe("teamSelection");
     expect(screen.queryByRole("heading", { name: "Choose a Relic" })).toBeNull();
     await session.dispose();
@@ -116,9 +116,9 @@ describe("player interface", () => {
     await session.load();
     render(<App session={session} />);
     const user = userEvent.setup();
-    await user.click(screen.getByRole("button", { name: "Journey results", exact: true }));
+    await user.click(screen.getByRole("button", { name: "Journey results" }));
     expect(screen.getByRole("heading", { name: "Returned home" })).toBeTruthy();
-    expect(screen.queryByRole("button", { name: "New journey", exact: true })).toBeNull();
+    expect(screen.queryByRole("button", { name: "New journey" })).toBeNull();
     expect(screen.getByLabelText("Journey gains").textContent).toContain("Lv 2");
     const progress = screen.getByRole("progressbar", { name: "Nature level 2 progress" });
     expect(progress.getAttribute("aria-valuenow")).toBe("4");
@@ -129,9 +129,9 @@ describe("player interface", () => {
     expect(screen.queryByLabelText("Relics collected")).toBeNull();
     expect(screen.queryByText(/battles won/)).toBeNull();
     expect(session.store.getState().game).toEqual(game);
-    await user.click(screen.getByRole("button", { name: "Main menu", exact: true }));
+    await user.click(screen.getByRole("button", { name: "Main menu" }));
     expect(screen.getByRole("button", { name: "Journey results" })).toBeTruthy();
-    await user.click(screen.getByRole("button", { name: "New journey", exact: true }));
+    await user.click(screen.getByRole("button", { name: "New journey" }));
     expect(session.store.getState().game.journey).toBeNull();
     expect(session.store.getState().game.keywordXP.nature).toBe(24);
     await session.dispose();
@@ -143,7 +143,7 @@ describe("player interface", () => {
     await session.load();
     render(<App session={session} />);
     const user = userEvent.setup();
-    await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+    await user.click(screen.getByRole("button", { name: "Continue" }));
     const destination = game.expedition!.offers[0]!.location;
     const pack = encounterSource(game, destination);
     await user.click(screen.getByRole("button", { name: `Inspect ${location(destination)!.name}` }));
@@ -210,7 +210,7 @@ describe("player interface", () => {
     await session.load();
     render(<App session={session} />);
     const user = userEvent.setup();
-    await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+    await user.click(screen.getByRole("button", { name: "Continue" }));
     for (const [id, expected] of [
       ["ally-0", "7/32 health"],
       ["ally-1", "19/32 health · 4 block"],
@@ -222,8 +222,8 @@ describe("player interface", () => {
       expect(document.querySelector(".inspection-health")!.textContent).toBe(expected);
       await user.keyboard("{Escape}");
     }
-    await user.click(screen.getByRole("button", { name: "Swap", exact: true }));
-    act(() => screen.getByRole("button", { name: "Mossback, reserve", exact: true }).focus());
+    await user.click(screen.getByRole("button", { name: "Swap" }));
+    act(() => screen.getByRole("button", { name: "Mossback, reserve" }).focus());
     await user.keyboard("i");
     expect(document.querySelector(".inspection-health")!.textContent).toBe("11/32 health · 2 block");
     expect(session.store.getState().game).toEqual(game);
