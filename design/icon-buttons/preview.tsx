@@ -13,8 +13,10 @@ import "./study.css";
 
 const icons = { Menu, Back: ArrowLeft, Close: X, Previous: ChevronLeft, Next: ChevronRight };
 type IconName = keyof typeof icons;
-const storageKey = "fauna-design-icon-size-v1";
-const sizes = ["16", "20", "24"];
+const hitAreaStep = new URLSearchParams(window.location.search).get("step") === "hit-area";
+const reviewedIconSize = "20";
+const storageKey = hitAreaStep ? "fauna-design-icon-hit-area-v1" : "fauna-design-icon-size-v1";
+const sizes = hitAreaStep ? ["44", "48", "52"] : ["16", "20", "24"];
 function initialSize() {
   try {
     const value = localStorage.getItem(storageKey) ?? "";
@@ -25,11 +27,13 @@ function initialSize() {
 }
 function IconSample({
   size,
+  targetSize,
   icon,
   unavailable,
   busyAction,
 }: {
   size: string;
+  targetSize: string;
   icon: IconName;
   unavailable: boolean;
   busyAction: boolean;
@@ -55,6 +59,7 @@ function IconSample({
       {...attributes}
       data-role="supporting"
       data-icon-size={size}
+      data-hit-area={targetSize}
       data-unavailable={unavailable ? reviewedButtonChoices.unavailable : undefined}
     >
       <Tooltip>
@@ -63,7 +68,7 @@ function IconSample({
             variant="outline"
             size="icon"
             className="study-action"
-            aria-label={`${icon}, ${size}px icon`}
+            aria-label={`${icon}, ${size}px icon, ${targetSize}px target`}
             aria-busy={waiting}
             disabled={unavailable || waiting}
             data-held={held || undefined}
@@ -127,10 +132,11 @@ function IconStudy() {
     <TooltipProvider>
       <main className="button-study icon-study" data-reduced={reduced}>
         <header className="study-heading">
-          <h1>Icon buttons · 1. Icon size</h1>
+          <h1>{hitAreaStep ? "Icon buttons · 2. Hit area" : "Icon buttons · 1. Icon size"}</h1>
           <p>
-            Only icon size varies. Every option has the same 44 × 44px hit area and your chosen button
-            interactions.
+            {hitAreaStep
+              ? "Your chosen 20px icon stays fixed. Only the square button’s hit area varies; its visible boundary is its clickable boundary."
+              : "Only icon size varies. Every option has the same 44 × 44px hit area and your chosen button interactions."}
           </p>
         </header>
         <RadioGroup
@@ -153,17 +159,19 @@ function IconStudy() {
         <RadioGroup
           value={choice}
           onValueChange={setChoice}
-          aria-label="Choose icon size"
+          aria-label={hitAreaStep ? "Choose hit area" : "Choose icon size"}
           className="study-grid"
         >
           {sizes.map((size, index) => (
             <section className="study-sample" key={size}>
               <h2>
-                {String.fromCharCode(65 + index)} · {size}px icon
+                {String.fromCharCode(65 + index)} ·{" "}
+                {hitAreaStep ? `${size} × ${size}px target` : `${size}px icon`}
               </h2>
               <IconSample
                 key={`${size}-${icon}`}
-                size={size}
+                size={hitAreaStep ? reviewedIconSize : size}
+                targetSize={hitAreaStep ? size : "44"}
                 icon={icon}
                 unavailable={unavailable}
                 busyAction={busyAction}
@@ -176,7 +184,9 @@ function IconStudy() {
           ))}
         </RadioGroup>
         <p className="study-recommendation">
-          My recommendation: 20px. It is more legible than 16px while leaving more breathing room than 24px.
+          {hitAreaStep
+            ? "My recommendation: 44px, matching Fauna’s existing control height. 48px is more forgiving; 52px is roomiest but occupies more space. Try clicking near the edges. Sizes are measured at rest; your hover growth still applies."
+            : "My recommendation: 20px. It is more legible than 16px while leaving more breathing room than 24px."}
           Your choice: {choice ? `${choice}px` : "Undecided"}.
         </p>
         <Button variant="outline" disabled={!choice} onClick={() => setChoice("")}>
@@ -209,9 +219,20 @@ function IconStudy() {
             state: these buttons issue commands.
           </p>
           <p>
-            Next decisions: hit area, tooltip timing, then a combined in-context review. No game UI or game
-            saves change. Mouse/keyboard only; controller review is pending.
+            Next: {hitAreaStep ? "tooltip timing" : "hit area"}, then a combined in-context review. No game UI
+            or game saves change. Mouse/keyboard only; controller review is pending.
           </p>
+          <Button variant="outline" asChild>
+            <a
+              href={
+                hitAreaStep
+                  ? "/design/icon-buttons/index.html"
+                  : "/design/icon-buttons/index.html?step=hit-area"
+              }
+            >
+              {hitAreaStep ? "Review icon size" : "Next: hit area"}
+            </a>
+          </Button>
         </footer>
       </main>
     </TooltipProvider>

@@ -16,3 +16,12 @@
   width: 24px;
   height: 24px;
 }
+
+#root .icon-study [data-hit-area="48"] .study-action {
+  width: 48px;
+  height: 48px;
+}
+#root .icon-study [data-hit-area="52"] .study-action {
+  width: 52px;
+  height: 52px;
+}
