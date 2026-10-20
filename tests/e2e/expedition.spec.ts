@@ -158,6 +158,8 @@ for (const width of [1280, 1920])
         await page.reload();
         await page.getByRole("button", { name: "Journey results", exact: true }).click();
         expect(await state(page)).toEqual(game);
+        await expect(page.getByRole("button", { name: "New journey", exact: true })).toHaveCount(0);
+        await page.getByRole("button", { name: "Main menu", exact: true }).click();
         await page.getByRole("button", { name: "New journey", exact: true }).click();
         expect((await state(page)).phase).toBe("draft");
         expect((await state(page)).keywordXP).toEqual(game.keywordXP);
@@ -492,7 +494,8 @@ test("settings and glossary return to the pause menu; End journey requires confi
     .getByRole("alertdialog", { name: "End journey?" })
     .getByRole("button", { name: "End journey", exact: true })
     .click();
-  await expect(page.getByRole("button", { name: "New journey", exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Main menu", exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "New journey", exact: true })).toHaveCount(0);
   expect((await state(page)).phase).toBe("defeat");
 });
 test("last mana saves the full turn before immediate close and does not replay on resume", async ({

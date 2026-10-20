@@ -45,6 +45,7 @@ describe("player interface", () => {
     const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: "Journey results", exact: true }));
     expect(screen.getByRole("heading", { name: "Returned home" })).toBeTruthy();
+    expect(screen.queryByRole("button", { name: "New journey", exact: true })).toBeNull();
     expect(screen.getByLabelText("Journey gains").textContent).toContain("Lv 2");
     const progress = screen.getByRole("progressbar", { name: "Nature level 2 progress" });
     expect(progress.getAttribute("aria-valuenow")).toBe("4");

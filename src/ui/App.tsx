@@ -525,7 +525,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                 inspect={setInspection}
               />
             ) : (
-              <JourneyResults game={game} send={send} home={() => setRoute("home")} />
+              <JourneyResults game={game} home={() => setRoute("home")} />
             )}
             <div className="sr-only" role="log" aria-live="polite">
               {view.events.map((event) => event.text).join(" ")}

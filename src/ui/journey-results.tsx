@@ -1,19 +1,11 @@
 import { Coins } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { KEYWORDS, keywordLabel, keywordProgress } from "../game/progression";
-import type { Command, GameState } from "../game/types";
+import type { GameState } from "../game/types";
 import { Keyword as KeywordLabel } from "./keyword-text";
 import { Progress } from "./progress";
 
-export function JourneyResults({
-  game,
-  send,
-  home,
-}: {
-  game: GameState;
-  send: (command: Command) => boolean;
-  home: () => void;
-}) {
+export function JourneyResults({ game, home }: { game: GameState; home: () => void }) {
   const summary = game.journey;
   const title =
     game.phase === "victory"
@@ -68,14 +60,8 @@ export function JourneyResults({
         </p>
       )}
       <footer className="journey-results-actions" data-nav-row>
-        <Button variant="outline" onClick={home}>
+        <Button className="primary-menu-action" onClick={home}>
           Main menu
-        </Button>
-        <Button
-          className="primary-menu-action"
-          onClick={() => send({ type: "newRun", seed: Date.now() >>> 0 })}
-        >
-          New journey
         </Button>
       </footer>
     </main>
