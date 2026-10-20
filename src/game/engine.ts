@@ -1,4 +1,4 @@
-import { MERCHANT_PRICE, SPRING_CURRENCY, springRecovery } from "./support";
+import { MERCHANT_PRICE, canVisitCampfire, campfireRecovery, canVisitMerchant } from "./support";
 import { freeze, produce } from "immer";
 import { KEYWORDS, BOONS, cardKeywords, canBuyTalent, hasTalent } from "./progression";
 import {
@@ -24,7 +24,7 @@ import type { Card, Command, CommandResult, GameEvent, GameState } from "./types
 export function createGame(seed = 1): GameState {
   return freeze(
     {
-      version: 14,
+      version: 15,
       support: null,
       discovery: { encountered: [], recruited: [] },
       revision: 0,
@@ -75,7 +75,7 @@ function offerDestinations(state: GameState) {
     pack: Math.floor(random(state) * location(id)!.packs.length),
   }));
   route.chosen = null;
-  const kind = route.step === 1 ? "merchant" : route.step === 2 ? "spring" : null;
+  const kind = route.step === 1 ? "merchant" : null;
   const stock =
     kind === "merchant"
       ? shuffle(
@@ -86,7 +86,7 @@ function offerDestinations(state: GameState) {
           .map((b, i) => ({ slot: `slot-${i}`, boon: b.id, price: MERCHANT_PRICE }))
       : [];
   state.support =
-    kind && (kind !== "merchant" || stock.length)
+    kind && stock.length
       ? {
           id: `support-${route.biome}-${route.step}`,
           kind,
@@ -295,7 +295,6 @@ function afterRewards(state: GameState) {
   if (state.expedition) {
     if (state.expedition.step === 3) {
       state.expedition.biome++;
-      state.expedition.campfireUsed = false;
       state.expedition.step = 0;
     } else state.expedition.step++;
     offerDestinations(state);
@@ -479,13 +478,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
     )
       return reject(state, "Choose a living ally.");
   }
-  if (
-    command.type === "visitCampfire" &&
-    (state.phase !== "teamSelection" ||
-      !state.expedition ||
-      state.expedition.step !== 3 ||
-      state.expedition.campfireUsed)
-  )
+  if (command.type === "visitCampfire" && !canVisitCampfire(state))
     return reject(state, "There is no available Campfire.");
   if (command.type === "rest" && state.phase !== "campfire") return reject(state, "Rest at a Campfire.");
   if (command.type === "newRun" && !["draft", "victory", "defeat"].includes(state.phase))
@@ -549,13 +542,10 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
   )
     return reject(state, "There is no journey to end.");
   const visit = state.support;
-  if (
-    command.type === "enterSupport" &&
-    (state.phase !== "teamSelection" || !visit || visit.resolved || visit.id !== command.visit)
-  )
+  if (command.type === "enterSupport" && (!canVisitMerchant(state) || !visit || visit.id !== command.visit))
     return reject(state, "That visit is unavailable.");
   if (
-    ["buyBoon", "springChoice", "leaveSupport"].includes(command.type) &&
+    ["buyBoon", "leaveSupport"].includes(command.type) &&
     (state.phase !== "support" || !visit || !("visit" in command) || command.visit !== visit.id)
   )
     return reject(state, "That visit is no longer active.");
@@ -571,16 +561,6 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
     )
       return reject(state, "That purchase is unavailable.");
   }
-  if (
-    command.type === "springChoice" &&
-    (visit?.kind !== "spring" ||
-      visit.resolved ||
-      (command.choice !== "heal" && command.choice !== "currency") ||
-      (command.choice === "heal"
-        ? ![...state.team, ...state.reserves].some((c) => springRecovery(c) > 0)
-        : state.currency >= 1_000_000))
-  )
-    return reject(state, "That Spring choice is unavailable.");
   const events: GameEvent[] = [];
   const next = produce(state, (draft) => {
     draft.revision++;
@@ -620,20 +600,6 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         events.push({ kind: "reward", text: "Boon purchased for this journey." });
         break;
       }
-      case "springChoice":
-        if (command.choice === "heal") {
-          for (const c of [...draft.team, ...draft.reserves]) c.health += springRecovery(c);
-        } else {
-          const retained = Math.min(SPRING_CURRENCY, 1_000_000 - draft.currency);
-          draft.currency += retained;
-          if (draft.journey) draft.journey.currency += retained;
-        }
-        draft.support!.resolved = true;
-        events.push({
-          kind: "reward",
-          text: command.choice === "heal" ? "Your roster recovered Health." : "Currency saved.",
-        });
-        break;
       case "beginBattle":
         draft.support = null;
         if (draft.journey) draft.journey.lastBattle = null;
@@ -646,8 +612,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         break;
       case "rest":
         for (const creature of [...draft.team, ...draft.reserves])
-          restoreHealth(creature, Math.round(species(creature.species).health * 0.3), events, true);
-        draft.expedition!.campfireUsed = true;
+          restoreHealth(creature, campfireRecovery(creature), events, true);
         draft.phase = "teamSelection";
         break;
       case "play": {

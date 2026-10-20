@@ -83,9 +83,9 @@ export const GLOSSARY = [
       "Passive effects lasting for the current journey. When offered, choose one of three or skip. Boons end with the journey.",
   },
   {
-    term: "Currency",
+    term: "Gold",
     definition:
-      "Battle-earned currency is permanent. Gold is a currency, not a keyword or talent category. Spending is not implemented.",
+      "Gold earned in battle carries between journeys. Spend Gold at Merchants on Boons for the current journey. Gold is not a keyword or talent category.",
   },
   ...KEYWORD_IDS.filter(
     (id) => KEYWORD_DEFINITIONS[id].availability === "active" && !["health", "block", "mana"].includes(id),

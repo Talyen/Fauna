@@ -1,3 +1,4 @@
+import { campfireRecovery } from "../game/support";
 import { species } from "../game/content";
 import type { Command, GameState } from "../game/types";
 import { Button } from "../components/ui/button";
@@ -15,7 +16,7 @@ export function Campfire({ game, send }: { game: GameState; send: (command: Comm
             <h2>{species(creature.species).name}</h2>
             <p>
               <KeywordText
-                text={`${creature.health}/${species(creature.species).health} Health · Rest +${Math.min(species(creature.species).health - creature.health, Math.round(species(creature.species).health * 0.3))}`}
+                text={`${creature.health}/${species(creature.species).health} Health · Rest +${campfireRecovery(creature)}`}
               />
             </p>
           </div>

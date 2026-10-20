@@ -202,7 +202,7 @@ describe("combat commands and journey health", () => {
     s = accept(decodeSave(encodeSave(s)), { type: "beginBattle" });
     expect(s.team.map((c) => c.health)).toEqual([0, 7, 26]);
   });
-  it("offers one Rest per biome, heals the whole roster including knockouts, and saves exactly once", () => {
+  it("heals the whole roster including knockouts and permits another visit while still hurt", () => {
     let s = produce(run(), (d) => {
       d.phase = "teamSelection";
       d.battle = null;
@@ -221,7 +221,12 @@ describe("combat commands and journey health", () => {
     expect(s.rng).toBe(rng);
     expect(s.encounter).toBe(3);
     expect(dispatch(s, { type: "rest" }).state).toBe(s);
-    expect(dispatch(decodeSave(encodeSave(s)), { type: "visitCampfire" }).accepted).toBe(false);
+    s = accept(decodeSave(encodeSave(s)), { type: "visitCampfire" });
+    s = accept(s, { type: "rest" });
+    s = accept(s, { type: "visitCampfire" });
+    s = accept(s, { type: "rest" });
+    expect(s.team.map((c) => c.health)).toEqual([30, 24, 26]);
+    expect(dispatch(s, { type: "visitCampfire" }).state).toBe(s);
   });
 });
 

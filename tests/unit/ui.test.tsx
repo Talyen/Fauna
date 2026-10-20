@@ -102,7 +102,7 @@ describe("player interface", () => {
     expect(screen.getByRole("heading", { name: "Victory", level: 1 })).toBeTruthy();
     expect(screen.getByRole("heading", { name: "Choose a Recruit" })).toBeTruthy();
     expect(document.querySelectorAll(".recruit-options .creature-card")).toHaveLength(3);
-    expect(screen.getByLabelText("Last battle earnings").textContent).toContain("+20 currency");
+    expect(screen.getByLabelText("Last battle earnings").textContent).toContain("+20 Gold");
     const progress = screen.getByRole("progressbar", { name: "Nature level 2 progress" });
     expect(progress.getAttribute("aria-valuenow")).toBe("14");
     expect(progress.getAttribute("aria-valuemax")).toBe("30");

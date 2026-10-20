@@ -24,7 +24,7 @@ export function JourneyResults({ game, home }: { game: GameState; home: () => vo
             <div className="journey-totals">
               <p>
                 <Coins aria-hidden="true" />
-                <strong>{summary.currency}</strong> currency earned
+                <strong>{summary.currency}</strong> Gold earned
               </p>
             </div>
           ) : null}

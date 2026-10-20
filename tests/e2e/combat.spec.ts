@@ -33,7 +33,9 @@ for (const width of [1280, 1920]) {
     expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(game);
     await page.screenshot({ path: `reports/combat-piles-${width}.png` });
   });
-  test(`Campfire heals once and Health survives entry to the boss at ${width}`, async ({ page }) => {
+  test(`Campfire remains eligible while hurt and Health survives entry to the boss at ${width}`, async ({
+    page,
+  }) => {
     await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
     const game = produce(run(), (s) => {
       s.phase = "teamSelection";
@@ -49,12 +51,12 @@ for (const width of [1280, 1920]) {
     await page.screenshot({ path: `reports/combat-campfire-${width}.png` });
     await page.getByRole("button", { name: "Rest", exact: true }).click();
     await expect(page.locator(".app")).toHaveAttribute("data-save-status", "saved");
-    await expect(page.getByRole("button", { name: "Visit Campfire", exact: true })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Visit Campfire", exact: true })).toHaveCount(1);
     await page.getByRole("button", { name: "Inspect Hollow Heart", exact: true }).click();
     await page.getByRole("button", { name: "Begin battle", exact: true }).click();
     await expect(page.locator(".app")).toHaveAttribute("data-save-status", "saved");
     const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!) as GameState);
     expect(saved.team.map((creature) => creature.health)).toEqual([10, 14, 26]);
-    expect(saved.expedition?.campfireUsed).toBe(true);
+    expect(saved.expedition?.offers).toEqual(game.expedition!.offers);
   });
 }

@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
 import { it, expect, vi, afterEach } from "vitest";
 import { render, screen, fireEvent, cleanup } from "@testing-library/react";
+import { produce } from "immer";
 import { createGame } from "../../src/game/engine";
 import { accept, winBattle } from "./helpers";
 import { SupportOffer, SupportInspector, SupportScreen } from "../../src/ui/support-screen";
@@ -30,4 +31,19 @@ it("resolved purchase leaves its own slot visibly owned and all further purchase
   render(<SupportScreen game={game} send={() => true} />);
   expect((screen.getByRole("button", { name: "Owned" }) as HTMLButtonElement).disabled).toBe(true);
   expect((screen.getByRole("button", { name: "Leave" }) as HTMLButtonElement).disabled).toBe(false);
+});
+
+it.each([19, 20])("shows Merchant only when an item is affordable with %s Gold", (gold) => {
+  const game = produce(merchant(), (d) => {
+    d.currency = gold;
+  });
+  render(<SupportOffer game={game} inspect={() => {}} />);
+  expect(!!screen.queryByRole("button", { name: "Inspect Merchant" })).toBe(gold >= 20);
+});
+it("labels the wallet and prices as Gold", () => {
+  const s = merchant();
+  const game = accept(s, { type: "enterSupport", visit: s.support!.id });
+  render(<SupportScreen game={game} send={() => true} />);
+  expect(screen.getByText(/Gold: 20/)).toBeTruthy();
+  expect(screen.getAllByRole("button", { name: "Buy · 20 Gold" })).toHaveLength(2);
 });

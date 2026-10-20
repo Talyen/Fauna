@@ -11,7 +11,7 @@ export function BattleEarnings({ game, detailed = false }: { game: GameState; de
     <div className="battle-earnings-receipt" aria-label="Last battle earnings">
       {receipt.currency > 0 ? (
         <p className="battle-earnings">
-          <Coins aria-hidden="true" />+{receipt.currency} currency
+          <Coins aria-hidden="true" />+{receipt.currency} Gold
         </p>
       ) : null}
       {detailed ? (
