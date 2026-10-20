@@ -145,6 +145,16 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Proposed: summon an additional ally. Its relationship to deployed creatures is undecided.",
       ["Companions"],
     ),
+    cleanse: entry("Cleanse", "effect", "planned", "Proposed: remove harmful effects from an ally.", [
+      "Cleanses",
+      "Cleansed",
+      "Cleansing",
+    ]),
+    purge: entry("Purge", "effect", "planned", "Proposed: remove beneficial effects from an enemy.", [
+      "Purges",
+      "Purged",
+      "Purging",
+    ]),
   },
   true,
 );

@@ -89,6 +89,8 @@
   --keyword-consume: #a78bfa;
   --keyword-archery: #a3e635;
   --keyword-companion: #fdba74;
+  --keyword-cleanse: #5eead4;
+  --keyword-purge: #e879f9;
   --damage-physical: var(--keyword-physical);
   --damage-fire: var(--keyword-fire);
   --damage-ice: var(--keyword-ice);

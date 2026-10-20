@@ -18,6 +18,15 @@ Alchemy's Holy maps to Fauna's existing Light, and Gold maps to Currency; those 
 
 Before implementing the planned mechanics, decide creature-level timing and duration, stack decay and caps, blocked-hit interactions, knockout and swap behavior, and effect ordering. Freeze/Stun thresholds, Dodge chance, Leech ratio, Wish ownership/deck lifetime, and Companion's relationship to deployed and reserve creatures remain open design decisions. No values for these rules are committed by adding vocabulary.
 
+## Cleanse and Purge
+
+Two additional planned effect keywords complete the removal vocabulary:
+
+- **Cleanse** removes harmful effects from an ally. Its assigned color is teal (`--keyword-cleanse`). Alchemy implements cleansing outside its formal keyword catalog; Fauna gives it an explicit keyword identity.
+- **Purge** removes beneficial effects from an enemy. Its assigned color is fuchsia (`--keyword-purge`).
+
+Both have labels, word aliases and shared color selectors. Like the other planned mechanics, they have no battle resolver, authored cards, XP category or player-facing glossary entry yet. Removal amounts and eligible effects will be defined with the battle implementation. Other suggested keywords remain deferred.
+
 ## Extending the system
 
 1. Add a stable catalog ID with a label, category, definition, availability, and any word aliases. Aliases must be unique among active keywords.

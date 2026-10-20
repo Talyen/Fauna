@@ -846,6 +846,14 @@ button {
 [data-keyword="companion"] {
   color: var(--keyword-companion);
 }
+[data-combat-tone="cleanse"],
+[data-keyword="cleanse"] {
+  color: var(--keyword-cleanse);
+}
+[data-combat-tone="purge"],
+[data-keyword="purge"] {
+  color: var(--keyword-purge);
+}
 .combat-feedback {
   pointer-events: none;
   position: absolute;
