@@ -17,7 +17,7 @@ beforeEach(() => {
       disconnect() {}
     },
   );
-  vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as DOMRectList);
+  vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
   vi.spyOn(HTMLMediaElement.prototype, "play").mockResolvedValue();
   vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {});
   vi.spyOn(HTMLMediaElement.prototype, "load").mockImplementation(() => {});
@@ -37,10 +37,10 @@ describe("artwork-first inspection", () => {
     const user = userEvent.setup();
     render(<App session={session} />);
     try {
-      await user.click(screen.getByRole("button", { name: "Collection", exact: true }));
-      const opener = screen.getByRole("button", { name: "Inspect Mossback", exact: true });
+      await user.click(screen.getByRole("button", { name: "Collection" }));
+      const opener = screen.getByRole("button", { name: "Inspect Mossback" });
       await user.click(opener);
-      const dialog = screen.getByRole("dialog", { name: "Mossback", exact: true });
+      const dialog = screen.getByRole("dialog", { name: "Mossback" });
       expect(dialog.querySelector(".card-details")).toBeNull();
       expect(within(dialog).queryByRole("button", { name: /Previous|Next/ })).toBeNull();
       await user.hover(within(dialog).getByRole("button", { name: "Mossback details" }));
@@ -55,11 +55,11 @@ describe("artwork-first inspection", () => {
       const pinned = within(actionDialog).getByRole("button", { name: /^Bramble Bash,/ });
       await user.hover(pinned);
       expect((await screen.findByRole("tooltip")).textContent).toContain("Mossback · 1 mana");
-      await user.click(within(actionDialog).getByRole("button", { name: "Back", exact: true }));
+      await user.click(within(actionDialog).getByRole("button", { name: "Back" }));
       expect(document.activeElement).toBe(
         within(screen.getByRole("dialog")).getByRole("button", { name: /^Bramble Bash,/ }),
       );
-      await user.click(within(screen.getByRole("dialog")).getByRole("button", { name: "Back", exact: true }));
+      await user.click(within(screen.getByRole("dialog")).getByRole("button", { name: "Back" }));
       expect(screen.queryByRole("dialog")).toBeNull();
       expect(document.activeElement).toBe(opener);
       expect(session.store.getState().game).toEqual(game);
@@ -75,12 +75,12 @@ describe("artwork-first inspection", () => {
     const user = userEvent.setup();
     render(<App session={session} />);
     try {
-      await user.click(screen.getByRole("button", { name: "Collection", exact: true }));
-      const opener = screen.getByRole("button", { name: "Inspect Mossback", exact: true });
+      await user.click(screen.getByRole("button", { name: "Collection" }));
+      const opener = screen.getByRole("button", { name: "Inspect Mossback" });
       act(() => opener.focus());
       await user.keyboard("{Enter}");
       expect(document.activeElement).toBe(
-        within(screen.getByRole("dialog")).getByRole("button", { name: "Back", exact: true }),
+        within(screen.getByRole("dialog")).getByRole("button", { name: "Back" }),
       );
       await user.tab();
       expect((await screen.findByRole("tooltip")).textContent).toContain("Rooted");
@@ -126,7 +126,7 @@ describe("artwork-first inspection", () => {
       expect(dialog.querySelector(".card-details")).toBeNull();
       await user.tab();
       expect((await screen.findByRole("tooltip")).textContent).toContain("Deal 9 Nature damage.");
-      await user.click(within(dialog).getByRole("button", { name: "Back", exact: true }));
+      await user.click(within(dialog).getByRole("button", { name: "Back" }));
       expect(screen.queryByRole("dialog")).toBeNull();
       expect(document.activeElement).toBe(opener);
       expect(session.store.getState().game).toEqual(fixture);
@@ -145,8 +145,8 @@ describe("artwork-first inspection", () => {
     render(<App session={session} />);
     try {
       await user.click(screen.getByRole("button", { name: "Continue" }));
-      await user.click(screen.getByRole("button", { name: "Inspect Bramble Imp", exact: true }));
-      const dialog = screen.getByRole("dialog", { name: "Bramble Imp", exact: true });
+      await user.click(screen.getByRole("button", { name: "Inspect Bramble Imp" }));
+      const dialog = screen.getByRole("dialog", { name: "Bramble Imp" });
       expect(dialog.querySelector(".card-details")).toBeNull();
       await user.hover(within(dialog).getByRole("button", { name: "Bramble Imp details" }));
       const tooltip = await screen.findByRole("tooltip");

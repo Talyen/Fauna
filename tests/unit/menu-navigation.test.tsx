@@ -25,7 +25,7 @@ describe("menu page focus return", () => {
   )("returns from $page via $back to its $origin menu choice", async ({ origin, page, back }) => {
     // jsdom has no layout. Only emulate visibility; this checks focus ownership,
     // not rendered geometry or physical controller behavior.
-    vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as DOMRectList);
+    vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
     const session = createSession(createBrowserPlatform(localStorage), 7);
     await session.load();
     const user = userEvent.setup();
@@ -36,14 +36,12 @@ describe("menu page focus return", () => {
         await user.click(screen.getByRole("button", { name: "Open menu" }));
       }
       const revision = session.store.getState().game.revision;
-      act(() => screen.getByRole("button", { name: page, exact: true }).focus());
+      act(() => screen.getByRole("button", { name: page }).focus());
       await user.keyboard("{Enter}");
-      expect(screen.getByRole("heading", { name: page, exact: true })).toBeTruthy();
+      expect(screen.getByRole("heading", { name: page })).toBeTruthy();
       if (back === "Escape") await user.keyboard("{Escape}");
-      else await user.click(screen.getByRole("button", { name: "Back", exact: true }));
-      await waitFor(() =>
-        expect(document.activeElement).toBe(screen.getByRole("button", { name: page, exact: true })),
-      );
+      else await user.click(screen.getByRole("button", { name: "Back" }));
+      await waitFor(() => expect(document.activeElement).toBe(screen.getByRole("button", { name: page })));
       expect(session.store.getState().game.revision).toBe(revision);
       if (origin === "pause") {
         await user.keyboard("{Escape}");

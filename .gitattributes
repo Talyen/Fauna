@@ -1,0 +1,2 @@
+# Prepared assets are hashed byte for byte on every platform.
+/public/prepared/** -text

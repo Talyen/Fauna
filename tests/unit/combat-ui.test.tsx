@@ -32,7 +32,7 @@ async function open(game: GameState) {
   const session = createSession(createBrowserPlatform(localStorage));
   await session.load();
   render(<App session={session} />);
-  await userEvent.click(screen.getByRole("button", { name: "Continue", exact: true }));
+  await userEvent.click(screen.getByRole("button", { name: "Continue" }));
   return session;
 }
 it("inspects draw and discard piles without changing state or exposing draw order, and returns focus through nested inspection", async () => {
@@ -45,7 +45,7 @@ it("inspects draw and discard piles without changing state or exposing draw orde
     const before = session.store.getState().game;
     const draw = screen.getByRole("button", { name: /^Inspect Draw Pile/ });
     await userEvent.click(draw);
-    const pile = screen.getByRole("dialog", { name: "Draw Pile", exact: true });
+    const pile = screen.getByRole("dialog", { name: "Draw Pile" });
     const cards = within(pile)
       .getAllByRole("button")
       .filter((button) => button.hasAttribute("data-card-id"));
@@ -64,7 +64,7 @@ it("inspects draw and discard piles without changing state or exposing draw orde
     expect(document.activeElement).toBe(draw);
     await userEvent.click(screen.getByRole("button", { name: /^Inspect Discard Pile/ }));
     expect(
-      within(screen.getByRole("dialog", { name: "Discard Pile", exact: true }))
+      within(screen.getByRole("dialog", { name: "Discard Pile" }))
         .getAllByRole("button")
         .filter((button) => button.hasAttribute("data-card-id")),
     ).toHaveLength(1);
@@ -90,7 +90,7 @@ it("shows exact Campfire recovery and commits one persisted Rest without currenc
     expect(
       screen.getByText((_, node) => node?.tagName === "P" && node.textContent === "0/32 Health · Rest +10"),
     ).toBeTruthy();
-    await userEvent.click(screen.getByRole("button", { name: "Rest", exact: true }));
+    await userEvent.click(screen.getByRole("button", { name: "Rest" }));
     await session.flush();
     const after = session.store.getState().game;
     expect(after.team[0]!.health).toBe(10);

@@ -30,11 +30,11 @@ describe("menu browsing", () => {
     const user = userEvent.setup();
     render(<App session={session} />);
     try {
-      await user.click(screen.getByRole("button", { name: "Talents", exact: true }));
-      const potency = screen.getByRole("button", { name: "Potency", exact: true });
+      await user.click(screen.getByRole("button", { name: "Talents" }));
+      const potency = screen.getByRole("button", { name: "Potency" });
       expect(within(potency).getByText("Matching cards gain +1 to their effect.")).toBeTruthy();
       expect(within(potency).getByText("Unlock · 1 point")).toBeTruthy();
-      const shelter = screen.getByRole("button", { name: "Shelter", exact: true });
+      const shelter = screen.getByRole("button", { name: "Shelter" });
       expect(within(shelter).getByText("Requires all earlier rows")).toBeTruthy();
       const revision = session.store.getState().game.revision;
       await user.click(shelter);
@@ -43,7 +43,7 @@ describe("menu browsing", () => {
       expect(
         within(screen.getByRole("button", { name: "Potency, unlocked" })).getByText("Unlocked"),
       ).toBeTruthy();
-      await user.click(screen.getByRole("button", { name: "Mastery", exact: true }));
+      await user.click(screen.getByRole("button", { name: "Mastery" }));
       expect(within(shelter).getByText("Unlock · 1 point")).toBeTruthy();
       await user.click(shelter);
       expect(
@@ -57,7 +57,7 @@ describe("menu browsing", () => {
       await user.click(screen.getByRole("button", { name: "Reset category" }));
       expect(session.store.getState().game.talents).toEqual([]);
       expect(
-        within(screen.getByRole("button", { name: "Potency", exact: true })).getByText("Unlock · 1 point"),
+        within(screen.getByRole("button", { name: "Potency" })).getByText("Unlock · 1 point"),
       ).toBeTruthy();
       expect(within(shelter).getByText("Requires all earlier rows")).toBeTruthy();
     } finally {
@@ -72,7 +72,7 @@ describe("menu browsing", () => {
     const user = userEvent.setup();
     render(<App session={session} />);
     try {
-      await user.click(screen.getByRole("button", { name: "Collection", exact: true }));
+      await user.click(screen.getByRole("button", { name: "Collection" }));
       const game = session.store.getState().game;
       for (const creature of SPECIES) {
         if (game.unlocked.includes(creature.id)) {
