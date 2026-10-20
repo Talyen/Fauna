@@ -35,7 +35,7 @@ describe("player interface", () => {
   it("reopens saved journey gains and starts fresh without losing permanent gains", async () => {
     const started = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
     const battle = produce(accept(started, { type: "beginBattle" }), (d) => {
-      d.battleXP = { nature: 4 };
+      d.battleXP = { nature: 24 };
     });
     const game = accept(battle, { type: "abandon" });
     localStorage.setItem("fauna.save.v1", JSON.stringify(game));
@@ -45,7 +45,11 @@ describe("player interface", () => {
     const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: "Journey results", exact: true }));
     expect(screen.getByRole("heading", { name: "Returned home" })).toBeTruthy();
-    expect(screen.getByLabelText("Journey gains").textContent).toContain("+4 XP");
+    expect(screen.getByLabelText("Journey gains").textContent).toContain("Lv 2");
+    const progress = screen.getByRole("progressbar", { name: "Nature level 2 progress" });
+    expect(progress.getAttribute("aria-valuenow")).toBe("4");
+    expect(progress.getAttribute("aria-valuemax")).toBe("40");
+    expect(screen.queryByText(/\+24 XP|talent point|4 \/ 40 XP/)).toBeNull();
     expect(screen.queryByLabelText("Final team")).toBeNull();
     expect(screen.queryByLabelText("New creature unlocks")).toBeNull();
     expect(screen.queryByLabelText("Relics collected")).toBeNull();
@@ -55,7 +59,7 @@ describe("player interface", () => {
     expect(screen.getByRole("button", { name: "Journey results" })).toBeTruthy();
     await user.click(screen.getByRole("button", { name: "New journey", exact: true }));
     expect(session.store.getState().game.journey).toBeNull();
-    expect(session.store.getState().game.keywordXP.nature).toBe(4);
+    expect(session.store.getState().game.keywordXP.nature).toBe(24);
     await session.dispose();
   });
   it("browses a destination, enemy and action in one dialog without committing or rerolling", async () => {

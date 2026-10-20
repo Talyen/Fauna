@@ -77,7 +77,7 @@ Ordinary victory → recruitment (if available) → relic choice (if awarded) �
 Final victory or defeat → Journey results. Ending a started journey voluntarily also opens results, labeled Returned home. Ending an unfinished starter choice simply returns to the main menu.
 
 - Results show only the outcome, keyword XP and permanent currencies/resources/items earned. Do not show the team, creature unlocks, journey-only relics, location, or journey statistics. Currency is the only authored permanent resource currently; do not invent item or material rewards.
-- Keyword totals include all settled battles and XP banked when returning home. Show permanent keyword progress numbers and talent points earned beneath the bars. Talents remain menu-driven; never prompt purchases here.
+- Keyword totals include all settled battles and XP banked when returning home. Follow Alchemy’s results presentation: keyword name, level (earned points + 1), and progress bar only. Hide numeric XP gains/fractions and points-earned lines here; the Talents screen owns point availability. This is a presentation change; Fauna retains its current 20/60/120 total XP thresholds. Talents remain menu-driven; never prompt purchases here.
 - Banking and totals update atomically with accepted gameplay commands. Browsing results never grants rewards or saves. Report actual retained earnings at progression caps.
 - New journey resets journey totals and roster/relics while preserving permanent progress. Main menu can reopen the last results until a new journey begins; this is not a multi-journey history.
 - Legacy saves preserve their reward/recruit/relic flow. Journey totals are unavailable for journeys that started before tracking existed; do not derive them from lifetime currency or XP.
