@@ -182,6 +182,13 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 - Rule paragraphs are left-aligned.
 - These choices apply to surrounding text and inspection; artwork remains free of text overlays. Preserve fixed text sizes, text-size settings and existing semantic colors.
 
+## Scrolling areas
+
+- Scrollbar thumbs use muted gray and appear on hover or while scrolling when content overflows.
+- Hovering the thumb brightens it slightly.
+- Preserve native wheel/trackpad scrolling without added smoothing, as well as standard keyboard scrolling and primitive behavior.
+- Apply through supported standard primitives and shared tokens; do not build a custom scrollbar interaction state machine. Platform-forced scrollbar visibility takes precedence.
+
 ## Shared preferences
 
 Continue the phone review in batches of independent questions so the user can answer several choices per turn.
