@@ -7,6 +7,29 @@ import { extractFile, listPackage } from "@electron/asar";
 import { assets } from "./assets.mjs";
 const ROOT = path.resolve(import.meta.dirname, "..");
 const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
+// Runtime files shipped by the pinned Electron Windows x64 distribution.
+export const WINDOWS_RUNTIME_FILES = [
+  "resources.pak",
+  "icudtl.dat",
+  "v8_context_snapshot.bin",
+  "snapshot_blob.bin",
+  "chrome_100_percent.pak",
+  "chrome_200_percent.pak",
+  "locales/en-US.pak",
+  "ffmpeg.dll",
+  "libEGL.dll",
+  "libGLESv2.dll",
+  "d3dcompiler_47.dll",
+  "dxcompiler.dll",
+  "dxil.dll",
+  "vulkan-1.dll",
+  "vk_swiftshader.dll",
+  "vk_swiftshader_icd.json",
+];
+export function verifyWindowsRuntime(size) {
+  for (const name of WINDOWS_RUNTIME_FILES)
+    if (!(size(name) > 0)) throw new Error(`Missing or empty Electron runtime: ${name}`);
+}
 export function verifyPE(bytes) {
   if (bytes.length < 64 || bytes.toString("ascii", 0, 2) !== "MZ")
     throw new Error("Missing Windows executable header.");
@@ -106,19 +129,10 @@ export async function verifyPackage(directory = path.join(ROOT, "release/win-unp
     verifyWindowsIdentity(details, expected);
   }
 
-  for (const name of [
-    "resources.pak",
-    "icudtl.dat",
-    "v8_context_snapshot.bin",
-    "chrome_100_percent.pak",
-    "chrome_200_percent.pak",
-    "locales/en-US.pak",
-    "chrome_elf.dll",
-    "ffmpeg.dll",
-    "libEGL.dll",
-    "libGLESv2.dll",
-  ])
-    if (!statSync(path.join(directory, name)).size) throw new Error(`Empty Electron runtime: ${name}`);
+  verifyWindowsRuntime((name) => {
+    const file = statSync(path.join(directory, name));
+    return file.isFile() ? file.size : 0;
+  });
   const archive = path.join(directory, "resources/app.asar");
   const names = listPackage(archive).map((name) => name.replaceAll("\\", "/").replace(/^\//, ""));
   if (

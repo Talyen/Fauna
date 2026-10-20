@@ -312,7 +312,7 @@ function ButtonStudy() {
                 <Button
                   variant="outline"
                   disabled={index === 0}
-                  onClick={() => setStep(decisions[index - 1].id)}
+                  onClick={() => setStep(decisions[index - 1]?.id ?? decision.id)}
                 >
                   Previous behavior
                 </Button>

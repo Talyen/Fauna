@@ -9,6 +9,8 @@ import { compareBalance, pairedStats } from "../../scripts/lib/paired-balance.mj
 import { summarizeSample, comparePerformance } from "../../scripts/lib/performance-metrics.mjs";
 import {
   verifyArchive,
+  verifyWindowsRuntime,
+  WINDOWS_RUNTIME_FILES,
   verifyPE,
   rendererPath,
   verifyWindowsIdentity,
@@ -162,4 +164,14 @@ it("does not let the internal worker bypass report-directory confinement", async
   await expect(worker("unused.json", path.join(os.tmpdir(), "outside-fauna-report.json"))).rejects.toThrow(
     "remain under reports",
   );
+});
+
+it("checks the shipped Electron runtime and rejects missing or empty files", () => {
+  const sizes = new Map(WINDOWS_RUNTIME_FILES.map((name) => [name, 1]));
+  expect(sizes.has("chrome_elf.dll")).toBe(false);
+  expect(() => verifyWindowsRuntime((name) => sizes.get(name))).not.toThrow();
+  sizes.set("dxcompiler.dll", 0);
+  expect(() => verifyWindowsRuntime((name) => sizes.get(name))).toThrow("dxcompiler.dll");
+  sizes.delete("dxcompiler.dll");
+  expect(() => verifyWindowsRuntime((name) => sizes.get(name))).toThrow("dxcompiler.dll");
 });
