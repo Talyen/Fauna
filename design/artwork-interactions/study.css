@@ -101,3 +101,16 @@
     transition: none;
   }
 }
+
+/* Selection owns the highlight; hover never adds a second highlighted frame. */
+#root .art-study .art-sample[data-selected="true"] .review-art::after {
+  border-color: transparent;
+}
+#root
+  .art-study
+  .art-sample[data-selected="true"][data-selected-hover="stronger"]
+  .review-art:not([aria-disabled="true"]):hover {
+  box-shadow:
+    0 0 0 var(--review-ring-gap) var(--background),
+    0 0 0 calc(var(--review-ring-gap) + var(--review-ring-width) + 1px) var(--primary);
+}

@@ -9,3 +9,9 @@ Individual comparisons hold other properties at 2px inner hover frame, no pointe
 Unavailable and knocked-out samples retain focus and hover details but cannot toggle selection. Unavailable artwork remains colored; knockout adds grayscale. Their opacity decisions are separate. The combined preview applies opacity only when its matching availability mode is selected. It combines explicit preferences, reports undecided values and permits selected-plus-focused review. These are selection samples, not implemented inspection, hand fan, combat targeting or reserve-swap flows.
 
 Tooltips use the user's [reviewed choices](../tooltip-interactions/reviewed-choices.ts): immediate, above, 8px gap, 100ms fade and neutral border. Production UI is unchanged. Full context acceptance, controller, desktop and CI validation remain pending.
+
+## Reviewed choices and selected-hover refinement
+
+The user supplied: 2px hover frame, 3.5% hover growth, 3px selection gap, 2px selection thickness, 45% unavailable opacity, and 45% knockout opacity. These are recorded in [reviewed choices](reviewed-choices.ts). The user then rejected the double highlighted border on selected-plus-hovered cards.
+
+Open `/design/artwork-interactions/index.html?step=selected-hover` for the refinement. Both candidates suppress the inner hover frame while selected. Keep single ring retains the chosen 2px selection ring; Strengthen single ring expands that same ring to 3px on hover. All other properties use the six reviewed choices, with availability enabled. Both retain 3.5% growth. Cards begin selected; deselecting restores the usual hover frame, and selecting restores the single-ring treatment. The new preference is independent and undecided until chosen. Keyboard focus remains a separate outer outline. No production artwork behavior changes.

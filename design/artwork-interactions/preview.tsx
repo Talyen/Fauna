@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../src/components/u
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../src/components/ui/tooltip";
 import { ArtCard } from "../../src/ui/art-card";
 import { assetUrl } from "../../src/ui/assets";
+import { reviewedArtworkChoices } from "./reviewed-choices";
 import { reviewedTooltipChoices } from "../tooltip-interactions/reviewed-choices";
 import "@fontsource-variable/inter/wght.css";
 import "../../src/ui/styles.css";
@@ -69,11 +70,28 @@ const steps = [
     instruction:
       "All cards are grayscale and unavailable for selection. Only opacity changes. Hover/focus details stay available.",
   },
+  {
+    id: "selectedHover",
+    title: "Selected hover",
+    options: ["ring", "stronger"],
+    labels: ["Keep single ring", "Strengthen single ring"],
+    recommendation: "Keep single ring: your 3.5% growth already signals hover; selection stays stable.",
+    instruction:
+      "Both start selected and suppress the inner hover frame. Hover to compare an unchanged 2px selection ring against the same ring thickening to 3px. Click to deselect and see your usual 2px hover frame return.",
+  },
 ] as const;
 type StepId = (typeof steps)[number]["id"];
 type Picks = Partial<Record<StepId, string>>;
 const storageKey = "fauna-design-artwork-picks-v1";
-const defaults = { frame: "2", motion: "still", ringGap: "3", ringWidth: "2", unavailable: "", knockout: "" };
+const defaults = {
+  frame: "2",
+  motion: "still",
+  ringGap: "3",
+  ringWidth: "2",
+  unavailable: "",
+  knockout: "",
+  selectedHover: "ring",
+};
 function loadPicks(): Picks {
   try {
     const saved = JSON.parse(localStorage.getItem(storageKey) ?? "{}");
@@ -112,6 +130,7 @@ function Sample({
       data-unavailable={settings.unavailable || undefined}
       data-knockout={settings.knockout || undefined}
       data-selected={selected}
+      data-selected-hover={settings.selectedHover}
     >
       <TooltipProvider delayDuration={Number(reviewedTooltipChoices.delay)}>
         <Tooltip>
@@ -160,7 +179,9 @@ function Sample({
   );
 }
 function ArtworkStudy() {
-  const [stepId, setStepId] = useState("frame");
+  const [stepId, setStepId] = useState(() =>
+    new URLSearchParams(window.location.search).get("step") === "selected-hover" ? "selectedHover" : "frame",
+  );
   const [picks, setPicks] = useState<Picks>(loadPicks);
   const [aspect, setAspect] = useState("creature");
   const [previewState, setPreviewState] = useState("ready");
@@ -249,11 +270,19 @@ function ArtworkStudy() {
                       {String.fromCharCode(65 + i)} · {step.labels[i]}
                     </h3>
                     <Sample
-                      settings={{ ...defaults, [step.id]: value }}
+                      settings={{
+                        ...defaults,
+                        ...(step.id === "selectedHover"
+                          ? { ...reviewedArtworkChoices, unavailable: "", knockout: "" }
+                          : {}),
+                        [step.id]: value,
+                      }}
                       label={step.labels[i]}
                       reduced={reduced}
                       aspect={aspect as "creature" | "action"}
-                      selectedInitially={step.id === "ringGap" || step.id === "ringWidth"}
+                      selectedInitially={
+                        step.id === "ringGap" || step.id === "ringWidth" || step.id === "selectedHover"
+                      }
                     />
                     <label className="study-choice">
                       <RadioGroupItem value={value} />
@@ -361,8 +390,9 @@ function ArtworkStudy() {
       ) : null}
       <footer>
         <p>
-          Baseline: 2px hover frame, no hover movement, 3px selection gap, 2px selection ring. Solid focus
-          stays outside selection. Choices combine only in Review my batch.
+          {stepId === "selectedHover"
+            ? "This refinement uses your recorded artwork choices: 2px frame, 3.5% growth, 3px selection gap and 2px ring. Only the selected-hover ring reaction changes."
+            : "Baseline: 2px hover frame, no hover movement, 3px selection gap, 2px selection ring. Solid focus stays outside selection. Choices combine only in Review my batch."}
         </p>
         <p>
           Your tooltip baseline: immediate, above, 8px gap, 100ms fade, neutral border. These selection
