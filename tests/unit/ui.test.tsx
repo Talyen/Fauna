@@ -225,13 +225,15 @@ describe("player interface", () => {
         document.querySelector<HTMLButtonElement>(`.player-row [data-actor-id="${id}"] button`)!.focus(),
       );
       await user.keyboard("i");
-      expect(document.querySelector(".inspection-health")!.textContent).toBe(expected);
+      await user.tab();
+      expect((await screen.findByRole("tooltip")).textContent).toContain(expected);
       await user.keyboard("{Escape}");
     }
     await user.click(screen.getByRole("button", { name: "Swap" }));
     act(() => screen.getByRole("button", { name: "Mossback, reserve" }).focus());
     await user.keyboard("i");
-    expect(document.querySelector(".inspection-health")!.textContent).toBe("11/32 health · 2 block");
+    await user.tab();
+    expect((await screen.findByRole("tooltip")).textContent).toContain("11/32 health · 2 block");
     expect(session.store.getState().game).toEqual(game);
     await session.dispose();
   });

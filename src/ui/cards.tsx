@@ -28,6 +28,7 @@ type CreatureProps = {
   tooltips?: boolean;
   readout?: boolean;
   invalidTarget?: boolean;
+  speciesKit?: boolean;
 };
 export function CreatureCard({
   kind,
@@ -49,6 +50,7 @@ export function CreatureCard({
   tooltips = true,
   readout = true,
   invalidTarget = false,
+  speciesKit = false,
 }: CreatureProps) {
   const [tooltipOpen, setTooltipOpen] = useState(false);
   useEffect(() => {
@@ -98,7 +100,14 @@ export function CreatureCard({
         <Tooltip open={tooltips && tooltipOpen} onOpenChange={(open) => setTooltipOpen(tooltips && open)}>
           <TooltipTrigger asChild>{artwork}</TooltipTrigger>
           <TooltipContent side={enemyId ? "bottom" : "top"} sideOffset={enemyId && readout ? 44 : 8}>
-            <CreatureDetails kind={kind} name={name} health={health} maxHealth={maxHealth} block={block} />
+            <CreatureDetails
+              kind={kind}
+              name={name}
+              health={health}
+              maxHealth={maxHealth}
+              block={block}
+              speciesKit={speciesKit}
+            />
           </TooltipContent>
         </Tooltip>
       )}

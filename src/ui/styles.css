@@ -457,51 +457,28 @@ button {
 }
 .inspection {
   width: min(
-    calc(var(--art-portrait-width) * 3 + var(--space-4) * 2 + var(--space-6) * 2 + 2px),
+    calc(var(--art-portrait-width) * 3 + var(--screen-item-gap) * 2 + var(--space-6) * 2 + 2px),
     calc(100vw - var(--space-12))
   );
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--screen-section-gap);
 }
 .inspection > * {
   flex-shrink: 0;
 }
-.inspection-creature-art {
-  width: var(--art-landscape-width);
-  margin: auto;
-}
-.inspection-kit {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  width: 100%;
-  max-width: 100%;
-  margin: auto;
-}
-.inspection-health,
-.inspection-kit-label {
-  color: var(--muted-foreground);
-  font-size: var(--text-secondary);
-  font-weight: 400;
-}
-.inspection-passive {
-  line-height: 1.4;
-}
-.inspection-passive strong {
-  display: block;
-  margin-bottom: var(--space-1);
+.inspection > .creature-wrap {
+  margin-inline: auto;
 }
 .inspection-thumbnails {
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, var(--art-portrait-width));
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: var(--space-4);
+  gap: var(--screen-item-gap);
 }
 .inspection-thumbnails .action-card {
   width: var(--art-portrait-width);
-  margin: auto;
 }
 .inspection > .action-card {
   width: var(--art-portrait-width);
@@ -510,16 +487,8 @@ button {
 .inspection.single-card {
   width: min(440px, calc(100vw - var(--space-12)));
 }
-.inspection .card-details {
-  --text-rule: var(--text-inspection);
-  font-size: var(--text-inspection);
-}
 .inspection-back {
   margin-top: calc(-1 * var(--space-6));
-}
-.inspection-action-navigation {
-  display: flex;
-  justify-content: space-between;
 }
 
 .team-selection {
