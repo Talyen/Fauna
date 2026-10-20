@@ -8,6 +8,7 @@ The first five species begin unlocked. Moonhart unlocks after the first journey 
 
 - **Creature cards: 4:3 landscape, full bleed.** Current placeholders are 800 × 600 SVGs.
 - **Location cards: 4:3 landscape.** Original 800 × 600 SVG placeholders in `public/art/locations/`, with names and encounter labels rendered outside the artwork. `scripts/create-location-placeholders.mjs` rewrites only these placeholders.
+- **Relic cards: 3:4 portrait, matching hand cards.** All current relic displays use the blank 600 × 800 `public/art/relic-placeholder.svg`. Replace with dedicated portrait illustrations later; keep names and effects outside the artwork.
 - **Action cards: 3:4 portrait, full bleed.** Current placeholders are 600 × 800 SVGs.
 
 These are separate compositions, not crops of one format into another. Replace the matching files in `public/art/` while retaining their names, or update the owning UI asset references together. Images use their native aspect ratio with no stretching. All text is rendered by the UI, not baked into artwork. Cards contain no text or UI overlays; names, stats and rules live in hover/focus details and centered inspection. Stacked inspection presents three portrait action thumbnails under the creature and passive. Selecting a thumbnail enlarges the complete action card in the same dialog, with Previous/Next cycling. Compact creature tooltips no longer list actions; enemy inspection labels collectible kit separately from battle state.

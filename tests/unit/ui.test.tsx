@@ -4,6 +4,7 @@ import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
 import { accept, run, winBattle } from "./helpers";
 import { encounterSource, location } from "../../src/game/destinations";
+import { RELICS } from "../../src/game/progression";
 import { TargetPreview } from "../../src/ui/target-preview";
 // @vitest-environment jsdom
 import { afterEach, describe, it, expect, vi } from "vitest";
@@ -18,6 +19,32 @@ afterEach(() => {
   localStorage.clear();
 });
 describe("player interface", () => {
+  it("offers blank portrait relic cards with external names and commits the chosen relic", async () => {
+    const game = accept(accept(winBattle(), { type: "continueReward" }), { type: "skipRecruit" });
+    localStorage.setItem("fauna.save.v1", JSON.stringify(game));
+    const session = createSession(createBrowserPlatform(localStorage), 7);
+    await session.load();
+    render(<App session={session} />);
+    const user = userEvent.setup();
+    await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+    for (const id of game.reward!.relics) {
+      const relic = RELICS.find((entry) => entry.id === id)!;
+      const card = screen.getByRole("button", { name: `Choose ${relic.name}`, exact: true });
+      const image = card.querySelector("img")!;
+      expect(image.getAttribute("src")).toBe("./art/relic-placeholder.svg");
+      expect(image.getAttribute("width")).toBe("600");
+      expect(image.getAttribute("height")).toBe("800");
+      expect(card.textContent).toBe("");
+      expect(screen.getByRole("heading", { name: relic.name, exact: true })).toBeTruthy();
+    }
+    const chosen = game.reward!.relics[0]!;
+    await user.click(
+      screen.getByRole("button", { name: `Choose ${RELICS.find((entry) => entry.id === chosen)!.name}` }),
+    );
+    expect(session.store.getState().game.relics).toEqual([chosen]);
+    expect(session.store.getState().game.phase).toBe("teamSelection");
+    await session.dispose();
+  });
   it("shows compact battle earnings beside recruitment without an acknowledgement screen", async () => {
     const started = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
     const game = winBattle(accept(started, { type: "beginBattle" }));

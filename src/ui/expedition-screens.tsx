@@ -1,7 +1,7 @@
 import { Keyword as KeywordLabel, KeywordText } from "./keyword-text";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui/tabs";
 import { useState } from "react";
-import { Coins, Gem, Feather, Shell, Leaf, Circle, Check, Sparkles } from "lucide-react";
+import { Coins, Check, Sparkles } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../components/ui/tooltip";
 import { ActionCard, CreatureCard } from "./cards";
@@ -219,36 +219,26 @@ export function Rewards({ game, send, inspect }: Props) {
       <BattleEarnings game={game} />
       <div className="relic-options">
         {reward.relics.map((id) => {
-          const relic = RELICS.find((r) => r.id === id)!,
-            Icon =
-              id === "emberstone"
-                ? Gem
-                : id === "wind-feather"
-                  ? Feather
-                  : id === "river-shell"
-                    ? Shell
-                    : id === "living-seed"
-                      ? Leaf
-                      : Circle;
+          const relic = RELICS.find((r) => r.id === id)!;
           return (
-            <Tooltip key={id}>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="card"
-                  className="relic-choice"
-                  aria-label={`Choose ${relic.name}`}
-                  onClick={() => send({ type: "chooseRelic", relic: id })}
-                >
-                  <Icon aria-hidden="true" />
-                  <span>{relic.name}</span>
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <strong>{relic.name}</strong>
-                <p>{relic.text}</p>
-              </TooltipContent>
-            </Tooltip>
+            <div className="relic-option" key={id}>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <ArtCard
+                    aspect="action"
+                    artwork="./art/relic-placeholder.svg"
+                    className="relic-choice"
+                    aria-label={`Choose ${relic.name}`}
+                    onClick={() => send({ type: "chooseRelic", relic: id })}
+                  />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <strong>{relic.name}</strong>
+                  <p>{relic.text}</p>
+                </TooltipContent>
+              </Tooltip>
+              <h2>{relic.name}</h2>
+            </div>
           );
         })}
       </div>

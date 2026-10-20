@@ -574,17 +574,18 @@ button {
   gap: var(--space-6);
   margin-top: var(--space-10);
 }
-.relic-choice {
+.relic-option {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
-  padding: var(--space-4) var(--space-2);
-  white-space: normal;
+  gap: var(--space-3);
+  min-width: 0;
+  text-align: center;
 }
-.relic-choice > svg {
-  width: 48px;
-  height: 48px;
-  stroke-width: 1.25;
+.relic-choice {
+  width: 100%;
+}
+.relic-option h2 {
+  font-size: var(--text-name);
 }
 .collection-screen,
 .talents-screen {

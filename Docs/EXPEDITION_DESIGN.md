@@ -65,7 +65,7 @@ These are the agreed directions from the design review. They supersede the proto
 - Spending permanent currency during an journey is a possible future feature; spending locations and an in-run shop flow have not been selected.
 - Initial battle item rewards focus on run-wide relics: passive effects for the whole journey.
 - When a battle awards a relic, offer a choice of three.
-- Choose one relic or skip the reward.
+- Choose one relic or skip the reward. Relics use 3:4 portrait artwork wherever displayed, matching hand cards. Use the shared blank placeholder until dedicated artwork is authored; names stay below the art and effects in hover/focus tooltips.
 - Starter tuning: Currency pays 20 per ordinary victory and 40 for each biome boss. Each ordinary victory offers three distinct unowned relics when three remain. Five starter relics are authored in `src/game/progression.ts`; their ownership lasts only for the journey. Currency spending and material types remain undefined and are not implemented.
 
 ## Screen flow and Journey results
