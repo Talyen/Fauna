@@ -1,4 +1,4 @@
-import { springRecovery } from "../game/support";
+import { canVisitCampfire, canVisitMerchant } from "../game/support";
 import { battleChoices } from "./battle-policy";
 import { createSession, type Session } from "./session";
 import { createGame } from "../game/engine";
@@ -56,32 +56,15 @@ function actor(config: JourneyConfig) {
         return { type: "rest" };
       case "support": {
         const v = state.support!;
-        if (
-          v.kind === "spring" &&
-          state.currency >= 1_000_000 &&
-          ![...state.team, ...state.reserves].some((c) => springRecovery(c) > 0)
-        )
-          return { type: "leaveSupport", visit: v.id };
         if (v.resolved) return { type: "leaveSupport", visit: v.id };
-        if (v.kind === "spring")
-          return {
-            type: "springChoice",
-            visit: v.id,
-            choice: [...state.team, ...state.reserves].some((c) => springRecovery(c) > 0)
-              ? "heal"
-              : state.currency < 1_000_000
-                ? "currency"
-                : "heal",
-          };
         const slot = v.stock.find((s) => s.price <= state.currency);
         return slot
           ? { type: "buyBoon", visit: v.id, slot: slot.slot }
           : { type: "leaveSupport", visit: v.id };
       }
       case "teamSelection":
-        if (state.support && !state.support.resolved)
-          return { type: "enterSupport", visit: state.support.id };
-        if (state.expedition?.step === 3 && !state.expedition.campfireUsed) return { type: "visitCampfire" };
+        if (canVisitMerchant(state)) return { type: "enterSupport", visit: state.support!.id };
+        if (canVisitCampfire(state)) return { type: "visitCampfire" };
         return {
           type: "beginBattle",
           destination: state.expedition ? pick(state.expedition.offers).location : undefined,

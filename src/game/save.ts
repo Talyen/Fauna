@@ -1,3 +1,4 @@
+import { needsCampfire } from "./support";
 import { freeze } from "immer";
 import { MAX_HAND_SIZE } from "./engine";
 import { z } from "zod";
@@ -67,7 +68,7 @@ const creature = z.object({
   combat: combatState.optional(),
 });
 const currentShape = z.object({
-  version: z.literal(14),
+  version: z.literal(15),
   discovery: z.object({ encountered: z.array(speciesId).max(6), recruited: z.array(speciesId).max(6) }),
   revision: z
     .number()
@@ -115,7 +116,6 @@ const currentShape = z.object({
         .int()
         .min(0)
         .max(BIOMES.length - 1),
-      campfireUsed: z.boolean().optional(),
       step: z.number().int().min(0).max(3),
       offers: z.array(z.object({ location: id, pack: z.number().int().min(0).max(10) })).max(3),
       chosen: id.nullable(),
@@ -124,9 +124,9 @@ const currentShape = z.object({
   support: z
     .object({
       id,
-      kind: z.enum(["merchant", "spring"]),
+      kind: z.literal("merchant"),
       biome: z.number().int().min(0).max(1),
-      step: z.number().int().min(1).max(2),
+      step: z.literal(1),
       resolved: z.boolean(),
       purchased: boonId.nullable(),
       stock: z
@@ -181,7 +181,7 @@ export function decodeSave(raw: string): GameState {
         summary.unlocks.some((kind) => !s.unlocked.includes(kind)),
     );
     invalid(
-      summary.currency > summary.victories * 40 + 20 ||
+      summary.currency > summary.victories * 40 ||
         KEYWORDS.some((keyword) => (summary.xp[keyword] ?? 0) > (s.keywordXP[keyword] ?? 0)),
     );
     invalid(
@@ -300,10 +300,8 @@ export function decodeSave(raw: string): GameState {
         v.biome !== s.expedition.biome ||
         v.step !== s.expedition.step ||
         v.id !== `support-${v.biome}-${v.step}` ||
-        !["teamSelection", "support"].includes(s.phase) ||
-        (v.kind === "merchant"
-          ? v.step !== 1 || !v.stock.length
-          : v.step !== 2 || !!v.stock.length || v.purchased !== null) ||
+        !["teamSelection", "support", "campfire"].includes(s.phase) ||
+        !v.stock.length ||
         !unique(v.stock.map((r) => r.slot)) ||
         !unique(v.stock.map((r) => r.boon)) ||
         v.stock.some(
@@ -313,8 +311,7 @@ export function decodeSave(raw: string): GameState {
           (!v.resolved || !s.boons.includes(v.purchased) || !v.stock.some((r) => r.boon === v.purchased))),
     );
   }
-  if (s.phase === "campfire")
-    invalid(!s.expedition || s.expedition.step !== 3 || !!s.expedition.campfireUsed);
+  if (s.phase === "campfire") invalid(!s.expedition || !needsCampfire(s));
   if (["battle", "recruit", "boon"].includes(s.phase)) invalid(!s.battle);
   const rewardPhase = ["recruit", "boon"].includes(s.phase);
   invalid(rewardPhase && !s.reward);

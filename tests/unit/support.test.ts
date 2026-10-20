@@ -24,32 +24,19 @@ it("saves an atomic purchase, rejects repeats and leaves the exact destination o
 });
 it("rejects stale and unaffordable purchases without changing state or RNG", () => {
   const s = merchant();
-  const entered = accept(
-    produce(s, (d) => {
-      d.currency = 0;
-    }),
-    { type: "enterSupport", visit: s.support!.id },
-  );
+  const entered = produce(accept(s, { type: "enterSupport", visit: s.support!.id }), (d) => {
+    d.currency = 0;
+  });
   for (const slot of [entered.support!.stock[0]!.slot, "constructor"])
     expect(dispatch(entered, { type: "buyBoon", visit: entered.support!.id, slot }).state).toBe(entered);
 });
-it("resumes Spring and grants only capped retained currency once", () => {
+it("offers no support visit after the second ordinary victory", () => {
   let s = merchant();
-  s = winBattle(accept(s, { type: "beginBattle", destination: s.expedition!.offers[0]!.location }));
+  s = winBattle(accept(s, { type: "beginBattle" }));
   s = accept(s, { type: "skipRecruit" });
-  s = produce(s, (d) => {
-    d.currency = 999_997;
-  });
-  s = accept(s, { type: "enterSupport", visit: s.support!.id });
-  s = decodeSave(encodeSave(s));
-  const earned = s.journey!.currency;
-  const next = accept(s, { type: "springChoice", visit: s.support!.id, choice: "currency" });
-  expect(next.currency).toBe(1_000_000);
-  expect(next.journey!.currency).toBe(earned + 3);
-  expect(dispatch(next, { type: "springChoice", visit: next.support!.id, choice: "currency" }).state).toBe(
-    next,
-  );
-  expect(decodeSave(encodeSave(next))).toEqual(next);
+  expect(s.expedition!.step).toBe(2);
+  expect(s.support).toBeNull();
+  expect(decodeSave(encodeSave(s))).toEqual(s);
 });
 it("preserves eight battles after Merchant purchases", () => {
   let s = merchant();
@@ -69,20 +56,32 @@ it("preserves eight battles after Merchant purchases", () => {
   }
   expect(s.journey!.victories).toBe(8);
 });
-it("Spring revives knocked-out reserves by the displayed capped amount and cannot heal twice", () => {
-  let s = merchant();
-  s = winBattle(accept(s, { type: "beginBattle", destination: s.expedition!.offers[0]!.location }));
-  s = accept(s, { type: "recruit", species: s.reward!.recruits[0]! });
-  s = produce(s, (d) => {
-    d.team.forEach((c) => {
-      c.health = 0;
-    });
+it("keeps Merchant stock and combat offers through Campfire rest and reload", () => {
+  let s = produce(merchant(), (d) => {
+    d.team[0]!.health = 0;
   });
-  s = accept(s, { type: "enterSupport", visit: s.support!.id });
-  const next = accept(s, { type: "springChoice", visit: s.support!.id, choice: "heal" });
-  expect(next.team.every((c) => c.health > 0)).toBe(true);
-  expect(dispatch(next, { type: "springChoice", visit: next.support!.id, choice: "heal" }).state).toBe(next);
-  expect(decodeSave(encodeSave(next))).toEqual(next);
+  const route = s.expedition,
+    visit = s.support;
+  s = accept(s, { type: "visitCampfire" });
+  s = decodeSave(encodeSave(s));
+  s = accept(s, { type: "rest" });
+  expect(s.expedition).toEqual(route);
+  expect(s.support).toEqual(visit);
+  expect(decodeSave(encodeSave(s))).toEqual(s);
+  expect(accept(s, { type: "enterSupport", visit: visit!.id }).phase).toBe("support");
+});
+it.each([0, 19, 20])("requires enough Gold to enter the Merchant with %s Gold", (gold) => {
+  const s = produce(merchant(), (d) => {
+    d.currency = gold;
+  });
+  const result = dispatch(s, { type: "enterSupport", visit: s.support!.id });
+  expect(result.accepted).toBe(gold >= 20);
+  if (gold < 20) expect(result.state).toBe(s);
+});
+it("rejects obsolete saves and retired Spring visits", () => {
+  const s = merchant();
+  expect(() => decodeSave(JSON.stringify({ ...s, version: 14 }))).toThrow();
+  expect(() => decodeSave(JSON.stringify({ ...s, support: { ...s.support, kind: "spring" } }))).toThrow();
 });
 
 it.each([2, 3, 4])("offers every remaining boss Boon when an explicit checkpoint owns %s Boons", (owned) => {

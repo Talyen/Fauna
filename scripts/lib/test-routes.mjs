@@ -13,7 +13,7 @@ export const routes = {
   },
   progression: {
     files: ["tests/e2e/expedition.spec.ts", "tests/e2e/adoption.spec.ts"],
-    grep: "talent|boon|recruit|victory|journey|unlock|Merchant|Spring",
+    grep: "talent|boon|recruit|victory|journey|unlock|Merchant|Campfire",
   },
   persistence: {
     files: ["tests/e2e/expedition.spec.ts", "tests/e2e/combat-controls.spec.ts"],

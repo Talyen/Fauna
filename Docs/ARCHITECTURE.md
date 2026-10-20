@@ -22,7 +22,7 @@ A linear-congruential RNG is explicit state. Destination offers, shuffles and in
 
 Development saves are disposable: there are no released player saves to preserve. Do not implement migrations or backward compatibility unless explicitly requested. Obsolete formats are rejected and can be reset through the existing recovery flow. The canonical agent policy is in [AGENTS.md](../AGENTS.md#development-saves).
 
-Current save version 14 is validated by Zod and semantic checks for content IDs, ownership, unique card zones, health bounds, lineup completeness, destination offers, and phase/outcome coherence. Only the current format is supported in browser and desktop storage; fixtures track that format. Valid current-format backups remain recoverable.
+Current save version 15 is validated by Zod and semantic checks for content IDs, ownership, unique card zones, health bounds, lineup completeness, destination offers, and phase/outcome coherence. Only the current format is supported in browser and desktop storage; fixtures track that format. Valid current-format backups remain recoverable.
 
 Battle settlement banks actual retained currency and keyword XP once. Ordinary fights offer recruitment only; intermediate bosses offer up to three unowned Boons only. The shared Reward screen consumes committed receipts and accepts a choice or Skip, with no acknowledgement phase or Continue command. No eligible choice advances immediately; final victory and defeat go directly to Journey results. The journey summary retains the outcome, battle count, gains, new unlocks, and last-battle receipt; opening results never grants rewards or saves.
 
@@ -52,7 +52,7 @@ Permanent discovery stores encountered and recruited species separately from sta
 
 `src/game/combat.ts` owns packet mitigation, seeded Dodge and crit, status buildup/ticks, Leech, crowd control, immunity and Death's Door. The command resolver owns turn sequencing and final settlement. Structured supplemental effects in content supply the same descriptions and keyword classification used by commands. Enemies select one of their species' three supported abilities without immediately repeating the last choice. Their supported descriptions omit player-only draw and Mana effects. Selection happens at the action window, never during inspection, and next intentions remain hidden.
 
-Health and knockouts persist through victories, rewards, lineup changes and destination entry. Battle setup resets combat effects without restoring Health. A once-per-biome Campfire appears alongside the boss destination. Visiting it enters a saved Campfire phase; Rest restores 30% of maximum Health to every roster creature, including knockouts, and returns to the same boss offer. Rest does not advance the encounter or award currency/XP; its saved used flag prevents repeat healing and resets in the next biome.
+Health and knockouts persist through victories, rewards, lineup changes and destination entry. Battle setup resets combat effects without restoring Health. Campfire appears beside destination choices whenever any roster creature, including a reserve or knockout, is missing at least 30% of maximum Health. Rest restores 30% maximum Health to the whole roster, capped at full Health, and returns to the same combat offers without advancing the encounter or changing RNG. It remains available while the threshold is met. Visiting enters a saved Campfire phase. Rest awards no Gold or XP. Eligibility and displayed recovery share the gameplay helpers in `src/game/support.ts`.
 
 Draw and discard surfaces use blank portrait art and the existing modal/inspection owners. Pile viewers sort by definition and instance identity, never draw order. Browsing does not publish gameplay, consume RNG or save.
 
@@ -68,9 +68,9 @@ Talent categories are consolidated independently of combat damage identities. Th
 
 ## Support visits and spending
 
-Each biome offers an optional Merchant after the first ordinary victory and Sheltered Spring after the second. These saved visits preserve the combat offers and do not replace or advance battles. Merchant stock contains up to two unowned Boons at 20 permanent currency each, with one purchase per visit. Spring offers 15% capped roster recovery or 10 retained currency. Entering commits a visit; leaving consumes it, and beginning the next battle forfeits it. Inspection is read-only. Commands address visit/slot identities and validate before mutation; reload cannot refresh stock or repeat benefits.
+Each biome offers an optional Merchant after the first ordinary victory. It is visible and enterable only when at least one stocked item is affordable. These saved visits preserve combat offers and do not replace or advance battles. Merchant stock contains up to two unowned Boons at 20 Gold each, with one purchase per visit. Gold is the existing permanent currency. Entering commits a visit; leaving consumes it, and beginning the next battle forfeits it. Inspection is read-only. Commands address visit/slot identities and validate before mutation; reload cannot refresh stock or repeat purchases. Merchant state remains valid during a Campfire visit.
 
-Journey currency measures gross retained earnings, independently of the remaining wallet. Boss rewards contain up to three eligible unowned Boons and skip only an empty pool. Support state, stock, price bounds, receipts and phases are validated together in save version 14; obsolete development saves are rejected.
+Journey currency measures gross retained earnings, independently of the remaining wallet. Boss rewards contain up to three eligible unowned Boons and skip only an empty pool. Support state, stock, price bounds, receipts and phases are validated together in save version 15; obsolete development saves are rejected.
 
 ## Cloud reconciliation and device preferences
 

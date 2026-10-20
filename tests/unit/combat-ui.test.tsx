@@ -96,8 +96,8 @@ it("shows exact Campfire recovery and commits one persisted Rest without currenc
     expect(after.team[0]!.health).toBe(10);
     expect(after.keywordXP).toEqual(before.keywordXP);
     expect(after.currency).toBe(before.currency);
-    expect(screen.queryByRole("button", { name: "Visit Campfire" })).toBeNull();
-    expect(JSON.parse(localStorage.getItem("fauna.save.v1")!).expedition.campfireUsed).toBe(true);
+    expect(screen.getByRole("button", { name: "Visit Campfire" })).toBeTruthy();
+    expect(JSON.parse(localStorage.getItem("fauna.save.v1")!).team[0].health).toBe(10);
   } finally {
     await act(() => session.dispose());
   }

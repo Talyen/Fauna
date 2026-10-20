@@ -1,3 +1,4 @@
+import { canVisitCampfire } from "../game/support";
 import { SupportOffer } from "./support-screen";
 import { assetUrl } from "./assets";
 import { KeywordText } from "./keyword-text";
@@ -37,7 +38,7 @@ export function TeamSelection({ game, send, inspect, deck }: Props & { deck: () 
         </header>
         <section className="destination-grid" data-nav-row aria-label="Destinations">
           <SupportOffer game={game} inspect={inspect} />
-          {route.step === 3 && !route.campfireUsed ? (
+          {canVisitCampfire(game) ? (
             <div className="destination-option">
               <ArtCard
                 aspect="creature"

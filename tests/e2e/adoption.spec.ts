@@ -124,7 +124,7 @@ for (const width of [1280, 1920])
     ).toBe(fixture.revision);
     await page.getByRole("button", { name: "Inspect Merchant", exact: true }).click();
     await page.getByRole("button", { name: "Enter", exact: true }).click();
-    await page.getByRole("button", { name: "Buy · 20 currency", exact: true }).first().click();
+    await page.getByRole("button", { name: "Buy · 20 Gold", exact: true }).first().click();
     await expect(page.getByRole("button", { name: "Owned", exact: true })).toBeDisabled();
     await page.screenshot({ path: `reports/merchant-${width}.png`, fullPage: true });
     await page.reload();

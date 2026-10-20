@@ -3,7 +3,6 @@ import { useStore } from "zustand";
 import type { Session } from "../application/session";
 import type { DisplayState } from "../platform/ports";
 import { decodeSave } from "../game/save";
-import { supportTitle } from "../game/support";
 import type { GameState } from "../game/types";
 import { BIOMES } from "../game/destinations";
 import { Button } from "../components/ui/button";
@@ -98,7 +97,7 @@ export function CloudStatus({ session }: { session: Session }) {
   );
 }
 function phaseLabel(game: GameState) {
-  if (game.phase === "support" && game.support) return supportTitle(game.support.kind);
+  if (game.phase === "support" && game.support) return "Merchant";
   return {
     draft: "Choose a starter",
     teamSelection: "Destinations",
@@ -156,7 +155,7 @@ export function CloudRecovery({ session }: { session: Session }) {
                 </h2>
                 <p>
                   {game.expedition ? BIOMES[game.expedition.biome]!.name : "Journey"} · {phaseLabel(game)} ·{" "}
-                  {game.currency} currency · {game.wins} wins
+                  {game.currency} Gold · {game.wins} wins
                 </p>
                 <Button
                   disabled={cloud.status !== "Conflict"}

@@ -22,7 +22,7 @@ These are the agreed directions from the design review. They supersede the proto
 ## Biomes and destinations
 
 - New journeys travel through Fernwood, then Moonwater Marsh. Each biome has three ordinary encounters followed by its boss; only the final boss completes the journey and unlocks Moonhart.
-- After each ordinary victory and its rewards, choose from three fresh locations in the current biome. The immediately visited location is excluded from the next offer. Boss steps offer one location. There is no branching map or Elite category. A Campfire is available once in each biome beside its boss offer. Rest heals every roster creature by 30% of maximum Health, including knockouts, then returns to that boss offer without advancing combat progress.
+- After each ordinary victory and its rewards, choose from three fresh locations in the current biome. The immediately visited location is excluded from the next offer. Boss steps offer one location. There is no branching map or Elite category. Campfire appears beside destination choices whenever any roster creature, including a reserve or knockout, is missing at least 30% of maximum Health. Rest restores 30% maximum Health to the whole roster, capped at full Health, and returns to the same combat offers without advancing the encounter or changing RNG. It remains available while the threshold is met.
 - Each location uses a 4:3 illustration with its name and **Combat** or **Boss** below the artwork. Campfire uses Rest beneath its location art; entering it commits a saved visit and exposes Rest as its only option. A quiet heading shows the biome and current encounter within it.
 - Opening a location is inspection, not commitment. Show its exact enemy group; inspect each creature's battle health and collectible kit in the same dialog. Back/Escape returns action → creature → location → destination screen. Begin battle commits the inspected location directly.
 - Seeded gameplay chooses location offers and packs once when entering the choice screen. Save those offers and the chosen location. Inspection, cancellation, menus, and reload never reroll enemies or consume randomness.
@@ -59,9 +59,9 @@ These are the agreed directions from the design review. They supersede the proto
 
 ## Currency and items
 
-- All currency is permanent and carries between journeys.
+- All Gold is permanent and carries between journeys.
 - Currency funds meta progression. Specific purchases are **TBD**.
-- Each biome offers a Merchant after its first ordinary victory. Buy one of up to two unowned journey Boons for 20 permanent currency, or Leave. Currency spending is atomic and reduces the wallet, while journey earnings remain gross retained income.
+- Each biome offers a Merchant after its first ordinary victory when an item is affordable. Buy one of up to two unowned journey Boons for 20 Gold, or Leave. Currency spending is atomic and reduces the wallet, while journey earnings remain gross retained income.
 - Initial battle item rewards focus on run-wide boons: passive effects for the whole journey.
 - When a battle awards a Boon, offer up to three distinct unowned choices.
 - Choose one boon or skip the reward. Boons use 3:4 portrait artwork wherever displayed, matching hand cards. Tattered Pages, Bone Charm, Ironwood Buckler and Icy Heart use copied Alchemy artwork; names stay below the art and effects in hover/focus tooltips. Owned Boons are inspectable from the menu during a journey.
@@ -101,6 +101,6 @@ Development builds add Skip combat to the battle pause menu. It settles a normal
 
 ## Optional support visits
 
-Merchant and Sheltered Spring appear beside combat destinations after the first and second ordinary victories respectively. Neither replaces a battle. Inspecting and canceling is read-only; Enter commits the saved visit. Leave consumes it, even without taking a benefit, and beginning the next battle forfeits the opportunity. Returning preserves exact combat offers and enemy packs. There are no restocks or repeated visits in a biome.
+Merchant appears beside combat destinations after the first ordinary victory in each biome, only when at least one stocked item is affordable. It does not replace a battle. Inspecting and canceling is read-only; Enter commits the saved visit and rechecks affordability. Leave consumes it, even without buying, and beginning the next battle forfeits the opportunity. Returning preserves exact combat offers and enemy packs. There are no restocks or repeated Merchant visits in a biome.
 
-The Merchant offers up to two distinct unowned Boons for 20 currency each and allows one purchase. Bought Boons last only for that journey; they do not become permanent unlocks. Omit a Merchant with no eligible stock. Saved stock and prices cannot reroll on reload. The Spring offers one choice: restore 15% maximum Health to every roster creature, including knockouts, or retain up to 10 currency below the wallet cap. Disable an option with no benefit; Leave remains available. Recovery uses Campfire rounding and caps. No support choice grants keyword XP or recruitment. Campfire and all eight battles retain their ordinary rules.
+The Merchant offers up to two distinct unowned Boons for 20 Gold each and allows one purchase. Gold is the existing permanent currency and carries between journeys. Bought Boons last only for that journey; they do not become permanent unlocks. Omit a Merchant with no eligible stock or insufficient Gold. Saved stock and prices cannot reroll on reload. Campfire visits preserve any Merchant offer and its purchase receipt. No visit grants keyword XP or recruitment, and all eight battles remain. Sheltered Springs are removed.

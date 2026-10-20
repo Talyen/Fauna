@@ -70,7 +70,7 @@ export interface JourneySummary {
   lastBattle: { xp: KeywordXP; currency: number } | null;
 }
 export interface GameState {
-  version: 14;
+  version: 15;
   discovery: { encountered: SpeciesId[]; recruited: SpeciesId[] };
   revision: number;
   rng: number;
@@ -89,14 +89,13 @@ export interface GameState {
   encounter: number;
   expedition: {
     biome: number;
-    campfireUsed?: boolean;
     step: number;
     offers: { location: string; pack: number }[];
     chosen: string | null;
   } | null;
   support: {
     id: string;
-    kind: "merchant" | "spring";
+    kind: "merchant";
     biome: number;
     step: number;
     resolved: boolean;
@@ -125,7 +124,6 @@ export type Command =
   | { type: "rest" }
   | { type: "enterSupport"; visit: string }
   | { type: "buyBoon"; visit: string; slot: string }
-  | { type: "springChoice"; visit: string; choice: "heal" | "currency" }
   | { type: "leaveSupport"; visit: string }
   | { type: "recruit"; species: SpeciesId; replace?: string }
   | { type: "skipRecruit" }
