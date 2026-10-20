@@ -640,10 +640,19 @@ for (const [width, height] of [
       .locator(".creature-card img")
       .evaluateAll((imgs) => Promise.all(imgs.map((img) => (img as HTMLImageElement).decode())));
     await fits(page);
-    const creature = await page.locator(".player-row .creature-card").first().boundingBox();
+    expect(
+      await page
+        .locator(".player-row .creature-card")
+        .first()
+        .evaluate((el: HTMLElement) => ({
+          width: el.offsetWidth,
+          height: el.offsetHeight,
+        })),
+    ).toEqual({ width: 293, height: 220 });
     for (const card of await page.locator(".hand .action-card").all()) {
-      const box = await card.boundingBox();
-      expect(Math.abs(box!.height - creature!.height)).toBeLessThan(1);
+      expect(
+        await card.evaluate((el: HTMLElement) => ({ width: el.offsetWidth, height: el.offsetHeight })),
+      ).toEqual({ width: 180, height: 240 });
       await expect(card.locator("img")).toHaveAttribute("width", "600");
     }
     await page.screenshot({ path: `reports/implementation/battle-${width}.png` });
