@@ -41,7 +41,7 @@ export function moveFocus(direction: "left" | "right" | "up" | "down") {
   }
   if (
     (root === document && current.closest(".battle-screen, .team-selection, .talents-screen")) ||
-    current.closest(".swap-roster")
+    current.closest(".swap-roster, .settings-controls")
   ) {
     const rows = Array.from(
       root.querySelectorAll<HTMLElement>(".enemy-row, .player-row, .hand, [data-nav-row]"),

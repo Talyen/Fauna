@@ -370,6 +370,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
               <fieldset>
                 <legend>Text size</legend>
                 <RadioGroup
+                  data-nav-row
                   orientation="vertical"
                   aria-label="Text size"
                   value={String(scale)}

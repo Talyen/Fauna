@@ -11,7 +11,7 @@ export function AudioSettings({
   return (
     <fieldset>
       <legend>Audio</legend>
-      <label className="setting-row" htmlFor="sound-setting">
+      <label data-nav-row className="setting-row" htmlFor="sound-setting">
         <span>Sound</span>
         <Switch
           id="sound-setting"
@@ -26,7 +26,7 @@ export function AudioSettings({
           ["effects", "Sound effects"],
         ] as const
       ).map(([key, label]) => (
-        <div key={key} className="setting-row" role="group" aria-label={`${label} volume`}>
+        <div data-nav-row key={key} className="setting-row" role="group" aria-label={`${label} volume`}>
           <span>{label}</span>
           <div className="volume-controls">
             <Button
@@ -53,7 +53,7 @@ export function AudioSettings({
           </div>
         </div>
       ))}
-      <label className="setting-row" htmlFor="background-mute">
+      <label data-nav-row className="setting-row" htmlFor="background-mute">
         <span>Mute in background</span>
         <Switch
           id="background-mute"

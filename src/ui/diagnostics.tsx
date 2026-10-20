@@ -8,7 +8,7 @@ export function DiagnosticViewer({ diagnostics, desktop }: { diagnostics: Diagno
   const [open, setOpen] = useState(false);
   const id = useId();
   return (
-    <section className="diagnostic-viewer" aria-label="Local diagnostics">
+    <section className="diagnostic-viewer" data-nav-row aria-label="Local diagnostics">
       <Button variant="ghost" aria-expanded={open} aria-controls={id} onClick={() => setOpen(!open)}>
         Diagnostics
       </Button>

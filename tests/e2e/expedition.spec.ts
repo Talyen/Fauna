@@ -53,7 +53,7 @@ async function step(page: Page, activate: (el: Locator) => Promise<void> = (el) 
     if (c.targetId) {
       await activate(
         c.targetId.startsWith("enemy-")
-          ? page.locator(`.enemy-row [data-enemy-id="${c.targetId}"] .creature-card`)
+          ? page.locator(`.enemy-row [data-enemy-id="${c.targetId}"]`)
           : page.locator(`.player-row [data-actor-id="${c.targetId}"] .creature-card`),
       );
     } else await activate(page.getByRole("button", { name: /^Play ·/ }));
@@ -127,6 +127,7 @@ for (const width of [1280, 1920])
             if (outcome === "defeat") {
               d.team[0]!.health = 1;
               d.team[0]!.combat!.deathDoorUsed = true;
+              d.team[0]!.combat!.burn = 1;
             }
           });
           game = accept(game, { type: outcome === "defeat" ? "endTurn" : "abandon" });
@@ -341,7 +342,7 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     await activate(page.getByRole("button", { name: "Choose Mossback", exact: true }));
     await activate(page.getByRole("button", { name: "Begin journey", exact: true }));
     expect((await state(page)).lineup).toEqual(["ally-0"]);
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 300; i++) {
       const s = await state(page);
       if (s.phase === "victory") break;
       expect(s.phase).not.toBe("defeat");

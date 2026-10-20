@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { connectInput, gamepadActions, type InputAction } from "../../src/ui/input";
+import { connectInput, gamepadActions, moveFocus, type InputAction } from "../../src/ui/input";
 
 afterEach(() => {
   vi.unstubAllGlobals();
@@ -195,5 +195,38 @@ it("checks browser focus even if a blur event was missed", () => {
     expect(h.actions).toEqual(["confirm"]);
   } finally {
     h.dispose();
+  }
+});
+
+it("moves through settings rows without skipping the offset Sound switch", () => {
+  const root = document.createElement("div");
+  root.className = "settings-controls";
+  root.innerHTML = `<section data-nav-row><button id="diagnostic">Diagnostics</button></section>
+    <label data-nav-row><button id="sound" role="switch">Sound</button></label>
+    <div data-nav-row><button id="less">Decrease</button><button id="more">Increase</button></div>`;
+  document.body.append(root);
+  vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
+  vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockImplementation(function (this: HTMLElement) {
+    const positions: Record<string, [number, number, number]> = {
+      diagnostic: [0, 0, 200],
+      sound: [300, 60, 44],
+      less: [180, 120, 44],
+      more: [300, 120, 44],
+    };
+    const [x, y, width] = positions[this.id] ?? [0, 0, 0];
+    return { x, y, width, height: 44 } as DOMRect;
+  });
+  try {
+    root.querySelector<HTMLButtonElement>("#diagnostic")!.focus();
+    moveFocus("down");
+    expect(document.activeElement?.id).toBe("sound");
+    moveFocus("down");
+    expect(document.activeElement?.id).toBe("more");
+    moveFocus("left");
+    expect(document.activeElement?.id).toBe("less");
+    moveFocus("up");
+    expect(document.activeElement?.id).toBe("sound");
+  } finally {
+    root.remove();
   }
 });
