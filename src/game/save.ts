@@ -1,7 +1,7 @@
 import { freeze } from "immer";
 import { MAX_HAND_SIZE } from "./engine";
 import { z } from "zod";
-import { CARDS, INITIAL_SPECIES, SPECIES, species } from "./content";
+import { CARDS, INITIAL_SPECIES, species } from "./content";
 import { BIOMES, location, encounterSource, finalEncounter, bossEncounter } from "./destinations";
 import { KEYWORDS, RELICS, TALENTS, talentPoints } from "./progression";
 import type { GameState } from "./types";
@@ -36,7 +36,8 @@ const battle = z
   .nullable();
 const creature = z.object({ id, species: speciesId, health: natural, block: natural, attacked: z.boolean() });
 const currentShape = z.object({
-  version: z.literal(10),
+  version: z.literal(11),
+  discovery: z.object({ encountered: z.array(speciesId).max(6), recruited: z.array(speciesId).max(6) }),
   revision: z
     .number()
     .int()
@@ -108,6 +109,8 @@ export function decodeSave(raw: string): GameState {
   const invalid = (condition: boolean) => {
     if (condition) throw new Error("Save contains inconsistent game data.");
   };
+  invalid(!unique(s.discovery.encountered) || !unique(s.discovery.recruited));
+  invalid(s.discovery.recruited.some((kind) => !s.discovery.encountered.includes(kind)));
   if (s.journey) {
     const summary = s.journey;
     invalid(
@@ -167,7 +170,6 @@ export function decodeSave(raw: string): GameState {
       !unique(s.selected) ||
       INITIAL_SPECIES.some((kind) => !s.unlocked.includes(kind)) ||
       s.selected.some((kind) => !s.unlocked.includes(kind)) ||
-      s.roster.some((kind) => !s.unlocked.includes(kind)) ||
       s.wins > 0 !== s.unlocked.includes("moonhart"),
   );
   invalid(
@@ -293,10 +295,4 @@ export function decodeSave(raw: string): GameState {
 export function encodeSave(state: GameState) {
   return JSON.stringify(state);
 }
-export function validateContent() {
-  if (!unique(SPECIES.map((s) => s.id)) || !unique(CARDS.map((c) => c.id)))
-    throw new Error("Duplicate content IDs.");
-  for (const creature of SPECIES)
-    if (CARDS.filter((c) => c.species === creature.id).length !== 3)
-      throw new Error(`${creature.name} must contribute three cards.`);
-}
+export { validateContent } from "./content-validation";

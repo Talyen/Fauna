@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "dev:desktop": "node scripts/dev-desktop.mjs",
+    "dev:desktop": "node scripts/preview.mjs --desktop",
     "check": "node scripts/check.mjs",
     "check:full": "tsc --noEmit && oxlint src tests scripts desktop design --deny-warnings && prettier --check . && node scripts/boundaries.mjs && node scripts/ui-contract.mjs",
     "format": "prettier --write .",
@@ -22,7 +22,17 @@
     "test:desktop": "node scripts/smoke-desktop.mjs",
     "package:win": "npm run build && electron-builder --win --x64 --dir",
     "verify": "node scripts/check.mjs",
-    "verify:full": "npm run check:full && npm run test:full && npm run build && npm run test:e2e"
+    "verify:full": "npm run check:full && npm run content:audit && npm run test:full && npm run build && npm run test:e2e",
+    "task:create": "node scripts/worktree.mjs",
+    "preview:task": "node scripts/preview.mjs",
+    "assets:prepare": "node scripts/assets.mjs --prepare",
+    "assets:check": "node scripts/assets.mjs --sources",
+    "assets:check:outputs": "node scripts/assets.mjs --outputs",
+    "content:audit": "node scripts/content-audit.mjs",
+    "balance:playthrough": "node scripts/run-playthrough.mjs",
+    "predev": "npm run assets:check:outputs",
+    "prebuild": "npm run assets:check:outputs",
+    "audio:review": "node scripts/audio-review.mjs"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.3.0",

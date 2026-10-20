@@ -1,3 +1,4 @@
+import { assetUrl } from "./assets";
 import { useEffect, useState, type ReactNode } from "react";
 import { BattleReadout } from "./target-preview";
 import { ArtCard } from "./art-card";
@@ -57,7 +58,7 @@ export function CreatureCard({
   const artwork = (
     <ArtCard
       aspect="creature"
-      artwork={`./art/${kind}.svg`}
+      artwork={assetUrl(`creature.${kind}`)}
       presentation={presentation}
       className={[selected ? "selected" : "", invalidTarget ? "invalid-target" : ""].join(" ")}
       data-species={kind}
@@ -175,7 +176,7 @@ export function ActionCard({
   const artwork = (
     <ArtCard
       aspect="action"
-      artwork={`./art/${def.species}-action.svg`}
+      artwork={assetUrl(`action.${def.species}`)}
       presentation={presentation}
       tabIndex={presentation ? undefined : 0}
       className={selected ? "selected" : undefined}

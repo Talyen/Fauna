@@ -2,9 +2,13 @@ const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("node:path");
 const { pathToFileURL } = require("node:url");
 const { createStorage } = require("./storage.cjs");
+const { isDevelopmentUrl } = require("./dev-url.cjs");
 app.setName("Fauna");
-if (process.env.FAUNA_SMOKE_USER_DATA)
-  app.setPath("userData", path.resolve(process.env.FAUNA_SMOKE_USER_DATA));
+if (process.env.FAUNA_PREVIEW_USER_DATA || process.env.FAUNA_SMOKE_USER_DATA)
+  app.setPath(
+    "userData",
+    path.resolve(process.env.FAUNA_PREVIEW_USER_DATA || process.env.FAUNA_SMOKE_USER_DATA),
+  );
 if (!app.requestSingleInstanceLock()) app.exit(0);
 app.on("second-instance", () => {
   if (window && !window.isDestroyed()) {
@@ -32,7 +36,7 @@ function finishClose() {
 let window;
 let storage;
 const dev = process.env.FAUNA_DEV_URL;
-if (dev && dev !== "http://127.0.0.1:48209") throw new Error("Untrusted development URL.");
+if (dev && !isDevelopmentUrl(dev)) throw new Error("Untrusted development URL.");
 const entry = pathToFileURL(path.join(__dirname, "../dist/index.html")).href;
 const trusted = (url) => (dev ? url === `${dev}/` || url === dev : url === entry);
 app.whenReady().then(async () => {

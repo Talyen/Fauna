@@ -1,8 +1,10 @@
+import { browserDiagnostics } from "./preferences";
 import type { Platform, SaveCandidate } from "./ports";
 const KEY = "fauna.save.v1";
 export function createBrowserPlatform(storage?: Storage): Platform {
   return {
     desktop: false,
+    diagnostics: browserDiagnostics(),
     steam: { available: false },
     saves: {
       async readCandidates() {

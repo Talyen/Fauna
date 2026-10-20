@@ -117,3 +117,9 @@ Browser controller simulation does not verify physical controller behavior. Repo
 - Mouse use stays hover-driven: no programmatic battle targeting focus, automatic hand focus, focus-only tooltip or focus lift. Navigation keys, Tab and controller navigation intentionally activate focus. After play, keyboard/controller focus moves to the nearest remaining hand slot. Pointer selection itself still lifts the selected card.
 
 The shared [keyword catalog](KEYWORDS.md) assigns every current and planned keyword a semantic `--keyword-<id>` foreground. Current resource and damage tokens alias that palette. Card prose, passives, glossary definitions, talent tabs and XP feedback consume the same identity. Planned keywords remain outside automatic prose highlighting and the player glossary until their rules are implemented.
+
+## Collection and audio settings
+
+Collection has All, Known and Unknown shadcn tabs. Known creatures reuse inspection and display concise Encountered, Recruited and Starter states independently. Unknown creatures remain locked and reveal no kit details. Filters are transient; inspection restores its connected opener. Browsing never grants discovery.
+
+Settings contains a Sound switch, Master/Music/Sound effects volume controls in 10-point steps, and Mute in background. Increment/decrement buttons retain native keyboard/controller activation and readable percentage outputs. Audio preferences persist separately from progression; setting changes apply live without replaying actions. Diagnostics offers explicit local copy with actionable failure feedback. Rendered review and a listening pass remain required for these flows; DOM and runtime tests alone do not establish acceptance.

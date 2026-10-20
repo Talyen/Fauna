@@ -13,13 +13,13 @@ npm ci
 npm run dev
 ```
 
-Open http://127.0.0.1:48209. To use the Electron shell instead:
+Open http://127.0.0.1:48209. Prepared outputs are checked before startup; media authoring uses `npm run assets:prepare`. To use the Electron shell instead:
 
 ```sh
 npm run dev:desktop
 ```
 
-Browser and desktop profiles are separate. Desktop saves live in Electron's Fauna user-data directory under `saves/expedition.json`; browser saves use the `fauna.save.v1` localStorage key. Both keep two backups. Development saves are disposable: only the current format is supported, with no migration or backward-compatibility requirement. Use a fresh browser context for experiments instead of deleting player saves.
+Owned previews use isolated ports and disposable browser/desktop profiles; `npm run dev:desktop` opens a quiet owned preview. Browser and normal desktop profiles are separate. Desktop saves live in Electron's Fauna user-data directory under `saves/expedition.json`; browser saves use the `fauna.save.v1` localStorage key. Both keep two backups. Development saves are disposable: only the current format is supported, with no migration or backward-compatibility requirement. Use a fresh browser context for experiments instead of deleting player saves.
 
 ## Play
 
@@ -71,6 +71,7 @@ The Windows job creates an **unpacked x64 application**, not a signed release in
 
 ## Architecture and authoring
 
+- [Development tools, previews, playthroughs and diagnostics](Docs/DEVELOPMENT_TOOLS.md)
 - [Architecture and saves](Docs/ARCHITECTURE.md)
 - [Content and artwork](Docs/CONTENT.md)
 - [UI and typography](Docs/UI.md)

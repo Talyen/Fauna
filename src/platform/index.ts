@@ -1,3 +1,4 @@
+import { browserDiagnostics } from "./preferences";
 import { createBrowserPlatform } from "./browser";
 import type { Platform } from "./ports";
 export function createPlatform(): Platform {
@@ -5,6 +6,7 @@ export function createPlatform(): Platform {
   if (!bridge) return createBrowserPlatform();
   return {
     desktop: true,
+    diagnostics: browserDiagnostics(),
     steam: { available: false },
     saves: { readCandidates: () => bridge.readCandidates(), write: (data) => bridge.writeSave(data) },
     quit: () => bridge.quit(),

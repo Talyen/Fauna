@@ -1,3 +1,4 @@
+import { assetUrl } from "./assets";
 import { KeywordText } from "./keyword-text";
 import { useLayoutEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
@@ -231,7 +232,7 @@ export function Inspector({
             <ArtCard
               className="inspection-creature-art"
               aspect="creature"
-              artwork={`./art/${kind}.svg`}
+              artwork={assetUrl(`creature.${kind}`)}
               presentation
               aria-label={enemy?.name ?? creature.name}
             />

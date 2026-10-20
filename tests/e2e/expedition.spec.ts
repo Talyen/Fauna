@@ -1106,7 +1106,10 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     expect(swapped.battle!.discard).toEqual(fixture.battle!.discard);
     expect(swapped.lineup).toEqual(fixture.lineup);
     expect(swapped.reserves.find((c) => c.species === "emberfox")!.health).toBe(9);
-    await expect(page.locator(".hand .action-card img")).toHaveAttribute("src", "./art/silkmoth-action.svg");
+    await expect(page.locator(".hand .action-card img")).toHaveAttribute(
+      "src",
+      /\/art\/silkmoth-action\.svg$/,
+    );
     await page.reload();
     await resume(page);
     expect(await state(page)).toEqual(swapped);

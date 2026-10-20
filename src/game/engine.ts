@@ -7,7 +7,8 @@ import type { Card, Command, CommandResult, GameEvent, GameState } from "./types
 export function createGame(seed = 1): GameState {
   return freeze(
     {
-      version: 10,
+      version: 11,
+      discovery: { encountered: [], recruited: [] },
       revision: 0,
       rng: seed >>> 0,
       phase: "draft",
@@ -108,6 +109,8 @@ function intents(state: GameState) {
 }
 export function beginBattle(state: GameState) {
   const encounter = encounterSource(state);
+  for (const enemy of encounter.enemies)
+    if (!state.discovery.encountered.includes(enemy.species)) state.discovery.encountered.push(enemy.species);
   const all = [...state.team, ...state.reserves];
   state.team = state.lineup.map((id) => all.find((c) => c.id === id)!);
   state.reserves = all.filter((c) => !state.lineup.includes(c.id));
@@ -584,6 +587,8 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
         break;
       }
       case "recruit": {
+        if (!draft.discovery.recruited.includes(command.species))
+          draft.discovery.recruited.push(command.species);
         const all = [...draft.team, ...draft.reserves];
         let id = `recruit-${draft.revision}`;
         for (let suffix = 1; all.some((creature) => creature.id === id); suffix++)
@@ -649,6 +654,10 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
         Object.assign(draft, fresh, {
           revision: state.revision + 1,
           unlocked: [...state.unlocked],
+          discovery: {
+            encountered: [...state.discovery.encountered],
+            recruited: [...state.discovery.recruited],
+          },
           wins: state.wins,
           keywordXP: { ...state.keywordXP },
           talents: [...state.talents],

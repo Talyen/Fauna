@@ -1,6 +1,9 @@
+import { AudioSettings } from "./audio-settings";
+import { useAudioPreferences } from "./audio-preferences";
+import { useGameAudio } from "./game-audio";
+import { DiagnosticViewer } from "./diagnostics";
 import { JourneyResults } from "./journey-results";
 import { KeywordText } from "./keyword-text";
-import { Switch } from "../components/ui/switch";
 import { RadioGroup, RadioGroupItem } from "../components/ui/radio-group";
 import {
   AlertDialog,
@@ -59,7 +62,8 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     [inspection, setInspection] = useState<Inspection | null>(null);
   const [mode, setMode] = useState<"pointer" | "keyboard" | "controller">("pointer");
   const [navigation, setNavigation] = useState(false);
-  const [sound, setSound] = useState(() => preference("fauna.sound.enabled", "true") !== "false");
+  const [audioPreferences, updateAudioPreferences] = useAudioPreferences();
+  const playSound = useGameAudio(session, audioPreferences, route === "home");
   const [scale, setScale] = useState(() => {
     const n = Number(preference("fauna.text-scale", "1"));
     return [1, 1.25, 1.5].includes(n) ? n : 1;
@@ -73,16 +77,15 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     game.phase === "teamSelection" ||
     (["recruit", "relic"].includes(game.phase) && game.reward?.outcome === "next");
   const paused = route !== "play" || menu || modal !== null || inspection !== null;
-  const { bursts, deny } = useCombatFeedback(session, root, sound, paused);
+  const { bursts, deny } = useCombatFeedback(session, root, playSound, paused);
   useEffect(() => {
     document.documentElement.style.setProperty("--text-scale", String(scale));
     try {
       localStorage.setItem("fauna.text-scale", String(scale));
-      localStorage.setItem("fauna.sound.enabled", String(sound));
     } catch {
       /* Optional preferences. */
     }
-  }, [scale, sound]);
+  }, [scale]);
   const send = useCallback((command: Command) => session.command(command), [session]);
   const menuReturnLabel = useRef<string | null>(null);
   const openMenu = () => {
@@ -352,10 +355,8 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
             <DeckCards game={game} inspect={setInspection} />
           ) : modal === "settings" ? (
             <div className="settings-controls">
-              <label className="setting-row" htmlFor="sound-setting">
-                <span>Sound</span>
-                <Switch id="sound-setting" checked={sound} onCheckedChange={setSound} />
-              </label>
+              <DiagnosticViewer diagnostics={session.diagnostics} desktop={desktop} />
+              <AudioSettings value={audioPreferences} update={updateAudioPreferences} />
               <fieldset>
                 <legend>Text size</legend>
                 <RadioGroup

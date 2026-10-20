@@ -1,5 +1,6 @@
+import type { SoundCue } from "./audio-runtime";
 import { useEffect, useState, useRef, useCallback, type RefObject } from "react";
-import { createCombatAudio, selectCombatCue } from "./combat-audio";
+import { selectCombatCue } from "./combat-audio";
 import { createCombatImpacts } from "./combat-impact";
 import { Heart, Shield, Skull } from "lucide-react";
 import type { Session } from "../application/session";
@@ -61,7 +62,7 @@ export function feedbackFrames(events: readonly GameEvent[]): GameEvent[][] {
 export function useCombatFeedback(
   session: Session,
   root: RefObject<HTMLDivElement | null>,
-  soundEnabled: boolean,
+  playSound: (cue: SoundCue) => void,
   paused = false,
 ) {
   const [bursts, setBursts] = useState<Burst[]>([]);
@@ -72,14 +73,10 @@ export function useCombatFeedback(
       setBursts([]);
       return;
     }
-    const audio = createCombatAudio(),
-      impacts = createCombatImpacts(() => root.current);
+    const impacts = createCombatImpacts(() => root.current);
     const deniedAnimations = new Map<HTMLElement, Animation>();
     denial.current = (element) => {
-      if (soundEnabled) {
-        audio.unlock();
-        audio.play("deny");
-      }
+      playSound("deny");
       if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches || !element.animate) return;
       deniedAnimations.get(element)?.cancel();
       const animation = element.animate(
@@ -91,11 +88,6 @@ export function useCombatFeedback(
         if (deniedAnimations.get(element) === animation) deniedAnimations.delete(element);
       };
     };
-    const unlock = () => {
-      if (soundEnabled) audio.unlock();
-    };
-    window.addEventListener("pointerdown", unlock);
-    window.addEventListener("keydown", unlock);
     const pending = new Set<ReturnType<typeof setTimeout>>();
     const cancelPending = () => {
       pending.forEach(clearTimeout);
@@ -107,11 +99,7 @@ export function useCombatFeedback(
       cancelPending();
       if (current.game.phase !== "battle") {
         setBursts([]);
-        const cue = selectCombatCue(current.events);
-        if (soundEnabled && cue) {
-          audio.unlock();
-          audio.play(cue);
-        }
+
         return;
       }
       feedbackFrames(current.events).forEach((events, index) => {
@@ -121,10 +109,8 @@ export function useCombatFeedback(
           );
           impacts.present(events);
           const cue = selectCombatCue(events);
-          if (soundEnabled && cue) {
-            audio.unlock();
-            audio.play(cue);
-          }
+          if (cue) playSound(cue);
+          else if (events.some((event) => event.kind === "knockout")) playSound("knockout");
         };
         if (index === 0) show();
         else {
@@ -152,12 +138,9 @@ export function useCombatFeedback(
       unsubscribe();
       cancelPending();
       clearInterval(interval);
-      window.removeEventListener("pointerdown", unlock);
-      window.removeEventListener("keydown", unlock);
-      audio.dispose();
       impacts.dispose();
     };
-  }, [session, root, soundEnabled, paused]);
+  }, [session, root, playSound, paused]);
   return { bursts, deny };
 }
 

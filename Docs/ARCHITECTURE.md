@@ -22,7 +22,7 @@ A linear-congruential RNG is explicit state. Destination offers, shuffles and in
 
 Development saves are disposable: there are no released player saves to preserve. Do not implement migrations or backward compatibility unless explicitly requested. Obsolete formats are rejected and can be reset through the existing recovery flow. The canonical agent policy is in [AGENTS.md](../AGENTS.md#development-saves).
 
-Current save version 10 is validated by Zod and semantic checks for content IDs, ownership, unique card zones, health bounds, lineup completeness, destination offers, and phase/outcome coherence. Only the current format is supported in browser and desktop storage; fixtures track that format. Valid current-format backups remain recoverable.
+Current save version 11 is validated by Zod and semantic checks for content IDs, ownership, unique card zones, health bounds, lineup completeness, destination offers, and phase/outcome coherence. Only the current format is supported in browser and desktop storage; fixtures track that format. Valid current-format backups remain recoverable.
 
 Battle settlement banks actual retained currency and keyword XP once. Ordinary fights offer recruitment only; intermediate bosses offer relics only. The shared Reward screen consumes committed receipts and accepts a choice or Skip, with no acknowledgement phase or Continue command. No eligible choice advances immediately; final victory and defeat go directly to Journey results. The journey summary retains the outcome, battle count, gains, new unlocks, and last-battle receipt; opening results never grants rewards or saves.
 
@@ -41,3 +41,9 @@ Spending the final mana resolves the enemy turn inside the same command and revi
 ## Keyword foundation
 
 `src/game/keywords.ts` owns keyword vocabulary, definitions, aliases, availability, damage identities, and authored-effect classification. Content, progression and glossary consume it. The catalog includes planned Alchemy-derived mechanics without enabling them. Progression eligibility remains explicit and save-compatible. Presentation-only word matching cannot assign gameplay effects or XP. See [Keywords](KEYWORDS.md).
+
+## Discovery and diagnostics
+
+Permanent discovery stores encountered and recruited species separately from starter unlocks. Initial starters and unlocked species are known; accepted Begin battle discovers the exact enemy group, and accepted recruitment records the species once. Inspection consumes no RNG, grants no discovery and writes no save. Loss, return home and new journeys retain knowledge. Save validation rejects duplicate or unknown discovery records and recruitment without an encounter. No historical discovery is inferred for obsolete saves.
+
+`src/application/diagnostics.ts` owns a bounded local collector exposed by the session. Its platform port owns persistence and explicit copying, separate from the game save. Reports contain selected revision/phase fields rather than arbitrary game objects. Sink failures and recursive logging cannot affect commands or saves. Session disposal revokes collection. `committedCommand` is transient session presentation metadata and never enters the saved aggregate; loading a checkpoint does not manufacture a new committed action or replay audio.

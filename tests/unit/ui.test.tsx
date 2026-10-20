@@ -1,3 +1,4 @@
+import { assetUrl } from "../../src/ui/assets";
 import { ActionCard } from "../../src/ui/cards";
 import { TooltipProvider } from "../../src/components/ui/tooltip";
 import { produce } from "immer";
@@ -7,13 +8,18 @@ import { encounterSource, location } from "../../src/game/destinations";
 import { RELICS } from "../../src/game/progression";
 import { TargetPreview } from "../../src/ui/target-preview";
 // @vitest-environment jsdom
-import { afterEach, describe, it, expect, vi } from "vitest";
+import { beforeEach, afterEach, describe, it, expect, vi } from "vitest";
 import { render, screen, cleanup, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { App } from "../../src/ui/App";
 import { createSession } from "../../src/application/session";
 import { createBrowserPlatform } from "../../src/platform/browser";
 import { gamepadActions } from "../../src/ui/input";
+beforeEach(() => {
+  vi.spyOn(HTMLMediaElement.prototype, "play").mockResolvedValue();
+  vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {});
+  vi.spyOn(HTMLMediaElement.prototype, "load").mockImplementation(() => {});
+});
 afterEach(() => {
   cleanup();
   localStorage.clear();
@@ -65,7 +71,7 @@ describe("player interface", () => {
       const relic = RELICS.find((entry) => entry.id === id)!;
       const card = screen.getByRole("button", { name: `Choose ${relic.name}` });
       const image = card.querySelector("img")!;
-      expect(image.getAttribute("src")).toBe("./art/relic-placeholder.svg");
+      expect(image.getAttribute("src")).toBe(assetUrl("relic.placeholder"));
       expect(image.getAttribute("width")).toBe("600");
       expect(image.getAttribute("height")).toBe("800");
       expect(card.textContent).toBe("");
@@ -96,8 +102,8 @@ describe("player interface", () => {
     expect(document.querySelectorAll(".recruit-options .creature-card")).toHaveLength(3);
     expect(screen.getByLabelText("Last battle earnings").textContent).toContain("+20 currency");
     const progress = screen.getByRole("progressbar", { name: "Nature level 2 progress" });
-    expect(progress.getAttribute("aria-valuenow")).toBe("4");
-    expect(progress.getAttribute("aria-valuemax")).toBe("40");
+    expect(progress.getAttribute("aria-valuenow")).toBe("14");
+    expect(progress.getAttribute("aria-valuemax")).toBe("30");
     expect(screen.queryByText(/keyword XP|talent point|4 \/ 40 XP/)).toBeNull();
     expect(screen.queryByRole("button", { name: "Continue" })).toBeNull();
     await user.click(screen.getByRole("button", { name: "Skip" }));
@@ -121,8 +127,8 @@ describe("player interface", () => {
     expect(screen.queryByRole("button", { name: "New journey" })).toBeNull();
     expect(screen.getByLabelText("Journey gains").textContent).toContain("Lv 2");
     const progress = screen.getByRole("progressbar", { name: "Nature level 2 progress" });
-    expect(progress.getAttribute("aria-valuenow")).toBe("4");
-    expect(progress.getAttribute("aria-valuemax")).toBe("40");
+    expect(progress.getAttribute("aria-valuenow")).toBe("14");
+    expect(progress.getAttribute("aria-valuemax")).toBe("30");
     expect(screen.queryByText(/\+24 XP|talent point|4 \/ 40 XP/)).toBeNull();
     expect(screen.queryByLabelText("Final team")).toBeNull();
     expect(screen.queryByLabelText("New creature unlocks")).toBeNull();

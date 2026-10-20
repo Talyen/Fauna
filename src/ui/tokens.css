@@ -1,5 +1,7 @@
 /* Authoritative visual values. Gameplay layouts consume semantic tokens. */
 :root {
+  --mana-full-image: url("/ui/mana/full.webp");
+  --mana-empty-image: url("/ui/mana/empty.webp");
   color-scheme: dark;
   --background: #000;
   --foreground: #ece6db;

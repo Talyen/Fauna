@@ -1212,3 +1212,35 @@ button {
 .battle-earnings {
   justify-content: center;
 }
+
+.volume-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--screen-item-gap);
+}
+.volume-controls output {
+  min-width: 4ch;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.diagnostic-viewer {
+  display: grid;
+  gap: var(--screen-item-gap);
+}
+.diagnostic-viewer pre {
+  max-height: 240px;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: var(--text-secondary);
+}
+.collection-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--screen-item-gap);
+}
+.collection-entry p {
+  font-size: var(--text-secondary);
+  color: var(--muted-foreground);
+}
