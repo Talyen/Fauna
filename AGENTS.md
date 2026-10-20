@@ -12,7 +12,7 @@ Fauna is a single-player creature-collecting card battler. Use plain language an
 
 ## Worktrees and integration
 
-Use one isolated Git worktree and task branch per implementation chat, starting from committed local main unless the user specifies another base. Reuse that chat's existing suitable worktree. Preserve unrelated edits and unfinished work in all checkouts; do not switch another checkout's branch.
+Use one isolated Git worktree and task branch per implementation chat, starting from committed local main unless the user specifies another base. Create or reuse it with `npm run worktree -- <task-name>` from the main checkout; see [workflow](CONTRIBUTING.md#worktrees-and-integration). Preserve unrelated edits and unfinished work in all checkouts; do not switch another checkout's branch.
 
 Work independently. Do not discover or message other chats for routine coordination, startup, ownership, progress, verification windows, acknowledgments, or completion. Message only for a concrete unresolved dependency or conflict that repository inspection cannot answer. Do not poll or wake completed chats unless the user explicitly resumes them; routine incoming messages require no reply or renewed work.
 
@@ -24,7 +24,7 @@ Task-scoped branch/worktree creation, commits, and local integration are authori
 - [Content and artwork](Docs/CONTENT.md): `src/game/content.ts` and `public/art/`.
 - [UI, interaction and accessibility](Docs/UI.md), [menus and inspection](Docs/MENU_DESIGN.md), [expedition and progression](Docs/EXPEDITION_DESIGN.md).
 - [Gameplay vocabulary](Docs/GLOSSARY.md): `src/game/glossary.ts`.
-- [Run and verification commands](README.md#verify), [release and platform verification boundaries](Docs/RELEASE.md).
+- [Run and verification commands](CONTRIBUTING.md#verification), [release and platform verification boundaries](Docs/RELEASE.md).
 
 ## Development saves
 
@@ -44,11 +44,7 @@ Development saves are disposable. There are no released player saves to preserve
 
 Review the final diff and integration. Express behavior through names, types and valuable tests; comments explain non-obvious reasons, ordering or compatibility. Justify lint suppressions.
 
-Default local verification is deliberately lightweight. Run `npm run check -- <task-owned paths>` before handoff; use `--diff` for the dirty set or `--base <commit>` for committed changes. It runs bounded selected-file formatting and fixed Node smoke. Markdown-only changes skip smoke. `npm test` runs the same fixed smoke suites with one worker, a 512 MiB heap limit, lower process priority when supported, and a 30-second deadline. `npm run verify` is another entrypoint for the local check. No default gate installs dependencies, walks the test dependency graph, runs full static or DOM suites, builds, launches browsers/Electron, or packages the game.
-
-Focused unit tests are allowed when useful: `npm run test:full -- <test paths>`. Full unit runs, full static checks, production builds, browser/desktop journeys, packaging, coverage and performance runs belong to CI by default; run them locally only when the user explicitly requests broader local validation. Do not bypass this policy with raw tool invocations. Retain full regression coverage in CI rather than deleting suites to make local checks faster.
-
-Integration runs the same lightweight check on the combined diff from the locked main commit, then advances clean main. Local integration is not full verification or release evidence. CI runs `npm run verify:full` for complete static checks, all units including DOM, the production build and browser journeys, plus Windows packaging and packaged desktop smoke. Report those gates as pending until observed for the exact commit.
+[Contributing](CONTRIBUTING.md#verification) owns execution tiers, resource limits and CI policy. Run `npm run check -- <task-owned paths>` before handoff and `npm run docs:check` for documentation edits. Focused unit suites are allowed when useful. Full unit runs, static checks, builds, browser/desktop journeys, packaging, coverage and performance runs remain CI-owned unless explicitly requested locally. Never bypass this policy with raw tools or remove regression coverage to make checks faster. Integration runs the lightweight combined-diff check and documentation contracts for Markdown changes; full CI and release validation remain pending until observed for the exact commit.
 
 For UI changes, follow [required rendered review](Docs/UI.md#required-review). CI owns the full viewport/input/state journeys. Inspect its rendered evidence when available; use a local preview or focused browser review only when requested. Report pending rendered review honestly. Passing local checks or geometry assertions alone does not establish visual acceptance.
 

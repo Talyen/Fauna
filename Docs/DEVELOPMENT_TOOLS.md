@@ -2,7 +2,7 @@
 
 ## Task checkouts and previews
 
-`npm run task:create -- short-name` creates `task/short-name` from committed local main in a sibling worktree, or reuses that branch's existing checkout. Dirty main is preserved. Dependencies are linked only when lockfiles and package manifests match; changed dependencies require a worktree-local installation. Continue to integrate with `node scripts/integrate.mjs task/short-name` from clean main. Setup does not delete checkouts or push branches.
+`npm run worktree -- short-name` from the main checkout creates `task/short-name` from committed local main in `.worktrees/short-name`, or reuses the matching checkout. Dirty main is preserved. Dependencies are linked only when lockfiles and package manifests match; changed dependencies require a worktree-local installation. Continue to integrate with `node scripts/integrate.mjs task/short-name` from clean main. Setup does not delete checkouts or push branches.
 
 `npm run preview:task -- --browser` starts a quiet Vite preview on its own localhost port and opens a fresh headed Chromium context at 1920×1080. `--desktop` opens Electron with a separate user-data directory. Without either flag, the command starts only the server. Browser mode requires an installed Playwright Chromium binary. Preview execution is opt-in; agents run it only when requested.
 

@@ -34,7 +34,7 @@ Desktop window close and application quit request a renderer flush first. The se
 
 ## Integration
 
-From clean main, run `node scripts/integrate.mjs task/foundation` (or the appropriate task branch). The script acquires a repository-wide lock in the common Git directory, merges current main into the clean task worktree, runs `npm run check -- --base <locked-main-commit>` on the combined diff, checks both worktrees remain clean, and fast-forwards main. The local gate runs only bounded formatting and fixed Node smoke; full static, DOM/unit, build, browser and packaged desktop validation belong to CI. Integration reports that those checks remain pending. Failures preserve task work. The task worktree is retained; cleanup and remote publication are separate actions.
+The [contribution workflow](../CONTRIBUTING.md#worktrees-and-integration) owns worktree creation, the shared integration lock, combined-diff verification and retained-checkout policy. [Script owners](../scripts/README.md) locate the implementation. Integration is local evidence only; CI and release checks remain separate.
 
 Spending the final mana resolves the enemy turn inside the same command and revision. Victory takes precedence over automatic turn advancement. Card previews run the same card-effect resolution without settling battle rewards, advancing the enemy turn, or publishing/saving the preview state. This retains the final enemy health forecast even when committing the card will advance directly to destinations.
 

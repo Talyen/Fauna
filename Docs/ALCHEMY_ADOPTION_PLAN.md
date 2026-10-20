@@ -35,7 +35,7 @@ Acceptance:
 - Readiness failure cleans up only the processes started by that launch; stale ownership records cannot authorize killing a reused process ID.
 - Worktree setup preserves dirty main and unrelated branches. Integration still requires clean main and the shared lock.
 
-Reference: Alchemy `scripts/agent-browser.mjs`, `scripts/lib/agent-browser-session.mjs`, and `scripts/agent-worktree.mjs`. Adapt ownership patterns without importing its server-stop or automatic worktree-removal behavior.
+Reference: `Alchemy: scripts/agent-browser.mjs`, `Alchemy: scripts/lib/agent-browser-session.mjs`, and `Alchemy: scripts/agent-worktree.mjs`. Adapt ownership patterns without importing its server-stop or automatic worktree-removal behavior.
 
 ## 2 Content validation
 
@@ -47,7 +47,7 @@ Add filesystem checks at the tooling boundary for registered artwork/media, requ
 
 Acceptance: deliberately invalid fixtures produce actionable diagnostics for broken references, missing media, and description/effect disagreements; valid authored content passes without booting React or consuming gameplay RNG.
 
-Reference: Alchemy `src/lib/content-validation/` and `scripts/content-audit.mjs`.
+Reference: `Alchemy: src/lib/content-validation/` and `Alchemy: scripts/content-audit.mjs`.
 
 ## 3 Local diagnostics
 
@@ -59,7 +59,7 @@ Store diagnostics separately from progression. Persistence and clipboard/downloa
 
 Acceptance: a save failure yields a useful report, report-copy failure has visible feedback, repeated audio failures stay bounded, and disposal removes listeners and subscriptions. Exporting diagnostics changes neither gameplay state nor save revision.
 
-Reference: Alchemy `src/lib/error-logger.ts`, `src/features/alchemy/shared/stores/error-log-store.ts`, and `src/features/alchemy/meta/screens/options/error-log-viewer.tsx`.
+Reference: `Alchemy: src/lib/error-logger.ts`, `Alchemy: src/features/alchemy/shared/stores/error-log-store.ts`, and `Alchemy: src/features/alchemy/meta/screens/options/error-log-viewer.tsx`.
 
 ## 4 Headless journeys and replay
 
@@ -78,7 +78,7 @@ Acceptance:
 - Reports show starter/team composition, encounter reached, battle length, retained XP/currency, recruitment and swap decisions, failure reasons, and incomplete scenarios.
 - Focused CI cases protect command and replay contracts; large balance sweeps stay opt-in or in dedicated CI jobs. Simulation does not establish rendered quality.
 
-Reference: Alchemy `Docs/PLAYTHROUGH_SIMULATION.md`, `scripts/run-playthrough.mjs`, and `src/lib/balance/`.
+Reference: `Alchemy: Docs/PLAYTHROUGH_SIMULATION.md`, `Alchemy: scripts/run-playthrough.mjs`, and `Alchemy: src/lib/balance/`.
 
 ## 5 Talent XP curve
 
@@ -90,7 +90,7 @@ Update Talents, earnings/results consumers, save validation, fixtures, and the p
 
 Acceptance: test immediately below, at, and above each early threshold, supported upper bounds, purchased-point budgets, category reset, results progress, and save/resume. Compare fixed headless careers before and after the change, reporting time to first/second point and earned progression without making a human-balance claim.
 
-Reference: Alchemy `src/lib/game-data/talents/progression.ts` and `Docs/TALENT_RULES.md`.
+Reference: `Alchemy: src/lib/game-data/talents/progression.ts` and `Alchemy: Docs/TALENT_RULES.md`.
 
 ## 6 Collection discovery
 
@@ -102,7 +102,7 @@ Keep Collection focused on creatures and their three-card kits. Show concise Enc
 
 Acceptance: browsing never mutates progress; an uncommitted destination grants no discovery; an accepted encounter does; duplicate species do not duplicate permanent records; discovery survives loss, return home, and save/resume. Rendered review covers locked entries, filters, empty states, enlarged text, and keyboard/controller focus return.
 
-Reference: Alchemy `src/features/alchemy/meta/screens/collection-screen.tsx` and its collection helpers. Discovery timing and the exact labels above are proposed implementation defaults, not existing Fauna behavior.
+Reference: `Alchemy: src/features/alchemy/meta/screens/collection-screen.tsx` and its collection helpers. Discovery timing and the exact labels above are proposed implementation defaults, not existing Fauna behavior.
 
 ## 7 Manifest-driven asset preparation
 
@@ -116,7 +116,7 @@ Generate asset lookup data from the manifest and connect media completeness to c
 
 Acceptance: missing/offloaded sources, changed recipes, corrupt outputs, conversion failure, duplicate outputs, and interrupted preparation fail safely; output-only checks work without the library; repeated preparation is stable. Test pipeline behavior with tiny fixture media rather than requiring the full production library.
 
-Reference: Alchemy `Docs/WORKFLOWS-ASSETS.md`, `scripts/assets.mjs`, and `scripts/assets/`.
+Reference: `Alchemy: Docs/WORKFLOWS-ASSETS.md`, `Alchemy: scripts/assets.mjs`, and `Alchemy: scripts/assets/`.
 
 ## 8 Audio and volume
 
@@ -137,7 +137,7 @@ Acceptance:
 - Save/resume and UI remounts do not repeat rewards or outcome sounds.
 - Listening review covers combat overlap, loops/fades, low volume, mute, and ordinary headphones/speakers; report the actual devices and host used.
 
-Reference: Alchemy `Docs/AUDIO.md`, `src/lib/audio/`, `scripts/audio-review.mjs`, and `src/features/alchemy/meta/screens/options/options-panels.tsx`.
+Reference: `Alchemy: Docs/AUDIO.md`, `Alchemy: src/lib/audio/`, `Alchemy: scripts/audio-review.mjs`, and `Alchemy: src/features/alchemy/meta/screens/options/options-panels.tsx`.
 
 ## Verification and handoff
 

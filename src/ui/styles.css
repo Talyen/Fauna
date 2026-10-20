@@ -654,10 +654,23 @@ button {
   margin-bottom: var(--screen-section-gap);
 }
 .collection-grid {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  grid-template-columns: repeat(3, var(--art-landscape-width));
-  gap: var(--space-6);
+  gap: var(--screen-section-gap);
+}
+.collection-species,
+.locked-species {
+  flex: 0 0 var(--art-landscape-width);
+}
+.collection-species {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--screen-item-gap);
+}
+.collection-species h2 {
+  font-size: var(--text-name);
 }
 .locked-species {
   filter: grayscale(1);
@@ -685,16 +698,34 @@ button {
   max-width: 640px;
 }
 .talent-row {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--screen-section-gap);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--screen-item-gap);
 }
 .talent-node {
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
-  height: 112px;
-  border: 1px solid transparent;
+  gap: var(--screen-item-gap);
+  width: var(--art-landscape-width);
+  height: auto;
+  padding: var(--space-4);
+  white-space: normal;
+  border: 1px solid var(--border);
+}
+.talent-name {
+  font-size: var(--text-name);
+  font-weight: 600;
+}
+.talent-effect {
+  font-size: var(--text-rule);
+  font-weight: 400;
+}
+.talent-status {
+  margin-top: auto;
+  font-size: var(--text-secondary);
+  color: var(--muted-foreground);
 }
 .talent-node svg {
   width: 28px;
@@ -704,10 +735,10 @@ button {
   border-color: var(--selected);
 }
 .talent-node[aria-disabled="true"][data-owned="false"] {
-  opacity: 0.4;
+  cursor: default;
 }
-.talent-node[data-available="true"] {
-  border-color: var(--line);
+.talent-node[data-available="true"] .talent-status {
+  color: var(--primary);
 }
 .end-screen {
   min-height: var(--page-content-height);
@@ -771,11 +802,6 @@ button {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
-}
-@media (max-width: 900px) {
-  .collection-grid {
-    grid-template-columns: repeat(2, var(--art-landscape-width));
-  }
 }
 @media (prefers-reduced-motion: reduce) {
   *,

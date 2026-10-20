@@ -6,10 +6,10 @@ Open `/design/battle-layout/index.html?compare=1` with the Vite development serv
 
 Mana crystals reuse the original full/empty alpha artwork and the independent full/spent layers, brightness/desaturation, fade timing, sockets and masked hover/focus glint from Alchemy (source checkout `e2998c171`). Source references:
 
-- `src/features/alchemy/run-loop/battle/presentation/ui/mana-dock.tsx`
-- `src/styles/components.css` (`mana-dock-*`)
-- `src/styles/keyframes.css` (`manaDockFill`, `manaDockSpend`, `manaDockGlint`)
-- `src/assets/optimized/mana-dock-full.webp` → `public/ui/mana/full.webp`
-- `src/assets/optimized/mana-dock-empty.webp` → `public/ui/mana/empty.webp`
+- `Alchemy: src/features/alchemy/run-loop/battle/presentation/ui/mana-dock.tsx`
+- `Alchemy: src/styles/components.css` (`mana-dock-*`)
+- `Alchemy: src/styles/keyframes.css` (`manaDockFill`, `manaDockSpend`, `manaDockGlint`)
+- `Alchemy: src/assets/optimized/mana-dock-full.webp` → `public/ui/mana/full.webp`
+- `Alchemy: src/assets/optimized/mana-dock-empty.webp` → `public/ui/mana/empty.webp`
 
 The sample uses Fauna's shadcn Button/Tooltip, semantic surface tokens, native focus ring and reduced-motion handling. It has three fixed crystals and no Alchemy store, localization, overflow, capacity-loss or shard lifecycle. The frame asset is not used by Alchemy's current dock and is not copied. Alchemy is unchanged.

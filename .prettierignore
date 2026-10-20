@@ -6,3 +6,5 @@ reports
 playwright-report
 test-results
 public/art
+.worktrees/
+public/prepared/
