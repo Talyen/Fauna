@@ -408,13 +408,15 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
 function reject(state: GameState, reason: string): CommandResult {
   return { accepted: false, state, reason, events: [] };
 }
-export function dispatch(state: GameState, command: Command): CommandResult {
-  return resolve(state, command, true);
+export function dispatch(state: GameState, command: Command, development = false): CommandResult {
+  if (command.type === "devWinBattle" && !development)
+    return reject(state, "Development command unavailable.");
+  return resolve(state, command, false);
 }
 export function previewCard(state: GameState, cardId: string, targetId?: string): CommandResult {
-  return resolve(state, { type: "play", cardId, targetId }, false);
+  return resolve(state, { type: "play", cardId, targetId }, true);
 }
-function resolve(state: GameState, command: Command, autoEndTurn: boolean): CommandResult {
+function resolve(state: GameState, command: Command, preview: boolean): CommandResult {
   const b = state.battle;
   if (
     command.type === "newRun" &&
@@ -425,7 +427,10 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
     return reject(state, "Choose an unlocked starter.");
   if (command.type === "start" && (state.phase !== "draft" || state.selected.length !== 1))
     return reject(state, "Choose one starter first.");
-  if ((command.type === "play" || command.type === "endTurn") && (state.phase !== "battle" || !b))
+  if (
+    (command.type === "play" || command.type === "endTurn" || command.type === "devWinBattle") &&
+    (state.phase !== "battle" || !b)
+  )
     return reject(state, "There is no active battle.");
   if (command.type === "play") {
     const card = state.cards.find((c) => c.id === command.cardId);
@@ -626,8 +631,14 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
           });
         }
         fillHand(draft);
-        if (autoEndTurn) settle(draft, events);
-        if (autoEndTurn && draft.phase === "battle" && battle.mana === 0) finishTurn(draft, events);
+        if (!preview) settle(draft, events);
+        if (!preview && command.autoEndTurn !== false && draft.phase === "battle" && battle.mana === 0)
+          finishTurn(draft, events);
+        break;
+      }
+      case "devWinBattle": {
+        for (const enemy of draft.battle!.enemies) enemy.health = 0;
+        settle(draft, events);
         break;
       }
       case "endTurn": {

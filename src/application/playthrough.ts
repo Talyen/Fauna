@@ -1,8 +1,8 @@
-import { controlled } from "../game/combat";
+import { battleChoices } from "./battle-policy";
 import { createSession, type Session } from "./session";
 import { createGame } from "../game/engine";
 import { decodeSave, encodeSave } from "../game/save";
-import { definition, species, type SpeciesId } from "../game/content";
+import { type SpeciesId } from "../game/content";
 import { TALENTS, canBuyTalent, KEYWORDS, talentPoints } from "../game/progression";
 import type { Command, GameState } from "../game/types";
 
@@ -21,7 +21,7 @@ export interface JourneyStep {
   checkpoint: string;
 }
 export interface JourneyBundle {
-  format: 1;
+  format: 2;
   identity: string;
   config: JourneyConfig;
   initial: string;
@@ -71,38 +71,9 @@ function actor(config: JourneyConfig) {
       case "defeat":
         return { type: "newRun", seed: (config.seed + state.revision) >>> 0 };
       case "battle": {
-        const battle = state.battle!;
-        const fallen = state.team.find((creature) => creature.health === 0 || controlled(creature));
-        const reserve = state.reserves.find((creature) => creature.health > 0 && !controlled(creature));
-        if (fallen && reserve) return { type: "swap", activeId: fallen.id, reserve: reserve.id };
-        const options: { command: Command; score: number }[] = [];
-        for (const id of battle.hand) {
-          const card = state.cards.find((entry) => entry.id === id)!;
-          const owner = state.team.find((creature) => creature.id === card.ownerId)!;
-          const def = definition(card.definitionId);
-          if (owner.health === 0 || controlled(owner) || def.cost > battle.mana) continue;
-          if (def.effect === "attack")
-            for (const enemy of battle.enemies.filter((entry) => entry.health > 0))
-              options.push({
-                command: { type: "play", cardId: id, targetId: enemy.id },
-                score: 100 + Math.min(def.value, enemy.health) - enemy.health / 100,
-              });
-          else if (def.effect === "teamGuard")
-            options.push({ command: { type: "play", cardId: id }, score: def.value });
-          else
-            for (const target of state.team.filter((entry) => entry.health > 0)) {
-              const score =
-                def.effect === "heal"
-                  ? Math.min(def.value, species(target.species).health - target.health) * 2
-                  : Math.max(0, def.value - target.block);
-              if (score > 0)
-                options.push({ command: { type: "play", cardId: id, targetId: target.id }, score });
-            }
-        }
+        const options = battleChoices(state);
         if (!options.length) return { type: "endTurn" };
-        return config.policy === "random"
-          ? pick(options).command
-          : options.sort((a, b) => b.score - a.score)[0]!.command;
+        return config.policy === "random" ? pick(options) : options[0]!;
       }
     }
   };
@@ -150,7 +121,7 @@ export async function runJourney(
   let session: Session = await open();
   const decide = actor(config);
   const bundle: JourneyBundle = {
-    format: 1,
+    format: 2,
     identity,
     config,
     initial,
@@ -161,7 +132,7 @@ export async function runJourney(
     milestones: [],
     results: [],
   };
-  if (replay && (replay.identity !== identity || replay.format !== 1))
+  if (replay && (replay.identity !== identity || replay.format !== 2))
     throw new Error("Replay content/build identity mismatch.");
   try {
     const limit = replay ? replay.steps.length : config.maxActions;
