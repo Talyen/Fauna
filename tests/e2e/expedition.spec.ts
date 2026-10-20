@@ -615,3 +615,156 @@ test("End run uses alert-dialog cancellation, trapping and outside-click protect
   await expect(page.getByRole("button", { name: "End run", exact: true })).toBeFocused();
   expect((await state(page)).phase).toBe("battle");
 });
+
+test("battle tooltips, pointer targeting, Mana forecast and corners follow the design system", async ({
+  page,
+}) => {
+  const fixture = produce(run(7), (d) => {
+    const cards = d.cards.filter((c) => definition(c.definitionId).effect === "attack");
+    d.battle!.hand = cards.map((c) => c.id);
+    d.battle!.draw = d.cards.filter((c) => !cards.some((a) => a.id === c.id)).map((c) => c.id);
+    d.battle!.discard = [];
+    d.battle!.enemies[0]!.health = 1;
+  });
+  await seed(page, fixture);
+  await resume(page);
+  const enemy = page.locator(".enemy-row .creature-card").first();
+  await enemy.hover();
+  await expect(page.locator(".game-tooltip").first()).toHaveAttribute("data-side", "bottom");
+  const ally = page.locator(".player-row .creature-card").first();
+  await ally.hover();
+  await expect(page.locator(".game-tooltip").first()).toHaveAttribute("data-side", "top");
+  const card = page.locator(".hand .action-card").first();
+  await card.hover();
+  await expect(page.locator(".game-tooltip").first()).toHaveAttribute("data-side", "top");
+  await card.click();
+  await expect(page.locator(".app")).toHaveAttribute("data-input", "pointer");
+  expect(await enemy.evaluate((el) => el === document.activeElement)).toBe(false);
+  await expect(page.locator(".game-tooltip")).toHaveCount(0);
+  await expect(page.locator(".player-row .invalid-target")).toHaveCount(3);
+  await expect(page.locator('.mana-gem[data-preview-spent="true"]')).toHaveCount(1);
+  await expect(page.locator(".knockout-preview")).toHaveCount(1);
+  expect((await state(page)).battle!.mana).toBe(3);
+  await page.mouse.move(0, 0);
+  await expect(page.locator(".game-tooltip")).toHaveCount(0);
+  for (const [width, height] of [
+    [1280, 800],
+    [1920, 1080],
+  ]) {
+    await page.setViewportSize({ width: width!, height: height! });
+    await page.evaluate(() => document.fonts.ready);
+    await expect
+      .poll(() =>
+        page
+          .locator(".battle-screen img")
+          .evaluateAll((images) =>
+            images.every(
+              (img) => (img as HTMLImageElement).complete && (img as HTMLImageElement).naturalWidth > 0,
+            ),
+          ),
+      )
+      .toBe(true);
+    await fits(page);
+    await page.screenshot({ path: `reports/battle-review/targeting-${width}.png` });
+  }
+  await page.setViewportSize({ width: 1280, height: 800 });
+  for (const el of [enemy, ally, card, page.locator(".end-turn")])
+    expect(await el.evaluate((el) => parseFloat(getComputedStyle(el).borderTopLeftRadius))).toBeGreaterThan(
+      0,
+    );
+  await page.locator(".target-control").click({ position: { x: 700, y: 8 } });
+  await expect(page.locator(".battle-screen")).toHaveAttribute("data-selected-card", "");
+  await expect(page.locator('.mana-gem[data-preview-spent="true"]')).toHaveCount(0);
+  await card.click();
+  await enemy.click();
+  await expect(page.locator(".enemy-row .knocked-out")).toHaveCount(1);
+  await expect(page.locator(".enemy-row .creature-card")).toHaveCount(2);
+  expect(
+    await page
+      .locator(".hand .action-card")
+      .evaluateAll((cards) => cards.some((c) => c === document.activeElement)),
+  ).toBe(false);
+  await expect(page.locator(".app")).toHaveAttribute("data-input", "pointer");
+  await page.locator(".hand .action-card").first().click();
+  await ally.focus();
+  await page.keyboard.press("d");
+  await expect(page.locator(".enemy-row .creature-wrap:not(.knocked-out) .creature-card")).toBeFocused();
+  await card.hover();
+  await expect(page.locator(".app")).toHaveAttribute("data-input", "pointer");
+  await page.keyboard.press("d");
+  await expect(page.locator(".app")).toHaveAttribute("data-input", "keyboard");
+});
+
+test("navigation returns to the nearest remaining card; denial is visual and respects motion", async ({
+  page,
+}) => {
+  const fixture = produce(run(7), (d) => {
+    const cards = d.cards.filter((c) => definition(c.definitionId).effect === "attack");
+    d.battle!.hand = cards.map((c) => c.id);
+    d.battle!.draw = d.cards.filter((c) => !cards.some((a) => a.id === c.id)).map((c) => c.id);
+    d.battle!.discard = [];
+  });
+  await seed(page, fixture);
+  await resume(page);
+  const cards = page.locator(".hand .action-card");
+  const last = await cards.nth(2).getAttribute("data-card-id");
+  await cards.nth(1).focus();
+  await page.keyboard.press("Enter");
+  await page.keyboard.press("Enter");
+  await expect(page.locator(`.hand [data-card-id="${last}"]`)).toBeFocused();
+  const before = await state(page);
+  await cards.first().click();
+  const unavailable = page.locator(".player-row .invalid-target").first();
+  await unavailable.click();
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+  expect(
+    await unavailable.evaluate((el) =>
+      el
+        .getAnimations()
+        .some(
+          (a) => a.effect instanceof KeyframeEffect && a.effect.getKeyframes().some((k) => "translate" in k),
+        ),
+    ),
+  ).toBe(true);
+  expect((await state(page)).revision).toBe(before.revision);
+  await expect(page.getByText("Not enough mana.", { exact: true })).toHaveCount(0);
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.waitForTimeout(200);
+  await unavailable.click();
+  expect(
+    await unavailable.evaluate((el) =>
+      el
+        .getAnimations()
+        .some(
+          (a) => a.effect instanceof KeyframeEffect && a.effect.getKeyframes().some((k) => "translate" in k),
+        ),
+    ),
+  ).toBe(false);
+});
+
+test("controller navigation preserves its device mode and can confirm a pointer-selected card", async ({
+  page,
+}) => {
+  const press = await gamepad(page);
+  const fixture = produce(run(7), (d) => {
+    const attacks = d.cards.filter((c) => definition(c.definitionId).effect === "attack");
+    d.battle!.hand = attacks.map((c) => c.id);
+    d.battle!.draw = d.cards.filter((c) => !attacks.some((a) => a.id === c.id)).map((c) => c.id);
+    d.battle!.discard = [];
+  });
+  await seed(page, fixture);
+  await page.getByRole("button", { name: "Talents", exact: true }).click();
+  await page.getByRole("tab", { name: "Physical", exact: true }).focus();
+  await press(15);
+  await expect(page.getByRole("tab", { name: "Fire", exact: true })).toBeFocused();
+  await expect(page.locator(".app")).toHaveAttribute("data-input", "controller");
+  await press(1);
+  await resume(page);
+  await page.locator(".hand .action-card").first().click();
+  await expect(page.locator(".app")).toHaveAttribute("data-input", "pointer");
+  const before = await state(page);
+  await press(0);
+  expect((await state(page)).revision).toBe(before.revision + 1);
+  await expect(page.locator(".hand .action-card").first()).toBeFocused();
+  await expect(page.locator(".app")).toHaveAttribute("data-input", "controller");
+});

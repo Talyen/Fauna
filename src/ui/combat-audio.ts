@@ -1,6 +1,6 @@
 import type { DamageType } from "../game/content";
 import type { GameEvent } from "../game/types";
-export type CombatCue = DamageType | "heal" | "block" | "absorb" | "mark";
+export type CombatCue = DamageType | "heal" | "block" | "absorb" | "mark" | "deny";
 /** Alchemy-inspired outcome selection: one strongest meaningful cue per resolved action. */
 export function selectCombatCue(events: readonly GameEvent[]): CombatCue | undefined {
   let best: { cue: CombatCue; amount: number; priority: number } | undefined;
@@ -27,6 +27,7 @@ export function selectCombatCue(events: readonly GameEvent[]): CombatCue | undef
   return best?.cue;
 }
 const VOICES: Record<CombatCue, { wave: OscillatorType; start: number; end: number; duration: number }> = {
+  deny: { wave: "sine", start: 130, end: 90, duration: 0.09 },
   physical: { wave: "triangle", start: 170, end: 55, duration: 0.12 },
   fire: { wave: "sawtooth", start: 240, end: 75, duration: 0.14 },
   ice: { wave: "sine", start: 1100, end: 550, duration: 0.14 },
@@ -72,7 +73,7 @@ export function createCombatAudio() {
         oscillator.frequency.setValueAtTime(voice.start, time);
         oscillator.frequency.exponentialRampToValueAtTime(voice.end, time + voice.duration);
         gain.gain.setValueAtTime(0, time);
-        gain.gain.linearRampToValueAtTime(0.075, time + 0.006);
+        gain.gain.linearRampToValueAtTime(cue === "deny" ? 0.025 : 0.075, time + 0.006);
         gain.gain.exponentialRampToValueAtTime(0.0001, time + voice.duration);
         oscillator.connect(gain);
         gain.connect(context.destination);

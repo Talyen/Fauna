@@ -11,6 +11,7 @@ import {
 import { buttonVariants } from "../components/ui/button";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
+import { flushSync } from "react-dom";
 import { Menu } from "lucide-react";
 import type { Session } from "../application/session";
 import { Button } from "../components/ui/button";
@@ -39,7 +40,7 @@ type Route = "home" | "play" | "talents" | "collection";
 type Modal = "settings" | "glossary" | "endRun" | "deck" | null;
 export function App(props: { session: Session; desktop?: boolean }) {
   return (
-    <TooltipProvider delayDuration={300} skipDelayDuration={100}>
+    <TooltipProvider delayDuration={300} skipDelayDuration={100} disableHoverableContent>
       <Game {...props} />
     </TooltipProvider>
   );
@@ -72,7 +73,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
   const active =
     !["victory", "defeat"].includes(game.phase) && (game.team.length > 0 || game.selected.length > 0);
   const paused = route !== "play" || menu || modal !== null || inspection !== null;
-  const bursts = useCombatFeedback(session, root, sound, paused);
+  const { bursts, deny } = useCombatFeedback(session, root, sound, paused);
   useEffect(() => {
     document.documentElement.style.setProperty("--text-scale", String(scale));
     try {
@@ -154,7 +155,25 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
   useEffect(() => {
     actionRef.current = input;
   });
-  useEffect(() => connectInput((action) => actionRef.current(action), setMode), []);
+  useEffect(() => {
+    const previous = document.documentElement.dataset.input;
+    document.documentElement.dataset.input = root.current?.dataset.input ?? "pointer";
+    const disconnect = connectInput(
+      (action) => actionRef.current(action),
+      (next) => {
+        // Publish mode before native focus/click handlers, including Radix portals.
+        if (root.current) root.current.dataset.input = next;
+        document.documentElement.dataset.input = next;
+        // Settle focus before a controller confirm in this same input callback.
+        flushSync(() => setMode(next));
+      },
+    );
+    return () => {
+      disconnect();
+      if (previous === undefined) delete document.documentElement.dataset.input;
+      else document.documentElement.dataset.input = previous;
+    };
+  }, []);
   useEffect(() => {
     if (!view.ready || menu || modal || inspection || (route === "play" && mode === "pointer")) return;
     const buttons = Array.from(
@@ -423,6 +442,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                 inspect={setInspection}
                 controls={gameControls}
                 bursts={bursts}
+                onDenied={deny}
                 controller={mode === "controller"}
                 navigateFocus={mode !== "pointer"}
               />

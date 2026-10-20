@@ -1,4 +1,4 @@
-import { Shield, Crosshair, Heart } from "lucide-react";
+import { Shield, Crosshair, Heart, Skull } from "lucide-react";
 import type { CommandResult, GameState } from "../game/types";
 import { species } from "../game/content";
 import { Progress } from "./progress";
@@ -9,6 +9,8 @@ export function BattleReadout({
   block = 0,
   marks = 0,
   previous,
+  previousBlock,
+  knockout = false,
   children,
 }: {
   health: number;
@@ -16,16 +18,28 @@ export function BattleReadout({
   block?: number;
   marks?: number;
   previous?: number;
+  previousBlock?: number;
+  knockout?: boolean;
   children?: React.ReactNode;
 }) {
   return (
     <div className="battle-readout">
-      <Progress value={health} maximum={maxHealth} previous={previous} label="Health" tone="health" />
+      <div className="health-forecast">
+        <Progress value={health} maximum={maxHealth} previous={previous} label="Health" tone="health" />
+        {knockout ? <Skull className="knockout-preview" aria-label="Knockout" /> : null}
+      </div>
       <div className="combat-stats">
-        {block > 0 ? (
-          <span data-combat-tone="block">
+        {block > 0 || (previousBlock ?? 0) > 0 ? (
+          <span
+            data-combat-tone="block"
+            aria-label={
+              previousBlock !== undefined && previousBlock !== block
+                ? `Block ${previousBlock} to ${block}`
+                : `Block ${block}`
+            }
+          >
             <Shield aria-hidden="true" />
-            {block}
+            {previousBlock !== undefined && previousBlock !== block ? `${previousBlock} → ${block}` : block}
           </span>
         ) : null}
         {marks > 0 ? (
@@ -68,6 +82,8 @@ export function TargetPreview({
         maxHealth={max}
         previous={old.health}
         block={"block" in next ? next.block : 0}
+        previousBlock={"block" in old ? old.block : 0}
+        knockout={old.health > 0 && next.health === 0}
         marks={"marks" in next ? next.marks : 0}
       >
         {events

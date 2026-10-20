@@ -101,3 +101,7 @@
 .mana-empty {
   background: url("/ui/mana/empty.webp") center / contain no-repeat;
 }
+
+.mana-gem[data-preview-spent="true"] .mana-full {
+  opacity: 0.4;
+}

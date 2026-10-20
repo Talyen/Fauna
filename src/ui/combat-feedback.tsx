@@ -1,4 +1,4 @@
-import { useEffect, useState, type RefObject } from "react";
+import { useEffect, useState, useRef, useCallback, type RefObject } from "react";
 import { createCombatAudio, selectCombatCue } from "./combat-audio";
 import { createCombatImpacts } from "./combat-impact";
 import { Crosshair, Heart, Shield, Skull } from "lucide-react";
@@ -65,6 +65,8 @@ export function useCombatFeedback(
   paused = false,
 ) {
   const [bursts, setBursts] = useState<Burst[]>([]);
+  const denial = useRef<(element: HTMLElement) => void>(() => {});
+  const deny = useCallback((element: HTMLElement) => denial.current(element), []);
   useEffect(() => {
     if (paused) {
       setBursts([]);
@@ -72,6 +74,23 @@ export function useCombatFeedback(
     }
     const audio = createCombatAudio(),
       impacts = createCombatImpacts(() => root.current);
+    const deniedAnimations = new Map<HTMLElement, Animation>();
+    denial.current = (element) => {
+      if (soundEnabled) {
+        audio.unlock();
+        audio.play("deny");
+      }
+      if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches || !element.animate) return;
+      deniedAnimations.get(element)?.cancel();
+      const animation = element.animate(
+        [{ translate: "0 0" }, { translate: "-4px 0" }, { translate: "4px 0" }, { translate: "0 0" }],
+        { duration: 180, easing: "ease-out" },
+      );
+      deniedAnimations.set(element, animation);
+      animation.onfinish = () => {
+        if (deniedAnimations.get(element) === animation) deniedAnimations.delete(element);
+      };
+    };
     const unlock = () => {
       if (soundEnabled) audio.unlock();
     };
@@ -127,6 +146,9 @@ export function useCombatFeedback(
       100,
     );
     return () => {
+      denial.current = () => {};
+      deniedAnimations.forEach((animation) => animation.cancel());
+      deniedAnimations.clear();
       unsubscribe();
       cancelPending();
       clearInterval(interval);
@@ -136,7 +158,7 @@ export function useCombatFeedback(
       impacts.dispose();
     };
   }, [session, root, soundEnabled, paused]);
-  return bursts;
+  return { bursts, deny };
 }
 
 export function CombatFeedback({ bursts, targetId }: { bursts: readonly Burst[]; targetId: string }) {

@@ -65,6 +65,8 @@ export function sourceViolations(file, source) {
   }
   if (/<img(?=[\s/>])/.test(source) && file !== "src/ui/art-card.tsx")
     fail("Game artwork must use ArtCard to preserve composition and states.");
+  if (/\brounded-(?:none\b|\[)/.test(source))
+    fail("Use the shared nonzero shadcn radius scale; no sharp-corner overrides.");
   if (/\bstyle\s*=\s*\{/.test(source))
     fail("Use shared CSS classes and tokens rather than inline visual styles.");
   if (

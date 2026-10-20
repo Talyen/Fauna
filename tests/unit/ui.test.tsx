@@ -1,3 +1,9 @@
+import { ActionCard } from "../../src/ui/cards";
+import { TooltipProvider } from "../../src/components/ui/tooltip";
+import { produce } from "immer";
+import { dispatch } from "../../src/game/engine";
+import { run } from "./helpers";
+import { TargetPreview } from "../../src/ui/target-preview";
 // @vitest-environment jsdom
 import { afterEach, describe, it, expect, vi } from "vitest";
 import { render, screen, cleanup, act } from "@testing-library/react";
@@ -73,4 +79,49 @@ it("opens a recoverable error screen when browser storage access itself is denie
   } finally {
     Object.defineProperty(window, "localStorage", original);
   }
+});
+
+it("previews Block depletion, exact health loss and knockout without visible HP totals", () => {
+  const before = produce(run(), (d) => {
+    d.team[0]!.health = 3;
+    d.team[0]!.block = 5;
+    d.battle!.enemies.forEach((enemy, i) => {
+      enemy.targetId = "ally-0";
+      enemy.damage = 8;
+      if (i > 0) enemy.health = 0;
+    });
+  });
+  const result = dispatch(before, { type: "endTurn" });
+  render(<TargetPreview before={before} result={result} targetId="ally-0" />);
+  expect(screen.getByLabelText("Block 5 to 0")).toBeTruthy();
+  expect(screen.getByLabelText("Knockout")).toBeTruthy();
+  expect(screen.getByRole("progressbar", { name: "Health" }).getAttribute("aria-valuenow")).toBe("0");
+  expect(document.querySelector(".health-number")).toBeNull();
+});
+
+it("keeps unavailable cards inspectable and denies activation without explanatory text", async () => {
+  const game = run(),
+    click = vi.fn(),
+    deny = vi.fn(),
+    inspect = vi.fn();
+  render(
+    <TooltipProvider>
+      <ActionCard
+        card={game.cards[0]!}
+        ownerName="Mossback"
+        disabled
+        onClick={click}
+        onDenied={deny}
+        onInspect={inspect}
+      />
+    </TooltipProvider>,
+  );
+  const button = screen.getByRole("button");
+  await userEvent.click(button);
+  expect(deny).toHaveBeenCalledWith(button);
+  expect(click).not.toHaveBeenCalled();
+  expect(button.getAttribute("aria-disabled")).toBe("true");
+  expect(screen.queryByText("Not enough mana.")).toBeNull();
+  await userEvent.pointer({ target: button, keys: "[MouseRight]" });
+  expect(inspect).toHaveBeenCalledOnce();
 });

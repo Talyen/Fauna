@@ -47,7 +47,7 @@ The color policy rejects raw hexadecimal/function/named colors in player UI, dir
 - Typography: locally bundled Inter Variable, regular rules, medium controls, semibold names, tabular numbers. 16px rules/controls, 20px names, 24px screen headings, 14px secondary information. Inspection enlarges rules to 18px and names to 28px. Font license: `Docs/FONT-LICENSE.txt`.
 - Spacing: a 4px grid, using layout instead of decorative separators or panels.
 - Color: pure black canvas (#000), neutral charcoal surfaces (#141414), ivory text (#ece6db), neutral secondary text (#b3b3b3), neutral gray borders (#484848), and muted gold (#d9b56f). Muted-gold primary actions and selection/focus indicators. Solid selection outline, separate dashed focus outline, neutral targetable border. Disabled/unaffordable cards dim; knockout adds grayscale and zero health.
-- Geometry: 6px corners, thin borders, no decorative shadows, glows or textures (the external selection ring is an interaction indicator). Artwork has no UI scrim.
+- Geometry: shadcn’s default 0.625rem base radius (10px at 16px text), with semantic sm/md/lg/xl radii derived at 0.6/0.8/1/1.4 times the base. Artwork uses the base radius; standard controls keep their component radius. No sharp visible surface corners or `rounded-none` overrides, thin borders, no decorative shadows, glows or textures (the external selection ring is an interaction indicator). Artwork has no UI scrim.
 - Motion: 150ms purposeful transitions; respect reduced motion. Gameplay commits before visual feedback and input never waits on animations.
 - Icons: Lucide, with labels/numbers so color is never the only cue.
 
@@ -82,3 +82,11 @@ Original synthesized cues distinguish damage families, healing, gaining block, a
 For every interface change, run check, unit tests and build, then the relevant Playwright journeys. Review actual rendered draft, battle, targeting, rewards, Pause and inspection at 1280×800 and 1920×1080. Check 150% text, reduced motion, focus return, input cancellation and unavailable/knockout states. The browser suite enforces ratios, artwork-only surfaces, row ordering, viewport fit, stable target previews, control hit areas, semantic colors, modal focus ownership, and full expedition flows. Screenshots are review evidence, not pixel-golden approvals.
 
 Browser controller simulation does not verify physical controller behavior. Report macOS desktop, Windows packaging, physical controller, Steam client and Steam Deck verification separately.
+
+## Battle interaction decisions
+
+- Enemy details open below their artwork and readout; ally and hand details open above. Radix collision handling may shift/flip to remain on-screen. Selecting an action closes its tooltip while targeting; hovering/focusing the card again restores its rules. Creature details remain inspectable.
+- Health loss is striped on the bar, with exact typed damage beside the target. Block previews show old → projected Block, including depletion to zero. Lethal previews add a small skull alongside the health bar. Numeric health totals remain in hover/inspection only.
+- Invalid targets dim slightly; knocked-out creatures retain their slots with dimmed grayscale artwork and empty health bars. Empty battlefield clicks cancel selection. A/D retains remembered valid targets.
+- Selected cards softly fade the Mana crystals they would spend. Actual Mana changes only after acceptance. Unavailable cards stay dimmed and inspectable; activation gives a short shake and quiet denial cue, without explanatory text. Sound and reduced-motion settings apply; rejected input never publishes gameplay or saves.
+- Mouse use stays hover-driven: no programmatic battle targeting focus, automatic hand focus, focus-only tooltip or focus lift. Navigation keys, Tab and controller navigation intentionally activate focus. After play, keyboard/controller focus moves to the nearest remaining hand slot. Pointer selection itself still lifts the selected card.

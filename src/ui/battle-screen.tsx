@@ -1,4 +1,12 @@
-import { useCallback, useLayoutEffect, useRef, useState, type MutableRefObject, type ReactNode } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type MutableRefObject,
+  type ReactNode,
+} from "react";
 import { Button } from "../components/ui/button";
 import { ActionCard, AllyCard, EnemyCard } from "./cards";
 import { definition, species } from "../game/content";
@@ -38,6 +46,7 @@ export function BattleScreen({
   bursts,
   controller,
   navigateFocus,
+  onDenied,
 }: {
   game: GameState;
   send: (command: Command) => boolean;
@@ -46,12 +55,13 @@ export function BattleScreen({
   bursts: readonly Burst[];
   controller: boolean;
   navigateFocus: boolean;
+  onDenied: (element: HTMLElement) => void;
 }) {
   const [selected, setSelected] = useState<string | null>(null);
   const [remembered, setRemembered] = useState<{ enemy?: string; ally?: string }>({});
   const board = useRef<HTMLElement>(null);
   const [line, setLine] = useState("");
-  const focusAfterCommand = useRef(false);
+  const focusAfterCommand = useRef<number | null>(null);
   const battle = game.battle!;
   const card = game.cards.find((c) => c.id === selected),
     def = card ? definition(card.definitionId) : null;
@@ -70,21 +80,35 @@ export function BattleScreen({
   const play = (command: Command) => {
     if (!send(command)) return;
     setSelected(null);
-    focusAfterCommand.current = navigateFocus;
+    focusAfterCommand.current = navigateFocus ? Math.max(0, battle.hand.indexOf(selected ?? "")) : null;
   };
   useLayoutEffect(() => {
-    if (focusAfterCommand.current && !selected) {
-      focusAfterCommand.current = false;
-      returnFocus(
-        board.current?.querySelector<HTMLElement>('.hand .action-card:not([aria-disabled="true"])') ?? null,
-      );
+    if (focusAfterCommand.current !== null && !selected) {
+      const cards = Array.from(board.current?.querySelectorAll<HTMLElement>(".hand .action-card") ?? []);
+      const index = Math.min(focusAfterCommand.current, cards.length - 1);
+      focusAfterCommand.current = null;
+      returnFocus(cards[index] ?? board.current?.querySelector<HTMLElement>(".end-turn") ?? null);
     }
   }, [game.revision, selected]);
   const cancel = useCallback(() => {
     const opener = board.current?.querySelector<HTMLElement>(`[data-card-id="${selected}"]`) ?? null;
     setSelected(null);
-    returnFocus(opener);
-  }, [selected]);
+    if (navigateFocus) returnFocus(opener);
+  }, [selected, navigateFocus]);
+  useEffect(() => {
+    const root = board.current;
+    const clear = (event: PointerEvent) => {
+      if (
+        event.button !== 0 ||
+        !(event.target instanceof Element) ||
+        event.target.closest("button, a, input, [role=dialog], [role=tooltip]")
+      )
+        return;
+      setSelected(null);
+    };
+    root?.addEventListener("pointerdown", clear);
+    return () => root?.removeEventListener("pointerdown", clear);
+  }, []);
   const handle = (action: InputAction) => {
     if (action === "back" && selected) {
       cancel();
@@ -95,9 +119,11 @@ export function BattleScreen({
       return true;
     }
     if (selected && targets.length && (action === "left" || action === "right")) {
-      setTarget(
-        targets[(targets.indexOf(target!) + (action === "left" ? -1 : 1) + targets.length) % targets.length]!,
-      );
+      const next =
+        targets[(targets.indexOf(target!) + (action === "left" ? -1 : 1) + targets.length) % targets.length]!;
+      setTarget(next);
+      // Navigation may start from another row, including when only one target remains.
+      board.current?.querySelector<HTMLElement>(`[data-actor-id="${next}"] .creature-card`)?.focus();
       return true;
     }
     return false;
@@ -109,11 +135,11 @@ export function BattleScreen({
     };
   });
   useLayoutEffect(() => {
-    if (!selected) return;
+    if (!selected || !navigateFocus) return;
     board.current
       ?.querySelector<HTMLElement>(target ? `[data-actor-id="${target}"] .creature-card` : ".confirm-play")
       ?.focus();
-  }, [selected, target]);
+  }, [selected, target, navigateFocus]);
   useLayoutEffect(() => {
     const update = () => {
       const root = board.current;
@@ -149,7 +175,7 @@ export function BattleScreen({
           <EnemyCard
             key={enemy.id}
             enemy={enemy}
-            tooltips={!selected}
+            invalidTarget={!!selected && (!enemyTarget || enemy.health <= 0)}
             modifiers={game}
             onPreview={() => {
               if (selected && enemyTarget && enemy.health > 0) setTarget(enemy.id);
@@ -160,10 +186,12 @@ export function BattleScreen({
               ) : undefined
             }
             feedback={<CombatFeedback bursts={bursts} targetId={enemy.id} />}
-            onClick={() => {
-              if (selected && enemyTarget && enemy.health > 0)
-                play({ type: "play", cardId: selected, targetId: enemy.id });
-              else inspect({ species: enemy.species, enemyId: enemy.id });
+            onClick={(element) => {
+              if (selected) {
+                if (enemyTarget && enemy.health > 0)
+                  play({ type: "play", cardId: selected, targetId: enemy.id });
+                else onDenied(element);
+              } else inspect({ species: enemy.species, enemyId: enemy.id });
             }}
             onInspect={() => inspect({ species: enemy.species, enemyId: enemy.id })}
             label={
@@ -194,7 +222,9 @@ export function BattleScreen({
             modifiers={game}
             cards={game.cards}
             selected={card?.ownerId === creature.id}
-            tooltips={!selected}
+            invalidTarget={
+              !!selected && ((!allyTarget && def?.effect !== "teamGuard") || creature.health <= 0)
+            }
             onPreview={() => {
               if (selected && allyTarget && creature.health > 0) setTarget(creature.id);
             }}
@@ -204,10 +234,12 @@ export function BattleScreen({
               ) : undefined
             }
             feedback={<CombatFeedback bursts={bursts} targetId={creature.id} />}
-            onClick={() => {
-              if (selected && allyTarget && creature.health > 0)
-                play({ type: "play", cardId: selected, targetId: creature.id });
-              else inspect({ species: creature.species });
+            onClick={(element) => {
+              if (selected) {
+                if (allyTarget && creature.health > 0)
+                  play({ type: "play", cardId: selected, targetId: creature.id });
+                else onDenied(element);
+              } else inspect({ species: creature.species });
             }}
             onInspect={() => inspect({ species: creature.species })}
             label={
@@ -220,7 +252,7 @@ export function BattleScreen({
       </section>
       <section className="hand-section" aria-label="Action hand">
         <div className="hand-toolbar">
-          <ManaCrystals mana={battle.mana} />
+          <ManaCrystals mana={battle.mana} previewCost={def?.cost ?? 0} />
           <Button className="end-turn" onClick={() => play({ type: "endTurn" })}>
             End turn{controller ? " · Y" : ""}
           </Button>
@@ -238,7 +270,7 @@ export function BattleScreen({
                   ownerName={species(owner.species).name}
                   selected={selected === id}
                   disabled={battle.mana < definition(card.definitionId).cost}
-                  tooltips={!selected}
+                  onDenied={onDenied}
                   onInspect={() => inspect({ card })}
                   onClick={() => setSelected((old) => (old === id ? null : id))}
                 />

@@ -1,3 +1,5 @@
+// Game navigation forwards arrow events to Radix without changing the active input device.
+const bridgedKeys = new WeakSet<KeyboardEvent>();
 export type InputAction = "left" | "right" | "up" | "down" | "confirm" | "back" | "inspect" | "endTurn";
 export function moveFocus(direction: "left" | "right" | "up" | "down") {
   const root =
@@ -15,7 +17,9 @@ export function moveFocus(direction: "left" | "right" | "up" | "down") {
       (!horizontal && (direction === "up" || direction === "down"))
     ) {
       const key = { left: "ArrowLeft", right: "ArrowRight", up: "ArrowUp", down: "ArrowDown" }[direction];
-      focused?.dispatchEvent(new KeyboardEvent("keydown", { key, bubbles: true }));
+      const event = new KeyboardEvent("keydown", { key, bubbles: true });
+      bridgedKeys.add(event);
+      focused?.dispatchEvent(event);
       // Radix schedules roving focus. Release after that focus settles so radio
       // selection follows navigation and its held-arrow state cannot leak.
       setTimeout(() => focused?.dispatchEvent(new KeyboardEvent("keyup", { key, bubbles: true })), 0);
@@ -103,7 +107,14 @@ export function connectInput(
   onAction: (action: InputAction) => void,
   onMode: (mode: "keyboard" | "controller" | "pointer") => void,
 ) {
+  let interactionMode: "keyboard" | "controller" | "pointer" | undefined;
+  const changeMode = (mode: "keyboard" | "controller" | "pointer") => {
+    if (mode === interactionMode) return;
+    interactionMode = mode;
+    onMode(mode);
+  };
   const keyboard = (event: KeyboardEvent) => {
+    if (bridgedKeys.has(event)) return;
     if (
       event.altKey ||
       event.ctrlKey ||
@@ -128,7 +139,23 @@ export function connectInput(
       I: "inspect",
     };
     const action = mapping[event.key];
-    onMode("keyboard");
+    if (
+      action ||
+      [
+        "Tab",
+        "Enter",
+        " ",
+        "ArrowLeft",
+        "ArrowRight",
+        "ArrowUp",
+        "ArrowDown",
+        "Home",
+        "End",
+        "PageUp",
+        "PageDown",
+      ].includes(event.key)
+    )
+      changeMode("keyboard");
     if (action) {
       event.preventDefault();
       onAction(action);
@@ -144,10 +171,14 @@ export function connectInput(
     )
       event.stopPropagation();
   };
-  const pointer = () => onMode("pointer");
+  const pointer = (event: PointerEvent) => {
+    if (event.type === "pointermove" && !event.movementX && !event.movementY) return;
+    changeMode("pointer");
+  };
   window.addEventListener("keydown", keyboard, true);
   window.addEventListener("keyup", keyup, true);
-  window.addEventListener("pointerdown", pointer);
+  window.addEventListener("pointerdown", pointer, true);
+  window.addEventListener("pointermove", pointer, true);
   let frame = 0;
   let previous = new Set<InputAction>();
   let repeatAt = 0;
@@ -159,7 +190,7 @@ export function connectInput(
     for (const action of actions) {
       const directional = ["left", "right", "up", "down"].includes(action);
       if (!previous.has(action) || (directional && now >= repeatAt)) {
-        onMode("controller");
+        changeMode("controller");
         onAction(action);
         if (directional) repeatAt = now + (previous.has(action) ? 160 : 350);
       }
@@ -172,6 +203,7 @@ export function connectInput(
     cancelAnimationFrame(frame);
     window.removeEventListener("keydown", keyboard, true);
     window.removeEventListener("keyup", keyup, true);
-    window.removeEventListener("pointerdown", pointer);
+    window.removeEventListener("pointerdown", pointer, true);
+    window.removeEventListener("pointermove", pointer, true);
   };
 }

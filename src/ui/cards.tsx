@@ -16,7 +16,7 @@ type CreatureProps = {
   marks?: number;
   selected?: boolean;
   disabled?: boolean;
-  onClick?: () => void;
+  onClick?: (element: HTMLElement) => void;
   onInspect?: () => void;
   label?: string;
   presentation?: boolean;
@@ -30,6 +30,7 @@ type CreatureProps = {
   modifiers?: GameState;
   tooltips?: boolean;
   readout?: boolean;
+  invalidTarget?: boolean;
 };
 export function CreatureCard({
   kind,
@@ -54,6 +55,7 @@ export function CreatureCard({
   tooltips = true,
   readout = true,
   modifiers,
+  invalidTarget = false,
 }: CreatureProps) {
   const [tooltipOpen, setTooltipOpen] = useState(false);
   useEffect(() => {
@@ -65,17 +67,24 @@ export function CreatureCard({
       aspect="creature"
       artwork={`./art/${kind}.svg`}
       presentation={presentation}
-      className={selected ? "selected" : undefined}
+      className={[selected ? "selected" : "", invalidTarget ? "invalid-target" : ""].join(" ")}
       data-species={kind}
       data-enemy-id={enemyId}
       aria-label={label ?? info.name}
       aria-pressed={presentation ? undefined : selected}
       aria-disabled={presentation ? undefined : disabled}
-      onClick={() => {
+      onClick={(event) => {
         setTooltipOpen(false);
-        if (!disabled) onClick?.();
+        if (!disabled) onClick?.(event.currentTarget);
       }}
-      onFocus={onPreview}
+      onFocus={(event) => {
+        if (
+          (event.currentTarget.closest<HTMLElement>(".app")?.dataset.input ??
+            document.documentElement.dataset.input) === "pointer"
+        )
+          event.preventDefault();
+        else onPreview?.();
+      }}
       onPointerEnter={onPreview}
       onContextMenu={
         onInspect
@@ -95,7 +104,7 @@ export function CreatureCard({
       ) : (
         <Tooltip open={tooltips && tooltipOpen} onOpenChange={(open) => setTooltipOpen(tooltips && open)}>
           <TooltipTrigger asChild>{artwork}</TooltipTrigger>
-          <TooltipContent>
+          <TooltipContent side={enemyId ? "bottom" : "top"} sideOffset={enemyId && readout ? 44 : 8}>
             <CreatureDetails
               kind={kind}
               name={name}
@@ -163,6 +172,7 @@ export function ActionCard({
   modifiers,
   actor,
   tooltips = true,
+  onDenied,
 }: {
   card: Card;
   selected?: boolean;
@@ -175,6 +185,7 @@ export function ActionCard({
   modifiers?: GameState;
   actor?: Creature;
   tooltips?: boolean;
+  onDenied?: (element: HTMLElement) => void;
 }) {
   const [tooltipOpen, setTooltipOpen] = useState(false);
   useEffect(() => {
@@ -196,9 +207,17 @@ export function ActionCard({
       }
       aria-pressed={presentation ? undefined : selected}
       aria-disabled={presentation ? undefined : disabled}
-      onClick={() => {
+      onFocus={(event) => {
+        if (
+          (event.currentTarget.closest<HTMLElement>(".app")?.dataset.input ??
+            document.documentElement.dataset.input) === "pointer"
+        )
+          event.preventDefault();
+      }}
+      onClick={(event) => {
         setTooltipOpen(false);
-        onClick();
+        if (disabled) onDenied?.(event.currentTarget);
+        else onClick();
       }}
       onContextMenu={
         onInspect
@@ -216,9 +235,8 @@ export function ActionCard({
   ) : (
     <Tooltip open={tooltips && tooltipOpen} onOpenChange={(open) => setTooltipOpen(tooltips && open)}>
       <TooltipTrigger asChild>{artwork}</TooltipTrigger>
-      <TooltipContent>
+      <TooltipContent side="top">
         <ActionDetails card={card} ownerName={ownerName} actor={actor} modifiers={modifiers} />
-        {disabled ? <p>Not enough mana.</p> : null}
       </TooltipContent>
     </Tooltip>
   );

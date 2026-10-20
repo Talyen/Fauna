@@ -24,8 +24,13 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --radius-full: var(--radius-round);
-  --radius-md: var(--radius);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
 * {
@@ -298,7 +303,7 @@ button {
   transition: transform var(--motion-fast) ease-out;
 }
 .hand-slot:hover,
-.hand-slot:focus-within,
+.app:not([data-input="pointer"]) .hand-slot:focus-within,
 .hand-slot:has(.selected) {
   z-index: 10;
 }
@@ -789,4 +794,34 @@ button {
 }
 .dialog-content.settings-dialog {
   width: min(440px, calc(100vw - var(--space-12)));
+}
+
+/* Pointer interaction must not inherit keyboard focus decoration or hand lifts. */
+:root[data-input="pointer"] button:focus-visible,
+.app[data-input="pointer"] button:focus-visible {
+  outline: none;
+}
+.app[data-input="pointer"] .hand-slot .action-card:focus-visible:not(:hover):not(.selected) {
+  transform: none;
+}
+.creature-wrap:not(.knocked-out) .creature-card.invalid-target {
+  opacity: 0.7;
+}
+.health-forecast {
+  position: relative;
+}
+.knockout-preview {
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  left: calc(100% + var(--space-1));
+  top: 50%;
+  translate: 0 -50%;
+}
+.notice,
+.error-banner {
+  border-radius: var(--radius-md);
+}
+.target-line path {
+  stroke-linecap: round;
 }
