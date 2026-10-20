@@ -11,15 +11,18 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "dev:desktop": "node scripts/dev-desktop.mjs",
-    "check": "tsc --noEmit && oxlint src tests scripts desktop design --deny-warnings && prettier --check . && node scripts/boundaries.mjs && node scripts/ui-contract.mjs",
+    "check": "node scripts/check.mjs",
+    "check:full": "tsc --noEmit && oxlint src tests scripts desktop design --deny-warnings && prettier --check . && node scripts/boundaries.mjs && node scripts/ui-contract.mjs",
     "format": "prettier --write .",
-    "test": "vitest run",
+    "test": "node scripts/run-local-tests.mjs",
+    "test:full": "vitest run",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",
     "test:e2e": "playwright test",
     "test:desktop": "node scripts/smoke-desktop.mjs",
     "package:win": "npm run build && electron-builder --win --x64 --dir",
-    "verify": "npm run check && npm test && npm run build && npm run test:e2e"
+    "verify": "node scripts/check.mjs",
+    "verify:full": "npm run check:full && npm run test:full && npm run build && npm run test:e2e"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.3.0",

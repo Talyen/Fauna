@@ -10,7 +10,7 @@ Use source-owned shadcn/ui for every standard UI control and its interaction beh
 
 Explicit gameplay compositions are artwork cards, the hand fan, targeting, mana crystals, combat feedback and forecast overlays on shadcn Progress bars. They use shadcn controls where interactive and shared tokens; no general-purpose custom widget is permitted under this exception. Black canvas, typography, semantic combat colors and minimum hit areas remain project theme decisions.
 
-ArtCard is the sole artwork surface: exactly one image, no text or UI overlays. Creature artwork stays 4:3 landscape and action artwork 3:4 portrait, with contain rendering; never stretch or crop to another ratio. Names, rules, health numbers and traits belong in hover/focus details or centered pinned inspection. Dynamic progress geometry is owned by Progress; hand geometry by FanSlot. All visual colors, text sizes, and radii use shared tokens. `npm run check` enforces component ownership, palette and typography rules.
+ArtCard is the sole artwork surface: exactly one image, no text or UI overlays. Creature artwork stays 4:3 landscape and action artwork 3:4 portrait, with contain rendering; never stretch or crop to another ratio. Names, rules, health numbers and traits belong in hover/focus details or centered pinned inspection. Dynamic progress geometry is owned by Progress; hand geometry by FanSlot. All visual colors, text sizes, and radii use shared tokens. The CI static gate (`npm run check:full`) enforces component ownership, palette and typography rules.
 
 ## Battle composition
 
@@ -83,7 +83,9 @@ Original synthesized cues distinguish damage families, healing, gaining block, a
 
 ## Required review
 
-For every interface change, run check, unit tests and build, then the relevant Playwright journeys. Review actual rendered draft, battle, targeting, rewards, Pause and inspection at 1280×800 and 1920×1080. Check 150% text, reduced motion, focus return, input cancellation and unavailable/knockout states. The browser suite enforces ratios, artwork-only surfaces, row ordering, viewport fit, stable target previews, control hit areas, semantic colors, modal focus ownership, and full expedition flows. Screenshots are review evidence, not pixel-golden approvals.
+Local handoff uses the bounded `npm run check` gate described in [AGENTS.md](../AGENTS.md#review-and-verification). Full static checks, DOM units, builds and browser journeys run in CI. Do not automatically run a local build, browser or desktop suite to satisfy this review; broader local validation is an explicit user opt-in.
+
+Required rendered coverage remains draft, battle, targeting, rewards, Pause and inspection at 1280×800 and 1920×1080, including 150% text, reduced motion, focus return, input cancellation and unavailable/knockout states. Inspect CI screenshots when available or perform a requested focused local review. Report rendered review as pending if no current evidence is available. The browser suite enforces ratios, artwork-only surfaces, row ordering, viewport fit, stable target previews, control hit areas, semantic colors, modal focus ownership, and full expedition flows. Screenshots are review evidence, not pixel-golden approvals.
 
 Browser controller simulation does not verify physical controller behavior. Report macOS desktop, Windows packaging, physical controller, Steam client and Steam Deck verification separately.
 

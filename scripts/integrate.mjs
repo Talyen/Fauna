@@ -24,8 +24,11 @@ try {
   if (git(["branch", "--show-current"], task) !== branch) throw new Error("Task checkout changed branches.");
   git(["merge", "--no-edit", "main"], task);
   const verifiedHead = git(["rev-parse", "HEAD"], task);
-  const result = spawnSync("npm", ["run", "verify"], { cwd: task, stdio: "inherit" });
-  if (result.status !== 0) throw new Error("Combined verification failed; main was not advanced.");
+  const result = spawnSync("npm", ["run", "check", "--", "--base", mainHead], {
+    cwd: task,
+    stdio: "inherit",
+  });
+  if (result.status !== 0) throw new Error("Combined local check failed; main was not advanced.");
   if (git(["status", "--porcelain"]) || git(["status", "--porcelain"], task))
     throw new Error("Checkout changed during verification; main was not advanced.");
   if (
@@ -35,7 +38,9 @@ try {
   )
     throw new Error("A branch advanced during verification; main was not advanced.");
   git(["merge", "--ff-only", verifiedHead]);
-  console.log(`Integrated ${branch} into main. Task worktree retained.`);
+  console.log(
+    `Integrated ${branch} into main after the local gate. Full CI validation remains pending. Task worktree retained.`,
+  );
 } finally {
   await rm(lock, { recursive: true });
 }

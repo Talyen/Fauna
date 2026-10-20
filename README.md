@@ -35,20 +35,37 @@ Gameplay settles before visual feedback. Accepted commands automatically save; a
 
 ## Verify
 
-```sh
-npm run check
-npm test
-npm run build
-npx playwright install chromium
-npm run test:e2e
-npm run test:desktop
-```
-
-`npm run verify` combines static checks, unit tests, the production build, and browser journeys. Desktop smoke requires a desktop session and a current build. Browser screenshots are written to ignored `reports/`. CI also builds Windows x64 and runs startup, draft, save, relaunch/resume, and renderer-isolation checks against the unpacked executable.
+The default local workflow is small and bounded:
 
 ```sh
-npm run package:win
+npm test                              # Fixed Node smoke, one worker
+npm run check -- src/game/engine.ts   # Smoke plus selected-file formatting
+npm run check -- --diff               # Dirty tracked and untracked files
+npm run check -- --base main          # Committed task diff plus local edits
+npm run verify                       # Same local check; defaults to the dirty set
 ```
+
+Smoke covers atomic turn settlement, save ordering/recovery, and the verification harness. It uses one worker, a 512 MiB Node heap limit, lower process priority when supported and a 30-second deadline. Formatting checks at most 50 existing files, each at most 256,000 bytes, within an 8,000-byte argument budget; larger batches are explicitly deferred to CI. Markdown-only checks skip Node smoke. Use explicit task paths in a mixed checkout. Local integration checks the combined diff against locked main with this same lightweight gate.
+
+CI owns complete validation: full static checks, all unit tests including DOM, one production build, the browser suite, Windows x64 packaging and packaged Electron startup/save/resume/isolation smoke. Linux verification skips the unused Electron download; Windows still installs and packages Electron. Every push and pull request runs the full CI profile. No test suites have been removed.
+
+Focused unit tests remain available during development:
+
+```sh
+npm run test:full -- tests/unit/starter.test.ts
+```
+
+Broader local checks are explicit opt-ins, not routine handoff steps:
+
+```sh
+npm run check:full     # Full static aggregate
+npm run test:full      # All unit suites, including DOM
+npm run verify:full    # Full static, all units, build and browser journeys
+npm run test:desktop   # Native Electron smoke; needs a current build and binary
+npm run package:win    # Windows unpacked package
+```
+
+Agents run those broader local checks only when requested. Local checks and integration do not establish CI or release readiness. Browser screenshots and traces are written to ignored `reports/` and `test-results/`; desktop smoke requires a desktop session. See [release boundaries](Docs/RELEASE.md) for remaining platform gates.
 
 The Windows job creates an **unpacked x64 application**, not a signed release installer. Code signing, production Steam App IDs, Steamworks services, upload/promotion, physical controller checks, and Steam Deck/Proton testing remain release work. No remote services or account credentials are needed to play.
 

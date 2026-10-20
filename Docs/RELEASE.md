@@ -2,7 +2,7 @@
 
 Fauna targets Windows x64 on Steam, with controller and Steam Deck experience considered from the foundation. The current app runs offline without Steam, game servers, or accounts.
 
-The GitHub Actions workflow runs Linux static/unit/browser verification and a Windows unpacked build plus Electron startup/resume/isolation smoke test. The Windows executable is produced by electron-builder using the `com.fauna.game` application identity. Builds contain only the renderer, desktop code, and required runtime dependencies.
+The GitHub Actions workflow runs `npm run verify:full` on Linux for full static checks, all Node/DOM unit suites, a production build and browser journeys, plus a Windows unpacked build and Electron startup/resume/isolation smoke test. The lightweight local `npm test`, `npm run check` and `npm run verify` gates do not replace CI. Linux skips the unused Electron binary download; Windows installs the binary needed for packaging and native smoke. CI retains rendered screenshots and failure traces in the `browser-review` artifact for seven days, including successful runs. The Windows executable is produced by electron-builder using the `com.fauna.game` application identity. Builds contain only the renderer, desktop code, and required runtime dependencies.
 
 Before shipping:
 
