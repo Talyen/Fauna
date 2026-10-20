@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { describe, it, expect } from "vitest";
 import { sourceViolations } from "../../scripts/ui-contract.mjs";
 
@@ -35,4 +36,85 @@ describe("design-system enforcement", () => {
       ),
     ).toEqual([]);
   });
+});
+
+it("rejects handmade widgets and unregistered primitive escape hatches", () => {
+  for (const source of [
+    '<div role="tablist"><Button role="tab" /></div>',
+    '<Button role={"switch"} aria-checked={true} />',
+    "<div onClick={() => select()} tabIndex={0} />",
+    "<summary>Settings</summary>",
+    'React.createElement("button", {onClick: select})',
+  ])
+    expect(sourceViolations("src/ui/screen.tsx", source).length).toBeGreaterThan(0);
+  expect(sourceViolations("src/components/ui/homemade-tabs.tsx", "<button />").length).toBeGreaterThan(0);
+  expect(sourceViolations("src/components/ui/tabs.tsx", "<button />").length).toBeGreaterThan(0);
+  expect(
+    sourceViolations(
+      "src/ui/screen.tsx",
+      '<Tabs><TabsList><TabsTrigger value="fire">Fire</TabsTrigger></TabsList><TabsContent value="fire" /></Tabs>',
+    ),
+  ).toEqual([]);
+});
+
+it("rejects color literals in code, named CSS colors and utility palette escapes", () => {
+  for (const source of [
+    '<Button className="text-amber-300" />',
+    '<Button className="bg-white" />',
+    'const theme = { primary: "#ccaa66" };',
+  ])
+    expect(sourceViolations("src/ui/screen.tsx", source).length).toBeGreaterThan(0);
+  expect(
+    sourceViolations("src/ui/screen.css", ".control { color: gold; background: white; }").length,
+  ).toBeGreaterThan(0);
+});
+
+it("keeps the approved semantic palette readable and combat colors independent", () => {
+  const css = readFileSync(new URL("../../src/ui/tokens.css", import.meta.url), "utf8");
+  const tokens = Object.fromEntries(
+    [...css.matchAll(/--([\w-]+):\s*([^;]+);/g)].map((match) => [match[1], match[2]]),
+  );
+  const resolve = (name) => {
+    const value = tokens[name];
+    const alias = /^var\(--([\w-]+)\)$/.exec(value);
+    return alias ? resolve(alias[1]) : value;
+  };
+  const luminance = (hex) => {
+    const expanded =
+      hex.length === 4
+        ? "#" +
+          hex
+            .slice(1)
+            .split("")
+            .map((c) => c + c)
+            .join("")
+        : hex;
+    const values = [1, 3, 5]
+      .map((i) => parseInt(expanded.slice(i, i + 2), 16) / 255)
+      .map((n) => (n <= 0.04045 ? n / 12.92 : ((n + 0.055) / 1.055) ** 2.4));
+    return values[0] * 0.2126 + values[1] * 0.7152 + values[2] * 0.0722;
+  };
+  for (const [text, background] of [
+    ["foreground", "background"],
+    ["card-foreground", "card"],
+    ["popover-foreground", "popover"],
+    ["primary-foreground", "primary"],
+    ["secondary-foreground", "secondary"],
+    ["accent-foreground", "accent"],
+    ["muted-foreground", "muted"],
+    ["muted-foreground", "popover"],
+    ["destructive-foreground", "destructive"],
+  ]) {
+    const a = luminance(resolve(text)),
+      b = luminance(resolve(background));
+    expect(
+      (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05),
+      `${text} on ${background}`,
+    ).toBeGreaterThanOrEqual(4.5);
+  }
+  expect(resolve("background")).toBe("#000");
+  expect(resolve("primary")).toBe("#d9b56f");
+  expect(resolve("health")).toBe("#f87171");
+  expect(resolve("block")).toBe("#7dd3fc");
+  for (const alias of ["selected", "line", "surface", "text"]) expect(tokens[alias]).toMatch(/^var\(--/);
 });

@@ -1,8 +1,27 @@
 export type InputAction = "left" | "right" | "up" | "down" | "confirm" | "back" | "inspect" | "endTurn";
 export function moveFocus(direction: "left" | "right" | "up" | "down") {
   const root =
-    Array.from(document.querySelectorAll('[role="dialog"][data-state="open"], dialog[open]')).at(-1) ??
-    document;
+    Array.from(
+      document.querySelectorAll(
+        '[role="dialog"][data-state="open"], [role="alertdialog"][data-state="open"], dialog[open]',
+      ),
+    ).at(-1) ?? document;
+  const focused = document.activeElement as HTMLElement | null;
+  const composite = focused?.closest('[role="tablist"], [role="radiogroup"]');
+  if (composite && (root === document || root.contains(composite))) {
+    const horizontal = composite.getAttribute("aria-orientation") !== "vertical";
+    if (
+      (horizontal && (direction === "left" || direction === "right")) ||
+      (!horizontal && (direction === "up" || direction === "down"))
+    ) {
+      const key = { left: "ArrowLeft", right: "ArrowRight", up: "ArrowUp", down: "ArrowDown" }[direction];
+      focused?.dispatchEvent(new KeyboardEvent("keydown", { key, bubbles: true }));
+      // Radix schedules roving focus. Release after that focus settles so radio
+      // selection follows navigation and its held-arrow state cannot leak.
+      setTimeout(() => focused?.dispatchEvent(new KeyboardEvent("keyup", { key, bubbles: true })), 0);
+      return;
+    }
+  }
   const buttons = Array.from(
     root.querySelectorAll<HTMLElement>(
       'button:not(:disabled):not([tabindex="-1"]), input:not(:disabled), [tabindex="0"]',
@@ -115,8 +134,19 @@ export function connectInput(
       onAction(action);
     }
   };
+  const keyup = (event: KeyboardEvent) => {
+    // WASD is translated into an arrow-key pair for composite shadcn widgets.
+    // Its physical keyup must not release Radix's arrow state before roving focus.
+    if (
+      /^[wasd]$/i.test(event.key) &&
+      event.target instanceof HTMLElement &&
+      event.target.closest('[role="tablist"], [role="radiogroup"]')
+    )
+      event.stopPropagation();
+  };
   const pointer = () => onMode("pointer");
   window.addEventListener("keydown", keyboard, true);
+  window.addEventListener("keyup", keyup, true);
   window.addEventListener("pointerdown", pointer);
   let frame = 0;
   let previous = new Set<InputAction>();
@@ -141,6 +171,7 @@ export function connectInput(
   return () => {
     cancelAnimationFrame(frame);
     window.removeEventListener("keydown", keyboard, true);
+    window.removeEventListener("keyup", keyup, true);
     window.removeEventListener("pointerdown", pointer);
   };
 }

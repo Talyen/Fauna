@@ -1,31 +1,74 @@
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
+import registry from "./shadcn-registry.json" with { type: "json" };
 import { pathToFileURL } from "node:url";
+
+// Every primitive is explicitly registered with its upstream owner. Add library
+// components here during review; do not use components/ui as a custom-control escape hatch.
+const primitives = new Map(
+  Object.entries(registry).map(([name, dependency]) => [
+    `src/components/ui/${name}.tsx`,
+    { name, dependency },
+  ]),
+);
+const widgetRoles =
+  /<[\w.:-]+\b[^>]*\brole\s*=\s*(?:["']|\{["'])(?:button|tab|tablist|tabpanel|switch|checkbox|radio|radiogroup|combobox|listbox|option|slider|spinbutton|dialog|alertdialog|menu|menubar|menuitem|menuitemcheckbox|menuitemradio|tree|treeitem)(?:["']|["']\})/;
 
 /** Source-policy guard. Rendered behavior and accessibility need browser verification too. */
 export function sourceViolations(file, source) {
   const violations = [];
   const fail = (message) => violations.push(`${file}: ${message}`);
   if (file.endsWith(".css") && file !== "src/ui/tokens.css") {
-    if (/#[\da-f]{3,8}\b|\b(?:rgb|hsl|oklch)a?\(/i.test(source))
+    if (/#[\da-f]{3,8}\b|\b(?:rgb|hsl|oklch|oklab|hwb|lab|lch)a?\(/i.test(source))
       fail("Define literal colors in src/ui/tokens.css.");
     if (/font-size\s*:\s*(?!var\()[\d.]/.test(source)) fail("Use the shared typography tokens.");
     if (/border-radius\s*:\s*(?!var\(|inherit)[\d.]/.test(source)) fail("Use the shared radius token.");
   }
-  if (!file.endsWith(".tsx")) return violations;
-  if (/from\s+["']@radix-ui\//.test(source) && !file.startsWith("src/components/ui/"))
-    fail("Compose Radix through the source-owned shadcn primitives.");
   if (
-    /<(?:button|input|select|textarea|dialog)(?=[\s/>])/.test(source) &&
-    !file.startsWith("src/components/ui/")
+    file !== "src/ui/tokens.css" &&
+    (file.endsWith(".tsx") || file.startsWith("src/ui/") || file.startsWith("src/components/"))
+  ) {
+    if (/#[\da-f]{3,8}\b|\b(?:rgb|hsl|oklch|oklab|hwb|lab|lch)a?\(/i.test(source) && !file.endsWith(".css"))
+      fail("Define literal colors in src/ui/tokens.css.");
+    if (
+      /(?:color|background(?:-color)?|border-color|outline-color|fill|stroke)\s*:\s*(?:black|white|red|orange|yellow|green|blue|purple|pink|gray|grey)\b/i.test(
+        source,
+      )
+    )
+      fail("Use semantic theme tokens instead of named color literals.");
+  }
+  if (!/\.tsx?$/.test(file)) return violations;
+  const primitive = primitives.get(file);
+  if (file.startsWith("src/components/ui/") && !primitive)
+    fail("Register a reviewed upstream shadcn primitive; custom controls are not allowed here.");
+  const radixImports = [...source.matchAll(/(?:from\s*|import\s*)["'](@radix-ui\/[^"']+)["']/g)].map(
+    (match) => match[1],
+  );
+  if (radixImports.some((dependency) => dependency !== primitive?.dependency))
+    fail("Compose Radix through its registered source-owned shadcn primitive.");
+  if (
+    primitive &&
+    (!source.includes(`https://ui.shadcn.com/r/styles/new-york/${primitive.name}.json`) ||
+      !radixImports.includes(primitive.dependency))
   )
-    fail("Use shared control primitives instead of raw controls.");
+    fail("Retain the registered shadcn provenance and upstream behavior owner.");
+  if (!primitive) {
+    if (
+      /<(?:button|input|select|textarea|dialog|details|summary|progress|meter)(?=[\s/>])/.test(source) ||
+      /(?:createElement|jsx|jsxs)\s*\(\s*["'](?:button|input|select|textarea|dialog)["']/.test(source)
+    )
+      fail("Use shared shadcn control primitives instead of raw controls.");
+    if (widgetRoles.test(source))
+      fail("Use the matching shadcn component instead of recreating widget roles.");
+    if (/<[a-z][\w-]*\b[^>]*\b(?:onClick|onKeyDown|onPointerDown)\s*=/.test(source))
+      fail("Do not turn layout elements into controls; compose a shadcn primitive.");
+  }
   if (/<img(?=[\s/>])/.test(source) && file !== "src/ui/art-card.tsx")
     fail("Game artwork must use ArtCard to preserve composition and states.");
   if (/\bstyle\s*=\s*\{/.test(source))
     fail("Use shared CSS classes and tokens rather than inline visual styles.");
   if (
-    /\b(?:text|bg|border|ring)-(?:red|orange|yellow|green|emerald|cyan|blue|sky|slate|zinc|neutral|stone|gray|violet|pink)-\d/.test(
+    /\b(?:text|bg|border|ring|outline|decoration|accent|caret|divide|fill|stroke|from|via|to|shadow)-(?:(?:red|orange|amber|yellow|lime|green|emerald|teal|cyan|blue|sky|slate|zinc|neutral|stone|gray|indigo|violet|purple|fuchsia|pink|rose)-\d|(?:white|black)\b)/.test(
       source,
     )
   )
@@ -39,13 +82,13 @@ async function check() {
     for (const entry of await readdir(directory, { withFileTypes: true })) {
       const file = path.posix.join(directory, entry.name);
       if (entry.isDirectory()) await inspect(file);
-      else if (/\.(tsx|css)$/.test(file))
+      else if (/\.(tsx?|css)$/.test(file))
         violations.push(...sourceViolations(file, await readFile(file, "utf8")));
     }
   }
   await inspect("src");
   const manifest = JSON.parse(await readFile("package.json", "utf8"));
-  for (const dependency of Object.keys(manifest.dependencies))
+  for (const dependency of Object.keys({ ...manifest.dependencies, ...manifest.devDependencies }))
     if (
       /^(?:@mantine\/|@mui\/|@chakra-ui\/|@react-aria\/|react-aria-components$|antd$|@blueprintjs\/)/.test(
         dependency,

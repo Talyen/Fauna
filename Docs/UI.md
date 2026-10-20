@@ -4,7 +4,13 @@ Fauna's screens are game surfaces. Show cards, decision-relevant state, and the 
 
 ## Shared components and enforcement
 
-Use source-owned shadcn Button, Dialog, and Tooltip. ArtCard is the sole artwork surface: exactly one image, no text or UI overlays. Creature artwork stays 4:3 landscape and action artwork 3:4 portrait, with contain rendering; never stretch or crop to another ratio. Names, rules, health numbers and traits belong in hover/focus details or centered pinned inspection. Dynamic progress geometry is owned by Progress; hand geometry by FanSlot. All visual colors, text sizes, and radii use shared tokens. `npm run check` enforces component ownership, palette and typography rules.
+Use source-owned shadcn/ui for every standard UI control and its interaction behavior. Current approved primitives: Button, Dialog, AlertDialog, Tooltip, Tabs, Switch, RadioGroup, and Progress. Talents uses Tabs with native roving focus; Settings uses a sound Switch and labeled text-size RadioGroup; End run uses AlertDialog with Cancel initially focused and no outside-click dismissal. Preserve native Tab, arrow-key, Space, Enter, Escape, focus trapping and return behavior. W/A/S/D and gamepad navigation adapt to those components rather than replacing their state machines.
+
+`scripts/shadcn-registry.json` explicitly lists reviewed primitives and their Radix owners. New standard controls must come from upstream shadcn, retain provenance, and be registered during review. Do not build custom toggles, tabs, dropdowns, dialogs, or clickable layout elements. The check rejects raw native controls, handmade widget roles, direct Radix imports, unregistered primitives, competing UI libraries and inline visual styles. These source guards complement interaction tests; they cannot prove all behavior by static analysis.
+
+Explicit gameplay compositions are artwork cards, the hand fan, targeting, mana crystals, combat feedback and forecast overlays on shadcn Progress bars. They use shadcn controls where interactive and shared tokens; no general-purpose custom widget is permitted under this exception. Black canvas, typography, semantic combat colors and minimum hit areas remain project theme decisions.
+
+ArtCard is the sole artwork surface: exactly one image, no text or UI overlays. Creature artwork stays 4:3 landscape and action artwork 3:4 portrait, with contain rendering; never stretch or crop to another ratio. Names, rules, health numbers and traits belong in hover/focus details or centered pinned inspection. Dynamic progress geometry is owned by Progress; hand geometry by FanSlot. All visual colors, text sizes, and radii use shared tokens. `npm run check` enforces component ownership, palette and typography rules.
 
 ## Battle composition
 
@@ -20,25 +26,27 @@ Use source-owned shadcn Button, Dialog, and Tooltip. ArtCard is the sole artwork
 
 Menus and Collection follow [menu design](MENU_DESIGN.md). Progression and rewards follow [expedition design](EXPEDITION_DESIGN.md).
 
-- Main menu is a centered vertical list; launching never automatically resumes gameplay. Pause is a centered overlay. Talents is full screen with keyword tabs and rows; immediate purchase, whole-category reset, and Back to the originating menu.
+- Main menu is a centered vertical list with a gold default Button for Continue/New expedition/Resume and ghost Buttons for all other choices; launching never automatically resumes gameplay. Pause is a centered overlay. Talents is full screen with keyword tabs and rows; immediate purchase, whole-category reset, and Back to the originating menu.
 - Collection orders unlocked species first. Locked artwork is grayscale and noninteractive, with no tooltip or unlock requirement. Unlocked creatures open centered inspection.
 - XP/currency, recruitment, and relic choice each use separate screens. XP progress numbers stay visible. Creature cards remain artwork-only; relic icons/names have effects in hover/focus tooltips. Recruitment and relic choice may be skipped; final choices commit immediately.
 - Before battle, show enemies, the remembered active team, and smaller reserves in separate rows. Select creatures across the active/reserve rows to swap. Deck opens the shared nine-card inspection dialog.
-- Settings and Glossary are centered scrollable dialogs returning to the menu. End run requires a confirmation; ordinary rewards and End turn do not.
+- Settings and Glossary are centered scrollable dialogs returning to the menu. A child menu dialog temporarily replaces Pause so only its focus trap is active; closing restores the originating menu choice. End run requires a confirmation; ordinary rewards and End turn do not.
 
 ## Interaction states and accessibility
 
-Idle uses thin neutral borders. Hover brightens controls; focus uses an external dashed white outline; selection uses a solid external ring. Knockout adds grayscale and dimming. Locked talents remain focusable for their tooltip, with commands unavailable. All non-art controls provide at least 44px hit height. Icons have accessible labels and are paired with values or names. Color alone never conveys availability or selection.
+Idle uses thin neutral borders. Hover brightens controls; focus uses an external dashed muted-gold outline; selection uses a solid external ring. Knockout adds grayscale and dimming. Locked talents remain focusable for their tooltip, with commands unavailable. All non-art controls provide at least 44px hit height. Icons have accessible labels and are paired with values or names. Color alone never conveys availability or selection.
 
 Mouse, W/A/S/D/Tab, and standard-mapped controller actions share the same commands and focus paths. Enter/Space and controller A activate focused controls; B/Escape returns one level. Nested dialogs own their focus and restore a connected, enabled opener; fallback goes to the current screen. Text enlargement, reduced motion, and sound preferences persist independently of game saves. Larger text may scroll rather than clip controls. Pause, inspection and navigation do not alter the game revision.
 
 ## Tokens
 
-`src/ui/tokens.css` owns semantic shadcn theme tokens and combat colors.
+`src/ui/tokens.css` owns semantic shadcn theme tokens and combat colors. Use `background`/`foreground` for the canvas, `card`/`card-foreground` for artwork surfaces, `popover`/`popover-foreground` for dialogs/tooltips, `primary`/`primary-foreground` for primary actions, `secondary` and `accent` pairs for quiet controls and hover, `muted`/`muted-foreground` for supporting information, `border`/`input` for boundaries, `ring` for focus, and `destructive` for destructive actions. Tailwind's theme mappings reference these tokens directly. Existing gameplay aliases resolve to these same roles; they are not independent palettes. Damage types, health and block remain separate semantic game tokens.
+
+The color policy rejects raw hexadecimal/function/named colors in player UI, direct Tailwind palette colors (including black/white and arbitrary hex colors), and inline JSX styles. Palette changes belong in the token owner; contrast tests validate foreground/background role pairs. Use opacity/state variants of semantic utilities instead of inventing colors per component.
 
 - Typography: locally bundled Inter Variable, regular rules, medium controls, semibold names, tabular numbers. 16px rules/controls, 20px names, 24px screen headings, 14px secondary information. Inspection enlarges rules to 18px and names to 28px. Font license: `Docs/FONT-LICENSE.txt`.
 - Spacing: a 4px grid, using layout instead of decorative separators or panels.
-- Color: pure black canvas, #111 controls, #f2f2f2 text, #b0b0b0 secondary text, #404040 borders. White primary actions. Solid selection outline, separate dashed focus outline, white targetable border. Disabled/unaffordable cards dim; knockout adds grayscale and zero health.
+- Color: pure black canvas (#000), neutral charcoal surfaces (#141414), ivory text (#ece6db), neutral secondary text (#b3b3b3), neutral gray borders (#484848), and muted gold (#d9b56f). Muted-gold primary actions and selection/focus indicators. Solid selection outline, separate dashed focus outline, neutral targetable border. Disabled/unaffordable cards dim; knockout adds grayscale and zero health.
 - Geometry: 6px corners, thin borders, no decorative shadows, glows or textures (the external selection ring is an interaction indicator). Artwork has no UI scrim.
 - Motion: 150ms purposeful transitions; respect reduced motion. Gameplay commits before visual feedback and input never waits on animations.
 - Icons: Lucide, with labels/numbers so color is never the only cue.

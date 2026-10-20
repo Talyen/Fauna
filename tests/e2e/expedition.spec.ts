@@ -251,7 +251,7 @@ test("settings and glossary return to the pause menu; End run requires confirmat
   await resume(page);
   await page.getByRole("button", { name: "Open menu" }).click();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
-  await page.getByRole("button", { name: "Sound on", exact: true }).click();
+  await page.getByRole("switch", { name: "Sound", exact: true }).click();
   await page.keyboard.press("Escape");
   await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
   await page.getByRole("button", { name: "Glossary", exact: true }).click();
@@ -259,13 +259,16 @@ test("settings and glossary return to the pause menu; End run requires confirmat
   await page.keyboard.press("Escape");
   const before = await state(page);
   await page.getByRole("button", { name: "End run", exact: true }).click();
-  await expect(page.getByRole("dialog", { name: "End expedition?" })).toBeVisible();
+  await expect(page.getByRole("alertdialog", { name: "End expedition?" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Cancel", exact: true })).toBeFocused();
+  await page.mouse.click(5, 5);
+  await expect(page.getByRole("alertdialog", { name: "End expedition?" })).toBeVisible();
   expect((await state(page)).revision).toBe(before.revision);
   await page.getByRole("button", { name: "Cancel", exact: true }).click();
   expect((await state(page)).phase).toBe("battle");
   await page.getByRole("button", { name: "End run", exact: true }).click();
   await page
-    .getByRole("dialog", { name: "End expedition?" })
+    .getByRole("alertdialog", { name: "End expedition?" })
     .getByRole("button", { name: "End run", exact: true })
     .click();
   await expect(page.getByRole("button", { name: "New expedition", exact: true })).toBeVisible();
@@ -492,7 +495,7 @@ test("real audio output, hit recoil, reduced motion, and mute follow combat outc
   expect((await observed()).impacts).toHaveLength(count);
   await page.getByRole("button", { name: "Open menu" }).click();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
-  await page.getByRole("button", { name: "Sound on", exact: true }).click();
+  await page.getByRole("switch", { name: "Sound", exact: true }).click();
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "Resume" }).click();
   const contexts = (await observed()).contexts.length;
@@ -508,7 +511,7 @@ test("real audio output, hit recoil, reduced motion, and mute follow combat outc
   ).toBe(true);
   await page.reload();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
-  await expect(page.getByRole("button", { name: "Sound off", exact: true })).toBeVisible();
+  await expect(page.getByRole("switch", { name: "Sound", exact: true })).not.toBeChecked();
 });
 
 test("six-card hand, three enemies and a full bench preserve fit and original artwork ratios", async ({
@@ -557,4 +560,58 @@ test("enlarged text and keyboard/controller row navigation keep inspection and m
   await expect(close).toBeVisible();
   await close.click();
   await expect(page.getByRole("button", { name: "Glossary", exact: true })).toBeFocused();
+});
+
+test("shadcn tabs and settings retain native keyboard behavior and game navigation", async ({ page }) => {
+  await seed(page, run());
+  await page.getByRole("button", { name: "Talents", exact: true }).click();
+  const physical = page.getByRole("tab", { name: "Physical", exact: true });
+  await physical.focus();
+  await page.keyboard.press("ArrowRight");
+  const fire = page.getByRole("tab", { name: "Fire", exact: true });
+  await expect(fire).toBeFocused();
+  await expect(fire).toHaveAttribute("aria-selected", "true");
+  await expect(page.getByRole("tabpanel")).toHaveAttribute(
+    "aria-labelledby",
+    (await fire.getAttribute("id")) as string,
+  );
+  await page.keyboard.press("d");
+  await expect(page.getByRole("tab", { name: "Ice", exact: true })).toBeFocused();
+  await page.keyboard.press("Escape");
+  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  const sound = page.getByRole("switch", { name: "Sound", exact: true });
+  await sound.focus();
+  await page.keyboard.press("Space");
+  await expect(sound).not.toBeChecked();
+  const small = page.getByRole("radio", { name: "100%", exact: true });
+  await small.focus();
+  await page.keyboard.down("ArrowDown");
+  await expect(page.getByRole("radio", { name: "125%", exact: true })).toBeChecked();
+  await page.keyboard.up("ArrowDown");
+  await page.keyboard.press("s");
+  await expect(page.getByRole("radio", { name: "150%", exact: true })).toBeFocused();
+  await expect(page.getByRole("radio", { name: "150%", exact: true })).toBeChecked();
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
+  await page.reload();
+  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await expect(sound).not.toBeChecked();
+  await expect(page.getByRole("radio", { name: "150%", exact: true })).toBeChecked();
+});
+
+test("End run uses alert-dialog cancellation, trapping and outside-click protection", async ({ page }) => {
+  await seed(page, run());
+  await page.getByRole("button", { name: "End run", exact: true }).click();
+  const dialog = page.getByRole("alertdialog", { name: "End expedition?" });
+  await expect(dialog.getByRole("button", { name: "Cancel", exact: true })).toBeFocused();
+  await page.mouse.click(5, 5);
+  await expect(dialog).toBeVisible();
+  // Clicking the overlay may blur the focused button without dismissing.
+  await dialog.getByRole("button", { name: "Cancel", exact: true }).focus();
+  await page.keyboard.press("Shift+Tab");
+  await expect(dialog.getByRole("button", { name: "End run", exact: true })).toBeFocused();
+  await page.keyboard.press("Escape");
+  await expect(dialog).not.toBeVisible();
+  await expect(page.getByRole("button", { name: "End run", exact: true })).toBeFocused();
+  expect((await state(page)).phase).toBe("battle");
 });

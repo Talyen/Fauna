@@ -4,22 +4,26 @@
   --text-base: var(--text-body);
   --text-sm: var(--text-secondary);
   --text-xl: var(--text-heading);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--foreground);
+  --color-secondary-foreground: var(--secondary-foreground);
   --color-accent: var(--accent);
-  --color-accent-foreground: var(--foreground);
+  --color-accent-foreground: var(--accent-foreground);
   --color-popover: var(--popover);
-  --color-popover-foreground: var(--foreground);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--background);
-  --color-border: var(--line);
-  --color-input: var(--line);
-  --color-ring: var(--selected);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-full: var(--radius-round);
   --radius-md: var(--radius);
   --radius-lg: var(--radius);
 }
@@ -339,7 +343,6 @@ button {
   height: 100%;
 }
 .progress-current {
-  width: var(--progress);
   background: currentColor;
 }
 .progress-previous {
@@ -550,6 +553,7 @@ button {
 .keyword-tabs {
   display: flex;
   overflow-x: auto;
+  justify-content: flex-start;
   gap: var(--space-1);
   padding: var(--space-2);
   margin-bottom: var(--space-6);
@@ -639,7 +643,6 @@ button {
   color: var(--muted-foreground);
   margin-top: var(--space-4);
 }
-.settings-controls,
 .confirm-actions {
   display: flex;
   flex-wrap: wrap;
@@ -761,4 +764,29 @@ button {
     opacity: 0;
     transform: translateY(-24px);
   }
+}
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: var(--control-height);
+}
+.settings-controls fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.settings-controls legend {
+  margin-bottom: 8px;
+}
+
+.settings-controls {
+  display: grid;
+  gap: var(--space-6);
+  margin-top: var(--space-6);
+}
+.dialog-content.settings-dialog {
+  width: min(440px, calc(100vw - var(--space-12)));
 }

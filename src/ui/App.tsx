@@ -1,3 +1,14 @@
+import { Switch } from "../components/ui/switch";
+import { RadioGroup, RadioGroupItem } from "../components/ui/radio-group";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogCancel,
+  AlertDialogAction,
+} from "../components/ui/alert-dialog";
+import { buttonVariants } from "../components/ui/button";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
 import { Menu } from "lucide-react";
@@ -72,11 +83,13 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     }
   }, [scale, sound]);
   const send = useCallback((command: Command) => session.command(command), [session]);
+  const menuReturnLabel = useRef<string | null>(null);
   const openMenu = () => {
     pauseOpener.current = document.activeElement as HTMLElement | null;
     setMenu(true);
   };
   const openModal = (next: Modal) => {
+    if (menu) menuReturnLabel.current = document.activeElement?.textContent ?? null;
     modalOpener.current = document.activeElement as HTMLElement | null;
     setModal(next);
   };
@@ -168,7 +181,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
   const menuItems = (home: boolean) => (
     <>
       <Button
-        variant="ghost"
+        variant="default"
         className="primary-menu-action"
         onClick={() => {
           if (!home || active) {
@@ -214,6 +227,126 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
         <Button variant="ghost" onClick={() => void session.quit()}>
           Save & quit
         </Button>
+      ) : null}
+    </>
+  );
+  const overlays = (
+    <>
+      {" "}
+      <Dialog
+        open={modal !== null && modal !== "endRun"}
+        onOpenChange={(open) => {
+          if (!open) setModal(null);
+        }}
+      >
+        <DialogContent
+          className={modal === "deck" ? "deck-dialog" : modal === "settings" ? "settings-dialog" : "glossary"}
+          closeLabel={
+            modal === "deck"
+              ? "Close deck"
+              : modal === "settings"
+                ? "Close settings"
+                : modal === "glossary"
+                  ? "Close glossary"
+                  : "Close dialog"
+          }
+          onCloseAutoFocus={(event) => {
+            event.preventDefault();
+            if (!menu) returnFocus(modalOpener.current);
+          }}
+        >
+          <DialogTitle>
+            {modal === "deck"
+              ? "Deck"
+              : modal === "settings"
+                ? "Settings"
+                : modal === "glossary"
+                  ? "Glossary & controls"
+                  : ""}
+          </DialogTitle>
+          <DialogDescription className="sr-only">Game information and controls</DialogDescription>
+          {modal === "deck" ? (
+            <DeckCards game={game} inspect={setInspection} />
+          ) : modal === "settings" ? (
+            <div className="settings-controls">
+              <label className="setting-row" htmlFor="sound-setting">
+                <span>Sound</span>
+                <Switch id="sound-setting" checked={sound} onCheckedChange={setSound} />
+              </label>
+              <fieldset>
+                <legend>Text size</legend>
+                <RadioGroup
+                  orientation="vertical"
+                  aria-label="Text size"
+                  value={String(scale)}
+                  onValueChange={(value) => setScale(Number(value))}
+                >
+                  {[1, 1.25, 1.5].map((value) => (
+                    <label className="setting-row" key={value}>
+                      <span>{value * 100}%</span>
+                      <RadioGroupItem value={String(value)} aria-label={`${value * 100}%`} />
+                    </label>
+                  ))}
+                </RadioGroup>
+              </fieldset>
+            </div>
+          ) : modal === "glossary" ? (
+            <>
+              <p>
+                W/A/S/D or Tab to navigate. A/D switches targets. Enter/controller A selects. Escape/B goes
+                back. I/controller X inspects. Controller Y ends the turn.
+              </p>
+              <dl>
+                {GLOSSARY.map((entry) => (
+                  <div key={entry.term}>
+                    <dt>{entry.term}</dt>
+                    <dd>{entry.definition}</dd>
+                  </div>
+                ))}
+              </dl>
+            </>
+          ) : null}
+          {inspection ? (
+            <Inspector item={inspection} session={session} onClose={() => setInspection(null)} />
+          ) : null}
+        </DialogContent>
+      </Dialog>
+      <AlertDialog
+        open={modal === "endRun"}
+        onOpenChange={(open) => {
+          if (!open) setModal(null);
+        }}
+      >
+        <AlertDialogContent
+          className="confirm-dialog"
+          onCloseAutoFocus={(event) => {
+            event.preventDefault();
+            if (!menu) returnFocus(modalOpener.current);
+          }}
+        >
+          <AlertDialogTitle>End expedition?</AlertDialogTitle>
+          <AlertDialogDescription>
+            Return to the main menu? Your expedition team and relics will be lost. Permanent progress is kept.
+          </AlertDialogDescription>
+          <div className="confirm-actions">
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              className={buttonVariants({ variant: "destructive" })}
+              onClick={(event) => {
+                if (send({ type: "abandon" })) {
+                  menuReturnLabel.current = null;
+                  setMenu(false);
+                  setRoute("home");
+                } else event.preventDefault();
+              }}
+            >
+              End run
+            </AlertDialogAction>
+          </div>
+        </AlertDialogContent>
+      </AlertDialog>
+      {!modal && inspection ? (
+        <Inspector item={inspection} session={session} onClose={() => setInspection(null)} />
       ) : null}
     </>
   );
@@ -309,13 +442,25 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           </div>
         </>
       )}
-      <Dialog open={menu} onOpenChange={setMenu}>
+      <Dialog open={menu && !modal && !inspection} onOpenChange={setMenu}>
         <DialogContent
           className="menu-panel"
           closeLabel="Close menu"
+          onOpenAutoFocus={(event) => {
+            const label = menuReturnLabel.current;
+            if (!label) return;
+            menuReturnLabel.current = null;
+            const opener = Array.from(
+              (event.currentTarget as HTMLElement).querySelectorAll<HTMLButtonElement>("button"),
+            ).find((button) => button.textContent === label);
+            if (opener) {
+              event.preventDefault();
+              opener.focus();
+            }
+          }}
           onCloseAutoFocus={(event) => {
             event.preventDefault();
-            if (route === "play") returnFocus(pauseOpener.current);
+            if (!modal && !inspection && route === "play") returnFocus(pauseOpener.current);
           }}
         >
           <DialogTitle className="sr-only">Pause menu</DialogTitle>
@@ -323,95 +468,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           {menuItems(false)}
         </DialogContent>
       </Dialog>
-      <Dialog
-        open={modal !== null}
-        onOpenChange={(open) => {
-          if (!open) setModal(null);
-        }}
-      >
-        <DialogContent
-          className={modal === "deck" ? "deck-dialog" : modal === "endRun" ? "confirm-dialog" : "glossary"}
-          closeLabel={
-            modal === "deck"
-              ? "Close deck"
-              : modal === "settings"
-                ? "Close settings"
-                : modal === "glossary"
-                  ? "Close glossary"
-                  : "Cancel end run"
-          }
-          onCloseAutoFocus={(event) => {
-            event.preventDefault();
-            returnFocus(modalOpener.current);
-          }}
-        >
-          <DialogTitle>
-            {modal === "deck"
-              ? "Deck"
-              : modal === "settings"
-                ? "Settings"
-                : modal === "glossary"
-                  ? "Glossary & controls"
-                  : "End expedition?"}
-          </DialogTitle>
-          <DialogDescription className={modal === "endRun" ? undefined : "sr-only"}>
-            {modal === "endRun"
-              ? "Return to the main menu? Your expedition team and relics will be lost. Permanent progress is kept."
-              : "Game information and controls"}
-          </DialogDescription>
-          {modal === "deck" ? (
-            <DeckCards game={game} inspect={setInspection} />
-          ) : modal === "settings" ? (
-            <div className="settings-controls">
-              <Button
-                variant="outline"
-                onClick={() => setScale(scale === 1 ? 1.25 : scale === 1.25 ? 1.5 : 1)}
-              >
-                Text size {scale * 100}%
-              </Button>
-              <Button variant="outline" aria-pressed={sound} onClick={() => setSound((old) => !old)}>
-                Sound {sound ? "on" : "off"}
-              </Button>
-            </div>
-          ) : modal === "glossary" ? (
-            <>
-              <p>
-                W/A/S/D or Tab to navigate. A/D switches targets. Enter/controller A selects. Escape/B goes
-                back. I/controller X inspects. Controller Y ends the turn.
-              </p>
-              <dl>
-                {GLOSSARY.map((entry) => (
-                  <div key={entry.term}>
-                    <dt>{entry.term}</dt>
-                    <dd>{entry.definition}</dd>
-                  </div>
-                ))}
-              </dl>
-            </>
-          ) : modal === "endRun" ? (
-            <div className="confirm-actions">
-              <Button variant="outline" onClick={() => setModal(null)}>
-                Cancel
-              </Button>
-              <Button
-                variant="destructive"
-                onClick={() => {
-                  if (send({ type: "abandon" })) {
-                    setModal(null);
-                    setMenu(false);
-                    setRoute("home");
-                  }
-                }}
-              >
-                End run
-              </Button>
-            </div>
-          ) : null}
-        </DialogContent>
-      </Dialog>
-      {inspection ? (
-        <Inspector item={inspection} session={session} onClose={() => setInspection(null)} />
-      ) : null}
+      {overlays}
     </div>
   );
 }

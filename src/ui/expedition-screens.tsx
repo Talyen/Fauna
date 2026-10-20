@@ -1,3 +1,4 @@
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui/tabs";
 import { useLayoutEffect, useRef, useState } from "react";
 import { Coins, Gem, Feather, Shell, Leaf, Circle, Check, Sparkles } from "lucide-react";
 import { Button } from "../components/ui/button";
@@ -303,89 +304,86 @@ export function Talents({ game, send, back }: { game: GameState; send: Props["se
           Back
         </Button>
       </header>
-      <div className="keyword-tabs" role="tablist" aria-label="Talent keywords">
-        {KEYWORDS.map((id) => (
-          <Button
-            key={id}
-            role="tab"
-            id={`tab-${id}`}
-            aria-controls="talent-panel"
-            aria-selected={keyword === id}
-            variant={keyword === id ? "secondary" : "ghost"}
-            onClick={() => setKeyword(id)}
-          >
-            {keywordLabel(id)}
-          </Button>
-        ))}
-      </div>
-      <section id="talent-panel" role="tabpanel" aria-labelledby={`tab-${keyword}`}>
-        <div className="talent-progress">
-          <span>{availablePoints(game, keyword)} points available</span>
-          <span>
-            {p.current} / {p.required} XP
-          </span>
-        </div>
-        <Progress
-          value={p.current}
-          maximum={p.required}
-          label={`${keywordLabel(keyword)} XP`}
-          tone={keyword}
-        />
-        <div className="talent-tree">
-          {[0, 1, 2].map((row) => (
-            <div className="talent-row" key={row} data-nav-row aria-label={`Row ${row + 1}`}>
-              {TALENTS.filter((t) => t.keyword === keyword && t.row === row).map((t) => {
-                const owned = game.talents.includes(t.id),
-                  available = canBuyTalent(game, t.id);
-                return (
-                  <Tooltip key={t.id}>
-                    <TooltipTrigger asChild>
-                      <Button
-                        variant="ghost"
-                        className="talent-node"
-                        aria-label={`${t.name}${owned ? ", unlocked" : ""}`}
-                        aria-disabled={!available}
-                        data-owned={owned}
-                        data-available={available}
-                        onClick={() => {
-                          if (available) send({ type: "buyTalent", talentId: t.id });
-                        }}
-                      >
-                        <span>{owned ? <Check aria-hidden="true" /> : <Sparkles aria-hidden="true" />}</span>
-                        <span>{t.name}</span>
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <strong>
-                        {keywordLabel(keyword)} · {t.name}
-                      </strong>
-                      <p>{t.text}</p>
-                      <p>
-                        {owned
-                          ? "Unlocked"
-                          : available
-                            ? "1 point · Click to unlock"
-                            : "Requires an available point and every talent in earlier rows."}
-                      </p>
-                    </TooltipContent>
-                  </Tooltip>
-                );
-              })}
-            </div>
+      <Tabs value={keyword} onValueChange={(value) => setKeyword(value as Keyword)}>
+        <TabsList className="keyword-tabs" aria-label="Talent keywords">
+          {KEYWORDS.map((id) => (
+            <TabsTrigger key={id} value={id}>
+              {keywordLabel(id)}
+            </TabsTrigger>
           ))}
-        </div>
-        <footer className="reward-footer">
-          <Button
-            variant="ghost"
-            disabled={!game.talents.some((id) => id.startsWith(`${keyword}.`))}
-            onClick={() => {
-              if (send({ type: "resetTalents", keyword })) document.getElementById(`tab-${keyword}`)?.focus();
-            }}
-          >
-            Reset category
-          </Button>
-        </footer>
-      </section>
+        </TabsList>
+        <TabsContent value={keyword}>
+          <div className="talent-progress">
+            <span>{availablePoints(game, keyword)} points available</span>
+            <span>
+              {p.current} / {p.required} XP
+            </span>
+          </div>
+          <Progress
+            value={p.current}
+            maximum={p.required}
+            label={`${keywordLabel(keyword)} XP`}
+            tone={keyword}
+          />
+          <div className="talent-tree">
+            {[0, 1, 2].map((row) => (
+              <div className="talent-row" key={row} data-nav-row aria-label={`Row ${row + 1}`}>
+                {TALENTS.filter((t) => t.keyword === keyword && t.row === row).map((t) => {
+                  const owned = game.talents.includes(t.id),
+                    available = canBuyTalent(game, t.id);
+                  return (
+                    <Tooltip key={t.id}>
+                      <TooltipTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          className="talent-node"
+                          aria-label={`${t.name}${owned ? ", unlocked" : ""}`}
+                          aria-disabled={!available}
+                          data-owned={owned}
+                          data-available={available}
+                          onClick={() => {
+                            if (available) send({ type: "buyTalent", talentId: t.id });
+                          }}
+                        >
+                          <span>
+                            {owned ? <Check aria-hidden="true" /> : <Sparkles aria-hidden="true" />}
+                          </span>
+                          <span>{t.name}</span>
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <strong>
+                          {keywordLabel(keyword)} · {t.name}
+                        </strong>
+                        <p>{t.text}</p>
+                        <p>
+                          {owned
+                            ? "Unlocked"
+                            : available
+                              ? "1 point · Click to unlock"
+                              : "Requires an available point and every talent in earlier rows."}
+                        </p>
+                      </TooltipContent>
+                    </Tooltip>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+          <footer className="reward-footer">
+            <Button
+              variant="ghost"
+              disabled={!game.talents.some((id) => id.startsWith(`${keyword}.`))}
+              onClick={() => {
+                if (send({ type: "resetTalents", keyword }))
+                  document.querySelector<HTMLElement>('[role="tab"][data-state="active"]')?.focus();
+              }}
+            >
+              Reset category
+            </Button>
+          </footer>
+        </TabsContent>
+      </Tabs>
     </main>
   );
 }

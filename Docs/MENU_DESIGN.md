@@ -16,3 +16,7 @@ Implemented direction from the design review.
 Collection uses a responsive artwork grid. Locked species are noninteractive. Menu order is Continue/New expedition, Talents, Collection, Glossary, Settings, then End run when applicable. Pause also offers Main menu; desktop adds Save & quit.
 
 See [UI rules](UI.md) and [expedition design](EXPEDITION_DESIGN.md) for shared interaction and progression decisions.
+
+## Shared menu treatment
+
+Main and pause menus use the same centered vertical list: shadcn default Button for Continue, New expedition, or Resume; ghost Buttons for other choices. Use the charcoal/ivory/muted-gold semantic theme in `src/ui/tokens.css`. Settings uses Switch for Sound and RadioGroup for explicit text-size choices; changes save immediately. End run uses AlertDialog with Cancel focused initially and no outside-click dismissal.

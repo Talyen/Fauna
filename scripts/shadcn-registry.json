@@ -1,0 +1,10 @@
+{
+  "alert-dialog": "@radix-ui/react-alert-dialog",
+  "button": "@radix-ui/react-slot",
+  "dialog": "@radix-ui/react-dialog",
+  "radio-group": "@radix-ui/react-radio-group",
+  "switch": "@radix-ui/react-switch",
+  "tabs": "@radix-ui/react-tabs",
+  "tooltip": "@radix-ui/react-tooltip",
+  "progress": "@radix-ui/react-progress"
+}
