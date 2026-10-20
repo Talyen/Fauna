@@ -87,6 +87,7 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 
 - Use a Lucide warning icon alongside a concise, plain-language message. Offer a relevant action such as Retry when available.
 - Action errors appear inline beside the affected control and remain until resolved or retried. Global errors, such as a failed save, use a persistent notice with Retry when available.
+- Error messages appear immediately, with no entrance animation.
 - Essential meaning remains visible without sound.
 
 ## Shared preferences
