@@ -122,6 +122,9 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 
 ## Collection paging
 
+- Use Lucide arrow icons only, without tooltips; retain accessible Previous/Next names.
+- Place paging controls below the creature grid. Reserve the space of each hidden arrow so the remaining control does not shift.
+- Changing Collection filters starts at the first page.
 - Page content changes immediately, without a crossfade, and the creature grid returns to its top.
 - Keyboard/controller focus stays on the paging control rather than moving to the first creature.
 - Hide unavailable Previous/Next controls. If the focused paging control disappears at a boundary, move focus to the remaining paging control; if neither remains, use the Collection filter control as the fallback. Never leave focus on a removed element.
