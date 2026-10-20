@@ -1,0 +1,90 @@
+// @vitest-environment jsdom
+import { afterEach, describe, expect, it } from "vitest";
+import { cleanup, render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { produce } from "immer";
+import { App } from "../../src/ui/App";
+import { createGame } from "../../src/game/engine";
+import { SPECIES } from "../../src/game/content";
+import { createSession } from "../../src/application/session";
+import { createBrowserPlatform } from "../../src/platform/browser";
+
+afterEach(() => {
+  cleanup();
+  localStorage.clear();
+});
+
+describe("menu browsing", () => {
+  it("explains talents before hover and updates requirements after purchases and category reset", async () => {
+    const game = produce(createGame(7), (draft) => {
+      draft.keywordXP.physical = 120;
+    });
+    localStorage.setItem("fauna.save.v1", JSON.stringify(game));
+    const session = createSession(createBrowserPlatform(localStorage), 7);
+    await session.load();
+    const user = userEvent.setup();
+    render(<App session={session} />);
+    try {
+      await user.click(screen.getByRole("button", { name: "Talents", exact: true }));
+      const potency = screen.getByRole("button", { name: "Potency", exact: true });
+      expect(within(potency).getByText("Matching cards gain +1 to their effect.")).toBeTruthy();
+      expect(within(potency).getByText("Unlock · 1 point")).toBeTruthy();
+      const shelter = screen.getByRole("button", { name: "Shelter", exact: true });
+      expect(within(shelter).getByText("Requires all earlier rows")).toBeTruthy();
+      const revision = session.store.getState().game.revision;
+      await user.click(shelter);
+      expect(session.store.getState().game.revision).toBe(revision);
+      await user.click(potency);
+      expect(
+        within(screen.getByRole("button", { name: "Potency, unlocked" })).getByText("Unlocked"),
+      ).toBeTruthy();
+      await user.click(screen.getByRole("button", { name: "Mastery", exact: true }));
+      expect(within(shelter).getByText("Unlock · 1 point")).toBeTruthy();
+      await user.click(shelter);
+      expect(
+        within(screen.getByRole("button", { name: "Guarded Focus" })).getByText("Requires 1 point"),
+      ).toBeTruthy();
+      expect(
+        within(screen.getByRole("button", { name: "Readiness" })).getByText(
+          "Requires 1 point and all earlier rows",
+        ),
+      ).toBeTruthy();
+      await user.click(screen.getByRole("button", { name: "Reset category" }));
+      expect(session.store.getState().game.talents).toEqual([]);
+      expect(
+        within(screen.getByRole("button", { name: "Potency", exact: true })).getByText("Unlock · 1 point"),
+      ).toBeTruthy();
+      expect(within(shelter).getByText("Requires all earlier rows")).toBeTruthy();
+    } finally {
+      cleanup();
+      await session.dispose();
+    }
+  });
+
+  it("names unlocked collection species outside artwork while keeping locked species anonymous", async () => {
+    const session = createSession(createBrowserPlatform(localStorage), 7);
+    await session.load();
+    const user = userEvent.setup();
+    render(<App session={session} />);
+    try {
+      await user.click(screen.getByRole("button", { name: "Collection", exact: true }));
+      const game = session.store.getState().game;
+      for (const creature of SPECIES) {
+        if (game.unlocked.includes(creature.id)) {
+          expect(screen.getByRole("heading", { name: creature.name })).toBeTruthy();
+          expect(screen.getByRole("button", { name: `Inspect ${creature.name}` }).textContent).toBe("");
+        } else {
+          expect(screen.queryByRole("heading", { name: creature.name })).toBeNull();
+          expect(screen.queryByRole("button", { name: `Inspect ${creature.name}` })).toBeNull();
+        }
+      }
+      const creature = SPECIES.find((entry) => game.unlocked.includes(entry.id))!;
+      await user.click(screen.getByRole("button", { name: `Inspect ${creature.name}` }));
+      expect(screen.getByRole("dialog")).toBeTruthy();
+      expect(session.store.getState().game.revision).toBe(game.revision);
+    } finally {
+      cleanup();
+      await session.dispose();
+    }
+  });
+});

@@ -256,6 +256,18 @@ export function Talents({ game, send, back }: { game: GameState; send: Props["se
                 {TALENTS.filter((t) => t.keyword === keyword && t.row === row).map((t) => {
                   const owned = game.talents.includes(t.id),
                     available = canBuyTalent(game, t.id);
+                  const earlierRowsOwned = TALENTS.filter(
+                    (talent) => talent.keyword === keyword && talent.row < t.row,
+                  ).every((talent) => game.talents.includes(talent.id));
+                  const status = owned
+                    ? "Unlocked"
+                    : available
+                      ? "Unlock · 1 point"
+                      : !earlierRowsOwned
+                        ? availablePoints(game, keyword) > 0
+                          ? "Requires all earlier rows"
+                          : "Requires 1 point and all earlier rows"
+                        : "Requires 1 point";
                   return (
                     <Tooltip key={t.id}>
                       <TooltipTrigger asChild>
@@ -264,6 +276,7 @@ export function Talents({ game, send, back }: { game: GameState; send: Props["se
                           className="talent-node"
                           aria-label={`${t.name}${owned ? ", unlocked" : ""}`}
                           aria-disabled={!available}
+                          aria-describedby={`${t.id}-effect ${t.id}-status`}
                           data-owned={owned}
                           data-available={available}
                           onClick={() => {
@@ -273,7 +286,13 @@ export function Talents({ game, send, back }: { game: GameState; send: Props["se
                           <span>
                             {owned ? <Check aria-hidden="true" /> : <Sparkles aria-hidden="true" />}
                           </span>
-                          <span>{t.name}</span>
+                          <span className="talent-name">{t.name}</span>
+                          <span className="talent-effect" id={`${t.id}-effect`}>
+                            <KeywordText text={t.text} />
+                          </span>
+                          <span className="talent-status" id={`${t.id}-status`}>
+                            {status}
+                          </span>
                         </Button>
                       </TooltipTrigger>
                       <TooltipContent>
@@ -283,13 +302,7 @@ export function Talents({ game, send, back }: { game: GameState; send: Props["se
                         <p>
                           <KeywordText text={t.text} />
                         </p>
-                        <p>
-                          {owned
-                            ? "Unlocked"
-                            : available
-                              ? "1 point · Click to unlock"
-                              : "Requires an available point and every talent in earlier rows."}
-                        </p>
+                        <p>{status}</p>
                       </TooltipContent>
                     </Tooltip>
                   );
@@ -337,13 +350,15 @@ export function Collection({
       <div className="collection-grid">
         {ordered.map((creature) =>
           game.unlocked.includes(creature.id) ? (
-            <CreatureCard
-              key={creature.id}
-              kind={creature.id}
-              onClick={() => inspect({ species: creature.id })}
-              onInspect={() => inspect({ species: creature.id })}
-              label={`Inspect ${creature.name}`}
-            />
+            <div className="collection-species" key={creature.id}>
+              <CreatureCard
+                kind={creature.id}
+                onClick={() => inspect({ species: creature.id })}
+                onInspect={() => inspect({ species: creature.id })}
+                label={`Inspect ${creature.name}`}
+              />
+              <h2>{creature.name}</h2>
+            </div>
           ) : (
             <div key={creature.id} className="locked-species">
               <ArtCard
