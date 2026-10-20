@@ -9,7 +9,9 @@ export function TooltipProvider(props: React.ComponentProps<typeof TooltipPrimit
   );
 }
 
-const TooltipInteraction = React.createContext<((open: boolean) => void) | undefined>(undefined);
+const TooltipInteraction = React.createContext<
+  { changeOpen: (open: boolean) => void; open: boolean } | undefined
+>(undefined);
 
 export function Tooltip({
   open: controlledOpen,
@@ -42,7 +44,7 @@ export function Tooltip({
   }, [open, changeOpen]);
   return (
     <TooltipPrimitive.Root {...props} open={open} onOpenChange={changeOpen}>
-      <TooltipInteraction.Provider value={changeOpen}>{children}</TooltipInteraction.Provider>
+      <TooltipInteraction.Provider value={{ changeOpen, open }}>{children}</TooltipInteraction.Provider>
     </TooltipPrimitive.Root>
   );
 }
@@ -51,7 +53,7 @@ export const TooltipTrigger = React.forwardRef<
   React.ElementRef<typeof TooltipPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Trigger> & { reopenOnPointerMove?: boolean }
 >(({ onFocus, onPointerMove, reopenOnPointerMove = true, ...props }, ref) => {
-  const changeOpen = React.useContext(TooltipInteraction);
+  const interaction = React.useContext(TooltipInteraction);
   return (
     <TooltipPrimitive.Trigger
       {...props}
@@ -69,7 +71,7 @@ export const TooltipTrigger = React.forwardRef<
           event.pointerType === "mouse" &&
           event.buttons === 0
         )
-          changeOpen?.(true);
+          interaction?.changeOpen(true);
       }}
     />
   );
@@ -85,6 +87,7 @@ export const TooltipContent = React.forwardRef<
       ref={ref}
       sideOffset={sideOffset}
       collisionPadding={16}
+      aria-hidden={React.useContext(TooltipInteraction)?.open === false || undefined}
       className={cn(
         "game-tooltip z-50 border border-border bg-card text-left text-base text-card-foreground",
         className,

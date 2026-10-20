@@ -738,7 +738,7 @@ strong {
   gap: var(--screen-section-gap);
 }
 .collection-gallery {
-  min-height: calc(var(--art-long-side) * 2 + var(--screen-item-gap));
+  min-height: calc(var(--art-short-side) * 2 + var(--screen-item-gap));
   display: flex;
   flex-direction: column;
   justify-content: center;

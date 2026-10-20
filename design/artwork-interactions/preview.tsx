@@ -277,7 +277,7 @@ function ArtworkStudy() {
                           : {}),
                         [step.id]: value,
                       }}
-                      label={step.labels[i]}
+                      label={step.labels[i] ?? value}
                       reduced={reduced}
                       aspect={aspect as "creature" | "action"}
                       selectedInitially={
@@ -286,7 +286,7 @@ function ArtworkStudy() {
                     />
                     <label className="study-choice">
                       <RadioGroupItem value={value} />
-                      Choose {step.labels[i].toLowerCase()}
+                      Choose {step.labels[i]?.toLowerCase() ?? value}
                     </label>
                   </section>
                 ))}
@@ -302,7 +302,7 @@ function ArtworkStudy() {
                 <Button
                   variant="outline"
                   disabled={index === 0}
-                  onClick={() => setStepId(steps[index - 1].id)}
+                  onClick={() => setStepId(steps[index - 1]?.id ?? step.id)}
                 >
                   Previous decision
                 </Button>
