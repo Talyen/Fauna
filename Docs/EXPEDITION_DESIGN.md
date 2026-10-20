@@ -71,7 +71,7 @@ These are the agreed directions from the design review. They supersede the proto
 
 Journey is the player-facing name. Internal command IDs, route fields, filenames, and storage paths retain their existing names.
 
-Ordinary victory → shared Reward screen with recruitment (if available) → fresh destinations. Intermediate boss victory → the same Reward screen with relic choices (if available) → the next biome. Compact last-battle currency and keyword XP earnings appear beside choices and remain visible on destinations until the next battle. No separate acknowledgement screen interrupts new journeys. If neither decision is available, proceed directly to destinations.
+Ordinary victory → shared Victory screen with recruitment (if available) → fresh destinations. Intermediate boss victory → the same Victory screen with relic choices (if available) → the next biome. Compact last-battle currency and keyword XP earnings appear beside choices and remain visible on destinations until the next battle. No separate acknowledgement screen interrupts new journeys. If neither decision is available, proceed directly to destinations.
 
 Final victory or defeat → Journey results. Ending a started journey voluntarily also opens results, labeled Returned home. Ending an unfinished starter choice simply returns to the main menu.
 
@@ -81,6 +81,6 @@ Final victory or defeat → Journey results. Ending a started journey voluntaril
 - Results offer a single centered Main menu action. Start a new journey only from the main menu.
 - New journey resets journey totals and roster/relics while preserving permanent progress. Main menu can reopen the last results until a new journey begins; this is not a multi-journey history.
 - Development saves are disposable; obsolete formats are rejected rather than migrated. Journey totals are recorded from current-format journeys, never inferred from lifetime XP or currency.
-- Material types remain undefined and are not shown. The shared Reward shell shows compact automatic earnings and one destination-specific choice: recruitment or relics. It has one Skip action, no Continue action. Full-roster replacement changes the contents of that same screen and may be canceled before committing.
+- Material types remain undefined and are not shown. The shared Victory shell shows compact automatic earnings and one destination-specific choice: recruitment or relics. It has one Skip action, no Continue action. Full-roster replacement changes the contents of that same screen and may be canceled before committing.
 
 See [UI design system](UI.md) for composition and interaction rules.

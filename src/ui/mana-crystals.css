@@ -3,14 +3,14 @@
 .mana {
   display: inline-flex;
   gap: 8px;
-  height: 52px;
+  height: var(--control-height);
   padding: 4px;
   background: transparent;
   cursor: help;
 }
 .mana-gem {
-  width: 36px;
-  height: 36px;
+  width: var(--mana-crystal-size);
+  height: var(--mana-crystal-size);
   position: relative;
   display: block;
   flex: 0 0 auto;

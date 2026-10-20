@@ -59,7 +59,7 @@ describe("player interface", () => {
     render(<App session={session} />);
     const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
-    expect(screen.getByRole("heading", { name: "Reward", level: 1 })).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "Victory", level: 1 })).toBeTruthy();
     expect(screen.queryByRole("button", { name: "Continue", exact: true })).toBeNull();
     for (const id of game.reward!.relics) {
       const relic = RELICS.find((entry) => entry.id === id)!;
@@ -79,23 +79,30 @@ describe("player interface", () => {
     expect(session.store.getState().game.phase).toBe("teamSelection");
     await session.dispose();
   });
-  it("shows compact battle earnings beside recruitment without an acknowledgement screen", async () => {
+  it("shows stacked currency and Journey-style keyword level progress on Victory", async () => {
     const started = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
-    const game = winBattle(accept(started, { type: "beginBattle" }));
+    const battle = produce(accept(started, { type: "beginBattle" }), (d) => {
+      d.keywordXP.nature = 23;
+    });
+    const game = winBattle(battle);
     localStorage.setItem("fauna.save.v1", JSON.stringify(game));
     const session = createSession(createBrowserPlatform(localStorage), 7);
     await session.load();
     render(<App session={session} />);
     const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
-    expect(screen.getByRole("heading", { name: "Reward", level: 1 })).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "Victory", level: 1 })).toBeTruthy();
     expect(screen.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeTruthy();
     expect(document.querySelectorAll(".recruit-options .creature-card")).toHaveLength(3);
     expect(screen.getByLabelText("Last battle earnings").textContent).toContain("+20 currency");
+    const progress = screen.getByRole("progressbar", { name: "Nature level 2 progress" });
+    expect(progress.getAttribute("aria-valuenow")).toBe("4");
+    expect(progress.getAttribute("aria-valuemax")).toBe("40");
+    expect(screen.queryByText(/keyword XP|talent point|4 \/ 40 XP/)).toBeNull();
     expect(screen.queryByRole("button", { name: "Continue", exact: true })).toBeNull();
     await user.click(screen.getByRole("button", { name: "Skip", exact: true }));
     expect(session.store.getState().game.phase).toBe("teamSelection");
-    expect(screen.queryByRole("heading", { name: "Choose a relic" })).toBeNull();
+    expect(screen.queryByRole("heading", { name: "Choose a Relic" })).toBeNull();
     await session.dispose();
   });
   it("reopens saved journey gains and starts fresh without losing permanent gains", async () => {

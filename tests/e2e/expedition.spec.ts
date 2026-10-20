@@ -775,9 +775,9 @@ test("five-card hand with hidden overflow, three enemies and a full bench preser
     .evaluate((el) => el.offsetWidth * el.offsetHeight);
   for (const card of await page.locator(".hand .action-card").all()) {
     await card.focus();
-    expect(Math.abs((await card.evaluate((el) => el.offsetWidth * el.offsetHeight)) / area - 1)).toBeLessThan(
-      0.025,
-    );
+    expect(
+      Math.abs((await card.evaluate((el) => el.offsetWidth * el.offsetHeight)) / area - (0.9 / 1.1) ** 2),
+    ).toBeLessThan(0.025);
   }
 });
 test("enlarged text and keyboard/controller row navigation keep inspection and menu controls reachable", async ({
@@ -916,7 +916,7 @@ test("battle tooltips, pointer targeting, Mana forecast and corners follow the d
     expect(await el.evaluate((el) => parseFloat(getComputedStyle(el).borderTopLeftRadius))).toBeGreaterThan(
       0,
     );
-  await page.locator(".target-control").click({ position: { x: 700, y: 8 } });
+  await page.getByRole("button", { name: "Cancel", exact: true }).click();
   await expect(page.locator(".battle-screen")).toHaveAttribute("data-selected-card", "");
   await expect(page.locator('.mana-gem[data-preview-spent="true"]')).toHaveCount(0);
   await card.click();
@@ -932,7 +932,9 @@ test("battle tooltips, pointer targeting, Mana forecast and corners follow the d
   await page.locator(".hand .action-card").first().click();
   await ally.focus();
   await page.keyboard.press("d");
-  await expect(page.locator(".enemy-row .creature-wrap:not(.knocked-out) .creature-card")).toBeFocused();
+  await expect(page.locator(".enemy-row .creature-wrap:not(.knocked-out) .creature-card:focus")).toHaveCount(
+    1,
+  );
   await card.hover();
   await expect(page.locator(".app")).toHaveAttribute("data-input", "pointer");
   await page.keyboard.press("d");
@@ -1327,12 +1329,14 @@ for (const [width, height] of [
         await resume(page);
         if (enlarged)
           await page.locator("html").evaluate((el) => el.style.setProperty("--text-scale", "1.5"));
-        await expect(page.getByRole("heading", { name: "Reward", exact: true })).toBeVisible();
+        await expect(page.getByRole("heading", { name: "Victory", exact: true })).toBeVisible();
         await page
           .locator(".reward-screen img")
           .evaluateAll((imgs) => Promise.all(imgs.map((img) => (img as HTMLImageElement).decode())));
         const cards = page.locator(".reward-option");
         await expect(cards).toHaveCount(3);
+        await expect(page.locator(".reward-heading h2")).toHaveCount(0);
+        await expect(page.locator(".reward-choice-content > h2")).toHaveCount(1);
         const first = (await cards.first().boundingBox())!,
           last = (await cards.last().boundingBox())!;
         expect(Math.abs(first.x + last.x + last.width - width)).toBeLessThan(1);
@@ -1360,7 +1364,7 @@ for (const [width, height] of [
   [3440, 1440],
   [960, 540],
 ] as const)
-  test(`equal-area battle and inspection remain usable at ${width}×${height}`, async ({ page }) => {
+  test(`fixed-size battle and inspection remain usable at ${width}×${height}`, async ({ page }) => {
     await page.setViewportSize({ width, height });
     await page.emulateMedia({ reducedMotion: "reduce" });
     const fixture = produce(run(), (d) => {
@@ -1371,12 +1375,50 @@ for (const [width, height] of [
     });
     await seed(page, fixture);
     await resume(page);
-    await fits(page);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     const area = (element: HTMLElement) => element.offsetWidth * element.offsetHeight;
+    expect(
+      await page
+        .locator(".player-row .creature-card")
+        .first()
+        .evaluate((el) => ({ width: el.offsetWidth, height: el.offsetHeight })),
+    ).toEqual({ width: 293, height: 220 });
+    expect(
+      await page
+        .locator(".hand .action-card")
+        .first()
+        .evaluate((el) => ({ width: el.offsetWidth, height: el.offsetHeight })),
+    ).toEqual({ width: 180, height: 240 });
+    expect(
+      await page
+        .locator(".mana-gem")
+        .first()
+        .evaluate((el) => el.getBoundingClientRect().width),
+    ).toBe(18);
+    const mana = (await page.getByRole("button", { name: /^Mana / }).boundingBox())!;
+    const end = (await page.getByRole("button", { name: /^End turn/ }).boundingBox())!;
+    const swap = (await page.getByRole("button", { name: "Swap", exact: true }).boundingBox())!;
+    expect(swap.y + swap.height).toBeLessThan(end.y);
+    expect(Math.abs(swap.x - end.x)).toBeLessThan(1);
+    expect(mana.x).toBe(32);
+    expect(Math.abs(mana.y + mana.height - height + 24)).toBeLessThan(1);
+    expect(Math.abs(end.x + end.width - width + 32)).toBeLessThan(1);
+    expect(Math.abs(end.y + end.height - height + 24)).toBeLessThan(1);
+    await page.mouse.move(0, 0);
+    const fan = await page
+      .locator(".hand-slot")
+      .evaluateAll((elements) => elements.map((el) => el.getBoundingClientRect().toJSON()));
+    expect(Math.abs(fan[0]!.top - fan[4]!.top)).toBeLessThan(1);
+    expect(Math.abs(fan[1]!.top - fan[3]!.top)).toBeLessThan(1);
+    expect(fan[0]!.top).toBeGreaterThan(fan[1]!.top);
+    expect(fan[1]!.top).toBeGreaterThan(fan[2]!.top);
+    expect(fan[0]!.bottom).toBeGreaterThan(height);
+    expect(fan[0]!.bottom).toBeLessThan(height + 48);
+    expect(Math.abs(fan[2]!.bottom - height)).toBeLessThan(1);
     const creatureArea = await page.locator(".player-row .creature-card").first().evaluate(area);
     for (const card of await page.locator(".hand .action-card").all())
-      expect(Math.abs((await card.evaluate(area)) / creatureArea - 1)).toBeLessThan(0.025);
-    for (const control of await page.locator(".hand-toolbar button").all()) {
+      expect(Math.abs((await card.evaluate(area)) / creatureArea - (0.9 / 1.1) ** 2)).toBeLessThan(0.025);
+    for (const control of await page.locator(".hand-toolbar button:enabled").all()) {
       const bounds = (await control.boundingBox())!;
       expect(bounds.y + bounds.height).toBeLessThanOrEqual(height);
       expect(

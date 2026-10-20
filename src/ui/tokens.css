@@ -60,16 +60,22 @@
   --text-result: calc(28px * var(--text-scale, 1));
   --motion-fast: 150ms;
   --feedback-duration: 1400ms;
-  /* 1280 x 800 anchors the relic baseline. Fit both axes; larger windows
-     take 72% of additional growth, matching Alchemy's density approach. */
-  --art-reference-short-side: 200px;
-  --art-standard-short-side: min(15.625vw, 25dvh, calc(11.25vw + 56px), calc(18dvh + 56px));
+  /* Fixed CSS-pixel artwork sizes; layouts reflow instead of scaling artwork. */
+  --art-standard-short-side: 200px;
   --art-short-side: var(--art-standard-short-side);
-  --page-inline-gutter: clamp(16px, 2.5vw, 32px);
+  --page-inline-gutter: 32px;
   --page-block-gutter: 24px;
   --page-content-height: calc(100dvh - var(--page-block-gutter) * 2);
-  --battle-layout-reserve: 308px;
-  --hand-overlap: 40px;
+  --screen-section-gap: 24px;
+  --screen-item-gap: 12px;
+  --hand-overlap: 48px;
+  --hand-fan-angle-step: 4deg;
+  --hand-fan-drop-step: 6px;
+  --hand-rest-inset: 0px;
+  --mana-crystal-size: 18px;
+  --battle-creature-width: calc(var(--art-landscape-width) * 1.1);
+  --battle-hand-width: calc(var(--art-portrait-width) * 0.9);
+  --battle-hand-height: calc(var(--art-long-side) * 0.9);
   --art-long-side: calc(var(--art-short-side) * 4 / 3);
   --art-landscape-width: var(--art-long-side);
   --art-portrait-width: var(--art-short-side);

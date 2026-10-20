@@ -25,11 +25,9 @@ export type Controls = MutableRefObject<((action: InputAction) => boolean) | nul
 function FanSlot({ index, count, children }: { index: number; count: number; children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {
-    const offset = index - (count - 1) / 2,
-      angle = offset * 4;
+    const offset = index - (count - 1) / 2;
     const style = ref.current!.style;
-    style.setProperty("--fan-angle", `${angle}deg`);
-    style.setProperty("--fan-drop", `${Math.abs(offset) * 7}px`);
+    style.setProperty("--fan-offset", String(offset));
     style.setProperty("--fan-order", String(index));
   }, [index, count]);
   return (
@@ -258,13 +256,6 @@ export function BattleScreen({
         ))}
       </section>
       <section className="hand-section" aria-label="Action hand">
-        <div className="hand-toolbar">
-          <ManaCrystals mana={battle.mana} previewCost={def?.cost ?? 0} />
-          {actions}
-          <Button className="end-turn" onClick={() => play({ type: "endTurn" })}>
-            End turn{controller ? " · Y" : ""}
-          </Button>
-        </div>
         <div className="hand">
           {visibleHand.map((id, index, hand) => {
             const card = game.cards.find((c) => c.id === id)!,
@@ -287,6 +278,15 @@ export function BattleScreen({
           })}
         </div>
       </section>
+      <div className="hand-toolbar">
+        <ManaCrystals mana={battle.mana} previewCost={def?.cost ?? 0} />
+        <div className="battle-actions">
+          {actions}
+          <Button className="end-turn" onClick={() => play({ type: "endTurn" })}>
+            End turn{controller ? " · Y" : ""}
+          </Button>
+        </div>
+      </div>
       {line ? (
         <svg className="target-line" aria-hidden="true">
           <path d={line} />
