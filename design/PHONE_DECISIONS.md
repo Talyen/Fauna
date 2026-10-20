@@ -137,6 +137,13 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 - After a successful swap, animate creatures between positions over 150ms. Committed gameplay updates immediately; motion is presentation-only, never blocks input and is skipped under reduced motion.
 - Swap movement uses ease-out timing and small opposing arcs to reduce overlap. Arc height remains undecided pending comparison.
 
+## Talent controls
+
+- Available purchases use a normal outlined control with gold on hover.
+- Unmet requirements use 45% opacity and remain inspectable.
+- Successful purchases update the owned state immediately, with a 150ms color transition; reduced motion makes the transition immediate. Do not use checkmarks.
+- Owned appearance remains undecided: the user rejected checkmarks and requested alternatives to the proposed gold-filled background.
+
 ## Empty states
 
 - Use an icon only, with no visible message, accompanying action or hover/focus tooltip. Provide an accessible label that describes the empty state.
