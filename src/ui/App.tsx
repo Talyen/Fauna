@@ -93,8 +93,10 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     modalOpener.current = document.activeElement as HTMLElement | null;
     setModal(next);
   };
-  const navigate = (next: Route) => {
+  const navigate = (next: "talents" | "collection") => {
     origin.current = menu ? "play" : route;
+    // Menu pages unmount their opener; retain its label for the recreated menu.
+    menuReturnLabel.current = next === "talents" ? "Talents" : "Collection";
     setMenu(false);
     setRoute(next);
   };
@@ -187,6 +189,14 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     const buttons = Array.from(
       root.current?.querySelectorAll<HTMLElement>("main button:not(:disabled)") ?? [],
     ).filter((el) => el.getClientRects().length > 0);
+    if (route === "home" && menuReturnLabel.current) {
+      const opener = buttons.find((el) => el.textContent === menuReturnLabel.current);
+      menuReturnLabel.current = null;
+      if (opener) {
+        opener.focus();
+        return;
+      }
+    }
     // Screen transitions must not replace focus the player already moved onto the new screen.
     if (buttons.includes(document.activeElement as HTMLElement)) return;
     (buttons.find((el) => el.classList.contains("primary-menu-action")) ?? buttons[0])?.focus();
