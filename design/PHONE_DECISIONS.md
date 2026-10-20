@@ -141,8 +141,9 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 
 - Available purchases use a normal outlined control with gold on hover.
 - Unmet requirements use 45% opacity and remain inspectable.
-- Successful purchases update the owned state immediately, with a 150ms color transition; reduced motion makes the transition immediate. Do not use checkmarks.
-- Owned appearance remains undecided: the user rejected checkmarks and requested alternatives to the proposed gold-filled background.
+- Owned talents use their keyword's semantic color on the talent icon, with a black background and no checkmark. Hover subtly brightens the icon without growth.
+- Successful purchases update the owned state immediately, with a 150ms color transition and a brief gold flash on the existing border. Focus outline takes priority over the flash to preserve a single highlighted boundary. Flash duration remains undecided.
+- Reduced motion makes the owned color transition immediate and suppresses the decorative border flash.
 
 ## Empty states
 
