@@ -55,6 +55,28 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 - For combatant wind-up, swing and hit reactions, use the [Alchemy direction](combat-motion/README.md). This supersedes the unanswered choice between no recoil, 2px recoil and 4px recoil. No recoil-distance option was selected in that question.
 - Numbers must retain meaningful committed outcomes; motion never gates input or gameplay. Presentation-only grouping must not mutate events or extend expired feedback.
 
+## Status effects
+
+- Icons only: names, counts and explanations appear in immediate hover/focus tooltips, not beside the icons. Accessible descriptions retain the same details. This supersedes the earlier tentative icon-plus-count direction.
+- Fixed catalog order, not dynamic urgency sorting.
+- Newly added status: scale from 90% to 110%, then settle at normal size over 200ms.
+- Existing status count changes: a small icon pulse, without replaying the full entrance bounce; tooltip data updates immediately.
+- When the effect ends: 150ms fade-out. Reaching zero uses removal feedback rather than also triggering a count-change pulse.
+- Reduced motion makes entrance/removal immediate and suppresses the pulse.
+
+## Targeting
+
+- Highlight only the current target; other valid candidates retain their normal border.
+- A thin, steady muted-gold line connects acting creature and target. No line glow or animation.
+- Invalid targets use 45% opacity and remain inspectable.
+- Preserve the single highlighted-boundary rule when targeting overlaps selection or hover. Target validity and action acceptance remain gameplay-owned.
+
+## Rejected action-card input
+
+- Attempting to play an unavailable card gives a brief sideways shake. Sound is supplementary.
+- Reduced motion uses a static border cue instead of shaking; do not add an extra ring.
+- Rejected input cannot change committed gameplay, RNG, Mana or saves. No shake duration or distance was chosen in this phone question; existing bounded values remain the implementation baseline pending rendered review.
+
 ## Shared preferences
 
 Reduced motion makes switch/radio/dialog/progress transitions immediate and disables spatial combat movement. Essential state remains visible without sound. None of these choices authorizes dropping keyboard accessibility, native control behavior, fixed artwork dimensions or the single highlighted-boundary treatment for selected-plus-hovered controls. Fine visual details still need review at a computer.
