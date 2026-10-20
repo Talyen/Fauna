@@ -48,6 +48,14 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 - Fill changes animate over 150ms; committed values change immediately.
 - Existing Health/keyword semantic colors and visible-number rules remain.
 
+## Health and Block previews
+
+- Predicted Health loss uses static stripes over the portion that would be lost.
+- Predicted healing uses a translucent green segment showing the gain.
+- Block changes show the current amount → predicted amount, including zero when depleted.
+- A lethal outcome uses a small skull beside the Health bar.
+- Previews update immediately and disappear on cancellation. Health totals remain in tooltips and inspection; previews never commit gameplay.
+
 ## Combat feedback
 
 - Combat numbers drift upward slightly while fading, remain visible for 1 second and use semibold text.
