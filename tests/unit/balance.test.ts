@@ -21,6 +21,6 @@ it("validates fixture grants, replays battle experiments and preserves non-loado
   changed.steps[0]!.checkpoint = "corrupt";
   await expect(balanceCase(config, "test", changed)).rejects.toThrow("diverged");
   await expect(
-    balanceCase({ ...config, loadout: { talents: ["physical.mastery"], boons: [] } }, "test"),
+    balanceCase({ ...config, loadout: { talents: ["physical.shield-slam"], boons: [] } }, "test"),
   ).rejects.toThrow();
 });

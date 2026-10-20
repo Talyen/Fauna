@@ -118,7 +118,7 @@ export const TALENTS = [
     keyword: "light",
     effect: "blessed-leech",
     name: "Blessed Leech",
-    text: "Light damage Leeches while below half Health.",
+    text: "Light damage: Leech below half Health.",
     row: 0,
   },
   {
