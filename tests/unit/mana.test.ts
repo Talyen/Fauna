@@ -45,11 +45,17 @@ describe("mana turn settlement", () => {
     expect(result.state.battle!.turn).toBe(1);
     expect(result.events.some((e) => e.actorId?.startsWith("enemy-"))).toBe(false);
   });
-  it("rejects exhausted committed turns instead of repairing them during load", () => {
+  it("resumes manual zero-Mana turns and still rejects out-of-range Mana", () => {
     const exhausted = produce(lastMana(), (d) => {
       d.battle!.mana = 0;
     });
-    expect(() => decodeSave(encodeSave(exhausted))).toThrow();
+    expect(decodeSave(encodeSave(exhausted))).toEqual(exhausted);
+    for (const mana of [-1, 5]) {
+      const invalid = produce(exhausted, (d) => {
+        d.battle!.mana = mana;
+      });
+      expect(() => decodeSave(encodeSave(invalid))).toThrow();
+    }
   });
 });
 describe("outcome-driven impact and sound", () => {

@@ -107,8 +107,9 @@ export type Command =
   | { type: "beginBattle"; destination?: string }
   | { type: "setLineup"; activeId: string; reserve: string }
   | { type: "swap"; activeId: string; reserve: string }
-  | { type: "play"; cardId: string; targetId?: string }
+  | { type: "play"; cardId: string; targetId?: string; autoEndTurn?: boolean }
   | { type: "endTurn" }
+  | { type: "devWinBattle" }
   | { type: "visitCampfire" }
   | { type: "rest" }
   | { type: "recruit"; species: SpeciesId; replace?: string }

@@ -34,7 +34,15 @@
     "balance:playthrough": "node scripts/run-playthrough.mjs",
     "predev": "npm run assets:check:outputs",
     "prebuild": "npm run assets:check:outputs",
-    "audio:review": "node scripts/audio-review.mjs"
+    "audio:review": "node scripts/audio-review.mjs",
+    "context": "node scripts/agent-context.mjs",
+    "review:status": "node scripts/agent-review.mjs --status",
+    "review:diff": "node scripts/agent-review.mjs",
+    "verify:package": "node scripts/verify-package.mjs",
+    "balance:compare": "node scripts/balance-compare.mjs",
+    "perf": "node scripts/run-performance.mjs",
+    "perf:replay": "node scripts/run-performance.mjs replay",
+    "perf:compare": "node scripts/run-performance.mjs compare"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.3.0",
@@ -59,6 +67,7 @@
     "zustand": "5.0.13"
   },
   "devDependencies": {
+    "@electron/asar": "^3.4.1",
     "@playwright/test": "^1.60.0",
     "@tailwindcss/vite": "^4.3.0",
     "@testing-library/jest-dom": "^6.9.1",

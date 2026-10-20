@@ -1,3 +1,9 @@
+import { Switch } from "../components/ui/switch";
+import { CreatureCard } from "./cards";
+import { species } from "../game/content";
+import { writePreference } from "../platform/preferences";
+import { useAutoplay } from "./autoplay";
+import { observeUnlocks } from "./unlock-reveals";
 import { Campfire } from "./campfire";
 import { Settings } from "./settings";
 import { useAudioPreferences } from "./audio-preferences";
@@ -33,7 +39,7 @@ import type { Command } from "../game/types";
 import type { SpeciesId } from "../game/content";
 import "./mana-crystals.css";
 
-type Route = "home" | "play" | "talents" | "collection";
+type Route = "home" | "play" | "talents" | "collection" | "unlocks";
 type Modal = "settings" | "glossary" | "endRun" | "deck" | "swap" | "lineup" | "draw" | "discard" | null;
 export function App(props: { session: Session; desktop?: boolean }) {
   return (
@@ -76,7 +82,18 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     game.phase === "teamSelection" ||
     game.phase === "campfire" ||
     (["recruit", "relic"].includes(game.phase) && game.reward?.outcome === "next");
+  const [autoEndTurn, setAutoEndTurn] = useState(() => preference("fauna.auto-end-turn", "true") !== "false");
+  const [pendingUnlocks, setPendingUnlocks] = useState<SpeciesId[]>([]);
+  const [reveals, setReveals] = useState<SpeciesId[]>([]);
+  useEffect(
+    () => observeUnlocks(session, (ids) => setPendingUnlocks((old) => [...new Set([...old, ...ids])])),
+    [session],
+  );
   const paused = route !== "play" || menu || modal !== null || inspection !== null;
+  const [autoplay, setAutoplay] = useAutoplay(session, paused, autoEndTurn);
+  useEffect(() => {
+    if (route !== "play") setAutoplay(false);
+  }, [route, setAutoplay]);
   const { bursts, deny } = useCombatFeedback(session, root, playSound, paused);
   useEffect(() => {
     document.documentElement.style.setProperty("--text-scale", String(scale));
@@ -86,7 +103,18 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
       /* Optional preferences. */
     }
   }, [scale]);
-  const send = useCallback((command: Command) => session.command(command), [session]);
+  const send = useCallback(
+    (command: Command) => {
+      setAutoplay(false);
+      return session.command(command.type === "play" ? { ...command, autoEndTurn } : command);
+    },
+    [session, autoEndTurn, setAutoplay],
+  );
+  const leaveResults = () => {
+    setReveals(pendingUnlocks);
+    setPendingUnlocks([]);
+    setRoute(pendingUnlocks.length ? "unlocks" : "home");
+  };
   const menuReturnLabel = useRef<string | null>(null);
   const openMenu = () => {
     pauseOpener.current = document.activeElement as HTMLElement | null;
@@ -278,7 +306,8 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           variant="ghost"
           onClick={() => {
             setMenu(false);
-            setRoute("home");
+            if (["victory", "defeat"].includes(game.phase)) leaveResults();
+            else setRoute("home");
           }}
         >
           Main menu
@@ -369,6 +398,11 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
               setScale={setScale}
               diagnostics={session.diagnostics}
               desktop={desktop}
+              autoEndTurn={autoEndTurn}
+              setAutoEndTurn={(value) => {
+                setAutoEndTurn(value);
+                writePreference("fauna.auto-end-turn", String(value));
+              }}
             />
           ) : modal === "glossary" ? (
             <>
@@ -493,6 +527,28 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
               <nav aria-label="Main menu">{menuItems(true)}</nav>
             </main>
           ) : null}
+          {route === "unlocks" && reveals[0] ? (
+            <main className="unlock-screen">
+              <h1>Creature unlocked</h1>
+              <div className="unlock-creature">
+                <CreatureCard
+                  kind={reveals[0]}
+                  label={`Inspect ${species(reveals[0]).name}`}
+                  onClick={() => setInspection({ species: reveals[0]! })}
+                  onInspect={() => setInspection({ species: reveals[0]! })}
+                />
+                <h2>{species(reveals[0]).name}</h2>
+              </div>
+              <Button
+                onClick={() => {
+                  setReveals((old) => old.slice(1));
+                  if (reveals.length === 1) setRoute("home");
+                }}
+              >
+                Continue
+              </Button>
+            </main>
+          ) : null}
           {route === "talents" ? <Talents game={game} send={send} back={backFromPage} /> : null}
           {route === "collection" ? (
             <Collection game={game} inspect={setInspection} back={backFromPage} />
@@ -516,18 +572,25 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
             ) : game.phase === "battle" ? (
               <BattleScreen
                 key={game.encounter}
-                clearSelection={menu || modal !== null || inspection !== null}
+                clearSelection={menu || modal !== null || inspection !== null || autoplay}
+                onManualStart={() => setAutoplay(false)}
                 openPile={(pile) => openModal(pile)}
                 actions={
-                  <Button
-                    variant="outline"
-                    className="swap-trigger"
-                    disabled={!game.reserves.some((c) => c.health > 0)}
-                    onClick={() => openModal("swap")}
-                  >
-                    <ArrowLeftRight aria-hidden="true" />
-                    Swap
-                  </Button>
+                  <>
+                    <label className="autoplay-control" htmlFor="autoplay">
+                      <span>Auto-play</span>
+                      <Switch id="autoplay" checked={autoplay} onCheckedChange={setAutoplay} />
+                    </label>
+                    <Button
+                      variant="outline"
+                      className="swap-trigger"
+                      disabled={!game.reserves.some((c) => c.health > 0)}
+                      onClick={() => openModal("swap")}
+                    >
+                      <ArrowLeftRight aria-hidden="true" />
+                      Swap
+                    </Button>
+                  </>
                 }
                 game={game}
                 send={send}
@@ -546,7 +609,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                 inspect={setInspection}
               />
             ) : (
-              <JourneyResults game={game} home={() => setRoute("home")} />
+              <JourneyResults game={game} home={leaveResults} />
             )}
             <div className="sr-only" role="log" aria-live="polite">
               {view.events.map((event) => event.text).join(" ")}
@@ -578,6 +641,16 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           <DialogTitle className="sr-only">Pause menu</DialogTitle>
           <DialogDescription className="sr-only">Game menu</DialogDescription>
           {menuItems(false)}
+          {import.meta.env.DEV && game.phase === "battle" ? (
+            <Button
+              variant="outline"
+              onClick={() => {
+                if (send({ type: "devWinBattle" })) setMenu(false);
+              }}
+            >
+              Skip combat
+            </Button>
+          ) : null}
         </DialogContent>
       </Dialog>
       {overlays}

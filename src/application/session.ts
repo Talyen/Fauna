@@ -16,7 +16,7 @@ export interface SessionView {
   events: GameEvent[];
   committedCommand: Command | null;
 }
-export function createSession(platform: Platform, seed = 1) {
+export function createSession(platform: Platform, seed = 1, capabilities: { development?: boolean } = {}) {
   const diagnostics = createDiagnostics(
     platform.diagnostics,
     typeof __FAUNA_BUILD__ === "string" ? __FAUNA_BUILD__ : "test",
@@ -111,7 +111,7 @@ export function createSession(platform: Platform, seed = 1) {
     command(command: Command) {
       const view = store.getState();
       if (disposed || view.closing || !view.ready || view.recoveryRequired || view.loadFailed) return false;
-      const result = dispatch(view.game, command);
+      const result = dispatch(view.game, command, capabilities.development === true);
       if (!result.accepted) {
         store.setState({ error: result.reason });
         return false;
@@ -145,6 +145,7 @@ export function createSession(platform: Platform, seed = 1) {
     },
     dispose() {
       disposed = true;
+      store.setState({ ready: false, closing: true });
       diagnostics.dispose();
       removeCloseListener?.();
       generation++;

@@ -321,8 +321,7 @@ export function decodeSave(raw: string): GameState {
       invalid([...s.team, ...s.reserves].some((creature) => !creature.combat));
       const liveCards = s.cards;
       invalid(
-        b.mana === 0 ||
-          ![...s.team, ...s.reserves].some((c) => c.health > 0) ||
+        ![...s.team, ...s.reserves].some((c) => c.health > 0) ||
           !b.enemies.some((e) => e.health > 0) ||
           (b.buffer.length > 0 && b.hand.length < MAX_HAND_SIZE) ||
           zones.length !== liveCards.length ||

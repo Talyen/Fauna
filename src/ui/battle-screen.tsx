@@ -50,6 +50,7 @@ export function BattleScreen({
   onDenied,
   actions,
   clearSelection = false,
+  onManualStart,
   openPile,
 }: {
   game: GameState;
@@ -61,6 +62,7 @@ export function BattleScreen({
   navigateFocus: boolean;
   onDenied: (element: HTMLElement) => void;
   actions?: ReactNode;
+  onManualStart?: () => void;
   clearSelection?: boolean;
   openPile?: (pile: "draw" | "discard") => void;
 }) {
@@ -276,7 +278,10 @@ export function BattleScreen({
                   disabled={battle.mana < definition(card.definitionId).cost || controlled(owner)}
                   onDenied={onDenied}
                   onInspect={() => inspect({ card })}
-                  onClick={() => setSelected((old) => (old === id ? null : id))}
+                  onClick={() => {
+                    onManualStart?.();
+                    setSelected((old) => (old === id ? null : id));
+                  }}
                 />
               </FanSlot>
             );

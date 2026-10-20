@@ -11,7 +11,7 @@ import "./ui/styles.css";
 for (const name of ["full", "empty"])
   document.documentElement.style.setProperty(`--mana-${name}-image`, `url("${assetUrl(`mana.${name}`)}")`);
 const platform = createPlatform();
-const session = createSession(platform, Date.now() >>> 0);
+const session = createSession(platform, Date.now() >>> 0, { development: import.meta.env.DEV });
 let contentValid = true;
 try {
   validateContent();

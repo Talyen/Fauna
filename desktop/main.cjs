@@ -35,7 +35,7 @@ function finishClose() {
 }
 let window;
 let storage;
-const dev = process.env.FAUNA_DEV_URL;
+const dev = app.isPackaged ? undefined : process.env.FAUNA_DEV_URL;
 if (dev && !isDevelopmentUrl(dev)) throw new Error("Untrusted development URL.");
 const entry = pathToFileURL(path.join(__dirname, "../dist/index.html")).href;
 const trusted = (url) => (dev ? url === `${dev}/` || url === dev : url === entry);

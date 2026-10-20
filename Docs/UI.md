@@ -6,7 +6,7 @@ Screen composition is mostly center-aligned: headings, content groups, artwork c
 
 ## Shared components and enforcement
 
-Use source-owned shadcn/ui for every standard UI control and its interaction behavior. Current approved primitives: Button, Dialog, AlertDialog, Tooltip, Tabs, Switch, RadioGroup, and Progress. Settings uses a sound Switch and labeled text-size RadioGroup; End journey uses AlertDialog with Cancel initially focused and no outside-click dismissal. Preserve native Tab, arrow-key, Space, Enter, Escape, focus trapping and return behavior. W/A/S/D and gamepad navigation adapt to those components rather than replacing their state machines.
+Use source-owned shadcn/ui for every standard UI control and its interaction behavior. Current approved primitives: Button, Dialog, AlertDialog, Tooltip, Tabs, Switch, RadioGroup, and Progress. Settings uses Sound and Auto-end turn Switches and a labeled text-size RadioGroup; End journey uses AlertDialog with Cancel initially focused and no outside-click dismissal. Preserve native Tab, arrow-key, Space, Enter, Escape, focus trapping and return behavior. W/A/S/D and gamepad navigation adapt to those components rather than replacing their state machines.
 
 `scripts/shadcn-registry.json` explicitly lists reviewed primitives and their Radix owners. New standard controls must come from upstream shadcn, retain provenance, and be registered during review. Do not build custom toggles, tabs, dropdowns, dialogs, or clickable layout elements. The check rejects raw native controls, handmade widget roles, direct Radix imports, unregistered primitives, competing UI libraries and inline visual styles. These source guards complement interaction tests; they cannot prove all behavior by static analysis.
 

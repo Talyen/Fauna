@@ -1446,6 +1446,27 @@ strong {
   }
 }
 
+.autoplay-control {
+  display: flex;
+  align-items: center;
+  gap: var(--screen-item-gap);
+  min-height: var(--control-height);
+}
+.unlock-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--screen-section-gap);
+  padding: var(--page-block-gutter) var(--page-inline-gutter);
+}
+
+.unlock-creature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--screen-item-gap);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .game-button {
     scale: 1 !important;

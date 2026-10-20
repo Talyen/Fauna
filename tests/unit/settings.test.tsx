@@ -37,6 +37,9 @@ it("applies slider and switch changes live, persists preferences, and preserves 
   try {
     await user.click(screen.getByRole("button", { name: "Settings", exact: true }));
     await user.click(screen.getByRole("radio", { name: "150%", exact: true }));
+    await user.click(screen.getByRole("tab", { name: "Battle", exact: true }));
+    expect(screen.getByRole("switch", { name: "Auto-end turn" }).getAttribute("aria-checked")).toBe("true");
+    await user.click(screen.getByRole("switch", { name: "Auto-end turn" }));
     await user.click(screen.getByRole("tab", { name: "Sound", exact: true }));
     const master = screen.getByRole("slider", { name: "Master volume", exact: true });
     master.focus();
@@ -60,6 +63,8 @@ it("applies slider and switch changes live, persists preferences, and preserves 
     render(<App session={session} />);
     await user.click(screen.getByRole("button", { name: "Settings", exact: true }));
     expect(screen.getByRole("radio", { name: "150%" }).getAttribute("aria-checked")).toBe("true");
+    await user.click(screen.getByRole("tab", { name: "Battle", exact: true }));
+    expect(screen.getByRole("switch", { name: "Auto-end turn" }).getAttribute("aria-checked")).toBe("false");
     await user.click(screen.getByRole("tab", { name: "Sound", exact: true }));
     expect(screen.getByRole("slider", { name: "Master volume" }).getAttribute("aria-valuenow")).toBe("0");
     expect(screen.getByRole("switch", { name: "Sound", exact: true }).getAttribute("aria-checked")).toBe(

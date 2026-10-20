@@ -1,11 +1,11 @@
-import { Monitor, Volume2, Bug, Scaling } from "lucide-react";
+import { Monitor, Volume2, Bug, Scaling, StepForward } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
 import { RadioGroup, RadioGroupItem } from "../components/ui/radio-group";
 import type { Diagnostics } from "../application/diagnostics";
 import type { AudioPreferences } from "./audio-preferences";
 import { AudioSettings } from "./audio-settings";
 import { DiagnosticViewer } from "./diagnostics";
-import { SettingRow } from "./settings-controls";
+import { SettingRow, SettingToggle } from "./settings-controls";
 
 export function Settings({
   audio,
@@ -14,6 +14,8 @@ export function Settings({
   setScale,
   diagnostics,
   desktop,
+  autoEndTurn,
+  setAutoEndTurn,
 }: {
   audio: AudioPreferences;
   updateAudio: (patch: Partial<AudioPreferences>) => void;
@@ -21,6 +23,8 @@ export function Settings({
   setScale: (value: number) => void;
   diagnostics: Diagnostics;
   desktop: boolean;
+  autoEndTurn: boolean;
+  setAutoEndTurn: (value: boolean) => void;
 }) {
   return (
     <Tabs defaultValue="display" className="settings-controls">
@@ -32,6 +36,10 @@ export function Settings({
         <TabsTrigger value="sound">
           <Volume2 aria-hidden="true" />
           Sound
+        </TabsTrigger>
+        <TabsTrigger value="battle">
+          <StepForward aria-hidden="true" />
+          Battle
         </TabsTrigger>
         <TabsTrigger value="diagnostics">
           <Bug aria-hidden="true" />
@@ -59,6 +67,15 @@ export function Settings({
       </TabsContent>
       <TabsContent value="sound" className="settings-panel">
         <AudioSettings value={audio} update={updateAudio} />
+      </TabsContent>
+      <TabsContent value="battle" className="settings-panel">
+        <h2 className="settings-heading">Battle</h2>
+        <SettingToggle
+          icon={StepForward}
+          label="Auto-end turn"
+          checked={autoEndTurn}
+          onChange={setAutoEndTurn}
+        />
       </TabsContent>
       <TabsContent value="diagnostics" className="settings-panel">
         <h2 className="settings-heading">Diagnostics</h2>
