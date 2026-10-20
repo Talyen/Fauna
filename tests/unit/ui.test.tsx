@@ -1,8 +1,9 @@
 import { ActionCard } from "../../src/ui/cards";
 import { TooltipProvider } from "../../src/components/ui/tooltip";
 import { produce } from "immer";
-import { dispatch } from "../../src/game/engine";
-import { run } from "./helpers";
+import { createGame, dispatch } from "../../src/game/engine";
+import { accept, run } from "./helpers";
+import { encounterSource, location } from "../../src/game/destinations";
 import { TargetPreview } from "../../src/ui/target-preview";
 // @vitest-environment jsdom
 import { afterEach, describe, it, expect, vi } from "vitest";
@@ -17,6 +18,29 @@ afterEach(() => {
   localStorage.clear();
 });
 describe("player interface", () => {
+  it("browses a destination, enemy and action in one dialog without committing or rerolling", async () => {
+    const game = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
+    localStorage.setItem("fauna.save.v1", JSON.stringify(game));
+    const session = createSession(createBrowserPlatform(localStorage), 7);
+    await session.load();
+    render(<App session={session} />);
+    const user = userEvent.setup();
+    await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+    const destination = game.expedition!.offers[0]!.location;
+    const pack = encounterSource(game, destination);
+    await user.click(screen.getByRole("button", { name: `Inspect ${location(destination)!.name}` }));
+    await user.click(screen.getByRole("button", { name: `Inspect ${pack.enemies[0]!.name}` }));
+    await user.click(document.querySelector<HTMLButtonElement>(".inspection-thumbnails button")!);
+    expect(screen.getAllByRole("dialog")).toHaveLength(1);
+    await user.keyboard("{Escape}");
+    await user.keyboard("{Escape}");
+    expect(screen.getByRole("button", { name: "Begin battle" })).toBeTruthy();
+    expect(session.store.getState().game).toEqual(game);
+    await user.keyboard("{Escape}");
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect(session.store.getState().game).toEqual(game);
+    await session.dispose();
+  });
   it("drafts through accessible buttons and commits the battle before feedback", async () => {
     const session = createSession(createBrowserPlatform(localStorage), 7);
     await session.load();
@@ -38,6 +62,7 @@ describe("player interface", () => {
         disconnect() {}
       },
     );
+    await user.click(screen.getAllByRole("button", { name: /^Inspect / })[0]!);
     await user.click(screen.getByRole("button", { name: "Begin battle" }));
     expect(session.store.getState().game.phase).toBe("battle");
     expect(screen.getByRole("region", { name: "Enemy row" })).toBeTruthy();

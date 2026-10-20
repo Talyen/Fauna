@@ -31,11 +31,11 @@ describe("one-starter expeditions", () => {
 
   it("adds recruits to the first three lineup slots and saves the settled battle before relic choice", () => {
     let s = start();
-    for (const recruit of ["briartooth", "stormfin"] as const) {
+    for (let index = 0; index < 2; index++) {
       s = accept(s, { type: "beginBattle" });
       s = accept(winBattle(s), { type: "continueReward" });
-      s = accept(s, { type: "recruit", species: recruit });
-      expect(s.team).toHaveLength(recruit === "briartooth" ? 2 : 3);
+      s = accept(s, { type: "recruit", species: s.reward!.recruits[0]! });
+      expect(s.team).toHaveLength(index + 2);
       expect(s.lineup).toEqual(s.roster);
       expect(s.reserves).toEqual([]);
       expect(decodeSave(encodeSave(s))).toEqual(s);
@@ -71,6 +71,6 @@ describe("one-starter expeditions", () => {
       expect(decodeSave(encodeSave(s))).toEqual(s);
     }
     expect(s.phase).toBe("victory");
-    expect(s.roster).toHaveLength(3);
+    expect(s.roster).toHaveLength(5);
   });
 });

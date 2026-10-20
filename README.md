@@ -2,7 +2,7 @@
 
 A single-player creature-collecting card battler for Steam. Choose a starter and recruit companions, combining their cards in one shared deck. Find combinations, recruit new teammates, and reach the heart of the wilds.
 
-This foundation contains a complete short expedition: choose one of five starter species, fight two encounters and a boss, collect keyword XP and currency, recruit reserves, and choose expedition relics, and unlock Moonhart on victory. The illustrations are original procedural SVG placeholders, not final production artwork.
+This foundation contains a complete short expedition: choose one of five starter species, explore two biomes with three encounters and a boss each, collect keyword XP and currency, recruit reserves, choose expedition relics, and unlock Moonhart on victory. The illustrations are original procedural SVG placeholders, not final production artwork.
 
 ## Run
 

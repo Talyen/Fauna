@@ -186,7 +186,7 @@ it("preserves in-progress version-two upgrades while adding validated progressio
   for (const key of ["roster", "keywordXP", "battleXP", "talents", "currency", "relics", "reward"])
     delete old[key];
   const migrated = decodeSave(JSON.stringify(old));
-  expect(migrated.version).toBe(4);
+  expect(migrated.version).toBe(5);
   expect(migrated.phase).toBe("battle");
   expect(migrated.roster).toEqual(migrated.team.map((c) => c.species));
   expect(migrated.cards[0]!.level).toBe(2);

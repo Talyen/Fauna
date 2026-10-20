@@ -910,3 +910,78 @@ button {
   width: 60%;
   margin: auto;
 }
+
+.destinations-screen {
+  width: min(1120px, 100%);
+  min-height: calc(100dvh - 48px);
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-6);
+}
+.destination-heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.destination-heading p,
+.destination-option p {
+  color: var(--muted-foreground);
+  font-size: var(--text-secondary);
+}
+.destination-grid {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-6);
+}
+.destination-option {
+  flex: 1;
+  max-width: 360px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.destination-option .creature-card {
+  width: 100%;
+}
+.destination-option h2,
+.destination-enemies h2 {
+  font-size: var(--text-name);
+  font-weight: 600;
+}
+.destination-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+}
+.inspection.destination-inspection {
+  width: min(960px, calc(100vw - var(--space-12)));
+}
+.destination-enemies {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+}
+.destination-enemies > div {
+  flex: 1;
+  min-width: 0;
+  max-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.destination-enemies .creature-card {
+  width: 100%;
+}
+@media (max-width: 640px) {
+  .destination-grid,
+  .destination-enemies {
+    flex-wrap: wrap;
+  }
+  .destination-option,
+  .destination-enemies > div {
+    flex-basis: 100%;
+  }
+}

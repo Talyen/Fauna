@@ -1,20 +1,13 @@
 import { freeze, produce } from "immer";
 import { KEYWORDS, RELICS, cardKeywords, canBuyTalent, hasTalent } from "./progression";
 import { actionValue, cardFollowups } from "./rules";
-import {
-  CARDS,
-  ENCOUNTERS,
-  INITIAL_SPECIES,
-  definition,
-  species,
-  enemyDamageType,
-  DAMAGE_LABELS,
-} from "./content";
+import { CARDS, INITIAL_SPECIES, definition, species, DAMAGE_LABELS } from "./content";
+import { BIOMES, bossEncounter, encounterSource, finalEncounter, location } from "./destinations";
 import type { Card, Command, CommandResult, GameEvent, GameState } from "./types";
 export function createGame(seed = 1): GameState {
   return freeze(
     {
-      version: 4,
+      version: 5,
       revision: 0,
       rng: seed >>> 0,
       phase: "draft",
@@ -33,6 +26,7 @@ export function createGame(seed = 1): GameState {
       team: [],
       cards: [],
       encounter: 0,
+      expedition: { biome: 0, step: 0, offers: [], chosen: null },
       battle: null,
     },
     true,
@@ -48,6 +42,25 @@ function shuffle<T>(state: GameState, cards: T[]): T[] {
     [cards[i], cards[j]] = [cards[j]!, cards[i]!];
   }
   return cards;
+}
+function offerDestinations(state: GameState) {
+  const route = state.expedition!;
+  const biome = BIOMES[route.biome]!;
+  const places =
+    route.step === 3
+      ? [biome.boss]
+      : shuffle(
+          state,
+          biome.locations.filter((id) => id !== route.chosen),
+        ).slice(0, 3);
+  route.offers = places.map((id) => ({
+    location: id,
+    pack: Math.floor(random(state) * location(id)!.packs.length),
+  }));
+  route.chosen = null;
+}
+function damageType(state: GameState, id: string) {
+  return encounterSource(state).enemies[Number(id.slice(6))]!.damageType;
 }
 function living(state: GameState) {
   return state.team.filter((c) => c.health > 0);
@@ -86,7 +99,7 @@ function intents(state: GameState) {
   }
 }
 export function beginBattle(state: GameState) {
-  const encounter = ENCOUNTERS[state.encounter]!;
+  const encounter = encounterSource(state);
   const all = [...state.team, ...state.reserves];
   state.team = state.lineup.map((kind) => all.find((c) => c.species === kind)!);
   state.reserves = all.filter((c) => !state.lineup.includes(c.species));
@@ -136,9 +149,9 @@ function finishBattle(state: GameState, defeated: boolean) {
   for (const keyword of KEYWORDS)
     state.keywordXP[keyword] = Math.min(1_000_000, (state.keywordXP[keyword] ?? 0) + (xp[keyword] ?? 0));
   state.battleXP = {};
-  const currency = defeated ? 0 : state.encounter === 2 ? 40 : 20;
+  const currency = defeated ? 0 : bossEncounter(state) ? 40 : 20;
   state.currency = Math.min(1_000_000, state.currency + currency);
-  const outcome = defeated ? "defeat" : state.encounter === 2 ? "victory" : "next";
+  const outcome = defeated ? "defeat" : finalEncounter(state) ? "victory" : "next";
   if (outcome === "victory") {
     state.wins++;
     if (!state.unlocked.includes("moonhart")) state.unlocked.push("moonhart");
@@ -158,7 +171,7 @@ function finishBattle(state: GameState, defeated: boolean) {
       defeated || outcome === "victory"
         ? []
         : [...new Set(state.battle!.enemies.map((e) => e.species))].filter(
-            (kind) => !state.roster.includes(kind),
+            (kind) => state.unlocked.includes(kind) && !state.roster.includes(kind),
           ),
     relics: relics.length === 3 ? relics : [],
   };
@@ -196,6 +209,13 @@ function afterRewards(state: GameState) {
     return;
   }
   state.encounter++;
+  if (state.expedition) {
+    if (state.expedition.step === 3) {
+      state.expedition.biome++;
+      state.expedition.step = 0;
+    } else state.expedition.step++;
+    offerDestinations(state);
+  }
   state.phase = "teamSelection";
   state.battle = null;
   state.reward = null;
@@ -242,8 +262,8 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
     target.health = Math.max(0, target.health - amount);
     events.push({
       kind: "damage",
-      text: `${enemy.name} hits ${species(target.species).name} for ${amount} ${DAMAGE_LABELS[enemyDamageType(draft.encounter, enemy.id)]} damage${blocked ? ` (${blocked} blocked)` : ""}.`,
-      damageType: enemyDamageType(draft.encounter, enemy.id),
+      text: `${enemy.name} hits ${species(target.species).name} for ${amount} ${DAMAGE_LABELS[damageType(draft, enemy.id)]} damage${blocked ? ` (${blocked} blocked)` : ""}.`,
+      damageType: damageType(draft, enemy.id),
       actorId: enemy.id,
       targetId: target.id,
       amount,
@@ -325,8 +345,12 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
   }
   if (command.type === "newRun" && !["draft", "victory", "defeat"].includes(state.phase))
     return reject(state, "End the current expedition first.");
-  if (command.type === "beginBattle" && state.phase !== "teamSelection")
-    return reject(state, "Choose a team before battle.");
+  if (
+    command.type === "beginBattle" &&
+    (state.phase !== "teamSelection" ||
+      (state.expedition && !state.expedition.offers.some((offer) => offer.location === command.destination)))
+  )
+    return reject(state, "Choose an offered destination before battle.");
   if (
     command.type === "swap" &&
     (!["battle", "teamSelection"].includes(state.phase) ||
@@ -405,8 +429,10 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
         draft.roster = [...draft.selected];
         draft.lineup = [...draft.selected];
         draft.phase = "teamSelection";
+        if (draft.expedition) offerDestinations(draft);
         break;
       case "beginBattle":
+        if (draft.expedition) draft.expedition.chosen = command.destination!;
         beginBattle(draft);
         events.push({ kind: "turn", text: "Your expedition begins." });
         break;

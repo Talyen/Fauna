@@ -1,7 +1,8 @@
 import { freeze } from "immer";
 import { z } from "zod";
 import { createGame, dispatch } from "./engine";
-import { CARDS, ENCOUNTERS, INITIAL_SPECIES, SPECIES, species } from "./content";
+import { CARDS, INITIAL_SPECIES, SPECIES, species } from "./content";
+import { BIOMES, location, encounterSource, finalEncounter } from "./destinations";
 import { KEYWORDS, RELICS, TALENTS, talentPoints } from "./progression";
 import type { GameState } from "./types";
 const natural = z.number().int().min(0).max(1_000_000);
@@ -74,11 +75,27 @@ const shape = oldShape.extend({
     .nullable(),
 });
 const creatureShape = oldShape.shape.team.element;
-const currentShape = shape.extend({
+const v4Shape = shape.extend({
   version: z.literal(4),
   roster: z.array(speciesId).max(5),
   reserves: z.array(creatureShape).max(2),
   lineup: z.array(speciesId).max(3),
+});
+const currentShape = v4Shape.extend({
+  version: z.literal(5),
+  encounter: z.number().int().min(0).max(7),
+  expedition: z
+    .object({
+      biome: z
+        .number()
+        .int()
+        .min(0)
+        .max(BIOMES.length - 1),
+      step: z.number().int().min(0).max(3),
+      offers: z.array(z.object({ location: id, pack: z.number().int().min(0).max(10) })).max(3),
+      chosen: id.nullable(),
+    })
+    .nullable(),
 });
 const unique = (values: unknown[]) => new Set(values).size === values.length;
 export function decodeSave(raw: string): GameState {
@@ -159,10 +176,39 @@ export function decodeSave(raw: string): GameState {
         })),
     };
   }
+  if (input && typeof input === "object" && "version" in input && input.version === 4) {
+    const old = v4Shape.parse(input);
+    input = {
+      ...old,
+      version: 5,
+      expedition: old.phase === "draft" ? { biome: 0, step: 0, offers: [], chosen: null } : null,
+    };
+  }
   const s = currentShape.parse(input);
   const invalid = (condition: boolean) => {
     if (condition) throw new Error("Save contains inconsistent game data.");
   };
+  if (s.expedition) {
+    const route = s.expedition,
+      biome = BIOMES[route.biome]!;
+    invalid(s.encounter !== route.biome * 4 + route.step);
+    const places: readonly string[] = route.step === 3 ? [biome.boss] : biome.locations;
+    invalid(
+      !unique(route.offers.map((offer) => offer.location)) ||
+        route.offers.some(
+          (offer) => !places.includes(offer.location) || !location(offer.location)?.packs[offer.pack],
+        ),
+    );
+    if (s.phase === "draft") invalid(route.offers.length !== 0 || route.chosen !== null || s.encounter !== 0);
+    else {
+      invalid(route.offers.length !== (route.step === 3 ? 1 : 3));
+      invalid(
+        s.phase === "teamSelection" || (s.phase === "defeat" && !s.battle)
+          ? route.chosen !== null
+          : !route.offers.some((offer) => offer.location === route.chosen),
+      );
+    }
+  } else invalid(s.encounter > 2);
   invalid(
     !unique(s.unlocked) ||
       !unique(s.selected) ||
@@ -235,11 +281,11 @@ export function decodeSave(raw: string): GameState {
     invalid(
       !unique(s.reward.recruits) ||
         !unique(s.reward.relics) ||
-        s.reward.recruits.some((kind) => !ENCOUNTERS[s.encounter]!.enemies.some((e) => e.species === kind)),
+        s.reward.recruits.some((kind) => !encounterSource(s).enemies.some((e) => e.species === kind)),
     );
     invalid(
-      (s.reward.outcome === "next" && s.encounter === 2) ||
-        (s.reward.outcome === "victory" && s.encounter !== 2),
+      (s.reward.outcome === "next" && finalEncounter(s)) ||
+        (s.reward.outcome === "victory" && !finalEncounter(s)),
     );
     if (s.phase === "recruit") invalid(s.reward.recruits.length === 0 || s.reward.outcome === "defeat");
     if (s.phase === "relic")
@@ -253,7 +299,7 @@ export function decodeSave(raw: string): GameState {
   }
   if (s.battle) {
     const b = s.battle,
-      source = ENCOUNTERS[s.encounter]!;
+      source = encounterSource(s);
     invalid(b.enemies.length !== source.enemies.length || !unique(b.enemies.map((e) => e.id)));
     b.enemies.forEach((enemy, index) => {
       const original = source.enemies[index];
@@ -283,7 +329,7 @@ export function decodeSave(raw: string): GameState {
   }
   invalid(
     s.phase === "victory" &&
-      (s.encounter !== 2 || s.wins === 0 || !s.battle || s.battle.enemies.some((e) => e.health > 0)),
+      (!finalEncounter(s) || s.wins === 0 || !s.battle || s.battle.enemies.some((e) => e.health > 0)),
   );
   const state = freeze(s, true) as GameState;
   return legacy && state.phase === "battle" && state.battle!.mana === 0

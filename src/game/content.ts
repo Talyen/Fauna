@@ -153,6 +153,7 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
       return `Give every living ally ${value} block this turn.`;
   }
 }
+/** Stable legacy route; new expeditions use the saved offers in destinations.ts. */
 export const ENCOUNTERS = [
   {
     name: "The overgrown trail",
@@ -182,10 +183,3 @@ export const ENCOUNTERS = [
     ],
   },
 ] as const;
-
-export function enemyDamageType(encounter: number, id: string): DamageType {
-  const index = Number(id.slice(6));
-  const entry = ENCOUNTERS[encounter]?.enemies[index];
-  if (!entry || id !== `enemy-${index}`) throw new Error("Unknown enemy identity.");
-  return entry.damageType;
-}

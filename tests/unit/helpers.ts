@@ -32,11 +32,17 @@ export function teamRun(seed: number, kinds: SpeciesId[]) {
       })),
     );
     d.phase = "teamSelection";
+    d.expedition = null;
   });
   return accept(s, { type: "beginBattle" });
 }
 export function accept(s: GameState, c: Command) {
-  const result = dispatch(s, c);
+  const result = dispatch(
+    s,
+    c.type === "beginBattle" && s.expedition && !c.destination
+      ? { ...c, destination: s.expedition.offers[0]?.location }
+      : c,
+  );
   if (!result.accepted) throw new Error(result.reason);
   return result.state;
 }
@@ -56,7 +62,8 @@ export function winBattle(s = run()) {
   return accept(s, { type: "play", cardId: card, targetId: "enemy-0" });
 }
 export function policy(s: GameState): Command {
-  if (s.phase === "teamSelection") return { type: "beginBattle" };
+  if (s.phase === "teamSelection")
+    return { type: "beginBattle", destination: s.expedition?.offers[0]?.location };
   if (s.phase === "reward") return { type: "continueReward" };
   if (s.phase === "recruit") return { type: "skipRecruit" };
   if (s.phase === "relic") return { type: "chooseRelic", relic: s.reward!.relics[0]! };

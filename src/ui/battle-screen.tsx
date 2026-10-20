@@ -17,7 +17,8 @@ import { returnFocus } from "./focus";
 import { TargetPreview } from "./target-preview";
 import { CombatFeedback, type Burst } from "./combat-feedback";
 import { ManaCrystals } from "./mana-crystals";
-export type Inspection = { card: Card } | { species: GameState["selected"][number]; enemyId?: string };
+export type Inspection =
+  { card: Card } | { species: GameState["selected"][number]; enemyId?: string } | { destination: string };
 export type Controls = MutableRefObject<((action: InputAction) => boolean) | null>;
 function FanSlot({ index, count, children }: { index: number; count: number; children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);

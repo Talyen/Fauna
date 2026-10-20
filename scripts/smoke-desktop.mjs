@@ -28,6 +28,7 @@ try {
     .locator(".deck-grid img")
     .evaluateAll((images) => Promise.all(images.map((image) => image.decode())));
   await window.getByRole("button", { name: "Close deck", exact: true }).click();
+  await window.locator("[data-destination]").first().click();
   await window.getByRole("button", { name: "Begin battle" }).click();
   await window.getByRole("main", { name: "Battlefield" }).waitFor();
   await window.locator('.app[data-save-status="saved"]').waitFor();
@@ -39,7 +40,7 @@ try {
   await window.getByRole("button", { name: "Next action", exact: true }).click();
   await window.getByRole("button", { name: "Back", exact: true }).click();
   await window.getByRole("button", { name: "Close inspection", exact: true }).click();
-  // Exercise free swaps through the actual renderer and version-four desktop storage.
+  // Exercise free swaps through the actual renderer and version-five desktop storage.
   await window.evaluate(async () => {
     const state = JSON.parse((await window.faunaDesktop.readCandidates())[0].data);
     if (state.team.length !== 1 || state.cards.length !== 3)
@@ -80,7 +81,7 @@ try {
     JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
   );
   if (
-    swapped.version !== 4 ||
+    swapped.version !== 5 ||
     swapped.team[0].species !== "silkmoth" ||
     swapped.battle.mana !== 3 ||
     swapped.lineup[0] !== "mossback"
@@ -111,7 +112,7 @@ try {
     JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
   );
   await attack.click();
-  await window.getByRole("button", { name: "Target Bramble Imp", exact: true }).click();
+  await window.getByRole("button", { name: `Target ${before.battle.enemies[0].name}`, exact: true }).click();
   // Close immediately while hit feedback is still animating; the handshake must flush the accepted command.
   await app.close();
   app = undefined;

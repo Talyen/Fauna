@@ -2,6 +2,7 @@ import { test, expect, type Page, type Locator } from "@playwright/test";
 import { produce } from "immer";
 import { createGame } from "../../src/game/engine";
 import { definition, species } from "../../src/game/content";
+import { location } from "../../src/game/destinations";
 import { RELICS } from "../../src/game/progression";
 import type { GameState } from "../../src/game/types";
 import { accept, policy, winBattle, run } from "../unit/helpers";
@@ -31,9 +32,13 @@ async function resume(page: Page) {
 async function step(page: Page, activate: (el: Locator) => Promise<void> = (el) => el.click()) {
   const s = await state(page),
     c = policy(s);
-  if (c.type === "beginBattle")
+  if (c.type === "beginBattle") {
+    if (c.destination)
+      await activate(
+        page.getByRole("button", { name: `Inspect ${location(c.destination)!.name}`, exact: true }),
+      );
     await activate(page.getByRole("button", { name: "Begin battle", exact: true }));
-  else if (c.type === "continueReward")
+  } else if (c.type === "continueReward")
     await activate(page.getByRole("button", { name: "Continue", exact: true }));
   else if (c.type === "skipRecruit") await activate(page.getByRole("button", { name: "Skip", exact: true }));
   else if (c.type === "chooseRelic")
@@ -96,6 +101,57 @@ async function fits(page: Page) {
   ).toEqual({ width: true, height: true });
 }
 
+for (const width of [1280, 1920])
+  for (const enlarged of [false, true])
+    test(`destination inspection preserves choices and focus at ${width}, enlarged ${enlarged}`, async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
+      await page.emulateMedia({ reducedMotion: "reduce" });
+      const game = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
+      await seed(page, game);
+      await resume(page);
+      if (enlarged) {
+        await page.getByRole("button", { name: "Open menu", exact: true }).click();
+        await page.getByRole("button", { name: "Settings", exact: true }).click();
+        await page.getByRole("radio", { name: "150%", exact: true }).click();
+        await page.keyboard.press("Escape");
+        await page.keyboard.press("Escape");
+      }
+      const offers = page.locator("[data-destination]");
+      await expect(offers).toHaveCount(3);
+      await expect(page.locator(".destination-option").getByText("Combat", { exact: true })).toHaveCount(3);
+      await offers
+        .locator("img")
+        .evaluateAll((images) => Promise.all(images.map((image) => (image as HTMLImageElement).decode())));
+      await fits(page);
+      await page.screenshot({ path: `reports/destinations/choices-${width}-${enlarged}.png` });
+      const opener = offers.first();
+      await opener.focus();
+      await page.keyboard.press("i");
+      const dialog = page.getByRole("dialog");
+      const enemy = dialog.locator(".destination-enemies .creature-card").first();
+      await enemy.click();
+      await dialog.locator(".inspection-thumbnails .action-card").first().click();
+      await page.keyboard.press("Escape");
+      await expect(dialog.locator(".inspection-thumbnails .action-card").first()).toBeFocused();
+      await page.keyboard.press("Escape");
+      await expect(enemy).toBeFocused();
+      await expect(page.getByRole("dialog")).toHaveCount(1);
+      await fits(page);
+      await page.screenshot({ path: `reports/destinations/pack-${width}-${enlarged}.png` });
+      await page.keyboard.press("Escape");
+      await expect(opener).toBeFocused();
+      expect(await state(page)).toEqual(game);
+      await page.reload();
+      await resume(page);
+      expect(await state(page)).toEqual(game);
+      await offers.first().click();
+      await page.getByRole("button", { name: "Begin battle", exact: true }).click();
+      expect((await state(page)).expedition!.chosen).toBe(game.expedition!.offers[0]!.location);
+      await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
+    });
+
 test("main menu, draft and pre-battle deck lead into the first battle", async ({ page }) => {
   await seed(page);
   await expect(page.getByRole("button", { name: "New expedition", exact: true })).toBeFocused();
@@ -105,16 +161,19 @@ test("main menu, draft and pre-battle deck lead into the first battle", async ({
   await page.getByRole("button", { name: "Choose Mossback", exact: true }).click();
   await page.getByRole("button", { name: "Begin expedition" }).click();
   expect((await state(page)).phase).toBe("teamSelection");
-  await page.getByRole("button", { name: "Inspect Bramble Imp", exact: true }).focus();
+  const destination = page.locator("[data-destination]").first();
+  await destination.focus();
   await page.keyboard.press("i");
-  await expect(page.getByRole("dialog").getByText("Bramble Imp", { exact: true })).toBeVisible();
+  await expect(page.getByRole("dialog").locator(".destination-enemies .creature-card")).toHaveCount(2);
   await page.keyboard.press("Escape");
+  await expect(destination).toBeFocused();
   await page.getByRole("button", { name: "Deck", exact: true }).click();
   await expect(page.getByRole("dialog").locator(".action-card")).toHaveCount(3);
   await page.getByRole("dialog").locator(".action-card").first().click({ button: "right" });
   await expect(page.getByRole("dialog").last().locator(".card-details")).toBeVisible();
   await page.keyboard.press("Escape");
   await page.keyboard.press("Escape");
+  await destination.click();
   await page.getByRole("button", { name: "Begin battle" }).click();
   await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
 });
@@ -175,6 +234,7 @@ for (const width of [1280, 1920])
 
 for (const input of ["mouse", "keyboard", "controller"] as const)
   test(`one starter grows a lineup through a full expedition with ${input}`, async ({ page }) => {
+    test.setTimeout(120_000);
     const press = input === "controller" ? await gamepad(page) : null;
     await seed(page);
     const activate = async (el: Locator) => {
@@ -200,8 +260,8 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
           page.getByRole("button", { name: `Recruit ${species(s.reward!.recruits[0]!).name}`, exact: true }),
         );
         const recruited = await state(page);
-        expect(recruited.lineup).toEqual(recruited.roster);
-        expect(recruited.reserves).toHaveLength(0);
+        expect(recruited.lineup).toEqual(recruited.roster.slice(0, 3));
+        expect(recruited.reserves).toHaveLength(Math.max(0, recruited.roster.length - 3));
       } else await step(page, activate);
     }
     await expect(page.getByRole("heading", { name: "Victory", exact: true })).toBeVisible();

@@ -5,7 +5,7 @@ import { Button } from "../components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../components/ui/tooltip";
 import { ActionCard, CreatureCard } from "./cards";
 import { ArtCard } from "./art-card";
-import { ENCOUNTERS, SPECIES, species, type SpeciesId } from "../game/content";
+import { SPECIES, species, type SpeciesId } from "../game/content";
 import {
   KEYWORDS,
   RELICS,
@@ -20,12 +20,49 @@ import {
 import type { Command, GameState } from "../game/types";
 import type { Inspection } from "./battle-screen";
 import { Progress } from "./progress";
+import { BIOMES, encounterSource, location } from "../game/destinations";
 type Props = { game: GameState; send: (command: Command) => boolean; inspect: (item: Inspection) => void };
 export function TeamSelection({ game, send, inspect, deck }: Props & { deck: () => void }) {
+  if (game.expedition) {
+    const route = game.expedition;
+    return (
+      <main className="destinations-screen">
+        <header className="destination-heading">
+          <h1>{BIOMES[route.biome]!.name}</h1>
+          <p>{route.step === 3 ? "Boss" : `Encounter ${route.step + 1} of 3`}</p>
+        </header>
+        <section className="destination-grid" data-nav-row aria-label="Destinations">
+          {route.offers.map((offer) => (
+            <div className="destination-option" key={offer.location}>
+              <ArtCard
+                aspect="creature"
+                artwork={`./art/locations/${offer.location}.svg`}
+                data-destination={offer.location}
+                aria-label={`Inspect ${location(offer.location)!.name}`}
+                onClick={() => inspect({ destination: offer.location })}
+                onContextMenu={(event) => {
+                  event.preventDefault();
+                  event.currentTarget.focus();
+                  inspect({ destination: offer.location });
+                }}
+              />
+              <h2>{location(offer.location)!.name}</h2>
+              <p>{route.step === 3 ? "Boss" : "Combat"}</p>
+            </div>
+          ))}
+        </section>
+        <footer className="destination-footer">
+          <Button variant="outline" onClick={deck}>
+            Deck
+          </Button>
+        </footer>
+      </main>
+    );
+  }
   return (
     <main className="team-selection">
       <section className="selection-row" data-nav-row aria-label="Enemy lineup">
-        {ENCOUNTERS[game.encounter]!.enemies.map((enemy, index) => (
+        {encounterSource(game).enemies.map((enemy, index) => (
           <CreatureCard
             key={index}
             kind={enemy.species}

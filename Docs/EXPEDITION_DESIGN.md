@@ -6,7 +6,7 @@ These are the agreed directions from the design review. They supersede the proto
 
 - Begin with one chosen starter. An expedition roster grows to five distinct species: up to three deployed and two reserves. Duplicate species are excluded.
 - Starter selection uses a three-column artwork grid of unlocked species. Clicking opens inspection with a Choose action; choosing returns to the grid and marks the selected creature. Begin expedition is a separate action, available after choosing one starter. Inspecting or canceling never changes the choice. Choosing another replaces it.
-- The starter supplies the remembered starting lineup. Recruits fill its second and third slots before joining reserves. The encounter preview shows enemies, Deck, and Begin battle without requiring team selection.
+- The starter supplies the remembered starting lineup. Recruits fill its second and third slots before joining reserves. The destination screen offers location artwork; inspection reveals the exact enemy group and Begin battle. Deck remains available without requiring team selection.
 - Lineup is an optional menu dialog between battles, including ordinary reward screens. Changes save immediately. Combat swaps do not overwrite this starting lineup.
 - Only deployed living creatures act and provide passive traits. Enemy intents remain hidden.
 - During your turn, Swap opens a centered dialog with three deployed creatures and two smaller reserves. Reserves are hidden on the battlefield.
@@ -18,6 +18,16 @@ These are the agreed directions from the design review. They supersede the proto
 - Knocked-out card slots remain inert in saved battle zones and are skipped by ordinary draws. When the entire deployed row falls, the next hand reserves slots for incoming creatures so recovery does not require a free extra draw. These slots never render as playable cards for knocked-out owners.
 - Victory restores the full roster. The next battle deploys the saved starting lineup.
 - Recruitment at five requires choosing one creature to release, or skipping. Replacing a starting species updates its lineup entry.
+
+## Biomes and destinations
+
+- New expeditions travel through Fernwood, then Moonwater Marsh. Each biome has three ordinary encounters followed by its boss; only the final boss completes the expedition and unlocks Moonhart.
+- After each ordinary victory and its rewards, choose from three fresh locations in the current biome. The immediately visited location is excluded from the next offer. Boss steps offer one location. There is no branching map or Elite category.
+- Each location uses a 4:3 illustration with its name and **Combat** or **Boss** below the artwork. Keep Combat visible in preparation for future non-combat destinations; those destinations are not implemented yet. A quiet heading shows the biome and current encounter within it.
+- Opening a location is inspection, not commitment. Show its exact enemy group; inspect each creature's battle health and collectible kit in the same dialog. Back/Escape returns action → creature → location → destination screen. Begin battle commits the inspected location directly.
+- Seeded gameplay chooses location offers and packs once when entering the choice screen. Save those offers and the chosen location. Inspection, cancellation, menus, and reload never reroll enemies or consume randomness.
+- Location pools contain themed packs; identities are stable while inhabitants vary between runs. Initial enemy stats grow with chapter progress, with easier first encounters for a single starter. These values are playtest tuning, not final balance.
+- Existing active saves keep their original fixed three-battle expedition. New runs and unfinished old drafts use the biome flow.
 
 ## Keyword XP and talents
 
@@ -56,11 +66,11 @@ These are the agreed directions from the design review. They supersede the proto
 - Initial battle item rewards focus on run-wide relics: passive effects for the whole expedition.
 - When a battle awards a relic, offer a choice of three.
 - Choose one relic or skip the reward.
-- Starter tuning: Currency pays 20 per ordinary victory and 40 for the boss. Each ordinary victory offers three distinct unowned relics when three remain. Five starter relics are authored in `src/game/progression.ts`; their ownership lasts only for the expedition. Currency spending and material types remain undefined and are not implemented.
+- Starter tuning: Currency pays 20 per ordinary victory and 40 for each biome boss. Each ordinary victory offers three distinct unowned relics when three remain. Five starter relics are authored in `src/game/progression.ts`; their ownership lasts only for the expedition. Currency spending and material types remain undefined and are not implemented.
 
 ## Screen flow
 
-Ordinary victory → XP and materials/currency → recruitment → relic choice (if awarded) → next encounter preview → combat.
+Ordinary victory → XP and materials/currency → recruitment → relic choice (if awarded) → fresh destination choices → location inspection → combat.
 
 Final victory → XP and currency → expedition results. Recruitment and expedition-only relics are offered between battles.
 

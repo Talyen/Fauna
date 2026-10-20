@@ -13,7 +13,8 @@ describe("game commands", () => {
     s = accept(s, { type: "draft", species: "mossback" });
     s = accept(s, { type: "draft", species: "mossback" });
     expect(s.selected).toEqual(["mossback"]);
-    s = accept(accept(s, { type: "start" }), { type: "beginBattle" });
+    s = accept(s, { type: "start" });
+    s = accept(s, { type: "beginBattle", destination: s.expedition!.offers[0]!.location });
     expect(s.roster).toEqual(["mossback"]);
     expect(s.team).toHaveLength(1);
     expect(s.cards).toHaveLength(3);

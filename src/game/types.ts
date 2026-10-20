@@ -39,7 +39,7 @@ export interface BattleReward {
   outcome: "next" | "victory" | "defeat";
 }
 export interface GameState {
-  version: 4;
+  version: 5;
   revision: number;
   rng: number;
   phase: "draft" | "teamSelection" | "battle" | "reward" | "recruit" | "relic" | "victory" | "defeat";
@@ -52,6 +52,12 @@ export interface GameState {
   team: Creature[];
   cards: Card[];
   encounter: number;
+  expedition: {
+    biome: number;
+    step: number;
+    offers: { location: string; pack: number }[];
+    chosen: string | null;
+  } | null;
   battle: Battle | null;
   keywordXP: KeywordXP;
   battleXP: KeywordXP;
@@ -63,7 +69,7 @@ export interface GameState {
 export type Command =
   | { type: "draft"; species: SpeciesId }
   | { type: "start" }
-  | { type: "beginBattle" }
+  | { type: "beginBattle"; destination?: string }
   | { type: "setLineup"; activeId: string; reserve: SpeciesId }
   | { type: "swap"; activeId: string; reserve: SpeciesId }
   | { type: "play"; cardId: string; targetId?: string }
