@@ -11,9 +11,10 @@ Implemented direction from the design review.
 - Locked species show grayscale artwork, no unlock requirement, and no hover tooltip.
 - Clicking an unlocked species opens the centered inspection dialog for its passive and action cards.
 - Collection lists unlocked species first, followed by locked species.
+- Lineup is an optional centered dialog available from the menu between battles, including ordinary reward screens. It edits the saved starting three; combat swaps leave that preference unchanged. There is no mandatory team-selection destination.
 - Settings and Glossary open as centered dialogs; closing them returns to the menu.
 
-Collection uses a responsive artwork grid. Locked species are noninteractive. Menu order is Continue/New expedition, Talents, Collection, Glossary, Settings, then End run when applicable. Pause also offers Main menu; desktop adds Save & quit.
+Collection uses a responsive artwork grid. Locked species are noninteractive. Menu order is Continue/New expedition, optional Lineup between battles, Talents, Collection, Glossary, Settings, then End run when applicable. Pause also offers Main menu; desktop adds Save & quit.
 
 See [UI rules](UI.md) and [expedition design](EXPEDITION_DESIGN.md) for shared interaction and progression decisions.
 

@@ -4,16 +4,19 @@ These are the agreed directions from the design review. They supersede the proto
 
 ## Roster and battles
 
-- An expedition roster holds six distinct species: three active and three reserves. Duplicate species are excluded.
-- Only the active three contribute their action cards to the shared deck.
-- Benching a creature removes its cards from the active deck.
-- Team selection is the first step of beginning each battle. It is a separate destination/phase, not a post-battle reward step.
-- Reveal the enemy lineup before team selection. Enemy intents remain hidden.
-- Choose the active three, then begin combat. Team swaps happen outside combat.
-- Pre-battle selection shows separate active and reserve rows beneath the enemies. Select either creature first, then a creature in the other roster row to swap them.
-- Reserve cards are smaller than enemy and active cards, emphasizing the active team while preserving artwork ratios.
-- A Deck button opens an inspection dialog for the active team's nine action cards.
-- Remember the previous active three when entering the next battle's team selection.
+- An expedition roster holds five distinct species: three deployed and two reserves. Duplicate species are excluded.
+- The initial draft supplies the remembered starting lineup. The encounter preview shows enemies, Deck, and Begin battle without requiring team selection.
+- Lineup is an optional menu dialog between battles, including ordinary reward screens. Changes save immediately. Combat swaps do not overwrite this starting lineup.
+- Only deployed living creatures act and provide passive traits. Enemy intents remain hidden.
+- During your turn, Swap opens a centered dialog with three deployed creatures and two smaller reserves. Reserves are hidden on the battlefield.
+- Select either creature first, then one from the opposite group to commit immediately. Swaps are free and unlimited; no Mana, draw, shuffle, turn advancement, or confirmation.
+- A swap replaces the outgoing owner's three cards in their existing hand, draw, and discard positions. Spent cards stay spent. Legacy upgrades do not transfer to incoming creatures.
+- Creature identity, health, Block, and first-attack state stay with the creature. Normal turn expiration applies in reserve; swapping never heals, cleanses, or repeats opening bonuses.
+- Living reserves can replace knocked-out deployed creatures. Fallen creatures remain unavailable for the battle.
+- If the deployed row falls, remaining enemy attacks stop and the next player turn begins with restored Mana. Healthy reserves can still enter through Swap. Defeat requires the whole roster to fall.
+- Knocked-out card slots remain inert in saved battle zones and are skipped by ordinary draws. When the entire deployed row falls, the next hand reserves slots for incoming creatures so recovery does not require a free extra draw. These slots never render as playable cards for knocked-out owners.
+- Victory restores the full roster. The next battle deploys the saved starting lineup.
+- Recruitment at five requires choosing one creature to release, or skipping. Replacing a starting species updates its lineup entry.
 
 ## Keyword XP and talents
 
@@ -56,7 +59,7 @@ These are the agreed directions from the design review. They supersede the proto
 
 ## Screen flow
 
-Ordinary victory → XP and materials/currency → recruitment → relic choice (if awarded) → next battle's team selection → combat.
+Ordinary victory → XP and materials/currency → recruitment → relic choice (if awarded) → next encounter preview → combat.
 
 Final victory → XP and currency → expedition results. Recruitment and expedition-only relics are offered between battles.
 
@@ -64,7 +67,7 @@ Final victory → XP and currency → expedition results. Recruitment and expedi
 - Recruitment and relic choice each have their own screen; relic choice appears only when a relic is awarded.
 - Relic effects remain in hover/focus tooltips.
 - Keep keyword XP progress numbers visible beneath the bars on the XP reward screen.
-- Team selection belongs to the next battle, separate from the reward screens.
+- Optional Lineup management is available through the menu between battles and is never a reward step.
 - Gameplay now uses the reviewed minimal layouts for the separate reward screens, smaller reserves, and full-screen talent/collection pages.
 
 See [UI design system](UI.md) for the approved battlefield composition and interaction rules.

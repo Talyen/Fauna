@@ -89,7 +89,7 @@ describe("game commands", () => {
     expect(damage.map((e) => e.damageType)).toEqual(["nature", "nature", "fire", "nature"]);
     expect(r.state.team[0]!.health).toBe(22);
   });
-  it("removes knocked-out creature cards from every zone and never draws them again", () => {
+  it("keeps knockout slots inert and never draws them while living creatures remain", () => {
     let s = run();
     s = produce(s, (d) => {
       d.team[0]!.health = 1;
@@ -100,7 +100,8 @@ describe("game commands", () => {
     for (let i = 0; i < 2; i++) {
       const b = s.battle!;
       const removed = s.cards.filter((c) => c.ownerId === "ally-0").map((c) => c.id);
-      expect([...b.hand, ...b.draw, ...b.discard].some((id) => removed.includes(id))).toBe(false);
+      expect(b.hand.some((id) => removed.includes(id))).toBe(false);
+      expect(decodeSave(encodeSave(s))).toEqual(s);
       s = accept(s, { type: "endTurn" });
     }
   });

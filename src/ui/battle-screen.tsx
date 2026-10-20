@@ -48,6 +48,7 @@ export function BattleScreen({
   navigateFocus,
   onDenied,
   actions,
+  clearSelection = false,
 }: {
   game: GameState;
   send: (command: Command) => boolean;
@@ -58,13 +59,20 @@ export function BattleScreen({
   navigateFocus: boolean;
   onDenied: (element: HTMLElement) => void;
   actions?: ReactNode;
+  clearSelection?: boolean;
 }) {
   const [selected, setSelected] = useState<string | null>(null);
+  useEffect(() => {
+    if (clearSelection) setSelected(null);
+  }, [clearSelection]);
   const [remembered, setRemembered] = useState<{ enemy?: string; ally?: string }>({});
   const board = useRef<HTMLElement>(null);
   const [line, setLine] = useState("");
   const focusAfterCommand = useRef<number | null>(null);
   const battle = game.battle!;
+  const visibleHand = battle.hand.filter((id) =>
+    game.team.some((c) => c.health > 0 && c.id === game.cards.find((card) => card.id === id)?.ownerId),
+  );
   const card = game.cards.find((c) => c.id === selected),
     def = card ? definition(card.definitionId) : null;
   const enemyTarget = def?.effect === "attack" || def?.effect === "mark",
@@ -82,7 +90,7 @@ export function BattleScreen({
   const play = (command: Command) => {
     if (!send(command)) return;
     setSelected(null);
-    focusAfterCommand.current = navigateFocus ? Math.max(0, battle.hand.indexOf(selected ?? "")) : null;
+    focusAfterCommand.current = navigateFocus ? Math.max(0, visibleHand.indexOf(selected ?? "")) : null;
   };
   useLayoutEffect(() => {
     if (focusAfterCommand.current !== null && !selected) {
@@ -261,11 +269,11 @@ export function BattleScreen({
           </Button>
         </div>
         <div className="hand">
-          {battle.hand.map((id, index) => {
+          {visibleHand.map((id, index, hand) => {
             const card = game.cards.find((c) => c.id === id)!,
               owner = game.team.find((c) => c.id === card.ownerId)!;
             return (
-              <FanSlot key={id} index={index} count={battle.hand.length}>
+              <FanSlot key={id} index={index} count={hand.length}>
                 <ActionCard
                   card={card}
                   actor={owner}

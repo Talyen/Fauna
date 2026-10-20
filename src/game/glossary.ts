@@ -55,7 +55,7 @@ export const GLOSSARY = [
   {
     term: "Knockout",
     definition:
-      "At zero health a creature cannot act or be healed during that battle. Its cards leave circulation. Losing all three teammates ends the expedition.",
+      "At zero health a creature cannot act or be healed during that battle. Its cards cannot be played or normally drawn. A living reserve can replace it. Losing every creature in the roster ends the expedition.",
   },
   {
     term: "Keyword XP",
@@ -70,7 +70,12 @@ export const GLOSSARY = [
   {
     term: "Reserves",
     definition:
-      "Recruit up to six distinct species during an expedition. Choose three active creatures before each battle. Only the active three contribute cards. Select creatures across the active and reserve rows to swap them.",
+      "Recruit up to five distinct species: three deployed and two reserves. Only deployed, living creatures provide passives. Swap freely during your turn through Swap; choose one deployed creature and one living reserve in either order. Their cards replace one another in their existing hand, draw, and discard positions. Health and effects persist, and swapping grants no extra draws or opening bonuses.",
+  },
+  {
+    term: "Starting lineup",
+    definition:
+      "Your original draft supplies the starting three. Edit Lineup from the menu between battles if desired. Combat swaps do not change this saved lineup. New recruits join reserves; Begin battle deploys your saved three without asking you to choose again.",
   },
   {
     term: "Relics",

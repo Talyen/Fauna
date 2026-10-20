@@ -31,6 +31,40 @@ try {
   await window.getByRole("button", { name: "Begin battle" }).click();
   await window.getByRole("main", { name: "Battlefield" }).waitFor();
   await window.locator('.app[data-save-status="saved"]').waitFor();
+  // Exercise free swaps through the actual renderer and version-four desktop storage.
+  await window.evaluate(async () => {
+    const state = JSON.parse((await window.faunaDesktop.readCandidates())[0].data);
+    state.roster.push("silkmoth", "briartooth");
+    state.reserves = ["silkmoth", "briartooth"].map((kind) => ({
+      id: `recruit-${kind}`,
+      species: kind,
+      health: 20,
+      block: 0,
+      attacked: false,
+    }));
+    await window.faunaDesktop.writeSave(JSON.stringify(state));
+  });
+  await window.reload();
+  await window.getByRole("button", { name: "Continue", exact: true }).click();
+  await window.getByRole("button", { name: "Swap", exact: true }).click();
+  await window.getByRole("button", { name: "Silkmoth, reserve", exact: true }).click();
+  await window.getByRole("button", { name: "Mossback, deployed", exact: true }).click();
+  await window.locator('.app[data-save-status="saved"]').waitFor();
+  const swapped = await window.evaluate(async () =>
+    JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
+  );
+  if (
+    swapped.version !== 4 ||
+    swapped.team[0].species !== "silkmoth" ||
+    swapped.battle.mana !== 3 ||
+    swapped.lineup[0] !== "mossback"
+  )
+    throw new Error("Desktop combat swap or lineup persistence failed.");
+  // Swap back so the existing automatic-turn smoke keeps its original combat fixture.
+  await window.getByRole("button", { name: "Swap", exact: true }).click();
+  await window.getByRole("button", { name: "Silkmoth, deployed", exact: true }).click();
+  await window.getByRole("button", { name: "Mossback, reserve", exact: true }).click();
+  await window.locator('.app[data-save-status="saved"]').waitFor();
   let attack = window.locator('.hand .action-card[data-effect="attack"]').first();
   if (!(await attack.count())) {
     await window.getByRole("button", { name: "End turn" }).click();
@@ -98,7 +132,9 @@ try {
   });
   if (audioState !== "running") throw new Error(`Controller-only desktop audio is blocked: ${audioState}`);
   success = true;
-  console.log("Desktop startup, draft, last-mana automatic turn quit/resume, and renderer isolation passed.");
+  console.log(
+    "Desktop startup, draft, free swaps, lineup persistence, last-mana automatic turn quit/resume, and renderer isolation passed.",
+  );
 } finally {
   if (app && !success) app.process().kill("SIGKILL");
   else await app?.close();

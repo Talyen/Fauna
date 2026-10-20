@@ -73,6 +73,13 @@ const shape = oldShape.extend({
     })
     .nullable(),
 });
+const creatureShape = oldShape.shape.team.element;
+const currentShape = shape.extend({
+  version: z.literal(4),
+  roster: z.array(speciesId).max(5),
+  reserves: z.array(creatureShape).max(2),
+  lineup: z.array(speciesId).max(3),
+});
 const unique = (values: unknown[]) => new Set(values).size === values.length;
 export function decodeSave(raw: string): GameState {
   if (raw.length > 100_000) throw new Error("Save exceeds the supported size.");
@@ -121,7 +128,38 @@ export function decodeSave(raw: string): GameState {
           : null,
     };
   }
-  const s = shape.parse(input);
+  if (input && typeof input === "object" && "version" in input && input.version === 3) {
+    const old = shape.parse(input);
+    if (!unique(old.roster) || old.team.some((c) => !old.roster.includes(c.species)))
+      throw new Error("Legacy save contains an inconsistent roster.");
+    const roster = [
+      ...old.team.map((c) => c.species),
+      ...old.roster.filter((kind) => !old.team.some((c) => c.species === kind)),
+    ].slice(0, 5);
+    const zones = old.battle ? [...old.battle.hand, ...old.battle.draw, ...old.battle.discard] : [];
+    if (old.battle)
+      old.battle.discard.push(
+        ...old.cards
+          .filter((c) => !zones.includes(c.id) && old.team.some((t) => t.id === c.ownerId && t.health === 0))
+          .map((c) => c.id),
+      );
+    input = {
+      ...old,
+      version: 4,
+      roster,
+      lineup: old.team.map((c) => c.species),
+      reserves: roster
+        .filter((kind) => !old.team.some((c) => c.species === kind))
+        .map((kind) => ({
+          id: `recruit-${kind}`,
+          species: kind,
+          health: old.reward?.outcome === "defeat" ? 0 : species(kind).health,
+          block: 0,
+          attacked: false,
+        })),
+    };
+  }
+  const s = currentShape.parse(input);
   const invalid = (condition: boolean) => {
     if (condition) throw new Error("Save contains inconsistent game data.");
   };
@@ -135,22 +173,22 @@ export function decodeSave(raw: string): GameState {
       s.wins > 0 !== s.unlocked.includes("moonhart"),
   );
   invalid(
-    !unique(s.team.map((c) => c.id)) ||
-      !unique(s.team.map((c) => c.species)) ||
+    !unique([...s.team, ...s.reserves].map((c) => c.id)) ||
+      !unique([...s.team, ...s.reserves].map((c) => c.species)) ||
+      !unique(s.lineup) ||
+      s.lineup.some((kind) => !s.roster.includes(kind)) ||
       !unique(s.cards.map((c) => c.id)) ||
       !unique(s.talents) ||
       !unique(s.relics),
   );
   invalid(
-    s.team.some(
-      (c, index) =>
-        c.id !== `ally-${index}` || !s.roster.includes(c.species) || c.health > species(c.species).health,
-    ),
+    [...s.team, ...s.reserves].some(
+      (c) => !s.roster.includes(c.species) || c.health > species(c.species).health,
+    ) || s.roster.length !== s.team.length + s.reserves.length,
   );
   invalid(
     s.cards.some(
       (c) =>
-        c.id !== `${c.ownerId}:${c.definitionId}` ||
         !s.team.some(
           (t) => t.id === c.ownerId && CARDS.some((d) => d.id === c.definitionId && d.species === t.species),
         ),
@@ -170,11 +208,16 @@ export function decodeSave(raw: string): GameState {
       s.team.length !== 0 ||
         s.cards.length !== 0 ||
         s.roster.length !== 0 ||
+        s.reserves.length !== 0 ||
+        s.lineup.length !== 0 ||
         s.battle !== null ||
         s.reward !== null,
     );
-  else invalid(s.team.length !== 3 || s.cards.length !== 9 || s.roster.length < 3);
-  if (s.phase === "teamSelection") invalid(s.battle !== null || s.reward !== null);
+  else invalid(s.team.length !== 3 || s.cards.length !== 9 || s.roster.length < 3 || s.lineup.length !== 3);
+  if (s.phase === "teamSelection")
+    invalid(
+      s.battle !== null || s.reward !== null || s.team.some((c, index) => c.species !== s.lineup[index]),
+    );
   if (["battle", "reward", "recruit", "relic"].includes(s.phase)) invalid(!s.battle);
   const rewardPhase = ["reward", "recruit", "relic"].includes(s.phase);
   invalid(rewardPhase && !s.reward);
@@ -197,6 +240,7 @@ export function decodeSave(raw: string): GameState {
           s.reward.relics.some((r) => s.relics.includes(r)) ||
           s.reward.outcome === "defeat",
       );
+    if (s.reward.outcome === "defeat") invalid([...s.team, ...s.reserves].some((c) => c.health > 0));
     if (s.reward.outcome !== "defeat") invalid(s.battle?.enemies.some((e) => e.health > 0) ?? true);
   }
   if (s.battle) {
@@ -219,10 +263,10 @@ export function decodeSave(raw: string): GameState {
     const zones = [...b.draw, ...b.hand, ...b.discard];
     invalid(!unique(zones) || zones.some((id) => !s.cards.some((c) => c.id === id)));
     if (s.phase === "battle") {
-      const liveCards = s.cards.filter((c) => s.team.some((t) => t.id === c.ownerId && t.health > 0));
+      const liveCards = s.cards;
       invalid(
         (!legacy && b.mana === 0) ||
-          !s.team.some((c) => c.health > 0) ||
+          ![...s.team, ...s.reserves].some((c) => c.health > 0) ||
           !b.enemies.some((e) => e.health > 0) ||
           zones.length !== liveCards.length ||
           liveCards.some((c) => !zones.includes(c.id)),

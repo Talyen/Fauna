@@ -20,7 +20,7 @@ export function Inspector({
   const game = useStore(session.store, (s) => s.game);
   const kind = "card" in item ? definition(item.card.definitionId).species : item.species;
   const creature = species(kind);
-  const ally = game.team.find((c) => c.species === kind);
+  const ally = [...game.team, ...game.reserves].find((c) => c.species === kind);
   const enemyIndex =
     "enemyId" in item && item.enemyId?.startsWith("preview-") ? Number(item.enemyId.slice(8)) : -1;
   const preview = ENCOUNTERS[game.encounter]?.enemies[enemyIndex];

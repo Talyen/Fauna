@@ -221,7 +221,7 @@ it("persists primary legacy migration without replaying its exhausted turn", asy
   await session.load();
   await session.flush();
   const migrated = session.store.getState().game;
-  expect(migrated.version).toBe(3);
+  expect(migrated.version).toBe(4);
   expect(migrated.battle!.mana).toBe(mana);
   expect(migrated.battle!.turn).toBe(original.battle!.turn + 1);
   expect(session.store.getState().events).toEqual([]);

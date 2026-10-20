@@ -82,26 +82,40 @@ describe("keyword progression and rewards", () => {
     s = accept(s, { type: "skipRelic" });
     s = accept(s, { type: "swap", activeId: "ally-0", reserve: "briartooth" });
     expect(
-      s.cards.filter((c) => c.ownerId === "ally-0").every((c) => c.definitionId.startsWith("briartooth")),
+      s.cards
+        .filter((c) => c.ownerId === s.team[0]!.id)
+        .every((c) => c.definitionId.startsWith("briartooth")),
     ).toBe(true);
     expect(dispatch(s, { type: "swap", activeId: "ally-0", reserve: "emberfox" }).accepted).toBe(false);
     s = accept(s, { type: "beginBattle" });
     expect(dispatch(s, { type: "swap", activeId: "ally-0", reserve: "mossback" }).accepted).toBe(false);
   });
-  it("rejects unnecessary releases and fills the roster with distinct species", () => {
-    for (const replace of ["mossback", "moonhart"] as const) {
+  it("requires a replacement at five and can replace either deployed or reserved species", () => {
+    for (const replace of ["mossback", "silkmoth"] as const) {
       let s = produce(accept(winBattle(), { type: "continueReward" }), (d) => {
-        d.roster = ["mossback", "emberfox", "stormfin", "silkmoth", "moonhart"];
+        d.roster.push("silkmoth", "moonhart");
+        d.reserves = ["silkmoth", "moonhart"].map((kind) => ({
+          id: `recruit-${kind}`,
+          species: kind as "silkmoth" | "moonhart",
+          health: 20,
+          block: 0,
+          attacked: false,
+        }));
         d.wins = 1;
         d.unlocked.push("moonhart");
       });
-
-      expect(dispatch(s, { type: "recruit", species: "briartooth", replace }).accepted).toBe(false);
-      s = accept(s, { type: "recruit", species: "briartooth" });
-      expect(s.roster).toHaveLength(6);
-      expect(new Set(s.roster).size).toBe(6);
+      expect(dispatch(s, { type: "recruit", species: "briartooth" }).accepted).toBe(false);
+      expect(dispatch(s, { type: "recruit", species: "briartooth", replace: "briartooth" }).accepted).toBe(
+        false,
+      );
+      s = accept(s, { type: "recruit", species: "briartooth", replace });
+      expect(s.roster).toHaveLength(5);
+      expect(new Set(s.roster).size).toBe(5);
+      expect(s.roster).not.toContain(replace);
       expect(decodeSave(encodeSave(s))).toEqual(s);
     }
+    const s = accept(winBattle(), { type: "continueReward" });
+    expect(dispatch(s, { type: "recruit", species: "briartooth", replace: "mossback" }).accepted).toBe(false);
   });
   it("offers three unique unowned relics, commits one once, and applies opening effects only at battle start", () => {
     let s = accept(accept(winBattle(), { type: "continueReward" }), { type: "skipRecruit" });
@@ -172,7 +186,7 @@ it("preserves in-progress version-two upgrades while adding validated progressio
   for (const key of ["roster", "keywordXP", "battleXP", "talents", "currency", "relics", "reward"])
     delete old[key];
   const migrated = decodeSave(JSON.stringify(old));
-  expect(migrated.version).toBe(3);
+  expect(migrated.version).toBe(4);
   expect(migrated.phase).toBe("battle");
   expect(migrated.roster).toEqual(migrated.team.map((c) => c.species));
   expect(migrated.cards[0]!.level).toBe(2);

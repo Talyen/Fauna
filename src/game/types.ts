@@ -39,7 +39,7 @@ export interface BattleReward {
   outcome: "next" | "victory" | "defeat";
 }
 export interface GameState {
-  version: 3;
+  version: 4;
   revision: number;
   rng: number;
   phase: "draft" | "teamSelection" | "battle" | "reward" | "recruit" | "relic" | "victory" | "defeat";
@@ -47,6 +47,8 @@ export interface GameState {
   wins: number;
   selected: SpeciesId[];
   roster: SpeciesId[];
+  reserves: Creature[];
+  lineup: SpeciesId[];
   team: Creature[];
   cards: Card[];
   encounter: number;
@@ -62,6 +64,7 @@ export type Command =
   | { type: "draft"; species: SpeciesId }
   | { type: "start" }
   | { type: "beginBattle" }
+  | { type: "setLineup"; activeId: string; reserve: SpeciesId }
   | { type: "swap"; activeId: string; reserve: SpeciesId }
   | { type: "play"; cardId: string; targetId?: string }
   | { type: "endTurn" }

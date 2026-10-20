@@ -8,6 +8,6 @@ Swap sits beside End turn; reserves remain hidden on the battlefield. The center
 
 The local preview replaces card definitions in place while preserving card IDs and hand/draw/discard positions. Swaps are free; health and combat data stay with the creature. This is not validation of production save, knockout circulation, passive, or defeat rules.
 
-Approved direction for subsequent gameplay implementation: five roster members, three deployed; remember the starting lineup rather than randomize it every battle. Offer optional Lineup management from the expedition menu between battles with no mandatory selection prompt. Only deployed living creatures supply passives; defeat occurs when the entire roster is knocked out. These rules are not implemented by this sample.
+The actual game now implements this direction at `/`: five roster members, three deployed; remember the starting lineup rather than randomize it every battle. Offer optional Lineup management from the expedition menu between battles with no mandatory selection prompt. Only deployed living creatures supply passives; defeat occurs when the entire roster is knocked out. This frozen sample still uses local presentation state; play the actual game to exercise saves and progression.
 
 Reviewed in Chromium at 1920×1080 and 1280×800, including selection in either order, repeated swaps, replacing a knocked-out creature, Escape dismissal, focus restoration, and unchanged Mana. Native desktop, Windows, physical controller, Steam client, and Steam Deck were not verified for this sample.

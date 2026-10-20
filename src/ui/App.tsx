@@ -12,7 +12,7 @@ import { buttonVariants } from "../components/ui/button";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
 import { flushSync } from "react-dom";
-import { Menu } from "lucide-react";
+import { Menu, ArrowLeftRight } from "lucide-react";
 import type { Session } from "../application/session";
 import { Button } from "../components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../components/ui/dialog";
@@ -27,6 +27,7 @@ import {
   EndScreen,
   DeckCards,
 } from "./expedition-screens";
+import { RosterPicker } from "./roster-picker";
 import { Inspector } from "./inspection";
 import { connectInput, moveFocus, type InputAction } from "./input";
 import { returnFocus } from "./focus";
@@ -37,7 +38,7 @@ import type { SpeciesId } from "../game/content";
 import "./mana-crystals.css";
 
 type Route = "home" | "play" | "talents" | "collection";
-type Modal = "settings" | "glossary" | "endRun" | "deck" | null;
+type Modal = "settings" | "glossary" | "endRun" | "deck" | "swap" | "lineup" | null;
 export function App(props: { session: Session; desktop?: boolean }) {
   return (
     <TooltipProvider delayDuration={300} skipDelayDuration={100} disableHoverableContent>
@@ -72,6 +73,9 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     modalOpener = useRef<HTMLElement | null>(null);
   const active =
     !["victory", "defeat"].includes(game.phase) && (game.team.length > 0 || game.selected.length > 0);
+  const canManageLineup =
+    game.phase === "teamSelection" ||
+    (["reward", "recruit", "relic"].includes(game.phase) && game.reward?.outcome === "next");
   const paused = route !== "play" || menu || modal !== null || inspection !== null;
   const { bursts, deny } = useCombatFeedback(session, root, sound, paused);
   useEffect(() => {
@@ -135,7 +139,12 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
       (document.activeElement as HTMLElement | null)?.click();
       return;
     }
-    if (action === "inspect" && !inspection && !menu && (!modal || modal === "deck")) {
+    if (
+      action === "inspect" &&
+      !inspection &&
+      (!menu || modal === "lineup") &&
+      (!modal || ["deck", "swap", "lineup"].includes(modal))
+    ) {
       const focused = document.activeElement as HTMLElement | null;
       const card = game.cards.find(
         (c) => c.id === focused?.closest<HTMLElement>("[data-card-id]")?.dataset.cardId,
@@ -214,6 +223,11 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
       >
         {home ? (active ? "Continue" : "New expedition") : "Resume"}
       </Button>
+      {canManageLineup ? (
+        <Button variant="ghost" onClick={() => openModal("lineup")}>
+          Lineup
+        </Button>
+      ) : null}
       <Button variant="ghost" onClick={() => navigate("talents")}>
         Talents
       </Button>
@@ -259,15 +273,27 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
         }}
       >
         <DialogContent
-          className={modal === "deck" ? "deck-dialog" : modal === "settings" ? "settings-dialog" : "glossary"}
+          className={
+            modal === "swap" || modal === "lineup"
+              ? "swap-dialog"
+              : modal === "deck"
+                ? "deck-dialog"
+                : modal === "settings"
+                  ? "settings-dialog"
+                  : "glossary"
+          }
           closeLabel={
-            modal === "deck"
-              ? "Close deck"
-              : modal === "settings"
-                ? "Close settings"
-                : modal === "glossary"
-                  ? "Close glossary"
-                  : "Close dialog"
+            modal === "swap"
+              ? "Close Swap"
+              : modal === "lineup"
+                ? "Close Lineup"
+                : modal === "deck"
+                  ? "Close deck"
+                  : modal === "settings"
+                    ? "Close settings"
+                    : modal === "glossary"
+                      ? "Close glossary"
+                      : "Close dialog"
           }
           onCloseAutoFocus={(event) => {
             event.preventDefault();
@@ -275,16 +301,29 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           }}
         >
           <DialogTitle>
-            {modal === "deck"
-              ? "Deck"
-              : modal === "settings"
-                ? "Settings"
-                : modal === "glossary"
-                  ? "Glossary & controls"
-                  : ""}
+            {modal === "swap"
+              ? "Swap"
+              : modal === "lineup"
+                ? "Lineup"
+                : modal === "deck"
+                  ? "Deck"
+                  : modal === "settings"
+                    ? "Settings"
+                    : modal === "glossary"
+                      ? "Glossary & controls"
+                      : ""}
           </DialogTitle>
           <DialogDescription className="sr-only">Game information and controls</DialogDescription>
-          {modal === "deck" ? (
+          {modal === "swap" || modal === "lineup" ? (
+            <RosterPicker
+              key={modal}
+              game={game}
+              lineup={modal === "lineup"}
+              send={send}
+              inspect={setInspection}
+              close={() => setModal(null)}
+            />
+          ) : modal === "deck" ? (
             <DeckCards game={game} inspect={setInspection} />
           ) : modal === "settings" ? (
             <div className="settings-controls">
@@ -426,17 +465,22 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
             {game.phase === "draft" ? (
               <Draft game={game} send={send} inspect={setInspection} />
             ) : game.phase === "teamSelection" ? (
-              <TeamSelection
-                game={game}
-                send={send}
-                inspect={setInspection}
-                deck={() => openModal("deck")}
-                navigateFocus={mode !== "pointer"}
-                controls={gameControls}
-              />
+              <TeamSelection game={game} send={send} inspect={setInspection} deck={() => openModal("deck")} />
             ) : game.phase === "battle" ? (
               <BattleScreen
                 key={game.encounter}
+                clearSelection={modal === "swap"}
+                actions={
+                  <Button
+                    variant="outline"
+                    className="swap-trigger"
+                    disabled={!game.reserves.some((c) => c.health > 0)}
+                    onClick={() => openModal("swap")}
+                  >
+                    <ArrowLeftRight aria-hidden="true" />
+                    Swap
+                  </Button>
+                }
                 game={game}
                 send={send}
                 inspect={setInspection}

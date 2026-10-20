@@ -160,20 +160,28 @@ test("recruitment adds a reserve, selection swaps its kit, and remembers active 
   expect((await state(page)).roster).toHaveLength(4);
   expect((await state(page)).phase).toBe("relic");
   await page.getByRole("button", { name: "Skip", exact: true }).click();
-  const active = page.getByRole("button", { name: "Mossback, active", exact: true }),
+  await expect(page.getByRole("button", { name: "Mossback, starting", exact: true })).toHaveCount(0);
+  await page.getByRole("button", { name: "Open menu" }).click();
+  await page.getByRole("button", { name: "Lineup", exact: true }).click();
+  const active = page.getByRole("button", { name: "Mossback, starting", exact: true }),
     reserve = page.getByRole("button", { name: "Briartooth, reserve", exact: true });
+  await reserve.focus();
+  await page.keyboard.press("i");
+  await expect(page.getByRole("dialog", { name: "Briartooth details" })).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(reserve).toBeFocused();
   await active.focus();
   await page.keyboard.press("Enter");
   await page.keyboard.press("s");
   await expect(reserve).toBeFocused();
   await page.keyboard.press("Enter");
+  await expect(page.getByRole("button", { name: "Lineup", exact: true })).toBeFocused();
+  await page.keyboard.press("Escape");
   const s = await state(page);
-  expect(s.team[0]!.species).toBe("briartooth");
-  await expect(page.getByRole("button", { name: "Briartooth, active", exact: true })).toBeFocused();
+  expect(s.lineup[0]).toBe("briartooth");
   expect(s.cards.some((c) => c.definitionId.startsWith("mossback"))).toBe(false);
   await page.reload();
   await resume(page);
-  await expect(page.getByRole("button", { name: "Briartooth, active", exact: true })).toBeVisible();
   await page.getByRole("button", { name: "Begin battle" }).click();
   expect((await state(page)).team[0]!.species).toBe("briartooth");
 });
@@ -378,6 +386,13 @@ for (const [width, height] of [
     await page.setViewportSize({ width, height });
     const fixture = produce(run(7), (d) => {
       d.roster.push("silkmoth", "briartooth");
+      d.reserves = ["silkmoth", "briartooth"].map((kind) => ({
+        id: `recruit-${kind}`,
+        species: kind as "silkmoth" | "briartooth",
+        health: 20,
+        block: 0,
+        attacked: false,
+      }));
       d.keywordXP.fire = 420;
     });
     await seed(page, fixture);
@@ -523,7 +538,14 @@ test("six-card hand, three enemies and a full bench preserve fit and original ar
     d.relics = ["wind-feather"];
     d.wins = 1;
     d.unlocked.push("moonhart");
-    d.roster = ["mossback", "emberfox", "stormfin", "silkmoth", "briartooth", "moonhart"];
+    d.roster = ["mossback", "emberfox", "stormfin", "silkmoth", "briartooth"];
+    d.reserves = ["silkmoth", "briartooth"].map((kind) => ({
+      id: `recruit-${kind}`,
+      species: kind as "silkmoth" | "briartooth",
+      health: 20,
+      block: 0,
+      attacked: false,
+    }));
   });
   await seed(page, s);
   await resume(page);
@@ -767,4 +789,209 @@ test("controller navigation preserves its device mode and can confirm a pointer-
   expect((await state(page)).revision).toBe(before.revision + 1);
   await expect(page.locator(".hand .action-card").first()).toBeFocused();
   await expect(page.locator(".app")).toHaveAttribute("data-input", "controller");
+});
+
+for (const input of ["mouse", "keyboard", "controller"] as const)
+  test(`free combat swaps save, replace hand cards, and preserve the starting lineup with ${input}`, async ({
+    page,
+  }) => {
+    const press = input === "controller" ? await gamepad(page) : null;
+    const fixture = produce(run(7), (d) => {
+      d.roster.push("silkmoth", "briartooth");
+      d.reserves = ["silkmoth", "briartooth"].map((kind) => ({
+        id: `recruit-${kind}`,
+        species: kind as "silkmoth" | "briartooth",
+        health: 20,
+        block: 0,
+        attacked: false,
+      }));
+      d.team[1]!.health = 9;
+      const cards = d.cards.filter((c) => c.ownerId === "ally-1");
+      d.battle!.hand = [cards[0]!.id];
+      d.battle!.discard = [cards[1]!.id];
+      d.battle!.draw = d.cards.filter((c) => ![cards[0]!.id, cards[1]!.id].includes(c.id)).map((c) => c.id);
+    });
+    await seed(page, fixture);
+    await resume(page);
+    const activate = async (el: Locator) => {
+      if (input === "mouse") await el.click();
+      else {
+        await el.focus();
+        if (press) await press(0);
+        else await page.keyboard.press("Enter");
+      }
+    };
+    await expect(page.locator('.player-row [data-species="silkmoth"]')).toHaveCount(0);
+    await activate(page.getByRole("button", { name: "Swap", exact: true }));
+    const dialog = page.getByRole("dialog");
+    await expect(dialog).toBeVisible();
+    await expect(dialog.locator(".creature-card")).toHaveCount(5);
+    if (input === "keyboard") {
+      await dialog.getByRole("button", { name: "Mossback, deployed", exact: true }).focus();
+      await page.keyboard.press("a");
+      await expect(dialog.getByRole("button", { name: "Stormfin, deployed", exact: true })).toBeFocused();
+      await page.keyboard.press("s");
+      await expect(dialog.getByRole("button", { name: "Briartooth, reserve", exact: true })).toBeFocused();
+      await page.keyboard.press("d");
+      await expect(dialog.getByRole("button", { name: "Silkmoth, reserve", exact: true })).toBeFocused();
+    }
+
+    await activate(dialog.getByRole("button", { name: "Silkmoth, reserve", exact: true }));
+    await activate(dialog.getByRole("button", { name: "Emberfox, deployed", exact: true }));
+    await expect(dialog).not.toBeVisible();
+    await expect(page.getByRole("button", { name: "Swap", exact: true })).toBeFocused();
+    const swapped = await state(page);
+    expect(swapped.battle!.mana).toBe(fixture.battle!.mana);
+    expect(swapped.battle!.turn).toBe(fixture.battle!.turn);
+    expect(swapped.battle!.hand).toEqual(fixture.battle!.hand);
+    expect(swapped.battle!.draw).toEqual(fixture.battle!.draw);
+    expect(swapped.battle!.discard).toEqual(fixture.battle!.discard);
+    expect(swapped.lineup).toEqual(fixture.lineup);
+    expect(swapped.reserves.find((c) => c.species === "emberfox")!.health).toBe(9);
+    await expect(page.locator(".hand .action-card img")).toHaveAttribute("src", "./art/silkmoth-action.svg");
+    await page.reload();
+    await resume(page);
+    expect(await state(page)).toEqual(swapped);
+    await activate(page.getByRole("button", { name: "Open menu" }));
+    await expect(page.getByRole("button", { name: "Lineup", exact: true })).toHaveCount(0);
+    await page.keyboard.press("Escape");
+    await activate(page.getByRole("button", { name: "Swap", exact: true }));
+    await activate(page.getByRole("button", { name: "Silkmoth, deployed", exact: true }));
+    await activate(page.getByRole("button", { name: "Emberfox, reserve", exact: true }));
+    expect((await state(page)).team[1]!.health).toBe(9);
+  });
+
+for (const [width, height] of [
+  [1280, 800],
+  [1920, 1080],
+] as const)
+  test(`live Swap and optional Lineup fit ${width}×${height}`, async ({ page }) => {
+    await page.setViewportSize({ width, height });
+    const fixture = produce(run(7), (d) => {
+      d.roster.push("silkmoth", "briartooth");
+      d.reserves = ["silkmoth", "briartooth"].map((kind) => ({
+        id: `recruit-${kind}`,
+        species: kind as "silkmoth" | "briartooth",
+        health: 20,
+        block: 0,
+        attacked: false,
+      }));
+    });
+    await seed(page, fixture);
+    await resume(page);
+    await page.screenshot({ path: `reports/swapping/battle-${width}.png` });
+    await page.getByRole("button", { name: "Swap", exact: true }).click();
+    await page.getByRole("button", { name: "Emberfox, deployed", exact: true }).click();
+    await page.mouse.move(0, 0);
+    await fits(page);
+    const dialog = page.getByRole("dialog");
+    const box = (await dialog.boundingBox())!;
+    expect(box.y).toBeGreaterThanOrEqual(0);
+    expect(box.y + box.height).toBeLessThanOrEqual(height);
+    for (const card of await dialog.locator(".creature-card").all()) {
+      const size = (await card.boundingBox())!;
+      expect(Math.abs(size.width / size.height - 4 / 3)).toBeLessThan(0.01);
+    }
+    await page.screenshot({ path: `reports/swapping/swap-${width}.png` });
+    await page.keyboard.press("Escape");
+    const reward = winBattle(fixture);
+    await seed(page, reward);
+    await resume(page);
+    await page.getByRole("button", { name: "Open menu" }).click();
+    await page.getByRole("button", { name: "Lineup", exact: true }).click();
+    await page.mouse.move(0, 0);
+    await fits(page);
+    await page.screenshot({ path: `reports/swapping/lineup-${width}.png` });
+    await page.getByRole("button", { name: "Silkmoth, reserve", exact: true }).click();
+    await page.getByRole("button", { name: "Mossback, starting", exact: true }).click();
+    const edited = await state(page);
+    expect(edited.lineup[0]).toBe("silkmoth");
+    expect(edited.phase).toBe("reward");
+    expect(edited.reward).toEqual(reward.reward);
+    await page.reload();
+    await resume(page);
+    expect((await state(page)).lineup[0]).toBe("silkmoth");
+  });
+
+test("a fallen deployed row resumes with no playable cards and can recover through a reserve swap", async ({
+  page,
+}) => {
+  let s = produce(run(7), (d) => {
+    d.roster.push("silkmoth", "briartooth");
+    d.reserves = ["silkmoth", "briartooth"].map((kind) => ({
+      id: `recruit-${kind}`,
+      species: kind as "silkmoth" | "briartooth",
+      health: 20,
+      block: 0,
+      attacked: false,
+    }));
+    d.phase = "teamSelection";
+    d.battle = null;
+    d.encounter = 1;
+  });
+  s = accept(s, { type: "beginBattle" });
+  s = produce(s, (d) =>
+    d.team.forEach((c) => {
+      c.health = 1;
+      c.block = 0;
+    }),
+  );
+  await seed(page, s);
+  await resume(page);
+  await page.getByRole("button", { name: "End turn", exact: true }).click();
+  await expect(page.locator(".hand .action-card")).toHaveCount(0);
+  const fallen = await state(page);
+  expect(fallen.phase).toBe("battle");
+  expect(fallen.team.every((c) => c.health === 0)).toBe(true);
+  await page.reload();
+  await resume(page);
+  const ownerId = fallen.cards.find((c) => c.id === fallen.battle!.hand[0])!.ownerId;
+  const outgoing = fallen.team.find((c) => c.id === ownerId)!;
+  await page.getByRole("button", { name: "Swap", exact: true }).click();
+  await page
+    .getByRole("button", { name: `${species(outgoing.species).name}, deployed`, exact: true })
+    .click();
+  await page.getByRole("button", { name: "Silkmoth, reserve", exact: true }).click();
+  await expect(page.locator(".hand .action-card").first()).toBeVisible();
+  const restored = await state(page);
+  expect(restored.battle!.mana).toBe(3);
+  expect(restored.battle!.hand).toEqual(fallen.battle!.hand);
+  await page.getByRole("button", { name: "Swap", exact: true }).click();
+  await expect(
+    page.getByRole("button", { name: `${species(outgoing.species).name}, reserve`, exact: true }),
+  ).toHaveAttribute("aria-disabled", "true");
+});
+
+test("recruitment at five requires replacement and updates a released starter's lineup entry", async ({
+  page,
+}) => {
+  const fixture = produce(accept(winBattle(), { type: "continueReward" }), (d) => {
+    d.wins = 1;
+    d.unlocked.push("moonhart");
+    d.roster.push("silkmoth", "moonhart");
+    d.reserves = ["silkmoth", "moonhart"].map((kind) => ({
+      id: `recruit-${kind}`,
+      species: kind as "silkmoth" | "moonhart",
+      health: 20,
+      block: 0,
+      attacked: false,
+    }));
+  });
+  await seed(page, fixture);
+  await resume(page);
+  await page.getByRole("button", { name: "Recruit Briartooth", exact: true }).click();
+  expect((await state(page)).roster).toEqual(fixture.roster);
+  await expect(page.getByRole("heading", { name: "Replace a creature", exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "Cancel", exact: true }).click();
+  expect((await state(page)).revision).toBe(fixture.revision);
+  await page.getByRole("button", { name: "Recruit Briartooth", exact: true }).click();
+  await page.getByRole("button", { name: "Release Mossback", exact: true }).click();
+  const recruited = await state(page);
+  expect(recruited.roster).toHaveLength(5);
+  expect(recruited.roster).not.toContain("mossback");
+  expect(recruited.lineup[0]).toBe("briartooth");
+  expect(recruited.phase).toBe("relic");
+  await page.reload();
+  await resume(page);
+  expect((await state(page)).lineup).toEqual(recruited.lineup);
 });

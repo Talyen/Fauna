@@ -14,7 +14,7 @@ import type { Card, Command, CommandResult, GameEvent, GameState } from "./types
 export function createGame(seed = 1): GameState {
   return freeze(
     {
-      version: 3,
+      version: 4,
       revision: 0,
       rng: seed >>> 0,
       phase: "draft",
@@ -22,6 +22,8 @@ export function createGame(seed = 1): GameState {
       wins: 0,
       selected: [],
       roster: [],
+      reserves: [],
+      lineup: [],
       keywordXP: {},
       battleXP: {},
       talents: [],
@@ -60,28 +62,43 @@ function ownedCards(id: string, kind: GameState["team"][number]["species"]): Car
 }
 function draw(state: GameState, count: number) {
   const b = state.battle!;
+  // Knocked-out owners retain inert slots, so replacing them cannot refresh spent cards.
+  const alive = living(state);
+  const eligible = (id: string) =>
+    !alive.length || alive.some((c) => c.id === state.cards.find((card) => card.id === id)?.ownerId);
   for (let i = 0; i < count; i++) {
-    if (!b.draw.length) {
-      b.draw = shuffle(state, b.discard.splice(0));
+    if (!b.draw.some(eligible)) {
+      const available = b.discard.filter(eligible);
+      b.discard = b.discard.filter((id) => !eligible(id));
+      b.draw.push(...shuffle(state, available));
     }
-    const id = b.draw.pop();
-    if (!id) break;
-    b.hand.push(id);
+    let index = b.draw.length - 1;
+    while (index >= 0 && !eligible(b.draw[index]!)) index--;
+    if (index < 0) break;
+    b.hand.push(b.draw.splice(index, 1)[0]!);
   }
 }
 function intents(state: GameState) {
   const alive = living(state);
   for (const enemy of state.battle!.enemies) {
-    if (enemy.health > 0) enemy.targetId = alive[Math.floor(random(state) * alive.length)]!.id;
+    if (enemy.health > 0 && alive.length)
+      enemy.targetId = alive[Math.floor(random(state) * alive.length)]!.id;
   }
 }
 export function beginBattle(state: GameState) {
   const encounter = ENCOUNTERS[state.encounter]!;
-  for (const c of state.team) {
+  const all = [...state.team, ...state.reserves];
+  state.team = state.lineup.map((kind) => all.find((c) => c.species === kind)!);
+  state.reserves = all.filter((c) => !state.lineup.includes(c.species));
+  rebuildCards(state);
+  for (const c of [...state.team, ...state.reserves]) {
     c.health = species(c.species).health;
-    c.block = (c.species === "moonhart" ? 4 : 0) + (state.relics.includes("river-shell") ? 3 : 0);
+    c.block =
+      (state.team.includes(c) && c.species === "moonhart" ? 4 : 0) +
+      (state.team.includes(c) && state.relics.includes("river-shell") ? 3 : 0);
     for (const keyword of KEYWORDS)
       if (
+        state.team.includes(c) &&
         hasTalent(state, keyword, "opening") &&
         state.cards.some((card) => card.ownerId === c.id && cardKeywords(card).includes(keyword))
       )
@@ -148,13 +165,13 @@ function finishBattle(state: GameState, defeated: boolean) {
   state.phase = "reward";
 }
 function settle(state: GameState, events: GameEvent[]): boolean {
-  if (!living(state).length) {
+  if (![...state.team, ...state.reserves].some((c) => c.health > 0)) {
     finishBattle(state, true);
     events.push({ kind: "knockout", text: "Your expedition has ended." });
     return true;
   }
   if (state.battle!.enemies.every((e) => e.health <= 0)) {
-    for (const creature of state.team) {
+    for (const creature of [...state.team, ...state.reserves]) {
       creature.health = species(creature.species).health;
       creature.block = 0;
     }
@@ -167,6 +184,12 @@ function settle(state: GameState, events: GameEvent[]): boolean {
   }
   return false;
 }
+function prepareLineup(state: GameState) {
+  const all = [...state.team, ...state.reserves];
+  state.team = state.lineup.map((kind) => all.find((c) => c.species === kind)!);
+  state.reserves = all.filter((c) => !state.lineup.includes(c.species));
+  rebuildCards(state);
+}
 function afterRewards(state: GameState) {
   if (state.reward!.outcome === "victory") {
     state.phase = "victory";
@@ -176,6 +199,7 @@ function afterRewards(state: GameState) {
   state.phase = "teamSelection";
   state.battle = null;
   state.reward = null;
+  prepareLineup(state);
 }
 function afterRecruit(state: GameState) {
   if (state.reward!.relics.length) state.phase = "relic";
@@ -185,7 +209,13 @@ function rebuildCards(state: GameState) {
   const previous = state.cards;
   state.cards = state.team
     .flatMap((c) => ownedCards(c.id, c.species))
-    .map((card) => previous.find((old) => old.id === card.id) ?? card);
+    .map(
+      (card) =>
+        previous.find(
+          (old) =>
+            old.id === card.id && old.ownerId === card.ownerId && old.definitionId === card.definitionId,
+        ) ?? card,
+    );
   if (state.battle) {
     state.battle.hand = [];
     state.battle.discard = [];
@@ -237,15 +267,11 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
         text: `${species(target.species).name} is knocked out.`,
         targetId: target.id,
       });
-      const removed = new Set(draft.cards.filter((c) => c.ownerId === target.id).map((c) => c.id));
-      battle.draw = battle.draw.filter((id) => !removed.has(id));
-      battle.hand = battle.hand.filter((id) => !removed.has(id));
-      battle.discard = battle.discard.filter((id) => !removed.has(id));
     }
     if (settle(draft, events)) break;
   }
   if (draft.phase !== "battle") return;
-  for (const c of draft.team) {
+  for (const c of [...draft.team, ...draft.reserves]) {
     c.block = 0;
     c.attacked = false;
   }
@@ -308,12 +334,26 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
     return reject(state, "Choose a team before battle.");
   if (
     command.type === "swap" &&
-    (state.phase !== "teamSelection" ||
+    (!["battle", "teamSelection"].includes(state.phase) ||
       !state.team.some((c) => c.id === command.activeId) ||
-      !state.roster.includes(command.reserve) ||
+      !state.reserves.some(
+        (c) => c.species === command.reserve && (state.phase !== "battle" || c.health > 0),
+      ) ||
       state.team.some((c) => c.species === command.reserve))
   )
     return reject(state, "Choose an active creature and a reserve.");
+  if (
+    command.type === "setLineup" &&
+    (!["teamSelection", "reward", "recruit", "relic"].includes(state.phase) ||
+      ![...state.team, ...state.reserves].some(
+        (c) => c.id === command.activeId && state.lineup.includes(c.species),
+      ) ||
+      !state.roster.includes(command.reserve) ||
+      state.lineup.includes(command.reserve) ||
+      state.reward?.outcome === "defeat" ||
+      state.reward?.outcome === "victory")
+  )
+    return reject(state, "Choose a starting creature and a reserve between battles.");
   if (command.type === "continueReward" && state.phase !== "reward")
     return reject(state, "There are no battle rewards to continue.");
   if (
@@ -321,7 +361,7 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
     (state.phase !== "recruit" ||
       !state.reward?.recruits.includes(command.species) ||
       state.roster.includes(command.species) ||
-      (state.roster.length === 6
+      (state.roster.length === 5
         ? !command.replace || !state.roster.includes(command.replace)
         : !!command.replace))
   )
@@ -370,6 +410,7 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
         }));
         draft.cards = draft.team.flatMap((c) => ownedCards(c.id, c.species));
         draft.roster = [...draft.selected];
+        draft.lineup = [...draft.selected];
         draft.phase = "teamSelection";
         break;
       case "beginBattle":
@@ -472,13 +513,40 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
         finishTurn(draft, events);
         break;
       }
+      case "setLineup": {
+        const outgoing = [...draft.team, ...draft.reserves].find((c) => c.id === command.activeId)!;
+        draft.lineup[draft.lineup.indexOf(outgoing.species)] = command.reserve;
+        if (draft.phase === "teamSelection") prepareLineup(draft);
+        break;
+      }
       case "swap": {
-        const creature = draft.team.find((c) => c.id === command.activeId)!;
-        creature.species = command.reserve;
-        creature.health = species(command.reserve).health;
-        creature.block = 0;
-        creature.attacked = false;
-        rebuildCards(draft);
+        const index = draft.team.findIndex((c) => c.id === command.activeId);
+        const reserveIndex = draft.reserves.findIndex((c) => c.species === command.reserve);
+        const outgoing = draft.team[index]!;
+        const incoming = draft.reserves[reserveIndex]!;
+        draft.team[index] = incoming;
+        draft.reserves[reserveIndex] = outgoing;
+        const oldDefs = CARDS.filter((c) => c.species === outgoing.species);
+        const newDefs = CARDS.filter((c) => c.species === incoming.species);
+        for (const card of draft.cards.filter((c) => c.ownerId === outgoing.id)) {
+          card.definitionId = newDefs[oldDefs.findIndex((def) => def.id === card.definitionId)]!.id;
+          card.ownerId = incoming.id;
+          card.level = 0;
+        }
+        if (draft.phase === "battle") {
+          for (const enemy of draft.battle!.enemies)
+            if (enemy.targetId === outgoing.id) enemy.targetId = incoming.id;
+        } else {
+          draft.lineup = draft.team.map((c) => c.species);
+          if (draft.battle)
+            for (const enemy of draft.battle.enemies)
+              if (enemy.targetId === outgoing.id) enemy.targetId = incoming.id;
+        }
+        events.push({
+          kind: "action",
+          actorId: incoming.id,
+          text: `${species(incoming.species).name} replaces ${species(outgoing.species).name}.`,
+        });
         break;
       }
       case "continueReward":
@@ -487,17 +555,35 @@ function resolve(state: GameState, command: Command, autoEndTurn: boolean): Comm
         else afterRecruit(draft);
         break;
       case "recruit": {
+        const recruited = {
+          id: `recruit-${command.species}`,
+          species: command.species,
+          health: species(command.species).health,
+          block: 0,
+          attacked: false,
+        };
         if (command.replace) {
           draft.roster[draft.roster.indexOf(command.replace)] = command.species;
-          const active = draft.team.find((c) => c.species === command.replace);
-          if (active) {
-            active.species = command.species;
-            active.health = species(command.species).health;
-            active.block = 0;
-            active.attacked = false;
-            rebuildCards(draft);
-          }
-        } else draft.roster.push(command.species);
+          draft.lineup = draft.lineup.map((kind) => (kind === command.replace ? command.species : kind));
+          const index = draft.team.findIndex((c) => c.species === command.replace);
+          if (index >= 0) {
+            const old = draft.team[index]!;
+            draft.team[index] = recruited;
+            const oldDefs = CARDS.filter((c) => c.species === old.species);
+            const newDefs = CARDS.filter((c) => c.species === command.species);
+            for (const card of draft.cards.filter((c) => c.ownerId === old.id)) {
+              card.ownerId = recruited.id;
+              card.definitionId = newDefs[oldDefs.findIndex((def) => def.id === card.definitionId)]!.id;
+              card.level = 0;
+            }
+            if (draft.battle)
+              for (const enemy of draft.battle.enemies)
+                if (enemy.targetId === old.id) enemy.targetId = recruited.id;
+          } else draft.reserves[draft.reserves.findIndex((c) => c.species === command.replace)] = recruited;
+        } else {
+          draft.roster.push(command.species);
+          draft.reserves.push(recruited);
+        }
         afterRecruit(draft);
         break;
       }

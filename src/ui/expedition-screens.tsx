@@ -1,5 +1,5 @@
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui/tabs";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Coins, Gem, Feather, Shell, Leaf, Circle, Check, Sparkles } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../components/ui/tooltip";
@@ -18,55 +18,10 @@ import {
   type Keyword,
 } from "../game/progression";
 import type { Command, GameState } from "../game/types";
-import type { Inspection, Controls } from "./battle-screen";
+import type { Inspection } from "./battle-screen";
 import { Progress } from "./progress";
 type Props = { game: GameState; send: (command: Command) => boolean; inspect: (item: Inspection) => void };
-export function TeamSelection({
-  game,
-  send,
-  inspect,
-  deck,
-  controls,
-  navigateFocus,
-}: { deck: () => void; controls: Controls; navigateFocus: boolean } & Props) {
-  const [selected, setSelected] = useState<SpeciesId | null>(null);
-  const activeRoot = useRef<HTMLDivElement>(null),
-    pendingFocus = useRef<number | null>(null);
-  useLayoutEffect(() => {
-    if (pendingFocus.current !== null) {
-      activeRoot.current?.querySelectorAll<HTMLButtonElement>("button")[pendingFocus.current]?.focus();
-      pendingFocus.current = null;
-    }
-  }, [game.revision]);
-  useLayoutEffect(() => {
-    controls.current = (action) => {
-      if (action === "back" && selected) {
-        setSelected(null);
-        return true;
-      }
-      return false;
-    };
-    return () => {
-      controls.current = null;
-    };
-  }, [controls, selected]);
-  const active = game.team.map((c) => c.species),
-    reserve = game.roster.filter((kind) => !active.includes(kind));
-  const choose = (kind: SpeciesId) => {
-    if (selected && active.includes(selected) !== active.includes(kind)) {
-      const activeKind = active.includes(kind) ? kind : selected;
-      pendingFocus.current = navigateFocus ? active.indexOf(activeKind) : null;
-      if (
-        send({
-          type: "swap",
-          activeId: game.team.find((c) => c.species === activeKind)!.id,
-          reserve: active.includes(kind) ? selected : kind,
-        })
-      )
-        setSelected(null);
-      else pendingFocus.current = null;
-    } else setSelected((old) => (old === kind ? null : kind));
-  };
+export function TeamSelection({ game, send, inspect, deck }: Props & { deck: () => void }) {
   return (
     <main className="team-selection">
       <section className="selection-row" data-nav-row aria-label="Enemy lineup">
@@ -77,50 +32,13 @@ export function TeamSelection({
             name={enemy.name}
             enemyId={`preview-${index}`}
             readout={false}
-            onInspect={() => inspect({ species: enemy.species, enemyId: `preview-${index}` })}
             health={enemy.health}
             maxHealth={enemy.health}
             label={`Inspect ${enemy.name}`}
+            onInspect={() => inspect({ species: enemy.species, enemyId: `preview-${index}` })}
             onClick={() => inspect({ species: enemy.species, enemyId: `preview-${index}` })}
           />
         ))}
-      </section>
-      <section className="selection-group" aria-labelledby="active-title">
-        <h2 id="active-title">Active</h2>
-        <div className="selection-row" data-nav-row ref={activeRoot}>
-          {active.map((kind) => (
-            <CreatureCard
-              key={kind}
-              kind={kind}
-              selected={selected === kind}
-              modifiers={game}
-              label={`${species(kind).name}, active`}
-              onClick={() => choose(kind)}
-              onInspect={() => inspect({ species: kind })}
-            />
-          ))}
-        </div>
-      </section>
-      <section className="selection-group" aria-labelledby="reserve-title">
-        <h2 id="reserve-title">Reserves</h2>
-        <div className="selection-row reserve-row" data-nav-row>
-          {[0, 1, 2].map((index) => {
-            const kind = reserve[index];
-            return kind ? (
-              <CreatureCard
-                key={kind}
-                kind={kind}
-                modifiers={game}
-                selected={selected === kind}
-                label={`${species(kind).name}, reserve`}
-                onClick={() => choose(kind)}
-                onInspect={() => inspect({ species: kind })}
-              />
-            ) : (
-              <div key={index} className="empty-reserve" aria-hidden="true" />
-            );
-          })}
-        </div>
       </section>
       <footer className="selection-footer">
         <Button variant="outline" onClick={deck}>
@@ -227,7 +145,7 @@ export function Rewards({ game, send, inspect }: Props) {
                 onInspect={() => inspect({ species: kind })}
                 onClick={() => {
                   if (incoming) send({ type: "recruit", species: incoming, replace: kind });
-                  else if (game.roster.length === 6) setIncoming(kind);
+                  else if (game.roster.length === 5) setIncoming(kind);
                   else send({ type: "recruit", species: kind });
                 }}
               />

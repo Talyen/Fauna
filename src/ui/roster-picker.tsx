@@ -1,0 +1,75 @@
+import { useState } from "react";
+import { CreatureCard } from "./cards";
+import { species } from "../game/content";
+import type { Command, Creature, GameState } from "../game/types";
+import type { Inspection } from "./battle-screen";
+
+/** Shared by optional starting-lineup management and free combat swaps. */
+export function RosterPicker({
+  game,
+  lineup,
+  send,
+  inspect,
+  close,
+}: {
+  game: GameState;
+  lineup: boolean;
+  send: (command: Command) => boolean;
+  inspect: (item: Inspection) => void;
+  close: () => void;
+}) {
+  const [selected, setSelected] = useState<string | null>(null);
+  const all = [...game.team, ...game.reserves];
+  const active = lineup ? game.lineup.map((kind) => all.find((c) => c.species === kind)!) : game.team;
+  const reserves = all.filter((c) => !active.some((a) => a.id === c.id));
+  const selectedActive = active.some((c) => c.id === selected);
+  const choose = (creature: Creature, isActive: boolean) => {
+    if (!selected || selectedActive === isActive) {
+      setSelected(selected === creature.id ? null : creature.id);
+      return;
+    }
+    const outgoing = isActive ? creature : active.find((c) => c.id === selected)!;
+    const incoming = isActive ? reserves.find((c) => c.id === selected)! : creature;
+    if (send({ type: lineup ? "setLineup" : "swap", activeId: outgoing.id, reserve: incoming.species })) {
+      setSelected(null);
+      close();
+    }
+  };
+  const tile = (creature: Creature, isActive: boolean) => (
+    <CreatureCard
+      key={creature.id}
+      kind={creature.species}
+      actorId={creature.id}
+      actor={creature}
+      health={creature.health}
+      maxHealth={species(creature.species).health}
+      block={creature.block}
+      modifiers={game}
+      cards={game.cards}
+      selected={selected === creature.id}
+      disabled={!lineup && !isActive && creature.health === 0}
+      label={`${species(creature.species).name}, ${isActive ? (lineup ? "starting" : "deployed") : "reserve"}`}
+      onClick={() => choose(creature, isActive)}
+      onInspect={() => inspect({ species: creature.species })}
+    />
+  );
+  return (
+    <>
+      <section aria-labelledby="roster-active-label">
+        <h2 id="roster-active-label">{lineup ? "Starting lineup" : "Deployed"}</h2>
+        <div className="swap-roster" data-nav-row>
+          {active.map((c) => tile(c, true))}
+        </div>
+      </section>
+      <section aria-labelledby="roster-reserve-label">
+        <h2 id="roster-reserve-label">Reserves</h2>
+        <div className="swap-roster swap-reserves" data-nav-row>
+          {reserves.map((c) => tile(c, false))}
+          {Array.from({ length: 2 - reserves.length }, (_, index) => (
+            <div key={index} className="empty-reserve" aria-hidden="true" />
+          ))}
+        </div>
+      </section>
+    </>
+  );
+}

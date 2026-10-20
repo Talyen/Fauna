@@ -55,7 +55,7 @@ describe("mana turn settlement", () => {
     expect(decodeSave(JSON.stringify(legacy))).toEqual(current);
     (legacy.battle as Record<string, unknown>).energy = 0;
     const once = decodeSave(JSON.stringify(legacy));
-    expect(once.version).toBe(3);
+    expect(once.version).toBe(4);
     expect(once.battle!.turn).toBe(2);
     expect(once.battle!.mana).toBe(3);
     expect(decodeSave(encodeSave(once))).toEqual(once);

@@ -37,9 +37,12 @@ export function moveFocus(direction: "left" | "right" | "up" | "down") {
     buttons[0]!.focus();
     return;
   }
-  if (root === document && current.closest(".battle-screen, .team-selection, .talents-screen")) {
+  if (
+    (root === document && current.closest(".battle-screen, .team-selection, .talents-screen")) ||
+    current.closest(".swap-roster")
+  ) {
     const rows = Array.from(
-      document.querySelectorAll<HTMLElement>(".enemy-row, .player-row, .hand, [data-nav-row]"),
+      root.querySelectorAll<HTMLElement>(".enemy-row, .player-row, .hand, [data-nav-row]"),
     ).filter((row) => row.getClientRects().length > 0 && row.querySelector("button"));
     const rowIndex = rows.findIndex((row) => row.contains(current));
     if (rowIndex >= 0) {
