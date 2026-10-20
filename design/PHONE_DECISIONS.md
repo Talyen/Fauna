@@ -100,8 +100,10 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 ## Empty states
 
 - Use an icon only, with no visible message, accompanying action or hover/focus tooltip. Provide an accessible label that describes the empty state.
-- Empty-state icons are 24px.
+- Empty-state icons are 24px and muted gray.
 
 ## Shared preferences
+
+Continue the phone review in batches of independent questions so the user can answer several choices per turn.
 
 Reduced motion makes switch/radio/dialog/progress transitions immediate and disables spatial combat movement. Essential state remains visible without sound. None of these choices authorizes dropping keyboard accessibility, native control behavior, fixed artwork dimensions or the single highlighted-boundary treatment for selected-plus-hovered controls. Fine visual details still need review at a computer.
