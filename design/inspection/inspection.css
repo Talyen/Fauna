@@ -1,0 +1,104 @@
+.inspection-sample-launcher {
+  display: grid;
+  place-items: center;
+  min-height: 100dvh;
+}
+.inspection-review {
+  padding: var(--space-6);
+  padding-top: var(--space-12);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.inspection-review-stacked {
+  width: min(420px, calc(100vw - var(--space-12)));
+}
+.inspection-review-side {
+  width: min(800px, calc(100vw - var(--space-12)));
+}
+.inspection-comparison-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+.inspection-enemy-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--muted-foreground);
+  font-size: var(--text-secondary);
+}
+.inspection-review-composition {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+.inspection-review-composition > .creature-card {
+  width: 320px;
+  max-width: 100%;
+  flex-shrink: 0;
+}
+.inspection-review-side .inspection-review-composition {
+  flex-direction: row;
+  align-items: start;
+  gap: var(--space-6);
+}
+.inspection-review-kit {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 320px;
+  max-width: 100%;
+}
+.inspection-review-health {
+  color: var(--muted-foreground);
+  font-size: var(--text-secondary);
+}
+.inspection-review-passive {
+  font-size: var(--text-body);
+  line-height: 1.4;
+}
+.inspection-review-passive strong {
+  display: block;
+  margin-bottom: var(--space-1);
+}
+.inspection-kit-label {
+  font-size: var(--text-secondary);
+  color: var(--muted-foreground);
+  font-weight: 400;
+}
+.inspection-action-thumbnails {
+  display: grid;
+  grid-template-columns: repeat(3, 96px);
+  gap: var(--space-4);
+}
+.inspection-action-thumbnails .action-card {
+  width: 96px;
+}
+.inspection-review-action {
+  width: min(440px, calc(100vw - var(--space-12)));
+}
+.inspection-action-header {
+  margin-top: calc(-1 * var(--space-6));
+}
+.inspection-enlarged {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.inspection-enlarged > .action-card {
+  width: 216px;
+  align-self: center;
+}
+.inspection-action-navigation {
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 720px) {
+  .inspection-review-side .inspection-review-composition {
+    flex-direction: column;
+    align-items: center;
+  }
+}
