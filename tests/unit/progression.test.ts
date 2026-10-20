@@ -1,3 +1,4 @@
+import { freshCombat } from "../../src/game/combat";
 import { describe, it, expect } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
@@ -104,6 +105,7 @@ describe("keyword progression and rewards", () => {
           species: kind as "silkmoth" | "moonhart",
           health: 20,
           block: 0,
+          combat: freshCombat(),
           attacked: false,
         }));
         d.wins = 1;

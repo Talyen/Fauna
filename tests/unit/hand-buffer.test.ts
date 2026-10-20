@@ -1,3 +1,4 @@
+import { freshCombat } from "../../src/game/combat";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { dispatch } from "../../src/game/engine";
@@ -80,7 +81,14 @@ describe("hidden hand overflow", () => {
   it("preserves buffered card slots and switches their owner during a reserve swap", () => {
     const s = produce(run(), (d) => {
       d.roster.push("silkmoth");
-      d.reserves.push({ id: "recruit-silkmoth", species: "silkmoth", health: 23, block: 0, attacked: false });
+      d.reserves.push({
+        id: "recruit-silkmoth",
+        species: "silkmoth",
+        health: 23,
+        block: 0,
+        combat: freshCombat(),
+        attacked: false,
+      });
       const owned = d.cards.filter((card) => card.ownerId === "ally-1");
       d.battle!.buffer = [owned[0]!.id];
       d.battle!.hand = d.cards

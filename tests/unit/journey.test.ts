@@ -1,3 +1,4 @@
+import { freshCombat } from "../../src/game/combat";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
@@ -79,6 +80,7 @@ describe("journey earnings and results", () => {
         species: kind as "silkmoth" | "briartooth",
         health: species(kind).health,
         block: 0,
+        combat: freshCombat(),
         attacked: false,
       }));
       d.relics = RELICS.map((relic) => relic.id);

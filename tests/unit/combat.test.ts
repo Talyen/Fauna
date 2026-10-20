@@ -226,3 +226,41 @@ describe("combat commands and journey health", () => {
     expect(dispatch(decodeSave(encodeSave(s)), { type: "visitCampfire" }).accepted).toBe(false);
   });
 });
+
+it("rejects current-format saves that lose combat lifetime flags or invent control and Leech sources", () => {
+  const changes: ((state: ReturnType<typeof run>) => void)[] = [
+    (s) => {
+      s.team[0]!.combat = undefined;
+    },
+    (s) => {
+      s.team[0]!.combat!.grace = 2;
+    },
+    (s) => {
+      s.battle!.enemies[0]!.lastAbility = "constructor";
+    },
+    (s) => {
+      s.team[0]!.combat!.cooldown = 4;
+    },
+    (s) => {
+      s.team[0]!.combat!.bleed = 3;
+      s.team[0]!.combat!.bleedLeech = [{ sourceId: "missing", amount: 3 }];
+    },
+  ];
+  for (const change of changes) expect(() => decodeSave(encodeSave(produce(run(), change)))).toThrow();
+});
+
+it("allows Dodge again after the control skip resolves while shared buildup immunity remains", () => {
+  let seed = 1;
+  while (((Math.imul(seed, 1664525) + 1013904223) >>> 0) / 2 ** 32 >= 0.05) seed++;
+  const events: Parameters<typeof hit>[5] = [];
+  const next = produce(run(), (s) => {
+    const enemy = s.battle!.enemies[0]!;
+    enemy.combat.controlled = "freeze";
+    startAction(enemy, events);
+    s.rng = seed;
+    hit(s, s.team[0]!, enemy, 3, "stun", events);
+  });
+  expect(next.battle!.enemies[0]!.health).toBe(18);
+  expect(next.battle!.enemies[0]!.combat.cooldown).toBe(3);
+  expect(events.at(-1)!.text).toContain("Dodges");
+});

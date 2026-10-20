@@ -318,6 +318,7 @@ export function decodeSave(raw: string): GameState {
     invalid(b.mana > b.maxMana);
     invalid(!unique(zones) || zones.some((id) => !s.cards.some((c) => c.id === id)));
     if (s.phase === "battle") {
+      invalid([...s.team, ...s.reserves].some((creature) => !creature.combat));
       const liveCards = s.cards;
       invalid(
         b.mana === 0 ||

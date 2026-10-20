@@ -1,16 +1,11 @@
-import { CombatStatus } from "./combat-status";
 import { enemyInspectionValue } from "../game/rules";
-import { assetUrl } from "./assets";
-import { KeywordText } from "./keyword-text";
 import { useLayoutEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import type { Session } from "../application/session";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../components/ui/dialog";
 import { Button } from "../components/ui/button";
-import { ArtCard } from "./art-card";
 import { ActionCard, CreatureCard } from "./cards";
-import { ActionDetails } from "./card-details";
 import { CARDS, definition, species } from "../game/content";
 import { encounterSource, location } from "../game/destinations";
 import type { Card } from "../game/types";
@@ -157,6 +152,20 @@ export function Inspector({
           returnFocus(opener);
         }}
       >
+        {destination && destinationEnemy === null ? null : (
+          <header className="inspection-back">
+            <Button
+              ref={backButton}
+              variant="ghost"
+              onClick={() => {
+                if (!back()) onClose();
+              }}
+            >
+              <ChevronLeft aria-hidden="true" />
+              Back
+            </Button>
+          </header>
+        )}
         {destination && destinationEnemy === null ? (
           <>
             <DialogTitle>{location(destination)!.name}</DialogTitle>
@@ -194,103 +203,59 @@ export function Inspector({
           </>
         ) : card ? (
           <>
-            {!rootCard ? (
-              <header className="inspection-back">
-                <Button ref={backButton} variant="ghost" onClick={back}>
-                  <ChevronLeft aria-hidden="true" />
-                  Back
-                </Button>
-              </header>
-            ) : null}
             <DialogTitle className="sr-only">{definition(card.definitionId).name} details</DialogTitle>
             <DialogDescription className="sr-only">
-              Action artwork and final effect. Previous and Next browse this species' cards.
+              Action artwork. Hover or focus for the name, Mana cost, and final effects.
             </DialogDescription>
             <ActionCard
               card={card}
               ownerName={creature.name}
               actor={actor}
-              enemy={!!enemy}
-              enemyValue={enemy ? enemyInspectionValue(enemy, definition(card.definitionId)) : undefined}
-              presentation
-              onClick={() => {}}
-            />
-            <ActionDetails
-              card={card}
-              ownerName={creature.name}
               modifiers={enemy ? undefined : game}
               enemy={!!enemy}
-              enemyValue={enemy ? enemyInspectionValue(enemy, definition(card!.definitionId)) : undefined}
-              actor={actor}
+              enemyValue={enemy ? enemyInspectionValue(enemy, definition(card.definitionId)) : undefined}
+              onClick={() => {}}
             />
-            <nav className="inspection-action-navigation" aria-label="Action cards">
-              <Button variant="ghost" size="icon" aria-label="Previous action" onClick={() => cycle(-1)}>
-                <ChevronLeft aria-hidden="true" />
-              </Button>
-              <Button variant="ghost" size="icon" aria-label="Next action" onClick={() => cycle(1)}>
-                <ChevronRight aria-hidden="true" />
-              </Button>
-            </nav>
           </>
         ) : (
           <>
-            {destination ? (
-              <header className="inspection-back">
-                <Button ref={backButton} variant="ghost" onClick={back}>
-                  <ChevronLeft aria-hidden="true" />
-                  Back
-                </Button>
-              </header>
-            ) : null}
-            <DialogTitle>{enemy?.name ?? creature.name}</DialogTitle>
+            <DialogTitle className="sr-only">{enemy?.name ?? creature.name}</DialogTitle>
             <DialogDescription className="sr-only">
-              Creature artwork, current health and effects, passive, and three action cards.
+              Creature artwork and three action cards. Hover or focus for current state, passive, and action
+              effects.
             </DialogDescription>
-            <ArtCard
-              className="inspection-creature-art"
-              aspect="creature"
-              artwork={assetUrl(`creature.${kind}`)}
-              presentation
-              aria-label={enemy?.name ?? creature.name}
+            <CreatureCard
+              kind={kind}
+              name={enemy?.name}
+              health={enemy?.health ?? ally?.health ?? creature.health}
+              maxHealth={enemy?.maxHealth ?? creature.health}
+              block={ally?.block ?? (enemy && "block" in enemy ? (enemy.block as number) : 0)}
+              combat={
+                ally?.combat ??
+                (enemy && "combat" in enemy
+                  ? (enemy.combat as import("../game/types").CombatState)
+                  : undefined)
+              }
+              readout={false}
+              speciesKit
+              label={`${enemy?.name ?? creature.name} details`}
             />
-            <div className="inspection-kit">
-              <p className="inspection-health">
-                {enemy?.health ?? ally?.health ?? creature.health}/{enemy?.maxHealth ?? creature.health}{" "}
-                health
-                {!enemy && ally?.block ? ` · ${ally.block} block` : ""}
-              </p>
-              <CombatStatus
-                combat={
-                  ally?.combat ??
-                  (enemy && "combat" in enemy
-                    ? (enemy.combat as import("../game/types").CombatState)
-                    : undefined)
-                }
-              />
-              {enemy ? <h2 className="inspection-kit-label">Species kit · {creature.name}</h2> : null}
-              <div className="inspection-passive">
-                <strong>{creature.trait}</strong>
-                <p>
-                  <KeywordText text={creature.description} />
-                </p>
-              </div>
-              <div className="inspection-thumbnails" ref={thumbnails} data-nav-row>
-                {cards.map((action, index) => (
-                  <ActionCard
-                    key={action.id}
-                    card={action}
-                    ownerName={creature.name}
-                    actor={actor}
-                    modifiers={enemy ? undefined : game}
-                    enemy={!!enemy}
-                    enemyValue={
-                      enemy ? enemyInspectionValue(enemy, definition(action.definitionId)) : undefined
-                    }
-                    onClick={() => setSelected(index)}
-                    onInspect={() => setSelected(index)}
-                  />
-                ))}
-              </div>
+            <div className="inspection-thumbnails" ref={thumbnails} data-nav-row>
+              {cards.map((action, index) => (
+                <ActionCard
+                  key={action.id}
+                  card={action}
+                  ownerName={creature.name}
+                  actor={actor}
+                  modifiers={enemy ? undefined : game}
+                  enemy={!!enemy}
+                  enemyValue={
+                    enemy ? enemyInspectionValue(enemy, definition(action.definitionId)) : undefined
+                  }
+                  onClick={() => setSelected(index)}
+                  onInspect={() => setSelected(index)}
+                />
+              ))}
             </div>
             {chooseStarter ? (
               <Button

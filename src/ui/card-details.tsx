@@ -1,3 +1,4 @@
+import { CombatStatus } from "./combat-status";
 import { KeywordText } from "./keyword-text";
 import { definition, enemyCard, species, type SpeciesId } from "../game/content";
 import { actionValue, cardFollowups } from "../game/rules";
@@ -67,12 +68,16 @@ export function CreatureDetails({
   health,
   maxHealth,
   block = 0,
+  speciesKit = false,
+  combat,
 }: {
   kind: SpeciesId;
   name?: string;
   health?: number;
   maxHealth?: number;
   block?: number;
+  speciesKit?: boolean;
+  combat?: import("../game/types").CombatState;
 }) {
   const info = species(kind);
   return (
@@ -81,10 +86,15 @@ export function CreatureDetails({
       <p>
         {health ?? info.health}/{maxHealth ?? info.health} health{block ? ` · ${block} block` : ""}
       </p>
-      {!name ? (
-        <p>
-          <KeywordText text={info.description} />
-        </p>
+      <CombatStatus combat={combat} />
+      {!name || speciesKit ? (
+        <>
+          {name && speciesKit ? <strong>Species kit · {info.name}</strong> : null}
+          {speciesKit ? <strong>{info.trait}</strong> : null}
+          <p>
+            <KeywordText text={info.description} />
+          </p>
+        </>
       ) : null}
     </div>
   );

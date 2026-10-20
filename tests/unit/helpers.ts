@@ -1,3 +1,4 @@
+import { freshCombat } from "../../src/game/combat";
 import { controlled } from "../../src/game/combat";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
@@ -21,6 +22,7 @@ export function teamRun(seed: number, kinds: SpeciesId[]) {
       species: kind,
       health: species(kind).health,
       block: 0,
+      combat: freshCombat(),
       attacked: false,
     }));
     d.lineup = d.team.map((c) => c.id);

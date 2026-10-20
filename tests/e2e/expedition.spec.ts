@@ -1,3 +1,4 @@
+import { freshCombat } from "../../src/game/combat";
 import { test, expect, type Page, type Locator } from "@playwright/test";
 import { produce } from "immer";
 import { createGame } from "../../src/game/engine";
@@ -629,6 +630,7 @@ for (const [width, height] of [
         species: kind as "silkmoth" | "briartooth",
         health: 20,
         block: 0,
+        combat: freshCombat(),
         attacked: false,
       }));
       d.keywordXP.fire = 420;
@@ -790,6 +792,7 @@ test("five-card hand with hidden overflow, three enemies and a full bench preser
       species: kind as "silkmoth" | "briartooth",
       health: 20,
       block: 0,
+      combat: freshCombat(),
       attacked: false,
     }));
   });
@@ -1061,6 +1064,7 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
         species: kind as "silkmoth" | "briartooth",
         health: 20,
         block: 0,
+        combat: freshCombat(),
         attacked: false,
       }));
       d.team[1]!.health = 9;
@@ -1135,6 +1139,7 @@ for (const [width, height] of [
         species: kind as "silkmoth" | "briartooth",
         health: 20,
         block: 0,
+        combat: freshCombat(),
         attacked: false,
       }));
     });
@@ -1184,6 +1189,7 @@ test("a fallen deployed row resumes with no playable cards and can recover throu
       species: kind as "silkmoth" | "briartooth",
       health: 20,
       block: 0,
+      combat: freshCombat(),
       attacked: false,
     }));
     d.phase = "teamSelection";
@@ -1235,6 +1241,7 @@ test("recruitment at five requires replacement and updates a released starter's 
       species: kind as "silkmoth" | "moonhart",
       health: 20,
       block: 0,
+      combat: freshCombat(),
       attacked: false,
     }));
   });
@@ -1274,7 +1281,13 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     await activate(page.getByRole("button", { name: "Inspect Emberfox", exact: true }));
     const dialog = page.getByRole("dialog");
     await expect(dialog.locator(".inspection-thumbnails .action-card")).toHaveCount(3);
-    await expect(dialog.getByText("Kindling", { exact: true })).toBeVisible();
+    await expect(dialog.locator(".card-details")).toHaveCount(0);
+    const reveal = async (el: Locator) => {
+      if (input === "mouse") await el.hover();
+      else await el.focus();
+    };
+    await reveal(dialog.locator(".creature-card"));
+    await expect(page.getByRole("tooltip")).toContainText("Kindling");
     const thumbs = dialog.locator(".inspection-thumbnails .action-card");
     if (input === "mouse") {
       await thumbs.first().hover();
@@ -1287,11 +1300,17 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     }
     await expect(page.locator(".inspection")).toHaveCount(1);
     await expect(dialog.getByRole("button", { name: "Back", exact: true })).toBeFocused();
-    await expect(dialog.locator(".card-details > strong")).toHaveText("Cinder Strike");
-    if (input === "mouse") await dialog.getByRole("button", { name: "Next action" }).click();
-    else if (press) await press(15);
+    await expect(dialog.locator(".card-details")).toHaveCount(0);
+    await expect(dialog.getByRole("button", { name: /Previous action|Next action/ })).toHaveCount(0);
+    await reveal(dialog.locator(".action-card"));
+    await expect(page.getByRole("tooltip")).toContainText("Cinder Strike");
+    if (input === "mouse") {
+      await dialog.getByRole("button", { name: "Back", exact: true }).click();
+      await thumbs.nth(1).click();
+    } else if (press) await press(15);
     else await page.keyboard.press("d");
-    await expect(dialog.locator(".card-details > strong")).toHaveText("Warm Embers");
+    await reveal(dialog.locator(".action-card"));
+    await expect(page.getByRole("tooltip")).toContainText("Warm Embers");
     if (input === "mouse") await dialog.getByRole("button", { name: "Back", exact: true }).click();
     else if (press) await press(1);
     else await page.keyboard.press("Escape");
@@ -1319,15 +1338,13 @@ for (const [width, height] of [
     await expect(page.getByRole("tooltip")).not.toContainText("Bramble Bash");
     await page.getByRole("button", { name: "Inspect Bramble Imp", exact: true }).click();
     const dialog = page.getByRole("dialog");
-    await expect(
-      dialog.getByRole("heading", { name: "Species kit · Briartooth", exact: true }),
-    ).toBeVisible();
-    await expect(
-      dialog.getByText(
-        "Start each battle with 2 Thorns. When an attack removes Health, retaliate with current Thorns, then lose 1 stack.",
-        { exact: true },
-      ),
-    ).toBeVisible();
+    await expect(dialog.locator(".card-details")).toHaveCount(0);
+    await dialog.locator(".creature-card").hover();
+    await expect(page.getByRole("tooltip")).toContainText("Bramble Imp");
+    await expect(page.getByRole("tooltip")).toContainText("Species kit · Briartooth");
+    await expect(page.getByRole("tooltip")).toContainText(
+      "Start each battle with 2 Thorns. When an attack removes Health, retaliate with current Thorns, then lose 1 stack.",
+    );
     await dialog
       .locator("img")
       .evaluateAll((imgs) => Promise.all(imgs.map((img) => (img as HTMLImageElement).decode())));

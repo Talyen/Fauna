@@ -30,6 +30,7 @@ type CreatureProps = {
   readout?: boolean;
   invalidTarget?: boolean;
   combat?: import("../game/types").CombatState;
+  speciesKit?: boolean;
 };
 export function CreatureCard({
   kind,
@@ -52,6 +53,7 @@ export function CreatureCard({
   readout = true,
   invalidTarget = false,
   combat,
+  speciesKit = false,
 }: CreatureProps) {
   const [tooltipOpen, setTooltipOpen] = useState(false);
   useEffect(() => {
@@ -101,7 +103,15 @@ export function CreatureCard({
         <Tooltip open={tooltips && tooltipOpen} onOpenChange={(open) => setTooltipOpen(tooltips && open)}>
           <TooltipTrigger asChild>{artwork}</TooltipTrigger>
           <TooltipContent side={enemyId ? "bottom" : "top"} sideOffset={enemyId && readout ? 44 : 8}>
-            <CreatureDetails kind={kind} name={name} health={health} maxHealth={maxHealth} block={block} />
+            <CreatureDetails
+              kind={kind}
+              name={name}
+              health={health}
+              maxHealth={maxHealth}
+              block={block}
+              speciesKit={speciesKit}
+              combat={combat}
+            />
           </TooltipContent>
         </Tooltip>
       )}
@@ -110,7 +120,7 @@ export function CreatureCard({
       ) : readout && health !== undefined && (actorId || enemyId) ? (
         <BattleReadout health={health} maxHealth={maxHealth ?? info.health} block={block} />
       ) : null}
-      <CombatStatus combat={combat} />
+      {readout ? <CombatStatus combat={combat} /> : null}
       {feedback}
     </div>
   );

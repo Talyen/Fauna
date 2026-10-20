@@ -1,3 +1,4 @@
+import { freshCombat } from "../../src/game/combat";
 import { combat, hit } from "../../src/game/combat";
 import { assetUrl } from "../../src/ui/assets";
 import { ActionCard } from "../../src/ui/cards";
@@ -210,7 +211,14 @@ describe("player interface", () => {
       d.team[1]!.health = 19;
       d.team[1]!.block = 4;
       d.roster.push("mossback");
-      d.reserves.push({ id: "reserve-copy", species: "mossback", health: 11, block: 2, attacked: false });
+      d.reserves.push({
+        id: "reserve-copy",
+        species: "mossback",
+        health: 11,
+        block: 2,
+        combat: freshCombat(),
+        attacked: false,
+      });
     });
     localStorage.setItem("fauna.save.v1", JSON.stringify(game));
     const session = createSession(createBrowserPlatform(localStorage), 7);
@@ -226,13 +234,15 @@ describe("player interface", () => {
         document.querySelector<HTMLButtonElement>(`.player-row [data-actor-id="${id}"] button`)!.focus(),
       );
       await user.keyboard("i");
-      expect(document.querySelector(".inspection-health")!.textContent).toBe(expected);
+      await user.tab();
+      expect((await screen.findByRole("tooltip")).textContent).toContain(expected);
       await user.keyboard("{Escape}");
     }
     await user.click(screen.getByRole("button", { name: "Swap" }));
     act(() => screen.getByRole("button", { name: "Mossback, reserve" }).focus());
     await user.keyboard("i");
-    expect(document.querySelector(".inspection-health")!.textContent).toBe("11/32 health · 2 block");
+    await user.tab();
+    expect((await screen.findByRole("tooltip")).textContent).toContain("11/32 health · 2 block");
     expect(session.store.getState().game).toEqual(game);
     await session.dispose();
   });

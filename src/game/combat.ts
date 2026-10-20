@@ -141,7 +141,7 @@ export function hit(
   const stats = combat(target),
     offense = combat(source),
     before = target.health;
-  if (attack && !controlled(target) && roll(state) < Math.min(75, 5 + stats.dodge) / 100) {
+  if (attack && !stats.controlled && roll(state) < Math.min(75, 5 + stats.dodge) / 100) {
     events.push({ kind: "status", targetId: target.id, text: `${unitName(target)} Dodges.` });
     if (!("maxHealth" in target))
       state.battleXP.dodge = Math.min(STACK_LIMIT, (state.battleXP.dodge ?? 0) + 1);

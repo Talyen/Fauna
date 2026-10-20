@@ -1,3 +1,4 @@
+import { freshCombat } from "../../src/game/combat";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { combat } from "../../src/game/combat";
@@ -15,6 +16,7 @@ export function withReserves() {
         species: kind,
         health: species(kind).health,
         block: 0,
+        combat: freshCombat(),
         attacked: false,
       });
     }
