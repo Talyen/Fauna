@@ -5,7 +5,10 @@ import { encodeSave } from "../../src/game/save";
 async function seed(page: Page, initial: string, scale: string) {
   await page.addInitScript(
     ({ initial, scale }) => {
-      localStorage.setItem("fauna.save.v1", initial);
+      if (!sessionStorage.getItem("fauna.review.seeded")) {
+        localStorage.setItem("fauna.save.v1", initial);
+        sessionStorage.setItem("fauna.review.seeded", "true");
+      }
       localStorage.setItem("fauna.text-scale", scale);
       localStorage.setItem("fauna.audio.v1", JSON.stringify({ enabled: false }));
     },
@@ -123,4 +126,29 @@ test("development skip wins once through normal rewards", async ({ page }) => {
   await page.getByRole("button", { name: "Open menu" }).click();
   await expect(page.getByRole("button", { name: "Skip combat", exact: true })).toHaveCount(0);
   await page.screenshot({ path: "reports/dev-skip.png" });
+});
+
+test("manual zero-Mana turns resume without losing the battle", async ({ page }) => {
+  const initial = produce(victoryReady(), (draft) => {
+    draft.battle!.mana = 1;
+    draft.battle!.enemies.forEach((enemy) => {
+      enemy.health = enemy.maxHealth;
+      enemy.combat.controlled = null;
+    });
+  });
+  await page.addInitScript(() => localStorage.setItem("fauna.auto-end-turn", "false"));
+  await seed(page, encodeSave(initial), "1");
+  await page.locator(`[data-card-id=${JSON.stringify(initial.battle!.hand[0])}]`).click();
+  await page.locator('[data-actor-id="enemy-0"] .creature-card').click();
+  await expect
+    .poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).battle.mana))
+    .toBe(0);
+  await page.locator(".app[data-save-status=saved]").waitFor();
+  await page.reload();
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
+  await page.getByRole("button", { name: "End turn", exact: true }).click();
+  await expect
+    .poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).battle.turn))
+    .toBe(initial.battle!.turn + 1);
 });

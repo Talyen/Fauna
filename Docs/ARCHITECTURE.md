@@ -36,7 +36,7 @@ Desktop window close and application quit request a renderer flush first. The se
 
 The [contribution workflow](../CONTRIBUTING.md#worktrees-and-integration) owns worktree creation, the shared integration lock, combined-diff verification and retained-checkout policy. [Script owners](../scripts/README.md) locate the implementation. Integration is local evidence only; CI and release checks remain separate.
 
-With Auto-end turn enabled (the default), spending the final Mana resolves the enemy turn inside the same command and revision. The play command records its effective preference. Disabling it retains the player turn at zero Mana; normal victory/defeat settlement remains immediate. Preview resolution is independent of this setting. Victory takes precedence over automatic turn advancement. Card previews run the same card-effect resolution without settling battle rewards, advancing the enemy turn, or publishing/saving the preview state. This retains the final enemy health forecast even when committing the card will advance directly to destinations.
+With Auto-end turn enabled (the default), spending the final Mana resolves the enemy turn inside the same command and revision. The play command records its effective preference. Disabling it retains a saveable and resumable player turn at zero Mana; normal victory/defeat settlement remains immediate. Preview resolution is independent of this setting. Victory takes precedence over automatic turn advancement. Card previews run the same card-effect resolution without settling battle rewards, advancing the enemy turn, or publishing/saving the preview state. This retains the final enemy health forecast even when committing the card will advance directly to destinations.
 
 ## Keyword foundation
 

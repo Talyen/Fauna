@@ -31,6 +31,7 @@ describe("combat controls", () => {
     });
     const manual = dispatch(ordinary, command).state;
     expect(manual.battle!.mana).toBe(0);
+    expect(decodeSave(encodeSave(manual))).toEqual(manual);
     expect(manual.battle!.turn).toBe(ordinary.battle!.turn);
     expect(dispatch(ordinary, { ...command, autoEndTurn: true }).state.battle!.turn).toBe(
       ordinary.battle!.turn + 1,
