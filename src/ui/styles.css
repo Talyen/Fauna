@@ -407,29 +407,65 @@ button {
   overflow: auto;
 }
 .inspection {
-  width: min(460px, calc(100vw - 48px));
+  width: min(420px, calc(100vw - var(--space-12)));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
 }
-.inspection > .creature-wrap {
-  width: 100%;
-  max-width: 360px;
+.inspection-creature-art {
+  width: 320px;
+  max-width: 100%;
   margin: auto;
+}
+.inspection-kit {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 320px;
+  max-width: 100%;
+  margin: auto;
+}
+.inspection-health,
+.inspection-kit-label {
+  color: var(--muted-foreground);
+  font-size: var(--text-secondary);
+  font-weight: 400;
+}
+.inspection-passive {
+  line-height: 1.4;
+}
+.inspection-passive strong {
+  display: block;
+  margin-bottom: var(--space-1);
+}
+.inspection-thumbnails {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+.inspection-thumbnails .action-card {
+  width: 100%;
 }
 .inspection > .action-card {
-  width: 200px;
+  width: 216px;
+  max-width: 100%;
   margin: auto;
 }
-.inspection > .card-details {
-  margin-top: var(--space-4);
+.inspection.single-card {
+  width: min(440px, calc(100vw - var(--space-12)));
 }
 .inspection .card-details {
   --text-rule: var(--text-inspection);
   font-size: var(--text-inspection);
 }
-.trait-description {
-  color: var(--muted-foreground);
-  font-size: var(--text-secondary);
-  margin-top: var(--space-3);
+.inspection-back {
+  margin-top: calc(-1 * var(--space-6));
 }
+.inspection-action-navigation {
+  display: flex;
+  justify-content: space-between;
+}
+
 .team-selection {
   --selection-card: min(360px, calc((100dvh - 284px) * 4 / 8.16));
   min-height: calc(100dvh - 48px);

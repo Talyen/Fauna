@@ -25,9 +25,6 @@ type CreatureProps = {
   onPreview?: () => void;
   preview?: ReactNode;
   feedback?: ReactNode;
-  cards?: readonly Card[];
-  actor?: Creature;
-  modifiers?: GameState;
   tooltips?: boolean;
   readout?: boolean;
   invalidTarget?: boolean;
@@ -50,11 +47,8 @@ export function CreatureCard({
   onPreview,
   preview,
   feedback,
-  cards,
-  actor,
   tooltips = true,
   readout = true,
-  modifiers,
   invalidTarget = false,
 }: CreatureProps) {
   const [tooltipOpen, setTooltipOpen] = useState(false);
@@ -112,9 +106,6 @@ export function CreatureCard({
               maxHealth={maxHealth}
               block={block}
               marks={marks}
-              cards={cards}
-              actor={actor}
-              modifiers={modifiers}
             />
           </TooltipContent>
         </Tooltip>
@@ -136,7 +127,6 @@ export function AllyCard({
   return (
     <CreatureCard
       actorId={creature.id}
-      actor={creature}
       kind={creature.species}
       health={creature.health}
       block={creature.block}

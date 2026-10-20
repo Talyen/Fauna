@@ -263,12 +263,7 @@ function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?
               </TooltipTrigger>
               {!selected ? (
                 <TooltipContent>
-                  <CreatureDetails
-                    kind={creature.species}
-                    actor={creature}
-                    health={creature.health}
-                    block={creature.block}
-                  />
+                  <CreatureDetails kind={creature.species} health={creature.health} block={creature.block} />
                 </TooltipContent>
               ) : null}
             </Tooltip>

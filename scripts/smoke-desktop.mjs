@@ -31,6 +31,14 @@ try {
   await window.getByRole("button", { name: "Begin battle" }).click();
   await window.getByRole("main", { name: "Battlefield" }).waitFor();
   await window.locator('.app[data-save-status="saved"]').waitFor();
+  await window.getByRole("button", { name: "Inspect Mossback", exact: true }).click();
+  await window.locator(".inspection-thumbnails .action-card").first().waitFor();
+  if ((await window.locator(".inspection-thumbnails .action-card").count()) !== 3)
+    throw new Error("Creature inspection did not expose three portrait actions.");
+  await window.locator(".inspection-thumbnails .action-card").first().click();
+  await window.getByRole("button", { name: "Next action", exact: true }).click();
+  await window.getByRole("button", { name: "Back", exact: true }).click();
+  await window.getByRole("button", { name: "Close inspection", exact: true }).click();
   // Exercise free swaps through the actual renderer and version-four desktop storage.
   await window.evaluate(async () => {
     const state = JSON.parse((await window.faunaDesktop.readCandidates())[0].data);
@@ -133,7 +141,7 @@ try {
   if (audioState !== "running") throw new Error(`Controller-only desktop audio is blocked: ${audioState}`);
   success = true;
   console.log(
-    "Desktop startup, draft, free swaps, lineup persistence, last-mana automatic turn quit/resume, and renderer isolation passed.",
+    "Desktop startup, draft, stacked inspection/action browsing, free swaps, lineup persistence, last-mana automatic turn quit/resume, and renderer isolation passed.",
   );
 } finally {
   if (app && !success) app.process().kill("SIGKILL");

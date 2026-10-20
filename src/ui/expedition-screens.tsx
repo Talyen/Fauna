@@ -60,7 +60,6 @@ export function Draft({ game, send, inspect }: Props) {
           <CreatureCard
             key={s.id}
             kind={s.id}
-            modifiers={game}
             selected={game.selected.includes(s.id)}
             disabled={game.selected.length === 3 && !game.selected.includes(s.id)}
             onClick={() => send({ type: "draft", species: s.id })}
@@ -140,7 +139,6 @@ export function Rewards({ game, send, inspect }: Props) {
               <CreatureCard
                 key={kind}
                 kind={kind}
-                modifiers={game}
                 label={incoming ? `Release ${species(kind).name}` : `Recruit ${species(kind).name}`}
                 onInspect={() => inspect({ species: kind })}
                 onClick={() => {
@@ -331,7 +329,6 @@ export function Collection({
             <CreatureCard
               key={creature.id}
               kind={creature.id}
-              modifiers={game}
               onClick={() => inspect({ species: creature.id })}
               onInspect={() => inspect({ species: creature.id })}
               label={`Inspect ${creature.name}`}

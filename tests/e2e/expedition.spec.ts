@@ -167,7 +167,7 @@ test("recruitment adds a reserve, selection swaps its kit, and remembers active 
     reserve = page.getByRole("button", { name: "Briartooth, reserve", exact: true });
   await reserve.focus();
   await page.keyboard.press("i");
-  await expect(page.getByRole("dialog", { name: "Briartooth details" })).toBeVisible();
+  await expect(page.getByRole("dialog", { name: "Briartooth", exact: true })).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(reserve).toBeFocused();
   await active.focus();
@@ -995,3 +995,96 @@ test("recruitment at five requires replacement and updates a released starter's 
   await resume(page);
   expect((await state(page)).lineup).toEqual(recruited.lineup);
 });
+
+for (const input of ["mouse", "keyboard", "controller"] as const)
+  test(`stacked creature inspection browses action cards in one dialog with ${input}`, async ({ page }) => {
+    const press = input === "controller" ? await gamepad(page) : null;
+    const fixture = run(7);
+    await seed(page, fixture);
+    await resume(page);
+    const activate = async (el: Locator) => {
+      if (input === "mouse") await el.click();
+      else {
+        await el.focus();
+        if (press) await press(0);
+        else await page.keyboard.press("Enter");
+      }
+    };
+    await activate(page.getByRole("button", { name: "Inspect Emberfox", exact: true }));
+    const dialog = page.getByRole("dialog");
+    await expect(dialog.locator(".inspection-thumbnails .action-card")).toHaveCount(3);
+    await expect(dialog.getByText("Kindling", { exact: true })).toBeVisible();
+    const thumbs = dialog.locator(".inspection-thumbnails .action-card");
+    if (input === "mouse") {
+      await thumbs.first().hover();
+      await expect(page.getByRole("tooltip")).toContainText("Cinder Strike");
+      await thumbs.first().click();
+    } else {
+      await thumbs.first().focus();
+      if (press) await press(2);
+      else await page.keyboard.press("i");
+    }
+    await expect(page.locator(".inspection")).toHaveCount(1);
+    await expect(dialog.getByRole("button", { name: "Back", exact: true })).toBeFocused();
+    await expect(dialog.locator(".card-details > strong")).toHaveText("Cinder Strike");
+    if (input === "mouse") await dialog.getByRole("button", { name: "Next action" }).click();
+    else if (press) await press(15);
+    else await page.keyboard.press("d");
+    await expect(dialog.locator(".card-details > strong")).toHaveText("Warm Embers");
+    if (input === "mouse") await dialog.getByRole("button", { name: "Back", exact: true }).click();
+    else if (press) await press(1);
+    else await page.keyboard.press("Escape");
+    await expect(dialog.locator(".inspection-thumbnails .action-card").nth(1)).toBeFocused();
+    if (input === "mouse") await dialog.getByRole("button", { name: "Close inspection" }).click();
+    else if (press) await press(1);
+    else await page.keyboard.press("Escape");
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Inspect Emberfox", exact: true })).toBeFocused();
+    expect(await state(page)).toEqual(fixture);
+  });
+
+for (const [width, height] of [
+  [1280, 800],
+  [1920, 1080],
+] as const)
+  test(`inspection preserves artwork ratios, enemy kit separation, and fit at ${width}×${height}`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height });
+    await seed(page, run(7));
+    await resume(page);
+    await page.locator(".player-row .creature-card").first().hover();
+    await expect(page.getByRole("tooltip")).toContainText("Guard cards grant 2 extra block.");
+    await expect(page.getByRole("tooltip")).not.toContainText("Bramble Bash");
+    await page.getByRole("button", { name: "Inspect Bramble Imp", exact: true }).click();
+    const dialog = page.getByRole("dialog");
+    await expect(
+      dialog.getByRole("heading", { name: "Species kit · Briartooth", exact: true }),
+    ).toBeVisible();
+    await expect(
+      dialog.getByText("When hit, deal 2 damage back to the attacker.", { exact: true }),
+    ).toBeVisible();
+    await dialog
+      .locator("img")
+      .evaluateAll((imgs) => Promise.all(imgs.map((img) => (img as HTMLImageElement).decode())));
+    await page.mouse.move(0, 0);
+    await fits(page);
+    const root = (await dialog.boundingBox())!;
+    expect(root.y).toBeGreaterThanOrEqual(0);
+    expect(root.y + root.height).toBeLessThanOrEqual(height);
+    const creature = (await dialog.locator(".creature-card").boundingBox())!;
+    expect(Math.abs(creature.width / creature.height - 4 / 3)).toBeLessThan(0.01);
+    for (const thumb of await dialog.locator(".action-card").all()) {
+      const bounds = (await thumb.boundingBox())!;
+      expect(Math.abs(bounds.width / bounds.height - 3 / 4)).toBeLessThan(0.01);
+      expect(await thumb.textContent()).toBe("");
+    }
+    await page.screenshot({ path: `reports/inspection/live-creature-${width}.png` });
+    await dialog.locator(".action-card").first().click();
+    const portrait = (await dialog.locator(".action-card").boundingBox())!;
+    expect(Math.abs(portrait.width / portrait.height - 3 / 4)).toBeLessThan(0.01);
+    await page.screenshot({ path: `reports/inspection/live-action-${width}.png` });
+    await page.keyboard.press("Escape");
+    await page.mouse.click(5, 5);
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+  });

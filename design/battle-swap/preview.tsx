@@ -104,7 +104,6 @@ function Preview() {
         actorId={creature.id}
         health={creature.health}
         maxHealth={species(creature.species).health}
-        actor={creature}
         block={creature.block}
         selected={selected === creature.id}
         disabled={!active && creature.health === 0}

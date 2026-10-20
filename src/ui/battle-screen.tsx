@@ -186,7 +186,6 @@ export function BattleScreen({
             key={enemy.id}
             enemy={enemy}
             invalidTarget={!!selected && (!enemyTarget || enemy.health <= 0)}
-            modifiers={game}
             onPreview={() => {
               if (selected && enemyTarget && enemy.health > 0) setTarget(enemy.id);
             }}
@@ -229,8 +228,6 @@ export function BattleScreen({
           <AllyCard
             key={creature.id}
             creature={creature}
-            modifiers={game}
-            cards={game.cards}
             selected={card?.ownerId === creature.id}
             invalidTarget={
               !!selected && ((!allyTarget && def?.effect !== "teamGuard") || creature.health <= 0)

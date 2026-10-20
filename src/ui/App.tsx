@@ -57,7 +57,8 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
   const view = useStore(session.store),
     game = view.game;
   const root = useRef<HTMLDivElement>(null),
-    gameControls: Controls = useRef(null);
+    gameControls: Controls = useRef(null),
+    inspectionControls: Controls = useRef(null);
   const [route, setRoute] = useState<Route>("home"),
     [menu, setMenu] = useState(false),
     [modal, setModal] = useState<Modal>(null),
@@ -108,6 +109,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     if (origin.current === "play") setMenu(true);
   };
   const input = (action: InputAction) => {
+    if (inspection && inspectionControls.current?.(action)) return;
     if (action === "back") {
       if (inspection) {
         setInspection(null);
@@ -365,7 +367,12 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
             </>
           ) : null}
           {inspection ? (
-            <Inspector item={inspection} session={session} onClose={() => setInspection(null)} />
+            <Inspector
+              item={inspection}
+              session={session}
+              controls={inspectionControls}
+              onClose={() => setInspection(null)}
+            />
           ) : null}
         </DialogContent>
       </Dialog>
@@ -404,7 +411,12 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
         </AlertDialogContent>
       </AlertDialog>
       {!modal && inspection ? (
-        <Inspector item={inspection} session={session} onClose={() => setInspection(null)} />
+        <Inspector
+          item={inspection}
+          session={session}
+          controls={inspectionControls}
+          onClose={() => setInspection(null)}
+        />
       ) : null}
     </>
   );

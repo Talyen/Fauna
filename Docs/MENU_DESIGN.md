@@ -9,7 +9,7 @@ Implemented direction from the design review.
 - Talents opens full screen from the menu. Back/Escape returns to the pause menu while preserving the expedition and its prior screen.
 - Collection is a main-menu destination for reviewing permanently unlocked species, passives and action cards. It is separate from the expedition roster.
 - Locked species show grayscale artwork, no unlock requirement, and no hover tooltip.
-- Clicking an unlocked species opens the centered inspection dialog for its passive and action cards.
+- Clicking an unlocked species opens the centered stacked inspection dialog: creature artwork, passive, and three portrait action thumbnails. Hover/focus shows final rules; selecting a thumbnail opens its enlarged view in the same dialog. A/D or Previous/Next cycles actions. Back/Escape returns to the species and its current thumbnail.
 - Collection lists unlocked species first, followed by locked species.
 - Lineup is an optional centered dialog available from the menu between battles, including ordinary reward screens. It edits the saved starting three; combat swaps leave that preference unchanged. There is no mandatory team-selection destination.
 - Settings and Glossary open as centered dialogs; closing them returns to the menu.

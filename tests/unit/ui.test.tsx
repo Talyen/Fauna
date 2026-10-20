@@ -125,3 +125,13 @@ it("keeps unavailable cards inspectable and denies activation without explanator
   await userEvent.pointer({ target: button, keys: "[MouseRight]" });
   expect(inspect).toHaveBeenCalledOnce();
 });
+
+it("keeps creature hover details compact while retaining health, effects and the passive", async () => {
+  const { CreatureDetails } = await import("../../src/ui/card-details");
+  render(<CreatureDetails kind="mossback" health={17} block={4} marks={2} />);
+  expect(screen.getByText("17/32 health · 4 block · 2 marks")).toBeTruthy();
+  expect(screen.getByText("Guard cards grant 2 extra block.")).toBeTruthy();
+  expect(screen.queryByText(/Bramble Bash/)).toBeNull();
+  expect(screen.queryByText(/Shelter/)).toBeNull();
+  expect(screen.queryByText(/Forest Mantle/)).toBeNull();
+});

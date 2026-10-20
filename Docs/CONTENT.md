@@ -9,7 +9,7 @@ The first five species begin unlocked. Moonhart unlocks after the first expediti
 - **Creature cards: 4:3 landscape, full bleed.** Current placeholders are 800 × 600 SVGs.
 - **Action cards: 3:4 portrait, full bleed.** Current placeholders are 600 × 800 SVGs.
 
-These are separate compositions, not crops of one format into another. Replace the matching files in `public/art/` while retaining their names, or update the owning UI asset references together. Images use their native aspect ratio with no stretching. All text is rendered by the UI, not baked into artwork. Cards contain no text or UI overlays; names, stats and rules live in hover/focus details and centered inspection. Inspection renders the complete action card larger.
+These are separate compositions, not crops of one format into another. Replace the matching files in `public/art/` while retaining their names, or update the owning UI asset references together. Images use their native aspect ratio with no stretching. All text is rendered by the UI, not baked into artwork. Cards contain no text or UI overlays; names, stats and rules live in hover/focus details and centered inspection. Stacked inspection presents three portrait action thumbnails under the creature and passive. Selecting a thumbnail enlarges the complete action card in the same dialog, with Previous/Next cycling. Compact creature tooltips no longer list actions; enemy inspection labels collectible kit separately from battle state.
 
 The initial asset set was authored by `scripts/create-placeholders.mjs`. Running it intentionally rewrites all placeholder SVGs; do not run it over production art. Mana UI sprites were adapted from Alchemy; no creature artwork or fonts were copied from Alchemy.
 

@@ -1,4 +1,4 @@
-import { CARDS, definition, species, type SpeciesId } from "../game/content";
+import { definition, species, type SpeciesId } from "../game/content";
 import { actionValue, cardFollowups } from "../game/rules";
 import type { Creature, Card, GameState } from "../game/types";
 import { CardRules } from "./combat-values";
@@ -57,9 +57,6 @@ export function CreatureDetails({
   maxHealth,
   block = 0,
   marks = 0,
-  cards,
-  actor,
-  modifiers,
 }: {
   kind: SpeciesId;
   name?: string;
@@ -67,9 +64,6 @@ export function CreatureDetails({
   maxHealth?: number;
   block?: number;
   marks?: number;
-  cards?: readonly Card[];
-  actor?: Creature;
-  modifiers?: GameState;
 }) {
   const info = species(kind);
   return (
@@ -79,32 +73,7 @@ export function CreatureDetails({
         {health ?? info.health}/{maxHealth ?? info.health} health{block ? ` · ${block} block` : ""}
         {marks ? ` · ${marks} marks` : ""}
       </p>
-      {!name && (
-        <>
-          <p>{info.description}</p>
-          {CARDS.filter((c) => c.species === kind).map((c) => {
-            const level = cards?.find((card) => card.definitionId === c.id)?.level ?? 0;
-            return (
-              <div key={c.id}>
-                <strong>
-                  {c.name}
-                  {level ? ` +${level}` : ""} · {c.cost} mana
-                </strong>
-                <CardRules
-                  card={c}
-                  level={level}
-                  value={actionValue(
-                    { id: c.id, definitionId: c.id, ownerId: kind, level },
-                    actor ?? { species: kind, attacked: false },
-                    modifiers,
-                  )}
-                />
-                <Followups card={{ definitionId: c.id }} modifiers={modifiers} />
-              </div>
-            );
-          })}
-        </>
-      )}
+      {!name ? <p>{info.description}</p> : null}
     </div>
   );
 }
