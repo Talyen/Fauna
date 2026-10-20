@@ -51,7 +51,7 @@ describe("combat controls", () => {
     expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
     expect(dispatch(result.state, { type: "devWinBattle" }, true).accepted).toBe(false);
   });
-  it("dev intermediate-boss victories offer normal relics and recovery swaps cannot cycle", () => {
+  it("dev intermediate-boss victories offer normal boons and recovery swaps cannot cycle", () => {
     const defeated = bossReward();
     const ready = produce(defeated, (d) => {
       d.phase = "battle";
@@ -61,8 +61,8 @@ describe("combat controls", () => {
       });
     });
     const won = dispatch(ready, { type: "devWinBattle" }, true);
-    expect(won.state.phase).toBe("relic");
-    expect(won.state.reward!.relics).toHaveLength(3);
+    expect(won.state.phase).toBe("boon");
+    expect(won.state.reward!.boons).toHaveLength(3);
     const state = produce(run(), (d) => {
       const reserve = d.team.pop()!;
       d.reserves = [reserve];

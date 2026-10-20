@@ -78,9 +78,9 @@ export const GLOSSARY = [
       "Your original draft supplies the starting three. Edit Lineup from the menu between battles if desired. Combat swaps do not change this saved lineup. New recruits join reserves; Begin battle deploys your saved three without asking you to choose again.",
   },
   {
-    term: "Relics",
+    term: "Boons",
     definition:
-      "Passive effects lasting for the current journey. When offered, choose one of three or skip. Relics end with the journey.",
+      "Passive effects lasting for the current journey. When offered, choose one of three or skip. Boons end with the journey.",
   },
   {
     term: "Currency",

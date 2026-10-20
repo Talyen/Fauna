@@ -1,9 +1,10 @@
 import { freeze, produce } from "immer";
-import { KEYWORDS, RELICS, cardKeywords, canBuyTalent, hasTalent } from "./progression";
+import { KEYWORDS, BOONS, cardKeywords, canBuyTalent, hasTalent } from "./progression";
 import {
   combat,
   freshCombat,
   grantStatus,
+  grantBlock,
   hit,
   restoreHealth,
   removeEffects,
@@ -15,14 +16,14 @@ import {
   TURN_DRAW,
   HAND_LIMIT,
 } from "./combat";
-import { actionValue, cardFollowups, enemyAbilityValue } from "./rules";
+import { actionValue, cardCost, enemyAbilityValue } from "./rules";
 import { CARDS, INITIAL_SPECIES, definition, species, enemyCard } from "./content";
 import { BIOMES, bossEncounter, encounterSource, finalEncounter, location } from "./destinations";
 import type { Card, Command, CommandResult, GameEvent, GameState } from "./types";
 export function createGame(seed = 1): GameState {
   return freeze(
     {
-      version: 12,
+      version: 13,
       discovery: { encountered: [], recruited: [] },
       revision: 0,
       rng: seed >>> 0,
@@ -37,7 +38,7 @@ export function createGame(seed = 1): GameState {
       battleXP: {},
       talents: [],
       currency: 0,
-      relics: [],
+      boons: [],
       reward: null,
       journey: null,
       team: [],
@@ -128,19 +129,15 @@ export function beginBattle(state: GameState) {
   for (const c of [...state.team, ...state.reserves]) {
     c.combat = freshCombat();
     if (c.species === "briartooth" && state.team.includes(c)) c.combat.thorns = 2;
-    c.block =
-      (state.team.includes(c) && c.species === "moonhart" ? 4 : 0) +
-      (state.team.includes(c) && state.relics.includes("river-shell") ? 3 : 0);
-    for (const keyword of KEYWORDS)
-      if (
-        state.team.includes(c) &&
-        hasTalent(state, keyword, "opening") &&
-        state.cards.some((card) => card.ownerId === c.id && cardKeywords(card).includes(keyword))
-      )
-        c.block += 2;
+    c.block = 0;
+    if (state.team.includes(c)) {
+      if (hasTalent(state, "armor.bulwark")) c.combat.armor = 2;
+      if (c.species === "moonhart") grantBlock(state, c, 4, []);
+    }
     c.attacked = false;
   }
   state.battle = {
+    freeBurnUsed: false,
     turn: 1,
     mana: TURN_MANA,
     maxMana: TURN_MANA,
@@ -165,7 +162,18 @@ export function beginBattle(state: GameState) {
     })),
   };
   state.phase = "battle";
-  draw(state, TURN_DRAW + (state.relics.includes("wind-feather") ? 1 : 0));
+  draw(state, TURN_DRAW + (state.boons.includes("tattered-pages") ? 1 : 0));
+  if (hasTalent(state, "nature.ecosystem")) {
+    const index = state.battle.draw.findLastIndex((id) => {
+      const def = definition(state.cards.find((card) => card.id === id)!.definitionId);
+      return def.effect === "attack" && def.damageType === "nature";
+    });
+    if (index >= 0) {
+      const id = state.battle.draw.splice(index, 1)[0]!;
+      if (state.battle.hand.length < MAX_HAND_SIZE) state.battle.hand.push(id);
+      else state.battle.buffer.push(id);
+    }
+  }
   state.reward = null;
   state.battleXP = {};
   intents(state);
@@ -203,12 +211,12 @@ function finishBattle(state: GameState, defeated: boolean) {
       state.journey?.unlocks.push("moonhart");
     }
   }
-  const relics =
+  const boons =
     defeated || outcome === "victory" || !bossEncounter(state)
       ? []
       : shuffle(
           state,
-          RELICS.filter((r) => !state.relics.includes(r.id)).map((r) => r.id),
+          BOONS.filter((r) => !state.boons.includes(r.id)).map((r) => r.id),
         ).slice(0, 3);
   state.reward = {
     xp,
@@ -218,7 +226,7 @@ function finishBattle(state: GameState, defeated: boolean) {
       defeated || outcome === "victory" || bossEncounter(state)
         ? []
         : state.battle!.enemies.map((e) => e.species),
-    relics: relics.length === 3 ? relics : [],
+    boons: boons.length === 3 ? boons : [],
   };
   enterReward(state);
 }
@@ -276,7 +284,7 @@ function enterReward(state: GameState) {
   if (reward.outcome === "defeat") state.phase = "defeat";
   else if (reward.outcome === "victory") state.phase = "victory";
   else if (reward.recruits.length > 0) state.phase = "recruit";
-  else if (reward.relics.length) state.phase = "relic";
+  else if (reward.boons.length) state.phase = "boon";
   else afterRewards(state);
 }
 function rebuildCards(state: GameState) {
@@ -316,10 +324,10 @@ function applyExtras(
         grantStatus(actor, effect.status, effect.amount, events);
         break;
       case "cleanse":
-        removeEffects(actor, "cleanse", effect.amount, events);
+        removeEffects(actor, "cleanse", effect.amount, events, state);
         break;
       case "purge":
-        if (target) removeEffects(target, "purge", effect.amount, events);
+        if (target) removeEffects(target, "purge", effect.amount, events, state);
         break;
       case "draw":
         if (!enemy) draw(state, effect.amount);
@@ -332,6 +340,9 @@ function applyExtras(
 }
 function finishTurn(draft: GameState, events: GameEvent[]) {
   const battle = draft.battle!;
+  const bonusMana = Number(
+    battle.mana > 0 ? hasTalent(draft, "mana.wellspring") : hasTalent(draft, "mana.dark-recovery"),
+  );
   // Enemy-phase draws and existing overflow survive into the next player turn.
   battle.discard.push(...battle.hand.splice(0));
   for (let pass = 0; pass < 3; pass++) {
@@ -361,19 +372,12 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
         const injured = battle.enemies
           .filter((e) => e.health > 0)
           .sort((a, b) => a.health / a.maxHealth - b.health / b.maxHealth)[0]!;
-        restoreHealth(injured, value, events);
+        restoreHealth(injured, value, events, false, draft);
       } else {
         for (const unit of def.effect === "teamGuard"
           ? battle.enemies.filter((e) => e.health > 0)
           : [enemy]) {
-          const amount = value;
-          unit.block = Math.min(1_000_000, unit.block + amount);
-          events.push({
-            kind: "block",
-            targetId: unit.id,
-            amount,
-            text: `${unit.name} gains ${amount} Block.`,
-          });
+          grantBlock(draft, unit, value, events);
         }
       }
       applyExtras(draft, enemy, def, events, true, target);
@@ -384,7 +388,7 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
       tickStatuses(draft, c, events);
       if (settle(draft, events)) return;
     }
-    for (const enemy of battle.enemies) restoreHealth(enemy, 1, events);
+    for (const enemy of battle.enemies) restoreHealth(enemy, 1, events, false, draft);
     for (const c of [...draft.team, ...draft.reserves]) {
       const stats = combat(c);
       if (stats.grace > 0) stats.grace--;
@@ -392,6 +396,7 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
       c.attacked = false;
       startAction(c, events);
     }
+    battle.maxMana = TURN_MANA + bonusMana;
     battle.mana = battle.maxMana;
     battle.turn++;
     intents(draft);
@@ -439,7 +444,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
     if (!actor || actor.health <= 0) return reject(state, "That creature is knocked out.");
     if (controlled(actor)) return reject(state, "That creature is Stunned or Frozen.");
     const def = definition(card.definitionId);
-    if (b!.mana < def.cost) return reject(state, "Not enough mana.");
+    if (b!.mana < cardCost(card, state)) return reject(state, "Not enough mana.");
     if (def.effect === "attack" && !b!.enemies.some((e) => e.id === command.targetId && e.health > 0))
       return reject(state, "Choose a living enemy.");
     if (
@@ -475,7 +480,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
     return reject(state, "Choose an active creature and a reserve.");
   if (
     command.type === "setLineup" &&
-    (!["teamSelection", "recruit", "relic", "campfire"].includes(state.phase) ||
+    (!["teamSelection", "recruit", "boon", "campfire"].includes(state.phase) ||
       ![...state.team, ...state.reserves].some(
         (c) => c.id === command.activeId && state.lineup.includes(c.id),
       ) ||
@@ -497,14 +502,13 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
   if (command.type === "skipRecruit" && state.phase !== "recruit")
     return reject(state, "There is no recruitment choice.");
   if (
-    command.type === "chooseRelic" &&
-    (state.phase !== "relic" ||
-      !state.reward?.relics.includes(command.relic) ||
-      state.relics.includes(command.relic))
+    command.type === "chooseBoon" &&
+    (state.phase !== "boon" ||
+      !state.reward?.boons.includes(command.boon) ||
+      state.boons.includes(command.boon))
   )
-    return reject(state, "Choose an offered relic.");
-  if (command.type === "skipRelic" && state.phase !== "relic")
-    return reject(state, "There is no relic reward.");
+    return reject(state, "Choose an offered boon.");
+  if (command.type === "skipBoon" && state.phase !== "boon") return reject(state, "There is no boon reward.");
   if (command.type === "buyTalent" && !canBuyTalent(state, command.talentId))
     return reject(state, "That talent is not available.");
   if (
@@ -514,7 +518,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
     return reject(state, "There are no talents to reset in this category.");
   if (
     command.type === "abandon" &&
-    !["battle", "teamSelection", "recruit", "relic", "campfire"].includes(state.phase) &&
+    !["battle", "teamSelection", "recruit", "boon", "campfire"].includes(state.phase) &&
     !(state.phase === "draft" && state.selected.length > 0)
   )
     return reject(state, "There is no journey to end.");
@@ -564,7 +568,8 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         const value = actionValue(card, actor, draft);
         for (const keyword of cardKeywords(card))
           draft.battleXP[keyword] = Math.min(1_000_000, (draft.battleXP[keyword] ?? 0) + 1);
-        battle.mana -= def.cost;
+        battle.mana -= cardCost(card, draft);
+        if (cardKeywords(card).includes("burn")) battle.freeBurnUsed = true;
         battle.hand.splice(battle.hand.indexOf(card.id), 1);
         battle.discard.push(card.id);
         events.push({
@@ -582,25 +587,12 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
           const targets =
             def.effect === "teamGuard" ? living(draft) : draft.team.filter((c) => c.id === command.targetId);
           for (const target of targets) {
-            target.block = Math.min(1_000_000, target.block + value);
-            events.push({
-              kind: "block",
-              text: `${species(target.species).name} gains ${value} block.`,
-              targetId: target.id,
-              amount: value,
-            });
+            grantBlock(draft, target, value, events);
           }
         }
         if (def.effect === "heal") {
           const target = draft.team.find((c) => c.id === command.targetId)!;
-          const amount = Math.min(value, species(target.species).health - target.health);
-          target.health += amount;
-          events.push({
-            kind: "heal",
-            text: `${species(target.species).name} recovers ${amount} health.`,
-            targetId: target.id,
-            amount,
-          });
+          restoreHealth(target, value, events, false, draft);
         }
         applyExtras(
           draft,
@@ -610,26 +602,6 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
           false,
           battle.enemies.find((e) => e.id === command.targetId),
         );
-        const followups = cardFollowups(card, draft);
-        if (actor.health > 0 && followups.block > 0) {
-          actor.block = Math.min(1_000_000, actor.block + followups.block);
-          events.push({
-            kind: "block",
-            targetId: actor.id,
-            amount: followups.block,
-            text: `Acting creature gains ${followups.block} Block.`,
-          });
-        }
-        const restored = Math.min(followups.heal, species(actor.species).health - actor.health);
-        if (actor.health > 0 && restored > 0) {
-          actor.health += restored;
-          events.push({
-            kind: "heal",
-            targetId: actor.id,
-            amount: restored,
-            text: `Acting creature restores ${restored} Health.`,
-          });
-        }
         fillHand(draft);
         if (!preview) settle(draft, events);
         if (!preview && command.autoEndTurn !== false && draft.phase === "battle" && battle.mana === 0)
@@ -721,7 +693,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
             draft.team.push(recruited);
             const cards = ownedCards(recruited.id, recruited.species);
             draft.cards.push(...cards);
-            // The settled battle remains a valid receipt through recruitment and relic choice.
+            // The settled battle remains a valid receipt through recruitment and boon choice.
             draft.battle?.discard.push(...cards.map((card) => card.id));
           } else draft.reserves.push(recruited);
         }
@@ -731,11 +703,11 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
       case "skipRecruit":
         afterRewards(draft);
         break;
-      case "chooseRelic":
-        draft.relics.push(command.relic);
+      case "chooseBoon":
+        draft.boons.push(command.boon);
         afterRewards(draft);
         break;
-      case "skipRelic":
+      case "skipBoon":
         afterRewards(draft);
         break;
       case "buyTalent":

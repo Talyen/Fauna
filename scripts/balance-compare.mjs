@@ -124,7 +124,7 @@ export async function main(args = process.argv.slice(2)) {
     const checkpoint = await readFile(path.resolve(options["--checkpoint"]), "utf8");
     const loadouts = await load(options["--loadouts"]);
     if (!loadouts.baseline || !loadouts.treatment)
-      throw new Error("Provide baseline and treatment talent/relic lists.");
+      throw new Error("Provide baseline and treatment talent/boon lists.");
     configs = ["baseline", "treatment"].map((arm) => ({
       key: "battle",
       arm,

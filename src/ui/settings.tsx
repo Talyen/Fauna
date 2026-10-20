@@ -12,6 +12,8 @@ export function Settings({
   updateAudio,
   scale,
   setScale,
+  tooltipScale,
+  setTooltipScale,
   diagnostics,
   desktop,
   autoEndTurn,
@@ -21,6 +23,8 @@ export function Settings({
   updateAudio: (patch: Partial<AudioPreferences>) => void;
   scale: number;
   setScale: (value: number) => void;
+  tooltipScale: number;
+  setTooltipScale: (value: number) => void;
   diagnostics: Diagnostics;
   desktop: boolean;
   autoEndTurn: boolean;
@@ -59,6 +63,22 @@ export function Settings({
             {[1, 1.25, 1.5].map((value) => (
               <label key={value} className="text-size-option">
                 <RadioGroupItem value={String(value)} aria-label={`${value * 100}%`} />
+                <span>{value * 100}%</span>
+              </label>
+            ))}
+          </RadioGroup>
+        </SettingRow>
+        <SettingRow icon={Scaling} label="Tooltip size">
+          <RadioGroup
+            orientation="horizontal"
+            className="text-size-options"
+            aria-label="Tooltip size"
+            value={String(tooltipScale)}
+            onValueChange={(value) => setTooltipScale(Number(value))}
+          >
+            {[1, 1.25, 1.5].map((value) => (
+              <label key={value} className="text-size-option">
+                <RadioGroupItem value={String(value)} aria-label={`Tooltip ${value * 100}%`} />
                 <span>{value * 100}%</span>
               </label>
             ))}

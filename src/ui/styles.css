@@ -482,11 +482,21 @@ strong {
   font-size: var(--text-rule);
   line-height: 1.4;
 }
+/* Radix positions a separate wrapper; enlarged details must not cover controls. */
+[data-radix-popper-content-wrapper]:has(> .game-tooltip) {
+  pointer-events: none;
+}
 .game-tooltip {
+  --text-body: var(--tooltip-text-body);
+  --text-rule: var(--tooltip-text-body);
+  --text-heading: var(--tooltip-text-heading);
+  --text-name: var(--tooltip-text-heading);
+  --text-secondary: var(--tooltip-text-secondary);
+  font-size: var(--text-body);
   /* Radix modal layers set an inline pointer override; hover details must not intercept controls. */
   pointer-events: none !important;
   width: max-content;
-  max-width: min(calc(var(--tooltip-max-width) * var(--text-scale, 1)), calc(100vw - var(--space-8)));
+  max-width: min(calc(var(--tooltip-max-width) * var(--tooltip-scale, 1)), calc(100vw - var(--space-8)));
   padding: var(--space-3);
   border-radius: var(--tooltip-radius);
   --tooltip-offset-x: 0px;
@@ -664,7 +674,7 @@ strong {
   width: 100%;
 }
 .recruit-options,
-.relic-options {
+.boon-options {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -679,10 +689,10 @@ strong {
   min-width: 0;
   text-align: center;
 }
-.relic-options .reward-option {
+.boon-options .reward-option {
   width: var(--art-portrait-width);
 }
-.relic-choice {
+.boon-choice {
   width: 100%;
 }
 .reward-option h2 {
@@ -967,10 +977,6 @@ strong {
 [data-combat-tone="armor"],
 [data-keyword="armor"] {
   color: var(--keyword-armor);
-}
-[data-combat-tone="forge"],
-[data-keyword="forge"] {
-  color: var(--keyword-forge);
 }
 [data-combat-tone="burn"],
 [data-keyword="burn"] {

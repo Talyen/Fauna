@@ -62,7 +62,7 @@ describe("biome destinations", () => {
         expect(s.expedition!.offers[0]!.location).toBe(BIOMES[Math.floor(index / 4)]!.boss);
       const selected = s.expedition!.offers[0]!.location;
       s = winBattle(enter(s));
-      expect(["recruit", "relic", "teamSelection", "victory"]).toContain(s.phase);
+      expect(["recruit", "boon", "teamSelection", "victory"]).toContain(s.phase);
       expect(s.currency).toBe(Math.floor(index / 4) * 100 + (index % 4 === 3 ? 100 : ((index % 4) + 1) * 20));
       expect(s.expedition!.chosen).toBe(s.phase === "teamSelection" ? null : selected);
       expect(decodeSave(encodeSave(s))).toEqual(s);
@@ -73,7 +73,7 @@ describe("biome destinations", () => {
             : accept(s, { type: "skipRecruit" });
         expect(decodeSave(encodeSave(s))).toEqual(s);
       }
-      if (s.phase === "relic") s = accept(s, { type: "skipRelic" });
+      if (s.phase === "boon") s = accept(s, { type: "skipBoon" });
       expect(decodeSave(encodeSave(s))).toEqual(s);
       if (index < 7) {
         expect(s.phase).toBe("teamSelection");

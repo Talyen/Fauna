@@ -5,7 +5,7 @@ import type { Card, Creature, GameState } from "./types";
 export function actionValue(
   card: Card,
   actor: Pick<Creature, "species" | "attacked"> & Partial<Pick<Creature, "block" | "combat">>,
-  state?: Pick<GameState, "talents" | "relics">,
+  _state?: Pick<GameState, "talents" | "boons">,
 ): number {
   const def = definition(card.definitionId);
   const bonus =
@@ -18,28 +18,20 @@ export function actionValue(
           : (def.effect === "guard" || def.effect === "teamGuard") && actor.species === "mossback"
             ? 2
             : 0;
-  let extra = 0;
-  if (state) {
-    for (const keyword of cardKeywords(card)) {
-      if (hasTalent(state, keyword, "potency")) extra++;
-      if (hasTalent(state, keyword, "mastery")) extra++;
-      if (hasTalent(state, keyword, "focus") && (actor.block ?? 0) > 0) extra += 2;
-    }
-    if (def.effect === "attack" && def.damageType === "fire" && state.relics.includes("emberstone")) extra++;
-    if (def.effect === "heal" && state.relics.includes("living-seed")) extra += 2;
-  }
-  return def.value + card.level * 2 + bonus + extra;
+  return def.value + card.level * 2 + bonus;
 }
-
-/** Additional final effects from accepted card plays; previews and details share this calculation. */
-export function cardFollowups(card: Pick<Card, "definitionId">, state: Pick<GameState, "talents">) {
-  let block = 0,
-    heal = 0;
-  for (const keyword of cardKeywords(card)) {
-    if (hasTalent(state, keyword, "shelter")) block += 2;
-    if (hasTalent(state, keyword, "renewal")) heal++;
-  }
-  return { block, heal };
+export function cardCost(card: Pick<Card, "definitionId">, state: GameState) {
+  return hasTalent(state, "burn.flashpoint") &&
+    !state.battle?.freeBurnUsed &&
+    cardKeywords(card).includes("burn")
+    ? 0
+    : definition(card.definitionId).cost;
+}
+export function physicalBonus(actor: Pick<Creature, "block" | "combat">, state: Pick<GameState, "talents">) {
+  return (
+    (hasTalent(state, "physical.shield-slam") ? actor.block / 2 : 0) +
+    (hasTalent(state, "physical.armored-fists") ? (actor.combat?.armor ?? 0) / 2 : 0)
+  );
 }
 
 /** Enemy repertoire uses encounter magnitudes and its own native trait, never player progression. */
@@ -67,10 +59,5 @@ export function enemyInspectionValue(
     Partial<Pick<import("./types").Enemy, "combat">>,
   card: import("./content").CardDefinition,
 ) {
-  return (
-    enemyAbilityValue(enemy, card) +
-    (card.effect === "attack" && (card.damageType === "physical" || card.damageType === "stun")
-      ? (enemy.combat?.forge ?? 0)
-      : 0)
-  );
+  return enemyAbilityValue(enemy, card);
 }

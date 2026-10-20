@@ -3,8 +3,8 @@ import { describe, it, expect } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
 import { decodeSave, encodeSave } from "../../src/game/save";
-import { TALENTS, cardKeywords, talentPoints } from "../../src/game/progression";
-import { actionValue } from "../../src/game/rules";
+import { cardKeywords, talentPoints } from "../../src/game/progression";
+import { cardCost } from "../../src/game/rules";
 import { accept, run, winBattle, policy, bossReward } from "./helpers";
 describe("keyword progression and rewards", () => {
   it("awards keywords once per accepted play, banks once on victory, and never banks previews", () => {
@@ -30,17 +30,17 @@ describe("keyword progression and rewards", () => {
     expect(resumed).toEqual(won);
     const next = accept(resumed, { type: "skipRecruit" });
     expect(next.keywordXP).toEqual(won.keywordXP);
-    expect(dispatch(next, { type: "skipRelic" }).accepted).toBe(false);
+    expect(dispatch(next, { type: "skipBoon" }).accepted).toBe(false);
   });
   it("banks defeat and abandonment XP without a victory payout", () => {
     const defeat = produce(run(), (d) => {
-      d.battleXP = { fire: 7 };
+      d.battleXP = { burn: 7 };
       d.team.forEach((c) => (c.health = 1));
       d.battle!.enemies.forEach((e) => (e.damage = 100));
     });
     let s = defeat;
     while (s.phase === "battle") s = accept(s, { type: "endTurn" });
-    expect(s.keywordXP.fire).toBe(7);
+    expect(s.keywordXP.burn).toBe(7);
     expect(s.currency).toBe(0);
     expect(s.reward!.outcome).toBe("defeat");
     const ended = accept(
@@ -53,26 +53,25 @@ describe("keyword progression and rewards", () => {
     expect(ended.battleXP).toEqual({});
     expect(decodeSave(encodeSave(ended))).toEqual(ended);
   });
-  it("uses increasing per-keyword thresholds, gates rows, and resets a whole category without losing XP", () => {
+  it("buys either talent first, enforces category budgets, and resets without losing XP", () => {
     expect([9, 10, 39, 40, 99, 100].map(talentPoints)).toEqual([0, 1, 1, 2, 2, 3]);
     let s = produce(run(), (d) => {
-      d.keywordXP = { fire: 420, block: 20 };
+      d.keywordXP = { burn: 40, block: 10 };
     });
-    expect(dispatch(s, { type: "buyTalent", talentId: "fire.shelter" }).accepted).toBe(false);
-    const actor = s.team.find((c) => c.species === "emberfox")!,
-      card = s.cards.find((c) => c.definitionId === "emberfox-attack")!,
-      base = actionValue(card, actor, s);
-    s = accept(s, { type: "buyTalent", talentId: "fire.potency" });
-    expect(actionValue(card, actor, s)).toBe(base + 1);
-    expect(dispatch(s, { type: "buyTalent", talentId: "fire.potency" }).accepted).toBe(false);
-    for (const t of TALENTS.filter((t) => t.keyword === "fire" && t.effect !== "potency"))
-      s = accept(s, { type: "buyTalent", talentId: t.id });
-    s = accept(s, { type: "buyTalent", talentId: "block.potency" });
+    const card = s.cards.find((c) => c.definitionId === "emberfox-attack")!;
+    expect(cardCost(card, s)).toBe(1);
+    s = accept(s, { type: "buyTalent", talentId: "burn.melting-point" });
+    s = accept(s, { type: "buyTalent", talentId: "burn.flashpoint" });
+    expect(cardCost(card, s)).toBe(0);
+    expect(dispatch(s, { type: "buyTalent", talentId: "burn.flashpoint" }).accepted).toBe(false);
+    expect(dispatch(s, { type: "buyTalent", talentId: "burn.potency" }).accepted).toBe(false);
+    s = accept(s, { type: "buyTalent", talentId: "block.second-wind" });
+    expect(dispatch(s, { type: "buyTalent", talentId: "block.grounding" }).accepted).toBe(false);
     const xp = s.keywordXP;
-    s = accept(s, { type: "resetTalents", keyword: "fire" });
+    s = accept(s, { type: "resetTalents", keyword: "burn" });
     expect(s.keywordXP).toEqual(xp);
-    expect(s.talents).toEqual(["block.potency"]);
-    expect(actionValue(card, actor, s)).toBe(base);
+    expect(s.talents).toEqual(["block.second-wind"]);
+    expect(cardCost(card, s)).toBe(1);
     expect(decodeSave(encodeSave(s))).toEqual(s);
   });
   it("recruits only offered species and preserves active choices across battles", () => {
@@ -125,25 +124,25 @@ describe("keyword progression and rewards", () => {
     const s = winBattle();
     expect(dispatch(s, { type: "recruit", species: "briartooth", replace: "mossback" }).accepted).toBe(false);
   });
-  it("offers three unique unowned relics, commits one once, and applies opening effects only at battle start", () => {
+  it("offers three unique unowned boons, commits one once, and applies opening effects only at battle start", () => {
     let s = bossReward();
-    expect(s.phase).toBe("relic");
-    expect(new Set(s.reward!.relics).size).toBe(3);
-    const chosen = s.reward!.relics[0]!;
-    s = accept(s, { type: "chooseRelic", relic: chosen });
-    expect(s.relics).toEqual([chosen]);
-    expect(dispatch(s, { type: "chooseRelic", relic: chosen }).accepted).toBe(false);
+    expect(s.phase).toBe("boon");
+    expect(new Set(s.reward!.boons).size).toBe(3);
+    const chosen = s.reward!.boons[0]!;
+    s = accept(s, { type: "chooseBoon", boon: chosen });
+    expect(s.boons).toEqual([chosen]);
+    expect(dispatch(s, { type: "chooseBoon", boon: chosen }).accepted).toBe(false);
     s = produce(s, (d) => {
-      d.relics = ["wind-feather", "river-shell"];
-      d.keywordXP.fire = 420;
-      d.talents = TALENTS.filter((t) => t.keyword === "fire").map((t) => t.id);
+      d.boons = ["tattered-pages", "ironwood-buckler"];
+      d.keywordXP.armor = 40;
+      d.talents = ["armor.bulwark"];
     });
     s = accept(s, { type: "beginBattle" });
     expect(s.battle!.hand).toHaveLength(5);
     expect(s.battle!.buffer).toHaveLength(0);
-    expect(s.team.find((c) => c.species === "emberfox")!.block).toBe(5);
-    s = accept(s, { type: "resetTalents", keyword: "fire" });
-    expect(s.team.find((c) => c.species === "emberfox")!.block).toBe(5);
+    expect(s.team.find((c) => c.species === "emberfox")!.combat.armor).toBe(2);
+    s = accept(s, { type: "resetTalents", keyword: "armor" });
+    expect(s.team.find((c) => c.species === "emberfox")!.combat.armor).toBe(2);
     expect(decodeSave(encodeSave(s))).toEqual(s);
   });
   it("rejects unknown/prototype map keys, invalid row purchases, and malformed receipts", () => {
@@ -156,7 +155,7 @@ describe("keyword progression and rewards", () => {
         s.keywordXP = { fire: 420 };
       },
       (s: Record<string, unknown>) => {
-        s.phase = "relic";
+        s.phase = "boon";
       },
       (s: Record<string, unknown>) => {
         s.roster = ["mossback", "mossback", "emberfox"];
@@ -188,31 +187,27 @@ it("awards a team-wide Block play once rather than once per recipient", () => {
   expect(next.team.every((c) => c.block === 5)).toBe(true);
 });
 
-it("resolves talent followups once, without replaying opening grants on purchases or resets", () => {
+it("consumes Flashpoint once and does not refresh it on talent reset or resume", () => {
   let s = produce(run(), (d) => {
-    d.keywordXP.fire = 420;
+    d.keywordXP.burn = 40;
+    d.talents = ["burn.flashpoint"];
     const card = d.cards.find((c) => c.definitionId === "emberfox-attack")!;
     d.battle!.hand = [card.id];
     d.battle!.draw = d.cards.filter((c) => c.id !== card.id).map((c) => c.id);
     d.battle!.discard = [];
-    d.team[1]!.health = 20;
   });
-  for (const talent of TALENTS.filter((t) => t.keyword === "fire"))
-    s = accept(s, { type: "buyTalent", talentId: talent.id });
-  expect(s.team[1]!.block).toBe(0);
-  const result = dispatch(s, { type: "play", cardId: s.battle!.hand[0]!, targetId: "enemy-0" });
-  expect(result.accepted).toBe(true);
-  s = result.state;
-  expect(s.battle!.enemies[0]!.health).toBe(4);
-  expect(s.team[1]!.health).toBe(18);
-  expect(s.team[1]!.block).toBe(2);
-  expect(s.battleXP.fire).toBe(1);
-  s = accept(s, { type: "resetTalents", keyword: "fire" });
-  expect(s.team[1]!.health).toBe(18);
-  expect(s.team[1]!.block).toBe(2);
+  const card = s.cards.find((c) => c.definitionId === "emberfox-attack")!;
+  s = accept(s, { type: "play", cardId: card.id, targetId: "enemy-0", autoEndTurn: false });
+  expect(s.battle!.mana).toBe(4);
+  expect(s.battle!.freeBurnUsed).toBe(true);
+  expect(s.battleXP.burn).toBe(1);
+  s = accept(s, { type: "resetTalents", keyword: "burn" });
+  s = accept(s, { type: "buyTalent", talentId: "burn.flashpoint" });
+  expect(cardCost(card, s)).toBe(1);
+  expect(decodeSave(encodeSave(s))).toEqual(s);
 });
 
-it("final victory banks permanent rewards without offering recruitment or run-only relics", () => {
+it("final victory banks permanent rewards without offering recruitment or run-only boons", () => {
   let s = run();
   for (let i = 0; i < 3; i++) {
     s = winBattle(s);
@@ -223,7 +218,7 @@ it("final victory banks permanent rewards without offering recruitment or run-on
   }
   expect(s.reward!.outcome).toBe("victory");
   expect(s.reward!.recruits).toEqual([]);
-  expect(s.reward!.relics).toEqual([]);
+  expect(s.reward!.boons).toEqual([]);
   expect(s.phase).toBe("victory");
 });
 it("swapping one creature preserves unchanged teammates' legacy cards", () => {

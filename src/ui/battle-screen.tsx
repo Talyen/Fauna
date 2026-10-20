@@ -1,3 +1,4 @@
+import { cardCost } from "../game/rules";
 import { controlled } from "../game/combat";
 import { ArtCard } from "./art-card";
 import { assetUrl } from "./assets";
@@ -275,7 +276,7 @@ export function BattleScreen({
                   modifiers={game}
                   ownerName={species(owner.species).name}
                   selected={selected === id}
-                  disabled={battle.mana < definition(card.definitionId).cost || controlled(owner)}
+                  disabled={battle.mana < cardCost(card, game) || controlled(owner)}
                   onDenied={onDenied}
                   onInspect={() => inspect({ card })}
                   onClick={() => {
@@ -293,7 +294,7 @@ export function BattleScreen({
           <div key={pile}>
             <ArtCard
               aspect="action"
-              artwork={assetUrl("relic.placeholder")}
+              artwork={assetUrl("pile.placeholder")}
               aria-label={`Inspect ${pile === "draw" ? "Draw Pile" : "Discard Pile"}, ${battle[pile].length} cards`}
               onClick={() => openPile?.(pile)}
             />
@@ -304,7 +305,11 @@ export function BattleScreen({
         ))}
       </section>
       <div className="hand-toolbar">
-        <ManaCrystals mana={battle.mana} maximum={battle.maxMana} previewCost={def?.cost ?? 0} />
+        <ManaCrystals
+          mana={battle.mana}
+          maximum={battle.maxMana}
+          previewCost={card ? cardCost(card, game) : 0}
+        />
         <div className="battle-actions">
           {actions}
           <Button className="end-turn" onClick={() => play({ type: "endTurn" })}>

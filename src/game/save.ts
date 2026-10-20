@@ -3,35 +3,38 @@ import { MAX_HAND_SIZE } from "./engine";
 import { z } from "zod";
 import { CARDS, INITIAL_SPECIES, species } from "./content";
 import { BIOMES, location, encounterSource, finalEncounter, bossEncounter } from "./destinations";
-import { KEYWORDS, RELICS, TALENTS, talentPoints } from "./progression";
+import { KEYWORDS, BOONS, TALENTS, talentPoints } from "./progression";
 import type { GameState } from "./types";
 const natural = z.number().int().min(0).max(1_000_000);
 const id = z.string().min(1).max(120);
 const speciesId = z.enum(["mossback", "emberfox", "stormfin", "silkmoth", "briartooth", "moonhart"]);
 const xp = z.partialRecord(z.enum(KEYWORDS), natural);
-const relicId = z.enum(RELICS.map((r) => r.id));
-const combatState = z.object({
-  armor: natural,
-  forge: natural,
-  thorns: natural,
-  dodge: z.number().int().min(0).max(70),
-  burn: natural,
-  poison: natural,
-  bleed: natural,
-  stun: natural,
-  freeze: natural,
-  controlled: z.enum(["stun", "freeze"]).nullable(),
-  cooldown: z.number().int().min(0).max(3),
-  skipped: z.boolean(),
-  deathDoorUsed: z.boolean(),
-  grace: z.number().int().min(0).max(2),
-  bleedLeech: z.array(z.object({ sourceId: id, amount: natural })).max(9),
-});
+const boonId = z.enum(BOONS.map((r) => r.id));
+const combatState = z
+  .object({
+    armor: natural,
+    thorns: natural,
+    dodge: z.number().int().min(0).max(70),
+    burn: natural,
+    poison: natural,
+    bleed: natural,
+    stun: natural,
+    freeze: natural,
+    controlled: z.enum(["stun", "freeze"]).nullable(),
+    cooldown: z.number().int().min(0).max(3),
+    skipped: z.boolean(),
+    deathDoorUsed: z.boolean(),
+    grace: z.number().int().min(0).max(2),
+    statusSources: z.partialRecord(z.enum(["burn", "poison", "bleed"]), id),
+    bleedLeech: z.array(z.object({ sourceId: id, amount: natural })).max(9),
+  })
+  .strict();
 const battle = z
   .object({
+    freeBurnUsed: z.boolean(),
     turn: z.number().int().min(1).max(1_000_000),
-    mana: z.number().int().min(0).max(4),
-    maxMana: z.literal(4),
+    mana: z.number().int().min(0).max(5),
+    maxMana: z.number().int().min(4).max(5),
     draw: z.array(id).max(9),
     hand: z.array(id).max(MAX_HAND_SIZE),
     buffer: z.array(id).max(9),
@@ -64,7 +67,7 @@ const creature = z.object({
   combat: combatState.optional(),
 });
 const currentShape = z.object({
-  version: z.literal(12),
+  version: z.literal(13),
   discovery: z.object({ encountered: z.array(speciesId).max(6), recruited: z.array(speciesId).max(6) }),
   revision: z
     .number()
@@ -72,7 +75,7 @@ const currentShape = z.object({
     .nonnegative()
     .max(Number.MAX_SAFE_INTEGER - 1),
   rng: z.number().int().min(0).max(0xffffffff),
-  phase: z.enum(["draft", "teamSelection", "battle", "recruit", "relic", "campfire", "victory", "defeat"]),
+  phase: z.enum(["draft", "teamSelection", "battle", "recruit", "boon", "campfire", "victory", "defeat"]),
   unlocked: z.array(speciesId).min(5).max(6),
   wins: natural,
   selected: z.array(speciesId).max(1),
@@ -113,13 +116,13 @@ const currentShape = z.object({
   battleXP: xp,
   talents: z.array(z.enum(TALENTS.map((t) => t.id))).max(TALENTS.length),
   currency: natural,
-  relics: z.array(relicId).max(RELICS.length),
+  boons: z.array(boonId).max(BOONS.length),
   reward: z
     .object({
       xp,
       currency: natural,
       recruits: z.array(speciesId).max(3),
-      relics: z.array(relicId).max(3),
+      boons: z.array(boonId).max(3),
       outcome: z.enum(["next", "victory", "defeat"]),
     })
     .nullable(),
@@ -214,7 +217,7 @@ export function decodeSave(raw: string): GameState {
       s.lineup.some((id) => ![...s.team, ...s.reserves].some((c) => c.id === id)) ||
       !unique(s.cards.map((c) => c.id)) ||
       !unique(s.talents) ||
-      !unique(s.relics),
+      !unique(s.boons),
   );
   invalid(
     [...s.team, ...s.reserves].some(
@@ -265,16 +268,16 @@ export function decodeSave(raw: string): GameState {
     invalid(s.battle !== null || s.reward !== null || s.team.some((c, index) => c.id !== s.lineup[index]));
   if (s.phase === "campfire")
     invalid(!s.expedition || s.expedition.step !== 3 || !!s.expedition.campfireUsed);
-  if (["battle", "recruit", "relic"].includes(s.phase)) invalid(!s.battle);
-  const rewardPhase = ["recruit", "relic"].includes(s.phase);
+  if (["battle", "recruit", "boon"].includes(s.phase)) invalid(!s.battle);
+  const rewardPhase = ["recruit", "boon"].includes(s.phase);
   invalid(rewardPhase && !s.reward);
   invalid(!rewardPhase && s.reward !== null && !["victory", "defeat"].includes(s.phase));
   if (s.phase !== "battle") invalid(Object.values(s.battleXP).some((n) => n !== 0));
   if (s.reward) {
-    invalid(s.reward.recruits.length > 0 && s.reward.relics.length > 0);
-    invalid(bossEncounter(s) ? s.reward.recruits.length > 0 : s.reward.relics.length > 0);
+    invalid(s.reward.recruits.length > 0 && s.reward.boons.length > 0);
+    invalid(bossEncounter(s) ? s.reward.recruits.length > 0 : s.reward.boons.length > 0);
     invalid(
-      !unique(s.reward.relics) ||
+      !unique(s.reward.boons) ||
         (s.reward.recruits.length > 0 &&
           JSON.stringify(s.reward.recruits) !==
             JSON.stringify(encounterSource(s).enemies.map((e) => e.species))),
@@ -284,10 +287,10 @@ export function decodeSave(raw: string): GameState {
         (s.reward.outcome === "victory" && !finalEncounter(s)),
     );
     if (s.phase === "recruit") invalid(s.reward.recruits.length !== 3 || s.reward.outcome !== "next");
-    if (s.phase === "relic")
+    if (s.phase === "boon")
       invalid(
-        s.reward.relics.length !== 3 ||
-          s.reward.relics.some((r) => s.relics.includes(r)) ||
+        s.reward.boons.length !== 3 ||
+          s.reward.boons.some((r) => s.boons.includes(r)) ||
           s.reward.outcome === "defeat",
       );
     if (s.reward.outcome === "defeat") invalid([...s.team, ...s.reserves].some((c) => c.health > 0));
@@ -315,6 +318,7 @@ export function decodeSave(raw: string): GameState {
       );
     });
     const zones = [...b.draw, ...b.hand, ...b.buffer, ...b.discard];
+    // The current turn capacity survives a category reset.
     invalid(b.mana > b.maxMana);
     invalid(!unique(zones) || zones.some((id) => !s.cards.some((c) => c.id === id)));
     if (s.phase === "battle") {
@@ -339,7 +343,8 @@ export function decodeSave(raw: string): GameState {
       const stats = unit.combat;
       invalid((stats.grace > 0 && !stats.deathDoorUsed) || (stats.controlled !== null && stats.cooldown > 0));
       invalid(
-        stats.bleedLeech.reduce((sum, row) => sum + row.amount, 0) > stats.bleed ||
+        Object.values(stats.statusSources).some((id) => !allCombatants.some((unit) => unit.id === id)) ||
+          stats.bleedLeech.reduce((sum, row) => sum + row.amount, 0) > stats.bleed ||
           stats.bleedLeech.some((row) => !allCombatants.some((source) => source.id === row.sourceId)),
       );
     }

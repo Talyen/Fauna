@@ -6,7 +6,7 @@ import { produce } from "immer";
 import { App } from "../../src/ui/App";
 import { createSession } from "../../src/application/session";
 import { createBrowserPlatform } from "../../src/platform/browser";
-import { run } from "./helpers";
+import { run, teamRun } from "./helpers";
 
 beforeEach(() => {
   // jsdom has no layout; this checks focus ownership, not rendered geometry.
@@ -103,10 +103,11 @@ describe("artwork-first inspection", () => {
   });
 
   it("preserves final modified effects in direct card inspection and closes with Back", async () => {
-    const fixture = produce(run(7), (game) => {
+    const fixture = produce(teamRun(7, ["briartooth", "emberfox", "stormfin"]), (game) => {
       game.cards[0]!.level = 1;
-      game.keywordXP.nature = 20;
-      game.talents = ["nature.potency"];
+      game.keywordXP.physical = 20;
+      game.talents = ["physical.shield-slam"];
+      game.team[0]!.block = 4;
       game.battle!.hand = [game.cards[0]!.id];
       game.battle!.buffer = [];
       game.battle!.draw = game.cards.slice(1).map((card) => card.id);
@@ -119,13 +120,13 @@ describe("artwork-first inspection", () => {
     render(<App session={session} />);
     try {
       await user.click(screen.getByRole("button", { name: "Continue" }));
-      const opener = screen.getByRole("button", { name: /^Bramble Bash \+1,/ });
+      const opener = screen.getByRole("button", { name: /^Thornlash \+1,/ });
       act(() => opener.focus());
       await user.keyboard("i");
-      const dialog = screen.getByRole("dialog", { name: "Bramble Bash details" });
+      const dialog = screen.getByRole("dialog", { name: "Thornlash details" });
       expect(dialog.querySelector(".card-details")).toBeNull();
       await user.tab();
-      expect((await screen.findByRole("tooltip")).textContent).toContain("Deal 9 Nature damage.");
+      expect((await screen.findByRole("tooltip")).textContent).toContain("Deal 12 Physical damage.");
       await user.click(within(dialog).getByRole("button", { name: "Back" }));
       expect(screen.queryByRole("dialog")).toBeNull();
       expect(document.activeElement).toBe(opener);

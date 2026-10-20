@@ -24,7 +24,8 @@ try {
   // Keyword tabs use text; illustrations are optional selections, not a talent prerequisite.
   for (const entry of manifest.assets.filter((asset) => asset.id.startsWith("keyword.")))
     requireAsset(entry.id);
-  requireAsset("relic.placeholder");
+  for (const boon of contentCatalog.boons) requireAsset(`boon.${boon.id}`);
+  requireAsset("pile.placeholder");
   requireAsset("mana.full");
   requireAsset("mana.empty");
   for (const cue of [

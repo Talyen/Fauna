@@ -31,17 +31,15 @@ function packet(
   return { next, events };
 }
 describe("Alchemy combat foundations", () => {
-  it("spends Block before Physical Armor, preserves Forge, and decays Armor only on damage", () => {
+  it("spends Block before Physical Armor and decays Armor only on damage", () => {
     const { next, events } = packet("physical", 10, (s) => {
-      combat(s.team[1]!).forge = 3;
       s.battle!.enemies[0]!.block = 4;
       s.battle!.enemies[0]!.combat.armor = 2;
     });
-    expect(next.battle!.enemies[0]!.health).toBe(11);
+    expect(next.battle!.enemies[0]!.health).toBe(14);
     expect(next.battle!.enemies[0]!.block).toBe(0);
     expect(next.battle!.enemies[0]!.combat.armor).toBe(1);
-    expect(next.team[1]!.combat!.forge).toBe(3);
-    expect(events.find((event) => event.kind === "damage")?.amount).toBe(7);
+    expect(events.find((event) => event.kind === "damage")?.amount).toBe(4);
     const blocked = packet("physical", 2, (s) => {
       s.battle!.enemies[0]!.combat.armor = 3;
     });
@@ -169,10 +167,10 @@ describe("Alchemy combat foundations", () => {
     const next = produce(run(), (s) => {
       const target = s.team[0]!;
       const rng = s.rng;
-      Object.assign(combat(target), { burn: 8, poison: 5, forge: 3 });
+      Object.assign(combat(target), { burn: 8, poison: 5, armor: 3 });
       target.block = 9;
       removeEffects(target, "cleanse", 1, []);
-      expect(combat(target)).toMatchObject({ burn: 0, poison: 5, forge: 3 });
+      expect(combat(target)).toMatchObject({ burn: 0, poison: 5, armor: 3 });
       removeEffects(target, "purge", 1, []);
       expect(target.block).toBe(0);
       grantStatus(target, "dodge", 999, []);

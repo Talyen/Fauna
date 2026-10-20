@@ -1,8 +1,7 @@
 import type { SpeciesId, DamageType } from "./content";
-import type { Keyword, KeywordXP, RelicId } from "./progression";
+import type { Keyword, KeywordXP, BoonId } from "./progression";
 export interface CombatState {
   armor: number;
-  forge: number;
   thorns: number;
   dodge: number;
   burn: number;
@@ -15,6 +14,7 @@ export interface CombatState {
   skipped: boolean;
   deathDoorUsed: boolean;
   grace: number;
+  statusSources: Partial<Record<"burn" | "poison" | "bleed", string>>;
   bleedLeech: { sourceId: string; amount: number }[];
 }
 export interface Creature {
@@ -44,6 +44,7 @@ export interface Enemy {
   lastAbility: string | null;
 }
 export interface Battle {
+  freeBurnUsed: boolean;
   turn: number;
   mana: number;
   maxMana: number;
@@ -57,7 +58,7 @@ export interface BattleReward {
   xp: KeywordXP;
   currency: number;
   recruits: SpeciesId[];
-  relics: RelicId[];
+  boons: BoonId[];
   outcome: "next" | "victory" | "defeat";
 }
 export interface JourneySummary {
@@ -69,11 +70,11 @@ export interface JourneySummary {
   lastBattle: { xp: KeywordXP; currency: number } | null;
 }
 export interface GameState {
-  version: 12;
+  version: 13;
   discovery: { encountered: SpeciesId[]; recruited: SpeciesId[] };
   revision: number;
   rng: number;
-  phase: "draft" | "teamSelection" | "battle" | "recruit" | "relic" | "campfire" | "victory" | "defeat";
+  phase: "draft" | "teamSelection" | "battle" | "recruit" | "boon" | "campfire" | "victory" | "defeat";
   unlocked: SpeciesId[];
   wins: number;
   selected: SpeciesId[];
@@ -97,7 +98,7 @@ export interface GameState {
   battleXP: KeywordXP;
   talents: string[];
   currency: number;
-  relics: RelicId[];
+  boons: BoonId[];
   reward: BattleReward | null;
   journey: JourneySummary | null;
 }
@@ -114,8 +115,8 @@ export type Command =
   | { type: "rest" }
   | { type: "recruit"; species: SpeciesId; replace?: string }
   | { type: "skipRecruit" }
-  | { type: "chooseRelic"; relic: RelicId }
-  | { type: "skipRelic" }
+  | { type: "chooseBoon"; boon: BoonId }
+  | { type: "skipBoon" }
   | { type: "buyTalent"; talentId: string }
   | { type: "resetTalents"; keyword: Keyword }
   | { type: "newRun"; seed: number }

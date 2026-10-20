@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
 import { INITIAL_SPECIES, species } from "../../src/game/content";
-import { RELICS } from "../../src/game/progression";
+import { BOONS } from "../../src/game/progression";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { previewPlay } from "../../src/game/preview";
 import { accept, run, winBattle, victoryReady, bossReward } from "./helpers";
@@ -20,12 +20,12 @@ describe("journey earnings and results", () => {
     });
     s = winBattle(s);
     expect(s.phase).toBe("recruit");
-    expect(s.reward!.relics).toEqual([]);
+    expect(s.reward!.boons).toEqual([]);
     expect(s.journey!.victories).toBe(1);
     expect(s.journey!.currency).toBe(20);
     expect(s.journey!.xp).toEqual(s.reward!.xp);
     const receipt = s.journey!.lastBattle;
-    expect(dispatch(s, { type: "skipRelic" }).state).toBe(s);
+    expect(dispatch(s, { type: "skipBoon" }).state).toBe(s);
     s = accept(s, { type: "skipRecruit" });
     expect(s.phase).toBe("teamSelection");
     expect(s.reward).toBeNull();
@@ -35,32 +35,32 @@ describe("journey earnings and results", () => {
     expect(s.journey!.lastBattle).toBeNull();
   });
 
-  it.each(["choose", "skip"])("intermediate bosses offer only relics and %s advances directly", (action) => {
+  it.each(["choose", "skip"])("intermediate bosses offer only boons and %s advances directly", (action) => {
     const reward = bossReward();
-    expect(reward.phase).toBe("relic");
+    expect(reward.phase).toBe("boon");
     expect(reward.reward!.recruits).toEqual([]);
-    expect(reward.reward!.relics).toHaveLength(3);
-    const chosen = reward.reward!.relics[0]!;
+    expect(reward.reward!.boons).toHaveLength(3);
+    const chosen = reward.reward!.boons[0]!;
     const command =
-      action === "choose" ? { type: "chooseRelic" as const, relic: chosen } : { type: "skipRelic" as const };
+      action === "choose" ? { type: "chooseBoon" as const, boon: chosen } : { type: "skipBoon" as const };
     const next = accept(reward, command);
     expect(next.phase).toBe("teamSelection");
     expect(next.expedition!.biome).toBe(1);
     expect(next.reward).toBeNull();
     expect(next.currency).toBe(reward.currency);
     expect(next.keywordXP).toEqual(reward.keywordXP);
-    expect(next.relics).toEqual(action === "choose" ? [chosen] : []);
+    expect(next.boons).toEqual(action === "choose" ? [chosen] : []);
     expect(dispatch(next, command).accepted).toBe(false);
     expect(decodeSave(encodeSave(next))).toEqual(next);
   });
 
-  it("skips the Reward screen when an intermediate boss has no available relic choices", () => {
+  it("skips the Reward screen when an intermediate boss has no available boon choices", () => {
     const ready = produce(bossReward(), (d) => {
       d.phase = "teamSelection";
       d.reward = null;
       d.battle = null;
       d.expedition!.chosen = null;
-      d.relics = RELICS.map((relic) => relic.id);
+      d.boons = BOONS.map((boon) => boon.id);
     });
     const won = winBattle(accept(ready, { type: "beginBattle" }));
     expect(won.phase).toBe("teamSelection");
@@ -83,7 +83,7 @@ describe("journey earnings and results", () => {
         combat: freshCombat(),
         attacked: false,
       }));
-      d.relics = RELICS.map((relic) => relic.id);
+      d.boons = BOONS.map((boon) => boon.id);
     });
     // Start from the committed pack so the saved battle receipt matches its destination.
     const battle = accept(
@@ -140,7 +140,7 @@ describe("journey earnings and results", () => {
     for (let i = 0; i < 8; i++) {
       s = winBattle(accept(s, { type: "beginBattle" }));
       if (s.phase === "recruit") s = accept(s, { type: "skipRecruit" });
-      if (s.phase === "relic") s = accept(s, { type: "skipRelic" });
+      if (s.phase === "boon") s = accept(s, { type: "skipBoon" });
     }
     expect(s.phase).toBe("victory");
     expect(s.journey).toMatchObject({
@@ -163,7 +163,7 @@ describe("journey earnings and results", () => {
     for (let i = 0; i < 8; i++) {
       s = winBattle(accept(s, { type: "beginBattle" }));
       if (s.phase === "recruit") s = accept(s, { type: "skipRecruit" });
-      if (s.phase === "relic") s = accept(s, { type: "skipRelic" });
+      if (s.phase === "boon") s = accept(s, { type: "skipBoon" });
     }
     expect(s.journey!.unlocks).toEqual([]);
     expect(s.journey!.currency).toBe(200);

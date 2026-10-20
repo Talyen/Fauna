@@ -2,7 +2,7 @@ import type { CombatState } from "../game/types";
 import { KeywordText } from "./keyword-text";
 export function CombatStatus({ combat }: { combat?: CombatState }) {
   if (!combat) return null;
-  const stats = ["armor", "forge", "thorns", "dodge", "burn", "poison", "bleed", "stun", "freeze"] as const;
+  const stats = ["armor", "thorns", "dodge", "burn", "poison", "bleed", "stun", "freeze"] as const;
   return (
     <div className="combat-status" aria-label="Combat effects">
       {stats

@@ -73,6 +73,9 @@
   --tooltip-exit-duration: 120ms;
   --tooltip-radius: 20px;
   --tooltip-max-width: 320px;
+  --tooltip-text-body: calc(16px * var(--tooltip-scale, 1));
+  --tooltip-text-heading: calc(20px * var(--tooltip-scale, 1));
+  --tooltip-text-secondary: calc(14px * var(--tooltip-scale, 1));
   --tooltip-travel: 4px;
   --feedback-duration: 1400ms;
   /* Fixed CSS-pixel artwork sizes; layouts reflow instead of scaling artwork. */
@@ -110,7 +113,6 @@
   --keyword-thorns: #6ee7b7;
   --keyword-dodge: #bef264;
   --keyword-armor: #9ca3af;
-  --keyword-forge: #fdba74;
   --keyword-burn: #fb923c;
   --keyword-freeze: #67e8f9;
   --keyword-bleed: #f87171;

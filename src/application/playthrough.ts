@@ -21,7 +21,7 @@ export interface JourneyStep {
   checkpoint: string;
 }
 export interface JourneyBundle {
-  format: 2;
+  format: 3;
   identity: string;
   config: JourneyConfig;
   initial: string;
@@ -65,8 +65,8 @@ function actor(config: JourneyConfig) {
           species: pick(state.reward!.recruits),
           ...(state.roster.length === 5 ? { replace: pick([...state.team, ...state.reserves]).id } : {}),
         };
-      case "relic":
-        return { type: "chooseRelic", relic: pick(state.reward!.relics) };
+      case "boon":
+        return { type: "chooseBoon", boon: pick(state.reward!.boons) };
       case "victory":
       case "defeat":
         return { type: "newRun", seed: (config.seed + state.revision) >>> 0 };
@@ -121,7 +121,7 @@ export async function runJourney(
   let session: Session = await open();
   const decide = actor(config);
   const bundle: JourneyBundle = {
-    format: 2,
+    format: 3,
     identity,
     config,
     initial,
@@ -132,7 +132,7 @@ export async function runJourney(
     milestones: [],
     results: [],
   };
-  if (replay && (replay.identity !== identity || replay.format !== 2))
+  if (replay && (replay.identity !== identity || replay.format !== 3))
     throw new Error("Replay content/build identity mismatch.");
   try {
     const limit = replay ? replay.steps.length : config.maxActions;

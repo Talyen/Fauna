@@ -50,7 +50,7 @@ describe("mana turn settlement", () => {
       d.battle!.mana = 0;
     });
     expect(decodeSave(encodeSave(exhausted))).toEqual(exhausted);
-    for (const mana of [-1, 5]) {
+    for (const mana of [-1, 6]) {
       const invalid = produce(exhausted, (d) => {
         d.battle!.mana = mana;
       });

@@ -299,7 +299,7 @@
       "rights": "Existing Fauna asset provenance in Docs/CONTENT.md"
     },
     {
-      "id": "relic.placeholder",
+      "id": "pile.placeholder",
       "origin": "repository",
       "source": "public/art/relic-placeholder.svg",
       "output": "art/relic-placeholder.svg",
@@ -592,6 +592,50 @@
       "provenance": "Shared Asset Library; Alchemy soundtrack selection",
       "rights": "Shared project music; original source retained in library",
       "listening": "pending"
+    },
+    {
+      "id": "boon.tattered-pages",
+      "origin": "repository",
+      "source": "public/art/boons/tattered-pages.webp",
+      "output": "art/boons/tattered-pages.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Copied from Alchemy src/assets/optimized/tattered-pages.webp; same user-owned project artwork",
+      "rights": "Existing Alchemy project artwork reused with user authorization"
+    },
+    {
+      "id": "boon.bone-charm",
+      "origin": "repository",
+      "source": "public/art/boons/bone-charm.webp",
+      "output": "art/boons/bone-charm.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Copied from Alchemy src/assets/optimized/bone-charm.webp; same user-owned project artwork",
+      "rights": "Existing Alchemy project artwork reused with user authorization"
+    },
+    {
+      "id": "boon.ironwood-buckler",
+      "origin": "repository",
+      "source": "public/art/boons/ironwood-buckler.webp",
+      "output": "art/boons/ironwood-buckler.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Copied from Alchemy src/assets/optimized/ironwood-buckler.webp; same user-owned project artwork",
+      "rights": "Existing Alchemy project artwork reused with user authorization"
+    },
+    {
+      "id": "boon.icy-heart",
+      "origin": "repository",
+      "source": "public/art/boons/icy-heart.webp",
+      "output": "art/boons/icy-heart.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Copied from Alchemy src/assets/optimized/icy-heart.webp; same user-owned project artwork",
+      "rights": "Existing Alchemy project artwork reused with user authorization"
     }
   ]
 }
