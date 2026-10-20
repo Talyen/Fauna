@@ -229,10 +229,11 @@ test("destination enemy artwork wraps at its fixed size in a narrow window", asy
   await page.locator("[data-destination]").first().click();
   const cards = page.getByRole("dialog").locator(".destination-enemies .creature-card");
   await expect(cards).toHaveCount(3);
+  // The pointer can land on a creature when the dialog opens. Measure its resting size.
+  await page.mouse.move(0, 0);
   for (const card of await cards.all()) {
-    const bounds = await card.boundingBox();
-    expect(bounds!.width).toBeCloseTo(800 / 3, 1);
-    expect(bounds!.height).toBeCloseTo(200, 1);
+    await expect.poll(async () => (await card.boundingBox())!.width).toBeCloseTo(800 / 3, 1);
+    await expect.poll(async () => (await card.boundingBox())!.height).toBeCloseTo(200, 1);
   }
   const first = await cards.nth(0).boundingBox();
   const last = await cards.nth(2).boundingBox();
