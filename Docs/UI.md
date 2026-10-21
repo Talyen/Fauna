@@ -28,7 +28,7 @@ Keywords in rule prose are semibold inline words in their semantic colors, with 
 
 ## Other screens
 
-Screen headings keep an icon-only Back button immediately to the left and an Open menu hamburger immediately to the right, with 12px gaps. Back returns one navigation level, including from talent trees to the overview and from visits to the encounter; it never undoes completed gameplay. The root main menu retains its simple title.
+Screen headings keep an icon-only Back button immediately to the left and an Open menu hamburger immediately to the right, with 24px gaps. Header buttons and battle corner controls use compact 32px visible surfaces and 16px icons within 44px hit areas. Back returns one navigation level, including from talent trees to the overview and from visits to the encounter; it never undoes completed gameplay. The root main menu retains its simple title.
 
 - First-journey starter selection shows three offers from the configured onboarding pool and commits one creature. Later journeys show three offers from Collection for each of three draft rounds. The heading shows the current pick number; choosing through shared inspection commits the pick and advances to the next offer. The finished starter team remains inspectable with external Selected checks beneath artwork. Begin journey is separate and becomes available when drafting is complete. Inspecting, canceling and reloading preserve choices and offers. Artwork uses the bounded shared sizing profiles; controls retain their hit areas.
 

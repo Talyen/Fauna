@@ -29,6 +29,37 @@
   height: var(--control-height);
   padding: 0;
 }
+.compact-icon-control {
+  position: relative;
+  isolation: isolate;
+}
+.game-button.control-outline.compact-icon-control,
+.game-button.control-outline.compact-icon-control:not(:disabled):not([aria-disabled="true"]):hover {
+  border: 0;
+  background: transparent;
+}
+.game-button.compact-icon-control::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: var(--compact-control-size);
+  height: var(--compact-control-size);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--background);
+  z-index: -1;
+  pointer-events: none;
+  transition: inherit;
+}
+.game-button.compact-icon-control:not(:disabled):not([aria-disabled="true"]):hover::before {
+  border-color: var(--primary);
+  background: var(--control-hover);
+}
+.game-button.compact-icon-control svg {
+  width: var(--compact-icon-size);
+  height: var(--compact-icon-size);
+}
 :root[data-focus="visible"] .game-button:focus {
   outline: 2px solid var(--primary);
   outline-offset: 3px;

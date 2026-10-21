@@ -45,6 +45,8 @@
   --error: #ffc4ad;
   --notice: var(--secondary);
   --control-height: 44px;
+  --compact-control-size: 32px;
+  --compact-icon-size: 16px;
   --main-menu-button-width: 150px;
   --settings-screen-width: 800px;
   --boon-dialog-width: 720px;

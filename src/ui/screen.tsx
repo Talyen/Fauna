@@ -18,11 +18,23 @@ export function ScreenHeading({
   const navigation = useContext(HeaderNavigation);
   return (
     <div className="screen-heading">
-      <Button variant="ghost" size="icon" aria-label="Back" onClick={back ?? navigation.back}>
+      <Button
+        variant="ghost"
+        size="icon"
+        className="compact-icon-control"
+        aria-label="Back"
+        onClick={back ?? navigation.back}
+      >
         <ArrowLeft aria-hidden="true" />
       </Button>
       <h1 id={id}>{children}</h1>
-      <Button variant="ghost" size="icon" aria-label="Open menu" onClick={openMenu ?? navigation.openMenu}>
+      <Button
+        variant="ghost"
+        size="icon"
+        className="compact-icon-control"
+        aria-label="Open menu"
+        onClick={openMenu ?? navigation.openMenu}
+      >
         <Menu aria-hidden="true" />
       </Button>
     </div>

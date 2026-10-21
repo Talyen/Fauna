@@ -967,7 +967,7 @@ strong {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--screen-item-gap);
+  gap: var(--screen-section-gap);
 }
 .screen-heading > h1 {
   margin: 0;
