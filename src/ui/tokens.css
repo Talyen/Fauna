@@ -118,7 +118,7 @@
   /* Alchemy's interaction timings and card scale, independent of viewport size. */
   --motion-hover: 150ms;
   --hover-scale: 1.035;
-  --hover-frame-width: 2px;
+  --hover-frame-width: 3px;
   --tooltip-enter-duration: 100ms;
   --tooltip-exit-duration: 100ms;
   --tooltip-radius: 20px;

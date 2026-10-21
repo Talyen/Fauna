@@ -319,27 +319,11 @@ strong {
 :root[data-focus="visible"] .game-button:not(:disabled):not([aria-disabled="true"]):focus {
   scale: var(--hover-scale);
 }
-.locked-species > .creature-card::after,
-.game-button:is(.creature-card, .action-card)::after {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border: var(--hover-frame-width) solid transparent;
-  border-radius: inherit;
-  pointer-events: none;
-  transition: border-color var(--motion-hover) ease-out;
-}
 .locked-species > .creature-card:hover,
 .game-button:is(.creature-card, .action-card):not(.selected):not(:disabled):not(
     [aria-disabled="true"]
   ):hover {
-  border-color: var(--primary);
-}
-.locked-species > .creature-card:hover::after,
-.game-button:is(.creature-card, .action-card):not(.selected):not(:disabled):not(
-    [aria-disabled="true"]
-  ):hover::after {
-  border-color: var(--primary);
+  box-shadow: 0 0 0 var(--hover-frame-width) var(--primary);
 }
 .battle-screen {
   height: 100%;
