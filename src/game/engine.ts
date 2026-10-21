@@ -43,7 +43,7 @@ import { bossEncounter, encounterSource, finalEncounter, encounterPacks } from "
 import type { Card, Command, CommandResult, GameEvent, GameState } from "./types";
 export function createGame(seed = 1): GameState {
   const state: GameState = {
-    version: 30,
+    version: 31,
     support: null,
     discovery: { encountered: [], recruited: {} },
     revision: 0,
@@ -387,6 +387,30 @@ function swapFromCard(state: GameState, actor: import("./combat").Combatant, eve
     text: `${species(actor.species).name} swaps positions with ${species(other.species).name}.`,
   });
 }
+function encore(state: GameState, actor: import("./combat").Combatant) {
+  const stats = combat(actor);
+  const chance = creaturePassive("maxHealth" in actor ? undefined : state, actor.species).effects.reduce(
+    (total, effect) => total + (effect.kind === "encore" ? effect.amount : 0),
+    0,
+  );
+  if (chance <= 0 || stats.encoreUsed) return false;
+  stats.encoreUsed = true;
+  return roll(state) < chance / 100;
+}
+function hushDome(state: GameState, enemy: boolean, events: GameEvent[]) {
+  for (const unit of enemy ? state.battle!.enemies : state.team) {
+    if (unit.health <= 0) continue;
+    combat(unit).nullify = true;
+    events.push({
+      kind: "status",
+      targetId: unit.id,
+      status: "nullify",
+      outcome: "apply",
+      text: `${species(unit.species).name} nullifies the next harmful status effect`,
+    });
+  }
+}
+
 function applyExtras(
   state: GameState,
   actor: import("./combat").Combatant,
@@ -505,35 +529,53 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
         targetId: def.effect === "attack" && def.target === "allEnemies" ? undefined : target.id,
         text: `${enemy.name} uses ${def.name}.`,
       });
-      const blindMiss = def.effect === "attack" ? beginAttack(draft, enemy) : false;
-      if (def.effect === "attack") {
-        const damageType =
-          def.alternateDamageType && roll(draft) < 0.5 ? def.alternateDamageType : def.damageType;
-        const targets = def.target === "allEnemies" ? living(draft) : [target];
-        for (const recipient of targets) {
-          if (enemy.health <= 0) break;
-          hit(draft, enemy, recipient, value, damageType, events, { leech: def.leech, blindMiss });
+      const encoreRepeat = encore(draft, enemy);
+      for (let play = 0; play < (encoreRepeat ? 2 : 1); play++) {
+        if (
+          enemy.health <= 0 ||
+          (def.effect === "attack" && def.target !== "allEnemies" && target.health <= 0)
+        )
+          break;
+        if (play === 1)
+          events.push({
+            kind: "action",
+            actionType: "support",
+            actorId: enemy.id,
+            text: `${enemy.name} repeats ${def.name} with Encore`,
+          });
+        const blindMiss = def.effect === "attack" ? beginAttack(draft, enemy) : false;
+        if (def.effect === "attack") {
+          const damageType =
+            def.alternateDamageType && roll(draft) < 0.5 ? def.alternateDamageType : def.damageType;
+          const targets = def.target === "allEnemies" ? living(draft) : target.health > 0 ? [target] : [];
+          if (!targets.length) break;
+          for (const recipient of targets) {
+            if (enemy.health <= 0) break;
+            hit(draft, enemy, recipient, value, damageType, events, { leech: def.leech, blindMiss });
+          }
+        } else if (def.effect === "heal") {
+          const injured = mostInjured(battle.enemies)!;
+          for (const recipient of def.target === "allAllies"
+            ? battle.enemies.filter((e) => e.health > 0)
+            : [injured]) {
+            restoreHealth(recipient, value, events, false, draft, false, enemy);
+            applyExtras(draft, enemy, def, events, true, recipient);
+          }
+        } else if (def.effect === "nullify") {
+          hushDome(draft, true, events);
+        } else if (def.effect === "dodge") {
+          grantTemporaryDodge(enemy, value, events);
+        } else if (def.effect === "swap") {
+          swapFromCard(draft, enemy, events);
+        } else {
+          for (const unit of def.effect === "teamGuard"
+            ? battle.enemies.filter((e) => e.health > 0)
+            : [enemy]) {
+            grantBlock(draft, unit, value, events);
+          }
         }
-      } else if (def.effect === "heal") {
-        const injured = mostInjured(battle.enemies)!;
-        for (const recipient of def.target === "allAllies"
-          ? battle.enemies.filter((e) => e.health > 0)
-          : [injured]) {
-          restoreHealth(recipient, value, events, false, draft, false, enemy);
-          applyExtras(draft, enemy, def, events, true, recipient);
-        }
-      } else if (def.effect === "dodge") {
-        grantTemporaryDodge(enemy, value, events);
-      } else if (def.effect === "swap") {
-        swapFromCard(draft, enemy, events);
-      } else {
-        for (const unit of def.effect === "teamGuard"
-          ? battle.enemies.filter((e) => e.health > 0)
-          : [enemy]) {
-          grantBlock(draft, unit, value, events);
-        }
+        if (def.effect !== "heal") applyExtras(draft, enemy, def, events, true, target, blindMiss);
       }
-      if (def.effect !== "heal") applyExtras(draft, enemy, def, events, true, target, blindMiss);
       if (settle(draft, events)) return;
     }
     for (const c of [...draft.team, ...draft.reserves]) {
@@ -813,11 +855,23 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
           ["poison", "poison.venom-strike"],
           ["stun", "stun.jarring-blow"],
         ] as const;
+        const encoreRepeat = encore(draft, actor);
         const repeat = repeatTalents.some(
           ([keyword, talent]) => keywords.includes(keyword) && hasTalent(draft, talent) && roll(draft) < 0.1,
         );
-        for (let play = 0; play < (repeat ? 2 : 1); play++) {
-          if (actor.health <= 0) break;
+        for (let play = 0; play < (repeat || encoreRepeat ? 2 : 1); play++) {
+          if (
+            actor.health <= 0 ||
+            (def.effect === "attack" && def.target !== "allEnemies" && (!target || target.health <= 0))
+          )
+            break;
+          if (play === 1 && encoreRepeat)
+            events.push({
+              kind: "action",
+              actionType: "support",
+              actorId: actor.id,
+              text: `${species(actor.species).name} repeats ${def.name} with Encore`,
+            });
           const blindMiss = def.effect === "attack" ? beginAttack(draft, actor) : false;
           if (def.effect === "attack") {
             const damageType =
@@ -862,6 +916,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
               applyExtras(draft, actor, def, events, false, recipient);
             }
           }
+          if (def.effect === "nullify") hushDome(draft, false, events);
           if (def.effect === "dodge") grantTemporaryDodge(actor, value, events);
           if (def.effect === "swap") swapFromCard(draft, actor, events);
           if (def.effect !== "heal") applyExtras(draft, actor, def, events, false, target, blindMiss);

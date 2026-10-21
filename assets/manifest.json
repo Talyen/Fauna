@@ -1175,6 +1175,50 @@
       "aspect": [3, 4],
       "provenance": "Water talent artwork reuses Coralcurl Reef Jet; https://drive.google.com/file/d/1k6gfQh3pLQ7Nf3Jpw2O47PX-OXVZpJIT/view",
       "rights": "User-provided artwork; original retained in Google Drive"
+    },
+    {
+      "id": "creature.chimecricket",
+      "origin": "repository",
+      "source": "public/art/chimecricket/portrait.png",
+      "output": "art/chimecricket/portrait.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Chimecricket artwork selected from user Google Drive: https://drive.google.com/file/d/1WmqqGVldciQGUsDZdnl8yaYpwkYeR-JO/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.chimecricket.resonant-leap",
+      "origin": "repository",
+      "source": "public/art/chimecricket/resonant-leap.png",
+      "output": "art/chimecricket/resonant-leap.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Chimecricket artwork selected from user Google Drive: https://drive.google.com/file/d/1lN6CCeGL2aErN6qYdktJ0-i72_oubdqC/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.chimecricket.hush-dome",
+      "origin": "repository",
+      "source": "public/art/chimecricket/hush-dome.png",
+      "output": "art/chimecricket/hush-dome.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Chimecricket artwork selected from user Google Drive: https://drive.google.com/file/d/1fezNPMnr3ixw0__rRRHIzaQOQzqW8o04/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.chimecricket.lullaby-drift",
+      "origin": "repository",
+      "source": "public/art/chimecricket/lullaby-drift.png",
+      "output": "art/chimecricket/lullaby-drift.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Chimecricket artwork selected from user Google Drive: https://drive.google.com/file/d/1EvE9WFlT2u7NxrVwQTyxdBoimibOYI33/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

@@ -197,7 +197,10 @@ describe("game commands", () => {
             s = accept(s, policy(s));
             decodeSave(encodeSave(s));
           }
-          expect(["victory", "defeat"]).toContain(s.phase);
+          expect(
+            ["victory", "defeat"],
+            `${[first, second, third].map((index) => SPECIES[index]!.id).join(", ")} at encounter ${s.encounter}, turn ${s.battle?.turn}`,
+          ).toContain(s.phase);
         }
   });
 });

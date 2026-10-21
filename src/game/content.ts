@@ -9,7 +9,8 @@ export type SpeciesId =
   | "dunefox"
   | "reedstag"
   | "cindernewt"
-  | "coralcurl";
+  | "coralcurl"
+  | "chimecricket";
 type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
   | { kind: "blockRetention"; amount: number }
@@ -17,6 +18,7 @@ type PassiveEffect =
   | { kind: "battleStart"; effect: "block" | "thorns" | "armor"; amount: number }
   | { kind: "poisonRetaliation"; amount: number }
   | { kind: "dodgeBurn"; amount: number }
+  | { kind: "encore"; amount: number }
   | { kind: "armorBreak"; amount: number }
   | { kind: "blockBreak"; amount: number }
   | { kind: "statusReflection"; amount: number }
@@ -427,6 +429,40 @@ export const SPECIES: readonly Species[] = [
       },
     ],
   },
+  {
+    id: "chimecricket",
+    name: "Chimecricket",
+    title: "The evening chorus",
+    health: 24,
+    color: "#c2b66c",
+    trait: "Encore",
+    passiveTiers: [
+      {
+        description: "Your first ability each turn has a 10% chance to repeat",
+        effects: [{ kind: "encore", amount: 10 }],
+      },
+      {
+        description: "Your first ability each turn has a 20% chance to repeat",
+        effects: [{ kind: "encore", amount: 20 }],
+      },
+      {
+        description: "Your first ability each turn has a 30% chance to repeat",
+        effects: [{ kind: "encore", amount: 30 }],
+      },
+      {
+        description: "Your first ability each turn has a 40% chance to repeat",
+        effects: [{ kind: "encore", amount: 40 }],
+      },
+      {
+        description: "Your first ability each turn has a 50% chance to repeat",
+        effects: [{ kind: "encore", amount: 50 }],
+      },
+      {
+        description: "Your first ability each turn has a 60% chance to repeat",
+        effects: [{ kind: "encore", amount: 60 }],
+      },
+    ],
+  },
 ];
 const card = <T extends Exclude<Effect, "attack">>(
   species: SpeciesId,
@@ -597,6 +633,21 @@ export const CARDS: readonly CardDefinition[] = [
     effects: [{ kind: "draw", amount: 2 }],
     artwork: "action.captoad.bogbound-leap",
   },
+  {
+    ...attack("chimecricket", "Resonant Leap", 4, "stun"),
+    effects: [{ kind: "draw", amount: 1 }],
+    artwork: "action.chimecricket.resonant-leap",
+  },
+  {
+    ...card("chimecricket", "Hush Dome", "nullify", 1),
+    artwork: "action.chimecricket.hush-dome",
+  },
+  {
+    ...card("chimecricket", "Lullaby Drift", "heal", 4),
+    target: "mostInjured",
+    effects: [{ kind: "cleanse", amount: 6, target: "recipient" }],
+    artwork: "action.chimecricket.lullaby-drift",
+  },
 ];
 export function enemyCard(card: CardDefinition): CardDefinition {
   return {
@@ -632,6 +683,9 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
       break;
     case "dodge":
       text = `Gain ${value}% Dodge until your next turn`;
+      break;
+    case "nullify":
+      text = "Nullify the next harmful status effect on each ally";
       break;
     case "swap":
       text = "Swap out for a random backup";

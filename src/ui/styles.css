@@ -1338,6 +1338,8 @@ strong {
 [data-keyword="cleanse"] {
   color: var(--keyword-cleanse);
 }
+[data-combat-tone="nullify"],
+[data-keyword="nullify"],
 [data-combat-tone="reflect"],
 [data-keyword="reflect"] {
   color: var(--keyword-reflect);

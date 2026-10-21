@@ -81,7 +81,21 @@ export function policy(s: GameState): Command {
   if (s.phase === "boon") return { type: "chooseBoon", boon: s.reward!.boons[0]! };
   if (s.phase === "campfire") return { type: "rest" };
   const b = s.battle!;
-  const enemy = b.enemies.filter((e) => e.health > 0).sort((a, b) => a.health - b.health)[0]!;
+  const fallen = s.team.find((c) => c.health <= 0);
+  const backup = s.reserves.find((c) => c.health > 0 && !controlled(c));
+  if (fallen && backup) return { type: "swap", activeId: fallen.id, reserve: backup.id };
+  // A Physical/Stun-only lineup must focus Armor builders before they outgrow its damage
+  const armorBound = s.cards.every((card) => {
+    const def = definition(card.definitionId);
+    return def.effect !== "attack" || ["physical", "stun"].includes(def.damageType);
+  });
+  const enemy = b.enemies
+    .filter((e) => e.health > 0)
+    .sort(
+      (a, b) =>
+        Number(armorBound) * (Number(b.species === "emberback") - Number(a.species === "emberback")) ||
+        a.health - b.health,
+    )[0]!;
   const cards = b.hand
     .map((id) => s.cards.find((c) => c.id === id)!)
     .filter(
@@ -114,7 +128,7 @@ export function policy(s: GameState): Command {
       ...(def.effect === "heal" && !def.target ? { targetId: injured.id } : {}),
     };
   }
-  const teamGuard = cards.find((c) => definition(c.definitionId).effect === "teamGuard");
+  const teamGuard = cards.find((c) => ["teamGuard", "nullify"].includes(definition(c.definitionId).effect));
   if (teamGuard) return { type: "play", cardId: teamGuard.id };
   const guard = cards.find((c) => definition(c.definitionId).effect === "guard");
   if (guard) {

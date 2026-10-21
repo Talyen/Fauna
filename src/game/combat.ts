@@ -19,6 +19,8 @@ export function freshCombat(): CombatState {
     freeLight: false,
     freeCard: false,
     reflect: false,
+    nullify: false,
+    encoreUsed: false,
     desperateGuardUsed: false,
     armor: 0,
     thorns: 0,
@@ -360,7 +362,7 @@ export function removeEffects(
   const statuses =
     kind === "cleanse"
       ? (["burn", "poison", "bleed", "stun", "freeze", "blind"] as const)
-      : (["armor", "thorns", "dodge", "reflect"] as const);
+      : (["armor", "thorns", "dodge", "reflect", "nullify"] as const);
   if (kind === "purge" && unit.block > 0 && count > 0) {
     unit.block = 0;
     removedStatuses.push("block");
@@ -378,7 +380,7 @@ export function removeEffects(
   for (const status of statuses)
     if (count > 0 && (Number(stats[status]) > 0 || (status === "dodge" && stats.temporaryDodge > 0))) {
       if (status === "dodge") stats.temporaryDodge = 0;
-      if (status === "reflect" || status === "blind") stats[status] = false;
+      if (status === "reflect" || status === "blind" || status === "nullify") stats[status] = false;
       else stats[status] = 0;
       if (kind === "cleanse") {
         cleansed++;
@@ -435,7 +437,7 @@ function applyHarmfulStatus(
   type: DamageType | "blind",
   events: GameEvent[],
   options: { beforeHealth: number; leech?: boolean; reflected?: boolean },
-): { armorBroken: boolean; appliedControl: boolean; reflected: boolean } {
+): { armorBroken: boolean; appliedControl: boolean; suppressed: boolean } {
   if (
     type !== "burn" &&
     type !== "poison" &&
@@ -444,7 +446,7 @@ function applyHarmfulStatus(
     type !== "freeze" &&
     type !== "blind"
   )
-    return { armorBroken: false, appliedControl: false, reflected: false };
+    return { armorBroken: false, appliedControl: false, suppressed: false };
   const stats = combat(target);
   const alliedSource = !("maxHealth" in source),
     alliedTarget = !("maxHealth" in target);
@@ -457,6 +459,23 @@ function applyHarmfulStatus(
       stats.skipped ||
       stats.cooldown > 0 ||
       (type === "stun" && alliedTarget && target.block > 0 && hasTalent(state, "block.grounding")));
+  if (
+    target.health > 0 &&
+    !immune &&
+    stats.nullify &&
+    Number(stats[type]) < (type === "blind" ? 1 : STACK_LIMIT)
+  ) {
+    stats.nullify = false;
+    events.push({
+      kind: "status",
+      targetId: target.id,
+      status: "nullify",
+      affectedStatus: type,
+      outcome: "remove",
+      text: `${unitName(target)} nullifies ${type}`,
+    });
+    return { armorBroken: false, appliedControl: false, suppressed: true };
+  }
   if (
     target.health > 0 &&
     !options.reflected &&
@@ -489,7 +508,7 @@ function applyHarmfulStatus(
       if (reflected.appliedControl && type !== "blind")
         controlRewards(state, target, recipient, type, events);
       if (reflected.armorBroken) triggerArmorBreak(state, recipient, events);
-      return { armorBroken: false, appliedControl: false, reflected: true };
+      return { armorBroken: false, appliedControl: false, suppressed: true };
     }
   }
   if (type === "blind" && target.health > 0 && !stats.blind) {
@@ -595,7 +614,7 @@ function applyHarmfulStatus(
       });
     }
   }
-  return { armorBroken, appliedControl, reflected: false };
+  return { armorBroken, appliedControl, suppressed: false };
 }
 function controlRewards(
   state: GameState,
@@ -1025,7 +1044,7 @@ function resolveHit(
         (type === "poison" && proc("leech.virulent-leech", 0.1)) ||
         (type === "nature" && proc("nature.verdant-cycle", 0.1));
       if (chanceLeech && type === "bleed" && !options.leech) {
-        if (!statusResult.reflected) deferLeech(target, source, damage);
+        if (!statusResult.suppressed) deferLeech(target, source, damage);
       } else if (chanceLeech && !options.leech && !blessedLeech)
         leechHealth(state, source, lost, events, stats.poison > 0 || stats.bleed > 0);
     }
@@ -1131,6 +1150,7 @@ export function tickStatuses(state: GameState, unit: Combatant, events: GameEven
 export function startAction(unit: Combatant, events: GameEvent[], state?: GameState) {
   const stats = combat(unit);
   stats.temporaryDodge = 0;
+  stats.encoreUsed = false;
   stats.skipped = !!stats.controlled;
   if (stats.controlled) {
     events.push({

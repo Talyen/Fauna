@@ -39,6 +39,7 @@ const icons = {
   cleanse: Sparkles,
   purge: Eraser,
   reflect: Shield,
+  nullify: Shield,
 };
 export function KeywordIcon({ id, className }: { id: KeywordId; className?: string }) {
   const Icon = icons[id as keyof typeof icons] ?? Sparkles;
