@@ -125,7 +125,7 @@ export function TargetPreview({
           </span>
         ))}
         {events
-          .filter((event) => event.kind === "status" && event.text.includes("Dodges"))
+          .filter((event) => event.kind === "status" && event.status === "dodge" && event.outcome === "dodge")
           .map((event, index) => (
             <span key={`dodge-${index}`}>Dodge</span>
           ))}
