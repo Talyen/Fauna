@@ -71,41 +71,33 @@ import type { Inspection, Controls } from "./battle-screen";
 import { Progress } from "./progress";
 import { BattleEarnings } from "./battle-earnings";
 import { bossEncounter, encounterSource, JOURNEY_LENGTH } from "../game/encounters";
-const originalTalentSymbols = [
-  Swords,
-  ShieldPlus,
-  Flame,
-  Anvil,
-  Snowflake,
-  ShieldHalf,
-  Zap,
-  ShieldOff,
-  FlaskConical,
-  Hourglass,
-  Leaf,
-  Sprout,
-  Sun,
-  HeartHandshake,
-  Droplets,
-  Skull,
-  Shield,
-  ShieldCheck,
-  HeartPlus,
-  HeartPulse,
-  Shell,
-  BrickWall,
-  Wind,
-  Footprints,
-  Heart,
-  Link,
-  Gem,
-  Battery,
-];
+const originalTalentSymbols = {
+  physical: [Swords, ShieldPlus],
+  burn: [Flame, Anvil],
+  freeze: [Snowflake, ShieldHalf],
+  stun: [Zap, ShieldOff],
+  poison: [FlaskConical, Hourglass],
+  nature: [Leaf, Sprout],
+  water: [Droplets, Shield],
+  light: [Sun, HeartHandshake],
+  bleed: [Droplets, Skull],
+  block: [Shield, ShieldCheck],
+  health: [HeartPlus, HeartPulse],
+  armor: [Shell, BrickWall],
+  dodge: [Wind, Footprints],
+  leech: [Heart, Link],
+  mana: [Gem, Battery],
+};
 const talentSymbols = Object.fromEntries(
   KEYWORDS.flatMap((keyword) => {
     const talents = TALENTS.filter((talent) => talent.keyword === keyword);
-    const original = talents.slice(0, 2).map((talent) => originalTalentSymbols[TALENTS.indexOf(talent)]!);
-    const symbols = [...original, ...originalTalentSymbols.filter((symbol) => !original.includes(symbol))];
+    const original = originalTalentSymbols[keyword];
+    const symbols = [
+      ...original,
+      ...Object.values(originalTalentSymbols)
+        .flat()
+        .filter((symbol) => !original.includes(symbol)),
+    ];
     return talents.map((talent, index) => [talent.id, symbols[index]!] as const);
   }),
 );

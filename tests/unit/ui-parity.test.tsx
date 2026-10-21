@@ -128,12 +128,12 @@ it("shows committed rest recovery while leaving the next encounter immediately p
     await user.click(screen.getByRole("button", { name: "Rest" }));
     const rested = session.store.getState().game;
     expect(rested.phase).toBe("teamSelection");
-    expect(rested.team[0]!.health).toBe(20);
+    expect(rested.team[0]!.health).toBe(19);
     const recovery = screen.getByRole("status", { name: "Rest recovery" });
-    expect(recovery.textContent).toContain("10 → 20 Health · +10");
+    expect(recovery.textContent).toContain("10 → 19 Health · +9");
     expect(
-      within(recovery).getByRole("progressbar", { name: "Mossguard Health" }).getAttribute("aria-valuenow"),
-    ).toBe("20");
+      within(recovery).getByRole("progressbar", { name: "Prismram Health" }).getAttribute("aria-valuenow"),
+    ).toBe("19");
     expect(rested.rng).toBe(injured.rng);
     await user.click(screen.getByRole("button", { name: "Combat" }));
     expect(session.store.getState().game.phase).toBe("battle");

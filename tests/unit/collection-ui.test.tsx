@@ -14,7 +14,7 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
-it("shows the current collection on one page, resets filters and preserves focus across supported heights", async () => {
+it("pages through the full collection, resets filters and preserves focus across supported heights", async () => {
   vi.stubGlobal("innerHeight", 1080);
   vi.stubGlobal(
     "ResizeObserver",
@@ -37,14 +37,22 @@ it("shows the current collection on one page, resets filters and preserves focus
   );
   const user = userEvent.setup();
   expect(screen.getByRole("img", { name: "Mossguard: 2 of 5 stars" })).toBeTruthy();
-  expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(SPECIES.length);
+  const firstPage = screen
+    .getAllByRole("button", { name: /^Inspect / })
+    .map((card) => card.getAttribute("aria-label"));
+  expect(firstPage).toHaveLength(8);
+  await user.click(screen.getByRole("button", { name: "Next page" }));
+  const lastPage = screen
+    .getAllByRole("button", { name: /^Inspect / })
+    .map((card) => card.getAttribute("aria-label"));
+  expect([...firstPage, ...lastPage]).toEqual(SPECIES.map((creature) => `Inspect ${creature.name}`));
   const lastCard = screen.getAllByRole("button", { name: /^Inspect / }).at(-1)!;
   lastCard.focus();
   vi.stubGlobal("innerHeight", 720);
   act(() => window.dispatchEvent(new Event("resize")));
   expect(document.activeElement).toBe(lastCard);
-  expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(SPECIES.length);
-  expect(screen.queryByRole("button", { name: "Next page" })).toBeNull();
+  expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(4);
+  expect((screen.getByRole("button", { name: "Next page" }) as HTMLButtonElement).disabled).toBe(true);
   const current = screen.getAllByRole("button", { name: /^Inspect / })[0]!.getAttribute("aria-label");
   vi.stubGlobal("innerHeight", 1080);
   act(() => window.dispatchEvent(new Event("resize")));
@@ -59,7 +67,7 @@ it("shows the current collection on one page, resets filters and preserves focus
   expect(screen.queryByRole("button", { name: "Next page" })).toBeNull();
   await user.click(screen.getByRole("tab", { name: "Collected" }));
   expect(screen.queryByRole("status")).toBeNull();
-  expect(screen.queryByRole("button", { name: "Previous page" })).toBeNull();
+  expect((screen.getByRole("button", { name: "Previous page" }) as HTMLButtonElement).disabled).toBe(true);
   await user.click(screen.getAllByRole("button", { name: /^Inspect / })[0]!);
   expect(screen.getByRole("heading", { name: SPECIES[0]!.name })).toBeTruthy();
   expect(screen.queryByRole("dialog")).toBeNull();

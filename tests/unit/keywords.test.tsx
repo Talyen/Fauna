@@ -23,6 +23,9 @@ import { run } from "./helpers";
 describe("keyword foundation", () => {
   it("classifies authored effects without reading names or rules text, using only current talent categories", () => {
     const expected = [
+      ["health"],
+      ["light"],
+      ["health"],
       ["block"],
       ["water"],
       [],
@@ -50,6 +53,12 @@ describe("keyword foundation", () => {
       ["poison"],
       ["block", "health"],
       [],
+      ["stun"],
+      [],
+      ["health"],
+      ["block"],
+      ["health"],
+      ["health"],
     ];
     expect(CARDS.map((card) => cardKeywords({ definitionId: card.id }))).toEqual(expected);
     expect(definitionKeywords({ effect: "attack", damageType: "poison" })).toEqual(["poison"]);

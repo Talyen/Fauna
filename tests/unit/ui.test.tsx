@@ -94,7 +94,7 @@ describe("player interface", () => {
       { type: "start" },
     );
     const battle = produce(accept(started, { type: "beginBattle" }), (d) => {
-      d.keywordXP.stun = 23;
+      d.keywordXP.physical = 23;
     });
     const game = winBattle(battle);
     localStorage.setItem("fauna.save.v1", JSON.stringify(game));
@@ -113,7 +113,7 @@ describe("player interface", () => {
           ?.textContent,
       ).toBe("20"),
     );
-    const progress = screen.getByRole("progressbar", { name: "Stun level 2 progress" });
+    const progress = screen.getByRole("progressbar", { name: "Physical level 2 progress" });
     expect(progress.getAttribute("aria-valuenow")).toBe("14");
     expect(progress.getAttribute("aria-valuemax")).toBe("30");
     expect(screen.queryByText(/keyword XP|talent point|4 \/ 40 XP/)).toBeNull();

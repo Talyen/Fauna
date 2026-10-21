@@ -1339,7 +1339,9 @@ strong {
   color: var(--keyword-cleanse);
 }
 [data-combat-tone="nullify"],
-[data-keyword="nullify"],
+[data-keyword="nullify"] {
+  color: var(--keyword-nullify);
+}
 [data-combat-tone="reflect"],
 [data-keyword="reflect"] {
   color: var(--keyword-reflect);

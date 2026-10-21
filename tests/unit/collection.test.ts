@@ -53,7 +53,14 @@ it("collects only accepted recruits, caps stars at five, and retains ranks acros
   state = accept(accept(state, { type: "draft", species: first }), { type: "start" });
   expect(state.discovery.recruited).toEqual({ [first]: 1 });
   for (let copy = 1; copy <= 8; copy++) {
-    state = winBattle(accept(state, { type: "beginBattle" }));
+    state = winBattle(
+      accept(
+        produce(state, (draft) => {
+          draft.expedition!.pack = 0;
+        }),
+        { type: "beginBattle" },
+      ),
+    );
     const kind = state.reward!.recruits[0]!;
     const before = state.discovery;
     const invalid = dispatch(state, { type: "recruit", species: kind, replace: "missing" });

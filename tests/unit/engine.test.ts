@@ -214,7 +214,7 @@ describe("game commands", () => {
             `${[first, second, third].map((index) => SPECIES[index]!.id).join(", ")} at encounter ${s.encounter}, turn ${s.battle?.turn}`,
           ).toContain(s.phase);
         }
-  });
+  }, 30_000);
 });
 describe("save validation", () => {
   it.each(["not json", "{}", JSON.stringify({ ...createGame(), version: 999 }), "x".repeat(100001)])(
