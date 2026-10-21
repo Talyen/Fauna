@@ -3,7 +3,7 @@ import { test, expect, type Page, type Locator } from "@playwright/test";
 import { accept, run } from "../unit/helpers";
 import { createGame } from "../../src/game/engine";
 import { produce } from "immer";
-import { BOONS } from "../../src/game/content";
+import { BOONS } from "../../src/game/progression";
 
 async function expectCenteredMenu(choices: Locator) {
   const buttons = await choices.locator("button").evaluateAll((elements) =>
