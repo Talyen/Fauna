@@ -32,10 +32,14 @@ describe("game commands", () => {
     expect(Object.isFrozen(s.battle!.hand)).toBe(true);
   });
   it("rejects wrong targets, absent cards, and insufficient mana before consuming RNG", () => {
-    const s = run();
-    const attack = s.cards.find(
-      (c) => s.battle!.hand.includes(c.id) && definition(c.definitionId).effect === "attack",
-    )!;
+    const s = produce(run(), (game) => {
+      const attack = game.cards.find((card) => card.definitionId === "emberback-attack")!;
+      game.battle!.hand = [attack.id];
+      game.battle!.buffer = [];
+      game.battle!.discard = [];
+      game.battle!.draw = game.cards.filter((card) => card.id !== attack.id).map((card) => card.id);
+    });
+    const attack = s.cards.find((card) => card.definitionId === "emberback-attack")!;
     for (const cmd of [
       { type: "play" as const, cardId: "constructor", targetId: "enemy-0" },
       { type: "play" as const, cardId: attack.id, targetId: "ally-0" },

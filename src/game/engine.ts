@@ -43,7 +43,7 @@ import { bossEncounter, encounterSource, finalEncounter, encounterPacks } from "
 import type { Card, Command, CommandResult, GameEvent, GameState } from "./types";
 export function createGame(seed = 1): GameState {
   const state: GameState = {
-    version: 27,
+    version: 28,
     support: null,
     discovery: { encountered: [], recruited: {} },
     revision: 0,
@@ -192,7 +192,7 @@ export function beginBattle(state: GameState, events: GameEvent[] = []) {
       if (effect.kind !== "battleStart") continue;
       if (effect.effect === "block") grantBlock(state, unit, effect.amount, events);
       else if (effect.effect === "armor") grantArmor(state, unit, effect.amount, events);
-      else grantStatus(unit, "thorns", effect.amount, events);
+      else grantStatus(unit, "thorns", effect.amount, events, state);
     }
     if (hasTalent(state, "mana.mana-bulwark")) grantBlock(state, unit, state.battle.maxMana, events);
     if (hasTalent(state, "mana.mana-shell")) grantArmor(state, unit, state.battle.maxMana, events);
@@ -411,7 +411,7 @@ function applyExtras(
         break;
       case "status":
         if (effect.status === "armor") grantArmor(state, actor, effect.amount, events);
-        else grantStatus(actor, effect.status, effect.amount, events);
+        else grantStatus(actor, effect.status, effect.amount, events, state);
         break;
       case "blind":
         for (const recipient of enemy ? state.team : state.battle!.enemies)
@@ -428,7 +428,13 @@ function applyExtras(
         });
         break;
       case "cleanse":
-        removeEffects(actor, "cleanse", effect.amount, events, state);
+        removeEffects(
+          effect.target === "recipient" && target ? target : actor,
+          "cleanse",
+          effect.amount,
+          events,
+          state,
+        );
         break;
       case "purge":
         if (target) removeEffects(target, "purge", effect.amount, events, state);
@@ -490,8 +496,10 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
         const injured = mostInjured(battle.enemies)!;
         for (const recipient of def.target === "allAllies"
           ? battle.enemies.filter((e) => e.health > 0)
-          : [injured])
+          : [injured]) {
           restoreHealth(recipient, value, events, false, draft, false, enemy);
+          applyExtras(draft, enemy, def, events, true, recipient);
+        }
       } else if (def.effect === "dodge") {
         grantTemporaryDodge(enemy, value, events);
       } else if (def.effect === "swap") {
@@ -503,7 +511,7 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
           grantBlock(draft, unit, value, events);
         }
       }
-      applyExtras(draft, enemy, def, events, true, target, blindMiss);
+      if (def.effect !== "heal") applyExtras(draft, enemy, def, events, true, target, blindMiss);
       if (settle(draft, events)) return;
     }
     for (const c of [...draft.team, ...draft.reserves]) {
@@ -825,11 +833,14 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
                 : def.target === "mostInjured"
                   ? [mostInjured(draft.team)!]
                   : draft.team.filter((c) => c.id === command.targetId && c.health > 0);
-            for (const target of targets) restoreHealth(target, value, events, false, draft, true, actor);
+            for (const recipient of targets) {
+              restoreHealth(recipient, value, events, false, draft, true, actor);
+              applyExtras(draft, actor, def, events, false, recipient);
+            }
           }
           if (def.effect === "dodge") grantTemporaryDodge(actor, value, events);
           if (def.effect === "swap") swapFromCard(draft, actor, events);
-          applyExtras(draft, actor, def, events, false, target, blindMiss);
+          if (def.effect !== "heal") applyExtras(draft, actor, def, events, false, target, blindMiss);
         }
         if (battle.cardsPlayedThisTurn < 3) {
           battle.cardsPlayedThisTurn++;

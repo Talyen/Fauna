@@ -128,14 +128,43 @@ export function restoreHealth(
       !("maxHealth" in unit) &&
       state.boons.includes("groves-favor")
     )
-      grantStatus(unit, "thorns", 1, events);
+      grantStatus(unit, "thorns", 1, events, state);
   }
   if (gain > 0 && source && state?.phase === "battle")
     bounce(state, source, unit, "heal", (target) =>
       restoreHealth(target, baseAmount, events, false, state, cardHealing),
     );
 }
-export function grantBlock(state: GameState, unit: Combatant, amount: number, events: GameEvent[]) {
+function shareProtection(
+  state: GameState,
+  source: Combatant,
+  effect: "block" | "thorns",
+  amount: number,
+  events: GameEvent[],
+) {
+  if (state.phase !== "battle" || !state.battle || source.health <= 0 || amount <= 0) return;
+  const allied = !("maxHealth" in source);
+  const pool = allied ? state.team : state.battle.enemies;
+  if (!pool.some((unit) => unit.id === source.id)) return;
+  const recipients = pool.filter((unit) => unit.id !== source.id && unit.health > 0);
+  if (!recipients.length) return;
+  const chance = creaturePassive(allied ? state : undefined, source.species).effects.reduce(
+    (total, entry) => total + (entry.kind === "shareProtection" ? entry.amount : 0),
+    0,
+  );
+  if (chance <= 0 || (chance < 100 && roll(state) >= chance / 100)) return;
+  for (const recipient of recipients) {
+    if (effect === "block") grantBlock(state, recipient, amount, events, false);
+    else grantStatus(recipient, "thorns", amount, events, state, false);
+  }
+}
+export function grantBlock(
+  state: GameState,
+  unit: Combatant,
+  amount: number,
+  events: GameEvent[],
+  sharing = true,
+) {
   if (unit.health <= 0 || amount <= 0) return;
   const gained = Math.min(STACK_LIMIT - unit.block, Math.round(amount));
   unit.block += gained;
@@ -149,7 +178,8 @@ export function grantBlock(state: GameState, unit: Combatant, amount: number, ev
   if (!("maxHealth" in unit) && hasTalent(state, "light.radiant-guard") && roll(state) < 0.1)
     drawKeyword(state, "light");
   if (!("maxHealth" in unit) && state.boons.includes("ironwood-buckler"))
-    grantStatus(unit, "thorns", 1, events);
+    grantStatus(unit, "thorns", 1, events, state, sharing);
+  if (sharing) shareProtection(state, unit, "block", gained, events);
 }
 export function gainMana(state: GameState, amount: number, events: GameEvent[]) {
   if (!state.battle || amount <= 0) return;
@@ -199,7 +229,7 @@ export function grantArmor(state: GameState, unit: Combatant, amount: number, ev
     if (hasTalent(state, "armor.last-stand") && unit.health < maximumHealth(unit) / 2) amount *= 1.25;
     if (hasTalent(state, "armor.reinforced") && roll(state) < 0.1) amount *= 2;
   }
-  grantStatus(unit, "armor", Math.round(amount), events);
+  grantStatus(unit, "armor", Math.round(amount), events, state);
   if (allied && combat(unit).armor > before && hasTalent(state, "armor.purification") && roll(state) < 0.1)
     removeEffects(unit, "cleanse", 1, events, state);
 }
@@ -282,6 +312,8 @@ export function grantStatus(
   status: "armor" | "thorns" | "dodge",
   amount: number,
   events: GameEvent[],
+  state?: GameState,
+  sharing = true,
 ) {
   if (unit.health <= 0) return;
   const stats = combat(unit),
@@ -297,6 +329,7 @@ export function grantStatus(
       outcome: "gain",
       text: `${unitName(unit)} gains ${gain} ${status}.`,
     });
+  if (status === "thorns" && state && sharing) shareProtection(state, unit, "thorns", gain, events);
 }
 /** Resolve after the Armor-removing effect, so its original hit completes first. */
 export function triggerArmorBreak(state: GameState, unit: Combatant, events: GameEvent[]) {
@@ -714,7 +747,7 @@ function resolveHit(
       restoreHealth(target, 1, events, false, state);
     if (alliedTarget) {
       stats.rhythm = 0;
-      if (hasTalent(state, "dodge.thornstep")) grantStatus(target, "thorns", 1, events);
+      if (hasTalent(state, "dodge.thornstep")) grantStatus(target, "thorns", 1, events, state);
       if (hasTalent(state, "dodge.clean-getaway")) {
         for (const status of ["burn", "poison", "bleed"] as const) {
           stats[status] = Math.max(0, stats[status] - 1);
@@ -917,7 +950,7 @@ function resolveHit(
     armorBroken ||= statusResult.armorBroken;
     if (direct && alliedSource && !alliedTarget && source.health > 0) {
       if (type === "nature" && hasTalent(state, "nature.bramblegrowth") && roll(state) < 0.1)
-        grantStatus(source, "thorns", damage, events);
+        grantStatus(source, "thorns", damage, events, state);
       if (type === "light" && lost > 0 && hasTalent(state, "light.faith-barrier") && roll(state) < 0.1)
         grantBlock(state, source, lost, events);
     }

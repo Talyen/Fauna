@@ -226,7 +226,7 @@ it("rejects obsolete development saves and recovers a current-format backup with
   expect(memory.getItem("fauna.save.v1")).toBe(obsolete);
   session.command({ type: "endTurn" });
   await session.flush();
-  expect(JSON.parse(memory.getItem("fauna.save.v1")!).version).toBe(27);
+  expect(JSON.parse(memory.getItem("fauna.save.v1")!).version).toBe(28);
   await session.dispose();
 });
 

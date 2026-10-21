@@ -1,6 +1,7 @@
 import { DAMAGE_TYPES, keywordLabel, type DamageType, EFFECT_KEYWORDS } from "./keywords";
 export { type DamageType } from "./keywords";
-export type SpeciesId = "mossguard" | "emberback" | "pollenmoth" | "prismram" | "captoad" | "dunefox";
+export type SpeciesId =
+  "mossguard" | "emberback" | "pollenmoth" | "prismram" | "captoad" | "dunefox" | "reedstag";
 type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
   | { kind: "blockRetention"; amount: number }
@@ -9,6 +10,7 @@ type PassiveEffect =
   | { kind: "poisonRetaliation"; amount: number }
   | { kind: "armorBreak"; amount: number }
   | { kind: "statusReflection"; amount: number }
+  | { kind: "shareProtection"; amount: number }
   | { kind: "shareDodge"; amount: number }
   | { kind: "bounce"; effect: "light" | "heal"; amount: number; chance?: number };
 export interface PassiveTier {
@@ -31,7 +33,8 @@ export const DAMAGE_LABELS = Object.fromEntries(DAMAGE_TYPES.map((id) => [id, ke
 type CardEffect =
   | { kind: "damage"; damageType: DamageType; amount: number; leech?: boolean }
   | { kind: "status"; status: "armor" | "thorns" | "dodge"; amount: number }
-  | { kind: "draw" | "mana" | "cleanse" | "purge" | "reflect" | "heal" | "blind"; amount: number };
+  | { kind: "cleanse"; amount: number; target?: "recipient" }
+  | { kind: "draw" | "mana" | "purge" | "reflect" | "heal" | "blind"; amount: number };
 interface CardBase {
   id: string;
   species: SpeciesId;
@@ -307,6 +310,40 @@ export const SPECIES: readonly Species[] = [
       { description: "Allies gain 40% of your Dodge chance", effects: [{ kind: "shareDodge", amount: 40 }] },
     ],
   },
+  {
+    id: "reedstag",
+    name: "Reedstag",
+    title: "The living reedbed",
+    health: 30,
+    color: "#c2a052",
+    trait: "Reedguard",
+    passiveTiers: [
+      {
+        description: "Block and Thorns have a 20% chance to be shared with allies",
+        effects: [{ kind: "shareProtection", amount: 20 }],
+      },
+      {
+        description: "Block and Thorns have a 40% chance to be shared with allies",
+        effects: [{ kind: "shareProtection", amount: 40 }],
+      },
+      {
+        description: "Block and Thorns have a 60% chance to be shared with allies",
+        effects: [{ kind: "shareProtection", amount: 60 }],
+      },
+      {
+        description: "Block and Thorns have a 80% chance to be shared with allies",
+        effects: [{ kind: "shareProtection", amount: 80 }],
+      },
+      {
+        description: "Block and Thorns have a 90% chance to be shared with allies",
+        effects: [{ kind: "shareProtection", amount: 90 }],
+      },
+      {
+        description: "Block and Thorns are shared with allies",
+        effects: [{ kind: "shareProtection", amount: 100 }],
+      },
+    ],
+  },
 ];
 const card = <T extends Exclude<Effect, "attack">>(
   species: SpeciesId,
@@ -336,6 +373,22 @@ const attack = (
   damageType,
 });
 export const CARDS: readonly CardDefinition[] = [
+  {
+    ...attack("reedstag", "Reed Rush", 6, "nature"),
+    artwork: "action.reedstag.reed-rush",
+  },
+  {
+    ...card("reedstag", "Reed Shelter", "guard", 3),
+    target: "self",
+    effects: [{ kind: "status", status: "thorns", amount: 3 }],
+    artwork: "action.reedstag.reed-shelter",
+  },
+  {
+    ...card("reedstag", "Mending Spring", "heal", 4),
+    target: "mostInjured",
+    effects: [{ kind: "cleanse", amount: 7, target: "recipient" }],
+    artwork: "action.reedstag.mending-spring",
+  },
   {
     ...attack("dunefox", "Sandburst Pounce", 6, "physical"),
     artwork: "action.dunefox.sandburst-pounce",
@@ -491,7 +544,9 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
                   ? "Blind all enemies"
                   : effect.kind === "reflect"
                     ? "Reflect the next harmful status effect"
-                    : `${effect.kind === "cleanse" ? "Cleanse acting creature" : "Purge target"}: remove ${effect.amount} effect${effect.amount === 1 ? "" : "s"}`);
+                    : effect.kind === "cleanse" && effect.target === "recipient"
+                      ? "Cleanse the healed ally"
+                      : `${effect.kind === "cleanse" ? "Cleanse acting creature" : "Purge target"}: remove ${effect.amount} effect${effect.amount === 1 ? "" : "s"}`);
   }
   if (card.leech) text += "; Leech";
   return text;

@@ -1032,6 +1032,50 @@
       "aspect": [3, 4],
       "provenance": "Unchanged Dunefox artwork selected from user Google Drive: https://drive.google.com/file/d/1Bo33wf9Z7WK7b9QV5q6BE8ozs_oeBypr/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "creature.reedstag",
+      "origin": "repository",
+      "source": "public/art/reedstag/portrait.png",
+      "output": "art/reedstag/portrait.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Reedstag artwork selected from user Google Drive: https://drive.google.com/file/d/1k5URVOM6gScUAROPRakMT91lmELMMOYc/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.reedstag.reed-rush",
+      "origin": "repository",
+      "source": "public/art/reedstag/reed-rush.png",
+      "output": "art/reedstag/reed-rush.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Reedstag artwork selected from user Google Drive: https://drive.google.com/file/d/1bETjGsMA4xlsxc0IONjtChGKh6kHuAYR/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.reedstag.reed-shelter",
+      "origin": "repository",
+      "source": "public/art/reedstag/reed-shelter.png",
+      "output": "art/reedstag/reed-shelter.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Reedstag artwork selected from user Google Drive: https://drive.google.com/file/d/1s5SToyFgJT6kv-5Q3Cioa4_YmAsCtD-P/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.reedstag.mending-spring",
+      "origin": "repository",
+      "source": "public/art/reedstag/mending-spring.png",
+      "output": "art/reedstag/mending-spring.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Reedstag artwork selected from user Google Drive: https://drive.google.com/file/d/1tImlkfgexSaQxx_m7eSg1QzDhcOzQNwe/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

@@ -145,9 +145,12 @@ it("honors the probabilistic healing tier and stops damage bounces after actor k
 
 it("discovers and recruits Pollenmoth with its complete kit", () => {
   const initial = createGame(7);
-  let game = accept(accept(initial, { type: "draft", species: initial.starterOffers[0]! }), {
-    type: "start",
-  });
+  let game = accept(
+    accept(initial, { type: "draft", species: initial.starterOffers.find((kind) => kind !== "pollenmoth")! }),
+    {
+      type: "start",
+    },
+  );
   game = accept(
     produce(game, (draft) => {
       draft.expedition!.pack = COMBAT_PACKS.findIndex((pack) => pack[0] === "pollenmoth");
