@@ -1,3 +1,4 @@
+import { Screen } from "./screen";
 import { PagedItems } from "./pagination";
 import { campfireRecovery } from "../game/support";
 import { species } from "../game/content";
@@ -8,7 +9,7 @@ import { KeywordText } from "./keyword-text";
 export function Campfire({ game, send }: { game: GameState; send: (command: Command) => boolean }) {
   const creatures = [...game.team, ...game.reserves];
   return (
-    <main className="campfire-screen">
+    <Screen className="campfire-screen">
       <h1>Campfire</h1>
       <PagedItems items={creatures} pageSize={3} className="campfire-roster" label="Rest recovery pages">
         {(creature) => (
@@ -24,6 +25,6 @@ export function Campfire({ game, send }: { game: GameState; send: (command: Comm
         )}
       </PagedItems>
       <Button onClick={() => send({ type: "rest" })}>Rest</Button>
-    </main>
+    </Screen>
   );
 }

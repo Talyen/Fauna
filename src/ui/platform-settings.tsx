@@ -1,3 +1,4 @@
+import { Screen } from "./screen";
 import { PagedItems } from "./pagination";
 import { Loading } from "./loading";
 import { TriangleAlert } from "lucide-react";
@@ -126,7 +127,7 @@ function phaseLabel(game: GameState) {
 export function CloudRecovery({ session }: { session: Session }) {
   const cloud = useStore(session.store, (s) => s.cloud);
   return (
-    <main className="recovery">
+    <Screen className="recovery">
       <h1>
         {cloud.importAvailable
           ? "Steam progress"
@@ -198,6 +199,6 @@ export function CloudRecovery({ session }: { session: Session }) {
           ) : null}
         </>
       )}
-    </main>
+    </Screen>
   );
 }

@@ -104,8 +104,9 @@ for (const [width, height] of REVIEW_VIEWPORTS)
       );
       await page.goto("/");
       await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
-      await expectScrollFree(page);
+      await captureScreen(page, { path: `reports/scroll-free/home-${width}-${height}-${scale}.png` });
       await page.getByRole("button", { name: "Collection", exact: true }).click();
+      await captureScreen(page, { path: `reports/scroll-free/collection-${width}-${height}-${scale}.png` });
       const seen = new Set<string>();
       await everyPage(page.locator(".collection-screen"), async () => {
         await page.mouse.move(0, 0);
@@ -131,19 +132,27 @@ for (const [width, height] of REVIEW_VIEWPORTS)
       expect(seen.size).toBe(SPECIES.length);
       await page.getByRole("button", { name: "Open menu", exact: true }).click();
       await page.getByRole("button", { name: "Talents", exact: true }).click();
+      await captureScreen(page, { path: `reports/scroll-free/talents-${width}-${height}-${scale}.png` });
       for (const keyword of KEYWORDS) {
         await page.getByRole("button", { name: `${keywordLabel(keyword)} talents`, exact: true }).click();
+        if (keyword === KEYWORDS[0])
+          await captureScreen(page, {
+            path: `reports/scroll-free/talent-tree-${width}-${height}-${scale}.png`,
+          });
         await everyPage(page.locator(".talents-screen"), () => expectScrollFree(page));
         await page.keyboard.press("Escape");
       }
       await page.getByRole("button", { name: "Open menu", exact: true }).click();
       await page.getByRole("button", { name: "Glossary", exact: true }).click();
+      await captureScreen(page, { path: `reports/scroll-free/glossary-${width}-${height}-${scale}.png` });
       await everyPage(page.getByRole("main", { name: "Glossary & controls" }), () => expectScrollFree(page));
       await page.keyboard.press("Escape");
       await page.getByRole("button", { name: "Settings", exact: true }).click();
       for (const name of ["Display", "Sound", "Battle"]) {
         await page.getByRole("tab", { name, exact: true }).click();
-        await expectScrollFree(page);
+        await captureScreen(page, {
+          path: `reports/scroll-free/settings-${name}-${width}-${height}-${scale}.png`,
+        });
       }
       await page.keyboard.press("Escape");
       await page.getByRole("button", { name: "Continue", exact: true }).click();
@@ -203,4 +212,25 @@ test("layout enforcement rejects controls with an obscured edge even when their 
     '<main class="app"><button style="width:160px;height:44px">Discard Pile</button><div style="position:fixed;left:148px;top:8px;width:20px;height:44px"></div></main>',
   );
   expect((await page.evaluate(layoutViolations)).some((entry) => entry.includes("obscured"))).toBe(true);
+});
+
+test("layout enforcement checks the content center inside a full-height screen", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.setContent(
+    '<div class="app"><div class="screen-stage" style="height:600px;display:flex;align-items:center"><main style="width:100%;height:100%"><h1 style="margin:0;height:40px">Settings</h1></main></div></div>',
+  );
+  expect(
+    (await page.evaluate(layoutViolations)).some((entry) => entry.includes("not vertically centered")),
+  ).toBe(true);
+  await page.locator("main").evaluate((el) => {
+    el.style.display = "flex";
+    el.style.alignItems = "center";
+  });
+  expect((await page.evaluate(layoutViolations)).filter((entry) => entry.includes("centered"))).toEqual([]);
+  await page.locator("main").evaluate((el) => {
+    el.style.width = "50%";
+  });
+  expect(
+    (await page.evaluate(layoutViolations)).some((entry) => entry.includes("not horizontally centered")),
+  ).toBe(true);
 });
