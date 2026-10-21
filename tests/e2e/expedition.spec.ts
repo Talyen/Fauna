@@ -4,7 +4,7 @@ import { test, expect, type Page, type Locator } from "@playwright/test";
 import { produce } from "immer";
 import { createGame } from "../../src/game/engine";
 import { definition, species } from "../../src/game/content";
-import { BOONS } from "../../src/game/progression";
+import { BOONS, TALENTS } from "../../src/game/progression";
 import type { GameState } from "../../src/game/types";
 import { recruitChoice, accept, policy, winBattle, run, bossReward } from "../unit/helpers";
 const key = "fauna.save.v1";
@@ -468,25 +468,110 @@ test("talents purchase immediately, gate rows, reset a category, and return to t
   page,
 }) => {
   const fixture = produce(run(7), (d) => {
-    d.keywordXP = { burn: 40, block: 20 };
+    d.keywordXP = { burn: 100, block: 20 };
+    d.talents = ["block.second-wind"];
   });
   await seed(page, fixture);
   await resume(page);
   await page.getByRole("button", { name: "Open menu" }).click();
   await page.getByRole("button", { name: "Talents", exact: true }).click();
-  await page.getByRole("button", { name: "Burn talents", exact: true }).click();
+  const burn = page.getByRole("button", { name: "Burn talents", exact: true });
+  await expect(burn).toHaveAccessibleDescription("3 points available");
+  await burn.click();
+  const laterTalent = TALENTS.find((talent) => talent.keyword === "burn" && talent.row === 1)!;
+  const later = page.getByRole("button", { name: laterTalent.name, exact: true });
+  await expect(later).toHaveAttribute("aria-disabled", "true");
+  const before = (await state(page)).revision;
+  await later.focus();
+  await page.keyboard.press("Enter");
+  expect((await state(page)).revision).toBe(before);
   await page.getByRole("button", { name: "Melting Point", exact: true }).click();
   await page.getByRole("button", { name: "Flashpoint", exact: true }).click();
-  expect((await state(page)).talents).toHaveLength(2);
-  await page.getByRole("button", { name: "Reset category", exact: true }).click();
-  expect((await state(page)).talents).toEqual([]);
-  expect((await state(page)).keywordXP.burn).toBe(40);
+  await expect(page.getByRole("button", { name: "Flashpoint, unlocked", exact: true })).toBeFocused();
+  expect((await state(page)).talents).toHaveLength(3);
+  await expect(later).toHaveAttribute("aria-disabled", "false");
+  await expect(page.getByText("1 point available", { exact: true })).toBeVisible();
+  const reset = page.getByRole("button", { name: "Reset Burn talents", exact: true });
+  await reset.click();
+  expect((await state(page)).talents).toEqual(["block.second-wind"]);
+  expect((await state(page)).keywordXP.burn).toBe(100);
+  await expect(reset).toBeDisabled();
+  await expect(page.getByRole("button", { name: "Melting Point", exact: true })).toBeFocused();
   await page.keyboard.press("Escape");
+  await expect(burn).toBeFocused();
+  await expect(burn).toHaveAccessibleDescription("3 points available");
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
   await page.getByRole("button", { name: "Resume", exact: true }).click();
   expect((await state(page)).battle).toEqual(fixture.battle);
 });
+for (const [width, height] of [
+  [1280, 720],
+  [1280, 800],
+  [1920, 1080],
+  [1024, 768],
+  [1024, 600],
+  [960, 540],
+  [2560, 1080],
+  [3440, 1440],
+] as const)
+  test(`talents overview fits all categories at ${width}×${height}`, async ({ page }) => {
+    await page.setViewportSize({ width, height });
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    const fixture = produce(createGame(7), (draft) => {
+      draft.keywordXP.burn = 100;
+    });
+    await seed(page, fixture);
+    for (const scale of [1, 1.25]) {
+      await page.evaluate((value) => localStorage.setItem("fauna.text-scale", String(value)), scale);
+      await page.reload();
+      await page.getByRole("button", { name: "Talents", exact: true }).click();
+      const cards = page.locator(".talent-overview .action-card");
+      await expect(cards).toHaveCount(14);
+      await expect(
+        page.getByRole("button", { name: "Burn talents", exact: true }),
+      ).toHaveAccessibleDescription("3 points available");
+      await page.mouse.move(0, 0);
+      await page
+        .locator(".talent-overview img")
+        .evaluateAll((images) => Promise.all(images.map((image) => (image as HTMLImageElement).decode())));
+      await fits(page);
+      const layout = await page.locator(".talents-screen").evaluate((screen) => {
+        const categories = [...screen.querySelectorAll(".talent-category")];
+        const arts = [...screen.querySelectorAll(".action-card")];
+        const insideWindow = (element: Element) => {
+          const box = element.getBoundingClientRect();
+          return box.left >= 0 && box.top >= 0 && box.right <= innerWidth && box.bottom <= innerHeight;
+        };
+        return {
+          noScroll: screen.scrollHeight <= screen.clientHeight && screen.scrollWidth <= screen.clientWidth,
+          captionsVisible: categories.every((category) => [...category.children].every(insideWindow)),
+          readableCaptions: categories.every((category) =>
+            [...category.querySelectorAll("h2, p")].every(
+              (caption) =>
+                caption.scrollWidth <= caption.clientWidth && caption.scrollHeight <= caption.clientHeight,
+            ),
+          ),
+          portraitSizes: arts.every((art) => {
+            const box = art.getBoundingClientRect();
+            return box.width <= 160.5 && Math.abs(box.width / box.height - 0.75) < 0.01 && box.height >= 44;
+          }),
+          rows: new Set(arts.map((art) => Math.round(art.getBoundingClientRect().top))).size,
+        };
+      });
+      expect(layout).toEqual({
+        noScroll: true,
+        captionsVisible: true,
+        readableCaptions: true,
+        portraitSizes: true,
+        rows: 2,
+      });
+      await captureScreen(page, {
+        path: `reports/implementation/talents-overview-${width}-${height}-${scale}.png`,
+      });
+      expect((await state(page)).revision).toBe(fixture.revision);
+    }
+  });
 test("Collection hides uncollected tooltips and uses centered collected inspection", async ({ page }) => {
   await seed(page, run());
   await page.getByRole("button", { name: "Collection", exact: true }).click();

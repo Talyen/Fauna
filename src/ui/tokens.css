@@ -113,7 +113,10 @@
   --tooltip-text-secondary: calc(14px * var(--tooltip-scale, 1));
   --tooltip-travel: 0px;
   --feedback-duration: 1000ms;
-  /* Fixed CSS-pixel artwork sizes; layouts reflow instead of scaling artwork. */
+  /* Only talents overview art scales to fit; all other artwork keeps fixed CSS-pixel sizes. */
+  --talent-overview-art-width: 160px;
+  --talent-card-width: 328px;
+  --talent-card-min-height: 168px;
   --art-standard-short-side: 200px;
   --art-short-side: var(--art-standard-short-side);
   --page-inline-gutter: 32px;
