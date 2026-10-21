@@ -60,3 +60,46 @@ for (const width of [1280, 1920]) {
     expect(saved.expedition?.pack).toEqual(game.expedition!.pack);
   });
 }
+
+for (const width of [1280, 1920]) {
+  test(`mouse targeting waits for a recipient and keeps the battlefield stable at ${width}`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    const game = produce(run(7), (state) => {
+      const attack = state.cards.find((card) => card.definitionId === "mossback-attack")!;
+      state.battle!.hand = [attack.id];
+      state.battle!.draw = state.cards.filter((card) => card.id !== attack.id).map((card) => card.id);
+    });
+    await seed(page, game);
+    const card = page.locator(".app:not([inert]) .hand .action-card");
+    const row = page.getByRole("region", { name: "Player row" });
+    const before = await row.evaluate((element) => ({
+      top: (element as HTMLElement).offsetTop,
+      height: element.clientHeight,
+    }));
+    await card.click();
+    await expect(page.getByText("Mossback · Choose an enemy", { exact: true })).toBeVisible();
+    await expect(page.locator(".target-preview")).toHaveCount(0);
+    await expect(page.locator(".target-line")).toHaveCount(0);
+    const target = page.locator('[data-actor-id="enemy-0"] .creature-card');
+    await target.hover();
+    await expect(page.locator('[data-actor-id="enemy-0"]')).toHaveAttribute("data-active-target", "true");
+    await expect(page.locator(".target-preview")).toBeVisible();
+    await expect(page.locator(".target-preview")).toContainText("Poison");
+    expect(
+      await row.evaluate((element) => ({
+        top: (element as HTMLElement).offsetTop,
+        height: element.clientHeight,
+      })),
+    ).toEqual(before);
+    expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(game);
+    await captureScreen(page, { path: `reports/targeting-hover-${width}.png` });
+    await card.hover();
+    await expect(page.locator(".target-preview")).toHaveCount(0);
+    await expect(page.locator(".target-line")).toHaveCount(0);
+    await page.keyboard.press("Escape");
+    await expect(card).toHaveAttribute("aria-pressed", "false");
+  });
+}

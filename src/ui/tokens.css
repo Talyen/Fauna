@@ -87,6 +87,15 @@
   --unavailable-opacity: 0.45;
   --disabled-opacity: 0.5;
   --pressed-scale: 0.98;
+  --target-actor-width: 1px;
+  --target-bracket-width: 2px;
+  --target-bracket-gap: 6px;
+  --target-corner: 16px;
+  --target-summary-width: 480px;
+  --target-control-height: calc(96px * var(--text-scale, 1));
+  --target-readout-height: 60px;
+  --target-outcomes-height: 44px;
+  --target-denial-duration: 2400ms;
   --selection-gap: 3px;
   --selection-width: 2px;
   --progress-height: 8px;

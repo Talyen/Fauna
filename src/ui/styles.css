@@ -319,11 +319,8 @@ strong {
   align-items: center;
   justify-content: center;
   gap: var(--screen-item-gap);
-  min-height: var(--control-height);
+  height: var(--target-control-height);
   z-index: 4;
-}
-.target-control:empty {
-  visibility: hidden;
 }
 .hand-section {
   position: fixed;
@@ -455,9 +452,73 @@ strong {
   width: 14px;
   height: 14px;
 }
-.creature-wrap:has(.target-preview) .creature-card {
-  outline: 1px solid var(--selected);
-  outline-offset: 2px;
+.battle-screen .creature-card {
+  overflow: visible;
+}
+.battle-screen :is(.enemy-row, .player-row) {
+  padding: var(--target-bracket-gap);
+}
+.battle-screen [data-acting] :where(.creature-card) {
+  outline: var(--target-actor-width) solid var(--muted-foreground);
+  outline-offset: var(--selection-gap);
+}
+.battle-screen .creature-wrap[data-valid-target] .creature-card::before {
+  content: "";
+  position: absolute;
+  inset: calc(-1 * var(--target-bracket-gap));
+  border: var(--target-bracket-width) solid var(--muted-foreground);
+  border-radius: var(--radius);
+  clip-path: polygon(
+    0 0,
+    var(--target-corner) 0,
+    var(--target-corner) var(--target-bracket-width),
+    calc(100% - var(--target-corner)) var(--target-bracket-width),
+    calc(100% - var(--target-corner)) 0,
+    100% 0,
+    100% var(--target-corner),
+    calc(100% - var(--target-bracket-width)) var(--target-corner),
+    calc(100% - var(--target-bracket-width)) calc(100% - var(--target-corner)),
+    100% calc(100% - var(--target-corner)),
+    100% 100%,
+    calc(100% - var(--target-corner)) 100%,
+    calc(100% - var(--target-corner)) calc(100% - var(--target-bracket-width)),
+    var(--target-corner) calc(100% - var(--target-bracket-width)),
+    var(--target-corner) 100%,
+    0 100%,
+    0 calc(100% - var(--target-corner)),
+    var(--target-bracket-width) calc(100% - var(--target-corner)),
+    var(--target-bracket-width) var(--target-corner),
+    0 var(--target-corner)
+  );
+  pointer-events: none;
+}
+.battle-screen .creature-wrap[data-active-target] .creature-card::before {
+  border-color: var(--selected);
+}
+.target-summary {
+  max-width: var(--target-summary-width);
+  min-width: 0;
+  text-align: center;
+  max-height: 100%;
+  overflow-y: auto;
+  font-size: var(--text-secondary);
+}
+.target-summary .card-details {
+  gap: 0;
+}
+.battle-screen .battle-readout {
+  height: var(--target-readout-height);
+}
+.battle-screen .combat-stats {
+  height: var(--target-outcomes-height);
+  overflow-y: auto;
+  align-content: start;
+  flex-wrap: wrap;
+  column-gap: var(--screen-item-gap);
+  row-gap: 0;
+}
+.target-line marker path {
+  stroke: var(--selected);
 }
 .card-details {
   display: flex;

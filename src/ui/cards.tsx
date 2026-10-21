@@ -25,6 +25,10 @@ type CreatureProps = {
   enemyId?: string;
   actorId?: string;
   onPreview?: () => void;
+  onPreviewEnd?: () => void;
+  validTarget?: boolean;
+  activeTarget?: boolean;
+  acting?: boolean;
   preview?: ReactNode;
   feedback?: ReactNode;
   tooltips?: boolean;
@@ -49,6 +53,10 @@ export function CreatureCard({
   enemyId,
   actorId,
   onPreview,
+  onPreviewEnd,
+  validTarget = false,
+  activeTarget = false,
+  acting = false,
   preview,
   feedback,
   tooltips = true,
@@ -86,6 +94,9 @@ export function CreatureCard({
         else onPreview?.();
       }}
       onPointerEnter={onPreview}
+      onPointerMove={onPreview}
+      onPointerLeave={onPreviewEnd}
+      onBlur={onPreviewEnd}
       onContextMenu={
         onInspect
           ? (event) => {
@@ -101,6 +112,9 @@ export function CreatureCard({
     <div
       className={`creature-wrap ${health === 0 ? "knocked-out" : ""}`}
       data-actor-id={actorId ?? enemyId}
+      data-valid-target={validTarget || undefined}
+      data-active-target={activeTarget || undefined}
+      data-acting={acting || undefined}
       data-max-health={maxHealth ?? info.health}
     >
       <div className="combatant-motion">
