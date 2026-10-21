@@ -1,7 +1,19 @@
-import { definition } from "./content";
+import type { SpeciesId } from "./content";
+import { definition, species } from "./content";
 import { PROGRESSION_KEYWORDS, definitionKeywords, type ProgressionKeyword } from "./keywords";
 export { progressionLabel as keywordLabel } from "./keywords";
 import type { Card, GameState } from "./types";
+export const MAX_CREATURE_STARS = 5;
+export function creatureStars(state: Pick<GameState, "discovery">, kind: SpeciesId): number {
+  return Math.max(0, (state.discovery.recruited[kind] ?? 0) - 1);
+}
+/** Each authored tier replaces the full passive; undefined tiers retain the previous effect. */
+export function creaturePassive(state: Pick<GameState, "discovery"> | undefined, kind: SpeciesId) {
+  const tiers = species(kind).passiveTiers;
+  let rank = state ? creatureStars(state, kind) : 0;
+  while (rank > 0 && tiers[rank] === null) rank--;
+  return { rank, ...tiers[rank]! };
+}
 export const KEYWORDS = PROGRESSION_KEYWORDS;
 export type Keyword = ProgressionKeyword;
 export type KeywordXP = Partial<Record<Keyword, number>>;

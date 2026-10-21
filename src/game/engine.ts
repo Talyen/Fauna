@@ -1,6 +1,14 @@
 import { MERCHANT_PRICE, canVisitCampfire, campfireRecovery, canVisitMerchant } from "./support";
 import { freeze, produce } from "immer";
-import { KEYWORDS, BOONS, cardKeywords, canBuyTalent, hasTalent } from "./progression";
+import {
+  creaturePassive,
+  MAX_CREATURE_STARS,
+  KEYWORDS,
+  BOONS,
+  cardKeywords,
+  canBuyTalent,
+  hasTalent,
+} from "./progression";
 import {
   combat,
   shuffle,
@@ -30,9 +38,9 @@ import type { Card, Command, CommandResult, GameEvent, GameState } from "./types
 export function createGame(seed = 1): GameState {
   return freeze(
     {
-      version: 20,
+      version: 21,
       support: null,
-      discovery: { encountered: [], recruited: [] },
+      discovery: { encountered: [], recruited: {} },
       revision: 0,
       rng: seed >>> 0,
       phase: "draft",
@@ -117,7 +125,6 @@ export function beginBattle(state: GameState, events: GameEvent[] = []) {
   rebuildCards(state);
   for (const c of [...state.team, ...state.reserves]) {
     c.combat = freshCombat();
-    if (c.species === "briartooth" && state.team.includes(c)) c.combat.thorns = 2;
     c.block = 0;
     c.attacked = false;
   }
@@ -136,25 +143,37 @@ export function beginBattle(state: GameState, events: GameEvent[] = []) {
     hand: [],
     buffer: [],
     discard: [],
-    enemies: encounter.enemies.map((e, i) => ({
-      id: `enemy-${i}`,
-      name: e.name,
-      species: e.species,
-      health: e.health,
-      maxHealth: e.health,
-      damage: e.damage,
-      targetId: "",
-      block: e.species === "moonhart" ? 4 : 0,
-      combat: { ...freshCombat(), thorns: e.species === "briartooth" ? 2 : 0 },
-      lastAbility: null,
-    })),
+    enemies: encounter.enemies.map((e, i) => {
+      const enemy = {
+        id: `enemy-${i}`,
+        name: e.name,
+        species: e.species,
+        health: e.health,
+        maxHealth: e.health,
+        damage: e.damage,
+        targetId: "",
+        block: 0,
+        combat: freshCombat(),
+        lastAbility: null,
+      };
+      for (const effect of creaturePassive(undefined, e.species).effects) {
+        if (effect.kind !== "battleStart") continue;
+        if (effect.effect === "block") enemy.block += effect.amount;
+        else enemy.combat.thorns += effect.amount;
+      }
+      return enemy;
+    }),
   };
   state.phase = "battle";
   draw(state, TURN_DRAW + (state.boons.includes("tattered-pages") ? 1 : 0));
   if (hasTalent(state, "nature.ecosystem")) drawKeyword(state, "nature");
   for (const unit of state.team) {
     if (hasTalent(state, "armor.bulwark")) grantArmor(state, unit, 2, events);
-    if (unit.species === "moonhart") grantBlock(state, unit, 4, events);
+    for (const effect of creaturePassive(state, unit.species).effects) {
+      if (effect.kind !== "battleStart") continue;
+      if (effect.effect === "block") grantBlock(state, unit, effect.amount, events);
+      else grantStatus(unit, "thorns", effect.amount, events);
+    }
     if (hasTalent(state, "mana.mana-bulwark")) grantBlock(state, unit, state.battle.maxMana, events);
     if (hasTalent(state, "mana.mana-shell")) grantArmor(state, unit, state.battle.maxMana, events);
     if (hasTalent(state, "heal.combat-surge")) restoreHealth(unit, 4, events, false, state);
@@ -710,8 +729,10 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         break;
       }
       case "recruit": {
-        if (!draft.discovery.recruited.includes(command.species))
-          draft.discovery.recruited.push(command.species);
+        draft.discovery.recruited[command.species] = Math.min(
+          MAX_CREATURE_STARS + 1,
+          (draft.discovery.recruited[command.species] ?? 0) + 1,
+        );
         const all = [...draft.team, ...draft.reserves];
         let id = `recruit-${draft.revision}`;
         for (let suffix = 1; all.some((creature) => creature.id === id); suffix++)
@@ -779,7 +800,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
           unlocked: [...state.unlocked],
           discovery: {
             encountered: [...state.discovery.encountered],
-            recruited: [...state.discovery.recruited],
+            recruited: { ...state.discovery.recruited },
           },
           wins: state.wins,
           keywordXP: { ...state.keywordXP },

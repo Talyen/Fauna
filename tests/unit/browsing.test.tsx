@@ -86,7 +86,7 @@ describe("menu browsing", () => {
       await user.hover(card);
       const tooltip = await screen.findByRole("tooltip");
       expect(tooltip.textContent).toContain(creature.name);
-      expect(tooltip.textContent).toContain(creature.description);
+      expect(tooltip.textContent).toContain(creature.passiveTiers[0].description);
       expect(screen.queryByRole("dialog")).toBeNull();
       await user.click(card);
       expect(screen.getByRole("dialog")).toBeTruthy();

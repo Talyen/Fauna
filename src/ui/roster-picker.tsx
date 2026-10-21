@@ -38,6 +38,7 @@ export function RosterPicker({
   };
   const tile = (creature: Creature, isActive: boolean) => (
     <CreatureCard
+      progression={game}
       key={creature.id}
       kind={creature.species}
       actorId={creature.id}

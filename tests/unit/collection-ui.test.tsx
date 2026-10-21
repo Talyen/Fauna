@@ -31,6 +31,7 @@ it("pages the collection, resets filters and keeps every creature reachable afte
   vi.spyOn(HTMLElement.prototype, "clientWidth", "get").mockImplementation(() => width);
   const game = produce(createGame(), (draft) => {
     draft.discovery.encountered = SPECIES.map((entry) => entry.id);
+    draft.discovery.recruited.mossback = 3;
   });
   const before = structuredClone(game);
   const inspect = vi.fn();
@@ -40,6 +41,8 @@ it("pages the collection, resets filters and keeps every creature reachable afte
     </TooltipProvider>,
   );
   const user = userEvent.setup();
+  expect(screen.getByRole("img", { name: "Mossback: 2 of 5 stars" })).toBeTruthy();
+  expect(screen.getAllByText("Not recruited")).toHaveLength(5);
   expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(6);
   expect(screen.queryByRole("button", { name: "Next page" })).toBeNull();
   width = 560;

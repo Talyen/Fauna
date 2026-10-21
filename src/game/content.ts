@@ -2,6 +2,13 @@ import { DAMAGE_TYPES, keywordLabel, type DamageType, EFFECT_KEYWORDS } from "./
 export { type DamageType } from "./keywords";
 export type SpeciesId = "mossback" | "emberfox" | "stormfin" | "silkmoth" | "briartooth" | "moonhart";
 type Effect = keyof typeof EFFECT_KEYWORDS;
+type PassiveEffect =
+  | { kind: "cardBonus"; trigger: "firstAttack" | "lightningAttack" | "heal" | "guard"; amount: number }
+  | { kind: "battleStart"; effect: "block" | "thorns"; amount: number };
+export interface PassiveTier {
+  description: string;
+  effects: readonly PassiveEffect[];
+}
 export interface Species {
   id: SpeciesId;
   name: string;
@@ -9,7 +16,14 @@ export interface Species {
   health: number;
   color: string;
   trait: string;
-  description: string;
+  passiveTiers: readonly [
+    PassiveTier,
+    PassiveTier | null,
+    PassiveTier | null,
+    PassiveTier | null,
+    PassiveTier | null,
+    PassiveTier | null,
+  ];
 }
 export const DAMAGE_LABELS = Object.fromEntries(DAMAGE_TYPES.map((id) => [id, keywordLabel(id)])) as Record<
   DamageType,
@@ -38,7 +52,17 @@ export const SPECIES: readonly Species[] = [
     health: 32,
     color: "#9ead70",
     trait: "Rooted",
-    description: "Guard cards grant 2 extra block.",
+    passiveTiers: [
+      {
+        description: "Guard cards grant 2 extra block.",
+        effects: [{ kind: "cardBonus", trigger: "guard", amount: 2 }],
+      },
+      null,
+      null,
+      null,
+      null,
+      null,
+    ],
   },
   {
     id: "emberfox",
@@ -47,7 +71,17 @@ export const SPECIES: readonly Species[] = [
     health: 24,
     color: "#ed9c65",
     trait: "Kindling",
-    description: "First attack each turn deals 2 extra damage.",
+    passiveTiers: [
+      {
+        description: "First attack each turn deals 2 extra damage.",
+        effects: [{ kind: "cardBonus", trigger: "firstAttack", amount: 2 }],
+      },
+      null,
+      null,
+      null,
+      null,
+      null,
+    ],
   },
   {
     id: "stormfin",
@@ -56,7 +90,17 @@ export const SPECIES: readonly Species[] = [
     health: 26,
     color: "#8cbecb",
     trait: "Charged",
-    description: "Lightning attacks deal 1 extra damage.",
+    passiveTiers: [
+      {
+        description: "Lightning attacks deal 1 extra damage.",
+        effects: [{ kind: "cardBonus", trigger: "lightningAttack", amount: 1 }],
+      },
+      null,
+      null,
+      null,
+      null,
+      null,
+    ],
   },
   {
     id: "silkmoth",
@@ -65,7 +109,17 @@ export const SPECIES: readonly Species[] = [
     health: 23,
     color: "#d1b5d3",
     trait: "Tender",
-    description: "Healing cards restore 2 extra health.",
+    passiveTiers: [
+      {
+        description: "Healing cards restore 2 extra health.",
+        effects: [{ kind: "cardBonus", trigger: "heal", amount: 2 }],
+      },
+      null,
+      null,
+      null,
+      null,
+      null,
+    ],
   },
   {
     id: "briartooth",
@@ -74,8 +128,18 @@ export const SPECIES: readonly Species[] = [
     health: 30,
     color: "#c7b76b",
     trait: "Thorns",
-    description:
-      "Start each battle with 2 Thorns. When an attack removes Health, retaliate with current Thorns, then lose 1 stack.",
+    passiveTiers: [
+      {
+        description:
+          "Start each battle with 2 Thorns. When an attack removes Health, retaliate with current Thorns, then lose 1 stack.",
+        effects: [{ kind: "battleStart", effect: "thorns", amount: 2 }],
+      },
+      null,
+      null,
+      null,
+      null,
+      null,
+    ],
   },
   {
     id: "moonhart",
@@ -84,7 +148,17 @@ export const SPECIES: readonly Species[] = [
     health: 28,
     color: "#b7c6e0",
     trait: "Moonlit",
-    description: "Start each battle with 4 block.",
+    passiveTiers: [
+      {
+        description: "Start each battle with 4 block.",
+        effects: [{ kind: "battleStart", effect: "block", amount: 4 }],
+      },
+      null,
+      null,
+      null,
+      null,
+      null,
+    ],
   },
 ];
 const card = (

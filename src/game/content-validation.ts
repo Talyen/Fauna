@@ -34,8 +34,21 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
   for (const entry of catalog.species) {
     if (!Number.isSafeInteger(entry.health) || entry.health < 1 || entry.health > 1_000_000)
       error(entry.id, "health", "Unsupported Health.");
-    if (!entry.name.trim() || !entry.description.trim())
+    if (!entry.name.trim() || !entry.trait.trim())
       error(entry.id, "description", "Name and trait description required.");
+    if (entry.passiveTiers.length !== 6 || !entry.passiveTiers[0])
+      error(entry.id, "passiveTiers", "A base passive and five upgrade slots are required.");
+    for (const tier of entry.passiveTiers) {
+      if (!tier) continue;
+      if (
+        !tier.description.trim() ||
+        !tier.effects.length ||
+        tier.effects.some(
+          (effect) => !Number.isSafeInteger(effect.amount) || effect.amount < 1 || effect.amount > 1_000_000,
+        )
+      )
+        error(entry.id, "passiveTiers", "Authored passive tiers need rules and supported effect amounts.");
+    }
     if (catalog.cards.filter((card) => card.species === entry.id).length !== 3)
       error(entry.id, "cards", "Species must contribute exactly three cards.");
   }

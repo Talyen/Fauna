@@ -239,6 +239,7 @@ export function BattleScreen({
       <section className="player-row" aria-label="Player row">
         {game.team.map((creature) => (
           <AllyCard
+            progression={game}
             key={creature.id}
             creature={creature}
             selected={card?.ownerId === creature.id}

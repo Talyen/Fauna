@@ -8,6 +8,7 @@ import { KeywordText } from "./keyword-text";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui/tabs";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
+  Star,
   LayoutGrid,
   BookOpen,
   LockKeyhole,
@@ -51,6 +52,8 @@ import { ArtCard } from "./art-card";
 import { returnFocus } from "./focus";
 import { SPECIES, species, type SpeciesId } from "../game/content";
 import {
+  creatureStars,
+  MAX_CREATURE_STARS,
   KEYWORDS,
   BOONS,
   TALENTS,
@@ -156,6 +159,7 @@ export function Draft({ game, send, inspect }: Props) {
         {SPECIES.filter((s) => game.unlocked.includes(s.id)).map((s) => (
           <div className="starter-option" key={s.id}>
             <CreatureCard
+              progression={game}
               kind={s.id}
               selected={game.selected.includes(s.id)}
               onClick={() => inspect({ species: s.id })}
@@ -217,6 +221,7 @@ export function Rewards({ game, send, inspect }: Props) {
                 ).map(({ kind, id }) => (
                   <div className="reward-option" key={id}>
                     <CreatureCard
+                      progression={game}
                       kind={kind}
                       actorId={incoming ? id : undefined}
                       label={incoming ? `Release ${species(kind).name}` : `Recruit ${species(kind).name}`}
@@ -232,6 +237,15 @@ export function Rewards({ game, send, inspect }: Props) {
                       }}
                     />
                     <h2>{species(kind).name}</h2>
+                    {!incoming ? (
+                      <p className="collection-uncollected">
+                        {!game.discovery.recruited[kind]
+                          ? "Unlock in Collection"
+                          : creatureStars(game, kind) === MAX_CREATURE_STARS
+                            ? `${MAX_CREATURE_STARS} stars · Max`
+                            : `${creatureStars(game, kind)} → ${creatureStars(game, kind) + 1} stars`}
+                      </p>
+                    ) : null}
                   </div>
                 ))}
               </div>
@@ -543,13 +557,32 @@ export function Collection({
             <div className="collection-grid" ref={gridRef}>
               {ordered.slice(activePage * pageSize, (activePage + 1) * pageSize).map((creature) =>
                 known(creature.id) ? (
-                  <CreatureCard
-                    key={creature.id}
-                    kind={creature.id}
-                    onClick={() => inspect({ species: creature.id })}
-                    onInspect={() => inspect({ species: creature.id })}
-                    label={`Inspect ${creature.name}`}
-                  />
+                  <div className="collection-entry" key={creature.id}>
+                    <CreatureCard
+                      progression={game}
+                      kind={creature.id}
+                      onClick={() => inspect({ species: creature.id })}
+                      onInspect={() => inspect({ species: creature.id })}
+                      label={`Inspect ${creature.name}`}
+                    />
+                    {game.discovery.recruited[creature.id] ? (
+                      <span
+                        className="collection-stars"
+                        role="img"
+                        aria-label={`${creature.name}: ${creatureStars(game, creature.id)} of ${MAX_CREATURE_STARS} stars`}
+                      >
+                        {Array.from({ length: MAX_CREATURE_STARS }, (_, index) => (
+                          <Star
+                            key={index}
+                            aria-hidden="true"
+                            data-earned={index < creatureStars(game, creature.id)}
+                          />
+                        ))}
+                      </span>
+                    ) : (
+                      <span className="collection-uncollected">Not recruited</span>
+                    )}
+                  </div>
                 ) : (
                   <div key={creature.id} className="locked-species">
                     <ArtCard

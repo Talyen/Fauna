@@ -10,6 +10,7 @@ import { cardText, definition, enemyCard, species } from "../game/content";
 import type { SpeciesId } from "../game/content";
 import type { Card, Creature, Enemy, GameState } from "../game/types";
 type CreatureProps = {
+  progression?: Pick<GameState, "discovery">;
   kind: SpeciesId;
   name?: string;
   health?: number;
@@ -33,6 +34,7 @@ type CreatureProps = {
   speciesKit?: boolean;
 };
 export function CreatureCard({
+  progression,
   kind,
   name,
   health,
@@ -110,6 +112,7 @@ export function CreatureCard({
               <TooltipTrigger asChild>{artwork}</TooltipTrigger>
               <TooltipContent>
                 <CreatureDetails
+                  progression={progression}
                   kind={kind}
                   name={name}
                   health={health}

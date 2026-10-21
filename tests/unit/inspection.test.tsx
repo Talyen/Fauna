@@ -3,6 +3,8 @@ import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
 import { act, cleanup, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { produce } from "immer";
+import { createGame } from "../../src/game/engine";
+import { encodeSave } from "../../src/game/save";
 import { App } from "../../src/ui/App";
 import { createSession } from "../../src/application/session";
 import { createBrowserPlatform } from "../../src/platform/browser";
@@ -31,6 +33,15 @@ afterEach(() => {
 
 describe("artwork-first inspection", () => {
   it("keeps creature and ability information on hover and returns to the selected artwork", async () => {
+    localStorage.setItem(
+      "fauna.save.v1",
+      encodeSave(
+        produce(createGame(7), (draft) => {
+          draft.discovery.encountered = ["mossback"];
+          draft.discovery.recruited.mossback = 4;
+        }),
+      ),
+    );
     const session = createSession(createBrowserPlatform(localStorage), 7);
     await session.load();
     const game = session.store.getState().game;
@@ -42,6 +53,11 @@ describe("artwork-first inspection", () => {
       await user.click(opener);
       const dialog = screen.getByRole("dialog", { name: "Mossback" });
       expect(dialog.querySelector(".card-details")).toBeNull();
+      const tiers = within(dialog).getByRole("region", { name: "Rooted passive tiers" });
+      expect(within(tiers).getAllByRole("listitem")).toHaveLength(6);
+      expect(tiers.querySelector('[aria-current="step"]')?.textContent).toContain("3 stars · Current rank");
+      expect(tiers.textContent).toContain("0 stars · Active effect");
+      expect(within(tiers).getAllByText("Not yet defined")).toHaveLength(5);
       expect(within(dialog).queryByRole("button", { name: /Previous|Next/ })).toBeNull();
       await user.hover(within(dialog).getByRole("button", { name: "Mossback details" }));
       expect((await screen.findByRole("tooltip")).textContent).toContain("Rooted");

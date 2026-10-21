@@ -1,3 +1,5 @@
+import { creaturePassive, creatureStars } from "../game/progression";
+import { KeywordText } from "./keyword-text";
 import { enemyInspectionValue } from "../game/rules";
 import { useLayoutEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
@@ -33,6 +35,8 @@ export function Inspector({
   const ally = creatureId ? [...game.team, ...game.reserves].find((c) => c.id === creatureId) : undefined;
   const enemy = "enemyId" in item ? game.battle?.enemies.find((e) => e.id === item.enemyId) : undefined;
   const actor = enemy ? undefined : ally;
+  const rank = enemy ? 0 : creatureStars(game, kind);
+  const passive = creaturePassive(enemy ? undefined : game, kind);
   const cards: Card[] = CARDS.filter((c) => c.species === kind).map((def) =>
     rootCard?.definitionId === def.id
       ? rootCard
@@ -142,6 +146,7 @@ export function Inspector({
               effects.
             </DialogDescription>
             <CreatureCard
+              progression={enemy ? undefined : game}
               kind={kind}
               name={enemy?.name}
               health={enemy?.health ?? ally?.health ?? creature.health}
@@ -152,6 +157,26 @@ export function Inspector({
               speciesKit
               label={`${enemy?.name ?? creature.name} details`}
             />
+            <section className="passive-tiers" aria-label={`${creature.trait} passive tiers`}>
+              <h2>{creature.trait}</h2>
+              <p>
+                {enemy
+                  ? "Species kit · Enemy passives use the base tier."
+                  : `Collection rank: ${rank} / 5 stars`}
+              </p>
+              <ol>
+                {creature.passiveTiers.map((tier, tierRank) => (
+                  <li key={tierRank} aria-current={tierRank === rank ? "step" : undefined}>
+                    <strong>
+                      {tierRank} {tierRank === 1 ? "star" : "stars"}
+                      {tierRank === rank ? " · Current rank" : ""}
+                      {tierRank === passive.rank ? " · Active effect" : ""}
+                    </strong>
+                    <p>{tier ? <KeywordText text={tier.description} /> : "Not yet defined"}</p>
+                  </li>
+                ))}
+              </ol>
+            </section>
             <div className="inspection-thumbnails" ref={thumbnails} data-nav-row>
               {cards.map((action, index) => (
                 <ActionCard

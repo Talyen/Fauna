@@ -653,6 +653,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                 <h1>Creature unlocked</h1>
                 <div className="unlock-creature">
                   <CreatureCard
+                    progression={game}
                     kind={reveals[0]}
                     label={`Inspect ${species(reveals[0]).name}`}
                     onClick={() => setInspection({ species: reveals[0]! })}

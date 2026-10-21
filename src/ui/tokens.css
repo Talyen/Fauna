@@ -82,6 +82,7 @@
   --reward-stagger: 75ms;
   --swap-arc-height: 32px;
   --icon-size: 20px;
+  --collection-rank-height: max(var(--icon-size), calc(var(--text-secondary) * 1.5));
   --empty-icon-size: 24px;
   --unavailable-opacity: 0.45;
   --disabled-opacity: 0.5;

@@ -1,3 +1,4 @@
+import { creaturePassive } from "../game/progression";
 import { CombatStatus } from "./combat-status";
 import { KeywordText } from "./keyword-text";
 import { definition, enemyCard, species, type SpeciesId } from "../game/content";
@@ -48,6 +49,7 @@ export function ActionDetails({
   );
 }
 export function CreatureDetails({
+  progression,
   kind,
   name,
   health,
@@ -57,6 +59,7 @@ export function CreatureDetails({
   combat,
 }: {
   kind: SpeciesId;
+  progression?: Pick<GameState, "discovery">;
   name?: string;
   health?: number;
   maxHealth?: number;
@@ -77,7 +80,7 @@ export function CreatureDetails({
           {name && speciesKit ? <strong>Species kit · {info.name}</strong> : null}
           {speciesKit ? <strong>{info.trait}</strong> : null}
           <p>
-            <KeywordText text={info.description} />
+            <KeywordText text={creaturePassive(progression, kind).description} />
           </p>
         </>
       ) : null}

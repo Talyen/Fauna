@@ -2,9 +2,9 @@ import { needsCampfire } from "./support";
 import { freeze } from "immer";
 import { MAX_HAND_SIZE } from "./engine";
 import { z } from "zod";
-import { CARDS, INITIAL_SPECIES, species } from "./content";
+import { CARDS, INITIAL_SPECIES, SPECIES, species } from "./content";
 import { JOURNEY_LENGTH, encounterPacks, encounterSource, finalEncounter, bossEncounter } from "./encounters";
-import { KEYWORDS, BOONS, TALENTS, talentPoints } from "./progression";
+import { MAX_CREATURE_STARS, KEYWORDS, BOONS, TALENTS, talentPoints } from "./progression";
 import type { GameState } from "./types";
 const natural = z.number().int().min(0).max(1_000_000);
 const id = z.string().min(1).max(120);
@@ -80,8 +80,18 @@ const creature = z.object({
   combat: combatState.optional(),
 });
 const currentShape = z.object({
-  version: z.literal(20),
-  discovery: z.object({ encountered: z.array(speciesId).max(6), recruited: z.array(speciesId).max(6) }),
+  version: z.literal(21),
+  discovery: z.object({
+    encountered: z.array(speciesId).max(6),
+    recruited: z.partialRecord(
+      speciesId,
+      z
+        .number()
+        .int()
+        .min(1)
+        .max(MAX_CREATURE_STARS + 1),
+    ),
+  }),
   revision: z
     .number()
     .int()
@@ -171,8 +181,12 @@ export function decodeSave(raw: string): GameState {
   const invalid = (condition: boolean) => {
     if (condition) throw new Error("Save contains inconsistent game data.");
   };
-  invalid(!unique(s.discovery.encountered) || !unique(s.discovery.recruited));
-  invalid(s.discovery.recruited.some((kind) => !s.discovery.encountered.includes(kind)));
+  invalid(!unique(s.discovery.encountered));
+  invalid(
+    SPECIES.some(
+      ({ id }) => s.discovery.recruited[id] !== undefined && !s.discovery.encountered.includes(id),
+    ),
+  );
   if (s.journey) {
     const summary = s.journey;
     invalid(

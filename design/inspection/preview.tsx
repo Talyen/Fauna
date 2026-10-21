@@ -158,7 +158,7 @@ function Preview() {
                   {enemy ? <h2 className="inspection-kit-label">Species kit</h2> : null}
                   <div className="inspection-review-passive">
                     <strong>{creature.trait}</strong>
-                    <p>{creature.description}</p>
+                    <p>{creature.passiveTiers[0].description}</p>
                   </div>
                   <div className="inspection-action-thumbnails" ref={thumbnails}>
                     {cards.map((item, index) => (
