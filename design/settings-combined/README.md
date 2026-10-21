@@ -17,3 +17,5 @@ Current hierarchy uses normal light foreground text: 24px semibold dialog title,
 Panel switches keep the dialog height and tab geometry fixed. Every tab label uses regular weight. Long panel content scrolls internally with stable scrollbar gutters; preview tools have their own bounded scroll area. Content switches instantly without fading, overlap or movement. Tab colors retain their 150ms transitions; reduced motion removes these. Native shadcn/Radix tabs own selection, visibility and focus.
 
 Focused browser review confirmed unchanged tab-button and icon rectangles across Display, Sound and Battle at 100%. Browser review of the final treatment confirmed immediate panel switching, fully opaque active content with no animation, and hidden/empty inactive panels. CI regression coverage compares the same geometry at 75%, 100% and 125%; its execution remains pending.
+
+Selected tabs have no extra hover change. Border thickness stays fixed; keyboard/controller focus remains visible.

@@ -195,7 +195,7 @@ function SwapStudy() {
       {copyState ? <p role="status">{copyState}</p> : null}
       <footer>
         <p>
-          Already chosen: 4px selection lift over 150ms, strengthened single ring on selected hover, opposing
+          Already chosen: 4px selection lift over 150ms, unchanged single ring on selected hover, opposing
           arcs and ease-out travel over 150ms. Slow motion is only an inspection aid. Artwork stays at fixed
           dimensions.
         </p>

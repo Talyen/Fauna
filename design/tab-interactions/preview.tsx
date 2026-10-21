@@ -333,8 +333,8 @@ function TabStudy() {
           only, 150ms transitions. Each individual comparison changes one property.
         </p>
         <p>
-          The active border thickens from 2px to 3px on hover. Keyboard focus replaces that border with your
-          solid external outline, retaining the active fill and one highlighted boundary.
+          Selected tabs retain their appearance on hover. Keyboard focus replaces that border with your solid
+          external outline, retaining the active fill and one highlighted boundary.
         </p>
         <p>
           Tab enters the tab list. Left/Right, Home and End follow shadcn/Radix navigation and activate panels

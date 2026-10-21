@@ -5,7 +5,7 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 ## Tabs
 
 - Tabs are centered with real, visible 2px borders on every tab: neutral when inactive, gold when selected or hovered. There is no gray background strip. Active tabs use black fill and regular light text. Intentional keyboard focus retains a solid gold outline and a visible neutral tab border.
-- Inactive hover: subtle charcoal fill, light text and a gold border, without movement.
+- Inactive hover: subtle charcoal fill, light text and a gold border, without movement. Selected tabs do not change on hover. Selected elements never thicken their border or selection ring on hover; keyboard/controller focus stays visibly distinct.
 - Inter-tab gap: the standard 12px related-item spacing; horizontal padding: 12px per side; height remains at least 44px.
 - 20px Lucide icons beside labels.
 - Color transition: 150ms. All tab labels retain the same regular weight; selection never changes button widths or icon positions.
@@ -147,7 +147,7 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 ## Lineup and Swap
 
 - The first selected creature uses the established gold selection ring plus a 4px lift over 150ms.
-- Hovering the selected creature strengthens the same ring, preserving the single highlighted-boundary treatment.
+- Hovering the selected creature retains the same ring thickness, preserving the single highlighted-boundary treatment.
 - Unavailable swap choices use 45% opacity and remain inspectable.
 - After a successful swap, animate creatures between positions over 150ms. Committed gameplay updates immediately; motion is presentation-only, never blocks input and is skipped under reduced motion.
 - Swap movement uses ease-out timing and opposing arcs with a 32px peak displacement from the direct path, chosen in the interactive arc-height comparison.

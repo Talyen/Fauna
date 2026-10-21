@@ -6,6 +6,4 @@ Actual registered shadcn Tabs own selection, roving focus, automatic activation 
 
 Individual comparisons hold other properties at black active fill on a charcoal strip, subtle inactive hover, 4px inter-tab spacing, 12px horizontal padding, labels only and 150ms transitions. Gold fill uses its matching semantic text color for contrast. Content changes immediately regardless of transition duration. Reduced motion removes transitions.
 
-To extend the reviewed single-highlight rule, active tabs strengthen their contiguous gold border from 2px to 3px on hover. Intentional keyboard focus replaces that border with the reviewed solid external outline, while active fill continues to identify selection. Pointer use removes focus decoration. This avoids stacking separate highlighted boundaries. It is a proposal for tab composition, pending user and context acceptance, rather than a production change.
-
-No settings, gameplay, audio or game saves load. Screen compositions, controller/desktop input and full CI acceptance remain pending.
+Selected tabs retain their appearance on hover, without border thickening. Intentional keyboard focus retains the reviewed external outline. Pointer use removes focus decoration. Native shadcn/Radix behavior is unchanged.

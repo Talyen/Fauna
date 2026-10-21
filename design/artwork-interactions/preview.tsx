@@ -73,11 +73,11 @@ const steps = [
   {
     id: "selectedHover",
     title: "Selected hover",
-    options: ["ring", "stronger"],
-    labels: ["Keep single ring", "Strengthen single ring"],
+    options: ["ring"],
+    labels: ["Keep single ring"],
     recommendation: "Keep single ring: your 3.5% growth already signals hover; selection stays stable.",
     instruction:
-      "Both start selected and suppress the inner hover frame. Hover to compare an unchanged 2px selection ring against the same ring thickening to 3px. Click to deselect and see your usual 2px hover frame return.",
+      "Selected cards keep the same 2px selection ring on hover, without an inner hover frame. Click to deselect and see your usual hover frame return.",
   },
 ] as const;
 type StepId = (typeof steps)[number]["id"];
@@ -94,7 +94,11 @@ const defaults: Record<StepId, string> = {
 };
 function loadPicks(): Picks {
   try {
-    const saved = { ...reviewedArtworkChoices, ...JSON.parse(localStorage.getItem(storageKey) ?? "{}") };
+    const saved = {
+      ...reviewedArtworkChoices,
+      ...JSON.parse(localStorage.getItem(storageKey) ?? "{}"),
+      selectedHover: reviewedArtworkChoices.selectedHover,
+    };
     return Object.fromEntries(
       steps.flatMap((step) =>
         (step.options as readonly string[]).includes(saved?.[step.id]) ? [[step.id, saved[step.id]]] : [],
@@ -394,7 +398,7 @@ function ArtworkStudy() {
       <footer>
         <p>
           {stepId === "selectedHover"
-            ? "This refinement uses your recorded artwork choices: 2px frame, 3.5% growth, 3px selection gap and 2px ring. Only the selected-hover ring reaction changes."
+            ? "This refinement uses your recorded artwork choices: 2px frame, 3.5% growth, 3px selection gap and 2px ring. Selected-hover ring thickness stays fixed."
             : "Baseline: 2px hover frame, no hover movement, 3px selection gap, 2px selection ring. Solid focus stays outside selection. Choices combine only in Review my batch."}
         </p>
         <p>

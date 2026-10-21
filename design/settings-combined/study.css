@@ -94,9 +94,6 @@ body:has(.settings-review) .dialog-overlay[data-state="closed"] {
   border-color: var(--primary);
   color: var(--foreground);
 }
-.settings-combined .settings-tabs button[data-state="active"]:hover {
-  box-shadow: inset 0 0 0 1px var(--primary);
-}
 :root[data-focus="visible"] .settings-combined .settings-tabs button:focus {
   outline: 2px solid var(--primary);
   outline-offset: 3px;
