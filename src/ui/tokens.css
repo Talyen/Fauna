@@ -37,7 +37,7 @@
   --font-number: var(--font-ui);
   --text-rule: var(--text-body);
   --text-name: var(--text-heading);
-  --radius: 20px;
+  --radius: 15px;
   --radius-round: 9999px;
   --border-art: transparent;
   --feedback-shadow: var(--background);
