@@ -1,7 +1,7 @@
 import { DAMAGE_TYPES, keywordLabel, type DamageType, EFFECT_KEYWORDS } from "./keywords";
-export { DAMAGE_TYPES, type DamageType } from "./keywords";
+export { type DamageType } from "./keywords";
 export type SpeciesId = "mossback" | "emberfox" | "stormfin" | "silkmoth" | "briartooth" | "moonhart";
-export type Effect = keyof typeof EFFECT_KEYWORDS;
+type Effect = keyof typeof EFFECT_KEYWORDS;
 export interface Species {
   id: SpeciesId;
   name: string;
@@ -15,7 +15,7 @@ export const DAMAGE_LABELS = Object.fromEntries(DAMAGE_TYPES.map((id) => [id, ke
   DamageType,
   string
 >;
-export type CardEffect =
+type CardEffect =
   | { kind: "damage"; damageType: DamageType; amount: number; leech?: boolean }
   | { kind: "status"; status: "armor" | "thorns" | "dodge"; amount: number }
   | { kind: "draw" | "mana" | "cleanse" | "purge"; amount: number };

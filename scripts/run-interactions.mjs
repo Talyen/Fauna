@@ -128,10 +128,11 @@ try {
           await page.getByRole("button", { name: "Close settings", exact: true }).click();
         } else {
           await page.getByRole("button", { name: "Talents", exact: true }).click();
-          await page.getByRole("tab", { name: "Fire / Burn", exact: true }).click();
+          await page.getByRole("button", { name: "Burn talents", exact: true }).click();
+          await page.getByRole("button", { name: "Back", exact: true }).click();
           await page.getByRole("button", { name: "Back", exact: true }).click();
         }
-        await page.locator(".app[data-save-status=saved]").waitFor();
+        await page.locator(".app:not([inert])[data-save-status=saved]").waitFor();
         const saved = await page.evaluate(() => localStorage.getItem("fauna.save.v1"));
         if (encodeSave(decodeSave(saved)) !== encodeSave(expected))
           throw new Error("Committed checkpoint differs from command result");

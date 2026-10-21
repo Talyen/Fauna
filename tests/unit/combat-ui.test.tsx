@@ -6,6 +6,7 @@ import { produce } from "immer";
 import { App } from "../../src/ui/App";
 import { createSession } from "../../src/application/session";
 import { createBrowserPlatform } from "../../src/platform/browser";
+import { KEYWORDS, TALENTS, keywordLabel } from "../../src/game/progression";
 import { run } from "./helpers";
 import type { GameState } from "../../src/game/types";
 
@@ -100,5 +101,57 @@ it("shows exact Campfire recovery and commits one persisted Rest without currenc
     expect(JSON.parse(localStorage.getItem("fauna.save.v1")!).team[0].health).toBe(10);
   } finally {
     await act(() => session.dispose());
+  }
+});
+
+it("exposes pending talent rewards and remaining control turns in creature details", async () => {
+  const session = await open(
+    produce(run(), (state) => {
+      state.team[0]!.combat!.freeNature = true;
+      state.team[0]!.combat!.riposte = true;
+      state.team[0]!.combat!.rhythm = 10;
+      state.battle!.enemies[0]!.combat.controlled = "stun";
+      state.battle!.enemies[0]!.combat.controlTurns = 2;
+    }),
+  );
+  try {
+    expect(screen.getByRole("button", { name: "Windstep: next Nature card is free" })).toBeTruthy();
+    expect(
+      screen.getByRole("button", { name: "Riposte: next Physical attack is a guaranteed Critical Hit" }),
+    ).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Finding Rhythm: +10% Dodge chance" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Stunned: 2 turns" })).toBeTruthy();
+  } finally {
+    await session.dispose();
+  }
+});
+
+it("opens every expanded talent tree and purchases a later row through the existing controls", async () => {
+  const game = produce(run(), (state) => {
+    state.keywordXP = Object.fromEntries(KEYWORDS.map((keyword) => [keyword, 10000]));
+  });
+  localStorage.setItem("fauna.save.v1", JSON.stringify(game));
+  const session = createSession(createBrowserPlatform(localStorage));
+  await session.load();
+  render(<App session={session} />);
+  try {
+    await userEvent.click(screen.getByRole("button", { name: "Talents", exact: true }));
+    for (const keyword of KEYWORDS) {
+      await userEvent.click(screen.getByRole("button", { name: `${keywordLabel(keyword)} talents` }));
+      const talents = TALENTS.filter((t) => t.keyword === keyword);
+      for (const talent of talents)
+        expect(screen.getByRole("button", { name: talent.name, exact: true })).toBeTruthy();
+      if (keyword === "physical") {
+        const later = talents.find((t) => t.row === 1)!;
+        expect(screen.getByRole("button", { name: later.name }).getAttribute("aria-disabled")).toBe("true");
+        for (const talent of talents.filter((t) => t.row === 0))
+          await userEvent.click(screen.getByRole("button", { name: talent.name, exact: true }));
+        await userEvent.click(screen.getByRole("button", { name: later.name, exact: true }));
+        expect(session.store.getState().game.talents).toContain(later.id);
+      }
+      await userEvent.click(screen.getByRole("button", { name: "Back", exact: true }));
+    }
+  } finally {
+    await session.dispose();
   }
 });

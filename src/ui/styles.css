@@ -1458,20 +1458,32 @@ strong {
 
 /* Fixed-size surfaces flow and scroll when a complete battle cannot fit. */
 @media (max-width: 1100px), (max-height: 850px) {
+  .app.in-battle {
+    height: 100dvh;
+    overflow: hidden;
+  }
+  .in-battle .play-surface {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
   .in-battle .menu-button {
     position: relative;
     inset: auto;
     display: block;
     margin-left: auto;
     margin-bottom: var(--screen-item-gap);
+    flex-shrink: 0;
   }
   .battle-screen {
     height: auto;
-    min-height: var(--page-content-height);
+    min-height: 0;
+    flex: 1;
     padding-bottom: var(--space-6);
-    overflow: visible;
+    overflow-y: auto;
   }
   .hand-section {
+    flex-shrink: 0;
     position: static;
     pointer-events: auto;
     clip-path: none;
@@ -1483,6 +1495,7 @@ strong {
     padding: var(--space-6);
   }
   .hand-toolbar {
+    flex-shrink: 0;
     position: static;
     flex-wrap: wrap;
   }

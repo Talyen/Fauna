@@ -102,7 +102,7 @@ describe("journey encounters", () => {
   });
 
   it("rejects obsolete destination and biome saves", () => {
-    for (const version of [16, 17])
+    for (const version of [16, 17, 18])
       expect(() => decodeSave(JSON.stringify({ ...start(), version }))).toThrow();
   });
 

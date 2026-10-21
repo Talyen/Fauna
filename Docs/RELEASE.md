@@ -12,7 +12,7 @@ Before shipping:
 - Test on Steam Deck hardware through the intended Windows/Proton or native distribution path, including handheld text, overlay, sleep/resume, battery/performance, and offline startup. Native Linux/macOS packaging is not configured.
 - Verify Steam client behavior, cloud conflicts/recovery, and packaged quit/resume on Windows. Local macOS Electron testing does not establish Windows packaging or Steam behavior.
 
-No release upload, remote publication, automatic promotion, telemetry, or Steam credential handling is configured. Progress sync remains unavailable until Fauna's own Steam App ID is configured. Pushes, PRs, Steam delivery, and hosted CI execution require separate authorization. Local integration is authorized after review and verification.
+No release upload, remote publication, automatic promotion, telemetry, or Steam credential handling is configured. Progress sync remains unavailable until Fauna's own Steam App ID is configured. Task-scoped repository pushes, hosted CI and local integration follow the authorization in [AGENTS.md](../AGENTS.md#worktrees-and-integration). PRs, release publication and Steam delivery require separate authorization.
 
 ## Packaged integrity
 
@@ -54,4 +54,4 @@ Without a tag, the range starts at the nearest reachable release tag and ends at
 
 Conventional `feat`, `balance`, `fix` and `perf` commits touching player runtime/content produce New, Balance, Fixes and Performance sections. Tooling-only commits are omitted. A `Player-Note: <player-facing sentence>` commit trailer supplies explicit wording and inclusion; `User-Facing: yes` includes other commit types under Changes, and `User-Facing: no` always excludes a commit. Duplicate lines are collapsed. Review the generated wording before publication; commit subjects are a fallback, not editorial approval. Linux CI fetches complete history and retains the draft in its existing browser-review reports artifact, including when later validation fails.
 
-Patch-note generation and verification never publish. Pushes, tags, release signing/setup, Steam delivery and public promotion remain separately authorized.
+Patch-note generation and verification never publish. Task-scoped repository pushes and hosted CI follow AGENTS.md. Release tags, release signing/setup, Steam delivery and public promotion remain separately authorized.

@@ -20,7 +20,7 @@ Review the task diff, run its checks, and commit task-owned files. From clean ma
 node scripts/integrate.mjs task/creature-feedback
 ```
 
-Integration holds one repository-wide lock, incorporates the locked main commit in the task checkout, checks the combined result and advances clean main. Dirty checkouts and unfinished Git operations block it. A competing integration fails as busy; retry later without terminating its owner. The OS releases the lock on exit, including crashes. A legacy directory lock is respected during the transition; inspect its owner before any separately authorized cleanup. Both worktrees are rechecked before main advances. Failed checks preserve committed task work; integration retains the checkout and branch. Remote publication and destructive cleanup require separate authorization.
+Integration holds one repository-wide lock, incorporates the locked main commit in the task checkout, checks the combined result and advances clean main. Dirty checkouts and unfinished Git operations block it. A competing integration fails as busy; retry later without terminating its owner. The OS releases the lock on exit, including crashes. A legacy directory lock is respected during the transition; inspect its owner before any separately authorized cleanup. Both worktrees are rechecked before main advances. Failed checks preserve committed task work; integration retains the checkout and branch. Task-scoped pushes and hosted CI follow the authorization in AGENTS.md. PRs, releases, deployments and destructive cleanup require separate authorization.
 
 ## Verification
 

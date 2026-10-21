@@ -37,16 +37,16 @@ These are the agreed directions from the design review. They supersede the proto
 - Earned keyword XP becomes permanent after each battle, including defeat.
 - Talents are accessible through the main menu at any time. Purchases take effect immediately, including during a journey.
 - Do not interrupt journeys or prompt players to spend talent points.
-- Talents mix straightforward stat bonuses with new interactions and combo effects. Specific effects are not yet selected.
+- Talents mix straightforward stat bonuses with new interactions and combo effects. The applicable Alchemy effects are implemented in the authored catalog.
 - Every talent can eventually be unlocked; there is no limited active-talent loadout.
-- Each category currently offers two talents in one row; choose either first and eventually unlock both.
+- Each category starts with the existing two talents. Later talents form rows of two, with a possible single-talent final row; complete all earlier rows to open the next.
 - The Talents screen opens on a keyword artwork overview, following Alchemy. Selecting a keyword opens its dedicated tree; Back returns to the overview.
 - Each talent shows its icon, name, and full effect directly on the talent. Effects use concise rules with ownership implied where clear. All talents have distinct effects; do not repeat a shared talent set across keywords.
 - Clicking an available talent purchases it immediately, without a detail-dialog purchase step or confirmation.
 - Reset operates on the entire keyword category, refunding all spent points in that category while retaining its XP. Reset is available at any time, including during a journey; talent effects update immediately. Individual-talent refunds are not the chosen interaction.
 - Use Alchemy’s current point pacing: cumulative thresholds are 10, 40, 100, 180, and 280 keyword XP. Total XP for point n is 10 × n × (n + 1) − 10 × min(n, 2). This is initial tuning for playtesting.
-- Fourteen consolidated categories each have two distinct talents (28 total), adapted from Alchemy. Fire/Burn, Ice/Freeze and Lightning/Stun share progression; Thorns belongs to Nature, Cleanse to Healing, and Purge to Light. Forge is removed. The authored catalog and effects are owned by `src/game/progression.ts` and `src/game/combat.ts`.
-- Abandonment banks the XP earned by accepted plays, with no victory currency or boons. Auto-play dispatches ordinary accepted plays; each awards keyword XP once. There are no repeated card-play effects.
+- Fourteen consolidated categories offer 129 distinct talents, adapted from Alchemy; effects requiring excluded mechanics are omitted. Fire/Burn, Ice/Freeze and Lightning/Stun share progression; Thorns belongs to Nature, Cleanse to Healing, and Purge to Light. Forge is removed. The authored catalog and effects are owned by `src/game/progression.ts` and `src/game/combat.ts`.
+- Abandonment banks the XP earned by accepted plays, with no victory currency or boons. Auto-play dispatches ordinary accepted plays; each awards keyword XP once. Talent repeats resolve at most once and award no extra accepted-play XP.
 
 ## Recruitment
 

@@ -1,7 +1,6 @@
 import { assetUrl } from "./ui/assets";
 import { GameErrorBoundary } from "./ui/diagnostics";
 import { createRoot } from "react-dom/client";
-import { MotionConfig } from "motion/react";
 import { createSession } from "./application/session";
 import { createPlatform } from "./platform";
 import { validateContent } from "./game/save";
@@ -31,18 +30,16 @@ const onPageHide = (event: PageTransitionEvent) => {
 window.addEventListener("pagehide", onPageHide);
 const root = createRoot(document.getElementById("root")!);
 root.render(
-  <MotionConfig reducedMotion="user" transition={{ duration: 0.15 }}>
-    <GameErrorBoundary diagnostics={session.diagnostics}>
-      {contentValid ? (
-        <App session={session} desktop={platform.desktop} />
-      ) : (
-        <main className="recovery">
-          <h1>Game content unavailable</h1>
-          <p>Close and reopen the game to retry.</p>
-        </main>
-      )}
-    </GameErrorBoundary>
-  </MotionConfig>,
+  <GameErrorBoundary diagnostics={session.diagnostics}>
+    {contentValid ? (
+      <App session={session} desktop={platform.desktop} />
+    ) : (
+      <main className="recovery">
+        <h1>Game content unavailable</h1>
+        <p>Close and reopen the game to retry.</p>
+      </main>
+    )}
+  </GameErrorBoundary>,
 );
 if (contentValid) void session.load();
 if (import.meta.hot)

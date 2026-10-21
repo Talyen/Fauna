@@ -22,7 +22,7 @@ A linear-congruential RNG is explicit state. Destination offers, shuffles and in
 
 Development saves are disposable: there are no released player saves to preserve. Do not implement migrations or backward compatibility unless explicitly requested. Obsolete formats are rejected and can be reset through the existing recovery flow. The canonical agent policy is in [AGENTS.md](../AGENTS.md#development-saves).
 
-Current save version 18 is validated by Zod and semantic checks for content IDs, ownership, unique card zones, health bounds, lineup completeness, saved encounter packs, and phase/outcome coherence. Only the current format is supported in browser and desktop storage; fixtures track that format. Valid current-format backups remain recoverable.
+Current save version 19 is validated by Zod and semantic checks for content IDs, ownership, unique card zones, health bounds, lineup completeness, saved encounter packs, and phase/outcome coherence. Only the current format is supported in browser and desktop storage; fixtures track that format. Valid current-format backups remain recoverable.
 
 Battle settlement banks actual retained currency and keyword XP once. Ordinary fights offer recruitment only; intermediate bosses offer up to three unowned Boons only. The shared Reward screen consumes committed receipts and accepts a choice or Skip, with no acknowledgement phase or Continue command. No eligible choice advances immediately; final victory and defeat go directly to Journey results. The journey summary retains the outcome, battle count, gains, new unlocks, and last-battle receipt; opening results never grants rewards or saves.
 
@@ -64,13 +64,13 @@ Development victory uses an explicit session capability supplied only by develop
 
 Unlock reveals observe newly committed species additions that appear in journey unlock receipts. Consumption is transient for the mounted session; loading completed saves and reopening results never manufacture another reveal.
 
-Talent categories are consolidated independently of combat damage identities. The current format stores Boon IDs, first-Burn consumption, and periodic status attribution. Old development saves, including Forge state and relic fields, are rejected. No capability or local display preference is restored from progression.
+Talent categories are consolidated independently of combat damage identities. The current format stores Boon IDs, first-Burn consumption, periodic status attribution, pending creature-owned talent rewards, remaining control windows, and already-banked talent Gold. Old development saves, including Forge state and relic fields, are rejected. No capability or local display preference is restored from progression.
 
 ## Support visits and spending
 
 An optional Merchant is offered before encounters 2 and 6. It is visible and enterable only when at least one stocked item is affordable. These saved visits preserve combat offers and do not replace or advance battles. Merchant stock contains up to two unowned Boons at 20 Gold each, with one purchase per visit. Gold is the existing permanent currency. Entering commits a visit; leaving consumes it, and beginning the next battle forfeits it. Inspection is read-only. Commands address visit/slot identities and validate before mutation; reload cannot refresh stock or repeat purchases. Merchant state remains valid during a Campfire visit.
 
-Journey currency measures gross retained earnings, independently of the remaining wallet. Boss rewards contain up to three eligible unowned Boons and skip only an empty pool. Support state, stock, price bounds, receipts and phases are validated together in save version 18; obsolete development saves are rejected.
+Journey currency measures gross retained earnings, independently of the remaining wallet. Boss rewards contain up to three eligible unowned Boons and skip only an empty pool. Support state, stock, price bounds, receipts and phases are validated together in save version 19; obsolete development saves are rejected.
 
 ## Cloud reconciliation and device preferences
 

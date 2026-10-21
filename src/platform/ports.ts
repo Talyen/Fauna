@@ -6,11 +6,11 @@ export interface SaveCandidate {
   source: string;
   data: string;
 }
-export interface SaveStorage {
+interface SaveStorage {
   readCandidates(): Promise<SaveCandidate[]>;
   write(data: string): Promise<void>;
 }
-export interface SteamCapabilities {
+interface SteamCapabilities {
   readonly available: boolean;
   achievements?: { unlock(id: string): Promise<void> };
 }
@@ -25,7 +25,7 @@ export interface Platform {
   quit?: () => Promise<void>;
   onCloseRequested?: (listener: () => Promise<boolean>) => () => void;
 }
-export interface DesktopBridge {
+interface DesktopBridge {
   display?: DisplayPort;
   cloud?: CloudPort;
   onOverlay?: (listener: (active: boolean) => void) => () => void;
@@ -44,7 +44,7 @@ export interface DisplayState {
   mode: "windowed" | "fullscreen";
   error?: string;
 }
-export interface DisplayPort {
+interface DisplayPort {
   read(): Promise<DisplayState>;
   set(mode: DisplayState["mode"]): Promise<DisplayState>;
   subscribe(listener: (state: DisplayState) => void): () => void;
