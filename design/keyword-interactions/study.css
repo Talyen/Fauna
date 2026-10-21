@@ -1,0 +1,170 @@
+.keyword-study {
+  max-width: 1280px;
+  margin-inline: auto;
+}
+.keyword-eyebrow {
+  color: var(--primary);
+}
+.keyword-study .study-grid {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+.keyword-sample {
+  padding-block: var(--space-6);
+}
+.keyword-context,
+.keyword-sample-help {
+  color: var(--muted-foreground);
+  font-size: var(--text-secondary);
+}
+.keyword-sentence {
+  line-height: 2;
+  margin-block: var(--space-3);
+}
+#root .keyword-reference,
+.keyword-dialog .keyword-related {
+  display: inline-flex;
+  min-height: var(--control-height);
+  padding-inline: var(--space-1);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: var(--radius);
+  color: var(--keyword-poison);
+  text-decoration: none;
+  text-underline-offset: 5px;
+  text-decoration-thickness: 1px;
+  font-weight: 600;
+  transform: none;
+  scale: 1;
+  translate: none;
+}
+#root .keyword-reference[data-keyword="block"],
+.keyword-dialog [data-keyword="block"] {
+  color: var(--keyword-block);
+}
+.keyword-dialog [data-keyword="health"] {
+  color: var(--keyword-health);
+}
+.keyword-dialog [data-keyword="poison"] {
+  color: var(--keyword-poison);
+}
+#root [data-rest="dotted"] .keyword-reference {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+}
+#root [data-hover="solid"] .keyword-reference:hover {
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+}
+#root [data-hover="brighten"] .keyword-reference:hover {
+  filter: brightness(1.2);
+}
+:root[data-focus="visible"] #root .keyword-reference:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  box-shadow: none;
+}
+.keyword-tooltip {
+  max-width: 360px;
+  padding: var(--space-3);
+  border-color: var(--border);
+  animation: keyword-in 100ms ease-out;
+}
+.keyword-tooltip p {
+  margin-top: var(--space-2);
+  line-height: 1.5;
+}
+.keyword-tooltip[data-state="closed"] {
+  animation: keyword-out 100ms ease-in;
+}
+body:has(.keyword-study) .dialog-overlay {
+  background: rgb(0 0 0 / 80%);
+  animation: keyword-in 150ms ease-out;
+}
+body:has(.keyword-study) .dialog-overlay[data-state="closed"] {
+  animation: keyword-out 150ms ease-in;
+}
+.keyword-dialog {
+  animation: keyword-in 150ms ease-out;
+}
+.keyword-dialog[data-state="closed"] {
+  animation: keyword-out 150ms ease-in;
+}
+.keyword-dialog > p {
+  margin-top: var(--space-2);
+}
+.keyword-detail-stack {
+  display: grid;
+  margin-block: var(--space-6);
+}
+.keyword-detail {
+  grid-area: 1 / 1;
+  min-height: 200px;
+}
+.keyword-detail h3 {
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+}
+.keyword-detail p {
+  line-height: 1.6;
+}
+.keyword-detail.outgoing {
+  pointer-events: none;
+  animation: keyword-out 150ms ease-in both;
+}
+.keyword-detail.current[data-animate="true"] {
+  animation: keyword-in 150ms ease-out both;
+}
+.keyword-dialog .keyword-related {
+  margin-top: var(--space-3);
+  text-decoration: underline dotted;
+}
+.keyword-dialog .keyword-related:hover {
+  text-decoration-style: solid;
+}
+.keyword-study .study-summary {
+  margin-bottom: var(--space-6);
+}
+.keyword-study footer a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+@keyframes keyword-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes keyword-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.keyword-tooltip[data-reduced="true"],
+.keyword-dialog[data-reduced="true"],
+.keyword-detail-stack[data-reduced="true"] .keyword-detail,
+.keyword-detail-stack[data-navigation="instant"] .keyword-detail,
+body:has(.keyword-study[data-reduced="true"]) .dialog-overlay {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .keyword-tooltip,
+  .keyword-dialog,
+  .keyword-detail-stack .keyword-detail,
+  body:has(.keyword-study) .dialog-overlay {
+    animation: none;
+  }
+}
+.keyword-detail-stack[data-reduced="true"] .outgoing {
+  visibility: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  .keyword-detail-stack .outgoing {
+    visibility: hidden;
+  }
+}

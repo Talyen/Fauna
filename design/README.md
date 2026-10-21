@@ -24,3 +24,4 @@ These samples record reviewed composition choices. They are not current rendered
 - [Phone design decisions](PHONE_DECISIONS.md)
 - [Alchemy combatant motion direction](combat-motion/README.md)
 - [Alchemy draw, discard and hand reflow direction](hand-motion/README.md)
+- [Keyword references — resume interactive preferences](keyword-interactions/README.md)
