@@ -8,7 +8,6 @@ import { SupportScreen, SupportInspector } from "./support-screen";
 import { BOONS } from "../game/progression";
 import { ArtCard } from "./art-card";
 import { assetUrl } from "./assets";
-import { Switch } from "../components/ui/switch";
 import { CreatureCard } from "./cards";
 import { species } from "../game/content";
 import { readPreference, writePreference } from "../platform/preferences";
@@ -32,7 +31,7 @@ import { buttonVariants } from "../components/ui/button";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
 import { flushSync } from "react-dom";
-import { Menu, ArrowLeft, ArrowLeftRight } from "lucide-react";
+import { Menu, ArrowLeft, ArrowLeftRight, Play, Pause } from "lucide-react";
 import type { Session } from "../application/session";
 import { Button } from "../components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../components/ui/dialog";
@@ -708,6 +707,18 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
               >
                 <Menu aria-hidden="true" />
               </Button>
+              {game.phase === "battle" ? (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="autoplay-control"
+                  aria-label="Auto-play"
+                  aria-pressed={autoplay}
+                  onClick={() => setAutoplay(!autoplay)}
+                >
+                  {autoplay ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}
+                </Button>
+              ) : null}
               {game.phase === "draft" ? (
                 <Draft game={game} send={send} inspect={setInspection} />
               ) : game.phase === "teamSelection" ? (
@@ -731,10 +742,6 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                   openPile={(pile) => openModal(pile)}
                   actions={
                     <>
-                      <label className="autoplay-control" htmlFor="autoplay">
-                        <span>Auto-play</span>
-                        <Switch id="autoplay" checked={autoplay} onCheckedChange={setAutoplay} />
-                      </label>
                       <Button
                         variant="outline"
                         className="swap-trigger"

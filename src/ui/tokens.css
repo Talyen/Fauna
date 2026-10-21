@@ -146,6 +146,7 @@
   --mana-crystal-size: 18px;
   --battle-creature-width: calc(var(--art-landscape-width) * 1.1);
   --battle-hand-width: calc(var(--art-portrait-width) * 0.9);
+  --battle-pile-width: calc(var(--battle-hand-width) * 0.7);
   --battle-hand-height: calc(var(--art-long-side) * 0.9);
   --art-long-side: calc(var(--art-short-side) * 4 / 3);
   --art-landscape-width: var(--art-long-side);
