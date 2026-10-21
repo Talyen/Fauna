@@ -159,7 +159,7 @@ for (const [width, height, enlarged] of [
     await pad.press(13);
     await expect(page.getByRole("button", { name: "Glossary", exact: true })).toBeFocused();
     await pad.press(0);
-    const glossary = page.getByRole("dialog", { name: "Glossary & controls" });
+    const glossary = page.getByRole("main", { name: "Glossary & controls" });
     await pad.press(13);
     await glossary.getByRole("button", { name: "Next page" }).click();
     expect(await glossary.evaluate((el) => el.scrollTop)).toBe(0);

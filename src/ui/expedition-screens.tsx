@@ -378,8 +378,13 @@ export function Talents({
   return (
     <main className="talents-screen" data-view={keyword ? "tree" : "overview"} ref={screen}>
       <header className="page-heading talents-heading">
-        <Button variant="outline" onClick={() => (keyword ? setKeyword(null) : back())}>
-          Back
+        <Button
+          variant="ghost"
+          size="icon"
+          aria-label="Back"
+          onClick={() => (keyword ? setKeyword(null) : back())}
+        >
+          <ArrowLeft aria-hidden="true" />
         </Button>
         <h1>{keyword ? keywordLabel(keyword) : "Talents"}</h1>
         {keyword ? (
@@ -524,7 +529,6 @@ export function Collection({
   inspect: Props["inspect"];
   back: () => void;
 }) {
-  const compact = useCompactLayout();
   const [filter, setFilter] = useState("all");
   const [pageStart, setPageStart] = useState(0);
   const gridRef = useRef<HTMLDivElement>(null);
@@ -536,13 +540,12 @@ export function Collection({
       document.activeElement === document.body
     )
       returnFocus(gridRef.current?.querySelector<HTMLElement>("button:not(:disabled)") ?? null);
-  }, [pageStart, filter, compact]);
+  }, [pageStart, filter]);
   const known = (id: SpeciesId) => game.discovery.recruited[id] !== undefined;
   const ordered = [...SPECIES]
     .filter((entry) => filter === "all" || (filter === "known" ? known(entry.id) : !known(entry.id)))
     .sort((a, b) => Number(known(b.id)) - Number(known(a.id)));
-  // Three columns fit the supported minimum width; height determines row capacity.
-  const pageSize = compact ? 3 : 6;
+  const pageSize = 8;
   const totalPages = Math.max(1, Math.ceil(ordered.length / pageSize));
   const activePage = Math.min(Math.floor(pageStart / pageSize), totalPages - 1);
   if (pageStart >= ordered.length && pageStart !== 0) setPageStart(activePage * pageSize);
@@ -629,6 +632,7 @@ export function Collection({
                 pages={totalPages}
                 change={(next) => setPageStart(next * pageSize)}
                 label="Collection pages"
+                showCount={false}
               />
             ) : null}
           </div>

@@ -114,13 +114,14 @@ export function Inspector({
         <header className="inspection-back" data-nav-row>
           <Button
             ref={backButton}
+            size="icon"
+            aria-label="Back"
             variant="ghost"
             onClick={() => {
               if (!back()) onClose();
             }}
           >
             <ChevronLeft aria-hidden="true" />
-            Back
           </Button>
         </header>
         {card ? (

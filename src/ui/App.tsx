@@ -32,7 +32,7 @@ import { buttonVariants } from "../components/ui/button";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
 import { flushSync } from "react-dom";
-import { Menu, ArrowLeftRight } from "lucide-react";
+import { Menu, ArrowLeft, ArrowLeftRight } from "lucide-react";
 import type { Session } from "../application/session";
 import { Button } from "../components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../components/ui/dialog";
@@ -49,9 +49,8 @@ import type { Command } from "../game/types";
 import type { SpeciesId } from "../game/content";
 import "./mana-crystals.css";
 
-type Route = "home" | "play" | "talents" | "collection" | "unlocks";
-type Modal =
-  "boons" | "settings" | "glossary" | "endRun" | "deck" | "swap" | "lineup" | "draw" | "discard" | null;
+type Route = "home" | "play" | "talents" | "collection" | "settings" | "glossary" | "unlocks";
+type Modal = "boons" | "endRun" | "deck" | "swap" | "lineup" | "draw" | "discard" | null;
 export function App(props: { session: Session; desktop?: boolean }) {
   return (
     <TooltipProvider>
@@ -84,7 +83,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
       if (!button || button.matches(':disabled, [aria-disabled="true"]') || button.closest("[inert]")) return;
       if (
         button.matches(
-          ".home-screen button, .menu-panel button, .settings-dialog button, .ui-tab, .dialog-close",
+          ".home-screen button, .menu-panel button, .settings-screen button, .ui-tab, .dialog-close",
         )
       )
         playSound("activate");
@@ -173,10 +172,15 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     setModalInstance((instance) => instance + 1);
     setModal(next);
   };
-  const navigate = (next: "talents" | "collection") => {
+  const navigate = (next: "talents" | "collection" | "settings" | "glossary") => {
     origin.current = menu ? "play" : route;
     // Menu pages unmount their opener; retain its label for the recreated menu.
-    menuReturnLabel.current = next === "talents" ? "Talents" : "Collection";
+    menuReturnLabel.current = {
+      talents: "Talents",
+      collection: "Collection",
+      settings: "Settings",
+      glossary: "Glossary",
+    }[next];
     setMenu(false);
     setRoute(next);
   };
@@ -222,7 +226,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
         return;
       }
       if (route === "talents" && talentControls.current?.(action)) return;
-      if (route === "talents" || route === "collection") {
+      if (["talents", "collection", "settings", "glossary"].includes(route)) {
         backFromPage();
         return;
       }
@@ -310,6 +314,12 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
         return;
       }
     }
+    if (route === "settings") {
+      root.current
+        ?.querySelector<HTMLElement>('.settings-screen [role="tab"][aria-selected="true"]')
+        ?.focus();
+      return;
+    }
     // Screen transitions must not replace focus the player already moved onto the new screen.
     if (buttons.includes(document.activeElement as HTMLElement)) return;
     (buttons.find((el) => el.classList.contains("primary-menu-action")) ?? buttons[0])?.focus();
@@ -377,10 +387,10 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           Boons
         </Button>
       ) : null}
-      <Button variant="ghost" onClick={() => openModal("glossary")}>
+      <Button variant="ghost" onClick={() => navigate("glossary")}>
         Glossary
       </Button>
-      <Button variant="ghost" onClick={() => openModal("settings")}>
+      <Button variant="ghost" onClick={() => navigate("settings")}>
         Settings
       </Button>
       {active ? (
@@ -423,9 +433,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
               ? "swap-dialog"
               : modal === "deck" || modal === "draw" || modal === "discard" || modal === "boons"
                 ? "deck-dialog"
-                : modal === "settings"
-                  ? "settings-dialog"
-                  : "glossary"
+                : ""
           }
           closeLabel={
             modal === "swap"
@@ -438,13 +446,9 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                     ? "Close discard pile"
                     : modal === "deck"
                       ? "Close deck"
-                      : modal === "settings"
-                        ? "Close settings"
-                        : modal === "boons"
-                          ? "Close Boons"
-                          : modal === "glossary"
-                            ? "Close glossary"
-                            : "Close dialog"
+                      : modal === "boons"
+                        ? "Close Boons"
+                        : "Close dialog"
           }
           onCloseAutoFocus={(event) => {
             event.preventDefault();
@@ -462,13 +466,9 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                     ? "Discard Pile"
                     : modal === "deck"
                       ? "Deck"
-                      : modal === "settings"
-                        ? "Settings"
-                        : modal === "boons"
-                          ? "Boons"
-                          : modal === "glossary"
-                            ? "Glossary & controls"
-                            : ""}
+                      : modal === "boons"
+                        ? "Boons"
+                        : ""}
           </DialogTitle>
           <DialogDescription className="sr-only">Game information and controls</DialogDescription>
           {modal === "swap" || modal === "lineup" ? (
@@ -502,46 +502,6 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                 );
               }}
             </PagedItems>
-          ) : modal === "settings" ? (
-            <Settings
-              session={session}
-              audio={audioPreferences}
-              updateAudio={updateAudioPreferences}
-              scale={scale}
-              setScale={setScale}
-              tooltipScale={tooltipScale}
-              setTooltipScale={setTooltipScale}
-              desktop={desktop}
-              autoEndTurn={autoEndTurn}
-              setAutoEndTurn={(value) => {
-                setAutoEndTurn(value);
-                writePreference("fauna.auto-end-turn", String(value));
-              }}
-            />
-          ) : modal === "glossary" ? (
-            <>
-              <p>
-                W/A/S/D or Tab to navigate. A/D switches targets. Enter/controller A selects. Escape/B goes
-                back. I/controller X inspects. Controller Y ends the turn.
-              </p>
-              <PagedItems
-                items={GLOSSARY}
-                pageSize={scale > 1 ? 2 : 3}
-                className="glossary-entries"
-                label="Glossary pages"
-              >
-                {(entry) => (
-                  <dl key={entry.term}>
-                    <dt>
-                      <KeywordText text={entry.term} />
-                    </dt>
-                    <dd>
-                      <KeywordText text={entry.definition} />
-                    </dd>
-                  </dl>
-                )}
-              </PagedItems>
-            </>
           ) : null}
           {inspection && !("support" in inspection) ? (
             <Inspector
@@ -687,6 +647,57 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
             {route === "collection" ? (
               <Collection game={game} inspect={setInspection} back={backFromPage} />
             ) : null}
+            {route === "settings" || route === "glossary" ? (
+              <main className={`menu-screen ${route}-screen`} aria-labelledby="menu-screen-title">
+                <header className="collection-heading">
+                  <Button variant="ghost" size="icon" aria-label="Back" onClick={backFromPage}>
+                    <ArrowLeft aria-hidden="true" />
+                  </Button>
+                  <h1 id="menu-screen-title">{route === "settings" ? "Settings" : "Glossary & controls"}</h1>
+                </header>
+                {route === "settings" ? (
+                  <Settings
+                    session={session}
+                    audio={audioPreferences}
+                    updateAudio={updateAudioPreferences}
+                    scale={scale}
+                    setScale={setScale}
+                    tooltipScale={tooltipScale}
+                    setTooltipScale={setTooltipScale}
+                    desktop={desktop}
+                    autoEndTurn={autoEndTurn}
+                    setAutoEndTurn={(value) => {
+                      setAutoEndTurn(value);
+                      writePreference("fauna.auto-end-turn", String(value));
+                    }}
+                  />
+                ) : (
+                  <>
+                    <p>
+                      W/A/S/D or Tab to navigate. A/D switches targets. Enter/controller A selects. Escape/B
+                      goes back. I/controller X inspects. Controller Y ends the turn.
+                    </p>
+                    <PagedItems
+                      items={GLOSSARY}
+                      pageSize={scale > 1 ? 2 : 3}
+                      className="glossary-entries"
+                      label="Glossary pages"
+                    >
+                      {(entry) => (
+                        <dl key={entry.term}>
+                          <dt>
+                            <KeywordText text={entry.term} />
+                          </dt>
+                          <dd>
+                            <KeywordText text={entry.definition} />
+                          </dd>
+                        </dl>
+                      )}
+                    </PagedItems>
+                  </>
+                )}
+              </main>
+            ) : null}
             <div className="play-surface" hidden={route !== "play"} inert={route !== "play"}>
               <Button
                 variant="ghost"
@@ -781,6 +792,12 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                 event.preventDefault();
                 if (modal || inspection) return;
                 if (route === "play") returnFocus(pauseOpener.current);
+                else if (route === "settings")
+                  returnFocus(
+                    root.current?.querySelector<HTMLElement>(
+                      '.settings-screen [role="tab"][aria-selected="true"]',
+                    ) ?? null,
+                  );
                 else
                   returnFocus(root.current?.querySelector<HTMLElement>("main button:not(:disabled)") ?? null);
               }}

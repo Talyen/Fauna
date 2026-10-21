@@ -14,7 +14,7 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
-it("pages the collection, resets filters and preserves place and focus across supported heights", async () => {
+it("shows the current collection on one page, resets filters and preserves focus across supported heights", async () => {
   vi.stubGlobal("innerHeight", 1080);
   vi.stubGlobal(
     "ResizeObserver",
@@ -38,24 +38,14 @@ it("pages the collection, resets filters and preserves place and focus across su
   );
   const user = userEvent.setup();
   expect(screen.getByRole("img", { name: "Mossback: 2 of 5 stars" })).toBeTruthy();
-  expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(6);
-  screen
-    .getAllByRole("button", { name: /^Inspect / })
-    .at(-1)!
-    .focus();
+  expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(SPECIES.length);
+  const lastCard = screen.getAllByRole("button", { name: /^Inspect / }).at(-1)!;
+  lastCard.focus();
   vi.stubGlobal("innerHeight", 720);
   act(() => window.dispatchEvent(new Event("resize")));
-  expect(document.activeElement).toBe(screen.getAllByRole("button", { name: /^Inspect / })[0]);
-  const seen = new Set<string>();
-  for (;;) {
-    screen
-      .getAllByRole("button", { name: /^Inspect / })
-      .forEach((el) => seen.add(el.getAttribute("aria-label")!));
-    const next = screen.getByRole("button", { name: "Next page" }) as HTMLButtonElement;
-    if (next.disabled) break;
-    await user.click(next);
-  }
-  expect(seen.size).toBe(SPECIES.length);
+  expect(document.activeElement).toBe(lastCard);
+  expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(SPECIES.length);
+  expect(screen.queryByRole("button", { name: "Next page" })).toBeNull();
   const current = screen.getAllByRole("button", { name: /^Inspect / })[0]!.getAttribute("aria-label");
   vi.stubGlobal("innerHeight", 1080);
   act(() => window.dispatchEvent(new Event("resize")));
@@ -69,7 +59,8 @@ it("pages the collection, resets filters and preserves place and focus across su
   expect(screen.getByRole("img", { name: "No creatures in this view" })).toBeTruthy();
   expect(screen.queryByRole("button", { name: "Next page" })).toBeNull();
   await user.click(screen.getByRole("tab", { name: "Collected" }));
-  expect(screen.getByRole("status").textContent).toMatch(/^1 \/ /);
+  expect(screen.queryByRole("status")).toBeNull();
+  expect(screen.queryByRole("button", { name: "Previous page" })).toBeNull();
   await user.click(screen.getAllByRole("button", { name: /^Inspect / })[0]!);
   expect(inspect).toHaveBeenCalledWith({ species: SPECIES[0]!.id });
   expect(game).toEqual(before);
