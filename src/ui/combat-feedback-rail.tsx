@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, type CSSProperties, type RefObject } from "react";
+import { useLayoutEffect, useRef, type RefObject } from "react";
 import { createPortal } from "react-dom";
 import { Heart, Shield, Skull, Sparkles, Timer } from "lucide-react";
 import { isFeedbackNotice, type Burst, type FeedbackEntry } from "./combat-feedback-model";
@@ -8,6 +8,14 @@ import { motionValue } from "./motion-values";
 
 function FeedbackNumber({ entry: e }: { entry: FeedbackEntry }) {
   const notice = isFeedbackNotice(e);
+  const number = useRef<HTMLSpanElement>(null);
+  useLayoutEffect(() => {
+    if (e.reservedDigits)
+      number.current?.style.setProperty(
+        "--feedback-value-width",
+        `${e.reservedDigits + ((e.amount ?? 0) !== 0 ? 1 : 0)}ch`,
+      );
+  }, [e.reservedDigits, e.amount]);
   const Icon =
     e.kind === "heal"
       ? Heart
@@ -20,6 +28,7 @@ function FeedbackNumber({ entry: e }: { entry: FeedbackEntry }) {
             : Sparkles;
   return (
     <span
+      ref={number}
       className={`combat-number${notice ? " combat-notice" : ""}`}
       data-critical={e.critical || undefined}
       data-kind={e.kind}
@@ -33,12 +42,7 @@ function FeedbackNumber({ entry: e }: { entry: FeedbackEntry }) {
       }
     >
       {e.kind === "damage" ? (
-        <DamageValue
-          type={e.damageType ?? "physical"}
-          amount={e.amount ?? 0}
-          signed
-          reservedDigits={e.reservedDigits}
-        />
+        <DamageValue type={e.damageType ?? "physical"} amount={e.amount ?? 0} signed />
       ) : (
         <>
           {e.status && e.status !== "deathDoor" ? (
@@ -51,14 +55,7 @@ function FeedbackNumber({ entry: e }: { entry: FeedbackEntry }) {
             <Icon aria-hidden="true" />
           )}
           {!notice || e.amount === 0 ? (
-            <span
-              className="feedback-value"
-              style={{
-                width: e.reservedDigits
-                  ? `${e.reservedDigits + ((e.amount ?? 0) !== 0 ? 1 : 0)}ch`
-                  : undefined,
-              }}
-            >
+            <span className="feedback-value">
               {(e.amount ?? 0) > 0 ? "+" : ""}
               {e.amount ?? 0}
             </span>
@@ -146,6 +143,7 @@ export function CombatFeedback({
       for (const item of items.reverse()) {
         const { element, rect } = item;
         if (item.staticMotion) element.dataset.static = "true";
+        element.style.setProperty("--feedback-duration", `${element.dataset.lifetime}ms`);
         const id = element.dataset.burstId!;
         const target = element.dataset.targetId!;
         if (
@@ -241,7 +239,7 @@ export function CombatFeedback({
           key={b.id}
           data-burst-id={b.id}
           data-target-id={b.targetId}
-          style={{ "--feedback-duration": `${b.lifetime}ms` } as CSSProperties}
+          data-lifetime={b.lifetime}
         >
           <div className="combat-burst-travel">
             <div

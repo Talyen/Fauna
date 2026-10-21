@@ -1095,6 +1095,7 @@ strong {
 }
 .combat-number .feedback-value,
 .combat-number .damage-value > span {
+  width: var(--feedback-value-width, auto);
   text-align: center;
   -webkit-text-stroke: var(--feedback-outline) var(--background);
   paint-order: stroke fill;
