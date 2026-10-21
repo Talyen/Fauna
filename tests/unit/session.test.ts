@@ -1,8 +1,11 @@
 import { describe, expect, it, vi } from "vitest";
-import { createSession } from "../../src/application/session";
+import { createSession as createSeededSession } from "../../src/application/session";
 import { createBrowserPlatform } from "../../src/platform/browser";
 import type { Platform } from "../../src/platform/ports";
 import { run, winBattle } from "./helpers";
+// Keep lifecycle fixtures independent of roster-driven changes to the default starter offers.
+const createSession: typeof createSeededSession = (platform, seed = 3, capabilities) =>
+  createSeededSession(platform, seed, capabilities);
 class MemoryStorage implements Storage {
   data = new Map<string, string>();
   get length() {
@@ -226,7 +229,7 @@ it("rejects obsolete development saves and recovers a current-format backup with
   expect(memory.getItem("fauna.save.v1")).toBe(obsolete);
   session.command({ type: "endTurn" });
   await session.flush();
-  expect(JSON.parse(memory.getItem("fauna.save.v1")!).version).toBe(28);
+  expect(JSON.parse(memory.getItem("fauna.save.v1")!).version).toBe(current.version);
   await session.dispose();
 });
 

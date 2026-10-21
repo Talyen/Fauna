@@ -8,7 +8,7 @@ import { recruitChoice, accept, policy, run, teamRun, winBattle } from "./helper
 describe("game commands", () => {
   it("validates authored content and starts with one unlocked creature and its three cards", () => {
     validateContent();
-    let s = createGame();
+    let s = createGame(3);
     expect(dispatch(s, { type: "start" }).accepted).toBe(false);
     expect(
       dispatch(s, { type: "draft", species: SPECIES.find((kind) => !s.starterOffers.includes(kind.id))!.id })

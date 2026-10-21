@@ -5,7 +5,7 @@ import { JOURNEY_LENGTH, encounterSource, encounterPacks } from "../../src/game/
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { recruitChoice, accept, winBattle } from "./helpers";
 
-function start(seed = 7) {
+function start(seed = 3) {
   return accept(accept(createGame(seed), { type: "draft", species: "mossguard" }), { type: "start" });
 }
 function enter(s = start()) {

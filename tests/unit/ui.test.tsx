@@ -89,7 +89,7 @@ describe("player interface", () => {
     await session.dispose();
   });
   it("shows stacked currency and Journey-style keyword level progress on Victory", async () => {
-    const started = accept(accept(createGame(7), { type: "draft", species: "mossguard" }), { type: "start" });
+    const started = accept(accept(createGame(3), { type: "draft", species: "mossguard" }), { type: "start" });
     const battle = produce(accept(started, { type: "beginBattle" }), (d) => {
       d.keywordXP.stun = 23;
     });
@@ -129,7 +129,7 @@ describe("player interface", () => {
         disconnect() {}
       },
     );
-    const started = accept(accept(createGame(7), { type: "draft", species: "mossguard" }), { type: "start" });
+    const started = accept(accept(createGame(3), { type: "draft", species: "mossguard" }), { type: "start" });
     const battle = produce(accept(started, { type: "beginBattle" }), (d) => {
       d.battleXP = { nature: 24 };
     });
@@ -167,7 +167,7 @@ describe("player interface", () => {
   });
   it.each([0, 3, 7])("starts encounter %s directly without an enemy preview", async (encounter) => {
     const game = produce(
-      accept(accept(createGame(7), { type: "draft", species: "mossguard" }), { type: "start" }),
+      accept(accept(createGame(3), { type: "draft", species: "mossguard" }), { type: "start" }),
       (draft) => {
         draft.encounter = encounter;
         draft.expedition!.pack = 0;

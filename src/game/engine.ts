@@ -43,7 +43,7 @@ import { bossEncounter, encounterSource, finalEncounter, encounterPacks } from "
 import type { Card, Command, CommandResult, GameEvent, GameState } from "./types";
 export function createGame(seed = 1): GameState {
   const state: GameState = {
-    version: 28,
+    version: 29,
     support: null,
     discovery: { encountered: [], recruited: {} },
     revision: 0,
@@ -413,6 +413,26 @@ function applyExtras(
         if (effect.status === "armor") grantArmor(state, actor, effect.amount, events);
         else grantStatus(actor, effect.status, effect.amount, events, state);
         break;
+      case "meltArmor":
+        for (const recipient of enemy ? state.team : state.battle!.enemies) {
+          if (actor.health <= 0) break;
+          if (recipient.health <= 0) continue;
+          const stats = combat(recipient);
+          const removed = Math.ceil((stats.armor * effect.amount) / 100);
+          if (!removed) continue;
+          stats.armor -= removed;
+          events.push({
+            kind: "status",
+            actorId: actor.id,
+            targetId: recipient.id,
+            status: "armor",
+            outcome: "remove",
+            amount: removed,
+            text: `${species(recipient.species).name} loses ${removed} Armor`,
+          });
+          if (stats.armor === 0) triggerArmorBreak(state, recipient, events);
+        }
+        break;
       case "blind":
         for (const recipient of enemy ? state.team : state.battle!.enemies)
           if (recipient.health > 0) applyBlind(state, actor, recipient, events);
@@ -487,10 +507,12 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
       });
       const blindMiss = def.effect === "attack" ? beginAttack(draft, enemy) : false;
       if (def.effect === "attack") {
+        const damageType =
+          def.alternateDamageType && roll(draft) < 0.5 ? def.alternateDamageType : def.damageType;
         const targets = def.target === "allEnemies" ? living(draft) : [target];
         for (const recipient of targets) {
           if (enemy.health <= 0) break;
-          hit(draft, enemy, recipient, value, def.damageType, events, { leech: def.leech, blindMiss });
+          hit(draft, enemy, recipient, value, damageType, events, { leech: def.leech, blindMiss });
         }
       } else if (def.effect === "heal") {
         const injured = mostInjured(battle.enemies)!;
@@ -798,6 +820,8 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
           if (actor.health <= 0) break;
           const blindMiss = def.effect === "attack" ? beginAttack(draft, actor) : false;
           if (def.effect === "attack") {
+            const damageType =
+              def.alternateDamageType && roll(draft) < 0.5 ? def.alternateDamageType : def.damageType;
             const targets =
               def.target === "allEnemies"
                 ? battle.enemies.filter((enemy) => enemy.health > 0)
@@ -807,7 +831,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
             if (!targets.length) break;
             for (const enemy of targets) {
               if (actor.health <= 0) break;
-              hit(draft, actor, enemy, value, def.damageType, events, {
+              hit(draft, actor, enemy, value, damageType, events, {
                 blindMiss,
                 leech: def.leech,
                 cardLeech: keywords.includes("leech"),

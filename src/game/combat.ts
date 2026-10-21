@@ -776,6 +776,12 @@ function resolveHit(
       if (hasTalent(state, "burn.smoke-screen") && combat(source).burn > 0)
         hit(state, target, source, 2, "burn", events, { proc: true });
     }
+    const cinderstep = creaturePassive(alliedTarget ? state : undefined, target.species).effects.reduce(
+      (sum, effect) => sum + (effect.kind === "dodgeBurn" ? effect.amount : 0),
+      0,
+    );
+    if (cinderstep)
+      hit(state, target, source, cinderstep, "burn", events, { retaliation: true, buildStatus: true });
     if (alliedTarget) state.battleXP.dodge = Math.min(STACK_LIMIT, (state.battleXP.dodge ?? 0) + 1);
     return;
   }

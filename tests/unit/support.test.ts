@@ -5,7 +5,7 @@ import { createGame, dispatch } from "../../src/game/engine";
 import { encodeSave, decodeSave } from "../../src/game/save";
 import { recruitChoice, accept, winBattle } from "./helpers";
 function merchant() {
-  let s = accept(accept(createGame(7), { type: "draft", species: "mossguard" }), { type: "start" });
+  let s = accept(accept(createGame(3), { type: "draft", species: "mossguard" }), { type: "start" });
   s = winBattle(accept(s, { type: "beginBattle" }));
   return accept(s, recruitChoice(s));
 }
@@ -122,7 +122,7 @@ it("discounts each new Merchant with Favor and persists the paid price", () => {
 });
 it("adds Smuggler's Map to the settled reward once without duplicating combat earnings", () => {
   let state = produce(
-    accept(accept(createGame(7), { type: "draft", species: "mossguard" }), { type: "start" }),
+    accept(accept(createGame(3), { type: "draft", species: "mossguard" }), { type: "start" }),
     (draft) => {
       draft.boons = ["smugglers-map"];
     },

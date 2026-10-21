@@ -17,6 +17,8 @@ export const COMBAT_PACKS = [
   ["prismram", "reedstag", "emberback"],
   ["captoad", "mossguard", "pollenmoth"],
   ["prismram", "captoad", "emberback"],
+  ["cindernewt", "dunefox", "mossguard"],
+  ["prismram", "cindernewt", "pollenmoth"],
 ] as const;
 export const BOSSES = [
   {
@@ -78,7 +80,7 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
       damageType:
         kind === "dunefox"
           ? "physical"
-          : kind === "emberback"
+          : kind === "emberback" || kind === "cindernewt"
             ? "burn"
             : kind === "captoad"
               ? "poison"
