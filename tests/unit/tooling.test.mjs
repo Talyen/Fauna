@@ -17,6 +17,7 @@ import { checkDocumentation } from "../../scripts/check-docs.mjs";
 import { checkBundleBudget } from "../../scripts/check-bundle-budget.mjs";
 import { summarizeReport, publishSummary } from "../../scripts/ci-summarize.mjs";
 import { createWorktree } from "../../scripts/worktree.mjs";
+import { cleanupWorktrees } from "../../scripts/worktree-cleanup.mjs";
 import { integrate } from "../../scripts/integrate.mjs";
 import { acquireIntegrationLock } from "../../scripts/lib/integration-lock.mjs";
 
@@ -265,8 +266,69 @@ describe("isolated worktrees and protected integration", () => {
       ["run", "docs:check"],
     ]);
     expect(readFileSync(path.join(root, "main-only.txt"), "utf8")).toContain("concurrent");
-    expect(git(root, "rev-parse", "HEAD")).toBe(git(task.path, "rev-parse", "HEAD"));
+    expect(git(root, "show", "HEAD:Docs/workflow.md")).toContain("Task change");
+    expect(existsSync(task.path)).toBe(false);
+    expect(git(root, "branch", "--list", task.branch)).toBe("");
+  });
+
+  it("audits without removal, archives ignored artifacts and preserves dirty or unmerged tasks", async () => {
+    const root = repo();
+    put(root, ".gitignore", ".worktrees/\nnode_modules\nreports/\n");
+    git(root, "add", ".gitignore");
+    git(root, "commit", "-qm", "ignore reports");
+    const clean = createWorktree(root, "clean");
+    put(clean.path, "reports/evidence.txt", "keep this evidence");
+    const dirty = createWorktree(root, "dirty");
+    put(dirty.path, "unfinished.txt", "unfinished");
+    const unmerged = createWorktree(root, "unmerged");
+    put(unmerged.path, "feature.txt", "unique work");
+    git(unmerged.path, "add", ".");
+    git(unmerged.path, "commit", "-qm", "unmerged feature");
+    const locked = createWorktree(root, "locked");
+    git(root, "worktree", "lock", locked.path);
+    git(root, "branch", "codex/merged-without-checkout");
+    git(root, "branch", "personal-work");
+    const audit = await cleanupWorktrees(root, { log: () => {} });
+    expect(audit.find((entry) => entry.branch === clean.branch).status).toBe("eligible");
+    expect(existsSync(clean.path)).toBe(true);
+    expect(audit.find((entry) => entry.branch === locked.branch).status).toBe("preserved");
+    const result = await cleanupWorktrees(root, { apply: true, log: () => {} });
+    const removed = result.find((entry) => entry.branch === clean.branch);
+    expect(removed.status).toBe("removed");
+    expect(readFileSync(path.join(removed.archive, "files/reports/evidence.txt"), "utf8")).toBe(
+      "keep this evidence",
+    );
+    expect(existsSync(clean.path)).toBe(false);
+    expect(git(root, "branch", "--list", clean.branch)).toBe("");
+    expect(git(root, "branch", "--list", "codex/merged-without-checkout")).toBe("");
+    expect(git(root, "branch", "--list", "personal-work")).toContain("personal-work");
+    for (const task of [dirty, unmerged, locked]) {
+      expect(result.find((entry) => entry.branch === task.branch).status).toBe("preserved");
+      expect(existsSync(task.path)).toBe(true);
+      expect(git(root, "branch", "--list", task.branch)).toContain(task.branch);
+    }
+    expect(readFileSync(path.join(dirty.path, "unfinished.txt"), "utf8")).toBe("unfinished");
+    expect(git(unmerged.path, "show", "HEAD:feature.txt")).toBe("unique work");
+  });
+
+  it("reports incomplete cleanup after integration when a task worktree is locked", async () => {
+    const root = repo();
+    const task = createWorktree(root, "locked-integration");
+    put(task.path, "feature.txt", "reviewed change");
+    git(task.path, "add", ".");
+    git(task.path, "commit", "-qm", "feature");
+    git(root, "worktree", "lock", task.path);
+    await expect(
+      integrate(root, task.branch, {
+        runner: () => ({ status: 0 }),
+        log: () => {},
+      }),
+    ).rejects.toThrow("Integration succeeded, but cleanup is incomplete");
+    expect(git(root, "show", "HEAD:feature.txt")).toBe("reviewed change");
     expect(existsSync(task.path)).toBe(true);
+    git(root, "worktree", "unlock", task.path);
+    await cleanupWorktrees(root, { apply: true, log: () => {} });
+    expect(existsSync(task.path)).toBe(false);
   });
 
   it("rejects unfinished Git operations even on clean worktrees and prevents advancement after verification mutations", async () => {

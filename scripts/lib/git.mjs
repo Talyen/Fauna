@@ -19,6 +19,7 @@ export function worktrees(root) {
       return {
         path: fields[0].slice(9),
         branch: fields.find((field) => field.startsWith("branch "))?.slice(7),
+        locked: fields.some((field) => field === "locked" || field.startsWith("locked ")),
       };
     });
 }

@@ -20,7 +20,19 @@ Review the task diff, run its checks, and commit task-owned files. From clean ma
 node scripts/integrate.mjs task/creature-feedback
 ```
 
-Integration holds one repository-wide lock, incorporates the locked main commit in the task checkout, checks the combined result and advances clean main. Dirty checkouts and unfinished Git operations block it. A competing integration fails as busy; retry later without terminating its owner. The OS releases the lock on exit, including crashes. A legacy directory lock is respected during the transition; inspect its owner before any separately authorized cleanup. Both worktrees are rechecked before main advances. Failed checks preserve committed task work; integration retains the checkout and branch. Task-scoped pushes and hosted CI follow the authorization in AGENTS.md. PRs, releases, deployments and destructive cleanup require separate authorization.
+Integration holds one repository-wide lock, incorporates the locked main commit in the task checkout, checks the combined result and advances clean main. Dirty checkouts and unfinished Git operations block it. A competing integration fails as busy; retry later without terminating its owner. The OS releases the lock on exit, including crashes. A legacy directory lock is respected during the transition; inspect its owner before any separately authorized cleanup. Both worktrees are rechecked before main advances. Failed checks preserve committed task work. Successful integration removes its clean merged checkout and local branch while still holding the lock. Cleanup failure is reported as incomplete even if main already advanced; inspect the retained work and retry cleanup. Task-scoped pushes and hosted CI follow the authorization in AGENTS.md. PRs, releases, deployments and cleanup beyond clean merged task checkouts require separate authorization.
+
+Audit accumulated local task branches and worktrees from clean main:
+
+```sh
+npm run worktree:cleanup
+# Remove eligible merged tasks:
+npm run worktree:cleanup -- --apply
+```
+
+Only local branches under `task/` or `codex/` whose commits are already in main are eligible. The sweep uses the integration lock and preserves dirty, unmerged, locked and unfinished checkouts. It never merges unreviewed work, forces removal, deletes remote branches or terminates preview processes. Apply mode exits unsuccessfully if any tasks were preserved; inspect those entries before treating cleanup as complete. Integration automatically cleans only the task being integrated, so another chat's newly created clean checkout is not swept during routine integration.
+
+Before removal, ignored artifacts (reports, screenshots, logs and other ignored files) are copied to `fauna-worktree-archives/` inside the shared Git directory, with a manifest identifying the original checkout, branch and commit. Dependency installs and links under the checkout's root `node_modules` are disposable and are not archived. Archives remain local and are never automatically deleted; find them with `git rev-parse --git-common-dir`. Tracked and untracked changes always block removal. Close only preview processes owned by the completed task before its integration; cleanup does not stop processes or establish that another chat has finished.
 
 ## Verification
 
