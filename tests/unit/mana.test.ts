@@ -8,7 +8,7 @@ import { impactTargets } from "../../src/ui/combat-impact";
 import { run, victoryReady } from "./helpers";
 function lastMana() {
   return produce(run(7), (d) => {
-    const card = d.cards.find((c) => c.definitionId === "mossback-attack")!;
+    const card = d.cards.find((c) => c.definitionId === "mossguard-attack")!;
     d.battle!.hand = [card.id];
     d.battle!.draw = d.cards.filter((c) => c.id !== card.id).map((c) => c.id);
     d.battle!.discard = [];
@@ -22,7 +22,7 @@ describe("mana turn settlement", () => {
     const preview = previewPlay(before, card, "enemy-0");
     expect(preview.state.battle!.mana).toBe(0);
     expect(preview.state.battle!.turn).toBe(1);
-    expect(preview.state.team.map((c) => c.health)).toEqual([29, 24, 26]);
+    expect(preview.state.team.map((c) => c.health)).toEqual([30, 24, 26]);
     const result = dispatch(before, { type: "play", cardId: card, targetId: "enemy-0" });
     expect(result.accepted).toBe(true);
     expect(result.state.revision).toBe(before.revision + 1);

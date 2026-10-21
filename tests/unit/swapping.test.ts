@@ -157,7 +157,7 @@ describe("optional starting lineup and save validation", () => {
         d.reserves[0]!.id = d.team[0]!.id;
       },
       (d: typeof s) => {
-        d.lineup = ["mossback", "mossback", "stormfin"];
+        d.lineup = ["mossguard", "mossguard", "stormfin"];
       },
       (d: typeof s) => {
         d.roster.push("moonhart");
@@ -175,7 +175,7 @@ it("restores the saved lineup after a tactical swap without retaining card owner
   s = winBattle(s);
   if (s.phase === "recruit") s = accept(s, recruitChoice(s));
   if (s.phase === "boon") s = accept(s, { type: "skipBoon" });
-  expect(s.team.map((c) => c.species)).toEqual(["mossback", "emberfox", "stormfin"]);
+  expect(s.team.map((c) => c.species)).toEqual(["mossguard", "emberfox", "stormfin"]);
   expect(
     s.cards.every((card) =>
       s.team.some(
@@ -196,7 +196,7 @@ it("rejects current saves with missing live cards or roster members", () => {
       (s.battle as { draw: string[] }).draw = [];
     },
     (s: Record<string, unknown>) => {
-      s.roster = ["mossback", "emberfox"];
+      s.roster = ["mossguard", "emberfox"];
     },
   ]) {
     const current = JSON.parse(encodeSave(withReserves()));

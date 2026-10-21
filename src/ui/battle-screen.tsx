@@ -97,8 +97,11 @@ export function BattleScreen({
   const automaticTarget =
     (def?.effect === "attack" && def.target === "randomEnemy") ||
     (def?.effect === "heal" && def.target === "mostInjured");
+  const allAllies = def?.effect === "teamGuard" || (def?.effect === "heal" && def.target === "allAllies");
+  const selfTarget = def?.effect === "guard" && def.target === "self";
   const enemyTarget = def?.effect === "attack" && !def.target,
-    allyTarget = (def?.effect === "heal" && !def.target) || def?.effect === "guard";
+    allyTarget =
+      (def?.effect === "heal" || def?.effect === "guard") && !allAllies && !selfTarget && !automaticTarget;
   const targets = enemyTarget
     ? battle.enemies.filter((e) => e.health > 0).map((e) => e.id)
     : allyTarget
@@ -112,7 +115,7 @@ export function BattleScreen({
     const side = enemyTarget ? "enemy" : "ally";
     setRemembered((old) => (old[side] === id ? old : { ...old, [side]: id }));
   };
-  const groupTarget = def?.effect === "teamGuard" || allEnemies || automaticTarget;
+  const groupTarget = allAllies || allEnemies || selfTarget || automaticTarget;
   const preview = useMemo(
     () => (selected && (target || groupTarget) ? previewPlay(game, selected, target) : null),
     [game, selected, target, groupTarget],
@@ -135,8 +138,8 @@ export function BattleScreen({
     }
   }
   if (target) affected.add(target);
-  if (def?.effect === "teamGuard")
-    game.team.filter((unit) => unit.health > 0).forEach((unit) => affected.add(unit.id));
+  if (allAllies) game.team.filter((unit) => unit.health > 0).forEach((unit) => affected.add(unit.id));
+  if (selfTarget && card) affected.add(card.ownerId);
   if (allEnemies) battle.enemies.filter((unit) => unit.health > 0).forEach((unit) => affected.add(unit.id));
   const allyRecipient = game.team.find((unit) => unit.id === target);
   const recipient =
@@ -286,13 +289,21 @@ export function BattleScreen({
             creature={creature}
             tooltips={!selected}
             acting={card?.ownerId === creature.id}
-            validTarget={!!selected && creature.health > 0 && (allyTarget || def?.effect === "teamGuard")}
+            validTarget={
+              !!selected &&
+              creature.health > 0 &&
+              (allyTarget || allAllies || (selfTarget && creature.id === card?.ownerId))
+            }
             activeTarget={
-              !!selected && creature.health > 0 && (target === creature.id || def?.effect === "teamGuard")
+              !!selected &&
+              creature.health > 0 &&
+              (target === creature.id || allAllies || (selfTarget && creature.id === card?.ownerId))
             }
             onPreviewEnd={() => setHovered((old) => (old === creature.id ? null : old))}
             invalidTarget={
-              !!selected && ((!allyTarget && def?.effect !== "teamGuard") || creature.health <= 0)
+              !!selected &&
+              ((!allyTarget && !allAllies && !(selfTarget && creature.id === card?.ownerId)) ||
+                creature.health <= 0)
             }
             onPreview={() => {
               if (selected && allyTarget && creature.health > 0) setTarget(creature.id);
@@ -304,7 +315,9 @@ export function BattleScreen({
             }
             onClick={(element) => {
               if (selected) {
-                if (allyTarget && creature.health > 0)
+                if (selfTarget && creature.id === card?.ownerId && creature.health > 0)
+                  play({ type: "play", cardId: selected });
+                else if (allyTarget && creature.health > 0)
                   play({ type: "play", cardId: selected, targetId: creature.id });
                 else onDenied(element);
               }
@@ -332,11 +345,13 @@ export function BattleScreen({
                       ? def.effect === "attack"
                         ? "Random enemy"
                         : "Most injured ally"
-                      : def.effect === "teamGuard"
+                      : allAllies
                         ? "All allies"
-                        : enemyTarget
-                          ? "Choose an enemy"
-                          : "Choose an ally")}
+                        : selfTarget
+                          ? "Self"
+                          : enemyTarget
+                            ? "Choose an enemy"
+                            : "Choose an ally")}
               </p>
               <ActionDetails
                 compact

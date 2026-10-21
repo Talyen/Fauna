@@ -184,7 +184,7 @@ it("opening creature details does not steal focus from a combatant or action", (
     <main>
       <Button>First action</Button>
       <Button>Target creature</Button>
-      {open ? <CreatureDetails kind="mossback" /> : null}
+      {open ? <CreatureDetails kind="mossguard" /> : null}
     </main>
   );
   const view = render(surface(false));

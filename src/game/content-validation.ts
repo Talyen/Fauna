@@ -1,4 +1,4 @@
-import { CARDS, SPECIES, INITIAL_SPECIES, FIRST_RUN_STARTERS, ENCOUNTERS } from "./content";
+import { cardText, CARDS, SPECIES, INITIAL_SPECIES, FIRST_RUN_STARTERS, ENCOUNTERS } from "./content";
 import { BOSSES, COMBAT_PACKS, JOURNEY_LENGTH } from "./encounters";
 import { BOONS, TALENTS, TALENT_EFFECTS } from "./progression";
 import { DAMAGE_TYPES, EFFECT_KEYWORDS, PROGRESSION_KEYWORDS, definitionKeywords } from "./keywords";
@@ -43,6 +43,8 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
       error(entry.id, "passiveTiers", "A base passive and five upgrade slots are required.");
     for (const tier of entry.passiveTiers) {
       if (!tier) continue;
+      if (tier.description.includes("."))
+        error(entry.id, "passiveTiers", "Effect descriptions must omit periods");
       if (
         !tier.description.trim() ||
         !tier.effects.length ||
@@ -67,6 +69,8 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
       error(entry.id, "cards", "Species must contribute exactly three cards.");
   }
   for (const card of catalog.cards) {
+    if (Object.hasOwn(EFFECT_KEYWORDS, card.effect) && cardText(card).includes("."))
+      error(card.id, "description", "Effect descriptions must omit periods");
     if (!species.has(card.species)) error(card.id, "species", "Unknown owner.");
     if (card.cost !== 1) error(card.id, "cost", "Every ability must cost exactly 1 Mana.");
     if (!Number.isSafeInteger(card.value) || card.value < 1 || card.value > 1_000_000)
@@ -126,6 +130,7 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
         error(encounter.name, "enemies", "Invalid legacy enemy.");
     }
   for (const talent of catalog.talents) {
+    if (talent.text.includes(".")) error(talent.id, "description", "Effect descriptions must omit periods");
     if (!PROGRESSION_KEYWORDS.includes(talent.keyword) || !TALENT_EFFECTS.includes(talent.effect))
       error(talent.id, "effect", "Unknown keyword or talent effect.");
     if (
@@ -139,7 +144,7 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
       error(talent.id, "description", "Talent identity or description is inconsistent.");
   }
   for (const boon of catalog.boons)
-    if (!boon.name.trim() || !boon.text.trim())
+    if (!boon.name.trim() || !boon.text.trim() || boon.text.includes("."))
       error(boon.id, "description", "Boon needs a name and effect description.");
   for (const keyword of PROGRESSION_KEYWORDS)
     if (

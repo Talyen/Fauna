@@ -96,7 +96,7 @@ for (const [width, height] of REVIEW_VIEWPORTS)
     await page.keyboard.press("Escape");
     await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
     await page.getByRole("button", { name: "Collection", exact: true }).click();
-    const art = page.getByRole("button", { name: "Inspect Mossback", exact: true });
+    const art = page.getByRole("button", { name: "Inspect Mossguard", exact: true });
     await art.hover();
     await expect(page.getByRole("tooltip")).toBeVisible();
     expect(await page.getByRole("tooltip").evaluate((node) => getComputedStyle(node).fontSize)).toBe("20px");
@@ -111,7 +111,7 @@ for (const [width, height] of REVIEW_VIEWPORTS)
     await page.keyboard.press("Enter");
     const dialog = page.getByRole("dialog", { name: "Boons", exact: true });
     await expect(dialog.getByRole("heading", { name: "Tattered Pages", exact: true })).toBeVisible();
-    await expect(dialog).toContainText("Restore 3 Health when you defeat an enemy.");
+    await expect(dialog).toContainText("Restore 3 Health when you defeat an enemy");
     await dialog
       .locator("img")
       .evaluateAll((images) => Promise.all(images.map((img) => (img as HTMLImageElement).decode())));
@@ -143,7 +143,7 @@ test("Merchant purchase resumes without duplicate spending", async ({ page }) =>
   const width = 1280;
   const { accept, winBattle, recruitChoice } = await import("../unit/helpers");
   const { createGame } = await import("../../src/game/engine");
-  let fixture = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
+  let fixture = accept(accept(createGame(7), { type: "draft", species: "mossguard" }), { type: "start" });
   fixture = winBattle(accept(fixture, { type: "beginBattle" }));
   fixture = accept(fixture, recruitChoice(fixture));
   const pack = fixture.expedition!.pack;

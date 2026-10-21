@@ -11,11 +11,11 @@ describe("game commands", () => {
     let s = createGame();
     expect(dispatch(s, { type: "start" }).accepted).toBe(false);
     expect(dispatch(s, { type: "draft", species: "moonhart" }).accepted).toBe(false);
-    s = accept(s, { type: "draft", species: "mossback" });
-    expect(s.selected).toEqual(["mossback"]);
+    s = accept(s, { type: "draft", species: "mossguard" });
+    expect(s.selected).toEqual(["mossguard"]);
     s = accept(s, { type: "start" });
     s = accept(s, { type: "beginBattle" });
-    expect(s.roster).toEqual(["mossback"]);
+    expect(s.roster).toEqual(["mossguard"]);
     expect(s.team).toHaveLength(1);
     expect(s.cards).toHaveLength(3);
     expect(s.battle!.hand).toHaveLength(3);
@@ -102,9 +102,9 @@ describe("game commands", () => {
       s = accept(s, { type: "endTurn" });
     }
   });
-  it("grants guard bonuses and halves residual Block at the next player turn", () => {
+  it("grants self Block and retains residual Block at the next player turn", () => {
     let s = run();
-    const guard = s.cards.find((c) => c.definitionId === "mossback-guard")!;
+    const guard = s.cards.find((c) => c.definitionId === "mossguard-guard")!;
     s = produce(s, (d) => {
       d.battle!.hand = [guard.id];
       d.battle!.draw = d.cards.filter((c) => c.id !== guard.id).map((c) => c.id);
@@ -114,10 +114,10 @@ describe("game commands", () => {
       });
     });
     s = accept(s, { type: "play", cardId: guard.id, targetId: "ally-0" });
-    expect(s.team[0]!.block).toBe(9);
+    expect(s.team[0]!.block).toBe(6);
     s = accept(s, { type: "endTurn" });
     expect(s.team[0]!.health).toBe(32);
-    expect(s.team[0]!.block).toBe(5);
+    expect(s.team[0]!.block).toBe(3);
     expect(s.battle!.mana).toBe(4);
     expect(s.battle!.turn).toBe(2);
   });
@@ -147,10 +147,10 @@ describe("game commands", () => {
     expect(dispatch(s, { type: "recruit", species: "moonhart" }).accepted).toBe(false);
     s = accept(s, { type: "recruit", species: "briartooth" });
     expect(s.roster).toHaveLength(4);
-    expect(s.team[0]!.species).toBe("mossback");
+    expect(s.team[0]!.species).toBe("mossguard");
     s = accept(s, { type: "swap", activeId: "ally-0", reserve: s.reserves[0]!.id });
     expect(s.team[0]!.species).toBe("briartooth");
-    expect(s.cards.some((c) => c.definitionId.startsWith("mossback"))).toBe(false);
+    expect(s.cards.some((c) => c.definitionId.startsWith("mossguard"))).toBe(false);
     expect(decodeSave(encodeSave(s))).toEqual(s);
   });
   it("settles rewards once, unlocks Moonhart once, and preserves permanent progress", () => {
@@ -233,7 +233,7 @@ describe("save validation", () => {
 });
 describe("creature traits and deck circulation", () => {
   it("applies Charged Stun damage and Tender healing while rejecting revival of knocked-out allies", () => {
-    let s = teamRun(5, ["stormfin", "silkmoth", "mossback"]);
+    let s = teamRun(5, ["stormfin", "silkmoth", "mossguard"]);
     const attack = s.cards.find((c) => c.definitionId === "stormfin-attack")!,
       heal = s.cards.find((c) => c.definitionId === "silkmoth-heal")!;
     s = produce(s, (d) => {
@@ -255,7 +255,7 @@ describe("creature traits and deck circulation", () => {
     expect(dispatch(knocked, { type: "play", cardId: heal.id, targetId: "ally-2" }).accepted).toBe(false);
   });
   it("deals Thorns only for health damage and grants Moonlit starting block", () => {
-    let s = teamRun(3, ["briartooth", "moonhart", "mossback"]);
+    let s = teamRun(3, ["briartooth", "moonhart", "mossguard"]);
     expect(s.team[1]!.block).toBe(4);
     const events: Parameters<typeof hit>[5] = [];
     s = produce(s, (d) => {

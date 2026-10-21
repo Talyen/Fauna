@@ -11,7 +11,7 @@ import type { GameEvent } from "../../src/game/types";
 import { accept, teamRun, winBattle } from "./helpers";
 
 function ready(id: string, copies = 1) {
-  return produce(teamRun(1, ["pollenmoth", "mossback", "stormfin"]), (game) => {
+  return produce(teamRun(1, ["pollenmoth", "mossguard", "stormfin"]), (game) => {
     game.discovery.recruited.pollenmoth = copies;
     const card = game.cards.find((card) => card.definitionId === id)!;
     game.battle!.hand = [card.id];
@@ -31,17 +31,17 @@ function ready(id: string, copies = 1) {
 it("authors the agreed kit and six complete passive tiers", () => {
   const cards = CARDS.filter((card) => card.species === "pollenmoth");
   expect(cards.map((card) => [card.cost, cardText(card)])).toEqual([
-    [1, "Deal 3 Light damage to a random enemy."],
-    [1, "Allies gain 2 Block."],
-    [1, "Restore 3 Health to the most injured ally."],
+    [1, "Deal 3 Light damage to a random enemy"],
+    [1, "Allies gain 2 Block"],
+    [1, "Restore 3 Health to the most injured ally"],
   ]);
   expect(species("pollenmoth").passiveTiers.map((tier) => tier?.description)).toEqual([
-    "Light damage bounces once.",
-    "Light damage bounces once, with a 50% chance to bounce twice.",
-    "Light damage bounces twice.",
-    "Light damage bounces twice. Health restoration has a 50% chance to bounce once.",
-    "Light damage bounces twice. Health restoration bounces once, with a 50% chance to bounce twice.",
-    "Light damage and Health restoration bounce twice.",
+    "Light damage bounces once",
+    "Light damage bounces once, with a 50% chance to bounce twice",
+    "Light damage bounces twice",
+    "Light damage bounces twice; Health restoration has a 50% chance to bounce once",
+    "Light damage bounces twice; Health restoration bounces once, with a 50% chance to bounce twice",
+    "Light damage and Health restoration bounce twice",
   ]);
   expect(validateCatalog().filter((issue) => issue.severity === "error")).toEqual([]);
 });
@@ -101,7 +101,7 @@ it("protects living deployed allies and never reserves or knockouts", () => {
   const game = produce(ready("pollenmoth-teamGuard"), (draft) => {
     draft.team[2]!.health = 0;
     draft.reserves.push({ ...draft.team[1]!, id: "reserve" });
-    draft.roster.push("mossback");
+    draft.roster.push("mossguard");
   });
   const next = accept(game, { type: "play", cardId: game.battle!.hand[0]!, autoEndTurn: false });
   expect(next.team.map((ally) => ally.block)).toEqual(

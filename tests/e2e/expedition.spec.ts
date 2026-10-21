@@ -123,7 +123,7 @@ for (const [width, enlarged, outcome] of [
   test(`journey results ${outcome} at ${width}, enlarged ${enlarged}`, async ({ page }) => {
     await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
     await page.emulateMedia({ reducedMotion: "reduce" });
-    let game = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
+    let game = accept(accept(createGame(7), { type: "draft", species: "mossguard" }), { type: "start" });
     let ending: Command;
     if (outcome === "victory") {
       for (let i = 0; i < 7; i++) {
@@ -202,7 +202,7 @@ for (const [width, enlarged, encounter] of [
     await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
     await page.emulateMedia({ reducedMotion: "reduce" });
     const game = produce(
-      accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" }),
+      accept(accept(createGame(7), { type: "draft", species: "mossguard" }), { type: "start" }),
       (draft) => {
         draft.encounter = encounter;
         draft.expedition!.pack = 0;
@@ -253,7 +253,7 @@ for (const [width, enlarged, encounter] of [
 
 test("encounter placeholder uses bounded artwork at the minimum viewport", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
-  const game = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
+  const game = accept(accept(createGame(7), { type: "draft", species: "mossguard" }), { type: "start" });
   await seed(page, game);
   await resume(page);
   const card = page.locator(".app:not([inert]) [data-encounter]");
@@ -313,8 +313,8 @@ for (const [width, enlarged] of [
     const initial = await state(page);
     const chosen = initial.starterOffers[0]!;
     const name = species(chosen).name;
-    const mossback = page.getByRole("button", { name: `Inspect ${name}`, exact: true });
-    await mossback.hover();
+    const mossguard = page.getByRole("button", { name: `Inspect ${name}`, exact: true });
+    await mossguard.hover();
     const tooltip = page.getByRole("tooltip");
     await expect(tooltip).toBeVisible();
     await expect(tooltip.locator("strong").first()).toHaveText(name);
@@ -322,15 +322,15 @@ for (const [width, enlarged] of [
     for (const action of CARDS.filter((entry) => entry.species === chosen))
       await expect(tooltip).toContainText(action.name);
     await captureScreen(page, { path: `reports/starter/tooltip-${width}-${enlarged}.png` });
-    await mossback.click();
+    await mossguard.click();
     await page.locator(".inspection-thumbnails .action-card").first().click();
     await expect(page.getByRole("button", { name: `Choose ${name}`, exact: true })).toHaveCount(0);
     await page.keyboard.press("Escape");
     await expect(page.getByRole("button", { name: `Choose ${name}`, exact: true })).toBeVisible();
     await page.keyboard.press("Escape");
-    await expect(mossback).toBeFocused();
+    await expect(mossguard).toBeFocused();
     expect((await state(page)).revision).toBe(initial.revision);
-    await mossback.press("Enter");
+    await mossguard.press("Enter");
     await captureScreen(page, { path: `reports/starter/inspection-${width}-${enlarged}.png` });
     const ranks = page.getByRole("button", { name: "Rank progression", exact: true });
     await ranks.click();
@@ -340,16 +340,16 @@ for (const [width, enlarged] of [
     await expect(ranks).toBeFocused();
     expect((await state(page)).revision).toBe(initial.revision);
     await page.getByRole("button", { name: `Choose ${name}`, exact: true }).click();
-    await expect(mossback).toBeFocused();
-    await expect(mossback).toHaveAttribute("aria-pressed", "true");
+    await expect(mossguard).toBeFocused();
+    await expect(mossguard).toHaveAttribute("aria-pressed", "true");
     await expect(begin).toBeEnabled();
     expect((await state(page)).selected).toEqual([chosen]);
-    await mossback.click();
+    await mossguard.click();
     await expect(page.getByRole("button", { name: /^Choose / })).toHaveCount(0);
     await page.keyboard.press("Escape");
     await page.reload();
     await resume(page);
-    await expect(mossback).toHaveAttribute("aria-pressed", "true");
+    await expect(mossguard).toHaveAttribute("aria-pressed", "true");
     if (!enlarged) await fits(page);
     for (const artwork of await page.locator(".draft-grid .creature-card").all()) {
       const bounds = (await artwork.boundingBox())!;
@@ -373,7 +373,7 @@ test("one starter grows a lineup through a full expedition", async ({ page }) =>
   await seed(page);
   const activate = (el: Locator) => el.click();
   await activate(page.getByRole("button", { name: "Play", exact: true }));
-  const chosen = "mossback";
+  const chosen = "mossguard";
   const name = species(chosen).name;
   await activate(page.getByRole("button", { name: `Inspect ${name}`, exact: true }));
   await activate(page.getByRole("button", { name: `Choose ${name}`, exact: true }));
@@ -448,10 +448,10 @@ test("recruitment adds a reserve, selection swaps its kit, and remembers active 
   await page.getByRole("button", { name: "Recruit Briartooth", exact: true }).click();
   expect((await state(page)).roster).toHaveLength(4);
   expect((await state(page)).phase).toBe("teamSelection");
-  await expect(page.getByRole("button", { name: "Mossback, starting", exact: true })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Mossguard, starting", exact: true })).toHaveCount(0);
   await page.getByRole("button", { name: "Open menu" }).click();
   await page.getByRole("button", { name: "Lineup", exact: true }).click();
-  const active = page.getByRole("button", { name: "Mossback, starting", exact: true }),
+  const active = page.getByRole("button", { name: "Mossguard, starting", exact: true }),
     reserve = page.getByRole("button", { name: "Briartooth, reserve", exact: true });
   await reserve.focus();
   await page.keyboard.press("i");
@@ -467,7 +467,7 @@ test("recruitment adds a reserve, selection swaps its kit, and remembers active 
   await page.keyboard.press("Escape");
   const s = await state(page);
   expect(s.team.find((c) => c.id === s.lineup[0])!.species).toBe("briartooth");
-  expect(s.cards.some((c) => c.definitionId.startsWith("mossback"))).toBe(false);
+  expect(s.cards.some((c) => c.definitionId.startsWith("mossguard"))).toBe(false);
   await page.reload();
   await resume(page);
   await page.locator(".app:not([inert]) [data-encounter]").click();
@@ -684,11 +684,11 @@ test("Collection hides uncollected tooltips and opens readable creature pages", 
   await page.getByRole("heading", { name: "Collection", exact: true }).hover();
   await expect(artwork).toHaveCSS("filter", "grayscale(1)");
   await expect(locked).toHaveCSS("scale", "none");
-  await page.getByRole("button", { name: "Inspect Mossback", exact: true }).click();
+  await page.getByRole("button", { name: "Inspect Mossguard", exact: true }).click();
   await expect(page.locator(".collection-creature-screen")).toBeVisible();
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await page.keyboard.press("Escape");
-  await expect(page.getByRole("button", { name: "Inspect Mossback", exact: true })).toBeFocused();
+  await expect(page.getByRole("button", { name: "Inspect Mossguard", exact: true })).toBeFocused();
   await page.keyboard.press("Escape");
   await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
 });
@@ -718,7 +718,7 @@ test("last mana saves the full turn before immediate close and does not replay o
 }) => {
   const fixture = produce(run(), (d) => {
     d.battle!.mana = 1;
-    const card = d.cards.find((c) => c.definitionId === "mossback-attack")!;
+    const card = d.cards.find((c) => c.definitionId === "mossguard-attack")!;
     d.battle!.hand = [card.id];
     d.battle!.draw = d.cards.filter((c) => c.id !== card.id).map((c) => c.id);
     d.battle!.discard = [];
@@ -726,7 +726,7 @@ test("last mana saves the full turn before immediate close and does not replay o
   await seed(page, fixture);
   await resume(page);
   await page.locator(".app:not([inert]) .hand .action-card").click();
-  await page.getByRole("button", { name: "Target Bramble Imp", exact: true }).click();
+  await page.locator(".confirm-play").click();
   await saved(page);
   const committed = await state(page);
   expect(committed.battle!.turn).toBe(2);
@@ -926,7 +926,7 @@ test("real audio output, hit recoil, reduced motion, and mute follow combat outc
   });
   const fixture = produce(run(7), (d) => {
     const cards = d.cards.filter((c) =>
-      ["mossback-attack", "emberfox-attack", "stormfin-attack"].includes(c.definitionId),
+      ["mossguard-attack", "emberfox-attack", "stormfin-attack"].includes(c.definitionId),
     );
     d.battle!.hand = cards.map((c) => c.id);
     d.battle!.draw = d.cards.filter((c) => !cards.some((card) => card.id === c.id)).map((c) => c.id);
@@ -934,8 +934,8 @@ test("real audio output, hit recoil, reduced motion, and mute follow combat outc
   });
   await seed(page, fixture);
   await resume(page);
-  await page.locator('.app:not([inert]) .hand [data-card-id="ally-0:mossback-attack"]').click();
-  await page.getByRole("button", { name: "Target Bramble Imp", exact: true }).click();
+  await page.locator('.app:not([inert]) .hand [data-card-id="ally-0:mossguard-attack"]').click();
+  await page.locator(".confirm-play").click();
   const observed = () =>
     page.evaluate(
       () =>
@@ -984,7 +984,7 @@ test("five-card hand with hidden overflow, three enemies and a full bench preser
     d.boons = ["tattered-pages"];
     d.wins = 1;
     d.unlocked.push("moonhart");
-    d.roster = ["mossback", "emberfox", "stormfin", "silkmoth", "briartooth"];
+    d.roster = ["mossguard", "emberfox", "stormfin", "silkmoth", "briartooth"];
     d.reserves = ["silkmoth", "briartooth"].map((kind) => ({
       id: `recruit-${kind}`,
       species: kind as "silkmoth" | "briartooth",
@@ -1332,7 +1332,7 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     await expect(dialog).toBeVisible();
     await expect(dialog.locator(".creature-card")).toHaveCount(5);
     if (input === "keyboard") {
-      await dialog.getByRole("button", { name: "Mossback, deployed", exact: true }).focus();
+      await dialog.getByRole("button", { name: "Mossguard, deployed", exact: true }).focus();
       await page.keyboard.press("a");
       await expect(dialog.getByRole("button", { name: "Stormfin, deployed", exact: true })).toBeFocused();
       await page.keyboard.press("s");
@@ -1412,7 +1412,7 @@ for (const [width, height] of [
     await fits(page);
     await captureScreen(page, { path: `reports/swapping/lineup-${width}.png` });
     await page.getByRole("button", { name: "Silkmoth, reserve", exact: true }).click();
-    await page.getByRole("button", { name: "Mossback, starting", exact: true }).click();
+    await page.getByRole("button", { name: "Mossguard, starting", exact: true }).click();
     const edited = await state(page);
     expect(edited.lineup[0]).toBe("recruit-silkmoth");
     expect(edited.phase).toBe("recruit");
@@ -1502,10 +1502,10 @@ test("recruitment at five requires replacement and updates a released starter's 
   await page.getByRole("button", { name: "Cancel", exact: true }).click();
   expect((await state(page)).revision).toBe(fixture.revision);
   await page.getByRole("button", { name: "Recruit Briartooth", exact: true }).click();
-  await page.getByRole("button", { name: "Release Mossback", exact: true }).click();
+  await page.getByRole("button", { name: "Release Mossguard", exact: true }).click();
   const recruited = await state(page);
   expect(recruited.roster).toHaveLength(5);
-  expect(recruited.roster).not.toContain("mossback");
+  expect(recruited.roster).not.toContain("mossguard");
   expect(recruited.team.find((c) => c.id === recruited.lineup[0])!.species).toBe("briartooth");
   expect(recruited.phase).toBe("teamSelection");
   await page.reload();
@@ -1544,7 +1544,7 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
         `${card.cost} Mana`,
       );
     await expect(details.getByRole("region", { name: "Cinder Strike", exact: true })).toContainText(
-      "Deal 8 Burn damage.",
+      "Deal 8 Burn damage",
     );
     await expect(page.getByRole("dialog")).toHaveCount(0);
     if (input === "mouse") await details.getByRole("button", { name: "Back", exact: true }).click();
@@ -1570,11 +1570,11 @@ for (const [width, height] of [
     await seed(page, run(7));
     await resume(page);
     await page.locator(".app:not([inert]) .player-row .creature-card").first().hover();
-    await expect(page.getByRole("tooltip")).toContainText("Guard cards grant 2 extra block.");
-    await expect(page.getByRole("tooltip")).not.toContainText("Bramble Bash");
+    await expect(page.getByRole("tooltip")).toContainText("Retain 10% more Block between turns");
+    await expect(page.getByRole("tooltip")).not.toContainText("Rooted Stomp");
     await page.getByRole("button", { name: "Open menu", exact: true }).click();
     await page.getByRole("button", { name: "Collection", exact: true }).click();
-    await page.getByRole("button", { name: "Inspect Mossback", exact: true }).click();
+    await page.getByRole("button", { name: "Inspect Mossguard", exact: true }).click();
     const details = page.locator(".collection-creature-screen");
     await details
       .locator("img")
@@ -1588,14 +1588,14 @@ for (const [width, height] of [
       expect(Math.abs(bounds.width / bounds.height - 3 / 4)).toBeLessThan(0.01);
       expect(await artwork.textContent()).toBe("");
     }
-    for (const card of CARDS.filter((c) => c.species === "mossback")) {
+    for (const card of CARDS.filter((c) => c.species === "mossguard")) {
       const region = details.getByRole("region", { name: card.name, exact: true });
       await expect(region).toBeVisible();
       await expect(region.locator(".action-effect")).not.toBeEmpty();
     }
     await captureScreen(page, { path: `reports/collection/kit-${width}.png` });
     await page.keyboard.press("Escape");
-    await expect(page.getByRole("button", { name: "Inspect Mossback", exact: true })).toBeFocused();
+    await expect(page.getByRole("button", { name: "Inspect Mossguard", exact: true })).toBeFocused();
   });
 
 for (const [width, height, enlarged] of [

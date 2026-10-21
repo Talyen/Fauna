@@ -73,3 +73,15 @@ export function enemyInspectionValue(
 ) {
   return enemyAbilityValue(enemy, card);
 }
+
+/** Retention is a relative increase over the ordinary half-Block carryover. */
+export function retainedBlock(
+  unit: Pick<Creature, "species" | "block">,
+  state?: Pick<GameState, "discovery">,
+): number {
+  const bonus = creaturePassive(state, unit.species).effects.reduce(
+    (sum, effect) => sum + (effect.kind === "blockRetention" ? effect.amount : 0),
+    0,
+  );
+  return Math.round((unit.block * (100 + bonus)) / 200);
+}

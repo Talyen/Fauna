@@ -74,7 +74,7 @@ test("minimum-size enlarged menus fit every action without scrolling", async ({ 
   await page.setViewportSize({ width: 1280, height: 720 });
   // Include both optional entries so the tallest browser menu must fit.
   const game = produce(
-    accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" }),
+    accept(accept(createGame(7), { type: "draft", species: "mossguard" }), { type: "start" }),
     (draft) => {
       draft.boons = [BOONS[0]!.id];
     },
@@ -169,8 +169,8 @@ test("controller menu journey at minimum size with enlarged text", async ({ page
   const pad = await controller(page);
   const collection = {
     ...createGame(7),
-    discovery: { encountered: ["mossback"], recruited: { mossback: 1 } },
-    starterOffers: ["mossback", "mossback", "mossback"],
+    discovery: { encountered: ["mossguard"], recruited: { mossguard: 1 } },
+    starterOffers: ["mossguard", "mossguard", "mossguard"],
   };
   await page.addInitScript((save) => localStorage.setItem("fauna.save.v1", save), JSON.stringify(collection));
   if (enlarged) await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
@@ -193,8 +193,8 @@ test("controller menu journey at minimum size with enlarged text", async ({ page
   await expect(page.locator(".collection-creature-screen")).toBeVisible();
   await expect(page.getByRole("button", { name: "Back", exact: true })).toBeFocused();
   await expect(page.locator(".collection-ability")).toHaveCount(3);
-  await expect(page.getByRole("region", { name: "Bramble Bash", exact: true })).toContainText(
-    "Deal 6 Nature damage.",
+  await expect(page.getByRole("region", { name: "Rooted Stomp", exact: true })).toContainText(
+    "Deal 2 Stun damage to all enemies",
   );
   await expect(page.getByRole("dialog")).toHaveCount(0);
   await captureScreen(page, { path: `reports/menu-collection-kit-${width}.png` });

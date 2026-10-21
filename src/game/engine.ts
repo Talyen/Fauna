@@ -34,13 +34,13 @@ import {
   TURN_DRAW,
   HAND_LIMIT,
 } from "./combat";
-import { actionValue, cardCost, enemyAbilityValue } from "./rules";
+import { retainedBlock, actionValue, cardCost, enemyAbilityValue } from "./rules";
 import { CARDS, INITIAL_SPECIES, FIRST_RUN_STARTERS, definition, species, enemyCard } from "./content";
 import { bossEncounter, encounterSource, finalEncounter, encounterPacks } from "./encounters";
 import type { Card, Command, CommandResult, GameEvent, GameState } from "./types";
 export function createGame(seed = 1): GameState {
   const state: GameState = {
-    version: 23,
+    version: 24,
     support: null,
     discovery: { encountered: [], recruited: {} },
     revision: 0,
@@ -377,7 +377,7 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
       tickStatuses(draft, enemy, events);
       if (settle(draft, events)) return;
       if (enemy.health <= 0) continue;
-      enemy.block = Math.round(enemy.block / 2);
+      enemy.block = retainedBlock(enemy);
       if (!startAction(enemy, events, draft)) continue;
       let target = living(draft).find((c) => c.id === enemy.targetId) ?? living(draft)[0];
       if (!target) break;
@@ -406,7 +406,10 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
         }
       } else if (def.effect === "heal") {
         const injured = mostInjured(battle.enemies)!;
-        restoreHealth(injured, value, events, false, draft, false, enemy);
+        for (const recipient of def.target === "allAllies"
+          ? battle.enemies.filter((e) => e.health > 0)
+          : [injured])
+          restoreHealth(recipient, value, events, false, draft, false, enemy);
       } else {
         for (const unit of def.effect === "teamGuard"
           ? battle.enemies.filter((e) => e.health > 0)
@@ -426,7 +429,7 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
     for (const c of [...draft.team, ...draft.reserves]) {
       const stats = combat(c);
       if (stats.grace > 0) stats.grace--;
-      c.block = Math.round(c.block / 2);
+      c.block = retainedBlock(c, draft);
       c.attacked = false;
       startAction(c, events, draft);
     }
@@ -493,10 +496,17 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
     )
       return reject(state, "Choose a living enemy.");
     if (
-      (def.effect === "guard" || (def.effect === "heal" && !def.target)) &&
+      ((def.effect === "guard" && def.target !== "self") || (def.effect === "heal" && !def.target)) &&
       !state.team.some((c) => c.id === command.targetId && c.health > 0)
     )
       return reject(state, "Choose a living ally.");
+    if (
+      def.effect === "guard" &&
+      def.target === "self" &&
+      command.targetId !== undefined &&
+      command.targetId !== actor.id
+    )
+      return reject(state, "This ability targets its acting creature.");
   }
   if (command.type === "visitCampfire" && !canVisitCampfire(state))
     return reject(state, "There is no available Campfire.");
@@ -714,17 +724,21 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
             const targets =
               def.effect === "teamGuard"
                 ? living(draft)
-                : draft.team.filter((c) => c.id === command.targetId);
+                : def.target === "self"
+                  ? [actor]
+                  : draft.team.filter((c) => c.id === command.targetId);
             for (const target of targets) {
               grantBlock(draft, target, value, events);
             }
           }
           if (def.effect === "heal") {
-            const target =
-              def.target === "mostInjured"
-                ? mostInjured(draft.team)!
-                : draft.team.find((c) => c.id === command.targetId)!;
-            restoreHealth(target, value, events, false, draft, true, actor);
+            const targets =
+              def.target === "allAllies"
+                ? living(draft)
+                : def.target === "mostInjured"
+                  ? [mostInjured(draft.team)!]
+                  : draft.team.filter((c) => c.id === command.targetId && c.health > 0);
+            for (const target of targets) restoreHealth(target, value, events, false, draft, true, actor);
           }
           applyExtras(draft, actor, def, events, false, target);
         }

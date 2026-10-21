@@ -56,7 +56,7 @@ describe("menu browsing", () => {
         true,
       );
       const slam = screen.getByRole("button", { name: "Shield Slam" });
-      expect(slam.textContent).toContain("Add half your Block to Physical damage.");
+      expect(slam.textContent).toContain("Add half your Block to Physical damage");
       expect(within(slam).getByText("Unlock · 1 point")).toBeTruthy();
       await user.click(slam);
       expect(screen.getByRole("button", { name: "Shield Slam, unlocked" })).toBeTruthy();

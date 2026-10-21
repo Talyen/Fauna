@@ -6,7 +6,7 @@ import { PageControls, PagedItems } from "../../src/ui/pagination";
 import { Button } from "../../src/components/ui/button";
 
 afterEach(cleanup);
-const entries = ["Mossback", "Emberfox", "Stormfin", "Briartooth", "Silkmoth"];
+const entries = ["Mossguard", "Emberfox", "Stormfin", "Briartooth", "Silkmoth"];
 function Gallery({ size = 2, items = entries }: { size?: number; items?: string[] }) {
   return (
     <PagedItems items={items} pageSize={size} className="gallery" label="Creature pages">
@@ -36,9 +36,9 @@ it("preserves the current item on resize, clamps shortened lists and restores re
   view.rerender(<Gallery size={1} />);
   expect(screen.getByRole("button", { name: "Stormfin" })).toBeTruthy();
   expect(document.activeElement).toBe(screen.getByRole("button", { name: "Stormfin" }));
-  view.rerender(<Gallery size={1} items={["Mossback"]} />);
-  expect(screen.getByRole("button", { name: "Mossback" })).toBeTruthy();
-  expect(document.activeElement).toBe(screen.getByRole("button", { name: "Mossback" }));
+  view.rerender(<Gallery size={1} items={["Mossguard"]} />);
+  expect(screen.getByRole("button", { name: "Mossguard" })).toBeTruthy();
+  expect(document.activeElement).toBe(screen.getByRole("button", { name: "Mossguard" }));
   expect(screen.queryByRole("navigation")).toBeNull();
   view.rerender(<Gallery items={[]} />);
   expect(screen.queryByRole("button")).toBeNull();

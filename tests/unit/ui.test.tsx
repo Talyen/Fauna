@@ -51,7 +51,7 @@ describe("player interface", () => {
     expect(document.querySelectorAll(".hand .action-card")).toHaveLength(7);
     expect(screen.queryByText(/buffer/i)).toBeNull();
     await user.click(document.querySelector<HTMLButtonElement>('.hand .action-card[data-effect="attack"]')!);
-    await user.click(document.querySelector<HTMLButtonElement>(".enemy-row .creature-card")!);
+    await user.click(document.querySelector<HTMLButtonElement>(".confirm-play")!);
     expect(session.store.getState().game.battle!.hand).toContain(game.battle!.buffer[0]);
     expect(session.store.getState().game.battle!.buffer).toHaveLength(1);
     expect(document.querySelectorAll(".hand .action-card")).toHaveLength(7);
@@ -89,7 +89,7 @@ describe("player interface", () => {
     await session.dispose();
   });
   it("shows stacked currency and Journey-style keyword level progress on Victory", async () => {
-    const started = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
+    const started = accept(accept(createGame(7), { type: "draft", species: "mossguard" }), { type: "start" });
     const battle = produce(accept(started, { type: "beginBattle" }), (d) => {
       d.keywordXP.nature = 23;
     });
@@ -129,7 +129,7 @@ describe("player interface", () => {
         disconnect() {}
       },
     );
-    const started = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
+    const started = accept(accept(createGame(7), { type: "draft", species: "mossguard" }), { type: "start" });
     const battle = produce(accept(started, { type: "beginBattle" }), (d) => {
       d.battleXP = { nature: 24 };
     });
@@ -167,7 +167,7 @@ describe("player interface", () => {
   });
   it.each([0, 3, 7])("starts encounter %s directly without an enemy preview", async (encounter) => {
     const game = produce(
-      accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" }),
+      accept(accept(createGame(7), { type: "draft", species: "mossguard" }), { type: "start" }),
       (draft) => {
         draft.encounter = encounter;
         draft.expedition!.pack = 0;
@@ -276,14 +276,14 @@ describe("player interface", () => {
           disconnect() {}
         },
       );
-      const game = produce(teamRun(7, ["mossback", "mossback", "stormfin"]), (d) => {
+      const game = produce(teamRun(7, ["mossguard", "mossguard", "stormfin"]), (d) => {
         d.team[0]!.health = 7;
         d.team[1]!.health = 19;
         d.team[1]!.block = 4;
-        d.roster.push("mossback");
+        d.roster.push("mossguard");
         d.reserves.push({
           id: "reserve-copy",
-          species: "mossback",
+          species: "mossguard",
           health: 11,
           block: 2,
           combat: freshCombat(),
@@ -313,7 +313,7 @@ describe("player interface", () => {
         if (input === "hover") await user.unhover(creature);
       }
       await user.click(screen.getByRole("button", { name: "Swap" }));
-      const reserve = screen.getByRole("button", { name: "Mossback, reserve" });
+      const reserve = screen.getByRole("button", { name: "Mossguard, reserve" });
       if (input === "hover") await user.hover(reserve);
       else {
         await user.tab();
@@ -389,7 +389,7 @@ it("keeps unavailable cards inspectable and denies activation without explanator
     <TooltipProvider>
       <ActionCard
         card={game.cards[0]!}
-        ownerName="Mossback"
+        ownerName="Mossguard"
         disabled
         onClick={click}
         onDenied={deny}
@@ -409,15 +409,16 @@ it("keeps unavailable cards inspectable and denies activation without explanator
 
 it("omits health from creature hover details while retaining block and the passive", async () => {
   const { CreatureDetails } = await import("../../src/ui/card-details");
-  render(<CreatureDetails kind="mossback" block={4} />);
+  render(<CreatureDetails kind="mossguard" block={4} />);
   expect(screen.getByText("4 block")).toBeTruthy();
   expect(screen.queryByText(/health/i)).toBeNull();
   expect(
     screen.getByText(
-      (_, element) => element?.tagName === "P" && element.textContent === "Guard cards grant 2 extra block.",
+      (_, element) =>
+        element?.tagName === "P" && element.textContent === "Retain 10% more Block between turns",
     ),
   ).toBeTruthy();
-  expect(screen.queryByText(/Bramble Bash/)).toBeNull();
+  expect(screen.queryByText(/Rooted Stomp/)).toBeNull();
   expect(screen.queryByText(/Shelter/)).toBeNull();
-  expect(screen.queryByText(/Forest Mantle/)).toBeNull();
+  expect(screen.queryByText(/Moss Renewal/)).toBeNull();
 });

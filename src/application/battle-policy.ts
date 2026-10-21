@@ -3,7 +3,7 @@ import { actionValue, cardCost, physicalBonus } from "../game/rules";
 import { definition, species } from "../game/content";
 import type { Command, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 4;
+export const BATTLE_POLICY_VERSION = 5;
 /** Only visible information enters scoring; no forecasts or gameplay RNG are sampled. */
 export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
   if (state.phase !== "battle" || !state.battle) return [];
@@ -47,21 +47,27 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
         add(id, enemies.length ? enemies.reduce((sum, enemy) => sum + score(enemy), 0) / enemies.length : 0);
       else for (const enemy of enemies) add(id, score(enemy), enemy.id);
     } else if (def.effect === "heal") {
-      const recipients =
-        def.target === "mostInjured" ? [mostInjured(state.team)!] : state.team.filter((c) => c.health > 0);
-      for (const ally of recipients) {
-        const missing = species(ally.species).health - ally.health;
-        if (missing > 0) add(id, 3000 + Math.min(value, missing), def.target ? undefined : ally.id);
-      }
+      const allies = state.team.filter((c) => c.health > 0);
+      if (def.target === "allAllies") {
+        const restored = allies.reduce(
+          (sum, ally) => sum + Math.min(value, species(ally.species).health - ally.health),
+          0,
+        );
+        add(id, restored > 0 ? 3000 + restored : 0);
+      } else
+        for (const ally of def.target === "mostInjured" ? [mostInjured(allies)!] : allies) {
+          const missing = species(ally.species).health - ally.health;
+          if (missing > 0) add(id, 3000 + Math.min(value, missing), def.target ? undefined : ally.id);
+        }
     } else if (def.effect === "teamGuard") {
       const useful = state.team
         .filter((c) => c.health > 0)
         .reduce((n, c) => n + Math.max(0, value - c.block), 0);
       add(id, useful > 0 ? 100 + useful : 0);
     } else {
-      for (const ally of state.team.filter((c) => c.health > 0)) {
+      for (const ally of def.target === "self" ? [actor] : state.team.filter((c) => c.health > 0)) {
         const useful = Math.max(0, value - ally.block);
-        add(id, useful > 0 ? 100 + useful : 0, ally.id);
+        add(id, useful > 0 ? 100 + useful : 0, def.target === "self" ? undefined : ally.id);
       }
     }
   }

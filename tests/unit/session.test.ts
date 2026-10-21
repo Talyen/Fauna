@@ -63,7 +63,7 @@ describe("save orchestration", () => {
     await s.load();
     expect((await p.saves.readCandidates())[0]!.data).toBe("broken");
     expect(s.store.getState().ready).toBe(true);
-    expect(s.command({ type: "draft", species: "mossback" })).toBe(true);
+    expect(s.command({ type: "draft", species: "mossguard" })).toBe(true);
     expect(await s.flush()).toBe(true);
     await s.dispose();
   });
@@ -87,7 +87,7 @@ describe("save orchestration", () => {
       },
     });
     await failed.load();
-    failed.command({ type: "draft", species: "mossback" });
+    failed.command({ type: "draft", species: "mossguard" });
     expect(await failed.flush()).toBe(false);
     expect(failed.store.getState().saveStatus).toBe("error");
     fail = false;
@@ -115,7 +115,7 @@ describe("save orchestration", () => {
       },
     });
     await s.load();
-    s.command({ type: "draft", species: "mossback" });
+    s.command({ type: "draft", species: "mossguard" });
     s.command({ type: "start" });
     const quitting = s.quit();
     expect(quit).toBe(false);
@@ -139,7 +139,7 @@ describe("save orchestration", () => {
     });
     await s.load();
     expect(s.store.getState().loadFailed).toBe(true);
-    expect(s.command({ type: "draft", species: "mossback" })).toBe(true);
+    expect(s.command({ type: "draft", species: "mossguard" })).toBe(true);
     s.retrySave();
     await s.flush();
     expect(writes).toBe(0);
@@ -151,7 +151,7 @@ describe("save orchestration", () => {
     await s.dispose();
     await loading;
     expect(s.store.getState().ready).toBe(false);
-    expect(s.command({ type: "draft", species: "mossback" })).toBe(false);
+    expect(s.command({ type: "draft", species: "mossguard" })).toBe(false);
   });
 });
 describe("desktop close handshake", () => {
@@ -179,7 +179,7 @@ describe("desktop close handshake", () => {
       },
     });
     await s.load();
-    s.command({ type: "draft", species: "mossback" });
+    s.command({ type: "draft", species: "mossguard" });
     const closing = requestClose!();
     expect(s.command({ type: "draft", species: "emberfox" })).toBe(false);
     release();
@@ -203,7 +203,7 @@ describe("desktop close handshake", () => {
     });
     fail = true;
     await failure.load();
-    failure.command({ type: "draft", species: "mossback" });
+    failure.command({ type: "draft", species: "mossguard" });
     expect(await requestClose!()).toBe(true);
     expect(failure.store.getState().closing).toBe(true);
     expect(failure.command({ type: "start" })).toBe(false);
@@ -226,7 +226,7 @@ it("rejects obsolete development saves and recovers a current-format backup with
   expect(memory.getItem("fauna.save.v1")).toBe(obsolete);
   session.command({ type: "endTurn" });
   await session.flush();
-  expect(JSON.parse(memory.getItem("fauna.save.v1")!).version).toBe(23);
+  expect(JSON.parse(memory.getItem("fauna.save.v1")!).version).toBe(24);
   await session.dispose();
 });
 
@@ -239,7 +239,7 @@ it("retries the latest committed state in the background and cancels retries on 
     });
     const s = createSession({ ...platform(), saves: { readCandidates: async () => [], write } });
     await s.load();
-    s.command({ type: "draft", species: "mossback" });
+    s.command({ type: "draft", species: "mossguard" });
     await s.flush();
     s.command({ type: "start" });
     await s.flush();
@@ -270,7 +270,7 @@ it("allows play after a stalled local read and ignores its late result", async (
     await vi.advanceTimersByTimeAsync(5000);
     await loading;
     expect(s.store.getState().ready).toBe(true);
-    expect(s.command({ type: "draft", species: "mossback" })).toBe(true);
+    expect(s.command({ type: "draft", species: "mossguard" })).toBe(true);
     release([{ source: "primary", data: JSON.stringify(run()) }]);
     await s.flush();
     expect(s.store.getState().game.phase).toBe("draft");

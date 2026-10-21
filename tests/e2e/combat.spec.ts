@@ -77,7 +77,7 @@ for (const width of [1280, 1920]) {
     await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
     await page.emulateMedia({ reducedMotion: "reduce" });
     const game = produce(run(7), (state) => {
-      const attack = state.cards.find((card) => card.definitionId === "mossback-attack")!;
+      const attack = state.cards.find((card) => card.definitionId === "stormfin-attack")!;
       state.battle!.hand = [attack.id];
       state.battle!.draw = state.cards.filter((card) => card.id !== attack.id).map((card) => card.id);
     });
@@ -89,7 +89,7 @@ for (const width of [1280, 1920]) {
       height: element.clientHeight,
     }));
     await card.click();
-    await expect(page.getByText("Mossback · Choose an enemy", { exact: true })).toBeVisible();
+    await expect(page.getByText("Stormfin · Choose an enemy", { exact: true })).toBeVisible();
     await expect(page.locator(".target-preview")).toHaveCount(0);
     await expect(page.locator(".target-line")).toHaveCount(0);
     const target = page.locator('[data-actor-id="enemy-0"] .creature-card');
@@ -97,9 +97,8 @@ for (const width of [1280, 1920]) {
     await expect(page.locator('[data-actor-id="enemy-0"]')).toHaveAttribute("data-active-target", "true");
     const recipientPreview = page.locator('[data-actor-id="enemy-0"] .target-preview');
     await expect(recipientPreview).toBeVisible();
-    await expect(recipientPreview).toContainText("Poison");
-    await expect(page.locator('[data-actor-id="ally-0"] .target-preview')).toBeVisible();
-    await expect(page.locator(".target-preview")).toHaveCount(2);
+    await expect(recipientPreview).toContainText("Stun");
+    await expect(page.locator(".target-preview")).toHaveCount(1);
     expect(
       await row.evaluate((element) => ({
         top: (element as HTMLElement).offsetTop,

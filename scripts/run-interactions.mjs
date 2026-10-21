@@ -119,7 +119,7 @@ try {
           await page.getByRole("button", { name: "Main menu", exact: true }).click();
         } else if (step.kind === "collection") {
           await page.getByRole("button", { name: "Collection", exact: true }).click();
-          await page.getByRole("button", { name: "Inspect Mossback", exact: true }).click();
+          await page.getByRole("button", { name: "Inspect Mossguard", exact: true }).click();
           await page.getByRole("button", { name: "Back", exact: true }).click();
           await page.getByRole("button", { name: "Back", exact: true }).click();
         } else if (step.kind === "settings") {

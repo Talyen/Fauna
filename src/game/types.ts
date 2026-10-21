@@ -83,7 +83,7 @@ interface JourneySummary {
   lastBattle: { xp: KeywordXP; currency: number } | null;
 }
 export interface GameState {
-  version: 23;
+  version: 24;
   discovery: { encountered: SpeciesId[]; recruited: Partial<Record<SpeciesId, number>> };
   revision: number;
   rng: number;

@@ -90,7 +90,7 @@ describe("artwork-first inspection", () => {
       "fauna.save.v1",
       encodeSave(
         produce(run(7), (draft) => {
-          draft.discovery.recruited.mossback = 4;
+          draft.discovery.recruited.mossguard = 4;
           draft.cards[0]!.level = 1;
         }),
       ),
@@ -102,32 +102,34 @@ describe("artwork-first inspection", () => {
     render(<App session={session} />);
     try {
       await user.click(screen.getByRole("button", { name: "Collection" }));
-      const opener = screen.getByRole("button", { name: "Inspect Mossback" });
+      const opener = screen.getByRole("button", { name: "Inspect Mossguard" });
       await user.click(opener);
       expect(screen.queryByRole("dialog")).toBeNull();
-      expect(screen.getByRole("heading", { name: "Mossback" })).toBeTruthy();
+      expect(screen.getByRole("heading", { name: "Mossguard" })).toBeTruthy();
       expect(screen.getByRole("region", { name: "Trait" }).textContent).toContain(
-        "Guard cards grant 2 extra block.",
+        "Retain 40% more Block between turns",
       );
-      for (const card of CARDS.filter((c) => c.species === "mossback")) {
+      for (const card of CARDS.filter((c) => c.species === "mossguard")) {
         const ability = screen.getByRole("region", { name: card.name });
         expect(ability.textContent).toContain(`${card.cost} Mana`);
         expect(ability.querySelector(".action-effect")?.textContent).toBeTruthy();
         expect(within(ability).queryByRole("button")).toBeNull();
       }
-      expect(screen.getByRole("region", { name: "Bramble Bash" }).textContent).toContain(
-        "Deal 6 Nature damage.",
+      expect(screen.getByRole("region", { name: "Rooted Stomp" }).textContent).toContain(
+        "Deal 2 Stun damage to all enemies",
       );
       await user.keyboard("i");
       expect(screen.queryByRole("dialog")).toBeNull();
       await user.click(screen.getByRole("tab", { name: "Rank progression" }));
-      const tiers = screen.getByRole("region", { name: "Rooted passive tiers" });
-      expect(tiers.textContent).toContain("0 stars · Active effect");
+      const tiers = screen.getByRole("region", { name: "Overgrowth passive tiers" });
+      expect(tiers.textContent).toContain("0 stars");
       for (let rank = 0; rank < 3; rank++)
         await user.click(within(tiers).getByRole("button", { name: "Next page" }));
-      expect(tiers.querySelector('[aria-current="step"]')?.textContent).toContain("3 stars · Current rank");
+      expect(tiers.querySelector('[aria-current="step"]')?.textContent).toContain(
+        "3 stars · Current rank · Active effect",
+      );
       await user.click(screen.getByRole("tab", { name: "Base abilities" }));
-      expect(screen.getByRole("region", { name: "Shelter" })).toBeTruthy();
+      expect(screen.getByRole("region", { name: "Boulder Brace" })).toBeTruthy();
       await user.keyboard("{Escape}");
       expect(document.activeElement).toBe(opener);
       expect(session.store.getState().game).toBe(game);
@@ -158,7 +160,7 @@ describe("artwork-first inspection", () => {
       const before = session.store.getState().game;
       const card = screen.getByRole("button", { name: /^Thornlash \+1,/ });
       await user.hover(card);
-      expect((await screen.findByRole("tooltip")).textContent).toContain("Deal 12 Physical damage.");
+      expect((await screen.findByRole("tooltip")).textContent).toContain("Deal 12 Physical damage");
       act(() => card.focus());
       await user.keyboard("i");
       await user.pointer({ target: card, keys: "[MouseRight]" });

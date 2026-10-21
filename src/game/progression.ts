@@ -29,7 +29,7 @@ export const TALENTS = [
     keyword: "physical",
     effect: "shield-slam",
     name: "Shield Slam",
-    text: "Add half your Block to Physical damage.",
+    text: "Add half your Block to Physical damage",
     row: 0,
   },
   {
@@ -37,7 +37,7 @@ export const TALENTS = [
     keyword: "physical",
     effect: "armored-fists",
     name: "Armored Fists",
-    text: "Add half your Armor to Physical damage.",
+    text: "Add half your Armor to Physical damage",
     row: 0,
   },
   {
@@ -45,7 +45,7 @@ export const TALENTS = [
     keyword: "burn",
     effect: "flashpoint",
     name: "Flashpoint",
-    text: "Your first Burn each battle is free.",
+    text: "Your first Burn each battle is free",
     row: 0,
   },
   {
@@ -53,7 +53,7 @@ export const TALENTS = [
     keyword: "burn",
     effect: "melting-point",
     name: "Melting Point",
-    text: "Burn damage removes an equal amount of Armor.",
+    text: "Burn damage removes an equal amount of Armor",
     row: 0,
   },
   {
@@ -61,7 +61,7 @@ export const TALENTS = [
     keyword: "freeze",
     effect: "bitter-cold",
     name: "Bitter Cold",
-    text: "Reduce enemy Freeze thresholds by 10 percentage points.",
+    text: "Reduce enemy Freeze thresholds by 10 percentage points",
     row: 0,
   },
   {
@@ -69,7 +69,7 @@ export const TALENTS = [
     keyword: "freeze",
     effect: "glacial-barrier",
     name: "Glacial Barrier",
-    text: "Gain 3 Block when you Freeze an enemy.",
+    text: "Gain 3 Block when you Freeze an enemy",
     row: 0,
   },
   {
@@ -77,7 +77,7 @@ export const TALENTS = [
     keyword: "stun",
     effect: "guarded-counter",
     name: "Guarded Counter",
-    text: "Stunning an enemy grants 4 Block if you have none.",
+    text: "Stunning an enemy grants 4 Block if you have none",
     row: 0,
   },
   {
@@ -85,7 +85,7 @@ export const TALENTS = [
     keyword: "stun",
     effect: "shatter-guard",
     name: "Shatter Guard",
-    text: "Stunning an enemy removes all its Armor.",
+    text: "Stunning an enemy removes all its Armor",
     row: 0,
   },
   {
@@ -93,7 +93,7 @@ export const TALENTS = [
     keyword: "poison",
     effect: "necrosis",
     name: "Necrosis",
-    text: "Poisoned enemies receive half as much healing.",
+    text: "Poisoned enemies receive half as much healing",
     row: 0,
   },
   {
@@ -101,7 +101,7 @@ export const TALENTS = [
     keyword: "poison",
     effect: "torpor",
     name: "Torpor",
-    text: "Poisoned enemies cannot Dodge.",
+    text: "Poisoned enemies cannot Dodge",
     row: 0,
   },
   {
@@ -109,7 +109,7 @@ export const TALENTS = [
     keyword: "nature",
     effect: "bramblegrowth",
     name: "Bramblegrowth",
-    text: "Nature hits have a 10% chance to grant Thorns equal to damage dealt.",
+    text: "Nature hits have a 10% chance to grant Thorns equal to damage dealt",
     row: 0,
   },
   {
@@ -117,7 +117,7 @@ export const TALENTS = [
     keyword: "nature",
     effect: "ecosystem",
     name: "Ecosystem",
-    text: "Draw a Nature card at battle start.",
+    text: "Draw a Nature card at battle start",
     row: 0,
   },
   {
@@ -125,7 +125,7 @@ export const TALENTS = [
     keyword: "light",
     effect: "faith-barrier",
     name: "Faith Barrier",
-    text: "Light hits have a 10% chance to grant Block equal to enemy Health lost.",
+    text: "Light hits have a 10% chance to grant Block equal to enemy Health lost",
     row: 0,
   },
   {
@@ -133,7 +133,7 @@ export const TALENTS = [
     keyword: "light",
     effect: "blessed-leech",
     name: "Blessed Leech",
-    text: "Light damage: Leech below half Health.",
+    text: "Light damage: Leech below half Health",
     row: 0,
   },
   {
@@ -141,7 +141,7 @@ export const TALENTS = [
     keyword: "bleed",
     effect: "first-blood",
     name: "First Blood",
-    text: "Deal 25% more Bleed damage against enemies that aren’t already Bleeding.",
+    text: "Deal 25% more Bleed damage against enemies that aren’t already Bleeding",
     row: 0,
   },
   {
@@ -149,7 +149,7 @@ export const TALENTS = [
     keyword: "bleed",
     effect: "mortal-wound",
     name: "Mortal Wound",
-    text: "Bleeding enemies receive half as much healing.",
+    text: "Bleeding enemies receive half as much healing",
     row: 0,
   },
   {
@@ -157,7 +157,7 @@ export const TALENTS = [
     keyword: "block",
     effect: "second-wind",
     name: "Second Wind",
-    text: "Restore 2 Health when your Block is depleted.",
+    text: "Restore 2 Health when your Block is depleted",
     row: 0,
   },
   {
@@ -165,7 +165,7 @@ export const TALENTS = [
     keyword: "block",
     effect: "grounding",
     name: "Grounding",
-    text: "Block prevents Stun buildup.",
+    text: "Block prevents Stun buildup",
     row: 0,
   },
   {
@@ -173,7 +173,7 @@ export const TALENTS = [
     keyword: "health",
     effect: "mending",
     name: "Mending",
-    text: "Receive 10% more healing during combat.",
+    text: "Receive 10% more healing during combat",
     row: 0,
   },
   {
@@ -181,7 +181,7 @@ export const TALENTS = [
     keyword: "health",
     effect: "renewal",
     name: "Renewal",
-    text: "Cleansing a harmful status restores 2 Health.",
+    text: "Cleansing a harmful status restores 2 Health",
     row: 0,
   },
   {
@@ -189,7 +189,7 @@ export const TALENTS = [
     keyword: "armor",
     effect: "bulwark",
     name: "Bulwark",
-    text: "Start each battle with 2 Armor.",
+    text: "Start each battle with 2 Armor",
     row: 0,
   },
   {
@@ -197,7 +197,7 @@ export const TALENTS = [
     keyword: "armor",
     effect: "reactive-guard",
     name: "Reactive Guard",
-    text: "Gain 3 Block when your Armor breaks.",
+    text: "Gain 3 Block when your Armor breaks",
     row: 0,
   },
   {
@@ -205,7 +205,7 @@ export const TALENTS = [
     keyword: "dodge",
     effect: "lightfoot",
     name: "Lightfoot",
-    text: "Gain 5% Dodge chance.",
+    text: "Gain 5% Dodge chance",
     row: 0,
   },
   {
@@ -213,7 +213,7 @@ export const TALENTS = [
     keyword: "dodge",
     effect: "catch-breath",
     name: "Catch Breath",
-    text: "Restore 1 Health when you Dodge.",
+    text: "Restore 1 Health when you Dodge",
     row: 0,
   },
   {
@@ -221,7 +221,7 @@ export const TALENTS = [
     keyword: "leech",
     effect: "deep-siphon",
     name: "Deep Siphon",
-    text: "Leech restores 1 additional Health.",
+    text: "Leech restores 1 additional Health",
     row: 0,
   },
   {
@@ -229,7 +229,7 @@ export const TALENTS = [
     keyword: "leech",
     effect: "desperate-siphon",
     name: "Desperate Siphon",
-    text: "Double Leech healing while below half Health.",
+    text: "Double Leech healing while below half Health",
     row: 0,
   },
   {
@@ -237,7 +237,7 @@ export const TALENTS = [
     keyword: "mana",
     effect: "wellspring",
     name: "Wellspring",
-    text: "End your turn with unspent Mana to gain 1 extra Mana next turn.",
+    text: "End your turn with unspent Mana to gain 1 extra Mana next turn",
     row: 0,
   },
   {
@@ -245,7 +245,7 @@ export const TALENTS = [
     keyword: "mana",
     effect: "dark-recovery",
     name: "Dark Recovery",
-    text: "End your turn with no Mana to gain 1 extra Mana next turn.",
+    text: "End your turn with no Mana to gain 1 extra Mana next turn",
     row: 0,
   },
   {
@@ -821,7 +821,7 @@ export const TALENTS = [
     keyword: "mana",
     effect: "arcane-mending",
     name: "Arcane Mending",
-    text: "Each living deployed creature restores 1 Health per Mana gained.",
+    text: "Each living deployed creature restores 1 Health per Mana gained",
     row: 3,
   },
   {
@@ -1099,47 +1099,47 @@ export function canBuyTalent(state: Pick<GameState, "talents" | "keywordXP">, id
   );
 }
 export const BOONS = [
-  { id: "tattered-pages", name: "Tattered Pages", text: "Draw 1 additional card at battle start." },
-  { id: "bone-charm", name: "Bone Charm", text: "Restore 3 Health when you defeat an enemy." },
-  { id: "ironwood-buckler", name: "Ironwood Buckler", text: "Gain 1 Thorns whenever you gain Block." },
-  { id: "icy-heart", name: "Icy Heart", text: "Freezing an enemy deals 6 Physical damage." },
-  { id: "meteorite", name: "Meteorite", text: "Double your first Burn hit each battle." },
+  { id: "tattered-pages", name: "Tattered Pages", text: "Draw 1 additional card at battle start" },
+  { id: "bone-charm", name: "Bone Charm", text: "Restore 3 Health when you defeat an enemy" },
+  { id: "ironwood-buckler", name: "Ironwood Buckler", text: "Gain 1 Thorns whenever you gain Block" },
+  { id: "icy-heart", name: "Icy Heart", text: "Freezing an enemy deals 6 Physical damage" },
+  { id: "meteorite", name: "Meteorite", text: "Double your first Burn hit each battle" },
   {
     id: "sin-eaters-lantern",
     name: "Sin-Eater's Lantern",
-    text: "Restore 6 Health per harmful effect you Cleanse.",
+    text: "Restore 6 Health per harmful effect you Cleanse",
   },
-  { id: "thunderstone", name: "Thunderstone", text: "Deal 6 Nature damage when you Stun an enemy." },
-  { id: "groves-favor", name: "Grove's Favor", text: "Gain 1 Thorns when you restore Health in battle." },
-  { id: "brass-censer", name: "Brass Censer", text: "Light hits have a 20% chance to also Burn or Leech." },
-  { id: "parasitic-bloom", name: "Parasitic Bloom", text: "Poison damage has a 10% chance to Leech." },
-  { id: "cutpurse-knife", name: "Cutpurse Knife", text: "Gain 1 Gold when you deal Bleed damage." },
+  { id: "thunderstone", name: "Thunderstone", text: "Deal 6 Nature damage when you Stun an enemy" },
+  { id: "groves-favor", name: "Grove's Favor", text: "Gain 1 Thorns when you restore Health in battle" },
+  { id: "brass-censer", name: "Brass Censer", text: "Light hits have a 20% chance to also Burn or Leech" },
+  { id: "parasitic-bloom", name: "Parasitic Bloom", text: "Poison damage has a 10% chance to Leech" },
+  { id: "cutpurse-knife", name: "Cutpurse Knife", text: "Gain 1 Gold when you deal Bleed damage" },
   {
     id: "merchants-favor",
     name: "Merchant's Favor",
-    text: "Your first purchase at each Merchant costs 7 less Gold.",
+    text: "Your first purchase at each Merchant costs 7 less Gold",
   },
   {
     id: "plague-doctors-mask",
     name: "Plague Doctor's Mask",
-    text: "Before turn-start damage, each ally Cleanses up to 2 Poison and deals half the amount removed as Poison damage to the first living enemy.",
+    text: "Before turn-start damage, each ally Cleanses up to 2 Poison and deals half the amount removed as Poison damage to the first living enemy",
   },
   {
     id: "sundering-charm",
     name: "Sundering Charm",
-    text: "Your Physical and Stun hits remove 2 enemy Armor before damage.",
+    text: "Your Physical and Stun hits remove 2 enemy Armor before damage",
   },
-  { id: "resonant-chimes", name: "Resonant Chimes", text: "After your third card each turn, gain 1 Mana." },
-  { id: "smugglers-map", name: "Smuggler's Map", text: "Gain 2 additional Gold for each battle won." },
+  { id: "resonant-chimes", name: "Resonant Chimes", text: "After your third card each turn, gain 1 Mana" },
+  { id: "smugglers-map", name: "Smuggler's Map", text: "Gain 2 additional Gold for each battle won" },
   {
     id: "frozen-pocketwatch",
     name: "Frozen Pocketwatch",
-    text: "Enemies stay Frozen for 1 additional turn.",
+    text: "Enemies stay Frozen for 1 additional turn",
   },
   {
     id: "lucky-clover",
     name: "Lucky Clover",
-    text: "Nature hits have a 10% chance to grant Gold equal to enemy Health lost.",
+    text: "Nature hits have a 10% chance to grant Gold equal to enemy Health lost",
   },
 ] as const;
 export type BoonId = (typeof BOONS)[number]["id"];

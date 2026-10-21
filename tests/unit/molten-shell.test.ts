@@ -10,7 +10,7 @@ import { accept, teamRun } from "./helpers";
 
 function battle(copies = 1) {
   return accept(
-    produce(teamRun(1, ["emberback", "mossback", "stormfin"]), (game) => {
+    produce(teamRun(1, ["emberback", "mossguard", "stormfin"]), (game) => {
       game.discovery.recruited.emberback = copies;
       game.phase = "teamSelection";
       game.battle = null;
@@ -30,7 +30,7 @@ it.each([1, 2, 3, 4, 5, 6])(
       combat(draft.team[0]!).controlTurns = 1;
     });
     expect(creaturePassive(game, "emberback").description).toBe(
-      `When your Armor breaks, deal ${copies} Burn damage to all enemies.`,
+      `When your Armor breaks, deal ${copies} Burn damage to all enemies`,
     );
     const events: GameEvent[] = [];
     const next = produce(decodeSave(encodeSave(game)), (draft) => {
@@ -87,7 +87,7 @@ it("keeps enemy Molten Shell at its base tier and excludes reserves", () => {
     enemy.combat.armor = 1;
     enemy.combat.controlled = "freeze";
     enemy.combat.controlTurns = 1;
-    draft.roster.push("mossback");
+    draft.roster.push("mossguard");
     draft.reserves.push({ ...draft.team[1]!, id: "reserve", combat: freshCombat() });
   });
   const events: GameEvent[] = [];

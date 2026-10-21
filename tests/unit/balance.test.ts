@@ -7,7 +7,7 @@ it("validates fixture grants, replays battle experiments and preserves non-loado
   const config = {
     checkpoint,
     seed: 42,
-    starter: "mossback" as const,
+    starter: "mossguard" as const,
     loadout: { talents: [], boons: ["bone-charm"] },
   };
   const result = await balanceCase(config, "test");

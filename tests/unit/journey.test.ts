@@ -9,7 +9,7 @@ import { previewPlay } from "../../src/game/preview";
 import { recruitChoice, accept, run, winBattle, victoryReady, bossReward, policy } from "./helpers";
 
 function startedJourney() {
-  return accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
+  return accept(accept(createGame(7), { type: "draft", species: "mossguard" }), { type: "start" });
 }
 
 describe("journey earnings and results", () => {

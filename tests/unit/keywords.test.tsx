@@ -23,9 +23,9 @@ import { run } from "./helpers";
 describe("keyword foundation", () => {
   it("classifies authored effects without reading names or rules text, using only current talent categories", () => {
     const expected = [
-      ["nature", "poison"],
-      ["block", "armor"],
       ["block"],
+      ["stun"],
+      ["health"],
       ["burn"],
       ["health"],
       ["block"],
@@ -125,7 +125,7 @@ describe("keyword foundation", () => {
     const attack = CARDS.find((card) => card.id === "emberfox-attack")!;
     const html = renderToStaticMarkup(<CardRules card={attack} value={13} />);
     expect(html).toContain('data-keyword="burn">Burn</span>');
-    expect(html.replace(/<[^>]+>/g, "")).toBe("Deal 13 Burn damage. Deal 2 Burn damage.");
+    expect(html.replace(/<[^>]+>/g, "")).toBe("Deal 13 Burn damage; Deal 2 Burn damage");
     expect(html).not.toContain('data-keyword="consume"');
     const unsafe = renderToStaticMarkup(<KeywordText text={"<script>Fire</script>"} />);
     expect(unsafe).toContain("&lt;script&gt;");

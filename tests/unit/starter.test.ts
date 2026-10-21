@@ -50,9 +50,9 @@ describe("collected starter drafts", () => {
     let s = firstJourney();
     s = accept(s, { type: "abandon" });
     s = produce(s, (d) => {
-      d.discovery.encountered = ["mossback", "emberfox", "stormfin", "moonhart"];
-      d.discovery.recruited = { mossback: 1, emberfox: 1, stormfin: 1 };
-      d.selected = ["mossback"];
+      d.discovery.encountered = ["mossguard", "emberfox", "stormfin", "moonhart"];
+      d.discovery.recruited = { mossguard: 1, emberfox: 1, stormfin: 1 };
+      d.selected = ["mossguard"];
     });
     s = accept(s, { type: "newRun", seed: 24 });
     const initial = s;
@@ -63,10 +63,10 @@ describe("collected starter drafts", () => {
       expect(dispatch(s, { type: "draft", species: "moonhart" }).state).toBe(s);
       expect(dispatch(s, { type: "start" }).state).toBe(s);
       s = decodeSave(encodeSave(s));
-      s = accept(s, { type: "draft", species: "mossback" });
+      s = accept(s, { type: "draft", species: "mossguard" });
     }
     expect(s.starterOffers).toEqual([]);
-    expect(s.selected).toEqual(["mossback", "mossback", "mossback"]);
+    expect(s.selected).toEqual(["mossguard", "mossguard", "mossguard"]);
     expect(initial.selected).toEqual([]);
     s = accept(s, { type: "start" });
     expect(s.team).toHaveLength(3);
@@ -92,14 +92,14 @@ describe("collected starter drafts", () => {
     let s = firstJourney();
     s = accept(s, { type: "abandon" });
     s = produce(s, (d) => {
-      d.discovery = { encountered: ["mossback", "emberfox"], recruited: { mossback: 1, emberfox: 1 } };
-      d.selected = ["mossback"];
+      d.discovery = { encountered: ["mossguard", "emberfox"], recruited: { mossguard: 1, emberfox: 1 } };
+      d.selected = ["mossguard"];
     });
     s = accept(s, { type: "newRun", seed: 42 });
-    expect(new Set(s.starterOffers)).toEqual(new Set(["mossback", "emberfox"]));
+    expect(new Set(s.starterOffers)).toEqual(new Set(["mossguard", "emberfox"]));
     expect(decodeSave(encodeSave(s))).toEqual(s);
     expect(() =>
-      decodeSave(JSON.stringify({ ...s, starterOffers: ["mossback", "mossback", "mossback"] })),
+      decodeSave(JSON.stringify({ ...s, starterOffers: ["mossguard", "mossguard", "mossguard"] })),
     ).toThrow();
   });
 
@@ -107,7 +107,7 @@ describe("collected starter drafts", () => {
     const s = createGame();
     for (const change of [
       { starterOffers: ["moonhart"] },
-      { selected: ["mossback", "emberfox"] },
+      { selected: ["mossguard", "emberfox"] },
       { starterOffers: [] },
       { version: 20 },
       { version: 21 },
