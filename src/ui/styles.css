@@ -578,14 +578,27 @@ strong {
 .battle-screen .health-forecast {
   position: absolute;
   top: calc(var(--battle-creature-width) * 3 / 4 - var(--battle-health-height) - 1px);
-  left: var(--radius);
-  width: calc(100% - var(--radius) * 2);
+  left: 0;
+  width: 100%;
+  height: var(--battle-health-height);
   margin: 0;
   pointer-events: none;
   transform-origin: 50% calc(var(--battle-health-height) + 1px - var(--battle-creature-width) * 3 / 8);
   transition: scale var(--motion-hover) ease-out;
 }
+/* Clip against the full artwork silhouette so the thin bar tapers at its corners. */
+.battle-screen .health-bar-surface {
+  position: absolute;
+  inset: auto 1px 0;
+  height: calc(var(--battle-creature-width) * 3 / 4 - 2px);
+  overflow: hidden;
+  border-radius: calc(var(--radius) - 1px);
+  corner-shape: var(--corner-shape);
+}
 .battle-screen .health-forecast .progress-track {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   height: var(--battle-health-height);
   border-radius: var(--radius-round);
 }

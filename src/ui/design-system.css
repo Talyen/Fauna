@@ -25,7 +25,7 @@
 :where(.creature-card, .action-card, .empty-reserve) {
   --surface-short-side: var(--art-short-side);
 }
-/* Keep sibling health bars clear of the creature's curved artwork corners. */
+/* Match the health-bar clipping surface to the creature's artwork corners. */
 .combatant-reaction {
   --radius: clamp(
     var(--radius-min),
