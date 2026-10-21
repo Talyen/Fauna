@@ -523,7 +523,6 @@ export function Collection({
   const compact = useCompactLayout();
   const [filter, setFilter] = useState("all");
   const [pageStart, setPageStart] = useState(0);
-  const [columns, setColumns] = useState(3);
   const gridRef = useRef<HTMLDivElement>(null);
   const focusedControl = useRef<HTMLElement | null>(null);
   useLayoutEffect(() => {
@@ -533,28 +532,13 @@ export function Collection({
       document.activeElement === document.body
     )
       returnFocus(gridRef.current?.querySelector<HTMLElement>("button:not(:disabled)") ?? null);
-  }, [pageStart, filter, columns, compact]);
-  useLayoutEffect(() => {
-    const grid = gridRef.current;
-    if (!grid) return;
-    const measure = () => {
-      const tile = grid.querySelector(".creature-card");
-      const width = tile?.getBoundingClientRect().width ?? 0;
-      if (!width) return;
-      const gap = parseFloat(getComputedStyle(grid).columnGap) || 0;
-      const next = Math.max(1, Math.min(3, Math.floor((grid.clientWidth + gap + 0.5) / (width + gap))));
-      setColumns(next);
-    };
-    measure();
-    const observer = new ResizeObserver(measure);
-    observer.observe(grid);
-    return () => observer.disconnect();
-  }, [filter]);
+  }, [pageStart, filter, compact]);
   const known = (id: SpeciesId) => game.discovery.recruited[id] !== undefined;
   const ordered = [...SPECIES]
     .filter((entry) => filter === "all" || (filter === "known" ? known(entry.id) : !known(entry.id)))
     .sort((a, b) => Number(known(b.id)) - Number(known(a.id)));
-  const pageSize = columns * (compact ? 1 : 2);
+  // Three columns fit the supported minimum width; height determines row capacity.
+  const pageSize = compact ? 3 : 6;
   const totalPages = Math.max(1, Math.ceil(ordered.length / pageSize));
   const activePage = Math.min(Math.floor(pageStart / pageSize), totalPages - 1);
   if (pageStart >= ordered.length && pageStart !== 0) setPageStart(activePage * pageSize);

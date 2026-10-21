@@ -14,22 +14,16 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
-it("pages the collection, resets filters and keeps every creature reachable after resizing", async () => {
-  let resize = () => {};
-  let width = 824;
+it("pages the collection, resets filters and preserves place and focus across supported heights", async () => {
+  vi.stubGlobal("innerHeight", 1080);
   vi.stubGlobal(
     "ResizeObserver",
     class {
-      constructor(callback: () => void) {
-        resize = callback;
-      }
       observe() {}
       disconnect() {}
     },
   );
-  vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockReturnValue({ width: 266.6667 } as DOMRect);
   vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
-  vi.spyOn(HTMLElement.prototype, "clientWidth", "get").mockImplementation(() => width);
   const game = produce(createGame(), (draft) => {
     draft.discovery.encountered = SPECIES.map((entry) => entry.id);
     draft.discovery.recruited = Object.fromEntries(SPECIES.map((entry) => [entry.id, 1]));
@@ -44,41 +38,33 @@ it("pages the collection, resets filters and keeps every creature reachable afte
   );
   const user = userEvent.setup();
   expect(screen.getByRole("img", { name: "Mossback: 2 of 5 stars" })).toBeTruthy();
-  expect(screen.queryByText("Not recruited")).toBeNull();
-  expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(3);
-  expect(screen.getByRole("button", { name: "Next page" })).toBeTruthy();
-  width = 560;
-  act(() => resize());
-  expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(2);
-  expect((screen.getByRole("button", { name: "Previous page" }) as HTMLButtonElement).disabled).toBe(true);
-  const seen = new Set<string>();
-  while (true) {
-    screen
-      .getAllByRole("button", { name: /^Inspect / })
-      .forEach((button) => seen.add(button.getAttribute("aria-label")!));
-    const next = screen.queryByRole("button", { name: "Next page" }) as HTMLButtonElement | null;
-    if (!next || next.disabled) break;
-    await user.click(next);
-  }
-  expect(seen.size).toBe(SPECIES.length);
-  const firstBeforeResize = screen
-    .getAllByRole("button", { name: /^Inspect / })[0]!
-    .getAttribute("aria-label");
-  vi.stubGlobal("innerHeight", 1080);
-  act(() => window.dispatchEvent(new Event("resize")));
-  expect(
-    screen.getAllByRole("button", { name: /^Inspect / }).map((el) => el.getAttribute("aria-label")),
-  ).toContain(firstBeforeResize);
-  vi.stubGlobal("innerHeight", 720);
-  act(() => window.dispatchEvent(new Event("resize")));
+  expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(6);
   screen
     .getAllByRole("button", { name: /^Inspect / })
     .at(-1)!
     .focus();
-  width = 280;
-  act(() => resize());
+  vi.stubGlobal("innerHeight", 720);
+  act(() => window.dispatchEvent(new Event("resize")));
   expect(document.activeElement).toBe(screen.getAllByRole("button", { name: /^Inspect / })[0]);
-  expect(screen.getAllByRole("button", { name: /^Inspect / }).length).toBeLessThanOrEqual(2);
+  const seen = new Set<string>();
+  for (;;) {
+    screen
+      .getAllByRole("button", { name: /^Inspect / })
+      .forEach((el) => seen.add(el.getAttribute("aria-label")!));
+    const next = screen.getByRole("button", { name: "Next page" }) as HTMLButtonElement;
+    if (next.disabled) break;
+    await user.click(next);
+  }
+  expect(seen.size).toBe(SPECIES.length);
+  const current = screen.getAllByRole("button", { name: /^Inspect / })[0]!.getAttribute("aria-label");
+  vi.stubGlobal("innerHeight", 1080);
+  act(() => window.dispatchEvent(new Event("resize")));
+  expect(
+    screen.getAllByRole("button", { name: /^Inspect / }).map((el) => el.getAttribute("aria-label")),
+  ).toContain(current);
+  vi.stubGlobal("innerHeight", 720);
+  act(() => window.dispatchEvent(new Event("resize")));
+  expect(screen.getAllByRole("button", { name: /^Inspect / })[0]!.getAttribute("aria-label")).toBe(current);
   await user.click(screen.getByRole("tab", { name: "Uncollected" }));
   expect(screen.getByRole("img", { name: "No creatures in this view" })).toBeTruthy();
   expect(screen.queryByRole("button", { name: "Next page" })).toBeNull();
