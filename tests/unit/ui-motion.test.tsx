@@ -7,12 +7,41 @@ import { Button } from "../../src/components/ui/button";
 import { HandMotion } from "../../src/ui/hand-motion";
 import { SurfaceTransition } from "../../src/ui/surface-transition";
 import { createCombatImpacts } from "../../src/ui/combat-impact";
+import { ManaCrystals } from "../../src/ui/mana-crystals";
 
 afterEach(() => {
   cleanup();
   vi.restoreAllMocks();
   vi.unstubAllGlobals();
 });
+
+it("lets mana glints finish after pointer exit or blur, and replays them on a new entry", () => {
+  const view = render(<ManaCrystals mana={4} />);
+  const gem = view.container.querySelector<HTMLElement>(".mana-gem")!;
+  expect(gem.querySelector(".mana-glint")?.getAttribute("data-glint")).toBe("false");
+  fireEvent.pointerEnter(gem);
+  const sweep = gem.querySelector(".mana-glint")!;
+  expect(sweep.getAttribute("data-glint")).toBe("true");
+  fireEvent.pointerLeave(gem);
+  view.rerender(<ManaCrystals mana={3} previewCost={1} />);
+  expect(gem.querySelector(".mana-glint")).toBe(sweep);
+  expect(sweep.getAttribute("data-glint")).toBe("true");
+  fireEvent.pointerEnter(gem);
+  expect(gem.querySelector(".mana-glint")).not.toBe(sweep);
+
+  document.documentElement.dataset.focus = "visible";
+  try {
+    const mana = view.getByRole("button", { name: "Mana 3 of 4" });
+    fireEvent.focus(mana);
+    const focusedSweeps = [...view.container.querySelectorAll('.mana-glint[data-glint="true"]')];
+    expect(focusedSweeps).toHaveLength(4);
+    fireEvent.blur(mana);
+    expect([...view.container.querySelectorAll('.mana-glint[data-glint="true"]')]).toEqual(focusedSweeps);
+  } finally {
+    delete document.documentElement.dataset.focus;
+  }
+});
+
 function motionEnvironment() {
   for (const [token, value] of Object.entries({
     "--motion-fast": "150ms",

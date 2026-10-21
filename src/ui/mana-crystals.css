@@ -66,8 +66,7 @@
   background-position: 100% 0;
   opacity: 0;
 }
-.mana-gem:hover .mana-glint,
-:root[data-focus="visible"] .mana:focus .mana-glint {
+.mana-glint[data-glint="true"] {
   animation: mana-glint var(--motion-mana-glint) ease-out both;
 }
 @keyframes mana-glint {
