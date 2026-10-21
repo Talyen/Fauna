@@ -81,6 +81,7 @@
   height: var(--compact-control-size);
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  corner-shape: inherit;
   background: var(--background);
   z-index: -1;
   pointer-events: none;
