@@ -1,0 +1,405 @@
+.settings-review {
+  max-width: 1120px;
+  margin-inline: auto;
+}
+.settings-review > button {
+  margin-block: var(--space-6);
+}
+.settings-review-guide {
+  max-width: 720px;
+  margin-top: var(--space-6);
+}
+.settings-review-guide p {
+  margin-top: var(--space-3);
+  line-height: 1.6;
+  color: var(--muted-foreground);
+}
+body:has(.settings-review) .dialog-overlay {
+  background: rgb(0 0 0 / 80%);
+  animation: settings-review-in 150ms ease-out;
+}
+body:has(.settings-review) .dialog-overlay[data-state="closed"] {
+  animation: settings-review-out 150ms ease-in;
+}
+.settings-combined {
+  width: min(880px, calc(100vw - var(--space-12)));
+  padding: var(--space-12) var(--space-6) var(--space-6);
+  border: 1px solid var(--border);
+  background: var(--secondary);
+  animation: settings-review-in 150ms ease-out;
+  scrollbar-color: transparent transparent;
+  scrollbar-width: thin;
+}
+.settings-combined[data-state="closed"] {
+  animation: settings-review-out 150ms ease-in;
+}
+.settings-combined[data-narrow="true"] {
+  width: min(440px, calc(100vw - var(--space-12)));
+}
+.settings-combined[data-short="true"] {
+  max-height: min(440px, calc(100dvh - var(--space-12)));
+}
+.settings-combined[data-text-size="125"] {
+  --text-scale: 1.25;
+}
+.settings-combined[data-text-size="150"] {
+  --text-scale: 1.5;
+}
+.settings-combined {
+  font-size: var(--text-body);
+}
+.settings-combined .settings-panel {
+  min-height: 200px;
+}
+.settings-combined .settings-tabs {
+  width: 100%;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  gap: 4px;
+  overflow-x: auto;
+  padding: var(--space-3);
+  background: var(--muted);
+}
+.settings-combined .settings-tabs button {
+  flex-shrink: 0;
+  min-height: 44px;
+  padding-inline: 12px;
+  border: 2px solid transparent;
+  background: transparent;
+  color: var(--muted-foreground);
+  outline: none;
+  box-shadow: none;
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    color 150ms;
+}
+.settings-combined .settings-tabs button svg {
+  width: 20px;
+  height: 20px;
+}
+.settings-combined .settings-tabs button[data-state="active"] {
+  background: var(--background);
+  border-color: var(--primary);
+  color: var(--foreground);
+}
+.settings-combined .settings-tabs button[data-state="inactive"]:hover {
+  background: var(--accent);
+  color: var(--foreground);
+}
+.settings-combined .settings-tabs button[data-state="active"]:hover {
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+:root[data-focus="visible"] .settings-combined .settings-tabs button:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-color: transparent;
+  box-shadow: none;
+}
+.settings-combined .settings-tabs + [role="tabpanel"] {
+  outline: none;
+  box-shadow: none;
+}
+.settings-combined [role="switch"] {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  outline: none;
+  box-shadow: none;
+  scale: 1;
+  flex-shrink: 0;
+}
+.settings-combined [role="switch"]::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 12px;
+  width: 36px;
+  height: 20px;
+  border-radius: var(--radius-round);
+  background: var(--muted-foreground);
+  transition:
+    background-color 150ms,
+    filter 150ms;
+}
+.settings-combined [role="switch"][data-state="checked"]::before {
+  background: var(--primary);
+}
+.settings-combined [role="switch"]:hover::before {
+  filter: brightness(1.1);
+}
+.settings-combined [role="switch"] > span {
+  position: absolute;
+  left: 6px;
+  top: 14px;
+  width: 16px;
+  height: 16px;
+  background: var(--background);
+  transform: translateX(0);
+  box-shadow: none;
+  transition: transform 150ms;
+}
+.settings-combined [role="switch"][data-state="checked"] > span {
+  transform: translateX(16px);
+}
+:root[data-focus="visible"] .settings-combined [role="switch"]:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  box-shadow: none;
+}
+.settings-combined .text-size-option {
+  border-radius: var(--radius);
+  padding: var(--space-1);
+}
+.settings-combined [role="radio"] {
+  border-color: var(--muted-foreground);
+  box-shadow: none;
+  outline: none;
+  transition: border-color 150ms;
+}
+.settings-combined [role="radio"][data-state="checked"] {
+  border-color: var(--primary);
+}
+.settings-combined .text-size-option:hover [role="radio"][data-state="unchecked"] {
+  border-color: var(--foreground);
+}
+:root[data-focus="visible"] .settings-combined .text-size-option:has([role="radio"]:focus) {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+:root[data-focus="visible"] .settings-combined [role="radio"]:focus {
+  outline: none;
+  box-shadow: none;
+}
+.settings-combined .volume-controls > [data-orientation] {
+  min-width: 180px;
+}
+.settings-combined .volume-controls > [data-orientation] > span:first-child {
+  background: var(--muted-foreground);
+}
+.settings-combined .volume-controls > [data-orientation] > span:first-child > span {
+  background: var(--primary);
+}
+.settings-combined [role="slider"] {
+  outline: none;
+  box-shadow: none;
+}
+.settings-combined [role="slider"]::after {
+  border: 1px solid transparent;
+  background: var(--foreground);
+}
+.settings-combined [role="slider"]:hover::after {
+  border-color: var(--primary);
+}
+.settings-combined .volume-controls > [data-orientation]:active [role="slider"]::after {
+  border: 2px solid var(--primary);
+}
+:root[data-focus="visible"]
+  .settings-combined
+  .volume-controls
+  > [data-orientation]:has([role="slider"]:focus) {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+:root[data-focus="visible"] .settings-combined [role="slider"]:focus {
+  outline: none;
+  box-shadow: none;
+}
+:root[data-focus="visible"]
+  .settings-combined
+  .volume-controls
+  > [data-orientation]:has([role="slider"]:focus)
+  [role="slider"]::after {
+  border-color: transparent;
+}
+.settings-combined .volume-controls output {
+  font-variant-numeric: tabular-nums;
+}
+.settings-combined .game-button {
+  background: var(--background);
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  box-shadow: none;
+  outline: none;
+  scale: 1;
+  transition:
+    scale 150ms,
+    border-color 150ms,
+    background-color 150ms;
+}
+.settings-combined .game-button:hover {
+  background: var(--muted);
+  border-color: var(--primary);
+  scale: 1.035;
+}
+.settings-combined .game-button:active {
+  background: var(--muted);
+  border-color: var(--primary);
+  scale: 0.98;
+}
+:root[data-focus="visible"] .settings-combined .game-button:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  box-shadow: none;
+  scale: 1.035;
+}
+.settings-combined .dialog-close {
+  width: 44px;
+  height: 44px;
+}
+.settings-combined .game-button svg {
+  width: 20px;
+  height: 20px;
+}
+.settings-preview-error {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+.settings-preview-error > svg {
+  width: 20px;
+  height: 20px;
+  color: var(--destructive);
+  flex-shrink: 0;
+}
+.settings-preview-error p {
+  flex: 1;
+}
+.settings-preview-tools {
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--border);
+}
+.settings-preview-tools h2 {
+  color: var(--muted-foreground);
+  font-size: var(--text-secondary);
+}
+.preview-toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-6);
+  margin-block: var(--space-3);
+}
+.preview-toggles label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.settings-preview-tools > p {
+  margin-top: var(--space-3);
+  line-height: 1.6;
+  font-size: var(--text-secondary);
+  color: var(--muted-foreground);
+}
+.settings-combined:hover,
+.settings-combined:focus-within,
+.settings-combined[data-scrolling="true"] {
+  scrollbar-color: var(--muted-foreground) transparent;
+}
+.settings-combined::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.settings-combined::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: var(--radius-round);
+}
+.settings-combined:is(:hover, :focus-within, [data-scrolling="true"])::-webkit-scrollbar-thumb {
+  background: var(--muted-foreground);
+}
+.settings-combined::-webkit-scrollbar-thumb:hover {
+  background: var(--foreground);
+}
+@keyframes settings-review-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes settings-review-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.settings-combined[data-reduced="true"],
+.settings-combined[data-reduced="true"] *,
+.settings-combined[data-reduced="true"] *::before,
+.settings-combined[data-reduced="true"] *::after,
+body:has(.settings-review[data-reduced="true"]) .dialog-overlay {
+  animation: none !important;
+  transition: none !important;
+}
+.settings-combined[data-reduced="true"] .game-button {
+  scale: 1 !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  body:has(.settings-review) .dialog-overlay,
+  .settings-combined {
+    animation: none;
+  }
+  .settings-combined .game-button {
+    scale: 1 !important;
+  }
+}
+@media (forced-colors: active) {
+  .settings-combined {
+    scrollbar-color: auto;
+  }
+}
+.settings-combined .settings-tabs button,
+.settings-combined .game-button,
+.settings-combined .setting-row,
+.settings-combined .text-size-option,
+.settings-combined .preview-toggles label {
+  font-size: var(--text-body);
+}
+.settings-combined [role="radio"] svg {
+  width: 8px;
+  height: 8px;
+}
+.settings-combined [role="radio"][data-state="checked"] > span {
+  animation: settings-review-in 150ms;
+}
+.settings-preview-tooltip {
+  max-width: 420px;
+  padding: var(--space-3);
+  font-size: var(--tooltip-text-body);
+  line-height: 1.6;
+  border-color: var(--border);
+  animation: settings-review-in 100ms;
+}
+.settings-preview-tooltip[data-size="125"] {
+  --tooltip-scale: 1.25;
+}
+.settings-preview-tooltip[data-size="150"] {
+  --tooltip-scale: 1.5;
+}
+.settings-preview-tooltip[data-state="closed"] {
+  animation: settings-review-out 100ms;
+}
+.settings-preview-tooltip[data-reduced="true"] {
+  animation: none;
+}
+.settings-combined [role="switch"] > span {
+  translate: none;
+}
+.settings-combined [role="radio"] {
+  width: 16px;
+  height: 16px;
+}
+:root[data-focus="visible"] .settings-combined .game-button:focus {
+  border-color: var(--border);
+}
+:root[data-focus="visible"] .settings-combined .game-button:focus:active {
+  scale: 0.98;
+}
