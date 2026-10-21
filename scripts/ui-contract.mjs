@@ -18,6 +18,19 @@ const widgetRoles =
 export function sourceViolations(file, source) {
   const violations = [];
   const fail = (message) => violations.push(`${file}: ${message}`);
+  if (file.startsWith("src/ui/") || file.startsWith("src/components/")) {
+    const code = source.replace(/\/\*[\s\S]*?\*\//g, "");
+    if (
+      /\boverflow(?:-[xy]|[XY])?\s*:\s*["']?(?:hidden\s+)?(?:auto|scroll)\b/i.test(code) ||
+      /\boverflow(?:-[xy])?-(?:auto|scroll)\b/.test(code)
+    )
+      fail("Player UI cannot scroll. Reflow, resize artwork within its bounds, or paginate content.");
+    if (
+      /\.\s*scroll(?:To|By|IntoView)\s*(?:\?\.)?\s*\(/.test(code) ||
+      /\.\s*scroll(?:Top|Left)\s*(?:=(?!=)|\+=|-=)/.test(code)
+    )
+      fail("Player UI cannot scroll imperatively, including during focus navigation.");
+  }
   if (file.endsWith(".css") && file !== "src/ui/tokens.css") {
     if (/#[\da-f]{3,8}\b|\b(?:rgb|hsl|oklch|oklab|hwb|lab|lch)a?\(/i.test(source))
       fail("Define literal colors in src/ui/tokens.css.");

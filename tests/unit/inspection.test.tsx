@@ -52,11 +52,14 @@ describe("artwork-first inspection", () => {
       const dialog = screen.getByRole("dialog", { name: "Mossback" });
       expect(dialog.querySelector(".card-details")).toBeNull();
       const tiers = within(dialog).getByRole("region", { name: "Rooted passive tiers" });
-      expect(within(tiers).getAllByRole("listitem")).toHaveLength(6);
-      expect(tiers.querySelector('[aria-current="step"]')?.textContent).toContain("3 stars · Current rank");
+      expect(within(tiers).getAllByRole("listitem")).toHaveLength(2);
       expect(tiers.textContent).toContain("0 stars · Active effect");
-      expect(within(tiers).getAllByText("Not yet defined")).toHaveLength(5);
-      expect(within(dialog).queryByRole("button", { name: /Previous|Next/ })).toBeNull();
+      expect(within(tiers).getAllByText("Not yet defined")).toHaveLength(1);
+      await user.click(within(tiers).getByRole("button", { name: "Next page" }));
+      expect(tiers.querySelector('[aria-current="step"]')?.textContent).toContain("3 stars · Current rank");
+      await user.click(within(tiers).getByRole("button", { name: "Next page" }));
+      expect(within(tiers).getAllByRole("listitem")).toHaveLength(2);
+      expect(within(dialog).queryByRole("button", { name: /Previous action|Next action/ })).toBeNull();
       await user.hover(within(dialog).getByRole("button", { name: "Mossback details" }));
       expect((await screen.findByRole("tooltip")).textContent).toContain("Rooted");
       const thumbnail = within(dialog).getByRole("button", { name: /^Bramble Bash,/ });

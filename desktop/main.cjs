@@ -72,8 +72,8 @@ app.whenReady().then(async () => {
     ...(!isolated ? display.bounds() : {}),
     useContentSize: !app.isPackaged && process.env.FAUNA_PERF_CAPTURE === "1",
     frame: app.isPackaged || process.env.FAUNA_PERF_CAPTURE !== "1",
-    minWidth: Math.min(900, screen.getPrimaryDisplay().workArea.width),
-    minHeight: Math.min(700, screen.getPrimaryDisplay().workArea.height),
+    minWidth: Math.min(1280, screen.getPrimaryDisplay().workArea.width),
+    minHeight: Math.min(720, screen.getPrimaryDisplay().workArea.height),
     backgroundColor: "#000000",
     autoHideMenuBar: true,
     webPreferences: {

@@ -1,3 +1,4 @@
+import { expectScrollFree } from "./layout-contract";
 import { expect, type Page } from "@playwright/test";
 
 /** Capture the settled screen, not an outgoing decorative navigation snapshot. */
@@ -17,5 +18,6 @@ export async function captureScreen(page: Page, options: Parameters<Page["screen
       ),
     )
     .toBe(0);
+  await expectScrollFree(page);
   return page.screenshot(options);
 }

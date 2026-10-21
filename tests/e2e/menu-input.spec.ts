@@ -34,8 +34,8 @@ test("held Escape closes only the current menu level", async ({ page }) => {
   await page.keyboard.up("Escape");
 });
 
-test("short enlarged menus retain full control sizes and scroll to every action", async ({ page }) => {
-  await page.setViewportSize({ width: 960, height: 480 });
+test("minimum-size enlarged menus fit every action without scrolling", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
   // A new journey's destination screen exposes the optional Lineup menu entry.
   const game = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
   await page.addInitScript((value) => {
@@ -106,7 +106,7 @@ async function controller(page: Page) {
 for (const [width, height, enlarged] of [
   [1280, 800, false],
   [1920, 1080, false],
-  [960, 540, true],
+  [1280, 720, true],
 ] as const) {
   test(`controller menu journey at ${width}x${height}, enlarged ${enlarged}`, async ({ page }) => {
     await page.setViewportSize({ width, height });
@@ -161,7 +161,9 @@ for (const [width, height, enlarged] of [
     await pad.press(0);
     const glossary = page.getByRole("dialog", { name: "Glossary & controls" });
     await pad.press(13);
-    expect(await glossary.evaluate((el) => el.scrollTop)).toBeGreaterThan(0);
+    await glossary.getByRole("button", { name: "Next page" }).click();
+    expect(await glossary.evaluate((el) => el.scrollTop)).toBe(0);
+    await expect(glossary.getByRole("status")).toHaveText(/^2 \/ /);
     await pad.press(1);
     await expect(page.getByRole("button", { name: "Glossary", exact: true })).toBeFocused();
     await pad.press(13);

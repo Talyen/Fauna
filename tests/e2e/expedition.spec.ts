@@ -230,15 +230,15 @@ for (const width of [1280, 1920])
         await expect(enemy).toBeFocused();
       });
 
-test("encounter placeholder keeps its fixed size in a narrow window", async ({ page }) => {
-  await page.setViewportSize({ width: 800, height: 800 });
+test("encounter placeholder uses bounded artwork at the minimum viewport", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
   const game = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
   await seed(page, game);
   await resume(page);
   const card = page.locator(".app:not([inert]) [data-encounter]");
   const bounds = await card.boundingBox();
-  expect(bounds!.width).toBeCloseTo(800 / 3, 1);
-  expect(bounds!.height).toBeCloseTo(200, 1);
+  expect(bounds!.width).toBeCloseTo(640 / 3, 1);
+  expect(bounds!.height).toBeCloseTo(160, 1);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await expect(page.locator(".app:not([inert]) [data-enemy-id]")).toHaveCount(0);
   await captureScreen(page, { path: "reports/encounters/narrow-choice.png", fullPage: true });
@@ -313,8 +313,8 @@ for (const width of [1280, 1920])
       if (!enlarged) await fits(page);
       for (const artwork of await page.locator(".draft-grid .creature-card").all()) {
         const bounds = (await artwork.boundingBox())!;
-        expect(Math.abs(bounds.width - 800 / 3)).toBeLessThan(1);
-        expect(Math.abs(bounds.height - 200)).toBeLessThan(1);
+        expect(Math.abs(bounds.width - (width === 1280 ? 240 : 800 / 3))).toBeLessThan(1);
+        expect(Math.abs(bounds.height - (width === 1280 ? 180 : 200))).toBeLessThan(1);
       }
       await captureScreen(page, {
         path: `reports/starter/selection-${width}-${enlarged}.png`,
@@ -480,15 +480,18 @@ test("talents purchase immediately, gate rows, reset a category, and return to t
   await burn.click();
   const laterTalent = TALENTS.find((talent) => talent.keyword === "burn" && talent.row === 1)!;
   const later = page.getByRole("button", { name: laterTalent.name, exact: true });
+  await page.getByRole("button", { name: "Next page" }).click();
   await expect(later).toHaveAttribute("aria-disabled", "true");
   const before = (await state(page)).revision;
   await later.focus();
   await page.keyboard.press("Enter");
   expect((await state(page)).revision).toBe(before);
+  await page.getByRole("button", { name: "Previous page" }).click();
   await page.getByRole("button", { name: "Melting Point", exact: true }).click();
   await page.getByRole("button", { name: "Flashpoint", exact: true }).click();
   await expect(page.getByRole("button", { name: "Flashpoint, unlocked", exact: true })).toBeFocused();
   expect((await state(page)).talents).toHaveLength(3);
+  await page.getByRole("button", { name: "Next page" }).click();
   await expect(later).toHaveAttribute("aria-disabled", "false");
   await expect(page.getByText("1 point available", { exact: true })).toBeVisible();
   const reset = page.getByRole("button", { name: "Reset Burn talents", exact: true });
@@ -509,9 +512,6 @@ for (const [width, height] of [
   [1280, 720],
   [1280, 800],
   [1920, 1080],
-  [1024, 768],
-  [1024, 600],
-  [960, 540],
   [2560, 1080],
   [3440, 1440],
 ] as const)
@@ -747,11 +747,23 @@ for (const [width, height] of [
           width: el.offsetWidth,
           height: el.offsetHeight,
         })),
-    ).toEqual({ width: 293, height: 220 });
+    ).toEqual(
+      height <= 760
+        ? { width: 235, height: 176 }
+        : height <= 900
+          ? { width: 264, height: 198 }
+          : { width: 293, height: 220 },
+    );
     for (const card of await page.locator(".app:not([inert]) .hand .action-card").all()) {
       expect(
         await card.evaluate((el: HTMLElement) => ({ width: el.offsetWidth, height: el.offsetHeight })),
-      ).toEqual({ width: 180, height: 240 });
+      ).toEqual(
+        height <= 760
+          ? { width: 144, height: 192 }
+          : height <= 900
+            ? { width: 162, height: 216 }
+            : { width: 180, height: 240 },
+      );
       await expect(card.locator("img")).toHaveAttribute("width", "600");
     }
     await captureScreen(page, { path: `reports/implementation/battle-${width}.png` });
@@ -1519,13 +1531,10 @@ for (const [width, height] of [
   [1280, 720],
   [1280, 800],
   [1920, 1080],
-  [1024, 768],
-  [1024, 600],
   [2560, 1080],
   [3440, 1440],
-  [960, 540],
 ] as const)
-  test(`fixed-size battle and inspection remain usable at ${width}×${height}`, async ({ page }) => {
+  test(`bounded battle and inspection remain scroll-free at ${width}×${height}`, async ({ page }) => {
     await page.setViewportSize({ width, height });
     await page.emulateMedia({ reducedMotion: "reduce" });
     const fixture = produce(run(), (d) => {
@@ -1543,32 +1552,37 @@ for (const [width, height] of [
         .locator(".app:not([inert]) .player-row .creature-card")
         .first()
         .evaluate((el: HTMLElement) => ({ width: el.offsetWidth, height: el.offsetHeight })),
-    ).toEqual({ width: 293, height: 220 });
+    ).toEqual(
+      height <= 760
+        ? { width: 235, height: 176 }
+        : height <= 900
+          ? { width: 264, height: 198 }
+          : { width: 293, height: 220 },
+    );
     expect(
       await page
         .locator(".app:not([inert]) .hand .action-card")
         .first()
         .evaluate((el: HTMLElement) => ({ width: el.offsetWidth, height: el.offsetHeight })),
-    ).toEqual({ width: 180, height: 240 });
+    ).toEqual(
+      height <= 760
+        ? { width: 144, height: 192 }
+        : height <= 900
+          ? { width: 162, height: 216 }
+          : { width: 180, height: 240 },
+    );
     expect(
       await page
         .locator(".mana-gem")
         .first()
         .evaluate((el) => el.getBoundingClientRect().width),
     ).toBe(18);
-    const scrolls = width <= 1100 || height <= 850;
-    if (scrolls) {
-      await page.getByRole("button", { name: /^End turn/ }).scrollIntoViewIfNeeded();
-      expect(await page.locator(".battle-screen").evaluate((el) => el.scrollHeight > el.clientHeight)).toBe(
-        true,
-      );
-    }
     const mana = (await page.getByRole("button", { name: /^Mana / }).boundingBox())!;
     const end = (await page.getByRole("button", { name: /^End turn/ }).boundingBox())!;
     const swap = (await page.getByRole("button", { name: "Swap", exact: true }).boundingBox())!;
     expect(swap.y + swap.height).toBeLessThan(end.y);
     expect(Math.abs(swap.x - end.x)).toBeLessThan(1);
-    if (!scrolls) {
+    {
       expect(mana.x).toBe(32);
       expect(Math.abs(mana.y + mana.height - height + 24)).toBeLessThan(1);
       expect(Math.abs(end.x + end.width - width + 32)).toBeLessThan(1);
@@ -1582,7 +1596,7 @@ for (const [width, height] of [
     expect(Math.abs(fan[1]!.top - fan[5]!.top)).toBeLessThan(1);
     expect(fan[0]!.top).toBeGreaterThan(fan[1]!.top);
     expect(fan[1]!.top).toBeGreaterThan(fan[2]!.top);
-    if (!scrolls) {
+    {
       expect(fan[0]!.bottom).toBeGreaterThan(height);
       expect(fan[0]!.bottom).toBeLessThan(height + 64);
       expect(Math.abs(fan[3]!.bottom - height)).toBeLessThan(1);
@@ -1594,7 +1608,6 @@ for (const [width, height] of [
     for (const card of await page.locator(".app:not([inert]) .hand .action-card").all())
       expect(Math.abs((await card.evaluate(area)) / creatureArea - (0.9 / 1.1) ** 2)).toBeLessThan(0.025);
     for (const control of await page.locator(".app:not([inert]) .hand-toolbar button:enabled").all()) {
-      if (scrolls) await control.scrollIntoViewIfNeeded();
       const bounds = (await control.boundingBox())!;
       expect(bounds.y + bounds.height).toBeLessThanOrEqual(height);
       expect(

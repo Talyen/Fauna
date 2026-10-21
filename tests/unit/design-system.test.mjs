@@ -3,6 +3,23 @@ import { describe, it, expect } from "vitest";
 import { sourceViolations } from "../../scripts/ui-contract.mjs";
 
 describe("design-system enforcement", () => {
+  it("rejects scrolling in CSS, utilities, and imperative navigation", () => {
+    for (const source of [
+      ".panel { overflow: auto; }",
+      ".panel { overflow-y: scroll; }",
+      ".panel { overflow: hidden auto; }",
+    ])
+      expect(sourceViolations("src/ui/screen.css", source).length).toBeGreaterThan(0);
+    for (const source of [
+      '<div className="overflow-x-auto" />',
+      "root.scrollBy({ top: 10 });",
+      "root.scrollIntoView();",
+      "root.scrollTo?.(0, 0);",
+      "root.scrollTop = 10;",
+    ])
+      expect(sourceViolations("src/ui/screen.tsx", source).length).toBeGreaterThan(0);
+    expect(sourceViolations("src/ui/screen.css", ".surface { overflow: clip; }")).toEqual([]);
+  });
   it("rejects a screen bypassing shared controls, artwork and styling", () => {
     const violations = sourceViolations(
       "src/ui/new-screen.tsx",

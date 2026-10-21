@@ -44,11 +44,11 @@ it("pages the collection, resets filters and keeps every creature reachable afte
   const user = userEvent.setup();
   expect(screen.getByRole("img", { name: "Mossback: 2 of 5 stars" })).toBeTruthy();
   expect(screen.queryByText("Not recruited")).toBeNull();
-  expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(6);
-  expect(screen.queryByRole("button", { name: "Next page" })).toBeNull();
+  expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(3);
+  expect(screen.getByRole("button", { name: "Next page" })).toBeTruthy();
   width = 560;
   act(() => resize());
-  expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(4);
+  expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(2);
   expect(screen.queryByRole("button", { name: "Previous page" })).toBeNull();
   const seen = new Set<string>();
   while (true) {

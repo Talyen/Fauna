@@ -1,3 +1,4 @@
+import { PagedItems } from "./pagination";
 import { campfireRecovery } from "../game/support";
 import { species } from "../game/content";
 import type { Command, GameState } from "../game/types";
@@ -9,8 +10,8 @@ export function Campfire({ game, send }: { game: GameState; send: (command: Comm
   return (
     <main className="campfire-screen">
       <h1>Campfire</h1>
-      <section className="campfire-roster" aria-label="Rest recovery">
-        {creatures.map((creature) => (
+      <PagedItems items={creatures} pageSize={3} className="campfire-roster" label="Rest recovery pages">
+        {(creature) => (
           <div key={creature.id}>
             <AllyCard creature={creature} presentation />
             <h2>{species(creature.species).name}</h2>
@@ -20,8 +21,8 @@ export function Campfire({ game, send }: { game: GameState; send: (command: Comm
               />
             </p>
           </div>
-        ))}
-      </section>
+        )}
+      </PagedItems>
       <Button onClick={() => send({ type: "rest" })}>Rest</Button>
     </main>
   );

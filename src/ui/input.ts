@@ -36,7 +36,7 @@ export function moveFocus(direction: "left" | "right" | "up" | "down") {
   if (!buttons.length) return;
   const current = document.activeElement as HTMLElement;
   if (!buttons.includes(current)) {
-    buttons[0]!.focus();
+    buttons[0]!.focus({ preventScroll: true });
     return;
   }
   if (
@@ -51,7 +51,9 @@ export function moveFocus(direction: "left" | "right" | "up" | "down") {
       if (direction === "left" || direction === "right") {
         const peers = buttons.filter((button) => rows[rowIndex]!.contains(button));
         const index = peers.indexOf(current);
-        peers[(index + (direction === "left" ? -1 : 1) + peers.length) % peers.length]?.focus();
+        peers[(index + (direction === "left" ? -1 : 1) + peers.length) % peers.length]?.focus({
+          preventScroll: true,
+        });
         return;
       }
       const next = rows[rowIndex + (direction === "up" ? -1 : 1)];
@@ -64,7 +66,7 @@ export function moveFocus(direction: "left" | "right" | "up" | "down") {
               Math.abs(a.getBoundingClientRect().x + a.getBoundingClientRect().width / 2 - x) -
               Math.abs(b.getBoundingClientRect().x + b.getBoundingClientRect().width / 2 - x),
           )[0]
-          ?.focus();
+          ?.focus({ preventScroll: true });
       }
       if (next) return;
     }
@@ -88,12 +90,7 @@ export function moveFocus(direction: "left" | "right" | "up" | "down") {
       score = cost;
     }
   }
-  if (best) best.focus();
-  else if (root instanceof HTMLElement)
-    root.scrollBy({
-      top: direction === "up" ? -100 : direction === "down" ? 100 : 0,
-      left: direction === "left" ? -100 : direction === "right" ? 100 : 0,
-    });
+  if (best) best.focus({ preventScroll: true });
 }
 export function gamepadActions(pad: Pick<Gamepad, "buttons" | "axes">): InputAction[] {
   const pressed = (i: number) => pad.buttons[i]?.pressed ?? false;

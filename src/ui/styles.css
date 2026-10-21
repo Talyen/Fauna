@@ -67,10 +67,18 @@ strong {
   font-weight: 600;
 }
 .app {
-  min-height: 100dvh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
   padding: var(--page-block-gutter) var(--page-inline-gutter);
   background: var(--background);
   position: relative;
+}
+.app > main,
+.play-surface {
+  flex: 1;
+  min-height: 0;
 }
 .app.in-battle {
   padding-block: var(--screen-item-gap);
@@ -128,7 +136,7 @@ strong {
   z-index: 50;
   width: min(720px, calc(100vw - var(--space-12)));
   max-height: calc(100dvh - var(--space-12));
-  overflow-y: auto;
+  overflow: visible;
   padding: var(--space-12) var(--space-6) var(--space-6);
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -145,7 +153,8 @@ strong {
   width: 100%;
 }
 .home-screen {
-  min-height: var(--page-content-height);
+  height: 100%;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -162,7 +171,8 @@ strong {
   gap: var(--space-2);
 }
 .draft-screen {
-  min-height: var(--page-content-height);
+  height: 100%;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -285,8 +295,8 @@ strong {
   border-color: var(--primary);
 }
 .battle-screen {
-  height: calc(100dvh - var(--screen-item-gap) * 2);
-  overflow-y: auto;
+  height: 100%;
+  overflow: visible;
   padding-bottom: calc(var(--battle-hand-height) - var(--hand-rest-inset) + var(--screen-item-gap));
   margin: auto;
   display: flex;
@@ -301,7 +311,7 @@ strong {
   flex-shrink: 0;
   display: flex;
   justify-content: safe center;
-  overflow-x: auto;
+  overflow: visible;
   gap: var(--screen-section-gap);
 }
 .enemy-row .creature-wrap,
@@ -496,11 +506,12 @@ strong {
   border-color: var(--selected);
 }
 .target-summary {
-  max-width: var(--target-summary-width);
+  width: var(--target-summary-width);
+  max-width: 100%;
   min-width: 0;
   text-align: center;
   max-height: 100%;
-  overflow-y: auto;
+  overflow: visible;
   font-size: var(--text-secondary);
 }
 .target-summary .card-details {
@@ -511,7 +522,7 @@ strong {
 }
 .battle-screen .combat-stats {
   height: var(--target-outcomes-height);
-  overflow-y: auto;
+  overflow: visible;
   align-content: start;
   flex-wrap: wrap;
   column-gap: var(--screen-item-gap);
@@ -555,14 +566,13 @@ strong {
   /* Radix modal layers set an inline pointer override; hover details must not intercept controls. */
   pointer-events: none !important;
   width: max-content;
-  max-width: min(calc(var(--tooltip-max-width) * var(--tooltip-scale, 1)), calc(100vw - var(--space-8)));
+  max-width: min(640px, calc(100vw - var(--space-8)));
   padding: var(--space-3);
   border-radius: var(--tooltip-radius);
   --tooltip-offset-x: 0px;
   --tooltip-offset-y: var(--tooltip-travel);
   overflow-wrap: anywhere;
-  max-height: var(--radix-tooltip-content-available-height);
-  overflow: auto;
+  overflow: visible;
 }
 .game-tooltip[data-side="bottom"] {
   --tooltip-offset-y: calc(-1 * var(--tooltip-travel));
@@ -622,14 +632,14 @@ strong {
   flex-direction: column;
   gap: var(--screen-item-gap);
 }
-.passive-tiers ol {
+.passive-tier-page {
   display: flex;
   flex-direction: column;
   gap: var(--screen-item-gap);
   list-style: none;
   padding: 0;
 }
-.passive-tiers li {
+.passive-tier-page > div {
   color: var(--muted-foreground);
 }
 .passive-tiers [aria-current="step"] {
@@ -658,7 +668,8 @@ strong {
 
 .team-selection {
   --selection-card: var(--art-landscape-width);
-  min-height: var(--page-content-height);
+  height: 100%;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -702,7 +713,8 @@ strong {
   width: min(calc(var(--art-landscape-width) * 3 + var(--space-6) * 2), 100%);
   container-type: inline-size;
   margin: auto;
-  min-height: var(--page-content-height);
+  height: 100%;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -779,16 +791,17 @@ strong {
 .talents-screen {
   width: 100%;
   max-width: calc(var(--talent-overview-art-width) * 7 + var(--screen-item-gap) * 6 + var(--space-4));
-  max-height: var(--page-content-height);
+  height: 100%;
+  min-height: 0;
   margin: auto;
   padding: var(--space-2);
-  overflow-y: auto;
+  overflow: visible;
   display: flex;
   flex-direction: column;
   gap: var(--screen-section-gap);
 }
 .talents-screen[data-view="overview"] {
-  height: var(--page-content-height);
+  height: 100%;
   overflow: visible;
 }
 .talents-screen .talents-heading {
@@ -860,7 +873,8 @@ strong {
 .collection-screen {
   width: 100%;
   max-width: calc(var(--art-landscape-width) * 3 + var(--screen-item-gap) * 2);
-  min-height: var(--page-content-height);
+  height: 100%;
+  min-height: 0;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -893,8 +907,9 @@ strong {
 }
 .collection-gallery {
   min-height: calc(
-    (var(--art-short-side) + var(--screen-item-gap) + var(--collection-rank-height)) * 2 +
-      var(--screen-item-gap)
+    var(--collection-rows) *
+      (var(--art-short-side) + var(--screen-item-gap) + var(--collection-rank-height)) +
+      (var(--collection-rows) - 1) * var(--screen-item-gap)
   );
   display: flex;
   flex-direction: column;
@@ -1023,7 +1038,8 @@ strong {
   height: 28px;
 }
 .end-screen {
-  min-height: var(--page-content-height);
+  height: 100%;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1054,7 +1070,7 @@ strong {
 .deck-grid .action-card {
   width: var(--art-portrait-width);
 }
-.glossary dl {
+.glossary-entries {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
@@ -1321,10 +1337,8 @@ strong {
 .settings-dialog .settings-panel,
 .settings-combined .settings-panel {
   min-height: 0;
-  overflow: auto;
+  overflow: visible;
   padding: var(--space-2);
-  scrollbar-gutter: stable both-edges;
-  overscroll-behavior: contain;
 }
 /* Automatic focus and pointer interaction never expose navigation decoration,
    including shadcn rings in portaled dialogs and tab panels. */
@@ -1402,7 +1416,8 @@ strong {
 
 .destinations-screen {
   width: min(1120px, 100%);
-  min-height: var(--page-content-height);
+  height: 100%;
+  min-height: 0;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -1435,7 +1450,8 @@ strong {
 }
 .journey-results {
   width: min(640px, 100%);
-  min-height: var(--page-content-height);
+  height: 100%;
+  min-height: 0;
   margin: auto;
   padding: var(--space-8) 0;
   display: flex;
@@ -1648,51 +1664,138 @@ strong {
   color: var(--foreground);
 }
 
-/* Fixed-size surfaces flow and scroll when a complete battle cannot fit. */
-@media (max-width: 1100px), (max-height: 850px) {
-  .app.in-battle {
-    height: 100dvh;
-    overflow: hidden;
-  }
-  .in-battle .play-surface {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  .in-battle .menu-button {
-    position: relative;
-    inset: auto;
-    display: block;
-    margin-left: auto;
-    margin-bottom: var(--screen-item-gap);
-    flex-shrink: 0;
-  }
+/* The viewport owns the surface. Long content uses explicit pages, never scroll areas. */
+html,
+body,
+#root {
+  height: 100%;
+  overflow: clip;
+}
+.app {
+  overflow: clip;
+}
+.paged-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--screen-section-gap);
+  min-height: 0;
+  width: 100%;
+}
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--screen-item-gap);
+  flex: 0 0 auto;
+}
+.pagination span {
+  color: var(--muted-foreground);
+  font-variant-numeric: tabular-nums;
+}
+.glossary-entries {
+  display: grid;
+  gap: var(--screen-item-gap);
+}
+.glossary-entries dl {
+  margin: 0;
+}
+.glossary > .paged-content {
+  margin-top: var(--screen-section-gap);
+}
+.creature-inspection {
+  width: min(1120px, calc(100vw - var(--space-12)));
+  display: grid;
+  grid-template-columns: calc(var(--art-portrait-width) * 3 + var(--screen-item-gap) * 2) minmax(0, 1fr);
+  align-items: start;
+}
+.creature-inspection .inspection-back {
+  grid-column: 1 / -1;
+}
+.creature-inspection > .creature-wrap {
+  grid-column: 1;
+  grid-row: 2;
+}
+.creature-inspection .passive-tiers {
+  grid-column: 2;
+  grid-row: 2 / span 2;
+}
+.creature-inspection .inspection-thumbnails {
+  grid-column: 1;
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.creature-inspection .inspection-thumbnails .action-card {
+  width: 100%;
+}
+.passive-tier-page {
+  min-height: 280px;
+}
+.cloud-candidates {
+  display: grid;
+  gap: var(--screen-section-gap);
+}
+.campfire-screen {
+  height: 100%;
+  justify-content: center;
+}
+.campfire-roster {
+  flex-wrap: nowrap;
+}
+.campfire-roster > div {
+  width: var(--art-landscape-width);
+}
+.battle-piles {
+  position: absolute;
+  inset: var(--screen-item-gap) 0 auto;
+  pointer-events: none;
+}
+.battle-piles > * {
+  pointer-events: auto;
+}
+@media (max-height: 900px) {
   .battle-screen {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr);
+    grid-template-rows: max-content max-content 1fr;
+    align-content: start;
+    align-items: start;
+    padding-bottom: 0;
+  }
+  .battle-screen .enemy-row {
+    grid-area: 1 / 2;
+  }
+  .battle-screen .player-row {
+    grid-area: 2 / 2;
+  }
+  .battle-screen :is(.enemy-row, .player-row) {
+    gap: var(--screen-item-gap);
+  }
+  .battle-screen :is(.enemy-row, .player-row) > .creature-wrap {
+    width: calc(var(--battle-creature-width) + var(--control-height) + var(--screen-item-gap));
+    flex-basis: calc(var(--battle-creature-width) + var(--control-height) + var(--screen-item-gap));
+    padding-right: calc(var(--control-height) + var(--screen-item-gap));
+  }
+  .battle-screen .combatant-reaction > .combat-status {
+    position: absolute;
+    right: calc(-1 * (var(--control-height) + var(--screen-item-gap)));
+    top: 0;
+    width: var(--control-height);
+    gap: 0;
+  }
+  .battle-screen .target-control {
+    grid-area: 1 / 1 / 3 / 2;
+    align-self: center;
+    flex-direction: column;
     height: auto;
-    min-height: 0;
-    flex: 1;
-    padding-bottom: var(--space-6);
-    overflow-y: auto;
+    padding-top: var(--space-12);
   }
-  .hand-section {
-    flex-shrink: 0;
-    position: static;
-    pointer-events: auto;
-    clip-path: none;
+  .battle-screen .battle-piles {
+    inset: var(--screen-item-gap) auto auto 0;
+    flex-direction: column;
+    gap: var(--screen-item-gap);
   }
-  .hand {
-    justify-content: safe center;
-    overflow: auto;
-    height: calc(var(--battle-hand-height) + var(--space-12) + var(--space-10));
-    padding: var(--space-6);
-  }
-  .hand-toolbar {
-    flex-shrink: 0;
-    position: static;
-    flex-wrap: wrap;
-  }
-  .battle-piles {
-    position: static;
-    pointer-events: auto;
+  .battle-screen .target-summary {
+    width: 200px;
   }
 }

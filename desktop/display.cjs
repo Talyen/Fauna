@@ -1,6 +1,15 @@
 const fs = require("node:fs/promises");
 const path = require("node:path");
-function clampBounds(bounds, displays) {
+const MINIMUM_CONTENT_SIZE = { width: 1280, height: 720 };
+function minimumOuterSize(window) {
+  const outer = window?.getBounds?.();
+  const content = window?.getContentBounds?.();
+  return {
+    width: MINIMUM_CONTENT_SIZE.width + (outer && content ? Math.max(0, outer.width - content.width) : 0),
+    height: MINIMUM_CONTENT_SIZE.height + (outer && content ? Math.max(0, outer.height - content.height) : 0),
+  };
+}
+function clampBounds(bounds, displays, minimum = MINIMUM_CONTENT_SIZE) {
   const areas = displays.map((d) => d.workArea);
   const saved =
     bounds && ["x", "y", "width", "height"].every((key) => Number.isFinite(bounds[key])) ? bounds : {};
@@ -8,8 +17,8 @@ function clampBounds(bounds, displays) {
     (a) => saved.x >= a.x && saved.x < a.x + a.width && saved.y >= a.y && saved.y < a.y + a.height,
   ) ??
     areas[0] ?? { x: 0, y: 0, width: 1440, height: 1000 };
-  const width = Math.min(Math.max(saved.width || 1440, 900), area.width);
-  const height = Math.min(Math.max(saved.height || 1000, 700), area.height);
+  const width = Math.min(Math.max(saved.width || 1440, minimum.width), area.width);
+  const height = Math.min(Math.max(saved.height || 1000, minimum.height), area.height);
   return {
     x: Math.round(Math.max(area.x, Math.min(saved.x ?? area.x, area.x + area.width - width))),
     y: Math.round(Math.max(area.y, Math.min(saved.y ?? area.y, area.y + area.height - height))),
@@ -32,7 +41,7 @@ async function createDisplay({ directory, screen, isolated = false, notify = () 
     disposed = false,
     lane = Promise.resolve(),
     transition = Promise.resolve();
-  const bounds = () => clampBounds(preferences.bounds, screen.getAllDisplays());
+  const bounds = () => clampBounds(preferences.bounds, screen.getAllDisplays(), minimumOuterSize(window));
   const write = () => {
     clearTimeout(timer);
     timer = undefined;
@@ -58,8 +67,9 @@ async function createDisplay({ directory, screen, isolated = false, notify = () 
   });
   const recover = () => {
     if (disposed || !window || window.isDestroyed() || read().mode !== "windowed") return;
-    const next = clampBounds(window.getBounds(), screen.getAllDisplays());
-    window.setMinimumSize?.(Math.min(900, next.width), Math.min(700, next.height));
+    const next = clampBounds(window.getBounds(), screen.getAllDisplays(), minimumOuterSize(window));
+    const minimum = minimumOuterSize(window);
+    window.setMinimumSize?.(Math.min(minimum.width, next.width), Math.min(minimum.height, next.height));
     window.setBounds(next);
     preferences.bounds = next;
     write();
@@ -99,7 +109,8 @@ async function createDisplay({ directory, screen, isolated = false, notify = () 
     }
     if (mode === "windowed") {
       const next = bounds();
-      window.setMinimumSize?.(Math.min(900, next.width), Math.min(700, next.height));
+      const minimum = minimumOuterSize(window);
+      window.setMinimumSize?.(Math.min(minimum.width, next.width), Math.min(minimum.height, next.height));
       window.setBounds(next);
     }
     preferences.mode = mode;
@@ -117,6 +128,7 @@ async function createDisplay({ directory, screen, isolated = false, notify = () 
     set,
     attach(target) {
       window = target;
+      if (!isolated) recover();
       screen.on?.("display-removed", recover);
       screen.on?.("display-metrics-changed", recover);
       window.on("move", remember);
@@ -141,4 +153,4 @@ async function createDisplay({ directory, screen, isolated = false, notify = () 
     },
   };
 }
-module.exports = { clampBounds, createDisplay };
+module.exports = { clampBounds, createDisplay, minimumOuterSize };

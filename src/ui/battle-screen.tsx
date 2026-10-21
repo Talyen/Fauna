@@ -4,8 +4,6 @@ import { motionValue } from "./motion-values";
 import { ActionDetails } from "./card-details";
 import { cardCost } from "../game/rules";
 import { controlled } from "../game/combat";
-import { ArtCard } from "./art-card";
-import { assetUrl } from "./assets";
 import {
   useCallback,
   useEffect,
@@ -218,12 +216,10 @@ export function BattleScreen({
       const origin = root.getBoundingClientRect(),
         a = actor.getBoundingClientRect(),
         b = recipient.getBoundingClientRect();
-      const x = a.x + (card?.ownerId === target ? 0 : a.width / 2) - origin.x + root.scrollLeft,
-        y = a.y - origin.y - 8 + root.scrollTop,
-        endX = allyTarget
-          ? b.x + b.width / 2 - origin.x + root.scrollLeft
-          : b.right - origin.x + 6 + root.scrollLeft,
-        endY = allyTarget ? b.y - origin.y - 8 + root.scrollTop : b.bottom - origin.y - 10 + root.scrollTop;
+      const x = a.x + (card?.ownerId === target ? 0 : a.width / 2) - origin.x,
+        y = a.y - origin.y - 8,
+        endX = allyTarget ? b.x + b.width / 2 - origin.x : b.right - origin.x + 6,
+        endY = allyTarget ? b.y - origin.y - 8 : b.bottom - origin.y - 10;
       const arch = Math.min(y, endY) - 32;
       setLine(
         allyTarget
@@ -234,10 +230,8 @@ export function BattleScreen({
     update();
     const observer = new ResizeObserver(update);
     if (board.current) observer.observe(board.current);
-    board.current?.addEventListener("scroll", update, true);
     return () => {
       observer.disconnect();
-      board.current?.removeEventListener("scroll", update, true);
     };
   }, [card?.ownerId, selected, target, allyTarget]);
   return (
@@ -399,14 +393,14 @@ export function BattleScreen({
       <section className="battle-piles" data-nav-row aria-label="Card piles">
         {(["draw", "discard"] as const).map((pile) => (
           <div key={pile}>
-            <ArtCard
-              aspect="action"
-              artwork={assetUrl("pile.placeholder")}
+            <Button
+              variant="outline"
               data-pile={pile}
               aria-label={`Inspect ${pile === "draw" ? "Draw Pile" : "Discard Pile"}`}
               onClick={() => openPile?.(pile)}
-            />
-            <p>{pile === "draw" ? "Draw Pile" : "Discard Pile"}</p>
+            >
+              {pile === "draw" ? "Draw Pile" : "Discard Pile"}
+            </Button>
           </div>
         ))}
       </section>

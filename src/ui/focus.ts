@@ -9,7 +9,7 @@ export const isAvailableFocusTarget = (element: HTMLElement | null): element is 
 /** Restore the player's place; a removed opener falls back to the current game surface. */
 export function returnFocus(opener: HTMLElement | null) {
   if (isAvailableFocusTarget(opener)) {
-    opener.focus();
+    opener.focus({ preventScroll: true });
     return;
   }
   const fallback = [
@@ -19,5 +19,5 @@ export function returnFocus(opener: HTMLElement | null) {
   ]
     .flatMap((selector) => Array.from(document.querySelectorAll<HTMLElement>(selector)))
     .find(isAvailableFocusTarget);
-  fallback?.focus();
+  fallback?.focus({ preventScroll: true });
 }

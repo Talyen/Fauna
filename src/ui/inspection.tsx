@@ -1,3 +1,4 @@
+import { PagedItems } from "./pagination";
 import { creaturePassive, creatureStars } from "../game/progression";
 import { KeywordText } from "./keyword-text";
 import { enemyInspectionValue } from "../game/rules";
@@ -157,26 +158,6 @@ export function Inspector({
               speciesKit
               label={`${enemy?.name ?? creature.name} details`}
             />
-            <section className="passive-tiers" aria-label={`${creature.trait} passive tiers`}>
-              <h2>{creature.trait}</h2>
-              <p>
-                {enemy
-                  ? "Species kit · Enemy passives use the base tier."
-                  : `Collection rank: ${rank} / 5 stars`}
-              </p>
-              <ol>
-                {creature.passiveTiers.map((tier, tierRank) => (
-                  <li key={tierRank} aria-current={tierRank === rank ? "step" : undefined}>
-                    <strong>
-                      {tierRank} {tierRank === 1 ? "star" : "stars"}
-                      {tierRank === rank ? " · Current rank" : ""}
-                      {tierRank === passive.rank ? " · Active effect" : ""}
-                    </strong>
-                    <p>{tier ? <KeywordText text={tier.description} /> : "Not yet defined"}</p>
-                  </li>
-                ))}
-              </ol>
-            </section>
             <div className="inspection-thumbnails" ref={thumbnails} data-nav-row>
               {cards.map((action, index) => (
                 <ActionCard
@@ -194,6 +175,32 @@ export function Inspector({
                 />
               ))}
             </div>
+            <section className="passive-tiers" aria-label={`${creature.trait} passive tiers`}>
+              <h2>{creature.trait}</h2>
+              <p>
+                {enemy
+                  ? "Species kit · Enemy passives use the base tier."
+                  : `Collection rank: ${rank} / 5 stars`}
+              </p>
+              <PagedItems
+                items={creature.passiveTiers}
+                pageSize={2}
+                className="passive-tier-page"
+                contentRole="list"
+                label="Passive tier pages"
+              >
+                {(tier, tierRank) => (
+                  <div role="listitem" key={tierRank} aria-current={tierRank === rank ? "step" : undefined}>
+                    <strong>
+                      {tierRank} {tierRank === 1 ? "star" : "stars"}
+                      {tierRank === rank ? " · Current rank" : ""}
+                      {tierRank === passive.rank ? " · Active effect" : ""}
+                    </strong>
+                    <p>{tier ? <KeywordText text={tier.description} /> : "Not yet defined"}</p>
+                  </div>
+                )}
+              </PagedItems>
+            </section>
             {chooseStarter ? (
               <Button
                 onClick={() => {

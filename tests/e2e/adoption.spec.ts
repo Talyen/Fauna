@@ -26,7 +26,7 @@ test("Collection filtering, audio preferences, and settings remain menu-driven",
   await page.goto("/");
   await page.getByRole("button", { name: "Collection", exact: true }).click();
   await page.getByRole("tab", { name: "Uncollected", exact: true }).click();
-  await expect(page.getByRole("img", { name: "Locked species" })).toHaveCount(6);
+  await expect(page.getByRole("img", { name: "Locked species" })).toHaveCount(3);
   await page.getByRole("button", { name: "Back", exact: true }).click();
   await expect(page.getByRole("button", { name: "Collection", exact: true })).toBeFocused();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
@@ -48,7 +48,7 @@ test("Collection filtering, audio preferences, and settings remain menu-driven",
 for (const [width, height, textScale] of [
   [1280, 800, "1"],
   [1920, 1080, "1"],
-  [960, 540, "1.25"],
+  [1280, 720, "1.25"],
 ] as const) {
   test(`settings categories remain reachable at ${width}x${height} with ${Number(textScale) * 100}% text`, async ({
     page,
@@ -67,7 +67,6 @@ for (const [width, height, textScale] of [
           : category === "Sound"
             ? panel.getByRole("switch", { name: "Mute in background", exact: true })
             : panel.getByRole("switch", { name: "Auto-end turn", exact: true });
-      await control.scrollIntoViewIfNeeded();
       await expect(control).toBeInViewport();
       await captureScreen(page, { path: `reports/settings-${category.toLowerCase()}-${width}.png` });
     }
@@ -97,7 +96,10 @@ for (const width of [1280, 1920])
     await art.hover();
     await expect(page.getByRole("tooltip")).toBeVisible();
     expect(await page.getByRole("tooltip").evaluate((node) => getComputedStyle(node).fontSize)).toBe("20px");
-    expect(await art.evaluate((node) => node.getBoundingClientRect().width)).toBeCloseTo(266.667, 0);
+    expect(await art.evaluate((node) => node.getBoundingClientRect().width)).toBeCloseTo(
+      width === 1280 ? 240 : 266.667,
+      0,
+    );
     await captureScreen(page, { path: `reports/tooltip-independent-${width}.png` });
     await page.getByRole("button", { name: "Back", exact: true }).click();
     const opener = page.getByRole("button", { name: "Boons", exact: true });
@@ -114,14 +116,15 @@ for (const width of [1280, 1920])
         .locator(".action-card")
         .first()
         .evaluate((node) => node.getBoundingClientRect().width),
-    ).toBeCloseTo(200, 0);
+    ).toBeCloseTo(width === 1280 ? 180 : 200, 0);
     await captureScreen(page, { path: `reports/owned-boons-${width}.png` });
-    for (const boon of BOONS.slice(4)) {
-      const heading = dialog.getByRole("heading", { name: boon.name, exact: true });
-      await heading.scrollIntoViewIfNeeded();
-      await expect(heading).toBeInViewport();
-      await expect(dialog).toContainText(boon.text);
-      await captureScreen(page, { path: `reports/owned-boon-${boon.id}-${width}.png` });
+    for (let index = 2; index < BOONS.length; index += 2) {
+      await dialog.getByRole("button", { name: "Next page" }).click();
+      for (const boon of BOONS.slice(index, index + 2)) {
+        await expect(dialog.getByRole("heading", { name: boon.name, exact: true })).toBeInViewport();
+        await expect(dialog).toContainText(boon.text);
+        await captureScreen(page, { path: `reports/owned-boon-${boon.id}-${width}.png` });
+      }
     }
     await page.keyboard.press("Escape");
     await expect(opener).toBeFocused();

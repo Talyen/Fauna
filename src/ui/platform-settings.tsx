@@ -1,3 +1,4 @@
+import { PagedItems } from "./pagination";
 import { Loading } from "./loading";
 import { TriangleAlert } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -158,26 +159,33 @@ export function CloudRecovery({ session }: { session: Session }) {
                 ? "These journeys differ. Choose which save to continue, or play offline."
                 : "Checking saved progress…")}
           </p>
-          {cloud.candidates.map((candidate, index) => {
-            const game = decodeSave(candidate.payload);
-            return (
-              <section key={candidate.id}>
-                <h2>
-                  Save {index + 1} · Device {candidate.device.slice(0, 6)}
-                </h2>
-                <p>
-                  Encounter {game.encounter + 1} · {phaseLabel(game)} · {game.currency} Gold · {game.wins}{" "}
-                  wins
-                </p>
-                <Button
-                  disabled={cloud.status !== "Conflict"}
-                  onClick={() => void session.cloud.choose(candidate.id)}
-                >
-                  Use save {index + 1}
-                </Button>
-              </section>
-            );
-          })}
+          <PagedItems
+            items={cloud.candidates}
+            pageSize={2}
+            className="cloud-candidates"
+            label="Saved journey pages"
+          >
+            {(candidate, index) => {
+              const game = decodeSave(candidate.payload);
+              return (
+                <section key={candidate.id}>
+                  <h2>
+                    Save {index + 1} · Device {candidate.device.slice(0, 6)}
+                  </h2>
+                  <p>
+                    Encounter {game.encounter + 1} · {phaseLabel(game)} · {game.currency} Gold · {game.wins}{" "}
+                    wins
+                  </p>
+                  <Button
+                    disabled={cloud.status !== "Conflict"}
+                    onClick={() => void session.cloud.choose(candidate.id)}
+                  >
+                    Use save {index + 1}
+                  </Button>
+                </section>
+              );
+            }}
+          </PagedItems>
           {cloud.offlineAvailable ? (
             <>
               <Button variant="outline" onClick={() => session.cloud.offline()}>

@@ -1,3 +1,4 @@
+import { PagedItems, useCompactLayout } from "./pagination";
 import { starterCount } from "../game/engine";
 import { motionValue } from "./motion-values";
 import { ResultPresentation } from "./result-presentation";
@@ -224,14 +225,21 @@ export function Rewards({ game, send, inspect }: Props) {
           <div className="reward-choice-content">
             <h2>{recruiting ? (incoming ? "Replace a creature" : "Choose a Recruit") : "Choose a Boon"}</h2>
             {recruiting ? (
-              <div className="recruit-options">
-                {(incoming
-                  ? [...game.team, ...game.reserves].map((creature) => ({
-                      kind: creature.species,
-                      id: creature.id,
-                    }))
-                  : reward.recruits.map((kind, index) => ({ kind, id: String(index) }))
-                ).map(({ kind, id }) => (
+              <PagedItems
+                key={incoming ?? "recruits"}
+                className="recruit-options"
+                label="Recruit pages"
+                pageSize={3}
+                items={
+                  incoming
+                    ? [...game.team, ...game.reserves].map((creature) => ({
+                        kind: creature.species,
+                        id: creature.id,
+                      }))
+                    : reward.recruits.map((kind, index) => ({ kind, id: String(index) }))
+                }
+              >
+                {({ kind, id }) => (
                   <div className="reward-option" key={id}>
                     <CreatureCard
                       progression={game}
@@ -260,8 +268,8 @@ export function Rewards({ game, send, inspect }: Props) {
                       </p>
                     ) : null}
                   </div>
-                ))}
-              </div>
+                )}
+              </PagedItems>
             ) : (
               <div className="boon-options">
                 {reward.boons.map((id) => {
@@ -317,6 +325,7 @@ export function Talents({
   back: () => void;
   controls?: Controls;
 }) {
+  const compact = useCompactLayout();
   const [keyword, setKeyword] = useState<Keyword | null>(null);
   const [purchased, setPurchased] = useState<string | null>(null);
   const lastKeyword = useRef<Keyword | null>(null);
@@ -426,10 +435,16 @@ export function Talents({
               tone={keyword}
             />
           </div>
-          <div className="talent-tree">
-            {[
+          <PagedItems
+            key={keyword}
+            className="talent-tree"
+            label="Talent pages"
+            pageSize={compact ? 1 : 2}
+            items={[
               ...new Set(TALENTS.filter((talent) => talent.keyword === keyword).map((talent) => talent.row)),
-            ].map((row) => (
+            ]}
+          >
+            {(row) => (
               <div className="talent-row" key={row} data-nav-row aria-label={`Row ${row + 1}`}>
                 {TALENTS.filter((t) => t.keyword === keyword && t.row === row).map((t) => {
                   const TalentSymbol = talentSymbols[t.id]!;
@@ -491,8 +506,8 @@ export function Talents({
                   );
                 })}
               </div>
-            ))}
-          </div>
+            )}
+          </PagedItems>
         </>
       )}
     </main>
@@ -507,6 +522,7 @@ export function Collection({
   inspect: Props["inspect"];
   back: () => void;
 }) {
+  const compact = useCompactLayout();
   const [filter, setFilter] = useState("all");
   const [page, setPage] = useState(0);
   const [columns, setColumns] = useState(3);
@@ -547,7 +563,7 @@ export function Collection({
   const ordered = [...SPECIES]
     .filter((entry) => filter === "all" || (filter === "known" ? known(entry.id) : !known(entry.id)))
     .sort((a, b) => Number(known(b.id)) - Number(known(a.id)));
-  const pageSize = columns * 2;
+  const pageSize = columns * (compact ? 1 : 2);
   const totalPages = Math.max(1, Math.ceil(ordered.length / pageSize));
   const activePage = Math.min(page, totalPages - 1);
   if (page !== activePage) setPage(activePage);
@@ -635,7 +651,6 @@ export function Collection({
                   onClick={() => {
                     pagingFocus.current = activePage === 1;
                     setPage(activePage - 1);
-                    gridRef.current?.scrollTo?.(0, 0);
                   }}
                 >
                   <ChevronLeft aria-hidden="true" />
@@ -653,7 +668,6 @@ export function Collection({
                   onClick={() => {
                     pagingFocus.current = activePage === totalPages - 2;
                     setPage(activePage + 1);
-                    gridRef.current?.scrollTo?.(0, 0);
                   }}
                 >
                   <ChevronRight aria-hidden="true" />
@@ -675,30 +689,33 @@ export function DeckCards({
   inspect: Props["inspect"];
   pile?: "draw" | "discard";
 }) {
+  const compact = useCompactLayout();
   const cards = game.cards
     .filter((card) => !pile || game.battle?.[pile].includes(card.id))
     .sort((a, b) => a.definitionId.localeCompare(b.definitionId) || a.id.localeCompare(b.id));
   return (
-    <div className="deck-grid">
+    <>
       {cards.length === 0 ? (
         <EmptyState
           label={`${pile === "draw" ? "Draw Pile" : pile === "discard" ? "Discard Pile" : "Deck"} is empty`}
         />
       ) : null}
-      {cards.map((card) => {
-        const owner = game.team.find((c) => c.id === card.ownerId)!;
-        return (
-          <ActionCard
-            key={card.id}
-            card={card}
-            actor={owner}
-            modifiers={game}
-            ownerName={species(owner.species).name}
-            onClick={() => inspect({ card })}
-            onInspect={() => inspect({ card })}
-          />
-        );
-      })}
-    </div>
+      <PagedItems items={cards} pageSize={compact ? 3 : 6} className="deck-grid" label="Deck pages">
+        {(card) => {
+          const owner = game.team.find((c) => c.id === card.ownerId)!;
+          return (
+            <ActionCard
+              key={card.id}
+              card={card}
+              actor={owner}
+              modifiers={game}
+              ownerName={species(owner.species).name}
+              onClick={() => inspect({ card })}
+              onInspect={() => inspect({ card })}
+            />
+          );
+        }}
+      </PagedItems>
+    </>
   );
 }

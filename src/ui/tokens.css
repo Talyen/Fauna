@@ -99,7 +99,6 @@
   --selection-gap: 3px;
   --selection-width: 2px;
   --progress-height: 8px;
-  --scrollbar-thumb: var(--muted-foreground);
   /* Alchemy's interaction timings and card scale, independent of viewport size. */
   --motion-hover: 150ms;
   --hover-scale: 1.035;
@@ -118,6 +117,9 @@
   --talent-card-width: 328px;
   --talent-card-min-height: 168px;
   --art-standard-short-side: 200px;
+  --art-compact-short-side: 180px;
+  --art-minimum-short-side: 160px;
+  --collection-rows: 2;
   --art-short-side: var(--art-standard-short-side);
   --page-inline-gutter: 32px;
   --page-block-gutter: 24px;
@@ -171,4 +173,16 @@
   color: var(--text);
   background: var(--bg);
   font-synthesis: none;
+}
+
+@media (max-height: 900px) {
+  :root {
+    --art-short-side: var(--art-compact-short-side);
+    --collection-rows: 1;
+  }
+}
+@media (max-height: 760px) {
+  :root {
+    --art-short-side: var(--art-minimum-short-side);
+  }
 }

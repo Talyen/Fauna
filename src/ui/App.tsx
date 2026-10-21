@@ -1,3 +1,4 @@
+import { PagedItems } from "./pagination";
 import { captureSwapMotion } from "./swap-motion";
 import { SurfaceTransition } from "./surface-transition";
 import { Loading } from "./loading";
@@ -482,8 +483,8 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           ) : modal === "deck" || modal === "draw" || modal === "discard" ? (
             <DeckCards game={game} inspect={setInspection} pile={modal === "deck" ? undefined : modal} />
           ) : modal === "boons" ? (
-            <div className="boon-options">
-              {game.boons.map((id) => {
+            <PagedItems items={game.boons} pageSize={2} className="boon-options" label="Boon pages">
+              {(id) => {
                 const boon = BOONS.find((entry) => entry.id === id)!;
                 return (
                   <section className="reward-option" key={id}>
@@ -499,8 +500,8 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                     </p>
                   </section>
                 );
-              })}
-            </div>
+              }}
+            </PagedItems>
           ) : modal === "settings" ? (
             <Settings
               session={session}
@@ -523,18 +524,18 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                 W/A/S/D or Tab to navigate. A/D switches targets. Enter/controller A selects. Escape/B goes
                 back. I/controller X inspects. Controller Y ends the turn.
               </p>
-              <dl>
-                {GLOSSARY.map((entry) => (
-                  <div key={entry.term}>
+              <PagedItems items={GLOSSARY} pageSize={3} className="glossary-entries" label="Glossary pages">
+                {(entry) => (
+                  <dl key={entry.term}>
                     <dt>
                       <KeywordText text={entry.term} />
                     </dt>
                     <dd>
                       <KeywordText text={entry.definition} />
                     </dd>
-                  </div>
-                ))}
-              </dl>
+                  </dl>
+                )}
+              </PagedItems>
             </>
           ) : null}
           {inspection && !("support" in inspection) ? (
