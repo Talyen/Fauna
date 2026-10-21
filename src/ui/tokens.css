@@ -100,6 +100,7 @@
   --selection-gap: 3px;
   --selection-width: 2px;
   --progress-height: 8px;
+  --battle-health-height: 4px;
   /* Alchemy's interaction timings and card scale, independent of viewport size. */
   --motion-hover: 150ms;
   --hover-scale: 1.035;

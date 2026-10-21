@@ -73,6 +73,36 @@ for (const [width, height] of REVIEW_VIEWPORTS)
       await page.goto("/");
       await page.getByRole("button", { name: "Continue", exact: true }).click();
       await expect(page.locator(".enemy-row .creature-card")).toHaveCount(3);
+      const composition = await page.locator(".battle-screen").evaluate((board) => {
+        const rows = [...board.querySelectorAll(".enemy-row, .player-row")].map((row) => {
+          const cards = [...row.querySelectorAll(".creature-card")].map((card) =>
+            card.getBoundingClientRect(),
+          );
+          return (cards[0]!.left + cards.at(-1)!.right) / 2;
+        });
+        const frames = [...board.querySelectorAll(".creature-wrap")].map((wrap) => {
+          const card = wrap.querySelector(".creature-card")!.getBoundingClientRect();
+          const health = wrap.querySelector(".health-forecast")!.getBoundingClientRect();
+          const icons = [...wrap.querySelectorAll(".status-icon")].map((icon) =>
+            icon.getBoundingClientRect(),
+          );
+          return {
+            healthInside: health.left >= card.left && health.right <= card.right,
+            healthBottom: card.bottom - health.bottom,
+            healthHeight: health.height,
+            iconsBelow: icons.every((icon) => icon.top >= card.bottom),
+          };
+        });
+        return { rows, frames, center: innerWidth / 2 };
+      });
+      for (const center of composition.rows)
+        expect(Math.abs(center - composition.center)).toBeLessThanOrEqual(1);
+      for (const frame of composition.frames) {
+        expect(frame.healthInside).toBe(true);
+        expect(frame.healthBottom).toBeCloseTo(1, 0);
+        expect(frame.healthHeight).toBe(4);
+        expect(frame.iconsBelow).toBe(true);
+      }
       const origin = Date.UTC(2026, 0, 1);
       await page.clock.install({ time: origin });
       await page.clock.pauseAt(origin + 60_000);

@@ -140,12 +140,14 @@ export function CreatureCard({
               </TooltipContent>
             </Tooltip>
           )}
-          {preview ? (
-            preview
-          ) : readout && health !== undefined && (actorId || enemyId) ? (
-            <BattleReadout health={health} maxHealth={maxHealth ?? info.health} block={block} />
-          ) : null}
-          {readout ? <CombatStatus combat={combat} /> : null}
+          <div className="combatant-details">
+            {preview ? (
+              preview
+            ) : readout && health !== undefined && (actorId || enemyId) ? (
+              <BattleReadout health={health} maxHealth={maxHealth ?? info.health} block={block} />
+            ) : null}
+            {readout ? <CombatStatus combat={combat} /> : null}
+          </div>
         </div>
       </div>
     </div>
@@ -265,6 +267,7 @@ export function ActionCard({
       <TooltipTrigger asChild>{artwork}</TooltipTrigger>
       <TooltipContent side="top">
         <ActionDetails
+          compact
           card={card}
           ownerName={ownerName}
           actor={actor}
