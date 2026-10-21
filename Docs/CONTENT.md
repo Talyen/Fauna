@@ -101,7 +101,7 @@ Armor, Bleed, Dodge, Leech and Mana now use their distinct existing Alchemy port
 
 ## Emberback
 
-Emberback is an armored brawler with 30 Health. Its base passive, Banked Furnace, starts each battle with 2 Armor; higher passive tiers remain undefined. It appears in ordinary combat packs and becomes collectible through the existing recruitment flow.
+Emberback is an armored brawler with 30 Health. Its unique passive, Molten Shell, reads: "When your Armor breaks, deal 1 Burn damage to all enemies." Damage scales from 1 through 6 at zero through five stars, replacing the previous tier. It grants no starting Armor. It appears in ordinary combat packs and becomes collectible through the existing recruitment flow.
 
 All three abilities cost 1 Mana:
 
@@ -112,3 +112,5 @@ All three abilities cost 1 Mana:
 Ability design aims for roughly 6 total value per card across its affected targets, with adjustment for effects such as lasting statuses. This is a design guideline rather than an arithmetic equivalence between damage, Armor and control; it does not retroactively rebalance existing creatures. Single chosen targets are implicit in descriptions; group targets and self-granted effects are explicit. Area attacks resolve living opponents in board order and stop if retaliation knocks out the acting creature. Player area attacks need no chosen target; enemy area attacks affect deployed allies, excluding reserves. Enemy area damage uses one third of encounter attack strength, rounded with a minimum of 1, rather than multiplying full single-target strength across the team.
 
 The selected creature portrait (`04.png`) and three ability portraits are copied unchanged from the user's [Emberback Drive folder](https://drive.google.com/drive/folders/1BAcTaOpKsPQonWJ4mZzJgRE3se0SrGp9) into `public/art/emberback/`. The manifest records each original file URL. Ability-specific artwork is used consistently in battle, inspection and Collection. Ashen Vanish remains outside the playable kit; its Drive source is preserved. PNG selections are copied at their original resolution and aspect ratio without cropping or conversion. Prepared output checks do not establish rendered acceptance.
+
+Molten Shell triggers once per positive-to-zero Armor transition, after the effect that removes Armor completes. Damage, periodic damage, shattering, Purge and Armor theft can break Armor. No burst occurs while Armor remains, when Armor was already zero, or after the creature is knocked out. New Armor can enable another burst. Burn packets use existing mitigation and buildup, without Dodge, Critical hits or ordinary attack retaliation. Player bursts use the collected tier and hit living enemies; enemy bursts use the base tier and hit deployed living allies. Passives should typically have a unique species mechanic and concise rules without naming abilities.

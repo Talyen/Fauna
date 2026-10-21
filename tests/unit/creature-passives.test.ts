@@ -9,7 +9,9 @@ import { accept, run } from "./helpers";
 afterEach(() => vi.restoreAllMocks());
 
 it("keeps base passives at every currently undefined star tier", () => {
-  for (const kind of content.SPECIES) {
+  for (const kind of content.SPECIES.filter((kind) =>
+    kind.passiveTiers.slice(1).every((tier) => tier === null),
+  )) {
     for (let copies = 0; copies <= 6; copies++) {
       const game = produce(createGame(), (draft) => {
         if (copies) draft.discovery.recruited[kind.id] = copies;

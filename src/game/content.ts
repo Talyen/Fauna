@@ -5,7 +5,8 @@ export type SpeciesId =
 type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
   | { kind: "cardBonus"; trigger: "firstAttack" | "stunAttack" | "heal" | "guard"; amount: number }
-  | { kind: "battleStart"; effect: "block" | "thorns" | "armor"; amount: number };
+  | { kind: "battleStart"; effect: "block" | "thorns" | "armor"; amount: number }
+  | { kind: "armorBreak"; amount: number };
 export interface PassiveTier {
   description: string;
   effects: readonly PassiveEffect[];
@@ -171,17 +172,32 @@ export const SPECIES: readonly Species[] = [
     title: "The banked furnace",
     health: 30,
     color: "#ed9c65",
-    trait: "Banked Furnace",
+    trait: "Molten Shell",
     passiveTiers: [
       {
-        description: "Start each battle with 2 Armor.",
-        effects: [{ kind: "battleStart", effect: "armor", amount: 2 }],
+        description: "When your Armor breaks, deal 1 Burn damage to all enemies.",
+        effects: [{ kind: "armorBreak", amount: 1 }],
       },
-      null,
-      null,
-      null,
-      null,
-      null,
+      {
+        description: "When your Armor breaks, deal 2 Burn damage to all enemies.",
+        effects: [{ kind: "armorBreak", amount: 2 }],
+      },
+      {
+        description: "When your Armor breaks, deal 3 Burn damage to all enemies.",
+        effects: [{ kind: "armorBreak", amount: 3 }],
+      },
+      {
+        description: "When your Armor breaks, deal 4 Burn damage to all enemies.",
+        effects: [{ kind: "armorBreak", amount: 4 }],
+      },
+      {
+        description: "When your Armor breaks, deal 5 Burn damage to all enemies.",
+        effects: [{ kind: "armorBreak", amount: 5 }],
+      },
+      {
+        description: "When your Armor breaks, deal 6 Burn damage to all enemies.",
+        effects: [{ kind: "armorBreak", amount: 6 }],
+      },
     ],
   },
 ];
