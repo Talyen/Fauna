@@ -291,3 +291,23 @@ it("keeps inspection actions reachable across a long passive list", () => {
     root.remove();
   }
 });
+
+it("skips mounted inactive settings panels during vertical navigation", () => {
+  const root = document.createElement("div");
+  root.className = "settings-controls";
+  root.innerHTML = `<div data-nav-row><button id="category">Sound category</button></div>
+    <section inert aria-hidden="true"><div data-nav-row><button id="inactive">Text size</button></div></section>
+    <div data-nav-row><button id="active">Sound</button></div>`;
+  document.body.append(root);
+  // Inactive panels reserve their layout space, so their rows still have rectangles.
+  vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
+  try {
+    root.querySelector<HTMLButtonElement>("#category")!.focus();
+    moveFocus("down");
+    expect(document.activeElement?.id).toBe("active");
+    moveFocus("up");
+    expect(document.activeElement?.id).toBe("category");
+  } finally {
+    root.remove();
+  }
+});

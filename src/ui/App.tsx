@@ -80,7 +80,14 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     [menu, setMenu] = useState(false),
     [modal, setModal] = useState<Modal>(null),
     [modalInstance, setModalInstance] = useState(0),
+    [menuInstance, setMenuInstance] = useState(0),
     [inspection, setInspection] = useState<Inspection | null>(null);
+  const menuGeneration = useRef(0);
+  const showMenu = useCallback(() => {
+    // Reopening during an exit fade needs a fresh focus scope and revokes the old return callback.
+    setMenuInstance(++menuGeneration.current);
+    setMenu(true);
+  }, []);
   const [mode, setMode] = useState<"pointer" | "keyboard" | "controller">("pointer");
   const [navigation, setNavigation] = useState(false);
   const [audioPreferences, updateAudioPreferences] = useAudioPreferences();
@@ -179,7 +186,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
   });
   const openMenu = () => {
     pauseOpener.current = document.activeElement as HTMLElement | null;
-    setMenu(true);
+    showMenu();
   };
   const openModal = (next: Modal) => {
     if (menu) menuReturnLabel.current = document.activeElement?.textContent ?? null;
@@ -202,7 +209,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
   };
   const backFromPage = () => {
     setRoute(origin.current);
-    if (origin.current === "play") setMenu(true);
+    if (origin.current === "play") showMenu();
   };
   useEffect(() => {
     if (!view.cloud.blocking) return;
@@ -214,8 +221,8 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
   useEffect(() => {
     if (!view.overlayActive) return;
     setAutoplay(false);
-    if (route === "play") setMenu(true);
-  }, [view.overlayActive, route, setAutoplay]);
+    if (route === "play") showMenu();
+  }, [view.overlayActive, route, setAutoplay, showMenu]);
   const input = (action: InputAction) => {
     if (session.store.getState().overlayActive) return;
     if (session.store.getState().cloud.blocking) {
@@ -783,6 +790,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           )}
           {!modal && !inspection ? (
             <PopoverContent
+              key={menuInstance}
               className="menu-panel"
               aria-label="Pause menu"
               onOpenAutoFocus={(event) => {
@@ -799,7 +807,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
               }}
               onCloseAutoFocus={(event) => {
                 event.preventDefault();
-                if (modal || inspection) return;
+                if (menuGeneration.current !== menuInstance || modal || inspection) return;
                 if (route === "play") returnFocus(pauseOpener.current);
                 else if (route === "settings")
                   returnFocus(

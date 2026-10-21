@@ -1747,13 +1747,22 @@ for (const [width, height] of [
       const pileWidth = await pile.evaluate((element: HTMLElement) => element.offsetWidth);
       expect(Math.abs(pileWidth / handWidth - 0.8)).toBeLessThan(0.01);
     }
-    const opener = page.locator(".app:not([inert]) .player-row .creature-card").first();
+    await page.getByRole("button", { name: "Open menu", exact: true }).click();
+    await page.getByRole("button", { name: "Collection", exact: true }).click();
+    const opener = page.getByRole("button", {
+      name: `Inspect ${species(fixture.team[0]!.species).name}`,
+      exact: true,
+    });
     await opener.click();
-    const dialog = page.getByRole("dialog");
-    const inspectedArea = await dialog.locator(".creature-card").evaluate(area);
-    for (const card of await dialog.locator(".action-card").all())
+    const details = page.locator(".collection-creature-screen");
+    await expect(details).toBeVisible();
+    const inspectedArea = await details.locator(".collection-creature-trait .creature-card").evaluate(area);
+    for (const card of await details.locator(".action-card").all())
       expect(Math.abs((await card.evaluate(area)) / inspectedArea - 1)).toBeLessThan(0.025);
     await page.keyboard.press("Escape");
-    await expect(dialog).toHaveCount(0);
+    await expect(details).toHaveCount(0);
     await expect(opener).toBeFocused();
+    await page.getByRole("button", { name: "Open menu", exact: true }).click();
+    await page.getByRole("button", { name: "Continue", exact: true }).click();
+    expect(await state(page)).toEqual(fixture);
   });
