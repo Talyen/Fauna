@@ -37,7 +37,7 @@
   --font-number: var(--font-ui);
   --text-rule: var(--text-body);
   --text-name: var(--text-heading);
-  --radius: 0.625rem;
+  --radius: 20px;
   --radius-round: 9999px;
   --border-art: transparent;
   --feedback-shadow: var(--background);
@@ -122,7 +122,7 @@
   --hover-frame-overlap: 1px;
   --tooltip-enter-duration: 100ms;
   --tooltip-exit-duration: 100ms;
-  --tooltip-radius: 20px;
+  --tooltip-radius: var(--radius);
   --tooltip-max-width: calc(var(--art-standard-short-side) * 4 / 3 * 1.2);
   --tooltip-text-body: calc(16px * var(--tooltip-scale, 1));
   --tooltip-text-heading: calc(20px * var(--tooltip-scale, 1));
