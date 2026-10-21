@@ -1,6 +1,7 @@
 import { REVIEW_VIEWPORTS } from "./layout-contract";
 import { captureScreen } from "./rendered-evidence";
 import { test, expect } from "@playwright/test";
+import { SPECIES } from "../../src/game/content";
 test("switch thumbs stay within their tracks in both states", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Settings", exact: true }).click();
@@ -27,7 +28,10 @@ test("Collection filtering, audio preferences, and settings remain menu-driven",
   await page.goto("/");
   await page.getByRole("button", { name: "Collection", exact: true }).click();
   await page.getByRole("tab", { name: "Uncollected", exact: true }).click();
-  await expect(page.getByRole("img", { name: "Locked species" })).toHaveCount(6);
+  const firstPage = await page.getByRole("img", { name: "Locked species" }).count();
+  expect(firstPage).toBeGreaterThan(0);
+  await page.getByRole("button", { name: "Next page" }).click();
+  await expect(page.getByRole("img", { name: "Locked species" })).toHaveCount(SPECIES.length - firstPage);
   await page.getByRole("button", { name: "Open menu", exact: true }).click();
   await expect(page.getByRole("button", { name: "Collection", exact: true })).toBeFocused();
   await page.getByRole("button", { name: "Settings", exact: true }).click();

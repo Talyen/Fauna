@@ -65,7 +65,7 @@ for (const width of [1280, 1920]) {
     await page.getByRole("button", { name: /^Boss: / }).click();
     await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
     const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!) as GameState);
-    expect(saved.team.map((creature) => creature.health)).toEqual([10, 14, 26]);
+    expect(saved.team.map((creature) => creature.health)).toEqual([10, 16, 30]);
     expect(saved.expedition?.pack).toEqual(game.expedition!.pack);
   });
 }
@@ -97,7 +97,11 @@ for (const width of [1280, 1920]) {
     await expect(page.locator('[data-actor-id="enemy-0"]')).toHaveAttribute("data-active-target", "true");
     const recipientPreview = page.locator('[data-actor-id="enemy-0"] .target-preview');
     await expect(recipientPreview).toBeVisible();
-    await expect(recipientPreview).toContainText("Health");
+    await expect(recipientPreview).toHaveAttribute(
+      "aria-label",
+      "Target preview for Emberback: Health 18 to 12, Block 0 to 0",
+    );
+    await expect(recipientPreview).toContainText("−6");
     await expect(page.locator(".target-preview")).toHaveCount(1);
     expect(
       await row.evaluate((element) => ({
