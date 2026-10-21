@@ -575,11 +575,13 @@ for (const [width, height] of [
 test("Collection hides uncollected tooltips and uses centered collected inspection", async ({ page }) => {
   await seed(page, run());
   await page.getByRole("button", { name: "Collection", exact: true }).click();
+  await page.getByRole("button", { name: "Next page" }).click();
   const locked = page.getByRole("img", { name: "Locked species" }).first();
   await expect(locked).toBeVisible();
   await locked.hover();
   await expect(page.getByRole("tooltip")).toHaveCount(0);
   expect(await locked.evaluate((e) => getComputedStyle(e.parentElement!).filter)).toContain("grayscale");
+  await page.getByRole("button", { name: "Previous page" }).click();
   await page.getByRole("button", { name: "Inspect Mossback", exact: true }).click();
   await expect(page.getByRole("dialog")).toBeVisible();
   await page.keyboard.press("Escape");

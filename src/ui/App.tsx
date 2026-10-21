@@ -524,7 +524,12 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                 W/A/S/D or Tab to navigate. A/D switches targets. Enter/controller A selects. Escape/B goes
                 back. I/controller X inspects. Controller Y ends the turn.
               </p>
-              <PagedItems items={GLOSSARY} pageSize={3} className="glossary-entries" label="Glossary pages">
+              <PagedItems
+                items={GLOSSARY}
+                pageSize={scale > 1 ? 2 : 3}
+                className="glossary-entries"
+                label="Glossary pages"
+              >
                 {(entry) => (
                   <dl key={entry.term}>
                     <dt>

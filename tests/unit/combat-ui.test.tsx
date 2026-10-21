@@ -160,7 +160,7 @@ it("keeps all simultaneous combat effects reachable through bounded pages", asyn
   }
 });
 
-it("opens every expanded talent tree and purchases a later row through the existing controls", async () => {
+it.each(KEYWORDS)("opens %s talent pages and preserves purchases and requirements", async (keyword) => {
   const game = produce(run(), (state) => {
     state.keywordXP = Object.fromEntries(KEYWORDS.map((keyword) => [keyword, 10000]));
   });
@@ -170,7 +170,7 @@ it("opens every expanded talent tree and purchases a later row through the exist
   render(<App session={session} />);
   try {
     await userEvent.click(screen.getByRole("button", { name: "Talents" }));
-    for (const keyword of KEYWORDS) {
+    {
       await userEvent.click(screen.getByRole("button", { name: `${keywordLabel(keyword)} talents` }));
       const talents = TALENTS.filter((t) => t.keyword === keyword);
       const rows = [...new Set(talents.map((talent) => talent.row))];

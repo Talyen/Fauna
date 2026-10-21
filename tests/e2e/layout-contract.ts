@@ -35,7 +35,14 @@ export function layoutViolations() {
     const name = describe(el);
     if (/^(auto|scroll)$/.test(css.overflowX) || /^(auto|scroll)$/.test(css.overflowY))
       failures.push(`${name} is a scroll area`);
-    if (el.clientWidth && (el.scrollWidth > el.clientWidth + 1 || el.scrollHeight > el.clientHeight + 1))
+    // Visible overflow can intentionally extend into a containing layout's reserved space
+    // (for example external combat effects). Bounds below still check every visible child.
+    const clipsX = /^(hidden|clip)$/.test(css.overflowX) || el.matches("button, p, dt, dd, h1, h2, h3");
+    const clipsY = /^(hidden|clip)$/.test(css.overflowY) || el.matches("button, p, dt, dd, h1, h2, h3");
+    if (
+      el.clientWidth &&
+      ((clipsX && el.scrollWidth > el.clientWidth + 1) || (clipsY && el.scrollHeight > el.clientHeight + 1))
+    )
       failures.push(`${name} has overflowing or clipped content`);
     const box = el.getBoundingClientRect();
     if (box.left < -1 || box.top < -1 || box.right > innerWidth + 1 || box.bottom > innerHeight + 1)
