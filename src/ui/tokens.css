@@ -179,7 +179,22 @@
   --mana-crystal-size: 18px;
   --battle-creature-width: calc(var(--art-landscape-width) * 1.1);
   --battle-hand-width: calc(var(--art-portrait-width) * 0.9);
-  --battle-pile-width: calc(var(--battle-hand-width) * 0.7);
+  --battle-pile-width: calc(var(--battle-hand-width) * 0.8);
+  --battle-dock-gap: clamp(16px, 2.19vw, 42px);
+  --hand-side-clearance: calc(var(--battle-hand-width) * 0.32);
+  --battle-hand-available: calc(
+    100dvw - var(--page-inline-gutter) * 2 - var(--battle-pile-width) * 2 - var(--battle-dock-gap) * 2 -
+      var(--hand-side-clearance) * 2
+  );
+  --discard-top-x: 5.9523809524%;
+  --discard-top-y: 4.4642857143%;
+  --discard-top-width: 78.0952380952%;
+  --discard-top-height: 77.1428571429%;
+  --discard-back-width: 128.0487804878%;
+  --discard-back-height: 129.6296296296%;
+  --discard-back-left: -7.6219512195%;
+  --discard-back-top: -5.787037037%;
+  --rest-feedback-duration: 1800ms;
   --battle-hand-height: calc(var(--art-long-side) * 0.9);
   --art-long-side: calc(var(--art-short-side) * 4 / 3);
   --art-landscape-width: var(--art-long-side);

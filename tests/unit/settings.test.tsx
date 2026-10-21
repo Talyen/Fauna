@@ -36,12 +36,14 @@ it("applies slider and switch changes live, persists preferences, and preserves 
   const game = session.store.getState().game;
   try {
     await user.click(screen.getByRole("button", { name: "Settings" }));
+    expect(screen.queryByRole("slider", { name: "Master volume" })).toBeNull();
     await user.click(screen.getByRole("radio", { name: "75%" }));
     expect(document.documentElement.style.getPropertyValue("--tooltip-scale")).toBe("1");
     await user.click(screen.getByRole("radio", { name: "Tooltip 125%" }));
     expect(document.documentElement.style.getPropertyValue("--text-scale")).toBe("0.75");
     expect(document.documentElement.style.getPropertyValue("--tooltip-scale")).toBe("1.25");
     await user.click(screen.getByRole("tab", { name: "Battle" }));
+    expect(screen.queryByRole("radio", { name: "75%" })).toBeNull();
     expect(screen.getByRole("switch", { name: "Auto-end turn" }).getAttribute("aria-checked")).toBe("true");
     await user.click(screen.getByRole("switch", { name: "Auto-end turn" }));
     await user.click(screen.getByRole("tab", { name: "Sound" }));

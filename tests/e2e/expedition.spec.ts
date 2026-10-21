@@ -1471,6 +1471,12 @@ test("recruitment at five requires replacement and updates a released starter's 
   await page.getByRole("button", { name: "Recruit Briartooth", exact: true }).click();
   expect((await state(page)).roster).toEqual(fixture.roster);
   await expect(page.getByRole("heading", { name: "Replace a creature", exact: true })).toBeVisible();
+  await expect(
+    page
+      .getByRole("region", { name: "Incoming recruit" })
+      .getByRole("button", { name: "Inspect Briartooth", exact: true }),
+  ).toBeVisible();
+  await captureScreen(page, { path: "reports/implementation/recruit-replacement.png" });
   await page.getByRole("button", { name: "Cancel", exact: true }).click();
   expect((await state(page)).revision).toBe(fixture.revision);
   await page.getByRole("button", { name: "Recruit Briartooth", exact: true }).click();
@@ -1711,7 +1717,9 @@ for (const [width, height] of [
       .evaluate(area);
     for (const card of await page.locator(".app:not([inert]) .hand .action-card").all())
       expect(Math.abs((await card.evaluate(area)) / creatureArea - (0.9 / 1.1) ** 2)).toBeLessThan(0.025);
-    for (const control of await page.locator(".app:not([inert]) .hand-toolbar button:enabled").all()) {
+    for (const control of await page
+      .locator(".app:not([inert]) .hand-toolbar .battle-dock button:enabled")
+      .all()) {
       const bounds = (await control.boundingBox())!;
       expect(bounds.y + bounds.height).toBeLessThanOrEqual(height);
       expect(
@@ -1720,6 +1728,24 @@ for (const [width, height] of [
           return el.contains(document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2));
         }),
       ).toBe(true);
+    }
+    const dock = await page.locator(".app:not([inert]) .hand-toolbar").evaluate((element) => {
+      const [left, hand, right] = [...element.children].map((child) =>
+        child.getBoundingClientRect().toJSON(),
+      );
+      return { left: left!, hand: hand!, right: right! };
+    });
+    expect(Math.abs((dock.left.left + dock.right.right) / 2 - width / 2)).toBeLessThan(1);
+    expect(Math.abs(dock.left.width - dock.right.width)).toBeLessThan(1);
+    expect(dock.left.right).toBeLessThan(dock.hand.left);
+    expect(dock.hand.right).toBeLessThan(dock.right.left);
+    const handWidth = await page
+      .locator(".app:not([inert]) .hand .action-card")
+      .first()
+      .evaluate((element: HTMLElement) => element.offsetWidth);
+    for (const pile of await page.locator(".app:not([inert]) [data-pile]").all()) {
+      const pileWidth = await pile.evaluate((element: HTMLElement) => element.offsetWidth);
+      expect(Math.abs(pileWidth / handWidth - 0.8)).toBeLessThan(0.01);
     }
     const opener = page.locator(".app:not([inert]) .player-row .creature-card").first();
     await opener.click();

@@ -25,7 +25,7 @@ try {
   for (const entry of manifest.assets.filter((asset) => asset.id.startsWith("keyword.")))
     requireAsset(entry.id);
   for (const boon of contentCatalog.boons) requireAsset(`boon.${boon.id}`);
-  requireAsset("pile.placeholder");
+  for (const id of ["pile.draw", "pile.discard", "card.back"]) requireAsset(id);
   requireAsset("mana.full");
   requireAsset("mana.empty");
   for (const cue of [

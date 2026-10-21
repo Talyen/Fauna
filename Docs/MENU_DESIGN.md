@@ -16,7 +16,7 @@ Implemented direction from the design review.
 - Journey results appear once when a journey is completed, defeated, or voluntarily ended; the main menu has no results entry. End journey on a started journey opens results; clearing an unfinished starter choice returns to the main menu.
 - Settings and Glossary open full screen; the header hamburger and Escape/controller B return to the originating menu and restore its choice. Full screens use an icon-only Back button immediately left of the centered heading and an Open menu hamburger immediately right, separated by the shared 24px gap. Back returns to the originating screen or menu; in a talent tree it returns to the overview.
 
-Collection uses a centered title, tabs, a gallery and pagination. Back and Open menu sit immediately to the left and right of the centered heading. The gallery shows two rows of four creatures per page using the bounded artwork profiles. Pagination uses Previous and Next icon buttons without page counts. It reserves gallery and footer space so partial pages and filters keep controls stable. Changing filters starts at the first page. Locked species are noninteractive. Menu order is Continue/Play, optional Lineup between battles, Talents, Collection, Glossary, Settings, then End journey when applicable in Pause only. Pause also offers Main menu; desktop adds Save & quit.
+Collection uses a centered title, tabs, a gallery and pagination. Back and Open menu sit immediately to the left and right of the centered heading. The gallery shows up to two rows of four creatures per page using the bounded artwork profiles; measured width reduces the column count before artwork is reduced. Pagination uses Previous and Next icon buttons without page counts. It reserves gallery and footer space so partial pages and filters keep controls stable. Each filter remembers its first visible creature while mounted. Changing capacity keeps that creature on the visible page, and shortened lists clamp the page. Locked species are noninteractive. Menu order is Continue/Play, optional Lineup between battles, Talents, Collection, Glossary, Settings, then End journey when applicable in Pause only. Pause also offers Main menu; desktop adds Save & quit.
 
 See [UI rules](UI.md) and [journey design](EXPEDITION_DESIGN.md) for shared interaction and progression decisions.
 
@@ -31,3 +31,11 @@ The battle action group includes the labeled Auto-play Switch, initially off for
 A live creature unlock opens an artwork-centered Creature unlocked screen when leaving results, with ordinary kit inspection and Continue. Continue advances through pending reveals and then Main menu. It does not add inspection to Journey results.
 
 Journey screens with headings use the same Back, heading and Open menu row. Back leaves Merchant or Campfire for the unchanged encounter without buying or resting, cancels recruit replacement before leaving Victory, returns from an unlock reveal to the main menu, and otherwise returns to the main menu without undoing committed gameplay. The root main menu keeps its Fauna title; battle has no main heading and retains its corner menu control.
+
+## Journey decisions and inspection
+
+Drafting, encounter, Victory, Merchant and Campfire headings offer the same icon-only Deck control beside Back, with the title centered independently of the side controls. It opens the shared Deck inspection without committing gameplay; drafting previews the action cards contributed by the already chosen starters. Closing restores the Deck opener.
+
+When the roster is full, recruit replacement keeps the incoming recruit visible and inspectable beside the paginated existing roster. Only activating a Release choice commits recruitment. Back or Cancel restores the original offer and its focus. Inspecting or paging never releases a creature.
+
+Settings reserves the tallest category panel in one grid cell. Inactive native tab panels stay invisible, inert and hidden from assistive technology so changing tabs preserves the heading and tabs without exposing inactive controls.

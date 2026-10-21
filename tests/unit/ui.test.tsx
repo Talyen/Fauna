@@ -254,7 +254,7 @@ describe("player interface", () => {
     expect(session.store.getState().game.team).toHaveLength(3);
     await session.dispose();
   });
-  it("inspects the focused creature copy with its current health and Block using the keyboard", async () => {
+  it("inspects each focused creature copy with current Block and no Health totals using the keyboard", async () => {
     vi.stubGlobal(
       "ResizeObserver",
       class {
@@ -282,23 +282,28 @@ describe("player interface", () => {
     render(<App session={session} />);
     const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: "Continue" }));
-    for (const [id, expected] of [
-      ["ally-0", "7/32 health"],
-      ["ally-1", "19/32 health · 4 block"],
-    ]) {
+    for (const [id, block] of [
+      ["ally-0", 0],
+      ["ally-1", 4],
+    ] as const) {
       act(() =>
         document.querySelector<HTMLButtonElement>(`.player-row [data-actor-id="${id}"] button`)!.focus(),
       );
       await user.keyboard("i");
       await user.tab();
-      expect((await screen.findByRole("tooltip")).textContent).toContain(expected);
+      const tooltip = (await screen.findByRole("tooltip")).textContent!;
+      expect(tooltip).not.toMatch(/\d+\/\d+ health/i);
+      if (block) expect(tooltip).toContain(`${block} block`);
+      else expect(tooltip).not.toMatch(/\d+ block/);
       await user.keyboard("{Escape}");
     }
     await user.click(screen.getByRole("button", { name: "Swap" }));
     act(() => screen.getByRole("button", { name: "Mossback, reserve" }).focus());
     await user.keyboard("i");
     await user.tab();
-    expect((await screen.findByRole("tooltip")).textContent).toContain("11/32 health · 2 block");
+    const reserveTooltip = (await screen.findByRole("tooltip")).textContent!;
+    expect(reserveTooltip).toContain("2 block");
+    expect(reserveTooltip).not.toMatch(/\d+\/\d+ health/i);
     expect(session.store.getState().game).toEqual(game);
     await session.dispose();
   });

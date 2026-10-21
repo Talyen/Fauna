@@ -91,3 +91,41 @@ it("keeps encountered and victory-unlocked creatures out of the collected filter
   expect(screen.getByRole("button", { name: "Inspect Mossback" })).toBeTruthy();
   expect(screen.queryByRole("button", { name: "Inspect Moonhart" })).toBeNull();
 });
+
+it("remembers each filter's page and retains its first visible creature when capacity changes", async () => {
+  let width = 500;
+  vi.stubGlobal(
+    "ResizeObserver",
+    class {
+      observe() {}
+      disconnect() {}
+    },
+  );
+  vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockImplementation(function (this: HTMLElement) {
+    return {
+      x: 0,
+      y: 0,
+      width: this.classList.contains("collection-grid") ? width : 240,
+      height: 180,
+    } as DOMRect;
+  });
+  const game = produce(createGame(), (draft) => {
+    draft.discovery.recruited = Object.fromEntries(SPECIES.map((entry) => [entry.id, 1]));
+  });
+  render(
+    <TooltipProvider>
+      <Collection game={game} inspect={vi.fn()} openMenu={vi.fn()} />
+    </TooltipProvider>,
+  );
+  const user = userEvent.setup();
+  await user.click(screen.getByRole("button", { name: "Next page" }));
+  const anchor = screen.getAllByRole("button", { name: /^Inspect / })[0]!.getAttribute("aria-label")!;
+  await user.click(screen.getByRole("tab", { name: "Collected" }));
+  expect(screen.queryByRole("button", { name: anchor })).toBeNull();
+  await user.click(screen.getByRole("tab", { name: "All" }));
+  expect(screen.getByRole("button", { name: anchor })).toBeTruthy();
+  width = 250;
+  act(() => window.dispatchEvent(new Event("resize")));
+  expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(2);
+  expect(screen.getAllByRole("button", { name: /^Inspect / })[0]!.getAttribute("aria-label")).toBe(anchor);
+});

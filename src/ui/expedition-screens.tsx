@@ -4,6 +4,7 @@ import { starterCount } from "../game/engine";
 import { motionValue } from "./motion-values";
 import { ResultPresentation } from "./result-presentation";
 import { EmptyState } from "./empty-state";
+import { RestRecovery } from "./campfire";
 import { canVisitCampfire } from "../game/support";
 import { SupportOffer } from "./support-screen";
 import { assetUrl } from "./assets";
@@ -50,7 +51,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../components/ui/toolti
 import { ActionCard, CreatureCard } from "./cards";
 import { ArtCard } from "./art-card";
 import { returnFocus } from "./focus";
-import { SPECIES, species, type SpeciesId } from "../game/content";
+import { CARDS, SPECIES, species, type SpeciesId } from "../game/content";
 import {
   creatureStars,
   creaturePassive,
@@ -64,7 +65,7 @@ import {
   canBuyTalent,
   type Keyword,
 } from "../game/progression";
-import type { Command, GameState } from "../game/types";
+import type { Command, GameState, GameEvent } from "../game/types";
 import type { Inspection, Controls } from "./battle-screen";
 import { Progress } from "./progress";
 import { BattleEarnings } from "./battle-earnings";
@@ -108,7 +109,7 @@ const talentSymbols = Object.fromEntries(
   }),
 );
 type Props = { game: GameState; send: (command: Command) => boolean; inspect: (item: Inspection) => void };
-export function TeamSelection({ game, send, inspect, deck }: Props & { deck: () => void }) {
+export function TeamSelection({ game, send, recovery }: Props & { recovery?: GameEvent[] }) {
   const boss = bossEncounter(game);
   return (
     <Screen className="destinations-screen">
@@ -143,11 +144,7 @@ export function TeamSelection({ game, send, inspect, deck }: Props & { deck: () 
         </div>
       </section>
       <BattleEarnings game={game} />
-      <footer className="destination-footer">
-        <Button variant="outline" onClick={deck}>
-          Deck
-        </Button>
-      </footer>
+      {recovery ? <RestRecovery key={game.revision} game={game} events={recovery} /> : null}
     </Screen>
   );
 }
@@ -209,7 +206,7 @@ export function Rewards({ game, send, inspect }: Props) {
   const choices = useRef<HTMLElement>(null);
   const returnTo = useRef<number | null>(null);
   useLayoutEffect(() => {
-    const buttons = choices.current?.querySelectorAll<HTMLButtonElement>(".creature-card");
+    const buttons = choices.current?.querySelectorAll<HTMLButtonElement>(".recruit-options .creature-card");
     if (incoming) returnFocus(buttons?.[0] ?? null);
     else if (returnTo.current !== null) {
       returnFocus(buttons?.[returnTo.current] ?? null);
@@ -229,51 +226,66 @@ export function Rewards({ game, send, inspect }: Props) {
           <div className="reward-choice-content">
             <h2>{recruiting ? (incoming ? "Replace a creature" : "Choose a Recruit") : "Choose a Boon"}</h2>
             {recruiting ? (
-              <PagedItems
-                key={incoming ?? "recruits"}
-                className="recruit-options"
-                label="Recruit pages"
-                pageSize={3}
-                items={
-                  incoming
-                    ? [...game.team, ...game.reserves].map((creature) => ({
-                        kind: creature.species,
-                        id: creature.id,
-                      }))
-                    : reward.recruits.map((kind, index) => ({ kind, id: String(index) }))
-                }
-              >
-                {({ kind, id }) => (
-                  <div className="reward-option" key={id}>
+              <div className={incoming ? "recruit-comparison" : undefined}>
+                {incoming ? (
+                  <section className="incoming-recruit" aria-label="Incoming recruit">
+                    <h3>Recruit</h3>
                     <CreatureCard
                       progression={game}
-                      kind={kind}
-                      actorId={incoming ? id : undefined}
-                      label={incoming ? `Release ${species(kind).name}` : `Recruit ${species(kind).name}`}
-                      onInspect={() =>
-                        inspect(incoming ? { species: kind, creatureId: id } : { species: kind })
-                      }
-                      onClick={() => {
-                        if (incoming) send({ type: "recruit", species: incoming, replace: id });
-                        else if (game.roster.length === 5) {
-                          returnTo.current = Number(id);
-                          setIncoming(kind);
-                        } else send({ type: "recruit", species: kind });
-                      }}
+                      kind={incoming}
+                      label={`Inspect ${species(incoming).name}`}
+                      onClick={() => inspect({ species: incoming })}
+                      onInspect={() => inspect({ species: incoming })}
                     />
-                    <h2>{species(kind).name}</h2>
-                    {!incoming ? (
-                      <p className="collection-uncollected">
-                        {!game.discovery.recruited[kind]
-                          ? "Unlock in Collection"
-                          : creatureStars(game, kind) === MAX_CREATURE_STARS
-                            ? `${MAX_CREATURE_STARS} stars · Max`
-                            : `${creatureStars(game, kind)} → ${creatureStars(game, kind) + 1} stars`}
-                      </p>
-                    ) : null}
-                  </div>
-                )}
-              </PagedItems>
+                    <h2>{species(incoming).name}</h2>
+                  </section>
+                ) : null}
+                <PagedItems
+                  key={incoming ?? "recruits"}
+                  className="recruit-options"
+                  label="Recruit pages"
+                  pageSize={3}
+                  items={
+                    incoming
+                      ? [...game.team, ...game.reserves].map((creature) => ({
+                          kind: creature.species,
+                          id: creature.id,
+                        }))
+                      : reward.recruits.map((kind, index) => ({ kind, id: String(index) }))
+                  }
+                >
+                  {({ kind, id }) => (
+                    <div className="reward-option" key={id}>
+                      <CreatureCard
+                        progression={game}
+                        kind={kind}
+                        actorId={incoming ? id : undefined}
+                        label={incoming ? `Release ${species(kind).name}` : `Recruit ${species(kind).name}`}
+                        onInspect={() =>
+                          inspect(incoming ? { species: kind, creatureId: id } : { species: kind })
+                        }
+                        onClick={() => {
+                          if (incoming) send({ type: "recruit", species: incoming, replace: id });
+                          else if (game.roster.length === 5) {
+                            returnTo.current = Number(id);
+                            setIncoming(kind);
+                          } else send({ type: "recruit", species: kind });
+                        }}
+                      />
+                      <h2>{species(kind).name}</h2>
+                      {!incoming ? (
+                        <p className="collection-uncollected">
+                          {!game.discovery.recruited[kind]
+                            ? "Unlock in Collection"
+                            : creatureStars(game, kind) === MAX_CREATURE_STARS
+                              ? `${MAX_CREATURE_STARS} stars · Max`
+                              : `${creatureStars(game, kind)} → ${creatureStars(game, kind) + 1} stars`}
+                        </p>
+                      ) : null}
+                    </div>
+                  )}
+                </PagedItems>
+              </div>
             ) : (
               <div className="boon-options">
                 {reward.boons.map((id) => {
@@ -526,7 +538,10 @@ export function Collection({
   openMenu: () => void;
 }) {
   const [filter, setFilter] = useState("all");
-  const [pageStart, setPageStart] = useState(0);
+  const [pageStarts, setPageStarts] = useState<Record<string, number>>({});
+  const pageStart = pageStarts[filter] ?? 0;
+  const setPageStart = (start: number) => setPageStarts((current) => ({ ...current, [filter]: start }));
+  const [columns, setColumns] = useState(4);
   const gridRef = useRef<HTMLDivElement>(null);
   const focusedControl = useRef<HTMLElement | null>(null);
   useLayoutEffect(() => {
@@ -536,12 +551,32 @@ export function Collection({
       document.activeElement === document.body
     )
       returnFocus(gridRef.current?.querySelector<HTMLElement>("button:not(:disabled)") ?? null);
-  }, [pageStart, filter]);
+  }, [pageStart, filter, columns]);
   const known = (id: SpeciesId) => game.discovery.recruited[id] !== undefined;
   const ordered = [...SPECIES]
     .filter((entry) => filter === "all" || (filter === "known" ? known(entry.id) : !known(entry.id)))
     .sort((a, b) => Number(known(b.id)) - Number(known(a.id)));
-  const pageSize = 8;
+  useLayoutEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+    const measure = () => {
+      const width = grid.getBoundingClientRect().width;
+      const itemWidth = grid.firstElementChild?.getBoundingClientRect().width ?? 0;
+      if (!width || !itemWidth) return;
+      const gap = Number.parseFloat(getComputedStyle(grid).columnGap) || 0;
+      setColumns(Math.max(1, Math.min(4, Math.floor((width + gap) / (itemWidth + gap)))));
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(grid);
+    if (grid.firstElementChild) observer.observe(grid.firstElementChild);
+    window.addEventListener("resize", measure);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, [filter]);
+  const pageSize = columns * 2;
   const totalPages = Math.max(1, Math.ceil(ordered.length / pageSize));
   const activePage = Math.min(Math.floor(pageStart / pageSize), totalPages - 1);
   if (pageStart >= ordered.length && pageStart !== 0) setPageStart(activePage * pageSize);
@@ -562,7 +597,6 @@ export function Collection({
         value={filter}
         onValueChange={(value) => {
           setFilter(value);
-          setPageStart(0);
         }}
       >
         <TabsList aria-label="Collection filter">
@@ -646,7 +680,28 @@ export function DeckCards({
   pile?: "draw" | "discard";
 }) {
   const compact = useCompactLayout();
-  const cards = game.cards
+  const owners =
+    game.phase === "draft"
+      ? game.selected.map((kind, index) => ({
+          id: `draft-${index}`,
+          species: kind,
+          health: species(kind).health,
+          block: 0,
+          attacked: false,
+        }))
+      : game.team;
+  const deck =
+    game.phase === "draft"
+      ? owners.flatMap((owner) =>
+          CARDS.filter((card) => card.species === owner.species).map((card) => ({
+            id: `${owner.id}:${card.id}`,
+            definitionId: card.id,
+            ownerId: owner.id,
+            level: 0,
+          })),
+        )
+      : game.cards;
+  const cards = deck
     .filter((card) => !pile || game.battle?.[pile].includes(card.id))
     .sort((a, b) => a.definitionId.localeCompare(b.definitionId) || a.id.localeCompare(b.id));
   return (
@@ -658,7 +713,7 @@ export function DeckCards({
       ) : null}
       <PagedItems items={cards} pageSize={compact ? 3 : 6} className="deck-grid" label="Deck pages">
         {(card) => {
-          const owner = game.team.find((c) => c.id === card.ownerId)!;
+          const owner = owners.find((c) => c.id === card.ownerId)!;
           return (
             <ActionCard
               key={card.id}

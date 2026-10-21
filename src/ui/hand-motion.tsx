@@ -11,8 +11,36 @@ type Pose = {
   height: number;
 };
 type Snapshot = Map<string, Pose>;
+type Props = { revision: number; turn?: number; opening?: boolean; paused: boolean; children: ReactNode };
+// Alchemy uses the CSS ease-in-out curve for one uninterrupted half-turn.
+function flipEase(time: number) {
+  if (time <= 0 || time >= 1) return time;
+  let low = 0,
+    high = 1;
+  for (let i = 0; i < 16; i++) {
+    const t = (low + high) / 2;
+    const x = 3 * (1 - t) ** 2 * t * 0.42 + 3 * (1 - t) * t * t * 0.58 + t ** 3;
+    if (x < time) low = t;
+    else high = t;
+  }
+  const t = (low + high) / 2;
+  return 3 * (1 - t) * t * t + t ** 3;
+}
+function discardRect(pile: DOMRect) {
+  const styles = getComputedStyle(document.documentElement);
+  const fraction = (token: string, fallback: number) => {
+    const value = Number.parseFloat(styles.getPropertyValue(token));
+    return Number.isFinite(value) ? value / 100 : fallback;
+  };
+  return {
+    x: pile.x + pile.width * fraction("--discard-top-x", 25 / 420),
+    y: pile.y + pile.height * fraction("--discard-top-y", 25 / 560),
+    width: pile.width * fraction("--discard-top-width", 328 / 420),
+    height: pile.height * fraction("--discard-top-height", 432 / 560),
+  };
+}
 /** Alchemy transfer/reflow choreography; committed cards and controls remain gameplay-owned. */
-export class HandMotion extends Component<{ revision: number; paused: boolean; children: ReactNode }> {
+export class HandMotion extends Component<Props> {
   private root = createRef<HTMLDivElement>();
   private animations = new Set<Animation>();
   private overlays = new Set<HTMLElement>();
@@ -73,36 +101,32 @@ export class HandMotion extends Component<{ revision: number; paused: boolean; c
     this.disposed = false;
     this.reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)");
     this.reduced?.addEventListener?.("change", this.motionChange);
-    for (const type of ["pointermove", "pointerdown", "keydown", "click", "resize", "blur"])
+    for (const type of ["pointerdown", "keydown", "click", "resize", "blur"])
       window.addEventListener(type, this.finish, true);
-    this.present(new Map());
+    if (this.props.opening) this.present(new Map());
   }
-  getSnapshotBeforeUpdate(previous: Readonly<{ revision: number }>): Snapshot {
+  getSnapshotBeforeUpdate(previous: Readonly<Props>): Snapshot {
     return previous.revision === this.props.revision ? new Map() : this.measure();
   }
-  componentDidUpdate(
-    previous: Readonly<{ revision: number; paused: boolean; children: ReactNode }>,
-    _: unknown,
-    before: Snapshot,
-  ) {
+  componentDidUpdate(previous: Readonly<Props>, _: unknown, before: Snapshot) {
     if (previous.revision === this.props.revision) {
       if (this.props.paused) this.finish();
       return;
     }
-    this.present(before);
+    this.present(before, previous.turn !== this.props.turn);
   }
-  private present(before: Snapshot) {
+  private present(before: Snapshot, newTurn = false) {
     this.finish();
     const after = this.measure();
     if (this.disposed || this.props.paused || this.reduced?.matches) return;
     const board = this.root.current?.closest(".battle-screen");
     if (!board) return;
-    const removed = [...before].filter(([id]) => !after.has(id)).reverse();
-    const added = [...after].filter(([id]) => !before.has(id));
+    const removed = [...before].filter(([id]) => newTurn || !after.has(id)).reverse();
+    const added = [...after].filter(([id]) => newTurn || !before.has(id));
     for (const [id, pose] of after) {
       const old = before.get(id);
       const layer = pose.node.closest(".hand-slot")?.querySelector<HTMLElement>(".hand-reflow");
-      if (!old || !layer?.animate) continue;
+      if (newTurn || !old || !layer?.animate) continue;
       const dx = old.rect.x - pose.rect.x,
         dy = old.rect.y - pose.rect.y;
       if (Math.abs(dx) + Math.abs(dy) < 0.5 && Math.abs(old.angle - pose.angle) < 0.05) continue;
@@ -155,7 +179,9 @@ export class HandMotion extends Component<{ revision: number; paused: boolean; c
       clone.classList.add("card-transfer");
       clone.style.position = "fixed";
       clone.style.margin = "0";
-      clone.style.zIndex = "40";
+      clone.style.zIndex = String(
+        40 + [...before.keys(), ...after.keys()].indexOf(flight.pose.node.dataset.cardId!),
+      );
       clone.style.transformOrigin = "center";
       clone.style.scale = "1";
       clone.style.translate = "none";
@@ -172,20 +198,21 @@ export class HandMotion extends Component<{ revision: number; paused: boolean; c
       const elapsed = performance.now() - now;
       for (const f of surfaces) {
         if (f.completed) continue;
-        if (elapsed < f.start) {
+        if (elapsed < f.start && f.draw) {
           f.clone.style.opacity = "0";
           continue;
         }
-        const t = Math.min(1, (elapsed - f.start) / f.duration),
+        const t = Math.max(0, Math.min(1, (elapsed - f.start) / f.duration)),
           p = 1 - (1 - t) ** 3;
-        const end = f.destination?.getBoundingClientRect();
-        if (!end?.width) {
+        const destination = f.destination?.getBoundingClientRect();
+        if (!destination?.width) {
           this.finish();
           return;
         }
+        const end = f.draw ? destination : discardRect(destination);
         const endScale = Number.parseFloat(getComputedStyle(f.destination!).scale) || 1;
-        const endWidth = f.destination!.offsetWidth * endScale || end.width,
-          endHeight = f.destination!.offsetHeight * endScale || end.height;
+        const endWidth = f.draw ? f.destination!.offsetWidth * endScale || end.width : end.width,
+          endHeight = f.draw ? f.destination!.offsetHeight * endScale || end.height : end.height;
         const startWidth = f.draw ? f.source.width : f.pose.width,
           startHeight = f.draw ? f.source.height : f.pose.height;
         const width = startWidth + (endWidth - startWidth) * p,
@@ -201,9 +228,13 @@ export class HandMotion extends Component<{ revision: number; paused: boolean; c
         const flipStart = f.draw ? 0.28 : 0.4,
           flipEnd = f.draw ? 0.82 : 0.95;
         const q = Math.max(0, Math.min(1, (t - flipStart) / (flipEnd - flipStart)));
-        const eased = q * q * (3 - 2 * q),
+        const eased = flipEase(q),
           flip = 180 * (f.draw ? 1 - eased : eased);
-        if (f.face) f.face.src = flip > 90 ? assetUrl("pile.placeholder") : f.front;
+        if (f.face) {
+          const back = flip > 90;
+          f.face.src = back ? assetUrl(f.draw ? "card.back" : "pile.discard") : f.front;
+          f.face.classList.toggle("discard-card-back", back && !f.draw);
+        }
         f.clone.style.opacity = t >= 1 ? "0" : "1";
         f.clone.style.left = `${cx - width / 2}px`;
         f.clone.style.top = `${cy - height / 2}px`;
@@ -225,7 +256,7 @@ export class HandMotion extends Component<{ revision: number; paused: boolean; c
     this.disposed = true;
     this.finish();
     this.reduced?.removeEventListener?.("change", this.motionChange);
-    for (const type of ["pointermove", "pointerdown", "keydown", "click", "resize", "blur"])
+    for (const type of ["pointerdown", "keydown", "click", "resize", "blur"])
       window.removeEventListener(type, this.finish, true);
   }
   render() {

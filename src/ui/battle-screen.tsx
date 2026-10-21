@@ -37,6 +37,7 @@ function FanSlot({ index, count, children }: { index: number; count: number; chi
     const style = ref.current!.style;
     style.setProperty("--fan-offset", String(offset));
     style.setProperty("--fan-order", String(index));
+    style.setProperty("--hand-count", String(count));
   }, [index, count]);
   return (
     <div className="hand-slot" ref={ref}>
@@ -57,6 +58,7 @@ export function BattleScreen({
   clearSelection = false,
   onManualStart,
   openPile,
+  openingDraw = false,
 }: {
   game: GameState;
   send: (command: Command) => boolean;
@@ -70,6 +72,7 @@ export function BattleScreen({
   onManualStart?: () => void;
   clearSelection?: boolean;
   openPile?: (pile: "draw" | "discard") => void;
+  openingDraw?: boolean;
 }) {
   const [selected, setSelected] = useState<string | null>(null);
   useEffect(() => {
@@ -358,78 +361,78 @@ export function BattleScreen({
           </>
         ) : null}
       </div>
-      <HandMotion revision={game.revision} paused={clearSelection}>
-        <section className="hand-section" aria-label="Action hand">
-          <div className="hand">
-            {visibleHand.map((id, index, hand) => {
-              const card = game.cards.find((c) => c.id === id)!,
-                owner = game.team.find((c) => c.id === card.ownerId)!;
-              return (
-                <FanSlot key={id} index={index} count={hand.length}>
-                  <ActionCard
-                    card={card}
-                    actor={owner}
-                    modifiers={game}
-                    ownerName={species(owner.species).name}
-                    selected={selected === id}
-                    disabled={battle.mana < cardCost(card, game) || controlled(owner)}
-                    onDenied={(element) => {
-                      setDenial(
-                        controlled(owner)
-                          ? `${species(owner.species).name} cannot act ${owner.combat?.controlled ? `while ${owner.combat.controlled === "freeze" ? "Frozen" : "Stunned"}` : "this turn"}.`
-                          : "Not enough Mana.",
-                      );
-                      onDenied(element);
-                    }}
-                    onInspect={() => inspect({ card })}
-                    onClick={() => {
-                      onManualStart?.();
-                      setHovered(null);
-                      setDenial("");
-                      setSelected((old) => (old === id ? null : id));
-                    }}
-                  />
-                </FanSlot>
-              );
-            })}
+      <HandMotion revision={game.revision} turn={battle.turn} opening={openingDraw} paused={clearSelection}>
+        <section className="hand-toolbar" aria-label="Battle cards and controls">
+          <div className="battle-dock" data-nav-row>
+            <ManaCrystals
+              mana={battle.mana}
+              maximum={battle.maxMana}
+              previewCost={card ? cardCost(card, game) : 0}
+            />
+            <div className="battle-pile">
+              <ArtCard
+                artwork={assetUrl("pile.draw")}
+                aspect="action"
+                data-pile="draw"
+                aria-label="Inspect Draw Pile"
+                onClick={() => openPile?.("draw")}
+              />
+            </div>
+          </div>
+          <section className="hand-section" aria-label="Action hand">
+            <div className="hand">
+              {visibleHand.map((id, index, hand) => {
+                const card = game.cards.find((c) => c.id === id)!,
+                  owner = game.team.find((c) => c.id === card.ownerId)!;
+                return (
+                  <FanSlot key={id} index={index} count={hand.length}>
+                    <ActionCard
+                      card={card}
+                      actor={owner}
+                      modifiers={game}
+                      ownerName={species(owner.species).name}
+                      selected={selected === id}
+                      disabled={battle.mana < cardCost(card, game) || controlled(owner)}
+                      onDenied={(element) => {
+                        setDenial(
+                          controlled(owner)
+                            ? `${species(owner.species).name} cannot act ${owner.combat?.controlled ? `while ${owner.combat.controlled === "freeze" ? "Frozen" : "Stunned"}` : "this turn"}.`
+                            : "Not enough Mana.",
+                        );
+                        onDenied(element);
+                      }}
+                      onInspect={() => inspect({ card })}
+                      onClick={() => {
+                        onManualStart?.();
+                        setHovered(null);
+                        setDenial("");
+                        setSelected((old) => (old === id ? null : id));
+                      }}
+                    />
+                  </FanSlot>
+                );
+              })}
+            </div>
+          </section>
+          <div className="battle-dock" data-nav-row>
+            <div className="battle-actions">
+              {actions}
+              <Button className="end-turn" onClick={() => play({ type: "endTurn" })}>
+                End turn{controller ? " · Y" : ""}
+              </Button>
+            </div>
+            <div className="battle-pile">
+              <ArtCard
+                artwork={assetUrl("pile.discard")}
+                aspect="action"
+                data-pile="discard"
+                aria-label="Inspect Discard Pile"
+                onClick={() => openPile?.("discard")}
+              />
+            </div>
           </div>
         </section>
       </HandMotion>
-      <div className="hand-toolbar">
-        <div className="battle-dock" data-nav-row>
-          <ManaCrystals
-            mana={battle.mana}
-            maximum={battle.maxMana}
-            previewCost={card ? cardCost(card, game) : 0}
-          />
-          <div className="battle-pile">
-            <ArtCard
-              artwork={assetUrl("pile.placeholder")}
-              aspect="action"
-              data-pile="draw"
-              aria-label="Inspect Draw Pile"
-              onClick={() => openPile?.("draw")}
-            />
-          </div>
-        </div>
-        <div className="battle-dock" data-nav-row>
-          <div className="battle-actions">
-            {actions}
-            <Button className="end-turn" onClick={() => play({ type: "endTurn" })}>
-              End turn{controller ? " · Y" : ""}
-            </Button>
-          </div>
-          <div className="battle-pile">
-            <ArtCard
-              artwork={assetUrl("pile.placeholder")}
-              aspect="action"
-              data-pile="discard"
-              aria-label="Inspect Discard Pile"
-              onClick={() => openPile?.("discard")}
-            />
-          </div>
-        </div>
-      </div>
       {line ? (
         <svg className="target-line" aria-hidden="true">
           <defs>

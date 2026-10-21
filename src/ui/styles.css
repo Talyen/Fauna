@@ -395,12 +395,14 @@ strong {
   z-index: 4;
 }
 .hand-section {
-  position: fixed;
-  bottom: var(--hand-rest-inset);
-  left: 0;
-  width: 100%;
+  position: relative;
+  flex: 0 1 auto;
+  width: calc(var(--battle-hand-available) + var(--hand-side-clearance) * 2);
+  max-width: calc(var(--battle-hand-width) * 7 - var(--hand-overlap) * 6 + var(--hand-side-clearance) * 2);
+  min-width: 0;
+  padding-inline: var(--hand-side-clearance);
+  translate: 0 var(--page-block-gutter);
   pointer-events: none;
-  clip-path: inset(calc(-1 * var(--battle-hand-height)) 0 calc(-1 * var(--hand-rest-inset)) 0);
   z-index: 3;
 }
 .hand-toolbar {
@@ -411,12 +413,15 @@ strong {
   min-height: var(--control-height);
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
+  justify-content: center;
+  gap: var(--battle-dock-gap);
   pointer-events: none;
   z-index: 5;
 }
-.hand-toolbar > * {
+.hand-toolbar > .battle-dock {
   pointer-events: auto;
+  flex: 0 0 var(--battle-pile-width);
+  width: var(--battle-pile-width);
 }
 .battle-actions {
   display: flex;
@@ -441,7 +446,13 @@ strong {
   z-index: var(--fan-order);
 }
 .hand-slot + .hand-slot {
-  margin-left: calc(-1 * var(--hand-overlap));
+  margin-left: min(
+    calc(-1 * var(--hand-overlap)),
+    calc(
+      (var(--battle-hand-available) - var(--battle-hand-width) * var(--hand-count)) /
+        max(1, var(--hand-count) - 1)
+    )
+  );
 }
 .hand-slot .action-card {
   width: 100%;
@@ -991,10 +1002,21 @@ strong {
   gap: var(--screen-section-gap);
 }
 .screen-heading {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  margin-inline: auto;
+  align-items: center;
+  gap: var(--screen-section-gap);
+  width: max-content;
+  max-width: 100%;
+}
+.screen-heading-actions {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: var(--screen-section-gap);
+  gap: var(--screen-item-gap);
+}
+.screen-heading > button {
+  justify-self: start;
 }
 .screen-heading > h1 {
   margin: 0;
@@ -1812,6 +1834,7 @@ strong {
 }
 .battle-pile > .action-card {
   width: var(--battle-pile-width);
+  background: transparent;
 }
 .battle-dock > .mana {
   align-items: flex-end;
@@ -2039,4 +2062,63 @@ body,
 .passive-tiers > h3 {
   color: var(--muted-foreground);
   font-size: var(--text-body);
+}
+
+.settings-panel[data-state="inactive"] {
+  visibility: hidden;
+  pointer-events: none;
+}
+.reward-screen:has(.recruit-comparison) {
+  width: min(calc(var(--art-landscape-width) * 4 + var(--screen-section-gap) * 3), 100%);
+}
+.recruit-comparison {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--screen-section-gap);
+}
+.incoming-recruit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--screen-item-gap);
+  flex: 0 0 var(--art-landscape-width);
+}
+.incoming-recruit .creature-wrap {
+  width: 100%;
+}
+.recruit-comparison > .paged-content {
+  min-width: 0;
+}
+.rest-recovery {
+  position: fixed;
+  left: var(--page-inline-gutter);
+  right: var(--page-inline-gutter);
+  bottom: var(--page-block-gutter);
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  gap: var(--screen-section-gap);
+}
+.rest-recovery > div {
+  flex: 1 1 0;
+  max-width: var(--art-landscape-width);
+  display: grid;
+  gap: var(--screen-item-gap);
+}
+.rest-recovery p {
+  font-size: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+.card-transfer {
+  overflow: hidden;
+}
+.card-transfer img.discard-card-back {
+  position: absolute;
+  max-width: none;
+  width: var(--discard-back-width);
+  height: var(--discard-back-height);
+  left: var(--discard-back-left);
+  top: var(--discard-back-top);
 }

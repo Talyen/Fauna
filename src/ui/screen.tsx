@@ -1,8 +1,11 @@
 import { createContext, useContext, type ComponentPropsWithRef, type ReactNode } from "react";
-import { ArrowLeft, Menu } from "lucide-react";
+import { ArrowLeft, Menu, Layers } from "lucide-react";
 import { Button } from "../components/ui/button";
 
-export const HeaderNavigation = createContext({ back: () => {}, openMenu: () => {} });
+export const HeaderNavigation = createContext<{ back: () => void; openMenu: () => void; deck?: () => void }>({
+  back: () => {},
+  openMenu: () => {},
+});
 
 export function ScreenHeading({
   children,
@@ -18,15 +21,28 @@ export function ScreenHeading({
   const navigation = useContext(HeaderNavigation);
   return (
     <div className="screen-heading">
-      <Button
-        variant="ghost"
-        size="icon"
-        className="compact-icon-control"
-        aria-label="Back"
-        onClick={back ?? navigation.back}
-      >
-        <ArrowLeft aria-hidden="true" />
-      </Button>
+      <div className="screen-heading-actions">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="compact-icon-control"
+          aria-label="Back"
+          onClick={back ?? navigation.back}
+        >
+          <ArrowLeft aria-hidden="true" />
+        </Button>
+        {navigation.deck ? (
+          <Button
+            variant="ghost"
+            size="icon"
+            className="compact-icon-control"
+            aria-label="Deck"
+            onClick={navigation.deck}
+          >
+            <Layers aria-hidden="true" />
+          </Button>
+        ) : null}
+      </div>
       <h1 id={id}>{children}</h1>
       <Button
         variant="ghost"

@@ -1,9 +1,10 @@
 // @vitest-environment jsdom
 import { afterEach, expect, it, vi } from "vitest";
-import { cleanup, fireEvent, render, waitFor } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, waitFor } from "@testing-library/react";
 import { useModalSurfaceRef } from "../../src/lib/modal-surface-ref";
 import { CreatureDetails } from "../../src/ui/card-details";
 import { Button } from "../../src/components/ui/button";
+import { assetUrl } from "../../src/ui/assets";
 import { HandMotion } from "../../src/ui/hand-motion";
 import { SurfaceTransition } from "../../src/ui/surface-transition";
 import { createCombatImpacts } from "../../src/ui/combat-impact";
@@ -213,4 +214,60 @@ it("retained modal pixels become inert and inaccessible, and a reversed close re
   expect(node.hasAttribute("aria-hidden")).toBe(false);
   view.unmount();
   expect(forwarded.current).toBeNull();
+});
+
+it("discards and redraws the same card identities on a new turn using the matching Alchemy backs", () => {
+  if (!HTMLElement.prototype.animate)
+    HTMLElement.prototype.animate = (() => ({})) as unknown as typeof HTMLElement.prototype.animate;
+  motionEnvironment();
+  let now = 0;
+  let frame: FrameRequestCallback = () => {};
+  vi.spyOn(performance, "now").mockImplementation(() => now);
+  vi.stubGlobal("requestAnimationFrame", (callback: FrameRequestCallback) => {
+    frame = callback;
+    return 1;
+  });
+  const hand = (turn: number) => (
+    <main className="battle-screen">
+      <HandMotion revision={turn} turn={turn} paused={false}>
+        <div className="hand">
+          {["one", "two"].map((id) => (
+            <div key={id} className="hand-slot">
+              <div className="hand-reflow">
+                <Button className="action-card" data-card-id={id}>
+                  <img src={`/${id}.webp`} alt="" />
+                </Button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </HandMotion>
+      <Button data-pile="draw">Draw</Button>
+      <Button data-pile="discard">Discard</Button>
+    </main>
+  );
+  const view = render(hand(1));
+  // Resuming a saved battle settles directly rather than replaying its opening draw.
+  expect(document.querySelector(".card-transfer")).toBeNull();
+  view.rerender(hand(2));
+  expect(document.querySelectorAll(".card-transfer")).toHaveLength(4);
+  const originals = [...view.container.querySelectorAll<HTMLElement>("[data-card-id]")];
+  expect(originals.every((card) => card.style.opacity === "0")).toBe(true);
+  fireEvent.pointerMove(originals[0]!);
+  expect(document.querySelectorAll(".card-transfer")).toHaveLength(4);
+  now = 420;
+  act(() => frame(now));
+  const discardBack = document.querySelector<HTMLImageElement>(".card-transfer img.discard-card-back")!;
+  expect(discardBack.getAttribute("src")).toBe(assetUrl("pile.discard"));
+  now = 1000;
+  act(() => frame(now));
+  expect(
+    [...document.querySelectorAll<HTMLImageElement>(".card-transfer img")].some(
+      (image) => image.getAttribute("src") === assetUrl("card.back"),
+    ),
+  ).toBe(true);
+  now = 2100;
+  act(() => frame(now));
+  expect(document.querySelector(".card-transfer")).toBeNull();
+  expect(originals.every((card) => card.style.opacity === "")).toBe(true);
 });

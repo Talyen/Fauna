@@ -662,7 +662,17 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                 </Screen>
               ) : null}
               <div className="play-surface" hidden={route !== "play"} inert={route !== "play"}>
-                <HeaderNavigation.Provider value={{ back: () => setRoute("home"), openMenu }}>
+                <HeaderNavigation.Provider
+                  value={{
+                    back: () => setRoute("home"),
+                    openMenu,
+                    deck: ["draft", "teamSelection", "recruit", "boon", "support", "campfire"].includes(
+                      game.phase,
+                    )
+                      ? () => openModal("deck")
+                      : undefined,
+                  }}
+                >
                   {game.phase === "battle" ? (
                     <Button
                       variant="ghost"
@@ -704,7 +714,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                       game={game}
                       send={send}
                       inspect={setInspection}
-                      deck={() => openModal("deck")}
+                      recovery={view.committedCommand?.type === "rest" ? view.events : undefined}
                     />
                   ) : game.phase === "support" ? (
                     <SupportScreen game={game} send={send} />
@@ -718,6 +728,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                       }
                       onManualStart={() => setAutoplay(false)}
                       openPile={(pile) => openModal(pile)}
+                      openingDraw={view.committedCommand?.type === "beginBattle"}
                       actions={
                         <>
                           <Button

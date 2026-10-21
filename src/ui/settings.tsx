@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { Session } from "../application/session";
 import { DisplaySettings } from "./platform-settings";
 import { Monitor, Headphones, Swords, CaseSensitive, MessageSquareText, StepForward } from "lucide-react";
@@ -31,8 +32,9 @@ export function Settings({
   autoEndTurn: boolean;
   setAutoEndTurn: (value: boolean) => void;
 }) {
+  const [tab, setTab] = useState("display");
   return (
-    <Tabs defaultValue="display" className="settings-controls">
+    <Tabs value={tab} onValueChange={setTab} className="settings-controls">
       <TabsList data-nav-row aria-label="Settings categories" className="settings-tabs">
         <TabsTrigger value="display">
           <Monitor aria-hidden="true" />
@@ -47,7 +49,13 @@ export function Settings({
           Battle
         </TabsTrigger>
       </TabsList>
-      <TabsContent value="display" className="settings-panel">
+      <TabsContent
+        value="display"
+        forceMount
+        inert={tab !== "display"}
+        aria-hidden={tab !== "display"}
+        className="settings-panel"
+      >
         <h2 className="settings-heading">Display</h2>
         {session ? <DisplaySettings session={session} /> : null}
         <SettingRow icon={CaseSensitive} label="Text size">
@@ -83,10 +91,22 @@ export function Settings({
           </RadioGroup>
         </SettingRow>
       </TabsContent>
-      <TabsContent value="sound" className="settings-panel">
+      <TabsContent
+        value="sound"
+        forceMount
+        inert={tab !== "sound"}
+        aria-hidden={tab !== "sound"}
+        className="settings-panel"
+      >
         <AudioSettings value={audio} update={updateAudio} />
       </TabsContent>
-      <TabsContent value="battle" className="settings-panel">
+      <TabsContent
+        value="battle"
+        forceMount
+        inert={tab !== "battle"}
+        aria-hidden={tab !== "battle"}
+        className="settings-panel"
+      >
         <h2 className="settings-heading">Battle</h2>
         <SettingToggle
           icon={StepForward}

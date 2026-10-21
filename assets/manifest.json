@@ -299,17 +299,6 @@
       "rights": "Existing Fauna asset provenance in Docs/CONTENT.md"
     },
     {
-      "id": "pile.placeholder",
-      "origin": "repository",
-      "source": "public/art/relic-placeholder.svg",
-      "output": "art/relic-placeholder.svg",
-      "recipe": "copy",
-      "kind": "art",
-      "aspect": [3, 4],
-      "provenance": "Fauna existing artwork; keyword artwork adapted from Alchemy",
-      "rights": "Existing Fauna asset provenance in Docs/CONTENT.md"
-    },
-    {
       "id": "action.silkmoth",
       "origin": "repository",
       "source": "public/art/silkmoth-action.svg",
@@ -823,6 +812,39 @@
       "aspect": [3, 4],
       "provenance": "Copied from Alchemy src/assets/optimized/lucky-clover.webp; same user-owned project artwork",
       "rights": "Existing Alchemy project artwork reused with user authorization"
+    },
+    {
+      "id": "pile.draw",
+      "origin": "repository",
+      "source": "public/art/battle/draw-pile.webp",
+      "output": "art/battle/draw-pile.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Alchemy optimized artwork: draw-pile.webp",
+      "rights": "Existing shared Alchemy artwork; reuse authorized by the user. See Docs/CONTENT.md"
+    },
+    {
+      "id": "pile.discard",
+      "origin": "repository",
+      "source": "public/art/battle/discard-pile.webp",
+      "output": "art/battle/discard-pile.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Alchemy optimized artwork: discard-pile.webp",
+      "rights": "Existing shared Alchemy artwork; reuse authorized by the user. See Docs/CONTENT.md"
+    },
+    {
+      "id": "card.back",
+      "origin": "repository",
+      "source": "public/art/battle/card-back.webp",
+      "output": "art/battle/card-back.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Alchemy optimized artwork: card-back.webp",
+      "rights": "Existing shared Alchemy artwork; reuse authorized by the user. See Docs/CONTENT.md"
     }
   ]
 }
