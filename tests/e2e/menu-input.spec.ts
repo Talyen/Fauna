@@ -2,6 +2,8 @@ import { captureScreen } from "./rendered-evidence";
 import { test, expect, type Page, type Locator } from "@playwright/test";
 import { accept, run } from "../unit/helpers";
 import { createGame } from "../../src/game/engine";
+import { produce } from "immer";
+import { BOONS } from "../../src/game/content";
 
 async function expectCenteredMenu(choices: Locator) {
   const buttons = await choices.locator("button").evaluateAll((elements) =>
@@ -70,8 +72,13 @@ test("held Escape closes only the current menu level", async ({ page }) => {
 
 test("minimum-size enlarged menus fit every action without scrolling", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
-  // A new journey's destination screen exposes the optional Lineup menu entry.
-  const game = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
+  // Include both optional entries so the tallest browser menu must fit.
+  const game = produce(
+    accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" }),
+    (draft) => {
+      draft.boons = [BOONS[0]!.id];
+    },
+  );
   await page.addInitScript((value) => {
     localStorage.setItem("fauna.text-scale", "1.25");
     localStorage.setItem("fauna.save.v1", value);
@@ -105,6 +112,7 @@ test("minimum-size enlarged menus fit every action without scrolling", async ({ 
     "Lineup",
     "Talents",
     "Collection",
+    "Boons",
     "Glossary",
     "Settings",
     "End journey",

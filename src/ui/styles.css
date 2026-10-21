@@ -156,6 +156,13 @@ strong {
   width: var(--pause-menu-width);
   max-width: calc(100vw - var(--space-8));
 }
+/* Radix shifts along the anchor's width. Keep tall menus inside its vertical collision boundary too. */
+.menu-panel[data-side="bottom"] {
+  translate: 0 min(0px, calc(var(--radix-popover-content-available-height) - 100%));
+}
+.menu-panel[data-side="top"] {
+  translate: 0 max(0px, calc(100% - var(--radix-popover-content-available-height)));
+}
 .pause-menu-choices {
   display: flex;
   flex-direction: column;
