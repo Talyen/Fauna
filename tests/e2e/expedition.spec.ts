@@ -469,7 +469,7 @@ test("talents purchase immediately, gate rows, reset a category, and return to t
   await resume(page);
   await page.getByRole("button", { name: "Open menu" }).click();
   await page.getByRole("button", { name: "Talents", exact: true }).click();
-  await page.getByRole("tab", { name: "Fire / Burn", exact: true }).click();
+  await page.getByRole("tab", { name: "Burn", exact: true }).click();
   await page.getByRole("button", { name: "Melting Point", exact: true }).click();
   await page.getByRole("button", { name: "Flashpoint", exact: true }).click();
   expect((await state(page)).talents).toHaveLength(2);
@@ -667,7 +667,7 @@ for (const [width, height] of [
     await page.getByRole("button", { name: "Open menu" }).click();
     await page.getByRole("button", { name: "Talents", exact: true }).click();
     await fits(page);
-    await page.getByRole("tab", { name: "Fire / Burn", exact: true }).click();
+    await page.getByRole("tab", { name: "Burn", exact: true }).click();
     await page.waitForTimeout(180);
     await page.screenshot({ path: `reports/implementation/talents-${width}.png` });
     await page.keyboard.press("Escape");
@@ -846,7 +846,7 @@ test("shadcn tabs and settings retain native keyboard behavior and game navigati
   const physical = page.getByRole("tab", { name: "Physical", exact: true });
   await physical.focus();
   await page.keyboard.press("ArrowRight");
-  const fire = page.getByRole("tab", { name: "Fire / Burn", exact: true });
+  const fire = page.getByRole("tab", { name: "Burn", exact: true });
   await expect(fire).toBeFocused();
   await expect(fire).toHaveAttribute("aria-selected", "true");
   await expect(page.getByRole("tabpanel")).toHaveAttribute(
@@ -854,7 +854,7 @@ test("shadcn tabs and settings retain native keyboard behavior and game navigati
     (await fire.getAttribute("id")) as string,
   );
   await page.keyboard.press("d");
-  await expect(page.getByRole("tab", { name: "Ice / Freeze", exact: true })).toBeFocused();
+  await expect(page.getByRole("tab", { name: "Freeze", exact: true })).toBeFocused();
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "Settings", exact: true }).click();
   await page.getByRole("tab", { name: "Sound", exact: true }).click();
@@ -1041,7 +1041,7 @@ test("controller navigation preserves its device mode and can confirm a pointer-
   await page.getByRole("button", { name: "Talents", exact: true }).click();
   await page.getByRole("tab", { name: "Physical", exact: true }).focus();
   await press(15);
-  await expect(page.getByRole("tab", { name: "Fire / Burn", exact: true })).toBeFocused();
+  await expect(page.getByRole("tab", { name: "Burn", exact: true })).toBeFocused();
   await expect(page.locator(".app")).toHaveAttribute("data-input", "controller");
   await press(1);
   await resume(page);

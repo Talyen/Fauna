@@ -303,7 +303,7 @@ test("pointer use has no native or shadcn focus decoration in settings, tabs or 
   await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
   await noDecoration();
   await page.getByRole("button", { name: "Talents", exact: true }).click();
-  await page.getByRole("tab", { name: "Fire / Burn", exact: true }).click();
+  await page.getByRole("tab", { name: "Burn", exact: true }).click();
   await noDecoration();
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "End journey", exact: true }).click();

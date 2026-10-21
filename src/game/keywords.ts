@@ -169,10 +169,7 @@ const progressionCategory: Partial<Record<KeywordId, ProgressionKeyword>> = {
   cleanse: "heal",
   purge: "light",
 };
-export const progressionLabel = (id: ProgressionKeyword) =>
-  ({ burn: "Fire / Burn", freeze: "Ice / Freeze", stun: "Lightning / Stun" })[
-    id as "burn" | "freeze" | "stun"
-  ] ?? keywordLabel(id);
+export const progressionLabel = (id: ProgressionKeyword) => keywordLabel(id === "heal" ? "health" : id);
 export const EFFECT_KEYWORDS = freeze(
   {
     attack: [],
