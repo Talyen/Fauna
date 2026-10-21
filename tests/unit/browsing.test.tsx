@@ -32,6 +32,8 @@ describe("menu browsing", () => {
   it("explains talents before hover and updates requirements after purchases and category reset", async () => {
     const game = produce(createGame(7), (draft) => {
       draft.keywordXP.physical = 10;
+      draft.keywordXP.block = 10;
+      draft.talents = ["block.second-wind"];
     });
     localStorage.setItem("fauna.save.v1", JSON.stringify(game));
     const session = createSession(createBrowserPlatform(localStorage), 7);
@@ -40,7 +42,17 @@ describe("menu browsing", () => {
     render(<App session={session} />);
     try {
       await user.click(screen.getByRole("button", { name: "Talents" }));
-      await user.click(screen.getByRole("button", { name: "Physical talents" }));
+      const physical = screen.getByRole("button", { name: "Physical talents" });
+      expect(document.getElementById(physical.getAttribute("aria-describedby")!)?.textContent).toBe(
+        "1 point available",
+      );
+      expect(screen.getByRole("button", { name: "Block talents" }).hasAttribute("aria-describedby")).toBe(
+        false,
+      );
+      await user.click(physical);
+      expect(screen.getByRole("button", { name: "Reset Physical talents" }).hasAttribute("disabled")).toBe(
+        true,
+      );
       const slam = screen.getByRole("button", { name: "Shield Slam" });
       expect(slam.textContent).toContain("Add half your Block to Physical damage.");
       expect(within(slam).getByText("Unlock · 1 point")).toBeTruthy();
@@ -51,8 +63,12 @@ describe("menu browsing", () => {
       const revision = session.store.getState().game.revision;
       await user.click(fists);
       expect(session.store.getState().game.revision).toBe(revision);
-      await user.click(screen.getByRole("button", { name: "Reset category" }));
-      expect(session.store.getState().game.talents).toEqual([]);
+      await user.click(screen.getByRole("button", { name: "Reset Physical talents" }));
+      expect(session.store.getState().game.talents).toEqual(["block.second-wind"]);
+      expect(session.store.getState().game.keywordXP).toEqual(game.keywordXP);
+      expect(screen.getByRole("button", { name: "Reset Physical talents" }).hasAttribute("disabled")).toBe(
+        true,
+      );
       expect(within(fists).getByText("Unlock · 1 point")).toBeTruthy();
       await user.keyboard("{Escape}");
       expect(screen.getByRole("button", { name: "Physical talents" })).toBeTruthy();

@@ -364,42 +364,68 @@ export function Talents({
     mana: "ice",
   };
   return (
-    <main className="talents-screen" ref={screen}>
-      <header className="page-heading">
-        <h1>{keyword ? keywordLabel(keyword) : "Talents"}</h1>
+    <main className="talents-screen" data-view={keyword ? "tree" : "overview"} ref={screen}>
+      <header className="page-heading talents-heading">
         <Button variant="outline" onClick={() => (keyword ? setKeyword(null) : back())}>
           Back
         </Button>
+        <h1>{keyword ? keywordLabel(keyword) : "Talents"}</h1>
+        {keyword ? (
+          <Button
+            variant="ghost"
+            disabled={!game.talents.some((id) => id.startsWith(`${keyword}.`))}
+            onClick={() => {
+              if (send({ type: "resetTalents", keyword }))
+                screen.current?.querySelector<HTMLElement>(".talent-node")?.focus();
+            }}
+          >
+            Reset {keywordLabel(keyword)} talents
+          </Button>
+        ) : null}
       </header>
       {keyword === null ? (
-        <div className="talent-overview">
-          {KEYWORDS.map((id) => (
-            <section className="reward-option" key={id}>
-              <ArtCard
-                aspect="action"
-                artwork={assetUrl(`keyword.${artwork[id]}`)}
-                data-talent-keyword={id}
-                aria-label={`${keywordLabel(id)} talents`}
-                onClick={() => setKeyword(id)}
-              />
-              <h2>{keywordLabel(id)}</h2>
-            </section>
-          ))}
+        <div className="talent-overview-viewport">
+          <div className="talent-overview">
+            {KEYWORDS.map((id) => {
+              const points = availablePoints(game, id);
+              return (
+                <section className="talent-category" key={id}>
+                  <ArtCard
+                    aspect="action"
+                    artwork={assetUrl(`keyword.${artwork[id]}`)}
+                    data-talent-keyword={id}
+                    aria-label={`${keywordLabel(id)} talents`}
+                    aria-describedby={points > 0 ? `${id}-available-points` : undefined}
+                    onClick={() => setKeyword(id)}
+                  />
+                  <h2>{keywordLabel(id)}</h2>
+                  <p className="talent-category-points" id={`${id}-available-points`}>
+                    {points > 0 ? `${points} ${points === 1 ? "point" : "points"} available` : null}
+                  </p>
+                </section>
+              );
+            })}
+          </div>
         </div>
       ) : (
         <>
-          <div className="talent-progress">
-            <span>{availablePoints(game, keyword)} points available</span>
-            <span>
-              {p.current} / {p.required} XP
-            </span>
+          <div className="talent-progress-group">
+            <div className="talent-progress">
+              <span aria-live="polite" aria-atomic="true">
+                {availablePoints(game, keyword)} {availablePoints(game, keyword) === 1 ? "point" : "points"}{" "}
+                available
+              </span>
+              <span>
+                {p.current} / {p.required} XP
+              </span>
+            </div>
+            <Progress
+              value={p.current}
+              maximum={p.required}
+              label={`${keywordLabel(keyword)} XP`}
+              tone={keyword}
+            />
           </div>
-          <Progress
-            value={p.current}
-            maximum={p.required}
-            label={`${keywordLabel(keyword)} XP`}
-            tone={keyword}
-          />
           <div className="talent-tree">
             {[
               ...new Set(TALENTS.filter((talent) => talent.keyword === keyword).map((talent) => talent.row)),
@@ -438,10 +464,12 @@ export function Talents({
                             if (available && send({ type: "buyTalent", talentId: t.id })) setPurchased(t.id);
                           }}
                         >
-                          <span data-keyword={keyword}>
-                            <TalentSymbol className="talent-icon" aria-hidden="true" />
+                          <span className="talent-card-heading">
+                            <span data-keyword={keyword}>
+                              <TalentSymbol className="talent-icon" aria-hidden="true" />
+                            </span>
+                            <span className="talent-name">{t.name}</span>
                           </span>
-                          <span className="talent-name">{t.name}</span>
                           <span className="talent-effect" id={`${t.id}-effect`}>
                             <KeywordText text={t.text} />
                           </span>
@@ -465,18 +493,6 @@ export function Talents({
               </div>
             ))}
           </div>
-          <footer className="reward-footer">
-            <Button
-              variant="ghost"
-              disabled={!game.talents.some((id) => id.startsWith(`${keyword}.`))}
-              onClick={() => {
-                if (send({ type: "resetTalents", keyword }))
-                  screen.current?.querySelector<HTMLElement>(".talent-node")?.focus();
-              }}
-            >
-              Reset category
-            </Button>
-          </footer>
         </>
       )}
     </main>

@@ -418,15 +418,6 @@ h3 {
     scale: 1.1;
   }
 }
-.talent-overview {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--screen-section-gap);
-}
-.talent-overview .reward-option {
-  width: var(--art-portrait-width);
-}
 .game-button.talent-node {
   background: var(--background);
   color: var(--foreground);
@@ -441,10 +432,15 @@ h3 {
 }
 .game-button.talent-node[aria-disabled="true"][data-owned="false"] {
   opacity: var(--unavailable-opacity);
+  cursor: default;
 }
 .game-button.talent-node[data-owned="true"] {
   opacity: 1;
-  border-color: var(--border);
+  border-color: var(--primary);
+}
+.game-button.talent-node[data-available="true"] .talent-status,
+.talent-category-points {
+  color: var(--primary);
 }
 .talent-node .talent-icon {
   color: var(--keyword-icon-color, currentColor);
@@ -456,7 +452,7 @@ h3 {
 .talent-node[data-owned="true"] .talent-icon {
   opacity: 1;
 }
-.talent-node:hover .talent-icon {
+.talent-node[data-available="true"]:hover .talent-icon {
   filter: brightness(1.2);
 }
 .talent-node[data-keyword] {
@@ -474,10 +470,10 @@ h3 {
 }
 @keyframes talent-purchased {
   from {
-    border-color: var(--primary);
+    border-color: var(--foreground);
   }
   to {
-    border-color: var(--border);
+    border-color: var(--primary);
   }
 }
 .collection-pagination button[data-unavailable="true"] {

@@ -23,7 +23,7 @@ const statusOrder: readonly string[] = [
   "freeCard",
 ];
 type Status = { id: string; text: string; count: number; exit?: boolean; changed?: boolean };
-export function CombatStatus({ combat, details = false }: { combat?: CombatState; details?: boolean }) {
+export function combatStatuses(combat?: CombatState): Status[] {
   const entries: Status[] = combat
     ? stats
         .filter((id) => combat[id] > 0)
@@ -64,6 +64,10 @@ export function CombatStatus({ combat, details = false }: { combat?: CombatState
     ] as const;
     for (const [id, count, text] of pending) if (count) entries.push({ id, count, text });
   }
+  return entries;
+}
+export function CombatStatus({ combat, details = false }: { combat?: CombatState; details?: boolean }) {
+  const entries = combatStatuses(combat);
   const root = useRef<HTMLDivElement>(null);
   const signature = JSON.stringify(entries);
   const [shown, setShown] = useState(entries);

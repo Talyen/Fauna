@@ -87,6 +87,15 @@
   --unavailable-opacity: 0.45;
   --disabled-opacity: 0.5;
   --pressed-scale: 0.98;
+  --target-actor-width: 1px;
+  --target-bracket-width: 2px;
+  --target-bracket-gap: 6px;
+  --target-corner: 16px;
+  --target-summary-width: 480px;
+  --target-control-height: calc(96px * var(--text-scale, 1));
+  --target-readout-height: 60px;
+  --target-outcomes-height: 44px;
+  --target-denial-duration: 2400ms;
   --selection-gap: 3px;
   --selection-width: 2px;
   --progress-height: 8px;
@@ -115,7 +124,10 @@
   --feedback-critical: #fcd34d;
   --feedback-critical-clear: #fcd34d00;
   --feedback-critical-flash: #fff7ed;
-  /* Fixed CSS-pixel artwork sizes; layouts reflow instead of scaling artwork. */
+  /* Only talents overview art scales to fit; all other artwork keeps fixed CSS-pixel sizes. */
+  --talent-overview-art-width: 160px;
+  --talent-card-width: 328px;
+  --talent-card-min-height: 168px;
   --art-standard-short-side: 200px;
   --art-short-side: var(--art-standard-short-side);
   --page-inline-gutter: 32px;

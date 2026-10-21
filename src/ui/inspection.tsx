@@ -110,7 +110,7 @@ export function Inspector({
           returnFocus(opener);
         }}
       >
-        <header className="inspection-back">
+        <header className="inspection-back" data-nav-row>
           <Button
             ref={backButton}
             variant="ghost"

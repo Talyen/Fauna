@@ -1,4 +1,7 @@
 import { HandMotion } from "./hand-motion";
+import { combatStatuses } from "./combat-status";
+import { motionValue } from "./motion-values";
+import { ActionDetails } from "./card-details";
 import { cardCost } from "../game/rules";
 import { controlled } from "../game/combat";
 import { ArtCard } from "./art-card";
@@ -7,6 +10,7 @@ import {
   useCallback,
   useEffect,
   useLayoutEffect,
+  useMemo,
   useRef,
   useState,
   type MutableRefObject,
@@ -72,6 +76,13 @@ export function BattleScreen({
   useEffect(() => {
     if (clearSelection) setSelected(null);
   }, [clearSelection]);
+  const [hovered, setHovered] = useState<string | null>(null);
+  const [denial, setDenial] = useState("");
+  useEffect(() => {
+    if (!denial) return;
+    const timer = setTimeout(() => setDenial(""), motionValue("--target-denial-duration"));
+    return () => clearTimeout(timer);
+  }, [denial]);
   const [remembered, setRemembered] = useState<{ enemy?: string; ally?: string }>({});
   const board = useRef<HTMLElement>(null);
   const [line, setLine] = useState("");
@@ -90,13 +101,47 @@ export function BattleScreen({
       ? game.team.filter((c) => c.health > 0).map((c) => c.id)
       : [];
   const last = enemyTarget ? remembered.enemy : remembered.ally;
-  const target = targets.includes(last ?? "") ? last : targets[0];
-  const setTarget = (id: string) =>
-    setRemembered((old) => ({ ...old, [id.startsWith("enemy-") ? "enemy" : "ally"]: id }));
-  const preview = selected ? previewPlay(game, selected, target) : null;
+  const navigationTarget = targets.includes(last ?? "") ? last : targets[0];
+  const target = navigateFocus ? navigationTarget : targets.includes(hovered ?? "") ? hovered! : undefined;
+  const setTarget = (id: string) => {
+    setHovered(id);
+    const side = enemyTarget ? "enemy" : "ally";
+    setRemembered((old) => (old[side] === id ? old : { ...old, [side]: id }));
+  };
+  const teamTarget = def?.effect === "teamGuard";
+  const preview = useMemo(
+    () => (selected && (target || teamTarget) ? previewPlay(game, selected, target) : null),
+    [game, selected, target, teamTarget],
+  );
+  const affected = new Set(
+    preview?.events.flatMap((event) => (event.targetId ? [event.targetId] : [])) ?? [],
+  );
+  if (preview?.accepted) {
+    for (const unit of [...game.team, ...battle.enemies]) {
+      const next = [...preview.state.team, ...(preview.state.battle?.enemies ?? [])].find(
+        (candidate) => candidate.id === unit.id,
+      );
+      if (
+        next &&
+        (next.health !== unit.health ||
+          next.block !== unit.block ||
+          JSON.stringify(combatStatuses(next.combat)) !== JSON.stringify(combatStatuses(unit.combat)))
+      )
+        affected.add(unit.id);
+    }
+  }
+  if (target) affected.add(target);
+  if (def?.effect === "teamGuard")
+    game.team.filter((unit) => unit.health > 0).forEach((unit) => affected.add(unit.id));
+  const allyRecipient = game.team.find((unit) => unit.id === target);
+  const recipient =
+    battle.enemies.find((unit) => unit.id === target)?.name ??
+    (allyRecipient ? species(allyRecipient.species).name : undefined);
   const play = (command: Command) => {
     if (!send(command)) return;
     setSelected(null);
+    setHovered(null);
+    setDenial("");
     focusAfterCommand.current = navigateFocus ? Math.max(0, visibleHand.indexOf(selected ?? "")) : null;
   };
   useLayoutEffect(() => {
@@ -110,6 +155,7 @@ export function BattleScreen({
   const cancel = useCallback(() => {
     const opener = board.current?.querySelector<HTMLElement>(`[data-card-id="${selected}"]`) ?? null;
     setSelected(null);
+    setHovered(null);
     if (navigateFocus) returnFocus(opener);
   }, [selected, navigateFocus]);
   useEffect(() => {
@@ -137,7 +183,10 @@ export function BattleScreen({
     }
     if (selected && targets.length && (action === "left" || action === "right")) {
       const next =
-        targets[(targets.indexOf(target!) + (action === "left" ? -1 : 1) + targets.length) % targets.length]!;
+        targets[
+          (targets.indexOf(navigationTarget!) + (action === "left" ? -1 : 1) + targets.length) %
+            targets.length
+        ]!;
       setTarget(next);
       // Navigation may start from another row, including when only one target remains.
       board.current?.querySelector<HTMLElement>(`[data-actor-id="${next}"] .creature-card`)?.focus();
@@ -162,14 +211,14 @@ export function BattleScreen({
       const root = board.current;
       const actor = root?.querySelector(`[data-actor-id="${card?.ownerId}"] .creature-card`);
       const recipient = root?.querySelector(`[data-actor-id="${target}"] .creature-card`);
-      if (!root || !actor || !recipient || !selected) {
+      if (!root || !actor || !recipient || !selected || !target) {
         setLine("");
         return;
       }
       const origin = root.getBoundingClientRect(),
         a = actor.getBoundingClientRect(),
         b = recipient.getBoundingClientRect();
-      const x = a.x + a.width / 2 - origin.x + root.scrollLeft,
+      const x = a.x + (card?.ownerId === target ? 0 : a.width / 2) - origin.x + root.scrollLeft,
         y = a.y - origin.y - 8 + root.scrollTop,
         endX = allyTarget
           ? b.x + b.width / 2 - origin.x + root.scrollLeft
@@ -199,12 +248,16 @@ export function BattleScreen({
           <EnemyCard
             key={enemy.id}
             enemy={enemy}
+            tooltips={!selected}
             invalidTarget={!!selected && (!enemyTarget || enemy.health <= 0)}
+            validTarget={!!selected && enemyTarget && enemy.health > 0}
+            activeTarget={!!selected && target === enemy.id}
+            onPreviewEnd={() => setHovered((old) => (old === enemy.id ? null : old))}
             onPreview={() => {
               if (selected && enemyTarget && enemy.health > 0) setTarget(enemy.id);
             }}
             preview={
-              selected && enemyTarget && target === enemy.id ? (
+              selected && affected.has(enemy.id) ? (
                 <TargetPreview before={game} result={preview} targetId={enemy.id} />
               ) : undefined
             }
@@ -222,27 +275,19 @@ export function BattleScreen({
           />
         ))}
       </section>
-      <div className="target-control">
-        {selected ? (
-          <>
-            {def?.effect === "teamGuard" ? (
-              <Button className="confirm-play" onClick={() => play({ type: "play", cardId: selected })}>
-                Play · {controller ? "A" : "Enter"}
-              </Button>
-            ) : null}
-            <Button variant="outline" onClick={cancel}>
-              Cancel
-            </Button>
-          </>
-        ) : null}
-      </div>
       <section className="player-row" aria-label="Player row">
         {game.team.map((creature) => (
           <AllyCard
             progression={game}
             key={creature.id}
             creature={creature}
-            selected={card?.ownerId === creature.id}
+            tooltips={!selected}
+            acting={card?.ownerId === creature.id}
+            validTarget={!!selected && creature.health > 0 && (allyTarget || def?.effect === "teamGuard")}
+            activeTarget={
+              !!selected && creature.health > 0 && (target === creature.id || def?.effect === "teamGuard")
+            }
+            onPreviewEnd={() => setHovered((old) => (old === creature.id ? null : old))}
             invalidTarget={
               !!selected && ((!allyTarget && def?.effect !== "teamGuard") || creature.health <= 0)
             }
@@ -250,7 +295,7 @@ export function BattleScreen({
               if (selected && allyTarget && creature.health > 0) setTarget(creature.id);
             }}
             preview={
-              selected && ((allyTarget && target === creature.id) || def?.effect === "teamGuard") ? (
+              selected && affected.has(creature.id) ? (
                 <TargetPreview before={game} result={preview} targetId={creature.id} />
               ) : undefined
             }
@@ -270,6 +315,49 @@ export function BattleScreen({
           />
         ))}
       </section>
+      <div className="target-control">
+        <div className="target-summary" role="status" aria-live="polite">
+          {denial ? (
+            <p>{denial}</p>
+          ) : card && def ? (
+            <>
+              <p>
+                {species(def.species).name} ·{" "}
+                {recipient ??
+                  (def.effect === "teamGuard"
+                    ? "All allies"
+                    : enemyTarget
+                      ? "Choose an enemy"
+                      : "Choose an ally")}
+              </p>
+              <ActionDetails
+                compact
+                card={card}
+                ownerName={species(def.species).name}
+                actor={game.team.find((unit) => unit.id === card.ownerId)}
+                modifiers={game}
+              />
+              {preview?.events
+                .filter((event) => event.kind === "status" && !event.targetId)
+                .map((event, index) => (
+                  <p key={index}>{event.text}</p>
+                ))}
+            </>
+          ) : null}
+        </div>
+        {selected ? (
+          <>
+            {def?.effect === "teamGuard" ? (
+              <Button className="confirm-play" onClick={() => play({ type: "play", cardId: selected })}>
+                Play · {controller ? "A" : "Enter"}
+              </Button>
+            ) : null}
+            <Button variant="outline" onClick={cancel}>
+              Cancel
+            </Button>
+          </>
+        ) : null}
+      </div>
       <HandMotion revision={game.revision} paused={clearSelection}>
         <section className="hand-section" aria-label="Action hand">
           <div className="hand">
@@ -285,10 +373,19 @@ export function BattleScreen({
                     ownerName={species(owner.species).name}
                     selected={selected === id}
                     disabled={battle.mana < cardCost(card, game) || controlled(owner)}
-                    onDenied={onDenied}
+                    onDenied={(element) => {
+                      setDenial(
+                        controlled(owner)
+                          ? `${species(owner.species).name} cannot act ${owner.combat?.controlled ? `while ${owner.combat.controlled === "freeze" ? "Frozen" : "Stunned"}` : "this turn"}.`
+                          : "Not enough Mana.",
+                      );
+                      onDenied(element);
+                    }}
                     onInspect={() => inspect({ card })}
                     onClick={() => {
                       onManualStart?.();
+                      setHovered(null);
+                      setDenial("");
                       setSelected((old) => (old === id ? null : id));
                     }}
                   />
@@ -327,7 +424,20 @@ export function BattleScreen({
       </div>
       {line ? (
         <svg className="target-line" aria-hidden="true">
-          <path d={line} />
+          <defs>
+            <marker
+              id="target-arrow"
+              markerWidth="8"
+              markerHeight="8"
+              refX="6"
+              refY="3"
+              orient="auto"
+              markerUnits="strokeWidth"
+            >
+              <path d="M 0 0 L 6 3 L 0 6" />
+            </marker>
+          </defs>
+          <path d={line} markerEnd="url(#target-arrow)" />
         </svg>
       ) : null}
     </main>

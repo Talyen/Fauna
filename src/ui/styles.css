@@ -319,11 +319,8 @@ strong {
   align-items: center;
   justify-content: center;
   gap: var(--screen-item-gap);
-  min-height: var(--control-height);
+  height: var(--target-control-height);
   z-index: 4;
-}
-.target-control:empty {
-  visibility: hidden;
 }
 .hand-section {
   position: fixed;
@@ -455,9 +452,73 @@ strong {
   width: 14px;
   height: 14px;
 }
-.creature-wrap:has(.target-preview) .creature-card {
-  outline: 1px solid var(--selected);
-  outline-offset: 2px;
+.battle-screen .creature-card {
+  overflow: visible;
+}
+.battle-screen :is(.enemy-row, .player-row) {
+  padding: var(--target-bracket-gap);
+}
+.battle-screen [data-acting] :where(.creature-card) {
+  outline: var(--target-actor-width) solid var(--muted-foreground);
+  outline-offset: var(--selection-gap);
+}
+.battle-screen .creature-wrap[data-valid-target] .creature-card::before {
+  content: "";
+  position: absolute;
+  inset: calc(-1 * var(--target-bracket-gap));
+  border: var(--target-bracket-width) solid var(--muted-foreground);
+  border-radius: var(--radius);
+  clip-path: polygon(
+    0 0,
+    var(--target-corner) 0,
+    var(--target-corner) var(--target-bracket-width),
+    calc(100% - var(--target-corner)) var(--target-bracket-width),
+    calc(100% - var(--target-corner)) 0,
+    100% 0,
+    100% var(--target-corner),
+    calc(100% - var(--target-bracket-width)) var(--target-corner),
+    calc(100% - var(--target-bracket-width)) calc(100% - var(--target-corner)),
+    100% calc(100% - var(--target-corner)),
+    100% 100%,
+    calc(100% - var(--target-corner)) 100%,
+    calc(100% - var(--target-corner)) calc(100% - var(--target-bracket-width)),
+    var(--target-corner) calc(100% - var(--target-bracket-width)),
+    var(--target-corner) 100%,
+    0 100%,
+    0 calc(100% - var(--target-corner)),
+    var(--target-bracket-width) calc(100% - var(--target-corner)),
+    var(--target-bracket-width) var(--target-corner),
+    0 var(--target-corner)
+  );
+  pointer-events: none;
+}
+.battle-screen .creature-wrap[data-active-target] .creature-card::before {
+  border-color: var(--selected);
+}
+.target-summary {
+  max-width: var(--target-summary-width);
+  min-width: 0;
+  text-align: center;
+  max-height: 100%;
+  overflow-y: auto;
+  font-size: var(--text-secondary);
+}
+.target-summary .card-details {
+  gap: 0;
+}
+.battle-screen .battle-readout {
+  height: var(--target-readout-height);
+}
+.battle-screen .combat-stats {
+  height: var(--target-outcomes-height);
+  overflow-y: auto;
+  align-content: start;
+  flex-wrap: wrap;
+  column-gap: var(--screen-item-gap);
+  row-gap: 0;
+}
+.target-line marker path {
+  stroke: var(--selected);
 }
 .card-details {
   display: flex;
@@ -661,8 +722,7 @@ strong {
   margin-bottom: var(--space-2);
   color: var(--foreground);
 }
-.reward-progress-detail,
-.talent-progress {
+.reward-progress-detail {
   display: flex;
   justify-content: space-between;
   font-size: var(--text-secondary);
@@ -717,13 +777,79 @@ strong {
   font-size: var(--text-name);
 }
 .talents-screen {
-  max-width: 1000px;
-  margin: auto;
-  padding: var(--space-8) 0;
-}
-.talents-screen {
+  width: 100%;
+  max-width: calc(var(--talent-overview-art-width) * 7 + var(--screen-item-gap) * 6 + var(--space-4));
   max-height: var(--page-content-height);
+  margin: auto;
+  padding: var(--space-2);
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--screen-section-gap);
+}
+.talents-screen[data-view="overview"] {
+  height: var(--page-content-height);
+  overflow: visible;
+}
+.talents-screen .talents-heading {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--screen-item-gap);
+  margin: 0;
+}
+.talents-heading > button:first-child {
+  justify-self: start;
+}
+.talents-heading > button:last-child {
+  justify-self: end;
+}
+.talent-overview-viewport {
+  flex: 1;
+  min-height: 0;
+  container-type: size;
+  display: grid;
+  place-items: center;
+}
+.talent-overview {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  width: 100%;
+  column-gap: var(--screen-item-gap);
+  row-gap: var(--screen-section-gap);
+}
+.talent-category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  gap: var(--screen-item-gap);
+  text-align: center;
+}
+.talent-category .action-card {
+  /* Two rows reserve captions, point labels and gaps before sizing only the art. */
+  width: min(
+    100%,
+    var(--talent-overview-art-width),
+    calc(
+      (
+          100cqh - var(--screen-section-gap) - var(--screen-item-gap) * 4 - var(--text-name) * 2.6 -
+            var(--text-secondary) * 6
+        ) *
+        3 / 8
+    )
+  );
+}
+.talent-category h2 {
+  font-size: var(--text-name);
+}
+.talent-category-points {
+  width: 100%;
+  min-height: calc(var(--text-secondary) * 3);
+  font-size: var(--text-secondary);
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
 }
 .page-heading {
   display: flex;
@@ -828,20 +954,35 @@ strong {
 .locked-species {
   filter: grayscale(1);
 }
+.talent-progress-group {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: calc(var(--talent-card-width) * 2 + var(--screen-item-gap));
+  margin-inline: auto;
+}
 .talent-progress {
-  margin-bottom: var(--space-2);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--screen-item-gap);
+  margin-bottom: var(--screen-item-gap);
+  color: var(--muted-foreground);
+  font-size: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
 }
 .talent-tree {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
-  margin: var(--space-6) auto 0;
-  max-width: 640px;
+  gap: var(--screen-item-gap);
+  width: 100%;
+  margin-inline: auto;
+  max-width: calc(var(--talent-card-width) * 2 + var(--screen-item-gap));
 }
 .talent-row {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: stretch;
   gap: var(--screen-item-gap);
 }
 .talent-node {
@@ -849,11 +990,20 @@ strong {
   display: flex;
   flex-direction: column;
   gap: var(--screen-item-gap);
-  width: var(--art-landscape-width);
+  width: var(--talent-card-width);
+  min-height: var(--talent-card-min-height);
   height: auto;
   padding: var(--space-4);
   white-space: normal;
-  border: 1px solid var(--border);
+}
+.talent-card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--screen-item-gap);
+}
+.talent-card-heading > span:first-child {
+  display: flex;
 }
 .talent-name {
   font-size: var(--text-name);
@@ -871,15 +1021,6 @@ strong {
 .talent-node svg {
   width: 28px;
   height: 28px;
-}
-.talent-node[data-owned="true"] {
-  border-color: var(--selected);
-}
-.talent-node[aria-disabled="true"][data-owned="false"] {
-  cursor: default;
-}
-.talent-node[data-available="true"] .talent-status {
-  color: var(--primary);
 }
 .end-screen {
   min-height: var(--page-content-height);

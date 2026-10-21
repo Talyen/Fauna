@@ -12,8 +12,10 @@ export function ActionDetails({
   modifiers,
   enemy = false,
   enemyValue,
+  compact = false,
 }: {
   card: Card;
+  compact?: boolean;
   enemy?: boolean;
   enemyValue?: number;
   ownerName: string;
@@ -27,11 +29,15 @@ export function ActionDetails({
         {def.name}
         {card.level ? ` +${card.level}` : ""}
       </strong>
-      <p>
-        <KeywordText
-          text={enemy ? ownerName : `${ownerName} · ${modifiers ? cardCost(card, modifiers) : def.cost} mana`}
-        />
-      </p>
+      {compact ? null : (
+        <p>
+          <KeywordText
+            text={
+              enemy ? ownerName : `${ownerName} · ${modifiers ? cardCost(card, modifiers) : def.cost} mana`
+            }
+          />
+        </p>
+      )}
       <CardRules
         card={def}
         level={card.level}
