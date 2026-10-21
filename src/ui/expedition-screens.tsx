@@ -65,7 +65,7 @@ import type { Inspection, Controls } from "./battle-screen";
 import { Progress } from "./progress";
 import { BattleEarnings } from "./battle-earnings";
 import { BIOMES, encounterSource } from "../game/encounters";
-const talentSymbols = [
+const originalTalentSymbols = [
   Swords,
   ShieldPlus,
   Flame,
@@ -95,6 +95,14 @@ const talentSymbols = [
   Gem,
   Battery,
 ];
+const talentSymbols = Object.fromEntries(
+  KEYWORDS.flatMap((keyword) => {
+    const talents = TALENTS.filter((talent) => talent.keyword === keyword);
+    const original = talents.slice(0, 2).map((talent) => originalTalentSymbols[TALENTS.indexOf(talent)]!);
+    const symbols = [...original, ...originalTalentSymbols.filter((symbol) => !original.includes(symbol))];
+    return talents.map((talent, index) => [talent.id, symbols[index]!] as const);
+  }),
+);
 type Props = { game: GameState; send: (command: Command) => boolean; inspect: (item: Inspection) => void };
 export function TeamSelection({ game, send, inspect, deck }: Props & { deck: () => void }) {
   if (game.expedition) {
@@ -402,7 +410,7 @@ export function Talents({
             ].map((row) => (
               <div className="talent-row" key={row} data-nav-row aria-label={`Row ${row + 1}`}>
                 {TALENTS.filter((t) => t.keyword === keyword && t.row === row).map((t) => {
-                  const TalentSymbol = talentSymbols[TALENTS.indexOf(t)]!;
+                  const TalentSymbol = talentSymbols[t.id]!;
                   const owned = game.talents.includes(t.id),
                     available = canBuyTalent(game, t.id);
                   const earlierRowsOwned = TALENTS.filter(

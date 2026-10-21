@@ -1,6 +1,15 @@
 import type { SpeciesId, DamageType } from "./content";
 import type { Keyword, KeywordXP, BoonId } from "./progression";
 export interface CombatState {
+  controlTurns: number;
+  rhythm: number;
+  nextPhysical: number;
+  partingCut: boolean;
+  riposte: boolean;
+  freeNature: boolean;
+  freeLight: boolean;
+  freeCard: boolean;
+  desperateGuardUsed: boolean;
   armor: number;
   thorns: number;
   dodge: number;
@@ -44,6 +53,7 @@ export interface Enemy {
   lastAbility: string | null;
 }
 interface Battle {
+  earnedGold: number;
   freeBurnUsed: boolean;
   meteoriteUsed: boolean;
   turn: number;
@@ -71,7 +81,7 @@ interface JourneySummary {
   lastBattle: { xp: KeywordXP; currency: number } | null;
 }
 export interface GameState {
-  version: 17;
+  version: 18;
   discovery: { encountered: SpeciesId[]; recruited: SpeciesId[] };
   revision: number;
   rng: number;

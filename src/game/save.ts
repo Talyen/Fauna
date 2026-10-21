@@ -13,6 +13,15 @@ const xp = z.partialRecord(z.enum(KEYWORDS), natural);
 const boonId = z.enum(BOONS.map((r) => r.id));
 const combatState = z
   .object({
+    controlTurns: z.number().int().min(0).max(2),
+    rhythm: z.number().int().min(0).max(70),
+    nextPhysical: z.number().int().min(0).max(2),
+    partingCut: z.boolean(),
+    riposte: z.boolean(),
+    freeNature: z.boolean(),
+    freeLight: z.boolean(),
+    freeCard: z.boolean(),
+    desperateGuardUsed: z.boolean(),
     armor: natural,
     thorns: natural,
     dodge: z.number().int().min(0).max(70),
@@ -25,18 +34,19 @@ const combatState = z
     cooldown: z.number().int().min(0).max(3),
     skipped: z.boolean(),
     deathDoorUsed: z.boolean(),
-    grace: z.number().int().min(0).max(2),
+    grace: z.number().int().min(0).max(3),
     statusSources: z.partialRecord(z.enum(["burn", "poison", "bleed"]), id),
     bleedLeech: z.array(z.object({ sourceId: id, amount: natural })).max(9),
   })
   .strict();
 const battle = z
   .object({
+    earnedGold: natural,
     freeBurnUsed: z.boolean(),
     meteoriteUsed: z.boolean(),
     turn: z.number().int().min(1).max(1_000_000),
-    mana: z.number().int().min(0).max(5),
-    maxMana: z.number().int().min(4).max(5),
+    mana: z.number().int().min(0).max(6),
+    maxMana: z.number().int().min(4).max(6),
     draw: z.array(id).max(9),
     hand: z.array(id).max(MAX_HAND_SIZE),
     buffer: z.array(id).max(9),
@@ -69,7 +79,7 @@ const creature = z.object({
   combat: combatState.optional(),
 });
 const currentShape = z.object({
-  version: z.literal(17),
+  version: z.literal(18),
   discovery: z.object({ encountered: z.array(speciesId).max(6), recruited: z.array(speciesId).max(6) }),
   revision: z
     .number()
@@ -180,10 +190,7 @@ export function decodeSave(raw: string): GameState {
         !unique(summary.unlocks) ||
         summary.unlocks.some((kind) => !s.unlocked.includes(kind)),
     );
-    invalid(
-      summary.currency > summary.victories * 40 ||
-        KEYWORDS.some((keyword) => (summary.xp[keyword] ?? 0) > (s.keywordXP[keyword] ?? 0)),
-    );
+    invalid(KEYWORDS.some((keyword) => (summary.xp[keyword] ?? 0) > (s.keywordXP[keyword] ?? 0)));
     invalid(
       s.phase === "victory"
         ? summary.outcome !== "victory"
@@ -345,7 +352,11 @@ export function decodeSave(raw: string): GameState {
     });
     const zones = [...b.draw, ...b.hand, ...b.buffer, ...b.discard];
     // The current turn capacity survives a category reset.
-    invalid(b.mana > b.maxMana);
+    invalid(
+      b.mana > b.maxMana ||
+        b.earnedGold > s.currency ||
+        (s.journey !== null && b.earnedGold > s.journey.currency),
+    );
     invalid(!unique(zones) || zones.some((id) => !s.cards.some((c) => c.id === id)));
     if (s.phase === "battle") {
       invalid([...s.team, ...s.reserves].some((creature) => !creature.combat));
