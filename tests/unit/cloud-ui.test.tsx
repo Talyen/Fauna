@@ -21,7 +21,7 @@ afterEach(() => {
   vi.restoreAllMocks();
   localStorage.clear();
 });
-it("controller confirm can choose offline continuation while cloud blocks gameplay commands", async () => {
+it("cloud failure silently continues at the main menu without recovery controls", async () => {
   vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
   vi.spyOn(HTMLMediaElement.prototype, "load").mockImplementation(() => {});
   vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {});
@@ -47,9 +47,8 @@ it("controller confirm can choose offline continuation while cloud blocks gamepl
   try {
     await session.load();
     render(<App session={session} />);
-    const offline = screen.getByRole("button", { name: "Play offline" });
-    act(() => offline.focus());
-    act(() => hook.send!("confirm"));
+    expect(screen.queryByRole("alert")).toBeNull();
+    expect(screen.queryByRole("button", { name: /offline|retry|save/i })).toBeNull();
     expect(session.store.getState().cloud.blocking).toBe(false);
     expect(screen.getByRole("button", { name: "New journey" })).toBeTruthy();
     expect(session.store.getState().game.revision).toBe(0);

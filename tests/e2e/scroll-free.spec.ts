@@ -15,7 +15,9 @@ for (const [width, height] of [
   [1280, 720],
   [1920, 1080],
 ] as const)
-  test(`cloud conflict and desktop Settings fit ${width}×${height} with enlarged text`, async ({ page }) => {
+  test(`automatic cloud recovery and desktop Settings fit ${width}×${height} with enlarged text`, async ({
+    page,
+  }) => {
     await page.setViewportSize({ width, height });
     const identity = {
       available: true,
@@ -54,17 +56,11 @@ for (const [width, height] of [
       { identity, files, save: encodeSave(run(7)) },
     );
     await page.goto("/");
-    await expect(page.getByRole("heading", { name: "Choose a save" })).toBeVisible();
-    const choices = new Set<string>();
-    await everyPage(page.locator(".recovery"), async () => {
-      await expectScrollFree(page);
-      choices.add(await page.getByRole("button", { name: /^Use save/ }).innerText());
-    });
-    expect(choices.size).toBeGreaterThanOrEqual(2);
+    await expect(page.getByRole("button", { name: "Continue", exact: true })).toBeVisible();
+    await expect(page.getByRole("alert")).toHaveCount(0);
+    await expectScrollFree(page);
     await captureScreen(page, { path: `reports/scroll-free/cloud-${width}.png` });
-    await page.getByRole("button", { name: "Play offline" }).click();
     await page.getByRole("button", { name: "Settings", exact: true }).click();
-    await page.getByRole("tab", { name: "Steam Cloud" }).click();
     await expectScrollFree(page);
     await captureScreen(page, { path: `reports/scroll-free/cloud-settings-${width}.png` });
   });

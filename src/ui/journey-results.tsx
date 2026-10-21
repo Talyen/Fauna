@@ -39,9 +39,7 @@ export function JourneyResults({ game, home }: { game: GameState; home: () => vo
               <EmptyState label="No permanent rewards earned" />
             ) : null}
           </section>
-        ) : (
-          <p className="journey-kept">Journey totals are unavailable. Permanent progress is kept.</p>
-        )}
+        ) : null}
         <footer className="journey-results-actions" data-nav-row>
           <Button className="primary-menu-action" onClick={home}>
             Main menu

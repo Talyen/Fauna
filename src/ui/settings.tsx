@@ -1,5 +1,5 @@
 import type { Session } from "../application/session";
-import { DisplaySettings, CloudStatus } from "./platform-settings";
+import { DisplaySettings } from "./platform-settings";
 import { Monitor, Headphones, Swords, CaseSensitive, MessageSquareText, StepForward } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
 import { RadioGroup, RadioGroupItem } from "../components/ui/radio-group";
@@ -17,7 +17,6 @@ export function Settings({
   setScale,
   tooltipScale,
   setTooltipScale,
-  desktop,
   autoEndTurn,
   setAutoEndTurn,
 }: {
@@ -47,7 +46,6 @@ export function Settings({
           <Swords aria-hidden="true" />
           Battle
         </TabsTrigger>
-        {desktop && session ? <TabsTrigger value="cloud">Steam Cloud</TabsTrigger> : null}
       </TabsList>
       <TabsContent value="display" className="settings-panel">
         <h2 className="settings-heading">Display</h2>
@@ -97,11 +95,6 @@ export function Settings({
           onChange={setAutoEndTurn}
         />
       </TabsContent>
-      {desktop && session ? (
-        <TabsContent value="cloud" className="settings-panel">
-          <CloudStatus session={session} />
-        </TabsContent>
-      ) : null}
     </Tabs>
   );
 }

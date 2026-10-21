@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { Loading } from "./ui/loading";
 import { assetUrl } from "./ui/assets";
 import { GameErrorBoundary } from "./ui/diagnostics";
 import { createRoot } from "react-dom/client";
@@ -11,12 +13,34 @@ for (const name of ["full", "empty"])
   document.documentElement.style.setProperty(`--mana-${name}-image`, `url("${assetUrl(`mana.${name}`)}")`);
 const platform = createPlatform();
 const session = createSession(platform, Date.now() >>> 0, { development: import.meta.env.DEV });
-let contentValid = true;
-try {
-  validateContent();
-} catch (error) {
-  contentValid = false;
-  session.diagnostics.record("validation", error);
+function Game() {
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    let alive = true;
+    const start = () => {
+      try {
+        validateContent();
+        setReady(true);
+        void session.load();
+      } catch (error) {
+        session.diagnostics.record("validation", error);
+        if (alive) timer = setTimeout(start, 5000);
+      }
+    };
+    start();
+    return () => {
+      alive = false;
+      clearTimeout(timer);
+    };
+  }, []);
+  return ready ? (
+    <App session={session} desktop={platform.desktop} />
+  ) : (
+    <main className="loading">
+      <Loading />
+    </main>
+  );
 }
 const onError = (event: ErrorEvent) => session.diagnostics.record("global", event.error ?? event.message);
 const onRejection = (event: PromiseRejectionEvent) => session.diagnostics.record("global", event.reason);
@@ -31,17 +55,9 @@ window.addEventListener("pagehide", onPageHide);
 const root = createRoot(document.getElementById("root")!);
 root.render(
   <GameErrorBoundary diagnostics={session.diagnostics}>
-    {contentValid ? (
-      <App session={session} desktop={platform.desktop} />
-    ) : (
-      <main className="recovery">
-        <h1>Game content unavailable</h1>
-        <p>Close and reopen the game to retry.</p>
-      </main>
-    )}
+    <Game />
   </GameErrorBoundary>,
 );
-if (contentValid) void session.load();
 if (import.meta.hot)
   import.meta.hot.dispose(() => {
     root.unmount();
