@@ -19,19 +19,10 @@ import { useAudioPreferences } from "./audio-preferences";
 import { useGameAudio } from "./game-audio";
 import { JourneyResults } from "./journey-results";
 import { KeywordText } from "./keyword-text";
-import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogCancel,
-  AlertDialogAction,
-} from "../components/ui/alert-dialog";
-import { buttonVariants } from "../components/ui/button";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
 import { flushSync } from "react-dom";
-import { Menu, ArrowLeftRight, Bot, Pause } from "lucide-react";
+import { Menu, ArrowLeftRight, Bot, Pause, LogOut } from "lucide-react";
 import type { Session } from "../application/session";
 import { Button } from "../components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../components/ui/dialog";
@@ -49,7 +40,7 @@ import type { SpeciesId } from "../game/content";
 import "./mana-crystals.css";
 
 type Route = "home" | "play" | "talents" | "collection" | "settings" | "glossary" | "unlocks";
-type Modal = "boons" | "endRun" | "deck" | "swap" | "lineup" | "draw" | "discard" | null;
+type Modal = "boons" | "deck" | "swap" | "lineup" | "draw" | "discard" | null;
 export function App(props: { session: Session; desktop?: boolean }) {
   return (
     <TooltipProvider>
@@ -392,8 +383,19 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
       <Button variant="ghost" onClick={() => navigate("settings")}>
         Settings
       </Button>
-      {active ? (
-        <Button variant="ghost" onClick={() => openModal("endRun")}>
+      {!home && active ? (
+        <Button
+          variant="ghost"
+          className="end-journey"
+          onClick={() => {
+            if (send({ type: "abandon" })) {
+              menuReturnLabel.current = null;
+              setMenu(false);
+              setRoute(game.phase === "draft" ? "home" : "play");
+            }
+          }}
+        >
+          <LogOut aria-hidden="true" />
           End journey
         </Button>
       ) : null}
@@ -421,7 +423,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
       {" "}
       <Dialog
         key={`modal-${modalInstance}`}
-        open={modal !== null && modal !== "endRun"}
+        open={modal !== null}
         onOpenChange={(open) => {
           if (!open) setModal(null);
         }}
@@ -512,43 +514,6 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           ) : null}
         </DialogContent>
       </Dialog>
-      <AlertDialog
-        key={`confirmation-${modalInstance}`}
-        open={modal === "endRun"}
-        onOpenChange={(open) => {
-          if (!open) setModal(null);
-        }}
-      >
-        <AlertDialogContent
-          className="confirm-dialog"
-          onCloseAutoFocus={(event) => {
-            event.preventDefault();
-            if (!menu) returnFocus(modalOpener.current);
-          }}
-        >
-          <AlertDialogTitle>End journey?</AlertDialogTitle>
-          <AlertDialogDescription>
-            {game.phase === "draft"
-              ? "Clear your starter choice and return to the main menu?"
-              : "Finish this journey and view your results? Your team and boons will not carry into the next journey. Permanent progress is kept."}
-          </AlertDialogDescription>
-          <div className="confirm-actions">
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction
-              className={buttonVariants({ variant: "destructive" })}
-              onClick={(event) => {
-                if (send({ type: "abandon" })) {
-                  menuReturnLabel.current = null;
-                  setMenu(false);
-                  setRoute(game.phase === "draft" ? "home" : "play");
-                } else event.preventDefault();
-              }}
-            >
-              End journey
-            </AlertDialogAction>
-          </div>
-        </AlertDialogContent>
-      </AlertDialog>
       {!modal && inspection ? (
         "support" in inspection ? (
           <SupportInspector game={game} send={send} close={() => setInspection(null)} />

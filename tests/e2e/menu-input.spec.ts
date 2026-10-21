@@ -274,7 +274,7 @@ test("mouse use cancels held-stick navigation until release", async ({ page }) =
   await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-focus", "hidden");
 });
 
-test("controller cancellation preserves the journey and returns through Pause", async ({ page }) => {
+test("controller can dismiss Pause or end the journey immediately", async ({ page }) => {
   const pad = await controller(page);
   await page.addInitScript((value) => localStorage.setItem("fauna.save.v1", value), JSON.stringify(run()));
   await page.goto("/");
@@ -284,21 +284,23 @@ test("controller cancellation preserves the journey and returns through Pause", 
   await pad.press(1);
   for (let i = 0; i < 5; i++) await pad.press(13);
   await expect(page.getByRole("button", { name: "End journey", exact: true })).toBeFocused();
-  await pad.press(0);
-  const dialog = page.getByRole("alertdialog", { name: "End journey?" });
-  await expect(dialog.getByRole("button", { name: "Cancel", exact: true })).toBeFocused();
-  await pad.press(1);
-  await expect(page.getByRole("button", { name: "End journey", exact: true })).toBeFocused();
   await pad.press(1);
   await expect(page.getByRole("dialog")).toHaveCount(0);
   expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).revision)).toBe(
     run().revision,
   );
+  await pad.press(1);
+  for (let i = 0; i < 5; i++) await pad.press(13);
+  await expect(page.getByRole("button", { name: "End journey", exact: true })).toBeFocused();
+  await pad.press(0);
+  await expect(page.getByRole("alertdialog")).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Main menu", exact: true })).toBeVisible();
+  await expect
+    .poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).phase))
+    .toBe("defeat");
 });
 
-test("pointer use has no native or shadcn focus decoration in settings, tabs or confirmation", async ({
-  page,
-}) => {
+test("pointer use has no native or shadcn focus decoration in settings, tabs or pause", async ({ page }) => {
   await page.addInitScript((value) => localStorage.setItem("fauna.save.v1", value), JSON.stringify(run()));
   await page.goto("/");
   const noDecoration = async () => {
@@ -325,10 +327,11 @@ test("pointer use has no native or shadcn focus decoration in settings, tabs or 
   await noDecoration();
   await page.keyboard.press("Escape");
   await page.keyboard.press("Escape");
-  await page.getByRole("button", { name: "End journey", exact: true }).click();
-  await expect(page.getByRole("button", { name: "Cancel", exact: true })).toBeFocused();
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await page.getByRole("button", { name: "Open menu" }).click();
+  await expect(page.getByRole("button", { name: "Resume", exact: true })).toBeFocused();
   await noDecoration();
   await page.keyboard.press("Escape");
-  await expect(page.getByRole("button", { name: "End journey", exact: true })).toBeFocused();
+  await expect(page.getByRole("button", { name: "Open menu", exact: true })).toBeFocused();
   await noDecoration();
 });

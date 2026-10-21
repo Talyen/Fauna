@@ -4,7 +4,7 @@ Implemented direction from the design review.
 
 - The main menu uses a centered vertical list on a black background, a simple Fauna title, and gameplay destinations only. No promotional copy, decorative panels or reward previews.
 - Launching with a saved journey opens the main menu with Continue selected. Do not automatically resume gameplay.
-- While an journey exists, offer Continue/Resume and End journey. End journey requires confirmation; New journey appears only when no run exists.
+- While a journey exists, offer Continue/Resume. End journey appears only in the hamburger pause menu and ends immediately without confirmation; New journey appears only when no run exists.
 - Opening the menu during an journey pauses play and shows a centered overlay over the current screen.
 - Talents opens full screen from the menu. The header hamburger opens the originating main or pause menu directly, including from a talent tree. Escape/controller B returns through the talent overview to the originating menu while preserving the journey and its prior screen.
 - Collection is a main-menu destination for reviewing permanently collected species, passives and action cards. It is separate from the journey roster.
@@ -16,13 +16,13 @@ Implemented direction from the design review.
 - Journey results reopens the most recent completed, defeated, or voluntarily ended journey until starting a new one. End journey on a started journey opens results; clearing an unfinished starter choice returns to the main menu.
 - Settings and Glossary open full screen; the header hamburger and Escape/controller B return to the originating menu and restore its choice. Full screens use an icon-only Open menu hamburger to the right of the centered header, with no visible Back button.
 
-Collection uses a centered title, tabs, a gallery and pagination. The Open menu hamburger sits to the right of the centered heading. The gallery shows two rows of four creatures per page using the bounded artwork profiles. Pagination uses Previous and Next icon buttons without page counts. It reserves gallery and footer space so partial pages and filters keep controls stable. Changing filters starts at the first page. Locked species are noninteractive. Menu order is Continue/New journey, optional Lineup between battles, Talents, Collection, Glossary, Settings, then End journey when applicable. Pause also offers Main menu; desktop adds Save & quit.
+Collection uses a centered title, tabs, a gallery and pagination. The Open menu hamburger sits to the right of the centered heading. The gallery shows two rows of four creatures per page using the bounded artwork profiles. Pagination uses Previous and Next icon buttons without page counts. It reserves gallery and footer space so partial pages and filters keep controls stable. Changing filters starts at the first page. Locked species are noninteractive. Menu order is Continue/New journey, optional Lineup between battles, Talents, Collection, Glossary, Settings, then End journey when applicable in Pause only. Pause also offers Main menu; desktop adds Save & quit.
 
 See [UI rules](UI.md) and [journey design](EXPEDITION_DESIGN.md) for shared interaction and progression decisions.
 
 ## Shared menu treatment
 
-Main and pause menus use the same centered vertical list: shadcn default Button for Continue, New journey, or Resume; ghost Buttons for other choices. Use the charcoal/ivory/muted-gold semantic theme in `src/ui/tokens.css`. Settings keeps Display, Sound and Battle tabs, plus Steam Cloud on desktop. It uses Switch for Sound and Auto-end turn (in Battle), and RadioGroup for explicit text-size choices; changes save immediately. End journey uses AlertDialog with Cancel focused initially and no outside-click dismissal.
+Main and pause menus use the same centered vertical list: shadcn default Button for Continue, New journey, or Resume; ghost Buttons for other choices. Use the charcoal/ivory/muted-gold semantic theme in `src/ui/tokens.css`. Settings keeps Display, Sound and Battle tabs, plus Steam Cloud on desktop. It uses Switch for Sound and Auto-end turn (in Battle), and RadioGroup for explicit text-size choices; changes save immediately. End journey appears only in the hamburger pause menu, with a red label and red Lucide LogOut icon, and commits immediately without confirmation.
 
 ## Battle assistance and reveals
 

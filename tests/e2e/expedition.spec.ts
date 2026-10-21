@@ -651,7 +651,7 @@ test("Collection hides uncollected tooltips and uses centered collected inspecti
   await page.keyboard.press("Escape");
   await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
 });
-test("settings and glossary return to the pause menu; End journey requires confirmation", async ({
+test("settings and glossary return to the pause menu; End journey immediately shows results", async ({
   page,
 }) => {
   await seed(page, run());
@@ -665,20 +665,8 @@ test("settings and glossary return to the pause menu; End journey requires confi
   await page.getByRole("button", { name: "Glossary", exact: true }).click();
   await expect(page.getByRole("main", { name: "Glossary & controls" })).toBeVisible();
   await page.keyboard.press("Escape");
-  const before = await state(page);
   await page.getByRole("button", { name: "End journey", exact: true }).click();
-  await expect(page.getByRole("alertdialog", { name: "End journey?" })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Cancel", exact: true })).toBeFocused();
-  await page.mouse.click(5, 5);
-  await expect(page.getByRole("alertdialog", { name: "End journey?" })).toBeVisible();
-  expect((await state(page)).revision).toBe(before.revision);
-  await page.getByRole("button", { name: "Cancel", exact: true }).click();
-  expect((await state(page)).phase).toBe("battle");
-  await page.getByRole("button", { name: "End journey", exact: true }).click();
-  await page
-    .getByRole("alertdialog", { name: "End journey?" })
-    .getByRole("button", { name: "End journey", exact: true })
-    .click();
+  await expect(page.getByRole("alertdialog")).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Main menu", exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: "New journey", exact: true })).toHaveCount(0);
   expect((await state(page)).phase).toBe("defeat");
@@ -1052,22 +1040,32 @@ test("shadcn tabs and settings retain native keyboard behavior and game navigati
   await expect(sound).not.toBeChecked();
 });
 
-test("End journey uses alert-dialog cancellation, trapping and outside-click protection", async ({
-  page,
-}) => {
+test("End journey is exclusive to the hamburger menu with a red label and icon", async ({ page }) => {
   await seed(page, run());
-  await page.getByRole("button", { name: "End journey", exact: true }).click();
-  const dialog = page.getByRole("alertdialog", { name: "End journey?" });
-  await expect(dialog.getByRole("button", { name: "Cancel", exact: true })).toBeFocused();
-  await page.mouse.click(5, 5);
-  await expect(dialog).toBeVisible();
-  // Clicking the overlay may blur the focused button without dismissing.
-  await dialog.getByRole("button", { name: "Cancel", exact: true }).focus();
-  await page.keyboard.press("Shift+Tab");
-  await expect(dialog.getByRole("button", { name: "End journey", exact: true })).toBeFocused();
+  await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "End journey", exact: true })).toHaveCount(0);
+  await resume(page);
+  await page.getByRole("button", { name: "Open menu" }).click();
+  const end = page
+    .getByRole("dialog", { name: "Pause menu" })
+    .getByRole("button", { name: "End journey", exact: true });
+  const red = await page
+    .locator(":root")
+    .evaluate((element) => getComputedStyle(element).getPropertyValue("--destructive").trim());
+  const resolvedRed = await end.evaluate((element, color) => {
+    const probe = document.createElement("span");
+    probe.style.color = color;
+    element.append(probe);
+    const resolved = getComputedStyle(probe).color;
+    probe.remove();
+    return resolved;
+  }, red);
+  await expect(end).toHaveCSS("color", resolvedRed);
+  await expect(end.locator("svg.lucide-log-out")).toHaveCSS("stroke", resolvedRed);
+  await end.hover();
+  await expect(end).toHaveCSS("color", resolvedRed);
+  await expect(end.locator("svg")).toHaveCSS("stroke", resolvedRed);
   await page.keyboard.press("Escape");
-  await expect(dialog).not.toBeVisible();
-  await expect(page.getByRole("button", { name: "End journey", exact: true })).toBeFocused();
   expect((await state(page)).phase).toBe("battle");
 });
 
