@@ -53,6 +53,7 @@ import { returnFocus } from "./focus";
 import { SPECIES, species, type SpeciesId } from "../game/content";
 import {
   creatureStars,
+  creaturePassive,
   MAX_CREATURE_STARS,
   KEYWORDS,
   BOONS,
@@ -168,7 +169,14 @@ export function Draft({ game, send, inspect }: Props) {
                   onClick={() => inspect({ species: s.id })}
                   onInspect={() => inspect({ species: s.id })}
                   label={`Inspect ${s.name}`}
-                  tooltips={false}
+                  tooltipContent={
+                    <div className="card-details">
+                      <strong>{s.name}</strong>
+                      <p>
+                        <KeywordText text={creaturePassive(game, s.id).description} />
+                      </p>
+                    </div>
+                  }
                 />
                 <h2>{s.name}</h2>
                 <span className="starter-selection">

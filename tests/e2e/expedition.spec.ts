@@ -294,6 +294,12 @@ for (const width of [1280, 1920])
       const chosen = initial.starterOffers[0]!;
       const name = species(chosen).name;
       const mossback = page.getByRole("button", { name: `Inspect ${name}`, exact: true });
+      await mossback.hover();
+      const tooltip = page.getByRole("tooltip");
+      await expect(tooltip).toBeVisible();
+      await expect(tooltip.locator("strong").first()).toHaveText(name);
+      await expect(tooltip).toHaveText(`${name}${species(chosen).passiveTiers[0].description}`);
+      await captureScreen(page, { path: `reports/starter/tooltip-${width}-${enlarged}.png` });
       await mossback.click();
       await page.locator(".inspection-thumbnails .action-card").first().click();
       await expect(page.getByRole("button", { name: `Choose ${name}`, exact: true })).toHaveCount(0);

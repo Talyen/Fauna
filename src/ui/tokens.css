@@ -108,7 +108,7 @@
   --tooltip-enter-duration: 100ms;
   --tooltip-exit-duration: 100ms;
   --tooltip-radius: 20px;
-  --tooltip-max-width: 320px;
+  --tooltip-max-width: calc(var(--art-standard-short-side) * 4 / 3 * 1.2);
   --tooltip-text-body: calc(16px * var(--tooltip-scale, 1));
   --tooltip-text-heading: calc(20px * var(--tooltip-scale, 1));
   --tooltip-text-secondary: calc(14px * var(--tooltip-scale, 1));

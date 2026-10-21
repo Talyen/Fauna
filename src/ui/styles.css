@@ -579,7 +579,7 @@ strong {
   /* Radix modal layers set an inline pointer override; hover details must not intercept controls. */
   pointer-events: none !important;
   width: max-content;
-  max-width: min(640px, calc(100vw - var(--space-8)));
+  max-width: min(calc(var(--tooltip-max-width) * var(--tooltip-scale, 1)), calc(100vw - var(--space-8)));
   padding: var(--space-3);
   border-radius: var(--tooltip-radius);
   --tooltip-offset-x: 0px;
@@ -1928,9 +1928,6 @@ body,
 }
 .combat-status .paged-content {
   gap: var(--screen-item-gap);
-}
-.game-tooltip:has(.combat-status-details) {
-  max-width: min(1000px, calc(100vw - var(--space-8)));
 }
 .combat-status-details {
   display: grid;

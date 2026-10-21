@@ -31,6 +31,7 @@ type CreatureProps = {
   acting?: boolean;
   preview?: ReactNode;
   tooltips?: boolean;
+  tooltipContent?: ReactNode;
   readout?: boolean;
   invalidTarget?: boolean;
   combat?: import("../game/types").CombatState;
@@ -58,6 +59,7 @@ export function CreatureCard({
   acting = false,
   preview,
   tooltips = true,
+  tooltipContent,
   readout = true,
   invalidTarget = false,
   combat,
@@ -123,16 +125,18 @@ export function CreatureCard({
             <Tooltip open={tooltips && tooltipOpen} onOpenChange={(open) => setTooltipOpen(tooltips && open)}>
               <TooltipTrigger asChild>{artwork}</TooltipTrigger>
               <TooltipContent>
-                <CreatureDetails
-                  progression={progression}
-                  kind={kind}
-                  name={name}
-                  health={health}
-                  maxHealth={maxHealth}
-                  block={block}
-                  speciesKit={speciesKit}
-                  combat={combat}
-                />
+                {tooltipContent ?? (
+                  <CreatureDetails
+                    progression={progression}
+                    kind={kind}
+                    name={name}
+                    health={health}
+                    maxHealth={maxHealth}
+                    block={block}
+                    speciesKit={speciesKit}
+                    combat={combat}
+                  />
+                )}
               </TooltipContent>
             </Tooltip>
           )}
