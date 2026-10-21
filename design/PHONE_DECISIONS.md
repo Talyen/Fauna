@@ -43,7 +43,7 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 - Near-black dialog fill with a thin neutral border.
 - Fade only, with no spatial movement: 150ms opening and closing.
 - Destructive confirmation action: red filled button; inherit ordinary dialog and button treatments otherwise.
-- Preserve shadcn/Radix modal focus ownership and focus return. Cancel receives initial focus in End journey; outside click does not dismiss that AlertDialog.
+- Preserve shadcn/Radix modal focus ownership and focus return. The pause menu uses a modal Popover; End journey ends immediately without a confirmation.
 
 ## Screen navigation transitions
 

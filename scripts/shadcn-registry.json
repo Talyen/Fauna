@@ -1,5 +1,4 @@
 {
-  "alert-dialog": "@radix-ui/react-alert-dialog",
   "button": "@radix-ui/react-slot",
   "dialog": "@radix-ui/react-dialog",
   "popover": "@radix-ui/react-popover",
