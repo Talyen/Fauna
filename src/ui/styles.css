@@ -616,7 +616,7 @@ strong {
   /* Radix modal layers set an inline pointer override; hover details must not intercept controls. */
   pointer-events: none !important;
   width: max-content;
-  max-width: min(640px, calc(100vw - var(--space-8)));
+  max-width: min(calc(var(--tooltip-max-width) * var(--tooltip-scale, 1)), calc(100vw - var(--space-8)));
   padding: var(--space-3);
   border-radius: var(--tooltip-radius);
   --tooltip-offset-x: 0px;
@@ -802,7 +802,7 @@ strong {
 .reward-choices {
   margin-top: var(--screen-section-gap);
   /* One section title and two caption lines keep reward anchors aligned at large text. */
-  min-height: calc(var(--art-long-side) + var(--screen-item-gap) * 2 + var(--text-name) * 3.9);
+  min-height: calc(var(--art-long-side) + var(--screen-item-gap) * 2 + var(--text-name) * 4.2);
   display: flex;
   align-items: center;
 }
@@ -840,7 +840,7 @@ strong {
 }
 .talents-screen {
   width: 100%;
-  max-width: calc(var(--talent-overview-art-width) * 7 + var(--screen-item-gap) * 6 + var(--space-4));
+  max-width: calc(var(--talent-overview-art-width) * 5 + var(--screen-item-gap) * 4 + var(--space-4));
   height: 100%;
   min-height: 0;
   margin: auto;
@@ -865,7 +865,7 @@ strong {
 .talents-heading > button:first-child {
   justify-self: start;
 }
-.talents-heading > button:last-child {
+.talents-heading > button:not(:first-child) {
   justify-self: end;
 }
 .talent-overview-viewport {
@@ -876,13 +876,15 @@ strong {
   place-items: center;
 }
 .talent-overview {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   width: 100%;
   column-gap: var(--screen-item-gap);
   row-gap: var(--screen-section-gap);
 }
 .talent-category {
+  flex: 0 0 calc((100% - var(--screen-item-gap) * 4) / 5);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -891,16 +893,16 @@ strong {
   text-align: center;
 }
 .talent-category .action-card {
-  /* Two rows reserve captions, point labels and gaps before sizing only the art. */
+  /* Three rows reserve captions, point labels and gaps before sizing only the art. */
   width: min(
     100%,
     var(--talent-overview-art-width),
     calc(
       (
-          100cqh - var(--screen-section-gap) - var(--screen-item-gap) * 4 - var(--text-name) * 2.6 -
-            var(--text-secondary) * 6
+          100cqh - var(--screen-section-gap) * 2 - var(--screen-item-gap) * 6 - var(--text-name) * 4.2 -
+            var(--text-secondary) * 9
         ) *
-        3 / 8
+        1 / 4
     )
   );
 }
@@ -922,7 +924,7 @@ strong {
 }
 .collection-screen {
   width: 100%;
-  max-width: calc(var(--art-landscape-width) * 3 + var(--screen-item-gap) * 2);
+  max-width: calc(var(--art-landscape-width) * 4 + var(--screen-item-gap) * 3);
   height: 100%;
   min-height: 0;
   margin: auto;
@@ -1011,10 +1013,6 @@ strong {
   align-items: center;
   justify-content: center;
   gap: var(--screen-item-gap);
-}
-.collection-pagination span {
-  color: var(--muted-foreground);
-  font-variant-numeric: tabular-nums;
 }
 .locked-species > .creature-card:not(:hover) > img {
   filter: grayscale(1);
@@ -1125,16 +1123,15 @@ strong {
   gap: var(--space-4);
   margin-top: var(--space-6);
 }
-.glossary dt {
+.glossary-screen dt {
   font-weight: 600;
 }
-.glossary dd {
+.glossary-screen dd {
   color: var(--muted-foreground);
   margin: var(--space-1) 0 0;
 }
-.glossary > p {
+.glossary-screen > p {
   color: var(--muted-foreground);
-  margin-top: var(--space-4);
 }
 .confirm-actions {
   display: flex;
@@ -1471,24 +1468,27 @@ strong {
   min-height: var(--control-height);
   cursor: pointer;
 }
-.dialog-content.settings-dialog {
-  width: min(var(--settings-dialog-width), calc(100vw - var(--space-12)));
-  height: min(var(--settings-dialog-height), calc(100dvh - var(--space-12)));
+.menu-screen {
+  width: 100%;
+  max-width: var(--settings-screen-width);
+  height: 100%;
+  min-height: 0;
+  margin: auto;
+  gap: var(--screen-section-gap);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
-.settings-dialog > h2 {
+.menu-screen > header {
   flex: 0 0 auto;
 }
-.settings-dialog .settings-controls,
+.settings-screen .settings-controls,
 .settings-combined .settings-controls {
   flex: 1 1 auto;
   min-height: 0;
   grid-template-rows: auto minmax(0, 1fr);
   grid-auto-rows: auto;
 }
-.settings-dialog .settings-panel,
+.settings-screen .settings-panel,
 .settings-combined .settings-panel {
   min-height: 0;
   overflow: visible;
@@ -1813,7 +1813,7 @@ strong {
 }
 
 /* Settings hierarchy: title, section, option, supporting text. */
-.settings-dialog > h2 {
+.settings-screen h1 {
   font-size: var(--text-title);
   font-weight: 600;
   color: var(--foreground);
@@ -1853,9 +1853,6 @@ body,
 }
 .glossary-entries dl {
   margin: 0;
-}
-.glossary > .paged-content {
-  margin-top: var(--screen-section-gap);
 }
 .creature-inspection {
   width: min(1120px, calc(100vw - var(--space-12)));
@@ -1958,9 +1955,6 @@ body,
   width: 1px;
   height: 1px;
   clip-path: inset(50%);
-}
-.game-tooltip:has(.combat-status-details) {
-  max-width: min(1000px, calc(100vw - var(--space-8)));
 }
 .combat-status-details {
   display: grid;

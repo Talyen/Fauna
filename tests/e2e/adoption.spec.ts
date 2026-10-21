@@ -27,7 +27,7 @@ test("Collection filtering, audio preferences, and settings remain menu-driven",
   await page.goto("/");
   await page.getByRole("button", { name: "Collection", exact: true }).click();
   await page.getByRole("tab", { name: "Uncollected", exact: true }).click();
-  await expect(page.getByRole("img", { name: "Locked species" })).toHaveCount(3);
+  await expect(page.getByRole("img", { name: "Locked species" })).toHaveCount(6);
   await page.getByRole("button", { name: "Back", exact: true }).click();
   await expect(page.getByRole("button", { name: "Collection", exact: true })).toBeFocused();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
@@ -174,11 +174,11 @@ for (const width of [1280, 1920])
     expect(saved.expedition.pack).toEqual(pack);
   });
 
-test("Settings panel switches preserve dialog, tab and icon geometry", async ({ page }) => {
+test("Settings panel switches preserve screen, tab and icon geometry", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Settings", exact: true }).click();
   await page.evaluate(() => document.fonts.ready);
-  const dialog = page.getByRole("dialog", { name: "Settings", exact: true });
+  const dialog = page.getByRole("main", { name: "Settings", exact: true });
   const tabs = ["Display", "Sound", "Battle"].map((name) => dialog.getByRole("tab", { name, exact: true }));
   const geometry = async () =>
     Promise.all([

@@ -45,8 +45,7 @@
   --error: #ffc4ad;
   --notice: var(--secondary);
   --control-height: 44px;
-  --settings-dialog-width: 800px;
-  --settings-dialog-height: 720px;
+  --settings-screen-width: 800px;
   --boon-dialog-width: 720px;
   --settings-label-basis: 200px;
   --settings-control-basis: 300px;
@@ -109,7 +108,7 @@
   --tooltip-enter-duration: 100ms;
   --tooltip-exit-duration: 100ms;
   --tooltip-radius: 20px;
-  --tooltip-max-width: 320px;
+  --tooltip-max-width: calc(var(--art-standard-short-side) * 4 / 3 * 1.2);
   --tooltip-text-body: calc(16px * var(--tooltip-scale, 1));
   --tooltip-text-heading: calc(20px * var(--tooltip-scale, 1));
   --tooltip-text-secondary: calc(14px * var(--tooltip-scale, 1));
@@ -192,7 +191,6 @@
 @media (max-height: 900px) {
   :root {
     --art-short-side: var(--art-compact-short-side);
-    --collection-rows: 1;
   }
 }
 @media (max-height: 760px) {

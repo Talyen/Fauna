@@ -294,6 +294,12 @@ for (const width of [1280, 1920])
       const chosen = initial.starterOffers[0]!;
       const name = species(chosen).name;
       const mossback = page.getByRole("button", { name: `Inspect ${name}`, exact: true });
+      await mossback.hover();
+      const tooltip = page.getByRole("tooltip");
+      await expect(tooltip).toBeVisible();
+      await expect(tooltip.locator("strong").first()).toHaveText(name);
+      await expect(tooltip).toHaveText(`${name}${species(chosen).passiveTiers[0].description}`);
+      await captureScreen(page, { path: `reports/starter/tooltip-${width}-${enlarged}.png` });
       await mossback.click();
       await page.locator(".inspection-thumbnails .action-card").first().click();
       await expect(page.getByRole("button", { name: `Choose ${name}`, exact: true })).toHaveCount(0);
@@ -548,6 +554,11 @@ for (const [width, height] of [
           const box = element.getBoundingClientRect();
           return box.left >= 0 && box.top >= 0 && box.right <= innerWidth && box.bottom <= innerHeight;
         };
+        const rows = new Map<number, number>();
+        for (const art of arts) {
+          const top = Math.round(art.getBoundingClientRect().top);
+          rows.set(top, (rows.get(top) ?? 0) + 1);
+        }
         return {
           noScroll: screen.scrollHeight <= screen.clientHeight && screen.scrollWidth <= screen.clientWidth,
           captionsVisible: categories.every((category) => [...category.children].every(insideWindow)),
@@ -561,7 +572,7 @@ for (const [width, height] of [
             const box = art.getBoundingClientRect();
             return box.width <= 160.5 && Math.abs(box.width / box.height - 0.75) < 0.01 && box.height >= 44;
           }),
-          rows: new Set(arts.map((art) => Math.round(art.getBoundingClientRect().top))).size,
+          rows: [...rows.values()],
         };
       });
       expect(layout).toEqual({
@@ -569,7 +580,7 @@ for (const [width, height] of [
         captionsVisible: true,
         readableCaptions: true,
         portraitSizes: true,
-        rows: 2,
+        rows: [5, 5, 4],
       });
       await captureScreen(page, {
         path: `reports/implementation/talents-overview-${width}-${height}-${scale}.png`,
@@ -580,7 +591,16 @@ for (const [width, height] of [
 test("Collection hides uncollected tooltips and uses centered collected inspection", async ({ page }) => {
   await seed(page, run());
   await page.getByRole("button", { name: "Collection", exact: true }).click();
-  await page.getByRole("button", { name: "Next page" }).click();
+  await expect(page.getByRole("navigation", { name: "Collection pages" })).toHaveCount(0);
+  const rows = await page.locator(".collection-grid .creature-card").evaluateAll((cards) => {
+    const counts = new Map<number, number>();
+    for (const card of cards) {
+      const top = Math.round(card.getBoundingClientRect().top);
+      counts.set(top, (counts.get(top) ?? 0) + 1);
+    }
+    return [...counts.values()];
+  });
+  expect(rows).toEqual([4, 2]);
   const locked = page.getByRole("img", { name: "Locked species" }).first();
   await expect(locked).toBeVisible();
   const artwork = locked.locator("img");
@@ -605,7 +625,6 @@ test("Collection hides uncollected tooltips and uses centered collected inspecti
   await page.getByRole("heading", { name: "Collection", exact: true }).hover();
   await expect(artwork).toHaveCSS("filter", "grayscale(1)");
   await expect(locked).toHaveCSS("scale", "none");
-  await page.getByRole("button", { name: "Previous page" }).click();
   await page.getByRole("button", { name: "Inspect Mossback", exact: true }).click();
   await expect(page.getByRole("dialog")).toBeVisible();
   await page.keyboard.press("Escape");
@@ -625,7 +644,7 @@ test("settings and glossary return to the pause menu; End journey requires confi
   await page.keyboard.press("Escape");
   await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
   await page.getByRole("button", { name: "Glossary", exact: true }).click();
-  await expect(page.getByRole("dialog", { name: "Glossary & controls" })).toBeVisible();
+  await expect(page.getByRole("main", { name: "Glossary & controls" })).toBeVisible();
   await page.keyboard.press("Escape");
   const before = await state(page);
   await page.getByRole("button", { name: "End journey", exact: true }).click();
@@ -964,7 +983,7 @@ test("enlarged text and keyboard/controller row navigation keep inspection and m
   await page.getByRole("button", { name: "Close inspection", exact: true }).click();
   await page.getByRole("button", { name: "Open menu" }).click();
   await page.getByRole("button", { name: "Glossary", exact: true }).click();
-  const close = page.getByRole("button", { name: "Close glossary", exact: true });
+  const close = page.getByRole("button", { name: "Back", exact: true });
   await expect(close).toBeVisible();
   await close.click();
   await expect(page.getByRole("button", { name: "Glossary", exact: true })).toBeFocused();
