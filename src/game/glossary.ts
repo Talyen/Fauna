@@ -75,7 +75,7 @@ export const GLOSSARY = [
   {
     term: "Starting lineup",
     definition:
-      "Your original draft supplies the starting three. Edit Lineup from the menu between battles if desired. Combat swaps do not change this saved lineup. New recruits join reserves; Begin battle deploys your saved three without asking you to choose again.",
+      "Your original draft supplies the starting three. Edit Lineup from the menu between battles if desired. Combat swaps do not change this saved lineup. New recruits join reserves; Selecting Combat or Boss deploys your saved three without asking you to choose again.",
   },
   {
     term: "Boons",

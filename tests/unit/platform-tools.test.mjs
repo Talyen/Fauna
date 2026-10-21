@@ -5,7 +5,42 @@ import path from "node:path";
 import hardening from "../../desktop/after-pack.cjs";
 import { clampBounds, createDisplay } from "../../desktop/display.cjs";
 import { verifyFuses } from "../../scripts/verify-package.mjs";
-import { FuseState } from "@electron/fuses";
+import { FuseState, getCurrentFuseWire } from "@electron/fuses";
+it.each([8, 9, 7, 10])(
+  "hardens supported fuse wires and rejects incomplete or unknown wires (%i slots)",
+  async (length) => {
+    const dir = await mkdtemp(path.join(tmpdir(), "fauna-fuse-wire-"));
+    try {
+      const executable = path.join(dir, "Fauna.exe");
+      // Public Electron fuse wire format: sentinel, version, slot count, then ASCII states.
+      await writeFile(
+        executable,
+        Buffer.concat([
+          Buffer.from("dL7pKGdnNz796PbbjQWNKmHXBZaB9tsX"),
+          Buffer.from([1, length]),
+          Buffer.alloc(length, FuseState.ENABLE),
+        ]),
+      );
+      const context = {
+        electronPlatformName: "win32",
+        appOutDir: dir,
+        packager: { appInfo: { productFilename: "Fauna" } },
+      };
+      if (length === 7 || length === 10) {
+        await expect(hardening(context)).rejects.toThrow(/fuse/i);
+      } else {
+        await hardening(context);
+        const wire = await getCurrentFuseWire(executable);
+        for (let index = 0; index < length; index++)
+          expect(wire[index]).toBe(hardening.FUSES[index] ? FuseState.ENABLE : FuseState.DISABLE);
+        expect(() => verifyFuses(wire)).not.toThrow();
+        expect(() => verifyFuses({ ...wire, 0: FuseState.ENABLE })).toThrow();
+      }
+    } finally {
+      await rm(dir, { recursive: true, force: true });
+    }
+  },
+);
 it("copies the required browser snapshot and rejects incorrect fuse values", async () => {
   const dir = await mkdtemp(path.join(tmpdir(), "fauna-snapshot-"));
   try {

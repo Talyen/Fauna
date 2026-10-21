@@ -64,7 +64,7 @@ import type { Command, GameState } from "../game/types";
 import type { Inspection, Controls } from "./battle-screen";
 import { Progress } from "./progress";
 import { BattleEarnings } from "./battle-earnings";
-import { BIOMES, encounterSource } from "../game/encounters";
+import { bossEncounter, JOURNEY_LENGTH } from "../game/encounters";
 const originalTalentSymbols = [
   Swords,
   ShieldPlus,
@@ -105,80 +105,49 @@ const talentSymbols = Object.fromEntries(
 );
 type Props = { game: GameState; send: (command: Command) => boolean; inspect: (item: Inspection) => void };
 export function TeamSelection({ game, send, inspect, deck }: Props & { deck: () => void }) {
-  if (game.expedition) {
-    const route = game.expedition;
-    return (
-      <main className="destinations-screen">
-        <header className="destination-heading">
-          <h1>{BIOMES[route.biome]!.name}</h1>
-          <p>{route.step === 3 ? "Boss" : `Encounter ${route.step + 1} of 3`}</p>
-        </header>
-        <section className="destination-grid" data-nav-row aria-label="Encounters">
-          <SupportOffer game={game} inspect={inspect} />
-          {canVisitCampfire(game) ? (
-            <div className="destination-option">
-              <ArtCard
-                aspect="creature"
-                artwork={assetUrl("location.ember-grove")}
-                aria-label="Visit Campfire"
-                onClick={() => send({ type: "visitCampfire" })}
-              />
-              <h2>Campfire</h2>
-              <p>Rest</p>
-            </div>
-          ) : null}
+  const boss = bossEncounter(game);
+  return (
+    <main className="destinations-screen">
+      <header className="destination-heading">
+        <h1>
+          Encounter {game.encounter + 1} of {game.expedition ? JOURNEY_LENGTH : 3}
+        </h1>
+      </header>
+      <section className="destination-grid" data-nav-row aria-label="Encounters">
+        <SupportOffer game={game} inspect={inspect} />
+        {canVisitCampfire(game) ? (
           <div className="destination-option">
             <ArtCard
               aspect="creature"
-              artwork={assetUrl(route.step === 3 ? "encounter.boss" : "encounter.combat")}
-              data-encounter
-              aria-label={`Inspect ${route.step === 3 ? "Boss" : "Combat"}`}
-              onClick={() => inspect({ encounter: true })}
-              onContextMenu={(event) => {
-                event.preventDefault();
-                event.currentTarget.focus();
-                inspect({ encounter: true });
-              }}
+              artwork={assetUrl("location.ember-grove")}
+              aria-label="Visit Campfire"
+              onClick={() => send({ type: "visitCampfire" })}
             />
-            <h2>{route.step === 3 ? "Boss" : "Combat"}</h2>
+            <h2>Campfire</h2>
+            <p>Rest</p>
           </div>
-        </section>
-        <BattleEarnings game={game} />
-        <footer className="destination-footer">
-          <Button variant="outline" onClick={deck}>
-            Deck
-          </Button>
-        </footer>
-      </main>
-    );
-  }
-  return (
-    <main className="team-selection">
-      <section className="selection-row" data-nav-row aria-label="Enemy lineup">
-        {encounterSource(game).enemies.map((enemy, index) => (
-          <CreatureCard
-            key={index}
-            kind={enemy.species}
-            name={enemy.name}
-            enemyId={`preview-${index}`}
-            readout={false}
-            health={enemy.health}
-            maxHealth={enemy.health}
-            label={`Inspect ${enemy.name}`}
-            onInspect={() => inspect({ species: enemy.species, enemyId: `preview-${index}` })}
-            onClick={() => inspect({ species: enemy.species, enemyId: `preview-${index}` })}
+        ) : null}
+        <div className="destination-option">
+          <ArtCard
+            aspect="creature"
+            artwork={assetUrl(boss ? "encounter.boss" : "encounter.combat")}
+            data-encounter
+            aria-label={boss ? "Boss" : "Combat"}
+            onClick={() => send({ type: "beginBattle" })}
           />
-        ))}
+          <h2>{boss ? "Boss" : "Combat"}</h2>
+        </div>
       </section>
-      <footer className="selection-footer">
+      <BattleEarnings game={game} />
+      <footer className="destination-footer">
         <Button variant="outline" onClick={deck}>
           Deck
         </Button>
-        <Button onClick={() => send({ type: "beginBattle" })}>Begin battle</Button>
       </footer>
     </main>
   );
 }
+
 export function Draft({ game, send, inspect }: Props) {
   return (
     <main className="draft-screen">

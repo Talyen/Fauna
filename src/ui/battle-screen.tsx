@@ -25,7 +25,6 @@ import { ManaCrystals } from "./mana-crystals";
 export type Inspection =
   | { card: Card }
   | { species: GameState["selected"][number]; enemyId?: string; creatureId?: string }
-  | { encounter: true }
   | { support: string };
 export type Controls = MutableRefObject<((action: InputAction) => boolean) | null>;
 function FanSlot({ index, count, children }: { index: number; count: number; children: ReactNode }) {

@@ -114,7 +114,7 @@ export function bossReward() {
     d.phase = "teamSelection";
     d.battle = null;
     d.encounter = 3;
-    d.expedition = { biome: 0, step: 3, pack: 0 };
+    d.expedition = { pack: 0 };
   });
   return winBattle(accept(ready, { type: "beginBattle" }));
 }

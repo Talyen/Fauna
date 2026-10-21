@@ -248,7 +248,7 @@ it("counts accepted cards once across previews and resume, refunds before auto-e
   expect(fourthPlayed.battle!.mana).toBe(0);
   expect(fourthPlayed.battle!.cardsPlayedThisTurn).toBe(3);
   expect(accept(played, { type: "endTurn" }).battle!.cardsPlayedThisTurn).toBe(0);
-  expect(() => decodeSave(JSON.stringify({ ...played, version: 18 }))).toThrow();
+  expect(() => decodeSave(JSON.stringify({ ...played, version: 19 }))).toThrow();
 });
 it("does not pay Gold or roll offensive Boons on blocked damage or enemy packets", () => {
   const { state, source, target, events } = fixture();
