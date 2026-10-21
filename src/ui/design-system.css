@@ -1,4 +1,38 @@
 /* Shared interaction skin for registered shadcn primitives. Screen CSS owns layout only. */
+/* Every surface resolves the shared formula locally; custom properties otherwise
+   inherit an already-resolved radius from their parent. Unmeasured controls use 44px. */
+:where(
+  .game-button,
+  .ui-tabs-list,
+  .ui-tab,
+  .dialog-content,
+  .game-tooltip,
+  .creature-card,
+  .action-card,
+  .empty-reserve,
+  label:has(> .ui-radio),
+  .ui-slider
+) {
+  --surface-short-side: var(--control-height);
+  --radius: clamp(
+    var(--radius-min),
+    calc(var(--surface-short-side, var(--control-height)) * var(--radius-ratio)),
+    var(--radius-max)
+  );
+  border-radius: var(--radius);
+  corner-shape: var(--corner-shape);
+}
+:where(.creature-card, .action-card, .empty-reserve) {
+  --surface-short-side: var(--art-short-side);
+}
+/* Keep sibling health bars clear of the creature's curved artwork corners. */
+.combatant-reaction {
+  --radius: clamp(
+    var(--radius-min),
+    calc(var(--battle-creature-width) * 3 / 4 * var(--radius-ratio)),
+    var(--radius-max)
+  );
+}
 .game-button.control-outline {
   border: 1px solid var(--border);
   background: var(--background);
