@@ -27,7 +27,6 @@ import {
   Repeat,
   Pause,
   Swords,
-  Trophy,
   Users,
   Sparkles,
   PawPrint,
@@ -357,12 +356,6 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
         <Swords aria-hidden="true" />
         {home ? (active ? "Continue" : "New journey") : "Resume"}
       </Button>
-      {home && ["victory", "defeat"].includes(game.phase) ? (
-        <Button variant="ghost" onClick={() => setRoute("play")}>
-          <Trophy aria-hidden="true" className="menu-icon-results" />
-          Journey results
-        </Button>
-      ) : null}
       {canManageLineup ? (
         <Button variant="ghost" onClick={() => openModal("lineup")}>
           <Users aria-hidden="true" className="menu-icon-lineup" />
@@ -571,7 +564,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
             ) : null}
             {route === "unlocks" && reveals[0] ? (
               <Screen className="unlock-screen">
-                <ScreenHeading back={() => setRoute("play")} openMenu={() => setRoute("home")}>
+                <ScreenHeading back={() => setRoute("home")} openMenu={() => setRoute("home")}>
                   Creature unlocked
                 </ScreenHeading>
                 <div className="unlock-creature">

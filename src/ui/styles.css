@@ -151,9 +151,6 @@ strong {
   );
   padding: var(--space-12) var(--screen-section-gap);
 }
-.menu-icon-results {
-  color: var(--menu-icon-results);
-}
 .menu-icon-lineup {
   color: var(--menu-icon-lineup);
 }

@@ -5,8 +5,8 @@ import { produce } from "immer";
 import { createGame } from "../../src/game/engine";
 import { definition, species } from "../../src/game/content";
 import { BOONS, TALENTS } from "../../src/game/progression";
-import type { GameState } from "../../src/game/types";
-import { recruitChoice, accept, policy, winBattle, run, bossReward } from "../unit/helpers";
+import type { Command, GameState } from "../../src/game/types";
+import { recruitChoice, accept, policy, winBattle, victoryReady, run, bossReward } from "../unit/helpers";
 const key = "fauna.save.v1";
 async function seed(page: Page, game = createGame(7)) {
   await page.goto("/");
@@ -119,8 +119,9 @@ for (const width of [1280, 1920])
         await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
         await page.emulateMedia({ reducedMotion: "reduce" });
         let game = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
+        let ending: Command;
         if (outcome === "victory") {
-          for (let i = 0; i < 8; i++) {
+          for (let i = 0; i < 7; i++) {
             game = winBattle(accept(game, { type: "beginBattle" }));
             if (game.phase === "recruit")
               game =
@@ -130,6 +131,8 @@ for (const width of [1280, 1920])
             if (game.phase === "boon")
               game = accept(game, { type: "chooseBoon", boon: game.reward!.boons[0]! });
           }
+          game = victoryReady(accept(game, { type: "beginBattle" }));
+          ending = { type: "play", cardId: game.battle!.hand[0]!, targetId: "enemy-0" };
         } else {
           game = accept(game, { type: "beginBattle" });
           game = produce(game, (d) => {
@@ -140,7 +143,7 @@ for (const width of [1280, 1920])
               d.team[0]!.combat!.burn = 1;
             }
           });
-          game = accept(game, { type: outcome === "defeat" ? "endTurn" : "abandon" });
+          ending = { type: outcome === "defeat" ? "endTurn" : "abandon" };
         }
         await seed(page, game);
         if (enlarged) {
@@ -148,7 +151,17 @@ for (const width of [1280, 1920])
           await page.getByRole("radio", { name: "125%", exact: true }).click();
           await page.keyboard.press("Escape");
         }
-        await page.getByRole("button", { name: "Journey results", exact: true }).click();
+        await resume(page);
+        if (ending.type === "play") {
+          await page.locator(`.app:not([inert]) .hand [data-card-id="${ending.cardId}"]`).click();
+          await page.locator('.app:not([inert]) .enemy-row [data-enemy-id="enemy-0"]').click();
+        } else if (ending.type === "endTurn") {
+          await page.getByRole("button", { name: "End turn", exact: true }).click();
+        } else {
+          await page.getByRole("button", { name: "Open menu", exact: true }).click();
+          await page.getByRole("button", { name: "End journey", exact: true }).click();
+        }
+        game = accept(game, ending);
         await expect(
           page.getByRole("heading", {
             name:
@@ -170,11 +183,11 @@ for (const width of [1280, 1920])
           fullPage: true,
         });
         await page.getByRole("button", { name: "Main menu", exact: true }).click();
+        await expect(page.getByRole("button", { name: "Journey results", exact: true })).toHaveCount(0);
         await page.reload();
-        await page.getByRole("button", { name: "Journey results", exact: true }).click();
+        await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
+        await expect(page.getByRole("button", { name: "Journey results", exact: true })).toHaveCount(0);
         expect(await state(page)).toEqual(game);
-        await expect(page.getByRole("button", { name: "New journey", exact: true })).toHaveCount(0);
-        await page.getByRole("button", { name: "Main menu", exact: true }).click();
         await page.getByRole("button", { name: "New journey", exact: true }).click();
         expect((await state(page)).phase).toBe("draft");
         expect((await state(page)).keywordXP).toEqual(game.keywordXP);
