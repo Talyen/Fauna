@@ -26,3 +26,4 @@ These samples record reviewed composition choices. They are not current rendered
 - [Alchemy draw, discard and hand reflow direction](hand-motion/README.md)
 - [Plain inline keywords and Glossary](keyword-interactions/README.md)
 - [Interactive talent states and fine-tuning](talent-interactions/README.md)
+- [Swap opposing arc-height comparison](swap-motion/README.md)

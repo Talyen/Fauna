@@ -161,9 +161,9 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 
 - Available purchases use a normal outlined control with gold on hover.
 - Unmet requirements use 45% opacity and remain inspectable; explain the unmet requirement in the hover/focus tooltip.
-- Unowned talent icons use a muted version of their keyword color; owned icons use the full keyword color.
-- Owned talents use their keyword's semantic color on the talent icon, with a black background and no checkmark. Hover subtly brightens the icon without growth.
-- Successful purchases update the owned state immediately, with a 150ms color transition and a 250ms gold flash on the existing border. Focus outline takes priority over the flash to preserve a single highlighted boundary.
+- Unowned talent icons use their keyword color at 65% opacity; owned icons use the full keyword color.
+- Owned talents use their keyword's semantic color on the talent icon, with a black background and no checkmark. Hover brightens the icon by 20% without growth.
+- Successful purchases update the owned state immediately, with a 150ms color transition and a 250ms gold flash on the existing border. The flash starts gold and fades back to the resting border. Focus outline takes priority over the flash to preserve a single highlighted boundary.
 - Reduced motion makes the owned color transition immediate and suppresses the decorative border flash.
 
 ## Rewards and results
