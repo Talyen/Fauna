@@ -3,7 +3,7 @@ import { test, expect, type Page, type Locator } from "@playwright/test";
 import { accept, run } from "../unit/helpers";
 import { createGame } from "../../src/game/engine";
 
-async function expectAlignedMenu(choices: Locator) {
+async function expectCenteredMenu(choices: Locator) {
   const buttons = await choices.locator("button").evaluateAll((elements) =>
     elements.map((element) => {
       const icon = element.querySelector("svg")!;
@@ -15,23 +15,17 @@ async function expectAlignedMenu(choices: Locator) {
       const textBounds = range.getBoundingClientRect();
       const buttonBounds = element.getBoundingClientRect();
       const iconBounds = icon.getBoundingClientRect();
-      const style = getComputedStyle(element);
-      const gap = Number.parseFloat(style.columnGap);
-      const labelWidth = Number.parseFloat(style.gridTemplateColumns.split(" ")[1]!);
       const buttonCenter = buttonBounds.left + buttonBounds.width / 2;
       return {
-        labelCenterOffset: textBounds.left + textBounds.width / 2 - buttonCenter,
-        expectedLabelOffset: (iconBounds.width + gap) / 2,
-        groupCenterOffset: iconBounds.left + (iconBounds.width + gap + labelWidth) / 2 - buttonCenter,
-        iconInset: iconBounds.left - buttonBounds.left,
+        iconLabelGap: textBounds.left - iconBounds.right,
+        groupCenterOffset: (iconBounds.left + textBounds.right) / 2 - buttonCenter,
         labelLines: range.getClientRects().length,
       };
     }),
   );
   for (const button of buttons) {
-    expect(button.iconInset).toBeCloseTo(buttons[0]!.iconInset);
     expect(button.labelLines).toBe(1);
-    expect(Math.abs(button.labelCenterOffset - button.expectedLabelOffset)).toBeLessThan(1);
+    expect(Math.abs(button.iconLabelGap - 8)).toBeLessThan(1);
     expect(Math.abs(button.groupCenterOffset)).toBeLessThan(1);
   }
 }
@@ -84,14 +78,14 @@ test("minimum-size enlarged menus fit every action without scrolling", async ({ 
   }, JSON.stringify(game));
   await page.goto("/");
   const homeChoices = page.getByRole("navigation", { name: "Main menu" });
-  await expectAlignedMenu(homeChoices);
+  await expectCenteredMenu(homeChoices);
   const homeWidth = (await homeChoices.boundingBox())!.width;
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   await page.getByRole("button", { name: "Open menu" }).click();
   const dialog = page.getByRole("dialog", { name: "Pause menu" });
   await expect(dialog.getByRole("heading", { name: "Fauna", exact: true })).toBeVisible();
   const choices = dialog.getByRole("navigation", { name: "Pause menu" });
-  await expectAlignedMenu(choices);
+  await expectCenteredMenu(choices);
   const bounds = (await choices.boundingBox())!;
   expect(bounds.width).toBeCloseTo(homeWidth);
   const resume = (await choices.getByRole("button", { name: "Resume", exact: true }).boundingBox())!;

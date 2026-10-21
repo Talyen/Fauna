@@ -205,24 +205,11 @@ strong {
   gap: var(--screen-item-gap);
 }
 .menu-choices > button {
-  display: grid;
-  grid-template-columns: var(--icon-size) var(--main-menu-label-width);
   justify-content: center;
   text-align: center;
-  padding-inline: 0;
   height: auto;
   min-height: var(--control-height);
   white-space: normal;
-}
-.menu-choices > button > svg {
-  grid-column: 1;
-  grid-row: 1;
-}
-.menu-choices > button[aria-busy="true"] > svg:not(.ui-spinner) {
-  visibility: hidden;
-}
-.menu-choices > .primary-menu-action {
-  border: 1px solid transparent;
 }
 .menu-choices > .primary-menu-action,
 .menu-choices > button:last-child:nth-child(even) {
