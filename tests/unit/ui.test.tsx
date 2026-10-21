@@ -167,7 +167,7 @@ describe("player interface", () => {
     await user.click(screen.getByRole("button", { name: "Continue" }));
     expect(screen.queryByRole("region", { name: "Enemy row" })).toBeNull();
     expect(screen.queryByRole("button", { name: /^Inspect / })).toBeNull();
-    const enter = screen.getByRole("button", { name: encounter === 0 ? "Combat" : "Boss", exact: true });
+    const enter = screen.getByRole("button", { name: encounter === 0 ? "Combat" : "Boss" });
     expect(screen.getByRole("heading", { name: `Encounter ${encounter + 1} of 8` })).toBeTruthy();
     enter.focus();
     await user.keyboard("i");
@@ -203,7 +203,7 @@ describe("player interface", () => {
         disconnect() {}
       },
     );
-    await user.click(screen.getByRole("button", { name: "Combat", exact: true }));
+    await user.click(screen.getByRole("button", { name: "Combat" }));
     expect(session.store.getState().game.phase).toBe("battle");
     expect(screen.getByRole("region", { name: "Enemy row" })).toBeTruthy();
     await act(async () => {
