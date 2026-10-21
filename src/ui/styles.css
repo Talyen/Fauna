@@ -1819,3 +1819,9 @@ body,
   grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: var(--screen-item-gap);
 }
+
+/* The upper row has no room above it for rising combat feedback. */
+.enemy-row .combat-feedback {
+  bottom: auto;
+  top: var(--space-6);
+}

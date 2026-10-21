@@ -19,12 +19,18 @@ for (const width of [1280, 1920]) {
     const opener = page.getByRole("button", { name: /^Inspect Draw Pile/ });
     await opener.click();
     const pile = page.getByRole("dialog", { name: "Draw Pile", exact: true });
-    await expect(pile.locator(".action-card")).toHaveCount(game.battle!.draw.length);
+    await expect(pile.locator(".action-card")).toHaveCount(
+      Math.min(width === 1280 ? 3 : 6, game.battle!.draw.length),
+    );
     const card = pile.locator(".action-card").first();
     await card.click();
     await expect(page.locator(".inspection.single-card")).toBeVisible();
     await page.keyboard.press("Escape");
     await expect(card).toBeFocused();
+    if (width === 1280 && game.battle!.draw.length > 3) {
+      await pile.getByRole("button", { name: "Next page" }).click();
+      await expect(pile.locator(".action-card")).toHaveCount(game.battle!.draw.length - 3);
+    }
     await page.getByRole("button", { name: "Close draw pile" }).click();
     await expect(opener).toBeFocused();
     await page.getByRole("button", { name: /^Inspect Discard Pile/ }).click();
