@@ -2,16 +2,16 @@ import { test, expect, type Page } from "@playwright/test";
 import { feedbackBattle } from "../unit/helpers";
 import { encodeSave } from "../../src/game/save";
 
-async function freezeFeedback(page: Page) {
-  await page.evaluate(() => {
+async function freezeFeedback(page: Page, time = 180) {
+  await page.evaluate((time) => {
     for (const animation of document.getAnimations()) {
       const target = animation.effect instanceof KeyframeEffect ? animation.effect.target : null;
       if (target instanceof Element && target.closest(".combat-feedback")) {
         animation.pause();
-        animation.currentTime = 180;
+        animation.currentTime = time;
       }
     }
-  });
+  }, time);
   await page.clock.runFor(32);
 }
 async function expectReadable(page: Page) {
@@ -48,9 +48,13 @@ async function expectReadable(page: Page) {
 }
 for (const [width, scale, reduced] of [
   [1280, "1", false],
+  [1280, "1", true],
+  [1280, "1.25", false],
   [1280, "1.25", true],
-  [1920, "1.25", false],
+  [1920, "1", false],
   [1920, "1", true],
+  [1920, "1.25", false],
+  [1920, "1.25", true],
 ] as const) {
   test(`floating combat feedback at ${width}, text ${scale}, reduced ${reduced}`, async ({ page }) => {
     await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
@@ -80,6 +84,11 @@ for (const [width, scale, reduced] of [
     await expectReadable(page);
     // These screenshots intentionally capture active feedback rather than a settled screen.
     await page.screenshot({ path: `reports/combat-feedback-${width}-${scale}-${reduced}.png` });
+    if (!reduced) {
+      await freezeFeedback(page, 900);
+      await expectReadable(page);
+      await page.screenshot({ path: `reports/combat-feedback-rise-${width}-${scale}.png` });
+    }
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.clock.runFor(32);
     await page.emulateMedia({ reducedMotion: "no-preference" });
@@ -93,6 +102,7 @@ for (const [width, scale, reduced] of [
     await page.clock.runFor(1200);
     await expect(page.locator(".combat-burst")).toHaveCount(0);
     await page.getByRole("button", { name: "End turn", exact: true }).click();
+    expect(await page.locator(".battle-screen").evaluate((node) => node.scrollTop)).toBe(0);
     await page.clock.runFor(650);
     await freezeFeedback(page);
     await expectReadable(page);

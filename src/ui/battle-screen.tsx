@@ -139,6 +139,8 @@ export function BattleScreen({
     (allyRecipient ? species(allyRecipient.species).name : undefined);
   const play = (command: Command) => {
     if (!send(command)) return;
+    // Compact layouts scroll the action row below the creatures; show the resolved turn.
+    if (command.type === "endTurn" && !navigateFocus && board.current) board.current.scrollTop = 0;
     setSelected(null);
     setHovered(null);
     setDenial("");

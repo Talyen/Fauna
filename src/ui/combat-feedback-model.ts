@@ -64,8 +64,12 @@ export function appendFeedback(
     else entries.push(entry);
     targets.set(event.targetId, entries);
   }
+  const hasMeaningful = [...targets.values()].some((entries) => entries.some((e) => e.amount !== 0));
+  let fallbackShown = false;
   for (const [targetId, raw] of targets) {
     const meaningful = raw.filter((e) => e.amount !== 0);
+    if (!meaningful.length && (hasMeaningful || fallbackShown)) continue;
+    if (!meaningful.length) fallbackShown = true;
     const entries = (meaningful.length ? meaningful : raw.slice(0, 1))
       .sort((a, b) => priority(a) - priority(b))
       .map((e) =>

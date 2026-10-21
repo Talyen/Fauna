@@ -136,6 +136,14 @@ it("orders notices, losses and gains, suppresses redundant zeros and keeps ineff
   const burst = appendFeedback([], events, 1, 0)[0]!;
   expect(burst.entries.map((e) => e.kind)).toEqual(["status", "damage", "block", "heal"]);
   expect(appendFeedback([], [damage(0)], 2, 0)[0]!.entries[0]!.amount).toBe(0);
+  expect(
+    appendFeedback(
+      [],
+      [damage(2), { kind: "heal", targetId: "ally-0", amount: 0, text: "Full Health" }],
+      4,
+      0,
+    ).map((b) => b.targetId),
+  ).toEqual(["enemy-0"]);
   const duplicate = appendFeedback([burst], [events[2]!], 3, 100);
   expect(duplicate[0]!.entries.filter((e) => e.kind === "status")).toHaveLength(1);
 });

@@ -70,6 +70,7 @@ describe("menu browsing", () => {
         true,
       );
       expect(within(fists).getByText("Unlock · 1 point")).toBeTruthy();
+      expect(document.activeElement).toBe(screen.getByRole("button", { name: "Shield Slam" }));
       await user.keyboard("{Escape}");
       expect(screen.getByRole("button", { name: "Physical talents" })).toBeTruthy();
       await user.keyboard("{Escape}");
