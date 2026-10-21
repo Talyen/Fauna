@@ -43,7 +43,7 @@ import { bossEncounter, encounterSource, finalEncounter, encounterPacks } from "
 import type { Card, Command, CommandResult, GameEvent, GameState } from "./types";
 export function createGame(seed = 1): GameState {
   const state: GameState = {
-    version: 28,
+    version: 29,
     support: null,
     discovery: { encountered: [], recruited: {} },
     revision: 0,

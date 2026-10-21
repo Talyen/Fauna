@@ -30,6 +30,12 @@ export const KEYWORD_DEFINITIONS = freeze(
       "active",
       "Poison hits add damage dealt as Poison; At turn start it deals its stacks as damage, then loses 20% (at least 1)",
     ),
+    water: entry(
+      "Water",
+      "damage",
+      "active",
+      "Water damage; Block absorbs it; Armor does not reduce it; No status effect is applied",
+    ),
     nature: entry("Nature", "damage", "active", "Nature damage; No resistance or status effect is implied"),
     light: entry("Light", "damage", "active", "Light damage; No resistance or status effect is implied", [
       "Holy",
@@ -137,6 +143,7 @@ export const DAMAGE_TYPES = freeze([
   "physical",
   "poison",
   "nature",
+  "water",
   "light",
   "burn",
   "freeze",
@@ -152,6 +159,7 @@ export const PROGRESSION_KEYWORDS = freeze([
   "stun",
   "poison",
   "nature",
+  "water",
   "light",
   "bleed",
   "block",

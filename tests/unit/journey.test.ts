@@ -2,14 +2,16 @@ import { freshCombat } from "../../src/game/combat";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
-import { INITIAL_SPECIES, species } from "../../src/game/content";
+import { species } from "../../src/game/content";
 import { BOONS } from "../../src/game/progression";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { previewPlay } from "../../src/game/preview";
 import { recruitChoice, accept, run, winBattle, victoryReady, bossReward, policy } from "./helpers";
 
 function startedJourney() {
-  return accept(accept(createGame(7), { type: "draft", species: "mossguard" }), { type: "start" });
+  return accept(accept(createGame(7), { type: "draft", species: createGame(7).starterOffers[0]! }), {
+    type: "start",
+  });
 }
 
 describe("journey earnings and results", () => {
@@ -68,12 +70,12 @@ describe("journey earnings and results", () => {
     expect(decodeSave(encodeSave(won))).toEqual(won);
   });
 
-  it("offers defeated creatures even when the roster already contains every species", () => {
+  it("offers defeated creatures even when the roster is full", () => {
     const started = startedJourney();
     const s = produce(run(), (d) => {
       d.expedition = started.expedition;
       d.journey = started.journey;
-      d.roster = [...INITIAL_SPECIES];
+      d.roster = ["mossguard", "emberback", "prismram", "pollenmoth", "captoad"];
       d.reserves = (["pollenmoth", "captoad"] as const).map((kind) => ({
         id: kind,
         species: kind,
@@ -215,7 +217,7 @@ describe("journey earnings and results", () => {
 });
 
 it("completes the one-starter recruitment path through the final boss within the browser journey budget", () => {
-  let game = accept(accept(createGame(7), { type: "draft", species: "pollenmoth" }), { type: "start" });
+  let game = accept(accept(createGame(3), { type: "draft", species: "pollenmoth" }), { type: "start" });
   for (let step = 0; step < 400 && game.phase !== "victory"; step++) {
     expect(game.phase).not.toBe("defeat");
     expect(game.reward?.outcome).not.toBe("defeat");

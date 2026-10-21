@@ -20,6 +20,8 @@ describe("collected starter drafts", () => {
       "prismram",
       "captoad",
       "dunefox",
+      "reedstag",
+      "coralcurl",
     ]);
     expect(new Set(s.unlocked)).toEqual(new Set(SPECIES.map((entry) => entry.id)));
     expect(s.discovery.recruited).toEqual({});

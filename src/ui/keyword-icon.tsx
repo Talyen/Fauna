@@ -22,6 +22,7 @@ const icons = {
   physical: Swords,
   poison: FlaskConical,
   nature: Leaf,
+  water: Droplets,
   light: Sun,
   health: Heart,
   mana: Gem,

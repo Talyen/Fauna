@@ -74,7 +74,9 @@ test("minimum-size enlarged menus fit every action without scrolling", async ({ 
   await page.setViewportSize({ width: 1280, height: 720 });
   // Include both optional entries so the tallest browser menu must fit.
   const game = produce(
-    accept(accept(createGame(7), { type: "draft", species: "mossguard" }), { type: "start" }),
+    accept(accept(createGame(7), { type: "draft", species: createGame(7).starterOffers[0]! }), {
+      type: "start",
+    }),
     (draft) => {
       draft.boons = [BOONS[0]!.id];
     },

@@ -6,7 +6,9 @@ import { decodeSave, encodeSave } from "../../src/game/save";
 import { recruitChoice, accept, winBattle } from "./helpers";
 
 function start(seed = 7) {
-  return accept(accept(createGame(seed), { type: "draft", species: "mossguard" }), { type: "start" });
+  return accept(accept(createGame(seed), { type: "draft", species: createGame(seed).starterOffers[0]! }), {
+    type: "start",
+  });
 }
 function enter(s = start()) {
   return accept(s, { type: "beginBattle" });

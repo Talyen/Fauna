@@ -1,7 +1,7 @@
 import { DAMAGE_TYPES, keywordLabel, type DamageType, EFFECT_KEYWORDS } from "./keywords";
 export { type DamageType } from "./keywords";
 export type SpeciesId =
-  "mossguard" | "emberback" | "pollenmoth" | "prismram" | "captoad" | "dunefox" | "reedstag";
+  "mossguard" | "emberback" | "pollenmoth" | "prismram" | "captoad" | "dunefox" | "reedstag" | "coralcurl";
 type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
   | { kind: "blockRetention"; amount: number }
@@ -9,6 +9,7 @@ type PassiveEffect =
   | { kind: "battleStart"; effect: "block" | "thorns" | "armor"; amount: number }
   | { kind: "poisonRetaliation"; amount: number }
   | { kind: "armorBreak"; amount: number }
+  | { kind: "blockBreak"; amount: number }
   | { kind: "statusReflection"; amount: number }
   | { kind: "shareProtection"; amount: number }
   | { kind: "shareDodge"; amount: number }
@@ -344,6 +345,40 @@ export const SPECIES: readonly Species[] = [
       },
     ],
   },
+  {
+    id: "coralcurl",
+    name: "Coralcurl",
+    title: "The sheltered reef",
+    health: 28,
+    color: "#f89983",
+    trait: "Bubbleburst",
+    passiveTiers: [
+      {
+        description: "Deal 1 Water damage when your Block breaks",
+        effects: [{ kind: "blockBreak", amount: 1 }],
+      },
+      {
+        description: "Deal 2 Water damage when your Block breaks",
+        effects: [{ kind: "blockBreak", amount: 2 }],
+      },
+      {
+        description: "Deal 3 Water damage when your Block breaks",
+        effects: [{ kind: "blockBreak", amount: 3 }],
+      },
+      {
+        description: "Deal 4 Water damage when your Block breaks",
+        effects: [{ kind: "blockBreak", amount: 4 }],
+      },
+      {
+        description: "Deal 5 Water damage when your Block breaks",
+        effects: [{ kind: "blockBreak", amount: 5 }],
+      },
+      {
+        description: "Deal 6 Water damage when your Block breaks",
+        effects: [{ kind: "blockBreak", amount: 6 }],
+      },
+    ],
+  },
 ];
 const card = <T extends Exclude<Effect, "attack">>(
   species: SpeciesId,
@@ -373,6 +408,17 @@ const attack = (
   damageType,
 });
 export const CARDS: readonly CardDefinition[] = [
+  {
+    ...card("coralcurl", "Bubble Ward", "guard", 6),
+    target: "self",
+    artwork: "action.coralcurl.bubble-ward",
+  },
+  { ...attack("coralcurl", "Reef Jet", 6, "water"), artwork: "action.coralcurl.reef-jet" },
+  {
+    ...card("coralcurl", "Coral Spiral", "swap", 1),
+    effects: [{ kind: "blind", amount: 1 }],
+    artwork: "action.coralcurl.coral-spiral",
+  },
   {
     ...attack("reedstag", "Reed Rush", 6, "nature"),
     artwork: "action.reedstag.reed-rush",

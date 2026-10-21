@@ -17,6 +17,8 @@ export const COMBAT_PACKS = [
   ["prismram", "reedstag", "emberback"],
   ["captoad", "mossguard", "pollenmoth"],
   ["prismram", "captoad", "emberback"],
+  ["coralcurl", "reedstag", "prismram"],
+  ["mossguard", "coralcurl", "captoad"],
 ] as const;
 export const BOSSES = [
   {
@@ -76,15 +78,17 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
       species: kind,
       ...(boss ? (index === 0 ? { health: boss.health, damage: boss.damage } : escort) : ordinary),
       damageType:
-        kind === "dunefox"
-          ? "physical"
-          : kind === "emberback"
-            ? "burn"
-            : kind === "captoad"
-              ? "poison"
-              : kind === "mossguard" || kind === "reedstag"
-                ? "nature"
-                : "light",
+        kind === "coralcurl"
+          ? "water"
+          : kind === "dunefox"
+            ? "physical"
+            : kind === "emberback"
+              ? "burn"
+              : kind === "captoad"
+                ? "poison"
+                : kind === "mossguard" || kind === "reedstag"
+                  ? "nature"
+                  : "light",
     })),
   };
 }

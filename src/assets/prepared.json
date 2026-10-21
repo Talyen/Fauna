@@ -1,497 +1,522 @@
 {
   "version": 1,
-  "manifestHash": "2b563f23598462dbf75cdc81b11aa40890070ca5a1c6d2aa4944c9b8429fbe20",
-  "generation": "b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367",
+  "manifestHash": "d2929b324b6ce618c92b6a9a25f0db6a516295d93c97a7cbe9b0af1d229d19bf",
+  "generation": "de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f",
   "records": {
     "keyword.block": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/keywords/block.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/keywords/block.webp",
       "sourceHash": "a44e71309db81d75a22daee623cd3ffc5f28e358180ae9d1b1d62dda99927dbd",
       "outputHash": "a44e71309db81d75a22daee623cd3ffc5f28e358180ae9d1b1d62dda99927dbd"
     },
     "keyword.fire": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/keywords/fire.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/keywords/fire.webp",
       "sourceHash": "cb9698ca8f681f473505cc59e86cb48a2878527821f1060aaee4962fc09b1161",
       "outputHash": "cb9698ca8f681f473505cc59e86cb48a2878527821f1060aaee4962fc09b1161"
     },
     "keyword.heal": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/keywords/heal.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/keywords/heal.webp",
       "sourceHash": "79a101fa4a4db0705630ce54b59eb42ee0563bbb5e09a4c76bff3501aa881bc0",
       "outputHash": "79a101fa4a4db0705630ce54b59eb42ee0563bbb5e09a4c76bff3501aa881bc0"
     },
     "keyword.ice": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/keywords/ice.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/keywords/ice.webp",
       "sourceHash": "73429df482a0a4cb4de9b1ecfb59df27283af83703edda4a7d1e941396f32999",
       "outputHash": "73429df482a0a4cb4de9b1ecfb59df27283af83703edda4a7d1e941396f32999"
     },
     "keyword.light": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/keywords/light.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/keywords/light.webp",
       "sourceHash": "f569c98fd404973c5dce3021496955395d2ac433a6537b3dddafa971bc68e4b2",
       "outputHash": "f569c98fd404973c5dce3021496955395d2ac433a6537b3dddafa971bc68e4b2"
     },
     "keyword.lightning": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/keywords/lightning.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/keywords/lightning.webp",
       "sourceHash": "4701b47a3c8295e443a79120516e36d46d2c40ca855389df1a13f51fc7610e93",
       "outputHash": "4701b47a3c8295e443a79120516e36d46d2c40ca855389df1a13f51fc7610e93"
     },
     "keyword.nature": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/keywords/nature.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/keywords/nature.webp",
       "sourceHash": "cae9eaf177c637da9b05bea9bb088e40cb273a0b4618e95cef10748765d26955",
       "outputHash": "cae9eaf177c637da9b05bea9bb088e40cb273a0b4618e95cef10748765d26955"
     },
     "keyword.physical": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/keywords/physical.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/keywords/physical.webp",
       "sourceHash": "30ea537b7e963d845e9600a0de62b7effb5ad7a0d0f3045dc3eac24a0a778151",
       "outputHash": "30ea537b7e963d845e9600a0de62b7effb5ad7a0d0f3045dc3eac24a0a778151"
     },
     "keyword.poison": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/keywords/poison.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/keywords/poison.webp",
       "sourceHash": "4c6d38d4178b5f781d513568655bae3ea8ca8583cd702498e3f8ccb1e076d127",
       "outputHash": "4c6d38d4178b5f781d513568655bae3ea8ca8583cd702498e3f8ccb1e076d127"
     },
     "location.briar-hollow": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/locations/briar-hollow.svg",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/locations/briar-hollow.svg",
       "sourceHash": "5d0a8d581f93714f7c5df51ea24382d0ce81c3d604d90d174f58818b29cc35b9",
       "outputHash": "5d0a8d581f93714f7c5df51ea24382d0ce81c3d604d90d174f58818b29cc35b9"
     },
     "location.ember-grove": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/locations/ember-grove.svg",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/locations/ember-grove.svg",
       "sourceHash": "c1dad85c6c1e2c0f69a25b256ab0ec09858e63624631e4f3d83edc5b9c1d9f6b",
       "outputHash": "c1dad85c6c1e2c0f69a25b256ab0ec09858e63624631e4f3d83edc5b9c1d9f6b"
     },
     "location.firefly-pool": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/locations/firefly-pool.svg",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/locations/firefly-pool.svg",
       "sourceHash": "1c96c737e42aa1144e8f3ea3b3a5881caf98098389398249d0ffd149c190fa8f",
       "outputHash": "1c96c737e42aa1144e8f3ea3b3a5881caf98098389398249d0ffd149c190fa8f"
     },
     "location.flooded-grove": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/locations/flooded-grove.svg",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/locations/flooded-grove.svg",
       "sourceHash": "ab42f9e0b7ee0f07a424dc4246d83b29cb9f4c98757f23b89c0d0069a1b1cb01",
       "outputHash": "ab42f9e0b7ee0f07a424dc4246d83b29cb9f4c98757f23b89c0d0069a1b1cb01"
     },
     "location.hollow-heart": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/locations/hollow-heart.svg",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/locations/hollow-heart.svg",
       "sourceHash": "002ff0c2510c471c4d69beff63e7e284eddb47076f4e0e26a38fa32ea4c56e33",
       "outputHash": "002ff0c2510c471c4d69beff63e7e284eddb47076f4e0e26a38fa32ea4c56e33"
     },
     "location.mist-island": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/locations/mist-island.svg",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/locations/mist-island.svg",
       "sourceHash": "7b8f5b21a7a7285758befad1605bf8d3c6ce4bbd727418985470efe771e9d799",
       "outputHash": "7b8f5b21a7a7285758befad1605bf8d3c6ce4bbd727418985470efe771e9d799"
     },
     "location.moonwell": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/locations/moonwell.svg",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/locations/moonwell.svg",
       "sourceHash": "07e24a8aea937900a2863aa43d9547b9617519fab2cef49e04f3cf679a92d8c8",
       "outputHash": "07e24a8aea937900a2863aa43d9547b9617519fab2cef49e04f3cf679a92d8c8"
     },
     "location.mossy-stream": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/locations/mossy-stream.svg",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/locations/mossy-stream.svg",
       "sourceHash": "412dddec0fd9fc889fd4296497cc0071557be1b585d8c909ad6143604fc358b5",
       "outputHash": "412dddec0fd9fc889fd4296497cc0071557be1b585d8c909ad6143604fc358b5"
     },
     "location.reed-banks": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/locations/reed-banks.svg",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/locations/reed-banks.svg",
       "sourceHash": "c69415f5f1bd576bfbfade166251ab73f2d05cb2a758609c83d295dfbdc5a3c3",
       "outputHash": "c69415f5f1bd576bfbfade166251ab73f2d05cb2a758609c83d295dfbdc5a3c3"
     },
     "location.silken-clearing": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/locations/silken-clearing.svg",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/locations/silken-clearing.svg",
       "sourceHash": "300a868b9b2ad2844a68460ec18541708433a1f3b05500c3d82888162ba5c65b",
       "outputHash": "300a868b9b2ad2844a68460ec18541708433a1f3b05500c3d82888162ba5c65b"
     },
     "mana.full": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/interface/mana-full.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/interface/mana-full.webp",
       "sourceHash": "b58b5b50814d7404d8b4b8428f02867bec34ef79b0f4974dcc612a4e1c2b6f2e",
       "outputHash": "b58b5b50814d7404d8b4b8428f02867bec34ef79b0f4974dcc612a4e1c2b6f2e"
     },
     "mana.empty": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/interface/mana-empty.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/interface/mana-empty.webp",
       "sourceHash": "8e9882cc59591e55ebbe4c095201e7331e84d416530ed1cd73e945a2b0ec3ee3",
       "outputHash": "8e9882cc59591e55ebbe4c095201e7331e84d416530ed1cd73e945a2b0ec3ee3"
     },
     "sound.physical": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/sounds/physical.wav",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/sounds/physical.wav",
       "sourceHash": "4b194d121fd7ab9823bca81a13f074af00c27dac7cd1d765a5dc5e683543615d",
       "outputHash": "4b194d121fd7ab9823bca81a13f074af00c27dac7cd1d765a5dc5e683543615d"
     },
     "sound.fire": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/sounds/fire.ogg",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/sounds/fire.ogg",
       "sourceHash": "7b515ce1c85396b7ebabb9dc9876e892a0f642c8d696cf03aa69aa83cb6f30d3",
       "outputHash": "7b515ce1c85396b7ebabb9dc9876e892a0f642c8d696cf03aa69aa83cb6f30d3"
     },
     "sound.ice": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/sounds/ice.ogg",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/sounds/ice.ogg",
       "sourceHash": "cd5b436a0c0c7866f6073f289c733a2201b34d345f2691a9a060b5c2aec0e3c0",
       "outputHash": "cd5b436a0c0c7866f6073f289c733a2201b34d345f2691a9a060b5c2aec0e3c0"
     },
     "sound.lightning": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/sounds/lightning.wav",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/sounds/lightning.wav",
       "sourceHash": "177638f560989c5f87be99ed6cd37dab913cbe6af7eb48e721b5561891b5d6f1",
       "outputHash": "177638f560989c5f87be99ed6cd37dab913cbe6af7eb48e721b5561891b5d6f1"
     },
     "sound.poison": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/sounds/poison.ogg",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/sounds/poison.ogg",
       "sourceHash": "3f3bdd7f3637e9bfe7d14a4cabed00f0e195eda95bdeb260233705e7e012d9c3",
       "outputHash": "3f3bdd7f3637e9bfe7d14a4cabed00f0e195eda95bdeb260233705e7e012d9c3"
     },
     "sound.nature": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/sounds/nature.wav",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/sounds/nature.wav",
       "sourceHash": "4b194d121fd7ab9823bca81a13f074af00c27dac7cd1d765a5dc5e683543615d",
       "outputHash": "4b194d121fd7ab9823bca81a13f074af00c27dac7cd1d765a5dc5e683543615d"
     },
     "sound.light": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/sounds/light.ogg",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/sounds/light.ogg",
       "sourceHash": "267a197d97d33a4acb09b974f908d82234cd548a369eb218f169238900586f0a",
       "outputHash": "267a197d97d33a4acb09b974f908d82234cd548a369eb218f169238900586f0a"
     },
     "sound.heal": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/sounds/heal.wav",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/sounds/heal.wav",
       "sourceHash": "2847537ec06e3c644f987485fe128128da8c18497630154bc8429ed39e7933b9",
       "outputHash": "2847537ec06e3c644f987485fe128128da8c18497630154bc8429ed39e7933b9"
     },
     "sound.block": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/sounds/block.ogg",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/sounds/block.ogg",
       "sourceHash": "6a4bbb4556c922dfd98d2356c924b8635dbbd3a88e9c21a8e94591141ee69c64",
       "outputHash": "6a4bbb4556c922dfd98d2356c924b8635dbbd3a88e9c21a8e94591141ee69c64"
     },
     "sound.absorb": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/sounds/absorb.ogg",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/sounds/absorb.ogg",
       "sourceHash": "6a4bbb4556c922dfd98d2356c924b8635dbbd3a88e9c21a8e94591141ee69c64",
       "outputHash": "6a4bbb4556c922dfd98d2356c924b8635dbbd3a88e9c21a8e94591141ee69c64"
     },
     "sound.deny": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/sounds/deny.wav",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/sounds/deny.wav",
       "sourceHash": "b82cdf1e4f349e68ede0dcd7dbf7476698872e3a5b81fbec9aeb4804caa059fa",
       "outputHash": "b82cdf1e4f349e68ede0dcd7dbf7476698872e3a5b81fbec9aeb4804caa059fa"
     },
     "sound.victory": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/sounds/victory.wav",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/sounds/victory.wav",
       "sourceHash": "c15d53b754283495fea4e7908023cd4391c41f91966968a57f7f075b886f62ad",
       "outputHash": "c15d53b754283495fea4e7908023cd4391c41f91966968a57f7f075b886f62ad"
     },
     "sound.defeat": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/sounds/defeat.wav",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/sounds/defeat.wav",
       "sourceHash": "b707cf3a0eca1b4aac9411e2411e25b0cf85e60ac1198b4750ba85901cea6184",
       "outputHash": "b707cf3a0eca1b4aac9411e2411e25b0cf85e60ac1198b4750ba85901cea6184"
     },
     "sound.recruit": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/sounds/recruit.wav",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/sounds/recruit.wav",
       "sourceHash": "3fdc704f15e128161465b8475be33600a54096826c2587f3d841cabe9633cf6e",
       "outputHash": "3fdc704f15e128161465b8475be33600a54096826c2587f3d841cabe9633cf6e"
     },
     "sound.talent": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/sounds/talent.wav",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/sounds/talent.wav",
       "sourceHash": "3fdc704f15e128161465b8475be33600a54096826c2587f3d841cabe9633cf6e",
       "outputHash": "3fdc704f15e128161465b8475be33600a54096826c2587f3d841cabe9633cf6e"
     },
     "sound.knockout": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/sounds/knockout.wav",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/sounds/knockout.wav",
       "sourceHash": "a38188b702a7e08ca386cd5c995e5231e9e650f841100415b781a86ffd1ac7d5",
       "outputHash": "a38188b702a7e08ca386cd5c995e5231e9e650f841100415b781a86ffd1ac7d5"
     },
     "music.menu": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/music/menu.mp3",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/music/menu.mp3",
       "sourceHash": "bbc16afff927bf8492d495f1b6de0a9f30bd45323e1942527ec0b8dec8743ebb",
       "outputHash": "bbc16afff927bf8492d495f1b6de0a9f30bd45323e1942527ec0b8dec8743ebb"
     },
     "music.fernwood": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/music/fernwood.mp3",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/music/fernwood.mp3",
       "sourceHash": "d711edee632295069a00456d1d6587f3ea4443f4e05a9159cf086c3aaa2786f5",
       "outputHash": "d711edee632295069a00456d1d6587f3ea4443f4e05a9159cf086c3aaa2786f5"
     },
     "music.marsh": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/music/marsh.mp3",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/music/marsh.mp3",
       "sourceHash": "154205a5367f0562d1c1e44cd650d204a74033fb8a607d50a9dc51d10cdb26b4",
       "outputHash": "154205a5367f0562d1c1e44cd650d204a74033fb8a607d50a9dc51d10cdb26b4"
     },
     "music.boss": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/music/boss.mp3",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/music/boss.mp3",
       "sourceHash": "56464355707bea1b6932b1fe107345a46d62f4ab3bc2f299aeb3d1b625719c38",
       "outputHash": "56464355707bea1b6932b1fe107345a46d62f4ab3bc2f299aeb3d1b625719c38"
     },
     "boon.tattered-pages": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/boons/tattered-pages.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/boons/tattered-pages.webp",
       "sourceHash": "ef42b8ba36da8df1724d44672b612f329f2855d28ca08f85bbb35e067c0b80b8",
       "outputHash": "ef42b8ba36da8df1724d44672b612f329f2855d28ca08f85bbb35e067c0b80b8"
     },
     "boon.bone-charm": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/boons/bone-charm.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/boons/bone-charm.webp",
       "sourceHash": "721b61ea8c709449980fe24c812df7f748b19f7c2b79d71462728b4f7ad4c046",
       "outputHash": "721b61ea8c709449980fe24c812df7f748b19f7c2b79d71462728b4f7ad4c046"
     },
     "boon.ironwood-buckler": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/boons/ironwood-buckler.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/boons/ironwood-buckler.webp",
       "sourceHash": "5eb2a27699be63e082957233ac5927109b5ee739b98e437fe321b10e28f7d6e5",
       "outputHash": "5eb2a27699be63e082957233ac5927109b5ee739b98e437fe321b10e28f7d6e5"
     },
     "boon.icy-heart": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/boons/icy-heart.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/boons/icy-heart.webp",
       "sourceHash": "e3cfd1970519dd1de46442e8f7182309920414449a00897aa657d29803f9054c",
       "outputHash": "e3cfd1970519dd1de46442e8f7182309920414449a00897aa657d29803f9054c"
     },
     "boon.meteorite": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/boons/meteorite.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/boons/meteorite.webp",
       "sourceHash": "4504b4b70873a9df25a5e81187bed537c7ac263471fb11855f41d99d3e1ef32a",
       "outputHash": "4504b4b70873a9df25a5e81187bed537c7ac263471fb11855f41d99d3e1ef32a"
     },
     "boon.sin-eaters-lantern": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/boons/sin-eaters-lantern.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/boons/sin-eaters-lantern.webp",
       "sourceHash": "c26c05186c2d5816e8044b9f00d23f7b6a6169a4448558f6655cc9808390e9a4",
       "outputHash": "c26c05186c2d5816e8044b9f00d23f7b6a6169a4448558f6655cc9808390e9a4"
     },
     "boon.thunderstone": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/boons/thunderstone.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/boons/thunderstone.webp",
       "sourceHash": "1d66585c63d0e8b52ba40f6f2226df4c6f86366709869d9c2e6903bf9320cbf9",
       "outputHash": "1d66585c63d0e8b52ba40f6f2226df4c6f86366709869d9c2e6903bf9320cbf9"
     },
     "boon.groves-favor": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/boons/groves-favor.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/boons/groves-favor.webp",
       "sourceHash": "1d8c4cbc2512efa5f4887024ba1d489167c4927edf5f1e3f8c6ad92e701a6bc5",
       "outputHash": "1d8c4cbc2512efa5f4887024ba1d489167c4927edf5f1e3f8c6ad92e701a6bc5"
     },
     "sound.activate": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/sounds/activate.wav",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/sounds/activate.wav",
       "sourceHash": "d2e16090e00cd6c00da24c1f2663eca96d5b9f3b5e840864f30b4fc615747d4a",
       "outputHash": "d2e16090e00cd6c00da24c1f2663eca96d5b9f3b5e840864f30b4fc615747d4a"
     },
     "encounter.combat": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/encounters/combat.svg",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/encounters/combat.svg",
       "sourceHash": "e51a9f689c37e508d3901cca01d7aa97757ed8b8acf18327b06b84b189cd0de2",
       "outputHash": "e51a9f689c37e508d3901cca01d7aa97757ed8b8acf18327b06b84b189cd0de2"
     },
     "encounter.boss": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/encounters/boss.svg",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/encounters/boss.svg",
       "sourceHash": "e51a9f689c37e508d3901cca01d7aa97757ed8b8acf18327b06b84b189cd0de2",
       "outputHash": "e51a9f689c37e508d3901cca01d7aa97757ed8b8acf18327b06b84b189cd0de2"
     },
     "boon.brass-censer": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/boons/brass-censer.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/boons/brass-censer.webp",
       "sourceHash": "34f42205cab3c99d31db5bf41b4e5bcb17bfd5e9e7c15a2ad1413c4f76352f03",
       "outputHash": "34f42205cab3c99d31db5bf41b4e5bcb17bfd5e9e7c15a2ad1413c4f76352f03"
     },
     "boon.parasitic-bloom": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/boons/parasitic-bloom.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/boons/parasitic-bloom.webp",
       "sourceHash": "c33b021c66c5d31edbd54a998ee4e556d214ac2ded4248c507a058d0e5d70e95",
       "outputHash": "c33b021c66c5d31edbd54a998ee4e556d214ac2ded4248c507a058d0e5d70e95"
     },
     "boon.cutpurse-knife": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/boons/cutpurse-knife.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/boons/cutpurse-knife.webp",
       "sourceHash": "871814d4e87588644b286ba27b470b99277fc679b2a0810c3c5b9327fad5f5f6",
       "outputHash": "871814d4e87588644b286ba27b470b99277fc679b2a0810c3c5b9327fad5f5f6"
     },
     "boon.merchants-favor": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/boons/merchants-favor.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/boons/merchants-favor.webp",
       "sourceHash": "5323eb57de518b0d596a8ba8705b5b9bfba474c2749d79bf549a0b27affaf172",
       "outputHash": "5323eb57de518b0d596a8ba8705b5b9bfba474c2749d79bf549a0b27affaf172"
     },
     "boon.plague-doctors-mask": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/boons/plague-doctors-mask.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/boons/plague-doctors-mask.webp",
       "sourceHash": "8f1f72e3fd8b2f459a8af08b4142f8427857471055838e57b2dac45c7c4a29ad",
       "outputHash": "8f1f72e3fd8b2f459a8af08b4142f8427857471055838e57b2dac45c7c4a29ad"
     },
     "boon.sundering-charm": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/boons/sundering-charm.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/boons/sundering-charm.webp",
       "sourceHash": "0c3dc045453aa58a31697dd8b7bd482fe59a751364685aeb1c78d85f9955ac8f",
       "outputHash": "0c3dc045453aa58a31697dd8b7bd482fe59a751364685aeb1c78d85f9955ac8f"
     },
     "boon.resonant-chimes": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/boons/resonant-chimes.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/boons/resonant-chimes.webp",
       "sourceHash": "1c27013c6d552683f945a83220ce17fb35f58f25afb8e07c9525cc5b224c1b63",
       "outputHash": "1c27013c6d552683f945a83220ce17fb35f58f25afb8e07c9525cc5b224c1b63"
     },
     "boon.smugglers-map": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/boons/smugglers-map.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/boons/smugglers-map.webp",
       "sourceHash": "5c528e4fe475b5137817d452c8e67a85a4c4646961f5ae185a4173b093c5b230",
       "outputHash": "5c528e4fe475b5137817d452c8e67a85a4c4646961f5ae185a4173b093c5b230"
     },
     "boon.frozen-pocketwatch": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/boons/frozen-pocketwatch.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/boons/frozen-pocketwatch.webp",
       "sourceHash": "3573c73cc8122372a4eb3782631b39c84e9b6411d8fbdf5f5c648d804f990d2d",
       "outputHash": "3573c73cc8122372a4eb3782631b39c84e9b6411d8fbdf5f5c648d804f990d2d"
     },
     "boon.lucky-clover": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/boons/lucky-clover.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/boons/lucky-clover.webp",
       "sourceHash": "799c9df3fe38d94ad6250287c6b0d1ed105afd68ce972147486b8565a92979fa",
       "outputHash": "799c9df3fe38d94ad6250287c6b0d1ed105afd68ce972147486b8565a92979fa"
     },
     "pile.draw": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/battle/draw-pile.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/battle/draw-pile.webp",
       "sourceHash": "9bea82c589a7c1e44331ae4244c772138a0ecc99c97a5fec0d39d9014813457c",
       "outputHash": "9bea82c589a7c1e44331ae4244c772138a0ecc99c97a5fec0d39d9014813457c"
     },
     "pile.discard": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/battle/discard-pile.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/battle/discard-pile.webp",
       "sourceHash": "96404f02f506b3ce26e4b200667a77d4a264e254da3bd77ee8bb6a6bf84a7237",
       "outputHash": "96404f02f506b3ce26e4b200667a77d4a264e254da3bd77ee8bb6a6bf84a7237"
     },
     "card.back": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/battle/card-back.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/battle/card-back.webp",
       "sourceHash": "08373185233625b13ecee642c5c9c72d3b66d85cad3bee4c243ffbfc5e2ba3b4",
       "outputHash": "08373185233625b13ecee642c5c9c72d3b66d85cad3bee4c243ffbfc5e2ba3b4"
     },
     "keyword.armor": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/keywords/armor.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/keywords/armor.webp",
       "sourceHash": "58e05a4c1584ee5cb9a5225038d79a0d003a86b1dfc8567f7554daa8b418e27e",
       "outputHash": "58e05a4c1584ee5cb9a5225038d79a0d003a86b1dfc8567f7554daa8b418e27e"
     },
     "keyword.bleed": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/keywords/bleed.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/keywords/bleed.webp",
       "sourceHash": "f5394ea620c001c968cc6e663c24a9b92a6871c6840a443cb29467d3adbc6901",
       "outputHash": "f5394ea620c001c968cc6e663c24a9b92a6871c6840a443cb29467d3adbc6901"
     },
     "keyword.dodge": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/keywords/dodge.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/keywords/dodge.webp",
       "sourceHash": "b35dbf480cbe393b4f482d7635e68a4c389b3bde0ed104bcb57152041abfe434",
       "outputHash": "b35dbf480cbe393b4f482d7635e68a4c389b3bde0ed104bcb57152041abfe434"
     },
     "keyword.leech": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/keywords/leech.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/keywords/leech.webp",
       "sourceHash": "7bd953c13ce7a4ac096363adcadbc0ed701dfe72782ef519c83c8f5850c4138d",
       "outputHash": "7bd953c13ce7a4ac096363adcadbc0ed701dfe72782ef519c83c8f5850c4138d"
     },
     "keyword.mana": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/keywords/mana.webp",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/keywords/mana.webp",
       "sourceHash": "a764934c1b281eb3d0876c05c810c037bb221d0bc3ca827b38dd8ceae56c192a",
       "outputHash": "a764934c1b281eb3d0876c05c810c037bb221d0bc3ca827b38dd8ceae56c192a"
     },
     "creature.emberback": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/emberback/emberback.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/emberback/emberback.png",
       "sourceHash": "172d152ac13deea86e0e3706493a420a3bcec8d64368db09ceaabf5e9968c3c2",
       "outputHash": "172d152ac13deea86e0e3706493a420a3bcec8d64368db09ceaabf5e9968c3c2"
     },
     "action.emberback.ember-charge": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/emberback/ember-charge.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/emberback/ember-charge.png",
       "sourceHash": "4d790c1602aec22c1b8b458c485be9cde46d344f929427ab60ce5de6562dc7f6",
       "outputHash": "4d790c1602aec22c1b8b458c485be9cde46d344f929427ab60ce5de6562dc7f6"
     },
     "action.emberback.furnace-breath": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/emberback/furnace-breath.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/emberback/furnace-breath.png",
       "sourceHash": "e8c691de7837ae9d84d4a5488a9991e184939c6943dce535ab02f8c7b108a69e",
       "outputHash": "e8c691de7837ae9d84d4a5488a9991e184939c6943dce535ab02f8c7b108a69e"
     },
     "action.emberback.magma-stomp": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/emberback/magma-stomp.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/emberback/magma-stomp.png",
       "sourceHash": "13644e72099ac1994670cfd8f46d8adcea7365cc2e42efa8b6ddeff7786a2447",
       "outputHash": "13644e72099ac1994670cfd8f46d8adcea7365cc2e42efa8b6ddeff7786a2447"
     },
     "creature.mossguard": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/mossguard/portrait.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/mossguard/portrait.png",
       "sourceHash": "79232067d4b246388fc9f9ca5c7d03ffd3deb541c81974bff291578d6140fed0",
       "outputHash": "79232067d4b246388fc9f9ca5c7d03ffd3deb541c81974bff291578d6140fed0"
     },
     "action.mossguard.boulder-brace": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/mossguard/boulder-brace.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/mossguard/boulder-brace.png",
       "sourceHash": "37fe66768d3262325d5ea04fe1050376ffda130cbc7a54da3cc604f46f9c276a",
       "outputHash": "37fe66768d3262325d5ea04fe1050376ffda130cbc7a54da3cc604f46f9c276a"
     },
     "action.mossguard.rooted-stomp": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/mossguard/rooted-stomp.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/mossguard/rooted-stomp.png",
       "sourceHash": "f467555250168dd6026447dbc9055995e8316d0ded9bcbb1701e06840bb6847c",
       "outputHash": "f467555250168dd6026447dbc9055995e8316d0ded9bcbb1701e06840bb6847c"
     },
     "action.mossguard.moss-renewal": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/mossguard/moss-renewal.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/mossguard/moss-renewal.png",
       "sourceHash": "bfb0c6de8a4a62753513db0eb6834a14d77330b25175b07ae4bf43f143fcce78",
       "outputHash": "bfb0c6de8a4a62753513db0eb6834a14d77330b25175b07ae4bf43f143fcce78"
     },
     "creature.pollenmoth": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/pollenmoth/pollenmoth.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/pollenmoth/pollenmoth.png",
       "sourceHash": "fc9b1ccd4acb9978117deed82682d2c1558b04169df92b16c9ad8cb23e32a738",
       "outputHash": "fc9b1ccd4acb9978117deed82682d2c1558b04169df92b16c9ad8cb23e32a738"
     },
     "action.pollenmoth.dazzle-burst": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/pollenmoth/dazzle-burst.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/pollenmoth/dazzle-burst.png",
       "sourceHash": "a0a0e6249e6b7cc95879d2d7d9d8de78e2ffdcc555b00679145ab9bd9aa3bfae",
       "outputHash": "a0a0e6249e6b7cc95879d2d7d9d8de78e2ffdcc555b00679145ab9bd9aa3bfae"
     },
     "action.pollenmoth.bloomwake": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/pollenmoth/bloomwake.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/pollenmoth/bloomwake.png",
       "sourceHash": "3d5838de7d4460f1c02567f353f8505a8ec07aa0248ff0bd9aa56c67d19a1a6e",
       "outputHash": "3d5838de7d4460f1c02567f353f8505a8ec07aa0248ff0bd9aa56c67d19a1a6e"
     },
     "action.pollenmoth.petal-shelter": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/pollenmoth/petal-shelter.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/pollenmoth/petal-shelter.png",
       "sourceHash": "163a8bbbabd38df0b81143c45335488a507e4290c8f992c0675a99c8f47a4542",
       "outputHash": "163a8bbbabd38df0b81143c45335488a507e4290c8f992c0675a99c8f47a4542"
     },
     "creature.prismram": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/prismram/portrait.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/prismram/portrait.png",
       "sourceHash": "33a58e988e41fda82d3c84fb4a41bc6c555c69b0477a73c7c711662641b58469",
       "outputHash": "33a58e988e41fda82d3c84fb4a41bc6c555c69b0477a73c7c711662641b58469"
     },
     "action.prismram.prism-charge": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/prismram/prism-charge.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/prismram/prism-charge.png",
       "sourceHash": "af070beb915ca8729389f077b03e27c696086bc95bbf589883e7285dbd3b5848",
       "outputHash": "af070beb915ca8729389f077b03e27c696086bc95bbf589883e7285dbd3b5848"
     },
     "action.prismram.faceted-ward": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/prismram/faceted-ward.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/prismram/faceted-ward.png",
       "sourceHash": "15a6ddec6638b14c5852da7522b773847ed02625d276f75205c1e7e695bfe358",
       "outputHash": "15a6ddec6638b14c5852da7522b773847ed02625d276f75205c1e7e695bfe358"
     },
     "action.prismram.spectrum-lance": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/prismram/spectrum-lance.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/prismram/spectrum-lance.png",
       "sourceHash": "aefbeaf686d693f13dc402ff84b6552bd93d5f01e89793d4d865422c3b5e4ae2",
       "outputHash": "aefbeaf686d693f13dc402ff84b6552bd93d5f01e89793d4d865422c3b5e4ae2"
     },
     "creature.captoad": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/captoad/portrait.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/captoad/portrait.png",
       "sourceHash": "d872ea01e94021061e313bef327b610cab51b8907ecd38e7e854ab6124e3255c",
       "outputHash": "d872ea01e94021061e313bef327b610cab51b8907ecd38e7e854ab6124e3255c"
     },
     "action.captoad.spore-puff": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/captoad/spore-puff.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/captoad/spore-puff.png",
       "sourceHash": "7edf7b66632a6d1e2f7cc462ca2afc9a22069e9133d08529ba95fd7cae24fbb3",
       "outputHash": "7edf7b66632a6d1e2f7cc462ca2afc9a22069e9133d08529ba95fd7cae24fbb3"
     },
     "action.captoad.mushroom-guard": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/captoad/mushroom-guard.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/captoad/mushroom-guard.png",
       "sourceHash": "879dc5f2b386eebd022569069bfe2160f37226ec84d23e44c63bebc5520f4265",
       "outputHash": "879dc5f2b386eebd022569069bfe2160f37226ec84d23e44c63bebc5520f4265"
     },
     "action.captoad.bogbound-leap": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/captoad/bogbound-leap.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/captoad/bogbound-leap.png",
       "sourceHash": "f39d106a932ac57f70ce9fa0a3f9887e24691d2de8020740c0222f67f041aa80",
       "outputHash": "f39d106a932ac57f70ce9fa0a3f9887e24691d2de8020740c0222f67f041aa80"
     },
     "creature.dunefox": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/dunefox/portrait.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/dunefox/portrait.png",
       "sourceHash": "f10c9654e9e1fd14fbf1ba08ed586292438bdf246147fb1f980862f958371658",
       "outputHash": "f10c9654e9e1fd14fbf1ba08ed586292438bdf246147fb1f980862f958371658"
     },
     "action.dunefox.sandburst-pounce": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/dunefox/sandburst-pounce.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/dunefox/sandburst-pounce.png",
       "sourceHash": "2da4185014088687cb0f459e5d2fe2c2245d0232671832de7613855446ec796e",
       "outputHash": "2da4185014088687cb0f459e5d2fe2c2245d0232671832de7613855446ec796e"
     },
     "action.dunefox.dune-whirl": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/dunefox/dune-whirl.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/dunefox/dune-whirl.png",
       "sourceHash": "02760aece680a7f9afcb3d271df3c1a2ef6a0aedb7eb4d3756db6d82d87d638d",
       "outputHash": "02760aece680a7f9afcb3d271df3c1a2ef6a0aedb7eb4d3756db6d82d87d638d"
     },
     "action.dunefox.mirage-step": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/dunefox/mirage-step.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/dunefox/mirage-step.png",
       "sourceHash": "a5d25cc8409556d8b9df591b3eb13893eb36c3633332f7174a22fab6b65f5847",
       "outputHash": "a5d25cc8409556d8b9df591b3eb13893eb36c3633332f7174a22fab6b65f5847"
     },
     "creature.reedstag": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/reedstag/portrait.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/reedstag/portrait.png",
       "sourceHash": "d83d8414e19df976a92560bd80522d7e1cdd401070ffd63c21c9c9eb3b59a91e",
       "outputHash": "d83d8414e19df976a92560bd80522d7e1cdd401070ffd63c21c9c9eb3b59a91e"
     },
     "action.reedstag.reed-rush": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/reedstag/reed-rush.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/reedstag/reed-rush.png",
       "sourceHash": "1d0412f45856f8222a5f854007e9c75b368cc542b60b4e603a225fa022383231",
       "outputHash": "1d0412f45856f8222a5f854007e9c75b368cc542b60b4e603a225fa022383231"
     },
     "action.reedstag.reed-shelter": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/reedstag/reed-shelter.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/reedstag/reed-shelter.png",
       "sourceHash": "36546533cd010d1ace2b0bbcb61e9e94178e63ed68f0d85774337585fbd14c71",
       "outputHash": "36546533cd010d1ace2b0bbcb61e9e94178e63ed68f0d85774337585fbd14c71"
     },
     "action.reedstag.mending-spring": {
-      "url": "./prepared/b9c8d1de4ab6eeaa606c099c3c2368728b73169ffc4b3d786fb7ed191b07c367/art/reedstag/mending-spring.png",
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/reedstag/mending-spring.png",
       "sourceHash": "4ff1c559164ae3d02aa213a2a25dc9eff7762b1a583ea7fca7e9fedaf33fbf6b",
       "outputHash": "4ff1c559164ae3d02aa213a2a25dc9eff7762b1a583ea7fca7e9fedaf33fbf6b"
+    },
+    "creature.coralcurl": {
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/coralcurl/portrait.png",
+      "sourceHash": "07f3e085383d4eefa4f48897409cbe07f784bff668a17c559e274bda3cfc4e8a",
+      "outputHash": "07f3e085383d4eefa4f48897409cbe07f784bff668a17c559e274bda3cfc4e8a"
+    },
+    "action.coralcurl.bubble-ward": {
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/coralcurl/bubble-ward.png",
+      "sourceHash": "a04e7484c58eaddbb3aa044a422d9d24aae8ee63f5208654d60d967e83cafc7b",
+      "outputHash": "a04e7484c58eaddbb3aa044a422d9d24aae8ee63f5208654d60d967e83cafc7b"
+    },
+    "action.coralcurl.reef-jet": {
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/coralcurl/reef-jet.png",
+      "sourceHash": "d4ed45e79526b1fc9628f41b91f4c6355434fe0c846c4d947cf9d202ff736d82",
+      "outputHash": "d4ed45e79526b1fc9628f41b91f4c6355434fe0c846c4d947cf9d202ff736d82"
+    },
+    "action.coralcurl.coral-spiral": {
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/coralcurl/coral-spiral.png",
+      "sourceHash": "bdc5832bcfd490dc20319bbeaeb5333cc895266b165ddbd493cb602717a9d42a",
+      "outputHash": "bdc5832bcfd490dc20319bbeaeb5333cc895266b165ddbd493cb602717a9d42a"
+    },
+    "keyword.water": {
+      "url": "./prepared/de5361e63d5096004a5081155307cda2fc91a8bfcf0a29d00ec9dd93f90d7b0f/art/keywords/water.png",
+      "sourceHash": "d4ed45e79526b1fc9628f41b91f4c6355434fe0c846c4d947cf9d202ff736d82",
+      "outputHash": "d4ed45e79526b1fc9628f41b91f4c6355434fe0c846c4d947cf9d202ff736d82"
     }
   }
 }

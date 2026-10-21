@@ -123,7 +123,9 @@ for (const [width, enlarged, outcome] of [
   test(`journey results ${outcome} at ${width}, enlarged ${enlarged}`, async ({ page }) => {
     await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
     await page.emulateMedia({ reducedMotion: "reduce" });
-    let game = accept(accept(createGame(7), { type: "draft", species: "mossguard" }), { type: "start" });
+    let game = accept(accept(createGame(7), { type: "draft", species: createGame(7).starterOffers[0]! }), {
+      type: "start",
+    });
     let ending: Command;
     if (outcome === "victory") {
       for (let i = 0; i < 7; i++) {
@@ -202,7 +204,9 @@ for (const [width, enlarged, encounter] of [
     await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
     await page.emulateMedia({ reducedMotion: "reduce" });
     const game = produce(
-      accept(accept(createGame(7), { type: "draft", species: "mossguard" }), { type: "start" }),
+      accept(accept(createGame(7), { type: "draft", species: createGame(7).starterOffers[0]! }), {
+        type: "start",
+      }),
       (draft) => {
         draft.encounter = encounter;
         draft.expedition!.pack = 0;
@@ -253,7 +257,9 @@ for (const [width, enlarged, encounter] of [
 
 test("encounter placeholder uses bounded artwork at the minimum viewport", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
-  const game = accept(accept(createGame(7), { type: "draft", species: "mossguard" }), { type: "start" });
+  const game = accept(accept(createGame(7), { type: "draft", species: createGame(7).starterOffers[0]! }), {
+    type: "start",
+  });
   await seed(page, game);
   await resume(page);
   const card = page.locator(".app:not([inert]) [data-encounter]");
@@ -368,7 +374,7 @@ for (const [width, enlarged] of [
 
 test("one starter grows a lineup through a full expedition", async ({ page }) => {
   test.setTimeout(120_000);
-  await page.clock.setFixedTime(new Date(7));
+  await page.clock.setFixedTime(new Date(3));
   await page.emulateMedia({ reducedMotion: "reduce" });
   await seed(page);
   const activate = (el: Locator) => el.click();

@@ -65,7 +65,7 @@ describe("remaining Alchemy talents adapted to creatures", () => {
         expect(canBuyTalent(state, talent.id), talent.id).toBe(false);
       }
     }
-    expect(TALENTS).toHaveLength(129);
+    expect(TALENTS).toHaveLength(135);
     expect(TALENTS.every((t) => !/Forge|Wish|Consume|Companion|Archery|Holy|Mana Crystal/.test(t.text))).toBe(
       true,
     );

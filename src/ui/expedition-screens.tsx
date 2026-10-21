@@ -396,6 +396,7 @@ export function Talents({
     stun: "lightning",
     poison: "poison",
     nature: "nature",
+    water: "water",
     light: "light",
     bleed: "bleed",
     block: "block",

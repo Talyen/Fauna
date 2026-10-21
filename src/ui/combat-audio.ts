@@ -1,7 +1,7 @@
 import type { DamageType } from "../game/content";
 import type { GameEvent } from "../game/types";
 export type CombatCue =
-  | Exclude<DamageType, "burn" | "freeze" | "bleed" | "stun">
+  | Exclude<DamageType, "burn" | "freeze" | "bleed" | "stun" | "water">
   | "fire"
   | "ice"
   | "lightning"
@@ -21,7 +21,7 @@ export function selectCombatCue(events: readonly GameEvent[]): CombatCue | undef
           ? "fire"
           : event.damageType === "freeze"
             ? "ice"
-            : event.damageType === "bleed"
+            : event.damageType === "bleed" || event.damageType === "water"
               ? "physical"
               : event.damageType === "stun"
                 ? "lightning"

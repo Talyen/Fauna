@@ -199,7 +199,7 @@ function gainGold(state: GameState, amount: number, events: GameEvent[]) {
   if (state.journey) state.journey.currency = Math.min(STACK_LIMIT, state.journey.currency + gained);
   if (gained) events.push({ kind: "reward", amount: gained, text: `Gain ${gained} Gold.` });
 }
-export function drawKeyword(state: GameState, keyword: "light" | "nature") {
+export function drawKeyword(state: GameState, keyword: "light" | "nature" | "water") {
   const battle = state.battle;
   if (!battle) return;
   fillHand(state);
@@ -794,6 +794,10 @@ function resolveHit(
     damage *= 2;
   }
   if (attack && alliedSource) {
+    if (type === "water") {
+      if (hasTalent(state, "water.pressure")) damage += 1;
+      if (source.block > 0 && hasTalent(state, "water.high-tide")) damage *= 1.25;
+    }
     if (type === "physical") damage += physicalBonus(source, state);
     if (type === "physical" && hasTalent(state, "block.weighted-guard")) damage += source.block * 0.1;
     if (type === "light" && hasTalent(state, "block.sacred-shield")) damage += source.block * 0.1;
@@ -942,6 +946,16 @@ function resolveHit(
   }
   if (nextPhysical > 0 && source.health > 0)
     hit(state, source, target, nextPhysical, "physical", events, { proc: true });
+  if (direct && alliedSource && !alliedTarget && source.health > 0 && type === "water") {
+    if (hasTalent(state, "water.seafoam")) grantBlock(state, source, 2, events);
+    if (hasTalent(state, "water.erosion")) {
+      stats.armor = Math.max(0, stats.armor - 2);
+      armorBroken ||= initialArmor > 0 && stats.armor === 0;
+    }
+    if (hasTalent(state, "water.cleansing-current") && roll(state) < 0.2)
+      removeEffects(source, "cleanse", 1, events, state);
+    if (hasTalent(state, "water.riptide") && roll(state) < 0.2) drawKeyword(state, "water");
+  }
   if ((attack || options.buildStatus) && damage > 0) {
     const statusResult = applyHarmfulStatus(state, source, target, damage, type, events, {
       beforeHealth: before,
@@ -1026,6 +1040,14 @@ function resolveHit(
     );
     if (amount > 0)
       hit(state, target, source, amount, "poison", events, { retaliation: true, buildStatus: true });
+  }
+  // Only direct attacks burst the bubble; derived damage cannot start retaliation chains
+  if (direct && depletedBlock && target.health > 0 && source.health > 0) {
+    const amount = creaturePassive(alliedTarget ? state : undefined, target.species).effects.reduce(
+      (sum, effect) => sum + (effect.kind === "blockBreak" ? effect.amount : 0),
+      0,
+    );
+    if (amount > 0) hit(state, target, source, amount, "water", events, { retaliation: true });
   }
   if (armorBroken) triggerArmorBreak(state, target, events);
   return lost;

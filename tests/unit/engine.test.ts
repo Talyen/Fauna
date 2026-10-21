@@ -14,11 +14,12 @@ describe("game commands", () => {
       dispatch(s, { type: "draft", species: SPECIES.find((kind) => !s.starterOffers.includes(kind.id))!.id })
         .accepted,
     ).toBe(false);
-    s = accept(s, { type: "draft", species: "mossguard" });
-    expect(s.selected).toEqual(["mossguard"]);
+    const chosen = s.starterOffers[0]!;
+    s = accept(s, { type: "draft", species: chosen });
+    expect(s.selected).toEqual([chosen]);
     s = accept(s, { type: "start" });
     s = accept(s, { type: "beginBattle" });
-    expect(s.roster).toEqual(["mossguard"]);
+    expect(s.roster).toEqual([chosen]);
     expect(s.team).toHaveLength(1);
     expect(s.cards).toHaveLength(3);
     expect(s.battle!.hand).toHaveLength(3);

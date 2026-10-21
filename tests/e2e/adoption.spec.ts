@@ -143,7 +143,9 @@ test("Merchant purchase resumes without duplicate spending", async ({ page }) =>
   const width = 1280;
   const { accept, winBattle, recruitChoice } = await import("../unit/helpers");
   const { createGame } = await import("../../src/game/engine");
-  let fixture = accept(accept(createGame(7), { type: "draft", species: "mossguard" }), { type: "start" });
+  let fixture = accept(accept(createGame(7), { type: "draft", species: createGame(7).starterOffers[0]! }), {
+    type: "start",
+  });
   fixture = winBattle(accept(fixture, { type: "beginBattle" }));
   fixture = accept(fixture, recruitChoice(fixture));
   const pack = fixture.expedition!.pack;

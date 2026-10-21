@@ -167,7 +167,7 @@ describe("keyword progression and rewards", () => {
 });
 
 it("can end a partially completed draft without breaking save invariants", () => {
-  const draft = accept(createGame(), { type: "draft", species: "mossguard" });
+  const draft = accept(createGame(), { type: "draft", species: createGame().starterOffers[0]! });
   const ended = accept(draft, { type: "abandon" });
   expect(ended.selected).toEqual([]);
   expect(decodeSave(encodeSave(ended))).toEqual(ended);

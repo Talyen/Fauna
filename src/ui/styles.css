@@ -1264,6 +1264,11 @@ strong {
 [data-keyword="poison"] {
   color: var(--keyword-poison);
 }
+[data-damage-type="water"],
+[data-combat-tone="water"],
+[data-keyword="water"] {
+  color: var(--keyword-water);
+}
 [data-damage-type="nature"],
 [data-combat-tone="nature"],
 [data-keyword="nature"] {

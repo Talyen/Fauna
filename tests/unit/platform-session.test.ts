@@ -23,10 +23,14 @@ it("overlay activation revokes commands immediately and disposed subscriptions c
   const session = createSession(platform);
   await session.load();
   overlay!(true);
-  expect(session.command({ type: "draft", species: "mossguard" })).toBe(false);
+  expect(session.command({ type: "draft", species: session.store.getState().game.starterOffers[0]! })).toBe(
+    false,
+  );
   expect(writes).toEqual([]);
   overlay!(false);
-  expect(session.command({ type: "draft", species: "mossguard" })).toBe(true);
+  expect(session.command({ type: "draft", species: session.store.getState().game.starterOffers[0]! })).toBe(
+    true,
+  );
   const old = overlay!;
   await session.dispose();
   old(false);
@@ -65,9 +69,11 @@ it("keeps local saving successful when cloud metadata cannot be written", async 
     },
   });
   await session.load();
-  expect(session.command({ type: "draft", species: "mossguard" })).toBe(true);
+  expect(session.command({ type: "draft", species: session.store.getState().game.starterOffers[0]! })).toBe(
+    true,
+  );
   expect(await session.flush()).toBe(true);
-  expect(JSON.parse(local).selected).toEqual(["mossguard"]);
+  expect(JSON.parse(local).selected).toEqual(session.store.getState().game.selected);
   expect(session.store.getState().cloud.status).toBe("Pending");
   expect(session.store.getState().saveStatus).toBe("saved");
   await session.dispose();
@@ -93,7 +99,9 @@ it("does not attempt cloud metadata or report pending sync when Steam is unavail
     },
   });
   await session.load();
-  expect(session.command({ type: "draft", species: "mossguard" })).toBe(true);
+  expect(session.command({ type: "draft", species: session.store.getState().game.starterOffers[0]! })).toBe(
+    true,
+  );
   await session.flush();
   expect(metadataWrites).toBe(0);
   expect(session.store.getState().cloud.status).toBe("Unavailable");
