@@ -1,3 +1,4 @@
+import { captureScreen } from "./rendered-evidence";
 import { test, expect, type Page } from "@playwright/test";
 import { produce } from "immer";
 import { run } from "../unit/helpers";
@@ -31,7 +32,7 @@ for (const width of [1280, 1920]) {
       page.getByRole("dialog", { name: "Discard Pile", exact: true }).locator(".action-card"),
     ).toHaveCount(1);
     expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(game);
-    await page.screenshot({ path: `reports/combat-piles-${width}.png` });
+    await captureScreen(page, { path: `reports/combat-piles-${width}.png` });
   });
   test(`Campfire remains eligible while hurt and Health survives entry to the boss at ${width}`, async ({
     page,
@@ -41,22 +42,22 @@ for (const width of [1280, 1920]) {
       s.phase = "teamSelection";
       s.battle = null;
       s.encounter = 3;
-      s.expedition = { biome: 0, step: 3, offers: [{ location: "hollow-heart", pack: 0 }], chosen: null };
+      s.expedition = { biome: 0, step: 3, pack: 0 };
       s.team[0]!.health = 0;
       s.team[1]!.health = 7;
     });
     await seed(page, game);
     await page.getByRole("button", { name: "Visit Campfire", exact: true }).click();
     await expect(page.locator(".campfire-screen")).toBeVisible();
-    await page.screenshot({ path: `reports/combat-campfire-${width}.png` });
+    await captureScreen(page, { path: `reports/combat-campfire-${width}.png` });
     await page.getByRole("button", { name: "Rest", exact: true }).click();
-    await expect(page.locator(".app")).toHaveAttribute("data-save-status", "saved");
+    await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
     await expect(page.getByRole("button", { name: "Visit Campfire", exact: true })).toHaveCount(1);
-    await page.getByRole("button", { name: "Inspect Hollow Heart", exact: true }).click();
+    await page.getByRole("button", { name: "Inspect Boss", exact: true }).click();
     await page.getByRole("button", { name: "Begin battle", exact: true }).click();
-    await expect(page.locator(".app")).toHaveAttribute("data-save-status", "saved");
+    await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
     const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!) as GameState);
     expect(saved.team.map((creature) => creature.health)).toEqual([10, 14, 26]);
-    expect(saved.expedition?.offers).toEqual(game.expedition!.offers);
+    expect(saved.expedition?.pack).toEqual(game.expedition!.pack);
   });
 }

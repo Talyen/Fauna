@@ -80,7 +80,7 @@ it("shows exact Campfire recovery and commits one persisted Rest without currenc
       s.phase = "teamSelection";
       s.battle = null;
       s.encounter = 3;
-      s.expedition = { biome: 0, step: 3, offers: [{ location: "hollow-heart", pack: 0 }], chosen: null };
+      s.expedition = { biome: 0, step: 3, pack: 0 };
       s.team[0]!.health = 0;
     }),
   );

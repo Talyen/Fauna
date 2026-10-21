@@ -25,12 +25,12 @@ import {
 } from "./combat";
 import { actionValue, cardCost, enemyAbilityValue } from "./rules";
 import { CARDS, INITIAL_SPECIES, definition, species, enemyCard } from "./content";
-import { BIOMES, bossEncounter, encounterSource, finalEncounter, location } from "./destinations";
+import { bossEncounter, encounterSource, finalEncounter, encounterPacks } from "./encounters";
 import type { Card, Command, CommandResult, GameEvent, GameState } from "./types";
 export function createGame(seed = 1): GameState {
   return freeze(
     {
-      version: 17,
+      version: 18,
       support: null,
       discovery: { encountered: [], recruited: [] },
       revision: 0,
@@ -52,28 +52,16 @@ export function createGame(seed = 1): GameState {
       team: [],
       cards: [],
       encounter: 0,
-      expedition: { biome: 0, step: 0, offers: [], chosen: null },
+      expedition: { biome: 0, step: 0, pack: null },
       battle: null,
     },
     true,
   ) as GameState;
 }
 const random = roll;
-function offerDestinations(state: GameState) {
+function prepareEncounter(state: GameState) {
   const route = state.expedition!;
-  const biome = BIOMES[route.biome]!;
-  const places =
-    route.step === 3
-      ? [biome.boss]
-      : shuffle(
-          state,
-          biome.locations.filter((id) => id !== route.chosen),
-        ).slice(0, 3);
-  route.offers = places.map((id) => ({
-    location: id,
-    pack: Math.floor(random(state) * location(id)!.packs.length),
-  }));
-  route.chosen = null;
+  route.pack = Math.floor(random(state) * encounterPacks(route.biome, route.step).length);
   const kind = route.step === 1 ? "merchant" : null;
   const stock =
     kind === "merchant"
@@ -266,7 +254,7 @@ function afterRewards(state: GameState) {
       state.expedition.biome++;
       state.expedition.step = 0;
     } else state.expedition.step++;
-    offerDestinations(state);
+    prepareEncounter(state);
   }
   state.phase = "teamSelection";
   state.battle = null;
@@ -460,12 +448,9 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
   if (command.type === "rest" && state.phase !== "campfire") return reject(state, "Rest at a Campfire.");
   if (command.type === "newRun" && !["draft", "victory", "defeat"].includes(state.phase))
     return reject(state, "End the current journey first.");
-  if (
-    command.type === "beginBattle" &&
-    (state.phase !== "teamSelection" ||
-      (state.expedition && !state.expedition.offers.some((offer) => offer.location === command.destination)))
-  )
-    return reject(state, "Choose an offered destination before battle.");
+  if (command.type === "beginBattle" && state.phase !== "teamSelection") {
+    return reject(state, "Battle is unavailable.");
+  }
   if (
     command.type === "swap" &&
     (!["battle", "teamSelection"].includes(state.phase) ||
@@ -559,7 +544,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         draft.roster = [...draft.selected];
         draft.lineup = draft.team.map((c) => c.id);
         draft.phase = "teamSelection";
-        if (draft.expedition) offerDestinations(draft);
+        if (draft.expedition) prepareEncounter(draft);
         break;
       case "enterSupport":
         draft.phase = "support";
@@ -580,7 +565,6 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
       case "beginBattle":
         draft.support = null;
         if (draft.journey) draft.journey.lastBattle = null;
-        if (draft.expedition) draft.expedition.chosen = command.destination!;
         beginBattle(draft, events);
         events.push({ kind: "turn", text: "Your journey begins." });
         break;

@@ -227,4 +227,4 @@ async function createSteam({
     },
   };
 }
-module.exports = { createSteam, validName };
+module.exports = { createSteam };

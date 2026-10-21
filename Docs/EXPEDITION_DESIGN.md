@@ -6,7 +6,7 @@ These are the agreed directions from the design review. They supersede the proto
 
 - Begin with one chosen starter. A journey roster grows to five creatures: up to three deployed and two reserves. Multiple copies of a species are allowed.
 - Starter selection uses a three-column artwork grid of unlocked species. Clicking opens inspection with a Choose action; choosing returns to the grid and marks the selected creature. Begin journey is a separate action, available after choosing one starter. Inspecting or canceling never changes the choice. Choosing another replaces it.
-- The starter supplies the remembered starting lineup. Recruits fill its second and third slots before joining reserves. The destination screen offers location artwork; inspection reveals the exact enemy group and Begin battle. Deck remains available without requiring team selection.
+- The starter supplies the remembered starting lineup. Recruits fill its second and third slots before joining reserves. The encounter screen offers one Combat or Boss placeholder ArtCard; inspection reveals the exact enemy group and Begin battle. Deck remains available without requiring team selection.
 - Lineup is an optional menu dialog between battles, including ordinary reward screens. Changes save immediately. Combat swaps do not overwrite this starting lineup.
 - Only deployed living creatures act and provide passive traits. Enemy intents remain hidden.
 - During your turn, Swap opens a centered dialog with three deployed creatures and two reserves at the shared artwork size. Reserves are hidden on the battlefield.
@@ -19,14 +19,14 @@ These are the agreed directions from the design review. They supersede the proto
 - Victory preserves roster Health and knockouts. The next battle deploys the saved starting lineup; combat effects reset.
 - Recruitment at five requires choosing one creature to release, or skipping. Replacing a starting creature updates that individual’s lineup entry.
 
-## Biomes and destinations
+## Biomes and encounters
 
 - New journeys travel through Fernwood, then Moonwater Marsh. Each biome has three ordinary encounters followed by its boss; only the final boss completes the journey and unlocks Moonhart.
-- After each ordinary victory and its rewards, choose from three fresh locations in the current biome. The immediately visited location is excluded from the next offer. Boss steps offer one location. There is no branching map or Elite category. Campfire appears beside destination choices whenever any roster creature, including a reserve or knockout, is missing at least 30% of maximum Health. Rest restores 30% maximum Health to the whole roster, capped at full Health, and returns to the same combat offers without advancing the encounter or changing RNG. It remains available while the threshold is met.
-- Each location uses a 4:3 illustration with its name and **Combat** or **Boss** below the artwork. Campfire uses Rest beneath its location art; entering it commits a saved visit and exposes Rest as its only option. A quiet heading shows the biome and current encounter within it.
-- Opening a location is inspection, not commitment. Show its exact enemy group; inspect each creature's battle health and collectible kit in the same dialog. Back/Escape returns action → creature → location → destination screen. Begin battle commits the inspected location directly.
-- Seeded gameplay chooses location offers and packs once when entering the choice screen. Save those offers and the chosen location. Inspection, cancellation, menus, and reload never reroll enemies or consume randomness.
-- Location pools contain themed packs; identities are stable while inhabitants vary between runs. Initial enemy stats grow with chapter progress, with easier first encounters for a single starter. These values are playtest tuning, not final balance.
+- Each step has one saved encounter: Combat for the three ordinary battles, then Boss. Enemy packs are selected from the current biome when advancing and remain unchanged through inspection, support visits and reload. Both encounter types use blank landscape placeholder artwork, with names beneath. Campfire appears alongside the encounter whenever any roster creature, including a reserve or knockout, is missing at least 30% of maximum Health. Rest restores 30% maximum Health to the whole roster, capped at full Health, and returns without advancing the encounter or changing RNG. It remains available while the threshold is met.
+- Combat and Boss use blank 4:3 artwork with the encounter type below it. Campfire uses Rest beneath its location art; entering it commits a saved visit and exposes Rest as its only option. A quiet heading shows the biome and current encounter within it.
+- Opening Combat or Boss is inspection. Show its exact enemy group; inspect each creature's battle health and collectible kit in the same dialog. Back/Escape returns action → creature → encounter → encounter screen. Begin battle starts the saved encounter.
+- Seeded gameplay chooses and saves one enemy pack when entering the encounter screen. Inspection, cancellation, menus, and reload never reroll enemies or consume randomness.
+- Biome pools contain themed enemy packs that vary between runs. Initial enemy stats grow with chapter progress, with easier first encounters for a single starter. These values are playtest tuning, not final balance.
 
 ## Keyword XP and talents
 
@@ -71,7 +71,7 @@ These are the agreed directions from the design review. They supersede the proto
 
 Journey is the player-facing name. Internal command IDs, route fields, filenames, and storage paths retain their existing names.
 
-Ordinary victory → shared Victory screen with recruitment (if available) → fresh destinations. Intermediate boss victory → the same Victory screen with boon choices (if available) → the next biome. Compact last-battle currency and keyword XP earnings appear beside choices and remain visible on destinations until the next battle. No separate acknowledgement screen interrupts new journeys. If neither decision is available, proceed directly to destinations.
+Ordinary victory → shared Victory screen with recruitment (if available) → the next encounter. Intermediate boss victory → the same Victory screen with boon choices (if available) → the next biome. Compact last-battle currency and keyword XP earnings appear beside choices and remain visible on the encounter screen until the next battle. No separate acknowledgement screen interrupts new journeys. If neither decision is available, proceed directly to the next encounter.
 
 Final victory or defeat → Journey results. Ending a started journey voluntarily also opens results, labeled Returned home. Ending an unfinished starter choice simply returns to the main menu.
 
@@ -81,7 +81,7 @@ Final victory or defeat → Journey results. Ending a started journey voluntaril
 - Results offer a single centered Main menu action. Start a new journey only from the main menu.
 - New journey resets journey totals and roster/boons while preserving permanent progress. Main menu can reopen the last results until a new journey begins; this is not a multi-journey history.
 - Development saves are disposable; obsolete formats are rejected rather than migrated. Journey totals are recorded from current-format journeys, never inferred from lifetime XP or currency.
-- Material types remain undefined and are not shown. The shared Victory shell shows compact automatic earnings and one destination-specific choice: recruitment or boons. It has one Skip action, no Continue action. Full-roster replacement changes the contents of that same screen and may be canceled before committing.
+- Material types remain undefined and are not shown. The shared Victory shell shows compact automatic earnings and one encounter-specific choice: recruitment or boons. It has one Skip action, no Continue action. Full-roster replacement changes the contents of that same screen and may be canceled before committing.
 
 See [UI design system](UI.md) for composition and interaction rules.
 
@@ -93,7 +93,7 @@ Each turn restores four shared Mana and draws four cards, with a seven-card hand
 
 Auto-end turn is enabled by default and advances only when Mana reaches zero. Its Settings switch persists separately from progression; disabling it allows free swaps before manually ending the turn. Victory and defeat settle immediately in either mode.
 
-Auto-play is explicitly enabled for one battle. It uses visible information to choose legal recovery swaps, healing, finishing attacks, other attacks and useful defenses, then ends turns when no useful play remains. Actions occur no faster than every 700 ms. Menus, inspection, focus loss and hidden pages pause it; manual play stops it. Rewards, destinations, recruitment and talents always remain player choices. It stops on completion, home navigation, save failure and shutdown.
+Auto-play is explicitly enabled for one battle. It uses visible information to choose legal recovery swaps, healing, finishing attacks, other attacks and useful defenses, then ends turns when no useful play remains. Actions occur no faster than every 700 ms. Menus, inspection, focus loss and hidden pages pause it; manual play stops it. Rewards, encounters, recruitment and talents always remain player choices. It stops on completion, home navigation, save failure and shutdown.
 
 Leaving newly completed results opens each newly unlocked creature's portrait and inspectable kit before Main menu. The reveal grants no progress and does not repeat when reopening results or loading an existing completed journey. Results otherwise retain the earnings-only design.
 
@@ -101,6 +101,6 @@ Development builds add Skip combat to the battle pause menu. It settles a normal
 
 ## Optional support visits
 
-Merchant appears beside combat destinations after the first ordinary victory in each biome, only when at least one stocked item is affordable. It does not replace a battle. Inspecting and canceling is read-only; Enter commits the saved visit and rechecks affordability. Leave consumes it, even without buying, and beginning the next battle forfeits the opportunity. Returning preserves exact combat offers and enemy packs. There are no restocks or repeated Merchant visits in a biome.
+Merchant appears beside the combat encounter after the first ordinary victory in each biome, only when at least one stocked item is affordable. It does not replace a battle. Inspecting and canceling is read-only; Enter commits the saved visit and rechecks affordability. Leave consumes it, even without buying, and beginning the next battle forfeits the opportunity. Returning preserves the exact enemy pack. There are no restocks or repeated Merchant visits in a biome.
 
 The Merchant offers up to two distinct unowned Boons for 20 Gold each and allows one purchase. Gold is the existing permanent currency and carries between journeys. Bought Boons last only for that journey; they do not become permanent unlocks. Omit a Merchant with no eligible stock or insufficient Gold. Saved stock and prices cannot reroll on reload. Campfire visits preserve any Merchant offer and its purchase receipt. No visit grants keyword XP or recruitment, and all eight battles remain. Sheltered Springs are removed.

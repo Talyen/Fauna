@@ -181,7 +181,7 @@ async function capture(browser, url, scenario, measured, native = false, cold = 
     const startupMs = performance.now() - launched;
     if (scenario.id !== "menus" && scenario.id !== "startup")
       await page.getByRole("button", { name: "Continue", exact: true }).click();
-    await page.locator(".app[data-save-status=saved]").waitFor();
+    await page.locator(".app:not([inert])[data-save-status=saved]").waitFor();
     await page.locator("img").evaluateAll((images) => Promise.all(images.map((img) => img.decode())));
     const environment = await page.evaluate(() => ({
       viewport: { width: innerWidth, height: innerHeight },

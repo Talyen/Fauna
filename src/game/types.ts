@@ -52,7 +52,7 @@ export interface Enemy {
   combat: CombatState;
   lastAbility: string | null;
 }
-export interface Battle {
+interface Battle {
   earnedGold: number;
   freeBurnUsed: boolean;
   meteoriteUsed: boolean;
@@ -65,14 +65,14 @@ export interface Battle {
   discard: string[];
   enemies: Enemy[];
 }
-export interface BattleReward {
+interface BattleReward {
   xp: KeywordXP;
   currency: number;
   recruits: SpeciesId[];
   boons: BoonId[];
   outcome: "next" | "victory" | "defeat";
 }
-export interface JourneySummary {
+interface JourneySummary {
   outcome: "victory" | "defeat" | "returned" | null;
   victories: number;
   currency: number;
@@ -81,7 +81,7 @@ export interface JourneySummary {
   lastBattle: { xp: KeywordXP; currency: number } | null;
 }
 export interface GameState {
-  version: 17;
+  version: 18;
   discovery: { encountered: SpeciesId[]; recruited: SpeciesId[] };
   revision: number;
   rng: number;
@@ -101,8 +101,7 @@ export interface GameState {
   expedition: {
     biome: number;
     step: number;
-    offers: { location: string; pack: number }[];
-    chosen: string | null;
+    pack: number | null;
   } | null;
   support: {
     id: string;
@@ -125,7 +124,7 @@ export interface GameState {
 export type Command =
   | { type: "draft"; species: SpeciesId }
   | { type: "start" }
-  | { type: "beginBattle"; destination?: string }
+  | { type: "beginBattle" }
   | { type: "setLineup"; activeId: string; reserve: string }
   | { type: "swap"; activeId: string; reserve: string }
   | { type: "play"; cardId: string; targetId?: string; autoEndTurn?: boolean }

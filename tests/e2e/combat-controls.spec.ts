@@ -1,3 +1,4 @@
+import { captureScreen } from "./rendered-evidence";
 import { test, expect, type Page } from "@playwright/test";
 import { produce } from "immer";
 import { accept, run, victoryReady } from "../unit/helpers";
@@ -32,7 +33,7 @@ for (const width of [1280, 1920]) {
     await expect(setting).not.toBeChecked();
     expect(await page.evaluate(() => localStorage.getItem("fauna.auto-end-turn"))).toBe("false");
     await page.waitForTimeout(200);
-    await page.screenshot({ path: `reports/controls-settings-${width}.png` });
+    await captureScreen(page, { path: `reports/controls-settings-${width}.png` });
     await page.keyboard.press("Escape");
     await page.keyboard.press("Escape");
     const autoplay = page.getByRole("switch", { name: "Auto-play", exact: true });
@@ -47,10 +48,10 @@ for (const width of [1280, 1920]) {
     await expect
       .poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).revision))
       .toBeGreaterThan(revision);
-    await page.locator(".hand .action-card:not([aria-disabled=true])").first().click();
+    await page.locator(".app:not([inert]) .hand .action-card:not([aria-disabled=true])").first().click();
     await expect(autoplay).not.toBeChecked();
     await page.keyboard.press("Escape");
-    await page.screenshot({ path: `reports/controls-battle-${width}.png` });
+    await captureScreen(page, { path: `reports/controls-battle-${width}.png` });
     await expect(page.getByRole("button", { name: "Skip combat", exact: true })).toHaveCount(0);
     // Browser controller simulation exercises the same semantic action as physical Y.
     await page.evaluate(() => {
@@ -84,7 +85,7 @@ for (const width of [1280, 1920]) {
           d.phase = "teamSelection";
           d.battle = null;
           d.journey = { outcome: null, victories: 7, currency: 0, xp: {}, unlocks: [], lastBattle: null };
-          d.expedition = { biome: 1, step: 3, offers: [{ location: "moonwell", pack: 0 }], chosen: null };
+          d.expedition = { biome: 1, step: 3, pack: 0 };
         }),
         { type: "beginBattle" },
       ),
@@ -96,7 +97,7 @@ for (const width of [1280, 1920]) {
     await page.getByRole("button", { name: "Main menu", exact: true }).click();
     await expect(page.getByRole("heading", { name: "Creature unlocked" })).toBeVisible();
     await expect(page.getByRole("heading", { name: "Moonhart", exact: true })).toBeVisible();
-    await page.screenshot({ path: `reports/unlock-${width}.png` });
+    await captureScreen(page, { path: `reports/unlock-${width}.png` });
     await page.getByRole("button", { name: "Inspect Moonhart", exact: true }).click();
     await expect(page.locator(".inspection-thumbnails .action-card")).toHaveCount(3);
     await page.keyboard.press("Escape");
@@ -125,7 +126,7 @@ test("development skip wins once through normal rewards", async ({ page }) => {
   expect(saved.reward.xp).toEqual({});
   await page.getByRole("button", { name: "Open menu" }).click();
   await expect(page.getByRole("button", { name: "Skip combat", exact: true })).toHaveCount(0);
-  await page.screenshot({ path: "reports/dev-skip.png" });
+  await captureScreen(page, { path: "reports/dev-skip.png" });
 });
 
 test("manual zero-Mana turns resume without losing the battle", async ({ page }) => {
@@ -138,12 +139,15 @@ test("manual zero-Mana turns resume without losing the battle", async ({ page })
   });
   await page.addInitScript(() => localStorage.setItem("fauna.auto-end-turn", "false"));
   await seed(page, encodeSave(initial), "1");
-  await page.locator(`[data-card-id=${JSON.stringify(initial.battle!.hand[0])}]`).click();
+  await page
+    .getByRole("region", { name: "Action hand" })
+    .locator(`[data-card-id=${JSON.stringify(initial.battle!.hand[0])}]`)
+    .click();
   await page.locator('[data-actor-id="enemy-0"] .creature-card').click();
   await expect
     .poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).battle.mana))
     .toBe(0);
-  await page.locator(".app[data-save-status=saved]").waitFor();
+  await page.locator(".app:not([inert])[data-save-status=saved]").waitFor();
   await page.reload();
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();

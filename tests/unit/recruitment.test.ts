@@ -1,15 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
-import { BIOMES, LOCATIONS } from "../../src/game/destinations";
+import { BIOMES } from "../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { accept, run, winBattle } from "./helpers";
 
 describe("recruiting creature copies", () => {
   it("offers exactly the three defeated enemies, including repeated species and roster members", () => {
-    for (const biome of BIOMES)
-      for (const id of biome.locations)
-        for (const pack of LOCATIONS.find((place) => place.id === id)!.packs) expect(pack).toHaveLength(3);
+    for (const biome of BIOMES) for (const pack of biome.combat) expect(pack).toHaveLength(3);
     const started = accept(accept(createGame(7), { type: "draft", species: "stormfin" }), { type: "start" });
     const battle = accept(
       produce(started, (d) => {
@@ -18,15 +16,10 @@ describe("recruiting creature copies", () => {
         d.expedition = {
           biome: 1,
           step: 0,
-          offers: [
-            { location: "reed-banks", pack: 1 },
-            { location: "flooded-grove", pack: 0 },
-            { location: "firefly-pool", pack: 0 },
-          ],
-          chosen: null,
+          pack: 1,
         };
       }),
-      { type: "beginBattle", destination: "reed-banks" },
+      { type: "beginBattle" },
     );
     const reward = winBattle(battle);
     expect(reward.reward!.recruits).toEqual(["stormfin", "stormfin", "briartooth"]);

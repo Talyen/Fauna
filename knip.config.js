@@ -1,8 +1,6 @@
 /** Runtime and tool entrypoints are explicit so native adapters and SSR harnesses remain visible. */
 export default {
   entry: [
-    "src/main.tsx",
-    "desktop/main.cjs",
     "desktop/preload.cjs",
     "desktop/after-pack.cjs",
     "desktop/steam-worker.cjs",

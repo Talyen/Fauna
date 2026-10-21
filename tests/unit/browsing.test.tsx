@@ -57,7 +57,7 @@ describe("menu browsing", () => {
       await user.keyboard("{Escape}");
       expect(screen.getByRole("button", { name: "Physical talents" })).toBeTruthy();
       await user.keyboard("{Escape}");
-      expect(screen.getByRole("button", { name: "Talents", exact: true })).toBeTruthy();
+      expect(screen.getByRole("button", { name: "Talents" })).toBeTruthy();
     } finally {
       cleanup();
       await session.dispose();

@@ -3,7 +3,7 @@ import { freeze } from "immer";
 import { MAX_HAND_SIZE } from "./engine";
 import { z } from "zod";
 import { CARDS, INITIAL_SPECIES, species } from "./content";
-import { BIOMES, location, encounterSource, finalEncounter, bossEncounter } from "./destinations";
+import { BIOMES, encounterPacks, encounterSource, finalEncounter, bossEncounter } from "./encounters";
 import { KEYWORDS, BOONS, TALENTS, talentPoints } from "./progression";
 import type { GameState } from "./types";
 const natural = z.number().int().min(0).max(1_000_000);
@@ -79,7 +79,7 @@ const creature = z.object({
   combat: combatState.optional(),
 });
 const currentShape = z.object({
-  version: z.literal(17),
+  version: z.literal(18),
   discovery: z.object({ encountered: z.array(speciesId).max(6), recruited: z.array(speciesId).max(6) }),
   revision: z
     .number()
@@ -128,8 +128,7 @@ const currentShape = z.object({
         .min(0)
         .max(BIOMES.length - 1),
       step: z.number().int().min(0).max(3),
-      offers: z.array(z.object({ location: id, pack: z.number().int().min(0).max(10) })).max(3),
-      chosen: id.nullable(),
+      pack: z.number().int().min(0).max(100).nullable(),
     })
     .nullable(),
   support: z
@@ -215,28 +214,10 @@ export function decodeSave(raw: string): GameState {
       );
   }
   if (s.expedition) {
-    const route = s.expedition,
-      biome = BIOMES[route.biome]!;
+    const route = s.expedition;
     invalid(s.encounter !== route.biome * 4 + route.step);
-    const places: readonly string[] = route.step === 3 ? [biome.boss] : biome.locations;
-    invalid(
-      !unique(route.offers.map((offer) => offer.location)) ||
-        route.offers.some(
-          (offer) => !places.includes(offer.location) || !location(offer.location)?.packs[offer.pack],
-        ),
-    );
-    if (s.phase === "draft") invalid(route.offers.length !== 0 || route.chosen !== null || s.encounter !== 0);
-    else {
-      invalid(route.offers.length !== (route.step === 3 ? 1 : 3));
-      invalid(
-        s.phase === "teamSelection" ||
-          s.phase === "support" ||
-          s.phase === "campfire" ||
-          (s.phase === "defeat" && !s.battle)
-          ? route.chosen !== null
-          : !route.offers.some((offer) => offer.location === route.chosen),
-      );
-    }
+    if (s.phase === "draft") invalid(route.pack !== null || s.encounter !== 0);
+    else invalid(route.pack === null || !encounterPacks(route.biome, route.step)[route.pack]);
   } else invalid(s.encounter > 2);
   invalid(
     !unique(s.unlocked) ||

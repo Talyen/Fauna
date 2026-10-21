@@ -1,3 +1,4 @@
+import { captureScreen } from "./rendered-evidence";
 import { test, expect, type Page } from "@playwright/test";
 import { accept, run } from "../unit/helpers";
 import { createGame } from "../../src/game/engine";
@@ -18,7 +19,7 @@ test("pointer menu transitions never display focus indicators", async ({ page })
   await expect(end).toHaveCSS("outline-style", "solid");
   await page.mouse.move(20, 20);
   await expect(end).toHaveCSS("outline-style", "none");
-  await page.screenshot({ path: "reports/menu-pointer.png" });
+  await captureScreen(page, { path: "reports/menu-pointer.png" });
 });
 
 test("held Escape closes only the current menu level", async ({ page }) => {
@@ -63,7 +64,7 @@ test("short enlarged menus retain full control sizes and scroll to every action"
     await expect(choice).toBeFocused();
     await expect(choice).toBeInViewport();
   }
-  await page.screenshot({ path: "reports/menu-short.png" });
+  await captureScreen(page, { path: "reports/menu-short.png" });
 });
 
 type SimulatedPad = { mapping: string; connected: boolean; axes: number[]; buttons: { pressed: boolean }[] };
@@ -125,7 +126,7 @@ for (const [width, height, enlarged] of [
     const card = page.locator(".collection-grid button:focus");
     await expect(card).toHaveCount(1);
     const opener = await card.getAttribute("aria-label");
-    await page.screenshot({ path: `reports/menu-collection-${width}.png` });
+    await captureScreen(page, { path: `reports/menu-collection-${width}.png` });
     await pad.press(2);
     await expect(page.locator(".creature-inspection")).toBeVisible();
     await expect(page.getByRole("button", { name: "Back", exact: true })).toBeFocused();
@@ -139,7 +140,7 @@ for (const [width, height, enlarged] of [
     await expect(page.locator(".single-card .action-card")).toBeInViewport();
     await expect(page.getByRole("button", { name: /Previous action|Next action/ })).toHaveCount(0);
     await expect(page.getByRole("tooltip")).toBeVisible();
-    await page.screenshot({ path: `reports/menu-inspection-${width}.png` });
+    await captureScreen(page, { path: `reports/menu-inspection-${width}.png` });
     await pad.press(1);
     await expect(page.locator(".inspection-thumbnails button:focus")).toHaveCount(1);
     await pad.press(1);
@@ -177,11 +178,11 @@ for (const [width, height, enlarged] of [
     await expect(page.getByRole("radio", { name: enlarged ? "125%" : "100%", exact: true })).toBeFocused();
     await pad.press(15);
     await expect(page.getByRole("radio", { name: enlarged ? "75%" : "125%", exact: true })).toBeChecked();
-    await page.screenshot({ path: `reports/menu-settings-${width}.png` });
+    await captureScreen(page, { path: `reports/menu-settings-${width}.png` });
     await pad.press(1);
     await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
     await page.mouse.move(20, 20);
-    await expect(page.locator(".app")).toHaveAttribute("data-focus", "hidden");
+    await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-focus", "hidden");
     const outlined = await page
       .locator(":focus")
       .evaluateAll((els) =>
@@ -199,7 +200,7 @@ test("controller reconnection and background input cannot activate journey comma
   await page.goto("/");
   await pad.frames();
   await pad.press(0);
-  await expect(page.locator(".app")).toHaveAttribute("data-phase", "battle");
+  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-phase", "battle");
   const revision = () =>
     page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).revision as number);
   const before = await revision();
@@ -228,7 +229,7 @@ test("controller reconnection and background input cannot activate journey comma
   });
   await pad.frames();
   await pad.press(3);
-  await expect(page.locator(".app")).toHaveAttribute("data-save-status", "saved");
+  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
   expect(await revision()).toBe(before + 1);
 });
 
@@ -245,7 +246,7 @@ test("mouse use cancels held-stick navigation until release", async ({ page }) =
   await page.getByRole("button", { name: "Collection", exact: true }).click();
   await page.waitForTimeout(500);
   await expect(page.getByRole("button", { name: "Back", exact: true })).toBeFocused();
-  await expect(page.locator(".app")).toHaveAttribute("data-focus", "hidden");
+  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-focus", "hidden");
   await page.evaluate(() => {
     window.menuPad.axes = [0, 0];
   });
@@ -253,7 +254,7 @@ test("mouse use cancels held-stick navigation until release", async ({ page }) =
   await pad.press(13);
   await expect(page.locator(".collection-grid button:focus")).toHaveCount(1);
   await page.mouse.wheel(0, 80);
-  await expect(page.locator(".app")).toHaveAttribute("data-focus", "hidden");
+  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-focus", "hidden");
 });
 
 test("controller cancellation preserves the journey and returns through Pause", async ({ page }) => {
@@ -291,7 +292,7 @@ test("pointer use has no native or shadcn focus decoration in settings, tabs or 
       }),
     );
     expect(styles.length).toBeGreaterThan(0);
-    await expect(page.locator(".app")).toHaveAttribute("data-focus", "hidden");
+    await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-focus", "hidden");
     expect(styles).toEqual(styles.map(() => ({ outline: "none", shadow: "none" })));
   };
   await noDecoration();

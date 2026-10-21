@@ -64,7 +64,7 @@ import type { Command, GameState } from "../game/types";
 import type { Inspection, Controls } from "./battle-screen";
 import { Progress } from "./progress";
 import { BattleEarnings } from "./battle-earnings";
-import { BIOMES, encounterSource, location } from "../game/destinations";
+import { BIOMES, encounterSource } from "../game/encounters";
 const originalTalentSymbols = [
   Swords,
   ShieldPlus,
@@ -113,7 +113,7 @@ export function TeamSelection({ game, send, inspect, deck }: Props & { deck: () 
           <h1>{BIOMES[route.biome]!.name}</h1>
           <p>{route.step === 3 ? "Boss" : `Encounter ${route.step + 1} of 3`}</p>
         </header>
-        <section className="destination-grid" data-nav-row aria-label="Destinations">
+        <section className="destination-grid" data-nav-row aria-label="Encounters">
           <SupportOffer game={game} inspect={inspect} />
           {canVisitCampfire(game) ? (
             <div className="destination-option">
@@ -127,24 +127,21 @@ export function TeamSelection({ game, send, inspect, deck }: Props & { deck: () 
               <p>Rest</p>
             </div>
           ) : null}
-          {route.offers.map((offer) => (
-            <div className="destination-option" key={offer.location}>
-              <ArtCard
-                aspect="creature"
-                artwork={assetUrl(`location.${offer.location}`)}
-                data-destination={offer.location}
-                aria-label={`Inspect ${location(offer.location)!.name}`}
-                onClick={() => inspect({ destination: offer.location })}
-                onContextMenu={(event) => {
-                  event.preventDefault();
-                  event.currentTarget.focus();
-                  inspect({ destination: offer.location });
-                }}
-              />
-              <h2>{location(offer.location)!.name}</h2>
-              <p>{route.step === 3 ? "Boss" : "Combat"}</p>
-            </div>
-          ))}
+          <div className="destination-option">
+            <ArtCard
+              aspect="creature"
+              artwork={assetUrl(route.step === 3 ? "encounter.boss" : "encounter.combat")}
+              data-encounter
+              aria-label={`Inspect ${route.step === 3 ? "Boss" : "Combat"}`}
+              onClick={() => inspect({ encounter: true })}
+              onContextMenu={(event) => {
+                event.preventDefault();
+                event.currentTarget.focus();
+                inspect({ encounter: true });
+              }}
+            />
+            <h2>{route.step === 3 ? "Boss" : "Combat"}</h2>
+          </div>
         </section>
         <BattleEarnings game={game} />
         <footer className="destination-footer">

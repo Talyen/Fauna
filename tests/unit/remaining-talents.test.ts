@@ -4,13 +4,13 @@ import {
   grantArmor,
   grantBlock,
   gainMana,
+  drawKeyword,
   hit,
-  maximumHealth,
   restoreHealth,
   startAction,
   tickStatuses,
 } from "../../src/game/combat";
-import { definition } from "../../src/game/content";
+import { definition, species } from "../../src/game/content";
 import { beginBattle, dispatch } from "../../src/game/engine";
 import { TALENTS, canBuyTalent } from "../../src/game/progression";
 import { cardCost } from "../../src/game/rules";
@@ -19,10 +19,12 @@ import { decodeSave, encodeSave } from "../../src/game/save";
 import type { GameEvent, GameState } from "../../src/game/types";
 import { accept, run, teamRun } from "./helpers";
 
+const maximumHealth = (unit: GameState["team"][number]) => species(unit.species).health;
+
 function fixture(talents: string[] = [], seed = 42) {
   const state = structuredClone(run());
   state.talents = talents;
-  state.rng = seed * 7919;
+  state.rng = seed;
   const source = state.team[0]!,
     target = state.battle!.enemies[0]!;
   source.combat = freshCombat();
@@ -624,4 +626,15 @@ it("retains already-earned talent Gold through defeat, abandonment and resume", 
   expect(losing.currency).toBe(resumed.currency);
   expect(losing.reward!.currency).toBe(resumed.currency);
   expect(decodeSave(encodeSave(losing))).toEqual(losing);
+});
+
+it("keyword draws include cards classified by supplemental effects", () => {
+  const state = structuredClone(teamRun(42, ["briartooth", "emberfox", "stormfin"]));
+  const card = playable(state, "briartooth-guard");
+  state.battle!.hand = [];
+  state.battle!.discard = [card.id];
+  drawKeyword(state, "nature");
+  expect(state.battle!.hand).toEqual([card.id]);
+  expect(state.battle!.discard).toEqual([]);
+  expect(new Set([...state.battle!.draw, ...state.battle!.hand]).size).toBe(state.cards.length);
 });

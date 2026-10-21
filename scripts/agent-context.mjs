@@ -27,13 +27,13 @@ export const topics = {
   progression: {
     patterns: [
       "src/game/progression",
-      "src/game/destinations",
+      "src/game/encounters",
       "src/ui/expedition",
       "src/ui/journey",
       "src/ui/unlock",
     ],
     docs: ["Docs/EXPEDITION_DESIGN.md"],
-    entries: ["src/game/progression.ts", "src/game/destinations.ts"],
+    entries: ["src/game/progression.ts", "src/game/encounters.ts"],
   },
   ui: {
     patterns: ["src/ui/", "src/components/", "design/"],

@@ -3,7 +3,7 @@ import { mkdtemp, writeFile, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import hardening from "../../desktop/after-pack.cjs";
-import display from "../../desktop/display.cjs";
+import { clampBounds, createDisplay } from "../../desktop/display.cjs";
 import { verifyFuses } from "../../scripts/verify-package.mjs";
 import { FuseState } from "@electron/fuses";
 it("copies the required browser snapshot and rejects incorrect fuse values", async () => {
@@ -22,7 +22,7 @@ it("copies the required browser snapshot and rejects incorrect fuse values", asy
   }
 });
 it("restores reachable bounds after monitor removal without resizing beyond the available display", () => {
-  const bounds = display.clampBounds({ x: 5000, y: 9000, width: 2000, height: 2000 }, [
+  const bounds = clampBounds({ x: 5000, y: 9000, width: 2000, height: 2000 }, [
     { workArea: { x: 0, y: 0, width: 1280, height: 800 } },
   ]);
   expect(bounds).toEqual({ x: 0, y: 0, width: 1280, height: 800 });
@@ -80,7 +80,7 @@ it("serializes fullscreen requests and persists device preferences outside game 
   }
   try {
     const window = new Window();
-    const manager = await display.createDisplay({
+    const manager = await createDisplay({
       directory: dir,
       screen: { getAllDisplays: () => [{ workArea: { x: 0, y: 0, width: 1280, height: 800 } }] },
     });
