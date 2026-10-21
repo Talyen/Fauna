@@ -33,7 +33,7 @@ it("shows the current collection on one page, resets filters and preserves focus
   const inspect = vi.fn();
   render(
     <TooltipProvider>
-      <Collection game={game} inspect={inspect} back={vi.fn()} />
+      <Collection game={game} inspect={inspect} openMenu={vi.fn()} />
     </TooltipProvider>,
   );
   const user = userEvent.setup();
@@ -82,7 +82,7 @@ it("keeps encountered and victory-unlocked creatures out of the collected filter
   });
   render(
     <TooltipProvider>
-      <Collection game={game} inspect={vi.fn()} back={vi.fn()} />
+      <Collection game={game} inspect={vi.fn()} openMenu={vi.fn()} />
     </TooltipProvider>,
   );
   const user = userEvent.setup();

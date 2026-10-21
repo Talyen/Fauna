@@ -412,7 +412,6 @@ export function BattleScreen({
               aria-label="Inspect Draw Pile"
               onClick={() => openPile?.("draw")}
             />
-            <span>Draw Pile</span>
           </div>
         </div>
         <div className="battle-dock" data-nav-row>
@@ -430,7 +429,6 @@ export function BattleScreen({
               aria-label="Inspect Discard Pile"
               onClick={() => openPile?.("discard")}
             />
-            <span>Discard Pile</span>
           </div>
         </div>
       </div>

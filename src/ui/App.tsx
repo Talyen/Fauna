@@ -20,19 +20,27 @@ import { useAudioPreferences } from "./audio-preferences";
 import { useGameAudio } from "./game-audio";
 import { JourneyResults } from "./journey-results";
 import { KeywordText } from "./keyword-text";
-import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogCancel,
-  AlertDialogAction,
-} from "../components/ui/alert-dialog";
-import { buttonVariants } from "../components/ui/button";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
 import { flushSync } from "react-dom";
-import { Menu, ArrowLeft, ArrowLeftRight, Play, Pause } from "lucide-react";
+import {
+  Menu,
+  ArrowLeftRight,
+  Repeat,
+  Pause,
+  Play,
+  Compass,
+  Trophy,
+  Users,
+  Sparkles,
+  PawPrint,
+  Gift,
+  BookOpen,
+  Settings2,
+  House,
+  LogOut,
+  FastForward,
+} from "lucide-react";
 import type { Session } from "../application/session";
 import { Button } from "../components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../components/ui/dialog";
@@ -50,7 +58,7 @@ import type { SpeciesId } from "../game/content";
 import "./mana-crystals.css";
 
 type Route = "home" | "play" | "talents" | "collection" | "settings" | "glossary" | "unlocks";
-type Modal = "boons" | "endRun" | "deck" | "swap" | "lineup" | "draw" | "discard" | null;
+type Modal = "boons" | "deck" | "swap" | "lineup" | "draw" | "discard" | null;
 export function App(props: { session: Session; desktop?: boolean }) {
   return (
     <TooltipProvider>
@@ -364,37 +372,60 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           }
         }}
       >
+        {home && !active ? (
+          <Compass aria-hidden="true" className="menu-icon-journey" />
+        ) : (
+          <Play aria-hidden="true" className="menu-icon-journey" />
+        )}
         {home ? (active ? "Continue" : "New journey") : "Resume"}
       </Button>
       {home && ["victory", "defeat"].includes(game.phase) ? (
         <Button variant="ghost" onClick={() => setRoute("play")}>
+          <Trophy aria-hidden="true" className="menu-icon-results" />
           Journey results
         </Button>
       ) : null}
       {canManageLineup ? (
         <Button variant="ghost" onClick={() => openModal("lineup")}>
+          <Users aria-hidden="true" className="menu-icon-lineup" />
           Lineup
         </Button>
       ) : null}
       <Button variant="ghost" onClick={() => navigate("talents")}>
+        <Sparkles aria-hidden="true" className="menu-icon-talents" />
         Talents
       </Button>
       <Button variant="ghost" onClick={() => navigate("collection")}>
+        <PawPrint aria-hidden="true" className="menu-icon-collection" />
         Collection
       </Button>
       {active && game.boons.length > 0 ? (
         <Button variant="ghost" onClick={() => openModal("boons")}>
+          <Gift aria-hidden="true" className="menu-icon-boons" />
           Boons
         </Button>
       ) : null}
       <Button variant="ghost" onClick={() => navigate("glossary")}>
+        <BookOpen aria-hidden="true" className="menu-icon-glossary" />
         Glossary
       </Button>
       <Button variant="ghost" onClick={() => navigate("settings")}>
+        <Settings2 aria-hidden="true" className="menu-icon-settings" />
         Settings
       </Button>
-      {active ? (
-        <Button variant="ghost" onClick={() => openModal("endRun")}>
+      {!home && active ? (
+        <Button
+          variant="ghost"
+          className="end-journey"
+          onClick={() => {
+            if (send({ type: "abandon" })) {
+              menuReturnLabel.current = null;
+              setMenu(false);
+              setRoute(game.phase === "draft" ? "home" : "play");
+            }
+          }}
+        >
+          <LogOut aria-hidden="true" className="menu-icon-end" />
           End journey
         </Button>
       ) : null}
@@ -407,11 +438,13 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
             else setRoute("home");
           }}
         >
+          <House aria-hidden="true" className="menu-icon-home" />
           Main menu
         </Button>
       ) : null}
       {desktop ? (
         <Button variant="ghost" busy={view.closing} onClick={() => void session.quit()}>
+          <LogOut aria-hidden="true" className="menu-icon-quit" />
           Save & quit
         </Button>
       ) : null}
@@ -422,7 +455,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
       {" "}
       <Dialog
         key={`modal-${modalInstance}`}
-        open={modal !== null && modal !== "endRun"}
+        open={modal !== null}
         onOpenChange={(open) => {
           if (!open) setModal(null);
         }}
@@ -513,43 +546,6 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           ) : null}
         </DialogContent>
       </Dialog>
-      <AlertDialog
-        key={`confirmation-${modalInstance}`}
-        open={modal === "endRun"}
-        onOpenChange={(open) => {
-          if (!open) setModal(null);
-        }}
-      >
-        <AlertDialogContent
-          className="confirm-dialog"
-          onCloseAutoFocus={(event) => {
-            event.preventDefault();
-            if (!menu) returnFocus(modalOpener.current);
-          }}
-        >
-          <AlertDialogTitle>End journey?</AlertDialogTitle>
-          <AlertDialogDescription>
-            {game.phase === "draft"
-              ? "Clear your starter choice and return to the main menu?"
-              : "Finish this journey and view your results? Your team and boons will not carry into the next journey. Permanent progress is kept."}
-          </AlertDialogDescription>
-          <div className="confirm-actions">
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction
-              className={buttonVariants({ variant: "destructive" })}
-              onClick={(event) => {
-                if (send({ type: "abandon" })) {
-                  menuReturnLabel.current = null;
-                  setMenu(false);
-                  setRoute(game.phase === "draft" ? "home" : "play");
-                } else event.preventDefault();
-              }}
-            >
-              End journey
-            </AlertDialogAction>
-          </div>
-        </AlertDialogContent>
-      </AlertDialog>
       {!modal && inspection ? (
         "support" in inspection ? (
           <SupportInspector game={game} send={send} close={() => setInspection(null)} />
@@ -642,18 +638,18 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
               </Screen>
             ) : null}
             {route === "talents" ? (
-              <Talents game={game} send={send} back={backFromPage} controls={talentControls} />
+              <Talents game={game} send={send} openMenu={backFromPage} controls={talentControls} />
             ) : null}
             {route === "collection" ? (
-              <Collection game={game} inspect={setInspection} back={backFromPage} />
+              <Collection game={game} inspect={setInspection} openMenu={backFromPage} />
             ) : null}
             {route === "settings" || route === "glossary" ? (
               <Screen className={`menu-screen ${route}-screen`} aria-labelledby="menu-screen-title">
                 <header className="collection-heading">
-                  <Button variant="ghost" size="icon" aria-label="Back" onClick={backFromPage}>
-                    <ArrowLeft aria-hidden="true" />
-                  </Button>
                   <h1 id="menu-screen-title">{route === "settings" ? "Settings" : "Glossary & controls"}</h1>
+                  <Button variant="ghost" size="icon" aria-label="Open menu" onClick={backFromPage}>
+                    <Menu aria-hidden="true" />
+                  </Button>
                 </header>
                 {route === "settings" ? (
                   <Settings
@@ -717,7 +713,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                   aria-pressed={autoplay}
                   onClick={() => setAutoplay(!autoplay)}
                 >
-                  {autoplay ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}
+                  {autoplay ? <Pause aria-hidden="true" /> : <Repeat aria-hidden="true" />}
                 </Button>
               ) : null}
               {game.phase === "draft" ? (
@@ -820,6 +816,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                     if (send({ type: "devWinBattle" })) setMenu(false);
                   }}
                 >
+                  <FastForward aria-hidden="true" className="menu-icon-skip" />
                   Skip combat
                 </Button>
               ) : null}

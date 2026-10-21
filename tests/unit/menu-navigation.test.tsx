@@ -29,7 +29,9 @@ afterEach(() => {
 describe("menu page focus return", () => {
   it.each(
     ["home", "pause"].flatMap((origin) =>
-      ["Collection", "Talents"].flatMap((page) => ["Escape", "Back"].map((back) => ({ origin, page, back }))),
+      ["Collection", "Talents", "Settings", "Glossary"].flatMap((page) =>
+        ["Escape", "Open menu"].map((back) => ({ origin, page, back })),
+      ),
     ),
   )("returns from $page via $back to its $origin menu choice", async ({ origin, page, back }) => {
     // jsdom has no layout. Only emulate visibility; this checks focus ownership,
@@ -47,9 +49,16 @@ describe("menu page focus return", () => {
       const revision = session.store.getState().game.revision;
       act(() => screen.getByRole("button", { name: page }).focus());
       await user.keyboard("{Enter}");
-      expect(screen.getByRole("heading", { name: page })).toBeTruthy();
+      expect(
+        screen.getByRole("heading", { name: page === "Glossary" ? "Glossary & controls" : page }),
+      ).toBeTruthy();
+      expect(screen.queryByRole("button", { name: "Back", exact: true })).toBeNull();
+      if (page === "Talents" && back === "Open menu") {
+        await user.click(screen.getByRole("button", { name: "Physical talents", exact: true }));
+        expect(screen.getByRole("heading", { name: "Physical", exact: true })).toBeTruthy();
+      }
       if (back === "Escape") await user.keyboard("{Escape}");
-      else await user.click(screen.getByRole("button", { name: "Back" }));
+      else await user.click(screen.getByRole("button", { name: "Open menu" }));
       await waitFor(() => expect(document.activeElement).toBe(screen.getByRole("button", { name: page })));
       expect(session.store.getState().game.revision).toBe(revision);
       if (origin === "pause") {

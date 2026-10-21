@@ -130,7 +130,7 @@ for (const [width, height] of REVIEW_VIEWPORTS)
         }
       });
       expect(seen.size).toBe(SPECIES.length);
-      await page.getByRole("button", { name: "Back", exact: true }).click();
+      await page.getByRole("button", { name: "Open menu", exact: true }).click();
       await page.getByRole("button", { name: "Talents", exact: true }).click();
       await captureScreen(page, { path: `reports/scroll-free/talents-${width}-${height}-${scale}.png` });
       for (const keyword of KEYWORDS) {
@@ -140,9 +140,9 @@ for (const [width, height] of REVIEW_VIEWPORTS)
             path: `reports/scroll-free/talent-tree-${width}-${height}-${scale}.png`,
           });
         await everyPage(page.locator(".talents-screen"), () => expectScrollFree(page));
-        await page.getByRole("button", { name: "Back", exact: true }).click();
+        await page.keyboard.press("Escape");
       }
-      await page.getByRole("button", { name: "Back", exact: true }).click();
+      await page.getByRole("button", { name: "Open menu", exact: true }).click();
       await page.getByRole("button", { name: "Glossary", exact: true }).click();
       await captureScreen(page, { path: `reports/scroll-free/glossary-${width}-${height}-${scale}.png` });
       await everyPage(page.getByRole("main", { name: "Glossary & controls" }), () => expectScrollFree(page));

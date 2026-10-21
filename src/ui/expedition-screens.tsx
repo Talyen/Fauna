@@ -15,7 +15,7 @@ import {
   LayoutGrid,
   BookOpen,
   LockKeyhole,
-  ArrowLeft,
+  Menu,
   Check,
   Swords,
   ShieldPlus,
@@ -320,12 +320,12 @@ export function Rewards({ game, send, inspect }: Props) {
 export function Talents({
   game,
   send,
-  back,
+  openMenu,
   controls,
 }: {
   game: GameState;
   send: Props["send"];
-  back: () => void;
+  openMenu: () => void;
   controls?: Controls;
 }) {
   const compact = useCompactLayout();
@@ -379,15 +379,10 @@ export function Talents({
   return (
     <Screen className="talents-screen" data-view={keyword ? "tree" : "overview"} ref={screen}>
       <header className="page-heading talents-heading">
-        <Button
-          variant="ghost"
-          size="icon"
-          aria-label="Back"
-          onClick={() => (keyword ? setKeyword(null) : back())}
-        >
-          <ArrowLeft aria-hidden="true" />
-        </Button>
         <h1>{keyword ? keywordLabel(keyword) : "Talents"}</h1>
+        <Button variant="ghost" size="icon" aria-label="Open menu" onClick={openMenu}>
+          <Menu aria-hidden="true" />
+        </Button>
         {keyword ? (
           <Button
             variant="ghost"
@@ -524,11 +519,11 @@ export function Talents({
 export function Collection({
   game,
   inspect,
-  back,
+  openMenu,
 }: {
   game: GameState;
   inspect: Props["inspect"];
-  back: () => void;
+  openMenu: () => void;
 }) {
   const [filter, setFilter] = useState("all");
   const [pageStart, setPageStart] = useState(0);
@@ -558,10 +553,10 @@ export function Collection({
       }}
     >
       <header className="collection-heading">
-        <Button variant="ghost" size="icon" onClick={back} aria-label="Back">
-          <ArrowLeft aria-hidden="true" />
-        </Button>
         <h1>Collection</h1>
+        <Button variant="ghost" size="icon" onClick={openMenu} aria-label="Open menu">
+          <Menu aria-hidden="true" />
+        </Button>
       </header>
       <Tabs
         className="collection-tabs"
