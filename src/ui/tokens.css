@@ -46,6 +46,7 @@
   --notice: var(--secondary);
   --control-height: 44px;
   --main-menu-button-width: 180px;
+  --main-menu-label-width: calc(94px * var(--text-scale, 1));
   --settings-screen-width: 800px;
   --boon-dialog-width: 720px;
   --settings-label-basis: 200px;

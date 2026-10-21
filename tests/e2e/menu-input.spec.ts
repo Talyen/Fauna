@@ -14,10 +14,16 @@ async function expectAlignedMenu(choices: Locator) {
       range.selectNodeContents(label);
       const textBounds = range.getBoundingClientRect();
       const buttonBounds = element.getBoundingClientRect();
+      const iconBounds = icon.getBoundingClientRect();
+      const style = getComputedStyle(element);
+      const gap = Number.parseFloat(style.columnGap);
+      const labelWidth = Number.parseFloat(style.gridTemplateColumns.split(" ")[1]!);
+      const buttonCenter = buttonBounds.left + buttonBounds.width / 2;
       return {
-        labelCenterOffset:
-          textBounds.left + textBounds.width / 2 - (buttonBounds.left + buttonBounds.width / 2),
-        iconInset: icon.getBoundingClientRect().left - element.getBoundingClientRect().left,
+        labelCenterOffset: textBounds.left + textBounds.width / 2 - buttonCenter,
+        expectedLabelOffset: (iconBounds.width + gap) / 2,
+        groupCenterOffset: iconBounds.left + (iconBounds.width + gap + labelWidth) / 2 - buttonCenter,
+        iconInset: iconBounds.left - buttonBounds.left,
         labelLines: range.getClientRects().length,
       };
     }),
@@ -25,7 +31,8 @@ async function expectAlignedMenu(choices: Locator) {
   for (const button of buttons) {
     expect(button.iconInset).toBeCloseTo(buttons[0]!.iconInset);
     expect(button.labelLines).toBe(1);
-    expect(Math.abs(button.labelCenterOffset)).toBeLessThan(1);
+    expect(Math.abs(button.labelCenterOffset - button.expectedLabelOffset)).toBeLessThan(1);
+    expect(Math.abs(button.groupCenterOffset)).toBeLessThan(1);
   }
 }
 
