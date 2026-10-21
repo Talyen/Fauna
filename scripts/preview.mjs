@@ -1,7 +1,7 @@
 import { assets } from "./assets.mjs";
 import { createServer } from "vite";
 import { randomUUID } from "node:crypto";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, realpath, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
@@ -33,7 +33,14 @@ try {
   // Vite owns the listening socket, avoiding a free-port probe/start race.
   server = await createServer({
     root,
-    server: { host: "127.0.0.1", port: 0, strictPort: true, open: false },
+    server: {
+      host: "127.0.0.1",
+      port: 0,
+      strictPort: true,
+      open: false,
+      // Worktrees link dependencies outside their root, including bundled fonts.
+      fs: { allow: [root, await realpath(path.join(root, "node_modules"))] },
+    },
     plugins: [
       {
         name: "preview-identity",
