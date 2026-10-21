@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { it, expect, vi, afterEach } from "vitest";
-import { render, screen, act, cleanup } from "@testing-library/react";
+import { render, screen, cleanup } from "@testing-library/react";
 import { createSession } from "../../src/application/session";
 import { createBrowserPlatform } from "../../src/platform/browser";
 import type { Platform } from "../../src/platform/ports";
