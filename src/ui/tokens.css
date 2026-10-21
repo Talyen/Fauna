@@ -38,6 +38,11 @@
   --text-rule: var(--text-body);
   --text-name: var(--text-heading);
   --radius: 15px;
+  --radius-ratio: 0.2237;
+  --radius-min: 10px;
+  --radius-max: 32px;
+  --corner-shape: squircle;
+  --border-art-width: 1px;
   --radius-round: 9999px;
   --border-art: transparent;
   --feedback-shadow: var(--background);
@@ -87,7 +92,6 @@
   --motion-mana-glint: 650ms;
   --reward-stagger: 75ms;
   --swap-arc-height: 32px;
-  --menu-icon-results: #facc15;
   --menu-icon-lineup: #38bdf8;
   --menu-icon-talents: #c084fc;
   --menu-icon-collection: #4ade80;
@@ -107,7 +111,7 @@
   --target-actor-width: 1px;
   --target-bracket-width: 2px;
   --target-bracket-gap: 6px;
-  --target-corner: 16px;
+  --target-corner: calc(var(--radius-max) + var(--target-bracket-gap) + var(--target-bracket-width));
   --target-summary-width: 480px;
   --target-control-height: calc(96px * var(--text-scale, 1));
   --target-readout-height: 60px;
@@ -124,7 +128,6 @@
   --hover-frame-overlap: 1px;
   --tooltip-enter-duration: 100ms;
   --tooltip-exit-duration: 100ms;
-  --tooltip-radius: var(--radius);
   --tooltip-max-width: calc(var(--art-standard-short-side) * 4 / 3 * 1.2);
   --tooltip-text-body: calc(16px * var(--tooltip-scale, 1));
   --tooltip-text-heading: calc(20px * var(--tooltip-scale, 1));

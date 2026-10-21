@@ -121,18 +121,27 @@ describe("player interface", () => {
     expect(screen.queryByRole("heading", { name: "Choose a Boon" })).toBeNull();
     await session.dispose();
   });
-  it("reopens saved journey gains and starts fresh without losing permanent gains", async () => {
+  it("shows journey gains only when ending the journey and preserves permanent gains", async () => {
+    vi.stubGlobal(
+      "ResizeObserver",
+      class {
+        observe() {}
+        disconnect() {}
+      },
+    );
     const started = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
     const battle = produce(accept(started, { type: "beginBattle" }), (d) => {
       d.battleXP = { nature: 24 };
     });
     const game = accept(battle, { type: "abandon" });
-    localStorage.setItem("fauna.save.v1", JSON.stringify(game));
+    localStorage.setItem("fauna.save.v1", JSON.stringify(battle));
     const session = createSession(createBrowserPlatform(localStorage), 7);
     await session.load();
     render(<App session={session} />);
     const user = userEvent.setup();
-    await user.click(screen.getByRole("button", { name: "Journey results" }));
+    await user.click(screen.getByRole("button", { name: "Continue" }));
+    await user.click(screen.getByRole("button", { name: "Open menu" }));
+    await user.click(screen.getByRole("button", { name: "End journey" }));
     expect(screen.getByRole("heading", { name: "Returned home" })).toBeTruthy();
     expect(screen.queryByRole("button", { name: "Play" })).toBeNull();
     expect(screen.getByLabelText("Journey gains").textContent).toContain("Lv 2");
@@ -146,7 +155,11 @@ describe("player interface", () => {
     expect(screen.queryByText(/battles won/)).toBeNull();
     expect(session.store.getState().game).toEqual(game);
     await user.click(screen.getByRole("button", { name: "Main menu" }));
-    expect(screen.getByRole("button", { name: "Journey results" })).toBeTruthy();
+    expect(screen.queryByRole("button", { name: "Journey results" })).toBeNull();
+    cleanup();
+    render(<App session={session} />);
+    expect(screen.queryByRole("button", { name: "Journey results" })).toBeNull();
+    expect(screen.queryByRole("heading", { name: "Returned home" })).toBeNull();
     await user.click(screen.getByRole("button", { name: "Play" }));
     expect(session.store.getState().game.journey).toBeNull();
     expect(session.store.getState().game.keywordXP.nature).toBe(24);

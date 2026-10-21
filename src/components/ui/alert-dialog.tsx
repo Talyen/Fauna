@@ -2,6 +2,7 @@
 "use client";
 
 import * as React from "react";
+import { useSurfaceRef } from "../../lib/surface-ref";
 import { useModalSurfaceRef } from "../../lib/modal-surface-ref";
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 
@@ -26,7 +27,7 @@ const AlertDialogContent = React.forwardRef<
   React.ElementRef<typeof AlertDialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Content>
 >(({ className, ...props }, ref) => {
-  const surface = useModalSurfaceRef(ref);
+  const surface = useSurfaceRef(useModalSurfaceRef(ref));
   return (
     <AlertDialogPortal>
       <AlertDialogOverlay />

@@ -80,7 +80,7 @@ Final victory or defeat → Journey results. Ending a started journey voluntaril
 - Keyword totals include all settled battles and XP banked when returning home. Follow Alchemy’s results presentation: keyword name, level (earned points + 1), and progress bar only. Hide numeric XP gains/fractions and points-earned lines here; the Talents screen owns point availability. Fauna uses the current 10/40/100 total XP thresholds. Talents remain menu-driven; never prompt purchases here.
 - Banking and totals update atomically with accepted gameplay commands. Browsing results never grants rewards or saves. Report actual retained earnings at progression caps.
 - Results offer a single centered Main menu action. Start a new journey only from the main menu.
-- Play resets journey totals and roster/boons while preserving permanent progress. Main menu can reopen the last results until a new journey begins; this is not a multi-journey history.
+- Play resets journey totals and roster/boons while preserving permanent progress. Results appear only when ending the journey; returning to the main menu or loading a completed journey does not reopen them.
 - Development saves are disposable; obsolete formats are rejected rather than migrated. Journey totals are recorded from current-format journeys, never inferred from lifetime XP or currency.
 - Material types remain undefined and are not shown. The shared Victory shell shows compact automatic earnings and one encounter-specific choice: recruitment or boons. Only Boon choices have a Skip action; recruitment is required. There is no Continue action. Full-roster replacement changes the contents of that same screen and may be canceled before committing.
 
@@ -96,7 +96,7 @@ Auto-end turn is enabled by default and advances only when Mana reaches zero. It
 
 Auto-play is explicitly enabled for one battle. It uses visible information to choose legal recovery swaps, healing, finishing attacks, other attacks and useful defenses, then ends turns when no useful play remains. Actions occur no faster than every 700 ms. Menus, inspection, focus loss and hidden pages pause it; manual play stops it. Rewards, encounters, recruitment and talents always remain player choices. It stops on completion, home navigation, save failure and shutdown.
 
-Leaving newly completed results opens each newly unlocked creature's portrait and inspectable kit before Main menu. The reveal grants no progress and does not repeat when reopening results or loading an existing completed journey. Results otherwise retain the earnings-only design.
+Leaving newly completed results opens each newly unlocked creature's portrait and inspectable kit before Main menu. The reveal grants no progress and does not repeat when loading an existing completed journey. Results otherwise retain the earnings-only design.
 
 Development builds add Skip combat to the battle pause menu. It settles a normal victory with normal rewards and only XP already earned by actual plays; roster Health is preserved. It is unavailable in production and rejects repeated settlement.
 

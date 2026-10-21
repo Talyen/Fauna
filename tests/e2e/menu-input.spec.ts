@@ -41,7 +41,7 @@ test("pointer menu transitions never display focus indicators", async ({ page })
   await expect(settings).toHaveCSS("outline-style", "none");
   await expect(settings).toHaveCSS("box-shadow", "none");
   await page.keyboard.press("s");
-  const end = page.getByRole("button", { name: "Main menu", exact: true });
+  const end = page.getByRole("button", { name: "End journey", exact: true });
   await expect(end).toBeFocused();
   await expect(end).toHaveCSS("outline-style", "solid");
   await page.mouse.move(20, 20);

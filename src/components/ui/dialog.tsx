@@ -1,5 +1,6 @@
 // Adapted from shadcn/ui (MIT): https://ui.shadcn.com/r/styles/new-york/dialog.json
 import * as React from "react";
+import { useSurfaceRef } from "../../lib/surface-ref";
 import { useModalSurfaceRef } from "../../lib/modal-surface-ref";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
@@ -29,7 +30,7 @@ export const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & { closeLabel?: string }
 >(({ className, children, closeLabel = "Close inspection", ...props }, ref) => {
-  const surface = useModalSurfaceRef(ref);
+  const surface = useSurfaceRef(useModalSurfaceRef(ref));
   return (
     <DialogPrimitive.Portal>
       <DialogPrimitive.Overlay className="dialog-overlay" />

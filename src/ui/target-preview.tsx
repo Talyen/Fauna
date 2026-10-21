@@ -26,7 +26,9 @@ export function BattleReadout({
   return (
     <div className="battle-readout">
       <div className="health-forecast">
-        <Progress value={health} maximum={maxHealth} previous={previous} label="Health" tone="health" />
+        <div className="health-bar-surface">
+          <Progress value={health} maximum={maxHealth} previous={previous} label="Health" tone="health" />
+        </div>
         {knockout ? <Skull className="knockout-preview" aria-label="Knockout" /> : null}
       </div>
       <div className="combat-stats">
