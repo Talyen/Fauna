@@ -56,18 +56,14 @@ it("uploads only after durable local metadata, keeping devices in distinct slots
   expect(f.local.data).toBeTruthy();
   f.manager.dispose();
 });
-it("preserves both divergent heads before choosing and resolves without merging currency", async () => {
+it("preserves divergent heads and automatically retains local progress without merging currency", async () => {
   const f = fixture();
   const remote = await snapshot(progress, other, 1);
   f.files.set(cloudName(remote), JSON.stringify(remote));
   await f.manager.start(initial);
-  expect(f.manager.view.status).toBe("Conflict");
-  expect(f.manager.view.blocking).toBe(true);
   expect(f.preserve).toHaveBeenCalled();
   expect(f.install).not.toHaveBeenCalled();
-  await f.manager.choose(remote.id);
   await f.manager.flush();
-  expect(f.install).toHaveBeenCalledWith(progress);
   expect(f.manager.view.blocking).toBe(false);
   const resolved = await parseSnapshot(f.local.data!, identity.profile);
   expect(resolved.ancestors).toContain(remote.id);
@@ -117,7 +113,7 @@ it("refuses replacement when durable conflict preservation fails", async () => {
     throw new Error("disk full");
   };
   await f.manager.start(initial);
-  expect(f.manager.view.blocking).toBe(true);
+  expect(f.manager.view.blocking).toBe(false);
   expect(f.install).not.toHaveBeenCalled();
   expect(f.files.size).toBe(1);
   f.manager.dispose();
@@ -156,17 +152,133 @@ it("automatically selects only proven descendants and keeps unrelated offline br
   expect(f.manager.view.status).not.toBe("Conflict");
   f.manager.dispose();
 });
-it("retries a failed selected-save installation without dropping the conflict", async () => {
+it("continues locally when automatic installation fails and retries safely", async () => {
   const f = fixture();
   const remote = await snapshot(progress, other, 1);
   f.files.set(cloudName(remote), JSON.stringify(remote));
-  await f.manager.start(initial);
   f.install.mockRejectedValueOnce(new Error("disk full"));
-  await f.manager.choose(remote.id);
-  expect(f.manager.view.status).toBe("Conflict");
-  expect(f.manager.view.blocking).toBe(true);
-  await f.manager.choose(remote.id);
+  await f.manager.start(null);
+  expect(f.manager.view.status).toBe("Pending");
+  expect(f.manager.view.blocking).toBe(false);
+  await f.manager.retry();
+  expect(f.install).toHaveBeenLastCalledWith(progress);
   expect(f.manager.view.blocking).toBe(false);
   await f.manager.flush();
   f.manager.dispose();
+});
+it("automatically continues locally after a startup timeout and ignores late remote results", async () => {
+  vi.useFakeTimers();
+  try {
+    const f = fixture();
+    let release!: () => void;
+    f.port.identity = async () => {
+      await new Promise<void>((resolve) => {
+        release = resolve;
+      });
+      return identity;
+    };
+    const start = f.manager.start(null);
+    await vi.advanceTimersByTimeAsync(5000);
+    await start;
+    expect(f.manager.view.blocking).toBe(false);
+    release();
+    await vi.advanceTimersByTimeAsync(0);
+    expect(f.install).not.toHaveBeenCalled();
+    f.manager.dispose();
+  } finally {
+    vi.useRealTimers();
+  }
+});
+it("retries sync silently without replacing a journey already being played", async () => {
+  vi.useFakeTimers();
+  try {
+    const f = fixture();
+    f.port.list = async () => {
+      throw new Error("offline");
+    };
+    await f.manager.start(initial);
+    await f.manager.commit(progress);
+    const remote = await snapshot(initial, other, 3);
+    f.files.set(cloudName(remote), JSON.stringify(remote));
+    f.port.list = async () => [...f.files.keys()];
+    await vi.advanceTimersByTimeAsync(15000);
+    await f.manager.flush();
+    expect(f.manager.view.blocking).toBe(false);
+    expect(f.install).not.toHaveBeenCalled();
+    await vi.waitFor(async () => {
+      const resolved = await parseSnapshot(f.local.data!, identity.profile);
+      expect(resolved.payload).toBe(progress);
+      expect(resolved.ancestors).toContain(remote.id);
+    });
+    await f.manager.flush();
+    expect(f.preserve).toHaveBeenCalled();
+    expect(f.files.get(cloudName(remote))).toBe(JSON.stringify(remote));
+    f.manager.dispose();
+  } finally {
+    vi.useRealTimers();
+  }
+});
+it("automatically adopts a valid standalone backup without changing the original", async () => {
+  const f = fixture();
+  f.port.identity = async () => ({ ...identity, importAvailable: true });
+  const original = [
+    { source: "primary", data: "broken" },
+    { source: "backup", data: progress },
+  ];
+  f.port.importStandalone = vi.fn(async () => original);
+  await f.manager.start(null);
+  expect(f.install).toHaveBeenCalledWith(progress);
+  expect(original[0]!.data).toBe("broken");
+  expect(f.manager.view.blocking).toBe(false);
+  await f.manager.flush();
+  f.manager.dispose();
+});
+it("serializes retry metadata with newer commits", async () => {
+  const f = fixture();
+  await f.manager.start(null);
+  let release!: () => void;
+  const gate = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  const original = f.port.writeLocal;
+  const calls: string[] = [];
+  f.port.writeLocal = async (data) => {
+    calls.push(data);
+    if (calls.length === 1) await gate;
+    await original(data);
+  };
+  const first = f.manager.commit(initial);
+  await vi.waitFor(() => expect(calls).toHaveLength(1));
+  const second = f.manager.commit(progress);
+  // Snapshot hashing finishes asynchronously, but the first write still owns the lane.
+  await new Promise((resolve) => setTimeout(resolve, 10));
+  expect(calls).toHaveLength(1);
+  release();
+  await Promise.all([first, second]);
+  expect((await parseSnapshot(f.local.data!, identity.profile)).payload).toBe(progress);
+  await f.manager.dispose();
+});
+
+it("retries metadata for the latest local progress without installing an older checkpoint", async () => {
+  vi.useFakeTimers();
+  try {
+    const f = fixture();
+    await f.manager.start(initial);
+    await f.manager.flush();
+    const write = f.port.writeLocal;
+    f.port.writeLocal = async () => {
+      throw new Error("full");
+    };
+    await f.manager.commit(progress);
+    f.port.writeLocal = write;
+    await vi.advanceTimersByTimeAsync(15000);
+    await vi.waitFor(async () => {
+      expect((await parseSnapshot(f.local.data!, identity.profile)).payload).toBe(progress);
+    });
+    expect(f.install).not.toHaveBeenCalled();
+    await f.manager.flush();
+    await f.manager.dispose();
+  } finally {
+    vi.useRealTimers();
+  }
 });

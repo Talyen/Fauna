@@ -11,19 +11,13 @@ export interface CloudSnapshot {
   id: string;
 }
 export interface CloudView {
-  status: "Unavailable" | "Syncing" | "Synced" | "Pending" | "Conflict";
+  status: "Unavailable" | "Syncing" | "Synced" | "Pending";
   blocking: boolean;
-  offlineAvailable: boolean;
-  importAvailable: boolean;
-  candidates: CloudSnapshot[];
   error: string;
 }
 export const initialCloudView: CloudView = {
   status: "Unavailable",
   blocking: false,
-  offlineAvailable: false,
-  importAvailable: false,
-  candidates: [],
   error: "",
 };
 const identifier = /^[a-f0-9]{32}$/;
@@ -104,11 +98,25 @@ export function createCloud(
   let localData: string | null = null;
   let replacing = false;
   let acknowledged: string | null = null;
-  let importing = false;
+  let retryTimer: ReturnType<typeof setTimeout> | undefined;
+  let retrying = false;
+  let metadataWrites = Promise.resolve();
+  const scheduleRetry = () => {
+    if (!alive || retryTimer || retrying || !identity?.available || identity.enabled === false) return;
+    retryTimer = setTimeout(() => {
+      retryTimer = undefined;
+      retrying = true;
+      void reconcile(true).finally(() => {
+        retrying = false;
+        if (view.status === "Pending") scheduleRetry();
+      });
+    }, 15000);
+  };
   const update = (patch: Partial<CloudView>) => {
     if (alive) {
       view = { ...view, ...patch };
       publish(view);
+      if (view.status === "Pending") scheduleRetry();
     }
   };
   const errorText = (error: unknown) => (error instanceof Error ? error.message : "Cloud sync failed.");
@@ -129,7 +137,7 @@ export function createCloud(
       } catch (error) {
         if (!pending) pending = item;
         remoteReady = false;
-        update({ status: "Pending", error: errorText(error), offlineAvailable: true });
+        update({ status: "Pending", error: errorText(error) });
       }
     }
   }
@@ -144,30 +152,38 @@ export function createCloud(
   }
   async function persist(data: string, parents: CloudSnapshot[] = current ? [current] : []) {
     if (!port || !identity?.available) return;
-    if (current?.payload === data && current.device === identity.device && parents.length <= 1) {
+    if (
+      current?.payload === data &&
+      current.device === identity.device &&
+      parents.length === 1 &&
+      parents[0]?.id === current.id
+    ) {
       upload(current);
       return;
     }
     if (sequence >= Number.MAX_SAFE_INTEGER) throw new Error("Cloud snapshot sequence exhausted.");
+    const token = generation;
     const next = await snapshot(data, identity, ++sequence, parents);
-    await port.writeLocal(JSON.stringify(next));
+    if (!alive || token !== generation) return;
+    const writing = metadataWrites.then(async () => {
+      if (alive && token === generation) await port.writeLocal(JSON.stringify(next));
+    });
+    metadataWrites = writing.catch(() => {});
+    await writing;
+    if (!alive || token !== generation) return;
     current = next;
     localData = next.payload;
     upload(next);
   }
-  async function reconcile() {
+  async function reconcile(background = false) {
     if (!port || !identity?.available || identity.enabled === false) return;
     const token = ++generation;
     remoteReady = false;
-    update({ blocking: true, offlineAvailable: false, status: "Syncing", candidates: [], error: "" });
-    const timer = setTimeout(() => {
-      if (alive && token === generation)
-        update({
-          status: "Pending",
-          offlineAvailable: true,
-          error: "Cloud is taking longer than expected. You can play offline.",
-        });
-    }, 5000);
+    update({
+      blocking: !background,
+      status: "Syncing",
+      error: "",
+    });
     try {
       // An in-flight write must finish before comparing remote heads.
       await running;
@@ -194,28 +210,32 @@ export function createCloud(
       if (!alive || token !== generation) return;
       if (streams.size >= 32 && !streams.has(identity.device))
         throw new Error("Cloud device limit reached. Local progress remains available.");
-      if (invalid && streams.size === 0)
-        throw new Error(
-          "Cloud saves could not be validated. Retry or play offline; remote files were preserved.",
-        );
+      if (invalid && streams.size === 0) throw new Error("No valid cloud snapshots; remote files preserved.");
+      if (background && localData && current?.payload !== localData) await persist(localData);
+      if (!alive || token !== generation) return;
       const records = [...streams.values(), ...(current ? [current] : [])];
       const heads = newestHeads(records);
-      if (heads.length > 1 && !heads.every((s) => s.hash === heads[0]!.hash)) {
-        // Preserve before offering replacement; no choice can destroy its alternative.
-        await port.preserve(heads.map((s) => JSON.stringify(s)));
-        if (alive && token === generation)
-          update({ status: "Conflict", candidates: heads, blocking: true, offlineAvailable: true });
+      if (!alive || token !== generation) return;
+      if (background && !current) {
+        // A running session without durable local metadata must not adopt remote state.
+        update({ status: "Pending", blocking: false });
         return;
       }
-      if (!alive || token !== generation) return;
       if (heads.length) {
-        const chosen = heads[0]!;
-        if (localData !== chosen.payload) {
+        // Prefer this device's intact progress; without it use a stable snapshot ID.
+        // Sequence counters are per device and cannot order different devices.
+        const chosen =
+          (background ? current : null) ??
+          heads.find((head) => head.id === current?.id) ??
+          [...heads].sort((a, b) => a.id.localeCompare(b.id))[0]!;
+        if (heads.length > 1 || (background && !heads.some((head) => head.id === chosen.id))) {
+          await port.preserve(records.map((record) => JSON.stringify(record)));
+          if (!alive || token !== generation) return;
+        }
+        if (!background && localData !== chosen.payload) {
           await port.preserve(records.map((s) => JSON.stringify(s)));
           if (!alive || token !== generation) return;
           replacing = true;
-          clearTimeout(timer);
-          update({ offlineAvailable: false });
           try {
             await install(chosen.payload);
           } finally {
@@ -227,19 +247,79 @@ export function createCloud(
         current = chosen;
       }
       remoteReady = !invalid;
-      if (current) await persist(current.payload, heads.length > 1 ? heads : [current]);
+      if (current) await persist(current.payload, background || heads.length > 1 ? heads : [current]);
       update({
         status: invalid ? "Pending" : current && acknowledged !== current.id ? "Syncing" : "Synced",
         blocking: false,
-        offlineAvailable: true,
-        candidates: [],
         error: invalid ? "Some cloud files could not be read. Uploads are paused." : "",
       });
     } catch (error) {
       if (alive && token === generation)
-        update({ status: "Pending", blocking: true, offlineAvailable: true, error: errorText(error) });
-    } finally {
-      clearTimeout(timer);
+        update({ status: "Pending", blocking: false, error: errorText(error) });
+    }
+  }
+  const offline = () => {
+    if (replacing) return false;
+    generation++;
+    remoteReady = false;
+    update({ blocking: false, status: "Pending" });
+    return true;
+  };
+  async function initialize(data: string | null) {
+    const starting = ++generation;
+    localData = data;
+    if (!port) return;
+    try {
+      update({ blocking: true, status: "Syncing" });
+      identity = await port.identity();
+      if (!alive || starting !== generation) return;
+      if (!identity.available) {
+        update({ ...initialCloudView });
+        return;
+      }
+      if (!identifier.test(identity.device) || !identifier.test(identity.profile))
+        throw new Error("Cloud profile identity is invalid.");
+      if (identity.importAvailable) {
+        const candidates = await port.importStandalone(true);
+        if (!alive || starting !== generation) return;
+        for (const candidate of candidates) {
+          try {
+            data = encodeSave(decodeSave(candidate.data));
+          } catch {
+            continue;
+          }
+          replacing = true;
+          try {
+            await install(data);
+          } finally {
+            replacing = false;
+          }
+          if (!alive || starting !== generation) return;
+          localData = data;
+          break;
+        }
+      }
+      const raw = await port.readLocal();
+      if (!alive || starting !== generation) return;
+      if (raw) {
+        try {
+          const saved = await parseSnapshot(raw, identity.profile);
+          sequence = saved.device === identity.device ? saved.sequence : 0;
+          if (saved.payload === data) current = saved;
+        } catch {
+          /* Unknown ancestry stays a conflict, never a fabricated descendant. */
+        }
+      }
+      if (data && !current) await persist(data, []);
+      if (!alive || starting !== generation) return;
+      if (identity.enabled === false) {
+        update({ ...initialCloudView });
+        return;
+      }
+      await reconcile();
+    } catch (error) {
+      if (alive && starting === generation)
+        update({ status: "Pending", blocking: false, error: errorText(error) });
     }
   }
   return {
@@ -247,115 +327,38 @@ export function createCloud(
       return view;
     },
     async start(data: string | null) {
-      const starting = ++generation;
-      localData = data;
-      if (!port) return;
+      let timer: ReturnType<typeof setTimeout> | undefined;
       try {
-        update({ blocking: true, status: "Syncing" });
-        identity = await port.identity();
-        if (!alive || starting !== generation) return;
-        if (!identity.available) {
-          update({ ...initialCloudView });
-          return;
-        }
-        if (!identifier.test(identity.device) || !identifier.test(identity.profile))
-          throw new Error("Cloud profile identity is invalid.");
-        if (identity.importAvailable) {
-          update({ importAvailable: true, blocking: true, status: "Pending" });
-          return;
-        }
-        const raw = await port.readLocal();
-        if (!alive || starting !== generation) return;
-        if (raw) {
-          try {
-            const saved = await parseSnapshot(raw, identity.profile);
-            sequence = saved.device === identity.device ? saved.sequence : 0;
-            if (saved.payload === data) current = saved;
-          } catch {
-            /* Unknown ancestry stays a conflict, never a fabricated descendant. */
-          }
-        }
-        if (data && !current) await persist(data, []);
-        if (!alive || starting !== generation) return;
-        if (identity.enabled === false) {
-          update({ ...initialCloudView });
-          return;
-        }
-        await reconcile();
-      } catch (error) {
-        update({ status: "Pending", blocking: true, offlineAvailable: true, error: errorText(error) });
+        await Promise.race([
+          initialize(data),
+          new Promise<void>((resolve) => {
+            timer = setTimeout(() => {
+              if (offline()) resolve();
+            }, 5000);
+          }),
+        ]);
+      } finally {
+        clearTimeout(timer);
       }
     },
     async commit(data: string) {
       if (!alive) return;
+      generation++;
       localData = data;
       try {
         await persist(data);
+        if (!remoteReady && identity?.available && identity.enabled !== false) update({ status: "Pending" });
       } catch (error) {
         remoteReady = false;
         update({ status: "Pending", error: errorText(error) });
       }
     },
     retry: reconcile,
-    offline() {
-      if (replacing) return;
-      generation++;
-      remoteReady = false;
-      update({
-        blocking: false,
-        offlineAvailable: true,
-        status: view.status === "Conflict" ? "Conflict" : "Pending",
-      });
-    },
-    async choose(id: string) {
-      if (!port || !identity || !view.blocking || view.status !== "Conflict") return;
-      const candidates = view.candidates,
-        chosen = candidates.find((s) => s.id === id);
-      if (!chosen) return;
-      const token = ++generation;
-      update({ status: "Syncing", offlineAvailable: false });
-      try {
-        await port.preserve(candidates.map((s) => JSON.stringify(s)));
-        if (!alive || token !== generation) return;
-        await install(chosen.payload);
-        if (!alive || token !== generation) return;
-        remoteReady = true;
-        await persist(chosen.payload, candidates);
-        update({ blocking: false, candidates: [], error: "", offlineAvailable: true });
-      } catch (error) {
-        update({ status: "Conflict", error: errorText(error), offlineAvailable: true });
-      }
-    },
-    async importStandalone(use: boolean) {
-      if (!port || !view.importAvailable || importing) return;
-      importing = true;
-      update({ status: "Syncing", error: "" });
-      try {
-        const candidates = await port.importStandalone(use);
-        if (!alive) return;
-        let data: string | null = null;
-        for (const candidate of candidates) {
-          try {
-            data = encodeSave(decodeSave(candidate.data));
-            break;
-          } catch {
-            /* Keep current-format backup recovery. */
-          }
-        }
-        if (use && !data) throw new Error("Standalone saves could not be read. Start separately or retry.");
-        if (data) await install(data);
-        update({ importAvailable: false });
-        await this.start(data ?? localData);
-      } catch (error) {
-        update({ status: "Pending", error: errorText(error) });
-      } finally {
-        importing = false;
-      }
-    },
+    offline,
     async flush(timeout = 2000) {
       let timer: ReturnType<typeof setTimeout> | undefined;
       await Promise.race([
-        running,
+        Promise.all([running, metadataWrites]),
         new Promise<void>((resolve) => {
           timer = setTimeout(resolve, timeout);
         }),
@@ -364,8 +367,10 @@ export function createCloud(
     },
     dispose() {
       alive = false;
+      clearTimeout(retryTimer);
       generation++;
       remoteReady = false;
+      return metadataWrites;
     },
   };
 }

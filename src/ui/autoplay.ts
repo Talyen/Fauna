@@ -33,19 +33,10 @@ export function useAutoplay(session: Session, paused: boolean, autoEndTurn: bool
     };
   }, []);
   useEffect(() => {
-    if (view.game.phase !== "battle" || view.closing || view.saveStatus === "error" || !view.ready)
-      setEnabled(false);
-  }, [view.game.phase, view.closing, view.saveStatus, view.ready]);
+    if (view.game.phase !== "battle" || view.closing || !view.ready) setEnabled(false);
+  }, [view.game.phase, view.closing, view.ready]);
   useEffect(() => {
-    if (
-      !enabled ||
-      paused ||
-      !foreground ||
-      view.closing ||
-      view.saveStatus === "error" ||
-      view.game.phase !== "battle"
-    )
-      return;
+    if (!enabled || paused || !foreground || view.closing || view.game.phase !== "battle") return;
     const revision = view.game.revision;
     return scheduleAutoplay(() => {
       const current = session.store.getState();
@@ -54,22 +45,11 @@ export function useAutoplay(session: Session, paused: boolean, autoEndTurn: bool
         current.closing ||
         current.overlayActive ||
         current.cloud.blocking ||
-        current.saveStatus === "error" ||
         current.game.phase !== "battle"
       )
         return;
       if (!session.command(chooseBattleCommand(current.game, autoEndTurn))) setEnabled(false);
     });
-  }, [
-    session,
-    enabled,
-    paused,
-    foreground,
-    autoEndTurn,
-    view.game.revision,
-    view.game.phase,
-    view.closing,
-    view.saveStatus,
-  ]);
+  }, [session, enabled, paused, foreground, autoEndTurn, view.game.revision, view.game.phase, view.closing]);
   return [enabled, setEnabled] as const;
 }

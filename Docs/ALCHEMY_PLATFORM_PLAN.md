@@ -59,7 +59,7 @@ Reference: `Alchemy: desktop/after-pack.cjs` and its package-layout tests. See [
 
 Add Windowed and Fullscreen to Settings under Display using a registered shadcn RadioGroup. Offer the setting only when the platform exposes the capability. Fullscreen means the platform-supported borderless fullscreen experience; exclusive display-mode switching and resolution selection are out of scope. Default to Windowed on a new profile.
 
-The desktop process owns persisted mode, last usable window bounds, and actual window state. Keep these device preferences outside progression and cloud payloads. Extend the typed preload with validated get/set operations and actual-state notifications; accept only known modes from the authorized main frame. Renderer code cannot pass window options or arbitrary geometry. Settings displays the confirmed mode and handles a rejected or failed transition with a concise error.
+The desktop process owns persisted mode, last usable window bounds, and actual window state. Keep these device preferences outside progression and cloud payloads. Extend the typed preload with validated get/set operations and actual-state notifications; accept only known modes from the authorized main frame. Renderer code cannot pass window options or arbitrary geometry. Settings displays the confirmed mode and silently retains the last confirmed mode after a rejected or failed transition.
 
 Apply the saved mode at ordinary launch. Restore windowed bounds clamped to a currently available display, with a reachable title bar after monitor removal or resolution changes. Remember resize/move changes without unbounded disk writes. Native fullscreen exit updates the setting; serialize rapid requests and ignore late completion from superseded requests. Preserve input focus and avoid forwarding the same key press into gameplay during a transition. Quit drains preference writes without entering the progression save lane.
 
@@ -135,7 +135,7 @@ The application owns reconciliation and production save decoding. Desktop owns a
 
 Use a separately versioned cloud envelope containing the exact current gameplay payload, payload hash, profile identity, local device identity, monotonically increasing per-device sequence, causal parent identifiers and bounded ancestry/explicit conflict-resolution receipts. Validate the payload through `decodeSave` before installation. Envelope transport metadata does not become a gameplay command, alter gameplay RNG, or change the gameplay revision.
 
-Generate device/profile identities outside gameplay using platform randomness. Keep device identity local to the installation. Bind Steam profiles to the active Steam account, with separate local directories. Preserve the existing standalone/offline profile. On the first Steam launch with nonempty standalone progress, offer Use this progress or Start a separate Steam profile; copy only on explicit choice and retain the standalone original. Never automatically attach another account's progress or cloud files. A running session pins its account; account change stops cloud admission and requires a safe restart/reconciliation.
+Generate device/profile identities outside gameplay using platform randomness. Keep device identity local to the installation. Bind Steam profiles to the active Steam account, with separate local directories. Preserve the existing standalone/offline profile. On the first Steam launch with nonempty standalone progress, automatically adopt valid progress and retain the standalone original. Never automatically attach another account's progress or cloud files. A running session pins its account; account change stops cloud admission and requires a safe restart/reconciliation.
 
 Do not rely on wall-clock timestamps, wallet totals or numeric gameplay revision to determine which branch is newer. Hash canonical payload bytes; use causal snapshot identity for ancestry. Distinct envelope IDs with identical payloads can be treated as equivalent after validation. Bound payload, metadata, file count and total read bytes; oversized/unrecognized objects remain untouched and produce actionable diagnostics.
 
@@ -151,29 +151,29 @@ Bounded ancestry may make a very old common ancestor unprovable; treat that case
 
 | Valid candidates                       | Behavior                                                                                          |
 | -------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| No local or remote progress            | Create a fresh profile only after reads succeed or the player explicitly chooses offline play     |
+| No local or remote progress            | Continue with a fresh in-memory profile if no valid progress can be loaded                        |
 | Local only                             | Persist a recoverable local envelope, then upload when the remote inventory is known              |
 | Cloud only                             | Install through the local serialized save/backup lane, then expose Continue                       |
 | Equivalent payloads                    | Retain progress and reconcile metadata without replaying events                                   |
 | One proven descendant                  | Select it, preserve the previous local candidate, and install locally before commands are enabled |
-| Divergent or unprovable heads          | Pause command admission and present an explicit conflict choice                                   |
+| Divergent or unprovable heads          | Preserve alternatives and automatically prefer intact local progress, then stable snapshot ID     |
 | Invalid primary and valid backup       | Recover the valid current-format candidate; retain the invalid evidence                           |
-| Cloud unavailable, denied or timed out | Offer local/offline continuation with sync pending; do not treat failed reads as an empty cloud   |
-| Local read/write failure               | Retain the existing actionable Retry flow; never upload a fresh placeholder over unknown progress |
+| Cloud unavailable, denied or timed out | Automatically continue locally; preserve remote files and keep failure diagnostics internal       |
+| Local read/write failure               | Continue in memory, retry writes silently and retain unknown progress in backups                  |
 
-At launch, reconcile before enabling progression commands. Use a five-second application-level wait before offering offline continuation; a late native result cannot install progress after the player has started playing. At runtime, only compare or report conflicts; replacing live progression requires an explicit synchronization transition that freezes commands, drains admitted local writes and revalidates the selected snapshot. Reconnect never silently rolls back an active journey.
+At launch, reconcile before enabling progression commands. After five seconds, automatically continue locally and ignore late remote results. Proven descendants fast-forward; divergent or unprovable heads automatically retain the intact local head, or select by stable snapshot ID without local progress. Preserve competing payloads before publishing ancestry for the resolution; never merge gameplay values. Preservation failure keeps local play available without overwriting remote alternatives. Reconnect must not roll back an active journey.
 
-Conflict UI shows concise local/cloud summaries: device label, journey phase/encounter, currency and available progress context. Timestamps are informational. Provide Use this save for each candidate, inspectable details when needed, and Play offline without replacement. Do not label a save Better based on wealth or wins. Preserve every competing validated candidate durably before enabling a replacement action. Failure to preserve or install leaves the conflict unresolved. Use registered modal controls and focus ownership; routine successful sync adds no modal or toast.
+There is no conflict UI, save warning, sync status or retry control. The [silent recovery policy](UI.md#silent-recovery-policy) owns player-facing behavior for every failure.
 
 ### Local saves, upload queue and shutdown
 
 Local saving remains authoritative for continued offline play. After each accepted command, serialize the current payload and durable cloud metadata in the local save lane. Only a successful local commit can enqueue its cloud snapshot. Coalesce pending uploads to the latest admitted snapshot per pinned account/profile, preserving causal metadata and continuing after individual failures. Never hold the local save lane while awaiting network/native transport. A metadata write failure leaves the local gameplay save recoverable and prevents an untracked upload.
 
-Expose local save status and cloud sync status separately. Cloud states include Unavailable, Syncing, Synced, Pending and Conflict. Settings shows concise status and Retry where actionable. Local save success remains truthful when cloud sync fails; repeated failures are bounded diagnostics. The internal collector never captures full saves or account identifiers; there is no player-facing diagnostic export.
+Keep local save status and cloud sync status internal. Local save success remains truthful when cloud sync fails; repeated failures are bounded diagnostics. The internal collector never captures full saves or account identifiers; there is no player-facing diagnostic export.
 
-Shutdown first revokes commands and drains local writes using the existing close handshake. Attempt the newest cloud upload for at most two seconds, then retain its durable pending state and permit quit if local saving succeeded. Local save failure still prevents ordinary quit for Retry. Do not assume a JavaScript timeout cancels an in-flight native call: verify the binding's blocking behavior and isolate potentially unbounded transport from the main/UI process if needed. Do not add a second callback pump when the binding already owns one. Renderer replacement cannot create competing upload queues, and disposed listeners cannot publish status into a new session.
+Shutdown first revokes commands and drains local writes using the existing close handshake. Attempt the newest cloud upload for at most two seconds, then retain its durable pending state and permit quit if local saving succeeded. Local save failure triggers one final retry and then permits ordinary quit silently. Do not assume a JavaScript timeout cancels an in-flight native call: verify the binding's blocking behavior and isolate potentially unbounded transport from the main/UI process if needed. Do not add a second callback pump when the binding already owns one. Renderer replacement cannot create competing upload queues, and disposed listeners cannot publish status into a new session.
 
-Acceptance: two devices progressing offline produce a conflict without overwriting either head; equal payloads do not conflict; known descendants fast-forward; invalid remote bytes never enter gameplay; local backup recovery still works; repeated retries do not duplicate rewards; cloud outages do not prevent locally saved play or graceful quit. Cover account changes, disabled Cloud, partial writes, quota/file limits, stale asynchronous reads, concurrent publications, ancestry-window exhaustion and interrupted conflict resolution. Test source payloads against the production current-format decoder.
+Acceptance: two devices progressing offline automatically resolve divergent heads after preserving alternatives; equal payloads do not conflict; known descendants fast-forward; invalid remote bytes never enter gameplay; local backup recovery still works; repeated retries do not duplicate rewards; cloud outages do not prevent locally saved play or graceful quit. Cover account changes, disabled Cloud, partial writes, quota/file limits, stale asynchronous reads, concurrent publications, ancestry-window exhaustion and interrupted conflict resolution. Test source payloads against the production current-format decoder.
 
 References: `Alchemy: desktop/steam-cloud-storage.cjs`, `Alchemy: src/lib/cloud-save-mirror.ts`, and cloud persistence tests. Fauna's separate device streams are an intentional adaptation to avoid silently overwriting divergent journeys; do not copy Alchemy's reconciliation policy without checking it against this contract.
 
@@ -187,14 +187,14 @@ Update canonical architecture, release, journey, UI, content and development-too
 
 Required evidence:
 
-| Area                  | Evidence before declaring implementation verified                                                                                   |
-| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| Architecture and Knip | Positive/negative policy fixtures and the actual full CI static result                                                              |
-| Hardening             | Fuse inspection, snapshot/native-module checks and startup/save/resume on the exact Windows package                                 |
-| Display               | Focused lifecycle tests, rendered Settings review, actual window transitions and restart/bounds restoration                         |
-| Encounters            | Command/save/replay tests and a complete journey retaining eight battles, recruitment, boss rewards and support visits              |
-| Cloud                 | Fault-injected application/transport tests plus two-device Steam sync, offline divergence, explicit conflict resolution and restart |
-| Overlay               | Simulated pause lifecycle plus actual Steam overlay/controller activation and deliberate resume                                     |
+| Area                  | Evidence before declaring implementation verified                                                                                    |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Architecture and Knip | Positive/negative policy fixtures and the actual full CI static result                                                               |
+| Hardening             | Fuse inspection, snapshot/native-module checks and startup/save/resume on the exact Windows package                                  |
+| Display               | Focused lifecycle tests, rendered Settings review, actual window transitions and restart/bounds restoration                          |
+| Encounters            | Command/save/replay tests and a complete journey retaining eight battles, recruitment, boss rewards and support visits               |
+| Cloud                 | Fault-injected application/transport tests plus two-device Steam sync, offline divergence, automatic conflict resolution and restart |
+| Overlay               | Simulated pause lifecycle plus actual Steam overlay/controller activation and deliberate resume                                      |
 
 Rendered review covers 1280×800 and 1920×1080, 125% text and tooltip sizes, reduced motion, keyboard and simulated controller, full/empty Merchant stock, unaffordable prices, Campfire thresholds, save errors and cloud conflicts. Inspect CI screenshots or an explicitly requested local preview. Passing source or geometry checks alone does not establish visual acceptance.
 

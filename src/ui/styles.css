@@ -120,43 +120,8 @@ strong {
   top: var(--space-4);
   z-index: 10;
 }
-.loading,
-.recovery {
+.loading {
   padding: var(--space-12);
-}
-.recovery {
-  max-width: 900px;
-  width: 100%;
-  min-height: 0;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: var(--screen-section-gap);
-  padding: var(--space-6);
-}
-.recovery p {
-  margin: 0;
-  color: var(--muted-foreground);
-}
-.notice,
-.error-banner {
-  position: relative;
-  z-index: 11;
-  font-size: var(--text-secondary);
-  padding: var(--space-2) var(--space-3);
-  margin: 0 64px 14px 0;
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  background: var(--notice);
-}
-.error-banner {
-  color: var(--foreground);
-}
-.notice {
-  color: var(--muted-foreground);
 }
 .dialog-overlay {
   position: fixed;
@@ -1590,10 +1555,6 @@ strong {
   top: 50%;
   translate: 0 -50%;
 }
-.notice,
-.error-banner {
-  border-radius: var(--radius-md);
-}
 .target-line path {
   stroke-linecap: round;
 }
@@ -1754,8 +1715,7 @@ strong {
 .destination-option p,
 .journey-results-heading,
 .dialog-content > h2,
-.dialog-content > p,
-.recovery {
+.dialog-content > p {
   text-align: center;
 }
 .page-heading,
