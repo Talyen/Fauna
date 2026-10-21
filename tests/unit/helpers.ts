@@ -1,4 +1,4 @@
-import { freshCombat } from "../../src/game/combat";
+import { freshCombat, combat } from "../../src/game/combat";
 import { controlled } from "../../src/game/combat";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
@@ -129,4 +129,32 @@ export function bossReward() {
     d.expedition = { pack: 0 };
   });
   return winBattle(accept(ready, { type: "beginBattle" }));
+}
+
+export function feedbackBattle() {
+  const battle = accept(
+    produce(teamRun(42, ["mossback", "briartooth", "stormfin"]), (game) => {
+      game.phase = "teamSelection";
+      game.encounter = 1;
+      game.battle = null;
+      game.expedition = null;
+    }),
+    { type: "beginBattle" },
+  );
+  return produce(battle, (game) => {
+    game.rng = 1;
+    const attack = game.cards.find((card) => card.definitionId === "briartooth-attack")!;
+    game.battle!.hand = [attack.id];
+    game.battle!.buffer = [];
+    game.battle!.discard = [];
+    game.battle!.draw = game.cards.filter((card) => card.id !== attack.id).map((card) => card.id);
+    const actor = game.team.find((creature) => creature.id === attack.ownerId)!;
+    actor.health -= 5;
+    combat(actor).riposte = true;
+    combat(actor).partingCut = true;
+    const target = game.battle!.enemies[0]!;
+    target.block = 4;
+    target.combat.armor = 0;
+    target.combat.thorns = 1;
+  });
 }

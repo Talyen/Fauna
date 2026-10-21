@@ -106,10 +106,14 @@
   --feedback-duration: 1100ms;
   --feedback-text: calc(37.8px * var(--text-scale, 1));
   --feedback-pop-scale: 2;
+  --feedback-hold-scale: 1.8;
+  --feedback-icon-gap: 6px;
+  --feedback-critical-radius: 8px;
   --feedback-rise: 240px;
   --feedback-reposition: 150ms;
   --feedback-outline: 1.5px;
   --feedback-critical: #fcd34d;
+  --feedback-critical-clear: #fcd34d00;
   --feedback-critical-flash: #fff7ed;
   /* Fixed CSS-pixel artwork sizes; layouts reflow instead of scaling artwork. */
   --art-standard-short-side: 200px;

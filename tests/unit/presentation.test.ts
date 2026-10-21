@@ -5,7 +5,8 @@ import { combat, hit } from "../../src/game/combat";
 import { dispatch } from "../../src/game/engine";
 import { appendFeedback, feedbackFrames } from "../../src/ui/combat-feedback-model";
 import type { GameEvent } from "../../src/game/types";
-import { run } from "./helpers";
+import { run, feedbackBattle } from "./helpers";
+import { decodeSave, encodeSave } from "../../src/game/save";
 describe("uncommitted previews", () => {
   it("includes traits and upgrades without mutating the committed state", () => {
     const original = produce(run(), (d) => {
@@ -155,4 +156,22 @@ it("sequences resolved actions without treating counterattack source IDs as new 
     { ...damage(3), actorId: "enemy-1" },
   ]);
   expect(frames.map((frame) => frame.length)).toEqual([3, 2]);
+});
+
+it("keeps the rendered mixed-feedback fixture current and exercises a real Critical, absorption and status gain", () => {
+  const game = feedbackBattle();
+  expect(decodeSave(encodeSave(game))).toEqual(game);
+  const played = dispatch(game, {
+    type: "play",
+    cardId: game.battle!.hand[0]!,
+    targetId: "enemy-0",
+    autoEndTurn: false,
+  });
+  expect(played.accepted).toBe(true);
+  expect(played.state.phase).toBe("battle");
+  expect(played.events).toContainEqual(expect.objectContaining({ kind: "damage", critical: true }));
+  expect(played.events).toContainEqual(expect.objectContaining({ kind: "block", amount: -4 }));
+  expect(appendFeedback([], played.events, 1, 0).find((b) => b.targetId === "enemy-0")!.entries).toHaveLength(
+    4,
+  );
 });

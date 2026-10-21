@@ -33,7 +33,13 @@ function FeedbackNumber({ entry: e }: { entry: FeedbackEntry }) {
       data-critical={e.critical || undefined}
       data-kind={e.kind}
       data-combat-tone={
-        e.kind === "heal" || e.kind === "block" ? e.kind : e.status === "deathDoor" ? undefined : e.status
+        e.kind === "damage"
+          ? (e.damageType ?? "physical")
+          : e.kind === "heal" || e.kind === "block"
+            ? e.kind
+            : e.status === "deathDoor"
+              ? undefined
+              : e.status
       }
       aria-label={
         notice
