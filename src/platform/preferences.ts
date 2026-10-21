@@ -3,7 +3,6 @@ export function browserDiagnostics(): DiagnosticPort {
   return {
     read: () => localStorage.getItem("fauna.diagnostics"),
     write: (data) => localStorage.setItem("fauna.diagnostics", data),
-    copy: (data) => navigator.clipboard.writeText(data),
   };
 }
 

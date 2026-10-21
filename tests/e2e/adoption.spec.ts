@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-test("Collection filtering, audio preferences, and diagnostics remain menu-driven", async ({ page }) => {
+test("Collection filtering, audio preferences, and settings remain menu-driven", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Collection", exact: true }).click();
   await page.getByRole("tab", { name: "Unknown", exact: true }).click();
@@ -12,8 +12,8 @@ test("Collection filtering, audio preferences, and diagnostics remain menu-drive
   await page.keyboard.press("ArrowLeft");
   await expect(page.getByLabel("Master volume value", { exact: true })).toHaveText("40%");
   await page.getByRole("switch", { name: "Mute in background", exact: true }).click();
-  await page.getByRole("tab", { name: "Diagnostics", exact: true }).click();
-  await expect(page.getByRole("button", { name: "Copy diagnostics", exact: true })).toBeVisible();
+  await expect(page.getByRole("tab", { name: "Diagnostics", exact: true })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Copy diagnostics", exact: true })).toHaveCount(0);
   await page.screenshot({ path: "reports/adoption-settings.png", fullPage: true });
   await page.reload();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
@@ -25,7 +25,7 @@ test("Collection filtering, audio preferences, and diagnostics remain menu-drive
 for (const [width, height, textScale] of [
   [1280, 800, "1"],
   [1920, 1080, "1"],
-  [960, 540, "1.5"],
+  [960, 540, "1.25"],
 ] as const) {
   test(`settings categories remain reachable at ${width}x${height} with ${Number(textScale) * 100}% text`, async ({
     page,
@@ -34,16 +34,16 @@ for (const [width, height, textScale] of [
     await page.addInitScript((scale) => localStorage.setItem("fauna.text-scale", scale), textScale);
     await page.goto("/");
     await page.getByRole("button", { name: "Settings", exact: true }).click();
-    for (const category of ["Display", "Sound", "Diagnostics"]) {
+    for (const category of ["Display", "Sound", "Battle"]) {
       await page.getByRole("tab", { name: category, exact: true }).click();
       const panel = page.getByRole("tabpanel");
       await expect(panel).toBeVisible();
       const control =
         category === "Display"
-          ? panel.getByRole("radio", { name: "150%", exact: true })
+          ? panel.getByRole("radio", { name: "125%", exact: true })
           : category === "Sound"
             ? panel.getByRole("switch", { name: "Mute in background", exact: true })
-            : panel.getByRole("button", { name: "Copy diagnostics", exact: true });
+            : panel.getByRole("switch", { name: "Auto-end turn", exact: true });
       await control.scrollIntoViewIfNeeded();
       await expect(control).toBeInViewport();
       await page.screenshot({ path: `reports/settings-${category.toLowerCase()}-${width}.png` });
@@ -64,7 +64,7 @@ for (const width of [1280, 1920])
     await page.evaluate((data) => localStorage.setItem("fauna.save.v1", data), JSON.stringify(fixture));
     await page.reload();
     await page.getByRole("button", { name: "Settings", exact: true }).click();
-    await page.getByRole("radio", { name: "150%", exact: true }).click();
+    await page.getByRole("radio", { name: "125%", exact: true }).click();
     await page.getByRole("radio", { name: "Tooltip 125%", exact: true }).click();
     await page.keyboard.press("Escape");
     await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
@@ -98,7 +98,7 @@ for (const width of [1280, 1920])
     await page.reload();
     await page.getByRole("button", { name: "Settings", exact: true }).click();
     await expect(page.getByRole("radio", { name: "Tooltip 125%", exact: true })).toBeChecked();
-    await expect(page.getByRole("radio", { name: "150%", exact: true })).toBeChecked();
+    await expect(page.getByRole("radio", { name: "125%", exact: true })).toBeChecked();
   });
 
 for (const width of [1280, 1920])
@@ -113,7 +113,7 @@ for (const width of [1280, 1920])
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.addInitScript((save) => {
       if (!localStorage.getItem("fauna.save.v1")) localStorage.setItem("fauna.save.v1", save);
-      localStorage.setItem("fauna.text-scale", "1.5");
+      localStorage.setItem("fauna.text-scale", "1.25");
     }, JSON.stringify(fixture));
     await page.goto("/");
     await page.getByRole("button", { name: "Continue", exact: true }).click();

@@ -1,5 +1,5 @@
 import { assetUrl } from "./ui/assets";
-import { DiagnosticViewer, GameErrorBoundary } from "./ui/diagnostics";
+import { GameErrorBoundary } from "./ui/diagnostics";
 import { createRoot } from "react-dom/client";
 import { MotionConfig } from "motion/react";
 import { createSession } from "./application/session";
@@ -38,7 +38,7 @@ root.render(
       ) : (
         <main className="recovery">
           <h1>Game content unavailable</h1>
-          <DiagnosticViewer diagnostics={session.diagnostics} desktop={platform.desktop} />
+          <p>Close and reopen the game to retry.</p>
         </main>
       )}
     </GameErrorBoundary>

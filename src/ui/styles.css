@@ -1095,8 +1095,8 @@ strong {
   justify-content: space-between;
 }
 .settings-heading {
-  color: var(--primary);
-  font-size: var(--text-body);
+  color: var(--foreground);
+  font-size: var(--text-heading);
   font-weight: 600;
   margin-bottom: var(--screen-item-gap);
 }
@@ -1105,17 +1105,46 @@ strong {
   gap: var(--screen-section-gap);
   margin-top: var(--screen-section-gap);
 }
+/* Borderless tabs retain Radix selection and keyboard navigation. */
 .settings-tabs {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--space-1);
+  flex-wrap: nowrap;
+  justify-content: safe center;
+  gap: var(--screen-item-gap);
   width: fit-content;
   max-width: 100%;
   margin-inline: auto;
+  overflow-x: auto;
+  background: transparent;
+  border: 0;
+  padding: var(--space-2);
 }
 .settings-tabs button {
+  flex-shrink: 0;
   gap: var(--space-2);
+  border: 0;
+  padding-inline: var(--space-3);
+  background: transparent;
+  box-shadow: none;
+  color: var(--muted-foreground);
+  transition: color 150ms;
+}
+.settings-tabs button[data-state="active"] {
+  background: transparent;
+  color: var(--primary);
+  font-weight: 600;
+}
+.settings-tabs button:hover {
+  background: transparent;
+  color: var(--foreground);
+}
+.settings-tabs button[data-state="active"]:hover {
+  color: var(--primary);
+}
+:root[data-focus="visible"] .settings-tabs button:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  box-shadow: none;
 }
 .settings-panel {
   margin-top: 0;
@@ -1387,17 +1416,6 @@ strong {
   color: var(--primary);
   font-variant-numeric: tabular-nums;
 }
-.diagnostic-viewer {
-  display: grid;
-  gap: var(--screen-item-gap);
-}
-.diagnostic-viewer pre {
-  max-height: 240px;
-  overflow: auto;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-  font-size: var(--text-secondary);
-}
 .collection-entry {
   display: flex;
   flex-direction: column;
@@ -1482,4 +1500,11 @@ strong {
   .game-button {
     scale: 1 !important;
   }
+}
+
+/* Settings hierarchy: title, section, option, supporting text. */
+.settings-dialog > h2 {
+  font-size: var(--text-title);
+  font-weight: 600;
+  color: var(--foreground);
 }

@@ -1,13 +1,13 @@
 import type { Session } from "../application/session";
 import { DisplaySettings, CloudStatus } from "./platform-settings";
-import { Monitor, Volume2, Bug, Scaling, StepForward } from "lucide-react";
+import { Monitor, Headphones, Swords, CaseSensitive, MessageSquareText, StepForward } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
 import { RadioGroup, RadioGroupItem } from "../components/ui/radio-group";
-import type { Diagnostics } from "../application/diagnostics";
 import type { AudioPreferences } from "./audio-preferences";
 import { AudioSettings } from "./audio-settings";
-import { DiagnosticViewer } from "./diagnostics";
 import { SettingRow, SettingToggle } from "./settings-controls";
+
+export const TEXT_SCALES = [0.75, 1, 1.25] as const;
 
 export function Settings({
   session,
@@ -17,7 +17,6 @@ export function Settings({
   setScale,
   tooltipScale,
   setTooltipScale,
-  diagnostics,
   desktop,
   autoEndTurn,
   setAutoEndTurn,
@@ -29,7 +28,6 @@ export function Settings({
   setScale: (value: number) => void;
   tooltipScale: number;
   setTooltipScale: (value: number) => void;
-  diagnostics: Diagnostics;
   desktop: boolean;
   autoEndTurn: boolean;
   setAutoEndTurn: (value: boolean) => void;
@@ -42,22 +40,18 @@ export function Settings({
           Display
         </TabsTrigger>
         <TabsTrigger value="sound">
-          <Volume2 aria-hidden="true" />
+          <Headphones aria-hidden="true" />
           Sound
         </TabsTrigger>
         <TabsTrigger value="battle">
-          <StepForward aria-hidden="true" />
+          <Swords aria-hidden="true" />
           Battle
-        </TabsTrigger>
-        <TabsTrigger value="diagnostics">
-          <Bug aria-hidden="true" />
-          Diagnostics
         </TabsTrigger>
       </TabsList>
       <TabsContent value="display" className="settings-panel">
         <h2 className="settings-heading">Display</h2>
         {session ? <DisplaySettings session={session} /> : null}
-        <SettingRow icon={Scaling} label="Text size">
+        <SettingRow icon={CaseSensitive} label="Text size">
           <RadioGroup
             orientation="horizontal"
             className="text-size-options"
@@ -65,7 +59,7 @@ export function Settings({
             value={String(scale)}
             onValueChange={(value) => setScale(Number(value))}
           >
-            {[1, 1.25, 1.5].map((value) => (
+            {TEXT_SCALES.map((value) => (
               <label key={value} className="text-size-option">
                 <RadioGroupItem value={String(value)} aria-label={`${value * 100}%`} />
                 <span>{value * 100}%</span>
@@ -73,7 +67,7 @@ export function Settings({
             ))}
           </RadioGroup>
         </SettingRow>
-        <SettingRow icon={Scaling} label="Tooltip size">
+        <SettingRow icon={MessageSquareText} label="Tooltip size">
           <RadioGroup
             orientation="horizontal"
             className="text-size-options"
@@ -81,7 +75,7 @@ export function Settings({
             value={String(tooltipScale)}
             onValueChange={(value) => setTooltipScale(Number(value))}
           >
-            {[1, 1.25, 1.5].map((value) => (
+            {TEXT_SCALES.map((value) => (
               <label key={value} className="text-size-option">
                 <RadioGroupItem value={String(value)} aria-label={`Tooltip ${value * 100}%`} />
                 <span>{value * 100}%</span>
@@ -102,11 +96,7 @@ export function Settings({
           onChange={setAutoEndTurn}
         />
       </TabsContent>
-      <TabsContent value="diagnostics" className="settings-panel">
-        <h2 className="settings-heading">Diagnostics</h2>
-        {session ? <CloudStatus session={session} /> : null}
-        <DiagnosticViewer diagnostics={diagnostics} desktop={desktop} collapsible={false} />
-      </TabsContent>
+      {desktop && session ? <CloudStatus session={session} /> : null}
     </Tabs>
   );
 }

@@ -38,7 +38,6 @@ describe("local diagnostics", () => {
       write: () => {
         throw new Error("full");
       },
-      copy: async () => {},
     });
     const circular: Record<string, unknown> = {};
     circular.self = circular;
@@ -49,8 +48,8 @@ describe("local diagnostics", () => {
       revision: 3,
       phase: "battle",
     });
-    expect(diagnostics.report("test")).not.toContain("person");
-    expect(diagnostics.report("test")).not.toContain("password=secret");
+    expect(JSON.stringify(diagnostics.snapshot())).not.toContain("person");
+    expect(JSON.stringify(diagnostics.snapshot())).not.toContain("password=secret");
     for (let index = 0; index < 100; index++) diagnostics.record("global", `failure ${index}`);
     expect(diagnostics.snapshot()).toHaveLength(50);
     diagnostics.dispose();

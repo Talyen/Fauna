@@ -32,7 +32,7 @@ An external 60-second watchdog, 5,000-action budget and 100-turn-per-battle budg
 
 ## Local diagnostics
 
-Settings offers local diagnostics and explicit copy. Reports contain bounded deduplicated errors, build identity, browser/desktop host, and the revision/phase when recorded. Error text is truncated and common absolute paths and credential assignments are redacted. Full saves and arbitrary context objects are never captured. Diagnostics persist separately from progression; unavailable storage leaves in-memory evidence, and failed copying leaves selectable report text. Nothing is uploaded automatically.
+The internal collector retains bounded deduplicated failures with selected revision/phase fields. Error text is truncated and common absolute paths and credential assignments are redacted. Full saves and arbitrary context objects are never captured. Entries persist separately from progression; unavailable storage leaves in-memory evidence. There is no player-facing diagnostics tab, report or clipboard export. Nothing is uploaded automatically.
 
 The application session owns collection lifetime and records save read/write and validation failures. The root boundary records render failures; startup registers global error/rejection listeners. Audio failures are non-fatal diagnostics. Disposing a session revokes further collection while admitted saves drain normally.
 

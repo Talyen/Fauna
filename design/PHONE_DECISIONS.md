@@ -4,11 +4,11 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 
 ## Tabs
 
-- Active: black fill and gold border.
-- Inactive hover: subtle charcoal fill.
-- Inter-tab gap: 4px; horizontal padding: 12px per side; height remains at least 44px.
+- Tabs are centered and borderless in resting, hover and selected states, with no gray background strip. The active tab uses gold semibold text; inactive text brightens on hover. Intentional keyboard focus retains a solid gold outline.
+- Inactive hover: brighter text, without fill, border or movement.
+- Inter-tab gap: the standard 12px related-item spacing; horizontal padding: 12px per side; height remains at least 44px.
 - 20px Lucide icons beside labels.
-- Fill/border transition: 150ms; panel activation remains immediate.
+- Color transition: 150ms; panel activation remains immediate.
 - Carry forward the single highlighted-boundary rule on combined states; retain visible native keyboard/controller focus.
 
 ## Switches
@@ -20,6 +20,8 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 
 ## Radio choices
 
+- Text and tooltip size choices are 75%, 100% and 125%, defaulting to 100%.
+
 - Selected: gold circular outline and center dot.
 - Unselected hover: brighten the existing circular outline, without movement or an additional background.
 - Focus: solid gold outline around the circle and label together, avoiding concentric focus rings around the circle.
@@ -27,7 +29,7 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 
 ## Volume sliders
 
-- Gold filled track, gray remainder, visible percentage.
+- Gold filled track, gray remainder, visible percentage. All audio sliders default to 50%.
 - Ivory circular thumb; hover adds a thin gold border without movement.
 - Dragging thickens that same border rather than adding a ring.
 - Solid gold focus outline around the whole slider control.
@@ -202,3 +204,11 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 Continue the phone review in batches of independent questions so the user can answer several choices per turn.
 
 Reduced motion makes switch/radio/dialog/progress transitions immediate and disables spatial combat movement. Essential state remains visible without sound. None of these choices authorizes dropping keyboard accessibility, native control behavior, fixed artwork dimensions or the single highlighted-boundary treatment for selected-plus-hovered controls. Fine visual details still need review at a computer.
+
+## Settings composition feedback
+
+- Use distinct Lucide icons within a screen.
+- Hierarchy at 100% text: dialog title 24px semibold light text; section headings 20px semibold light text; option labels 16px light text; supporting text muted. All type follows the chosen text-size setting.
+- Remove the Diagnostics tab and all player-facing diagnostic reports/copy actions, including recovery screens. Internal bounded failure collection remains; desktop Cloud status and Retry stay available in a separate Settings section.
+
+- Headers and subheaders typically use the normal light foreground color; hierarchy comes from size and weight. Semantic keyword and state colors remain meaningful.

@@ -10,8 +10,8 @@ export interface AudioPreferences {
 export const defaultAudioPreferences: AudioPreferences = {
   enabled: true,
   master: 50,
-  music: 30,
-  effects: 60,
+  music: 50,
+  effects: 50,
   muteInBackground: true,
 };
 export function normalizeAudioPreferences(value: unknown): AudioPreferences {

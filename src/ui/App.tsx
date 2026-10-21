@@ -10,7 +10,7 @@ import { readPreference, writePreference } from "../platform/preferences";
 import { useAutoplay } from "./autoplay";
 import { observeUnlocks } from "./unlock-reveals";
 import { Campfire } from "./campfire";
-import { Settings } from "./settings";
+import { Settings, TEXT_SCALES } from "./settings";
 import { useAudioPreferences } from "./audio-preferences";
 import { useGameAudio } from "./game-audio";
 import { JourneyResults } from "./journey-results";
@@ -73,11 +73,11 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
   const playSound = useGameAudio(session, audioPreferences, route === "home");
   const [scale, setScale] = useState(() => {
     const n = Number(preference("fauna.text-scale", "1"));
-    return [1, 1.25, 1.5].includes(n) ? n : 1;
+    return TEXT_SCALES.some((value) => value === n) ? n : 1;
   });
   const [tooltipScale, setTooltipScale] = useState(() => {
     const value = Number(preference("fauna.tooltip-scale", "1"));
-    return [1, 1.25, 1.5].includes(value) ? value : 1;
+    return TEXT_SCALES.some((scale) => scale === value) ? value : 1;
   });
   useEffect(() => {
     document.documentElement.style.setProperty("--tooltip-scale", String(tooltipScale));
@@ -472,7 +472,6 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
               setScale={setScale}
               tooltipScale={tooltipScale}
               setTooltipScale={setTooltipScale}
-              diagnostics={session.diagnostics}
               desktop={desktop}
               autoEndTurn={autoEndTurn}
               setAutoEndTurn={(value) => {

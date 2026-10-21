@@ -38,7 +38,7 @@ test("short enlarged menus retain full control sizes and scroll to every action"
   // A new journey's destination screen exposes the optional Lineup menu entry.
   const game = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
   await page.addInitScript((value) => {
-    localStorage.setItem("fauna.text-scale", "1.5");
+    localStorage.setItem("fauna.text-scale", "1.25");
     localStorage.setItem("fauna.save.v1", value);
   }, JSON.stringify(game));
   await page.goto("/");
@@ -111,7 +111,7 @@ for (const [width, height, enlarged] of [
     await page.setViewportSize({ width, height });
     await page.emulateMedia({ reducedMotion: "reduce" });
     const pad = await controller(page);
-    if (enlarged) await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.5"));
+    if (enlarged) await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
     await page.goto("/");
     await expect(page.getByRole("button", { name: "New journey", exact: true })).toBeFocused();
     await pad.frames();
@@ -174,9 +174,9 @@ for (const [width, height, enlarged] of [
     await pad.press(14);
     await expect(page.getByRole("tab", { name: "Display", exact: true })).toBeFocused();
     await pad.press(13);
-    await expect(page.getByRole("radio", { name: enlarged ? "150%" : "100%", exact: true })).toBeFocused();
+    await expect(page.getByRole("radio", { name: enlarged ? "125%" : "100%", exact: true })).toBeFocused();
     await pad.press(15);
-    await expect(page.getByRole("radio", { name: enlarged ? "100%" : "125%", exact: true })).toBeChecked();
+    await expect(page.getByRole("radio", { name: enlarged ? "75%" : "125%", exact: true })).toBeChecked();
     await page.screenshot({ path: `reports/menu-settings-${width}.png` });
     await pad.press(1);
     await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
@@ -297,7 +297,7 @@ test("pointer use has no native or shadcn focus decoration in settings, tabs or 
   await noDecoration();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
   await noDecoration();
-  await page.getByRole("radio", { name: "150%", exact: true }).click();
+  await page.getByRole("radio", { name: "125%", exact: true }).click();
   await noDecoration();
   await page.keyboard.press("Escape");
   await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();

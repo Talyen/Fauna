@@ -16,7 +16,6 @@ import { KEYWORD_DEFINITIONS } from "../../src/game/keywords";
 import { Settings } from "../../src/ui/settings";
 import { returnFocus } from "../../src/ui/focus";
 import { defaultAudioPreferences, type AudioPreferences } from "../../src/ui/audio-preferences";
-import { createDiagnostics } from "../../src/application/diagnostics";
 import "@fontsource-variable/inter/wght.css";
 import "../../src/ui/styles.css";
 import "../button-interactions/study.css";
@@ -37,12 +36,6 @@ function SettingsReview() {
   const scrollTimer = useRef<number | undefined>(undefined);
   const dialogRef = useRef<HTMLDivElement>(null);
   const openerRef = useRef<HTMLButtonElement>(null);
-  const [diagnostics] = useState(() =>
-    createDiagnostics(
-      { read: () => null, write: () => {}, copy: (data) => navigator.clipboard.writeText(data) },
-      "settings-design-preview",
-    ),
-  );
   useEffect(() => {
     const root = document.documentElement;
     const previousText = root.style.getPropertyValue("--text-scale");
@@ -87,9 +80,8 @@ function SettingsReview() {
       document.removeEventListener("pointerdown", pointer, true);
       delete document.documentElement.dataset.focus;
       window.clearTimeout(scrollTimer.current);
-      diagnostics.dispose();
     };
-  }, [diagnostics]);
+  }, []);
   const reset = () => {
     setAudio({ ...defaultAudioPreferences });
     setScale(1);
@@ -157,7 +149,6 @@ function SettingsReview() {
             setScale={setScale}
             tooltipScale={tooltipScale}
             setTooltipScale={setTooltipScale}
-            diagnostics={diagnostics}
             desktop={false}
             autoEndTurn={autoEndTurn}
             setAutoEndTurn={setAutoEndTurn}
@@ -212,7 +203,7 @@ function SettingsReview() {
         <p>
           Use Tab and Shift+Tab for focus; Left/Right changes tabs and radio choices. Volume sliders use arrow
           keys in 10% steps, plus Home/End. Try focus while hovering, selected radios, sliders while dragging,
-          150% text and narrow/short layouts.
+          125% text and narrow/short layouts.
         </p>
         <p>Close with Escape, then reopen to check focus return and retained preview values.</p>
         <p>

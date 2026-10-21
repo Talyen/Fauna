@@ -1,4 +1,4 @@
-import { AudioLines, Music, Volume2, VolumeX } from "lucide-react";
+import { AudioLines, Music, Volume2, VolumeX, Power } from "lucide-react";
 import { Slider } from "../components/ui/slider";
 import type { AudioPreferences } from "./audio-preferences";
 import { SettingRow, SettingToggle } from "./settings-controls";
@@ -13,7 +13,7 @@ export function AudioSettings({
     <section aria-label="Audio">
       <h2 className="settings-heading">Audio</h2>
       <SettingToggle
-        icon={Volume2}
+        icon={Power}
         label="Sound"
         checked={value.enabled}
         onChange={(enabled) => update({ enabled })}

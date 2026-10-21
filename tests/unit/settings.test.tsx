@@ -36,15 +36,17 @@ it("applies slider and switch changes live, persists preferences, and preserves 
   const game = session.store.getState().game;
   try {
     await user.click(screen.getByRole("button", { name: "Settings" }));
-    await user.click(screen.getByRole("radio", { name: "150%" }));
+    await user.click(screen.getByRole("radio", { name: "75%" }));
     expect(document.documentElement.style.getPropertyValue("--tooltip-scale")).toBe("1");
     await user.click(screen.getByRole("radio", { name: "Tooltip 125%" }));
-    expect(document.documentElement.style.getPropertyValue("--text-scale")).toBe("1.5");
+    expect(document.documentElement.style.getPropertyValue("--text-scale")).toBe("0.75");
     expect(document.documentElement.style.getPropertyValue("--tooltip-scale")).toBe("1.25");
     await user.click(screen.getByRole("tab", { name: "Battle" }));
     expect(screen.getByRole("switch", { name: "Auto-end turn" }).getAttribute("aria-checked")).toBe("true");
     await user.click(screen.getByRole("switch", { name: "Auto-end turn" }));
     await user.click(screen.getByRole("tab", { name: "Sound" }));
+    for (const label of ["Master volume", "Music volume", "Sound effects volume"])
+      expect(screen.getByRole("slider", { name: label }).getAttribute("aria-valuenow")).toBe("50");
     const master = screen.getByRole("slider", { name: "Master volume" });
     master.focus();
     await user.keyboard("{ArrowLeft}");
@@ -59,14 +61,13 @@ it("applies slider and switch changes live, persists preferences, and preserves 
     expect(master.getAttribute("aria-valuenow")).toBe("0");
     await user.click(screen.getByRole("switch", { name: "Sound" }));
     await user.click(screen.getByRole("switch", { name: "Mute in background" }));
-    await user.click(screen.getByRole("tab", { name: "Diagnostics" }));
-    expect(screen.getByRole("button", { name: "Copy diagnostics" })).toBeTruthy();
-    expect(screen.queryByRole("slider")).toBeNull();
+    expect(screen.queryByRole("tab", { name: "Diagnostics" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Copy diagnostics" })).toBeNull();
     expect(session.store.getState().game).toBe(game);
     view.unmount();
     render(<App session={session} />);
     await user.click(screen.getByRole("button", { name: "Settings" }));
-    expect(screen.getByRole("radio", { name: "150%" }).getAttribute("aria-checked")).toBe("true");
+    expect(screen.getByRole("radio", { name: "75%" }).getAttribute("aria-checked")).toBe("true");
     expect(screen.getByRole("radio", { name: "Tooltip 125%" }).getAttribute("aria-checked")).toBe("true");
     await user.click(screen.getByRole("tab", { name: "Battle" }));
     expect(screen.getByRole("switch", { name: "Auto-end turn" }).getAttribute("aria-checked")).toBe("false");

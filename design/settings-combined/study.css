@@ -42,8 +42,8 @@ body:has(.settings-review) .dialog-overlay[data-state="closed"] {
 .settings-combined[data-text-size="125"] {
   --text-scale: 1.25;
 }
-.settings-combined[data-text-size="150"] {
-  --text-scale: 1.5;
+.settings-combined[data-text-size="75"] {
+  --text-scale: 0.75;
 }
 .settings-combined {
   font-size: var(--text-body);
@@ -54,17 +54,17 @@ body:has(.settings-review) .dialog-overlay[data-state="closed"] {
 .settings-combined .settings-tabs {
   width: 100%;
   flex-wrap: nowrap;
-  justify-content: flex-start;
-  gap: 4px;
+  justify-content: safe center;
+  gap: var(--screen-item-gap);
   overflow-x: auto;
   padding: var(--space-3);
-  background: var(--muted);
+  background: transparent;
 }
 .settings-combined .settings-tabs button {
   flex-shrink: 0;
   min-height: 44px;
   padding-inline: 12px;
-  border: 2px solid transparent;
+  border: 0;
   background: transparent;
   color: var(--muted-foreground);
   outline: none;
@@ -79,16 +79,17 @@ body:has(.settings-review) .dialog-overlay[data-state="closed"] {
   height: 20px;
 }
 .settings-combined .settings-tabs button[data-state="active"] {
-  background: var(--background);
-  border-color: var(--primary);
-  color: var(--foreground);
+  background: transparent;
+  color: var(--primary);
+  font-weight: 600;
 }
 .settings-combined .settings-tabs button[data-state="inactive"]:hover {
-  background: var(--accent);
+  background: transparent;
   color: var(--foreground);
 }
 .settings-combined .settings-tabs button[data-state="active"]:hover {
-  box-shadow: inset 0 0 0 1px var(--primary);
+  box-shadow: none;
+  color: var(--primary);
 }
 :root[data-focus="visible"] .settings-combined .settings-tabs button:focus {
   outline: 2px solid var(--primary);
@@ -381,8 +382,8 @@ body:has(.settings-review[data-reduced="true"]) .dialog-overlay {
 .settings-preview-tooltip[data-size="125"] {
   --tooltip-scale: 1.25;
 }
-.settings-preview-tooltip[data-size="150"] {
-  --tooltip-scale: 1.5;
+.settings-preview-tooltip[data-size="75"] {
+  --tooltip-scale: 0.75;
 }
 .settings-preview-tooltip[data-state="closed"] {
   animation: settings-review-out 100ms;
@@ -402,4 +403,14 @@ body:has(.settings-review[data-reduced="true"]) .dialog-overlay {
 }
 :root[data-focus="visible"] .settings-combined .game-button:focus:active {
   scale: 0.98;
+}
+.settings-combined > h2 {
+  font-size: var(--text-title);
+  font-weight: 600;
+  color: var(--foreground);
+}
+.settings-combined .settings-heading {
+  font-size: var(--text-heading);
+  font-weight: 600;
+  color: var(--foreground);
 }

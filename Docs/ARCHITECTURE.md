@@ -46,7 +46,7 @@ With Auto-end turn enabled (the default), spending the final Mana resolves the e
 
 Permanent discovery stores encountered and recruited species separately from starter unlocks. Initial starters and unlocked species are known; accepted Begin battle discovers the exact enemy group, and accepted recruitment records the species once. Inspection consumes no RNG, grants no discovery and writes no save. Loss, return home and new journeys retain knowledge. Save validation rejects duplicate or unknown discovery records and recruitment without an encounter. No historical discovery is inferred for obsolete saves.
 
-`src/application/diagnostics.ts` owns a bounded local collector exposed by the session. Its platform port owns persistence and explicit copying, separate from the game save. Reports contain selected revision/phase fields rather than arbitrary game objects. Sink failures and recursive logging cannot affect commands or saves. Session disposal revokes collection. `committedCommand` is transient session presentation metadata and never enters the saved aggregate; loading a checkpoint does not manufacture a new committed action or replay audio.
+`src/application/diagnostics.ts` owns a bounded local collector exposed by the session. Its platform port owns persistence, separate from the game save. Entries contain selected revision/phase fields rather than arbitrary game objects. No player-facing report or clipboard export is exposed. Sink failures and recursive logging cannot affect commands or saves. Session disposal revokes collection. `committedCommand` is transient session presentation metadata and never enters the saved aggregate; loading a checkpoint does not manufacture a new committed action or replay audio.
 
 ## Combat and destination health
 

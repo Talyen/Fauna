@@ -21,7 +21,7 @@ for (const width of [1280, 1920]) {
   test(`combat preferences, autoplay pause and manual takeover at ${width}`, async ({ page }) => {
     await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
     await page.emulateMedia({ reducedMotion: width === 1280 ? "reduce" : "no-preference" });
-    await seed(page, encodeSave(run()), width === 1280 ? "1.5" : "1");
+    await seed(page, encodeSave(run()), width === 1280 ? "1.25" : "1");
     await page.getByRole("button", { name: "Open menu" }).click();
     await page.getByRole("button", { name: "Settings", exact: true }).click();
     await page.getByRole("tab", { name: "Battle", exact: true }).click();
@@ -89,7 +89,7 @@ for (const width of [1280, 1920]) {
         { type: "beginBattle" },
       ),
     );
-    await seed(page, encodeSave(final), width === 1280 ? "1.5" : "1");
+    await seed(page, encodeSave(final), width === 1280 ? "1.25" : "1");
     await page.locator(`[data-card-id=${JSON.stringify(final.battle!.hand[0])}]`).click();
     await page.locator('[data-actor-id="enemy-0"] .creature-card').click();
     await page.getByRole("heading", { name: "Journey complete" }).waitFor();

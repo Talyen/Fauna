@@ -14,7 +14,7 @@ const sanitize = (value: string) =>
     .replace(/(?:token|password|secret|authorization)\s*[:=]\s*\S+/gi, "[redacted]")
     .slice(0, 1200);
 
-export function createDiagnostics(port?: DiagnosticPort, identity = "development") {
+export function createDiagnostics(port?: DiagnosticPort) {
   let entries: Diagnostic[] = [];
   let disposed = false,
     writing = false;
@@ -64,13 +64,6 @@ export function createDiagnostics(port?: DiagnosticPort, identity = "development
       };
     },
     snapshot: () => entries,
-    report(platform: string) {
-      return JSON.stringify({ build: identity, platform, entries }, null, 2);
-    },
-    async copy(platform: string) {
-      if (!port) throw new Error("Clipboard unavailable.");
-      await port.copy(this.report(platform));
-    },
     record(source: DiagnosticSource, error: unknown, context?: { revision: number; phase: string }) {
       if (disposed || writing) return;
       // Never stringify arbitrary error context or full save payloads.

@@ -1,7 +1,6 @@
 export interface DiagnosticPort {
   read(): string | null;
   write(data: string): void;
-  copy(data: string): Promise<void>;
 }
 export interface SaveCandidate {
   source: string;

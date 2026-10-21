@@ -20,10 +20,7 @@ export interface SessionView {
   committedCommand: Command | null;
 }
 export function createSession(platform: Platform, seed = 1, capabilities: { development?: boolean } = {}) {
-  const diagnostics = createDiagnostics(
-    platform.diagnostics,
-    typeof __FAUNA_BUILD__ === "string" ? __FAUNA_BUILD__ : "test",
-  );
+  const diagnostics = createDiagnostics(platform.diagnostics);
   const store = createStore<SessionView>(() => ({
     game: createGame(seed),
     cloud: initialCloudView,

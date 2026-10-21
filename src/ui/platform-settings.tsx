@@ -48,7 +48,7 @@ export function DisplaySettings({ session }: { session: Session }) {
   if (!port) return null;
   return (
     <section>
-      <h3>Display mode</h3>
+      <h3 className="settings-heading">Display mode</h3>
       <RadioGroup
         aria-label="Display mode"
         orientation="horizontal"
@@ -85,7 +85,7 @@ export function CloudStatus({ session }: { session: Session }) {
   const cloud = useStore(session.store, (s) => s.cloud);
   return (
     <section>
-      <h3>Steam Cloud</h3>
+      <h3 className="settings-heading">Steam Cloud</h3>
       <p role="status">{cloud.status}</p>
       {cloud.error ? <p>{cloud.error}</p> : null}
       {["Pending", "Conflict"].includes(cloud.status) ? (

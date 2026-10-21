@@ -135,7 +135,7 @@ for (const width of [1280, 1920])
         await seed(page, game);
         if (enlarged) {
           await page.getByRole("button", { name: "Settings", exact: true }).click();
-          await page.getByRole("radio", { name: "150%", exact: true }).click();
+          await page.getByRole("radio", { name: "125%", exact: true }).click();
           await page.keyboard.press("Escape");
         }
         await page.getByRole("button", { name: "Journey results", exact: true }).click();
@@ -183,7 +183,7 @@ for (const width of [1280, 1920])
       if (enlarged) {
         await page.getByRole("button", { name: "Open menu", exact: true }).click();
         await page.getByRole("button", { name: "Settings", exact: true }).click();
-        await page.getByRole("radio", { name: "150%", exact: true }).click();
+        await page.getByRole("radio", { name: "125%", exact: true }).click();
         await page.keyboard.press("Escape");
         await page.keyboard.press("Escape");
       }
@@ -281,7 +281,7 @@ for (const width of [1280, 1920])
       await seed(page);
       if (enlarged) {
         await page.getByRole("button", { name: "Settings", exact: true }).click();
-        await page.getByRole("radio", { name: "150%", exact: true }).click();
+        await page.getByRole("radio", { name: "125%", exact: true }).click();
         await page.keyboard.press("Escape");
       }
       await page.getByRole("button", { name: "New journey", exact: true }).click();
@@ -820,7 +820,7 @@ test("enlarged text and keyboard/controller row navigation keep inspection and m
   page,
 }) => {
   await seed(page, run());
-  await page.evaluate(() => localStorage.setItem("fauna.text-scale", "1.5"));
+  await page.evaluate(() => localStorage.setItem("fauna.text-scale", "1.25"));
   await page.reload();
   await resume(page);
   const card = page.locator(".hand .action-card").first();
@@ -869,13 +869,13 @@ test("shadcn tabs and settings retain native keyboard behavior and game navigati
   await expect(page.getByRole("radio", { name: "125%", exact: true })).toBeChecked();
   await page.keyboard.up("ArrowRight");
   await page.keyboard.press("d");
-  await expect(page.getByRole("radio", { name: "150%", exact: true })).toBeFocused();
-  await expect(page.getByRole("radio", { name: "150%", exact: true })).toBeChecked();
+  await expect(page.getByRole("radio", { name: "125%", exact: true })).toBeFocused();
+  await expect(page.getByRole("radio", { name: "125%", exact: true })).toBeChecked();
   await page.keyboard.press("Escape");
   await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
   await page.reload();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
-  await expect(page.getByRole("radio", { name: "150%", exact: true })).toBeChecked();
+  await expect(page.getByRole("radio", { name: "125%", exact: true })).toBeChecked();
   await page.getByRole("tab", { name: "Sound", exact: true }).click();
   await expect(sound).not.toBeChecked();
 });
@@ -1387,7 +1387,7 @@ for (const [width, height] of [
         await seed(page, fixture);
         await resume(page);
         if (enlarged)
-          await page.locator("html").evaluate((el) => el.style.setProperty("--text-scale", "1.5"));
+          await page.locator("html").evaluate((el) => el.style.setProperty("--text-scale", "1.25"));
         await expect(page.getByRole("heading", { name: "Victory", exact: true })).toBeVisible();
         await page
           .locator(".reward-screen img")
