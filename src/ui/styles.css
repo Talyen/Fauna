@@ -1773,6 +1773,7 @@ strong {
 }
 
 .volume-controls {
+  width: 100%;
   display: flex;
   align-items: center;
   gap: var(--screen-item-gap);
@@ -1863,6 +1864,7 @@ strong {
 
 @media (prefers-reduced-motion: reduce) {
   .locked-species > .creature-card,
+  .battle-screen .health-forecast,
   .game-button {
     scale: 1 !important;
   }

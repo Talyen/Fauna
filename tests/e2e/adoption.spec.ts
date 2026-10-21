@@ -69,6 +69,16 @@ for (const [width, height, textScale] of [
             ? panel.getByRole("switch", { name: "Mute in background", exact: true })
             : panel.getByRole("switch", { name: "Auto-end turn", exact: true });
       await expect(control).toBeInViewport();
+      if (category === "Sound") {
+        for (const slider of await panel.locator(".ui-slider").all()) {
+          const bounds = (await slider.boundingBox())!;
+          expect(bounds.width).toBeGreaterThanOrEqual(88);
+          await slider.click({ position: { x: bounds.width * 0.75, y: bounds.height / 2 } });
+          await expect
+            .poll(async () => Number(await slider.getByRole("slider").getAttribute("aria-valuenow")))
+            .toBeGreaterThan(50);
+        }
+      }
       await captureScreen(page, { path: `reports/settings-${category.toLowerCase()}-${width}.png` });
     }
     await page.keyboard.press("Escape");
@@ -198,7 +208,8 @@ test("Settings panel switches preserve screen, tab and icon geometry", async ({ 
       await expect(dialog.getByRole("tabpanel")).toHaveCSS("animation-name", "none");
       for (const panel of await dialog.locator('.settings-panel[data-state="inactive"]').all()) {
         await expect(panel).toBeHidden();
-        await expect(panel).toHaveAttribute("hidden", "");
+        await expect(panel).toHaveAttribute("inert", "");
+        await expect(panel).toHaveAttribute("aria-hidden", "true");
       }
     }
   }

@@ -1,4 +1,4 @@
-import { captureScreen } from "./rendered-evidence";
+import { captureScreen, settleScreen } from "./rendered-evidence";
 import { test, expect, type Page } from "@playwright/test";
 import { produce } from "immer";
 import { accept, run, victoryReady } from "../unit/helpers";
@@ -37,6 +37,8 @@ for (const width of [1280, 1920]) {
     await page.keyboard.press("Escape");
     await page.keyboard.press("Escape");
     const autoplay = page.getByRole("button", { name: "Auto-play", exact: true });
+    await page.mouse.move(0, 0);
+    await settleScreen(page);
     const menu = await page.getByRole("button", { name: "Open menu" }).boundingBox();
     const auto = await autoplay.boundingBox();
     expect(auto!.y).toBe(menu!.y);

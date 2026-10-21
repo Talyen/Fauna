@@ -73,6 +73,14 @@ for (const [width, height] of REVIEW_VIEWPORTS)
       await page.goto("/");
       await page.getByRole("button", { name: "Continue", exact: true }).click();
       await expect(page.locator(".enemy-row .creature-card")).toHaveCount(3);
+      if (reduced) {
+        const ally = page.locator(".player-row .creature-card").first();
+        await ally.hover();
+        await expect(ally).toHaveCSS("scale", "1");
+        await expect(page.locator(".player-row .health-forecast").first()).toHaveCSS("scale", "1");
+      }
+      await page.mouse.move(0, 0);
+      await settleScreen(page);
       const composition = await page.locator(".battle-screen").evaluate((board) => {
         const rows = [...board.querySelectorAll(".enemy-row, .player-row")].map((row) => {
           const cards = [...row.querySelectorAll(".creature-card")].map((card) =>
