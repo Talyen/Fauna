@@ -1,4 +1,4 @@
-import { Screen } from "./screen";
+import { Screen, ScreenHeading } from "./screen";
 import { PagedItems } from "./pagination";
 import { campfireRecovery } from "../game/support";
 import { species } from "../game/content";
@@ -10,7 +10,7 @@ export function Campfire({ game, send }: { game: GameState; send: (command: Comm
   const creatures = [...game.team, ...game.reserves];
   return (
     <Screen className="campfire-screen">
-      <h1>Campfire</h1>
+      <ScreenHeading back={() => send({ type: "leaveCampfire" })}>Campfire</ScreenHeading>
       <PagedItems items={creatures} pageSize={3} className="campfire-roster" label="Rest recovery pages">
         {(creature) => (
           <div key={creature.id}>

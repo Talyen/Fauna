@@ -1,4 +1,4 @@
-import { Screen } from "./screen";
+import { Screen, ScreenHeading } from "./screen";
 import { PageControls, PagedItems, useCompactLayout } from "./pagination";
 import { starterCount } from "../game/engine";
 import { motionValue } from "./motion-values";
@@ -15,7 +15,6 @@ import {
   LayoutGrid,
   BookOpen,
   LockKeyhole,
-  Menu,
   Check,
   Swords,
   ShieldPlus,
@@ -114,9 +113,9 @@ export function TeamSelection({ game, send, inspect, deck }: Props & { deck: () 
   return (
     <Screen className="destinations-screen">
       <header className="destination-heading">
-        <h1>
+        <ScreenHeading>
           Encounter {game.encounter + 1} of {game.expedition ? JOURNEY_LENGTH : 3}
-        </h1>
+        </ScreenHeading>
       </header>
       <section className="destination-grid" data-nav-row aria-label="Encounters">
         <SupportOffer game={game} inspect={inspect} />
@@ -156,7 +155,9 @@ export function TeamSelection({ game, send, inspect, deck }: Props & { deck: () 
 export function Draft({ game, send, inspect }: Props) {
   return (
     <Screen className="draft-screen">
-      <h1>{game.selected.length < starterCount(game) ? "Choose your starter" : "Your starter team"}</h1>
+      <ScreenHeading>
+        {game.selected.length < starterCount(game) ? "Choose your starter" : "Your starter team"}
+      </ScreenHeading>
       <div className="draft-grid" data-nav-row>
         {(game.selected.length === starterCount(game) ? game.selected : game.starterOffers).map(
           (kind, index) => {
@@ -221,7 +222,7 @@ export function Rewards({ game, send, inspect }: Props) {
     <ResultPresentation>
       <Screen className="reward-screen">
         <header className="reward-heading">
-          <h1>Victory</h1>
+          <ScreenHeading back={incoming ? () => setIncoming(null) : undefined}>Victory</ScreenHeading>
           <BattleEarnings game={game} detailed />
         </header>
         <section className="reward-choices" ref={choices}>
@@ -379,10 +380,9 @@ export function Talents({
   return (
     <Screen className="talents-screen" data-view={keyword ? "tree" : "overview"} ref={screen}>
       <header className="page-heading talents-heading">
-        <h1>{keyword ? keywordLabel(keyword) : "Talents"}</h1>
-        <Button variant="ghost" size="icon" aria-label="Open menu" onClick={openMenu}>
-          <Menu aria-hidden="true" />
-        </Button>
+        <ScreenHeading back={keyword ? () => setKeyword(null) : openMenu} openMenu={openMenu}>
+          {keyword ? keywordLabel(keyword) : "Talents"}
+        </ScreenHeading>
         {keyword ? (
           <Button
             variant="ghost"
@@ -553,10 +553,9 @@ export function Collection({
       }}
     >
       <header className="collection-heading">
-        <h1>Collection</h1>
-        <Button variant="ghost" size="icon" onClick={openMenu} aria-label="Open menu">
-          <Menu aria-hidden="true" />
-        </Button>
+        <ScreenHeading back={openMenu} openMenu={openMenu}>
+          Collection
+        </ScreenHeading>
       </header>
       <Tabs
         className="collection-tabs"
