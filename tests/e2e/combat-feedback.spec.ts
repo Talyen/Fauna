@@ -73,8 +73,9 @@ for (const [width, scale, reduced] of [
     await page.goto("/");
     await page.getByRole("button", { name: "Continue", exact: true }).click();
     await expect(page.locator(".enemy-row .creature-card")).toHaveCount(3);
-    await page.clock.install();
-    await page.clock.pauseAt(new Date());
+    const origin = Date.UTC(2026, 0, 1);
+    await page.clock.install({ time: origin });
+    await page.clock.pauseAt(origin + 60_000);
     await page.locator(".hand .action-card").click();
     await page.locator('[data-actor-id="enemy-0"] .creature-card').click();
     await page.clock.runFor(200);

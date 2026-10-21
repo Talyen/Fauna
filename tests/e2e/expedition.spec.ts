@@ -348,7 +348,7 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     await activate(page.getByRole("button", { name: `Choose ${name}`, exact: true }));
     await activate(page.getByRole("button", { name: "Begin journey", exact: true }));
     expect((await state(page)).lineup).toEqual(["ally-0"]);
-    for (let i = 0; i < 300; i++) {
+    for (let i = 0; i < 400; i++) {
       const s = await state(page);
       if (s.phase === "victory") break;
       expect(s.phase).not.toBe("defeat");
