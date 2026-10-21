@@ -1,5 +1,6 @@
 import { forwardRef } from "react";
 import { Button, type ButtonProps } from "../components/ui/button";
+import { useSurfaceRef } from "../lib/surface-ref";
 import { cn } from "../lib/utils";
 
 type ArtCardProps = Omit<ButtonProps, "children" | "variant" | "size"> & {
@@ -13,6 +14,7 @@ export const ArtCard = forwardRef<HTMLButtonElement, ArtCardProps>(function ArtC
   { artwork, aspect, presentation = false, className, ...props },
   ref,
 ) {
+  const surface = useSurfaceRef<HTMLDivElement>();
   const image = (
     <img
       src={artwork}
@@ -25,7 +27,7 @@ export const ArtCard = forwardRef<HTMLButtonElement, ArtCardProps>(function ArtC
   const classes = cn(`${aspect}-card`, className);
   if (presentation)
     return (
-      <div className={classes} role="img" aria-label={props["aria-label"]}>
+      <div ref={surface} className={classes} role="img" aria-label={props["aria-label"]}>
         {image}
       </div>
     );

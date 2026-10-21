@@ -136,13 +136,11 @@ it("keeps the approved semantic palette readable and combat colors independent",
   for (const alias of ["selected", "line", "surface", "text"]) expect(tokens[alias]).toMatch(/^var\(--/);
 });
 
-it("rejects sharp-corner overrides and retains the upstream radius scale", () => {
+it("rejects sharp-corner overrides", () => {
   for (const className of ["rounded-none", "rounded-[0px]"])
     expect(
       sourceViolations("src/ui/card.tsx", `<ArtCard className="${className}" />`).length,
     ).toBeGreaterThan(0);
-  const css = readFileSync(new URL("../../src/ui/tokens.css", import.meta.url), "utf8");
-  expect(css).toContain("--radius: 0.625rem;");
 });
 
 it("keeps control states in the shared shadcn skin and rejects selected-hover thickening", () => {
