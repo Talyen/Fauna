@@ -126,7 +126,7 @@ describe("artwork-first inspection", () => {
       for (let rank = 0; rank < 3; rank++)
         await user.click(within(tiers).getByRole("button", { name: "Next page" }));
       expect(tiers.querySelector('[aria-current="step"]')?.textContent).toContain("3 stars · Current rank");
-      await user.click(screen.getByRole("tab", { name: "Base abilities", exact: true }));
+      await user.click(screen.getByRole("tab", { name: "Base abilities" }));
       expect(screen.getByRole("region", { name: "Shelter" })).toBeTruthy();
       await user.keyboard("{Escape}");
       expect(document.activeElement).toBe(opener);

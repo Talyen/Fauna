@@ -63,7 +63,7 @@ it("shows the current collection on one page, resets filters and preserves focus
   await user.click(screen.getAllByRole("button", { name: /^Inspect / })[0]!);
   expect(screen.getByRole("heading", { name: SPECIES[0]!.name })).toBeTruthy();
   expect(screen.queryByRole("dialog")).toBeNull();
-  await user.click(screen.getByRole("button", { name: "Back", exact: true }));
+  await user.click(screen.getByRole("button", { name: "Back" }));
   expect(document.activeElement).toBe(screen.getAllByRole("button", { name: /^Inspect / })[0]);
   expect(game).toEqual(before);
 });
@@ -132,8 +132,8 @@ it("remembers each filter's page and retains its first visible creature when cap
   expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(2);
   expect(screen.getAllByRole("button", { name: /^Inspect / })[0]!.getAttribute("aria-label")).toBe(anchor);
   await user.click(screen.getByRole("button", { name: anchor }));
-  await user.click(screen.getByRole("button", { name: "Back", exact: true }));
-  expect(screen.getByRole("tab", { name: "All", exact: true }).getAttribute("aria-selected")).toBe("true");
+  await user.click(screen.getByRole("button", { name: "Back" }));
+  expect(screen.getByRole("tab", { name: "All" }).getAttribute("aria-selected")).toBe("true");
   expect(screen.getAllByRole("button", { name: /^Inspect / })[0]!.getAttribute("aria-label")).toBe(anchor);
   expect(document.activeElement).toBe(screen.getByRole("button", { name: anchor }));
 });

@@ -204,12 +204,7 @@ function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?
               </TooltipTrigger>
               {!selected ? (
                 <TooltipContent>
-                  <CreatureDetails
-                    kind={enemy.species}
-                    name={enemy.name}
-                    health={enemy.current}
-                    maxHealth={enemy.health}
-                  />
+                  <CreatureDetails kind={enemy.species} name={enemy.name} />
                 </TooltipContent>
               ) : null}
             </Tooltip>
@@ -258,7 +253,7 @@ function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?
               </TooltipTrigger>
               {!selected ? (
                 <TooltipContent>
-                  <CreatureDetails kind={creature.species} health={creature.health} block={creature.block} />
+                  <CreatureDetails kind={creature.species} block={creature.block} />
                 </TooltipContent>
               ) : null}
             </Tooltip>

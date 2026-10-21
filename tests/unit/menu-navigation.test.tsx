@@ -55,13 +55,13 @@ describe("menu page focus return", () => {
       expect(
         screen.getByRole("heading", { name: page === "Glossary" ? "Glossary & controls" : page }),
       ).toBeTruthy();
-      expect(screen.getByRole("button", { name: "Back", exact: true })).toBeTruthy();
+      expect(screen.getByRole("button", { name: "Back" })).toBeTruthy();
       if (page === "Talents" && back === "Open menu") {
-        await user.click(screen.getByRole("button", { name: "Physical talents", exact: true }));
-        expect(screen.getByRole("heading", { name: "Physical", exact: true })).toBeTruthy();
+        await user.click(screen.getByRole("button", { name: "Physical talents" }));
+        expect(screen.getByRole("heading", { name: "Physical" })).toBeTruthy();
       }
       if (back === "Escape") await user.keyboard("{Escape}");
-      else await user.click(screen.getByRole("button", { name: back, exact: true }));
+      else await user.click(screen.getByRole("button", { name: back }));
       await waitFor(() => expect(document.activeElement).toBe(screen.getByRole("button", { name: page })));
       expect(session.store.getState().game.revision).toBe(revision);
       if (origin === "pause") {
@@ -83,11 +83,11 @@ it("returns from a talent tree to its overview before returning to the menu", as
   const user = userEvent.setup();
   render(<App session={session} />);
   try {
-    await user.click(screen.getByRole("button", { name: "Talents", exact: true }));
-    await user.click(screen.getByRole("button", { name: "Physical talents", exact: true }));
-    await user.click(screen.getByRole("button", { name: "Back", exact: true }));
-    expect(screen.getByRole("heading", { name: "Talents", exact: true })).toBeTruthy();
-    await user.click(screen.getByRole("button", { name: "Back", exact: true }));
+    await user.click(screen.getByRole("button", { name: "Talents" }));
+    await user.click(screen.getByRole("button", { name: "Physical talents" }));
+    await user.click(screen.getByRole("button", { name: "Back" }));
+    expect(screen.getByRole("heading", { name: "Talents" })).toBeTruthy();
+    await user.click(screen.getByRole("button", { name: "Back" }));
     expect(screen.getByRole("navigation", { name: "Main menu" })).toBeTruthy();
   } finally {
     cleanup();
@@ -103,10 +103,10 @@ it("returns from starter selection without changing offers or committed choices"
   try {
     await user.click(screen.getByRole("button", { name: "Play" }));
     const before = session.store.getState().game;
-    expect(screen.getAllByRole("button", { name: "Open menu", exact: true })).toHaveLength(1);
-    await user.click(screen.getByRole("button", { name: "Back", exact: true }));
+    expect(screen.getAllByRole("button", { name: "Open menu" })).toHaveLength(1);
+    await user.click(screen.getByRole("button", { name: "Back" }));
     expect(screen.getByRole("navigation", { name: "Main menu" })).toBeTruthy();
-    await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+    await user.click(screen.getByRole("button", { name: "Continue" }));
     expect(session.store.getState().game).toBe(before);
   } finally {
     cleanup();
@@ -121,26 +121,25 @@ it("continues or dismisses the undimmed menu without changing the journey", asyn
   const user = userEvent.setup({ pointerEventsCheck: 0 });
   render(<App session={session} />);
   try {
-    await user.click(screen.getByRole("button", { name: "Play", exact: true }));
+    await user.click(screen.getByRole("button", { name: "Play" }));
     const revision = session.store.getState().game.revision;
     for (const dismiss of ["Continue", "Escape", "outside"]) {
-      const opener = screen.getByRole("button", { name: "Open menu", exact: true });
+      const opener = screen.getByRole("button", { name: "Open menu" });
       await user.click(opener);
       const menu = screen.getByRole("dialog", { name: "Pause menu" });
       expect(menu.querySelector(".dialog-close")).toBeNull();
       expect(menu.querySelector("h1, h2")).toBeNull();
       expect(document.querySelector(".dialog-overlay")).toBeNull();
-      expect(document.activeElement).toBe(screen.getByRole("button", { name: "Continue", exact: true }));
-      if (dismiss === "Continue")
-        await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+      expect(document.activeElement).toBe(screen.getByRole("button", { name: "Continue" }));
+      if (dismiss === "Continue") await user.click(screen.getByRole("button", { name: "Continue" }));
       else if (dismiss === "Escape") await user.keyboard("{Escape}");
       else await user.click(document.body);
       await waitFor(() => expect(screen.queryByRole("dialog", { name: "Pause menu" })).toBeNull());
       await waitFor(() => expect(document.activeElement).toBe(opener));
       expect(session.store.getState().game.revision).toBe(revision);
     }
-    await user.click(screen.getByRole("button", { name: "Back", exact: true }));
-    expect(screen.getByRole("button", { name: "Continue", exact: true })).toBeTruthy();
+    await user.click(screen.getByRole("button", { name: "Back" }));
+    expect(screen.getByRole("button", { name: "Continue" })).toBeTruthy();
   } finally {
     cleanup();
     await session.dispose();
@@ -164,19 +163,17 @@ it.each(["home", "pause"])(
     render(<App session={session} />);
     try {
       if (origin === "pause") {
-        await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
-        await user.click(screen.getByRole("button", { name: "Open menu", exact: true }));
+        await user.click(screen.getByRole("button", { name: "Continue" }));
+        await user.click(screen.getByRole("button", { name: "Open menu" }));
       }
-      const talents = screen.getByRole("button", { name: "Talents", exact: true });
+      const talents = screen.getByRole("button", { name: "Talents" });
       expect(talents.getAttribute("aria-describedby")).toBe(`menu-talent-points-${origin === "home"}`);
       expect(screen.getByLabelText("1 talent point available").textContent).toBe("1");
       act(() => {
         expect(session.command({ type: "buyTalent", talentId: "physical.shield-slam" })).toBe(true);
       });
       expect(screen.queryByLabelText("1 talent point available")).toBeNull();
-      expect(
-        screen.getByRole("button", { name: "Talents", exact: true }).hasAttribute("aria-describedby"),
-      ).toBe(false);
+      expect(screen.getByRole("button", { name: "Talents" }).hasAttribute("aria-describedby")).toBe(false);
     } finally {
       cleanup();
       await session.dispose();
@@ -194,24 +191,22 @@ it.each(["Back", "Escape", "Open menu"])(
     const user = userEvent.setup();
     render(<App session={session} />);
     try {
-      await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+      await user.click(screen.getByRole("button", { name: "Continue" }));
       const before = session.store.getState().game;
-      await user.click(screen.getByRole("button", { name: "Open menu", exact: true }));
-      await user.click(screen.getByRole("button", { name: "Collection", exact: true }));
-      await user.click(screen.getByRole("button", { name: "Inspect Mossback", exact: true }));
+      await user.click(screen.getByRole("button", { name: "Open menu" }));
+      await user.click(screen.getByRole("button", { name: "Collection" }));
+      await user.click(screen.getByRole("button", { name: "Inspect Mossback" }));
       expect(screen.getByRole("region", { name: "Bramble Bash" })).toBeTruthy();
       if (back === "Escape") await user.keyboard("{Escape}");
-      else await user.click(screen.getByRole("button", { name: back, exact: true }));
+      else await user.click(screen.getByRole("button", { name: back }));
       if (back !== "Open menu") {
-        expect(document.activeElement).toBe(
-          screen.getByRole("button", { name: "Inspect Mossback", exact: true }),
-        );
+        expect(document.activeElement).toBe(screen.getByRole("button", { name: "Inspect Mossback" }));
         await user.keyboard("{Escape}");
       }
       await waitFor(() =>
-        expect(document.activeElement).toBe(screen.getByRole("button", { name: "Collection", exact: true })),
+        expect(document.activeElement).toBe(screen.getByRole("button", { name: "Collection" })),
       );
-      await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+      await user.click(screen.getByRole("button", { name: "Continue" }));
       expect(screen.getByRole("main", { name: "Battlefield" })).toBeTruthy();
       expect(session.store.getState().game).toBe(before);
     } finally {
@@ -239,13 +234,13 @@ it.each(["home", "pause"])(
     render(<App session={session} />);
     try {
       if (origin === "pause") {
-        await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
-        await user.click(screen.getByRole("button", { name: "Open menu", exact: true }));
+        await user.click(screen.getByRole("button", { name: "Continue" }));
+        await user.click(screen.getByRole("button", { name: "Open menu" }));
       }
-      await user.click(screen.getByRole("button", { name: "Talents", exact: true }));
-      await user.click(screen.getByRole("button", { name: "Back", exact: true }));
+      await user.click(screen.getByRole("button", { name: "Talents" }));
+      await user.click(screen.getByRole("button", { name: "Back" }));
       await waitFor(() =>
-        expect(document.activeElement).toBe(screen.getByRole("button", { name: "Talents", exact: true })),
+        expect(document.activeElement).toBe(screen.getByRole("button", { name: "Talents" })),
       );
     } finally {
       cleanup();

@@ -22,8 +22,12 @@ it("reaches every creature after resizing and retains the first visible creature
     },
   );
   vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockImplementation(function (this: HTMLElement) {
-    const height = this.matches(".screen-stage") ? 720 : this.matches("main") ? 400 : 180;
-    return { width: this.matches("button") ? 200 : width, height } as DOMRect;
+    const height = Element.prototype.matches.call(this, ".screen-stage")
+      ? 720
+      : Element.prototype.matches.call(this, "main")
+        ? 400
+        : 180;
+    return { width: Element.prototype.matches.call(this, "button") ? 200 : width, height } as DOMRect;
   });
   render(
     <div className="screen-stage">
@@ -69,11 +73,11 @@ it("fits talent rows to height left after surrounding controls and responds to t
   );
   vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockImplementation(function (this: HTMLElement) {
     const count = document.querySelectorAll(".gallery > button").length;
-    const height = this.matches(".screen-stage")
+    const height = Element.prototype.matches.call(this, ".screen-stage")
       ? 720
-      : this.matches("main")
+      : Element.prototype.matches.call(this, "main")
         ? 250 + count * cellHeight
-        : this.matches(".gallery")
+        : Element.prototype.matches.call(this, ".gallery")
           ? count * cellHeight
           : cellHeight;
     return { width: 600, height } as DOMRect;
@@ -130,11 +134,11 @@ it("does not oscillate when the next talent row has longer rules than the first"
   vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockImplementation(function (this: HTMLElement) {
     const cells = [...document.querySelectorAll(".gallery > button")];
     const gridHeight = cells.reduce((height, cell) => height + (cell.textContent === "Short" ? 120 : 280), 0);
-    const height = this.matches(".screen-stage")
+    const height = Element.prototype.matches.call(this, ".screen-stage")
       ? 720
-      : this.matches("main")
+      : Element.prototype.matches.call(this, "main")
         ? 250 + gridHeight
-        : this.matches(".gallery")
+        : Element.prototype.matches.call(this, ".gallery")
           ? gridHeight
           : this.textContent === "Short"
             ? 120

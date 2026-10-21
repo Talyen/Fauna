@@ -126,7 +126,6 @@ function Preview() {
             key={game.revision}
             game={game}
             send={() => false}
-            inspect={() => {}}
             controls={controls}
             bursts={[]}
             controller={false}

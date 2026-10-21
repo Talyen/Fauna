@@ -266,56 +266,66 @@ describe("player interface", () => {
     expect(session.store.getState().game.team).toHaveLength(3);
     await session.dispose();
   });
-  it("shows each creature copy with current Block and no Health totals on hover", async () => {
-    vi.stubGlobal(
-      "ResizeObserver",
-      class {
-        observe() {}
-        disconnect() {}
-      },
-    );
-    const game = produce(teamRun(7, ["mossback", "mossback", "stormfin"]), (d) => {
-      d.team[0]!.health = 7;
-      d.team[1]!.health = 19;
-      d.team[1]!.block = 4;
-      d.roster.push("mossback");
-      d.reserves.push({
-        id: "reserve-copy",
-        species: "mossback",
-        health: 11,
-        block: 2,
-        combat: freshCombat(),
-        attacked: false,
+  it.each(["hover", "keyboard"])(
+    "shows each creature copy with current Block and no Health totals using %s",
+    async (input) => {
+      vi.stubGlobal(
+        "ResizeObserver",
+        class {
+          observe() {}
+          disconnect() {}
+        },
+      );
+      const game = produce(teamRun(7, ["mossback", "mossback", "stormfin"]), (d) => {
+        d.team[0]!.health = 7;
+        d.team[1]!.health = 19;
+        d.team[1]!.block = 4;
+        d.roster.push("mossback");
+        d.reserves.push({
+          id: "reserve-copy",
+          species: "mossback",
+          health: 11,
+          block: 2,
+          combat: freshCombat(),
+          attacked: false,
+        });
       });
-    });
-    localStorage.setItem("fauna.save.v1", JSON.stringify(game));
-    const session = createSession(createBrowserPlatform(localStorage), 7);
-    await session.load();
-    render(<App session={session} />);
-    const user = userEvent.setup();
-    await user.click(screen.getByRole("button", { name: "Continue" }));
-    for (const [id, block] of [
-      ["ally-0", 0],
-      ["ally-1", 4],
-    ] as const) {
-      const creature = document.querySelector<HTMLButtonElement>(
-        `.player-row [data-actor-id="${id}"] button`,
-      )!;
-      await user.hover(creature);
-      const tooltip = (await screen.findByRole("tooltip")).textContent!;
-      expect(tooltip).not.toMatch(/\d+\/\d+ health/i);
-      if (block) expect(tooltip).toContain(`${block} block`);
-      else expect(tooltip).not.toMatch(/\d+ block/);
-      await user.unhover(creature);
-    }
-    await user.click(screen.getByRole("button", { name: "Swap" }));
-    await user.hover(screen.getByRole("button", { name: "Mossback, reserve" }));
-    const reserveTooltip = (await screen.findByRole("tooltip")).textContent!;
-    expect(reserveTooltip).toContain("2 block");
-    expect(reserveTooltip).not.toMatch(/\d+\/\d+ health/i);
-    expect(session.store.getState().game).toEqual(game);
-    await session.dispose();
-  });
+      localStorage.setItem("fauna.save.v1", JSON.stringify(game));
+      const session = createSession(createBrowserPlatform(localStorage), 7);
+      await session.load();
+      render(<App session={session} />);
+      const user = userEvent.setup();
+      await user.click(screen.getByRole("button", { name: "Continue" }));
+      if (input === "keyboard") await user.tab();
+      for (const [id, block] of [
+        ["ally-0", 0],
+        ["ally-1", 4],
+      ] as const) {
+        const creature = document.querySelector<HTMLButtonElement>(
+          `.player-row [data-actor-id="${id}"] button`,
+        )!;
+        if (input === "hover") await user.hover(creature);
+        else act(() => creature.focus());
+        const tooltip = (await screen.findByRole("tooltip")).textContent!;
+        expect(tooltip).not.toMatch(/\d+\/\d+ health/i);
+        if (block) expect(tooltip).toContain(`${block} block`);
+        else expect(tooltip).not.toMatch(/\d+ block/);
+        if (input === "hover") await user.unhover(creature);
+      }
+      await user.click(screen.getByRole("button", { name: "Swap" }));
+      const reserve = screen.getByRole("button", { name: "Mossback, reserve" });
+      if (input === "hover") await user.hover(reserve);
+      else {
+        await user.tab();
+        act(() => reserve.focus());
+      }
+      const reserveTooltip = (await screen.findByRole("tooltip")).textContent!;
+      expect(reserveTooltip).toContain("2 block");
+      expect(reserveTooltip).not.toMatch(/\d+\/\d+ health/i);
+      expect(session.store.getState().game).toEqual(game);
+      await session.dispose();
+    },
+  );
   it("maps standard controller buttons and sticks to semantic actions", () => {
     const buttons = Array.from({ length: 16 }, (_, i) => ({
       pressed: [0, 2, 3, 12].includes(i),

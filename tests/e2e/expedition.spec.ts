@@ -1119,7 +1119,10 @@ test("battle tooltips, pointer targeting, Mana forecast and corners follow the d
           const maximum = parseFloat(style.getPropertyValue("--radius-max"));
           const expected = Math.max(
             minimum,
-            Math.min(maximum, Math.min(node.offsetWidth, node.offsetHeight) * ratio),
+            Math.min(
+              maximum,
+              Math.min((node as HTMLElement).offsetWidth, (node as HTMLElement).offsetHeight) * ratio,
+            ),
           );
           return Math.abs(parseFloat(style.borderTopLeftRadius) - expected);
         }),
