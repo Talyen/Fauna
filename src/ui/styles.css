@@ -964,7 +964,7 @@ strong {
   row-gap: var(--screen-section-gap);
 }
 .talent-category {
-  flex: 0 0 calc((100% - var(--screen-item-gap) * 6) / 7);
+  flex: 0 0 calc((100% - var(--screen-item-gap) * 4) / 5);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -973,15 +973,15 @@ strong {
   text-align: center;
 }
 .talent-category .action-card {
-  /* Fill two rows while reserving full-size captions, point labels and gaps. */
+  /* Fill three rows while reserving full-size captions, point labels and gaps. */
   width: min(
     100%,
     calc(
       (
-          100cqh - var(--space-4) - var(--control-height) - var(--screen-section-gap) * 2 -
-            (var(--talent-overview-caption-height) + var(--screen-item-gap) * 2) * 2
+          100cqh - var(--space-4) - var(--control-height) - var(--screen-section-gap) * 3 -
+            (var(--talent-overview-caption-height) + var(--screen-item-gap) * 2) * 3
         ) *
-        3 / 8
+        3 / 12
     )
   );
 }

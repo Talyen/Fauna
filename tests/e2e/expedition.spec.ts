@@ -580,7 +580,7 @@ for (const [width, height] of [
         captionsVisible: true,
         readableCaptions: true,
         portraitSizes: true,
-        rows: [7, 7],
+        rows: [5, 5, 4],
       });
       const artworkFit = await page.locator(".talent-overview-viewport").evaluate((viewport) => {
         const category = viewport.querySelector(".talent-category")!;
@@ -596,7 +596,7 @@ for (const [width, height] of [
           actual: art.width,
           largest: Math.min(
             category.getBoundingClientRect().width,
-            ((viewport.clientHeight - rowGap) / 2 - captions - gap * 2) * 0.75,
+            ((viewport.clientHeight - rowGap * 2) / 3 - captions - gap * 2) * 0.75,
           ),
         };
       });
