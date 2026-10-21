@@ -1128,21 +1128,6 @@ strong {
 [data-keyword="physical"] {
   color: var(--keyword-physical);
 }
-[data-damage-type="fire"],
-[data-combat-tone="fire"],
-[data-keyword="fire"] {
-  color: var(--keyword-fire);
-}
-[data-damage-type="ice"],
-[data-combat-tone="ice"],
-[data-keyword="ice"] {
-  color: var(--keyword-ice);
-}
-[data-damage-type="lightning"],
-[data-combat-tone="lightning"],
-[data-keyword="lightning"] {
-  color: var(--keyword-lightning);
-}
 [data-damage-type="poison"],
 [data-combat-tone="poison"],
 [data-keyword="poison"] {
@@ -1170,10 +1155,6 @@ strong {
 [data-keyword="block"] {
   color: var(--keyword-block);
 }
-[data-combat-tone="heal"],
-[data-keyword="heal"] {
-  color: var(--keyword-heal);
-}
 [data-combat-tone="thorns"],
 [data-keyword="thorns"] {
   color: var(--keyword-thorns);
@@ -1186,18 +1167,22 @@ strong {
 [data-keyword="armor"] {
   color: var(--keyword-armor);
 }
+[data-damage-type="burn"],
 [data-combat-tone="burn"],
 [data-keyword="burn"] {
   color: var(--keyword-burn);
 }
+[data-damage-type="freeze"],
 [data-combat-tone="freeze"],
 [data-keyword="freeze"] {
   color: var(--keyword-freeze);
 }
+[data-damage-type="bleed"],
 [data-combat-tone="bleed"],
 [data-keyword="bleed"] {
   color: var(--keyword-bleed);
 }
+[data-damage-type="stun"],
 [data-combat-tone="stun"],
 [data-keyword="stun"] {
   color: var(--keyword-stun);

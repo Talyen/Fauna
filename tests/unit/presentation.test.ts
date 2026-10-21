@@ -51,9 +51,9 @@ describe("floating feedback", () => {
       {
         kind: "damage" as const,
         targetId: "enemy-0",
-        damageType: "fire" as const,
+        damageType: "burn" as const,
         amount: 4,
-        text: "4 Fire damage",
+        text: "4 Burn damage",
       },
     ];
     const first = appendFeedback([], events, 1, 0);
@@ -70,7 +70,7 @@ describe("floating feedback", () => {
     const event = {
       kind: "damage" as const,
       targetId: "enemy-0",
-      damageType: "fire" as const,
+      damageType: "burn" as const,
       amount: 3,
       text: "",
     };
@@ -96,7 +96,7 @@ describe("floating feedback", () => {
   });
 });
 
-const damage = (amount: number, damageType: GameEvent["damageType"] = "fire"): GameEvent => ({
+const damage = (amount: number, damageType: GameEvent["damageType"] = "burn"): GameEvent => ({
   kind: "damage",
   targetId: "enemy-0",
   amount,
@@ -105,7 +105,7 @@ const damage = (amount: number, damageType: GameEvent["damageType"] = "fire"): G
 });
 it("gives unmatched effects their own lifetime and reserves digit width without restarting an existing Critical", () => {
   const first = appendFeedback([], [damage(9)], "first", 0);
-  const mixed = appendFeedback(first, [{ ...damage(1), critical: true }, damage(3, "ice")], "mixed", 200);
+  const mixed = appendFeedback(first, [{ ...damage(1), critical: true }, damage(3, "freeze")], "mixed", 200);
   expect(mixed.map((b) => [b.started, b.entries.map((e) => e.amount)])).toEqual([
     [0, [10]],
     [200, [3]],
@@ -118,7 +118,7 @@ it("gives unmatched effects their own lifetime and reserves digit width without 
 });
 it("evicts before merging so a fresh result cannot disappear with the oldest burst", () => {
   let bursts = appendFeedback([], [damage(2)], 1, 0);
-  bursts = appendFeedback(bursts, [damage(3, "ice")], 2, 50);
+  bursts = appendFeedback(bursts, [damage(3, "freeze")], 2, 50);
   bursts = appendFeedback(bursts, [damage(4, "nature")], 3, 100);
   const next = appendFeedback(bursts, [damage(5), damage(6, "light")], 4, 150);
   expect(next).toHaveLength(3);

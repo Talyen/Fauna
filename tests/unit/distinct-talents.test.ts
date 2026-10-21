@@ -140,7 +140,7 @@ describe("distinct talent and Boon outcomes", () => {
   });
   it("Mending and Renewal heal only actually cleansed categories, without reviving", () => {
     const { state, source, events } = fixture();
-    state.talents = ["heal.mending", "heal.renewal"];
+    state.talents = ["health.mending", "health.renewal"];
     restoreHealth(source, 10, events, false, state);
     expect(source.health).toBe(21);
     source.combat.poison = 1;

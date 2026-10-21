@@ -70,7 +70,7 @@ describe("outcome-driven impact and sound", () => {
     const hit = {
       kind: "damage" as const,
       targetId: "enemy-0",
-      damageType: "fire" as const,
+      damageType: "burn" as const,
       amount: 8,
       text: "",
     };

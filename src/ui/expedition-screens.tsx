@@ -369,7 +369,7 @@ export function Talents({
     light: "light",
     bleed: "physical",
     block: "block",
-    heal: "heal",
+    health: "heal",
     armor: "block",
     dodge: "nature",
     leech: "light",

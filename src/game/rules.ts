@@ -18,8 +18,8 @@ function passiveCardBonus(def: CardDefinition, passive: PassiveTier, attacked: b
     const applies =
       effect.trigger === "firstAttack"
         ? def.effect === "attack" && !attacked
-        : effect.trigger === "lightningAttack"
-          ? def.effect === "attack" && def.damageType === "lightning"
+        : effect.trigger === "stunAttack"
+          ? def.effect === "attack" && def.damageType === "stun"
           : effect.trigger === "heal"
             ? def.effect === "heal"
             : def.effect === "guard" || def.effect === "teamGuard";

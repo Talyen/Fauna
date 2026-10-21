@@ -13,7 +13,7 @@ afterEach(() => {
   vi.unstubAllGlobals();
   vi.restoreAllMocks();
 });
-const hit = (amount: number, damageType: GameEvent["damageType"] = "fire"): GameEvent => ({
+const hit = (amount: number, damageType: GameEvent["damageType"] = "burn"): GameEvent => ({
   kind: "damage",
   targetId: "enemy-0",
   amount,
@@ -58,7 +58,7 @@ it("reveals interrupted numbers without accumulated audio, and Pause/teardown re
   const view = renderHook(({ paused }) => useCombatFeedback(feed.session, root, sound, paused), {
     initialProps: { paused: false },
   });
-  act(() => feed.commit([action("enemy-0"), hit(2), action("enemy-1"), hit(3, "ice")]));
+  act(() => feed.commit([action("enemy-0"), hit(2), action("enemy-1"), hit(3, "freeze")]));
   expect(sound.mock.calls).toEqual([["fire"]]);
   expect(view.result.current.bursts).toHaveLength(1);
   act(() => feed.commit([hit(4, "nature")]));
@@ -95,7 +95,7 @@ it("retains readable numbers on a reduced-motion change and clears them at battl
     sound = vi.fn(),
     root = createRef<HTMLDivElement>();
   const view = renderHook(() => useCombatFeedback(feed.session, root, sound));
-  act(() => feed.commit([action("enemy-0"), hit(2), action("enemy-1"), hit(3, "ice")]));
+  act(() => feed.commit([action("enemy-0"), hit(2), action("enemy-1"), hit(3, "freeze")]));
   act(() => {
     reduced = true;
     listeners.forEach((fn) => fn());
@@ -146,7 +146,7 @@ it("keeps icon-only notices and Critical identity while overlay tracking is disp
   expect(overlay.textContent).not.toContain("Immune");
   expect(overlay.querySelector(".combat-notice")?.getAttribute("aria-label")).toBe("Immune to Freeze");
   expect(overlay.querySelector('[data-critical="true"]')?.getAttribute("aria-label")).toContain(
-    "11 fire. Includes a Critical",
+    "11 burn. Includes a Critical",
   );
   expect(scheduled).toBeTypeOf("function");
   view.unmount();

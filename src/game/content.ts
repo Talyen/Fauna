@@ -3,7 +3,7 @@ export { type DamageType } from "./keywords";
 export type SpeciesId = "mossback" | "emberfox" | "stormfin" | "silkmoth" | "briartooth" | "moonhart";
 type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
-  | { kind: "cardBonus"; trigger: "firstAttack" | "lightningAttack" | "heal" | "guard"; amount: number }
+  | { kind: "cardBonus"; trigger: "firstAttack" | "stunAttack" | "heal" | "guard"; amount: number }
   | { kind: "battleStart"; effect: "block" | "thorns"; amount: number };
 export interface PassiveTier {
   description: string;
@@ -92,8 +92,8 @@ export const SPECIES: readonly Species[] = [
     trait: "Charged",
     passiveTiers: [
       {
-        description: "Lightning attacks deal 1 extra damage.",
-        effects: [{ kind: "cardBonus", trigger: "lightningAttack", amount: 1 }],
+        description: "Stun attacks deal 1 extra damage.",
+        effects: [{ kind: "cardBonus", trigger: "stunAttack", amount: 1 }],
       },
       null,
       null,
@@ -111,7 +111,7 @@ export const SPECIES: readonly Species[] = [
     trait: "Tender",
     passiveTiers: [
       {
-        description: "Healing cards restore 2 extra health.",
+        description: "Health cards restore 2 extra Health.",
         effects: [{ kind: "cardBonus", trigger: "heal", amount: 2 }],
       },
       null,
@@ -192,13 +192,13 @@ export const CARDS: readonly CardDefinition[] = [
   { ...card("mossback", "Shelter", "guard", 7), effects: [{ kind: "status", status: "armor", amount: 1 }] },
   card("mossback", "Forest Mantle", "teamGuard", 3),
   {
-    ...attack("emberfox", "Cinder Strike", 8, "fire"),
+    ...attack("emberfox", "Cinder Strike", 8, "burn"),
     effects: [{ kind: "damage", damageType: "burn", amount: 2 }],
   },
   card("emberfox", "Warm Embers", "heal", 5),
   card("emberfox", "Ember Ward", "guard", 6),
   {
-    ...attack("stormfin", "Arc Bite", 7, "lightning"),
+    ...attack("stormfin", "Arc Bite", 7, "stun"),
     effects: [{ kind: "damage", damageType: "stun", amount: 3 }],
   },
   { ...card("stormfin", "Storm Shelter", "teamGuard", 3), effects: [{ kind: "draw", amount: 1 }] },
@@ -291,7 +291,7 @@ export const ENCOUNTERS = [
     name: "The overgrown trail",
     enemies: [
       { damageType: "nature", name: "Bramble Imp", species: "briartooth" as const, health: 18, damage: 4 },
-      { damageType: "fire", name: "Cinder Wisp", species: "emberfox" as const, health: 16, damage: 4 },
+      { damageType: "burn", name: "Cinder Wisp", species: "emberfox" as const, health: 16, damage: 4 },
       { damageType: "light", name: "Dusk Moth", species: "silkmoth" as const, health: 16, damage: 4 },
     ],
   },

@@ -80,7 +80,7 @@ const creature = z.object({
   combat: combatState.optional(),
 });
 const currentShape = z.object({
-  version: z.literal(22),
+  version: z.literal(23),
   discovery: z.object({
     encountered: z.array(speciesId).max(6),
     recruited: z.partialRecord(
