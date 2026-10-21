@@ -1307,6 +1307,50 @@
       "aspect": [3, 4],
       "provenance": "Unchanged Bloomquail artwork selected from user Google Drive: https://drive.google.com/file/d/1Fpe9tfwUXWSEyNV_ELyqOjJa-jgY4wTJ/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "creature.shadebrim",
+      "origin": "repository",
+      "source": "public/art/shadebrim/portrait.png",
+      "output": "art/shadebrim/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Shadebrim artwork selected from user Google Drive: https://drive.google.com/file/d/1VXIBLjqjjSNFGAtyxh8S8UQ-HoEZRzL4/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.shadebrim.noonward",
+      "origin": "repository",
+      "source": "public/art/shadebrim/noonward.png",
+      "output": "art/shadebrim/noonward.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Shadebrim artwork selected from user Google Drive: https://drive.google.com/file/d/1BogMYD59n-FZaUfeD_7JjtwiEmrbjxA-/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.shadebrim.coolfront",
+      "origin": "repository",
+      "source": "public/art/shadebrim/coolfront.png",
+      "output": "art/shadebrim/coolfront.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Shadebrim artwork selected from user Google Drive: https://drive.google.com/file/d/1Drbm7C189UBWPRXikt5nFtLtQVcNhRcT/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.shadebrim.noon-bloom",
+      "origin": "repository",
+      "source": "public/art/shadebrim/noon-bloom.png",
+      "output": "art/shadebrim/noon-bloom.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Shadebrim artwork selected from user Google Drive: https://drive.google.com/file/d/1h7XAGAL8CqD79TbtzcKP3gR5gci0VnpO/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

@@ -19,6 +19,7 @@ export function freshCombat(): CombatState {
     freeLight: false,
     freeCard: false,
     reflect: false,
+    reflectBurn: false,
     nullify: false,
     encoreUsed: false,
     firstAttackUsed: false,
@@ -382,7 +383,7 @@ export function removeEffects(
   const statuses =
     kind === "cleanse"
       ? (["burn", "poison", "bleed", "stun", "freeze", "blind"] as const)
-      : (["armor", "thorns", "dodge", "reflect", "nullify"] as const);
+      : (["armor", "thorns", "dodge", "reflect", "reflectBurn", "nullify"] as const);
   if (kind === "purge" && unit.block > 0 && count > 0) {
     unit.block = 0;
     removedStatuses.push("block");
@@ -400,7 +401,8 @@ export function removeEffects(
   for (const status of statuses)
     if (count > 0 && (Number(stats[status]) > 0 || (status === "dodge" && stats.temporaryDodge > 0))) {
       if (status === "dodge") stats.temporaryDodge = 0;
-      if (status === "reflect" || status === "blind" || status === "nullify") stats[status] = false;
+      if (status === "reflect" || status === "reflectBurn" || status === "blind" || status === "nullify")
+        stats[status] = false;
       else stats[status] = 0;
       if (kind === "cleanse") {
         cleansed++;
@@ -408,7 +410,7 @@ export function removeEffects(
       }
       if (status === "bleed") stats.bleedLeech = [];
       count--;
-      removedStatuses.push(status);
+      removedStatuses.push(status === "reflectBurn" ? "reflect" : status);
     }
   for (const affectedStatus of new Set(removedStatuses))
     events.push({
@@ -509,9 +511,11 @@ function applyHarmfulStatus(
       (sum, effect) => sum + (effect.kind === "statusReflection" ? effect.amount : 0),
       0,
     );
-    if (enemies.length && (stats.reflect || (chance > 0 && roll(state) < chance / 100))) {
+    const burnReflection = type === "burn" && stats.reflectBurn;
+    if (enemies.length && (burnReflection || stats.reflect || (chance > 0 && roll(state) < chance / 100))) {
       const recipient = enemies[Math.floor(roll(state) * enemies.length)]!;
-      stats.reflect = false;
+      if (burnReflection) stats.reflectBurn = false;
+      else stats.reflect = false;
       events.push({
         kind: "status",
         actorId: target.id,
@@ -910,6 +914,20 @@ function resolveHit(
         (type === "poison" && hasTalent(state, "block.venom-ward")))
     )
       damage *= 0.5;
+  }
+  if (type === "burn") {
+    const protectors = alliedTarget ? state.team : (state.battle?.enemies ?? []);
+    // Multiple canopies use the strongest shelter; swapping or knockout removes it immediately.
+    const resistance = protectors.reduce((best, unit) => {
+      if (unit.health <= 0) return best;
+      return Math.max(
+        best,
+        ...creaturePassive(alliedTarget ? state : undefined, unit.species).effects.map((effect) =>
+          effect.kind === "teamBurnResistance" ? effect.amount : 0,
+        ),
+      );
+    }, 0);
+    if (protectors.some((unit) => unit.id === target.id)) damage *= 1 - Math.min(100, resistance) / 100;
   }
   damage = Math.round(damage);
   const riposte = direct && alliedSource && type === "physical" && combat(source).riposte;

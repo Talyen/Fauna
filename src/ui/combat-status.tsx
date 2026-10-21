@@ -23,6 +23,7 @@ const statusOrder: readonly string[] = [
   "freeLight",
   "freeCard",
   "reflect",
+  "reflectBurn",
   "nullify",
   "blind",
 ];
@@ -68,6 +69,11 @@ export function combatStatuses(combat?: CombatState, sharedDodge = 0): Status[] 
       ["freeCard", Number(combat.freeCard), "Free Follow-up: next card is free"],
       ["blind", Number(combat.blind), `Blind: ${KEYWORD_DEFINITIONS.blind.description}`],
       ["nullify", Number(combat.nullify), `Nullify: ${KEYWORD_DEFINITIONS.nullify.description}`],
+      [
+        "reflectBurn",
+        Number(combat.reflectBurn),
+        "Reflect the next Burn; Direct damage still lands; Lasts until consumed or Purged; Does not stack",
+      ],
       ["reflect", Number(combat.reflect), `Reflect: ${KEYWORD_DEFINITIONS.reflect.description}`],
     ] as const;
     for (const [id, count, text] of pending) if (count) entries.push({ id, count, text });
@@ -162,7 +168,13 @@ export function CombatStatus({
               key={s.count}
               className={s.exit ? undefined : s.changed ? "status-changed" : "status-enter"}
             >
-              {isKeywordId(s.id) ? <KeywordIcon id={s.id} /> : <Icon aria-hidden="true" />}
+              {s.id === "reflectBurn" ? (
+                <KeywordIcon id="reflect" />
+              ) : isKeywordId(s.id) ? (
+                <KeywordIcon id={s.id} />
+              ) : (
+                <Icon aria-hidden="true" />
+              )}
             </span>
           </Button>
         </TooltipTrigger>

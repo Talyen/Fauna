@@ -12,9 +12,11 @@ export type SpeciesId =
   | "coralcurl"
   | "chimecricket"
   | "dawncall"
-  | "bloomquail";
+  | "bloomquail"
+  | "shadebrim";
 type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
+  | { kind: "teamBurnResistance"; amount: number }
   | { kind: "blockConversion"; amount: number }
   | { kind: "blockRetention"; amount: number }
   | { kind: "cardBonus"; trigger: "firstAttack" | "stunAttack" | "heal" | "guard"; amount: number }
@@ -49,8 +51,9 @@ export const DAMAGE_LABELS = Object.fromEntries(DAMAGE_TYPES.map((id) => [id, ke
 type CardEffect =
   | { kind: "damage"; damageType: DamageType; amount: number; leech?: boolean }
   | { kind: "status"; status: "armor" | "thorns" | "dodge"; amount: number }
-  | { kind: "cleanse"; amount: number; target?: "recipient" }
-  | { kind: "draw" | "mana" | "purge" | "reflect" | "heal" | "blind" | "meltArmor"; amount: number };
+  | { kind: "cleanse"; amount: number; target?: "recipient" | "allAllies" }
+  | { kind: "reflect"; amount: number; status?: "burn" }
+  | { kind: "draw" | "mana" | "purge" | "heal" | "blind" | "meltArmor"; amount: number };
 interface CardBase {
   id: string;
   species: SpeciesId;
@@ -535,6 +538,40 @@ export const SPECIES: readonly Species[] = [
       },
     ],
   },
+  {
+    id: "shadebrim",
+    name: "Shadebrim",
+    title: "The cool refuge",
+    health: 28,
+    color: "#dbaf52",
+    trait: "Cool Refuge",
+    passiveTiers: [
+      {
+        description: "Allies take 10% less Burn damage",
+        effects: [{ kind: "teamBurnResistance", amount: 10 }],
+      },
+      {
+        description: "Allies take 20% less Burn damage",
+        effects: [{ kind: "teamBurnResistance", amount: 20 }],
+      },
+      {
+        description: "Allies take 30% less Burn damage",
+        effects: [{ kind: "teamBurnResistance", amount: 30 }],
+      },
+      {
+        description: "Allies take 40% less Burn damage",
+        effects: [{ kind: "teamBurnResistance", amount: 40 }],
+      },
+      {
+        description: "Allies take 50% less Burn damage",
+        effects: [{ kind: "teamBurnResistance", amount: 50 }],
+      },
+      {
+        description: "Allies take 60% less Burn damage",
+        effects: [{ kind: "teamBurnResistance", amount: 60 }],
+      },
+    ],
+  },
 ];
 const card = <T extends Exclude<Effect, "attack">>(
   species: SpeciesId,
@@ -751,6 +788,23 @@ export const CARDS: readonly CardDefinition[] = [
     effects: [{ kind: "blind", amount: 1 }],
     artwork: "action.bloomquail.petal-veil",
   },
+  {
+    ...card("shadebrim", "Noonward", "guard", 4),
+    target: "self",
+    effects: [{ kind: "reflect", amount: 1, status: "burn" }],
+    artwork: "action.shadebrim.noonward",
+  },
+  {
+    ...attack("shadebrim", "Coolfront", 1, "freeze"),
+    target: "allEnemies",
+    effects: [{ kind: "cleanse", amount: 7, target: "allAllies" }],
+    artwork: "action.shadebrim.coolfront",
+  },
+  {
+    ...card("shadebrim", "Noon Bloom", "draw", 2),
+    effects: [{ kind: "mana", amount: 1 }],
+    artwork: "action.shadebrim.noon-bloom",
+  },
 ];
 export function enemyCard(card: CardDefinition): CardDefinition {
   // Enemies have no hand; retain the self-healing half of a draw ability
@@ -820,7 +874,7 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
           : effect.kind === "draw"
             ? `Draw ${effect.amount} card${effect.amount === 1 ? "" : "s"}`
             : effect.kind === "mana"
-              ? `Restore ${effect.amount} Mana`
+              ? `Gain ${effect.amount} Mana`
               : effect.kind === "heal"
                 ? `Restore ${effect.amount} Health`
                 : effect.kind === "blind"
@@ -828,10 +882,14 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
                   : effect.kind === "meltArmor"
                     ? `Remove ${effect.amount}% of all enemies’ Armor, rounded up`
                     : effect.kind === "reflect"
-                      ? "Reflect the next harmful status effect"
-                      : effect.kind === "cleanse" && effect.target === "recipient"
-                        ? "Cleanse the healed ally"
-                        : `${effect.kind === "cleanse" ? "Cleanse acting creature" : "Purge target"}: remove ${effect.amount} effect${effect.amount === 1 ? "" : "s"}`);
+                      ? effect.status === "burn"
+                        ? "Reflect the next Burn"
+                        : "Reflect the next harmful status effect"
+                      : effect.kind === "cleanse" && effect.target === "allAllies"
+                        ? "Cleanse all allies"
+                        : effect.kind === "cleanse" && effect.target === "recipient"
+                          ? "Cleanse the healed ally"
+                          : `${effect.kind === "cleanse" ? "Cleanse acting creature" : "Purge target"}: remove ${effect.amount} effect${effect.amount === 1 ? "" : "s"}`);
   }
   if (card.leech) text += "; Leech";
   return text;

@@ -44,7 +44,7 @@ import { bossEncounter, encounterSource, finalEncounter, encounterPacks } from "
 import type { Card, Command, CommandResult, GameEvent, GameState } from "./types";
 export function createGame(seed = 1): GameState {
   const state: GameState = {
-    version: 33,
+    version: 34,
     support: null,
     discovery: { encountered: [], recruited: {} },
     revision: 0,
@@ -468,23 +468,21 @@ function applyExtras(
           if (recipient.health > 0) applyBlind(state, actor, recipient, events);
         break;
       case "reflect":
-        combat(actor).reflect = true;
+        if (effect.status === "burn") combat(actor).reflectBurn = true;
+        else combat(actor).reflect = true;
         events.push({
           kind: "status",
           targetId: actor.id,
           status: "reflect",
           outcome: "apply",
-          text: "Reflect the next harmful status effect",
+          text: effect.status === "burn" ? "Reflect the next Burn" : "Reflect the next harmful status effect",
         });
         break;
       case "cleanse":
-        removeEffects(
-          effect.target === "recipient" && target ? target : actor,
-          "cleanse",
-          effect.amount,
-          events,
-          state,
-        );
+        for (const recipient of effect.target === "allAllies"
+          ? (enemy ? state.battle!.enemies : state.team).filter((unit) => unit.health > 0)
+          : [effect.target === "recipient" && target ? target : actor])
+          removeEffects(recipient, "cleanse", effect.amount, events, state);
         break;
       case "purge":
         if (target) removeEffects(target, "purge", effect.amount, events, state);
@@ -521,7 +519,10 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
       let target = living(draft).find((c) => c.id === enemy.targetId) ?? living(draft)[0];
       if (!target) break;
       const abilities = CARDS.filter(
-        (card) => card.species === enemy.species && card.id !== enemy.lastAbility,
+        (card) =>
+          card.species === enemy.species &&
+          card.id !== enemy.lastAbility &&
+          enemyCard(card).effect !== "draw",
       );
       const def = enemyCard(abilities[Math.floor(random(draft) * abilities.length)]!);
       if (def.effect === "attack" && def.target === "randomEnemy") {
