@@ -2,6 +2,8 @@
 
 The user approved production adoption on 2026-10-20. [Phone decisions](../design/PHONE_DECISIONS.md), the [button study](../design/button-interactions/README.md), [artwork choices](../design/artwork-interactions/README.md) and the later Settings refinements are the decision record. This document records implementation ownership and verification, not blanket visual acceptance.
 
+The current palette adopts Alchemy’s warm near-black canvas, charcoal surfaces, ivory text and gold accents through the shared semantic tokens. Merchant uses a compact inspectable shelf with aligned external purchase controls and explicit availability reasons. Creature inspection separates Traits, Abilities and paginated Rank progression. Both menus expose spendable talent points.
+
 ## Canonical owners
 
 - `src/components/ui/` retains registered upstream shadcn/Radix controls and their native keyboard, focus, modal and value behavior. Controls expose stable `ui-*` skin classes; screens compose them rather than implementing widgets.

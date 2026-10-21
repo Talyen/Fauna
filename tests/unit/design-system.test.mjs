@@ -113,6 +113,7 @@ it("keeps the approved semantic palette readable and combat colors independent",
   };
   for (const [text, background] of [
     ["foreground", "background"],
+    ["destructive-text", "background"],
     ["card-foreground", "card"],
     ["popover-foreground", "popover"],
     ["primary-foreground", "primary"],
@@ -129,8 +130,8 @@ it("keeps the approved semantic palette readable and combat colors independent",
       `${text} on ${background}`,
     ).toBeGreaterThanOrEqual(4.5);
   }
-  expect(resolve("background")).toBe("#000");
-  expect(resolve("primary")).toBe("#d9b56f");
+  expect(resolve("background")).toBe("#080807");
+  expect(resolve("primary")).toBe("#cd9b51");
   expect(resolve("health")).toBe("#f87171");
   expect(resolve("block")).toBe("#7dd3fc");
   for (const alias of ["selected", "line", "surface", "text"]) expect(tokens[alias]).toMatch(/^var\(--/);

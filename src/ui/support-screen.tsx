@@ -4,106 +4,88 @@ import type { Command, GameState } from "../game/types";
 import { canVisitMerchant } from "../game/support";
 import { BOONS } from "../game/progression";
 import { Button } from "../components/ui/button";
-import { Dialog, DialogContent, DialogTitle, DialogDescription } from "../components/ui/dialog";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../components/ui/tooltip";
 import { ArtCard } from "./art-card";
 import { KeywordText } from "./keyword-text";
 import { assetUrl } from "./assets";
-export function SupportOffer({
-  game,
-  inspect,
-}: {
-  game: GameState;
-  inspect: (item: { support: string }) => void;
-}) {
-  const v = game.support;
-  if (!v || !canVisitMerchant(game)) return null;
-  const title = "Merchant";
+
+export function SupportOffer({ game, send }: { game: GameState; send: (c: Command) => boolean }) {
+  const visit = game.support;
+  if (!visit || !canVisitMerchant(game)) return null;
   return (
     <div className="destination-option">
       <ArtCard
         aspect="creature"
         artwork={assetUrl("location.silken-clearing")}
-        data-support={v.id}
-        aria-label={`Inspect ${title}`}
-        onClick={() => inspect({ support: v.id })}
-        onContextMenu={(event) => {
-          event.preventDefault();
-          inspect({ support: v.id });
-        }}
+        aria-label="Visit Merchant"
+        onClick={() => send({ type: "enterSupport", visit: visit.id })}
       />
-      <h2>{title}</h2>
-      <p>Shop</p>
+      <h2>Merchant</h2>
     </div>
   );
 }
-export function SupportInspector({
-  game,
-  send,
-  close,
-}: {
-  game: GameState;
-  send: (c: Command) => boolean;
-  close: () => void;
-}) {
-  const v = game.support;
-  if (!v || !canVisitMerchant(game)) return null;
-  return (
-    <Dialog
-      open
-      onOpenChange={(open) => {
-        if (!open) close();
-      }}
-    >
-      <DialogContent>
-        <DialogTitle>Merchant</DialogTitle>
-        <DialogDescription>Buy one Boon for this journey. Spending uses permanent Gold.</DialogDescription>
-        <Button
-          onClick={() => {
-            if (send({ type: "enterSupport", visit: v.id })) close();
-          }}
-        >
-          Enter
-        </Button>
-      </DialogContent>
-    </Dialog>
-  );
-}
+
 export function SupportScreen({ game, send }: { game: GameState; send: (c: Command) => boolean }) {
-  const v = game.support!;
+  const visit = game.support!;
   const leave = useRef<HTMLButtonElement>(null);
   useLayoutEffect(() => {
-    if (v.resolved && document.documentElement.dataset.input !== "pointer") leave.current?.focus();
-  }, [v.resolved]);
+    if (visit.resolved && document.documentElement.dataset.input !== "pointer") leave.current?.focus();
+  }, [visit.resolved]);
   return (
-    <Screen className="campfire-screen">
-      <ScreenHeading back={() => send({ type: "leaveSupport", visit: v.id })}>Merchant</ScreenHeading>
-      <p>Gold: {game.currency} · One purchase per visit · Boons last for this journey</p>
-      <section className="boon-options" aria-label="Merchant stock" data-nav-row>
-        {v.stock.map((slot) => {
+    <Screen className="campfire-screen merchant-screen">
+      <header className="merchant-heading">
+        <ScreenHeading back={() => send({ type: "leaveSupport", visit: visit.id })}>Merchant</ScreenHeading>
+        <p className="merchant-wallet">Gold: {game.currency}</p>
+      </header>
+      <p className="merchant-terms">One purchase per visit · Boons last for this journey</p>
+      <section className="boon-options merchant-stock" aria-label="Merchant stock" data-nav-row>
+        {visit.stock.map((slot) => {
           const boon = BOONS.find((b) => b.id === slot.boon)!;
+          const owned = visit.purchased === boon.id;
+          const unavailable = visit.resolved || game.currency < slot.price;
+          const reason = owned
+            ? "Owned"
+            : visit.resolved
+              ? "Purchase used"
+              : game.currency < slot.price
+                ? "Not enough Gold"
+                : "";
+          const statusId = `merchant-${slot.slot}-status`;
           return (
-            <section className="reward-option" key={slot.slot}>
-              <ArtCard
-                aspect="action"
-                artwork={assetUrl(`boon.${boon.id}`)}
-                presentation
-                aria-label={boon.name}
-              />
-              <h2>{boon.name}</h2>
-              <p>
-                <KeywordText text={boon.text} />
-              </p>
+            <section className="reward-option merchant-offer" key={slot.slot}>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <ArtCard
+                    aspect="action"
+                    artwork={assetUrl(`boon.${boon.id}`)}
+                    aria-label={`Inspect ${boon.name}`}
+                  />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <strong>{boon.name}</strong>
+                  <p>
+                    <KeywordText text={boon.text} />
+                  </p>
+                  {reason ? <p>{reason}</p> : null}
+                </TooltipContent>
+              </Tooltip>
               <Button
-                disabled={v.resolved || game.currency < slot.price}
-                onClick={() => send({ type: "buyBoon", visit: v.id, slot: slot.slot })}
+                aria-disabled={unavailable}
+                aria-describedby={reason ? statusId : undefined}
+                onClick={() => {
+                  if (!unavailable) send({ type: "buyBoon", visit: visit.id, slot: slot.slot });
+                }}
               >
-                {v.purchased === boon.id ? "Owned" : `Buy · ${slot.price} Gold`}
+                {owned ? "Owned" : `Buy · ${slot.price} Gold`}
               </Button>
+              <p className="merchant-status" id={statusId}>
+                {reason || "\u00a0"}
+              </p>
             </section>
           );
         })}
       </section>
-      <Button ref={leave} variant="outline" onClick={() => send({ type: "leaveSupport", visit: v.id })}>
+      <Button ref={leave} variant="outline" onClick={() => send({ type: "leaveSupport", visit: visit.id })}>
         Leave
       </Button>
     </Screen>

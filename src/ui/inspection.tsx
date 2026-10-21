@@ -21,7 +21,7 @@ export function Inspector({
   onClose,
   chooseStarter,
 }: {
-  item: Exclude<Inspection, { support: string }>;
+  item: Inspection;
   session: Session;
   controls: Controls;
   onClose: () => void;
@@ -159,25 +159,35 @@ export function Inspector({
               speciesKit
               label={`${enemy?.name ?? creature.name} details`}
             />
-            <div className="inspection-thumbnails" ref={thumbnails} data-nav-row>
-              {cards.map((action, index) => (
-                <ActionCard
-                  key={action.id}
-                  card={action}
-                  ownerName={creature.name}
-                  actor={actor}
-                  modifiers={enemy ? undefined : game}
-                  enemy={!!enemy}
-                  enemyValue={
-                    enemy ? enemyInspectionValue(enemy, definition(action.definitionId)) : undefined
-                  }
-                  onClick={() => setSelected(index)}
-                  onInspect={() => setSelected(index)}
-                />
-              ))}
-            </div>
+            <section className="inspection-abilities" aria-label="Abilities">
+              <h2>Abilities</h2>
+              <div className="inspection-thumbnails" ref={thumbnails} data-nav-row>
+                {cards.map((action, index) => (
+                  <ActionCard
+                    key={action.id}
+                    card={action}
+                    ownerName={creature.name}
+                    actor={actor}
+                    modifiers={enemy ? undefined : game}
+                    enemy={!!enemy}
+                    enemyValue={
+                      enemy ? enemyInspectionValue(enemy, definition(action.definitionId)) : undefined
+                    }
+                    onClick={() => setSelected(index)}
+                    onInspect={() => setSelected(index)}
+                  />
+                ))}
+              </div>
+            </section>
             <section className="passive-tiers" aria-label={`${creature.trait} passive tiers`}>
-              <h2>{creature.trait}</h2>
+              <h2>Traits</h2>
+              <div className="inspection-active-trait">
+                <h3>{creature.trait}</h3>
+                <p>
+                  <KeywordText text={passive.description} />
+                </p>
+              </div>
+              <h3>Rank progression</h3>
               <p>
                 {enemy
                   ? "Species kit · Enemy passives use the base tier."
@@ -185,7 +195,7 @@ export function Inspector({
               </p>
               <PagedItems
                 items={creature.passiveTiers}
-                pageSize={2}
+                pageSize={1}
                 className="passive-tier-page"
                 contentRole="list"
                 label="Passive tier pages"

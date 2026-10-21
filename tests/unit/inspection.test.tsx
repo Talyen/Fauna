@@ -52,13 +52,16 @@ describe("artwork-first inspection", () => {
       const dialog = screen.getByRole("dialog", { name: "Mossback" });
       expect(dialog.querySelector(".card-details")).toBeNull();
       const tiers = within(dialog).getByRole("region", { name: "Rooted passive tiers" });
-      expect(within(tiers).getAllByRole("listitem")).toHaveLength(2);
+      expect(within(tiers).getAllByRole("listitem")).toHaveLength(1);
       expect(tiers.textContent).toContain("0 stars · Active effect");
-      expect(within(tiers).getAllByText("Not yet defined")).toHaveLength(1);
-      await user.click(within(tiers).getByRole("button", { name: "Next page" }));
+      expect(within(dialog).getByRole("heading", { name: "Traits" })).toBeTruthy();
+      expect(within(dialog).getByRole("region", { name: "Abilities" })).toBeTruthy();
+      expect(dialog.querySelector(".inspection-active-trait")?.textContent).toContain("Rooted");
+      for (let rank = 0; rank < 3; rank++)
+        await user.click(within(tiers).getByRole("button", { name: "Next page" }));
       expect(tiers.querySelector('[aria-current="step"]')?.textContent).toContain("3 stars · Current rank");
       await user.click(within(tiers).getByRole("button", { name: "Next page" }));
-      expect(within(tiers).getAllByRole("listitem")).toHaveLength(2);
+      expect(within(tiers).getAllByRole("listitem")).toHaveLength(1);
       expect(within(dialog).queryByRole("button", { name: /Previous action|Next action/ })).toBeNull();
       await user.hover(within(dialog).getByRole("button", { name: "Mossback details" }));
       expect((await screen.findByRole("tooltip")).textContent).toContain("Rooted");
@@ -71,7 +74,7 @@ describe("artwork-first inspection", () => {
       expect(actionDialog.querySelector(".card-details")).toBeNull();
       const pinned = within(actionDialog).getByRole("button", { name: /^Bramble Bash,/ });
       await user.hover(pinned);
-      expect((await screen.findByRole("tooltip")).textContent).toContain("Mossback · 1 mana");
+      expect((await screen.findByRole("tooltip")).textContent).toContain("Deal 6 Nature damage.");
       await user.click(within(actionDialog).getByRole("button", { name: "Back" }));
       expect(document.activeElement).toBe(
         within(screen.getByRole("dialog")).getByRole("button", { name: /^Bramble Bash,/ }),
@@ -170,7 +173,8 @@ describe("artwork-first inspection", () => {
       await user.hover(within(dialog).getByRole("button", { name: "Bramble Imp details" }));
       const tooltip = await screen.findByRole("tooltip");
       const enemy = game.battle!.enemies.find((entry) => entry.name === "Bramble Imp")!;
-      expect(tooltip.textContent).toContain(`${enemy.health}/${enemy.maxHealth} health`);
+      expect(tooltip.textContent).not.toContain(`${enemy.health}/${enemy.maxHealth} health`);
+      expect(tooltip.textContent).toContain("Thorns 2");
       expect(tooltip.textContent).toContain("Species kit · Briartooth");
       expect(tooltip.textContent).toContain(
         "Start each battle with 2 Thorns. When an attack removes Health, retaliate with current Thorns, then lose 1 stack.",

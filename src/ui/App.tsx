@@ -3,8 +3,8 @@ import { PagedItems } from "./pagination";
 import { captureSwapMotion } from "./swap-motion";
 import { SurfaceTransition } from "./surface-transition";
 import { Loading } from "./loading";
-import { SupportScreen, SupportInspector } from "./support-screen";
-import { BOONS } from "../game/progression";
+import { SupportScreen } from "./support-screen";
+import { BOONS, KEYWORDS, availablePoints } from "../game/progression";
 import { ArtCard } from "./art-card";
 import { assetUrl } from "./assets";
 import { CreatureCard } from "./cards";
@@ -69,6 +69,7 @@ function preference(key: string, fallback: string) {
 function Game({ session, desktop = false }: { session: Session; desktop?: boolean }) {
   const view = useStore(session.store),
     game = view.game;
+  const talentPoints = KEYWORDS.reduce((total, keyword) => total + availablePoints(game, keyword), 0);
   const root = useRef<HTMLDivElement>(null),
     gameControls: Controls = useRef(null),
     inspectionControls: Controls = useRef(null),
@@ -270,9 +271,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
         (c) => c.id === focused?.closest<HTMLElement>("[data-card-id]")?.dataset.cardId,
       );
       const kind = focused?.closest<HTMLElement>("[data-species]")?.dataset.species as SpeciesId | undefined;
-      const support = focused?.closest<HTMLElement>("[data-support]")?.dataset.support;
-      if (support) setInspection({ support });
-      else if (card) setInspection({ card });
+      if (card) setInspection({ card });
       else if (kind)
         setInspection({
           species: kind,
@@ -369,9 +368,23 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           Lineup
         </Button>
       ) : null}
-      <Button variant="ghost" onClick={() => navigate("talents")}>
+      <Button
+        variant="ghost"
+        aria-label="Talents"
+        aria-describedby={talentPoints > 0 ? `menu-talent-points-${home}` : undefined}
+        onClick={() => navigate("talents")}
+      >
         <Sparkles aria-hidden="true" className="menu-icon-talents" />
         Talents
+        {talentPoints > 0 ? (
+          <span
+            className="menu-talent-points"
+            id={`menu-talent-points-${home}`}
+            aria-label={`${talentPoints} talent ${talentPoints === 1 ? "point" : "points"} available`}
+          >
+            {talentPoints}
+          </span>
+        ) : null}
       </Button>
       <Button variant="ghost" onClick={() => navigate("collection")}>
         <PawPrint aria-hidden="true" className="menu-icon-collection" />
@@ -515,7 +528,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
               }}
             </PagedItems>
           ) : null}
-          {inspection && !("support" in inspection) ? (
+          {inspection ? (
             <Inspector
               item={inspection}
               session={session}
@@ -526,25 +539,21 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
         </DialogContent>
       </Dialog>
       {!modal && inspection ? (
-        "support" in inspection ? (
-          <SupportInspector game={game} send={send} close={() => setInspection(null)} />
-        ) : (
-          <Inspector
-            item={inspection}
-            session={session}
-            controls={inspectionControls}
-            onClose={() => setInspection(null)}
-            chooseStarter={
-              route === "play" &&
-              game.phase === "draft" &&
-              !menu &&
-              "species" in inspection &&
-              game.starterOffers.includes(inspection.species)
-                ? () => send({ type: "draft", species: inspection.species })
-                : undefined
-            }
-          />
-        )
+        <Inspector
+          item={inspection}
+          session={session}
+          controls={inspectionControls}
+          onClose={() => setInspection(null)}
+          chooseStarter={
+            route === "play" &&
+            game.phase === "draft" &&
+            !menu &&
+            "species" in inspection &&
+            game.starterOffers.includes(inspection.species)
+              ? () => send({ type: "draft", species: inspection.species })
+              : undefined
+          }
+        />
       ) : null}
     </>
   );

@@ -4,6 +4,9 @@ import { act, cleanup, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createSession } from "../../src/application/session";
 import { createBrowserPlatform } from "../../src/platform/browser";
+import { produce } from "immer";
+import { encodeSave } from "../../src/game/save";
+import { run } from "./helpers";
 import { App } from "../../src/ui/App";
 
 beforeEach(() => {
@@ -143,3 +146,40 @@ it("continues or dismisses the undimmed menu without changing the journey", asyn
     await session.dispose();
   }
 });
+
+it.each(["home", "pause"])(
+  "shows spendable talent points in the %s menu and clears the cue after purchase",
+  async (origin) => {
+    localStorage.setItem(
+      "fauna.save.v1",
+      encodeSave(
+        produce(run(7), (game) => {
+          game.keywordXP.physical = 10;
+        }),
+      ),
+    );
+    const session = createSession(createBrowserPlatform(localStorage), 7);
+    await session.load();
+    const user = userEvent.setup();
+    render(<App session={session} />);
+    try {
+      if (origin === "pause") {
+        await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+        await user.click(screen.getByRole("button", { name: "Open menu", exact: true }));
+      }
+      const talents = screen.getByRole("button", { name: "Talents", exact: true });
+      expect(talents.getAttribute("aria-describedby")).toBe(`menu-talent-points-${origin === "home"}`);
+      expect(screen.getByLabelText("1 talent point available").textContent).toBe("1");
+      act(() => {
+        expect(session.command({ type: "buyTalent", talentId: "physical.shield-slam" })).toBe(true);
+      });
+      expect(screen.queryByLabelText("1 talent point available")).toBeNull();
+      expect(
+        screen.getByRole("button", { name: "Talents", exact: true }).hasAttribute("aria-describedby"),
+      ).toBe(false);
+    } finally {
+      cleanup();
+      await session.dispose();
+    }
+  },
+);

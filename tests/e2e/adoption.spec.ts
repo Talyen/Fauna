@@ -152,22 +152,23 @@ for (const width of [1280, 1920])
     }, JSON.stringify(fixture));
     await page.goto("/");
     await page.getByRole("button", { name: "Continue", exact: true }).click();
-    await page.getByRole("button", { name: "Inspect Merchant", exact: true }).click();
-    await page.keyboard.press("Escape");
-    expect(
-      JSON.parse((await page.evaluate(() => localStorage.getItem("fauna.save.v1"))) ?? "{}").revision,
-    ).toBe(fixture.revision);
-    await page.getByRole("button", { name: "Inspect Merchant", exact: true }).click();
-    await page.getByRole("button", { name: "Enter", exact: true }).click();
+    await page.getByRole("button", { name: "Visit Merchant", exact: true }).click();
+    await expect(page.getByRole("heading", { name: "Merchant", exact: true })).toBeVisible();
     await page.getByRole("button", { name: "Buy · 20 Gold", exact: true }).first().click();
-    await expect(page.getByRole("button", { name: "Owned", exact: true })).toBeDisabled();
+    await expect(page.getByRole("button", { name: "Owned", exact: true })).toHaveAttribute(
+      "aria-disabled",
+      "true",
+    );
     await captureScreen(page, { path: `reports/merchant-${width}.png`, fullPage: true });
     await page.reload();
     await page.getByRole("button", { name: "Continue", exact: true }).click();
     await expect(page.getByRole("heading", { name: "Merchant", exact: true })).toBeVisible();
-    await expect(page.getByRole("button", { name: "Owned", exact: true })).toBeDisabled();
+    await expect(page.getByRole("button", { name: "Owned", exact: true })).toHaveAttribute(
+      "aria-disabled",
+      "true",
+    );
     await page.getByRole("button", { name: "Leave", exact: true }).click();
-    await expect(page.getByRole("button", { name: "Inspect Merchant", exact: true })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Visit Merchant", exact: true })).toHaveCount(0);
     const saved = JSON.parse((await page.evaluate(() => localStorage.getItem("fauna.save.v1"))) ?? "{}");
     expect(saved.currency).toBe(0);
     expect(saved.journey.currency).toBe(20);

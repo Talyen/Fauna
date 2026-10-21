@@ -44,7 +44,7 @@
   border-color: var(--primary);
 }
 .game-button.control-outline.end-journey {
-  color: var(--destructive);
+  color: var(--destructive-text);
 }
 :root .game-button:not(:disabled):not([aria-disabled="true"]):active {
   scale: var(--pressed-scale);
@@ -589,4 +589,11 @@ h3 {
 }
 .animated-number .number-reserve {
   visibility: hidden;
+}
+
+.merchant-offer > .game-button[aria-disabled="true"] {
+  background: var(--muted);
+  color: var(--muted-foreground);
+  cursor: default;
+  opacity: 1;
 }

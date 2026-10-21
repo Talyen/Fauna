@@ -1901,9 +1901,11 @@ body,
   grid-column: 2;
   grid-row: 2 / span 2;
 }
-.creature-inspection .inspection-thumbnails {
+.creature-inspection .inspection-abilities {
   grid-column: 1;
   grid-row: 3;
+}
+.creature-inspection .inspection-thumbnails {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -1911,7 +1913,7 @@ body,
   width: 100%;
 }
 .passive-tier-page {
-  min-height: 280px;
+  min-height: calc(var(--text-body) * 7);
 }
 .cloud-candidates {
   display: grid;
@@ -1995,4 +1997,46 @@ body,
 .deck-dialog > .paged-content .boon-options .reward-option {
   width: calc((100% - var(--screen-section-gap)) / 2);
   align-items: center;
+}
+
+/* Alchemy's compact shelves keep the decision controls aligned below the art. */
+.merchant-heading,
+.inspection-abilities {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--screen-item-gap);
+}
+.merchant-wallet {
+  color: var(--gold-pale);
+  font-variant-numeric: tabular-nums;
+}
+.merchant-terms,
+.merchant-status {
+  color: var(--muted-foreground);
+  font-size: var(--text-secondary);
+}
+.merchant-offer > .game-button:not(.action-card) {
+  width: 100%;
+}
+
+.merchant-status {
+  min-height: calc(var(--text-secondary) * 1.4);
+}
+.menu-talent-points {
+  color: var(--gold-pale);
+  font-size: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+.inspection-abilities h2 {
+  font-size: var(--text-heading);
+}
+.inspection-active-trait {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.passive-tiers > h3 {
+  color: var(--muted-foreground);
+  font-size: var(--text-body);
 }

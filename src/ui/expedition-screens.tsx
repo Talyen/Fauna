@@ -118,7 +118,7 @@ export function TeamSelection({ game, send, inspect, deck }: Props & { deck: () 
         </ScreenHeading>
       </header>
       <section className="destination-grid" data-nav-row aria-label="Encounters">
-        <SupportOffer game={game} inspect={inspect} />
+        <SupportOffer game={game} send={send} />
         {canVisitCampfire(game) ? (
           <div className="destination-option">
             <ArtCard
