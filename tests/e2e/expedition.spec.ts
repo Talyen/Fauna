@@ -1049,6 +1049,9 @@ test("controller navigation preserves its device mode and can confirm a pointer-
   await resume(page);
   await page.locator(".hand .action-card").first().click();
   await expect(page.locator(".app")).toHaveAttribute("data-input", "pointer");
+  const selected = page.locator(".hand .action-card.selected");
+  await expect(selected).toHaveCSS("outline-style", "none");
+  expect(await selected.evaluate((element) => getComputedStyle(element).boxShadow)).not.toBe("none");
   const before = await state(page);
   await press(0);
   expect((await state(page)).revision).toBe(before.revision + 1);

@@ -1138,9 +1138,11 @@ strong {
    including shadcn rings in portaled dialogs and tab panels. */
 :root:not([data-focus="visible"]) :focus {
   outline: none;
-  box-shadow: none;
   /* Remove focus decoration immediately while retaining pointer hover motion. */
   transition-property: scale, border-color, background-color, color, transform;
+}
+:root:not([data-focus="visible"]) :focus:not(.selected) {
+  box-shadow: none;
 }
 .app[data-focus="hidden"] .hand-slot .action-card:focus:not(:hover):not(.selected) {
   transform: none;
