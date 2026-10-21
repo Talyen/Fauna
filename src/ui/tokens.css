@@ -39,7 +39,7 @@
   --text-name: var(--text-heading);
   --radius: 0.625rem;
   --radius-round: 9999px;
-  --border-art: var(--border);
+  --border-art: transparent;
   --feedback-shadow: var(--background);
   --overlay: #000c;
   --error: #ffc4ad;
