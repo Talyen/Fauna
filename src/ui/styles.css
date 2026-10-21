@@ -206,6 +206,11 @@ strong {
   width: min(100%, calc(2 * var(--main-menu-button-width) + var(--screen-item-gap)));
   gap: var(--screen-item-gap);
 }
+.home-screen nav > button {
+  height: auto;
+  min-height: var(--control-height);
+  white-space: normal;
+}
 .home-screen nav > .primary-menu-action,
 .home-screen nav > button:last-child:nth-child(even) {
   grid-column: 1 / -1;
