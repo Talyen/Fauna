@@ -24,7 +24,7 @@ describe("keyword progression and rewards", () => {
     const won = winBattle(result.state);
     expect(Object.values(won.battleXP)).toEqual([]);
     expect(Object.values(won.keywordXP).reduce((a, b) => a + b, 0)).toBe(
-      keywords.length + cardKeywords({ definitionId: "mossback-attack" }).length,
+      keywords.length + cardKeywords({ definitionId: "mossguard-attack" }).length,
     );
     const resumed = decodeSave(encodeSave(won));
     expect(resumed).toEqual(won);
@@ -79,7 +79,7 @@ describe("keyword progression and rewards", () => {
     expect(dispatch(s, { type: "recruit", species: "moonhart" }).accepted).toBe(false);
     s = accept(s, { type: "recruit", species: "briartooth" });
     expect(s.roster).toContain("briartooth");
-    expect(s.team.map((c) => c.species)).toEqual(["mossback", "emberfox", "stormfin"]);
+    expect(s.team.map((c) => c.species)).toEqual(["mossguard", "emberfox", "stormfin"]);
     expect(decodeSave(encodeSave(s))).toEqual(s);
     s = accept(s, {
       type: "swap",
@@ -122,7 +122,9 @@ describe("keyword progression and rewards", () => {
       expect(decodeSave(encodeSave(s))).toEqual(s);
     }
     const s = winBattle();
-    expect(dispatch(s, { type: "recruit", species: "briartooth", replace: "mossback" }).accepted).toBe(false);
+    expect(dispatch(s, { type: "recruit", species: "briartooth", replace: "mossguard" }).accepted).toBe(
+      false,
+    );
   });
   it("offers three unique unowned boons, commits one once, and applies opening effects only at battle start", () => {
     let s = bossReward();
@@ -158,7 +160,7 @@ describe("keyword progression and rewards", () => {
         s.phase = "boon";
       },
       (s: Record<string, unknown>) => {
-        s.roster = ["mossback", "mossback", "emberfox"];
+        s.roster = ["mossguard", "mossguard", "emberfox"];
       },
     ]) {
       const data = JSON.parse(encodeSave(run()));
@@ -170,21 +172,21 @@ describe("keyword progression and rewards", () => {
 });
 
 it("can end a partially completed draft without breaking save invariants", () => {
-  const draft = accept(createGame(), { type: "draft", species: "mossback" });
+  const draft = accept(createGame(), { type: "draft", species: "mossguard" });
   const ended = accept(draft, { type: "abandon" });
   expect(ended.selected).toEqual([]);
   expect(decodeSave(encodeSave(ended))).toEqual(ended);
 });
 it("awards a team-wide Block play once rather than once per recipient", () => {
   const s = produce(run(), (d) => {
-    const card = d.cards.find((c) => c.definitionId === "mossback-teamGuard")!;
+    const card = d.cards.find((c) => c.definitionId === "stormfin-teamGuard")!;
     d.battle!.hand = [card.id];
     d.battle!.draw = d.cards.filter((c) => c.id !== card.id).map((c) => c.id);
     d.battle!.discard = [];
   });
   const next = accept(s, { type: "play", cardId: s.battle!.hand[0]! });
   expect(next.battleXP.block).toBe(1);
-  expect(next.team.every((c) => c.block === 5)).toBe(true);
+  expect(next.team.every((c) => c.block === 3)).toBe(true);
 });
 
 it("consumes Flashpoint once and does not refresh it on talent reset or resume", () => {

@@ -13,7 +13,7 @@ import "./selection.css";
 type Slot = { row: "active" | "reserve"; index: number };
 function TeamSelection({ hints = false, sample = "" }: { hints?: boolean; sample?: string }) {
   const [roster, setRoster] = useState<Record<Slot["row"], SpeciesId[]>>({
-    active: ["mossback", "emberfox", "stormfin"],
+    active: ["mossguard", "emberfox", "stormfin"],
     reserve: ["silkmoth", "briartooth", "moonhart"],
   });
   const [selected, setSelected] = useState<Slot | null>(sample ? { row: "active", index: 1 } : null);

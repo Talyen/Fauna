@@ -8,7 +8,7 @@ import { TargetPreview } from "../../src/ui/target-preview";
 import { moveFocus } from "../../src/ui/input";
 import { previewCard } from "../../src/game/engine";
 import { produce } from "immer";
-import { run, teamRun } from "./helpers";
+import { teamRun } from "./helpers";
 
 beforeEach(() => {
   vi.stubGlobal(
@@ -27,7 +27,7 @@ afterEach(() => {
   delete document.documentElement.dataset.focus;
 });
 function fixture() {
-  return produce(run(7), (game) => {
+  return produce(teamRun(7, ["stormfin", "emberfox", "silkmoth"]), (game) => {
     game.battle!.hand = game.cards.map((card) => card.id);
     game.battle!.draw = [];
     game.battle!.mana = 4;
@@ -57,7 +57,7 @@ function open(game = fixture(), navigation = false) {
 it("mouse selection waits for hover, clears on leave, switches cards, and cancels without commands", async () => {
   const { container, send, card } = open();
   await userEvent.click(card("attack"));
-  expect(screen.getByText("Mossback · Choose an enemy")).toBeTruthy();
+  expect(screen.getByText("Stormfin · Choose an enemy")).toBeTruthy();
   expect(container.querySelector(".target-preview")).toBeNull();
   expect(container.querySelector(".target-line")).toBeNull();
   expect(container.querySelectorAll(".enemy-row [data-valid-target]")).toHaveLength(3);
@@ -68,7 +68,7 @@ it("mouse selection waits for hover, clears on leave, switches cards, and cancel
   await userEvent.unhover(enemy);
   expect(container.querySelector(".target-preview")).toBeNull();
   await userEvent.click(card("guard"));
-  expect(screen.getByText("Mossback · Choose an ally")).toBeTruthy();
+  expect(screen.getByText("Stormfin · Choose an ally")).toBeTruthy();
   expect(container.querySelectorAll(".player-row [data-valid-target]")).toHaveLength(3);
   expect(container.querySelector(".enemy-row [data-valid-target]")).toBeNull();
   await userEvent.click(card("guard"));
@@ -135,7 +135,7 @@ it("explains unavailable Mana and control while leaving state unchanged", async 
   await userEvent.click(frozen);
   expect(screen.getByText(/cannot act while Frozen/)).toBeTruthy();
   await userEvent.click(container.querySelector<HTMLButtonElement>('.hand [data-card-id^="ally-2:"]')!);
-  expect(screen.getByText("Stormfin cannot act this turn.")).toBeTruthy();
+  expect(screen.getByText("Silkmoth cannot act this turn.")).toBeTruthy();
   expect(send).not.toHaveBeenCalled();
 });
 it("forecasts Block absorption, Health damage and status changes from the authoritative preview without mutating RNG", () => {
@@ -143,13 +143,13 @@ it("forecasts Block absorption, Health damage and status changes from the author
     game.battle!.enemies[0]!.block = 2;
     game.battle!.enemies[0]!.combat.dodge = 0;
   });
-  // Poison has a stack consequence as well as immediate damage.
-  const card = before.cards.find((card) => card.definitionId === "mossback-attack")!;
+  // Stun has a buildup consequence as well as immediate damage.
+  const card = before.cards.find((card) => card.definitionId === "stormfin-attack")!;
   const rng = before.rng;
   const result = previewCard(before, card.id, "enemy-0");
   render(<TargetPreview before={before} result={result} targetId="enemy-0" />);
   expect(screen.getByText(/absorbed/)).toBeTruthy();
-  expect(screen.getByText(/Poison/, { selector: ".rule-keyword" })).toBeTruthy();
+  expect(screen.getByText(/Stun/, { selector: ".rule-keyword" })).toBeTruthy();
   expect(before.rng).toBe(rng);
   expect(before.battle!.enemies[0]!.block).toBe(2);
 });
@@ -162,8 +162,8 @@ it("shows the acting creature's secondary effects separately from the chosen all
   );
   const actor = container.querySelector('[data-actor-id="ally-0"]')!;
   const recipient = container.querySelector('[data-actor-id="ally-1"]')!;
-  expect(actor.querySelector(".target-preview")?.textContent).toContain("Armor 0 → 1");
-  expect(recipient.querySelector(".target-preview")?.textContent).toContain("0 → 9");
+  expect(actor.querySelector(".target-preview")?.textContent).toContain("Dodge 0 → 10");
+  expect(recipient.querySelector(".target-preview")?.textContent).toContain("0 → 6");
   expect(actor.hasAttribute("data-acting")).toBe(true);
   expect(actor.hasAttribute("data-active-target")).toBe(false);
   expect(recipient.hasAttribute("data-active-target")).toBe(true);
@@ -194,10 +194,10 @@ it("moves between battle rows and reaches hand-side controls with directional in
   for (const control of controls) expect(reached.has(control)).toBe(true);
 });
 
-it.each(["emberback-furnace-breath", "emberback-magma-stomp"])(
+it.each(["emberback-furnace-breath", "emberback-magma-stomp", "mossguard-attack"])(
   "previews every enemy for %s and confirms without choosing one target",
   async (id) => {
-    const game = produce(teamRun(1, ["emberback", "mossback", "stormfin"]), (draft) => {
+    const game = produce(teamRun(1, ["emberback", "mossguard", "stormfin"]), (draft) => {
       const chosen = draft.cards.find((card) => card.definitionId === id)!;
       draft.battle!.hand = [chosen.id];
       draft.battle!.buffer = [];
@@ -207,10 +207,12 @@ it.each(["emberback-furnace-breath", "emberback-magma-stomp"])(
     const { container, card, send, controls } = open(game, true);
     const before = structuredClone(game);
     expect(card("attack").querySelector("img")?.getAttribute("src")).toContain(
-      id.replace("emberback-", "") + ".png",
+      (id === "mossguard-attack" ? "rooted-stomp" : id.replace("emberback-", "")) + ".png",
     );
     await userEvent.click(card("attack"));
-    expect(screen.getByText("Emberback · All enemies")).toBeTruthy();
+    expect(
+      screen.getByText(`${id.startsWith("mossguard") ? "Mossguard" : "Emberback"} · All enemies`),
+    ).toBeTruthy();
     expect(container.querySelectorAll(".enemy-row .target-preview")).toHaveLength(3);
     expect(container.querySelectorAll(".enemy-row [data-active-target]")).toHaveLength(3);
     expect(container.querySelector(".target-line")).toBeNull();
@@ -227,3 +229,28 @@ it.each(["emberback-furnace-breath", "emberback-magma-stomp"])(
     expect(send).toHaveBeenCalledExactlyOnceWith({ type: "play", cardId: game.battle!.hand[0]! });
   },
 );
+
+it.each([
+  ["mossguard-guard", "guard", "Self", 1],
+  ["mossguard-heal", "heal", "All allies", 3],
+] as const)("previews and confirms %s without selecting an ally", async (id, effect, recipient, count) => {
+  const game = produce(teamRun(1, ["mossguard", "emberfox", "stormfin"]), (draft) => {
+    const chosen = draft.cards.find((card) => card.definitionId === id)!;
+    draft.battle!.hand = [chosen.id];
+    draft.battle!.buffer = [];
+    draft.battle!.discard = [];
+    draft.battle!.draw = draft.cards.filter((card) => card.id !== chosen.id).map((card) => card.id);
+    draft.team.forEach((ally) => {
+      ally.health -= 3;
+    });
+  });
+  const { container, card, send } = open(game, true);
+  await userEvent.click(card(effect));
+  expect(screen.getByText(`Mossguard · ${recipient}`)).toBeTruthy();
+  expect(container.querySelectorAll(".player-row [data-active-target]")).toHaveLength(count);
+  expect(container.querySelectorAll(".player-row .target-preview")).toHaveLength(count);
+  expect(container.querySelector(".target-line")).toBeNull();
+  expect(send).not.toHaveBeenCalled();
+  await userEvent.keyboard("{Enter}");
+  expect(send).toHaveBeenCalledExactlyOnceWith({ type: "play", cardId: game.battle!.hand[0]! });
+});

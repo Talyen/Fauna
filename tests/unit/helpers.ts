@@ -5,7 +5,7 @@ import { createGame, dispatch } from "../../src/game/engine";
 import { CARDS, definition, species, type SpeciesId } from "../../src/game/content";
 import type { Command, GameState } from "../../src/game/types";
 export function run(seed = 42) {
-  return teamRun(seed, ["mossback", "emberfox", "stormfin"]);
+  return teamRun(seed, ["mossguard", "emberfox", "stormfin"]);
 }
 /** A progressed lineup fixture for multi-creature combat coverage. */
 export function teamRun(seed: number, kinds: SpeciesId[]) {
@@ -108,6 +108,8 @@ export function policy(s: GameState): Command {
   if (teamGuard) return { type: "play", cardId: teamGuard.id };
   const guard = cards.find((c) => definition(c.definitionId).effect === "guard");
   if (guard) {
+    const def = definition(guard.definitionId);
+    if (def.effect === "guard" && def.target === "self") return { type: "play", cardId: guard.id };
     const target = s.team
       .filter((c) => c.health > 0)
       .sort(
@@ -133,7 +135,7 @@ export function bossReward() {
 
 export function feedbackBattle() {
   const battle = accept(
-    produce(teamRun(42, ["mossback", "briartooth", "stormfin"]), (game) => {
+    produce(teamRun(42, ["mossguard", "briartooth", "stormfin"]), (game) => {
       game.phase = "teamSelection";
       game.encounter = 1;
       game.battle = null;

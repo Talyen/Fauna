@@ -18,16 +18,16 @@ import "./mana-crystals.css";
 
 // Deliberately frozen presentation fixtures: no session, commands, persistence or audio.
 const team: Creature[] = [
-  { id: "ally-0", species: "mossback", health: 26, block: 5, attacked: false },
+  { id: "ally-0", species: "mossguard", health: 26, block: 5, attacked: false },
   { id: "ally-1", species: "emberfox", health: 20, block: 0, attacked: false },
   { id: "ally-2", species: "stormfin", health: 18, block: 0, attacked: false },
 ];
 const hand: Card[] = [
-  "mossback-guard",
+  "mossguard-guard",
   "stormfin-attack",
   "emberfox-attack",
   "emberfox-heal",
-  "mossback-teamGuard",
+  "mossguard-teamGuard",
 ].map((id, index) => ({
   id: `sample-${index}`,
   definitionId: id,

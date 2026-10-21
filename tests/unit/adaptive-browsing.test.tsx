@@ -33,7 +33,7 @@ it("reaches every creature after resizing and retains the first visible creature
     <div className="screen-stage">
       <main>
         <PagedItems
-          items={["Mossback", "Emberfox", "Stormfin", "Briartooth", "Silkmoth"]}
+          items={["Mossguard", "Emberfox", "Stormfin", "Briartooth", "Silkmoth"]}
           pageSize={1}
           adaptive={{ columns: 5, rows: 1 }}
           className="gallery"

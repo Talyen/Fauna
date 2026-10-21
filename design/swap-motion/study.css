@@ -24,13 +24,13 @@
 .swap-flight {
   grid-row: 1;
 }
-.swap-flight[data-creature="mossback"] {
+.swap-flight[data-creature="mossguard"] {
   grid-column: 1;
 }
 .swap-flight[data-creature="emberfox"] {
   grid-column: 2;
 }
-[data-swapped="true"] .swap-flight[data-creature="mossback"] {
+[data-swapped="true"] .swap-flight[data-creature="mossguard"] {
   grid-column: 2;
 }
 [data-swapped="true"] .swap-flight[data-creature="emberfox"] {

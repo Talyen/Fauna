@@ -81,8 +81,8 @@ it("collects only accepted recruits, caps stars at five, and retains ranks acros
 
 it.each([0, -1, 7, 1.5, "2", null])("rejects invalid permanent recruitment counts: %s", (count) => {
   const data = JSON.parse(encodeSave(createGame()));
-  data.discovery.encountered = ["mossback"];
-  data.discovery.recruited = { mossback: count };
+  data.discovery.encountered = ["mossguard"];
+  data.discovery.recruited = { mossguard: count };
   expect(() => decodeSave(JSON.stringify(data))).toThrow();
 });
 it("rejects obsolete and unknown collection records", () => {

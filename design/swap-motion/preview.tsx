@@ -12,7 +12,7 @@ import "./study.css";
 
 const options = ["16", "32", "48"] as const;
 const creatures = [
-  { id: "mossback", name: "Mossback" },
+  { id: "mossguard", name: "Mossguard" },
   { id: "emberfox", name: "Emberfox" },
 ] as const;
 const storageKey = "fauna-design-swap-arc-v1";
@@ -170,7 +170,7 @@ function SwapStudy() {
         </section>
       </div>
       <p role="status" className="study-instructions">
-        Left slot: {swapped ? "Emberfox" : "Mossback"}. Right slot: {swapped ? "Mossback" : "Emberfox"}.{" "}
+        Left slot: {swapped ? "Emberfox" : "Mossguard"}. Right slot: {swapped ? "Mossguard" : "Emberfox"}.{" "}
         {selected
           ? "Choose the other creature to swap, or the same creature to cancel."
           : "Select a creature, then the other—or use Swap again."}

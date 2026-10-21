@@ -12,7 +12,7 @@ const identity: CloudIdentity = {
 const other = { ...identity, device: "c".repeat(32) };
 const initial = encodeSave(decodeSave(encodeSave(createGame(7))));
 const progress = encodeSave(
-  decodeSave(encodeSave(dispatch(createGame(7), { type: "draft", species: "mossback" }).state)),
+  decodeSave(encodeSave(dispatch(createGame(7), { type: "draft", species: "mossguard" }).state)),
 );
 function fixture() {
   const files = new Map<string, string>(),

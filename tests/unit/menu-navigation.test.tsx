@@ -207,12 +207,12 @@ it.each(["Back", "Escape", "Open menu"])(
       const before = session.store.getState().game;
       await user.click(screen.getByRole("button", { name: "Open menu" }));
       await user.click(screen.getByRole("button", { name: "Collection" }));
-      await user.click(screen.getByRole("button", { name: "Inspect Mossback" }));
-      expect(screen.getByRole("region", { name: "Bramble Bash" })).toBeTruthy();
+      await user.click(screen.getByRole("button", { name: "Inspect Mossguard" }));
+      expect(screen.getByRole("region", { name: "Rooted Stomp" })).toBeTruthy();
       if (back === "Escape") await user.keyboard("{Escape}");
       else await user.click(screen.getByRole("button", { name: back }));
       if (back !== "Open menu") {
-        expect(document.activeElement).toBe(screen.getByRole("button", { name: "Inspect Mossback" }));
+        expect(document.activeElement).toBe(screen.getByRole("button", { name: "Inspect Mossguard" }));
         await user.keyboard("{Escape}");
       }
       await waitFor(() =>

@@ -73,11 +73,11 @@ it("keeps the incoming recruit inspectable while browsing replacements, and canc
 });
 
 it("makes Deck available in drafting, rewards and Merchant without committing inspection", async () => {
-  const started = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
+  const started = accept(accept(createGame(7), { type: "draft", species: "mossguard" }), { type: "start" });
   const reward = winBattle(accept(started, { type: "beginBattle" }));
   const destination = accept(reward, recruitChoice(reward));
   const merchant = accept(destination, { type: "enterSupport", visit: destination.support!.id });
-  for (const game of [accept(createGame(7), { type: "draft", species: "mossback" }), reward, merchant]) {
+  for (const game of [accept(createGame(7), { type: "draft", species: "mossguard" }), reward, merchant]) {
     localStorage.setItem("fauna.save.v1", JSON.stringify(game));
     const session = createSession(createBrowserPlatform(localStorage));
     await session.load();
@@ -106,7 +106,7 @@ it("makes Deck available in drafting, rewards and Merchant without committing in
 });
 
 it("shows committed rest recovery while leaving the next encounter immediately playable", async () => {
-  const started = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
+  const started = accept(accept(createGame(7), { type: "draft", species: "mossguard" }), { type: "start" });
   const injured = produce(started, (draft) => {
     draft.team[0]!.health = 10;
   });
@@ -124,7 +124,7 @@ it("shows committed rest recovery while leaving the next encounter immediately p
     const recovery = screen.getByRole("status", { name: "Rest recovery" });
     expect(recovery.textContent).toContain("10 → 20 Health · +10");
     expect(
-      within(recovery).getByRole("progressbar", { name: "Mossback Health" }).getAttribute("aria-valuenow"),
+      within(recovery).getByRole("progressbar", { name: "Mossguard Health" }).getAttribute("aria-valuenow"),
     ).toBe("20");
     expect(rested.rng).toBe(injured.rng);
     await user.click(screen.getByRole("button", { name: "Combat" }));

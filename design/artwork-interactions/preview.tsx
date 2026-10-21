@@ -123,7 +123,7 @@ function Sample({
 }) {
   const [selected, setSelected] = useState(selectedInitially);
   const unavailable = Boolean(settings.unavailable || settings.knockout);
-  const name = aspect === "creature" ? "Mossback" : "Mossback action";
+  const name = aspect === "creature" ? "Mossguard" : "Mossguard action";
   return (
     <div
       className="art-sample"
@@ -140,7 +140,7 @@ function Sample({
         <Tooltip>
           <TooltipTrigger asChild reopenOnPointerMove={false}>
             <ArtCard
-              artwork={assetUrl(`${aspect}.mossback`)}
+              artwork={assetUrl(`${aspect}.mossguard`)}
               aspect={aspect}
               className="review-art"
               aria-label={`${label}: ${name}`}

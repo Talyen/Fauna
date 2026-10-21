@@ -10,7 +10,7 @@ import { battleChoices } from "../../src/application/battle-policy";
 import { accept, teamRun, winBattle } from "./helpers";
 
 function ready(definitionId: string) {
-  return produce(teamRun(1, ["emberback", "mossback", "stormfin"]), (game) => {
+  return produce(teamRun(1, ["emberback", "mossguard", "stormfin"]), (game) => {
     game.rng = 1;
     const card = game.cards.find((card) => card.definitionId === definitionId)!;
     game.battle!.hand = [card.id];
@@ -43,7 +43,7 @@ it("charges one target, grants the acting creature Armor, and preserves the resu
   );
   expect(result.state.battle!.mana).toBe(game.battle!.mana - 1);
   expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
-  expect(cardText(definition("emberback-attack"))).toBe("Deal 4 Physical damage. Gain 2 Armor.");
+  expect(cardText(definition("emberback-attack"))).toBe("Deal 4 Physical damage; Gain 2 Armor");
   const rejected = dispatch(game, { type: "play", cardId: game.battle!.hand[0]! });
   expect(rejected.accepted).toBe(false);
   expect(rejected.state).toBe(game);
@@ -78,7 +78,7 @@ it.each([
     expect(result.state.battle!.cardsPlayedThisTurn).toBe(1);
     expect(result.state.battleXP[status]).toBe(1);
     expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
-    expect(cardText(definition(id))).toBe(`Deal 2 ${label} damage to all enemies.`);
+    expect(cardText(definition(id))).toBe(`Deal 2 ${label} damage to all enemies`);
     expect(battleChoices(game, false)[0]).toEqual({
       type: "play",
       cardId,
@@ -149,12 +149,12 @@ it("keeps every authored ability at one Mana and validates the catalog", () => {
 
 it("uses an enemy area ability against deployed allies while leaving reserves untouched", () => {
   let game = accept(
-    produce(teamRun(1, ["mossback", "emberfox", "stormfin"]), (draft) => {
+    produce(teamRun(1, ["mossguard", "emberfox", "stormfin"]), (draft) => {
       draft.phase = "teamSelection";
       draft.battle = null;
       draft.encounter = 2;
       draft.expedition = { pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "emberback") };
-      draft.roster.push("mossback");
+      draft.roster.push("mossguard");
       draft.reserves.push({ ...draft.team[0]!, id: "reserve", combat: freshCombat() });
     }),
     { type: "beginBattle" },

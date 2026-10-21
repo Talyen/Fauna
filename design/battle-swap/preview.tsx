@@ -23,13 +23,13 @@ import "./swap.css";
 // Presentation sandbox only. No persistence, production swap command, or progression changes.
 function fixture(): GameState {
   let game = createGame(71);
-  for (const kind of ["mossback", "emberfox", "stormfin"] as const)
+  for (const kind of ["mossguard", "emberfox", "stormfin"] as const)
     game = dispatch(game, { type: "draft", species: kind }).state;
   game = dispatch(game, { type: "start" }).state;
   game = dispatch({ ...game, encounter: 1 }, { type: "beginBattle" }).state;
   return {
     ...game,
-    roster: ["mossback", "emberfox", "stormfin", "silkmoth", "briartooth"],
+    roster: ["mossguard", "emberfox", "stormfin", "silkmoth", "briartooth"],
     team: game.team.map((creature, index) => ({
       ...creature,
       health: index === 1 && new URLSearchParams(location.search).has("ko") ? 0 : [26, 12, 19][index]!,

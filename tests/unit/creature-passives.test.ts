@@ -4,17 +4,18 @@ import * as content from "../../src/game/content";
 import { creaturePassive } from "../../src/game/progression";
 import { actionValue, enemyAbilityValue } from "../../src/game/rules";
 import { createGame } from "../../src/game/engine";
-import { accept, run } from "./helpers";
+import { accept, teamRun } from "./helpers";
 
 afterEach(() => vi.restoreAllMocks());
 
-it("keeps base passives at every currently undefined star tier", () => {
+it("resolves authored tiers and falls back for undefined star tiers", () => {
   for (const kind of content.SPECIES) {
     for (let copies = 0; copies <= 6; copies++) {
       const game = produce(createGame(), (draft) => {
         if (copies) draft.discovery.recruited[kind.id] = copies;
       });
-      expect(creaturePassive(game, kind.id)).toEqual({ rank: 0, ...kind.passiveTiers[0] });
+      const rank = kind.id === "mossguard" ? Math.max(0, copies - 1) : 0;
+      expect(creaturePassive(game, kind.id)).toEqual({ rank, ...kind.passiveTiers[rank]! });
     }
   }
 });
@@ -23,7 +24,7 @@ it("resolves the highest authored tier for card rules and battle start without s
   const base = content.species;
   vi.spyOn(content, "species").mockImplementation((kind) => {
     const original = base(kind);
-    if (kind !== "mossback") return original;
+    if (kind !== "stormfin") return original;
     return {
       ...original,
       passiveTiers: [
@@ -43,21 +44,21 @@ it("resolves the highest authored tier for card rules and battle start without s
       ],
     };
   });
-  const guard = { id: "test", definitionId: "mossback-guard", ownerId: "ally-0", level: 0 };
+  const guard = { id: "test", definitionId: "stormfin-guard", ownerId: "ally-0", level: 0 };
   for (const copies of [1, 2, 3, 4, 6]) {
-    const game = produce(run(), (draft) => {
-      draft.discovery.recruited.mossback = copies;
+    const game = produce(teamRun(42, ["stormfin", "emberfox", "silkmoth"]), (draft) => {
+      draft.discovery.recruited.stormfin = copies;
       draft.phase = "teamSelection";
       draft.battle = null;
     });
     const upgraded = copies >= 3;
-    expect(creaturePassive(game, "mossback").rank).toBe(upgraded ? 2 : 0);
-    expect(actionValue(guard, game.team[0]!, game)).toBe(upgraded ? 14 : 9);
+    expect(creaturePassive(game, "stormfin").rank).toBe(upgraded ? 2 : 0);
+    expect(actionValue(guard, game.team[0]!, game)).toBe(upgraded ? 13 : 6);
     const battle = accept(game, { type: "beginBattle" });
     expect(battle.team[0]!.block).toBe(upgraded ? 3 : 0);
     expect(battle.team[0]!.combat!.thorns).toBe(upgraded ? 4 : 0);
     expect(
-      enemyAbilityValue({ species: "mossback", damage: 8 }, content.definition(guard.definitionId)),
-    ).toBe(6);
+      enemyAbilityValue({ species: "stormfin", damage: 8 }, content.definition(guard.definitionId)),
+    ).toBe(4);
   }
 });

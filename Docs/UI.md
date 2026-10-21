@@ -136,6 +136,8 @@ Required rendered coverage includes every screen and dialog at 1280×720, 1280×
 
 Browser controller simulation does not verify physical controller behavior. Report macOS desktop, Windows packaging, physical controller, Steam client and Steam Deck verification separately.
 
+Effect descriptions omit periods throughout abilities, passive tiers, talents, Boons and keyword/glossary rules. Separate multiple clauses with semicolons.
+
 ## Battle interaction decisions
 
 - Enemy details open below their artwork and readout; ally and hand details open above. Radix collision handling may shift/flip to remain on-screen. Selecting an action closes its tooltip while targeting; hovering/focusing the card again restores its rules. While targeting, creature hover/focus prioritizes forecasts; full creature abilities are available in Collection through Pause.

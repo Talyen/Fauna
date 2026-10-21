@@ -65,7 +65,7 @@ describe("recruiting creature copies", () => {
   it("releases only the chosen copy at five and updates its lineup entry", () => {
     let s = accept(winBattle(), { type: "recruit", species: "emberfox" });
     s = accept(s, { type: "beginBattle" });
-    s = accept(winBattle(s), { type: "recruit", species: "mossback" });
+    s = accept(winBattle(s), { type: "recruit", species: "mossguard" });
     const copies = s.reserves.map((c) => c.id);
     s = accept(s, { type: "beginBattle" });
     // Replay an ordinary combat for the replacement decision.
@@ -84,7 +84,7 @@ describe("recruiting creature copies", () => {
     expect(s.discovery.recruited.emberfox).toBe(2);
     s = accept(s, { type: "recruit", species: "emberfox", replace: "ally-1" });
     expect(s.discovery.recruited.emberfox).toBe(3);
-    expect(s.discovery.recruited.mossback).toBe(2);
+    expect(s.discovery.recruited.mossguard).toBe(2);
     const all = [...s.team, ...s.reserves];
     expect(all.some((c) => c.id === "ally-1")).toBe(false);
     expect(copies.every((id) => all.some((c) => c.id === id))).toBe(true);

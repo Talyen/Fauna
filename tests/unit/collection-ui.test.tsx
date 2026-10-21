@@ -27,7 +27,7 @@ it("shows the current collection on one page, resets filters and preserves focus
   const game = produce(createGame(), (draft) => {
     draft.discovery.encountered = SPECIES.map((entry) => entry.id);
     draft.discovery.recruited = Object.fromEntries(SPECIES.map((entry) => [entry.id, 1]));
-    draft.discovery.recruited.mossback = 3;
+    draft.discovery.recruited.mossguard = 3;
   });
   const before = structuredClone(game);
   render(
@@ -36,7 +36,7 @@ it("shows the current collection on one page, resets filters and preserves focus
     </TooltipProvider>,
   );
   const user = userEvent.setup();
-  expect(screen.getByRole("img", { name: "Mossback: 2 of 5 stars" })).toBeTruthy();
+  expect(screen.getByRole("img", { name: "Mossguard: 2 of 5 stars" })).toBeTruthy();
   expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(SPECIES.length);
   const lastCard = screen.getAllByRole("button", { name: /^Inspect / }).at(-1)!;
   lastCard.focus();
@@ -77,8 +77,8 @@ it("keeps encountered and victory-unlocked creatures out of the collected filter
     },
   );
   const game = produce(createGame(), (draft) => {
-    draft.discovery.encountered = ["mossback", "moonhart"];
-    draft.discovery.recruited = { mossback: 1 };
+    draft.discovery.encountered = ["mossguard", "moonhart"];
+    draft.discovery.recruited = { mossguard: 1 };
     draft.unlocked.push("moonhart");
     draft.wins = 1;
   });
@@ -90,7 +90,7 @@ it("keeps encountered and victory-unlocked creatures out of the collected filter
   const user = userEvent.setup();
   await user.click(screen.getByRole("tab", { name: "Collected" }));
   expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(1);
-  expect(screen.getByRole("button", { name: "Inspect Mossback" })).toBeTruthy();
+  expect(screen.getByRole("button", { name: "Inspect Mossguard" })).toBeTruthy();
   expect(screen.queryByRole("button", { name: "Inspect Moonhart" })).toBeNull();
 });
 

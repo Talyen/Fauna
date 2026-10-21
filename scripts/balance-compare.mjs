@@ -107,7 +107,7 @@ export async function main(args = process.argv.slice(2)) {
   if (mode === "run") {
     if (options["--checkpoint"] || options["--loadouts"])
       throw new Error("Use experiment for checkpoint loadouts.");
-    const starters = (options["--starters"] ?? "mossback,emberfox,stormfin,silkmoth,briartooth").split(",");
+    const starters = (options["--starters"] ?? "mossguard,emberfox,stormfin,silkmoth,briartooth").split(",");
     const seeds = (options["--seeds"] ?? "0,1,2,3,4,5,6,7,8,9").split(",").map(Number);
     if (
       new Set(starters).size !== starters.length ||

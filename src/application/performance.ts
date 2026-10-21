@@ -7,7 +7,7 @@ import type { Command, GameState } from "../game/types";
 
 export function performanceCases(seed = 42) {
   const fixture = structuredClone(createGame(seed));
-  const kinds: SpeciesId[] = ["mossback", "emberfox", "stormfin", "silkmoth"];
+  const kinds: SpeciesId[] = ["mossguard", "emberfox", "stormfin", "silkmoth"];
   fixture.roster = kinds;
   fixture.selected = kinds.slice(0, 3);
   fixture.starterOffers = [];
@@ -91,7 +91,7 @@ export function performanceCases(seed = 42) {
       fixture: "explicit-three-deployed-one-reserve-v1",
       actions: [
         { kind: "click", name: "Collection", checkpoint: initial },
-        { kind: "click", name: "Inspect Mossback", checkpoint: initial },
+        { kind: "click", name: "Inspect Mossguard", checkpoint: initial },
         { kind: "click", name: "Back", checkpoint: initial },
         { kind: "click", name: "Open menu", checkpoint: initial },
         { kind: "click", name: "Settings", checkpoint: initial },
@@ -108,7 +108,7 @@ export async function reachablePerformanceCases(seed = 42) {
     {
       seed,
       runs: 3,
-      starter: "mossback",
+      starter: "mossguard",
       policy: "heuristic",
       maxActions: 5000,
       maxTurns: 100,

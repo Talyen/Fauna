@@ -277,28 +277,6 @@
       "rights": "Existing Fauna asset provenance in Docs/CONTENT.md"
     },
     {
-      "id": "action.mossback",
-      "origin": "repository",
-      "source": "public/art/mossback-action.svg",
-      "output": "art/mossback-action.svg",
-      "recipe": "copy",
-      "kind": "art",
-      "aspect": [3, 4],
-      "provenance": "Fauna existing artwork; keyword artwork adapted from Alchemy",
-      "rights": "Existing Fauna asset provenance in Docs/CONTENT.md"
-    },
-    {
-      "id": "creature.mossback",
-      "origin": "repository",
-      "source": "public/art/mossback.svg",
-      "output": "art/mossback.svg",
-      "recipe": "copy",
-      "kind": "art",
-      "aspect": [4, 3],
-      "provenance": "Fauna existing artwork; keyword artwork adapted from Alchemy",
-      "rights": "Existing Fauna asset provenance in Docs/CONTENT.md"
-    },
-    {
       "id": "action.silkmoth",
       "origin": "repository",
       "source": "public/art/silkmoth-action.svg",
@@ -943,6 +921,50 @@
       "kind": "art",
       "aspect": [3, 4],
       "provenance": "Emberback artwork copied unchanged from Google Drive https://drive.google.com/file/d/1yiI6bieumAk1Q_Pb4o_8cMUzbV9JhJTD/view",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "creature.mossguard",
+      "origin": "repository",
+      "source": "public/art/mossguard/portrait.png",
+      "output": "art/mossguard/portrait.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Mossguard artwork copied unchanged from Google Drive https://drive.google.com/file/d/1yudVVfn2haUOgQYpfHc9Pv6zskw_xVDh/view",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "action.mossguard.boulder-brace",
+      "origin": "repository",
+      "source": "public/art/mossguard/boulder-brace.png",
+      "output": "art/mossguard/boulder-brace.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Mossguard artwork copied unchanged from Google Drive https://drive.google.com/file/d/1M8LaDQU2JMpq9LHGdhkRpl4nXIWx7H2k/view",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "action.mossguard.rooted-stomp",
+      "origin": "repository",
+      "source": "public/art/mossguard/rooted-stomp.png",
+      "output": "art/mossguard/rooted-stomp.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Mossguard artwork copied unchanged from Google Drive https://drive.google.com/file/d/13fQBwSnclUQS--pFZcrVstIeZxbavxYv/view",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "action.mossguard.moss-renewal",
+      "origin": "repository",
+      "source": "public/art/mossguard/moss-renewal.png",
+      "output": "art/mossguard/moss-renewal.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Mossguard artwork copied unchanged from Google Drive https://drive.google.com/file/d/1aSkLrsG_hiFJcZxMoCIvhpoxYpI02vM2/view",
       "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
     }
   ]

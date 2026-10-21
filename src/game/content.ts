@@ -1,9 +1,10 @@
 import { DAMAGE_TYPES, keywordLabel, type DamageType, EFFECT_KEYWORDS } from "./keywords";
 export { type DamageType } from "./keywords";
 export type SpeciesId =
-  "mossback" | "emberfox" | "stormfin" | "silkmoth" | "briartooth" | "moonhart" | "emberback";
+  "mossguard" | "emberfox" | "stormfin" | "silkmoth" | "briartooth" | "moonhart" | "emberback";
 type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
+  | { kind: "blockRetention"; amount: number }
   | { kind: "cardBonus"; trigger: "firstAttack" | "stunAttack" | "heal" | "guard"; amount: number }
   | { kind: "battleStart"; effect: "block" | "thorns" | "armor"; amount: number };
 export interface PassiveTier {
@@ -47,26 +48,43 @@ interface CardBase {
 export type CardDefinition = CardBase &
   (
     | { effect: "attack"; damageType: DamageType; target?: "allEnemies" }
-    | { effect: Exclude<Effect, "attack"> }
+    | { effect: "guard"; target?: "self" }
+    | { effect: "heal"; target?: "allAllies" }
+    | { effect: Exclude<Effect, "attack" | "guard" | "heal"> }
   );
 export const SPECIES: readonly Species[] = [
   {
-    id: "mossback",
-    name: "Mossback",
+    id: "mossguard",
+    name: "Mossguard",
     title: "The gentle guardian",
     health: 32,
     color: "#9ead70",
-    trait: "Rooted",
+    trait: "Overgrowth",
     passiveTiers: [
       {
-        description: "Guard cards grant 2 extra block.",
-        effects: [{ kind: "cardBonus", trigger: "guard", amount: 2 }],
+        description: "Retain 10% more Block between turns",
+        effects: [{ kind: "blockRetention", amount: 10 }],
       },
-      null,
-      null,
-      null,
-      null,
-      null,
+      {
+        description: "Retain 20% more Block between turns",
+        effects: [{ kind: "blockRetention", amount: 20 }],
+      },
+      {
+        description: "Retain 30% more Block between turns",
+        effects: [{ kind: "blockRetention", amount: 30 }],
+      },
+      {
+        description: "Retain 40% more Block between turns",
+        effects: [{ kind: "blockRetention", amount: 40 }],
+      },
+      {
+        description: "Retain 50% more Block between turns",
+        effects: [{ kind: "blockRetention", amount: 50 }],
+      },
+      {
+        description: "Retain 60% more Block between turns",
+        effects: [{ kind: "blockRetention", amount: 60 }],
+      },
     ],
   },
   {
@@ -78,7 +96,7 @@ export const SPECIES: readonly Species[] = [
     trait: "Kindling",
     passiveTiers: [
       {
-        description: "First attack each turn deals 2 extra damage.",
+        description: "First attack each turn deals 2 extra damage",
         effects: [{ kind: "cardBonus", trigger: "firstAttack", amount: 2 }],
       },
       null,
@@ -97,7 +115,7 @@ export const SPECIES: readonly Species[] = [
     trait: "Charged",
     passiveTiers: [
       {
-        description: "Stun attacks deal 1 extra damage.",
+        description: "Stun attacks deal 1 extra damage",
         effects: [{ kind: "cardBonus", trigger: "stunAttack", amount: 1 }],
       },
       null,
@@ -116,7 +134,7 @@ export const SPECIES: readonly Species[] = [
     trait: "Tender",
     passiveTiers: [
       {
-        description: "Health cards restore 2 extra Health.",
+        description: "Health cards restore 2 extra Health",
         effects: [{ kind: "cardBonus", trigger: "heal", amount: 2 }],
       },
       null,
@@ -136,7 +154,7 @@ export const SPECIES: readonly Species[] = [
     passiveTiers: [
       {
         description:
-          "Start each battle with 2 Thorns. When an attack removes Health, retaliate with current Thorns, then lose 1 stack.",
+          "Start each battle with 2 Thorns; When an attack removes Health, retaliate with current Thorns, then lose 1 stack",
         effects: [{ kind: "battleStart", effect: "thorns", amount: 2 }],
       },
       null,
@@ -155,7 +173,7 @@ export const SPECIES: readonly Species[] = [
     trait: "Moonlit",
     passiveTiers: [
       {
-        description: "Start each battle with 4 block.",
+        description: "Start each battle with 4 block",
         effects: [{ kind: "battleStart", effect: "block", amount: 4 }],
       },
       null,
@@ -174,7 +192,7 @@ export const SPECIES: readonly Species[] = [
     trait: "Banked Furnace",
     passiveTiers: [
       {
-        description: "Start each battle with 2 Armor.",
+        description: "Start each battle with 2 Armor",
         effects: [{ kind: "battleStart", effect: "armor", amount: 2 }],
       },
       null,
@@ -185,12 +203,12 @@ export const SPECIES: readonly Species[] = [
     ],
   },
 ];
-const card = (
+const card = <T extends Exclude<Effect, "attack">>(
   species: SpeciesId,
   name: string,
-  effect: Exclude<Effect, "attack">,
+  effect: T,
   value: number,
-): CardDefinition => ({
+): CardBase & { effect: T } => ({
   id: `${species}-${effect}`,
   species,
   name,
@@ -198,7 +216,12 @@ const card = (
   value,
   cost: 1,
 });
-const attack = (species: SpeciesId, name: string, value: number, damageType: DamageType): CardDefinition => ({
+const attack = (
+  species: SpeciesId,
+  name: string,
+  value: number,
+  damageType: DamageType,
+): Extract<CardDefinition, { effect: "attack" }> => ({
   id: `${species}-attack`,
   species,
   name,
@@ -209,11 +232,20 @@ const attack = (species: SpeciesId, name: string, value: number, damageType: Dam
 });
 export const CARDS: readonly CardDefinition[] = [
   {
-    ...attack("mossback", "Bramble Bash", 6, "nature"),
-    effects: [{ kind: "damage", damageType: "poison", amount: 2 }],
+    ...card("mossguard", "Boulder Brace", "guard", 6),
+    target: "self",
+    artwork: "action.mossguard.boulder-brace",
   },
-  { ...card("mossback", "Shelter", "guard", 7), effects: [{ kind: "status", status: "armor", amount: 1 }] },
-  card("mossback", "Forest Mantle", "teamGuard", 3),
+  {
+    ...attack("mossguard", "Rooted Stomp", 2, "stun"),
+    target: "allEnemies",
+    artwork: "action.mossguard.rooted-stomp",
+  },
+  {
+    ...card("mossguard", "Moss Renewal", "heal", 2),
+    target: "allAllies",
+    artwork: "action.mossguard.moss-renewal",
+  },
   {
     ...attack("emberfox", "Cinder Strike", 8, "burn"),
     effects: [{ kind: "damage", damageType: "burn", amount: 2 }],
@@ -276,7 +308,7 @@ export function enemyCard(card: CardDefinition): CardDefinition {
   };
 }
 export const FIRST_RUN_STARTERS: readonly SpeciesId[] = [
-  "mossback",
+  "mossguard",
   "emberfox",
   "stormfin",
   "silkmoth",
@@ -297,32 +329,32 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
   let text: string;
   switch (card.effect) {
     case "attack":
-      text = `Deal ${value} ${DAMAGE_LABELS[card.damageType]} damage${card.target === "allEnemies" ? " to all enemies" : ""}.`;
+      text = `Deal ${value} ${DAMAGE_LABELS[card.damageType]} damage${card.target === "allEnemies" ? " to all enemies" : ""}`;
       break;
     case "guard":
-      text = `Give an ally ${value} Block.`;
+      text = card.target === "self" ? `Gain ${value} Block` : `Give an ally ${value} Block`;
       break;
     case "heal":
-      text = `Restore ${value} Health to a living ally.`;
+      text = `Restore ${value} Health to ${card.target === "allAllies" ? "all allies" : "a living ally"}`;
       break;
     case "teamGuard":
-      text = `Give every living ally ${value} Block.`;
+      text = `Give every living ally ${value} Block`;
       break;
   }
   for (const effect of card.effects ?? []) {
     text +=
-      " " +
+      "; " +
       (effect.kind === "damage"
-        ? `Deal ${effect.amount} ${DAMAGE_LABELS[effect.damageType]} damage${effect.leech ? " with Leech" : ""}.`
+        ? `Deal ${effect.amount} ${DAMAGE_LABELS[effect.damageType]} damage${effect.leech ? " with Leech" : ""}`
         : effect.kind === "status"
-          ? `Gain ${effect.amount} ${keywordLabel(effect.status)}.`
+          ? `Gain ${effect.amount} ${keywordLabel(effect.status)}`
           : effect.kind === "draw"
-            ? `Draw ${effect.amount}.`
+            ? `Draw ${effect.amount}`
             : effect.kind === "mana"
-              ? `Restore ${effect.amount} Mana.`
-              : `${effect.kind === "cleanse" ? "Cleanse acting creature" : "Purge target"}: remove ${effect.amount} effect${effect.amount === 1 ? "" : "s"}.`);
+              ? `Restore ${effect.amount} Mana`
+              : `${effect.kind === "cleanse" ? "Cleanse acting creature" : "Purge target"}: remove ${effect.amount} effect${effect.amount === 1 ? "" : "s"}`);
   }
-  if (card.leech) text += " Leech.";
+  if (card.leech) text += "; Leech";
   return text;
 }
 /** Stable legacy route; new expeditions use the saved packs in encounters.ts. */
@@ -346,7 +378,7 @@ export const ENCOUNTERS = [
         damage: 5,
       },
       { damageType: "light", name: "Dusk Moth", species: "silkmoth" as const, health: 22, damage: 5 },
-      { damageType: "nature", name: "Moss Imp", species: "mossback" as const, health: 18, damage: 4 },
+      { damageType: "nature", name: "Moss Imp", species: "mossguard" as const, health: 18, damage: 4 },
     ],
   },
   {

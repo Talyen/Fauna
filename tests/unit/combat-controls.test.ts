@@ -6,7 +6,7 @@ import { chooseBattleCommand } from "../../src/application/battle-policy";
 import { createSession } from "../../src/application/session";
 import { observeUnlocks } from "../../src/ui/unlock-reveals";
 import { scheduleAutoplay } from "../../src/ui/autoplay";
-import { accept, run, victoryReady, bossReward } from "./helpers";
+import { accept, run, victoryReady, bossReward, teamRun } from "./helpers";
 
 describe("combat controls", () => {
   it("manual turn keeps zero Mana while preview never settles and victory still settles", () => {
@@ -87,9 +87,9 @@ describe("combat controls", () => {
     expect(dispatch(state, chooseBattleCommand(state)).accepted).toBe(true);
   });
   it("scores elemental finishers using visible bonuses without applying Physical armor to Fire", () => {
-    const state = produce(run(), (d) => {
+    const state = produce(teamRun(42, ["briartooth", "emberfox", "stormfin"]), (d) => {
       const fire = d.cards.find((card) => card.definitionId === "emberfox-attack")!;
-      const other = d.cards.find((card) => card.definitionId === "mossback-attack")!;
+      const other = d.cards.find((card) => card.definitionId === "briartooth-attack")!;
       d.battle!.hand = [other.id, fire.id];
       d.battle!.enemies.forEach((enemy, index) => {
         enemy.health = index === 0 ? 9 : index === 1 ? 1 : 1000;

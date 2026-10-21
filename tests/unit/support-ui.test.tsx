@@ -10,7 +10,7 @@ import { TooltipProvider } from "../../src/components/ui/tooltip";
 const render = (ui: ReactElement) => renderUI(ui, { wrapper: TooltipProvider });
 afterEach(cleanup);
 function merchant() {
-  let s = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
+  let s = accept(accept(createGame(7), { type: "draft", species: "mossguard" }), { type: "start" });
   s = winBattle(accept(s, { type: "beginBattle" }));
   return accept(s, recruitChoice(s));
 }

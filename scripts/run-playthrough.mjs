@@ -82,7 +82,7 @@ if (!args.includes("--worker")) {
       config.runs < 1 ||
       config.runs > 20 ||
       !["heuristic", "random"].includes(config.policy) ||
-      !["mossback", "emberfox", "stormfin", "silkmoth", "briartooth", "moonhart"].includes(config.starter)
+      !["mossguard", "emberfox", "stormfin", "silkmoth", "briartooth", "moonhart"].includes(config.starter)
     )
       throw new Error("Invalid scenario configuration.");
     const output = path.resolve(root, value("--out", "reports/playthrough"));
