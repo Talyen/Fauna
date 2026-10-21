@@ -54,6 +54,17 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
       )
         error(entry.id, "passiveTiers", "Authored passive tiers need rules and supported effect amounts.");
     }
+    for (const tier of entry.passiveTiers)
+      for (const effect of tier?.effects ?? []) {
+        if (
+          effect.kind === "bounce" &&
+          (effect.amount > 2 ||
+            !["light", "heal"].includes(effect.effect) ||
+            (effect.chance !== undefined &&
+              (!Number.isFinite(effect.chance) || effect.chance <= 0 || effect.chance > 1)))
+        )
+          error(entry.id, "passiveTiers", "Invalid bounce count, effect or chance.");
+      }
     if (catalog.cards.filter((card) => card.species === entry.id).length !== 3)
       error(entry.id, "cards", "Species must contribute exactly three cards.");
   }

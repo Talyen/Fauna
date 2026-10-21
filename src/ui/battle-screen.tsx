@@ -94,10 +94,14 @@ export function BattleScreen({
   const card = game.cards.find((c) => c.id === selected),
     def = card ? definition(card.definitionId) : null;
   const allEnemies = def?.effect === "attack" && def.target === "allEnemies";
+  const automaticTarget =
+    (def?.effect === "attack" && def.target === "randomEnemy") ||
+    (def?.effect === "heal" && def.target === "mostInjured");
   const allAllies = def?.effect === "teamGuard" || (def?.effect === "heal" && def.target === "allAllies");
   const selfTarget = def?.effect === "guard" && def.target === "self";
-  const enemyTarget = def?.effect === "attack" && !allEnemies,
-    allyTarget = (def?.effect === "heal" || def?.effect === "guard") && !allAllies && !selfTarget;
+  const enemyTarget = def?.effect === "attack" && !def.target,
+    allyTarget =
+      (def?.effect === "heal" || def?.effect === "guard") && !allAllies && !selfTarget && !automaticTarget;
   const targets = enemyTarget
     ? battle.enemies.filter((e) => e.health > 0).map((e) => e.id)
     : allyTarget
@@ -111,7 +115,7 @@ export function BattleScreen({
     const side = enemyTarget ? "enemy" : "ally";
     setRemembered((old) => (old[side] === id ? old : { ...old, [side]: id }));
   };
-  const groupTarget = allAllies || allEnemies || selfTarget;
+  const groupTarget = allAllies || allEnemies || selfTarget || automaticTarget;
   const preview = useMemo(
     () => (selected && (target || groupTarget) ? previewPlay(game, selected, target) : null),
     [game, selected, target, groupTarget],
@@ -337,13 +341,17 @@ export function BattleScreen({
                 {recipient ??
                   (allEnemies
                     ? "All enemies"
-                    : allAllies
-                      ? "All allies"
-                      : selfTarget
-                        ? "Self"
-                        : enemyTarget
-                          ? "Choose an enemy"
-                          : "Choose an ally")}
+                    : automaticTarget
+                      ? def.effect === "attack"
+                        ? "Random enemy"
+                        : "Most injured ally"
+                      : allAllies
+                        ? "All allies"
+                        : selfTarget
+                          ? "Self"
+                          : enemyTarget
+                            ? "Choose an enemy"
+                            : "Choose an ally")}
               </p>
               <ActionDetails
                 compact

@@ -24,6 +24,7 @@ import {
   grantBlock,
   hit,
   restoreHealth,
+  mostInjured,
   removeEffects,
   roll,
   startAction,
@@ -388,12 +389,16 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
       if (enemy.health <= 0) continue;
       enemy.block = retainedBlock(enemy);
       if (!startAction(enemy, events, draft)) continue;
-      const target = living(draft).find((c) => c.id === enemy.targetId) ?? living(draft)[0];
+      let target = living(draft).find((c) => c.id === enemy.targetId) ?? living(draft)[0];
       if (!target) break;
       const abilities = CARDS.filter(
         (card) => card.species === enemy.species && card.id !== enemy.lastAbility,
       );
       const def = enemyCard(abilities[Math.floor(random(draft) * abilities.length)]!);
+      if (def.effect === "attack" && def.target === "randomEnemy") {
+        const allies = living(draft);
+        target = allies[Math.floor(random(draft) * allies.length)]!;
+      }
       const value = enemyAbilityValue(enemy, def);
       enemy.lastAbility = def.id;
       events.push({
@@ -410,13 +415,11 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
           hit(draft, enemy, recipient, value, def.damageType, events, { leech: def.leech });
         }
       } else if (def.effect === "heal") {
-        const injured = battle.enemies
-          .filter((e) => e.health > 0)
-          .sort((a, b) => a.health / a.maxHealth - b.health / b.maxHealth)[0]!;
+        const injured = mostInjured(battle.enemies)!;
         for (const recipient of def.target === "allAllies"
           ? battle.enemies.filter((e) => e.health > 0)
           : [injured])
-          restoreHealth(recipient, value, events, false, draft);
+          restoreHealth(recipient, value, events, false, draft, false, enemy);
       } else {
         for (const unit of def.effect === "teamGuard"
           ? battle.enemies.filter((e) => e.health > 0)
@@ -498,13 +501,12 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
     if (b!.mana < cardCost(card, state)) return reject(state, "Not enough mana.");
     if (
       def.effect === "attack" &&
-      def.target !== "allEnemies" &&
+      !def.target &&
       !b!.enemies.some((e) => e.id === command.targetId && e.health > 0)
     )
       return reject(state, "Choose a living enemy.");
     if (
-      ((def.effect === "guard" && def.target !== "self") ||
-        (def.effect === "heal" && def.target !== "allAllies")) &&
+      ((def.effect === "guard" && def.target !== "self") || (def.effect === "heal" && !def.target)) &&
       !state.team.some((c) => c.id === command.targetId && c.health > 0)
     )
       return reject(state, "Choose a living ally.");
@@ -683,9 +685,14 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
           targetId: command.targetId,
         });
         const target =
-          def.effect === "attack" && def.target === "allEnemies"
-            ? undefined
-            : battle.enemies.find((e) => e.id === command.targetId);
+          def.effect === "attack" && def.target === "randomEnemy"
+            ? (() => {
+                const enemies = battle.enemies.filter((enemy) => enemy.health > 0);
+                return enemies[Math.floor(random(draft) * enemies.length)];
+              })()
+            : def.effect === "attack" && def.target === "allEnemies"
+              ? undefined
+              : battle.enemies.find((e) => e.id === command.targetId);
         if (target && keywords.includes("leech") && hasTalent(draft, "leech.armor-siphon")) {
           const stolen = Math.min(1, target.combat.armor);
           target.combat.armor -= stolen;
@@ -738,8 +745,10 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
             const targets =
               def.target === "allAllies"
                 ? living(draft)
-                : draft.team.filter((c) => c.id === command.targetId && c.health > 0);
-            for (const target of targets) restoreHealth(target, value, events, false, draft, true);
+                : def.target === "mostInjured"
+                  ? [mostInjured(draft.team)!]
+                  : draft.team.filter((c) => c.id === command.targetId && c.health > 0);
+            for (const target of targets) restoreHealth(target, value, events, false, draft, true, actor);
           }
           applyExtras(draft, actor, def, events, false, target);
         }

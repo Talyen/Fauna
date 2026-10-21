@@ -1,4 +1,4 @@
-import { controlled } from "../game/combat";
+import { controlled, mostInjured } from "../game/combat";
 import { actionValue, cardCost, physicalBonus } from "../game/rules";
 import { definition, species } from "../game/content";
 import type { Command, GameState } from "../game/types";
@@ -43,6 +43,8 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
           id,
           enemies.reduce((sum, enemy) => sum + score(enemy), 0),
         );
+      else if (def.target === "randomEnemy")
+        add(id, enemies.length ? enemies.reduce((sum, enemy) => sum + score(enemy), 0) / enemies.length : 0);
       else for (const enemy of enemies) add(id, score(enemy), enemy.id);
     } else if (def.effect === "heal") {
       const allies = state.team.filter((c) => c.health > 0);
@@ -53,9 +55,9 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
         );
         add(id, restored > 0 ? 3000 + restored : 0);
       } else
-        for (const ally of allies) {
+        for (const ally of def.target === "mostInjured" ? [mostInjured(allies)!] : allies) {
           const missing = species(ally.species).health - ally.health;
-          if (missing > 0) add(id, 3000 + Math.min(value, missing), ally.id);
+          if (missing > 0) add(id, 3000 + Math.min(value, missing), def.target ? undefined : ally.id);
         }
     } else if (def.effect === "teamGuard") {
       const useful = state.team

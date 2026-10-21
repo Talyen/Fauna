@@ -48,6 +48,48 @@ const maximumHealth = (unit: Combatant) =>
   "maxHealth" in unit ? unit.maxHealth : species(unit.species).health;
 const unitName = (unit: Combatant) => ("name" in unit ? unit.name : species(unit.species).name);
 export const controlled = (unit: Combatant) => !!unit.combat?.controlled || !!unit.combat?.skipped;
+/** Ties retain battlefield order; reserves and knockouts are never recipients. */
+export function mostInjured<T extends Combatant>(units: readonly T[]): T | undefined {
+  return units
+    .filter((unit) => unit.health > 0)
+    .sort((a, b) => a.health / maximumHealth(a) - b.health / maximumHealth(b))[0];
+}
+function bounce(
+  state: GameState,
+  source: Combatant,
+  first: Combatant,
+  effect: "light" | "heal",
+  apply: (target: Combatant) => void,
+) {
+  if (!state.battle) return;
+  const allied = !("maxHealth" in source);
+  const pool =
+    effect === "heal"
+      ? allied
+        ? state.team
+        : state.battle.enemies
+      : allied
+        ? state.battle.enemies
+        : state.team;
+  const visited = new Set([first.id]);
+  for (const entry of creaturePassive(allied ? state : undefined, source.species).effects) {
+    if (entry.kind !== "bounce" || entry.effect !== effect) continue;
+    for (let i = 0; i < entry.amount; i++) {
+      const eligible = pool.filter(
+        (unit) =>
+          unit.health > 0 &&
+          !visited.has(unit.id) &&
+          (effect !== "heal" || unit.health < maximumHealth(unit)),
+      );
+      if (source.health <= 0 || !eligible.length) return;
+      if (entry.chance !== undefined && roll(state) >= entry.chance) return;
+      const target =
+        effect === "heal" ? mostInjured(eligible)! : eligible[Math.floor(roll(state) * eligible.length)]!;
+      visited.add(target.id);
+      apply(target);
+    }
+  }
+}
 export function restoreHealth(
   unit: Combatant,
   amount: number,
@@ -55,7 +97,9 @@ export function restoreHealth(
   revive = false,
   state?: GameState,
   cardHealing = false,
+  source?: Combatant,
 ) {
+  const baseAmount = amount;
   if (state?.phase === "battle") {
     if (!("maxHealth" in unit) && hasTalent(state, "health.mending")) amount *= 1.1;
     if ("maxHealth" in unit && unit.combat.poison > 0 && hasTalent(state, "poison.necrosis")) amount *= 0.5;
@@ -84,6 +128,10 @@ export function restoreHealth(
     )
       grantStatus(unit, "thorns", 1, events);
   }
+  if (gain > 0 && source && state?.phase === "battle")
+    bounce(state, source, unit, "heal", (target) =>
+      restoreHealth(target, baseAmount, events, false, state, cardHealing),
+    );
 }
 export function grantBlock(state: GameState, unit: Combatant, amount: number, events: GameEvent[]) {
   if (unit.health <= 0 || amount <= 0) return;
@@ -512,7 +560,31 @@ export function hit(
   value: number,
   type: DamageType,
   events: GameEvent[],
+  options: Parameters<typeof resolveHit>[6] = {},
+) {
+  const lost = resolveHit(state, source, target, value, type, events, options);
+  if (
+    lost !== undefined &&
+    type === "light" &&
+    !options.periodic &&
+    !options.retaliation &&
+    !options.derived &&
+    !options.bounced
+  )
+    bounce(state, source, target, "light", (recipient) =>
+      hit(state, source, recipient, value, type, events, { ...options, bounced: true }),
+    );
+  return lost;
+}
+function resolveHit(
+  state: GameState,
+  source: Combatant,
+  target: Combatant,
+  value: number,
+  type: DamageType,
+  events: GameEvent[],
   options: {
+    bounced?: boolean;
     periodic?: boolean;
     retaliation?: boolean;
     derived?: boolean;

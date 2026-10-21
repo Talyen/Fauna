@@ -1,14 +1,23 @@
 import { DAMAGE_TYPES, keywordLabel, type DamageType, EFFECT_KEYWORDS } from "./keywords";
 export { type DamageType } from "./keywords";
 export type SpeciesId =
-  "mossguard" | "emberfox" | "stormfin" | "silkmoth" | "briartooth" | "moonhart" | "emberback" | "prismram";
+  | "mossguard"
+  | "emberfox"
+  | "stormfin"
+  | "silkmoth"
+  | "briartooth"
+  | "moonhart"
+  | "emberback"
+  | "pollenmoth"
+  | "prismram";
 type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
   | { kind: "blockRetention"; amount: number }
   | { kind: "cardBonus"; trigger: "firstAttack" | "stunAttack" | "heal" | "guard"; amount: number }
   | { kind: "battleStart"; effect: "block" | "thorns" | "armor"; amount: number }
   | { kind: "armorBreak"; amount: number }
-  | { kind: "statusReflection"; amount: number };
+  | { kind: "statusReflection"; amount: number }
+  | { kind: "bounce"; effect: "light" | "heal"; amount: number; chance?: number };
 export interface PassiveTier {
   description: string;
   effects: readonly PassiveEffect[];
@@ -49,9 +58,9 @@ interface CardBase {
 }
 export type CardDefinition = CardBase &
   (
-    | { effect: "attack"; damageType: DamageType; target?: "allEnemies" }
+    | { effect: "attack"; damageType: DamageType; target?: "allEnemies" | "randomEnemy" }
     | { effect: "guard"; target?: "self" }
-    | { effect: "heal"; target?: "allAllies" }
+    | { effect: "heal"; target?: "allAllies" | "mostInjured" }
     | { effect: Exclude<Effect, "attack" | "guard" | "heal"> }
   );
 export const SPECIES: readonly Species[] = [
@@ -220,6 +229,105 @@ export const SPECIES: readonly Species[] = [
     ],
   },
   {
+    id: "pollenmoth",
+    name: "Pollenmoth",
+    title: "A golden wake of flowers",
+    health: 23,
+    color: "#dbaf52",
+    trait: "Cross-Pollination",
+    passiveTiers: [
+      {
+        description: "Light damage bounces once",
+        effects: [
+          {
+            kind: "bounce",
+            effect: "light",
+            amount: 1,
+          },
+        ],
+      },
+      {
+        description: "Light damage bounces once, with a 50% chance to bounce twice",
+        effects: [
+          {
+            kind: "bounce",
+            effect: "light",
+            amount: 1,
+          },
+          {
+            kind: "bounce",
+            effect: "light",
+            amount: 1,
+            chance: 0.5,
+          },
+        ],
+      },
+      {
+        description: "Light damage bounces twice",
+        effects: [
+          {
+            kind: "bounce",
+            effect: "light",
+            amount: 2,
+          },
+        ],
+      },
+      {
+        description: "Light damage bounces twice; Health restoration has a 50% chance to bounce once",
+        effects: [
+          {
+            kind: "bounce",
+            effect: "light",
+            amount: 2,
+          },
+          {
+            kind: "bounce",
+            effect: "heal",
+            amount: 1,
+            chance: 0.5,
+          },
+        ],
+      },
+      {
+        description:
+          "Light damage bounces twice; Health restoration bounces once, with a 50% chance to bounce twice",
+        effects: [
+          {
+            kind: "bounce",
+            effect: "light",
+            amount: 2,
+          },
+          {
+            kind: "bounce",
+            effect: "heal",
+            amount: 1,
+          },
+          {
+            kind: "bounce",
+            effect: "heal",
+            amount: 1,
+            chance: 0.5,
+          },
+        ],
+      },
+      {
+        description: "Light damage and Health restoration bounce twice",
+        effects: [
+          {
+            kind: "bounce",
+            effect: "light",
+            amount: 2,
+          },
+          {
+            kind: "bounce",
+            effect: "heal",
+            amount: 2,
+          },
+        ],
+      },
+    ],
+  },
+  {
     id: "prismram",
     name: "Prismram",
     title: "The crystal sentinel",
@@ -358,6 +466,21 @@ export const CARDS: readonly CardDefinition[] = [
     target: "allEnemies",
   },
   {
+    ...attack("pollenmoth", "Dazzle Burst", 3, "light"),
+    artwork: "action.pollenmoth.dazzle-burst",
+    target: "randomEnemy",
+  },
+  {
+    ...card("pollenmoth", "Petal Shelter", "teamGuard", 2),
+    artwork: "action.pollenmoth.petal-shelter",
+  },
+  {
+    ...card("pollenmoth", "Bloomwake", "heal", 3),
+    effect: "heal",
+    artwork: "action.pollenmoth.bloomwake",
+    target: "mostInjured",
+  },
+  {
     ...attack("prismram", "Prism Charge", 6, "physical"),
     artwork: "action.prismram.prism-charge",
   },
@@ -404,16 +527,16 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
   let text: string;
   switch (card.effect) {
     case "attack":
-      text = `Deal ${value} ${DAMAGE_LABELS[card.damageType]} damage${card.target === "allEnemies" ? " to all enemies" : ""}`;
+      text = `Deal ${value} ${DAMAGE_LABELS[card.damageType]} damage${card.target === "allEnemies" ? " to all enemies" : card.target === "randomEnemy" ? " to a random enemy" : ""}`;
       break;
     case "guard":
       text = card.target === "self" ? `Gain ${value} Block` : `Give an ally ${value} Block`;
       break;
     case "heal":
-      text = `Restore ${value} Health to ${card.target === "allAllies" ? "all allies" : "a living ally"}`;
+      text = `Restore ${value} Health to ${card.target === "allAllies" ? "all allies" : card.target === "mostInjured" ? "the most injured ally" : "a living ally"}`;
       break;
     case "teamGuard":
-      text = `Give every living ally ${value} Block`;
+      text = `Allies gain ${value} Block`;
       break;
   }
   for (const effect of card.effects ?? []) {

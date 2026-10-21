@@ -89,7 +89,7 @@ Journeys use one shared combat enemy pool, with bosses at encounters 4 and 8. Th
 
 Each species in `src/game/content.ts` owns six `passiveTiers`, indexed by stars from zero through five. The first recruitment collects the species at zero stars; the sixth reaches five. Counts persist across journeys and cap at six. Committing the first onboarding starter supplies one initial copy. Later starter drafts and encounter discovery do not grant copies.
 
-The base tier contains the existing unique passive. Higher slots remain `null` until designed, except Mossguard's Overgrowth, Emberback's Molten Shell and Prismram's Refraction tiers. A defined tier replaces the whole previous passive rather than adding to it; include all retained effects in its effect list. Tiers can compose card bonuses and battle-start Block, Armor or Thorns. Favor recurring, species-exclusive passive mechanics independent of named abilities. New mechanics belong in the typed passive effect contract and its gameplay consumers alongside matching descriptions and regression coverage. Player rules, previews and inspection use the highest defined tier at or below the permanent rank. Enemies always use the base tier. Inspection shows all six slots, the current rank, the active effect and undefined upgrades.
+The base tier contains the existing unique passive. Higher slots remain `null` until designed, except Mossguard's Overgrowth, Emberback's Molten Shell, Pollenmoth's Cross-Pollination and Prismram's Refraction tiers. A defined tier replaces the whole previous passive rather than adding to it; include all retained effects in its effect list. Tiers can compose card bonuses and battle-start Block, Armor or Thorns. Favor recurring, species-exclusive passive mechanics independent of named abilities. New mechanics belong in the typed passive effect contract and its gameplay consumers alongside matching descriptions and regression coverage. Player rules, previews and inspection use the highest defined tier at or below the permanent rank. Enemies always use the base tier. Inspection shows all six slots, the current rank, the active effect and undefined upgrades.
 
 ## Battle pile artwork
 
@@ -122,6 +122,23 @@ Mossguard is a new species ID replacing the removed Mossback content and occupie
 Overgrowth retains 10%, 20%, 30%, 40%, 50% or 60% more Block at zero through five stars. This is a relative increase over the ordinary 50% retention: 55%, 60%, 65%, 70%, 75% or 80% of remaining Block survives, rounded normally. It applies on each turn transition, including in reserve. Enemy Mossguard always uses the base tier. Save version 24 rejects obsolete development saves instead of migrating removed species or abilities.
 
 The portrait and three distinct ability illustrations are unchanged PNGs imported from the user-provided [Mossguard Drive folder](https://drive.google.com/drive/folders/1xzid2xsfO4044-xra9i3KU1K1dx_Kxgz). Source provenance is recorded per file in the asset manifest. Removed Mossback placeholders are no longer selected; prior immutable prepared generations are preserved. Source art was inspected at native aspect ratios; in-game rendered review remains a separate gate.
+
+## Pollenmoth
+
+Pollenmoth is a 23 Health support creature encountered and recruited on ordinary routes. Each ability costs 1 Mana: Dazzle Burst deals 3 Light damage to a random living enemy; Petal Shelter gives living deployed allies 2 Block; Bloomwake restores 3 Health to the most injured living deployed ally, including Pollenmoth. Injury is measured by remaining Health percentage, with battlefield order breaking ties. Reserves and knockouts are excluded.
+
+Cross-Pollination has six complete passive tiers:
+
+1. Light damage bounces once.
+2. Light damage bounces once, with a 50% chance to bounce twice.
+3. Light damage bounces twice.
+4. Light damage bounces twice. Health restoration has a 50% chance to bounce once.
+5. Light damage bounces twice. Health restoration bounces once, with a 50% chance to bounce twice.
+6. Light damage and Health restoration bounce twice.
+
+Each bounce repeats the original effect amount, with defenses and healing modifiers applied separately. Damage selects a random living opponent not already visited; healing selects the most injured remaining ally missing Health. Bounces cannot revisit a recipient or start another chain. A Dodged initial hit does not bounce; a knocked-out source stops its chain. Full-Health healing attempts do not bounce. Chance rolls and random targets use committed seeded combat randomness, so previews never consume live RNG. Enemy Pollenmoths use their base passive. Healing bounces belong to Pollenmoth's own healing abilities, not another creature's healing or automatic recovery.
+
+The creature portrait and three dedicated action illustrations are unchanged copies from the user's Pollenmoth Google Drive folder. Their original URLs and rights notes are recorded in the asset manifest. Prepared assets retain the native 4:3 creature and 3:4 action compositions. Rendered gameplay review remains pending.
 
 ## Prismram
 
