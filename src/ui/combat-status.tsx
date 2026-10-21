@@ -163,8 +163,8 @@ export function CombatStatus({ combat, details = false }: { combat?: CombatState
   };
   return (
     <div ref={root} className="combat-status" aria-label="Combat effects">
-      {shown.length > 4 ? (
-        <PagedItems items={shown} pageSize={2} className="combat-effect-page" label="Combat effect pages">
+      {shown.length > 3 ? (
+        <PagedItems items={shown} pageSize={1} className="combat-effect-page" label="Combat effect pages">
           {tile}
         </PagedItems>
       ) : (

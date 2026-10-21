@@ -530,16 +530,53 @@ strong {
 .target-summary .card-details {
   gap: 0;
 }
-.battle-screen .battle-readout {
-  height: var(--target-readout-height);
+.battle-screen .combatant-details {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--screen-item-gap);
+  min-height: var(--target-readout-height);
+  padding-top: var(--screen-item-gap);
+}
+.battle-screen .battle-readout,
+.battle-screen .target-preview {
+  display: contents;
+}
+.battle-screen .health-forecast {
+  position: absolute;
+  top: calc(var(--battle-creature-width) * 3 / 4 - var(--battle-health-height) - 1px);
+  left: var(--radius);
+  width: calc(100% - var(--radius) * 2);
+  margin: 0;
+  pointer-events: none;
+  transform-origin: 50% calc(var(--battle-health-height) + 1px - var(--battle-creature-width) * 3 / 8);
+  transition: scale var(--motion-hover) ease-out;
+}
+.battle-screen .health-forecast .progress-track {
+  height: var(--battle-health-height);
+  border-radius: var(--radius-round);
+}
+.battle-screen .combatant-reaction:has(> .creature-card:not([aria-disabled="true"]):hover) .health-forecast,
+:root[data-focus="visible"]
+  .battle-screen
+  .combatant-reaction:has(> .creature-card:not([aria-disabled="true"]):focus)
+  .health-forecast {
+  scale: var(--hover-scale);
+}
+.battle-screen .combatant-reaction:has(> .creature-card:not([aria-disabled="true"]):active) .health-forecast {
+  scale: var(--pressed-scale);
 }
 .battle-screen .combat-stats {
-  height: var(--target-outcomes-height);
+  min-width: 0;
+  min-height: var(--control-height);
+  padding-top: 0;
   overflow: visible;
-  align-content: start;
   flex-wrap: wrap;
   column-gap: var(--screen-item-gap);
   row-gap: 0;
+}
+.battle-screen .combat-stats:empty {
+  display: none;
 }
 .target-line marker path {
   stroke: var(--selected);
@@ -1874,7 +1911,7 @@ body,
 @media (max-height: 900px) {
   .battle-screen {
     display: grid;
-    grid-template-columns: 200px minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) max-content minmax(0, 1fr);
     grid-template-rows: max-content max-content 1fr;
     align-content: start;
     align-items: start;
@@ -1902,32 +1939,25 @@ body,
     gap: var(--screen-item-gap);
   }
   .battle-screen .target-summary {
-    width: 200px;
+    width: 100%;
   }
 }
 
-/* Effects occupy a separate rail, including when several simultaneous effects need pages. */
-.battle-screen :is(.enemy-row, .player-row) > .creature-wrap {
-  width: calc(var(--battle-creature-width) + var(--control-height) + var(--screen-item-gap));
-  flex-basis: calc(var(--battle-creature-width) + var(--control-height) + var(--screen-item-gap));
-  padding-right: calc(var(--control-height) + var(--screen-item-gap));
-}
-.battle-screen .combatant-reaction > .combat-status {
-  position: absolute;
-  right: calc(-1 * (var(--control-height) + var(--screen-item-gap)));
-  top: 0;
-  width: var(--control-height);
-  gap: 0;
+.battle-screen .combat-status {
+  flex-shrink: 0;
 }
 .combat-status .combat-effect-page,
-.combat-status .pagination {
+.combat-status .pagination,
+.combat-status > .paged-content {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 0;
-}
-.combat-status .paged-content {
   gap: var(--screen-item-gap);
+}
+.combat-status .pagination > span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip-path: inset(50%);
 }
 .game-tooltip:has(.combat-status-details) {
   max-width: min(1000px, calc(100vw - var(--space-8)));
