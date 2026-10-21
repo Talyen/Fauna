@@ -66,6 +66,13 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Both sides have a 5% chance to avoid each attack packet before defenses; Controlled targets cannot Dodge; Total Dodge is capped at 75%",
       ["Dodges", "Dodged", "Dodging"],
     ),
+    blind: entry(
+      "Blind",
+      "status",
+      "active",
+      "50% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a Dodge by every recipient; Does not stack",
+      ["Blinded", "Blinding"],
+    ),
     armor: entry(
       "Armor",
       "status",
@@ -168,6 +175,7 @@ export const EFFECT_KEYWORDS = freeze(
     heal: ["health"],
     teamGuard: ["block"],
     swap: [],
+    dodge: ["dodge"],
   } as const,
   true,
 );

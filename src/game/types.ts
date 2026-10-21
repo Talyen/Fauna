@@ -15,6 +15,8 @@ export interface CombatState {
   armor: number;
   thorns: number;
   dodge: number;
+  temporaryDodge: number;
+  blind: boolean;
   burn: number;
   poison: number;
   bleed: number;
@@ -84,7 +86,7 @@ interface JourneySummary {
   lastBattle: { xp: KeywordXP; currency: number } | null;
 }
 export interface GameState {
-  version: 26;
+  version: 27;
   discovery: { encountered: SpeciesId[]; recruited: Partial<Record<SpeciesId, number>> };
   revision: number;
   rng: number;

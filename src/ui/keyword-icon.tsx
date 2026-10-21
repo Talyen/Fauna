@@ -15,6 +15,7 @@ import {
   Droplets,
   Sparkles,
   Eraser,
+  EyeOff,
 } from "lucide-react";
 import type { KeywordId } from "../game/keywords";
 const icons = {
@@ -27,6 +28,7 @@ const icons = {
   block: Shield,
   thorns: Sprout,
   dodge: Wind,
+  blind: EyeOff,
   armor: Shell,
   burn: Flame,
   freeze: Snowflake,

@@ -95,7 +95,11 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
     for (const effect of card.effects ?? []) {
       if (!Number.isSafeInteger(effect.amount) || effect.amount < 1 || effect.amount > 100)
         error(card.id, "effects", "Unsupported supplemental amount.");
-      if (!["damage", "status", "draw", "mana", "cleanse", "purge", "reflect", "heal"].includes(effect.kind))
+      if (
+        !["damage", "status", "draw", "mana", "cleanse", "purge", "reflect", "heal", "blind"].includes(
+          effect.kind,
+        )
+      )
         error(card.id, "effects", "Unknown supplemental effect.");
       if (effect.kind === "damage" && !DAMAGE_TYPES.includes(effect.damageType))
         error(card.id, "effects", "Unknown supplemental damage type.");

@@ -988,6 +988,50 @@
       "aspect": [3, 4],
       "provenance": "Unchanged Captoad artwork selected from user Google Drive: https://drive.google.com/file/d/1XXQBLfcHkFnwCoHqyj58x1DZMk0OqAzu/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "creature.dunefox",
+      "origin": "repository",
+      "source": "public/art/dunefox/portrait.png",
+      "output": "art/dunefox/portrait.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Dunefox artwork selected from user Google Drive: https://drive.google.com/file/d/1kj50FqBx-wEbwynncr9jtOZ1HV0ZbbA7/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.dunefox.sandburst-pounce",
+      "origin": "repository",
+      "source": "public/art/dunefox/sandburst-pounce.png",
+      "output": "art/dunefox/sandburst-pounce.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Dunefox artwork selected from user Google Drive: https://drive.google.com/file/d/1-Yam_PGEdVmiQ3-zBijvwiRJ7OlzBUCy/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.dunefox.dune-whirl",
+      "origin": "repository",
+      "source": "public/art/dunefox/dune-whirl.png",
+      "output": "art/dunefox/dune-whirl.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Dunefox artwork selected from user Google Drive: https://drive.google.com/file/d/16Va30KPVITUZUJruHKzAI7eWqdhw7O_H/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.dunefox.mirage-step",
+      "origin": "repository",
+      "source": "public/art/dunefox/mirage-step.png",
+      "output": "art/dunefox/mirage-step.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Dunefox artwork selected from user Google Drive: https://drive.google.com/file/d/1Bo33wf9Z7WK7b9QV5q6BE8ozs_oeBypr/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

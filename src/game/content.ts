@@ -1,6 +1,6 @@
 import { DAMAGE_TYPES, keywordLabel, type DamageType, EFFECT_KEYWORDS } from "./keywords";
 export { type DamageType } from "./keywords";
-export type SpeciesId = "mossguard" | "emberback" | "pollenmoth" | "prismram" | "captoad";
+export type SpeciesId = "mossguard" | "emberback" | "pollenmoth" | "prismram" | "captoad" | "dunefox";
 type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
   | { kind: "blockRetention"; amount: number }
@@ -9,6 +9,7 @@ type PassiveEffect =
   | { kind: "poisonRetaliation"; amount: number }
   | { kind: "armorBreak"; amount: number }
   | { kind: "statusReflection"; amount: number }
+  | { kind: "shareDodge"; amount: number }
   | { kind: "bounce"; effect: "light" | "heal"; amount: number; chance?: number };
 export interface PassiveTier {
   description: string;
@@ -30,7 +31,7 @@ export const DAMAGE_LABELS = Object.fromEntries(DAMAGE_TYPES.map((id) => [id, ke
 type CardEffect =
   | { kind: "damage"; damageType: DamageType; amount: number; leech?: boolean }
   | { kind: "status"; status: "armor" | "thorns" | "dodge"; amount: number }
-  | { kind: "draw" | "mana" | "cleanse" | "purge" | "reflect" | "heal"; amount: number };
+  | { kind: "draw" | "mana" | "cleanse" | "purge" | "reflect" | "heal" | "blind"; amount: number };
 interface CardBase {
   id: string;
   species: SpeciesId;
@@ -290,6 +291,22 @@ export const SPECIES: readonly Species[] = [
       },
     ],
   },
+  {
+    id: "dunefox",
+    name: "Dunefox",
+    title: "The shifting mirage",
+    health: 24,
+    color: "#d9aa57",
+    trait: "Shifting Sands",
+    passiveTiers: [
+      { description: "Allies gain 15% of your Dodge chance", effects: [{ kind: "shareDodge", amount: 15 }] },
+      { description: "Allies gain 20% of your Dodge chance", effects: [{ kind: "shareDodge", amount: 20 }] },
+      { description: "Allies gain 25% of your Dodge chance", effects: [{ kind: "shareDodge", amount: 25 }] },
+      { description: "Allies gain 30% of your Dodge chance", effects: [{ kind: "shareDodge", amount: 30 }] },
+      { description: "Allies gain 35% of your Dodge chance", effects: [{ kind: "shareDodge", amount: 35 }] },
+      { description: "Allies gain 40% of your Dodge chance", effects: [{ kind: "shareDodge", amount: 40 }] },
+    ],
+  },
 ];
 const card = <T extends Exclude<Effect, "attack">>(
   species: SpeciesId,
@@ -319,6 +336,22 @@ const attack = (
   damageType,
 });
 export const CARDS: readonly CardDefinition[] = [
+  {
+    ...attack("dunefox", "Sandburst Pounce", 6, "physical"),
+    artwork: "action.dunefox.sandburst-pounce",
+  },
+  {
+    ...attack("dunefox", "Dune Whirl", 1, "physical"),
+    id: "dunefox-dune-whirl",
+    target: "allEnemies",
+    effects: [{ kind: "blind", amount: 1 }],
+    artwork: "action.dunefox.dune-whirl",
+  },
+  {
+    ...card("dunefox", "Mirage Step", "dodge", 30),
+    effects: [{ kind: "draw", amount: 1 }],
+    artwork: "action.dunefox.mirage-step",
+  },
   {
     ...card("mossguard", "Boulder Brace", "guard", 6),
     target: "self",
@@ -403,7 +436,7 @@ export function enemyCard(card: CardDefinition): CardDefinition {
   return {
     ...card,
     effects: card.effects?.filter((effect) =>
-      ["damage", "status", "cleanse", "purge", "reflect", "heal"].includes(effect.kind),
+      ["damage", "status", "cleanse", "purge", "reflect", "heal", "blind"].includes(effect.kind),
     ),
   };
 }
@@ -431,6 +464,9 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
     case "heal":
       text = `Restore ${value} Health to ${card.target === "allAllies" ? "all allies" : card.target === "mostInjured" ? "the most injured ally" : "a living ally"}`;
       break;
+    case "dodge":
+      text = `Gain ${value}% Dodge until your next turn`;
+      break;
     case "swap":
       text = "Swap out for a random backup";
       break;
@@ -451,9 +487,11 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
               ? `Restore ${effect.amount} Mana`
               : effect.kind === "heal"
                 ? `Restore ${effect.amount} Health`
-                : effect.kind === "reflect"
-                  ? "Reflect the next harmful status effect"
-                  : `${effect.kind === "cleanse" ? "Cleanse acting creature" : "Purge target"}: remove ${effect.amount} effect${effect.amount === 1 ? "" : "s"}`);
+                : effect.kind === "blind"
+                  ? "Blind all enemies"
+                  : effect.kind === "reflect"
+                    ? "Reflect the next harmful status effect"
+                    : `${effect.kind === "cleanse" ? "Cleanse acting creature" : "Purge target"}: remove ${effect.amount} effect${effect.amount === 1 ? "" : "s"}`);
   }
   if (card.leech) text += "; Leech";
   return text;

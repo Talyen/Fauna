@@ -1290,6 +1290,13 @@ strong {
 [data-keyword="thorns"] {
   color: var(--keyword-thorns);
 }
+[data-combat-tone="blind"],
+[data-keyword="blind"] {
+  color: var(--keyword-blind);
+}
+[data-art-keyword="blind"] {
+  --art-keyword-color: var(--keyword-blind);
+}
 [data-combat-tone="dodge"],
 [data-keyword="dodge"] {
   color: var(--keyword-dodge);

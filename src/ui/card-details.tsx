@@ -84,6 +84,7 @@ export function CreatureDetails({
   name,
   block = 0,
   speciesKit = false,
+  sharedDodge = 0,
   combat,
 }: {
   kind: SpeciesId;
@@ -92,13 +93,14 @@ export function CreatureDetails({
   block?: number;
   speciesKit?: boolean;
   combat?: import("../game/types").CombatState;
+  sharedDodge?: number;
 }) {
   const info = species(kind);
   return (
     <div className="card-details">
       <strong>{name ?? info.name}</strong>
       {block ? <p>{block} block</p> : null}
-      <CombatStatus combat={combat} details />
+      <CombatStatus combat={combat} sharedDodge={sharedDodge} details />
       {!name || speciesKit ? (
         <>
           {name && speciesKit ? <strong>Species kit · {info.name}</strong> : null}

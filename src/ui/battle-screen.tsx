@@ -1,3 +1,4 @@
+import { sharedDodgeChance } from "../game/combat";
 import { Screen } from "./screen";
 import { HandMotion } from "./hand-motion";
 import { combatStatuses } from "./combat-status";
@@ -98,7 +99,7 @@ export function BattleScreen({
     (def?.effect === "attack" && def.target === "randomEnemy") ||
     (def?.effect === "heal" && def.target === "mostInjured");
   const allAllies = def?.effect === "teamGuard" || (def?.effect === "heal" && def.target === "allAllies");
-  const selfTarget = def?.effect === "guard" && def.target === "self";
+  const selfTarget = def?.effect === "dodge" || (def?.effect === "guard" && def.target === "self");
   const enemyTarget = def?.effect === "attack" && !def.target,
     allyTarget =
       (def?.effect === "heal" || def?.effect === "guard") && !allAllies && !selfTarget && !automaticTarget;
@@ -132,7 +133,8 @@ export function BattleScreen({
         next &&
         (next.health !== unit.health ||
           next.block !== unit.block ||
-          JSON.stringify(combatStatuses(next.combat)) !== JSON.stringify(combatStatuses(unit.combat)))
+          JSON.stringify(combatStatuses(next.combat, sharedDodgeChance(preview.state, next))) !==
+            JSON.stringify(combatStatuses(unit.combat, sharedDodgeChance(game, unit))))
       )
         affected.add(unit.id);
     }
@@ -257,6 +259,7 @@ export function BattleScreen({
           <EnemyCard
             key={enemy.id}
             enemy={enemy}
+            sharedDodge={sharedDodgeChance(game, enemy)}
             tooltips={!selected}
             invalidTarget={!!selected && ((!enemyTarget && !allEnemies) || enemy.health <= 0)}
             validTarget={!!selected && (enemyTarget || allEnemies) && enemy.health > 0}
@@ -287,6 +290,7 @@ export function BattleScreen({
             progression={game}
             key={creature.id}
             creature={creature}
+            sharedDodge={sharedDodgeChance(game, creature)}
             tooltips={!selected}
             acting={card?.ownerId === creature.id}
             validTarget={

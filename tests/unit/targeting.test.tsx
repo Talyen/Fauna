@@ -305,3 +305,22 @@ it("confirms Bogbound Leap without asking for an ally target", async () => {
   await userEvent.click(confirm);
   expect(send).toHaveBeenCalledWith({ type: "play", cardId: leap.dataset.cardId });
 });
+
+it("Mirage Step selects only Dunefox, previews its shared Dodge, and confirms without an ally target", async () => {
+  const game = produce(teamRun(7, ["dunefox", "mossguard", "captoad"]), (draft) => {
+    const step = draft.cards.find((card) => card.definitionId === "dunefox-dodge")!;
+    draft.battle!.hand = [step.id];
+    draft.battle!.draw = draft.cards.filter((card) => card.id !== step.id).map((card) => card.id);
+    draft.battle!.discard = [];
+    draft.battle!.buffer = [];
+  });
+  const { container, send, card } = open(game);
+  await userEvent.click(card("dodge"));
+  expect(container.querySelectorAll(".player-row [data-valid-target]")).toHaveLength(1);
+  expect(container.querySelectorAll(".target-preview")).toHaveLength(3);
+  expect(
+    screen.getByRole("status", { name: /Target preview for Mossguard/ }).getAttribute("aria-label"),
+  ).toContain("Dodge 0.75 → 5.25");
+  await userEvent.click(screen.getByRole("button", { name: /Play ·/ }));
+  expect(send).toHaveBeenCalledWith({ type: "play", cardId: game.battle!.hand[0]! });
+});

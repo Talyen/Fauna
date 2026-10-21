@@ -1,3 +1,4 @@
+import { sharedDodgeChance } from "../game/combat";
 import { PagedItems } from "./pagination";
 import { creaturePassive, creatureStars } from "../game/progression";
 import { KeywordText } from "./keyword-text";
@@ -180,6 +181,7 @@ export function Inspector({
               maxHealth={enemy?.maxHealth ?? creature.health}
               block={ally?.block ?? enemy?.block ?? 0}
               combat={ally?.combat ?? enemy?.combat}
+              sharedDodge={ally || enemy ? sharedDodgeChance(game, (ally ?? enemy)!) : 0}
               readout={false}
               speciesKit
               label={`${enemy?.name ?? creature.name} details`}

@@ -11,6 +11,8 @@ export const COMBAT_PACKS = [
   ["pollenmoth", "pollenmoth", "emberback"],
   ["prismram", "prismram", "emberback"],
   ["prismram", "emberback", "pollenmoth"],
+  ["dunefox", "mossguard", "pollenmoth"],
+  ["captoad", "dunefox", "prismram"],
   ["captoad", "mossguard", "pollenmoth"],
   ["prismram", "captoad", "emberback"],
 ] as const;
@@ -72,13 +74,15 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
       species: kind,
       ...(boss ? (index === 0 ? { health: boss.health, damage: boss.damage } : escort) : ordinary),
       damageType:
-        kind === "emberback"
-          ? "burn"
-          : kind === "captoad"
-            ? "poison"
-            : kind === "mossguard"
-              ? "nature"
-              : "light",
+        kind === "dunefox"
+          ? "physical"
+          : kind === "emberback"
+            ? "burn"
+            : kind === "captoad"
+              ? "poison"
+              : kind === "mossguard"
+                ? "nature"
+                : "light",
     })),
   };
 }

@@ -22,7 +22,7 @@ A linear-congruential RNG is explicit state. Destination offers, shuffles and in
 
 Development saves are disposable: there are no released player saves to preserve. Do not implement migrations or backward compatibility unless explicitly requested. Obsolete formats are rejected and can be reset through the existing recovery flow. The canonical agent policy is in [AGENTS.md](../AGENTS.md#development-saves).
 
-Current save version 24 is validated by Zod and semantic checks for content IDs, ownership, unique card zones, health bounds, lineup completeness, saved encounter packs, and phase/outcome coherence. Only the current format is supported in browser and desktop storage; fixtures track that format. Valid current-format backups remain recoverable.
+Current save version 27 is validated by Zod and semantic checks for content IDs, ownership, unique card zones, health bounds, lineup completeness, saved encounter packs, and phase/outcome coherence. Only the current format is supported in browser and desktop storage; fixtures track that format. Valid current-format backups remain recoverable.
 
 Battle settlement banks actual retained currency and keyword XP once. Ordinary fights offer recruitment only; intermediate bosses offer up to three unowned Boons only. The shared Reward screen consumes committed receipts and requires recruitment when offered and accepts a Boon choice or Skip, with no acknowledgement phase or Continue command. No eligible choice advances immediately; final victory and defeat go directly to Journey results. The journey summary retains the outcome, battle count, gains, new unlocks, and last-battle receipt; opening results never grants rewards or saves.
 

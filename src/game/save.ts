@@ -26,6 +26,8 @@ const combatState = z
     armor: natural,
     thorns: natural,
     dodge: z.number().int().min(0).max(70),
+    temporaryDodge: z.number().int().min(0).max(70),
+    blind: z.boolean(),
     burn: natural,
     poison: natural,
     bleed: natural,
@@ -81,7 +83,7 @@ const creature = z.object({
   combat: combatState.optional(),
 });
 const currentShape = z.object({
-  version: z.literal(26),
+  version: z.literal(27),
   discovery: z.object({
     encountered: z.array(speciesId).max(SPECIES.length),
     recruited: z.partialRecord(

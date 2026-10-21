@@ -12,6 +12,9 @@ import {
 } from "./progression";
 import {
   combat,
+  beginAttack,
+  applyBlind,
+  grantTemporaryDodge,
   shuffle,
   fillHand,
   draw,
@@ -40,7 +43,7 @@ import { bossEncounter, encounterSource, finalEncounter, encounterPacks } from "
 import type { Card, Command, CommandResult, GameEvent, GameState } from "./types";
 export function createGame(seed = 1): GameState {
   const state: GameState = {
-    version: 26,
+    version: 27,
     support: null,
     discovery: { encountered: [], recruited: {} },
     revision: 0,
@@ -391,6 +394,7 @@ function applyExtras(
   events: GameEvent[],
   enemy = false,
   target?: import("./combat").Combatant,
+  blindMiss = false,
 ) {
   for (const effect of def.effects ?? []) {
     if (actor.health <= 0) break;
@@ -398,6 +402,7 @@ function applyExtras(
       case "damage":
         if (target)
           hit(state, actor, target, effect.amount, effect.damageType, events, {
+            blindMiss,
             leech: effect.leech,
             cardLeech:
               !enemy &&
@@ -407,6 +412,10 @@ function applyExtras(
       case "status":
         if (effect.status === "armor") grantArmor(state, actor, effect.amount, events);
         else grantStatus(actor, effect.status, effect.amount, events);
+        break;
+      case "blind":
+        for (const recipient of enemy ? state.team : state.battle!.enemies)
+          if (recipient.health > 0) applyBlind(state, actor, recipient, events);
         break;
       case "reflect":
         combat(actor).reflect = true;
@@ -470,11 +479,12 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
         targetId: def.effect === "attack" && def.target === "allEnemies" ? undefined : target.id,
         text: `${enemy.name} uses ${def.name}.`,
       });
+      const blindMiss = def.effect === "attack" ? beginAttack(draft, enemy) : false;
       if (def.effect === "attack") {
         const targets = def.target === "allEnemies" ? living(draft) : [target];
         for (const recipient of targets) {
           if (enemy.health <= 0) break;
-          hit(draft, enemy, recipient, value, def.damageType, events, { leech: def.leech });
+          hit(draft, enemy, recipient, value, def.damageType, events, { leech: def.leech, blindMiss });
         }
       } else if (def.effect === "heal") {
         const injured = mostInjured(battle.enemies)!;
@@ -482,6 +492,8 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
           ? battle.enemies.filter((e) => e.health > 0)
           : [injured])
           restoreHealth(recipient, value, events, false, draft, false, enemy);
+      } else if (def.effect === "dodge") {
+        grantTemporaryDodge(enemy, value, events);
       } else if (def.effect === "swap") {
         swapFromCard(draft, enemy, events);
       } else {
@@ -491,7 +503,7 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
           grantBlock(draft, unit, value, events);
         }
       }
-      applyExtras(draft, enemy, def, events, true, target);
+      applyExtras(draft, enemy, def, events, true, target, blindMiss);
       if (settle(draft, events)) return;
     }
     for (const c of [...draft.team, ...draft.reserves]) {
@@ -575,8 +587,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
     )
       return reject(state, "Choose a living ally.");
     if (
-      def.effect === "guard" &&
-      def.target === "self" &&
+      (def.effect === "dodge" || (def.effect === "guard" && def.target === "self")) &&
       command.targetId !== undefined &&
       command.targetId !== actor.id
     )
@@ -777,6 +788,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         );
         for (let play = 0; play < (repeat ? 2 : 1); play++) {
           if (actor.health <= 0) break;
+          const blindMiss = def.effect === "attack" ? beginAttack(draft, actor) : false;
           if (def.effect === "attack") {
             const targets =
               def.target === "allEnemies"
@@ -788,6 +800,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
             for (const enemy of targets) {
               if (actor.health <= 0) break;
               hit(draft, actor, enemy, value, def.damageType, events, {
+                blindMiss,
                 leech: def.leech,
                 cardLeech: keywords.includes("leech"),
               });
@@ -814,8 +827,9 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
                   : draft.team.filter((c) => c.id === command.targetId && c.health > 0);
             for (const target of targets) restoreHealth(target, value, events, false, draft, true, actor);
           }
+          if (def.effect === "dodge") grantTemporaryDodge(actor, value, events);
           if (def.effect === "swap") swapFromCard(draft, actor, events);
-          applyExtras(draft, actor, def, events, false, target);
+          applyExtras(draft, actor, def, events, false, target, blindMiss);
         }
         if (battle.cardsPlayedThisTurn < 3) {
           battle.cardsPlayedThisTurn++;

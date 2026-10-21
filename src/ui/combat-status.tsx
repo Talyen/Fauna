@@ -23,16 +23,18 @@ const statusOrder: readonly string[] = [
   "freeLight",
   "freeCard",
   "reflect",
+  "blind",
 ];
 type Status = { id: string; text: string; count: number; exit?: boolean; changed?: boolean };
-export function combatStatuses(combat?: CombatState): Status[] {
+export function combatStatuses(combat?: CombatState, sharedDodge = 0): Status[] {
+  const dodge = Number(((combat?.dodge ?? 0) + (combat?.temporaryDodge ?? 0) + sharedDodge).toFixed(2));
   const entries: Status[] = combat
     ? stats
-        .filter((id) => combat[id] > 0)
+        .filter((id) => (id === "dodge" ? dodge : combat[id]) > 0)
         .map((id) => ({
           id,
-          count: combat[id],
-          text: `${KEYWORD_DEFINITIONS[id].label} ${combat[id]}${id === "dodge" ? "%" : ""}. ${KEYWORD_DEFINITIONS[id].description}`,
+          count: id === "dodge" ? dodge : combat[id],
+          text: `${KEYWORD_DEFINITIONS[id].label} ${id === "dodge" ? dodge : combat[id]}${id === "dodge" ? "% bonus" : ""}; ${KEYWORD_DEFINITIONS[id].description}${id === "dodge" && combat.temporaryDodge ? `; ${combat.temporaryDodge}% expires at your next turn` : ""}${id === "dodge" && sharedDodge ? `; ${Number(sharedDodge.toFixed(2))}% from Shifting Sands` : ""}`,
         }))
     : [];
   if (combat?.controlled || combat?.skipped)
@@ -63,14 +65,23 @@ export function combatStatuses(combat?: CombatState): Status[] {
       ["freeNature", Number(combat.freeNature), "Windstep: next Nature card is free"],
       ["freeLight", Number(combat.freeLight), "Divine Favor: next Light card is free"],
       ["freeCard", Number(combat.freeCard), "Free Follow-up: next card is free"],
+      ["blind", Number(combat.blind), `Blind: ${KEYWORD_DEFINITIONS.blind.description}`],
       ["reflect", Number(combat.reflect), `Reflect: ${KEYWORD_DEFINITIONS.reflect.description}`],
     ] as const;
     for (const [id, count, text] of pending) if (count) entries.push({ id, count, text });
   }
   return entries;
 }
-export function CombatStatus({ combat, details = false }: { combat?: CombatState; details?: boolean }) {
-  const entries = combatStatuses(combat);
+export function CombatStatus({
+  combat,
+  sharedDodge = 0,
+  details = false,
+}: {
+  combat?: CombatState;
+  sharedDodge?: number;
+  details?: boolean;
+}) {
+  const entries = combatStatuses(combat, sharedDodge);
   const root = useRef<HTMLDivElement>(null);
   const signature = JSON.stringify(entries);
   const [shown, setShown] = useState(entries);

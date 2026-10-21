@@ -1,3 +1,5 @@
+import { KeywordIcon } from "./keyword-icon";
+import { sharedDodgeChance } from "../game/combat";
 import { combatStatuses } from "./combat-status";
 import { KEYWORD_DEFINITIONS } from "../game/keywords";
 import { KeywordText } from "./keyword-text";
@@ -67,8 +69,8 @@ export function TargetPreview({
     result.state.battle?.enemies.find((e) => e.id === targetId);
   if (!old || !next) return null;
   const events = result.events.filter((e) => e.targetId === targetId);
-  const previousStatuses = combatStatuses(old.combat);
-  const nextStatuses = combatStatuses(next.combat);
+  const previousStatuses = combatStatuses(old.combat, sharedDodgeChance(before, old));
+  const nextStatuses = combatStatuses(next.combat, sharedDodgeChance(result.state, next));
   const changes = [...new Set([...previousStatuses, ...nextStatuses].map((status) => status.id))].flatMap(
     (id) => {
       const previous = previousStatuses.find((status) => status.id === id);
@@ -129,7 +131,10 @@ export function TargetPreview({
         {events
           .filter((event) => event.kind === "status" && event.status === "dodge" && event.outcome === "dodge")
           .map((event, index) => (
-            <span key={`dodge-${index}`}>Dodge</span>
+            <span key={`dodge-${index}`} data-combat-tone="dodge">
+              <KeywordIcon id="dodge" />
+              Dodge
+            </span>
           ))}
       </BattleReadout>
     </div>

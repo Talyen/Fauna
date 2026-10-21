@@ -23,6 +23,8 @@ export function freshCombat(): CombatState {
     armor: 0,
     thorns: 0,
     dodge: 0,
+    temporaryDodge: 0,
+    blind: false,
     burn: 0,
     poison: 0,
     bleed: 0,
@@ -324,7 +326,7 @@ export function removeEffects(
   const removedStatuses: NonNullable<GameEvent["affectedStatus"]>[] = [];
   const statuses =
     kind === "cleanse"
-      ? (["burn", "poison", "bleed", "stun", "freeze"] as const)
+      ? (["burn", "poison", "bleed", "stun", "freeze", "blind"] as const)
       : (["armor", "thorns", "dodge", "reflect"] as const);
   if (kind === "purge" && unit.block > 0 && count > 0) {
     unit.block = 0;
@@ -341,8 +343,9 @@ export function removeEffects(
     count--;
   }
   for (const status of statuses)
-    if (count > 0 && Number(stats[status]) > 0) {
-      if (status === "reflect") stats.reflect = false;
+    if (count > 0 && (Number(stats[status]) > 0 || (status === "dodge" && stats.temporaryDodge > 0))) {
+      if (status === "dodge") stats.temporaryDodge = 0;
+      if (status === "reflect" || status === "blind") stats[status] = false;
       else stats[status] = 0;
       if (kind === "cleanse") {
         cleansed++;
@@ -396,11 +399,18 @@ function applyHarmfulStatus(
   source: Combatant,
   target: Combatant,
   damage: number,
-  type: DamageType,
+  type: DamageType | "blind",
   events: GameEvent[],
   options: { beforeHealth: number; leech?: boolean; reflected?: boolean },
 ): { armorBroken: boolean; appliedControl: boolean; reflected: boolean } {
-  if (type !== "burn" && type !== "poison" && type !== "bleed" && type !== "stun" && type !== "freeze")
+  if (
+    type !== "burn" &&
+    type !== "poison" &&
+    type !== "bleed" &&
+    type !== "stun" &&
+    type !== "freeze" &&
+    type !== "blind"
+  )
     return { armorBroken: false, appliedControl: false, reflected: false };
   const stats = combat(target);
   const alliedSource = !("maxHealth" in source),
@@ -414,7 +424,12 @@ function applyHarmfulStatus(
       stats.skipped ||
       stats.cooldown > 0 ||
       (type === "stun" && alliedTarget && target.block > 0 && hasTalent(state, "block.grounding")));
-  if (target.health > 0 && !options.reflected && !immune && stats[type] < STACK_LIMIT) {
+  if (
+    target.health > 0 &&
+    !options.reflected &&
+    !immune &&
+    Number(stats[type]) < (type === "blind" ? 1 : STACK_LIMIT)
+  ) {
     const enemies = (alliedTarget ? (state.battle?.enemies ?? []) : state.team).filter(
       (unit) => unit.health > 0,
     );
@@ -438,10 +453,22 @@ function applyHarmfulStatus(
         beforeHealth: recipient.health,
         reflected: true,
       });
-      if (reflected.appliedControl) controlRewards(state, target, recipient, type, events);
+      if (reflected.appliedControl && type !== "blind")
+        controlRewards(state, target, recipient, type, events);
       if (reflected.armorBroken) triggerArmorBreak(state, recipient, events);
       return { armorBroken: false, appliedControl: false, reflected: true };
     }
+  }
+  if (type === "blind" && target.health > 0 && !stats.blind) {
+    stats.blind = true;
+    events.push({
+      kind: "status",
+      actorId: source.id,
+      targetId: target.id,
+      status: "blind",
+      outcome: "apply",
+      text: `${unitName(target)} is Blinded`,
+    });
   }
   if (type === "burn" || type === "poison" || type === "bleed") {
     const beforeStacks = stats[type];
@@ -552,6 +579,68 @@ function controlRewards(
   }
 }
 
+function ownDodgeChance(state: GameState, unit: Combatant): number {
+  if (unit.health <= 0 || unit.combat?.controlled) return 0;
+  const allied = !("maxHealth" in unit);
+  const stats = unit.combat;
+  if (!allied && (stats?.poison ?? 0) > 0 && hasTalent(state, "poison.torpor")) return 0;
+  return Math.min(
+    75,
+    5 +
+      (stats?.dodge ?? 0) +
+      (stats?.temporaryDodge ?? 0) +
+      (allied
+        ? (stats?.rhythm ?? 0) +
+          Number(hasTalent(state, "dodge.lightfoot")) * 5 +
+          (hasTalent(state, "health.last-gasp") && unit.health < maximumHealth(unit) / 2 ? 10 : 0)
+        : 0),
+  );
+}
+/** Share intrinsic Dodge only, so multiple Dunefoxes cannot recursively amplify one another. */
+export function sharedDodgeChance(state: GameState, target: Combatant): number {
+  const allied = !("maxHealth" in target);
+  const row = allied ? state.team : (state.battle?.enemies ?? []);
+  if (target.health <= 0 || !row.some((unit) => unit.id === target.id)) return 0;
+  return row
+    .filter((unit) => unit.id !== target.id && unit.health > 0)
+    .reduce((total, unit) => {
+      const share = creaturePassive(allied ? state : undefined, unit.species).effects.reduce(
+        (sum, effect) => sum + (effect.kind === "shareDodge" ? effect.amount : 0),
+        0,
+      );
+      return total + (ownDodgeChance(state, unit) * share) / 100;
+    }, 0);
+}
+export function dodgeChance(state: GameState, target: Combatant): number {
+  const own = ownDodgeChance(state, target);
+  return own === 0 ? 0 : Math.min(75, own + sharedDodgeChance(state, target));
+}
+export function grantTemporaryDodge(unit: Combatant, amount: number, events: GameEvent[]) {
+  if (unit.health <= 0) return;
+  const stats = combat(unit),
+    before = stats.temporaryDodge;
+  stats.temporaryDodge = Math.min(70, before + amount);
+  const gained = stats.temporaryDodge - before;
+  if (!gained) return;
+  events.push({
+    kind: "status",
+    targetId: unit.id,
+    status: "dodge",
+    outcome: "gain",
+    amount: gained,
+    text: `${unitName(unit)} gains ${gained}% Dodge until its next turn`,
+  });
+}
+export function applyBlind(state: GameState, source: Combatant, target: Combatant, events: GameEvent[]) {
+  applyHarmfulStatus(state, source, target, 1, "blind", events, { beforeHealth: target.health });
+}
+/** One Blind roll owns an entire attack, including all recipients and supplemental packets. */
+export function beginAttack(state: GameState, source: Combatant): boolean {
+  const stats = combat(source);
+  if (!stats.blind) return false;
+  stats.blind = false;
+  return roll(state) < 0.5;
+}
 /** Derived packets never dodge, crit or retaliate; Sporecoat explicitly retains Poison buildup. */
 export function hit(
   state: GameState,
@@ -584,6 +673,7 @@ function resolveHit(
   type: DamageType,
   events: GameEvent[],
   options: {
+    blindMiss?: boolean;
     bounced?: boolean;
     periodic?: boolean;
     retaliation?: boolean;
@@ -608,22 +698,10 @@ function resolveHit(
     type === "light" &&
     hasTalent(state, "light.blessed-leech") &&
     source.health < maximumHealth(source) / 2;
+  const blindMiss = direct && (options.blindMiss ?? beginAttack(state, source));
   if (
     direct &&
-    !stats.controlled &&
-    !(!alliedTarget && stats.poison > 0 && hasTalent(state, "poison.torpor")) &&
-    roll(state) <
-      Math.min(
-        75,
-        5 +
-          stats.dodge +
-          (alliedTarget
-            ? stats.rhythm +
-              (hasTalent(state, "dodge.lightfoot") ? 5 : 0) +
-              (hasTalent(state, "health.last-gasp") && target.health < maximumHealth(target) / 2 ? 10 : 0)
-            : 0),
-      ) /
-        100
+    (blindMiss || (dodgeChance(state, target) > 0 && roll(state) < dodgeChance(state, target) / 100))
   ) {
     events.push({
       kind: "status",
@@ -991,6 +1069,7 @@ export function tickStatuses(state: GameState, unit: Combatant, events: GameEven
 /** Called once at the start of the owner's turn, including while in reserve. */
 export function startAction(unit: Combatant, events: GameEvent[], state?: GameState) {
   const stats = combat(unit);
+  stats.temporaryDodge = 0;
   stats.skipped = !!stats.controlled;
   if (stats.controlled) {
     events.push({
