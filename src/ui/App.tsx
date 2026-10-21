@@ -22,7 +22,24 @@ import { KeywordText } from "./keyword-text";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
 import { flushSync } from "react-dom";
-import { Menu, ArrowLeftRight, Bot, Pause, LogOut } from "lucide-react";
+import {
+  Menu,
+  ArrowLeftRight,
+  Bot,
+  Pause,
+  Play,
+  Compass,
+  Trophy,
+  Users,
+  Sparkles,
+  PawPrint,
+  Gift,
+  BookOpen,
+  Settings2,
+  House,
+  LogOut,
+  FastForward,
+} from "lucide-react";
 import type { Session } from "../application/session";
 import { Button } from "../components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../components/ui/dialog";
@@ -354,33 +371,45 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           }
         }}
       >
+        {home && !active ? (
+          <Compass aria-hidden="true" className="menu-icon-journey" />
+        ) : (
+          <Play aria-hidden="true" className="menu-icon-journey" />
+        )}
         {home ? (active ? "Continue" : "New journey") : "Resume"}
       </Button>
       {home && ["victory", "defeat"].includes(game.phase) ? (
         <Button variant="ghost" onClick={() => setRoute("play")}>
+          <Trophy aria-hidden="true" className="menu-icon-results" />
           Journey results
         </Button>
       ) : null}
       {canManageLineup ? (
         <Button variant="ghost" onClick={() => openModal("lineup")}>
+          <Users aria-hidden="true" className="menu-icon-lineup" />
           Lineup
         </Button>
       ) : null}
       <Button variant="ghost" onClick={() => navigate("talents")}>
+        <Sparkles aria-hidden="true" className="menu-icon-talents" />
         Talents
       </Button>
       <Button variant="ghost" onClick={() => navigate("collection")}>
+        <PawPrint aria-hidden="true" className="menu-icon-collection" />
         Collection
       </Button>
       {active && game.boons.length > 0 ? (
         <Button variant="ghost" onClick={() => openModal("boons")}>
+          <Gift aria-hidden="true" className="menu-icon-boons" />
           Boons
         </Button>
       ) : null}
       <Button variant="ghost" onClick={() => navigate("glossary")}>
+        <BookOpen aria-hidden="true" className="menu-icon-glossary" />
         Glossary
       </Button>
       <Button variant="ghost" onClick={() => navigate("settings")}>
+        <Settings2 aria-hidden="true" className="menu-icon-settings" />
         Settings
       </Button>
       {!home && active ? (
@@ -395,7 +424,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
             }
           }}
         >
-          <LogOut aria-hidden="true" />
+          <LogOut aria-hidden="true" className="menu-icon-end" />
           End journey
         </Button>
       ) : null}
@@ -408,11 +437,13 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
             else setRoute("home");
           }}
         >
+          <House aria-hidden="true" className="menu-icon-home" />
           Main menu
         </Button>
       ) : null}
       {desktop ? (
         <Button variant="ghost" busy={view.closing} onClick={() => void session.quit()}>
+          <LogOut aria-hidden="true" className="menu-icon-quit" />
           Save & quit
         </Button>
       ) : null}
@@ -784,6 +815,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                     if (send({ type: "devWinBattle" })) setMenu(false);
                   }}
                 >
+                  <FastForward aria-hidden="true" className="menu-icon-skip" />
                   Skip combat
                 </Button>
               ) : null}
