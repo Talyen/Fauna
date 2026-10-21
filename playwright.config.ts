@@ -3,6 +3,9 @@ export default defineConfig({
   testDir: "tests/e2e",
   fullyParallel: false,
   workers: 1,
+  // A broken shared layout otherwise repeats the same failure across every viewport.
+  // Green runs still execute the complete suite.
+  maxFailures: process.env.CI ? 5 : undefined,
   timeout: 90000,
   use: {
     baseURL: process.env.FAUNA_TEST_URL ?? "http://127.0.0.1:48210",
