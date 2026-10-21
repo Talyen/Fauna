@@ -152,10 +152,10 @@
   --feedback-critical-flash: #fff7ed;
   --talent-tree-screen-width: 864px;
   --talent-category-label-size: calc(16px * var(--text-scale, 1));
-  --talent-category-label-line-height: calc(18.2px * var(--text-scale, 1));
-  --talent-category-caption-width: calc(98px * var(--text-scale, 1));
+  --talent-category-label-line-height: calc(20px * var(--text-scale, 1));
+  --talent-category-caption-width: calc(120px * var(--text-scale, 1));
   --talent-category-points-size: calc(13px * var(--text-scale, 1));
-  --talent-category-points-line-height: calc(18px * var(--text-scale, 1));
+  --talent-category-points-line-height: calc(20px * var(--text-scale, 1));
   --talent-overview-caption-height: calc(
     var(--talent-category-label-line-height) + var(--talent-category-points-line-height)
   );

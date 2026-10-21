@@ -1,4 +1,4 @@
-import { captureScreen } from "./rendered-evidence";
+import { captureScreen, settleScreen } from "./rendered-evidence";
 import { freshCombat } from "../../src/game/combat";
 import { test, expect, type Page, type Locator } from "@playwright/test";
 import { produce } from "immer";
@@ -256,6 +256,8 @@ test("encounter placeholder uses bounded artwork at the minimum viewport", async
   await seed(page, game);
   await resume(page);
   const card = page.locator(".app:not([inert]) [data-encounter]");
+  await page.mouse.move(0, 0);
+  await settleScreen(page);
   const bounds = await card.boundingBox();
   expect(bounds!.width).toBeCloseTo(640 / 3, 1);
   expect(bounds!.height).toBeCloseTo(160, 1);
