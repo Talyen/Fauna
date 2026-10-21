@@ -178,6 +178,7 @@ describe("lightweight local verification", () => {
     const { scripts } = JSON.parse(readFileSync(path.join(repo, "package.json"), "utf8"));
     expect(scripts.check).toBe("node scripts/check.mjs");
     expect(scripts.verify).toBe("node scripts/check.mjs");
+    expect(scripts["package:win"]).toContain("--publish never");
     for (const command of ["check:full", "test:full", "build", "test:e2e"])
       expect(scripts["verify:full"]).toContain(`npm run ${command}`);
     const workflow = readFileSync(path.join(repo, ".github/workflows/ci.yml"), "utf8");

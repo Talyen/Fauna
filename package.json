@@ -20,7 +20,7 @@
     "preview": "vite preview --host 127.0.0.1",
     "test:e2e": "playwright test",
     "test:desktop": "node scripts/smoke-desktop.mjs",
-    "package:win": "npm run build && npm run check:bundle && electron-builder --win --x64 --dir",
+    "package:win": "npm run build && npm run check:bundle && electron-builder --win --x64 --dir --publish never",
     "verify": "node scripts/check.mjs",
     "verify:full": "npm run check:full && npm run docs:check && npm run content:audit && npm run test:full -- --reporter=default --reporter=json --outputFile.json=reports/vitest.json && npm run build && npm run check:bundle && npm run test:e2e",
     "worktree": "node scripts/worktree.mjs",

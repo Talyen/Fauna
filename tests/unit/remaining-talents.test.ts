@@ -577,7 +577,7 @@ it("combined talent builds keep accepted turns and pending rewards saveable", ()
     state.talents = TALENTS.map((t) => t.id);
     state.keywordXP = Object.fromEntries(TALENTS.map((t) => [t.keyword, 10000]));
     for (let turn = 0; turn < 10 && state.phase === "battle"; turn++) {
-      for (const cardId of [...state.battle!.hand]) {
+      for (const cardId of state.battle!.hand) {
         if (state.phase !== "battle") break;
         const card = state.cards.find((c) => c.id === cardId)!;
         const def = definition(card.definitionId);

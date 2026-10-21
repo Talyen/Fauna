@@ -135,21 +135,20 @@ it("opens every expanded talent tree and purchases a later row through the exist
   await session.load();
   render(<App session={session} />);
   try {
-    await userEvent.click(screen.getByRole("button", { name: "Talents", exact: true }));
+    await userEvent.click(screen.getByRole("button", { name: "Talents" }));
     for (const keyword of KEYWORDS) {
       await userEvent.click(screen.getByRole("button", { name: `${keywordLabel(keyword)} talents` }));
       const talents = TALENTS.filter((t) => t.keyword === keyword);
-      for (const talent of talents)
-        expect(screen.getByRole("button", { name: talent.name, exact: true })).toBeTruthy();
+      for (const talent of talents) expect(screen.getByRole("button", { name: talent.name })).toBeTruthy();
       if (keyword === "physical") {
         const later = talents.find((t) => t.row === 1)!;
         expect(screen.getByRole("button", { name: later.name }).getAttribute("aria-disabled")).toBe("true");
         for (const talent of talents.filter((t) => t.row === 0))
-          await userEvent.click(screen.getByRole("button", { name: talent.name, exact: true }));
-        await userEvent.click(screen.getByRole("button", { name: later.name, exact: true }));
+          await userEvent.click(screen.getByRole("button", { name: talent.name }));
+        await userEvent.click(screen.getByRole("button", { name: later.name }));
         expect(session.store.getState().game.talents).toContain(later.id);
       }
-      await userEvent.click(screen.getByRole("button", { name: "Back", exact: true }));
+      await userEvent.click(screen.getByRole("button", { name: "Back" }));
     }
   } finally {
     await session.dispose();
