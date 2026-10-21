@@ -34,7 +34,7 @@ it("offers no support visit after the second ordinary victory", () => {
   let s = merchant();
   s = winBattle(accept(s, { type: "beginBattle" }));
   s = accept(s, { type: "skipRecruit" });
-  expect(s.expedition!.step).toBe(2);
+  expect(s.encounter).toBe(2);
   expect(s.support).toBeNull();
   expect(decodeSave(encodeSave(s))).toEqual(s);
 });

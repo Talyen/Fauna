@@ -34,8 +34,7 @@ async function step(page: Page, activate: (el: Locator) => Promise<void> = (el) 
   const s = await state(page),
     c = policy(s);
   if (c.type === "beginBattle") {
-    if (s.expedition) await activate(page.locator("[data-encounter]"));
-    await activate(page.getByRole("button", { name: "Begin battle", exact: true }));
+    await activate(page.locator(".app:not([inert]) [data-encounter]"));
   } else if (c.type === "skipRecruit")
     await activate(page.getByRole("button", { name: "Skip", exact: true }));
   else if (c.type === "chooseBoon")
@@ -169,74 +168,71 @@ for (const width of [1280, 1920])
 
 for (const width of [1280, 1920])
   for (const enlarged of [false, true])
-    test(`destination inspection preserves choices and focus at ${width}, enlarged ${enlarged}`, async ({
-      page,
-    }) => {
-      await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
-      await page.emulateMedia({ reducedMotion: "reduce" });
-      const game = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
-      await seed(page, game);
-      await resume(page);
-      if (enlarged) {
-        await page.getByRole("button", { name: "Open menu", exact: true }).click();
-        await page.getByRole("button", { name: "Settings", exact: true }).click();
-        await page.getByRole("radio", { name: "125%", exact: true }).click();
+    for (const encounter of [0, 3, 7])
+      test(`encounter ${encounter} enters directly at ${width}, enlarged ${enlarged}`, async ({ page }) => {
+        await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
+        await page.emulateMedia({ reducedMotion: "reduce" });
+        const game = produce(
+          accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" }),
+          (draft) => {
+            draft.encounter = encounter;
+            draft.expedition!.pack = 0;
+            draft.journey!.victories = encounter;
+          },
+        );
+        await seed(page, game);
+        await resume(page);
+        if (enlarged) {
+          await page.getByRole("button", { name: "Open menu", exact: true }).click();
+          await page.getByRole("button", { name: "Settings", exact: true }).click();
+          await page.getByRole("radio", { name: "125%", exact: true }).click();
+          await page.keyboard.press("Escape");
+          await page.keyboard.press("Escape");
+        }
+        const enter = page.getByRole("button", { name: encounter === 0 ? "Combat" : "Boss", exact: true });
+        await expect(page.locator(".app:not([inert]) [data-encounter]")).toHaveCount(1);
+        await expect(page.locator(".app:not([inert]) [data-enemy-id]")).toHaveCount(0);
+        await enter.locator("img").evaluate((image) => (image as HTMLImageElement).decode());
+        await fits(page);
+        await captureScreen(page, {
+          path: `reports/encounters/choice-${encounter}-${width}-${enlarged}.png`,
+        });
+        await enter.focus();
+        await page.keyboard.press("i");
+        await expect(page.getByRole("dialog")).toHaveCount(0);
+        expect(await state(page)).toEqual(game);
+        await page.reload();
+        await resume(page);
+        expect(await state(page)).toEqual(game);
+        await enter.focus();
+        await page.keyboard.press("Enter");
+        await expect(page.getByRole("dialog")).toHaveCount(0);
+        await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
+        expect((await state(page)).expedition!.pack).toBe(game.expedition!.pack);
+        // Enemy and action inspection remains available once combat has started.
+        const enemy = page.locator(".app:not([inert]) .enemy-row .creature-card").first();
+        await enemy.focus();
+        await page.keyboard.press("i");
+        const action = page.getByRole("dialog").locator(".inspection-thumbnails .action-card").first();
+        await action.click();
         await page.keyboard.press("Escape");
+        await expect(action).toBeFocused();
         await page.keyboard.press("Escape");
-      }
-      const offers = page.locator("[data-encounter]");
-      await expect(offers).toHaveCount(1);
-      await expect(page.locator(".destination-option").getByText("Combat", { exact: true })).toHaveCount(1);
-      await offers
-        .locator("img")
-        .evaluateAll((images) => Promise.all(images.map((image) => (image as HTMLImageElement).decode())));
-      await fits(page);
-      await captureScreen(page, { path: `reports/destinations/choices-${width}-${enlarged}.png` });
-      const opener = offers.first();
-      await opener.focus();
-      await page.keyboard.press("i");
-      const dialog = page.getByRole("dialog");
-      const enemy = dialog.locator(".destination-enemies .creature-card").first();
-      await enemy.click();
-      await dialog.locator(".inspection-thumbnails .action-card").first().click();
-      await page.keyboard.press("Escape");
-      await expect(dialog.locator(".inspection-thumbnails .action-card").first()).toBeFocused();
-      await page.keyboard.press("Escape");
-      await expect(enemy).toBeFocused();
-      await expect(page.getByRole("dialog")).toHaveCount(1);
-      await fits(page);
-      await captureScreen(page, { path: `reports/destinations/pack-${width}-${enlarged}.png` });
-      await page.keyboard.press("Escape");
-      await expect(opener).toBeFocused();
-      expect(await state(page)).toEqual(game);
-      await page.reload();
-      await resume(page);
-      expect(await state(page)).toEqual(game);
-      await offers.first().click();
-      await page.getByRole("button", { name: "Begin battle", exact: true }).click();
-      expect((await state(page)).expedition!.pack).toBe(game.expedition!.pack);
-      await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
-    });
+        await expect(enemy).toBeFocused();
+      });
 
-test("destination enemy artwork wraps at its fixed size in a narrow window", async ({ page }) => {
+test("encounter placeholder keeps its fixed size in a narrow window", async ({ page }) => {
   await page.setViewportSize({ width: 800, height: 800 });
   const game = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
   await seed(page, game);
   await resume(page);
-  await page.locator("[data-encounter]").first().click();
-  const cards = page.getByRole("dialog").locator(".destination-enemies .creature-card");
-  await expect(cards).toHaveCount(3);
-  // The pointer can land on a creature when the dialog opens. Measure its resting size.
-  await page.mouse.move(0, 0);
-  for (const card of await cards.all()) {
-    await expect.poll(async () => (await card.boundingBox())!.width).toBeCloseTo(800 / 3, 1);
-    await expect.poll(async () => (await card.boundingBox())!.height).toBeCloseTo(200, 1);
-  }
-  const first = await cards.nth(0).boundingBox();
-  const last = await cards.nth(2).boundingBox();
-  expect(last!.y).toBeGreaterThan(first!.y + first!.height);
+  const card = page.locator(".app:not([inert]) [data-encounter]");
+  const bounds = await card.boundingBox();
+  expect(bounds!.width).toBeCloseTo(800 / 3, 1);
+  expect(bounds!.height).toBeCloseTo(200, 1);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  await captureScreen(page, { path: "reports/destinations/narrow-pack.png", fullPage: true });
+  await expect(page.locator(".app:not([inert]) [data-enemy-id]")).toHaveCount(0);
+  await captureScreen(page, { path: "reports/encounters/narrow-choice.png", fullPage: true });
   expect(await state(page)).toEqual(game);
 });
 
@@ -249,12 +245,7 @@ test("main menu, draft and pre-battle deck lead into the first battle", async ({
   await page.getByRole("button", { name: "Choose Mossback", exact: true }).click();
   await page.getByRole("button", { name: "Begin journey" }).click();
   expect((await state(page)).phase).toBe("teamSelection");
-  const destination = page.locator("[data-encounter]").first();
-  await destination.focus();
-  await page.keyboard.press("i");
-  await expect(page.getByRole("dialog").locator(".destination-enemies .creature-card")).toHaveCount(3);
-  await page.keyboard.press("Escape");
-  await expect(destination).toBeFocused();
+  const destination = page.locator(".app:not([inert]) [data-encounter]").first();
   await page.getByRole("button", { name: "Deck", exact: true }).click();
   await expect(page.getByRole("dialog").locator(".action-card")).toHaveCount(3);
   await page.getByRole("dialog").locator(".action-card").first().click({ button: "right" });
@@ -264,7 +255,6 @@ test("main menu, draft and pre-battle deck lead into the first battle", async ({
   await page.keyboard.press("Escape");
   await page.keyboard.press("Escape");
   await destination.click();
-  await page.getByRole("button", { name: "Begin battle" }).click();
   await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
 });
 
@@ -427,7 +417,7 @@ test("recruitment adds a reserve, selection swaps its kit, and remembers active 
   expect(s.cards.some((c) => c.definitionId.startsWith("mossback"))).toBe(false);
   await page.reload();
   await resume(page);
-  await page.getByRole("button", { name: "Begin battle" }).click();
+  await page.locator(".app:not([inert]) [data-encounter]").click();
   expect((await state(page)).team[0]!.species).toBe("briartooth");
 });
 test("battle targeting uses remembered targets, forecasts bars, and has no targeted Play button", async ({
@@ -800,7 +790,7 @@ test("five-card hand with hidden overflow, three enemies and a full bench preser
   await seed(page, s);
   await resume(page);
   await fits(page);
-  await page.getByRole("button", { name: "Begin battle" }).click();
+  await page.locator(".app:not([inert]) [data-encounter]").click();
   await expect(page.locator(".app:not([inert]) .hand .action-card")).toHaveCount(5);
   await expect(page.locator(".app:not([inert]) .enemy-row .creature-card")).toHaveCount(3);
   await fits(page);

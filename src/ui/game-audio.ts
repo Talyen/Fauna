@@ -1,3 +1,4 @@
+import { bossEncounter } from "../game/encounters";
 import { useCallback, useEffect, useRef } from "react";
 import type { Session } from "../application/session";
 import type { AudioPreferences } from "./audio-preferences";
@@ -61,11 +62,9 @@ export function useGameAudio(session: Session, preferences: AudioPreferences, ho
   const track: MusicCue =
     home || !["battle", "teamSelection", "recruit", "boon", "support", "campfire"].includes(game.phase)
       ? "menu"
-      : game.expedition?.step === 3
+      : bossEncounter(game)
         ? "boss"
-        : game.expedition?.biome === 1
-          ? "marsh"
-          : "fernwood";
+        : "combat";
   useEffect(() => {
     owner.current?.configure(preferences);
   }, [preferences]);

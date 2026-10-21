@@ -3,7 +3,7 @@ import { freeze } from "immer";
 import { MAX_HAND_SIZE } from "./engine";
 import { z } from "zod";
 import { CARDS, INITIAL_SPECIES, species } from "./content";
-import { BIOMES, encounterPacks, encounterSource, finalEncounter, bossEncounter } from "./encounters";
+import { JOURNEY_LENGTH, encounterPacks, encounterSource, finalEncounter, bossEncounter } from "./encounters";
 import { KEYWORDS, BOONS, TALENTS, talentPoints } from "./progression";
 import type { GameState } from "./types";
 const natural = z.number().int().min(0).max(1_000_000);
@@ -79,7 +79,7 @@ const creature = z.object({
   combat: combatState.optional(),
 });
 const currentShape = z.object({
-  version: z.literal(18),
+  version: z.literal(19),
   discovery: z.object({ encountered: z.array(speciesId).max(6), recruited: z.array(speciesId).max(6) }),
   revision: z
     .number()
@@ -119,15 +119,9 @@ const currentShape = z.object({
     .number()
     .int()
     .min(0)
-    .max(BIOMES.length * 4 - 1),
+    .max(JOURNEY_LENGTH - 1),
   expedition: z
     .object({
-      biome: z
-        .number()
-        .int()
-        .min(0)
-        .max(BIOMES.length - 1),
-      step: z.number().int().min(0).max(3),
       pack: z.number().int().min(0).max(100).nullable(),
     })
     .nullable(),
@@ -135,8 +129,7 @@ const currentShape = z.object({
     .object({
       id,
       kind: z.literal("merchant"),
-      biome: z.number().int().min(0).max(1),
-      step: z.literal(1),
+      encounter: z.union([z.literal(1), z.literal(5)]),
       resolved: z.boolean(),
       purchased: boonId.nullable(),
       stock: z
@@ -162,11 +155,7 @@ const currentShape = z.object({
   journey: z
     .object({
       outcome: z.enum(["victory", "defeat", "returned"]).nullable(),
-      victories: z
-        .number()
-        .int()
-        .min(0)
-        .max(BIOMES.length * 4),
+      victories: z.number().int().min(0).max(JOURNEY_LENGTH),
       currency: natural,
       xp,
       unlocks: z.array(speciesId).max(6),
@@ -215,9 +204,8 @@ export function decodeSave(raw: string): GameState {
   }
   if (s.expedition) {
     const route = s.expedition;
-    invalid(s.encounter !== route.biome * 4 + route.step);
     if (s.phase === "draft") invalid(route.pack !== null || s.encounter !== 0);
-    else invalid(route.pack === null || !encounterPacks(route.biome, route.step)[route.pack]);
+    else invalid(route.pack === null || !encounterPacks(s.encounter)[route.pack]);
   } else invalid(s.encounter > 2);
   invalid(
     !unique(s.unlocked) ||
@@ -286,9 +274,8 @@ export function decodeSave(raw: string): GameState {
     const v = s.support;
     invalid(
       !s.expedition ||
-        v.biome !== s.expedition.biome ||
-        v.step !== s.expedition.step ||
-        v.id !== `support-${v.biome}-${v.step}` ||
+        v.encounter !== s.encounter ||
+        v.id !== `support-${v.encounter}` ||
         !["teamSelection", "support", "campfire"].includes(s.phase) ||
         !v.stock.length ||
         !unique(v.stock.map((r) => r.slot)) ||

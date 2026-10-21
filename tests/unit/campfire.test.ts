@@ -18,15 +18,9 @@ it.each([22, 21, 20, 0])("uses the exact 30%% missing Health threshold at %s/30"
 });
 it.each([0, 1, 2, 3, 4, 5, 6, 7])("offers Campfire at encounter %s without rerolling combat", (encounter) => {
   const s = produce(destinations(), (d) => {
-    const biome = Math.floor(encounter / 4),
-      step = encounter % 4;
     d.encounter = encounter;
     d.journey!.victories = encounter;
-    d.expedition = {
-      biome,
-      step,
-      pack: 0,
-    };
+    d.expedition = { pack: 0 };
     d.team[0]!.health = 21;
   });
   const rested = accept(accept(s, { type: "visitCampfire" }), { type: "rest" });

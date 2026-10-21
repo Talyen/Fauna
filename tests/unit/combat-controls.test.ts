@@ -125,7 +125,7 @@ describe("combat controls", () => {
         d.encounter = 7;
         d.phase = "teamSelection";
         d.battle = null;
-        d.expedition = { biome: 1, step: 3, pack: 0 };
+        d.expedition = { pack: 0 };
       }),
       { type: "beginBattle" },
     );

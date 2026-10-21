@@ -81,7 +81,7 @@ interface JourneySummary {
   lastBattle: { xp: KeywordXP; currency: number } | null;
 }
 export interface GameState {
-  version: 18;
+  version: 19;
   discovery: { encountered: SpeciesId[]; recruited: SpeciesId[] };
   revision: number;
   rng: number;
@@ -99,15 +99,12 @@ export interface GameState {
   cards: Card[];
   encounter: number;
   expedition: {
-    biome: number;
-    step: number;
     pack: number | null;
   } | null;
   support: {
     id: string;
     kind: "merchant";
-    biome: number;
-    step: number;
+    encounter: number;
     resolved: boolean;
     purchased: BoonId | null;
     stock: { slot: string; boon: BoonId; price: number }[];

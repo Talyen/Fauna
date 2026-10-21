@@ -6,7 +6,6 @@ import type { Session } from "../application/session";
 import type { DisplayState } from "../platform/ports";
 import { decodeSave } from "../game/save";
 import type { GameState } from "../game/types";
-import { BIOMES } from "../game/encounters";
 import { Button } from "../components/ui/button";
 import { RadioGroup, RadioGroupItem } from "../components/ui/radio-group";
 export function DisplaySettings({ session }: { session: Session }) {
@@ -167,8 +166,8 @@ export function CloudRecovery({ session }: { session: Session }) {
                   Save {index + 1} · Device {candidate.device.slice(0, 6)}
                 </h2>
                 <p>
-                  {game.expedition ? BIOMES[game.expedition.biome]!.name : "Journey"} · {phaseLabel(game)} ·{" "}
-                  {game.currency} Gold · {game.wins} wins
+                  Encounter {game.encounter + 1} · {phaseLabel(game)} · {game.currency} Gold · {game.wins}{" "}
+                  wins
                 </p>
                 <Button
                   disabled={cloud.status !== "Conflict"}

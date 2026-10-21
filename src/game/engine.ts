@@ -30,7 +30,7 @@ import type { Card, Command, CommandResult, GameEvent, GameState } from "./types
 export function createGame(seed = 1): GameState {
   return freeze(
     {
-      version: 18,
+      version: 19,
       support: null,
       discovery: { encountered: [], recruited: [] },
       revision: 0,
@@ -52,7 +52,7 @@ export function createGame(seed = 1): GameState {
       team: [],
       cards: [],
       encounter: 0,
-      expedition: { biome: 0, step: 0, pack: null },
+      expedition: { pack: null },
       battle: null,
     },
     true,
@@ -61,8 +61,8 @@ export function createGame(seed = 1): GameState {
 const random = roll;
 function prepareEncounter(state: GameState) {
   const route = state.expedition!;
-  route.pack = Math.floor(random(state) * encounterPacks(route.biome, route.step).length);
-  const kind = route.step === 1 ? "merchant" : null;
+  route.pack = Math.floor(random(state) * encounterPacks(state.encounter).length);
+  const kind = [1, 5].includes(state.encounter) ? "merchant" : null;
   const stock =
     kind === "merchant"
       ? shuffle(
@@ -75,10 +75,9 @@ function prepareEncounter(state: GameState) {
   state.support =
     kind && stock.length
       ? {
-          id: `support-${route.biome}-${route.step}`,
+          id: `support-${state.encounter}`,
           kind,
-          biome: route.biome,
-          step: route.step,
+          encounter: state.encounter,
           resolved: false,
           purchased: null,
           stock,
@@ -249,13 +248,7 @@ function afterRewards(state: GameState) {
     return;
   }
   state.encounter++;
-  if (state.expedition) {
-    if (state.expedition.step === 3) {
-      state.expedition.biome++;
-      state.expedition.step = 0;
-    } else state.expedition.step++;
-    prepareEncounter(state);
-  }
+  if (state.expedition) prepareEncounter(state);
   state.phase = "teamSelection";
   state.battle = null;
   state.reward = null;

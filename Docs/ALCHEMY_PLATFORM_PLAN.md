@@ -73,15 +73,15 @@ Reference: `Alchemy: desktop/main.cjs` display-mode handling. Adapt ownership an
 
 ## Optional non-combat encounters
 
-Preserve Fernwood and Moonwater Marsh, their three ordinary battles and boss each, ordinary recruitment, intermediate-boss Boons, and Campfire recovery. Add an optional Merchant visit in each biome:
+Preserve the eight-encounter journey, bosses at encounters 4 and 8, ordinary recruitment, intermediate-boss Boons, and Campfire recovery. Biomes and pre-battle enemy previews are removed. Offer an optional Merchant before encounters 2 and 6:
 
-| Visit    | Availability                                                                                 | Initial content                                                                  |
-| -------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| Merchant | Beside combat destinations after the first ordinary victory, only when an item is affordable | Two distinct unowned journey Boons, 20 Gold each; at most one purchase per visit |
+| Visit    | Availability                                                                          | Initial content                                                                  |
+| -------- | ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Merchant | Beside combat destinations before encounters 2 and 6, only when an item is affordable | Two distinct unowned journey Boons, 20 Gold each; at most one purchase per visit |
 
 Prices and effect amounts are initial tuning, owned by authored content rather than UI literals. A new account can spend the first 20-Gold victory payout at the first Merchant. The price intentionally spends permanent savings on a journey-only benefit; show the wallet, price and journey duration clearly. Do not add another currency or imply the purchase unlocks the Boon permanently.
 
-These visits do not replace or advance combat encounters. Continuing to the next battle forfeits that support opportunity. Entering a visit commits its saved state; leaving consumes it even without a purchase. Inspecting location artwork and canceling before entry consumes nothing. Returning from a completed visit preserves the exact combat destination offers and enemy packs. Starting another biome creates fresh visit availability; saving/reloading never refreshes it.
+These visits do not replace or advance combat encounters. Continuing to the next battle forfeits that support opportunity. Entering a visit commits its saved state; leaving consumes it even without a purchase. Inspecting location artwork and canceling before entry consumes nothing. Returning from a completed visit preserves the exact enemy pack. The next scheduled Merchant offer creates fresh visit availability; saving/reloading never refreshes it.
 
 Merchant stock is drawn once from eligible unowned Boons when the support offer is generated, using explicit gameplay RNG. Persist stock, stable slot IDs, authored prices and visit identity. Offer up to two eligible Boons; omit the Merchant if none remain. There are no restocks, selling, buyback, card removal, permanent unlocks or recruitment purchases. After buying one, show the committed owned state and Leave; do not add a redundant success screen.
 
@@ -105,7 +105,7 @@ Inspection offers Enter; the committed visit displays its choices and Leave. Esc
 
 Extend the production headless policy with explicit deterministic support decisions. The initial heuristic buys the first stable eligible Merchant slot when affordable and rests at Campfire whenever the health threshold is met; record this policy so balance results cannot masquerade as human preferences. Add save/resume and replay checkpoints before entry, after purchase/rest, and after leaving. Update existing route and seeded-interaction owners rather than introducing a second encounter driver.
 
-Acceptance: Merchant occurs at most once per biome; Campfire follows the roster Health threshold; all eight battles and normal rewards remain reachable; destination inspection never rerolls; rejected purchases preserve state/RNG; save/resume cannot duplicate benefits or spending; starting a new journey drops bought Boons and retains currency. Cover low funds, full Health, cap boundaries, one/no eligible Boons, abandonment and all visit resume phases.
+Acceptance: Merchant occurs at most once per scheduled offer; Campfire follows the roster Health threshold; all eight battles and normal rewards remain reachable; support inspection never rerolls combat; rejected purchases preserve state/RNG; save/resume cannot duplicate benefits or spending; starting a new journey drops bought Boons and retains currency. Cover low funds, full Health, cap boundaries, one/no eligible Boons, abandonment and all visit resume phases.
 
 References: `Alchemy: src/features/alchemy/run-loop/shop/shop-transactions.ts`, `Alchemy: src/features/alchemy/run-loop/shop/trinket-shop-commands.ts`, and `Alchemy: src/lib/mystery/types.ts`. This scope supersedes only the previously unselected support-location and currency-spending portions of [journey design](EXPEDITION_DESIGN.md); update that canonical document during implementation.
 
@@ -163,7 +163,7 @@ Bounded ancestry may make a very old common ancestor unprovable; treat that case
 
 At launch, reconcile before enabling progression commands. Use a five-second application-level wait before offering offline continuation; a late native result cannot install progress after the player has started playing. At runtime, only compare or report conflicts; replacing live progression requires an explicit synchronization transition that freezes commands, drains admitted local writes and revalidates the selected snapshot. Reconnect never silently rolls back an active journey.
 
-Conflict UI shows concise local/cloud summaries: device label, journey phase/biome, currency and available progress context. Timestamps are informational. Provide Use this save for each candidate, inspectable details when needed, and Play offline without replacement. Do not label a save Better based on wealth or wins. Preserve every competing validated candidate durably before enabling a replacement action. Failure to preserve or install leaves the conflict unresolved. Use registered modal controls and focus ownership; routine successful sync adds no modal or toast.
+Conflict UI shows concise local/cloud summaries: device label, journey phase/encounter, currency and available progress context. Timestamps are informational. Provide Use this save for each candidate, inspectable details when needed, and Play offline without replacement. Do not label a save Better based on wealth or wins. Preserve every competing validated candidate durably before enabling a replacement action. Failure to preserve or install leaves the conflict unresolved. Use registered modal controls and focus ownership; routine successful sync adds no modal or toast.
 
 ### Local saves, upload queue and shutdown
 

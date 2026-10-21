@@ -10,7 +10,7 @@ Each session records its random identity, port, checkout and owner PID under ign
 
 ## Content checks
 
-`npm run content:audit` reports authored-content errors and warnings by stable ID and field, and writes `reports/content-audit.json`. The pure validator in `src/game/content-validation.ts` also supplies startup validation through the existing `validateContent` export. It checks IDs, owners, supported magnitudes/costs, effect and keyword registration, encounter packs, biome locations, and talent rows/references. Missing player cards for a progression keyword are advisory warnings.
+`npm run content:audit` reports authored-content errors and warnings by stable ID and field, and writes `reports/content-audit.json`. The pure validator in `src/game/content-validation.ts` also supplies startup validation through the existing `validateContent` export. It checks IDs, owners, supported magnitudes/costs, effect and keyword registration, encounter packs, boss positions, stats, and IDs, and talent rows/references. Missing player cards for a progression keyword are advisory warnings.
 
 Card descriptions derive from their structured effects. Handwritten traits, boons and talent prose still need focused gameplay tests and review; the validator does not prove arbitrary English describes a resolver correctly. Media checks validate manifest coverage, image geometry, preparation identities and output bytes. CI runs the content audit; it is not added to the bounded default local smoke.
 

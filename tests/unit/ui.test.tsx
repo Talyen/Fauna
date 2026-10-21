@@ -150,43 +150,38 @@ describe("player interface", () => {
     expect(session.store.getState().game.keywordXP.nature).toBe(24);
     await session.dispose();
   });
-  it.each([0, 3])(
-    "browses encounter step %s, enemy and action without committing or rerolling",
-    async (step) => {
-      const game = produce(
-        accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" }),
-        (draft) => {
-          draft.encounter = step;
-          draft.expedition!.step = step;
-          draft.expedition!.pack = 0;
-          draft.journey!.victories = step;
-        },
-      );
-      localStorage.setItem("fauna.save.v1", JSON.stringify(game));
-      const session = createSession(createBrowserPlatform(localStorage), 7);
-      await session.load();
-      render(<App session={session} />);
-      const user = userEvent.setup();
-      await user.click(screen.getByRole("button", { name: "Continue" }));
-      const pack = encounterSource(game);
-      const opener = screen.getByRole("button", { name: step === 3 ? "Inspect Boss" : "Inspect Combat" });
-      expect(document.querySelectorAll("[data-encounter]")).toHaveLength(1);
-      vi.spyOn(opener, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
-      await user.click(opener);
-      await user.click(screen.getByRole("button", { name: `Inspect ${pack.enemies[0]!.name}` }));
-      await user.click(document.querySelector<HTMLButtonElement>(".inspection-thumbnails button")!);
-      expect(screen.getAllByRole("dialog")).toHaveLength(1);
-      await user.keyboard("{Escape}");
-      await user.keyboard("{Escape}");
-      expect(screen.getByRole("button", { name: "Begin battle" })).toBeTruthy();
-      expect(session.store.getState().game).toEqual(game);
-      await user.keyboard("{Escape}");
-      expect(screen.queryByRole("dialog")).toBeNull();
-      expect(session.store.getState().game).toEqual(game);
-      await waitFor(() => expect(document.activeElement).toBe(opener));
-      await session.dispose();
-    },
-  );
+  it.each([0, 3, 7])("starts encounter %s directly without an enemy preview", async (encounter) => {
+    const game = produce(
+      accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" }),
+      (draft) => {
+        draft.encounter = encounter;
+        draft.expedition!.pack = 0;
+        draft.journey!.victories = encounter;
+      },
+    );
+    localStorage.setItem("fauna.save.v1", JSON.stringify(game));
+    const session = createSession(createBrowserPlatform(localStorage), 7);
+    await session.load();
+    render(<App session={session} />);
+    const user = userEvent.setup();
+    await user.click(screen.getByRole("button", { name: "Continue" }));
+    expect(screen.queryByRole("region", { name: "Enemy row" })).toBeNull();
+    expect(screen.queryByRole("button", { name: /^Inspect / })).toBeNull();
+    const enter = screen.getByRole("button", { name: encounter === 0 ? "Combat" : "Boss", exact: true });
+    expect(screen.getByRole("heading", { name: `Encounter ${encounter + 1} of 8` })).toBeTruthy();
+    enter.focus();
+    await user.keyboard("i");
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect(session.store.getState().game).toEqual(game);
+    await user.keyboard("{Enter}");
+    expect(session.store.getState().game.phase).toBe("battle");
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect(screen.getByRole("region", { name: "Enemy row" })).toBeTruthy();
+    expect(session.store.getState().game.battle!.enemies.map((enemy) => enemy.species)).toEqual(
+      encounterSource(game).enemies.map((enemy) => enemy.species),
+    );
+    await session.dispose();
+  });
   it("drafts through accessible buttons and commits the battle before feedback", async () => {
     const session = createSession(createBrowserPlatform(localStorage), 7);
     await session.load();
@@ -208,8 +203,7 @@ describe("player interface", () => {
         disconnect() {}
       },
     );
-    await user.click(screen.getAllByRole("button", { name: /^Inspect / })[0]!);
-    await user.click(screen.getByRole("button", { name: "Begin battle" }));
+    await user.click(screen.getByRole("button", { name: "Combat", exact: true }));
     expect(session.store.getState().game.phase).toBe("battle");
     expect(screen.getByRole("region", { name: "Enemy row" })).toBeTruthy();
     await act(async () => {
