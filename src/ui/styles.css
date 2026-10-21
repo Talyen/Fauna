@@ -97,11 +97,19 @@ strong {
   padding: var(--space-12);
 }
 .recovery {
-  max-width: 600px;
-  margin: 15vh auto;
+  width: min(900px, 100%);
+  height: 100dvh;
+  min-height: 0;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--screen-section-gap);
+  padding: var(--space-6);
 }
 .recovery p {
-  margin: var(--space-5) 0;
+  margin: 0;
   color: var(--muted-foreground);
 }
 .notice,
@@ -1827,4 +1835,11 @@ body,
 
 .deck-dialog > .paged-content {
   margin-top: var(--screen-section-gap);
+}
+
+.cloud-candidates > section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--screen-item-gap);
 }

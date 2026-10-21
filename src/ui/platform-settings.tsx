@@ -161,7 +161,7 @@ export function CloudRecovery({ session }: { session: Session }) {
           </p>
           <PagedItems
             items={cloud.candidates}
-            pageSize={2}
+            pageSize={1}
             className="cloud-candidates"
             label="Saved journey pages"
           >
