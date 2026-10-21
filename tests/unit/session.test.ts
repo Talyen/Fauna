@@ -181,7 +181,7 @@ describe("desktop close handshake", () => {
     await s.load();
     s.command({ type: "draft", species: "mossguard" });
     const closing = requestClose!();
-    expect(s.command({ type: "draft", species: "emberfox" })).toBe(false);
+    expect(s.command({ type: "draft", species: "emberback" })).toBe(false);
     release();
     expect(await closing).toBe(true);
     await s.dispose();
@@ -226,7 +226,7 @@ it("rejects obsolete development saves and recovers a current-format backup with
   expect(memory.getItem("fauna.save.v1")).toBe(obsolete);
   session.command({ type: "endTurn" });
   await session.flush();
-  expect(JSON.parse(memory.getItem("fauna.save.v1")!).version).toBe(25);
+  expect(JSON.parse(memory.getItem("fauna.save.v1")!).version).toBe(26);
   await session.dispose();
 });
 

@@ -6,7 +6,7 @@ import { PageControls, PagedItems } from "../../src/ui/pagination";
 import { Button } from "../../src/components/ui/button";
 
 afterEach(cleanup);
-const entries = ["Mossguard", "Emberfox", "Stormfin", "Briartooth", "Silkmoth"];
+const entries = ["Mossguard", "Emberback", "Prismram", "Pollenmoth", "Extra creature"];
 function Gallery({ size = 2, items = entries }: { size?: number; items?: string[] }) {
   return (
     <PagedItems items={items} pageSize={size} className="gallery" label="Creature pages">
@@ -27,15 +27,15 @@ it("reaches every item, preserves order, and keeps focus on an enabled page cont
   expect(document.activeElement).toBe(screen.getByRole("button", { name: "Previous page" }));
   expect((screen.getByRole("button", { name: "Next page" }) as HTMLButtonElement).disabled).toBe(true);
   await user.click(screen.getByRole("button", { name: "Previous page" }));
-  expect(screen.getByRole("button", { name: "Stormfin" })).toBeTruthy();
+  expect(screen.getByRole("button", { name: "Prismram" })).toBeTruthy();
 });
 it("preserves the current item on resize, clamps shortened lists and restores removed focus", async () => {
   const view = render(<Gallery />);
   await userEvent.click(screen.getByRole("button", { name: "Next page" }));
-  screen.getByRole("button", { name: "Briartooth" }).focus();
+  screen.getByRole("button", { name: "Pollenmoth" }).focus();
   view.rerender(<Gallery size={1} />);
-  expect(screen.getByRole("button", { name: "Stormfin" })).toBeTruthy();
-  expect(document.activeElement).toBe(screen.getByRole("button", { name: "Stormfin" }));
+  expect(screen.getByRole("button", { name: "Prismram" })).toBeTruthy();
+  expect(document.activeElement).toBe(screen.getByRole("button", { name: "Prismram" }));
   view.rerender(<Gallery size={1} items={["Mossguard"]} />);
   expect(screen.getByRole("button", { name: "Mossguard" })).toBeTruthy();
   expect(document.activeElement).toBe(screen.getByRole("button", { name: "Mossguard" }));
@@ -52,7 +52,7 @@ it("does not reclaim focus after the player leaves content that later disappears
     </>,
   );
   const user = userEvent.setup();
-  await user.click(screen.getByRole("button", { name: "Emberfox" }));
+  await user.click(screen.getByRole("button", { name: "Emberback" }));
   await user.click(screen.getByRole("button", { name: "Open menu" }));
   view.rerender(
     <>

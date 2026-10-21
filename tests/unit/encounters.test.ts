@@ -80,7 +80,7 @@ describe("journey encounters", () => {
     }
     expect(s.phase).toBe("victory");
     expect(s.wins).toBe(1);
-    expect(s.unlocked).toContain("moonhart");
+    expect(s.unlocked).toContain("prismram");
   });
 
   it("rejects forged packs, progress and enemy receipts", () => {

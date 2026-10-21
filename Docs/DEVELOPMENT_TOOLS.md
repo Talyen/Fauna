@@ -17,7 +17,7 @@ Card descriptions derive from their structured effects. Handwritten traits, boon
 ## Headless journeys
 
 ```sh
-npm run balance:playthrough -- --seed 42 --runs 2 --starter emberfox --policy heuristic
+npm run balance:playthrough -- --seed 42 --runs 2 --starter emberback --policy heuristic
 npm run balance:playthrough -- --replay reports/playthrough/journey.json --out reports/replay
 npm run balance:playthrough -- --seed 42 --runs 2 --compare reports/baseline/journey.json --out reports/comparison
 ```
@@ -44,7 +44,7 @@ The desk compares current assignments with any prepared candidate of the same ki
 
 ## Paired balance reports
 
-`npm run balance:compare -- run` runs one career for each initial starter and seeds 0–9, serially. Each case uses the production heuristic policy, explicit Auto-end turn enabled, a 5,000-action/100-turn limit, save/resume every 17 actions and a 60-second watchdog. The suite has a fifteen-minute deadline. `--starters emberfox --seeds 0,1 --out reports/balance/smoke` provides a bounded two-case smoke. Reports contain explicit incomplete outcomes rather than converting timeouts to defeats.
+`npm run balance:compare -- run` runs one career for each initial starter and seeds 0–9, serially. Each case uses the production heuristic policy, explicit Auto-end turn enabled, a 5,000-action/100-turn limit, save/resume every 17 actions and a 60-second watchdog. The suite has a fifteen-minute deadline. `--starters emberback --seeds 0,1 --out reports/balance/smoke` provides a bounded two-case smoke. Reports contain explicit incomplete outcomes rather than converting timeouts to defeats.
 
 Run the identical suite in each code version, then use `npm run balance:compare -- compare reports/balance/before/report.json reports/balance/after/report.json`. Reports require matching scenario settings and initial checkpoint hashes, but permit explicitly identified code/content changes. `comparison.json` records paired mean differences and standard errors for wins, turns, remaining roster Health, encounter reached, swaps, retained currency and XP. Differences within two standard errors are noisy; one pair cannot estimate uncertainty. These are automated-policy observations, not human win rates.
 

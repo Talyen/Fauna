@@ -3,36 +3,21 @@ import type { GameState } from "./types";
 
 export const JOURNEY_LENGTH = 8;
 export const COMBAT_PACKS = [
-  ["briartooth", "silkmoth", "mossguard"],
-  ["briartooth", "mossguard", "emberfox"],
-  ["mossguard", "stormfin", "silkmoth"],
-  ["stormfin", "silkmoth", "briartooth"],
-  ["emberfox", "briartooth", "mossguard"],
-  ["emberfox", "mossguard", "silkmoth"],
-  ["silkmoth", "mossguard", "stormfin"],
-  ["silkmoth", "emberfox", "briartooth"],
-  ["stormfin", "silkmoth", "mossguard"],
-  ["stormfin", "stormfin", "briartooth"],
-  ["mossguard", "briartooth", "stormfin"],
-  ["silkmoth", "emberfox", "stormfin"],
-  ["emberfox", "silkmoth", "mossguard"],
-  ["stormfin", "briartooth", "emberfox"],
-  ["silkmoth", "mossguard", "briartooth"],
-  ["emberback", "mossguard", "silkmoth"],
-  ["briartooth", "emberback", "stormfin"],
-  ["silkmoth", "emberback", "mossguard"],
-  ["pollenmoth", "briartooth", "stormfin"],
-  ["mossguard", "pollenmoth", "emberfox"],
-  ["prismram", "mossguard", "silkmoth"],
-  ["stormfin", "prismram", "emberback"],
-  ["briartooth", "silkmoth", "prismram"],
+  ["emberback", "pollenmoth", "mossguard"],
+  ["mossguard", "prismram", "pollenmoth"],
+  ["pollenmoth", "emberback", "prismram"],
+  ["prismram", "mossguard", "emberback"],
+  ["emberback", "emberback", "mossguard"],
+  ["pollenmoth", "pollenmoth", "emberback"],
+  ["prismram", "prismram", "emberback"],
+  ["prismram", "emberback", "pollenmoth"],
 ] as const;
 export const BOSSES = [
   {
     id: "briar-warden",
     encounter: 3,
     name: "The Briar Warden",
-    pack: ["briartooth", "mossguard", "silkmoth"],
+    pack: ["emberback", "mossguard", "pollenmoth"],
     health: 36,
     damage: 5,
   },
@@ -40,7 +25,7 @@ export const BOSSES = [
     id: "hollow-crown",
     encounter: 7,
     name: "The Hollow Crown",
-    pack: ["moonhart", "stormfin", "silkmoth"],
+    pack: ["prismram", "emberback", "pollenmoth"],
     health: 68,
     damage: 10,
   },
@@ -84,14 +69,7 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
       name: boss && index === 0 ? boss.name : species(kind).name,
       species: kind,
       ...(boss ? (index === 0 ? { health: boss.health, damage: boss.damage } : escort) : ordinary),
-      damageType:
-        kind === "emberfox"
-          ? "burn"
-          : kind === "stormfin"
-            ? "stun"
-            : kind === "silkmoth" || kind === "moonhart" || kind === "pollenmoth" || kind === "prismram"
-              ? "light"
-              : "nature",
+      damageType: kind === "emberback" ? "burn" : kind === "mossguard" ? "nature" : "light",
     })),
   };
 }

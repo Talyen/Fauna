@@ -2,50 +2,6 @@
   "version": 1,
   "assets": [
     {
-      "id": "action.briartooth",
-      "origin": "repository",
-      "source": "public/art/briartooth-action.svg",
-      "output": "art/briartooth-action.svg",
-      "recipe": "copy",
-      "kind": "art",
-      "aspect": [3, 4],
-      "provenance": "Fauna existing artwork; keyword artwork adapted from Alchemy",
-      "rights": "Existing Fauna asset provenance in Docs/CONTENT.md"
-    },
-    {
-      "id": "creature.briartooth",
-      "origin": "repository",
-      "source": "public/art/briartooth.svg",
-      "output": "art/briartooth.svg",
-      "recipe": "copy",
-      "kind": "art",
-      "aspect": [4, 3],
-      "provenance": "Fauna existing artwork; keyword artwork adapted from Alchemy",
-      "rights": "Existing Fauna asset provenance in Docs/CONTENT.md"
-    },
-    {
-      "id": "action.emberfox",
-      "origin": "repository",
-      "source": "public/art/emberfox-action.svg",
-      "output": "art/emberfox-action.svg",
-      "recipe": "copy",
-      "kind": "art",
-      "aspect": [3, 4],
-      "provenance": "Fauna existing artwork; keyword artwork adapted from Alchemy",
-      "rights": "Existing Fauna asset provenance in Docs/CONTENT.md"
-    },
-    {
-      "id": "creature.emberfox",
-      "origin": "repository",
-      "source": "public/art/emberfox.svg",
-      "output": "art/emberfox.svg",
-      "recipe": "copy",
-      "kind": "art",
-      "aspect": [4, 3],
-      "provenance": "Fauna existing artwork; keyword artwork adapted from Alchemy",
-      "rights": "Existing Fauna asset provenance in Docs/CONTENT.md"
-    },
-    {
       "id": "keyword.block",
       "origin": "repository",
       "source": "public/art/keywords/block.webp",
@@ -248,72 +204,6 @@
       "origin": "repository",
       "source": "public/art/locations/silken-clearing.svg",
       "output": "art/locations/silken-clearing.svg",
-      "recipe": "copy",
-      "kind": "art",
-      "aspect": [4, 3],
-      "provenance": "Fauna existing artwork; keyword artwork adapted from Alchemy",
-      "rights": "Existing Fauna asset provenance in Docs/CONTENT.md"
-    },
-    {
-      "id": "action.moonhart",
-      "origin": "repository",
-      "source": "public/art/moonhart-action.svg",
-      "output": "art/moonhart-action.svg",
-      "recipe": "copy",
-      "kind": "art",
-      "aspect": [3, 4],
-      "provenance": "Fauna existing artwork; keyword artwork adapted from Alchemy",
-      "rights": "Existing Fauna asset provenance in Docs/CONTENT.md"
-    },
-    {
-      "id": "creature.moonhart",
-      "origin": "repository",
-      "source": "public/art/moonhart.svg",
-      "output": "art/moonhart.svg",
-      "recipe": "copy",
-      "kind": "art",
-      "aspect": [4, 3],
-      "provenance": "Fauna existing artwork; keyword artwork adapted from Alchemy",
-      "rights": "Existing Fauna asset provenance in Docs/CONTENT.md"
-    },
-    {
-      "id": "action.silkmoth",
-      "origin": "repository",
-      "source": "public/art/silkmoth-action.svg",
-      "output": "art/silkmoth-action.svg",
-      "recipe": "copy",
-      "kind": "art",
-      "aspect": [3, 4],
-      "provenance": "Fauna existing artwork; keyword artwork adapted from Alchemy",
-      "rights": "Existing Fauna asset provenance in Docs/CONTENT.md"
-    },
-    {
-      "id": "creature.silkmoth",
-      "origin": "repository",
-      "source": "public/art/silkmoth.svg",
-      "output": "art/silkmoth.svg",
-      "recipe": "copy",
-      "kind": "art",
-      "aspect": [4, 3],
-      "provenance": "Fauna existing artwork; keyword artwork adapted from Alchemy",
-      "rights": "Existing Fauna asset provenance in Docs/CONTENT.md"
-    },
-    {
-      "id": "action.stormfin",
-      "origin": "repository",
-      "source": "public/art/stormfin-action.svg",
-      "output": "art/stormfin-action.svg",
-      "recipe": "copy",
-      "kind": "art",
-      "aspect": [3, 4],
-      "provenance": "Fauna existing artwork; keyword artwork adapted from Alchemy",
-      "rights": "Existing Fauna asset provenance in Docs/CONTENT.md"
-    },
-    {
-      "id": "creature.stormfin",
-      "origin": "repository",
-      "source": "public/art/stormfin.svg",
-      "output": "art/stormfin.svg",
       "recipe": "copy",
       "kind": "art",
       "aspect": [4, 3],

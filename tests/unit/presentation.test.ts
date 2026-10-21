@@ -10,17 +10,17 @@ import { decodeSave, encodeSave } from "../../src/game/save";
 describe("uncommitted previews", () => {
   it("includes traits and upgrades without mutating the committed state", () => {
     const original = produce(run(), (d) => {
-      const attack = d.cards.find((c) => c.definitionId === "emberfox-attack")!;
+      const attack = d.cards.find((c) => c.definitionId === "emberback-attack")!;
       attack.level = 1;
       d.battle!.hand = [attack.id];
-      d.battle!.enemies[0]!.health = 12;
+      d.battle!.enemies[0]!.health = 6;
     });
     const serialized = JSON.stringify(original),
       card = original.battle!.hand[0]!;
     const preview = previewPlay(original, card, "enemy-0");
     expect(preview.accepted).toBe(true);
     expect(preview.state.battle!.enemies[0]!.health).toBe(0);
-    expect(preview.events.find((e) => e.kind === "damage")?.amount).toBe(12);
+    expect(preview.events.find((e) => e.kind === "damage")?.amount).toBe(6);
     expect(preview.events.some((e) => e.kind === "knockout" && e.targetId === "enemy-0")).toBe(true);
     expect(JSON.stringify(original)).toBe(serialized);
     expect(dispatch(original, { type: "play", cardId: card, targetId: "enemy-0" })).toEqual(preview);

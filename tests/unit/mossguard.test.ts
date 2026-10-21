@@ -12,7 +12,7 @@ import { GLOSSARY } from "../../src/game/glossary";
 import { teamRun } from "./helpers";
 
 function ready(id: string) {
-  return produce(teamRun(1, ["mossguard", "emberfox", "stormfin"]), (game) => {
+  return produce(teamRun(1, ["mossguard", "emberback", "prismram"]), (game) => {
     game.rng = 1;
     const card = game.cards.find((card) => card.definitionId === id)!;
     game.battle!.hand = [card.id];
@@ -81,7 +81,7 @@ it("renews the living deployed team including self, caps healing and leaves knoc
   const cardId = game.battle!.hand[0]!;
   const result = dispatch(game, { type: "play", cardId, autoEndTurn: false });
   expect(result.accepted).toBe(true);
-  expect(result.state.team.map((ally) => ally.health)).toEqual([29, 24, 0]);
+  expect(result.state.team.map((ally) => ally.health)).toEqual([29, 30, 0]);
   expect(result.state.reserves).toEqual(game.reserves);
   expect(result.state.battleXP.health).toBe(1);
   expect(result.state.battle!.mana).toBe(game.battle!.mana - 1);

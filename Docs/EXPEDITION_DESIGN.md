@@ -22,7 +22,7 @@ These are the agreed directions from the design review. They supersede the proto
 
 ## Encounters
 
-- A journey has eight encounters: Combat, Combat, Combat, Boss, Combat, Combat, Combat, Boss. Only the final boss completes the journey and unlocks Moonhart.
+- A journey has eight encounters: Combat, Combat, Combat, Boss, Combat, Combat, Combat, Boss. Only the final boss completes the journey.
 - Each step has one saved encounter: Combat for the three ordinary battles, then Boss. Enemy packs are selected from one shared pool when advancing and remain unchanged through support visits and reload. Both encounter types use blank landscape placeholder artwork, with names beneath. Campfire appears alongside the encounter whenever any roster creature, including a reserve or knockout, is missing at least 30% of maximum Health. Rest restores 30% maximum Health to the whole roster, capped at full Health, and returns without advancing the encounter or changing RNG. It remains available while the threshold is met.
 - Combat and Boss use blank 4:3 artwork with the encounter type below it. Campfire uses Rest beneath its location art; entering it commits a saved visit and exposes Rest as its only option. A quiet heading shows the encounter number out of eight.
 - Activating Combat or Boss immediately commits the saved encounter and starts battle. There is no enemy preview, inspection dialog or separate Begin battle action. Creature and action inspection remain available during battle.

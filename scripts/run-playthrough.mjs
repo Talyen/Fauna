@@ -68,7 +68,7 @@ if (!args.includes("--worker")) {
     const config = replay?.config ?? {
       seed: Number(value("--seed", 42)),
       runs: Number(value("--runs", 2)),
-      starter: value("--starter", "emberfox"),
+      starter: value("--starter", "emberback"),
       policy: value("--policy", "heuristic"),
       maxActions: 5000,
       maxTurns: 100,
@@ -82,7 +82,7 @@ if (!args.includes("--worker")) {
       config.runs < 1 ||
       config.runs > 20 ||
       !["heuristic", "random"].includes(config.policy) ||
-      !["mossguard", "emberfox", "stormfin", "silkmoth", "briartooth", "moonhart"].includes(config.starter)
+      !["mossguard", "emberback", "pollenmoth", "prismram"].includes(config.starter)
     )
       throw new Error("Invalid scenario configuration.");
     const output = path.resolve(root, value("--out", "reports/playthrough"));

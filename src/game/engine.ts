@@ -40,7 +40,7 @@ import { bossEncounter, encounterSource, finalEncounter, encounterPacks } from "
 import type { Card, Command, CommandResult, GameEvent, GameState } from "./types";
 export function createGame(seed = 1): GameState {
   const state: GameState = {
-    version: 25,
+    version: 26,
     support: null,
     discovery: { encountered: [], recruited: {} },
     revision: 0,
@@ -232,10 +232,6 @@ function finishBattle(state: GameState, defeated: boolean) {
   }
   if (outcome === "victory") {
     state.wins++;
-    if (!state.unlocked.includes("moonhart")) {
-      state.unlocked.push("moonhart");
-      state.journey?.unlocks.push("moonhart");
-    }
   }
   const boons =
     defeated || outcome === "victory" || !bossEncounter(state)

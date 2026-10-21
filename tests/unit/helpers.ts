@@ -5,16 +5,12 @@ import { createGame, dispatch } from "../../src/game/engine";
 import { CARDS, definition, species, type SpeciesId } from "../../src/game/content";
 import type { Command, GameState } from "../../src/game/types";
 export function run(seed = 42) {
-  return teamRun(seed, ["mossguard", "emberfox", "stormfin"]);
+  return teamRun(seed, ["mossguard", "emberback", "prismram"]);
 }
 /** A progressed lineup fixture for multi-creature combat coverage. */
 export function teamRun(seed: number, kinds: SpeciesId[]) {
   let s = createGame(seed);
   s = produce(s, (d) => {
-    if (kinds.includes("moonhart")) {
-      d.unlocked.push("moonhart");
-      d.wins = 1;
-    }
     d.selected = [kinds[0]!];
     d.starterOffers = [];
     d.discovery = {
@@ -98,12 +94,26 @@ export function policy(s: GameState): Command {
     (a, b) =>
       definition(b.definitionId).value + b.level * 2 - (definition(a.definitionId).value + a.level * 2),
   )[0];
-  if (attack) return { type: "play", cardId: attack.id, targetId: enemy.id };
+  if (attack) {
+    const def = definition(attack.definitionId);
+    return {
+      type: "play",
+      cardId: attack.id,
+      ...(def.effect === "attack" && !def.target ? { targetId: enemy.id } : {}),
+    };
+  }
   const heal = cards.find((c) => definition(c.definitionId).effect === "heal");
   const injured = s.team
     .filter((c) => c.health > 0 && c.health < species(c.species).health)
     .sort((a, b) => a.health - b.health)[0];
-  if (heal && injured) return { type: "play", cardId: heal.id, targetId: injured.id };
+  if (heal && injured) {
+    const def = definition(heal.definitionId);
+    return {
+      type: "play",
+      cardId: heal.id,
+      ...(def.effect === "heal" && !def.target ? { targetId: injured.id } : {}),
+    };
+  }
   const teamGuard = cards.find((c) => definition(c.definitionId).effect === "teamGuard");
   if (teamGuard) return { type: "play", cardId: teamGuard.id };
   const guard = cards.find((c) => definition(c.definitionId).effect === "guard");
@@ -135,7 +145,7 @@ export function bossReward() {
 
 export function feedbackBattle() {
   const battle = accept(
-    produce(teamRun(42, ["mossguard", "briartooth", "stormfin"]), (game) => {
+    produce(teamRun(42, ["mossguard", "emberback", "prismram"]), (game) => {
       game.phase = "teamSelection";
       game.encounter = 1;
       game.battle = null;
@@ -145,7 +155,7 @@ export function feedbackBattle() {
   );
   return produce(battle, (game) => {
     game.rng = 1;
-    const attack = game.cards.find((card) => card.definitionId === "briartooth-attack")!;
+    const attack = game.cards.find((card) => card.definitionId === "emberback-attack")!;
     game.battle!.hand = [attack.id];
     game.battle!.buffer = [];
     game.battle!.discard = [];

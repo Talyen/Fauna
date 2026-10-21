@@ -10,7 +10,7 @@ import { battleChoices } from "../../src/application/battle-policy";
 import { accept, teamRun, winBattle } from "./helpers";
 
 function ready(definitionId: string) {
-  return produce(teamRun(1, ["emberback", "mossguard", "stormfin"]), (game) => {
+  return produce(teamRun(1, ["emberback", "mossguard", "prismram"]), (game) => {
     game.rng = 1;
     const card = game.cards.find((card) => card.definitionId === definitionId)!;
     game.battle!.hand = [card.id];
@@ -149,7 +149,7 @@ it("keeps every authored ability at one Mana and validates the catalog", () => {
 
 it("uses an enemy area ability against deployed allies while leaving reserves untouched", () => {
   let game = accept(
-    produce(teamRun(1, ["mossguard", "emberfox", "stormfin"]), (draft) => {
+    produce(teamRun(1, ["mossguard", "emberback", "prismram"]), (draft) => {
       draft.phase = "teamSelection";
       draft.battle = null;
       draft.encounter = 2;

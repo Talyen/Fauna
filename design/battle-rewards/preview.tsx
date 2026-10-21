@@ -1,3 +1,4 @@
+import { assetUrl } from "../../src/ui/assets";
 import { useRef, useState, useLayoutEffect, type CSSProperties } from "react";
 import { createRoot } from "react-dom/client";
 import { Coins, Flame, Shield, Leaf, Gem, Feather, Shell, Check } from "lucide-react";
@@ -106,12 +107,12 @@ function Rewards() {
         {stage === "recruit" ? (
           <>
             <section className="reward-recruits" aria-label="Defeated species available to recruit">
-              {(["silkmoth", "briartooth"] as SpeciesId[]).map((kind) => (
+              {(["pollenmoth", "emberback"] as SpeciesId[]).map((kind) => (
                 <Tooltip key={kind}>
                   <TooltipTrigger asChild>
                     <ArtCard
                       aspect="creature"
-                      artwork={`/art/${kind}.svg`}
+                      artwork={assetUrl(`creature.${kind}`)}
                       aria-label={`Recruit ${species(kind).name}`}
                       onClick={() => setStage("relic")}
                     />

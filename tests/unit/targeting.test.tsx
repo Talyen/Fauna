@@ -8,9 +8,23 @@ import { TargetPreview } from "../../src/ui/target-preview";
 import { moveFocus } from "../../src/ui/input";
 import { previewCard } from "../../src/game/engine";
 import { produce } from "immer";
+import * as content from "../../src/game/content";
 import { teamRun } from "./helpers";
 
 beforeEach(() => {
+  // Keep chosen-ally targeting covered even though the current kits use self or group guards.
+  const original = content.definition;
+  vi.spyOn(content, "definition").mockImplementation((id) =>
+    id === "prismram-guard"
+      ? {
+          ...original(id),
+          effect: "guard",
+          target: undefined,
+          value: 6,
+          effects: [{ kind: "status", status: "dodge", amount: 10 }],
+        }
+      : original(id),
+  );
   vi.stubGlobal(
     "ResizeObserver",
     class {
@@ -23,11 +37,12 @@ beforeEach(() => {
 });
 afterEach(() => {
   cleanup();
+  vi.restoreAllMocks();
   vi.unstubAllGlobals();
   delete document.documentElement.dataset.focus;
 });
 function fixture() {
-  return produce(teamRun(7, ["stormfin", "emberfox", "silkmoth"]), (game) => {
+  return produce(teamRun(7, ["prismram", "emberback", "pollenmoth"]), (game) => {
     game.battle!.hand = game.cards.map((card) => card.id);
     game.battle!.draw = [];
     game.battle!.mana = 4;
@@ -57,7 +72,7 @@ function open(game = fixture(), navigation = false) {
 it("mouse selection waits for hover, clears on leave, switches cards, and cancels without commands", async () => {
   const { container, send, card } = open();
   await userEvent.click(card("attack"));
-  expect(screen.getByText("Stormfin · Choose an enemy")).toBeTruthy();
+  expect(screen.getByText("Prismram · Choose an enemy")).toBeTruthy();
   expect(container.querySelector(".target-preview")).toBeNull();
   expect(container.querySelector(".target-line")).toBeNull();
   expect(container.querySelectorAll(".enemy-row [data-valid-target]")).toHaveLength(3);
@@ -68,7 +83,7 @@ it("mouse selection waits for hover, clears on leave, switches cards, and cancel
   await userEvent.unhover(enemy);
   expect(container.querySelector(".target-preview")).toBeNull();
   await userEvent.click(card("guard"));
-  expect(screen.getByText("Stormfin · Choose an ally")).toBeTruthy();
+  expect(screen.getByText("Prismram · Choose an ally")).toBeTruthy();
   expect(container.querySelectorAll(".player-row [data-valid-target]")).toHaveLength(3);
   expect(container.querySelector(".enemy-row [data-valid-target]")).toBeNull();
   await userEvent.click(card("guard"));
@@ -135,23 +150,24 @@ it("explains unavailable Mana and control while leaving state unchanged", async 
   await userEvent.click(frozen);
   expect(screen.getByText(/cannot act while Frozen/)).toBeTruthy();
   await userEvent.click(container.querySelector<HTMLButtonElement>('.hand [data-card-id^="ally-2:"]')!);
-  expect(screen.getByText("Silkmoth cannot act this turn.")).toBeTruthy();
+  expect(screen.getByText("Pollenmoth cannot act this turn.")).toBeTruthy();
   expect(send).not.toHaveBeenCalled();
 });
-it("forecasts Block absorption, Health damage and status changes from the authoritative preview without mutating RNG", () => {
+it("forecasts Block absorption, Health damage and Stun buildup from the authoritative preview without mutating RNG", () => {
   const before = produce(fixture(), (game) => {
-    game.battle!.enemies[0]!.block = 2;
+    game.battle!.enemies[0]!.block = 1;
+    game.rng = 1;
     game.battle!.enemies[0]!.combat.dodge = 0;
   });
-  // Stun has a buildup consequence as well as immediate damage.
-  const card = before.cards.find((card) => card.definitionId === "stormfin-attack")!;
+  // Magma Stomp has a buildup consequence as well as immediate damage.
+  const card = before.cards.find((card) => card.definitionId === "emberback-magma-stomp")!;
   const rng = before.rng;
   const result = previewCard(before, card.id, "enemy-0");
   render(<TargetPreview before={before} result={result} targetId="enemy-0" />);
   expect(screen.getByText(/absorbed/)).toBeTruthy();
   expect(screen.getByText(/Stun/, { selector: ".rule-keyword" })).toBeTruthy();
   expect(before.rng).toBe(rng);
-  expect(before.battle!.enemies[0]!.block).toBe(2);
+  expect(before.battle!.enemies[0]!.block).toBe(1);
 });
 
 it("shows the acting creature's secondary effects separately from the chosen ally", async () => {
@@ -197,7 +213,7 @@ it("moves between battle rows and reaches hand-side controls with directional in
 it.each(["emberback-furnace-breath", "emberback-magma-stomp", "mossguard-attack"])(
   "previews every enemy for %s and confirms without choosing one target",
   async (id) => {
-    const game = produce(teamRun(1, ["emberback", "mossguard", "stormfin"]), (draft) => {
+    const game = produce(teamRun(1, ["emberback", "mossguard", "prismram"]), (draft) => {
       const chosen = draft.cards.find((card) => card.definitionId === id)!;
       draft.battle!.hand = [chosen.id];
       draft.battle!.buffer = [];
@@ -234,7 +250,7 @@ it.each([
   ["mossguard-guard", "guard", "Self", 1],
   ["mossguard-heal", "heal", "All allies", 3],
 ] as const)("previews and confirms %s without selecting an ally", async (id, effect, recipient, count) => {
-  const game = produce(teamRun(1, ["mossguard", "emberfox", "stormfin"]), (draft) => {
+  const game = produce(teamRun(1, ["mossguard", "emberback", "prismram"]), (draft) => {
     const chosen = draft.cards.find((card) => card.definitionId === id)!;
     draft.battle!.hand = [chosen.id];
     draft.battle!.buffer = [];
@@ -256,7 +272,7 @@ it.each([
 });
 
 it.each(["attack", "heal"])("confirms Pollenmoth's automatic %s without manual targeting", (effect) => {
-  const game = produce(teamRun(7, ["pollenmoth", "mossguard", "stormfin"]), (draft) => {
+  const game = produce(teamRun(7, ["pollenmoth", "mossguard", "prismram"]), (draft) => {
     draft.team[0]!.health -= 5;
     draft.battle!.hand = draft.cards.map((card) => card.id);
     draft.battle!.draw = [];

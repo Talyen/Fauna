@@ -25,14 +25,14 @@ it("resolves the highest authored tier for card rules and battle start without s
   const base = content.species;
   vi.spyOn(content, "species").mockImplementation((kind) => {
     const original = base(kind);
-    if (kind !== "stormfin") return original;
+    if (kind !== "prismram") return original;
     return {
       ...original,
       passiveTiers: [
         original.passiveTiers[0],
         null,
         {
-          description: "Guard cards grant 7 extra Block. Start battle with 3 Block and 4 Thorns.",
+          description: "Guard cards grant 7 extra Block; Start battle with 3 Block and 4 Thorns",
           effects: [
             { kind: "cardBonus", trigger: "guard", amount: 7 },
             { kind: "battleStart", effect: "block", amount: 3 },
@@ -45,21 +45,21 @@ it("resolves the highest authored tier for card rules and battle start without s
       ],
     };
   });
-  const guard = { id: "test", definitionId: "stormfin-guard", ownerId: "ally-0", level: 0 };
+  const guard = { id: "test", definitionId: "prismram-guard", ownerId: "ally-0", level: 0 };
   for (const copies of [1, 2, 3, 4, 6]) {
-    const game = produce(teamRun(42, ["stormfin", "emberfox", "silkmoth"]), (draft) => {
-      draft.discovery.recruited.stormfin = copies;
+    const game = produce(teamRun(42, ["prismram", "emberback", "pollenmoth"]), (draft) => {
+      draft.discovery.recruited.prismram = copies;
       draft.phase = "teamSelection";
       draft.battle = null;
     });
     const upgraded = copies >= 3;
-    expect(creaturePassive(game, "stormfin").rank).toBe(upgraded ? 2 : 0);
-    expect(actionValue(guard, game.team[0]!, game)).toBe(upgraded ? 13 : 6);
+    expect(creaturePassive(game, "prismram").rank).toBe(upgraded ? 2 : 0);
+    expect(actionValue(guard, game.team[0]!, game)).toBe(upgraded ? 10 : 3);
     const battle = accept(game, { type: "beginBattle" });
     expect(battle.team[0]!.block).toBe(upgraded ? 3 : 0);
     expect(battle.team[0]!.combat!.thorns).toBe(upgraded ? 4 : 0);
     expect(
-      enemyAbilityValue({ species: "stormfin", damage: 8 }, content.definition(guard.definitionId)),
+      enemyAbilityValue({ species: "prismram", damage: 8 }, content.definition(guard.definitionId)),
     ).toBe(4);
   }
 });

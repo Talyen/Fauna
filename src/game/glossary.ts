@@ -30,7 +30,7 @@ export const GLOSSARY = [
   {
     term: "Hit",
     definition:
-      "An incoming damage action; Briartooth's passive retaliates only when the action removes health, not when block absorbs it entirely",
+      "An incoming damage action; Thorns retaliate only when the action removes health, not when block absorbs it entirely",
   },
   {
     term: "Turn",

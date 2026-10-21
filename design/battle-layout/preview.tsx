@@ -1,3 +1,4 @@
+import { assetUrl } from "../../src/ui/assets";
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { Shield, Menu } from "lucide-react";
@@ -19,15 +20,15 @@ import "./mana-crystals.css";
 // Deliberately frozen presentation fixtures: no session, commands, persistence or audio.
 const team: Creature[] = [
   { id: "ally-0", species: "mossguard", health: 26, block: 5, attacked: false },
-  { id: "ally-1", species: "emberfox", health: 20, block: 0, attacked: false },
-  { id: "ally-2", species: "stormfin", health: 18, block: 0, attacked: false },
+  { id: "ally-1", species: "emberback", health: 20, block: 0, attacked: false },
+  { id: "ally-2", species: "prismram", health: 18, block: 0, attacked: false },
 ];
 const hand: Card[] = [
   "mossguard-guard",
-  "stormfin-attack",
-  "emberfox-attack",
-  "emberfox-heal",
-  "mossguard-teamGuard",
+  "prismram-attack",
+  "emberback-attack",
+  "mossguard-heal",
+  "emberback-furnace-breath",
 ].map((id, index) => ({
   id: `sample-${index}`,
   definitionId: id,
@@ -118,7 +119,7 @@ function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?
       artwork: (
         <ArtCard
           aspect="creature"
-          artwork={`/art/${kind}.svg`}
+          artwork={assetUrl(`creature.${kind}`)}
           presentation
           aria-label={name ?? species(kind).name}
         />
@@ -185,7 +186,7 @@ function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?
               <TooltipTrigger asChild>
                 <ArtCard
                   aspect="creature"
-                  artwork={`/art/${enemy.species}.svg`}
+                  artwork={assetUrl(`creature.${enemy.species}`)}
                   aria-label={selected && !allyTarget ? `Target ${enemy.name}` : `Inspect ${enemy.name}`}
                   onPointerEnter={() => {
                     if (selected && !allyTarget) setTarget(enemy.id);
@@ -238,7 +239,7 @@ function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?
               <TooltipTrigger asChild>
                 <ArtCard
                   aspect="creature"
-                  artwork={`/art/${creature.species}.svg`}
+                  artwork={assetUrl(`creature.${creature.species}`)}
                   aria-label={`Inspect ${species(creature.species).name}`}
                   onPointerEnter={() => {
                     if (selected && allyTarget) setTarget(creature.id);
@@ -293,7 +294,7 @@ function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?
                     artwork: (
                       <ArtCard
                         aspect="action"
-                        artwork={`/art/${definition(card.definitionId).species}-action.svg`}
+                        artwork={assetUrl(definition(card.definitionId).artwork!)}
                         presentation
                         aria-label={definition(card.definitionId).name}
                       />

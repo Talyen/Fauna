@@ -7,7 +7,7 @@ import type { Command, GameState } from "../game/types";
 
 export function performanceCases(seed = 42) {
   const fixture = structuredClone(createGame(seed));
-  const kinds: SpeciesId[] = ["mossguard", "emberfox", "stormfin", "silkmoth"];
+  const kinds: SpeciesId[] = ["mossguard", "emberback", "prismram", "pollenmoth"];
   fixture.roster = kinds;
   fixture.selected = kinds.slice(0, 3);
   fixture.starterOffers = [];
@@ -26,8 +26,8 @@ export function performanceCases(seed = 42) {
   fixture.reserves = [
     {
       id: "reserve-0",
-      species: "silkmoth",
-      health: species("silkmoth").health,
+      species: "pollenmoth",
+      health: species("pollenmoth").health,
       block: 0,
       combat: freshCombat(),
       attacked: false,

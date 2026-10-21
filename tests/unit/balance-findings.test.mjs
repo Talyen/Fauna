@@ -23,14 +23,14 @@ const report = (cases) => ({
 it("ranks incomplete evidence above tuning findings and never counts unfinished cases as defeats", () => {
   const input = report(Array.from({ length: 5 }, (_, i) => row("mossguard", i, 0, 140)));
   input.complete = false;
-  input.cases.push({ key: "emberfox-0", complete: false });
-  input.failures.push({ key: "emberfox-0", reason: "watchdog", journal: "attempts.jsonl" });
+  input.cases.push({ key: "emberback-0", complete: false });
+  input.failures.push({ key: "emberback-0", reason: "watchdog", journal: "attempts.jsonl" });
   const result = rankBalanceFindings(input);
   expect(result.findings[0]).toMatchObject({ id: "incomplete", severity: "critical" });
   expect(result.findings.find((finding) => finding.id === "mossguard-length").rank).toBeLessThan(
     result.findings.find((finding) => finding.id === "mossguard-extreme").rank,
   );
-  expect(result.findings.some((finding) => finding.id.startsWith("emberfox"))).toBe(false);
+  expect(result.findings.some((finding) => finding.id.startsWith("emberback"))).toBe(false);
 });
 it("keeps small, extreme and noisy paired samples tentative and ranks well-supported effects", () => {
   const baseline = report(Array.from({ length: 5 }, (_, i) => row("mossguard", i)));
@@ -60,7 +60,7 @@ it("does not invent findings from invalid or contradictory evidence", () => {
 
 it("rejects duplicate seeds and compares starters only across matching seed sets", () => {
   const left = Array.from({ length: 5 }, (_, seed) => row("mossguard", seed, 1));
-  const right = Array.from({ length: 5 }, (_, seed) => row("emberfox", seed + 5, 0));
+  const right = Array.from({ length: 5 }, (_, seed) => row("emberback", seed + 5, 0));
   expect(
     rankBalanceFindings(report([...left, ...right])).findings.some((finding) =>
       finding.id.endsWith("spread"),
@@ -68,7 +68,7 @@ it("rejects duplicate seeds and compares starters only across matching seed sets
   ).toBe(false);
   right.forEach((entry, seed) => {
     entry.seed = seed;
-    entry.key = `emberfox-${seed}`;
+    entry.key = `emberback-${seed}`;
   });
   expect(
     rankBalanceFindings(report([...left, ...right])).findings.find((finding) => finding.id.endsWith("spread"))

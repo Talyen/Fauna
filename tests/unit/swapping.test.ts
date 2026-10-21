@@ -9,7 +9,7 @@ import { recruitChoice, accept, run, winBattle } from "./helpers";
 
 export function withReserves() {
   return produce(run(), (d) => {
-    for (const kind of ["silkmoth", "briartooth"] as const) {
+    for (const kind of ["pollenmoth", "emberback"] as const) {
       d.roster.push(kind);
       d.reserves.push({
         id: `recruit-${kind}`,
@@ -34,7 +34,7 @@ describe("free combat swaps", () => {
       d.team[1]!.attacked = true;
       d.battle!.enemies[0]!.targetId = "ally-1";
     });
-    const after = accept(before, { type: "swap", activeId: "ally-1", reserve: "recruit-silkmoth" });
+    const after = accept(before, { type: "swap", activeId: "ally-1", reserve: "recruit-pollenmoth" });
     expect(after.rng).toBe(before.rng);
     expect(after.battle!.mana).toBe(4);
     expect(after.battle!.turn).toBe(1);
@@ -43,7 +43,7 @@ describe("free combat swaps", () => {
     expect(after.lineup).toEqual(before.lineup);
     expect(after.battle!.enemies[0]!.targetId).toBe(after.team[1]!.id);
     expect(after.cards.filter((c) => c.ownerId === after.team[1]!.id).map((c) => c.definitionId)).toEqual(
-      CARDS.filter((c) => c.species === "silkmoth").map((c) => c.id),
+      CARDS.filter((c) => c.species === "pollenmoth").map((c) => c.id),
     );
     const back = accept(after, { type: "swap", activeId: after.team[1]!.id, reserve: "ally-1" });
     expect(back.team[1]).toEqual(before.team[1]);
@@ -56,14 +56,14 @@ describe("free combat swaps", () => {
       d.team[1]!.block = 5;
     });
     for (let i = 0; i < 5; i++) {
-      s = accept(s, { type: "swap", activeId: s.team[1]!.id, reserve: "recruit-silkmoth" });
+      s = accept(s, { type: "swap", activeId: s.team[1]!.id, reserve: "recruit-pollenmoth" });
       s = accept(s, { type: "swap", activeId: s.team[1]!.id, reserve: "ally-1" });
     }
     expect(s.team[1]!.attacked).toBe(true);
     expect(s.team[1]!.block).toBe(5);
-    s = accept(s, { type: "swap", activeId: s.team[1]!.id, reserve: "recruit-silkmoth" });
+    s = accept(s, { type: "swap", activeId: s.team[1]!.id, reserve: "recruit-pollenmoth" });
     s = accept(s, { type: "endTurn" });
-    const fox = s.reserves.find((c) => c.species === "emberfox")!;
+    const fox = s.reserves.find((c) => c.species === "emberback")!;
     expect(fox.block).toBe(3);
     expect(fox.attacked).toBe(false);
     expect(decodeSave(encodeSave(s))).toEqual(s);
@@ -92,10 +92,10 @@ describe("free combat swaps", () => {
     expect(decodeSave(encodeSave(s))).toEqual(s);
     const ids = [...s.battle!.hand];
     const slot = s.cards.find((c) => ids.includes(c.id))!.ownerId;
-    s = accept(s, { type: "swap", activeId: slot, reserve: "recruit-silkmoth" });
+    s = accept(s, { type: "swap", activeId: slot, reserve: "recruit-pollenmoth" });
     expect(
       s.cards.some(
-        (c) => ids.includes(c.id) && c.ownerId === s.team.find((c) => c.species === "silkmoth")!.id,
+        (c) => ids.includes(c.id) && c.ownerId === s.team.find((c) => c.species === "pollenmoth")!.id,
       ),
     ).toBe(true);
     const outgoing = s.reserves.find((c) => c.health === 0)!;
@@ -123,25 +123,25 @@ describe("free combat swaps", () => {
   it("rejects invalid swaps without touching state or randomness", () => {
     const s = withReserves();
     for (const [activeId, reserve] of [
-      ["missing", "silkmoth"],
-      ["ally-0", "emberfox"],
-      ["ally-0", "moonhart"],
+      ["missing", "pollenmoth"],
+      ["ally-0", "emberback"],
+      ["ally-0", "prismram"],
     ] as const) {
       expect(dispatch(s, { type: "swap", activeId, reserve }).state).toBe(s);
     }
-    expect(dispatch(s, { type: "setLineup", activeId: "ally-0", reserve: "recruit-silkmoth" }).accepted).toBe(
-      false,
-    );
+    expect(
+      dispatch(s, { type: "setLineup", activeId: "ally-0", reserve: "recruit-pollenmoth" }).accepted,
+    ).toBe(false);
   });
 });
 describe("optional starting lineup and save validation", () => {
   it("remembers the starting lineup independently of combat swaps and applies optional edits next battle", () => {
-    let s = accept(withReserves(), { type: "swap", activeId: "ally-0", reserve: "recruit-silkmoth" });
+    let s = accept(withReserves(), { type: "swap", activeId: "ally-0", reserve: "recruit-pollenmoth" });
     s = winBattle(s);
     expect(s.reserves.every((c) => c.health === species(c.species).health)).toBe(true);
     const snapshot = s.battle;
-    s = accept(s, { type: "setLineup", activeId: "ally-0", reserve: "recruit-briartooth" });
-    expect(s.lineup).toEqual(["recruit-briartooth", "ally-1", "ally-2"]);
+    s = accept(s, { type: "setLineup", activeId: "ally-0", reserve: "recruit-emberback" });
+    expect(s.lineup).toEqual(["recruit-emberback", "ally-1", "ally-2"]);
     expect(s.battle).toEqual(snapshot);
     expect(decodeSave(encodeSave(s))).toEqual(s);
     if (s.phase === "recruit") s = accept(s, recruitChoice(s));
@@ -157,10 +157,10 @@ describe("optional starting lineup and save validation", () => {
         d.reserves[0]!.id = d.team[0]!.id;
       },
       (d: typeof s) => {
-        d.lineup = ["mossguard", "mossguard", "stormfin"];
+        d.lineup = ["mossguard", "mossguard", "prismram"];
       },
       (d: typeof s) => {
-        d.roster.push("moonhart");
+        d.roster.push("prismram");
       },
       (d: typeof s) => {
         d.reserves.pop();
@@ -171,11 +171,11 @@ describe("optional starting lineup and save validation", () => {
 });
 
 it("restores the saved lineup after a tactical swap without retaining card owners from the bench", () => {
-  let s = accept(withReserves(), { type: "swap", activeId: "ally-0", reserve: "recruit-silkmoth" });
+  let s = accept(withReserves(), { type: "swap", activeId: "ally-0", reserve: "recruit-pollenmoth" });
   s = winBattle(s);
   if (s.phase === "recruit") s = accept(s, recruitChoice(s));
   if (s.phase === "boon") s = accept(s, { type: "skipBoon" });
-  expect(s.team.map((c) => c.species)).toEqual(["mossguard", "emberfox", "stormfin"]);
+  expect(s.team.map((c) => c.species)).toEqual(["mossguard", "emberback", "prismram"]);
   expect(
     s.cards.every((card) =>
       s.team.some(
@@ -196,7 +196,7 @@ it("rejects current saves with missing live cards or roster members", () => {
       (s.battle as { draw: string[] }).draw = [];
     },
     (s: Record<string, unknown>) => {
-      s.roster = ["mossguard", "emberfox"];
+      s.roster = ["mossguard", "emberback"];
     },
   ]) {
     const current = JSON.parse(encodeSave(withReserves()));

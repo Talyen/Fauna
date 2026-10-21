@@ -22,7 +22,7 @@ describe("mana turn settlement", () => {
     const preview = previewPlay(before, card, "enemy-0");
     expect(preview.state.battle!.mana).toBe(0);
     expect(preview.state.battle!.turn).toBe(1);
-    expect(preview.state.team.map((c) => c.health)).toEqual([30, 24, 26]);
+    expect(preview.state.team.map((c) => c.health)).toEqual(before.team.map((creature) => creature.health));
     const result = dispatch(before, { type: "play", cardId: card, targetId: "enemy-0" });
     expect(result.accepted).toBe(true);
     expect(result.state.revision).toBe(before.revision + 1);

@@ -183,8 +183,8 @@ describe("Alchemy combat foundations", () => {
 });
 describe("combat commands and journey health", () => {
   it("classifies structured effects and tags once, without deriving XP from prose", () => {
-    expect(cardKeywords({ definitionId: "briartooth-attack" })).toEqual(["physical", "bleed", "leech"]);
-    expect(cardKeywords({ definitionId: "silkmoth-heal" })).toEqual(["health"]);
+    expect(cardKeywords({ definitionId: "emberback-attack" })).toEqual(["physical", "armor"]);
+    expect(cardKeywords({ definitionId: "pollenmoth-heal" })).toEqual(["health"]);
   });
   it("keeps damage and knockouts through victory, rewards, and the next battle", () => {
     let s = produce(victoryReady(), (d) => {
@@ -192,16 +192,16 @@ describe("combat commands and journey health", () => {
       d.team[1]!.health = 7;
     });
     // Use a living creature's attack, retaining every inert knocked-out card slot.
-    const attack = s.cards.find((c) => c.definitionId === "emberfox-attack")!;
+    const attack = s.cards.find((c) => c.definitionId === "emberback-attack")!;
     s = produce(s, (d) => {
       d.battle!.hand = [attack.id];
       d.battle!.draw = d.cards.filter((c) => c.id !== attack.id).map((c) => c.id);
     });
     s = accept(s, { type: "play", cardId: attack.id, targetId: "enemy-0" });
     s = accept(s, recruitChoice(s));
-    expect(s.team.map((c) => c.health)).toEqual([0, 7, 26]);
+    expect(s.team.map((c) => c.health)).toEqual([0, 7, 30]);
     s = accept(decodeSave(encodeSave(s)), { type: "beginBattle" });
-    expect(s.team.map((c) => c.health)).toEqual([0, 7, 26]);
+    expect(s.team.map((c) => c.health)).toEqual([0, 7, 30]);
   });
   it("heals the whole roster including knockouts and permits another visit while still hurt", () => {
     let s = produce(run(), (d) => {
@@ -217,7 +217,7 @@ describe("combat commands and journey health", () => {
     expect(decodeSave(encodeSave(s))).toEqual(s);
     const revision = s.revision;
     s = accept(s, { type: "rest" });
-    expect(s.team.map((c) => c.health)).toEqual([10, 14, 26]);
+    expect(s.team.map((c) => c.health)).toEqual([10, 16, 30]);
     expect(s.revision).toBe(revision + 1);
     expect(s.rng).toBe(rng);
     expect(s.encounter).toBe(3);
@@ -226,7 +226,7 @@ describe("combat commands and journey health", () => {
     s = accept(s, { type: "rest" });
     s = accept(s, { type: "visitCampfire" });
     s = accept(s, { type: "rest" });
-    expect(s.team.map((c) => c.health)).toEqual([30, 24, 26]);
+    expect(s.team.map((c) => c.health)).toEqual([30, 30, 30]);
     expect(dispatch(s, { type: "visitCampfire" }).state).toBe(s);
   });
 });
@@ -275,8 +275,8 @@ it("keeps Campfire lineup changes resumable before and after Rest", () => {
     s.battle = null;
     s.encounter = 3;
     s.expedition = { pack: 0 };
-    s.roster.push("silkmoth");
-    s.reserves.push({ id: "reserve-moth", species: "silkmoth", health: 5, block: 0, attacked: false });
+    s.roster.push("pollenmoth");
+    s.reserves.push({ id: "reserve-moth", species: "pollenmoth", health: 5, block: 0, attacked: false });
   });
   state = accept(state, { type: "visitCampfire" });
   const outgoing = state.team[0]!.id;

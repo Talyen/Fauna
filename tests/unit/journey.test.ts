@@ -74,9 +74,9 @@ describe("journey earnings and results", () => {
       d.expedition = started.expedition;
       d.journey = started.journey;
       d.roster = [...INITIAL_SPECIES];
-      d.reserves = (["silkmoth", "briartooth"] as const).map((kind) => ({
+      d.reserves = (["pollenmoth"] as const).map((kind) => ({
         id: kind,
-        species: kind as "silkmoth" | "briartooth",
+        species: kind as "pollenmoth" | "emberback",
         health: species(kind).health,
         block: 0,
         combat: freshCombat(),
@@ -135,7 +135,7 @@ describe("journey earnings and results", () => {
     expect(decodeSave(encodeSave(s))).toEqual(s);
   });
 
-  it("retains complete totals and only new unlocks across saving; a new journey resets the summary", () => {
+  it("retains complete totals and the complete roster across saving; a new journey resets the summary", () => {
     let s = startedJourney();
     for (let i = 0; i < 8; i++) {
       s = winBattle(accept(s, { type: "beginBattle" }));
@@ -147,7 +147,7 @@ describe("journey earnings and results", () => {
       outcome: "victory",
       victories: 8,
       currency: 200,
-      unlocks: ["moonhart"],
+      unlocks: [],
     });
     expect(s.journey!.xp).toEqual(
       Object.fromEntries(Object.entries(s.keywordXP).filter(([, value]) => value > 0)),
@@ -188,7 +188,7 @@ describe("journey earnings and results", () => {
         d.journey!.victories = 8;
       },
       (d: typeof s) => {
-        d.journey!.unlocks = ["moonhart"];
+        d.journey!.unlocks = ["prismram"];
       },
       (d: typeof s) => {
         d.journey!.outcome = "victory";

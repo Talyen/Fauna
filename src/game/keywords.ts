@@ -56,7 +56,7 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Thorns",
       "effect",
       "active",
-      "Thorns retaliate with Nature damage when an opposing attack removes Health, then lose 1 stack; Briartooth begins battle with 2 Thorns",
+      "Thorns retaliate with Nature damage when an opposing attack removes Health, then lose 1 stack",
       ["Thorn"],
     ),
     dodge: entry(

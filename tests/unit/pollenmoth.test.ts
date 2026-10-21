@@ -11,7 +11,7 @@ import type { GameEvent } from "../../src/game/types";
 import { accept, teamRun, winBattle } from "./helpers";
 
 function ready(id: string, copies = 1) {
-  return produce(teamRun(1, ["pollenmoth", "mossguard", "stormfin"]), (game) => {
+  return produce(teamRun(1, ["pollenmoth", "mossguard", "prismram"]), (game) => {
     game.discovery.recruited.pollenmoth = copies;
     const card = game.cards.find((card) => card.definitionId === id)!;
     game.battle!.hand = [card.id];
@@ -50,6 +50,7 @@ it.each([1, 2, 3, 4, 5, 6])("resolves tier %i damage bounces without revisits or
   const game = ready("pollenmoth-attack", copies);
   const events: GameEvent[] = [];
   const next = produce(game, (draft) => {
+    draft.rng = 1;
     hit(draft, draft.team[0]!, draft.battle!.enemies[0]!, 3, "light", events);
   });
   const damage = events.filter((event) => event.kind === "damage");
@@ -136,6 +137,7 @@ it("honors the probabilistic healing tier and stops damage bounces after actor k
     draft.team[0]!.health = 1;
     draft.team[0]!.combat!.deathDoorUsed = true;
     draft.battle!.enemies[0]!.combat.thorns = 2;
+    draft.rng = 1;
     hit(draft, draft.team[0]!, draft.battle!.enemies[0]!, 3, "light", events);
   });
   expect(events.filter((event) => event.kind === "damage" && event.actorId === "ally-0")).toHaveLength(1);

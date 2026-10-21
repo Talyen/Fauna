@@ -1,3 +1,4 @@
+import { assetUrl } from "../../src/ui/assets";
 import { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { Button } from "../../src/components/ui/button";
@@ -13,8 +14,8 @@ import "./selection.css";
 type Slot = { row: "active" | "reserve"; index: number };
 function TeamSelection({ hints = false, sample = "" }: { hints?: boolean; sample?: string }) {
   const [roster, setRoster] = useState<Record<Slot["row"], SpeciesId[]>>({
-    active: ["mossguard", "emberfox", "stormfin"],
-    reserve: ["silkmoth", "briartooth", "moonhart"],
+    active: ["mossguard", "emberback", "prismram"],
+    reserve: ["pollenmoth", "emberback", "prismram"],
   });
   const [selected, setSelected] = useState<Slot | null>(sample ? { row: "active", index: 1 } : null);
   const [deckOpen, setDeckOpen] = useState(false);
@@ -69,7 +70,7 @@ function TeamSelection({ hints = false, sample = "" }: { hints?: boolean; sample
       <TooltipTrigger asChild>
         <ArtCard
           aspect="creature"
-          artwork={`/art/${kind}.svg`}
+          artwork={assetUrl(`creature.${kind}`)}
           data-row={row}
           data-column={column}
           data-kind={kind}
@@ -142,7 +143,7 @@ function TeamSelection({ hints = false, sample = "" }: { hints?: boolean; sample
               CARDS.filter((card) => card.species === kind).map((def) => (
                 <Tooltip key={def.id}>
                   <TooltipTrigger asChild>
-                    <ArtCard aspect="action" artwork={`/art/${kind}-action.svg`} aria-label={def.name} />
+                    <ArtCard aspect="action" artwork={assetUrl(def.artwork!)} aria-label={def.name} />
                   </TooltipTrigger>
                   <TooltipContent>
                     <ActionDetails
@@ -169,7 +170,7 @@ function TeamSelection({ hints = false, sample = "" }: { hints?: boolean; sample
             <>
               <ArtCard
                 aspect="creature"
-                artwork={`/art/${inspection}.svg`}
+                artwork={assetUrl(`creature.${inspection}`)}
                 presentation
                 aria-label={species(inspection).name}
               />

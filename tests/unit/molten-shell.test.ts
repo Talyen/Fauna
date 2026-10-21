@@ -10,7 +10,7 @@ import { accept, teamRun } from "./helpers";
 
 function battle(copies = 1) {
   return accept(
-    produce(teamRun(1, ["emberback", "mossguard", "stormfin"]), (game) => {
+    produce(teamRun(1, ["emberback", "mossguard", "prismram"]), (game) => {
       game.discovery.recruited.emberback = copies;
       game.phase = "teamSelection";
       game.battle = null;
@@ -139,7 +139,7 @@ it.each(["physical", "poison", "freeze", "stun"] as const)(
 
 it("previews Armor theft and commits the same passive burst without mutating the original", () => {
   const withLeech = accept(
-    produce(teamRun(1, ["briartooth", "emberback", "stormfin"]), (draft) => {
+    produce(teamRun(1, ["emberback", "emberback", "prismram"]), (draft) => {
       draft.phase = "teamSelection";
       draft.battle = null;
       draft.encounter = 2;
@@ -149,7 +149,7 @@ it("previews Armor theft and commits the same passive burst without mutating the
     { type: "beginBattle" },
   );
   const ready = produce(withLeech, (draft) => {
-    const card = draft.cards.find((card) => card.definitionId === "briartooth-attack")!;
+    const card = draft.cards.find((card) => card.definitionId === "emberback-attack")!;
     draft.battle!.hand = [card.id];
     draft.battle!.buffer = [];
     draft.battle!.discard = [];

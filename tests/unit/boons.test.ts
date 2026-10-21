@@ -40,7 +40,7 @@ it("doubles only the first allied direct Burn hit across swaps, previews and res
   saved.boons = ["meteorite"];
   const burn = saved.cards.find((card) => {
     const def = definition(card.definitionId);
-    return def.effects?.some((effect) => effect.kind === "damage" && effect.damageType === "burn");
+    return def.effect === "attack" && def.damageType === "burn";
   })!;
   saved.battle!.hand = [burn.id];
   saved.battle!.draw = saved.cards.filter((card) => card.id !== burn.id).map((card) => card.id);

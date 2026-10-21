@@ -5,7 +5,7 @@ import { createGame, dispatch } from "../../src/game/engine";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { cardKeywords, talentPoints } from "../../src/game/progression";
 import { cardCost } from "../../src/game/rules";
-import { recruitChoice, accept, run, winBattle, policy, bossReward } from "./helpers";
+import { teamRun, recruitChoice, accept, run, winBattle, policy, bossReward } from "./helpers";
 describe("keyword progression and rewards", () => {
   it("awards keywords once per accepted play, banks once on victory, and never banks previews", () => {
     const s = run(),
@@ -58,7 +58,7 @@ describe("keyword progression and rewards", () => {
     let s = produce(run(), (d) => {
       d.keywordXP = { burn: 40, block: 10 };
     });
-    const card = s.cards.find((c) => c.definitionId === "emberfox-attack")!;
+    const card = s.cards.find((c) => c.definitionId === "emberback-furnace-breath")!;
     expect(cardCost(card, s)).toBe(1);
     s = accept(s, { type: "buyTalent", talentId: "burn.melting-point" });
     s = accept(s, { type: "buyTalent", talentId: "burn.flashpoint" });
@@ -76,55 +76,50 @@ describe("keyword progression and rewards", () => {
   });
   it("recruits only offered species and preserves active choices across battles", () => {
     let s = winBattle();
-    expect(dispatch(s, { type: "recruit", species: "moonhart" }).accepted).toBe(false);
-    s = accept(s, { type: "recruit", species: "briartooth" });
-    expect(s.roster).toContain("briartooth");
-    expect(s.team.map((c) => c.species)).toEqual(["mossguard", "emberfox", "stormfin"]);
+    expect(dispatch(s, { type: "recruit", species: "prismram" }).accepted).toBe(false);
+    s = accept(s, { type: "recruit", species: "emberback" });
+    expect(s.roster).toContain("emberback");
+    expect(s.team.map((c) => c.species)).toEqual(["mossguard", "emberback", "prismram"]);
     expect(decodeSave(encodeSave(s))).toEqual(s);
     s = accept(s, {
       type: "swap",
       activeId: "ally-0",
-      reserve: s.reserves.find((c) => c.species === "briartooth")!.id,
+      reserve: s.reserves.find((c) => c.species === "emberback")!.id,
     });
     expect(
-      s.cards
-        .filter((c) => c.ownerId === s.team[0]!.id)
-        .every((c) => c.definitionId.startsWith("briartooth")),
+      s.cards.filter((c) => c.ownerId === s.team[0]!.id).every((c) => c.definitionId.startsWith("emberback")),
     ).toBe(true);
     expect(dispatch(s, { type: "swap", activeId: "ally-0", reserve: "ally-1" }).accepted).toBe(false);
     s = accept(s, { type: "beginBattle" });
     expect(dispatch(s, { type: "swap", activeId: "ally-0", reserve: "ally-0" }).accepted).toBe(false);
   });
   it("requires a replacement at five and can replace either deployed or reserved species", () => {
-    for (const replace of ["ally-0", "recruit-silkmoth"] as const) {
+    for (const replace of ["ally-0", "recruit-pollenmoth"] as const) {
       let s = produce(winBattle(), (d) => {
-        d.roster.push("silkmoth", "moonhart");
-        d.reserves = ["silkmoth", "moonhart"].map((kind) => ({
+        d.roster.push("pollenmoth", "prismram");
+        d.reserves = ["pollenmoth", "prismram"].map((kind) => ({
           id: `recruit-${kind}`,
-          species: kind as "silkmoth" | "moonhart",
+          species: kind as "pollenmoth" | "prismram",
           health: 20,
           block: 0,
           combat: freshCombat(),
           attacked: false,
         }));
         d.wins = 1;
-        d.unlocked.push("moonhart");
       });
-      expect(dispatch(s, { type: "recruit", species: "briartooth" }).accepted).toBe(false);
-      expect(dispatch(s, { type: "recruit", species: "briartooth", replace: "briartooth" }).accepted).toBe(
+      expect(dispatch(s, { type: "recruit", species: "emberback" }).accepted).toBe(false);
+      expect(dispatch(s, { type: "recruit", species: "emberback", replace: "emberback" }).accepted).toBe(
         false,
       );
       const released = [...s.team, ...s.reserves].find((c) => c.id === replace)!.species;
-      s = accept(s, { type: "recruit", species: "briartooth", replace });
+      s = accept(s, { type: "recruit", species: "emberback", replace });
       expect(s.roster).toHaveLength(5);
-      expect(new Set(s.roster).size).toBe(5);
+      expect(new Set([...s.team, ...s.reserves].map((c) => c.id)).size).toBe(5);
       expect(s.roster).not.toContain(released);
       expect(decodeSave(encodeSave(s))).toEqual(s);
     }
     const s = winBattle();
-    expect(dispatch(s, { type: "recruit", species: "briartooth", replace: "mossguard" }).accepted).toBe(
-      false,
-    );
+    expect(dispatch(s, { type: "recruit", species: "emberback", replace: "mossguard" }).accepted).toBe(false);
   });
   it("offers three unique unowned boons, commits one once, and applies opening effects only at battle start", () => {
     let s = bossReward();
@@ -142,9 +137,9 @@ describe("keyword progression and rewards", () => {
     s = accept(s, { type: "beginBattle" });
     expect(s.battle!.hand).toHaveLength(5);
     expect(s.battle!.buffer).toHaveLength(0);
-    expect(s.team.find((c) => c.species === "emberfox")!.combat!.armor).toBe(2);
+    expect(s.team.find((c) => c.species === "emberback")!.combat!.armor).toBe(2);
     s = accept(s, { type: "resetTalents", keyword: "armor" });
-    expect(s.team.find((c) => c.species === "emberfox")!.combat!.armor).toBe(2);
+    expect(s.team.find((c) => c.species === "emberback")!.combat!.armor).toBe(2);
     expect(decodeSave(encodeSave(s))).toEqual(s);
   });
   it("rejects unknown/prototype map keys, invalid row purchases, and malformed receipts", () => {
@@ -160,7 +155,7 @@ describe("keyword progression and rewards", () => {
         s.phase = "boon";
       },
       (s: Record<string, unknown>) => {
-        s.roster = ["mossguard", "mossguard", "emberfox"];
+        s.roster = ["mossguard", "mossguard", "emberback"];
       },
     ]) {
       const data = JSON.parse(encodeSave(run()));
@@ -178,27 +173,27 @@ it("can end a partially completed draft without breaking save invariants", () =>
   expect(decodeSave(encodeSave(ended))).toEqual(ended);
 });
 it("awards a team-wide Block play once rather than once per recipient", () => {
-  const s = produce(run(), (d) => {
-    const card = d.cards.find((c) => c.definitionId === "stormfin-teamGuard")!;
+  const s = produce(teamRun(42, ["mossguard", "emberback", "pollenmoth"]), (d) => {
+    const card = d.cards.find((c) => c.definitionId === "pollenmoth-teamGuard")!;
     d.battle!.hand = [card.id];
     d.battle!.draw = d.cards.filter((c) => c.id !== card.id).map((c) => c.id);
     d.battle!.discard = [];
   });
   const next = accept(s, { type: "play", cardId: s.battle!.hand[0]! });
   expect(next.battleXP.block).toBe(1);
-  expect(next.team.every((c) => c.block === 3)).toBe(true);
+  expect(next.team.every((c) => c.block === 2)).toBe(true);
 });
 
 it("consumes Flashpoint once and does not refresh it on talent reset or resume", () => {
   let s = produce(run(), (d) => {
     d.keywordXP.burn = 40;
     d.talents = ["burn.flashpoint"];
-    const card = d.cards.find((c) => c.definitionId === "emberfox-attack")!;
+    const card = d.cards.find((c) => c.definitionId === "emberback-furnace-breath")!;
     d.battle!.hand = [card.id];
     d.battle!.draw = d.cards.filter((c) => c.id !== card.id).map((c) => c.id);
     d.battle!.discard = [];
   });
-  const card = s.cards.find((c) => c.definitionId === "emberfox-attack")!;
+  const card = s.cards.find((c) => c.definitionId === "emberback-furnace-breath")!;
   s = accept(s, { type: "play", cardId: card.id, targetId: "enemy-0", autoEndTurn: false });
   expect(s.battle!.mana).toBe(4);
   expect(s.battle!.freeBurnUsed).toBe(true);
@@ -224,15 +219,17 @@ it("final victory banks permanent rewards without offering recruitment or run-on
   expect(s.phase).toBe("victory");
 });
 it("swapping one creature preserves unchanged teammates' legacy cards", () => {
-  let s = accept(winBattle(), { type: "recruit", species: "briartooth" });
+  let s = accept(winBattle(), { type: "recruit", species: "emberback" });
   s = produce(s, (d) => {
-    d.cards.find((c) => c.definitionId === "emberfox-attack")!.level = 2;
+    d.cards.find((c) => c.definitionId === "emberback-furnace-breath")!.level = 2;
   });
   s = accept(s, {
     type: "swap",
     activeId: "ally-0",
-    reserve: s.reserves.find((c) => c.species === "briartooth")!.id,
+    reserve: s.reserves.find((c) => c.species === "emberback")!.id,
   });
-  expect(s.cards.find((c) => c.definitionId === "emberfox-attack")!.level).toBe(2);
+  expect(
+    s.cards.find((c) => c.definitionId === "emberback-furnace-breath" && c.ownerId === "ally-1")!.level,
+  ).toBe(2);
   expect(decodeSave(encodeSave(s))).toEqual(s);
 });

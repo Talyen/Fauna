@@ -23,13 +23,13 @@ import "./swap.css";
 // Presentation sandbox only. No persistence, production swap command, or progression changes.
 function fixture(): GameState {
   let game = createGame(71);
-  for (const kind of ["mossguard", "emberfox", "stormfin"] as const)
+  for (const kind of ["mossguard", "emberback", "prismram"] as const)
     game = dispatch(game, { type: "draft", species: kind }).state;
   game = dispatch(game, { type: "start" }).state;
   game = dispatch({ ...game, encounter: 1 }, { type: "beginBattle" }).state;
   return {
     ...game,
-    roster: ["mossguard", "emberfox", "stormfin", "silkmoth", "briartooth"],
+    roster: ["mossguard", "emberback", "prismram", "pollenmoth", "emberback"],
     team: game.team.map((creature, index) => ({
       ...creature,
       health: index === 1 && new URLSearchParams(location.search).has("ko") ? 0 : [26, 12, 19][index]!,
@@ -59,8 +59,8 @@ function Preview() {
   }, []);
   const [game, setGame] = useState(fixture);
   const [reserves, setReserves] = useState<Creature[]>([
-    { id: "reserve-silkmoth", species: "silkmoth", health: 18, block: 0, attacked: false },
-    { id: "reserve-briartooth", species: "briartooth", health: 28, block: 0, attacked: false },
+    { id: "reserve-pollenmoth", species: "pollenmoth", health: 18, block: 0, attacked: false },
+    { id: "reserve-emberback", species: "emberback", health: 28, block: 0, attacked: false },
   ]);
   const [open, setOpen] = useState(new URLSearchParams(location.search).has("open"));
   const [selected, setSelected] = useState<string | null>(null);

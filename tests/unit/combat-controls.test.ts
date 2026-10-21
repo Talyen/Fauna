@@ -87,20 +87,19 @@ describe("combat controls", () => {
     expect(dispatch(state, chooseBattleCommand(state)).accepted).toBe(true);
   });
   it("scores elemental finishers using visible bonuses without applying Physical armor to Fire", () => {
-    const state = produce(teamRun(42, ["briartooth", "emberfox", "stormfin"]), (d) => {
-      const fire = d.cards.find((card) => card.definitionId === "emberfox-attack")!;
-      const other = d.cards.find((card) => card.definitionId === "briartooth-attack")!;
+    const state = produce(teamRun(42, ["mossguard", "emberback", "prismram"]), (d) => {
+      const fire = d.cards.find((card) => card.definitionId === "emberback-furnace-breath")!;
+      const other = d.cards.find((card) => card.definitionId === "prismram-attack")!;
       d.battle!.hand = [other.id, fire.id];
       d.battle!.enemies.forEach((enemy, index) => {
-        enemy.health = index === 0 ? 9 : index === 1 ? 1 : 1000;
+        enemy.health = index === 0 ? 2 : index === 1 ? 1 : 1000;
         enemy.block = 0;
         enemy.combat.armor = index === 1 ? 0 : 100;
       });
     });
     expect(chooseBattleCommand(state)).toMatchObject({
       type: "play",
-      cardId: "ally-1:emberfox-attack",
-      targetId: "enemy-0",
+      cardId: "ally-1:emberback-furnace-breath",
     });
   });
   it("cancels even an already queued timer callback", () => {
@@ -118,7 +117,7 @@ describe("combat controls", () => {
     callback();
     expect(action).not.toHaveBeenCalled();
   });
-  it("observes live unlocks but not loaded completed checkpoints", async () => {
+  it("does not reveal a retired victory unlock or replay completed checkpoints", async () => {
     const starting = accept(
       produce(run(), (d) => {
         d.journey = { outcome: null, victories: 7, currency: 0, xp: {}, unlocks: [], lastBattle: null };
@@ -143,7 +142,7 @@ describe("combat controls", () => {
     const reveal = vi.fn();
     const stop = observeUnlocks(session, reveal);
     expect(session.command({ type: "devWinBattle" })).toBe(true);
-    expect(reveal).toHaveBeenCalledWith(["moonhart"]);
+    expect(reveal).not.toHaveBeenCalled();
     const completed = encodeSave(session.store.getState().game);
     stop();
     await session.dispose();

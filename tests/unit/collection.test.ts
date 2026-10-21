@@ -30,7 +30,7 @@ it("discovers only committed encounters and retains knowledge independently of s
   state = accept(state, { type: "newRun", seed: 8 });
   expect(state.discovery).toEqual(knowledge);
   const corrupt = produce(state, (draft) => {
-    draft.discovery.recruited = { moonhart: 1 };
+    draft.discovery.recruited = { prismram: 1 };
   });
   expect(() => decodeSave(encodeSave(corrupt))).toThrow();
 });

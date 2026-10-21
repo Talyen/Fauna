@@ -1,15 +1,6 @@
 import { DAMAGE_TYPES, keywordLabel, type DamageType, EFFECT_KEYWORDS } from "./keywords";
 export { type DamageType } from "./keywords";
-export type SpeciesId =
-  | "mossguard"
-  | "emberfox"
-  | "stormfin"
-  | "silkmoth"
-  | "briartooth"
-  | "moonhart"
-  | "emberback"
-  | "pollenmoth"
-  | "prismram";
+export type SpeciesId = "mossguard" | "emberback" | "pollenmoth" | "prismram";
 type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
   | { kind: "blockRetention"; amount: number }
@@ -96,102 +87,6 @@ export const SPECIES: readonly Species[] = [
         description: "Retain 60% more Block between turns",
         effects: [{ kind: "blockRetention", amount: 60 }],
       },
-    ],
-  },
-  {
-    id: "emberfox",
-    name: "Emberfox",
-    title: "A spark in the undergrowth",
-    health: 24,
-    color: "#ed9c65",
-    trait: "Kindling",
-    passiveTiers: [
-      {
-        description: "First attack each turn deals 2 extra damage",
-        effects: [{ kind: "cardBonus", trigger: "firstAttack", amount: 2 }],
-      },
-      null,
-      null,
-      null,
-      null,
-      null,
-    ],
-  },
-  {
-    id: "stormfin",
-    name: "Stormfin",
-    title: "The gathering storm",
-    health: 26,
-    color: "#8cbecb",
-    trait: "Charged",
-    passiveTiers: [
-      {
-        description: "Stun attacks deal 1 extra damage",
-        effects: [{ kind: "cardBonus", trigger: "stunAttack", amount: 1 }],
-      },
-      null,
-      null,
-      null,
-      null,
-      null,
-    ],
-  },
-  {
-    id: "silkmoth",
-    name: "Silkmoth",
-    title: "A little light in the dark",
-    health: 23,
-    color: "#d1b5d3",
-    trait: "Tender",
-    passiveTiers: [
-      {
-        description: "Health cards restore 2 extra Health",
-        effects: [{ kind: "cardBonus", trigger: "heal", amount: 2 }],
-      },
-      null,
-      null,
-      null,
-      null,
-      null,
-    ],
-  },
-  {
-    id: "briartooth",
-    name: "Briartooth",
-    title: "Wild at heart",
-    health: 30,
-    color: "#c7b76b",
-    trait: "Thorns",
-    passiveTiers: [
-      {
-        description:
-          "Start each battle with 2 Thorns; When an attack removes Health, retaliate with current Thorns, then lose 1 stack",
-        effects: [{ kind: "battleStart", effect: "thorns", amount: 2 }],
-      },
-      null,
-      null,
-      null,
-      null,
-      null,
-    ],
-  },
-  {
-    id: "moonhart",
-    name: "Moonhart",
-    title: "Keeper of the quiet paths",
-    health: 28,
-    color: "#b7c6e0",
-    trait: "Moonlit",
-    passiveTiers: [
-      {
-        description: "Start each battle with 4 block",
-        effects: [{ kind: "battleStart", effect: "block", amount: 4 }],
-      },
-      null,
-      null,
-      null,
-      null,
-      null,
     ],
   },
   {
@@ -412,43 +307,6 @@ export const CARDS: readonly CardDefinition[] = [
     artwork: "action.mossguard.moss-renewal",
   },
   {
-    ...attack("emberfox", "Cinder Strike", 8, "burn"),
-    effects: [{ kind: "damage", damageType: "burn", amount: 2 }],
-  },
-  card("emberfox", "Warm Embers", "heal", 5),
-  card("emberfox", "Ember Ward", "guard", 6),
-  {
-    ...attack("stormfin", "Arc Bite", 7, "stun"),
-    effects: [{ kind: "damage", damageType: "stun", amount: 3 }],
-  },
-  { ...card("stormfin", "Storm Shelter", "teamGuard", 3), effects: [{ kind: "draw", amount: 1 }] },
-  {
-    ...card("stormfin", "Static Veil", "guard", 6),
-    effects: [{ kind: "status", status: "dodge", amount: 10 }],
-  },
-  attack("silkmoth", "Glimmer", 5, "light"),
-  card("silkmoth", "Mending Light", "heal", 8),
-  { ...card("silkmoth", "Silken Ward", "guard", 7), effects: [{ kind: "cleanse", amount: 1 }] },
-  {
-    ...attack("briartooth", "Thornlash", 8, "physical"),
-    leech: true,
-    effects: [{ kind: "damage", damageType: "bleed", amount: 2, leech: true }],
-  },
-  {
-    ...card("briartooth", "Briar Coat", "guard", 7),
-    effects: [{ kind: "status", status: "thorns", amount: 1 }],
-  },
-  card("briartooth", "Briar Shelter", "teamGuard", 3),
-  {
-    ...attack("moonhart", "Moonbeam", 8, "light"),
-    effects: [
-      { kind: "damage", damageType: "freeze", amount: 4 },
-      { kind: "purge", amount: 1 },
-    ],
-  },
-  { ...card("moonhart", "Silver Light", "heal", 7), effects: [{ kind: "mana", amount: 1 }] },
-  card("moonhart", "Night Shelter", "teamGuard", 4),
-  {
     ...attack("emberback", "Ember Charge", 4, "physical"),
     artwork: "action.emberback.ember-charge",
     effects: [{ kind: "status", status: "armor", amount: 2 }],
@@ -505,14 +363,8 @@ export function enemyCard(card: CardDefinition): CardDefinition {
     ),
   };
 }
-export const FIRST_RUN_STARTERS: readonly SpeciesId[] = [
-  "mossguard",
-  "emberfox",
-  "stormfin",
-  "silkmoth",
-  "briartooth",
-];
-export const INITIAL_SPECIES = SPECIES.slice(0, 5).map((s) => s.id);
+export const INITIAL_SPECIES = SPECIES.map((s) => s.id);
+export const FIRST_RUN_STARTERS: readonly SpeciesId[] = ["emberback", "mossguard", "pollenmoth", "prismram"];
 export function species(id: SpeciesId): Species {
   const result = SPECIES.find((s) => s.id === id);
   if (!result) throw new Error(`Unknown species: ${id}`);
@@ -562,9 +414,9 @@ export const ENCOUNTERS = [
   {
     name: "The overgrown trail",
     enemies: [
-      { damageType: "nature", name: "Bramble Imp", species: "briartooth" as const, health: 18, damage: 4 },
-      { damageType: "burn", name: "Cinder Wisp", species: "emberfox" as const, health: 16, damage: 4 },
-      { damageType: "light", name: "Dusk Moth", species: "silkmoth" as const, health: 16, damage: 4 },
+      { damageType: "burn", name: "Emberback", species: "emberback" as const, health: 18, damage: 4 },
+      { damageType: "light", name: "Pollenmoth", species: "pollenmoth" as const, health: 16, damage: 4 },
+      { damageType: "nature", name: "Mossguard", species: "mossguard" as const, health: 16, damage: 4 },
     ],
   },
   {
@@ -572,19 +424,19 @@ export const ENCOUNTERS = [
     enemies: [
       {
         damageType: "physical",
-        name: "Thicket Stalker",
-        species: "stormfin" as const,
+        name: "Prismram",
+        species: "prismram" as const,
         health: 24,
         damage: 5,
       },
-      { damageType: "light", name: "Dusk Moth", species: "silkmoth" as const, health: 22, damage: 5 },
-      { damageType: "nature", name: "Moss Imp", species: "mossguard" as const, health: 18, damage: 4 },
+      { damageType: "light", name: "Pollenmoth", species: "pollenmoth" as const, health: 22, damage: 5 },
+      { damageType: "nature", name: "Mossguard", species: "mossguard" as const, health: 18, damage: 4 },
     ],
   },
   {
     name: "Heart of the wilds",
     enemies: [
-      { damageType: "light", name: "The Hollow Crown", species: "moonhart" as const, health: 68, damage: 10 },
+      { damageType: "light", name: "The Hollow Crown", species: "prismram" as const, health: 68, damage: 10 },
     ],
   },
 ] as const;

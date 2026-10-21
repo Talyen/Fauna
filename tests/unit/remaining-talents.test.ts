@@ -424,16 +424,16 @@ describe("remaining Alchemy talents adapted to creatures", () => {
 });
 
 it.each([
-  ["burn", "burn.flash-fire", "emberfox-attack"],
-  ["freeze", "freeze.winter-s-grasp", "moonhart-attack"],
-  ["nature", "nature.overgrowth", "emberfox-attack"],
-  ["poison", "poison.venom-strike", "emberfox-attack"],
-  ["stun", "stun.jarring-blow", "stormfin-attack"],
+  ["burn", "burn.flash-fire", "emberback-attack"],
+  ["freeze", "freeze.winter-s-grasp", "prismram-attack"],
+  ["nature", "nature.overgrowth", "emberback-attack"],
+  ["poison", "poison.venom-strike", "emberback-attack"],
+  ["stun", "stun.jarring-blow", "prismram-attack"],
 ] as const)(
   "%s repeats a complete card once, charges once, and previews the same outcome",
   (keyword, talent, id) => {
-    // Nature and Poison remain supported mechanics without an authored attack in this roster.
-    if (keyword === "nature" || keyword === "poison") {
+    // Exercise compound packets independently of the current production kits.
+    {
       const original = content.definition;
       vi.spyOn(content, "definition").mockImplementation((cardId) => {
         const card = original(cardId);
@@ -448,9 +448,7 @@ it.each([
       });
     }
     for (let seed = 0; seed < 1000; seed++) {
-      const state = structuredClone(
-        teamRun(42, ["mossguard", "emberfox", id.startsWith("moonhart") ? "moonhart" : "stormfin"]),
-      );
+      const state = structuredClone(teamRun(42, ["mossguard", "emberback", "prismram"]));
       fund(state, keyword);
       state.talents = state.talents.filter(
         (t) =>
@@ -477,17 +475,17 @@ it.each([
 );
 
 it("persists free-card ownership and spends the reward on only the matching creature", () => {
-  const state = structuredClone(teamRun(42, ["silkmoth", "mossguard", "emberfox"]));
+  const state = structuredClone(teamRun(42, ["pollenmoth", "mossguard", "emberback"]));
   const actor = state.team[0]!;
   actor.combat!.freeLight = true;
-  const card = playable(state, "silkmoth-attack");
+  const card = playable(state, "pollenmoth-attack");
   const saved = decodeSave(encodeSave(state));
   expect(cardCost(card, saved)).toBe(0);
   const next = accept(saved, { type: "play", cardId: card.id, targetId: "enemy-0", autoEndTurn: false });
   expect(next.team[0]!.combat!.freeLight).toBe(false);
   expect(next.battle!.mana).toBe(4);
   expect(decodeSave(encodeSave(next))).toEqual(next);
-  const rejected = dispatch(saved, { type: "play", cardId: card.id, targetId: "missing" });
+  const rejected = dispatch(saved, { type: "play", cardId: "missing" });
   expect(rejected.accepted).toBe(false);
   expect(rejected.state).toBe(saved);
 });
@@ -528,9 +526,13 @@ it("talent Gold survives defeat and resume, is reported once, and previews canno
 });
 
 it("Armor Siphon steals before card damage and Caustic strips credited Poison Armor", () => {
-  const state = structuredClone(teamRun(42, ["briartooth", "mossguard", "emberfox"]));
+  const original = content.definition;
+  vi.spyOn(content, "definition").mockImplementation((id) =>
+    id === "emberback-attack" ? { ...original(id), leech: true, effects: [] } : original(id),
+  );
+  const state = structuredClone(teamRun(42, ["emberback", "mossguard", "prismram"]));
   fund(state, "leech");
-  const card = playable(state, "briartooth-attack");
+  const card = playable(state, "emberback-attack");
   state.battle!.enemies[0]!.combat.armor = 10;
   state.battle!.enemies[0]!.block = 100;
   const result = accept(state, { type: "play", cardId: card.id, targetId: "enemy-0", autoEndTurn: false });
@@ -579,10 +581,10 @@ it("Armored Surge triggers on a Block card once and Radiant Guard draws an eligi
   }
   expect(triggered).toBe(true);
   for (let seed = 0; seed < 1000; seed++) {
-    const state = structuredClone(teamRun(42, ["silkmoth", "mossguard", "emberfox"]));
+    const state = structuredClone(teamRun(42, ["pollenmoth", "mossguard", "emberback"]));
     state.talents = ["light.radiant-guard"];
     state.rng = seed * 7919;
-    const light = playable(state, "silkmoth-attack");
+    const light = playable(state, "pollenmoth-attack");
     state.battle!.hand = [];
     state.battle!.discard = [light.id];
     const events: GameEvent[] = [];
@@ -594,7 +596,7 @@ it("Armored Surge triggers on a Block card once and Radiant Guard draws an eligi
 
 it("combined talent builds keep accepted turns and pending rewards saveable", () => {
   for (let seed = 0; seed < 5; seed++) {
-    let state = structuredClone(teamRun(seed, ["moonhart", "briartooth", "mossguard"]));
+    let state = structuredClone(teamRun(seed, ["prismram", "emberback", "mossguard"]));
     state.talents = TALENTS.map((t) => t.id);
     state.keywordXP = Object.fromEntries(TALENTS.map((t) => [t.keyword, 10000]));
     for (let turn = 0; turn < 10 && state.phase === "battle"; turn++) {
@@ -618,10 +620,10 @@ it("combined talent builds keep accepted turns and pending rewards saveable", ()
 it("retains already-earned talent Gold through defeat, abandonment and resume", () => {
   let earned: GameState | undefined;
   for (let seed = 0; seed < 1000; seed++) {
-    const state = structuredClone(teamRun(42, ["silkmoth", "mossguard", "emberfox"]));
+    const state = structuredClone(teamRun(42, ["pollenmoth", "mossguard", "emberback"]));
     fund(state, "light");
     state.rng = seed * 7919;
-    const card = playable(state, "silkmoth-attack");
+    const card = playable(state, "pollenmoth-attack");
     const next = accept(state, { type: "play", cardId: card.id, targetId: "enemy-0", autoEndTurn: false });
     if (next.currency > 0) {
       earned = next;
@@ -650,8 +652,14 @@ it("retains already-earned talent Gold through defeat, abandonment and resume", 
 });
 
 it("keyword draws include cards classified by supplemental effects", () => {
-  const state = structuredClone(teamRun(42, ["briartooth", "emberfox", "stormfin"]));
-  const card = playable(state, "briartooth-guard");
+  const state = structuredClone(teamRun(42, ["emberback", "mossguard", "prismram"]));
+  const original = content.definition;
+  vi.spyOn(content, "definition").mockImplementation((id) =>
+    id === "emberback-attack"
+      ? { ...original(id), effects: [{ kind: "status", status: "thorns", amount: 1 }] }
+      : original(id),
+  );
+  const card = playable(state, "emberback-attack");
   state.battle!.hand = [];
   state.battle!.discard = [card.id];
   drawKeyword(state, "nature");

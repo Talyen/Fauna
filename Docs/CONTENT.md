@@ -2,7 +2,7 @@
 
 `src/game/encounters.ts` owns encounter progression, enemy packs, and initial encounter scaling. `src/game/content.ts` retains the stable legacy encounters and owns the species roster, card definitions, displayed effect descriptions, and encounter templates. Each species contributes exactly three unique card definitions. Content validation runs at startup and in tests. Keep IDs stable once saves are supported.
 
-The first five species begin unlocked. Moonhart unlocks after the first journey victory. Each deployed creature contributes three cards, so the starting three-card deck grows to nine cards with a full lineup; recruitment adds defeated species to the five-slot roster. Only the deployed lineup of up to three creatures contributes cards, and free combat swaps replace cards in their existing zones. Starting lineups are remembered and optionally editable from the menu between battles. Health and knockouts persist between battles; Campfire appears beside the encounter whenever any roster creature, including a reserve or knockout, is missing at least 30% of maximum Health. Rest restores 30% maximum Health to the whole roster, capped at full Health, and returns to the same combat encounter without advancing the encounter or changing RNG. It remains available while the threshold is met. There is no positioning or elemental chart.
+The roster consists of Mossguard, Emberback, Pollenmoth and Prismram. All four are eligible for the first journey; three distinct choices are offered. Later journeys draft only collected species. Ordinary encounters and boss escorts use this same roster; victory grants no additional species unlock. Save version 26 rejects obsolete development saves without migration. Each deployed creature contributes three cards, so the starting three-card deck grows to nine cards with a full lineup; recruitment adds defeated species to the five-slot roster. Only the deployed lineup of up to three creatures contributes cards, and free combat swaps replace cards in their existing zones. Starting lineups are remembered and optionally editable from the menu between battles. Health and knockouts persist between battles; Campfire appears beside the encounter whenever any roster creature, including a reserve or knockout, is missing at least 30% of maximum Health. Rest restores 30% maximum Health to the whole roster, capped at full Health, and returns to the same combat encounter without advancing the encounter or changing RNG. It remains available while the threshold is met. There is no positioning or elemental chart.
 
 ## Ability costs
 
@@ -10,16 +10,16 @@ Every ability, for every creature, has a base cost of exactly **1 Mana**. This a
 
 ## Artwork contracts
 
-- **Creature cards: 4:3 landscape, full bleed.** Current placeholders are 800 × 600 SVGs.
+- **Creature cards: 4:3 landscape, full bleed.** Production portraits are unchanged PNG selections.
 - **Location cards: 4:3 landscape.** Original 800 × 600 SVG placeholders in `public/art/locations/`, with names and encounter labels rendered outside the artwork. `scripts/create-location-placeholders.mjs` rewrites only these placeholders.
 - **Boon cards: 3:4 portrait, matching hand cards.** Boon displays use dedicated portraits in `public/art/boons/`; keep names and effects outside the artwork.
-- **Action cards: 3:4 portrait, full bleed.** Current placeholders are 600 × 800 SVGs.
+- **Action cards: 3:4 portrait, full bleed.** Each creature has three dedicated production PNG illustrations.
 
 Displayed artwork uses one equal-area size standard: 200×266⅔ portrait and 266⅔×200 landscape in CSS pixels, at every viewport. Battle explicitly enlarges creatures by 10% and reduces hand cards by 10%. Layouts reflow or scroll instead of scaling artwork; source asset resolution is independent of displayed size. See [layout rules](UI.md#layout-artwork-size-and-spacing).
 
 These are separate compositions, not crops of one format into another. Replace the selected sources in `public/art/` or the shared library, update `assets/manifest.json` where needed, and explicitly prepare the new generation. Images use their native aspect ratio with no stretching. All text is rendered by the UI, not baked into artwork. Cards contain no text or UI overlays; names, stats and rules live in hover/focus details, including inside centered inspection. Stacked inspection presents three portrait action thumbnails under the creature artwork without visible captions or passive text. Selecting a thumbnail pins the complete action artwork in the same dialog; hover/focus reveals its rules. Keyboard/controller cycling has no Previous/Next buttons. Compact creature tooltips do not list actions; pinned enemy artwork reveals its collectible passive separately from battle state.
 
-The initial asset set was authored by `scripts/create-placeholders.mjs`. Running it intentionally rewrites all placeholder SVGs; do not run it over production art. Mana UI sprites were adapted from Alchemy; no species illustrations or fonts were copied from Alchemy. Keyword artwork reuse is documented below.
+The retired creature placeholders and their authoring script have been removed; earlier immutable prepared generations remain preserved. Mana UI sprites were adapted from Alchemy; no species illustrations or fonts were copied from Alchemy. Keyword artwork reuse is documented below.
 
 ## Keyword artwork
 

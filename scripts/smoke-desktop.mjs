@@ -60,8 +60,8 @@ try {
       throw new Error("The expedition did not begin with one starter.");
     // Continue swap coverage with a grown lineup and its complete card slots.
     for (const [kind, health, effects] of [
-      ["emberfox", 24, ["attack", "heal", "guard"]],
-      ["stormfin", 26, ["attack", "teamGuard", "guard"]],
+      ["emberback", 30, ["attack", "furnace-breath", "magma-stomp"]],
+      ["prismram", 30, ["attack", "guard", "spectrum-lance"]],
     ]) {
       const id = `ally-${state.team.length}`;
       state.roster.push(kind);
@@ -81,8 +81,8 @@ try {
         state.battle.draw.push(card.id);
       }
     }
-    state.roster.push("silkmoth", "briartooth");
-    state.reserves = ["silkmoth", "briartooth"].map((kind) => ({
+    state.roster.push("pollenmoth", "emberback");
+    state.reserves = ["pollenmoth", "emberback"].map((kind) => ({
       id: `recruit-${kind}`,
       species: kind,
       health: 20,
@@ -95,22 +95,22 @@ try {
   await window.reload();
   await window.getByRole("button", { name: "Continue", exact: true }).click();
   await window.getByRole("button", { name: "Swap", exact: true }).click();
-  await window.getByRole("button", { name: "Silkmoth, reserve", exact: true }).click();
+  await window.getByRole("button", { name: "Pollenmoth, reserve", exact: true }).click();
   await window.locator('.swap-roster [data-actor-id="ally-0"] .creature-card').click();
   await window.locator('.app:not([inert])[data-save-status="saved"]').waitFor();
   const swapped = await window.evaluate(async () =>
     JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
   );
   if (
-    swapped.version !== 24 ||
-    swapped.team[0].species !== "silkmoth" ||
+    swapped.version !== 26 ||
+    swapped.team[0].species !== "pollenmoth" ||
     swapped.battle.mana !== 4 ||
     swapped.lineup[0] !== "ally-0"
   )
     throw new Error("Desktop combat swap or lineup persistence failed.");
   // Swap back to restore the original starter before checking automatic turns.
   await window.getByRole("button", { name: "Swap", exact: true }).click();
-  await window.locator('.swap-roster [data-actor-id="recruit-silkmoth"] .creature-card').click();
+  await window.locator('.swap-roster [data-actor-id="recruit-pollenmoth"] .creature-card').click();
   await window.locator('.swap-roster [data-actor-id="ally-0"] .creature-card').click();
   await window.locator('.app:not([inert])[data-save-status="saved"]').waitFor();
   let attack = window.locator('.app:not([inert]) .hand .action-card[data-effect="attack"]').first();
@@ -135,7 +135,9 @@ try {
     JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
   );
   await attack.click();
-  await window.locator('.app:not([inert]) .enemy-row [data-enemy-id="enemy-0"]').click();
+  const confirm = window.locator(".confirm-play");
+  if (await confirm.count()) await confirm.click();
+  else await window.locator('.app:not([inert]) .enemy-row [data-enemy-id="enemy-0"]').click();
   // Close immediately while hit feedback is still animating; the handshake must flush the accepted command.
   await app.close();
   app = undefined;

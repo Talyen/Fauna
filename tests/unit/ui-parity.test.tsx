@@ -34,7 +34,7 @@ afterEach(() => {
 
 it("keeps the incoming recruit inspectable while browsing replacements, and cancellation preserves the offer", async () => {
   const game = produce(winBattle(run()), (draft) => {
-    for (const [index, kind] of (["briartooth", "silkmoth"] as const).entries()) {
+    for (const [index, kind] of (["emberback", "pollenmoth"] as const).entries()) {
       const id = `reserve-${index}`;
       draft.roster.push(kind);
       draft.reserves.push({ id, species: kind, health: species(kind).health, block: 0, attacked: false });

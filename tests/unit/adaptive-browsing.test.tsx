@@ -33,7 +33,7 @@ it("reaches every creature after resizing and retains the first visible creature
     <div className="screen-stage">
       <main>
         <PagedItems
-          items={["Mossguard", "Emberfox", "Stormfin", "Briartooth", "Silkmoth"]}
+          items={["Mossguard", "Emberback", "Prismram", "Pollenmoth", "Extra creature"]}
           pageSize={1}
           adaptive={{ columns: 5, rows: 1 }}
           className="gallery"
@@ -47,15 +47,15 @@ it("reaches every creature after resizing and retains the first visible creature
   );
   expect(document.querySelectorAll(".gallery button")).toHaveLength(3);
   await userEvent.click(screen.getByRole("button", { name: "Next page" }));
-  expect(screen.getByRole("button", { name: "Briartooth" })).toBeTruthy();
+  expect(screen.getByRole("button", { name: "Pollenmoth" })).toBeTruthy();
   await userEvent.click(screen.getByRole("button", { name: "Open menu" }));
   width = 210;
   act(() => window.dispatchEvent(new Event("resize")));
   expect(document.querySelectorAll(".gallery button")).toHaveLength(1);
-  expect(screen.getByRole("button", { name: "Briartooth" })).toBeTruthy();
+  expect(screen.getByRole("button", { name: "Pollenmoth" })).toBeTruthy();
   expect(document.activeElement).toBe(screen.getByRole("button", { name: "Open menu" }));
   await userEvent.click(screen.getByRole("button", { name: "Next page" }));
-  expect(screen.getByRole("button", { name: "Silkmoth" })).toBeTruthy();
+  expect(screen.getByRole("button", { name: "Extra creature" })).toBeTruthy();
   width = 1200;
   act(() => window.dispatchEvent(new Event("resize")));
   expect(document.querySelectorAll(".gallery button")).toHaveLength(5);

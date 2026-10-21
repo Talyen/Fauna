@@ -68,7 +68,7 @@ it("shows the current collection on one page, resets filters and preserves focus
   expect(game).toEqual(before);
 });
 
-it("keeps encountered and victory-unlocked creatures out of the collected filter until recruited", async () => {
+it("keeps encountered and eligible creatures out of the collected filter until recruited", async () => {
   vi.stubGlobal(
     "ResizeObserver",
     class {
@@ -77,9 +77,8 @@ it("keeps encountered and victory-unlocked creatures out of the collected filter
     },
   );
   const game = produce(createGame(), (draft) => {
-    draft.discovery.encountered = ["mossguard", "moonhart"];
+    draft.discovery.encountered = ["mossguard", "prismram"];
     draft.discovery.recruited = { mossguard: 1 };
-    draft.unlocked.push("moonhart");
     draft.wins = 1;
   });
   render(
@@ -91,12 +90,12 @@ it("keeps encountered and victory-unlocked creatures out of the collected filter
   await user.click(screen.getByRole("tab", { name: "Collected" }));
   expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(1);
   expect(screen.getByRole("button", { name: "Inspect Mossguard" })).toBeTruthy();
-  expect(screen.queryByRole("button", { name: "Inspect Moonhart" })).toBeNull();
+  expect(screen.queryByRole("button", { name: "Inspect Prismram" })).toBeNull();
 });
 
 it("remembers each filter's page and retains its first visible creature when capacity changes", async () => {
   vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
-  let width = 500;
+  let width = 120;
   vi.stubGlobal(
     "ResizeObserver",
     class {
@@ -109,7 +108,7 @@ it("remembers each filter's page and retains its first visible creature when cap
       x: 0,
       y: 0,
       width: this.classList.contains("collection-grid") ? width : 240,
-      height: 180,
+      height: 300,
     } as DOMRect;
   });
   const game = produce(createGame(), (draft) => {

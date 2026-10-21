@@ -8,19 +8,19 @@ import { accept, run, winBattle } from "./helpers";
 describe("recruiting creature copies", () => {
   it("offers exactly the three defeated enemies, including repeated species and roster members", () => {
     for (const pack of COMBAT_PACKS) expect(pack).toHaveLength(3);
-    const started = accept(accept(createGame(7), { type: "draft", species: "stormfin" }), { type: "start" });
+    const started = accept(accept(createGame(7), { type: "draft", species: "prismram" }), { type: "start" });
     const battle = accept(
       produce(started, (d) => {
         d.encounter = 4;
         d.journey = null;
         d.expedition = {
-          pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "stormfin" && pack[1] === "stormfin"),
+          pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "prismram" && pack[1] === "prismram"),
         };
       }),
       { type: "beginBattle" },
     );
     const reward = winBattle(battle);
-    expect(reward.reward!.recruits).toEqual(["stormfin", "stormfin", "briartooth"]);
+    expect(reward.reward!.recruits).toEqual(["prismram", "prismram", "emberback"]);
     expect(decodeSave(encodeSave(reward))).toEqual(reward);
     expect(() =>
       decodeSave(
@@ -31,14 +31,14 @@ describe("recruiting creature copies", () => {
         ),
       ),
     ).toThrow();
-    const next = accept(reward, { type: "recruit", species: "stormfin" });
-    expect(next.roster).toEqual(["stormfin", "stormfin"]);
+    const next = accept(reward, { type: "recruit", species: "prismram" });
+    expect(next.roster).toEqual(["prismram", "prismram"]);
     expect(new Set(next.team.map((c) => c.id)).size).toBe(2);
     expect(decodeSave(encodeSave(next))).toEqual(next);
   });
 
   it("swaps and remembers the chosen copy without merging card ownership, health or identity", () => {
-    let s = accept(winBattle(run()), { type: "recruit", species: "emberfox" });
+    let s = accept(winBattle(run()), { type: "recruit", species: "emberback" });
     const copy = s.reserves[0]!;
     expect(copy.id).not.toBe("ally-1");
     s = accept(s, { type: "setLineup", activeId: "ally-1", reserve: copy.id });
@@ -63,7 +63,7 @@ describe("recruiting creature copies", () => {
   });
 
   it("releases only the chosen copy at five and updates its lineup entry", () => {
-    let s = accept(winBattle(), { type: "recruit", species: "emberfox" });
+    let s = accept(winBattle(), { type: "recruit", species: "emberback" });
     s = accept(s, { type: "beginBattle" });
     s = accept(winBattle(s), { type: "recruit", species: "mossguard" });
     const copies = s.reserves.map((c) => c.id);
@@ -80,15 +80,15 @@ describe("recruiting creature copies", () => {
       ),
     );
     expect(dispatch(s, { type: "skipRecruit" }).state).toBe(s);
-    expect(dispatch(s, { type: "recruit", species: "emberfox" }).accepted).toBe(false);
-    expect(s.discovery.recruited.emberfox).toBe(2);
-    s = accept(s, { type: "recruit", species: "emberfox", replace: "ally-1" });
-    expect(s.discovery.recruited.emberfox).toBe(3);
+    expect(dispatch(s, { type: "recruit", species: "emberback" }).accepted).toBe(false);
+    expect(s.discovery.recruited.emberback).toBe(2);
+    s = accept(s, { type: "recruit", species: "emberback", replace: "ally-1" });
+    expect(s.discovery.recruited.emberback).toBe(3);
     expect(s.discovery.recruited.mossguard).toBe(2);
     const all = [...s.team, ...s.reserves];
     expect(all.some((c) => c.id === "ally-1")).toBe(false);
     expect(copies.every((id) => all.some((c) => c.id === id))).toBe(true);
-    expect(all.filter((c) => c.species === "emberfox")).toHaveLength(2);
+    expect(all.filter((c) => c.species === "emberback")).toHaveLength(2);
     expect(s.lineup[1]).toBe(s.team[1]!.id);
     expect(new Set(all.map((c) => c.id)).size).toBe(5);
     expect(decodeSave(encodeSave(s))).toEqual(s);

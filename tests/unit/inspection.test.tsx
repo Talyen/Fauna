@@ -38,9 +38,9 @@ describe("artwork-first inspection", () => {
     const game = produce(createGame(7), (draft) => {
       draft.talents = ["burn.flashpoint"];
     });
-    render(<StarterDetails game={game} kind="emberfox" />);
-    expect(screen.getByText("Cinder Strike").closest("p")?.textContent).toContain("0 Mana");
-    expect(screen.getByText("Warm Embers").closest("p")?.textContent).toContain("1 Mana");
+    render(<StarterDetails game={game} kind="emberback" />);
+    expect(screen.getByText("Furnace Breath").closest("p")?.textContent).toContain("0 Mana");
+    expect(screen.getByText("Ember Charge").closest("p")?.textContent).toContain("1 Mana");
   });
 
   it.each([0, 1, 2])(
@@ -140,11 +140,12 @@ describe("artwork-first inspection", () => {
   });
 
   it("keeps modified hand rules and enemy effects on hover without any battle inspection", async () => {
-    const fixture = produce(teamRun(7, ["briartooth", "emberfox", "stormfin"]), (game) => {
+    const fixture = produce(teamRun(7, ["emberback", "emberback", "prismram"]), (game) => {
       game.cards[0]!.level = 1;
       game.keywordXP.physical = 20;
       game.talents = ["physical.shield-slam"];
       game.team[0]!.block = 4;
+      game.battle!.enemies[0]!.combat.thorns = 2;
       game.battle!.hand = [game.cards[0]!.id];
       game.battle!.buffer = [];
       game.battle!.draw = game.cards.slice(1).map((card) => card.id);
@@ -158,9 +159,9 @@ describe("artwork-first inspection", () => {
     try {
       await user.click(screen.getByRole("button", { name: "Continue" }));
       const before = session.store.getState().game;
-      const card = screen.getByRole("button", { name: /^Thornlash \+1,/ });
+      const card = screen.getByRole("button", { name: /^Ember Charge \+1,/ });
       await user.hover(card);
-      expect((await screen.findByRole("tooltip")).textContent).toContain("Deal 12 Physical damage");
+      expect((await screen.findByRole("tooltip")).textContent).toContain("Deal 8 Physical damage");
       act(() => card.focus());
       await user.keyboard("i");
       await user.pointer({ target: card, keys: "[MouseRight]" });
@@ -178,7 +179,7 @@ describe("artwork-first inspection", () => {
       expect(tooltip.textContent).toContain(enemy.name);
       expect(tooltip.textContent).toContain("Thorns 2");
       expect(tooltip.textContent).not.toContain(`${enemy.health}/${enemy.maxHealth}`);
-      expect(tooltip.textContent).not.toContain("Thornlash");
+      expect(tooltip.textContent).not.toContain("Ember Charge");
       expect(session.store.getState().game).toBe(before);
     } finally {
       cleanup();

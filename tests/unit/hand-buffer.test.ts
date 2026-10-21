@@ -39,15 +39,15 @@ describe("hidden hand overflow", () => {
     expect(rejected.accepted).toBe(false);
     expect(rejected.state).toBe(s);
     const before = encodeSave(s);
-    const preview = previewPlay(s, s.battle!.hand[0]!, "enemy-0");
+    const preview = previewPlay(s, s.battle!.hand[0]!);
     expect(preview.state.battle!.hand.at(-1)).toBe(first);
     expect(encodeSave(s)).toBe(before);
-    s = accept(s, { type: "play", cardId: s.battle!.hand[0]!, targetId: "enemy-0" });
+    s = accept(s, { type: "play", cardId: s.battle!.hand[0]! });
     expect(s.battle!.hand).toHaveLength(7);
     expect(s.battle!.hand.at(-1)).toBe(first);
     expect(s.battle!.buffer).toEqual([second]);
     expect(s.rng).toBe(preview.state.rng);
-    s = accept(s, { type: "play", cardId: s.battle!.hand[0]!, targetId: "ally-0" });
+    s = accept(s, { type: "play", cardId: s.battle!.hand[0]! });
     expect(s.battle!.hand).toHaveLength(7);
     expect(s.battle!.hand.at(-1)).toBe(second);
     expect(s.battle!.buffer).toEqual([]);
@@ -61,10 +61,7 @@ describe("hidden hand overflow", () => {
         if (automatic) d.battle!.mana = 1;
       });
       const queued = [...s.battle!.buffer];
-      const next = accept(
-        s,
-        automatic ? { type: "play", cardId: s.battle!.hand[0]!, targetId: "enemy-0" } : { type: "endTurn" },
-      );
+      const next = accept(s, automatic ? { type: "play", cardId: s.battle!.hand[0]! } : { type: "endTurn" });
       expect(next.battle!.turn).toBe(2);
       expect(next.battle!.hand).toHaveLength(automatic ? 5 : 6);
       expect(next.battle!.hand.slice(0, automatic ? 1 : 2)).toEqual(automatic ? queued.slice(1) : queued);
@@ -80,10 +77,10 @@ describe("hidden hand overflow", () => {
 
   it("preserves buffered card slots and switches their owner during a reserve swap", () => {
     const s = produce(run(), (d) => {
-      d.roster.push("silkmoth");
+      d.roster.push("pollenmoth");
       d.reserves.push({
-        id: "recruit-silkmoth",
-        species: "silkmoth",
+        id: "recruit-pollenmoth",
+        species: "pollenmoth",
         health: 23,
         block: 0,
         combat: freshCombat(),
@@ -100,9 +97,9 @@ describe("hidden hand overflow", () => {
         .map((card) => card.id);
       d.battle!.discard = [];
     });
-    const next = accept(s, { type: "swap", activeId: "ally-1", reserve: "recruit-silkmoth" });
+    const next = accept(s, { type: "swap", activeId: "ally-1", reserve: "recruit-pollenmoth" });
     expect(next.battle!.buffer).toEqual(s.battle!.buffer);
-    expect(next.cards.find((card) => card.id === next.battle!.buffer[0])!.ownerId).toBe("recruit-silkmoth");
+    expect(next.cards.find((card) => card.id === next.battle!.buffer[0])!.ownerId).toBe("recruit-pollenmoth");
     expect(decodeSave(encodeSave(next))).toEqual(next);
   });
 

@@ -5,7 +5,7 @@ import { contentCatalog, validateCatalog } from "../../src/game/content-validati
 const config: JourneyConfig = {
   seed: 42,
   runs: 2,
-  starter: "emberfox",
+  starter: "emberback",
   policy: "heuristic",
   maxActions: 2000,
   maxTurns: 100,

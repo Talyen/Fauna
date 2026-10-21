@@ -81,7 +81,7 @@ const creature = z.object({
   combat: combatState.optional(),
 });
 const currentShape = z.object({
-  version: z.literal(25),
+  version: z.literal(26),
   discovery: z.object({
     encountered: z.array(speciesId).max(SPECIES.length),
     recruited: z.partialRecord(
@@ -110,7 +110,7 @@ const currentShape = z.object({
     "victory",
     "defeat",
   ]),
-  unlocked: z.array(speciesId).min(5).max(SPECIES.length),
+  unlocked: z.array(speciesId).min(INITIAL_SPECIES.length).max(SPECIES.length),
   wins: natural,
   selected: z.array(speciesId).max(3),
   starterOffers: z.array(speciesId).max(3),
@@ -171,7 +171,7 @@ const currentShape = z.object({
       victories: z.number().int().min(0).max(JOURNEY_LENGTH),
       currency: natural,
       xp,
-      unlocks: z.array(speciesId).max(SPECIES.length),
+      unlocks: z.array(speciesId).max(0),
       lastBattle: z.object({ xp, currency: natural }).nullable(),
     })
     .nullable(),
@@ -237,8 +237,7 @@ export function decodeSave(raw: string): GameState {
       INITIAL_SPECIES.some((kind) => !s.unlocked.includes(kind)) ||
       s.selected.some((kind) => !starterPool.includes(kind)) ||
       (s.phase === "draft" && s.selected.length > starterCount(s)) ||
-      (s.phase !== "draft" && !collected.length) ||
-      s.wins > 0 !== s.unlocked.includes("moonhart"),
+      (s.phase !== "draft" && !collected.length),
   );
   invalid(
     !unique([...s.team, ...s.reserves].map((c) => c.id)) ||

@@ -1,3 +1,4 @@
+import { assetUrl } from "../../src/ui/assets";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -16,7 +17,7 @@ import "@fontsource-variable/inter/wght.css";
 import "../../src/ui/styles.css";
 import "./inspection.css";
 
-const creature = species("emberfox");
+const creature = species("emberback");
 const actor: Creature = { id: "sample-fox", species: creature.id, health: 12, block: 5, attacked: false };
 const cards: Card[] = CARDS.filter((card) => card.species === creature.id).map((card) => ({
   id: `inspection-${card.id}`,
@@ -147,9 +148,9 @@ function Preview() {
               <div className="inspection-review-composition">
                 <ArtCard
                   aspect="creature"
-                  artwork="/art/emberfox.svg"
+                  artwork={assetUrl("creature.emberback")}
                   presentation
-                  aria-label="Emberfox artwork"
+                  aria-label="Emberback artwork"
                 />
                 <div className="inspection-review-kit">
                   <p className="inspection-review-health">

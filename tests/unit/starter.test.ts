@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch, starterCount } from "../../src/game/engine";
-import { FIRST_RUN_STARTERS } from "../../src/game/content";
+import { FIRST_RUN_STARTERS, SPECIES } from "../../src/game/content";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { accept, recruitChoice, winBattle } from "./helpers";
 
@@ -13,6 +13,8 @@ function firstJourney(seed = 7) {
 describe("collected starter drafts", () => {
   it("onboards with one of three eligible creatures and collects only the committed starter", () => {
     let s = createGame(7);
+    expect(SPECIES.map((entry) => entry.id)).toEqual(["mossguard", "emberback", "pollenmoth", "prismram"]);
+    expect(new Set(s.unlocked)).toEqual(new Set(SPECIES.map((entry) => entry.id)));
     expect(s.discovery.recruited).toEqual({});
     expect(s.starterOffers).toHaveLength(3);
     expect(new Set(s.starterOffers).size).toBe(3);
@@ -50,8 +52,8 @@ describe("collected starter drafts", () => {
     let s = firstJourney();
     s = accept(s, { type: "abandon" });
     s = produce(s, (d) => {
-      d.discovery.encountered = ["mossguard", "emberfox", "stormfin", "moonhart"];
-      d.discovery.recruited = { mossguard: 1, emberfox: 1, stormfin: 1 };
+      d.discovery.encountered = ["mossguard", "emberback", "prismram", "pollenmoth"];
+      d.discovery.recruited = { mossguard: 1, emberback: 1, prismram: 1 };
       d.selected = ["mossguard"];
     });
     s = accept(s, { type: "newRun", seed: 24 });
@@ -60,7 +62,7 @@ describe("collected starter drafts", () => {
       expect(s.selected).toHaveLength(round);
       expect(s.starterOffers).toHaveLength(3);
       expect(new Set(s.starterOffers)).toEqual(new Set(Object.keys(s.discovery.recruited)));
-      expect(dispatch(s, { type: "draft", species: "moonhart" }).state).toBe(s);
+      expect(dispatch(s, { type: "draft", species: "pollenmoth" }).state).toBe(s);
       expect(dispatch(s, { type: "start" }).state).toBe(s);
       s = decodeSave(encodeSave(s));
       s = accept(s, { type: "draft", species: "mossguard" });
@@ -92,11 +94,11 @@ describe("collected starter drafts", () => {
     let s = firstJourney();
     s = accept(s, { type: "abandon" });
     s = produce(s, (d) => {
-      d.discovery = { encountered: ["mossguard", "emberfox"], recruited: { mossguard: 1, emberfox: 1 } };
+      d.discovery = { encountered: ["mossguard", "emberback"], recruited: { mossguard: 1, emberback: 1 } };
       d.selected = ["mossguard"];
     });
     s = accept(s, { type: "newRun", seed: 42 });
-    expect(new Set(s.starterOffers)).toEqual(new Set(["mossguard", "emberfox"]));
+    expect(new Set(s.starterOffers)).toEqual(new Set(["mossguard", "emberback"]));
     expect(decodeSave(encodeSave(s))).toEqual(s);
     expect(() =>
       decodeSave(JSON.stringify({ ...s, starterOffers: ["mossguard", "mossguard", "mossguard"] })),
@@ -106,11 +108,12 @@ describe("collected starter drafts", () => {
   it("rejects forged offers, uncollected selections and obsolete saves", () => {
     const s = createGame();
     for (const change of [
-      { starterOffers: ["moonhart"] },
-      { selected: ["mossguard", "emberfox"] },
+      { starterOffers: ["prismram"] },
+      { selected: ["mossguard", "emberback"] },
       { starterOffers: [] },
       { version: 20 },
       { version: 21 },
+      { version: 25 },
     ])
       expect(() => decodeSave(JSON.stringify({ ...s, ...change }))).toThrow();
     expect(createGame(7)).toEqual(createGame(7));

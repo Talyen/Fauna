@@ -10,7 +10,10 @@ describe("game commands", () => {
     validateContent();
     let s = createGame();
     expect(dispatch(s, { type: "start" }).accepted).toBe(false);
-    expect(dispatch(s, { type: "draft", species: "moonhart" }).accepted).toBe(false);
+    expect(
+      dispatch(s, { type: "draft", species: SPECIES.find((kind) => !s.starterOffers.includes(kind.id))!.id })
+        .accepted,
+    ).toBe(false);
     s = accept(s, { type: "draft", species: "mossguard" });
     expect(s.selected).toEqual(["mossguard"]);
     s = accept(s, { type: "start" });
@@ -48,7 +51,7 @@ describe("game commands", () => {
   });
   it("spends mana, applies traits, and commits ordered feedback", () => {
     let s = run();
-    const attack = s.cards.find((c) => c.definitionId === "emberfox-attack")!;
+    const attack = s.cards.find((c) => c.definitionId === "emberback-attack")!;
     s = produce(s, (d) => {
       d.battle!.hand = [attack.id];
       d.battle!.draw = d.cards.filter((c) => c.id !== attack.id).map((c) => c.id);
@@ -57,19 +60,11 @@ describe("game commands", () => {
     const r = dispatch(s, { type: "play", cardId: attack.id, targetId: "enemy-0" });
     expect(r.accepted).toBe(true);
     expect(r.state.battle!.mana).toBe(3);
-    expect(r.state.battle!.enemies[0]!.health).toBe(6);
-    expect(r.events.map((e) => e.kind)).toEqual([
-      "action",
-      "damage",
-      "status",
-      "damage",
-      "damage",
-      "status",
-      "damage",
-    ]);
-    expect(r.events.find((e) => e.kind === "damage")?.damageType).toBe("burn");
-    expect(r.state.battle!.enemies[0]!.combat.burn).toBe(12);
-    expect(r.state.battleXP.burn).toBe(1);
+    expect(r.state.battle!.enemies[0]!.health).toBe(14);
+    expect(r.events.map((e) => e.kind)).toEqual(["action", "damage", "status"]);
+    expect(r.events.find((e) => e.kind === "damage")?.damageType).toBe("physical");
+    expect(r.state.team[1]!.combat!.armor).toBe(2);
+    expect(r.state.battleXP.armor).toBe(1);
     expect(r.state.battle!.discard).toContain(attack.id);
   });
   it("persists enemy repertoire history and never repeats consecutive abilities", () => {
@@ -144,16 +139,16 @@ describe("game commands", () => {
   });
   it("recruits a defeated species into reserves and swaps its kit before the next battle", () => {
     let s = winBattle();
-    expect(dispatch(s, { type: "recruit", species: "moonhart" }).accepted).toBe(false);
-    s = accept(s, { type: "recruit", species: "briartooth" });
+    expect(dispatch(s, { type: "recruit", species: "prismram" }).accepted).toBe(false);
+    s = accept(s, { type: "recruit", species: "emberback" });
     expect(s.roster).toHaveLength(4);
     expect(s.team[0]!.species).toBe("mossguard");
     s = accept(s, { type: "swap", activeId: "ally-0", reserve: s.reserves[0]!.id });
-    expect(s.team[0]!.species).toBe("briartooth");
+    expect(s.team[0]!.species).toBe("emberback");
     expect(s.cards.some((c) => c.definitionId.startsWith("mossguard"))).toBe(false);
     expect(decodeSave(encodeSave(s))).toEqual(s);
   });
-  it("settles rewards once, unlocks Moonhart once, and preserves permanent progress", () => {
+  it("settles rewards once and preserves the complete eligible roster and permanent progress", () => {
     let s = run();
     for (let battle = 0; battle < 3; battle++) {
       s = winBattle(s);
@@ -166,11 +161,11 @@ describe("game commands", () => {
     }
     expect(s.phase).toBe("victory");
     expect(s.wins).toBe(1);
-    expect(s.unlocked.filter((id) => id === "moonhart")).toHaveLength(1);
+    expect(s.unlocked.filter((id) => id === "prismram")).toHaveLength(1);
     const bank = s.currency;
     s = accept(s, { type: "newRun", seed: 123 });
     expect(s.currency).toBe(bank);
-    expect(s.unlocked).toContain("moonhart");
+    expect(s.unlocked).toContain("prismram");
     expect(s.roster).toEqual([]);
   });
   it("replays identical seeds and commands with identical results through complete expeditions", () => {
@@ -186,9 +181,9 @@ describe("game commands", () => {
     expect(a.phase).toBe("victory");
   });
   it("supports all unlocked team combinations without engine failures or invalid saves", () => {
-    for (let first = 0; first < 4; first++)
-      for (let second = first + 1; second < 5; second++)
-        for (let third = second + 1; third < 6; third++) {
+    for (let first = 0; first < SPECIES.length - 2; first++)
+      for (let second = first + 1; second < SPECIES.length - 1; second++)
+        for (let third = second + 1; third < SPECIES.length; third++) {
           let s = teamRun(
             first * 100 + second * 10 + third,
             [first, second, third].map((index) => SPECIES[index]!.id),
@@ -232,19 +227,19 @@ describe("save validation", () => {
   });
 });
 describe("creature traits and deck circulation", () => {
-  it("applies Charged Stun damage and Tender healing while rejecting revival of knocked-out allies", () => {
-    let s = teamRun(5, ["stormfin", "silkmoth", "mossguard"]);
-    const attack = s.cards.find((c) => c.definitionId === "stormfin-attack")!,
-      heal = s.cards.find((c) => c.definitionId === "silkmoth-heal")!;
+  it("applies Prism Charge damage and heals the most injured living ally without reviving knockouts", () => {
+    let s = teamRun(5, ["prismram", "pollenmoth", "mossguard"]);
+    const attack = s.cards.find((c) => c.definitionId === "prismram-attack")!,
+      heal = s.cards.find((c) => c.definitionId === "pollenmoth-heal")!;
     s = produce(s, (d) => {
       d.team[2]!.health = 10;
       d.battle!.hand = [attack.id, heal.id];
       d.battle!.draw = d.cards.filter((c) => ![attack.id, heal.id].includes(c.id)).map((c) => c.id);
     });
     s = accept(s, { type: "play", cardId: attack.id, targetId: "enemy-0" });
-    expect(s.battle!.enemies[0]!.health).toBe(7);
+    expect(s.battle!.enemies[0]!.health).toBe(12);
     s = accept(s, { type: "play", cardId: heal.id, targetId: "ally-2" });
-    expect(s.team[2]!.health).toBe(20);
+    expect(s.team[2]!.health).toBe(13);
     expect(s.battleXP.health).toBe(1);
     expect(decodeSave(encodeSave(s))).toEqual(s);
     const knocked = produce(s, (d) => {
@@ -252,14 +247,16 @@ describe("creature traits and deck circulation", () => {
       d.battle!.hand = [heal.id];
       d.battle!.mana = 3;
     });
-    expect(dispatch(knocked, { type: "play", cardId: heal.id, targetId: "ally-2" }).accepted).toBe(false);
+    const healed = accept(knocked, { type: "play", cardId: heal.id });
+    expect(healed.team[2]!.health).toBe(0);
   });
-  it("deals Thorns only for health damage and grants Moonlit starting block", () => {
-    let s = teamRun(3, ["briartooth", "moonhart", "mossguard"]);
-    expect(s.team[1]!.block).toBe(4);
+  it("deals Thorns only for health damage", () => {
+    let s = teamRun(3, ["emberback", "prismram", "mossguard"]);
+    expect(s.team[1]!.block).toBe(0);
     const events: Parameters<typeof hit>[5] = [];
     s = produce(s, (d) => {
       d.team[0]!.block = 4;
+      combat(d.team[0]!).thorns = 2;
       hit(d, d.battle!.enemies[0]!, d.team[0]!, 4, "nature", events, { retaliation: true });
       expect(d.battle!.enemies[0]!.health).toBe(18);
       d.rng = 1;

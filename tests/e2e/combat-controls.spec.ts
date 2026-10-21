@@ -97,7 +97,7 @@ test("combat preferences, autoplay pause and manual takeover", async ({ page }) 
     .poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).revision))
     .toBeGreaterThan(revision + 1);
 });
-test("live unlock reveal is inspectable and does not repeat", async ({ page }) => {
+test("final victory returns to the menu without a retired creature reveal", async ({ page }) => {
   const width = 1280;
   await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
   await page.emulateMedia({ reducedMotion: "reduce" });
@@ -115,18 +115,11 @@ test("live unlock reveal is inspectable and does not repeat", async ({ page }) =
   );
   await seed(page, encodeSave(final), width === 1280 ? "1.25" : "1");
   await page.locator(`[data-card-id=${JSON.stringify(final.battle!.hand[0])}]`).click();
-  await page.locator('[data-actor-id="enemy-0"] .creature-card').click();
+  await page.locator(".confirm-play").click();
   await page.getByRole("heading", { name: "Journey complete" }).waitFor();
   await page.getByRole("button", { name: "Main menu", exact: true }).click();
-  await expect(page.getByRole("heading", { name: "Creature unlocked" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Moonhart", exact: true })).toBeVisible();
-  await captureScreen(page, { path: `reports/unlock-${width}.png` });
-  await page.getByRole("button", { name: "Inspect Moonhart", exact: true }).click();
-  await expect(page.locator(".inspection-thumbnails .action-card")).toHaveCount(3);
-  await page.keyboard.press("Escape");
-  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Creature unlocked" })).toHaveCount(0);
   await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Journey results", exact: true })).toHaveCount(0);
   await page.reload();
   await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Creature unlocked" })).toHaveCount(0);

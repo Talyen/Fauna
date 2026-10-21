@@ -431,31 +431,31 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     await expect(page.getByRole("heading", { name: "Journey complete", exact: true })).toBeVisible();
     const won = await state(page);
     expect(won.wins).toBe(1);
-    expect(won.unlocked).toContain("moonhart");
+    expect(won.unlocked).toContain("prismram");
     expect(won.currency).toBe(fixture.currency + 40);
     expect(Object.values(won.keywordXP).reduce((a, b) => a + b, 0)).toBeGreaterThan(0);
     await page.reload();
     await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
     expect((await state(page)).revision).toBe(won.revision);
     await page.getByRole("button", { name: "Collection", exact: true }).click();
-    await expect(page.getByRole("button", { name: "Inspect Moonhart" })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Inspect Prismram" })).toHaveCount(1);
   });
 test("recruitment adds a reserve, selection swaps its kit, and remembers active choices", async ({
   page,
 }) => {
   await seed(page, winBattle());
   await resume(page);
-  await page.getByRole("button", { name: "Recruit Briartooth", exact: true }).click();
+  await page.getByRole("button", { name: "Recruit Emberback", exact: true }).click();
   expect((await state(page)).roster).toHaveLength(4);
   expect((await state(page)).phase).toBe("teamSelection");
   await expect(page.getByRole("button", { name: "Mossguard, starting", exact: true })).toHaveCount(0);
   await page.getByRole("button", { name: "Open menu" }).click();
   await page.getByRole("button", { name: "Lineup", exact: true }).click();
   const active = page.getByRole("button", { name: "Mossguard, starting", exact: true }),
-    reserve = page.getByRole("button", { name: "Briartooth, reserve", exact: true });
+    reserve = page.getByRole("button", { name: "Emberback, reserve", exact: true });
   await reserve.focus();
   await page.keyboard.press("i");
-  await expect(page.getByRole("dialog", { name: "Briartooth", exact: true })).toBeVisible();
+  await expect(page.getByRole("dialog", { name: "Emberback", exact: true })).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(reserve).toBeFocused();
   await active.focus();
@@ -466,18 +466,20 @@ test("recruitment adds a reserve, selection swaps its kit, and remembers active 
   await expect(page.getByRole("button", { name: "Lineup", exact: true })).toBeFocused();
   await page.keyboard.press("Escape");
   const s = await state(page);
-  expect(s.team.find((c) => c.id === s.lineup[0])!.species).toBe("briartooth");
+  expect(s.team.find((c) => c.id === s.lineup[0])!.species).toBe("emberback");
   expect(s.cards.some((c) => c.definitionId.startsWith("mossguard"))).toBe(false);
   await page.reload();
   await resume(page);
   await page.locator(".app:not([inert]) [data-encounter]").click();
-  expect((await state(page)).team[0]!.species).toBe("briartooth");
+  expect((await state(page)).team[0]!.species).toBe("emberback");
 });
 test("battle targeting uses remembered targets, forecasts bars, and has no targeted Play button", async ({
   page,
 }) => {
   const fixture = produce(run(7), (d) => {
-    const cards = d.cards.filter((c) => definition(c.definitionId).effect === "attack");
+    const cards = d.cards.filter((c) =>
+      ["emberback-attack", "prismram-attack", "prismram-spectrum-lance"].includes(c.definitionId),
+    );
     d.battle!.hand = cards.map((c) => c.id);
     d.battle!.draw = d.cards.filter((c) => !cards.some((a) => a.id === c.id)).map((c) => c.id);
     d.battle!.discard = [];
@@ -489,14 +491,14 @@ test("battle targeting uses remembered targets, forecasts bars, and has no targe
   await cards.first().focus();
   await page.keyboard.press("Enter");
   await page.keyboard.press("d");
-  await expect(page.getByRole("button", { name: "Target Cinder Wisp", exact: true })).toBeFocused();
+  await expect(page.getByRole("button", { name: "Target Pollenmoth", exact: true })).toBeFocused();
   await expect(page.locator(".target-preview")).toBeVisible();
   await expect(page.locator(".confirm-play")).toHaveCount(0);
   expect((await state(page)).revision).toBe(before.revision);
   await page.keyboard.press("Escape");
   await cards.nth(1).focus();
   await page.keyboard.press("Enter");
-  await expect(page.getByRole("button", { name: "Target Cinder Wisp", exact: true })).toBeFocused();
+  await expect(page.getByRole("button", { name: "Target Pollenmoth", exact: true })).toBeFocused();
   await page.keyboard.press("Enter");
   expect((await state(page)).revision).toBe(before.revision + 1);
   await expect(page.locator(".health-number,.intent,.battle-status,.pile-counts")).toHaveCount(0);
@@ -817,10 +819,10 @@ for (const [width, height] of [
   test(`rendered gameplay, rewards and menus fit ${width}×${height}`, async ({ page }) => {
     await page.setViewportSize({ width, height });
     const fixture = produce(run(7), (d) => {
-      d.roster.push("silkmoth", "briartooth");
-      d.reserves = ["silkmoth", "briartooth"].map((kind) => ({
+      d.roster.push("pollenmoth", "emberback");
+      d.reserves = ["pollenmoth", "emberback"].map((kind) => ({
         id: `recruit-${kind}`,
-        species: kind as "silkmoth" | "briartooth",
+        species: kind as "pollenmoth" | "emberback",
         health: 20,
         block: 0,
         combat: freshCombat(),
@@ -926,7 +928,7 @@ test("real audio output, hit recoil, reduced motion, and mute follow combat outc
   });
   const fixture = produce(run(7), (d) => {
     const cards = d.cards.filter((c) =>
-      ["mossguard-attack", "emberfox-attack", "stormfin-attack"].includes(c.definitionId),
+      ["mossguard-attack", "emberback-attack", "prismram-attack"].includes(c.definitionId),
     );
     d.battle!.hand = cards.map((c) => c.id);
     d.battle!.draw = d.cards.filter((c) => !cards.some((card) => card.id === c.id)).map((c) => c.id);
@@ -949,8 +951,8 @@ test("real audio output, hit recoil, reduced motion, and mute follow combat outc
   expect((await observed()).impacts).toContain("enemy-0");
   await page.emulateMedia({ reducedMotion: "reduce" });
   const count = (await observed()).impacts.length;
-  await page.locator('.app:not([inert]) .hand [data-card-id="ally-1:emberfox-attack"]').click();
-  await page.getByRole("button", { name: "Target Cinder Wisp", exact: true }).click();
+  await page.locator('.app:not([inert]) .hand [data-card-id="ally-1:emberback-attack"]').click();
+  await page.getByRole("button", { name: "Target Pollenmoth", exact: true }).click();
   expect((await observed()).impacts).toHaveLength(count);
   await page.getByRole("button", { name: "Open menu" }).click();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
@@ -983,11 +985,10 @@ test("five-card hand with hidden overflow, three enemies and a full bench preser
   s = produce(s, (d) => {
     d.boons = ["tattered-pages"];
     d.wins = 1;
-    d.unlocked.push("moonhart");
-    d.roster = ["mossguard", "emberfox", "stormfin", "silkmoth", "briartooth"];
-    d.reserves = ["silkmoth", "briartooth"].map((kind) => ({
+    d.roster = ["mossguard", "emberback", "prismram", "pollenmoth", "emberback"];
+    d.reserves = ["pollenmoth", "emberback"].map((kind) => ({
       id: `recruit-${kind}`,
-      species: kind as "silkmoth" | "briartooth",
+      species: kind as "pollenmoth" | "emberback",
       health: 20,
       block: 0,
       combat: freshCombat(),
@@ -1139,7 +1140,9 @@ test("battle tooltips, pointer targeting, Mana forecast and corners follow the d
     );
   };
   const fixture = produce(run(7), (d) => {
-    const cards = d.cards.filter((c) => definition(c.definitionId).effect === "attack");
+    const cards = d.cards.filter((c) =>
+      ["emberback-attack", "prismram-attack", "prismram-spectrum-lance"].includes(c.definitionId),
+    );
     d.battle!.hand = cards.map((c) => c.id);
     d.battle!.draw = d.cards.filter((c) => !cards.some((a) => a.id === c.id)).map((c) => c.id);
     d.battle!.discard = [];
@@ -1222,7 +1225,9 @@ test("navigation returns to the nearest remaining card; denial is visual and res
   page,
 }) => {
   const fixture = produce(run(7), (d) => {
-    const cards = d.cards.filter((c) => definition(c.definitionId).effect === "attack");
+    const cards = d.cards.filter((c) =>
+      ["emberback-attack", "prismram-attack", "prismram-spectrum-lance"].includes(c.definitionId),
+    );
     d.battle!.hand = cards.map((c) => c.id);
     d.battle!.draw = d.cards.filter((c) => !cards.some((a) => a.id === c.id)).map((c) => c.id);
     d.battle!.discard = [];
@@ -1270,7 +1275,9 @@ test("controller navigation preserves its device mode and can confirm a pointer-
 }) => {
   const press = await gamepad(page);
   const fixture = produce(run(7), (d) => {
-    const attacks = d.cards.filter((c) => definition(c.definitionId).effect === "attack");
+    const attacks = d.cards.filter((c) =>
+      ["emberback-attack", "prismram-attack", "prismram-spectrum-lance"].includes(c.definitionId),
+    );
     d.battle!.hand = attacks.map((c) => c.id);
     d.battle!.draw = d.cards.filter((c) => !attacks.some((a) => a.id === c.id)).map((c) => c.id);
     d.battle!.discard = [];
@@ -1301,10 +1308,10 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
   }) => {
     const press = input === "controller" ? await gamepad(page) : null;
     const fixture = produce(run(7), (d) => {
-      d.roster.push("silkmoth", "briartooth");
-      d.reserves = ["silkmoth", "briartooth"].map((kind) => ({
+      d.roster.push("pollenmoth", "emberback");
+      d.reserves = ["pollenmoth", "emberback"].map((kind) => ({
         id: `recruit-${kind}`,
-        species: kind as "silkmoth" | "briartooth",
+        species: kind as "pollenmoth" | "emberback",
         health: 20,
         block: 0,
         combat: freshCombat(),
@@ -1326,7 +1333,7 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
         else await page.keyboard.press("Enter");
       }
     };
-    await expect(page.locator('.app:not([inert]) .player-row [data-species="silkmoth"]')).toHaveCount(0);
+    await expect(page.locator('.app:not([inert]) .player-row [data-species="pollenmoth"]')).toHaveCount(0);
     await activate(page.getByRole("button", { name: "Swap", exact: true }));
     const dialog = page.getByRole("dialog");
     await expect(dialog).toBeVisible();
@@ -1334,15 +1341,15 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     if (input === "keyboard") {
       await dialog.getByRole("button", { name: "Mossguard, deployed", exact: true }).focus();
       await page.keyboard.press("a");
-      await expect(dialog.getByRole("button", { name: "Stormfin, deployed", exact: true })).toBeFocused();
+      await expect(dialog.getByRole("button", { name: "Prismram, deployed", exact: true })).toBeFocused();
       await page.keyboard.press("s");
-      await expect(dialog.getByRole("button", { name: "Briartooth, reserve", exact: true })).toBeFocused();
+      await expect(dialog.getByRole("button", { name: "Emberback, reserve", exact: true })).toBeFocused();
       await page.keyboard.press("d");
-      await expect(dialog.getByRole("button", { name: "Silkmoth, reserve", exact: true })).toBeFocused();
+      await expect(dialog.getByRole("button", { name: "Pollenmoth, reserve", exact: true })).toBeFocused();
     }
 
-    await activate(dialog.getByRole("button", { name: "Silkmoth, reserve", exact: true }));
-    await activate(dialog.getByRole("button", { name: "Emberfox, deployed", exact: true }));
+    await activate(dialog.getByRole("button", { name: "Pollenmoth, reserve", exact: true }));
+    await activate(dialog.getByRole("button", { name: "Emberback, deployed", exact: true }));
     await expect(dialog).not.toBeVisible();
     await expect(page.getByRole("button", { name: "Swap", exact: true })).toBeFocused();
     const swapped = await state(page);
@@ -1352,10 +1359,10 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     expect(swapped.battle!.draw).toEqual(fixture.battle!.draw);
     expect(swapped.battle!.discard).toEqual(fixture.battle!.discard);
     expect(swapped.lineup).toEqual(fixture.lineup);
-    expect(swapped.reserves.find((c) => c.species === "emberfox")!.health).toBe(9);
+    expect(swapped.reserves.find((c) => c.species === "emberback")!.health).toBe(9);
     await expect(page.locator(".app:not([inert]) .hand .action-card img")).toHaveAttribute(
       "src",
-      /\/art\/silkmoth-action\.svg$/,
+      /\/art\/pollenmoth-action\.svg$/,
     );
     await page.reload();
     await resume(page);
@@ -1364,8 +1371,8 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     await expect(page.getByRole("button", { name: "Lineup", exact: true })).toHaveCount(0);
     await page.keyboard.press("Escape");
     await activate(page.getByRole("button", { name: "Swap", exact: true }));
-    await activate(page.getByRole("button", { name: "Silkmoth, deployed", exact: true }));
-    await activate(page.getByRole("button", { name: "Emberfox, reserve", exact: true }));
+    await activate(page.getByRole("button", { name: "Pollenmoth, deployed", exact: true }));
+    await activate(page.getByRole("button", { name: "Emberback, reserve", exact: true }));
     expect((await state(page)).team[1]!.health).toBe(9);
   });
 
@@ -1376,10 +1383,10 @@ for (const [width, height] of [
   test(`live Swap and optional Lineup fit ${width}×${height}`, async ({ page }) => {
     await page.setViewportSize({ width, height });
     const fixture = produce(run(7), (d) => {
-      d.roster.push("silkmoth", "briartooth");
-      d.reserves = ["silkmoth", "briartooth"].map((kind) => ({
+      d.roster.push("pollenmoth", "emberback");
+      d.reserves = ["pollenmoth", "emberback"].map((kind) => ({
         id: `recruit-${kind}`,
-        species: kind as "silkmoth" | "briartooth",
+        species: kind as "pollenmoth" | "emberback",
         health: 20,
         block: 0,
         combat: freshCombat(),
@@ -1390,7 +1397,7 @@ for (const [width, height] of [
     await resume(page);
     await captureScreen(page, { path: `reports/swapping/battle-${width}.png` });
     await page.getByRole("button", { name: "Swap", exact: true }).click();
-    await page.getByRole("button", { name: "Emberfox, deployed", exact: true }).click();
+    await page.getByRole("button", { name: "Emberback, deployed", exact: true }).click();
     await page.mouse.move(0, 0);
     await fits(page);
     const dialog = page.getByRole("dialog");
@@ -1411,25 +1418,25 @@ for (const [width, height] of [
     await page.mouse.move(0, 0);
     await fits(page);
     await captureScreen(page, { path: `reports/swapping/lineup-${width}.png` });
-    await page.getByRole("button", { name: "Silkmoth, reserve", exact: true }).click();
+    await page.getByRole("button", { name: "Pollenmoth, reserve", exact: true }).click();
     await page.getByRole("button", { name: "Mossguard, starting", exact: true }).click();
     const edited = await state(page);
-    expect(edited.lineup[0]).toBe("recruit-silkmoth");
+    expect(edited.lineup[0]).toBe("recruit-pollenmoth");
     expect(edited.phase).toBe("recruit");
     expect(edited.reward).toEqual(reward.reward);
     await page.reload();
     await resume(page);
-    expect((await state(page)).lineup[0]).toBe("recruit-silkmoth");
+    expect((await state(page)).lineup[0]).toBe("recruit-pollenmoth");
   });
 
 test("a fallen deployed row resumes with no playable cards and can recover through a reserve swap", async ({
   page,
 }) => {
   let s = produce(run(7), (d) => {
-    d.roster.push("silkmoth", "briartooth");
-    d.reserves = ["silkmoth", "briartooth"].map((kind) => ({
+    d.roster.push("pollenmoth", "emberback");
+    d.reserves = ["pollenmoth", "emberback"].map((kind) => ({
       id: `recruit-${kind}`,
-      species: kind as "silkmoth" | "briartooth",
+      species: kind as "pollenmoth" | "emberback",
       health: 20,
       block: 0,
       combat: freshCombat(),
@@ -1461,7 +1468,7 @@ test("a fallen deployed row resumes with no playable cards and can recover throu
   await page
     .getByRole("button", { name: `${species(outgoing.species).name}, deployed`, exact: true })
     .click();
-  await page.getByRole("button", { name: "Silkmoth, reserve", exact: true }).click();
+  await page.getByRole("button", { name: "Pollenmoth, reserve", exact: true }).click();
   await expect(page.locator(".app:not([inert]) .hand .action-card").first()).toBeVisible();
   const restored = await state(page);
   expect(restored.battle!.mana).toBe(4);
@@ -1477,11 +1484,10 @@ test("recruitment at five requires replacement and updates a released starter's 
 }) => {
   const fixture = produce(winBattle(), (d) => {
     d.wins = 1;
-    d.unlocked.push("moonhart");
-    d.roster.push("silkmoth", "moonhart");
-    d.reserves = ["silkmoth", "moonhart"].map((kind) => ({
+    d.roster.push("pollenmoth", "prismram");
+    d.reserves = ["pollenmoth", "prismram"].map((kind) => ({
       id: `recruit-${kind}`,
-      species: kind as "silkmoth" | "moonhart",
+      species: kind as "pollenmoth" | "prismram",
       health: 20,
       block: 0,
       combat: freshCombat(),
@@ -1490,23 +1496,23 @@ test("recruitment at five requires replacement and updates a released starter's 
   });
   await seed(page, fixture);
   await resume(page);
-  await page.getByRole("button", { name: "Recruit Briartooth", exact: true }).click();
+  await page.getByRole("button", { name: "Recruit Emberback", exact: true }).click();
   expect((await state(page)).roster).toEqual(fixture.roster);
   await expect(page.getByRole("heading", { name: "Replace a creature", exact: true })).toBeVisible();
   await expect(
     page
       .getByRole("region", { name: "Incoming recruit" })
-      .getByRole("button", { name: "Inspect Briartooth", exact: true }),
+      .getByRole("button", { name: "Inspect Emberback", exact: true }),
   ).toBeVisible();
   await captureScreen(page, { path: "reports/implementation/recruit-replacement.png" });
   await page.getByRole("button", { name: "Cancel", exact: true }).click();
   expect((await state(page)).revision).toBe(fixture.revision);
-  await page.getByRole("button", { name: "Recruit Briartooth", exact: true }).click();
+  await page.getByRole("button", { name: "Recruit Emberback", exact: true }).click();
   await page.getByRole("button", { name: "Release Mossguard", exact: true }).click();
   const recruited = await state(page);
   expect(recruited.roster).toHaveLength(5);
   expect(recruited.roster).not.toContain("mossguard");
-  expect(recruited.team.find((c) => c.id === recruited.lineup[0])!.species).toBe("briartooth");
+  expect(recruited.team.find((c) => c.id === recruited.lineup[0])!.species).toBe("emberback");
   expect(recruited.phase).toBe("teamSelection");
   await page.reload();
   await resume(page);
@@ -1536,21 +1542,21 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     await expect(page.getByRole("dialog")).toHaveCount(0);
     await activate(page.getByRole("button", { name: "Open menu", exact: true }));
     await activate(page.getByRole("button", { name: "Collection", exact: true }));
-    await activate(page.getByRole("button", { name: "Inspect Emberfox", exact: true }));
+    await activate(page.getByRole("button", { name: "Inspect Emberback", exact: true }));
     const details = page.locator(".collection-creature-screen");
-    await expect(details.getByRole("region", { name: "Trait", exact: true })).toContainText("Kindling");
-    for (const card of CARDS.filter((c) => c.species === "emberfox"))
+    await expect(details.getByRole("region", { name: "Trait", exact: true })).toContainText("Molten Shell");
+    for (const card of CARDS.filter((c) => c.species === "emberback"))
       await expect(details.getByRole("region", { name: card.name, exact: true })).toContainText(
         `${card.cost} Mana`,
       );
-    await expect(details.getByRole("region", { name: "Cinder Strike", exact: true })).toContainText(
-      "Deal 8 Burn damage",
+    await expect(details.getByRole("region", { name: "Ember Charge", exact: true })).toContainText(
+      "Deal 4 Physical damage",
     );
     await expect(page.getByRole("dialog")).toHaveCount(0);
     if (input === "mouse") await details.getByRole("button", { name: "Back", exact: true }).click();
     else if (press) await press(1);
     else await page.keyboard.press("Escape");
-    await expect(page.getByRole("button", { name: "Inspect Emberfox", exact: true })).toBeFocused();
+    await expect(page.getByRole("button", { name: "Inspect Emberback", exact: true })).toBeFocused();
     if (press) await press(1);
     else await page.keyboard.press("Escape");
     await expect(page.getByRole("button", { name: "Collection", exact: true })).toBeFocused();
@@ -1629,8 +1635,8 @@ for (const [width, height, enlarged] of [
       if (fixture.phase === "recruit") {
         await expect(page.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeVisible();
         await expect(page.getByRole("button", { name: "Skip", exact: true })).toHaveCount(0);
-        await page.getByRole("button", { name: "Recruit Emberfox", exact: true }).click();
-        expect((await state(page)).roster.filter((kind) => kind === "emberfox")).toHaveLength(2);
+        await page.getByRole("button", { name: "Recruit Emberback", exact: true }).click();
+        expect((await state(page)).roster.filter((kind) => kind === "emberback")).toHaveLength(2);
       } else await page.getByRole("button", { name: "Skip", exact: true }).click();
     }
     expect(Math.abs(anchors[0]!.heading - anchors[1]!.heading)).toBeLessThan(1);

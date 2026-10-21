@@ -63,7 +63,9 @@ describe("distinct talent and Boon outcomes", () => {
     hit(state, source, target, 55, "stun", events);
     expect(target.combat.controlled).toBe("stun");
     expect(target.combat.armor).toBe(0);
-    expect(source.block).toBe(4);
+    expect(events).toContainEqual(expect.objectContaining({ kind: "block", targetId: source.id, amount: 4 }));
+    // Breaking Emberback Armor then spends one Block on its Molten Shell burst.
+    expect(source.block).toBe(3);
   });
   it("reduces healing for each harmful status and prevents poisoned enemy Dodge", () => {
     const { state, source, target, events } = fixture();

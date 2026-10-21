@@ -10,7 +10,7 @@ import { accept, teamRun, winBattle } from "./helpers";
 import type { GameEvent } from "../../src/game/types";
 
 function ready(id = "prismram-guard") {
-  return produce(teamRun(1, ["prismram", "mossguard", "stormfin"]), (game) => {
+  return produce(teamRun(1, ["prismram", "mossguard", "prismram"]), (game) => {
     const card = game.cards.find((card) => card.definitionId === id)!;
     game.battle!.hand = [card.id];
     game.battle!.buffer = [];
@@ -184,9 +184,12 @@ it.each([
 
 it("discovers and recruits Prismram with its complete kit and rejects obsolete saves", () => {
   const initial = createGame(7);
-  let game = accept(accept(initial, { type: "draft", species: initial.starterOffers[0]! }), {
-    type: "start",
-  });
+  let game = accept(
+    accept(initial, { type: "draft", species: initial.starterOffers.find((kind) => kind !== "prismram")! }),
+    {
+      type: "start",
+    },
+  );
   game = accept(
     produce(game, (draft) => {
       draft.expedition!.pack = COMBAT_PACKS.findIndex((pack) => pack[0] === "prismram");
@@ -209,11 +212,11 @@ it("refreshes one Ward, preserves it through swaps and turn changes, and resets 
     draft.reserves.push({
       ...draft.team[1]!,
       id: "reserve",
-      species: "emberfox",
+      species: "emberback",
       health: 24,
       combat: freshCombat(),
     });
-    draft.roster.push("emberfox");
+    draft.roster.push("emberback");
   });
   game = accept(game, { type: "play", cardId: game.battle!.hand[0]!, autoEndTurn: false });
   expect(game.team[0]!.combat!.reflect).toBe(true);
@@ -223,11 +226,11 @@ it("refreshes one Ward, preserves it through swaps and turn changes, and resets 
     draft.reserves.push({
       ...draft.team[1]!,
       id: "reserve",
-      species: "emberfox",
+      species: "emberback",
       health: 24,
       combat: freshCombat(),
     });
-    draft.roster.push("emberfox");
+    draft.roster.push("emberback");
     draft.battle!.enemies.forEach((enemy) => {
       enemy.combat.controlled = "freeze";
       enemy.combat.controlTurns = 2;

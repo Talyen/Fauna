@@ -91,7 +91,7 @@ describe("player interface", () => {
   it("shows stacked currency and Journey-style keyword level progress on Victory", async () => {
     const started = accept(accept(createGame(7), { type: "draft", species: "mossguard" }), { type: "start" });
     const battle = produce(accept(started, { type: "beginBattle" }), (d) => {
-      d.keywordXP.nature = 23;
+      d.keywordXP.stun = 23;
     });
     const game = winBattle(battle);
     localStorage.setItem("fauna.save.v1", JSON.stringify(game));
@@ -110,7 +110,7 @@ describe("player interface", () => {
           ?.textContent,
       ).toBe("20"),
     );
-    const progress = screen.getByRole("progressbar", { name: "Nature level 2 progress" });
+    const progress = screen.getByRole("progressbar", { name: "Stun level 2 progress" });
     expect(progress.getAttribute("aria-valuenow")).toBe("14");
     expect(progress.getAttribute("aria-valuemax")).toBe("30");
     expect(screen.queryByText(/keyword XP|talent point|4 \/ 40 XP/)).toBeNull();
@@ -276,7 +276,7 @@ describe("player interface", () => {
           disconnect() {}
         },
       );
-      const game = produce(teamRun(7, ["mossguard", "mossguard", "stormfin"]), (d) => {
+      const game = produce(teamRun(7, ["mossguard", "mossguard", "prismram"]), (d) => {
         d.team[0]!.health = 7;
         d.team[1]!.health = 19;
         d.team[1]!.block = 4;
