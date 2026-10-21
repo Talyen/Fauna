@@ -248,9 +248,6 @@ strong {
   width: var(--main-menu-button-width);
   max-width: 100%;
 }
-.home-screen nav > .primary-menu-action {
-  margin-bottom: var(--screen-item-gap);
-}
 .draft-screen {
   min-height: 0;
   display: flex;
