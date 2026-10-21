@@ -67,7 +67,6 @@ function actor(config: JourneyConfig) {
         if (canVisitCampfire(state)) return { type: "visitCampfire" };
         return {
           type: "beginBattle",
-          destination: state.expedition ? pick(state.expedition.offers).location : undefined,
         };
       case "recruit":
         return {

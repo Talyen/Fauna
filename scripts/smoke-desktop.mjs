@@ -31,7 +31,7 @@ try {
     .locator(".deck-grid img")
     .evaluateAll((images) => Promise.all(images.map((image) => image.decode())));
   await window.getByRole("button", { name: "Close deck", exact: true }).click();
-  await window.locator("[data-destination]").first().click();
+  await window.locator("[data-encounter]").first().click();
   await window.getByRole("button", { name: "Begin battle" }).click();
   await window.getByRole("main", { name: "Battlefield" }).waitFor();
   await window.locator('.app[data-save-status="saved"]').waitFor();
@@ -93,7 +93,7 @@ try {
     JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
   );
   if (
-    swapped.version !== 16 ||
+    swapped.version !== 17 ||
     swapped.team[0].species !== "silkmoth" ||
     swapped.battle.mana !== 4 ||
     swapped.lineup[0] !== "ally-0"

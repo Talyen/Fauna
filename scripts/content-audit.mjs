@@ -20,7 +20,7 @@ try {
     requireAsset(`creature.${species.id}`);
     requireAsset(`action.${species.id}`);
   }
-  for (const place of contentCatalog.locations) requireAsset(`location.${place.id}`);
+  for (const kind of ["combat", "boss"]) requireAsset(`encounter.${kind}`);
   // Keyword tabs use text; illustrations are optional selections, not a talent prerequisite.
   for (const entry of manifest.assets.filter((asset) => asset.id.startsWith("keyword.")))
     requireAsset(entry.id);

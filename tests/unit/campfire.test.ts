@@ -2,7 +2,6 @@ import { expect, it } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
 import { decodeSave, encodeSave } from "../../src/game/save";
-import { BIOMES } from "../../src/game/destinations";
 import { canVisitCampfire } from "../../src/game/support";
 import { accept, run } from "./helpers";
 function destinations() {
@@ -26,11 +25,7 @@ it.each([0, 1, 2, 3, 4, 5, 6, 7])("offers Campfire at encounter %s without rerol
     d.expedition = {
       biome,
       step,
-      chosen: null,
-      offers: (step === 3 ? [BIOMES[biome]!.boss] : BIOMES[biome]!.locations.slice(0, 3)).map((location) => ({
-        location,
-        pack: 0,
-      })),
+      pack: 0,
     };
     d.team[0]!.health = 21;
   });

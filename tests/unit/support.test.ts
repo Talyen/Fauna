@@ -6,7 +6,7 @@ import { encodeSave, decodeSave } from "../../src/game/save";
 import { accept, winBattle } from "./helpers";
 function merchant() {
   let s = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
-  s = winBattle(accept(s, { type: "beginBattle", destination: s.expedition!.offers[0]!.location }));
+  s = winBattle(accept(s, { type: "beginBattle" }));
   return accept(s, { type: "skipRecruit" });
 }
 it("saves an atomic purchase, rejects repeats and leaves the exact destination offers", () => {
@@ -46,7 +46,7 @@ it("preserves eight battles after Merchant purchases", () => {
       s = accept(s, { type: "buyBoon", visit: s.support!.id, slot: s.support!.stock[0]!.slot });
       s = accept(s, { type: "leaveSupport", visit: s.support!.id });
     }
-    s = winBattle(accept(s, { type: "beginBattle", destination: s.expedition!.offers[0]!.location }));
+    s = winBattle(accept(s, { type: "beginBattle" }));
     if (s.phase === "boon") {
       expect(s.reward!.boons.length).toBeGreaterThan(0);
       s = accept(s, { type: "chooseBoon", boon: s.reward!.boons[0]! });
@@ -89,14 +89,14 @@ it.each([BOONS.length - 2, BOONS.length - 1, BOONS.length])(
   (owned) => {
     let s = merchant();
     for (let i = 0; i < 2; i++) {
-      s = winBattle(accept(s, { type: "beginBattle", destination: s.expedition!.offers[0]!.location }));
+      s = winBattle(accept(s, { type: "beginBattle" }));
       s = accept(s, { type: "skipRecruit" });
     }
     // Explicit loadout fixture; these Boons are not claimed as earned purchases.
     s = produce(s, (d) => {
       d.boons = BOONS.slice(0, owned).map((b) => b.id);
     });
-    s = winBattle(accept(s, { type: "beginBattle", destination: s.expedition!.offers[0]!.location }));
+    s = winBattle(accept(s, { type: "beginBattle" }));
     expect(s.phase).toBe(owned === BOONS.length ? "teamSelection" : "boon");
     if (owned < BOONS.length) expect(s.reward!.boons).toHaveLength(BOONS.length - owned);
     expect(decodeSave(encodeSave(s))).toEqual(s);

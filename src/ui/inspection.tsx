@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../compon
 import { Button } from "../components/ui/button";
 import { ActionCard, CreatureCard } from "./cards";
 import { CARDS, definition, species } from "../game/content";
-import { encounterSource, location } from "../game/destinations";
+import { encounterSource } from "../game/encounters";
 import type { Card } from "../game/types";
 import { returnFocus } from "./focus";
 import type { Inspection, Controls } from "./battle-screen";
@@ -18,35 +18,35 @@ export function Inspector({
   controls,
   onClose,
   chooseStarter,
-  enterDestination,
+  enterEncounter,
 }: {
   item: Exclude<Inspection, { support: string }>;
   session: Session;
   controls: Controls;
   onClose: () => void;
   chooseStarter?: () => boolean;
-  enterDestination?: (destination: string) => boolean;
+  enterEncounter?: () => boolean;
 }) {
   const [opener] = useState(() => document.activeElement as HTMLElement | null);
   const game = useStore(session.store, (s) => s.game);
   const rootCard = "card" in item ? item.card : null;
-  const destination = "destination" in item ? item.destination : null;
-  const [destinationEnemy, setDestinationEnemy] = useState<number | null>(null);
-  const pack = destination ? encounterSource(game, destination) : null;
+  const encounter = "encounter" in item;
+  const [encounterEnemy, setEncounterEnemy] = useState<number | null>(null);
+  const pack = encounter ? encounterSource(game) : null;
   const kind =
     "card" in item
       ? definition(item.card.definitionId).species
       : "species" in item
         ? item.species
-        : pack!.enemies[destinationEnemy ?? 0]!.species;
+        : pack!.enemies[encounterEnemy ?? 0]!.species;
   const creature = species(kind);
   const creatureId = rootCard?.ownerId ?? ("creatureId" in item ? item.creatureId : undefined);
   const ally = creatureId ? [...game.team, ...game.reserves].find((c) => c.id === creatureId) : undefined;
   const enemyIndex =
     "enemyId" in item && item.enemyId?.startsWith("preview-") ? Number(item.enemyId.slice(8)) : -1;
   const preview =
-    pack && destinationEnemy !== null
-      ? pack.enemies[destinationEnemy]
+    pack && encounterEnemy !== null
+      ? pack.enemies[encounterEnemy]
       : enemyIndex >= 0
         ? encounterSource(game).enemies[enemyIndex]
         : undefined;
@@ -72,15 +72,15 @@ export function Inspector({
   const thumbnails = useRef<HTMLDivElement>(null),
     backButton = useRef<HTMLButtonElement>(null);
   const packRoot = useRef<HTMLDivElement>(null);
-  const previousEnemy = useRef(destinationEnemy);
+  const previousEnemy = useRef(encounterEnemy);
   useLayoutEffect(() => {
-    if (previousEnemy.current !== null && destinationEnemy === null)
+    if (previousEnemy.current !== null && encounterEnemy === null)
       returnFocus(
         packRoot.current?.querySelectorAll<HTMLButtonElement>("button")[previousEnemy.current] ?? null,
       );
-    else if (previousEnemy.current === null && destinationEnemy !== null) backButton.current?.focus();
-    previousEnemy.current = destinationEnemy;
-  }, [destinationEnemy]);
+    else if (previousEnemy.current === null && encounterEnemy !== null) backButton.current?.focus();
+    previousEnemy.current = encounterEnemy;
+  }, [encounterEnemy]);
   const previousCard = useRef(selected),
     restore = useRef<number | null>(null);
   const cycle = (direction: number) =>
@@ -88,8 +88,8 @@ export function Inspector({
   const back = () => {
     if (rootCard) return false;
     if (selected === null) {
-      if (destinationEnemy === null) return false;
-      setDestinationEnemy(null);
+      if (encounterEnemy === null) return false;
+      setEncounterEnemy(null);
       return true;
     }
     restore.current = selected;
@@ -111,14 +111,14 @@ export function Inspector({
         cycle(action === "left" ? -1 : 1);
         return true;
       }
-      if (action === "inspect" && destination && destinationEnemy === null) {
+      if (action === "inspect" && encounter && encounterEnemy === null) {
         const index = Number(
           (document.activeElement as HTMLElement | null)
             ?.closest<HTMLElement>("[data-enemy-id]")
             ?.dataset.enemyId?.slice(8),
         );
         if (Number.isInteger(index) && pack?.enemies[index]) {
-          setDestinationEnemy(index);
+          setEncounterEnemy(index);
           return true;
         }
       }
@@ -146,13 +146,13 @@ export function Inspector({
       }}
     >
       <DialogContent
-        className={`inspection ${destination && destinationEnemy === null ? "destination-inspection" : card ? "single-card" : "creature-inspection"}`}
+        className={`inspection ${encounter && encounterEnemy === null ? "destination-inspection" : card ? "single-card" : "creature-inspection"}`}
         onCloseAutoFocus={(event) => {
           event.preventDefault();
           returnFocus(opener);
         }}
       >
-        {destination && destinationEnemy === null ? null : (
+        {encounter && encounterEnemy === null ? null : (
           <header className="inspection-back">
             <Button
               ref={backButton}
@@ -166,10 +166,10 @@ export function Inspector({
             </Button>
           </header>
         )}
-        {destination && destinationEnemy === null ? (
+        {encounter && encounterEnemy === null ? (
           <>
-            <DialogTitle>{location(destination)!.name}</DialogTitle>
-            <DialogDescription>{game.expedition!.step === 3 ? "Boss" : "Combat"}</DialogDescription>
+            <DialogTitle>{pack!.name}</DialogTitle>
+            <DialogDescription className="sr-only">Enemy lineup</DialogDescription>
             <div className="destination-enemies" ref={packRoot} data-nav-row aria-label="Enemy lineup">
               {pack!.enemies.map((entry, index) => (
                 <div key={index}>
@@ -181,8 +181,8 @@ export function Inspector({
                     health={entry.health}
                     maxHealth={entry.health}
                     label={`Inspect ${entry.name}`}
-                    onClick={() => setDestinationEnemy(index)}
-                    onInspect={() => setDestinationEnemy(index)}
+                    onClick={() => setEncounterEnemy(index)}
+                    onInspect={() => setEncounterEnemy(index)}
                   />
                   <h2>{entry.name}</h2>
                 </div>
@@ -194,7 +194,7 @@ export function Inspector({
               </Button>
               <Button
                 onClick={() => {
-                  if (enterDestination?.(destination)) onClose();
+                  if (enterEncounter?.()) onClose();
                 }}
               >
                 Begin battle

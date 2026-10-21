@@ -71,7 +71,7 @@ export interface JourneySummary {
   lastBattle: { xp: KeywordXP; currency: number } | null;
 }
 export interface GameState {
-  version: 16;
+  version: 17;
   discovery: { encountered: SpeciesId[]; recruited: SpeciesId[] };
   revision: number;
   rng: number;
@@ -91,8 +91,7 @@ export interface GameState {
   expedition: {
     biome: number;
     step: number;
-    offers: { location: string; pack: number }[];
-    chosen: string | null;
+    pack: number | null;
   } | null;
   support: {
     id: string;
@@ -115,7 +114,7 @@ export interface GameState {
 export type Command =
   | { type: "draft"; species: SpeciesId }
   | { type: "start" }
-  | { type: "beginBattle"; destination?: string }
+  | { type: "beginBattle" }
   | { type: "setLineup"; activeId: string; reserve: string }
   | { type: "swap"; activeId: string; reserve: string }
   | { type: "play"; cardId: string; targetId?: string; autoEndTurn?: boolean }

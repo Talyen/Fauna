@@ -3,7 +3,6 @@ import { test, expect, type Page, type Locator } from "@playwright/test";
 import { produce } from "immer";
 import { createGame } from "../../src/game/engine";
 import { definition, species } from "../../src/game/content";
-import { location } from "../../src/game/destinations";
 import { BOONS } from "../../src/game/progression";
 import type { GameState } from "../../src/game/types";
 import { accept, policy, winBattle, run, bossReward } from "../unit/helpers";
@@ -34,10 +33,7 @@ async function step(page: Page, activate: (el: Locator) => Promise<void> = (el) 
   const s = await state(page),
     c = policy(s);
   if (c.type === "beginBattle") {
-    if (c.destination)
-      await activate(
-        page.getByRole("button", { name: `Inspect ${location(c.destination)!.name}`, exact: true }),
-      );
+    if (s.expedition) await activate(page.locator("[data-encounter]"));
     await activate(page.getByRole("button", { name: "Begin battle", exact: true }));
   } else if (c.type === "skipRecruit")
     await activate(page.getByRole("button", { name: "Skip", exact: true }));
@@ -187,9 +183,9 @@ for (const width of [1280, 1920])
         await page.keyboard.press("Escape");
         await page.keyboard.press("Escape");
       }
-      const offers = page.locator("[data-destination]");
-      await expect(offers).toHaveCount(3);
-      await expect(page.locator(".destination-option").getByText("Combat", { exact: true })).toHaveCount(3);
+      const offers = page.locator("[data-encounter]");
+      await expect(offers).toHaveCount(1);
+      await expect(page.locator(".destination-option").getByText("Combat", { exact: true })).toHaveCount(1);
       await offers
         .locator("img")
         .evaluateAll((images) => Promise.all(images.map((image) => (image as HTMLImageElement).decode())));
@@ -217,7 +213,7 @@ for (const width of [1280, 1920])
       expect(await state(page)).toEqual(game);
       await offers.first().click();
       await page.getByRole("button", { name: "Begin battle", exact: true }).click();
-      expect((await state(page)).expedition!.chosen).toBe(game.expedition!.offers[0]!.location);
+      expect((await state(page)).expedition!.pack).toBe(game.expedition!.pack);
       await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
     });
 
@@ -226,7 +222,7 @@ test("destination enemy artwork wraps at its fixed size in a narrow window", asy
   const game = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
   await seed(page, game);
   await resume(page);
-  await page.locator("[data-destination]").first().click();
+  await page.locator("[data-encounter]").first().click();
   const cards = page.getByRole("dialog").locator(".destination-enemies .creature-card");
   await expect(cards).toHaveCount(3);
   // The pointer can land on a creature when the dialog opens. Measure its resting size.
@@ -252,7 +248,7 @@ test("main menu, draft and pre-battle deck lead into the first battle", async ({
   await page.getByRole("button", { name: "Choose Mossback", exact: true }).click();
   await page.getByRole("button", { name: "Begin journey" }).click();
   expect((await state(page)).phase).toBe("teamSelection");
-  const destination = page.locator("[data-destination]").first();
+  const destination = page.locator("[data-encounter]").first();
   await destination.focus();
   await page.keyboard.press("i");
   await expect(page.getByRole("dialog").locator(".destination-enemies .creature-card")).toHaveCount(3);

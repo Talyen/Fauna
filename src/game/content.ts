@@ -204,7 +204,7 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
   if (card.leech) text += " Leech.";
   return text;
 }
-/** Stable legacy route; new expeditions use the saved offers in destinations.ts. */
+/** Stable legacy route; new expeditions use the saved packs in encounters.ts. */
 export const ENCOUNTERS = [
   {
     name: "The overgrown trail",

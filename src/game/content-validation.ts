@@ -1,12 +1,11 @@
 import { CARDS, SPECIES, INITIAL_SPECIES, ENCOUNTERS } from "./content";
-import { LOCATIONS, BIOMES } from "./destinations";
+import { BIOMES } from "./encounters";
 import { BOONS, TALENTS, TALENT_EFFECTS } from "./progression";
 import { DAMAGE_TYPES, EFFECT_KEYWORDS, PROGRESSION_KEYWORDS, definitionKeywords } from "./keywords";
 
 export const contentCatalog = {
   cards: CARDS,
   species: SPECIES,
-  locations: LOCATIONS,
   biomes: BIOMES,
   boons: BOONS,
   talents: TALENTS,
@@ -65,19 +64,12 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
         error(card.id, "keywords", "Invalid progression classification.");
     }
   }
-  for (const place of catalog.locations) {
-    if (!place.packs.length) error(place.id, "packs", "Location has no packs.");
-    for (const pack of place.packs)
+  for (const biome of catalog.biomes) {
+    if (!biome.combat.length) error(biome.name, "combat", "Biome has no combat packs.");
+    for (const pack of [...biome.combat, biome.boss])
       if (pack.length < 1 || pack.length > 3 || pack.some((id) => !species.has(id)))
-        error(place.id, "packs", "Invalid encounter pack.");
+        error(biome.name, "packs", "Invalid encounter pack.");
   }
-  catalog.biomes.forEach((biome) => {
-    const ids: readonly string[] = [...biome.locations, biome.boss];
-    if (new Set(ids).size !== ids.length || biome.locations.length < 4)
-      error(biome.name, "locations", "Biome needs four distinct ordinary locations and a boss.");
-    for (const id of ids)
-      if (!catalog.locations.some((place) => place.id === id)) error(id, "biome", "Unknown biome location.");
-  });
   for (const encounter of ENCOUNTERS)
     for (const enemy of encounter.enemies) {
       if (

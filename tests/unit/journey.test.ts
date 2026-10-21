@@ -59,7 +59,6 @@ describe("journey earnings and results", () => {
       d.phase = "teamSelection";
       d.reward = null;
       d.battle = null;
-      d.expedition!.chosen = null;
       d.boons = BOONS.map((boon) => boon.id);
     });
     const won = winBattle(accept(ready, { type: "beginBattle" }));
@@ -85,9 +84,9 @@ describe("journey earnings and results", () => {
       }));
       d.boons = BOONS.map((boon) => boon.id);
     });
-    // Start from the committed pack so the saved battle receipt matches its destination.
+    // Start from the committed pack so the saved battle receipt matches its encounter.
     const battle = accept(
-      { ...s, phase: "teamSelection", battle: null, expedition: { ...s.expedition!, chosen: null } },
+      { ...s, phase: "teamSelection", battle: null, expedition: s.expedition },
       { type: "beginBattle" },
     );
     const ready = victoryReady(battle);
