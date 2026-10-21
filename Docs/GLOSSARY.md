@@ -2,7 +2,7 @@
 
 Keyword definitions live in [src/game/keywords.ts](../src/game/keywords.ts); the complete gameplay glossary is assembled in [src/game/glossary.ts](../src/game/glossary.ts) and is available in-game under **Menu → Glossary**. Keep terminology in card text and feedback consistent with those definitions.
 
-Terms currently defined: Health, Block, Mana, Action card, Attack, Damage, Hit, Turn, Battle, Draw / discard, Knockout, Keyword XP, Talents, Reserves, Starting lineup, Boons, Currency, Thorns, Death's Door, defenses, periodic statuses, crowd control, removal effects and each damage type.
+Terms currently defined: Health, Block, Mana, Action card, Attack, Damage, Hit, Turn, Battle, Draw / discard, Knockout, Keyword XP, Talents, Backup, Starting lineup, Swap cards, Boons, Currency, Thorns, Death's Door, defenses, periodic statuses, crowd control, removal effects and each damage type.
 
 Damage, status, defense and keyword contracts are defined in [Keywords](KEYWORDS.md). There are no elemental reactions. Gold is permanent battle-earned currency spent at Merchants, rather than a keyword or talent category. Wish, Consume, Companion and Archery are excluded.
 

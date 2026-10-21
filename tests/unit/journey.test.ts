@@ -74,9 +74,9 @@ describe("journey earnings and results", () => {
       d.expedition = started.expedition;
       d.journey = started.journey;
       d.roster = [...INITIAL_SPECIES];
-      d.reserves = (["pollenmoth"] as const).map((kind) => ({
+      d.reserves = (["pollenmoth", "captoad"] as const).map((kind) => ({
         id: kind,
-        species: kind as "pollenmoth" | "emberback",
+        species: kind,
         health: species(kind).health,
         block: 0,
         combat: freshCombat(),
@@ -215,7 +215,7 @@ describe("journey earnings and results", () => {
 });
 
 it("completes the one-starter recruitment path through the final boss within the browser journey budget", () => {
-  let game = startedJourney();
+  let game = accept(accept(createGame(7), { type: "draft", species: "pollenmoth" }), { type: "start" });
   for (let step = 0; step < 400 && game.phase !== "victory"; step++) {
     expect(game.phase).not.toBe("defeat");
     expect(game.reward?.outcome).not.toBe("defeat");

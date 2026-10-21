@@ -188,7 +188,7 @@ describe("game commands", () => {
             first * 100 + second * 10 + third,
             [first, second, third].map((index) => SPECIES[index]!.id),
           );
-          for (let i = 0; i < 180 && !["victory", "defeat"].includes(s.phase); i++) {
+          for (let i = 0; i < 500 && !["victory", "defeat"].includes(s.phase); i++) {
             s = accept(s, policy(s));
             decodeSave(encodeSave(s));
           }

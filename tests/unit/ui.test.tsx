@@ -313,7 +313,7 @@ describe("player interface", () => {
         if (input === "hover") await user.unhover(creature);
       }
       await user.click(screen.getByRole("button", { name: "Swap" }));
-      const reserve = screen.getByRole("button", { name: "Mossguard, reserve" });
+      const reserve = screen.getByRole("button", { name: "Mossguard, backup" });
       if (input === "hover") await user.hover(reserve);
       else {
         await user.tab();

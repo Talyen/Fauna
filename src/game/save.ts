@@ -346,11 +346,11 @@ export function decodeSave(raw: string): GameState {
     const b = s.battle,
       source = encounterSource(s);
     invalid(b.enemies.length !== source.enemies.length || !unique(b.enemies.map((e) => e.id)));
-    b.enemies.forEach((enemy, index) => {
-      const original = source.enemies[index];
+    b.enemies.forEach((enemy) => {
+      const original = source.enemies[Number(enemy.id.replace(/^enemy-/, ""))];
       invalid(
         !original ||
-          enemy.id !== `enemy-${index}` ||
+          !source.enemies.some((_, index) => enemy.id === `enemy-${index}`) ||
           enemy.species !== original.species ||
           enemy.name !== original.name ||
           enemy.maxHealth !== original.health ||

@@ -2,7 +2,7 @@
 
 A single-player creature-collecting card battler for Steam. Choose a starter and recruit companions, combining their cards in one shared deck. Find combinations, recruit new teammates, and reach the heart of the wilds.
 
-This foundation contains a complete short journey: choose from Mossguard, Emberback, Pollenmoth and Prismram, play eight encounters with bosses fourth and last, collect keyword XP and currency, recruit reserves, choose journey Boons. Creatures and abilities use production illustrations; encounter and location artwork still includes placeholders.
+This foundation contains a complete short journey: choose from Mossguard, Emberback, Pollenmoth, Prismram and Captoad, play eight encounters with bosses fourth and last, collect keyword XP and currency, recruit reserves, choose journey Boons. Creatures and abilities use production illustrations; encounter and location artwork still includes placeholders.
 
 ## Run
 

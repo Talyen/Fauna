@@ -5,7 +5,7 @@ import { decodeSave, encodeSave } from "../../src/game/save";
 import { canVisitCampfire } from "../../src/game/support";
 import { accept, run } from "./helpers";
 function destinations() {
-  return accept(accept(createGame(7), { type: "draft", species: "prismram" }), { type: "start" });
+  return accept(accept(createGame(7), { type: "draft", species: "captoad" }), { type: "start" });
 }
 it.each([22, 21, 20, 0])("uses the exact 30%% missing Health threshold at %s/30", (health) => {
   const s = produce(destinations(), (d) => {

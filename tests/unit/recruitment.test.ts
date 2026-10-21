@@ -1,16 +1,18 @@
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
-import { createGame, dispatch } from "../../src/game/engine";
+import { dispatch } from "../../src/game/engine";
 import { COMBAT_PACKS } from "../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../src/game/save";
-import { accept, run, winBattle } from "./helpers";
+import { accept, run, teamRun, winBattle } from "./helpers";
 
 describe("recruiting creature copies", () => {
   it("offers exactly the three defeated enemies, including repeated species and roster members", () => {
     for (const pack of COMBAT_PACKS) expect(pack).toHaveLength(3);
-    const started = accept(accept(createGame(7), { type: "draft", species: "prismram" }), { type: "start" });
+    const started = teamRun(7, ["prismram"]);
     const battle = accept(
       produce(started, (d) => {
+        d.phase = "teamSelection";
+        d.battle = null;
         d.encounter = 4;
         d.journey = null;
         d.expedition = {

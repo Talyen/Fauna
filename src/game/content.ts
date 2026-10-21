@@ -1,11 +1,12 @@
 import { DAMAGE_TYPES, keywordLabel, type DamageType, EFFECT_KEYWORDS } from "./keywords";
 export { type DamageType } from "./keywords";
-export type SpeciesId = "mossguard" | "emberback" | "pollenmoth" | "prismram";
+export type SpeciesId = "mossguard" | "emberback" | "pollenmoth" | "prismram" | "captoad";
 type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
   | { kind: "blockRetention"; amount: number }
   | { kind: "cardBonus"; trigger: "firstAttack" | "stunAttack" | "heal" | "guard"; amount: number }
   | { kind: "battleStart"; effect: "block" | "thorns" | "armor"; amount: number }
+  | { kind: "poisonRetaliation"; amount: number }
   | { kind: "armorBreak"; amount: number }
   | { kind: "statusReflection"; amount: number }
   | { kind: "bounce"; effect: "light" | "heal"; amount: number; chance?: number };
@@ -36,7 +37,7 @@ export const DAMAGE_LABELS = Object.fromEntries(DAMAGE_TYPES.map((id) => [id, ke
 type CardEffect =
   | { kind: "damage"; damageType: DamageType; amount: number; leech?: boolean }
   | { kind: "status"; status: "armor" | "thorns" | "dodge"; amount: number }
-  | { kind: "draw" | "mana" | "cleanse" | "purge" | "reflect"; amount: number };
+  | { kind: "draw" | "mana" | "cleanse" | "purge" | "reflect" | "heal"; amount: number };
 interface CardBase {
   id: string;
   species: SpeciesId;
@@ -262,6 +263,25 @@ export const SPECIES: readonly Species[] = [
       },
     ],
   },
+  {
+    id: "captoad",
+    name: "Captoad",
+    title: "Beneath the spotted cap",
+    health: 30,
+    color: "#cb8051",
+    trait: "Sporecoat",
+    passiveTiers: [
+      {
+        description: "Retaliate with 1 Poison damage when hit",
+        effects: [{ kind: "poisonRetaliation", amount: 1 }],
+      },
+      null,
+      null,
+      null,
+      null,
+      null,
+    ],
+  },
 ];
 const card = <T extends Exclude<Effect, "attack">>(
   species: SpeciesId,
@@ -354,17 +374,33 @@ export const CARDS: readonly CardDefinition[] = [
     artwork: "action.prismram.spectrum-lance",
     effects: [{ kind: "purge", amount: 1 }],
   },
+  {
+    ...attack("captoad", "Spore Puff", 2, "poison"),
+    target: "allEnemies",
+    artwork: "action.captoad.spore-puff",
+  },
+  {
+    ...card("captoad", "Mushroom Guard", "guard", 3),
+    target: "self",
+    effects: [{ kind: "heal", amount: 3 }],
+    artwork: "action.captoad.mushroom-guard",
+  },
+  {
+    ...card("captoad", "Bogbound Leap", "swap", 1),
+    effects: [{ kind: "draw", amount: 2 }],
+    artwork: "action.captoad.bogbound-leap",
+  },
 ];
 export function enemyCard(card: CardDefinition): CardDefinition {
   return {
     ...card,
     effects: card.effects?.filter((effect) =>
-      ["damage", "status", "cleanse", "purge", "reflect"].includes(effect.kind),
+      ["damage", "status", "cleanse", "purge", "reflect", "heal"].includes(effect.kind),
     ),
   };
 }
 export const INITIAL_SPECIES = SPECIES.map((s) => s.id);
-export const FIRST_RUN_STARTERS: readonly SpeciesId[] = ["emberback", "mossguard", "pollenmoth", "prismram"];
+export const FIRST_RUN_STARTERS: readonly SpeciesId[] = INITIAL_SPECIES;
 export function species(id: SpeciesId): Species {
   const result = SPECIES.find((s) => s.id === id);
   if (!result) throw new Error(`Unknown species: ${id}`);
@@ -387,6 +423,9 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
     case "heal":
       text = `Restore ${value} Health to ${card.target === "allAllies" ? "all allies" : card.target === "mostInjured" ? "the most injured ally" : "a living ally"}`;
       break;
+    case "swap":
+      text = "Swap out for a random backup";
+      break;
     case "teamGuard":
       text = `Allies gain ${value} Block`;
       break;
@@ -399,12 +438,14 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
         : effect.kind === "status"
           ? `Gain ${effect.amount} ${keywordLabel(effect.status)}`
           : effect.kind === "draw"
-            ? `Draw ${effect.amount}`
+            ? `Draw ${effect.amount} card${effect.amount === 1 ? "" : "s"}`
             : effect.kind === "mana"
               ? `Restore ${effect.amount} Mana`
-              : effect.kind === "reflect"
-                ? "Reflect the next harmful status effect"
-                : `${effect.kind === "cleanse" ? "Cleanse acting creature" : "Purge target"}: remove ${effect.amount} effect${effect.amount === 1 ? "" : "s"}`);
+              : effect.kind === "heal"
+                ? `Restore ${effect.amount} Health`
+                : effect.kind === "reflect"
+                  ? "Reflect the next harmful status effect"
+                  : `${effect.kind === "cleanse" ? "Cleanse acting creature" : "Purge target"}: remove ${effect.amount} effect${effect.amount === 1 ? "" : "s"}`);
   }
   if (card.leech) text += "; Leech";
   return text;

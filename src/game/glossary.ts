@@ -30,7 +30,7 @@ export const GLOSSARY = [
   {
     term: "Hit",
     definition:
-      "An incoming damage action; Thorns retaliate only when the action removes health, not when block absorbs it entirely",
+      "A landed attack, including one absorbed by Block; Dodges and periodic damage are not hits; Sporecoat retaliates when hit; Thorns require the attack to remove Health",
   },
   {
     term: "Turn",
@@ -55,7 +55,7 @@ export const GLOSSARY = [
   {
     term: "Knockout",
     definition:
-      "At zero health a creature cannot act or be healed during that battle; Its cards cannot be played or normally drawn; A living reserve can replace it; Losing every creature in the roster ends the journey",
+      "At zero health a creature cannot act or be healed during that battle; Its cards cannot be played or normally drawn; A living backup can replace it; Losing every creature in the roster ends the journey",
   },
   {
     term: "Keyword XP",
@@ -68,14 +68,19 @@ export const GLOSSARY = [
       "Keyword XP earns points for that keyword's talents; The first point takes 20 XP, then another 40, then 60; Complete each row to open the next; Talents apply immediately to every matching creature; Reset a category at any time to refund all its points while retaining XP",
   },
   {
-    term: "Reserves",
+    term: "Backup",
     definition:
-      "Recruit up to five distinct species: three deployed and two reserves; Only deployed, living creatures provide passives; Swap freely during your turn through Swap; choose one deployed creature and one living reserve in either order; Their cards replace one another in their existing hand, draw, and discard positions; Health and effects persist, and swapping grants no extra draws or opening bonuses",
+      "Recruit up to five creatures: three deployed and two in backup; Only deployed, living creatures provide passives; Swap freely during your turn through Swap; choose one deployed creature and one living backup in either order; Their cards replace one another in their existing hand, draw, and discard positions; Health and effects persist, and free swaps grant no extra draws or opening bonuses",
+  },
+  {
+    term: "Swap cards",
+    definition:
+      "Swap with a random living backup; Remove the departing creature's cards from hand and all piles, then shuffle the incoming kit into the draw pile before any draws; With no living backup, swap positions with a random living ally; Alone, only the swap part does nothing; Health and effects persist",
   },
   {
     term: "Starting lineup",
     definition:
-      "Your original draft supplies the starting three; Edit Lineup from the menu between battles if desired; Combat swaps do not change this saved lineup; New recruits join reserves; Selecting Combat or Boss deploys your saved three without asking you to choose again",
+      "Your original draft supplies the starting three; Edit Lineup from the menu between battles if desired; Combat swaps do not change this saved lineup; New recruits join backup; Selecting Combat or Boss deploys your saved three without asking you to choose again",
   },
   {
     term: "Boons",

@@ -3,7 +3,7 @@ import { actionValue, cardCost, physicalBonus } from "../game/rules";
 import { definition, species } from "../game/content";
 import type { Command, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 5;
+export const BATTLE_POLICY_VERSION = 6;
 /** Only visible information enters scoring; no forecasts or gameplay RNG are sampled. */
 export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
   if (state.phase !== "battle" || !state.battle) return [];
@@ -64,6 +64,8 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
         .filter((c) => c.health > 0)
         .reduce((n, c) => n + Math.max(0, value - c.block), 0);
       add(id, useful > 0 ? 100 + useful : 0);
+    } else if (def.effect === "swap") {
+      add(id, 150);
     } else {
       for (const ally of def.target === "self" ? [actor] : state.team.filter((c) => c.health > 0)) {
         const useful = Math.max(0, value - ally.block);

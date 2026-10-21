@@ -289,3 +289,19 @@ it.each(["attack", "heal"])("confirms Pollenmoth's automatic %s without manual t
   expect(send).toHaveBeenCalledTimes(1);
   expect(send).toHaveBeenCalledWith({ type: "play", cardId });
 });
+
+it("confirms Bogbound Leap without asking for an ally target", async () => {
+  const game = produce(teamRun(1, ["captoad"]), (draft) => {
+    const leap = draft.cards.find((card) => card.definitionId === "captoad-swap")!;
+    draft.battle!.hand = [leap.id];
+    draft.battle!.draw = draft.cards.filter((card) => card.id !== leap.id).map((card) => card.id);
+  });
+  const { send, card } = open(game);
+  const leap = card("swap");
+  await userEvent.click(leap);
+  expect(send).not.toHaveBeenCalled();
+  const confirm = screen.getByRole("button", { name: /^Play/ });
+  expect(confirm.hasAttribute("disabled")).toBe(false);
+  await userEvent.click(confirm);
+  expect(send).toHaveBeenCalledWith({ type: "play", cardId: leap.dataset.cardId });
+});

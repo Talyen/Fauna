@@ -373,7 +373,7 @@ test("one starter grows a lineup through a full expedition", async ({ page }) =>
   await seed(page);
   const activate = (el: Locator) => el.click();
   await activate(page.getByRole("button", { name: "Play", exact: true }));
-  const chosen = "mossguard";
+  const chosen = "pollenmoth";
   const name = species(chosen).name;
   await activate(page.getByRole("button", { name: `Inspect ${name}`, exact: true }));
   await activate(page.getByRole("button", { name: `Choose ${name}`, exact: true }));
@@ -452,7 +452,7 @@ test("recruitment adds a reserve, selection swaps its kit, and remembers active 
   await page.getByRole("button", { name: "Open menu" }).click();
   await page.getByRole("button", { name: "Lineup", exact: true }).click();
   const active = page.getByRole("button", { name: "Mossguard, starting", exact: true }),
-    reserve = page.getByRole("button", { name: "Emberback, reserve", exact: true });
+    reserve = page.getByRole("button", { name: "Emberback, backup", exact: true });
   await reserve.focus();
   await page.keyboard.press("i");
   await expect(page.getByRole("dialog", { name: "Emberback", exact: true })).toBeVisible();
@@ -1343,12 +1343,12 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
       await page.keyboard.press("a");
       await expect(dialog.getByRole("button", { name: "Prismram, deployed", exact: true })).toBeFocused();
       await page.keyboard.press("s");
-      await expect(dialog.getByRole("button", { name: "Emberback, reserve", exact: true })).toBeFocused();
+      await expect(dialog.getByRole("button", { name: "Emberback, backup", exact: true })).toBeFocused();
       await page.keyboard.press("d");
-      await expect(dialog.getByRole("button", { name: "Pollenmoth, reserve", exact: true })).toBeFocused();
+      await expect(dialog.getByRole("button", { name: "Pollenmoth, backup", exact: true })).toBeFocused();
     }
 
-    await activate(dialog.getByRole("button", { name: "Pollenmoth, reserve", exact: true }));
+    await activate(dialog.getByRole("button", { name: "Pollenmoth, backup", exact: true }));
     await activate(dialog.getByRole("button", { name: "Emberback, deployed", exact: true }));
     await expect(dialog).not.toBeVisible();
     await expect(page.getByRole("button", { name: "Swap", exact: true })).toBeFocused();
@@ -1372,7 +1372,7 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     await page.keyboard.press("Escape");
     await activate(page.getByRole("button", { name: "Swap", exact: true }));
     await activate(page.getByRole("button", { name: "Pollenmoth, deployed", exact: true }));
-    await activate(page.getByRole("button", { name: "Emberback, reserve", exact: true }));
+    await activate(page.getByRole("button", { name: "Emberback, backup", exact: true }));
     expect((await state(page)).team[1]!.health).toBe(9);
   });
 
@@ -1418,7 +1418,7 @@ for (const [width, height] of [
     await page.mouse.move(0, 0);
     await fits(page);
     await captureScreen(page, { path: `reports/swapping/lineup-${width}.png` });
-    await page.getByRole("button", { name: "Pollenmoth, reserve", exact: true }).click();
+    await page.getByRole("button", { name: "Pollenmoth, backup", exact: true }).click();
     await page.getByRole("button", { name: "Mossguard, starting", exact: true }).click();
     const edited = await state(page);
     expect(edited.lineup[0]).toBe("recruit-pollenmoth");
@@ -1468,14 +1468,14 @@ test("a fallen deployed row resumes with no playable cards and can recover throu
   await page
     .getByRole("button", { name: `${species(outgoing.species).name}, deployed`, exact: true })
     .click();
-  await page.getByRole("button", { name: "Pollenmoth, reserve", exact: true }).click();
+  await page.getByRole("button", { name: "Pollenmoth, backup", exact: true }).click();
   await expect(page.locator(".app:not([inert]) .hand .action-card").first()).toBeVisible();
   const restored = await state(page);
   expect(restored.battle!.mana).toBe(4);
   expect(restored.battle!.hand).toEqual(fallen.battle!.hand);
   await page.getByRole("button", { name: "Swap", exact: true }).click();
   await expect(
-    page.getByRole("button", { name: `${species(outgoing.species).name}, reserve`, exact: true }),
+    page.getByRole("button", { name: `${species(outgoing.species).name}, backup`, exact: true }),
   ).toHaveAttribute("aria-disabled", "true");
 });
 

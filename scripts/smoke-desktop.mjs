@@ -95,7 +95,7 @@ try {
   await window.reload();
   await window.getByRole("button", { name: "Continue", exact: true }).click();
   await window.getByRole("button", { name: "Swap", exact: true }).click();
-  await window.getByRole("button", { name: "Pollenmoth, reserve", exact: true }).click();
+  await window.getByRole("button", { name: "Pollenmoth, backup", exact: true }).click();
   await window.locator('.swap-roster [data-actor-id="ally-0"] .creature-card').click();
   await window.locator('.app:not([inert])[data-save-status="saved"]').waitFor();
   const swapped = await window.evaluate(async () =>

@@ -94,7 +94,7 @@ Reference: `Alchemy: src/lib/game-data/talents/progression.ts` and `Alchemy: Doc
 
 ## 6 Collection discovery
 
-Separate permanent knowledge from starter eligibility. Proposed behavior: initially available starter species are known; committing Combat or Boss discovers the exact encountered enemy species and their collectible kits; accepted recruitment records that the species has been recruited. Viewing the encounter screen does not discover enemies. Recruitment during a journey does not independently unlock that species as a future starter. The current four-species roster is eligible from the first journey; the retired Moonhart victory unlock has been removed.
+Separate permanent knowledge from starter eligibility. Proposed behavior: initially available starter species are known; committing Combat or Boss discovers the exact encountered enemy species and their collectible kits; accepted recruitment records that the species has been recruited. Viewing the encounter screen does not discover enemies. Recruitment during a journey does not independently unlock that species as a future starter. The current five-species roster is eligible from the first journey; the retired Moonhart victory unlock has been removed.
 
 Record discovery atomically in gameplay commands, retain it after defeat or abandonment, and validate it in the current save contract. Do not infer historical encounters from currency, wins, or the current roster. If new fields require a save-version change, update all current-format fixtures and reject obsolete development saves.
 

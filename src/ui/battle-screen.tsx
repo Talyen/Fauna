@@ -115,7 +115,7 @@ export function BattleScreen({
     const side = enemyTarget ? "enemy" : "ally";
     setRemembered((old) => (old[side] === id ? old : { ...old, [side]: id }));
   };
-  const groupTarget = allAllies || allEnemies || selfTarget || automaticTarget;
+  const groupTarget = allAllies || allEnemies || selfTarget || automaticTarget || def?.effect === "swap";
   const preview = useMemo(
     () => (selected && (target || groupTarget) ? previewPlay(game, selected, target) : null),
     [game, selected, target, groupTarget],
@@ -341,17 +341,23 @@ export function BattleScreen({
                 {recipient ??
                   (allEnemies
                     ? "All enemies"
-                    : automaticTarget
-                      ? def.effect === "attack"
-                        ? "Random enemy"
-                        : "Most injured ally"
-                      : allAllies
-                        ? "All allies"
-                        : selfTarget
-                          ? "Self"
-                          : enemyTarget
-                            ? "Choose an enemy"
-                            : "Choose an ally")}
+                    : def.effect === "swap"
+                      ? game.reserves.some((unit) => unit.health > 0)
+                        ? "Random backup"
+                        : game.team.some((unit) => unit.health > 0 && unit.id !== card.ownerId)
+                          ? "Random ally"
+                          : "Self"
+                      : automaticTarget
+                        ? def.effect === "attack"
+                          ? "Random enemy"
+                          : "Most injured ally"
+                        : allAllies
+                          ? "All allies"
+                          : selfTarget
+                            ? "Self"
+                            : enemyTarget
+                              ? "Choose an enemy"
+                              : "Choose an ally")}
               </p>
               <ActionDetails
                 compact
