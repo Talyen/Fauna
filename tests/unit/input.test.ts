@@ -257,3 +257,37 @@ it("moves vertically from switches through slider rows without changing their va
     root.remove();
   }
 });
+
+it("keeps inspection actions reachable across a long passive list", () => {
+  const root = document.createElement("div");
+  root.className = "inspection";
+  root.setAttribute("role", "dialog");
+  root.dataset.state = "open";
+  root.innerHTML = `<header data-nav-row><button id="back">Back</button></header>
+    <button id="creature">Creature details</button>
+    <section>Long passive tier list</section>
+    <div data-nav-row><button id="attack">Attack</button><button id="guard">Guard</button></div>`;
+  document.body.append(root);
+  vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
+  vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockImplementation(function (this: HTMLElement) {
+    const positions: Record<string, [number, number]> = {
+      back: [0, 0],
+      creature: [300, 100],
+      attack: [0, 1200],
+      guard: [300, 1200],
+    };
+    const [x, y] = positions[this.id] ?? [0, 0];
+    return { x, y, width: 44, height: 44 } as DOMRect;
+  });
+  try {
+    root.querySelector<HTMLButtonElement>("#back")!.focus();
+    moveFocus("down");
+    expect(document.activeElement?.id).toBe("attack");
+    moveFocus("right");
+    expect(document.activeElement?.id).toBe("guard");
+    moveFocus("up");
+    expect(document.activeElement?.id).toBe("back");
+  } finally {
+    root.remove();
+  }
+});
