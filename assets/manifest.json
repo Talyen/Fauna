@@ -691,6 +691,28 @@
       "provenance": "Shared Asset Library; quiet activation candidate from Alchemy interface library",
       "rights": "Shared project library selection; retain original library license metadata",
       "listening": "pending"
+    },
+    {
+      "id": "encounter.combat",
+      "origin": "repository",
+      "source": "public/art/encounters/combat.svg",
+      "output": "art/encounters/combat.svg",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Fauna original blank encounter placeholder",
+      "rights": "Fauna original artwork"
+    },
+    {
+      "id": "encounter.boss",
+      "origin": "repository",
+      "source": "public/art/encounters/boss.svg",
+      "output": "art/encounters/boss.svg",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Fauna original blank encounter placeholder",
+      "rights": "Fauna original artwork"
     }
   ]
 }

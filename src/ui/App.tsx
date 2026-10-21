@@ -251,10 +251,10 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
         (c) => c.id === focused?.closest<HTMLElement>("[data-card-id]")?.dataset.cardId,
       );
       const kind = focused?.closest<HTMLElement>("[data-species]")?.dataset.species as SpeciesId | undefined;
-      const destination = focused?.closest<HTMLElement>("[data-destination]")?.dataset.destination;
+      const encounter = focused?.closest<HTMLElement>("[data-encounter]");
       const support = focused?.closest<HTMLElement>("[data-support]")?.dataset.support;
       if (support) setInspection({ support });
-      else if (destination) setInspection({ destination });
+      else if (encounter) setInspection({ encounter: true });
       else if (card) setInspection({ card });
       else if (kind)
         setInspection({
@@ -595,7 +595,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
             session={session}
             controls={inspectionControls}
             onClose={() => setInspection(null)}
-            enterDestination={(destination) => send({ type: "beginBattle", destination })}
+            enterEncounter={() => send({ type: "beginBattle" })}
             chooseStarter={
               route === "play" && game.phase === "draft" && !menu && "species" in inspection
                 ? () => send({ type: "draft", species: inspection.species })

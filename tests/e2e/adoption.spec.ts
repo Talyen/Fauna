@@ -139,7 +139,7 @@ for (const width of [1280, 1920])
     let fixture = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
     fixture = winBattle(accept(fixture, { type: "beginBattle" }));
     fixture = accept(fixture, { type: "skipRecruit" });
-    const offers = fixture.expedition!.offers;
+    const pack = fixture.expedition!.pack;
     await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.addInitScript((save) => {
@@ -167,7 +167,7 @@ for (const width of [1280, 1920])
     const saved = JSON.parse((await page.evaluate(() => localStorage.getItem("fauna.save.v1"))) ?? "{}");
     expect(saved.currency).toBe(0);
     expect(saved.journey.currency).toBe(20);
-    expect(saved.expedition.offers).toEqual(offers);
+    expect(saved.expedition.pack).toEqual(pack);
   });
 
 test("Settings panel switches preserve dialog, tab and icon geometry", async ({ page }) => {

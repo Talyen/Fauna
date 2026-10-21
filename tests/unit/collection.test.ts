@@ -8,7 +8,7 @@ import { accept, winBattle } from "./helpers";
 it("discovers only committed encounters and retains knowledge independently of starter unlocks", () => {
   let state = accept(accept(createGame(), { type: "draft", species: "emberfox" }), { type: "start" });
   expect(state.discovery.encountered).toEqual([]);
-  const rejected = dispatch(state, { type: "beginBattle", destination: "missing" });
+  const rejected = dispatch(state, { type: "endTurn" });
   expect(rejected.state).toBe(state);
   state = accept(state, { type: "beginBattle" });
   expect(state.discovery.encountered).toEqual([

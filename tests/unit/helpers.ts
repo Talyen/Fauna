@@ -40,12 +40,7 @@ export function teamRun(seed: number, kinds: SpeciesId[]) {
   return accept(s, { type: "beginBattle" });
 }
 export function accept(s: GameState, c: Command) {
-  const result = dispatch(
-    s,
-    c.type === "beginBattle" && s.expedition && !c.destination
-      ? { ...c, destination: s.expedition.offers[0]?.location }
-      : c,
-  );
+  const result = dispatch(s, c);
   if (!result.accepted) throw new Error(result.reason);
   return result.state;
 }
@@ -73,8 +68,7 @@ export function winBattle(s = run()) {
   return accept(s, { type: "play", cardId: card, targetId: "enemy-0" });
 }
 export function policy(s: GameState): Command {
-  if (s.phase === "teamSelection")
-    return { type: "beginBattle", destination: s.expedition?.offers[0]?.location };
+  if (s.phase === "teamSelection") return { type: "beginBattle" };
   if (s.phase === "recruit") return { type: "skipRecruit" };
   if (s.phase === "boon") return { type: "chooseBoon", boon: s.reward!.boons[0]! };
   if (s.phase === "campfire") return { type: "rest" };
@@ -120,7 +114,7 @@ export function bossReward() {
     d.phase = "teamSelection";
     d.battle = null;
     d.encounter = 3;
-    d.expedition = { biome: 0, step: 3, offers: [{ location: "hollow-heart", pack: 0 }], chosen: null };
+    d.expedition = { biome: 0, step: 3, pack: 0 };
   });
   return winBattle(accept(ready, { type: "beginBattle" }));
 }

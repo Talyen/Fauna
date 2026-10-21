@@ -4,98 +4,41 @@ import type { GameState } from "./types";
 export const BIOMES = [
   {
     name: "Fernwood",
-    locations: ["briar-hollow", "mossy-stream", "ember-grove", "silken-clearing"],
-    boss: "hollow-heart",
-  },
-  {
-    name: "Moonwater Marsh",
-    locations: ["reed-banks", "flooded-grove", "firefly-pool", "mist-island"],
-    boss: "moonwell",
-  },
-] as const;
-
-export const LOCATIONS: readonly {
-  id: string;
-  name: string;
-  packs: readonly (readonly SpeciesId[])[];
-}[] = [
-  {
-    id: "briar-hollow",
-    name: "Briar Hollow",
-    packs: [
+    combat: [
       ["briartooth", "silkmoth", "mossback"],
       ["briartooth", "mossback", "emberfox"],
-    ],
-  },
-  {
-    id: "mossy-stream",
-    name: "Mossy Stream",
-    packs: [
       ["mossback", "stormfin", "silkmoth"],
       ["stormfin", "silkmoth", "briartooth"],
-    ],
-  },
-  {
-    id: "ember-grove",
-    name: "Ember Grove",
-    packs: [
       ["emberfox", "briartooth", "mossback"],
       ["emberfox", "mossback", "silkmoth"],
-    ],
-  },
-  {
-    id: "silken-clearing",
-    name: "Silken Clearing",
-    packs: [
       ["silkmoth", "mossback", "stormfin"],
       ["silkmoth", "emberfox", "briartooth"],
     ],
+    boss: ["briartooth", "mossback"],
   },
-  { id: "hollow-heart", name: "Hollow Heart", packs: [["briartooth", "mossback"]] },
   {
-    id: "reed-banks",
-    name: "Reed Banks",
-    packs: [
+    name: "Moonwater Marsh",
+    combat: [
       ["stormfin", "silkmoth", "mossback"],
       ["stormfin", "stormfin", "briartooth"],
-    ],
-  },
-  {
-    id: "flooded-grove",
-    name: "Flooded Grove",
-    packs: [
       ["mossback", "briartooth", "stormfin"],
       ["briartooth", "silkmoth", "mossback"],
-    ],
-  },
-  {
-    id: "firefly-pool",
-    name: "Firefly Pool",
-    packs: [
       ["silkmoth", "emberfox", "stormfin"],
       ["emberfox", "silkmoth", "mossback"],
-    ],
-  },
-  {
-    id: "mist-island",
-    name: "Mist Island",
-    packs: [
       ["stormfin", "briartooth", "emberfox"],
       ["silkmoth", "mossback", "briartooth"],
     ],
+    boss: ["moonhart"],
   },
-  { id: "moonwell", name: "Moonwell", packs: [["moonhart"]] },
-];
+] as const;
 
-export function location(id: string) {
-  return LOCATIONS.find((entry) => entry.id === id);
+export function encounterPacks(biome: number, step: number) {
+  const content = BIOMES[biome]!;
+  return step === 3 ? [content.boss] : content.combat;
 }
 
-/** Authored legacy encounters stay stable so existing expeditions can finish unchanged. */
-export function encounterSource(
-  game: Pick<GameState, "expedition" | "encounter">,
-  destination?: string,
-): {
+/** Authored encounters also support standalone battle fixtures. */
+export function encounterSource(game: Pick<GameState, "expedition" | "encounter">): {
   name: string;
   enemies: readonly {
     name: string;
@@ -107,10 +50,8 @@ export function encounterSource(
 } {
   const route = game.expedition;
   if (!route) return ENCOUNTERS[game.encounter]!;
-  const offer = route.offers.find((entry) => entry.location === (destination ?? route.chosen));
-  const place = offer && location(offer.location);
-  const pack = offer && place?.packs[offer.pack];
-  if (!place || !pack) throw new Error("Unknown destination offer.");
+  const pack = route.pack === null ? undefined : encounterPacks(route.biome, route.step)[route.pack];
+  if (!pack) throw new Error("Missing encounter pack.");
   const boss = route.step === 3;
   const ordinary =
     route.biome === 0
@@ -119,7 +60,7 @@ export function encounterSource(
   const leader = route.biome === 0 ? { health: 36, damage: 5 } : { health: 68, damage: 10 };
   const escort = { health: 18, damage: 3 };
   return {
-    name: place.name,
+    name: boss ? "Boss" : "Combat",
     enemies: pack.map((kind, index) => ({
       name:
         boss && index === 0

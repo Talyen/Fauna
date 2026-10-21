@@ -45,7 +45,7 @@ export const GLOSSARY = [
   {
     term: "Battle",
     definition:
-      "One encounter. Defeat every enemy to win. Health and knockouts persist between destinations. Campfire Rest restores 30% of each creature's maximum Health, including knocked-out creatures. Combat effects and Block reset for the next battle.",
+      "One encounter. Defeat every enemy to win. Health and knockouts persist between encounters. Campfire Rest restores 30% of each creature's maximum Health, including knocked-out creatures. Combat effects and Block reset for the next battle.",
   },
   {
     term: "Draw / discard",

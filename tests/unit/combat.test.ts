@@ -207,7 +207,7 @@ describe("combat commands and journey health", () => {
       d.phase = "teamSelection";
       d.battle = null;
       d.encounter = 3;
-      d.expedition = { biome: 0, step: 3, offers: [{ location: "hollow-heart", pack: 0 }], chosen: null };
+      d.expedition = { biome: 0, step: 3, pack: 0 };
       d.team[0]!.health = 0;
       d.team[1]!.health = 7;
     });
@@ -273,7 +273,7 @@ it("keeps Campfire lineup changes resumable before and after Rest", () => {
     s.phase = "teamSelection";
     s.battle = null;
     s.encounter = 3;
-    s.expedition = { biome: 0, step: 3, offers: [{ location: "hollow-heart", pack: 0 }], chosen: null };
+    s.expedition = { biome: 0, step: 3, pack: 0 };
     s.roster.push("silkmoth");
     s.reserves.push({ id: "reserve-moth", species: "silkmoth", health: 5, block: 0, attacked: false });
   });
