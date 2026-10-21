@@ -916,6 +916,10 @@ strong {
   }
 }
 /* Keyword identity owns text, combat feedback and progression colors. */
+.rule-keyword {
+  font-weight: 600;
+}
+
 [data-damage-type="physical"],
 [data-combat-tone="physical"],
 [data-keyword="physical"] {

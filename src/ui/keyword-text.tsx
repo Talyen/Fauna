@@ -8,7 +8,7 @@ export function Keyword({ id }: { id: KeywordId }) {
 export function KeywordText({ text }: { text: string }) {
   return keywordText(text).map((part, index) =>
     part.keyword ? (
-      <span key={index} data-keyword={part.keyword}>
+      <span key={index} className="rule-keyword" data-keyword={part.keyword}>
         {part.text}
       </span>
     ) : (

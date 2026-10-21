@@ -14,6 +14,8 @@ Explicit gameplay compositions are artwork cards, the hand fan, targeting, mana 
 
 ArtCard is the sole artwork surface: exactly one image, no text or UI overlays. Creature artwork stays 4:3 landscape and action artwork 3:4 portrait, with contain rendering; never stretch or crop to another ratio. Names, rules, health numbers and traits belong in hover/focus details, including within centered pinned inspection. Dynamic progress geometry is owned by Progress; hand geometry by FanSlot. All visual colors, text sizes, and radii use shared tokens. The CI static gate (`npm run check:full`) enforces component ownership, palette and typography rules.
 
+Keywords in rule prose are semibold inline words in their semantic colors, with normal word spacing. They have no individual hover tooltip, click action or keyboard focus stop; definitions remain in the Glossary. Rules inside a surrounding hover/inspection tooltip retain this same plain-text treatment.
+
 ## Battle composition
 
 - Enemy row above active creatures, with a compact overlapping fan at the bottom. Hand cards match creature artwork-frame height even while rotated, raised, or selected. Uniform compensation preserves each original aspect ratio. Keep the chosen overlap.
