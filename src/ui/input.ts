@@ -47,7 +47,7 @@ export function moveFocus(direction: "left" | "right" | "up" | "down") {
     const rows = Array.from(root.querySelectorAll<HTMLElement>(rowSelector)).filter(
       (row) =>
         row.getClientRects().length > 0 &&
-        row.querySelector('button, [role="slider"]') &&
+        buttons.some((button) => row.contains(button)) &&
         !row.parentElement?.closest(rowSelector),
     );
     const rowIndex = rows.findIndex((row) => row.contains(current));
