@@ -85,7 +85,7 @@ describe("menu browsing", () => {
     }
   });
 
-  it("keeps Collection artwork-only, reveals details on hover, and opens pinned inspection", async () => {
+  it("keeps Collection artwork-only, reveals details on hover, and opens a creature page", async () => {
     const session = createSession(createBrowserPlatform(localStorage), 7);
     await session.load();
     const user = userEvent.setup();
@@ -112,8 +112,12 @@ describe("menu browsing", () => {
       expect(tooltip.textContent).toContain(creature.passiveTiers[0].description);
       expect(screen.queryByRole("dialog")).toBeNull();
       await user.click(card);
-      expect(screen.getByRole("dialog")).toBeTruthy();
-      expect(session.store.getState().game.revision).toBe(game.revision);
+      expect(screen.queryByRole("dialog")).toBeNull();
+      expect(screen.getByRole("heading", { name: creature.name })).toBeTruthy();
+      expect(document.querySelectorAll(".collection-ability")).toHaveLength(3);
+      await user.click(screen.getByRole("button", { name: "Back" }));
+      expect(document.activeElement).toBe(card);
+      expect(session.store.getState().game).toBe(game);
     } finally {
       cleanup();
       await session.dispose();
