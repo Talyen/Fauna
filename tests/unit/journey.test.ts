@@ -97,7 +97,8 @@ describe("journey earnings and results", () => {
     const won = winBattle(ready);
     expect(won.phase).toBe("recruit");
     expect(won.reward!.recruits).toEqual(battle.battle!.enemies.map((enemy) => enemy.species));
-    expect(won.journey!.lastBattle!.currency).toBe(20);
+    // The all-Boons fixture includes Smuggler's Map's +2 battle reward.
+    expect(won.journey!.lastBattle!.currency).toBe(22);
     expect(decodeSave(encodeSave(won))).toEqual(won);
   });
 
