@@ -80,7 +80,7 @@ Final victory or defeat → Journey results. Ending a started journey voluntaril
 - Keyword totals include all settled battles and XP banked when returning home. Follow Alchemy’s results presentation: keyword name, level (earned points + 1), and progress bar only. Hide numeric XP gains/fractions and points-earned lines here; the Talents screen owns point availability. Fauna uses the current 10/40/100 total XP thresholds. Talents remain menu-driven; never prompt purchases here.
 - Banking and totals update atomically with accepted gameplay commands. Browsing results never grants rewards or saves. Report actual retained earnings at progression caps.
 - Results offer a single centered Main menu action. Start a new journey only from the main menu.
-- New journey resets journey totals and roster/boons while preserving permanent progress. Main menu can reopen the last results until a new journey begins; this is not a multi-journey history.
+- Play resets journey totals and roster/boons while preserving permanent progress. Main menu can reopen the last results until a new journey begins; this is not a multi-journey history.
 - Development saves are disposable; obsolete formats are rejected rather than migrated. Journey totals are recorded from current-format journeys, never inferred from lifetime XP or currency.
 - Material types remain undefined and are not shown. The shared Victory shell shows compact automatic earnings and one encounter-specific choice: recruitment or boons. Only Boon choices have a Skip action; recruitment is required. There is no Continue action. Full-roster replacement changes the contents of that same screen and may be canceled before committing.
 

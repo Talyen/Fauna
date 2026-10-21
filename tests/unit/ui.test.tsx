@@ -134,7 +134,7 @@ describe("player interface", () => {
     const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: "Journey results" }));
     expect(screen.getByRole("heading", { name: "Returned home" })).toBeTruthy();
-    expect(screen.queryByRole("button", { name: "New journey" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Play" })).toBeNull();
     expect(screen.getByLabelText("Journey gains").textContent).toContain("Lv 2");
     const progress = screen.getByRole("progressbar", { name: "Nature level 2 progress" });
     expect(progress.getAttribute("aria-valuenow")).toBe("14");
@@ -147,7 +147,7 @@ describe("player interface", () => {
     expect(session.store.getState().game).toEqual(game);
     await user.click(screen.getByRole("button", { name: "Main menu" }));
     expect(screen.getByRole("button", { name: "Journey results" })).toBeTruthy();
-    await user.click(screen.getByRole("button", { name: "New journey" }));
+    await user.click(screen.getByRole("button", { name: "Play" }));
     expect(session.store.getState().game.journey).toBeNull();
     expect(session.store.getState().game.keywordXP.nature).toBe(24);
     await session.dispose();
@@ -189,7 +189,7 @@ describe("player interface", () => {
     await session.load();
     render(<App session={session} />);
     const user = userEvent.setup();
-    await user.click(screen.getByRole("button", { name: "New journey" }));
+    await user.click(screen.getByRole("button", { name: "Play" }));
     const enter = screen.getByRole("button", { name: "Begin journey" });
     expect((enter as HTMLButtonElement).disabled).toBe(true);
     const chosen = session.store.getState().game.starterOffers[0]!;
@@ -226,7 +226,7 @@ describe("player interface", () => {
     await session.load();
     render(<App session={session} />);
     const user = userEvent.setup();
-    await user.click(screen.getByRole("button", { name: "New journey" }));
+    await user.click(screen.getByRole("button", { name: "Play" }));
     const begin = screen.getByRole("button", { name: "Begin journey" }) as HTMLButtonElement;
     for (let round = 0; round < 3; round++) {
       expect(begin.disabled).toBe(true);
@@ -311,7 +311,7 @@ it("silently allows play when browser storage access itself is denied", async ()
     const session = createSession(createBrowserPlatform());
     await session.load();
     render(<App session={session} />);
-    expect(screen.getByRole("button", { name: "New journey" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Play" })).toBeTruthy();
     expect(screen.queryByRole("alert")).toBeNull();
     expect(session.store.getState().loadFailed).toBe(true);
     await session.dispose();

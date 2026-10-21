@@ -60,7 +60,18 @@ export function layoutViolations() {
     if (Math.abs(center - (stage.top + (stage.height - reserved) / 2)) > 1)
       failures.push(`${describe(main)} content is not vertically centered`);
   }
-  if (dialogs.length) {
+  if (dialogs.length && active.matches(".menu-panel")) {
+    const anchor = document.querySelector('.play-surface button[aria-label="Open menu"]');
+    const box = active.getBoundingClientRect();
+    if (!anchor) failures.push("menu has no anchor");
+    else {
+      const expectedRight = Math.min(
+        innerWidth - 16,
+        Math.max(anchor.getBoundingClientRect().right, 16 + box.width),
+      );
+      if (Math.abs(box.right - expectedRight) > 1) failures.push("menu is not aligned with its opener");
+    }
+  } else if (dialogs.length) {
     const box = active.getBoundingClientRect();
     if (
       Math.abs(box.left + box.width / 2 - innerWidth / 2) > 1 ||

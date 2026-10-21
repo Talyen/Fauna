@@ -144,12 +144,29 @@ strong {
   background: var(--popover);
   color: var(--foreground);
 }
-.dialog-content.menu-panel {
-  width: min(
-    calc(2 * var(--main-menu-button-width) + var(--screen-item-gap) + 2 * var(--screen-section-gap) + 2px),
-    calc(100vw - var(--space-12))
-  );
-  padding: var(--space-12) var(--screen-section-gap);
+.popover-content {
+  z-index: 50;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--popover);
+  color: var(--popover-foreground);
+  padding: var(--space-3);
+}
+.menu-panel {
+  width: var(--pause-menu-width);
+  max-width: calc(100vw - var(--space-8));
+}
+.pause-menu-choices {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.pause-menu-choices > button {
+  justify-content: flex-start;
+  text-align: left;
+  height: auto;
+  min-height: var(--control-height);
+  white-space: normal;
 }
 .menu-icon-results {
   color: var(--menu-icon-results);

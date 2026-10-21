@@ -224,11 +224,13 @@ label:has(> .ui-radio) {
   box-shadow: none;
 }
 .dialog-overlay[data-state="open"],
-.dialog-content[data-state="open"] {
+.dialog-content[data-state="open"],
+.popover-content[data-state="open"] {
   animation: ui-fade-in var(--motion-fast) ease-out;
 }
 .dialog-overlay[data-state="closed"],
-.dialog-content[data-state="closed"] {
+.dialog-content[data-state="closed"],
+.popover-content[data-state="closed"] {
   animation: ui-fade-out var(--motion-fast) ease-in;
 }
 .dialog-content > h2 {
@@ -522,7 +524,8 @@ h3 {
   border-color: transparent;
   scale: 1;
 }
-.dialog-content[data-state="closed"] {
+.dialog-content[data-state="closed"],
+.popover-content[data-state="closed"] {
   pointer-events: none;
 }
 :root[data-focus="visible"] .game-button.control-outline:focus {

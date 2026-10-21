@@ -173,9 +173,9 @@ for (const width of [1280, 1920])
         await page.reload();
         await page.getByRole("button", { name: "Journey results", exact: true }).click();
         expect(await state(page)).toEqual(game);
-        await expect(page.getByRole("button", { name: "New journey", exact: true })).toHaveCount(0);
+        await expect(page.getByRole("button", { name: "Play", exact: true })).toHaveCount(0);
         await page.getByRole("button", { name: "Main menu", exact: true }).click();
-        await page.getByRole("button", { name: "New journey", exact: true }).click();
+        await page.getByRole("button", { name: "Play", exact: true }).click();
         expect((await state(page)).phase).toBe("draft");
         expect((await state(page)).keywordXP).toEqual(game.keywordXP);
       });
@@ -252,8 +252,8 @@ test("encounter placeholder uses bounded artwork at the minimum viewport", async
 
 test("main menu, draft and pre-battle deck lead into the first battle", async ({ page }) => {
   await seed(page);
-  await expect(page.getByRole("button", { name: "New journey", exact: true })).toBeFocused();
-  await page.getByRole("button", { name: "New journey", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Play", exact: true })).toBeFocused();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
   await expect(page.getByRole("button", { name: "Begin journey" })).toBeDisabled();
   const chosen = (await state(page)).starterOffers[0]!;
   const name = species(chosen).name;
@@ -287,7 +287,7 @@ for (const width of [1280, 1920])
         await page.getByRole("radio", { name: "125%", exact: true }).click();
         await page.keyboard.press("Escape");
       }
-      await page.getByRole("button", { name: "New journey", exact: true }).click();
+      await page.getByRole("button", { name: "Play", exact: true }).click();
       const begin = page.getByRole("button", { name: "Begin journey", exact: true });
       await expect(begin).toBeDisabled();
       const initial = await state(page);
@@ -352,7 +352,7 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
         else await page.keyboard.press("Enter");
       }
     };
-    await activate(page.getByRole("button", { name: "New journey", exact: true }));
+    await activate(page.getByRole("button", { name: "Play", exact: true }));
     const chosen = "mossback";
     const name = species(chosen).name;
     await activate(page.getByRole("button", { name: `Inspect ${name}`, exact: true }));
@@ -516,7 +516,7 @@ test("talents purchase immediately, gate rows, reset a category, and return to t
   await expect(burn).toHaveAccessibleDescription("3 points available");
   await page.keyboard.press("Escape");
   await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
-  await page.getByRole("button", { name: "Resume", exact: true }).click();
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
   expect((await state(page)).battle).toEqual(fixture.battle);
 });
 for (const [width, height] of [
@@ -680,7 +680,7 @@ test("settings and glossary return to the pause menu; End journey immediately sh
   await page.getByRole("button", { name: "End journey", exact: true }).click();
   await expect(page.getByRole("alertdialog")).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Main menu", exact: true })).toBeVisible();
-  await expect(page.getByRole("button", { name: "New journey", exact: true })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Play", exact: true })).toHaveCount(0);
   expect((await state(page)).phase).toBe("defeat");
 });
 test("last mana saves the full turn before immediate close and does not replay on resume", async ({
@@ -750,7 +750,7 @@ test("corrupt saves recover backups and all-invalid saves continue silently", as
   }, key);
   await page.reload();
   await expect(page.getByRole("alert")).toHaveCount(0);
-  await expect(page.getByRole("button", { name: "New journey", exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Play", exact: true })).toBeVisible();
 });
 test("controller edges, inspect and pause do not repeat a held confirm", async ({ page }) => {
   const press = await gamepad(page);
@@ -925,7 +925,7 @@ test("real audio output, hit recoil, reduced motion, and mute follow combat outc
   await page.getByRole("tab", { name: "Sound", exact: true }).click();
   await page.getByRole("switch", { name: "Sound", exact: true }).click();
   await page.keyboard.press("Escape");
-  await page.getByRole("button", { name: "Resume" }).click();
+  await page.getByRole("button", { name: "Continue" }).click();
   const mediaCount = (await observed()).media.length;
   await page.getByRole("button", { name: "End turn" }).click();
   await page.waitForTimeout(400);

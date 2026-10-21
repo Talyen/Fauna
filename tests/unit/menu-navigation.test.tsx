@@ -43,7 +43,7 @@ describe("menu page focus return", () => {
     render(<App session={session} />);
     try {
       if (origin === "pause") {
-        await user.click(screen.getByRole("button", { name: "New journey" }));
+        await user.click(screen.getByRole("button", { name: "Play" }));
         await user.click(screen.getByRole("button", { name: "Open menu" }));
       }
       const revision = session.store.getState().game.revision;
@@ -98,13 +98,46 @@ it("returns from starter selection without changing offers or committed choices"
   const user = userEvent.setup();
   render(<App session={session} />);
   try {
-    await user.click(screen.getByRole("button", { name: "New journey" }));
+    await user.click(screen.getByRole("button", { name: "Play" }));
     const before = session.store.getState().game;
     expect(screen.getAllByRole("button", { name: "Open menu", exact: true })).toHaveLength(1);
     await user.click(screen.getByRole("button", { name: "Back", exact: true }));
     expect(screen.getByRole("navigation", { name: "Main menu" })).toBeTruthy();
     await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
     expect(session.store.getState().game).toBe(before);
+  } finally {
+    cleanup();
+    await session.dispose();
+  }
+});
+
+it("continues or dismisses the undimmed menu without changing the journey", async () => {
+  vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
+  const session = createSession(createBrowserPlatform(localStorage), 7);
+  await session.load();
+  const user = userEvent.setup({ pointerEventsCheck: 0 });
+  render(<App session={session} />);
+  try {
+    await user.click(screen.getByRole("button", { name: "Play", exact: true }));
+    const revision = session.store.getState().game.revision;
+    for (const dismiss of ["Continue", "Escape", "outside"]) {
+      const opener = screen.getByRole("button", { name: "Open menu", exact: true });
+      await user.click(opener);
+      const menu = screen.getByRole("dialog", { name: "Pause menu" });
+      expect(menu.querySelector(".dialog-close")).toBeNull();
+      expect(menu.querySelector("h1, h2")).toBeNull();
+      expect(document.querySelector(".dialog-overlay")).toBeNull();
+      expect(document.activeElement).toBe(screen.getByRole("button", { name: "Continue", exact: true }));
+      if (dismiss === "Continue")
+        await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+      else if (dismiss === "Escape") await user.keyboard("{Escape}");
+      else await user.click(document.body);
+      await waitFor(() => expect(screen.queryByRole("dialog", { name: "Pause menu" })).toBeNull());
+      await waitFor(() => expect(document.activeElement).toBe(opener));
+      expect(session.store.getState().game.revision).toBe(revision);
+    }
+    await user.click(screen.getByRole("button", { name: "Back", exact: true }));
+    expect(screen.getByRole("button", { name: "Continue", exact: true })).toBeTruthy();
   } finally {
     cleanup();
     await session.dispose();

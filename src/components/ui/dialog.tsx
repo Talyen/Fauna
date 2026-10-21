@@ -27,29 +27,24 @@ export const DialogDescription = React.forwardRef<
 DialogDescription.displayName = "DialogDescription";
 export const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
-    closeLabel?: string;
-    showCloseButton?: boolean;
-  }
->(({ className, children, closeLabel = "Close inspection", showCloseButton = true, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & { closeLabel?: string }
+>(({ className, children, closeLabel = "Close inspection", ...props }, ref) => {
   const surface = useModalSurfaceRef(ref);
   return (
     <DialogPrimitive.Portal>
       <DialogPrimitive.Overlay className="dialog-overlay" />
       <DialogPrimitive.Content ref={surface} className={cn("dialog-content", className)} {...props}>
         {children}
-        {showCloseButton ? (
-          <DialogPrimitive.Close asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="dialog-close absolute right-2 top-2"
-              aria-label={closeLabel}
-            >
-              <X aria-hidden="true" />
-            </Button>
-          </DialogPrimitive.Close>
-        ) : null}
+        <DialogPrimitive.Close asChild>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="dialog-close absolute right-2 top-2"
+            aria-label={closeLabel}
+          >
+            <X aria-hidden="true" />
+          </Button>
+        </DialogPrimitive.Close>
       </DialogPrimitive.Content>
     </DialogPrimitive.Portal>
   );

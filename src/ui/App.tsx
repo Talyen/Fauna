@@ -41,6 +41,7 @@ import {
 import type { Session } from "../application/session";
 import { Button } from "../components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../components/ui/dialog";
+import { Popover, PopoverAnchor, PopoverContent } from "../components/ui/popover";
 import { TooltipProvider } from "../components/ui/tooltip";
 import { BattleScreen, type Inspection, type Controls } from "./battle-screen";
 import { Draft, TeamSelection, Rewards, Talents, Collection, DeckCards } from "./expedition-screens";
@@ -169,6 +170,12 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     setRoute(remaining.length ? "unlocks" : "home");
   };
   const menuReturnLabel = useRef<string | null>(null);
+  const menuAnchor = useRef({
+    getBoundingClientRect: () =>
+      root.current
+        ?.querySelector<HTMLButtonElement>('.play-surface button[aria-label="Open menu"]')
+        ?.getBoundingClientRect() ?? new DOMRect(),
+  });
   const openMenu = () => {
     pauseOpener.current = document.activeElement as HTMLElement | null;
     setMenu(true);
@@ -341,7 +348,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
   const menuItems = (home: boolean) => (
     <>
       <Button
-        variant="default"
+        variant={home ? "default" : "ghost"}
         className="primary-menu-action"
         onClick={() => {
           if (!home || active) {
@@ -355,7 +362,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
         }}
       >
         <Swords aria-hidden="true" />
-        {home ? (active ? "Continue" : "New journey") : "Resume"}
+        {home && !active ? "Play" : "Continue"}
       </Button>
       {home && ["victory", "defeat"].includes(game.phase) ? (
         <Button variant="ghost" onClick={() => setRoute("play")}>
@@ -550,209 +557,210 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
   );
   return (
     <SurfaceTransition token={`${route}:${game.phase}`} battle={route === "play" && game.phase === "battle"}>
-      <div
-        ref={root}
-        className={`app ${route === "play" && game.phase === "battle" ? "in-battle" : ""}`}
-        data-input={mode}
-        data-focus={navigation ? "visible" : "hidden"}
-        data-route={route}
-        data-phase={game.phase}
-        data-save-status={view.saveStatus}
-      >
-        {!view.cloud.blocking ? (
-          <>
-            {route === "home" ? (
-              <Screen className="home-screen menu-layout">
-                <h1 className="menu-title">Fauna</h1>
-                <nav className="menu-choices" aria-label="Main menu">
-                  {menuItems(true)}
-                </nav>
-              </Screen>
-            ) : null}
-            {route === "unlocks" && reveals[0] ? (
-              <Screen className="unlock-screen">
-                <ScreenHeading back={() => setRoute("play")} openMenu={() => setRoute("home")}>
-                  Creature unlocked
-                </ScreenHeading>
-                <div className="unlock-creature">
-                  <CreatureCard
-                    progression={game}
-                    kind={reveals[0]}
-                    label={`Inspect ${species(reveals[0]).name}`}
-                    onClick={() => setInspection({ species: reveals[0]! })}
-                    onInspect={() => setInspection({ species: reveals[0]! })}
-                  />
-                  <h2>{species(reveals[0]).name}</h2>
-                </div>
-                <Button
-                  onClick={() => {
-                    setReveals((old) => old.slice(1));
-                    if (reveals.length === 1) setRoute("home");
-                  }}
-                >
-                  Continue
-                </Button>
-              </Screen>
-            ) : null}
-            {route === "talents" ? (
-              <Talents game={game} send={send} openMenu={backFromPage} controls={talentControls} />
-            ) : null}
-            {route === "collection" ? (
-              <Collection game={game} inspect={setInspection} openMenu={backFromPage} />
-            ) : null}
-            {route === "settings" || route === "glossary" ? (
-              <Screen className={`menu-screen ${route}-screen`} aria-labelledby="menu-screen-title">
-                <header className="collection-heading">
-                  <ScreenHeading id="menu-screen-title" back={backFromPage} openMenu={backFromPage}>
-                    {route === "settings" ? "Settings" : "Glossary & controls"}
+      <Popover modal open={menu && !modal && !inspection} onOpenChange={setMenu}>
+        <PopoverAnchor virtualRef={menuAnchor} />
+        <div
+          ref={root}
+          className={`app ${route === "play" && game.phase === "battle" ? "in-battle" : ""}`}
+          data-input={mode}
+          data-focus={navigation ? "visible" : "hidden"}
+          data-route={route}
+          data-phase={game.phase}
+          data-save-status={view.saveStatus}
+        >
+          {!view.cloud.blocking ? (
+            <>
+              {route === "home" ? (
+                <Screen className="home-screen menu-layout">
+                  <h1 className="menu-title">Fauna</h1>
+                  <nav className="menu-choices" aria-label="Main menu">
+                    {menuItems(true)}
+                  </nav>
+                </Screen>
+              ) : null}
+              {route === "unlocks" && reveals[0] ? (
+                <Screen className="unlock-screen">
+                  <ScreenHeading back={() => setRoute("play")} openMenu={() => setRoute("home")}>
+                    Creature unlocked
                   </ScreenHeading>
-                </header>
-                {route === "settings" ? (
-                  <Settings
-                    session={session}
-                    audio={audioPreferences}
-                    updateAudio={updateAudioPreferences}
-                    scale={scale}
-                    setScale={setScale}
-                    tooltipScale={tooltipScale}
-                    setTooltipScale={setTooltipScale}
-                    desktop={desktop}
-                    autoEndTurn={autoEndTurn}
-                    setAutoEndTurn={(value) => {
-                      setAutoEndTurn(value);
-                      writePreference("fauna.auto-end-turn", String(value));
+                  <div className="unlock-creature">
+                    <CreatureCard
+                      progression={game}
+                      kind={reveals[0]}
+                      label={`Inspect ${species(reveals[0]).name}`}
+                      onClick={() => setInspection({ species: reveals[0]! })}
+                      onInspect={() => setInspection({ species: reveals[0]! })}
+                    />
+                    <h2>{species(reveals[0]).name}</h2>
+                  </div>
+                  <Button
+                    onClick={() => {
+                      setReveals((old) => old.slice(1));
+                      if (reveals.length === 1) setRoute("home");
                     }}
-                  />
-                ) : (
-                  <>
-                    <p>
-                      W/A/S/D or Tab to navigate. A/D switches targets. Enter/controller A selects. Escape/B
-                      goes back. I/controller X inspects. Controller Y ends the turn.
-                    </p>
-                    <PagedItems
-                      items={GLOSSARY}
-                      pageSize={scale > 1 ? 2 : 3}
-                      className="glossary-entries"
-                      label="Glossary pages"
+                  >
+                    Continue
+                  </Button>
+                </Screen>
+              ) : null}
+              {route === "talents" ? (
+                <Talents game={game} send={send} openMenu={backFromPage} controls={talentControls} />
+              ) : null}
+              {route === "collection" ? (
+                <Collection game={game} inspect={setInspection} openMenu={backFromPage} />
+              ) : null}
+              {route === "settings" || route === "glossary" ? (
+                <Screen className={`menu-screen ${route}-screen`} aria-labelledby="menu-screen-title">
+                  <header className="collection-heading">
+                    <ScreenHeading id="menu-screen-title" back={backFromPage} openMenu={backFromPage}>
+                      {route === "settings" ? "Settings" : "Glossary & controls"}
+                    </ScreenHeading>
+                  </header>
+                  {route === "settings" ? (
+                    <Settings
+                      session={session}
+                      audio={audioPreferences}
+                      updateAudio={updateAudioPreferences}
+                      scale={scale}
+                      setScale={setScale}
+                      tooltipScale={tooltipScale}
+                      setTooltipScale={setTooltipScale}
+                      desktop={desktop}
+                      autoEndTurn={autoEndTurn}
+                      setAutoEndTurn={(value) => {
+                        setAutoEndTurn(value);
+                        writePreference("fauna.auto-end-turn", String(value));
+                      }}
+                    />
+                  ) : (
+                    <>
+                      <p>
+                        W/A/S/D or Tab to navigate. A/D switches targets. Enter/controller A selects. Escape/B
+                        goes back. I/controller X inspects. Controller Y ends the turn.
+                      </p>
+                      <PagedItems
+                        items={GLOSSARY}
+                        pageSize={scale > 1 ? 2 : 3}
+                        className="glossary-entries"
+                        label="Glossary pages"
+                      >
+                        {(entry) => (
+                          <dl key={entry.term}>
+                            <dt>
+                              <KeywordText text={entry.term} />
+                            </dt>
+                            <dd>
+                              <KeywordText text={entry.definition} />
+                            </dd>
+                          </dl>
+                        )}
+                      </PagedItems>
+                    </>
+                  )}
+                </Screen>
+              ) : null}
+              <div className="play-surface" hidden={route !== "play"} inert={route !== "play"}>
+                <HeaderNavigation.Provider value={{ back: () => setRoute("home"), openMenu }}>
+                  {game.phase === "battle" ? (
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="menu-button compact-icon-control"
+                      aria-label="Open menu"
+                      onClick={openMenu}
                     >
-                      {(entry) => (
-                        <dl key={entry.term}>
-                          <dt>
-                            <KeywordText text={entry.term} />
-                          </dt>
-                          <dd>
-                            <KeywordText text={entry.definition} />
-                          </dd>
-                        </dl>
-                      )}
-                    </PagedItems>
-                  </>
-                )}
-              </Screen>
-            ) : null}
-            <div className="play-surface" hidden={route !== "play"} inert={route !== "play"}>
-              <HeaderNavigation.Provider value={{ back: () => setRoute("home"), openMenu }}>
-                {game.phase === "battle" ? (
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="menu-button compact-icon-control"
-                    aria-label="Open menu"
-                    onClick={openMenu}
-                  >
-                    <Menu aria-hidden="true" />
-                  </Button>
-                ) : null}
-                {import.meta.env.DEV && game.phase === "battle" ? (
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="skip-combat-control compact-icon-control"
-                    aria-label="Skip combat"
-                    onClick={() => send({ type: "devWinBattle" })}
-                  >
-                    <FastForward aria-hidden="true" className="menu-icon-skip" />
-                  </Button>
-                ) : null}
-                {game.phase === "battle" ? (
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="autoplay-control compact-icon-control"
-                    aria-label="Auto-play"
-                    aria-pressed={autoplay}
-                    onClick={() => setAutoplay(!autoplay)}
-                  >
-                    {autoplay ? <Pause aria-hidden="true" /> : <Repeat aria-hidden="true" />}
-                  </Button>
-                ) : null}
-                {game.phase === "draft" ? (
-                  <Draft game={game} send={send} inspect={setInspection} />
-                ) : game.phase === "teamSelection" ? (
-                  <TeamSelection
-                    game={game}
-                    send={send}
-                    inspect={setInspection}
-                    deck={() => openModal("deck")}
-                  />
-                ) : game.phase === "support" ? (
-                  <SupportScreen game={game} send={send} />
-                ) : game.phase === "campfire" ? (
-                  <Campfire game={game} send={send} />
-                ) : game.phase === "battle" ? (
-                  <BattleScreen
-                    key={game.encounter}
-                    clearSelection={
-                      view.overlayActive || menu || modal !== null || inspection !== null || autoplay
-                    }
-                    onManualStart={() => setAutoplay(false)}
-                    openPile={(pile) => openModal(pile)}
-                    actions={
-                      <>
-                        <Button
-                          variant="outline"
-                          className="swap-trigger"
-                          disabled={!game.reserves.some((c) => c.health > 0)}
-                          onClick={() => openModal("swap")}
-                        >
-                          <ArrowLeftRight aria-hidden="true" />
-                          Swap
-                        </Button>
-                      </>
-                    }
-                    game={game}
-                    send={send}
-                    inspect={setInspection}
-                    controls={gameControls}
-                    bursts={bursts}
-                    onDenied={deny}
-                    controller={mode === "controller"}
-                    navigateFocus={navigation}
-                  />
-                ) : game.phase === "recruit" || game.phase === "boon" ? (
-                  <Rewards
-                    key={`${game.encounter}-${game.phase}`}
-                    game={game}
-                    send={send}
-                    inspect={setInspection}
-                  />
-                ) : (
-                  <JourneyResults game={game} home={leaveResults} />
-                )}
-              </HeaderNavigation.Provider>
-              <div className="sr-only" role="log" aria-live="polite">
-                {view.events.map((event) => event.text).join(" ")}
+                      <Menu aria-hidden="true" />
+                    </Button>
+                  ) : null}
+                  {import.meta.env.DEV && game.phase === "battle" ? (
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="skip-combat-control compact-icon-control"
+                      aria-label="Skip combat"
+                      onClick={() => send({ type: "devWinBattle" })}
+                    >
+                      <FastForward aria-hidden="true" className="menu-icon-skip" />
+                    </Button>
+                  ) : null}
+                  {game.phase === "battle" ? (
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="autoplay-control compact-icon-control"
+                      aria-label="Auto-play"
+                      aria-pressed={autoplay}
+                      onClick={() => setAutoplay(!autoplay)}
+                    >
+                      {autoplay ? <Pause aria-hidden="true" /> : <Repeat aria-hidden="true" />}
+                    </Button>
+                  ) : null}
+                  {game.phase === "draft" ? (
+                    <Draft game={game} send={send} inspect={setInspection} />
+                  ) : game.phase === "teamSelection" ? (
+                    <TeamSelection
+                      game={game}
+                      send={send}
+                      inspect={setInspection}
+                      deck={() => openModal("deck")}
+                    />
+                  ) : game.phase === "support" ? (
+                    <SupportScreen game={game} send={send} />
+                  ) : game.phase === "campfire" ? (
+                    <Campfire game={game} send={send} />
+                  ) : game.phase === "battle" ? (
+                    <BattleScreen
+                      key={game.encounter}
+                      clearSelection={
+                        view.overlayActive || menu || modal !== null || inspection !== null || autoplay
+                      }
+                      onManualStart={() => setAutoplay(false)}
+                      openPile={(pile) => openModal(pile)}
+                      actions={
+                        <>
+                          <Button
+                            variant="outline"
+                            className="swap-trigger"
+                            disabled={!game.reserves.some((c) => c.health > 0)}
+                            onClick={() => openModal("swap")}
+                          >
+                            <ArrowLeftRight aria-hidden="true" />
+                            Swap
+                          </Button>
+                        </>
+                      }
+                      game={game}
+                      send={send}
+                      inspect={setInspection}
+                      controls={gameControls}
+                      bursts={bursts}
+                      onDenied={deny}
+                      controller={mode === "controller"}
+                      navigateFocus={navigation}
+                    />
+                  ) : game.phase === "recruit" || game.phase === "boon" ? (
+                    <Rewards
+                      key={`${game.encounter}-${game.phase}`}
+                      game={game}
+                      send={send}
+                      inspect={setInspection}
+                    />
+                  ) : (
+                    <JourneyResults game={game} home={leaveResults} />
+                  )}
+                </HeaderNavigation.Provider>
+                <div className="sr-only" role="log" aria-live="polite">
+                  {view.events.map((event) => event.text).join(" ")}
+                </div>
               </div>
-            </div>
-          </>
-        ) : (
-          <Loading />
-        )}
-        {!modal && !inspection ? (
-          <Dialog open={menu} onOpenChange={setMenu}>
-            <DialogContent
-              className="menu-panel menu-layout"
-              showCloseButton={false}
+            </>
+          ) : (
+            <Loading />
+          )}
+          {!modal && !inspection ? (
+            <PopoverContent
+              className="menu-panel"
+              aria-label="Pause menu"
               onOpenAutoFocus={(event) => {
                 const label = menuReturnLabel.current;
                 if (!label) return;
@@ -779,17 +787,14 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                   returnFocus(root.current?.querySelector<HTMLElement>("main button:not(:disabled)") ?? null);
               }}
             >
-              <DialogTitle className="sr-only">Pause menu</DialogTitle>
-              <DialogDescription className="sr-only">Game menu</DialogDescription>
-              <h2 className="menu-title">Fauna</h2>
-              <nav className="menu-choices" aria-label="Pause menu">
+              <nav className="pause-menu-choices" aria-label="Pause menu">
                 {menuItems(false)}
               </nav>
-            </DialogContent>
-          </Dialog>
-        ) : null}
-        {overlays}
-      </div>
+            </PopoverContent>
+          ) : null}
+          {overlays}
+        </div>
+      </Popover>
     </SurfaceTransition>
   );
 }

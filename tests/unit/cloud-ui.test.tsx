@@ -50,7 +50,7 @@ it("cloud failure silently continues at the main menu without recovery controls"
     expect(screen.queryByRole("alert")).toBeNull();
     expect(screen.queryByRole("button", { name: /offline|retry|save/i })).toBeNull();
     expect(session.store.getState().cloud.blocking).toBe(false);
-    expect(screen.getByRole("button", { name: "New journey" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Play" })).toBeTruthy();
     expect(session.store.getState().game.revision).toBe(0);
   } finally {
     cleanup();

@@ -32,7 +32,7 @@ async function expectCenteredMenu(choices: Locator) {
 
 test("pointer menu transitions never display focus indicators", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "New journey", exact: true }).click();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Open menu" }).click();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
   await page.keyboard.press("Escape");
@@ -52,13 +52,13 @@ test("pointer menu transitions never display focus indicators", async ({ page })
   await page.mouse.click(20, 20);
   await expect(menu).toHaveCount(0);
   await page.getByRole("button", { name: "Open menu" }).click();
-  await menu.getByRole("button", { name: "Resume", exact: true }).click();
+  await menu.getByRole("button", { name: "Continue", exact: true }).click();
   await expect(menu).toHaveCount(0);
 });
 
 test("held Escape closes only the current menu level", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "New journey", exact: true }).click();
+  await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Open menu" }).click();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
   await page.keyboard.down("Escape");
@@ -79,37 +79,38 @@ test("minimum-size enlarged menus fit every action without scrolling", async ({ 
   await page.goto("/");
   const homeChoices = page.getByRole("navigation", { name: "Main menu" });
   await expectCenteredMenu(homeChoices);
-  const homeWidth = (await homeChoices.boundingBox())!.width;
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   await page.getByRole("button", { name: "Open menu" }).click();
   const dialog = page.getByRole("dialog", { name: "Pause menu" });
-  await expect(dialog.getByRole("heading", { name: "Fauna", exact: true })).toBeVisible();
+  await expect(dialog.getByRole("heading", { name: "Fauna", exact: true })).toHaveCount(0);
   const choices = dialog.getByRole("navigation", { name: "Pause menu" });
-  await expectCenteredMenu(choices);
-  const bounds = (await choices.boundingBox())!;
-  expect(bounds.width).toBeCloseTo(homeWidth);
-  const resume = (await choices.getByRole("button", { name: "Resume", exact: true }).boundingBox())!;
-  const lineup = (await choices.getByRole("button", { name: "Lineup", exact: true }).boundingBox())!;
-  const talents = (await choices.getByRole("button", { name: "Talents", exact: true }).boundingBox())!;
-  expect(resume.x + resume.width / 2).toBeCloseTo(bounds.x + bounds.width / 2);
-  expect(lineup.y).toBeCloseTo(talents.y);
-  expect(lineup.width).toBeCloseTo(resume.width);
-  expect(talents.x - lineup.x - lineup.width).toBeCloseTo(12);
-  expect(lineup.y - resume.y - resume.height).toBeCloseTo(12);
+  const opener = page.locator('.play-surface button[aria-label="Open menu"]');
+  const anchor = (await opener.boundingBox())!;
+  const panel = (await dialog.boundingBox())!;
+  expect(panel.x + panel.width).toBeCloseTo(anchor.x + anchor.width);
+  expect(panel.y).toBeGreaterThanOrEqual(16);
+  expect(panel.y + panel.height).toBeLessThanOrEqual(704);
+  expect(await page.locator(".dialog-overlay").count()).toBe(0);
+  const iconOffsets = await choices
+    .locator("button")
+    .evaluateAll((buttons) =>
+      buttons.map((button) => button.querySelector("svg")!.getBoundingClientRect().left),
+    );
+  for (const offset of iconOffsets) expect(offset).toBeCloseTo(iconOffsets[0]!);
   const heights = await dialog
     .locator("button:not(.dialog-close)")
     .evaluateAll((buttons) => buttons.map((button) => button.getBoundingClientRect().height));
   expect(heights.every((height) => height >= 44)).toBe(true);
-  for (const [key, name] of [
-    ["s", "Lineup"],
-    ["d", "Talents"],
-    ["s", "Glossary"],
-    ["a", "Collection"],
-    ["s", "Settings"],
-    ["d", "End journey"],
-    ["s", "Main menu"],
-  ] as const) {
-    await page.keyboard.press(key);
+  for (const name of [
+    "Lineup",
+    "Talents",
+    "Collection",
+    "Glossary",
+    "Settings",
+    "End journey",
+    "Main menu",
+  ]) {
+    await page.keyboard.press("s");
     const choice = page.getByRole("button", { name, exact: true });
     await expect(choice).toBeFocused();
     await expect(choice).toBeInViewport();
@@ -173,7 +174,7 @@ for (const [width, height, enlarged] of [
     );
     if (enlarged) await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
     await page.goto("/");
-    await expect(page.getByRole("button", { name: "New journey", exact: true })).toBeFocused();
+    await expect(page.getByRole("button", { name: "Play", exact: true })).toBeFocused();
     await pad.frames();
     await pad.press(13);
     await expect(page.getByRole("button", { name: "Talents", exact: true })).toBeFocused();
@@ -306,7 +307,7 @@ test("mouse use cancels held-stick navigation until release", async ({ page }) =
   const later = accept(accept(started, { type: "abandon" }), { type: "newRun", seed: 7 });
   await page.evaluate((data) => localStorage.setItem("fauna.save.v1", data), JSON.stringify(later));
   await page.reload();
-  await expect(page.getByRole("button", { name: "New journey", exact: true })).toBeFocused();
+  await expect(page.getByRole("button", { name: "Play", exact: true })).toBeFocused();
   await pad.frames();
   await page.evaluate(() => {
     window.menuPad.axes = [0, 1];
@@ -382,7 +383,7 @@ test("pointer use has no native or shadcn focus decoration in settings, tabs or 
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   await page.getByRole("button", { name: "Open menu" }).click();
-  await expect(page.getByRole("button", { name: "Resume", exact: true })).toBeFocused();
+  await expect(page.getByRole("button", { name: "Continue", exact: true })).toBeFocused();
   await noDecoration();
   await page.keyboard.press("Escape");
   await expect(page.getByRole("button", { name: "Open menu", exact: true })).toBeFocused();
