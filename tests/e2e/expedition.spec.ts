@@ -573,6 +573,14 @@ for (const [width, height] of [
             return Math.abs(box.width / box.height - 0.75) < 0.01 && box.height >= 44;
           }),
           rows: [...rows.values()],
+          compactColumns: categories.every((category, index) => {
+            if (index % 5 === 0) return true;
+            const previous = categories[index - 1]!.getBoundingClientRect();
+            const current = category.getBoundingClientRect();
+            const overview = screen.querySelector(".talent-overview")!;
+            const gap = parseFloat(getComputedStyle(overview).columnGap);
+            return Math.abs(current.left - previous.right - gap) < 1;
+          }),
         };
       });
       expect(layout).toEqual({
@@ -581,12 +589,12 @@ for (const [width, height] of [
         readableCaptions: true,
         portraitSizes: true,
         rows: [5, 5, 4],
+        compactColumns: true,
       });
       const artworkFit = await page.locator(".talent-overview-viewport").evaluate((viewport) => {
         const category = viewport.querySelector(".talent-category")!;
         const art = category.querySelector(".action-card")!.getBoundingClientRect();
-        const style = getComputedStyle(category);
-        const gap = parseFloat(style.gap);
+        const gap = parseFloat(getComputedStyle(category.querySelector(".action-card")!).marginBottom);
         const captions = [...category.querySelectorAll("h2, p")].reduce(
           (height, caption) => height + caption.getBoundingClientRect().height,
           0,
@@ -596,7 +604,7 @@ for (const [width, height] of [
           actual: art.width,
           largest: Math.min(
             category.getBoundingClientRect().width,
-            ((viewport.clientHeight - rowGap * 2) / 3 - captions - gap * 2) * 0.75,
+            ((viewport.clientHeight - rowGap * 2) / 3 - captions - gap) * 0.75,
           ),
         };
       });
