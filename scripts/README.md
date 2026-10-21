@@ -6,6 +6,7 @@
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `npm run worktree -- <task-name> [base-ref]`                                     | [worktree.mjs](worktree.mjs): creates/reuses isolated tasks and links matching dependencies                                                                    |
 | `node scripts/integrate.mjs <task-branch>`                                       | [integrate.mjs](integrate.mjs), [Git helpers](lib/git.mjs), [shared lock](lib/integration-lock.mjs), [npm launcher](lib/npm-command.mjs)                       |
+| `npm run worktree:cleanup -- [--apply]`                                          | [worktree-cleanup.mjs](worktree-cleanup.mjs): audits or removes clean merged tasks under the shared lock and archives ignored artifacts                        |
 | `npm run check`, `npm run verify`                                                | [check.mjs](check.mjs): bounded selected-file formatting and fixed smoke                                                                                       |
 | `npm test`                                                                       | [run-local-tests.mjs](run-local-tests.mjs), [local test config](../vitest.local.config.mjs)                                                                    |
 | `npm run docs:check`                                                             | [check-docs.mjs](check-docs.mjs), [Markdown helpers](lib/markdown.mjs)                                                                                         |
@@ -39,7 +40,7 @@ Additional opt-in tools:
 
 See [Development tools](../Docs/DEVELOPMENT_TOOLS.md) for scenarios, defaults, evidence and limitations.
 
-Documentation parsing, measured bundle checks, worktree setup, integration safeguards and CI summary patterns are adapted from the sibling Alchemy repository. They have no runtime dependency on that checkout. Fauna retains its own command policy, save rules, worktree retention and release identity.
+Documentation parsing, measured bundle checks, worktree setup, integration safeguards and CI summary patterns are adapted from the sibling Alchemy repository. They have no runtime dependency on that checkout. Fauna retains its own command policy, save rules, worktree cleanup and release identity.
 
 ## Bundle allowance
 

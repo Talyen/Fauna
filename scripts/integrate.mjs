@@ -3,10 +3,11 @@ import { pathToFileURL } from "node:url";
 import { spawnSync } from "node:child_process";
 import { git, worktrees, assertClean } from "./lib/git.mjs";
 import { acquireIntegrationLock } from "./lib/integration-lock.mjs";
+import { removeMergedTask } from "./worktree-cleanup.mjs";
 import { npmCommand } from "./lib/npm-command.mjs";
 
 export async function integrate(root, branch, { runner = spawnSync, log = console.log } = {}) {
-  if (!branch || branch === "main" || branch.startsWith("-")) throw new Error("Provide a task branch.");
+  if (!/^(?:task|codex)\//.test(branch ?? "")) throw new Error("Provide a task/ or codex/ branch.");
   const release = await acquireIntegrationLock(root);
   try {
     assertClean(root, "main");
@@ -35,9 +36,13 @@ export async function integrate(root, branch, { runner = spawnSync, log = consol
     )
       throw new Error("A branch advanced during verification; main was not advanced.");
     git(root, ["merge", "--ff-only", verifiedHead]);
-    log(
-      `Integrated ${branch} into main after the local gate. Full CI validation remains pending. Task worktree retained.`,
-    );
+    log(`Integrated ${branch} into main after the local gate. Full CI validation remains pending.`);
+    try {
+      const { archive } = removeMergedTask(root, branch);
+      log(`Removed integrated task checkout and branch.${archive ? ` Artifacts: ${archive}` : ""}`);
+    } catch (error) {
+      throw new Error(`Integration succeeded, but cleanup is incomplete: ${error.message}`, { cause: error });
+    }
   } finally {
     await release();
   }
