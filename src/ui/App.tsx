@@ -354,7 +354,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           }
         }}
       >
-        <Swords aria-hidden="true" className="menu-icon-journey" />
+        <Swords aria-hidden="true" />
         {home ? (active ? "Continue" : "New journey") : "Resume"}
       </Button>
       {home && ["victory", "defeat"].includes(game.phase) ? (
