@@ -331,6 +331,7 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     test.setTimeout(120_000);
     const press = input === "controller" ? await gamepad(page) : null;
     await page.clock.setFixedTime(new Date(7));
+    await page.emulateMedia({ reducedMotion: "reduce" });
     await seed(page);
     const activate = async (el: Locator) => {
       if (input === "mouse") await el.click();
