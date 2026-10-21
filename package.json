@@ -109,7 +109,8 @@
     "files": [
       "dist/**/*",
       "desktop/**/*",
-      "package.json"
+      "package.json",
+      "src/game/save-format.json"
     ],
     "asar": true,
     "win": {

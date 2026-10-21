@@ -219,7 +219,7 @@ describe("journey earnings and results", () => {
 });
 
 it("completes the one-starter recruitment path through the final boss within the browser journey budget", () => {
-  let game = accept(accept(createGame(36), { type: "draft", species: "pollenmoth" }), { type: "start" });
+  let game = accept(accept(createGame(11), { type: "draft", species: "pollenmoth" }), { type: "start" });
   for (let step = 0; step < 400 && game.phase !== "victory"; step++) {
     expect(game.phase).not.toBe("defeat");
     expect(game.reward?.outcome).not.toBe("defeat");

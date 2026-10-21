@@ -89,10 +89,7 @@ describe("player interface", () => {
     await session.dispose();
   });
   it("shows stacked currency and Journey-style keyword level progress on Victory", async () => {
-    const started = accept(
-      accept(createGame(7), { type: "draft", species: createGame(7).starterOffers[0]! }),
-      { type: "start" },
-    );
+    const started = accept(accept(createGame(7), { type: "draft", species: "emberback" }), { type: "start" });
     const battle = produce(accept(started, { type: "beginBattle" }), (d) => {
       d.keywordXP.physical = 23;
     });

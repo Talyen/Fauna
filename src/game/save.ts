@@ -1,4 +1,5 @@
 import { needsCampfire } from "./support";
+import saveFormat from "./save-format.json";
 import { freeze } from "immer";
 import { MAX_HAND_SIZE, starterCount } from "./engine";
 import { z } from "zod";
@@ -87,7 +88,7 @@ const creature = z.object({
   combat: combatState.optional(),
 });
 const currentShape = z.object({
-  version: z.literal(34),
+  version: z.literal(saveFormat.version),
   discovery: z.object({
     encountered: z.array(speciesId).max(SPECIES.length),
     recruited: z.partialRecord(

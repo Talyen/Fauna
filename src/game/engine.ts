@@ -1,4 +1,5 @@
 import { MERCHANT_PRICE, canVisitCampfire, campfireRecovery, canVisitMerchant } from "./support";
+import saveFormat from "./save-format.json";
 import { freeze, produce } from "immer";
 import {
   collectedSpecies,
@@ -44,7 +45,7 @@ import { bossEncounter, encounterSource, finalEncounter, encounterPacks } from "
 import type { Card, Command, CommandResult, GameEvent, GameState } from "./types";
 export function createGame(seed = 1): GameState {
   const state: GameState = {
-    version: 34,
+    version: saveFormat.version,
     support: null,
     discovery: { encountered: [], recruited: {} },
     revision: 0,

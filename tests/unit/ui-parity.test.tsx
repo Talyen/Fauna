@@ -112,7 +112,7 @@ it("makes Deck available in drafting, rewards and Merchant without committing in
 });
 
 it("shows committed rest recovery while leaving the next encounter immediately playable", async () => {
-  const started = accept(accept(createGame(7), { type: "draft", species: createGame(7).starterOffers[0]! }), {
+  const started = accept(accept(createGame(7), { type: "draft", species: "emberback" }), {
     type: "start",
   });
   const injured = produce(started, (draft) => {
@@ -132,7 +132,7 @@ it("shows committed rest recovery while leaving the next encounter immediately p
     const recovery = screen.getByRole("status", { name: "Rest recovery" });
     expect(recovery.textContent).toContain("10 → 19 Health · +9");
     expect(
-      within(recovery).getByRole("progressbar", { name: "Prismram Health" }).getAttribute("aria-valuenow"),
+      within(recovery).getByRole("progressbar", { name: "Emberback Health" }).getAttribute("aria-valuenow"),
     ).toBe("19");
     expect(rested.rng).toBe(injured.rng);
     await user.click(screen.getByRole("button", { name: "Combat" }));

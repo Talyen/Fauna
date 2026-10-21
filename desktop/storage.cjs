@@ -1,5 +1,6 @@
 const fs = require("node:fs/promises");
 const path = require("node:path");
+const saveFormat = require("../src/game/save-format.json");
 function createStorage(directory) {
   const primary = path.join(directory, "expedition.json");
   let queue = Promise.resolve();
@@ -26,7 +27,7 @@ function createStorage(directory) {
         return Promise.reject(new Error("Invalid save payload."));
       try {
         const value = JSON.parse(data);
-        if (value.version !== 33) throw new Error("Unsupported save.");
+        if (value.version !== saveFormat.version) throw new Error("Unsupported save.");
       } catch (error) {
         return Promise.reject(error);
       }

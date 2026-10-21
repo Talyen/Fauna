@@ -3,6 +3,7 @@ import { _electron as electron } from "@playwright/test";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
+import saveFormat from "../src/game/save-format.json" with { type: "json" };
 const userData = await mkdtemp(path.join(tmpdir(), "fauna-smoke-"));
 let app;
 let success = false;
@@ -102,7 +103,7 @@ try {
     JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
   );
   if (
-    swapped.version !== 33 ||
+    swapped.version !== saveFormat.version ||
     swapped.team[0].species !== "pollenmoth" ||
     swapped.battle.mana !== 4 ||
     swapped.lineup[0] !== "ally-0"

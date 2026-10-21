@@ -51,7 +51,7 @@ it("pages through the full collection, resets filters and preserves focus across
   vi.stubGlobal("innerHeight", 720);
   act(() => window.dispatchEvent(new Event("resize")));
   expect(document.activeElement).toBe(lastCard);
-  expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(4);
+  expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(lastPage.length);
   expect((screen.getByRole("button", { name: "Next page" }) as HTMLButtonElement).disabled).toBe(true);
   const current = screen.getAllByRole("button", { name: /^Inspect / })[0]!.getAttribute("aria-label");
   vi.stubGlobal("innerHeight", 1080);
