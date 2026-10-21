@@ -15,11 +15,13 @@ export function PageControls({
   pages,
   change,
   label = "Pages",
+  showCount = true,
 }: {
   page: number;
   pages: number;
   change: (page: number) => void;
   label?: string;
+  showCount?: boolean;
 }) {
   const nav = useRef<HTMLElement>(null);
   const restore = useRef(false);
@@ -56,9 +58,11 @@ export function PageControls({
       >
         <ChevronLeft aria-hidden="true" />
       </Button>
-      <span role="status" aria-live="polite">
-        {page + 1} / {pages}
-      </span>
+      {showCount ? (
+        <span role="status" aria-live="polite">
+          {page + 1} / {pages}
+        </span>
+      ) : null}
       <Button
         variant="ghost"
         size="icon"

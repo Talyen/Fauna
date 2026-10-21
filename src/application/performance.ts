@@ -95,7 +95,7 @@ export function performanceCases(seed = 42) {
         { kind: "click", name: "Back", checkpoint: initial },
         { kind: "click", name: "Back", checkpoint: initial },
         { kind: "click", name: "Settings", checkpoint: initial },
-        { kind: "click", name: "Close settings", checkpoint: initial },
+        { kind: "click", name: "Back", checkpoint: initial },
       ],
     },
   ];

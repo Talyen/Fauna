@@ -138,7 +138,7 @@ for (const [width, height] of REVIEW_VIEWPORTS)
       }
       await page.getByRole("button", { name: "Back", exact: true }).click();
       await page.getByRole("button", { name: "Glossary", exact: true }).click();
-      await everyPage(page.getByRole("dialog"), () => expectScrollFree(page));
+      await everyPage(page.getByRole("main", { name: "Glossary & controls" }), () => expectScrollFree(page));
       await page.keyboard.press("Escape");
       await page.getByRole("button", { name: "Settings", exact: true }).click();
       for (const name of ["Display", "Sound", "Battle"]) {

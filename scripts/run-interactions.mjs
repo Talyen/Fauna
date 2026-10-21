@@ -125,7 +125,7 @@ try {
         } else if (step.kind === "settings") {
           await page.getByRole("button", { name: "Settings", exact: true }).click();
           await page.getByRole("radio", { name: "Tooltip 125%", exact: true }).click();
-          await page.getByRole("button", { name: "Close settings", exact: true }).click();
+          await page.getByRole("button", { name: "Back", exact: true }).click();
         } else {
           await page.getByRole("button", { name: "Talents", exact: true }).click();
           await page.getByRole("button", { name: "Burn talents", exact: true }).click();
