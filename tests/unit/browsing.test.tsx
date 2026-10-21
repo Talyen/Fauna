@@ -69,7 +69,9 @@ describe("menu browsing", () => {
       expect(screen.getByRole("button", { name: "Reset Physical talents" }).hasAttribute("disabled")).toBe(
         true,
       );
-      expect(within(fists).getByText("Unlock · 1 point")).toBeTruthy();
+      expect(
+        within(screen.getByRole("button", { name: "Armored Fists" })).getByText("Unlock · 1 point"),
+      ).toBeTruthy();
       await user.keyboard("{Escape}");
       expect(screen.getByRole("button", { name: "Physical talents" })).toBeTruthy();
       await user.keyboard("{Escape}");

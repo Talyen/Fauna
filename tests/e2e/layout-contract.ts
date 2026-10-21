@@ -51,7 +51,14 @@ export function layoutViolations() {
     )
       failures.push(`${name} has overflowing or clipped content`);
     const box = el.getBoundingClientRect();
-    if (box.left < -1 || box.top < -1 || box.right > innerWidth + 1 || box.bottom > innerHeight + 1)
+    // Radix Progress translates a full-width fill behind its bounded track mask.
+    const progressFill = el.matches(
+      ".progress-track > .progress-current, .progress-track > .progress-previous",
+    );
+    if (
+      !progressFill &&
+      (box.left < -1 || box.top < -1 || box.right > innerWidth + 1 || box.bottom > innerHeight + 1)
+    )
       failures.push(`${name} is outside the viewport`);
     if (el.matches('button:not(:disabled), [role="switch"], [role="radio"], [role="slider"], [role="tab"]')) {
       const hit = document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2);

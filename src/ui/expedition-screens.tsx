@@ -327,6 +327,7 @@ export function Talents({
 }) {
   const compact = useCompactLayout();
   const [keyword, setKeyword] = useState<Keyword | null>(null);
+  const [treeReset, setTreeReset] = useState(0);
   const [purchased, setPurchased] = useState<string | null>(null);
   const lastKeyword = useRef<Keyword | null>(null);
   const screen = useRef<HTMLElement>(null);
@@ -354,7 +355,7 @@ export function Talents({
     return () => {
       if (controls) controls.current = null;
     };
-  }, [keyword, controls]);
+  }, [keyword, controls, treeReset]);
   const p = keywordProgress(keyword ? (game.keywordXP[keyword] ?? 0) : 0);
   const artwork: Record<Keyword, string> = {
     physical: "physical",
@@ -384,8 +385,7 @@ export function Talents({
             variant="ghost"
             disabled={!game.talents.some((id) => id.startsWith(`${keyword}.`))}
             onClick={() => {
-              if (send({ type: "resetTalents", keyword }))
-                screen.current?.querySelector<HTMLElement>(".talent-node")?.focus();
+              if (send({ type: "resetTalents", keyword })) setTreeReset((value) => value + 1);
             }}
           >
             Reset {keywordLabel(keyword)} talents
@@ -436,7 +436,7 @@ export function Talents({
             />
           </div>
           <PagedItems
-            key={keyword}
+            key={`${keyword}:${treeReset}`}
             className="talent-tree"
             label="Talent pages"
             pageSize={compact ? 1 : 2}
@@ -524,12 +524,15 @@ export function Collection({
 }) {
   const compact = useCompactLayout();
   const [filter, setFilter] = useState("all");
-  const [page, setPage] = useState(0);
+  const [pageStart, setPageStart] = useState(0);
   const [columns, setColumns] = useState(3);
   const gridRef = useRef<HTMLDivElement>(null);
   const paging = useRef<HTMLElement>(null);
   const pagingFocus = useRef(false);
+  const focusedTile = useRef<HTMLElement | null>(null);
   useLayoutEffect(() => {
+    if (focusedTile.current && !focusedTile.current.isConnected && document.activeElement === document.body)
+      returnFocus(gridRef.current?.querySelector<HTMLElement>("button:not(:disabled)") ?? null);
     if (!pagingFocus.current) return;
     pagingFocus.current = false;
     returnFocus(
@@ -539,7 +542,7 @@ export function Collection({
           ?.querySelector<HTMLElement>('[role="tab"][data-state="active"]') ??
         null,
     );
-  }, [page, filter, columns]);
+  }, [pageStart, filter, columns, compact]);
   useLayoutEffect(() => {
     const grid = gridRef.current;
     if (!grid) return;
@@ -565,8 +568,8 @@ export function Collection({
     .sort((a, b) => Number(known(b.id)) - Number(known(a.id)));
   const pageSize = columns * (compact ? 1 : 2);
   const totalPages = Math.max(1, Math.ceil(ordered.length / pageSize));
-  const activePage = Math.min(page, totalPages - 1);
-  if (page !== activePage) setPage(activePage);
+  const activePage = Math.min(Math.floor(pageStart / pageSize), totalPages - 1);
+  if (pageStart >= ordered.length && pageStart !== 0) setPageStart(activePage * pageSize);
   return (
     <main className="collection-screen">
       <header className="collection-heading">
@@ -580,7 +583,7 @@ export function Collection({
         value={filter}
         onValueChange={(value) => {
           setFilter(value);
-          setPage(0);
+          setPageStart(0);
         }}
       >
         <TabsList aria-label="Collection filter">
@@ -599,7 +602,13 @@ export function Collection({
         </TabsList>
         <TabsContent className="collection-content" value={filter}>
           <div className="collection-gallery">
-            <div className="collection-grid" ref={gridRef}>
+            <div
+              className="collection-grid"
+              ref={gridRef}
+              onFocusCapture={(event) => {
+                focusedTile.current = event.target as HTMLElement;
+              }}
+            >
               {ordered.slice(activePage * pageSize, (activePage + 1) * pageSize).map((creature) =>
                 known(creature.id) ? (
                   <div className="collection-entry" key={creature.id}>
@@ -650,7 +659,7 @@ export function Collection({
                   aria-hidden={activePage === 0 || undefined}
                   onClick={() => {
                     pagingFocus.current = activePage === 1;
-                    setPage(activePage - 1);
+                    setPageStart((activePage - 1) * pageSize);
                   }}
                 >
                   <ChevronLeft aria-hidden="true" />
@@ -667,7 +676,7 @@ export function Collection({
                   aria-hidden={activePage === totalPages - 1 || undefined}
                   onClick={() => {
                     pagingFocus.current = activePage === totalPages - 2;
-                    setPage(activePage + 1);
+                    setPageStart((activePage + 1) * pageSize);
                   }}
                 >
                   <ChevronRight aria-hidden="true" />

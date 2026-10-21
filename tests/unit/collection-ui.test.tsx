@@ -28,6 +28,7 @@ it("pages the collection, resets filters and keeps every creature reachable afte
     },
   );
   vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockReturnValue({ width: 266.6667 } as DOMRect);
+  vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
   vi.spyOn(HTMLElement.prototype, "clientWidth", "get").mockImplementation(() => width);
   const game = produce(createGame(), (draft) => {
     draft.discovery.encountered = SPECIES.map((entry) => entry.id);
@@ -60,8 +61,23 @@ it("pages the collection, resets filters and keeps every creature reachable afte
     await user.click(next);
   }
   expect(seen.size).toBe(SPECIES.length);
+  const firstBeforeResize = screen
+    .getAllByRole("button", { name: /^Inspect / })[0]!
+    .getAttribute("aria-label");
+  vi.stubGlobal("innerHeight", 1080);
+  act(() => window.dispatchEvent(new Event("resize")));
+  expect(
+    screen.getAllByRole("button", { name: /^Inspect / }).map((el) => el.getAttribute("aria-label")),
+  ).toContain(firstBeforeResize);
+  vi.stubGlobal("innerHeight", 720);
+  act(() => window.dispatchEvent(new Event("resize")));
+  screen
+    .getAllByRole("button", { name: /^Inspect / })
+    .at(-1)!
+    .focus();
   width = 280;
   act(() => resize());
+  expect(document.activeElement).toBe(screen.getAllByRole("button", { name: /^Inspect / })[0]);
   expect(screen.getAllByRole("button", { name: /^Inspect / }).length).toBeLessThanOrEqual(2);
   await user.click(screen.getByRole("tab", { name: "Uncollected" }));
   expect(screen.getByRole("img", { name: "No creatures in this view" })).toBeTruthy();

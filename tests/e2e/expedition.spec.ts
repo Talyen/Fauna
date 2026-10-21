@@ -40,12 +40,17 @@ async function step(page: Page, activate: (el: Locator) => Promise<void> = (el) 
     await activate(
       page.getByRole("button", { name: `Recruit ${species(c.species).name}`, exact: true }).first(),
     );
-    if (c.replace)
-      await activate(
-        page
-          .locator(".recruit-options .creature-card")
-          .nth([...s.team, ...s.reserves].findIndex((creature) => creature.id === c.replace)),
-      );
+    if (c.replace) {
+      const replacement = page.locator(`.recruit-options [data-actor-id="${c.replace}"] .creature-card`);
+      while ((await replacement.count()) === 0) {
+        const next = page
+          .getByRole("navigation", { name: "Recruit pages" })
+          .getByRole("button", { name: "Next page" });
+        await expect(next).toBeEnabled();
+        await activate(next);
+      }
+      await activate(replacement);
+    }
   } else if (c.type === "chooseBoon")
     await activate(
       page.getByRole("button", {

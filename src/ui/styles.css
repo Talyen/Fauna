@@ -1065,7 +1065,6 @@ strong {
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--space-4);
-  margin-top: var(--space-6);
 }
 .deck-grid .action-card {
   width: var(--art-portrait-width);
@@ -1824,4 +1823,8 @@ body,
 .enemy-row .combat-feedback {
   bottom: auto;
   top: var(--space-6);
+}
+
+.deck-dialog > .paged-content {
+  margin-top: var(--screen-section-gap);
 }
