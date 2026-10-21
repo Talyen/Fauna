@@ -374,7 +374,7 @@ for (const [width, enlarged] of [
 
 test("one starter grows a lineup through a full expedition", async ({ page }) => {
   test.setTimeout(120_000);
-  await page.clock.setFixedTime(new Date(253));
+  await page.clock.setFixedTime(new Date(36));
   await page.emulateMedia({ reducedMotion: "reduce" });
   await seed(page);
   const activate = (el: Locator) => el.click();

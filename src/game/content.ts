@@ -765,8 +765,7 @@ export function enemyCard(card: CardDefinition): CardDefinition {
     ),
   };
 }
-export const INITIAL_SPECIES = SPECIES.map((s) => s.id);
-export const FIRST_RUN_STARTERS: readonly SpeciesId[] = INITIAL_SPECIES;
+export const FIRST_RUN_STARTERS: readonly SpeciesId[] = SPECIES.map((s) => s.id);
 export function species(id: SpeciesId): Species {
   const result = SPECIES.find((s) => s.id === id);
   if (!result) throw new Error(`Unknown species: ${id}`);

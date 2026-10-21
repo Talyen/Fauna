@@ -1,4 +1,4 @@
-import { cardText, CARDS, SPECIES, INITIAL_SPECIES, FIRST_RUN_STARTERS, ENCOUNTERS } from "./content";
+import { cardText, CARDS, SPECIES, FIRST_RUN_STARTERS, ENCOUNTERS } from "./content";
 import { BOSSES, COMBAT_PACKS, JOURNEY_LENGTH } from "./encounters";
 import { BOONS, TALENTS, TALENT_EFFECTS } from "./progression";
 import { DAMAGE_TYPES, EFFECT_KEYWORDS, PROGRESSION_KEYWORDS, definitionKeywords } from "./keywords";
@@ -32,8 +32,7 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
   const species = new Set(catalog.species.map((entry) => entry.id));
   if (FIRST_RUN_STARTERS.length < 3 || new Set(FIRST_RUN_STARTERS).size !== FIRST_RUN_STARTERS.length)
     error("first-run", "starter", "First-run starter pool needs at least three distinct species.");
-  for (const id of [...INITIAL_SPECIES, ...FIRST_RUN_STARTERS])
-    if (!species.has(id)) error(id, "starter", "Unknown starter.");
+  for (const id of FIRST_RUN_STARTERS) if (!species.has(id)) error(id, "starter", "Unknown starter.");
   for (const entry of catalog.species) {
     if (!Number.isSafeInteger(entry.health) || entry.health < 1 || entry.health > 1_000_000)
       error(entry.id, "health", "Unsupported Health.");

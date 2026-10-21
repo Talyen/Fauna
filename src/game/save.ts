@@ -2,7 +2,7 @@ import { needsCampfire } from "./support";
 import { freeze } from "immer";
 import { MAX_HAND_SIZE, starterCount } from "./engine";
 import { z } from "zod";
-import { CARDS, INITIAL_SPECIES, SPECIES, FIRST_RUN_STARTERS, species } from "./content";
+import { CARDS, SPECIES, FIRST_RUN_STARTERS, species } from "./content";
 import { JOURNEY_LENGTH, encounterPacks, encounterSource, finalEncounter, bossEncounter } from "./encounters";
 import { collectedSpecies, MAX_CREATURE_STARS, KEYWORDS, BOONS, TALENTS, talentPoints } from "./progression";
 import type { GameState } from "./types";
@@ -115,7 +115,7 @@ const currentShape = z.object({
     "victory",
     "defeat",
   ]),
-  unlocked: z.array(speciesId).min(INITIAL_SPECIES.length).max(SPECIES.length),
+  unlocked: z.array(speciesId).min(FIRST_RUN_STARTERS.length).max(SPECIES.length),
   wins: natural,
   selected: z.array(speciesId).max(3),
   starterOffers: z.array(speciesId).max(3),
@@ -239,7 +239,7 @@ export function decodeSave(raw: string): GameState {
   } else invalid(s.encounter > 2);
   invalid(
     !unique(s.unlocked) ||
-      INITIAL_SPECIES.some((kind) => !s.unlocked.includes(kind)) ||
+      FIRST_RUN_STARTERS.some((kind) => !s.unlocked.includes(kind)) ||
       s.selected.some((kind) => !starterPool.includes(kind)) ||
       (s.phase === "draft" && s.selected.length > starterCount(s)) ||
       (s.phase !== "draft" && !collected.length),
