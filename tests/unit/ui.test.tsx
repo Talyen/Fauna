@@ -182,8 +182,20 @@ describe("player interface", () => {
     await user.click(screen.getByRole("button", { name: "Continue" }));
     expect(screen.queryByRole("region", { name: "Enemy row" })).toBeNull();
     expect(screen.queryByRole("button", { name: /^Inspect / })).toBeNull();
-    const enter = screen.getByRole("button", { name: encounter === 0 ? "Combat" : "Boss" });
+    const enter = screen.getByRole("button", {
+      name: encounter === 0 ? "Combat" : `Boss: ${encounterSource(game).enemies[0]!.name}`,
+    });
     expect(screen.getByRole("heading", { name: `Encounter ${encounter + 1} of 8` })).toBeTruthy();
+    if (encounter !== 0) {
+      const boss = encounterSource(game).enemies[0]!;
+      expect(screen.getByRole("heading", { name: boss.name })).toBeTruthy();
+      await user.hover(enter);
+      const tooltip = await screen.findByRole("tooltip");
+      expect(tooltip.textContent).toContain(boss.name);
+      expect(tooltip.textContent).toContain(species(boss.species).passiveTiers[0].description);
+      await user.unhover(enter);
+      expect(session.store.getState().game).toEqual(game);
+    }
     enter.focus();
     await user.keyboard("i");
     expect(screen.queryByRole("dialog")).toBeNull();

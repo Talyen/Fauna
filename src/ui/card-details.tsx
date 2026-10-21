@@ -1,10 +1,34 @@
 import { creaturePassive } from "../game/progression";
 import { CombatStatus } from "./combat-status";
 import { KeywordText } from "./keyword-text";
-import { definition, enemyCard, species, type SpeciesId } from "../game/content";
+import { CARDS, definition, enemyCard, species, type SpeciesId } from "../game/content";
+import { definitionKeywords, keywordLabel } from "../game/keywords";
 import { actionValue, cardCost, physicalBonus } from "../game/rules";
 import type { Creature, Card, GameState } from "../game/types";
 import { CardRules } from "./combat-values";
+export function StarterDetails({ game, kind }: { game: GameState; kind: SpeciesId }) {
+  const creature = species(kind);
+  const actions = CARDS.filter((card) => card.species === kind);
+  const keywords = [...new Set(actions.flatMap(definitionKeywords))];
+  return (
+    <div className="card-details starter-details">
+      <strong>{creature.name}</strong>
+      <p>
+        <KeywordText text={keywords.map(keywordLabel).join(" · ")} />
+      </p>
+      <p>
+        <strong>{creature.trait}</strong> · <KeywordText text={creaturePassive(game, kind).description} />
+      </p>
+      <div className="starter-kit">
+        {actions.map((action) => (
+          <p key={action.id}>
+            <strong>{action.name}</strong> · {cardCost({ definitionId: action.id }, game)} Mana
+          </p>
+        ))}
+      </div>
+    </div>
+  );
+}
 export function ActionDetails({
   card,
   ownerName,

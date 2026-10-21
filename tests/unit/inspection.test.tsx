@@ -3,7 +3,10 @@ import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
 import { act, cleanup, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { produce } from "immer";
+import { CARDS, species } from "../../src/game/content";
 import { encodeSave } from "../../src/game/save";
+import { createGame } from "../../src/game/engine";
+import { StarterDetails } from "../../src/ui/card-details";
 import { App } from "../../src/ui/App";
 import { createSession } from "../../src/application/session";
 import { createBrowserPlatform } from "../../src/platform/browser";
@@ -31,6 +34,57 @@ afterEach(() => {
 });
 
 describe("artwork-first inspection", () => {
+  it("shows talent-adjusted Mana costs in the starter kit", () => {
+    const game = produce(createGame(7), (draft) => {
+      draft.talents = ["burn.flashpoint"];
+    });
+    render(<StarterDetails game={game} kind="emberfox" />);
+    expect(screen.getByText("Cinder Strike").closest("p")?.textContent).toContain("0 Mana");
+    expect(screen.getByText("Warm Embers").closest("p")?.textContent).toContain("1 Mana");
+  });
+
+  it.each([0, 1, 2])(
+    "previews starter slot %s without committing and restores it after choosing",
+    async (slot) => {
+      const session = createSession(createBrowserPlatform(localStorage), 7);
+      await session.load();
+      const user = userEvent.setup();
+      render(<App session={session} />);
+      try {
+        await user.click(screen.getByRole("button", { name: "Play" }));
+        const game = session.store.getState().game;
+        const kind = game.starterOffers[slot]!;
+        const creature = species(kind);
+        const opener = screen.getByRole("button", { name: `Inspect ${creature.name}` });
+        await user.hover(opener);
+        const tooltip = await screen.findByRole("tooltip");
+        expect(tooltip.textContent).toContain(creature.trait);
+        for (const action of CARDS.filter((entry) => entry.species === kind)) {
+          expect(tooltip.textContent).toContain(action.name);
+          expect(tooltip.textContent).toContain(`${action.cost} Mana`);
+        }
+        await user.click(opener);
+        const dialog = screen.getByRole("dialog", { name: creature.name });
+        expect(dialog.querySelector(".passive-tiers")).toBeNull();
+        expect(within(dialog).getByRole("region", { name: "Trait" }).textContent).toContain(
+          creature.passiveTiers[0].description,
+        );
+        await user.click(within(dialog).getByRole("button", { name: "Rank progression" }));
+        expect(screen.queryByRole("button", { name: `Choose ${creature.name}` })).toBeNull();
+        await user.keyboard("{Escape}");
+        expect(document.activeElement).toBe(screen.getByRole("button", { name: "Rank progression" }));
+        expect(session.store.getState().game).toBe(game);
+        await user.click(screen.getByRole("button", { name: `Choose ${creature.name}` }));
+        expect(session.store.getState().game.selected).toEqual([kind]);
+        expect(screen.queryByRole("dialog")).toBeNull();
+        expect(document.activeElement).toBe(screen.getByRole("button", { name: `Inspect ${creature.name}` }));
+      } finally {
+        cleanup();
+        await session.dispose();
+      }
+    },
+  );
+
   it("keeps creature and ability information on hover and returns to the selected artwork", async () => {
     localStorage.setItem(
       "fauna.save.v1",
@@ -51,17 +105,24 @@ describe("artwork-first inspection", () => {
       await user.click(opener);
       const dialog = screen.getByRole("dialog", { name: "Mossback" });
       expect(dialog.querySelector(".card-details")).toBeNull();
-      const tiers = within(dialog).getByRole("region", { name: "Rooted passive tiers" });
+      expect(within(dialog).queryByRole("region", { name: "Rooted passive tiers" })).toBeNull();
+      expect(within(dialog).getByRole("region", { name: "Abilities" })).toBeTruthy();
+      expect(within(dialog).getByRole("region", { name: "Trait" }).textContent).toContain("Rooted");
+      const rankOpener = within(dialog).getByRole("button", { name: "Rank progression" });
+      await user.click(rankOpener);
+      const tiers = within(screen.getByRole("dialog", { name: "Mossback rank progression" })).getByRole(
+        "region",
+        { name: "Rooted passive tiers" },
+      );
       expect(within(tiers).getAllByRole("listitem")).toHaveLength(1);
       expect(tiers.textContent).toContain("0 stars · Active effect");
-      expect(within(dialog).getByRole("heading", { name: "Traits" })).toBeTruthy();
-      expect(within(dialog).getByRole("region", { name: "Abilities" })).toBeTruthy();
-      expect(dialog.querySelector(".inspection-active-trait")?.textContent).toContain("Rooted");
       for (let rank = 0; rank < 3; rank++)
         await user.click(within(tiers).getByRole("button", { name: "Next page" }));
       expect(tiers.querySelector('[aria-current="step"]')?.textContent).toContain("3 stars · Current rank");
       await user.click(within(tiers).getByRole("button", { name: "Next page" }));
       expect(within(tiers).getAllByRole("listitem")).toHaveLength(1);
+      await user.keyboard("{Escape}");
+      expect(document.activeElement).toBe(within(dialog).getByRole("button", { name: "Rank progression" }));
       expect(within(dialog).queryByRole("button", { name: /Previous action|Next action/ })).toBeNull();
       await user.hover(within(dialog).getByRole("button", { name: "Mossback details" }));
       expect((await screen.findByRole("tooltip")).textContent).toContain("Rooted");

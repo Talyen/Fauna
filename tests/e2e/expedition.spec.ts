@@ -2,8 +2,9 @@ import { captureScreen } from "./rendered-evidence";
 import { freshCombat } from "../../src/game/combat";
 import { test, expect, type Page, type Locator } from "@playwright/test";
 import { produce } from "immer";
+import { encounterSource } from "../../src/game/encounters";
 import { createGame } from "../../src/game/engine";
-import { definition, species } from "../../src/game/content";
+import { CARDS, definition, species } from "../../src/game/content";
 import { BOONS, TALENTS } from "../../src/game/progression";
 import type { Command, GameState } from "../../src/game/types";
 import { recruitChoice, accept, policy, winBattle, victoryReady, run, bossReward } from "../unit/helpers";
@@ -216,7 +217,10 @@ for (const width of [1280, 1920])
           await page.keyboard.press("Escape");
           await page.keyboard.press("Escape");
         }
-        const enter = page.getByRole("button", { name: encounter === 0 ? "Combat" : "Boss", exact: true });
+        const enter = page.getByRole("button", {
+          name: encounter === 0 ? "Combat" : `Boss: ${encounterSource(game).enemies[0]!.name}`,
+          exact: true,
+        });
         await expect(page.locator(".app:not([inert]) [data-encounter]")).toHaveCount(1);
         await expect(page.locator(".app:not([inert]) [data-enemy-id]")).toHaveCount(0);
         await enter.locator("img").evaluate((image) => (image as HTMLImageElement).decode());
@@ -311,7 +315,9 @@ for (const width of [1280, 1920])
       const tooltip = page.getByRole("tooltip");
       await expect(tooltip).toBeVisible();
       await expect(tooltip.locator("strong").first()).toHaveText(name);
-      await expect(tooltip).toHaveText(`${name}${species(chosen).passiveTiers[0].description}`);
+      await expect(tooltip).toContainText(species(chosen).passiveTiers[0].description);
+      for (const action of CARDS.filter((entry) => entry.species === chosen))
+        await expect(tooltip).toContainText(action.name);
       await captureScreen(page, { path: `reports/starter/tooltip-${width}-${enlarged}.png` });
       await mossback.click();
       await page.locator(".inspection-thumbnails .action-card").first().click();
@@ -323,6 +329,13 @@ for (const width of [1280, 1920])
       expect((await state(page)).revision).toBe(initial.revision);
       await mossback.press("Enter");
       await captureScreen(page, { path: `reports/starter/inspection-${width}-${enlarged}.png` });
+      const ranks = page.getByRole("button", { name: "Rank progression", exact: true });
+      await ranks.click();
+      await expect(page.getByRole("button", { name: `Choose ${name}`, exact: true })).toHaveCount(0);
+      await captureScreen(page, { path: `reports/starter/ranks-${width}-${enlarged}.png` });
+      await page.keyboard.press("Escape");
+      await expect(ranks).toBeFocused();
+      expect((await state(page)).revision).toBe(initial.revision);
       await page.getByRole("button", { name: `Choose ${name}`, exact: true }).click();
       await expect(mossback).toBeFocused();
       await expect(mossback).toHaveAttribute("aria-pressed", "true");

@@ -51,6 +51,10 @@ export function Inspector({
   const [selected, setSelected] = useState<number | null>(() =>
     rootCard ? cards.findIndex((c) => c.definitionId === rootCard.definitionId) : null,
   );
+  const [showRanks, setShowRanks] = useState(false);
+  const rankButton = useRef<HTMLButtonElement>(null);
+  const restoreRank = useRef(false);
+  const chosenStarter = useRef(false);
   const thumbnails = useRef<HTMLDivElement>(null),
     backButton = useRef<HTMLButtonElement>(null);
   const previousCard = useRef(selected),
@@ -59,11 +63,23 @@ export function Inspector({
     setSelected((index) => (index === null ? null : (index + direction + cards.length) % cards.length));
   const back = () => {
     if (rootCard) return false;
+    if (showRanks) {
+      restoreRank.current = true;
+      setShowRanks(false);
+      return true;
+    }
     if (selected === null) return false;
     restore.current = selected;
     setSelected(null);
     return true;
   };
+  useLayoutEffect(() => {
+    if (showRanks) backButton.current?.focus();
+    else if (restoreRank.current) {
+      restoreRank.current = false;
+      returnFocus(rankButton.current);
+    }
+  }, [showRanks]);
   useLayoutEffect(() => {
     if (selected !== null && previousCard.current === null) backButton.current?.focus();
     previousCard.current = selected;
@@ -103,9 +119,14 @@ export function Inspector({
       }}
     >
       <DialogContent
-        className={`inspection ${card ? "single-card" : "creature-inspection"}`}
+        className={`inspection ${card ? "single-card" : "creature-inspection"}${showRanks ? " rank-inspection" : ""}`}
         onCloseAutoFocus={(event) => {
           event.preventDefault();
+          // Completing the draft can replace the opener when its slot changes.
+          if (chosenStarter.current) {
+            returnFocus(document.querySelector<HTMLElement>(`.draft-grid [data-species="${kind}"]`));
+            return;
+          }
           const focused = document.activeElement as HTMLElement | null;
           if (focused !== document.body && isAvailableFocusTarget(focused)) return;
           returnFocus(opener);
@@ -142,10 +163,14 @@ export function Inspector({
           </>
         ) : (
           <>
-            <DialogTitle className="sr-only">{enemy?.name ?? creature.name}</DialogTitle>
+            <DialogTitle className="sr-only">
+              {enemy?.name ?? creature.name}
+              {showRanks ? " rank progression" : ""}
+            </DialogTitle>
             <DialogDescription className="sr-only">
-              Creature artwork and three action cards. Hover or focus for current state, passive, and action
-              effects.
+              {showRanks
+                ? "Creature artwork and paginated passive tiers. Back returns to the creature kit."
+                : "Creature artwork, current trait and three action cards. Hover or focus for current state and action effects."}
             </DialogDescription>
             <CreatureCard
               progression={enemy ? undefined : game}
@@ -159,68 +184,80 @@ export function Inspector({
               speciesKit
               label={`${enemy?.name ?? creature.name} details`}
             />
-            <section className="inspection-abilities" aria-label="Abilities">
-              <h2>Abilities</h2>
-              <div className="inspection-thumbnails" ref={thumbnails} data-nav-row>
-                {cards.map((action, index) => (
-                  <ActionCard
-                    key={action.id}
-                    card={action}
-                    ownerName={creature.name}
-                    actor={actor}
-                    modifiers={enemy ? undefined : game}
-                    enemy={!!enemy}
-                    enemyValue={
-                      enemy ? enemyInspectionValue(enemy, definition(action.definitionId)) : undefined
-                    }
-                    onClick={() => setSelected(index)}
-                    onInspect={() => setSelected(index)}
-                  />
-                ))}
-              </div>
-            </section>
-            <section className="passive-tiers" aria-label={`${creature.trait} passive tiers`}>
-              <h2>Traits</h2>
-              <div className="inspection-active-trait">
-                <h3>{creature.trait}</h3>
-                <p>
-                  <KeywordText text={passive.description} />
-                </p>
-              </div>
-              <h3>Rank progression</h3>
-              <p>
-                {enemy
-                  ? "Species kit · Enemy passives use the base tier."
-                  : `Collection rank: ${rank} / 5 stars`}
-              </p>
-              <PagedItems
-                items={creature.passiveTiers}
-                pageSize={1}
-                className="passive-tier-page"
-                contentRole="list"
-                label="Passive tier pages"
-              >
-                {(tier, tierRank) => (
-                  <div role="listitem" key={tierRank} aria-current={tierRank === rank ? "step" : undefined}>
-                    <strong>
-                      {tierRank} {tierRank === 1 ? "star" : "stars"}
-                      {tierRank === rank ? " · Current rank" : ""}
-                      {tierRank === passive.rank ? " · Active effect" : ""}
-                    </strong>
-                    <p>{tier ? <KeywordText text={tier.description} /> : "Not yet defined"}</p>
+            {!showRanks ? (
+              <>
+                <section className="inspection-active-trait" aria-label="Trait">
+                  <h2>{creature.trait}</h2>
+                  <p>
+                    <KeywordText text={passive.description} />
+                  </p>
+                </section>
+                <section className="inspection-abilities" aria-label="Abilities">
+                  <h2>Abilities</h2>
+                  <div className="inspection-thumbnails" ref={thumbnails} data-nav-row>
+                    {cards.map((action, index) => (
+                      <ActionCard
+                        key={action.id}
+                        card={action}
+                        ownerName={creature.name}
+                        actor={actor}
+                        modifiers={enemy ? undefined : game}
+                        enemy={!!enemy}
+                        enemyValue={
+                          enemy ? enemyInspectionValue(enemy, definition(action.definitionId)) : undefined
+                        }
+                        onClick={() => setSelected(index)}
+                        onInspect={() => setSelected(index)}
+                      />
+                    ))}
                   </div>
-                )}
-              </PagedItems>
-            </section>
-            {chooseStarter ? (
-              <Button
-                onClick={() => {
-                  if (chooseStarter()) onClose();
-                }}
-              >
-                Choose {creature.name}
-              </Button>
-            ) : null}
+                </section>
+                <footer className="inspection-actions" data-nav-row>
+                  <Button ref={rankButton} variant="outline" onClick={() => setShowRanks(true)}>
+                    Rank progression
+                  </Button>
+                  {chooseStarter ? (
+                    <Button
+                      onClick={() => {
+                        if (chooseStarter()) {
+                          chosenStarter.current = true;
+                          onClose();
+                        }
+                      }}
+                    >
+                      Choose {creature.name}
+                    </Button>
+                  ) : null}
+                </footer>
+              </>
+            ) : (
+              <section className="passive-tiers" aria-label={`${creature.trait} passive tiers`}>
+                <h2>Rank progression</h2>
+                <p>
+                  {enemy
+                    ? "Species kit · Enemy passives use the base tier."
+                    : `Collection rank: ${rank} / 5 stars`}
+                </p>
+                <PagedItems
+                  items={creature.passiveTiers}
+                  pageSize={1}
+                  className="passive-tier-page"
+                  contentRole="list"
+                  label="Passive tier pages"
+                >
+                  {(tier, tierRank) => (
+                    <div role="listitem" key={tierRank} aria-current={tierRank === rank ? "step" : undefined}>
+                      <strong>
+                        {tierRank} {tierRank === 1 ? "star" : "stars"}
+                        {tierRank === rank ? " · Current rank" : ""}
+                        {tierRank === passive.rank ? " · Active effect" : ""}
+                      </strong>
+                      <p>{tier ? <KeywordText text={tier.description} /> : "Not yet defined"}</p>
+                    </div>
+                  )}
+                </PagedItems>
+              </section>
+            )}
           </>
         )}
       </DialogContent>

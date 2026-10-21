@@ -845,6 +845,61 @@
       "aspect": [3, 4],
       "provenance": "Unchanged Alchemy optimized artwork: card-back.webp",
       "rights": "Existing shared Alchemy artwork; reuse authorized by the user. See Docs/CONTENT.md"
+    },
+    {
+      "id": "keyword.armor",
+      "origin": "repository",
+      "source": "public/art/keywords/armor.webp",
+      "output": "art/keywords/armor.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Alchemy: src/assets/optimized/talent-armor.webp; unchanged Fauna-owned copy",
+      "rights": "Existing Alchemy keyword artwork reuse, as recorded in Docs/CONTENT.md"
+    },
+    {
+      "id": "keyword.bleed",
+      "origin": "repository",
+      "source": "public/art/keywords/bleed.webp",
+      "output": "art/keywords/bleed.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Alchemy: src/assets/optimized/talent-bleed.webp; unchanged Fauna-owned copy",
+      "rights": "Existing Alchemy keyword artwork reuse, as recorded in Docs/CONTENT.md"
+    },
+    {
+      "id": "keyword.dodge",
+      "origin": "repository",
+      "source": "public/art/keywords/dodge.webp",
+      "output": "art/keywords/dodge.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Alchemy: src/assets/optimized/talent-dodge.webp; unchanged Fauna-owned copy",
+      "rights": "Existing Alchemy keyword artwork reuse, as recorded in Docs/CONTENT.md"
+    },
+    {
+      "id": "keyword.leech",
+      "origin": "repository",
+      "source": "public/art/keywords/leech.webp",
+      "output": "art/keywords/leech.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Alchemy: src/assets/optimized/talent-leech.webp; unchanged Fauna-owned copy",
+      "rights": "Existing Alchemy keyword artwork reuse, as recorded in Docs/CONTENT.md"
+    },
+    {
+      "id": "keyword.mana",
+      "origin": "repository",
+      "source": "public/art/keywords/mana.webp",
+      "output": "art/keywords/mana.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Alchemy: src/assets/optimized/talent-mana.webp; unchanged Fauna-owned copy",
+      "rights": "Existing Alchemy keyword artwork reuse, as recorded in Docs/CONTENT.md"
     }
   ]
 }

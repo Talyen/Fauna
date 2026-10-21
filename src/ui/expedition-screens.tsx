@@ -9,6 +9,7 @@ import { canVisitCampfire } from "../game/support";
 import { SupportOffer } from "./support-screen";
 import { assetUrl } from "./assets";
 import { KeywordText } from "./keyword-text";
+import { CreatureDetails, StarterDetails } from "./card-details";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui/tabs";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
@@ -54,7 +55,6 @@ import { returnFocus } from "./focus";
 import { CARDS, SPECIES, species, type SpeciesId } from "../game/content";
 import {
   creatureStars,
-  creaturePassive,
   MAX_CREATURE_STARS,
   KEYWORDS,
   BOONS,
@@ -69,7 +69,7 @@ import type { Command, GameState, GameEvent } from "../game/types";
 import type { Inspection, Controls } from "./battle-screen";
 import { Progress } from "./progress";
 import { BattleEarnings } from "./battle-earnings";
-import { bossEncounter, JOURNEY_LENGTH } from "../game/encounters";
+import { bossEncounter, encounterSource, JOURNEY_LENGTH } from "../game/encounters";
 const originalTalentSymbols = [
   Swords,
   ShieldPlus,
@@ -111,6 +111,7 @@ const talentSymbols = Object.fromEntries(
 type Props = { game: GameState; send: (command: Command) => boolean; inspect: (item: Inspection) => void };
 export function TeamSelection({ game, send, recovery }: Props & { recovery?: GameEvent[] }) {
   const boss = bossEncounter(game);
+  const bossEnemy = boss ? encounterSource(game).enemies[0]! : null;
   return (
     <Screen className="destinations-screen">
       <header className="destination-heading">
@@ -133,14 +134,31 @@ export function TeamSelection({ game, send, recovery }: Props & { recovery?: Gam
           </div>
         ) : null}
         <div className="destination-option">
-          <ArtCard
-            aspect="creature"
-            artwork={assetUrl(boss ? "encounter.boss" : "encounter.combat")}
-            data-encounter
-            aria-label={boss ? "Boss" : "Combat"}
-            onClick={() => send({ type: "beginBattle" })}
-          />
-          <h2>{boss ? "Boss" : "Combat"}</h2>
+          {bossEnemy ? (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <ArtCard
+                  aspect="creature"
+                  artwork={assetUrl(`creature.${bossEnemy.species}`)}
+                  data-encounter
+                  aria-label={`Boss: ${bossEnemy.name}`}
+                  onClick={() => send({ type: "beginBattle" })}
+                />
+              </TooltipTrigger>
+              <TooltipContent>
+                <CreatureDetails kind={bossEnemy.species} name={bossEnemy.name} speciesKit />
+              </TooltipContent>
+            </Tooltip>
+          ) : (
+            <ArtCard
+              aspect="creature"
+              artwork={assetUrl("encounter.combat")}
+              data-encounter
+              aria-label="Combat"
+              onClick={() => send({ type: "beginBattle" })}
+            />
+          )}
+          <h2>{bossEnemy?.name ?? "Combat"}</h2>
         </div>
       </section>
       <BattleEarnings game={game} />
@@ -168,14 +186,7 @@ export function Draft({ game, send, inspect }: Props) {
                   onClick={() => inspect({ species: s.id })}
                   onInspect={() => inspect({ species: s.id })}
                   label={`Inspect ${s.name}`}
-                  tooltipContent={
-                    <div className="card-details">
-                      <strong>{s.name}</strong>
-                      <p>
-                        <KeywordText text={creaturePassive(game, s.id).description} />
-                      </p>
-                    </div>
-                  }
+                  tooltipContent={<StarterDetails game={game} kind={s.id} />}
                 />
                 <h2>{s.name}</h2>
                 <span className="starter-selection">
@@ -381,13 +392,13 @@ export function Talents({
     poison: "poison",
     nature: "nature",
     light: "light",
-    bleed: "physical",
+    bleed: "bleed",
     block: "block",
     health: "heal",
-    armor: "block",
-    dodge: "nature",
-    leech: "light",
-    mana: "ice",
+    armor: "armor",
+    dodge: "dodge",
+    leech: "leech",
+    mana: "mana",
   };
   return (
     <Screen className="talents-screen" data-view={keyword ? "tree" : "overview"} ref={screen}>

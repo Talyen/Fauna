@@ -58,11 +58,12 @@
   --compact-icon-size: 16px;
   --main-menu-button-width: 180px;
   --pause-menu-width: 240px;
-  --settings-screen-width: 800px;
+  --settings-screen-width: 640px;
+  --menu-screen-width: 800px;
+  --screen-heading-width: 640px;
   --boon-dialog-width: 720px;
   --settings-label-basis: 200px;
   --settings-control-basis: 300px;
-  --settings-panel-min-height: 384px;
   --glossary-page-min-height: 320px;
   --space-1: 4px;
   --space-2: 8px;

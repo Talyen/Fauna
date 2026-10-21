@@ -77,9 +77,9 @@ Merchant prices, affordability and Campfire eligibility/recovery are owned by `s
 
 ## Encounter placeholders
 
-Combat and Boss use original blank 4:3 SVG placeholders in `public/art/encounters/`, registered as `encounter.combat` and `encounter.boss`. Labels remain outside the artwork. Enemy packs and encounter progression live in `src/game/encounters.ts`; named destination selection is removed. The existing location assets remain available for support artwork.
+Ordinary Combat uses an original blank 4:3 SVG placeholder; the preserved Boss placeholder is retained in the manifest. Both original files remain in `public/art/encounters/`, registered as `encounter.combat` and `encounter.boss`. Labels remain outside the artwork. Enemy packs and encounter progression live in `src/game/encounters.ts`; named destination selection is removed. The existing location assets remain available for support artwork.
 
-Journeys use one shared combat enemy pool, with bosses at encounters 4 and 8. There are no biome divisions. Combat music reuses the prepared track registered as `music.fernwood`; that source ID does not select progression. Activating Combat or Boss starts the saved battle directly, without showing enemies beforehand.
+Journeys use one shared combat enemy pool, with bosses at encounters 4 and 8. There are no biome divisions. Combat music reuses the prepared track registered as `music.fernwood`; that source ID does not select progression. Boss entrances show their authored name and species artwork with base-trait hover/focus details. Ordinary encounters retain the blank Combat entrance. Activating either starts the saved battle directly, without revealing turn intents or opening a preview dialog.
 
 ## Creature passive tiers
 
@@ -90,3 +90,7 @@ The base tier contains the existing unique passive. Higher slots remain `null` u
 ## Battle pile artwork
 
 `public/art/battle/draw-pile.webp`, `discard-pile.webp` and `card-back.webp` are unchanged 420×560 optimized artwork copied from `Alchemy: src/assets/optimized/`, with reuse explicitly requested by the user. The prepared manifest owns `pile.draw`, `pile.discard` and `card.back`; runtime has no sibling-project dependency. Draw and discard ArtCards preserve the 3:4 aspect ratio. Flying discards use the same top-card crop and landing bounds as Alchemy: x=25/420, y=25/560, width=328/420, height=432/560. The source library, original placeholders and earlier immutable prepared generations remain preserved.
+
+## Talent category portraits
+
+Armor, Bleed, Dodge, Leech and Mana now use their distinct existing Alchemy portraits, copied unchanged from `Alchemy: src/assets/optimized/talent-<keyword>.webp` into `public/art/keywords/`. These follow the existing Alchemy keyword-art reuse, with source provenance in `assets/manifest.json` and Fauna-owned prepared outputs. There is no runtime dependency on Alchemy.

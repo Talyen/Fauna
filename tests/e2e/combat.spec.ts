@@ -59,7 +59,7 @@ for (const width of [1280, 1920]) {
     await page.getByRole("button", { name: "Rest", exact: true }).click();
     await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
     await expect(page.getByRole("button", { name: "Visit Campfire", exact: true })).toHaveCount(1);
-    await page.getByRole("button", { name: "Boss", exact: true }).click();
+    await page.getByRole("button", { name: /^Boss: / }).click();
     await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
     const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!) as GameState);
     expect(saved.team.map((creature) => creature.health)).toEqual([10, 14, 26]);
