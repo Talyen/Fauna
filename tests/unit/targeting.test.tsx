@@ -8,7 +8,6 @@ import { TargetPreview } from "../../src/ui/target-preview";
 import { previewCard } from "../../src/game/engine";
 import { produce } from "immer";
 import { run } from "./helpers";
-import type { GameState } from "../../src/game/types";
 
 beforeEach(() => {
   vi.stubGlobal(
