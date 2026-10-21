@@ -1,82 +1,117 @@
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
-import { createGame, dispatch } from "../../src/game/engine";
-import { INITIAL_SPECIES } from "../../src/game/content";
+import { createGame, dispatch, starterCount } from "../../src/game/engine";
+import { FIRST_RUN_STARTERS } from "../../src/game/content";
 import { decodeSave, encodeSave } from "../../src/game/save";
-import { accept, policy, run, winBattle } from "./helpers";
+import { accept, recruitChoice, winBattle } from "./helpers";
 
-const start = () => accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
+function firstJourney(seed = 7) {
+  const game = createGame(seed);
+  return accept(accept(game, { type: "draft", species: game.starterOffers[0]! }), { type: "start" });
+}
 
-describe("one-starter expeditions", () => {
-  it("keeps the selected starter through saving, replaces it explicitly, and rejects locked choices", () => {
-    let s = accept(createGame(7), { type: "draft", species: "mossback" });
+describe("collected starter drafts", () => {
+  it("onboards with one of three eligible creatures and collects only the committed starter", () => {
+    let s = createGame(7);
+    expect(s.discovery.recruited).toEqual([]);
+    expect(s.starterOffers).toHaveLength(3);
+    expect(new Set(s.starterOffers).size).toBe(3);
+    expect(s.starterOffers.every((kind) => FIRST_RUN_STARTERS.includes(kind))).toBe(true);
+    expect(starterCount(s)).toBe(1);
+    const chosen = s.starterOffers[0]!;
+    s = accept(s, { type: "draft", species: chosen });
+    expect(s.discovery.recruited).toEqual([]);
+    expect(s.starterOffers).toEqual([]);
     expect(decodeSave(encodeSave(s))).toEqual(s);
-    const rng = s.rng;
-    s = accept(s, { type: "draft", species: "emberfox" });
-    expect(s.selected).toEqual(["emberfox"]);
-    expect(s.rng).toBe(rng);
-    expect(dispatch(s, { type: "draft", species: "moonhart" }).state).toBe(s);
-    expect(decodeSave(encodeSave(accept(s, { type: "start" })))).toEqual(accept(s, { type: "start" }));
-  });
-
-  it("rejects multiple starter choices and preserves current multi-creature battles", () => {
-    const invalid = produce(createGame(), (d) => {
-      d.selected = ["mossback", "emberfox"];
-    });
-    expect(() => decodeSave(encodeSave(invalid))).toThrow();
-    expect(decodeSave(encodeSave(run()))).toEqual(run());
-  });
-
-  it("adds recruits to the first three lineup slots and saves the settled battle before boon choice", () => {
-    let s = start();
-    for (let index = 0; index < 2; index++) {
-      s = accept(s, { type: "beginBattle" });
-      s = winBattle(s);
-      s = accept(s, { type: "recruit", species: s.reward!.recruits[0]! });
-      expect(s.team).toHaveLength(index + 2);
-      expect(s.team.map((c) => c.id)).toEqual(s.lineup);
-      expect(s.reserves).toEqual([]);
-      expect(decodeSave(encodeSave(s))).toEqual(s);
-      expect(decodeSave(encodeSave(s))).toEqual(s);
-    }
-    expect(s.cards).toHaveLength(9);
-  });
-
-  it("can skip recruitment and begin the next battle with one creature", () => {
-    let s = accept(start(), { type: "beginBattle" });
-    s = accept(winBattle(s), { type: "skipRecruit" });
-    s = accept(s, { type: "beginBattle" });
+    expect(dispatch(s, { type: "draft", species: chosen }).state).toBe(s);
+    s = accept(s, { type: "start" });
+    expect(s.discovery.recruited).toEqual([chosen]);
     expect(s.team).toHaveLength(1);
-    expect(s.battle!.hand).toHaveLength(3);
+    expect(s.cards).toHaveLength(3);
     expect(decodeSave(encodeSave(s))).toEqual(s);
   });
 
-  it("rejects undersized lineups when creatures exist to fill them", () => {
-    const invalid = produce(run(), (d) => {
-      d.reserves.push(d.team.pop()!);
-      d.lineup.pop();
-    });
-    expect(() => decodeSave(encodeSave(invalid))).toThrow();
-  });
-
-  it.each(INITIAL_SPECIES)("supports a complete saved expedition from %s", (kind) => {
-    let s = accept(accept(accept(createGame(7), { type: "draft", species: kind }), { type: "start" }), {
-      type: "beginBattle",
-    });
-    for (let i = 0; i < 400 && !["victory", "defeat"].includes(s.phase); i++) {
-      s = accept(
-        s,
-        s.phase === "recruit" && s.roster.length < 5
-          ? {
-              type: "recruit",
-              species: s.reward!.recruits.find((kind) => !s.roster.includes(kind)) ?? s.reward!.recruits[0]!,
-            }
-          : policy(s),
-      );
+  it("grows the onboarding team through compulsory recruitment against one, then two enemies", () => {
+    let s = firstJourney();
+    for (let round = 0; round < 2; round++) {
+      s = accept(s, { type: "beginBattle" });
+      expect(s.battle!.enemies).toHaveLength(round + 1);
+      s = winBattle(s);
+      expect(s.reward!.recruits).toHaveLength(round + 1);
+      expect(dispatch(s, { type: "skipRecruit" }).state).toBe(s);
+      s = accept(s, recruitChoice(s));
+      expect(s.team).toHaveLength(round + 2);
+      expect(s.cards).toHaveLength((round + 2) * 3);
       expect(decodeSave(encodeSave(s))).toEqual(s);
     }
-    expect(s.phase).toBe("victory");
-    expect(s.roster.length).toBeGreaterThanOrEqual(3);
-    expect(s.roster.length).toBeLessThanOrEqual(5);
+  });
+
+  it("drafts three times from recruits alone, preserving every offer across reload", () => {
+    let s = firstJourney();
+    s = accept(s, { type: "abandon" });
+    s = produce(s, (d) => {
+      d.discovery.encountered = ["mossback", "emberfox", "stormfin", "moonhart"];
+      d.discovery.recruited = ["mossback", "emberfox", "stormfin"];
+      d.selected = ["mossback"];
+    });
+    s = accept(s, { type: "newRun", seed: 24 });
+    const initial = s;
+    for (let round = 0; round < 3; round++) {
+      expect(s.selected).toHaveLength(round);
+      expect(s.starterOffers).toHaveLength(3);
+      expect(new Set(s.starterOffers)).toEqual(new Set(s.discovery.recruited));
+      expect(dispatch(s, { type: "draft", species: "moonhart" }).state).toBe(s);
+      expect(dispatch(s, { type: "start" }).state).toBe(s);
+      s = decodeSave(encodeSave(s));
+      s = accept(s, { type: "draft", species: "mossback" });
+    }
+    expect(s.starterOffers).toEqual([]);
+    expect(s.selected).toEqual(["mossback", "mossback", "mossback"]);
+    expect(initial.selected).toEqual([]);
+    s = accept(s, { type: "start" });
+    expect(s.team).toHaveLength(3);
+    expect(new Set(s.team.map((c) => c.id)).size).toBe(3);
+    expect(s.cards).toHaveLength(9);
+    expect(decodeSave(encodeSave(s))).toEqual(s);
+    s = accept(s, { type: "beginBattle" });
+    expect(s.battle!.enemies).toHaveLength(1);
+  });
+
+  it("supports repeat journeys after an early return with only one collected species", () => {
+    let s = firstJourney();
+    const collected = s.discovery.recruited[0]!;
+    s = accept(accept(s, { type: "abandon" }), { type: "newRun", seed: 9 });
+    for (let round = 0; round < 3; round++) {
+      expect(s.starterOffers).toEqual([collected, collected, collected]);
+      s = accept(decodeSave(encodeSave(s)), { type: "draft", species: collected });
+    }
+    expect(accept(s, { type: "start" }).team).toHaveLength(3);
+  });
+
+  it("includes both collected species when a later draft pool has fewer than three", () => {
+    let s = firstJourney();
+    s = accept(s, { type: "abandon" });
+    s = produce(s, (d) => {
+      d.discovery = { encountered: ["mossback", "emberfox"], recruited: ["mossback", "emberfox"] };
+      d.selected = ["mossback"];
+    });
+    s = accept(s, { type: "newRun", seed: 42 });
+    expect(new Set(s.starterOffers)).toEqual(new Set(["mossback", "emberfox"]));
+    expect(decodeSave(encodeSave(s))).toEqual(s);
+    expect(() =>
+      decodeSave(JSON.stringify({ ...s, starterOffers: ["mossback", "mossback", "mossback"] })),
+    ).toThrow();
+  });
+
+  it("rejects forged offers, uncollected selections and obsolete saves", () => {
+    const s = createGame();
+    for (const change of [
+      { starterOffers: ["moonhart"] },
+      { selected: ["mossback", "emberfox"] },
+      { starterOffers: [] },
+      { version: 20 },
+    ])
+      expect(() => decodeSave(JSON.stringify({ ...s, ...change }))).toThrow();
+    expect(createGame(7)).toEqual(createGame(7));
   });
 });

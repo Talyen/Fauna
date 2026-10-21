@@ -1,8 +1,8 @@
 import { needsCampfire } from "./support";
 import { freeze } from "immer";
-import { MAX_HAND_SIZE } from "./engine";
+import { MAX_HAND_SIZE, starterCount } from "./engine";
 import { z } from "zod";
-import { CARDS, INITIAL_SPECIES, species } from "./content";
+import { CARDS, INITIAL_SPECIES, FIRST_RUN_STARTERS, species } from "./content";
 import { JOURNEY_LENGTH, encounterPacks, encounterSource, finalEncounter, bossEncounter } from "./encounters";
 import { KEYWORDS, BOONS, TALENTS, talentPoints } from "./progression";
 import type { GameState } from "./types";
@@ -80,7 +80,7 @@ const creature = z.object({
   combat: combatState.optional(),
 });
 const currentShape = z.object({
-  version: z.literal(20),
+  version: z.literal(21),
   discovery: z.object({ encountered: z.array(speciesId).max(6), recruited: z.array(speciesId).max(6) }),
   revision: z
     .number()
@@ -101,7 +101,8 @@ const currentShape = z.object({
   ]),
   unlocked: z.array(speciesId).min(5).max(6),
   wins: natural,
-  selected: z.array(speciesId).max(1),
+  selected: z.array(speciesId).max(3),
+  starterOffers: z.array(speciesId).max(3),
   roster: z.array(speciesId).max(5),
   team: z.array(creature).max(3),
   reserves: z.array(creature).max(2),
@@ -173,6 +174,13 @@ export function decodeSave(raw: string): GameState {
   };
   invalid(!unique(s.discovery.encountered) || !unique(s.discovery.recruited));
   invalid(s.discovery.recruited.some((kind) => !s.discovery.encountered.includes(kind)));
+  const starterPool = s.discovery.recruited.length ? s.discovery.recruited : FIRST_RUN_STARTERS;
+  const drafting = s.phase === "draft" && s.selected.length < starterCount(s);
+  invalid(
+    new Set(s.starterOffers).size !== (drafting ? Math.min(3, starterPool.length) : 0) ||
+      s.starterOffers.some((kind) => !starterPool.includes(kind)) ||
+      s.starterOffers.length !== (drafting ? 3 : 0),
+  );
   if (s.journey) {
     const summary = s.journey;
     invalid(
@@ -210,9 +218,10 @@ export function decodeSave(raw: string): GameState {
   } else invalid(s.encounter > 2);
   invalid(
     !unique(s.unlocked) ||
-      !unique(s.selected) ||
       INITIAL_SPECIES.some((kind) => !s.unlocked.includes(kind)) ||
-      s.selected.some((kind) => !s.unlocked.includes(kind)) ||
+      s.selected.some((kind) => !starterPool.includes(kind)) ||
+      (s.phase === "draft" && s.selected.length > starterCount(s)) ||
+      (s.phase !== "draft" && !s.discovery.recruited.length) ||
       s.wins > 0 !== s.unlocked.includes("moonhart"),
   );
   invalid(
@@ -307,7 +316,8 @@ export function decodeSave(raw: string): GameState {
       (s.reward.outcome === "next" && finalEncounter(s)) ||
         (s.reward.outcome === "victory" && !finalEncounter(s)),
     );
-    if (s.phase === "recruit") invalid(s.reward.recruits.length !== 3 || s.reward.outcome !== "next");
+    if (s.phase === "recruit")
+      invalid(s.reward.recruits.length !== encounterSource(s).enemies.length || s.reward.outcome !== "next");
     if (s.phase === "boon")
       invalid(
         s.reward.boons.length < 1 ||

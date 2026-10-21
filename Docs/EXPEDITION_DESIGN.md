@@ -4,9 +4,10 @@ These are the agreed directions from the design review. They supersede the proto
 
 ## Roster and battles
 
-- Begin with one chosen starter. A journey roster grows to five creatures: up to three deployed and two reserves. Multiple copies of a species are allowed.
-- Starter selection uses a three-column artwork grid of unlocked species. Clicking opens inspection with a Choose action; choosing returns to the grid and marks the selected creature. Begin journey is a separate action, available after choosing one starter. Inspecting or canceling never changes the choice. Choosing another replaces it.
-- The starter supplies the remembered starting lineup. Recruits fill its second and third slots before joining reserves. The encounter screen offers one Combat or Boss placeholder ArtCard that starts battle directly. Deck remains available without requiring team selection.
+- Your first journey begins with one creature, chosen from three seeded offers from the configured `FIRST_RUN_STARTERS` pool in `src/game/content.ts`. Committing Begin journey adds that creature to Collection. Inspecting and canceling do not collect it.
+- Later journeys draft three starters from collected species: choose one of three offers, three times. Each choice commits immediately and prepares the next saved offer; Begin journey becomes available after all three choices. Species may repeat across rounds. Pools smaller than three repeat species within the offer, so an early loss never prevents a new journey. With three or more collected species, each offer contains three distinct species.
+- Clicking starter artwork opens inspection with a Choose action. Browsing, canceling and reloading preserve the current offers and earlier picks. After drafting, the chosen team remains inspectable before Begin journey.
+- A journey roster grows to five creatures: up to three deployed and two reserves. Multiple copies of a species are allowed. The drafted team supplies the remembered starting lineup. On the first journey, recruits fill its second and third slots before joining reserves. The encounter screen offers one Combat or Boss placeholder ArtCard that starts battle directly. Deck remains available without requiring team selection.
 - Lineup is an optional menu dialog between battles, including ordinary reward screens. Changes save immediately. Combat swaps do not overwrite this starting lineup.
 - Only deployed living creatures act and provide passive traits. Enemy intents remain hidden.
 - During your turn, Swap opens a centered dialog with three deployed creatures and two reserves at the shared artwork size. Reserves are hidden on the battlefield.
@@ -17,7 +18,7 @@ These are the agreed directions from the design review. They supersede the proto
 - If the deployed row falls, remaining enemy attacks stop and the next player turn begins with restored Mana. Healthy reserves can still enter through Swap. Defeat requires the whole roster to fall.
 - Knocked-out card slots remain inert in saved battle zones and are skipped by ordinary draws. When the entire deployed row falls, the next hand reserves slots for incoming creatures so recovery does not require a free extra draw. These slots never render as playable cards for knocked-out owners.
 - Victory preserves roster Health and knockouts. The next battle deploys the saved starting lineup; combat effects reset.
-- Recruitment at five requires choosing one creature to release, or skipping. Replacing a starting creature updates that individual’s lineup entry.
+- Recruitment at five requires choosing one creature to release. Replacing a starting creature updates that individual’s lineup entry.
 
 ## Encounters
 
@@ -26,7 +27,7 @@ These are the agreed directions from the design review. They supersede the proto
 - Combat and Boss use blank 4:3 artwork with the encounter type below it. Campfire uses Rest beneath its location art; entering it commits a saved visit and exposes Rest as its only option. A quiet heading shows the encounter number out of eight.
 - Activating Combat or Boss immediately commits the saved encounter and starts battle. There is no enemy preview, inspection dialog or separate Begin battle action. Creature and action inspection remain available during battle.
 - Seeded gameplay chooses and saves one enemy pack when entering the encounter screen. Menus, support visits and reload never reroll enemies or consume randomness.
-- The shared enemy pool varies between runs. Initial enemy stats grow with encounter progress, with easier first encounters for a single starter. These values are playtest tuning, not final balance.
+- The shared enemy pool varies between runs. Initial enemy stats grow with encounter progress, with a one-enemy first battle and two-enemy second battle. These values are playtest tuning, not final balance.
 
 ## Keyword XP and talents
 
@@ -52,9 +53,9 @@ These are the agreed directions from the design review. They supersede the proto
 
 - Recruit from defeated enemy species after an ordinary combat victory.
 - Recruiting adds a creature to the journey roster rather than forcing an immediate active-team replacement.
-- Each ordinary combat contains three enemies. Choose a Recruit shows those exact three entries in battle order, including repeated species and species already in the roster. Recruiting creates a new individual with independent identity and battle state.
+- The first battle contains one enemy, the second contains two, and every later battle, including bosses, contains three. Choose a Recruit shows the exact defeated enemy entries in battle order, including repeated species and species already in the roster. Recruiting creates a new individual with independent identity and battle state.
 - Recruitment remains a direct commitment on the final choice, without a separate confirmation.
-- Recruit one defeated creature or skip recruitment.
+- Recruit one defeated creature whenever recruits are offered; recruitment cannot be skipped, including at a full roster. Collected species persist after release, defeat and return home. Encountering a species or unlocking it through victory does not collect it.
 - When the roster is full, choose the incoming species, then choose an existing creature to release. The final replacement choice commits immediately; canceling before that choice preserves the roster.
 
 ## Currency and items
@@ -81,7 +82,7 @@ Final victory or defeat → Journey results. Ending a started journey voluntaril
 - Results offer a single centered Main menu action. Start a new journey only from the main menu.
 - New journey resets journey totals and roster/boons while preserving permanent progress. Main menu can reopen the last results until a new journey begins; this is not a multi-journey history.
 - Development saves are disposable; obsolete formats are rejected rather than migrated. Journey totals are recorded from current-format journeys, never inferred from lifetime XP or currency.
-- Material types remain undefined and are not shown. The shared Victory shell shows compact automatic earnings and one encounter-specific choice: recruitment or boons. It has one Skip action, no Continue action. Full-roster replacement changes the contents of that same screen and may be canceled before committing.
+- Material types remain undefined and are not shown. The shared Victory shell shows compact automatic earnings and one encounter-specific choice: recruitment or boons. Only Boon choices have a Skip action; recruitment is required. There is no Continue action. Full-roster replacement changes the contents of that same screen and may be canceled before committing.
 
 See [UI design system](UI.md) for composition and interaction rules.
 

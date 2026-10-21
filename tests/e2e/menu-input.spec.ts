@@ -236,6 +236,12 @@ test("controller reconnection and background input cannot activate journey comma
 test("mouse use cancels held-stick navigation until release", async ({ page }) => {
   const pad = await controller(page);
   await page.goto("/");
+  const fresh = createGame(7);
+  const collected = fresh.starterOffers[0]!;
+  const started = accept(accept(fresh, { type: "draft", species: collected }), { type: "start" });
+  const later = accept(accept(started, { type: "abandon" }), { type: "newRun", seed: 7 });
+  await page.evaluate((data) => localStorage.setItem("fauna.save.v1", data), JSON.stringify(later));
+  await page.reload();
   await expect(page.getByRole("button", { name: "New journey", exact: true })).toBeFocused();
   await pad.frames();
   await page.evaluate(() => {

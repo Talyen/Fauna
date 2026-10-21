@@ -3,7 +3,7 @@ import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
 import { JOURNEY_LENGTH, encounterSource, encounterPacks } from "../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../src/game/save";
-import { accept, winBattle } from "./helpers";
+import { recruitChoice, accept, winBattle } from "./helpers";
 
 function start(seed = 7) {
   return accept(accept(createGame(seed), { type: "draft", species: "mossback" }), { type: "start" });
@@ -56,6 +56,7 @@ describe("journey encounters", () => {
       expect(s.encounter).toBe(index);
       expect(s.support?.encounter ?? null).toBe([1, 5].includes(index) ? index : null);
       expect(encounterSource(s).name).toBe(index % 4 === 3 ? "Boss" : "Combat");
+      expect(encounterSource(s).enemies).toHaveLength(Math.min(3, index + 1));
       const route = s.expedition;
       s = winBattle(enter(s));
       expect(["recruit", "boon", "teamSelection", "victory"]).toContain(s.phase);
@@ -67,7 +68,7 @@ describe("journey encounters", () => {
         s =
           s.roster.length < 3
             ? accept(s, { type: "recruit", species: s.reward!.recruits[0]! })
-            : accept(s, { type: "skipRecruit" });
+            : accept(s, recruitChoice(s));
         expect(decodeSave(encodeSave(s))).toEqual(s);
       }
       if (s.phase === "boon") s = accept(s, { type: "skipBoon" });

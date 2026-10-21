@@ -24,39 +24,51 @@ import {
   HAND_LIMIT,
 } from "./combat";
 import { actionValue, cardCost, enemyAbilityValue } from "./rules";
-import { CARDS, INITIAL_SPECIES, definition, species, enemyCard } from "./content";
+import { CARDS, INITIAL_SPECIES, FIRST_RUN_STARTERS, definition, species, enemyCard } from "./content";
 import { bossEncounter, encounterSource, finalEncounter, encounterPacks } from "./encounters";
 import type { Card, Command, CommandResult, GameEvent, GameState } from "./types";
 export function createGame(seed = 1): GameState {
-  return freeze(
-    {
-      version: 20,
-      support: null,
-      discovery: { encountered: [], recruited: [] },
-      revision: 0,
-      rng: seed >>> 0,
-      phase: "draft",
-      unlocked: [...INITIAL_SPECIES],
-      wins: 0,
-      selected: [],
-      roster: [],
-      reserves: [],
-      lineup: [],
-      keywordXP: {},
-      battleXP: {},
-      talents: [],
-      currency: 0,
-      boons: [],
-      reward: null,
-      journey: null,
-      team: [],
-      cards: [],
-      encounter: 0,
-      expedition: { pack: null },
-      battle: null,
-    },
-    true,
-  ) as GameState;
+  const state: GameState = {
+    version: 21,
+    support: null,
+    discovery: { encountered: [], recruited: [] },
+    revision: 0,
+    rng: seed >>> 0,
+    phase: "draft",
+    unlocked: [...INITIAL_SPECIES],
+    wins: 0,
+    selected: [],
+    starterOffers: [],
+    roster: [],
+    reserves: [],
+    lineup: [],
+    keywordXP: {},
+    battleXP: {},
+    talents: [],
+    currency: 0,
+    boons: [],
+    reward: null,
+    journey: null,
+    team: [],
+    cards: [],
+    encounter: 0,
+    expedition: { pack: null },
+    battle: null,
+  };
+  offerStarters(state);
+  return freeze(state, true);
+}
+export function starterCount(state: GameState) {
+  return state.discovery.recruited.length === 0 ? 1 : 3;
+}
+function offerStarters(state: GameState) {
+  const pool = state.discovery.recruited.length ? state.discovery.recruited : FIRST_RUN_STARTERS;
+  if (state.selected.length === starterCount(state)) {
+    state.starterOffers = [];
+    return;
+  }
+  const shuffled = shuffle(state, [...pool]);
+  state.starterOffers = Array.from({ length: 3 }, (_, index) => shuffled[index % shuffled.length]!);
 }
 const random = roll;
 function prepareEncounter(state: GameState) {
@@ -421,10 +433,15 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
     (!Number.isSafeInteger(command.seed) || command.seed < 0 || command.seed > 0xffffffff)
   )
     return reject(state, "Choose a valid journey seed.");
-  if (command.type === "draft" && (state.phase !== "draft" || !state.unlocked.includes(command.species)))
-    return reject(state, "Choose an unlocked starter.");
-  if (command.type === "start" && (state.phase !== "draft" || state.selected.length !== 1))
-    return reject(state, "Choose one starter first.");
+  if (
+    command.type === "draft" &&
+    (state.phase !== "draft" ||
+      !state.starterOffers.includes(command.species) ||
+      state.selected.length === starterCount(state))
+  )
+    return reject(state, "Choose an offered starter.");
+  if (command.type === "start" && (state.phase !== "draft" || state.selected.length !== starterCount(state)))
+    return reject(state, "Complete your starter choices first.");
   if (
     (command.type === "play" || command.type === "endTurn" || command.type === "devWinBattle") &&
     (state.phase !== "battle" || !b)
@@ -483,8 +500,8 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         : !!command.replace))
   )
     return reject(state, "Choose an offered species and, if full, a creature to release.");
-  if (command.type === "skipRecruit" && state.phase !== "recruit")
-    return reject(state, "There is no recruitment choice.");
+  if (command.type === "skipRecruit" && (state.phase !== "recruit" || !!state.reward?.recruits.length))
+    return reject(state, "Choose a creature to recruit.");
   if (
     command.type === "chooseBoon" &&
     (state.phase !== "boon" ||
@@ -531,10 +548,16 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
     draft.revision++;
     switch (command.type) {
       case "draft": {
-        draft.selected = [command.species];
+        draft.selected.push(command.species);
+        offerStarters(draft);
         break;
       }
       case "start":
+        if (draft.discovery.recruited.length === 0) {
+          draft.discovery.recruited.push(...draft.selected);
+          for (const kind of draft.selected)
+            if (!draft.discovery.encountered.includes(kind)) draft.discovery.encountered.push(kind);
+        }
         draft.team = draft.selected.map((kind, i) => ({
           id: `ally-${i}`,
           species: kind,
@@ -776,6 +799,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         const fresh = createGame(command.seed);
         Object.assign(draft, fresh, {
           revision: state.revision + 1,
+          rng: command.seed >>> 0,
           unlocked: [...state.unlocked],
           discovery: {
             encountered: [...state.discovery.encountered],
@@ -786,12 +810,14 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
           talents: [...state.talents],
           currency: state.currency,
         });
+        offerStarters(draft);
         break;
       }
       case "abandon":
         draft.support = null;
         if (draft.phase === "draft") {
           draft.selected = [];
+          offerStarters(draft);
           break;
         }
         bankBattleXP(draft);

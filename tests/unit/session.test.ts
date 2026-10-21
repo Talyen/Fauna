@@ -117,7 +117,7 @@ describe("save orchestration", () => {
     });
     await s.load();
     s.command({ type: "draft", species: "mossback" });
-    s.command({ type: "draft", species: "emberfox" });
+    s.command({ type: "start" });
     const quitting = s.quit();
     expect(quit).toBe(false);
     release();
@@ -206,7 +206,7 @@ describe("desktop close handshake", () => {
     failure.command({ type: "draft", species: "mossback" });
     expect(await requestClose!()).toBe(false);
     expect(failure.store.getState().closing).toBe(false);
-    expect(failure.command({ type: "draft", species: "emberfox" })).toBe(true);
+    expect(failure.command({ type: "start" })).toBe(true);
     await failure.dispose();
   });
 });
@@ -226,6 +226,6 @@ it("rejects obsolete development saves and recovers a current-format backup with
   expect(memory.getItem("fauna.save.v1")).toBe(obsolete);
   session.command({ type: "endTurn" });
   await session.flush();
-  expect(JSON.parse(memory.getItem("fauna.save.v1")!).version).toBe(20);
+  expect(JSON.parse(memory.getItem("fauna.save.v1")!).version).toBe(21);
   await session.dispose();
 });

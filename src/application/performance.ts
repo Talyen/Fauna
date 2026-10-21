@@ -9,7 +9,9 @@ export function performanceCases(seed = 42) {
   const fixture = structuredClone(createGame(seed));
   const kinds: SpeciesId[] = ["mossback", "emberfox", "stormfin", "silkmoth"];
   fixture.roster = kinds;
-  fixture.selected = [kinds[0]!];
+  fixture.selected = kinds.slice(0, 3);
+  fixture.starterOffers = [];
+  fixture.discovery = { encountered: [...kinds], recruited: [...kinds] };
   fixture.team = kinds.slice(0, 3).map((kind, i) => ({
     id: `ally-${i}`,
     species: kind,

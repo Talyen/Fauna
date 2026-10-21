@@ -11,7 +11,7 @@ import { decodeSave, encodeSave } from "../../src/game/save";
 import { previewCard } from "../../src/game/engine";
 import { BOONS } from "../../src/game/progression";
 import { definition } from "../../src/game/content";
-import { accept, run, winBattle } from "./helpers";
+import { recruitChoice, accept, run, winBattle } from "./helpers";
 import type { GameEvent } from "../../src/game/types";
 function fixture() {
   const state = structuredClone(run());
@@ -63,7 +63,8 @@ it("doubles only the first allied direct Burn hit across swaps, previews and res
     accept(swappable, { type: "swap", activeId: swappable.team[1]!.id, reserve: reserve.id }).battle!
       .meteoriteUsed,
   ).toBe(true);
-  const next = accept(winBattle(played), { type: "skipRecruit" });
+  const won = winBattle(played);
+  const next = accept(won, recruitChoice(won));
   expect(next.phase).toBe("teamSelection");
   expect(accept(next, { type: "beginBattle" }).battle!.meteoriteUsed).toBe(false);
 });

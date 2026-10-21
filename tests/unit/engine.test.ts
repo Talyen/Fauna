@@ -4,14 +4,13 @@ import { createGame, dispatch } from "../../src/game/engine";
 import { combat, hit } from "../../src/game/combat";
 import { definition, species, SPECIES } from "../../src/game/content";
 import { decodeSave, encodeSave, validateContent } from "../../src/game/save";
-import { accept, policy, run, teamRun, winBattle } from "./helpers";
+import { recruitChoice, accept, policy, run, teamRun, winBattle } from "./helpers";
 describe("game commands", () => {
   it("validates authored content and starts with one unlocked creature and its three cards", () => {
     validateContent();
     let s = createGame();
     expect(dispatch(s, { type: "start" }).accepted).toBe(false);
     expect(dispatch(s, { type: "draft", species: "moonhart" }).accepted).toBe(false);
-    s = accept(s, { type: "draft", species: "mossback" });
     s = accept(s, { type: "draft", species: "mossback" });
     expect(s.selected).toEqual(["mossback"]);
     s = accept(s, { type: "start" });
@@ -21,16 +20,6 @@ describe("game commands", () => {
     expect(s.cards).toHaveLength(3);
     expect(s.battle!.hand).toHaveLength(3);
     expect(s.battle!.mana).toBe(4);
-  });
-  it("replaces the chosen starter without accumulating choices or consuming RNG", () => {
-    let s = createGame();
-    for (const kind of ["mossback", "emberfox", "stormfin"] as const)
-      s = accept(s, { type: "draft", species: kind });
-    expect(s.selected).toEqual(["stormfin"]);
-    const result = dispatch(s, { type: "draft", species: "moonhart" });
-    expect(result.accepted).toBe(false);
-    expect(result.state).toBe(s);
-    expect(s.rng).toBe(createGame().rng);
   });
   it("publishes deeply frozen state and leaves the previous state untouched", () => {
     const s = run();
@@ -161,7 +150,7 @@ describe("game commands", () => {
       const bank = s.currency;
       expect(dispatch(s, { type: "skipBoon" }).accepted).toBe(false);
       expect(s.currency).toBe(bank);
-      if (s.phase === "recruit") s = accept(s, { type: "skipRecruit" });
+      if (s.phase === "recruit") s = accept(s, recruitChoice(s));
       if (s.phase === "boon") s = accept(s, { type: "skipBoon" });
       if (s.phase === "teamSelection") s = accept(s, { type: "beginBattle" });
     }

@@ -82,7 +82,7 @@ interface JourneySummary {
   lastBattle: { xp: KeywordXP; currency: number } | null;
 }
 export interface GameState {
-  version: 20;
+  version: 21;
   discovery: { encountered: SpeciesId[]; recruited: SpeciesId[] };
   revision: number;
   rng: number;
@@ -91,6 +91,7 @@ export interface GameState {
   unlocked: SpeciesId[];
   wins: number;
   selected: SpeciesId[];
+  starterOffers: SpeciesId[];
   /** Species counts, including copies; individual state lives in team and reserves. */
   roster: SpeciesId[];
   reserves: Creature[];

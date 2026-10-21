@@ -79,6 +79,7 @@ describe("recruiting creature copies", () => {
         { type: "beginBattle" },
       ),
     );
+    expect(dispatch(s, { type: "skipRecruit" }).state).toBe(s);
     expect(dispatch(s, { type: "recruit", species: "emberfox" }).accepted).toBe(false);
     s = accept(s, { type: "recruit", species: "emberfox", replace: "ally-1" });
     const all = [...s.team, ...s.reserves];

@@ -1,3 +1,4 @@
+import { species } from "../../src/game/content";
 import { freshCombat } from "../../src/game/combat";
 import { combat, hit } from "../../src/game/combat";
 import { assetUrl } from "../../src/ui/assets";
@@ -101,7 +102,7 @@ describe("player interface", () => {
     await user.click(screen.getByRole("button", { name: "Continue" }));
     expect(screen.getByRole("heading", { name: "Victory", level: 1 })).toBeTruthy();
     expect(screen.getByRole("heading", { name: "Choose a Recruit" })).toBeTruthy();
-    expect(document.querySelectorAll(".recruit-options .creature-card")).toHaveLength(3);
+    expect(document.querySelectorAll(".recruit-options .creature-card")).toHaveLength(1);
     expect(screen.getByText("20", { selector: ".sr-only" })).toBeTruthy();
     await waitFor(() =>
       expect(
@@ -114,7 +115,8 @@ describe("player interface", () => {
     expect(progress.getAttribute("aria-valuemax")).toBe("30");
     expect(screen.queryByText(/keyword XP|talent point|4 \/ 40 XP/)).toBeNull();
     expect(screen.queryByRole("button", { name: "Continue" })).toBeNull();
-    await user.click(screen.getByRole("button", { name: "Skip" }));
+    expect(screen.queryByRole("button", { name: "Skip" })).toBeNull();
+    await user.click(screen.getByRole("button", { name: /^Recruit / }));
     expect(session.store.getState().game.phase).toBe("teamSelection");
     expect(screen.queryByRole("heading", { name: "Choose a Boon" })).toBeNull();
     await session.dispose();
@@ -190,10 +192,12 @@ describe("player interface", () => {
     await user.click(screen.getByRole("button", { name: "New journey" }));
     const enter = screen.getByRole("button", { name: "Begin journey" });
     expect((enter as HTMLButtonElement).disabled).toBe(true);
-    await user.click(screen.getByRole("button", { name: "Inspect Mossback" }));
+    const chosen = session.store.getState().game.starterOffers[0]!;
+    const name = species(chosen).name;
+    await user.click(screen.getByRole("button", { name: `Inspect ${name}` }));
     expect(session.store.getState().game.selected).toEqual([]);
-    await user.click(screen.getByRole("button", { name: "Choose Mossback" }));
-    expect(session.store.getState().game.selected).toEqual(["mossback"]);
+    await user.click(screen.getByRole("button", { name: `Choose ${name}` }));
+    expect(session.store.getState().game.selected).toEqual([chosen]);
     await user.click(enter);
     expect(session.store.getState().game.phase).toBe("teamSelection");
     vi.stubGlobal(
@@ -210,6 +214,31 @@ describe("player interface", () => {
       await session.flush();
     });
     expect(JSON.parse(localStorage.getItem("fauna.save.v1")!).phase).toBe("battle");
+    await session.dispose();
+  });
+  it("requires all three collection draft picks through inspection before beginning a later journey", async () => {
+    const fresh = createGame(7);
+    const starter = fresh.starterOffers[0]!;
+    const started = accept(accept(fresh, { type: "draft", species: starter }), { type: "start" });
+    const returned = accept(started, { type: "abandon" });
+    localStorage.setItem("fauna.save.v1", JSON.stringify(returned));
+    const session = createSession(createBrowserPlatform(localStorage), 7);
+    await session.load();
+    render(<App session={session} />);
+    const user = userEvent.setup();
+    await user.click(screen.getByRole("button", { name: "New journey" }));
+    const begin = screen.getByRole("button", { name: "Begin journey" }) as HTMLButtonElement;
+    for (let round = 0; round < 3; round++) {
+      expect(begin.disabled).toBe(true);
+      expect(screen.getByRole("heading", { name: `Choose your starter (${round + 1} of 3)` })).toBeTruthy();
+      await user.click(screen.getAllByRole("button", { name: `Inspect ${species(starter).name}` })[0]!);
+      await user.click(screen.getByRole("button", { name: `Choose ${species(starter).name}` }));
+      expect(session.store.getState().game.selected).toHaveLength(round + 1);
+      expect(screen.queryByRole("dialog")).toBeNull();
+    }
+    expect(begin.disabled).toBe(false);
+    await user.click(begin);
+    expect(session.store.getState().game.team).toHaveLength(3);
     await session.dispose();
   });
   it("inspects the focused creature copy with its current health and Block using the keyboard", async () => {

@@ -6,19 +6,21 @@ import { talentPoints, xpThreshold, keywordProgress } from "../../src/game/progr
 import { accept, winBattle } from "./helpers";
 
 it("discovers only committed encounters and retains knowledge independently of starter unlocks", () => {
-  let state = accept(accept(createGame(), { type: "draft", species: "emberfox" }), { type: "start" });
-  expect(state.discovery.encountered).toEqual([]);
+  const fresh = createGame();
+  const starter = fresh.starterOffers[0]!;
+  let state = accept(accept(fresh, { type: "draft", species: starter }), { type: "start" });
+  expect(state.discovery.encountered).toEqual([starter]);
   const rejected = dispatch(state, { type: "endTurn" });
   expect(rejected.state).toBe(state);
   state = accept(state, { type: "beginBattle" });
   expect(state.discovery.encountered).toEqual([
-    ...new Set(state.battle!.enemies.map((enemy) => enemy.species)),
+    ...new Set([starter, ...state.battle!.enemies.map((enemy) => enemy.species)]),
   ]);
   const unlocked = state.unlocked;
   state = winBattle(state);
   const kind = state.reward!.recruits[0]!;
   state = accept(state, { type: "recruit", species: kind });
-  expect(state.discovery.recruited).toEqual([kind]);
+  expect(state.discovery.recruited).toEqual([...new Set([starter, kind])]);
   expect(state.unlocked).toEqual(unlocked);
   state = accept(state, { type: "abandon" });
   const knowledge = state.discovery;

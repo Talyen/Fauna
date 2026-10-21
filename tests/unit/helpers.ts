@@ -16,6 +16,8 @@ export function teamRun(seed: number, kinds: SpeciesId[]) {
       d.wins = 1;
     }
     d.selected = [kinds[0]!];
+    d.starterOffers = [];
+    d.discovery = { encountered: [...new Set(kinds)], recruited: [...new Set(kinds)] };
     d.roster = [...kinds];
     d.team = kinds.map((kind, i) => ({
       id: `ally-${i}`,
@@ -67,9 +69,16 @@ export function winBattle(s = run()) {
   const card = s.battle!.hand[0]!;
   return accept(s, { type: "play", cardId: card, targetId: "enemy-0" });
 }
+export function recruitChoice(s: GameState): Command {
+  return {
+    type: "recruit",
+    species: s.reward!.recruits[0]!,
+    ...(s.roster.length === 5 ? { replace: [...s.team, ...s.reserves].at(-1)!.id } : {}),
+  };
+}
 export function policy(s: GameState): Command {
   if (s.phase === "teamSelection") return { type: "beginBattle" };
-  if (s.phase === "recruit") return { type: "skipRecruit" };
+  if (s.phase === "recruit") return recruitChoice(s);
   if (s.phase === "boon") return { type: "chooseBoon", boon: s.reward!.boons[0]! };
   if (s.phase === "campfire") return { type: "rest" };
   const b = s.battle!;

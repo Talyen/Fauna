@@ -6,7 +6,7 @@ import { INITIAL_SPECIES, species } from "../../src/game/content";
 import { BOONS } from "../../src/game/progression";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { previewPlay } from "../../src/game/preview";
-import { accept, run, winBattle, victoryReady, bossReward } from "./helpers";
+import { recruitChoice, accept, run, winBattle, victoryReady, bossReward } from "./helpers";
 
 function startedJourney() {
   return accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
@@ -26,7 +26,7 @@ describe("journey earnings and results", () => {
     expect(s.journey!.xp).toEqual(s.reward!.xp);
     const receipt = s.journey!.lastBattle;
     expect(dispatch(s, { type: "skipBoon" }).state).toBe(s);
-    s = accept(s, { type: "skipRecruit" });
+    s = accept(s, recruitChoice(s));
     expect(s.phase).toBe("teamSelection");
     expect(s.reward).toBeNull();
     expect(s.journey!.lastBattle).toEqual(receipt);
@@ -139,7 +139,7 @@ describe("journey earnings and results", () => {
     let s = startedJourney();
     for (let i = 0; i < 8; i++) {
       s = winBattle(accept(s, { type: "beginBattle" }));
-      if (s.phase === "recruit") s = accept(s, { type: "skipRecruit" });
+      if (s.phase === "recruit") s = accept(s, recruitChoice(s));
       if (s.phase === "boon") s = accept(s, { type: "skipBoon" });
     }
     expect(s.phase).toBe("victory");
@@ -158,11 +158,12 @@ describe("journey earnings and results", () => {
     expect(s.journey).toBeNull();
     expect(s.keywordXP).toEqual(oldXP);
     expect(s.currency).toBe(200);
-    s = accept(accept(s, { type: "draft", species: "mossback" }), { type: "start" });
+    for (let pick = 0; pick < 3; pick++) s = accept(s, { type: "draft", species: s.starterOffers[0]! });
+    s = accept(s, { type: "start" });
     expect(s.journey).toMatchObject({ outcome: null, victories: 0, currency: 0, xp: {}, unlocks: [] });
     for (let i = 0; i < 8; i++) {
       s = winBattle(accept(s, { type: "beginBattle" }));
-      if (s.phase === "recruit") s = accept(s, { type: "skipRecruit" });
+      if (s.phase === "recruit") s = accept(s, recruitChoice(s));
       if (s.phase === "boon") s = accept(s, { type: "skipBoon" });
     }
     expect(s.journey!.unlocks).toEqual([]);

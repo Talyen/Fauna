@@ -31,6 +31,7 @@ it("pages the collection, resets filters and keeps every creature reachable afte
   vi.spyOn(HTMLElement.prototype, "clientWidth", "get").mockImplementation(() => width);
   const game = produce(createGame(), (draft) => {
     draft.discovery.encountered = SPECIES.map((entry) => entry.id);
+    draft.discovery.recruited = SPECIES.map((entry) => entry.id);
   });
   const before = structuredClone(game);
   const inspect = vi.fn();
@@ -59,12 +60,38 @@ it("pages the collection, resets filters and keeps every creature reachable afte
   width = 280;
   act(() => resize());
   expect(screen.getAllByRole("button", { name: /^Inspect / }).length).toBeLessThanOrEqual(2);
-  await user.click(screen.getByRole("tab", { name: "Unknown" }));
+  await user.click(screen.getByRole("tab", { name: "Uncollected" }));
   expect(screen.getByRole("img", { name: "No creatures in this view" })).toBeTruthy();
   expect(screen.queryByRole("button", { name: "Next page" })).toBeNull();
-  await user.click(screen.getByRole("tab", { name: "Known" }));
+  await user.click(screen.getByRole("tab", { name: "Collected" }));
   expect(screen.getByRole("status").textContent).toMatch(/^1 \/ /);
   await user.click(screen.getAllByRole("button", { name: /^Inspect / })[0]!);
   expect(inspect).toHaveBeenCalledWith({ species: SPECIES[0]!.id });
   expect(game).toEqual(before);
+});
+
+it("keeps encountered and victory-unlocked creatures out of the collected filter until recruited", async () => {
+  vi.stubGlobal(
+    "ResizeObserver",
+    class {
+      observe() {}
+      disconnect() {}
+    },
+  );
+  const game = produce(createGame(), (draft) => {
+    draft.discovery.encountered = ["mossback", "moonhart"];
+    draft.discovery.recruited = ["mossback"];
+    draft.unlocked.push("moonhart");
+    draft.wins = 1;
+  });
+  render(
+    <TooltipProvider>
+      <Collection game={game} inspect={vi.fn()} back={vi.fn()} />
+    </TooltipProvider>,
+  );
+  const user = userEvent.setup();
+  await user.click(screen.getByRole("tab", { name: "Collected" }));
+  expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(1);
+  expect(screen.getByRole("button", { name: "Inspect Mossback" })).toBeTruthy();
+  expect(screen.queryByRole("button", { name: "Inspect Moonhart" })).toBeNull();
 });

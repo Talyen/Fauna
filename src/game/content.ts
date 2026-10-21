@@ -161,6 +161,13 @@ export function enemyCard(card: CardDefinition): CardDefinition {
     effects: card.effects?.filter((effect) => ["damage", "status", "cleanse", "purge"].includes(effect.kind)),
   };
 }
+export const FIRST_RUN_STARTERS: readonly SpeciesId[] = [
+  "mossback",
+  "emberfox",
+  "stormfin",
+  "silkmoth",
+  "briartooth",
+];
 export const INITIAL_SPECIES = SPECIES.slice(0, 5).map((s) => s.id);
 export function species(id: SpeciesId): Species {
   const result = SPECIES.find((s) => s.id === id);

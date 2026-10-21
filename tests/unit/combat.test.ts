@@ -12,7 +12,7 @@ import {
 import { dispatch } from "../../src/game/engine";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { cardKeywords } from "../../src/game/progression";
-import { accept, run, victoryReady } from "./helpers";
+import { recruitChoice, accept, run, victoryReady } from "./helpers";
 
 function packet(
   type: Parameters<typeof hit>[4],
@@ -197,7 +197,7 @@ describe("combat commands and journey health", () => {
       d.battle!.draw = d.cards.filter((c) => c.id !== attack.id).map((c) => c.id);
     });
     s = accept(s, { type: "play", cardId: attack.id, targetId: "enemy-0" });
-    s = accept(s, { type: "skipRecruit" });
+    s = accept(s, recruitChoice(s));
     expect(s.team.map((c) => c.health)).toEqual([0, 7, 26]);
     s = accept(decodeSave(encodeSave(s)), { type: "beginBattle" });
     expect(s.team.map((c) => c.health)).toEqual([0, 7, 26]);

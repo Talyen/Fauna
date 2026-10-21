@@ -3,11 +3,11 @@ import { produce } from "immer";
 import { BOONS } from "../../src/game/progression";
 import { createGame, dispatch } from "../../src/game/engine";
 import { encodeSave, decodeSave } from "../../src/game/save";
-import { accept, winBattle } from "./helpers";
+import { recruitChoice, accept, winBattle } from "./helpers";
 function merchant() {
   let s = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
   s = winBattle(accept(s, { type: "beginBattle" }));
-  return accept(s, { type: "skipRecruit" });
+  return accept(s, recruitChoice(s));
 }
 it("saves an atomic purchase, rejects repeats and leaves the exact destination offers", () => {
   const s = merchant();
@@ -33,7 +33,7 @@ it("rejects stale and unaffordable purchases without changing state or RNG", () 
 it("offers no support visit after the second ordinary victory", () => {
   let s = merchant();
   s = winBattle(accept(s, { type: "beginBattle" }));
-  s = accept(s, { type: "skipRecruit" });
+  s = accept(s, recruitChoice(s));
   expect(s.encounter).toBe(2);
   expect(s.support).toBeNull();
   expect(decodeSave(encodeSave(s))).toEqual(s);
@@ -51,7 +51,7 @@ it("preserves eight battles after Merchant purchases", () => {
       expect(s.reward!.boons.length).toBeGreaterThan(0);
       s = accept(s, { type: "chooseBoon", boon: s.reward!.boons[0]! });
     }
-    if (s.phase === "recruit") s = accept(s, { type: "skipRecruit" });
+    if (s.phase === "recruit") s = accept(s, recruitChoice(s));
     expect(decodeSave(encodeSave(s))).toEqual(s);
   }
   expect(s.journey!.victories).toBe(8);
@@ -90,7 +90,7 @@ it.each([BOONS.length - 2, BOONS.length - 1, BOONS.length])(
     let s = merchant();
     for (let i = 0; i < 2; i++) {
       s = winBattle(accept(s, { type: "beginBattle" }));
-      s = accept(s, { type: "skipRecruit" });
+      s = accept(s, recruitChoice(s));
     }
     // Explicit loadout fixture; these Boons are not claimed as earned purchases.
     s = produce(s, (d) => {
@@ -111,7 +111,7 @@ it("discounts each new Merchant with Favor and persists the paid price", () => {
   for (let battle = 0; battle < 4; battle++) {
     state = winBattle(accept(state, { type: "beginBattle" }));
     if (state.phase === "boon") state = accept(state, { type: "skipBoon" });
-    if (state.phase === "recruit") state = accept(state, { type: "skipRecruit" });
+    if (state.phase === "recruit") state = accept(state, recruitChoice(state));
   }
   expect(state.support!.stock.map((slot) => slot.price)).toEqual([13, 13]);
   const before = state.currency;
@@ -131,6 +131,6 @@ it("adds Smuggler's Map to the settled reward once without duplicating combat ea
   expect(state.currency).toBe(22);
   expect(state.reward!.currency).toBe(22);
   expect(state.journey!.currency).toBe(22);
-  state = accept(decodeSave(encodeSave(state)), { type: "skipRecruit" });
+  state = accept(decodeSave(encodeSave(state)), recruitChoice(state));
   expect(state.currency).toBe(22);
 });
