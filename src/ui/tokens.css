@@ -50,6 +50,8 @@
   --error: #ffc4ad;
   --notice: var(--secondary);
   --control-height: 44px;
+  --compact-control-size: 32px;
+  --compact-icon-size: 16px;
   --main-menu-button-width: 180px;
   --settings-screen-width: 800px;
   --boon-dialog-width: 720px;
@@ -89,7 +91,6 @@
   --motion-mana-glint: 650ms;
   --reward-stagger: 75ms;
   --swap-arc-height: 32px;
-  --menu-icon-journey: #14532d;
   --menu-icon-results: #facc15;
   --menu-icon-lineup: #38bdf8;
   --menu-icon-talents: #c084fc;

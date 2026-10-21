@@ -26,8 +26,7 @@ import {
   ArrowLeftRight,
   Repeat,
   Pause,
-  Play,
-  Compass,
+  Swords,
   Trophy,
   Users,
   Sparkles,
@@ -355,11 +354,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           }
         }}
       >
-        {home && !active ? (
-          <Compass aria-hidden="true" className="menu-icon-journey" />
-        ) : (
-          <Play aria-hidden="true" className="menu-icon-journey" />
-        )}
+        <Swords aria-hidden="true" />
         {home ? (active ? "Continue" : "New journey") : "Resume"}
       </Button>
       {home && ["victory", "defeat"].includes(game.phase) ? (
@@ -661,7 +656,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="menu-button"
+                    className="menu-button compact-icon-control"
                     aria-label="Open menu"
                     onClick={openMenu}
                   >
@@ -672,7 +667,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="skip-combat-control"
+                    className="skip-combat-control compact-icon-control"
                     aria-label="Skip combat"
                     onClick={() => send({ type: "devWinBattle" })}
                   >
@@ -683,7 +678,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="autoplay-control"
+                    className="autoplay-control compact-icon-control"
                     aria-label="Auto-play"
                     aria-pressed={autoplay}
                     onClick={() => setAutoplay(!autoplay)}

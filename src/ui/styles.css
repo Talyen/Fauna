@@ -151,9 +151,6 @@ strong {
   );
   padding: var(--space-12) var(--screen-section-gap);
 }
-.menu-icon-journey {
-  color: var(--menu-icon-journey);
-}
 .menu-icon-results {
   color: var(--menu-icon-results);
 }
@@ -970,7 +967,7 @@ strong {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--screen-item-gap);
+  gap: var(--screen-section-gap);
 }
 .screen-heading > h1 {
   margin: 0;
