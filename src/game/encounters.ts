@@ -21,6 +21,9 @@ export const COMBAT_PACKS = [
   ["emberback", "mossguard", "silkmoth"],
   ["briartooth", "emberback", "stormfin"],
   ["silkmoth", "emberback", "mossguard"],
+  ["prismram", "mossguard", "silkmoth"],
+  ["stormfin", "prismram", "emberback"],
+  ["briartooth", "silkmoth", "prismram"],
 ] as const;
 export const BOSSES = [
   {
@@ -84,7 +87,7 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
           ? "burn"
           : kind === "stormfin"
             ? "stun"
-            : kind === "silkmoth" || kind === "moonhart"
+            : kind === "silkmoth" || kind === "moonhart" || kind === "prismram"
               ? "light"
               : "nature",
     })),

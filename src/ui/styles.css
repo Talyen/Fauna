@@ -1326,6 +1326,10 @@ strong {
 [data-keyword="cleanse"] {
   color: var(--keyword-cleanse);
 }
+[data-combat-tone="reflect"],
+[data-keyword="reflect"] {
+  color: var(--keyword-reflect);
+}
 [data-combat-tone="purge"],
 [data-keyword="purge"] {
   color: var(--keyword-purge);

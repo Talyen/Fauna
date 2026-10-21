@@ -220,6 +220,7 @@
   --keyword-leech: #9f1239;
   --keyword-cleanse: #5eead4;
   --keyword-purge: #e879f9;
+  --keyword-reflect: #c4b5fd;
   --damage-physical: var(--keyword-physical);
   --damage-poison: var(--keyword-poison);
   --damage-nature: var(--keyword-nature);

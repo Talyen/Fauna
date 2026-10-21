@@ -14,7 +14,10 @@ it("resolves authored tiers and falls back for undefined star tiers", () => {
       const game = produce(createGame(), (draft) => {
         if (copies) draft.discovery.recruited[kind.id] = copies;
       });
-      const rank = kind.id === "mossguard" || kind.id === "emberback" ? Math.max(0, copies - 1) : 0;
+      const rank =
+        kind.id === "mossguard" || kind.id === "emberback" || kind.id === "prismram"
+          ? Math.max(0, copies - 1)
+          : 0;
       expect(creaturePassive(game, kind.id)).toEqual({ rank, ...kind.passiveTiers[rank]! });
     }
   }

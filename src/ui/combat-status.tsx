@@ -5,7 +5,7 @@ import { motionValue } from "./motion-values";
 import { useEffect, useLayoutEffect, useState, useRef } from "react";
 import { Hourglass, Skull, Timer } from "lucide-react";
 import type { CombatState } from "../game/types";
-import { KEYWORD_DEFINITIONS } from "../game/keywords";
+import { isKeywordId, KEYWORD_DEFINITIONS } from "../game/keywords";
 import { KeywordIcon } from "./keyword-icon";
 import { Button } from "../components/ui/button";
 import { Tooltip, TooltipTrigger, TooltipContent } from "../components/ui/tooltip";
@@ -22,6 +22,7 @@ const statusOrder: readonly string[] = [
   "freeNature",
   "freeLight",
   "freeCard",
+  "reflect",
 ];
 type Status = { id: string; text: string; count: number; exit?: boolean; changed?: boolean };
 export function combatStatuses(combat?: CombatState): Status[] {
@@ -62,6 +63,7 @@ export function combatStatuses(combat?: CombatState): Status[] {
       ["freeNature", Number(combat.freeNature), "Windstep: next Nature card is free"],
       ["freeLight", Number(combat.freeLight), "Divine Favor: next Light card is free"],
       ["freeCard", Number(combat.freeCard), "Free Follow-up: next card is free"],
+      ["reflect", Number(combat.reflect), `Reflect: ${KEYWORD_DEFINITIONS.reflect.description}`],
     ] as const;
     for (const [id, count, text] of pending) if (count) entries.push({ id, count, text });
   }
@@ -147,11 +149,7 @@ export function CombatStatus({ combat, details = false }: { combat?: CombatState
               key={s.count}
               className={s.exit ? undefined : s.changed ? "status-changed" : "status-enter"}
             >
-              {stats.includes(s.id as (typeof stats)[number]) ? (
-                <KeywordIcon id={s.id as (typeof stats)[number]} />
-              ) : (
-                <Icon aria-hidden="true" />
-              )}
+              {isKeywordId(s.id) ? <KeywordIcon id={s.id} /> : <Icon aria-hidden="true" />}
             </span>
           </Button>
         </TooltipTrigger>

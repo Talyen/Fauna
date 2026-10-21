@@ -104,6 +104,13 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Cleansed",
       "Cleansing",
     ]),
+    reflect: entry(
+      "Reflect",
+      "status",
+      "active",
+      "Redirect the next harmful status effect to a random living enemy at its original strength; Direct damage still lands; Reflected effects cannot be reflected again; Does not stack",
+      ["Reflection", "Reflected", "Reflecting"],
+    ),
     purge: entry("Purge", "effect", "active", "Remove beneficial effects from an enemy", [
       "Purges",
       "Purged",

@@ -21,6 +21,7 @@ const combatState = z
     freeNature: z.boolean(),
     freeLight: z.boolean(),
     freeCard: z.boolean(),
+    reflect: z.boolean(),
     desperateGuardUsed: z.boolean(),
     armor: natural,
     thorns: natural,
@@ -80,7 +81,7 @@ const creature = z.object({
   combat: combatState.optional(),
 });
 const currentShape = z.object({
-  version: z.literal(24),
+  version: z.literal(25),
   discovery: z.object({
     encountered: z.array(speciesId).max(SPECIES.length),
     recruited: z.partialRecord(

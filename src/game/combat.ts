@@ -18,6 +18,7 @@ export function freshCombat(): CombatState {
     freeNature: false,
     freeLight: false,
     freeCard: false,
+    reflect: false,
     desperateGuardUsed: false,
     armor: 0,
     thorns: 0,
@@ -276,7 +277,7 @@ export function removeEffects(
   const statuses =
     kind === "cleanse"
       ? (["burn", "poison", "bleed", "stun", "freeze"] as const)
-      : (["armor", "thorns", "dodge"] as const);
+      : (["armor", "thorns", "dodge", "reflect"] as const);
   if (kind === "purge" && unit.block > 0 && count > 0) {
     unit.block = 0;
     removedStatuses.push("block");
@@ -292,8 +293,9 @@ export function removeEffects(
     count--;
   }
   for (const status of statuses)
-    if (count > 0 && stats[status] > 0) {
-      stats[status] = 0;
+    if (count > 0 && Number(stats[status]) > 0) {
+      if (status === "reflect") stats.reflect = false;
+      else stats[status] = 0;
       if (kind === "cleanse") {
         cleansed++;
         delete stats.statusSources[status as "burn" | "poison" | "bleed"];
@@ -340,6 +342,168 @@ function deferLeech(target: Combatant, source: Combatant, amount: number) {
   if (entry) entry.amount += gained;
   else if (gained) stats.bleedLeech.push({ sourceId: source.id, amount: gained });
 }
+/** Status reflection transfers buildup without repeating damage or allowing another reflection. */
+function applyHarmfulStatus(
+  state: GameState,
+  source: Combatant,
+  target: Combatant,
+  damage: number,
+  type: DamageType,
+  events: GameEvent[],
+  options: { beforeHealth: number; leech?: boolean; reflected?: boolean },
+): { armorBroken: boolean; appliedControl: boolean; reflected: boolean } {
+  if (type !== "burn" && type !== "poison" && type !== "bleed" && type !== "stun" && type !== "freeze")
+    return { armorBroken: false, appliedControl: false, reflected: false };
+  const stats = combat(target);
+  const alliedSource = !("maxHealth" in source),
+    alliedTarget = !("maxHealth" in target);
+  const before = options.beforeHealth;
+  let appliedControl = false,
+    armorBroken = false;
+  const immune =
+    (type === "stun" || type === "freeze") &&
+    (stats.controlled ||
+      stats.skipped ||
+      stats.cooldown > 0 ||
+      (type === "stun" && alliedTarget && target.block > 0 && hasTalent(state, "block.grounding")));
+  if (target.health > 0 && !options.reflected && !immune && stats[type] < STACK_LIMIT) {
+    const enemies = (alliedTarget ? (state.battle?.enemies ?? []) : state.team).filter(
+      (unit) => unit.health > 0,
+    );
+    const chance = creaturePassive(alliedTarget ? state : undefined, target.species).effects.reduce(
+      (sum, effect) => sum + (effect.kind === "statusReflection" ? effect.amount : 0),
+      0,
+    );
+    if (enemies.length && (stats.reflect || (chance > 0 && roll(state) < chance / 100))) {
+      const recipient = enemies[Math.floor(roll(state) * enemies.length)]!;
+      stats.reflect = false;
+      events.push({
+        kind: "status",
+        actorId: target.id,
+        targetId: target.id,
+        status: "reflect",
+        affectedStatus: type,
+        outcome: "apply",
+        text: `${unitName(target)} reflects ${type} to ${unitName(recipient)}`,
+      });
+      const reflected = applyHarmfulStatus(state, target, recipient, damage, type, events, {
+        beforeHealth: recipient.health,
+        reflected: true,
+      });
+      if (reflected.appliedControl) controlRewards(state, target, recipient, type, events);
+      if (reflected.armorBroken) triggerArmorBreak(state, recipient, events);
+      return { armorBroken: false, appliedControl: false, reflected: true };
+    }
+  }
+  if (type === "burn" || type === "poison" || type === "bleed") {
+    const beforeStacks = stats[type];
+    stats[type] = Math.min(STACK_LIMIT, stats[type] + damage);
+    stats.statusSources[type] = source.id;
+    if (type === "bleed" && options.leech) deferLeech(target, source, damage);
+    events.push({
+      kind: "status",
+      targetId: target.id,
+      status: type,
+      outcome: "gain",
+      amount: stats[type] - beforeStacks,
+      text: `${unitName(target)} gains ${stats[type] - beforeStacks} ${type}.`,
+    });
+  }
+  if (
+    (type === "stun" || type === "freeze") &&
+    target.health > 0 &&
+    (stats.controlled ||
+      stats.skipped ||
+      stats.cooldown > 0 ||
+      (type === "stun" && alliedTarget && target.block > 0 && hasTalent(state, "block.grounding")))
+  )
+    events.push({
+      kind: "status",
+      targetId: target.id,
+      status: type,
+      outcome: "immune",
+      text: `${unitName(target)} is immune to ${type} buildup.`,
+    });
+  if (
+    (type === "stun" || type === "freeze") &&
+    source.health > 0 &&
+    target.health > 0 &&
+    !stats.controlled &&
+    !stats.skipped &&
+    stats.cooldown === 0 &&
+    !(type === "stun" && alliedTarget && target.block > 0 && hasTalent(state, "block.grounding"))
+  ) {
+    const beforeStacks = stats[type];
+    stats[type] = Math.min(STACK_LIMIT, stats[type] + damage);
+    events.push({
+      kind: "status",
+      targetId: target.id,
+      status: type,
+      outcome: "gain",
+      amount: stats[type] - beforeStacks,
+      text: `${unitName(target)} gains ${stats[type] - beforeStacks} ${type} buildup.`,
+    });
+    const threshold =
+      ("maxHealth" in target ? before : maximumHealth(target)) *
+      (alliedSource &&
+      ((type === "freeze" && hasTalent(state, "freeze.bitter-cold")) ||
+        (type === "stun" && hasTalent(state, "stun.concussive-force")))
+        ? 0.4
+        : 0.5);
+    if (stats[type] >= threshold) {
+      stats[type] = 0;
+      stats.controlled = type;
+      stats.controlTurns =
+        (type === "stun" && alliedSource && hasTalent(state, "stun.extended-stun")) ||
+        (type === "freeze" && alliedSource && !alliedTarget && state.boons.includes("frozen-pocketwatch"))
+          ? 2
+          : 1;
+      appliedControl = true;
+      if (alliedSource && !alliedTarget) {
+        if (type === "freeze" && hasTalent(state, "freeze.icebound")) target.block = 0;
+        if (type === "freeze" && hasTalent(state, "freeze.brittle-armor")) {
+          armorBroken ||= stats.armor > 0;
+          stats.armor = 0;
+        }
+        if (type === "stun" && hasTalent(state, "stun.free-follow-up")) combat(source).freeCard = true;
+        if (type === "stun" && hasTalent(state, "stun.stun-insight")) draw(state, 1);
+        if (type === "stun" && hasTalent(state, "stun.stun-surge") && state.battle?.mana === 0)
+          gainMana(state, 1, events);
+        if (type === "freeze" && hasTalent(state, "freeze.glacial-barrier"))
+          grantBlock(state, source, 3, events);
+        if (type === "stun" && hasTalent(state, "stun.guarded-counter") && source.block === 0)
+          grantBlock(state, source, 4, events);
+        if (type === "stun" && hasTalent(state, "stun.shatter-guard")) {
+          armorBroken ||= stats.armor > 0;
+          stats.armor = 0;
+        }
+      }
+      events.push({
+        kind: "status",
+        targetId: target.id,
+        status: type,
+        outcome: "apply",
+        text: `${unitName(target)} is ${type === "stun" ? "Stunned" : "Frozen"}.`,
+      });
+    }
+  }
+  return { armorBroken, appliedControl, reflected: false };
+}
+function controlRewards(
+  state: GameState,
+  source: Combatant,
+  target: Combatant,
+  type: DamageType,
+  events: GameEvent[],
+) {
+  if (!("maxHealth" in source) && "maxHealth" in target) {
+    if (type === "freeze" && state.boons.includes("icy-heart"))
+      hit(state, source, target, 6, "physical", events, { derived: true });
+    if (type === "stun" && state.boons.includes("thunderstone"))
+      hit(state, source, target, 6, "nature", events, { derived: true });
+  }
+}
+
 /** One attack packet. Periodic and retaliation packets never dodge, crit, build statuses, or retaliate. */
 export function hit(
   state: GameState,
@@ -371,7 +535,6 @@ export function hit(
     type === "light" &&
     hasTalent(state, "light.blessed-leech") &&
     source.health < maximumHealth(source) / 2;
-  let appliedControl = false;
   if (
     direct &&
     !stats.controlled &&
@@ -596,98 +759,11 @@ export function hit(
   if (nextPhysical > 0 && source.health > 0)
     hit(state, source, target, nextPhysical, "physical", events, { proc: true });
   if (attack && damage > 0) {
-    if (type === "burn" || type === "poison" || type === "bleed") {
-      const beforeStacks = stats[type];
-      stats[type] = Math.min(STACK_LIMIT, stats[type] + damage);
-      stats.statusSources[type] = source.id;
-      if (type === "bleed" && options.leech) deferLeech(target, source, damage);
-      events.push({
-        kind: "status",
-        targetId: target.id,
-        status: type,
-        outcome: "gain",
-        amount: stats[type] - beforeStacks,
-        text: `${unitName(target)} gains ${stats[type] - beforeStacks} ${type}.`,
-      });
-    }
-    if (
-      (type === "stun" || type === "freeze") &&
-      target.health > 0 &&
-      (stats.controlled ||
-        stats.skipped ||
-        stats.cooldown > 0 ||
-        (type === "stun" && alliedTarget && target.block > 0 && hasTalent(state, "block.grounding")))
-    )
-      events.push({
-        kind: "status",
-        targetId: target.id,
-        status: type,
-        outcome: "immune",
-        text: `${unitName(target)} is immune to ${type} buildup.`,
-      });
-    if (
-      (type === "stun" || type === "freeze") &&
-      source.health > 0 &&
-      target.health > 0 &&
-      !stats.controlled &&
-      !stats.skipped &&
-      stats.cooldown === 0 &&
-      !(type === "stun" && alliedTarget && target.block > 0 && hasTalent(state, "block.grounding"))
-    ) {
-      const beforeStacks = stats[type];
-      stats[type] = Math.min(STACK_LIMIT, stats[type] + damage);
-      events.push({
-        kind: "status",
-        targetId: target.id,
-        status: type,
-        outcome: "gain",
-        amount: stats[type] - beforeStacks,
-        text: `${unitName(target)} gains ${stats[type] - beforeStacks} ${type} buildup.`,
-      });
-      const threshold =
-        ("maxHealth" in target ? before : maximumHealth(target)) *
-        (alliedSource &&
-        ((type === "freeze" && hasTalent(state, "freeze.bitter-cold")) ||
-          (type === "stun" && hasTalent(state, "stun.concussive-force")))
-          ? 0.4
-          : 0.5);
-      if (stats[type] >= threshold) {
-        stats[type] = 0;
-        stats.controlled = type;
-        stats.controlTurns =
-          (type === "stun" && alliedSource && hasTalent(state, "stun.extended-stun")) ||
-          (type === "freeze" && alliedSource && !alliedTarget && state.boons.includes("frozen-pocketwatch"))
-            ? 2
-            : 1;
-        appliedControl = true;
-        if (alliedSource && !alliedTarget) {
-          if (type === "freeze" && hasTalent(state, "freeze.icebound")) target.block = 0;
-          if (type === "freeze" && hasTalent(state, "freeze.brittle-armor")) {
-            armorBroken ||= stats.armor > 0;
-            stats.armor = 0;
-          }
-          if (type === "stun" && hasTalent(state, "stun.free-follow-up")) combat(source).freeCard = true;
-          if (type === "stun" && hasTalent(state, "stun.stun-insight")) draw(state, 1);
-          if (type === "stun" && hasTalent(state, "stun.stun-surge") && state.battle?.mana === 0)
-            gainMana(state, 1, events);
-          if (type === "freeze" && hasTalent(state, "freeze.glacial-barrier"))
-            grantBlock(state, source, 3, events);
-          if (type === "stun" && hasTalent(state, "stun.guarded-counter") && source.block === 0)
-            grantBlock(state, source, 4, events);
-          if (type === "stun" && hasTalent(state, "stun.shatter-guard")) {
-            armorBroken ||= stats.armor > 0;
-            stats.armor = 0;
-          }
-        }
-        events.push({
-          kind: "status",
-          targetId: target.id,
-          status: type,
-          outcome: "apply",
-          text: `${unitName(target)} is ${type === "stun" ? "Stunned" : "Frozen"}.`,
-        });
-      }
-    }
+    const statusResult = applyHarmfulStatus(state, source, target, damage, type, events, {
+      beforeHealth: before,
+      leech: options.leech,
+    });
+    armorBroken ||= statusResult.armorBroken;
     if (direct && alliedSource && !alliedTarget && source.health > 0) {
       if (type === "nature" && hasTalent(state, "nature.bramblegrowth") && roll(state) < 0.1)
         grantStatus(source, "thorns", damage, events);
@@ -744,8 +820,9 @@ export function hit(
         (type === "bleed" && proc("bleed.sanguine", 0.1)) ||
         (type === "poison" && proc("leech.virulent-leech", 0.1)) ||
         (type === "nature" && proc("nature.verdant-cycle", 0.1));
-      if (chanceLeech && type === "bleed" && !options.leech) deferLeech(target, source, damage);
-      else if (chanceLeech && !options.leech && !blessedLeech)
+      if (chanceLeech && type === "bleed" && !options.leech) {
+        if (!statusResult.reflected) deferLeech(target, source, damage);
+      } else if (chanceLeech && !options.leech && !blessedLeech)
         leechHealth(state, source, lost, events, stats.poison > 0 || stats.bleed > 0);
     }
     // Captured damage remains valid even if retaliation later removes the attacker.
@@ -756,12 +833,7 @@ export function hit(
     }
     if ((options.leech || blessedLeech) && type !== "bleed" && source.health > 0)
       leechHealth(state, source, lost, events, stats.poison > 0 || stats.bleed > 0);
-    if (appliedControl && alliedSource && !alliedTarget) {
-      if (type === "freeze" && state.boons.includes("icy-heart"))
-        hit(state, source, target, 6, "physical", events, { derived: true });
-      if (type === "stun" && state.boons.includes("thunderstone"))
-        hit(state, source, target, 6, "nature", events, { derived: true });
-    }
+    if (statusResult.appliedControl) controlRewards(state, source, target, type, events);
   }
   if (armorBroken) triggerArmorBreak(state, target, events);
   return lost;

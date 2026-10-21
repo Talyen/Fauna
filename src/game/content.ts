@@ -1,13 +1,14 @@
 import { DAMAGE_TYPES, keywordLabel, type DamageType, EFFECT_KEYWORDS } from "./keywords";
 export { type DamageType } from "./keywords";
 export type SpeciesId =
-  "mossguard" | "emberfox" | "stormfin" | "silkmoth" | "briartooth" | "moonhart" | "emberback";
+  "mossguard" | "emberfox" | "stormfin" | "silkmoth" | "briartooth" | "moonhart" | "emberback" | "prismram";
 type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
   | { kind: "blockRetention"; amount: number }
   | { kind: "cardBonus"; trigger: "firstAttack" | "stunAttack" | "heal" | "guard"; amount: number }
   | { kind: "battleStart"; effect: "block" | "thorns" | "armor"; amount: number }
-  | { kind: "armorBreak"; amount: number };
+  | { kind: "armorBreak"; amount: number }
+  | { kind: "statusReflection"; amount: number };
 export interface PassiveTier {
   description: string;
   effects: readonly PassiveEffect[];
@@ -35,7 +36,7 @@ export const DAMAGE_LABELS = Object.fromEntries(DAMAGE_TYPES.map((id) => [id, ke
 type CardEffect =
   | { kind: "damage"; damageType: DamageType; amount: number; leech?: boolean }
   | { kind: "status"; status: "armor" | "thorns" | "dodge"; amount: number }
-  | { kind: "draw" | "mana" | "cleanse" | "purge"; amount: number };
+  | { kind: "draw" | "mana" | "cleanse" | "purge" | "reflect"; amount: number };
 interface CardBase {
   id: string;
   species: SpeciesId;
@@ -218,6 +219,46 @@ export const SPECIES: readonly Species[] = [
       },
     ],
   },
+  {
+    id: "prismram",
+    name: "Prismram",
+    title: "The crystal sentinel",
+    health: 30,
+    color: "#b7b2e2",
+    trait: "Refraction",
+    passiveTiers: [
+      {
+        description:
+          "Harmful status effects you receive have a 10% chance to be redirected to a random enemy",
+        effects: [{ kind: "statusReflection", amount: 10 }],
+      },
+      {
+        description:
+          "Harmful status effects you receive have a 20% chance to be redirected to a random enemy",
+        effects: [{ kind: "statusReflection", amount: 20 }],
+      },
+      {
+        description:
+          "Harmful status effects you receive have a 30% chance to be redirected to a random enemy",
+        effects: [{ kind: "statusReflection", amount: 30 }],
+      },
+      {
+        description:
+          "Harmful status effects you receive have a 40% chance to be redirected to a random enemy",
+        effects: [{ kind: "statusReflection", amount: 40 }],
+      },
+      {
+        description:
+          "Harmful status effects you receive have a 50% chance to be redirected to a random enemy",
+        effects: [{ kind: "statusReflection", amount: 50 }],
+      },
+      {
+        description:
+          "Harmful status effects you receive have a 60% chance to be redirected to a random enemy",
+        effects: [{ kind: "statusReflection", amount: 60 }],
+      },
+    ],
+  },
 ];
 const card = <T extends Exclude<Effect, "attack">>(
   species: SpeciesId,
@@ -316,11 +357,29 @@ export const CARDS: readonly CardDefinition[] = [
     artwork: "action.emberback.magma-stomp",
     target: "allEnemies",
   },
+  {
+    ...attack("prismram", "Prism Charge", 6, "physical"),
+    artwork: "action.prismram.prism-charge",
+  },
+  {
+    ...card("prismram", "Faceted Ward", "guard", 3),
+    target: "self",
+    artwork: "action.prismram.faceted-ward",
+    effects: [{ kind: "reflect", amount: 1 }],
+  },
+  {
+    ...attack("prismram", "Spectrum Lance", 4, "light"),
+    id: "prismram-spectrum-lance",
+    artwork: "action.prismram.spectrum-lance",
+    effects: [{ kind: "purge", amount: 1 }],
+  },
 ];
 export function enemyCard(card: CardDefinition): CardDefinition {
   return {
     ...card,
-    effects: card.effects?.filter((effect) => ["damage", "status", "cleanse", "purge"].includes(effect.kind)),
+    effects: card.effects?.filter((effect) =>
+      ["damage", "status", "cleanse", "purge", "reflect"].includes(effect.kind),
+    ),
   };
 }
 export const FIRST_RUN_STARTERS: readonly SpeciesId[] = [
@@ -368,7 +427,9 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
             ? `Draw ${effect.amount}`
             : effect.kind === "mana"
               ? `Restore ${effect.amount} Mana`
-              : `${effect.kind === "cleanse" ? "Cleanse acting creature" : "Purge target"}: remove ${effect.amount} effect${effect.amount === 1 ? "" : "s"}`);
+              : effect.kind === "reflect"
+                ? "Reflect the next harmful status effect"
+                : `${effect.kind === "cleanse" ? "Cleanse acting creature" : "Purge target"}: remove ${effect.amount} effect${effect.amount === 1 ? "" : "s"}`);
   }
   if (card.leech) text += "; Leech";
   return text;

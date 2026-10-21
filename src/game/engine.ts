@@ -39,7 +39,7 @@ import { bossEncounter, encounterSource, finalEncounter, encounterPacks } from "
 import type { Card, Command, CommandResult, GameEvent, GameState } from "./types";
 export function createGame(seed = 1): GameState {
   const state: GameState = {
-    version: 24,
+    version: 25,
     support: null,
     discovery: { encountered: [], recruited: {} },
     revision: 0,
@@ -347,6 +347,16 @@ function applyExtras(
       case "status":
         if (effect.status === "armor") grantArmor(state, actor, effect.amount, events);
         else grantStatus(actor, effect.status, effect.amount, events);
+        break;
+      case "reflect":
+        combat(actor).reflect = true;
+        events.push({
+          kind: "status",
+          targetId: actor.id,
+          status: "reflect",
+          outcome: "apply",
+          text: "Reflect the next harmful status effect",
+        });
         break;
       case "cleanse":
         removeEffects(actor, "cleanse", effect.amount, events, state);

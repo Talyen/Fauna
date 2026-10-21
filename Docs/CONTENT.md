@@ -89,7 +89,7 @@ Journeys use one shared combat enemy pool, with bosses at encounters 4 and 8. Th
 
 Each species in `src/game/content.ts` owns six `passiveTiers`, indexed by stars from zero through five. The first recruitment collects the species at zero stars; the sixth reaches five. Counts persist across journeys and cap at six. Committing the first onboarding starter supplies one initial copy. Later starter drafts and encounter discovery do not grant copies.
 
-The base tier contains the existing unique passive. Higher slots remain `null` until designed, except Mossguard's Overgrowth and Emberback's Molten Shell tiers. A defined tier replaces the whole previous passive rather than adding to it; include all retained effects in its effect list. Tiers can compose card bonuses and battle-start Block, Armor or Thorns. Favor recurring, species-exclusive passive mechanics independent of named abilities. New mechanics belong in the typed passive effect contract and its gameplay consumers alongside matching descriptions and regression coverage. Player rules, previews and inspection use the highest defined tier at or below the permanent rank. Enemies always use the base tier. Inspection shows all six slots, the current rank, the active effect and undefined upgrades.
+The base tier contains the existing unique passive. Higher slots remain `null` until designed, except Mossguard's Overgrowth, Emberback's Molten Shell and Prismram's Refraction tiers. A defined tier replaces the whole previous passive rather than adding to it; include all retained effects in its effect list. Tiers can compose card bonuses and battle-start Block, Armor or Thorns. Favor recurring, species-exclusive passive mechanics independent of named abilities. New mechanics belong in the typed passive effect contract and its gameplay consumers alongside matching descriptions and regression coverage. Player rules, previews and inspection use the highest defined tier at or below the permanent rank. Enemies always use the base tier. Inspection shows all six slots, the current rank, the active effect and undefined upgrades.
 
 ## Battle pile artwork
 
@@ -122,3 +122,17 @@ Mossguard is a new species ID replacing the removed Mossback content and occupie
 Overgrowth retains 10%, 20%, 30%, 40%, 50% or 60% more Block at zero through five stars. This is a relative increase over the ordinary 50% retention: 55%, 60%, 65%, 70%, 75% or 80% of remaining Block survives, rounded normally. It applies on each turn transition, including in reserve. Enemy Mossguard always uses the base tier. Save version 24 rejects obsolete development saves instead of migrating removed species or abilities.
 
 The portrait and three distinct ability illustrations are unchanged PNGs imported from the user-provided [Mossguard Drive folder](https://drive.google.com/drive/folders/1xzid2xsfO4044-xra9i3KU1K1dx_Kxgz). Source provenance is recorded per file in the asset manifest. Removed Mossback placeholders are no longer selected; prior immutable prepared generations are preserved. Source art was inspected at native aspect ratios; in-game rendered review remains a separate gate.
+
+## Prismram
+
+Prismram is a 30 Health crystal defender found in ordinary combat packs and collected through recruitment. All three abilities cost 1 Mana:
+
+- **Prism Charge:** Deal 6 Physical damage
+- **Faceted Ward:** Gain 3 Block; Reflect the next harmful status effect
+- **Spectrum Lance:** Deal 4 Light damage; Purge target: remove 1 effect
+
+**Refraction** gives harmful status effects received a 10%, 20%, 30%, 40%, 50% or 60% chance to redirect to a random living enemy at zero through five stars. Enemy Prismram always uses 10%. Faceted Ward guarantees the next reflection before passive chance is considered; repeated Wards refresh one pending reflection rather than stacking. The pending effect persists across turns, swaps and current-format saves, resets for each battle and can be Purged.
+
+Reflection transfers the incoming Burn, Poison, Bleed, Stun or Freeze buildup at its original post-mitigation strength; direct damage still lands on the original target. The recipient uses normal control thresholds and immunity. Reflected effects belong to the reflecting creature and cannot reflect again. Only living deployed opponents are eligible, including the attacker. Fully blocked damage, periodic ticks, retaliation and immune control applications do not consume a Ward or roll Refraction. Save version 25 rejects obsolete development saves without migration.
+
+The landscape portrait (`04.png`) and three portrait ability illustrations are unchanged PNGs from the user's [Prismram Drive folder](https://drive.google.com/drive/folders/1_-fYMW69ianG7xHrSc0fukfMX_kl42Vb), copied into `public/art/prismram/`. The manifest records the original file URLs. Creature and ability artwork use the shared prepared-media pipeline for battle, inspection and Collection. Source images were visually inspected; in-game rendered acceptance remains pending.
