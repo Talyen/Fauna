@@ -43,3 +43,44 @@ it("preserves the current item on resize, clamps shortened lists and restores re
   view.rerender(<Gallery items={[]} />);
   expect(screen.queryByRole("button")).toBeNull();
 });
+
+it("does not reclaim focus after the player leaves content that later disappears on resize", async () => {
+  const view = render(
+    <>
+      <Gallery />
+      <Button>Open menu</Button>
+    </>,
+  );
+  const user = userEvent.setup();
+  await user.click(screen.getByRole("button", { name: "Emberfox" }));
+  await user.click(screen.getByRole("button", { name: "Open menu" }));
+  view.rerender(
+    <>
+      <Gallery size={1} />
+      <Button>Open menu</Button>
+    </>,
+  );
+  expect(document.activeElement).toBe(screen.getByRole("button", { name: "Open menu" }));
+});
+
+it("does not reclaim focus when a previously used page control becomes disabled after resize", async () => {
+  const view = render(
+    <>
+      <Gallery size={1} />
+      <Button>Open menu</Button>
+    </>,
+  );
+  const user = userEvent.setup();
+  await user.click(screen.getByRole("button", { name: "Next page" }));
+  await user.click(screen.getByRole("button", { name: "Open menu" }));
+  await user.click(screen.getByRole("button", { name: "Next page" }));
+  await user.click(screen.getByRole("button", { name: "Next page" }));
+  await user.click(screen.getByRole("button", { name: "Open menu" }));
+  view.rerender(
+    <>
+      <Gallery size={3} />
+      <Button>Open menu</Button>
+    </>,
+  );
+  expect(document.activeElement).toBe(screen.getByRole("button", { name: "Open menu" }));
+});

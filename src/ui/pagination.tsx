@@ -40,6 +40,9 @@ export function PageControls({
       onFocusCapture={(event) => {
         previousFocus.current = event.target as HTMLElement;
       }}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) previousFocus.current = null;
+      }}
     >
       <Button
         variant="ghost"
@@ -107,6 +110,9 @@ export function PagedItems<T>({
       ref={root}
       onFocusCapture={(event) => {
         focusedItem.current = event.target as HTMLElement;
+      }}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) focusedItem.current = null;
       }}
     >
       <div className={className} role={contentRole}>

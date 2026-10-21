@@ -144,7 +144,7 @@ Settings uses Alchemy-style category tabs (Display, Sound and Battle), icon labe
 
 ## Piles, effects and Campfire
 
-Draw Pile and Discard Pile use blank portrait ArtCard surfaces, with names and counts outside the art. Each opens the existing Deck-style dialog, including empty state and nested action inspection. Cards sort independently of draw order. Escape closes only the current inspection level and returns focus to its connected opener. Pile browsing never commits commands.
+Draw Pile and Discard Pile use labeled outline Buttons beside the battlefield. Each opens the existing Deck-style dialog, including empty state and nested action inspection. Cards sort independently of draw order. Escape closes only the current inspection level and returns focus to its connected opener. Pile browsing never commits commands.
 
 On the battlefield, combat effects remain visible outside creature artwork, including defenses, periodic stacks, remaining control windows, immunity, Death's Door grace and pending talent rewards. Status notices also enter committed feedback and the accessible battle log; sound is supplementary. Campfire pages through the whole roster with current Health and the exact capped recovery before its single Rest action. Successful Rest returns to the same combat offers; Campfire remains visible while any roster creature is missing at least 30% maximum Health.
 
