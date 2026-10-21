@@ -1078,6 +1078,50 @@
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     },
     {
+      "id": "creature.cindernewt",
+      "origin": "repository",
+      "source": "public/art/cindernewt/portrait.png",
+      "output": "art/cindernewt/portrait.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Cindernewt artwork selected from user Google Drive: https://drive.google.com/file/d/1yJB8amJGQHJN8OvSK6CEjbkr0WREYPrJ/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.cindernewt.cinder-lash",
+      "origin": "repository",
+      "source": "public/art/cindernewt/cinder-lash.png",
+      "output": "art/cindernewt/cinder-lash.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Cindernewt artwork selected from user Google Drive: https://drive.google.com/file/d/1_HS_-7kpIKrIpoA5xUqXLgTRfE3DPak1/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.cindernewt.ember-breath",
+      "origin": "repository",
+      "source": "public/art/cindernewt/ember-breath.png",
+      "output": "art/cindernewt/ember-breath.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Cindernewt artwork selected from user Google Drive: https://drive.google.com/file/d/1N3sHQ_99dntEaMprM4EkhcvZ7WwSZOpm/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.cindernewt.ashen-veil",
+      "origin": "repository",
+      "source": "public/art/cindernewt/ashen-veil.png",
+      "output": "art/cindernewt/ashen-veil.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Cindernewt artwork selected from user Google Drive: https://drive.google.com/file/d/191BIxpLB9myg0KlpBrAgcaxiFS2qRNbB/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
       "id": "creature.coralcurl",
       "origin": "repository",
       "source": "public/art/coralcurl/portrait.png",

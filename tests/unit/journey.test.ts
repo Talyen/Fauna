@@ -2,7 +2,7 @@ import { freshCombat } from "../../src/game/combat";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
-import { species } from "../../src/game/content";
+import { INITIAL_SPECIES, species } from "../../src/game/content";
 import { BOONS } from "../../src/game/progression";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { previewPlay } from "../../src/game/preview";
@@ -70,12 +70,14 @@ describe("journey earnings and results", () => {
     expect(decodeSave(encodeSave(won))).toEqual(won);
   });
 
-  it("offers defeated creatures even when the roster is full", () => {
+  it("offers defeated creatures even when every species is already collected", () => {
     const started = startedJourney();
     const s = produce(run(), (d) => {
       d.expedition = started.expedition;
       d.journey = started.journey;
-      d.roster = ["mossguard", "emberback", "prismram", "pollenmoth", "captoad"];
+      d.discovery.encountered = [...INITIAL_SPECIES];
+      d.discovery.recruited = Object.fromEntries(INITIAL_SPECIES.map((kind) => [kind, 1]));
+      d.roster = [...d.team.map((unit) => unit.species), "pollenmoth", "captoad"];
       d.reserves = (["pollenmoth", "captoad"] as const).map((kind) => ({
         id: kind,
         species: kind,
@@ -217,7 +219,7 @@ describe("journey earnings and results", () => {
 });
 
 it("completes the one-starter recruitment path through the final boss within the browser journey budget", () => {
-  let game = accept(accept(createGame(3), { type: "draft", species: "pollenmoth" }), { type: "start" });
+  let game = accept(accept(createGame(253), { type: "draft", species: "pollenmoth" }), { type: "start" });
   for (let step = 0; step < 400 && game.phase !== "victory"; step++) {
     expect(game.phase).not.toBe("defeat");
     expect(game.reward?.outcome).not.toBe("defeat");

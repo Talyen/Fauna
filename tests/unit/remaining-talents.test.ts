@@ -502,6 +502,8 @@ it("opening Mana, Armor and healing apply once, while victory heals living roste
   state.talents = ["health.vitality"];
   state.battle!.enemies.forEach((e) => (e.health = 0));
   state.battle!.enemies[0]!.health = 1;
+  state.battle!.enemies[0]!.combat.controlled = "stun";
+  state.battle!.enemies[0]!.combat.controlTurns = 1;
   const card = playable(state, "mossguard-attack");
   const won = accept(state, { type: "play", cardId: card.id, targetId: "enemy-0", autoEndTurn: false });
   expect(won.team[0]!.health).toBe(18);

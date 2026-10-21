@@ -10,7 +10,7 @@ const identity: CloudIdentity = {
   importAvailable: false,
 };
 const other = { ...identity, device: "c".repeat(32) };
-const initial = encodeSave(decodeSave(encodeSave(createGame(7))));
+const initial = encodeSave(decodeSave(encodeSave(createGame(3))));
 const progress = encodeSave(
   decodeSave(
     encodeSave(dispatch(createGame(7), { type: "draft", species: createGame(7).starterOffers[0]! }).state),

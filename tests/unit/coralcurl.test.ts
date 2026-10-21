@@ -48,7 +48,7 @@ it("plays the authored one-Mana kit with preview parity, Water XP and current sa
     if (id.endsWith("swap"))
       expect(result.state.battle!.enemies.every((enemy) => enemy.combat.blind)).toBe(true);
   }
-  expect(() => decodeSave(JSON.stringify({ ...ready(), version: 28 }))).toThrow();
+  for (const version of [28, 29]) expect(() => decodeSave(JSON.stringify({ ...ready(), version }))).toThrow();
 });
 
 it.each([1, 2, 3, 4, 5, 6])("bursts for tier %i against the attacker even on exact absorption", (amount) => {

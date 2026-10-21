@@ -1,6 +1,9 @@
 import { expect, it } from "vitest";
-import { createSession } from "../../src/application/session";
+import { createSession as createSeededSession } from "../../src/application/session";
 import type { Platform } from "../../src/platform/ports";
+// Keep lifecycle fixtures independent of roster-driven changes to the default starter offers.
+const createSession: typeof createSeededSession = (platform, seed = 3, capabilities) =>
+  createSeededSession(platform, seed, capabilities);
 it("overlay activation revokes commands immediately and disposed subscriptions cannot resume a session", async () => {
   let overlay: ((active: boolean) => void) | undefined;
   const writes: string[] = [];

@@ -90,15 +90,30 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
     if (card.cost !== 1) error(card.id, "cost", "Every ability must cost exactly 1 Mana.");
     if (!Number.isSafeInteger(card.value) || card.value < 1 || card.value > 1_000_000)
       error(card.id, "value", "Unsupported effect amount.");
+    if (
+      card.effect === "attack" &&
+      card.alternateDamageType !== undefined &&
+      !DAMAGE_TYPES.includes(card.alternateDamageType)
+    )
+      error(card.id, "alternateDamageType", "Unknown alternate damage type.");
     for (const tag of [card.leech])
       if (tag !== undefined && typeof tag !== "boolean") error(card.id, "tags", "Invalid card tag.");
     for (const effect of card.effects ?? []) {
       if (!Number.isSafeInteger(effect.amount) || effect.amount < 1 || effect.amount > 100)
         error(card.id, "effects", "Unsupported supplemental amount.");
       if (
-        !["damage", "status", "draw", "mana", "cleanse", "purge", "reflect", "heal", "blind"].includes(
-          effect.kind,
-        )
+        ![
+          "damage",
+          "status",
+          "draw",
+          "mana",
+          "cleanse",
+          "purge",
+          "reflect",
+          "heal",
+          "blind",
+          "meltArmor",
+        ].includes(effect.kind)
       )
         error(card.id, "effects", "Unknown supplemental effect.");
       if (effect.kind === "damage" && !DAMAGE_TYPES.includes(effect.damageType))

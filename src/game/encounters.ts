@@ -17,6 +17,8 @@ export const COMBAT_PACKS = [
   ["prismram", "reedstag", "emberback"],
   ["captoad", "mossguard", "pollenmoth"],
   ["prismram", "captoad", "emberback"],
+  ["cindernewt", "dunefox", "mossguard"],
+  ["prismram", "cindernewt", "pollenmoth"],
   ["coralcurl", "reedstag", "prismram"],
   ["mossguard", "coralcurl", "captoad"],
 ] as const;
@@ -82,7 +84,7 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
           ? "water"
           : kind === "dunefox"
             ? "physical"
-            : kind === "emberback"
+            : kind === "emberback" || kind === "cindernewt"
               ? "burn"
               : kind === "captoad"
                 ? "poison"

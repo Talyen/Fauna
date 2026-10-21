@@ -190,11 +190,14 @@ export const EFFECT_KEYWORDS = freeze(
 export function definitionKeywords(definition: {
   effect: keyof typeof EFFECT_KEYWORDS;
   damageType?: DamageType;
+  alternateDamageType?: DamageType;
   leech?: boolean;
   effects?: readonly { kind: string; status?: string; damageType?: DamageType; leech?: boolean }[];
 }): ProgressionKeyword[] {
   const raw: string[] =
     definition.effect === "attack" ? [definition.damageType!] : [...EFFECT_KEYWORDS[definition.effect]];
+  if (definition.effect === "attack" && definition.alternateDamageType)
+    raw.push(definition.alternateDamageType);
   for (const effect of definition.effects ?? []) {
     raw.push(
       effect.kind === "heal"
@@ -203,7 +206,9 @@ export function definitionKeywords(definition: {
           ? effect.damageType!
           : effect.kind === "status"
             ? effect.status!
-            : effect.kind,
+            : effect.kind === "meltArmor"
+              ? "purge"
+              : effect.kind,
     );
     if (effect.leech) raw.push("leech");
   }

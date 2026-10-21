@@ -1,13 +1,22 @@
 import { DAMAGE_TYPES, keywordLabel, type DamageType, EFFECT_KEYWORDS } from "./keywords";
 export { type DamageType } from "./keywords";
 export type SpeciesId =
-  "mossguard" | "emberback" | "pollenmoth" | "prismram" | "captoad" | "dunefox" | "reedstag" | "coralcurl";
+  | "mossguard"
+  | "emberback"
+  | "pollenmoth"
+  | "prismram"
+  | "captoad"
+  | "dunefox"
+  | "reedstag"
+  | "cindernewt"
+  | "coralcurl";
 type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
   | { kind: "blockRetention"; amount: number }
   | { kind: "cardBonus"; trigger: "firstAttack" | "stunAttack" | "heal" | "guard"; amount: number }
   | { kind: "battleStart"; effect: "block" | "thorns" | "armor"; amount: number }
   | { kind: "poisonRetaliation"; amount: number }
+  | { kind: "dodgeBurn"; amount: number }
   | { kind: "armorBreak"; amount: number }
   | { kind: "blockBreak"; amount: number }
   | { kind: "statusReflection"; amount: number }
@@ -35,7 +44,7 @@ type CardEffect =
   | { kind: "damage"; damageType: DamageType; amount: number; leech?: boolean }
   | { kind: "status"; status: "armor" | "thorns" | "dodge"; amount: number }
   | { kind: "cleanse"; amount: number; target?: "recipient" }
-  | { kind: "draw" | "mana" | "purge" | "reflect" | "heal" | "blind"; amount: number };
+  | { kind: "draw" | "mana" | "purge" | "reflect" | "heal" | "blind" | "meltArmor"; amount: number };
 interface CardBase {
   id: string;
   species: SpeciesId;
@@ -48,7 +57,12 @@ interface CardBase {
 }
 export type CardDefinition = CardBase &
   (
-    | { effect: "attack"; damageType: DamageType; target?: "allEnemies" | "randomEnemy" }
+    | {
+        effect: "attack";
+        damageType: DamageType;
+        alternateDamageType?: DamageType;
+        target?: "allEnemies" | "randomEnemy";
+      }
     | { effect: "guard"; target?: "self" }
     | { effect: "heal"; target?: "allAllies" | "mostInjured" }
     | { effect: Exclude<Effect, "attack" | "guard" | "heal"> }
@@ -346,6 +360,40 @@ export const SPECIES: readonly Species[] = [
     ],
   },
   {
+    id: "cindernewt",
+    name: "Cindernewt",
+    title: "The dancing ember",
+    health: 24,
+    color: "#ed9c65",
+    trait: "Cinderstep",
+    passiveTiers: [
+      {
+        description: "When you Dodge, deal 1 Burn damage to the attacker",
+        effects: [{ kind: "dodgeBurn", amount: 1 }],
+      },
+      {
+        description: "When you Dodge, deal 2 Burn damage to the attacker",
+        effects: [{ kind: "dodgeBurn", amount: 2 }],
+      },
+      {
+        description: "When you Dodge, deal 3 Burn damage to the attacker",
+        effects: [{ kind: "dodgeBurn", amount: 3 }],
+      },
+      {
+        description: "When you Dodge, deal 4 Burn damage to the attacker",
+        effects: [{ kind: "dodgeBurn", amount: 4 }],
+      },
+      {
+        description: "When you Dodge, deal 5 Burn damage to the attacker",
+        effects: [{ kind: "dodgeBurn", amount: 5 }],
+      },
+      {
+        description: "When you Dodge, deal 6 Burn damage to the attacker",
+        effects: [{ kind: "dodgeBurn", amount: 6 }],
+      },
+    ],
+  },
+  {
     id: "coralcurl",
     name: "Coralcurl",
     title: "The sheltered reef",
@@ -418,6 +466,25 @@ export const CARDS: readonly CardDefinition[] = [
     ...card("coralcurl", "Coral Spiral", "swap", 1),
     effects: [{ kind: "blind", amount: 1 }],
     artwork: "action.coralcurl.coral-spiral",
+  },
+  {
+    ...attack("cindernewt", "Cinder Lash", 6, "physical"),
+    alternateDamageType: "burn",
+    artwork: "action.cindernewt.cinder-lash",
+  },
+  {
+    ...attack("cindernewt", "Ember Breath", 1, "burn"),
+    id: "cindernewt-ember-breath",
+    target: "allEnemies",
+    effects: [{ kind: "meltArmor", amount: 50 }],
+    artwork: "action.cindernewt.ember-breath",
+  },
+  {
+    ...attack("cindernewt", "Ashen Veil", 1, "burn"),
+    id: "cindernewt-ashen-veil",
+    target: "allEnemies",
+    effects: [{ kind: "blind", amount: 1 }],
+    artwork: "action.cindernewt.ashen-veil",
   },
   {
     ...attack("reedstag", "Reed Rush", 6, "nature"),
@@ -535,7 +602,7 @@ export function enemyCard(card: CardDefinition): CardDefinition {
   return {
     ...card,
     effects: card.effects?.filter((effect) =>
-      ["damage", "status", "cleanse", "purge", "reflect", "heal", "blind"].includes(effect.kind),
+      ["damage", "status", "cleanse", "purge", "reflect", "heal", "blind", "meltArmor"].includes(effect.kind),
     ),
   };
 }
@@ -555,7 +622,7 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
   let text: string;
   switch (card.effect) {
     case "attack":
-      text = `Deal ${value} ${DAMAGE_LABELS[card.damageType]} damage${card.target === "allEnemies" ? " to all enemies" : card.target === "randomEnemy" ? " to a random enemy" : ""}`;
+      text = `Deal ${value} ${DAMAGE_LABELS[card.damageType]}${card.alternateDamageType ? ` or ${DAMAGE_LABELS[card.alternateDamageType]}` : ""} damage${card.alternateDamageType ? " at random" : ""}${card.target === "allEnemies" ? " to all enemies" : card.target === "randomEnemy" ? " to a random enemy" : ""}`;
       break;
     case "guard":
       text = card.target === "self" ? `Gain ${value} Block` : `Give an ally ${value} Block`;
@@ -588,11 +655,13 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
                 ? `Restore ${effect.amount} Health`
                 : effect.kind === "blind"
                   ? "Blind all enemies"
-                  : effect.kind === "reflect"
-                    ? "Reflect the next harmful status effect"
-                    : effect.kind === "cleanse" && effect.target === "recipient"
-                      ? "Cleanse the healed ally"
-                      : `${effect.kind === "cleanse" ? "Cleanse acting creature" : "Purge target"}: remove ${effect.amount} effect${effect.amount === 1 ? "" : "s"}`);
+                  : effect.kind === "meltArmor"
+                    ? `Remove ${effect.amount}% of all enemies’ Armor, rounded up`
+                    : effect.kind === "reflect"
+                      ? "Reflect the next harmful status effect"
+                      : effect.kind === "cleanse" && effect.target === "recipient"
+                        ? "Cleanse the healed ally"
+                        : `${effect.kind === "cleanse" ? "Cleanse acting creature" : "Purge target"}: remove ${effect.amount} effect${effect.amount === 1 ? "" : "s"}`);
   }
   if (card.leech) text += "; Leech";
   return text;
