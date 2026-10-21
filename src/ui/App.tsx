@@ -31,7 +31,7 @@ import { buttonVariants } from "../components/ui/button";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
 import { flushSync } from "react-dom";
-import { Menu, ArrowLeftRight, Play, Pause } from "lucide-react";
+import { Menu, ArrowLeftRight, Bot, Pause } from "lucide-react";
 import type { Session } from "../application/session";
 import { Button } from "../components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../components/ui/dialog";
@@ -716,7 +716,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                   aria-pressed={autoplay}
                   onClick={() => setAutoplay(!autoplay)}
                 >
-                  {autoplay ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}
+                  {autoplay ? <Pause aria-hidden="true" /> : <Bot aria-hidden="true" />}
                 </Button>
               ) : null}
               {game.phase === "draft" ? (
