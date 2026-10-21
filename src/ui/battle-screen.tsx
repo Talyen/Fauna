@@ -94,8 +94,11 @@ export function BattleScreen({
   const card = game.cards.find((c) => c.id === selected),
     def = card ? definition(card.definitionId) : null;
   const allEnemies = def?.effect === "attack" && def.target === "allEnemies";
-  const enemyTarget = def?.effect === "attack" && !allEnemies,
-    allyTarget = def?.effect === "heal" || def?.effect === "guard";
+  const automaticTarget =
+    (def?.effect === "attack" && def.target === "randomEnemy") ||
+    (def?.effect === "heal" && def.target === "mostInjured");
+  const enemyTarget = def?.effect === "attack" && !def.target,
+    allyTarget = (def?.effect === "heal" && !def.target) || def?.effect === "guard";
   const targets = enemyTarget
     ? battle.enemies.filter((e) => e.health > 0).map((e) => e.id)
     : allyTarget
@@ -109,7 +112,7 @@ export function BattleScreen({
     const side = enemyTarget ? "enemy" : "ally";
     setRemembered((old) => (old[side] === id ? old : { ...old, [side]: id }));
   };
-  const groupTarget = def?.effect === "teamGuard" || allEnemies;
+  const groupTarget = def?.effect === "teamGuard" || allEnemies || automaticTarget;
   const preview = useMemo(
     () => (selected && (target || groupTarget) ? previewPlay(game, selected, target) : null),
     [game, selected, target, groupTarget],
@@ -325,11 +328,15 @@ export function BattleScreen({
                 {recipient ??
                   (allEnemies
                     ? "All enemies"
-                    : def.effect === "teamGuard"
-                      ? "All allies"
-                      : enemyTarget
-                        ? "Choose an enemy"
-                        : "Choose an ally")}
+                    : automaticTarget
+                      ? def.effect === "attack"
+                        ? "Random enemy"
+                        : "Most injured ally"
+                      : def.effect === "teamGuard"
+                        ? "All allies"
+                        : enemyTarget
+                          ? "Choose an enemy"
+                          : "Choose an ally")}
               </p>
               <ActionDetails
                 compact

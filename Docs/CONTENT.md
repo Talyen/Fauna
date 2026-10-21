@@ -114,3 +114,20 @@ Ability design aims for roughly 6 total value per card across its affected targe
 The selected creature portrait (`04.png`) and three ability portraits are copied unchanged from the user's [Emberback Drive folder](https://drive.google.com/drive/folders/1BAcTaOpKsPQonWJ4mZzJgRE3se0SrGp9) into `public/art/emberback/`. The manifest records each original file URL. Ability-specific artwork is used consistently in battle, inspection and Collection. Ashen Vanish remains outside the playable kit; its Drive source is preserved. PNG selections are copied at their original resolution and aspect ratio without cropping or conversion. Prepared output checks do not establish rendered acceptance.
 
 Molten Shell triggers once per positive-to-zero Armor transition, after the effect that removes Armor completes. Damage, periodic damage, shattering, Purge and Armor theft can break Armor. No burst occurs while Armor remains, when Armor was already zero, or after the creature is knocked out. New Armor can enable another burst. Burn packets use existing mitigation and buildup, without Dodge, Critical hits or ordinary attack retaliation. Player bursts use the collected tier and hit living enemies; enemy bursts use the base tier and hit deployed living allies. Passives should typically have a unique species mechanic and concise rules without naming abilities.
+
+## Pollenmoth
+
+Pollenmoth is a 23 Health support creature encountered and recruited on ordinary routes. Each ability costs 1 Mana: Dazzle Burst deals 3 Light damage to a random living enemy; Petal Shelter gives living deployed allies 2 Block; Bloomwake restores 3 Health to the most injured living deployed ally, including Pollenmoth. Injury is measured by remaining Health percentage, with battlefield order breaking ties. Reserves and knockouts are excluded.
+
+Cross-Pollination has six complete passive tiers:
+
+1. Light damage bounces once.
+2. Light damage bounces once, with a 50% chance to bounce twice.
+3. Light damage bounces twice.
+4. Light damage bounces twice. Health restoration has a 50% chance to bounce once.
+5. Light damage bounces twice. Health restoration bounces once, with a 50% chance to bounce twice.
+6. Light damage and Health restoration bounce twice.
+
+Each bounce repeats the original effect amount, with defenses and healing modifiers applied separately. Damage selects a random living opponent not already visited; healing selects the most injured remaining ally missing Health. Bounces cannot revisit a recipient or start another chain. A Dodged initial hit does not bounce; a knocked-out source stops its chain. Full-Health healing attempts do not bounce. Chance rolls and random targets use committed seeded combat randomness, so previews never consume live RNG. Enemy Pollenmoths use their base passive. Healing bounces belong to Pollenmoth's own healing abilities, not another creature's healing or automatic recovery.
+
+The creature portrait and three dedicated action illustrations are unchanged copies from the user's Pollenmoth Google Drive folder. Their original URLs and rights notes are recorded in the asset manifest. Prepared assets retain the native 4:3 creature and 3:4 action compositions. Rendered gameplay review remains pending.

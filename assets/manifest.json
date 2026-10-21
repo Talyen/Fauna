@@ -944,6 +944,50 @@
       "aspect": [3, 4],
       "provenance": "Emberback artwork copied unchanged from Google Drive https://drive.google.com/file/d/1yiI6bieumAk1Q_Pb4o_8cMUzbV9JhJTD/view",
       "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "creature.pollenmoth",
+      "origin": "repository",
+      "source": "public/art/pollenmoth/pollenmoth.png",
+      "output": "art/pollenmoth/pollenmoth.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Pollenmoth artwork copied unchanged from Google Drive https://drive.google.com/file/d/1T2Cc8haMwRKPfu7VcU0Lvt9P-9_uU4KD/view",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "action.pollenmoth.dazzle-burst",
+      "origin": "repository",
+      "source": "public/art/pollenmoth/dazzle-burst.png",
+      "output": "art/pollenmoth/dazzle-burst.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Pollenmoth artwork copied unchanged from Google Drive https://drive.google.com/file/d/1icQUu3PTdhZhHKNTJ80E9UHKBR4w__Oj/view",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "action.pollenmoth.bloomwake",
+      "origin": "repository",
+      "source": "public/art/pollenmoth/bloomwake.png",
+      "output": "art/pollenmoth/bloomwake.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Pollenmoth artwork copied unchanged from Google Drive https://drive.google.com/file/d/14d9fEn2etQDLjyHPGWlIOWEton0dGO7e/view",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "action.pollenmoth.petal-shelter",
+      "origin": "repository",
+      "source": "public/art/pollenmoth/petal-shelter.png",
+      "output": "art/pollenmoth/petal-shelter.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Pollenmoth artwork copied unchanged from Google Drive https://drive.google.com/file/d/1xHmWnhvuvAVLNkeO-G2HBusj8neaiTAs/view",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
     }
   ]
 }

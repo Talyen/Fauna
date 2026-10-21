@@ -227,3 +227,22 @@ it.each(["emberback-furnace-breath", "emberback-magma-stomp"])(
     expect(send).toHaveBeenCalledExactlyOnceWith({ type: "play", cardId: game.battle!.hand[0]! });
   },
 );
+
+it.each(["attack", "heal"])("confirms Pollenmoth's automatic %s without manual targeting", (effect) => {
+  const game = produce(teamRun(7, ["pollenmoth", "mossback", "stormfin"]), (draft) => {
+    draft.team[0]!.health -= 5;
+    draft.battle!.hand = draft.cards.map((card) => card.id);
+    draft.battle!.draw = [];
+    draft.battle!.buffer = [];
+    draft.battle!.discard = [];
+  });
+  const { container, send } = open(game, true);
+  const cardId = game.cards.find((card) => card.definitionId === `pollenmoth-${effect}`)!.id;
+  fireEvent.click(container.querySelector(`[data-card-id="${cardId}"]`)!);
+  expect(container.querySelector(".confirm-play")).toBeTruthy();
+  expect(container.querySelectorAll("[data-valid-target]")).toHaveLength(0);
+  expect(container.querySelector(".target-preview")).toBeTruthy();
+  fireEvent.click(container.querySelector(".confirm-play")!);
+  expect(send).toHaveBeenCalledTimes(1);
+  expect(send).toHaveBeenCalledWith({ type: "play", cardId });
+});
