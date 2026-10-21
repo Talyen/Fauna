@@ -321,12 +321,6 @@ export function Talents({
   const [purchased, setPurchased] = useState<string | null>(null);
   const lastKeyword = useRef<Keyword | null>(null);
   const screen = useRef<HTMLElement>(null);
-  const focusAfterReset = useRef(false);
-  useLayoutEffect(() => {
-    if (!focusAfterReset.current) return;
-    focusAfterReset.current = false;
-    screen.current?.querySelector<HTMLElement>(".talent-node")?.focus();
-  }, [game.revision]);
   useEffect(() => {
     if (!purchased) return;
     const timer = setTimeout(() => setPurchased(null), motionValue("--motion-battle"));
@@ -381,8 +375,8 @@ export function Talents({
             variant="ghost"
             disabled={!game.talents.some((id) => id.startsWith(`${keyword}.`))}
             onClick={() => {
-              focusAfterReset.current = true;
-              if (!send({ type: "resetTalents", keyword })) focusAfterReset.current = false;
+              if (send({ type: "resetTalents", keyword }))
+                screen.current?.querySelector<HTMLElement>(".talent-node")?.focus();
             }}
           >
             Reset {keywordLabel(keyword)} talents

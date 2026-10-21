@@ -373,6 +373,7 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
       if (enemy.health <= 0) continue;
       tickStatuses(draft, enemy, events);
       if (settle(draft, events)) return;
+      if (enemy.health <= 0) continue;
       enemy.block = Math.round(enemy.block / 2);
       if (!startAction(enemy, events, draft)) continue;
       const target = living(draft).find((c) => c.id === enemy.targetId) ?? living(draft)[0];

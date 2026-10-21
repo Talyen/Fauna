@@ -316,3 +316,16 @@ it("publishes actual control immunity, capped buildup and removed status identit
     "burn",
   ]);
 });
+
+it("does not admit an enemy action after its own status tick knocks it out", () => {
+  const initial = produce(run(7), (game) => {
+    const enemy = game.battle!.enemies[0]!;
+    enemy.health = 1;
+    enemy.combat.poison = 1;
+  });
+  const result = dispatch(initial, { type: "endTurn" });
+  expect(result.accepted).toBe(true);
+  expect(result.events).toContainEqual(expect.objectContaining({ kind: "knockout", targetId: "enemy-0" }));
+  expect(result.events.some((event) => event.kind === "action" && event.actorId === "enemy-0")).toBe(false);
+  expect(result.state.battle!.enemies[0]!.lastAbility).toBe(initial.battle!.enemies[0]!.lastAbility);
+});

@@ -496,7 +496,7 @@ test("talents purchase immediately, gate rows, reset a category, and return to t
   expect((await state(page)).talents).toEqual(["block.second-wind"]);
   expect((await state(page)).keywordXP.burn).toBe(100);
   await expect(reset).toBeDisabled();
-  await expect(page.getByRole("button", { name: "Melting Point", exact: true })).toBeFocused();
+  await expect(page.getByRole("button", { name: "Flashpoint", exact: true })).toBeFocused();
   await page.keyboard.press("Escape");
   await expect(burn).toBeFocused();
   await expect(burn).toHaveAccessibleDescription("3 points available");
