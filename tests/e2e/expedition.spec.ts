@@ -330,6 +330,7 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
   test(`one starter grows a lineup through a full expedition with ${input}`, async ({ page }) => {
     test.setTimeout(120_000);
     const press = input === "controller" ? await gamepad(page) : null;
+    await page.clock.setFixedTime(new Date(7));
     await seed(page);
     const activate = async (el: Locator) => {
       if (input === "mouse") await el.click();
@@ -340,7 +341,7 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
       }
     };
     await activate(page.getByRole("button", { name: "New journey", exact: true }));
-    const chosen = (await state(page)).starterOffers[0]!;
+    const chosen = "mossback";
     const name = species(chosen).name;
     await activate(page.getByRole("button", { name: `Inspect ${name}`, exact: true }));
     await activate(page.getByRole("button", { name: `Choose ${name}`, exact: true }));

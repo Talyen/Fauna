@@ -671,6 +671,7 @@ strong {
   margin-top: var(--space-2);
 }
 .reward-footer {
+  min-height: var(--control-height);
   display: flex;
   justify-content: flex-end;
   gap: var(--space-3);

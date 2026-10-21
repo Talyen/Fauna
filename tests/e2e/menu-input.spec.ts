@@ -112,6 +112,15 @@ for (const [width, height, enlarged] of [
     await page.setViewportSize({ width, height });
     await page.emulateMedia({ reducedMotion: "reduce" });
     const pad = await controller(page);
+    const collection = {
+      ...createGame(7),
+      discovery: { encountered: ["mossback"], recruited: { mossback: 1 } },
+      starterOffers: ["mossback", "mossback", "mossback"],
+    };
+    await page.addInitScript(
+      (save) => localStorage.setItem("fauna.save.v1", save),
+      JSON.stringify(collection),
+    );
     if (enlarged) await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
     await page.goto("/");
     await expect(page.getByRole("button", { name: "New journey", exact: true })).toBeFocused();
