@@ -1,3 +1,4 @@
+import { settleScreen } from "./rendered-evidence";
 import { expectScrollFree, REVIEW_VIEWPORTS } from "./layout-contract";
 import { test, expect, type Page } from "@playwright/test";
 import { feedbackBattle } from "../unit/helpers";
