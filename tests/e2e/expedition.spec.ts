@@ -595,9 +595,13 @@ for (const [width, height] of [
         const category = viewport.querySelector(".talent-category")!;
         const art = category.querySelector(".action-card")!.getBoundingClientRect();
         const gap = parseFloat(getComputedStyle(category.querySelector(".action-card")!).marginBottom);
-        const captions = [...category.querySelectorAll("h2, p")].reduce(
-          (height, caption) => height + caption.getBoundingClientRect().height,
-          0,
+        const captions = Math.max(
+          ...[...viewport.querySelectorAll(".talent-category")].map((item) =>
+            [...item.querySelectorAll("h2, p")].reduce(
+              (height, caption) => height + caption.getBoundingClientRect().height,
+              0,
+            ),
+          ),
         );
         const rowGap = parseFloat(getComputedStyle(viewport.querySelector(".talent-overview")!).rowGap);
         return {

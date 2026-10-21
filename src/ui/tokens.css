@@ -141,7 +141,11 @@
   --feedback-critical-clear: #fcd34d00;
   --feedback-critical-flash: #fff7ed;
   --talent-tree-screen-width: 864px;
-  --talent-overview-caption-height: calc(var(--text-name) * 1.3 + var(--text-secondary) * 3);
+  --talent-category-label-size: calc(14px * var(--text-scale, 1));
+  --talent-category-points-size: calc(12px * var(--text-scale, 1));
+  --talent-overview-caption-height: calc(
+    var(--talent-category-label-size) * 1.3 + var(--talent-category-points-size) * 1.5
+  );
   --talent-card-width: 328px;
   --talent-card-min-height: 168px;
   --talent-page-rows: 2;
