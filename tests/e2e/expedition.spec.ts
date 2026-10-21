@@ -983,7 +983,7 @@ test("enlarged text and keyboard/controller row navigation keep inspection and m
   await page.getByRole("button", { name: "Close inspection", exact: true }).click();
   await page.getByRole("button", { name: "Open menu" }).click();
   await page.getByRole("button", { name: "Glossary", exact: true }).click();
-  const close = page.getByRole("button", { name: "Back", exact: true });
+  const close = page.getByRole("button", { name: "Open menu", exact: true });
   await expect(close).toBeVisible();
   await close.click();
   await expect(page.getByRole("button", { name: "Glossary", exact: true })).toBeFocused();

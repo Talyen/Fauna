@@ -862,11 +862,19 @@ strong {
   gap: var(--screen-item-gap);
   margin: 0;
 }
-.talents-heading > button:first-child {
-  justify-self: start;
+.talents-heading > h1 {
+  grid-column: 2;
+  grid-row: 1;
 }
-.talents-heading > button:not(:first-child) {
+.talents-heading > button[aria-label="Open menu"] {
+  grid-column: 3;
+  grid-row: 1;
   justify-self: end;
+}
+.talents-heading > button:not([aria-label="Open menu"]) {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: start;
 }
 .talent-overview-viewport {
   flex: 1;
@@ -939,9 +947,11 @@ strong {
   align-items: center;
 }
 .collection-heading > button {
-  justify-self: start;
+  grid-column: 3;
+  justify-self: end;
 }
 .collection-heading h1 {
+  grid-column: 2;
   text-align: center;
 }
 .collection-tabs {

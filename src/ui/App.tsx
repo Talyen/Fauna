@@ -31,7 +31,7 @@ import { buttonVariants } from "../components/ui/button";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
 import { flushSync } from "react-dom";
-import { Menu, ArrowLeft, ArrowLeftRight, Play, Pause } from "lucide-react";
+import { Menu, ArrowLeftRight, Play, Pause } from "lucide-react";
 import type { Session } from "../application/session";
 import { Button } from "../components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../components/ui/dialog";
@@ -641,18 +641,18 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
               </main>
             ) : null}
             {route === "talents" ? (
-              <Talents game={game} send={send} back={backFromPage} controls={talentControls} />
+              <Talents game={game} send={send} openMenu={backFromPage} controls={talentControls} />
             ) : null}
             {route === "collection" ? (
-              <Collection game={game} inspect={setInspection} back={backFromPage} />
+              <Collection game={game} inspect={setInspection} openMenu={backFromPage} />
             ) : null}
             {route === "settings" || route === "glossary" ? (
               <main className={`menu-screen ${route}-screen`} aria-labelledby="menu-screen-title">
                 <header className="collection-heading">
-                  <Button variant="ghost" size="icon" aria-label="Back" onClick={backFromPage}>
-                    <ArrowLeft aria-hidden="true" />
-                  </Button>
                   <h1 id="menu-screen-title">{route === "settings" ? "Settings" : "Glossary & controls"}</h1>
+                  <Button variant="ghost" size="icon" aria-label="Open menu" onClick={backFromPage}>
+                    <Menu aria-hidden="true" />
+                  </Button>
                 </header>
                 {route === "settings" ? (
                   <Settings

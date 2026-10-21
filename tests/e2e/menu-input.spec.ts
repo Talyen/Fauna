@@ -130,7 +130,7 @@ for (const [width, height, enlarged] of [
     await pad.press(13);
     await expect(page.getByRole("button", { name: "Collection", exact: true })).toBeFocused();
     await pad.press(0);
-    await expect(page.getByRole("button", { name: "Back", exact: true })).toBeFocused();
+    await expect(page.getByRole("button", { name: "Open menu", exact: true })).toBeFocused();
     await pad.press(13);
     const card = page.locator(".collection-grid button:focus");
     await expect(card).toHaveCount(1);
@@ -262,7 +262,7 @@ test("mouse use cancels held-stick navigation until release", async ({ page }) =
   await expect(page.getByRole("button", { name: "Talents", exact: true })).toBeFocused();
   await page.getByRole("button", { name: "Collection", exact: true }).click();
   await page.waitForTimeout(500);
-  await expect(page.getByRole("button", { name: "Back", exact: true })).toBeFocused();
+  await expect(page.getByRole("button", { name: "Open menu", exact: true })).toBeFocused();
   await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-focus", "hidden");
   await page.evaluate(() => {
     window.menuPad.axes = [0, 0];
