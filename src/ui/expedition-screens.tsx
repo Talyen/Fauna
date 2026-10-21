@@ -251,51 +251,55 @@ export function Rewards({ game, send, inspect }: Props) {
                     <h2>{species(incoming).name}</h2>
                   </section>
                 ) : null}
-                <PagedItems
-                  key={incoming ?? "recruits"}
-                  className="recruit-options"
-                  label="Recruit pages"
-                  pageSize={3}
-                  items={
-                    incoming
-                      ? [...game.team, ...game.reserves].map((creature) => ({
-                          kind: creature.species,
-                          id: creature.id,
-                        }))
-                      : reward.recruits.map((kind, index) => ({ kind, id: String(index) }))
-                  }
-                >
-                  {({ kind, id }) => (
-                    <div className="reward-option" key={id}>
-                      <CreatureCard
-                        progression={game}
-                        kind={kind}
-                        actorId={incoming ? id : undefined}
-                        label={incoming ? `Release ${species(kind).name}` : `Recruit ${species(kind).name}`}
-                        onInspect={() =>
-                          inspect(incoming ? { species: kind, creatureId: id } : { species: kind })
-                        }
-                        onClick={() => {
-                          if (incoming) send({ type: "recruit", species: incoming, replace: id });
-                          else if (game.roster.length === 5) {
-                            returnTo.current = Number(id);
-                            setIncoming(kind);
-                          } else send({ type: "recruit", species: kind });
-                        }}
-                      />
-                      <h2>{species(kind).name}</h2>
-                      {!incoming ? (
-                        <p className="collection-uncollected">
-                          {!game.discovery.recruited[kind]
-                            ? "Unlock in Collection"
-                            : creatureStars(game, kind) === MAX_CREATURE_STARS
-                              ? `${MAX_CREATURE_STARS} stars · Max`
-                              : `${creatureStars(game, kind)} → ${creatureStars(game, kind) + 1} stars`}
-                        </p>
-                      ) : null}
-                    </div>
-                  )}
-                </PagedItems>
+                <div className="recruit-roster">
+                  {incoming ? <h3>Release</h3> : null}
+                  <PagedItems
+                    key={incoming ?? "recruits"}
+                    className="recruit-options"
+                    label="Recruit pages"
+                    pageSize={3}
+                    adaptive={{ columns: incoming ? 5 : 3, rows: 1 }}
+                    items={
+                      incoming
+                        ? [...game.team, ...game.reserves].map((creature) => ({
+                            kind: creature.species,
+                            id: creature.id,
+                          }))
+                        : reward.recruits.map((kind, index) => ({ kind, id: String(index) }))
+                    }
+                  >
+                    {({ kind, id }) => (
+                      <div className="reward-option" key={id}>
+                        <CreatureCard
+                          progression={game}
+                          kind={kind}
+                          actorId={incoming ? id : undefined}
+                          label={incoming ? `Release ${species(kind).name}` : `Recruit ${species(kind).name}`}
+                          onInspect={() =>
+                            inspect(incoming ? { species: kind, creatureId: id } : { species: kind })
+                          }
+                          onClick={() => {
+                            if (incoming) send({ type: "recruit", species: incoming, replace: id });
+                            else if (game.roster.length === 5) {
+                              returnTo.current = Number(id);
+                              setIncoming(kind);
+                            } else send({ type: "recruit", species: kind });
+                          }}
+                        />
+                        <h2>{species(kind).name}</h2>
+                        {!incoming ? (
+                          <p className="collection-uncollected">
+                            {!game.discovery.recruited[kind]
+                              ? "Unlock in Collection"
+                              : creatureStars(game, kind) === MAX_CREATURE_STARS
+                                ? `${MAX_CREATURE_STARS} stars · Max`
+                                : `${creatureStars(game, kind)} → ${creatureStars(game, kind) + 1} stars`}
+                          </p>
+                        ) : null}
+                      </div>
+                    )}
+                  </PagedItems>
+                </div>
               </div>
             ) : (
               <div className="boon-options">
@@ -308,6 +312,7 @@ export function Rewards({ game, send, inspect }: Props) {
                           <ArtCard
                             aspect="action"
                             artwork={assetUrl(`boon.${id}`)}
+                            effectText={boon.text}
                             className="boon-choice"
                             aria-label={`Choose ${boon.name}`}
                             onClick={() => send({ type: "chooseBoon", boon: id })}
@@ -352,7 +357,6 @@ export function Talents({
   openMenu: () => void;
   controls?: Controls;
 }) {
-  const compact = useCompactLayout();
   const [keyword, setKeyword] = useState<Keyword | null>(null);
   const [treeReset, setTreeReset] = useState(0);
   const [purchased, setPurchased] = useState<string | null>(null);
@@ -465,7 +469,8 @@ export function Talents({
             key={`${keyword}:${treeReset}`}
             className="talent-tree"
             label="Talent pages"
-            pageSize={compact ? 1 : 2}
+            pageSize={1}
+            adaptive={{ columns: 1, rows: 3 }}
             items={[
               ...new Set(TALENTS.filter((talent) => talent.keyword === keyword).map((talent) => talent.row)),
             ]}

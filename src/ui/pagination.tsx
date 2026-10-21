@@ -83,6 +83,7 @@ export function PageControls({
 export function PagedItems<T>({
   items,
   pageSize,
+  adaptive,
   children,
   className,
   label,
@@ -90,6 +91,7 @@ export function PagedItems<T>({
 }: {
   items: readonly T[];
   pageSize: number;
+  adaptive?: { columns: number; rows: number };
   children: (item: T, index: number) => ReactNode;
   className: string;
   label: string;
@@ -97,7 +99,64 @@ export function PagedItems<T>({
 }) {
   const [anchor, setAnchor] = useState(0);
   const root = useRef<HTMLDivElement>(null);
-  const capacity = Math.max(1, pageSize);
+  const [measuredCapacity, setMeasuredCapacity] = useState<number | null>(null);
+  const capacity = Math.max(1, adaptive ? (measuredCapacity ?? pageSize) : pageSize);
+  const tallestCell = useRef({ profile: "", height: 0 });
+  const maxColumns = adaptive?.columns,
+    maxRows = adaptive?.rows;
+  useLayoutEffect(() => {
+    const element = root.current;
+    const grid = element?.firstElementChild as HTMLElement | null;
+    const main = element?.closest("main");
+    const stage = main?.closest(".screen-stage");
+    if (!element || !grid || !main || !stage || !maxColumns || !maxRows) return;
+    const measure = () => {
+      const cells = Array.from(grid.children, (child) => child.getBoundingClientRect());
+      const width = grid.getBoundingClientRect().width;
+      const cellWidth = Math.max(...cells.map((cell) => cell.width));
+      const cellHeight = Math.max(...cells.map((cell) => cell.height));
+      if (!(width > 0 && cellWidth > 0 && cellHeight > 0)) return;
+      const style = getComputedStyle(grid);
+      const columnGap = Number.parseFloat(style.columnGap) || 0;
+      const rowGap = Number.parseFloat(style.rowGap) || 0;
+      const profile = `${cellWidth}:${style.fontSize}`;
+      // Different pages can contain taller captions or rules. Retain their space so
+      // returning to a shorter page cannot repeatedly grow and shrink capacity.
+      tallestCell.current = {
+        profile,
+        height: Math.max(
+          cellHeight,
+          tallestCell.current.profile === profile ? tallestCell.current.height : 0,
+        ),
+      };
+      // Subtract all surrounding content, including the reserved pagination slot.
+      const available =
+        stage.getBoundingClientRect().height -
+        main.getBoundingClientRect().height +
+        grid.getBoundingClientRect().height;
+      const columns = Math.max(
+        1,
+        Math.min(maxColumns, Math.floor((width + columnGap) / (cellWidth + columnGap))),
+      );
+      const rows = Math.max(
+        1,
+        Math.min(maxRows, Math.floor((available + rowGap) / (tallestCell.current.height + rowGap))),
+      );
+      grid.style.setProperty(
+        "--adaptive-page-height",
+        `${rows * tallestCell.current.height + (rows - 1) * rowGap}px`,
+      );
+      setMeasuredCapacity(columns * rows);
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    for (const target of [stage, main, grid, ...grid.children]) observer.observe(target);
+    window.addEventListener("resize", measure);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, [maxColumns, maxRows, items, capacity]);
   const pages = Math.max(1, Math.ceil(items.length / capacity));
   const page = Math.min(Math.floor(anchor / capacity), pages - 1);
   const focusedItem = useRef<HTMLElement | null>(null);
@@ -119,13 +178,15 @@ export function PagedItems<T>({
         if (!event.currentTarget.contains(event.relatedTarget)) focusedItem.current = null;
       }}
     >
-      <div className={className} role={contentRole}>
+      <div className={className} role={contentRole} data-adaptive={adaptive ? "true" : undefined}>
         {items
           .slice(page * capacity, (page + 1) * capacity)
           .map((item, index) => children(item, page * capacity + index))}
       </div>
       {pages > 1 ? (
         <PageControls page={page} pages={pages} change={(next) => setAnchor(next * capacity)} label={label} />
+      ) : adaptive ? (
+        <div className="pagination-spacer" aria-hidden="true" />
       ) : null}
     </div>
   );

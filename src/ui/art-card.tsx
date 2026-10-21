@@ -1,17 +1,19 @@
 import { forwardRef } from "react";
 import { Button, type ButtonProps } from "../components/ui/button";
 import { useSurfaceRef } from "../lib/surface-ref";
+import { keywordText } from "../game/keywords";
 import { cn } from "../lib/utils";
 
 type ArtCardProps = Omit<ButtonProps, "children" | "variant" | "size"> & {
   artwork: string;
   aspect: "creature" | "action";
   presentation?: boolean;
+  effectText?: string;
 };
 
 /** The single artwork surface: one uncropped image, with state outside the art. */
 export const ArtCard = forwardRef<HTMLButtonElement, ArtCardProps>(function ArtCard(
-  { artwork, aspect, presentation = false, className, ...props },
+  { artwork, aspect, presentation = false, className, effectText, ...props },
   ref,
 ) {
   const surface = useSurfaceRef<HTMLDivElement>();
@@ -24,6 +26,8 @@ export const ArtCard = forwardRef<HTMLButtonElement, ArtCardProps>(function ArtC
       draggable={false}
     />
   );
+  const keyword =
+    effectText === undefined ? undefined : keywordText(effectText).find((part) => part.keyword)?.keyword;
   const classes = cn(`${aspect}-card`, className);
   if (presentation)
     return (
@@ -32,7 +36,15 @@ export const ArtCard = forwardRef<HTMLButtonElement, ArtCardProps>(function ArtC
       </div>
     );
   return (
-    <Button ref={ref} {...props} variant="art" size="card" className={classes}>
+    <Button
+      ref={ref}
+      {...props}
+      data-art-keyword={keyword}
+      data-effect-art={effectText !== undefined || undefined}
+      variant="art"
+      size="card"
+      className={classes}
+    >
       {image}
     </Button>
   );

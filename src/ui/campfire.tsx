@@ -14,7 +14,13 @@ export function Campfire({ game, send }: { game: GameState; send: (command: Comm
   return (
     <Screen className="campfire-screen">
       <ScreenHeading back={() => send({ type: "leaveCampfire" })}>Campfire</ScreenHeading>
-      <PagedItems items={creatures} pageSize={3} className="campfire-roster" label="Rest recovery pages">
+      <PagedItems
+        items={creatures}
+        pageSize={3}
+        adaptive={{ columns: 5, rows: 1 }}
+        className="campfire-roster"
+        label="Rest recovery pages"
+      >
         {(creature) => (
           <div key={creature.id}>
             <AllyCard creature={creature} presentation />

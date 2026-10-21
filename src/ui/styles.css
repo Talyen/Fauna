@@ -351,7 +351,7 @@ strong {
 .game-button:is(.creature-card, .action-card):not(.selected):not(:disabled):not(
     [aria-disabled="true"]
   ):hover::after {
-  border-color: var(--primary);
+  border-color: var(--art-keyword-color, var(--primary));
 }
 .battle-screen {
   height: 100%;
@@ -1511,9 +1511,12 @@ strong {
   justify-content: space-between;
 }
 .settings-heading {
-  color: var(--foreground);
-  font-size: var(--text-heading);
+  color: var(--gold-pale);
+  font-size: var(--text-body);
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: var(--screen-item-gap);
   margin-bottom: var(--screen-item-gap);
 }
 .settings-controls {
@@ -2097,13 +2100,13 @@ body,
   pointer-events: none;
 }
 .reward-screen:has(.recruit-comparison) {
-  width: min(calc(var(--art-landscape-width) * 4 + var(--screen-section-gap) * 3), 100%);
+  width: min(calc(var(--art-landscape-width) * 6 + var(--screen-section-gap) * 5), 100%);
 }
 .recruit-comparison {
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: var(--screen-section-gap);
 }
 .incoming-recruit {
@@ -2116,8 +2119,13 @@ body,
 .incoming-recruit .creature-wrap {
   width: 100%;
 }
-.recruit-comparison > .paged-content {
+.recruit-roster {
   min-width: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--screen-item-gap);
 }
 .rest-recovery {
   position: fixed;
@@ -2149,4 +2157,89 @@ body,
   height: var(--discard-back-height);
   left: var(--discard-back-left);
   top: var(--discard-back-top);
+}
+
+.settings-heading::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--border), transparent);
+}
+.setting-control {
+  display: flex;
+  justify-content: flex-end;
+}
+.pagination-spacer {
+  min-height: var(--control-height);
+}
+[data-adaptive="true"] {
+  min-height: var(--adaptive-page-height, 0px);
+}
+.campfire-roster,
+.recruit-options {
+  align-items: flex-start;
+}
+.campfire-roster > div,
+.recruit-options > .reward-option {
+  flex-shrink: 0;
+}
+
+[data-effect-art] {
+  --art-keyword-color: var(--muted-foreground);
+}
+[data-art-keyword="physical"] {
+  --art-keyword-color: var(--keyword-physical);
+}
+[data-art-keyword="poison"] {
+  --art-keyword-color: var(--keyword-poison);
+}
+[data-art-keyword="nature"] {
+  --art-keyword-color: var(--keyword-nature);
+}
+[data-art-keyword="light"] {
+  --art-keyword-color: var(--keyword-light);
+}
+[data-art-keyword="health"] {
+  --art-keyword-color: var(--keyword-health);
+}
+[data-art-keyword="mana"] {
+  --art-keyword-color: var(--keyword-mana);
+}
+[data-art-keyword="block"] {
+  --art-keyword-color: var(--keyword-block);
+}
+[data-art-keyword="thorns"] {
+  --art-keyword-color: var(--keyword-thorns);
+}
+[data-art-keyword="dodge"] {
+  --art-keyword-color: var(--keyword-dodge);
+}
+[data-art-keyword="armor"] {
+  --art-keyword-color: var(--keyword-armor);
+}
+[data-art-keyword="burn"] {
+  --art-keyword-color: var(--keyword-burn);
+}
+[data-art-keyword="freeze"] {
+  --art-keyword-color: var(--keyword-freeze);
+}
+[data-art-keyword="bleed"] {
+  --art-keyword-color: var(--keyword-bleed);
+}
+[data-art-keyword="stun"] {
+  --art-keyword-color: var(--keyword-stun);
+}
+[data-art-keyword="leech"] {
+  --art-keyword-color: var(--keyword-leech);
+}
+[data-art-keyword="cleanse"] {
+  --art-keyword-color: var(--keyword-cleanse);
+}
+[data-art-keyword="purge"] {
+  --art-keyword-color: var(--keyword-purge);
+}
+
+:root[data-focus="visible"]
+  .game-button[data-effect-art]:not(.selected):not([aria-disabled="true"]):focus::after {
+  border-color: var(--art-keyword-color);
 }

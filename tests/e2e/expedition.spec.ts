@@ -517,18 +517,19 @@ test("talents purchase immediately, gate rows, reset a category, and return to t
   await burn.click();
   const laterTalent = TALENTS.find((talent) => talent.keyword === "burn" && talent.row === 1)!;
   const later = page.getByRole("button", { name: laterTalent.name, exact: true });
-  await page.getByRole("button", { name: "Next page" }).click();
+  if (!(await later.isVisible())) await page.getByRole("button", { name: "Next page" }).click();
   await expect(later).toHaveAttribute("aria-disabled", "true");
   const before = (await state(page)).revision;
   await later.focus();
   await page.keyboard.press("Enter");
   expect((await state(page)).revision).toBe(before);
-  await page.getByRole("button", { name: "Previous page" }).click();
+  if (!(await page.getByRole("button", { name: "Melting Point", exact: true }).isVisible()))
+    await page.getByRole("button", { name: "Previous page" }).click();
   await page.getByRole("button", { name: "Melting Point", exact: true }).click();
   await page.getByRole("button", { name: "Flashpoint", exact: true }).click();
   await expect(page.getByRole("button", { name: "Flashpoint, unlocked", exact: true })).toBeFocused();
   expect((await state(page)).talents).toHaveLength(3);
-  await page.getByRole("button", { name: "Next page" }).click();
+  if (!(await later.isVisible())) await page.getByRole("button", { name: "Next page" }).click();
   await expect(later).toHaveAttribute("aria-disabled", "false");
   await expect(page.getByText("1 point available", { exact: true })).toBeVisible();
   const reset = page.getByRole("button", { name: "Reset Burn talents", exact: true });

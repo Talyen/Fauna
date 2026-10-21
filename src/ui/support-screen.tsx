@@ -58,6 +58,7 @@ export function SupportScreen({ game, send }: { game: GameState; send: (c: Comma
                   <ArtCard
                     aspect="action"
                     artwork={assetUrl(`boon.${boon.id}`)}
+                    effectText={boon.text}
                     aria-label={`Inspect ${boon.name}`}
                   />
                 </TooltipTrigger>

@@ -516,6 +516,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                     <ArtCard
                       aspect="action"
                       artwork={assetUrl(`boon.${id}`)}
+                      effectText={boon.text}
                       presentation
                       aria-label={boon.name}
                     />

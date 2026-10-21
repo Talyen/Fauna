@@ -220,6 +220,17 @@ export function ActionCard({
     if (!tooltips) setTooltipOpen(false);
   }, [tooltips]);
   const def = enemy ? enemyCard(definition(card.definitionId)) : definition(card.definitionId);
+  const effectText = cardText(
+    def,
+    card.level,
+    enemyValue ??
+      Math.round(
+        actionValue(card, actor ?? { species: def.species, attacked: false }, modifiers) +
+          (modifiers && actor && def.effect === "attack" && def.damageType === "physical"
+            ? physicalBonus(actor, modifiers)
+            : 0),
+      ),
+  );
   const artwork = (
     <ArtCard
       aspect="action"
@@ -227,11 +238,12 @@ export function ActionCard({
       presentation={presentation}
       tabIndex={presentation ? undefined : 0}
       className={selected ? "selected" : undefined}
+      effectText={effectText}
       data-card-id={card.id}
       data-effect={def.effect}
       aria-label={
         label ??
-        `${def.name}${card.level ? ` +${card.level}` : ""}, ${ownerName}, ${enemy ? "" : `${modifiers ? cardCost(card, modifiers) : def.cost} mana, `}${cardText(def, card.level, enemyValue ?? Math.round(actionValue(card, actor ?? { species: def.species, attacked: false }, modifiers) + (modifiers && actor && def.effect === "attack" && def.damageType === "physical" ? physicalBonus(actor, modifiers) : 0)))}`
+        `${def.name}${card.level ? ` +${card.level}` : ""}, ${ownerName}, ${enemy ? "" : `${modifiers ? cardCost(card, modifiers) : def.cost} mana, `}${effectText}`
       }
       aria-pressed={presentation ? undefined : selected}
       aria-disabled={presentation ? undefined : disabled}
