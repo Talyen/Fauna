@@ -72,8 +72,24 @@ export function layoutViolations() {
     )
       failures.push(`${name} is outside the viewport`);
     if (el.matches('button:not(:disabled), [role="switch"], [role="radio"], [role="slider"], [role="tab"]')) {
-      const hit = document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2);
-      if (!hit || !el.contains(hit)) failures.push(`${name} is obscured`);
+      const middleX = box.x + box.width / 2,
+        middleY = box.y + box.height / 2;
+      const insetX = Math.min(12, box.width / 4),
+        insetY = Math.min(12, box.height / 4);
+      const points = [
+        [middleX, middleY],
+        [box.left + insetX, middleY],
+        [box.right - insetX, middleY],
+        [middleX, box.top + insetY],
+        [middleX, box.bottom - insetY],
+      ];
+      if (
+        points.some(([x, y]) => {
+          const hit = document.elementFromPoint(x!, y!);
+          return !hit || !el.contains(hit);
+        })
+      )
+        failures.push(`${name} is obscured`);
       if ((el.closest("label, .ui-slider") ?? el).getBoundingClientRect().height < 43.5)
         failures.push(`${name} has a hit area shorter than 44px`);
     }

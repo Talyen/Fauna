@@ -195,3 +195,12 @@ test("layout enforcement detects nested scrolling, hidden clipping, and obscured
   );
   expect((await page.evaluate(layoutViolations)).some((entry) => entry.includes("obscured"))).toBe(true);
 });
+
+test("layout enforcement rejects controls with an obscured edge even when their center is clear", async ({
+  page,
+}) => {
+  await page.setContent(
+    '<main class="app"><button style="width:160px;height:44px">Discard Pile</button><div style="position:fixed;left:148px;top:8px;width:20px;height:44px"></div></main>',
+  );
+  expect((await page.evaluate(layoutViolations)).some((entry) => entry.includes("obscured"))).toBe(true);
+});

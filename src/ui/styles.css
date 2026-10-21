@@ -1859,7 +1859,7 @@ body,
 }
 .battle-piles {
   position: absolute;
-  inset: var(--screen-item-gap) 0 auto;
+  inset: var(--screen-item-gap) calc(var(--control-height) + var(--screen-item-gap)) auto 0;
   pointer-events: none;
 }
 .battle-piles > * {
