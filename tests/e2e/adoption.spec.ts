@@ -146,3 +146,31 @@ for (const width of [1280, 1920])
     expect(saved.journey.currency).toBe(20);
     expect(saved.expedition.offers).toEqual(offers);
   });
+
+test("Settings panel switches preserve dialog, tab and icon geometry", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.evaluate(() => document.fonts.ready);
+  const dialog = page.getByRole("dialog", { name: "Settings", exact: true });
+  const tabs = ["Display", "Sound", "Battle"].map((name) => dialog.getByRole("tab", { name, exact: true }));
+  const geometry = async () =>
+    Promise.all([
+      dialog.boundingBox(),
+      ...tabs.map((tab) => tab.boundingBox()),
+      ...tabs.map((tab) => tab.locator("svg").boundingBox()),
+    ]);
+  for (const scale of ["100%", "125%", "75%"] as const) {
+    await tabs[0]!.click();
+    await dialog.getByRole("radio", { name: scale, exact: true }).click();
+    const before = await geometry();
+    for (const tab of [...tabs.slice(1), tabs[0]!]) {
+      await tab.click();
+      expect(await geometry()).toEqual(before);
+      await expect(dialog.getByRole("tabpanel")).toBeVisible();
+      for (const panel of await dialog.locator('.settings-panel[data-state="inactive"]').all()) {
+        await expect(panel).toHaveAttribute("inert", "");
+        await expect(panel).toHaveAttribute("aria-hidden", "true");
+      }
+    }
+  }
+});

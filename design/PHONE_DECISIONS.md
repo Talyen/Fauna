@@ -4,11 +4,12 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 
 ## Tabs
 
-- Tabs are centered with real, visible 2px borders on every tab: neutral when inactive, gold when selected or hovered. There is no gray background strip. Active tabs use black fill and semibold light text. Intentional keyboard focus retains a solid gold outline and a visible neutral tab border.
+- Tabs are centered with real, visible 2px borders on every tab: neutral when inactive, gold when selected or hovered. There is no gray background strip. Active tabs use black fill and regular light text. Intentional keyboard focus retains a solid gold outline and a visible neutral tab border.
 - Inactive hover: subtle charcoal fill, light text and a gold border, without movement.
 - Inter-tab gap: the standard 12px related-item spacing; horizontal padding: 12px per side; height remains at least 44px.
 - 20px Lucide icons beside labels.
-- Color transition: 150ms; panel activation remains immediate.
+- Color transition: 150ms. All tab labels retain the same regular weight; selection never changes button widths or icon positions.
+- Keep the dialog frame and tab row fixed across panel switches; scroll long content within the panel and reserve scrollbar space. Panel activation is immediate, with a 150ms content crossfade (instant under reduced motion). The outgoing panel is inert and hidden from assistive technology.
 - Carry forward the single highlighted-boundary rule on combined states; retain visible native keyboard/controller focus.
 
 ## Switches

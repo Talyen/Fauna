@@ -26,6 +26,10 @@ body:has(.settings-review) .dialog-overlay[data-state="closed"] {
   padding: var(--space-12) var(--space-6) var(--space-6);
   border: 1px solid var(--border);
   background: var(--secondary);
+  height: min(var(--settings-dialog-height), calc(100dvh - var(--space-12)));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   animation: settings-review-in 150ms ease-out;
   scrollbar-color: transparent transparent;
   scrollbar-width: thin;
@@ -49,7 +53,7 @@ body:has(.settings-review) .dialog-overlay[data-state="closed"] {
   font-size: var(--text-body);
 }
 .settings-combined .settings-panel {
-  min-height: 200px;
+  min-height: 0;
 }
 .settings-combined .settings-tabs {
   width: 100%;
@@ -67,6 +71,7 @@ body:has(.settings-review) .dialog-overlay[data-state="closed"] {
   border: 2px solid var(--border);
   background: transparent;
   color: var(--muted-foreground);
+  font-weight: 400;
   outline: none;
   box-shadow: none;
   transition:
@@ -82,7 +87,7 @@ body:has(.settings-review) .dialog-overlay[data-state="closed"] {
   background: var(--background);
   border-color: var(--primary);
   color: var(--foreground);
-  font-weight: 600;
+  font-weight: 400;
 }
 .settings-combined .settings-tabs button[data-state="inactive"]:hover {
   background: var(--muted);
@@ -414,4 +419,15 @@ body:has(.settings-review[data-reduced="true"]) .dialog-overlay {
   font-size: var(--text-heading);
   font-weight: 600;
   color: var(--foreground);
+}
+
+.settings-combined > h2 {
+  flex: 0 0 auto;
+}
+.settings-combined .settings-preview-tools {
+  flex: 0 1 auto;
+  min-height: 0;
+  max-height: 38%;
+  overflow: auto;
+  scrollbar-gutter: stable both-edges;
 }
