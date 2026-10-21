@@ -147,7 +147,7 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 - Hovering the selected creature strengthens the same ring, preserving the single highlighted-boundary treatment.
 - Unavailable swap choices use 45% opacity and remain inspectable.
 - After a successful swap, animate creatures between positions over 150ms. Committed gameplay updates immediately; motion is presentation-only, never blocks input and is skipped under reduced motion.
-- Swap movement uses ease-out timing and small opposing arcs to reduce overlap. Arc height remains undecided pending comparison.
+- Swap movement uses ease-out timing and opposing arcs with a 32px peak displacement from the direct path, chosen in the interactive arc-height comparison.
 - Empty reserve slots that can receive a creature use a thin dashed neutral border and a centered muted Lucide Plus. Available hover turns the existing border gold without movement. Keyboard/controller focus uses the established solid gold outline, preserving the single highlighted-boundary rule.
 
 ## Keywords in rule text
