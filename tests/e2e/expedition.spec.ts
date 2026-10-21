@@ -570,7 +570,7 @@ for (const [width, height] of [
           ),
           portraitSizes: arts.every((art) => {
             const box = art.getBoundingClientRect();
-            return box.width <= 160.5 && Math.abs(box.width / box.height - 0.75) < 0.01 && box.height >= 44;
+            return Math.abs(box.width / box.height - 0.75) < 0.01 && box.height >= 44;
           }),
           rows: [...rows.values()],
         };
@@ -580,8 +580,27 @@ for (const [width, height] of [
         captionsVisible: true,
         readableCaptions: true,
         portraitSizes: true,
-        rows: [5, 5, 4],
+        rows: [7, 7],
       });
+      const artworkFit = await page.locator(".talent-overview-viewport").evaluate((viewport) => {
+        const category = viewport.querySelector(".talent-category")!;
+        const art = category.querySelector(".action-card")!.getBoundingClientRect();
+        const style = getComputedStyle(category);
+        const gap = parseFloat(style.gap);
+        const captions = [...category.querySelectorAll("h2, p")].reduce(
+          (height, caption) => height + caption.getBoundingClientRect().height,
+          0,
+        );
+        const rowGap = parseFloat(getComputedStyle(viewport.querySelector(".talent-overview")!).rowGap);
+        return {
+          actual: art.width,
+          largest: Math.min(
+            category.getBoundingClientRect().width,
+            ((viewport.clientHeight - rowGap) / 2 - captions - gap * 2) * 0.75,
+          ),
+        };
+      });
+      expect(artworkFit.actual).toBeCloseTo(artworkFit.largest, 0);
       await captureScreen(page, {
         path: `reports/implementation/talents-overview-${width}-${height}-${scale}.png`,
       });

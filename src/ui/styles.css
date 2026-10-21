@@ -840,7 +840,7 @@ strong {
 }
 .talents-screen {
   width: 100%;
-  max-width: calc(var(--talent-overview-art-width) * 5 + var(--screen-item-gap) * 4 + var(--space-4));
+  max-width: var(--talent-tree-screen-width);
   height: 100%;
   min-height: 0;
   margin: auto;
@@ -851,6 +851,7 @@ strong {
   gap: var(--screen-section-gap);
 }
 .talents-screen[data-view="overview"] {
+  max-width: none;
   height: 100%;
   overflow: visible;
 }
@@ -884,7 +885,7 @@ strong {
   row-gap: var(--screen-section-gap);
 }
 .talent-category {
-  flex: 0 0 calc((100% - var(--screen-item-gap) * 4) / 5);
+  flex: 0 0 calc((100% - var(--screen-item-gap) * 6) / 7);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -893,16 +894,15 @@ strong {
   text-align: center;
 }
 .talent-category .action-card {
-  /* Three rows reserve captions, point labels and gaps before sizing only the art. */
+  /* Fill two rows while reserving full-size captions, point labels and gaps. */
   width: min(
     100%,
-    var(--talent-overview-art-width),
     calc(
       (
-          100cqh - var(--screen-section-gap) * 2 - var(--screen-item-gap) * 6 - var(--text-name) * 4.2 -
-            var(--text-secondary) * 9
+          100cqh - var(--screen-section-gap) -
+            (var(--talent-overview-caption-height) + var(--screen-item-gap) * 2) * 2
         ) *
-        1 / 4
+        3 / 8
     )
   );
 }
