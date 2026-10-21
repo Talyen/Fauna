@@ -873,8 +873,8 @@ strong {
 }
 .reward-choices {
   margin-top: var(--screen-section-gap);
-  /* One section title and two caption lines keep reward anchors aligned at large text. */
-  min-height: calc(var(--art-long-side) + var(--screen-item-gap) * 2 + var(--text-name) * 4.2);
+  /* Reserve the recruitment pager as well as captions so Boon headings share the same anchor. */
+  min-height: calc(var(--art-long-side) + var(--screen-item-gap) * 3 + var(--text-name) * 4.2);
   display: flex;
   align-items: center;
 }

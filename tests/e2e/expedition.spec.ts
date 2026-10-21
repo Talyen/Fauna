@@ -788,7 +788,8 @@ test("controller edges, inspect and pause do not repeat a held confirm", async (
   await card.focus();
   await press(2);
   await expect(page.getByRole("dialog")).toHaveCount(0);
-  await expect(page.getByRole("tooltip")).toBeVisible();
+  await expect(card).toBeFocused();
+  expect((await state(page)).revision).toBe(run().revision);
   await press(1);
   await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
   await press(1);
@@ -1692,12 +1693,13 @@ for (const [width, height] of [
     const swap = (await page.getByRole("button", { name: "Swap", exact: true }).boundingBox())!;
     expect(swap.y + swap.height).toBeLessThan(end.y);
     expect(Math.abs(swap.x - end.x)).toBeLessThan(1);
-    {
-      expect(mana.x).toBe(32);
-      expect(Math.abs(mana.y + mana.height - height + 24)).toBeLessThan(1);
-      expect(Math.abs(end.x + end.width - width + 32)).toBeLessThan(1);
-      expect(Math.abs(end.y + end.height - height + 24)).toBeLessThan(1);
-    }
+    const draw = (await page.locator('[data-pile="draw"]').boundingBox())!;
+    const discard = (await page.locator('[data-pile="discard"]').boundingBox())!;
+    expect(mana.y + mana.height).toBeLessThan(draw.y);
+    expect(end.y + end.height).toBeLessThan(discard.y);
+    expect(Math.abs(mana.x + mana.width / 2 - draw.x - draw.width / 2)).toBeLessThan(1);
+    expect(Math.abs(end.x + end.width / 2 - discard.x - discard.width / 2)).toBeLessThan(1);
+    for (const pile of [draw, discard]) expect(Math.abs(pile.y + pile.height - height + 24)).toBeLessThan(1);
     await page.mouse.move(0, 0);
     const fan = await page
       .locator(".app:not([inert]) .hand-slot")

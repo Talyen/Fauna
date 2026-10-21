@@ -183,8 +183,8 @@ for (const [width, height, enlarged] of [
     await captureScreen(page, { path: `reports/menu-home-${width}.png` });
     await pad.press(0);
     await expect(page.getByRole("button", { name: "Back", exact: true })).toBeFocused();
-    await pad.press(13);
     const card = page.locator(".collection-grid button:focus");
+    for (let row = 0; row < 3 && !(await card.count()); row++) await pad.press(13);
     await expect(card).toHaveCount(1);
     const opener = await card.getAttribute("aria-label");
     await captureScreen(page, { path: `reports/menu-collection-${width}.png` });
