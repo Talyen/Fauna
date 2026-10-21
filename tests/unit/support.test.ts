@@ -102,3 +102,35 @@ it.each([BOONS.length - 2, BOONS.length - 1, BOONS.length])(
     expect(decodeSave(encodeSave(s))).toEqual(s);
   },
 );
+it("discounts each new Merchant with Favor and persists the paid price", () => {
+  let state = merchant();
+  state = produce(state, (draft) => {
+    draft.boons = ["merchants-favor"];
+  });
+  // Stock is already committed. Favor applies when the next Merchant is prepared.
+  for (let battle = 0; battle < 4; battle++) {
+    state = winBattle(accept(state, { type: "beginBattle" }));
+    if (state.phase === "boon") state = accept(state, { type: "skipBoon" });
+    if (state.phase === "recruit") state = accept(state, { type: "skipRecruit" });
+  }
+  expect(state.support!.stock.map((slot) => slot.price)).toEqual([13, 13]);
+  const before = state.currency;
+  state = accept(state, { type: "enterSupport", visit: state.support!.id });
+  state = accept(state, { type: "buyBoon", visit: state.support!.id, slot: state.support!.stock[0]!.slot });
+  expect(state.currency).toBe(before - 13);
+  expect(decodeSave(encodeSave(state))).toEqual(state);
+});
+it("adds Smuggler's Map to the settled reward once without duplicating combat earnings", () => {
+  let state = produce(
+    accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" }),
+    (draft) => {
+      draft.boons = ["smugglers-map"];
+    },
+  );
+  state = winBattle(accept(state, { type: "beginBattle" }));
+  expect(state.currency).toBe(22);
+  expect(state.reward!.currency).toBe(22);
+  expect(state.journey!.currency).toBe(22);
+  state = accept(decodeSave(encodeSave(state)), { type: "skipRecruit" });
+  expect(state.currency).toBe(22);
+});

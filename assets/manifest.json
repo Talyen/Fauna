@@ -713,6 +713,116 @@
       "aspect": [4, 3],
       "provenance": "Fauna original blank encounter placeholder",
       "rights": "Fauna original artwork"
+    },
+    {
+      "id": "boon.brass-censer",
+      "origin": "repository",
+      "source": "public/art/boons/brass-censer.webp",
+      "output": "art/boons/brass-censer.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Copied from Alchemy src/assets/optimized/brass-censer.webp; same user-owned project artwork",
+      "rights": "Existing Alchemy project artwork reused with user authorization"
+    },
+    {
+      "id": "boon.parasitic-bloom",
+      "origin": "repository",
+      "source": "public/art/boons/parasitic-bloom.webp",
+      "output": "art/boons/parasitic-bloom.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Copied from Alchemy src/assets/optimized/parasitic-bloom.webp; same user-owned project artwork",
+      "rights": "Existing Alchemy project artwork reused with user authorization"
+    },
+    {
+      "id": "boon.cutpurse-knife",
+      "origin": "repository",
+      "source": "public/art/boons/cutpurse-knife.webp",
+      "output": "art/boons/cutpurse-knife.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Copied from Alchemy src/assets/optimized/cutpurse-knife.webp; same user-owned project artwork",
+      "rights": "Existing Alchemy project artwork reused with user authorization"
+    },
+    {
+      "id": "boon.merchants-favor",
+      "origin": "repository",
+      "source": "public/art/boons/merchants-favor.webp",
+      "output": "art/boons/merchants-favor.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Copied from Alchemy src/assets/optimized/merchants-favor.webp; same user-owned project artwork",
+      "rights": "Existing Alchemy project artwork reused with user authorization"
+    },
+    {
+      "id": "boon.plague-doctors-mask",
+      "origin": "repository",
+      "source": "public/art/boons/plague-doctors-mask.webp",
+      "output": "art/boons/plague-doctors-mask.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Copied from Alchemy src/assets/optimized/plague-doctors-mask.webp; same user-owned project artwork",
+      "rights": "Existing Alchemy project artwork reused with user authorization"
+    },
+    {
+      "id": "boon.sundering-charm",
+      "origin": "repository",
+      "source": "public/art/boons/sundering-charm.webp",
+      "output": "art/boons/sundering-charm.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Copied from Alchemy src/assets/optimized/sundering-charm.webp; same user-owned project artwork",
+      "rights": "Existing Alchemy project artwork reused with user authorization"
+    },
+    {
+      "id": "boon.resonant-chimes",
+      "origin": "repository",
+      "source": "public/art/boons/resonant-chimes.webp",
+      "output": "art/boons/resonant-chimes.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Copied from Alchemy src/assets/optimized/resonant-chimes.webp; same user-owned project artwork",
+      "rights": "Existing Alchemy project artwork reused with user authorization"
+    },
+    {
+      "id": "boon.smugglers-map",
+      "origin": "repository",
+      "source": "public/art/boons/smugglers-map.webp",
+      "output": "art/boons/smugglers-map.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Copied from Alchemy src/assets/optimized/smugglers-map.webp; same user-owned project artwork",
+      "rights": "Existing Alchemy project artwork reused with user authorization"
+    },
+    {
+      "id": "boon.frozen-pocketwatch",
+      "origin": "repository",
+      "source": "public/art/boons/frozen-pocketwatch.webp",
+      "output": "art/boons/frozen-pocketwatch.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Copied from Alchemy src/assets/optimized/frozen-pocketwatch.webp; same user-owned project artwork",
+      "rights": "Existing Alchemy project artwork reused with user authorization"
+    },
+    {
+      "id": "boon.lucky-clover",
+      "origin": "repository",
+      "source": "public/art/boons/lucky-clover.webp",
+      "output": "art/boons/lucky-clover.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Copied from Alchemy src/assets/optimized/lucky-clover.webp; same user-owned project artwork",
+      "rights": "Existing Alchemy project artwork reused with user authorization"
     }
   ]
 }

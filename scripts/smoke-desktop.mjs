@@ -96,7 +96,7 @@ try {
     JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
   );
   if (
-    swapped.version !== 18 ||
+    swapped.version !== 19 ||
     swapped.team[0].species !== "silkmoth" ||
     swapped.battle.mana !== 4 ||
     swapped.lineup[0] !== "ally-0"

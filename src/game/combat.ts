@@ -281,7 +281,11 @@ export function removeEffects(
       targetId: unit.id,
       text: `${unitName(unit)}: ${kind === "cleanse" ? "Cleanse" : "Purge"}.`,
     });
-  if (cleansed > 0 && state && !("maxHealth" in unit)) {
+  if (cleansed > 0 && state) cleanseRewards(state, unit, cleansed, events);
+}
+function cleanseRewards(state: GameState, unit: Combatant, cleansed: number, events: GameEvent[]) {
+  const stats = combat(unit);
+  if (!("maxHealth" in unit)) {
     if (hasTalent(state, "light.divine-favor")) stats.freeLight = true;
     const healing =
       Number(hasTalent(state, "heal.renewal")) * 2 + (state.boons.includes("sin-eaters-lantern") ? 6 : 0);
@@ -466,6 +470,14 @@ export function hit(
   const depletedBlock = blocked > 0 && target.block === 0;
   damage -= blocked;
   if (
+    attack &&
+    alliedSource &&
+    !alliedTarget &&
+    state.boons.includes("sundering-charm") &&
+    (type === "physical" || type === "stun")
+  )
+    stats.armor = Math.max(0, stats.armor - 2);
+  if (
     type === "physical" ||
     type === "stun" ||
     (alliedTarget &&
@@ -520,6 +532,17 @@ export function hit(
     gainGold(state, 3, events);
   if (target.health === 0 && !alliedTarget && alliedSource && state.boons.includes("bone-charm"))
     restoreHealth(source, 3, events, false, state);
+  if (alliedSource && !alliedTarget && lost > 0) {
+    if (type === "bleed" && state.boons.includes("cutpurse-knife")) gainGold(state, 1, events);
+    if (type === "poison" && state.boons.includes("parasitic-bloom") && roll(state) < 0.1)
+      leechHealth(state, source, lost, events, true);
+    if (attack && type === "nature" && state.boons.includes("lucky-clover") && roll(state) < 0.1)
+      gainGold(state, lost, events);
+    if (attack && type === "light" && state.boons.includes("brass-censer") && roll(state) < 0.2) {
+      if (roll(state) < 0.5) hit(state, source, target, damage, "burn", events, { proc: true });
+      else leechHealth(state, source, lost, events, stats.poison > 0 || stats.bleed > 0);
+    }
+  }
   if (nextPhysical > 0 && source.health > 0)
     hit(state, source, target, nextPhysical, "physical", events, { proc: true });
   if (attack && damage > 0) {
@@ -554,7 +577,10 @@ export function hit(
         stats[type] = 0;
         stats.controlled = type;
         stats.controlTurns =
-          type === "stun" && alliedSource && hasTalent(state, "stun.extended-stun") ? 2 : 1;
+          (type === "stun" && alliedSource && hasTalent(state, "stun.extended-stun")) ||
+          (type === "freeze" && alliedSource && !alliedTarget && state.boons.includes("frozen-pocketwatch"))
+            ? 2
+            : 1;
         appliedControl = true;
         if (alliedSource && !alliedTarget) {
           if (type === "freeze" && hasTalent(state, "freeze.icebound")) target.block = 0;
@@ -655,6 +681,28 @@ export function hit(
 }
 export function tickStatuses(state: GameState, unit: Combatant, events: GameEvent[]) {
   const stats = combat(unit);
+  if (
+    !("maxHealth" in unit) &&
+    unit.health > 0 &&
+    stats.poison > 0 &&
+    state.boons.includes("plague-doctors-mask")
+  ) {
+    const removed = Math.min(2, stats.poison);
+    stats.poison -= removed;
+    events.push({
+      kind: "status",
+      targetId: unit.id,
+      amount: -removed,
+      text: `${unitName(unit)} Cleanses ${removed} Poison.`,
+    });
+    if (stats.poison === 0) {
+      delete stats.statusSources.poison;
+      cleanseRewards(state, unit, 1, events);
+    }
+    const target = state.battle!.enemies.find((enemy) => enemy.health > 0);
+    if (target) hit(state, unit, target, Math.round(removed / 2), "poison", events, { proc: true });
+    if (state.battle!.enemies.every((enemy) => enemy.health <= 0)) return;
+  }
   for (const status of ["burn", "poison", "bleed"] as const) {
     if (unit.health <= 0) break;
     const amount = stats[status];

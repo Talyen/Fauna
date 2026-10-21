@@ -44,6 +44,7 @@ const battle = z
     earnedGold: natural,
     freeBurnUsed: z.boolean(),
     meteoriteUsed: z.boolean(),
+    cardsPlayedThisTurn: z.number().int().min(0).max(3),
     turn: z.number().int().min(1).max(1_000_000),
     mana: z.number().int().min(0).max(6),
     maxMana: z.number().int().min(4).max(6),
@@ -79,7 +80,7 @@ const creature = z.object({
   combat: combatState.optional(),
 });
 const currentShape = z.object({
-  version: z.literal(18),
+  version: z.literal(19),
   discovery: z.object({ encountered: z.array(speciesId).max(6), recruited: z.array(speciesId).max(6) }),
   revision: z
     .number()

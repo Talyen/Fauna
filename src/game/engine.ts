@@ -30,7 +30,7 @@ import type { Card, Command, CommandResult, GameEvent, GameState } from "./types
 export function createGame(seed = 1): GameState {
   return freeze(
     {
-      version: 18,
+      version: 19,
       support: null,
       discovery: { encountered: [], recruited: [] },
       revision: 0,
@@ -70,7 +70,11 @@ function prepareEncounter(state: GameState) {
           BOONS.filter((b) => !state.boons.includes(b.id)),
         )
           .slice(0, 2)
-          .map((b, i) => ({ slot: `slot-${i}`, boon: b.id, price: MERCHANT_PRICE }))
+          .map((b, i) => ({
+            slot: `slot-${i}`,
+            boon: b.id,
+            price: MERCHANT_PRICE - (state.boons.includes("merchants-favor") ? 7 : 0),
+          }))
       : [];
   state.support =
     kind && stock.length
@@ -122,6 +126,7 @@ export function beginBattle(state: GameState, events: GameEvent[] = []) {
     earnedGold: 0,
     freeBurnUsed: false,
     meteoriteUsed: false,
+    cardsPlayedThisTurn: 0,
     turn: 1,
     mana: TURN_MANA + Number(hasTalent(state, "mana.leyline-attunement")),
     maxMana: TURN_MANA + Number(hasTalent(state, "mana.leyline-attunement")),
@@ -177,7 +182,11 @@ function finishBattle(state: GameState, defeated: boolean) {
   const xp = bankBattleXP(state);
   const earnedGold = state.battle?.earnedGold ?? 0;
   const previousCurrency = state.currency;
-  state.currency = Math.min(1_000_000, state.currency + (defeated ? 0 : bossEncounter(state) ? 40 : 20));
+  state.currency = Math.min(
+    1_000_000,
+    state.currency +
+      (defeated ? 0 : (bossEncounter(state) ? 40 : 20) + (state.boons.includes("smugglers-map") ? 2 : 0)),
+  );
   const currency = state.currency - previousCurrency + earnedGold;
   const outcome = defeated ? "defeat" : finalEncounter(state) ? "victory" : "next";
   if (state.journey) {
@@ -389,6 +398,7 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
     battle.mana = 0;
     gainMana(draft, battle.maxMana, events);
     battle.turn++;
+    battle.cardsPlayedThisTurn = 0;
     intents(draft);
     if (
       living(draft).some((c) => !controlled(c)) ||
@@ -648,6 +658,11 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
             false,
             battle.enemies.find((e) => e.id === command.targetId),
           );
+        }
+        if (battle.cardsPlayedThisTurn < 3) {
+          battle.cardsPlayedThisTurn++;
+          if (battle.cardsPlayedThisTurn === 3 && draft.boons.includes("resonant-chimes"))
+            gainMana(draft, 1, events);
         }
         fillHand(draft);
         if (!preview) settle(draft, events);

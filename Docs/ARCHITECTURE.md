@@ -22,7 +22,7 @@ A linear-congruential RNG is explicit state. Destination offers, shuffles and in
 
 Development saves are disposable: there are no released player saves to preserve. Do not implement migrations or backward compatibility unless explicitly requested. Obsolete formats are rejected and can be reset through the existing recovery flow. The canonical agent policy is in [AGENTS.md](../AGENTS.md#development-saves).
 
-Current save version 18 is validated by Zod and semantic checks for content IDs, ownership, unique card zones, health bounds, lineup completeness, saved encounter packs, and phase/outcome coherence. Only the current format is supported in browser and desktop storage; fixtures track that format. Valid current-format backups remain recoverable.
+Current save version 19 is validated by Zod and semantic checks for content IDs, ownership, unique card zones, health bounds, lineup completeness, saved encounter packs, and phase/outcome coherence. Only the current format is supported in browser and desktop storage; fixtures track that format. Valid current-format backups remain recoverable.
 
 Battle settlement banks actual retained currency and keyword XP once. Ordinary fights offer recruitment only; intermediate bosses offer up to three unowned Boons only. The shared Reward screen consumes committed receipts and accepts a choice or Skip, with no acknowledgement phase or Continue command. No eligible choice advances immediately; final victory and defeat go directly to Journey results. The journey summary retains the outcome, battle count, gains, new unlocks, and last-battle receipt; opening results never grants rewards or saves.
 
@@ -68,9 +68,9 @@ Talent categories are consolidated independently of combat damage identities. Th
 
 ## Support visits and spending
 
-Each biome offers an optional Merchant after the first ordinary victory. It is visible and enterable only when at least one stocked item is affordable. These saved visits preserve combat offers and do not replace or advance battles. Merchant stock contains up to two unowned Boons at 20 Gold each, with one purchase per visit. Gold is the existing permanent currency. Entering commits a visit; leaving consumes it, and beginning the next battle forfeits it. Inspection is read-only. Commands address visit/slot identities and validate before mutation; reload cannot refresh stock or repeat purchases. Merchant state remains valid during a Campfire visit.
+Each biome offers an optional Merchant after the first ordinary victory. It is visible and enterable only when at least one stocked item is affordable. These saved visits preserve combat offers and do not replace or advance battles. Merchant stock contains up to two unowned Boons at 20 Gold each, or 13 with Merchant's Favor when stock is prepared, with one purchase per visit. Gold is the existing permanent currency. Entering commits a visit; leaving consumes it, and beginning the next battle forfeits it. Inspection is read-only. Commands address visit/slot identities and validate before mutation; reload cannot refresh stock or repeat purchases. Merchant state remains valid during a Campfire visit.
 
-Journey currency measures gross retained earnings, independently of the remaining wallet. Boss rewards contain up to three eligible unowned Boons and skip only an empty pool. Support state, stock, price bounds, receipts and phases are validated together in save version 18; obsolete development saves are rejected.
+Journey currency measures gross retained earnings, independently of the remaining wallet. Boss rewards contain up to three eligible unowned Boons and skip only an empty pool. Support state, stock, price bounds, receipts and phases are validated together in save version 19; obsolete development saves are rejected.
 
 ## Cloud reconciliation and device preferences
 
