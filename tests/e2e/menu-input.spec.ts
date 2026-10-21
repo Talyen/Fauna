@@ -43,23 +43,37 @@ test("minimum-size enlarged menus fit every action without scrolling", async ({ 
     localStorage.setItem("fauna.save.v1", value);
   }, JSON.stringify(game));
   await page.goto("/");
+  const homeChoices = page.getByRole("navigation", { name: "Main menu" });
+  const homeWidth = (await homeChoices.boundingBox())!.width;
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   await page.getByRole("button", { name: "Open menu" }).click();
   const dialog = page.getByRole("dialog", { name: "Pause menu" });
+  await expect(dialog.getByRole("heading", { name: "Fauna", exact: true })).toBeVisible();
+  const choices = dialog.getByRole("navigation", { name: "Pause menu" });
+  const bounds = (await choices.boundingBox())!;
+  expect(bounds.width).toBeCloseTo(homeWidth);
+  const resume = (await choices.getByRole("button", { name: "Resume", exact: true }).boundingBox())!;
+  const lineup = (await choices.getByRole("button", { name: "Lineup", exact: true }).boundingBox())!;
+  const talents = (await choices.getByRole("button", { name: "Talents", exact: true }).boundingBox())!;
+  expect(resume.x + resume.width / 2).toBeCloseTo(bounds.x + bounds.width / 2);
+  expect(lineup.y).toBeCloseTo(talents.y);
+  expect(lineup.width).toBeCloseTo(resume.width);
+  expect(talents.x - lineup.x - lineup.width).toBeCloseTo(12);
+  expect(lineup.y - resume.y - resume.height).toBeCloseTo(12);
   const heights = await dialog
     .locator("button:not(.dialog-close)")
     .evaluateAll((buttons) => buttons.map((button) => button.getBoundingClientRect().height));
   expect(heights.every((height) => height >= 44)).toBe(true);
-  for (const name of [
-    "Lineup",
-    "Talents",
-    "Collection",
-    "Glossary",
-    "Settings",
-    "End journey",
-    "Main menu",
-  ]) {
-    await page.keyboard.press("s");
+  for (const [key, name] of [
+    ["s", "Lineup"],
+    ["d", "Talents"],
+    ["s", "Glossary"],
+    ["a", "Collection"],
+    ["s", "Settings"],
+    ["d", "End journey"],
+    ["s", "Main menu"],
+  ] as const) {
+    await page.keyboard.press(key);
     const choice = page.getByRole("button", { name, exact: true });
     await expect(choice).toBeFocused();
     await expect(choice).toBeInViewport();

@@ -562,9 +562,11 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
         {!view.cloud.blocking ? (
           <>
             {route === "home" ? (
-              <Screen className="home-screen">
-                <h1>Fauna</h1>
-                <nav aria-label="Main menu">{menuItems(true)}</nav>
+              <Screen className="home-screen menu-layout">
+                <h1 className="menu-title">Fauna</h1>
+                <nav className="menu-choices" aria-label="Main menu">
+                  {menuItems(true)}
+                </nav>
               </Screen>
             ) : null}
             {route === "unlocks" && reveals[0] ? (
@@ -744,7 +746,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
         {!modal && !inspection ? (
           <Dialog open={menu} onOpenChange={setMenu}>
             <DialogContent
-              className="menu-panel"
+              className="menu-panel menu-layout"
               closeLabel="Close menu"
               onOpenAutoFocus={(event) => {
                 const label = menuReturnLabel.current;
@@ -774,7 +776,10 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
             >
               <DialogTitle className="sr-only">Pause menu</DialogTitle>
               <DialogDescription className="sr-only">Game menu</DialogDescription>
-              {menuItems(false)}
+              <h2 className="menu-title">Fauna</h2>
+              <nav className="menu-choices" aria-label="Pause menu">
+                {menuItems(false)}
+              </nav>
             </DialogContent>
           </Dialog>
         ) : null}
