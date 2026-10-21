@@ -265,7 +265,7 @@ strong {
   padding: 0;
   position: relative;
   display: block;
-  overflow: hidden;
+  overflow: visible;
   border: 1px solid var(--border-art);
   background: var(--surface);
   border-radius: var(--radius);
@@ -319,11 +319,21 @@ strong {
 :root[data-focus="visible"] .game-button:not(:disabled):not([aria-disabled="true"]):focus {
   scale: var(--hover-scale);
 }
-.locked-species > .creature-card:hover,
+.locked-species > .creature-card::after,
+.game-button:is(.creature-card, .action-card)::after {
+  content: "";
+  position: absolute;
+  inset: calc(var(--hover-frame-overlap) - var(--hover-frame-width));
+  border: var(--hover-frame-width) solid transparent;
+  border-radius: inherit;
+  pointer-events: none;
+  transition: border-color var(--motion-hover) ease-out;
+}
+.locked-species > .creature-card:hover::after,
 .game-button:is(.creature-card, .action-card):not(.selected):not(:disabled):not(
     [aria-disabled="true"]
-  ):hover {
-  box-shadow: 0 0 0 var(--hover-frame-width) var(--primary);
+  ):hover::after {
+  border-color: var(--primary);
 }
 .battle-screen {
   height: 100%;
