@@ -145,13 +145,13 @@ strong {
   color: var(--foreground);
 }
 .dialog-content.menu-panel {
-  width: min(320px, calc(100vw - var(--space-12)));
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-.menu-panel > button:not(.dialog-close) {
-  width: 100%;
+  width: min(
+    calc(2 * var(--main-menu-button-width) + var(--screen-item-gap) + 2 * var(--screen-section-gap)),
+    calc(100vw - var(--space-12))
+  );
+  padding: var(--space-12) var(--screen-section-gap);
+  border: 0;
+  background: var(--background);
 }
 .menu-icon-journey {
   color: var(--menu-icon-journey);
@@ -189,7 +189,7 @@ strong {
 .menu-icon-skip {
   color: var(--menu-icon-skip);
 }
-.home-screen {
+.menu-layout {
   min-height: 0;
   display: flex;
   flex-direction: column;
@@ -197,22 +197,22 @@ strong {
   justify-content: center;
   gap: var(--screen-section-gap);
 }
-.home-screen h1 {
+.menu-title {
   font-size: var(--text-result);
 }
-.home-screen nav {
+.menu-choices {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   width: min(100%, calc(2 * var(--main-menu-button-width) + var(--screen-item-gap)));
   gap: var(--screen-item-gap);
 }
-.home-screen nav > button {
+.menu-choices > button {
   height: auto;
   min-height: var(--control-height);
   white-space: normal;
 }
-.home-screen nav > .primary-menu-action,
-.home-screen nav > button:last-child:nth-child(even) {
+.menu-choices > .primary-menu-action,
+.menu-choices > button:last-child:nth-child(even) {
   grid-column: 1 / -1;
   justify-self: center;
   width: var(--main-menu-button-width);
