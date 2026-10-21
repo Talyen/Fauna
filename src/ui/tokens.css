@@ -17,6 +17,7 @@
   --muted-foreground: #b3b3b3;
   --accent: #292929;
   --accent-foreground: var(--foreground);
+  --control-hover: #1c1c1c;
   --destructive: #f87171;
   --destructive-foreground: var(--primary-foreground);
   --border: #484848;

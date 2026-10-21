@@ -5,7 +5,7 @@
   color: var(--foreground);
 }
 .game-button.control-outline:not(:disabled):not([aria-disabled="true"]):hover {
-  background: var(--muted);
+  background: var(--control-hover);
   border-color: var(--primary);
 }
 :root .game-button:not(:disabled):not([aria-disabled="true"]):active {
@@ -63,7 +63,7 @@
   box-shadow: none;
 }
 .ui-tabs-list .ui-tab[data-state="inactive"]:hover {
-  background: var(--muted);
+  background: var(--control-hover);
   color: var(--foreground);
   border-color: var(--primary);
 }
