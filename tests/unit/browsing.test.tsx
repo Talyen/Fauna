@@ -10,6 +10,7 @@ import { createSession } from "../../src/application/session";
 import { createBrowserPlatform } from "../../src/platform/browser";
 
 beforeEach(() => {
+  vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
   vi.stubGlobal(
     "ResizeObserver",
     class {
@@ -25,6 +26,7 @@ beforeEach(() => {
 afterEach(() => {
   cleanup();
   localStorage.clear();
+  vi.restoreAllMocks();
   vi.unstubAllGlobals();
 });
 
@@ -72,6 +74,7 @@ describe("menu browsing", () => {
       expect(
         within(screen.getByRole("button", { name: "Armored Fists" })).getByText("Unlock · 1 point"),
       ).toBeTruthy();
+      expect(document.activeElement).toBe(screen.getByRole("button", { name: "Shield Slam" }));
       await user.keyboard("{Escape}");
       expect(screen.getByRole("button", { name: "Physical talents" })).toBeTruthy();
       await user.keyboard("{Escape}");

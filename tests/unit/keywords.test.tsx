@@ -123,7 +123,7 @@ describe("keyword foundation", () => {
       1,
       0,
     );
-    const feedback = renderToStaticMarkup(<CombatFeedback bursts={bursts} targetId="ally-0" />);
+    const feedback = renderToStaticMarkup(<CombatFeedback bursts={bursts} />);
     expect(feedback).toContain('data-combat-tone="heal"');
     expect(feedback).toContain('data-combat-tone="block"');
     const readout = renderToStaticMarkup(<BattleReadout health={10} maxHealth={20} block={2} />);

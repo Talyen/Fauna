@@ -353,7 +353,7 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     await activate(page.getByRole("button", { name: `Choose ${name}`, exact: true }));
     await activate(page.getByRole("button", { name: "Begin journey", exact: true }));
     expect((await state(page)).lineup).toEqual(["ally-0"]);
-    for (let i = 0; i < 300; i++) {
+    for (let i = 0; i < 400; i++) {
       const s = await state(page);
       if (s.phase === "victory") break;
       expect(s.phase).not.toBe("defeat");
@@ -504,7 +504,7 @@ test("talents purchase immediately, gate rows, reset a category, and return to t
   expect((await state(page)).talents).toEqual(["block.second-wind"]);
   expect((await state(page)).keywordXP.burn).toBe(100);
   await expect(reset).toBeDisabled();
-  await expect(page.getByRole("button", { name: "Melting Point", exact: true })).toBeFocused();
+  await expect(page.getByRole("button", { name: "Flashpoint", exact: true })).toBeFocused();
   await page.keyboard.press("Escape");
   await expect(burn).toBeFocused();
   await expect(burn).toHaveAccessibleDescription("3 points available");

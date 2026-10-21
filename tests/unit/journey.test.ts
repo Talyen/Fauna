@@ -6,7 +6,7 @@ import { INITIAL_SPECIES, species } from "../../src/game/content";
 import { BOONS } from "../../src/game/progression";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { previewPlay } from "../../src/game/preview";
-import { recruitChoice, accept, run, winBattle, victoryReady, bossReward } from "./helpers";
+import { recruitChoice, accept, run, winBattle, victoryReady, bossReward, policy } from "./helpers";
 
 function startedJourney() {
   return accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
@@ -212,4 +212,25 @@ describe("journey earnings and results", () => {
     expect(s.reward!.xp.nature).toBe(1);
     expect(decodeSave(encodeSave(s))).toEqual(s);
   });
+});
+
+it("completes the one-starter recruitment path through the final boss within the browser journey budget", () => {
+  let game = startedJourney();
+  for (let step = 0; step < 400 && game.phase !== "victory"; step++) {
+    expect(game.phase).not.toBe("defeat");
+    expect(game.reward?.outcome).not.toBe("defeat");
+    const command =
+      game.phase === "recruit" && game.roster.length < 5
+        ? {
+            type: "recruit" as const,
+            species:
+              game.reward!.recruits.find((kind) => !game.roster.includes(kind)) ?? game.reward!.recruits[0]!,
+          }
+        : policy(game);
+    game = accept(game, command);
+  }
+  expect(game.phase).toBe("victory");
+  expect(game.team).toHaveLength(3);
+  expect(game.roster).toHaveLength(5);
+  expect(decodeSave(encodeSave(game))).toEqual(game);
 });

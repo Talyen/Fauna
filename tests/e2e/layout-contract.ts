@@ -1,5 +1,13 @@
 import { expect, type Page } from "@playwright/test";
 
+export const REVIEW_VIEWPORTS = [
+  [1280, 720],
+  [1280, 800],
+  [1920, 1080],
+  [2560, 1080],
+  [3440, 1440],
+] as const;
+
 /** Also runs against deliberate failures: clipping must not masquerade as fitting. */
 export function layoutViolations() {
   const failures: string[] = [];
@@ -27,7 +35,10 @@ export function layoutViolations() {
     ),
   ];
   const active = dialogs.at(-1) ?? document.querySelector(".app:not([inert])") ?? document.body;
-  const roots = [active, ...document.querySelectorAll('.game-tooltip:not([data-state="closed"])')];
+  const roots = [
+    active,
+    ...document.querySelectorAll('.game-tooltip:not([data-state="closed"]), .combat-feedback'),
+  ];
   const elements = new Set(roots.flatMap((root) => [root, ...root.querySelectorAll("*")]));
   for (const el of elements) {
     if (!(el instanceof HTMLElement) || invisible(el)) continue;

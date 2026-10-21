@@ -4,7 +4,9 @@ import type { GameEvent } from "../game/types";
 export function impactTargets(events: readonly GameEvent[]): string[] {
   return [
     ...new Set(
-      events.filter((e) => e.kind === "damage" && (e.amount ?? 0) > 0 && e.targetId).map((e) => e.targetId!),
+      events
+        .filter((e) => e.kind === "damage" && e.impact !== false && (e.amount ?? 0) > 0 && e.targetId)
+        .map((e) => e.targetId!),
     ),
   ];
 }
