@@ -103,7 +103,10 @@ export function BattleScreen({
     def?.effect === "teamCleanse" ||
     def?.effect === "nullify" ||
     (def?.effect === "heal" && def.target === "allAllies");
-  const selfTarget = def?.effect === "dodge" || (def?.effect === "guard" && def.target === "self");
+  const selfTarget =
+    def?.effect === "draw" ||
+    def?.effect === "dodge" ||
+    ((def?.effect === "guard" || def?.effect === "heal") && def.target === "self");
   const enemyTarget = def?.effect === "attack" && !def.target,
     allyTarget =
       (def?.effect === "heal" || def?.effect === "guard") && !allAllies && !selfTarget && !automaticTarget;

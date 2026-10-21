@@ -169,7 +169,27 @@ export function grantBlock(
   sharing = true,
 ) {
   if (unit.health <= 0 || amount <= 0) return;
-  const gained = Math.min(STACK_LIMIT - unit.block, Math.round(amount));
+  let gained = Math.min(STACK_LIMIT - unit.block, Math.round(amount));
+  if (gained > 0 && state.phase === "battle" && state.battle) {
+    const allied = !("maxHealth" in unit);
+    const pool = allied ? state.team : state.battle.enemies;
+    if (pool.some((recipient) => recipient.id === unit.id)) {
+      const percent = creaturePassive(allied ? state : undefined, unit.species).effects.reduce(
+        (sum, effect) => sum + (effect.kind === "blockConversion" ? effect.amount : 0),
+        0,
+      );
+      const recipient = percent > 0 ? mostInjured(pool) : undefined;
+      if (recipient) {
+        const converted = Math.min(
+          Math.round((gained * percent) / 100),
+          maximumHealth(recipient) - recipient.health,
+        );
+        gained -= converted;
+        if (converted > 0) restoreHealth(recipient, converted, events, false, state);
+      }
+    }
+  }
+  if (!gained) return;
   unit.block += gained;
   events.push({
     kind: "block",
@@ -177,7 +197,6 @@ export function grantBlock(
     amount: gained,
     text: `${unitName(unit)} gains ${gained} Block.`,
   });
-  if (!gained) return;
   if (!("maxHealth" in unit) && hasTalent(state, "light.radiant-guard") && roll(state) < 0.1)
     drawKeyword(state, "light");
   if (!("maxHealth" in unit) && state.boons.includes("ironwood-buckler"))

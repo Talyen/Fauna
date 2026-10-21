@@ -3,7 +3,7 @@ import { actionValue, cardCost, physicalBonus } from "../game/rules";
 import { definition, species } from "../game/content";
 import type { Command, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 9;
+export const BATTLE_POLICY_VERSION = 10;
 /** Only visible information enters scoring; no forecasts or gameplay RNG are sampled. */
 export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
   if (state.phase !== "battle" || !state.battle) return [];
@@ -53,12 +53,26 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
           (sum, ally) => sum + Math.min(value, species(ally.species).health - ally.health),
           0,
         );
-        add(id, restored > 0 ? 3000 + restored : 0);
+        add(
+          id,
+          restored > 0
+            ? 3000 + restored
+            : def.effects?.some((effect) => effect.kind === "blind") &&
+                state.battle.enemies.some((enemy) => enemy.health > 0 && !enemy.combat.blind)
+              ? 150
+              : 0,
+        );
       } else
-        for (const ally of def.target === "mostInjured" ? [mostInjured(allies)!] : allies) {
+        for (const ally of def.target === "self"
+          ? [actor]
+          : def.target === "mostInjured"
+            ? [mostInjured(allies)!]
+            : allies) {
           const missing = species(ally.species).health - ally.health;
           if (missing > 0) add(id, 3000 + Math.min(value, missing), def.target ? undefined : ally.id);
         }
+    } else if (def.effect === "draw") {
+      add(id, 200 + value);
     } else if (def.effect === "teamCleanse") {
       add(id, 150);
     } else if (def.effect === "teamGuard") {

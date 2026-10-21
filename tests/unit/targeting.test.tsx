@@ -5,6 +5,7 @@ import userEvent from "@testing-library/user-event";
 import { TooltipProvider } from "../../src/components/ui/tooltip";
 import { BattleScreen, type Controls } from "../../src/ui/battle-screen";
 import { TargetPreview } from "../../src/ui/target-preview";
+import { assetUrl } from "../../src/ui/assets";
 import { moveFocus } from "../../src/ui/input";
 import { previewCard } from "../../src/game/engine";
 import { produce } from "immer";
@@ -222,8 +223,8 @@ it.each(["emberback-furnace-breath", "emberback-magma-stomp", "mossguard-attack"
     });
     const { container, card, send, controls } = open(game, true);
     const before = structuredClone(game);
-    expect(card("attack").querySelector("img")?.getAttribute("src")).toContain(
-      (id === "mossguard-attack" ? "rooted-stomp" : id.replace("emberback-", "")) + ".png",
+    expect(card("attack").querySelector("img")?.getAttribute("src")).toBe(
+      assetUrl(content.definition(id).artwork!),
     );
     await userEvent.click(card("attack"));
     expect(
@@ -323,4 +324,23 @@ it("Mirage Step selects only Dunefox, previews its shared Dodge, and confirms wi
   ).toContain("Dodge 0.75 → 5.25");
   await userEvent.click(screen.getByRole("button", { name: /Play ·/ }));
   expect(send).toHaveBeenCalledWith({ type: "play", cardId: game.battle!.hand[0]! });
+});
+
+it("Bloom Cradle previews self-healing and confirms without choosing an ally", async () => {
+  const game = produce(teamRun(1, ["bloomquail", "mossguard", "prismram"]), (draft) => {
+    const chosen = draft.cards.find((card) => card.definitionId === "bloomquail-draw")!;
+    draft.battle!.hand = [chosen.id];
+    draft.battle!.buffer = [];
+    draft.battle!.discard = [];
+    draft.battle!.draw = draft.cards.filter((card) => card.id !== chosen.id).map((card) => card.id);
+    draft.team[0]!.health -= 4;
+    draft.team[1]!.health = 1;
+  });
+  const { container, card, send } = open(game, true);
+  await userEvent.click(card("draw"));
+  expect(screen.getByText("Bloomquail · Self")).toBeTruthy();
+  expect(container.querySelectorAll(".player-row [data-active-target]")).toHaveLength(1);
+  expect(container.querySelector(".target-preview")?.getAttribute("aria-label")).toContain("Health 22 to 24");
+  await userEvent.keyboard("{Enter}");
+  expect(send).toHaveBeenCalledExactlyOnceWith({ type: "play", cardId: game.battle!.hand[0]! });
 });

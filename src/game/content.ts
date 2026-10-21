@@ -11,9 +11,11 @@ export type SpeciesId =
   | "cindernewt"
   | "coralcurl"
   | "chimecricket"
-  | "dawncall";
+  | "dawncall"
+  | "bloomquail";
 type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
+  | { kind: "blockConversion"; amount: number }
   | { kind: "blockRetention"; amount: number }
   | { kind: "cardBonus"; trigger: "firstAttack" | "stunAttack" | "heal" | "guard"; amount: number }
   | { kind: "battleStart"; effect: "block" | "thorns" | "armor"; amount: number }
@@ -68,7 +70,7 @@ export type CardDefinition = CardBase &
         target?: "allEnemies" | "randomEnemy";
       }
     | { effect: "guard"; target?: "self" }
-    | { effect: "heal"; target?: "allAllies" | "mostInjured" }
+    | { effect: "heal"; target?: "allAllies" | "mostInjured" | "self" }
     | { effect: Exclude<Effect, "attack" | "guard" | "heal"> }
   );
 export const SPECIES: readonly Species[] = [
@@ -499,6 +501,40 @@ export const SPECIES: readonly Species[] = [
       },
     ],
   },
+  {
+    id: "bloomquail",
+    name: "Bloomquail",
+    title: "The petal keeper",
+    health: 26,
+    color: "#ed9c9b",
+    trait: "Full Bloom",
+    passiveTiers: [
+      {
+        description: "Convert 50% of your Block into Health for the most injured ally",
+        effects: [{ kind: "blockConversion", amount: 50 }],
+      },
+      {
+        description: "Convert 60% of your Block into Health for the most injured ally",
+        effects: [{ kind: "blockConversion", amount: 60 }],
+      },
+      {
+        description: "Convert 70% of your Block into Health for the most injured ally",
+        effects: [{ kind: "blockConversion", amount: 70 }],
+      },
+      {
+        description: "Convert 80% of your Block into Health for the most injured ally",
+        effects: [{ kind: "blockConversion", amount: 80 }],
+      },
+      {
+        description: "Convert 90% of your Block into Health for the most injured ally",
+        effects: [{ kind: "blockConversion", amount: 90 }],
+      },
+      {
+        description: "Convert your Block into Health for the most injured ally",
+        effects: [{ kind: "blockConversion", amount: 100 }],
+      },
+    ],
+  },
 ];
 const card = <T extends Exclude<Effect, "attack">>(
   species: SpeciesId,
@@ -699,8 +735,29 @@ export const CARDS: readonly CardDefinition[] = [
     effects: [{ kind: "cleanse", amount: 6, target: "recipient" }],
     artwork: "action.chimecricket.lullaby-drift",
   },
+  {
+    ...card("bloomquail", "Petal Rampart", "guard", 6),
+    target: "self",
+    artwork: "action.bloomquail.petal-rampart",
+  },
+  {
+    ...card("bloomquail", "Bloom Cradle", "draw", 2),
+    effects: [{ kind: "heal", amount: 2 }],
+    artwork: "action.bloomquail.bloom-cradle",
+  },
+  {
+    ...card("bloomquail", "Petal Veil", "heal", 2),
+    target: "allAllies",
+    effects: [{ kind: "blind", amount: 1 }],
+    artwork: "action.bloomquail.petal-veil",
+  },
 ];
 export function enemyCard(card: CardDefinition): CardDefinition {
+  // Enemies have no hand; retain the self-healing half of a draw ability
+  if (card.effect === "draw") {
+    const healing = card.effects?.find((effect) => effect.kind === "heal");
+    if (healing) return { ...card, effect: "heal", target: "self", value: healing.amount, effects: [] };
+  }
   return {
     ...card,
     effects: card.effects?.filter((effect) =>
@@ -730,7 +787,10 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
       text = card.target === "self" ? `Gain ${value} Block` : `Give an ally ${value} Block`;
       break;
     case "heal":
-      text = `Restore ${value} Health to ${card.target === "allAllies" ? "all allies" : card.target === "mostInjured" ? "the most injured ally" : "a living ally"}`;
+      text =
+        card.target === "self"
+          ? `Restore ${value} Health`
+          : `Restore ${value} Health to ${card.target === "allAllies" ? "all allies" : card.target === "mostInjured" ? "the most injured ally" : "a living ally"}`;
       break;
     case "dodge":
       text = `Gain ${value}% Dodge until your next turn`;
@@ -743,6 +803,9 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
       break;
     case "swap":
       text = "Swap out for a random backup";
+      break;
+    case "draw":
+      text = `Draw ${value} card${value === 1 ? "" : "s"}`;
       break;
     case "teamGuard":
       text = `Allies gain ${value} Block`;

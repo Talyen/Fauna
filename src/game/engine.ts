@@ -44,7 +44,7 @@ import { bossEncounter, encounterSource, finalEncounter, encounterPacks } from "
 import type { Card, Command, CommandResult, GameEvent, GameState } from "./types";
 export function createGame(seed = 1): GameState {
   const state: GameState = {
-    version: 32,
+    version: 33,
     support: null,
     discovery: { encountered: [], recruited: {} },
     revision: 0,
@@ -421,8 +421,11 @@ function applyExtras(
   target?: import("./combat").Combatant,
   blindMiss = false,
   criticalBonus = 0,
+  recipientOnly = false,
 ) {
   for (const effect of def.effects ?? []) {
+    // Targeted Cleanse follows each healed ally; global extras run once after the primary effect
+    if (recipientOnly !== (effect.kind === "cleanse" && effect.target === "recipient")) continue;
     if (actor.health <= 0) break;
     switch (effect.kind) {
       case "damage":
@@ -562,12 +565,12 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
             });
           }
         } else if (def.effect === "heal") {
-          const injured = mostInjured(battle.enemies)!;
+          const injured = def.target === "self" ? enemy : mostInjured(battle.enemies)!;
           for (const recipient of def.target === "allAllies"
             ? battle.enemies.filter((e) => e.health > 0)
             : [injured]) {
             restoreHealth(recipient, value, events, false, draft, false, enemy);
-            applyExtras(draft, enemy, def, events, true, recipient);
+            applyExtras(draft, enemy, def, events, true, recipient, false, 0, true);
           }
         } else if (def.effect === "teamCleanse") {
           for (const recipient of battle.enemies.filter((unit) => unit.health > 0))
@@ -585,8 +588,7 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
             grantBlock(draft, unit, value, events);
           }
         }
-        if (def.effect !== "heal")
-          applyExtras(draft, enemy, def, events, true, target, blindMiss, criticalBonus);
+        applyExtras(draft, enemy, def, events, true, target, blindMiss, criticalBonus);
       }
       if (settle(draft, events)) return;
     }
@@ -671,7 +673,8 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
     )
       return reject(state, "Choose a living ally.");
     if (
-      (def.effect === "dodge" || (def.effect === "guard" && def.target === "self")) &&
+      (def.effect === "dodge" ||
+        ((def.effect === "guard" || def.effect === "heal") && def.target === "self")) &&
       command.targetId !== undefined &&
       command.targetId !== actor.id
     )
@@ -922,21 +925,23 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
             const targets =
               def.target === "allAllies"
                 ? living(draft)
-                : def.target === "mostInjured"
-                  ? [mostInjured(draft.team)!]
-                  : draft.team.filter((c) => c.id === command.targetId && c.health > 0);
+                : def.target === "self"
+                  ? [actor]
+                  : def.target === "mostInjured"
+                    ? [mostInjured(draft.team)!]
+                    : draft.team.filter((c) => c.id === command.targetId && c.health > 0);
             for (const recipient of targets) {
               restoreHealth(recipient, value, events, false, draft, true, actor);
-              applyExtras(draft, actor, def, events, false, recipient);
+              applyExtras(draft, actor, def, events, false, recipient, false, 0, true);
             }
           }
+          if (def.effect === "draw") draw(draft, value);
           if (def.effect === "teamCleanse")
             for (const recipient of living(draft)) removeEffects(recipient, "cleanse", value, events, draft);
           if (def.effect === "nullify") hushDome(draft, false, events);
           if (def.effect === "dodge") grantTemporaryDodge(actor, value, events);
           if (def.effect === "swap") swapFromCard(draft, actor, events);
-          if (def.effect !== "heal")
-            applyExtras(draft, actor, def, events, false, target, blindMiss, criticalBonus);
+          applyExtras(draft, actor, def, events, false, target, blindMiss, criticalBonus);
         }
         if (battle.cardsPlayedThisTurn < 3) {
           battle.cardsPlayedThisTurn++;

@@ -1263,6 +1263,50 @@
       "aspect": [3, 4],
       "provenance": "Unchanged Dawncall artwork selected from user Google Drive: https://drive.google.com/file/d/1-KWvYvzQAFW7g_MexgomYirPpWndiauI/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "creature.bloomquail",
+      "origin": "repository",
+      "source": "public/art/bloomquail/portrait.png",
+      "output": "art/bloomquail/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Bloomquail artwork selected from user Google Drive: https://drive.google.com/file/d/1-s264kQPUk4QaIvIKd8vVDTMkXYg-osh/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.bloomquail.petal-rampart",
+      "origin": "repository",
+      "source": "public/art/bloomquail/petal-rampart.png",
+      "output": "art/bloomquail/petal-rampart.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Bloomquail artwork selected from user Google Drive: https://drive.google.com/file/d/1BMMwLfA3_38oOrcAMCiXsK-1MnhiRHdB/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.bloomquail.bloom-cradle",
+      "origin": "repository",
+      "source": "public/art/bloomquail/bloom-cradle.png",
+      "output": "art/bloomquail/bloom-cradle.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Bloomquail artwork selected from user Google Drive: https://drive.google.com/file/d/1AOvTtkgOGIfTH4grZ2ANr2QeQ_bGv4tI/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.bloomquail.petal-veil",
+      "origin": "repository",
+      "source": "public/art/bloomquail/petal-veil.png",
+      "output": "art/bloomquail/petal-veil.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Bloomquail artwork selected from user Google Drive: https://drive.google.com/file/d/1Fpe9tfwUXWSEyNV_ELyqOjJa-jgY4wTJ/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }
