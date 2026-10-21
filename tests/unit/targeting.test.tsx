@@ -5,6 +5,7 @@ import userEvent from "@testing-library/user-event";
 import { TooltipProvider } from "../../src/components/ui/tooltip";
 import { BattleScreen, type Controls } from "../../src/ui/battle-screen";
 import { TargetPreview } from "../../src/ui/target-preview";
+import { moveFocus } from "../../src/ui/input";
 import { previewCard } from "../../src/game/engine";
 import { produce } from "immer";
 import { run } from "./helpers";
@@ -167,4 +168,28 @@ it("shows the acting creature's secondary effects separately from the chosen all
   expect(actor.hasAttribute("data-active-target")).toBe(false);
   expect(recipient.hasAttribute("data-active-target")).toBe(true);
   expect(send).not.toHaveBeenCalled();
+});
+
+it("moves between battle rows and reaches hand-side controls with directional input", () => {
+  const { container, card } = open(
+    produce(fixture(), (game) => {
+      Object.assign(game.team[0]!.combat!, { armor: 1, dodge: 10, thorns: 2, burn: 1, poison: 1 });
+    }),
+  );
+  card("attack").focus();
+  moveFocus("up");
+  expect(document.activeElement?.matches(".player-row .creature-card")).toBe(true);
+  moveFocus("up");
+  expect(document.activeElement?.closest(".enemy-row")).not.toBeNull();
+  moveFocus("down");
+  moveFocus("down");
+  const toolbar = container.querySelector(".hand-toolbar")!;
+  expect(toolbar.contains(document.activeElement)).toBe(true);
+  const controls = [...toolbar.querySelectorAll<HTMLButtonElement>("button:not(:disabled)")];
+  const reached = new Set<Element | null>();
+  for (let i = 0; i < controls.length; i++) {
+    reached.add(document.activeElement);
+    moveFocus("right");
+  }
+  for (const control of controls) expect(reached.has(control)).toBe(true);
 });

@@ -356,8 +356,8 @@ export function BattleScreen({
         ) : null}
       </div>
       <HandMotion revision={game.revision} turn={battle.turn} opening={openingDraw} paused={clearSelection}>
-        <section className="hand-toolbar" aria-label="Battle cards and controls">
-          <div className="battle-dock" data-nav-row>
+        <section className="hand-toolbar" aria-label="Battle cards and controls" data-nav-row>
+          <div className="battle-dock">
             <ManaCrystals
               mana={battle.mana}
               maximum={battle.maxMana}
@@ -407,7 +407,7 @@ export function BattleScreen({
               })}
             </div>
           </section>
-          <div className="battle-dock" data-nav-row>
+          <div className="battle-dock">
             <div className="battle-actions">
               {actions}
               <Button className="end-turn" onClick={() => play({ type: "endTurn" })}>

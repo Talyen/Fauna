@@ -56,6 +56,8 @@ describe("menu page focus return", () => {
         screen.getByRole("heading", { name: page === "Glossary" ? "Glossary & controls" : page }),
       ).toBeTruthy();
       expect(screen.getByRole("button", { name: "Back" })).toBeTruthy();
+      if (page === "Collection")
+        expect(document.activeElement).toBe(screen.getByRole("button", { name: "Back" }));
       if (page === "Talents" && back === "Open menu") {
         await user.click(screen.getByRole("button", { name: "Physical talents" }));
         expect(screen.getByRole("heading", { name: "Physical" })).toBeTruthy();

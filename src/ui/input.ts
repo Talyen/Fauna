@@ -43,9 +43,13 @@ export function moveFocus(direction: "left" | "right" | "up" | "down") {
     (root === document && current.closest(".battle-screen, .team-selection, .talents-screen")) ||
     current.closest(".swap-roster, .settings-controls, .inspection")
   ) {
-    const rows = Array.from(
-      root.querySelectorAll<HTMLElement>(".enemy-row, .player-row, .hand, [data-nav-row]"),
-    ).filter((row) => row.getClientRects().length > 0 && row.querySelector('button, [role="slider"]'));
+    const rowSelector = ".enemy-row, .player-row, .hand-toolbar, [data-nav-row]";
+    const rows = Array.from(root.querySelectorAll<HTMLElement>(rowSelector)).filter(
+      (row) =>
+        row.getClientRects().length > 0 &&
+        row.querySelector('button, [role="slider"]') &&
+        !row.parentElement?.closest(rowSelector),
+    );
     const rowIndex = rows.findIndex((row) => row.contains(current));
     if (rowIndex >= 0) {
       if (direction === "left" || direction === "right") {

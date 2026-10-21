@@ -787,7 +787,10 @@ test("controller edges, inspect and pause do not repeat a held confirm", async (
   const card = page.locator('.app:not([inert]) .hand .action-card[data-effect="attack"]').first();
   await card.focus();
   await press(2);
-  await expect(page.getByRole("dialog")).toBeVisible();
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+  await expect(page.getByRole("tooltip")).toBeVisible();
+  await press(1);
+  await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
   await press(1);
   await expect(card).toBeFocused();
   await press(0);
@@ -1540,7 +1543,7 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
         `${card.cost} Mana`,
       );
     await expect(details.getByRole("region", { name: "Cinder Strike", exact: true })).toContainText(
-      "Deal 8 Fire damage.",
+      "Deal 8 Burn damage.",
     );
     await expect(page.getByRole("dialog")).toHaveCount(0);
     if (input === "mouse") await details.getByRole("button", { name: "Back", exact: true }).click();
