@@ -178,7 +178,7 @@ describe("journey earnings and results", () => {
     const s = winBattle(accept(startedJourney(), { type: "beginBattle" }));
     for (const mutate of [
       (d: typeof s) => {
-        d.journey!.currency = d.journey!.victories * 40 + 21;
+        d.journey!.currency = 1_000_001;
       },
       (d: typeof s) => {
         d.journey!.xp.nature = (d.keywordXP.nature ?? 0) + 1;

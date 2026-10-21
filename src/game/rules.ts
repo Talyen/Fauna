@@ -20,7 +20,18 @@ export function actionValue(
             : 0;
   return def.value + card.level * 2 + bonus;
 }
-export function cardCost(card: Pick<Card, "definitionId">, state: GameState) {
+export function cardCost(
+  card: Pick<Card, "definitionId"> & Partial<Pick<Card, "ownerId">>,
+  state: GameState,
+) {
+  const actor = state.team.find((c) => c.id === ("ownerId" in card ? card.ownerId : undefined));
+  const keywords = cardKeywords(card);
+  if (
+    actor?.combat?.freeCard ||
+    (actor?.combat?.freeNature && keywords.includes("nature")) ||
+    (actor?.combat?.freeLight && keywords.includes("light"))
+  )
+    return 0;
   return hasTalent(state, "burn.flashpoint") &&
     !state.battle?.freeBurnUsed &&
     cardKeywords(card).includes("burn")

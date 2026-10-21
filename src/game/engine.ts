@@ -3,6 +3,12 @@ import { freeze, produce } from "immer";
 import { KEYWORDS, BOONS, cardKeywords, canBuyTalent, hasTalent } from "./progression";
 import {
   combat,
+  shuffle,
+  fillHand,
+  draw,
+  drawKeyword,
+  gainMana,
+  grantArmor,
   freshCombat,
   grantStatus,
   grantBlock,
@@ -24,7 +30,7 @@ import type { Card, Command, CommandResult, GameEvent, GameState } from "./types
 export function createGame(seed = 1): GameState {
   return freeze(
     {
-      version: 16,
+      version: 17,
       support: null,
       discovery: { encountered: [], recruited: [] },
       revision: 0,
@@ -53,13 +59,6 @@ export function createGame(seed = 1): GameState {
   ) as GameState;
 }
 const random = roll;
-function shuffle<T>(state: GameState, cards: T[]): T[] {
-  for (let i = cards.length - 1; i > 0; i--) {
-    const j = Math.floor(random(state) * (i + 1));
-    [cards[i], cards[j]] = [cards[j]!, cards[i]!];
-  }
-  return cards;
-}
 function offerDestinations(state: GameState) {
   const route = state.expedition!;
   const biome = BIOMES[route.biome]!;
@@ -110,31 +109,6 @@ function ownedCards(id: string, kind: GameState["team"][number]["species"]): Car
   }));
 }
 export const MAX_HAND_SIZE = HAND_LIMIT;
-function fillHand(state: GameState) {
-  const battle = state.battle!;
-  while (battle.hand.length < MAX_HAND_SIZE && battle.buffer.length) battle.hand.push(battle.buffer.shift()!);
-}
-function draw(state: GameState, count: number) {
-  fillHand(state);
-  const b = state.battle!;
-  // Knocked-out owners retain inert slots, so replacing them cannot refresh spent cards.
-  const alive = living(state);
-  const eligible = (id: string) =>
-    !alive.length || alive.some((c) => c.id === state.cards.find((card) => card.id === id)?.ownerId);
-  for (let i = 0; i < count; i++) {
-    if (!b.draw.some(eligible)) {
-      const available = b.discard.filter(eligible);
-      b.discard = b.discard.filter((id) => !eligible(id));
-      b.draw.push(...shuffle(state, available));
-    }
-    let index = b.draw.length - 1;
-    while (index >= 0 && !eligible(b.draw[index]!)) index--;
-    if (index < 0) break;
-    const card = b.draw.splice(index, 1)[0]!;
-    if (b.hand.length < MAX_HAND_SIZE) b.hand.push(card);
-    else b.buffer.push(card);
-  }
-}
 function intents(state: GameState) {
   const alive = living(state);
   for (const enemy of state.battle!.enemies) {
@@ -142,7 +116,7 @@ function intents(state: GameState) {
       enemy.targetId = alive.length ? alive[Math.floor(random(state) * alive.length)]!.id : state.team[0]!.id;
   }
 }
-export function beginBattle(state: GameState) {
+export function beginBattle(state: GameState, events: GameEvent[] = []) {
   const encounter = encounterSource(state);
   for (const enemy of encounter.enemies)
     if (!state.discovery.encountered.includes(enemy.species)) state.discovery.encountered.push(enemy.species);
@@ -154,18 +128,15 @@ export function beginBattle(state: GameState) {
     c.combat = freshCombat();
     if (c.species === "briartooth" && state.team.includes(c)) c.combat.thorns = 2;
     c.block = 0;
-    if (state.team.includes(c)) {
-      if (hasTalent(state, "armor.bulwark")) c.combat.armor = 2;
-      if (c.species === "moonhart") grantBlock(state, c, 4, []);
-    }
     c.attacked = false;
   }
   state.battle = {
+    earnedGold: 0,
     freeBurnUsed: false,
     meteoriteUsed: false,
     turn: 1,
-    mana: TURN_MANA,
-    maxMana: TURN_MANA,
+    mana: TURN_MANA + Number(hasTalent(state, "mana.leyline-attunement")),
+    maxMana: TURN_MANA + Number(hasTalent(state, "mana.leyline-attunement")),
     draw: shuffle(
       state,
       state.cards.map((c) => c.id),
@@ -188,18 +159,13 @@ export function beginBattle(state: GameState) {
   };
   state.phase = "battle";
   draw(state, TURN_DRAW + (state.boons.includes("tattered-pages") ? 1 : 0));
-  if (hasTalent(state, "nature.ecosystem")) {
-    let index = state.battle.draw.length - 1;
-    for (; index >= 0; index--) {
-      const id = state.battle.draw[index]!;
-      const def = definition(state.cards.find((card) => card.id === id)!.definitionId);
-      if (def.effect === "attack" && def.damageType === "nature") break;
-    }
-    if (index >= 0) {
-      const id = state.battle.draw.splice(index, 1)[0]!;
-      if (state.battle.hand.length < MAX_HAND_SIZE) state.battle.hand.push(id);
-      else state.battle.buffer.push(id);
-    }
+  if (hasTalent(state, "nature.ecosystem")) drawKeyword(state, "nature");
+  for (const unit of state.team) {
+    if (hasTalent(state, "armor.bulwark")) grantArmor(state, unit, 2, events);
+    if (unit.species === "moonhart") grantBlock(state, unit, 4, events);
+    if (hasTalent(state, "mana.mana-bulwark")) grantBlock(state, unit, state.battle.maxMana, events);
+    if (hasTalent(state, "mana.mana-shell")) grantArmor(state, unit, state.battle.maxMana, events);
+    if (hasTalent(state, "heal.combat-surge")) restoreHealth(unit, 4, events, false, state);
   }
   state.reward = null;
   state.battleXP = {};
@@ -221,12 +187,13 @@ function bankBattleXP(state: GameState) {
 }
 function finishBattle(state: GameState, defeated: boolean) {
   const xp = bankBattleXP(state);
+  const earnedGold = state.battle?.earnedGold ?? 0;
   const previousCurrency = state.currency;
   state.currency = Math.min(1_000_000, state.currency + (defeated ? 0 : bossEncounter(state) ? 40 : 20));
-  const currency = state.currency - previousCurrency;
+  const currency = state.currency - previousCurrency + earnedGold;
   const outcome = defeated ? "defeat" : finalEncounter(state) ? "victory" : "next";
   if (state.journey) {
-    state.journey.currency += currency;
+    state.journey.currency = Math.min(1_000_000, state.journey.currency + currency - earnedGold);
     state.journey.lastBattle = { xp, currency };
     if (!defeated) state.journey.victories++;
     if (outcome !== "next") state.journey.outcome = outcome;
@@ -265,6 +232,7 @@ function settle(state: GameState, events: GameEvent[]): boolean {
   }
   if (state.battle!.enemies.every((e) => e.health <= 0)) {
     for (const creature of [...state.team, ...state.reserves]) {
+      if (hasTalent(state, "heal.vitality")) restoreHealth(creature, 4, events, false, state);
       creature.block = 0;
       creature.combat = freshCombat();
     }
@@ -344,10 +312,16 @@ function applyExtras(
     switch (effect.kind) {
       case "damage":
         if (target)
-          hit(state, actor, target, effect.amount, effect.damageType, events, { leech: effect.leech });
+          hit(state, actor, target, effect.amount, effect.damageType, events, {
+            leech: effect.leech,
+            cardLeech:
+              !enemy &&
+              (def.leech || def.effects?.some((effect) => effect.kind === "damage" && effect.leech)),
+          });
         break;
       case "status":
-        grantStatus(actor, effect.status, effect.amount, events);
+        if (effect.status === "armor") grantArmor(state, actor, effect.amount, events);
+        else grantStatus(actor, effect.status, effect.amount, events);
         break;
       case "cleanse":
         removeEffects(actor, "cleanse", effect.amount, events, state);
@@ -359,7 +333,7 @@ function applyExtras(
         if (!enemy) draw(state, effect.amount);
         break;
       case "mana":
-        if (!enemy) state.battle!.mana = Math.min(state.battle!.maxMana, state.battle!.mana + effect.amount);
+        if (!enemy) gainMana(state, effect.amount, events);
         break;
     }
   }
@@ -377,7 +351,7 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
       tickStatuses(draft, enemy, events);
       if (settle(draft, events)) return;
       enemy.block = Math.round(enemy.block / 2);
-      if (!startAction(enemy, events)) continue;
+      if (!startAction(enemy, events, draft)) continue;
       const target = living(draft).find((c) => c.id === enemy.targetId) ?? living(draft)[0];
       if (!target) break;
       const abilities = CARDS.filter(
@@ -421,10 +395,11 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
       if (stats.grace > 0) stats.grace--;
       c.block = Math.round(c.block / 2);
       c.attacked = false;
-      startAction(c, events);
+      startAction(c, events, draft);
     }
-    battle.maxMana = TURN_MANA + bonusMana;
-    battle.mana = battle.maxMana;
+    battle.maxMana = TURN_MANA + Number(hasTalent(draft, "mana.leyline-attunement")) + bonusMana;
+    battle.mana = 0;
+    gainMana(draft, battle.maxMana, events);
     battle.turn++;
     intents(draft);
     if (
@@ -606,7 +581,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         draft.support = null;
         if (draft.journey) draft.journey.lastBattle = null;
         if (draft.expedition) draft.expedition.chosen = command.destination!;
-        beginBattle(draft);
+        beginBattle(draft, events);
         events.push({ kind: "turn", text: "Your journey begins." });
         break;
       case "visitCampfire":
@@ -626,7 +601,11 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         for (const keyword of cardKeywords(card))
           draft.battleXP[keyword] = Math.min(1_000_000, (draft.battleXP[keyword] ?? 0) + 1);
         battle.mana -= cardCost(card, draft);
-        if (cardKeywords(card).includes("burn")) battle.freeBurnUsed = true;
+        const keywords = cardKeywords(card);
+        combat(actor).freeCard = false;
+        if (keywords.includes("nature")) combat(actor).freeNature = false;
+        if (keywords.includes("light")) combat(actor).freeLight = false;
+        if (keywords.includes("burn")) battle.freeBurnUsed = true;
         battle.hand.splice(battle.hand.indexOf(card.id), 1);
         battle.discard.push(card.id);
         events.push({
@@ -636,30 +615,56 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
           actorId: actor.id,
           targetId: command.targetId,
         });
-        if (def.effect === "attack") {
-          const enemy = battle.enemies.find((e) => e.id === command.targetId)!;
-          hit(draft, actor, enemy, value, def.damageType, events, { leech: def.leech });
-          actor.attacked = true;
+        const target = battle.enemies.find((e) => e.id === command.targetId);
+        if (target && keywords.includes("leech") && hasTalent(draft, "leech.armor-siphon")) {
+          const stolen = Math.min(1, target.combat.armor);
+          target.combat.armor -= stolen;
+          grantArmor(draft, actor, stolen, events);
         }
-        if (def.effect === "guard" || def.effect === "teamGuard") {
-          const targets =
-            def.effect === "teamGuard" ? living(draft) : draft.team.filter((c) => c.id === command.targetId);
-          for (const target of targets) {
-            grantBlock(draft, target, value, events);
-          }
-        }
-        if (def.effect === "heal") {
-          const target = draft.team.find((c) => c.id === command.targetId)!;
-          restoreHealth(target, value, events, false, draft);
-        }
-        applyExtras(
-          draft,
-          actor,
-          def,
-          events,
-          false,
-          battle.enemies.find((e) => e.id === command.targetId),
+        if (keywords.includes("block") && hasTalent(draft, "armor.armored-surge") && roll(draft) < 0.1)
+          grantArmor(draft, actor, 6, events);
+        const repeatTalents = [
+          ["burn", "burn.flash-fire"],
+          ["freeze", "freeze.winter-s-grasp"],
+          ["nature", "nature.overgrowth"],
+          ["poison", "poison.venom-strike"],
+          ["stun", "stun.jarring-blow"],
+        ] as const;
+        const repeat = repeatTalents.some(
+          ([keyword, talent]) => keywords.includes(keyword) && hasTalent(draft, talent) && roll(draft) < 0.1,
         );
+        for (let play = 0; play < (repeat ? 2 : 1); play++) {
+          if (actor.health <= 0 || (def.effect === "attack" && target!.health <= 0)) break;
+          if (def.effect === "attack") {
+            const enemy = battle.enemies.find((e) => e.id === command.targetId)!;
+            hit(draft, actor, enemy, value, def.damageType, events, {
+              leech: def.leech,
+              cardLeech: keywords.includes("leech"),
+            });
+            actor.attacked = true;
+          }
+          if (def.effect === "guard" || def.effect === "teamGuard") {
+            const targets =
+              def.effect === "teamGuard"
+                ? living(draft)
+                : draft.team.filter((c) => c.id === command.targetId);
+            for (const target of targets) {
+              grantBlock(draft, target, value, events);
+            }
+          }
+          if (def.effect === "heal") {
+            const target = draft.team.find((c) => c.id === command.targetId)!;
+            restoreHealth(target, value, events, false, draft, true);
+          }
+          applyExtras(
+            draft,
+            actor,
+            def,
+            events,
+            false,
+            battle.enemies.find((e) => e.id === command.targetId),
+          );
+        }
         fillHand(draft);
         if (!preview) settle(draft, events);
         if (!preview && command.autoEndTurn !== false && draft.phase === "battle" && battle.mana === 0)

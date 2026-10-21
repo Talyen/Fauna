@@ -9,6 +9,19 @@ import { KeywordIcon } from "./keyword-icon";
 import { Button } from "../components/ui/button";
 import { Tooltip, TooltipTrigger, TooltipContent } from "../components/ui/tooltip";
 const stats = ["armor", "thorns", "dodge", "burn", "poison", "bleed", "stun", "freeze"] as const;
+const statusOrder: readonly string[] = [
+  ...stats,
+  "controlled",
+  "cooldown",
+  "grace",
+  "rhythm",
+  "nextPhysical",
+  "partingCut",
+  "riposte",
+  "freeNature",
+  "freeLight",
+  "freeCard",
+];
 type Status = { id: string; text: string; count: number; exit?: boolean; changed?: boolean };
 export function CombatStatus({ combat, details = false }: { combat?: CombatState; details?: boolean }) {
   const entries: Status[] = combat
@@ -23,13 +36,34 @@ export function CombatStatus({ combat, details = false }: { combat?: CombatState
   if (combat?.controlled || combat?.skipped)
     entries.push({
       id: "controlled",
-      count: 1,
-      text:
-        combat.controlled === "freeze" ? "Frozen" : combat.controlled === "stun" ? "Stunned" : "Turn skipped",
+      count: combat.controlTurns || 1,
+      text: combat.controlled
+        ? `${combat.controlled === "freeze" ? "Frozen" : "Stunned"}: ${combat.controlTurns || 1} turn${combat.controlTurns > 1 ? "s" : ""}`
+        : "Turn skipped",
     });
   if (combat?.cooldown)
     entries.push({ id: "cooldown", count: combat.cooldown, text: `Control immunity ${combat.cooldown}` });
   if (combat?.grace) entries.push({ id: "grace", count: combat.grace, text: `Death's Door ${combat.grace}` });
+  if (combat) {
+    const pending = [
+      ["rhythm", combat.rhythm, `Finding Rhythm: +${combat.rhythm}% Dodge chance`],
+      [
+        "nextPhysical",
+        combat.nextPhysical,
+        `Open Flank: next attack deals ${combat.nextPhysical} additional Physical damage`,
+      ],
+      [
+        "partingCut",
+        Number(combat.partingCut),
+        "Parting Cut: next Physical hit deals half its damage as additional Bleed damage",
+      ],
+      ["riposte", Number(combat.riposte), "Riposte: next Physical attack is a guaranteed Critical Hit"],
+      ["freeNature", Number(combat.freeNature), "Windstep: next Nature card is free"],
+      ["freeLight", Number(combat.freeLight), "Divine Favor: next Light card is free"],
+      ["freeCard", Number(combat.freeCard), "Free Follow-up: next card is free"],
+    ] as const;
+    for (const [id, count, text] of pending) if (count) entries.push({ id, count, text });
+  }
   const root = useRef<HTMLDivElement>(null);
   const signature = JSON.stringify(entries);
   const [shown, setShown] = useState(entries);
@@ -57,11 +91,7 @@ export function CombatStatus({ combat, details = false }: { combat?: CombatState
               !next.some((n) => n.id === item.id),
           )
           .map((item) => ({ ...item, exit: true })),
-      ].sort(
-        (a, b) =>
-          [...stats, "controlled", "cooldown", "grace"].indexOf(a.id) -
-          [...stats, "controlled", "cooldown", "grace"].indexOf(b.id),
-      ),
+      ].sort((a, b) => statusOrder.indexOf(a.id) - statusOrder.indexOf(b.id)),
     );
   }, [signature]);
   useEffect(() => {
