@@ -21,6 +21,7 @@ export function freshCombat(): CombatState {
     reflect: false,
     nullify: false,
     encoreUsed: false,
+    firstAttackUsed: false,
     desperateGuardUsed: false,
     armor: 0,
     thorns: 0,
@@ -693,6 +694,16 @@ export function beginAttack(state: GameState, source: Combatant): boolean {
   stats.blind = false;
   return roll(state) < 0.5;
 }
+/** Capture once per attack so every area target receives the same opening bonus. */
+export function openingCriticalBonus(state: GameState, source: Combatant): number {
+  const stats = combat(source);
+  if (stats.firstAttackUsed) return 0;
+  stats.firstAttackUsed = true;
+  return creaturePassive("maxHealth" in source ? undefined : state, source.species).effects.reduce(
+    (total, effect) => total + (effect.kind === "earlyBird" ? effect.amount : 0),
+    0,
+  );
+}
 /** Derived packets never dodge, crit or retaliate; Sporecoat explicitly retains Poison buildup. */
 export function hit(
   state: GameState,
@@ -726,6 +737,7 @@ function resolveHit(
   events: GameEvent[],
   options: {
     blindMiss?: boolean;
+    criticalBonus?: number;
     bounced?: boolean;
     periodic?: boolean;
     retaliation?: boolean;
@@ -882,7 +894,9 @@ function resolveHit(
   }
   damage = Math.round(damage);
   const riposte = direct && alliedSource && type === "physical" && combat(source).riposte;
-  const critical = direct && alliedSource && (riposte || roll(state) < 0.05);
+  const criticalChance = (alliedSource ? 0.05 : 0) + (options.criticalBonus ?? 0) / 100;
+  const critical =
+    direct && (riposte || (criticalChance > 0 && (criticalChance >= 1 || roll(state) < criticalChance)));
   if (riposte) combat(source).riposte = false;
   const partingCut = direct && alliedSource && type === "physical" && combat(source).partingCut;
   if (partingCut) combat(source).partingCut = false;
@@ -1151,6 +1165,7 @@ export function startAction(unit: Combatant, events: GameEvent[], state?: GameSt
   const stats = combat(unit);
   stats.temporaryDodge = 0;
   stats.encoreUsed = false;
+  stats.firstAttackUsed = false;
   stats.skipped = !!stats.controlled;
   if (stats.controlled) {
     events.push({

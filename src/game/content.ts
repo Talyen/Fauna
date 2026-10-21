@@ -10,7 +10,8 @@ export type SpeciesId =
   | "reedstag"
   | "cindernewt"
   | "coralcurl"
-  | "chimecricket";
+  | "chimecricket"
+  | "dawncall";
 type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
   | { kind: "blockRetention"; amount: number }
@@ -19,6 +20,7 @@ type PassiveEffect =
   | { kind: "poisonRetaliation"; amount: number }
   | { kind: "dodgeBurn"; amount: number }
   | { kind: "encore"; amount: number }
+  | { kind: "earlyBird"; amount: number }
   | { kind: "armorBreak"; amount: number }
   | { kind: "blockBreak"; amount: number }
   | { kind: "statusReflection"; amount: number }
@@ -463,6 +465,40 @@ export const SPECIES: readonly Species[] = [
       },
     ],
   },
+  {
+    id: "dawncall",
+    name: "Dawncall",
+    title: "The sunrise herald",
+    health: 24,
+    color: "#eab75b",
+    trait: "Early Bird",
+    passiveTiers: [
+      {
+        description: "Your first attack each turn gains 20% Critical hit chance",
+        effects: [{ kind: "earlyBird", amount: 20 }],
+      },
+      {
+        description: "Your first attack each turn gains 35% Critical hit chance",
+        effects: [{ kind: "earlyBird", amount: 35 }],
+      },
+      {
+        description: "Your first attack each turn gains 50% Critical hit chance",
+        effects: [{ kind: "earlyBird", amount: 50 }],
+      },
+      {
+        description: "Your first attack each turn gains 65% Critical hit chance",
+        effects: [{ kind: "earlyBird", amount: 65 }],
+      },
+      {
+        description: "Your first attack each turn gains 80% Critical hit chance",
+        effects: [{ kind: "earlyBird", amount: 80 }],
+      },
+      {
+        description: "Your first attack each turn is a Critical Hit",
+        effects: [{ kind: "earlyBird", amount: 100 }],
+      },
+    ],
+  },
 ];
 const card = <T extends Exclude<Effect, "attack">>(
   species: SpeciesId,
@@ -492,6 +528,21 @@ const attack = (
   damageType,
 });
 export const CARDS: readonly CardDefinition[] = [
+  {
+    ...card("dawncall", "Dawn Cry", "teamCleanse", 1),
+    effects: [{ kind: "draw", amount: 1 }],
+    artwork: "action.dawncall.dawn-cry",
+  },
+  {
+    ...attack("dawncall", "Sunwing Sweep", 2, "light"),
+    target: "allEnemies",
+    artwork: "action.dawncall.sunwing-sweep",
+  },
+  {
+    ...card("dawncall", "Morning Bloom", "heal", 2),
+    target: "allAllies",
+    artwork: "action.dawncall.morning-bloom",
+  },
   {
     ...card("coralcurl", "Bubble Ward", "guard", 6),
     target: "self",
@@ -683,6 +734,9 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
       break;
     case "dodge":
       text = `Gain ${value}% Dodge until your next turn`;
+      break;
+    case "teamCleanse":
+      text = `Cleanse ${value} harmful effect${value === 1 ? "" : "s"} from all allies`;
       break;
     case "nullify":
       text = "Nullify the next harmful status effect on each ally";

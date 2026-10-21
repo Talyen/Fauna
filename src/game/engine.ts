@@ -13,6 +13,7 @@ import {
 import {
   combat,
   beginAttack,
+  openingCriticalBonus,
   applyBlind,
   grantTemporaryDodge,
   shuffle,
@@ -43,7 +44,7 @@ import { bossEncounter, encounterSource, finalEncounter, encounterPacks } from "
 import type { Card, Command, CommandResult, GameEvent, GameState } from "./types";
 export function createGame(seed = 1): GameState {
   const state: GameState = {
-    version: 31,
+    version: 32,
     support: null,
     discovery: { encountered: [], recruited: {} },
     revision: 0,
@@ -419,6 +420,7 @@ function applyExtras(
   enemy = false,
   target?: import("./combat").Combatant,
   blindMiss = false,
+  criticalBonus = 0,
 ) {
   for (const effect of def.effects ?? []) {
     if (actor.health <= 0) break;
@@ -427,6 +429,7 @@ function applyExtras(
         if (target)
           hit(state, actor, target, effect.amount, effect.damageType, events, {
             blindMiss,
+            criticalBonus,
             leech: effect.leech,
             cardLeech:
               !enemy &&
@@ -543,6 +546,7 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
             actorId: enemy.id,
             text: `${enemy.name} repeats ${def.name} with Encore`,
           });
+        const criticalBonus = def.effect === "attack" ? openingCriticalBonus(draft, enemy) : 0;
         const blindMiss = def.effect === "attack" ? beginAttack(draft, enemy) : false;
         if (def.effect === "attack") {
           const damageType =
@@ -551,7 +555,11 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
           if (!targets.length) break;
           for (const recipient of targets) {
             if (enemy.health <= 0) break;
-            hit(draft, enemy, recipient, value, damageType, events, { leech: def.leech, blindMiss });
+            hit(draft, enemy, recipient, value, damageType, events, {
+              leech: def.leech,
+              blindMiss,
+              criticalBonus,
+            });
           }
         } else if (def.effect === "heal") {
           const injured = mostInjured(battle.enemies)!;
@@ -561,6 +569,9 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
             restoreHealth(recipient, value, events, false, draft, false, enemy);
             applyExtras(draft, enemy, def, events, true, recipient);
           }
+        } else if (def.effect === "teamCleanse") {
+          for (const recipient of battle.enemies.filter((unit) => unit.health > 0))
+            removeEffects(recipient, "cleanse", value, events, draft);
         } else if (def.effect === "nullify") {
           hushDome(draft, true, events);
         } else if (def.effect === "dodge") {
@@ -574,7 +585,8 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
             grantBlock(draft, unit, value, events);
           }
         }
-        if (def.effect !== "heal") applyExtras(draft, enemy, def, events, true, target, blindMiss);
+        if (def.effect !== "heal")
+          applyExtras(draft, enemy, def, events, true, target, blindMiss, criticalBonus);
       }
       if (settle(draft, events)) return;
     }
@@ -872,6 +884,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
               actorId: actor.id,
               text: `${species(actor.species).name} repeats ${def.name} with Encore`,
             });
+          const criticalBonus = def.effect === "attack" ? openingCriticalBonus(draft, actor) : 0;
           const blindMiss = def.effect === "attack" ? beginAttack(draft, actor) : false;
           if (def.effect === "attack") {
             const damageType =
@@ -887,6 +900,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
               if (actor.health <= 0) break;
               hit(draft, actor, enemy, value, damageType, events, {
                 blindMiss,
+                criticalBonus,
                 leech: def.leech,
                 cardLeech: keywords.includes("leech"),
               });
@@ -916,10 +930,13 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
               applyExtras(draft, actor, def, events, false, recipient);
             }
           }
+          if (def.effect === "teamCleanse")
+            for (const recipient of living(draft)) removeEffects(recipient, "cleanse", value, events, draft);
           if (def.effect === "nullify") hushDome(draft, false, events);
           if (def.effect === "dodge") grantTemporaryDodge(actor, value, events);
           if (def.effect === "swap") swapFromCard(draft, actor, events);
-          if (def.effect !== "heal") applyExtras(draft, actor, def, events, false, target, blindMiss);
+          if (def.effect !== "heal")
+            applyExtras(draft, actor, def, events, false, target, blindMiss, criticalBonus);
         }
         if (battle.cardsPlayedThisTurn < 3) {
           battle.cardsPlayedThisTurn++;

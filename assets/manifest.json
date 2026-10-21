@@ -1219,6 +1219,50 @@
       "aspect": [3, 4],
       "provenance": "Unchanged Chimecricket artwork selected from user Google Drive: https://drive.google.com/file/d/1EvE9WFlT2u7NxrVwQTyxdBoimibOYI33/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "creature.dawncall",
+      "origin": "repository",
+      "source": "public/art/dawncall/portrait.png",
+      "output": "art/dawncall/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Dawncall artwork selected from user Google Drive: https://drive.google.com/file/d/1yx0v-_Inc0IaeLY0CHH5dYbBX6lCFSYt/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.dawncall.dawn-cry",
+      "origin": "repository",
+      "source": "public/art/dawncall/dawn-cry.png",
+      "output": "art/dawncall/dawn-cry.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Dawncall artwork selected from user Google Drive: https://drive.google.com/file/d/1971kPM3VlxysHVI56QFacWBb_eKIL6VI/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.dawncall.sunwing-sweep",
+      "origin": "repository",
+      "source": "public/art/dawncall/sunwing-sweep.png",
+      "output": "art/dawncall/sunwing-sweep.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Dawncall artwork selected from user Google Drive: https://drive.google.com/file/d/1aLKdS827l87zhx3nV5bJlMTPg7l_u0ZB/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.dawncall.morning-bloom",
+      "origin": "repository",
+      "source": "public/art/dawncall/morning-bloom.png",
+      "output": "art/dawncall/morning-bloom.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Dawncall artwork selected from user Google Drive: https://drive.google.com/file/d/1-KWvYvzQAFW7g_MexgomYirPpWndiauI/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

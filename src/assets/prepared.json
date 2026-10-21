@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "manifestHash": "1747bcc433f125cb5c696f1c92e32b1fdc0c589293bf586d545d68ca51726d8f",
-  "generation": "59ce759b1a1c6733d72b405243b6a45fb34a99d92339381f7eabe6a220a86701",
+  "manifestHash": "da2b7939674cfda53b661cca235ea7cf7367162fa83a15cf94ddc849203d2edb",
+  "generation": "d64b34f8bb9281c1b1bc23588d0fcb1c8ec9c281c2cdafeb07cfc2587b0ae0b9",
   "records": {
     "keyword.block": {
       "url": "./prepared/objects/735558c0801082a6bfbeabec58de75ff3b1ad59643b686fac19e7a169691902e/asset.webp",
@@ -1367,6 +1367,58 @@
       "outputHash": "c8497ea3195a4e419d31686b872e603681d011d375883d429e0859cae3bb3def",
       "sourceBytes": 2257784,
       "outputBytes": 877384,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "creature.dawncall": {
+      "url": "./prepared/objects/a575cd9c0a6f8e0f34734c2a025b3f6b98356a9acef7f3620f394f54ec6ff111/asset.webp",
+      "sourceHash": "892816564ae867d91f2fccb07a40ec3bdc46afb3a825a04032f950ffb6ec11fd",
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "93026c6a833f296ea2d3fa578ce04c755f24a1075fdea858f97aafaf08f95afc",
+      "sourceBytes": 2126352,
+      "outputBytes": 807820,
+      "width": 960,
+      "height": 720,
+      "alpha": false
+    },
+    "action.dawncall.dawn-cry": {
+      "url": "./prepared/objects/ca655522e6581e263505f6d49b2725c126d4c91e28433141e023816a234a952f/asset.webp",
+      "sourceHash": "c2355f079a8e2175e94482e3ace9720f82f69ba5fa1bfb1312096cdd7f23b398",
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "4e5347e5892e6386d2564b19a2d699ba5df668db51083defd2e073158a5c01c4",
+      "sourceBytes": 1964744,
+      "outputBytes": 743988,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "action.dawncall.sunwing-sweep": {
+      "url": "./prepared/objects/c1e52383b5a4707f92a79ac51e8f7c78aaf340485b51ce2ffb14f9df8a687748/asset.webp",
+      "sourceHash": "85cdf876a1d1cd3f63957feb1924cb4b847abd656a977eb25e52ce1035cccbbe",
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "f573d002c993ca385fb442f80b28a3d965c54b790e98513da73099761bce067f",
+      "sourceBytes": 2123414,
+      "outputBytes": 836316,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "action.dawncall.morning-bloom": {
+      "url": "./prepared/objects/a173148e338db5d820cfdf80b87d99683714d83b14caafa9cdce6a317914239b/asset.webp",
+      "sourceHash": "0358caf7e4cd3dfd60a0d6f021618a9b6aec1a9d8b64ba57ef07f6c66bd9d6ec",
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "dae681377ec158c852b48498a663ffe01be5e9e769ab296395ac7878a8552c57",
+      "sourceBytes": 2360751,
+      "outputBytes": 956326,
       "width": 720,
       "height": 960,
       "alpha": false

@@ -13,6 +13,7 @@ export interface CombatState {
   reflect: boolean;
   nullify: boolean;
   encoreUsed: boolean;
+  firstAttackUsed: boolean;
   desperateGuardUsed: boolean;
   armor: number;
   thorns: number;
@@ -88,7 +89,7 @@ interface JourneySummary {
   lastBattle: { xp: KeywordXP; currency: number } | null;
 }
 export interface GameState {
-  version: 31;
+  version: 32;
   discovery: { encountered: SpeciesId[]; recruited: Partial<Record<SpeciesId, number>> };
   revision: number;
   rng: number;
