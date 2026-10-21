@@ -1,4 +1,27 @@
+import { captureScreen } from "./rendered-evidence";
 import { test, expect } from "@playwright/test";
+test("switch thumbs stay within their tracks in both states", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.getByRole("tab", { name: "Sound", exact: true }).click();
+  const sound = page.getByRole("switch", { name: "Sound", exact: true });
+  for (const checked of [true, false, true]) {
+    await sound.setChecked(checked);
+    await expect
+      .poll(() =>
+        sound.evaluate((el) => {
+          const root = el.getBoundingClientRect();
+          const thumb = el.querySelector("span")!.getBoundingClientRect();
+          return {
+            hit: [root.width, root.height],
+            thumb: [thumb.width, thumb.height],
+            offset: Math.round(thumb.left - root.left),
+          };
+        }),
+      )
+      .toEqual({ hit: [44, 44], thumb: [16, 16], offset: checked ? 22 : 6 });
+  }
+});
 test("Collection filtering, audio preferences, and settings remain menu-driven", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Collection", exact: true }).click();
@@ -14,7 +37,7 @@ test("Collection filtering, audio preferences, and settings remain menu-driven",
   await page.getByRole("switch", { name: "Mute in background", exact: true }).click();
   await expect(page.getByRole("tab", { name: "Diagnostics", exact: true })).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Copy diagnostics", exact: true })).toHaveCount(0);
-  await page.screenshot({ path: "reports/adoption-settings.png", fullPage: true });
+  await captureScreen(page, { path: "reports/adoption-settings.png", fullPage: true });
   await page.reload();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
   await page.getByRole("tab", { name: "Sound", exact: true }).click();
@@ -46,7 +69,7 @@ for (const [width, height, textScale] of [
             : panel.getByRole("switch", { name: "Auto-end turn", exact: true });
       await control.scrollIntoViewIfNeeded();
       await expect(control).toBeInViewport();
-      await page.screenshot({ path: `reports/settings-${category.toLowerCase()}-${width}.png` });
+      await captureScreen(page, { path: `reports/settings-${category.toLowerCase()}-${width}.png` });
     }
     await page.keyboard.press("Escape");
     await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
@@ -75,7 +98,7 @@ for (const width of [1280, 1920])
     await expect(page.getByRole("tooltip")).toBeVisible();
     expect(await page.getByRole("tooltip").evaluate((node) => getComputedStyle(node).fontSize)).toBe("20px");
     expect(await art.evaluate((node) => node.getBoundingClientRect().width)).toBeCloseTo(266.667, 0);
-    await page.screenshot({ path: `reports/tooltip-independent-${width}.png` });
+    await captureScreen(page, { path: `reports/tooltip-independent-${width}.png` });
     await page.getByRole("button", { name: "Back", exact: true }).click();
     const opener = page.getByRole("button", { name: "Boons", exact: true });
     await opener.focus();
@@ -92,13 +115,13 @@ for (const width of [1280, 1920])
         .first()
         .evaluate((node) => node.getBoundingClientRect().width),
     ).toBeCloseTo(200, 0);
-    await page.screenshot({ path: `reports/owned-boons-${width}.png` });
+    await captureScreen(page, { path: `reports/owned-boons-${width}.png` });
     for (const boon of BOONS.slice(4)) {
       const heading = dialog.getByRole("heading", { name: boon.name, exact: true });
       await heading.scrollIntoViewIfNeeded();
       await expect(heading).toBeInViewport();
       await expect(dialog).toContainText(boon.text);
-      await page.screenshot({ path: `reports/owned-boon-${boon.id}-${width}.png` });
+      await captureScreen(page, { path: `reports/owned-boon-${boon.id}-${width}.png` });
     }
     await page.keyboard.press("Escape");
     await expect(opener).toBeFocused();
@@ -134,7 +157,7 @@ for (const width of [1280, 1920])
     await page.getByRole("button", { name: "Enter", exact: true }).click();
     await page.getByRole("button", { name: "Buy · 20 Gold", exact: true }).first().click();
     await expect(page.getByRole("button", { name: "Owned", exact: true })).toBeDisabled();
-    await page.screenshot({ path: `reports/merchant-${width}.png`, fullPage: true });
+    await captureScreen(page, { path: `reports/merchant-${width}.png`, fullPage: true });
     await page.reload();
     await page.getByRole("button", { name: "Continue", exact: true }).click();
     await expect(page.getByRole("heading", { name: "Merchant", exact: true })).toBeVisible();

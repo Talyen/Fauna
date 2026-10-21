@@ -1,3 +1,4 @@
+import { captureScreen } from "./rendered-evidence";
 import { freshCombat } from "../../src/game/combat";
 import { test, expect, type Page, type Locator } from "@playwright/test";
 import { produce } from "immer";
@@ -21,7 +22,7 @@ async function seed(page: Page, game = createGame(7)) {
   await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
 }
 async function saved(page: Page) {
-  await expect(page.locator(".app")).toHaveAttribute("data-save-status", "saved");
+  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
 }
 async function state(page: Page): Promise<GameState> {
   await saved(page);
@@ -49,12 +50,12 @@ async function step(page: Page, activate: (el: Locator) => Promise<void> = (el) 
       }),
     );
   else if (c.type === "play") {
-    await activate(page.locator(`.hand [data-card-id="${c.cardId}"]`));
+    await activate(page.locator(`.app:not([inert]) .hand [data-card-id="${c.cardId}"]`));
     if (c.targetId) {
       await activate(
         c.targetId.startsWith("enemy-")
-          ? page.locator(`.enemy-row [data-enemy-id="${c.targetId}"]`)
-          : page.locator(`.player-row [data-actor-id="${c.targetId}"] .creature-card`),
+          ? page.locator(`.app:not([inert]) .enemy-row [data-enemy-id="${c.targetId}"]`)
+          : page.locator(`.app:not([inert]) .player-row [data-actor-id="${c.targetId}"] .creature-card`),
       );
     } else await activate(page.getByRole("button", { name: /^Play ·/ }));
   } else await activate(page.getByRole("button", { name: /^End turn/ }));
@@ -155,7 +156,7 @@ for (const width of [1280, 1920])
         await expect(page.getByLabel("New creature unlocks", { exact: true })).toHaveCount(0);
         expect(await state(page)).toEqual(game);
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-        await page.screenshot({
+        await captureScreen(page, {
           path: `reports/results/${outcome}-${width}-${enlarged}.png`,
           fullPage: true,
         });
@@ -194,7 +195,7 @@ for (const width of [1280, 1920])
         .locator("img")
         .evaluateAll((images) => Promise.all(images.map((image) => (image as HTMLImageElement).decode())));
       await fits(page);
-      await page.screenshot({ path: `reports/destinations/choices-${width}-${enlarged}.png` });
+      await captureScreen(page, { path: `reports/destinations/choices-${width}-${enlarged}.png` });
       const opener = offers.first();
       await opener.focus();
       await page.keyboard.press("i");
@@ -208,7 +209,7 @@ for (const width of [1280, 1920])
       await expect(enemy).toBeFocused();
       await expect(page.getByRole("dialog")).toHaveCount(1);
       await fits(page);
-      await page.screenshot({ path: `reports/destinations/pack-${width}-${enlarged}.png` });
+      await captureScreen(page, { path: `reports/destinations/pack-${width}-${enlarged}.png` });
       await page.keyboard.press("Escape");
       await expect(opener).toBeFocused();
       expect(await state(page)).toEqual(game);
@@ -239,7 +240,7 @@ test("destination enemy artwork wraps at its fixed size in a narrow window", asy
   const last = await cards.nth(2).boundingBox();
   expect(last!.y).toBeGreaterThan(first!.y + first!.height);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  await page.screenshot({ path: "reports/destinations/narrow-pack.png", fullPage: true });
+  await captureScreen(page, { path: "reports/destinations/narrow-pack.png", fullPage: true });
   expect(await state(page)).toEqual(game);
 });
 
@@ -298,7 +299,7 @@ for (const width of [1280, 1920])
       await expect(mossback).toBeFocused();
       expect((await state(page)).revision).toBe(initial.revision);
       await mossback.press("Enter");
-      await page.screenshot({ path: `reports/starter/inspection-${width}-${enlarged}.png` });
+      await captureScreen(page, { path: `reports/starter/inspection-${width}-${enlarged}.png` });
       await page.getByRole("button", { name: "Choose Mossback", exact: true }).click();
       await expect(mossback).toBeFocused();
       await expect(mossback).toHaveAttribute("aria-pressed", "true");
@@ -313,12 +314,15 @@ for (const width of [1280, 1920])
       await resume(page);
       await expect(emberfox).toHaveAttribute("aria-pressed", "true");
       if (!enlarged) await fits(page);
-      expect(
-        await page
-          .locator(".draft-grid")
-          .evaluate((el) => getComputedStyle(el).gridTemplateColumns.split(" ").length),
-      ).toBe(3);
-      await page.screenshot({ path: `reports/starter/selection-${width}-${enlarged}.png`, fullPage: true });
+      for (const artwork of await page.locator(".draft-grid .creature-card").all()) {
+        const bounds = (await artwork.boundingBox())!;
+        expect(Math.abs(bounds.width - 800 / 3)).toBeLessThan(1);
+        expect(Math.abs(bounds.height - 200)).toBeLessThan(1);
+      }
+      await captureScreen(page, {
+        path: `reports/starter/selection-${width}-${enlarged}.png`,
+        fullPage: true,
+      });
       await begin.click();
       const started = await state(page);
       expect(started.roster).toEqual(["emberfox"]);
@@ -442,7 +446,7 @@ test("battle targeting uses remembered targets, forecasts bars, and has no targe
   await seed(page, fixture);
   await resume(page);
   const before = await state(page);
-  const cards = page.locator(".hand .action-card");
+  const cards = page.locator(".app:not([inert]) .hand .action-card");
   await cards.first().focus();
   await page.keyboard.press("Enter");
   await page.keyboard.press("d");
@@ -542,7 +546,7 @@ test("last mana saves the full turn before immediate close and does not replay o
   });
   await seed(page, fixture);
   await resume(page);
-  await page.locator(".hand .action-card").click();
+  await page.locator(".app:not([inert]) .hand .action-card").click();
   await page.getByRole("button", { name: "Target Bramble Imp", exact: true }).click();
   await saved(page);
   const committed = await state(page);
@@ -603,7 +607,7 @@ test("controller edges, inspect and pause do not repeat a held confirm", async (
   const press = await gamepad(page);
   await seed(page, run());
   await resume(page);
-  const card = page.locator('.hand .action-card[data-effect="attack"]').first();
+  const card = page.locator('.app:not([inert]) .hand .action-card[data-effect="attack"]').first();
   await card.focus();
   await press(2);
   await expect(page.getByRole("dialog")).toBeVisible();
@@ -651,26 +655,26 @@ for (const [width, height] of [
     await fits(page);
     expect(
       await page
-        .locator(".player-row .creature-card")
+        .locator(".app:not([inert]) .player-row .creature-card")
         .first()
         .evaluate((el: HTMLElement) => ({
           width: el.offsetWidth,
           height: el.offsetHeight,
         })),
     ).toEqual({ width: 293, height: 220 });
-    for (const card of await page.locator(".hand .action-card").all()) {
+    for (const card of await page.locator(".app:not([inert]) .hand .action-card").all()) {
       expect(
         await card.evaluate((el: HTMLElement) => ({ width: el.offsetWidth, height: el.offsetHeight })),
       ).toEqual({ width: 180, height: 240 });
       await expect(card.locator("img")).toHaveAttribute("width", "600");
     }
-    await page.screenshot({ path: `reports/implementation/battle-${width}.png` });
+    await captureScreen(page, { path: `reports/implementation/battle-${width}.png` });
     await page.getByRole("button", { name: "Open menu" }).click();
     await page.getByRole("button", { name: "Talents", exact: true }).click();
     await fits(page);
     await page.getByRole("button", { name: "Burn talents", exact: true }).click();
     await page.waitForTimeout(180);
-    await page.screenshot({ path: `reports/implementation/talents-${width}.png` });
+    await captureScreen(page, { path: `reports/implementation/talents-${width}.png` });
     await page.keyboard.press("Escape");
     await page.keyboard.press("Escape");
     await page.getByRole("button", { name: "Collection", exact: true }).click();
@@ -678,19 +682,19 @@ for (const [width, height] of [
     await page
       .locator(".collection-grid img")
       .evaluateAll((imgs) => Promise.all(imgs.map((img) => (img as HTMLImageElement).decode())));
-    await page.screenshot({ path: `reports/implementation/collection-${width}.png` });
+    await captureScreen(page, { path: `reports/implementation/collection-${width}.png` });
     const reward = winBattle();
     await seed(page, reward);
     await resume(page);
     await fits(page);
-    await page.screenshot({ path: `reports/implementation/rewards-${width}.png` });
+    await captureScreen(page, { path: `reports/implementation/rewards-${width}.png` });
     await seed(page, bossReward());
     await resume(page);
     await fits(page);
-    await page.screenshot({ path: `reports/implementation/boon-${width}.png` });
+    await captureScreen(page, { path: `reports/implementation/boon-${width}.png` });
     await page.getByRole("button", { name: "Skip", exact: true }).click();
     await fits(page);
-    await page.screenshot({ path: `reports/implementation/team-${width}.png` });
+    await captureScreen(page, { path: `reports/implementation/team-${width}.png` });
   });
 
 test("real audio output, hit recoil, reduced motion, and mute follow combat outcomes", async ({ page }) => {
@@ -722,7 +726,7 @@ test("real audio output, hit recoil, reduced motion, and mute follow combat outc
     };
     const animate = Element.prototype.animate;
     Element.prototype.animate = function (frames, options) {
-      if (this.matches(".creature-card"))
+      if (this.matches(".combatant-reaction"))
         observed.impacts.push(this.closest<HTMLElement>("[data-actor-id]")?.dataset.actorId ?? "");
       return animate.call(this, frames, options);
     };
@@ -737,7 +741,7 @@ test("real audio output, hit recoil, reduced motion, and mute follow combat outc
   });
   await seed(page, fixture);
   await resume(page);
-  await page.locator('.hand [data-card-id="ally-0:mossback-attack"]').click();
+  await page.locator('.app:not([inert]) .hand [data-card-id="ally-0:mossback-attack"]').click();
   await page.getByRole("button", { name: "Target Bramble Imp", exact: true }).click();
   const observed = () =>
     page.evaluate(
@@ -752,7 +756,7 @@ test("real audio output, hit recoil, reduced motion, and mute follow combat outc
   expect((await observed()).impacts).toContain("enemy-0");
   await page.emulateMedia({ reducedMotion: "reduce" });
   const count = (await observed()).impacts.length;
-  await page.locator('.hand [data-card-id="ally-1:emberfox-attack"]').click();
+  await page.locator('.app:not([inert]) .hand [data-card-id="ally-1:emberfox-attack"]').click();
   await page.getByRole("button", { name: "Target Cinder Wisp", exact: true }).click();
   expect((await observed()).impacts).toHaveLength(count);
   await page.getByRole("button", { name: "Open menu" }).click();
@@ -801,14 +805,14 @@ test("five-card hand with hidden overflow, three enemies and a full bench preser
   await resume(page);
   await fits(page);
   await page.getByRole("button", { name: "Begin battle" }).click();
-  await expect(page.locator(".hand .action-card")).toHaveCount(5);
-  await expect(page.locator(".enemy-row .creature-card")).toHaveCount(3);
+  await expect(page.locator(".app:not([inert]) .hand .action-card")).toHaveCount(5);
+  await expect(page.locator(".app:not([inert]) .enemy-row .creature-card")).toHaveCount(3);
   await fits(page);
   const area = await page
-    .locator(".player-row .creature-card")
+    .locator(".app:not([inert]) .player-row .creature-card")
     .first()
     .evaluate((el: HTMLElement) => el.offsetWidth * el.offsetHeight);
-  for (const card of await page.locator(".hand .action-card").all()) {
+  for (const card of await page.locator(".app:not([inert]) .hand .action-card").all()) {
     await card.focus();
     expect(
       Math.abs(
@@ -825,12 +829,12 @@ test("enlarged text and keyboard/controller row navigation keep inspection and m
   await page.evaluate(() => localStorage.setItem("fauna.text-scale", "1.25"));
   await page.reload();
   await resume(page);
-  const card = page.locator(".hand .action-card").first();
+  const card = page.locator(".app:not([inert]) .hand .action-card").first();
   await card.focus();
   await page.keyboard.press("w");
-  await expect(page.locator(".player-row .creature-card:focus")).toHaveCount(1);
+  await expect(page.locator(".app:not([inert]) .player-row .creature-card:focus")).toHaveCount(1);
   await page.keyboard.press("w");
-  await expect(page.locator(".enemy-row .creature-card:focus")).toHaveCount(1);
+  await expect(page.locator(".app:not([inert]) .enemy-row .creature-card:focus")).toHaveCount(1);
   await page.keyboard.press("i");
   await expect(page.getByRole("dialog")).toBeVisible();
   await page.getByRole("button", { name: "Close inspection", exact: true }).click();
@@ -913,20 +917,20 @@ test("battle tooltips, pointer targeting, Mana forecast and corners follow the d
   });
   await seed(page, fixture);
   await resume(page);
-  const enemy = page.locator(".enemy-row .creature-card").first();
+  const enemy = page.locator(".app:not([inert]) .enemy-row .creature-card").first();
   await enemy.hover();
   await expect(page.locator(".game-tooltip").first()).toHaveAttribute("data-side", "bottom");
-  const ally = page.locator(".player-row .creature-card").first();
+  const ally = page.locator(".app:not([inert]) .player-row .creature-card").first();
   await ally.hover();
   await expect(page.locator(".game-tooltip").first()).toHaveAttribute("data-side", "top");
-  const card = page.locator(".hand .action-card").first();
+  const card = page.locator(".app:not([inert]) .hand .action-card").first();
   await card.hover();
   await expect(page.locator(".game-tooltip").first()).toHaveAttribute("data-side", "top");
   await card.click();
-  await expect(page.locator(".app")).toHaveAttribute("data-input", "pointer");
+  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-input", "pointer");
   expect(await enemy.evaluate((el) => el === document.activeElement)).toBe(false);
   await expect(page.locator(".game-tooltip")).toHaveCount(0);
-  await expect(page.locator(".player-row .invalid-target")).toHaveCount(3);
+  await expect(page.locator(".app:not([inert]) .player-row .invalid-target")).toHaveCount(3);
   await expect(page.locator('.mana-gem[data-preview-spent="true"]')).toHaveCount(1);
   await expect(page.locator(".knockout-preview")).toHaveCount(1);
   expect((await state(page)).battle!.mana).toBe(4);
@@ -950,7 +954,7 @@ test("battle tooltips, pointer targeting, Mana forecast and corners follow the d
       )
       .toBe(true);
     await fits(page);
-    await page.screenshot({ path: `reports/battle-review/targeting-${width}.png` });
+    await captureScreen(page, { path: `reports/battle-review/targeting-${width}.png` });
   }
   await page.setViewportSize({ width: 1280, height: 800 });
   for (const el of [enemy, ally, card, page.locator(".end-turn")])
@@ -962,24 +966,24 @@ test("battle tooltips, pointer targeting, Mana forecast and corners follow the d
   await expect(page.locator('.mana-gem[data-preview-spent="true"]')).toHaveCount(0);
   await card.click();
   await enemy.click();
-  await expect(page.locator(".enemy-row .knocked-out")).toHaveCount(1);
-  await expect(page.locator(".enemy-row .creature-card")).toHaveCount(3);
+  await expect(page.locator(".app:not([inert]) .enemy-row .knocked-out")).toHaveCount(1);
+  await expect(page.locator(".app:not([inert]) .enemy-row .creature-card")).toHaveCount(3);
   expect(
     await page
-      .locator(".hand .action-card")
+      .locator(".app:not([inert]) .hand .action-card")
       .evaluateAll((cards) => cards.some((c) => c === document.activeElement)),
   ).toBe(false);
-  await expect(page.locator(".app")).toHaveAttribute("data-input", "pointer");
-  await page.locator(".hand .action-card").first().click();
+  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-input", "pointer");
+  await page.locator(".app:not([inert]) .hand .action-card").first().click();
   await ally.focus();
   await page.keyboard.press("d");
-  await expect(page.locator(".enemy-row .creature-wrap:not(.knocked-out) .creature-card:focus")).toHaveCount(
-    1,
-  );
+  await expect(
+    page.locator(".app:not([inert]) .enemy-row .creature-wrap:not(.knocked-out) .creature-card:focus"),
+  ).toHaveCount(1);
   await card.hover();
-  await expect(page.locator(".app")).toHaveAttribute("data-input", "pointer");
+  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-input", "pointer");
   await page.keyboard.press("d");
-  await expect(page.locator(".app")).toHaveAttribute("data-input", "keyboard");
+  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-input", "keyboard");
 });
 
 test("navigation returns to the nearest remaining card; denial is visual and respects motion", async ({
@@ -993,15 +997,15 @@ test("navigation returns to the nearest remaining card; denial is visual and res
   });
   await seed(page, fixture);
   await resume(page);
-  const cards = page.locator(".hand .action-card");
+  const cards = page.locator(".app:not([inert]) .hand .action-card");
   const last = await cards.nth(2).getAttribute("data-card-id");
   await cards.nth(1).focus();
   await page.keyboard.press("Enter");
   await page.keyboard.press("Enter");
-  await expect(page.locator(`.hand [data-card-id="${last}"]`)).toBeFocused();
+  await expect(page.locator(`.app:not([inert]) .hand [data-card-id="${last}"]`)).toBeFocused();
   const before = await state(page);
   await cards.first().click();
-  const unavailable = page.locator(".player-row .invalid-target").first();
+  const unavailable = page.locator(".app:not([inert]) .player-row .invalid-target").first();
   await unavailable.click();
   await expect(page.getByRole("dialog")).toHaveCount(0);
   expect(
@@ -1044,19 +1048,19 @@ test("controller navigation preserves its device mode and can confirm a pointer-
   await page.getByRole("button", { name: "Physical talents", exact: true }).focus();
   await press(15);
   await expect(page.getByRole("button", { name: "Burn talents", exact: true })).toBeFocused();
-  await expect(page.locator(".app")).toHaveAttribute("data-input", "controller");
+  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-input", "controller");
   await press(1);
   await resume(page);
-  await page.locator(".hand .action-card").first().click();
-  await expect(page.locator(".app")).toHaveAttribute("data-input", "pointer");
-  const selected = page.locator(".hand .action-card.selected");
+  await page.locator(".app:not([inert]) .hand .action-card").first().click();
+  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-input", "pointer");
+  const selected = page.locator(".app:not([inert]) .hand .action-card.selected");
   await expect(selected).toHaveCSS("outline-style", "none");
   expect(await selected.evaluate((element) => getComputedStyle(element).boxShadow)).not.toBe("none");
   const before = await state(page);
   await press(0);
   expect((await state(page)).revision).toBe(before.revision + 1);
-  await expect(page.locator(".hand .action-card").first()).toBeFocused();
-  await expect(page.locator(".app")).toHaveAttribute("data-input", "controller");
+  await expect(page.locator(".app:not([inert]) .hand .action-card").first()).toBeFocused();
+  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-input", "controller");
 });
 
 for (const input of ["mouse", "keyboard", "controller"] as const)
@@ -1090,7 +1094,7 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
         else await page.keyboard.press("Enter");
       }
     };
-    await expect(page.locator('.player-row [data-species="silkmoth"]')).toHaveCount(0);
+    await expect(page.locator('.app:not([inert]) .player-row [data-species="silkmoth"]')).toHaveCount(0);
     await activate(page.getByRole("button", { name: "Swap", exact: true }));
     const dialog = page.getByRole("dialog");
     await expect(dialog).toBeVisible();
@@ -1117,7 +1121,7 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     expect(swapped.battle!.discard).toEqual(fixture.battle!.discard);
     expect(swapped.lineup).toEqual(fixture.lineup);
     expect(swapped.reserves.find((c) => c.species === "emberfox")!.health).toBe(9);
-    await expect(page.locator(".hand .action-card img")).toHaveAttribute(
+    await expect(page.locator(".app:not([inert]) .hand .action-card img")).toHaveAttribute(
       "src",
       /\/art\/silkmoth-action\.svg$/,
     );
@@ -1152,7 +1156,7 @@ for (const [width, height] of [
     });
     await seed(page, fixture);
     await resume(page);
-    await page.screenshot({ path: `reports/swapping/battle-${width}.png` });
+    await captureScreen(page, { path: `reports/swapping/battle-${width}.png` });
     await page.getByRole("button", { name: "Swap", exact: true }).click();
     await page.getByRole("button", { name: "Emberfox, deployed", exact: true }).click();
     await page.mouse.move(0, 0);
@@ -1165,7 +1169,7 @@ for (const [width, height] of [
       const size = (await card.boundingBox())!;
       expect(Math.abs(size.width / size.height - 4 / 3)).toBeLessThan(0.01);
     }
-    await page.screenshot({ path: `reports/swapping/swap-${width}.png` });
+    await captureScreen(page, { path: `reports/swapping/swap-${width}.png` });
     await page.keyboard.press("Escape");
     const reward = winBattle(fixture);
     await seed(page, reward);
@@ -1174,7 +1178,7 @@ for (const [width, height] of [
     await page.getByRole("button", { name: "Lineup", exact: true }).click();
     await page.mouse.move(0, 0);
     await fits(page);
-    await page.screenshot({ path: `reports/swapping/lineup-${width}.png` });
+    await captureScreen(page, { path: `reports/swapping/lineup-${width}.png` });
     await page.getByRole("button", { name: "Silkmoth, reserve", exact: true }).click();
     await page.getByRole("button", { name: "Mossback, starting", exact: true }).click();
     const edited = await state(page);
@@ -1213,7 +1217,7 @@ test("a fallen deployed row resumes with no playable cards and can recover throu
   await seed(page, s);
   await resume(page);
   await page.getByRole("button", { name: "End turn", exact: true }).click();
-  await expect(page.locator(".hand .action-card")).toHaveCount(0);
+  await expect(page.locator(".app:not([inert]) .hand .action-card")).toHaveCount(0);
   const fallen = await state(page);
   expect(fallen.phase).toBe("battle");
   expect(fallen.team.every((c) => c.health === 0)).toBe(true);
@@ -1226,7 +1230,7 @@ test("a fallen deployed row resumes with no playable cards and can recover throu
     .getByRole("button", { name: `${species(outgoing.species).name}, deployed`, exact: true })
     .click();
   await page.getByRole("button", { name: "Silkmoth, reserve", exact: true }).click();
-  await expect(page.locator(".hand .action-card").first()).toBeVisible();
+  await expect(page.locator(".app:not([inert]) .hand .action-card").first()).toBeVisible();
   const restored = await state(page);
   expect(restored.battle!.mana).toBe(4);
   expect(restored.battle!.hand).toEqual(fallen.battle!.hand);
@@ -1340,7 +1344,7 @@ for (const [width, height] of [
     await page.setViewportSize({ width, height });
     await seed(page, run(7));
     await resume(page);
-    await page.locator(".player-row .creature-card").first().hover();
+    await page.locator(".app:not([inert]) .player-row .creature-card").first().hover();
     await expect(page.getByRole("tooltip")).toContainText("Guard cards grant 2 extra block.");
     await expect(page.getByRole("tooltip")).not.toContainText("Bramble Bash");
     await page.getByRole("button", { name: "Inspect Bramble Imp", exact: true }).click();
@@ -1367,11 +1371,11 @@ for (const [width, height] of [
       expect(Math.abs(bounds.width / bounds.height - 3 / 4)).toBeLessThan(0.01);
       expect(await thumb.textContent()).toBe("");
     }
-    await page.screenshot({ path: `reports/inspection/live-creature-${width}.png` });
+    await captureScreen(page, { path: `reports/inspection/live-creature-${width}.png` });
     await dialog.locator(".action-card").first().click();
     const portrait = (await dialog.locator(".action-card").boundingBox())!;
     expect(Math.abs(portrait.width / portrait.height - 3 / 4)).toBeLessThan(0.01);
-    await page.screenshot({ path: `reports/inspection/live-action-${width}.png` });
+    await captureScreen(page, { path: `reports/inspection/live-action-${width}.png` });
     await page.keyboard.press("Escape");
     await page.mouse.click(5, 5);
     await expect(page.getByRole("dialog")).toHaveCount(0);
@@ -1443,13 +1447,13 @@ for (const [width, height] of [
     const area = (element: HTMLElement) => element.offsetWidth * element.offsetHeight;
     expect(
       await page
-        .locator(".player-row .creature-card")
+        .locator(".app:not([inert]) .player-row .creature-card")
         .first()
         .evaluate((el: HTMLElement) => ({ width: el.offsetWidth, height: el.offsetHeight })),
     ).toEqual({ width: 293, height: 220 });
     expect(
       await page
-        .locator(".hand .action-card")
+        .locator(".app:not([inert]) .hand .action-card")
         .first()
         .evaluate((el: HTMLElement) => ({ width: el.offsetWidth, height: el.offsetHeight })),
     ).toEqual({ width: 180, height: 240 });
@@ -1459,30 +1463,45 @@ for (const [width, height] of [
         .first()
         .evaluate((el) => el.getBoundingClientRect().width),
     ).toBe(18);
+    const scrolls = width <= 1100 || height <= 850;
+    if (scrolls) {
+      await page.getByRole("button", { name: /^End turn/ }).scrollIntoViewIfNeeded();
+      expect(await page.locator(".battle-screen").evaluate((el) => el.scrollHeight > el.clientHeight)).toBe(
+        true,
+      );
+    }
     const mana = (await page.getByRole("button", { name: /^Mana / }).boundingBox())!;
     const end = (await page.getByRole("button", { name: /^End turn/ }).boundingBox())!;
     const swap = (await page.getByRole("button", { name: "Swap", exact: true }).boundingBox())!;
     expect(swap.y + swap.height).toBeLessThan(end.y);
     expect(Math.abs(swap.x - end.x)).toBeLessThan(1);
-    expect(mana.x).toBe(32);
-    expect(Math.abs(mana.y + mana.height - height + 24)).toBeLessThan(1);
-    expect(Math.abs(end.x + end.width - width + 32)).toBeLessThan(1);
-    expect(Math.abs(end.y + end.height - height + 24)).toBeLessThan(1);
+    if (!scrolls) {
+      expect(mana.x).toBe(32);
+      expect(Math.abs(mana.y + mana.height - height + 24)).toBeLessThan(1);
+      expect(Math.abs(end.x + end.width - width + 32)).toBeLessThan(1);
+      expect(Math.abs(end.y + end.height - height + 24)).toBeLessThan(1);
+    }
     await page.mouse.move(0, 0);
     const fan = await page
-      .locator(".hand-slot")
+      .locator(".app:not([inert]) .hand-slot")
       .evaluateAll((elements) => elements.map((el) => el.getBoundingClientRect().toJSON()));
     expect(Math.abs(fan[0]!.top - fan[6]!.top)).toBeLessThan(1);
     expect(Math.abs(fan[1]!.top - fan[5]!.top)).toBeLessThan(1);
     expect(fan[0]!.top).toBeGreaterThan(fan[1]!.top);
     expect(fan[1]!.top).toBeGreaterThan(fan[2]!.top);
-    expect(fan[0]!.bottom).toBeGreaterThan(height);
-    expect(fan[0]!.bottom).toBeLessThan(height + 64);
-    expect(Math.abs(fan[3]!.bottom - height)).toBeLessThan(1);
-    const creatureArea = await page.locator(".player-row .creature-card").first().evaluate(area);
-    for (const card of await page.locator(".hand .action-card").all())
+    if (!scrolls) {
+      expect(fan[0]!.bottom).toBeGreaterThan(height);
+      expect(fan[0]!.bottom).toBeLessThan(height + 64);
+      expect(Math.abs(fan[3]!.bottom - height)).toBeLessThan(1);
+    }
+    const creatureArea = await page
+      .locator(".app:not([inert]) .player-row .creature-card")
+      .first()
+      .evaluate(area);
+    for (const card of await page.locator(".app:not([inert]) .hand .action-card").all())
       expect(Math.abs((await card.evaluate(area)) / creatureArea - (0.9 / 1.1) ** 2)).toBeLessThan(0.025);
-    for (const control of await page.locator(".hand-toolbar button:enabled").all()) {
+    for (const control of await page.locator(".app:not([inert]) .hand-toolbar button:enabled").all()) {
+      if (scrolls) await control.scrollIntoViewIfNeeded();
       const bounds = (await control.boundingBox())!;
       expect(bounds.y + bounds.height).toBeLessThanOrEqual(height);
       expect(
@@ -1492,7 +1511,7 @@ for (const [width, height] of [
         }),
       ).toBe(true);
     }
-    const opener = page.locator(".player-row .creature-card").first();
+    const opener = page.locator(".app:not([inert]) .player-row .creature-card").first();
     await opener.click();
     const dialog = page.getByRole("dialog");
     const inspectedArea = await dialog.locator(".creature-card").evaluate(area);

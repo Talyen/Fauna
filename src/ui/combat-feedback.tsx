@@ -47,7 +47,7 @@ export function appendFeedback(
   );
   return bursts;
 }
-export function feedbackFrames(events: readonly GameEvent[]): GameEvent[][] {
+function feedbackFrames(events: readonly GameEvent[]): GameEvent[][] {
   const frames: GameEvent[][] = [];
   let actor: string | undefined;
   for (const event of events) {

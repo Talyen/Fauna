@@ -34,8 +34,11 @@ try {
   await window.locator("[data-destination]").first().click();
   await window.getByRole("button", { name: "Begin battle" }).click();
   await window.getByRole("main", { name: "Battlefield" }).waitFor();
-  await window.locator('.app[data-save-status="saved"]').waitFor();
-  await window.locator(".player-row").getByRole("button", { name: "Inspect Mossback", exact: true }).click();
+  await window.locator('.app:not([inert])[data-save-status="saved"]').waitFor();
+  await window
+    .locator(".app:not([inert]) .player-row")
+    .getByRole("button", { name: "Inspect Mossback", exact: true })
+    .click();
   await window.locator(".inspection-thumbnails .action-card").first().waitFor();
   if ((await window.locator(".inspection-thumbnails .action-card").count()) !== 3)
     throw new Error("Creature inspection did not expose three portrait actions.");
@@ -88,7 +91,7 @@ try {
   await window.getByRole("button", { name: "Swap", exact: true }).click();
   await window.getByRole("button", { name: "Silkmoth, reserve", exact: true }).click();
   await window.getByRole("button", { name: "Mossback, deployed", exact: true }).click();
-  await window.locator('.app[data-save-status="saved"]').waitFor();
+  await window.locator('.app:not([inert])[data-save-status="saved"]').waitFor();
   const swapped = await window.evaluate(async () =>
     JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
   );
@@ -103,12 +106,12 @@ try {
   await window.getByRole("button", { name: "Swap", exact: true }).click();
   await window.getByRole("button", { name: "Silkmoth, deployed", exact: true }).click();
   await window.getByRole("button", { name: "Mossback, reserve", exact: true }).click();
-  await window.locator('.app[data-save-status="saved"]').waitFor();
-  let attack = window.locator('.hand .action-card[data-effect="attack"]').first();
+  await window.locator('.app:not([inert])[data-save-status="saved"]').waitFor();
+  let attack = window.locator('.app:not([inert]) .hand .action-card[data-effect="attack"]').first();
   if (!(await attack.count())) {
     await window.getByRole("button", { name: "End turn" }).click();
-    await window.locator('.app[data-save-status="saved"]').waitFor();
-    attack = window.locator('.hand .action-card[data-effect="attack"]').first();
+    await window.locator('.app:not([inert])[data-save-status="saved"]').waitFor();
+    attack = window.locator('.app:not([inert]) .hand .action-card[data-effect="attack"]').first();
   }
   // Exercise automatic turn settlement and pending feedback across an immediate exit.
   await window.evaluate(async () => {
@@ -119,12 +122,12 @@ try {
   await window.reload();
   await window.getByRole("button", { name: "Continue", exact: true }).click();
   await window.getByRole("main", { name: "Battlefield" }).waitFor();
-  await window.locator('.app[data-save-status="saved"]').waitFor();
+  await window.locator('.app:not([inert])[data-save-status="saved"]').waitFor();
   const before = await window.evaluate(async () =>
     JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
   );
   await attack.click();
-  await window.locator('.enemy-row [data-enemy-id="enemy-0"]').click();
+  await window.locator('.app:not([inert]) .enemy-row [data-enemy-id="enemy-0"]').click();
   // Close immediately while hit feedback is still animating; the handshake must flush the accepted command.
   await app.close();
   app = undefined;

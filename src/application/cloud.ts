@@ -30,7 +30,7 @@ const identifier = /^[a-f0-9]{32}$/;
 const digest = /^[a-f0-9]{64}$/;
 export const cloudName = (s: Pick<CloudSnapshot, "device" | "sequence">) =>
   `fauna-v1-${s.device}-${s.sequence % 2}.json`;
-export const isCloudName = (name: string) => /^fauna-v1-[a-f0-9]{32}-[01]\.json$/.test(name);
+const isCloudName = (name: string) => /^fauna-v1-[a-f0-9]{32}-[01]\.json$/.test(name);
 async function sha(text: string) {
   const bytes = await globalThis.crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
   return Array.from(new Uint8Array(bytes), (b) => b.toString(16).padStart(2, "0")).join("");

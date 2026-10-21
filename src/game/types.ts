@@ -43,7 +43,7 @@ export interface Enemy {
   combat: CombatState;
   lastAbility: string | null;
 }
-export interface Battle {
+interface Battle {
   freeBurnUsed: boolean;
   meteoriteUsed: boolean;
   turn: number;
@@ -55,14 +55,14 @@ export interface Battle {
   discard: string[];
   enemies: Enemy[];
 }
-export interface BattleReward {
+interface BattleReward {
   xp: KeywordXP;
   currency: number;
   recruits: SpeciesId[];
   boons: BoonId[];
   outcome: "next" | "victory" | "defeat";
 }
-export interface JourneySummary {
+interface JourneySummary {
   outcome: "victory" | "defeat" | "returned" | null;
   victories: number;
   currency: number;

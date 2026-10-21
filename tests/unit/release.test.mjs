@@ -83,7 +83,7 @@ it("uses reachable release ancestry and leaves Git unchanged when generating not
     expect(git("status", "--porcelain")).toBe(status);
   }));
 it("rejects version, tag, source and dirty-build mismatches and records build races", () =>
-  repository((root, git) => {
+  repository((root) => {
     expect(releaseVersion(root, "v1.0.0")).toBe("1.0.0");
     expect(() => releaseVersion(root, "v2.0.0")).toThrow("tag");
     const expected = buildIdentity(root);

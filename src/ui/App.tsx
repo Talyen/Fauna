@@ -71,6 +71,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
   const [route, setRoute] = useState<Route>("home"),
     [menu, setMenu] = useState(false),
     [modal, setModal] = useState<Modal>(null),
+    [modalInstance, setModalInstance] = useState(0),
     [inspection, setInspection] = useState<Inspection | null>(null);
   const [mode, setMode] = useState<"pointer" | "keyboard" | "controller">("pointer");
   const [navigation, setNavigation] = useState(false);
@@ -167,6 +168,8 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
   const openModal = (next: Modal) => {
     if (menu) menuReturnLabel.current = document.activeElement?.textContent ?? null;
     modalOpener.current = document.activeElement as HTMLElement | null;
+    // Reopening during an exit fade needs a fresh Radix focus scope.
+    setModalInstance((instance) => instance + 1);
     setModal(next);
   };
   const navigate = (next: "talents" | "collection") => {
@@ -409,6 +412,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     <>
       {" "}
       <Dialog
+        key={`modal-${modalInstance}`}
         open={modal !== null && modal !== "endRun"}
         onOpenChange={(open) => {
           if (!open) setModal(null);
@@ -535,7 +539,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
               </dl>
             </>
           ) : null}
-          {inspection ? (
+          {inspection && !("support" in inspection) ? (
             <Inspector
               item={inspection}
               session={session}
@@ -546,6 +550,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
         </DialogContent>
       </Dialog>
       <AlertDialog
+        key={`confirmation-${modalInstance}`}
         open={modal === "endRun"}
         onOpenChange={(open) => {
           if (!open) setModal(null);
@@ -747,45 +752,47 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
             </div>
           </>
         )}
-        <Dialog open={menu && !modal && !inspection} onOpenChange={setMenu}>
-          <DialogContent
-            className="menu-panel"
-            closeLabel="Close menu"
-            onOpenAutoFocus={(event) => {
-              const label = menuReturnLabel.current;
-              if (!label) return;
-              menuReturnLabel.current = null;
-              const opener = Array.from(
-                (event.currentTarget as HTMLElement).querySelectorAll<HTMLButtonElement>("button"),
-              ).find((button) => button.textContent === label);
-              if (opener) {
+        {!modal && !inspection ? (
+          <Dialog open={menu} onOpenChange={setMenu}>
+            <DialogContent
+              className="menu-panel"
+              closeLabel="Close menu"
+              onOpenAutoFocus={(event) => {
+                const label = menuReturnLabel.current;
+                if (!label) return;
+                menuReturnLabel.current = null;
+                const opener = Array.from(
+                  (event.currentTarget as HTMLElement).querySelectorAll<HTMLButtonElement>("button"),
+                ).find((button) => button.textContent === label);
+                if (opener) {
+                  event.preventDefault();
+                  opener.focus();
+                }
+              }}
+              onCloseAutoFocus={(event) => {
                 event.preventDefault();
-                opener.focus();
-              }
-            }}
-            onCloseAutoFocus={(event) => {
-              event.preventDefault();
-              if (modal || inspection) return;
-              if (route === "play") returnFocus(pauseOpener.current);
-              else
-                returnFocus(root.current?.querySelector<HTMLElement>("main button:not(:disabled)") ?? null);
-            }}
-          >
-            <DialogTitle className="sr-only">Pause menu</DialogTitle>
-            <DialogDescription className="sr-only">Game menu</DialogDescription>
-            {menuItems(false)}
-            {import.meta.env.DEV && game.phase === "battle" ? (
-              <Button
-                variant="outline"
-                onClick={() => {
-                  if (send({ type: "devWinBattle" })) setMenu(false);
-                }}
-              >
-                Skip combat
-              </Button>
-            ) : null}
-          </DialogContent>
-        </Dialog>
+                if (modal || inspection) return;
+                if (route === "play") returnFocus(pauseOpener.current);
+                else
+                  returnFocus(root.current?.querySelector<HTMLElement>("main button:not(:disabled)") ?? null);
+              }}
+            >
+              <DialogTitle className="sr-only">Pause menu</DialogTitle>
+              <DialogDescription className="sr-only">Game menu</DialogDescription>
+              {menuItems(false)}
+              {import.meta.env.DEV && game.phase === "battle" ? (
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    if (send({ type: "devWinBattle" })) setMenu(false);
+                  }}
+                >
+                  Skip combat
+                </Button>
+              ) : null}
+            </DialogContent>
+          </Dialog>
+        ) : null}
         {overlays}
       </div>
     </SurfaceTransition>

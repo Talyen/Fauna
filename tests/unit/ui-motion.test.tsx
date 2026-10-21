@@ -63,7 +63,7 @@ function motionEnvironment() {
 it("finishes decorative hand flights before accepting input and reveals every committed card on unmount", () => {
   // jsdom does not implement WAAPI; this supplies only the animation ownership boundary.
   if (!HTMLElement.prototype.animate)
-    HTMLElement.prototype.animate = (() => ({})) as typeof HTMLElement.prototype.animate;
+    HTMLElement.prototype.animate = (() => ({})) as unknown as typeof HTMLElement.prototype.animate;
   const env = motionEnvironment();
   const action = vi.fn();
   const hand = (revision: number, ids: string[]) => (
@@ -107,7 +107,7 @@ it("finishes decorative hand flights before accepting input and reveals every co
 });
 it("crossfade copies never duplicate IDs or input ownership, and new input clears them", () => {
   if (!HTMLElement.prototype.animate)
-    HTMLElement.prototype.animate = (() => ({})) as typeof HTMLElement.prototype.animate;
+    HTMLElement.prototype.animate = (() => ({})) as unknown as typeof HTMLElement.prototype.animate;
   const env = motionEnvironment();
   const view = render(
     <SurfaceTransition token="home">
@@ -131,7 +131,7 @@ it("crossfade copies never duplicate IDs or input ownership, and new input clear
 });
 it("classifies committed action motion without prose, and revokes animation capabilities on disposal", () => {
   if (!HTMLElement.prototype.animate)
-    HTMLElement.prototype.animate = (() => ({})) as typeof HTMLElement.prototype.animate;
+    HTMLElement.prototype.animate = (() => ({})) as unknown as typeof HTMLElement.prototype.animate;
   const env = motionEnvironment();
   const root = document.createElement("div");
   root.innerHTML =

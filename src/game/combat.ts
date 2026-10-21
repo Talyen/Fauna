@@ -6,7 +6,7 @@ import type { CombatState, Creature, Enemy, GameEvent, GameState } from "./types
 export const TURN_MANA = 4;
 export const TURN_DRAW = 4;
 export const HAND_LIMIT = 7;
-export const STACK_LIMIT = 1_000_000;
+const STACK_LIMIT = 1_000_000;
 export type Combatant = Creature | Enemy;
 export function freshCombat(): CombatState {
   return {
@@ -34,9 +34,9 @@ export function roll(state: GameState) {
   state.rng = (Math.imul(state.rng, 1664525) + 1013904223) >>> 0;
   return state.rng / 4294967296;
 }
-export const maximumHealth = (unit: Combatant) =>
+const maximumHealth = (unit: Combatant) =>
   "maxHealth" in unit ? unit.maxHealth : species(unit.species).health;
-export const unitName = (unit: Combatant) => ("name" in unit ? unit.name : species(unit.species).name);
+const unitName = (unit: Combatant) => ("name" in unit ? unit.name : species(unit.species).name);
 export const controlled = (unit: Combatant) => !!unit.combat?.controlled || !!unit.combat?.skipped;
 export function restoreHealth(
   unit: Combatant,

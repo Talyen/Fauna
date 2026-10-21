@@ -1,7 +1,7 @@
-// Existing Fauna artifact baseline, October 19, 2026; producing commit unknown.
+// Shared design-system rollout measured locally, October 20, 2026.
 // See scripts/README.md for the artifact hash and allowance rationale.
 export const BUNDLE_BUDGET = {
-  baselineBytes: 493_308,
-  maxBytes: 580 * 1024,
-  warnBytes: Math.floor(580 * 1024 * 0.95),
+  baselineBytes: 613_638,
+  maxBytes: 640 * 1024,
+  warnBytes: Math.floor(640 * 1024 * 0.95),
 };

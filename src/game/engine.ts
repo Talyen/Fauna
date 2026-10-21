@@ -142,7 +142,7 @@ function intents(state: GameState) {
       enemy.targetId = alive.length ? alive[Math.floor(random(state) * alive.length)]!.id : state.team[0]!.id;
   }
 }
-export function beginBattle(state: GameState) {
+function beginBattle(state: GameState) {
   const encounter = encounterSource(state);
   for (const enemy of encounter.enemies)
     if (!state.discovery.encountered.includes(enemy.species)) state.discovery.encountered.push(enemy.species);

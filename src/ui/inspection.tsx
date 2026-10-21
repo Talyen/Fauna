@@ -9,7 +9,7 @@ import { ActionCard, CreatureCard } from "./cards";
 import { CARDS, definition, species } from "../game/content";
 import { encounterSource, location } from "../game/destinations";
 import type { Card } from "../game/types";
-import { returnFocus } from "./focus";
+import { isAvailableFocusTarget, returnFocus } from "./focus";
 import type { Inspection, Controls } from "./battle-screen";
 
 export function Inspector({
@@ -149,6 +149,8 @@ export function Inspector({
         className={`inspection ${destination && destinationEnemy === null ? "destination-inspection" : card ? "single-card" : "creature-inspection"}`}
         onCloseAutoFocus={(event) => {
           event.preventDefault();
+          const focused = document.activeElement as HTMLElement | null;
+          if (focused !== document.body && isAvailableFocusTarget(focused)) return;
           returnFocus(opener);
         }}
       >
