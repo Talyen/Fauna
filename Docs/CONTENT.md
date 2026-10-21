@@ -69,7 +69,7 @@ Brass Censer gives allied Light hits a 20% chance to either deal their damage ag
 
 Sundering Charm removes 2 enemy Armor before Physical or Stun hit mitigation, after Dodge. Frozen Pocketwatch extends enemy Freeze to two skipped turns, followed by the existing shared immunity. Before allied turn-start damage, Plague Doctor's Mask removes up to 2 Poison from each living creature, including reserves, and deals half the removed amount (rounded normally) as Poison to the first living enemy. Fully removing Poison triggers Cleanse rewards; partial stack removal does not.
 
-Resonant Chimes refunds 1 shared Mana after the third accepted card of each turn, before automatic end turn. Repeated card effects count once. Its capped battle-wide counter survives previews, swaps and resume and resets each turn and battle. Merchant's Favor commits a 13 Gold price instead of 20 when each new Merchant stock is prepared; the one-purchase visit limit still applies. Smuggler's Map adds 2 Gold to victory rewards, including bosses, using ordinary settlement and retained-earnings limits. Save version 21 rejects obsolete development saves.
+Resonant Chimes refunds 1 shared Mana after the third accepted card of each turn, before automatic end turn. Repeated card effects count once. Its capped battle-wide counter survives previews, swaps and resume and resets each turn and battle. Merchant's Favor commits a 13 Gold price instead of 20 when each new Merchant stock is prepared; the one-purchase visit limit still applies. Smuggler's Map adds 2 Gold to victory rewards, including bosses, using ordinary settlement and retained-earnings limits. Save version 22 rejects obsolete development saves.
 
 ## Support encounter content
 
@@ -83,6 +83,6 @@ Journeys use one shared combat enemy pool, with bosses at encounters 4 and 8. Th
 
 ## Creature passive tiers
 
-Each species in `src/game/content.ts` owns six `passiveTiers`, indexed by stars from zero through five. The first recruitment collects the species at zero stars; the sixth reaches five. Counts persist across journeys and cap at six. Starter selection and encounter discovery do not count as recruitment.
+Each species in `src/game/content.ts` owns six `passiveTiers`, indexed by stars from zero through five. The first recruitment collects the species at zero stars; the sixth reaches five. Counts persist across journeys and cap at six. Committing the first onboarding starter supplies one initial copy. Later starter drafts and encounter discovery do not grant copies.
 
 The base tier contains the existing unique passive. Higher slots remain `null` until designed. A defined tier replaces the whole previous passive rather than adding to it; include all retained effects in its effect list. Tiers can compose card bonuses and battle-start Block or Thorns. New mechanics belong in the typed passive effect contract and its gameplay consumers alongside matching descriptions and regression coverage. Player rules, previews and inspection use the highest defined tier at or below the permanent rank. Enemies always use the base tier. Inspection shows all six slots, the current rank, the active effect and undefined upgrades.

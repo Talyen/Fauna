@@ -79,11 +79,12 @@ describe("recruiting creature copies", () => {
         { type: "beginBattle" },
       ),
     );
+    expect(dispatch(s, { type: "skipRecruit" }).state).toBe(s);
     expect(dispatch(s, { type: "recruit", species: "emberfox" }).accepted).toBe(false);
-    expect(s.discovery.recruited.emberfox).toBe(1);
-    s = accept(s, { type: "recruit", species: "emberfox", replace: "ally-1" });
     expect(s.discovery.recruited.emberfox).toBe(2);
-    expect(s.discovery.recruited.mossback).toBe(1);
+    s = accept(s, { type: "recruit", species: "emberfox", replace: "ally-1" });
+    expect(s.discovery.recruited.emberfox).toBe(3);
+    expect(s.discovery.recruited.mossback).toBe(2);
     const all = [...s.team, ...s.reserves];
     expect(all.some((c) => c.id === "ally-1")).toBe(false);
     expect(copies.every((id) => all.some((c) => c.id === id))).toBe(true);

@@ -6,19 +6,23 @@ import { creatureStars, talentPoints, xpThreshold, keywordProgress } from "../..
 import { accept, winBattle } from "./helpers";
 
 it("discovers only committed encounters and retains knowledge independently of starter unlocks", () => {
-  let state = accept(accept(createGame(), { type: "draft", species: "emberfox" }), { type: "start" });
-  expect(state.discovery.encountered).toEqual([]);
+  const fresh = createGame();
+  const starter = fresh.starterOffers[0]!;
+  let state = accept(accept(fresh, { type: "draft", species: starter }), { type: "start" });
+  expect(state.discovery.encountered).toEqual([starter]);
   const rejected = dispatch(state, { type: "endTurn" });
   expect(rejected.state).toBe(state);
   state = accept(state, { type: "beginBattle" });
   expect(state.discovery.encountered).toEqual([
-    ...new Set(state.battle!.enemies.map((enemy) => enemy.species)),
+    ...new Set([starter, ...state.battle!.enemies.map((enemy) => enemy.species)]),
   ]);
   const unlocked = state.unlocked;
   state = winBattle(state);
   const kind = state.reward!.recruits[0]!;
   state = accept(state, { type: "recruit", species: kind });
-  expect(state.discovery.recruited).toEqual({ [kind]: 1 });
+  expect(state.discovery.recruited).toEqual(
+    kind === starter ? { [starter]: 2 } : { [starter]: 1, [kind]: 1 },
+  );
   expect(state.unlocked).toEqual(unlocked);
   state = accept(state, { type: "abandon" });
   const knowledge = state.discovery;
@@ -45,26 +49,34 @@ it("uses discounted early XP thresholds without granting points early at large b
 
 it("collects only accepted recruits, caps stars at five, and retains ranks across saves and journeys", () => {
   let state = createGame(42);
+  const first = state.starterOffers[0]!;
+  state = accept(accept(state, { type: "draft", species: first }), { type: "start" });
+  expect(state.discovery.recruited).toEqual({ [first]: 1 });
   for (let copy = 1; copy <= 8; copy++) {
-    state = accept(state, { type: "draft", species: "mossback" });
-    state = accept(state, { type: "start" });
     state = winBattle(accept(state, { type: "beginBattle" }));
     const kind = state.reward!.recruits[0]!;
     const before = state.discovery;
     const invalid = dispatch(state, { type: "recruit", species: kind, replace: "missing" });
     expect(invalid.accepted).toBe(false);
     expect(invalid.state).toBe(state);
-    expect(accept(state, { type: "skipRecruit" }).discovery).toEqual(before);
+    expect(dispatch(state, { type: "skipRecruit" }).state).toBe(state);
+    const expected = Math.min((before.recruited[kind] ?? 0) + 1, 6);
     state = accept(state, { type: "recruit", species: kind });
-    expect(state.discovery.recruited).toEqual({ [kind]: Math.min(copy, 6) });
-    expect(creatureStars(state, kind)).toBe(Math.min(copy - 1, 5));
+    expect(state.discovery.recruited[kind]).toBe(expected);
+    expect(creatureStars(state, kind)).toBe(expected - 1);
     const repeated = dispatch(state, { type: "recruit", species: kind });
     expect(repeated.accepted).toBe(false);
     expect(repeated.state).toBe(state);
     state = decodeSave(encodeSave(accept(state, { type: "abandon" })));
+    const retained = state.discovery;
     state = accept(state, { type: "newRun", seed: 42 });
-    expect(state.discovery.recruited).toEqual({ [kind]: Math.min(copy, 6) });
+    for (let pick = 0; pick < 3; pick++) {
+      state = accept(state, { type: "draft", species: state.starterOffers[0]! });
+    }
+    state = accept(state, { type: "start" });
+    expect(state.discovery).toEqual(retained);
   }
+  expect(Object.values(state.discovery.recruited)).toContain(6);
 });
 
 it.each([0, -1, 7, 1.5, "2", null])("rejects invalid permanent recruitment counts: %s", (count) => {

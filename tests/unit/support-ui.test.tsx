@@ -3,13 +3,13 @@ import { it, expect, vi, afterEach } from "vitest";
 import { render, screen, fireEvent, cleanup } from "@testing-library/react";
 import { produce } from "immer";
 import { createGame } from "../../src/game/engine";
-import { accept, winBattle } from "./helpers";
+import { recruitChoice, accept, winBattle } from "./helpers";
 import { SupportOffer, SupportInspector, SupportScreen } from "../../src/ui/support-screen";
 afterEach(cleanup);
 function merchant() {
   let s = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
   s = winBattle(accept(s, { type: "beginBattle" }));
-  return accept(s, { type: "skipRecruit" });
+  return accept(s, recruitChoice(s));
 }
 it("inspection can be dismissed without a command; Enter commits the saved visit identity", () => {
   const game = merchant(),

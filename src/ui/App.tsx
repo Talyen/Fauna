@@ -594,7 +594,11 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
             controls={inspectionControls}
             onClose={() => setInspection(null)}
             chooseStarter={
-              route === "play" && game.phase === "draft" && !menu && "species" in inspection
+              route === "play" &&
+              game.phase === "draft" &&
+              !menu &&
+              "species" in inspection &&
+              game.starterOffers.includes(inspection.species)
                 ? () => send({ type: "draft", species: inspection.species })
                 : undefined
             }

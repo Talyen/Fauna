@@ -1,8 +1,11 @@
 import type { SpeciesId } from "./content";
-import { definition, species } from "./content";
+import { definition, species, SPECIES } from "./content";
 import { PROGRESSION_KEYWORDS, definitionKeywords, type ProgressionKeyword } from "./keywords";
 export { progressionLabel as keywordLabel } from "./keywords";
 import type { Card, GameState } from "./types";
+export function collectedSpecies(state: Pick<GameState, "discovery">): SpeciesId[] {
+  return SPECIES.filter(({ id }) => state.discovery.recruited[id] !== undefined).map(({ id }) => id);
+}
 export const MAX_CREATURE_STARS = 5;
 export function creatureStars(state: Pick<GameState, "discovery">, kind: SpeciesId): number {
   return Math.max(0, (state.discovery.recruited[kind] ?? 0) - 1);

@@ -25,8 +25,8 @@ test("switch thumbs stay within their tracks in both states", async ({ page }) =
 test("Collection filtering, audio preferences, and settings remain menu-driven", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Collection", exact: true }).click();
-  await page.getByRole("tab", { name: "Unknown", exact: true }).click();
-  await expect(page.getByRole("img", { name: "Locked species" })).toHaveCount(1);
+  await page.getByRole("tab", { name: "Uncollected", exact: true }).click();
+  await expect(page.getByRole("img", { name: "Locked species" })).toHaveCount(6);
   await page.getByRole("button", { name: "Back", exact: true }).click();
   await expect(page.getByRole("button", { name: "Collection", exact: true })).toBeFocused();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
@@ -138,7 +138,7 @@ for (const width of [1280, 1920])
     const { createGame } = await import("../../src/game/engine");
     let fixture = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
     fixture = winBattle(accept(fixture, { type: "beginBattle" }));
-    fixture = accept(fixture, { type: "skipRecruit" });
+    fixture = accept(fixture, recruitChoice(fixture));
     const pack = fixture.expedition!.pack;
     await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
     await page.emulateMedia({ reducedMotion: "reduce" });

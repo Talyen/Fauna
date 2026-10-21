@@ -1,3 +1,4 @@
+import { starterCount } from "../game/engine";
 import { motionValue } from "./motion-values";
 import { ResultPresentation } from "./result-presentation";
 import { EmptyState } from "./empty-state";
@@ -154,32 +155,44 @@ export function TeamSelection({ game, send, inspect, deck }: Props & { deck: () 
 export function Draft({ game, send, inspect }: Props) {
   return (
     <main className="draft-screen">
-      <h1>Choose your starter</h1>
+      <h1>
+        {game.selected.length < starterCount(game)
+          ? `Choose your starter (${game.selected.length + 1} of ${starterCount(game)})`
+          : "Your starter team"}
+      </h1>
       <div className="draft-grid" data-nav-row>
-        {SPECIES.filter((s) => game.unlocked.includes(s.id)).map((s) => (
-          <div className="starter-option" key={s.id}>
-            <CreatureCard
-              progression={game}
-              kind={s.id}
-              selected={game.selected.includes(s.id)}
-              onClick={() => inspect({ species: s.id })}
-              onInspect={() => inspect({ species: s.id })}
-              label={`Inspect ${s.name}`}
-              tooltips={false}
-            />
-            <h2>{s.name}</h2>
-            <span className="starter-selection">
-              {game.selected.includes(s.id) ? (
-                <>
-                  <Check aria-hidden="true" /> Selected
-                </>
-              ) : null}
-            </span>
-          </div>
-        ))}
+        {(game.selected.length === starterCount(game) ? game.selected : game.starterOffers).map(
+          (kind, index) => {
+            const s = species(kind);
+            return (
+              <div className="starter-option" key={`${index}-${s.id}`}>
+                <CreatureCard
+                  progression={game}
+                  kind={s.id}
+                  selected={game.selected.length === starterCount(game)}
+                  onClick={() => inspect({ species: s.id })}
+                  onInspect={() => inspect({ species: s.id })}
+                  label={`Inspect ${s.name}`}
+                  tooltips={false}
+                />
+                <h2>{s.name}</h2>
+                <span className="starter-selection">
+                  {game.selected.length === starterCount(game) ? (
+                    <>
+                      <Check aria-hidden="true" /> Selected
+                    </>
+                  ) : null}
+                </span>
+              </div>
+            );
+          },
+        )}
       </div>
       <footer className="selection-footer" data-nav-row>
-        <Button disabled={game.selected.length !== 1} onClick={() => send({ type: "start" })}>
+        <Button
+          disabled={game.selected.length !== starterCount(game)}
+          onClick={() => send({ type: "start" })}
+        >
           Begin journey
         </Button>
       </footer>
@@ -283,11 +296,11 @@ export function Rewards({ game, send, inspect }: Props) {
             <Button variant="outline" onClick={() => setIncoming(null)}>
               Cancel
             </Button>
-          ) : (
-            <Button variant="ghost" onClick={() => send({ type: recruiting ? "skipRecruit" : "skipBoon" })}>
+          ) : !recruiting ? (
+            <Button variant="ghost" onClick={() => send({ type: "skipBoon" })}>
               Skip
             </Button>
-          )}
+          ) : null}
         </footer>
       </main>
     </ResultPresentation>
@@ -514,7 +527,7 @@ export function Collection({
     observer.observe(grid);
     return () => observer.disconnect();
   }, [filter]);
-  const known = (id: SpeciesId) => game.unlocked.includes(id) || game.discovery.encountered.includes(id);
+  const known = (id: SpeciesId) => game.discovery.recruited[id] !== undefined;
   const ordered = [...SPECIES]
     .filter((entry) => filter === "all" || (filter === "known" ? known(entry.id) : !known(entry.id)))
     .sort((a, b) => Number(known(b.id)) - Number(known(a.id)));
@@ -545,11 +558,11 @@ export function Collection({
           </TabsTrigger>
           <TabsTrigger value="known">
             <BookOpen aria-hidden="true" />
-            Known
+            Collected
           </TabsTrigger>
           <TabsTrigger value="unknown">
             <LockKeyhole aria-hidden="true" />
-            Unknown
+            Uncollected
           </TabsTrigger>
         </TabsList>
         <TabsContent className="collection-content" value={filter}>
@@ -565,23 +578,19 @@ export function Collection({
                       onInspect={() => inspect({ species: creature.id })}
                       label={`Inspect ${creature.name}`}
                     />
-                    {game.discovery.recruited[creature.id] ? (
-                      <span
-                        className="collection-stars"
-                        role="img"
-                        aria-label={`${creature.name}: ${creatureStars(game, creature.id)} of ${MAX_CREATURE_STARS} stars`}
-                      >
-                        {Array.from({ length: MAX_CREATURE_STARS }, (_, index) => (
-                          <Star
-                            key={index}
-                            aria-hidden="true"
-                            data-earned={index < creatureStars(game, creature.id)}
-                          />
-                        ))}
-                      </span>
-                    ) : (
-                      <span className="collection-uncollected">Not recruited</span>
-                    )}
+                    <span
+                      className="collection-stars"
+                      role="img"
+                      aria-label={`${creature.name}: ${creatureStars(game, creature.id)} of ${MAX_CREATURE_STARS} stars`}
+                    >
+                      {Array.from({ length: MAX_CREATURE_STARS }, (_, index) => (
+                        <Star
+                          key={index}
+                          aria-hidden="true"
+                          data-earned={index < creatureStars(game, creature.id)}
+                        />
+                      ))}
+                    </span>
                   </div>
                 ) : (
                   <div key={creature.id} className="locked-species">

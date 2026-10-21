@@ -5,7 +5,7 @@ import { createGame, dispatch } from "../../src/game/engine";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { cardKeywords, talentPoints } from "../../src/game/progression";
 import { cardCost } from "../../src/game/rules";
-import { accept, run, winBattle, policy, bossReward } from "./helpers";
+import { recruitChoice, accept, run, winBattle, policy, bossReward } from "./helpers";
 describe("keyword progression and rewards", () => {
   it("awards keywords once per accepted play, banks once on victory, and never banks previews", () => {
     const s = run(),
@@ -28,7 +28,7 @@ describe("keyword progression and rewards", () => {
     );
     const resumed = decodeSave(encodeSave(won));
     expect(resumed).toEqual(won);
-    const next = accept(resumed, { type: "skipRecruit" });
+    const next = accept(resumed, recruitChoice(resumed));
     expect(next.keywordXP).toEqual(won.keywordXP);
     expect(dispatch(next, { type: "skipBoon" }).accepted).toBe(false);
   });

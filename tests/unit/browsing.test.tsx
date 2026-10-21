@@ -69,11 +69,13 @@ describe("menu browsing", () => {
     await session.load();
     const user = userEvent.setup();
     render(<App session={session} />);
+    session.command({ type: "draft", species: session.store.getState().game.starterOffers[0]! });
+    session.command({ type: "start" });
     try {
       await user.click(screen.getByRole("button", { name: "Collection" }));
       const game = session.store.getState().game;
       for (const creature of SPECIES) {
-        if (game.unlocked.includes(creature.id)) {
+        if (game.discovery.recruited[creature.id] !== undefined) {
           expect(screen.queryByRole("heading", { name: creature.name })).toBeNull();
           expect(screen.getByRole("button", { name: `Inspect ${creature.name}` }).textContent).toBe("");
         } else {
@@ -81,7 +83,7 @@ describe("menu browsing", () => {
           expect(screen.queryByRole("button", { name: `Inspect ${creature.name}` })).toBeNull();
         }
       }
-      const creature = SPECIES.find((entry) => game.unlocked.includes(entry.id))!;
+      const creature = SPECIES.find((entry) => game.discovery.recruited[entry.id] !== undefined)!;
       const card = screen.getByRole("button", { name: `Inspect ${creature.name}` });
       await user.hover(card);
       const tooltip = await screen.findByRole("tooltip");

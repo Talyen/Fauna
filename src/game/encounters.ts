@@ -24,11 +24,18 @@ export const BOSSES = [
     id: "briar-warden",
     encounter: 3,
     name: "The Briar Warden",
-    pack: ["briartooth", "mossback"],
+    pack: ["briartooth", "mossback", "silkmoth"],
     health: 36,
     damage: 5,
   },
-  { id: "hollow-crown", encounter: 7, name: "The Hollow Crown", pack: ["moonhart"], health: 68, damage: 10 },
+  {
+    id: "hollow-crown",
+    encounter: 7,
+    name: "The Hollow Crown",
+    pack: ["moonhart", "stormfin", "silkmoth"],
+    health: 68,
+    damage: 10,
+  },
 ] as const;
 const COMBAT_STATS = [
   { health: 8, damage: 2 },
@@ -65,7 +72,7 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
   const escort = { health: 18, damage: 3 };
   return {
     name: boss ? "Boss" : "Combat",
-    enemies: pack.map((kind, index) => ({
+    enemies: pack.slice(0, Math.min(3, game.encounter + 1)).map((kind, index) => ({
       name: boss && index === 0 ? boss.name : species(kind).name,
       species: kind,
       ...(boss ? (index === 0 ? { health: boss.health, damage: boss.damage } : escort) : ordinary),

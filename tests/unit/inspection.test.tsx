@@ -3,7 +3,6 @@ import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
 import { act, cleanup, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { produce } from "immer";
-import { createGame } from "../../src/game/engine";
 import { encodeSave } from "../../src/game/save";
 import { App } from "../../src/ui/App";
 import { createSession } from "../../src/application/session";
@@ -36,8 +35,7 @@ describe("artwork-first inspection", () => {
     localStorage.setItem(
       "fauna.save.v1",
       encodeSave(
-        produce(createGame(7), (draft) => {
-          draft.discovery.encountered = ["mossback"];
+        produce(run(7), (draft) => {
           draft.discovery.recruited.mossback = 4;
         }),
       ),
@@ -86,6 +84,7 @@ describe("artwork-first inspection", () => {
   });
 
   it("reveals details with native Tab and restores the current ability after keyboard cycling", async () => {
+    localStorage.setItem("fauna.save.v1", encodeSave(run(7)));
     const session = createSession(createBrowserPlatform(localStorage), 7);
     await session.load();
     const user = userEvent.setup();

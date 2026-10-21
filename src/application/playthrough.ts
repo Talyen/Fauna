@@ -1,3 +1,4 @@
+import { starterCount } from "../game/engine";
 import { canVisitCampfire, canVisitMerchant } from "../game/support";
 import { battleChoices } from "./battle-policy";
 import { createSession, type Session } from "./session";
@@ -51,7 +52,14 @@ function actor(config: JourneyConfig) {
     if (talent) return { type: "buyTalent", talentId: talent.id };
     switch (state.phase) {
       case "draft":
-        return state.selected.length ? { type: "start" } : { type: "draft", species: config.starter };
+        return state.selected.length === starterCount(state)
+          ? { type: "start" }
+          : {
+              type: "draft",
+              species: state.starterOffers.includes(config.starter)
+                ? config.starter
+                : pick(state.starterOffers),
+            };
       case "campfire":
         return { type: "rest" };
       case "support": {

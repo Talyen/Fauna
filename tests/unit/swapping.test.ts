@@ -5,7 +5,7 @@ import { combat } from "../../src/game/combat";
 import { dispatch } from "../../src/game/engine";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { CARDS, species } from "../../src/game/content";
-import { accept, run, winBattle } from "./helpers";
+import { recruitChoice, accept, run, winBattle } from "./helpers";
 
 export function withReserves() {
   return produce(run(), (d) => {
@@ -144,7 +144,7 @@ describe("optional starting lineup and save validation", () => {
     expect(s.lineup).toEqual(["recruit-briartooth", "ally-1", "ally-2"]);
     expect(s.battle).toEqual(snapshot);
     expect(decodeSave(encodeSave(s))).toEqual(s);
-    if (s.phase === "recruit") s = accept(s, { type: "skipRecruit" });
+    if (s.phase === "recruit") s = accept(s, recruitChoice(s));
     if (s.phase === "boon") s = accept(s, { type: "skipBoon" });
     s = accept(s, { type: "beginBattle" });
     expect(s.team.map((c) => c.id)).toEqual(s.lineup);
@@ -173,7 +173,7 @@ describe("optional starting lineup and save validation", () => {
 it("restores the saved lineup after a tactical swap without retaining card owners from the bench", () => {
   let s = accept(withReserves(), { type: "swap", activeId: "ally-0", reserve: "recruit-silkmoth" });
   s = winBattle(s);
-  if (s.phase === "recruit") s = accept(s, { type: "skipRecruit" });
+  if (s.phase === "recruit") s = accept(s, recruitChoice(s));
   if (s.phase === "boon") s = accept(s, { type: "skipBoon" });
   expect(s.team.map((c) => c.species)).toEqual(["mossback", "emberfox", "stormfin"]);
   expect(
