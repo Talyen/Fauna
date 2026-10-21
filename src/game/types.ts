@@ -56,6 +56,7 @@ interface Battle {
   earnedGold: number;
   freeBurnUsed: boolean;
   meteoriteUsed: boolean;
+  cardsPlayedThisTurn: number;
   turn: number;
   mana: number;
   maxMana: number;
@@ -81,7 +82,7 @@ interface JourneySummary {
   lastBattle: { xp: KeywordXP; currency: number } | null;
 }
 export interface GameState {
-  version: 19;
+  version: 20;
   discovery: { encountered: SpeciesId[]; recruited: SpeciesId[] };
   revision: number;
   rng: number;
