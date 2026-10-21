@@ -178,7 +178,7 @@ export function grantBlock(
         (sum, effect) => sum + (effect.kind === "blockConversion" ? effect.amount : 0),
         0,
       );
-      const recipient = percent > 0 ? mostInjured(pool) : undefined;
+      const recipient = percent > 0 ? mostInjured<Combatant>(pool) : undefined;
       if (recipient) {
         const converted = Math.min(
           Math.round((gained * percent) / 100),
@@ -732,7 +732,7 @@ export function hit(
   type: DamageType,
   events: GameEvent[],
   options: Parameters<typeof resolveHit>[6] = {},
-) {
+): number | undefined {
   const lost = resolveHit(state, source, target, value, type, events, options);
   if (
     lost !== undefined &&
@@ -766,7 +766,7 @@ function resolveHit(
     cardLeech?: boolean;
     proc?: boolean;
   } = {},
-) {
+): number | undefined {
   if ((source.health <= 0 && !options.periodic && !options.derived) || target.health <= 0 || value <= 0)
     return;
   const attack = !options.periodic && !options.retaliation && !options.derived;

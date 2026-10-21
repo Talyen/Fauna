@@ -55,8 +55,20 @@ export function activeAssetsPlugin(repository = ROOT) {
   return {
     name: "fauna-active-assets",
     apply: "build",
+    enforce: "post",
     async buildStart() {
       receipt = await assets({ repository });
+    },
+    transform(_code, id) {
+      if (
+        id.replaceAll("\\", "/") !== path.join(repository, "src/assets/prepared.json").replaceAll("\\", "/")
+      )
+        return;
+      // The renderer needs URLs; source hashes and encoder receipts remain in the media manifest.
+      const records = Object.fromEntries(
+        Object.entries(receipt.records).map(([key, record]) => [key, { url: record.url }]),
+      );
+      return { code: `export default ${JSON.stringify({ records })};`, map: null };
     },
     async generateBundle() {
       const current = JSON.parse(await readFile(path.join(repository, "src/assets/prepared.json"), "utf8"));

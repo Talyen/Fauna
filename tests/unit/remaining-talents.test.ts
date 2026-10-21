@@ -441,6 +441,7 @@ it.each([
           ? {
               ...card,
               effect: "attack",
+              target: undefined,
               damageType: keyword,
               effects: [{ kind: "damage", damageType: keyword, amount: 2 }],
             }

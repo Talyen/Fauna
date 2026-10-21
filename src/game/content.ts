@@ -71,7 +71,7 @@ export type CardDefinition = CardBase &
       }
     | { effect: "guard"; target?: "self" }
     | { effect: "heal"; target?: "allAllies" | "mostInjured" | "self" }
-    | { effect: Exclude<Effect, "attack" | "guard" | "heal"> }
+    | { effect: Exclude<Effect, "attack" | "guard" | "heal">; target?: never }
   );
 export const SPECIES: readonly Species[] = [
   {

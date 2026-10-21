@@ -33,6 +33,14 @@ it("emits exactly the active inventory without originals, old generations, recei
     await mkdir(dist);
     const plugin = activeAssetsPlugin(repository);
     await plugin.buildStart();
+    const runtime = plugin.transform("", path.join(repository, "src/assets/prepared.json"));
+    expect(runtime.code).toBe(
+      `export default ${JSON.stringify({ records: { [entry.id]: { url: receipt.records[entry.id].url } } })};`,
+    );
+    expect(
+      plugin.transform("", path.join(repository, "src/assets/prepared.json").replaceAll("\\", "/")),
+    ).toEqual(runtime);
+    expect(plugin.transform("unrelated", path.join(repository, "src/game/content.ts"))).toBeUndefined();
     const emitted = [];
     await plugin.generateBundle.call({ emitFile: (file) => emitted.push(file) });
     expect(emitted.map((file) => file.fileName).sort()).toEqual(
