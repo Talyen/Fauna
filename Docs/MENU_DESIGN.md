@@ -26,6 +26,6 @@ Main and pause menu buttons are 150px wide, with labels wrapping when needed at 
 
 ## Battle assistance and reveals
 
-The battle action group includes the labeled Auto-play Switch, initially off for each battle. Manual card selection stops it; ordinary menus and inspection pause it. Development battle pause menus include Skip combat below the normal menu actions. Production menus contain no developer action.
+The battle action group includes the labeled Auto-play Switch, initially off for each battle. Manual card selection stops it; ordinary menus and inspection pause it. Development battles include Skip combat beside Auto-play. Production contains no developer action.
 
 A live creature unlock opens an artwork-centered Creature unlocked screen when leaving results, with ordinary kit inspection and Continue. Continue advances through pending reveals and then Main menu. It does not add inspection to Journey results.

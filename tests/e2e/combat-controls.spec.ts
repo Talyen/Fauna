@@ -133,8 +133,13 @@ test("development skip wins once through normal rewards", async ({ page }) => {
   test.skip(process.env.FAUNA_DEV_REVIEW !== "1", "Requires an explicitly owned development preview.");
   const initial = run();
   await seed(page, encodeSave(initial), "1");
-  await page.getByRole("button", { name: "Open menu" }).click();
-  await page.getByRole("button", { name: "Skip combat", exact: true }).click();
+  const skip = page.getByRole("button", { name: "Skip combat", exact: true });
+  await expect(skip).toBeVisible();
+  const skipBounds = await skip.boundingBox();
+  const autoBounds = await page.getByRole("button", { name: "Auto-play", exact: true }).boundingBox();
+  expect(skipBounds!.y).toBe(autoBounds!.y);
+  expect(skipBounds!.x + skipBounds!.width).toBeLessThan(autoBounds!.x);
+  await skip.click();
   await expect(page.getByRole("heading", { name: "Choose a Recruit" })).toBeVisible();
   await expect
     .poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).currency))

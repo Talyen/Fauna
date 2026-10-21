@@ -924,10 +924,7 @@ strong {
       ) *
       3 / 12
   );
-  --talent-overview-column-width: max(
-    var(--talent-overview-art-width),
-    calc(var(--talent-category-label-size) * 7)
-  );
+  --talent-overview-column-width: max(var(--talent-overview-art-width), var(--talent-category-caption-width));
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -936,7 +933,7 @@ strong {
   row-gap: var(--screen-section-gap);
 }
 .talent-overview:not(:has(.talent-category-points:not(:empty))) {
-  --talent-overview-caption-height: calc(var(--talent-category-label-size) * 1.3);
+  --talent-overview-caption-height: var(--talent-category-label-line-height);
 }
 .talent-category {
   flex: 0 0 calc((100% - var(--screen-item-gap) * 4) / 5);
@@ -952,13 +949,14 @@ strong {
 }
 .talent-category h2 {
   font-size: var(--talent-category-label-size);
+  line-height: var(--talent-category-label-line-height);
 }
 .talent-category-points {
   width: 100%;
-  min-height: calc(var(--talent-category-points-size) * 1.5);
+  min-height: var(--talent-category-points-line-height);
   font-size: var(--talent-category-points-size);
   white-space: nowrap;
-  line-height: 1.5;
+  line-height: var(--talent-category-points-line-height);
   font-variant-numeric: tabular-nums;
 }
 .talent-category-points:empty {
@@ -1784,11 +1782,17 @@ strong {
   text-align: center;
 }
 
+.skip-combat-control {
+  right: calc(var(--space-6) + 2 * (var(--control-height) + var(--screen-item-gap)));
+}
+.skip-combat-control,
 .autoplay-control {
   position: absolute;
-  right: calc(var(--space-6) + var(--control-height) + var(--screen-item-gap));
   top: var(--space-4);
   z-index: 10;
+}
+.autoplay-control {
+  right: calc(var(--space-6) + var(--control-height) + var(--screen-item-gap));
 }
 .battle-dock,
 .battle-pile {
