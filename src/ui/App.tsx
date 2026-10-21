@@ -657,6 +657,17 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
               >
                 <Menu aria-hidden="true" />
               </Button>
+              {import.meta.env.DEV && game.phase === "battle" ? (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="skip-combat-control"
+                  aria-label="Skip combat"
+                  onClick={() => send({ type: "devWinBattle" })}
+                >
+                  <FastForward aria-hidden="true" className="menu-icon-skip" />
+                </Button>
+              ) : null}
               {game.phase === "battle" ? (
                 <Button
                   variant="ghost"
@@ -764,17 +775,6 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
               <DialogTitle className="sr-only">Pause menu</DialogTitle>
               <DialogDescription className="sr-only">Game menu</DialogDescription>
               {menuItems(false)}
-              {import.meta.env.DEV && game.phase === "battle" ? (
-                <Button
-                  variant="outline"
-                  onClick={() => {
-                    if (send({ type: "devWinBattle" })) setMenu(false);
-                  }}
-                >
-                  <FastForward aria-hidden="true" className="menu-icon-skip" />
-                  Skip combat
-                </Button>
-              ) : null}
             </DialogContent>
           </Dialog>
         ) : null}
