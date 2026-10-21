@@ -1,4 +1,4 @@
-import { Screen } from "./screen";
+import { Screen, ScreenHeading, HeaderNavigation } from "./screen";
 import { PagedItems } from "./pagination";
 import { captureSwapMotion } from "./swap-motion";
 import { SurfaceTransition } from "./surface-transition";
@@ -74,6 +74,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     gameControls: Controls = useRef(null),
     inspectionControls: Controls = useRef(null),
     talentControls: Controls = useRef(null);
+  const [draftStarted, setDraftStarted] = useState(false);
   const [route, setRoute] = useState<Route>("home"),
     [menu, setMenu] = useState(false),
     [modal, setModal] = useState<Modal>(null),
@@ -113,7 +114,8 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     pauseOpener = useRef<HTMLElement | null>(null),
     modalOpener = useRef<HTMLElement | null>(null);
   const active =
-    !["victory", "defeat"].includes(game.phase) && (game.team.length > 0 || game.selected.length > 0);
+    !["victory", "defeat"].includes(game.phase) &&
+    (game.team.length > 0 || game.selected.length > 0 || (game.phase === "draft" && draftStarted));
   const canManageLineup =
     game.phase === "teamSelection" ||
     game.phase === "campfire" ||
@@ -162,9 +164,10 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     [session, autoEndTurn, setAutoplay],
   );
   const leaveResults = () => {
-    setReveals(pendingUnlocks);
+    const remaining = [...new Set([...reveals, ...pendingUnlocks])];
+    setReveals(remaining);
     setPendingUnlocks([]);
-    setRoute(pendingUnlocks.length ? "unlocks" : "home");
+    setRoute(remaining.length ? "unlocks" : "home");
   };
   const menuReturnLabel = useRef<string | null>(null);
   const openMenu = () => {
@@ -346,6 +349,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
             setRoute("play");
             setMenu(false);
           } else if (send({ type: "newRun", seed: Date.now() >>> 0 })) {
+            setDraftStarted(true);
             setRoute("play");
             setMenu(false);
           }
@@ -399,6 +403,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           onClick={() => {
             if (send({ type: "abandon" })) {
               menuReturnLabel.current = null;
+              setDraftStarted(false);
               setMenu(false);
               setRoute(game.phase === "draft" ? "home" : "play");
             }
@@ -569,7 +574,9 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
             ) : null}
             {route === "unlocks" && reveals[0] ? (
               <Screen className="unlock-screen">
-                <h1>Creature unlocked</h1>
+                <ScreenHeading back={() => setRoute("play")} openMenu={() => setRoute("home")}>
+                  Creature unlocked
+                </ScreenHeading>
                 <div className="unlock-creature">
                   <CreatureCard
                     progression={game}
@@ -599,10 +606,9 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
             {route === "settings" || route === "glossary" ? (
               <Screen className={`menu-screen ${route}-screen`} aria-labelledby="menu-screen-title">
                 <header className="collection-heading">
-                  <h1 id="menu-screen-title">{route === "settings" ? "Settings" : "Glossary & controls"}</h1>
-                  <Button variant="ghost" size="icon" aria-label="Open menu" onClick={backFromPage}>
-                    <Menu aria-hidden="true" />
-                  </Button>
+                  <ScreenHeading id="menu-screen-title" back={backFromPage} openMenu={backFromPage}>
+                    {route === "settings" ? "Settings" : "Glossary & controls"}
+                  </ScreenHeading>
                 </header>
                 {route === "settings" ? (
                   <Settings
@@ -648,80 +654,84 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
               </Screen>
             ) : null}
             <div className="play-surface" hidden={route !== "play"} inert={route !== "play"}>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="menu-button"
-                aria-label="Open menu"
-                onClick={openMenu}
-              >
-                <Menu aria-hidden="true" />
-              </Button>
-              {game.phase === "battle" ? (
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="autoplay-control"
-                  aria-label="Auto-play"
-                  aria-pressed={autoplay}
-                  onClick={() => setAutoplay(!autoplay)}
-                >
-                  {autoplay ? <Pause aria-hidden="true" /> : <Repeat aria-hidden="true" />}
-                </Button>
-              ) : null}
-              {game.phase === "draft" ? (
-                <Draft game={game} send={send} inspect={setInspection} />
-              ) : game.phase === "teamSelection" ? (
-                <TeamSelection
-                  game={game}
-                  send={send}
-                  inspect={setInspection}
-                  deck={() => openModal("deck")}
-                />
-              ) : game.phase === "support" ? (
-                <SupportScreen game={game} send={send} />
-              ) : game.phase === "campfire" ? (
-                <Campfire game={game} send={send} />
-              ) : game.phase === "battle" ? (
-                <BattleScreen
-                  key={game.encounter}
-                  clearSelection={
-                    view.overlayActive || menu || modal !== null || inspection !== null || autoplay
-                  }
-                  onManualStart={() => setAutoplay(false)}
-                  openPile={(pile) => openModal(pile)}
-                  actions={
-                    <>
-                      <Button
-                        variant="outline"
-                        className="swap-trigger"
-                        disabled={!game.reserves.some((c) => c.health > 0)}
-                        onClick={() => openModal("swap")}
-                      >
-                        <ArrowLeftRight aria-hidden="true" />
-                        Swap
-                      </Button>
-                    </>
-                  }
-                  game={game}
-                  send={send}
-                  inspect={setInspection}
-                  controls={gameControls}
-                  bursts={bursts}
-                  onDenied={deny}
-                  controller={mode === "controller"}
-                  navigateFocus={navigation}
-                />
-              ) : game.phase === "recruit" || game.phase === "boon" ? (
-                <Rewards
-                  key={`${game.encounter}-${game.phase}`}
-                  game={game}
-                  send={send}
-                  inspect={setInspection}
-                />
-              ) : (
-                <JourneyResults game={game} home={leaveResults} />
-              )}
+              <HeaderNavigation.Provider value={{ back: () => setRoute("home"), openMenu }}>
+                {game.phase === "battle" ? (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="menu-button"
+                    aria-label="Open menu"
+                    onClick={openMenu}
+                  >
+                    <Menu aria-hidden="true" />
+                  </Button>
+                ) : null}
+                {game.phase === "battle" ? (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="autoplay-control"
+                    aria-label="Auto-play"
+                    aria-pressed={autoplay}
+                    onClick={() => setAutoplay(!autoplay)}
+                  >
+                    {autoplay ? <Pause aria-hidden="true" /> : <Repeat aria-hidden="true" />}
+                  </Button>
+                ) : null}
+                {game.phase === "draft" ? (
+                  <Draft game={game} send={send} inspect={setInspection} />
+                ) : game.phase === "teamSelection" ? (
+                  <TeamSelection
+                    game={game}
+                    send={send}
+                    inspect={setInspection}
+                    deck={() => openModal("deck")}
+                  />
+                ) : game.phase === "support" ? (
+                  <SupportScreen game={game} send={send} />
+                ) : game.phase === "campfire" ? (
+                  <Campfire game={game} send={send} />
+                ) : game.phase === "battle" ? (
+                  <BattleScreen
+                    key={game.encounter}
+                    clearSelection={
+                      view.overlayActive || menu || modal !== null || inspection !== null || autoplay
+                    }
+                    onManualStart={() => setAutoplay(false)}
+                    openPile={(pile) => openModal(pile)}
+                    actions={
+                      <>
+                        <Button
+                          variant="outline"
+                          className="swap-trigger"
+                          disabled={!game.reserves.some((c) => c.health > 0)}
+                          onClick={() => openModal("swap")}
+                        >
+                          <ArrowLeftRight aria-hidden="true" />
+                          Swap
+                        </Button>
+                      </>
+                    }
+                    game={game}
+                    send={send}
+                    inspect={setInspection}
+                    controls={gameControls}
+                    bursts={bursts}
+                    onDenied={deny}
+                    controller={mode === "controller"}
+                    navigateFocus={navigation}
+                  />
+                ) : game.phase === "recruit" || game.phase === "boon" ? (
+                  <Rewards
+                    key={`${game.encounter}-${game.phase}`}
+                    game={game}
+                    send={send}
+                    inspect={setInspection}
+                  />
+                ) : (
+                  <JourneyResults game={game} home={leaveResults} />
+                )}
+              </HeaderNavigation.Provider>
               <div className="sr-only" role="log" aria-live="polite">
                 {view.events.map((event) => event.text).join(" ")}
               </div>

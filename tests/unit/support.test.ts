@@ -134,3 +134,19 @@ it("adds Smuggler's Map to the settled reward once without duplicating combat ea
   state = accept(decodeSave(encodeSave(state)), recruitChoice(state));
   expect(state.currency).toBe(22);
 });
+
+it("leaves Campfire without healing or changing the encounter and rejects leaving elsewhere", () => {
+  const before = produce(merchant(), (draft) => {
+    draft.team[0]!.health = 0;
+  });
+  expect(dispatch(before, { type: "leaveCampfire" }).state).toBe(before);
+  const visiting = accept(before, { type: "visitCampfire" });
+  const left = accept(decodeSave(encodeSave(visiting)), { type: "leaveCampfire" });
+  expect(left.phase).toBe("teamSelection");
+  expect(left.team).toEqual(before.team);
+  expect(left.reserves).toEqual(before.reserves);
+  expect(left.expedition).toEqual(before.expedition);
+  expect(left.support).toEqual(before.support);
+  expect(left.rng).toBe(before.rng);
+  expect(decodeSave(encodeSave(left))).toEqual(left);
+});

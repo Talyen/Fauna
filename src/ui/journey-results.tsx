@@ -1,4 +1,4 @@
-import { Screen } from "./screen";
+import { Screen, ScreenHeading } from "./screen";
 import { ResultPresentation, AnimatedNumber } from "./result-presentation";
 import { EmptyState } from "./empty-state";
 import { Coins } from "lucide-react";
@@ -20,7 +20,7 @@ export function JourneyResults({ game, home }: { game: GameState; home: () => vo
     <ResultPresentation>
       <Screen className="journey-results">
         <header className="journey-results-heading">
-          <h1>{title}</h1>
+          <ScreenHeading>{title}</ScreenHeading>
         </header>
         {summary ? (
           <section className="journey-gains" aria-label="Journey gains">

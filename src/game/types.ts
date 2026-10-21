@@ -132,6 +132,7 @@ export type Command =
   | { type: "devWinBattle" }
   | { type: "visitCampfire" }
   | { type: "rest" }
+  | { type: "leaveCampfire" }
   | { type: "enterSupport"; visit: string }
   | { type: "buyBoon"; visit: string; slot: string }
   | { type: "leaveSupport"; visit: string }

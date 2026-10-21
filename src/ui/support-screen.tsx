@@ -1,4 +1,4 @@
-import { Screen } from "./screen";
+import { Screen, ScreenHeading } from "./screen";
 import { useLayoutEffect, useRef } from "react";
 import type { Command, GameState } from "../game/types";
 import { canVisitMerchant } from "../game/support";
@@ -76,7 +76,7 @@ export function SupportScreen({ game, send }: { game: GameState; send: (c: Comma
   }, [v.resolved]);
   return (
     <Screen className="campfire-screen">
-      <h1>Merchant</h1>
+      <ScreenHeading back={() => send({ type: "leaveSupport", visit: v.id })}>Merchant</ScreenHeading>
       <p>Gold: {game.currency} · One purchase per visit · Boons last for this journey</p>
       <section className="boon-options" aria-label="Merchant stock" data-nav-row>
         {v.stock.map((slot) => {

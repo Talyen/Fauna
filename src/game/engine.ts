@@ -487,7 +487,8 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
   }
   if (command.type === "visitCampfire" && !canVisitCampfire(state))
     return reject(state, "There is no available Campfire.");
-  if (command.type === "rest" && state.phase !== "campfire") return reject(state, "Rest at a Campfire.");
+  if ((command.type === "rest" || command.type === "leaveCampfire") && state.phase !== "campfire")
+    return reject(state, "Visit a Campfire first.");
   if (command.type === "newRun" && !["draft", "victory", "defeat"].includes(state.phase))
     return reject(state, "End the current journey first.");
   if (command.type === "beginBattle" && state.phase !== "teamSelection") {
@@ -618,6 +619,9 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         break;
       case "visitCampfire":
         draft.phase = "campfire";
+        break;
+      case "leaveCampfire":
+        draft.phase = "teamSelection";
         break;
       case "rest":
         for (const creature of [...draft.team, ...draft.reserves])
