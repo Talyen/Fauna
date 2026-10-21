@@ -1,3 +1,4 @@
+import { Screen } from "./screen";
 import { HandMotion } from "./hand-motion";
 import { combatStatuses } from "./combat-status";
 import { motionValue } from "./motion-values";
@@ -237,7 +238,12 @@ export function BattleScreen({
     };
   }, [card?.ownerId, selected, target, allyTarget]);
   return (
-    <main ref={board} className="battle-screen" aria-label="Battlefield" data-selected-card={selected ?? ""}>
+    <Screen
+      ref={board}
+      className="battle-screen"
+      aria-label="Battlefield"
+      data-selected-card={selected ?? ""}
+    >
       <CombatFeedback bursts={bursts} root={board} />
       <section className="enemy-row" aria-label="Enemy row">
         {battle.enemies.map((enemy) => (
@@ -406,7 +412,6 @@ export function BattleScreen({
               aria-label="Inspect Draw Pile"
               onClick={() => openPile?.("draw")}
             />
-            <span>Draw Pile</span>
           </div>
         </div>
         <div className="battle-dock" data-nav-row>
@@ -424,7 +429,6 @@ export function BattleScreen({
               aria-label="Inspect Discard Pile"
               onClick={() => openPile?.("discard")}
             />
-            <span>Discard Pile</span>
           </div>
         </div>
       </div>
@@ -446,6 +450,6 @@ export function BattleScreen({
           <path d={line} markerEnd="url(#target-arrow)" />
         </svg>
       ) : null}
-    </main>
+    </Screen>
   );
 }

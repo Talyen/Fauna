@@ -93,9 +93,9 @@ export function performanceCases(seed = 42) {
         { kind: "click", name: "Collection", checkpoint: initial },
         { kind: "click", name: "Inspect Mossback", checkpoint: initial },
         { kind: "click", name: "Back", checkpoint: initial },
-        { kind: "click", name: "Back", checkpoint: initial },
+        { kind: "click", name: "Open menu", checkpoint: initial },
         { kind: "click", name: "Settings", checkpoint: initial },
-        { kind: "click", name: "Back", checkpoint: initial },
+        { kind: "click", name: "Open menu", checkpoint: initial },
       ],
     },
   ];

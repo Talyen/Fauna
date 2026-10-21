@@ -39,6 +39,35 @@ export function layoutViolations() {
     active,
     ...document.querySelectorAll('.game-tooltip:not([data-state="closed"]), .combat-feedback'),
   ];
+  // Measure the content group, not a full-height wrapper that could hide top alignment.
+  for (const main of active.querySelectorAll(".screen-stage > main")) {
+    if (!(main instanceof HTMLElement) || invisible(main)) continue;
+    const stage = main.parentElement!.getBoundingClientRect();
+    const box = main.getBoundingClientRect();
+    const css = getComputedStyle(main);
+    if (Math.abs(box.left + box.width / 2 - (stage.left + stage.width / 2)) > 1)
+      failures.push(`${describe(main)} is not horizontally centered`);
+    const content = [...main.children].filter((child) => {
+      const position = getComputedStyle(child).position;
+      return !invisible(child) && position !== "absolute" && position !== "fixed";
+    });
+    if (!content.length) continue;
+    const boxes = content.map((child) => child.getBoundingClientRect());
+    const center =
+      (Math.min(...boxes.map((rect) => rect.top)) + Math.max(...boxes.map((rect) => rect.bottom))) / 2;
+    // The fixed hand owns the bottom strip; the battlefield centers above it.
+    const reserved = main.matches(".battle-screen") ? parseFloat(css.paddingBottom) : 0;
+    if (Math.abs(center - (stage.top + (stage.height - reserved) / 2)) > 1)
+      failures.push(`${describe(main)} content is not vertically centered`);
+  }
+  if (dialogs.length) {
+    const box = active.getBoundingClientRect();
+    if (
+      Math.abs(box.left + box.width / 2 - innerWidth / 2) > 1 ||
+      Math.abs(box.top + box.height / 2 - innerHeight / 2) > 1
+    )
+      failures.push("dialog is not centered in the viewport");
+  }
   const elements = new Set(roots.flatMap((root) => [root, ...root.querySelectorAll("*")]));
   for (const el of elements) {
     if (!(el instanceof HTMLElement) || invisible(el)) continue;

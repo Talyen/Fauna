@@ -1,3 +1,4 @@
+import { Screen } from "./screen";
 import { ResultPresentation, AnimatedNumber } from "./result-presentation";
 import { EmptyState } from "./empty-state";
 import { Coins } from "lucide-react";
@@ -17,7 +18,7 @@ export function JourneyResults({ game, home }: { game: GameState; home: () => vo
           : "Journey ended";
   return (
     <ResultPresentation>
-      <main className="journey-results">
+      <Screen className="journey-results">
         <header className="journey-results-heading">
           <h1>{title}</h1>
         </header>
@@ -45,7 +46,7 @@ export function JourneyResults({ game, home }: { game: GameState; home: () => vo
             Main menu
           </Button>
         </footer>
-      </main>
+      </Screen>
     </ResultPresentation>
   );
 }

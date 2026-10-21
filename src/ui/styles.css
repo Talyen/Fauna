@@ -75,10 +75,38 @@ strong {
   background: var(--background);
   position: relative;
 }
-.app > main,
+.app > .screen-stage,
 .play-surface {
   flex: 1;
   min-height: 0;
+}
+.play-surface {
+  display: flex;
+  flex-direction: column;
+}
+.screen-stage {
+  height: 100%;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.screen-stage > main {
+  height: auto;
+  flex: 0 0 auto;
+  min-height: 0;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: center;
+}
+/* Standalone startup and failure surfaces have the same viewport owner. */
+#root > .screen-stage {
+  padding: var(--page-block-gutter) var(--page-inline-gutter);
+}
+.screen-stage > .loading {
+  display: flex;
+  align-items: center;
 }
 .app.in-battle {
   padding-block: var(--screen-item-gap);
@@ -110,7 +138,7 @@ strong {
   width: min(720px, calc(100vw - var(--space-12)));
   max-height: calc(100dvh - var(--space-12));
   overflow: visible;
-  padding: var(--space-12) var(--space-6) var(--space-6);
+  padding: var(--space-12) var(--space-6);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--popover);
@@ -125,8 +153,43 @@ strong {
 .menu-panel > button:not(.dialog-close) {
   width: 100%;
 }
+.menu-icon-journey {
+  color: var(--menu-icon-journey);
+}
+.menu-icon-results {
+  color: var(--menu-icon-results);
+}
+.menu-icon-lineup {
+  color: var(--menu-icon-lineup);
+}
+.menu-icon-talents {
+  color: var(--menu-icon-talents);
+}
+.menu-icon-collection {
+  color: var(--menu-icon-collection);
+}
+.menu-icon-boons {
+  color: var(--menu-icon-boons);
+}
+.menu-icon-glossary {
+  color: var(--menu-icon-glossary);
+}
+.menu-icon-settings {
+  color: var(--menu-icon-settings);
+}
+.menu-icon-end {
+  color: var(--menu-icon-end);
+}
+.menu-icon-home {
+  color: var(--menu-icon-home);
+}
+.menu-icon-quit {
+  color: var(--menu-icon-quit);
+}
+.menu-icon-skip {
+  color: var(--menu-icon-skip);
+}
 .home-screen {
-  height: 100%;
   min-height: 0;
   display: flex;
   flex-direction: column;
@@ -144,7 +207,6 @@ strong {
   gap: var(--space-2);
 }
 .draft-screen {
-  height: 100%;
   min-height: 0;
   display: flex;
   flex-direction: column;
@@ -281,8 +343,11 @@ strong {
   flex-direction: column;
   position: relative;
   isolation: isolate;
-  justify-content: flex-start;
+  justify-content: center;
   gap: var(--screen-item-gap);
+}
+.screen-stage > .battle-screen {
+  height: 100%;
 }
 .enemy-row,
 .player-row {
@@ -683,7 +748,6 @@ strong {
 
 .team-selection {
   --selection-card: var(--art-landscape-width);
-  height: 100%;
   min-height: 0;
   display: flex;
   flex-direction: column;
@@ -728,7 +792,6 @@ strong {
   width: min(calc(var(--art-landscape-width) * 3 + var(--space-6) * 2), 100%);
   container-type: inline-size;
   margin: auto;
-  height: 100%;
   min-height: 0;
   display: flex;
   flex-direction: column;
@@ -805,8 +868,7 @@ strong {
 }
 .talents-screen {
   width: 100%;
-  max-width: calc(var(--talent-overview-art-width) * 5 + var(--screen-item-gap) * 4 + var(--space-4));
-  height: 100%;
+  max-width: var(--talent-tree-screen-width);
   min-height: 0;
   margin: auto;
   padding: var(--space-2);
@@ -815,9 +877,11 @@ strong {
   flex-direction: column;
   gap: var(--screen-section-gap);
 }
+.screen-stage:has(> .talents-screen) {
+  container-type: size;
+}
 .talents-screen[data-view="overview"] {
-  height: 100%;
-  overflow: visible;
+  max-width: none;
 }
 .talents-screen .talents-heading {
   display: grid;
@@ -827,16 +891,22 @@ strong {
   gap: var(--screen-item-gap);
   margin: 0;
 }
-.talents-heading > button:first-child {
-  justify-self: start;
+.talents-heading > h1 {
+  grid-column: 2;
+  grid-row: 1;
 }
-.talents-heading > button:not(:first-child) {
+.talents-heading > button[aria-label="Open menu"] {
+  grid-column: 3;
+  grid-row: 1;
   justify-self: end;
 }
+.talents-heading > button:not([aria-label="Open menu"]) {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: start;
+}
 .talent-overview-viewport {
-  flex: 1;
   min-height: 0;
-  container-type: size;
   display: grid;
   place-items: center;
 }
@@ -849,7 +919,7 @@ strong {
   row-gap: var(--screen-section-gap);
 }
 .talent-category {
-  flex: 0 0 calc((100% - var(--screen-item-gap) * 4) / 5);
+  flex: 0 0 calc((100% - var(--screen-item-gap) * 6) / 7);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -858,16 +928,15 @@ strong {
   text-align: center;
 }
 .talent-category .action-card {
-  /* Three rows reserve captions, point labels and gaps before sizing only the art. */
+  /* Fill two rows while reserving full-size captions, point labels and gaps. */
   width: min(
     100%,
-    var(--talent-overview-art-width),
     calc(
       (
-          100cqh - var(--screen-section-gap) * 2 - var(--screen-item-gap) * 6 - var(--text-name) * 4.2 -
-            var(--text-secondary) * 9
+          100cqh - var(--space-4) - var(--control-height) - var(--screen-section-gap) * 2 -
+            (var(--talent-overview-caption-height) + var(--screen-item-gap) * 2) * 2
         ) *
-        1 / 4
+        3 / 8
     )
   );
 }
@@ -890,7 +959,6 @@ strong {
 .collection-screen {
   width: 100%;
   max-width: calc(var(--art-landscape-width) * 4 + var(--screen-item-gap) * 3);
-  height: 100%;
   min-height: 0;
   margin: auto;
   display: flex;
@@ -904,9 +972,11 @@ strong {
   align-items: center;
 }
 .collection-heading > button {
-  justify-self: start;
+  grid-column: 3;
+  justify-self: end;
 }
 .collection-heading h1 {
+  grid-column: 2;
   text-align: center;
 }
 .collection-tabs {
@@ -999,6 +1069,11 @@ strong {
   font-variant-numeric: tabular-nums;
 }
 .talent-tree {
+  min-height: calc(
+    var(--talent-page-rows) * var(--talent-page-row-height) + (var(--talent-page-rows) - 1) *
+      var(--screen-item-gap)
+  );
+  justify-content: center;
   display: flex;
   flex-direction: column;
   gap: var(--screen-item-gap);
@@ -1051,7 +1126,6 @@ strong {
   height: 28px;
 }
 .end-screen {
-  height: 100%;
   min-height: 0;
   display: flex;
   flex-direction: column;
@@ -1421,7 +1495,6 @@ strong {
 .menu-screen {
   width: 100%;
   max-width: var(--settings-screen-width);
-  height: 100%;
   min-height: 0;
   margin: auto;
   gap: var(--screen-section-gap);
@@ -1433,10 +1506,9 @@ strong {
 }
 .settings-screen .settings-controls,
 .settings-combined .settings-controls {
-  flex: 1 1 auto;
-  min-height: 0;
-  grid-template-rows: auto minmax(0, 1fr);
-  grid-auto-rows: auto;
+  flex: 0 0 auto;
+  margin-top: 0;
+  grid-template-rows: auto minmax(var(--settings-panel-min-height), auto);
 }
 .settings-screen .settings-panel,
 .settings-combined .settings-panel {
@@ -1509,7 +1581,6 @@ strong {
 
 .destinations-screen {
   width: min(1120px, 100%);
-  height: 100%;
   min-height: 0;
   margin: auto;
   display: flex;
@@ -1543,7 +1614,6 @@ strong {
 }
 .journey-results {
   width: min(640px, 100%);
-  height: 100%;
   min-height: 0;
   margin: auto;
   padding: var(--space-8) 0;
@@ -1697,12 +1767,6 @@ strong {
   text-align: center;
 }
 
-@media (min-width: 1500px) {
-  .battle-screen {
-    justify-content: center;
-  }
-}
-
 .autoplay-control {
   position: absolute;
   right: calc(var(--space-6) + var(--control-height) + var(--screen-item-gap));
@@ -1719,9 +1783,10 @@ strong {
 .battle-pile > .action-card {
   width: var(--battle-pile-width);
 }
-.battle-pile > span {
-  font-size: var(--text-secondary);
-  color: var(--muted-foreground);
+.battle-dock > .mana {
+  align-items: flex-end;
+  /* Include the socket's 7% overhang in the shared gap above each pile. */
+  padding-bottom: calc(var(--mana-crystal-size) * 0.07);
 }
 .unlock-screen {
   display: flex;
@@ -1782,6 +1847,8 @@ body,
 }
 .glossary-entries {
   display: grid;
+  align-content: center;
+  min-height: var(--glossary-page-min-height);
   gap: var(--screen-item-gap);
 }
 .glossary-entries dl {
@@ -1821,7 +1888,6 @@ body,
   gap: var(--screen-section-gap);
 }
 .campfire-screen {
-  height: 100%;
   justify-content: center;
 }
 .campfire-roster {
@@ -1834,10 +1900,9 @@ body,
   .battle-screen {
     display: grid;
     grid-template-columns: minmax(0, 1fr) max-content minmax(0, 1fr);
-    grid-template-rows: max-content max-content 1fr;
-    align-content: start;
+    grid-template-rows: max-content max-content;
+    align-content: center;
     align-items: start;
-    padding-bottom: 0;
   }
   .battle-screen .enemy-row {
     grid-area: 1 / 2;

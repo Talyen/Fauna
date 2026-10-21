@@ -49,7 +49,8 @@
   --boon-dialog-width: 720px;
   --settings-label-basis: 200px;
   --settings-control-basis: 300px;
-  --settings-panel-min-height: 360px;
+  --settings-panel-min-height: 384px;
+  --glossary-page-min-height: 320px;
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -82,6 +83,18 @@
   --motion-mana-glint: 650ms;
   --reward-stagger: 75ms;
   --swap-arc-height: 32px;
+  --menu-icon-journey: #14532d;
+  --menu-icon-results: #facc15;
+  --menu-icon-lineup: #38bdf8;
+  --menu-icon-talents: #c084fc;
+  --menu-icon-collection: #4ade80;
+  --menu-icon-boons: #f472b6;
+  --menu-icon-glossary: #2dd4bf;
+  --menu-icon-settings: #94a3b8;
+  --menu-icon-end: var(--destructive);
+  --menu-icon-home: #d9b56f;
+  --menu-icon-quit: #fb923c;
+  --menu-icon-skip: #a3e635;
   --icon-size: 20px;
   --collection-rank-height: max(var(--icon-size), calc(var(--text-secondary) * 1.5));
   --empty-icon-size: 24px;
@@ -125,10 +138,12 @@
   --feedback-critical: #fcd34d;
   --feedback-critical-clear: #fcd34d00;
   --feedback-critical-flash: #fff7ed;
-  /* Talents overview uses its own cap within the bounded artwork profiles. */
-  --talent-overview-art-width: 160px;
+  --talent-tree-screen-width: 864px;
+  --talent-overview-caption-height: calc(var(--text-name) * 1.3 + var(--text-secondary) * 3);
   --talent-card-width: 328px;
   --talent-card-min-height: 168px;
+  --talent-page-rows: 2;
+  --talent-page-row-height: calc(var(--text-body) * 10 + var(--space-8));
   --art-standard-short-side: 200px;
   --art-compact-short-side: 180px;
   --art-minimum-short-side: 160px;
@@ -185,6 +200,7 @@
 @media (max-height: 900px) {
   :root {
     --art-short-side: var(--art-compact-short-side);
+    --talent-page-rows: 1;
   }
 }
 @media (max-height: 760px) {

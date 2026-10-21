@@ -1,3 +1,4 @@
+import { Screen } from "./screen";
 import { useLayoutEffect, useRef } from "react";
 import type { Command, GameState } from "../game/types";
 import { canVisitMerchant } from "../game/support";
@@ -74,7 +75,7 @@ export function SupportScreen({ game, send }: { game: GameState; send: (c: Comma
     if (v.resolved && document.documentElement.dataset.input !== "pointer") leave.current?.focus();
   }, [v.resolved]);
   return (
-    <main className="campfire-screen">
+    <Screen className="campfire-screen">
       <h1>Merchant</h1>
       <p>Gold: {game.currency} · One purchase per visit · Boons last for this journey</p>
       <section className="boon-options" aria-label="Merchant stock" data-nav-row>
@@ -105,6 +106,6 @@ export function SupportScreen({ game, send }: { game: GameState; send: (c: Comma
       <Button ref={leave} variant="outline" onClick={() => send({ type: "leaveSupport", visit: v.id })}>
         Leave
       </Button>
-    </main>
+    </Screen>
   );
 }

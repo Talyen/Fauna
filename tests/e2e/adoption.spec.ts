@@ -28,7 +28,7 @@ test("Collection filtering, audio preferences, and settings remain menu-driven",
   await page.getByRole("button", { name: "Collection", exact: true }).click();
   await page.getByRole("tab", { name: "Uncollected", exact: true }).click();
   await expect(page.getByRole("img", { name: "Locked species" })).toHaveCount(6);
-  await page.getByRole("button", { name: "Back", exact: true }).click();
+  await page.getByRole("button", { name: "Open menu", exact: true }).click();
   await expect(page.getByRole("button", { name: "Collection", exact: true })).toBeFocused();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
   await page.getByRole("tab", { name: "Sound", exact: true }).click();
@@ -102,7 +102,7 @@ for (const [width, height] of REVIEW_VIEWPORTS)
       0,
     );
     await captureScreen(page, { path: `reports/tooltip-independent-${width}-${height}.png` });
-    await page.getByRole("button", { name: "Back", exact: true }).click();
+    await page.getByRole("button", { name: "Open menu", exact: true }).click();
     const opener = page.getByRole("button", { name: "Boons", exact: true });
     await opener.focus();
     await page.keyboard.press("Enter");

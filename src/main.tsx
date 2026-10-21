@@ -1,3 +1,4 @@
+import { Screen } from "./ui/screen";
 import { useEffect, useState } from "react";
 import { Loading } from "./ui/loading";
 import { assetUrl } from "./ui/assets";
@@ -37,9 +38,9 @@ function Game() {
   return ready ? (
     <App session={session} desktop={platform.desktop} />
   ) : (
-    <main className="loading">
+    <Screen className="loading">
       <Loading />
-    </main>
+    </Screen>
   );
 }
 const onError = (event: ErrorEvent) => session.diagnostics.record("global", event.error ?? event.message);

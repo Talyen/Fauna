@@ -8,6 +8,9 @@
   background: var(--control-hover);
   border-color: var(--primary);
 }
+.game-button.control-outline.end-journey {
+  color: var(--destructive);
+}
 :root .game-button:not(:disabled):not([aria-disabled="true"]):active {
   scale: var(--pressed-scale);
   border-color: var(--primary);

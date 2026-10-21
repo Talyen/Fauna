@@ -1,3 +1,4 @@
+import { Screen } from "./screen";
 import { Component, type ReactNode } from "react";
 import type { Diagnostics } from "../application/diagnostics";
 import { Loading } from "./loading";
@@ -24,9 +25,9 @@ export class GameErrorBoundary extends Component<
   }
   render() {
     return this.state.failed ? (
-      <main className="loading">
+      <Screen className="loading">
         <Loading />
-      </main>
+      </Screen>
     ) : (
       this.props.children
     );
