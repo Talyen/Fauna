@@ -31,14 +31,7 @@ export interface Species {
   health: number;
   color: string;
   trait: string;
-  passiveTiers: readonly [
-    PassiveTier,
-    PassiveTier | null,
-    PassiveTier | null,
-    PassiveTier | null,
-    PassiveTier | null,
-    PassiveTier | null,
-  ];
+  passiveTiers: readonly [PassiveTier, PassiveTier, PassiveTier, PassiveTier, PassiveTier, PassiveTier];
 }
 export const DAMAGE_LABELS = Object.fromEntries(DAMAGE_TYPES.map((id) => [id, keywordLabel(id)])) as Record<
   DamageType,
@@ -112,11 +105,26 @@ export const SPECIES: readonly Species[] = [
         description: "First attack each turn deals 2 extra damage",
         effects: [{ kind: "cardBonus", trigger: "firstAttack", amount: 2 }],
       },
-      null,
-      null,
-      null,
-      null,
-      null,
+      {
+        description: "First attack each turn deals 3 extra damage",
+        effects: [{ kind: "cardBonus", trigger: "firstAttack", amount: 3 }],
+      },
+      {
+        description: "First attack each turn deals 4 extra damage",
+        effects: [{ kind: "cardBonus", trigger: "firstAttack", amount: 4 }],
+      },
+      {
+        description: "First attack each turn deals 5 extra damage",
+        effects: [{ kind: "cardBonus", trigger: "firstAttack", amount: 5 }],
+      },
+      {
+        description: "First attack each turn deals 6 extra damage",
+        effects: [{ kind: "cardBonus", trigger: "firstAttack", amount: 6 }],
+      },
+      {
+        description: "First attack each turn deals 7 extra damage",
+        effects: [{ kind: "cardBonus", trigger: "firstAttack", amount: 7 }],
+      },
     ],
   },
   {
@@ -131,11 +139,26 @@ export const SPECIES: readonly Species[] = [
         description: "Stun attacks deal 1 extra damage",
         effects: [{ kind: "cardBonus", trigger: "stunAttack", amount: 1 }],
       },
-      null,
-      null,
-      null,
-      null,
-      null,
+      {
+        description: "Stun attacks deal 2 extra damage",
+        effects: [{ kind: "cardBonus", trigger: "stunAttack", amount: 2 }],
+      },
+      {
+        description: "Stun attacks deal 3 extra damage",
+        effects: [{ kind: "cardBonus", trigger: "stunAttack", amount: 3 }],
+      },
+      {
+        description: "Stun attacks deal 4 extra damage",
+        effects: [{ kind: "cardBonus", trigger: "stunAttack", amount: 4 }],
+      },
+      {
+        description: "Stun attacks deal 5 extra damage",
+        effects: [{ kind: "cardBonus", trigger: "stunAttack", amount: 5 }],
+      },
+      {
+        description: "Stun attacks deal 6 extra damage",
+        effects: [{ kind: "cardBonus", trigger: "stunAttack", amount: 6 }],
+      },
     ],
   },
   {
@@ -150,11 +173,26 @@ export const SPECIES: readonly Species[] = [
         description: "Health cards restore 2 extra Health",
         effects: [{ kind: "cardBonus", trigger: "heal", amount: 2 }],
       },
-      null,
-      null,
-      null,
-      null,
-      null,
+      {
+        description: "Health cards restore 3 extra Health",
+        effects: [{ kind: "cardBonus", trigger: "heal", amount: 3 }],
+      },
+      {
+        description: "Health cards restore 4 extra Health",
+        effects: [{ kind: "cardBonus", trigger: "heal", amount: 4 }],
+      },
+      {
+        description: "Health cards restore 5 extra Health",
+        effects: [{ kind: "cardBonus", trigger: "heal", amount: 5 }],
+      },
+      {
+        description: "Health cards restore 6 extra Health",
+        effects: [{ kind: "cardBonus", trigger: "heal", amount: 6 }],
+      },
+      {
+        description: "Health cards restore 7 extra Health",
+        effects: [{ kind: "cardBonus", trigger: "heal", amount: 7 }],
+      },
     ],
   },
   {
@@ -170,11 +208,31 @@ export const SPECIES: readonly Species[] = [
           "Start each battle with 2 Thorns; When an attack removes Health, retaliate with current Thorns, then lose 1 stack",
         effects: [{ kind: "battleStart", effect: "thorns", amount: 2 }],
       },
-      null,
-      null,
-      null,
-      null,
-      null,
+      {
+        description:
+          "Start each battle with 3 Thorns; When an attack removes Health, retaliate with current Thorns, then lose 1 stack",
+        effects: [{ kind: "battleStart", effect: "thorns", amount: 3 }],
+      },
+      {
+        description:
+          "Start each battle with 4 Thorns; When an attack removes Health, retaliate with current Thorns, then lose 1 stack",
+        effects: [{ kind: "battleStart", effect: "thorns", amount: 4 }],
+      },
+      {
+        description:
+          "Start each battle with 5 Thorns; When an attack removes Health, retaliate with current Thorns, then lose 1 stack",
+        effects: [{ kind: "battleStart", effect: "thorns", amount: 5 }],
+      },
+      {
+        description:
+          "Start each battle with 6 Thorns; When an attack removes Health, retaliate with current Thorns, then lose 1 stack",
+        effects: [{ kind: "battleStart", effect: "thorns", amount: 6 }],
+      },
+      {
+        description:
+          "Start each battle with 7 Thorns; When an attack removes Health, retaliate with current Thorns, then lose 1 stack",
+        effects: [{ kind: "battleStart", effect: "thorns", amount: 7 }],
+      },
     ],
   },
   {
@@ -186,14 +244,29 @@ export const SPECIES: readonly Species[] = [
     trait: "Moonlit",
     passiveTiers: [
       {
-        description: "Start each battle with 4 block",
+        description: "Start each battle with 4 Block",
         effects: [{ kind: "battleStart", effect: "block", amount: 4 }],
       },
-      null,
-      null,
-      null,
-      null,
-      null,
+      {
+        description: "Start each battle with 5 Block",
+        effects: [{ kind: "battleStart", effect: "block", amount: 5 }],
+      },
+      {
+        description: "Start each battle with 6 Block",
+        effects: [{ kind: "battleStart", effect: "block", amount: 6 }],
+      },
+      {
+        description: "Start each battle with 7 Block",
+        effects: [{ kind: "battleStart", effect: "block", amount: 7 }],
+      },
+      {
+        description: "Start each battle with 8 Block",
+        effects: [{ kind: "battleStart", effect: "block", amount: 8 }],
+      },
+      {
+        description: "Start each battle with 9 Block",
+        effects: [{ kind: "battleStart", effect: "block", amount: 9 }],
+      },
     ],
   },
   {
@@ -381,11 +454,26 @@ export const SPECIES: readonly Species[] = [
         description: "Retaliate with 1 Poison damage when hit",
         effects: [{ kind: "poisonRetaliation", amount: 1 }],
       },
-      null,
-      null,
-      null,
-      null,
-      null,
+      {
+        description: "Retaliate with 2 Poison damage when hit",
+        effects: [{ kind: "poisonRetaliation", amount: 2 }],
+      },
+      {
+        description: "Retaliate with 3 Poison damage when hit",
+        effects: [{ kind: "poisonRetaliation", amount: 3 }],
+      },
+      {
+        description: "Retaliate with 4 Poison damage when hit",
+        effects: [{ kind: "poisonRetaliation", amount: 4 }],
+      },
+      {
+        description: "Retaliate with 5 Poison damage when hit",
+        effects: [{ kind: "poisonRetaliation", amount: 5 }],
+      },
+      {
+        description: "Retaliate with 6 Poison damage when hit",
+        effects: [{ kind: "poisonRetaliation", amount: 6 }],
+      },
     ],
   },
 ];
