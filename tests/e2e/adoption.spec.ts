@@ -30,8 +30,13 @@ test("Collection filtering, audio preferences, and settings remain menu-driven",
   await page.getByRole("tab", { name: "Uncollected", exact: true }).click();
   const firstPage = await page.getByRole("img", { name: "Locked species" }).count();
   expect(firstPage).toBeGreaterThan(0);
-  await page.getByRole("button", { name: "Next page" }).click();
-  await expect(page.getByRole("img", { name: "Locked species" })).toHaveCount(SPECIES.length - firstPage);
+  for (let offset = firstPage; offset < SPECIES.length; offset += firstPage) {
+    await page.getByRole("button", { name: "Next page" }).click();
+    await expect(page.getByRole("img", { name: "Locked species" })).toHaveCount(
+      Math.min(firstPage, SPECIES.length - offset),
+    );
+  }
+  await expect(page.getByRole("button", { name: "Next page" })).toBeDisabled();
   await page.getByRole("button", { name: "Open menu", exact: true }).click();
   await expect(page.getByRole("button", { name: "Collection", exact: true })).toBeFocused();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
