@@ -25,7 +25,7 @@ import { flushSync } from "react-dom";
 import {
   Menu,
   ArrowLeftRight,
-  Bot,
+  Repeat,
   Pause,
   Play,
   Compass,
@@ -712,7 +712,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                   aria-pressed={autoplay}
                   onClick={() => setAutoplay(!autoplay)}
                 >
-                  {autoplay ? <Pause aria-hidden="true" /> : <Bot aria-hidden="true" />}
+                  {autoplay ? <Pause aria-hidden="true" /> : <Repeat aria-hidden="true" />}
                 </Button>
               ) : null}
               {game.phase === "draft" ? (
