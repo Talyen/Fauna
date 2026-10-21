@@ -1,3 +1,4 @@
+import { REVIEW_VIEWPORTS } from "./layout-contract";
 import { captureScreen } from "./rendered-evidence";
 import { test, expect } from "@playwright/test";
 test("switch thumbs stay within their tracks in both states", async ({ page }) => {
@@ -75,13 +76,13 @@ for (const [width, height, textScale] of [
   });
 }
 
-for (const width of [1280, 1920])
-  test(`illustrated Boons and independent tooltip sizing at ${width}`, async ({ page }) => {
+for (const [width, height] of REVIEW_VIEWPORTS)
+  test(`illustrated Boons and independent tooltip sizing at ${width}×${height}`, async ({ page }) => {
     const { run } = await import("../unit/helpers");
     const fixture = structuredClone(run(7));
     const { BOONS } = await import("../../src/game/progression");
     fixture.boons = BOONS.map((boon) => boon.id);
-    await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
+    await page.setViewportSize({ width, height });
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/");
     await page.evaluate((data) => localStorage.setItem("fauna.save.v1", data), JSON.stringify(fixture));
@@ -97,10 +98,10 @@ for (const width of [1280, 1920])
     await expect(page.getByRole("tooltip")).toBeVisible();
     expect(await page.getByRole("tooltip").evaluate((node) => getComputedStyle(node).fontSize)).toBe("20px");
     expect(await art.evaluate((node) => node.getBoundingClientRect().width)).toBeCloseTo(
-      width === 1280 ? 240 : 266.667,
+      height <= 760 ? 213.333 : height <= 900 ? 240 : 266.667,
       0,
     );
-    await captureScreen(page, { path: `reports/tooltip-independent-${width}.png` });
+    await captureScreen(page, { path: `reports/tooltip-independent-${width}-${height}.png` });
     await page.getByRole("button", { name: "Back", exact: true }).click();
     const opener = page.getByRole("button", { name: "Boons", exact: true });
     await opener.focus();
@@ -116,14 +117,14 @@ for (const width of [1280, 1920])
         .locator(".action-card")
         .first()
         .evaluate((node) => node.getBoundingClientRect().width),
-    ).toBeCloseTo(width === 1280 ? 180 : 200, 0);
-    await captureScreen(page, { path: `reports/owned-boons-${width}.png` });
+    ).toBeCloseTo(height <= 760 ? 160 : height <= 900 ? 180 : 200, 0);
+    await captureScreen(page, { path: `reports/owned-boons-${width}-${height}.png` });
     for (let index = 2; index < BOONS.length; index += 2) {
       await dialog.getByRole("button", { name: "Next page" }).click();
       for (const boon of BOONS.slice(index, index + 2)) {
         await expect(dialog.getByRole("heading", { name: boon.name, exact: true })).toBeInViewport();
         await expect(dialog).toContainText(boon.text);
-        await captureScreen(page, { path: `reports/owned-boon-${boon.id}-${width}.png` });
+        await captureScreen(page, { path: `reports/owned-boon-${boon.id}-${width}-${height}.png` });
       }
     }
     await page.keyboard.press("Escape");

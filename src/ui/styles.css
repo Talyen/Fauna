@@ -1942,3 +1942,12 @@ body,
   align-items: center;
   gap: var(--screen-item-gap);
 }
+
+/* Portrait size and readable rule-column width are independent. */
+.deck-dialog:has(> .paged-content .boon-options) {
+  width: min(var(--boon-dialog-width), calc(100vw - var(--space-12)));
+}
+.deck-dialog > .paged-content .boon-options .reward-option {
+  width: calc((100% - var(--screen-section-gap)) / 2);
+  align-items: center;
+}
