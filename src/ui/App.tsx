@@ -1,3 +1,4 @@
+import { Screen } from "./screen";
 import { PagedItems } from "./pagination";
 import { captureSwapMotion } from "./swap-motion";
 import { SurfaceTransition } from "./surface-transition";
@@ -344,9 +345,9 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
   }, [session]);
   if (!view.ready)
     return (
-      <div className="loading" role="status">
+      <Screen className="loading">
         <Loading />
-      </div>
+      </Screen>
     );
   const menuItems = (home: boolean) => (
     <>
@@ -602,23 +603,23 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
         {view.cloud.blocking ? (
           <CloudRecovery session={session} />
         ) : view.loadFailed || view.recoveryRequired ? (
-          <main className="recovery">
+          <Screen className="recovery">
             <h1>Save unavailable</h1>
             <p>{view.loadFailed ? view.error : view.notice}</p>
             <Button onClick={() => (view.loadFailed ? void session.load() : session.startFresh())}>
               {view.loadFailed ? "Retry loading" : "Start fresh"}
             </Button>
-          </main>
+          </Screen>
         ) : (
           <>
             {route === "home" ? (
-              <main className="home-screen">
+              <Screen className="home-screen">
                 <h1>Fauna</h1>
                 <nav aria-label="Main menu">{menuItems(true)}</nav>
-              </main>
+              </Screen>
             ) : null}
             {route === "unlocks" && reveals[0] ? (
-              <main className="unlock-screen">
+              <Screen className="unlock-screen">
                 <h1>Creature unlocked</h1>
                 <div className="unlock-creature">
                   <CreatureCard
@@ -638,7 +639,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                 >
                   Continue
                 </Button>
-              </main>
+              </Screen>
             ) : null}
             {route === "talents" ? (
               <Talents game={game} send={send} back={backFromPage} controls={talentControls} />
@@ -647,7 +648,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
               <Collection game={game} inspect={setInspection} back={backFromPage} />
             ) : null}
             {route === "settings" || route === "glossary" ? (
-              <main className={`menu-screen ${route}-screen`} aria-labelledby="menu-screen-title">
+              <Screen className={`menu-screen ${route}-screen`} aria-labelledby="menu-screen-title">
                 <header className="collection-heading">
                   <Button variant="ghost" size="icon" aria-label="Back" onClick={backFromPage}>
                     <ArrowLeft aria-hidden="true" />
@@ -695,7 +696,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                     </PagedItems>
                   </>
                 )}
-              </main>
+              </Screen>
             ) : null}
             <div className="play-surface" hidden={route !== "play"} inert={route !== "play"}>
               <Button

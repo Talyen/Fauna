@@ -1,3 +1,4 @@
+import { Screen } from "./ui/screen";
 import { assetUrl } from "./ui/assets";
 import { GameErrorBoundary } from "./ui/diagnostics";
 import { createRoot } from "react-dom/client";
@@ -34,10 +35,10 @@ root.render(
     {contentValid ? (
       <App session={session} desktop={platform.desktop} />
     ) : (
-      <main className="recovery">
+      <Screen className="recovery">
         <h1>Game content unavailable</h1>
         <p>Close and reopen the game to retry.</p>
-      </main>
+      </Screen>
     )}
   </GameErrorBoundary>,
 );

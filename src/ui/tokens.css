@@ -49,7 +49,8 @@
   --boon-dialog-width: 720px;
   --settings-label-basis: 200px;
   --settings-control-basis: 300px;
-  --settings-panel-min-height: 360px;
+  --settings-panel-min-height: 384px;
+  --glossary-page-min-height: 320px;
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -129,6 +130,8 @@
   --talent-overview-art-width: 160px;
   --talent-card-width: 328px;
   --talent-card-min-height: 168px;
+  --talent-page-rows: 2;
+  --talent-page-row-height: calc(var(--text-body) * 10 + var(--space-8));
   --art-standard-short-side: 200px;
   --art-compact-short-side: 180px;
   --art-minimum-short-side: 160px;
@@ -185,6 +188,7 @@
 @media (max-height: 900px) {
   :root {
     --art-short-side: var(--art-compact-short-side);
+    --talent-page-rows: 1;
   }
 }
 @media (max-height: 760px) {
