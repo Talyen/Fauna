@@ -123,8 +123,10 @@ for (const width of [1280, 1920]) {
     await expect(page.locator(".inspection-thumbnails .action-card")).toHaveCount(3);
     await page.keyboard.press("Escape");
     await page.getByRole("button", { name: "Continue", exact: true }).click();
-    await page.getByRole("button", { name: "Journey results", exact: true }).click();
-    await page.getByRole("button", { name: "Main menu", exact: true }).click();
+    await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Journey results", exact: true })).toHaveCount(0);
+    await page.reload();
+    await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
     await expect(page.getByRole("heading", { name: "Creature unlocked" })).toHaveCount(0);
   });
 }

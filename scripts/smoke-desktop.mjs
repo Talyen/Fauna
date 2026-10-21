@@ -22,7 +22,7 @@ try {
     .locator(".collection-grid img")
     .evaluateAll((images) => Promise.all(images.map((image) => image.decode())));
   await window.getByRole("button", { name: "Back", exact: true }).click();
-  await window.getByRole("button", { name: "New journey", exact: true }).click();
+  await window.getByRole("button", { name: "Play", exact: true }).click();
   const starterOffer = window.locator(".draft-grid .creature-card").first();
   const starterName = (await starterOffer.getAttribute("aria-label")).replace(/^Inspect /, "");
   await starterOffer.click();
@@ -36,21 +36,23 @@ try {
   await window.locator("[data-encounter]").first().click();
   await window.getByRole("main", { name: "Battlefield" }).waitFor();
   await window.locator('.app:not([inert])[data-save-status="saved"]').waitFor();
-  await window
-    .locator(".app:not([inert]) .player-row")
-    .getByRole("button", { name: `Inspect ${starterName}`, exact: true })
-    .click();
-  await window.locator(".inspection-thumbnails .action-card").first().waitFor();
-  if ((await window.locator(".inspection-thumbnails .action-card").count()) !== 3)
-    throw new Error("Creature inspection did not expose three portrait actions.");
-  const nextActionName = (
-    await window.locator(".inspection-thumbnails .action-card").nth(1).getAttribute("aria-label")
-  ).split(",")[0];
-  await window.locator(".inspection-thumbnails .action-card").first().click();
-  await window.keyboard.press("d");
-  await window.getByRole("dialog", { name: `${nextActionName} details`, exact: true }).waitFor();
+  const inspected = await window.evaluate(async () => (await window.faunaDesktop.readCandidates())[0].data);
+  await window.getByRole("button", { name: "Open menu", exact: true }).click();
+  await window.getByRole("button", { name: "Collection", exact: true }).click();
+  await window.getByRole("button", { name: `Inspect ${starterName}`, exact: true }).click();
+  await window.locator(".collection-ability").first().waitFor();
+  if ((await window.locator(".collection-ability").count()) !== 3)
+    throw new Error("Collection did not expose three base abilities.");
+  const rules = await window.locator(".collection-ability .action-effect").allTextContents();
+  if (rules.some((text) => !text.trim())) throw new Error("Collection ability rules are missing.");
+  await window.getByRole("tab", { name: "Rank progression", exact: true }).click();
+  await window.getByRole("button", { name: "Next page", exact: true }).click();
+  await window.getByRole("tab", { name: "Base abilities", exact: true }).click();
   await window.getByRole("button", { name: "Back", exact: true }).click();
-  await window.getByRole("button", { name: "Close inspection", exact: true }).click();
+  await window.getByRole("button", { name: "Open menu", exact: true }).click();
+  await window.getByRole("button", { name: "Continue", exact: true }).click();
+  if ((await window.evaluate(async () => (await window.faunaDesktop.readCandidates())[0].data)) !== inspected)
+    throw new Error("Collection browsing changed the saved battle.");
   // Exercise free swaps through the actual renderer and current-format desktop storage.
   await window.evaluate(async () => {
     const state = JSON.parse((await window.faunaDesktop.readCandidates())[0].data);
@@ -186,7 +188,7 @@ try {
   if (audioState !== "running") throw new Error(`Controller-only desktop audio is blocked: ${audioState}`);
   success = true;
   console.log(
-    "Desktop startup, draft, stacked inspection/action browsing, free swaps, lineup persistence, last-mana automatic turn quit/resume, and renderer isolation passed.",
+    "Desktop startup, draft, Collection ability and rank browsing, free swaps, lineup persistence, last-mana automatic turn quit/resume, and renderer isolation passed.",
   );
 } finally {
   if (app && !success) {
