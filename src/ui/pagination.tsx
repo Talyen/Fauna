@@ -1,17 +1,14 @@
-import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { useLayoutEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "../components/ui/button";
 
-/** One height breakpoint shared with the compact artwork tokens. */
-export function useCompactLayout() {
-  const [compact, setCompact] = useState(() => window.innerHeight <= 900);
-  useLayoutEffect(() => {
-    const update = () => setCompact(window.innerHeight <= 900);
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
-  return compact;
+const compactViewport = () => window.innerHeight <= 900;
+function subscribeViewport(update: () => void) {
+  window.addEventListener("resize", update);
+  return () => window.removeEventListener("resize", update);
 }
+/** One height breakpoint shared with the compact artwork tokens. */
+export const useCompactLayout = () => useSyncExternalStore(subscribeViewport, compactViewport);
 
 export function PageControls({
   page,
