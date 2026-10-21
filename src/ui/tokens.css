@@ -82,6 +82,18 @@
   --motion-mana-glint: 650ms;
   --reward-stagger: 75ms;
   --swap-arc-height: 32px;
+  --menu-icon-journey: #14532d;
+  --menu-icon-results: #facc15;
+  --menu-icon-lineup: #38bdf8;
+  --menu-icon-talents: #c084fc;
+  --menu-icon-collection: #4ade80;
+  --menu-icon-boons: #f472b6;
+  --menu-icon-glossary: #2dd4bf;
+  --menu-icon-settings: #94a3b8;
+  --menu-icon-end: var(--destructive);
+  --menu-icon-home: #d9b56f;
+  --menu-icon-quit: #fb923c;
+  --menu-icon-skip: #a3e635;
   --icon-size: 20px;
   --collection-rank-height: max(var(--icon-size), calc(var(--text-secondary) * 1.5));
   --empty-icon-size: 24px;
