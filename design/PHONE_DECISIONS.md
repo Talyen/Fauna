@@ -4,8 +4,8 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 
 ## Tabs
 
-- Tabs are centered and borderless in resting, hover and selected states, with no gray background strip. The active tab uses gold semibold text; inactive text brightens on hover. Intentional keyboard focus retains a solid gold outline.
-- Inactive hover: brighter text, without fill, border or movement.
+- Tabs are centered with real, visible 2px borders on every tab: neutral when inactive, gold when selected or hovered. There is no gray background strip. Active tabs use black fill and semibold light text. Intentional keyboard focus retains a solid gold outline and a visible neutral tab border.
+- Inactive hover: subtle charcoal fill, light text and a gold border, without movement.
 - Inter-tab gap: the standard 12px related-item spacing; horizontal padding: 12px per side; height remains at least 44px.
 - 20px Lucide icons beside labels.
 - Color transition: 150ms; panel activation remains immediate.

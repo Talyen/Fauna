@@ -1105,7 +1105,7 @@ strong {
   gap: var(--screen-section-gap);
   margin-top: var(--screen-section-gap);
 }
-/* Borderless tabs retain Radix selection and keyboard navigation. */
+/* Visible tab borders retain Radix selection and keyboard navigation. */
 .settings-tabs {
   display: flex;
   flex-wrap: nowrap;
@@ -1122,28 +1122,35 @@ strong {
 .settings-tabs button {
   flex-shrink: 0;
   gap: var(--space-2);
-  border: 0;
+  border: 2px solid var(--border);
   padding-inline: var(--space-3);
   background: transparent;
   box-shadow: none;
   color: var(--muted-foreground);
-  transition: color 150ms;
+  transition:
+    color 150ms,
+    border-color 150ms,
+    background-color 150ms;
 }
 .settings-tabs button[data-state="active"] {
-  background: transparent;
-  color: var(--primary);
+  background: var(--background);
+  border-color: var(--primary);
+  color: var(--foreground);
   font-weight: 600;
 }
 .settings-tabs button:hover {
-  background: transparent;
+  background: var(--muted);
+  border-color: var(--primary);
   color: var(--foreground);
 }
 .settings-tabs button[data-state="active"]:hover {
-  color: var(--primary);
+  background: var(--background);
+  box-shadow: inset 0 0 0 1px var(--primary);
 }
 :root[data-focus="visible"] .settings-tabs button:focus {
   outline: 2px solid var(--primary);
   outline-offset: 3px;
+  border-color: var(--border);
   box-shadow: none;
 }
 .settings-panel {

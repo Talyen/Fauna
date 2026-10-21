@@ -63,8 +63,8 @@ body:has(.settings-review) .dialog-overlay[data-state="closed"] {
 .settings-combined .settings-tabs button {
   flex-shrink: 0;
   min-height: 44px;
-  padding-inline: 12px;
-  border: 0;
+  padding-inline: var(--space-3);
+  border: 2px solid var(--border);
   background: transparent;
   color: var(--muted-foreground);
   outline: none;
@@ -79,22 +79,23 @@ body:has(.settings-review) .dialog-overlay[data-state="closed"] {
   height: 20px;
 }
 .settings-combined .settings-tabs button[data-state="active"] {
-  background: transparent;
-  color: var(--primary);
+  background: var(--background);
+  border-color: var(--primary);
+  color: var(--foreground);
   font-weight: 600;
 }
 .settings-combined .settings-tabs button[data-state="inactive"]:hover {
-  background: transparent;
+  background: var(--muted);
+  border-color: var(--primary);
   color: var(--foreground);
 }
 .settings-combined .settings-tabs button[data-state="active"]:hover {
-  box-shadow: none;
-  color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
 }
 :root[data-focus="visible"] .settings-combined .settings-tabs button:focus {
   outline: 2px solid var(--primary);
   outline-offset: 3px;
-  border-color: transparent;
+  border-color: var(--border);
   box-shadow: none;
 }
 .settings-combined .settings-tabs + [role="tabpanel"] {
