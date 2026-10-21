@@ -13,7 +13,7 @@ export function useCompactLayout() {
   return compact;
 }
 
-function PageControls({
+export function PageControls({
   page,
   pages,
   change,
@@ -26,15 +26,24 @@ function PageControls({
 }) {
   const nav = useRef<HTMLElement>(null);
   const restore = useRef(false);
+  const previousFocus = useRef<HTMLElement | null>(null);
   useLayoutEffect(() => {
-    if (!restore.current) return;
+    if (!restore.current && !previousFocus.current?.matches(":disabled")) return;
     restore.current = false;
     const focused = document.activeElement;
     if (!(focused instanceof HTMLButtonElement) || focused.disabled || !nav.current?.contains(focused))
       nav.current?.querySelector<HTMLButtonElement>("button:not(:disabled)")?.focus({ preventScroll: true });
   }, [page, pages]);
   return (
-    <nav className="pagination" aria-label={label} ref={nav} data-nav-row>
+    <nav
+      className="pagination"
+      aria-label={label}
+      ref={nav}
+      data-nav-row
+      onFocusCapture={(event) => {
+        previousFocus.current = event.target as HTMLElement;
+      }}
+    >
       <Button
         variant="ghost"
         size="icon"

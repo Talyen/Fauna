@@ -8,6 +8,74 @@ import { expectScrollFree, layoutViolations, REVIEW_VIEWPORTS } from "./layout-c
 import { captureScreen } from "./rendered-evidence";
 import { snapshot, cloudName } from "../../src/application/cloud";
 
+for (const [width, height] of [
+  [1280, 720],
+  [1920, 1080],
+] as const)
+  test(`cloud conflict and desktop Settings fit ${width}×${height} with enlarged text`, async ({ page }) => {
+    await page.setViewportSize({ width, height });
+    const identity = {
+      available: true,
+      device: "a".repeat(32),
+      profile: "b".repeat(32),
+      importAvailable: false,
+    };
+    const remote = await Promise.all(
+      [8, 9].map((seed) =>
+        snapshot(encodeSave(run(seed)), { ...identity, device: String(seed).repeat(32) }, 1),
+      ),
+    );
+    const files = Object.fromEntries(remote.map((entry) => [cloudName(entry), JSON.stringify(entry)]));
+    await page.addInitScript(
+      ({ identity, files, save }) => {
+        localStorage.setItem("fauna.text-scale", "1.25");
+        window.faunaDesktop = {
+          readCandidates: async () => [{ source: "local", data: save }],
+          writeSave: async () => {},
+          quit: async () => {},
+          onCloseRequested: () => () => {},
+          cloud: {
+            identity: async () => identity,
+            readLocal: async () => null,
+            writeLocal: async () => {},
+            preserve: async () => {},
+            importStandalone: async () => [],
+            list: async () => Object.keys(files),
+            read: async (name) => files[name] ?? null,
+            write: async (name, data) => {
+              files[name] = data;
+            },
+          },
+        };
+      },
+      { identity, files, save: encodeSave(run(7)) },
+    );
+    await page.goto("/");
+    await expect(page.getByRole("heading", { name: "Choose a save" })).toBeVisible();
+    const choices = new Set<string>();
+    await everyPage(page.locator(".recovery"), async () => {
+      await expectScrollFree(page);
+      choices.add(await page.getByRole("button", { name: /^Use save/ }).innerText());
+    });
+    expect(choices.size).toBeGreaterThanOrEqual(2);
+    await captureScreen(page, { path: `reports/scroll-free/cloud-${width}.png` });
+    await page.getByRole("button", { name: "Play offline" }).click();
+    await page.getByRole("button", { name: "Settings", exact: true }).click();
+    await page.getByRole("tab", { name: "Steam Cloud" }).click();
+    await expectScrollFree(page);
+    await captureScreen(page, { path: `reports/scroll-free/cloud-settings-${width}.png` });
+  });
+
+async function everyPage(root: Locator, check: () => Promise<void>) {
+  for (let count = 0; count < 100; count++) {
+    await check();
+    const next = root.getByRole("button", { name: "Next page", exact: true });
+    if (!(await next.count()) || (await next.isDisabled())) return;
+    await next.click();
+  }
+  throw new Error("Pagination did not terminate");
+}
+
 for (const [width, height] of REVIEW_VIEWPORTS)
   for (const scale of [1, 1.25])
     test(`scroll-free screens at ${width}×${height}, text ${scale}`, async ({ page }) => {

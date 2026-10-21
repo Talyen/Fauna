@@ -50,14 +50,14 @@ it("pages the collection, resets filters and keeps every creature reachable afte
   width = 560;
   act(() => resize());
   expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(2);
-  expect(screen.queryByRole("button", { name: "Previous page" })).toBeNull();
+  expect((screen.getByRole("button", { name: "Previous page" }) as HTMLButtonElement).disabled).toBe(true);
   const seen = new Set<string>();
   while (true) {
     screen
       .getAllByRole("button", { name: /^Inspect / })
       .forEach((button) => seen.add(button.getAttribute("aria-label")!));
     const next = screen.queryByRole("button", { name: "Next page" }) as HTMLButtonElement | null;
-    if (!next) break;
+    if (!next || next.disabled) break;
     await user.click(next);
   }
   expect(seen.size).toBe(SPECIES.length);

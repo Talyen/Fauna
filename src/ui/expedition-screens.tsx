@@ -1,4 +1,4 @@
-import { PagedItems, useCompactLayout } from "./pagination";
+import { PageControls, PagedItems, useCompactLayout } from "./pagination";
 import { starterCount } from "../game/engine";
 import { motionValue } from "./motion-values";
 import { ResultPresentation } from "./result-presentation";
@@ -15,8 +15,6 @@ import {
   BookOpen,
   LockKeyhole,
   ArrowLeft,
-  ChevronLeft,
-  ChevronRight,
   Check,
   Swords,
   ShieldPlus,
@@ -527,21 +525,14 @@ export function Collection({
   const [pageStart, setPageStart] = useState(0);
   const [columns, setColumns] = useState(3);
   const gridRef = useRef<HTMLDivElement>(null);
-  const paging = useRef<HTMLElement>(null);
-  const pagingFocus = useRef(false);
-  const focusedTile = useRef<HTMLElement | null>(null);
+  const focusedControl = useRef<HTMLElement | null>(null);
   useLayoutEffect(() => {
-    if (focusedTile.current && !focusedTile.current.isConnected && document.activeElement === document.body)
+    if (
+      focusedControl.current &&
+      !focusedControl.current.isConnected &&
+      document.activeElement === document.body
+    )
       returnFocus(gridRef.current?.querySelector<HTMLElement>("button:not(:disabled)") ?? null);
-    if (!pagingFocus.current) return;
-    pagingFocus.current = false;
-    returnFocus(
-      paging.current?.querySelector<HTMLElement>("button:not(:disabled)") ??
-        gridRef.current
-          ?.closest(".collection-tabs")
-          ?.querySelector<HTMLElement>('[role="tab"][data-state="active"]') ??
-        null,
-    );
   }, [pageStart, filter, columns, compact]);
   useLayoutEffect(() => {
     const grid = gridRef.current;
@@ -552,10 +543,7 @@ export function Collection({
       if (!width) return;
       const gap = parseFloat(getComputedStyle(grid).columnGap) || 0;
       const next = Math.max(1, Math.min(3, Math.floor((grid.clientWidth + gap + 0.5) / (width + gap))));
-      setColumns((current) => {
-        if (next !== current && paging.current?.contains(document.activeElement)) pagingFocus.current = true;
-        return next;
-      });
+      setColumns(next);
     };
     measure();
     const observer = new ResizeObserver(measure);
@@ -571,7 +559,12 @@ export function Collection({
   const activePage = Math.min(Math.floor(pageStart / pageSize), totalPages - 1);
   if (pageStart >= ordered.length && pageStart !== 0) setPageStart(activePage * pageSize);
   return (
-    <main className="collection-screen">
+    <main
+      className="collection-screen"
+      onFocusCapture={(event) => {
+        focusedControl.current = event.target as HTMLElement;
+      }}
+    >
       <header className="collection-heading">
         <Button variant="ghost" size="icon" onClick={back} aria-label="Back">
           <ArrowLeft aria-hidden="true" />
@@ -602,13 +595,7 @@ export function Collection({
         </TabsList>
         <TabsContent className="collection-content" value={filter}>
           <div className="collection-gallery">
-            <div
-              className="collection-grid"
-              ref={gridRef}
-              onFocusCapture={(event) => {
-                focusedTile.current = event.target as HTMLElement;
-              }}
-            >
+            <div className="collection-grid" ref={gridRef}>
               {ordered.slice(activePage * pageSize, (activePage + 1) * pageSize).map((creature) =>
                 known(creature.id) ? (
                   <div className="collection-entry" key={creature.id}>
@@ -647,43 +634,16 @@ export function Collection({
             </div>
             {ordered.length === 0 ? <EmptyState label="No creatures in this view" /> : null}
           </div>
-          <nav ref={paging} className="collection-pagination" aria-label="Collection pages">
+          <div className="collection-pagination">
             {totalPages > 1 ? (
-              <>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  aria-label="Previous page"
-                  disabled={activePage === 0}
-                  data-unavailable={activePage === 0 || undefined}
-                  aria-hidden={activePage === 0 || undefined}
-                  onClick={() => {
-                    pagingFocus.current = activePage === 1;
-                    setPageStart((activePage - 1) * pageSize);
-                  }}
-                >
-                  <ChevronLeft aria-hidden="true" />
-                </Button>
-                <span role="status" aria-live="polite">
-                  {activePage + 1} / {totalPages}
-                </span>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  aria-label="Next page"
-                  disabled={activePage === totalPages - 1}
-                  data-unavailable={activePage === totalPages - 1 || undefined}
-                  aria-hidden={activePage === totalPages - 1 || undefined}
-                  onClick={() => {
-                    pagingFocus.current = activePage === totalPages - 2;
-                    setPageStart((activePage + 1) * pageSize);
-                  }}
-                >
-                  <ChevronRight aria-hidden="true" />
-                </Button>
-              </>
+              <PageControls
+                page={activePage}
+                pages={totalPages}
+                change={(next) => setPageStart(next * pageSize)}
+                label="Collection pages"
+              />
             ) : null}
-          </nav>
+          </div>
         </TabsContent>
       </Tabs>
     </main>
