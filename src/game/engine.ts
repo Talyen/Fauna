@@ -18,6 +18,7 @@ import {
   drawKeyword,
   gainMana,
   grantArmor,
+  triggerArmorBreak,
   freshCombat,
   grantStatus,
   grantBlock,
@@ -679,6 +680,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
           const stolen = Math.min(1, target.combat.armor);
           target.combat.armor -= stolen;
           grantArmor(draft, actor, stolen, events);
+          if (stolen > 0 && target.combat.armor === 0) triggerArmorBreak(draft, target, events);
         }
         if (keywords.includes("block") && hasTalent(draft, "armor.armored-surge") && roll(draft) < 0.1)
           grantArmor(draft, actor, 6, events);

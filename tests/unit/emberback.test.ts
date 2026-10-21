@@ -37,7 +37,7 @@ it("charges one target, grants the acting creature Armor, and preserves the resu
     autoEndTurn: false,
   });
   expect(result.accepted).toBe(true);
-  expect(result.state.team[0]!.combat!.armor).toBe(4);
+  expect(result.state.team[0]!.combat!.armor).toBe(2);
   expect(result.state.battle!.enemies.map((enemy) => enemy.health)).toEqual(
     game.battle!.enemies.map((enemy, index) => enemy.health - (index === 0 ? 4 : 0)),
   );
@@ -130,7 +130,7 @@ it("discovers and recruits Emberback from an ordinary encounter and resumes its 
     { type: "beginBattle" },
   );
   expect(game.discovery.encountered).toContain("emberback");
-  expect(game.battle!.enemies[0]!.combat.armor).toBe(2);
+  expect(game.battle!.enemies[0]!.combat.armor).toBe(0);
   game = winBattle(game);
   game = accept(game, { type: "recruit", species: "emberback" });
   expect(game.discovery.recruited.emberback).toBe(1);

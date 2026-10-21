@@ -1,4 +1,4 @@
-import { cardKeywords, hasTalent } from "./progression";
+import { cardKeywords, hasTalent, creaturePassive } from "./progression";
 import { physicalBonus } from "./rules";
 import { species, type DamageType } from "./content";
 import type { CombatState, Creature, Enemy, GameEvent, GameState } from "./types";
@@ -247,6 +247,21 @@ export function grantStatus(
       text: `${unitName(unit)} gains ${gain} ${status}.`,
     });
 }
+/** Resolve after the Armor-removing effect, so its original hit completes first. */
+export function triggerArmorBreak(state: GameState, unit: Combatant, events: GameEvent[]) {
+  if (unit.health <= 0 || !state.battle) return;
+  const allied = !("maxHealth" in unit);
+  const amount = creaturePassive(allied ? state : undefined, unit.species).effects.reduce(
+    (total, effect) => total + (effect.kind === "armorBreak" ? effect.amount : 0),
+    0,
+  );
+  if (!amount) return;
+  const targets = allied ? state.battle.enemies : state.team;
+  for (const target of targets) {
+    if (unit.health <= 0) break;
+    if (target.health > 0) hit(state, unit, target, amount, "burn", events, { proc: true });
+  }
+}
 export function removeEffects(
   unit: Combatant,
   kind: "cleanse" | "purge",
@@ -254,7 +269,8 @@ export function removeEffects(
   events: GameEvent[],
   state?: GameState,
 ) {
-  const stats = combat(unit);
+  const stats = combat(unit),
+    armorBefore = stats.armor;
   let cleansed = 0;
   const removedStatuses: NonNullable<GameEvent["affectedStatus"]>[] = [];
   const statuses =
@@ -305,6 +321,7 @@ export function removeEffects(
       text: `${unitName(unit)}: ${kind === "cleanse" ? "Cleanse" : "Purge"} removes no effects.`,
     });
   if (cleansed > 0 && state) cleanseRewards(state, unit, cleansed, events);
+  if (state && armorBefore > 0 && stats.armor === 0) triggerArmorBreak(state, unit, events);
 }
 function cleanseRewards(state: GameState, unit: Combatant, cleansed: number, events: GameEvent[]) {
   const stats = combat(unit);
@@ -347,7 +364,8 @@ export function hit(
   const alliedSource = !("maxHealth" in source),
     alliedTarget = !("maxHealth" in target);
   const stats = combat(target),
-    before = target.health;
+    before = target.health,
+    initialArmor = stats.armor;
   const blessedLeech =
     alliedSource &&
     type === "light" &&
@@ -525,6 +543,7 @@ export function hit(
     if (alliedTarget && armorBefore > 0 && stats.armor === 0 && hasTalent(state, "armor.reactive-guard"))
       grantBlock(state, target, 3, events);
   }
+  let armorBroken = initialArmor > 0 && stats.armor === 0;
   if (lost > 0) healthThresholds(state, target, before, events);
   if (alliedTarget && lost > 0 && hasTalent(state, "dodge.finding-rhythm"))
     stats.rhythm = Math.min(70, stats.rhythm + 5);
@@ -643,7 +662,10 @@ export function hit(
         appliedControl = true;
         if (alliedSource && !alliedTarget) {
           if (type === "freeze" && hasTalent(state, "freeze.icebound")) target.block = 0;
-          if (type === "freeze" && hasTalent(state, "freeze.brittle-armor")) stats.armor = 0;
+          if (type === "freeze" && hasTalent(state, "freeze.brittle-armor")) {
+            armorBroken ||= stats.armor > 0;
+            stats.armor = 0;
+          }
           if (type === "stun" && hasTalent(state, "stun.free-follow-up")) combat(source).freeCard = true;
           if (type === "stun" && hasTalent(state, "stun.stun-insight")) draw(state, 1);
           if (type === "stun" && hasTalent(state, "stun.stun-surge") && state.battle?.mana === 0)
@@ -652,7 +674,10 @@ export function hit(
             grantBlock(state, source, 3, events);
           if (type === "stun" && hasTalent(state, "stun.guarded-counter") && source.block === 0)
             grantBlock(state, source, 4, events);
-          if (type === "stun" && hasTalent(state, "stun.shatter-guard")) stats.armor = 0;
+          if (type === "stun" && hasTalent(state, "stun.shatter-guard")) {
+            armorBroken ||= stats.armor > 0;
+            stats.armor = 0;
+          }
         }
         events.push({
           kind: "status",
@@ -738,6 +763,7 @@ export function hit(
         hit(state, source, target, 6, "nature", events, { derived: true });
     }
   }
+  if (armorBroken) triggerArmorBreak(state, target, events);
   return lost;
 }
 export function tickStatuses(state: GameState, unit: Combatant, events: GameEvent[]) {
