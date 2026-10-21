@@ -205,14 +205,23 @@ strong {
   gap: var(--screen-item-gap);
 }
 .menu-choices > button {
-  justify-content: flex-start;
-  text-align: left;
+  position: relative;
+  justify-content: center;
+  text-align: center;
+  padding-inline: calc(var(--icon-size) + var(--space-2));
   height: auto;
   min-height: var(--control-height);
   white-space: normal;
 }
+.menu-choices > button > svg {
+  position: absolute;
+  inset-inline-start: var(--space-2);
+}
+.menu-choices > button[aria-busy="true"] > svg:not(.ui-spinner) {
+  visibility: hidden;
+}
 .menu-choices > .primary-menu-action {
-  padding-inline: calc(var(--space-4) + 1px);
+  border: 1px solid transparent;
 }
 .menu-choices > .primary-menu-action,
 .menu-choices > button:last-child:nth-child(even) {

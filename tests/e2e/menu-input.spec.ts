@@ -12,7 +12,11 @@ async function expectAlignedMenu(choices: Locator) {
       )!;
       const range = document.createRange();
       range.selectNodeContents(label);
+      const textBounds = range.getBoundingClientRect();
+      const buttonBounds = element.getBoundingClientRect();
       return {
+        labelCenterOffset:
+          textBounds.left + textBounds.width / 2 - (buttonBounds.left + buttonBounds.width / 2),
         iconInset: icon.getBoundingClientRect().left - element.getBoundingClientRect().left,
         labelLines: range.getClientRects().length,
       };
@@ -21,6 +25,7 @@ async function expectAlignedMenu(choices: Locator) {
   for (const button of buttons) {
     expect(button.iconInset).toBeCloseTo(buttons[0]!.iconInset);
     expect(button.labelLines).toBe(1);
+    expect(Math.abs(button.labelCenterOffset)).toBeLessThan(1);
   }
 }
 
