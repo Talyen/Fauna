@@ -84,19 +84,19 @@ The hand shows at most seven playable cards. Extra draws remain entirely hidden 
 
 Palette and icon pairings are adapted from `Alchemy: src/lib/game-data/keywords.ts` and `Alchemy: src/features/alchemy/shared/config/metadata.ts`. Health uses red (#f87171, Heart), block sky blue (#7dd3fc, Shield). Damage color follows the attack type, independent of lost health:
 
-| Type      | Foreground | Icon         |
-| --------- | ---------- | ------------ |
-| Physical  | #cbd5e1    | Swords       |
-| Fire      | #fb923c    | Flame        |
-| Ice       | #67e8f9    | Snowflake    |
-| Lightning | #fcd34d    | Zap          |
-| Poison    | #86efac    | FlaskConical |
-| Nature    | #34d399    | Leaf         |
-| Light     | #fde68a    | Sun          |
+| Type     | Foreground | Icon         |
+| -------- | ---------- | ------------ |
+| Physical | #cbd5e1    | Swords       |
+| Burn     | #fb923c    | Flame        |
+| Freeze   | #67e8f9    | Snowflake    |
+| Stun     | #fcd34d    | Zap          |
+| Poison   | #15803d    | FlaskConical |
+| Nature   | #059669    | Leaf         |
+| Light    | #fde68a    | Sun          |
 
-Poison and Nature use lighter foregrounds from Alchemy's green/emerald families for readable text on black and artwork. Tooltip attack rules spell out the type; floating feedback and target previews retain the damage type. Enemy intents are hidden. Keyword words in rules use their assigned colors, including secondary clauses; other prose stays neutral. Healing has a rose identity, distinct from Health.
+Shared keyword colors match Alchemy's catalog base colors, including darker Poison (#15803d), Nature and Thorns (#059669), Bleed (#dc2626), and Leech (#9f1239). Health restoration uses Health's red identity. Tooltip attack rules spell out the type; floating feedback and target previews retain the damage type. Enemy intents are hidden. Keyword words in rules use their assigned colors, including secondary clauses; other prose stays neutral. Labels and icons preserve meaning alongside color; rendered readability requires review, especially for the darker colors.
 
-Types are content metadata, carried on damage presentation events. Enemy types derive from the resolved species ability. Explicit Burn, Poison, Bleed, Stun and Freeze packets use the combat rules in [Keywords](KEYWORDS.md). Original Fire, Ice and Lightning identities do not implicitly add these effects.
+Types are content metadata, carried on damage presentation events. Enemy types derive from the resolved species ability. Burn, Poison, Bleed, Stun and Freeze packets use the combat rules in [Keywords](KEYWORDS.md). Fire, Ice, Lightning and Healing are not separate keyword identities.
 
 Use shadcn/ui for dialogs, tooltips, menus, sliders, and shared controls, composing gameplay cards from the same primitives and tokens. Gamepad navigation remains an application responsibility and must be verified through these compositions. Adopting a library is not a reason to add more controls or containers.
 

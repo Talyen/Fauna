@@ -35,11 +35,13 @@ function FeedbackNumber({ entry: e }: { entry: FeedbackEntry }) {
       data-combat-tone={
         e.kind === "damage"
           ? (e.damageType ?? "physical")
-          : e.kind === "heal" || e.kind === "block"
-            ? e.kind
-            : e.status === "deathDoor"
-              ? undefined
-              : e.status
+          : e.kind === "heal"
+            ? "health"
+            : e.kind === "block"
+              ? "block"
+              : e.status === "deathDoor"
+                ? undefined
+                : e.status
       }
       aria-label={
         notice

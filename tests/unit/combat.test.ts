@@ -45,8 +45,8 @@ describe("Alchemy combat foundations", () => {
     });
     expect(blocked.next.battle!.enemies[0]!.combat.armor).toBe(3);
   });
-  it("distinguishes Fire/Ice/Lightning from Burn/Freeze/Stun and never invokes elemental reactions", () => {
-    for (const type of ["fire", "ice", "lightning", "nature", "light"] as const) {
+  it("resolves typed damage and buildup without elemental reactions", () => {
+    for (const type of ["nature", "light"] as const) {
       const { next } = packet(type, 3);
       expect(next.battle!.enemies[0]!.combat).toEqual(freshCombat());
     }
@@ -118,7 +118,7 @@ describe("Alchemy combat foundations", () => {
     expect(dodge.next.battle!.enemies[0]!.block).toBe(5);
     expect(dodge.events[0]!.text).toContain("Dodges");
     expect(dodge.events[0]).toMatchObject({ status: "dodge", outcome: "dodge" });
-    const crit = packet("fire", 3, (s) => {
+    const crit = packet("burn", 3, (s) => {
       s.rng = critSeed;
     });
     expect(crit.next.battle!.enemies[0]!.health).toBe(12);
@@ -154,13 +154,13 @@ describe("Alchemy combat foundations", () => {
       const target = s.team[0]!,
         enemy = s.battle!.enemies[0]!,
         events: Parameters<typeof hit>[5] = [];
-      hit(s, enemy, target, 999, "fire", events, { retaliation: true });
+      hit(s, enemy, target, 999, "burn", events, { retaliation: true });
       expect(target.health).toBe(1);
       expect(combat(target)).toMatchObject({ deathDoorUsed: true, grace: 2 });
-      hit(s, enemy, target, 999, "fire", events, { retaliation: true });
+      hit(s, enemy, target, 999, "burn", events, { retaliation: true });
       expect(target.health).toBe(1);
       combat(target).grace = 0;
-      hit(s, enemy, target, 999, "fire", events, { retaliation: true });
+      hit(s, enemy, target, 999, "burn", events, { retaliation: true });
     });
     expect(next.team[0]!.health).toBe(0);
   });
@@ -184,7 +184,7 @@ describe("Alchemy combat foundations", () => {
 describe("combat commands and journey health", () => {
   it("classifies structured effects and tags once, without deriving XP from prose", () => {
     expect(cardKeywords({ definitionId: "briartooth-attack" })).toEqual(["physical", "bleed", "leech"]);
-    expect(cardKeywords({ definitionId: "silkmoth-heal" })).toEqual(["heal"]);
+    expect(cardKeywords({ definitionId: "silkmoth-heal" })).toEqual(["health"]);
   });
   it("keeps damage and knockouts through victory, rewards, and the next battle", () => {
     let s = produce(victoryReady(), (d) => {

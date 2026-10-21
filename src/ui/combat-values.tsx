@@ -3,9 +3,6 @@ import { Flame, FlaskConical, Leaf, Snowflake, Sun, Swords, Zap } from "lucide-r
 import { cardText, DAMAGE_LABELS, type CardDefinition, type DamageType } from "../game/content";
 const DAMAGE_ICONS = {
   physical: Swords,
-  fire: Flame,
-  ice: Snowflake,
-  lightning: Zap,
   poison: FlaskConical,
   nature: Leaf,
   light: Sun,

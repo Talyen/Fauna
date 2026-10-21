@@ -58,8 +58,18 @@ describe("game commands", () => {
     expect(r.accepted).toBe(true);
     expect(r.state.battle!.mana).toBe(3);
     expect(r.state.battle!.enemies[0]!.health).toBe(6);
-    expect(r.events.map((e) => e.kind)).toEqual(["action", "damage", "damage", "damage", "status", "damage"]);
-    expect(r.events.find((e) => e.kind === "damage")?.damageType).toBe("fire");
+    expect(r.events.map((e) => e.kind)).toEqual([
+      "action",
+      "damage",
+      "status",
+      "damage",
+      "damage",
+      "status",
+      "damage",
+    ]);
+    expect(r.events.find((e) => e.kind === "damage")?.damageType).toBe("burn");
+    expect(r.state.battle!.enemies[0]!.combat.burn).toBe(12);
+    expect(r.state.battleXP.burn).toBe(1);
     expect(r.state.battle!.discard).toContain(attack.id);
   });
   it("persists enemy repertoire history and never repeats consecutive abilities", () => {
@@ -222,7 +232,7 @@ describe("save validation", () => {
   });
 });
 describe("creature traits and deck circulation", () => {
-  it("applies Charged Lightning damage and Tender healing while rejecting revival of knocked-out allies", () => {
+  it("applies Charged Stun damage and Tender healing while rejecting revival of knocked-out allies", () => {
     let s = teamRun(5, ["stormfin", "silkmoth", "mossback"]);
     const attack = s.cards.find((c) => c.definitionId === "stormfin-attack")!,
       heal = s.cards.find((c) => c.definitionId === "silkmoth-heal")!;
@@ -235,6 +245,8 @@ describe("creature traits and deck circulation", () => {
     expect(s.battle!.enemies[0]!.health).toBe(7);
     s = accept(s, { type: "play", cardId: heal.id, targetId: "ally-2" });
     expect(s.team[2]!.health).toBe(20);
+    expect(s.battleXP.health).toBe(1);
+    expect(decodeSave(encodeSave(s))).toEqual(s);
     const knocked = produce(s, (d) => {
       d.team[2]!.health = 0;
       d.battle!.hand = [heal.id];
@@ -251,7 +263,7 @@ describe("creature traits and deck circulation", () => {
       hit(d, d.battle!.enemies[0]!, d.team[0]!, 4, "nature", events, { retaliation: true });
       expect(d.battle!.enemies[0]!.health).toBe(18);
       d.rng = 1;
-      hit(d, d.battle!.enemies[1]!, d.team[0]!, 4, "fire", events);
+      hit(d, d.battle!.enemies[1]!, d.team[0]!, 4, "burn", events);
     });
     expect(s.battle!.enemies[1]!.health).toBe(14);
     expect(s.team[0]!.combat!.thorns).toBe(1);

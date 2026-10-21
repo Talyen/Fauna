@@ -107,7 +107,7 @@ export function TargetPreview({
               {e.kind === "damage" ? (
                 <DamageValue type={e.damageType ?? "physical"} amount={e.amount ?? 0} signed />
               ) : (
-                <span data-combat-tone="heal">
+                <span data-combat-tone="health">
                   <Heart aria-hidden="true" />+{e.amount}
                 </span>
               )}

@@ -38,7 +38,7 @@ import { bossEncounter, encounterSource, finalEncounter, encounterPacks } from "
 import type { Card, Command, CommandResult, GameEvent, GameState } from "./types";
 export function createGame(seed = 1): GameState {
   const state: GameState = {
-    version: 22,
+    version: 23,
     support: null,
     discovery: { encountered: [], recruited: {} },
     revision: 0,
@@ -190,7 +190,7 @@ export function beginBattle(state: GameState, events: GameEvent[] = []) {
     }
     if (hasTalent(state, "mana.mana-bulwark")) grantBlock(state, unit, state.battle.maxMana, events);
     if (hasTalent(state, "mana.mana-shell")) grantArmor(state, unit, state.battle.maxMana, events);
-    if (hasTalent(state, "heal.combat-surge")) restoreHealth(unit, 4, events, false, state);
+    if (hasTalent(state, "health.combat-surge")) restoreHealth(unit, 4, events, false, state);
   }
   state.reward = null;
   state.battleXP = {};
@@ -261,7 +261,7 @@ function settle(state: GameState, events: GameEvent[]): boolean {
   }
   if (state.battle!.enemies.every((e) => e.health <= 0)) {
     for (const creature of [...state.team, ...state.reserves]) {
-      if (hasTalent(state, "heal.vitality")) restoreHealth(creature, 4, events, false, state);
+      if (hasTalent(state, "health.vitality")) restoreHealth(creature, 4, events, false, state);
       creature.block = 0;
       creature.combat = freshCombat();
     }
