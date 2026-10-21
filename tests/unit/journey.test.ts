@@ -45,7 +45,7 @@ describe("journey earnings and results", () => {
       action === "choose" ? { type: "chooseBoon" as const, boon: chosen } : { type: "skipBoon" as const };
     const next = accept(reward, command);
     expect(next.phase).toBe("teamSelection");
-    expect(next.expedition!.biome).toBe(1);
+    expect(next.encounter).toBe(4);
     expect(next.reward).toBeNull();
     expect(next.currency).toBe(reward.currency);
     expect(next.keywordXP).toEqual(reward.keywordXP);
@@ -63,7 +63,7 @@ describe("journey earnings and results", () => {
     });
     const won = winBattle(accept(ready, { type: "beginBattle" }));
     expect(won.phase).toBe("teamSelection");
-    expect(won.expedition!.biome).toBe(1);
+    expect(won.encounter).toBe(4);
     expect(won.reward).toBeNull();
     expect(decodeSave(encodeSave(won))).toEqual(won);
   });

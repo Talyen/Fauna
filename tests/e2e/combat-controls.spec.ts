@@ -84,7 +84,7 @@ for (const width of [1280, 1920]) {
           d.phase = "teamSelection";
           d.battle = null;
           d.journey = { outcome: null, victories: 7, currency: 0, xp: {}, unlocks: [], lastBattle: null };
-          d.expedition = { biome: 1, step: 3, pack: 0 };
+          d.expedition = { pack: 0 };
         }),
         { type: "beginBattle" },
       ),

@@ -6,7 +6,7 @@ These are the agreed directions from the design review. They supersede the proto
 
 - Begin with one chosen starter. A journey roster grows to five creatures: up to three deployed and two reserves. Multiple copies of a species are allowed.
 - Starter selection uses a three-column artwork grid of unlocked species. Clicking opens inspection with a Choose action; choosing returns to the grid and marks the selected creature. Begin journey is a separate action, available after choosing one starter. Inspecting or canceling never changes the choice. Choosing another replaces it.
-- The starter supplies the remembered starting lineup. Recruits fill its second and third slots before joining reserves. The encounter screen offers one Combat or Boss placeholder ArtCard; inspection reveals the exact enemy group and Begin battle. Deck remains available without requiring team selection.
+- The starter supplies the remembered starting lineup. Recruits fill its second and third slots before joining reserves. The encounter screen offers one Combat or Boss placeholder ArtCard that starts battle directly. Deck remains available without requiring team selection.
 - Lineup is an optional menu dialog between battles, including ordinary reward screens. Changes save immediately. Combat swaps do not overwrite this starting lineup.
 - Only deployed living creatures act and provide passive traits. Enemy intents remain hidden.
 - During your turn, Swap opens a centered dialog with three deployed creatures and two reserves at the shared artwork size. Reserves are hidden on the battlefield.
@@ -19,14 +19,14 @@ These are the agreed directions from the design review. They supersede the proto
 - Victory preserves roster Health and knockouts. The next battle deploys the saved starting lineup; combat effects reset.
 - Recruitment at five requires choosing one creature to release, or skipping. Replacing a starting creature updates that individual’s lineup entry.
 
-## Biomes and encounters
+## Encounters
 
-- New journeys travel through Fernwood, then Moonwater Marsh. Each biome has three ordinary encounters followed by its boss; only the final boss completes the journey and unlocks Moonhart.
-- Each step has one saved encounter: Combat for the three ordinary battles, then Boss. Enemy packs are selected from the current biome when advancing and remain unchanged through inspection, support visits and reload. Both encounter types use blank landscape placeholder artwork, with names beneath. Campfire appears alongside the encounter whenever any roster creature, including a reserve or knockout, is missing at least 30% of maximum Health. Rest restores 30% maximum Health to the whole roster, capped at full Health, and returns without advancing the encounter or changing RNG. It remains available while the threshold is met.
-- Combat and Boss use blank 4:3 artwork with the encounter type below it. Campfire uses Rest beneath its location art; entering it commits a saved visit and exposes Rest as its only option. A quiet heading shows the biome and current encounter within it.
-- Opening Combat or Boss is inspection. Show its exact enemy group; inspect each creature's battle health and collectible kit in the same dialog. Back/Escape returns action → creature → encounter → encounter screen. Begin battle starts the saved encounter.
-- Seeded gameplay chooses and saves one enemy pack when entering the encounter screen. Inspection, cancellation, menus, and reload never reroll enemies or consume randomness.
-- Biome pools contain themed enemy packs that vary between runs. Initial enemy stats grow with chapter progress, with easier first encounters for a single starter. These values are playtest tuning, not final balance.
+- A journey has eight encounters: Combat, Combat, Combat, Boss, Combat, Combat, Combat, Boss. Only the final boss completes the journey and unlocks Moonhart.
+- Each step has one saved encounter: Combat for the three ordinary battles, then Boss. Enemy packs are selected from one shared pool when advancing and remain unchanged through support visits and reload. Both encounter types use blank landscape placeholder artwork, with names beneath. Campfire appears alongside the encounter whenever any roster creature, including a reserve or knockout, is missing at least 30% of maximum Health. Rest restores 30% maximum Health to the whole roster, capped at full Health, and returns without advancing the encounter or changing RNG. It remains available while the threshold is met.
+- Combat and Boss use blank 4:3 artwork with the encounter type below it. Campfire uses Rest beneath its location art; entering it commits a saved visit and exposes Rest as its only option. A quiet heading shows the encounter number out of eight.
+- Activating Combat or Boss immediately commits the saved encounter and starts battle. There is no enemy preview, inspection dialog or separate Begin battle action. Creature and action inspection remain available during battle.
+- Seeded gameplay chooses and saves one enemy pack when entering the encounter screen. Menus, support visits and reload never reroll enemies or consume randomness.
+- The shared enemy pool varies between runs. Initial enemy stats grow with encounter progress, with easier first encounters for a single starter. These values are playtest tuning, not final balance.
 
 ## Keyword XP and talents
 
@@ -61,17 +61,17 @@ These are the agreed directions from the design review. They supersede the proto
 
 - All Gold is permanent and carries between journeys.
 - Currency funds meta progression. Specific purchases are **TBD**.
-- Each biome offers a Merchant after its first ordinary victory when an item is affordable. Buy one of up to two unowned journey Boons for 20 Gold, or Leave. Currency spending is atomic and reduces the wallet, while journey earnings remain gross retained income.
+- A Merchant is offered before encounters 2 and 6 when an item is affordable. Buy one of up to two unowned journey Boons for 20 Gold, or Leave. Currency spending is atomic and reduces the wallet, while journey earnings remain gross retained income.
 - Initial battle item rewards focus on run-wide boons: passive effects for the whole journey.
 - When a battle awards a Boon, offer up to three distinct unowned choices.
 - Choose one boon or skip the reward. Boons use 3:4 portrait artwork wherever displayed, matching hand cards. All eight Boons use copied Alchemy artwork; names stay below the art and effects in hover/focus tooltips. Owned Boons are inspectable from the menu during a journey.
-- Starter tuning: Currency pays 20 per ordinary victory and 40 for each biome boss. Intermediate biome bosses offer up to three distinct unowned Boons; smaller nonempty pools remain available. Ordinary combat offers recruitment, never boons; intermediate bosses offer boons, never recruitment. Eight Boons are authored in `src/game/progression.ts`; their ownership lasts only for the journey. Material types and permanent upgrade purchases remain undefined.
+- Starter tuning: Currency pays 20 per ordinary victory and 40 for each boss. Intermediate bosses offer up to three distinct unowned Boons; smaller nonempty pools remain available. Ordinary combat offers recruitment, never boons; intermediate bosses offer boons, never recruitment. Eight Boons are authored in `src/game/progression.ts`; their ownership lasts only for the journey. Material types and permanent upgrade purchases remain undefined.
 
 ## Screen flow and Journey results
 
 Journey is the player-facing name. Internal command IDs, route fields, filenames, and storage paths retain their existing names.
 
-Ordinary victory → shared Victory screen with recruitment (if available) → the next encounter. Intermediate boss victory → the same Victory screen with boon choices (if available) → the next biome. Compact last-battle currency and keyword XP earnings appear beside choices and remain visible on the encounter screen until the next battle. No separate acknowledgement screen interrupts new journeys. If neither decision is available, proceed directly to the next encounter.
+Ordinary victory → shared Victory screen with recruitment (if available) → the next encounter. Intermediate boss victory → the same Victory screen with boon choices (if available) → the next encounter. Compact last-battle currency and keyword XP earnings appear beside choices and remain visible on the encounter screen until the next battle. No separate acknowledgement screen interrupts new journeys. If neither decision is available, proceed directly to the next encounter.
 
 Final victory or defeat → Journey results. Ending a started journey voluntarily also opens results, labeled Returned home. Ending an unfinished starter choice simply returns to the main menu.
 
@@ -101,6 +101,6 @@ Development builds add Skip combat to the battle pause menu. It settles a normal
 
 ## Optional support visits
 
-Merchant appears beside the combat encounter after the first ordinary victory in each biome, only when at least one stocked item is affordable. It does not replace a battle. Inspecting and canceling is read-only; Enter commits the saved visit and rechecks affordability. Leave consumes it, even without buying, and beginning the next battle forfeits the opportunity. Returning preserves the exact enemy pack. There are no restocks or repeated Merchant visits in a biome.
+Merchant appears beside the combat encounter before encounters 2 and 6, only when at least one stocked item is affordable. It does not replace a battle. Inspecting and canceling is read-only; Enter commits the saved visit and rechecks affordability. Leave consumes it, even without buying, and beginning the next battle forfeits the opportunity. Returning preserves the exact enemy pack. Each offer allows one visit, without restocks.
 
 The Merchant offers up to two distinct unowned Boons for 20 Gold each and allows one purchase. Gold is the existing permanent currency and carries between journeys. Bought Boons last only for that journey; they do not become permanent unlocks. Omit a Merchant with no eligible stock or insufficient Gold. Saved stock and prices cannot reroll on reload. Campfire visits preserve any Merchant offer and its purchase receipt. No visit grants keyword XP or recruitment, and all eight battles remain. Sheltered Springs are removed.

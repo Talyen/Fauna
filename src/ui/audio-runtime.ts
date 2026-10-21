@@ -22,7 +22,7 @@ export type SoundCue =
   | "defeat"
   | "recruit"
   | "talent";
-export type MusicCue = "menu" | "fernwood" | "marsh" | "boss";
+export type MusicCue = "menu" | "combat" | "boss";
 export interface MediaVoice {
   readonly paused?: boolean;
   volume: number;
@@ -153,7 +153,11 @@ export function createAudioRuntime(
       fading.set(old.media, timer);
     }
     try {
-      const record = { cue: requested, media: makeMedia(assetUrl(`music.${requested}`)), fade: 0 };
+      const record = {
+        cue: requested,
+        media: makeMedia(assetUrl(`music.${requested === "combat" ? "fernwood" : requested}`)),
+        fade: 0,
+      };
       music = record;
       record.media.loop = true;
       record.media.preload = "auto";

@@ -41,7 +41,7 @@ for (const width of [1280, 1920]) {
       s.phase = "teamSelection";
       s.battle = null;
       s.encounter = 3;
-      s.expedition = { biome: 0, step: 3, pack: 0 };
+      s.expedition = { pack: 0 };
       s.team[0]!.health = 0;
       s.team[1]!.health = 7;
     });
@@ -52,8 +52,7 @@ for (const width of [1280, 1920]) {
     await page.getByRole("button", { name: "Rest", exact: true }).click();
     await expect(page.locator(".app")).toHaveAttribute("data-save-status", "saved");
     await expect(page.getByRole("button", { name: "Visit Campfire", exact: true })).toHaveCount(1);
-    await page.getByRole("button", { name: "Inspect Boss", exact: true }).click();
-    await page.getByRole("button", { name: "Begin battle", exact: true }).click();
+    await page.getByRole("button", { name: "Boss", exact: true }).click();
     await expect(page.locator(".app")).toHaveAttribute("data-save-status", "saved");
     const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!) as GameState);
     expect(saved.team.map((creature) => creature.health)).toEqual([10, 14, 26]);

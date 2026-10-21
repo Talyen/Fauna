@@ -1,22 +1,20 @@
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
-import { BIOMES } from "../../src/game/encounters";
+import { COMBAT_PACKS } from "../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { accept, run, winBattle } from "./helpers";
 
 describe("recruiting creature copies", () => {
   it("offers exactly the three defeated enemies, including repeated species and roster members", () => {
-    for (const biome of BIOMES) for (const pack of biome.combat) expect(pack).toHaveLength(3);
+    for (const pack of COMBAT_PACKS) expect(pack).toHaveLength(3);
     const started = accept(accept(createGame(7), { type: "draft", species: "stormfin" }), { type: "start" });
     const battle = accept(
       produce(started, (d) => {
         d.encounter = 4;
         d.journey = null;
         d.expedition = {
-          biome: 1,
-          step: 0,
-          pack: 1,
+          pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "stormfin" && pack[1] === "stormfin"),
         };
       }),
       { type: "beginBattle" },

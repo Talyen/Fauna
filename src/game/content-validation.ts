@@ -1,12 +1,13 @@
 import { CARDS, SPECIES, INITIAL_SPECIES, ENCOUNTERS } from "./content";
-import { BIOMES } from "./encounters";
+import { BOSSES, COMBAT_PACKS, JOURNEY_LENGTH } from "./encounters";
 import { BOONS, TALENTS, TALENT_EFFECTS } from "./progression";
 import { DAMAGE_TYPES, EFFECT_KEYWORDS, PROGRESSION_KEYWORDS, definitionKeywords } from "./keywords";
 
 export const contentCatalog = {
   cards: CARDS,
   species: SPECIES,
-  biomes: BIOMES,
+  bosses: BOSSES,
+  combatPacks: COMBAT_PACKS,
   boons: BOONS,
   talents: TALENTS,
 };
@@ -20,7 +21,7 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
   const issues: ContentIssue[] = [];
   const error = (id: string, field: string, message: string) =>
     issues.push({ severity: "error", id, field, message });
-  for (const [field, entries] of Object.entries(catalog).filter(([key]) => key !== "biomes")) {
+  for (const [field, entries] of Object.entries(catalog).filter(([key]) => key !== "combatPacks")) {
     const ids = new Set<string>();
     for (const entry of entries as readonly { id: string }[]) {
       if (!/^[a-z][a-zA-Z0-9.-]*$/.test(entry.id) || ids.has(entry.id))
@@ -64,11 +65,28 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
         error(card.id, "keywords", "Invalid progression classification.");
     }
   }
-  for (const biome of catalog.biomes) {
-    if (!biome.combat.length) error(biome.name, "combat", "Biome has no combat packs.");
-    for (const pack of [...biome.combat, biome.boss])
-      if (pack.length < 1 || pack.length > 3 || pack.some((id) => !species.has(id)))
-        error(biome.name, "packs", "Invalid encounter pack.");
+  if (!catalog.combatPacks.length) error("combat", "packs", "No combat packs.");
+  for (const pack of [...catalog.combatPacks, ...catalog.bosses.map((boss) => boss.pack)])
+    if (pack.length < 1 || pack.length > 3 || pack.some((id) => !species.has(id)))
+      error("encounters", "packs", "Invalid encounter pack.");
+  const encounters = new Set<number>();
+  for (const boss of catalog.bosses) {
+    if (
+      !Number.isInteger(boss.encounter) ||
+      boss.encounter < 0 ||
+      boss.encounter >= JOURNEY_LENGTH ||
+      encounters.has(boss.encounter)
+    )
+      error(boss.id, "encounter", "Invalid or repeated boss encounter.");
+    encounters.add(boss.encounter);
+    if (
+      !boss.name.trim() ||
+      !Number.isSafeInteger(boss.health) ||
+      boss.health < 1 ||
+      !Number.isSafeInteger(boss.damage) ||
+      boss.damage < 0
+    )
+      error(boss.id, "stats", "Invalid boss name or stats.");
   }
   for (const encounter of ENCOUNTERS)
     for (const enemy of encounter.enemies) {

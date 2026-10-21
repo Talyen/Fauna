@@ -41,7 +41,7 @@ Reference: `Alchemy: scripts/agent-browser.mjs`, `Alchemy: scripts/lib/agent-bro
 
 Expand the existing `validateContent()` contract in `src/game/save.ts` into a pure, structured validator with a compact command-line report. Keep save decoding separate from authored-content checks while preserving existing startup validation. Avoid introducing a second definition of valid content.
 
-Validate species/card ownership, exactly three distinct cards per species, unique and known IDs, finite supported values and costs, recognized effects and keywords, encounter packs, location/biome references, boon and talent references, row prerequisites, and consistent keyword classification. Validate displayed effect amounts and descriptions where structured definitions permit it; use focused outcome tests for handwritten passive and talent descriptions. Do not claim arbitrary prose is proven correct by string matching.
+Validate species/card ownership, exactly three distinct cards per species, unique and known IDs, finite supported values and costs, recognized effects and keywords, encounter packs, boss positions, boon and talent references, row prerequisites, and consistent keyword classification. Validate displayed effect amounts and descriptions where structured definitions permit it; use focused outcome tests for handwritten passive and talent descriptions. Do not claim arbitrary prose is proven correct by string matching.
 
 Add filesystem checks at the tooling boundary for registered artwork/media, required aspect ratios, and prepared manifests. Distinguish errors from advisory tuning warnings. Reports identify the content ID, field, and reason, with JSON for automation and concise text for development. CI runs comprehensive authored-content checks; retain the bounded default local gate.
 
@@ -94,13 +94,13 @@ Reference: `Alchemy: src/lib/game-data/talents/progression.ts` and `Alchemy: Doc
 
 ## 6 Collection discovery
 
-Separate permanent knowledge from starter eligibility. Proposed behavior: initially available starter species are known; committing Begin battle discovers the exact encountered enemy species and their collectible kits; accepted recruitment records that the species has been recruited. Inspecting or canceling a location does not discover it. Recruitment during a journey does not independently unlock that species as a future starter. Existing Moonhart victory unlocking remains intact.
+Separate permanent knowledge from starter eligibility. Proposed behavior: initially available starter species are known; committing Combat or Boss discovers the exact encountered enemy species and their collectible kits; accepted recruitment records that the species has been recruited. Viewing the encounter screen does not discover enemies. Recruitment during a journey does not independently unlock that species as a future starter. Existing Moonhart victory unlocking remains intact.
 
 Record discovery atomically in gameplay commands, retain it after defeat or abandonment, and validate it in the current save contract. Do not infer historical encounters from currency, wins, or the current roster. If new fields require a save-version change, update all current-format fixtures and reject obsolete development saves.
 
 Keep Collection focused on creatures and their three-card kits. Show concise Encountered, Recruited, and Starter states where useful; keep unknown entries visually locked without exposing undiscovered details. Reuse existing inspection and fixed ArtCard dimensions. Add a simple All/Known/Unknown filter using registered primitives; introduce pagination only when content growth needs it. Keep filter state transient and preserve focus when returning from inspection or the menu.
 
-Acceptance: browsing never mutates progress; an uncommitted destination grants no discovery; an accepted encounter does; duplicate species do not duplicate permanent records; discovery survives loss, return home, and save/resume. Rendered review covers locked entries, filters, empty states, enlarged text, and keyboard/controller focus return.
+Acceptance: browsing never mutates progress; the encounter screen grants no discovery; an accepted encounter does; duplicate species do not duplicate permanent records; discovery survives loss, return home, and save/resume. Rendered review covers locked entries, filters, empty states, enlarged text, and keyboard/controller focus return.
 
 Reference: `Alchemy: src/features/alchemy/meta/screens/collection-screen.tsx` and its collection helpers. Discovery timing and the exact labels above are proposed implementation defaults, not existing Fauna behavior.
 
@@ -120,7 +120,7 @@ Reference: `Alchemy: Docs/WORKFLOWS-ASSETS.md`, `Alchemy: scripts/assets.mjs`, a
 
 ## 8 Audio and volume
 
-Replace synthesized prototype tones with approved prepared recordings while retaining Fauna's committed-event cue selection. Add curated menu/biome/boss music where suitable approved media exists. Use one semantic playback facade; UI and game code do not own media elements. Gameplay, progression, input acceptance, and save ordering must remain independent of playback and animation.
+Replace synthesized prototype tones with approved prepared recordings while retaining Fauna's committed-event cue selection. Add curated menu/combat/boss music where suitable approved media exists. Use one semantic playback facade; UI and game code do not own media elements. Gameplay, progression, input acceptance, and save ordering must remain independent of playback and animation.
 
 Map damage types, Healing, Block/absorption, rejected actions, knockout, victory/defeat, recruitment, talent purchase, and other supported actions to an explicit cue or intentional silence. Preserve one focal cue per resolved action; separate music and limited outcome stingers must not cause repeated playback on rerender, inspection, load, or results reopening. Keep essential outcomes visible while muted.
 

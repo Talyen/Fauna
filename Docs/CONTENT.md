@@ -1,6 +1,6 @@
 # Content and artwork
 
-`src/game/encounters.ts` owns biome progression, enemy packs, and initial encounter scaling. `src/game/content.ts` retains the stable legacy encounters and owns the species roster, card definitions, displayed effect descriptions, and encounter templates. Each species contributes exactly three unique card definitions. Content validation runs at startup and in tests. Keep IDs stable once saves are supported.
+`src/game/encounters.ts` owns encounter progression, enemy packs, and initial encounter scaling. `src/game/content.ts` retains the stable legacy encounters and owns the species roster, card definitions, displayed effect descriptions, and encounter templates. Each species contributes exactly three unique card definitions. Content validation runs at startup and in tests. Keep IDs stable once saves are supported.
 
 The first five species begin unlocked. Moonhart unlocks after the first journey victory. Each deployed creature contributes three cards, so the starting three-card deck grows to nine cards with a full lineup; recruitment adds defeated species to the five-slot roster. Only the deployed lineup of up to three creatures contributes cards, and free combat swaps replace cards in their existing zones. Starting lineups are remembered and optionally editable from the menu between battles. Health and knockouts persist between battles; Campfire appears beside the encounter whenever any roster creature, including a reserve or knockout, is missing at least 30% of maximum Health. Rest restores 30% maximum Health to the whole roster, capped at full Health, and returns to the same combat encounter without advancing the encounter or changing RNG. It remains available while the threshold is met. There is no positioning or elemental chart.
 
@@ -55,7 +55,7 @@ Preparation reads and validates all selected sources before publication. Output 
 
 Runtime artwork/audio resolves stable IDs through the generated lookup. Ordinary development and production builds run output-only checks; they never regenerate media or need access to the library. Source checks are required after media authoring. Header, geometry and hash checks do not establish audio decoding, visual suitability, source-license clearance or listening acceptance. Retain upstream source-license metadata; the manifest records the shared-library selection and provenance, not a new license grant.
 
-Recorded sounds cover typed combat outcomes, healing, defense, rejected actions, knockouts, recruitment, talents and battle outcomes. Menu, biome and boss tracks are selected independently of Alchemy's routes. Runtime volume uses Master × Music or Master × Sound effects, with background mute and a convenient Sound toggle. Preferences are independent of saves. Audio follows committed commands, respects quiet previews, and never controls gameplay, saves or command admission. Current selections still require Fauna listening/mix review. See [Sound desk](DEVELOPMENT_TOOLS.md#prepared-media-and-sound-desk).
+Recorded sounds cover typed combat outcomes, healing, defense, rejected actions, knockouts, recruitment, talents and battle outcomes. Menu, combat and boss tracks are selected independently of Alchemy's routes. Runtime volume uses Master × Music or Master × Sound effects, with background mute and a convenient Sound toggle. Preferences are independent of saves. Audio follows committed commands, respects quiet previews, and never controls gameplay, saves or command admission. Current selections still require Fauna listening/mix review. See [Sound desk](DEVELOPMENT_TOOLS.md#prepared-media-and-sound-desk).
 
 ## Boon selections
 
@@ -69,4 +69,6 @@ Merchant prices, affordability and Campfire eligibility/recovery are owned by `s
 
 ## Encounter placeholders
 
-Combat and Boss use original blank 4:3 SVG placeholders in `public/art/encounters/`, registered as `encounter.combat` and `encounter.boss`. Labels remain outside the artwork. Enemy packs and biome progression live in `src/game/encounters.ts`; named destination selection is removed. The existing location assets remain available for support artwork.
+Combat and Boss use original blank 4:3 SVG placeholders in `public/art/encounters/`, registered as `encounter.combat` and `encounter.boss`. Labels remain outside the artwork. Enemy packs and encounter progression live in `src/game/encounters.ts`; named destination selection is removed. The existing location assets remain available for support artwork.
+
+Journeys use one shared combat enemy pool, with bosses at encounters 4 and 8. There are no biome divisions. Combat music reuses the prepared track registered as `music.fernwood`; that source ID does not select progression. Activating Combat or Boss starts the saved battle directly, without showing enemies beforehand.

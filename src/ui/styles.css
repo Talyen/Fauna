@@ -1307,8 +1307,7 @@ strong {
 .destination-option .creature-card {
   width: 100%;
 }
-.destination-option h2,
-.destination-enemies h2 {
+.destination-option h2 {
   font-size: var(--text-name);
   font-weight: 600;
 }
@@ -1317,33 +1316,11 @@ strong {
   justify-content: flex-end;
   gap: var(--space-3);
 }
-.inspection.destination-inspection {
-  width: min(960px, calc(100vw - var(--space-12)));
-}
-.destination-enemies {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-4);
-  justify-content: center;
-}
-.destination-enemies > div {
-  flex: 0 0 var(--art-landscape-width);
-  min-width: 0;
-  max-width: var(--art-landscape-width);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-.destination-enemies .creature-card {
-  width: 100%;
-}
 @media (max-width: 640px) {
-  .destination-grid,
-  .destination-enemies {
+  .destination-grid {
     flex-wrap: wrap;
   }
-  .destination-option,
-  .destination-enemies > div {
+  .destination-option {
     flex-basis: 100%;
   }
 }
@@ -1355,7 +1332,6 @@ strong {
 .destination-heading,
 .destination-option h2,
 .destination-option p,
-.destination-enemies h2,
 .journey-results-heading,
 .dialog-content > h2,
 .dialog-content > p,
