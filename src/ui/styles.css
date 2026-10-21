@@ -158,10 +158,10 @@ strong {
 }
 /* Radix shifts along the anchor's width. Keep tall menus inside its vertical collision boundary too. */
 .menu-panel[data-side="bottom"] {
-  translate: 0 min(0px, calc(var(--radix-popover-content-available-height) - 100%));
+  translate: 0 min(0px, calc(var(--radix-popover-content-available-height) - 100% - var(--space-1)));
 }
 .menu-panel[data-side="top"] {
-  translate: 0 max(0px, calc(100% - var(--radix-popover-content-available-height)));
+  translate: 0 max(0px, calc(100% - var(--radix-popover-content-available-height) + var(--space-1)));
 }
 .pause-menu-choices {
   display: flex;

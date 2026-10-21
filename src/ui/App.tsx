@@ -809,14 +809,18 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                 event.preventDefault();
                 if (menuGeneration.current !== menuInstance || modal || inspection) return;
                 if (route === "play") returnFocus(pauseOpener.current);
-                else if (route === "settings")
+                else {
+                  // A page may already have focused a deeper destination during the exit fade.
+                  const focused = document.activeElement as HTMLElement | null;
+                  if (focused !== document.body && isAvailableFocusTarget(focused)) return;
                   returnFocus(
                     root.current?.querySelector<HTMLElement>(
-                      '.settings-screen [role="tab"][aria-selected="true"]',
+                      route === "settings"
+                        ? '.settings-screen [role="tab"][aria-selected="true"]'
+                        : "main button:not(:disabled)",
                     ) ?? null,
                   );
-                else
-                  returnFocus(root.current?.querySelector<HTMLElement>("main button:not(:disabled)") ?? null);
+                }
               }}
             >
               <nav className="pause-menu-choices" aria-label="Pause menu">
