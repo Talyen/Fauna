@@ -370,10 +370,11 @@ it("keeps unavailable cards inspectable and denies activation without explanator
   expect(inspect).toHaveBeenCalledOnce();
 });
 
-it("keeps creature hover details compact while retaining health, effects and the passive", async () => {
+it("omits health from creature hover details while retaining block and the passive", async () => {
   const { CreatureDetails } = await import("../../src/ui/card-details");
-  render(<CreatureDetails kind="mossback" health={17} block={4} />);
-  expect(screen.getByText("17/32 health · 4 block")).toBeTruthy();
+  render(<CreatureDetails kind="mossback" block={4} />);
+  expect(screen.getByText("4 block")).toBeTruthy();
+  expect(screen.queryByText(/health/i)).toBeNull();
   expect(
     screen.getByText(
       (_, element) => element?.tagName === "P" && element.textContent === "Guard cards grant 2 extra block.",

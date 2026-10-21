@@ -130,8 +130,6 @@ export function CreatureCard({
                     progression={progression}
                     kind={kind}
                     name={name}
-                    health={health}
-                    maxHealth={maxHealth}
                     block={block}
                     speciesKit={speciesKit}
                     combat={combat}

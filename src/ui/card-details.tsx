@@ -58,8 +58,6 @@ export function CreatureDetails({
   progression,
   kind,
   name,
-  health,
-  maxHealth,
   block = 0,
   speciesKit = false,
   combat,
@@ -67,8 +65,6 @@ export function CreatureDetails({
   kind: SpeciesId;
   progression?: Pick<GameState, "discovery">;
   name?: string;
-  health?: number;
-  maxHealth?: number;
   block?: number;
   speciesKit?: boolean;
   combat?: import("../game/types").CombatState;
@@ -77,9 +73,7 @@ export function CreatureDetails({
   return (
     <div className="card-details">
       <strong>{name ?? info.name}</strong>
-      <p>
-        {health ?? info.health}/{maxHealth ?? info.health} health{block ? ` · ${block} block` : ""}
-      </p>
+      {block ? <p>{block} block</p> : null}
       <CombatStatus combat={combat} details />
       {!name || speciesKit ? (
         <>
