@@ -5,7 +5,8 @@ import { produce } from "immer";
 import { encounterSource } from "../../src/game/encounters";
 import { createGame } from "../../src/game/engine";
 import { CARDS, definition, species } from "../../src/game/content";
-import { BOONS, TALENTS } from "../../src/game/progression";
+import { assetUrl } from "../../src/ui/assets";
+import { BOONS, TALENTS, KEYWORDS } from "../../src/game/progression";
 import type { Command, GameState } from "../../src/game/types";
 import { recruitChoice, accept, policy, winBattle, victoryReady, run, bossReward } from "../unit/helpers";
 const key = "fauna.save.v1";
@@ -53,6 +54,11 @@ async function step(page: Page, activate: (el: Locator) => Promise<void> = (el) 
       }
       await activate(replacement);
     }
+  } else if (c.type === "swap") {
+    await activate(page.getByRole("button", { name: "Swap", exact: true }));
+    const dialog = page.getByRole("dialog");
+    await activate(dialog.locator(`[data-actor-id="${c.activeId}"] .creature-card`));
+    await activate(dialog.locator(`[data-actor-id="${c.reserve}"] .creature-card`));
   } else if (c.type === "chooseBoon") {
     await expect(page.getByRole("button", { name: /^Recruit / })).toHaveCount(0);
     await activate(
@@ -291,7 +297,7 @@ test("main menu, draft and pre-battle deck lead into the first battle", async ({
   await page.getByRole("dialog").locator(".action-card").first().click({ button: "right" });
   await expect(page.locator(".inspection.single-card")).toBeVisible();
   await page.locator(".inspection.single-card .action-card").hover();
-  await expect(page.getByRole("tooltip")).toContainText(definition(`${chosen}-attack`).name);
+  await expect(page.getByRole("tooltip")).toContainText(CARDS.find((card) => card.species === chosen)!.name);
   await page.keyboard.press("Escape");
   await page.keyboard.press("Escape");
   await destination.click();
@@ -498,7 +504,7 @@ test("battle targeting uses remembered targets, forecasts bars, and has no targe
   await page.keyboard.press("Enter");
   await page.keyboard.press("d");
   await expect(page.getByRole("button", { name: "Target Pollenmoth", exact: true })).toBeFocused();
-  await expect(page.locator(".target-preview")).toBeVisible();
+  await expect(page.locator(".enemy-row .target-preview")).toBeVisible();
   await expect(page.locator(".confirm-play")).toHaveCount(0);
   expect((await state(page)).revision).toBe(before.revision);
   await page.keyboard.press("Escape");
@@ -574,7 +580,7 @@ for (const [width, height] of [
       await page.reload();
       await page.getByRole("button", { name: "Talents", exact: true }).click();
       const cards = page.locator(".talent-overview .action-card");
-      await expect(cards).toHaveCount(14);
+      await expect(cards).toHaveCount(KEYWORDS.length);
       await expect(
         page.getByRole("button", { name: "Burn talents", exact: true }),
       ).toHaveAccessibleDescription("3 points available");
@@ -624,7 +630,7 @@ for (const [width, height] of [
         captionsVisible: true,
         readableCaptions: true,
         portraitSizes: true,
-        rows: [5, 5, 4],
+        rows: [5, 5, 5],
         compactColumns: true,
       });
       const artworkFit = await page.locator(".talent-overview-viewport").evaluate((viewport) => {
@@ -658,7 +664,7 @@ for (const [width, height] of [
 test("Collection hides uncollected tooltips and opens readable creature pages", async ({ page }) => {
   await seed(page, run());
   await page.getByRole("button", { name: "Collection", exact: true }).click();
-  await expect(page.getByRole("navigation", { name: "Collection pages" })).toHaveCount(0);
+  await expect(page.getByRole("navigation", { name: "Collection pages" })).toHaveCount(1);
   const rows = await page.locator(".collection-grid .creature-card").evaluateAll((cards) => {
     const counts = new Map<number, number>();
     for (const card of cards) {
@@ -667,7 +673,7 @@ test("Collection hides uncollected tooltips and opens readable creature pages", 
     }
     return [...counts.values()];
   });
-  expect(rows).toEqual([4, 2]);
+  expect(rows).toEqual([4, 4]);
   const locked = page.getByRole("img", { name: "Locked species" }).first();
   await expect(locked).toBeVisible();
   const artwork = locked.locator("img");
@@ -1366,9 +1372,11 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     expect(swapped.battle!.discard).toEqual(fixture.battle!.discard);
     expect(swapped.lineup).toEqual(fixture.lineup);
     expect(swapped.reserves.find((c) => c.species === "emberback")!.health).toBe(9);
+    const handCard = swapped.cards.find((card) => card.id === swapped.battle!.hand[0])!;
+    const handDefinition = definition(handCard.definitionId);
     await expect(page.locator(".app:not([inert]) .hand .action-card img")).toHaveAttribute(
       "src",
-      /\/art\/pollenmoth-action\.svg$/,
+      assetUrl(handDefinition.artwork ?? `action.${handDefinition.species}`),
     );
     await page.reload();
     await resume(page);
