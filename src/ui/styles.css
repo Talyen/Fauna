@@ -146,15 +146,10 @@ strong {
 }
 .dialog-content.menu-panel {
   width: min(
-    calc(2 * var(--main-menu-button-width) + var(--screen-item-gap) + 2 * var(--screen-section-gap)),
+    calc(2 * var(--main-menu-button-width) + var(--screen-item-gap) + 2 * var(--screen-section-gap) + 2px),
     calc(100vw - var(--space-12))
   );
   padding: var(--space-12) var(--screen-section-gap);
-  border: 0;
-  background: var(--background);
-}
-.menu-icon-journey {
-  color: var(--menu-icon-journey);
 }
 .menu-icon-results {
   color: var(--menu-icon-results);
@@ -207,6 +202,8 @@ strong {
   gap: var(--screen-item-gap);
 }
 .menu-choices > button {
+  justify-content: center;
+  text-align: center;
   height: auto;
   min-height: var(--control-height);
   white-space: normal;

@@ -90,7 +90,7 @@ export const TooltipContent = React.forwardRef<
       collisionPadding={16}
       aria-hidden={React.useContext(TooltipInteraction)?.open === false || undefined}
       className={cn(
-        "game-tooltip z-50 border border-border bg-card text-left text-base text-card-foreground",
+        "game-tooltip z-50 border border-border bg-popover text-left text-base text-popover-foreground",
         className,
       )}
       {...props}

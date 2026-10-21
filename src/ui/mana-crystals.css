@@ -18,14 +18,14 @@
 .mana-socket {
   position: absolute;
   inset: -7%;
-  background: var(--popover);
+  background: var(--card);
   clip-path: polygon(26% 0, 74% 0, 100% 26%, 100% 74%, 74% 100%, 26% 100%, 0 74%, 0 26%);
 }
 .mana-socket::after {
   content: "";
   position: absolute;
   inset: 4%;
-  background: linear-gradient(var(--popover), var(--accent));
+  background: linear-gradient(var(--card), var(--accent));
   clip-path: inherit;
 }
 .mana-full,

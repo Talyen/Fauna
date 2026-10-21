@@ -7,7 +7,7 @@
   --foreground: #ece6db;
   --card: #141414;
   --card-foreground: var(--foreground);
-  --popover: #0b0b0b;
+  --popover: var(--background);
   --popover-foreground: var(--foreground);
   --primary: #d9b56f;
   --primary-foreground: #141414;
@@ -37,7 +37,7 @@
   --font-number: var(--font-ui);
   --text-rule: var(--text-body);
   --text-name: var(--text-heading);
-  --radius: 20px;
+  --radius: 15px;
   --radius-round: 9999px;
   --border-art: transparent;
   --feedback-shadow: var(--background);
@@ -47,7 +47,7 @@
   --control-height: 44px;
   --compact-control-size: 32px;
   --compact-icon-size: 16px;
-  --main-menu-button-width: 150px;
+  --main-menu-button-width: 180px;
   --settings-screen-width: 800px;
   --boon-dialog-width: 720px;
   --settings-label-basis: 200px;
@@ -86,7 +86,6 @@
   --motion-mana-glint: 650ms;
   --reward-stagger: 75ms;
   --swap-arc-height: 32px;
-  --menu-icon-journey: #14532d;
   --menu-icon-results: #facc15;
   --menu-icon-lineup: #38bdf8;
   --menu-icon-talents: #c084fc;
