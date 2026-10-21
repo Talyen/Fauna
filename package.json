@@ -20,9 +20,9 @@
     "preview": "vite preview --host 127.0.0.1",
     "test:e2e": "playwright test",
     "test:desktop": "node scripts/smoke-desktop.mjs",
-    "package:win": "npm run build && npm run check:bundle && electron-builder --win --x64 --dir --publish never",
+    "package:win": "npm run build && npm run check:bundle && npm run assets:check:bundle && electron-builder --win --x64 --dir --publish never",
     "verify": "node scripts/check.mjs",
-    "verify:full": "npm run check:full && npm run docs:check && npm run content:audit && npm run test:full -- --reporter=default --reporter=json --outputFile.json=reports/vitest.json && npm run build && npm run check:bundle && npm run test:e2e",
+    "verify:full": "npm run check:full && npm run docs:check && npm run content:audit && npm run test:full -- --reporter=default --reporter=json --outputFile.json=reports/vitest.json && npm run build && npm run check:bundle && npm run assets:check:bundle && npm run test:e2e",
     "worktree": "node scripts/worktree.mjs",
     "worktree:cleanup": "node scripts/worktree-cleanup.mjs",
     "docs:check": "node scripts/check-docs.mjs",
@@ -50,7 +50,9 @@
     "balance:findings": "node scripts/balance-findings.mjs",
     "verify:release-version": "node scripts/verify-release.mjs --version-only",
     "verify:release": "node scripts/verify-release.mjs",
-    "generate:patch-notes": "node scripts/generate-patch-notes.mjs"
+    "generate:patch-notes": "node scripts/generate-patch-notes.mjs",
+    "assets:check:bundle": "node scripts/active-assets.mjs",
+    "assets:review": "node scripts/art-review.mjs"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.3.0",
@@ -92,6 +94,7 @@
     "knip": "6.14.2",
     "oxlint": "1.87.0",
     "prettier": "^3.8.3",
+    "sharp": "0.34.5",
     "tailwindcss": "^4.3.0",
     "typescript": "7.0.2",
     "vite": "^8.0.10",
@@ -128,6 +131,7 @@
   "allowScripts": {
     "@swc/core": true,
     "electron": true,
-    "electron-winstaller": true
+    "electron-winstaller": true,
+    "sharp": true
   }
 }

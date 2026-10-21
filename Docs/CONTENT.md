@@ -10,7 +10,7 @@ Every ability, for every creature, has a base cost of exactly **1 Mana**. This a
 
 ## Artwork contracts
 
-- **Creature cards: 4:3 landscape, full bleed.** Production portraits are unchanged PNG selections.
+- **Creature cards: 4:3 landscape, full bleed.** Original production portraits are preserved PNG selections; runtime derivatives use the prepared-media recipe.
 - **Location cards: 4:3 landscape.** Original 800 × 600 SVG placeholders in `public/art/locations/`, with names and encounter labels rendered outside the artwork. `scripts/create-location-placeholders.mjs` rewrites only these placeholders.
 - **Boon cards: 3:4 portrait, matching hand cards.** Boon displays use dedicated portraits in `public/art/boons/`; keep names and effects outside the artwork.
 - **Action cards: 3:4 portrait, full bleed.** Each creature has three dedicated production PNG illustrations.
@@ -47,7 +47,7 @@ Review the draft, ordinary encounters, three-enemy encounter, reward choices, en
 
 ## Prepared assets
 
-`assets/manifest.json` owns stable media IDs, repository/library-relative source selections, copy recipes, image aspect ratios, source provenance and rights notes. Art placeholders remain authoring sources under `public/art/`; selected sound recordings and music come from `~/Documents/Asset Library` or `ASSET_LIBRARY_ROOT`. No preparation command modifies or deletes library originals.
+`assets/manifest.json` owns stable media IDs, repository/library-relative source selections, versioned copy/optimization recipes, image aspect ratios, source provenance and rights notes. Art placeholders remain authoring sources under `public/art/`; selected sound recordings and music come from `~/Documents/Asset Library` or `ASSET_LIBRARY_ROOT`. No preparation command modifies or deletes library originals.
 
 ```sh
 npm run assets:prepare        # Validate sources and publish a complete generation
@@ -55,9 +55,24 @@ npm run assets:check          # Verify selected sources, recipes and output hash
 npm run assets:check:outputs  # Validate committed outputs without the source library
 ```
 
-Preparation reads and validates all selected sources before publication. Output generations live under `public/prepared/<content hash>/`; `src/assets/prepared.json` is the generated lookup and receipt. The pointer changes only after all generation files are installed. Missing sources, corrupt immutable output files, or conversion/recipe failures preserve the prior pointer. Old generations are retained; cleanup is a separate explicit action. Generated files are not edited by hand. Current recipes copy selected SVG/PNG/WebP/WAV/OGG/MP3 bytes without conversion or cropping; richer encoding recipes should be introduced only for a concrete need.
+Preparation reads and validates all selected sources before publication. Each immutable object lives under `public/prepared/objects/<fingerprint>/`; its fingerprint includes source bytes, recipe settings, output format and the encoder toolchain. Each object has a hash receipt; unchanged objects are reused without rewriting or re-encoding. `src/assets/prepared.json` is the complete generated lookup and publication receipt. The pointer changes atomically only after every selected output passes validation. Missing sources, corrupt objects and encoding failures preserve the prior pointer. Original artwork, library files and historical generations are never modified or deleted. Generated files are not edited by hand.
 
-Runtime artwork/audio resolves stable IDs through the generated lookup. Ordinary development and production builds run output-only checks; they never regenerate media or need access to the library. Source checks are required after media authoring. Header, geometry and hash checks do not establish audio decoding, visual suitability, source-license clearance or listening acceptance. Retain upstream source-license metadata; the manifest records the shared-library selection and provenance, not a new license grant.
+### Artwork resolution and quality
+
+The `card-webp` recipe uses lossless WebP and fits PNG artwork within a 960 × 960 pixel box without cropping, stretching or enlargement. This supports a long edge of 480 CSS pixels at 2× device pixel ratio, with headroom over current standard/battle cards, hovered cards, Collection abilities and inspection. Resolution is based on displayed CSS size multiplied by device pixel ratio, not a file's print DPI; see [responsive image sizing](https://web.dev/articles/responsive-images). The central recipe contract lives in [art recipes](../scripts/art-recipes.mjs); changing it invalidates prepared selections and cache keys. Source images smaller than the target retain their native resolution; enlargement cannot restore absent detail. Existing optimized WebP files and scalable SVG artwork use byte-preserving copy recipes. The talents overview has viewport-dependent sizing and retains its existing native WebP sources; preparation does not claim those smaller source files provide 2× detail at arbitrary viewport sizes.
+
+Lossless encoding preserves the resized image's pixels, including alpha, without lossy compression artifacts. Downsampling still changes pixels, so visual review remains required. Raster validation fully decodes sources and outputs, rejects animated/oriented artwork and verifies geometry and hashes. Receipts record source/output byte counts and prepared dimensions.
+
+```sh
+npm run assets:review        # Generate original/prepared comparisons and a contact sheet
+npm run assets:check:bundle  # Verify an existing build's exact active media inventory and budgets
+```
+
+Artwork review writes `reports/art-review/index.html`, a contact sheet of optimized selections and a size summary. Inspect the comparison at 2× display density and use CI's actual hand, creature, Collection and inspection evidence for visual acceptance. This review does not establish in-game rendering quality or physical-device acceptance.
+
+Runtime artwork/audio resolves stable IDs through the generated lookup. Ordinary development and production builds run output-only checks; they never regenerate media or need access to the library. The build disables automatic public-directory copying and emits only the active lookup's files plus its build receipt. Authoring originals, cache receipts and old generations stay out of the shipped renderer. Build validation rejects extra/missing media, changed bytes and unapproved public resources, with a 128 MiB total-media limit and 3 MiB limit per image. JavaScript retains its separate measured budget. Historical outputs can remain available locally without increasing each new build; cleanup is separate and explicit.
+
+Source checks are required after media authoring. Output-only checks verify the recipe contract without requiring the preparing machine's exact native encoder versions; source checks additionally verify selected source bytes. Hash/geometry/decode checks do not establish visual suitability, source-license clearance or listening acceptance. Retain upstream source-license metadata; the manifest records the shared-library selection and provenance, not a new license grant.
 
 Recorded sounds cover typed combat outcomes, healing, defense, rejected actions, knockouts, recruitment, talents and battle outcomes. Menu, combat and boss tracks are selected independently of Alchemy's routes. Runtime volume uses Master × Music or Master × Sound effects, with background mute and a convenient Sound toggle. Preferences are independent of saves. Audio follows committed commands, respects quiet previews, and never controls gameplay, saves or command admission. Current selections still require Fauna listening/mix review. See [Sound desk](DEVELOPMENT_TOOLS.md#prepared-media-and-sound-desk).
 

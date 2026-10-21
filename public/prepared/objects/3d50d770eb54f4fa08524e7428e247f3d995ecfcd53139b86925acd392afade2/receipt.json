@@ -1,0 +1,10 @@
+{
+  "url": "./prepared/objects/3d50d770eb54f4fa08524e7428e247f3d995ecfcd53139b86925acd392afade2/asset.ogg",
+  "sourceHash": "267a197d97d33a4acb09b974f908d82234cd548a369eb218f169238900586f0a",
+  "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+  "recipe": "copy",
+  "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+  "outputHash": "267a197d97d33a4acb09b974f908d82234cd548a369eb218f169238900586f0a",
+  "sourceBytes": 25470,
+  "outputBytes": 25470
+}

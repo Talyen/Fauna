@@ -1,542 +1,1323 @@
 {
-  "version": 1,
-  "manifestHash": "c4ec9aa3b232ec9746efa8584509ef451e378a4c0a3a2213bc6820ca3411c4a3",
-  "generation": "2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3",
+  "version": 2,
+  "manifestHash": "b324c770ea67927f7fb1c59d015523dbda2003554e3712e9163e21886aed2be0",
+  "generation": "b8765771127114477633db24af389c67f5a6c96a300fcafa21f7f8e95d7c8ddb",
   "records": {
     "keyword.block": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/keywords/block.webp",
+      "url": "./prepared/objects/735558c0801082a6bfbeabec58de75ff3b1ad59643b686fac19e7a169691902e/asset.webp",
       "sourceHash": "a44e71309db81d75a22daee623cd3ffc5f28e358180ae9d1b1d62dda99927dbd",
-      "outputHash": "a44e71309db81d75a22daee623cd3ffc5f28e358180ae9d1b1d62dda99927dbd"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "a44e71309db81d75a22daee623cd3ffc5f28e358180ae9d1b1d62dda99927dbd",
+      "sourceBytes": 15932,
+      "outputBytes": 15932,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "keyword.fire": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/keywords/fire.webp",
+      "url": "./prepared/objects/8d0b9c1bcebae627247bc7baf195cd8708c20e42197b1dc18937dfbd5915c64d/asset.webp",
       "sourceHash": "cb9698ca8f681f473505cc59e86cb48a2878527821f1060aaee4962fc09b1161",
-      "outputHash": "cb9698ca8f681f473505cc59e86cb48a2878527821f1060aaee4962fc09b1161"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "cb9698ca8f681f473505cc59e86cb48a2878527821f1060aaee4962fc09b1161",
+      "sourceBytes": 18434,
+      "outputBytes": 18434,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "keyword.heal": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/keywords/heal.webp",
+      "url": "./prepared/objects/b71f5f667e25200a8daa84c62517c49e99196878544183607ba292f026a42331/asset.webp",
       "sourceHash": "79a101fa4a4db0705630ce54b59eb42ee0563bbb5e09a4c76bff3501aa881bc0",
-      "outputHash": "79a101fa4a4db0705630ce54b59eb42ee0563bbb5e09a4c76bff3501aa881bc0"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "79a101fa4a4db0705630ce54b59eb42ee0563bbb5e09a4c76bff3501aa881bc0",
+      "sourceBytes": 12046,
+      "outputBytes": 12046,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "keyword.ice": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/keywords/ice.webp",
+      "url": "./prepared/objects/d699113ec7ab99554338d5bf3beb960c539632b63366c889facf2a57df58d611/asset.webp",
       "sourceHash": "73429df482a0a4cb4de9b1ecfb59df27283af83703edda4a7d1e941396f32999",
-      "outputHash": "73429df482a0a4cb4de9b1ecfb59df27283af83703edda4a7d1e941396f32999"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "73429df482a0a4cb4de9b1ecfb59df27283af83703edda4a7d1e941396f32999",
+      "sourceBytes": 18206,
+      "outputBytes": 18206,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "keyword.light": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/keywords/light.webp",
+      "url": "./prepared/objects/f7e5f3d58031524c13a071cbd24df06c26f7fc201e4b8f9d822618a9e81e7490/asset.webp",
       "sourceHash": "f569c98fd404973c5dce3021496955395d2ac433a6537b3dddafa971bc68e4b2",
-      "outputHash": "f569c98fd404973c5dce3021496955395d2ac433a6537b3dddafa971bc68e4b2"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "f569c98fd404973c5dce3021496955395d2ac433a6537b3dddafa971bc68e4b2",
+      "sourceBytes": 20000,
+      "outputBytes": 20000,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "keyword.lightning": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/keywords/lightning.webp",
+      "url": "./prepared/objects/e5753b75f9c0abc594d297a9bb8e5961aa343b7a51296bcd454d70e82ce16d8a/asset.webp",
       "sourceHash": "4701b47a3c8295e443a79120516e36d46d2c40ca855389df1a13f51fc7610e93",
-      "outputHash": "4701b47a3c8295e443a79120516e36d46d2c40ca855389df1a13f51fc7610e93"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "4701b47a3c8295e443a79120516e36d46d2c40ca855389df1a13f51fc7610e93",
+      "sourceBytes": 17830,
+      "outputBytes": 17830,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "keyword.nature": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/keywords/nature.webp",
+      "url": "./prepared/objects/c9af74de5badbbe452540e3ac4da9d73408763e97bae4b748662da1c1c266262/asset.webp",
       "sourceHash": "cae9eaf177c637da9b05bea9bb088e40cb273a0b4618e95cef10748765d26955",
-      "outputHash": "cae9eaf177c637da9b05bea9bb088e40cb273a0b4618e95cef10748765d26955"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "cae9eaf177c637da9b05bea9bb088e40cb273a0b4618e95cef10748765d26955",
+      "sourceBytes": 14324,
+      "outputBytes": 14324,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "keyword.physical": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/keywords/physical.webp",
+      "url": "./prepared/objects/0082e1911768d267f74f96bde0967e0fa3e37b6dd52cb1f0a2e4f5610623f313/asset.webp",
       "sourceHash": "30ea537b7e963d845e9600a0de62b7effb5ad7a0d0f3045dc3eac24a0a778151",
-      "outputHash": "30ea537b7e963d845e9600a0de62b7effb5ad7a0d0f3045dc3eac24a0a778151"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "30ea537b7e963d845e9600a0de62b7effb5ad7a0d0f3045dc3eac24a0a778151",
+      "sourceBytes": 13148,
+      "outputBytes": 13148,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "keyword.poison": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/keywords/poison.webp",
+      "url": "./prepared/objects/327c9bf09bbadbcc15c25754c9466063952073bee087151ad48d4c236abdb3eb/asset.webp",
       "sourceHash": "4c6d38d4178b5f781d513568655bae3ea8ca8583cd702498e3f8ccb1e076d127",
-      "outputHash": "4c6d38d4178b5f781d513568655bae3ea8ca8583cd702498e3f8ccb1e076d127"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "4c6d38d4178b5f781d513568655bae3ea8ca8583cd702498e3f8ccb1e076d127",
+      "sourceBytes": 25658,
+      "outputBytes": 25658,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "location.briar-hollow": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/locations/briar-hollow.svg",
+      "url": "./prepared/objects/80e5c290cab430e3c41f0c9088d9ba8e53c1f874247429001004f6f848ee25d9/asset.svg",
       "sourceHash": "5d0a8d581f93714f7c5df51ea24382d0ce81c3d604d90d174f58818b29cc35b9",
-      "outputHash": "5d0a8d581f93714f7c5df51ea24382d0ce81c3d604d90d174f58818b29cc35b9"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "5d0a8d581f93714f7c5df51ea24382d0ce81c3d604d90d174f58818b29cc35b9",
+      "sourceBytes": 4099,
+      "outputBytes": 4099,
+      "width": 800,
+      "height": 600
     },
     "location.ember-grove": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/locations/ember-grove.svg",
+      "url": "./prepared/objects/178a28d51371c9d38c5a7005fbfbaab5b10236d44f3bf811e4856f8b90067396/asset.svg",
       "sourceHash": "c1dad85c6c1e2c0f69a25b256ab0ec09858e63624631e4f3d83edc5b9c1d9f6b",
-      "outputHash": "c1dad85c6c1e2c0f69a25b256ab0ec09858e63624631e4f3d83edc5b9c1d9f6b"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "c1dad85c6c1e2c0f69a25b256ab0ec09858e63624631e4f3d83edc5b9c1d9f6b",
+      "sourceBytes": 4012,
+      "outputBytes": 4012,
+      "width": 800,
+      "height": 600
     },
     "location.firefly-pool": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/locations/firefly-pool.svg",
+      "url": "./prepared/objects/9f15a723b443a2c3c8443ecc85145c70950439b4d749601764137237da365fab/asset.svg",
       "sourceHash": "1c96c737e42aa1144e8f3ea3b3a5881caf98098389398249d0ffd149c190fa8f",
-      "outputHash": "1c96c737e42aa1144e8f3ea3b3a5881caf98098389398249d0ffd149c190fa8f"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "1c96c737e42aa1144e8f3ea3b3a5881caf98098389398249d0ffd149c190fa8f",
+      "sourceBytes": 3956,
+      "outputBytes": 3956,
+      "width": 800,
+      "height": 600
     },
     "location.flooded-grove": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/locations/flooded-grove.svg",
+      "url": "./prepared/objects/453c9a9676d3eb7b6f7968f62e3f60942298e3b74cf7799be134c2d56ed6f0ee/asset.svg",
       "sourceHash": "ab42f9e0b7ee0f07a424dc4246d83b29cb9f4c98757f23b89c0d0069a1b1cb01",
-      "outputHash": "ab42f9e0b7ee0f07a424dc4246d83b29cb9f4c98757f23b89c0d0069a1b1cb01"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "ab42f9e0b7ee0f07a424dc4246d83b29cb9f4c98757f23b89c0d0069a1b1cb01",
+      "sourceBytes": 3956,
+      "outputBytes": 3956,
+      "width": 800,
+      "height": 600
     },
     "location.hollow-heart": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/locations/hollow-heart.svg",
+      "url": "./prepared/objects/dd47c7452618af03ae92250b4776cae01f2495da29436606ba0abfbf39fc06ac/asset.svg",
       "sourceHash": "002ff0c2510c471c4d69beff63e7e284eddb47076f4e0e26a38fa32ea4c56e33",
-      "outputHash": "002ff0c2510c471c4d69beff63e7e284eddb47076f4e0e26a38fa32ea4c56e33"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "002ff0c2510c471c4d69beff63e7e284eddb47076f4e0e26a38fa32ea4c56e33",
+      "sourceBytes": 4165,
+      "outputBytes": 4165,
+      "width": 800,
+      "height": 600
     },
     "location.mist-island": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/locations/mist-island.svg",
+      "url": "./prepared/objects/6e7f823bb997b6f440dbea43db56050767edfb0b4f6ee9ab8acea592c3e6d1bf/asset.svg",
       "sourceHash": "7b8f5b21a7a7285758befad1605bf8d3c6ce4bbd727418985470efe771e9d799",
-      "outputHash": "7b8f5b21a7a7285758befad1605bf8d3c6ce4bbd727418985470efe771e9d799"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "7b8f5b21a7a7285758befad1605bf8d3c6ce4bbd727418985470efe771e9d799",
+      "sourceBytes": 4110,
+      "outputBytes": 4110,
+      "width": 800,
+      "height": 600
     },
     "location.moonwell": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/locations/moonwell.svg",
+      "url": "./prepared/objects/c46509630d11982be7f98bc6d43ada9800eaa9c5f9a60ea43cd50679b2f71695/asset.svg",
       "sourceHash": "07e24a8aea937900a2863aa43d9547b9617519fab2cef49e04f3cf679a92d8c8",
-      "outputHash": "07e24a8aea937900a2863aa43d9547b9617519fab2cef49e04f3cf679a92d8c8"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "07e24a8aea937900a2863aa43d9547b9617519fab2cef49e04f3cf679a92d8c8",
+      "sourceBytes": 4163,
+      "outputBytes": 4163,
+      "width": 800,
+      "height": 600
     },
     "location.mossy-stream": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/locations/mossy-stream.svg",
+      "url": "./prepared/objects/8b873ab6cb65167609dfd25444f3ace3caa66b2bf01c780c92de79de7618dbc1/asset.svg",
       "sourceHash": "412dddec0fd9fc889fd4296497cc0071557be1b585d8c909ad6143604fc358b5",
-      "outputHash": "412dddec0fd9fc889fd4296497cc0071557be1b585d8c909ad6143604fc358b5"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "412dddec0fd9fc889fd4296497cc0071557be1b585d8c909ad6143604fc358b5",
+      "sourceBytes": 3956,
+      "outputBytes": 3956,
+      "width": 800,
+      "height": 600
     },
     "location.reed-banks": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/locations/reed-banks.svg",
+      "url": "./prepared/objects/74a3cabf0a9f6d1d904e1209da0a0233ce2f5ba7b646b48058ff5384ab1ff047/asset.svg",
       "sourceHash": "c69415f5f1bd576bfbfade166251ab73f2d05cb2a758609c83d295dfbdc5a3c3",
-      "outputHash": "c69415f5f1bd576bfbfade166251ab73f2d05cb2a758609c83d295dfbdc5a3c3"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "c69415f5f1bd576bfbfade166251ab73f2d05cb2a758609c83d295dfbdc5a3c3",
+      "sourceBytes": 3956,
+      "outputBytes": 3956,
+      "width": 800,
+      "height": 600
     },
     "location.silken-clearing": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/locations/silken-clearing.svg",
+      "url": "./prepared/objects/c14ab7d0f5f6c8bb4f125ce4dfa15cd78a26eec0a1cc5e2d99175cb758b58178/asset.svg",
       "sourceHash": "300a868b9b2ad2844a68460ec18541708433a1f3b05500c3d82888162ba5c65b",
-      "outputHash": "300a868b9b2ad2844a68460ec18541708433a1f3b05500c3d82888162ba5c65b"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "300a868b9b2ad2844a68460ec18541708433a1f3b05500c3d82888162ba5c65b",
+      "sourceBytes": 4022,
+      "outputBytes": 4022,
+      "width": 800,
+      "height": 600
     },
     "mana.full": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/interface/mana-full.webp",
+      "url": "./prepared/objects/dd91e1c5cfb3b94595f2e5adb2ef90318808ea22ad20d55cf511a35b89c5fee1/asset.webp",
       "sourceHash": "b58b5b50814d7404d8b4b8428f02867bec34ef79b0f4974dcc612a4e1c2b6f2e",
-      "outputHash": "b58b5b50814d7404d8b4b8428f02867bec34ef79b0f4974dcc612a4e1c2b6f2e"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "b58b5b50814d7404d8b4b8428f02867bec34ef79b0f4974dcc612a4e1c2b6f2e",
+      "sourceBytes": 220932,
+      "outputBytes": 220932,
+      "width": 512,
+      "height": 510,
+      "alpha": true
     },
     "mana.empty": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/interface/mana-empty.webp",
+      "url": "./prepared/objects/98dbec60a91c7114757fbccf4bc8d7ce23f597473a0e850bce550af69a5bdeb8/asset.webp",
       "sourceHash": "8e9882cc59591e55ebbe4c095201e7331e84d416530ed1cd73e945a2b0ec3ee3",
-      "outputHash": "8e9882cc59591e55ebbe4c095201e7331e84d416530ed1cd73e945a2b0ec3ee3"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "8e9882cc59591e55ebbe4c095201e7331e84d416530ed1cd73e945a2b0ec3ee3",
+      "sourceBytes": 206970,
+      "outputBytes": 206970,
+      "width": 512,
+      "height": 509,
+      "alpha": true
     },
     "sound.physical": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/sounds/physical.wav",
+      "url": "./prepared/objects/16c6b64d34480a9133d592e75da0822d4f7b062311995e1b6358383a5963d32c/asset.wav",
       "sourceHash": "4b194d121fd7ab9823bca81a13f074af00c27dac7cd1d765a5dc5e683543615d",
-      "outputHash": "4b194d121fd7ab9823bca81a13f074af00c27dac7cd1d765a5dc5e683543615d"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "4b194d121fd7ab9823bca81a13f074af00c27dac7cd1d765a5dc5e683543615d",
+      "sourceBytes": 1849974,
+      "outputBytes": 1849974
     },
     "sound.fire": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/sounds/fire.ogg",
+      "url": "./prepared/objects/f8eb18a91a3c92d622f27ea23c2ed4c452e12f6c3d8c5dcc382c760f2cba127b/asset.ogg",
       "sourceHash": "7b515ce1c85396b7ebabb9dc9876e892a0f642c8d696cf03aa69aa83cb6f30d3",
-      "outputHash": "7b515ce1c85396b7ebabb9dc9876e892a0f642c8d696cf03aa69aa83cb6f30d3"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "7b515ce1c85396b7ebabb9dc9876e892a0f642c8d696cf03aa69aa83cb6f30d3",
+      "sourceBytes": 82297,
+      "outputBytes": 82297
     },
     "sound.ice": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/sounds/ice.ogg",
+      "url": "./prepared/objects/63d3149662eadbcfd3bce5975893db4f6c642d29b87941d1617376bee17f0073/asset.ogg",
       "sourceHash": "cd5b436a0c0c7866f6073f289c733a2201b34d345f2691a9a060b5c2aec0e3c0",
-      "outputHash": "cd5b436a0c0c7866f6073f289c733a2201b34d345f2691a9a060b5c2aec0e3c0"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "cd5b436a0c0c7866f6073f289c733a2201b34d345f2691a9a060b5c2aec0e3c0",
+      "sourceBytes": 74425,
+      "outputBytes": 74425
     },
     "sound.lightning": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/sounds/lightning.wav",
+      "url": "./prepared/objects/2a28ccc478743a1cc1da01f6b7855b5bc6d8c035dacd8105101745047ba498e2/asset.wav",
       "sourceHash": "177638f560989c5f87be99ed6cd37dab913cbe6af7eb48e721b5561891b5d6f1",
-      "outputHash": "177638f560989c5f87be99ed6cd37dab913cbe6af7eb48e721b5561891b5d6f1"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "177638f560989c5f87be99ed6cd37dab913cbe6af7eb48e721b5561891b5d6f1",
+      "sourceBytes": 576102,
+      "outputBytes": 576102
     },
     "sound.poison": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/sounds/poison.ogg",
+      "url": "./prepared/objects/727ca4523d3ed5541ac0b401ddf97e75561095928323cf54999e9453a7795dbf/asset.ogg",
       "sourceHash": "3f3bdd7f3637e9bfe7d14a4cabed00f0e195eda95bdeb260233705e7e012d9c3",
-      "outputHash": "3f3bdd7f3637e9bfe7d14a4cabed00f0e195eda95bdeb260233705e7e012d9c3"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "3f3bdd7f3637e9bfe7d14a4cabed00f0e195eda95bdeb260233705e7e012d9c3",
+      "sourceBytes": 38714,
+      "outputBytes": 38714
     },
     "sound.nature": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/sounds/nature.wav",
+      "url": "./prepared/objects/16c6b64d34480a9133d592e75da0822d4f7b062311995e1b6358383a5963d32c/asset.wav",
       "sourceHash": "4b194d121fd7ab9823bca81a13f074af00c27dac7cd1d765a5dc5e683543615d",
-      "outputHash": "4b194d121fd7ab9823bca81a13f074af00c27dac7cd1d765a5dc5e683543615d"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "4b194d121fd7ab9823bca81a13f074af00c27dac7cd1d765a5dc5e683543615d",
+      "sourceBytes": 1849974,
+      "outputBytes": 1849974
     },
     "sound.light": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/sounds/light.ogg",
+      "url": "./prepared/objects/3d50d770eb54f4fa08524e7428e247f3d995ecfcd53139b86925acd392afade2/asset.ogg",
       "sourceHash": "267a197d97d33a4acb09b974f908d82234cd548a369eb218f169238900586f0a",
-      "outputHash": "267a197d97d33a4acb09b974f908d82234cd548a369eb218f169238900586f0a"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "267a197d97d33a4acb09b974f908d82234cd548a369eb218f169238900586f0a",
+      "sourceBytes": 25470,
+      "outputBytes": 25470
     },
     "sound.heal": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/sounds/heal.wav",
+      "url": "./prepared/objects/501ef1629a50db07eca8cfe859ec22c85f27f27fc56de5b28f98c26f2e10fbeb/asset.wav",
       "sourceHash": "2847537ec06e3c644f987485fe128128da8c18497630154bc8429ed39e7933b9",
-      "outputHash": "2847537ec06e3c644f987485fe128128da8c18497630154bc8429ed39e7933b9"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "2847537ec06e3c644f987485fe128128da8c18497630154bc8429ed39e7933b9",
+      "sourceBytes": 2068080,
+      "outputBytes": 2068080
     },
     "sound.block": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/sounds/block.ogg",
+      "url": "./prepared/objects/f898fb2454dd6b7153ccc5329ae4140e62dc9dc27755cf885f7ec96573866c7c/asset.ogg",
       "sourceHash": "6a4bbb4556c922dfd98d2356c924b8635dbbd3a88e9c21a8e94591141ee69c64",
-      "outputHash": "6a4bbb4556c922dfd98d2356c924b8635dbbd3a88e9c21a8e94591141ee69c64"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "6a4bbb4556c922dfd98d2356c924b8635dbbd3a88e9c21a8e94591141ee69c64",
+      "sourceBytes": 34398,
+      "outputBytes": 34398
     },
     "sound.absorb": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/sounds/absorb.ogg",
+      "url": "./prepared/objects/f898fb2454dd6b7153ccc5329ae4140e62dc9dc27755cf885f7ec96573866c7c/asset.ogg",
       "sourceHash": "6a4bbb4556c922dfd98d2356c924b8635dbbd3a88e9c21a8e94591141ee69c64",
-      "outputHash": "6a4bbb4556c922dfd98d2356c924b8635dbbd3a88e9c21a8e94591141ee69c64"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "6a4bbb4556c922dfd98d2356c924b8635dbbd3a88e9c21a8e94591141ee69c64",
+      "sourceBytes": 34398,
+      "outputBytes": 34398
     },
     "sound.deny": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/sounds/deny.wav",
+      "url": "./prepared/objects/efc36c1552707a18b0a770d75479852b40a25093565af220e579305c5991df49/asset.wav",
       "sourceHash": "b82cdf1e4f349e68ede0dcd7dbf7476698872e3a5b81fbec9aeb4804caa059fa",
-      "outputHash": "b82cdf1e4f349e68ede0dcd7dbf7476698872e3a5b81fbec9aeb4804caa059fa"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "b82cdf1e4f349e68ede0dcd7dbf7476698872e3a5b81fbec9aeb4804caa059fa",
+      "sourceBytes": 353536,
+      "outputBytes": 353536
     },
     "sound.victory": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/sounds/victory.wav",
+      "url": "./prepared/objects/631f7d874578cbd1d6a0786a8dfeb603962baeaf6fa8c497ac47e0be3638d1ab/asset.wav",
       "sourceHash": "c15d53b754283495fea4e7908023cd4391c41f91966968a57f7f075b886f62ad",
-      "outputHash": "c15d53b754283495fea4e7908023cd4391c41f91966968a57f7f075b886f62ad"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "c15d53b754283495fea4e7908023cd4391c41f91966968a57f7f075b886f62ad",
+      "sourceBytes": 334796,
+      "outputBytes": 334796
     },
     "sound.defeat": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/sounds/defeat.wav",
+      "url": "./prepared/objects/d99b7b86a5a3881212cdfbc5f339bda2f171cfef55b71e380c40cc482b281910/asset.wav",
       "sourceHash": "b707cf3a0eca1b4aac9411e2411e25b0cf85e60ac1198b4750ba85901cea6184",
-      "outputHash": "b707cf3a0eca1b4aac9411e2411e25b0cf85e60ac1198b4750ba85901cea6184"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "b707cf3a0eca1b4aac9411e2411e25b0cf85e60ac1198b4750ba85901cea6184",
+      "sourceBytes": 528844,
+      "outputBytes": 528844
     },
     "sound.recruit": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/sounds/recruit.wav",
+      "url": "./prepared/objects/58c300aee1105306f3443e9efabba54802881d2938e1ff8e93069ecadfb0fb64/asset.wav",
       "sourceHash": "3fdc704f15e128161465b8475be33600a54096826c2587f3d841cabe9633cf6e",
-      "outputHash": "3fdc704f15e128161465b8475be33600a54096826c2587f3d841cabe9633cf6e"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "3fdc704f15e128161465b8475be33600a54096826c2587f3d841cabe9633cf6e",
+      "sourceBytes": 419638,
+      "outputBytes": 419638
     },
     "sound.talent": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/sounds/talent.wav",
+      "url": "./prepared/objects/58c300aee1105306f3443e9efabba54802881d2938e1ff8e93069ecadfb0fb64/asset.wav",
       "sourceHash": "3fdc704f15e128161465b8475be33600a54096826c2587f3d841cabe9633cf6e",
-      "outputHash": "3fdc704f15e128161465b8475be33600a54096826c2587f3d841cabe9633cf6e"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "3fdc704f15e128161465b8475be33600a54096826c2587f3d841cabe9633cf6e",
+      "sourceBytes": 419638,
+      "outputBytes": 419638
     },
     "sound.knockout": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/sounds/knockout.wav",
+      "url": "./prepared/objects/b9735b49941c2410cada44cfc8d2afbf348b35f18adf4fe859edf5712fefe575/asset.wav",
       "sourceHash": "a38188b702a7e08ca386cd5c995e5231e9e650f841100415b781a86ffd1ac7d5",
-      "outputHash": "a38188b702a7e08ca386cd5c995e5231e9e650f841100415b781a86ffd1ac7d5"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "a38188b702a7e08ca386cd5c995e5231e9e650f841100415b781a86ffd1ac7d5",
+      "sourceBytes": 135212,
+      "outputBytes": 135212
     },
     "music.menu": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/music/menu.mp3",
+      "url": "./prepared/objects/83ea5eb6621b109e9cf42f599527524b361a214caa0c35cfee6f377ae556b038/asset.mp3",
       "sourceHash": "bbc16afff927bf8492d495f1b6de0a9f30bd45323e1942527ec0b8dec8743ebb",
-      "outputHash": "bbc16afff927bf8492d495f1b6de0a9f30bd45323e1942527ec0b8dec8743ebb"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "bbc16afff927bf8492d495f1b6de0a9f30bd45323e1942527ec0b8dec8743ebb",
+      "sourceBytes": 7867487,
+      "outputBytes": 7867487
     },
     "music.fernwood": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/music/fernwood.mp3",
+      "url": "./prepared/objects/8531192602bcd9bec8c72a498e1493d5d6572ade3faf53ae55f2142cc9f59561/asset.mp3",
       "sourceHash": "d711edee632295069a00456d1d6587f3ea4443f4e05a9159cf086c3aaa2786f5",
-      "outputHash": "d711edee632295069a00456d1d6587f3ea4443f4e05a9159cf086c3aaa2786f5"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "d711edee632295069a00456d1d6587f3ea4443f4e05a9159cf086c3aaa2786f5",
+      "sourceBytes": 5427237,
+      "outputBytes": 5427237
     },
     "music.marsh": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/music/marsh.mp3",
+      "url": "./prepared/objects/364441c05b68dfb7e250814639c782c0936577fbee697c37f2b105785296844f/asset.mp3",
       "sourceHash": "154205a5367f0562d1c1e44cd650d204a74033fb8a607d50a9dc51d10cdb26b4",
-      "outputHash": "154205a5367f0562d1c1e44cd650d204a74033fb8a607d50a9dc51d10cdb26b4"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "154205a5367f0562d1c1e44cd650d204a74033fb8a607d50a9dc51d10cdb26b4",
+      "sourceBytes": 5131218,
+      "outputBytes": 5131218
     },
     "music.boss": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/music/boss.mp3",
+      "url": "./prepared/objects/0a3a78dc98964e6168b9c68048dc5630d206285b6aa69dd157c0e71ccbb27f06/asset.mp3",
       "sourceHash": "56464355707bea1b6932b1fe107345a46d62f4ab3bc2f299aeb3d1b625719c38",
-      "outputHash": "56464355707bea1b6932b1fe107345a46d62f4ab3bc2f299aeb3d1b625719c38"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "56464355707bea1b6932b1fe107345a46d62f4ab3bc2f299aeb3d1b625719c38",
+      "sourceBytes": 8347166,
+      "outputBytes": 8347166
     },
     "boon.tattered-pages": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/boons/tattered-pages.webp",
+      "url": "./prepared/objects/c0ec2d696243c9ed17b8edf8bd4788d00d37cbb07913ed1161a7416f2a9c1b03/asset.webp",
       "sourceHash": "ef42b8ba36da8df1724d44672b612f329f2855d28ca08f85bbb35e067c0b80b8",
-      "outputHash": "ef42b8ba36da8df1724d44672b612f329f2855d28ca08f85bbb35e067c0b80b8"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "ef42b8ba36da8df1724d44672b612f329f2855d28ca08f85bbb35e067c0b80b8",
+      "sourceBytes": 69554,
+      "outputBytes": 69554,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "boon.bone-charm": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/boons/bone-charm.webp",
+      "url": "./prepared/objects/4648d9b2276597584c8256e4c0e624a8d121a86bba49e94bbc447f2cc7edf551/asset.webp",
       "sourceHash": "721b61ea8c709449980fe24c812df7f748b19f7c2b79d71462728b4f7ad4c046",
-      "outputHash": "721b61ea8c709449980fe24c812df7f748b19f7c2b79d71462728b4f7ad4c046"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "721b61ea8c709449980fe24c812df7f748b19f7c2b79d71462728b4f7ad4c046",
+      "sourceBytes": 33590,
+      "outputBytes": 33590,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "boon.ironwood-buckler": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/boons/ironwood-buckler.webp",
+      "url": "./prepared/objects/a5b01d433519039300c6922adcd37fad11124f8794d1cfcec2564726b7cd1327/asset.webp",
       "sourceHash": "5eb2a27699be63e082957233ac5927109b5ee739b98e437fe321b10e28f7d6e5",
-      "outputHash": "5eb2a27699be63e082957233ac5927109b5ee739b98e437fe321b10e28f7d6e5"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "5eb2a27699be63e082957233ac5927109b5ee739b98e437fe321b10e28f7d6e5",
+      "sourceBytes": 37366,
+      "outputBytes": 37366,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "boon.icy-heart": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/boons/icy-heart.webp",
+      "url": "./prepared/objects/e2f5ea6fa560806a81f74fbb51b7e40d6b103fb8bb66122deb05654be3dc3c34/asset.webp",
       "sourceHash": "e3cfd1970519dd1de46442e8f7182309920414449a00897aa657d29803f9054c",
-      "outputHash": "e3cfd1970519dd1de46442e8f7182309920414449a00897aa657d29803f9054c"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "e3cfd1970519dd1de46442e8f7182309920414449a00897aa657d29803f9054c",
+      "sourceBytes": 34560,
+      "outputBytes": 34560,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "boon.meteorite": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/boons/meteorite.webp",
+      "url": "./prepared/objects/055fff0dc04c3014f602a5b34b71c38fb9f0067c42ec1c928f4e876e1797020f/asset.webp",
       "sourceHash": "4504b4b70873a9df25a5e81187bed537c7ac263471fb11855f41d99d3e1ef32a",
-      "outputHash": "4504b4b70873a9df25a5e81187bed537c7ac263471fb11855f41d99d3e1ef32a"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "4504b4b70873a9df25a5e81187bed537c7ac263471fb11855f41d99d3e1ef32a",
+      "sourceBytes": 50438,
+      "outputBytes": 50438,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "boon.sin-eaters-lantern": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/boons/sin-eaters-lantern.webp",
+      "url": "./prepared/objects/78998176b2919f276b8a3906a0570a73713b4c1a5ab8a30f6ce236bd935bcd5b/asset.webp",
       "sourceHash": "c26c05186c2d5816e8044b9f00d23f7b6a6169a4448558f6655cc9808390e9a4",
-      "outputHash": "c26c05186c2d5816e8044b9f00d23f7b6a6169a4448558f6655cc9808390e9a4"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "c26c05186c2d5816e8044b9f00d23f7b6a6169a4448558f6655cc9808390e9a4",
+      "sourceBytes": 41092,
+      "outputBytes": 41092,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "boon.thunderstone": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/boons/thunderstone.webp",
+      "url": "./prepared/objects/c17aa80afefc7b454368fb4c375e3454bb81a99b33d318a03ec0ebb1b25f082e/asset.webp",
       "sourceHash": "1d66585c63d0e8b52ba40f6f2226df4c6f86366709869d9c2e6903bf9320cbf9",
-      "outputHash": "1d66585c63d0e8b52ba40f6f2226df4c6f86366709869d9c2e6903bf9320cbf9"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "1d66585c63d0e8b52ba40f6f2226df4c6f86366709869d9c2e6903bf9320cbf9",
+      "sourceBytes": 44512,
+      "outputBytes": 44512,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "boon.groves-favor": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/boons/groves-favor.webp",
+      "url": "./prepared/objects/f925a3280728356eebdb35e4a19a606451e17613cea1757048d9c626d848113b/asset.webp",
       "sourceHash": "1d8c4cbc2512efa5f4887024ba1d489167c4927edf5f1e3f8c6ad92e701a6bc5",
-      "outputHash": "1d8c4cbc2512efa5f4887024ba1d489167c4927edf5f1e3f8c6ad92e701a6bc5"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "1d8c4cbc2512efa5f4887024ba1d489167c4927edf5f1e3f8c6ad92e701a6bc5",
+      "sourceBytes": 59078,
+      "outputBytes": 59078,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "sound.activate": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/sounds/activate.wav",
+      "url": "./prepared/objects/c8d1359fcf37b897500fb1662c42b615184018f48103f2f46c989808063d8afb/asset.wav",
       "sourceHash": "d2e16090e00cd6c00da24c1f2663eca96d5b9f3b5e840864f30b4fc615747d4a",
-      "outputHash": "d2e16090e00cd6c00da24c1f2663eca96d5b9f3b5e840864f30b4fc615747d4a"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "d2e16090e00cd6c00da24c1f2663eca96d5b9f3b5e840864f30b4fc615747d4a",
+      "sourceBytes": 84012,
+      "outputBytes": 84012
     },
     "encounter.combat": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/encounters/combat.svg",
+      "url": "./prepared/objects/935ff28b0b01be9b48d409b376f99314da206257f5e017468d7d8a48b87a8d5f/asset.svg",
       "sourceHash": "e51a9f689c37e508d3901cca01d7aa97757ed8b8acf18327b06b84b189cd0de2",
-      "outputHash": "e51a9f689c37e508d3901cca01d7aa97757ed8b8acf18327b06b84b189cd0de2"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "e51a9f689c37e508d3901cca01d7aa97757ed8b8acf18327b06b84b189cd0de2",
+      "sourceBytes": 136,
+      "outputBytes": 136,
+      "width": 800,
+      "height": 600
     },
     "encounter.boss": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/encounters/boss.svg",
+      "url": "./prepared/objects/935ff28b0b01be9b48d409b376f99314da206257f5e017468d7d8a48b87a8d5f/asset.svg",
       "sourceHash": "e51a9f689c37e508d3901cca01d7aa97757ed8b8acf18327b06b84b189cd0de2",
-      "outputHash": "e51a9f689c37e508d3901cca01d7aa97757ed8b8acf18327b06b84b189cd0de2"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "e51a9f689c37e508d3901cca01d7aa97757ed8b8acf18327b06b84b189cd0de2",
+      "sourceBytes": 136,
+      "outputBytes": 136,
+      "width": 800,
+      "height": 600
     },
     "boon.brass-censer": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/boons/brass-censer.webp",
+      "url": "./prepared/objects/4a7959b3b3449799f5ba08266facbfd0c9e126ec54911afe29969fedcffcfee5/asset.webp",
       "sourceHash": "34f42205cab3c99d31db5bf41b4e5bcb17bfd5e9e7c15a2ad1413c4f76352f03",
-      "outputHash": "34f42205cab3c99d31db5bf41b4e5bcb17bfd5e9e7c15a2ad1413c4f76352f03"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "34f42205cab3c99d31db5bf41b4e5bcb17bfd5e9e7c15a2ad1413c4f76352f03",
+      "sourceBytes": 43368,
+      "outputBytes": 43368,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "boon.parasitic-bloom": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/boons/parasitic-bloom.webp",
+      "url": "./prepared/objects/b8a0926bf532e8f992fd48a4cc500a78d0ab06d8683e99fbeb7675beaa356b16/asset.webp",
       "sourceHash": "c33b021c66c5d31edbd54a998ee4e556d214ac2ded4248c507a058d0e5d70e95",
-      "outputHash": "c33b021c66c5d31edbd54a998ee4e556d214ac2ded4248c507a058d0e5d70e95"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "c33b021c66c5d31edbd54a998ee4e556d214ac2ded4248c507a058d0e5d70e95",
+      "sourceBytes": 44242,
+      "outputBytes": 44242,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "boon.cutpurse-knife": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/boons/cutpurse-knife.webp",
+      "url": "./prepared/objects/2c2d163f4af7fecbff96582f32203f92d3a0109df6bdd0bf90bd18fc8fef7399/asset.webp",
       "sourceHash": "871814d4e87588644b286ba27b470b99277fc679b2a0810c3c5b9327fad5f5f6",
-      "outputHash": "871814d4e87588644b286ba27b470b99277fc679b2a0810c3c5b9327fad5f5f6"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "871814d4e87588644b286ba27b470b99277fc679b2a0810c3c5b9327fad5f5f6",
+      "sourceBytes": 26552,
+      "outputBytes": 26552,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "boon.merchants-favor": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/boons/merchants-favor.webp",
+      "url": "./prepared/objects/b3b27b11eb7dc5cdf50cdd9f1e7ee4526fd43febfa1b5c1578bfd6d1a71ebb8c/asset.webp",
       "sourceHash": "5323eb57de518b0d596a8ba8705b5b9bfba474c2749d79bf549a0b27affaf172",
-      "outputHash": "5323eb57de518b0d596a8ba8705b5b9bfba474c2749d79bf549a0b27affaf172"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "5323eb57de518b0d596a8ba8705b5b9bfba474c2749d79bf549a0b27affaf172",
+      "sourceBytes": 49278,
+      "outputBytes": 49278,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "boon.plague-doctors-mask": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/boons/plague-doctors-mask.webp",
+      "url": "./prepared/objects/1b0a0faa5fbdf038b1f9c53b95d0c413e0da3bd9cf35d9b8435ca8a9fa80276c/asset.webp",
       "sourceHash": "8f1f72e3fd8b2f459a8af08b4142f8427857471055838e57b2dac45c7c4a29ad",
-      "outputHash": "8f1f72e3fd8b2f459a8af08b4142f8427857471055838e57b2dac45c7c4a29ad"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "8f1f72e3fd8b2f459a8af08b4142f8427857471055838e57b2dac45c7c4a29ad",
+      "sourceBytes": 54970,
+      "outputBytes": 54970,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "boon.sundering-charm": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/boons/sundering-charm.webp",
+      "url": "./prepared/objects/8fd546330cf1e571faa727ee644f26c346989fa5de06e2071b1cd2cd5c3fd893/asset.webp",
       "sourceHash": "0c3dc045453aa58a31697dd8b7bd482fe59a751364685aeb1c78d85f9955ac8f",
-      "outputHash": "0c3dc045453aa58a31697dd8b7bd482fe59a751364685aeb1c78d85f9955ac8f"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "0c3dc045453aa58a31697dd8b7bd482fe59a751364685aeb1c78d85f9955ac8f",
+      "sourceBytes": 45430,
+      "outputBytes": 45430,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "boon.resonant-chimes": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/boons/resonant-chimes.webp",
+      "url": "./prepared/objects/e35f2de2794b8acadbe1a8dd81bc7111b767d307ba5094fa92fb9b96763c1a47/asset.webp",
       "sourceHash": "1c27013c6d552683f945a83220ce17fb35f58f25afb8e07c9525cc5b224c1b63",
-      "outputHash": "1c27013c6d552683f945a83220ce17fb35f58f25afb8e07c9525cc5b224c1b63"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "1c27013c6d552683f945a83220ce17fb35f58f25afb8e07c9525cc5b224c1b63",
+      "sourceBytes": 56126,
+      "outputBytes": 56126,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "boon.smugglers-map": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/boons/smugglers-map.webp",
+      "url": "./prepared/objects/3ab19f80b04879a49ce34d8e1f5d0fcab624b49705fcca8f208039c9143459bf/asset.webp",
       "sourceHash": "5c528e4fe475b5137817d452c8e67a85a4c4646961f5ae185a4173b093c5b230",
-      "outputHash": "5c528e4fe475b5137817d452c8e67a85a4c4646961f5ae185a4173b093c5b230"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "5c528e4fe475b5137817d452c8e67a85a4c4646961f5ae185a4173b093c5b230",
+      "sourceBytes": 60800,
+      "outputBytes": 60800,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "boon.frozen-pocketwatch": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/boons/frozen-pocketwatch.webp",
+      "url": "./prepared/objects/ada9b0e04ac149a4574970c3d91b2bb17bd2446a70a2aac0f94f242b15fed334/asset.webp",
       "sourceHash": "3573c73cc8122372a4eb3782631b39c84e9b6411d8fbdf5f5c648d804f990d2d",
-      "outputHash": "3573c73cc8122372a4eb3782631b39c84e9b6411d8fbdf5f5c648d804f990d2d"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "3573c73cc8122372a4eb3782631b39c84e9b6411d8fbdf5f5c648d804f990d2d",
+      "sourceBytes": 55460,
+      "outputBytes": 55460,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "boon.lucky-clover": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/boons/lucky-clover.webp",
+      "url": "./prepared/objects/1dae59f26c0c4bbf37ae5d63ace4302c734438091e0b153cab3dae38ee48bd4b/asset.webp",
       "sourceHash": "799c9df3fe38d94ad6250287c6b0d1ed105afd68ce972147486b8565a92979fa",
-      "outputHash": "799c9df3fe38d94ad6250287c6b0d1ed105afd68ce972147486b8565a92979fa"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "799c9df3fe38d94ad6250287c6b0d1ed105afd68ce972147486b8565a92979fa",
+      "sourceBytes": 43126,
+      "outputBytes": 43126,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "pile.draw": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/battle/draw-pile.webp",
+      "url": "./prepared/objects/68f9f8fb0c52859faf301ca64665f1a2be72579c25baadd33f398b635354de6d/asset.webp",
       "sourceHash": "9bea82c589a7c1e44331ae4244c772138a0ecc99c97a5fec0d39d9014813457c",
-      "outputHash": "9bea82c589a7c1e44331ae4244c772138a0ecc99c97a5fec0d39d9014813457c"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "9bea82c589a7c1e44331ae4244c772138a0ecc99c97a5fec0d39d9014813457c",
+      "sourceBytes": 35178,
+      "outputBytes": 35178,
+      "width": 420,
+      "height": 560,
+      "alpha": true
     },
     "pile.discard": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/battle/discard-pile.webp",
+      "url": "./prepared/objects/8946a08101fa1831a5bf24fbe9a3bcd34f3a54535d56ab511c7c22cfe2401bc2/asset.webp",
       "sourceHash": "96404f02f506b3ce26e4b200667a77d4a264e254da3bd77ee8bb6a6bf84a7237",
-      "outputHash": "96404f02f506b3ce26e4b200667a77d4a264e254da3bd77ee8bb6a6bf84a7237"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "96404f02f506b3ce26e4b200667a77d4a264e254da3bd77ee8bb6a6bf84a7237",
+      "sourceBytes": 29480,
+      "outputBytes": 29480,
+      "width": 420,
+      "height": 560,
+      "alpha": true
     },
     "card.back": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/battle/card-back.webp",
+      "url": "./prepared/objects/785d9aeaef260377dd7daa33b37af0032172f0481b460f2345a8a27ae029c757/asset.webp",
       "sourceHash": "08373185233625b13ecee642c5c9c72d3b66d85cad3bee4c243ffbfc5e2ba3b4",
-      "outputHash": "08373185233625b13ecee642c5c9c72d3b66d85cad3bee4c243ffbfc5e2ba3b4"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "08373185233625b13ecee642c5c9c72d3b66d85cad3bee4c243ffbfc5e2ba3b4",
+      "sourceBytes": 31704,
+      "outputBytes": 31704,
+      "width": 420,
+      "height": 560,
+      "alpha": true
     },
     "keyword.armor": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/keywords/armor.webp",
+      "url": "./prepared/objects/953a2ca5b7cd1b338d0a8076e54a69d791518ad782082a42aeb6018301b124e9/asset.webp",
       "sourceHash": "58e05a4c1584ee5cb9a5225038d79a0d003a86b1dfc8567f7554daa8b418e27e",
-      "outputHash": "58e05a4c1584ee5cb9a5225038d79a0d003a86b1dfc8567f7554daa8b418e27e"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "58e05a4c1584ee5cb9a5225038d79a0d003a86b1dfc8567f7554daa8b418e27e",
+      "sourceBytes": 19712,
+      "outputBytes": 19712,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "keyword.bleed": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/keywords/bleed.webp",
+      "url": "./prepared/objects/3cea010e8cfea2c650dfd3011098fd6ddc5f825233c8c3cec716808ed2e71f1c/asset.webp",
       "sourceHash": "f5394ea620c001c968cc6e663c24a9b92a6871c6840a443cb29467d3adbc6901",
-      "outputHash": "f5394ea620c001c968cc6e663c24a9b92a6871c6840a443cb29467d3adbc6901"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "f5394ea620c001c968cc6e663c24a9b92a6871c6840a443cb29467d3adbc6901",
+      "sourceBytes": 19164,
+      "outputBytes": 19164,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "keyword.dodge": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/keywords/dodge.webp",
+      "url": "./prepared/objects/bceab2ea166dbf7bd69a8141a1812c43142eac9835ce019b3bfa806e4d34dbdf/asset.webp",
       "sourceHash": "b35dbf480cbe393b4f482d7635e68a4c389b3bde0ed104bcb57152041abfe434",
-      "outputHash": "b35dbf480cbe393b4f482d7635e68a4c389b3bde0ed104bcb57152041abfe434"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "b35dbf480cbe393b4f482d7635e68a4c389b3bde0ed104bcb57152041abfe434",
+      "sourceBytes": 27458,
+      "outputBytes": 27458,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "keyword.leech": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/keywords/leech.webp",
+      "url": "./prepared/objects/9c40b226b5fd2bfcbcb45a16d3eb891c52669f03605e6f981860e4b291de0568/asset.webp",
       "sourceHash": "7bd953c13ce7a4ac096363adcadbc0ed701dfe72782ef519c83c8f5850c4138d",
-      "outputHash": "7bd953c13ce7a4ac096363adcadbc0ed701dfe72782ef519c83c8f5850c4138d"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "7bd953c13ce7a4ac096363adcadbc0ed701dfe72782ef519c83c8f5850c4138d",
+      "sourceBytes": 10642,
+      "outputBytes": 10642,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "keyword.mana": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/keywords/mana.webp",
+      "url": "./prepared/objects/2fbf7a9b70e281eabbd503b2cd4ca7d60625c021df48d38c95494af1dd9e41a2/asset.webp",
       "sourceHash": "a764934c1b281eb3d0876c05c810c037bb221d0bc3ca827b38dd8ceae56c192a",
-      "outputHash": "a764934c1b281eb3d0876c05c810c037bb221d0bc3ca827b38dd8ceae56c192a"
+      "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "recipe": "copy",
+      "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+      "outputHash": "a764934c1b281eb3d0876c05c810c037bb221d0bc3ca827b38dd8ceae56c192a",
+      "sourceBytes": 18900,
+      "outputBytes": 18900,
+      "width": 420,
+      "height": 563,
+      "alpha": false
     },
     "creature.emberback": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/emberback/emberback.png",
+      "url": "./prepared/objects/d051e2aec787a703e7e5539681510f834485a6fb8eea2c793682e7925f7905af/asset.webp",
       "sourceHash": "172d152ac13deea86e0e3706493a420a3bcec8d64368db09ceaabf5e9968c3c2",
-      "outputHash": "172d152ac13deea86e0e3706493a420a3bcec8d64368db09ceaabf5e9968c3c2"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "f46c521a4d68e1c30655b61a01bd6be60a65ad32545a0b8772b1b85257c463c6",
+      "sourceBytes": 2310573,
+      "outputBytes": 867350,
+      "width": 960,
+      "height": 720,
+      "alpha": false
     },
     "action.emberback.ember-charge": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/emberback/ember-charge.png",
+      "url": "./prepared/objects/493293df9f068c3e623632873b3ef6b848795e8a54c4fba69193567032887689/asset.webp",
       "sourceHash": "4d790c1602aec22c1b8b458c485be9cde46d344f929427ab60ce5de6562dc7f6",
-      "outputHash": "4d790c1602aec22c1b8b458c485be9cde46d344f929427ab60ce5de6562dc7f6"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "30bd06bf526b7e821908a5d0fc7170ae366920270286d99c6d9a1783f79ae4a0",
+      "sourceBytes": 2301071,
+      "outputBytes": 920408,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "action.emberback.furnace-breath": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/emberback/furnace-breath.png",
+      "url": "./prepared/objects/fd7526b89c25ae0876c54af18c54774ecf0906337ad61a333d2c420a2dd53e71/asset.webp",
       "sourceHash": "e8c691de7837ae9d84d4a5488a9991e184939c6943dce535ab02f8c7b108a69e",
-      "outputHash": "e8c691de7837ae9d84d4a5488a9991e184939c6943dce535ab02f8c7b108a69e"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "73bc0dcab96384bf07692038e64935d9169b144152b9d82d7b3d87872e24d495",
+      "sourceBytes": 2154609,
+      "outputBytes": 850860,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "action.emberback.magma-stomp": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/emberback/magma-stomp.png",
+      "url": "./prepared/objects/e97b670366f4bd6ff47376287d78a17b496442e420b5ee472b869ca4065abdc8/asset.webp",
       "sourceHash": "13644e72099ac1994670cfd8f46d8adcea7365cc2e42efa8b6ddeff7786a2447",
-      "outputHash": "13644e72099ac1994670cfd8f46d8adcea7365cc2e42efa8b6ddeff7786a2447"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "95a1ee14f5af4fc6249f8d54ec1e79193ef0772d3d00edac9c6cf04887800ac2",
+      "sourceBytes": 2355017,
+      "outputBytes": 915346,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "creature.mossguard": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/mossguard/portrait.png",
+      "url": "./prepared/objects/f52c3e819945d1f3c95b8696af03d8481ad1c11d9e07085b4b5cf6a1a7d2c30c/asset.webp",
       "sourceHash": "79232067d4b246388fc9f9ca5c7d03ffd3deb541c81974bff291578d6140fed0",
-      "outputHash": "79232067d4b246388fc9f9ca5c7d03ffd3deb541c81974bff291578d6140fed0"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "0ef62acd4c19cc87a79a565a8ab207e4c092d97d00dc08cd0b4381f4960baf38",
+      "sourceBytes": 2389164,
+      "outputBytes": 905728,
+      "width": 960,
+      "height": 720,
+      "alpha": false
     },
     "action.mossguard.boulder-brace": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/mossguard/boulder-brace.png",
+      "url": "./prepared/objects/8dd51aa69ce2db7069b77ccedbab6198baf515852ff7a3b8b958607a23f14c12/asset.webp",
       "sourceHash": "37fe66768d3262325d5ea04fe1050376ffda130cbc7a54da3cc604f46f9c276a",
-      "outputHash": "37fe66768d3262325d5ea04fe1050376ffda130cbc7a54da3cc604f46f9c276a"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "f766df0593915b7a9e9bf14a03feaf66b8fa709aab7eec7c6b57d0f7723aa1b2",
+      "sourceBytes": 2435617,
+      "outputBytes": 940778,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "action.mossguard.rooted-stomp": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/mossguard/rooted-stomp.png",
+      "url": "./prepared/objects/4ed7173cd2f5ee4ad41cb9c3d6b07b9a405866444c74c95a993e9488a0b43585/asset.webp",
       "sourceHash": "f467555250168dd6026447dbc9055995e8316d0ded9bcbb1701e06840bb6847c",
-      "outputHash": "f467555250168dd6026447dbc9055995e8316d0ded9bcbb1701e06840bb6847c"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "4fb165cc56e826d601809a3278251773be1b73bda2798021581005b552f7a074",
+      "sourceBytes": 2500698,
+      "outputBytes": 959666,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "action.mossguard.moss-renewal": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/mossguard/moss-renewal.png",
+      "url": "./prepared/objects/2c3306c92719763dad12d8e6354c49173d72538e092d98f802c53bbe73506250/asset.webp",
       "sourceHash": "bfb0c6de8a4a62753513db0eb6834a14d77330b25175b07ae4bf43f143fcce78",
-      "outputHash": "bfb0c6de8a4a62753513db0eb6834a14d77330b25175b07ae4bf43f143fcce78"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "9a472c78adf596f930f29250dbe6683f9db07207647b66678a20aff4db6f1bb0",
+      "sourceBytes": 2511662,
+      "outputBytes": 990694,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "creature.pollenmoth": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/pollenmoth/pollenmoth.png",
+      "url": "./prepared/objects/ac954a6895ee9643ae6c976f67eac030a7d00370dbd7efa9b27c503577534fb8/asset.webp",
       "sourceHash": "fc9b1ccd4acb9978117deed82682d2c1558b04169df92b16c9ad8cb23e32a738",
-      "outputHash": "fc9b1ccd4acb9978117deed82682d2c1558b04169df92b16c9ad8cb23e32a738"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "6e280b1f16ecf578c77a1f1a303b8496497fbea5b99b81ea2791b8dce180b88a",
+      "sourceBytes": 2451882,
+      "outputBytes": 926560,
+      "width": 960,
+      "height": 720,
+      "alpha": false
     },
     "action.pollenmoth.dazzle-burst": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/pollenmoth/dazzle-burst.png",
+      "url": "./prepared/objects/217f5b529d592c2404c0080b89420c78f4c616e35cf6f493f5ffde85a1b901d4/asset.webp",
       "sourceHash": "a0a0e6249e6b7cc95879d2d7d9d8de78e2ffdcc555b00679145ab9bd9aa3bfae",
-      "outputHash": "a0a0e6249e6b7cc95879d2d7d9d8de78e2ffdcc555b00679145ab9bd9aa3bfae"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "86c458af3c3e8f38a6f58cc3bb485cff104fe549348fd8cd23d9689369540267",
+      "sourceBytes": 2361463,
+      "outputBytes": 907562,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "action.pollenmoth.bloomwake": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/pollenmoth/bloomwake.png",
+      "url": "./prepared/objects/bac90588bdf984d99fd71cd608d1bce384a5919979f7fc795bb1d2b8c305b465/asset.webp",
       "sourceHash": "3d5838de7d4460f1c02567f353f8505a8ec07aa0248ff0bd9aa56c67d19a1a6e",
-      "outputHash": "3d5838de7d4460f1c02567f353f8505a8ec07aa0248ff0bd9aa56c67d19a1a6e"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "e79d02b43297845f1d74de24b7606700990e4947b1ee6dc2932dae2e5dca7feb",
+      "sourceBytes": 2329962,
+      "outputBytes": 927700,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "action.pollenmoth.petal-shelter": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/pollenmoth/petal-shelter.png",
+      "url": "./prepared/objects/16de4ce0f5f7679f8e2c993eee9779c9faafc322bafed9a5a59a32314646dcbc/asset.webp",
       "sourceHash": "163a8bbbabd38df0b81143c45335488a507e4290c8f992c0675a99c8f47a4542",
-      "outputHash": "163a8bbbabd38df0b81143c45335488a507e4290c8f992c0675a99c8f47a4542"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "f6f22d4e909eef4be17616830d3d37393639a063e8b06d2fae837cdb3a5299a4",
+      "sourceBytes": 2215657,
+      "outputBytes": 834060,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "creature.prismram": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/prismram/portrait.png",
+      "url": "./prepared/objects/d3d4afee93f999ff620794e1cedaaf3917460325eeab08dcca16dbdf763a0b9a/asset.webp",
       "sourceHash": "33a58e988e41fda82d3c84fb4a41bc6c555c69b0477a73c7c711662641b58469",
-      "outputHash": "33a58e988e41fda82d3c84fb4a41bc6c555c69b0477a73c7c711662641b58469"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "1a63c89e3dcc3cc40da5981b14665463c9bafd96aa8afc748dd457d9759f4ac9",
+      "sourceBytes": 2288900,
+      "outputBytes": 827556,
+      "width": 960,
+      "height": 720,
+      "alpha": false
     },
     "action.prismram.prism-charge": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/prismram/prism-charge.png",
+      "url": "./prepared/objects/d685c1839342325898422a0a0a3612fcb0a6ab3fb8ae0df18e9d77fc8b9ba29b/asset.webp",
       "sourceHash": "af070beb915ca8729389f077b03e27c696086bc95bbf589883e7285dbd3b5848",
-      "outputHash": "af070beb915ca8729389f077b03e27c696086bc95bbf589883e7285dbd3b5848"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "8bd889a2157842a00fd98bcb61f1b3ca263e13a5cbfdc7712bddd5163c58d685",
+      "sourceBytes": 2147365,
+      "outputBytes": 824982,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "action.prismram.faceted-ward": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/prismram/faceted-ward.png",
+      "url": "./prepared/objects/3ca753e89c4c68d58cbc901adf19c8259a64130c7a3136aae9e1af2ca00a368d/asset.webp",
       "sourceHash": "15a6ddec6638b14c5852da7522b773847ed02625d276f75205c1e7e695bfe358",
-      "outputHash": "15a6ddec6638b14c5852da7522b773847ed02625d276f75205c1e7e695bfe358"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "76509239b99b62230ffcc45cb42b96d3b7bf033c79afcf7c145b1e466517f2db",
+      "sourceBytes": 2391746,
+      "outputBytes": 915558,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "action.prismram.spectrum-lance": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/prismram/spectrum-lance.png",
+      "url": "./prepared/objects/f19a378a1b55f632314785f8a844a0f29d820b61a967b39a9c8c30ed0e055799/asset.webp",
       "sourceHash": "aefbeaf686d693f13dc402ff84b6552bd93d5f01e89793d4d865422c3b5e4ae2",
-      "outputHash": "aefbeaf686d693f13dc402ff84b6552bd93d5f01e89793d4d865422c3b5e4ae2"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "c615041bc34ae2cac0b8508bbee3457f701ff1c2b416b45421e515de98f4bb6d",
+      "sourceBytes": 2232361,
+      "outputBytes": 850204,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "creature.captoad": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/captoad/portrait.png",
+      "url": "./prepared/objects/3c9e1d660f180997bacf0037829ab1992912659c4ffe5a421fd39ec64ee1ab5c/asset.webp",
       "sourceHash": "d872ea01e94021061e313bef327b610cab51b8907ecd38e7e854ab6124e3255c",
-      "outputHash": "d872ea01e94021061e313bef327b610cab51b8907ecd38e7e854ab6124e3255c"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "6ed95e03391937c9279d0d217e6032003d0d9db1517a9417f1537a52e3b81f93",
+      "sourceBytes": 2195655,
+      "outputBytes": 831714,
+      "width": 960,
+      "height": 720,
+      "alpha": false
     },
     "action.captoad.spore-puff": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/captoad/spore-puff.png",
+      "url": "./prepared/objects/95860af9369cd57778998b451fd31571dc7e4a957625c9bcd0ee62177957738a/asset.webp",
       "sourceHash": "7edf7b66632a6d1e2f7cc462ca2afc9a22069e9133d08529ba95fd7cae24fbb3",
-      "outputHash": "7edf7b66632a6d1e2f7cc462ca2afc9a22069e9133d08529ba95fd7cae24fbb3"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "f83be617af5d6efd9a2d6dbf55ecde6a712c96ed10e33cd940a498ceab134d2f",
+      "sourceBytes": 2177558,
+      "outputBytes": 856836,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "action.captoad.mushroom-guard": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/captoad/mushroom-guard.png",
+      "url": "./prepared/objects/161af29dd19e8c46bec938126f7b0b94a649d4fa0f126f3a3d894611034b7cb9/asset.webp",
       "sourceHash": "879dc5f2b386eebd022569069bfe2160f37226ec84d23e44c63bebc5520f4265",
-      "outputHash": "879dc5f2b386eebd022569069bfe2160f37226ec84d23e44c63bebc5520f4265"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "b4069b04982e75f899e665cf8b20e1df1988995805b4923a67aa3f15fce3c62a",
+      "sourceBytes": 2482202,
+      "outputBytes": 959442,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "action.captoad.bogbound-leap": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/captoad/bogbound-leap.png",
+      "url": "./prepared/objects/b9863c8f6e75aba6e2a21932ecdb139d61392f3b407df0830b63cf0740652414/asset.webp",
       "sourceHash": "f39d106a932ac57f70ce9fa0a3f9887e24691d2de8020740c0222f67f041aa80",
-      "outputHash": "f39d106a932ac57f70ce9fa0a3f9887e24691d2de8020740c0222f67f041aa80"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "f155e8f99edc1b8fd5661d9aab96ac2df4a2af8378d457e3e216470b2d442c6b",
+      "sourceBytes": 2265182,
+      "outputBytes": 907140,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "creature.dunefox": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/dunefox/portrait.png",
+      "url": "./prepared/objects/bcc9ad2d2e72734f9d3d0dcb45749d62f5b8da00f97a2aa0151b7c73ed68b391/asset.webp",
       "sourceHash": "f10c9654e9e1fd14fbf1ba08ed586292438bdf246147fb1f980862f958371658",
-      "outputHash": "f10c9654e9e1fd14fbf1ba08ed586292438bdf246147fb1f980862f958371658"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "0dcaa5f45325aee864f297ee69e9d1917d294950d68f080b761d2ddfda20f58e",
+      "sourceBytes": 2194198,
+      "outputBytes": 818244,
+      "width": 960,
+      "height": 720,
+      "alpha": false
     },
     "action.dunefox.sandburst-pounce": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/dunefox/sandburst-pounce.png",
+      "url": "./prepared/objects/30eebcdde1f0cb78ea619f3fefad87191d9a492d3eb2c83b091bcde4537c5b42/asset.webp",
       "sourceHash": "2da4185014088687cb0f459e5d2fe2c2245d0232671832de7613855446ec796e",
-      "outputHash": "2da4185014088687cb0f459e5d2fe2c2245d0232671832de7613855446ec796e"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "6a8df9e0c082f8a40c2802d14d58490f66caf51fe49da287cadbe9bb2cfe052b",
+      "sourceBytes": 2170343,
+      "outputBytes": 844030,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "action.dunefox.dune-whirl": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/dunefox/dune-whirl.png",
+      "url": "./prepared/objects/818341734155a2ad59f76203e79653213dc5bf642484902c23058f2bd20c782b/asset.webp",
       "sourceHash": "02760aece680a7f9afcb3d271df3c1a2ef6a0aedb7eb4d3756db6d82d87d638d",
-      "outputHash": "02760aece680a7f9afcb3d271df3c1a2ef6a0aedb7eb4d3756db6d82d87d638d"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "fb7215e69c2f6114f334155449503188808e5cc3ef70a807b97f774f92c07f87",
+      "sourceBytes": 2276576,
+      "outputBytes": 886614,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "action.dunefox.mirage-step": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/dunefox/mirage-step.png",
+      "url": "./prepared/objects/a4917c040957bffa9c550168fbadc01ab498054e38ab7ba37ee9e8fda478bb29/asset.webp",
       "sourceHash": "a5d25cc8409556d8b9df591b3eb13893eb36c3633332f7174a22fab6b65f5847",
-      "outputHash": "a5d25cc8409556d8b9df591b3eb13893eb36c3633332f7174a22fab6b65f5847"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "8b5ab61de898eedfd96142d9eecd2efef534ff194e71c0215ad3af62819fbdc7",
+      "sourceBytes": 2163623,
+      "outputBytes": 835886,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "creature.reedstag": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/reedstag/portrait.png",
+      "url": "./prepared/objects/8398a26a2972153ecf1f97f1574cdde2cb61041496bc01966d78c28398579970/asset.webp",
       "sourceHash": "d83d8414e19df976a92560bd80522d7e1cdd401070ffd63c21c9c9eb3b59a91e",
-      "outputHash": "d83d8414e19df976a92560bd80522d7e1cdd401070ffd63c21c9c9eb3b59a91e"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "d47c4c8e27b647cd9c2b52d6343c6712f90c335796ea468b51463dcd6cc1e36d",
+      "sourceBytes": 2419359,
+      "outputBytes": 931148,
+      "width": 960,
+      "height": 720,
+      "alpha": false
     },
     "action.reedstag.reed-rush": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/reedstag/reed-rush.png",
+      "url": "./prepared/objects/dc947d733b3b305a4fa53573ba6d8ee58859c5a8d8ed0103e12d982c5d8a51ff/asset.webp",
       "sourceHash": "1d0412f45856f8222a5f854007e9c75b368cc542b60b4e603a225fa022383231",
-      "outputHash": "1d0412f45856f8222a5f854007e9c75b368cc542b60b4e603a225fa022383231"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "61829a74b52190a71b46c98299b02b76a87f7f12931b92851ddb44b7cd98327b",
+      "sourceBytes": 2466056,
+      "outputBytes": 941616,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "action.reedstag.reed-shelter": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/reedstag/reed-shelter.png",
+      "url": "./prepared/objects/418927cb951ae33ec2c7ba7294590dbe520f92c7df1f823637d9877c6439c0e4/asset.webp",
       "sourceHash": "36546533cd010d1ace2b0bbcb61e9e94178e63ed68f0d85774337585fbd14c71",
-      "outputHash": "36546533cd010d1ace2b0bbcb61e9e94178e63ed68f0d85774337585fbd14c71"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "10c13afac915ec875e6f9408ba2f6180d980b8cf238a3a6bd9c85a713016a7b1",
+      "sourceBytes": 2341865,
+      "outputBytes": 915590,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "action.reedstag.mending-spring": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/reedstag/mending-spring.png",
+      "url": "./prepared/objects/35ee5ef1db6ff0e78bf63ac631c1605adc4f98085e28729a5db69f94ef12a549/asset.webp",
       "sourceHash": "4ff1c559164ae3d02aa213a2a25dc9eff7762b1a583ea7fca7e9fedaf33fbf6b",
-      "outputHash": "4ff1c559164ae3d02aa213a2a25dc9eff7762b1a583ea7fca7e9fedaf33fbf6b"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "a07eae57dceada140ac6f7483a51be0fe95b2b0fd2aea04c7ff7a487c9e8f520",
+      "sourceBytes": 2454017,
+      "outputBytes": 994176,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "creature.cindernewt": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/cindernewt/portrait.png",
+      "url": "./prepared/objects/26dde9469881d9aec5d79d8fa97c93cc852cd4ade94fba539fb36cb481800b7c/asset.webp",
       "sourceHash": "c11275104b78324f1d05c2f68c879e4375e22bbfaf45edf2b0ba7c79b895e25e",
-      "outputHash": "c11275104b78324f1d05c2f68c879e4375e22bbfaf45edf2b0ba7c79b895e25e"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "efad1db8533d8b9a2529339c67095e83ba7f4e2e0ce75595b7b8fc2b640db6cb",
+      "sourceBytes": 2293405,
+      "outputBytes": 864982,
+      "width": 960,
+      "height": 720,
+      "alpha": false
     },
     "action.cindernewt.cinder-lash": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/cindernewt/cinder-lash.png",
+      "url": "./prepared/objects/be0ad81db5061e653340e1aa76bb83fd5d9ec2f033c23b2eab4dc2e7d7763bc2/asset.webp",
       "sourceHash": "97732806b24ffbc6fcb4a6b72616ad7bdd19b90c2805ccd56192056652403c94",
-      "outputHash": "97732806b24ffbc6fcb4a6b72616ad7bdd19b90c2805ccd56192056652403c94"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "4a67fb993f15d8503d3cc56e0d2c773063d1eac82bbff1ce38359613455b7ac4",
+      "sourceBytes": 2410940,
+      "outputBytes": 948604,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "action.cindernewt.ember-breath": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/cindernewt/ember-breath.png",
+      "url": "./prepared/objects/e21eac62fafbe517dd20b59755cb2872c84b95a819185a05879b04d40bd28090/asset.webp",
       "sourceHash": "4580847c44b0e0dfcbc8ef509af776a6bd3dc7f2387d90ab8e413cd7c9b07135",
-      "outputHash": "4580847c44b0e0dfcbc8ef509af776a6bd3dc7f2387d90ab8e413cd7c9b07135"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "bbec256ea3960ad3df6f723838ea0d8d5ba6f21704acf851dc02753f78e6355b",
+      "sourceBytes": 2379450,
+      "outputBytes": 914510,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "action.cindernewt.ashen-veil": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/cindernewt/ashen-veil.png",
+      "url": "./prepared/objects/ce26408bfa1c5423990b76a8f1c248acef8b82c7691ea1a93665f1a660040ce2/asset.webp",
       "sourceHash": "96e68a11532631df4d34fc0e7f4a6e0574a8c0651f304bc83670daf85a0330ed",
-      "outputHash": "96e68a11532631df4d34fc0e7f4a6e0574a8c0651f304bc83670daf85a0330ed"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "84ffd526e42dfbd66151bc19fe963b71b22d90bb086a393da9b60b667ca82cfe",
+      "sourceBytes": 2330546,
+      "outputBytes": 890740,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "creature.coralcurl": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/coralcurl/portrait.png",
+      "url": "./prepared/objects/204c2b0335d97e45c8abe1ee7e9bb4dca0fe48372211c88ed3c0c5378f8f45b0/asset.webp",
       "sourceHash": "07f3e085383d4eefa4f48897409cbe07f784bff668a17c559e274bda3cfc4e8a",
-      "outputHash": "07f3e085383d4eefa4f48897409cbe07f784bff668a17c559e274bda3cfc4e8a"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "3b5210aa5ccc12dca319e4d92a87a969d09fdc7d97669d86363abc4eab1ba2ae",
+      "sourceBytes": 2278335,
+      "outputBytes": 912312,
+      "width": 960,
+      "height": 720,
+      "alpha": false
     },
     "action.coralcurl.bubble-ward": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/coralcurl/bubble-ward.png",
+      "url": "./prepared/objects/df171e452b508f8340f6c3a73f88be68f5e5374e1c39121b8c63b3d637378e9f/asset.webp",
       "sourceHash": "a04e7484c58eaddbb3aa044a422d9d24aae8ee63f5208654d60d967e83cafc7b",
-      "outputHash": "a04e7484c58eaddbb3aa044a422d9d24aae8ee63f5208654d60d967e83cafc7b"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "157746b88a402b8623fadaebbe91336dba615d62e12703631a3526787b6c6933",
+      "sourceBytes": 2260603,
+      "outputBytes": 906952,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "action.coralcurl.reef-jet": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/coralcurl/reef-jet.png",
+      "url": "./prepared/objects/fed6a8dbedc39c80f50f445bd9386faceb17f37a257c4e4d1179001a6cb6f527/asset.webp",
       "sourceHash": "d4ed45e79526b1fc9628f41b91f4c6355434fe0c846c4d947cf9d202ff736d82",
-      "outputHash": "d4ed45e79526b1fc9628f41b91f4c6355434fe0c846c4d947cf9d202ff736d82"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "7d06c081cf1438c3895c9f84d5ad8f923c85ec6110220cde617c1d9c66b25f54",
+      "sourceBytes": 2217318,
+      "outputBytes": 908020,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "action.coralcurl.coral-spiral": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/coralcurl/coral-spiral.png",
+      "url": "./prepared/objects/b995c201401f50cb45f7b823a0e5bd9431c65966616b4cd374f09b916c1c1b51/asset.webp",
       "sourceHash": "bdc5832bcfd490dc20319bbeaeb5333cc895266b165ddbd493cb602717a9d42a",
-      "outputHash": "bdc5832bcfd490dc20319bbeaeb5333cc895266b165ddbd493cb602717a9d42a"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "555e8d7b45715995d47abaa32c88b8118bd45a2c92340e9d61646c3db279b782",
+      "sourceBytes": 2625798,
+      "outputBytes": 1096264,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     },
     "keyword.water": {
-      "url": "./prepared/2de628ecb1b299e1fe062d0ecc006fa502019ab336f035fcbff3996cb7e06cb3/art/keywords/water.png",
+      "url": "./prepared/objects/fed6a8dbedc39c80f50f445bd9386faceb17f37a257c4e4d1179001a6cb6f527/asset.webp",
       "sourceHash": "d4ed45e79526b1fc9628f41b91f4c6355434fe0c846c4d947cf9d202ff736d82",
-      "outputHash": "d4ed45e79526b1fc9628f41b91f4c6355434fe0c846c4d947cf9d202ff736d82"
+      "recipeHash": "eccc9e7dad311f6e7f165eb9f0a4df40a1966fc18679e8d0f213a3a686d73a6d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "7d06c081cf1438c3895c9f84d5ad8f923c85ec6110220cde617c1d9c66b25f54",
+      "sourceBytes": 2217318,
+      "outputBytes": 908020,
+      "width": 720,
+      "height": 960,
+      "alpha": false
     }
   }
 }

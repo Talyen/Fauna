@@ -1,0 +1,13 @@
+{
+  "url": "./prepared/objects/b8a0926bf532e8f992fd48a4cc500a78d0ab06d8683e99fbeb7675beaa356b16/asset.webp",
+  "sourceHash": "c33b021c66c5d31edbd54a998ee4e556d214ac2ded4248c507a058d0e5d70e95",
+  "recipeHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+  "recipe": "copy",
+  "settingsHash": "be2422b264630209eec8d0c291617d2beed84572cea0b0f10c8ece241e86c076",
+  "outputHash": "c33b021c66c5d31edbd54a998ee4e556d214ac2ded4248c507a058d0e5d70e95",
+  "sourceBytes": 44242,
+  "outputBytes": 44242,
+  "width": 420,
+  "height": 563,
+  "alpha": false
+}
