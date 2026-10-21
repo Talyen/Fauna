@@ -860,7 +860,11 @@ test("shadcn tabs and settings retain native keyboard behavior and game navigati
   await page.keyboard.down("ArrowRight");
   await expect(page.getByRole("radio", { name: "125%", exact: true })).toBeChecked();
   await page.keyboard.up("ArrowRight");
+  // WASD follows the same wrapping behavior as Radix's native arrow navigation.
   await page.keyboard.press("d");
+  await expect(page.getByRole("radio", { name: "75%", exact: true })).toBeFocused();
+  await expect(page.getByRole("radio", { name: "75%", exact: true })).toBeChecked();
+  await page.keyboard.press("a");
   await expect(page.getByRole("radio", { name: "125%", exact: true })).toBeFocused();
   await expect(page.getByRole("radio", { name: "125%", exact: true })).toBeChecked();
   await page.keyboard.press("Escape");
