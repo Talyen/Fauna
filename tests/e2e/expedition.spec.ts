@@ -937,6 +937,8 @@ test("battle tooltips, pointer targeting, Mana forecast and corners follow the d
   await expect(page.locator(".game-tooltip")).toHaveCount(0);
   await expect(page.locator(".app:not([inert]) .player-row .invalid-target")).toHaveCount(3);
   await expect(page.locator('.mana-gem[data-preview-spent="true"]')).toHaveCount(1);
+  await expect(page.locator(".knockout-preview")).toHaveCount(0);
+  await enemy.hover();
   await expect(page.locator(".knockout-preview")).toHaveCount(1);
   expect((await state(page)).battle!.mana).toBe(4);
   await page.mouse.move(0, 0);
@@ -959,6 +961,8 @@ test("battle tooltips, pointer targeting, Mana forecast and corners follow the d
       )
       .toBe(true);
     await fits(page);
+    await enemy.hover();
+    await expect(page.locator(".knockout-preview")).toHaveCount(1);
     await captureScreen(page, { path: `reports/battle-review/targeting-${width}.png` });
   }
   await page.setViewportSize({ width: 1280, height: 800 });

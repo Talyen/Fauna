@@ -86,8 +86,11 @@ for (const width of [1280, 1920]) {
     const target = page.locator('[data-actor-id="enemy-0"] .creature-card');
     await target.hover();
     await expect(page.locator('[data-actor-id="enemy-0"]')).toHaveAttribute("data-active-target", "true");
-    await expect(page.locator(".target-preview")).toBeVisible();
-    await expect(page.locator(".target-preview")).toContainText("Poison");
+    const recipientPreview = page.locator('[data-actor-id="enemy-0"] .target-preview');
+    await expect(recipientPreview).toBeVisible();
+    await expect(recipientPreview).toContainText("Poison");
+    await expect(page.locator('[data-actor-id="ally-0"] .target-preview')).toBeVisible();
+    await expect(page.locator(".target-preview")).toHaveCount(2);
     expect(
       await row.evaluate((element) => ({
         top: (element as HTMLElement).offsetTop,
