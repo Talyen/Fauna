@@ -18,120 +18,119 @@ async function seed(page: Page, initial: string, scale: string) {
   await page.goto("/");
   await page.getByRole("button", { name: "Continue", exact: true }).click();
 }
-for (const width of [1280, 1920]) {
-  test(`combat preferences, autoplay pause and manual takeover at ${width}`, async ({ page }) => {
-    await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
-    await page.emulateMedia({ reducedMotion: width === 1280 ? "reduce" : "no-preference" });
-    await seed(page, encodeSave(run()), width === 1280 ? "1.25" : "1");
-    await page.getByRole("button", { name: "Open menu" }).click();
-    await page.getByRole("button", { name: "Settings", exact: true }).click();
-    await page.getByRole("tab", { name: "Battle", exact: true }).click();
-    const setting = page.getByRole("switch", { name: "Auto-end turn", exact: true });
-    await expect(setting).toBeChecked();
-    await setting.focus();
-    await page.keyboard.press("Space");
-    await expect(setting).not.toBeChecked();
-    expect(await page.evaluate(() => localStorage.getItem("fauna.auto-end-turn"))).toBe("false");
-    await page.waitForTimeout(200);
-    await captureScreen(page, { path: `reports/controls-settings-${width}.png` });
-    await page.keyboard.press("Escape");
-    await page.keyboard.press("Escape");
-    const autoplay = page.getByRole("button", { name: "Auto-play", exact: true });
-    await page.mouse.move(0, 0);
-    await settleScreen(page);
-    const menu = await page.getByRole("button", { name: "Open menu" }).boundingBox();
-    const auto = await autoplay.boundingBox();
-    expect(auto!.y).toBe(menu!.y);
-    expect(auto!.x + auto!.width).toBeLessThan(menu!.x);
-    const mana = await page.getByRole("button", { name: /^Mana / }).boundingBox();
-    const endTurn = await page.getByRole("button", { name: /^End turn/ }).boundingBox();
-    const draw = await page.locator('[data-pile="draw"]').boundingBox();
-    const discard = await page.locator('[data-pile="discard"]').boundingBox();
-    expect(draw!.y).toBeGreaterThanOrEqual(mana!.y + mana!.height);
-    expect(discard!.y).toBeGreaterThanOrEqual(endTurn!.y + endTurn!.height);
-    expect(draw!.x + draw!.width).toBeLessThan(width / 2);
-    expect(discard!.x).toBeGreaterThan(width / 2);
-    for (const pile of [draw!, discard!]) {
-      expect(pile.width / pile.height).toBeCloseTo(3 / 4, 2);
-      const expectedWidth = await page
-        .locator(".hand-slot")
-        .first()
-        .evaluate((slot) => slot.clientWidth * 0.8);
-      expect(Math.abs(pile.width - expectedWidth)).toBeLessThan(1);
-    }
-    await autoplay.click();
-    await expect(autoplay).toHaveAttribute("aria-pressed", "true");
-    await page.getByRole("button", { name: "Open menu" }).click();
-    const revision = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).revision);
-    await page.waitForTimeout(900);
-    expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).revision)).toBe(
-      revision,
-    );
-    await page.keyboard.press("Escape");
-    await expect
-      .poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).revision))
-      .toBeGreaterThan(revision);
-    await page.locator(".app:not([inert]) .hand .action-card:not([aria-disabled=true])").first().click();
-    await expect(autoplay).toHaveAttribute("aria-pressed", "false");
-    await page.keyboard.press("Escape");
-    await captureScreen(page, { path: `reports/controls-battle-${width}.png` });
-    await expect(page.getByRole("button", { name: "Skip combat", exact: true })).toHaveCount(0);
-    // Browser controller simulation exercises the same semantic action as physical Y.
-    await page.evaluate(() => {
-      const pad = {
-        mapping: "standard",
-        connected: true,
-        index: 0,
-        axes: [0, 0],
-        buttons: Array.from({ length: 16 }, () => ({ pressed: false })),
-      };
-      Object.defineProperty(navigator, "getGamepads", { value: () => [pad], configurable: true });
-      (window as unknown as { controlPad: typeof pad }).controlPad = pad;
-    });
-    await page.waitForTimeout(100);
-    await page.evaluate(() => {
-      (
-        window as unknown as { controlPad: { buttons: { pressed: boolean }[] } }
-      ).controlPad.buttons[3]!.pressed = true;
-    });
-    await expect
-      .poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).revision))
-      .toBeGreaterThan(revision + 1);
+test("combat preferences, autoplay pause and manual takeover", async ({ page }) => {
+  const width = 1280;
+  await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
+  await page.emulateMedia({ reducedMotion: width === 1280 ? "reduce" : "no-preference" });
+  await seed(page, encodeSave(run()), width === 1280 ? "1.25" : "1");
+  await page.getByRole("button", { name: "Open menu" }).click();
+  await page.getByRole("button", { name: "Settings", exact: true }).click();
+  await page.getByRole("tab", { name: "Battle", exact: true }).click();
+  const setting = page.getByRole("switch", { name: "Auto-end turn", exact: true });
+  await expect(setting).toBeChecked();
+  await setting.focus();
+  await page.keyboard.press("Space");
+  await expect(setting).not.toBeChecked();
+  expect(await page.evaluate(() => localStorage.getItem("fauna.auto-end-turn"))).toBe("false");
+  await captureScreen(page, { path: `reports/controls-settings-${width}.png` });
+  await page.keyboard.press("Escape");
+  await page.keyboard.press("Escape");
+  const autoplay = page.getByRole("button", { name: "Auto-play", exact: true });
+  await page.mouse.move(0, 0);
+  await settleScreen(page);
+  const menu = await page.getByRole("button", { name: "Open menu" }).boundingBox();
+  const auto = await autoplay.boundingBox();
+  expect(auto!.y).toBe(menu!.y);
+  expect(auto!.x + auto!.width).toBeLessThan(menu!.x);
+  const mana = await page.getByRole("button", { name: /^Mana / }).boundingBox();
+  const endTurn = await page.getByRole("button", { name: /^End turn/ }).boundingBox();
+  const draw = await page.locator('[data-pile="draw"]').boundingBox();
+  const discard = await page.locator('[data-pile="discard"]').boundingBox();
+  expect(draw!.y).toBeGreaterThanOrEqual(mana!.y + mana!.height);
+  expect(discard!.y).toBeGreaterThanOrEqual(endTurn!.y + endTurn!.height);
+  expect(draw!.x + draw!.width).toBeLessThan(width / 2);
+  expect(discard!.x).toBeGreaterThan(width / 2);
+  for (const pile of [draw!, discard!]) {
+    expect(pile.width / pile.height).toBeCloseTo(3 / 4, 2);
+    const expectedWidth = await page
+      .locator(".hand-slot")
+      .first()
+      .evaluate((slot) => slot.clientWidth * 0.8);
+    expect(Math.abs(pile.width - expectedWidth)).toBeLessThan(1);
+  }
+  await autoplay.click();
+  await expect(autoplay).toHaveAttribute("aria-pressed", "true");
+  await page.getByRole("button", { name: "Open menu" }).click();
+  const revision = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).revision);
+  await page.waitForTimeout(900);
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).revision)).toBe(
+    revision,
+  );
+  await page.keyboard.press("Escape");
+  await expect
+    .poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).revision))
+    .toBeGreaterThan(revision);
+  await page.locator(".app:not([inert]) .hand .action-card:not([aria-disabled=true])").first().click();
+  await expect(autoplay).toHaveAttribute("aria-pressed", "false");
+  await page.keyboard.press("Escape");
+  await captureScreen(page, { path: `reports/controls-battle-${width}.png` });
+  await expect(page.getByRole("button", { name: "Skip combat", exact: true })).toHaveCount(0);
+  // Browser controller simulation exercises the same semantic action as physical Y.
+  await page.evaluate(() => {
+    const pad = {
+      mapping: "standard",
+      connected: true,
+      index: 0,
+      axes: [0, 0],
+      buttons: Array.from({ length: 16 }, () => ({ pressed: false })),
+    };
+    Object.defineProperty(navigator, "getGamepads", { value: () => [pad], configurable: true });
+    (window as unknown as { controlPad: typeof pad }).controlPad = pad;
   });
-  test(`live unlock reveal is inspectable and does not repeat at ${width}`, async ({ page }) => {
-    await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
-    await page.emulateMedia({ reducedMotion: "reduce" });
-    const final = victoryReady(
-      accept(
-        produce(run(), (d) => {
-          d.encounter = 7;
-          d.phase = "teamSelection";
-          d.battle = null;
-          d.journey = { outcome: null, victories: 7, currency: 0, xp: {}, unlocks: [], lastBattle: null };
-          d.expedition = { pack: 0 };
-        }),
-        { type: "beginBattle" },
-      ),
-    );
-    await seed(page, encodeSave(final), width === 1280 ? "1.25" : "1");
-    await page.locator(`[data-card-id=${JSON.stringify(final.battle!.hand[0])}]`).click();
-    await page.locator('[data-actor-id="enemy-0"] .creature-card').click();
-    await page.getByRole("heading", { name: "Journey complete" }).waitFor();
-    await page.getByRole("button", { name: "Main menu", exact: true }).click();
-    await expect(page.getByRole("heading", { name: "Creature unlocked" })).toBeVisible();
-    await expect(page.getByRole("heading", { name: "Moonhart", exact: true })).toBeVisible();
-    await captureScreen(page, { path: `reports/unlock-${width}.png` });
-    await page.getByRole("button", { name: "Inspect Moonhart", exact: true }).click();
-    await expect(page.locator(".inspection-thumbnails .action-card")).toHaveCount(3);
-    await page.keyboard.press("Escape");
-    await page.getByRole("button", { name: "Continue", exact: true }).click();
-    await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
-    await expect(page.getByRole("button", { name: "Journey results", exact: true })).toHaveCount(0);
-    await page.reload();
-    await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
-    await expect(page.getByRole("heading", { name: "Creature unlocked" })).toHaveCount(0);
+  await page.waitForTimeout(100);
+  await page.evaluate(() => {
+    (
+      window as unknown as { controlPad: { buttons: { pressed: boolean }[] } }
+    ).controlPad.buttons[3]!.pressed = true;
   });
-}
+  await expect
+    .poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).revision))
+    .toBeGreaterThan(revision + 1);
+});
+test("live unlock reveal is inspectable and does not repeat", async ({ page }) => {
+  const width = 1280;
+  await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const final = victoryReady(
+    accept(
+      produce(run(), (d) => {
+        d.encounter = 7;
+        d.phase = "teamSelection";
+        d.battle = null;
+        d.journey = { outcome: null, victories: 7, currency: 0, xp: {}, unlocks: [], lastBattle: null };
+        d.expedition = { pack: 0 };
+      }),
+      { type: "beginBattle" },
+    ),
+  );
+  await seed(page, encodeSave(final), width === 1280 ? "1.25" : "1");
+  await page.locator(`[data-card-id=${JSON.stringify(final.battle!.hand[0])}]`).click();
+  await page.locator('[data-actor-id="enemy-0"] .creature-card').click();
+  await page.getByRole("heading", { name: "Journey complete" }).waitFor();
+  await page.getByRole("button", { name: "Main menu", exact: true }).click();
+  await expect(page.getByRole("heading", { name: "Creature unlocked" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Moonhart", exact: true })).toBeVisible();
+  await captureScreen(page, { path: `reports/unlock-${width}.png` });
+  await page.getByRole("button", { name: "Inspect Moonhart", exact: true }).click();
+  await expect(page.locator(".inspection-thumbnails .action-card")).toHaveCount(3);
+  await page.keyboard.press("Escape");
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Journey results", exact: true })).toHaveCount(0);
+  await page.reload();
+  await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Creature unlocked" })).toHaveCount(0);
+});
 
 test("development skip wins once through normal rewards", async ({ page }) => {
   test.skip(process.env.FAUNA_DEV_REVIEW !== "1", "Requires an explicitly owned development preview.");

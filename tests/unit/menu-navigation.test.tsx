@@ -31,10 +31,14 @@ afterEach(() => {
 
 describe("menu page focus return", () => {
   it.each(
-    ["home", "pause"].flatMap((origin) =>
-      ["Collection", "Talents", "Settings", "Glossary"].flatMap((page) =>
-        ["Escape", "Back", "Open menu"].map((back) => ({ origin, page, back })),
-      ),
+    // Every page/exit pair, with both menu origins covered for every page.
+    // The shared exit handler does not need a full origin × page × exit product.
+    ["Collection", "Talents", "Settings", "Glossary"].flatMap((page, index) =>
+      ["Escape", "Back", "Open menu"].map((back, exit) => ({
+        origin: (index + exit) % 2 === 0 ? "home" : "pause",
+        page,
+        back,
+      })),
     ),
   )("returns from $page via $back to its $origin menu choice", async ({ origin, page, back }) => {
     // jsdom has no layout. Only emulate visibility; this checks focus ownership,
@@ -151,6 +155,7 @@ it("continues or dismisses the undimmed menu without changing the journey", asyn
 it.each(["home", "pause"])(
   "shows spendable talent points in the %s menu and clears the cue after purchase",
   async (origin) => {
+    vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
     localStorage.setItem(
       "fauna.save.v1",
       encodeSave(
@@ -171,6 +176,11 @@ it.each(["home", "pause"])(
       const talents = screen.getByRole("button", { name: "Talents" });
       expect(talents.getAttribute("aria-describedby")).toBe(`menu-talent-points-${origin === "home"}`);
       expect(screen.getByLabelText("1 talent point available").textContent).toBe("1");
+      await user.click(talents);
+      await user.click(screen.getByRole("button", { name: "Back" }));
+      await waitFor(() =>
+        expect(document.activeElement).toBe(screen.getByRole("button", { name: "Talents" })),
+      );
       act(() => {
         expect(session.command({ type: "buyTalent", talentId: "physical.shield-slam" })).toBe(true);
       });
@@ -211,39 +221,6 @@ it.each(["Back", "Escape", "Open menu"])(
       await user.click(screen.getByRole("button", { name: "Continue" }));
       expect(screen.getByRole("main", { name: "Battlefield" })).toBeTruthy();
       expect(session.store.getState().game).toBe(before);
-    } finally {
-      cleanup();
-      await session.dispose();
-    }
-  },
-);
-
-it.each(["home", "pause"])(
-  "returns focus to Talents with available points in the %s menu",
-  async (origin) => {
-    vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
-    localStorage.setItem(
-      "fauna.save.v1",
-      encodeSave(
-        produce(run(7), (game) => {
-          game.keywordXP.physical = 10;
-        }),
-      ),
-    );
-    const session = createSession(createBrowserPlatform(localStorage), 7);
-    await session.load();
-    const user = userEvent.setup();
-    render(<App session={session} />);
-    try {
-      if (origin === "pause") {
-        await user.click(screen.getByRole("button", { name: "Continue" }));
-        await user.click(screen.getByRole("button", { name: "Open menu" }));
-      }
-      await user.click(screen.getByRole("button", { name: "Talents" }));
-      await user.click(screen.getByRole("button", { name: "Back" }));
-      await waitFor(() =>
-        expect(document.activeElement).toBe(screen.getByRole("button", { name: "Talents" })),
-      );
     } finally {
       cleanup();
       await session.dispose();

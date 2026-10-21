@@ -8,6 +8,17 @@ export const REVIEW_VIEWPORTS = [
   [3440, 1440],
 ] as const;
 
+// Exercise both text sizes at the tightest viewport, then each remaining layout
+// profile/aspect ratio once. Behavior tests do not need this entire matrix.
+export const LAYOUT_CASES = [
+  [1280, 720, 1],
+  [1280, 720, 1.25],
+  [1280, 800, 1.25],
+  [1920, 1080, 1],
+  [2560, 1080, 1.25],
+  [3440, 1440, 1],
+] as const;
+
 /** Also runs against deliberate failures: clipping must not masquerade as fitting. */
 export function layoutViolations() {
   const failures: string[] = [];

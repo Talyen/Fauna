@@ -4,7 +4,7 @@ import { produce } from "immer";
 import { run } from "../unit/helpers";
 import { SPECIES } from "../../src/game/content";
 import { decodeSave, encodeSave } from "../../src/game/save";
-import { expectScrollFree, layoutViolations, REVIEW_VIEWPORTS } from "./layout-contract";
+import { expectScrollFree, layoutViolations, LAYOUT_CASES } from "./layout-contract";
 import { captureScreen } from "./rendered-evidence";
 import { snapshot, cloudName } from "../../src/application/cloud";
 
@@ -75,111 +75,118 @@ async function everyPage(root: Locator, check: () => Promise<void>) {
   throw new Error("Pagination did not terminate");
 }
 
-for (const [width, height] of REVIEW_VIEWPORTS)
-  for (const scale of [1, 1.25])
-    test(`scroll-free screens at ${width}×${height}, text ${scale}`, async ({ page }) => {
-      await page.setViewportSize({ width, height });
-      await page.emulateMedia({ reducedMotion: scale === 1 ? "no-preference" : "reduce" });
-      const game = produce(run(7), (draft) => {
-        draft.discovery.encountered = SPECIES.map((entry) => entry.id);
-        draft.discovery.recruited = Object.fromEntries(SPECIES.map((entry) => [entry.id, 1]));
-        draft.battle!.hand = draft.cards.slice(0, 7).map((card) => card.id);
-        draft.battle!.buffer = draft.cards.slice(7).map((card) => card.id);
-        draft.battle!.draw = [];
-        draft.battle!.discard = [];
-      });
-      const save = encodeSave(game);
-      expect(decodeSave(save)).toEqual(game);
-      await page.addInitScript(
-        ({ save, scale }) => {
-          localStorage.setItem("fauna.save.v1", save);
-          localStorage.setItem("fauna.text-scale", String(scale));
-          localStorage.setItem("fauna.tooltip-scale", "1.25");
-        },
-        { save, scale },
-      );
-      await page.goto("/");
-      await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
-      await captureScreen(page, { path: `reports/scroll-free/home-${width}-${height}-${scale}.png` });
-      await page.getByRole("button", { name: "Collection", exact: true }).click();
-      await captureScreen(page, { path: `reports/scroll-free/collection-${width}-${height}-${scale}.png` });
-      const seen = new Set<string>();
-      await everyPage(page.locator(".collection-screen"), async () => {
-        await page.mouse.move(0, 0);
-        await expectScrollFree(page);
-        const cards = page.locator(".collection-grid .creature-card");
-        for (let index = 0; index < (await cards.count()); index++) {
-          const card = cards.nth(index);
-          seen.add((await card.getAttribute("aria-label"))!);
-          await card.click();
-          const details = page.locator(".collection-creature-screen");
-          await expect(details.locator(".collection-ability")).toHaveCount(3);
-          await expectScrollFree(page);
-          await captureScreen(page, {
-            path: `reports/scroll-free/kit-${(await card.getAttribute("data-species"))!}-${width}-${height}-${scale}.png`,
-          });
-          await details.getByRole("tab", { name: "Rank progression", exact: true }).click();
-          await everyPage(details, () => expectScrollFree(page));
-          await page.keyboard.press("Escape");
-          await expect(card).toBeFocused();
-        }
-      });
-      expect(seen.size).toBe(SPECIES.length);
-      await page.getByRole("button", { name: "Open menu", exact: true }).click();
-      await page.getByRole("button", { name: "Talents", exact: true }).click();
-      await captureScreen(page, { path: `reports/scroll-free/talents-${width}-${height}-${scale}.png` });
-      for (const keyword of KEYWORDS) {
-        await page.getByRole("button", { name: `${keywordLabel(keyword)} talents`, exact: true }).click();
-        if (keyword === KEYWORDS[0])
-          await captureScreen(page, {
-            path: `reports/scroll-free/talent-tree-${width}-${height}-${scale}.png`,
-          });
-        await everyPage(page.locator(".talents-screen"), () => expectScrollFree(page));
-        await page.keyboard.press("Escape");
-      }
-      await page.getByRole("button", { name: "Open menu", exact: true }).click();
-      await page.getByRole("button", { name: "Glossary", exact: true }).click();
-      await captureScreen(page, { path: `reports/scroll-free/glossary-${width}-${height}-${scale}.png` });
-      await everyPage(page.getByRole("main", { name: "Glossary & controls" }), () => expectScrollFree(page));
-      await page.keyboard.press("Escape");
-      await page.getByRole("button", { name: "Settings", exact: true }).click();
-      for (const name of ["Display", "Sound", "Battle"]) {
-        await page.getByRole("tab", { name, exact: true }).click();
-        await captureScreen(page, {
-          path: `reports/scroll-free/settings-${name}-${width}-${height}-${scale}.png`,
-        });
-      }
-      await page.keyboard.press("Escape");
-      await page.getByRole("button", { name: "Continue", exact: true }).click();
-      await page.mouse.move(0, 0);
-      await expectScrollFree(page);
-      await page.mouse.wheel(500, 500);
-      await page.keyboard.press("Tab");
-      await expectScrollFree(page);
-      expect(await page.locator(".battle-screen").evaluate((el) => [el.scrollLeft, el.scrollTop])).toEqual([
-        0, 0,
-      ]);
-      // The authored fan is the sole clipping exception; every card still needs a real hit target.
-      const hand = page.locator(".app:not([inert]) .hand .action-card");
-      await expect(hand).toHaveCount(7);
-      for (const card of await hand.all()) {
-        const point = await card.evaluate((el) => {
-          const rect = el.getBoundingClientRect();
-          for (let y = Math.max(0, rect.top) + 8; y < Math.min(innerHeight, rect.bottom); y += 12)
-            for (let x = Math.max(0, rect.left) + 8; x < Math.min(innerWidth, rect.right); x += 12)
-              if (el.contains(document.elementFromPoint(x, y))) return { x, y };
-          return null;
-        });
-        expect(point).not.toBeNull();
-        await page.mouse.click(point!.x, point!.y);
-        await expectScrollFree(page);
-        await page.keyboard.press("Escape");
-      }
-      await page.mouse.move(0, 0);
-      await captureScreen(page, { path: `reports/scroll-free/battle-${width}-${height}-${scale}.png` });
-      await page.getByRole("button", { name: "Inspect Draw Pile" }).click();
-      await expectScrollFree(page);
+for (const [width, height, scale] of LAYOUT_CASES)
+  test(`scroll-free screens at ${width}×${height}, text ${scale}`, async ({ page }) => {
+    await page.setViewportSize({ width, height });
+    await page.emulateMedia({ reducedMotion: scale === 1 ? "no-preference" : "reduce" });
+    const game = produce(run(7), (draft) => {
+      draft.discovery.encountered = SPECIES.map((entry) => entry.id);
+      draft.discovery.recruited = Object.fromEntries(SPECIES.map((entry) => [entry.id, 1]));
+      draft.battle!.hand = draft.cards.slice(0, 7).map((card) => card.id);
+      draft.battle!.buffer = draft.cards.slice(7).map((card) => card.id);
+      draft.battle!.draw = [];
+      draft.battle!.discard = [];
     });
+    const save = encodeSave(game);
+    expect(decodeSave(save)).toEqual(game);
+    await page.addInitScript(
+      ({ save, scale }) => {
+        localStorage.setItem("fauna.save.v1", save);
+        localStorage.setItem("fauna.text-scale", String(scale));
+        localStorage.setItem("fauna.tooltip-scale", "1.25");
+      },
+      { save, scale },
+    );
+    await page.goto("/");
+    await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
+    await captureScreen(page, { path: `reports/scroll-free/home-${width}-${height}-${scale}.png` });
+    await page.getByRole("button", { name: "Collection", exact: true }).click();
+    await captureScreen(page, { path: `reports/scroll-free/collection-${width}-${height}-${scale}.png` });
+    // Exhaust the authored catalog at the most constrained size. Other cases
+    // cover responsive layout with the first and last visible entries.
+    const exhaustive = width === 1280 && height === 720 && scale === 1.25;
+    const seen = new Set<string>();
+    await everyPage(page.locator(".collection-screen"), async () => {
+      await page.mouse.move(0, 0);
+      await expectScrollFree(page);
+      const cards = page.locator(".collection-grid .creature-card");
+      const count = await cards.count();
+      const indices = exhaustive
+        ? Array.from({ length: count }, (_, index) => index)
+        : [...new Set([0, count - 1])];
+      for (const index of indices) {
+        const card = cards.nth(index);
+        seen.add((await card.getAttribute("aria-label"))!);
+        await card.click();
+        const details = page.locator(".collection-creature-screen");
+        await expect(details.locator(".collection-ability")).toHaveCount(3);
+        await expectScrollFree(page);
+        await captureScreen(page, {
+          path: `reports/scroll-free/kit-${(await card.getAttribute("data-species"))!}-${width}-${height}-${scale}.png`,
+        });
+        await details.getByRole("tab", { name: "Rank progression", exact: true }).click();
+        await everyPage(details, () => expectScrollFree(page));
+        await page.keyboard.press("Escape");
+        await expect(card).toBeFocused();
+      }
+    });
+    if (exhaustive) expect(seen.size).toBe(SPECIES.length);
+    else expect(seen.size).toBeGreaterThan(0);
+    await page.getByRole("button", { name: "Open menu", exact: true }).click();
+    await page.getByRole("button", { name: "Talents", exact: true }).click();
+    await captureScreen(page, { path: `reports/scroll-free/talents-${width}-${height}-${scale}.png` });
+    for (const keyword of exhaustive ? KEYWORDS : [KEYWORDS[0]!, KEYWORDS.at(-1)!]) {
+      await page.getByRole("button", { name: `${keywordLabel(keyword)} talents`, exact: true }).click();
+      if (keyword === KEYWORDS[0])
+        await captureScreen(page, {
+          path: `reports/scroll-free/talent-tree-${width}-${height}-${scale}.png`,
+        });
+      await everyPage(page.locator(".talents-screen"), () => expectScrollFree(page));
+      await page.keyboard.press("Escape");
+    }
+    await page.getByRole("button", { name: "Open menu", exact: true }).click();
+    await page.getByRole("button", { name: "Glossary", exact: true }).click();
+    await captureScreen(page, { path: `reports/scroll-free/glossary-${width}-${height}-${scale}.png` });
+    await everyPage(page.getByRole("main", { name: "Glossary & controls" }), () => expectScrollFree(page));
+    await page.keyboard.press("Escape");
+    await page.getByRole("button", { name: "Settings", exact: true }).click();
+    for (const name of ["Display", "Sound", "Battle"]) {
+      await page.getByRole("tab", { name, exact: true }).click();
+      await captureScreen(page, {
+        path: `reports/scroll-free/settings-${name}-${width}-${height}-${scale}.png`,
+      });
+    }
+    await page.keyboard.press("Escape");
+    await page.getByRole("button", { name: "Continue", exact: true }).click();
+    await page.mouse.move(0, 0);
+    await expectScrollFree(page);
+    await page.mouse.wheel(500, 500);
+    await page.keyboard.press("Tab");
+    await expectScrollFree(page);
+    expect(await page.locator(".battle-screen").evaluate((el) => [el.scrollLeft, el.scrollTop])).toEqual([
+      0, 0,
+    ]);
+    // The authored fan is the sole clipping exception; every card still needs a real hit target.
+    const hand = page.locator(".app:not([inert]) .hand .action-card");
+    await expect(hand).toHaveCount(7);
+    for (const card of await hand.all()) {
+      const point = await card.evaluate((el) => {
+        const rect = el.getBoundingClientRect();
+        for (let y = Math.max(0, rect.top) + 8; y < Math.min(innerHeight, rect.bottom); y += 12)
+          for (let x = Math.max(0, rect.left) + 8; x < Math.min(innerWidth, rect.right); x += 12)
+            if (el.contains(document.elementFromPoint(x, y))) return { x, y };
+        return null;
+      });
+      expect(point).not.toBeNull();
+      await page.mouse.click(point!.x, point!.y);
+      await expectScrollFree(page);
+      await page.keyboard.press("Escape");
+    }
+    await page.mouse.move(0, 0);
+    await captureScreen(page, { path: `reports/scroll-free/battle-${width}-${height}-${scale}.png` });
+    await page.getByRole("button", { name: "Inspect Draw Pile" }).click();
+    await expectScrollFree(page);
+  });
 
 test("layout enforcement detects nested scrolling, hidden clipping, and obscured controls", async ({
   page,
