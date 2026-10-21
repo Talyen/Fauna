@@ -100,8 +100,8 @@ export function PagedItems<T>({
   useLayoutEffect(() => {
     const focused = focusedItem.current;
     if (focused && (!focused.isConnected || focused.matches(":disabled"))) {
-      root.current?.querySelector<HTMLButtonElement>("button:not(:disabled)")?.focus({ preventScroll: true });
       focusedItem.current = null;
+      root.current?.querySelector<HTMLButtonElement>("button:not(:disabled)")?.focus({ preventScroll: true });
     }
   }, [items, page, capacity, pages]);
   return (

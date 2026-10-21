@@ -38,6 +38,7 @@ it("preserves the current item on resize, clamps shortened lists and restores re
   expect(document.activeElement).toBe(screen.getByRole("button", { name: "Stormfin" }));
   view.rerender(<Gallery size={1} items={["Mossback"]} />);
   expect(screen.getByRole("button", { name: "Mossback" })).toBeTruthy();
+  expect(document.activeElement).toBe(screen.getByRole("button", { name: "Mossback" }));
   expect(screen.queryByRole("navigation")).toBeNull();
   view.rerender(<Gallery items={[]} />);
   expect(screen.queryByRole("button")).toBeNull();
