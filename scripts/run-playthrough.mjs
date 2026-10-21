@@ -64,6 +64,7 @@ if (!args.includes("--worker")) {
     await fingerprint(path.join(root, "src/application"));
     const identity = hash.digest("hex");
     const { runJourney } = await server.ssrLoadModule("/src/application/playthrough.ts");
+    const { FIRST_RUN_STARTERS } = await server.ssrLoadModule("/src/game/content.ts");
     const replay = value("--replay") ? JSON.parse(await readFile(value("--replay"), "utf8")) : undefined;
     const config = replay?.config ?? {
       seed: Number(value("--seed", 42)),
@@ -82,7 +83,7 @@ if (!args.includes("--worker")) {
       config.runs < 1 ||
       config.runs > 20 ||
       !["heuristic", "random"].includes(config.policy) ||
-      !["mossguard", "emberback", "pollenmoth", "prismram", "captoad"].includes(config.starter)
+      !FIRST_RUN_STARTERS.includes(config.starter)
     )
       throw new Error("Invalid scenario configuration.");
     const output = path.resolve(root, value("--out", "reports/playthrough"));
