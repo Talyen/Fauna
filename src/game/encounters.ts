@@ -26,6 +26,8 @@ export const COMBAT_PACKS = [
   ["prismram", "mossguard", "silkmoth"],
   ["stormfin", "prismram", "emberback"],
   ["briartooth", "silkmoth", "prismram"],
+  ["captoad", "mossguard", "pollenmoth"],
+  ["stormfin", "captoad", "emberback"],
 ] as const;
 export const BOSSES = [
   {
@@ -87,11 +89,13 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
       damageType:
         kind === "emberfox"
           ? "burn"
-          : kind === "stormfin"
-            ? "stun"
-            : kind === "silkmoth" || kind === "moonhart" || kind === "pollenmoth" || kind === "prismram"
-              ? "light"
-              : "nature",
+          : kind === "captoad"
+            ? "poison"
+            : kind === "stormfin"
+              ? "stun"
+              : kind === "silkmoth" || kind === "moonhart" || kind === "pollenmoth" || kind === "prismram"
+                ? "light"
+                : "nature",
     })),
   };
 }

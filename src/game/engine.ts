@@ -325,6 +325,69 @@ function rebuildCards(state: GameState) {
     state.battle.draw = state.cards.map((c) => c.id);
   }
 }
+/** Manual swaps retain zone slots; swap cards return the incoming kit to the draw pile. */
+function swapBackup(
+  state: GameState,
+  activeId: string,
+  backupId: string,
+  events: GameEvent[],
+  fromCard = false,
+) {
+  const index = state.team.findIndex((unit) => unit.id === activeId);
+  const backupIndex = state.reserves.findIndex((unit) => unit.id === backupId);
+  const outgoing = state.team[index]!;
+  const incoming = state.reserves[backupIndex]!;
+  state.team[index] = incoming;
+  state.reserves[backupIndex] = outgoing;
+  const oldDefs = CARDS.filter((card) => card.species === outgoing.species);
+  const newDefs = CARDS.filter((card) => card.species === incoming.species);
+  const replaced = state.cards.filter((card) => card.ownerId === outgoing.id);
+  for (const card of replaced) {
+    card.definitionId = newDefs[oldDefs.findIndex((def) => def.id === card.definitionId)]!.id;
+    card.ownerId = incoming.id;
+    card.level = 0;
+  }
+  if (state.battle) {
+    for (const enemy of state.battle.enemies)
+      if (enemy.targetId === outgoing.id) enemy.targetId = incoming.id;
+    if (fromCard) {
+      const ids = new Set(replaced.map((card) => card.id));
+      for (const zone of ["draw", "hand", "buffer", "discard"] as const)
+        state.battle[zone] = state.battle[zone].filter((id) => !ids.has(id));
+      state.battle.draw = shuffle(state, [...state.battle.draw, ...ids]);
+    }
+  }
+  if (state.phase !== "battle") state.lineup = state.team.map((unit) => unit.id);
+  events.push({
+    kind: "action",
+    actionType: "swap",
+    actorId: incoming.id,
+    text: `${species(incoming.species).name} replaces ${species(outgoing.species).name}.`,
+  });
+}
+function swapFromCard(state: GameState, actor: import("./combat").Combatant, events: GameEvent[]) {
+  const allied = !("maxHealth" in actor);
+  const backup = allied ? state.reserves.filter((unit) => unit.health > 0) : [];
+  if (backup.length) {
+    const incoming = backup[Math.floor(random(state) * backup.length)]!;
+    swapBackup(state, actor.id, incoming.id, events, true);
+    return;
+  }
+  const row = allied ? state.team : state.battle!.enemies;
+  const others = row.filter((unit) => unit.id !== actor.id && unit.health > 0);
+  if (!others.length) return;
+  const other = others[Math.floor(random(state) * others.length)]!;
+  const from = row.findIndex((unit) => unit.id === actor.id);
+  const to = row.findIndex((unit) => unit.id === other.id);
+  [row[from], row[to]] = [row[to]!, row[from]!];
+  events.push({
+    kind: "action",
+    actionType: "swap",
+    actorId: actor.id,
+    targetId: other.id,
+    text: `${species(actor.species).name} swaps positions with ${species(other.species).name}.`,
+  });
+}
 function applyExtras(
   state: GameState,
   actor: import("./combat").Combatant,
@@ -365,6 +428,9 @@ function applyExtras(
       case "purge":
         if (target) removeEffects(target, "purge", effect.amount, events, state);
         break;
+      case "heal":
+        restoreHealth(actor, effect.amount, events, false, state, !enemy, actor);
+        break;
       case "draw":
         if (!enemy) draw(state, effect.amount);
         break;
@@ -382,7 +448,7 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
   // Enemy-phase draws and existing overflow survive into the next player turn.
   battle.discard.push(...battle.hand.splice(0));
   for (let pass = 0; pass < 3; pass++) {
-    for (const enemy of battle.enemies) {
+    for (const enemy of [...battle.enemies]) {
       if (enemy.health <= 0) continue;
       tickStatuses(draft, enemy, events);
       if (settle(draft, events)) return;
@@ -420,6 +486,8 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
           ? battle.enemies.filter((e) => e.health > 0)
           : [injured])
           restoreHealth(recipient, value, events, false, draft, false, enemy);
+      } else if (def.effect === "swap") {
+        swapFromCard(draft, enemy, events);
       } else {
         for (const unit of def.effect === "teamGuard"
           ? battle.enemies.filter((e) => e.health > 0)
@@ -534,7 +602,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
       !state.reserves.some((c) => c.id === command.reserve && (state.phase !== "battle" || c.health > 0)) ||
       state.team.some((c) => c.id === command.reserve))
   )
-    return reject(state, "Choose an active creature and a reserve.");
+    return reject(state, "Choose an active creature and a backup.");
   if (
     command.type === "setLineup" &&
     (!["teamSelection", "recruit", "boon", "campfire", "support"].includes(state.phase) ||
@@ -546,7 +614,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
       state.reward?.outcome === "defeat" ||
       state.reward?.outcome === "victory")
   )
-    return reject(state, "Choose a starting creature and a reserve between battles.");
+    return reject(state, "Choose a starting creature and a backup between battles.");
   if (
     command.type === "recruit" &&
     (state.phase !== "recruit" ||
@@ -750,6 +818,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
                   : draft.team.filter((c) => c.id === command.targetId && c.health > 0);
             for (const target of targets) restoreHealth(target, value, events, false, draft, true, actor);
           }
+          if (def.effect === "swap") swapFromCard(draft, actor, events);
           applyExtras(draft, actor, def, events, false, target);
         }
         if (battle.cardsPlayedThisTurn < 3) {
@@ -779,34 +848,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         break;
       }
       case "swap": {
-        const index = draft.team.findIndex((c) => c.id === command.activeId);
-        const reserveIndex = draft.reserves.findIndex((c) => c.id === command.reserve);
-        const outgoing = draft.team[index]!;
-        const incoming = draft.reserves[reserveIndex]!;
-        draft.team[index] = incoming;
-        draft.reserves[reserveIndex] = outgoing;
-        const oldDefs = CARDS.filter((c) => c.species === outgoing.species);
-        const newDefs = CARDS.filter((c) => c.species === incoming.species);
-        for (const card of draft.cards.filter((c) => c.ownerId === outgoing.id)) {
-          card.definitionId = newDefs[oldDefs.findIndex((def) => def.id === card.definitionId)]!.id;
-          card.ownerId = incoming.id;
-          card.level = 0;
-        }
-        if (draft.phase === "battle") {
-          for (const enemy of draft.battle!.enemies)
-            if (enemy.targetId === outgoing.id) enemy.targetId = incoming.id;
-        } else {
-          draft.lineup = draft.team.map((c) => c.id);
-          if (draft.battle)
-            for (const enemy of draft.battle.enemies)
-              if (enemy.targetId === outgoing.id) enemy.targetId = incoming.id;
-        }
-        events.push({
-          kind: "action",
-          actionType: "swap",
-          actorId: incoming.id,
-          text: `${species(incoming.species).name} replaces ${species(outgoing.species).name}.`,
-        });
+        swapBackup(draft, command.activeId, command.reserve, events);
         break;
       }
       case "recruit": {

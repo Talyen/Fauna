@@ -48,7 +48,7 @@ export function RosterPicker({
       combat={creature.combat}
       selected={selected === creature.id}
       disabled={!lineup && !isActive && creature.health === 0}
-      label={`${species(creature.species).name}, ${isActive ? (lineup ? "starting" : "deployed") : "reserve"}`}
+      label={`${species(creature.species).name}, ${isActive ? (lineup ? "starting" : "deployed") : "backup"}`}
       onClick={() => choose(creature, isActive)}
       onInspect={inspect ? () => inspect({ species: creature.species, creatureId: creature.id }) : undefined}
     />
@@ -62,11 +62,11 @@ export function RosterPicker({
         </div>
       </section>
       <section aria-labelledby="roster-reserve-label">
-        <h2 id="roster-reserve-label">Reserves</h2>
+        <h2 id="roster-reserve-label">Backup</h2>
         <div className="swap-roster swap-reserves" data-nav-row>
           {reserves.map((c) => tile(c, false))}
           {Array.from({ length: 2 - reserves.length }, (_, index) => (
-            <div key={index} className="empty-reserve" role="img" aria-label="Empty reserve slot">
+            <div key={index} className="empty-reserve" role="img" aria-label="Empty backup slot">
               <Plus aria-hidden="true" />
             </div>
           ))}

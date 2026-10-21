@@ -1054,6 +1054,50 @@
       "aspect": [3, 4],
       "provenance": "User-provided Prismram artwork from Google Drive: https://drive.google.com/file/d/1Gb-wGHxlrGk5uEZ_RENqVLrCxG0F4XZq/view",
       "rights": "User-provided artwork for Fauna; original source preserved unchanged"
+    },
+    {
+      "id": "creature.captoad",
+      "origin": "repository",
+      "source": "public/art/captoad/portrait.png",
+      "output": "art/captoad/portrait.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Captoad artwork selected from user Google Drive: https://drive.google.com/file/d/1maRWCAU3xemPxgTJOMtqRbqshkJSYpLz/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.captoad.spore-puff",
+      "origin": "repository",
+      "source": "public/art/captoad/spore-puff.png",
+      "output": "art/captoad/spore-puff.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Captoad artwork selected from user Google Drive: https://drive.google.com/file/d/1o8afb3c6v-JVNuUwndwyK_JJ8aD2uqDl/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.captoad.mushroom-guard",
+      "origin": "repository",
+      "source": "public/art/captoad/mushroom-guard.png",
+      "output": "art/captoad/mushroom-guard.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Captoad artwork selected from user Google Drive: https://drive.google.com/file/d/1yhHdZsqtHKQnm8VWHPORczRZLNn0JZrp/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.captoad.bogbound-leap",
+      "origin": "repository",
+      "source": "public/art/captoad/bogbound-leap.png",
+      "output": "art/captoad/bogbound-leap.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Captoad artwork selected from user Google Drive: https://drive.google.com/file/d/1XXQBLfcHkFnwCoHqyj58x1DZMk0OqAzu/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

@@ -452,7 +452,7 @@ test("recruitment adds a reserve, selection swaps its kit, and remembers active 
   await page.getByRole("button", { name: "Open menu" }).click();
   await page.getByRole("button", { name: "Lineup", exact: true }).click();
   const active = page.getByRole("button", { name: "Mossguard, starting", exact: true }),
-    reserve = page.getByRole("button", { name: "Briartooth, reserve", exact: true });
+    reserve = page.getByRole("button", { name: "Briartooth, backup", exact: true });
   await reserve.focus();
   await page.keyboard.press("i");
   await expect(page.getByRole("dialog", { name: "Briartooth", exact: true })).toBeVisible();
@@ -1336,12 +1336,12 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
       await page.keyboard.press("a");
       await expect(dialog.getByRole("button", { name: "Stormfin, deployed", exact: true })).toBeFocused();
       await page.keyboard.press("s");
-      await expect(dialog.getByRole("button", { name: "Briartooth, reserve", exact: true })).toBeFocused();
+      await expect(dialog.getByRole("button", { name: "Briartooth, backup", exact: true })).toBeFocused();
       await page.keyboard.press("d");
-      await expect(dialog.getByRole("button", { name: "Silkmoth, reserve", exact: true })).toBeFocused();
+      await expect(dialog.getByRole("button", { name: "Silkmoth, backup", exact: true })).toBeFocused();
     }
 
-    await activate(dialog.getByRole("button", { name: "Silkmoth, reserve", exact: true }));
+    await activate(dialog.getByRole("button", { name: "Silkmoth, backup", exact: true }));
     await activate(dialog.getByRole("button", { name: "Emberfox, deployed", exact: true }));
     await expect(dialog).not.toBeVisible();
     await expect(page.getByRole("button", { name: "Swap", exact: true })).toBeFocused();
@@ -1365,7 +1365,7 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     await page.keyboard.press("Escape");
     await activate(page.getByRole("button", { name: "Swap", exact: true }));
     await activate(page.getByRole("button", { name: "Silkmoth, deployed", exact: true }));
-    await activate(page.getByRole("button", { name: "Emberfox, reserve", exact: true }));
+    await activate(page.getByRole("button", { name: "Emberfox, backup", exact: true }));
     expect((await state(page)).team[1]!.health).toBe(9);
   });
 
@@ -1411,7 +1411,7 @@ for (const [width, height] of [
     await page.mouse.move(0, 0);
     await fits(page);
     await captureScreen(page, { path: `reports/swapping/lineup-${width}.png` });
-    await page.getByRole("button", { name: "Silkmoth, reserve", exact: true }).click();
+    await page.getByRole("button", { name: "Silkmoth, backup", exact: true }).click();
     await page.getByRole("button", { name: "Mossguard, starting", exact: true }).click();
     const edited = await state(page);
     expect(edited.lineup[0]).toBe("recruit-silkmoth");
@@ -1461,7 +1461,7 @@ test("a fallen deployed row resumes with no playable cards and can recover throu
   await page
     .getByRole("button", { name: `${species(outgoing.species).name}, deployed`, exact: true })
     .click();
-  await page.getByRole("button", { name: "Silkmoth, reserve", exact: true }).click();
+  await page.getByRole("button", { name: "Silkmoth, backup", exact: true }).click();
   await expect(page.locator(".app:not([inert]) .hand .action-card").first()).toBeVisible();
   const restored = await state(page);
   expect(restored.battle!.mana).toBe(4);

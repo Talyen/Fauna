@@ -552,7 +552,7 @@ function controlRewards(
   }
 }
 
-/** One attack packet. Periodic and retaliation packets never dodge, crit, build statuses, or retaliate. */
+/** Derived packets never dodge, crit or retaliate; Sporecoat explicitly retains Poison buildup. */
 export function hit(
   state: GameState,
   source: Combatant,
@@ -587,6 +587,7 @@ function resolveHit(
     bounced?: boolean;
     periodic?: boolean;
     retaliation?: boolean;
+    buildStatus?: boolean;
     derived?: boolean;
     leech?: boolean;
     cardLeech?: boolean;
@@ -830,7 +831,7 @@ function resolveHit(
   }
   if (nextPhysical > 0 && source.health > 0)
     hit(state, source, target, nextPhysical, "physical", events, { proc: true });
-  if (attack && damage > 0) {
+  if ((attack || options.buildStatus) && damage > 0) {
     const statusResult = applyHarmfulStatus(state, source, target, damage, type, events, {
       beforeHealth: before,
       leech: options.leech,
@@ -906,6 +907,14 @@ function resolveHit(
     if ((options.leech || blessedLeech) && type !== "bleed" && source.health > 0)
       leechHealth(state, source, lost, events, stats.poison > 0 || stats.bleed > 0);
     if (statusResult.appliedControl) controlRewards(state, source, target, type, events);
+  }
+  if (direct && target.health > 0 && source.health > 0) {
+    const amount = creaturePassive(alliedTarget ? state : undefined, target.species).effects.reduce(
+      (sum, effect) => sum + (effect.kind === "poisonRetaliation" ? effect.amount : 0),
+      0,
+    );
+    if (amount > 0)
+      hit(state, target, source, amount, "poison", events, { retaliation: true, buildStatus: true });
   }
   if (armorBroken) triggerArmorBreak(state, target, events);
   return lost;

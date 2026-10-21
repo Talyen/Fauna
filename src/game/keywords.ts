@@ -167,6 +167,7 @@ export const EFFECT_KEYWORDS = freeze(
     guard: ["block"],
     heal: ["health"],
     teamGuard: ["block"],
+    swap: [],
   } as const,
   true,
 );
@@ -180,7 +181,13 @@ export function definitionKeywords(definition: {
     definition.effect === "attack" ? [definition.damageType!] : [...EFFECT_KEYWORDS[definition.effect]];
   for (const effect of definition.effects ?? []) {
     raw.push(
-      effect.kind === "damage" ? effect.damageType! : effect.kind === "status" ? effect.status! : effect.kind,
+      effect.kind === "heal"
+        ? "health"
+        : effect.kind === "damage"
+          ? effect.damageType!
+          : effect.kind === "status"
+            ? effect.status!
+            : effect.kind,
     );
     if (effect.leech) raw.push("leech");
   }
