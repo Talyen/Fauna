@@ -469,7 +469,7 @@ test("talents purchase immediately, gate rows, reset a category, and return to t
   await resume(page);
   await page.getByRole("button", { name: "Open menu" }).click();
   await page.getByRole("button", { name: "Talents", exact: true }).click();
-  await page.getByRole("button", { name: "Fire / Burn talents", exact: true }).click();
+  await page.getByRole("button", { name: "Burn talents", exact: true }).click();
   await page.getByRole("button", { name: "Melting Point", exact: true }).click();
   await page.getByRole("button", { name: "Flashpoint", exact: true }).click();
   expect((await state(page)).talents).toHaveLength(2);
@@ -668,7 +668,7 @@ for (const [width, height] of [
     await page.getByRole("button", { name: "Open menu" }).click();
     await page.getByRole("button", { name: "Talents", exact: true }).click();
     await fits(page);
-    await page.getByRole("button", { name: "Fire / Burn talents", exact: true }).click();
+    await page.getByRole("button", { name: "Burn talents", exact: true }).click();
     await page.waitForTimeout(180);
     await page.screenshot({ path: `reports/implementation/talents-${width}.png` });
     await page.keyboard.press("Escape");
@@ -1043,7 +1043,7 @@ test("controller navigation preserves its device mode and can confirm a pointer-
   await page.getByRole("button", { name: "Talents", exact: true }).click();
   await page.getByRole("button", { name: "Physical talents", exact: true }).focus();
   await press(15);
-  await expect(page.getByRole("button", { name: "Fire / Burn talents", exact: true })).toBeFocused();
+  await expect(page.getByRole("button", { name: "Burn talents", exact: true })).toBeFocused();
   await expect(page.locator(".app")).toHaveAttribute("data-input", "controller");
   await press(1);
   await resume(page);

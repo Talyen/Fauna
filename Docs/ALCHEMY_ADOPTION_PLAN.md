@@ -151,22 +151,22 @@ For each stage, report the integrated commit, focused/local checks, pending CI/r
 
 Replace the shared talent set with two talents per consolidated category, replace four relics with four illustrated Boons, and add independent tooltip sizing. The user delegated selection. Both talents are eventually available, either may be purchased first, and category reset preserves XP. Difficulty tiers are explicitly excluded; Forge is removed instead of expanded.
 
-| Category         | Selected talents               |
-| ---------------- | ------------------------------ |
-| Physical         | Shield Slam, Armored Fists     |
-| Fire / Burn      | Flashpoint, Melting Point      |
-| Ice / Freeze     | Bitter Cold, Glacial Barrier   |
-| Lightning / Stun | Guarded Counter, Shatter Guard |
-| Poison           | Necrosis, Torpor               |
-| Nature           | Bramblegrowth, Ecosystem       |
-| Light            | Faith Barrier, Blessed Leech   |
-| Bleed            | First Blood, Mortal Wound      |
-| Block            | Second Wind, Grounding         |
-| Healing          | Mending, Renewal               |
-| Armor            | Bulwark, Reactive Guard        |
-| Dodge            | Lightfoot, Catch Breath        |
-| Leech            | Deep Siphon, Desperate Siphon  |
-| Mana             | Wellspring, Dark Recovery      |
+| Category | Selected talents               |
+| -------- | ------------------------------ |
+| Physical | Shield Slam, Armored Fists     |
+| Burn     | Flashpoint, Melting Point      |
+| Freeze   | Bitter Cold, Glacial Barrier   |
+| Stun     | Guarded Counter, Shatter Guard |
+| Poison   | Necrosis, Torpor               |
+| Nature   | Bramblegrowth, Ecosystem       |
+| Light    | Faith Barrier, Blessed Leech   |
+| Bleed    | First Blood, Mortal Wound      |
+| Block    | Second Wind, Grounding         |
+| Health   | Mending, Renewal               |
+| Armor    | Bulwark, Reactive Guard        |
+| Dodge    | Lightfoot, Catch Breath        |
+| Leech    | Deep Siphon, Desperate Siphon  |
+| Mana     | Wellspring, Dark Recovery      |
 
 Boons are Tattered Pages, Bone Charm, Ironwood Buckler and Icy Heart, including copied artwork and prepared receipts. Keep intermediate-boss choices of three and normal rewards. No result-screen inspection is added. Concise rules use percentages and implied ownership; exact resolution belongs in focused gameplay tests and the keyword contract.
 
