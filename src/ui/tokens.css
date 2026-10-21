@@ -103,7 +103,14 @@
   --tooltip-text-heading: calc(20px * var(--tooltip-scale, 1));
   --tooltip-text-secondary: calc(14px * var(--tooltip-scale, 1));
   --tooltip-travel: 0px;
-  --feedback-duration: 1000ms;
+  --feedback-duration: 1100ms;
+  --feedback-text: calc(37.8px * var(--text-scale, 1));
+  --feedback-pop-scale: 2;
+  --feedback-rise: 240px;
+  --feedback-reposition: 150ms;
+  --feedback-outline: 1.5px;
+  --feedback-critical: #fcd34d;
+  --feedback-critical-flash: #fff7ed;
   /* Fixed CSS-pixel artwork sizes; layouts reflow instead of scaling artwork. */
   --art-standard-short-side: 200px;
   --art-short-side: var(--art-standard-short-side);

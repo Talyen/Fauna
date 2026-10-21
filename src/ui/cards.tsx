@@ -26,7 +26,6 @@ type CreatureProps = {
   actorId?: string;
   onPreview?: () => void;
   preview?: ReactNode;
-  feedback?: ReactNode;
   tooltips?: boolean;
   readout?: boolean;
   invalidTarget?: boolean;
@@ -50,7 +49,6 @@ export function CreatureCard({
   actorId,
   onPreview,
   preview,
-  feedback,
   tooltips = true,
   readout = true,
   invalidTarget = false,
@@ -130,7 +128,6 @@ export function CreatureCard({
             <BattleReadout health={health} maxHealth={maxHealth ?? info.health} block={block} />
           ) : null}
           {readout ? <CombatStatus combat={combat} /> : null}
-          {feedback}
         </div>
       </div>
     </div>

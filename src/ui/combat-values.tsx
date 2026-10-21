@@ -18,10 +18,12 @@ export function DamageValue({
   type,
   amount,
   signed = false,
+  reservedDigits,
 }: {
   type: DamageType;
   amount: number;
   signed?: boolean;
+  reservedDigits?: number;
 }) {
   const Icon = DAMAGE_ICONS[type];
   return (
@@ -31,7 +33,11 @@ export function DamageValue({
       aria-label={`${amount} ${DAMAGE_LABELS[type]} damage`}
     >
       <Icon aria-hidden="true" />
-      <span>
+      <span
+        style={{
+          width: reservedDigits ? `${reservedDigits + (signed && amount !== 0 ? 1 : 0)}ch` : undefined,
+        }}
+      >
         {signed && amount > 0 ? "−" : ""}
         {amount}
       </span>

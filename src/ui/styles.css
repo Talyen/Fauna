@@ -1050,51 +1050,152 @@ strong {
 }
 .combat-feedback {
   pointer-events: none;
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 4;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-1);
+  position: fixed;
+  inset: 0;
+  z-index: 45;
 }
 .combat-burst {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  align-items: center;
-  white-space: nowrap;
-  animation: combat-rise var(--feedback-duration) ease-out both;
+  position: absolute;
+  visibility: hidden;
+  transition: opacity 100ms ease-out;
+}
+.combat-burst[data-evicted="true"] {
+  opacity: 0;
+}
+.combat-burst-travel {
+  position: absolute;
+  left: 50%;
+  translate: -50% 0;
+  animation: combat-rise var(--feedback-duration) linear both;
+}
+.combat-numbers {
+  display: grid;
+  width: max-content;
+  justify-items: center;
+  gap: var(--space-1) var(--space-4);
+  font-size: var(--feedback-text);
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  transform-origin: top center;
+  filter: drop-shadow(0 0 1px var(--background)) drop-shadow(0 1px 2px var(--background));
+  animation: combat-pop var(--feedback-duration) linear both;
+}
+.combat-numbers[data-columns="2"] {
+  grid-template-columns: repeat(2, auto);
+}
+.combat-notice {
+  grid-column: 1 / -1;
 }
 .combat-number {
   display: inline-flex;
   gap: var(--space-1);
   align-items: center;
-  font-size: var(--text-title);
-  font-weight: 600;
+  white-space: nowrap;
   font-variant-numeric: tabular-nums;
-  text-shadow:
-    0 1px 2px var(--background),
-    0 0 4px var(--background);
+}
+.combat-number .feedback-value,
+.combat-number .damage-value > span {
+  text-align: center;
+  -webkit-text-stroke: var(--feedback-outline) var(--background);
+  paint-order: stroke fill;
 }
 .combat-number svg,
 .combat-number .damage-value svg {
-  width: 20px;
-  height: 20px;
+  width: 0.94em;
+  height: 0.94em;
+  stroke-width: 3;
 }
-@keyframes combat-rise {
+.combat-number[data-critical="true"] {
+  animation:
+    combat-critical-flash 140ms ease-out,
+    combat-critical-glow 480ms ease-out;
+}
+@keyframes combat-pop {
   0% {
+    scale: 0.5;
     opacity: 1;
-    transform: translateY(0);
   }
-  75% {
+  13.636% {
+    scale: var(--feedback-pop-scale);
+  }
+  18.182%,
+  36.364% {
+    scale: 1.8;
+  }
+  77.273% {
     opacity: 1;
+  }
+  81.818% {
+    scale: 1;
   }
   100% {
+    scale: 1;
     opacity: 0;
-    transform: translateY(-24px);
+  }
+}
+@keyframes combat-rise {
+  0%,
+  36.364% {
+    transform: translateY(0);
+  }
+  42.727% {
+    transform: translateY(calc(var(--feedback-rise) * -0.001));
+  }
+  49.091% {
+    transform: translateY(calc(var(--feedback-rise) * -0.008));
+  }
+  55.455% {
+    transform: translateY(calc(var(--feedback-rise) * -0.027));
+  }
+  61.818% {
+    transform: translateY(calc(var(--feedback-rise) * -0.064));
+  }
+  68.182% {
+    transform: translateY(calc(var(--feedback-rise) * -0.125));
+  }
+  74.545% {
+    transform: translateY(calc(var(--feedback-rise) * -0.216));
+  }
+  80.909% {
+    transform: translateY(calc(var(--feedback-rise) * -0.343));
+  }
+  87.273% {
+    transform: translateY(calc(var(--feedback-rise) * -0.512));
+  }
+  93.636% {
+    transform: translateY(calc(var(--feedback-rise) * -0.729));
+  }
+  100% {
+    transform: translateY(calc(var(--feedback-rise) * -1));
+  }
+}
+@keyframes combat-critical-flash {
+  from {
+    text-shadow: 0 0 4px var(--feedback-critical-flash);
+  }
+  to {
+    text-shadow: none;
+  }
+}
+@keyframes combat-critical-glow {
+  from {
+    filter: drop-shadow(0 0 6px var(--feedback-critical));
+  }
+  to {
+    filter: drop-shadow(0 0 0px var(--feedback-critical));
+  }
+}
+.combat-burst[data-static="true"] .combat-numbers,
+.combat-burst[data-static="true"] .combat-burst-travel {
+  animation: none;
+}
+.combat-burst[data-static="true"] .combat-number[data-critical="true"] {
+  animation: none;
+  filter: drop-shadow(0 0 6px var(--feedback-critical));
+}
+@media (prefers-reduced-motion: reduce) {
+  .combat-number[data-critical="true"] {
+    filter: drop-shadow(0 0 6px var(--feedback-critical));
   }
 }
 

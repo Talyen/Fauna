@@ -117,11 +117,12 @@ describe("Alchemy combat foundations", () => {
     expect(dodge.next.battle!.enemies[0]!.combat.burn).toBe(0);
     expect(dodge.next.battle!.enemies[0]!.block).toBe(5);
     expect(dodge.events[0]!.text).toContain("Dodges");
-    expect(
-      packet("fire", 3, (s) => {
-        s.rng = critSeed;
-      }).next.battle!.enemies[0]!.health,
-    ).toBe(12);
+    expect(dodge.events[0]).toMatchObject({ status: "dodge", outcome: "dodge" });
+    const crit = packet("fire", 3, (s) => {
+      s.rng = critSeed;
+    });
+    expect(crit.next.battle!.enemies[0]!.health).toBe(12);
+    expect(crit.events.find((e) => e.kind === "damage")).toMatchObject({ critical: true, amount: 6 });
   });
   it("Leech caps overkill and Bleed defers its Leech until actual tick damage", () => {
     const immediate = packet(
@@ -287,4 +288,31 @@ it("keeps Campfire lineup changes resumable before and after Rest", () => {
   expect(decodeSave(encodeSave(state))).toEqual(state);
   expect(state.team[0]!.health).toBe(12);
   expect(state.reserves[0]!.id).toBe(outgoing);
+});
+
+it("publishes actual control immunity, capped buildup and removed status identities", () => {
+  const immune = packet("freeze", 3, (s) => {
+    s.battle!.enemies[0]!.combat.cooldown = 2;
+  });
+  expect(immune.next.battle!.enemies[0]!.combat.freeze).toBe(0);
+  expect(immune.events).toContainEqual(expect.objectContaining({ status: "freeze", outcome: "immune" }));
+  expect(immune.events.some((e) => e.outcome === "apply")).toBe(false);
+  const gained = packet("burn", 3, (s) => {
+    s.battle!.enemies[0]!.combat.burn = 999999;
+  });
+  expect(gained.events).toContainEqual(
+    expect.objectContaining({ status: "burn", outcome: "gain", amount: 1 }),
+  );
+  const events: Parameters<typeof hit>[5] = [];
+  produce(run(), (s) => {
+    const target = s.battle!.enemies[0]!;
+    target.combat.controlled = "freeze";
+    target.combat.controlTurns = 1;
+    target.combat.burn = 3;
+    removeEffects(target, "cleanse", 2, events, s);
+  });
+  expect(events.filter((e) => e.status === "cleanse").map((e) => e.affectedStatus)).toEqual([
+    "freeze",
+    "burn",
+  ]);
 });

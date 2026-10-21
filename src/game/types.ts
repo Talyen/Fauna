@@ -1,3 +1,4 @@
+import type { KeywordId } from "./keywords";
 import type { SpeciesId, DamageType } from "./content";
 import type { Keyword, KeywordXP, BoonId } from "./progression";
 export interface CombatState {
@@ -150,6 +151,13 @@ export interface GameEvent {
   targetId?: string;
   amount?: number;
   damageType?: DamageType;
+  critical?: boolean;
+  periodic?: boolean;
+  additive?: boolean;
+  impact?: boolean;
+  status?: KeywordId | "deathDoor";
+  outcome?: "gain" | "remove" | "apply" | "immune" | "dodge" | "skip";
+  affectedStatus?: KeywordId;
 }
 export type CommandResult =
   | { accepted: true; state: GameState; events: GameEvent[] }

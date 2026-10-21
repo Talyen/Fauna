@@ -68,14 +68,19 @@ export function restoreHealth(
     if (hasTalent(state, "heal.overflow")) grantBlock(state, unit, Math.round(excess * 0.25), events);
     if (hasTalent(state, "heal.clean-slate")) removeEffects(unit, "cleanse", 1, events, state);
   }
-  if (gain) {
+  if (gain || amount > 0) {
     events.push({
       kind: "heal",
       targetId: unit.id,
       amount: gain,
       text: `${unitName(unit)} restores ${gain} Health.`,
     });
-    if (state?.phase === "battle" && !("maxHealth" in unit) && state.boons.includes("groves-favor"))
+    if (
+      gain > 0 &&
+      state?.phase === "battle" &&
+      !("maxHealth" in unit) &&
+      state.boons.includes("groves-favor")
+    )
       grantStatus(unit, "thorns", 1, events);
   }
 }
@@ -83,13 +88,13 @@ export function grantBlock(state: GameState, unit: Combatant, amount: number, ev
   if (unit.health <= 0 || amount <= 0) return;
   const gained = Math.min(STACK_LIMIT - unit.block, Math.round(amount));
   unit.block += gained;
-  if (!gained) return;
   events.push({
     kind: "block",
     targetId: unit.id,
     amount: gained,
     text: `${unitName(unit)} gains ${gained} Block.`,
   });
+  if (!gained) return;
   if (!("maxHealth" in unit) && hasTalent(state, "light.radiant-guard") && roll(state) < 0.1)
     drawKeyword(state, "light");
   if (!("maxHealth" in unit) && state.boons.includes("ironwood-buckler"))
@@ -193,6 +198,8 @@ function loseHealth(state: GameState, unit: Combatant, amount: number, events: G
       events.push({
         kind: "status",
         targetId: unit.id,
+        status: "deathDoor",
+        outcome: "apply",
         text: `${unitName(unit)} reaches Death's Door: ${stats.grace} grace turns.`,
       });
     }
@@ -235,6 +242,8 @@ export function grantStatus(
       kind: "status",
       targetId: unit.id,
       amount: gain,
+      status,
+      outcome: "gain",
       text: `${unitName(unit)} gains ${gain} ${status}.`,
     });
 }
@@ -247,15 +256,18 @@ export function removeEffects(
 ) {
   const stats = combat(unit);
   let cleansed = 0;
+  const removedStatuses: NonNullable<GameEvent["affectedStatus"]>[] = [];
   const statuses =
     kind === "cleanse"
       ? (["burn", "poison", "bleed", "stun", "freeze"] as const)
       : (["armor", "thorns", "dodge"] as const);
   if (kind === "purge" && unit.block > 0 && count > 0) {
     unit.block = 0;
+    removedStatuses.push("block");
     count--;
   }
   if (kind === "cleanse" && stats.controlled && count > 0) {
+    removedStatuses.push(stats.controlled);
     stats.controlled = null;
     stats.controlTurns = 0;
     cleansed++;
@@ -263,7 +275,6 @@ export function removeEffects(
     stats.cooldown = 3;
     count--;
   }
-  let removed = false;
   for (const status of statuses)
     if (count > 0 && stats[status] > 0) {
       stats[status] = 0;
@@ -273,13 +284,25 @@ export function removeEffects(
       }
       if (status === "bleed") stats.bleedLeech = [];
       count--;
-      removed = true;
+      removedStatuses.push(status);
     }
-  if (removed || count === 0)
+  for (const affectedStatus of new Set(removedStatuses))
     events.push({
       kind: "status",
       targetId: unit.id,
-      text: `${unitName(unit)}: ${kind === "cleanse" ? "Cleanse" : "Purge"}.`,
+      status: kind,
+      outcome: "remove",
+      affectedStatus,
+      text: `${unitName(unit)}: ${kind === "cleanse" ? "Cleanse" : "Purge"} ${affectedStatus}.`,
+    });
+  if (removedStatuses.length === 0)
+    events.push({
+      kind: "status",
+      targetId: unit.id,
+      status: kind,
+      outcome: "remove",
+      amount: 0,
+      text: `${unitName(unit)}: ${kind === "cleanse" ? "Cleanse" : "Purge"} removes no effects.`,
     });
   if (cleansed > 0 && state) cleanseRewards(state, unit, cleansed, events);
 }
@@ -348,7 +371,13 @@ export function hit(
       ) /
         100
   ) {
-    events.push({ kind: "status", targetId: target.id, text: `${unitName(target)} Dodges.` });
+    events.push({
+      kind: "status",
+      targetId: target.id,
+      status: "dodge",
+      outcome: "dodge",
+      text: `${unitName(target)} Dodges.`,
+    });
     if (alliedTarget && hasTalent(state, "dodge.catch-breath"))
       restoreHealth(target, 1, events, false, state);
     if (alliedTarget) {
@@ -518,6 +547,8 @@ export function hit(
     targetId: target.id,
     amount: lost,
     damageType: type,
+    critical,
+    periodic: options.periodic === true,
     text: `${unitName(target)} takes ${lost} ${type} damage${critical ? " (Critical)" : ""}.`,
   });
   if (target.health === 0)
@@ -547,15 +578,34 @@ export function hit(
     hit(state, source, target, nextPhysical, "physical", events, { proc: true });
   if (attack && damage > 0) {
     if (type === "burn" || type === "poison" || type === "bleed") {
+      const beforeStacks = stats[type];
       stats[type] = Math.min(STACK_LIMIT, stats[type] + damage);
       stats.statusSources[type] = source.id;
       if (type === "bleed" && options.leech) deferLeech(target, source, damage);
       events.push({
         kind: "status",
         targetId: target.id,
-        text: `${unitName(target)} gains ${damage} ${type}.`,
+        status: type,
+        outcome: "gain",
+        amount: stats[type] - beforeStacks,
+        text: `${unitName(target)} gains ${stats[type] - beforeStacks} ${type}.`,
       });
     }
+    if (
+      (type === "stun" || type === "freeze") &&
+      target.health > 0 &&
+      (stats.controlled ||
+        stats.skipped ||
+        stats.cooldown > 0 ||
+        (type === "stun" && alliedTarget && target.block > 0 && hasTalent(state, "block.grounding")))
+    )
+      events.push({
+        kind: "status",
+        targetId: target.id,
+        status: type,
+        outcome: "immune",
+        text: `${unitName(target)} is immune to ${type} buildup.`,
+      });
     if (
       (type === "stun" || type === "freeze") &&
       source.health > 0 &&
@@ -565,7 +615,16 @@ export function hit(
       stats.cooldown === 0 &&
       !(type === "stun" && alliedTarget && target.block > 0 && hasTalent(state, "block.grounding"))
     ) {
+      const beforeStacks = stats[type];
       stats[type] = Math.min(STACK_LIMIT, stats[type] + damage);
+      events.push({
+        kind: "status",
+        targetId: target.id,
+        status: type,
+        outcome: "gain",
+        amount: stats[type] - beforeStacks,
+        text: `${unitName(target)} gains ${stats[type] - beforeStacks} ${type} buildup.`,
+      });
       const threshold =
         ("maxHealth" in target ? before : maximumHealth(target)) *
         (alliedSource &&
@@ -598,6 +657,8 @@ export function hit(
         events.push({
           kind: "status",
           targetId: target.id,
+          status: type,
+          outcome: "apply",
           text: `${unitName(target)} is ${type === "stun" ? "Stunned" : "Frozen"}.`,
         });
       }
@@ -693,6 +754,9 @@ export function tickStatuses(state: GameState, unit: Combatant, events: GameEven
       kind: "status",
       targetId: unit.id,
       amount: -removed,
+      status: "cleanse",
+      affectedStatus: "poison",
+      outcome: "remove",
       text: `${unitName(unit)} Cleanses ${removed} Poison.`,
     });
     if (stats.poison === 0) {
@@ -753,6 +817,8 @@ export function startAction(unit: Combatant, events: GameEvent[], state?: GameSt
     events.push({
       kind: "status",
       targetId: unit.id,
+      status: stats.controlled,
+      outcome: "skip",
       text: `${unitName(unit)} skips its ${stats.controlled === "freeze" ? "Frozen" : "Stunned"} turn.`,
     });
     stats.controlTurns = Math.max(0, stats.controlTurns - 1);

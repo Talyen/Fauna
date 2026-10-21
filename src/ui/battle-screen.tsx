@@ -193,6 +193,7 @@ export function BattleScreen({
   }, [card?.ownerId, selected, target, allyTarget]);
   return (
     <main ref={board} className="battle-screen" aria-label="Battlefield" data-selected-card={selected ?? ""}>
+      <CombatFeedback bursts={bursts} root={board} />
       <section className="enemy-row" aria-label="Enemy row">
         {battle.enemies.map((enemy) => (
           <EnemyCard
@@ -207,7 +208,6 @@ export function BattleScreen({
                 <TargetPreview before={game} result={preview} targetId={enemy.id} />
               ) : undefined
             }
-            feedback={<CombatFeedback bursts={bursts} targetId={enemy.id} />}
             onClick={(element) => {
               if (selected) {
                 if (enemyTarget && enemy.health > 0)
@@ -254,7 +254,6 @@ export function BattleScreen({
                 <TargetPreview before={game} result={preview} targetId={creature.id} />
               ) : undefined
             }
-            feedback={<CombatFeedback bursts={bursts} targetId={creature.id} />}
             onClick={(element) => {
               if (selected) {
                 if (allyTarget && creature.health > 0)
