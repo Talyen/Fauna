@@ -11,9 +11,7 @@ export interface SessionView {
   overlayActive: boolean;
   ready: boolean;
   closing: boolean;
-  recoveryRequired: boolean;
   loadFailed: boolean;
-  notice: string;
   error: string;
   saveStatus: "saved" | "saving" | "error";
   events: GameEvent[];
@@ -27,9 +25,7 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
     overlayActive: false,
     ready: false,
     closing: false,
-    recoveryRequired: false,
     loadFailed: false,
-    notice: "",
     error: "",
     saveStatus: "saved",
     events: [],
@@ -38,6 +34,22 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
   let writes = Promise.resolve();
   let disposed = false;
   let generation = 0;
+  let retryTimer: ReturnType<typeof setTimeout> | undefined;
+  const scheduleSaveRetry = () => {
+    if (disposed || retryTimer) return;
+    retryTimer = setTimeout(() => {
+      retryTimer = undefined;
+      if (!disposed && !store.getState().closing) save(store.getState().game);
+    }, 5000);
+  };
+  const writeLocal = async (data: string) => {
+    // Do not rotate unreadable storage until access has recovered.
+    if (store.getState().loadFailed) {
+      await platform.saves.readCandidates();
+      if (!disposed) store.setState({ loadFailed: false });
+    }
+    await platform.saves.write(data);
+  };
   const cloud = createCloud(
     platform.cloud,
     (view) => {
@@ -52,18 +64,16 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
       if (disposed || store.getState().closing) throw new Error("Session is closing.");
       const game = decodeSave(data);
       const installation = writes
-        .then(() => platform.saves.write(data))
+        .then(() => writeLocal(data))
         .then(() => {
           if (!disposed)
             store.setState({
               game,
               ready: true,
-              recoveryRequired: false,
               loadFailed: false,
               saveStatus: "saved",
               events: [],
               committedCommand: null,
-              notice: "",
               error: "",
             });
         });
@@ -78,25 +88,37 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
     const data = encodeSave(game);
     store.setState({ saveStatus: "saving" });
     writes = writes
-      .then(() => platform.saves.write(data))
+      .then(() => writeLocal(data))
       .then(() => {
-        if (!disposed && store.getState().game.revision === game.revision)
+        if (!disposed && store.getState().game.revision === game.revision) {
+          clearTimeout(retryTimer);
+          retryTimer = undefined;
           store.setState({ saveStatus: "saved", error: "" });
+        }
         return cloud.commit(data);
       })
       .catch((error) => {
         diagnostics.record("save-write", error, store.getState().game);
-        if (!disposed)
-          store.setState({ saveStatus: "error", error: "Could not save. Keep the game open and retry." });
+        if (!disposed) {
+          store.setState({ saveStatus: "error", error: "" });
+          scheduleSaveRetry();
+        }
       });
   };
   async function load() {
     const current = store.getState();
-    if (disposed || current.closing || (current.ready && !current.loadFailed)) return;
+    if (disposed || current.closing || current.ready) return;
     const token = ++generation;
     store.setState({ ready: false, error: "", loadFailed: false });
+    let timer: ReturnType<typeof setTimeout> | undefined;
     try {
-      const candidates = await platform.saves.readCandidates();
+      const candidates = await Promise.race([
+        platform.saves.readCandidates().catch(() => platform.saves.readCandidates()),
+        new Promise<never>((_, reject) => {
+          timer = setTimeout(() => reject(new Error("Local save read timed out.")), 5000);
+        }),
+      ]);
+      clearTimeout(timer);
       if (disposed || token !== generation) return;
       for (const candidate of candidates) {
         try {
@@ -104,11 +126,6 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
           store.setState({
             game,
             ready: true,
-            recoveryRequired: false,
-            notice:
-              candidate.source === "primary" || candidate.source === "fauna.save.v1"
-                ? ""
-                : "Recovered your journey from a backup.",
             saveStatus: "saved",
           });
           await cloud.start(encodeSave(game));
@@ -120,10 +137,6 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
       }
       store.setState({
         ready: true,
-        recoveryRequired: candidates.length > 0,
-        notice: candidates.length
-          ? "Your previous save could not be read. Start fresh to continue; the old data will be rotated into backups."
-          : "",
       });
       await cloud.start(null);
     } catch (error) {
@@ -132,18 +145,23 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
         store.setState({
           ready: true,
           loadFailed: true,
-          error: "Could not read your save. Retry before continuing.",
+          error: "",
         });
+      if (!disposed && token === generation) await cloud.start(null);
+    } finally {
+      clearTimeout(timer);
     }
   }
   const prepareClose = async () => {
     if (disposed) return true;
     store.setState({ closing: true });
     await writes;
-    const saved = store.getState().saveStatus !== "error";
-    if (saved) await cloud.flush();
-    if (!saved) store.setState({ closing: false });
-    return saved;
+    if (store.getState().saveStatus === "error") {
+      save(store.getState().game);
+      await writes;
+    }
+    await cloud.flush();
+    return true;
   };
   const removeCloseListener = platform.onCloseRequested?.(prepareClose);
   return {
@@ -151,38 +169,12 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
     diagnostics,
     display: platform.display,
     load,
-    cloud: {
-      offline: () => cloud.offline(),
-      choose: (id: string) => cloud.choose(id),
-      importStandalone: (use: boolean) => cloud.importStandalone(use),
-      async retry() {
-        if (
-          disposed ||
-          store.getState().closing ||
-          store.getState().loadFailed ||
-          store.getState().saveStatus === "error"
-        )
-          return;
-        store.setState({ cloud: { ...store.getState().cloud, blocking: true } });
-        await writes;
-        if (!disposed) await cloud.retry();
-      },
-    },
     command(command: Command) {
       const view = store.getState();
-      if (
-        disposed ||
-        view.closing ||
-        view.overlayActive ||
-        view.cloud.blocking ||
-        !view.ready ||
-        view.recoveryRequired ||
-        view.loadFailed
-      )
-        return false;
+      if (disposed || view.closing || view.overlayActive || view.cloud.blocking || !view.ready) return false;
       const result = dispatch(view.game, command, capabilities.development === true);
       if (!result.accepted) {
-        store.setState({ error: result.reason });
+        store.setState({ error: result.reason }); // Internal command diagnostics only.
         return false;
       }
       store.setState({
@@ -194,14 +186,9 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
       save(result.state);
       return true;
     },
-    startFresh() {
-      if (disposed || store.getState().closing || !store.getState().recoveryRequired) return;
-      store.setState({ recoveryRequired: false, notice: "A fresh journal is ready." });
-      save(store.getState().game);
-    },
     retrySave() {
       const view = store.getState();
-      if (disposed || !view.ready || view.loadFailed || view.recoveryRequired || view.closing) return;
+      if (disposed || !view.ready || view.closing) return;
       save(view.game);
     },
     async flush() {
@@ -214,13 +201,14 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
     },
     dispose() {
       disposed = true;
+      clearTimeout(retryTimer);
       store.setState({ ready: false, closing: true });
       diagnostics.dispose();
-      cloud.dispose();
+      const cloudWrites = cloud.dispose();
       removeOverlay?.();
       removeCloseListener?.();
       generation++;
-      return writes;
+      return Promise.all([writes, cloudWrites]).then(() => {});
     },
   };
 }

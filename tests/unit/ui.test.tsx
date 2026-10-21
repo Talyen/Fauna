@@ -299,7 +299,7 @@ describe("player interface", () => {
     expect(gamepadActions({ buttons: [], axes: [0.1, -0.1] })).toEqual([]);
   });
 });
-it("opens a recoverable error screen when browser storage access itself is denied", async () => {
+it("silently allows play when browser storage access itself is denied", async () => {
   const original = Object.getOwnPropertyDescriptor(window, "localStorage")!;
   Object.defineProperty(window, "localStorage", {
     configurable: true,
@@ -311,7 +311,8 @@ it("opens a recoverable error screen when browser storage access itself is denie
     const session = createSession(createBrowserPlatform());
     await session.load();
     render(<App session={session} />);
-    expect(screen.getByRole("button", { name: "Retry loading" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "New journey" })).toBeTruthy();
+    expect(screen.queryByRole("alert")).toBeNull();
     expect(session.store.getState().loadFailed).toBe(true);
     await session.dispose();
   } finally {

@@ -9,7 +9,7 @@ afterEach(() => {
   cleanup();
   vi.useRealTimers();
 });
-it("pauses overlays and blur, revokes on disposal and does not restart after a save failure", async () => {
+it("pauses overlays and blur, revokes on disposal and keeps playing through a save failure", async () => {
   vi.spyOn(document, "hasFocus").mockReturnValue(true);
   let fail = false;
   const session = createSession({
@@ -55,18 +55,19 @@ it("pauses overlays and blur, revokes on disposal and does not restart after a s
     vi.advanceTimersByTime(700);
     await session.flush();
   });
-  expect(hook.result.current[0]).toBe(false);
+  expect(hook.result.current[0]).toBe(true);
   fail = false;
   await act(async () => {
     session.retrySave();
     await session.flush();
   });
-  const stopped = session.store.getState().game.revision;
-  act(() => {
-    vi.advanceTimersByTime(1400);
+  const recovered = session.store.getState().game.revision;
+  await act(async () => {
+    vi.advanceTimersByTime(700);
+    await session.flush();
   });
-  expect(session.store.getState().game.revision).toBe(stopped);
-  act(() => hook.result.current[1](true));
+  expect(session.store.getState().game.revision).toBe(recovered + 1);
+  const stopped = session.store.getState().game.revision;
   await act(async () => {
     await session.dispose();
   });

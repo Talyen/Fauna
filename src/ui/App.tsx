@@ -3,8 +3,6 @@ import { PagedItems } from "./pagination";
 import { captureSwapMotion } from "./swap-motion";
 import { SurfaceTransition } from "./surface-transition";
 import { Loading } from "./loading";
-import { TriangleAlert } from "lucide-react";
-import { CloudRecovery } from "./platform-settings";
 import { SupportScreen, SupportInspector } from "./support-screen";
 import { BOONS } from "../game/progression";
 import { ArtCard } from "./art-card";
@@ -331,26 +329,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     // Screen transitions must not replace focus the player already moved onto the new screen.
     if (buttons.includes(document.activeElement as HTMLElement)) return;
     (buttons.find((el) => el.classList.contains("primary-menu-action")) ?? buttons[0])?.focus();
-  }, [
-    route,
-    game.phase,
-    view.ready,
-    view.recoveryRequired,
-    view.cloud.blocking,
-    view.cloud.status,
-    view.cloud.importAvailable,
-    view.cloud.candidates.length,
-  ]);
-  useEffect(() => {
-    const listener = (event: BeforeUnloadEvent) => {
-      if (session.store.getState().saveStatus !== "saved") {
-        event.preventDefault();
-        event.returnValue = "";
-      }
-    };
-    window.addEventListener("beforeunload", listener);
-    return () => window.removeEventListener("beforeunload", listener);
-  }, [session]);
+  }, [route, game.phase, view.ready, view.cloud.blocking, view.cloud.status]);
   if (!view.ready)
     return (
       <Screen className="loading">
@@ -580,33 +559,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
         data-phase={game.phase}
         data-save-status={view.saveStatus}
       >
-        {view.notice && !view.recoveryRequired ? (
-          <p className="notice" role="status">
-            {view.notice}
-          </p>
-        ) : null}
-        {view.error && !view.loadFailed ? (
-          <div className="error-banner" role="alert">
-            <TriangleAlert className="error-icon" aria-hidden="true" />
-            {view.error}
-            {view.saveStatus === "error" ? (
-              <Button variant="outline" onClick={() => session.retrySave()}>
-                Retry save
-              </Button>
-            ) : null}
-          </div>
-        ) : null}
-        {view.cloud.blocking ? (
-          <CloudRecovery session={session} />
-        ) : view.loadFailed || view.recoveryRequired ? (
-          <Screen className="recovery">
-            <h1>Save unavailable</h1>
-            <p>{view.loadFailed ? view.error : view.notice}</p>
-            <Button onClick={() => (view.loadFailed ? void session.load() : session.startFresh())}>
-              {view.loadFailed ? "Retry loading" : "Start fresh"}
-            </Button>
-          </Screen>
-        ) : (
+        {!view.cloud.blocking ? (
           <>
             {route === "home" ? (
               <Screen className="home-screen">
@@ -774,6 +727,8 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
               </div>
             </div>
           </>
+        ) : (
+          <Loading />
         )}
         {!modal && !inspection ? (
           <Dialog open={menu} onOpenChange={setMenu}>

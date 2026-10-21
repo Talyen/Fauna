@@ -1,14 +1,7 @@
-import { Screen } from "./screen";
-import { PagedItems } from "./pagination";
 import { Loading } from "./loading";
-import { TriangleAlert } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { useStore } from "zustand";
 import type { Session } from "../application/session";
 import type { DisplayState } from "../platform/ports";
-import { decodeSave } from "../game/save";
-import type { GameState } from "../game/types";
-import { Button } from "../components/ui/button";
 import { RadioGroup, RadioGroupItem } from "../components/ui/radio-group";
 export function DisplaySettings({ session }: { session: Session }) {
   const port = session.display;
@@ -37,8 +30,8 @@ export function DisplaySettings({ session }: { session: Session }) {
       .then((value) => {
         if (live && !notified) setState(value);
       })
-      .catch(() => {
-        if (live) setState({ mode: "windowed", error: "Display preferences unavailable." });
+      .catch((error) => {
+        session.diagnostics.record("global", error);
       })
       .finally(() => {
         if (live) setBusy(false);
@@ -47,7 +40,7 @@ export function DisplaySettings({ session }: { session: Session }) {
       live = false;
       off();
     };
-  }, [port]);
+  }, [port, session]);
   if (!port) return null;
   return (
     <section>
@@ -65,8 +58,8 @@ export function DisplaySettings({ session }: { session: Session }) {
             .then((next) => {
               if (mounted.current) setState(next);
             })
-            .catch(() => {
-              if (mounted.current) setState((old) => ({ ...old, error: "Could not change display mode." }));
+            .catch((error) => {
+              session.diagnostics.record("global", error);
             })
             .finally(() => {
               if (mounted.current) setBusy(false);
@@ -81,124 +74,6 @@ export function DisplaySettings({ session }: { session: Session }) {
         ))}
       </RadioGroup>
       {busy ? <Loading /> : null}
-      {state.error ? (
-        <p role="alert">
-          <TriangleAlert className="error-icon" aria-hidden="true" />
-          {state.error}
-        </p>
-      ) : null}
     </section>
-  );
-}
-export function CloudStatus({ session }: { session: Session }) {
-  const cloud = useStore(session.store, (s) => s.cloud);
-  return (
-    <section>
-      <h3 className="settings-heading">Steam Cloud</h3>
-      <p role="status">{cloud.status}</p>
-      {cloud.error ? (
-        <p role="alert">
-          <TriangleAlert className="error-icon" aria-hidden="true" />
-          {cloud.error}
-        </p>
-      ) : null}
-      {["Pending", "Conflict"].includes(cloud.status) ? (
-        <Button variant="outline" onClick={() => void session.cloud.retry()}>
-          Retry cloud sync
-        </Button>
-      ) : null}
-    </section>
-  );
-}
-function phaseLabel(game: GameState) {
-  if (game.phase === "support" && game.support) return "Merchant";
-  return {
-    draft: "Choose a starter",
-    teamSelection: "Destinations",
-    battle: "Battle",
-    recruit: "Recruitment",
-    boon: "Boon reward",
-    campfire: "Campfire",
-    support: "Support visit",
-    victory: "Journey complete",
-    defeat: "Journey ended",
-  }[game.phase];
-}
-export function CloudRecovery({ session }: { session: Session }) {
-  const cloud = useStore(session.store, (s) => s.cloud);
-  return (
-    <Screen className="recovery">
-      <h1>
-        {cloud.importAvailable
-          ? "Steam progress"
-          : cloud.status === "Conflict"
-            ? "Choose a save"
-            : "Steam Cloud"}
-      </h1>
-      {cloud.importAvailable ? (
-        <>
-          <p>Use your standalone progress for this Steam profile? The original remains available offline.</p>
-          <Button
-            disabled={cloud.status === "Syncing"}
-            onClick={() => void session.cloud.importStandalone(true)}
-          >
-            Use this progress
-          </Button>
-          <Button
-            disabled={cloud.status === "Syncing"}
-            variant="outline"
-            onClick={() => void session.cloud.importStandalone(false)}
-          >
-            Start a separate Steam profile
-          </Button>
-        </>
-      ) : (
-        <>
-          <p role="status">
-            {cloud.error ||
-              (cloud.status === "Conflict"
-                ? "These journeys differ. Choose which save to continue, or play offline."
-                : "Checking saved progress…")}
-          </p>
-          <PagedItems
-            items={cloud.candidates}
-            pageSize={1}
-            className="cloud-candidates"
-            label="Saved journey pages"
-          >
-            {(candidate, index) => {
-              const game = decodeSave(candidate.payload);
-              return (
-                <section key={candidate.id}>
-                  <h2>
-                    Save {index + 1} · Device {candidate.device.slice(0, 6)}
-                  </h2>
-                  <p>
-                    Encounter {game.encounter + 1} · {phaseLabel(game)} · {game.currency} Gold · {game.wins}{" "}
-                    wins
-                  </p>
-                  <Button
-                    disabled={cloud.status !== "Conflict"}
-                    onClick={() => void session.cloud.choose(candidate.id)}
-                  >
-                    Use save {index + 1}
-                  </Button>
-                </section>
-              );
-            }}
-          </PagedItems>
-          {cloud.offlineAvailable ? (
-            <>
-              <Button variant="outline" onClick={() => session.cloud.offline()}>
-                Play offline
-              </Button>
-              {cloud.status !== "Conflict" ? (
-                <Button onClick={() => void session.cloud.retry()}>Retry cloud sync</Button>
-              ) : null}
-            </>
-          ) : null}
-        </>
-      )}
-    </Screen>
   );
 }

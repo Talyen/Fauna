@@ -6,7 +6,7 @@ The GitHub Actions workflow runs `npm run verify:full` on Linux for full static 
 
 Before shipping:
 
-- Configure Fauna's own Steam App/depot and Cloud quota, then set its App ID in `desktop/steam-config.json`. Optional cloud and overlay adapters are implemented with isolated account profiles and explicit conflict resolution. Live client, two-device divergence/recovery, callback support and native binary qualification remain required. Achievements are not implemented. Never use Alchemy's identities or saves.
+- Configure Fauna's own Steam App/depot and Cloud quota, then set its App ID in `desktop/steam-config.json`. Optional cloud and overlay adapters are implemented with isolated account profiles and automatic conflict resolution. Live client, two-device divergence/recovery, callback support and native binary qualification remain required. Achievements are not implemented. Never use Alchemy's identities or saves.
 - Add release signing, installer acceptance, production artwork and audio, privacy/crash-reporting choices, and store material.
 - Validate a complete journey with physical controllers, including disconnect/reconnect and device prompts. Current browser tests simulate standard gamepad input; prompts use Xbox-style labels.
 - Test on Steam Deck hardware through the intended Windows/Proton or native distribution path, including handheld text, overlay, sleep/resume, battery/performance, and offline startup. Native Linux/macOS packaging is not configured.
@@ -26,9 +26,9 @@ Native performance uses an unpackaged production renderer in isolated profiles. 
 
 ## Steam qualification
 
-Use application-managed Cloud only for the versioned Fauna device-slot namespace; do not also Auto-Cloud the same progression directories. Confirm configured quota supports 32 device streams with two 1 MiB slots each. Device snapshots carry current-format payload hashes and bounded ancestry; unrelated or unprovable heads require explicit selection after durable preservation. Offline startup and failed reads never authorize overwriting unknown remote progress. Settings, audio preferences and diagnostics are device-local. Client-free launch continues the last local profile without uploading; a different identified Steam account never adopts that profile automatically.
+Use application-managed Cloud only for the versioned Fauna device-slot namespace; do not also Auto-Cloud the same progression directories. Confirm configured quota supports 32 device streams with two 1 MiB slots each. Device snapshots carry current-format payload hashes and bounded ancestry; unrelated or unprovable heads automatically prefer intact local progress, then stable snapshot-ID order, after durable preservation. Offline startup and failed reads never authorize overwriting unknown remote progress. Settings, audio preferences and diagnostics are device-local. Client-free launch continues the last local profile without uploading; a different identified Steam account never adopts that profile automatically.
 
-Smoke/preview/performance profiles explicitly bypass Steam. Live acceptance requires two actual devices, offline divergent journeys, both conflict choices, account switching, disabled Cloud, reconnect and graceful quit. Verify overlay activation through the client and physical controller, including Deck sleep/resume and custom bindings. A fake event test establishes lifecycle behavior only. Keep Steam configuration, signing and publication separately authorized.
+Smoke/preview/performance profiles explicitly bypass Steam. Live acceptance requires two actual devices, offline divergent journeys, automatic conflict resolution and preservation of all competing heads, account switching, disabled Cloud, reconnect and graceful quit. Verify overlay activation through the client and physical controller, including Deck sleep/resume and custom bindings. A fake event test establishes lifecycle behavior only. Keep Steam configuration, signing and publication separately authorized.
 
 ## Release verification and player notes
 

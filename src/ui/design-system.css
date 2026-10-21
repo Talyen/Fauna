@@ -239,12 +239,6 @@ h3 {
   width: var(--empty-icon-size);
   height: var(--empty-icon-size);
 }
-.error-icon {
-  width: var(--icon-size);
-  height: var(--icon-size);
-  color: var(--destructive);
-  flex-shrink: 0;
-}
 .ui-spinner {
   animation: ui-spin var(--motion-spinner) linear infinite;
 }

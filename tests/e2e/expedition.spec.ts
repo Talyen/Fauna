@@ -580,7 +580,7 @@ for (const [width, height] of [
         captionsVisible: true,
         readableCaptions: true,
         portraitSizes: true,
-        rows: [7, 7],
+        rows: [5, 5, 4],
       });
       const artworkFit = await page.locator(".talent-overview-viewport").evaluate((viewport) => {
         const category = viewport.querySelector(".talent-category")!;
@@ -596,7 +596,7 @@ for (const [width, height] of [
           actual: art.width,
           largest: Math.min(
             category.getBoundingClientRect().width,
-            ((viewport.clientHeight - rowGap) / 2 - captions - gap * 2) * 0.75,
+            ((viewport.clientHeight - rowGap * 2) / 3 - captions - gap * 2) * 0.75,
           ),
         };
       });
@@ -719,7 +719,7 @@ test("rewards resume without duplicate XP, currency, recruitment or boons", asyn
   await resume(page);
   expect((await state(page)).boons).toEqual(after.boons);
 });
-test("corrupt saves recover backups and all-invalid saves require explicit recovery", async ({ page }) => {
+test("corrupt saves recover backups and all-invalid saves continue silently", async ({ page }) => {
   await page.goto("/");
   await page.evaluate(
     ({ key, game }) => {
@@ -729,7 +729,7 @@ test("corrupt saves recover backups and all-invalid saves require explicit recov
     { key, game: JSON.stringify(run()) },
   );
   await page.reload();
-  await expect(page.getByRole("status")).toContainText("backup");
+  await expect(page.getByRole("button", { name: "Continue", exact: true })).toBeVisible();
   await resume(page);
   await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
   await page.evaluate((key) => {
@@ -737,8 +737,7 @@ test("corrupt saves recover backups and all-invalid saves require explicit recov
     localStorage.setItem(key, "broken");
   }, key);
   await page.reload();
-  await expect(page.getByRole("heading", { name: "Save unavailable" })).toBeVisible();
-  await page.getByRole("button", { name: "Start fresh" }).click();
+  await expect(page.getByRole("alert")).toHaveCount(0);
   await expect(page.getByRole("button", { name: "New journey", exact: true })).toBeVisible();
 });
 test("controller edges, inspect and pause do not repeat a held confirm", async ({ page }) => {

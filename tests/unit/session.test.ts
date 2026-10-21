@@ -1,7 +1,6 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { createSession } from "../../src/application/session";
 import { createBrowserPlatform } from "../../src/platform/browser";
-import { createGame } from "../../src/game/engine";
 import type { Platform } from "../../src/platform/ports";
 import { run, winBattle } from "./helpers";
 class MemoryStorage implements Storage {
@@ -55,18 +54,18 @@ describe("save orchestration", () => {
     const s = createSession(createBrowserPlatform(memory));
     await s.load();
     expect(s.store.getState().game.phase).toBe("battle");
-    expect(s.store.getState().notice).toContain("backup");
+    expect(s.store.getState().error).toBe("");
     expect(memory.getItem("fauna.save.v1")).toBe("broken");
   });
-  it("requires an explicit fresh start when every candidate is invalid", async () => {
+  it("silently starts a playable profile when every candidate is invalid, retaining the primary until play", async () => {
     const p = platform("broken");
     const s = createSession(p);
     await s.load();
-    expect(s.command({ type: "draft", species: "mossback" })).toBe(false);
-    s.startFresh();
-    await s.flush();
-    expect(s.store.getState().recoveryRequired).toBe(false);
-    expect((await p.saves.readCandidates())[0]!.data).toBe(JSON.stringify(createGame()));
+    expect((await p.saves.readCandidates())[0]!.data).toBe("broken");
+    expect(s.store.getState().ready).toBe(true);
+    expect(s.command({ type: "draft", species: "mossback" })).toBe(true);
+    expect(await s.flush()).toBe(true);
+    await s.dispose();
   });
   it("preserves primary and backups in browser storage and reports quota failures", async () => {
     const memory = new MemoryStorage();
@@ -125,7 +124,7 @@ describe("save orchestration", () => {
     expect(saved.map((raw) => JSON.parse(raw).revision)).toEqual([1, 2]);
     expect(quit).toBe(true);
   });
-  it("does not erase data or admit commands after an I/O read failure", async () => {
+  it("permits in-memory play without overwriting inaccessible storage after read failure", async () => {
     let writes = 0;
     const s = createSession({
       ...platform(),
@@ -140,10 +139,11 @@ describe("save orchestration", () => {
     });
     await s.load();
     expect(s.store.getState().loadFailed).toBe(true);
-    expect(s.command({ type: "draft", species: "mossback" })).toBe(false);
+    expect(s.command({ type: "draft", species: "mossback" })).toBe(true);
     s.retrySave();
     await s.flush();
     expect(writes).toBe(0);
+    await s.dispose();
   });
   it("revokes command capabilities and ignores stale load completions after disposal", async () => {
     const s = createSession(platform());
@@ -155,7 +155,7 @@ describe("save orchestration", () => {
   });
 });
 describe("desktop close handshake", () => {
-  it("pauses new commands while renderer writes drain and declines close after a save failure", async () => {
+  it("drains admitted writes and retries silently before allowing close after a save failure", async () => {
     let requestClose: (() => Promise<boolean>) | undefined;
     let release: () => void = () => {};
     const blocked = new Promise<void>((resolve) => (release = resolve));
@@ -204,9 +204,9 @@ describe("desktop close handshake", () => {
     fail = true;
     await failure.load();
     failure.command({ type: "draft", species: "mossback" });
-    expect(await requestClose!()).toBe(false);
-    expect(failure.store.getState().closing).toBe(false);
-    expect(failure.command({ type: "start" })).toBe(true);
+    expect(await requestClose!()).toBe(true);
+    expect(failure.store.getState().closing).toBe(true);
+    expect(failure.command({ type: "start" })).toBe(false);
     await failure.dispose();
   });
 });
@@ -222,10 +222,61 @@ it("rejects obsolete development saves and recovers a current-format backup with
   await session.flush();
   expect(session.store.getState().game).toEqual(current);
   expect(session.store.getState().events).toEqual([]);
-  expect(session.store.getState().notice).toContain("Recovered");
+  expect(session.store.getState().error).toBe("");
   expect(memory.getItem("fauna.save.v1")).toBe(obsolete);
   session.command({ type: "endTurn" });
   await session.flush();
   expect(JSON.parse(memory.getItem("fauna.save.v1")!).version).toBe(23);
   await session.dispose();
+});
+
+it("retries the latest committed state in the background and cancels retries on disposal", async () => {
+  vi.useFakeTimers();
+  try {
+    let fail = true;
+    const write = vi.fn(async (_data: string) => {
+      if (fail) throw new Error("full");
+    });
+    const s = createSession({ ...platform(), saves: { readCandidates: async () => [], write } });
+    await s.load();
+    s.command({ type: "draft", species: "mossback" });
+    await s.flush();
+    s.command({ type: "start" });
+    await s.flush();
+    fail = false;
+    await vi.advanceTimersByTimeAsync(5000);
+    expect(await s.flush()).toBe(true);
+    expect(JSON.parse(write.mock.calls.at(-1)![0]).revision).toBe(2);
+    await s.dispose();
+    const count = write.mock.calls.length;
+    await vi.advanceTimersByTimeAsync(10000);
+    expect(write).toHaveBeenCalledTimes(count);
+  } finally {
+    vi.useRealTimers();
+  }
+});
+it("allows play after a stalled local read and ignores its late result", async () => {
+  vi.useFakeTimers();
+  try {
+    let release!: (data: { source: string; data: string }[]) => void;
+    const read = new Promise<{ source: string; data: string }[]>((resolve) => {
+      release = resolve;
+    });
+    const s = createSession({
+      ...platform(),
+      saves: { readCandidates: async () => read, write: async () => {} },
+    });
+    const loading = s.load();
+    await vi.advanceTimersByTimeAsync(5000);
+    await loading;
+    expect(s.store.getState().ready).toBe(true);
+    expect(s.command({ type: "draft", species: "mossback" })).toBe(true);
+    release([{ source: "primary", data: JSON.stringify(run()) }]);
+    await s.flush();
+    expect(s.store.getState().game.phase).toBe("draft");
+    expect(s.store.getState().game.revision).toBe(1);
+    await s.dispose();
+  } finally {
+    vi.useRealTimers();
+  }
 });
