@@ -9,7 +9,7 @@ async function seed(page: Page, game: GameState) {
   await page.getByRole("button", { name: "Continue", exact: true }).click();
 }
 for (const width of [1280, 1920]) {
-  test(`pile inspection preserves gameplay and nested focus at ${width}`, async ({ page }) => {
+  test(`pile browsing preserves gameplay and hover rules at ${width}`, async ({ page }) => {
     await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
     await page.emulateMedia({ reducedMotion: "reduce" });
     const game = produce(run(), (s) => {
@@ -24,9 +24,12 @@ for (const width of [1280, 1920]) {
     );
     const card = pile.locator(".action-card").first();
     await card.click();
-    await expect(page.locator(".inspection.single-card")).toBeVisible();
-    await page.keyboard.press("Escape");
-    await expect(card).toBeFocused();
+    await expect(page.locator(".inspection")).toHaveCount(0);
+    await card.hover();
+    await expect(page.getByRole("tooltip")).toBeVisible();
+    await card.focus();
+    await page.keyboard.press("i");
+    await expect(page.getByRole("dialog")).toHaveCount(1);
     if (width === 1280 && game.battle!.draw.length > 3) {
       await pile.getByRole("button", { name: "Next page" }).click();
       await expect(pile.locator(".action-card")).toHaveCount(game.battle!.draw.length - 3);

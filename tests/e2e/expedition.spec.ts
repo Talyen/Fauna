@@ -240,16 +240,14 @@ for (const width of [1280, 1920])
         await expect(page.getByRole("dialog")).toHaveCount(0);
         await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
         expect((await state(page)).expedition!.pack).toBe(game.expedition!.pack);
-        // Enemy and action inspection remains available once combat has started.
+        // Battle inspection shortcuts are inert; current effects remain on hover/focus.
         const enemy = page.locator(".app:not([inert]) .enemy-row .creature-card").first();
+        const before = await state(page);
         await enemy.focus();
         await page.keyboard.press("i");
-        const action = page.getByRole("dialog").locator(".inspection-thumbnails .action-card").first();
-        await action.click();
-        await page.keyboard.press("Escape");
-        await expect(action).toBeFocused();
-        await page.keyboard.press("Escape");
-        await expect(enemy).toBeFocused();
+        await expect(page.getByRole("dialog")).toHaveCount(0);
+        await expect(page.getByRole("tooltip")).toBeVisible();
+        expect(await state(page)).toEqual(before);
       });
 
 test("encounter placeholder uses bounded artwork at the minimum viewport", async ({ page }) => {
@@ -646,7 +644,7 @@ for (const [width, height] of [
       expect((await state(page)).revision).toBe(fixture.revision);
     }
   });
-test("Collection hides uncollected tooltips and uses centered collected inspection", async ({ page }) => {
+test("Collection hides uncollected tooltips and opens readable creature pages", async ({ page }) => {
   await seed(page, run());
   await page.getByRole("button", { name: "Collection", exact: true }).click();
   await expect(page.getByRole("navigation", { name: "Collection pages" })).toHaveCount(0);
@@ -684,7 +682,8 @@ test("Collection hides uncollected tooltips and uses centered collected inspecti
   await expect(artwork).toHaveCSS("filter", "grayscale(1)");
   await expect(locked).toHaveCSS("scale", "none");
   await page.getByRole("button", { name: "Inspect Mossback", exact: true }).click();
-  await expect(page.getByRole("dialog")).toBeVisible();
+  await expect(page.locator(".collection-creature-screen")).toBeVisible();
+  await expect(page.getByRole("dialog")).toHaveCount(0);
   await page.keyboard.press("Escape");
   await expect(page.getByRole("button", { name: "Inspect Mossback", exact: true })).toBeFocused();
   await page.keyboard.press("Escape");
@@ -1010,7 +1009,7 @@ test("five-card hand with hidden overflow, three enemies and a full bench preser
     ).toBeLessThan(0.025);
   }
 });
-test("enlarged text and keyboard/controller row navigation keep inspection and menu controls reachable", async ({
+test("enlarged text and keyboard/controller row navigation keep hover details and menu controls reachable", async ({
   page,
 }) => {
   await seed(page, run());
@@ -1024,8 +1023,8 @@ test("enlarged text and keyboard/controller row navigation keep inspection and m
   await page.keyboard.press("w");
   await expect(page.locator(".app:not([inert]) .enemy-row .creature-card:focus")).toHaveCount(1);
   await page.keyboard.press("i");
-  await expect(page.getByRole("dialog")).toBeVisible();
-  await page.getByRole("button", { name: "Close inspection", exact: true }).click();
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+  await expect(page.getByRole("tooltip")).toBeVisible();
   await page.getByRole("button", { name: "Open menu" }).click();
   await page.getByRole("button", { name: "Glossary", exact: true }).click();
   const close = page.getByRole("button", { name: "Open menu", exact: true });
@@ -1506,7 +1505,9 @@ test("recruitment at five requires replacement and updates a released starter's 
 });
 
 for (const input of ["mouse", "keyboard", "controller"] as const)
-  test(`stacked creature inspection browses action cards in one dialog with ${input}`, async ({ page }) => {
+  test(`Collection from battle shows a complete kit and returns without changing combat with ${input}`, async ({
+    page,
+  }) => {
     const press = input === "controller" ? await gamepad(page) : null;
     const fixture = run(7);
     await seed(page, fixture);
@@ -1519,48 +1520,33 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
         else await page.keyboard.press("Enter");
       }
     };
-    await activate(page.getByRole("button", { name: "Inspect Emberfox", exact: true }));
-    const dialog = page.getByRole("dialog");
-    await expect(dialog.locator(".inspection-thumbnails .action-card")).toHaveCount(3);
-    await expect(dialog.locator(".card-details")).toHaveCount(0);
-    const reveal = async (el: Locator) => {
-      if (input === "mouse") await el.hover();
-      else await el.focus();
-    };
-    await reveal(dialog.locator(".creature-card"));
-    await expect(page.getByRole("tooltip")).toContainText("Kindling");
-    const thumbs = dialog.locator(".inspection-thumbnails .action-card");
-    if (input === "mouse") {
-      await thumbs.first().hover();
-      await expect(page.getByRole("tooltip")).toContainText("Cinder Strike");
-      await thumbs.first().click();
-    } else {
-      await thumbs.first().focus();
-      if (press) await press(2);
-      else await page.keyboard.press("i");
-    }
-    await expect(page.locator(".inspection")).toHaveCount(1);
-    await expect(dialog.getByRole("button", { name: "Back", exact: true })).toBeFocused();
-    await expect(dialog.locator(".card-details")).toHaveCount(0);
-    await expect(dialog.getByRole("button", { name: /Previous action|Next action/ })).toHaveCount(0);
-    await reveal(dialog.locator(".action-card"));
-    await expect(page.getByRole("tooltip")).toContainText("Cinder Strike");
-    if (input === "mouse") {
-      await dialog.getByRole("button", { name: "Back", exact: true }).click();
-      await thumbs.nth(1).click();
-    } else if (press) await press(15);
-    else await page.keyboard.press("d");
-    await reveal(dialog.locator(".action-card"));
-    await expect(page.getByRole("tooltip")).toContainText("Warm Embers");
-    if (input === "mouse") await dialog.getByRole("button", { name: "Back", exact: true }).click();
-    else if (press) await press(1);
-    else await page.keyboard.press("Escape");
-    await expect(dialog.locator(".inspection-thumbnails .action-card").nth(1)).toBeFocused();
-    if (input === "mouse") await dialog.getByRole("button", { name: "Close inspection" }).click();
-    else if (press) await press(1);
-    else await page.keyboard.press("Escape");
+    const enemy = page.locator(".app:not([inert]) .enemy-row .creature-card").first();
+    await enemy.focus();
+    if (press) await press(2);
+    else await page.keyboard.press("i");
     await expect(page.getByRole("dialog")).toHaveCount(0);
+    await activate(page.getByRole("button", { name: "Open menu", exact: true }));
+    await activate(page.getByRole("button", { name: "Collection", exact: true }));
+    await activate(page.getByRole("button", { name: "Inspect Emberfox", exact: true }));
+    const details = page.locator(".collection-creature-screen");
+    await expect(details.getByRole("region", { name: "Trait", exact: true })).toContainText("Kindling");
+    for (const card of CARDS.filter((c) => c.species === "emberfox"))
+      await expect(details.getByRole("region", { name: card.name, exact: true })).toContainText(
+        `${card.cost} Mana`,
+      );
+    await expect(details.getByRole("region", { name: "Cinder Strike", exact: true })).toContainText(
+      "Deal 8 Fire damage.",
+    );
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+    if (input === "mouse") await details.getByRole("button", { name: "Back", exact: true }).click();
+    else if (press) await press(1);
+    else await page.keyboard.press("Escape");
     await expect(page.getByRole("button", { name: "Inspect Emberfox", exact: true })).toBeFocused();
+    if (press) await press(1);
+    else await page.keyboard.press("Escape");
+    await expect(page.getByRole("button", { name: "Collection", exact: true })).toBeFocused();
+    await activate(page.getByRole("button", { name: "Continue", exact: true }));
+    await expect(page.getByRole("main", { name: "Battlefield", exact: true })).toBeVisible();
     expect(await state(page)).toEqual(fixture);
   });
 
@@ -1568,7 +1554,7 @@ for (const [width, height] of [
   [1280, 800],
   [1920, 1080],
 ] as const)
-  test(`inspection preserves artwork ratios, enemy kit separation, and fit at ${width}×${height}`, async ({
+  test(`Collection kit preserves artwork ratios and visible rules at ${width}×${height}`, async ({
     page,
   }) => {
     await page.setViewportSize({ width, height });
@@ -1577,38 +1563,30 @@ for (const [width, height] of [
     await page.locator(".app:not([inert]) .player-row .creature-card").first().hover();
     await expect(page.getByRole("tooltip")).toContainText("Guard cards grant 2 extra block.");
     await expect(page.getByRole("tooltip")).not.toContainText("Bramble Bash");
-    await page.getByRole("button", { name: "Inspect Bramble Imp", exact: true }).click();
-    const dialog = page.getByRole("dialog");
-    await expect(dialog.locator(".card-details")).toHaveCount(0);
-    await dialog.locator(".creature-card").hover();
-    await expect(page.getByRole("tooltip")).toContainText("Bramble Imp");
-    await expect(page.getByRole("tooltip")).toContainText("Species kit · Briartooth");
-    await expect(page.getByRole("tooltip")).toContainText(
-      "Start each battle with 2 Thorns. When an attack removes Health, retaliate with current Thorns, then lose 1 stack.",
-    );
-    await dialog
+    await page.getByRole("button", { name: "Open menu", exact: true }).click();
+    await page.getByRole("button", { name: "Collection", exact: true }).click();
+    await page.getByRole("button", { name: "Inspect Mossback", exact: true }).click();
+    const details = page.locator(".collection-creature-screen");
+    await details
       .locator("img")
       .evaluateAll((imgs) => Promise.all(imgs.map((img) => (img as HTMLImageElement).decode())));
     await page.mouse.move(0, 0);
     await fits(page);
-    const root = (await dialog.boundingBox())!;
-    expect(root.y).toBeGreaterThanOrEqual(0);
-    expect(root.y + root.height).toBeLessThanOrEqual(height);
-    const creature = (await dialog.locator(".creature-card").boundingBox())!;
+    const creature = (await details.locator(".creature-card").boundingBox())!;
     expect(Math.abs(creature.width / creature.height - 4 / 3)).toBeLessThan(0.01);
-    for (const thumb of await dialog.locator(".action-card").all()) {
-      const bounds = (await thumb.boundingBox())!;
+    for (const artwork of await details.locator(".action-card").all()) {
+      const bounds = (await artwork.boundingBox())!;
       expect(Math.abs(bounds.width / bounds.height - 3 / 4)).toBeLessThan(0.01);
-      expect(await thumb.textContent()).toBe("");
+      expect(await artwork.textContent()).toBe("");
     }
-    await captureScreen(page, { path: `reports/inspection/live-creature-${width}.png` });
-    await dialog.locator(".action-card").first().click();
-    const portrait = (await dialog.locator(".action-card").boundingBox())!;
-    expect(Math.abs(portrait.width / portrait.height - 3 / 4)).toBeLessThan(0.01);
-    await captureScreen(page, { path: `reports/inspection/live-action-${width}.png` });
+    for (const card of CARDS.filter((c) => c.species === "mossback")) {
+      const region = details.getByRole("region", { name: card.name, exact: true });
+      await expect(region).toBeVisible();
+      await expect(region.locator(".action-effect")).not.toBeEmpty();
+    }
+    await captureScreen(page, { path: `reports/collection/kit-${width}.png` });
     await page.keyboard.press("Escape");
-    await page.mouse.click(5, 5);
-    await expect(page.getByRole("dialog")).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "Inspect Mossback", exact: true })).toBeFocused();
   });
 
 for (const [width, height] of [
@@ -1658,7 +1636,7 @@ for (const [width, height] of [
   [2560, 1080],
   [3440, 1440],
 ] as const)
-  test(`bounded battle and inspection remain scroll-free at ${width}×${height}`, async ({ page }) => {
+  test(`bounded battle remains scroll-free at ${width}×${height}`, async ({ page }) => {
     await page.setViewportSize({ width, height });
     await page.emulateMedia({ reducedMotion: "reduce" });
     const fixture = produce(run(), (d) => {

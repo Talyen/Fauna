@@ -48,7 +48,6 @@ function FanSlot({ index, count, children }: { index: number; count: number; chi
 export function BattleScreen({
   game,
   send,
-  inspect,
   controls,
   bursts,
   controller,
@@ -62,7 +61,6 @@ export function BattleScreen({
 }: {
   game: GameState;
   send: (command: Command) => boolean;
-  inspect: (item: Inspection) => void;
   controls: Controls;
   bursts: readonly Burst[];
   controller: boolean;
@@ -269,12 +267,9 @@ export function BattleScreen({
                 if (enemyTarget && enemy.health > 0)
                   play({ type: "play", cardId: selected, targetId: enemy.id });
                 else onDenied(element);
-              } else inspect({ species: enemy.species, enemyId: enemy.id });
+              }
             }}
-            onInspect={() => inspect({ species: enemy.species, enemyId: enemy.id })}
-            label={
-              selected && enemyTarget && enemy.health > 0 ? `Target ${enemy.name}` : `Inspect ${enemy.name}`
-            }
+            label={selected && enemyTarget && enemy.health > 0 ? `Target ${enemy.name}` : enemy.name}
           />
         ))}
       </section>
@@ -307,13 +302,12 @@ export function BattleScreen({
                 if (allyTarget && creature.health > 0)
                   play({ type: "play", cardId: selected, targetId: creature.id });
                 else onDenied(element);
-              } else inspect({ species: creature.species, creatureId: creature.id });
+              }
             }}
-            onInspect={() => inspect({ species: creature.species, creatureId: creature.id })}
             label={
               selected && allyTarget && creature.health > 0
                 ? `Target ${species(creature.species).name}`
-                : `Inspect ${species(creature.species).name}`
+                : species(creature.species).name
             }
           />
         ))}
@@ -401,7 +395,6 @@ export function BattleScreen({
                         );
                         onDenied(element);
                       }}
-                      onInspect={() => inspect({ card })}
                       onClick={() => {
                         onManualStart?.();
                         setHovered(null);

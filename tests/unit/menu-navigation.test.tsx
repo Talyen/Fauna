@@ -183,3 +183,40 @@ it.each(["home", "pause"])(
     }
   },
 );
+
+it.each(["Back", "Escape", "Open menu"])(
+  "returns from the battle Collection creature page using %s without changing combat",
+  async (back) => {
+    vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
+    localStorage.setItem("fauna.save.v1", encodeSave(run(7)));
+    const session = createSession(createBrowserPlatform(localStorage), 7);
+    await session.load();
+    const user = userEvent.setup();
+    render(<App session={session} />);
+    try {
+      await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+      const before = session.store.getState().game;
+      await user.click(screen.getByRole("button", { name: "Open menu", exact: true }));
+      await user.click(screen.getByRole("button", { name: "Collection", exact: true }));
+      await user.click(screen.getByRole("button", { name: "Inspect Mossback", exact: true }));
+      expect(screen.getByRole("region", { name: "Bramble Bash" })).toBeTruthy();
+      if (back === "Escape") await user.keyboard("{Escape}");
+      else await user.click(screen.getByRole("button", { name: back, exact: true }));
+      if (back !== "Open menu") {
+        expect(document.activeElement).toBe(
+          screen.getByRole("button", { name: "Inspect Mossback", exact: true }),
+        );
+        await user.keyboard("{Escape}");
+      }
+      await waitFor(() =>
+        expect(document.activeElement).toBe(screen.getByRole("button", { name: "Collection", exact: true })),
+      );
+      await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+      expect(screen.getByRole("main", { name: "Battlefield" })).toBeTruthy();
+      expect(session.store.getState().game).toBe(before);
+    } finally {
+      cleanup();
+      await session.dispose();
+    }
+  },
+);

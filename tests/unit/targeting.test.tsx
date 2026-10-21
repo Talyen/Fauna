@@ -41,7 +41,6 @@ function open(game = fixture(), navigation = false) {
       <BattleScreen
         game={game}
         send={send}
-        inspect={vi.fn()}
         controls={controls}
         bursts={[]}
         controller={false}

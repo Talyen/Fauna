@@ -189,21 +189,14 @@ for (const [width, height, enlarged] of [
     const opener = await card.getAttribute("aria-label");
     await captureScreen(page, { path: `reports/menu-collection-${width}.png` });
     await pad.press(2);
-    await expect(page.locator(".creature-inspection")).toBeVisible();
+    await expect(page.locator(".collection-creature-screen")).toBeVisible();
     await expect(page.getByRole("button", { name: "Back", exact: true })).toBeFocused();
-    await pad.press(13);
-    await expect(page.locator(".inspection-thumbnails .action-card").first()).toBeFocused();
-    await pad.press(0);
-    await expect(page.locator(".inspection.single-card")).toBeVisible();
-    await pad.press(15);
-    await pad.press(13);
-    await expect(page.locator(".single-card .action-card")).toBeFocused();
-    await expect(page.locator(".single-card .action-card")).toBeInViewport();
-    await expect(page.getByRole("button", { name: /Previous action|Next action/ })).toHaveCount(0);
-    await expect(page.getByRole("tooltip")).toBeVisible();
-    await captureScreen(page, { path: `reports/menu-inspection-${width}.png` });
-    await pad.press(1);
-    await expect(page.locator(".inspection-thumbnails button:focus")).toHaveCount(1);
+    await expect(page.locator(".collection-ability")).toHaveCount(3);
+    await expect(page.getByRole("region", { name: "Bramble Bash", exact: true })).toContainText(
+      "Deal 6 Nature damage.",
+    );
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+    await captureScreen(page, { path: `reports/menu-collection-kit-${width}.png` });
     await pad.press(1);
     await expect(page.getByRole("button", { name: opener!, exact: true })).toBeFocused();
     await pad.press(1);

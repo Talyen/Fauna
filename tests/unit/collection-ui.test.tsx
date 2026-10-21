@@ -30,10 +30,9 @@ it("shows the current collection on one page, resets filters and preserves focus
     draft.discovery.recruited.mossback = 3;
   });
   const before = structuredClone(game);
-  const inspect = vi.fn();
   render(
     <TooltipProvider>
-      <Collection game={game} inspect={inspect} openMenu={vi.fn()} />
+      <Collection game={game} controls={{ current: null }} openMenu={vi.fn()} />
     </TooltipProvider>,
   );
   const user = userEvent.setup();
@@ -62,7 +61,10 @@ it("shows the current collection on one page, resets filters and preserves focus
   expect(screen.queryByRole("status")).toBeNull();
   expect(screen.queryByRole("button", { name: "Previous page" })).toBeNull();
   await user.click(screen.getAllByRole("button", { name: /^Inspect / })[0]!);
-  expect(inspect).toHaveBeenCalledWith({ species: SPECIES[0]!.id });
+  expect(screen.getByRole("heading", { name: SPECIES[0]!.name })).toBeTruthy();
+  expect(screen.queryByRole("dialog")).toBeNull();
+  await user.click(screen.getByRole("button", { name: "Back", exact: true }));
+  expect(document.activeElement).toBe(screen.getAllByRole("button", { name: /^Inspect / })[0]);
   expect(game).toEqual(before);
 });
 
@@ -82,7 +84,7 @@ it("keeps encountered and victory-unlocked creatures out of the collected filter
   });
   render(
     <TooltipProvider>
-      <Collection game={game} inspect={vi.fn()} openMenu={vi.fn()} />
+      <Collection game={game} controls={{ current: null }} openMenu={vi.fn()} />
     </TooltipProvider>,
   );
   const user = userEvent.setup();
@@ -93,6 +95,7 @@ it("keeps encountered and victory-unlocked creatures out of the collected filter
 });
 
 it("remembers each filter's page and retains its first visible creature when capacity changes", async () => {
+  vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
   let width = 500;
   vi.stubGlobal(
     "ResizeObserver",
@@ -114,7 +117,7 @@ it("remembers each filter's page and retains its first visible creature when cap
   });
   render(
     <TooltipProvider>
-      <Collection game={game} inspect={vi.fn()} openMenu={vi.fn()} />
+      <Collection game={game} controls={{ current: null }} openMenu={vi.fn()} />
     </TooltipProvider>,
   );
   const user = userEvent.setup();
@@ -128,4 +131,9 @@ it("remembers each filter's page and retains its first visible creature when cap
   act(() => window.dispatchEvent(new Event("resize")));
   expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(2);
   expect(screen.getAllByRole("button", { name: /^Inspect / })[0]!.getAttribute("aria-label")).toBe(anchor);
+  await user.click(screen.getByRole("button", { name: anchor }));
+  await user.click(screen.getByRole("button", { name: "Back", exact: true }));
+  expect(screen.getByRole("tab", { name: "All", exact: true }).getAttribute("aria-selected")).toBe("true");
+  expect(screen.getAllByRole("button", { name: /^Inspect / })[0]!.getAttribute("aria-label")).toBe(anchor);
+  expect(document.activeElement).toBe(screen.getByRole("button", { name: anchor }));
 });

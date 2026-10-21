@@ -73,7 +73,8 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
   const root = useRef<HTMLDivElement>(null),
     gameControls: Controls = useRef(null),
     inspectionControls: Controls = useRef(null),
-    talentControls: Controls = useRef(null);
+    talentControls: Controls = useRef(null),
+    collectionControls: Controls = useRef(null);
   const [draftStarted, setDraftStarted] = useState(false);
   const [route, setRoute] = useState<Route>("home"),
     [menu, setMenu] = useState(false),
@@ -227,6 +228,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
       return;
     }
     if (inspection && inspectionControls.current?.(action)) return;
+    if (route === "collection" && collectionControls.current?.(action)) return;
     if (action === "back") {
       if (inspection) {
         setInspection(null);
@@ -263,6 +265,8 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     if (
       action === "inspect" &&
       !inspection &&
+      route !== "collection" &&
+      !(route === "play" && game.phase === "battle") &&
       (!menu || modal === "lineup") &&
       (!modal || ["deck", "draw", "discard", "swap", "lineup"].includes(modal))
     ) {
@@ -502,11 +506,15 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
               game={game}
               lineup={modal === "lineup"}
               send={send}
-              inspect={setInspection}
+              inspect={modal === "lineup" ? setInspection : undefined}
               close={() => setModal(null)}
             />
           ) : modal === "deck" || modal === "draw" || modal === "discard" ? (
-            <DeckCards game={game} inspect={setInspection} pile={modal === "deck" ? undefined : modal} />
+            <DeckCards
+              game={game}
+              inspect={game.phase === "battle" ? undefined : setInspection}
+              pile={modal === "deck" ? undefined : modal}
+            />
           ) : modal === "boons" ? (
             <PagedItems items={game.boons} pageSize={2} className="boon-options" label="Boon pages">
               {(id) => {
@@ -610,7 +618,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                 <Talents game={game} send={send} openMenu={backFromPage} controls={talentControls} />
               ) : null}
               {route === "collection" ? (
-                <Collection game={game} inspect={setInspection} openMenu={backFromPage} />
+                <Collection game={game} controls={collectionControls} openMenu={backFromPage} />
               ) : null}
               {route === "settings" || route === "glossary" ? (
                 <Screen className={`menu-screen ${route}-screen`} aria-labelledby="menu-screen-title">
@@ -639,7 +647,8 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                     <>
                       <p>
                         W/A/S/D or Tab to navigate. A/D switches targets. Enter/controller A selects. Escape/B
-                        goes back. I/controller X inspects. Controller Y ends the turn.
+                        goes back. Controller Y ends the turn. View creature abilities in Collection from the
+                        menu.
                       </p>
                       <PagedItems
                         items={GLOSSARY}
@@ -745,7 +754,6 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                       }
                       game={game}
                       send={send}
-                      inspect={setInspection}
                       controls={gameControls}
                       bursts={bursts}
                       onDenied={deny}

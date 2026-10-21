@@ -36,7 +36,7 @@ async function open(game: GameState) {
   await userEvent.click(screen.getByRole("button", { name: "Continue" }));
   return session;
 }
-it("inspects draw and discard piles without changing state or exposing draw order, and returns focus through nested inspection", async () => {
+it("inspects draw and discard piles without changing state or exposing draw order, and keeps card details on hover", async () => {
   const session = await open(
     produce(run(), (s) => {
       s.battle!.discard.push(s.battle!.draw.pop()!);
@@ -68,9 +68,11 @@ it("inspects draw and discard piles without changing state or exposing draw orde
     await userEvent.click(within(pile).getByRole("button", { name: "Previous page" }));
     const firstCard = pile.querySelector<HTMLButtonElement>("[data-card-id]")!;
     await userEvent.click(firstCard);
-    expect(screen.getAllByRole("dialog").at(-1)?.getAttribute("class")).toContain("inspection");
-    await userEvent.keyboard("{Escape}");
-    expect(document.activeElement).toBe(firstCard);
+    expect(screen.getAllByRole("dialog")).toHaveLength(1);
+    await userEvent.hover(firstCard);
+    expect(await screen.findByRole("tooltip")).toBeTruthy();
+    await userEvent.keyboard("i");
+    expect(screen.getAllByRole("dialog")).toHaveLength(1);
     await userEvent.click(screen.getByRole("button", { name: "Close draw pile" }));
     expect(document.activeElement).toBe(draw);
     await userEvent.click(screen.getByRole("button", { name: /^Inspect Discard Pile/ }));

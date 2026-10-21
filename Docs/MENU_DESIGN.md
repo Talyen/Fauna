@@ -7,10 +7,10 @@ Implemented direction from the design review.
 - While a journey exists, offer Continue. End journey appears only in the hamburger pause menu and ends immediately without confirmation; Play appears only when no run exists.
 - Opening the menu during an journey pauses play and shows a compact vertical dropdown anchored below and aligned to the right edge of its Open menu button, without dimming the current screen.
 - Talents opens full screen from the menu. The header hamburger opens the originating main or pause menu directly, including from a talent tree. Escape/controller B returns through the talent overview to the originating menu while preserving the journey and its prior screen.
-- Collection is a main-menu destination for reviewing permanently collected species, passives and action cards. It is separate from the journey roster.
+- Collection is available from the main and pause menus, including during battle, for reviewing permanently collected species, passives and action cards. It is separate from the journey roster.
 - The header hamburger or Escape/controller B from Collection or the Talents overview returns to the originating main or pause menu with its Collection or Talents choice focused.
 - Locked species show grayscale artwork, no unlock requirement, and no hover tooltip.
-- Clicking a collected species opens the centered inspection dialog: creature artwork and three portrait action thumbnails alongside paginated passive tiers. Names, passives, and ability rules appear on hover or keyboard/controller focus, with no artwork captions. Selecting a thumbnail pins its artwork in the same dialog; its rules remain on hover/focus. A/D and controller left/right cycle actions without Previous/Next buttons. A visible Back control and Escape/controller B return to the species and its current thumbnail, then close inspection and restore the collection opener.
+- Selecting a collected species opens a full creature page within Collection. Its artwork, active named trait and all three portrait abilities are visible together; each ability has its name, base Mana cost and full base rules outside the artwork. No hover or nested inspection is needed to read the kit. The page describes the species independently of journey card levels, talents and temporary battle modifiers. Rank progression is a native tab on the same page with one passive tier per page. Back and Escape/controller B return directly to the gallery with the same filter, page and creature focused. Open menu returns to the originating menu; battle Pause restores its Collection choice, and Continue resumes the unchanged battle with Auto-play off.
 - Collection lists collected species first, followed by uncollected species. All, Collected and Uncollected tabs filter that list. Encountered species remain uncollected until recruited; the committed onboarding starter also joins Collection.
 - Lineup is an optional centered dialog available from the menu between battles, including ordinary reward screens. It edits the saved starting three; combat swaps leave that preference unchanged. There is no mandatory team-selection destination.
 - Journey results appear once when a journey is completed, defeated, or voluntarily ended; the main menu has no results entry. End journey on a started journey opens results; clearing an unfinished starter choice returns to the main menu.
@@ -26,7 +26,7 @@ Main and pause menus show the available talent-point count beside Talents with a
 
 ## Battle assistance and reveals
 
-The battle action group includes the labeled Auto-play Switch, initially off for each battle. Manual card selection stops it; ordinary menus and inspection pause it. Development battles include Skip combat beside Auto-play. Production contains no developer action.
+The battle action group includes the labeled Auto-play Switch, initially off for each battle. Manual card selection stops it; ordinary menus pause it. Battle has no pinned inspection; hover/focus details remain available. Development battles include Skip combat beside Auto-play. Production contains no developer action.
 
 A live creature unlock opens an artwork-centered Creature unlocked screen when leaving results, with ordinary kit inspection and Continue. Continue advances through pending reveals and then Main menu. It does not add inspection to Journey results.
 

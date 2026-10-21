@@ -16,7 +16,7 @@ export function RosterPicker({
   game: GameState;
   lineup: boolean;
   send: (command: Command) => boolean;
-  inspect: (item: Inspection) => void;
+  inspect?: (item: Inspection) => void;
   close: () => void;
 }) {
   const [selected, setSelected] = useState<string | null>(null);
@@ -50,7 +50,7 @@ export function RosterPicker({
       disabled={!lineup && !isActive && creature.health === 0}
       label={`${species(creature.species).name}, ${isActive ? (lineup ? "starting" : "deployed") : "reserve"}`}
       onClick={() => choose(creature, isActive)}
-      onInspect={() => inspect({ species: creature.species, creatureId: creature.id })}
+      onInspect={inspect ? () => inspect({ species: creature.species, creatureId: creature.id }) : undefined}
     />
   );
   return (

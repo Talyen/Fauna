@@ -2243,3 +2243,71 @@ body,
   .game-button[data-effect-art]:not(.selected):not([aria-disabled="true"]):focus::after {
   border-color: var(--art-keyword-color);
 }
+
+.collection-gallery-page {
+  flex: 1;
+  min-height: 0;
+}
+.collection-creature-screen {
+  max-width: calc(
+    var(--art-landscape-width) + var(--collection-ability-width) * 3 + var(--screen-item-gap) * 2 +
+      var(--screen-section-gap)
+  );
+  display: flex;
+  flex-direction: column;
+  gap: var(--screen-section-gap);
+}
+.collection-creature-layout {
+  display: grid;
+  grid-template-columns: var(--art-landscape-width) minmax(0, 1fr);
+  gap: var(--screen-section-gap);
+  align-items: start;
+}
+.collection-creature-trait,
+.collection-creature-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--screen-item-gap);
+}
+.collection-creature-tabs {
+  gap: var(--screen-section-gap);
+}
+.collection-creature-tabs > [role="tablist"] {
+  align-self: start;
+}
+.collection-creature-passive,
+.collection-ability-copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--screen-item-gap);
+}
+.collection-creature-passive {
+  margin-top: var(--screen-item-gap);
+}
+.collection-creature-passive h2,
+.collection-ability-copy h2 {
+  font-size: var(--text-heading);
+}
+.collection-creature-rank,
+.collection-ability-cost {
+  font-size: var(--text-secondary);
+  color: var(--muted-foreground);
+}
+.collection-kit-content {
+  margin-top: 0;
+}
+.collection-ability-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--screen-item-gap);
+}
+.collection-ability {
+  display: flex;
+  flex-direction: column;
+  gap: var(--screen-item-gap);
+  min-width: 0;
+}
+.collection-ability > .action-card {
+  width: var(--art-portrait-width);
+  align-self: center;
+}

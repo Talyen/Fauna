@@ -112,15 +112,14 @@ for (const [width, height] of REVIEW_VIEWPORTS)
           const card = cards.nth(index);
           seen.add((await card.getAttribute("aria-label"))!);
           await card.click();
-          const dialog = page.locator(".creature-inspection");
-          await everyPage(dialog, () => expectScrollFree(page));
-          const action = dialog.locator(".inspection-thumbnails .action-card").first();
-          await action.click();
-          await page.locator(".single-card .action-card").hover();
-          await expect(page.getByRole("tooltip")).toBeVisible();
+          const details = page.locator(".collection-creature-screen");
+          await expect(details.locator(".collection-ability")).toHaveCount(3);
           await expectScrollFree(page);
-          await page.keyboard.press("Escape");
-          await expect(action).toBeFocused();
+          await captureScreen(page, {
+            path: `reports/scroll-free/kit-${(await card.getAttribute("data-species"))!}-${width}-${height}-${scale}.png`,
+          });
+          await details.getByRole("tab", { name: "Rank progression", exact: true }).click();
+          await everyPage(details, () => expectScrollFree(page));
           await page.keyboard.press("Escape");
           await expect(card).toBeFocused();
         }
