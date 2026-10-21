@@ -636,6 +636,50 @@
       "aspect": [3, 4],
       "provenance": "Copied from Alchemy src/assets/optimized/icy-heart.webp; same user-owned project artwork",
       "rights": "Existing Alchemy project artwork reused with user authorization"
+    },
+    {
+      "id": "boon.meteorite",
+      "origin": "repository",
+      "source": "public/art/boons/meteorite.webp",
+      "output": "art/boons/meteorite.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Copied from Alchemy src/assets/optimized/meteorite.webp; same user-owned project artwork",
+      "rights": "Existing Alchemy project artwork reused with user authorization"
+    },
+    {
+      "id": "boon.sin-eaters-lantern",
+      "origin": "repository",
+      "source": "public/art/boons/sin-eaters-lantern.webp",
+      "output": "art/boons/sin-eaters-lantern.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Copied from Alchemy src/assets/optimized/sin-eaters-lantern.webp; same user-owned project artwork",
+      "rights": "Existing Alchemy project artwork reused with user authorization"
+    },
+    {
+      "id": "boon.thunderstone",
+      "origin": "repository",
+      "source": "public/art/boons/thunderstone.webp",
+      "output": "art/boons/thunderstone.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Copied from Alchemy src/assets/optimized/thunderstone.webp; same user-owned project artwork",
+      "rights": "Existing Alchemy project artwork reused with user authorization"
+    },
+    {
+      "id": "boon.groves-favor",
+      "origin": "repository",
+      "source": "public/art/boons/groves-favor.webp",
+      "output": "art/boons/groves-favor.webp",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Copied from Alchemy src/assets/optimized/groves-favor.webp; same user-owned project artwork",
+      "rights": "Existing Alchemy project artwork reused with user authorization"
     }
   ]
 }

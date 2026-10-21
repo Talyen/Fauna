@@ -51,6 +51,8 @@ export function compareBalance(baseline, treatment) {
     };
   });
   return {
+    format: 1,
+    kind: "comparison",
     baselineIdentity: baseline.identity,
     treatmentIdentity: treatment.identity,
     codeChanged: baseline.identity !== treatment.identity,

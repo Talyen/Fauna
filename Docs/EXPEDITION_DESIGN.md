@@ -64,8 +64,8 @@ These are the agreed directions from the design review. They supersede the proto
 - Each biome offers a Merchant after its first ordinary victory when an item is affordable. Buy one of up to two unowned journey Boons for 20 Gold, or Leave. Currency spending is atomic and reduces the wallet, while journey earnings remain gross retained income.
 - Initial battle item rewards focus on run-wide boons: passive effects for the whole journey.
 - When a battle awards a Boon, offer up to three distinct unowned choices.
-- Choose one boon or skip the reward. Boons use 3:4 portrait artwork wherever displayed, matching hand cards. Tattered Pages, Bone Charm, Ironwood Buckler and Icy Heart use copied Alchemy artwork; names stay below the art and effects in hover/focus tooltips. Owned Boons are inspectable from the menu during a journey.
-- Starter tuning: Currency pays 20 per ordinary victory and 40 for each biome boss. Intermediate biome bosses offer up to three distinct unowned Boons; smaller nonempty pools remain available. Ordinary combat offers recruitment, never boons; intermediate bosses offer boons, never recruitment. Four Boons are authored in `src/game/progression.ts`; their ownership lasts only for the journey. Material types and permanent upgrade purchases remain undefined.
+- Choose one boon or skip the reward. Boons use 3:4 portrait artwork wherever displayed, matching hand cards. All eight Boons use copied Alchemy artwork; names stay below the art and effects in hover/focus tooltips. Owned Boons are inspectable from the menu during a journey.
+- Starter tuning: Currency pays 20 per ordinary victory and 40 for each biome boss. Intermediate biome bosses offer up to three distinct unowned Boons; smaller nonempty pools remain available. Ordinary combat offers recruitment, never boons; intermediate bosses offer boons, never recruitment. Eight Boons are authored in `src/game/progression.ts`; their ownership lasts only for the journey. Material types and permanent upgrade purchases remain undefined.
 
 ## Screen flow and Journey results
 

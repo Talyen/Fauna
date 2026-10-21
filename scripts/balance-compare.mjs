@@ -4,6 +4,7 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { ROOT, runtime, identity, hash, reportDirectory } from "./lib/tool-runtime.mjs";
 import { compareBalance } from "./lib/paired-balance.mjs";
+import { writeBalanceFindings } from "./balance-findings.mjs";
 const load = async (file) => JSON.parse(await readFile(path.resolve(file), "utf8"));
 export async function worker(input, output) {
   if (!output || !path.resolve(output).startsWith(path.join(ROOT, "reports") + path.sep))
@@ -51,6 +52,7 @@ export async function main(args = process.argv.slice(2)) {
     const comparison = compareBalance(baseline, treatment);
     const out = await reportDirectory(args[2], `reports/balance/comparison-${Date.now()}`);
     await writeFile(path.join(out, "comparison.json"), JSON.stringify(comparison, null, 2));
+    await writeBalanceFindings(comparison, out);
     console.log(JSON.stringify(comparison.metrics, null, 2));
     console.log(`Evidence: ${out}`);
     return;
@@ -150,6 +152,8 @@ export async function main(args = process.argv.slice(2)) {
       report.settings = result.settings;
       report.cases.push({
         key,
+        starter: config.starter,
+        seed: config.seed,
         arm,
         complete: result.complete,
         reason: result.reason,
@@ -159,7 +163,13 @@ export async function main(args = process.argv.slice(2)) {
         fixtureGrants: config.loadout ?? null,
         evidence: output,
       });
-      if (!result.complete) report.failures.push({ key, reason: result.reason });
+      if (!result.complete)
+        report.failures.push({
+          key,
+          reason: result.reason,
+          evidence: output,
+          journal: `${output}.journal.jsonl`,
+        });
     } catch (error) {
       report.failures.push({ key, reason: error.message, config: input, journal: `${output}.journal.jsonl` });
     }
@@ -167,12 +177,12 @@ export async function main(args = process.argv.slice(2)) {
   }
   report.complete = report.failures.length === 0 && report.cases.length === configs.length;
   await writeFile(manifest, JSON.stringify(report, null, 2));
+  await writeBalanceFindings(report, out);
   if (mode === "experiment" && report.complete) {
     const split = (arm) => ({ ...report, cases: report.cases.filter((row) => row.arm === arm) });
-    await writeFile(
-      path.join(out, "comparison.json"),
-      JSON.stringify(compareBalance(split("baseline"), split("treatment")), null, 2),
-    );
+    const comparison = compareBalance(split("baseline"), split("treatment"));
+    await writeFile(path.join(out, "comparison.json"), JSON.stringify(comparison, null, 2));
+    await writeBalanceFindings(comparison, out);
   }
   console.log(
     `${report.complete ? "Complete" : "Incomplete"}: ${report.cases.length}/${configs.length} cases. ${manifest}`,

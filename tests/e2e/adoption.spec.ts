@@ -57,7 +57,8 @@ for (const width of [1280, 1920])
   test(`illustrated Boons and independent tooltip sizing at ${width}`, async ({ page }) => {
     const { run } = await import("../unit/helpers");
     const fixture = structuredClone(run(7));
-    fixture.boons = ["tattered-pages", "bone-charm", "ironwood-buckler", "icy-heart"];
+    const { BOONS } = await import("../../src/game/progression");
+    fixture.boons = BOONS.map((boon) => boon.id);
     await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/");
@@ -92,6 +93,13 @@ for (const width of [1280, 1920])
         .evaluate((node) => node.getBoundingClientRect().width),
     ).toBeCloseTo(200, 0);
     await page.screenshot({ path: `reports/owned-boons-${width}.png` });
+    for (const boon of BOONS.slice(4)) {
+      const heading = dialog.getByRole("heading", { name: boon.name, exact: true });
+      await heading.scrollIntoViewIfNeeded();
+      await expect(heading).toBeInViewport();
+      await expect(dialog).toContainText(boon.text);
+      await page.screenshot({ path: `reports/owned-boon-${boon.id}-${width}.png` });
+    }
     await page.keyboard.press("Escape");
     await expect(opener).toBeFocused();
     expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(fixture);
