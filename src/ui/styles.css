@@ -1769,9 +1769,10 @@ strong {
 .battle-pile > .action-card {
   width: var(--battle-pile-width);
 }
-.battle-pile > span {
-  font-size: var(--text-secondary);
-  color: var(--muted-foreground);
+.battle-dock > .mana {
+  align-items: flex-end;
+  /* Include the socket's 7% overhang in the shared gap above each pile. */
+  padding-bottom: calc(var(--mana-crystal-size) * 0.07);
 }
 .unlock-screen {
   display: flex;
