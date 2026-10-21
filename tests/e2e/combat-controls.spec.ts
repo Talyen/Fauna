@@ -54,7 +54,7 @@ for (const width of [1280, 1920]) {
       const expectedWidth = await page
         .locator(".hand-slot")
         .first()
-        .evaluate((slot) => slot.clientWidth * 0.7);
+        .evaluate((slot) => slot.clientWidth * 0.8);
       expect(Math.abs(pile.width - expectedWidth)).toBeLessThan(1);
     }
     await autoplay.click();

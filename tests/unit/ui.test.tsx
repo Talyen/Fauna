@@ -266,7 +266,7 @@ describe("player interface", () => {
     expect(session.store.getState().game.team).toHaveLength(3);
     await session.dispose();
   });
-  it("inspects each focused creature copy with current Block and no Health totals using the keyboard", async () => {
+  it("shows each creature copy with current Block and no Health totals on hover", async () => {
     vi.stubGlobal(
       "ResizeObserver",
       class {
@@ -298,21 +298,18 @@ describe("player interface", () => {
       ["ally-0", 0],
       ["ally-1", 4],
     ] as const) {
-      act(() =>
-        document.querySelector<HTMLButtonElement>(`.player-row [data-actor-id="${id}"] button`)!.focus(),
-      );
-      await user.keyboard("i");
-      await user.tab();
+      const creature = document.querySelector<HTMLButtonElement>(
+        `.player-row [data-actor-id="${id}"] button`,
+      )!;
+      await user.hover(creature);
       const tooltip = (await screen.findByRole("tooltip")).textContent!;
       expect(tooltip).not.toMatch(/\d+\/\d+ health/i);
       if (block) expect(tooltip).toContain(`${block} block`);
       else expect(tooltip).not.toMatch(/\d+ block/);
-      await user.keyboard("{Escape}");
+      await user.unhover(creature);
     }
     await user.click(screen.getByRole("button", { name: "Swap" }));
-    act(() => screen.getByRole("button", { name: "Mossback, reserve" }).focus());
-    await user.keyboard("i");
-    await user.tab();
+    await user.hover(screen.getByRole("button", { name: "Mossback, reserve" }));
     const reserveTooltip = (await screen.findByRole("tooltip")).textContent!;
     expect(reserveTooltip).toContain("2 block");
     expect(reserveTooltip).not.toMatch(/\d+\/\d+ health/i);

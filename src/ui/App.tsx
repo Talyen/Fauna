@@ -324,7 +324,9 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
       root.current?.querySelectorAll<HTMLElement>("main button:not(:disabled)") ?? [],
     ).filter((el) => el.getClientRects().length > 0);
     if (route === "home" && menuReturnLabel.current) {
-      const opener = buttons.find((el) => el.textContent === menuReturnLabel.current);
+      const opener = buttons.find(
+        (el) => (el.getAttribute("aria-label") ?? el.textContent) === menuReturnLabel.current,
+      );
       menuReturnLabel.current = null;
       if (opener) {
         opener.focus();
@@ -789,7 +791,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                 menuReturnLabel.current = null;
                 const opener = Array.from(
                   (event.currentTarget as HTMLElement).querySelectorAll<HTMLButtonElement>("button"),
-                ).find((button) => button.textContent === label);
+                ).find((button) => (button.getAttribute("aria-label") ?? button.textContent) === label);
                 if (opener) {
                   event.preventDefault();
                   opener.focus();

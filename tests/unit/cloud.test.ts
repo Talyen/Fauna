@@ -282,3 +282,52 @@ it("retries metadata for the latest local progress without installing an older c
     vi.useRealTimers();
   }
 });
+
+it("retries a failed identity lookup and syncs the journey played offline", async () => {
+  vi.useFakeTimers();
+  const f = fixture();
+  try {
+    f.port.identity = vi.fn().mockRejectedValueOnce(new Error("offline")).mockResolvedValue(identity);
+    await f.manager.start(initial);
+    await f.manager.commit(progress);
+    await vi.advanceTimersByTimeAsync(15000);
+    await vi.waitFor(async () => {
+      expect((await parseSnapshot(f.local.data!, identity.profile)).payload).toBe(progress);
+      expect(f.files.size).toBeGreaterThan(0);
+    });
+    expect(f.install).not.toHaveBeenCalled();
+    expect(f.manager.view.blocking).toBe(false);
+  } finally {
+    await f.manager.dispose();
+    vi.useRealTimers();
+  }
+});
+
+it("recovers local metadata before retrying uploads after a startup read failure", async () => {
+  vi.useFakeTimers();
+  const f = fixture();
+  try {
+    const ancestor = await snapshot(initial, identity, 20);
+    f.local.data = JSON.stringify(ancestor);
+    f.files.set(cloudName(ancestor), JSON.stringify(ancestor));
+    f.port.readLocal = vi
+      .fn()
+      .mockRejectedValueOnce(new Error("disk busy"))
+      .mockImplementation(async () => JSON.stringify(ancestor));
+    await f.manager.start(initial);
+    await f.manager.commit(progress);
+    expect(f.local.data).toBe(JSON.stringify(ancestor));
+    await vi.advanceTimersByTimeAsync(15000);
+    await vi.waitFor(async () => {
+      const saved = await parseSnapshot(f.local.data!, identity.profile);
+      expect(saved.sequence).toBeGreaterThan(20);
+      expect(saved.payload).toBe(progress);
+      expect(f.manager.view.status).toBe("Synced");
+    });
+    expect(f.port.readLocal).toHaveBeenCalledTimes(2);
+    expect(f.install).not.toHaveBeenCalled();
+  } finally {
+    await f.manager.dispose();
+    vi.useRealTimers();
+  }
+});

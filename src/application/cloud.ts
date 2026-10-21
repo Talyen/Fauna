@@ -100,13 +100,15 @@ export function createCloud(
   let acknowledged: string | null = null;
   let retryTimer: ReturnType<typeof setTimeout> | undefined;
   let retrying = false;
+  let initialized = false;
   let metadataWrites = Promise.resolve();
   const scheduleRetry = () => {
-    if (!alive || retryTimer || retrying || !identity?.available || identity.enabled === false) return;
+    if (!alive || retryTimer || retrying || identity?.available === false || identity?.enabled === false)
+      return;
     retryTimer = setTimeout(() => {
       retryTimer = undefined;
       retrying = true;
-      void reconcile(true).finally(() => {
+      void (initialized ? reconcile(true) : initialize(localData, true)).finally(() => {
         retrying = false;
         if (view.status === "Pending") scheduleRetry();
       });
@@ -265,21 +267,22 @@ export function createCloud(
     update({ blocking: false, status: "Pending" });
     return true;
   };
-  async function initialize(data: string | null) {
+  async function initialize(data: string | null, background = false) {
     const starting = ++generation;
     localData = data;
     if (!port) return;
     try {
-      update({ blocking: true, status: "Syncing" });
-      identity = await port.identity();
+      update({ blocking: !background, status: "Syncing" });
+      const nextIdentity = await port.identity();
       if (!alive || starting !== generation) return;
+      identity = nextIdentity;
       if (!identity.available) {
         update({ ...initialCloudView });
         return;
       }
       if (!identifier.test(identity.device) || !identifier.test(identity.profile))
         throw new Error("Cloud profile identity is invalid.");
-      if (identity.importAvailable) {
+      if (!background && identity.importAvailable) {
         const candidates = await port.importStandalone(true);
         if (!alive || starting !== generation) return;
         for (const candidate of candidates) {
@@ -310,13 +313,14 @@ export function createCloud(
           /* Unknown ancestry stays a conflict, never a fabricated descendant. */
         }
       }
+      initialized = true;
       if (data && !current) await persist(data, []);
       if (!alive || starting !== generation) return;
       if (identity.enabled === false) {
         update({ ...initialCloudView });
         return;
       }
-      await reconcile();
+      await reconcile(background);
     } catch (error) {
       if (alive && starting === generation)
         update({ status: "Pending", blocking: false, error: errorText(error) });
@@ -345,6 +349,10 @@ export function createCloud(
       if (!alive) return;
       generation++;
       localData = data;
+      if (!initialized) {
+        if (port && identity?.available !== false) update({ status: "Pending" });
+        return;
+      }
       try {
         await persist(data);
         if (!remoteReady && identity?.available && identity.enabled !== false) update({ status: "Pending" });

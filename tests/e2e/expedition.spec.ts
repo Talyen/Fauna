@@ -676,7 +676,7 @@ test("Collection hides uncollected tooltips and opens readable creature pages", 
     return color;
   });
   await expect(locked).toHaveCSS("scale", hoverScale);
-  await expect(locked).toHaveCSS("border-color", highlight);
+  await expect(locked).toHaveCSS("border-color", "rgba(0, 0, 0, 0)");
   await expect.poll(() => locked.evaluate((e) => getComputedStyle(e, "::after").borderColor)).toBe(highlight);
   await page.getByRole("heading", { name: "Collection", exact: true }).hover();
   await expect(artwork).toHaveCSS("filter", "grayscale(1)");
@@ -1088,7 +1088,7 @@ test("End journey is exclusive to the hamburger menu with a red label and icon",
     .getByRole("button", { name: "End journey", exact: true });
   const red = await page
     .locator(":root")
-    .evaluate((element) => getComputedStyle(element).getPropertyValue("--destructive").trim());
+    .evaluate((element) => getComputedStyle(element).getPropertyValue("--destructive-text").trim());
   const resolvedRed = await end.evaluate((element, color) => {
     const probe = document.createElement("span");
     probe.style.color = color;

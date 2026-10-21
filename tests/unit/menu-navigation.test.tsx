@@ -220,3 +220,36 @@ it.each(["Back", "Escape", "Open menu"])(
     }
   },
 );
+
+it.each(["home", "pause"])(
+  "returns focus to Talents with available points in the %s menu",
+  async (origin) => {
+    vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
+    localStorage.setItem(
+      "fauna.save.v1",
+      encodeSave(
+        produce(run(7), (game) => {
+          game.keywordXP.physical = 10;
+        }),
+      ),
+    );
+    const session = createSession(createBrowserPlatform(localStorage), 7);
+    await session.load();
+    const user = userEvent.setup();
+    render(<App session={session} />);
+    try {
+      if (origin === "pause") {
+        await user.click(screen.getByRole("button", { name: "Continue", exact: true }));
+        await user.click(screen.getByRole("button", { name: "Open menu", exact: true }));
+      }
+      await user.click(screen.getByRole("button", { name: "Talents", exact: true }));
+      await user.click(screen.getByRole("button", { name: "Back", exact: true }));
+      await waitFor(() =>
+        expect(document.activeElement).toBe(screen.getByRole("button", { name: "Talents", exact: true })),
+      );
+    } finally {
+      cleanup();
+      await session.dispose();
+    }
+  },
+);
