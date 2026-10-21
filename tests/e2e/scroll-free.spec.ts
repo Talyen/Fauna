@@ -3,10 +3,13 @@ import { test, expect, type Locator } from "@playwright/test";
 import { produce } from "immer";
 import { run } from "../unit/helpers";
 import { SPECIES } from "../../src/game/content";
-import { encodeSave } from "../../src/game/save";
+import { decodeSave, encodeSave } from "../../src/game/save";
 import { expectScrollFree, layoutViolations, REVIEW_VIEWPORTS } from "./layout-contract";
 import { captureScreen } from "./rendered-evidence";
 import { snapshot, cloudName } from "../../src/application/cloud";
+
+// Each action is local and immediate; do not spend a full journey timeout on a missing control.
+test.use({ actionTimeout: 5000 });
 
 for (const [width, height] of [
   [1280, 720],
@@ -82,21 +85,25 @@ for (const [width, height] of REVIEW_VIEWPORTS)
       await page.setViewportSize({ width, height });
       await page.emulateMedia({ reducedMotion: scale === 1 ? "no-preference" : "reduce" });
       const game = produce(run(7), (draft) => {
+        draft.discovery.encountered = SPECIES.map((entry) => entry.id);
         draft.discovery.recruited = Object.fromEntries(SPECIES.map((entry) => [entry.id, 1]));
         draft.battle!.hand = draft.cards.slice(0, 7).map((card) => card.id);
         draft.battle!.buffer = draft.cards.slice(7).map((card) => card.id);
         draft.battle!.draw = [];
         draft.battle!.discard = [];
       });
+      const save = encodeSave(game);
+      expect(decodeSave(save)).toEqual(game);
       await page.addInitScript(
         ({ save, scale }) => {
           localStorage.setItem("fauna.save.v1", save);
           localStorage.setItem("fauna.text-scale", String(scale));
           localStorage.setItem("fauna.tooltip-scale", "1.25");
         },
-        { save: encodeSave(game), scale },
+        { save, scale },
       );
       await page.goto("/");
+      await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
       await expectScrollFree(page);
       await page.getByRole("button", { name: "Collection", exact: true }).click();
       const seen = new Set<string>();
