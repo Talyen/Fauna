@@ -50,17 +50,27 @@ it("inspects draw and discard piles without changing state or exposing draw orde
     const cards = within(pile)
       .getAllByRole("button")
       .filter((button) => button.hasAttribute("data-card-id"));
-    expect(cards).toHaveLength(before.battle!.draw.length);
+    expect(cards).toHaveLength(Math.min(3, before.battle!.draw.length));
     const ids = cards.map((card) => card.dataset.cardId);
     const expected = before.cards
       .filter((card) => before.battle!.draw.includes(card.id))
       .sort((a, b) => a.definitionId.localeCompare(b.definitionId) || a.id.localeCompare(b.id))
       .map((card) => card.id);
-    expect(ids).toEqual(expected);
-    await userEvent.click(cards[0]!);
+    expect(ids).toEqual(expected.slice(0, 3));
+    const allIds = [...ids];
+    while (!(within(pile).getByRole("button", { name: "Next page" }) as HTMLButtonElement).disabled) {
+      await userEvent.click(within(pile).getByRole("button", { name: "Next page" }));
+      allIds.push(
+        ...Array.from(pile.querySelectorAll<HTMLElement>("[data-card-id]"), (el) => el.dataset.cardId),
+      );
+    }
+    expect(allIds).toEqual(expected);
+    await userEvent.click(within(pile).getByRole("button", { name: "Previous page" }));
+    const firstCard = pile.querySelector<HTMLButtonElement>("[data-card-id]")!;
+    await userEvent.click(firstCard);
     expect(screen.getAllByRole("dialog").at(-1)?.getAttribute("class")).toContain("inspection");
     await userEvent.keyboard("{Escape}");
-    expect(document.activeElement).toBe(cards[0]);
+    expect(document.activeElement).toBe(firstCard);
     await userEvent.click(screen.getByRole("button", { name: "Close draw pile" }));
     expect(document.activeElement).toBe(draw);
     await userEvent.click(screen.getByRole("button", { name: /^Inspect Discard Pile/ }));
@@ -126,6 +136,30 @@ it("exposes pending talent rewards and remaining control turns in creature detai
   }
 });
 
+it("keeps all simultaneous combat effects reachable through bounded pages", async () => {
+  const session = await open(
+    produce(run(), (state) => {
+      Object.assign(state.team[0]!.combat!, { armor: 3, thorns: 2, dodge: 10, burn: 1, poison: 1, bleed: 1 });
+    }),
+  );
+  try {
+    const effects = document.querySelector(".player-row .combat-status") as HTMLElement;
+    const seen = new Set<string>();
+    for (;;) {
+      effects
+        .querySelectorAll<HTMLElement>("[data-status-id]")
+        .forEach((el) => seen.add(el.dataset.statusId!));
+      const next = within(effects).getByRole("button", { name: "Next page" }) as HTMLButtonElement;
+      if (next.disabled) break;
+      await userEvent.click(next);
+    }
+    expect([...seen]).toEqual(["armor", "thorns", "dodge", "burn", "poison", "bleed"]);
+    expect(document.activeElement).toBe(within(effects).getByRole("button", { name: "Previous page" }));
+  } finally {
+    await session.dispose();
+  }
+});
+
 it("opens every expanded talent tree and purchases a later row through the existing controls", async () => {
   const game = produce(run(), (state) => {
     state.keywordXP = Object.fromEntries(KEYWORDS.map((keyword) => [keyword, 10000]));
@@ -139,12 +173,22 @@ it("opens every expanded talent tree and purchases a later row through the exist
     for (const keyword of KEYWORDS) {
       await userEvent.click(screen.getByRole("button", { name: `${keywordLabel(keyword)} talents` }));
       const talents = TALENTS.filter((t) => t.keyword === keyword);
-      for (const talent of talents) expect(screen.getByRole("button", { name: talent.name })).toBeTruthy();
+      const rows = [...new Set(talents.map((talent) => talent.row))];
+      for (let index = 0; index < rows.length; index++) {
+        for (const talent of talents.filter((entry) => entry.row === rows[index]))
+          expect(screen.getByRole("button", { name: talent.name })).toBeTruthy();
+        if (index < rows.length - 1) await userEvent.click(screen.getByRole("button", { name: "Next page" }));
+      }
+      while (!(screen.getByRole("button", { name: "Previous page" }) as HTMLButtonElement).disabled)
+        await userEvent.click(screen.getByRole("button", { name: "Previous page" }));
       if (keyword === "physical") {
         const later = talents.find((t) => t.row === 1)!;
+        await userEvent.click(screen.getByRole("button", { name: "Next page" }));
         expect(screen.getByRole("button", { name: later.name }).getAttribute("aria-disabled")).toBe("true");
+        await userEvent.click(screen.getByRole("button", { name: "Previous page" }));
         for (const talent of talents.filter((t) => t.row === 0))
           await userEvent.click(screen.getByRole("button", { name: talent.name }));
+        await userEvent.click(screen.getByRole("button", { name: "Next page" }));
         await userEvent.click(screen.getByRole("button", { name: later.name }));
         expect(session.store.getState().game.talents).toContain(later.id);
       }

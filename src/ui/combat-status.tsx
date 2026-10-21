@@ -1,3 +1,4 @@
+import { PagedItems } from "./pagination";
 import { returnFocus } from "./focus";
 import { KeywordText } from "./keyword-text";
 import { motionValue } from "./motion-values";
@@ -125,43 +126,50 @@ export function CombatStatus({ combat, details = false }: { combat?: CombatState
       </div>
     );
   if (!shown.length) return null;
+  const tile = (s: Status) => {
+    const Icon = s.id === "grace" ? Skull : s.id === "cooldown" ? Timer : Hourglass;
+    return (
+      <Tooltip key={s.id}>
+        <TooltipTrigger asChild>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="status-icon"
+            data-status-id={s.id}
+            aria-label={s.text}
+            aria-hidden={s.exit || undefined}
+            disabled={s.exit}
+            data-exiting={s.exit || undefined}
+            data-keyword={s.id}
+          >
+            <span
+              data-keyword={s.id}
+              key={s.count}
+              className={s.exit ? undefined : s.changed ? "status-changed" : "status-enter"}
+            >
+              {stats.includes(s.id as (typeof stats)[number]) ? (
+                <KeywordIcon id={s.id as (typeof stats)[number]} />
+              ) : (
+                <Icon aria-hidden="true" />
+              )}
+            </span>
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <KeywordText text={s.text} />
+        </TooltipContent>
+      </Tooltip>
+    );
+  };
   return (
     <div ref={root} className="combat-status" aria-label="Combat effects">
-      {shown.map((s) => {
-        const Icon = s.id === "grace" ? Skull : s.id === "cooldown" ? Timer : Hourglass;
-        return (
-          <Tooltip key={s.id}>
-            <TooltipTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="status-icon"
-                data-status-id={s.id}
-                aria-label={s.text}
-                aria-hidden={s.exit || undefined}
-                disabled={s.exit}
-                data-exiting={s.exit || undefined}
-                data-keyword={s.id}
-              >
-                <span
-                  data-keyword={s.id}
-                  key={s.count}
-                  className={s.exit ? undefined : s.changed ? "status-changed" : "status-enter"}
-                >
-                  {stats.includes(s.id as (typeof stats)[number]) ? (
-                    <KeywordIcon id={s.id as (typeof stats)[number]} />
-                  ) : (
-                    <Icon aria-hidden="true" />
-                  )}
-                </span>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <KeywordText text={s.text} />
-            </TooltipContent>
-          </Tooltip>
-        );
-      })}
+      {shown.length > 4 ? (
+        <PagedItems items={shown} pageSize={2} className="combat-effect-page" label="Combat effect pages">
+          {tile}
+        </PagedItems>
+      ) : (
+        shown.map(tile)
+      )}
     </div>
   );
 }

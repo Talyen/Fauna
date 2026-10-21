@@ -1771,18 +1771,6 @@ body,
   .battle-screen :is(.enemy-row, .player-row) {
     gap: var(--screen-item-gap);
   }
-  .battle-screen :is(.enemy-row, .player-row) > .creature-wrap {
-    width: calc(var(--battle-creature-width) + var(--control-height) + var(--screen-item-gap));
-    flex-basis: calc(var(--battle-creature-width) + var(--control-height) + var(--screen-item-gap));
-    padding-right: calc(var(--control-height) + var(--screen-item-gap));
-  }
-  .battle-screen .combatant-reaction > .combat-status {
-    position: absolute;
-    right: calc(-1 * (var(--control-height) + var(--screen-item-gap)));
-    top: 0;
-    width: var(--control-height);
-    gap: 0;
-  }
   .battle-screen .target-control {
     grid-area: 1 / 1 / 3 / 2;
     align-self: center;
@@ -1798,4 +1786,36 @@ body,
   .battle-screen .target-summary {
     width: 200px;
   }
+}
+
+/* Effects occupy a separate rail, including when several simultaneous effects need pages. */
+.battle-screen :is(.enemy-row, .player-row) > .creature-wrap {
+  width: calc(var(--battle-creature-width) + var(--control-height) + var(--screen-item-gap));
+  flex-basis: calc(var(--battle-creature-width) + var(--control-height) + var(--screen-item-gap));
+  padding-right: calc(var(--control-height) + var(--screen-item-gap));
+}
+.battle-screen .combatant-reaction > .combat-status {
+  position: absolute;
+  right: calc(-1 * (var(--control-height) + var(--screen-item-gap)));
+  top: 0;
+  width: var(--control-height);
+  gap: 0;
+}
+.combat-status .combat-effect-page,
+.combat-status .pagination {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.combat-status .paged-content {
+  gap: var(--screen-item-gap);
+}
+.game-tooltip:has(.combat-status-details) {
+  max-width: min(1000px, calc(100vw - var(--space-8)));
+}
+.combat-status-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--screen-item-gap);
 }

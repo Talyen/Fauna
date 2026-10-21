@@ -13,7 +13,7 @@ export function useCompactLayout() {
   return compact;
 }
 
-export function PageControls({
+function PageControls({
   page,
   pages,
   change,
