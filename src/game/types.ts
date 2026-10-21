@@ -45,6 +45,7 @@ export interface Enemy {
 }
 export interface Battle {
   freeBurnUsed: boolean;
+  meteoriteUsed: boolean;
   turn: number;
   mana: number;
   maxMana: number;
@@ -70,7 +71,7 @@ export interface JourneySummary {
   lastBattle: { xp: KeywordXP; currency: number } | null;
 }
 export interface GameState {
-  version: 15;
+  version: 16;
   discovery: { encountered: SpeciesId[]; recruited: SpeciesId[] };
   revision: number;
   rng: number;

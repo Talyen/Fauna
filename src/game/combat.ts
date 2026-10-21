@@ -53,13 +53,16 @@ export function restoreHealth(
   if (unit.health === 0 && !revive) return;
   const gain = Math.min(Math.max(0, Math.round(amount)), maximumHealth(unit) - unit.health);
   unit.health += gain;
-  if (gain)
+  if (gain) {
     events.push({
       kind: "heal",
       targetId: unit.id,
       amount: gain,
       text: `${unitName(unit)} restores ${gain} Health.`,
     });
+    if (state?.phase === "battle" && !("maxHealth" in unit) && state.boons.includes("groves-favor"))
+      grantStatus(unit, "thorns", 1, events);
+  }
 }
 export function grantBlock(state: GameState, unit: Combatant, amount: number, events: GameEvent[]) {
   if (unit.health <= 0 || amount <= 0) return;
@@ -168,8 +171,11 @@ export function removeEffects(
       targetId: unit.id,
       text: `${unitName(unit)}: ${kind === "cleanse" ? "Cleanse" : "Purge"}.`,
     });
-  if (cleansed > 0 && state && !("maxHealth" in unit) && hasTalent(state, "heal.renewal"))
-    restoreHealth(unit, 2 * cleansed, events, false, state);
+  if (cleansed > 0 && state && !("maxHealth" in unit)) {
+    const healing =
+      Number(hasTalent(state, "heal.renewal")) * 2 + (state.boons.includes("sin-eaters-lantern") ? 6 : 0);
+    if (healing) restoreHealth(unit, healing * cleansed, events, false, state);
+  }
 }
 /** One attack packet. Periodic and retaliation packets never dodge, crit, build statuses, or retaliate. */
 export function hit(
@@ -208,6 +214,17 @@ export function hit(
     return;
   }
   let damage = value;
+  if (
+    attack &&
+    alliedSource &&
+    type === "burn" &&
+    state.battle &&
+    state.boons.includes("meteorite") &&
+    !state.battle.meteoriteUsed
+  ) {
+    state.battle.meteoriteUsed = true;
+    damage *= 2;
+  }
   if (attack && alliedSource) {
     if (type === "physical") damage += physicalBonus(source, state);
     if (type === "bleed" && stats.bleed === 0 && hasTalent(state, "bleed.first-blood")) damage *= 1.25;
@@ -308,14 +325,12 @@ export function hit(
     }
     if ((options.leech || blessedLeech) && type !== "bleed" && source.health > 0)
       leechHealth(state, source, lost, events);
-    if (
-      appliedControl &&
-      type === "freeze" &&
-      alliedSource &&
-      !alliedTarget &&
-      state.boons.includes("icy-heart")
-    )
-      hit(state, source, target, 6, "physical", events, { derived: true });
+    if (appliedControl && alliedSource && !alliedTarget) {
+      if (type === "freeze" && state.boons.includes("icy-heart"))
+        hit(state, source, target, 6, "physical", events, { derived: true });
+      if (type === "stun" && state.boons.includes("thunderstone"))
+        hit(state, source, target, 6, "nature", events, { derived: true });
+    }
   }
 }
 export function tickStatuses(state: GameState, unit: Combatant, events: GameEvent[]) {

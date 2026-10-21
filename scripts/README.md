@@ -24,6 +24,9 @@
 
 Additional opt-in tools:
 
+- `npm run balance:findings`: [ranked findings](balance-findings.mjs), [analysis and thresholds](lib/balance-findings.mjs); analyzes existing reports without simulations.
+- `npm run verify:release-version`, `npm run verify:release`: [read-only release gate](verify-release.mjs), [build identity](lib/release-identity.mjs); no build or publication.
+- `npm run generate:patch-notes`: [history filtering and draft generation](generate-patch-notes.mjs); see [release workflow](../Docs/RELEASE.md#release-verification-and-player-notes).
 - `npm run balance:compare`: [balance-compare.mjs](balance-compare.mjs), [paired report math](lib/paired-balance.mjs), [production cases](../src/application/balance.ts).
 - `npm run perf`, `npm run perf:replay`, `npm run perf:compare`: [capture driver](run-performance.mjs), [metrics](lib/performance-metrics.mjs), [validated fixtures](../src/application/performance.ts).
 - `npm run verify:package`: [package gate](verify-package.mjs), [after-pack hardening](../desktop/after-pack.cjs), [packaged renderer launcher](lib/packaged-desktop.mjs).

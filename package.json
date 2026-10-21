@@ -45,7 +45,11 @@
     "perf:compare": "node scripts/run-performance.mjs compare",
     "test:e2e:route": "node scripts/test-route.mjs",
     "test:interactions": "node scripts/run-interactions.mjs",
-    "deadcode": "knip --treat-config-hints-as-errors"
+    "deadcode": "knip --treat-config-hints-as-errors",
+    "balance:findings": "node scripts/balance-findings.mjs",
+    "verify:release-version": "node scripts/verify-release.mjs --version-only",
+    "verify:release": "node scripts/verify-release.mjs",
+    "generate:patch-notes": "node scripts/generate-patch-notes.mjs"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.3.0",

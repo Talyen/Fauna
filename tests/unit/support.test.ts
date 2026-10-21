@@ -84,18 +84,21 @@ it("rejects obsolete saves and retired Spring visits", () => {
   expect(() => decodeSave(JSON.stringify({ ...s, support: { ...s.support, kind: "spring" } }))).toThrow();
 });
 
-it.each([2, 3, 4])("offers every remaining boss Boon when an explicit checkpoint owns %s Boons", (owned) => {
-  let s = merchant();
-  for (let i = 0; i < 2; i++) {
+it.each([BOONS.length - 2, BOONS.length - 1, BOONS.length])(
+  "offers every remaining boss Boon when an explicit checkpoint owns %s Boons",
+  (owned) => {
+    let s = merchant();
+    for (let i = 0; i < 2; i++) {
+      s = winBattle(accept(s, { type: "beginBattle", destination: s.expedition!.offers[0]!.location }));
+      s = accept(s, { type: "skipRecruit" });
+    }
+    // Explicit loadout fixture; these Boons are not claimed as earned purchases.
+    s = produce(s, (d) => {
+      d.boons = BOONS.slice(0, owned).map((b) => b.id);
+    });
     s = winBattle(accept(s, { type: "beginBattle", destination: s.expedition!.offers[0]!.location }));
-    s = accept(s, { type: "skipRecruit" });
-  }
-  // Explicit loadout fixture; these Boons are not claimed as earned purchases.
-  s = produce(s, (d) => {
-    d.boons = BOONS.slice(0, owned).map((b) => b.id);
-  });
-  s = winBattle(accept(s, { type: "beginBattle", destination: s.expedition!.offers[0]!.location }));
-  expect(s.phase).toBe(owned === 4 ? "teamSelection" : "boon");
-  if (owned < 4) expect(s.reward!.boons).toHaveLength(4 - owned);
-  expect(decodeSave(encodeSave(s))).toEqual(s);
-});
+    expect(s.phase).toBe(owned === BOONS.length ? "teamSelection" : "boon");
+    if (owned < BOONS.length) expect(s.reward!.boons).toHaveLength(BOONS.length - owned);
+    expect(decodeSave(encodeSave(s))).toEqual(s);
+  },
+);

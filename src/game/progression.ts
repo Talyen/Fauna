@@ -280,5 +280,13 @@ export const BOONS = [
   { id: "bone-charm", name: "Bone Charm", text: "Restore 3 Health when you defeat an enemy." },
   { id: "ironwood-buckler", name: "Ironwood Buckler", text: "Gain 1 Thorns whenever you gain Block." },
   { id: "icy-heart", name: "Icy Heart", text: "Freezing an enemy deals 6 Physical damage." },
+  { id: "meteorite", name: "Meteorite", text: "Double your first Burn hit each battle." },
+  {
+    id: "sin-eaters-lantern",
+    name: "Sin-Eater's Lantern",
+    text: "Restore 6 Health per harmful effect you Cleanse.",
+  },
+  { id: "thunderstone", name: "Thunderstone", text: "Deal 6 Nature damage when you Stun an enemy." },
+  { id: "groves-favor", name: "Grove's Favor", text: "Gain 1 Thorns when you restore Health in battle." },
 ] as const;
 export type BoonId = (typeof BOONS)[number]["id"];

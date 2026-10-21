@@ -24,7 +24,7 @@ import type { Card, Command, CommandResult, GameEvent, GameState } from "./types
 export function createGame(seed = 1): GameState {
   return freeze(
     {
-      version: 15,
+      version: 16,
       support: null,
       discovery: { encountered: [], recruited: [] },
       revision: 0,
@@ -162,6 +162,7 @@ export function beginBattle(state: GameState) {
   }
   state.battle = {
     freeBurnUsed: false,
+    meteoriteUsed: false,
     turn: 1,
     mana: TURN_MANA,
     maxMana: TURN_MANA,

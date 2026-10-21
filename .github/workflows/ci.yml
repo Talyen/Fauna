@@ -10,13 +10,23 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ELECTRON_SKIP_BINARY_DOWNLOAD: "1"
+      RELEASE_TAG: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || '' }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version-file: .node-version
           cache: npm
       - run: npm ci
+      - run: npm run verify:release-version
+      - name: Draft unreleased player notes
+        if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
+        run: npm run generate:patch-notes
+      - name: Draft tagged player notes
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: npm run generate:patch-notes -- --tag "$RELEASE_TAG"
       - run: npx playwright install --with-deps chromium
       - run: npm run verify:full
       - run: npm run test:interactions -- --seed 42 --steps 12 --out reports/interactions/ci
@@ -35,6 +45,8 @@ jobs:
             test-results/
   windows:
     runs-on: windows-latest
+    env:
+      RELEASE_TAG: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || '' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -42,10 +54,14 @@ jobs:
           node-version-file: .node-version
           cache: npm
       - run: npm ci
+      - run: npm run verify:release-version
       - run: npm run package:win
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: "false"
       - run: npm run verify:package
+      - name: Verify tagged release identity
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: npm run verify:release
       - run: node scripts/smoke-desktop.mjs --packaged
       - uses: actions/upload-artifact@v4
         with:

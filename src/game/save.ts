@@ -33,6 +33,7 @@ const combatState = z
 const battle = z
   .object({
     freeBurnUsed: z.boolean(),
+    meteoriteUsed: z.boolean(),
     turn: z.number().int().min(1).max(1_000_000),
     mana: z.number().int().min(0).max(5),
     maxMana: z.number().int().min(4).max(5),
@@ -68,7 +69,7 @@ const creature = z.object({
   combat: combatState.optional(),
 });
 const currentShape = z.object({
-  version: z.literal(15),
+  version: z.literal(16),
   discovery: z.object({ encountered: z.array(speciesId).max(6), recruited: z.array(speciesId).max(6) }),
   revision: z
     .number()
