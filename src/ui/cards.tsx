@@ -267,6 +267,7 @@ export function ActionCard({
       <TooltipTrigger asChild>{artwork}</TooltipTrigger>
       <TooltipContent side="top">
         <ActionDetails
+          compact
           card={card}
           ownerName={ownerName}
           actor={actor}
