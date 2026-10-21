@@ -18,6 +18,9 @@ export const COMBAT_PACKS = [
   ["emberfox", "silkmoth", "mossback"],
   ["stormfin", "briartooth", "emberfox"],
   ["silkmoth", "mossback", "briartooth"],
+  ["emberback", "mossback", "silkmoth"],
+  ["briartooth", "emberback", "stormfin"],
+  ["silkmoth", "emberback", "mossback"],
 ] as const;
 export const BOSSES = [
   {

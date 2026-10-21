@@ -234,7 +234,7 @@ export function ActionCard({
   const artwork = (
     <ArtCard
       aspect="action"
-      artwork={assetUrl(`action.${def.species}`)}
+      artwork={assetUrl(def.artwork ?? `action.${def.species}`)}
       presentation={presentation}
       tabIndex={presentation ? undefined : 0}
       className={selected ? "selected" : undefined}

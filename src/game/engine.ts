@@ -173,7 +173,7 @@ export function beginBattle(state: GameState, events: GameEvent[] = []) {
       for (const effect of creaturePassive(undefined, e.species).effects) {
         if (effect.kind !== "battleStart") continue;
         if (effect.effect === "block") enemy.block += effect.amount;
-        else enemy.combat.thorns += effect.amount;
+        else enemy.combat[effect.effect] += effect.amount;
       }
       return enemy;
     }),
@@ -186,6 +186,7 @@ export function beginBattle(state: GameState, events: GameEvent[] = []) {
     for (const effect of creaturePassive(state, unit.species).effects) {
       if (effect.kind !== "battleStart") continue;
       if (effect.effect === "block") grantBlock(state, unit, effect.amount, events);
+      else if (effect.effect === "armor") grantArmor(state, unit, effect.amount, events);
       else grantStatus(unit, "thorns", effect.amount, events);
     }
     if (hasTalent(state, "mana.mana-bulwark")) grantBlock(state, unit, state.battle.maxMana, events);
@@ -388,12 +389,16 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
         kind: "action",
         actionType: def.effect === "attack" ? "attack" : "support",
         actorId: enemy.id,
-        targetId: target.id,
+        targetId: def.effect === "attack" && def.target === "allEnemies" ? undefined : target.id,
         text: `${enemy.name} uses ${def.name}.`,
       });
-      if (def.effect === "attack")
-        hit(draft, enemy, target, value, def.damageType, events, { leech: def.leech });
-      else if (def.effect === "heal") {
+      if (def.effect === "attack") {
+        const targets = def.target === "allEnemies" ? living(draft) : [target];
+        for (const recipient of targets) {
+          if (enemy.health <= 0) break;
+          hit(draft, enemy, recipient, value, def.damageType, events, { leech: def.leech });
+        }
+      } else if (def.effect === "heal") {
         const injured = battle.enemies
           .filter((e) => e.health > 0)
           .sort((a, b) => a.health / a.maxHealth - b.health / b.maxHealth)[0]!;
@@ -477,7 +482,11 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
     if (controlled(actor)) return reject(state, "That creature is Stunned or Frozen.");
     const def = definition(card.definitionId);
     if (b!.mana < cardCost(card, state)) return reject(state, "Not enough mana.");
-    if (def.effect === "attack" && !b!.enemies.some((e) => e.id === command.targetId && e.health > 0))
+    if (
+      def.effect === "attack" &&
+      def.target !== "allEnemies" &&
+      !b!.enemies.some((e) => e.id === command.targetId && e.health > 0)
+    )
       return reject(state, "Choose a living enemy.");
     if (
       (def.effect === "guard" || def.effect === "heal") &&
@@ -651,7 +660,10 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
           actorId: actor.id,
           targetId: command.targetId,
         });
-        const target = battle.enemies.find((e) => e.id === command.targetId);
+        const target =
+          def.effect === "attack" && def.target === "allEnemies"
+            ? undefined
+            : battle.enemies.find((e) => e.id === command.targetId);
         if (target && keywords.includes("leech") && hasTalent(draft, "leech.armor-siphon")) {
           const stolen = Math.min(1, target.combat.armor);
           target.combat.armor -= stolen;
@@ -670,13 +682,22 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
           ([keyword, talent]) => keywords.includes(keyword) && hasTalent(draft, talent) && roll(draft) < 0.1,
         );
         for (let play = 0; play < (repeat ? 2 : 1); play++) {
-          if (actor.health <= 0 || (def.effect === "attack" && target!.health <= 0)) break;
+          if (actor.health <= 0) break;
           if (def.effect === "attack") {
-            const enemy = battle.enemies.find((e) => e.id === command.targetId)!;
-            hit(draft, actor, enemy, value, def.damageType, events, {
-              leech: def.leech,
-              cardLeech: keywords.includes("leech"),
-            });
+            const targets =
+              def.target === "allEnemies"
+                ? battle.enemies.filter((enemy) => enemy.health > 0)
+                : target && target.health > 0
+                  ? [target]
+                  : [];
+            if (!targets.length) break;
+            for (const enemy of targets) {
+              if (actor.health <= 0) break;
+              hit(draft, actor, enemy, value, def.damageType, events, {
+                leech: def.leech,
+                cardLeech: keywords.includes("leech"),
+              });
+            }
             actor.attacked = true;
           }
           if (def.effect === "guard" || def.effect === "teamGuard") {
@@ -692,14 +713,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
             const target = draft.team.find((c) => c.id === command.targetId)!;
             restoreHealth(target, value, events, false, draft, true);
           }
-          applyExtras(
-            draft,
-            actor,
-            def,
-            events,
-            false,
-            battle.enemies.find((e) => e.id === command.targetId),
-          );
+          applyExtras(draft, actor, def, events, false, target);
         }
         if (battle.cardsPlayedThisTurn < 3) {
           battle.cardsPlayedThisTurn++;

@@ -1,10 +1,11 @@
 import { DAMAGE_TYPES, keywordLabel, type DamageType, EFFECT_KEYWORDS } from "./keywords";
 export { type DamageType } from "./keywords";
-export type SpeciesId = "mossback" | "emberfox" | "stormfin" | "silkmoth" | "briartooth" | "moonhart";
+export type SpeciesId =
+  "mossback" | "emberfox" | "stormfin" | "silkmoth" | "briartooth" | "moonhart" | "emberback";
 type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
   | { kind: "cardBonus"; trigger: "firstAttack" | "stunAttack" | "heal" | "guard"; amount: number }
-  | { kind: "battleStart"; effect: "block" | "thorns"; amount: number };
+  | { kind: "battleStart"; effect: "block" | "thorns" | "armor"; amount: number };
 export interface PassiveTier {
   description: string;
   effects: readonly PassiveEffect[];
@@ -38,12 +39,16 @@ interface CardBase {
   species: SpeciesId;
   name: string;
   value: number;
-  cost: number;
+  cost: 1;
+  artwork?: string;
   leech?: boolean;
   effects?: readonly CardEffect[];
 }
 export type CardDefinition = CardBase &
-  ({ effect: "attack"; damageType: DamageType } | { effect: Exclude<Effect, "attack"> });
+  (
+    | { effect: "attack"; damageType: DamageType; target?: "allEnemies" }
+    | { effect: Exclude<Effect, "attack"> }
+  );
 export const SPECIES: readonly Species[] = [
   {
     id: "mossback",
@@ -160,20 +165,38 @@ export const SPECIES: readonly Species[] = [
       null,
     ],
   },
+  {
+    id: "emberback",
+    name: "Emberback",
+    title: "The banked furnace",
+    health: 30,
+    color: "#ed9c65",
+    trait: "Banked Furnace",
+    passiveTiers: [
+      {
+        description: "Start each battle with 2 Armor.",
+        effects: [{ kind: "battleStart", effect: "armor", amount: 2 }],
+      },
+      null,
+      null,
+      null,
+      null,
+      null,
+    ],
+  },
 ];
 const card = (
   species: SpeciesId,
   name: string,
   effect: Exclude<Effect, "attack">,
   value: number,
-  cost = 1,
 ): CardDefinition => ({
   id: `${species}-${effect}`,
   species,
   name,
   effect,
   value,
-  cost,
+  cost: 1,
 });
 const attack = (species: SpeciesId, name: string, value: number, damageType: DamageType): CardDefinition => ({
   id: `${species}-attack`,
@@ -228,6 +251,23 @@ export const CARDS: readonly CardDefinition[] = [
   },
   { ...card("moonhart", "Silver Light", "heal", 7), effects: [{ kind: "mana", amount: 1 }] },
   card("moonhart", "Night Shelter", "teamGuard", 4),
+  {
+    ...attack("emberback", "Ember Charge", 4, "physical"),
+    artwork: "action.emberback.ember-charge",
+    effects: [{ kind: "status", status: "armor", amount: 2 }],
+  },
+  {
+    ...attack("emberback", "Furnace Breath", 2, "burn"),
+    id: "emberback-furnace-breath",
+    artwork: "action.emberback.furnace-breath",
+    target: "allEnemies",
+  },
+  {
+    ...attack("emberback", "Magma Stomp", 2, "stun"),
+    id: "emberback-magma-stomp",
+    artwork: "action.emberback.magma-stomp",
+    target: "allEnemies",
+  },
 ];
 export function enemyCard(card: CardDefinition): CardDefinition {
   return {
@@ -257,7 +297,7 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
   let text: string;
   switch (card.effect) {
     case "attack":
-      text = `Deal ${value} ${DAMAGE_LABELS[card.damageType]} damage.`;
+      text = `Deal ${value} ${DAMAGE_LABELS[card.damageType]} damage${card.target === "allEnemies" ? " to all enemies" : ""}.`;
       break;
     case "guard":
       text = `Give an ally ${value} Block.`;
@@ -275,7 +315,7 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
       (effect.kind === "damage"
         ? `Deal ${effect.amount} ${DAMAGE_LABELS[effect.damageType]} damage${effect.leech ? " with Leech" : ""}.`
         : effect.kind === "status"
-          ? `Acting creature gains ${effect.amount} ${keywordLabel(effect.status)}.`
+          ? `Gain ${effect.amount} ${keywordLabel(effect.status)}.`
           : effect.kind === "draw"
             ? `Draw ${effect.amount}.`
             : effect.kind === "mana"

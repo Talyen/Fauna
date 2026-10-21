@@ -2,7 +2,7 @@ import { mkdtemp, mkdir, writeFile, readFile, rm } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { expect, it } from "vitest";
-import { assets, validateManifest } from "../../scripts/assets.mjs";
+import { assets, validateManifest, imageDimensions } from "../../scripts/assets.mjs";
 it("preserves the published generation after a missing or invalid source and detects changed bytes", async () => {
   const repository = await mkdtemp(path.join(os.tmpdir(), "fauna-assets-"));
   try {
@@ -43,4 +43,13 @@ it("preserves the published generation after a missing or invalid source and det
   } finally {
     await rm(repository, { recursive: true, force: true });
   }
+});
+
+it("reads native PNG dimensions and rejects truncated or invalid PNG headers", async () => {
+  const bytes = await readFile(new URL("../../public/art/emberback/emberback.png", import.meta.url));
+  expect(imageDimensions(bytes, ".png")).toEqual([1448, 1086]);
+  expect(() => imageDimensions(bytes.subarray(0, 24), ".png")).toThrow();
+  const invalid = Buffer.from(bytes);
+  invalid.writeUInt32BE(0, 16);
+  expect(() => imageDimensions(invalid, ".png")).toThrow();
 });

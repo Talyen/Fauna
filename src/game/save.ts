@@ -8,7 +8,7 @@ import { collectedSpecies, MAX_CREATURE_STARS, KEYWORDS, BOONS, TALENTS, talentP
 import type { GameState } from "./types";
 const natural = z.number().int().min(0).max(1_000_000);
 const id = z.string().min(1).max(120);
-const speciesId = z.enum(["mossback", "emberfox", "stormfin", "silkmoth", "briartooth", "moonhart"]);
+const speciesId = z.enum(SPECIES.map((entry) => entry.id));
 const xp = z.partialRecord(z.enum(KEYWORDS), natural);
 const boonId = z.enum(BOONS.map((r) => r.id));
 const combatState = z
@@ -82,7 +82,7 @@ const creature = z.object({
 const currentShape = z.object({
   version: z.literal(23),
   discovery: z.object({
-    encountered: z.array(speciesId).max(6),
+    encountered: z.array(speciesId).max(SPECIES.length),
     recruited: z.partialRecord(
       speciesId,
       z
@@ -109,7 +109,7 @@ const currentShape = z.object({
     "victory",
     "defeat",
   ]),
-  unlocked: z.array(speciesId).min(5).max(6),
+  unlocked: z.array(speciesId).min(5).max(SPECIES.length),
   wins: natural,
   selected: z.array(speciesId).max(3),
   starterOffers: z.array(speciesId).max(3),
@@ -170,7 +170,7 @@ const currentShape = z.object({
       victories: z.number().int().min(0).max(JOURNEY_LENGTH),
       currency: natural,
       xp,
-      unlocks: z.array(speciesId).max(6),
+      unlocks: z.array(speciesId).max(SPECIES.length),
       lastBattle: z.object({ xp, currency: natural }).nullable(),
     })
     .nullable(),

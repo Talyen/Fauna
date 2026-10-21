@@ -6,6 +6,17 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 export const hash = (data) => createHash("sha256").update(data).digest("hex");
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 export function imageDimensions(bytes, extension) {
+  if (
+    extension === ".png" &&
+    bytes.length >= 33 &&
+    bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10])) &&
+    bytes.readUInt32BE(8) === 13 &&
+    bytes.toString("ascii", 12, 16) === "IHDR"
+  ) {
+    const width = bytes.readUInt32BE(16),
+      height = bytes.readUInt32BE(20);
+    if (width && height) return [width, height];
+  }
   if (extension === ".svg") {
     const source = bytes.toString();
     const view = source.match(/viewBox=["']\s*[\d.-]+\s+[\d.-]+\s+([\d.]+)\s+([\d.]+)/);

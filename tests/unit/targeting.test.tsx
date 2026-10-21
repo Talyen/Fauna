@@ -8,7 +8,7 @@ import { TargetPreview } from "../../src/ui/target-preview";
 import { moveFocus } from "../../src/ui/input";
 import { previewCard } from "../../src/game/engine";
 import { produce } from "immer";
-import { run } from "./helpers";
+import { run, teamRun } from "./helpers";
 
 beforeEach(() => {
   vi.stubGlobal(
@@ -193,3 +193,37 @@ it("moves between battle rows and reaches hand-side controls with directional in
   }
   for (const control of controls) expect(reached.has(control)).toBe(true);
 });
+
+it.each(["emberback-furnace-breath", "emberback-magma-stomp"])(
+  "previews every enemy for %s and confirms without choosing one target",
+  async (id) => {
+    const game = produce(teamRun(1, ["emberback", "mossback", "stormfin"]), (draft) => {
+      const chosen = draft.cards.find((card) => card.definitionId === id)!;
+      draft.battle!.hand = [chosen.id];
+      draft.battle!.buffer = [];
+      draft.battle!.discard = [];
+      draft.battle!.draw = draft.cards.filter((card) => card.id !== chosen.id).map((card) => card.id);
+    });
+    const { container, card, send, controls } = open(game, true);
+    const before = structuredClone(game);
+    expect(card("attack").querySelector("img")?.getAttribute("src")).toContain(
+      id.replace("emberback-", "") + ".png",
+    );
+    await userEvent.click(card("attack"));
+    expect(screen.getByText("Emberback · All enemies")).toBeTruthy();
+    expect(container.querySelectorAll(".enemy-row .target-preview")).toHaveLength(3);
+    expect(container.querySelectorAll(".enemy-row [data-active-target]")).toHaveLength(3);
+    expect(container.querySelector(".target-line")).toBeNull();
+    const confirm = screen.getByRole("button", { name: "Play · Enter" });
+    expect(document.activeElement).toBe(confirm);
+    act(() => {
+      controls.current!("back");
+    });
+    expect(send).not.toHaveBeenCalled();
+    expect(game).toEqual(before);
+    expect(document.activeElement).toBe(card("attack"));
+    await userEvent.click(card("attack"));
+    await userEvent.keyboard("{Enter}");
+    expect(send).toHaveBeenCalledExactlyOnceWith({ type: "play", cardId: game.battle!.hand[0]! });
+  },
+);

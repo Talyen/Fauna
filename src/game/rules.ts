@@ -57,7 +57,11 @@ export function enemyAbilityValue(
   card: import("./content").CardDefinition,
 ) {
   return (
-    (card.effect === "attack" ? enemy.damage : Math.max(1, Math.round(enemy.damage / 2))) +
+    (card.effect === "attack"
+      ? card.target === "allEnemies"
+        ? Math.max(1, Math.round(enemy.damage / 3))
+        : enemy.damage
+      : Math.max(1, Math.round(enemy.damage / 2))) +
     passiveCardBonus(card, creaturePassive(undefined, enemy.species), false)
   );
 }

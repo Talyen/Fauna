@@ -93,7 +93,8 @@ export function BattleScreen({
   );
   const card = game.cards.find((c) => c.id === selected),
     def = card ? definition(card.definitionId) : null;
-  const enemyTarget = def?.effect === "attack",
+  const allEnemies = def?.effect === "attack" && def.target === "allEnemies";
+  const enemyTarget = def?.effect === "attack" && !allEnemies,
     allyTarget = def?.effect === "heal" || def?.effect === "guard";
   const targets = enemyTarget
     ? battle.enemies.filter((e) => e.health > 0).map((e) => e.id)
@@ -108,10 +109,10 @@ export function BattleScreen({
     const side = enemyTarget ? "enemy" : "ally";
     setRemembered((old) => (old[side] === id ? old : { ...old, [side]: id }));
   };
-  const teamTarget = def?.effect === "teamGuard";
+  const groupTarget = def?.effect === "teamGuard" || allEnemies;
   const preview = useMemo(
-    () => (selected && (target || teamTarget) ? previewPlay(game, selected, target) : null),
-    [game, selected, target, teamTarget],
+    () => (selected && (target || groupTarget) ? previewPlay(game, selected, target) : null),
+    [game, selected, target, groupTarget],
   );
   const affected = new Set(
     preview?.events.flatMap((event) => (event.targetId ? [event.targetId] : [])) ?? [],
@@ -133,6 +134,7 @@ export function BattleScreen({
   if (target) affected.add(target);
   if (def?.effect === "teamGuard")
     game.team.filter((unit) => unit.health > 0).forEach((unit) => affected.add(unit.id));
+  if (allEnemies) battle.enemies.filter((unit) => unit.health > 0).forEach((unit) => affected.add(unit.id));
   const allyRecipient = game.team.find((unit) => unit.id === target);
   const recipient =
     battle.enemies.find((unit) => unit.id === target)?.name ??
@@ -250,9 +252,9 @@ export function BattleScreen({
             key={enemy.id}
             enemy={enemy}
             tooltips={!selected}
-            invalidTarget={!!selected && (!enemyTarget || enemy.health <= 0)}
-            validTarget={!!selected && enemyTarget && enemy.health > 0}
-            activeTarget={!!selected && target === enemy.id}
+            invalidTarget={!!selected && ((!enemyTarget && !allEnemies) || enemy.health <= 0)}
+            validTarget={!!selected && (enemyTarget || allEnemies) && enemy.health > 0}
+            activeTarget={!!selected && (target === enemy.id || (allEnemies && enemy.health > 0))}
             onPreviewEnd={() => setHovered((old) => (old === enemy.id ? null : old))}
             onPreview={() => {
               if (selected && enemyTarget && enemy.health > 0) setTarget(enemy.id);
@@ -264,8 +266,8 @@ export function BattleScreen({
             }
             onClick={(element) => {
               if (selected) {
-                if (enemyTarget && enemy.health > 0)
-                  play({ type: "play", cardId: selected, targetId: enemy.id });
+                if ((enemyTarget || allEnemies) && enemy.health > 0)
+                  play({ type: "play", cardId: selected, ...(allEnemies ? {} : { targetId: enemy.id }) });
                 else onDenied(element);
               }
             }}
@@ -321,11 +323,13 @@ export function BattleScreen({
               <p>
                 {species(def.species).name} ·{" "}
                 {recipient ??
-                  (def.effect === "teamGuard"
-                    ? "All allies"
-                    : enemyTarget
-                      ? "Choose an enemy"
-                      : "Choose an ally")}
+                  (allEnemies
+                    ? "All enemies"
+                    : def.effect === "teamGuard"
+                      ? "All allies"
+                      : enemyTarget
+                        ? "Choose an enemy"
+                        : "Choose an ally")}
               </p>
               <ActionDetails
                 compact
@@ -344,7 +348,7 @@ export function BattleScreen({
         </div>
         {selected ? (
           <>
-            {def?.effect === "teamGuard" ? (
+            {groupTarget ? (
               <Button className="confirm-play" onClick={() => play({ type: "play", cardId: selected })}>
                 Play · {controller ? "A" : "Enter"}
               </Button>

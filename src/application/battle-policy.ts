@@ -3,7 +3,7 @@ import { actionValue, cardCost, physicalBonus } from "../game/rules";
 import { definition, species } from "../game/content";
 import type { Command, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 3;
+export const BATTLE_POLICY_VERSION = 4;
 /** Only visible information enters scoring; no forecasts or gameplay RNG are sampled. */
 export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
   if (state.phase !== "battle" || !state.battle) return [];
@@ -31,12 +31,19 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
       actionValue(card, actor, state) +
       (def.effect === "attack" && def.damageType === "physical" ? physicalBonus(actor, state) : 0);
     if (def.effect === "attack") {
-      for (const enemy of state.battle.enemies.filter((e) => e.health > 0)) {
+      const enemies = state.battle.enemies.filter((e) => e.health > 0);
+      const score = (enemy: (typeof enemies)[number]) => {
         const physical = def.damageType === "physical" || def.damageType === "stun";
         // Rank ordinary landed hits; do not roll Dodge or Critical outcomes.
         const effective = Math.max(0, value - enemy.block - (physical ? enemy.combat.armor : 0));
-        add(id, (effective >= enemy.health ? 2000 : 1000) + Math.min(value, enemy.health), enemy.id);
-      }
+        return (effective >= enemy.health ? 2000 : 1000) + Math.min(value, enemy.health);
+      };
+      if (def.target === "allEnemies")
+        add(
+          id,
+          enemies.reduce((sum, enemy) => sum + score(enemy), 0),
+        );
+      else for (const enemy of enemies) add(id, score(enemy), enemy.id);
     } else if (def.effect === "heal") {
       for (const ally of state.team.filter((c) => c.health > 0)) {
         const missing = species(ally.species).health - ally.health;

@@ -41,6 +41,9 @@ describe("keyword foundation", () => {
       ["light", "freeze"],
       ["health", "mana"],
       ["block"],
+      ["physical", "armor"],
+      ["burn"],
+      ["stun"],
     ];
     expect(CARDS.map((card) => cardKeywords({ definitionId: card.id }))).toEqual(expected);
     expect(definitionKeywords({ effect: "attack", damageType: "poison" })).toEqual(["poison"]);

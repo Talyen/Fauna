@@ -18,7 +18,8 @@ try {
   };
   for (const species of contentCatalog.species) {
     requireAsset(`creature.${species.id}`);
-    requireAsset(`action.${species.id}`);
+    for (const card of contentCatalog.cards.filter((card) => card.species === species.id))
+      requireAsset(card.artwork ?? `action.${species.id}`);
   }
   for (const kind of ["combat", "boss"]) requireAsset(`encounter.${kind}`);
   // Keyword tabs use text; illustrations are optional selections, not a talent prerequisite.

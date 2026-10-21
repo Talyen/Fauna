@@ -57,8 +57,7 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
   }
   for (const card of catalog.cards) {
     if (!species.has(card.species)) error(card.id, "species", "Unknown owner.");
-    if (!Number.isSafeInteger(card.cost) || card.cost < 0 || card.cost > 3)
-      error(card.id, "cost", "Unsupported Mana cost.");
+    if (card.cost !== 1) error(card.id, "cost", "Every ability must cost exactly 1 Mana.");
     if (!Number.isSafeInteger(card.value) || card.value < 1 || card.value > 1_000_000)
       error(card.id, "value", "Unsupported effect amount.");
     for (const tag of [card.leech])

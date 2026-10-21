@@ -900,6 +900,50 @@
       "aspect": [3, 4],
       "provenance": "Alchemy: src/assets/optimized/talent-mana.webp; unchanged Fauna-owned copy",
       "rights": "Existing Alchemy keyword artwork reuse, as recorded in Docs/CONTENT.md"
+    },
+    {
+      "id": "creature.emberback",
+      "origin": "repository",
+      "source": "public/art/emberback/emberback.png",
+      "output": "art/emberback/emberback.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Emberback artwork copied unchanged from Google Drive https://drive.google.com/file/d/1PFOh8OWn4qJWuX_vRN3mV0YfKawW-Hkb/view",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "action.emberback.ember-charge",
+      "origin": "repository",
+      "source": "public/art/emberback/ember-charge.png",
+      "output": "art/emberback/ember-charge.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Emberback artwork copied unchanged from Google Drive https://drive.google.com/file/d/1TuhB6Q1hm6gNfvBXM29J0ISlKtBoVPNh/view",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "action.emberback.furnace-breath",
+      "origin": "repository",
+      "source": "public/art/emberback/furnace-breath.png",
+      "output": "art/emberback/furnace-breath.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Emberback artwork copied unchanged from Google Drive https://drive.google.com/file/d/1PIaBn-G1FFmhFtWPUszwlz7TzLrDsQQS/view",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "action.emberback.magma-stomp",
+      "origin": "repository",
+      "source": "public/art/emberback/magma-stomp.png",
+      "output": "art/emberback/magma-stomp.png",
+      "recipe": "copy",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Emberback artwork copied unchanged from Google Drive https://drive.google.com/file/d/1yiI6bieumAk1Q_Pb4o_8cMUzbV9JhJTD/view",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
     }
   ]
 }

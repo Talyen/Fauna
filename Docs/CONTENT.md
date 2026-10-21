@@ -55,7 +55,7 @@ npm run assets:check          # Verify selected sources, recipes and output hash
 npm run assets:check:outputs  # Validate committed outputs without the source library
 ```
 
-Preparation reads and validates all selected sources before publication. Output generations live under `public/prepared/<content hash>/`; `src/assets/prepared.json` is the generated lookup and receipt. The pointer changes only after all generation files are installed. Missing sources, corrupt immutable output files, or conversion/recipe failures preserve the prior pointer. Old generations are retained; cleanup is a separate explicit action. Generated files are not edited by hand. Current recipes copy selected SVG/WebP/WAV/OGG/MP3 bytes without conversion or cropping; richer encoding recipes should be introduced only for a concrete need.
+Preparation reads and validates all selected sources before publication. Output generations live under `public/prepared/<content hash>/`; `src/assets/prepared.json` is the generated lookup and receipt. The pointer changes only after all generation files are installed. Missing sources, corrupt immutable output files, or conversion/recipe failures preserve the prior pointer. Old generations are retained; cleanup is a separate explicit action. Generated files are not edited by hand. Current recipes copy selected SVG/PNG/WebP/WAV/OGG/MP3 bytes without conversion or cropping; richer encoding recipes should be introduced only for a concrete need.
 
 Runtime artwork/audio resolves stable IDs through the generated lookup. Ordinary development and production builds run output-only checks; they never regenerate media or need access to the library. Source checks are required after media authoring. Header, geometry and hash checks do not establish audio decoding, visual suitability, source-license clearance or listening acceptance. Retain upstream source-license metadata; the manifest records the shared-library selection and provenance, not a new license grant.
 
@@ -89,7 +89,7 @@ Journeys use one shared combat enemy pool, with bosses at encounters 4 and 8. Th
 
 Each species in `src/game/content.ts` owns six `passiveTiers`, indexed by stars from zero through five. The first recruitment collects the species at zero stars; the sixth reaches five. Counts persist across journeys and cap at six. Committing the first onboarding starter supplies one initial copy. Later starter drafts and encounter discovery do not grant copies.
 
-The base tier contains the existing unique passive. Higher slots remain `null` until designed. A defined tier replaces the whole previous passive rather than adding to it; include all retained effects in its effect list. Tiers can compose card bonuses and battle-start Block or Thorns. New mechanics belong in the typed passive effect contract and its gameplay consumers alongside matching descriptions and regression coverage. Player rules, previews and inspection use the highest defined tier at or below the permanent rank. Enemies always use the base tier. Inspection shows all six slots, the current rank, the active effect and undefined upgrades.
+The base tier contains the existing unique passive. Higher slots remain `null` until designed. A defined tier replaces the whole previous passive rather than adding to it; include all retained effects in its effect list. Tiers can compose card bonuses and battle-start Block, Armor or Thorns. New mechanics belong in the typed passive effect contract and its gameplay consumers alongside matching descriptions and regression coverage. Player rules, previews and inspection use the highest defined tier at or below the permanent rank. Enemies always use the base tier. Inspection shows all six slots, the current rank, the active effect and undefined upgrades.
 
 ## Battle pile artwork
 
@@ -98,3 +98,17 @@ The base tier contains the existing unique passive. Higher slots remain `null` u
 ## Talent category portraits
 
 Armor, Bleed, Dodge, Leech and Mana now use their distinct existing Alchemy portraits, copied unchanged from `Alchemy: src/assets/optimized/talent-<keyword>.webp` into `public/art/keywords/`. These follow the existing Alchemy keyword-art reuse, with source provenance in `assets/manifest.json` and Fauna-owned prepared outputs. There is no runtime dependency on Alchemy.
+
+## Emberback
+
+Emberback is an armored brawler with 30 Health. Its base passive, Banked Furnace, starts each battle with 2 Armor; higher passive tiers remain undefined. It appears in ordinary combat packs and becomes collectible through the existing recruitment flow.
+
+All three abilities cost 1 Mana:
+
+- **Ember Charge:** Deal 4 Physical damage. Gain 2 Armor.
+- **Furnace Breath:** Deal 2 Burn damage to all enemies.
+- **Magma Stomp:** Deal 2 Stun damage to all enemies.
+
+Ability design aims for roughly 6 total value per card across its affected targets, with adjustment for effects such as lasting statuses. This is a design guideline rather than an arithmetic equivalence between damage, Armor and control; it does not retroactively rebalance existing creatures. Single chosen targets are implicit in descriptions; group targets and self-granted effects are explicit. Area attacks resolve living opponents in board order and stop if retaliation knocks out the acting creature. Player area attacks need no chosen target; enemy area attacks affect deployed allies, excluding reserves. Enemy area damage uses one third of encounter attack strength, rounded with a minimum of 1, rather than multiplying full single-target strength across the team.
+
+The selected creature portrait (`04.png`) and three ability portraits are copied unchanged from the user's [Emberback Drive folder](https://drive.google.com/drive/folders/1BAcTaOpKsPQonWJ4mZzJgRE3se0SrGp9) into `public/art/emberback/`. The manifest records each original file URL. Ability-specific artwork is used consistently in battle, inspection and Collection. Ashen Vanish remains outside the playable kit; its Drive source is preserved. PNG selections are copied at their original resolution and aspect ratio without cropping or conversion. Prepared output checks do not establish rendered acceptance.

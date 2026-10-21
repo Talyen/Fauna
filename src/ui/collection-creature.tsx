@@ -65,7 +65,7 @@ export function CollectionCreature({
                 >
                   <ArtCard
                     aspect="action"
-                    artwork={assetUrl(`action.${kind}`)}
+                    artwork={assetUrl(card.artwork ?? `action.${kind}`)}
                     presentation
                     aria-label={`${card.name} artwork`}
                   />
