@@ -134,7 +134,7 @@ for (const width of [1280, 1920])
 
 for (const width of [1280, 1920])
   test(`Merchant purchase resumes without duplicate spending at ${width}`, async ({ page }) => {
-    const { accept, winBattle } = await import("../unit/helpers");
+    const { accept, winBattle, recruitChoice } = await import("../unit/helpers");
     const { createGame } = await import("../../src/game/engine");
     let fixture = accept(accept(createGame(7), { type: "draft", species: "mossback" }), { type: "start" });
     fixture = winBattle(accept(fixture, { type: "beginBattle" }));

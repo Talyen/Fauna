@@ -23,8 +23,10 @@ try {
     .evaluateAll((images) => Promise.all(images.map((image) => image.decode())));
   await window.getByRole("button", { name: "Back", exact: true }).click();
   await window.getByRole("button", { name: "New journey", exact: true }).click();
-  await window.getByRole("button", { name: "Inspect Mossback", exact: true }).click();
-  await window.getByRole("button", { name: "Choose Mossback", exact: true }).click();
+  const starterOffer = window.locator(".draft-grid .creature-card").first();
+  const starterName = (await starterOffer.getAttribute("aria-label")).replace(/^Inspect /, "");
+  await starterOffer.click();
+  await window.getByRole("button", { name: `Choose ${starterName}`, exact: true }).click();
   await window.getByRole("button", { name: "Begin journey" }).click();
   await window.getByRole("button", { name: "Deck", exact: true }).click();
   await window
@@ -36,14 +38,17 @@ try {
   await window.locator('.app:not([inert])[data-save-status="saved"]').waitFor();
   await window
     .locator(".app:not([inert]) .player-row")
-    .getByRole("button", { name: "Inspect Mossback", exact: true })
+    .getByRole("button", { name: `Inspect ${starterName}`, exact: true })
     .click();
   await window.locator(".inspection-thumbnails .action-card").first().waitFor();
   if ((await window.locator(".inspection-thumbnails .action-card").count()) !== 3)
     throw new Error("Creature inspection did not expose three portrait actions.");
+  const nextActionName = (
+    await window.locator(".inspection-thumbnails .action-card").nth(1).getAttribute("aria-label")
+  ).split(",")[0];
   await window.locator(".inspection-thumbnails .action-card").first().click();
   await window.keyboard.press("d");
-  await window.getByRole("dialog", { name: "Shelter details", exact: true }).waitFor();
+  await window.getByRole("dialog", { name: `${nextActionName} details`, exact: true }).waitFor();
   await window.getByRole("button", { name: "Back", exact: true }).click();
   await window.getByRole("button", { name: "Close inspection", exact: true }).click();
   // Exercise free swaps through the actual renderer and current-format desktop storage.
@@ -89,7 +94,7 @@ try {
   await window.getByRole("button", { name: "Continue", exact: true }).click();
   await window.getByRole("button", { name: "Swap", exact: true }).click();
   await window.getByRole("button", { name: "Silkmoth, reserve", exact: true }).click();
-  await window.getByRole("button", { name: "Mossback, deployed", exact: true }).click();
+  await window.locator('.swap-roster [data-actor-id="ally-0"] .creature-card').click();
   await window.locator('.app:not([inert])[data-save-status="saved"]').waitFor();
   const swapped = await window.evaluate(async () =>
     JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
@@ -101,10 +106,10 @@ try {
     swapped.lineup[0] !== "ally-0"
   )
     throw new Error("Desktop combat swap or lineup persistence failed.");
-  // Swap back so the existing automatic-turn smoke keeps its original combat fixture.
+  // Swap back to restore the original starter before checking automatic turns.
   await window.getByRole("button", { name: "Swap", exact: true }).click();
-  await window.getByRole("button", { name: "Silkmoth, deployed", exact: true }).click();
-  await window.getByRole("button", { name: "Mossback, reserve", exact: true }).click();
+  await window.locator('.swap-roster [data-actor-id="recruit-silkmoth"] .creature-card').click();
+  await window.locator('.swap-roster [data-actor-id="ally-0"] .creature-card').click();
   await window.locator('.app:not([inert])[data-save-status="saved"]').waitFor();
   let attack = window.locator('.app:not([inert]) .hand .action-card[data-effect="attack"]').first();
   if (!(await attack.count())) {
@@ -116,6 +121,8 @@ try {
   await window.evaluate(async () => {
     const state = JSON.parse((await window.faunaDesktop.readCandidates())[0].data);
     state.battle.mana = 1;
+    // The one-enemy opening battle must survive this hit so quit/resume checks a new turn.
+    state.battle.enemies[0].block = 100;
     await window.faunaDesktop.writeSave(JSON.stringify(state));
   });
   await window.reload();
@@ -147,7 +154,8 @@ try {
     after.revision !== before.revision + 1 ||
     after.battle.mana !== 4 ||
     after.battle.turn !== before.battle.turn + 1 ||
-    after.battle.enemies[0].health >= before.battle.enemies[0].health
+    (after.battle.enemies[0].health >= before.battle.enemies[0].health &&
+      after.battle.enemies[0].block >= before.battle.enemies[0].block)
   )
     throw new Error(
       `Combat was lost or replayed across quit/resume: ${JSON.stringify({ before: { revision: before.revision, mana: before.battle.mana, health: before.battle.enemies[0].health }, after: { revision: after.revision, mana: after.battle.mana, health: after.battle.enemies[0].health } })}`,
