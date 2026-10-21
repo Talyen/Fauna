@@ -10,11 +10,10 @@ export const MAX_CREATURE_STARS = 5;
 export function creatureStars(state: Pick<GameState, "discovery">, kind: SpeciesId): number {
   return Math.max(0, (state.discovery.recruited[kind] ?? 0) - 1);
 }
-/** Each authored tier replaces the full passive; undefined tiers retain the previous effect. */
+/** Every star rank has a complete replacement passive; enemies always use the base tier. */
 export function creaturePassive(state: Pick<GameState, "discovery"> | undefined, kind: SpeciesId) {
   const tiers = species(kind).passiveTiers;
-  let rank = state ? creatureStars(state, kind) : 0;
-  while (rank > 0 && tiers[rank] === null) rank--;
+  const rank = state ? creatureStars(state, kind) : 0;
   return { rank, ...tiers[rank]! };
 }
 export const KEYWORDS = PROGRESSION_KEYWORDS;

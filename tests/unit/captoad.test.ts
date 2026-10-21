@@ -255,5 +255,26 @@ it("enemy Leaps reorder the battlefield without extra actions, and saves retain 
   }
   expect(found).toBe(true);
   expect(CARDS.filter((card) => card.species === "captoad")).toHaveLength(3);
-  expect(species("captoad").passiveTiers.slice(1)).toEqual([null, null, null, null, null]);
+  expect(species("captoad").passiveTiers.map((tier) => tier.effects[0]!.amount)).toEqual([1, 2, 3, 4, 5, 6]);
 });
+
+it.each([1, 2, 3, 4, 5, 6])(
+  "Sporecoat retaliates for %i Poison damage at its collected tier while enemies stay at base",
+  (copies) => {
+    const result = produce(ready(), (game) => {
+      game.discovery.recruited.captoad = copies;
+      hit(game, game.battle!.enemies[0]!, game.team[0]!, 2, "nature", []);
+    });
+    expect(result.battle!.enemies[0]!.health).toBe(18 - copies);
+    expect(result.battle!.enemies[0]!.combat.poison).toBe(copies);
+    expect(decodeSave(encodeSave(result))).toEqual(result);
+    const enemyResult = produce(ready(), (game) => {
+      game.discovery.recruited.captoad = copies;
+      game.battle!.enemies[0]!.species = "captoad";
+      game.battle!.enemies[0]!.combat = freshCombat();
+      hit(game, game.team[0]!, game.battle!.enemies[0]!, 2, "nature", []);
+    });
+    expect(enemyResult.team[0]!.health).toBe(29);
+    expect(enemyResult.team[0]!.combat!.poison).toBe(1);
+  },
+);

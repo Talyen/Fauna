@@ -252,7 +252,9 @@ export function Inspector({
                         {tierRank === rank ? " · Current rank" : ""}
                         {tierRank === passive.rank ? " · Active effect" : ""}
                       </strong>
-                      <p>{tier ? <KeywordText text={tier.description} /> : "Not yet defined"}</p>
+                      <p>
+                        <KeywordText text={tier.description} />
+                      </p>
                     </div>
                   )}
                 </PagedItems>

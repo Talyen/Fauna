@@ -21,14 +21,7 @@ export interface Species {
   health: number;
   color: string;
   trait: string;
-  passiveTiers: readonly [
-    PassiveTier,
-    PassiveTier | null,
-    PassiveTier | null,
-    PassiveTier | null,
-    PassiveTier | null,
-    PassiveTier | null,
-  ];
+  passiveTiers: readonly [PassiveTier, PassiveTier, PassiveTier, PassiveTier, PassiveTier, PassiveTier];
 }
 export const DAMAGE_LABELS = Object.fromEntries(DAMAGE_TYPES.map((id) => [id, keywordLabel(id)])) as Record<
   DamageType,
@@ -275,11 +268,26 @@ export const SPECIES: readonly Species[] = [
         description: "Retaliate with 1 Poison damage when hit",
         effects: [{ kind: "poisonRetaliation", amount: 1 }],
       },
-      null,
-      null,
-      null,
-      null,
-      null,
+      {
+        description: "Retaliate with 2 Poison damage when hit",
+        effects: [{ kind: "poisonRetaliation", amount: 2 }],
+      },
+      {
+        description: "Retaliate with 3 Poison damage when hit",
+        effects: [{ kind: "poisonRetaliation", amount: 3 }],
+      },
+      {
+        description: "Retaliate with 4 Poison damage when hit",
+        effects: [{ kind: "poisonRetaliation", amount: 4 }],
+      },
+      {
+        description: "Retaliate with 5 Poison damage when hit",
+        effects: [{ kind: "poisonRetaliation", amount: 5 }],
+      },
+      {
+        description: "Retaliate with 6 Poison damage when hit",
+        effects: [{ kind: "poisonRetaliation", amount: 6 }],
+      },
     ],
   },
 ];

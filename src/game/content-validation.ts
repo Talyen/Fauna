@@ -39,10 +39,25 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
       error(entry.id, "health", "Unsupported Health.");
     if (!entry.name.trim() || !entry.trait.trim())
       error(entry.id, "description", "Name and trait description required.");
-    if (entry.passiveTiers.length !== 6 || !entry.passiveTiers[0])
-      error(entry.id, "passiveTiers", "A base passive and five upgrade slots are required.");
+    if (entry.passiveTiers.length !== 6 || Array.from(entry.passiveTiers).some((tier) => !tier))
+      error(entry.id, "passiveTiers", "All six passive tiers must be defined.");
+    const passiveEffects = new Set<string>();
     for (const tier of entry.passiveTiers) {
       if (!tier) continue;
+      // Rules copy and object/effect order cannot disguise unchanged gameplay.
+      const effectKey = JSON.stringify(
+        tier.effects
+          .map((effect) =>
+            Object.entries(
+              effect.kind === "bounce" ? { ...effect, chance: effect.chance ?? 1 } : effect,
+            ).sort(([a], [b]) => a.localeCompare(b)),
+          )
+          .map((effect) => JSON.stringify(effect))
+          .sort(),
+      );
+      if (passiveEffects.has(effectKey))
+        error(entry.id, "passiveTiers", "Each passive tier must have different effects.");
+      passiveEffects.add(effectKey);
       if (tier.description.includes("."))
         error(entry.id, "passiveTiers", "Effect descriptions must omit periods");
       if (
