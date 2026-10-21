@@ -167,9 +167,10 @@ test("Settings panel switches preserve dialog, tab and icon geometry", async ({ 
       await tab.click();
       expect(await geometry()).toEqual(before);
       await expect(dialog.getByRole("tabpanel")).toBeVisible();
+      await expect(dialog.getByRole("tabpanel")).toHaveCSS("animation-name", "none");
       for (const panel of await dialog.locator('.settings-panel[data-state="inactive"]').all()) {
-        await expect(panel).toHaveAttribute("inert", "");
-        await expect(panel).toHaveAttribute("aria-hidden", "true");
+        await expect(panel).toBeHidden();
+        await expect(panel).toHaveAttribute("hidden", "");
       }
     }
   }

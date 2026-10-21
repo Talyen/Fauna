@@ -1,4 +1,3 @@
-import { useState } from "react";
 import type { Session } from "../application/session";
 import { DisplaySettings, CloudStatus } from "./platform-settings";
 import { Monitor, Headphones, Swords, CaseSensitive, MessageSquareText, StepForward } from "lucide-react";
@@ -33,9 +32,8 @@ export function Settings({
   autoEndTurn: boolean;
   setAutoEndTurn: (value: boolean) => void;
 }) {
-  const [category, setCategory] = useState("display");
   return (
-    <Tabs value={category} onValueChange={setCategory} className="settings-controls">
+    <Tabs defaultValue="display" className="settings-controls">
       <TabsList data-nav-row aria-label="Settings categories" className="settings-tabs">
         <TabsTrigger value="display">
           <Monitor aria-hidden="true" />
@@ -50,13 +48,7 @@ export function Settings({
           Battle
         </TabsTrigger>
       </TabsList>
-      <TabsContent
-        value="display"
-        className="settings-panel"
-        inert={category !== "display"}
-        aria-hidden={category !== "display"}
-        tabIndex={category === "display" ? 0 : -1}
-      >
+      <TabsContent value="display" className="settings-panel">
         <h2 className="settings-heading">Display</h2>
         {session ? <DisplaySettings session={session} /> : null}
         <SettingRow icon={CaseSensitive} label="Text size">
@@ -92,22 +84,10 @@ export function Settings({
           </RadioGroup>
         </SettingRow>
       </TabsContent>
-      <TabsContent
-        value="sound"
-        className="settings-panel"
-        inert={category !== "sound"}
-        aria-hidden={category !== "sound"}
-        tabIndex={category === "sound" ? 0 : -1}
-      >
+      <TabsContent value="sound" className="settings-panel">
         <AudioSettings value={audio} update={updateAudio} />
       </TabsContent>
-      <TabsContent
-        value="battle"
-        className="settings-panel"
-        inert={category !== "battle"}
-        aria-hidden={category !== "battle"}
-        tabIndex={category === "battle" ? 0 : -1}
-      >
+      <TabsContent value="battle" className="settings-panel">
         <h2 className="settings-heading">Battle</h2>
         <SettingToggle
           icon={StepForward}

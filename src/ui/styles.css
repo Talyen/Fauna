@@ -1196,31 +1196,6 @@ strong {
   scrollbar-gutter: stable both-edges;
   overscroll-behavior: contain;
 }
-.settings-panel[data-state="active"] {
-  animation: settings-content-in 150ms linear;
-  z-index: 1;
-}
-.settings-panel[data-state="inactive"] {
-  animation: settings-content-out 150ms linear;
-  pointer-events: none;
-}
-@keyframes settings-content-out {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-@keyframes settings-content-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 /* Automatic focus and pointer interaction never expose navigation decoration,
    including shadcn rings in portaled dialogs and tab panels. */
 :root:not([data-focus="visible"]) :focus {

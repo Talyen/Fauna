@@ -9,7 +9,7 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 - Inter-tab gap: the standard 12px related-item spacing; horizontal padding: 12px per side; height remains at least 44px.
 - 20px Lucide icons beside labels.
 - Color transition: 150ms. All tab labels retain the same regular weight; selection never changes button widths or icon positions.
-- Keep the dialog frame and tab row fixed across panel switches; scroll long content within the panel and reserve scrollbar space. Panel activation is immediate, with a 150ms content crossfade (instant under reduced motion). The outgoing panel is inert and hidden from assistive technology.
+- Keep the dialog frame and tab row fixed across panel switches; scroll long content within the panel and reserve scrollbar space. Panel content switches instantly, without fading, overlap or movement. Tab border and text colors retain their 150ms transition (none under reduced motion).
 - Carry forward the single highlighted-boundary rule on combined states; retain visible native keyboard/controller focus.
 
 ## Switches
