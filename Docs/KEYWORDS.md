@@ -33,3 +33,5 @@ Talent Gold banks immediately, survives defeat and abandonment, and is included 
 ## Extending the system
 
 Implement rules in the pure gameplay owner before exposing a keyword. Add structured effect classification, generated wording, current-format save validation and semantic presentation together. Cover actual outcomes, timing, preview parity, rejected commands, swaps and resume at their owning boundaries. Development saves are disposable: reject obsolete versions without migrations. Full static, rendered and platform verification remain CI-owned.
+
+**Nullify** prevents the next applicable harmful status effect while leaving direct damage intact. Protection does not stack, persists until consumed or Purged and can stop reflected statuses. It does not remove existing effects or spend protection on immune, capped or already present non-stacking effects. Hush Dome grants it to each living deployed ally, including its actor. Nullify is combat vocabulary, not a separate progression category.

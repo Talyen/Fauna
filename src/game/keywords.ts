@@ -117,6 +117,13 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Cleansed",
       "Cleansing",
     ]),
+    nullify: entry(
+      "Nullify",
+      "effect",
+      "active",
+      "Prevent the next harmful status effect; Direct damage still lands; Lasts until consumed or Purged; Does not stack",
+      ["Nullified"],
+    ),
     reflect: entry(
       "Reflect",
       "status",
@@ -183,6 +190,7 @@ export const EFFECT_KEYWORDS = freeze(
     heal: ["health"],
     teamGuard: ["block"],
     swap: [],
+    nullify: [],
     dodge: ["dodge"],
   } as const,
   true,

@@ -23,6 +23,7 @@ const statusOrder: readonly string[] = [
   "freeLight",
   "freeCard",
   "reflect",
+  "nullify",
   "blind",
 ];
 type Status = { id: string; text: string; count: number; exit?: boolean; changed?: boolean };
@@ -66,6 +67,7 @@ export function combatStatuses(combat?: CombatState, sharedDodge = 0): Status[] 
       ["freeLight", Number(combat.freeLight), "Divine Favor: next Light card is free"],
       ["freeCard", Number(combat.freeCard), "Free Follow-up: next card is free"],
       ["blind", Number(combat.blind), `Blind: ${KEYWORD_DEFINITIONS.blind.description}`],
+      ["nullify", Number(combat.nullify), `Nullify: ${KEYWORD_DEFINITIONS.nullify.description}`],
       ["reflect", Number(combat.reflect), `Reflect: ${KEYWORD_DEFINITIONS.reflect.description}`],
     ] as const;
     for (const [id, count, text] of pending) if (count) entries.push({ id, count, text });
