@@ -154,11 +154,7 @@ export function TeamSelection({ game, send, inspect, deck }: Props & { deck: () 
 export function Draft({ game, send, inspect }: Props) {
   return (
     <main className="draft-screen">
-      <h1>
-        {game.selected.length < starterCount(game)
-          ? `Choose your starter (${game.selected.length + 1} of ${starterCount(game)})`
-          : "Your starter team"}
-      </h1>
+      <h1>{game.selected.length < starterCount(game) ? "Choose your starter" : "Your starter team"}</h1>
       <div className="draft-grid" data-nav-row>
         {(game.selected.length === starterCount(game) ? game.selected : game.starterOffers).map(
           (kind, index) => {

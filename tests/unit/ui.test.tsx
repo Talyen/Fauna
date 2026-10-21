@@ -230,7 +230,7 @@ describe("player interface", () => {
     const begin = screen.getByRole("button", { name: "Begin journey" }) as HTMLButtonElement;
     for (let round = 0; round < 3; round++) {
       expect(begin.disabled).toBe(true);
-      expect(screen.getByRole("heading", { name: `Choose your starter (${round + 1} of 3)` })).toBeTruthy();
+      expect(screen.getByRole("heading", { name: "Choose your starter" })).toBeTruthy();
       await user.click(screen.getAllByRole("button", { name: `Inspect ${species(starter).name}` })[0]!);
       await user.click(screen.getByRole("button", { name: `Choose ${species(starter).name}` }));
       expect(session.store.getState().game.selected).toHaveLength(round + 1);

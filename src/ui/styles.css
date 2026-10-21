@@ -271,7 +271,8 @@ strong {
   outline: 2px solid var(--selected);
   outline-offset: 6px;
 }
-.game-button {
+.game-button,
+.locked-species > .creature-card {
   transition:
     scale var(--motion-hover) ease-out,
     border-color var(--motion-hover) ease-out,
@@ -279,10 +280,12 @@ strong {
     color var(--motion-hover) ease-out,
     box-shadow var(--motion-hover) ease-out;
 }
+.locked-species > .creature-card:hover,
 .game-button:not(:disabled):not([aria-disabled="true"]):hover,
 :root[data-focus="visible"] .game-button:not(:disabled):not([aria-disabled="true"]):focus {
   scale: var(--hover-scale);
 }
+.locked-species > .creature-card::after,
 .game-button:is(.creature-card, .action-card)::after {
   content: "";
   position: absolute;
@@ -292,11 +295,13 @@ strong {
   pointer-events: none;
   transition: border-color var(--motion-hover) ease-out;
 }
+.locked-species > .creature-card:hover,
 .game-button:is(.creature-card, .action-card):not(.selected):not(:disabled):not(
     [aria-disabled="true"]
   ):hover {
   border-color: var(--primary);
 }
+.locked-species > .creature-card:hover::after,
 .game-button:is(.creature-card, .action-card):not(.selected):not(:disabled):not(
     [aria-disabled="true"]
   ):hover::after {
@@ -972,7 +977,7 @@ strong {
   justify-content: center;
   gap: var(--screen-item-gap);
 }
-.locked-species {
+.locked-species > .creature-card:not(:hover) > img {
   filter: grayscale(1);
 }
 .talent-progress-group {
@@ -1764,6 +1769,7 @@ strong {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .locked-species > .creature-card,
   .game-button {
     scale: 1 !important;
   }

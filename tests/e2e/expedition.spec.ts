@@ -597,9 +597,28 @@ test("Collection hides uncollected tooltips and uses centered collected inspecti
   expect(rows).toEqual([4, 2]);
   const locked = page.getByRole("img", { name: "Locked species" }).first();
   await expect(locked).toBeVisible();
+  const artwork = locked.locator("img");
+  await expect(artwork).toHaveCSS("filter", "grayscale(1)");
   await locked.hover();
   await expect(page.getByRole("tooltip")).toHaveCount(0);
-  expect(await locked.evaluate((e) => getComputedStyle(e.parentElement!).filter)).toContain("grayscale");
+  await expect(artwork).toHaveCSS("filter", "none");
+  const hoverScale = await locked.evaluate((e) =>
+    getComputedStyle(e).getPropertyValue("--hover-scale").trim(),
+  );
+  const highlight = await locked.evaluate((e) => {
+    const sample = document.createElement("span");
+    sample.style.color = "var(--primary)";
+    e.append(sample);
+    const color = getComputedStyle(sample).color;
+    sample.remove();
+    return color;
+  });
+  await expect(locked).toHaveCSS("scale", hoverScale);
+  await expect(locked).toHaveCSS("border-color", highlight);
+  await expect.poll(() => locked.evaluate((e) => getComputedStyle(e, "::after").borderColor)).toBe(highlight);
+  await page.getByRole("heading", { name: "Collection", exact: true }).hover();
+  await expect(artwork).toHaveCSS("filter", "grayscale(1)");
+  await expect(locked).toHaveCSS("scale", "none");
   await page.getByRole("button", { name: "Inspect Mossback", exact: true }).click();
   await expect(page.getByRole("dialog")).toBeVisible();
   await page.keyboard.press("Escape");
