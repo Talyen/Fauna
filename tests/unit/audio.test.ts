@@ -108,3 +108,19 @@ it("can retry music on a later gesture after initial playback is rejected", asyn
   runtime.dispose();
   expect(vi.getTimerCount()).toBe(0);
 });
+
+it("keeps activation quieter than combat across live volume changes and mute", () => {
+  const { runtime, media } = fixture();
+  runtime.configure({ ...defaultAudioPreferences, master: 50, effects: 50 });
+  runtime.unlock();
+  runtime.play("activate");
+  const click = media.at(-1)!;
+  expect(click.volume).toBeCloseTo(0.25 * 0.35);
+  runtime.configure({ ...defaultAudioPreferences, master: 100, effects: 50 });
+  expect(click.volume).toBeCloseTo(0.5 * 0.35);
+  runtime.configure({ ...defaultAudioPreferences, enabled: false });
+  const count = media.length;
+  runtime.play("activate");
+  expect(media).toHaveLength(count);
+  runtime.dispose();
+});

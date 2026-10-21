@@ -1,3 +1,4 @@
+import { HandMotion } from "./hand-motion";
 import { cardCost } from "../game/rules";
 import { controlled } from "../game/combat";
 import { ArtCard } from "./art-card";
@@ -37,7 +38,7 @@ function FanSlot({ index, count, children }: { index: number; count: number; chi
   }, [index, count]);
   return (
     <div className="hand-slot" ref={ref}>
-      {children}
+      <div className="hand-reflow">{children}</div>
     </div>
   );
 }
@@ -169,10 +170,12 @@ export function BattleScreen({
       const origin = root.getBoundingClientRect(),
         a = actor.getBoundingClientRect(),
         b = recipient.getBoundingClientRect();
-      const x = a.x + a.width / 2 - origin.x,
-        y = a.y - origin.y - 8,
-        endX = allyTarget ? b.x + b.width / 2 - origin.x : b.right - origin.x + 6,
-        endY = allyTarget ? b.y - origin.y - 8 : b.bottom - origin.y - 10;
+      const x = a.x + a.width / 2 - origin.x + root.scrollLeft,
+        y = a.y - origin.y - 8 + root.scrollTop,
+        endX = allyTarget
+          ? b.x + b.width / 2 - origin.x + root.scrollLeft
+          : b.right - origin.x + 6 + root.scrollLeft,
+        endY = allyTarget ? b.y - origin.y - 8 + root.scrollTop : b.bottom - origin.y - 10 + root.scrollTop;
       const arch = Math.min(y, endY) - 32;
       setLine(
         allyTarget
@@ -183,7 +186,11 @@ export function BattleScreen({
     update();
     const observer = new ResizeObserver(update);
     if (board.current) observer.observe(board.current);
-    return () => observer.disconnect();
+    board.current?.addEventListener("scroll", update, true);
+    return () => {
+      observer.disconnect();
+      board.current?.removeEventListener("scroll", update, true);
+    };
   }, [card?.ownerId, selected, target, allyTarget]);
   return (
     <main ref={board} className="battle-screen" aria-label="Battlefield" data-selected-card={selected ?? ""}>
@@ -264,44 +271,45 @@ export function BattleScreen({
           />
         ))}
       </section>
-      <section className="hand-section" aria-label="Action hand">
-        <div className="hand">
-          {visibleHand.map((id, index, hand) => {
-            const card = game.cards.find((c) => c.id === id)!,
-              owner = game.team.find((c) => c.id === card.ownerId)!;
-            return (
-              <FanSlot key={id} index={index} count={hand.length}>
-                <ActionCard
-                  card={card}
-                  actor={owner}
-                  modifiers={game}
-                  ownerName={species(owner.species).name}
-                  selected={selected === id}
-                  disabled={battle.mana < cardCost(card, game) || controlled(owner)}
-                  onDenied={onDenied}
-                  onInspect={() => inspect({ card })}
-                  onClick={() => {
-                    onManualStart?.();
-                    setSelected((old) => (old === id ? null : id));
-                  }}
-                />
-              </FanSlot>
-            );
-          })}
-        </div>
-      </section>
+      <HandMotion revision={game.revision} paused={clearSelection}>
+        <section className="hand-section" aria-label="Action hand">
+          <div className="hand">
+            {visibleHand.map((id, index, hand) => {
+              const card = game.cards.find((c) => c.id === id)!,
+                owner = game.team.find((c) => c.id === card.ownerId)!;
+              return (
+                <FanSlot key={id} index={index} count={hand.length}>
+                  <ActionCard
+                    card={card}
+                    actor={owner}
+                    modifiers={game}
+                    ownerName={species(owner.species).name}
+                    selected={selected === id}
+                    disabled={battle.mana < cardCost(card, game) || controlled(owner)}
+                    onDenied={onDenied}
+                    onInspect={() => inspect({ card })}
+                    onClick={() => {
+                      onManualStart?.();
+                      setSelected((old) => (old === id ? null : id));
+                    }}
+                  />
+                </FanSlot>
+              );
+            })}
+          </div>
+        </section>
+      </HandMotion>
       <section className="battle-piles" data-nav-row aria-label="Card piles">
         {(["draw", "discard"] as const).map((pile) => (
           <div key={pile}>
             <ArtCard
               aspect="action"
               artwork={assetUrl("pile.placeholder")}
-              aria-label={`Inspect ${pile === "draw" ? "Draw Pile" : "Discard Pile"}, ${battle[pile].length} cards`}
+              data-pile={pile}
+              aria-label={`Inspect ${pile === "draw" ? "Draw Pile" : "Discard Pile"}`}
               onClick={() => openPile?.(pile)}
             />
-            <p>
-              {pile === "draw" ? "Draw Pile" : "Discard Pile"} · {battle[pile].length}
-            </p>
+            <p>{pile === "draw" ? "Draw Pile" : "Discard Pile"}</p>
           </div>
         ))}
       </section>

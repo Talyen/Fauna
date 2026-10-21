@@ -1,3 +1,4 @@
+import { KeywordIcon } from "./keyword-icon";
 import { KEYWORDS, keywordLabel, keywordProgress, type KeywordXP } from "../game/progression";
 import { Keyword as KeywordLabel } from "./keyword-text";
 import { Progress } from "./progress";
@@ -11,9 +12,20 @@ export function KeywordProgressGrid({ earned, totals }: { earned: KeywordXP; tot
       {keywords.map((keyword) => {
         const progress = keywordProgress(totals[keyword] ?? 0);
         return (
-          <div className="reward-keyword" key={keyword} data-combat-tone={keyword}>
+          <div
+            className="reward-keyword"
+            key={keyword}
+            data-combat-tone={keyword}
+            data-level-up={
+              keywordProgress((totals[keyword] ?? 0) - (earned[keyword] ?? 0)).points < progress.points ||
+              undefined
+            }
+          >
             <div className="reward-keyword-label">
-              <KeywordLabel id={keyword} />
+              <span className="reward-keyword-identity">
+                <KeywordIcon id={keyword} />
+                <KeywordLabel id={keyword} />
+              </span>
               <span>Lv {progress.points + 1}</span>
             </div>
             <Progress

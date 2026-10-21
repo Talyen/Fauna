@@ -127,3 +127,24 @@ it("rejects sharp-corner overrides and retains the upstream radius scale", () =>
   const css = readFileSync(new URL("../../src/ui/tokens.css", import.meta.url), "utf8");
   expect(css).toContain("--radius: 0.625rem;");
 });
+
+it("keeps control states in the shared shadcn skin and rejects selected-hover thickening", () => {
+  expect(
+    sourceViolations("src/ui/screen.tsx", '<Button className="hover:bg-primary" />').length,
+  ).toBeGreaterThan(0);
+  expect(
+    sourceViolations("src/ui/screen.css", ".ui-tab { background: var(--muted); }").length,
+  ).toBeGreaterThan(0);
+  expect(
+    sourceViolations("src/ui/screen.css", ".selected:hover { outline-width: 3px; }").length,
+  ).toBeGreaterThan(0);
+  expect(sourceViolations("src/ui/design-system.css", ".ui-tab { background: var(--background); }")).toEqual(
+    [],
+  );
+  expect(
+    sourceViolations(
+      "src/ui/design-system.css",
+      '.ui-tab[data-state="active"]:hover { background: var(--muted); }',
+    ).length,
+  ).toBeGreaterThan(0);
+});

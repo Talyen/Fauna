@@ -1,28 +1,133 @@
-import type { CombatState } from "../game/types";
+import { returnFocus } from "./focus";
 import { KeywordText } from "./keyword-text";
-export function CombatStatus({ combat }: { combat?: CombatState }) {
-  if (!combat) return null;
-  const stats = ["armor", "thorns", "dodge", "burn", "poison", "bleed", "stun", "freeze"] as const;
-  return (
-    <div className="combat-status" aria-label="Combat effects">
-      {stats
+import { motionValue } from "./motion-values";
+import { useEffect, useLayoutEffect, useState, useRef } from "react";
+import { Hourglass, Skull, Timer } from "lucide-react";
+import type { CombatState } from "../game/types";
+import { KEYWORD_DEFINITIONS } from "../game/keywords";
+import { KeywordIcon } from "./keyword-icon";
+import { Button } from "../components/ui/button";
+import { Tooltip, TooltipTrigger, TooltipContent } from "../components/ui/tooltip";
+const stats = ["armor", "thorns", "dodge", "burn", "poison", "bleed", "stun", "freeze"] as const;
+type Status = { id: string; text: string; count: number; exit?: boolean; changed?: boolean };
+export function CombatStatus({ combat, details = false }: { combat?: CombatState; details?: boolean }) {
+  const entries: Status[] = combat
+    ? stats
         .filter((id) => combat[id] > 0)
-        .map((id) => (
-          <span key={id}>
-            <KeywordText text={`${id} ${combat[id]}${id === "dodge" ? "%" : ""}`} />
-          </span>
+        .map((id) => ({
+          id,
+          count: combat[id],
+          text: `${KEYWORD_DEFINITIONS[id].label} ${combat[id]}${id === "dodge" ? "%" : ""}. ${KEYWORD_DEFINITIONS[id].description}`,
+        }))
+    : [];
+  if (combat?.controlled || combat?.skipped)
+    entries.push({
+      id: "controlled",
+      count: 1,
+      text:
+        combat.controlled === "freeze" ? "Frozen" : combat.controlled === "stun" ? "Stunned" : "Turn skipped",
+    });
+  if (combat?.cooldown)
+    entries.push({ id: "cooldown", count: combat.cooldown, text: `Control immunity ${combat.cooldown}` });
+  if (combat?.grace) entries.push({ id: "grace", count: combat.grace, text: `Death's Door ${combat.grace}` });
+  const root = useRef<HTMLDivElement>(null);
+  const signature = JSON.stringify(entries);
+  const [shown, setShown] = useState(entries);
+  useLayoutEffect(() => {
+    const next = JSON.parse(signature) as Status[];
+    const focused = document.activeElement as HTMLElement | null;
+    if (
+      root.current &&
+      focused?.closest(".combat-status") === root.current &&
+      !next.some((s) => s.id === focused?.dataset.statusId)
+    )
+      returnFocus(
+        root.current?.closest(".creature-wrap")?.querySelector<HTMLElement>(".creature-card") ?? null,
+      );
+    setShown((old) =>
+      [
+        ...next.map((item) => ({
+          ...item,
+          changed: old.some((p) => p.id === item.id && !p.exit && (p.count !== item.count || p.changed)),
+        })),
+        ...old
+          .filter(
+            (item) =>
+              !window.matchMedia?.("(prefers-reduced-motion: reduce)").matches &&
+              !next.some((n) => n.id === item.id),
+          )
+          .map((item) => ({ ...item, exit: true })),
+      ].sort(
+        (a, b) =>
+          [...stats, "controlled", "cooldown", "grace"].indexOf(a.id) -
+          [...stats, "controlled", "cooldown", "grace"].indexOf(b.id),
+      ),
+    );
+  }, [signature]);
+  useEffect(() => {
+    if (!shown.some((s) => s.exit)) return;
+    const timer = setTimeout(
+      () => setShown((items) => items.filter((s) => !s.exit)),
+      motionValue("--motion-fast"),
+    );
+    return () => clearTimeout(timer);
+  }, [shown]);
+  useEffect(() => {
+    const motion = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+    const change = () => {
+      if (motion?.matches) setShown((items) => items.filter((item) => !item.exit));
+    };
+    motion?.addEventListener?.("change", change);
+    return () => motion?.removeEventListener?.("change", change);
+  }, []);
+  if (details)
+    return (
+      <div className="combat-status-details">
+        {entries.map((s) => (
+          <p key={s.id}>
+            <KeywordText text={s.text} />
+          </p>
         ))}
-      {combat.controlled || combat.skipped ? (
-        <span>
-          {combat.controlled === "freeze"
-            ? "Frozen"
-            : combat.controlled === "stun"
-              ? "Stunned"
-              : "Turn skipped"}
-        </span>
-      ) : null}
-      {combat.cooldown > 0 ? <span>Control immunity {combat.cooldown}</span> : null}
-      {combat.grace > 0 ? <span>Death's Door {combat.grace}</span> : null}
+      </div>
+    );
+  if (!shown.length) return null;
+  return (
+    <div ref={root} className="combat-status" aria-label="Combat effects">
+      {shown.map((s) => {
+        const Icon = s.id === "grace" ? Skull : s.id === "cooldown" ? Timer : Hourglass;
+        return (
+          <Tooltip key={s.id}>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="status-icon"
+                data-status-id={s.id}
+                aria-label={s.text}
+                aria-hidden={s.exit || undefined}
+                disabled={s.exit}
+                data-exiting={s.exit || undefined}
+                data-keyword={s.id}
+              >
+                <span
+                  data-keyword={s.id}
+                  key={s.count}
+                  className={s.exit ? undefined : s.changed ? "status-changed" : "status-enter"}
+                >
+                  {stats.includes(s.id as (typeof stats)[number]) ? (
+                    <KeywordIcon id={s.id as (typeof stats)[number]} />
+                  ) : (
+                    <Icon aria-hidden="true" />
+                  )}
+                </span>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <KeywordText text={s.text} />
+            </TooltipContent>
+          </Tooltip>
+        );
+      })}
     </div>
   );
 }

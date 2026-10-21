@@ -71,7 +71,7 @@ export function CreatureDetails({
       <p>
         {health ?? info.health}/{maxHealth ?? info.health} health{block ? ` · ${block} block` : ""}
       </p>
-      <CombatStatus combat={combat} />
+      <CombatStatus combat={combat} details />
       {!name || speciesKit ? (
         <>
           {name && speciesKit ? <strong>Species kit · {info.name}</strong> : null}

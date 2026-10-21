@@ -1,3 +1,5 @@
+import { ResultPresentation, AnimatedNumber } from "./result-presentation";
+import { EmptyState } from "./empty-state";
 import { Coins } from "lucide-react";
 import { Button } from "../components/ui/button";
 import type { GameState } from "../game/types";
@@ -14,33 +16,38 @@ export function JourneyResults({ game, home }: { game: GameState; home: () => vo
           ? "Returned home"
           : "Journey ended";
   return (
-    <main className="journey-results">
-      <header className="journey-results-heading">
-        <h1>{title}</h1>
-      </header>
-      {summary ? (
-        <section className="journey-gains" aria-label="Journey gains">
-          {summary.currency > 0 ? (
-            <div className="journey-totals">
-              <p>
-                <Coins aria-hidden="true" />
-                <strong>{summary.currency}</strong> Gold earned
-              </p>
-            </div>
-          ) : null}
-          <KeywordProgressGrid earned={summary.xp} totals={game.keywordXP} />
-          {!summary.currency && !Object.values(summary.xp).some((value) => value > 0) ? (
-            <p className="journey-kept">No permanent rewards earned.</p>
-          ) : null}
-        </section>
-      ) : (
-        <p className="journey-kept">Journey totals are unavailable. Permanent progress is kept.</p>
-      )}
-      <footer className="journey-results-actions" data-nav-row>
-        <Button className="primary-menu-action" onClick={home}>
-          Main menu
-        </Button>
-      </footer>
-    </main>
+    <ResultPresentation>
+      <main className="journey-results">
+        <header className="journey-results-heading">
+          <h1>{title}</h1>
+        </header>
+        {summary ? (
+          <section className="journey-gains" aria-label="Journey gains">
+            {summary.currency > 0 ? (
+              <div className="journey-totals">
+                <p>
+                  <Coins aria-hidden="true" />
+                  <strong>
+                    <AnimatedNumber value={summary.currency} />
+                  </strong>{" "}
+                  Gold earned
+                </p>
+              </div>
+            ) : null}
+            <KeywordProgressGrid earned={summary.xp} totals={game.keywordXP} />
+            {!summary.currency && !Object.values(summary.xp).some((value) => value > 0) ? (
+              <EmptyState label="No permanent rewards earned" />
+            ) : null}
+          </section>
+        ) : (
+          <p className="journey-kept">Journey totals are unavailable. Permanent progress is kept.</p>
+        )}
+        <footer className="journey-results-actions" data-nav-row>
+          <Button className="primary-menu-action" onClick={home}>
+            Main menu
+          </Button>
+        </footer>
+      </main>
+    </ResultPresentation>
   );
 }

@@ -135,6 +135,7 @@ export type Command =
   | { type: "newRun"; seed: number }
   | { type: "abandon" };
 export interface GameEvent {
+  actionType?: "attack" | "support" | "swap";
   kind: "action" | "damage" | "block" | "heal" | "knockout" | "turn" | "reward" | "victory" | "status";
   text: string;
   actorId?: string;

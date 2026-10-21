@@ -81,9 +81,10 @@ TooltipTrigger.displayName = "TooltipTrigger";
 export const TooltipContent = React.forwardRef<
   React.ElementRef<typeof TooltipPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
->(({ className, sideOffset = 16, ...props }, ref) => (
+>(({ className, sideOffset = 8, ...props }, ref) => (
   <TooltipPrimitive.Portal>
     <TooltipPrimitive.Content
+      side="top"
       ref={ref}
       sideOffset={sideOffset}
       collisionPadding={16}

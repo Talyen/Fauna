@@ -680,6 +680,17 @@
       "aspect": [3, 4],
       "provenance": "Copied from Alchemy src/assets/optimized/groves-favor.webp; same user-owned project artwork",
       "rights": "Existing Alchemy project artwork reused with user authorization"
+    },
+    {
+      "id": "sound.activate",
+      "origin": "library",
+      "source": "Sounds/Game Sources/Projects/Alchemy/Sound Effects/interface/toggles/toggle_on_02.wav",
+      "output": "sounds/activate.wav",
+      "recipe": "copy",
+      "kind": "sound",
+      "provenance": "Shared Asset Library; quiet activation candidate from Alchemy interface library",
+      "rights": "Shared project library selection; retain original library license metadata",
+      "listening": "pending"
     }
   ]
 }

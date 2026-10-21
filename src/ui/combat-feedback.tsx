@@ -1,3 +1,4 @@
+import { motionValue } from "./motion-values";
 import type { SoundCue } from "./audio-runtime";
 import { useEffect, useState, useRef, useCallback, type RefObject } from "react";
 import { selectCombatCue } from "./combat-audio";
@@ -12,7 +13,7 @@ export interface Burst {
   started: number;
   entries: GameEvent[];
 }
-const LIFETIME = 1400;
+const LIFETIME = 1000;
 /** Display-only consolidation: same recipient, kind, type and direction. Expiry never extends. */
 export function appendFeedback(
   previous: readonly Burst[],
@@ -58,7 +59,12 @@ export function feedbackFrames(events: readonly GameEvent[]): GameEvent[][] {
     frames[frames.length - 1]!.push(event);
   }
   return frames.filter((frame) =>
-    frame.some((e) => e.targetId && ["damage", "heal", "block", "knockout", "status"].includes(e.kind)),
+    frame.some(
+      (e) =>
+        e.actionType === "attack" ||
+        e.actionType === "support" ||
+        (e.targetId && ["damage", "heal", "block", "knockout", "status"].includes(e.kind)),
+    ),
   );
 }
 export function useCombatFeedback(
@@ -79,11 +85,23 @@ export function useCombatFeedback(
     const deniedAnimations = new Map<HTMLElement, Animation>();
     denial.current = (element) => {
       playSound("deny");
-      if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches || !element.animate) return;
+      if (!element.animate) return;
+      if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
+        deniedAnimations.get(element)?.cancel();
+        const cue = element.animate(
+          [{ borderColor: "var(--destructive)" }, { borderColor: "var(--border)" }],
+          { duration: motionValue("--motion-deny") },
+        );
+        deniedAnimations.set(element, cue);
+        cue.onfinish = () => {
+          if (deniedAnimations.get(element) === cue) deniedAnimations.delete(element);
+        };
+        return;
+      }
       deniedAnimations.get(element)?.cancel();
       const animation = element.animate(
         [{ translate: "0 0" }, { translate: "-4px 0" }, { translate: "4px 0" }, { translate: "0 0" }],
-        { duration: 180, easing: "ease-out" },
+        { duration: motionValue("--motion-deny"), easing: "ease-out" },
       );
       deniedAnimations.set(element, animation);
       animation.onfinish = () => {
@@ -95,10 +113,21 @@ export function useCombatFeedback(
       pending.forEach(clearTimeout);
       pending.clear();
     };
+    const motion = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+    const motionChange = () => {
+      if (motion?.matches) {
+        cancelPending();
+        impacts.cancel();
+        deniedAnimations.forEach((animation) => animation.cancel());
+        deniedAnimations.clear();
+      }
+    };
+    motion?.addEventListener?.("change", motionChange);
     const unsubscribe = session.store.subscribe((current, previous) => {
       if (current.game.revision === previous.game.revision) return;
       // Fresh accepted input interrupts the remaining visual sequence, never gameplay.
       cancelPending();
+      impacts.cancel();
       if (current.game.phase !== "battle") {
         setBursts([]);
 
@@ -116,10 +145,13 @@ export function useCombatFeedback(
         };
         if (index === 0) show();
         else {
-          const timer = setTimeout(() => {
-            pending.delete(timer);
-            show();
-          }, index * 300);
+          const timer = setTimeout(
+            () => {
+              pending.delete(timer);
+              show();
+            },
+            index * motionValue("--motion-feedback-sequence"),
+          );
           pending.add(timer);
         }
       });
@@ -134,6 +166,7 @@ export function useCombatFeedback(
       100,
     );
     return () => {
+      motion?.removeEventListener?.("change", motionChange);
       denial.current = () => {};
       deniedAnimations.forEach((animation) => animation.cancel());
       deniedAnimations.clear();

@@ -1,6 +1,6 @@
 # Hand motion — Alchemy direction
 
-The user chose Alchemy's card draw, discard and hand reflow animations on 2026-10-20 instead of selecting new motion independently. This records the source choreography for later Fauna adoption; no production port or rendered acceptance is claimed. Retain Fauna's shadcn controls, ArtCard ownership, fixed card dimensions and current hand fan geometry.
+The user chose Alchemy's card draw, discard and hand reflow animations on 2026-10-20 instead of selecting new motion independently. The production choreography is implemented in `src/ui/hand-motion.tsx`; full rendered acceptance remains pending. Retain Fauna's shadcn controls, ArtCard ownership, fixed card dimensions and current hand fan geometry.
 
 ## Inspected source
 
@@ -33,4 +33,8 @@ Keep Fauna's resting artwork dimensions and aspect ratio; any transfer scaling i
 
 Reduced motion skips flight, flip and reflow. Leaving battle, pause, disposal, interruption and live reduced-motion changes clear owned overlays and stale callbacks, reveal the current committed hand and never replay cancelled sequences. Missing measurements settle directly to the committed layout.
 
-Production implementation and validation remain pending. Cover repeated draws/discards, overlapping reflows, variable/full/empty hands, accepted input during flight, cancellation and disposal, reduced motion, focus return, correct face/back handoff and unchanged command/save behavior. Review rendered motion at Fauna's fixed card size and short viewports before acceptance; local documentation checks do not establish visual quality.
+Production choreography is implemented; comprehensive context validation remains pending. Cover repeated draws/discards, overlapping reflows, variable/full/empty hands, accepted input during flight, cancellation and disposal, reduced motion, focus return, correct face/back handoff and unchanged command/save behavior. Review rendered motion at Fauna's fixed card size and short viewports before acceptance; local documentation checks do not establish visual quality.
+
+## Production adoption
+
+The approved choreography is now implemented in Fauna through the owners listed in the [shared design system](../../Docs/DESIGN_SYSTEM.md). Full viewport, desktop, physical-controller and CI acceptance remain pending; implementation does not establish visual acceptance.

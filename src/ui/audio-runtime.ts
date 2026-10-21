@@ -5,6 +5,7 @@ import {
   type AudioPreferences,
 } from "./audio-preferences";
 export type SoundCue =
+  | "activate"
   | "physical"
   | "fire"
   | "ice"
@@ -81,6 +82,7 @@ export function createAudioRuntime(
   let requested: MusicCue = "menu";
   let music: { cue: MusicCue; media: MediaVoice; fade: number } | undefined;
   const voices = new Set<MediaVoice>();
+  const voiceGain = new WeakMap<MediaVoice, number>();
   const fading = new Map<MediaVoice, ReturnType<typeof setInterval>>();
   const warm = new Set<MediaVoice>();
   const audible = () =>
@@ -211,7 +213,7 @@ export function createAudioRuntime(
       if (disposed) return;
       preferences = normalizeAudioPreferences(value);
       for (const media of voices) {
-        media.volume = volume("effects");
+        media.volume = volume("effects") * (voiceGain.get(media) ?? 1);
         if (!audible()) release(media);
       }
       for (const media of fading.keys())
@@ -236,7 +238,9 @@ export function createAudioRuntime(
       try {
         if (voices.size >= 6) release(voices.values().next().value!);
         const media = makeMedia(assetUrl(`sound.${cue}`));
-        media.volume = volume("effects");
+        const gain = cue === "activate" ? 0.35 : 1;
+        voiceGain.set(media, gain);
+        media.volume = volume("effects") * gain;
         media.loop = false;
         media.preload = "auto";
         voices.add(media);

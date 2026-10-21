@@ -40,6 +40,7 @@ describe("menu browsing", () => {
     render(<App session={session} />);
     try {
       await user.click(screen.getByRole("button", { name: "Talents" }));
+      await user.click(screen.getByRole("button", { name: "Physical talents" }));
       const slam = screen.getByRole("button", { name: "Shield Slam" });
       expect(slam.textContent).toContain("Add half your Block to Physical damage.");
       expect(within(slam).getByText("Unlock · 1 point")).toBeTruthy();
@@ -53,6 +54,10 @@ describe("menu browsing", () => {
       await user.click(screen.getByRole("button", { name: "Reset category" }));
       expect(session.store.getState().game.talents).toEqual([]);
       expect(within(fists).getByText("Unlock · 1 point")).toBeTruthy();
+      await user.keyboard("{Escape}");
+      expect(screen.getByRole("button", { name: "Physical talents" })).toBeTruthy();
+      await user.keyboard("{Escape}");
+      expect(screen.getByRole("button", { name: "Talents", exact: true })).toBeTruthy();
     } finally {
       cleanup();
       await session.dispose();

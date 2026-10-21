@@ -388,6 +388,7 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
       enemy.lastAbility = def.id;
       events.push({
         kind: "action",
+        actionType: def.effect === "attack" ? "attack" : "support",
         actorId: enemy.id,
         targetId: target.id,
         text: `${enemy.name} uses ${def.name}.`,
@@ -630,6 +631,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         battle.discard.push(card.id);
         events.push({
           kind: "action",
+          actionType: def.effect === "attack" ? "attack" : "support",
           text: `${species(actor.species).name} uses ${def.name}.`,
           actorId: actor.id,
           targetId: command.targetId,
@@ -704,6 +706,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         }
         events.push({
           kind: "action",
+          actionType: "swap",
           actorId: incoming.id,
           text: `${species(incoming.species).name} replaces ${species(outgoing.species).name}.`,
         });

@@ -1,6 +1,6 @@
 # Combatant motion — Alchemy direction
 
-The user chose Alchemy's wind-up, swing and hit reactions instead of individually selecting a new recoil distance on 2026-10-20. This is an accepted design direction, not a claim that Fauna's production presentation has been ported or rendered. Retain shadcn controls and ArtCard; do not import Alchemy's control components or change Fauna's gameplay rules.
+The user chose Alchemy's wind-up, swing and hit reactions instead of individually selecting a new recoil distance on 2026-10-20. The choreography is implemented in Fauna; full rendered acceptance remains pending. Retain shadcn controls and ArtCard; do not import Alchemy's control components or change Fauna's gameplay rules.
 
 ## Inspected source
 
@@ -36,6 +36,10 @@ Use a dedicated presentation wrapper so wind-up/swing/recoil cannot overwrite Ar
 - Keep attack, support and target reaction ownership separate; bound repeated motion and replace or cancel stale animation handles. Preserve enemy presentation order.
 - Pause, leaving battle, new accepted input where it interrupts the existing presentation, disposal and live reduced-motion changes must cancel pending phases and return frames to neutral. Cancelled sequences never replay on resume. Reduced motion keeps the essential numbers/state feedback without spatial motion; sound remains supplementary.
 
-## Implementation and acceptance still pending
+## Implementation ownership and acceptance
 
-Fauna currently has `src/ui/combat-impact.ts` and `src/ui/combat-feedback.tsx` as presentation owners. Port and test the choreography there when production adoption is requested; these notes do not mark that work complete. Required checks include attack versus support classification, blocked/zero damage, periodic effects, repeated and overlapping actions, interruption/disposal, transform isolation, reduced motion and unchanged gameplay/save behavior. Render actual battle frames, including both directions and short viewports. Browser simulation, desktop, physical controller and CI acceptance remain separate.
+Fauna uses `src/ui/combat-impact.ts` and `src/ui/combat-feedback.tsx` as presentation owners, with separate motion/reaction wrappers in `src/ui/cards.tsx`. Committed action events carry attack/support/swap facts. Ownership tests cover interruption, reduced motion and disposal. Required checks include attack versus support classification, blocked/zero damage, periodic effects, repeated and overlapping actions, interruption/disposal, transform isolation, reduced motion and unchanged gameplay/save behavior. Render actual battle frames, including both directions and short viewports. Browser simulation, desktop, physical controller and CI acceptance remain separate.
+
+## Production adoption
+
+The approved choreography is now implemented in Fauna through the owners listed in the [shared design system](../../Docs/DESIGN_SYSTEM.md). Full viewport, desktop, physical-controller and CI acceptance remain pending; implementation does not establish visual acceptance.

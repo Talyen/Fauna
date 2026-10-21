@@ -1,3 +1,7 @@
+import { captureSwapMotion } from "./swap-motion";
+import { SurfaceTransition } from "./surface-transition";
+import { Loading } from "./loading";
+import { TriangleAlert } from "lucide-react";
 import { CloudRecovery } from "./platform-settings";
 import { SupportScreen, SupportInspector } from "./support-screen";
 import { BOONS } from "../game/progression";
@@ -37,7 +41,7 @@ import { Draft, TeamSelection, Rewards, Talents, Collection, DeckCards } from ".
 import { RosterPicker } from "./roster-picker";
 import { Inspector } from "./inspection";
 import { connectInput, moveFocus, type InputAction } from "./input";
-import { returnFocus } from "./focus";
+import { isAvailableFocusTarget, returnFocus } from "./focus";
 import { useCombatFeedback } from "./combat-feedback";
 import { GLOSSARY } from "../game/glossary";
 import type { Command } from "../game/types";
@@ -62,7 +66,8 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     game = view.game;
   const root = useRef<HTMLDivElement>(null),
     gameControls: Controls = useRef(null),
-    inspectionControls: Controls = useRef(null);
+    inspectionControls: Controls = useRef(null),
+    talentControls: Controls = useRef(null);
   const [route, setRoute] = useState<Route>("home"),
     [menu, setMenu] = useState(false),
     [modal, setModal] = useState<Modal>(null),
@@ -71,6 +76,20 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
   const [navigation, setNavigation] = useState(false);
   const [audioPreferences, updateAudioPreferences] = useAudioPreferences();
   const playSound = useGameAudio(session, audioPreferences, route === "home");
+  useEffect(() => {
+    const activate = (event: MouseEvent) => {
+      const button = event.target instanceof Element ? event.target.closest<HTMLElement>("button") : null;
+      if (!button || button.matches(':disabled, [aria-disabled="true"]') || button.closest("[inert]")) return;
+      if (
+        button.matches(
+          ".home-screen button, .menu-panel button, .settings-dialog button, .ui-tab, .dialog-close",
+        )
+      )
+        playSound("activate");
+    };
+    window.addEventListener("click", activate);
+    return () => window.removeEventListener("click", activate);
+  }, [playSound]);
   const [scale, setScale] = useState(() => {
     const n = Number(preference("fauna.text-scale", "1"));
     return TEXT_SCALES.some((value) => value === n) ? n : 1;
@@ -116,10 +135,22 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     document.documentElement.style.setProperty("--text-scale", String(scale));
     writePreference("fauna.text-scale", String(scale));
   }, [scale]);
+  const swapMotion = useRef<ReturnType<typeof captureSwapMotion> | null>(null);
+  useEffect(() => () => swapMotion.current?.cancel(), []);
   const send = useCallback(
     (command: Command) => {
       setAutoplay(false);
-      return session.command(command.type === "play" ? { ...command, autoEndTurn } : command);
+      swapMotion.current?.cancel();
+      const motion =
+        command.type === "swap" || command.type === "setLineup"
+          ? captureSwapMotion(command.activeId, command.reserve)
+          : null;
+      const accepted = session.command(command.type === "play" ? { ...command, autoEndTurn } : command);
+      if (accepted) {
+        swapMotion.current = motion;
+        motion?.start();
+      }
+      return accepted;
     },
     [session, autoEndTurn, setAutoplay],
   );
@@ -166,7 +197,10 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     if (session.store.getState().cloud.blocking) {
       if (["left", "right", "up", "down"].includes(action))
         moveFocus(action as "left" | "right" | "up" | "down");
-      else if (action === "confirm") (document.activeElement as HTMLElement | null)?.click();
+      else if (action === "confirm") {
+        const focused = document.activeElement as HTMLElement | null;
+        if (isAvailableFocusTarget(focused)) focused.click();
+      }
       return;
     }
     if (inspection && inspectionControls.current?.(action)) return;
@@ -183,6 +217,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
         setMenu(false);
         return;
       }
+      if (route === "talents" && talentControls.current?.(action)) return;
       if (route === "talents" || route === "collection") {
         backFromPage();
         return;
@@ -198,7 +233,8 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
       return;
     }
     if (action === "confirm") {
-      (document.activeElement as HTMLElement | null)?.click();
+      const focused = document.activeElement as HTMLElement | null;
+      if (isAvailableFocusTarget(focused)) focused.click();
       return;
     }
     if (
@@ -298,7 +334,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
   if (!view.ready)
     return (
       <div className="loading" role="status">
-        Loading…
+        <Loading />
       </div>
     );
   const menuItems = (home: boolean) => (
@@ -363,7 +399,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
         </Button>
       ) : null}
       {desktop ? (
-        <Button variant="ghost" onClick={() => void session.quit()}>
+        <Button variant="ghost" busy={view.closing} onClick={() => void session.quit()}>
           Save & quit
         </Button>
       ) : null}
@@ -566,179 +602,192 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     </>
   );
   return (
-    <div
-      ref={root}
-      className={`app ${route === "play" && game.phase === "battle" ? "in-battle" : ""}`}
-      data-input={mode}
-      data-focus={navigation ? "visible" : "hidden"}
-      data-route={route}
-      data-phase={game.phase}
-      data-save-status={view.saveStatus}
-    >
-      {view.notice && !view.recoveryRequired ? (
-        <p className="notice" role="status">
-          {view.notice}
-        </p>
-      ) : null}
-      {view.error && !view.loadFailed ? (
-        <div className="error-banner" role="alert">
-          {view.error}
-          {view.saveStatus === "error" ? (
-            <Button variant="outline" onClick={() => session.retrySave()}>
-              Retry save
+    <SurfaceTransition token={`${route}:${game.phase}`} battle={route === "play" && game.phase === "battle"}>
+      <div
+        ref={root}
+        className={`app ${route === "play" && game.phase === "battle" ? "in-battle" : ""}`}
+        data-input={mode}
+        data-focus={navigation ? "visible" : "hidden"}
+        data-route={route}
+        data-phase={game.phase}
+        data-save-status={view.saveStatus}
+      >
+        {view.notice && !view.recoveryRequired ? (
+          <p className="notice" role="status">
+            {view.notice}
+          </p>
+        ) : null}
+        {view.error && !view.loadFailed ? (
+          <div className="error-banner" role="alert">
+            <TriangleAlert className="error-icon" aria-hidden="true" />
+            {view.error}
+            {view.saveStatus === "error" ? (
+              <Button variant="outline" onClick={() => session.retrySave()}>
+                Retry save
+              </Button>
+            ) : null}
+          </div>
+        ) : null}
+        {view.cloud.blocking ? (
+          <CloudRecovery session={session} />
+        ) : view.loadFailed || view.recoveryRequired ? (
+          <main className="recovery">
+            <h1>Save unavailable</h1>
+            <p>{view.loadFailed ? view.error : view.notice}</p>
+            <Button onClick={() => (view.loadFailed ? void session.load() : session.startFresh())}>
+              {view.loadFailed ? "Retry loading" : "Start fresh"}
             </Button>
-          ) : null}
-        </div>
-      ) : null}
-      {view.cloud.blocking ? (
-        <CloudRecovery session={session} />
-      ) : view.loadFailed || view.recoveryRequired ? (
-        <main className="recovery">
-          <h1>Save unavailable</h1>
-          <p>{view.loadFailed ? view.error : view.notice}</p>
-          <Button onClick={() => (view.loadFailed ? void session.load() : session.startFresh())}>
-            {view.loadFailed ? "Retry loading" : "Start fresh"}
-          </Button>
-        </main>
-      ) : (
-        <>
-          {route === "home" ? (
-            <main className="home-screen">
-              <h1>Fauna</h1>
-              <nav aria-label="Main menu">{menuItems(true)}</nav>
-            </main>
-          ) : null}
-          {route === "unlocks" && reveals[0] ? (
-            <main className="unlock-screen">
-              <h1>Creature unlocked</h1>
-              <div className="unlock-creature">
-                <CreatureCard
-                  kind={reveals[0]}
-                  label={`Inspect ${species(reveals[0]).name}`}
-                  onClick={() => setInspection({ species: reveals[0]! })}
-                  onInspect={() => setInspection({ species: reveals[0]! })}
-                />
-                <h2>{species(reveals[0]).name}</h2>
-              </div>
+          </main>
+        ) : (
+          <>
+            {route === "home" ? (
+              <main className="home-screen">
+                <h1>Fauna</h1>
+                <nav aria-label="Main menu">{menuItems(true)}</nav>
+              </main>
+            ) : null}
+            {route === "unlocks" && reveals[0] ? (
+              <main className="unlock-screen">
+                <h1>Creature unlocked</h1>
+                <div className="unlock-creature">
+                  <CreatureCard
+                    kind={reveals[0]}
+                    label={`Inspect ${species(reveals[0]).name}`}
+                    onClick={() => setInspection({ species: reveals[0]! })}
+                    onInspect={() => setInspection({ species: reveals[0]! })}
+                  />
+                  <h2>{species(reveals[0]).name}</h2>
+                </div>
+                <Button
+                  onClick={() => {
+                    setReveals((old) => old.slice(1));
+                    if (reveals.length === 1) setRoute("home");
+                  }}
+                >
+                  Continue
+                </Button>
+              </main>
+            ) : null}
+            {route === "talents" ? (
+              <Talents game={game} send={send} back={backFromPage} controls={talentControls} />
+            ) : null}
+            {route === "collection" ? (
+              <Collection game={game} inspect={setInspection} back={backFromPage} />
+            ) : null}
+            <div className="play-surface" hidden={route !== "play"} inert={route !== "play"}>
               <Button
+                variant="ghost"
+                size="icon"
+                className="menu-button"
+                aria-label="Open menu"
+                onClick={openMenu}
+              >
+                <Menu aria-hidden="true" />
+              </Button>
+              {game.phase === "draft" ? (
+                <Draft game={game} send={send} inspect={setInspection} />
+              ) : game.phase === "teamSelection" ? (
+                <TeamSelection
+                  game={game}
+                  send={send}
+                  inspect={setInspection}
+                  deck={() => openModal("deck")}
+                />
+              ) : game.phase === "support" ? (
+                <SupportScreen game={game} send={send} />
+              ) : game.phase === "campfire" ? (
+                <Campfire game={game} send={send} />
+              ) : game.phase === "battle" ? (
+                <BattleScreen
+                  key={game.encounter}
+                  clearSelection={
+                    view.overlayActive || menu || modal !== null || inspection !== null || autoplay
+                  }
+                  onManualStart={() => setAutoplay(false)}
+                  openPile={(pile) => openModal(pile)}
+                  actions={
+                    <>
+                      <label className="autoplay-control" htmlFor="autoplay">
+                        <span>Auto-play</span>
+                        <Switch id="autoplay" checked={autoplay} onCheckedChange={setAutoplay} />
+                      </label>
+                      <Button
+                        variant="outline"
+                        className="swap-trigger"
+                        disabled={!game.reserves.some((c) => c.health > 0)}
+                        onClick={() => openModal("swap")}
+                      >
+                        <ArrowLeftRight aria-hidden="true" />
+                        Swap
+                      </Button>
+                    </>
+                  }
+                  game={game}
+                  send={send}
+                  inspect={setInspection}
+                  controls={gameControls}
+                  bursts={bursts}
+                  onDenied={deny}
+                  controller={mode === "controller"}
+                  navigateFocus={navigation}
+                />
+              ) : game.phase === "recruit" || game.phase === "boon" ? (
+                <Rewards
+                  key={`${game.encounter}-${game.phase}`}
+                  game={game}
+                  send={send}
+                  inspect={setInspection}
+                />
+              ) : (
+                <JourneyResults game={game} home={leaveResults} />
+              )}
+              <div className="sr-only" role="log" aria-live="polite">
+                {view.events.map((event) => event.text).join(" ")}
+              </div>
+            </div>
+          </>
+        )}
+        <Dialog open={menu && !modal && !inspection} onOpenChange={setMenu}>
+          <DialogContent
+            className="menu-panel"
+            closeLabel="Close menu"
+            onOpenAutoFocus={(event) => {
+              const label = menuReturnLabel.current;
+              if (!label) return;
+              menuReturnLabel.current = null;
+              const opener = Array.from(
+                (event.currentTarget as HTMLElement).querySelectorAll<HTMLButtonElement>("button"),
+              ).find((button) => button.textContent === label);
+              if (opener) {
+                event.preventDefault();
+                opener.focus();
+              }
+            }}
+            onCloseAutoFocus={(event) => {
+              event.preventDefault();
+              if (modal || inspection) return;
+              if (route === "play") returnFocus(pauseOpener.current);
+              else
+                returnFocus(root.current?.querySelector<HTMLElement>("main button:not(:disabled)") ?? null);
+            }}
+          >
+            <DialogTitle className="sr-only">Pause menu</DialogTitle>
+            <DialogDescription className="sr-only">Game menu</DialogDescription>
+            {menuItems(false)}
+            {import.meta.env.DEV && game.phase === "battle" ? (
+              <Button
+                variant="outline"
                 onClick={() => {
-                  setReveals((old) => old.slice(1));
-                  if (reveals.length === 1) setRoute("home");
+                  if (send({ type: "devWinBattle" })) setMenu(false);
                 }}
               >
-                Continue
+                Skip combat
               </Button>
-            </main>
-          ) : null}
-          {route === "talents" ? <Talents game={game} send={send} back={backFromPage} /> : null}
-          {route === "collection" ? (
-            <Collection game={game} inspect={setInspection} back={backFromPage} />
-          ) : null}
-          <div className="play-surface" hidden={route !== "play"} inert={route !== "play"}>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="menu-button"
-              aria-label="Open menu"
-              onClick={openMenu}
-            >
-              <Menu aria-hidden="true" />
-            </Button>
-            {game.phase === "draft" ? (
-              <Draft game={game} send={send} inspect={setInspection} />
-            ) : game.phase === "teamSelection" ? (
-              <TeamSelection game={game} send={send} inspect={setInspection} deck={() => openModal("deck")} />
-            ) : game.phase === "support" ? (
-              <SupportScreen game={game} send={send} />
-            ) : game.phase === "campfire" ? (
-              <Campfire game={game} send={send} />
-            ) : game.phase === "battle" ? (
-              <BattleScreen
-                key={game.encounter}
-                clearSelection={
-                  view.overlayActive || menu || modal !== null || inspection !== null || autoplay
-                }
-                onManualStart={() => setAutoplay(false)}
-                openPile={(pile) => openModal(pile)}
-                actions={
-                  <>
-                    <label className="autoplay-control" htmlFor="autoplay">
-                      <span>Auto-play</span>
-                      <Switch id="autoplay" checked={autoplay} onCheckedChange={setAutoplay} />
-                    </label>
-                    <Button
-                      variant="outline"
-                      className="swap-trigger"
-                      disabled={!game.reserves.some((c) => c.health > 0)}
-                      onClick={() => openModal("swap")}
-                    >
-                      <ArrowLeftRight aria-hidden="true" />
-                      Swap
-                    </Button>
-                  </>
-                }
-                game={game}
-                send={send}
-                inspect={setInspection}
-                controls={gameControls}
-                bursts={bursts}
-                onDenied={deny}
-                controller={mode === "controller"}
-                navigateFocus={navigation}
-              />
-            ) : game.phase === "recruit" || game.phase === "boon" ? (
-              <Rewards
-                key={`${game.encounter}-${game.phase}`}
-                game={game}
-                send={send}
-                inspect={setInspection}
-              />
-            ) : (
-              <JourneyResults game={game} home={leaveResults} />
-            )}
-            <div className="sr-only" role="log" aria-live="polite">
-              {view.events.map((event) => event.text).join(" ")}
-            </div>
-          </div>
-        </>
-      )}
-      <Dialog open={menu && !modal && !inspection} onOpenChange={setMenu}>
-        <DialogContent
-          className="menu-panel"
-          closeLabel="Close menu"
-          onOpenAutoFocus={(event) => {
-            const label = menuReturnLabel.current;
-            if (!label) return;
-            menuReturnLabel.current = null;
-            const opener = Array.from(
-              (event.currentTarget as HTMLElement).querySelectorAll<HTMLButtonElement>("button"),
-            ).find((button) => button.textContent === label);
-            if (opener) {
-              event.preventDefault();
-              opener.focus();
-            }
-          }}
-          onCloseAutoFocus={(event) => {
-            event.preventDefault();
-            if (!modal && !inspection && route === "play") returnFocus(pauseOpener.current);
-          }}
-        >
-          <DialogTitle className="sr-only">Pause menu</DialogTitle>
-          <DialogDescription className="sr-only">Game menu</DialogDescription>
-          {menuItems(false)}
-          {import.meta.env.DEV && game.phase === "battle" ? (
-            <Button
-              variant="outline"
-              onClick={() => {
-                if (send({ type: "devWinBattle" })) setMenu(false);
-              }}
-            >
-              Skip combat
-            </Button>
-          ) : null}
-        </DialogContent>
-      </Dialog>
-      {overlays}
-    </div>
+            ) : null}
+          </DialogContent>
+        </Dialog>
+        {overlays}
+      </div>
+    </SurfaceTransition>
   );
 }

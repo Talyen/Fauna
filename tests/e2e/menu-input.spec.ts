@@ -15,7 +15,7 @@ test("pointer menu transitions never display focus indicators", async ({ page })
   await page.keyboard.press("s");
   const end = page.getByRole("button", { name: "Main menu", exact: true });
   await expect(end).toBeFocused();
-  await expect(end).toHaveCSS("outline-style", "dashed");
+  await expect(end).toHaveCSS("outline-style", "solid");
   await page.mouse.move(20, 20);
   await expect(end).toHaveCSS("outline-style", "none");
   await page.screenshot({ path: "reports/menu-pointer.png" });
@@ -303,8 +303,9 @@ test("pointer use has no native or shadcn focus decoration in settings, tabs or 
   await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
   await noDecoration();
   await page.getByRole("button", { name: "Talents", exact: true }).click();
-  await page.getByRole("tab", { name: "Fire / Burn", exact: true }).click();
+  await page.getByRole("button", { name: "Fire / Burn talents", exact: true }).click();
   await noDecoration();
+  await page.keyboard.press("Escape");
   await page.keyboard.press("Escape");
   await page.getByRole("button", { name: "End journey", exact: true }).click();
   await expect(page.getByRole("button", { name: "Cancel", exact: true })).toBeFocused();

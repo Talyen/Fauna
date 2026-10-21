@@ -1,3 +1,4 @@
+import { Plus } from "lucide-react";
 import { useState } from "react";
 import { CreatureCard } from "./cards";
 import { species } from "../game/content";
@@ -64,7 +65,9 @@ export function RosterPicker({
         <div className="swap-roster swap-reserves" data-nav-row>
           {reserves.map((c) => tile(c, false))}
           {Array.from({ length: 2 - reserves.length }, (_, index) => (
-            <div key={index} className="empty-reserve" aria-hidden="true" />
+            <div key={index} className="empty-reserve" role="img" aria-label="Empty reserve slot">
+              <Plus aria-hidden="true" />
+            </div>
           ))}
         </div>
       </section>

@@ -61,7 +61,8 @@ describe("floating feedback", () => {
     expect(merged[0]!.id).toBe(first[0]!.id);
     expect(first[0]!.entries[0]!.amount).toBe(4);
     expect(events[0]!.amount).toBe(4);
-    expect(appendFeedback(merged, [], 3, 1400)).toEqual([]);
+    expect(appendFeedback(merged, [], 3, 999)).not.toEqual([]);
+    expect(appendFeedback(merged, [], 3, 1000)).toEqual([]);
   });
   it("separates types, recipients and directions, bounds bursts, and excludes prose", () => {
     const event = {

@@ -1,6 +1,6 @@
 # Phone design decisions
 
-User choices from the text review on 2026-10-20. These supplement the earlier interactive studies. They record design intent only: production adoption and rendered/context acceptance remain pending. Continue with short text options while the user is on a phone; do not require HTML access or screenshots for each decision. Preserve registered shadcn/ui controls and their native behavior.
+User choices from the text review on 2026-10-20. These supplement the earlier interactive studies. Approved interaction decisions are now adopted through the [shared design system](../Docs/DESIGN_SYSTEM.md); complete rendered/context acceptance remains pending. Continue with short text options while the user is on a phone; do not require HTML access or screenshots for each decision. Preserve registered shadcn/ui controls and their native behavior.
 
 ## Tabs
 
@@ -125,7 +125,7 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 ## Hand motion
 
 - Use [Alchemy's draw, discard and hand reflow choreography](hand-motion/README.md), including its curved flip flights, batch speed and 320ms interrupted-pose-aware reflow. This supersedes the unanswered proposed 150ms hand reflow and independently chosen draw/discard options.
-- Retain Fauna's fixed card sizes, fan layout, shadcn controls and nonblocking committed gameplay. Production adoption and rendered acceptance remain pending.
+- Retain Fauna's fixed card sizes, fan layout, shadcn controls and nonblocking committed gameplay. Production choreography is implemented; full rendered acceptance remains pending.
 
 ## Draw and Discard Piles
 

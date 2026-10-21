@@ -28,6 +28,8 @@ export function Progress({
       value={value}
       max={maximum}
       data-combat-tone={tone}
+      data-forecast={previous !== undefined || undefined}
+      data-direction={previous === undefined ? undefined : value < previous ? "loss" : "gain"}
     >
       <span className="progress-previous" />
     </ShadcnProgress>

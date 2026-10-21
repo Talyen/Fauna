@@ -42,20 +42,20 @@
 .mana-full {
   opacity: 1;
   filter: brightness(0.78) saturate(0.8);
-  transition: opacity 260ms ease-out;
+  transition: opacity var(--motion-fast) ease-out;
 }
 .mana-empty {
   opacity: 0;
   filter: grayscale(1) brightness(0.48);
-  transition: opacity 260ms ease-out;
+  transition: opacity var(--motion-fast) ease-out;
 }
 .mana-gem[data-filled="false"] .mana-full {
   opacity: 0;
-  transition-duration: 180ms;
+  transition-duration: var(--motion-fast);
 }
 .mana-gem[data-filled="false"] .mana-empty {
   opacity: 1;
-  transition-duration: 180ms;
+  transition-duration: var(--motion-fast);
 }
 .mana-glint {
   mask-image: var(--mana-full-image);
@@ -68,7 +68,7 @@
 }
 .mana-gem:hover .mana-glint,
 :root[data-focus="visible"] .mana:focus .mana-glint {
-  animation: mana-glint 650ms ease-out both;
+  animation: mana-glint var(--motion-mana-glint) ease-out both;
 }
 @keyframes mana-glint {
   0% {

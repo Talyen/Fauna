@@ -37,6 +37,25 @@ export function sourceViolations(file, source) {
     )
       fail("Use semantic theme tokens instead of named color literals.");
   }
+  if (file.endsWith(".css")) {
+    if (file !== "src/ui/design-system.css" && /\.ui-(?:tab|switch|slider|radio)\b/.test(source))
+      fail("Shared shadcn state styling belongs in src/ui/design-system.css; screens own layout only.");
+    for (const [, selector, declarations] of source.matchAll(/([^{}]+)\{([^{}]*)\}/g))
+      if (
+        selector.includes(":hover") &&
+        /(?:\.selected|aria-(?:pressed|selected)=["']true|data-state=["'](?:active|checked))/.test(
+          selector,
+        ) &&
+        /border-width\s*:|outline-width\s*:|box-shadow\s*:[^;]*inset/.test(declarations)
+      )
+        fail("Selected hover must not thicken a border or selection ring.");
+      else if (
+        /\.ui-tab\b/.test(selector) &&
+        selector.includes(":hover") &&
+        /data-state=["']active/.test(selector)
+      )
+        fail("Selected tabs retain their resting appearance on hover.");
+  }
   if (!/\.tsx?$/.test(file)) return violations;
   const primitive = primitives.get(file);
   if (file.startsWith("src/components/ui/") && !primitive)
@@ -53,6 +72,14 @@ export function sourceViolations(file, source) {
   )
     fail("Retain the registered shadcn provenance and upstream behavior owner.");
   if (!primitive) {
+    if (
+      /(?:hover|focus-visible|active|disabled|data-\[state=)[^"'\s]*:(?:bg|border|ring|outline|scale|opacity|duration)-/.test(
+        source,
+      )
+    )
+      fail(
+        "Use shared shadcn variants for control interaction states, rather than screen-local state utilities.",
+      );
     if (
       /<(?:button|input|select|textarea|dialog|details|summary|progress|meter)(?=[\s/>])/.test(source) ||
       /(?:createElement|jsx|jsxs)\s*\(\s*["'](?:button|input|select|textarea|dialog)["']/.test(source)

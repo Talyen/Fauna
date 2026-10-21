@@ -1,3 +1,5 @@
+import { Loading } from "./loading";
+import { TriangleAlert } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
 import type { Session } from "../application/session";
@@ -77,7 +79,13 @@ export function DisplaySettings({ session }: { session: Session }) {
           </label>
         ))}
       </RadioGroup>
-      {state.error ? <p role="alert">{state.error}</p> : null}
+      {busy ? <Loading /> : null}
+      {state.error ? (
+        <p role="alert">
+          <TriangleAlert className="error-icon" aria-hidden="true" />
+          {state.error}
+        </p>
+      ) : null}
     </section>
   );
 }
@@ -87,7 +95,12 @@ export function CloudStatus({ session }: { session: Session }) {
     <section>
       <h3 className="settings-heading">Steam Cloud</h3>
       <p role="status">{cloud.status}</p>
-      {cloud.error ? <p>{cloud.error}</p> : null}
+      {cloud.error ? (
+        <p role="alert">
+          <TriangleAlert className="error-icon" aria-hidden="true" />
+          {cloud.error}
+        </p>
+      ) : null}
       {["Pending", "Conflict"].includes(cloud.status) ? (
         <Button variant="outline" onClick={() => void session.cloud.retry()}>
           Retry cloud sync

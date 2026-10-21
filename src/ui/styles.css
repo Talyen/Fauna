@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./tokens.css";
+@import "./design-system.css";
 @theme inline {
   --text-base: var(--text-body);
   --text-sm: var(--text-secondary);
@@ -59,7 +60,7 @@ p {
 h1,
 h2 {
   font-size: var(--text-title);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.3;
 }
 strong {
@@ -108,7 +109,7 @@ strong {
   background: var(--notice);
 }
 .error-banner {
-  color: var(--error);
+  color: var(--foreground);
 }
 .notice {
   color: var(--muted-foreground);
@@ -196,8 +197,8 @@ strong {
   height: var(--space-4);
 }
 .draft-grid {
-  display: grid;
-  grid-template-columns: repeat(3, var(--art-landscape-width));
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: var(--space-5);
   max-width: calc(var(--art-landscape-width) * 3 + var(--space-5) * 2);
@@ -237,19 +238,19 @@ strong {
 }
 .selected {
   box-shadow:
-    0 0 0 3px var(--background),
-    0 0 0 5px var(--selected);
+    0 0 0 var(--selection-gap) var(--background),
+    0 0 0 calc(var(--selection-gap) + var(--selection-width)) var(--selected);
 }
 .knocked-out .creature-card {
-  opacity: 0.3;
+  opacity: var(--unavailable-opacity);
   filter: grayscale(1);
 }
 .creature-card[aria-disabled="true"],
 .action-card[aria-disabled="true"] {
-  opacity: 0.45;
+  opacity: var(--unavailable-opacity);
 }
 :root[data-focus="visible"] button:focus {
-  outline: 2px dashed var(--selected);
+  outline: 2px solid var(--selected);
   outline-offset: 6px;
 }
 .game-button {
@@ -273,16 +274,14 @@ strong {
   pointer-events: none;
   transition: border-color var(--motion-hover) ease-out;
 }
-.game-button:is(.creature-card, .action-card):not(.selected):not(:disabled):not([aria-disabled="true"]):hover,
-:root[data-focus="visible"]
-  .game-button:is(.creature-card, .action-card):not(:disabled):not([aria-disabled="true"]):focus {
+.game-button:is(.creature-card, .action-card):not(.selected):not(:disabled):not(
+    [aria-disabled="true"]
+  ):hover {
   border-color: var(--primary);
 }
 .game-button:is(.creature-card, .action-card):not(.selected):not(:disabled):not(
     [aria-disabled="true"]
-  ):hover::after,
-:root[data-focus="visible"]
-  .game-button:is(.creature-card, .action-card):not(:disabled):not([aria-disabled="true"]):focus::after {
+  ):hover::after {
   border-color: var(--primary);
 }
 .battle-screen {
@@ -299,13 +298,16 @@ strong {
 }
 .enemy-row,
 .player-row {
+  flex-shrink: 0;
   display: flex;
-  justify-content: center;
+  justify-content: safe center;
+  overflow-x: auto;
   gap: var(--screen-section-gap);
 }
 .enemy-row .creature-wrap,
 .player-row .creature-wrap {
   width: var(--battle-creature-width);
+  flex: 0 0 var(--battle-creature-width);
 }
 .enemy-row .creature-card,
 .player-row .creature-card {
@@ -313,21 +315,15 @@ strong {
 }
 .target-control {
   display: flex;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: center;
   gap: var(--screen-item-gap);
   min-height: var(--control-height);
-  position: absolute;
-  top: calc(
-    (100% - var(--battle-hand-height) + var(--hand-rest-inset) - var(--screen-item-gap)) / 2 - var(--space-10)
-  );
-  bottom: auto;
-  left: 50%;
-  transform: translateX(-50%);
   z-index: 4;
 }
 .target-control:empty {
-  display: none;
+  visibility: hidden;
 }
 .hand-section {
   position: fixed;
@@ -419,10 +415,10 @@ strong {
   width: 100%;
 }
 .progress-track {
-  height: 4px;
+  height: var(--progress-height);
   position: relative;
   background: var(--muted);
-  border-radius: var(--radius);
+  border-radius: var(--radius-round);
   overflow: hidden;
 }
 .progress-track > span {
@@ -781,18 +777,6 @@ strong {
 .locked-species {
   filter: grayscale(1);
 }
-.keyword-tabs {
-  display: flex;
-  overflow-x: auto;
-  justify-content: flex-start;
-  gap: var(--space-1);
-  padding: var(--space-2);
-  margin-bottom: var(--space-6);
-}
-.keyword-tabs button {
-  font-size: var(--text-secondary);
-  padding: var(--space-2) var(--space-3);
-}
 .talent-progress {
   margin-bottom: var(--space-2);
 }
@@ -869,9 +853,9 @@ strong {
   );
 }
 .deck-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  justify-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--space-4);
   margin-top: var(--space-6);
 }
@@ -1027,6 +1011,7 @@ strong {
 }
 .combat-burst {
   display: flex;
+  flex-direction: column;
   gap: var(--space-2);
   align-items: center;
   white-space: nowrap;
@@ -1107,51 +1092,6 @@ strong {
   gap: var(--screen-section-gap);
   margin-top: var(--screen-section-gap);
 }
-/* Visible tab borders retain Radix selection and keyboard navigation. */
-.settings-tabs {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: safe center;
-  gap: var(--screen-item-gap);
-  width: fit-content;
-  max-width: 100%;
-  margin-inline: auto;
-  overflow-x: auto;
-  background: transparent;
-  border: 0;
-  padding: var(--space-2);
-}
-.settings-tabs button {
-  flex-shrink: 0;
-  gap: var(--space-2);
-  border: 2px solid var(--border);
-  padding-inline: var(--space-3);
-  background: transparent;
-  box-shadow: none;
-  color: var(--muted-foreground);
-  font-weight: 400;
-  transition:
-    color 150ms,
-    border-color 150ms,
-    background-color 150ms;
-}
-.settings-tabs button[data-state="active"] {
-  background: var(--background);
-  border-color: var(--primary);
-  color: var(--foreground);
-  font-weight: 400;
-}
-.settings-tabs button[data-state="inactive"]:hover {
-  background: var(--muted);
-  border-color: var(--primary);
-  color: var(--foreground);
-}
-:root[data-focus="visible"] .settings-tabs button:focus {
-  outline: 2px solid var(--primary);
-  outline-offset: 3px;
-  border-color: var(--border);
-  box-shadow: none;
-}
 .settings-panel {
   margin-top: 0;
   grid-area: 2 / 1;
@@ -1206,7 +1146,7 @@ strong {
   transform: none;
 }
 .creature-wrap:not(.knocked-out) .creature-card.invalid-target {
-  opacity: 0.7;
+  opacity: var(--unavailable-opacity);
 }
 .health-forecast {
   position: relative;
@@ -1249,10 +1189,10 @@ strong {
   flex-direction: column;
   gap: var(--space-6);
 }
-.swap-dialog h2 {
-  font-size: var(--text-secondary);
-  color: var(--muted-foreground);
-  font-weight: 400;
+.swap-dialog section h2 {
+  font-size: var(--text-heading);
+  color: var(--foreground);
+  font-weight: 600;
   margin-bottom: var(--space-3);
 }
 .swap-roster {
@@ -1463,6 +1403,7 @@ strong {
   font-size: var(--text-secondary);
 }
 .battle-piles {
+  flex-shrink: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -1535,4 +1476,40 @@ strong {
   font-size: var(--text-title);
   font-weight: 600;
   color: var(--foreground);
+}
+
+/* Fixed-size surfaces flow and scroll when a complete battle cannot fit. */
+@media (max-width: 1100px), (max-height: 850px) {
+  .in-battle .menu-button {
+    position: relative;
+    inset: auto;
+    display: block;
+    margin-left: auto;
+    margin-bottom: var(--screen-item-gap);
+  }
+  .battle-screen {
+    height: auto;
+    min-height: var(--page-content-height);
+    padding-bottom: var(--space-6);
+    overflow: visible;
+  }
+  .hand-section {
+    position: static;
+    pointer-events: auto;
+    clip-path: none;
+  }
+  .hand {
+    justify-content: safe center;
+    overflow: auto;
+    height: calc(var(--battle-hand-height) + var(--space-12) + var(--space-10));
+    padding: var(--space-6);
+  }
+  .hand-toolbar {
+    position: static;
+    flex-wrap: wrap;
+  }
+  .battle-piles {
+    position: static;
+    pointer-events: auto;
+  }
 }

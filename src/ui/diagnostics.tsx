@@ -1,3 +1,4 @@
+import { TriangleAlert } from "lucide-react";
 import { Component, type ReactNode } from "react";
 import type { Diagnostics } from "../application/diagnostics";
 
@@ -15,7 +16,10 @@ export class GameErrorBoundary extends Component<
   render() {
     return this.state.failed ? (
       <main className="recovery">
-        <h1>Fauna could not continue</h1>
+        <h1>
+          <TriangleAlert className="error-icon" aria-hidden="true" />
+          Fauna could not continue
+        </h1>
         <p>Close and reopen the game to retry.</p>
       </main>
     ) : (

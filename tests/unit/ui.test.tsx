@@ -11,7 +11,7 @@ import { BOONS } from "../../src/game/progression";
 import { TargetPreview } from "../../src/ui/target-preview";
 // @vitest-environment jsdom
 import { beforeEach, afterEach, describe, it, expect, vi } from "vitest";
-import { render, screen, cleanup, act } from "@testing-library/react";
+import { render, screen, cleanup, act, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { App } from "../../src/ui/App";
 import { createSession } from "../../src/application/session";
@@ -102,7 +102,13 @@ describe("player interface", () => {
     expect(screen.getByRole("heading", { name: "Victory", level: 1 })).toBeTruthy();
     expect(screen.getByRole("heading", { name: "Choose a Recruit" })).toBeTruthy();
     expect(document.querySelectorAll(".recruit-options .creature-card")).toHaveLength(3);
-    expect(screen.getByLabelText("Last battle earnings").textContent).toContain("+20 Gold");
+    expect(screen.getByText("20", { selector: ".sr-only" })).toBeTruthy();
+    await waitFor(() =>
+      expect(
+        screen.getByLabelText("Last battle earnings").querySelector(".animated-number .number-value")
+          ?.textContent,
+      ).toBe("20"),
+    );
     const progress = screen.getByRole("progressbar", { name: "Nature level 2 progress" });
     expect(progress.getAttribute("aria-valuenow")).toBe("14");
     expect(progress.getAttribute("aria-valuemax")).toBe("30");

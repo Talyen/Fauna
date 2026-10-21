@@ -1,10 +1,49 @@
+import { motionValue } from "./motion-values";
+import { ResultPresentation } from "./result-presentation";
+import { EmptyState } from "./empty-state";
 import { canVisitCampfire } from "../game/support";
 import { SupportOffer } from "./support-screen";
 import { assetUrl } from "./assets";
 import { KeywordText } from "./keyword-text";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/ui/tabs";
-import { useLayoutEffect, useRef, useState } from "react";
-import { ArrowLeft, ChevronLeft, ChevronRight, Check, Sparkles } from "lucide-react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import {
+  LayoutGrid,
+  BookOpen,
+  LockKeyhole,
+  ArrowLeft,
+  ChevronLeft,
+  ChevronRight,
+  Check,
+  Swords,
+  ShieldPlus,
+  Flame,
+  Anvil,
+  Snowflake,
+  ShieldHalf,
+  Zap,
+  ShieldOff,
+  FlaskConical,
+  Hourglass,
+  Leaf,
+  Sprout,
+  Sun,
+  HeartHandshake,
+  Droplets,
+  Skull,
+  Shield,
+  ShieldCheck,
+  HeartPlus,
+  HeartPulse,
+  Shell,
+  BrickWall,
+  Wind,
+  Footprints,
+  Heart,
+  Link,
+  Gem,
+  Battery,
+} from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../components/ui/tooltip";
 import { ActionCard, CreatureCard } from "./cards";
@@ -22,10 +61,40 @@ import {
   type Keyword,
 } from "../game/progression";
 import type { Command, GameState } from "../game/types";
-import type { Inspection } from "./battle-screen";
+import type { Inspection, Controls } from "./battle-screen";
 import { Progress } from "./progress";
 import { BattleEarnings } from "./battle-earnings";
 import { BIOMES, encounterSource, location } from "../game/destinations";
+const talentSymbols = [
+  Swords,
+  ShieldPlus,
+  Flame,
+  Anvil,
+  Snowflake,
+  ShieldHalf,
+  Zap,
+  ShieldOff,
+  FlaskConical,
+  Hourglass,
+  Leaf,
+  Sprout,
+  Sun,
+  HeartHandshake,
+  Droplets,
+  Skull,
+  Shield,
+  ShieldCheck,
+  HeartPlus,
+  HeartPulse,
+  Shell,
+  BrickWall,
+  Wind,
+  Footprints,
+  Heart,
+  Link,
+  Gem,
+  Battery,
+];
 type Props = { game: GameState; send: (command: Command) => boolean; inspect: (item: Inspection) => void };
 export function TeamSelection({ game, send, inspect, deck }: Props & { deck: () => void }) {
   if (game.expedition) {
@@ -154,106 +223,170 @@ export function Rewards({ game, send, inspect }: Props) {
   const reward = game.reward!;
   const recruiting = game.phase === "recruit";
   return (
-    <main className="reward-screen">
-      <header className="reward-heading">
-        <h1>Victory</h1>
-        <BattleEarnings game={game} detailed />
-      </header>
-      <section className="reward-choices" ref={choices}>
-        <div className="reward-choice-content">
-          <h2>{recruiting ? (incoming ? "Replace a creature" : "Choose a Recruit") : "Choose a Boon"}</h2>
-          {recruiting ? (
-            <div className="recruit-options">
-              {(incoming
-                ? [...game.team, ...game.reserves].map((creature) => ({
-                    kind: creature.species,
-                    id: creature.id,
-                  }))
-                : reward.recruits.map((kind, index) => ({ kind, id: String(index) }))
-              ).map(({ kind, id }) => (
-                <div className="reward-option" key={id}>
-                  <CreatureCard
-                    kind={kind}
-                    actorId={incoming ? id : undefined}
-                    label={incoming ? `Release ${species(kind).name}` : `Recruit ${species(kind).name}`}
-                    onInspect={() =>
-                      inspect(incoming ? { species: kind, creatureId: id } : { species: kind })
-                    }
-                    onClick={() => {
-                      if (incoming) send({ type: "recruit", species: incoming, replace: id });
-                      else if (game.roster.length === 5) {
-                        returnTo.current = Number(id);
-                        setIncoming(kind);
-                      } else send({ type: "recruit", species: kind });
-                    }}
-                  />
-                  <h2>{species(kind).name}</h2>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="boon-options">
-              {reward.boons.map((id) => {
-                const boon = BOONS.find((r) => r.id === id)!;
-                return (
+    <ResultPresentation>
+      <main className="reward-screen">
+        <header className="reward-heading">
+          <h1>Victory</h1>
+          <BattleEarnings game={game} detailed />
+        </header>
+        <section className="reward-choices" ref={choices}>
+          <div className="reward-choice-content">
+            <h2>{recruiting ? (incoming ? "Replace a creature" : "Choose a Recruit") : "Choose a Boon"}</h2>
+            {recruiting ? (
+              <div className="recruit-options">
+                {(incoming
+                  ? [...game.team, ...game.reserves].map((creature) => ({
+                      kind: creature.species,
+                      id: creature.id,
+                    }))
+                  : reward.recruits.map((kind, index) => ({ kind, id: String(index) }))
+                ).map(({ kind, id }) => (
                   <div className="reward-option" key={id}>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <ArtCard
-                          aspect="action"
-                          artwork={assetUrl(`boon.${id}`)}
-                          className="boon-choice"
-                          aria-label={`Choose ${boon.name}`}
-                          onClick={() => send({ type: "chooseBoon", boon: id })}
-                        />
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <strong>{boon.name}</strong>
-                        <p>{boon.text}</p>
-                      </TooltipContent>
-                    </Tooltip>
-                    <h2>{boon.name}</h2>
+                    <CreatureCard
+                      kind={kind}
+                      actorId={incoming ? id : undefined}
+                      label={incoming ? `Release ${species(kind).name}` : `Recruit ${species(kind).name}`}
+                      onInspect={() =>
+                        inspect(incoming ? { species: kind, creatureId: id } : { species: kind })
+                      }
+                      onClick={() => {
+                        if (incoming) send({ type: "recruit", species: incoming, replace: id });
+                        else if (game.roster.length === 5) {
+                          returnTo.current = Number(id);
+                          setIncoming(kind);
+                        } else send({ type: "recruit", species: kind });
+                      }}
+                    />
+                    <h2>{species(kind).name}</h2>
                   </div>
-                );
-              })}
-            </div>
+                ))}
+              </div>
+            ) : (
+              <div className="boon-options">
+                {reward.boons.map((id) => {
+                  const boon = BOONS.find((r) => r.id === id)!;
+                  return (
+                    <div className="reward-option" key={id}>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <ArtCard
+                            aspect="action"
+                            artwork={assetUrl(`boon.${id}`)}
+                            className="boon-choice"
+                            aria-label={`Choose ${boon.name}`}
+                            onClick={() => send({ type: "chooseBoon", boon: id })}
+                          />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <strong>{boon.name}</strong>
+                          <p>{boon.text}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                      <h2>{boon.name}</h2>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </section>
+        <footer className="reward-footer">
+          {incoming ? (
+            <Button variant="outline" onClick={() => setIncoming(null)}>
+              Cancel
+            </Button>
+          ) : (
+            <Button variant="ghost" onClick={() => send({ type: recruiting ? "skipRecruit" : "skipBoon" })}>
+              Skip
+            </Button>
           )}
-        </div>
-      </section>
-      <footer className="reward-footer">
-        {incoming ? (
-          <Button variant="outline" onClick={() => setIncoming(null)}>
-            Cancel
-          </Button>
-        ) : (
-          <Button variant="ghost" onClick={() => send({ type: recruiting ? "skipRecruit" : "skipBoon" })}>
-            Skip
-          </Button>
-        )}
-      </footer>
-    </main>
+        </footer>
+      </main>
+    </ResultPresentation>
   );
 }
-export function Talents({ game, send, back }: { game: GameState; send: Props["send"]; back: () => void }) {
-  const [keyword, setKeyword] = useState<Keyword>("physical");
-  const p = keywordProgress(game.keywordXP[keyword] ?? 0);
+export function Talents({
+  game,
+  send,
+  back,
+  controls,
+}: {
+  game: GameState;
+  send: Props["send"];
+  back: () => void;
+  controls?: Controls;
+}) {
+  const [keyword, setKeyword] = useState<Keyword | null>(null);
+  const [purchased, setPurchased] = useState<string | null>(null);
+  const lastKeyword = useRef<Keyword | null>(null);
+  const screen = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (!purchased) return;
+    const timer = setTimeout(() => setPurchased(null), motionValue("--motion-battle"));
+    return () => clearTimeout(timer);
+  }, [purchased]);
+  useLayoutEffect(() => {
+    if (keyword) {
+      lastKeyword.current = keyword;
+      returnFocus(screen.current?.querySelector<HTMLElement>(".talent-node") ?? null);
+    } else if (lastKeyword.current)
+      returnFocus(
+        screen.current?.querySelector<HTMLElement>(`[data-talent-keyword="${lastKeyword.current}"]`) ?? null,
+      );
+    if (controls)
+      controls.current = (action) => {
+        if (action === "back" && keyword) {
+          setKeyword(null);
+          return true;
+        }
+        return false;
+      };
+    return () => {
+      if (controls) controls.current = null;
+    };
+  }, [keyword, controls]);
+  const p = keywordProgress(keyword ? (game.keywordXP[keyword] ?? 0) : 0);
+  const artwork: Record<Keyword, string> = {
+    physical: "physical",
+    burn: "fire",
+    freeze: "ice",
+    stun: "lightning",
+    poison: "poison",
+    nature: "nature",
+    light: "light",
+    bleed: "physical",
+    block: "block",
+    heal: "heal",
+    armor: "block",
+    dodge: "nature",
+    leech: "light",
+    mana: "ice",
+  };
   return (
-    <main className="talents-screen">
+    <main className="talents-screen" ref={screen}>
       <header className="page-heading">
-        <h1>Talents</h1>
-        <Button variant="ghost" onClick={back}>
+        <h1>{keyword ? keywordLabel(keyword) : "Talents"}</h1>
+        <Button variant="outline" onClick={() => (keyword ? setKeyword(null) : back())}>
           Back
         </Button>
       </header>
-      <Tabs value={keyword} onValueChange={(value) => setKeyword(value as Keyword)}>
-        <TabsList className="keyword-tabs" aria-label="Talent keywords">
+      {keyword === null ? (
+        <div className="talent-overview">
           {KEYWORDS.map((id) => (
-            <TabsTrigger key={id} value={id}>
-              <span data-keyword={id}>{keywordLabel(id)}</span>
-            </TabsTrigger>
+            <section className="reward-option" key={id}>
+              <ArtCard
+                aspect="action"
+                artwork={assetUrl(`keyword.${artwork[id]}`)}
+                data-talent-keyword={id}
+                aria-label={`${keywordLabel(id)} talents`}
+                onClick={() => setKeyword(id)}
+              />
+              <h2>{keywordLabel(id)}</h2>
+            </section>
           ))}
-        </TabsList>
-        <TabsContent value={keyword}>
+        </div>
+      ) : (
+        <>
           <div className="talent-progress">
             <span>{availablePoints(game, keyword)} points available</span>
             <span>
@@ -272,6 +405,7 @@ export function Talents({ game, send, back }: { game: GameState; send: Props["se
             ].map((row) => (
               <div className="talent-row" key={row} data-nav-row aria-label={`Row ${row + 1}`}>
                 {TALENTS.filter((t) => t.keyword === keyword && t.row === row).map((t) => {
+                  const TalentSymbol = talentSymbols[TALENTS.indexOf(t)]!;
                   const owned = game.talents.includes(t.id),
                     available = canBuyTalent(game, t.id);
                   const earlierRowsOwned = TALENTS.filter(
@@ -290,19 +424,21 @@ export function Talents({ game, send, back }: { game: GameState; send: Props["se
                     <Tooltip key={t.id}>
                       <TooltipTrigger asChild>
                         <Button
-                          variant="ghost"
+                          variant="outline"
                           className="talent-node"
                           aria-label={`${t.name}${owned ? ", unlocked" : ""}`}
                           aria-disabled={!available}
                           aria-describedby={`${t.id}-effect ${t.id}-status`}
                           data-owned={owned}
+                          data-keyword={keyword}
+                          data-purchased={purchased === t.id || undefined}
                           data-available={available}
                           onClick={() => {
-                            if (available) send({ type: "buyTalent", talentId: t.id });
+                            if (available && send({ type: "buyTalent", talentId: t.id })) setPurchased(t.id);
                           }}
                         >
-                          <span>
-                            {owned ? <Check aria-hidden="true" /> : <Sparkles aria-hidden="true" />}
+                          <span data-keyword={keyword}>
+                            <TalentSymbol className="talent-icon" aria-hidden="true" />
                           </span>
                           <span className="talent-name">{t.name}</span>
                           <span className="talent-effect" id={`${t.id}-effect`}>
@@ -334,14 +470,14 @@ export function Talents({ game, send, back }: { game: GameState; send: Props["se
               disabled={!game.talents.some((id) => id.startsWith(`${keyword}.`))}
               onClick={() => {
                 if (send({ type: "resetTalents", keyword }))
-                  document.querySelector<HTMLElement>('[role="tab"][data-state="active"]')?.focus();
+                  screen.current?.querySelector<HTMLElement>(".talent-node")?.focus();
               }}
             >
               Reset category
             </Button>
           </footer>
-        </TabsContent>
-      </Tabs>
+        </>
+      )}
     </main>
   );
 }
@@ -358,6 +494,19 @@ export function Collection({
   const [page, setPage] = useState(0);
   const [columns, setColumns] = useState(3);
   const gridRef = useRef<HTMLDivElement>(null);
+  const paging = useRef<HTMLElement>(null);
+  const pagingFocus = useRef(false);
+  useLayoutEffect(() => {
+    if (!pagingFocus.current) return;
+    pagingFocus.current = false;
+    returnFocus(
+      paging.current?.querySelector<HTMLElement>("button:not(:disabled)") ??
+        gridRef.current
+          ?.closest(".collection-tabs")
+          ?.querySelector<HTMLElement>('[role="tab"][data-state="active"]') ??
+        null,
+    );
+  }, [page, filter, columns]);
   useLayoutEffect(() => {
     const grid = gridRef.current;
     if (!grid) return;
@@ -366,7 +515,11 @@ export function Collection({
       const width = tile?.getBoundingClientRect().width ?? 0;
       if (!width) return;
       const gap = parseFloat(getComputedStyle(grid).columnGap) || 0;
-      setColumns(Math.max(1, Math.min(3, Math.floor((grid.clientWidth + gap + 0.5) / (width + gap)))));
+      const next = Math.max(1, Math.min(3, Math.floor((grid.clientWidth + gap + 0.5) / (width + gap))));
+      setColumns((current) => {
+        if (next !== current && paging.current?.contains(document.activeElement)) pagingFocus.current = true;
+        return next;
+      });
     };
     measure();
     const observer = new ResizeObserver(measure);
@@ -398,9 +551,18 @@ export function Collection({
         }}
       >
         <TabsList aria-label="Collection filter">
-          <TabsTrigger value="all">All</TabsTrigger>
-          <TabsTrigger value="known">Known</TabsTrigger>
-          <TabsTrigger value="unknown">Unknown</TabsTrigger>
+          <TabsTrigger value="all">
+            <LayoutGrid aria-hidden="true" />
+            All
+          </TabsTrigger>
+          <TabsTrigger value="known">
+            <BookOpen aria-hidden="true" />
+            Known
+          </TabsTrigger>
+          <TabsTrigger value="unknown">
+            <LockKeyhole aria-hidden="true" />
+            Unknown
+          </TabsTrigger>
         </TabsList>
         <TabsContent className="collection-content" value={filter}>
           <div className="collection-gallery">
@@ -426,9 +588,9 @@ export function Collection({
                 ),
               )}
             </div>
-            {ordered.length === 0 ? <p>No creatures in this view.</p> : null}
+            {ordered.length === 0 ? <EmptyState label="No creatures in this view" /> : null}
           </div>
-          <nav className="collection-pagination" aria-label="Collection pages">
+          <nav ref={paging} className="collection-pagination" aria-label="Collection pages">
             {totalPages > 1 ? (
               <>
                 <Button
@@ -436,7 +598,13 @@ export function Collection({
                   size="icon"
                   aria-label="Previous page"
                   disabled={activePage === 0}
-                  onClick={() => setPage(activePage - 1)}
+                  data-unavailable={activePage === 0 || undefined}
+                  aria-hidden={activePage === 0 || undefined}
+                  onClick={() => {
+                    pagingFocus.current = activePage === 1;
+                    setPage(activePage - 1);
+                    gridRef.current?.scrollTo?.(0, 0);
+                  }}
                 >
                   <ChevronLeft aria-hidden="true" />
                 </Button>
@@ -448,7 +616,13 @@ export function Collection({
                   size="icon"
                   aria-label="Next page"
                   disabled={activePage === totalPages - 1}
-                  onClick={() => setPage(activePage + 1)}
+                  data-unavailable={activePage === totalPages - 1 || undefined}
+                  aria-hidden={activePage === totalPages - 1 || undefined}
+                  onClick={() => {
+                    pagingFocus.current = activePage === totalPages - 2;
+                    setPage(activePage + 1);
+                    gridRef.current?.scrollTo?.(0, 0);
+                  }}
                 >
                   <ChevronRight aria-hidden="true" />
                 </Button>
@@ -475,7 +649,9 @@ export function DeckCards({
   return (
     <div className="deck-grid">
       {cards.length === 0 ? (
-        <p>{pile === "draw" ? "Draw Pile" : pile === "discard" ? "Discard Pile" : "Deck"} is empty.</p>
+        <EmptyState
+          label={`${pile === "draw" ? "Draw Pile" : pile === "discard" ? "Discard Pile" : "Deck"} is empty`}
+        />
       ) : null}
       {cards.map((card) => {
         const owner = game.team.find((c) => c.id === card.ownerId)!;

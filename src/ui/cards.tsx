@@ -96,32 +96,40 @@ export function CreatureCard({
     />
   );
   return (
-    <div className={`creature-wrap ${health === 0 ? "knocked-out" : ""}`} data-actor-id={actorId ?? enemyId}>
-      {presentation ? (
-        artwork
-      ) : (
-        <Tooltip open={tooltips && tooltipOpen} onOpenChange={(open) => setTooltipOpen(tooltips && open)}>
-          <TooltipTrigger asChild>{artwork}</TooltipTrigger>
-          <TooltipContent side={enemyId ? "bottom" : "top"} sideOffset={enemyId && readout ? 44 : 16}>
-            <CreatureDetails
-              kind={kind}
-              name={name}
-              health={health}
-              maxHealth={maxHealth}
-              block={block}
-              speciesKit={speciesKit}
-              combat={combat}
-            />
-          </TooltipContent>
-        </Tooltip>
-      )}
-      {preview ? (
-        preview
-      ) : readout && health !== undefined && (actorId || enemyId) ? (
-        <BattleReadout health={health} maxHealth={maxHealth ?? info.health} block={block} />
-      ) : null}
-      {readout ? <CombatStatus combat={combat} /> : null}
-      {feedback}
+    <div
+      className={`creature-wrap ${health === 0 ? "knocked-out" : ""}`}
+      data-actor-id={actorId ?? enemyId}
+      data-max-health={maxHealth ?? info.health}
+    >
+      <div className="combatant-motion">
+        <div className="combatant-reaction">
+          {presentation ? (
+            artwork
+          ) : (
+            <Tooltip open={tooltips && tooltipOpen} onOpenChange={(open) => setTooltipOpen(tooltips && open)}>
+              <TooltipTrigger asChild>{artwork}</TooltipTrigger>
+              <TooltipContent>
+                <CreatureDetails
+                  kind={kind}
+                  name={name}
+                  health={health}
+                  maxHealth={maxHealth}
+                  block={block}
+                  speciesKit={speciesKit}
+                  combat={combat}
+                />
+              </TooltipContent>
+            </Tooltip>
+          )}
+          {preview ? (
+            preview
+          ) : readout && health !== undefined && (actorId || enemyId) ? (
+            <BattleReadout health={health} maxHealth={maxHealth ?? info.health} block={block} />
+          ) : null}
+          {readout ? <CombatStatus combat={combat} /> : null}
+          {feedback}
+        </div>
+      </div>
     </div>
   );
 }
