@@ -278,7 +278,7 @@ async function runAssets({
           outputHash: hash(outputBytes),
           sourceBytes: bytes.length,
           outputBytes: outputBytes.length,
-          ...(geometry ?? {}),
+          ...geometry,
         };
         await installImmutable(output, outputBytes);
         await installImmutable(cache, Buffer.from(JSON.stringify(record, null, 2) + "\n"));

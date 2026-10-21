@@ -509,7 +509,9 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
   // Enemy-phase draws and existing overflow survive into the next player turn.
   battle.discard.push(...battle.hand.splice(0));
   for (let pass = 0; pass < 3; pass++) {
-    for (const enemy of [...battle.enemies]) {
+    // Swaps can reorder the battlefield; each enemy keeps its single action window.
+    const actionOrder = battle.enemies.slice();
+    for (const enemy of actionOrder) {
       if (enemy.health <= 0) continue;
       tickStatuses(draft, enemy, events);
       if (settle(draft, events)) return;
