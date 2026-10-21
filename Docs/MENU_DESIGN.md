@@ -2,7 +2,7 @@
 
 Implemented direction from the design review.
 
-- The main menu uses a centered vertical list on a black background, a simple Fauna title, and gameplay destinations only. No promotional copy, decorative panels or reward previews.
+- The main menu uses a centered primary button above a two-column grid of narrower secondary buttons on a black background, a simple Fauna title, and gameplay destinations only. No promotional copy, decorative panels or reward previews.
 - Launching with a saved journey opens the main menu with Continue selected. Do not automatically resume gameplay.
 - While a journey exists, offer Continue/Resume. End journey appears only in the hamburger pause menu and ends immediately without confirmation; New journey appears only when no run exists.
 - Opening the menu during an journey pauses play and shows a centered overlay over the current screen.
@@ -22,7 +22,7 @@ See [UI rules](UI.md) and [journey design](EXPEDITION_DESIGN.md) for shared inte
 
 ## Shared menu treatment
 
-Main and pause menus use the same centered vertical list: shadcn default Button for Continue, New journey, or Resume; ghost Buttons for other choices. Use the charcoal/ivory/muted-gold semantic theme in `src/ui/tokens.css`. Settings keeps Display, Sound and Battle tabs, plus Steam Cloud on desktop. It uses Switch for Sound and Auto-end turn (in Battle), and RadioGroup for explicit text-size choices; changes save immediately. End journey appears only in the hamburger pause menu, with a red label and red Lucide LogOut icon, and commits immediately without confirmation.
+Main menu buttons are 200px wide, with Continue/New journey centered above the two-by-two Talents, Collection, Glossary and Settings grid. Conditional choices add rows, with a lone final choice centered. Related buttons use 12px gaps, with 24px beneath the primary action. Pause keeps its centered vertical list. Both menus use shadcn default Button for Continue, New journey, or Resume; ghost Buttons for other choices. Use the charcoal/ivory/muted-gold semantic theme in `src/ui/tokens.css`. Settings keeps Display, Sound and Battle tabs, plus Steam Cloud on desktop. It uses Switch for Sound and Auto-end turn (in Battle), and RadioGroup for explicit text-size choices; changes save immediately. End journey appears only in the hamburger pause menu, with a red label and red Lucide LogOut icon, and commits immediately without confirmation.
 
 ## Battle assistance and reveals
 

@@ -127,8 +127,9 @@ for (const [width, height, enlarged] of [
     await pad.frames();
     await pad.press(13);
     await expect(page.getByRole("button", { name: "Talents", exact: true })).toBeFocused();
-    await pad.press(13);
+    await pad.press(15);
     await expect(page.getByRole("button", { name: "Collection", exact: true })).toBeFocused();
+    await captureScreen(page, { path: `reports/menu-home-${width}.png` });
     await pad.press(0);
     await expect(page.getByRole("button", { name: "Open menu", exact: true })).toBeFocused();
     await pad.press(13);
@@ -157,6 +158,8 @@ for (const [width, height, enlarged] of [
     await pad.press(1);
     await expect(page.getByRole("button", { name: "Collection", exact: true })).toBeFocused();
     await pad.press(13);
+    await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
+    await pad.press(14);
     await expect(page.getByRole("button", { name: "Glossary", exact: true })).toBeFocused();
     await pad.press(0);
     const glossary = page.getByRole("main", { name: "Glossary & controls" });
@@ -166,7 +169,7 @@ for (const [width, height, enlarged] of [
     await expect(glossary.getByRole("status")).toHaveText(/^2 \/ /);
     await pad.press(1);
     await expect(page.getByRole("button", { name: "Glossary", exact: true })).toBeFocused();
-    await pad.press(13);
+    await pad.press(15);
     await pad.press(0);
     await expect(page.getByRole("tab", { name: "Display", exact: true })).toBeFocused();
     await pad.press(15);
