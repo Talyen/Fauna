@@ -160,6 +160,42 @@ strong {
 .menu-panel > button:not(.dialog-close) {
   width: 100%;
 }
+.menu-icon-journey {
+  color: var(--menu-icon-journey);
+}
+.menu-icon-results {
+  color: var(--menu-icon-results);
+}
+.menu-icon-lineup {
+  color: var(--menu-icon-lineup);
+}
+.menu-icon-talents {
+  color: var(--menu-icon-talents);
+}
+.menu-icon-collection {
+  color: var(--menu-icon-collection);
+}
+.menu-icon-boons {
+  color: var(--menu-icon-boons);
+}
+.menu-icon-glossary {
+  color: var(--menu-icon-glossary);
+}
+.menu-icon-settings {
+  color: var(--menu-icon-settings);
+}
+.menu-icon-end {
+  color: var(--menu-icon-end);
+}
+.menu-icon-home {
+  color: var(--menu-icon-home);
+}
+.menu-icon-quit {
+  color: var(--menu-icon-quit);
+}
+.menu-icon-skip {
+  color: var(--menu-icon-skip);
+}
 .home-screen {
   height: 100%;
   min-height: 0;
