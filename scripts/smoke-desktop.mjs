@@ -102,7 +102,7 @@ try {
     JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
   );
   if (
-    swapped.version !== 27 ||
+    swapped.version !== 33 ||
     swapped.team[0].species !== "pollenmoth" ||
     swapped.battle.mana !== 4 ||
     swapped.lineup[0] !== "ally-0"

@@ -197,6 +197,18 @@ describe("game commands", () => {
             s = accept(s, policy(s));
             decodeSave(encodeSave(s));
           }
+          // Support-heavy teams can sustain combat; their escape must still bank progress safely.
+          if (!["victory", "defeat"].includes(s.phase)) {
+            const progress = { ...s.keywordXP };
+            const earned = { ...s.battleXP };
+            s = accept(s, { type: "abandon" });
+            expect(s.phase).toBe("defeat");
+            expect(s.reward).toBeNull();
+            expect(Object.values(s.battleXP).every((amount) => amount === 0)).toBe(true);
+            for (const keyword of Object.keys(earned) as (keyof typeof earned)[])
+              expect(s.keywordXP[keyword]).toBe((progress[keyword] ?? 0) + earned[keyword]!);
+            expect(decodeSave(encodeSave(s))).toEqual(s);
+          }
           expect(
             ["victory", "defeat"],
             `${[first, second, third].map((index) => SPECIES[index]!.id).join(", ")} at encounter ${s.encounter}, turn ${s.battle?.turn}`,

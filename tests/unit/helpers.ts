@@ -56,6 +56,7 @@ export function victoryReady(s = run()) {
       e.combat.skipped = false;
     });
     const attack = d.cards.find((c) => definition(c.definitionId).effect === "attack")!;
+    combat(d.team.find((creature) => creature.id === attack.ownerId)!).blind = false;
     d.battle!.hand = [attack.id];
     d.battle!.buffer = [];
     d.battle!.draw = d.cards.filter((c) => c.id !== attack.id).map((c) => c.id);
@@ -66,7 +67,11 @@ export function victoryReady(s = run()) {
 export function winBattle(s = run()) {
   s = victoryReady(s);
   const card = s.battle!.hand[0]!;
-  return accept(s, { type: "play", cardId: card, targetId: "enemy-0" });
+  return accept(s, {
+    type: "play",
+    cardId: card,
+    targetId: s.battle!.enemies.find((enemy) => enemy.health > 0)!.id,
+  });
 }
 export function recruitChoice(s: GameState): Command {
   return {
@@ -116,6 +121,11 @@ export function policy(s: GameState): Command {
       ...(def.effect === "attack" && !def.target ? { targetId: enemy.id } : {}),
     };
   }
+  const draw = cards.find((card) => {
+    const def = definition(card.definitionId);
+    return def.effect === "draw" || def.effects?.some((effect) => effect.kind === "draw");
+  });
+  if (draw) return { type: "play", cardId: draw.id };
   const heal = cards.find((c) => definition(c.definitionId).effect === "heal");
   const injured = s.team
     .filter((c) => c.health > 0 && c.health < species(c.species).health)
