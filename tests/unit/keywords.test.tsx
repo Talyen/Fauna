@@ -60,7 +60,7 @@ describe("keyword foundation", () => {
       "leech",
       "mana",
     ]);
-    expect(TALENTS).toHaveLength(28);
+    expect(new Set(TALENTS.map((talent) => talent.keyword))).toEqual(new Set(KEYWORDS));
     for (const id of ["forge", "currency", "gold", "wish", "consume", "companion", "archery"]) {
       expect(isKeywordId(id)).toBe(false);
       expect(KEYWORDS).not.toContain(id);
