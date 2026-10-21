@@ -747,7 +747,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           <Dialog open={menu} onOpenChange={setMenu}>
             <DialogContent
               className="menu-panel menu-layout"
-              closeLabel="Close menu"
+              showCloseButton={false}
               onOpenAutoFocus={(event) => {
                 const label = menuReturnLabel.current;
                 if (!label) return;

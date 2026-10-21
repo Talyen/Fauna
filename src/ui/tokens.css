@@ -7,7 +7,7 @@
   --foreground: #ece6db;
   --card: #141414;
   --card-foreground: var(--foreground);
-  --popover: #0b0b0b;
+  --popover: var(--card);
   --popover-foreground: var(--foreground);
   --primary: #d9b56f;
   --primary-foreground: #141414;
@@ -45,7 +45,7 @@
   --error: #ffc4ad;
   --notice: var(--secondary);
   --control-height: 44px;
-  --main-menu-button-width: 150px;
+  --main-menu-button-width: 180px;
   --settings-screen-width: 800px;
   --boon-dialog-width: 720px;
   --settings-label-basis: 200px;

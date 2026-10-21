@@ -1,7 +1,28 @@
 import { captureScreen } from "./rendered-evidence";
-import { test, expect, type Page } from "@playwright/test";
+import { test, expect, type Page, type Locator } from "@playwright/test";
 import { accept, run } from "../unit/helpers";
 import { createGame } from "../../src/game/engine";
+
+async function expectAlignedMenu(choices: Locator) {
+  const buttons = await choices.locator("button").evaluateAll((elements) =>
+    elements.map((element) => {
+      const icon = element.querySelector("svg")!;
+      const label = Array.from(element.childNodes).find(
+        (node) => node.nodeType === Node.TEXT_NODE && node.textContent?.trim(),
+      )!;
+      const range = document.createRange();
+      range.selectNodeContents(label);
+      return {
+        iconInset: icon.getBoundingClientRect().left - element.getBoundingClientRect().left,
+        labelLines: range.getClientRects().length,
+      };
+    }),
+  );
+  for (const button of buttons) {
+    expect(button.iconInset).toBeCloseTo(buttons[0]!.iconInset);
+    expect(button.labelLines).toBe(1);
+  }
+}
 
 test("pointer menu transitions never display focus indicators", async ({ page }) => {
   await page.goto("/");
@@ -20,6 +41,13 @@ test("pointer menu transitions never display focus indicators", async ({ page })
   await page.mouse.move(20, 20);
   await expect(end).toHaveCSS("outline-style", "none");
   await captureScreen(page, { path: "reports/menu-pointer.png" });
+  const menu = page.getByRole("dialog", { name: "Pause menu" });
+  await expect(menu.getByRole("button", { name: "Close menu" })).toHaveCount(0);
+  await page.mouse.click(20, 20);
+  await expect(menu).toHaveCount(0);
+  await page.getByRole("button", { name: "Open menu" }).click();
+  await menu.getByRole("button", { name: "Resume", exact: true }).click();
+  await expect(menu).toHaveCount(0);
 });
 
 test("held Escape closes only the current menu level", async ({ page }) => {
@@ -44,12 +72,14 @@ test("minimum-size enlarged menus fit every action without scrolling", async ({ 
   }, JSON.stringify(game));
   await page.goto("/");
   const homeChoices = page.getByRole("navigation", { name: "Main menu" });
+  await expectAlignedMenu(homeChoices);
   const homeWidth = (await homeChoices.boundingBox())!.width;
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   await page.getByRole("button", { name: "Open menu" }).click();
   const dialog = page.getByRole("dialog", { name: "Pause menu" });
   await expect(dialog.getByRole("heading", { name: "Fauna", exact: true })).toBeVisible();
   const choices = dialog.getByRole("navigation", { name: "Pause menu" });
+  await expectAlignedMenu(choices);
   const bounds = (await choices.boundingBox())!;
   expect(bounds.width).toBeCloseTo(homeWidth);
   const resume = (await choices.getByRole("button", { name: "Resume", exact: true }).boundingBox())!;
