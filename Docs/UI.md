@@ -61,7 +61,7 @@ No player surface may scroll horizontally or vertically: screens, dialogs, panel
 
 Use 24px between screen sections and 12px between related items. Page gutters are 32px horizontally and 24px vertically. Dialogs reserve room for the close control. Screens reserve their actual remaining height after notices and errors. Collection uses one artwork row at compact heights and two at larger heights, with pagination controls outside the gallery. Deck, talent rows, passive tiers, Glossary, owned Boons, Campfire and keyword earnings use bounded pages. Settings keeps native category tabs, including Steam Cloud on desktop, without panel scrolling.
 
-Battle keeps enemy and player rows, target feedback, the seven-card hand, Mana, Swap and End turn reachable simultaneously. Compact heights use a side rail for pile buttons and targeting feedback, with equal space on the opposite side to keep both artwork rows horizontally centered. Effects and Block sit below each frame; thin health bars sit inside its bottom edge. Draw and discard are compact Buttons. The hand remains an overlapping quadratic fan at the bottom, including its authored partial bottom-edge clipping; every visible hand card must have a real selectable hit area and full inspection. This is the sole artwork clipping exception and never creates a scroll area. Screen-reader-only content may retain its accessibility clipping.
+Battle keeps enemy and player rows, target feedback, the seven-card hand, Mana, Swap and End turn reachable simultaneously. Compact heights use a side rail for targeting feedback, with equal space on the opposite side to keep both artwork rows horizontally centered. Effects and Block sit below each frame; thin health bars sit inside its bottom edge. Draw and discard use blank portrait ArtCards at 70% of hand-card width and height, with external labels. Draw sits in the lower left below Mana; discard sits in the lower right below End turn. Auto-play is a Play/Pause icon Button beside the upper-right menu, with an accessible pressed state. The hand remains an overlapping quadratic fan at the bottom, including its authored partial bottom-edge clipping; every visible hand card must have a real selectable hit area and full inspection. This is the sole artwork clipping exception and never creates a scroll area. Screen-reader-only content may retain its accessibility clipping.
 
 The source-policy gate rejects scrolling CSS, utilities and imperative scrolling in player UI. The shared browser layout assertion checks document and nested overflow, viewport bounds, hidden clipping, hit areas and obscured controls, including portaled dialogs and tooltips. Screenshots pass that assertion before capture. Geometry checks are regression protection; rendered review still establishes readability and composition.
 
@@ -84,19 +84,19 @@ The hand shows at most seven playable cards. Extra draws remain entirely hidden 
 
 Palette and icon pairings are adapted from `Alchemy: src/lib/game-data/keywords.ts` and `Alchemy: src/features/alchemy/shared/config/metadata.ts`. Health uses red (#f87171, Heart), block sky blue (#7dd3fc, Shield). Damage color follows the attack type, independent of lost health:
 
-| Type      | Foreground | Icon         |
-| --------- | ---------- | ------------ |
-| Physical  | #cbd5e1    | Swords       |
-| Fire      | #fb923c    | Flame        |
-| Ice       | #67e8f9    | Snowflake    |
-| Lightning | #fcd34d    | Zap          |
-| Poison    | #86efac    | FlaskConical |
-| Nature    | #34d399    | Leaf         |
-| Light     | #fde68a    | Sun          |
+| Type     | Foreground | Icon         |
+| -------- | ---------- | ------------ |
+| Physical | #cbd5e1    | Swords       |
+| Burn     | #fb923c    | Flame        |
+| Freeze   | #67e8f9    | Snowflake    |
+| Stun     | #fcd34d    | Zap          |
+| Poison   | #15803d    | FlaskConical |
+| Nature   | #059669    | Leaf         |
+| Light    | #fde68a    | Sun          |
 
-Poison and Nature use lighter foregrounds from Alchemy's green/emerald families for readable text on black and artwork. Tooltip attack rules spell out the type; floating feedback and target previews retain the damage type. Enemy intents are hidden. Keyword words in rules use their assigned colors, including secondary clauses; other prose stays neutral. Healing has a rose identity, distinct from Health.
+Shared keyword colors match Alchemy's catalog base colors, including darker Poison (#15803d), Nature and Thorns (#059669), Bleed (#dc2626), and Leech (#9f1239). Health restoration uses Health's red identity. Tooltip attack rules spell out the type; floating feedback and target previews retain the damage type. Enemy intents are hidden. Keyword words in rules use their assigned colors, including secondary clauses; other prose stays neutral. Labels and icons preserve meaning alongside color; rendered readability requires review, especially for the darker colors.
 
-Types are content metadata, carried on damage presentation events. Enemy types derive from the resolved species ability. Explicit Burn, Poison, Bleed, Stun and Freeze packets use the combat rules in [Keywords](KEYWORDS.md). Original Fire, Ice and Lightning identities do not implicitly add these effects.
+Types are content metadata, carried on damage presentation events. Enemy types derive from the resolved species ability. Burn, Poison, Bleed, Stun and Freeze packets use the combat rules in [Keywords](KEYWORDS.md). Fire, Ice, Lightning and Healing are not separate keyword identities.
 
 Use shadcn/ui for dialogs, tooltips, menus, sliders, and shared controls, composing gameplay cards from the same primitives and tokens. Gamepad navigation remains an application responsibility and must be verified through these compositions. Adopting a library is not a reason to add more controls or containers.
 

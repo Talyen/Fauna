@@ -213,7 +213,7 @@ describe("desktop close handshake", () => {
 
 it("rejects obsolete development saves and recovers a current-format backup without rewriting it", async () => {
   const current = run(7);
-  const obsolete = JSON.stringify({ ...current, version: 8 });
+  const obsolete = JSON.stringify({ ...current, version: 22 });
   const memory = new MemoryStorage();
   memory.setItem("fauna.save.v1", obsolete);
   memory.setItem("fauna.save.v1.backup1", JSON.stringify(current));
@@ -226,6 +226,6 @@ it("rejects obsolete development saves and recovers a current-format backup with
   expect(memory.getItem("fauna.save.v1")).toBe(obsolete);
   session.command({ type: "endTurn" });
   await session.flush();
-  expect(JSON.parse(memory.getItem("fauna.save.v1")!).version).toBe(22);
+  expect(JSON.parse(memory.getItem("fauna.save.v1")!).version).toBe(23);
   await session.dispose();
 });

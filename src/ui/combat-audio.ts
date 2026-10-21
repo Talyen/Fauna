@@ -1,7 +1,14 @@
 import type { DamageType } from "../game/content";
 import type { GameEvent } from "../game/types";
 export type CombatCue =
-  Exclude<DamageType, "burn" | "freeze" | "bleed" | "stun"> | "heal" | "block" | "absorb" | "deny";
+  | Exclude<DamageType, "burn" | "freeze" | "bleed" | "stun">
+  | "fire"
+  | "ice"
+  | "lightning"
+  | "heal"
+  | "block"
+  | "absorb"
+  | "deny";
 /** Alchemy-inspired outcome selection: one strongest meaningful cue per resolved action. */
 export function selectCombatCue(events: readonly GameEvent[]): CombatCue | undefined {
   let best: { cue: CombatCue; amount: number; priority: number } | undefined;

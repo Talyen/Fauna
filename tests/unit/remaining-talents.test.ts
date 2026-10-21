@@ -215,7 +215,7 @@ describe("remaining Alchemy talents adapted to creatures", () => {
     const f = fixture(["dodge.finding-rhythm"]);
     hit(f.state, f.target, f.source, 1, "nature", f.events, { periodic: true });
     expect(f.source.combat!.rhythm).toBe(5);
-    f.state.talents = ["heal.last-gasp"];
+    f.state.talents = ["health.last-gasp"];
     f.state.rng = 1;
     // Search a deterministic roll between base Dodge and the low-Health bonus.
     for (let seed = 0; ; seed++) {
@@ -230,7 +230,12 @@ describe("remaining Alchemy talents adapted to creatures", () => {
     expect(f.source.health).toBe(before);
   });
   it("grants threshold defenses once, cleanses danger and extends Death's Door", () => {
-    const f = fixture(["armor.steadfast", "heal.desperate-guard", "heal.last-resort", "heal.will-to-live"]);
+    const f = fixture([
+      "armor.steadfast",
+      "health.desperate-guard",
+      "health.last-resort",
+      "health.will-to-live",
+    ]);
     f.source.health = maximumHealth(f.source);
     f.source.combat!.poison = 3;
     hit(f.state, f.target, f.source, maximumHealth(f.source) - 4, "light", f.events, { periodic: true });
@@ -244,7 +249,7 @@ describe("remaining Alchemy talents adapted to creatures", () => {
     expect(f.source.combat!.grace).toBe(3);
   });
   it("converts only card overhealing, cleanses once and charges Divine Favor", () => {
-    const f = fixture(["heal.overflow", "heal.clean-slate", "light.divine-favor"]);
+    const f = fixture(["health.overflow", "health.clean-slate", "light.divine-favor"]);
     f.source.health = maximumHealth(f.source);
     f.source.combat!.poison = 3;
     restoreHealth(f.source, 8, f.events, false, f.state);
@@ -475,12 +480,12 @@ it("opening Mana, Armor and healing apply once, while victory heals living roste
   const state = structuredClone(run());
   state.phase = "teamSelection";
   state.battle = null;
-  state.talents = ["mana.leyline-attunement", "mana.mana-bulwark", "mana.mana-shell", "heal.combat-surge"];
+  state.talents = ["mana.leyline-attunement", "mana.mana-bulwark", "mana.mana-shell", "health.combat-surge"];
   state.team.forEach((c) => (c.health = 10));
   beginBattle(state);
   expect(state.battle!.maxMana).toBe(5);
   expect(state.team.every((c) => c.block === 5 && c.combat!.armor === 5 && c.health === 14)).toBe(true);
-  state.talents = ["heal.vitality"];
+  state.talents = ["health.vitality"];
   state.battle!.enemies.forEach((e) => (e.health = 0));
   state.battle!.enemies[0]!.health = 1;
   const card = playable(state, "mossback-attack");

@@ -1165,21 +1165,6 @@ strong {
 [data-keyword="physical"] {
   color: var(--keyword-physical);
 }
-[data-damage-type="fire"],
-[data-combat-tone="fire"],
-[data-keyword="fire"] {
-  color: var(--keyword-fire);
-}
-[data-damage-type="ice"],
-[data-combat-tone="ice"],
-[data-keyword="ice"] {
-  color: var(--keyword-ice);
-}
-[data-damage-type="lightning"],
-[data-combat-tone="lightning"],
-[data-keyword="lightning"] {
-  color: var(--keyword-lightning);
-}
 [data-damage-type="poison"],
 [data-combat-tone="poison"],
 [data-keyword="poison"] {
@@ -1207,10 +1192,6 @@ strong {
 [data-keyword="block"] {
   color: var(--keyword-block);
 }
-[data-combat-tone="heal"],
-[data-keyword="heal"] {
-  color: var(--keyword-heal);
-}
 [data-combat-tone="thorns"],
 [data-keyword="thorns"] {
   color: var(--keyword-thorns);
@@ -1223,18 +1204,22 @@ strong {
 [data-keyword="armor"] {
   color: var(--keyword-armor);
 }
+[data-damage-type="burn"],
 [data-combat-tone="burn"],
 [data-keyword="burn"] {
   color: var(--keyword-burn);
 }
+[data-damage-type="freeze"],
 [data-combat-tone="freeze"],
 [data-keyword="freeze"] {
   color: var(--keyword-freeze);
 }
+[data-damage-type="bleed"],
 [data-combat-tone="bleed"],
 [data-keyword="bleed"] {
   color: var(--keyword-bleed);
 }
+[data-damage-type="stun"],
 [data-combat-tone="stun"],
 [data-keyword="stun"] {
   color: var(--keyword-stun);
@@ -1531,13 +1516,6 @@ strong {
   stroke-linecap: round;
 }
 
-.in-battle .hand-toolbar {
-  justify-content: flex-end;
-  gap: var(--space-3);
-}
-.in-battle .hand-toolbar > .mana {
-  margin-right: auto;
-}
 .swap-trigger svg {
   width: var(--space-4);
   height: var(--space-4);
@@ -1742,17 +1720,6 @@ strong {
   gap: var(--screen-item-gap);
   font-size: var(--text-secondary);
 }
-.battle-piles {
-  flex-shrink: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: var(--screen-section-gap);
-}
-.battle-piles p {
-  text-align: center;
-  margin-top: var(--screen-item-gap);
-}
 .campfire-screen {
   display: flex;
   flex-direction: column;
@@ -1774,21 +1741,27 @@ strong {
   .battle-screen {
     justify-content: center;
   }
-  .battle-piles {
-    position: absolute;
-    inset: var(--screen-section-gap) 0 auto;
-    pointer-events: none;
-  }
-  .battle-piles > div {
-    pointer-events: auto;
-  }
 }
 
 .autoplay-control {
+  position: absolute;
+  right: calc(var(--space-6) + var(--control-height) + var(--screen-item-gap));
+  top: var(--space-4);
+  z-index: 10;
+}
+.battle-dock,
+.battle-pile {
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: var(--screen-item-gap);
-  min-height: var(--control-height);
+}
+.battle-pile > .action-card {
+  width: var(--battle-pile-width);
+}
+.battle-pile > span {
+  font-size: var(--text-secondary);
+  color: var(--muted-foreground);
 }
 .unlock-screen {
   display: flex;
@@ -1897,14 +1870,6 @@ body,
 .campfire-roster > div {
   width: var(--art-landscape-width);
 }
-.battle-piles {
-  position: absolute;
-  inset: var(--screen-item-gap) calc(var(--control-height) + var(--screen-item-gap)) auto 0;
-  pointer-events: none;
-}
-.battle-piles > * {
-  pointer-events: auto;
-}
 @media (max-height: 900px) {
   .battle-screen {
     display: grid;
@@ -1929,11 +1894,6 @@ body,
     flex-direction: column;
     height: auto;
     padding-top: var(--space-12);
-  }
-  .battle-screen .battle-piles {
-    inset: var(--screen-item-gap) auto auto 0;
-    flex-direction: column;
-    gap: var(--screen-item-gap);
   }
   .battle-screen .target-summary {
     width: 100%;

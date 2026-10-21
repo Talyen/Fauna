@@ -24,14 +24,14 @@ The initial asset set was authored by `scripts/create-placeholders.mjs`. Running
 | Fauna keyword | Local file       | Alchemy source         |
 | ------------- | ---------------- | ---------------------- |
 | Physical      | `physical.webp`  | `talent-physical.webp` |
-| Fire          | `fire.webp`      | `talent-burn.webp`     |
-| Ice           | `ice.webp`       | `talent-freeze.webp`   |
-| Lightning     | `lightning.webp` | `talent-stun.webp`     |
+| Burn          | `fire.webp`      | `talent-burn.webp`     |
+| Freeze        | `ice.webp`       | `talent-freeze.webp`   |
+| Stun          | `lightning.webp` | `talent-stun.webp`     |
 | Poison        | `poison.webp`    | `talent-poison.webp`   |
 | Nature        | `nature.webp`    | `talent-nature.webp`   |
 | Light         | `light.webp`     | `talent-holy.webp`     |
 | Block         | `block.webp`     | `talent-block.webp`    |
-| Healing       | `heal.webp`      | `talent-health.webp`   |
+| Health        | `heal.webp`      | `talent-health.webp`   |
 
 Source directory: `Alchemy: src/assets/optimized/`. Artwork reuse does not import Alchemy's keyword mechanics. The nine original keyword illustrations are registered; additional talent categories do not require illustrations.
 
@@ -69,7 +69,7 @@ Brass Censer gives allied Light hits a 20% chance to either deal their damage ag
 
 Sundering Charm removes 2 enemy Armor before Physical or Stun hit mitigation, after Dodge. Frozen Pocketwatch extends enemy Freeze to two skipped turns, followed by the existing shared immunity. Before allied turn-start damage, Plague Doctor's Mask removes up to 2 Poison from each living creature, including reserves, and deals half the removed amount (rounded normally) as Poison to the first living enemy. Fully removing Poison triggers Cleanse rewards; partial stack removal does not.
 
-Resonant Chimes refunds 1 shared Mana after the third accepted card of each turn, before automatic end turn. Repeated card effects count once. Its capped battle-wide counter survives previews, swaps and resume and resets each turn and battle. Merchant's Favor commits a 13 Gold price instead of 20 when each new Merchant stock is prepared; the one-purchase visit limit still applies. Smuggler's Map adds 2 Gold to victory rewards, including bosses, using ordinary settlement and retained-earnings limits. Save version 22 rejects obsolete development saves.
+Resonant Chimes refunds 1 shared Mana after the third accepted card of each turn, before automatic end turn. Repeated card effects count once. Its capped battle-wide counter survives previews, swaps and resume and resets each turn and battle. Merchant's Favor commits a 13 Gold price instead of 20 when each new Merchant stock is prepared; the one-purchase visit limit still applies. Smuggler's Map adds 2 Gold to victory rewards, including bosses, using ordinary settlement and retained-earnings limits. Save version 23 rejects obsolete development saves.
 
 ## Support encounter content
 

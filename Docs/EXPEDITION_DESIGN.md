@@ -34,7 +34,7 @@ These are the agreed directions from the design review. They supersede the proto
 - Creature XP, training levels, and milestone upgrades are retired design directions.
 - Permanent keyword XP and talents replace creature training, taking Alchemy's keyword progression as a reference.
 - Keyword progression is shared across the collection. Talents benefit any creature using the relevant keyword, rather than belonging to individual species.
-- Each accepted card play earns 1 XP for each eligible keyword on that card, regardless of effect magnitude. A Fire + Block card earns 1 Fire XP and 1 Block XP.
+- Each accepted card play earns 1 XP for each eligible keyword on that card, regardless of effect magnitude. A Burn + Block card earns 1 Burn XP and 1 Block XP.
 - Earned keyword XP becomes permanent after each battle, including defeat.
 - Talents are accessible through the main menu at any time. Purchases take effect immediately, including during a journey.
 - Do not interrupt journeys or prompt players to spend talent points.
@@ -46,7 +46,7 @@ These are the agreed directions from the design review. They supersede the proto
 - Clicking an available talent purchases it immediately, without a detail-dialog purchase step or confirmation.
 - Reset operates on the entire keyword category, refunding all spent points in that category while retaining its XP. Reset is available at any time, including during a journey; talent effects update immediately. Individual-talent refunds are not the chosen interaction.
 - Use Alchemy’s current point pacing: cumulative thresholds are 10, 40, 100, 180, and 280 keyword XP. Total XP for point n is 10 × n × (n + 1) − 10 × min(n, 2). This is initial tuning for playtesting.
-- Fourteen consolidated categories offer 129 distinct talents, adapted from Alchemy; effects requiring excluded mechanics are omitted. Fire/Burn, Ice/Freeze and Lightning/Stun share progression; Thorns belongs to Nature, Cleanse to Healing, and Purge to Light. Forge is removed. The authored catalog and effects are owned by `src/game/progression.ts` and `src/game/combat.ts`.
+- Fourteen consolidated categories offer 129 distinct talents, adapted from Alchemy; effects requiring excluded mechanics are omitted. Burn, Freeze, Stun and Health use their matching progression; Thorns belongs to Nature, Cleanse to Health, and Purge to Light. Forge is removed. The authored catalog and effects are owned by `src/game/progression.ts` and `src/game/combat.ts`.
 - Abandonment banks the XP earned by accepted plays, with no victory currency or boons. Auto-play dispatches ordinary accepted plays; each awards keyword XP once. Talent repeats resolve at most once and award no extra accepted-play XP.
 
 ## Recruitment

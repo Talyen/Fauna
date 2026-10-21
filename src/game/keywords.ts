@@ -24,9 +24,6 @@ export const KEYWORD_DEFINITIONS = freeze(
       "active",
       "Physical damage is reduced by Armor after Block. Attacks have a 5% critical chance for double damage.",
     ),
-    fire: entry("Fire", "damage", "active", "Fire damage. Does not apply Burn."),
-    ice: entry("Ice", "damage", "active", "Ice damage. Does not apply Freeze."),
-    lightning: entry("Lightning", "damage", "active", "Lightning damage. Does not apply Stun."),
     poison: entry(
       "Poison",
       "damage",
@@ -41,7 +38,7 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Health",
       "resource",
       "active",
-      "A creature's remaining life. At zero health it is knocked out. Healing cannot exceed maximum health.",
+      "Remaining life. At zero Health a creature is knocked out. Restore Health up to its maximum; restoration cannot revive it during battle.",
     ),
     mana: entry(
       "Mana",
@@ -54,13 +51,6 @@ export const KEYWORD_DEFINITIONS = freeze(
       "status",
       "active",
       "Absorbs incoming damage before health. Each point absorbs one damage and is spent. Remaining Block halves at the start of your next turn, rounded normally.",
-    ),
-    heal: entry(
-      "Healing",
-      "effect",
-      "active",
-      "Restore health to a living creature, up to its maximum health. Cannot revive a knocked-out creature.",
-      ["Heal", "Heals", "Healed"],
     ),
     thorns: entry(
       "Thorns",
@@ -131,9 +121,6 @@ export const keywordLabel = (id: KeywordId): string => KEYWORD_DEFINITIONS[id].l
 
 export const DAMAGE_TYPES = freeze([
   "physical",
-  "fire",
-  "ice",
-  "lightning",
   "poison",
   "nature",
   "light",
@@ -154,7 +141,7 @@ export const PROGRESSION_KEYWORDS = freeze([
   "light",
   "bleed",
   "block",
-  "heal",
+  "health",
   "armor",
   "dodge",
   "leech",
@@ -162,19 +149,16 @@ export const PROGRESSION_KEYWORDS = freeze([
 ] as const);
 export type ProgressionKeyword = (typeof PROGRESSION_KEYWORDS)[number];
 const progressionCategory: Partial<Record<KeywordId, ProgressionKeyword>> = {
-  fire: "burn",
-  ice: "freeze",
-  lightning: "stun",
   thorns: "nature",
-  cleanse: "heal",
+  cleanse: "health",
   purge: "light",
 };
-export const progressionLabel = (id: ProgressionKeyword) => keywordLabel(id === "heal" ? "health" : id);
+export const progressionLabel = (id: ProgressionKeyword) => keywordLabel(id);
 export const EFFECT_KEYWORDS = freeze(
   {
     attack: [],
     guard: ["block"],
-    heal: ["heal"],
+    heal: ["health"],
     teamGuard: ["block"],
   } as const,
   true,

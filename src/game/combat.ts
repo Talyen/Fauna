@@ -56,7 +56,7 @@ export function restoreHealth(
   cardHealing = false,
 ) {
   if (state?.phase === "battle") {
-    if (!("maxHealth" in unit) && hasTalent(state, "heal.mending")) amount *= 1.1;
+    if (!("maxHealth" in unit) && hasTalent(state, "health.mending")) amount *= 1.1;
     if ("maxHealth" in unit && unit.combat.poison > 0 && hasTalent(state, "poison.necrosis")) amount *= 0.5;
     if ("maxHealth" in unit && unit.combat.bleed > 0 && hasTalent(state, "bleed.mortal-wound")) amount *= 0.5;
   }
@@ -65,8 +65,8 @@ export function restoreHealth(
   const excess = Math.max(0, Math.round(amount) - gain);
   unit.health += gain;
   if (cardHealing && state && !("maxHealth" in unit) && excess > 0) {
-    if (hasTalent(state, "heal.overflow")) grantBlock(state, unit, Math.round(excess * 0.25), events);
-    if (hasTalent(state, "heal.clean-slate")) removeEffects(unit, "cleanse", 1, events, state);
+    if (hasTalent(state, "health.overflow")) grantBlock(state, unit, Math.round(excess * 0.25), events);
+    if (hasTalent(state, "health.clean-slate")) removeEffects(unit, "cleanse", 1, events, state);
   }
   if (gain || amount > 0) {
     events.push({
@@ -194,7 +194,7 @@ function loseHealth(state: GameState, unit: Combatant, amount: number, events: G
   ) {
     if (!stats.deathDoorUsed) {
       stats.deathDoorUsed = true;
-      stats.grace = hasTalent(state, "heal.will-to-live") ? 3 : 2;
+      stats.grace = hasTalent(state, "health.will-to-live") ? 3 : 2;
       events.push({
         kind: "status",
         targetId: unit.id,
@@ -213,7 +213,7 @@ function healthThresholds(state: GameState, unit: Combatant, before: number, eve
   if (!("maxHealth" in unit) && unit.health > 0) {
     if (before >= maximumHealth(unit) / 2 && unit.health < maximumHealth(unit) / 2) {
       if (hasTalent(state, "armor.steadfast")) grantArmor(state, unit, 3, events);
-      if (hasTalent(state, "heal.desperate-guard") && !stats.desperateGuardUsed) {
+      if (hasTalent(state, "health.desperate-guard") && !stats.desperateGuardUsed) {
         stats.desperateGuardUsed = true;
         grantBlock(state, unit, 6, events);
       }
@@ -221,7 +221,7 @@ function healthThresholds(state: GameState, unit: Combatant, before: number, eve
     if (
       before >= maximumHealth(unit) / 4 &&
       unit.health < maximumHealth(unit) / 4 &&
-      hasTalent(state, "heal.last-resort")
+      hasTalent(state, "health.last-resort")
     )
       removeEffects(unit, "cleanse", 6, events, state);
   }
@@ -311,7 +311,7 @@ function cleanseRewards(state: GameState, unit: Combatant, cleansed: number, eve
   if (!("maxHealth" in unit)) {
     if (hasTalent(state, "light.divine-favor")) stats.freeLight = true;
     const healing =
-      Number(hasTalent(state, "heal.renewal")) * 2 + (state.boons.includes("sin-eaters-lantern") ? 6 : 0);
+      Number(hasTalent(state, "health.renewal")) * 2 + (state.boons.includes("sin-eaters-lantern") ? 6 : 0);
     if (healing) restoreHealth(unit, healing * cleansed, events, false, state);
   }
 }
@@ -366,7 +366,7 @@ export function hit(
           (alliedTarget
             ? stats.rhythm +
               (hasTalent(state, "dodge.lightfoot") ? 5 : 0) +
-              (hasTalent(state, "heal.last-gasp") && target.health < maximumHealth(target) / 2 ? 10 : 0)
+              (hasTalent(state, "health.last-gasp") && target.health < maximumHealth(target) / 2 ? 10 : 0)
             : 0),
       ) /
         100

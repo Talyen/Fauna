@@ -78,9 +78,9 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
       ...(boss ? (index === 0 ? { health: boss.health, damage: boss.damage } : escort) : ordinary),
       damageType:
         kind === "emberfox"
-          ? "fire"
+          ? "burn"
           : kind === "stormfin"
-            ? "lightning"
+            ? "stun"
             : kind === "silkmoth" || kind === "moonhart"
               ? "light"
               : "nature",

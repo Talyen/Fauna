@@ -222,7 +222,7 @@ h3 {
   opacity: 0.65;
 }
 .progress-track[data-direction="gain"] .progress-current {
-  background: var(--keyword-heal);
+  background: var(--keyword-health);
   opacity: 0.6;
 }
 .empty-state {

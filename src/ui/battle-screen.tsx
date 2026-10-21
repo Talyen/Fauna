@@ -24,6 +24,8 @@ import { returnFocus } from "./focus";
 import { TargetPreview } from "./target-preview";
 import { CombatFeedback, type Burst } from "./combat-feedback";
 import { ManaCrystals } from "./mana-crystals";
+import { ArtCard } from "./art-card";
+import { assetUrl } from "./assets";
 export type Inspection =
   | { card: Card }
   | { species: GameState["selected"][number]; enemyId?: string; creatureId?: string }
@@ -389,31 +391,41 @@ export function BattleScreen({
           </div>
         </section>
       </HandMotion>
-      <section className="battle-piles" data-nav-row aria-label="Card piles">
-        {(["draw", "discard"] as const).map((pile) => (
-          <div key={pile}>
-            <Button
-              variant="outline"
-              data-pile={pile}
-              aria-label={`Inspect ${pile === "draw" ? "Draw Pile" : "Discard Pile"}`}
-              onClick={() => openPile?.(pile)}
-            >
-              {pile === "draw" ? "Draw Pile" : "Discard Pile"}
+      <div className="hand-toolbar">
+        <div className="battle-dock" data-nav-row>
+          <ManaCrystals
+            mana={battle.mana}
+            maximum={battle.maxMana}
+            previewCost={card ? cardCost(card, game) : 0}
+          />
+          <div className="battle-pile">
+            <ArtCard
+              artwork={assetUrl("pile.placeholder")}
+              aspect="action"
+              data-pile="draw"
+              aria-label="Inspect Draw Pile"
+              onClick={() => openPile?.("draw")}
+            />
+            <span>Draw Pile</span>
+          </div>
+        </div>
+        <div className="battle-dock" data-nav-row>
+          <div className="battle-actions">
+            {actions}
+            <Button className="end-turn" onClick={() => play({ type: "endTurn" })}>
+              End turn{controller ? " · Y" : ""}
             </Button>
           </div>
-        ))}
-      </section>
-      <div className="hand-toolbar">
-        <ManaCrystals
-          mana={battle.mana}
-          maximum={battle.maxMana}
-          previewCost={card ? cardCost(card, game) : 0}
-        />
-        <div className="battle-actions">
-          {actions}
-          <Button className="end-turn" onClick={() => play({ type: "endTurn" })}>
-            End turn{controller ? " · Y" : ""}
-          </Button>
+          <div className="battle-pile">
+            <ArtCard
+              artwork={assetUrl("pile.placeholder")}
+              aspect="action"
+              data-pile="discard"
+              aria-label="Inspect Discard Pile"
+              onClick={() => openPile?.("discard")}
+            />
+            <span>Discard Pile</span>
+          </div>
         </div>
       </div>
       {line ? (
