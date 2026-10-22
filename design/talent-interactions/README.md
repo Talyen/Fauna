@@ -6,4 +6,4 @@ The baseline preserves normal outlined available controls with gold hover, full 
 
 Activate an available sample to simulate purchase, then Replay purchase to reset it. Owned and locked samples remain inspectable but cannot purchase. Simulation never loads game state, awards talents or saves progression. Flash timers clean up on replacement/unmount; keyboard focus suppresses the flash to preserve one highlighted boundary. Reduced motion disables transitions and flash. Actual shadcn Button, Tooltip, Tabs, RadioGroup and Switch retain their standard behaviors.
 
-[Phone decisions](../PHONE_DECISIONS.md) remain authoritative for approved design intent. Production talent adoption, full rendered journeys, CI, desktop and physical-controller acceptance remain pending.
+[Phone decisions](../PHONE_DECISIONS.md) remain authoritative for approved design intent. Production adoption is recorded in the [shared design system](../../Docs/DESIGN_SYSTEM.md); full rendered journeys, CI, desktop and physical-controller acceptance remain separate.

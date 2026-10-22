@@ -1,5 +1,7 @@
 # Alchemy tools and platform adoption plan
 
+This is a historical scope and delivery record. Current behavior and verification policy belong to [Architecture](ARCHITECTURE.md), [UI](UI.md), [journey design](EXPEDITION_DESIGN.md), [Release readiness](RELEASE.md) and [Contributing](../CONTRIBUTING.md). Later decisions replace the proposed Cloud recovery UI with silent automatic recovery, open Merchant visits directly, and require scroll-free layouts with shared artwork profiles. Acceptance criteria below are requirements, not evidence that native or live Steam qualification passed.
+
 Add stronger architecture checks and unused-code detection, hardened Electron packages, optional non-combat encounters, desktop display modes, Steam Cloud saves, and Steam overlay pause. Adapt Alchemy's patterns to Fauna's existing game, application, and platform owners. Fauna retains independent code, content selection, application identity, and saves.
 
 The implementation follows the selected scope and defaults below. Local focused checks accompany delivery; full CI, rendered/native package and live Steam acceptance remain separate evidence gates. Steam partner configuration, credentials, uploads and publication require separate authorization. Repository references were checked against Fauna `b0f87b4` and Alchemy `7790d47fb`; implementation must re-read current contracts before editing.

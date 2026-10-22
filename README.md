@@ -2,7 +2,7 @@
 
 A single-player creature-collecting card battler for Steam. Choose a starter and recruit companions, combining their cards in one shared deck. Find combinations, recruit new teammates, and reach the heart of the wilds.
 
-This foundation contains a complete short journey: choose from Mossguard, Emberback, Pollenmoth, Prismram and Captoad, play eight encounters with bosses fourth and last, collect keyword XP and currency, recruit reserves, choose journey Boons. Creatures and abilities use production illustrations; encounter and location artwork still includes placeholders.
+This foundation contains a complete short journey: choose one starter from three seeded offers, play eight encounters with bosses fourth and last, collect keyword XP and Gold, recruit backup creatures, and choose journey Boons. Creatures and abilities use production illustrations; encounter and location artwork still includes placeholders.
 
 ## Run
 
@@ -23,15 +23,15 @@ Owned previews use isolated ports and disposable browser/desktop profiles; `npm 
 
 ## Play
 
-Inspect the available creatures, choose one starter, then begin the journey. Every creature contributes three cards. Keep up to seven cards in hand; each turn restores four Mana and draws four cards. Extra draws wait in a hidden, unplayable buffer and fill open hand slots in order as cards are played. End turn discards the visible hand and retains the buffer. Select a card and an enemy or ally; confirm team guard cards with Play. Enemy actions remain hidden. Block absorbs attacks, and each creature has a passive trait.
+Inspect the available creatures, choose one starter, then begin the journey. Every creature contributes three cards. Keep up to seven cards in hand; each turn restores four Mana and draws four cards. Extra draws wait in a hidden, unplayable buffer and fill open hand slots in order as cards are played. End turn discards the visible hand and retains the buffer. Select a card and any required enemy or ally; confirm team-wide actions with Play. Enemy actions remain hidden. Block absorbs attacks, and each creature has a passive trait.
 
-Knocked-out creatures cannot act; their cards retain inert slots until replaced by a swap. Defeat the enemy row to bank XP/currency. Health and knockouts persist between battles; Campfire appears beside destination choices whenever any roster creature, including a reserve or knockout, is missing at least 30% of maximum Health. Rest restores 30% maximum Health to the whole roster, capped at full Health, and returns to the same combat offers without advancing the encounter or changing RNG. It remains available while the threshold is met. The shared Victory screen offers recruitment after ordinary combat or Boon choices after intermediate bosses; choosing or skipping advances directly. Choose from the three defeated creatures, including species already owned, to build a five-creature roster. Each copy has its own battle state. Recruits fill the starting lineup up to three creatures, then join the two reserves. The starting lineup is remembered and optionally editable from the menu between battles. Swap freely during combat; incoming cards replace outgoing cards in their current zones without healing, drawing, or spending Mana. Healthy reserves can replace fallen creatures; defeat requires the entire roster to fall. Optional Merchants sell journey Boons for permanent Gold without replacing battles, appearing only when at least one item is affordable. Keyword XP unlocks shared permanent talents; talents can be bought or reset at any time through the menu. Winning, losing or ending a run preserves discoveries.
+Knocked-out creatures cannot act; their cards retain inert slots until replaced by a swap. Defeat the enemy row to bank XP/currency. Health and knockouts persist between battles; Campfire appears beside destination choices whenever any roster creature, including a reserve or knockout, is missing at least 30% of maximum Health. Rest restores 30% maximum Health to the whole roster, capped at full Health, and returns to the same combat offers without advancing the encounter or changing RNG. It remains available while the threshold is met. The shared Victory screen offers recruitment after ordinary combat or Boon choices after intermediate bosses; choosing or skipping advances directly. Choose from the defeated creatures (one in the first battle, two in the second, three thereafter), including species already owned, to build a five-creature roster. Each copy has its own battle state. Recruits fill the starting lineup up to three creatures, then join the two reserves. The starting lineup is remembered and optionally editable from the menu between battles. Swap freely during combat; incoming cards replace outgoing cards in their current zones without healing, drawing, or spending Mana. Healthy reserves can replace fallen creatures; defeat requires the entire roster to fall. Optional Merchants sell journey Boons for permanent Gold without replacing battles, appearing only when at least one item is affordable. Keyword XP unlocks shared permanent talents; talents can be bought or reset at any time through the menu. Winning, losing or ending a run preserves discoveries.
 
-- Mouse: select cards and targets. Right-click any card to inspect it.
-- Keyboard: W/A/S/D navigate, Enter/Space activate, I inspects a focused card, Escape cancels or opens the menu. Tab remains available.
-- Standard controller: D-pad/left stick navigate, south/A confirms, east/B backs out, west/X inspects, north/Y ends the turn. Button mapping follows standard Xbox-style positions. Non-standard mappings are not yet supported.
+- Mouse: select cards and targets. Hover over artwork for details; right-click to pin inspection outside battle.
+- Keyboard: W/A/S/D navigate, Enter/Space activate, I opens inspection outside battle, Escape cancels or opens the menu. Tab remains available.
+- Standard controller: D-pad/left stick navigate, south/A confirms, east/B backs out, west/X inspects outside battle, north/Y ends the turn. Button mapping follows standard Xbox-style positions. Non-standard mappings are not yet supported.
 
-Gameplay settles before visual feedback. Accepted commands automatically save; a save failure exposes a retry action. Desktop close requests wait for queued saves. Browsers warn about closing while saves are pending, but abrupt browser/process termination cannot guarantee completion of queued writes.
+Gameplay settles before visual feedback. Accepted commands automatically save; failed writes retry automatically in the background without player-facing notices. Desktop close requests wait for queued saves. Browsers show no save warning on exit; abrupt browser/process termination cannot guarantee completion of queued writes.
 
 ## Verify
 
@@ -43,8 +43,8 @@ Gameplay settles before visual feedback. Accepted commands automatically save; a
 - [Contribution workflow and verification](CONTRIBUTING.md)
 - [Script implementation map](scripts/README.md)
 - [Design references](design/README.md)
-- [Planned Alchemy feature adoption](Docs/ALCHEMY_ADOPTION_PLAN.md)
-- [Alchemy tools and platform adoption plan](Docs/ALCHEMY_PLATFORM_PLAN.md)
+- [Historical Alchemy feature adoption](Docs/ALCHEMY_ADOPTION_PLAN.md)
+- [Historical Alchemy tools and platform adoption plan](Docs/ALCHEMY_PLATFORM_PLAN.md)
 - [Architecture and saves](Docs/ARCHITECTURE.md)
 - [Content and artwork](Docs/CONTENT.md)
 - [UI and typography](Docs/UI.md)

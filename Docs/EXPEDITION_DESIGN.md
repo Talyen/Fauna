@@ -12,7 +12,7 @@ These are the agreed directions from the design review. They supersede the proto
 - Only deployed living creatures act and provide passive traits. Enemy intents remain hidden.
 - During your turn, Swap opens a centered dialog with three deployed creatures and two backup at the shared artwork size. Backup are hidden on the battlefield.
 - Select either creature first, then one from the opposite group to commit immediately. Swaps are free and unlimited; no Mana, draw, shuffle, turn advancement, or confirmation.
-- A free manual swap replaces the outgoing owner's three cards in their existing hand, draw, and discard positions. Spent cards stay spent. Legacy upgrades do not transfer to incoming creatures.
+- A free manual swap replaces the outgoing owner's three cards in their existing hand, overflow, draw, and discard positions. Spent cards stay spent. Card upgrades do not transfer to incoming creatures.
 - Swap cards choose a random living backup, remove the departing kit from all zones, and shuffle the incoming kit into the draw pile before any draw effect. Without living backup they swap positions with a random living ally; alone the swap part does nothing. See [Captoad](CONTENT.md#captoad).
 - Creature identity, health, Block, and first-attack state stay with the creature. Normal turn expiration applies in backup; swapping never heals, cleanses, or repeats opening bonuses.
 - Living backup can replace knocked-out deployed creatures. Fallen creatures remain unavailable for the battle.
@@ -24,9 +24,9 @@ These are the agreed directions from the design review. They supersede the proto
 ## Encounters
 
 - A journey has eight encounters: Combat, Combat, Combat, Boss, Combat, Combat, Combat, Boss. Only the final boss completes the journey.
-- Each step has one saved encounter: Combat for the three ordinary battles, then Boss. Enemy packs are selected from one shared pool when advancing and remain unchanged through support visits and reload. Both encounter types use blank landscape placeholder artwork, with names beneath. Campfire appears alongside the encounter whenever any roster creature, including a backup or knockout, is missing at least 30% of maximum Health. Rest restores 30% maximum Health to the whole roster, capped at full Health, and returns without advancing the encounter or changing RNG. It remains available while the threshold is met.
-- Combat and Boss use blank 4:3 artwork with the encounter type below it. Campfire uses Rest beneath its location art; entering it commits a saved visit and exposes Rest as its only option. A quiet heading shows the encounter number out of eight.
-- Activating Combat or Boss immediately commits the saved encounter and starts battle. There is no enemy preview, inspection dialog or separate Begin battle action. Creature and action inspection remain available during battle.
+- Each step has one saved encounter: Combat for the three ordinary battles, then Boss. Ordinary packs come from the shared combat pool; each boss has an authored pack. Packs remain unchanged through support visits and reload. Combat uses blank landscape artwork; Boss shows its authored name and species artwork, with names beneath. Campfire appears alongside the encounter whenever any roster creature, including a backup or knockout, is missing at least 30% of maximum Health. Rest restores 30% maximum Health to the whole roster, capped at full Health, and returns without advancing the encounter or changing RNG. It remains available while the threshold is met.
+- Combat and Boss entrances use 4:3 ArtCards, with Combat or the boss name below the artwork. Campfire uses Rest beneath its location art; entering it commits a saved visit and exposes Rest as its only option. A quiet heading shows the encounter number out of eight.
+- Activating Combat or Boss immediately commits the saved encounter and starts battle. There is no enemy preview, inspection dialog or separate Begin battle action. Creature and action hover/focus details remain available during battle; pinned kit inspection belongs outside battle and in Collection.
 - Seeded gameplay chooses and saves one enemy pack when entering the encounter screen. Menus, support visits and reload never reroll enemies or consume randomness.
 - The shared enemy pool varies between runs. Every enemy, including boss placeholders and escorts, uses its species’ authored base Health, matching recruited creatures. Health and authored encounter damage gain an additive 10% of their base per room after the first: 100% in room 1 through 170% in room 8, rounded to the nearest whole number. Support visits do not advance this scaling. Enemy damage retains encounter tuning, with a one-enemy first battle and two-enemy second battle. These values are playtest tuning, not final balance.
 
@@ -47,7 +47,7 @@ These are the agreed directions from the design review. They supersede the proto
 - Clicking an available talent purchases it immediately, without a detail-dialog purchase step or confirmation.
 - Reset operates on the entire keyword category, refunding all spent points in that category while retaining its XP. Reset is available at any time, including during a journey; talent effects update immediately. Individual-talent refunds are not the chosen interaction.
 - Use Alchemy’s current point pacing: cumulative thresholds are 10, 40, 100, 180, and 280 keyword XP. Total XP for point n is 10 × n × (n + 1) − 10 × min(n, 2). This is initial tuning for playtesting.
-- Fourteen consolidated categories offer 129 distinct talents, adapted from Alchemy; effects requiring excluded mechanics are omitted. Burn, Freeze, Stun and Health use their matching progression; Thorns belongs to Nature, Cleanse to Health, and Purge to Light. Forge is removed. The authored catalog and effects are owned by `src/game/progression.ts` and `src/game/combat.ts`.
+- Fifteen consolidated categories offer 135 distinct talents, adapted from Alchemy; effects requiring excluded mechanics are omitted. Burn, Freeze, Stun and Health use their matching progression; Thorns belongs to Nature, Cleanse to Health, and Purge to Light. Forge is removed. The authored catalog and effects are owned by `src/game/progression.ts` and `src/game/combat.ts`.
 - Abandonment banks the XP earned by accepted plays, with no victory currency or boons. Auto-play dispatches ordinary accepted plays; each awards keyword XP once. Talent repeats resolve at most once and award no extra accepted-play XP.
 
 ## Recruitment
@@ -62,12 +62,12 @@ These are the agreed directions from the design review. They supersede the proto
 ## Currency and items
 
 - All Gold is permanent and carries between journeys.
-- Currency funds meta progression. Specific purchases are **TBD**.
-- A Merchant is offered before encounters 2 and 6 when an item is affordable. Buy one of up to two unowned journey Boons for 20 Gold, or Leave. Currency spending is atomic and reduces the wallet, while journey earnings remain gross retained income.
+- Gold buys journey Boons at Merchants; permanent upgrade purchases and other currencies are undefined.
+- A Merchant is offered before encounters 2 and 6 when an item is affordable. Buy one of up to two unowned journey Boons for 20 Gold (13 with Merchant’s Favor when stock is prepared), or Leave. Currency spending is atomic and reduces the wallet, while journey earnings remain gross retained income.
 - Initial battle item rewards focus on run-wide boons: passive effects for the whole journey.
 - When a battle awards a Boon, offer up to three distinct unowned choices.
-- Choose one boon or skip the reward. Boons use 3:4 portrait artwork wherever displayed, matching hand cards. All eight Boons use copied Alchemy artwork; names stay below the art and effects in hover/focus tooltips. Owned Boons are inspectable from the menu during a journey.
-- Starter tuning: Currency pays 20 per ordinary victory and 40 for each boss. Intermediate bosses offer up to three distinct unowned Boons; smaller nonempty pools remain available. Ordinary combat offers recruitment, never boons; intermediate bosses offer boons, never recruitment. Eight Boons are authored in `src/game/progression.ts`; their ownership lasts only for the journey. Material types and permanent upgrade purchases remain undefined.
+- Choose one boon or skip the reward. Boons use 3:4 portrait artwork wherever displayed, matching hand cards. All 18 Boons use copied Alchemy artwork; names stay below the art and effects in hover/focus tooltips. Owned Boons are inspectable from the menu during a journey.
+- Starter tuning: Currency pays 20 per ordinary victory and 40 for each boss. Intermediate bosses offer up to three distinct unowned Boons; smaller nonempty pools remain available. Ordinary combat offers recruitment, never boons; intermediate bosses offer boons, never recruitment. Eighteen Boons are authored in `src/game/progression.ts`; their ownership lasts only for the journey. Material types and permanent upgrade purchases remain undefined.
 
 ## Screen flow and Journey results
 
@@ -95,14 +95,14 @@ Each turn restores four shared Mana and draws four cards, with a seven-card hand
 
 Auto-end turn is enabled by default and advances only when Mana reaches zero. Its Settings switch persists separately from progression; disabling it allows free swaps before manually ending the turn. Victory and defeat settle immediately in either mode.
 
-Auto-play is explicitly enabled for one battle. It uses visible information to choose legal recovery swaps, healing, finishing attacks, other attacks and useful defenses, then ends turns when no useful play remains. Actions occur no faster than every 700 ms. Menus, inspection, focus loss and hidden pages pause it; manual play stops it. Rewards, encounters, recruitment and talents always remain player choices. It stops on completion, home navigation, save failure and shutdown.
+Auto-play is explicitly enabled for one battle. It uses visible information to choose legal recovery swaps, healing, finishing attacks, other attacks and useful defenses, then ends turns when no useful play remains. Actions occur no faster than every 700 ms. Menus, inspection, focus loss and hidden pages pause it; manual play stops it. Rewards, encounters, recruitment and talents always remain player choices. It stops on completion, home navigation and shutdown; save retries remain independent of combat assistance.
 
 Leaving newly completed results opens each newly unlocked creature's portrait and inspectable kit before Main menu. The reveal grants no progress and does not repeat when loading an existing completed journey. Results otherwise retain the earnings-only design.
 
-Development builds add Skip combat to the battle pause menu. It settles a normal victory with normal rewards and only XP already earned by actual plays; roster Health is preserved. It is unavailable in production and rejects repeated settlement.
+Development builds add a Skip combat icon beside the battle menu and Auto-play controls. It settles a normal victory with normal rewards and only XP already earned by actual plays; roster Health is preserved. It is unavailable in production and rejects repeated settlement.
 
 ## Optional support visits
 
-Merchant appears beside the combat encounter before encounters 2 and 6, only when at least one stocked item is affordable. It does not replace a battle. Inspecting and canceling is read-only; Enter commits the saved visit and rechecks affordability. Leave consumes it, even without buying, and beginning the next battle forfeits the opportunity. Returning preserves the exact enemy pack. Each offer allows one visit, without restocks.
+Merchant appears beside the combat encounter before encounters 2 and 6, only when at least one stocked item is affordable. It does not replace a battle. Activating the Merchant ArtCard commits the saved visit directly and rechecks affordability. Leave consumes it, even without buying, and beginning the next battle forfeits the opportunity. Returning preserves the exact enemy pack. Each offer allows one visit, without restocks.
 
-The Merchant offers up to two distinct unowned Boons for 20 Gold each and allows one purchase. Gold is the existing permanent currency and carries between journeys. Bought Boons last only for that journey; they do not become permanent unlocks. Omit a Merchant with no eligible stock or insufficient Gold. Saved stock and prices cannot reroll on reload. Campfire visits preserve any Merchant offer and its purchase receipt. No visit grants keyword XP or recruitment, and all eight battles remain. Sheltered Springs are removed.
+The Merchant offers up to two distinct unowned Boons for 20 Gold each (13 with Merchant’s Favor when stock is prepared) and allows one purchase. Gold is the existing permanent currency and carries between journeys. Bought Boons last only for that journey; they do not become permanent unlocks. Omit a Merchant with no eligible stock or insufficient Gold. Saved stock and prices cannot reroll on reload. Campfire visits preserve any Merchant offer and its purchase receipt. No visit grants keyword XP or recruitment, and all eight battles remain. Sheltered Springs are removed.

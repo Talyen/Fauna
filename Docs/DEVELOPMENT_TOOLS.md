@@ -10,7 +10,7 @@ Each session records its random identity, port, checkout and owner PID under ign
 
 ## Content checks
 
-`npm run content:audit` reports authored-content errors and warnings by stable ID and field, and writes `reports/content-audit.json`. The pure validator in `src/game/content-validation.ts` also supplies startup validation through the existing `validateContent` export. It checks IDs, owners, supported magnitudes/costs, effect and keyword registration, encounter packs, boss positions, stats, and IDs, and talent rows/references. Missing player cards for a progression keyword are advisory warnings.
+`npm run content:audit` reports authored-content errors and warnings by stable ID and field, and writes `reports/content-audit.json`. The pure validator in `src/game/content-validation.ts` also supplies startup validation through the existing `validateContent` export. It checks IDs, owners, supported magnitudes/costs, effect and keyword registration, encounter packs, boss positions, stats, and talent rows/references. Missing player cards for a progression keyword are advisory warnings.
 
 Card descriptions derive from their structured effects. Handwritten traits, boons and talent prose still need focused gameplay tests and review; the validator does not prove arbitrary English describes a resolver correctly. Media checks validate manifest coverage, image geometry, preparation identities and output bytes. CI runs the content audit; it is not added to the bounded default local smoke.
 
@@ -53,6 +53,8 @@ Run the identical suite in each code version, then use `npm run balance:compare 
 `npm run balance:compare -- replay reports/balance/smoke/case-0.json` directly replays recorded commands and fails on code identity or checkpoint divergence. All output remains under ignored `reports/`. The existing `balance:playthrough` replay format is now version 3; obsolete journals are rejected.
 
 ## Reproducible performance captures
+
+Builds and performance captures are CI-owned by default; the commands below are for an explicitly requested local investigation or an authorized CI run.
 
 Build once with `npm run build`, then run `npm run perf -- --out reports/performance/baseline`. The three scenarios cover card play/enemy turns, free swaps, and Collection/menu transitions. `--scenario battle`, `swap`, or `menus` selects one. A named fixture explicitly grants three deployed creatures and one reserve; it is validated as a current-format save, not claimed to be earned progression. The driver uses normal controls in fresh browser contexts, an owned production preview on a free port, and muted speaker output.
 
