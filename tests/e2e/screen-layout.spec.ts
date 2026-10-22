@@ -31,30 +31,25 @@ for (const [width, height] of [
       .locator(".creature-card img")
       .evaluateAll((imgs) => Promise.all(imgs.map((img) => (img as HTMLImageElement).decode())));
     await fits(page);
-    expect(
-      await page
-        .locator(".app:not([inert]) .player-row .creature-card")
-        .first()
-        .evaluate((el: HTMLElement) => ({
-          width: el.offsetWidth,
-          height: el.offsetHeight,
-        })),
-    ).toEqual(
-      height <= 760
-        ? { width: 235, height: 176 }
-        : height <= 900
-          ? { width: 264, height: 198 }
-          : { width: 293, height: 220 },
-    );
+    for (const creature of await page
+      .locator(".app:not([inert]) :is(.player-row, .enemy-row) .creature-card")
+      .all()) {
+      const size = await creature.evaluate((el: HTMLElement) => ({
+        width: el.offsetWidth,
+        height: el.offsetHeight,
+      }));
+      expect(Math.abs(size.width / size.height - 4 / 3)).toBeLessThan(0.015);
+      expect(size.width).toBeGreaterThan(44);
+    }
     for (const card of await page.locator(".app:not([inert]) .hand .action-card").all()) {
       expect(
         await card.evaluate((el: HTMLElement) => ({ width: el.offsetWidth, height: el.offsetHeight })),
       ).toEqual(
         height <= 760
-          ? { width: 144, height: 192 }
+          ? { width: 160, height: 213 }
           : height <= 900
-            ? { width: 162, height: 216 }
-            : { width: 180, height: 240 },
+            ? { width: 180, height: 240 }
+            : { width: 200, height: 267 },
       );
       await expect(card.locator("img")).toHaveAttribute("width", "600");
     }
@@ -111,17 +106,13 @@ test("five-card hand with hidden overflow, three enemies and a full bench preser
   await expect(page.locator(".app:not([inert]) .hand .action-card")).toHaveCount(5);
   await expect(page.locator(".app:not([inert]) .enemy-row .creature-card")).toHaveCount(3);
   await fits(page);
-  const area = await page
-    .locator(".app:not([inert]) .player-row .creature-card")
-    .first()
-    .evaluate((el: HTMLElement) => el.offsetWidth * el.offsetHeight);
   for (const card of await page.locator(".app:not([inert]) .hand .action-card").all()) {
     await card.focus();
-    expect(
-      Math.abs(
-        (await card.evaluate((el: HTMLElement) => el.offsetWidth * el.offsetHeight)) / area -
-          (0.9 / 1.1) ** 2,
-      ),
-    ).toBeLessThan(0.025);
+    const size = await card.evaluate((el: HTMLElement) => ({
+      width: el.offsetWidth,
+      height: el.offsetHeight,
+    }));
+    expect(Math.abs(size.width / size.height - 3 / 4)).toBeLessThan(0.01);
+    await expect(card.locator("img")).toHaveCSS("object-fit", "contain");
   }
 });

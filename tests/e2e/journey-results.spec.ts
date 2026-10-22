@@ -115,6 +115,13 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
       }
     };
     await step(page, activate);
+    const reward = await state(page);
+    expect(reward.phase).toBe("recruit");
+    expect(reward.reward!.recruits).toEqual(["memento"]);
+    await page.reload();
+    await resume(page);
+    expect(await state(page)).toEqual(reward);
+    await step(page, activate);
     await expect(page.getByRole("heading", { name: "Journey complete", exact: true })).toBeVisible();
     const won = await state(page);
     expect(won.wins).toBe(1);

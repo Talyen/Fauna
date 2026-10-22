@@ -55,7 +55,7 @@ export function formationForSwap(
   else ids[index] = incoming;
   return ids;
 }
-export function setFormation(state: GameState, ids: string[], events: GameEvent[] = [], fromCard = false) {
+function setFormation(state: GameState, ids: string[], events: GameEvent[] = [], fromCard = false) {
   const all = [...state.team, ...state.reserves];
   const previous = state.cards;
   const departing = new Set(state.team.filter((unit) => !ids.includes(unit.id)).map((unit) => unit.id));

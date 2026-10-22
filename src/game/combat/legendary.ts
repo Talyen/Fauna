@@ -7,7 +7,7 @@ import { battlefield, isEnemy } from "../battlefield";
 import { freshCombat, hit, restoreHealth, controlled } from "./index";
 import type { Combatant } from "./state";
 import type { BattleState, Enemy, EnemyDeck, GameEvent, GameState } from "../types";
-export const MINION_LIMIT = 2;
+const MINION_LIMIT = 2;
 export function bossDeck(state: GameState, enemy: Enemy): EnemyDeck {
   return {
     draw: shuffle(

@@ -249,7 +249,11 @@ export function settle(state: BattleState, events: GameEvent[]): boolean {
 }
 export function afterRewards(state: RewardState) {
   if (state.phase === "recruit" && state.reward.outcome === "next" && state.reward.boons.length) {
-    enterPhase(state, { ...state, phase: "boon", reward: { ...state.reward, recruits: [] } });
+    enterPhase(state, {
+      ...state,
+      phase: "boon",
+      reward: { ...state.reward, outcome: "next", recruits: [] },
+    });
   } else if (state.reward.outcome === "victory") {
     enterPhase(state, {
       ...state,

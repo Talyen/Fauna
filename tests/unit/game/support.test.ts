@@ -1,4 +1,5 @@
 import { expect, it } from "vitest";
+import type { GameState } from "../../../src/game/types";
 import { produce } from "immer";
 import { BOONS } from "../../../src/game/content";
 import { createGame, dispatch } from "../../../src/game/engine";
@@ -50,7 +51,7 @@ it("rejects stale and unaffordable purchases without changing state or RNG", () 
   expect(rejected.events).toEqual([]);
 });
 it("can roll no Merchant after an ordinary victory", () => {
-  let s = merchant();
+  let s: GameState = merchant();
   s = winBattle(accept(s, { type: "beginBattle" }));
   s = accept(
     produce(s, (draft) => {
@@ -63,7 +64,7 @@ it("can roll no Merchant after an ordinary victory", () => {
   expect(decodeSave(encodeSave(s))).toEqual(s);
 });
 it("preserves eight battles after Merchant purchases", () => {
-  let s = merchant();
+  let s: GameState = merchant();
   for (let i = 1; i < 8; i++) {
     if (s.support?.kind === "merchant" && s.support.stock.some((slot) => slot.price <= s.currency)) {
       s = accept(s, { type: "enterSupport", visit: s.support.id });
@@ -85,7 +86,7 @@ it("preserves eight battles after Merchant purchases", () => {
   expect(s.journey!.victories).toBe(8);
 });
 it("keeps Merchant stock and combat offers through Campfire rest and reload", () => {
-  let s = produce(merchant(), (d) => {
+  let s: GameState = produce(merchant(), (d) => {
     d.team[0]!.health = 0;
   });
   const route = s.expedition,
@@ -117,7 +118,7 @@ it("rejects obsolete saves and retired Spring visits", () => {
 it.each([BOONS.length - 2, BOONS.length - 1, BOONS.length])(
   "offers every remaining boss Boon when an explicit checkpoint owns %s Boons",
   (owned) => {
-    let s = merchant();
+    let s: GameState = merchant();
     for (let i = 0; i < 2; i++) {
       s = winBattle(accept(s, { type: "beginBattle" }));
       s = accept(s, recruitChoice(s));
@@ -136,7 +137,7 @@ it.each([BOONS.length - 2, BOONS.length - 1, BOONS.length])(
   },
 );
 it("discounts each new Merchant with Favor and persists the paid price", () => {
-  let state = merchant();
+  let state: GameState = merchant();
   state = produce(state, (draft) => {
     draft.boons = ["merchants-favor"];
   });

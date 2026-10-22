@@ -120,7 +120,7 @@
   --target-corner: calc(var(--radius-max) + var(--target-bracket-gap) + var(--target-bracket-width));
   --target-summary-width: 480px;
   --target-control-height: calc(96px * var(--text-scale, 1));
-  --target-readout-height: 44px;
+  --target-readout-height: calc(var(--control-height) + var(--screen-item-gap));
   --battle-target-rail-width: clamp(180px, 16vw, 300px);
   --battle-hand-hover-clearance: 24px;
   --target-outcomes-height: 44px;

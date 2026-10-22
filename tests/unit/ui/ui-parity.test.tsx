@@ -13,7 +13,6 @@ import { species } from "../../../src/game/content";
 import {
   requireReward,
   accept,
-  recruitChoice,
   run,
   winBattle,
   starterJourney,

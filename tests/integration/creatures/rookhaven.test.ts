@@ -177,7 +177,9 @@ it("enemy Rookhaven attacks and Purges the opposing deployed row without player-
       draft.team.forEach((unit) => {
         unit.block = 3;
       });
-      executeAbility(draft, { side: "enemy", actor: enemy, def, value: 1 }, events, { swap: swapFromCard });
+      executeAbility(requireBattle(draft), { side: "enemy", actor: enemy, def, value: 1 }, events, {
+        swap: swapFromCard,
+      });
     });
     expect(result.battle!.hand).toEqual(game.battle!.hand);
     expect(result.battle!.copySerial).toBe(game.battle!.copySerial);

@@ -53,7 +53,15 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
         const physical = def.damageType === "physical" || def.damageType === "stun";
         // Rank ordinary landed hits; do not roll Dodge or Critical outcomes.
         const effective = Math.max(0, value - enemy.block - (physical ? enemy.combat.armor : 0));
-        return (effective >= enemy.health ? 2000 : 1000) + Math.min(value, enemy.health);
+        // Defeating the summoner removes its Echoes; farming replacement Minions can stall forever.
+        const priority = enemy.minion
+          ? effective >= enemy.health
+            ? 500
+            : 250
+          : effective >= enemy.health
+            ? 2000
+            : 1000;
+        return priority + Math.min(value, enemy.health);
       };
       if (def.target === "allEnemies")
         add(

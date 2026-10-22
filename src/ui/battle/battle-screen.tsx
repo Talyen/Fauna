@@ -8,7 +8,7 @@ import { motionValue } from "../shared/motion-values";
 import { ActionDetails } from "../shared/cards/card-details";
 import { cardCost } from "../../game/ability-rules";
 import { controlled } from "../../game/combat/index";
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { Button } from "../../components/ui/button";
 import { ActionCard, AllyCard, EnemyCard } from "../shared/cards/cards";
 import { definition, species } from "../../game/content";
@@ -115,10 +115,7 @@ export function BattleScreen({
     const side = enemyTarget ? "enemy" : "ally";
     setRemembered((old) => (old[side] === id ? old : { ...old, [side]: id }));
   };
-  const preview = useMemo(
-    () => (selected && target ? previewPlay(game, selected, target) : null),
-    [game, selected, target],
-  );
+  const preview = selected && target ? previewPlay(game, selected, target) : null;
   const affected = new Set(
     preview?.events.flatMap((event) => (event.targetId ? [event.targetId] : [])) ?? [],
   );

@@ -4,7 +4,7 @@ import { freshCombat, combat } from "../../src/game/combat/index";
 import { controlled } from "../../src/game/combat/index";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
-import { CARDS, definition, species, type SpeciesId } from "../../src/game/content";
+import { definition, species, type SpeciesId } from "../../src/game/content";
 import type { Command, GameState, Lifecycle, BattleState, RewardState } from "../../src/game/types";
 // Shared bound accounts for solo Legendary Bosses and their recruitment choices
 export const FULL_JOURNEY_SEED = 3;

@@ -215,7 +215,7 @@ it("consumes Flashpoint once and does not refresh it on talent reset or resume",
   expect(decodeSave(encodeSave(s))).toEqual(s);
 });
 
-it("final victory banks permanent rewards without offering recruitment or run-only boons", () => {
+it("final victory banks rewards once before recruitment and offers no run-only Boons", () => {
   let s = run();
   for (let i = 0; i < 3; i++) {
     s = winBattle(s);
@@ -226,9 +226,15 @@ it("final victory banks permanent rewards without offering recruitment or run-on
     }
   }
   expect(s.reward!.outcome).toBe("victory");
-  expect(s.reward!.recruits).toEqual([]);
+  expect(s.phase).toBe("recruit");
+  expect(s.reward!.recruits).toEqual(["memento"]);
   expect(s.reward!.boons).toEqual([]);
+  expect(decodeSave(encodeSave(s))).toEqual(s);
+  const banked = { currency: s.currency, keywordXP: s.keywordXP, wins: s.wins };
+  s = accept(s, recruitChoice(s));
   expect(s.phase).toBe("victory");
+  expect({ currency: s.currency, keywordXP: s.keywordXP, wins: s.wins }).toEqual(banked);
+  expect(decodeSave(encodeSave(s))).toEqual(s);
 });
 it("swapping one creature preserves unchanged teammates' legacy cards", () => {
   let s = accept(winBattle(), { type: "recruit", species: "emberback" });
