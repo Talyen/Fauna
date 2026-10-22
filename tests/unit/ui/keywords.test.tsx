@@ -1,7 +1,8 @@
 import { readFileSync } from "node:fs";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { CARDS, DAMAGE_LABELS, TALENTS } from "../../../src/game/content";
+import { CARDS, TALENTS } from "../../../src/game/content";
+import { DAMAGE_LABELS } from "../../../src/game/card-rules";
 import { GLOSSARY } from "../../../src/game/glossary";
 import {
   DAMAGE_TYPES,

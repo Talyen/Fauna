@@ -2,7 +2,7 @@ import { afterEach, expect, it, vi } from "vitest";
 import { produce } from "immer";
 import * as content from "../../../src/game/content";
 import { creaturePassive } from "../../../src/game/progression";
-import { actionValue, enemyAbilityValue, retainedBlock } from "../../../src/game/rules";
+import { actionValue, enemyAbilityValue, retainedBlock } from "../../../src/game/ability-rules";
 import { contentCatalog, validateCatalog } from "../../../src/game/content-validation";
 import { createGame } from "../../../src/game/engine";
 import { hit } from "../../../src/game/combat/index";

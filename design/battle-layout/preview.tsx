@@ -10,7 +10,7 @@ import { ActionCard } from "../../src/ui/shared/cards/cards";
 import { ManaCrystals } from "./mana-crystals";
 import { ActionDetails, CreatureDetails } from "../../src/ui/shared/cards/card-details";
 import { definition, species, ENCOUNTERS, type SpeciesId } from "../../src/game/content";
-import { actionValue } from "../../src/game/rules";
+import { actionValue } from "../../src/game/ability-rules";
 import type { Card, Creature } from "../../src/game/types";
 import "@fontsource-variable/inter/wght.css";
 import "../../src/ui/styles.css";

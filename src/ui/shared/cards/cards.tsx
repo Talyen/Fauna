@@ -5,8 +5,9 @@ import { BattleReadout } from "../combat/battle-readout";
 import { ArtCard } from "./art-card";
 import { ActionDetails, CreatureDetails } from "./card-details";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../../components/ui/tooltip";
-import { actionValue, cardCost, physicalBonus } from "../../../game/rules";
-import { cardText, definition, enemyCard, species } from "../../../game/content";
+import { actionValue, cardCost, physicalBonus } from "../../../game/ability-rules";
+import { definition, species } from "../../../game/content";
+import { cardText, enemyCard } from "../../../game/card-rules";
 import type { SpeciesId } from "../../../game/content";
 import type { Card, Creature, Enemy, GameState } from "../../../game/types";
 type CreatureProps = {

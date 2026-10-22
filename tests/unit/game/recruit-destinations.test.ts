@@ -2,7 +2,7 @@ import { expect, it } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../../src/game/engine";
 import { SPECIES, species } from "../../../src/game/content";
-import { canRecruitDestination, canVisitCampfire, canVisitMerchant } from "../../../src/game/support";
+import { canRecruitDestination, canVisitCampfire, canVisitMerchant } from "../../../src/game/destinations";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { accept, starterJourney, winBattle, recruitChoice } from "../../support/game";
 

@@ -30,7 +30,7 @@ it("finds gameplay and presentation owners from current modules and focused suit
     "tests/unit/game/combat.test.ts",
   ])
     expect(context(root, [file]).topics).toContain("combat");
-  expect(context(root, ["src/game/support.ts"]).topics).toContain("progression");
+  expect(context(root, ["src/game/destinations.ts"]).topics).toContain("progression");
   const collection = context(root, ["tests/unit/ui/collection-ui.test.tsx"]);
   expect(collection.topics).toEqual(expect.arrayContaining(["ui", "progression", "tooling"]));
   expect(collection.entries).toContain("src/ui/App.tsx");

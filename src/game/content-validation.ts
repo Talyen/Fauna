@@ -1,13 +1,5 @@
-import {
-  cardText,
-  CARDS,
-  SPECIES,
-  FIRST_RUN_STARTERS,
-  ENCOUNTERS,
-  BOONS,
-  TALENTS,
-  TALENT_EFFECTS,
-} from "./content";
+import { CARDS, SPECIES, FIRST_RUN_STARTERS, ENCOUNTERS, BOONS, TALENTS, TALENT_EFFECTS } from "./content";
+import { cardText } from "./card-rules";
 import { BOSSES, COMBAT_PACKS, JOURNEY_LENGTH } from "./encounters";
 import { DAMAGE_TYPES, EFFECT_KEYWORDS, PROGRESSION_KEYWORDS, definitionKeywords } from "./keywords";
 

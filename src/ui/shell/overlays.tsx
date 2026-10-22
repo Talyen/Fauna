@@ -16,10 +16,10 @@ interface ShellOverlaysProps {
   menu: boolean;
   modalOpener: RefObject<HTMLElement | null>;
   game: GameState;
-  send(command: Command): boolean;
-  setModal(value: Modal): void;
+  send: (command: Command) => boolean;
+  setModal: (value: Modal) => void;
   inspection: Inspection | null;
-  setInspection(value: Inspection | null): void;
+  setInspection: (value: Inspection | null) => void;
   session: Session;
   inspectionControls: Controls;
   route: Route;

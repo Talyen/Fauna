@@ -1,5 +1,5 @@
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
-import { ResultPresentation, AnimatedNumber } from "./result-presentation";
+import { ResultPresentation, AnimatedNumber } from "../shared/rewards/result-presentation";
 import { EmptyState } from "../shared/empty-state";
 import { Coins } from "lucide-react";
 import { Button } from "../../components/ui/button";

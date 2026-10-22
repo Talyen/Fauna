@@ -1,6 +1,7 @@
 import { KeywordText } from "../keyword-text";
 import { Droplet, Flame, FlaskConical, Leaf, Snowflake, Sun, Swords, Zap } from "lucide-react";
-import { cardText, DAMAGE_LABELS, type CardDefinition, type DamageType } from "../../../game/content";
+import { type CardDefinition, type DamageType } from "../../../game/content";
+import { cardText, DAMAGE_LABELS } from "../../../game/card-rules";
 const DAMAGE_ICONS = {
   physical: Swords,
   poison: FlaskConical,
