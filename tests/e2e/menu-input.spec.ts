@@ -100,11 +100,16 @@ test("minimum-size enlarged menus fit every action without scrolling", async ({ 
   expect(panel.y).toBeGreaterThanOrEqual(16);
   expect(panel.y + panel.height).toBeLessThanOrEqual(704);
   expect(await page.locator(".dialog-overlay").count()).toBe(0);
-  const iconOffsets = await choices
-    .locator("button")
-    .evaluateAll((buttons) =>
-      buttons.map((button) => button.querySelector("svg")!.getBoundingClientRect().left),
-    );
+  const iconOffsets = await choices.locator("button").evaluateAll((buttons) =>
+    buttons.map((button) => {
+        const element = button as HTMLButtonElement;
+        const bounds = element.getBoundingClientRect();
+      const icon = button.querySelector("svg")!.getBoundingClientRect();
+      // Compare layout columns independently of the intentional hover/focus scale.
+        const scale = bounds.width / element.offsetWidth;
+        return element.offsetLeft + (icon.left - bounds.left) / scale;
+    }),
+  );
   for (const offset of iconOffsets) expect(offset).toBeCloseTo(iconOffsets[0]!);
   const heights = await dialog
     .locator("button:not(.dialog-close)")
