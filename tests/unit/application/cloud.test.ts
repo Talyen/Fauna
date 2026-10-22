@@ -557,3 +557,78 @@ it("retries again after a stalled background read and ignores its late result", 
     vi.useRealTimers();
   }
 });
+
+it("retains causal ancestry across overlapping local commits", async () => {
+  const f = fixture();
+  await f.manager.start(initial);
+  await f.manager.flush();
+  let release!: () => void;
+  const gate = new Promise<void>((resolve) => (release = resolve));
+  const records: string[] = [];
+  const write = f.port.writeLocal;
+  f.port.writeLocal = async (data) => {
+    records.push(data);
+    if (records.length === 1) await gate;
+    await write(data);
+  };
+  try {
+    const first = f.manager.commit(progress);
+    await vi.waitFor(() => expect(records).toHaveLength(1));
+    const latest = encodeSave({ ...decodeSave(progress), currency: 17 });
+    const second = f.manager.commit(latest);
+    release();
+    await Promise.all([first, second]);
+    const earlier = await parseSnapshot(records[0]!, identity.profile);
+    const later = await parseSnapshot(f.local.data!, identity.profile);
+    expect(later.payload).toBe(latest);
+    expect(later.ancestors).toContain(earlier.id);
+    expect(newestHeads([earlier, later])).toEqual([later]);
+  } finally {
+    release();
+    await f.manager.flush();
+    await f.manager.dispose();
+  }
+});
+
+it("recovers a valid remote backup when another slot rejects its read", async () => {
+  const f = fixture();
+  const remote = await snapshot(progress, other, 1);
+  const unreadable = cloudName({ device: other.device, sequence: 2 });
+  f.files.set(unreadable, "unreadable");
+  f.files.set(cloudName(remote), JSON.stringify(remote));
+  const read = f.port.read;
+  f.port.read = async (name) => {
+    if (name === unreadable) throw new Error("slot unavailable");
+    return read(name);
+  };
+  try {
+    await f.manager.start(null);
+    expect(f.install).toHaveBeenCalledWith(progress);
+    expect(f.manager.view.status).toBe("Pending");
+    expect(f.files.size).toBe(2);
+    expect(f.files.get(unreadable)).toBe("unreadable");
+  } finally {
+    await f.manager.dispose();
+  }
+});
+
+it("preserves divergent snapshots in both slots of the same device", async () => {
+  const f = fixture();
+  const first = await snapshot(initial, other, 1);
+  const second = await snapshot(progress, other, 2);
+  f.files.set(cloudName(first), JSON.stringify(first));
+  f.files.set(cloudName(second), JSON.stringify(second));
+  try {
+    await f.manager.start(null);
+    await f.manager.flush();
+    const preserved = f.preserve.mock.calls.flatMap(([records]) => records.map((raw) => JSON.parse(raw).id));
+    expect(preserved).toEqual(expect.arrayContaining([first.id, second.id]));
+    const resolved = await parseSnapshot(f.local.data!, identity.profile);
+    expect(resolved.ancestors).toEqual(expect.arrayContaining([first.id, second.id]));
+    expect(f.install).toHaveBeenCalledWith(
+      [first, second].sort((a, b) => a.id.localeCompare(b.id))[0]!.payload,
+    );
+  } finally {
+    await f.manager.dispose();
+  }
+});
