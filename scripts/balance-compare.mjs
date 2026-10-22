@@ -9,6 +9,7 @@ const load = async (file) => JSON.parse(await readFile(path.resolve(file), "utf8
 export async function worker(input, output) {
   if (!output || !path.resolve(output).startsWith(path.join(ROOT, "reports") + path.sep))
     throw new Error("Worker reports must remain under reports/.");
+  await reportDirectory(path.dirname(path.resolve(output)));
   const server = await runtime();
   try {
     const config = await load(input);
@@ -21,29 +22,36 @@ export async function worker(input, output) {
     await server.close();
   }
 }
-function runWorker(input, output, timeout) {
+export function runWorker(input, output, timeout, { signal, spawnWorker = fork } = {}) {
+  signal?.throwIfAborted();
   return new Promise((resolve, reject) => {
-    const child = fork(path.join(ROOT, "scripts/balance-compare.mjs"), ["--worker", input, output], {
+    const child = spawnWorker(path.join(ROOT, "scripts/balance-compare.mjs"), ["--worker", input, output], {
       stdio: ["ignore", "inherit", "inherit", "ipc"],
     });
-    const stop = () => child.kill();
-    process.once("SIGINT", stop);
-    process.once("SIGTERM", stop);
+    let failure;
+    const stop = () => {
+      failure = new Error("Incomplete: balance run cancelled.");
+      child.kill("SIGKILL");
+    };
+    signal?.addEventListener("abort", stop, { once: true });
     const timer = setTimeout(() => {
-      child.kill();
-      reject(new Error("Incomplete: case watchdog exhausted."));
+      failure = new Error("Incomplete: case watchdog exhausted.");
+      child.kill("SIGKILL");
     }, timeout);
-    child.once("error", reject);
-    child.once("exit", (code) => {
+    const finish = (error) => {
       clearTimeout(timer);
-      process.removeListener("SIGINT", stop);
-      process.removeListener("SIGTERM", stop);
-      if (code === 0) resolve();
-      else reject(new Error(`Incomplete: case worker exited ${code}.`));
+      signal?.removeEventListener("abort", stop);
+      if (error) reject(error);
+      else resolve();
+    };
+    child.once("error", finish);
+    // Wait for exit before admitting another case, including after the watchdog.
+    child.once("exit", (code) => {
+      finish(failure ?? (code === 0 ? undefined : new Error(`Incomplete: case worker exited ${code}.`)));
     });
   });
 }
-export async function main(args = process.argv.slice(2)) {
+export async function main(args = process.argv.slice(2), { runCase = runWorker } = {}) {
   if (args[0] === "--worker") return worker(args[1], args[2]);
   const mode = args.shift();
   if (mode === "compare") {
@@ -145,44 +153,60 @@ export async function main(args = process.argv.slice(2)) {
       },
     }));
   }
-  for (let i = 0; i < configs.length; i++) {
-    const { key, config, arm } = configs[i];
-    const input = path.join(out, `case-${i}-config.json`),
-      output = path.join(out, `case-${i}.json`);
-    await writeFile(input, JSON.stringify(config));
-    try {
-      const remaining = deadline - Date.now();
-      if (remaining <= 0) throw new Error("Suite deadline exhausted.");
-      await runWorker(input, output, Math.min(60_000, remaining));
-      const result = await load(output);
-      await writeFile(output, JSON.stringify({ ...result, config, identity: code }));
-      report.settings = result.settings;
-      report.cases.push({
-        key,
-        starter: config.starter,
-        seed: config.seed,
-        arm,
-        complete: result.complete,
-        reason: result.reason,
-        baseHash: hash(result.base),
-        initialHash: hash(result.initial),
-        metrics: result.metrics,
-        fixtureGrants: config.loadout ?? null,
-        evidence: output,
-      });
-      if (!result.complete)
+  const controller = new AbortController();
+  const cancel = () => controller.abort();
+  process.once("SIGINT", cancel);
+  process.once("SIGTERM", cancel);
+  try {
+    for (let i = 0; i < configs.length; i++) {
+      if (controller.signal.aborted) break;
+      const { key, config, arm } = configs[i];
+      const input = path.join(out, `case-${i}-config.json`),
+        output = path.join(out, `case-${i}.json`);
+      await writeFile(input, JSON.stringify(config));
+      try {
+        const remaining = deadline - Date.now();
+        if (remaining <= 0) throw new Error("Suite deadline exhausted.");
+        await runCase(input, output, Math.min(60_000, remaining), { signal: controller.signal });
+        const result = await load(output);
+        await writeFile(output, JSON.stringify({ ...result, config, identity: code }));
+        report.settings = result.settings;
+        report.cases.push({
+          key,
+          starter: config.starter,
+          seed: config.seed,
+          arm,
+          complete: result.complete,
+          reason: result.reason,
+          baseHash: hash(result.base),
+          initialHash: hash(result.initial),
+          metrics: result.metrics,
+          fixtureGrants: config.loadout ?? null,
+          evidence: output,
+        });
+        if (!result.complete)
+          report.failures.push({
+            key,
+            reason: result.reason,
+            evidence: output,
+            journal: `${output}.journal.jsonl`,
+          });
+      } catch (error) {
         report.failures.push({
           key,
-          reason: result.reason,
-          evidence: output,
+          reason: error.message,
+          config: input,
           journal: `${output}.journal.jsonl`,
         });
-    } catch (error) {
-      report.failures.push({ key, reason: error.message, config: input, journal: `${output}.journal.jsonl` });
+      }
+      await writeFile(manifest, JSON.stringify(report, null, 2));
     }
-    await writeFile(manifest, JSON.stringify(report, null, 2));
+  } finally {
+    process.removeListener("SIGINT", cancel);
+    process.removeListener("SIGTERM", cancel);
   }
-  report.complete = report.failures.length === 0 && report.cases.length === configs.length;
+  report.complete =
+    !controller.signal.aborted && report.failures.length === 0 && report.cases.length === configs.length;
   await writeFile(manifest, JSON.stringify(report, null, 2));
   await writeBalanceFindings(report, out);
   if (mode === "experiment" && report.complete) {
