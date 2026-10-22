@@ -1,4 +1,4 @@
-import { needsCampfire } from "./support";
+import { needsCampfire, merchantPrice } from "./support";
 import saveFormat from "./save-format.json" with { type: "json" };
 import { freeze } from "immer";
 import { MAX_HAND_SIZE } from "./card-zones";
@@ -308,6 +308,8 @@ export function decodeSave(raw: string): GameState {
   if (s.phase === "support") invalid(!s.support || !s.expedition);
   if (s.support) {
     const v = s.support;
+    // Stock keeps its original price when this visit sells Merchant's Favor.
+    const price = merchantPrice({ boons: s.boons.filter((boon) => boon !== v.purchased) });
     invalid(
       !s.expedition ||
         v.encounter !== s.encounter ||
@@ -317,7 +319,10 @@ export function decodeSave(raw: string): GameState {
         !unique(v.stock.map((r) => r.slot)) ||
         !unique(v.stock.map((r) => r.boon)) ||
         v.stock.some(
-          (r, i) => r.slot !== `slot-${i}` || (s.boons.includes(r.boon) && v.purchased !== r.boon),
+          (r, i) =>
+            r.slot !== `slot-${i}` ||
+            r.price !== price ||
+            (s.boons.includes(r.boon) && v.purchased !== r.boon),
         ) ||
         (v.purchased !== null &&
           (!v.resolved || !s.boons.includes(v.purchased) || !v.stock.some((r) => r.boon === v.purchased))),
@@ -330,6 +335,11 @@ export function decodeSave(raw: string): GameState {
   invalid(!rewardPhase && s.reward !== null && !["victory", "defeat"].includes(s.phase));
   if (s.phase !== "battle") invalid(Object.values(s.battleXP).some((n) => n !== 0));
   if (s.reward) {
+    invalid(
+      (s.phase === "victory" && s.reward.outcome !== "victory") ||
+        (s.phase === "defeat" && s.reward.outcome !== "defeat") ||
+        (rewardPhase && s.reward.outcome !== "next"),
+    );
     invalid(s.reward.recruits.length > 0 && s.reward.boons.length > 0);
     invalid(bossEncounter(s) ? s.reward.recruits.length > 0 : s.reward.boons.length > 0);
     invalid(
@@ -403,6 +413,7 @@ export function decodeSave(raw: string): GameState {
   for (const unit of allCombatants)
     if (unit.combat) {
       const stats = unit.combat;
+      invalid((stats.controlled === null) !== (stats.controlTurns === 0));
       invalid((stats.grace > 0 && !stats.deathDoorUsed) || (stats.controlled !== null && stats.cooldown > 0));
       invalid(
         Object.values(stats.statusSources).some((id) => !allCombatants.some((unit) => unit.id === id)) ||

@@ -1,6 +1,9 @@
 import { species } from "./content";
 import type { GameState } from "./types";
-export const MERCHANT_PRICE = 20;
+const MERCHANT_PRICE = 20;
+export function merchantPrice(state: Pick<GameState, "boons">) {
+  return MERCHANT_PRICE - (state.boons.includes("merchants-favor") ? 7 : 0);
+}
 export function campfireRecovery(creature: GameState["team"][number]) {
   const maximum = species(creature.species).health;
   return Math.min(maximum - creature.health, Math.round(maximum * 0.3));

@@ -1,5 +1,5 @@
 import { executeAbility } from "./abilities";
-import { MERCHANT_PRICE, canVisitCampfire, campfireRecovery, canVisitMerchant } from "./support";
+import { merchantPrice, canVisitCampfire, campfireRecovery, canVisitMerchant } from "./support";
 import saveFormat from "./save-format.json" with { type: "json" };
 import { freeze, produce } from "immer";
 import {
@@ -90,7 +90,7 @@ function prepareEncounter(state: GameState) {
           .map((b, i) => ({
             slot: `slot-${i}`,
             boon: b.id,
-            price: MERCHANT_PRICE - (state.boons.includes("merchants-favor") ? 7 : 0),
+            price: merchantPrice(state),
           }))
       : [];
   state.support =
