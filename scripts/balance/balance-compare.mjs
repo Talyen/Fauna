@@ -101,7 +101,7 @@ export async function main(args = process.argv.slice(2), { runCase = runWorker }
   if (mode === "run") {
     if (options["--checkpoint"] || options["--loadouts"])
       throw new Error("Use experiment for checkpoint loadouts.");
-    const starters = (options["--starters"] ?? "mossguard,emberback,pollenmoth,prismram,captoad").split(",");
+    const starters = (options["--starters"] ?? "emberback,prismram,captoad,dunefox,cindernewt").split(",");
     const seeds = (options["--seeds"] ?? "0,1,2,3,4,5,6,7,8,9").split(",").map(Number);
     if (
       new Set(starters).size !== starters.length ||
@@ -153,6 +153,9 @@ export async function main(args = process.argv.slice(2), { runCase = runWorker }
         report.cases.push({
           key,
           starter: config.starter,
+          actualStarter:
+            result.replay.steps.find((step) => step.accepted && step.command.type === "draft")?.command
+              .species ?? null,
           seed: config.seed,
           arm,
           complete: result.complete,

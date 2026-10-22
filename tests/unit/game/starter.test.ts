@@ -3,6 +3,7 @@ import { produce } from "immer";
 import { createGame, dispatch } from "../../../src/game/engine";
 import { starterCount } from "../../../src/game/progression";
 import { CARDS, FIRST_RUN_STARTERS, SPECIES } from "../../../src/game/content";
+import { encounterPacks } from "../../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { accept, recruitChoice, winBattle } from "../../support/game";
 
@@ -12,6 +13,37 @@ function firstJourney(seed = 7) {
 }
 
 describe("collected starter drafts", () => {
+  it.each(["rookhaven", "mossguard", "pollenmoth", "dawncall", "shadebrim"] as const)(
+    "keeps %s recruitable and draftable after collection without offering it as a first solo starter",
+    (kind) => {
+      expect(SPECIES.some((entry) => entry.id === kind)).toBe(true);
+      expect(FIRST_RUN_STARTERS).not.toContain(kind);
+      for (let seed = 0; seed < 32; seed++) {
+        const fresh = createGame(seed);
+        expect(fresh.starterOffers).not.toContain(kind);
+        expect(dispatch(fresh, { type: "draft", species: kind }).state).toBe(fresh);
+      }
+      const encounter = produce(firstJourney(42), (draft) => {
+        draft.expedition!.pack = encounterPacks(0).findIndex((pack) => pack[0] === kind);
+      });
+      const won = winBattle(accept(encounter, { type: "beginBattle" }));
+      expect(won.reward!.recruits).toContain(kind);
+      const collected = accept(won, { type: "recruit", species: kind });
+      expect(collected.discovery.recruited[kind]).toBe(1);
+      let later = accept(accept(collected, { type: "abandon" }), { type: "newRun", seed: 42 });
+      for (let pick = 0; pick < 3; pick++) {
+        later = accept(decodeSave(encodeSave(later)), { type: "draft", species: kind });
+      }
+      later = accept(later, { type: "start" });
+      expect(later.team.map((creature) => creature.species)).toEqual([kind, kind, kind]);
+      expect(decodeSave(encodeSave(later))).toEqual(later);
+    },
+  );
+
+  it("rejects the obsolete draft format rather than migrating saved starter offers", () => {
+    expect(() => decodeSave(JSON.stringify({ ...createGame(42), version: 48 }))).toThrow();
+  });
+
   it("offers only solo-capable starters while retaining collected support creatures for later drafts", () => {
     for (const kind of FIRST_RUN_STARTERS)
       expect(CARDS.some((card) => card.species === kind && card.effect === "attack")).toBe(true);

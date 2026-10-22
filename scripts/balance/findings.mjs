@@ -64,6 +64,19 @@ export function rankBalanceFindings(report) {
     const keys = report.cases.map((row) => `${row.arm ?? ""}:${row.key}`);
     if (new Set(keys).size !== keys.length) throw new Error("Duplicate balance cases.");
     const groups = new Map();
+    if (report.kind === "career") {
+      const unconfirmed = report.cases.filter(
+        (row) => typeof row.actualStarter !== "string" || row.actualStarter !== row.starter,
+      );
+      if (unconfirmed.length)
+        add(
+          "watch",
+          "starter-coverage",
+          "Starter preferences do not establish starter coverage",
+          `${unconfirmed.length} of ${report.cases.length} cases did not confirm the preferred starter was drafted. Fallback or unrecorded drafts are excluded from starter summaries; inspect actualStarter and collect offered starts before comparing species.`,
+          unconfirmed.map((row) => ({ key: row.key, files: [row.evidence] })),
+        );
+    }
     for (const row of report.cases.filter((entry) => entry.complete)) {
       if (
         ![0, 1].includes(row.metrics?.win) ||
@@ -74,6 +87,7 @@ export function rankBalanceFindings(report) {
       )
         throw new Error(`Invalid balance metrics: ${row.key}`);
       if (report.kind !== "career") continue;
+      if (typeof row.actualStarter !== "string" || row.actualStarter !== row.starter) continue;
       const starter = row.starter ?? row.key.replace(/-\d+$/, "");
       if (!groups.has(starter)) groups.set(starter, []);
       groups.get(starter).push(row);

@@ -1,9 +1,15 @@
 import { it, expect } from "vitest";
+import { randomUUID } from "node:crypto";
+import { readFile, writeFile, rm } from "node:fs/promises";
+import path from "node:path";
 import { rankBalanceFindings } from "../../../scripts/balance/findings.mjs";
 import { compareBalance } from "../../../scripts/balance/paired-balance.mjs";
+import { main } from "../../../scripts/balance/balance-compare.mjs";
+import { ROOT } from "../../../scripts/lib/tool-runtime.mjs";
 const row = (starter, seed, win = 0, turns = 20) => ({
   key: `${starter}-${seed}`,
   starter,
+  actualStarter: starter,
   seed,
   complete: true,
   baseHash: "base",
@@ -56,6 +62,51 @@ it("does not invent findings from invalid or contradictory evidence", () => {
   input.cases[0].metrics.win = NaN;
   expect(() => rankBalanceFindings(input)).toThrow("Invalid");
   expect(() => rankBalanceFindings(report([]))).toThrow("Contradictory");
+});
+
+it("does not attribute fallback drafts or unknown draft evidence to the preferred species", () => {
+  const input = report(Array.from({ length: 5 }, (_, seed) => row("mossguard", seed, 1, 140)));
+  input.cases.forEach((entry) => (entry.actualStarter = "emberback"));
+  let findings = rankBalanceFindings(input).findings;
+  expect(findings.map((finding) => finding.id)).toEqual(["starter-coverage"]);
+  expect(findings[0].detail).toContain("5 of 5");
+  delete input.cases[0].actualStarter;
+  expect(rankBalanceFindings(input).findings.map((finding) => finding.id)).toEqual(["starter-coverage"]);
+  input.cases.push(row("mossguard", 5, 1, 140));
+  findings = rankBalanceFindings(input).findings;
+  expect(findings.find((finding) => finding.id === "mossguard-samples").detail).toContain("1 completed");
+  expect(findings.some((finding) => finding.id === "mossguard-length")).toBe(false);
+});
+
+it("records the accepted draft in a career report instead of inferring it from the preference", async () => {
+  const directory = path.join(ROOT, "reports", `balance-draft-${randomUUID()}`);
+  try {
+    await main(["run", "--starters", "mossguard", "--seeds", "1", "--out", directory], {
+      runCase: async (_input, output) => {
+        await writeFile(
+          output,
+          JSON.stringify({
+            complete: true,
+            base: "base",
+            initial: "initial",
+            settings: {},
+            metrics: row("mossguard", 1).metrics,
+            replay: {
+              steps: [
+                { command: { type: "draft", species: "mossguard" }, accepted: false },
+                { command: { type: "draft", species: "emberback" }, accepted: true },
+              ],
+            },
+          }),
+        );
+      },
+    });
+    const result = JSON.parse(await readFile(path.join(directory, "report.json"), "utf8"));
+    expect(result.cases[0]).toMatchObject({ starter: "mossguard", actualStarter: "emberback" });
+    expect(rankBalanceFindings(result).findings.map((finding) => finding.id)).toEqual(["starter-coverage"]);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
 });
 
 it("rejects duplicate seeds and compares starters only across matching seed sets", () => {
