@@ -77,7 +77,7 @@ jobs:
       - name: Content audit
         run: npm run content:audit
       - name: Upload player-notes
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           name: player-notes
@@ -113,7 +113,7 @@ jobs:
         if: always()
         run: node scripts/ci-summarize.mjs vitest reports/vitest.json
       - name: Upload unit-results
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           name: unit-results
@@ -156,7 +156,7 @@ jobs:
       - name: Record exact build identity
         run: node scripts/ci.mjs build
       - name: Upload browser-build
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: browser-build
           overwrite: true
@@ -166,7 +166,7 @@ jobs:
           path: |
             dist/
       - name: Upload browser-manifest
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: browser-manifest
           overwrite: true
@@ -225,7 +225,7 @@ jobs:
         if: always()
         run: node scripts/ci.mjs shard
       - name: Upload browser-shard-${{ matrix.shard }}
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           name: browser-shard-${{ matrix.shard }}
@@ -276,7 +276,7 @@ jobs:
       - name: Seeded interaction replay
         run: npm run test:interactions -- --seed 42 --steps 12 --out reports/interactions/ci
       - name: Upload interaction-results
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           name: interaction-results
@@ -322,7 +322,7 @@ jobs:
       - name: Packaged desktop smoke
         run: node scripts/smoke-desktop.mjs --packaged
       - name: Upload fauna-windows-x64
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: fauna-windows-x64
           overwrite: true
@@ -409,7 +409,7 @@ jobs:
         if: always()
         run: node scripts/ci.mjs gate
       - name: Upload browser-review
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
         with:
           name: browser-review
