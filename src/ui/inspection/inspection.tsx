@@ -5,10 +5,11 @@ import { KeywordText } from "../shared/keyword-text";
 import { enemyInspectionValue } from "../../game/ability-rules";
 import { useLayoutEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, Info } from "lucide-react";
 import type { Session } from "../../application/session";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../../components/ui/dialog";
 import { Button } from "../../components/ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
 import { ActionCard, CreatureCard } from "../shared/cards/cards";
 import { CARDS, definition, species } from "../../game/content";
 import type { Card } from "../../game/types";
@@ -172,31 +173,42 @@ export function Inspector({
             <DialogDescription className="sr-only">
               {showRanks
                 ? "Creature artwork and paginated passive tiers. Back returns to the creature kit."
-                : "Creature artwork, current trait and three action cards. Hover or focus for current state and action effects."}
+                : "Creature artwork and three action cards. Hover or focus the creature, trait or abilities for their details."}
             </DialogDescription>
-            <CreatureCard
-              progression={enemy ? undefined : game}
-              kind={kind}
-              name={enemy?.name}
-              health={enemy?.health ?? ally?.health ?? creature.health}
-              maxHealth={enemy?.maxHealth ?? creature.health}
-              block={ally?.block ?? enemy?.block ?? 0}
-              combat={ally?.combat ?? enemy?.combat}
-              sharedDodge={ally || enemy ? sharedDodgeChance(game, (ally ?? enemy)!) : 0}
-              readout={false}
-              speciesKit
-              label={`${enemy?.name ?? creature.name} details`}
-            />
+            <div className="inspection-creature">
+              <CreatureCard
+                progression={enemy ? undefined : game}
+                kind={kind}
+                name={enemy?.name}
+                health={enemy?.health ?? ally?.health ?? creature.health}
+                maxHealth={enemy?.maxHealth ?? creature.health}
+                block={ally?.block ?? enemy?.block ?? 0}
+                combat={ally?.combat ?? enemy?.combat}
+                sharedDodge={ally || enemy ? sharedDodgeChance(game, (ally ?? enemy)!) : 0}
+                readout={false}
+                speciesKit
+                label={`${enemy?.name ?? creature.name} details`}
+              />
+              {!showRanks ? (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button className="inspection-trait" variant="ghost">
+                      <Info aria-hidden="true" />
+                      {creature.trait}
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <strong>{creature.trait}</strong>
+                    <p>
+                      <KeywordText text={passive.description} />
+                    </p>
+                  </TooltipContent>
+                </Tooltip>
+              ) : null}
+            </div>
             {!showRanks ? (
               <>
-                <section className="inspection-active-trait" aria-label="Trait">
-                  <h2>{creature.trait}</h2>
-                  <p>
-                    <KeywordText text={passive.description} />
-                  </p>
-                </section>
                 <section className="inspection-abilities" aria-label="Abilities">
-                  <h2>Abilities</h2>
                   <div className="inspection-thumbnails" ref={thumbnails} data-nav-row>
                     {cards.map((action, index) => (
                       <ActionCard
