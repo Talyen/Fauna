@@ -71,13 +71,38 @@ describe("save orchestration", () => {
     expect(await s.flush()).toBe(true);
     await s.dispose();
   });
+  it.each(["primary", "backup1"])(
+    "retains the intact recovery slot when corrupt %s precedes a failed write",
+    async (corrupt) => {
+      const memory = new MemoryStorage();
+      const saved = JSON.stringify(run());
+      memory.setItem("fauna.save.v1", "broken primary");
+      memory.setItem("fauna.save.v1.backup1", corrupt === "backup1" ? "broken backup" : saved);
+      if (corrupt === "backup1") memory.setItem("fauna.save.v1.backup2", saved);
+      const set = memory.setItem.bind(memory);
+      memory.setItem = (key, data) => {
+        if (key === "fauna.save.v1") throw new Error("quota exceeded");
+        set(key, data);
+      };
+      const p = createBrowserPlatform(memory);
+      const s = createSession(p);
+      try {
+        await s.load();
+        expect(s.store.getState().game).toEqual(JSON.parse(saved));
+        expect(s.command({ type: "endTurn" })).toBe(true);
+        expect(await s.flush()).toBe(false);
+        expect((await p.saves.readCandidates()).some((candidate) => candidate.data === saved)).toBe(true);
+      } finally {
+        await s.dispose();
+      }
+    },
+  );
   it("preserves primary and backups in browser storage and reports quota failures", async () => {
     const memory = new MemoryStorage();
     const p = createBrowserPlatform(memory);
-    await p.saves.write("first");
-    await p.saves.write("second");
-    await p.saves.write("third");
-    expect((await p.saves.readCandidates()).map((c) => c.data)).toEqual(["third", "second", "first"]);
+    const snapshots = [1, 2, 3].map((revision) => JSON.stringify({ ...run(), revision }));
+    for (const data of snapshots) await p.saves.write(data);
+    expect((await p.saves.readCandidates()).map((c) => c.data)).toEqual([...snapshots].reverse());
     let fail = true;
     const failed = createSession({
       ...platform(),

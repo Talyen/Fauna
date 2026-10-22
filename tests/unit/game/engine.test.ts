@@ -44,6 +44,24 @@ describe("game commands", () => {
       next.team[0]!.combat!.armor = 999;
     }).toThrow(TypeError);
   });
+  it("rejects unknown runtime command types without changing state or RNG", () => {
+    const state = run();
+    for (const type of ["unknown", "constructor", "toString"]) {
+      const result = dispatch(state, { type } as unknown as Parameters<typeof dispatch>[1]);
+      expect(result.accepted).toBe(false);
+      expect(result.state).toBe(state);
+      expect(result.events).toEqual([]);
+    }
+  });
+  it("protects committed presentation events from consumer mutation", () => {
+    const result = dispatch(run(), { type: "endTurn" });
+    expect(result.events.length).toBeGreaterThan(0);
+    const before = JSON.stringify(result.events);
+    expectDeeplyFrozen(result.events);
+    Reflect.set(result.events[0]!, "text", "tampered");
+    Reflect.set(result.events, "length", 0);
+    expect(JSON.stringify(result.events)).toBe(before);
+  });
   it("rejects wrong targets, absent cards, and insufficient mana before consuming RNG", () => {
     const s = produce(run(), (game) => {
       const attack = game.cards.find((card) => card.definitionId === "emberback-attack")!;
