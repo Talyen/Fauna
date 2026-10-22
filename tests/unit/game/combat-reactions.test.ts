@@ -143,3 +143,58 @@ it("cancels Thunderstone after Thorns knocks out the acting creature, retaining 
     "nature",
   ]);
 });
+
+it("Last Resort removes active control and all six harmful buildups together", () => {
+  const state = structuredClone(run());
+  state.talents = ["health.last-resort"];
+  const ally = state.team[0]!;
+  ally.health = Math.ceil(species(ally.species).health / 4);
+  ally.combat = {
+    ...freshCombat(),
+    controlled: "stun",
+    controlTurns: 1,
+    burn: 1,
+    poison: 1,
+    bleed: 1,
+    stun: 1,
+    freeze: 1,
+    blind: true,
+  };
+  const events: GameEvent[] = [];
+
+  hit(state, state.battle!.enemies[0]!, ally, 2, "physical", events, { origin: "periodic" });
+
+  expect(ally.combat).toMatchObject({
+    controlled: null,
+    controlTurns: 0,
+    burn: 0,
+    poison: 0,
+    bleed: 0,
+    stun: 0,
+    freeze: 0,
+    blind: false,
+  });
+});
+
+it.each([999_999, 1_000_000])(
+  "Bleed Leech only claims newly added stacks with %i existing Bleed",
+  (bleed) => {
+    const state = structuredClone(run());
+    const ally = state.team[0]!;
+    const enemy = state.battle!.enemies[0]!;
+    enemy.health = enemy.maxHealth = 1_000_000;
+    enemy.block = 0;
+    enemy.combat = { ...freshCombat(), bleed, controlled: "stun", controlTurns: 1 };
+    state.rng = 42;
+    const events: GameEvent[] = [];
+
+    hit(state, ally, enemy, 10, "bleed", events, { origin: "ability", leech: true });
+
+    expect(enemy.combat.bleed).toBe(1_000_000);
+    expect(enemy.combat.bleedLeech).toEqual(bleed === 999_999 ? [{ sourceId: ally.id, amount: 1 }] : []);
+    ally.health -= 10;
+    const before = ally.health;
+    tickStatuses(state, enemy, events);
+    expect(ally.health - before).toBe(bleed === 999_999 ? 1 : 0);
+  },
+);
