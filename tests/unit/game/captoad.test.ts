@@ -7,7 +7,7 @@ import { COMBAT_PACKS, encounterSource } from "../../../src/game/encounters";
 import { definitionKeywords } from "../../../src/game/keywords";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import type { GameEvent } from "../../../src/game/types";
-import { accept, teamRun, winBattle } from "../../support/game";
+import { prepareDestination, accept, teamRun, winBattle } from "../../support/game";
 
 function ready(kinds: SpeciesId[] = ["captoad"], cardId = "captoad-swap") {
   return produce(teamRun(1, kinds), (game) => {
@@ -65,7 +65,8 @@ it("guards and heals only Captoad for one Mana, using card healing and preview p
 it("Puffs Poison onto every living enemy, excluding knockouts", () => {
   const game = produce(ready(["captoad"], "captoad-attack"), (draft) => {
     draft.encounter = 1;
-    draft.phase = "teamSelection";
+    draft.journey!.victories = draft.encounter;
+    prepareDestination(draft);
     draft.battle = null;
   });
   const started = produce(accept(game, { type: "beginBattle" }), (draft) => {
@@ -248,7 +249,8 @@ it("enemy Leaps reorder the battlefield without extra actions, and saves retain 
     const game = accept(
       produce(teamRun(seed, ["mossguard"]), (draft) => {
         draft.encounter = 2;
-        draft.phase = "teamSelection";
+        draft.journey!.victories = draft.encounter;
+        prepareDestination(draft);
         draft.battle = null;
         draft.expedition = {
           recruit: null,

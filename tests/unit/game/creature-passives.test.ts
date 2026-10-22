@@ -7,7 +7,7 @@ import { contentCatalog, validateCatalog } from "../../../src/game/content-valid
 import { createGame } from "../../../src/game/engine";
 import { hit } from "../../../src/game/combat/index";
 import type { GameEvent } from "../../../src/game/types";
-import { accept, teamRun } from "../../support/game";
+import { prepareDestination, accept, teamRun } from "../../support/game";
 
 afterEach(() => vi.restoreAllMocks());
 
@@ -45,7 +45,7 @@ it("uses the exact tier for card rules and battle start without scaling enemies"
   for (const copies of [1, 2, 3, 4, 6]) {
     const game = produce(teamRun(42, ["prismram", "emberback", "pollenmoth"]), (draft) => {
       draft.discovery.recruited.prismram = copies;
-      draft.phase = "teamSelection";
+      prepareDestination(draft);
       draft.battle = null;
     });
     const upgraded = copies >= 3;

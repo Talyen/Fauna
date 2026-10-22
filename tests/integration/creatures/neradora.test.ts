@@ -9,7 +9,7 @@ import { definitionKeywords, keywordText } from "../../../src/game/keywords";
 import { battleChoices } from "../../../src/application/battle-policy";
 import { combatStatuses } from "../../../src/ui/shared/combat/combat-status";
 import type { GameEvent, GameState } from "../../../src/game/types";
-import { accept, teamRun } from "../../support/game";
+import { prepareDestination, accept, teamRun } from "../../support/game";
 
 function ready(copies = 1) {
   return produce(teamRun(1, ["neradora", "mossguard", "prismram"]), (game) => {
@@ -313,7 +313,7 @@ it("caps passive healing without card-only overhealing rewards and resets on a n
     expect(actor.block).toBe(0);
     actor.health = 10;
     actor.combat!.waterThorns = 8;
-    draft.phase = "teamSelection";
+    prepareDestination(draft);
     draft.battle = null;
   });
   const next = accept(game, { type: "beginBattle" });

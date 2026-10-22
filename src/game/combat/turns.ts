@@ -15,7 +15,7 @@ import {
 import { draw } from "../card-zones";
 import { retainedBlock, enemyAbilityValue } from "../rules";
 import { CARDS, enemyCard, enemyCanUse } from "../content";
-import type { GameEvent, GameState } from "../types";
+import type { GameEvent, GameState, BattleState } from "../types";
 import { living, swapFromCard } from "../team";
 import { settle, intents } from "../journey";
 
@@ -31,7 +31,7 @@ export function livingChorus(state: GameState, enemy: boolean, events: GameEvent
     if (recipient) restoreHealth(recipient, amount, events, false, state, false, singer);
   }
 }
-export function finishTurn(draft: GameState, events: GameEvent[]) {
+export function finishTurn(draft: BattleState, events: GameEvent[]) {
   const battle = draft.battle!;
   const bonusMana = Number(
     battle.mana > 0 ? hasTalent(draft, "mana.wellspring") : hasTalent(draft, "mana.dark-recovery"),

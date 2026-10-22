@@ -12,7 +12,7 @@ import {
 import { dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { cardKeywords } from "../../../src/game/progression";
-import { recruitChoice, accept, run, victoryReady } from "../../support/game";
+import { prepareDestination, recruitChoice, accept, run, victoryReady } from "../../support/game";
 
 function packet(
   type: Parameters<typeof hit>[4],
@@ -206,9 +206,10 @@ describe("combat commands and journey health", () => {
   });
   it("heals the whole roster including knockouts without permitting consecutive Campfire visits", () => {
     let s = produce(run(), (d) => {
-      d.phase = "teamSelection";
+      prepareDestination(d);
       d.battle = null;
       d.encounter = 3;
+      d.journey!.victories = d.encounter;
       d.expedition = { pack: 0, recruit: null, lastRoom: null };
       d.team[0]!.health = 0;
       d.team[1]!.health = 7;
@@ -270,9 +271,10 @@ it("allows Dodge again after the control skip resolves while shared buildup immu
 
 it("keeps Campfire lineup changes resumable before and after Rest", () => {
   let state = produce(run(), (s) => {
-    s.phase = "teamSelection";
+    prepareDestination(s);
     s.battle = null;
     s.encounter = 3;
+    s.journey!.victories = s.encounter;
     s.expedition = { pack: 0, recruit: null, lastRoom: null };
     s.roster.push("pollenmoth");
     s.reserves.push({ id: "reserve-moth", species: "pollenmoth", health: 5, block: 0, attacked: false });

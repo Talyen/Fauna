@@ -6,7 +6,7 @@ import { chooseBattleCommand } from "../../../src/application/battle-policy";
 import { createSession } from "../../../src/application/session";
 import { observeUnlocks } from "../../../src/ui/expedition/unlock-reveals";
 import { scheduleAutoplay } from "../../../src/ui/battle/autoplay";
-import { accept, run, victoryReady, bossReward, teamRun } from "../../support/game";
+import { prepareDestination, accept, run, victoryReady, bossReward, teamRun } from "../../support/game";
 
 describe("combat controls", () => {
   it("manual turn keeps zero Mana while preview never settles and victory still settles", () => {
@@ -54,13 +54,12 @@ describe("combat controls", () => {
   });
   it("dev intermediate-boss victories offer normal boons and recovery swaps cannot cycle", () => {
     const defeated = bossReward();
-    const ready = produce(defeated, (d) => {
-      d.phase = "battle";
-      d.reward = null;
-      d.battle!.enemies.forEach((enemy) => {
-        enemy.health = enemy.maxHealth;
-      });
-    });
+    const ready = accept(
+      produce(defeated, (draft) => {
+        prepareDestination(draft);
+      }),
+      { type: "beginBattle" },
+    );
     const won = dispatch(ready, { type: "devWinBattle" }, true);
     expect(won.state.phase).toBe("boon");
     expect(won.state.reward!.boons).toHaveLength(3);
@@ -123,7 +122,8 @@ describe("combat controls", () => {
       produce(run(), (d) => {
         d.journey = { outcome: null, victories: 7, currency: 0, xp: {}, unlocks: [], lastBattle: null };
         d.encounter = 7;
-        d.phase = "teamSelection";
+        d.journey!.victories = d.encounter;
+        prepareDestination(d);
         d.battle = null;
         d.expedition = { pack: 0, recruit: null, lastRoom: null };
       }),

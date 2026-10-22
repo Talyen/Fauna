@@ -80,7 +80,8 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
     game.phase === "teamSelection" ||
     game.phase === "campfire" ||
     game.phase === "support" ||
-    (["recruit", "boon"].includes(game.phase) && game.reward?.outcome === "next");
+    game.phase === "recruit" ||
+    game.phase === "boon";
   const [pendingUnlocks, setPendingUnlocks] = useState<SpeciesId[]>([]);
   const [reveals, setReveals] = useState<SpeciesId[]>([]);
   useEffect(

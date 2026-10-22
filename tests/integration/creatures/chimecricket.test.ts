@@ -14,7 +14,7 @@ import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { battleChoices } from "../../../src/application/battle-policy";
 import { combatStatuses } from "../../../src/ui/shared/combat/combat-status";
-import { accept, teamRun, winBattle } from "../../support/game";
+import { prepareDestination, accept, teamRun, winBattle } from "../../support/game";
 
 function ready(id = "chimecricket-attack", seed = 1) {
   return produce(teamRun(1, ["chimecricket", "mossguard", "emberback"]), (game) => {
@@ -223,7 +223,7 @@ it("retains Nullify and spent Encore through swapping and resume, and resets the
   game = accept(game, { type: "swap", activeId: "backup", reserve: "ally-0" });
   expect(game.team[0]!.combat!.encoreUsed).toBe(true);
   game = produce(game, (draft) => {
-    draft.phase = "teamSelection";
+    prepareDestination(draft);
     draft.battle = null;
   });
   game = accept(game, { type: "beginBattle" });

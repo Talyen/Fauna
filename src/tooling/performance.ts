@@ -42,7 +42,13 @@ export function performanceCases(seed = 42) {
       level: 0,
     })),
   );
-  fixture.phase = "teamSelection";
+  Object.assign(fixture, {
+    phase: "teamSelection",
+    battle: null,
+    reward: null,
+    support: null,
+    journey: { outcome: null, victories: 0, currency: 0, xp: {}, unlocks: [], lastBattle: null },
+  } satisfies import("../game/types").Lifecycle);
   fixture.expedition = null;
   const started = dispatch(fixture, { type: "beginBattle" });
   if (!started.accepted) throw new Error(started.reason);

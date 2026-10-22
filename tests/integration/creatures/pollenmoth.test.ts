@@ -185,6 +185,7 @@ it("uses the enemy's base bounce tier against allies regardless of collected sta
     produce(game, (draft) => {
       draft.expedition!.pack = COMBAT_PACKS.findIndex((pack) => pack[0] === "pollenmoth");
       draft.encounter = 2;
+      draft.journey!.victories = draft.encounter;
     }),
     { type: "beginBattle" },
   );

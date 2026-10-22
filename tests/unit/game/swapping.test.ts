@@ -103,6 +103,7 @@ describe("free combat swaps", () => {
         c.block = 0;
       });
       d.encounter = 1;
+      d.journey!.victories = d.encounter;
       // Use a real three-enemy encounter so all three allies fall in one enemy turn.
     });
     // Beginning that encounter supplies authored enemies; health is then reduced for the fixture.

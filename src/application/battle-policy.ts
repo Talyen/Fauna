@@ -6,7 +6,7 @@ import type { Command, GameState } from "../game/types";
 export const BATTLE_POLICY_VERSION = 17;
 /** Only visible information enters scoring; no forecasts or gameplay RNG are sampled. */
 export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
-  if (state.phase !== "battle" || !state.battle) return [];
+  if (state.phase !== "battle") return [];
   const order = <T extends { id: string }>(items: T[]) => [...items].sort((a, b) => a.id.localeCompare(b.id));
   const outgoing = order(state.team).find((c) => c.health === 0 || controlled(c));
   const incoming = order(state.reserves).find((c) => c.health > 0 && !controlled(c));

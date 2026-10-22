@@ -3,7 +3,7 @@ import { Coins } from "lucide-react";
 import type { GameState } from "../../game/types";
 import { KeywordProgressGrid } from "../shared/keyword-progress-grid";
 export function BattleEarnings({ game, detailed = false }: { game: GameState; detailed?: boolean }) {
-  const receipt = game.journey?.lastBattle ?? game.reward;
+  const receipt = game.journey?.lastBattle;
   if (!receipt) return null;
   const xp = Object.values(receipt.xp).reduce((total, value) => total + value, 0);
   if (!receipt.currency && !xp) return null;

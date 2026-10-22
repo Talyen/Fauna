@@ -6,15 +6,16 @@ import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { creaturePassive } from "../../../src/game/progression";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import type { GameEvent } from "../../../src/game/types";
-import { accept, teamRun } from "../../support/game";
+import { prepareDestination, accept, teamRun } from "../../support/game";
 
 function battle(copies = 1) {
   return accept(
     produce(teamRun(1, ["emberback", "mossguard", "prismram"]), (game) => {
       game.discovery.recruited.emberback = copies;
-      game.phase = "teamSelection";
+      prepareDestination(game);
       game.battle = null;
       game.encounter = 2;
+      game.journey!.victories = game.encounter;
       game.expedition = {
         recruit: null,
         lastRoom: null,
@@ -169,9 +170,10 @@ it.each(["physical", "poison", "freeze", "stun"] as const)(
 it("previews Armor theft and commits the same passive burst without mutating the original", () => {
   const withLeech = accept(
     produce(teamRun(1, ["emberback", "emberback", "prismram"]), (draft) => {
-      draft.phase = "teamSelection";
+      prepareDestination(draft);
       draft.battle = null;
       draft.encounter = 2;
+      draft.journey!.victories = draft.encounter;
       draft.expedition = {
         recruit: null,
         lastRoom: null,

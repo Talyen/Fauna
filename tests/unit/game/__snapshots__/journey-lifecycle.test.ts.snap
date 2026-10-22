@@ -1,0 +1,2119 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`journey lifecycle behavior baseline > preserves seeded commands and outputs for seed 3 1`] = `
+[
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "draft",
+    "ca6046739d0f2a20333ffe04ae10ddb7a55e766b933cf525e883fe9bd30f8245",
+  ],
+  [
+    {
+      "species": "ringpalm",
+      "type": "draft",
+    },
+    true,
+    "draft",
+    "11a757dea10c2896ef1217568550d4ff6eba1ea6571e931fafd2d540f0105d34",
+  ],
+  [
+    {
+      "type": "start",
+    },
+    true,
+    "teamSelection",
+    "6c90016bd46ea36b3c33d2a5af5510cc9981440fc8d5eb8c0c152707c9ff5a9a",
+  ],
+  [
+    {
+      "species": "pollenmoth",
+      "type": "recruitDestination",
+    },
+    true,
+    "teamSelection",
+    "7f29dff2ba2db10715783d1f4e8aaee78586c3de0f4efd057b285cecd960d117",
+  ],
+  [
+    {
+      "type": "beginBattle",
+    },
+    true,
+    "battle",
+    "19f713a1f893eaa3a144cf8fc72985d54409d6d94385aa70811465c9fbacf954",
+  ],
+  [
+    "preview",
+    true,
+    "198568dba27b337c39c592e5c48c0f49b970495f8db5fdebe6792c12841c956a",
+  ],
+  [
+    {
+      "autoEndTurn": false,
+      "cardId": "ally-0:ringpalm-attack",
+      "targetId": "enemy-0",
+      "type": "play",
+    },
+    true,
+    "battle",
+    "198568dba27b337c39c592e5c48c0f49b970495f8db5fdebe6792c12841c956a",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    true,
+    "battle",
+    "361d0549f81e6df07542bb5e4f4830dc7ee2c57325e8cd4c66f49ea49c0d9ed9",
+  ],
+  [
+    {
+      "type": "devWinBattle",
+    },
+    true,
+    "recruit",
+    "cd12749b4cea2ca80fdcda523e1daddff0fb190db26bb15e37587053da3fd656",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "recruit",
+    "3e6a85afe5587f4e844cedb65479d00309220d17a687c417dc72c8871d245937",
+  ],
+  [
+    {
+      "species": "stillara",
+      "type": "recruit",
+    },
+    true,
+    "teamSelection",
+    "2f13f97ac9d5c24868f30fe24c922ad81c5313d19296acd384b9ba7a0280592e",
+  ],
+  [
+    {
+      "type": "visitCampfire",
+    },
+    true,
+    "campfire",
+    "0a22820f05176fca4ef561273991a92f484bc2bbd1aa3c73055d86b9cd7025e0",
+  ],
+  [
+    {
+      "type": "rest",
+    },
+    true,
+    "teamSelection",
+    "d5cbf602d0fa2d9bf7c871b97a6f0789c3219fd04f4aec99492f248cc42ede69",
+  ],
+  [
+    {
+      "type": "enterSupport",
+      "visit": "support-1",
+    },
+    true,
+    "support",
+    "101fea53f62fb790fb712826ed02ec7005d4bd6b0921096030e4582fa58dffb7",
+  ],
+  [
+    {
+      "slot": "slot-0",
+      "type": "buyBoon",
+      "visit": "support-1",
+    },
+    true,
+    "support",
+    "007d63ef037e6a02cd65311700e96f82b95df7ba50db9dde9e6e41bc80cb211a",
+  ],
+  [
+    {
+      "slot": "slot-0",
+      "type": "buyBoon",
+      "visit": "support-1",
+    },
+    false,
+    "support",
+    "f1b8a15a4bf1988ca236d6043f4ab3577631d026d3cf97b0f22c7217c7d2bef2",
+  ],
+  [
+    {
+      "type": "leaveSupport",
+      "visit": "support-1",
+    },
+    true,
+    "teamSelection",
+    "17261b30485ce5f8a00d28155f4003db58a35e0d2983c7ff7797cd8998f24682",
+  ],
+  [
+    {
+      "type": "beginBattle",
+    },
+    true,
+    "battle",
+    "973c229bd95d1629f7f5219fcc6a778ed29409708649fef83606727720a23cc5",
+  ],
+  [
+    "preview",
+    true,
+    "afa99a8c2a06d597ec7e63d4c5728f40a2cbc7ae1aaf2d5f9ad290e62aaa4963",
+  ],
+  [
+    {
+      "autoEndTurn": false,
+      "cardId": "recruit-3:pollenmoth-heal",
+      "targetId": undefined,
+      "type": "play",
+    },
+    true,
+    "battle",
+    "afa99a8c2a06d597ec7e63d4c5728f40a2cbc7ae1aaf2d5f9ad290e62aaa4963",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    true,
+    "battle",
+    "e4b3e2ce3a738f46b3502bcf044e33a1f0a022bfd27623427dc6c731c353949d",
+  ],
+  [
+    {
+      "type": "devWinBattle",
+    },
+    true,
+    "recruit",
+    "0c2498c9eda1641dcc25f7928418d0baaf1a2b21cdf84bfbb56c829f38e21dd6",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "recruit",
+    "11a17282674212fbf74330f41089092ff8f1fedfbee2bcda63cc02e7b6349575",
+  ],
+  [
+    {
+      "species": "mossguard",
+      "type": "recruit",
+    },
+    true,
+    "teamSelection",
+    "19b603529ba0337bb749ae66188b199d55bf5ba0413553657021a7daedf81a13",
+  ],
+  [
+    {
+      "type": "visitCampfire",
+    },
+    true,
+    "campfire",
+    "9654f997f6175f5768fa4235ea291ac614745f4fba16999aeca451a929ae76e6",
+  ],
+  [
+    {
+      "type": "leaveCampfire",
+    },
+    true,
+    "teamSelection",
+    "cf6356aa9167e797b2bf3fdd2e65ad0d2d2e85b387ac43fbe01605b102140d0e",
+  ],
+  [
+    {
+      "type": "beginBattle",
+    },
+    true,
+    "battle",
+    "37528e6be9b2d1082e01d2c2f96f23c8f4a9e14ba182bb1e5d6a33cd85592e85",
+  ],
+  [
+    "preview",
+    true,
+    "fd4bb2e701f7b53c80a0ca326e2c22be9ddbb90299f7440647a8e1824afe7ee7",
+  ],
+  [
+    {
+      "autoEndTurn": false,
+      "cardId": "recruit-8:stillara-water-remembers",
+      "targetId": undefined,
+      "type": "play",
+    },
+    true,
+    "battle",
+    "fd4bb2e701f7b53c80a0ca326e2c22be9ddbb90299f7440647a8e1824afe7ee7",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    true,
+    "battle",
+    "b49ff90495589a987af3d207b2c20ca750efc1abe89e9d616d9d6271a10897d9",
+  ],
+  [
+    {
+      "type": "devWinBattle",
+    },
+    true,
+    "recruit",
+    "bd04ba6974292dd7ac01af9ca76cb16b06423098d662498f9625a1a4a7e89dd3",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "recruit",
+    "bc340d20bbbdbec0fb444d8540eecb6ca7a7325b1265ad135c9a7a5e52fb871b",
+  ],
+  [
+    {
+      "species": "wickwaltz",
+      "type": "recruit",
+    },
+    true,
+    "teamSelection",
+    "357caf1ed8d7c914b6afc8eb76d7c292918bfcc1f4161c06c5e175921ce7624d",
+  ],
+  [
+    {
+      "type": "visitCampfire",
+    },
+    true,
+    "campfire",
+    "47acedd00ef22a7282a7b5797205ba1a1371823e6dfc062c28022c1b3fec08a1",
+  ],
+  [
+    {
+      "type": "rest",
+    },
+    true,
+    "teamSelection",
+    "8dfed06306e10caa07b5e5c6dd02d73015751affd4b86129777965adbe7937d6",
+  ],
+  [
+    {
+      "type": "beginBattle",
+    },
+    true,
+    "battle",
+    "0bdc636884460448263b1f4d3f5f0ceca1f12ab764c93088a7e055b9471582de",
+  ],
+  [
+    "preview",
+    true,
+    "0f03de2948b77e3bfb861ed18414e7d391e5d31047b3f4dc33aa782f0e53c63b",
+  ],
+  [
+    {
+      "autoEndTurn": false,
+      "cardId": "ally-0:ringpalm-harmonic-set",
+      "targetId": undefined,
+      "type": "play",
+    },
+    true,
+    "battle",
+    "0f03de2948b77e3bfb861ed18414e7d391e5d31047b3f4dc33aa782f0e53c63b",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    true,
+    "battle",
+    "39b3e08d4e14aa20158c22f7e4dcdb79372b5b8dd571a3039bcc2114b84119da",
+  ],
+  [
+    {
+      "type": "devWinBattle",
+    },
+    true,
+    "boon",
+    "5fde1b8515c00ff4f44d4b5db86c6138af99e41a17a289f806666028d5fc533b",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "boon",
+    "444e22a15681b8f02712ec0c94986eb677c39b6344ea8303ce47f63eae7eb807",
+  ],
+  [
+    {
+      "boon": "sundering-charm",
+      "type": "chooseBoon",
+    },
+    true,
+    "teamSelection",
+    "44a731b452ac7d60dc24a6ca58038c0a5d14682b4f8c83066b36614cf6041a8d",
+  ],
+  [
+    {
+      "type": "visitCampfire",
+    },
+    true,
+    "campfire",
+    "d6818c2574bd463261d9b12f90f5ec422f22eb2db1b311cfd4dcf55d4389f865",
+  ],
+  [
+    {
+      "type": "leaveCampfire",
+    },
+    true,
+    "teamSelection",
+    "55cfb1a6209321514968a51fe7b05f51b4346d233b6bdff1b4b19f56b3dd51b3",
+  ],
+  [
+    {
+      "type": "beginBattle",
+    },
+    true,
+    "battle",
+    "f868f72af6d169b267c463d6ecdec07b6708de0abee69a33656de6cca91713cd",
+  ],
+  [
+    "preview",
+    true,
+    "00685256482180023fbe233f4862a095b8a090125d4f01d31d15695291b26697",
+  ],
+  [
+    {
+      "autoEndTurn": false,
+      "cardId": "ally-0:ringpalm-harmonic-set",
+      "targetId": undefined,
+      "type": "play",
+    },
+    true,
+    "battle",
+    "00685256482180023fbe233f4862a095b8a090125d4f01d31d15695291b26697",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    true,
+    "battle",
+    "76368e050e4d2b091bfd8000bf5a1e845f6ebd5b2491b5d011c2eaed65f55731",
+  ],
+  [
+    {
+      "type": "devWinBattle",
+    },
+    true,
+    "recruit",
+    "e56cdb1099c17217fbbe761a32352c5fd96075b8d65bd6fa241e78a0bcc84cef",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "recruit",
+    "4e2981dcc9f3073a6bc9026085b99e53aa82d9b07a3575500244ae6677d15d89",
+  ],
+  [
+    {
+      "replace": "ally-0",
+      "species": "neradora",
+      "type": "recruit",
+    },
+    true,
+    "teamSelection",
+    "47f1e5fd94cdd23730126034214aa4ce27d2a6cac9fcfb06a276da7de1923062",
+  ],
+  [
+    {
+      "type": "visitCampfire",
+    },
+    true,
+    "campfire",
+    "53766b0426593d7ea28a3a5a139771340a23ae3e3456be3f56803f10df64f7b9",
+  ],
+  [
+    {
+      "type": "rest",
+    },
+    true,
+    "teamSelection",
+    "2ff77d4429107fd48188eeb7ad8901da783a533b4cd726321ba53c5420566bf7",
+  ],
+  [
+    {
+      "type": "beginBattle",
+    },
+    true,
+    "battle",
+    "8e5584e36eb30d870331f56ef0e2d20c0d698301e1b88914c05af5546b961b42",
+  ],
+  [
+    "preview",
+    true,
+    "2c44286a9418b138ab01e4493bc9bb1e0a333874efc2ced4a45d0085e3c1fe84",
+  ],
+  [
+    {
+      "autoEndTurn": false,
+      "cardId": "recruit-3:pollenmoth-heal",
+      "targetId": undefined,
+      "type": "play",
+    },
+    true,
+    "battle",
+    "2c44286a9418b138ab01e4493bc9bb1e0a333874efc2ced4a45d0085e3c1fe84",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    true,
+    "battle",
+    "a6aa1d152ff90a8cb06c02b336e8097641d47f3d7ffaa909c569a1164375f42c",
+  ],
+  [
+    {
+      "type": "devWinBattle",
+    },
+    true,
+    "recruit",
+    "42c75c630cc21cf514b8aa98a0b1119f1f6d13745caa89627110157e085b26be",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "recruit",
+    "721732ab3122b5e5d6e3139a1a063d303c26a4311604b80084b896db8d5bf142",
+  ],
+  [
+    {
+      "replace": "recruit-39",
+      "species": "captoad",
+      "type": "recruit",
+    },
+    true,
+    "teamSelection",
+    "cc4fa7e74e710950d86876ba932981c7e29a96627332e4ab7f042891a26e1844",
+  ],
+  [
+    {
+      "type": "visitCampfire",
+    },
+    true,
+    "campfire",
+    "572bbdb618d2760ab4a8b331d5b43bea94702e4e053210b1ece5261e665f8763",
+  ],
+  [
+    {
+      "type": "leaveCampfire",
+    },
+    true,
+    "teamSelection",
+    "70789b4c09f85eda9e68ed4f66c3d9bee3cc41296777300315930da3f4bff3d3",
+  ],
+  [
+    {
+      "type": "beginBattle",
+    },
+    true,
+    "battle",
+    "37aab5623616710b5fd33169aea4cec43fc8617891c9d8f499d138df1cbf2e89",
+  ],
+  [
+    "preview",
+    true,
+    "4107295bef0ff527e4c8ae93f4944b8b4c36769213ef33c47bf9818d734a3ef8",
+  ],
+  [
+    {
+      "autoEndTurn": false,
+      "cardId": "recruit-8:stillara-water-remembers",
+      "targetId": undefined,
+      "type": "play",
+    },
+    true,
+    "battle",
+    "4107295bef0ff527e4c8ae93f4944b8b4c36769213ef33c47bf9818d734a3ef8",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    true,
+    "battle",
+    "55e4c5bdbcdfa4a4b627ba0bb24f68b6afd84f56929c41404ee5d51f0905d08e",
+  ],
+  [
+    {
+      "type": "devWinBattle",
+    },
+    true,
+    "recruit",
+    "6e019dc1d0018eb36436d9000cad1a6936d6af00b1dd53375b040323399a7436",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "recruit",
+    "6c0557319879cd28854193899d98f719f1e12920989a808413bd2019bf1b5bac",
+  ],
+  [
+    {
+      "replace": "recruit-46",
+      "species": "mossguard",
+      "type": "recruit",
+    },
+    true,
+    "teamSelection",
+    "837d57c77d8983f5a9c41afd488cb41d3dbfb41c2c8ac5a32a4f319a769532dc",
+  ],
+  [
+    {
+      "type": "visitCampfire",
+    },
+    true,
+    "campfire",
+    "d98db1e672df8f157c0a01c5954d2576f87a597d12161ab28bd4223bc814fedc",
+  ],
+  [
+    {
+      "type": "rest",
+    },
+    true,
+    "teamSelection",
+    "89c0009fcaa83d02f3b775fb767c40f46d91af4d57fa4f6d3e0ab2ed8af54677",
+  ],
+  [
+    {
+      "type": "beginBattle",
+    },
+    true,
+    "battle",
+    "722367c1c41cba75ba62950ffae4c87e7d5a1d964669e3422456916269d466a1",
+  ],
+  [
+    "preview",
+    true,
+    "4694bae965d5829184ce34dd8d7f09317f8f7b3c7f19e9ee3e1993862c1a61a1",
+  ],
+  [
+    {
+      "autoEndTurn": false,
+      "cardId": "recruit-53:mossguard-attack",
+      "targetId": undefined,
+      "type": "play",
+    },
+    true,
+    "battle",
+    "4694bae965d5829184ce34dd8d7f09317f8f7b3c7f19e9ee3e1993862c1a61a1",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    true,
+    "battle",
+    "da0dc9cde36d82cf8306c2fce069a63c02a44d766554bebc8957079af588e6ca",
+  ],
+  [
+    {
+      "type": "devWinBattle",
+    },
+    true,
+    "victory",
+    "9c68d78ef5de4be4c0086a2661916a0edb484e4e7afba2088cdd03baa65074f9",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "victory",
+    "eb9eae8e7c861fb2f666bcb9b9bc0654b6754fd0558e825ff19713f8f970193c",
+  ],
+  [
+    {
+      "seed": 4,
+      "type": "newRun",
+    },
+    true,
+    "draft",
+    "c4d7397aa61025f282737610d3b9e8029ab02ce00f8814d104ca1d69dbe71ad0",
+  ],
+  [
+    {
+      "species": "pollenmoth",
+      "type": "draft",
+    },
+    true,
+    "draft",
+    "76aeb955079ee89cf3b931533c8f2e6b60214d005f5b1149a7ada99c45d25fbf",
+  ],
+  [
+    {
+      "type": "abandon",
+    },
+    true,
+    "draft",
+    "84f7406a576ce680685da108520d0a1ae83b1f13d392ae47a7ac09718c112243",
+  ],
+  [
+    {
+      "species": "ringpalm",
+      "type": "draft",
+    },
+    true,
+    "draft",
+    "5d4adf5d6985b277f2b95c9bcc8e4b8709d0633c58c76fb2f9519e443847821f",
+  ],
+  [
+    {
+      "type": "start",
+    },
+    false,
+    "draft",
+    "5d4adf5d6985b277f2b95c9bcc8e4b8709d0633c58c76fb2f9519e443847821f",
+  ],
+  [
+    {
+      "type": "abandon",
+    },
+    true,
+    "draft",
+    "f6147140a5428da736043b16bd3729f3a36595045931a19a0eb9630d303de894",
+  ],
+]
+`;
+
+exports[`journey lifecycle behavior baseline > preserves seeded commands and outputs for seed 10 1`] = `
+[
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "draft",
+    "a253de349d0c7de6fbd3e8d49a6e799b9c6a757da7525664c9d016ee74ceec77",
+  ],
+  [
+    {
+      "species": "reedstag",
+      "type": "draft",
+    },
+    true,
+    "draft",
+    "00609ad38fa121dc6aea88302198def81dab752d89415c17f205562c70b01e60",
+  ],
+  [
+    {
+      "type": "start",
+    },
+    true,
+    "teamSelection",
+    "c4dd3c304329f339534303a81d939685cf7f6527138559b31a31786ba95a2588",
+  ],
+  [
+    {
+      "species": "captoad",
+      "type": "recruitDestination",
+    },
+    true,
+    "teamSelection",
+    "b4027142bcee926b035e0bb883b05f21c69b56d0083e6dfb53c051361e328673",
+  ],
+  [
+    {
+      "type": "beginBattle",
+    },
+    true,
+    "battle",
+    "ae9a13f56c506f03a9c567df2c7ee54db5a63900d3fdc8561483db3d8a0178db",
+  ],
+  [
+    "preview",
+    true,
+    "dac1749b52d1769236de453d9853f1fe39ca011e531b1d3fbcd6bfba9e07abd9",
+  ],
+  [
+    {
+      "autoEndTurn": false,
+      "cardId": "ally-0:reedstag-attack",
+      "targetId": "enemy-0",
+      "type": "play",
+    },
+    true,
+    "battle",
+    "dac1749b52d1769236de453d9853f1fe39ca011e531b1d3fbcd6bfba9e07abd9",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    true,
+    "battle",
+    "d8cb363043f085c5889c929b8065b3c00711670539b320b0505665f30ca739ab",
+  ],
+  [
+    {
+      "type": "devWinBattle",
+    },
+    true,
+    "recruit",
+    "e9cdf315f5af29de04d3e69522fa179b2585ce228829f06ce5094e30022ebc86",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "recruit",
+    "db6859586e66dfc95f281210d985863421ae7acb44b44aaa8b9f798051b0e353",
+  ],
+  [
+    {
+      "species": "prismram",
+      "type": "recruit",
+    },
+    true,
+    "teamSelection",
+    "6650cfbd57cc47c1571fc5a26f14d836b11373baaad51d115da5c00a79ba19e6",
+  ],
+  [
+    {
+      "type": "visitCampfire",
+    },
+    true,
+    "campfire",
+    "d005c27054fec1e4db05e46ca3fb3e16cdf47a70fd6f65f87def4e8d9c33b4e3",
+  ],
+  [
+    {
+      "type": "rest",
+    },
+    true,
+    "teamSelection",
+    "7bacff43fd90e32075da61dd36ee1517de6c10927cedba05a396d18ee9b81d81",
+  ],
+  [
+    {
+      "species": "pollenmoth",
+      "type": "recruitDestination",
+    },
+    true,
+    "teamSelection",
+    "4716c969d601abf9b0733665de4b59b5ff3bf1bfd8b635e0bc53692742abf725",
+  ],
+  [
+    {
+      "type": "beginBattle",
+    },
+    true,
+    "battle",
+    "5485fef10c1f40906def7b805930b02e7d5d562154aabf439de461e3e09d5904",
+  ],
+  [
+    "preview",
+    true,
+    "82133231e0f75306246d295e8e9d888e771258b037c1cb162e582ec7fa3143f8",
+  ],
+  [
+    {
+      "autoEndTurn": false,
+      "cardId": "recruit-3:captoad-attack",
+      "targetId": undefined,
+      "type": "play",
+    },
+    true,
+    "battle",
+    "82133231e0f75306246d295e8e9d888e771258b037c1cb162e582ec7fa3143f8",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    true,
+    "battle",
+    "91a72f08fb8ba677d413249bf6e6a02045b7a1f7d861baa0777d9f7c66b1a155",
+  ],
+  [
+    {
+      "type": "devWinBattle",
+    },
+    true,
+    "recruit",
+    "5a160b5b464c48a7160d1ffc0f1163b1be98c88f954b0e0c92c6849827c8c189",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "recruit",
+    "f2731f13fb96ef465bc0c89dd3002f84e06b5b08c3e501812a333dfd084a8011",
+  ],
+  [
+    {
+      "species": "cadenza",
+      "type": "recruit",
+    },
+    true,
+    "teamSelection",
+    "5d1051de01d96b411ee4e17c80c366003429481468b7c35a99b30e8b685ffe0a",
+  ],
+  [
+    {
+      "type": "visitCampfire",
+    },
+    true,
+    "campfire",
+    "79b03ed9d6879e9b1fc3bb084e02ded31560953deabe0baac34c7cf6806bbefb",
+  ],
+  [
+    {
+      "type": "leaveCampfire",
+    },
+    true,
+    "teamSelection",
+    "e5f67ff3c6ec902fb2910ddef1365eca0a449f0129c1a38a72265a73a7b1101c",
+  ],
+  [
+    {
+      "type": "beginBattle",
+    },
+    true,
+    "battle",
+    "a812375bfbdc10d02ec10d46ffe40c0da77afe4c5672b86d71f0ac48f49c78fa",
+  ],
+  [
+    "preview",
+    true,
+    "d74e1a1315b8daacf488992b369d6e5580e48febbb9d74c1c603a7428571197e",
+  ],
+  [
+    {
+      "autoEndTurn": false,
+      "cardId": "recruit-3:captoad-attack",
+      "targetId": undefined,
+      "type": "play",
+    },
+    true,
+    "battle",
+    "d74e1a1315b8daacf488992b369d6e5580e48febbb9d74c1c603a7428571197e",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    true,
+    "battle",
+    "49d776ba97cd4757daaf1103a5bf8149323d144cc619b9d1a9cc590d9f9cb40c",
+  ],
+  [
+    {
+      "type": "devWinBattle",
+    },
+    true,
+    "recruit",
+    "b21cbcc5f7fe88f6e16cbd2aeacaf83dafc41d7aa2af67265009b117e63325b0",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "recruit",
+    "82035e3b8d4526bfeb77116be66affcd1e14c6732f1371747bc0567b326c27a6",
+  ],
+  [
+    {
+      "replace": "ally-0",
+      "species": "prismram",
+      "type": "recruit",
+    },
+    true,
+    "teamSelection",
+    "e96a4dae3b81c877cbac80bbf2fa1b42183190028060f93731b31ac908b6785f",
+  ],
+  [
+    {
+      "type": "visitCampfire",
+    },
+    true,
+    "campfire",
+    "8be7da952c495495b3ca8b3270673a8f1ed4ba9fd0531c96c3989572e55462cd",
+  ],
+  [
+    {
+      "type": "rest",
+    },
+    true,
+    "teamSelection",
+    "4cb06b8cb985b9f637ff6ebe0861304c41f097c77be891fb1cc1a01c44a96ed9",
+  ],
+  [
+    {
+      "type": "beginBattle",
+    },
+    true,
+    "battle",
+    "cd8f5ea7c887e2877ff5d75a652138cb4266da5c268a6c6d9003f606fc945698",
+  ],
+  [
+    "preview",
+    true,
+    "e9d44c6141af2e5047b8f80a149f3958b748ba38cdc6f52a8a264fb21b866341",
+  ],
+  [
+    {
+      "autoEndTurn": false,
+      "cardId": "recruit-3:captoad-attack",
+      "targetId": undefined,
+      "type": "play",
+    },
+    true,
+    "battle",
+    "e9d44c6141af2e5047b8f80a149f3958b748ba38cdc6f52a8a264fb21b866341",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    true,
+    "battle",
+    "5d357cc62ba725679edb854d827bd0945b2e42d8d8efbb5410236dde817ee51d",
+  ],
+  [
+    {
+      "type": "devWinBattle",
+    },
+    true,
+    "boon",
+    "525129e155f131f062d3fd220e7b298ea5f6600b4ee161071ca605dc7d7998f4",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "boon",
+    "279083638038954c9fc19d31789cf19710020806e7d5bfe687d704c714ff346c",
+  ],
+  [
+    {
+      "boon": "meteorite",
+      "type": "chooseBoon",
+    },
+    true,
+    "teamSelection",
+    "e5178da6abe65c4341cbc8cfa9033c4edbf6a25c1efa2ee99690dbb3a0b8602a",
+  ],
+  [
+    {
+      "type": "visitCampfire",
+    },
+    true,
+    "campfire",
+    "d914be145469dbbeb5b6693114474080c2fb43fc5707286d7ca99598b6f330e5",
+  ],
+  [
+    {
+      "type": "leaveCampfire",
+    },
+    true,
+    "teamSelection",
+    "3a68052bbc6642c8dbdeb0b8c5a92c0dff09be39f8d255c6fbd2e4bd04e65a0f",
+  ],
+  [
+    {
+      "type": "beginBattle",
+    },
+    true,
+    "battle",
+    "c1c853bacf2c50ec462b23dbeff8e809ad1dde7f8c3697196914a6d9974df384",
+  ],
+  [
+    "preview",
+    true,
+    "a38b86382948ca1218e3e116f3d5e4a446801c6e4cdafff6f415df8220046ecc",
+  ],
+  [
+    {
+      "autoEndTurn": false,
+      "cardId": "recruit-3:captoad-attack",
+      "targetId": undefined,
+      "type": "play",
+    },
+    true,
+    "battle",
+    "a38b86382948ca1218e3e116f3d5e4a446801c6e4cdafff6f415df8220046ecc",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    true,
+    "battle",
+    "6660fbd3e43b2a9a7c79a5c374edda0f370b987345aeecc21553785efe29e8fa",
+  ],
+  [
+    {
+      "type": "devWinBattle",
+    },
+    true,
+    "recruit",
+    "6724190593c684ee1115708f3376c358be215ce2c3e9eef8bffefe7425012711",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "recruit",
+    "cdb06d8d4a6441423206de8ce28b4c37ef314c3d385414afd0b751cede78e2e4",
+  ],
+  [
+    {
+      "replace": "recruit-23",
+      "species": "mossguard",
+      "type": "recruit",
+    },
+    true,
+    "teamSelection",
+    "e32d9ecedb7b47e3929d154fd0cd9758550c941f19dba8e1aaaa30bf49862ebc",
+  ],
+  [
+    {
+      "type": "visitCampfire",
+    },
+    true,
+    "campfire",
+    "be98befd96f22c0b004c51ee2b2c4363f0fd370dede1f8f947af29f7ae99ed3f",
+  ],
+  [
+    {
+      "type": "rest",
+    },
+    true,
+    "teamSelection",
+    "a12f6fb02e6aa0a3e3e7ad2d9b7afd3fbeb3e611320f9e9a3a1c4d641cfd390f",
+  ],
+  [
+    {
+      "type": "enterSupport",
+      "visit": "support-5",
+    },
+    true,
+    "support",
+    "9240c5d2dfdb3f5553e546ea285c5a402a424124997b604852c6f01efbe7e499",
+  ],
+  [
+    {
+      "slot": "slot-0",
+      "type": "buyBoon",
+      "visit": "support-5",
+    },
+    true,
+    "support",
+    "bb7160b8d50958e052e89313795ecf6a1a52a1926e8ec7f29004340c79595194",
+  ],
+  [
+    {
+      "slot": "slot-0",
+      "type": "buyBoon",
+      "visit": "support-5",
+    },
+    false,
+    "support",
+    "7bf27792fa2506a8ac0e58d57f0cb590a0ace8a036dcb5f90eb76094808003c1",
+  ],
+  [
+    {
+      "type": "leaveSupport",
+      "visit": "support-5",
+    },
+    true,
+    "teamSelection",
+    "e6d3b8b8364c22c03ebbb63e7c58c6c4ec3ddf43ea5a269ad49021c051f263e6",
+  ],
+  [
+    {
+      "type": "beginBattle",
+    },
+    true,
+    "battle",
+    "e3c1365f634c3da287c0c3addb39f875f47cae5416e25e5b9813822ea2bd0a6e",
+  ],
+  [
+    "preview",
+    true,
+    "44ec3b1afd45db5804a61f9d5fd291afb3abbcadd9bc0980701cc8d56dd27c43",
+  ],
+  [
+    {
+      "autoEndTurn": false,
+      "cardId": "recruit-37:mossguard-attack",
+      "targetId": undefined,
+      "type": "play",
+    },
+    true,
+    "battle",
+    "44ec3b1afd45db5804a61f9d5fd291afb3abbcadd9bc0980701cc8d56dd27c43",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    true,
+    "battle",
+    "31ce8b21749a2e2b92b893cc6ae1152e5cbacff0304178168d15361800bec7f1",
+  ],
+  [
+    {
+      "type": "devWinBattle",
+    },
+    true,
+    "recruit",
+    "5f8c7255c413fd75d1dd2777f17432ad516d51c1060496feaf38e1379fbf0bca",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "recruit",
+    "b45426c07bfd6785883994bd7907fcfc9dce99eaca371b824674ac41039a7f14",
+  ],
+  [
+    {
+      "replace": "recruit-37",
+      "species": "coralcurl",
+      "type": "recruit",
+    },
+    true,
+    "teamSelection",
+    "204c264ae23acaa1d0db5dc13322755bfc5fd1423ced00bc363faf64d01a24fa",
+  ],
+  [
+    {
+      "type": "visitCampfire",
+    },
+    true,
+    "campfire",
+    "50ae7ed753e3360e7e8dc50f129eca9d17fd8b14b1e3fb712801a49da496234f",
+  ],
+  [
+    {
+      "type": "leaveCampfire",
+    },
+    true,
+    "teamSelection",
+    "b4f25e69dc82e047863cfc8972168bfdde431b9b2f519042c451b2e377f441fe",
+  ],
+  [
+    {
+      "type": "beginBattle",
+    },
+    true,
+    "battle",
+    "cf88e82913eac0513fb5c2e5874dce21819814661a449a2e969318cccc08be13",
+  ],
+  [
+    "preview",
+    true,
+    "130393067d5c50a430ccfe1d5c248379b1824af4c9b7283b3c1c3a1d8d256fa0",
+  ],
+  [
+    {
+      "autoEndTurn": false,
+      "cardId": "recruit-8:prismram-attack",
+      "targetId": "enemy-0",
+      "type": "play",
+    },
+    true,
+    "battle",
+    "130393067d5c50a430ccfe1d5c248379b1824af4c9b7283b3c1c3a1d8d256fa0",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    true,
+    "battle",
+    "340d3b08c7d69819539e9b5a3020f0b7f0820ed7c2565b7b913456b38a87e51b",
+  ],
+  [
+    {
+      "type": "devWinBattle",
+    },
+    true,
+    "recruit",
+    "f92e097a28711250865002d4e8156c625f724673920c3e741fee53bd8dc8cfb5",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "recruit",
+    "5d30a1e0d30d1e67f97fa8d99490f70368b33ea985635871d2904c871521f798",
+  ],
+  [
+    {
+      "replace": "recruit-47",
+      "species": "dunefox",
+      "type": "recruit",
+    },
+    true,
+    "teamSelection",
+    "290ebd19a264b5bacc121fef84216e317b0e94f0bb58fc9dbe91f06137f4d8b2",
+  ],
+  [
+    {
+      "type": "visitCampfire",
+    },
+    true,
+    "campfire",
+    "8832b0fac108f248d13fd813625aafb5d6e2099b4a1f8e861939624f3b486897",
+  ],
+  [
+    {
+      "type": "rest",
+    },
+    true,
+    "teamSelection",
+    "5eab6c2087c2e01f672142eb74d0ec68ad04416101af294f693293f635b4b6b7",
+  ],
+  [
+    {
+      "type": "enterSupport",
+      "visit": "support-7",
+    },
+    true,
+    "support",
+    "0995efa197ac40393b7a3892d43c9cf4cc4df0501a8162240aef91822da8976f",
+  ],
+  [
+    {
+      "slot": "slot-0",
+      "type": "buyBoon",
+      "visit": "support-7",
+    },
+    true,
+    "support",
+    "9f81031ea044a2fab55cd00651a7cf2b3ff5b54446ab7db074f2eff7cff7bf2f",
+  ],
+  [
+    {
+      "slot": "slot-0",
+      "type": "buyBoon",
+      "visit": "support-7",
+    },
+    false,
+    "support",
+    "76be083614a3190f201b7fbf7192457aeedb74d82e058928c599bccd7c7d7133",
+  ],
+  [
+    {
+      "type": "leaveSupport",
+      "visit": "support-7",
+    },
+    true,
+    "teamSelection",
+    "710ff282ebb24c7b4dee00cd8bdb2768432b32493a3c149f77c47b10667bb565",
+  ],
+  [
+    {
+      "type": "beginBattle",
+    },
+    true,
+    "battle",
+    "7d6e7a3ea7215dc4adb2fce226eb9fe1e9ed67a9a7171aa322d3bd5e6f4ce456",
+  ],
+  [
+    "preview",
+    true,
+    "c09e66cf24bf0b14fd0513b348b1ab315ad54520ff7644414b7996cd1998416a",
+  ],
+  [
+    {
+      "autoEndTurn": false,
+      "cardId": "recruit-54:dunefox-attack",
+      "targetId": "enemy-0",
+      "type": "play",
+    },
+    true,
+    "battle",
+    "c09e66cf24bf0b14fd0513b348b1ab315ad54520ff7644414b7996cd1998416a",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    true,
+    "battle",
+    "ae90300c322f53737fd4a8875efb5ea9882435b8b13c0986c5e39b5e3c1c57fe",
+  ],
+  [
+    {
+      "type": "devWinBattle",
+    },
+    true,
+    "victory",
+    "f605233361bc268d24caa0f9c6bae9d77474a61af81debe8db87f83f31bae60c",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "victory",
+    "62cdb4443fb3cc2979ba37df61672ad838e71ccbfa8114a7232b519215617cc8",
+  ],
+  [
+    {
+      "seed": 11,
+      "type": "newRun",
+    },
+    true,
+    "draft",
+    "4b832acf5ae5317ef4b4a6b285996d3940521e2ed8bbc4f166a73fb1f8373134",
+  ],
+  [
+    {
+      "species": "reedstag",
+      "type": "draft",
+    },
+    true,
+    "draft",
+    "56f2e08c5053982f414ea7f65a194191c39a5e68e0c99bbc045e3741a5ba6a95",
+  ],
+  [
+    {
+      "type": "abandon",
+    },
+    true,
+    "draft",
+    "c504c9948ba4ce703f23f4e5faba83c3fb59e93dddcc93f4ca2f71c531fb5712",
+  ],
+  [
+    {
+      "species": "prismram",
+      "type": "draft",
+    },
+    true,
+    "draft",
+    "480e64d2d973f6cf3b98545d3ecc8e684214113d29c8b09ceefec773fafe190d",
+  ],
+  [
+    {
+      "type": "start",
+    },
+    false,
+    "draft",
+    "480e64d2d973f6cf3b98545d3ecc8e684214113d29c8b09ceefec773fafe190d",
+  ],
+  [
+    {
+      "type": "abandon",
+    },
+    true,
+    "draft",
+    "cd7684ca6e907813922d3a60833338a61279025cd6aa19851c69b199586d9edf",
+  ],
+]
+`;
+
+exports[`journey lifecycle behavior baseline > preserves seeded commands and outputs for seed 98 1`] = `
+[
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "draft",
+    "2aa30f9f1882b0dcd980d68108b053280a25d1c19df3a4063e11882708be6b9c",
+  ],
+  [
+    {
+      "species": "chimecricket",
+      "type": "draft",
+    },
+    true,
+    "draft",
+    "bc8065d87040f90d0d2e3f3c658854a43500bdde5e6689def335c34015d65a92",
+  ],
+  [
+    {
+      "type": "start",
+    },
+    true,
+    "teamSelection",
+    "34c53a9c44f2d581c43b9f57deb6e103cf95510bd3862d7acae0610aa1793df6",
+  ],
+  [
+    {
+      "type": "beginBattle",
+    },
+    true,
+    "battle",
+    "dce263d8a43863ef1dae32baf7ec71deed0872d2cbcb6ecdcb25a3e645bd9637",
+  ],
+  [
+    "preview",
+    true,
+    "19cdc5ae05a1bd317916f585839ba6b919142d516c0665df97c4626383eeb5f5",
+  ],
+  [
+    {
+      "autoEndTurn": false,
+      "cardId": "ally-0:chimecricket-attack",
+      "targetId": "enemy-0",
+      "type": "play",
+    },
+    true,
+    "battle",
+    "19cdc5ae05a1bd317916f585839ba6b919142d516c0665df97c4626383eeb5f5",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    true,
+    "battle",
+    "c234081f6b1a1b83949d1e43ec5195920f8f746eb4fdc458acfbef077348be44",
+  ],
+  [
+    {
+      "type": "devWinBattle",
+    },
+    true,
+    "recruit",
+    "45b49116ac89bcae837229e65122f91ccae6d165cdb25895d7590c5e221f090d",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "recruit",
+    "5b7ada4d26e83fcb30e5e46fc15f4e6fde9a4fb11cf64eda20c783f279a140ad",
+  ],
+  [
+    {
+      "species": "prismram",
+      "type": "recruit",
+    },
+    true,
+    "teamSelection",
+    "5261653e969558def41ed1a7f450d40bc339b23438dc55ee603a71668625114d",
+  ],
+  [
+    {
+      "type": "visitCampfire",
+    },
+    true,
+    "campfire",
+    "bf1b7db13ba586fea0ed2c317a4dc3fe34c5b361ab11a21257331cf5d1918173",
+  ],
+  [
+    {
+      "type": "rest",
+    },
+    true,
+    "teamSelection",
+    "308d91ea913e5e2467174d9bc6f1da08f3b08202e65cb55ce6f6fd344041eef1",
+  ],
+  [
+    {
+      "type": "beginBattle",
+    },
+    true,
+    "battle",
+    "65e6f420af618d902f80a93b54fec175fd816d4c9eb558613797f279ed1df77e",
+  ],
+  [
+    "preview",
+    true,
+    "fa55bd2dda2977262fbd1dbc324d3dcb98228ab7828ebdf30a985cf06a279bdf",
+  ],
+  [
+    {
+      "autoEndTurn": false,
+      "cardId": "ally-0:chimecricket-heal",
+      "targetId": undefined,
+      "type": "play",
+    },
+    true,
+    "battle",
+    "fa55bd2dda2977262fbd1dbc324d3dcb98228ab7828ebdf30a985cf06a279bdf",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    true,
+    "battle",
+    "ed5280d0f9a70974f33771e2a7f3ed26cfa5d03ecf180e0b1c88ded823c2ab47",
+  ],
+  [
+    {
+      "type": "devWinBattle",
+    },
+    true,
+    "recruit",
+    "cfabe0141a132e135d6ae1d7df5ec882dd3eea15ab7ece68ea2a578ad4c4b05b",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "recruit",
+    "80f77a2a3589bb1cffbca39ec7e7631c0115fa29aacadcacbe8cb0da32b48453",
+  ],
+  [
+    {
+      "species": "wickwaltz",
+      "type": "recruit",
+    },
+    true,
+    "teamSelection",
+    "d33557a35658a601bdd69bd0206092426a358baf8bcf83787976e70816f3c520",
+  ],
+  [
+    {
+      "type": "visitCampfire",
+    },
+    true,
+    "campfire",
+    "edffa4c41cdfdec50fd4964e0eadb26e1bbe30a57146890d7f20b1a95b2472ae",
+  ],
+  [
+    {
+      "type": "leaveCampfire",
+    },
+    true,
+    "teamSelection",
+    "13e4208b13fb1c3fb29abdbf1ae6f2ef08304398459f085f21100850021d34ce",
+  ],
+  [
+    {
+      "type": "enterSupport",
+      "visit": "support-2",
+    },
+    true,
+    "support",
+    "2900322730629b128e76b9ac6a0ac9702ca82ea851a74812a17e440b4cb460a2",
+  ],
+  [
+    {
+      "slot": "slot-0",
+      "type": "buyBoon",
+      "visit": "support-2",
+    },
+    true,
+    "support",
+    "406518b205811d1eba5ea8e4516c62e1643311a7c9c09b97ea52b95ae11bb9cf",
+  ],
+  [
+    {
+      "slot": "slot-0",
+      "type": "buyBoon",
+      "visit": "support-2",
+    },
+    false,
+    "support",
+    "29ede443411c19ced26d1acb7bbd3d5eea4952ef55b88c15ed0ffe7c32f16819",
+  ],
+  [
+    {
+      "type": "leaveSupport",
+      "visit": "support-2",
+    },
+    true,
+    "teamSelection",
+    "a7330370d8dcaa232e3e0f5e4831fd2fd2a2d2dc3d3905dc725c64dbb983cdee",
+  ],
+  [
+    {
+      "type": "beginBattle",
+    },
+    true,
+    "battle",
+    "5ad2faabac84eb3503602de35200c713322385dd4af60e1fc5011597b4fc58f6",
+  ],
+  [
+    "preview",
+    true,
+    "16b5a07fcd979c6619b7a140c32c4ead31c5b54686305fd90f962ce22c421c90",
+  ],
+  [
+    {
+      "autoEndTurn": false,
+      "cardId": "recruit-14:wickwaltz-attack",
+      "targetId": undefined,
+      "type": "play",
+    },
+    true,
+    "battle",
+    "16b5a07fcd979c6619b7a140c32c4ead31c5b54686305fd90f962ce22c421c90",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    true,
+    "battle",
+    "71bb5d3225088121524e987ad3030ec9c30cd92758bbe26ada35b63dd4ee4b16",
+  ],
+  [
+    {
+      "type": "devWinBattle",
+    },
+    true,
+    "recruit",
+    "56243f780283451e1ed4fbfa3bce1f726cf5342ad4f717afbbb49bdebe0faa2b",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "recruit",
+    "7c8de9ecbb246d405be4ed224730f13da62c8799c8efe59084923aae8bdafc35",
+  ],
+  [
+    {
+      "species": "dawncall",
+      "type": "recruit",
+    },
+    true,
+    "teamSelection",
+    "97ed92884c4e09b6035c2655fef2c7c0c48474c38ea928a639b21f4564b5058f",
+  ],
+  [
+    {
+      "type": "visitCampfire",
+    },
+    true,
+    "campfire",
+    "39effe32f846f62d7aa295bc3ef7fc0a96f7e801d3c490a094fbe873e678e5f1",
+  ],
+  [
+    {
+      "type": "rest",
+    },
+    true,
+    "teamSelection",
+    "2a479ce92baee9200e7339f922aeab00f9a5eb7e73e3ae008fbd02ae4956be4c",
+  ],
+  [
+    {
+      "species": "bloomquail",
+      "type": "recruitDestination",
+    },
+    true,
+    "teamSelection",
+    "2de43da3b58d2e9e8f4d033ccdf7da1a3691681121f2914d609046eaae27e850",
+  ],
+  [
+    {
+      "type": "beginBattle",
+    },
+    true,
+    "battle",
+    "e4b53d9ae9941e97be141a3c75f8bf19ff6e2d6e1354d52b878314bcf112569f",
+  ],
+  [
+    "preview",
+    true,
+    "7efa80d68e8a67439d09b7dee208dc1fb79e28afdab3295252ac0a0d5b66c215",
+  ],
+  [
+    {
+      "autoEndTurn": false,
+      "cardId": "ally-0:chimecricket-heal",
+      "targetId": undefined,
+      "type": "play",
+    },
+    true,
+    "battle",
+    "7efa80d68e8a67439d09b7dee208dc1fb79e28afdab3295252ac0a0d5b66c215",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    true,
+    "battle",
+    "b6fdf506dd4ca11c4096942deaaea4dff5ce2dc8e657c547779609c72b60e753",
+  ],
+  [
+    {
+      "type": "devWinBattle",
+    },
+    true,
+    "boon",
+    "8e7b491527af27273a081448eb689f2eb2e9bf8782e79b71fe03ed4ee83050af",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "boon",
+    "ec71f65e1823289f3490f4bf69230aced3ca5621686c28e87a20032bc6786613",
+  ],
+  [
+    {
+      "boon": "smugglers-map",
+      "type": "chooseBoon",
+    },
+    true,
+    "teamSelection",
+    "e75e85b1212d7a4874b876122304e44f38d49add787a5a76124ecf21055bb903",
+  ],
+  [
+    {
+      "type": "visitCampfire",
+    },
+    true,
+    "campfire",
+    "802bc4f0318edf5dd3b5d6b8c693bb760dbd6e9835fec807583c787ec31171e3",
+  ],
+  [
+    {
+      "type": "leaveCampfire",
+    },
+    true,
+    "teamSelection",
+    "ee60cc5def9c8bdb202408c84bc61991f5fe8298483791cb6838bc6cb05950f4",
+  ],
+  [
+    {
+      "type": "beginBattle",
+    },
+    true,
+    "battle",
+    "ab4a2c41e68a691814ed78b6406324f36badffcd22bc71fcba899cb794f0d363",
+  ],
+  [
+    "preview",
+    true,
+    "b0217b217e9ccf3bb5fe51ba7f0c61749959709c59f9d81b3697f1d140f5d5f0",
+  ],
+  [
+    {
+      "autoEndTurn": false,
+      "cardId": "recruit-14:wickwaltz-attack",
+      "targetId": undefined,
+      "type": "play",
+    },
+    true,
+    "battle",
+    "b0217b217e9ccf3bb5fe51ba7f0c61749959709c59f9d81b3697f1d140f5d5f0",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    true,
+    "battle",
+    "2aea767b7f2924ecdd4bbb3946c398586a791337bc1aea87be9dd97dbcaa43c2",
+  ],
+  [
+    {
+      "type": "devWinBattle",
+    },
+    true,
+    "recruit",
+    "bec6c1ee1581e5ad644d5a07d8cb2ad2fed41d0f33faf822625cb9cfe1245cc1",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "recruit",
+    "889e2e18847dd16b03744db91ffe49ef9a345ed56f3af0ba0f190320a73b319d",
+  ],
+  [
+    {
+      "replace": "ally-0",
+      "species": "dawncall",
+      "type": "recruit",
+    },
+    true,
+    "teamSelection",
+    "c10823710b9fb7f33cbe124e7fb72bd375269089eb41acb551e53c79e2eef36e",
+  ],
+  [
+    {
+      "type": "visitCampfire",
+    },
+    true,
+    "campfire",
+    "f101cf4d6876e0b6378b3e3651c0a92e2affb0ff194d41719f772620d2941e4f",
+  ],
+  [
+    {
+      "type": "rest",
+    },
+    true,
+    "teamSelection",
+    "c46992fca9bc22862d45c6c147073e0c2b271f2e5d98fa8449f105e874e6c284",
+  ],
+  [
+    {
+      "type": "beginBattle",
+    },
+    true,
+    "battle",
+    "321fefe3803156c58844708a9d31b1ed531ae98402e2fad130479af85583cf9e",
+  ],
+  [
+    "preview",
+    true,
+    "64c2aa65be471a8a99484833127b143d0faa7a46477f3fb042b5172272aa7801",
+  ],
+  [
+    {
+      "autoEndTurn": false,
+      "cardId": "recruit-14:wickwaltz-attack",
+      "targetId": undefined,
+      "type": "play",
+    },
+    true,
+    "battle",
+    "64c2aa65be471a8a99484833127b143d0faa7a46477f3fb042b5172272aa7801",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    true,
+    "battle",
+    "1503e6e24ac481617e70923548042e45536f6010a2c2dcf518841b1b5ccb2e22",
+  ],
+  [
+    {
+      "type": "devWinBattle",
+    },
+    true,
+    "recruit",
+    "de648f6c1f296c8fea514d3f792410632b342160c1733fe89c090e80557b0f76",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "recruit",
+    "b95e6045240c29dc228e6353d98cbba9837bb9f578cddf3cf1774c69128c00b0",
+  ],
+  [
+    {
+      "replace": "recruit-39",
+      "species": "prismram",
+      "type": "recruit",
+    },
+    true,
+    "teamSelection",
+    "d53405d1b2aff76060d89ae58257e4b0b6701c8ae44ad923c7c01b3bb83f7ed3",
+  ],
+  [
+    {
+      "type": "visitCampfire",
+    },
+    true,
+    "campfire",
+    "2072e43137635f5330482e28b00c919c3379c689e97a7afcd7bdf750c97aff75",
+  ],
+  [
+    {
+      "type": "leaveCampfire",
+    },
+    true,
+    "teamSelection",
+    "6c7c08748a4179a510a529920db007ecaad5c704d6ec0ad1ffbce5c10f2a9d2f",
+  ],
+  [
+    {
+      "type": "beginBattle",
+    },
+    true,
+    "battle",
+    "8784a2c930d23e0ccfd6817ff440057999c3ff791c6cebf237f161322f05aae3",
+  ],
+  [
+    "preview",
+    true,
+    "f247d6572f58c34c5dd3486a7a8edb9a8ea10ae528c609e40423622e84bd2999",
+  ],
+  [
+    {
+      "autoEndTurn": false,
+      "cardId": "recruit-14:wickwaltz-attack",
+      "targetId": undefined,
+      "type": "play",
+    },
+    true,
+    "battle",
+    "f247d6572f58c34c5dd3486a7a8edb9a8ea10ae528c609e40423622e84bd2999",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    true,
+    "battle",
+    "1ea29614a81372a7308ec81227f4407704acce4a45f396372f7f5e11b469b3df",
+  ],
+  [
+    {
+      "type": "devWinBattle",
+    },
+    true,
+    "recruit",
+    "eecdc9929762537adeeaea131b7a6508db5e80ef426fcd1c76bb3cf5d3d741d6",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "recruit",
+    "e79b63a0f26d450633fce187d9624db10920972167b44df1194839f66c29ad01",
+  ],
+  [
+    {
+      "replace": "recruit-46",
+      "species": "ringpalm",
+      "type": "recruit",
+    },
+    true,
+    "teamSelection",
+    "2991c396d1664bfb5a148897a3ec61a34d600bd39f192ee3ab069bd3a35254c7",
+  ],
+  [
+    {
+      "type": "visitCampfire",
+    },
+    true,
+    "campfire",
+    "6c9a181313f0271809f11ea6ae217043d896b0453362cacda96986599eeb5017",
+  ],
+  [
+    {
+      "type": "rest",
+    },
+    true,
+    "teamSelection",
+    "5bf04e501b5ec9bd366ba843ac233d110bf710e3ec20b730cedb88b6219a3590",
+  ],
+  [
+    {
+      "type": "beginBattle",
+    },
+    true,
+    "battle",
+    "2c6007505b777eaacf8d60e227ab44487b8f1e77f1807ea233c48db97fd7170c",
+  ],
+  [
+    "preview",
+    true,
+    "c69aebed4eabe068719b134324931fec53ced8070da3ea3886c105be63149924",
+  ],
+  [
+    {
+      "autoEndTurn": false,
+      "cardId": "recruit-53:ringpalm-harmonic-set",
+      "targetId": undefined,
+      "type": "play",
+    },
+    true,
+    "battle",
+    "c69aebed4eabe068719b134324931fec53ced8070da3ea3886c105be63149924",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    true,
+    "battle",
+    "4753ea324d8ba1c599da63edcb8b959f3385e2bb0b325f74e483625b9fc5d12e",
+  ],
+  [
+    {
+      "type": "devWinBattle",
+    },
+    true,
+    "victory",
+    "0f7a198433a13c37d631a0cb8c66269a86240d8b32861778182c90b1f08e1b85",
+  ],
+  [
+    {
+      "type": "endTurn",
+    },
+    false,
+    "victory",
+    "899ee43c478b01d3b6de135a4e0beae5b05a943641385606d93a21f90fc1db0e",
+  ],
+  [
+    {
+      "seed": 99,
+      "type": "newRun",
+    },
+    true,
+    "draft",
+    "a82b6f388f4d89b4255bc0cc0ebebd7c44fa7ddfecb314aad2128047e7864d42",
+  ],
+  [
+    {
+      "species": "bloomquail",
+      "type": "draft",
+    },
+    true,
+    "draft",
+    "cbddd387298671646bab28e02cb70fe50c15d223cf8f4809e210d8f911357c33",
+  ],
+  [
+    {
+      "type": "abandon",
+    },
+    true,
+    "draft",
+    "7108d05f83a7916efbf32e3a80731a116b54a99b6004d491016c67254d8eb1a3",
+  ],
+  [
+    {
+      "species": "ringpalm",
+      "type": "draft",
+    },
+    true,
+    "draft",
+    "3d4600d3fbb7fd961de697bea4d077fdb0453995586174bae99d1e240ec526ad",
+  ],
+  [
+    {
+      "type": "start",
+    },
+    false,
+    "draft",
+    "3d4600d3fbb7fd961de697bea4d077fdb0453995586174bae99d1e240ec526ad",
+  ],
+  [
+    {
+      "type": "abandon",
+    },
+    true,
+    "draft",
+    "09cd93587377a9631ae90cbb9e2975e3723ca3ecab8b5901910048f29287dd87",
+  ],
+]
+`;

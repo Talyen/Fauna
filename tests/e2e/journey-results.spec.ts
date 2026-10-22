@@ -3,7 +3,7 @@ import { test, expect, type Locator } from "@playwright/test";
 import { produce } from "immer";
 import { createGame } from "../../src/game/engine";
 import type { Command } from "../../src/game/types";
-import { recruitChoice, accept, winBattle, victoryReady, run } from "../support/game";
+import { prepareDestination, recruitChoice, accept, winBattle, victoryReady, run } from "../support/game";
 import { seed, state, resume } from "./support/session";
 import { gamepad } from "./support/gamepad";
 import { step } from "./support/journey";
@@ -95,7 +95,8 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
       accept(
         produce(run(7), (draft) => {
           draft.encounter = 7;
-          draft.phase = "teamSelection";
+          draft.journey!.victories = draft.encounter;
+          prepareDestination(draft);
           draft.battle = null;
           draft.expedition = { pack: 0, recruit: null, lastRoom: null };
           draft.journey = { outcome: null, victories: 7, currency: 0, xp: {}, unlocks: [], lastBattle: null };

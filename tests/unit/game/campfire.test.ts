@@ -3,7 +3,7 @@ import { produce } from "immer";
 import { dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { canVisitCampfire } from "../../../src/game/support";
-import { accept, run, starterJourney } from "../../support/game";
+import { prepareDestination, accept, run, starterJourney } from "../../support/game";
 function destinations() {
   return starterJourney(3, "captoad");
 }
@@ -19,6 +19,7 @@ it.each([22, 21, 20, 0])("uses the exact 30%% missing Health threshold at %s/30"
 it.each([0, 1, 2, 3, 4, 5, 6, 7])("offers Campfire at encounter %s without rerolling combat", (encounter) => {
   const s = produce(destinations(), (d) => {
     d.encounter = encounter;
+    d.journey!.victories = d.encounter;
     d.journey!.victories = encounter;
     d.expedition = { pack: 0, recruit: null, lastRoom: null };
     d.team[0]!.health = 21;
@@ -33,7 +34,7 @@ it.each([0, 1, 2, 3, 4, 5, 6, 7])("offers Campfire at encounter %s without rerol
 });
 it("counts reserves and restores knocked-out reserves without overfilling healthy allies", () => {
   const s = produce(run(), (d) => {
-    d.phase = "teamSelection";
+    prepareDestination(d);
     d.battle = null;
     d.expedition = destinations().expedition;
     d.roster.push("emberback");

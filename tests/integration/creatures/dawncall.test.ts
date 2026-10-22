@@ -6,7 +6,7 @@ import { createGame, dispatch, previewCard } from "../../../src/game/engine";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { battleChoices } from "../../../src/application/battle-policy";
-import { accept, teamRun, winBattle } from "../../support/game";
+import { prepareDestination, accept, teamRun, winBattle } from "../../support/game";
 import type { GameEvent, GameState } from "../../../src/game/types";
 
 function ready(id = "dawncall-attack", copies = 6) {
@@ -161,7 +161,7 @@ it("retains the opening receipt through swaps and resume, resets in backup and a
   const result = play(rehand(game, "dawncall-attack"));
   expect(attacks(result.events).every((event) => event.critical)).toBe(true);
   game = produce(result.state, (draft) => {
-    draft.phase = "teamSelection";
+    prepareDestination(draft);
     draft.battle = null;
   });
   game = accept(game, { type: "beginBattle" });

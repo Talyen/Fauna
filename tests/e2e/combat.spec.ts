@@ -1,7 +1,7 @@
 import { captureScreen } from "./support/rendered-evidence";
 import { test, expect, type Page } from "@playwright/test";
 import { produce } from "immer";
-import { run } from "../support/game";
+import { prepareDestination, run } from "../support/game";
 import type { GameState } from "../../src/game/types";
 async function seed(page: Page, game: GameState) {
   await page.addInitScript((game) => {
@@ -52,9 +52,10 @@ for (const width of [1280, 1920]) {
   }) => {
     await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
     const game = produce(run(), (s) => {
-      s.phase = "teamSelection";
+      prepareDestination(s);
       s.battle = null;
       s.encounter = 3;
+      s.journey!.victories = s.encounter;
       s.expedition = { pack: 0, recruit: null, lastRoom: null };
       s.team[0]!.health = 0;
       s.team[1]!.health = 7;

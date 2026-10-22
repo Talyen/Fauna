@@ -7,6 +7,7 @@ import { FIRST_RUN_STARTERS, species, BOONS } from "../../../src/game/content";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { previewPlay } from "../../../src/game/preview";
 import {
+  prepareDestination,
   recruitChoice,
   accept,
   run,
@@ -67,7 +68,7 @@ describe("journey earnings and results", () => {
 
   it("skips the Reward screen when an intermediate boss has no available boon choices", () => {
     const ready = produce(bossReward(), (d) => {
-      d.phase = "teamSelection";
+      prepareDestination(d);
       d.reward = null;
       d.battle = null;
       d.boons = BOONS.map((boon) => boon.id);

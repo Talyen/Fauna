@@ -6,7 +6,7 @@ import { createGame, dispatch, previewCard } from "../../../src/game/engine";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { combatStatuses } from "../../../src/ui/shared/combat/combat-status";
-import { accept, teamRun, winBattle } from "../../support/game";
+import { prepareDestination, accept, teamRun, winBattle } from "../../support/game";
 import type { GameEvent } from "../../../src/game/types";
 
 function ready(id = "prismram-guard") {
@@ -244,7 +244,7 @@ it("refreshes one Ward, preserves it through swaps and turn changes, and resets 
   expect(decodeSave(encodeSave(game))).toEqual(game);
   game = accept(game, { type: "swap", activeId: "reserve", reserve: "ally-0" });
   game = produce(game, (draft) => {
-    draft.phase = "teamSelection";
+    prepareDestination(draft);
     draft.battle = null;
   });
   game = accept(game, { type: "beginBattle" });

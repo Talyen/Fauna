@@ -10,10 +10,10 @@ import { ArtCard } from "../shared/cards/art-card";
 import { returnFocus } from "../shared/navigation/focus";
 import { species, type SpeciesId, BOONS } from "../../game/content";
 import { creatureStars, MAX_CREATURE_STARS } from "../../game/progression";
-import type { Command, GameState } from "../../game/types";
+import type { Command, RewardState } from "../../game/types";
 import type { Inspection } from "../shared/inspection-model";
 import { BattleEarnings } from "../battle/battle-earnings";
-type Props = { game: GameState; send: (command: Command) => boolean; inspect: (item: Inspection) => void };
+type Props = { game: RewardState; send: (command: Command) => boolean; inspect: (item: Inspection) => void };
 export function Rewards({ game, send, inspect }: Props) {
   const [incoming, setIncoming] = useState<SpeciesId | null>(null);
   const choices = useRef<HTMLElement>(null);
@@ -26,7 +26,7 @@ export function Rewards({ game, send, inspect }: Props) {
       returnTo.current = null;
     }
   }, [incoming]);
-  const reward = game.reward!;
+  const reward = game.reward;
   const recruiting = game.phase === "recruit";
   return (
     <ResultPresentation>

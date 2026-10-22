@@ -44,6 +44,7 @@ describe("journey encounters", () => {
       for (let pack = 0; pack < encounterPacks(encounter).length; pack++) {
         const state = produce(initial, (draft) => {
           draft.encounter = encounter;
+          draft.journey!.victories = draft.encounter;
           draft.expedition!.pack = pack;
         });
         const battle = enter(state);
@@ -119,6 +120,7 @@ describe("journey encounters", () => {
       },
       (d: typeof s) => {
         d.encounter = 2;
+        d.journey!.victories = d.encounter;
       },
       (d: typeof s) => {
         d.battle!.enemies[0]!.power++;

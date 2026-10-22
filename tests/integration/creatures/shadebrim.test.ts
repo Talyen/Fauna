@@ -6,7 +6,7 @@ import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { combatStatuses } from "../../../src/ui/shared/combat/combat-status";
-import { accept, teamRun, winBattle } from "../../support/game";
+import { prepareDestination, accept, teamRun, winBattle } from "../../support/game";
 
 function ready(id = "shadebrim-guard") {
   return produce(teamRun(1, ["shadebrim", "mossguard", "prismram"]), (game) => {
@@ -274,7 +274,7 @@ it("enemy Shadebrim alternates useful abilities, Cleanses its own side and never
 
 it("encounters and recruits Shadebrim through the ordinary journey pool", () => {
   let game = produce(teamRun(1, ["mossguard", "emberback", "prismram"]), (draft) => {
-    draft.phase = "teamSelection";
+    prepareDestination(draft);
     draft.battle = null;
     draft.expedition = {
       recruit: null,

@@ -7,7 +7,7 @@ import { actionValue, enemyAbilityValue, enemyInspectionValue } from "../../../s
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import type { GameState } from "../../../src/game/types";
-import { accept, teamRun } from "../../support/game";
+import { prepareDestination, accept, teamRun } from "../../support/game";
 
 function ready() {
   return produce(teamRun(1, ["sternshell", "mossguard", "prismram"]), (game) => {
@@ -57,7 +57,7 @@ it("adds the approved kit to drafts, encounters and current-format saves", () =>
 });
 it.each([1, 2, 3, 4, 5, 6])("grants Shelter once at combat start for %i copies", (copies) => {
   let game = produce(ready(), (draft) => {
-    draft.phase = "teamSelection";
+    prepareDestination(draft);
     draft.battle = null;
     draft.discovery.recruited.sternshell = copies;
   });
@@ -155,7 +155,7 @@ it("hits every enemy and refunds Mana once before automatic end turn", () => {
 
 it("grants enemy Shelter at base rank and does not grant opening Armor to backup", () => {
   let game = produce(ready(), (draft) => {
-    draft.phase = "teamSelection";
+    prepareDestination(draft);
     draft.battle = null;
     draft.expedition = {
       recruit: null,

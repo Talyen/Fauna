@@ -20,7 +20,7 @@ import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { combatStatuses } from "../../../src/ui/shared/combat/combat-status";
 import { appendFeedback, CombatFeedback } from "../../../src/ui/battle/combat-feedback";
-import { accept, teamRun, winBattle } from "../../support/game";
+import { prepareDestination, accept, teamRun, winBattle } from "../../support/game";
 import type { GameEvent } from "../../../src/game/types";
 
 function ready(id = "dunefox-dodge") {
@@ -255,9 +255,10 @@ it("encounters discover and recruit Dunefox; enemy Mirage Step and auras use the
   for (let seed = 1; seed <= 30 && (!sawStep || !sawWhirl); seed++) {
     const game = accept(
       produce(ready(), (draft) => {
-        draft.phase = "teamSelection";
+        prepareDestination(draft);
         draft.battle = null;
         draft.encounter = 1;
+        draft.journey!.victories = draft.encounter;
         draft.expedition = {
           recruit: null,
           lastRoom: null,

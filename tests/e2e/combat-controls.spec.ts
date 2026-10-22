@@ -1,7 +1,7 @@
 import { captureScreen, settleScreen } from "./support/rendered-evidence";
 import { test, expect, type Page } from "@playwright/test";
 import { produce } from "immer";
-import { accept, run, victoryReady } from "../support/game";
+import { prepareDestination, accept, run, victoryReady } from "../support/game";
 import { decodeSave, encodeSave } from "../../src/game/save";
 async function seed(page: Page, initial: string, scale: string) {
   await page.addInitScript(
@@ -123,7 +123,8 @@ test("final victory returns to the menu without a retired creature reveal", asyn
     accept(
       produce(run(), (d) => {
         d.encounter = 7;
-        d.phase = "teamSelection";
+        d.journey!.victories = d.encounter;
+        prepareDestination(d);
         d.battle = null;
         d.journey = { outcome: null, victories: 7, currency: 0, xp: {}, unlocks: [], lastBattle: null };
         d.expedition = { pack: 0, recruit: null, lastRoom: null };

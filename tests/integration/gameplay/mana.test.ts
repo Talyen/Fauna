@@ -42,7 +42,8 @@ describe("mana turn settlement", () => {
     });
     const result = dispatch(s, { type: "play", cardId: s.battle!.hand[0]!, targetId: "enemy-0" });
     expect(result.state.phase).toBe("recruit");
-    expect(result.state.battle!.turn).toBe(1);
+    expect(result.state.battle).toBeNull();
+    expect(result.events.some((event) => event.kind === "turn")).toBe(false);
     expect(result.events.some((e) => e.actorId?.startsWith("enemy-"))).toBe(false);
   });
   it("resumes manual zero-Mana turns and still rejects out-of-range Mana", () => {

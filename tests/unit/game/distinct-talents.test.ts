@@ -10,7 +10,7 @@ import {
 import { dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import type { GameEvent } from "../../../src/game/types";
-import { accept, run } from "../../support/game";
+import { prepareDestination, accept, run } from "../../support/game";
 
 function fixture() {
   const state = structuredClone(run(42));
@@ -209,7 +209,7 @@ describe("distinct talent and Boon outcomes", () => {
 it("applies opening draws and Armor once, without granting reserve Armor", () => {
   for (let seed = 0; seed < 10; seed++) {
     const ready = structuredClone(run(seed));
-    ready.phase = "teamSelection";
+    prepareDestination(ready);
     ready.battle = null;
     const reserve = ready.team.pop()!;
     ready.reserves.push(reserve);

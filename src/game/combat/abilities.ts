@@ -23,7 +23,7 @@ import {
 } from "./index";
 import { roll } from "../random";
 import { fillHand, MAX_HAND_SIZE, draw } from "../card-zones";
-import type { Creature, Enemy, GameState, GameEvent } from "../types";
+import type { Creature, Enemy, GameState, GameEvent, BattleState } from "../types";
 
 type AbilityAction = {
   def: CardDefinition;
@@ -214,7 +214,7 @@ function applyExtras(
 }
 /** Runs inside the command draft; command costs, counters and settlement stay with the caller. */
 export function executeAbility(
-  state: GameState,
+  state: BattleState,
   action: AbilityAction,
   events: GameEvent[],
   operations: AbilityOperations,

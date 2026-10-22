@@ -8,7 +8,7 @@ import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { definitionKeywords } from "../../../src/game/keywords";
 import { combatStatuses } from "../../../src/ui/shared/combat/combat-status";
 import type { GameEvent, GameState } from "../../../src/game/types";
-import { accept, teamRun } from "../../support/game";
+import { prepareDestination, accept, teamRun } from "../../support/game";
 
 function ready(copies = 6) {
   return produce(teamRun(1, ["wickwaltz", "mossguard", "prismram"]), (game) => {
@@ -159,7 +159,7 @@ it("does not count teammate plays or rejected commands and retains the count acr
   expect(nextTurn.team[0]!.combat!.cardsPlayedThisTurn).toBe(0);
   const nextBattle = accept(
     produce(result.state, (draft) => {
-      draft.phase = "teamSelection";
+      prepareDestination(draft);
       draft.battle = null;
     }),
     { type: "beginBattle" },

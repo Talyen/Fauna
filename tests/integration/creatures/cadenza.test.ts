@@ -7,7 +7,7 @@ import { decodeSave, encodeSave } from "../../../src/game/save";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { battleChoices } from "../../../src/application/battle-policy";
 import type { GameState } from "../../../src/game/types";
-import { accept, teamRun, winBattle } from "../../support/game";
+import { prepareDestination, accept, teamRun, winBattle } from "../../support/game";
 
 function ready(ability = "resonant-well") {
   return produce(teamRun(1, ["cadenza", "mossguard", "prismram"]), (game) => {
@@ -44,7 +44,7 @@ it("registers Cadenza's kit, recruitment, automatic targeting and save/preview p
     );
   }
   let game = produce(teamRun(1, ["mossguard", "emberback", "prismram"]), (draft) => {
-    draft.phase = "teamSelection";
+    prepareDestination(draft);
     draft.battle = null;
     draft.expedition = {
       recruit: null,

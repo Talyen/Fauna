@@ -168,6 +168,7 @@ describe("player interface", () => {
       }),
       (draft) => {
         draft.encounter = encounter;
+        draft.journey!.victories = draft.encounter;
         draft.expedition!.pack = 0;
         draft.journey!.victories = encounter;
       },

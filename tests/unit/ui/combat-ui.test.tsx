@@ -8,7 +8,7 @@ import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import { KEYWORDS, keywordLabel } from "../../../src/game/progression";
 import { TALENTS } from "../../../src/game/content";
-import { run } from "../../support/game";
+import { prepareDestination, run } from "../../support/game";
 import type { GameState } from "../../../src/game/types";
 
 beforeEach(() => {
@@ -90,9 +90,10 @@ it("inspects draw and discard piles without changing state or exposing draw orde
 it("shows exact Campfire recovery and commits one persisted Rest without currency or XP rewards", async () => {
   const session = await open(
     produce(run(), (s) => {
-      s.phase = "teamSelection";
+      prepareDestination(s);
       s.battle = null;
       s.encounter = 3;
+      s.journey!.victories = s.encounter;
       s.expedition = { pack: 0, recruit: null, lastRoom: null };
       s.team[0]!.health = 0;
     }),

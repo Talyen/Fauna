@@ -19,7 +19,7 @@ import { cardCost } from "../../../src/game/rules";
 import { previewPlay } from "../../../src/game/preview";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import type { GameEvent, GameState } from "../../../src/game/types";
-import { accept, run, teamRun } from "../../support/game";
+import { prepareDestination, accept, run, teamRun } from "../../support/game";
 
 const maximumHealth = (unit: GameState["team"][number]) => species(unit.species).health;
 
@@ -502,7 +502,7 @@ it("persists free-card ownership and spends the reward on only the matching crea
 
 it("opening Mana, Armor and healing apply once, while victory heals living roster members", () => {
   const state = structuredClone(run());
-  state.phase = "teamSelection";
+  prepareDestination(state);
   state.battle = null;
   state.talents = ["mana.leyline-attunement", "mana.mana-bulwark", "mana.mana-shell", "health.combat-surge"];
   state.team.forEach((c) => (c.health = 10));

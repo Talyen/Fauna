@@ -7,7 +7,7 @@ import { freshCombat } from "../../../src/game/combat/index";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { battleChoices } from "../../../src/application/battle-policy";
-import { accept, teamRun, winBattle } from "../../support/game";
+import { prepareDestination, accept, teamRun, winBattle } from "../../support/game";
 
 function ready(definitionId: string) {
   return produce(teamRun(1, ["emberback", "mossguard", "prismram"]), (game) => {
@@ -150,9 +150,10 @@ it("keeps every authored ability at one Mana and validates the catalog", () => {
 it("uses an enemy area ability against deployed allies while leaving reserves untouched", () => {
   let game = accept(
     produce(teamRun(1, ["mossguard", "emberback", "prismram"]), (draft) => {
-      draft.phase = "teamSelection";
+      prepareDestination(draft);
       draft.battle = null;
       draft.encounter = 2;
+      draft.journey!.victories = draft.encounter;
       draft.expedition = {
         recruit: null,
         lastRoom: null,

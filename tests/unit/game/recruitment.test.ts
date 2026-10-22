@@ -3,7 +3,7 @@ import { produce } from "immer";
 import { dispatch } from "../../../src/game/engine";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { accept, run, teamRun, winBattle } from "../../support/game";
+import { prepareDestination, accept, run, teamRun, winBattle } from "../../support/game";
 
 describe("recruiting creature copies", () => {
   it("offers exactly the three defeated enemies, including repeated species and roster members", () => {
@@ -11,10 +11,11 @@ describe("recruiting creature copies", () => {
     const started = teamRun(7, ["prismram"]);
     const battle = accept(
       produce(started, (d) => {
-        d.phase = "teamSelection";
+        prepareDestination(d);
         d.battle = null;
         d.encounter = 4;
-        d.journey = null;
+        d.journey!.victories = d.encounter;
+        d.journey!.victories = 4;
         d.expedition = {
           recruit: null,
           lastRoom: null,
@@ -76,9 +77,11 @@ describe("recruiting creature copies", () => {
     s = winBattle(
       accept(
         produce(s, (d) => {
-          d.phase = "teamSelection";
+          prepareDestination(d);
           d.battle = null;
           d.encounter = 0;
+          d.journey!.victories = d.encounter;
+          d.journey!.victories = 0;
         }),
         { type: "beginBattle" },
       ),

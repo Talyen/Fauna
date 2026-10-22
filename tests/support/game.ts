@@ -3,7 +3,7 @@ import { controlled } from "../../src/game/combat/index";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
 import { CARDS, definition, species, type SpeciesId } from "../../src/game/content";
-import type { Command, GameState } from "../../src/game/types";
+import type { Command, GameState, Lifecycle } from "../../src/game/types";
 // This seeded first journey finishes within the browser's 400-command budget
 export const FULL_JOURNEY_SEED = 98;
 export function run(seed = 42) {
@@ -44,7 +44,7 @@ export function teamRun(seed: number, kinds: SpeciesId[]) {
         level: 0,
       })),
     );
-    d.phase = "teamSelection";
+    prepareDestination(d);
     d.expedition = null;
   });
   return accept(s, { type: "beginBattle" });
@@ -171,9 +171,11 @@ export function policy(s: GameState): Command {
 /** A saved intermediate boss with its actual authored pack and a progressed three-creature team. */
 export function bossReward() {
   const ready = produce(run(), (d) => {
-    d.phase = "teamSelection";
+    prepareDestination(d);
     d.battle = null;
     d.encounter = 3;
+    d.journey!.victories = d.encounter;
+    d.journey!.victories = 3;
     d.expedition = { pack: 0, recruit: null, lastRoom: null };
   });
   return winBattle(accept(ready, { type: "beginBattle" }));
@@ -182,8 +184,10 @@ export function bossReward() {
 export function feedbackBattle() {
   const battle = accept(
     produce(teamRun(42, ["mossguard", "emberback", "prismram"]), (game) => {
-      game.phase = "teamSelection";
+      prepareDestination(game);
       game.encounter = 1;
+      game.journey!.victories = game.encounter;
+      game.journey!.victories = 1;
       game.battle = null;
       game.expedition = null;
     }),
@@ -205,4 +209,24 @@ export function feedbackBattle() {
     target.combat.armor = 0;
     target.combat.thorns = 1;
   });
+}
+
+/** Re-enter a destination for an isolated scenario, discarding the previous battle's lifetime. */
+export function prepareDestination(state: GameState) {
+  const next = {
+    phase: "teamSelection",
+    battle: null,
+    reward: null,
+    support: null,
+    expedition: state.expedition,
+    journey: {
+      currency: state.journey?.currency ?? 0,
+      xp: state.journey?.xp ?? {},
+      unlocks: [],
+      outcome: null,
+      victories: state.encounter,
+      lastBattle: null,
+    },
+  } satisfies Lifecycle;
+  return Object.assign(state, next);
 }

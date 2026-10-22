@@ -1,3 +1,4 @@
+import { commandPhases } from "./command-phases";
 import { executeAbility } from "./combat/abilities";
 import { canVisitCampfire, campfireRecovery, canVisitMerchant, canRecruitDestination } from "./support";
 import saveFormat from "./save-format.json" with { type: "json" };
@@ -16,7 +17,18 @@ import { actionValue, cardCost } from "./rules";
 import { CARDS, SPECIES, definition, species } from "./content";
 import { bossEncounter } from "./encounters";
 import type { Command, CommandResult, GameEvent, GameState } from "./types";
-import { offerStarters, prepareEncounter, beginBattle, bankBattleXP, settle, afterRewards } from "./journey";
+import {
+  offerStarters,
+  beginBattle,
+  settle,
+  afterRewards,
+  startJourney,
+  enterMerchant,
+  leaveMerchant,
+  enterCampfire,
+  leaveCampfire,
+  returnHome,
+} from "./journey";
 import { ownedCards, prepareLineup, swapBackup, swapFromCard } from "./team";
 import { finishTurn, livingChorus } from "./combat/turns";
 
@@ -56,32 +68,6 @@ function reject(state: GameState, reason: string): CommandResult {
   return { accepted: false, state, reason, events: [] };
 }
 
-const commandTypes = {
-  draft: true,
-  start: true,
-  beginBattle: true,
-  setLineup: true,
-  swap: true,
-  play: true,
-  endTurn: true,
-  devWinBattle: true,
-  visitCampfire: true,
-  rest: true,
-  leaveCampfire: true,
-  enterSupport: true,
-  buyBoon: true,
-  leaveSupport: true,
-  recruit: true,
-  recruitDestination: true,
-  skipRecruit: true,
-  chooseBoon: true,
-  skipBoon: true,
-  buyTalent: true,
-  resetTalents: true,
-  newRun: true,
-  abandon: true,
-} satisfies Record<Command["type"], true>;
-
 export function dispatch(state: GameState, command: Command, development = false): CommandResult {
   if (command.type === "devWinBattle" && !development)
     return reject(state, "Development command unavailable.");
@@ -93,7 +79,9 @@ export function previewCard(state: GameState, cardId: string, targetId?: string)
 }
 
 function resolve(state: GameState, command: Command, preview: boolean): CommandResult {
-  if (!Object.hasOwn(commandTypes, command.type)) return reject(state, "Unknown command.");
+  if (!Object.hasOwn(commandPhases, command.type)) return reject(state, "Unknown command.");
+  const phases: readonly GameState["phase"][] = commandPhases[command.type];
+  if (!phases.includes(state.phase)) return reject(state, "That action is unavailable here.");
   const b = state.battle;
   if (
     command.type === "newRun" &&
@@ -102,18 +90,11 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
     return reject(state, "Choose a valid journey seed.");
   if (
     command.type === "draft" &&
-    (state.phase !== "draft" ||
-      !state.starterOffers.includes(command.species) ||
-      state.selected.length === starterCount(state))
+    (!state.starterOffers.includes(command.species) || state.selected.length === starterCount(state))
   )
     return reject(state, "Choose an offered starter.");
-  if (command.type === "start" && (state.phase !== "draft" || state.selected.length !== starterCount(state)))
+  if (command.type === "start" && state.selected.length !== starterCount(state))
     return reject(state, "Complete your starter choices first.");
-  if (
-    (command.type === "play" || command.type === "endTurn" || command.type === "devWinBattle") &&
-    (state.phase !== "battle" || !b)
-  )
-    return reject(state, "There is no active battle.");
   if (command.type === "play") {
     const card = state.cards.find((c) => c.id === command.cardId);
     if (!card || !b!.hand.includes(card.id)) return reject(state, "That card is not in your hand.");
@@ -143,37 +124,25 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
   }
   if (command.type === "visitCampfire" && !canVisitCampfire(state))
     return reject(state, "There is no available Campfire.");
-  if ((command.type === "rest" || command.type === "leaveCampfire") && state.phase !== "campfire")
-    return reject(state, "Visit a Campfire first.");
-  if (command.type === "newRun" && !["draft", "victory", "defeat"].includes(state.phase))
-    return reject(state, "End the current journey first.");
-  if (command.type === "beginBattle" && state.phase !== "teamSelection") {
-    return reject(state, "Battle is unavailable.");
-  }
   if (
     command.type === "swap" &&
-    (!["battle", "teamSelection"].includes(state.phase) ||
-      !state.team.some((c) => c.id === command.activeId) ||
+    (!state.team.some((c) => c.id === command.activeId) ||
       !state.reserves.some((c) => c.id === command.reserve && (state.phase !== "battle" || c.health > 0)) ||
       state.team.some((c) => c.id === command.reserve))
   )
     return reject(state, "Choose an active creature and a backup.");
   if (
     command.type === "setLineup" &&
-    (!["teamSelection", "recruit", "boon", "campfire", "support"].includes(state.phase) ||
-      ![...state.team, ...state.reserves].some(
-        (c) => c.id === command.activeId && state.lineup.includes(c.id),
-      ) ||
+    (![...state.team, ...state.reserves].some(
+      (c) => c.id === command.activeId && state.lineup.includes(c.id),
+    ) ||
       ![...state.team, ...state.reserves].some((c) => c.id === command.reserve) ||
-      state.lineup.includes(command.reserve) ||
-      state.reward?.outcome === "defeat" ||
-      state.reward?.outcome === "victory")
+      state.lineup.includes(command.reserve))
   )
     return reject(state, "Choose a starting creature and a backup between battles.");
   if (
     command.type === "recruit" &&
-    (state.phase !== "recruit" ||
-      !state.reward?.recruits.includes(command.species) ||
+    (!state.reward?.recruits.includes(command.species) ||
       (state.roster.length === 5
         ? !command.replace || ![...state.team, ...state.reserves].some((c) => c.id === command.replace)
         : !!command.replace))
@@ -184,16 +153,13 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
     (!canRecruitDestination(state) || state.expedition?.recruit !== command.species)
   )
     return reject(state, "That recruit is unavailable.");
-  if (command.type === "skipRecruit" && (state.phase !== "recruit" || !!state.reward?.recruits.length))
+  if (command.type === "skipRecruit" && !!state.reward?.recruits.length)
     return reject(state, "Choose a creature to recruit.");
   if (
     command.type === "chooseBoon" &&
-    (state.phase !== "boon" ||
-      !state.reward?.boons.includes(command.boon) ||
-      state.boons.includes(command.boon))
+    (!state.reward?.boons.includes(command.boon) || state.boons.includes(command.boon))
   )
     return reject(state, "Choose an offered boon.");
-  if (command.type === "skipBoon" && state.phase !== "boon") return reject(state, "There is no boon reward.");
   if (command.type === "buyTalent" && !canBuyTalent(state, command.talentId))
     return reject(state, "That talent is not available.");
   if (
@@ -201,18 +167,14 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
     (!KEYWORDS.includes(command.keyword) || !state.talents.some((id) => id.startsWith(`${command.keyword}.`)))
   )
     return reject(state, "There are no talents to reset in this category.");
-  if (
-    command.type === "abandon" &&
-    !["battle", "teamSelection", "recruit", "boon", "campfire", "support"].includes(state.phase) &&
-    !(state.phase === "draft" && state.selected.length > 0)
-  )
+  if (command.type === "abandon" && state.phase === "draft" && state.selected.length === 0)
     return reject(state, "There is no journey to end.");
   const visit = state.support;
   if (command.type === "enterSupport" && (!canVisitMerchant(state) || !visit || visit.id !== command.visit))
     return reject(state, "That visit is unavailable.");
   if (
     ["buyBoon", "leaveSupport"].includes(command.type) &&
-    (state.phase !== "support" || !visit || !("visit" in command) || command.visit !== visit.id)
+    (!visit || !("visit" in command) || command.visit !== visit.id)
   )
     return reject(state, "That visit is no longer active.");
   if (command.type === "buyBoon") {
@@ -250,20 +212,18 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
           attacked: false,
         }));
         draft.cards = draft.team.flatMap((c) => ownedCards(c.id, c.species));
-        draft.journey = { outcome: null, victories: 0, currency: 0, xp: {}, unlocks: [], lastBattle: null };
         draft.roster = [...draft.selected];
         draft.lineup = draft.team.map((c) => c.id);
-        draft.phase = "teamSelection";
-        if (draft.expedition) prepareEncounter(draft);
+        if (draft.phase !== "draft") throw new Error("Invalid starter transition.");
+        startJourney(draft);
         break;
       case "enterSupport":
-        draft.phase = "support";
+        if (draft.phase !== "teamSelection") throw new Error("Invalid Merchant transition.");
+        enterMerchant(draft);
         break;
       case "leaveSupport":
-        draft.support!.resolved = true;
-        draft.expedition!.lastRoom = "merchant";
-        prepareEncounter(draft);
-        draft.phase = "teamSelection";
+        if (draft.phase !== "support") throw new Error("Invalid Merchant departure.");
+        leaveMerchant(draft);
         break;
       case "buyBoon": {
         const slot = draft.support!.stock.find((s) => s.slot === command.slot)!;
@@ -285,19 +245,21 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         events.push({ kind: "turn", text: "Your journey begins." });
         break;
       case "visitCampfire":
-        draft.phase = "campfire";
+        if (draft.phase !== "teamSelection") throw new Error("Invalid Campfire transition.");
+        enterCampfire(draft);
         break;
       case "leaveCampfire":
-        draft.expedition!.lastRoom = "campfire";
-        draft.phase = "teamSelection";
+        if (draft.phase !== "campfire") throw new Error("Invalid Campfire departure.");
+        leaveCampfire(draft);
         break;
       case "rest":
-        draft.expedition!.lastRoom = "campfire";
+        if (draft.phase !== "campfire") throw new Error("Invalid Campfire rest.");
         for (const creature of [...draft.team, ...draft.reserves])
           restoreHealth(creature, campfireRecovery(creature), events, true);
-        draft.phase = "teamSelection";
+        leaveCampfire(draft);
         break;
       case "play": {
+        if (draft.phase !== "battle") throw new Error("Invalid battle action.");
         const battle = draft.battle!;
         const card = draft.cards.find((c) => c.id === command.cardId)!;
         const def = definition(card.definitionId);
@@ -339,11 +301,13 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         break;
       }
       case "devWinBattle": {
+        if (draft.phase !== "battle") throw new Error("Invalid development battle action.");
         for (const enemy of draft.battle!.enemies) enemy.health = 0;
         settle(draft, events);
         break;
       }
       case "endTurn": {
+        if (draft.phase !== "battle") throw new Error("Invalid turn action.");
         finishTurn(draft, events);
         break;
       }
@@ -392,9 +356,6 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
               card.definitionId = newDefs[oldDefs.findIndex((def) => def.id === card.definitionId)]!.id;
               card.level = 0;
             }
-            if (draft.battle)
-              for (const enemy of draft.battle.enemies)
-                if (enemy.targetId === old.id) enemy.targetId = recruited.id;
           } else draft.reserves[draft.reserves.findIndex((c) => c.id === replacement)] = recruited;
         } else {
           draft.roster.push(command.species);
@@ -403,25 +364,29 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
             draft.team.push(recruited);
             const cards = ownedCards(recruited.id, recruited.species);
             draft.cards.push(...cards);
-            // The settled battle remains a valid receipt through recruitment and boon choice.
-            draft.battle?.discard.push(...cards.map((card) => card.id));
           } else draft.reserves.push(recruited);
         }
         if (command.type === "recruitDestination") {
           draft.expedition!.recruit = null;
           draft.expedition!.lastRoom = "recruit";
           events.push({ kind: "reward", text: `${species(command.species).name} joined your roster.` });
-        } else afterRewards(draft);
+        } else {
+          if (draft.phase !== "recruit") throw new Error("Invalid Recruit choice.");
+          afterRewards(draft);
+        }
         break;
       }
       case "skipRecruit":
+        if (draft.phase !== "recruit") throw new Error("Invalid Recruit skip.");
         afterRewards(draft);
         break;
       case "chooseBoon":
+        if (draft.phase !== "boon") throw new Error("Invalid Boon choice.");
         draft.boons.push(command.boon);
         afterRewards(draft);
         break;
       case "skipBoon":
+        if (draft.phase !== "boon") throw new Error("Invalid Boon skip.");
         afterRewards(draft);
         break;
       case "buyTalent":
@@ -456,10 +421,8 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
           offerStarters(draft);
           break;
         }
-        bankBattleXP(draft);
-        if (draft.journey) draft.journey.outcome = "returned";
-        draft.reward = null;
-        draft.phase = "defeat";
+        if (draft.phase === "victory" || draft.phase === "defeat") throw new Error("Invalid return.");
+        returnHome(draft);
         events.push({ kind: "knockout", text: "You return from the wilds. Discoveries are kept." });
         break;
     }

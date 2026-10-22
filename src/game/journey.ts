@@ -13,7 +13,7 @@ import {
 import { shuffle, roll } from "./random";
 import { draw, drawKeyword } from "./card-zones";
 import { bossEncounter, encounterSource, finalEncounter, encounterPacks } from "./encounters";
-import type { GameEvent, GameState } from "./types";
+import type { GameEvent, GameState, Lifecycle, BattleState, RewardState, StateAt } from "./types";
 import { living, rebuildCards, prepareLineup } from "./team";
 const OPTIONAL_DESTINATION_CHANCE = 0.25;
 
@@ -65,7 +65,7 @@ export function prepareEncounter(state: GameState) {
         }
       : null;
 }
-export function intents(state: GameState) {
+export function intents(state: BattleState) {
   const alive = living(state);
   for (const enemy of state.battle!.enemies) {
     if (enemy.health > 0)
@@ -85,7 +85,7 @@ export function beginBattle(state: GameState, events: GameEvent[] = []) {
     c.block = 0;
     c.attacked = false;
   }
-  state.battle = {
+  const battle = {
     earnedGold: 0,
     freeBurnUsed: false,
     meteoriteUsed: false,
@@ -121,7 +121,15 @@ export function beginBattle(state: GameState, events: GameEvent[] = []) {
       return enemy;
     }),
   };
-  state.phase = "battle";
+  if (!state.journey) throw new Error("Battle requires a journey.");
+  const active = enterPhase(state, {
+    phase: "battle",
+    battle,
+    reward: null,
+    support: null,
+    expedition: state.expedition,
+    journey: { ...state.journey, outcome: null },
+  });
   draw(state, TURN_DRAW + (state.boons.includes("tattered-pages") ? 1 : 0));
   if (hasTalent(state, "nature.ecosystem")) drawKeyword(state, "nature");
   for (const unit of state.team) {
@@ -132,13 +140,12 @@ export function beginBattle(state: GameState, events: GameEvent[] = []) {
       else if (effect.effect === "armor") grantArmor(state, unit, effect.amount, events);
       else grantStatus(unit, "thorns", effect.amount, events, state);
     }
-    if (hasTalent(state, "mana.mana-bulwark")) grantBlock(state, unit, state.battle.maxMana, events);
-    if (hasTalent(state, "mana.mana-shell")) grantArmor(state, unit, state.battle.maxMana, events);
+    if (hasTalent(state, "mana.mana-bulwark")) grantBlock(state, unit, active.battle.maxMana, events);
+    if (hasTalent(state, "mana.mana-shell")) grantArmor(state, unit, active.battle.maxMana, events);
     if (hasTalent(state, "health.combat-surge")) restoreHealth(unit, 4, events, false, state);
   }
-  state.reward = null;
   state.battleXP = {};
-  intents(state);
+  intents(active);
 }
 export function bankBattleXP(state: GameState) {
   const xp: GameState["battleXP"] = {};
@@ -154,7 +161,7 @@ export function bankBattleXP(state: GameState) {
   state.battleXP = {};
   return xp;
 }
-function finishBattle(state: GameState, defeated: boolean) {
+function finishBattle(state: BattleState, defeated: boolean) {
   const xp = bankBattleXP(state);
   const earnedGold = state.battle?.earnedGold ?? 0;
   const previousCurrency = state.currency;
@@ -167,9 +174,8 @@ function finishBattle(state: GameState, defeated: boolean) {
   const outcome = defeated ? "defeat" : finalEncounter(state) ? "victory" : "next";
   if (state.journey) {
     state.journey.currency = Math.min(1_000_000, state.journey.currency + currency - earnedGold);
-    state.journey.lastBattle = { xp, currency };
+    state.journey.lastBattle = { xp, currency, encounter: state.encounter, outcome };
     if (!defeated) state.journey.victories++;
-    if (outcome !== "next") state.journey.outcome = outcome;
   }
   if (outcome === "victory") {
     state.wins = Math.min(1_000_000, state.wins + 1);
@@ -181,7 +187,7 @@ function finishBattle(state: GameState, defeated: boolean) {
           state,
           BOONS.filter((r) => !state.boons.includes(r.id)).map((r) => r.id),
         ).slice(0, 3);
-  state.reward = {
+  const receipt = {
     xp,
     currency,
     outcome,
@@ -191,9 +197,41 @@ function finishBattle(state: GameState, defeated: boolean) {
         : encounterSource(state).enemies.map((enemy) => enemy.species),
     boons,
   };
-  enterReward(state);
+  // Combat identity ends here. Receipts never refer to mutable roster or enemy objects.
+  clearCombat(state);
+  const finished = { battle: null, support: null, expedition: state.expedition };
+  if (outcome === "defeat")
+    enterPhase(state, {
+      ...finished,
+      phase: "defeat",
+      journey: { ...state.journey, outcome },
+      reward: { ...receipt, outcome, recruits: [], boons: [] },
+    });
+  else if (outcome === "victory")
+    enterPhase(state, {
+      ...finished,
+      phase: "victory",
+      journey: { ...state.journey, outcome },
+      reward: { ...receipt, outcome, recruits: [], boons: [] },
+    });
+  else if (receipt.recruits.length)
+    enterPhase(state, {
+      ...finished,
+      phase: "recruit",
+      journey: state.journey,
+      reward: { ...receipt, outcome: "next", boons: [] },
+    });
+  else if (boons.length)
+    enterPhase(state, {
+      ...finished,
+      phase: "boon",
+      journey: state.journey,
+      reward: { ...receipt, outcome: "next", recruits: [] },
+    });
+  else advanceEncounter(state);
 }
-export function settle(state: GameState, events: GameEvent[]): boolean {
+
+export function settle(state: BattleState, events: GameEvent[]): boolean {
   if (![...state.team, ...state.reserves].some((c) => c.health > 0)) {
     finishBattle(state, true);
     events.push({ kind: "knockout", text: "Your journey has ended." });
@@ -211,30 +249,83 @@ export function settle(state: GameState, events: GameEvent[]): boolean {
     }
     finishBattle(state, false);
     events.push({
-      kind: state.phase === "victory" || state.reward?.outcome === "victory" ? "victory" : "reward",
+      kind: finalEncounter(state) ? "victory" : "reward",
       text: "Battle complete. Rewards saved.",
     });
     return true;
   }
   return false;
 }
-export function afterRewards(state: GameState) {
-  if (state.reward!.outcome === "victory") {
-    state.phase = "victory";
-    return;
-  }
+export function afterRewards(state: RewardState) {
+  advanceEncounter(state);
+}
+function advanceEncounter(state: GameState) {
   state.encounter++;
   if (state.expedition) prepareEncounter(state);
-  state.phase = "teamSelection";
-  state.battle = null;
-  state.reward = null;
+  enterDestination(state);
   prepareLineup(state);
 }
-function enterReward(state: GameState) {
-  const reward = state.reward!;
-  if (reward.outcome === "defeat") state.phase = "defeat";
-  else if (reward.outcome === "victory") state.phase = "victory";
-  else if (reward.recruits.length > 0) state.phase = "recruit";
-  else if (reward.boons.length) state.phase = "boon";
-  else afterRewards(state);
+
+/** Only complete lifecycle payloads cross this synchronous draft mutation boundary. */
+function enterPhase<T extends Lifecycle>(state: GameState, next: T): GameState & T {
+  return Object.assign(state, next);
+}
+function clearCombat(state: GameState) {
+  for (const creature of [...state.team, ...state.reserves]) {
+    creature.block = 0;
+    creature.combat = freshCombat();
+  }
+}
+function enterDestination(state: GameState) {
+  if (!state.journey) throw new Error("Destination requires a journey.");
+  enterPhase(state, {
+    phase: "teamSelection",
+    battle: null,
+    reward: null,
+    support: state.support,
+    expedition: state.expedition,
+    journey: { ...state.journey, outcome: null },
+  });
+}
+export function startJourney(state: StateAt<"draft">) {
+  enterPhase(state, {
+    phase: "teamSelection",
+    battle: null,
+    reward: null,
+    support: null,
+    expedition: state.expedition,
+    journey: { outcome: null, victories: 0, currency: 0, xp: {}, unlocks: [], lastBattle: null },
+  });
+  if (state.expedition) prepareEncounter(state);
+}
+export function enterMerchant(state: StateAt<"teamSelection">) {
+  if (!state.support || !state.expedition) throw new Error("Missing Merchant visit.");
+  enterPhase(state, { ...state, phase: "support", support: state.support, expedition: state.expedition });
+}
+export function leaveMerchant(state: StateAt<"support">) {
+  state.support.resolved = true;
+  state.expedition.lastRoom = "merchant";
+  prepareEncounter(state);
+  enterDestination(state);
+}
+export function enterCampfire(state: StateAt<"teamSelection">) {
+  if (!state.expedition) throw new Error("Missing Campfire route.");
+  enterPhase(state, { ...state, phase: "campfire", expedition: state.expedition });
+}
+export function leaveCampfire(state: StateAt<"campfire">) {
+  state.expedition.lastRoom = "campfire";
+  enterDestination(state);
+}
+export function returnHome(state: Exclude<GameState, StateAt<"draft" | "victory" | "defeat">>) {
+  if (state.expedition) state.expedition.recruit = null;
+  bankBattleXP(state);
+  clearCombat(state);
+  enterPhase(state, {
+    phase: "defeat",
+    battle: null,
+    reward: null,
+    support: null,
+    expedition: state.expedition,
+    journey: { ...state.journey, outcome: "returned" },
+  });
 }

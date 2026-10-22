@@ -1,6 +1,6 @@
 import type { KeywordId } from "./keywords";
 import type { SpeciesId, DamageType, BoonId } from "./content";
-import type { Keyword, KeywordXP } from "./progression";
+import type { Keyword } from "./progression";
 
 export interface CombatState {
   controlTurns: number;
@@ -64,76 +64,17 @@ export interface Enemy {
   combat: CombatState;
   lastAbility: string | null;
 }
-interface Battle {
-  earnedGold: number;
-  freeBurnUsed: boolean;
-  meteoriteUsed: boolean;
-  cardsPlayedThisTurn: number;
-  turn: number;
-  mana: number;
-  maxMana: number;
-  draw: string[];
-  hand: string[];
-  buffer: string[];
-  discard: string[];
-  enemies: Enemy[];
-}
-interface BattleReward {
-  xp: KeywordXP;
-  currency: number;
-  recruits: SpeciesId[];
-  boons: BoonId[];
-  outcome: "next" | "victory" | "defeat";
-}
-interface JourneySummary {
-  outcome: "victory" | "defeat" | "returned" | null;
-  victories: number;
-  currency: number;
-  xp: KeywordXP;
-  unlocks: SpeciesId[];
-  lastBattle: { xp: KeywordXP; currency: number } | null;
-}
-export interface GameState {
-  version: number;
-  discovery: { encountered: SpeciesId[]; recruited: Partial<Record<SpeciesId, number>> };
-  revision: number;
-  rng: number;
-  phase:
-    "draft" | "teamSelection" | "battle" | "recruit" | "boon" | "campfire" | "support" | "victory" | "defeat";
-  unlocked: SpeciesId[];
-  wins: number;
-  selected: SpeciesId[];
-  starterOffers: SpeciesId[];
-  /** Species counts, including copies; individual state lives in team and reserves. */
-  roster: SpeciesId[];
-  reserves: Creature[];
-  /** Creature IDs in starting order, independent of tactical combat swaps. */
-  lineup: string[];
-  team: Creature[];
-  cards: Card[];
-  encounter: number;
-  expedition: {
-    pack: number | null;
-    recruit: SpeciesId | null;
-    lastRoom: "combat" | "boss" | "merchant" | "campfire" | "recruit" | null;
-  } | null;
-  support: {
-    id: string;
-    kind: "merchant";
-    encounter: number;
-    resolved: boolean;
-    purchased: BoonId | null;
-    stock: { slot: string; boon: BoonId; price: number }[];
-  } | null;
-  battle: Battle | null;
-  keywordXP: KeywordXP;
-  battleXP: KeywordXP;
-  talents: string[];
-  currency: number;
-  boons: BoonId[];
-  reward: BattleReward | null;
-  journey: JourneySummary | null;
-}
+/** Runtime and persisted phase payloads share one structural contract. */
+export type GameState = import("zod").infer<typeof import("./state-schema").gameStateSchema>;
+export type StateAt<P extends GameState["phase"]> = Extract<GameState, { phase: P }>;
+export type BattleState = StateAt<"battle">;
+export type RewardState = StateAt<"recruit" | "boon">;
+export type Lifecycle = GameState extends infer S
+  ? S extends GameState
+    ? Pick<S, "phase" | "battle" | "reward" | "journey" | "support" | "expedition">
+    : never
+  : never;
+
 export type Command =
   | { type: "draft"; species: SpeciesId }
   | { type: "start" }

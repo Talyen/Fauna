@@ -4,7 +4,7 @@ import { produce } from "immer";
 import { dispatch } from "../../../src/game/engine";
 import { previewPlay } from "../../../src/game/preview";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { accept, run } from "../../support/game";
+import { prepareDestination, accept, run } from "../../support/game";
 
 function buffered() {
   return produce(run(), (d) => {
@@ -19,7 +19,7 @@ describe("hidden hand overflow", () => {
   it("draws four opening cards plus Wind Feather without exceeding the seven-card hand", () => {
     const s = accept(
       produce(run(), (d) => {
-        d.phase = "teamSelection";
+        prepareDestination(d);
         d.battle = null;
         d.boons = ["tattered-pages"];
       }),

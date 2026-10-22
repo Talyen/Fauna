@@ -4,7 +4,7 @@ import { test, expect, type Locator } from "@playwright/test";
 import { produce } from "immer";
 import { definition, species } from "../../src/game/content";
 import { assetUrl } from "../../src/ui/shared/assets";
-import { accept, winBattle, run } from "../support/game";
+import { prepareDestination, accept, winBattle, run } from "../support/game";
 import { seed, state, resume } from "./support/session";
 import { gamepad } from "./support/gamepad";
 import { fits } from "./support/layout";
@@ -152,9 +152,10 @@ test("a fallen deployed row resumes with no playable cards and can recover throu
       combat: freshCombat(),
       attacked: false,
     }));
-    d.phase = "teamSelection";
+    prepareDestination(d);
     d.battle = null;
     d.encounter = 1;
+    d.journey!.victories = d.encounter;
   });
   s = accept(s, { type: "beginBattle" });
   s = produce(s, (d) =>

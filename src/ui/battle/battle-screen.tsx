@@ -10,7 +10,7 @@ import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, typ
 import { Button } from "../../components/ui/button";
 import { ActionCard, AllyCard, EnemyCard } from "../shared/cards/cards";
 import { definition, species } from "../../game/content";
-import type { Command, GameState } from "../../game/types";
+import type { Command, BattleState } from "../../game/types";
 import { previewPlay } from "../../game/preview";
 import type { InputAction } from "../shared/navigation/input";
 import { returnFocus } from "../shared/navigation/focus";
@@ -49,7 +49,7 @@ export function BattleScreen({
   openPile,
   openingDraw = false,
 }: {
-  game: GameState;
+  game: BattleState;
   send: (command: Command) => boolean;
   controls: Controls;
   bursts: readonly Burst[];
@@ -77,7 +77,7 @@ export function BattleScreen({
   const board = useRef<HTMLElement>(null);
   const [line, setLine] = useState("");
   const focusAfterCommand = useRef<number | null>(null);
-  const battle = game.battle!;
+  const battle = game.battle;
   const visibleHand = battle.hand.filter((id) =>
     game.team.some((c) => c.health > 0 && c.id === game.cards.find((card) => card.id === id)?.ownerId),
   );

@@ -7,7 +7,7 @@ import { decodeSave, encodeSave } from "../../../src/game/save";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { battleChoices } from "../../../src/application/battle-policy";
 import type { GameEvent } from "../../../src/game/types";
-import { accept, teamRun, winBattle } from "../../support/game";
+import { prepareDestination, accept, teamRun, winBattle } from "../../support/game";
 
 function ready(id = "glintstride-attack", copies = 1) {
   return produce(teamRun(1, ["glintstride", "mossguard", "prismram"]), (game) => {
@@ -160,12 +160,13 @@ it("respects Nullify, Reflect and knockouts when blinding all enemies, and score
 it("encounters, recruits and resumes Glintstride with its complete kit", () => {
   let game = produce(ready(), (draft) => {
     draft.encounter = 0;
+    draft.journey!.victories = draft.encounter;
     draft.expedition = {
       recruit: null,
       lastRoom: null,
       pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "glintstride"),
     };
-    draft.phase = "teamSelection";
+    prepareDestination(draft);
     delete draft.discovery.recruited.glintstride;
     draft.discovery.encountered = draft.discovery.encountered.filter((id) => id !== "glintstride");
   });
