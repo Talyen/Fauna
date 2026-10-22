@@ -1,4 +1,4 @@
-import { captureScreen } from "./support/rendered-evidence";
+import { captureScreen, settleScreen } from "./support/rendered-evidence";
 import { test, expect, type Locator } from "@playwright/test";
 import { CARDS } from "../../src/game/content";
 import { run } from "../support/game";
@@ -10,7 +10,10 @@ test("Collection hides uncollected tooltips and opens readable creature pages", 
   await seed(page, run());
   await page.getByRole("button", { name: "Collection", exact: true }).click();
   await expect(page.getByRole("navigation", { name: "Collection pages" })).toHaveCount(1);
-  const rows = await page.locator(".collection-grid .creature-card").evaluateAll((cards) => {
+  await settleScreen(page);
+  await expect(page.locator(".collection-grid .creature-card")).toHaveCount(8);
+  // Grid cells own row layout; the artwork inside may be scaled under a stationary pointer.
+  const rows = await page.locator(".collection-grid > *").evaluateAll((cards) => {
     const counts = new Map<number, number>();
     for (const card of cards) {
       const top = Math.round(card.getBoundingClientRect().top);
