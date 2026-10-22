@@ -107,6 +107,7 @@ export function BattleScreen({
   const selfTarget =
     def?.effect === "draw" ||
     def?.effect === "dodge" ||
+    def?.effect === "waterThorns" ||
     ((def?.effect === "guard" || def?.effect === "heal") && def.target === "self");
   const enemyTarget = def?.effect === "attack" && !def.target,
     allyTarget =

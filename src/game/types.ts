@@ -20,6 +20,7 @@ export interface CombatState {
   desperateGuardUsed: boolean;
   armor: number;
   thorns: number;
+  waterThorns: number;
   dodge: number;
   temporaryDodge: number;
   blind: boolean;

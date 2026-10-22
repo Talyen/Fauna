@@ -9,7 +9,17 @@ import { isKeywordId, KEYWORD_DEFINITIONS } from "../game/keywords";
 import { KeywordIcon } from "./keyword-icon";
 import { Button } from "../components/ui/button";
 import { Tooltip, TooltipTrigger, TooltipContent } from "../components/ui/tooltip";
-const stats = ["armor", "thorns", "dodge", "burn", "poison", "bleed", "stun", "freeze"] as const;
+const stats = [
+  "armor",
+  "thorns",
+  "waterThorns",
+  "dodge",
+  "burn",
+  "poison",
+  "bleed",
+  "stun",
+  "freeze",
+] as const;
 const statusOrder: readonly string[] = [
   ...stats,
   "controlled",

@@ -58,6 +58,12 @@ export const KEYWORD_DEFINITIONS = freeze(
       "active",
       "Absorbs incoming damage before health; Each point absorbs one damage and is spent; Remaining Block normally halves at the start of your next turn, rounded normally",
     ),
+    waterThorns: entry(
+      "Water Thorns",
+      "effect",
+      "active",
+      "Water Thorns retaliate with Water damage when an opposing attack removes Health, then lose 1 stack; Separate from Nature Thorns",
+    ),
     thorns: entry(
       "Thorns",
       "effect",
@@ -190,6 +196,7 @@ export const EFFECT_KEYWORDS = freeze(
     heal: ["health"],
     teamGuard: ["block"],
     teamProtection: ["block", "nature"],
+    waterThorns: ["water"],
     teamCleanse: ["health"],
     teamBlind: [],
     swap: [],

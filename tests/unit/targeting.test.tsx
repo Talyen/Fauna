@@ -360,3 +360,20 @@ it("Bloom Cradle previews self-healing and confirms without choosing an ally", a
   await userEvent.keyboard("{Enter}");
   expect(send).toHaveBeenCalledExactlyOnceWith({ type: "play", cardId: game.battle!.hand[0]! });
 });
+
+it("targets Neradora itself for Undertow Knot and previews the separate Water Thorns pool", async () => {
+  const game = produce(teamRun(1, ["neradora", "mossguard", "prismram"]), (draft) => {
+    const knot = draft.cards.find((card) => card.definitionId === "neradora-undertow-knot")!;
+    draft.battle!.hand = [knot.id];
+    draft.battle!.buffer = [];
+    draft.battle!.discard = [];
+    draft.battle!.draw = draft.cards.filter((card) => card.id !== knot.id).map((card) => card.id);
+  });
+  const { container, send, card } = open(game);
+  await userEvent.click(card("waterThorns"));
+  expect(container.querySelectorAll(".player-row [data-active-target]")).toHaveLength(1);
+  expect(container.querySelectorAll(".player-row .target-preview")).toHaveLength(1);
+  expect(container.querySelector(".target-preview")?.textContent).toContain("Water Thorns 0 → 3");
+  await userEvent.click(screen.getByRole("button", { name: /^Play/ }));
+  expect(send.mock.calls).toEqual([[{ type: "play", cardId: game.battle!.hand[0]! }]]);
+});
