@@ -61,6 +61,11 @@ for (const [width, enlarged, outcome] of [
       await page.getByRole("button", { name: "End journey", exact: true }).click();
     }
     game = accept(game, ending);
+    if (game.phase === "recruit") {
+      const recruit = recruitChoice(game);
+      await step(page, undefined, game, recruit);
+      game = accept(game, recruit);
+    }
     await expect(
       page.getByRole("heading", {
         name:

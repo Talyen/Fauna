@@ -111,19 +111,20 @@ try {
     throw new Error("Desktop knockout replacement or formation persistence failed.");
   if (await window.getByRole("button", { name: "Swap", exact: true }).count())
     throw new Error("A free Swap control remains available.");
-  let attack = window.locator('.app:not([inert]) .hand .action-card[data-effect="attack"]').first();
-  if (!(await attack.count())) {
-    await window.getByRole("button", { name: "End turn" }).click();
-    await window.locator('.app:not([inert])[data-save-status="saved"]').waitFor();
-    attack = window.locator('.app:not([inert]) .hand .action-card[data-effect="attack"]').first();
-  }
-  // Exercise automatic turn settlement and pending feedback across an immediate exit.
-  await window.evaluate(async () => {
+  // Exercise automatic turn settlement with a known attack that does not restore Mana.
+  const attackCardId = await window.evaluate(async () => {
     const state = JSON.parse((await window.faunaDesktop.readCandidates())[0].data);
+    const attack = state.cards.find((card) => card.definitionId === "emberback-attack");
+    if (!attack) throw new Error("Smoke lineup has no Ember Charge");
+    state.battle.hand = [attack.id];
+    state.battle.draw = state.cards.filter((card) => card.id !== attack.id).map((card) => card.id);
+    state.battle.buffer = [];
+    state.battle.discard = [];
     state.battle.mana = 1;
     // The one-enemy opening battle must survive this hit so quit/resume checks a new turn.
     state.battle.enemies[0].block = 100;
     await window.faunaDesktop.writeSave(JSON.stringify(state));
+    return attack.id;
   });
   await window.reload();
   await window.getByRole("button", { name: "Continue", exact: true }).click();
@@ -132,9 +133,9 @@ try {
   const before = await window.evaluate(async () =>
     JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
   );
-  await attack.click();
-  if (await window.locator(".battle-screen").getAttribute("data-selected-card"))
-    await window.locator('.app:not([inert]) .enemy-row [data-enemy-id="enemy-0"]').click();
+  await window.locator(`.app:not([inert]) .hand [data-card-id=${JSON.stringify(attackCardId)}]`).click();
+  await window.locator('.app:not([inert]) .battle-screen:not([data-selected-card=""])').waitFor();
+  await window.locator('.app:not([inert]) .enemy-row [data-enemy-id="enemy-0"]').click();
   // Close immediately while hit feedback is still animating; the handshake must flush the accepted command.
   await app.close();
   app = undefined;
