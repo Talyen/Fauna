@@ -276,7 +276,11 @@ it("encounters and recruits Shadebrim through the ordinary journey pool", () => 
   let game = produce(teamRun(1, ["mossguard", "emberback", "prismram"]), (draft) => {
     draft.phase = "teamSelection";
     draft.battle = null;
-    draft.expedition = { pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "shadebrim") };
+    draft.expedition = {
+      recruit: null,
+      lastRoom: null,
+      pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "shadebrim"),
+    };
   });
   game = accept(game, { type: "beginBattle" });
   expect(game.discovery.encountered).toContain("shadebrim");

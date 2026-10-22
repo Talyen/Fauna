@@ -250,7 +250,11 @@ it("enemy Leaps reorder the battlefield without extra actions, and saves retain 
         draft.encounter = 2;
         draft.phase = "teamSelection";
         draft.battle = null;
-        draft.expedition = { pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "captoad") };
+        draft.expedition = {
+          recruit: null,
+          lastRoom: null,
+          pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "captoad"),
+        };
       }),
       { type: "beginBattle" },
     );

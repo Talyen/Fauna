@@ -41,7 +41,12 @@ it("rejects a victory receipt presented as a returned journey", () => {
 
 it.each([1, 14, 19, 21, 1000000])("rejects an impossible Merchant price of %s", (price) => {
   const won = winBattle(accept(starterJourney(3, "captoad"), { type: "beginBattle" }));
-  const destinations = accept(won, recruitChoice(won));
+  const destinations = accept(
+    produce(won, (draft) => {
+      draft.rng = 10;
+    }),
+    recruitChoice(won),
+  );
   expect(destinations.support).not.toBeNull();
   expect(decodeSave(encodeSave(destinations))).toEqual(destinations);
   const corrupt = produce(destinations, (draft) => {
@@ -52,7 +57,12 @@ it.each([1, 14, 19, 21, 1000000])("rejects an impossible Merchant price of %s", 
 
 it("rejects a Merchant discount without Merchant's Favor", () => {
   const won = winBattle(accept(starterJourney(3, "captoad"), { type: "beginBattle" }));
-  const destinations = accept(won, recruitChoice(won));
+  const destinations = accept(
+    produce(won, (draft) => {
+      draft.rng = 10;
+    }),
+    recruitChoice(won),
+  );
   const corrupt = produce(destinations, (draft) => {
     for (const slot of draft.support!.stock) slot.price = 13;
   });
@@ -63,7 +73,8 @@ it("keeps the committed full price when Favor is purchased from the current Merc
   for (let seed = 1; seed <= 100; seed++) {
     const won = winBattle(accept(starterJourney(seed, "captoad"), { type: "beginBattle" }));
     const destinations = accept(won, recruitChoice(won));
-    const visit = destinations.support!;
+    const visit = destinations.support;
+    if (!visit) continue;
     const favor = visit.stock.find((slot) => slot.boon === "merchants-favor");
     if (!favor) continue;
     const shopping = accept(destinations, { type: "enterSupport", visit: visit.id });
@@ -96,7 +107,15 @@ it.each(["control", "reward", "price"])(
   "silently recovers a backup after rejecting corrupt %s data",
   async (kind) => {
     const won = winBattle(accept(starterJourney(3, "captoad"), { type: "beginBattle" }));
-    const good = kind === "reward" ? won : accept(won, recruitChoice(won));
+    const good =
+      kind === "reward"
+        ? won
+        : accept(
+            produce(won, (draft) => {
+              draft.rng = 10;
+            }),
+            recruitChoice(won),
+          );
     const corrupt = produce(good, (draft) => {
       if (kind === "control") {
         draft.team[0]!.combat!.controlled = "freeze";

@@ -15,13 +15,28 @@ export function needsCampfire(state: GameState) {
   });
 }
 export function canVisitCampfire(state: GameState) {
-  return state.phase === "teamSelection" && state.expedition !== null && needsCampfire(state);
+  return (
+    state.phase === "teamSelection" &&
+    state.expedition !== null &&
+    state.expedition.lastRoom !== "campfire" &&
+    needsCampfire(state)
+  );
 }
 export function canVisitMerchant(state: GameState) {
   return (
     state.phase === "teamSelection" &&
+    state.expedition?.lastRoom !== "merchant" &&
     !!state.support &&
     !state.support.resolved &&
     state.support.stock.some((slot) => slot.price <= state.currency)
+  );
+}
+
+export function canRecruitDestination(state: GameState) {
+  return (
+    state.phase === "teamSelection" &&
+    state.expedition?.lastRoom !== "recruit" &&
+    state.roster.length < 5 &&
+    !!state.expedition?.recruit
   );
 }

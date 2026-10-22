@@ -147,13 +147,19 @@ const currentShape = z.object({
   expedition: z
     .object({
       pack: z.number().int().min(0).max(100).nullable(),
+      recruit: speciesId.nullable(),
+      lastRoom: z.enum(["combat", "boss", "merchant", "campfire", "recruit"]).nullable(),
     })
     .nullable(),
   support: z
     .object({
       id,
       kind: z.literal("merchant"),
-      encounter: z.union([z.literal(1), z.literal(5)]),
+      encounter: z
+        .number()
+        .int()
+        .min(0)
+        .max(JOURNEY_LENGTH - 1),
       resolved: z.boolean(),
       purchased: boonId.nullable(),
       stock: z
@@ -240,8 +246,11 @@ export function decodeSave(raw: string): GameState {
   }
   if (s.expedition) {
     const route = s.expedition;
-    if (s.phase === "draft") invalid(route.pack !== null || s.encounter !== 0);
+    if (s.phase === "draft")
+      invalid(route.pack !== null || route.recruit !== null || route.lastRoom !== null || s.encounter !== 0);
     else invalid(route.pack === null || !encounterPacks(s.encounter)[route.pack]);
+    if (route.recruit !== null)
+      invalid(s.roster.length >= 5 || !["teamSelection", "support", "campfire"].includes(s.phase));
   } else invalid(s.encounter > 2);
   invalid(
     !unique(s.unlocked) ||
@@ -328,7 +337,8 @@ export function decodeSave(raw: string): GameState {
           (!v.resolved || !s.boons.includes(v.purchased) || !v.stock.some((r) => r.boon === v.purchased))),
     );
   }
-  if (s.phase === "campfire") invalid(!s.expedition || !needsCampfire(s));
+  if (s.phase === "campfire")
+    invalid(!s.expedition || s.expedition.lastRoom === "campfire" || !needsCampfire(s));
   if (["battle", "recruit", "boon"].includes(s.phase)) invalid(!s.battle);
   const rewardPhase = ["recruit", "boon"].includes(s.phase);
   invalid(rewardPhase && !s.reward);

@@ -15,7 +15,11 @@ function battle(copies = 1) {
       game.phase = "teamSelection";
       game.battle = null;
       game.encounter = 2;
-      game.expedition = { pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "emberback") };
+      game.expedition = {
+        recruit: null,
+        lastRoom: null,
+        pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "emberback"),
+      };
     }),
     { type: "beginBattle" },
   );
@@ -168,7 +172,11 @@ it("previews Armor theft and commits the same passive burst without mutating the
       draft.phase = "teamSelection";
       draft.battle = null;
       draft.encounter = 2;
-      draft.expedition = { pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "emberback") };
+      draft.expedition = {
+        recruit: null,
+        lastRoom: null,
+        pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "emberback"),
+      };
       draft.talents.push("leech.armor-siphon");
     }),
     { type: "beginBattle" },

@@ -1,5 +1,11 @@
 import { executeAbility } from "./abilities";
-import { merchantPrice, canVisitCampfire, campfireRecovery, canVisitMerchant } from "./support";
+import {
+  merchantPrice,
+  canVisitCampfire,
+  campfireRecovery,
+  canVisitMerchant,
+  canRecruitDestination,
+} from "./support";
 import saveFormat from "./save-format.json" with { type: "json" };
 import { freeze, produce } from "immer";
 import {
@@ -59,7 +65,7 @@ export function createGame(seed = 1): GameState {
     team: [],
     cards: [],
     encounter: 0,
-    expedition: { pack: null },
+    expedition: { pack: null, recruit: null, lastRoom: null },
     battle: null,
   };
   offerStarters(state);
@@ -76,10 +82,20 @@ function offerStarters(state: GameState) {
   state.starterOffers = Array.from({ length: 3 }, (_, index) => shuffled[index % shuffled.length]!);
 }
 const random = roll;
+const OPTIONAL_DESTINATION_CHANCE = 0.25;
 function prepareEncounter(state: GameState) {
   const route = state.expedition!;
   route.pack = Math.floor(random(state) * encounterPacks(state.encounter).length);
-  const kind = [1, 5].includes(state.encounter) ? "merchant" : null;
+  const kind =
+    route.lastRoom !== "merchant" &&
+    state.currency >= merchantPrice(state) &&
+    random(state) < OPTIONAL_DESTINATION_CHANCE
+      ? "merchant"
+      : null;
+  route.recruit =
+    route.lastRoom !== "recruit" && state.roster.length < 5 && random(state) < OPTIONAL_DESTINATION_CHANCE
+      ? SPECIES[Math.floor(random(state) * SPECIES.length)]!.id
+      : null;
   const stock =
     kind === "merchant"
       ? shuffle(
@@ -476,6 +492,7 @@ const commandTypes = {
   buyBoon: true,
   leaveSupport: true,
   recruit: true,
+  recruitDestination: true,
   skipRecruit: true,
   chooseBoon: true,
   skipBoon: true,
@@ -579,6 +596,11 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         : !!command.replace))
   )
     return reject(state, "Choose an offered species and, if full, a creature to release.");
+  if (
+    command.type === "recruitDestination" &&
+    (!canRecruitDestination(state) || state.expedition?.recruit !== command.species)
+  )
+    return reject(state, "That recruit is unavailable.");
   if (command.type === "skipRecruit" && (state.phase !== "recruit" || !!state.reward?.recruits.length))
     return reject(state, "Choose a creature to recruit.");
   if (
@@ -656,6 +678,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         break;
       case "leaveSupport":
         draft.support!.resolved = true;
+        draft.expedition!.lastRoom = "merchant";
         draft.phase = "teamSelection";
         break;
       case "buyBoon": {
@@ -669,6 +692,10 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
       }
       case "beginBattle":
         draft.support = null;
+        if (draft.expedition) {
+          draft.expedition.recruit = null;
+          draft.expedition.lastRoom = bossEncounter(draft) ? "boss" : "combat";
+        }
         if (draft.journey) draft.journey.lastBattle = null;
         beginBattle(draft, events);
         events.push({ kind: "turn", text: "Your journey begins." });
@@ -677,9 +704,11 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         draft.phase = "campfire";
         break;
       case "leaveCampfire":
+        draft.expedition!.lastRoom = "campfire";
         draft.phase = "teamSelection";
         break;
       case "rest":
+        draft.expedition!.lastRoom = "campfire";
         for (const creature of [...draft.team, ...draft.reserves])
           restoreHealth(creature, campfireRecovery(creature), events, true);
         draft.phase = "teamSelection";
@@ -744,7 +773,11 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         swapBackup(draft, command.activeId, command.reserve, events);
         break;
       }
+      case "recruitDestination":
       case "recruit": {
+        const replacement = command.type === "recruit" ? command.replace : undefined;
+        if (!draft.discovery.encountered.includes(command.species))
+          draft.discovery.encountered.push(command.species);
         draft.discovery.recruited[command.species] = Math.min(
           MAX_CREATURE_STARS + 1,
           (draft.discovery.recruited[command.species] ?? 0) + 1,
@@ -760,11 +793,11 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
           block: 0,
           attacked: false,
         };
-        if (command.replace) {
-          const released = [...draft.team, ...draft.reserves].find((c) => c.id === command.replace)!;
+        if (replacement) {
+          const released = [...draft.team, ...draft.reserves].find((c) => c.id === replacement)!;
           draft.roster[draft.roster.indexOf(released.species)] = command.species;
-          draft.lineup = draft.lineup.map((id) => (id === command.replace ? recruited.id : id));
-          const index = draft.team.findIndex((c) => c.id === command.replace);
+          draft.lineup = draft.lineup.map((id) => (id === replacement ? recruited.id : id));
+          const index = draft.team.findIndex((c) => c.id === replacement);
           if (index >= 0) {
             const old = draft.team[index]!;
             draft.team[index] = recruited;
@@ -778,7 +811,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
             if (draft.battle)
               for (const enemy of draft.battle.enemies)
                 if (enemy.targetId === old.id) enemy.targetId = recruited.id;
-          } else draft.reserves[draft.reserves.findIndex((c) => c.id === command.replace)] = recruited;
+          } else draft.reserves[draft.reserves.findIndex((c) => c.id === replacement)] = recruited;
         } else {
           draft.roster.push(command.species);
           if (draft.lineup.length < 3) {
@@ -790,7 +823,11 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
             draft.battle?.discard.push(...cards.map((card) => card.id));
           } else draft.reserves.push(recruited);
         }
-        afterRewards(draft);
+        if (command.type === "recruitDestination") {
+          draft.expedition!.recruit = null;
+          draft.expedition!.lastRoom = "recruit";
+          events.push({ kind: "reward", text: `${species(command.species).name} joined your roster.` });
+        } else afterRewards(draft);
         break;
       }
       case "skipRecruit":
@@ -829,6 +866,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
       }
       case "abandon":
         draft.support = null;
+        if (draft.expedition) draft.expedition.recruit = null;
         if (draft.phase === "draft") {
           draft.selected = [];
           offerStarters(draft);

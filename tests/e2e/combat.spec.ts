@@ -55,7 +55,7 @@ for (const width of [1280, 1920]) {
       s.phase = "teamSelection";
       s.battle = null;
       s.encounter = 3;
-      s.expedition = { pack: 0 };
+      s.expedition = { pack: 0, recruit: null, lastRoom: null };
       s.team[0]!.health = 0;
       s.team[1]!.health = 7;
     });

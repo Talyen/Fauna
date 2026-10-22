@@ -92,7 +92,7 @@ it("shows exact Campfire recovery and commits one persisted Rest without currenc
       s.phase = "teamSelection";
       s.battle = null;
       s.encounter = 3;
-      s.expedition = { pack: 0 };
+      s.expedition = { pack: 0, recruit: null, lastRoom: null };
       s.team[0]!.health = 0;
     }),
   );
@@ -109,7 +109,7 @@ it("shows exact Campfire recovery and commits one persisted Rest without currenc
     expect(after.team[0]!.health).toBe(10);
     expect(after.keywordXP).toEqual(before.keywordXP);
     expect(after.currency).toBe(before.currency);
-    expect(screen.getByRole("button", { name: "Visit Campfire" })).toBeTruthy();
+    expect(screen.queryByRole("button", { name: "Visit Campfire" })).toBeNull();
     expect(JSON.parse(localStorage.getItem("fauna.save.v1")!).team[0].health).toBe(10);
   } finally {
     await act(() => session.dispose());

@@ -443,7 +443,7 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
           draft.encounter = 7;
           draft.phase = "teamSelection";
           draft.battle = null;
-          draft.expedition = { pack: 0 };
+          draft.expedition = { pack: 0, recruit: null, lastRoom: null };
           draft.journey = { outcome: null, victories: 7, currency: 0, xp: {}, unlocks: [], lastBattle: null };
         }),
         { type: "beginBattle" },

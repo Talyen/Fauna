@@ -81,11 +81,11 @@ describe("journey encounters", () => {
     let earnings = 0;
     for (let index = 0; index < JOURNEY_LENGTH; index++) {
       expect(s.encounter).toBe(index);
-      expect(s.support?.encounter ?? null).toBe([1, 5].includes(index) ? index : null);
+      if (s.support) expect(s.support.encounter).toBe(index);
       expect(encounterSource(s).name).toBe(index % 4 === 3 ? "Boss" : "Combat");
       expect(encounterSource(s).enemies).toHaveLength(Math.min(3, index + 1));
       expect(decodeSave(encodeSave(enter(s)))).toEqual(enter(s));
-      const route = s.expedition;
+      const route = enter(s).expedition;
       s = winBattle(enter(s));
       expect(["recruit", "boon", "teamSelection", "victory"]).toContain(s.phase);
       earnings += [3, 7].includes(index) ? 40 : 20;

@@ -126,7 +126,7 @@ test("final victory returns to the menu without a retired creature reveal", asyn
         d.phase = "teamSelection";
         d.battle = null;
         d.journey = { outcome: null, victories: 7, currency: 0, xp: {}, unlocks: [], lastBattle: null };
-        d.expedition = { pack: 0 };
+        d.expedition = { pack: 0, recruit: null, lastRoom: null };
       }),
       { type: "beginBattle" },
     ),

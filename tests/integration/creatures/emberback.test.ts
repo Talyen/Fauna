@@ -153,7 +153,11 @@ it("uses an enemy area ability against deployed allies while leaving reserves un
       draft.phase = "teamSelection";
       draft.battle = null;
       draft.encounter = 2;
-      draft.expedition = { pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "emberback") };
+      draft.expedition = {
+        recruit: null,
+        lastRoom: null,
+        pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "emberback"),
+      };
       draft.roster.push("mossguard");
       draft.reserves.push({ ...draft.team[0]!, id: "reserve", combat: freshCombat() });
     }),

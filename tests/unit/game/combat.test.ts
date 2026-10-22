@@ -204,12 +204,12 @@ describe("combat commands and journey health", () => {
     s = accept(decodeSave(encodeSave(s)), { type: "beginBattle" });
     expect(s.team.map((c) => c.health)).toEqual([0, 7, 30]);
   });
-  it("heals the whole roster including knockouts and permits another visit while still hurt", () => {
+  it("heals the whole roster including knockouts without permitting consecutive Campfire visits", () => {
     let s = produce(run(), (d) => {
       d.phase = "teamSelection";
       d.battle = null;
       d.encounter = 3;
-      d.expedition = { pack: 0 };
+      d.expedition = { pack: 0, recruit: null, lastRoom: null };
       d.team[0]!.health = 0;
       d.team[1]!.health = 7;
     });
@@ -223,11 +223,8 @@ describe("combat commands and journey health", () => {
     expect(s.rng).toBe(rng);
     expect(s.encounter).toBe(3);
     expect(dispatch(s, { type: "rest" }).state).toBe(s);
-    s = accept(decodeSave(encodeSave(s)), { type: "visitCampfire" });
-    s = accept(s, { type: "rest" });
-    s = accept(s, { type: "visitCampfire" });
-    s = accept(s, { type: "rest" });
-    expect(s.team.map((c) => c.health)).toEqual([30, 30, 30]);
+    s = decodeSave(encodeSave(s));
+    expect(s.team.map((c) => c.health)).toEqual([10, 16, 30]);
     expect(dispatch(s, { type: "visitCampfire" }).state).toBe(s);
   });
 });
@@ -276,7 +273,7 @@ it("keeps Campfire lineup changes resumable before and after Rest", () => {
     s.phase = "teamSelection";
     s.battle = null;
     s.encounter = 3;
-    s.expedition = { pack: 0 };
+    s.expedition = { pack: 0, recruit: null, lastRoom: null };
     s.roster.push("pollenmoth");
     s.reserves.push({ id: "reserve-moth", species: "pollenmoth", health: 5, block: 0, attacked: false });
   });

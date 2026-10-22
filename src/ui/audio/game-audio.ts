@@ -31,7 +31,7 @@ export function useGameAudio(session: Session, preferences: AudioPreferences, ho
       const cue: SoundCue | undefined =
         type === "buyTalent"
           ? "talent"
-          : type === "recruit"
+          : type === "recruit" || type === "recruitDestination"
             ? "recruit"
             : type === "play" || type === "endTurn"
               ? current.game.phase === "victory" ||

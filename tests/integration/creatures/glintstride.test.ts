@@ -160,7 +160,11 @@ it("respects Nullify, Reflect and knockouts when blinding all enemies, and score
 it("encounters, recruits and resumes Glintstride with its complete kit", () => {
   let game = produce(ready(), (draft) => {
     draft.encounter = 0;
-    draft.expedition = { pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "glintstride") };
+    draft.expedition = {
+      recruit: null,
+      lastRoom: null,
+      pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "glintstride"),
+    };
     draft.phase = "teamSelection";
     delete draft.discovery.recruited.glintstride;
     draft.discovery.encountered = draft.discovery.encountered.filter((id) => id !== "glintstride");

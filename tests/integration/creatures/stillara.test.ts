@@ -59,7 +59,11 @@ it("registers the support kit, recruitment, preview parity and current saves", (
   let game = produce(teamRun(1, ["mossguard", "emberback", "prismram"]), (draft) => {
     draft.phase = "teamSelection";
     draft.battle = null;
-    draft.expedition = { pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "stillara") };
+    draft.expedition = {
+      recruit: null,
+      lastRoom: null,
+      pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "stillara"),
+    };
   });
   game = accept(game, { type: "beginBattle" });
   expect(game.discovery.encountered).toContain("stillara");

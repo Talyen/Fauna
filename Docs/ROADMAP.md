@@ -15,7 +15,7 @@ Fauna has a complete short playable journey. Checked items below are implemented
 - [x] Free combat swaps preserving Health, effects and card positions without bonus draws or Mana costs
 - [x] Persistent Health and knockouts between battles; defeat requires the entire roster to fall
 - [x] Optional Campfire recovery for the whole roster, including knocked-out creatures
-- [x] Optional Merchants before encounters two and six, with saved stock, affordability checks and one Boon purchase per visit
+- [x] Independently rolled Recruit and Merchant destinations at equal frequency, with open-roster and affordability criteria, saved offers and direct recruitment
 - [x] Shared Victory screen for recruitment or intermediate-boss Boons
 - [x] Final victory, defeat and return-home results with retained permanent earnings
 
@@ -100,7 +100,7 @@ Tools: [development tools](DEVELOPMENT_TOOLS.md), [verification policy](../CONTR
 
 These are known completion needs before substantial expansion:
 
-- [ ] **Balance the complete journey:** playtest starter strength, team combinations, passive ranks, talents, Boons, Merchant value and repeatable Campfire recovery against clear difficulty and journey-length goals
+- [ ] **Balance the complete journey:** playtest starter strength, team combinations, passive ranks, talents, Boons, Merchant value and Campfire recovery and optional-event frequency against clear difficulty and journey-length goals
 - [ ] **Finish encounter and support artwork:** replace remaining placeholders through the prepared-media workflow and review them in the actual screens
 - [ ] **Approve media and audio:** confirm source rights, track/effect selections, relative volumes and long-session listening comfort
 - [ ] **Qualify rendered flows:** inspect exact-commit CI evidence for the complete journey, minimum viewport, enlarged text, tooltips and keyboard/controller navigation

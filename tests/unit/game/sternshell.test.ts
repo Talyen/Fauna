@@ -157,7 +157,11 @@ it("grants enemy Shelter at base rank and does not grant opening Armor to backup
   let game = produce(ready(), (draft) => {
     draft.phase = "teamSelection";
     draft.battle = null;
-    draft.expedition = { pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "sternshell") };
+    draft.expedition = {
+      recruit: null,
+      lastRoom: null,
+      pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "sternshell"),
+    };
     draft.discovery.recruited.sternshell = 6;
     draft.roster.push("coralcurl");
     draft.reserves.push({

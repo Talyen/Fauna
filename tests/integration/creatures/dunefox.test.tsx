@@ -258,7 +258,11 @@ it("encounters discover and recruit Dunefox; enemy Mirage Step and auras use the
         draft.phase = "teamSelection";
         draft.battle = null;
         draft.encounter = 1;
-        draft.expedition = { pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "dunefox") };
+        draft.expedition = {
+          recruit: null,
+          lastRoom: null,
+          pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "dunefox"),
+        };
         draft.discovery.recruited.dunefox = 6;
         draft.rng = seed;
       }),

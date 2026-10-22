@@ -16,6 +16,8 @@ describe("recruiting creature copies", () => {
         d.encounter = 4;
         d.journey = null;
         d.expedition = {
+          recruit: null,
+          lastRoom: null,
           pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "prismram" && pack[1] === "prismram"),
         };
       }),

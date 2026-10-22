@@ -1,5 +1,5 @@
 import { starterCount } from "../game/progression";
-import { canVisitCampfire, canVisitMerchant } from "../game/support";
+import { canVisitCampfire, canVisitMerchant, canRecruitDestination } from "../game/support";
 import { battleChoices } from "../application/battle-policy";
 import { createSession, type Session } from "../application/session";
 import { createGame } from "../game/engine";
@@ -71,6 +71,8 @@ function actor(config: JourneyConfig) {
           : { type: "leaveSupport", visit: v.id };
       }
       case "teamSelection":
+        if (canRecruitDestination(state))
+          return { type: "recruitDestination", species: state.expedition!.recruit! };
         if (canVisitMerchant(state)) return { type: "enterSupport", visit: state.support!.id };
         if (canVisitCampfire(state)) return { type: "visitCampfire" };
         return {

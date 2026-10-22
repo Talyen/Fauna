@@ -46,7 +46,11 @@ it("registers Cadenza's kit, recruitment, automatic targeting and save/preview p
   let game = produce(teamRun(1, ["mossguard", "emberback", "prismram"]), (draft) => {
     draft.phase = "teamSelection";
     draft.battle = null;
-    draft.expedition = { pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "cadenza") };
+    draft.expedition = {
+      recruit: null,
+      lastRoom: null,
+      pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "cadenza"),
+    };
   });
   game = accept(game, { type: "beginBattle" });
   expect(game.discovery.encountered).toContain("cadenza");

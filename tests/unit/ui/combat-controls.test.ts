@@ -124,7 +124,7 @@ describe("combat controls", () => {
         d.encounter = 7;
         d.phase = "teamSelection";
         d.battle = null;
-        d.expedition = { pack: 0 };
+        d.expedition = { pack: 0, recruit: null, lastRoom: null };
       }),
       { type: "beginBattle" },
     );

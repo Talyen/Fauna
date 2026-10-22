@@ -5,6 +5,7 @@ import { render as renderUI, screen, fireEvent, cleanup } from "@testing-library
 import { produce } from "immer";
 import { createGame } from "../../../src/game/engine";
 import { recruitChoice, accept, winBattle } from "../../support/game";
+import { TeamSelection } from "../../../src/ui/expedition/team-selection";
 import { SupportOffer, SupportScreen } from "../../../src/ui/expedition/support-screen";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
 const render = (ui: ReactElement) => renderUI(ui, { wrapper: TooltipProvider });
@@ -70,4 +71,18 @@ it("keeps unavailable offers inspectable and rejects purchases with their specif
   expect(screen.getAllByText("Purchase used")).toHaveLength(2);
   fireEvent.click(screen.getAllByRole("button", { name: "Buy · 20 Gold" })[0]!);
   expect(send).not.toHaveBeenCalled();
+});
+
+it("shows the offered Recruit directly and commits only that creature without opening a dialog", () => {
+  const game = produce(merchant(), (draft) => {
+    draft.expedition!.recruit = "cadenza";
+  });
+  const send = vi.fn(() => true);
+  render(<TeamSelection game={game} send={send} inspect={() => {}} />);
+  document.documentElement.dataset.focus = "visible";
+  fireEvent.click(screen.getByRole("button", { name: "Recruit Cadenza" }));
+  expect(document.activeElement).toBe(screen.getByRole("button", { name: "Combat", exact: true }));
+  delete document.documentElement.dataset.focus;
+  expect(send).toHaveBeenCalledExactlyOnceWith({ type: "recruitDestination", species: "cadenza" });
+  expect(screen.queryByRole("dialog")).toBeNull();
 });

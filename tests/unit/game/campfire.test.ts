@@ -20,12 +20,12 @@ it.each([0, 1, 2, 3, 4, 5, 6, 7])("offers Campfire at encounter %s without rerol
   const s = produce(destinations(), (d) => {
     d.encounter = encounter;
     d.journey!.victories = encounter;
-    d.expedition = { pack: 0 };
+    d.expedition = { pack: 0, recruit: null, lastRoom: null };
     d.team[0]!.health = 21;
   });
   const rested = accept(accept(s, { type: "visitCampfire" }), { type: "rest" });
   expect(rested.team[0]!.health).toBe(30);
-  expect(rested.expedition).toEqual(s.expedition);
+  expect(rested.expedition).toEqual({ ...s.expedition, lastRoom: "campfire" });
   expect(rested.rng).toBe(s.rng);
   expect(rested.encounter).toBe(encounter);
   expect(canVisitCampfire(rested)).toBe(false);

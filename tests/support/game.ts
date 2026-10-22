@@ -173,7 +173,7 @@ export function bossReward() {
     d.phase = "teamSelection";
     d.battle = null;
     d.encounter = 3;
-    d.expedition = { pack: 0 };
+    d.expedition = { pack: 0, recruit: null, lastRoom: null };
   });
   return winBattle(accept(ready, { type: "beginBattle" }));
 }

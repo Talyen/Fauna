@@ -21,7 +21,7 @@ it("saves an atomic purchase, rejects repeats and leaves the exact destination o
   expect(decodeSave(encodeSave(bought))).toEqual(bought);
   expect(dispatch(bought, { type: "buyBoon", visit: v.id, slot: v.stock[1]!.slot }).state).toBe(bought);
   const left = accept(bought, { type: "leaveSupport", visit: v.id });
-  expect(left.expedition).toEqual(s.expedition);
+  expect(left.expedition).toEqual({ ...s.expedition, lastRoom: "merchant" });
   expect(dispatch(left, { type: "enterSupport", visit: v.id }).state).toBe(left);
 });
 it("rejects stale and unaffordable purchases without changing state or RNG", () => {
@@ -50,7 +50,7 @@ it("rejects stale and unaffordable purchases without changing state or RNG", () 
   expect(rejected.state).toBe(poor);
   expect(rejected.events).toEqual([]);
 });
-it("offers no support visit after the second ordinary victory", () => {
+it("can roll no Merchant after an ordinary victory", () => {
   let s = merchant();
   s = winBattle(accept(s, { type: "beginBattle" }));
   s = accept(s, recruitChoice(s));
@@ -85,7 +85,7 @@ it("keeps Merchant stock and combat offers through Campfire rest and reload", ()
   s = accept(s, { type: "visitCampfire" });
   s = decodeSave(encodeSave(s));
   s = accept(s, { type: "rest" });
-  expect(s.expedition).toEqual(route);
+  expect(s.expedition).toEqual({ ...route, lastRoom: "campfire" });
   expect(s.support).toEqual(visit);
   expect(decodeSave(encodeSave(s))).toEqual(s);
   expect(accept(s, { type: "enterSupport", visit: visit!.id }).phase).toBe("support");
@@ -131,7 +131,14 @@ it("discounts each new Merchant with Favor and persists the paid price", () => {
   for (let battle = 0; battle < 4; battle++) {
     state = winBattle(accept(state, { type: "beginBattle" }));
     if (state.phase === "boon") state = accept(state, { type: "skipBoon" });
-    if (state.phase === "recruit") state = accept(state, recruitChoice(state));
+    if (state.phase === "recruit") {
+      // Fix the preparation roll; this test owns pricing rather than event frequency.
+      if (battle === 3)
+        state = produce(state, (draft) => {
+          draft.rng = 10;
+        });
+      state = accept(state, recruitChoice(state));
+    }
   }
   expect(state.support!.stock.map((slot) => slot.price)).toEqual([13, 13]);
   const before = state.currency;
@@ -167,7 +174,7 @@ it("leaves Campfire without healing or changing the encounter and rejects leavin
   expect(left.phase).toBe("teamSelection");
   expect(left.team).toEqual(before.team);
   expect(left.reserves).toEqual(before.reserves);
-  expect(left.expedition).toEqual(before.expedition);
+  expect(left.expedition).toEqual({ ...before.expedition, lastRoom: "campfire" });
   expect(left.support).toEqual(before.support);
   expect(left.rng).toBe(before.rng);
   expect(decodeSave(encodeSave(left))).toEqual(left);

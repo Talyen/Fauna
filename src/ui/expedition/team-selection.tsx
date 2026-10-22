@@ -1,9 +1,12 @@
 import { Screen, ScreenHeading } from "../shared/screen";
 
 import { RestRecovery } from "./campfire";
-import { canVisitCampfire } from "../../game/support";
+import { canVisitCampfire, canRecruitDestination } from "../../game/support";
 import { SupportOffer } from "./support-screen";
 import { assetUrl } from "../shared/assets";
+import { CreatureCard } from "../shared/cards";
+import { KeywordText } from "../shared/keyword-text";
+import { CARDS, cardText, species } from "../../game/content";
 import { CreatureDetails } from "../shared/card-details";
 
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
@@ -27,6 +30,36 @@ export function TeamSelection({ game, send, recovery }: Props & { recovery?: Gam
       </header>
       <section className="destination-grid" data-nav-row aria-label="Encounters">
         <SupportOffer game={game} send={send} />
+        {canRecruitDestination(game) ? (
+          <div className="destination-option">
+            <CreatureCard
+              kind={game.expedition!.recruit!}
+              progression={game}
+              readout={false}
+              label={`Recruit ${species(game.expedition!.recruit!).name}`}
+              onClick={(element) => {
+                if (!send({ type: "recruitDestination", species: game.expedition!.recruit! })) return;
+                if (document.documentElement.dataset.focus === "visible")
+                  element
+                    .closest(".destination-grid")
+                    ?.querySelector<HTMLElement>("[data-encounter]")
+                    ?.focus();
+              }}
+              tooltipContent={
+                <div className="card-details">
+                  <CreatureDetails kind={game.expedition!.recruit!} progression={game} speciesKit />
+                  {CARDS.filter((card) => card.species === game.expedition!.recruit).map((card) => (
+                    <p key={card.id}>
+                      <strong>{card.name}</strong> · <KeywordText text={cardText(card)} />
+                    </p>
+                  ))}
+                </div>
+              }
+            />
+            <h2>Recruit</h2>
+            <p>{species(game.expedition!.recruit!).name}</p>
+          </div>
+        ) : null}
         {canVisitCampfire(game) ? (
           <div className="destination-option">
             <ArtCard

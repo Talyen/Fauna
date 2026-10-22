@@ -113,6 +113,8 @@ export interface GameState {
   encounter: number;
   expedition: {
     pack: number | null;
+    recruit: SpeciesId | null;
+    lastRoom: "combat" | "boss" | "merchant" | "campfire" | "recruit" | null;
   } | null;
   support: {
     id: string;
@@ -147,6 +149,7 @@ export type Command =
   | { type: "buyBoon"; visit: string; slot: string }
   | { type: "leaveSupport"; visit: string }
   | { type: "recruit"; species: SpeciesId; replace?: string }
+  | { type: "recruitDestination"; species: SpeciesId }
   | { type: "skipRecruit" }
   | { type: "chooseBoon"; boon: BoonId }
   | { type: "skipBoon" }
