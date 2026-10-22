@@ -33,6 +33,7 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
   }));
   let writes = Promise.resolve();
   let disposed = false;
+  let disposal: Promise<void> | undefined;
   let generation = 0;
   let retryTimer: ReturnType<typeof setTimeout> | undefined;
   const scheduleSaveRetry = () => {
@@ -225,6 +226,12 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
       if (await prepareClose()) await platform.quit?.();
     },
     dispose() {
+      if (disposal) return disposal;
+      let complete!: (result: Promise<void>) => void;
+      // Retain teardown ownership before notifying synchronous store subscribers.
+      disposal = new Promise<void>((resolve) => {
+        complete = resolve;
+      });
       disposed = true;
       clearTimeout(retryTimer);
       store.setState({ ready: false, closing: true });
@@ -233,7 +240,8 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
       removeOverlay?.();
       removeCloseListener?.();
       generation++;
-      return Promise.all([writes, cloudWrites]).then(() => {});
+      complete(Promise.all([writes, cloudWrites]).then(() => {}));
+      return disposal;
     },
   };
 }
