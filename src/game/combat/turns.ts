@@ -89,7 +89,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
           if (!targetsNow.length) break;
           const victim = targetsNow[Math.floor(roll(draft) * targetsNow.length)]!;
           deck.hand.splice(deck.hand.indexOf(id), 1);
-          deck.discard.push(id);
+          if (!def.consume) deck.discard.push(id);
           deck.mana -= def.cost;
           executeAbility(
             draft,
@@ -105,6 +105,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
             { swap: swapFromCard },
           );
           courtRemembers(draft, enemy, events);
+          if (def.consume) deck.pearls--;
           removeDepartedMinions(draft);
           recycleDiscard(draft, deck);
           while (deck.hand.length < MAX_HAND_SIZE && deck.buffer.length) deck.hand.push(deck.buffer.shift()!);

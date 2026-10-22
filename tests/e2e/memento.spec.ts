@@ -36,7 +36,7 @@ function legendaryTeam() {
   });
 }
 
-test("Legendary stays centered without free swaps and Pearls survive reload", async ({ page }) => {
+test("Legendary stays centered and only unplayed Pearls survive reload", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.emulateMedia({ reducedMotion: "reduce" });
   await seed(page, legendaryTeam());
@@ -45,9 +45,13 @@ test("Legendary stays centered without free swaps and Pearls survive reload", as
   expect(Math.abs(boss!.x + boss!.width / 2 - 640)).toBeLessThan(1);
   await expect(page.locator(".hand .action-card")).toHaveCount(6);
   await expect(page.getByRole("button", { name: "Swap", exact: true })).toHaveCount(0);
-  await page.locator('.hand [data-effect="pearl"]').first().click();
+  const pearl = page.locator('.hand [data-effect="pearl"]').first();
+  await expect(pearl).toHaveAccessibleName(/Consume/);
+  const consumed = await pearl.getAttribute("data-card-id");
+  await pearl.click();
   const saved = await state(page);
-  expect(saved.cards.filter((card) => card.definitionId === "memento-pearl")).toHaveLength(2);
+  expect(saved.cards.filter((card) => card.definitionId === "memento-pearl")).toHaveLength(1);
+  expect(saved.cards.some((card) => card.id === consumed)).toBe(false);
   await page.reload();
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   expect(await state(page)).toEqual(saved);

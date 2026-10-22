@@ -98,7 +98,7 @@ it("finishes decorative hand flights before accepting input and reveals every co
   const action = vi.fn();
   const hand = (revision: number, ids: string[]) => (
     <main className="battle-screen">
-      <HandMotion revision={revision} paused={false}>
+      <HandMotion revision={revision} paused={false} cardIds={ids}>
         <div className="hand">
           {ids.map((id) => (
             <div key={id} className="hand-slot">
@@ -134,6 +134,33 @@ it("finishes decorative hand flights before accepting input and reveals every co
   ).toBe(true);
   view.unmount();
   expect(document.querySelector(".card-transfer")).toBeNull();
+});
+it.each([true, false])("only flies an unplayed Consume card to Discard (played: %s)", (played) => {
+  if (!HTMLElement.prototype.animate)
+    HTMLElement.prototype.animate = (() => ({})) as unknown as typeof HTMLElement.prototype.animate;
+  motionEnvironment();
+  const hand = (visible: boolean) => (
+    <main className="battle-screen">
+      <HandMotion revision={visible ? 1 : 2} paused={false} cardIds={visible || !played ? ["pearl"] : []}>
+        <div className="hand">
+          {visible && (
+            <div className="hand-slot">
+              <div className="hand-reflow">
+                <Button className="action-card" data-card-id="pearl" data-consume="true">
+                  Pearl
+                </Button>
+              </div>
+            </div>
+          )}
+        </div>
+      </HandMotion>
+      <Button data-pile="draw">Draw</Button>
+      <Button data-pile="discard">Discard</Button>
+    </main>
+  );
+  const view = render(hand(true));
+  view.rerender(hand(false));
+  expect(document.querySelectorAll(".card-transfer")).toHaveLength(played ? 0 : 1);
 });
 it("crossfade copies never duplicate IDs or input ownership, and new input clears them", () => {
   if (!HTMLElement.prototype.animate)
@@ -229,7 +256,7 @@ it("discards and redraws the same card identities on a new turn using the matchi
   });
   const hand = (turn: number) => (
     <main className="battle-screen">
-      <HandMotion revision={turn} turn={turn} paused={false}>
+      <HandMotion revision={turn} turn={turn} paused={false} cardIds={["one", "two"]}>
         <div className="hand">
           {["one", "two"].map((id) => (
             <div key={id} className="hand-slot">

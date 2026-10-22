@@ -359,7 +359,13 @@ export function BattleScreen({
           </Button>
         ) : null}
       </div>
-      <HandMotion revision={game.revision} turn={battle.turn} opening={openingDraw} paused={clearSelection}>
+      <HandMotion
+        revision={game.revision}
+        turn={battle.turn}
+        opening={openingDraw}
+        paused={clearSelection}
+        cardIds={game.cards.map((card) => card.id)}
+      >
         <section className="hand-toolbar" aria-label="Battle cards and controls" data-nav-row>
           <div className="battle-dock">
             <ManaCrystals

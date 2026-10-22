@@ -86,3 +86,7 @@ Rendered browser review at 1280×720 covered a manual Cindernewt opening, recrui
 The live-edit preview logged a React error-boundary recovery during experimentation; the final resumed draft, victory and recruitment flow completed afterward. No production reproduction was established.
 
 The bounded local gate and documentation contracts are required before integration. Full static, full unit/DOM, exhaustive browser journeys, builds, packaged Windows, physical controllers, live Steam and Steam Deck remain separate gates; this report does not mark any of them passed.
+
+## Memento follow-up
+
+The approved follow-up gives Pearls Consume: played Pearls leave the battle after resolving, while unplayed Pearls discard and recycle normally. Treasury Echo still creates two Pearls, each granting two Block or two Mana at random. Drowned Revelation remains Draw 2 with no damage. The Court Remembers now deals 3–8 Water damage across its six tiers, with no attacks-per-turn cap. This supersedes the earlier Memento tuning described above; the retained benchmark evidence predates these changes and does not establish their balance.

@@ -112,6 +112,8 @@ The Boon Merchant offers up to three distinct unowned Boons at independently rol
 
 ## Legendaries and Minions
 
+Memento’s Pearls have Consume: played Pearls leave the battle after their effects and court trigger, while unplayed Pearls discard and recycle normally. The Court Remembers deals 3–8 Water damage across its six passive tiers, once per accepted card with no attacks-per-turn limit. Treasury Echo still creates two Pearls; Drowned Revelation only draws two cards.
+
 Legendaries appear as enemies only in Boss encounters and remain ordinary recruitable roster individuals. The five-creature roster accepts any combination of Legendaries and ordinary creatures. A Legendary starter fills the starting lineup alone. Deploying one returns every deployed creature to backup; replacing it with an ordinary creature leaves two vacant positions; later recruits may fill them under the ordinary recruitment rules. No manual formation editing is available.
 
 Each deployed Legendary supplies two copies of each of its three abilities. Formation changes preserve existing spent zone positions, remove surplus slots, and shuffle additional slots into Draw without granting cards to hand. Generated cards disappear when their owner leaves the field.

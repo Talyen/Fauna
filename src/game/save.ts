@@ -253,8 +253,8 @@ export function decodeSave(raw: string): GameState {
         const zones = [...deck.draw, ...deck.hand, ...deck.buffer, ...deck.discard];
         const defs = CARDS.filter((card) => card.species === enemy.species);
         invalid(
-          zones.length !== 6 + deck.created ||
-            zones.filter((id) => id === PEARL.id).length !== deck.created ||
+          zones.length !== 6 + deck.pearls ||
+            zones.filter((id) => id === PEARL.id).length !== deck.pearls ||
             (deck.buffer.length > 0 && deck.hand.length < MAX_HAND_SIZE),
         );
         for (const def of defs) invalid(zones.filter((id) => id === def.id).length !== 2);

@@ -53,7 +53,7 @@ const enemyDeck = z.object({
   buffer: z.array(id).max(MAX_BATTLE_CARDS),
   discard: z.array(id).max(MAX_BATTLE_CARDS),
   mana: z.number().int().min(0).max(4),
-  created: z
+  pearls: z
     .number()
     .int()
     .min(0)
@@ -74,7 +74,7 @@ const minion = z.object({
 });
 const battle = z.object({
   minions: z.array(minion).max(12).optional(),
-  copySerial: z.number().int().min(0).max(MAX_BATTLE_CARDS),
+  copySerial: z.number().int().min(0).max(Number.MAX_SAFE_INTEGER),
   earnedGold: natural,
   freeBurnUsed: z.boolean(),
   meteoriteUsed: z.boolean(),

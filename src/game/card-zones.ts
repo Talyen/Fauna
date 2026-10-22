@@ -25,7 +25,11 @@ function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
   const original = state.cards.find((entry) => entry.id === id)!;
   // Copy insertion and buffer promotion are not draws and cannot recursively copy.
   for (const reader of state.team) {
-    if (reader.health <= 0 || state.cards.length >= MAX_BATTLE_CARDS || battle.copySerial >= MAX_BATTLE_CARDS)
+    if (
+      reader.health <= 0 ||
+      state.cards.length >= MAX_BATTLE_CARDS ||
+      battle.copySerial >= Number.MAX_SAFE_INTEGER
+    )
       continue;
     const chance = creaturePassive(state, reader.species).effects.reduce(
       (amount, effect) => amount + (effect.kind === "wellRead" ? effect.amount : 0),

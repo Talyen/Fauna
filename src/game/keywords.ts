@@ -142,6 +142,12 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Purged",
       "Purging",
     ]),
+    consume: entry(
+      "Consume",
+      "card",
+      "active",
+      "Remove this card from the battle after it is played; Unplayed cards discard normally",
+    ),
   },
   true,
 );

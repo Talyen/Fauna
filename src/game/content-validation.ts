@@ -100,7 +100,7 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
       !DAMAGE_TYPES.includes(card.alternateDamageType)
     )
       error(card.id, "alternateDamageType", "Unknown alternate damage type.");
-    for (const tag of [card.leech])
+    for (const tag of [card.leech, card.consume])
       if (tag !== undefined && typeof tag !== "boolean") error(card.id, "tags", "Invalid card tag.");
     if (
       card.repeatChance !== undefined &&

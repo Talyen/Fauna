@@ -18,6 +18,8 @@ Leech restores half actual Health lost, capped by overkill and maximum Health. B
 
 **Nullify** prevents the next applicable harmful status effect while leaving direct damage intact. Protection does not stack, persists until consumed or Purged and can stop reflected statuses. It does not remove existing effects or spend protection on immune, capped or already present non-stacking effects. Hush Dome grants it to each living deployed ally, including its actor. Nullify is combat vocabulary, not a separate progression category.
 
+**Consume** removes a card from the battle after its accepted play resolves, including repeated effects and the one court trigger. Played Pearls never enter Discard; unplayed Pearls discard and recycle normally. Consumption frees space under the battle card limit. Rejected plays retain the card and RNG unchanged.
+
 Each allied creature has Death's Door once per battle: fatal damage leaves one Health with two grace turns. Fatal packets during grace still leave one Health; subsequent damage can knock it out after grace expires. Reserve turns also spend grace. Combat effects, immunity and Death's Door reset for each battle; Health and knockouts persist between destinations.
 
 ## Classification and progression
@@ -30,7 +32,7 @@ Creature-owned Dodge follow-ups, free-card charges and once-per-battle defenses 
 
 Periodic damage remembers the last source per status for kill credit; Bleed retains individual Leech contributions. Source IDs remain valid across backup swaps. Derived Icy Heart damage cannot Dodge, critically strike, build status, retaliate or trigger another Freeze. Bone Charm heals the credited living creature once per enemy defeat. These effects use normal resolution and never create extra accepted-play XP.
 
-Talent Gold banks immediately, survives defeat and abandonment, and is included once in the battle receipt; previews only change their detached result. Gold remains permanent currency and a battle reward. It is not a keyword, does not receive keyword highlighting, earns no keyword XP and has no talent tree. Wish, Consume, Companion and Archery are excluded from Fauna's catalog, cards and mechanics.
+Talent Gold banks immediately, survives defeat and abandonment, and is included once in the battle receipt; previews only change their detached result. Gold remains permanent currency and a battle reward. It is not a keyword, does not receive keyword highlighting, earns no keyword XP and has no talent tree. Wish, Companion and Archery are excluded from Fauna's catalog, cards and mechanics. Consume is card vocabulary and does not award keyword XP or have a talent tree.
 
 ## Extending the system
 
