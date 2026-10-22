@@ -241,7 +241,9 @@ it("completes the one-starter recruitment path through the final boss within the
   let game = accept(accept(initial, { type: "draft", species: initial.starterOffers[0]! }), {
     type: "start",
   });
+  let deployedThree = false;
   for (let step = 0; step < FULL_JOURNEY_COMMAND_BUDGET && game.phase !== "victory"; step++) {
+    deployedThree ||= game.team.length === 3;
     expect(game.phase).not.toBe("defeat");
     expect(game.reward?.outcome).not.toBe("defeat");
     const command =
@@ -257,7 +259,8 @@ it("completes the one-starter recruitment path through the final boss within the
     game = accept(game, command);
   }
   expect(game.phase).toBe("victory");
-  expect(game.team).toHaveLength(3);
+  expect(deployedThree).toBe(true);
+  expect(game.team).toHaveLength(species(game.team[0]!.species).legendary ? 1 : 3);
   expect(game.roster).toHaveLength(5);
   expect(decodeSave(encodeSave(game))).toEqual(game);
 });

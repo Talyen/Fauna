@@ -1,5 +1,6 @@
 import { createSession } from "../application/session";
-import { chooseBattleCommand, BATTLE_POLICY_VERSION } from "../application/battle-policy";
+import { rankedBattleChoices, BATTLE_POLICY_VERSION } from "../application/battle-policy";
+import { createBattleProgress } from "./battle-progress";
 import { createGame } from "../game/engine";
 import { decodeSave, encodeSave } from "../game/save";
 import { runJourney, type JourneyConfig, type JourneyStep } from "./playthrough";
@@ -52,6 +53,7 @@ export async function balanceCase(
       base: encodeSave(base),
       complete: bundle.complete,
       reason: bundle.reason,
+      diagnostics: bundle.diagnostics,
       replay: bundle,
       metrics: metrics(
         base,
@@ -80,6 +82,8 @@ export async function balanceCase(
   };
   let session = await open();
   const steps: JourneyStep[] = [];
+  const progress = createBattleProgress();
+  progress.observe(session.store.getState().game);
   let turns = 1;
   let complete = false,
     reason = "Action budget exhausted";
@@ -91,12 +95,24 @@ export async function balanceCase(
         reason = "Turn budget exhausted";
         break;
       }
-      const command = replay ? replay.steps[i]!.command : chooseBattleCommand(before);
-      await journal?.({ type: "attempt", index: i, command });
+      const selected = replay
+        ? { command: replay.steps[i]!.command, reason: replay.steps[i]!.decision }
+        : (rankedBattleChoices(before)[0] ?? {
+            command: { type: "endTurn" as const },
+            reason: "No affordable playable card has a scored visible benefit",
+          });
+      const command = selected.command;
+      await journal?.({ type: "attempt", index: i, command, decision: selected.reason });
       const accepted = session.command(command);
       if (!(await session.flush())) throw new Error("In-memory save failed.");
       const after = session.store.getState().game;
-      const step = { command, accepted, checkpoint: encodeSave(decodeSave(saved)) };
+      progress.observe(after);
+      const step = {
+        command,
+        accepted,
+        checkpoint: encodeSave(decodeSave(saved)),
+        decision: selected.reason,
+      };
       steps.push(step);
       await journal?.({ type: "completed", index: i, ...step });
       turns = Math.max(turns, (after.battle?.turn ?? before.battle!.turn) - base.battle!.turn + 1);
@@ -126,6 +142,7 @@ export async function balanceCase(
       base: encodeSave(base),
       complete,
       reason,
+      diagnostics: complete ? null : progress.snapshot(),
       replay: { format: 1, identity, initial, steps },
       metrics: metrics(base, final, steps, turns, final.phase !== "defeat" && complete),
     };

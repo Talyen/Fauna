@@ -160,6 +160,7 @@ export async function main(args = process.argv.slice(2), { runCase = runWorker }
           arm,
           complete: result.complete,
           reason: result.reason,
+          diagnostics: result.diagnostics,
           baseHash: hash(result.base),
           initialHash: hash(result.initial),
           metrics: result.metrics,
@@ -170,6 +171,7 @@ export async function main(args = process.argv.slice(2), { runCase = runWorker }
           report.failures.push({
             key,
             reason: result.reason,
+            diagnostics: result.diagnostics,
             evidence: output,
             journal: `${output}.journal.jsonl`,
           });

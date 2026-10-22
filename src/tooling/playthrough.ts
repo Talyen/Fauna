@@ -1,10 +1,11 @@
-import { starterCount, canBuyTalent, KEYWORDS, talentPoints } from "../game/progression";
-import { canVisitCampfire, canVisitMerchant, canRecruitDestination } from "../game/destinations";
-import { battleChoices } from "../application/battle-policy";
+import { KEYWORDS, talentPoints } from "../game/progression";
+import { BATTLE_POLICY_VERSION } from "../application/battle-policy";
+import { createJourneyActor } from "./journey-policy";
+import { createBattleProgress, type IncompleteBattle } from "./battle-progress";
 import { createSession, type Session } from "../application/session";
 import { createGame } from "../game/engine";
 import { decodeSave, encodeSave } from "../game/save";
-import { type SpeciesId, TALENTS } from "../game/content";
+import { type SpeciesId } from "../game/content";
 import type { Command, GameState } from "../game/types";
 
 export interface JourneyConfig {
@@ -20,15 +21,18 @@ export interface JourneyStep {
   command: Command;
   accepted: boolean;
   checkpoint: string;
+  decision: string;
 }
 export interface JourneyBundle {
-  format: 3;
+  format: 4;
+  policyVersion: number;
   identity: string;
   config: JourneyConfig;
   initial: string;
   steps: JourneyStep[];
   complete: boolean;
   reason: string;
+  diagnostics: IncompleteBattle | null;
   battles: { encounter: number; turns: number; roster: SpeciesId[]; outcome: string }[];
   milestones: { keyword: string; point: number; action: number }[];
   results: {
@@ -39,62 +43,6 @@ export interface JourneyBundle {
     xp: GameState["keywordXP"];
     roster: SpeciesId[];
   }[];
-}
-function actor(config: JourneyConfig) {
-  let rng = (config.seed ^ 0x9e3779b9) >>> 0;
-  const pick = <T>(items: readonly T[]) => {
-    rng = (Math.imul(rng, 1664525) + 1013904223) >>> 0;
-    return items[Math.floor((rng / 4294967296) * items.length)]!;
-  };
-  return (state: GameState): Command => {
-    const talent = TALENTS.find((entry) => canBuyTalent(state, entry.id));
-    if (talent) return { type: "buyTalent", talentId: talent.id };
-    switch (state.phase) {
-      case "draft":
-        return state.selected.length === starterCount(state)
-          ? { type: "start" }
-          : {
-              type: "draft",
-              species: state.starterOffers.includes(config.starter)
-                ? config.starter
-                : pick(state.starterOffers),
-            };
-      case "campfire":
-        return { type: "rest" };
-      case "support": {
-        const v = state.support!;
-        if (v.resolved) return { type: "leaveSupport", visit: v.id };
-        const slot = v.stock.find((s) => s.price <= state.currency);
-        return slot
-          ? { type: "buyBoon", visit: v.id, slot: slot.slot }
-          : { type: "leaveSupport", visit: v.id };
-      }
-      case "teamSelection":
-        if (canRecruitDestination(state))
-          return { type: "recruitDestination", species: state.expedition!.recruit! };
-        if (canVisitMerchant(state)) return { type: "enterSupport", visit: state.support!.id };
-        if (canVisitCampfire(state)) return { type: "visitCampfire" };
-        return {
-          type: "beginBattle",
-        };
-      case "recruit":
-        return {
-          type: "recruit",
-          species: pick(state.reward!.recruits),
-          ...(state.roster.length === 5 ? { replace: pick([...state.team, ...state.reserves]).id } : {}),
-        };
-      case "boon":
-        return { type: "chooseBoon", boon: pick(state.reward!.boons) };
-      case "victory":
-      case "defeat":
-        return { type: "newRun", seed: (config.seed + state.revision) >>> 0 };
-      case "battle": {
-        const options = battleChoices(state);
-        if (!options.length) return { type: "endTurn" };
-        return config.policy === "random" ? pick(options) : options[0]!;
-      }
-    }
-  };
 }
 export async function runJourney(
   config: JourneyConfig,
@@ -120,6 +68,11 @@ export async function runJourney(
     throw new Error("Invalid scenario budgets.");
   if (replay && (!Array.isArray(replay.steps) || replay.steps.length > 5000))
     throw new Error("Invalid replay journal.");
+  if (
+    replay &&
+    (replay.identity !== identity || replay.format !== 4 || replay.policyVersion !== BATTLE_POLICY_VERSION)
+  )
+    throw new Error("Replay content/build identity mismatch.");
   decodeSave(initial);
   let saved = initial;
   const open = async () => {
@@ -137,21 +90,23 @@ export async function runJourney(
     return session;
   };
   let session: Session = await open();
-  const decide = actor(config);
+  const decide = createJourneyActor(config);
+  const progress = createBattleProgress();
+  progress.observe(session.store.getState().game);
   const bundle: JourneyBundle = {
-    format: 3,
+    format: 4,
+    policyVersion: BATTLE_POLICY_VERSION,
     identity,
     config,
     initial,
     steps: [],
     complete: false,
     reason: "Action budget exhausted",
+    diagnostics: null,
     battles: [],
     milestones: [],
     results: [],
   };
-  if (replay && (replay.identity !== identity || replay.format !== 3))
-    throw new Error("Replay content/build identity mismatch.");
   try {
     const limit = replay ? replay.steps.length : config.maxActions;
     for (let index = 0; index < limit; index++) {
@@ -160,12 +115,21 @@ export async function runJourney(
         bundle.reason = "Turn budget exhausted";
         break;
       }
-      const command = replay ? replay.steps[index]!.command : decide(before);
-      await journal?.({ type: "attempt", index, command });
+      const selected = replay
+        ? { command: replay.steps[index]!.command, reason: replay.steps[index]!.decision }
+        : decide(before);
+      const command = selected.command;
+      await journal?.({ type: "attempt", index, command, decision: selected.reason });
       const accepted = session.command(command);
       if (!(await session.flush())) throw new Error("In-memory save failed.");
       const after = session.store.getState().game;
-      const step = { command, accepted, checkpoint: encodeSave(decodeSave(encodeSave(after))) };
+      progress.observe(after);
+      const step = {
+        command,
+        accepted,
+        checkpoint: encodeSave(decodeSave(encodeSave(after))),
+        decision: selected.reason,
+      };
       bundle.steps.push(step);
       await journal?.({ type: "completed", index, ...step });
       for (const keyword of KEYWORDS)
@@ -213,6 +177,7 @@ export async function runJourney(
     }
     if (replay && bundle.steps.length !== replay.steps.length)
       throw new Error("Replay ended before its journal.");
+    bundle.diagnostics = bundle.complete ? null : progress.snapshot();
     return bundle;
   } finally {
     await session.dispose();

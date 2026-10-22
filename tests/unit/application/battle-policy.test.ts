@@ -80,6 +80,25 @@ it("Auto-play avoids recovering Echoes Remember itself or a knocked-out owner's 
   expect(chooseBattleCommand(inert, false)).toEqual({ type: "endTurn" });
 });
 
+it("does not treat one lethal branch of a random damage type as a battle finish", () => {
+  const state = produce(teamRun(42, ["cindernewt", "mossguard"]), (game) => {
+    const attack = game.cards.find((card) => card.definitionId === "cindernewt-attack")!;
+    const heal = game.cards.find((card) => card.definitionId === "mossguard-heal")!;
+    game.battle!.hand = [attack.id, heal.id];
+    game.team[0]!.health = 5;
+    game.battle!.enemies.forEach((enemy, index) => {
+      enemy.health = index ? 0 : 3;
+      enemy.block = 0;
+      enemy.combat.armor = 100;
+    });
+  });
+  expect(chooseBattleCommand(state, false)).toMatchObject({ type: "play", cardId: state.battle!.hand[1] });
+  const both = produce(state, (game) => {
+    game.battle!.enemies[0]!.combat.armor = 0;
+  });
+  expect(chooseBattleCommand(both, false)).toMatchObject({ type: "play", cardId: state.battle!.hand[0] });
+});
+
 it.each([
   ["bloomquail", "health.overflow"],
   ["reedstag", "health.overflow"],
@@ -114,3 +133,88 @@ it.each([
     expect(chooseBattleCommand(spent, false)).toEqual({ type: "endTurn" });
   },
 );
+
+it("finishes the last enemy before healing or killing a Minion, without sampling RNG", () => {
+  const state = produce(teamRun(42, ["prismram", "mossguard"]), (game) => {
+    const attack = game.cards.find((card) => card.definitionId === "prismram-attack")!;
+    const heal = game.cards.find((card) => card.definitionId === "mossguard-heal")!;
+    game.battle!.hand = [heal.id, attack.id];
+    game.battle!.buffer = [];
+    game.battle!.discard = [];
+    game.battle!.draw = game.cards
+      .filter((card) => !game.battle!.hand.includes(card.id))
+      .map((card) => card.id);
+    game.team.forEach((unit) => {
+      unit.health = 5;
+    });
+    game.battle!.enemies.forEach((enemy, index) => {
+      enemy.health = index ? 0 : 3;
+      enemy.block = 0;
+      enemy.combat.armor = 0;
+    });
+    const boss = game.battle!.enemies[0]!;
+    game.battle!.minions = [
+      {
+        ...boss,
+        id: "echo",
+        name: "Echo",
+        health: 1,
+        maxHealth: 6,
+        minion: { ownerId: boss.id, side: "enemy" },
+      },
+    ];
+  });
+  const before = JSON.stringify(state);
+  const chosen = chooseBattleCommand(state, false);
+  expect(chosen).toMatchObject({
+    type: "play",
+    cardId: state.battle!.hand[1],
+    targetId: state.battle!.enemies[0]!.id,
+  });
+  expect(
+    chooseBattleCommand(
+      produce(state, (draft) => {
+        draft.rng = 1;
+      }),
+      false,
+    ),
+  ).toEqual(chosen);
+  expect(JSON.stringify(state)).toBe(before);
+  expect(dispatch(state, chosen).state.phase).not.toBe("battle");
+});
+
+it("Purges Armor before a fully blocked attack and still values attacks that deplete Block", () => {
+  const state = produce(teamRun(42, ["prismram", "rookhaven"]), (game) => {
+    const ids = ["prismram-attack", "rookhaven-unwritten-ending"].map(
+      (id) => game.cards.find((card) => card.definitionId === id)!.id,
+    );
+    game.battle!.hand = ids;
+    game.battle!.buffer = [];
+    game.battle!.discard = [];
+    game.battle!.draw = game.cards.filter((card) => !ids.includes(card.id)).map((card) => card.id);
+    game.battle!.enemies.forEach((enemy) => {
+      enemy.combat.armor = 100;
+      enemy.block = 0;
+    });
+  });
+  const chosen = chooseBattleCommand(state, false);
+  expect(chosen).toMatchObject({ type: "play", cardId: state.battle!.hand[1] });
+  const purged = dispatch(state, chosen);
+  expect(purged.accepted).toBe(true);
+  expect(chooseBattleCommand(purged.state, false)).toMatchObject({
+    type: "play",
+    cardId: state.battle!.hand[0],
+  });
+  const inert = produce(state, (game) => {
+    game.battle!.hand = [game.battle!.hand[0]!];
+  });
+  expect(chooseBattleCommand(inert, false)).toEqual({ type: "endTurn" });
+  const eroding = produce(inert, (game) => {
+    game.boons = ["sundering-charm"];
+  });
+  expect(chooseBattleCommand(eroding, false)).toMatchObject({ type: "play", cardId: state.battle!.hand[0] });
+  const block = produce(inert, (game) => {
+    game.battle!.enemies[0]!.block = 20;
+  });
+  expect(chooseBattleCommand(block, false)).toMatchObject({ type: "play", cardId: state.battle!.hand[0] });
+});
