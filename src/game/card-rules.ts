@@ -1,3 +1,4 @@
+import { abilityExtras, primaryAbilityValue, scalePower } from "./ability-values";
 import { DAMAGE_TYPES, keywordLabel } from "./keywords";
 import type { CardDefinition, DamageType } from "./content/types";
 export const DAMAGE_LABELS = Object.fromEntries(DAMAGE_TYPES.map((id) => [id, keywordLabel(id)])) as Record<
@@ -12,27 +13,70 @@ export function enemyCard(card: CardDefinition): CardDefinition {
   }
   return {
     ...card,
-    effects: card.effects?.filter((effect) =>
-      [
-        "damage",
-        "status",
-        "cleanse",
-        "purge",
-        "reflect",
-        "heal",
-        "blind",
-        "meltArmor",
-        "nullifyFreeze",
-      ].includes(effect.kind),
-    ),
+    effects: card.effects?.filter((effect) => {
+      const kind = effect.kind;
+      switch (kind) {
+        case "damage":
+        case "status":
+        case "cleanse":
+        case "purge":
+        case "reflect":
+        case "heal":
+        case "blind":
+        case "meltArmor":
+        case "nullifyFreeze":
+          return true;
+        case "draw":
+        case "mana":
+          return false;
+        default: {
+          const unhandled: never = kind;
+          throw new Error(`Unhandled enemy extra: ${unhandled}`);
+        }
+      }
+    }),
   };
 }
-export function cardText(card: CardDefinition, level = 0, value = card.value + level * 2): string {
+/** Enemies have no shared hand, Mana pool or discard pile. Decide support for every primary kind. */
+export function enemyCanUse(card: CardDefinition): boolean {
+  const effect = enemyCard(card).effect;
+  switch (effect) {
+    case "draw":
+    case "mana":
+    case "recover":
+      return false;
+    case "attack":
+    case "guard":
+    case "heal":
+    case "waterThorns":
+    case "teamDodge":
+    case "dodge":
+    case "teamBlind":
+    case "teamThaw":
+    case "teamCleanse":
+    case "nullify":
+    case "swap":
+    case "teamGuard":
+    case "teamProtection":
+      return true;
+    default: {
+      const unhandled: never = effect;
+      throw new Error(`Unhandled enemy ability: ${unhandled}`);
+    }
+  }
+}
+export function cardText(
+  card: CardDefinition,
+  level = 0,
+  value: number | undefined = undefined,
+  power = 1,
+): string {
+  value ??= primaryAbilityValue(card, card.value + level * 2, power);
   let text: string;
   switch (card.effect) {
     case "attack":
       // Keep the conditional rule at its base value so resolved previews do not imply a second doubling
-      if (card.doubleWithArmor) value = card.value + level * 2;
+      if (card.doubleWithArmor) value = primaryAbilityValue(card, card.value + level * 2, power);
       text = `Deal ${value} ${DAMAGE_LABELS[card.damageType]}${card.alternateDamageType ? ` or ${DAMAGE_LABELS[card.alternateDamageType]}` : ""} damage${card.alternateDamageType ? " at random" : ""}${card.target === "allEnemies" ? " to all enemies" : card.target === "randomEnemy" ? " to a random enemy" : ""}`;
       if (card.doubleWithArmor) text += "; Doubled if you have Armor";
       break;
@@ -82,10 +126,13 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
       text = `Allies gain ${value} Block`;
       break;
     case "teamProtection":
-      text = `Grant all allies ${value} Block or Thorns`;
+      text =
+        power === 1
+          ? `Grant all allies ${value} Block or Thorns`
+          : `Grant all allies ${scalePower(value, power)} Block or ${value} Thorns`;
       break;
   }
-  for (const effect of card.effects ?? []) {
+  for (const effect of abilityExtras(card, power)) {
     text +=
       "; " +
       (effect.kind === "nullifyFreeze"

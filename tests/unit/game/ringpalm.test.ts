@@ -170,7 +170,7 @@ it("applies Armor separately to the repeated base packet and allows its Stun to 
   produce(ready("ringpalm-attack", seed), (game) => {
     const source = game.team[0]!,
       target = game.battle!.enemies[0]!;
-    target.health = 18;
+    target.health = target.maxHealth = 18;
     target.combat.armor = 1;
     hit(game, source, target, 5, "stun", [], { proc: true });
     expect(target.health).toBe(9);
@@ -310,7 +310,7 @@ it.each(["Ringclap", "Harmonic Set", "Seedling Circle"])(
       const enemy = draft.battle!.enemies[0]!;
       enemy.species = "ringpalm";
       enemy.name = "Ringpalm";
-      enemy.damage = 3;
+      enemy.power = 1;
       for (const other of draft.battle!.enemies.slice(1)) {
         other.combat.controlled = "freeze";
         other.combat.controlTurns = 1;

@@ -207,7 +207,7 @@ it("enemy Stillara alternates team healing and thawing without player Mana or dr
       const enemy = draft.battle!.enemies[0]!;
       enemy.species = "stillara";
       enemy.lastAbility = last;
-      enemy.damage = 4;
+      enemy.power = 1;
       draft.battle!.enemies.slice(1).forEach((unit) => {
         unit.species = "emberback";
       });
@@ -224,7 +224,7 @@ it("enemy Stillara alternates team healing and thawing without player Mana or dr
     if (next.endsWith("thaw-path")) expect(result.state.battle!.enemies[1]!.combat.freeze).toBe(0);
     else
       expect(result.events).toContainEqual(
-        expect.objectContaining({ kind: "heal", targetId: "enemy-1", amount: 2 }),
+        expect.objectContaining({ kind: "heal", targetId: "enemy-1", amount: 1 }),
       );
     expect(result.events.some((event) => event.kind === "block" && event.targetId === "enemy-0")).toBe(false);
   }

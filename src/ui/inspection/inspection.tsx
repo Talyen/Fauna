@@ -158,6 +158,7 @@ export function Inspector({
               actor={actor}
               modifiers={enemy ? undefined : game}
               enemy={!!enemy}
+              enemyPower={enemy?.power}
               enemyValue={enemy ? enemyInspectionValue(enemy, definition(card.definitionId)) : undefined}
               onClick={() => {}}
             />
@@ -205,6 +206,7 @@ export function Inspector({
                         actor={actor}
                         modifiers={enemy ? undefined : game}
                         enemy={!!enemy}
+                        enemyPower={enemy?.power}
                         enemyValue={
                           enemy ? enemyInspectionValue(enemy, definition(action.definitionId)) : undefined
                         }

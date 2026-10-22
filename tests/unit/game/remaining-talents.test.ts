@@ -371,7 +371,7 @@ describe("remaining Alchemy talents adapted to creatures", () => {
       "freeze.cryo-preservation",
       "freeze.thaw-dividend",
     ]);
-    f.target.health = 100;
+    f.target.health = f.target.maxHealth = 100;
     f.target.combat.armor = 10;
     f.target.block = 1;
     hit(f.state, f.source, f.target, 60, "freeze", f.events);
@@ -396,7 +396,7 @@ describe("remaining Alchemy talents adapted to creatures", () => {
       "stun.stun-insight",
       "stun.stun-surge",
     ]);
-    f.target.health = 100;
+    f.target.health = f.target.maxHealth = 100;
     f.state.battle!.mana = 0;
     const hand = f.state.battle!.hand.length;
     hit(f.state, f.source, f.target, 40, "stun", f.events);

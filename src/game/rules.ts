@@ -1,4 +1,5 @@
-import { definition, type CardDefinition, type PassiveTier } from "./content";
+import { primaryAbilityValue } from "./ability-values";
+import { definition, enemyCard, type CardDefinition, type PassiveTier } from "./content";
 import { creaturePassive, cardKeywords, hasTalent } from "./progression";
 import type { Card, Creature, GameState } from "./types";
 /** Intrinsic effect value; healing caps resolve in the command. */
@@ -8,13 +9,24 @@ export function actionValue(
   state?: Pick<GameState, "talents" | "boons" | "discovery">,
 ): number {
   const def = definition(card.definitionId);
+  return intrinsicAbilityValue(def, actor, card.level, creaturePassive(state, actor.species));
+}
+function intrinsicAbilityValue(
+  def: CardDefinition,
+  actor: { attacked?: boolean; combat?: Creature["combat"] },
+  level: number,
+  passive: PassiveTier,
+  power = 1,
+) {
   return (
-    (def.value +
-      card.level * 2 +
-      passiveCardBonus(def, creaturePassive(state, actor.species), actor.attacked)) *
-    (def.effect === "attack" && def.doubleWithArmor && (actor.combat?.armor ?? 0) > 0 ? 2 : 1)
+    primaryAbilityValue(
+      def,
+      def.value + level * 2 + passiveCardBonus(def, passive, actor.attacked ?? false),
+      power,
+    ) * (def.effect === "attack" && def.doubleWithArmor && (actor.combat?.armor ?? 0) > 0 ? 2 : 1)
   );
 }
+
 function passiveCardBonus(def: CardDefinition, passive: PassiveTier, attacked: boolean) {
   return passive.effects.reduce((total, effect) => {
     if (effect.kind !== "cardBonus") return total;
@@ -54,34 +66,17 @@ export function physicalBonus(actor: Pick<Creature, "block" | "combat">, state: 
   );
 }
 
-/** Enemy repertoire uses encounter magnitudes and its own native trait, never player progression. */
+/** Same authored values and passive calculation; room power is an explicit magnitude modifier. */
 export function enemyAbilityValue(
-  enemy: Pick<import("./types").Enemy, "species" | "damage"> &
+  enemy: Pick<import("./types").Enemy, "species" | "power"> &
     Partial<Pick<import("./types").Enemy, "combat">>,
-  card: import("./content").CardDefinition,
+  card: CardDefinition,
 ) {
-  return (
-    ((card.effect === "dodge" ||
-    card.effect === "teamDodge" ||
-    card.effect === "teamCleanse" ||
-    card.effect === "teamBlind"
-      ? card.value
-      : card.effect === "attack"
-        ? card.target === "allEnemies"
-          ? Math.max(1, Math.round(enemy.damage / 3))
-          : enemy.damage
-        : Math.max(1, Math.round(enemy.damage / 2))) +
-      passiveCardBonus(card, creaturePassive(undefined, enemy.species), false)) *
-    (card.effect === "attack" && card.doubleWithArmor && (enemy.combat?.armor ?? 0) > 0 ? 2 : 1)
-  );
+  return intrinsicAbilityValue(card, enemy, 0, creaturePassive(undefined, enemy.species), enemy.power);
 }
 
-export function enemyInspectionValue(
-  enemy: Pick<import("./types").Enemy, "species" | "damage"> &
-    Partial<Pick<import("./types").Enemy, "combat">>,
-  card: import("./content").CardDefinition,
-) {
-  return enemyAbilityValue(enemy, card);
+export function enemyInspectionValue(enemy: Parameters<typeof enemyAbilityValue>[0], card: CardDefinition) {
+  return enemyAbilityValue(enemy, enemyCard(card));
 }
 
 /** Retention is a relative increase over the ordinary half-Block carryover. */

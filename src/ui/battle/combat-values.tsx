@@ -40,14 +40,16 @@ export function CardRules({
   card,
   level = 0,
   value,
+  power = 1,
 }: {
   card: CardDefinition;
   level?: number;
   value?: number;
+  power?: number;
 }) {
   return (
     <span className="action-effect">
-      <KeywordText text={cardText(card, level, value)} />
+      <KeywordText text={cardText(card, level, value, power)} />
     </span>
   );
 }

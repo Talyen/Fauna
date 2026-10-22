@@ -5,7 +5,7 @@ export { CARDS } from "./content/cards";
 export { SPECIES, species } from "./content/species";
 export { ENCOUNTERS } from "./content/encounters";
 export type { SpeciesId, Species, PassiveTier, CardDefinition, DamageType } from "./content/types";
-export { DAMAGE_LABELS, enemyCard, cardText } from "./card-rules";
+export { DAMAGE_LABELS, enemyCard, enemyCanUse, cardText } from "./card-rules";
 export const FIRST_RUN_STARTERS: readonly SpeciesId[] = SPECIES.filter((entry) =>
   CARDS.some((card) => card.species === entry.id && card.effect === "attack"),
 ).map((entry) => entry.id);

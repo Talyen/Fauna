@@ -71,7 +71,7 @@ const battle = z
           species: speciesId,
           health: natural,
           maxHealth: natural,
-          damage: natural,
+          power: z.number().min(1).max(2),
           targetId: id,
           block: natural,
           combat: combatState,
@@ -364,7 +364,7 @@ export function decodeSave(raw: string): GameState {
           enemy.species !== original.species ||
           enemy.name !== original.name ||
           enemy.maxHealth !== original.health ||
-          enemy.damage !== original.damage ||
+          enemy.power !== original.power ||
           enemy.health > enemy.maxHealth ||
           (enemy.lastAbility !== null &&
             !CARDS.some((card) => card.id === enemy.lastAbility && card.species === enemy.species)) ||

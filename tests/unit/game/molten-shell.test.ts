@@ -136,14 +136,22 @@ it.each(["physical", "poison", "freeze", "stun"] as const)(
     const events: GameEvent[] = [];
     produce(battle(), (draft) => {
       const enemy = draft.battle!.enemies[0]!;
-      enemy.health = 18;
+      enemy.health = type === "freeze" || type === "stun" ? enemy.maxHealth : 18;
       enemy.combat.armor = type === "physical" || type === "poison" ? 2 : 4;
       draft.rng = 1;
       if (type === "physical") draft.boons.push("sundering-charm");
       if (type === "poison") draft.talents.push("poison.caustic");
       if (type === "freeze") draft.talents.push("freeze.brittle-armor");
       if (type === "stun") draft.talents.push("stun.shatter-guard");
-      hit(draft, draft.team[0]!, enemy, type === "stun" ? 14 : type === "freeze" ? 12 : 1, type, events);
+      const threshold = Math.ceil(enemy.maxHealth / 2);
+      hit(
+        draft,
+        draft.team[0]!,
+        enemy,
+        type === "stun" ? threshold + 4 : type === "freeze" ? threshold : 1,
+        type,
+        events,
+      );
       expect(enemy.combat.armor).toBe(0);
       expect(
         events.filter(

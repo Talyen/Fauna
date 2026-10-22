@@ -5,7 +5,7 @@ import { run } from "../support/game";
 import { SPECIES } from "../../src/game/content";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { expectScrollFree, layoutViolations, LAYOUT_CASES } from "./layout-contract";
-import { captureScreen } from "./rendered-evidence";
+import { captureScreen, settleScreen } from "./rendered-evidence";
 import { snapshot, cloudName } from "../../src/application/cloud";
 
 // Each action is local and immediate; do not spend a full journey timeout on a missing control.
@@ -170,6 +170,9 @@ for (const [width, height, scale] of LAYOUT_CASES)
     const hand = page.locator(".app:not([inert]) .hand .action-card");
     await expect(hand).toHaveCount(7);
     for (const card of await hand.all()) {
+      // Escape changes selection immediately; the previous card can still be lowering over this one.
+      await page.mouse.move(0, 0);
+      await settleScreen(page);
       const point = await card.evaluate((el) => {
         const rect = el.getBoundingClientRect();
         for (let y = Math.max(0, rect.top) + 8; y < Math.min(innerHeight, rect.bottom); y += 12)

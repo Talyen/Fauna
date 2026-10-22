@@ -3,10 +3,12 @@ import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
 import { act, cleanup, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { produce } from "immer";
-import { CARDS, species } from "../../../src/game/content";
+import { CARDS, definition, species } from "../../../src/game/content";
 import { encodeSave } from "../../../src/game/save";
 import { createGame } from "../../../src/game/engine";
-import { StarterDetails } from "../../../src/ui/shared/card-details";
+import { enemyInspectionValue } from "../../../src/game/rules";
+import { freshCombat } from "../../../src/game/combat";
+import { ActionDetails, StarterDetails } from "../../../src/ui/shared/card-details";
 import { App } from "../../../src/ui/App";
 import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
@@ -186,4 +188,19 @@ describe("artwork-first inspection", () => {
       await session.dispose();
     }
   });
+});
+
+it("shows room-scaled enemy primary and supplemental effects using combat values", () => {
+  const authored = definition("captoad-guard");
+  const enemy = { species: "captoad" as const, power: 1.5, combat: freshCombat() };
+  render(
+    <ActionDetails
+      card={{ id: "inspect", definitionId: authored.id, ownerId: "enemy-0", level: 0 }}
+      ownerName="Captoad"
+      enemy
+      enemyPower={enemy.power}
+      enemyValue={enemyInspectionValue(enemy, authored)}
+    />,
+  );
+  expect(document.querySelector(".action-effect")?.textContent).toBe("Gain 5 Block; Restore 5 Health");
 });

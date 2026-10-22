@@ -10,7 +10,8 @@ import {
   DialogTrigger,
 } from "../../src/components/ui/dialog";
 import { TooltipProvider } from "../../src/components/ui/tooltip";
-import { BattleScreen, type Controls } from "../../src/ui/battle/battle-screen";
+import { BattleScreen } from "../../src/ui/battle/battle-screen";
+import type { Controls } from "../../src/ui/shared/input";
 import { CreatureCard } from "../../src/ui/shared/cards";
 import { createGame, dispatch } from "../../src/game/engine";
 import { CARDS, species } from "../../src/game/content";

@@ -84,10 +84,10 @@ describe("Alchemy combat foundations", () => {
       "burn",
     ]);
   });
-  it("uses pre-hit enemy Health for CC, skips once, and shares three turns of immunity", () => {
-    const below = packet("stun", 8).next;
+  it("uses maximum Health for CC on both sides, skips once, and shares three turns of immunity", () => {
+    const below = packet("stun", 14).next;
     expect(below.battle!.enemies[0]!.combat.controlled).toBeNull();
-    const threshold = packet("freeze", 9).next;
+    const threshold = packet("freeze", 15).next;
     expect(threshold.battle!.enemies[0]!.combat.controlled).toBe("freeze");
     const next = produce(threshold, (s) => {
       const enemy = s.battle!.enemies[0]!,
