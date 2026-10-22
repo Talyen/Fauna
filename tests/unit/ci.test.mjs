@@ -253,7 +253,9 @@ it("ships portable merged JSON attachments and rejects missing resources", () =>
     });
     writeFileSync(path.join(root, "reports/playwright.json"), JSON.stringify(report));
     const run = () => spawnSync(process.execPath, [script, "portable"], { cwd: root, encoding: "utf8" });
-    expect(run().status).toBe(0);
+    const result = run();
+    expect(result.stderr).toBe("");
+    expect(result.status).toBe(0);
     const portable = JSON.parse(readFileSync(path.join(root, "reports/playwright.json"), "utf8"));
     expect(portable.suites[0].specs[0].tests[0].results[0].attachments[0].path).toBe(
       "browser-resources/frame.png",

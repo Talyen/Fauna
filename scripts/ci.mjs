@@ -1,5 +1,13 @@
 import { createHash } from "node:crypto";
-import { appendFileSync, copyFileSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
+import {
+  appendFileSync,
+  copyFileSync,
+  mkdirSync,
+  readdirSync,
+  realpathSync,
+  readFileSync,
+  writeFileSync,
+} from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { identity as interactionIdentity } from "./lib/tool-runtime.mjs";
@@ -180,8 +188,8 @@ async function main(command) {
       for (const result of row.test.results ?? [])
         for (const attachment of result.attachments ?? []) {
           if (!attachment.path) continue;
-          const source = path.resolve(attachment.path);
-          if (!source.startsWith(path.resolve("all-blob-reports/resources") + path.sep))
+          const source = realpathSync(attachment.path);
+          if (!source.startsWith(realpathSync("all-blob-reports/resources") + path.sep))
             throw new Error("Merged attachment is outside blob resources");
           const relative = `browser-resources/${path.basename(source)}`;
           copyFileSync(source, path.join("reports", relative));
