@@ -12,6 +12,7 @@ export async function launchPackaged(profile) {
     { env: isolatedDesktopEnvironment(profile), stdio: "ignore" },
   );
   let browser, launchError;
+  const connections = [];
   child.once("error", (error) => {
     launchError = error;
   });
@@ -30,13 +31,19 @@ export async function launchPackaged(profile) {
       await new Promise((resolve) => setTimeout(resolve, 100));
     }
     if (!port) throw new Error("Packaged renderer did not expose its test endpoint.");
-    browser = await chromium.connectOverCDP(`http://127.0.0.1:${port}`);
+    const connect = async () => {
+      const connection = await chromium.connectOverCDP(`http://127.0.0.1:${port}`);
+      connections.push(connection);
+      browser = connection;
+    };
+    await connect();
     const firstWindow = async () => {
       const context = browser.contexts()[0];
       return context.pages()[0] ?? context.waitForEvent("page", { timeout: 20000 });
     };
     return {
       firstWindow,
+      reconnect: connect,
       process: () => child,
       async close() {
         const page = await firstWindow();
@@ -56,12 +63,12 @@ export async function launchPackaged(profile) {
               resolve();
             });
           });
-        await browser.close().catch(() => {});
+        await Promise.all(connections.map((connection) => connection.close().catch(() => {})));
       },
     };
   } catch (error) {
     child.kill();
-    await browser?.close().catch(() => {});
+    await Promise.all(connections.map((connection) => connection.close().catch(() => {})));
     throw error;
   }
 }

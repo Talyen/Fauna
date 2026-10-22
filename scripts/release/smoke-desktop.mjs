@@ -190,27 +190,28 @@ try {
     }
   });
   if (audioState !== "running") throw new Error(`Controller-only desktop audio is blocked: ${audioState}`);
-  const durable = await resumed.evaluate(async () => (await window.faunaDesktop.readCandidates())[0].data);
-  const cdp = await resumed.context().newCDPSession(resumed);
-  const crashed = resumed.waitForEvent("crash", { timeout: 10000 });
-  const restored = resumed.waitForEvent("framenavigated", {
-    predicate: (frame) => frame === resumed.mainFrame() && frame.url().startsWith("fauna://app/"),
-    timeout: 30000,
-  });
-  // Page.crash may never reply; observe the actual crash and replacement document instead.
-  void cdp.send("Page.crash").catch(() => {});
-  await crashed;
-  await restored;
-  await resumed.getByRole("button", { name: "Continue", exact: true }).waitFor({ timeout: 60000 });
-  await resumed.getByRole("button", { name: "Continue", exact: true }).click();
-  await resumed.getByRole("main", { name: "Battlefield" }).waitFor();
-  if ((await resumed.evaluate(async () => (await window.faunaDesktop.readCandidates())[0].data)) !== durable)
-    throw new Error("Renderer crash recovery lost or replayed the durable battle.");
-  if (!resumed.url().startsWith("fauna://app/"))
-    throw new Error("Desktop renderer bypassed the application protocol.");
+  if (packaged) {
+    const durable = await resumed.evaluate(async () => (await window.faunaDesktop.readCandidates())[0].data);
+    const cdp = await resumed.context().newCDPSession(resumed);
+    const crashed = resumed.waitForEvent("crash", { timeout: 10000 });
+    // Crash aborts Playwright's page waiters. Attach a fresh renderer connection after observing it.
+    void cdp.send("Page.crash").catch(() => {});
+    await crashed;
+    await app.reconnect();
+    const recovered = await app.firstWindow();
+    recovered.setDefaultTimeout(30000);
+    await recovered.getByRole("button", { name: "Continue", exact: true }).click();
+    await recovered.getByRole("main", { name: "Battlefield" }).waitFor();
+    if (
+      (await recovered.evaluate(async () => (await window.faunaDesktop.readCandidates())[0].data)) !== durable
+    )
+      throw new Error("Renderer crash recovery lost or replayed the durable battle.");
+    if (!recovered.url().startsWith("fauna://app/"))
+      throw new Error("Desktop renderer bypassed the application protocol.");
+  }
   success = true;
   console.log(
-    "Desktop startup, draft, Collection ability and rank browsing, free swaps, lineup persistence, last-mana automatic turn quit/resume, renderer isolation, application protocol and crash recovery passed.",
+    `Desktop startup, draft, Collection ability and rank browsing, free swaps, lineup persistence, last-mana automatic turn quit/resume, renderer isolation passed${packaged ? ", including packaged application protocol and crash recovery" : ""}.`,
   );
 } finally {
   if (app && !success) {
