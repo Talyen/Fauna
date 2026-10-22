@@ -11,6 +11,8 @@ Before implementation, inspect the current rendered screen and its real content.
 
 Compose the whole screen first. Establish artwork scale, reading order, useful negative space and a bounded content group before tuning controls. Use the existing shared owners; generic dashboard containers, repeated cards around cards, badges and ornamental separators need a concrete gameplay purpose. Preserve registered primitives and accessibility. New visual values belong in tokens.
 
+Do not expand permanent on-screen prose by default when rules are already available through accessible inspection. Add inline rules only for a demonstrated decision or interaction problem and evaluate the density tradeoff in the rendered composition. The rejected Merchant B pilot shows that more visible information and tidier alignment can still make the screen worse.
+
 Audit every visible phrase: retain decision-relevant state, rules, availability and outcomes; remove repeated headings, descriptions of obvious controls, motivational copy and routine success messages. Example: under “Choose your reward”, remove “Select one of the rewards below to continue”. Do not move filler into tooltips. Do not remove accessible names or hide essential rules to obtain a lower word count.
 
 Implement the smallest complete composition, then capture it through the real player flow. Compare against the baseline with the same state, viewport, text preference, input modality and animation condition. Review at minimum 1280×720 with 125% text and 1920×1080 at default text. Inspect both full frames and interaction states; geometry checks alone cannot establish visual quality. Follow the bounded review authorization and completion requirements in UI contracts.

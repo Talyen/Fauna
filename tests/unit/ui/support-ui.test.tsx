@@ -5,7 +5,6 @@ import type { ReactElement } from "react";
 import { render as renderUI, screen, fireEvent, cleanup } from "@testing-library/react";
 import { produce } from "immer";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { BOONS } from "../../../src/game/content";
 import { createGame } from "../../../src/game/engine";
 import { recruitChoice, accept, winBattle } from "../../support/game";
 import { TeamSelection } from "../../../src/ui/expedition/team-selection";
@@ -47,7 +46,7 @@ it("replaces the shelf with the purchased Boon reward, restores it on reload and
   });
   game = accept(game, { type: "buyBoon", visit: game.support!.id, slot: game.support!.stock[0]!.slot });
   rerender(<SupportScreen game={requireMerchant(game)} send={send} />);
-  expect(screen.getByRole("heading", { name: "Boon Merchant" })).toBeTruthy();
+  expect(screen.getByRole("heading", { name: "Boon received" })).toBeTruthy();
   expect(screen.getByRole("region", { name: "Purchased Boon" })).toBeTruthy();
   expect(screen.queryByRole("button", { name: /^Buy / })).toBeNull();
   expect(screen.getByText("For this journey")).toBeTruthy();
@@ -65,19 +64,13 @@ it.each([19, 20])("shows Merchant only when an item is affordable with %s Gold",
   render(<SupportOffer game={game} send={() => true} />);
   expect(!!screen.queryByRole("button", { name: "Visit Boon Merchant" })).toBe(gold >= 20);
 });
-it("shows the wallet, purchase limit and exact Boon rules before buying", () => {
+it("labels the wallet and prices as Gold", () => {
   const s = merchant();
   const game = accept(s, { type: "enterSupport", visit: s.support!.id });
   render(<SupportScreen game={requireMerchant(game)} send={() => true} />);
   expect(screen.getAllByText("20 Gold")[0]).toBeTruthy();
   expect(screen.getAllByRole("button", { name: /^Buy .+ for 20 Gold$/ })).toHaveLength(3);
-  expect(screen.getByText("1 Boon · For this journey")).toBeTruthy();
-  for (const slot of game.support!.stock) {
-    const boon = BOONS.find((candidate) => candidate.id === slot.boon)!;
-    expect(
-      screen.getByText((_, element) => element?.tagName === "P" && element.textContent === boon.text),
-    ).toBeTruthy();
-  }
+  expect(screen.getByText("Limit 1 per customer")).toBeTruthy();
 });
 
 it("keeps unavailable offers inspectable and rejects purchases with their specific reason", () => {
