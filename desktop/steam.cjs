@@ -183,7 +183,8 @@ async function createSteam({
     preserve: (records) =>
       serial(async () => {
         requireAvailable();
-        if (!Array.isArray(records) || records.length > 64) throw new Error("Invalid recovery set.");
+        // The bounded remote inventory can conflict with one additional local head.
+        if (!Array.isArray(records) || records.length > 65) throw new Error("Invalid recovery set.");
         for (const raw of records) {
           if (typeof raw !== "string" || Buffer.byteLength(raw) > 1_048_576)
             throw new Error("Invalid recovery snapshot.");

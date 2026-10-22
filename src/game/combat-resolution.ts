@@ -3,7 +3,7 @@ import { roll } from "./random";
 import { draw, drawKeyword } from "./card-zones";
 import { hasTalent, creaturePassive } from "./progression";
 import { physicalBonus } from "./rules";
-import { species, type DamageType } from "./content";
+import type { DamageType } from "./content";
 import type { GameEvent, GameState } from "./types";
 import {
   combat,
@@ -17,6 +17,7 @@ import {
   beginAttack,
   STACK_LIMIT,
   removeArmor,
+  gainGold,
   type ArmorDepletion,
   type Combatant,
 } from "./combat-state";
@@ -34,7 +35,6 @@ const handlers = {
   shareProtection,
   grantBlock,
   gainMana,
-  gainGold,
   grantArmor,
   leechHealth,
   healthThresholds,
@@ -67,54 +67,10 @@ function* reaction<K extends OperationName>(
   return (yield { kind, args } as CombatOperation) as CombatResult<K>;
 }
 function frame(operation: CombatOperation): Resolution<unknown> {
-  switch (operation.kind) {
-    case "bounce":
-      return bounce(...operation.args);
-    case "restoreHealth":
-      return restoreHealth(...operation.args);
-    case "shareProtection":
-      return shareProtection(...operation.args);
-    case "grantBlock":
-      return grantBlock(...operation.args);
-    case "gainMana":
-      return gainMana(...operation.args);
-    case "gainGold":
-      return gainGold(...operation.args);
-    case "grantArmor":
-      return grantArmor(...operation.args);
-    case "leechHealth":
-      return leechHealth(...operation.args);
-    case "healthThresholds":
-      return healthThresholds(...operation.args);
-    case "grantStatus":
-      return grantStatus(...operation.args);
-    case "triggerArmorBreak":
-      return triggerArmorBreak(...operation.args);
-    case "removeFreezeBuildup":
-      return removeFreezeBuildup(...operation.args);
-    case "removeEffects":
-      return removeEffects(...operation.args);
-    case "cleanseRewards":
-      return cleanseRewards(...operation.args);
-    case "applyHarmfulStatus":
-      return applyHarmfulStatus(...operation.args);
-    case "controlRewards":
-      return controlRewards(...operation.args);
-    case "applyBlind":
-      return applyBlind(...operation.args);
-    case "hit":
-      return hit(...operation.args);
-    case "resolveHit":
-      return resolveHit(...operation.args);
-    case "tickStatuses":
-      return tickStatuses(...operation.args);
-    case "startAction":
-      return startAction(...operation.args);
-    default: {
-      const unhandled: never = operation;
-      throw new Error(`Unknown combat operation: ${unhandled}`);
-    }
-  }
+  // The discriminated request ties each argument tuple to this closed handler registry.
+  // Erase that correlation only at invocation; callers retain the typed request/result pair.
+  const handler = handlers[operation.kind] as (...args: unknown[]) => Resolution<unknown>;
+  return handler(...operation.args);
 }
 /** Each root owns its stack and draft arguments; no global current resolver or saved continuation. */
 export function resolveCombat<K extends OperationName>(
@@ -308,14 +264,6 @@ function* gainMana(state: GameState, amount: number, events: GameEvent[]): Resol
       for (const unit of state.team) yield* reaction("restoreHealth", unit, gained, events, false, state);
   }
 }
-function* gainGold(state: GameState, amount: number, events: GameEvent[]): Resolution<void> {
-  if (!state.battle) return;
-  const gained = Math.min(Math.max(0, Math.round(amount)), STACK_LIMIT - state.currency);
-  state.currency += gained;
-  state.battle.earnedGold += gained;
-  if (state.journey) state.journey.currency = Math.min(STACK_LIMIT, state.journey.currency + gained);
-  if (gained) events.push({ kind: "reward", amount: gained, text: `Gain ${gained} Gold.` });
-}
 function* grantArmor(
   state: GameState,
   unit: Combatant,
@@ -351,8 +299,7 @@ function* leechHealth(
   yield* reaction("restoreHealth", unit, amount, events, false, state);
   const restored = unit.health - before;
   if (!("maxHealth" in unit) && restored > 0) {
-    if (hasTalent(state, "leech.blood-debt") && roll(state) < 0.1)
-      yield* reaction("gainGold", state, restored, events);
+    if (hasTalent(state, "leech.blood-debt") && roll(state) < 0.1) gainGold(state, restored, events);
     if (
       hasTalent(state, "leech.sanguine-overflow") &&
       before < maximumHealth(unit) &&
@@ -1097,16 +1044,15 @@ function* resolveHit(
     stats.poison > 0 &&
     hasTalent(state, "poison.toxic-profit")
   )
-    yield* reaction("gainGold", state, 3, events);
+    gainGold(state, 3, events);
   if (target.health === 0 && !alliedTarget && alliedSource && state.boons.includes("bone-charm"))
     yield* reaction("restoreHealth", source, 3, events, false, state);
   if (alliedSource && !alliedTarget && lost > 0 && (source.health > 0 || policy.deadSource)) {
-    if (type === "bleed" && state.boons.includes("cutpurse-knife"))
-      yield* reaction("gainGold", state, 1, events);
+    if (type === "bleed" && state.boons.includes("cutpurse-knife")) gainGold(state, 1, events);
     if (type === "poison" && state.boons.includes("parasitic-bloom") && roll(state) < 0.1)
       yield* reaction("leechHealth", state, source, lost, events, true);
     if (attack && type === "nature" && state.boons.includes("lucky-clover") && roll(state) < 0.1)
-      yield* reaction("gainGold", state, lost, events);
+      gainGold(state, lost, events);
     if (attack && type === "light" && state.boons.includes("brass-censer") && roll(state) < 0.2) {
       if (roll(state) < 0.5)
         yield* reaction("hit", state, source, target, damage, "burn", events, { origin: "proc" });
@@ -1196,7 +1142,7 @@ function* resolveHit(
       if (type === "light") {
         if (proc("light.scorching-light", 0.1))
           yield* reaction("hit", state, source, target, damage, "burn", events, { origin: "proc" });
-        if (lost > 0 && proc("light.tithe", 0.1)) yield* reaction("gainGold", state, lost, events);
+        if (lost > 0 && proc("light.tithe", 0.1)) gainGold(state, lost, events);
       }
       const chanceLeech =
         (type === "bleed" && proc("bleed.sanguine", 0.1)) ||

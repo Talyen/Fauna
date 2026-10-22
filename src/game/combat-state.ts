@@ -180,3 +180,12 @@ export function removeArmor(unit: Combatant, amount: number) {
     before > 0 && stats.armor === 0 ? { unit, delivered: false } : null;
   return { removed, depletion };
 }
+
+export function gainGold(state: GameState, amount: number, events: GameEvent[]) {
+  if (!state.battle) return;
+  const gained = Math.min(Math.max(0, Math.round(amount)), STACK_LIMIT - state.currency);
+  state.currency += gained;
+  state.battle.earnedGold += gained;
+  if (state.journey) state.journey.currency = Math.min(STACK_LIMIT, state.journey.currency + gained);
+  if (gained) events.push({ kind: "reward", amount: gained, text: `Gain ${gained} Gold.` });
+}
