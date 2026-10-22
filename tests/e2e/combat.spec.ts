@@ -47,7 +47,7 @@ for (const width of [1280, 1920]) {
     expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(game);
     await captureScreen(page, { path: `reports/combat-piles-${width}.png` });
   });
-  test(`Campfire remains eligible while hurt and Health survives entry to the boss at ${width}`, async ({
+  test(`Campfire heals the roster once and Health survives entry to the boss at ${width}`, async ({
     page,
   }) => {
     await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
@@ -65,7 +65,7 @@ for (const width of [1280, 1920]) {
     await captureScreen(page, { path: `reports/combat-campfire-${width}.png` });
     await page.getByRole("button", { name: "Rest", exact: true }).click();
     await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
-    await expect(page.getByRole("button", { name: "Visit Campfire", exact: true })).toHaveCount(1);
+    await expect(page.getByRole("button", { name: "Visit Campfire", exact: true })).toHaveCount(0);
     const rested = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!) as GameState);
     expect(rested.team.map((creature) => creature.health)).toEqual([10, 16, 30]);
     await page.reload();
