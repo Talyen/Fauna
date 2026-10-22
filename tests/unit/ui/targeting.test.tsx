@@ -378,3 +378,24 @@ it("targets Neradora itself for Undertow Knot and previews the separate Water Th
   await userEvent.click(screen.getByRole("button", { name: /^Play/ }));
   expect(send.mock.calls).toEqual([[{ type: "play", cardId: game.battle!.hand[0]! }]]);
 });
+
+it("previews and confirms Unwritten Ending for all enemies without a chosen target", async () => {
+  const game = produce(teamRun(1, ["rookhaven", "mossguard", "prismram"]), (draft) => {
+    const chosen = draft.cards.find((card) => card.definitionId === "rookhaven-unwritten-ending")!;
+    draft.battle!.hand = [chosen.id];
+    draft.battle!.buffer = [];
+    draft.battle!.discard = [];
+    draft.battle!.draw = draft.cards.filter((card) => card.id !== chosen.id).map((card) => card.id);
+    draft.battle!.enemies.forEach((enemy) => {
+      enemy.block = 4;
+    });
+  });
+  const { container, card, send } = open(game, true);
+  await userEvent.click(card("teamPurge"));
+  expect(screen.getByText("Rookhaven · All enemies")).toBeTruthy();
+  expect(container.querySelectorAll(".enemy-row [data-active-target]")).toHaveLength(3);
+  expect(container.querySelectorAll(".enemy-row .target-preview")).toHaveLength(3);
+  expect(send).not.toHaveBeenCalled();
+  await userEvent.keyboard("{Enter}");
+  expect(send).toHaveBeenCalledExactlyOnceWith({ type: "play", cardId: game.battle!.hand[0]! });
+});
