@@ -94,21 +94,40 @@ describe("CI coverage gate", () => {
       numPendingTestSuites: 0,
       numTotalTests: 1,
       numPassedTests: 1,
-      testResults: [{}],
+      testResults: [{ status: "passed", assertionResults: [{ status: "passed" }] }],
     };
     expect(() => validateUnit(units)).not.toThrow();
     expect(() => validateUnit({ ...units, numPassedTests: 0 })).toThrow();
     expect(() => validateUnit({ ...units, numPendingTests: 1 })).toThrow();
+    for (const change of [
+      { numTotalTests: undefined, numPassedTests: undefined },
+      { testResults: [{}] },
+      { testResults: [{ status: "passed", assertionResults: [] }] },
+      { testResults: [{ status: "failed", assertionResults: [{ status: "passed" }] }] },
+      { testResults: [{ status: "passed", assertionResults: [{ status: "skipped" }] }] },
+    ])
+      expect(() => validateUnit({ ...units, ...change })).toThrow();
     const trace = {
+      format: 1,
+      family: "mixed",
+      initial: "checkpoint",
       complete: true,
       failure: null,
       identity: "current",
       seed: 42,
-      actions: Array(12).fill({}),
+      actions: Array(12).fill({ kind: "reload", checkpointHash: "a".repeat(64) }),
     };
     expect(() => validateInteraction(trace, "current")).not.toThrow();
     expect(() => validateInteraction({ ...trace, complete: false }, "current")).toThrow();
     expect(() => validateInteraction(trace, "stale")).toThrow();
+    for (const change of [
+      { format: 0 },
+      { family: "navigation" },
+      { actions: Array(12).fill({}) },
+      { actions: Array(12).fill({ kind: "battle", checkpointHash: "a".repeat(64) }) },
+      { actions: Array(12).fill({ kind: "reload" }) },
+    ])
+      expect(() => validateInteraction({ ...trace, ...change }, "current")).toThrow();
   });
 });
 
@@ -192,14 +211,17 @@ it("fails the executable final gate for upstream failures, missing reports and i
       numPendingTestSuites: 0,
       numTotalTests: 1,
       numPassedTests: 1,
-      testResults: [{}],
+      testResults: [{ status: "passed", assertionResults: [{ status: "passed" }] }],
     });
     put("reports/interactions/ci/report.json", {
+      format: 1,
+      family: "mixed",
+      initial: "checkpoint",
       complete: true,
       failure: null,
       identity: await identity(),
       seed: 42,
-      actions: Array(12).fill({}),
+      actions: Array(12).fill({ kind: "reload", checkpointHash: "a".repeat(64) }),
     });
     const green = run();
     expect(green.stderr).toBe("");
