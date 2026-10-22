@@ -45,7 +45,7 @@ Gameplay settles before visual feedback. Accepted commands automatically save; f
 
 ## Architecture and authoring
 
-Current contracts and workflows live directly under `Docs/`; active proposals and implementation plans pending validation live under `Docs/plans/`, and completed adoption and rollout plans live under `Docs/archive/`.
+Current contracts and workflows live directly under `Docs/`; completed implementation, adoption and rollout records live under `Docs/archive/`. Archiving records implementation history and does not establish CI, rendered or release acceptance.
 
 Current contracts and workflows:
 
@@ -65,5 +65,7 @@ Historical records retain earlier proposals and rollout evidence; the current co
 - [Alchemy feature adoption](Docs/archive/ALCHEMY_ADOPTION_PLAN.md)
 - [Alchemy tools and platform adoption](Docs/archive/ALCHEMY_PLATFORM_PLAN.md)
 - [CI speed plan and rollout measurements](Docs/archive/CI_SPEED_PLAN.md)
+- [Shared ability resolution and approved rule alignment](Docs/archive/COMBAT_RESOLUTION_PLAN.md)
+- [Combat reaction ordering and implementation record](Docs/archive/COMBAT_REACTIONS_PLAN.md)
 
 Alchemy informed the technology choices and architectural patterns. Fauna has its own implementation and no runtime dependency on Alchemy. Mana crystal UI sprites are adapted from Alchemy; provenance is recorded in the battle-layout sample README.
