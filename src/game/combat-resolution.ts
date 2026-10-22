@@ -332,7 +332,7 @@ function* healthThresholds(
       unit.health < maximumHealth(unit) / 4 &&
       hasTalent(state, "health.last-resort")
     )
-      yield* reaction("removeEffects", unit, "cleanse", 6, events, state);
+      yield* reaction("removeEffects", unit, "cleanse", harmfulStatuses.length + 1, events, state);
   }
 }
 function* grantStatus(
@@ -605,7 +605,7 @@ function* applyHarmfulStatus(
     const beforeStacks = stats[type];
     stats[type] = Math.min(STACK_LIMIT, stats[type] + damage);
     stats.statusSources[type] = source.id;
-    if (type === "bleed" && options.leech) deferLeech(target, source, damage);
+    if (type === "bleed" && options.leech) deferLeech(target, source, stats.bleed - beforeStacks);
     events.push({
       kind: "status",
       targetId: target.id,
@@ -1071,6 +1071,7 @@ function* resolveHit(
     if (hasTalent(state, "water.riptide") && roll(state) < 0.2) drawKeyword(state, "water");
   }
   if (policy.buildup && damage > 0 && source.health > 0) {
+    const bleedBefore = stats.bleed;
     const statusResult = yield* reaction("applyHarmfulStatus", state, source, target, damage, type, events, {
       leech,
     });
@@ -1149,7 +1150,7 @@ function* resolveHit(
         (type === "poison" && proc("leech.virulent-leech", 0.1)) ||
         (type === "nature" && proc("nature.verdant-cycle", 0.1));
       if (chanceLeech && type === "bleed" && !leech) {
-        if (!statusResult.suppressed) deferLeech(target, source, damage);
+        if (!statusResult.suppressed) deferLeech(target, source, Math.max(0, stats.bleed - bleedBefore));
       } else if (chanceLeech && !leech && !blessedLeech)
         yield* reaction("leechHealth", state, source, lost, events, stats.poison > 0 || stats.bleed > 0);
     }
