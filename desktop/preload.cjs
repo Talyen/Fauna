@@ -18,7 +18,10 @@ const bridge = Object.freeze({
     read: () => ipcRenderer.invoke("fauna:display-read"),
     set: (mode) => ipcRenderer.invoke("fauna:display-set", mode),
     subscribe: (listener) => {
-      const handler = (_event, state) => listener(state);
+      const handler = (
+        /** @type {Electron.IpcRendererEvent} */ _event,
+        /** @type {import("../src/platform/ports").DisplayState} */ state,
+      ) => listener(state);
       ipcRenderer.on("fauna:display-state", handler);
       return () => ipcRenderer.removeListener("fauna:display-state", handler);
     },
@@ -37,7 +40,7 @@ const bridge = Object.freeze({
   onOverlay: (listener) => {
     let live = true,
       notified = false;
-    const handler = (_event, active) => {
+    const handler = (/** @type {Electron.IpcRendererEvent} */ _event, /** @type {unknown} */ active) => {
       notified = true;
       if (live) listener(active === true);
     };

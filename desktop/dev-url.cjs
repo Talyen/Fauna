@@ -1,3 +1,4 @@
+/** @param {string} value */
 function isDevelopmentUrl(value) {
   try {
     const url = new URL(value);

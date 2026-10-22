@@ -9,6 +9,7 @@ for (const config of [
   "tsconfig.node.json",
   "tsconfig.test.json",
   "tsconfig.desktop.json",
+  "tsconfig.desktop-boundary.json",
 ]) {
   console.log(`Type checking ${config}`);
   const result = spawnSync(process.execPath, [compiler, "--noEmit", "-p", config], { stdio: "inherit" });

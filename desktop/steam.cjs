@@ -1,8 +1,14 @@
 const fs = require("node:fs/promises");
 const path = require("node:path");
 const { createHash, randomBytes } = require("node:crypto");
+const { parseReply } = require("./steam-wire.cjs");
 const { createStorage } = require("./storage.cjs");
+/** @param {string} name */
 const validName = (name) => typeof name === "string" && /^fauna-v1-[a-f0-9]{32}-[01]\.json$/.test(name);
+/**
+ * @param {{app: Pick<import("electron").App, "isPackaged">, utilityProcess: Pick<typeof import("electron").utilityProcess, "fork">, directory: string, isolated: boolean, pause: (active: boolean) => void, loadBinding?: () => typeof import("steamworks.js")}} options
+ * @returns {Promise<Required<import("../src/platform/ports").CloudPort> & {storage: ReturnType<typeof createStorage>, overlay: () => boolean, dispose: () => Promise<void>}>}
+ */
 async function createSteam({
   app,
   utilityProcess,
@@ -13,17 +19,19 @@ async function createSteam({
 }) {
   let available = false,
     account = /** @type {string | null} */ (null),
-    worker,
+    worker = /** @type {import("electron").UtilityProcess | undefined} */ (undefined),
     overlay = /** @type {{disconnect(): void} | null} */ (null),
     overlayActive = false;
-  let device,
+  let device = /** @type {string | undefined} */ (undefined),
     profile = "",
     sequence = 0,
     dead = false,
     transportStopped = false;
+  /** @type {Map<number, {resolve: (value: unknown) => void, reject: (error: Error) => void, timer: ReturnType<typeof setTimeout>}>} */
   const requests = new Map();
   const root = directory;
   let lane = Promise.resolve();
+  /** @param {string} file @param {string} data */
   async function atomic(file, data) {
     await fs.mkdir(path.dirname(file), { recursive: true });
     const handle = await fs.open(`${file}.tmp`, "w");
@@ -35,18 +43,34 @@ async function createSteam({
     }
     await fs.rename(`${file}.tmp`, file);
   }
-  function request(operation, args = []) {
+  /**
+   * @template {keyof import("./steam-types").SteamRequests} K
+   * @param {K} operation
+   * @param {import("./steam-types").SteamRequests[K]["args"]} args
+   * @returns {Promise<import("./steam-types").SteamRequests[K]["result"]>}
+   */
+  function request(operation, args) {
     if (dead || transportStopped || !worker) return Promise.reject(new Error("Steam transport unavailable."));
     const id = ++sequence;
     return new Promise((resolve, reject) => {
       const timer = setTimeout(() => {
         requests.delete(id);
         transportStopped = true;
-        worker.kill();
+        worker?.kill();
         reject(new Error("Steam Cloud timed out. Local saves remain available; restart to reconnect."));
       }, 5000);
-      requests.set(id, { resolve, reject, timer });
-      worker.postMessage({ id, operation, args });
+      requests.set(id, {
+        resolve: (value) => {
+          try {
+            resolve(parseReply(operation, value));
+          } catch (error) {
+            reject(error);
+          }
+        },
+        reject,
+        timer,
+      });
+      worker?.postMessage({ id, operation, args });
     });
   }
   if (!isolated) {
@@ -78,14 +102,17 @@ async function createSteam({
         worker = utilityProcess.fork(path.join(__dirname, "steam-worker.cjs"), [], {
           serviceName: "Fauna cloud",
         });
-        worker.on("message", ({ id, value, error }) => {
-          const entry = requests.get(id);
-          if (!entry) return;
-          requests.delete(id);
-          clearTimeout(entry.timer);
-          if (error) entry.reject(new Error(error));
-          else entry.resolve(value);
-        });
+        worker.on(
+          "message",
+          (/** @type {{id: number, value?: unknown, error?: unknown}} */ { id, value, error }) => {
+            const entry = requests.get(id);
+            if (!entry) return;
+            requests.delete(id);
+            clearTimeout(entry.timer);
+            if (error) entry.reject(new Error(String(error)));
+            else entry.resolve(value);
+          },
+        );
         worker.on("exit", () => {
           transportStopped = true;
           for (const entry of requests.values()) {
@@ -124,7 +151,7 @@ async function createSteam({
       try {
         device = await fs.readFile(path.join(root, "device-id"), "utf8");
       } catch (e) {
-        if (e.code !== "ENOENT") throw e;
+        if (!(e instanceof Error && "code" in e && e.code === "ENOENT")) throw e;
       }
       if (!/^[a-f0-9]{32}$/.test(device ?? "")) {
         device = randomBytes(16).toString("hex");
@@ -139,16 +166,18 @@ async function createSteam({
   const offlineStorage = createStorage(root);
   const metadata = path.join(profileDir, "cloud.json");
   const importMarker = path.join(profileDir, "standalone-choice");
+  /** @param {string} file */
   async function readOptional(file) {
     try {
       const stat = await fs.stat(file);
       if (stat.size > 1_048_576) throw new Error("Cloud metadata exceeds supported size.");
       return await fs.readFile(file, "utf8");
     } catch (e) {
-      if (e.code === "ENOENT") return null;
+      if (e instanceof Error && "code" in e && e.code === "ENOENT") return null;
       throw e;
     }
   }
+  /** @template T @param {() => Promise<T>} fn */
   const serial = (fn) => {
     const operation = lane.then(fn);
     lane = operation.catch(() => {});
@@ -164,7 +193,7 @@ async function createSteam({
       const local = available ? await storage.readCandidates() : [];
       return {
         available,
-        enabled: available ? await request("enabled") : false,
+        enabled: available ? await request("enabled", []) : false,
         device: device ?? "",
         profile,
         importAvailable:
@@ -210,7 +239,7 @@ async function createSteam({
     },
     list: async () => {
       requireAvailable();
-      return request("list");
+      return request("list", []);
     },
     read: async (name) => {
       requireAvailable();

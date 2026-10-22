@@ -1,11 +1,23 @@
 const { parentPort } = process;
+const { parseRequest } = require("./steam-wire.cjs");
+if (!parentPort) throw new Error("Steam worker requires a parent port.");
 const MAX = 1_048_576;
+/** @param {string} name */
 const validName = (name) => typeof name === "string" && /^fauna-v1-[a-f0-9]{32}-[01]\.json$/.test(name);
-let client, account;
+/** @type {ReturnType<typeof import("steamworks.js").init> | undefined} */
+let client;
+/** @type {string | undefined} */
+let account;
 let lane = Promise.resolve();
-parentPort.on("message", ({ data: message }) => {
+parentPort.on("message", (/** @type {{data: unknown}} */ { data }) => {
+  let message;
+  try {
+    message = parseRequest(data);
+  } catch {
+    return;
+  }
+  const { id, operation, args } = message;
   lane = lane.then(async () => {
-    const { id, operation, args = [] } = message;
     try {
       let value;
       if (operation === "init") {

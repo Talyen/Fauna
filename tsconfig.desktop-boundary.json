@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.desktop.json",
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "useUnknownInCatchVariables": true,
+    "exactOptionalPropertyTypes": true
+  },
+  "include": [
+    "desktop/storage.cjs",
+    "desktop/preload.cjs",
+    "desktop/steam.cjs",
+    "desktop/steam-worker.cjs",
+    "desktop/steam-wire.cjs",
+    "desktop/protocol.cjs",
+    "desktop/recovery.cjs",
+    "desktop/dev-url.cjs",
+    "src/platform/ports.ts"
+  ]
+}

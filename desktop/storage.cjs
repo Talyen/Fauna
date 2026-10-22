@@ -19,7 +19,7 @@ function createStorage(directory) {
           }
           candidates.push({ source: index ? "backup" : "primary", data: await fs.readFile(file, "utf8") });
         } catch (error) {
-          if (error.code !== "ENOENT") failures.push(error);
+          if (!(error instanceof Error && "code" in error && error.code === "ENOENT")) failures.push(error);
         }
       }
       if (failures.length && !candidates.length)
@@ -54,7 +54,7 @@ function createStorage(directory) {
             await fs.copyFile(i === 1 ? primary : `${primary}.bak${i - 1}`, staged);
             await fs.rename(staged, backup);
           } catch (error) {
-            if (error.code !== "ENOENT") throw error;
+            if (!(error instanceof Error && "code" in error && error.code === "ENOENT")) throw error;
           } finally {
             await fs.rm(staged, { force: true }).catch(() => {});
           }
