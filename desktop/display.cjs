@@ -26,8 +26,10 @@ function clampBounds(bounds, displays, minimum = MINIMUM_CONTENT_SIZE) {
     height: Math.round(height),
   };
 }
+/** @param {{directory: string, screen: import("electron").Screen, isolated?: boolean, notify?: (state: import("../src/platform/ports").DisplayState) => void}} options */
 async function createDisplay({ directory, screen, isolated = false, notify = () => {} }) {
   const file = path.join(directory, "display.json");
+  /** @type {{mode: "windowed" | "fullscreen", bounds: import("electron").Rectangle | null}} */
   let preferences = { mode: "windowed", bounds: null };
   if (!isolated)
     try {
@@ -40,7 +42,7 @@ async function createDisplay({ directory, screen, isolated = false, notify = () 
     timer,
     disposed = false,
     lane = Promise.resolve(),
-    transition = Promise.resolve();
+    transition = /** @type {Promise<unknown>} */ (Promise.resolve());
   const bounds = () => clampBounds(preferences.bounds, screen.getAllDisplays(), minimumOuterSize(window));
   const write = () => {
     clearTimeout(timer);
@@ -57,6 +59,7 @@ async function createDisplay({ directory, screen, isolated = false, notify = () 
         notify({ ...read(), error: "Could not remember display preferences." });
       });
   };
+  /** @returns {import("../src/platform/ports").DisplayState} */
   const read = () => ({
     mode:
       window && !window.isDestroyed()
@@ -86,6 +89,7 @@ async function createDisplay({ directory, screen, isolated = false, notify = () 
     clearTimeout(timer);
     timer = setTimeout(write, 250);
   };
+  /** @param {"windowed" | "fullscreen"} mode */
   const apply = async (mode) => {
     if (disposed || !window || window.isDestroyed() || !["windowed", "fullscreen"].includes(mode))
       throw new Error("Invalid display request.");
@@ -93,7 +97,7 @@ async function createDisplay({ directory, screen, isolated = false, notify = () 
     if (mode === "fullscreen" && read().mode === "windowed") preferences.bounds = window.getBounds();
     if (process.platform === "darwin") window.setSimpleFullScreen(mode === "fullscreen");
     else if (window.isFullScreen() !== (mode === "fullscreen")) {
-      await new Promise((resolve, reject) => {
+      await new Promise((/** @type {() => void} */ resolve, reject) => {
         const event = mode === "fullscreen" ? "enter-full-screen" : "leave-full-screen";
         const done = () => {
           clearTimeout(timeout);
@@ -117,6 +121,7 @@ async function createDisplay({ directory, screen, isolated = false, notify = () 
     write();
     return read();
   };
+  /** @param {"windowed" | "fullscreen"} mode */
   const set = (mode) => {
     const result = transition.then(() => apply(mode));
     transition = result.catch(() => {});

@@ -18,7 +18,7 @@ No release upload, remote publication, automatic promotion, telemetry, or Steam 
 
 ## Packaged integrity
 
-Windows packaging explicitly disables electron-builder publication. The hardening hook applies the optional Wasm trap-handler fuse only when the Electron binary exposes it; mandatory fuse settings and rejection of unknown or incomplete wires remain strict.
+Windows packaging explicitly disables electron-builder publication. The hardening hook configures every Electron 45 fuse, including the Wasm trap handler, and strictly rejects unknown or incomplete fuse wires.
 
 `npm run verify:package -- release/win-unpacked` reads an existing Windows x64 artifact without building, modifying or publishing it. Windows CI runs it after packaging and before startup smoke. It verifies PE architecture, Fauna package identity/version, required Electron runtime files, ASAR paths, exact runtime/preload source bytes and sandbox configuration, relative nonempty renderer references, exact renderer bytes against the matching existing `dist/` build, and prepared media hashes against validated receipts. Every renderer JavaScript chunk is checked for accidental development controls. Packaged startup ignores `FAUNA_DEV_URL`, and production sessions never enable development victory.
 

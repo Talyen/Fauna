@@ -1,14 +1,17 @@
 const { contextBridge, ipcRenderer } = require("electron");
 /** @type {(() => Promise<boolean>) | null} */
 let closeListener = null;
-ipcRenderer.on("fauna:prepare-close", async () => {
+ipcRenderer.on("fauna:prepare-close", () => {
+  void prepareClose();
+});
+async function prepareClose() {
   let saved = false;
   try {
     saved = closeListener ? await closeListener() : true;
   } finally {
-    await ipcRenderer.invoke("fauna:close-ready", saved);
+    await ipcRenderer.invoke("fauna:close-ready", saved).catch(() => {});
   }
-});
+}
 /** @type {import("../src/platform/ports").DesktopBridge} */
 const bridge = Object.freeze({
   display: Object.freeze({

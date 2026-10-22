@@ -18,11 +18,8 @@ const { createSteam } = require("./steam.cjs");
 const { createDisplay } = require("./display.cjs");
 const { isDevelopmentUrl } = require("./dev-url.cjs");
 app.setName("Fauna");
-if (process.env.FAUNA_PREVIEW_USER_DATA || process.env.FAUNA_SMOKE_USER_DATA)
-  app.setPath(
-    "userData",
-    path.resolve(process.env.FAUNA_PREVIEW_USER_DATA || process.env.FAUNA_SMOKE_USER_DATA),
-  );
+const isolatedDirectory = process.env.FAUNA_PREVIEW_USER_DATA || process.env.FAUNA_SMOKE_USER_DATA;
+if (isolatedDirectory) app.setPath("userData", path.resolve(isolatedDirectory));
 if (!app.requestSingleInstanceLock()) app.exit(0);
 app.on("second-instance", () => {
   if (window && !window.isDestroyed()) {
@@ -43,7 +40,7 @@ function requestClose() {
 function finishClose() {
   if (closing) return;
   closing = true;
-  Promise.all([storage?.drain(), display?.dispose(), steam?.dispose()]).then(() => {
+  void Promise.all([storage?.drain(), display?.dispose(), steam?.dispose()]).then(() => {
     quitting = true;
     app.quit();
   });
@@ -56,7 +53,7 @@ const dev = app.isPackaged ? undefined : process.env.FAUNA_DEV_URL;
 if (dev && !isDevelopmentUrl(dev)) throw new Error("Untrusted development URL.");
 const entry = ENTRY;
 const trusted = (url) => (dev ? url === `${dev}/` || url === dev : url === entry);
-app.whenReady().then(async () => {
+void app.whenReady().then(async () => {
   protocol.handle(
     "fauna",
     createResourceHandler(path.join(__dirname, "../dist"), (url) => net.fetch(url)),

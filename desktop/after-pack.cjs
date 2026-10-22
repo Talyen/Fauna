@@ -1,6 +1,6 @@
 const path = require("node:path");
 const fs = require("node:fs/promises");
-const { flipFuses, getCurrentFuseWire, FuseVersion, FuseV1Options } = require("@electron/fuses");
+const { flipFuses, FuseVersion, FuseV1Options } = require("@electron/fuses");
 const FUSES = Object.freeze({
   [FuseV1Options.RunAsNode]: false,
   [FuseV1Options.EnableCookieEncryption]: true,
@@ -20,7 +20,7 @@ async function installSnapshots(directory) {
     }
   }
 }
-module.exports = async function afterPack(context) {
+async function afterPack(context) {
   const platform = context.electronPlatformName;
   const name = context.packager.appInfo.productFilename;
   const executable = path.join(
@@ -28,19 +28,11 @@ module.exports = async function afterPack(context) {
     platform === "darwin" ? `${name}.app` : `${name}${platform === "win32" ? ".exe" : ""}`,
   );
   await installSnapshots(context.appOutDir);
-  const wire = await getCurrentFuseWire(executable);
-  // Electron 39 has no WasmTrapHandlers slot; mandatory fuses remain explicit and strict.
-  const supported = Object.fromEntries(
-    Object.entries(FUSES).filter(
-      ([index]) => Number(index) !== FuseV1Options.WasmTrapHandlers || Object.hasOwn(wire, index),
-    ),
-  );
   await flipFuses(executable, {
     version: FuseVersion.V1,
-    ...supported,
+    ...FUSES,
     strictlyRequireAllFuses: true,
     resetAdHocDarwinSignature: platform === "darwin",
   });
-};
-module.exports.FUSES = FUSES;
-module.exports.installSnapshots = installSnapshots;
+}
+module.exports = Object.assign(afterPack, { FUSES, installSnapshots });

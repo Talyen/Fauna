@@ -39,4 +39,4 @@ function createResourceHandler(root, fetchFile) {
     }
   };
 }
-module.exports = { ENTRY, resourcePath, createResourceHandler };
+module.exports = { ENTRY, createResourceHandler };

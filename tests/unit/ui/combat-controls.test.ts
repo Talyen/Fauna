@@ -27,6 +27,7 @@ describe("combat controls", () => {
       d.battle!.enemies.forEach((e) => {
         e.health = e.maxHealth;
         e.combat.controlled = null;
+        e.combat.controlTurns = 0;
       });
     });
     const manual = dispatch(ordinary, command).state;
