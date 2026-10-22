@@ -220,6 +220,13 @@
   --keyword-freeze: #67e8f9;
   --keyword-bleed: #dc2626;
   --keyword-stun: #fcd34d;
+  --control-star-outline: #d97706;
+  --control-crystal-outline: #06b6d4;
+  --control-frost-clear: #67e8f900;
+  --control-frost-edge: #06b6d44d;
+  --control-orbit-duration: 4000ms;
+  --control-frost-duration: 1400ms;
+  --control-twinkle-duration: 2000ms;
   --keyword-leech: #9f1239;
   --keyword-cleanse: #5eead4;
   --keyword-purge: #e879f9;

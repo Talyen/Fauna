@@ -495,6 +495,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
           data-focus={navigation ? "visible" : "hidden"}
           data-route={route}
           data-phase={game.phase}
+          data-paused={paused || undefined}
           data-save-status={view.saveStatus}
         >
           {!view.cloud.blocking ? (

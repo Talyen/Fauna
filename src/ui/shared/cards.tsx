@@ -76,6 +76,7 @@ export function CreatureCard({
     <ArtCard
       aspect="creature"
       artwork={assetUrl(`creature.${kind}`)}
+      control={health === 0 ? null : combat?.controlled}
       presentation={presentation}
       className={[selected ? "selected" : "", invalidTarget ? "invalid-target" : ""].join(" ")}
       data-species={kind}
