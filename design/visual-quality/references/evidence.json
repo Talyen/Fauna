@@ -1,0 +1,114 @@
+{
+  "baselineCommit": "97465a9b224a366afdcb854db9deb7e64acc6501",
+  "candidateSourceSha256": {
+    "src/ui/expedition/support-screen.tsx": "a89640ded3e5e81387af425fc54b0ac05415ca53114cc4452364c2d7cb175682",
+    "src/ui/expedition/expedition.css": "bfc11250086164b27bad17863d710b18523228f671af7306a34832a512031128",
+    "src/ui/tokens.css": "f912b53bf6402eda4d5d350892f4fe63e4d4d1eae4365fee9a9038e3168348fa"
+  },
+  "imagesSha256": {
+    "battle-1920.png": "931142118177801375a716d6e1f878e808d8f3b43725e40c54c3f3fbba10df2c",
+    "merchant-before-1280-large.png": "fe08ae5b086dcb04f15730fc4ea4cbe6b8aa9a6cfe4077d8a22ca313422ecda9",
+    "merchant-before-1280.png": "0164d84fcd273cbeebfe0543a231fb38ea39f44f15ee65b404873f77e184849b",
+    "merchant-before-1920.png": "a25c6aac7d497ad5c3a9e372bb6c948f135974419dcac4ae684502529007372b",
+    "merchant-candidate-1280-large.png": "0590684eb12d3b36193499dbf20c26e5f19cb9b9fa62582251a9f7aa563ca260",
+    "merchant-candidate-1280.png": "87f6ff97a6b63a3b3e4abe404d0d563b727989c813247a16d27c8f3a33f2796d",
+    "merchant-candidate-1920.png": "6577f91d67a5df8bccce7c5828a76739c0f3d8f246a5bff14e8e452d428a717a",
+    "merchant-inspection-large.png": "1653ab1bb4d01678c589760c1f97e433937341d9b023debd2f01208c4f5217eb",
+    "merchant-purchased-large.png": "424de800f12e42d400edd6acca8130f66f59274fc0044bfb3c8739a97b452fe9",
+    "merchant-unavailable-large.png": "abad7aab20fd31e4f4c76c805391a54951b46738b8345fc22ce6eb62b5d6e9c4",
+    "settings-1920.png": "83a58aad55ca6c30f48f7499e81772c9995823bc0451f085ae99ba4ced6497a7"
+  },
+  "browser": "Chromium headless via Playwright",
+  "seed": 7,
+  "battleSeed": 42,
+  "motion": "reduce",
+  "candidateEvidence": [
+    {
+      "file": "merchant-1920-1.png",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "errors": [],
+      "layoutFailures": []
+    },
+    {
+      "file": "inspection-1920-1.png",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "errors": [],
+      "layoutFailures": []
+    },
+    {
+      "file": "purchased-1920-1.png",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "errors": [],
+      "layoutFailures": []
+    },
+    {
+      "file": "settings-benchmark-1920-1.png",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "errors": [],
+      "layoutFailures": []
+    },
+    {
+      "file": "merchant-1280-1.png",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "errors": [],
+      "layoutFailures": []
+    },
+    {
+      "file": "inspection-1280-1.png",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "errors": [],
+      "layoutFailures": []
+    },
+    {
+      "file": "purchased-1280-1.png",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "errors": [],
+      "layoutFailures": []
+    },
+    {
+      "file": "merchant-1280-1.25.png",
+      "width": 1280,
+      "height": 720,
+      "scale": 1.25,
+      "errors": [],
+      "layoutFailures": []
+    },
+    {
+      "file": "inspection-1280-1.25.png",
+      "width": 1280,
+      "height": 720,
+      "scale": 1.25,
+      "errors": [],
+      "layoutFailures": []
+    },
+    {
+      "file": "purchased-1280-1.25.png",
+      "width": 1280,
+      "height": 720,
+      "scale": 1.25,
+      "errors": [],
+      "layoutFailures": []
+    },
+    {
+      "file": "unavailable-1280-1.25.png",
+      "width": 1280,
+      "height": 720,
+      "scale": 1.25,
+      "layoutFailures": []
+    }
+  ]
+}

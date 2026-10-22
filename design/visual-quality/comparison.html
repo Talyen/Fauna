@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fauna · A / B</title>
+    <link rel="stylesheet" href="../../src/ui/tokens.css" />
+    <style>
+      body {
+        margin: var(--space-6);
+        background: var(--background);
+        color: var(--foreground);
+        font-size: var(--text-body);
+        font-family: var(--font-ui);
+      }
+      main {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--screen-section-gap);
+      }
+      figure {
+        margin: 0;
+      }
+      figcaption {
+        margin-bottom: var(--screen-item-gap);
+      }
+      img {
+        display: block;
+        width: 100%;
+      }
+      a {
+        color: inherit;
+      }
+      @media (max-width: 900px) {
+        main {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <figure>
+        <figcaption>A</figcaption>
+        <a href="references/merchant-before-1280.png"
+          ><img src="references/merchant-before-1280.png" alt="Option A, Boon Merchant at 1280 by 720"
+        /></a>
+      </figure>
+      <figure>
+        <figcaption>B</figcaption>
+        <a href="references/merchant-candidate-1280.png"
+          ><img
+            src="references/merchant-candidate-1280.png"
+            alt="Option B, same Boon Merchant stock and viewport"
+        /></a>
+      </figure>
+    </main>
+  </body>
+</html>

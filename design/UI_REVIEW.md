@@ -2,7 +2,11 @@
 
 This records the component review process and inventory from the October 20 rollout. Current production behavior belongs to [UI rules](../Docs/UI.md); older study controls and verification notes describe their recorded scope. For a new design comparison, review each Fauna UI element through playable HTML comparisons built from the registered shadcn/ui primitives and the real gameplay compositions. Keep the black, charcoal, ivory and gold foundation. Ordinary buttons have visible boundaries; primary actions use gold fill. The user authorized production adoption of all approved decisions on 2026-10-20. [Implementation ownership](../Docs/DESIGN_SYSTEM.md) records the rollout and validation boundaries.
 
-## Decision process
+## Current visual workflow
+
+New work follows the [whole-screen workflow and reference pack](visual-quality/README.md) and the [required rendered review](../Docs/UI.md#required-review). Start with the player decision, artwork, hierarchy, grouping and copy. The component inventory below remains useful for interaction review after composition is established. Its historical component-first sequence is not the starting point for a new screen.
+
+## Historical component decision process
 
 1. Review one component and one behavior at a time. Compare multiple meaningful options while holding all other appearance, content, dimensions and behavior constant. Separate fill, border, movement, outline, timing, feedback and availability decisions.
 2. Explain the options and a recommendation. Make several independent steps available in advance with Next/Previous navigation and saved choices; do not require a chat turn between decisions. Let the player try pointer hover/press, keyboard focus/activation and relevant value/selection changes before choosing. Demonstrate failure and cancellation where applicable. Preserve standard shadcn interaction contracts.

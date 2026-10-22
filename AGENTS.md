@@ -22,6 +22,7 @@ Task-scoped branch/worktree creation, commits, local integration, non-force push
 
 - [Architecture, application commands, saves and platform boundaries](Docs/ARCHITECTURE.md): `src/game/`, `src/application/session.ts`, and `src/platform/`.
 - [Content and artwork](Docs/CONTENT.md): `src/game/content.ts` and `public/art/`.
+- [Visual design workflow and references](design/visual-quality/README.md): use the repo [UI design](.agents/skills/fauna-ui-design/SKILL.md), [UI critique](.agents/skills/fauna-ui-critique/SKILL.md), and [art direction](.agents/skills/fauna-art-direction/SKILL.md) skills for their corresponding visual tasks
 - [UI, interaction and accessibility](Docs/UI.md), [menus and inspection](Docs/MENU_DESIGN.md), [expedition and progression](Docs/EXPEDITION_DESIGN.md).
 - [Gameplay vocabulary](Docs/GLOSSARY.md): `src/game/glossary.ts`.
 - [Run and verification commands](CONTRIBUTING.md#verification), [release and platform verification boundaries](Docs/RELEASE.md).
@@ -49,6 +50,6 @@ Review the final diff and integration. Express behavior through names, types and
 
 [Contributing](CONTRIBUTING.md#verification) owns execution tiers, resource limits and CI policy. Run `npm run check -- <task-owned paths>` before handoff and `npm run docs:check` for documentation edits. Focused unit suites are allowed when useful. Full unit runs, static checks, builds, browser/desktop journeys, packaging, coverage and performance runs remain CI-owned unless explicitly requested locally. Never bypass this policy with raw tools or remove regression coverage to make checks faster. Integration runs the lightweight combined-diff check and documentation contracts for Markdown changes; full CI and release validation remain pending until observed for the exact commit.
 
-For UI changes, follow [required rendered review](Docs/UI.md#required-review). CI owns the full viewport/input/state journeys. Inspect its rendered evidence when available; use a local preview or focused browser review only when requested. Report pending rendered review honestly. Passing local checks or geometry assertions alone does not establish visual acceptance.
+For UI changes, follow [required rendered review](Docs/UI.md#required-review). A bounded local preview and focused browser review are authorized by default for task-owned visual changes. Inspect current before/after captures and the affected interaction before integration; keep exhaustive viewport/input/state journeys in CI. If rendered evidence cannot be obtained, preserve the task on its branch and report the blocker instead of integrating visually unreviewed work. Proposed artistic direction remains pending user preference even after technical integration; passing local checks or geometry assertions alone does not establish visual acceptance.
 
 Report completion, checks run, limitations, incidental fixes and unresolved decisions without log or diff dumps. Distinguish browser simulation, desktop, Windows packaging, physical controller, Steam client and Steam Deck verification; do not claim unrun gates passed. Stop after completion.
