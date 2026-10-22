@@ -573,3 +573,47 @@ it("flush drains writes admitted by save-completion subscribers", async () => {
     await s.dispose();
   }
 });
+
+it("shares disposal across reentrant subscribers while draining admitted saves", async () => {
+  let release!: () => void;
+  const gate = new Promise<void>((resolve) => (release = resolve));
+  const removeClose = vi.fn();
+  const removeOverlay = vi.fn();
+  const s = createSession({
+    ...platform(),
+    onCloseRequested: () => removeClose,
+    onOverlay: () => removeOverlay,
+    saves: { readCandidates: async () => [], write: async () => gate },
+  });
+  await s.load();
+  s.command({ type: "draft", species: s.store.getState().game.starterOffers[0]! });
+  const disposals: Promise<void>[] = [];
+  const unsubscribe = s.store.subscribe((view) => {
+    if (view.closing && disposals.length < 2) {
+      // Reserve the slot before disposal synchronously publishes again.
+      const index = disposals.length;
+      disposals.push(Promise.resolve());
+      disposals[index] = s.dispose();
+    }
+  });
+  try {
+    const first = s.dispose();
+    expect(disposals).toEqual([first]);
+    expect(s.dispose()).toBe(first);
+    expect(removeClose).toHaveBeenCalledOnce();
+    expect(removeOverlay).toHaveBeenCalledOnce();
+    let finished = false;
+    void first.then(() => {
+      finished = true;
+    });
+    await Promise.resolve();
+    expect(finished).toBe(false);
+    release();
+    await first;
+    expect(finished).toBe(true);
+  } finally {
+    unsubscribe();
+    release();
+    await s.dispose();
+  }
+});

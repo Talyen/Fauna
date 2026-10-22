@@ -399,6 +399,7 @@ export function decodeSave(raw: string): GameState {
       (!finalEncounter(s) || s.wins === 0 || !s.battle || s.battle.enemies.some((e) => e.health > 0)),
   );
   const allCombatants = [...s.team, ...s.reserves, ...(s.battle?.enemies ?? [])];
+  invalid(!unique(allCombatants.map((unit) => unit.id)));
   for (const unit of allCombatants)
     if (unit.combat) {
       const stats = unit.combat;

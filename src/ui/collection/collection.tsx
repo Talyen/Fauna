@@ -13,13 +13,11 @@ import { CreatureCard } from "../shared/cards";
 import { ArtCard } from "../shared/art-card";
 import { CollectionCreature } from "./collection-creature";
 import { returnFocus } from "../shared/focus";
-import { SPECIES, species, type SpeciesId } from "../../game/content";
+import { SPECIES, type SpeciesId } from "../../game/content";
 import { creatureStars, MAX_CREATURE_STARS } from "../../game/progression";
-import type { Command, GameState } from "../../game/types";
-import type { Inspection } from "../inspection/model";
+import type { GameState } from "../../game/types";
 import type { Controls } from "../shared/input";
 
-type Props = { game: GameState; send: (command: Command) => boolean; inspect: (item: Inspection) => void };
 export function Collection({
   game,
   controls,

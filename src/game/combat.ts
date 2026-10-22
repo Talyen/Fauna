@@ -1239,7 +1239,21 @@ export function tickStatuses(state: GameState, unit: Combatant, events: GameEven
       [...state.team, ...state.reserves, ...state.battle!.enemies].find(
         (candidate) => candidate.id === stats.statusSources[status],
       ) ?? unit;
+    // Cleanse reactions may remove the wound, but cannot revoke healing earned by this tick.
+    const payouts = status === "bleed" ? stats.bleedLeech : [];
     const lost = hit(state, source, unit, amount, status, events, { periodic: true }) ?? 0;
+    if (status === "bleed") {
+      stats.bleedLeech = [];
+      let remaining = lost;
+      for (const payout of payouts) {
+        const owner = [...state.team, ...state.reserves, ...state.battle!.enemies].find(
+          (candidate) => candidate.id === payout.sourceId,
+        );
+        const paid = Math.min(remaining, payout.amount);
+        if (owner) leechHealth(state, owner, paid, events, true);
+        remaining -= paid;
+      }
+    }
     // Threshold reactions can Cleanse the ticking status; decay must not restore it.
     if (stats[status] === 0) continue;
     stats[status] =
@@ -1250,18 +1264,6 @@ export function tickStatuses(state: GameState, unit: Combatant, events: GameEven
             ? 0
             : Math.round(amount / 2)
           : Math.max(0, amount - Math.max(1, Math.round(amount * 0.2)));
-    if (status === "bleed") {
-      let remaining = lost;
-      for (const payout of stats.bleedLeech) {
-        const source = [...state.team, ...state.reserves, ...state.battle!.enemies].find(
-          (c) => c.id === payout.sourceId,
-        );
-        const paid = Math.min(remaining, payout.amount);
-        if (source) leechHealth(state, source, paid, events, true);
-        remaining -= paid;
-      }
-      stats.bleedLeech = [];
-    }
     if ("maxHealth" in unit && !("maxHealth" in source)) {
       if (status === "burn" && hasTalent(state, "burn.smoldering") && roll(state) < 0.1) stats.burn = amount;
       if (status === "poison") {

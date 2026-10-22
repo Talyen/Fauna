@@ -93,3 +93,26 @@ it("Sun-Struck Shield reflects Block spent rather than Reinforce's amplified abs
   expect(enemy.health).toBe(85);
   expect(events.find((event) => event.damageType === "light")?.amount).toBe(15);
 });
+
+it("pays Bleed Leech for damage already dealt even when Last Resort Cleanses the wound", () => {
+  const state = structuredClone(run());
+  state.talents = ["health.last-resort"];
+  const target = state.team[0]!;
+  const source = state.battle!.enemies[0]!;
+  source.health = source.maxHealth - 10;
+  target.health = Math.ceil(species(target.species).health / 4);
+  target.combat = freshCombat();
+  target.combat.bleed = 4;
+  target.combat.statusSources.bleed = source.id;
+  target.combat.bleedLeech = [{ sourceId: source.id, amount: 4 }];
+  const before = source.health;
+  const events: GameEvent[] = [];
+
+  tickStatuses(state, target, events);
+
+  expect(target.combat.bleed).toBe(0);
+  expect(target.combat.bleedLeech).toEqual([]);
+  expect(source.health).toBe(before + 2);
+  tickStatuses(state, target, events);
+  expect(source.health).toBe(before + 2);
+});

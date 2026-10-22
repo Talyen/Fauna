@@ -331,3 +331,16 @@ it("does not admit an enemy action after its own status tick knocks it out", () 
   expect(result.events.some((event) => event.kind === "action" && event.actorId === "enemy-0")).toBe(false);
   expect(result.state.battle!.enemies[0]!.lastAbility).toBe(initial.battle!.enemies[0]!.lastAbility);
 });
+
+it("rejects a save whose allied creature shares an enemy identity", () => {
+  const state = produce(run(), (draft) => {
+    const ally = draft.team[0]!;
+    const previous = ally.id;
+    ally.id = draft.battle!.enemies[0]!.id;
+    draft.lineup = draft.lineup.map((id) => (id === previous ? ally.id : id));
+    for (const card of draft.cards) if (card.ownerId === previous) card.ownerId = ally.id;
+    for (const enemy of draft.battle!.enemies) if (enemy.targetId === previous) enemy.targetId = ally.id;
+  });
+  // Every owner reference still resolves, but status attribution and target identity are ambiguous.
+  expect(() => decodeSave(encodeSave(state))).toThrow();
+});
