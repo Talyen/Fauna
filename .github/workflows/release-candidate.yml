@@ -8,6 +8,7 @@ on:
         type: string
 permissions:
   contents: read
+  actions: read
 concurrency:
   group: signed-windows-candidate
   cancel-in-progress: false
@@ -18,8 +19,6 @@ jobs:
     environment: release-signing
     env:
       RELEASE_TAG: ${{ inputs.tag }}
-      CSC_LINK: ${{ secrets.WINDOWS_CSC_LINK }}
-      CSC_KEY_PASSWORD: ${{ secrets.WINDOWS_CSC_KEY_PASSWORD }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -30,6 +29,9 @@ jobs:
           node-version-file: .node-version
           cache: npm
       - name: Require signing configuration
+        env:
+          CSC_LINK: ${{ secrets.WINDOWS_CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.WINDOWS_CSC_KEY_PASSWORD }}
         shell: pwsh
         run: |
           if (!$env:CSC_LINK -or !$env:CSC_KEY_PASSWORD) { throw "Configure Windows signing secrets in release-signing" }
@@ -39,7 +41,18 @@ jobs:
         run: npm ci --no-audit --no-fund
       - name: Verify tag and version
         run: npm run verify:release-version
+      - name: Require complete verification for the tagged commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: pwsh
+        run: |
+          $sha = git rev-parse HEAD
+          $runs = gh run list --workflow ci.yml --commit $sha --limit 50 --json conclusion,headSha | ConvertFrom-Json
+          if (!($runs | Where-Object { $_.headSha -eq $sha -and $_.conclusion -eq "success" })) { throw "Tagged commit requires successful full CI" }
       - name: Build signed installer
+        env:
+          CSC_LINK: ${{ secrets.WINDOWS_CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.WINDOWS_CSC_KEY_PASSWORD }}
         run: npm run package:installer
       - name: Verify signed package identity
         run: npm run verify:release

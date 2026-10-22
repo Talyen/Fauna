@@ -33,9 +33,10 @@ export function verifyWindowsRuntime(size) {
     if (!(size(name) > 0)) throw new Error(`Missing or empty Electron runtime: ${name}`);
 }
 export function verifyFuses(wire) {
+  for (const index of Object.keys(wire))
+    if (/^\d+$/.test(index) && !Object.hasOwn(hardening.FUSES, index))
+      throw new Error(`Unknown Electron fuse ${index}`);
   for (const [index, enabled] of Object.entries(hardening.FUSES)) {
-    // Pinned Electron may predate a newer optional fuse; every present fuse must match.
-    if (wire[index] === undefined && Number(index) >= 8) continue;
     if (wire[index] !== (enabled ? FuseState.ENABLE : FuseState.DISABLE))
       throw new Error(`Unexpected Electron fuse ${index}`);
   }

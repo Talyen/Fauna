@@ -26,7 +26,7 @@ it.each([8, 9, 7, 10])(
         appOutDir: dir,
         packager: { appInfo: { productFilename: "Fauna" } },
       };
-      if (length === 7 || length === 10) {
+      if (length !== 9) {
         await expect(hardening(context)).rejects.toThrow(/fuse/i);
       } else {
         await hardening(context);
@@ -52,6 +52,9 @@ it("copies the required browser snapshot and rejects incorrect fuse values", asy
     );
     expect(() => verifyFuses(wire)).not.toThrow();
     expect(() => verifyFuses({ ...wire, 0: FuseState.ENABLE })).toThrow();
+    const { 8: _missing, ...incomplete } = wire;
+    expect(() => verifyFuses(incomplete)).toThrow();
+    expect(() => verifyFuses({ ...wire, 9: FuseState.ENABLE })).toThrow();
   } finally {
     await rm(dir, { recursive: true, force: true });
   }
