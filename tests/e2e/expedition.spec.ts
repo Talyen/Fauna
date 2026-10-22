@@ -293,6 +293,7 @@ test("main menu, draft and pre-battle deck lead into the first battle", async ({
   await page.getByRole("button", { name: "Begin journey" }).click();
   expect((await state(page)).phase).toBe("teamSelection");
   const destination = page.locator(".app:not([inert]) [data-encounter]").first();
+  const deckCards = (await state(page)).cards;
   await page.getByRole("button", { name: "Deck", exact: true }).click();
   await expect(page.getByRole("dialog").locator(".action-card")).toHaveCount(3);
   const inspectedCard = page.getByRole("dialog").locator(".action-card").first();
@@ -300,7 +301,9 @@ test("main menu, draft and pre-battle deck lead into the first battle", async ({
   await inspectedCard.click({ button: "right" });
   await expect(page.locator(".inspection.single-card")).toBeVisible();
   await page.locator(".inspection.single-card .action-card").hover();
-  await expect(page.getByRole("tooltip")).toContainText(definition(inspectedId!).name);
+  await expect(page.getByRole("tooltip")).toContainText(
+    definition(deckCards.find((card) => card.id === inspectedId)!.definitionId).name,
+  );
   await page.keyboard.press("Escape");
   await page.keyboard.press("Escape");
   await destination.click();
@@ -388,7 +391,7 @@ test("one starter grows a lineup through a full expedition", async ({ page }) =>
   await seed(page);
   const activate = (el: Locator) => el.click();
   await activate(page.getByRole("button", { name: "Play", exact: true }));
-  const chosen = "pollenmoth";
+  const chosen = (await state(page)).starterOffers[0]!;
   const name = species(chosen).name;
   await activate(page.getByRole("button", { name: `Inspect ${name}`, exact: true }));
   await activate(page.getByRole("button", { name: `Choose ${name}`, exact: true }));
