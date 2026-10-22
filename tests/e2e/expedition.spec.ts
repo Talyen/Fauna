@@ -6,6 +6,7 @@ import { encounterSource } from "../../src/game/encounters";
 import { createGame } from "../../src/game/engine";
 import { CARDS, definition, species } from "../../src/game/content";
 import { assetUrl } from "../../src/ui/assets";
+import prepared from "../../src/assets/prepared.json" with { type: "json" };
 import { BOONS, TALENTS, KEYWORDS } from "../../src/game/progression";
 import type { Command, GameState } from "../../src/game/types";
 import { recruitChoice, accept, policy, winBattle, victoryReady, run, bossReward } from "../unit/helpers";
@@ -905,13 +906,17 @@ for (const [width, height] of [
   });
 
 test("real audio output, hit recoil, reduced motion, and mute follow combat outcomes", async ({ page }) => {
-  await page.addInitScript(() => {
+  const soundUrls = Object.keys(prepared.records)
+    .filter((id) => id.startsWith("sound."))
+    .map(assetUrl);
+  await page.addInitScript((sources) => {
+    const soundUrls = new Set(sources.map((source) => new URL(source, location.href).href));
     const observed = { peak: 0, media: [] as HTMLMediaElement[], impacts: [] as string[] };
     Object.assign(window, { combatObserved: observed });
     const nativePlay = HTMLMediaElement.prototype.play;
     const connected = new WeakSet<HTMLMediaElement>();
     HTMLMediaElement.prototype.play = function () {
-      if (!connected.has(this) && this.src.includes("/sounds/")) {
+      if (!connected.has(this) && soundUrls.has(this.src)) {
         connected.add(this);
         observed.media.push(this);
         const context = new AudioContext();
@@ -937,7 +942,7 @@ test("real audio output, hit recoil, reduced motion, and mute follow combat outc
         observed.impacts.push(this.closest<HTMLElement>("[data-actor-id]")?.dataset.actorId ?? "");
       return animate.call(this, frames, options);
     };
-  });
+  }, soundUrls);
   const fixture = produce(run(7), (d) => {
     const cards = d.cards.filter((c) =>
       ["mossguard-attack", "emberback-attack", "prismram-attack"].includes(c.definitionId),
@@ -1371,7 +1376,7 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     expect(swapped.battle!.draw).toEqual(fixture.battle!.draw);
     expect(swapped.battle!.discard).toEqual(fixture.battle!.discard);
     expect(swapped.lineup).toEqual(fixture.lineup);
-    expect(swapped.reserves.find((c) => c.species === "emberback")!.health).toBe(9);
+    expect(swapped.reserves.find((c) => c.id === "ally-1")!.health).toBe(9);
     const handCard = swapped.cards.find((card) => card.id === swapped.battle!.hand[0])!;
     const handDefinition = definition(handCard.definitionId);
     await expect(page.locator(".app:not([inert]) .hand .action-card img")).toHaveAttribute(
@@ -1385,8 +1390,9 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     await expect(page.getByRole("button", { name: "Lineup", exact: true })).toHaveCount(0);
     await page.keyboard.press("Escape");
     await activate(page.getByRole("button", { name: "Swap", exact: true }));
-    await activate(page.getByRole("button", { name: "Pollenmoth, deployed", exact: true }));
-    await activate(page.getByRole("button", { name: "Emberback, backup", exact: true }));
+    const restoredDialog = page.getByRole("dialog");
+    await activate(restoredDialog.locator('[data-actor-id="recruit-pollenmoth"] .creature-card'));
+    await activate(restoredDialog.locator('[data-actor-id="ally-1"] .creature-card'));
     expect((await state(page)).team[1]!.health).toBe(9);
   });
 
