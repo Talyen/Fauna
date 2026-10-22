@@ -1659,6 +1659,17 @@
       "aspect": [3, 4],
       "provenance": "Unchanged Cadenza artwork selected from user Google Drive: https://drive.google.com/file/d/1ipaW39quO9-aprgGGoQ6GKRUqfzxMDh6/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "logo.main-menu",
+      "origin": "repository",
+      "source": "public/art/branding/Fauna_Gamboloom_Logo.png",
+      "output": "art/branding/main-menu.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Fauna_Gamboloom_Logo.png selected from Google Drive file 1JOEi0BXpZ8bnKfaHU3UxeebSzW_sHzY2; temporary main menu logo",
+      "rights": "User-provided Fauna artwork selected for this game"
     }
   ]
 }
