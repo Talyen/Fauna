@@ -158,6 +158,8 @@ test("Merchant purchase resumes without duplicate spending", async ({ page }) =>
   fixture = winBattle(accept(fixture, { type: "beginBattle" }));
   fixture = accept(fixture, recruitChoice(fixture));
   const pack = fixture.expedition!.pack;
+  const visit = fixture.support!.id;
+  const slot = fixture.support!.stock[0]!;
   await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.addInitScript((save) => {
@@ -167,12 +169,16 @@ test("Merchant purchase resumes without duplicate spending", async ({ page }) =>
   await page.goto("/");
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   await page.getByRole("button", { name: "Visit Merchant", exact: true }).click();
+  const entered = accept(fixture, { type: "enterSupport", visit });
   await expect(page.getByRole("heading", { name: "Merchant", exact: true })).toBeVisible();
   await page.getByRole("button", { name: "Buy · 20 Gold", exact: true }).first().click();
   await expect(page.getByRole("button", { name: "Owned", exact: true })).toHaveAttribute(
     "aria-disabled",
     "true",
   );
+  const purchased = accept(entered, { type: "buyBoon", visit, slot: slot.slot });
+  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(purchased);
   await captureScreen(page, { path: `reports/merchant-${width}.png`, fullPage: true });
   await page.reload();
   await page.getByRole("button", { name: "Continue", exact: true }).click();
@@ -181,9 +187,16 @@ test("Merchant purchase resumes without duplicate spending", async ({ page }) =>
     "aria-disabled",
     "true",
   );
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(purchased);
+  await page.getByRole("button", { name: "Owned", exact: true }).focus();
+  await page.keyboard.press("Enter");
+  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(purchased);
   await page.getByRole("button", { name: "Leave", exact: true }).click();
   await expect(page.getByRole("button", { name: "Visit Merchant", exact: true })).toHaveCount(0);
-  const saved = JSON.parse((await page.evaluate(() => localStorage.getItem("fauna.save.v1"))) ?? "{}");
+  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
+  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!));
+  expect(saved).toEqual(accept(purchased, { type: "leaveSupport", visit }));
   expect(saved.currency).toBe(0);
   expect(saved.journey.currency).toBe(20);
   expect(saved.expedition.pack).toEqual(pack);

@@ -10,10 +10,17 @@ export function createBrowserPlatform(storage?: Storage): Platform {
       async readCandidates() {
         const source = storage ?? window.localStorage;
         const results: SaveCandidate[] = [];
+        const failures: unknown[] = [];
         for (const key of [KEY, `${KEY}.backup1`, `${KEY}.backup2`]) {
-          const data = source.getItem(key);
-          if (data !== null) results.push({ source: key === KEY ? "primary" : "backup", data });
+          try {
+            const data = source.getItem(key);
+            if (data !== null) results.push({ source: key === KEY ? "primary" : "backup", data });
+          } catch (error) {
+            failures.push(error);
+          }
         }
+        if (failures.length && !results.length)
+          throw new AggregateError(failures, "Save slots are unreadable.");
         return results;
       },
       async write(data) {

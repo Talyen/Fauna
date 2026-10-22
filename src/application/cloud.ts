@@ -45,7 +45,11 @@ export async function snapshot(
     sequence,
     payload,
     hash: await sha(payload),
-    ancestors: [...new Set(parents.flatMap((p) => [p.id, ...p.ancestors]))].slice(0, 64),
+    // Retain every direct head before spending the bounded history on older ancestry.
+    ancestors: [...new Set([...parents.map((p) => p.id), ...parents.flatMap((p) => p.ancestors)])].slice(
+      0,
+      64,
+    ),
   };
   Object.freeze(record.ancestors);
   return Object.freeze({ ...record, id: await sha(body(record)) });
@@ -102,6 +106,7 @@ export function createCloud(
   let retrying = false;
   let initialized = false;
   let metadataWrites = Promise.resolve();
+  const commits = new Set<Promise<void>>();
   const scheduleRetry = () => {
     if (!alive || retryTimer || retrying || identity?.available === false || identity?.enabled === false)
       return;
@@ -326,6 +331,22 @@ export function createCloud(
         update({ status: "Pending", blocking: false, error: errorText(error) });
     }
   }
+  async function commit(data: string) {
+    if (!alive) return;
+    generation++;
+    localData = data;
+    if (!initialized) {
+      if (port && identity?.available !== false) update({ status: "Pending" });
+      return;
+    }
+    try {
+      await persist(data);
+      if (!remoteReady && identity?.available && identity.enabled !== false) update({ status: "Pending" });
+    } catch (error) {
+      remoteReady = false;
+      update({ status: "Pending", error: errorText(error) });
+    }
+  }
   return {
     get view() {
       return view;
@@ -345,28 +366,22 @@ export function createCloud(
         clearTimeout(timer);
       }
     },
-    async commit(data: string) {
-      if (!alive) return;
-      generation++;
-      localData = data;
-      if (!initialized) {
-        if (port && identity?.available !== false) update({ status: "Pending" });
-        return;
-      }
-      try {
-        await persist(data);
-        if (!remoteReady && identity?.available && identity.enabled !== false) update({ status: "Pending" });
-      } catch (error) {
-        remoteReady = false;
-        update({ status: "Pending", error: errorText(error) });
-      }
+    commit(data: string) {
+      const operation = commit(data);
+      commits.add(operation);
+      void operation.finally(() => commits.delete(operation));
+      return operation;
     },
     retry: reconcile,
     offline,
     async flush(timeout = 2000) {
       let timer: ReturnType<typeof setTimeout> | undefined;
       await Promise.race([
-        Promise.all([running, metadataWrites]),
+        (async () => {
+          await Promise.all([...commits, metadataWrites]);
+          // Commits may start an upload after hashing and local metadata persistence.
+          await running;
+        })(),
         new Promise<void>((resolve) => {
           timer = setTimeout(resolve, timeout);
         }),
