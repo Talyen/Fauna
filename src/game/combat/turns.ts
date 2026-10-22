@@ -50,7 +50,7 @@ export function finishTurn(draft: GameState, events: GameEvent[]) {
       enemy.block = retainedBlock(enemy);
       if (!startAction(enemy, events, draft)) continue;
       const target = living(draft).find((c) => c.id === enemy.targetId) ?? living(draft)[0];
-      if (!target) break;
+      if (!target) continue;
       const abilities = CARDS.filter((card) => card.species === enemy.species && enemyCanUse(card));
       const alternatives = abilities.filter((card) => card.id !== enemy.lastAbility);
       const pool = alternatives.length ? alternatives : abilities;

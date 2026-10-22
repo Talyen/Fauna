@@ -1,6 +1,6 @@
 import { CombatStatus } from "../combat/combat-status";
 import { assetUrl } from "../assets";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState, type ComponentProps, type ReactNode } from "react";
 import { BattleReadout } from "../combat/battle-readout";
 import { ArtCard } from "./art-card";
 import { ActionDetails, CreatureDetails } from "./card-details";
@@ -32,6 +32,7 @@ type CreatureProps = {
   preview?: ReactNode;
   tooltips?: boolean;
   tooltipContent?: ReactNode;
+  tooltipSide?: ComponentProps<typeof TooltipContent>["side"];
   readout?: boolean;
   invalidTarget?: boolean;
   combat?: import("../../../game/types").CombatState;
@@ -61,6 +62,7 @@ export function CreatureCard({
   preview,
   tooltips = true,
   tooltipContent,
+  tooltipSide = "top",
   readout = true,
   invalidTarget = false,
   combat,
@@ -127,7 +129,7 @@ export function CreatureCard({
           ) : (
             <Tooltip open={tooltips && tooltipOpen} onOpenChange={(open) => setTooltipOpen(tooltips && open)}>
               <TooltipTrigger asChild>{artwork}</TooltipTrigger>
-              <TooltipContent>
+              <TooltipContent side={tooltipSide}>
                 {tooltipContent ?? (
                   <CreatureDetails
                     progression={progression}

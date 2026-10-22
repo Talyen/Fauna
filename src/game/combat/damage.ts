@@ -240,7 +240,7 @@ export function* resolveHit(
   if (nextPhysical) combat(source).nextPhysical = 0;
   let damage = value;
   if (
-    attack &&
+    direct &&
     alliedSource &&
     type === "burn" &&
     state.battle &&
