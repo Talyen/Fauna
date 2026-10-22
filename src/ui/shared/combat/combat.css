@@ -1,0 +1,73 @@
+.battle-readout {
+  height: 36px;
+  padding-top: var(--space-2);
+  width: 100%;
+}
+
+.combat-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding-top: var(--space-1);
+  min-height: 20px;
+  font-size: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.combat-stats > span,
+.damage-value {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.combat-stats svg,
+.damage-value svg {
+  width: 14px;
+  height: 14px;
+}
+
+.health-forecast {
+  position: relative;
+  width: calc(100% - var(--radius) * 2);
+  margin-inline: auto;
+}
+
+.knockout-preview {
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  left: calc(100% + var(--space-1));
+  top: 50%;
+  translate: 0 -50%;
+}
+
+.combat-status {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--screen-item-gap);
+  font-size: var(--text-secondary);
+}
+
+.combat-status .combat-effect-page,
+.combat-status .pagination,
+.combat-status > .paged-content {
+  display: flex;
+  align-items: center;
+  gap: var(--screen-item-gap);
+}
+
+.combat-status .pagination > span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  clip-path: inset(50%);
+}
+
+.combat-status-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--screen-item-gap);
+}

@@ -1,9 +1,9 @@
 import { expect, it, vi } from "vitest";
 import { produce } from "immer";
-import { executeAbility } from "../../../src/game/abilities";
-import { abilityExtras } from "../../../src/game/ability-values";
+import { executeAbility } from "../../../src/game/combat/abilities";
+import { abilityExtras } from "../../../src/game/combat/ability-values";
 import { CARDS, definition, enemyCanUse, enemyCard, cardText, species } from "../../../src/game/content";
-import { freshCombat, hit } from "../../../src/game/combat";
+import { freshCombat, hit } from "../../../src/game/combat/index";
 import { actionValue, enemyAbilityValue } from "../../../src/game/rules";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";

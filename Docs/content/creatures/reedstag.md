@@ -1,0 +1,19 @@
+# Reedstag
+
+[Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
+
+Reedstag is a 30 Health marsh guardian available through starter drafts, ordinary encounters and recruitment. All three abilities cost 1 Mana:
+
+- **Reed Rush:** Deal 6 Nature damage
+- **Reed Shelter:** Gain 3 Block and 3 Thorns
+- **Mending Spring:** Restore 4 Health and Cleanse the most injured ally
+
+Mending Spring selects the living deployed ally with the lowest remaining Health percentage, including Reedstag; battlefield order breaks ties. Healing and removal of all harmful effects apply to that same recipient, selected before healing. Full-Health allies remain eligible for Cleanse. Backup and knocked-out creatures are excluded. Enemy healing and cleansing select from living enemies and retain authored healing and explicit room power.
+
+**Reedguard** reads "Block and Thorns have a 20% chance to be shared with allies" and scales through 40%, 60%, 80% and 90% to "Block and Thorns are shared with allies" at five stars. Each positive Block or Thorns gain rolls separately, once for all other living deployed allies; success copies the amount actually gained without spending Reedstag's own gain. Card, talent and Boon grants participate. Shared gains never trigger further sharing, including through another Reedstag. Backup and knockouts neither share nor receive; enemies use the 20% base tier and share only with living enemies. Guaranteed sharing and gains with no eligible recipients consume no sharing RNG.
+
+## Artwork provenance and validation record
+
+These retained notes record source selection and verification at implementation time; they do not establish current rendered acceptance
+
+The unchanged landscape portrait (`05.png`) and three portrait ability PNGs come from the user's [Reedstag Drive folder](https://drive.google.com/drive/folders/1VpBD8PLbx5hEHMJTi1ZZv9NvCK_IRQRt). Each original URL is recorded in the asset manifest. The shared preparation pipeline retains native 4:3 creature and 3:4 action compositions. Source artwork was visually inspected; in-game rendered review remains pending.

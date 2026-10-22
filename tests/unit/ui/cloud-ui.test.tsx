@@ -4,11 +4,11 @@ import { render, screen, cleanup } from "@testing-library/react";
 import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import type { Platform } from "../../../src/platform/ports";
-import type { InputAction } from "../../../src/ui/shared/input";
+import type { InputAction } from "../../../src/ui/shared/navigation/input";
 import { App } from "../../../src/ui/App";
 const hook = vi.hoisted(() => ({ send: undefined as ((action: InputAction) => void) | undefined }));
-vi.mock("../../../src/ui/shared/input", async (original) => ({
-  ...(await original<typeof import("../../../src/ui/shared/input")>()),
+vi.mock("../../../src/ui/shared/navigation/input", async (original) => ({
+  ...(await original<typeof import("../../../src/ui/shared/navigation/input")>()),
   connectInput: (handler: (action: InputAction) => void) => {
     hook.send = handler;
     return () => {

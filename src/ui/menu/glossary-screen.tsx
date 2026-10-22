@@ -1,6 +1,6 @@
 import { GLOSSARY } from "../../game/glossary";
-import { Screen, ScreenHeading } from "../shared/screen";
-import { PagedItems } from "../shared/pagination";
+import { Screen, ScreenHeading } from "../shared/navigation/screen";
+import { PagedItems } from "../shared/navigation/pagination";
 import { KeywordText } from "../shared/keyword-text";
 export function GlossaryScreen({ scale, back }: { scale: number; back: () => void }) {
   return (

@@ -1,7 +1,7 @@
 import { produce } from "immer";
 import { expect, it } from "vitest";
 import { CARDS, cardText, definition, species, type SpeciesId } from "../../../src/game/content";
-import { freshCombat, hit, tickStatuses } from "../../../src/game/combat";
+import { freshCombat, hit, tickStatuses } from "../../../src/game/combat/index";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { COMBAT_PACKS, encounterSource } from "../../../src/game/encounters";
 import { definitionKeywords } from "../../../src/game/keywords";

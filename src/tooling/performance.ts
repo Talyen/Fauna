@@ -1,6 +1,6 @@
 import { createGame, dispatch } from "../game/engine";
 import { CARDS, species, type SpeciesId, definition } from "../game/content";
-import { freshCombat } from "../game/combat";
+import { freshCombat } from "../game/combat/index";
 import { encodeSave, decodeSave } from "../game/save";
 import { battleChoices } from "../application/battle-policy";
 import type { Command, GameState } from "../game/types";

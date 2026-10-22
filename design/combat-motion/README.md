@@ -38,7 +38,7 @@ Use a dedicated presentation wrapper so wind-up/swing/recoil cannot overwrite Ar
 
 ## Implementation ownership and acceptance
 
-Fauna uses `src/ui/battle/combat-impact.ts` and `src/ui/battle/combat-feedback.tsx` as presentation owners, with separate motion/reaction wrappers in `src/ui/shared/cards.tsx`. Committed action events carry attack/support/swap facts. Ownership tests cover interruption, reduced motion and disposal. Required checks include attack versus support classification, blocked/zero damage, periodic effects, repeated and overlapping actions, interruption/disposal, transform isolation, reduced motion and unchanged gameplay/save behavior. Render actual battle frames, including both directions and short viewports. Browser simulation, desktop, physical controller and CI acceptance remain separate.
+Fauna uses `src/ui/battle/combat-impact.ts` and `src/ui/battle/combat-feedback.tsx` as presentation owners, with separate motion/reaction wrappers in `src/ui/shared/cards/cards.tsx`. Committed action events carry attack/support/swap facts. Ownership tests cover interruption, reduced motion and disposal. Required checks include attack versus support classification, blocked/zero damage, periodic effects, repeated and overlapping actions, interruption/disposal, transform isolation, reduced motion and unchanged gameplay/save behavior. Render actual battle frames, including both directions and short viewports. Browser simulation, desktop, physical controller and CI acceptance remain separate.
 
 ## Production adoption
 

@@ -1,16 +1,16 @@
-import { Screen, ScreenHeading } from "../shared/screen";
+import { Screen, ScreenHeading } from "../shared/navigation/screen";
 
 import { RestRecovery } from "./campfire";
 import { canVisitCampfire, canRecruitDestination } from "../../game/support";
 import { SupportOffer } from "./support-screen";
 import { assetUrl } from "../shared/assets";
-import { CreatureCard } from "../shared/cards";
+import { CreatureCard } from "../shared/cards/cards";
 import { KeywordText } from "../shared/keyword-text";
 import { CARDS, cardText, species } from "../../game/content";
-import { CreatureDetails } from "../shared/card-details";
+import { CreatureDetails } from "../shared/cards/card-details";
 
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
-import { ArtCard } from "../shared/art-card";
+import { ArtCard } from "../shared/cards/art-card";
 
 import type { Command, GameState, GameEvent } from "../../game/types";
 import type { Inspection } from "../shared/inspection-model";

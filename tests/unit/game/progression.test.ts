@@ -1,4 +1,4 @@
-import { freshCombat } from "../../../src/game/combat";
+import { freshCombat } from "../../../src/game/combat/index";
 import { describe, it, expect } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../../src/game/engine";

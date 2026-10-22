@@ -2,7 +2,7 @@
 import { afterEach, expect, it, vi } from "vitest";
 import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { PageControls, PagedItems } from "../../../src/ui/shared/pagination";
+import { PageControls, PagedItems } from "../../../src/ui/shared/navigation/pagination";
 import { Button } from "../../../src/components/ui/button";
 
 afterEach(cleanup);

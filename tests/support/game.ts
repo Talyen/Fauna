@@ -1,5 +1,5 @@
-import { freshCombat, combat } from "../../src/game/combat";
-import { controlled } from "../../src/game/combat";
+import { freshCombat, combat } from "../../src/game/combat/index";
+import { controlled } from "../../src/game/combat/index";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
 import { CARDS, definition, species, type SpeciesId } from "../../src/game/content";

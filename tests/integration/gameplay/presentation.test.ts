@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { previewPlay } from "../../../src/game/preview";
-import { combat, hit } from "../../../src/game/combat";
+import { combat, hit } from "../../../src/game/combat/index";
 import { dispatch } from "../../../src/game/engine";
 import { appendFeedback, feedbackFrames } from "../../../src/ui/battle/combat-feedback-model";
 import type { GameEvent } from "../../../src/game/types";

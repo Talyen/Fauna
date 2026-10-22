@@ -1,8 +1,8 @@
 import { BOONS, type BoonId } from "../../game/progression";
-import { ArtCard } from "../shared/art-card";
+import { ArtCard } from "../shared/cards/art-card";
 import { assetUrl } from "../shared/assets";
 import { KeywordText } from "../shared/keyword-text";
-import { PagedItems } from "../shared/pagination";
+import { PagedItems } from "../shared/navigation/pagination";
 export function OwnedBoons({ boons }: { boons: readonly BoonId[] }) {
   return (
     <PagedItems items={boons} pageSize={2} className="boon-options" label="Boon pages">

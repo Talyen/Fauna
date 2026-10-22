@@ -23,8 +23,8 @@ import { isolatedDesktopEnvironment } from "../../../scripts/lib/desktop-environ
 it("finds gameplay and presentation owners from current modules and focused suites", () => {
   const root = path.resolve(import.meta.dirname, "../../..");
   for (const file of [
-    "src/game/abilities.ts",
-    "src/game/ability-values.ts",
+    "src/game/combat/abilities.ts",
+    "src/game/combat/ability-values.ts",
     "src/game/card-zones.ts",
     "src/game/random.ts",
     "tests/unit/game/combat.test.ts",

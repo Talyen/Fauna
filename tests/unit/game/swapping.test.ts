@@ -1,7 +1,7 @@
-import { freshCombat } from "../../../src/game/combat";
+import { freshCombat } from "../../../src/game/combat/index";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
-import { combat } from "../../../src/game/combat";
+import { combat } from "../../../src/game/combat/index";
 import { dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { CARDS, species } from "../../../src/game/content";

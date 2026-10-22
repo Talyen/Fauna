@@ -1,5 +1,5 @@
-import { Screen, ScreenHeading } from "../shared/screen";
-import { PagedItems } from "../shared/pagination";
+import { Screen, ScreenHeading } from "../shared/navigation/screen";
+import { PagedItems } from "../shared/navigation/pagination";
 
 import { ResultPresentation } from "./result-presentation";
 
@@ -8,9 +8,9 @@ import { assetUrl } from "../shared/assets";
 import { useLayoutEffect, useRef, useState } from "react";
 import { Button } from "../../components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
-import { CreatureCard } from "../shared/cards";
-import { ArtCard } from "../shared/art-card";
-import { returnFocus } from "../shared/focus";
+import { CreatureCard } from "../shared/cards/cards";
+import { ArtCard } from "../shared/cards/art-card";
+import { returnFocus } from "../shared/navigation/focus";
 import { species, type SpeciesId } from "../../game/content";
 import { creatureStars, MAX_CREATURE_STARS, BOONS } from "../../game/progression";
 import type { Command, GameState } from "../../game/types";

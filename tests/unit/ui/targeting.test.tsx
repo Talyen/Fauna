@@ -4,10 +4,10 @@ import { act, cleanup, fireEvent, render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
 import { BattleScreen } from "../../../src/ui/battle/battle-screen";
-import type { Controls } from "../../../src/ui/shared/input";
+import type { Controls } from "../../../src/ui/shared/navigation/input";
 import { TargetPreview } from "../../../src/ui/battle/target-preview";
 import { assetUrl } from "../../../src/ui/shared/assets";
-import { moveFocus } from "../../../src/ui/shared/input";
+import { moveFocus } from "../../../src/ui/shared/navigation/input";
 import { previewCard } from "../../../src/game/engine";
 import { produce } from "immer";
 import * as content from "../../../src/game/content";

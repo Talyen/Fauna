@@ -1,4 +1,4 @@
-import { Screen } from "./screen";
+import { Screen } from "./navigation/screen";
 import { Component, type ReactNode } from "react";
 import type { Diagnostics } from "../../application/diagnostics";
 import { Loading } from "./loading";

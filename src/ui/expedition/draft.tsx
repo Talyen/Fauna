@@ -1,11 +1,11 @@
-import { Screen, ScreenHeading } from "../shared/screen";
+import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { starterCount } from "../../game/progression";
 
-import { StarterDetails } from "../shared/card-details";
+import { StarterDetails } from "../shared/cards/card-details";
 
 import { Check } from "lucide-react";
 import { Button } from "../../components/ui/button";
-import { CreatureCard } from "../shared/cards";
+import { CreatureCard } from "../shared/cards/cards";
 
 import { species } from "../../game/content";
 import type { Command, GameState } from "../../game/types";

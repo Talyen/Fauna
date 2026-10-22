@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Screen } from "../shared/screen";
+import { Screen } from "../shared/navigation/screen";
 export function HomeScreen({ children }: { children: ReactNode }) {
   return (
     <Screen className="home-screen menu-layout">

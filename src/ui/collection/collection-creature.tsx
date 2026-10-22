@@ -3,12 +3,12 @@ import { CARDS, species, type SpeciesId } from "../../game/content";
 import { creaturePassive, creatureStars } from "../../game/progression";
 import type { GameState } from "../../game/types";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs";
-import { ArtCard } from "../shared/art-card";
+import { ArtCard } from "../shared/cards/art-card";
 import { assetUrl } from "../shared/assets";
-import { CardRules } from "../shared/combat-values";
+import { CardRules } from "../shared/combat/combat-values";
 import { KeywordText } from "../shared/keyword-text";
-import { PagedItems } from "../shared/pagination";
-import { Screen, ScreenHeading } from "../shared/screen";
+import { PagedItems } from "../shared/navigation/pagination";
+import { Screen, ScreenHeading } from "../shared/navigation/screen";
 /** Collection describes the species kit, independent of journey cards and battle modifiers. */
 export function CollectionCreature({
   game,

@@ -5,7 +5,7 @@ import userEvent from "@testing-library/user-event";
 import { App } from "../../../src/ui/App";
 import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
-import { moveFocus } from "../../../src/ui/shared/input";
+import { moveFocus } from "../../../src/ui/shared/navigation/input";
 
 beforeEach(() => {
   vi.stubGlobal(

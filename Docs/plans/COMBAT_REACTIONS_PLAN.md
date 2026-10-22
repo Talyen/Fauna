@@ -14,14 +14,14 @@ The recent [ability resolution work](COMBAT_RESOLUTION_PLAN.md) removed the sepa
 
 ## Evidence and priority
 
-| Evidence                                                                                                                                                                                                        | Architectural consequence                                                                                                                 |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `hit` and `resolveHit` in [combat.ts](../../src/game/combat.ts) distinguish direct attacks, procs, periodic damage, retaliation, derived damage, bounces and Resonance with overlapping optional Boolean flags  | Reaction eligibility is inferred from repeated flag combinations; callers can express combinations without a named gameplay meaning       |
-| `resolveHit` invokes `healthThresholds`, nested `hit` calls, healing, status application and Armor-break reactions before returning the original Health loss                                                    | A parent calculation resumes after children have changed the same combatants; captured values and live values need different lifetimes    |
-| `tickStatuses` captures Bleed payouts before damage and explicitly avoids restoring a status removed during a threshold Cleanse                                                                                 | Mutation order is part of the gameplay contract, but lives in local snapshots and defensive checks                                        |
-| `triggerArmorBreak` is called from packet resolution, Purge, ability Armor melting and Leech Armor theft in [abilities.ts](../../src/game/abilities.ts)                                                         | Detecting and delivering one semantic reaction is spread across several mutation paths                                                    |
-| [combat-reactions.test.ts](../../tests/unit/game/combat-reactions.test.ts) protects one Molten Shell burst after Open Flank plus Erosion, persistent threshold Cleanse, and Bleed healing earned before Cleanse | These are concrete examples of interaction cost; the tests establish intended behavior without establishing coverage of every combination |
-| [combat-feedback.tsx](../../src/ui/battle/combat-feedback.tsx) consumes ordered committed events, while [session.ts](../../src/application/session.ts) saves and publishes a whole command result               | Reordering reactions can change feedback, RNG and saved outcomes even when final damage appears equal                                     |
+| Evidence                                                                                                                                                                                                             | Architectural consequence                                                                                                                 |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `hit` and `resolveHit` in [combat.ts](../../src/game/combat/index.ts) distinguish direct attacks, procs, periodic damage, retaliation, derived damage, bounces and Resonance with overlapping optional Boolean flags | Reaction eligibility is inferred from repeated flag combinations; callers can express combinations without a named gameplay meaning       |
+| `resolveHit` invokes `healthThresholds`, nested `hit` calls, healing, status application and Armor-break reactions before returning the original Health loss                                                         | A parent calculation resumes after children have changed the same combatants; captured values and live values need different lifetimes    |
+| `tickStatuses` captures Bleed payouts before damage and explicitly avoids restoring a status removed during a threshold Cleanse                                                                                      | Mutation order is part of the gameplay contract, but lives in local snapshots and defensive checks                                        |
+| `triggerArmorBreak` is called from packet resolution, Purge, ability Armor melting and Leech Armor theft in [abilities.ts](../../src/game/combat/abilities.ts)                                                       | Detecting and delivering one semantic reaction is spread across several mutation paths                                                    |
+| [combat-reactions.test.ts](../../tests/unit/game/combat-reactions.test.ts) protects one Molten Shell burst after Open Flank plus Erosion, persistent threshold Cleanse, and Bleed healing earned before Cleanse      | These are concrete examples of interaction cost; the tests establish intended behavior without establishing coverage of every combination |
+| [combat-feedback.tsx](../../src/ui/battle/combat-feedback.tsx) consumes ordered committed events, while [session.ts](../../src/application/session.ts) saves and publishes a whole command result                    | Reordering reactions can change feedback, RNG and saved outcomes even when final damage appears equal                                     |
 
 I rank this above the other candidates inspected:
 
@@ -48,14 +48,14 @@ The stack, ancestry and intermediate results are transient execution data. They 
 
 Proposed ownership, with new modules under `src/game/` and filenames finalized during implementation:
 
-| Owner                                                | Responsibility                                                                                    |
-| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `combat-policy.ts` (new)                             | Packet origin types and exhaustive reaction eligibility                                           |
-| `combat-resolution.ts` (new)                         | Synchronous operation stack, continuations and reaction ordering                                  |
-| Existing [combat.ts](../../src/game/combat.ts)       | Focused calculations and public combat entry points, delegating nested execution to the resolver  |
-| Existing [abilities.ts](../../src/game/abilities.ts) | Ability targets, repeats, primary effects and extras; every root effect completes before the next |
-| Existing [engine.ts](../../src/game/engine.ts)       | Validation, Mana, card zones, XP, turn windows and once-only battle settlement                    |
-| Existing application and presentation                | Save/publication ordering and consumption of committed results                                    |
+| Owner                                                       | Responsibility                                                                                    |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `combat-policy.ts` (new)                                    | Packet origin types and exhaustive reaction eligibility                                           |
+| `combat-resolution.ts` (new)                                | Synchronous operation stack, continuations and reaction ordering                                  |
+| Existing [combat.ts](../../src/game/combat/index.ts)        | Focused calculations and public combat entry points, delegating nested execution to the resolver  |
+| Existing [abilities.ts](../../src/game/combat/abilities.ts) | Ability targets, repeats, primary effects and extras; every root effect completes before the next |
+| Existing [engine.ts](../../src/game/engine.ts)              | Validation, Mana, card zones, XP, turn windows and once-only battle settlement                    |
+| Existing application and presentation                       | Save/publication ordering and consumption of committed results                                    |
 
 Keep dependency direction one way: public combat entry points call the resolver; the resolver consumes lower-level policy/calculations. Do not create a combat/resolver import cycle. Add modules only for concrete responsibilities; splitting the large file alone is not success.
 

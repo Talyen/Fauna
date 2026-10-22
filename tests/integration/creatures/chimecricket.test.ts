@@ -8,12 +8,12 @@ import {
   removeEffects,
   startAction,
   tickStatuses,
-} from "../../../src/game/combat";
+} from "../../../src/game/combat/index";
 import { createGame, dispatch, previewCard } from "../../../src/game/engine";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { battleChoices } from "../../../src/application/battle-policy";
-import { combatStatuses } from "../../../src/ui/shared/combat-status";
+import { combatStatuses } from "../../../src/ui/shared/combat/combat-status";
 import { accept, teamRun, winBattle } from "../../support/game";
 
 function ready(id = "chimecricket-attack", seed = 1) {

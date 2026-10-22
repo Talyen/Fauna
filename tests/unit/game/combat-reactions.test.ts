@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { freshCombat, hit, removeEffects, tickStatuses } from "../../../src/game/combat";
+import { freshCombat, hit, removeEffects, tickStatuses } from "../../../src/game/combat/index";
 import { species } from "../../../src/game/content";
 import type { GameEvent } from "../../../src/game/types";
 import { run } from "../../support/game";

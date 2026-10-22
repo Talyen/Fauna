@@ -3,7 +3,7 @@ import { produce } from "immer";
 import { CARDS, cardText, definition } from "../../../src/game/content";
 import { validateCatalog, contentCatalog } from "../../../src/game/content-validation";
 import { createGame, dispatch, previewCard } from "../../../src/game/engine";
-import { freshCombat } from "../../../src/game/combat";
+import { freshCombat } from "../../../src/game/combat/index";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { battleChoices } from "../../../src/application/battle-policy";

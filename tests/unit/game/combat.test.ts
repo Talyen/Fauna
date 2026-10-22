@@ -8,7 +8,7 @@ import {
   removeEffects,
   startAction,
   tickStatuses,
-} from "../../../src/game/combat";
+} from "../../../src/game/combat/index";
 import { dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { cardKeywords } from "../../../src/game/progression";

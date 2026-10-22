@@ -1,13 +1,13 @@
 import { KeywordIcon } from "../shared/keyword-icon";
-import { sharedDodgeChance } from "../../game/combat";
-import { combatStatuses } from "../shared/combat-status";
+import { sharedDodgeChance } from "../../game/combat/index";
+import { combatStatuses } from "../shared/combat/combat-status";
 import { KEYWORD_DEFINITIONS } from "../../game/keywords";
 import { KeywordText } from "../shared/keyword-text";
 import { Heart, Shield } from "lucide-react";
 import type { CommandResult, GameState } from "../../game/types";
 import { species } from "../../game/content";
-import { BattleReadout } from "../shared/battle-readout";
-import { DamageValue } from "../shared/combat-values";
+import { BattleReadout } from "../shared/combat/battle-readout";
+import { DamageValue } from "../shared/combat/combat-values";
 export function TargetPreview({
   before,
   result,

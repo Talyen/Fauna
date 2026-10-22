@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef, type RefObject } from "react";
 import { createPortal } from "react-dom";
 import { Heart, Shield, Skull, Sparkles, Timer } from "lucide-react";
 import { isFeedbackNotice, type Burst, type FeedbackEntry } from "./combat-feedback-model";
-import { DamageValue } from "../shared/combat-values";
+import { DamageValue } from "../shared/combat/combat-values";
 import { KeywordIcon } from "../shared/keyword-icon";
 import { motionValue } from "../shared/motion-values";
 function FeedbackNumber({ entry: e }: { entry: FeedbackEntry }) {

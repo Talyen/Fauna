@@ -2,9 +2,9 @@
 import { afterEach, expect, it, vi } from "vitest";
 import { act, cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { PagedItems } from "../../../src/ui/shared/pagination";
+import { PagedItems } from "../../../src/ui/shared/navigation/pagination";
 import { Button } from "../../../src/components/ui/button";
-import { ArtCard } from "../../../src/ui/shared/art-card";
+import { ArtCard } from "../../../src/ui/shared/cards/art-card";
 
 afterEach(() => {
   cleanup();

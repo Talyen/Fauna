@@ -2,8 +2,8 @@ import { Button } from "../../components/ui/button";
 import { species, type SpeciesId } from "../../game/content";
 import type { GameState } from "../../game/types";
 import type { Inspection } from "../shared/inspection-model";
-import { CreatureCard } from "../shared/cards";
-import { Screen, ScreenHeading } from "../shared/screen";
+import { CreatureCard } from "../shared/cards/cards";
+import { Screen, ScreenHeading } from "../shared/navigation/screen";
 export function UnlockScreen({
   game,
   kind,

@@ -4,7 +4,7 @@ import { expect, it } from "vitest";
 import { dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { BOONS, TALENTS, KEYWORDS } from "../../../src/game/progression";
-import { freshCombat } from "../../../src/game/combat";
+import { freshCombat } from "../../../src/game/combat/index";
 import { policy, teamRun, victoryReady } from "../../support/game";
 import type { SpeciesId } from "../../../src/game/content";
 

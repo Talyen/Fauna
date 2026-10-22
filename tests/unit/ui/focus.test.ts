@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { afterEach, expect, it, vi } from "vitest";
-import { moveFocus } from "../../../src/ui/shared/input";
-import { returnFocus } from "../../../src/ui/shared/focus";
+import { moveFocus } from "../../../src/ui/shared/navigation/input";
+import { returnFocus } from "../../../src/ui/shared/navigation/focus";
 
 afterEach(() => {
   document.body.replaceChildren();
