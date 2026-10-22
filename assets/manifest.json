@@ -1615,6 +1615,50 @@
       "aspect": [3, 4],
       "provenance": "Unchanged Stillara artwork selected from user Google Drive: https://drive.google.com/file/d/1hNbzH7d1MxNJWfir9lY3V-OhuyyZD7ex/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "creature.cadenza",
+      "origin": "repository",
+      "source": "public/art/cadenza/portrait.png",
+      "output": "art/cadenza/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Cadenza artwork selected from user Google Drive: https://drive.google.com/file/d/1yDX3s-RRX3QqNCDpw3TlwdgIcdU6UyBt/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.cadenza.resonant-well",
+      "origin": "repository",
+      "source": "public/art/cadenza/resonant-well.png",
+      "output": "art/cadenza/resonant-well.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Cadenza artwork selected from user Google Drive: https://drive.google.com/file/d/1vgDjrFoQxDObhYYmRJw6pVNM2n2rUQrA/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.cadenza.echoes-remember",
+      "origin": "repository",
+      "source": "public/art/cadenza/echoes-remember.png",
+      "output": "art/cadenza/echoes-remember.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Cadenza artwork selected from user Google Drive: https://drive.google.com/file/d/1HvnB3M3p9MnCxuAUWgU8998PPxSXh0iS/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.cadenza.rousing-refrain",
+      "origin": "repository",
+      "source": "public/art/cadenza/rousing-refrain.png",
+      "output": "art/cadenza/rousing-refrain.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Cadenza artwork selected from user Google Drive: https://drive.google.com/file/d/1ipaW39quO9-aprgGGoQ6GKRUqfzxMDh6/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

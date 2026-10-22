@@ -1,4 +1,4 @@
-import { settleScreen } from "./rendered-evidence";
+import { captureFrame, settleScreen } from "./rendered-evidence";
 import { expectScrollFree, LAYOUT_CASES } from "./layout-contract";
 import { test, expect, type Page } from "@playwright/test";
 import { feedbackBattle } from "../unit/helpers";
@@ -119,12 +119,12 @@ for (const [width, height, scale, reduced] of [
     await expectReadable(page);
     // These screenshots intentionally capture active feedback rather than a settled screen.
     await expectScrollFree(page);
-    await page.screenshot({ path: `reports/combat-feedback-${width}-${height}-${scale}-${reduced}.png` });
+    await captureFrame(page, { path: `reports/combat-feedback-${width}-${height}-${scale}-${reduced}.png` });
     if (!reduced) {
       await freezeFeedback(page, 900);
       await expectReadable(page);
       await expectScrollFree(page);
-      await page.screenshot({ path: `reports/combat-feedback-rise-${width}-${height}-${scale}.png` });
+      await captureFrame(page, { path: `reports/combat-feedback-rise-${width}-${height}-${scale}.png` });
     }
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.clock.runFor(32);
@@ -144,7 +144,7 @@ for (const [width, height, scale, reduced] of [
     await freezeFeedback(page);
     await expectReadable(page);
     await expectScrollFree(page);
-    await page.screenshot({
+    await captureFrame(page, {
       path: `reports/combat-feedback-turn-${width}-${height}-${scale}-${reduced}.png`,
     });
     await page.getByRole("button", { name: "Open menu" }).click();

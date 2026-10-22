@@ -10,7 +10,7 @@ import { createSession } from "../../src/application/session";
 import { createBrowserPlatform } from "../../src/platform/browser";
 import { createGame } from "../../src/game/engine";
 import { species } from "../../src/game/content";
-import { accept, recruitChoice, run, winBattle } from "./helpers";
+import { accept, recruitChoice, run, winBattle, starterJourney } from "./helpers";
 
 beforeEach(() => {
   vi.stubGlobal(
@@ -112,9 +112,7 @@ it("makes Deck available in drafting, rewards and Merchant without committing in
 });
 
 it("shows committed rest recovery while leaving the next encounter immediately playable", async () => {
-  const started = accept(accept(createGame(7), { type: "draft", species: "emberback" }), {
-    type: "start",
-  });
+  const started = starterJourney(7, "emberback");
   const injured = produce(started, (draft) => {
     draft.team[0]!.health = 10;
   });

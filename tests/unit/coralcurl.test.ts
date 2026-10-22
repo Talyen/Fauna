@@ -42,7 +42,7 @@ it("plays the authored one-Mana kit with preview parity, Water XP and current sa
     expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
     if (id.endsWith("guard")) expect(result.state.team[0]!.block).toBe(6);
     if (id.endsWith("attack")) {
-      expect(result.state.battle!.enemies[0]!.health).toBe(12);
+      expect(result.state.battle!.enemies[0]!.health).toBe(game.battle!.enemies[0]!.health - 6);
       expect(result.state.battleXP.water).toBe(1);
     }
     if (id.endsWith("swap"))
@@ -61,8 +61,8 @@ it.each([1, 2, 3, 4, 5, 6])("bursts for tier %i against the attacker even on exa
     hit(game, attacker, target, 6, "water", []);
     expect(target.block).toBe(0);
     expect(target.health).toBe(species("coralcurl").health);
-    expect(attacker.health).toBe(18 - amount);
-    expect(game.battle!.enemies[1]!.health).toBe(16);
+    expect(attacker.health).toBe(attacker.maxHealth - amount);
+    expect(game.battle!.enemies[1]!.health).toBe(game.battle!.enemies[1]!.maxHealth);
     expect(game.battleXP.water).toBeUndefined();
   });
 });
@@ -79,7 +79,7 @@ it("does not burst on partial absorption, Dodge, Purge or retaliation", () => {
           blindMiss: mode === "dodge",
           retaliation: mode === "retaliation",
         });
-      expect(attacker.health).toBe(18);
+      expect(attacker.health).toBe(attacker.maxHealth);
     });
   }
 });
@@ -94,7 +94,7 @@ it("uses enemy base Bubbleburst and prevents a bubble retaliation loop", () => {
     enemy.combat.controlled = "stun";
     actor.block = 1;
     hit(game, actor, enemy, 6, "water", []);
-    expect(enemy.health).toBe(18);
+    expect(enemy.health).toBe(enemy.maxHealth);
     expect(actor.block).toBe(0);
     expect(actor.health).toBe(28);
   });
@@ -110,7 +110,7 @@ it("captures Block break before Second Wind or another defense restores protecti
     target.combat!.controlled = "stun";
     hit(game, attacker, target, 4, "physical", []);
     expect(target.block).toBe(3);
-    expect(attacker.health).toBe(17);
+    expect(attacker.health).toBe(attacker.maxHealth - 1);
   });
 });
 
@@ -160,7 +160,7 @@ it("Water bypasses Armor reduction, obeys Block and leaves no damage status", ()
     enemy.combat.armor = 20;
     enemy.combat.controlled = "stun";
     hit(game, game.team[0]!, enemy, 6, "water", []);
-    expect(enemy.health).toBe(14);
+    expect(enemy.health).toBe(enemy.maxHealth - 4);
     expect(enemy.block).toBe(0);
     expect(enemy.combat.armor).toBe(19);
     expect([enemy.combat.burn, enemy.combat.poison, enemy.combat.bleed, enemy.combat.freeze]).toEqual([
@@ -191,7 +191,7 @@ it("gates all three Water talent rows and applies Pressure, High Tide, Seafoam a
     enemy.combat.controlled = "stun";
     enemy.combat.armor = 10;
     hit(game, actor, enemy, 6, "water", []);
-    expect(enemy.health).toBe(9);
+    expect(enemy.health).toBe(enemy.maxHealth - 9);
     expect(actor.block).toBe(5);
     expect(enemy.combat.armor).toBe(7);
   });

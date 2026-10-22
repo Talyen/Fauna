@@ -6,7 +6,7 @@ import { ActionCard } from "../../src/ui/cards";
 import { TooltipProvider } from "../../src/components/ui/tooltip";
 import { produce } from "immer";
 import { createGame } from "../../src/game/engine";
-import { accept, run, teamRun, winBattle, bossReward } from "./helpers";
+import { accept, run, teamRun, starterJourney, winBattle, bossReward } from "./helpers";
 import { encounterSource } from "../../src/game/encounters";
 import { BOONS } from "../../src/game/progression";
 import { TargetPreview } from "../../src/ui/target-preview";
@@ -89,7 +89,7 @@ describe("player interface", () => {
     await session.dispose();
   });
   it("shows stacked currency and Journey-style keyword level progress on Victory", async () => {
-    const started = accept(accept(createGame(7), { type: "draft", species: "emberback" }), { type: "start" });
+    const started = starterJourney(7, "emberback");
     const battle = produce(accept(started, { type: "beginBattle" }), (d) => {
       d.keywordXP.physical = 23;
     });

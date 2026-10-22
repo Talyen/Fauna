@@ -36,18 +36,18 @@ Before removal, ignored artifacts (reports, screenshots, logs and other ignored 
 
 ## Verification
 
-The [CI speed improvement plan](Docs/CI_SPEED_PLAN.md) describes proposed parallel jobs, browser sharding and rollout acceptance criteria; the execution policy below remains current.
+The [CI speed improvement plan](Docs/CI_SPEED_PLAN.md) describes parallel jobs, browser sharding, measurements and rollout acceptance criteria.
 
-| When                | Command                                                         | Evidence                                                                                |
-| ------------------- | --------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| Local smoke         | `npm test`                                                      | Fixed Node smoke only                                                                   |
-| Task handoff        | `npm run check -- <task-owned paths>`                           | Selected formatting and fixed Node smoke                                                |
-| Dirty set           | `npm run check -- --diff`                                       | Includes tracked and untracked changes                                                  |
-| Committed task      | `npm run check -- --base <commit>`                              | Combined committed and dirty changes                                                    |
-| Documentation edits | `npm run docs:check`                                            | Local links, anchors, file references, npm commands and document reachability           |
-| Focused regression  | `npm run test:full -- <test paths>`                             | Only the named unit suites                                                              |
-| CI                  | `npm run verify:full`                                           | Full static, documentation, all units/DOM, build, bundle allowance and browser journeys |
-| Windows CI          | `npm run package:win` then `npm run test:desktop -- --packaged` | Unpacked x64 build and packaged startup/save/resume/isolation                           |
+| When                | Command                                                         | Evidence                                                                                                             |
+| ------------------- | --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| Local smoke         | `npm test`                                                      | Fixed Node smoke only                                                                                                |
+| Task handoff        | `npm run check -- <task-owned paths>`                           | Selected formatting and fixed Node smoke                                                                             |
+| Dirty set           | `npm run check -- --diff`                                       | Includes tracked and untracked changes                                                                               |
+| Committed task      | `npm run check -- --base <commit>`                              | Combined committed and dirty changes                                                                                 |
+| Documentation edits | `npm run docs:check`                                            | Local links, anchors, file references, npm commands and document reachability                                        |
+| Focused regression  | `npm run test:full -- <test paths>`                             | Only the named unit suites                                                                                           |
+| CI                  | Parallel jobs in [the workflow](.github/workflows/ci.yml)       | Full static, documentation, content, all units/DOM, build, bundle allowance, browser journeys and interaction replay |
+| Windows CI          | `npm run package:win` then `npm run test:desktop -- --packaged` | Unpacked x64 build and packaged startup/save/resume/isolation                                                        |
 
 `npm run verify` aliases the local check. Use explicit paths in a mixed checkout. Markdown-only local checks skip smoke; run the documentation gate separately. Integration automatically adds the documentation gate when its combined diff changes Markdown. The documentation gate reads Git-listed files, skips deleted files, treats README and AGENTS as entry points, and checks commands in fenced examples. Prefix historical or foreign inline source references with their repository name, such as `Alchemy: src/example.ts`, rather than implying they are current Fauna files. Link every durable document from an existing owner or index.
 
@@ -55,7 +55,15 @@ Local smoke has one worker, a 512 MiB heap, lower process priority when availabl
 
 Full unit runs, static checks, builds, browser/desktop journeys, packaging, coverage and performance runs are CI-owned by default. Agents run them locally only on explicit request. Do not substitute raw tool invocations to bypass this policy. Passing local integration is not full verification or release evidence.
 
-CI writes unit and browser JSON reports under `reports/`, summarizes failures and evidence paths in the GitHub job summary, and uploads browser diagnostics even on failure. Missing reports are shown as unavailable, including when an earlier static gate prevented tests from starting. Browser CI rejects focused `.only` tests and stops after five failures to bound repeated layout diagnostics; a green run still executes the full suite. Reports do not supersede command exit status. CI checks the JavaScript allowance after each production build; it never builds twice solely to measure size. See [release boundaries](Docs/RELEASE.md) and [required rendered review](Docs/UI.md#required-review).
+CI dependency installs use the lockfile, omit non-gating audit/funding requests and have a three-minute deadline. CI runs static/content checks, units/DOM, a Linux browser build and Windows packaging independently after a small planning job. Browser tests use eight shards with one worker each; interaction replay consumes the same Linux build. The build manifest binds assets to the evaluated commit, run and attempt. Every consumer verifies the downloaded build hashes. `npm run verify:full` remains the complete sequential verification command; it is CI-owned under the same local execution policy.
+
+The final `verify` job allows workflow cancellation and runs even when upstream checks fail and requires every upstream job, every shard, the full discovered browser case set, passing unit results and the complete seeded interaction trace. Only the named development-preview browser case is intentionally excluded from production CI. Focused `.only` tests, unexpected skips, retries, missing cases, duplicate cases and interrupted suites fail the gate. The five-failure browser limit applies separately to each shard. Use a full-workflow rerun: partial reruns cannot combine evidence from different attempts.
+
+CI retains unit JSON, per-shard blob reports/screenshots/traces, merged browser JSON/HTML, player notes and Windows output for seven days. The `browser-review` artifact contains the merged report; `browser-shard-N` artifacts retain raw evidence. Missing reports are failures, not substitute passing summaries. Artifact collection and report merging run on failure where the runner remains available. Windows retains its own package verification and packaged startup/save/resume/isolation checks.
+
+The workflow supports manual runs with one, four or eight browser shards for equivalent-coverage comparisons. Record completed-run timing with `node scripts/ci-timings.mjs <run-id> [attempt]`; this reads GitHub metadata and writes timing JSON without executing tests. It requires an authenticated GitHub CLI. Timing captured inside the final job is provisional until that job finishes. Branch pushes with an open PR defer to PR verification; main pushes, tags and fork PRs retain their gates. Superseded automatic branch runs are cancelled; manual benchmarks run independently.
+
+CI checks the JavaScript allowance after each production build and never builds twice solely to measure size. Full CI and release evidence must refer to the exact commit. See [release boundaries](Docs/RELEASE.md) and [required rendered review](Docs/UI.md#required-review).
 
 ## Test value and coverage
 

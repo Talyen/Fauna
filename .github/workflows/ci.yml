@@ -1,69 +1,425 @@
 name: Verify Fauna
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      shards:
+        description: Browser shard count for comparable CI benchmarks
+        type: choice
+        options: ["1", "4", "8"]
+        default: "8"
 permissions:
   contents: read
+  pull-requests: read
+  actions: read
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}-${{ github.event_name == 'workflow_dispatch' && github.run_id || 'automatic' }}
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/') }}
+env:
+  ELECTRON_SKIP_BINARY_DOWNLOAD: "1"
+  RELEASE_TAG: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || '' }}
 jobs:
-  verify:
+  prepare:
     runs-on: ubuntu-latest
-    env:
-      ELECTRON_SKIP_BINARY_DOWNLOAD: "1"
-      RELEASE_TAG: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || '' }}
+    timeout-minutes: 5
+    outputs:
+      run: ${{ steps.plan.outputs.run }}
+      attempt: ${{ steps.plan.outputs.attempt }}
+      shards: ${{ steps.plan.outputs.shards }}
+      total: ${{ steps.plan.outputs.total }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          sparse-checkout: |
+            .node-version
+            scripts/ci.mjs
+            scripts/lib/tool-runtime.mjs
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .node-version
+      - id: plan
+        name: Choose shards and suppress duplicate branch runs
+        run: node scripts/ci.mjs prepare
+        env:
+          GH_TOKEN: ${{ github.token }}
+  static:
+    needs: [prepare]
+    if: ${{ !cancelled() && needs.prepare.result == 'success' && needs.prepare.outputs.run == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      attempt: ${{ steps.complete.outputs.attempt }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version-file: .node-version
           cache: npm
-      - run: npm ci
-      - run: npm run verify:release-version
+      - name: Install dependencies
+        timeout-minutes: 3
+        run: npm ci --no-audit --no-fund
+      - name: Verify release version
+        run: npm run verify:release-version
       - name: Draft unreleased player notes
         if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
         run: npm run generate:patch-notes
       - name: Draft tagged player notes
         if: startsWith(github.ref, 'refs/tags/v')
         run: npm run generate:patch-notes -- --tag "$RELEASE_TAG"
-      - run: npx playwright install --with-deps chromium
-      - run: npm run verify:full
-      - run: npm run test:interactions -- --seed 42 --steps 12 --out reports/interactions/ci
-      - name: Summarize unit and browser results
-        if: always()
-        run: |
-          node scripts/ci-summarize.mjs vitest reports/vitest.json
-          node scripts/ci-summarize.mjs playwright reports/playwright.json
-      - uses: actions/upload-artifact@v4
+      - name: Static checks
+        run: npm run check:full
+      - name: Documentation contracts
+        run: npm run docs:check
+      - name: Content audit
+        run: npm run content:audit
+      - name: Upload player-notes
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
-          name: browser-review
+          name: player-notes
+          overwrite: true
           retention-days: 7
+          if-no-files-found: error
+          compression-level: 0
           path: |
-            reports/
-            test-results/
-  windows:
-    runs-on: windows-latest
-    env:
-      RELEASE_TAG: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || '' }}
+            reports/release-notes/
+      - id: complete
+        name: Record successful workflow attempt
+        run: node scripts/ci.mjs stamp
+
+  unit:
+    needs: [prepare]
+    if: ${{ !cancelled() && needs.prepare.result == 'success' && needs.prepare.outputs.run == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      attempt: ${{ steps.complete.outputs.attempt }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version-file: .node-version
           cache: npm
-      - run: npm ci
-      - run: npm run verify:release-version
-      - run: npm run package:win
+      - name: Install dependencies
+        timeout-minutes: 3
+        run: npm ci --no-audit --no-fund
+      - name: Unit and DOM suites
+        run: npm run test:full -- --reporter=default --reporter=json --outputFile.json=reports/vitest.json
+      - name: Summarize unit results
+        if: always()
+        run: node scripts/ci-summarize.mjs vitest reports/vitest.json
+      - name: Upload unit-results
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: unit-results
+          overwrite: true
+          retention-days: 7
+          if-no-files-found: error
+          compression-level: 0
+          path: |
+            reports/vitest.json
+      - id: complete
+        name: Record successful workflow attempt
+        run: node scripts/ci.mjs stamp
+
+  build:
+    needs: [prepare]
+    if: ${{ !cancelled() && needs.prepare.result == 'success' && needs.prepare.outputs.run == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      attempt: ${{ steps.complete.outputs.attempt }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - name: Install dependencies
+        timeout-minutes: 3
+        run: npm ci --no-audit --no-fund
+      - name: Build production browser assets
+        run: npm run build
+      - name: Bundle allowance
+        run: npm run check:bundle
+      - name: Bundled asset contract
+        run: npm run assets:check:bundle
+      - name: Discover the complete browser suite
+        run: |
+          mkdir -p reports/ci
+          npx playwright test --list --reporter=json > reports/ci/discovery.json
+      - name: Record exact build identity
+        run: node scripts/ci.mjs build
+      - name: Upload browser-build
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: browser-build
+          overwrite: true
+          retention-days: 7
+          if-no-files-found: error
+          compression-level: 0
+          path: |
+            dist/
+      - name: Upload browser-manifest
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: browser-manifest
+          overwrite: true
+          retention-days: 7
+          if-no-files-found: error
+          compression-level: 0
+          path: |
+            reports/ci/
+      - id: complete
+        name: Record successful workflow attempt
+        run: node scripts/ci.mjs stamp
+
+  browser:
+    needs: [prepare, build]
+    if: ${{ !cancelled() && needs.prepare.result == 'success' && needs.prepare.outputs.run == 'true' && needs.build.result == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(needs.prepare.outputs.shards) }}
+    env:
+      CI_SHARD: ${{ matrix.shard }}
+      CI_SHARDS: ${{ needs.prepare.outputs.total }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          sparse-checkout: |
+            scripts
+            src
+            tests
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - name: Install dependencies
+        timeout-minutes: 3
+        run: npm ci --no-audit --no-fund
+      - name: Download browser-build
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: browser-build
+          path: dist
+      - name: Download browser-manifest
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: browser-manifest
+          path: reports/ci
+      - name: Verify downloaded build identity
+        run: node scripts/ci.mjs verify-build
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Browser shard
+        run: npx playwright test --shard=$CI_SHARD/$CI_SHARDS
+      - name: Record shard identity
+        if: always()
+        run: node scripts/ci.mjs shard
+      - name: Upload browser-shard-${{ matrix.shard }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: browser-shard-${{ matrix.shard }}
+          overwrite: true
+          retention-days: 7
+          if-no-files-found: error
+          compression-level: 0
+          path: |
+            blob-report/
+            reports/playwright.json
+            reports/ci/shard.json
+            test-results/
+  interactions:
+    needs: [prepare, build]
+    if: ${{ !cancelled() && needs.prepare.result == 'success' && needs.prepare.outputs.run == 'true' && needs.build.result == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      attempt: ${{ steps.complete.outputs.attempt }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          sparse-checkout: |
+            scripts
+            src
+            tests
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - name: Install dependencies
+        timeout-minutes: 3
+        run: npm ci --no-audit --no-fund
+      - name: Download browser-build
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: browser-build
+          path: dist
+      - name: Download browser-manifest
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: browser-manifest
+          path: reports/ci
+      - name: Verify downloaded build identity
+        run: node scripts/ci.mjs verify-build
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Seeded interaction replay
+        run: npm run test:interactions -- --seed 42 --steps 12 --out reports/interactions/ci
+      - name: Upload interaction-results
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: interaction-results
+          overwrite: true
+          retention-days: 7
+          if-no-files-found: error
+          compression-level: 0
+          path: |
+            reports/interactions/
+      - id: complete
+        name: Record successful workflow attempt
+        run: node scripts/ci.mjs stamp
+
+  windows:
+    needs: [prepare]
+    if: ${{ !cancelled() && needs.prepare.result == 'success' && needs.prepare.outputs.run == 'true' }}
+    runs-on: windows-latest
+    timeout-minutes: 20
+    env:
+      ELECTRON_SKIP_BINARY_DOWNLOAD: ""
+    outputs:
+      attempt: ${{ steps.complete.outputs.attempt }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - name: Install dependencies
+        timeout-minutes: 3
+        run: npm ci --no-audit --no-fund
+      - name: Verify release version
+        run: npm run verify:release-version
+      - name: Package Windows
+        run: npm run package:win
         env:
           CSC_IDENTITY_AUTO_DISCOVERY: "false"
-      - run: npm run verify:package
+      - name: Verify package
+        run: npm run verify:package
       - name: Verify tagged release identity
         if: startsWith(github.ref, 'refs/tags/v')
         run: npm run verify:release
-      - run: node scripts/smoke-desktop.mjs --packaged
-      - uses: actions/upload-artifact@v4
+      - name: Packaged desktop smoke
+        run: node scripts/smoke-desktop.mjs --packaged
+      - name: Upload fauna-windows-x64
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: fauna-windows-x64
-          path: release/win-unpacked
+          overwrite: true
+          retention-days: 7
+          if-no-files-found: error
+          compression-level: 0
+          path: |
+            release/win-unpacked
+      - id: complete
+        name: Record successful workflow attempt
+        run: node scripts/ci.mjs stamp
+
+  verify:
+    needs: [prepare, static, unit, build, browser, interactions, windows]
+    if: ${{ !cancelled() && needs.prepare.outputs.run != 'false' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CI_SHARDS: ${{ needs.prepare.outputs.total }}
+      CI_NEEDS: ${{ toJSON(needs) }}
+      PLAYWRIGHT_JSON_OUTPUT_FILE: reports/playwright.json
+      PLAYWRIGHT_HTML_OUTPUT_DIR: reports/browser-html
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          sparse-checkout: |
+            .node-version
+            package.json
+            package-lock.json
+            playwright.config.ts
+            scripts/
+            src/
+            tests/e2e/
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - name: Install dependencies
+        timeout-minutes: 3
+        run: npm ci --no-audit --no-fund
+      - name: Download browser-shard-*
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        if: always()
+        with:
+          pattern: browser-shard-*
+          path: reports/shards
+      - name: Download browser-manifest
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        if: always()
+        with:
+          name: browser-manifest
+          path: reports/ci
+      - name: Download unit-results
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        if: always()
+        with:
+          name: unit-results
+          path: reports
+      - name: Download interaction-results
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        if: always()
+        with:
+          name: interaction-results
+          path: reports/interactions
+      - name: Collect shard blobs
+        if: always()
+        run: node scripts/ci.mjs collect
+      - name: Merge browser results
+        if: always()
+        run: npx playwright merge-reports --reporter=json,html all-blob-reports
+      - name: Make merged JSON evidence portable
+        if: always()
+        run: node scripts/ci.mjs portable
+      - name: Summarize browser results
+        if: always()
+        run: node scripts/ci-summarize.mjs playwright reports/playwright.json
+      - name: Capture stage and runner timings
+        if: always()
+        run: node scripts/ci-timings.mjs "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT"
+        env:
+          GH_TOKEN: ${{ github.token }}
+      - name: Require every job and complete first-attempt results
+        if: always()
+        run: node scripts/ci.mjs gate
+      - name: Upload browser-review
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: browser-review
+          overwrite: true
+          retention-days: 7
+          if-no-files-found: error
+          compression-level: 0
+          path: |
+            reports/playwright.json
+            reports/browser-html/
+            reports/browser-resources/
+            reports/ci/browser-timings.json
+            reports/ci/timings-*.json
