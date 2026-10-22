@@ -202,7 +202,7 @@ export function* resolveHit(
         yield* reaction("removeControlBuildup", state, target, "stun", events);
         yield* reaction("removeControlBuildup", state, target, "freeze", events);
       }
-      if (hasTalent(state, "dodge.tailwind")) draw(state, 1);
+      if (hasTalent(state, "dodge.tailwind")) draw(state, 1, events);
       if (hasTalent(state, "dodge.perfect-timing") && stats.armor === 0)
         yield* reaction("grantArmor", state, target, 2, events);
       if (hasTalent(state, "block.footwork")) yield* reaction("grantBlock", state, target, 2, events);
@@ -427,7 +427,7 @@ export function* resolveHit(
     }
     if (hasTalent(state, "water.cleansing-current") && roll(state) < 0.2)
       yield* reaction("removeEffects", source, "cleanse", 1, events, state);
-    if (hasTalent(state, "water.riptide") && roll(state) < 0.2) drawKeyword(state, "water");
+    if (hasTalent(state, "water.riptide") && roll(state) < 0.2) drawKeyword(state, "water", events);
   }
   if (policy.buildup && damage > 0 && source.health > 0) {
     const bleedBefore = stats.bleed;
@@ -497,7 +497,7 @@ export function* resolveHit(
           yield* reaction("hit", state, source, target, Math.round(damage / 2), "poison", events, {
             origin: "proc",
           });
-        if (proc("bleed.bloodrush", 0.1)) draw(state, 1);
+        if (proc("bleed.bloodrush", 0.1)) draw(state, 1, events);
       }
       if (type === "light") {
         if (proc("light.scorching-light", 0.1))

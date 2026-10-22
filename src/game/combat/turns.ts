@@ -99,6 +99,6 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
     )
       break;
   }
-  draw(draft, TURN_DRAW);
+  draw(draft, TURN_DRAW, events);
   events.push({ kind: "turn", text: `Turn ${battle.turn}. ${battle.maxMana} Mana restored.` });
 }

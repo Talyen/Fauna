@@ -17,12 +17,14 @@ export type SpeciesId =
   | "ringpalm"
   | "glintstride"
   | "wickwaltz"
+  | "rookhaven"
   | "cadenza"
   | "stillara"
   | "sternshell"
   | "neradora";
 export type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
+  | { kind: "wellRead"; amount: number }
   | { kind: "livingChorus"; amount: number }
   | { kind: "tidalRegeneration"; amount: number }
   | { kind: "kindlingFlourish"; amount: number }

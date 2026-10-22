@@ -53,6 +53,11 @@ export const GLOSSARY = [
       "All teammates share one deck, hand, and discard pile; Played and unplayed end-of-turn cards go to discard; Shuffle discard into the draw pile when needed",
   },
   {
+    term: "Copy",
+    definition:
+      "A duplicate of a drawn card with the same owner, level and Mana cost; Stays in the deck until battle end; Drawing a copy can copy it again; Creating or promoting a copy is not a draw",
+  },
+  {
     term: "Knockout",
     definition:
       "At zero health a creature cannot act or be healed during that battle; Its cards cannot be played or normally drawn; A living backup can replace it; Losing every creature in the roster ends the journey",

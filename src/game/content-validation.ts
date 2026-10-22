@@ -70,6 +70,8 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
     }
     for (const tier of entry.passiveTiers)
       for (const effect of tier?.effects ?? []) {
+        if (effect.kind === "wellRead" && effect.amount > 100)
+          error(entry.id, "passiveTiers", "Copy chance cannot exceed 100 percent");
         if (
           effect.kind === "bounce" &&
           (effect.amount > 2 ||

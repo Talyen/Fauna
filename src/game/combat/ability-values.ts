@@ -19,6 +19,7 @@ export function primaryAbilityValue(card: CardDefinition, value: number, power =
     case "teamBlind":
     case "mana":
     case "teamThaw":
+    case "teamPurge":
     case "teamCleanse":
     case "nullify":
     case "swap":

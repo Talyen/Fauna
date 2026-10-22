@@ -124,7 +124,7 @@ export function* grantBlock(
     text: `${unitName(unit)} gains ${gained} Block.`,
   });
   if (!("maxHealth" in unit) && hasTalent(state, "light.radiant-guard") && roll(state) < 0.1)
-    drawKeyword(state, "light");
+    drawKeyword(state, "light", events);
   if (!("maxHealth" in unit) && state.boons.includes("ironwood-buckler"))
     yield* reaction("grantStatus", unit, "thorns", 1, events, state, sharing);
   if (sharing) yield* reaction("shareProtection", state, unit, "block", gained, events);

@@ -53,6 +53,7 @@ export function enemyCanUse(card: CardDefinition): boolean {
     case "dodge":
     case "teamBlind":
     case "teamThaw":
+    case "teamPurge":
     case "teamCleanse":
     case "nullify":
     case "swap":
@@ -109,6 +110,9 @@ export function cardText(
       break;
     case "teamThaw":
       text = "Cleanse all Freeze build-up from allies";
+      break;
+    case "teamPurge":
+      text = "Purge all enemies";
       break;
     case "teamCleanse":
       text = `Cleanse ${value} harmful effect${value === 1 ? "" : "s"} from all allies`;

@@ -200,7 +200,7 @@ function applyExtras(
         restoreHealth(actor, effect.amount, events, false, state, true, actor);
         break;
       case "draw":
-        if (!enemy) draw(state, effect.amount);
+        if (!enemy) draw(state, effect.amount, events);
         break;
       case "mana":
         if (!enemy) gainMana(state, effect.amount, events);
@@ -341,7 +341,7 @@ export function executeAbility(
         grantStatus(actor, "waterThorns", value, events, state);
         break;
       case "draw":
-        if (!enemy) draw(state, value);
+        if (!enemy) draw(state, value, events);
         break;
       case "recover":
         if (!enemy) recoverDiscard(state, events);
@@ -361,6 +361,12 @@ export function executeAbility(
         break;
       case "teamBlind":
         for (const unit of alive(opposingRow(state, action))) applyBlind(state, actor, unit, events);
+        break;
+      case "teamPurge":
+        for (const unit of alive(opposingRow(state, action))) {
+          if (actor.health <= 0) break;
+          removeEffects(unit, "purge", Number.MAX_SAFE_INTEGER, events, state);
+        }
         break;
       case "teamCleanse":
         for (const unit of alive(friendlyRow(state, action)))

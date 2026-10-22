@@ -86,6 +86,7 @@ export function beginBattle(state: StateAt<"teamSelection">, events: GameEvent[]
     c.attacked = false;
   }
   const battle = {
+    copySerial: 0,
     earnedGold: 0,
     freeBurnUsed: false,
     meteoriteUsed: false,
@@ -129,8 +130,8 @@ export function beginBattle(state: StateAt<"teamSelection">, events: GameEvent[]
     expedition: state.expedition,
     journey: { ...state.journey, outcome: null },
   });
-  draw(active, TURN_DRAW + (state.boons.includes("tattered-pages") ? 1 : 0));
-  if (hasTalent(state, "nature.ecosystem")) drawKeyword(active, "nature");
+  draw(active, TURN_DRAW + (state.boons.includes("tattered-pages") ? 1 : 0), events);
+  if (hasTalent(state, "nature.ecosystem")) drawKeyword(active, "nature", events);
   for (const unit of state.team) {
     if (hasTalent(state, "armor.bulwark")) grantArmor(state, unit, 2, events);
     for (const effect of creaturePassive(state, unit.species).effects) {
@@ -268,6 +269,7 @@ function enterPhase<T extends Lifecycle>(state: GameState, next: T): GameState &
   return Object.assign(state, next);
 }
 function clearCombat(state: GameState) {
+  state.cards = state.cards.filter((card) => !card.temporary);
   for (const creature of [...state.team, ...state.reserves]) {
     creature.block = 0;
     creature.combat = freshCombat();
