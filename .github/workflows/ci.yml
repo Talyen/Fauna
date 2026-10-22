@@ -75,7 +75,8 @@ jobs:
         run: npm run docs:check
       - name: Content audit
         run: npm run content:audit
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - name: Upload player-notes
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
           name: player-notes
@@ -109,7 +110,8 @@ jobs:
       - name: Summarize unit results
         if: always()
         run: node scripts/ci-summarize.mjs vitest reports/vitest.json
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - name: Upload unit-results
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
           name: unit-results
@@ -150,7 +152,8 @@ jobs:
           npx playwright test --list --reporter=json > reports/ci/discovery.json
       - name: Record exact build identity
         run: node scripts/ci.mjs build
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - name: Upload browser-build
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: browser-build
           overwrite: true
@@ -159,7 +162,8 @@ jobs:
           compression-level: 0
           path: |
             dist/
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - name: Upload browser-manifest
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: browser-manifest
           overwrite: true
@@ -197,11 +201,13 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+      - name: Download browser-build
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: browser-build
           path: dist
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+      - name: Download browser-manifest
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: browser-manifest
           path: reports/ci
@@ -214,7 +220,8 @@ jobs:
       - name: Record shard identity
         if: always()
         run: node scripts/ci.mjs shard
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - name: Upload browser-shard-${{ matrix.shard }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
           name: browser-shard-${{ matrix.shard }}
@@ -247,11 +254,13 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+      - name: Download browser-build
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: browser-build
           path: dist
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+      - name: Download browser-manifest
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: browser-manifest
           path: reports/ci
@@ -261,7 +270,8 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Seeded interaction replay
         run: npm run test:interactions -- --seed 42 --steps 12 --out reports/interactions/ci
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - name: Upload interaction-results
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
           name: interaction-results
@@ -305,7 +315,8 @@ jobs:
         run: npm run verify:release
       - name: Packaged desktop smoke
         run: node scripts/smoke-desktop.mjs --packaged
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - name: Upload fauna-windows-x64
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: fauna-windows-x64
           overwrite: true
@@ -345,22 +356,26 @@ jobs:
           node-version-file: .node-version
           cache: npm
       - run: npm ci
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+      - name: Download browser-shard-*
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         if: always()
         with:
           pattern: browser-shard-*
           path: reports/shards
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+      - name: Download browser-manifest
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         if: always()
         with:
           name: browser-manifest
           path: reports/ci
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+      - name: Download unit-results
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         if: always()
         with:
           name: unit-results
           path: reports
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+      - name: Download interaction-results
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         if: always()
         with:
           name: interaction-results
@@ -385,7 +400,8 @@ jobs:
       - name: Require every job and complete first-attempt results
         if: always()
         run: node scripts/ci.mjs gate
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - name: Upload browser-review
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
           name: browser-review
