@@ -9,12 +9,15 @@
     "src/ui/expedition/expedition.css": "d578d9cc6d24b8ea9c1db9111cb85a43a57c1fd92a12bb07a47f3c6e0b53893d",
     "src/ui/tokens.css": "f912b53bf6402eda4d5d350892f4fe63e4d4d1eae4365fee9a9038e3168348fa",
     "src/game/destinations.ts": "e932a3045ccd546c47788d0439d3bca373864e077638027dd6a6b65a96edcc09",
-    "src/game/journey.ts": "2b44622998c556a406032c79c70068d4ada94d6e698640811513d39a6eace56e",
-    "src/game/save.ts": "a7b13e116878260850ec21494fe58d23b341d7aaeeb7fe5de28696fecbe35395"
+    "src/game/journey.ts": "58b083389566897d5acd76ae7212091e8501f332d75857bc93f93d77df58f520",
+    "src/game/save.ts": "45b9717352450cc8df74641d7ff36ed3abafa95335d5d2a4621460943062b92d",
+    "src/game/content/creatures.ts": "edca95a721eef2dce913126dfc2cc75e8080be128afc3a574c1e085809081e06",
+    "src/game/save-format.json": "b5275c881c292ba1163296d2c5d85f433714170fb6a913873b954bcb5d58eba8",
+    "tests/support/game.ts": "8148af23e11d3ea186a37bb40bf9bd496be688fa36f55d9b5e020e8c6a25e34d"
   },
   "seed": 7,
   "wallet": 40,
-  "prices": [26, 30, 34],
+  "prices": [29, 23, 22],
   "motion": "reduce",
   "browser": "Chromium headless via Playwright",
   "evidence": [
@@ -107,9 +110,10 @@
     }
   ],
   "imagesSha256": {
-    "merchant-current-1280-large.png": "4b1c4f643f664bbb42f5b26367422c399346e7b24e1d76f3878fc56f70db50bc",
-    "merchant-current-1280.png": "a5249694e299add9d53b7089fd1ad0acabeac22cb1f307767b97d569e3b8a80a",
-    "merchant-current-1920.png": "21c2dd8d3e666c5d69ecb4f52aea4ad425c12a3da1da88fe1df048101626a66f",
-    "merchant-current-inspection.png": "80ec28699a89bcec0fb44a1ad315e4f4e3915b2c8a5bd38210b9fd2c06a2902b"
-  }
+    "merchant-current-1280-large.png": "6260491ff8feea9899ccb320b1c683c71761f3854bc9bf4d1264aa7965a51c80",
+    "merchant-current-1280.png": "6f381c8d3c9efc22ec7e8e51725c968f950b56b317200d1b0ea76a279bdd0cb1",
+    "merchant-current-1920.png": "c544cfe1036c07ffa006704eb083a1b9bcd13e63946ba56f1fd8af7cc1b485cf",
+    "merchant-current-inspection.png": "96126bff1158042092f5936722c8e28a6465d2ca7f027dccda8ea9b2b3ae2014"
+  },
+  "fixturePreparationRng": 10
 }

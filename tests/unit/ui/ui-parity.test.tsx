@@ -10,7 +10,15 @@ import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import { createGame } from "../../../src/game/engine";
 import { species } from "../../../src/game/content";
-import { requireReward, accept, recruitChoice, run, winBattle, starterJourney } from "../../support/game";
+import {
+  requireReward,
+  accept,
+  recruitChoice,
+  run,
+  winBattle,
+  starterJourney,
+  merchantDestination,
+} from "../../support/game";
 
 beforeEach(() => {
   vi.stubGlobal(
@@ -77,9 +85,7 @@ it("makes Deck available in drafting, rewards and Merchant without committing in
     type: "start",
   });
   const reward = winBattle(accept(started, { type: "beginBattle" }));
-  const destination = produce(accept(reward, recruitChoice(reward)), (draft) => {
-    draft.currency = 40;
-  });
+  const destination = merchantDestination();
   const merchant = accept(destination, { type: "enterSupport", visit: destination.support!.id });
   for (const game of [
     accept(createGame(7), { type: "draft", species: createGame(7).starterOffers[0]! }),

@@ -5,7 +5,7 @@ import { createGame, dispatch } from "../../src/game/engine";
 import { CARDS, definition, species, type SpeciesId } from "../../src/game/content";
 import type { Command, GameState, Lifecycle, BattleState, RewardState } from "../../src/game/types";
 // This seeded first journey finishes within the browser's 400-command budget
-export const FULL_JOURNEY_SEED = 98;
+export const FULL_JOURNEY_SEED = 663;
 export function run(seed = 42) {
   return teamRun(seed, ["mossguard", "emberback", "prismram"]);
 }
@@ -247,9 +247,12 @@ export function merchantDestination() {
     type: "start",
   });
   state = winBattle(accept(state, { type: "beginBattle" }));
-  const ready = accept(state, recruitChoice(state));
-  if (ready.phase !== "teamSelection" || !ready.support) throw new Error("Expected seeded Merchant stock.");
-  return produce(ready, (draft) => {
+  // Fix this scenario's destination roll independently of the changing recruit catalog.
+  state = produce(state, (draft) => {
+    draft.rng = 10;
     draft.currency = 40;
   });
+  const ready = accept(state, recruitChoice(state));
+  if (ready.phase !== "teamSelection" || !ready.support) throw new Error("Expected seeded Merchant stock.");
+  return ready;
 }
