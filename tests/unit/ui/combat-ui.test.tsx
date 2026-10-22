@@ -172,30 +172,34 @@ it("opens every talent category and preserves purchases and requirements", async
   await session.load();
   render(<App session={session} />);
   try {
-    await userEvent.click(screen.getByRole("button", { name: "Talents" }));
+    const user = userEvent.setup();
+    await user.click(screen.getByRole("button", { name: "Talents" }));
     for (const keyword of KEYWORDS) {
-      await userEvent.click(screen.getByRole("button", { name: `${keywordLabel(keyword)} talents` }));
+      await user.click(
+        within(screen.getByRole("main")).getByRole("button", { name: `${keywordLabel(keyword)} talents` }),
+      );
+      const tree = within(screen.getByRole("main"));
       const talents = TALENTS.filter((t) => t.keyword === keyword);
       const rows = [...new Set(talents.map((talent) => talent.row))];
       for (let index = 0; index < rows.length; index++) {
         for (const talent of talents.filter((entry) => entry.row === rows[index]))
-          expect(screen.getByRole("button", { name: talent.name })).toBeTruthy();
-        if (index < rows.length - 1) await userEvent.click(screen.getByRole("button", { name: "Next page" }));
+          expect(tree.getByRole("button", { name: talent.name })).toBeTruthy();
+        if (index < rows.length - 1) await user.click(tree.getByRole("button", { name: "Next page" }));
       }
-      while (!(screen.getByRole("button", { name: "Previous page" }) as HTMLButtonElement).disabled)
-        await userEvent.click(screen.getByRole("button", { name: "Previous page" }));
+      while (!(tree.getByRole("button", { name: "Previous page" }) as HTMLButtonElement).disabled)
+        await user.click(tree.getByRole("button", { name: "Previous page" }));
       if (keyword === "physical") {
         const later = talents.find((t) => t.row === 1)!;
-        await userEvent.click(screen.getByRole("button", { name: "Next page" }));
-        expect(screen.getByRole("button", { name: later.name }).getAttribute("aria-disabled")).toBe("true");
-        await userEvent.click(screen.getByRole("button", { name: "Previous page" }));
+        await user.click(tree.getByRole("button", { name: "Next page" }));
+        expect(tree.getByRole("button", { name: later.name }).getAttribute("aria-disabled")).toBe("true");
+        await user.click(tree.getByRole("button", { name: "Previous page" }));
         for (const talent of talents.filter((t) => t.row === 0))
-          await userEvent.click(screen.getByRole("button", { name: talent.name }));
-        await userEvent.click(screen.getByRole("button", { name: "Next page" }));
-        await userEvent.click(screen.getByRole("button", { name: later.name }));
+          await user.click(tree.getByRole("button", { name: talent.name }));
+        await user.click(tree.getByRole("button", { name: "Next page" }));
+        await user.click(tree.getByRole("button", { name: later.name }));
         expect(session.store.getState().game.talents).toContain(later.id);
       }
-      await userEvent.click(screen.getByRole("button", { name: "Back" }));
+      await user.click(screen.getByRole("button", { name: "Back" }));
     }
   } finally {
     await session.dispose();

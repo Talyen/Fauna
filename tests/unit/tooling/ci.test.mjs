@@ -9,6 +9,8 @@ import {
   validateJobs,
   validateUnit,
   validateInteraction,
+  planBrowserShards,
+  browserDurations,
 } from "../../../scripts/ci/ci.mjs";
 
 const test = (id, overrides = {}) => ({
@@ -264,8 +266,10 @@ it("ships portable merged JSON attachments and rejects missing resources", () =>
   try {
     mkdirSync(path.join(root, "reports"));
     mkdirSync(path.join(root, "all-blob-reports/resources"), { recursive: true });
+    mkdirSync(path.join(root, "reports/browser-html/data"), { recursive: true });
     const image = path.join(root, "all-blob-reports/resources/frame.png");
     writeFileSync(image, "image bytes");
+    writeFileSync(path.join(root, "reports/browser-html/data/content-hash.png"), "image bytes");
     const report = test("screen", {
       results: [
         {
@@ -282,10 +286,17 @@ it("ships portable merged JSON attachments and rejects missing resources", () =>
     expect(result.status).toBe(0);
     const portable = JSON.parse(readFileSync(path.join(root, "reports/playwright.json"), "utf8"));
     expect(portable.suites[0].specs[0].tests[0].results[0].attachments[0].path).toBe(
-      "browser-resources/frame.png",
+      "browser-html/data/content-hash.png",
     );
-    expect(readFileSync(path.join(root, "reports/browser-resources/frame.png"), "utf8")).toBe("image bytes");
+    expect(readFileSync(path.join(root, "reports/browser-html/data/content-hash.png"), "utf8")).toBe(
+      "image bytes",
+    );
     writeFileSync(path.join(root, "reports/playwright.json"), JSON.stringify(report));
+    rmSync(path.join(root, "reports/browser-html/data/content-hash.png"));
+    expect(run().status).not.toBe(0);
+    writeFileSync(path.join(root, "reports/browser-html/data/content-hash.png"), "different bytes");
+    expect(run().status).not.toBe(0);
+    writeFileSync(path.join(root, "reports/browser-html/data/content-hash.png"), "image bytes");
     rmSync(image);
     expect(run().status).not.toBe(0);
   } finally {
@@ -320,4 +331,57 @@ it("rejects modified or stale downloaded builds before starting browser consumer
   } finally {
     rmSync(root, { recursive: true, force: true });
   }
+});
+
+describe("duration-balanced browser planning", () => {
+  const discovery = (durations) => ({
+    suites: [
+      {
+        title: "journey.spec.ts",
+        file: "journey.spec.ts",
+        line: 0,
+        suites: [
+          {
+            title: "keyboard",
+            file: "journey.spec.ts",
+            line: 10,
+            specs: durations.map((duration, index) => ({
+              id: `case-${index}`,
+              file: "journey.spec.ts",
+              title: `case ${index}`,
+              tests: [{ projectName: "chromium", results: [{ status: "passed", duration }] }],
+            })),
+          },
+        ],
+      },
+    ],
+    errors: [],
+  });
+  it("keeps every case once, uses full title paths and separates expensive journeys", () => {
+    const report = discovery([40_000, 17_000, 13_000, 12_000, 8_000, 4_000, 4_000, 3_000]);
+    const estimates = browserDurations(report);
+    const plan = planBrowserShards(report, estimates, 4);
+    expect(
+      plan
+        .flatMap((shard) => shard.tests)
+        .map((test) => test.id)
+        .sort(),
+    ).toEqual(Array.from({ length: 8 }, (_, index) => `case-${index}:chromium`));
+    expect(plan[0].tests).toHaveLength(1);
+    expect(plan[0].tests[0].list).toBe("[chromium] › journey.spec.ts › keyboard › case 0");
+    expect(Math.max(...plan.map((shard) => shard.estimatedMs))).toBe(40_000);
+    expect(planBrowserShards(report, estimates, 4)).toEqual(plan);
+  });
+  it("runs new cases with a default estimate and rejects invalid estimates or duplicate identities", () => {
+    const report = discovery([1000, 2000, 3000, 4000]);
+    expect(planBrowserShards(report, {}, 4).every((shard) => shard.tests.length === 1)).toBe(true);
+    const durations = browserDurations(report);
+    durations[Object.keys(durations)[0]] = -1;
+    expect(() => planBrowserShards(report, durations, 4)).toThrow("Invalid duration");
+    expect(() => planBrowserShards(report, {}, 8)).toThrow("Invalid shard count");
+    expect(() => planBrowserShards(combine(report, report), {}, 4)).toThrow("duplicate");
+    const failed = discovery([1000]);
+    failed.suites[0].suites[0].specs[0].tests[0].results[0].status = "failed";
+    expect(browserDurations(failed)).toEqual({});
+  });
 });

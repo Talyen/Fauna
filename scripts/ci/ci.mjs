@@ -4,6 +4,7 @@ import {
   copyFileSync,
   mkdirSync,
   readdirSync,
+  existsSync,
   realpathSync,
   readFileSync,
   writeFileSync,
@@ -44,12 +45,18 @@ export function browserCases(report) {
   if (!Array.isArray(report.suites) || report.errors?.length)
     throw new Error("Invalid browser report or runner errors");
   const cases = [];
-  function walk(suites) {
+  function walk(suites, parents = []) {
     for (const suite of suites) {
+      const titles = suite.title && suite.line !== 0 ? [...parents, suite.title] : parents;
       for (const spec of suite.specs ?? [])
         for (const test of spec.tests ?? [])
-          cases.push({ id: `${spec.id}:${test.projectName}`, title: spec.title, test });
-      walk(suite.suites ?? []);
+          cases.push({
+            id: `${spec.id}:${test.projectName}`,
+            title: spec.title,
+            list: `[${test.projectName}] › ${spec.file} › ${[...titles, spec.title].join(" › ")}`,
+            test,
+          });
+      walk(suite.suites ?? [], titles);
     }
   }
   walk(report.suites);
@@ -57,6 +64,58 @@ export function browserCases(report) {
     throw new Error("Empty or duplicate browser cases");
   return cases;
 }
+/** Largest-first assignment keeps slow journeys apart; estimates never select coverage. */
+export function planBrowserShards(discovery, estimates, total) {
+  const cases = browserCases(discovery);
+  if (![1, 4, 8].includes(total) || cases.length < total) throw new Error("Invalid shard count");
+  const shards = Array.from({ length: total }, (_, index) => ({
+    shard: index + 1,
+    estimatedMs: 0,
+    tests: [],
+  }));
+  const weighted = cases.map(({ id, list }) => {
+    const estimate = Object.hasOwn(estimates, list) ? estimates[list] : 2000;
+    if (!Number.isFinite(estimate) || estimate < 0) throw new Error(`Invalid duration: ${list}`);
+    return { id, list, estimatedMs: Math.max(1, estimate) };
+  });
+  weighted.sort((a, b) => b.estimatedMs - a.estimatedMs || a.list.localeCompare(b.list, "en"));
+  for (const row of weighted) {
+    const shard = shards.reduce((a, b) => (a.estimatedMs <= b.estimatedMs ? a : b));
+    shard.tests.push(row);
+    shard.estimatedMs += row.estimatedMs;
+  }
+  return shards;
+}
+
+export function browserDurations(report) {
+  return Object.fromEntries(
+    browserCases(report)
+      .filter((row) => row.test.results?.length === 1 && row.test.results[0].status === "passed")
+      .map((row) => [row.list, row.test.results[0].duration])
+      .sort(([a], [b]) => a.localeCompare(b, "en")),
+  );
+}
+
+/** JSON and HTML share the HTML reporter's content-addressed attachment store. */
+export function portableAttachments(report, root = ".") {
+  const resources = path.resolve(root, "all-blob-reports/resources");
+  const data = path.resolve(root, "reports/browser-html/data");
+  const hash = (file) => createHash("sha256").update(readFileSync(file)).digest("hex");
+  const byHash = new Map((existsSync(data) ? files(data) : []).map((file) => [hash(file), file]));
+  for (const row of browserCases(report))
+    for (const result of row.test.results ?? [])
+      for (const attachment of result.attachments ?? []) {
+        if (!attachment.path) continue;
+        const source = realpathSync(path.resolve(root, attachment.path));
+        if (!source.startsWith(realpathSync(resources) + path.sep))
+          throw new Error("Merged attachment is outside blob resources");
+        const target = byHash.get(hash(source));
+        if (!target) throw new Error(`Missing HTML attachment: ${attachment.name}`);
+        attachment.path = path.relative(path.resolve(root, "reports"), target).split(path.sep).join("/");
+      }
+  return report;
+}
+
 export function validateBrowserCoverage(discovery, reports) {
   const expected = new Map(browserCases(discovery).map((row) => [row.id, row]));
   const observed = new Set();
@@ -137,6 +196,10 @@ async function main(command) {
     const event = read(process.env.GITHUB_EVENT_PATH);
     const count = Number(event.inputs?.shards ?? 8);
     if (![1, 4, 8].includes(count)) throw new Error("Expected 1, 4 or 8 shards");
+    const runtime = event.inputs?.browser_runtime ?? "install";
+    if (!["install", "container"].includes(runtime)) throw new Error("Invalid browser runtime");
+    const version = read("package-lock.json").packages["node_modules/@playwright/test"].version;
+    const image = runtime === "container" ? `mcr.microsoft.com/playwright:v${version}-noble` : "";
     let run = true;
     if (
       process.env.GITHUB_EVENT_NAME === "push" &&
@@ -160,7 +223,7 @@ async function main(command) {
     }
     appendFileSync(
       process.env.GITHUB_OUTPUT,
-      `attempt=${process.env.GITHUB_RUN_ATTEMPT}\nrun=${run}\nshards=${JSON.stringify(Array.from({ length: count }, (_, i) => i + 1))}\ntotal=${count}\n`,
+      `browser_image=${image}\nattempt=${process.env.GITHUB_RUN_ATTEMPT}\nrun=${run}\nshards=${JSON.stringify(Array.from({ length: count }, (_, i) => i + 1))}\ntotal=${count}\n`,
     );
   } else if (command === "stamp") {
     appendFileSync(process.env.GITHUB_OUTPUT, `attempt=${process.env.GITHUB_RUN_ATTEMPT}\n`);
@@ -188,6 +251,7 @@ async function main(command) {
         node: process.version,
         image: process.env.ImageOS,
         imageVersion: process.env.ImageVersion,
+        browserImage: process.env.FAUNA_BROWSER_IMAGE || null,
       },
     });
   } else if (command === "collect") {
@@ -197,20 +261,21 @@ async function main(command) {
     ))
       copyFileSync(file, path.join("all-blob-reports", `${file.split(path.sep)[2]}-${path.basename(file)}`));
   } else if (command === "portable") {
-    const report = read("reports/playwright.json");
-    mkdirSync("reports/browser-resources", { recursive: true });
-    for (const row of browserCases(report))
-      for (const result of row.test.results ?? [])
-        for (const attachment of result.attachments ?? []) {
-          if (!attachment.path) continue;
-          const source = realpathSync(attachment.path);
-          if (!source.startsWith(realpathSync("all-blob-reports/resources") + path.sep))
-            throw new Error("Merged attachment is outside blob resources");
-          const relative = `browser-resources/${path.basename(source)}`;
-          copyFileSync(source, path.join("reports", relative));
-          attachment.path = relative;
-        }
-    write("reports/playwright.json", report);
+    write("reports/playwright.json", portableAttachments(read("reports/playwright.json")));
+  } else if (command === "plan") {
+    const shards = planBrowserShards(
+      read("reports/ci/discovery.json"),
+      read("scripts/ci/browser-durations.json"),
+      Number(process.env.CI_SHARDS),
+    );
+    write("reports/ci/browser-plan.json", { ...identity(), shards });
+    for (const shard of shards)
+      writeFileSync(
+        `reports/ci/shard-${shard.shard}.txt`,
+        shard.tests.map((row) => row.list).join("\n") + "\n",
+      );
+  } else if (command === "durations") {
+    write("reports/ci/browser-durations.json", browserDurations(read("reports/playwright.json")));
   } else if (command === "gate") {
     validateJobs(JSON.parse(process.env.CI_NEEDS), process.env.GITHUB_RUN_ATTEMPT);
     const total = Number(process.env.CI_SHARDS);
@@ -229,6 +294,7 @@ async function main(command) {
     validateBrowserCoverage(discovery, [read("reports/playwright.json")]);
     validateUnit(read("reports/vitest.json"));
     validateInteraction(read("reports/interactions/ci/report.json"), await interactionIdentity());
+    write("reports/ci/browser-durations.json", browserDurations(read("reports/playwright.json")));
     const slowest = reports
       .flatMap((report) =>
         browserCases(report).map((row) => ({

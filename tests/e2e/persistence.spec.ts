@@ -94,3 +94,18 @@ test("corrupt saves recover backups and all-invalid saves continue silently", as
   await expect(page.getByRole("alert")).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Play", exact: true })).toBeVisible();
 });
+
+test("fresh fixture seeding preserves init preferences and never resets a later save on reload", async ({
+  page,
+}) => {
+  await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
+  await seed(page, run(7));
+  expect(await page.evaluate(() => localStorage.getItem("fauna.text-scale"))).toBe("1.25");
+  await seed(page, run(8));
+  await page.reload();
+  expect(await state(page)).toEqual(run(8));
+  await page.evaluate(() => localStorage.clear());
+  await page.reload();
+  await expect(page.getByRole("button", { name: "Play", exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Continue", exact: true })).toHaveCount(0);
+});
