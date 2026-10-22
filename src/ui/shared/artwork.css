@@ -31,6 +31,98 @@
   border-radius: calc(var(--radius) - var(--border-art-width));
   corner-shape: inherit;
 }
+.control-art-effect {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: calc(var(--radius) - var(--border-art-width));
+  corner-shape: inherit;
+  pointer-events: none;
+}
+.control-art-effect svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.control-art-effect[data-control-art="freeze"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, var(--control-frost-clear) 30%, var(--control-frost-edge));
+  animation: control-frost-arrive var(--control-frost-duration) ease-out both;
+}
+.control-stars {
+  transform-origin: 200px 84px;
+  animation: control-star-orbit var(--control-orbit-duration) linear infinite;
+}
+.control-star {
+  fill: var(--keyword-stun);
+  stroke: var(--control-star-outline);
+  stroke-width: 0.07;
+  animation: control-twinkle var(--control-twinkle-duration) ease-in-out infinite alternate;
+}
+.control-stars > g:nth-child(even) .control-star {
+  animation-delay: -1s;
+}
+.control-crystal {
+  fill: var(--keyword-freeze);
+  fill-opacity: 0.7;
+  stroke: var(--control-crystal-outline);
+  stroke-width: 0.65;
+  animation: control-crystal-grow var(--control-frost-duration) ease-out both;
+}
+.control-art-effect svg > g:nth-child(3n + 2) .control-crystal {
+  animation-delay: 200ms;
+}
+.control-art-effect svg > g:nth-child(3n) .control-crystal {
+  animation-delay: 400ms;
+}
+@keyframes control-star-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes control-twinkle {
+  from {
+    opacity: 0.45;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes control-frost-arrive {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes control-crystal-grow {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .control-art-effect::before,
+  .control-stars,
+  .control-star,
+  .control-crystal {
+    animation: none;
+  }
+}
+.app[data-paused="true"] .control-art-effect::before,
+.app[data-paused="true"] .control-stars,
+.app[data-paused="true"] .control-star,
+.app[data-paused="true"] .control-crystal {
+  animation-play-state: paused;
+}
 .selected {
   box-shadow:
     0 0 0 var(--selection-gap) var(--background),
