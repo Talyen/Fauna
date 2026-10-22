@@ -2,11 +2,11 @@
 
 A single-player creature-collecting card battler for Steam. Choose a starter and recruit companions, combining their cards in one shared deck. Find combinations, recruit new teammates, and reach the heart of the wilds.
 
-Play an eight-encounter journey with bosses fourth and last, collect keyword XP and Gold, recruit backup creatures, and choose journey Boons. The first journey starts with one creature chosen from three seeded offers; later journeys draft three starters from Collection. Creatures and abilities use production illustrations; encounter and location artwork still includes placeholders.
+Play an eight-encounter journey with bosses fourth and last, collect keyword XP and Gold, recruit backup creatures, and choose journey Boons. The first journey starts with one creature chosen from three seeded offers; later journeys draft three starters from Collection, or one Legendary chosen as the first pick. Creatures and abilities use production illustrations; encounter and location artwork still includes placeholders.
 
 ## Run
 
-Use Node 24 (`.node-version`) and npm 11+.
+Use the Node 24 LTS patch pinned in `.node-version` and npm 12.2.1, as specified in `package.json`. See [setup and verification](CONTRIBUTING.md) for installation requirements.
 
 ```sh
 npm ci
@@ -23,7 +23,7 @@ Owned previews use isolated ports and disposable browser/desktop profiles; `npm 
 
 ## Play
 
-Choose your starter, recruit creatures into a five-member roster, and combine your deployed creatures' abilities in one shared deck. Every ability has a base cost of 1 Mana. Swap deployed creatures with healthy reserves during combat, and use their passives and keyword combinations to win eight encounters, with bosses fourth and last.
+Choose your starter, recruit creatures into a five-member roster, and combine your deployed creatures' abilities in one shared deck. Every ability has a base cost of 1 Mana. Replace knocked-out deployed creatures with living backup, and use abilities to change formation during combat. Deploy up to three ordinary creatures or one Legendary, using their passives and keyword combinations to win eight encounters, with bosses fourth and last.
 
 Between battles, recruit teammates, buy journey Boons, or recover at a Campfire when available. Keyword XP, Collection discoveries, talents and Gold provide permanent progression. See [Journey progression](Docs/EXPEDITION_DESIGN.md) for the complete roster, combat, reward and destination rules, and [content authoring](Docs/CONTENT.md) for ability and artwork contracts.
 
@@ -61,5 +61,6 @@ Historical records retain earlier proposals and rollout evidence; the current co
 - [CI speed plan and rollout measurements](Docs/archive/CI_SPEED_PLAN.md)
 - [Shared ability resolution and approved rule alignment](Docs/archive/COMBAT_RESOLUTION_PLAN.md)
 - [Combat reaction ordering and implementation record](Docs/archive/COMBAT_REACTIONS_PLAN.md)
+- [Journey lifecycle implementation record](Docs/archive/GAME_STATE_PLAN.md)
 
 Alchemy informed the technology choices and architectural patterns. Fauna has its own implementation and no runtime dependency on Alchemy. Mana crystal UI sprites are adapted from Alchemy; provenance is recorded in the battle-layout sample README.
