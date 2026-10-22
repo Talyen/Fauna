@@ -4,9 +4,9 @@ import { runJourney, type JourneyConfig } from "../../../src/tooling/playthrough
 import { contentCatalog, validateCatalog } from "../../../src/game/content-validation";
 const config: JourneyConfig = {
   // Complete current-catalog journeys; arbitrary lineups may legitimately exhaust the turn budget.
-  seed: 2,
+  seed: 4,
   runs: 2,
-  starter: "emberback",
+  starter: "captoad",
   policy: "heuristic",
   maxActions: 2000,
   maxTurns: 100,

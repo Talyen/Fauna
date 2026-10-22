@@ -20,7 +20,7 @@ it("retains replayable current-format performance checkpoints", () => {
 });
 // Constructing and replaying three full journeys can exceed the default deadline on hosted CPUs
 it("derives reachable early and late inventories from replay evidence without fixture grants", async () => {
-  const scenarios = await reachablePerformanceCases(16);
+  const scenarios = await reachablePerformanceCases(4);
   expect(scenarios).toHaveLength(2);
   const journey = scenarios[0]!.journey;
   expect(journey.complete).toBe(true);

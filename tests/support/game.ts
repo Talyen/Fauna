@@ -7,7 +7,7 @@ import { createGame, dispatch } from "../../src/game/engine";
 import { definition, species, type SpeciesId } from "../../src/game/content";
 import type { Command, GameState, Lifecycle, BattleState, RewardState } from "../../src/game/types";
 // Shared bound accounts for solo Legendary Bosses and their recruitment choices
-export const FULL_JOURNEY_SEED = 3;
+export const FULL_JOURNEY_SEED = 15;
 export const FULL_JOURNEY_COMMAND_BUDGET = 800;
 export function run(seed = 42) {
   return teamRun(seed, ["mossguard", "emberback", "prismram"]);

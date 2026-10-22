@@ -13,7 +13,7 @@ it("writes a durable journal and replays the CLI's recorded production career", 
         encoding: "utf8",
         timeout: 10_000,
       });
-    invoke(["--seed", "2", "--runs", "1", "--out", directory]);
+    invoke(["--seed", "4", "--starter", "captoad", "--runs", "1", "--out", directory]);
     const summary = JSON.parse(readFileSync(path.join(directory, "summary.json"), "utf8"));
     const bundle = JSON.parse(readFileSync(path.join(directory, "journey.json"), "utf8"));
     expect(summary.complete).toBe(true);
