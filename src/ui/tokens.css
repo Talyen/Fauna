@@ -56,6 +56,7 @@
   --control-height: 44px;
   --compact-control-size: 32px;
   --compact-icon-size: 16px;
+  --main-menu-logo-width: calc(var(--art-long-side) * 1.8);
   --main-menu-button-width: 180px;
   --pause-menu-width: 240px;
   --settings-screen-width: 640px;
