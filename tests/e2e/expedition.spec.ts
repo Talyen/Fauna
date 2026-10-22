@@ -788,6 +788,12 @@ test("corrupt saves recover backups and all-invalid saves continue silently", as
   await expect(page.getByRole("button", { name: "Continue", exact: true })).toBeVisible();
   await resume(page);
   await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
+  await page.getByRole("button", { name: "End turn", exact: true }).click();
+  const recovered = accept(run(), { type: "endTurn" });
+  expect(await state(page)).toEqual(recovered);
+  await page.reload();
+  await resume(page);
+  expect(await state(page)).toEqual(recovered);
   await page.evaluate((key) => {
     localStorage.clear();
     localStorage.setItem(key, "broken");
@@ -1278,7 +1284,7 @@ test("navigation returns to the nearest remaining card; denial is visual and res
   expect((await state(page)).revision).toBe(before.revision);
   await expect(page.getByText("Not enough mana.", { exact: true })).toHaveCount(0);
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.waitForTimeout(200);
+  await settleScreen(page);
   await unavailable.click();
   expect(
     await unavailable.evaluate((el) =>
