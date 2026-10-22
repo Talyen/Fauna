@@ -155,7 +155,9 @@ export function createCloud(
       update({ status: "Syncing", error: "" });
       try {
         await port.write(cloudName(item), JSON.stringify(item));
+        if (!alive) return;
         const confirmation = await port.read(cloudName(item));
+        if (!alive) return;
         if (!confirmation || (await parseSnapshot(confirmation, item.profile)).id !== item.id)
           throw new Error("Cloud upload could not be verified.");
         if (!alive) return;
@@ -238,7 +240,7 @@ export function createCloud(
         }
       }
       if (!alive || token !== generation) return;
-      if (streams.size >= 32 && !streams.has(identity.device))
+      if (streams.size + Number(!streams.has(identity.device)) > 32)
         throw new Error("Cloud device limit reached. Local progress remains available.");
       if (invalid && streams.size === 0) throw new Error("No valid cloud snapshots; remote files preserved.");
       if (background && localData && current?.payload !== localData) await persist(localData);
@@ -307,7 +309,7 @@ export function createCloud(
       update({ blocking: !background, status: "Syncing" });
       const nextIdentity = await port.identity();
       if (!alive || starting !== generation) return;
-      identity = nextIdentity;
+      identity = Object.freeze({ ...nextIdentity });
       if (!identity.available) {
         update({ ...initialCloudView });
         return;

@@ -632,3 +632,84 @@ it("preserves divergent snapshots in both slots of the same device", async () =>
     await f.manager.dispose();
   }
 });
+
+it("pins account identity even if the transport mutates its returned object", async () => {
+  const f = fixture();
+  const transportIdentity = { ...identity };
+  f.port.identity = async () => transportIdentity;
+  try {
+    await f.manager.start(initial);
+    await f.manager.flush();
+    transportIdentity.device = other.device;
+    transportIdentity.profile = "d".repeat(32);
+    await f.manager.commit(progress);
+    await f.manager.flush();
+    const saved = await parseSnapshot(f.local.data!, identity.profile);
+    expect(saved.device).toBe(identity.device);
+    expect(saved.profile).toBe(identity.profile);
+    expect([...f.files.keys()].every((name) => name.includes(identity.device))).toBe(true);
+  } finally {
+    await f.manager.dispose();
+  }
+});
+
+it("rejects more than 32 remote streams even when this device already has a slot", async () => {
+  const f = fixture();
+  const records = await Promise.all(
+    [identity.device, ...Array.from({ length: 32 }, (_, i) => i.toString(16).padStart(32, "0"))].map(
+      (device) => snapshot(initial, { ...identity, device }, 1),
+    ),
+  );
+  for (const record of records) f.files.set(cloudName(record), JSON.stringify(record));
+  const before = new Map(f.files);
+  try {
+    await f.manager.start(initial);
+    await f.manager.flush();
+    expect(f.manager.view.status).toBe("Pending");
+    expect(f.manager.view.error).toContain("device limit");
+    expect(f.files).toEqual(before);
+    expect(f.install).not.toHaveBeenCalled();
+  } finally {
+    await f.manager.dispose();
+  }
+});
+
+it.each(["write", "read"] as const)(
+  "does not start further transport calls after disposal during upload %s",
+  async (stage) => {
+    const f = fixture();
+    let entered!: () => void;
+    const started = new Promise<void>((resolve) => (entered = resolve));
+    let release!: () => void;
+    const gate = new Promise<void>((resolve) => (release = resolve));
+    const read = f.port.read;
+    const write = f.port.write;
+    f.port.write = vi.fn(async (name, data) => {
+      if (stage === "write") {
+        entered();
+        await gate;
+      }
+      await write(name, data);
+    });
+    f.port.read = vi.fn(async (name) => {
+      if (stage === "read") {
+        entered();
+        await gate;
+      }
+      return read(name);
+    });
+    f.port.acknowledge = vi.fn(async () => {});
+    try {
+      await f.manager.start(initial);
+      await started;
+      await f.manager.dispose();
+      release();
+      await f.manager.flush();
+      expect(f.port.read).toHaveBeenCalledTimes(stage === "read" ? 1 : 0);
+      expect(f.port.acknowledge).not.toHaveBeenCalled();
+    } finally {
+      release();
+      await f.manager.dispose();
+    }
+  },
+);
