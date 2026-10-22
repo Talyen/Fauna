@@ -140,6 +140,7 @@ async function createDisplay({ directory, screen, isolated = false, notify = () 
     },
     async dispose() {
       disposed = true;
+      clearTimeout(timer);
       screen.removeListener?.("display-removed", recover);
       screen.removeListener?.("display-metrics-changed", recover);
       if (window && !window.isDestroyed()) {
@@ -148,6 +149,10 @@ async function createDisplay({ directory, screen, isolated = false, notify = () 
         window.removeListener("enter-full-screen", publish);
         window.removeListener("leave-full-screen", publish);
       }
+      // Native fullscreen completion can still update preferences and enqueue a write.
+      // Drain it before taking the final snapshot or declaring teardown complete.
+      await transition;
+      preferences.mode = read().mode;
       write();
       await lane;
     },

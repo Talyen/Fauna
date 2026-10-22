@@ -28,6 +28,7 @@ function requestClose() {
   else finishClose();
 }
 function finishClose() {
+  if (closing) return;
   closing = true;
   Promise.all([storage?.drain(), display?.dispose(), steam?.dispose()]).then(() => {
     quitting = true;

@@ -1,6 +1,6 @@
 import { it, expect, vi } from "vitest";
 import { EventEmitter } from "node:events";
-import { mkdtemp, rm, writeFile, mkdir } from "node:fs/promises";
+import { mkdtemp, rm, writeFile, mkdir, readdir } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { createGame } from "../../../src/game/engine";
@@ -71,6 +71,11 @@ it("pins account storage, limits slot ownership and closes only its own worker",
     await expect(adapter.read("../other-game/save.json")).rejects.toThrow("Invalid cloud slot");
     await adapter.writeLocal("metadata");
     expect(await adapter.readLocal()).toBe("metadata");
+    // A full remote inventory can conflict with one additional local checkpoint.
+    const recovery = Array.from({ length: 65 }, (_, index) => `checkpoint-${index}`);
+    await adapter.preserve(recovery);
+    expect(await readdir(path.join(directory, "profiles", identity.profile, "recovery"))).toHaveLength(65);
+    await expect(adapter.preserve([...recovery, "extra"])).rejects.toThrow("Invalid recovery set");
   } finally {
     await adapter?.dispose();
     if (env === undefined) delete process.env.FAUNA_STEAM_APP_ID;
