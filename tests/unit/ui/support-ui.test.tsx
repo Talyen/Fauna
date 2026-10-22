@@ -2,11 +2,10 @@
 import { it, expect, vi, afterEach } from "vitest";
 import type { GameState } from "../../../src/game/types";
 import type { ReactElement } from "react";
-import { render as renderUI, screen, fireEvent, cleanup } from "@testing-library/react";
+import { render as renderUI, screen, fireEvent, cleanup, within } from "@testing-library/react";
 import { produce } from "immer";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { createGame } from "../../../src/game/engine";
-import { recruitChoice, accept, winBattle } from "../../support/game";
+import { accept, merchantDestination as merchant } from "../../support/game";
 import { TeamSelection } from "../../../src/ui/expedition/team-selection";
 import { SupportOffer, SupportScreen } from "../../../src/ui/expedition/support-screen";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
@@ -15,15 +14,6 @@ afterEach(cleanup);
 function requireMerchant(game: GameState) {
   if (game.phase !== "support") throw new Error("Expected an active Merchant visit.");
   return game;
-}
-function merchant() {
-  let s = accept(accept(createGame(7), { type: "draft", species: createGame(7).starterOffers[0]! }), {
-    type: "start",
-  });
-  s = winBattle(accept(s, { type: "beginBattle" }));
-  const ready = accept(s, recruitChoice(s));
-  if (ready.phase !== "teamSelection") throw new Error("Expected destination offers.");
-  return ready;
 }
 it("opens Merchant directly with the saved visit identity", () => {
   const game = merchant(),
@@ -38,7 +28,7 @@ it("replaces the shelf with the purchased Boon reward, restores it on reload and
   game = accept(game, { type: "enterSupport", visit: game.support!.id });
   const send = vi.fn(() => true);
   const { rerender } = render(<SupportScreen game={requireMerchant(game)} send={send} />);
-  fireEvent.click(screen.getAllByRole("button", { name: /^Buy .+ for 20 Gold$/ })[0]!);
+  fireEvent.click(screen.getAllByRole("button", { name: /^Buy .+ for \d+ Gold$/ })[0]!);
   expect(send).toHaveBeenCalledExactlyOnceWith({
     type: "buyBoon",
     visit: game.support!.id,
@@ -57,20 +47,26 @@ it("replaces the shelf with the purchased Boon reward, restores it on reload and
   expect(send).toHaveBeenLastCalledWith({ type: "leaveSupport", visit: game.support!.id });
 });
 
-it.each([19, 20])("shows Merchant only when an item is affordable with %s Gold", (gold) => {
-  const game = produce(merchant(), (d) => {
+it.each([-1, 0])("shows Merchant at the lowest committed price plus %s Gold", (offset) => {
+  const ready = merchant();
+  const gold = Math.min(...ready.support!.stock.map((slot) => slot.price)) + offset;
+  const game = produce(ready, (d) => {
     d.currency = gold;
   });
   render(<SupportOffer game={game} send={() => true} />);
-  expect(!!screen.queryByRole("button", { name: "Visit Boon Merchant" })).toBe(gold >= 20);
+  expect(!!screen.queryByRole("button", { name: "Visit Boon Merchant" })).toBe(offset >= 0);
 });
 it("labels the wallet and prices as Gold", () => {
   const s = merchant();
   const game = accept(s, { type: "enterSupport", visit: s.support!.id });
   render(<SupportScreen game={requireMerchant(game)} send={() => true} />);
-  expect(screen.getAllByText("20 Gold")[0]).toBeTruthy();
-  expect(screen.getAllByRole("button", { name: /^Buy .+ for 20 Gold$/ })).toHaveLength(3);
-  expect(screen.getByText("Limit 1")).toBeTruthy();
+  expect(
+    within(screen.getByRole("heading", { name: "Boon Merchant" }).closest("header")!).getByText(
+      `${game.currency} Gold`,
+    ),
+  ).toBeTruthy();
+  expect(screen.getAllByRole("button", { name: /^Buy .+ for \d+ Gold$/ })).toHaveLength(3);
+  expect(screen.getByText("Limit 1 per customer - No Refunds!")).toBeTruthy();
   expect(screen.queryByRole("heading", { level: 2 })).toBeNull();
   expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(3);
 });
@@ -84,7 +80,7 @@ it("keeps unavailable offers inspectable and rejects purchases with their specif
   const { rerender } = render(<SupportScreen game={requireMerchant(game)} send={send} />);
   expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(3);
   expect(screen.getAllByText("Not enough Gold")).toHaveLength(3);
-  fireEvent.click(screen.getAllByRole("button", { name: /^Buy .+ for 20 Gold$/ })[0]!);
+  fireEvent.click(screen.getAllByRole("button", { name: /^Buy .+ for \d+ Gold$/ })[0]!);
   expect(send).not.toHaveBeenCalled();
   rerender(
     <SupportScreen
@@ -97,7 +93,7 @@ it("keeps unavailable offers inspectable and rejects purchases with their specif
     />,
   );
   expect(screen.getAllByText("Purchase used")).toHaveLength(3);
-  fireEvent.click(screen.getAllByRole("button", { name: /^Buy .+ for 20 Gold$/ })[0]!);
+  fireEvent.click(screen.getAllByRole("button", { name: /^Buy .+ for \d+ Gold$/ })[0]!);
   expect(send).not.toHaveBeenCalled();
 });
 

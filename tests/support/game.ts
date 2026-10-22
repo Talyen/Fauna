@@ -239,3 +239,17 @@ export function requireReward(state: GameState): RewardState {
     throw new Error("Scenario requires a reward choice.");
   return state;
 }
+
+/** A saved Merchant destination funded for any baseline offer; journey earnings stay exact. */
+export function merchantDestination() {
+  const initial = createGame(7);
+  let state = accept(accept(initial, { type: "draft", species: initial.starterOffers[0]! }), {
+    type: "start",
+  });
+  state = winBattle(accept(state, { type: "beginBattle" }));
+  const ready = accept(state, recruitChoice(state));
+  if (ready.phase !== "teamSelection" || !ready.support) throw new Error("Expected seeded Merchant stock.");
+  return produce(ready, (draft) => {
+    draft.currency = 40;
+  });
+}

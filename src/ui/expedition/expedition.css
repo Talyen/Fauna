@@ -344,13 +344,6 @@
   align-items: center;
   gap: var(--screen-item-gap);
 }
-.merchant-context {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--screen-section-gap);
-  width: 100%;
-}
 .merchant-wallet {
   display: flex;
   align-items: center;
@@ -365,6 +358,9 @@
 .merchant-status {
   color: var(--muted-foreground);
   font-size: var(--text-secondary);
+}
+.merchant-policy {
+  text-align: center;
 }
 .merchant-stock {
   flex-wrap: nowrap;

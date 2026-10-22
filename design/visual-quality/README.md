@@ -9,7 +9,7 @@ Use this pack with the repo [UI design](../../.agents/skills/fauna-ui-design/SKI
 - **User approved:** an image the user explicitly selected, with the choice date and scope recorded here
 - **Counterexample:** a specific visible weakness to avoid, not a ban on everything in the image
 
-On 2026-10-22 the user rejected both Merchant designs and preferred A over B. A was restored after that feedback; the later [user-directed revision](references/merchant-current-1280.png) is now implemented with names in inspection, secondary purchase controls and a split Gold/Limit 1 row. Its aesthetic acceptance remains pending. Neither is an approved whole-screen reference. Never infer approval from integration, passing checks or silence. The older [battle A composition](../battle-layout/README.md) and [interaction decisions](../PHONE_DECISIONS.md) retain only their documented scope; current contracts supersede outdated details.
+On 2026-10-22 the user rejected both Merchant designs and preferred A over B. A was restored after that feedback; the later [user-directed revision](references/merchant-current-1280.png) is now implemented with names in inspection, secondary purchase controls, Gold in the header and a centered italic “Limit 1 per customer - No Refunds!” line above the shelf. Prices now roll independently from 20–40 Gold and persist with the offers. Its aesthetic acceptance remains pending. Neither is an approved whole-screen reference. Never infer approval from integration, passing checks or silence. The older [battle A composition](../battle-layout/README.md) and [interaction decisions](../PHONE_DECISIONS.md) retain only their documented scope; current contracts supersede outdated details.
 
 ## Whole-screen reference set
 

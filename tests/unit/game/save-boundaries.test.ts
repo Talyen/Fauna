@@ -3,7 +3,14 @@ import { produce } from "immer";
 import { createSession } from "../../../src/application/session";
 import { dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { accept, bossReward, recruitChoice, starterJourney, winBattle } from "../../support/game";
+import {
+  accept,
+  bossReward,
+  recruitChoice,
+  starterJourney,
+  winBattle,
+  merchantDestination,
+} from "../../support/game";
 
 it.each([
   { controlled: "stun" as const, controlTurns: 0 },
@@ -39,7 +46,7 @@ it("rejects a victory receipt presented as a returned journey", () => {
   expect(decodeSave(encodeSave(accept(won, { type: "abandon" })))).toEqual(accept(won, { type: "abandon" }));
 });
 
-it.each([1, 14, 19, 21, 1000000])("rejects an impossible Merchant price of %s", (price) => {
+it.each([1, 14, 19, 20.5, 41, 1000000])("rejects an impossible Merchant price of %s", (price) => {
   const won = winBattle(accept(starterJourney(3, "captoad"), { type: "beginBattle" }));
   const destinations = accept(
     produce(won, (draft) => {
@@ -72,14 +79,17 @@ it("rejects a Merchant discount without Merchant's Favor", () => {
 it("keeps the committed full price when Favor is purchased from the current Merchant", () => {
   for (let seed = 1; seed <= 100; seed++) {
     const won = winBattle(accept(starterJourney(seed, "captoad"), { type: "beginBattle" }));
-    const destinations = accept(won, recruitChoice(won));
+    const destinations = produce(accept(won, recruitChoice(won)), (draft) => {
+      draft.currency = 40;
+    });
     const visit = destinations.support;
     if (!visit) continue;
     const favor = visit.stock.find((slot) => slot.boon === "merchants-favor");
     if (!favor) continue;
     const shopping = accept(destinations, { type: "enterSupport", visit: visit.id });
     const purchased = accept(shopping, { type: "buyBoon", visit: visit.id, slot: favor.slot });
-    expect(purchased.support!.stock.every((slot) => slot.price === 20)).toBe(true);
+    expect(purchased.support!.stock).toEqual(visit.stock);
+    expect(purchased.support!.stock.every((slot) => slot.price >= 20 && slot.price <= 40)).toBe(true);
     expect(decodeSave(encodeSave(purchased))).toEqual(purchased);
     return;
   }
@@ -163,4 +173,13 @@ it.each([999_999, 1_000_000])("keeps final victory saveable with %s previous win
   expect(won.phase).toBe("victory");
   expect(won.wins).toBe(1_000_000);
   expect(decodeSave(encodeSave(won))).toEqual(won);
+});
+
+it.each([12, 34])("rejects a price outside the discounted range: %s", (price) => {
+  const corrupt = produce(merchantDestination(), (draft) => {
+    draft.boons = ["merchants-favor"];
+    for (const slot of draft.support!.stock) slot.price = 13;
+    draft.support!.stock[0]!.price = price;
+  });
+  expect(() => decodeSave(encodeSave(corrupt))).toThrow();
 });

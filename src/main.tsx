@@ -9,6 +9,7 @@ import { createPlatform } from "./platform";
 import { validateContent } from "./game/content-validation";
 import { App } from "./ui/App";
 import "@fontsource-variable/inter/wght.css";
+import "@fontsource-variable/inter/wght-italic.css";
 import "./ui/styles.css";
 for (const name of ["full", "empty"])
   document.documentElement.style.setProperty(`--mana-${name}-image`, `url("${assetUrl(`mana.${name}`)}")`);

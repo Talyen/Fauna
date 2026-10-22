@@ -3,20 +3,14 @@ import { produce } from "immer";
 import { BOONS } from "../../../src/game/content";
 import { createGame, dispatch } from "../../../src/game/engine";
 import { encodeSave, decodeSave } from "../../../src/game/save";
-import { recruitChoice, accept, winBattle } from "../../support/game";
-function merchant() {
-  let s = accept(accept(createGame(7), { type: "draft", species: createGame(7).starterOffers[0]! }), {
-    type: "start",
-  });
-  s = winBattle(accept(s, { type: "beginBattle" }));
-  return accept(s, recruitChoice(s));
-}
+import { recruitChoice, accept, winBattle, merchantDestination as merchant } from "../../support/game";
 it("saves an atomic purchase, rejects repeats and progresses to fresh destinations", () => {
   const s = merchant();
   const v = s.support!;
   const entered = accept(s, { type: "enterSupport", visit: v.id });
   const bought = accept(entered, { type: "buyBoon", visit: v.id, slot: v.stock[0]!.slot });
-  expect(bought.currency).toBe(0);
+  expect(bought.currency).toBe(s.currency - v.stock[0]!.price);
+  expect(bought.rng).toBe(entered.rng);
   expect(bought.journey!.currency).toBe(20);
   expect(decodeSave(encodeSave(bought))).toEqual(bought);
   expect(dispatch(bought, { type: "buyBoon", visit: v.id, slot: v.stock[1]!.slot }).state).toBe(bought);
@@ -58,7 +52,12 @@ it("rejects stale and unaffordable purchases without changing state or RNG", () 
 it("can roll no Merchant after an ordinary victory", () => {
   let s = merchant();
   s = winBattle(accept(s, { type: "beginBattle" }));
-  s = accept(s, recruitChoice(s));
+  s = accept(
+    produce(s, (draft) => {
+      draft.rng = 0;
+    }),
+    recruitChoice(s),
+  );
   expect(s.encounter).toBe(2);
   expect(s.support).toBeNull();
   expect(decodeSave(encodeSave(s))).toEqual(s);
@@ -66,9 +65,13 @@ it("can roll no Merchant after an ordinary victory", () => {
 it("preserves eight battles after Merchant purchases", () => {
   let s = merchant();
   for (let i = 1; i < 8; i++) {
-    if (s.support?.kind === "merchant") {
+    if (s.support?.kind === "merchant" && s.support.stock.some((slot) => slot.price <= s.currency)) {
       s = accept(s, { type: "enterSupport", visit: s.support.id });
-      s = accept(s, { type: "buyBoon", visit: s.support!.id, slot: s.support!.stock[0]!.slot });
+      s = accept(s, {
+        type: "buyBoon",
+        visit: s.support!.id,
+        slot: s.support!.stock.find((slot) => slot.price <= s.currency)!.slot,
+      });
       s = accept(s, { type: "leaveSupport", visit: s.support!.id });
     }
     s = winBattle(accept(s, { type: "beginBattle" }));
@@ -95,13 +98,15 @@ it("keeps Merchant stock and combat offers through Campfire rest and reload", ()
   expect(decodeSave(encodeSave(s))).toEqual(s);
   expect(accept(s, { type: "enterSupport", visit: visit!.id }).phase).toBe("support");
 });
-it.each([0, 19, 20])("requires enough Gold to enter the Merchant with %s Gold", (gold) => {
-  const s = produce(merchant(), (d) => {
+it.each([-1, 0])("checks the cheapest committed price at affordability offset %s", (offset) => {
+  const ready = merchant();
+  const gold = Math.min(...ready.support!.stock.map((slot) => slot.price)) + offset;
+  const s = produce(ready, (d) => {
     d.currency = gold;
   });
   const result = dispatch(s, { type: "enterSupport", visit: s.support!.id });
-  expect(result.accepted).toBe(gold >= 20);
-  if (gold < 20) expect(result.state).toBe(s);
+  expect(result.accepted).toBe(offset >= 0);
+  if (!result.accepted) expect(result.state).toBe(s);
 });
 it("rejects obsolete saves and retired Spring visits", () => {
   const s = merchant();
@@ -145,11 +150,12 @@ it("discounts each new Merchant with Favor and persists the paid price", () => {
       state = accept(state, recruitChoice(state));
     }
   }
-  expect(state.support!.stock.map((slot) => slot.price)).toEqual([13, 13, 13]);
+  expect(state.support!.stock.every((slot) => slot.price >= 13 && slot.price <= 33)).toBe(true);
+  const price = state.support!.stock[0]!.price;
   const before = state.currency;
   state = accept(state, { type: "enterSupport", visit: state.support!.id });
   state = accept(state, { type: "buyBoon", visit: state.support!.id, slot: state.support!.stock[0]!.slot });
-  expect(state.currency).toBe(before - 13);
+  expect(state.currency).toBe(before - price);
   expect(decodeSave(encodeSave(state))).toEqual(state);
 });
 it("adds Smuggler's Map to the settled reward once without duplicating combat earnings", () => {
@@ -229,3 +235,31 @@ it.each([0, 1, 2, 3, BOONS.length])(
     expect(decodeSave(encodeSave(game))).toEqual(game);
   },
 );
+
+it.each([false, true])("rolls and saves every inclusive price with Favor=%s", (favor) => {
+  const observed = new Set<number>();
+  const low = favor ? 13 : 20,
+    high = favor ? 33 : 40;
+  for (let seed = 1; seed <= 500; seed++) {
+    const initial = createGame(seed);
+    const drafted = produce(
+      accept(initial, { type: "draft", species: initial.starterOffers[0]! }),
+      (draft) => {
+        draft.currency = 100;
+        if (favor) draft.boons = ["merchants-favor"];
+      },
+    );
+    const command = { type: "start" } as const;
+    const state = accept(drafted, command);
+    expect(accept(drafted, command)).toEqual(state);
+    if (!state.support) continue;
+    for (const slot of state.support.stock) {
+      expect(Number.isInteger(slot.price)).toBe(true);
+      expect(slot.price).toBeGreaterThanOrEqual(low);
+      expect(slot.price).toBeLessThanOrEqual(high);
+      observed.add(slot.price);
+    }
+    expect(decodeSave(encodeSave(state))).toEqual(state);
+  }
+  expect([...observed].sort((a, b) => a - b)).toEqual(Array.from({ length: 21 }, (_, i) => low + i));
+});

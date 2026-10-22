@@ -67,9 +67,10 @@ describe("journey lifecycle behavior baseline", () => {
     for (let room = 0; room < 8; room++) {
       if (state.support && state.support.stock.some((slot) => slot.price <= state.currency)) {
         const visit = state.support;
+        const slot = visit.stock.find((offer) => offer.price <= state.currency)!;
         step({ type: "enterSupport", visit: visit.id });
-        step({ type: "buyBoon", visit: visit.id, slot: visit.stock[0]!.slot });
-        step({ type: "buyBoon", visit: visit.id, slot: visit.stock[0]!.slot });
+        step({ type: "buyBoon", visit: visit.id, slot: slot.slot });
+        step({ type: "buyBoon", visit: visit.id, slot: slot.slot });
         step({ type: "leaveSupport", visit: visit.id });
       }
       if (state.expedition?.recruit && state.roster.length < 5)

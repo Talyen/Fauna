@@ -77,7 +77,9 @@ it("makes Deck available in drafting, rewards and Merchant without committing in
     type: "start",
   });
   const reward = winBattle(accept(started, { type: "beginBattle" }));
-  const destination = accept(reward, recruitChoice(reward));
+  const destination = produce(accept(reward, recruitChoice(reward)), (draft) => {
+    draft.currency = 40;
+  });
   const merchant = accept(destination, { type: "enterSupport", visit: destination.support!.id });
   for (const game of [
     accept(createGame(7), { type: "draft", species: createGame(7).starterOffers[0]! }),
