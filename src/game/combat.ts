@@ -368,6 +368,12 @@ export function removeFreezeBuildup(state: GameState, unit: Combatant, events: G
   cleanseRewards(state, unit, 1, events);
 }
 
+const harmfulStatuses = ["burn", "poison", "bleed", "stun", "freeze", "blind"] as const;
+export function hasHarmfulEffects(unit: Combatant): boolean {
+  const stats = unit.combat;
+  return !!stats && (!!stats.controlled || harmfulStatuses.some((status) => Number(stats[status]) > 0));
+}
+
 export function removeEffects(
   unit: Combatant,
   kind: "cleanse" | "purge",
@@ -381,7 +387,7 @@ export function removeEffects(
   const removedStatuses: NonNullable<GameEvent["affectedStatus"]>[] = [];
   const statuses =
     kind === "cleanse"
-      ? (["burn", "poison", "bleed", "stun", "freeze", "blind"] as const)
+      ? harmfulStatuses
       : ([
           "armor",
           "thorns",

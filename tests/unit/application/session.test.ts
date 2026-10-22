@@ -42,6 +42,49 @@ function platform(data: string | null = null): Platform {
     },
   };
 }
+it.each([false, true])("captures development permission at session creation (%s)", async (development) => {
+  const capabilities = { development };
+  const s = createSession(platform(JSON.stringify(run())), 3, capabilities);
+  try {
+    await s.load();
+    capabilities.development = !development;
+    const before = s.store.getState().game;
+    expect(s.command({ type: "devWinBattle" })).toBe(development);
+    if (development) expect(s.store.getState().game.phase).toBe("recruit");
+    else expect(s.store.getState().game).toBe(before);
+  } finally {
+    await s.dispose();
+  }
+});
+
+it("saves the latest browser checkpoint when backup growth exceeds the storage quota", async () => {
+  const memory = new MemoryStorage();
+  const saved = JSON.stringify(run());
+  memory.setItem("fauna.save.v1", saved);
+  const set = memory.setItem.bind(memory);
+  // Replacing the primary fits; allocating another checkpoint does not.
+  memory.setItem = (key, data) => {
+    if (key.includes("backup")) throw new Error("quota exceeded");
+    set(key, data);
+  };
+  const s = createSession(createBrowserPlatform(memory));
+  try {
+    await s.load();
+    expect(s.command({ type: "endTurn" })).toBe(true);
+    expect(await s.flush()).toBe(true);
+    expect(JSON.parse(memory.getItem("fauna.save.v1")!)).toEqual(s.store.getState().game);
+    const resumed = createSession(createBrowserPlatform(memory));
+    try {
+      await resumed.load();
+      expect(resumed.store.getState().game).toEqual(s.store.getState().game);
+    } finally {
+      await resumed.dispose();
+    }
+  } finally {
+    await s.dispose();
+  }
+});
+
 describe("save orchestration", () => {
   it("resumes committed combat and rewards without replaying commands", async () => {
     for (const game of [run(), winBattle()]) {

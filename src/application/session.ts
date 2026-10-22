@@ -18,6 +18,7 @@ export interface SessionView {
   committedCommand: Command | null;
 }
 export function createSession(platform: Platform, seed = 1, capabilities: { development?: boolean } = {}) {
+  const development = capabilities.development === true;
   const diagnostics = createDiagnostics(platform.diagnostics);
   const store = createStore<SessionView>(() => ({
     game: createGame(seed),
@@ -225,7 +226,7 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
     command(command: Command) {
       const view = store.getState();
       if (disposed || view.closing || view.overlayActive || view.cloud.blocking || !view.ready) return false;
-      const result = dispatch(view.game, command, capabilities.development === true);
+      const result = dispatch(view.game, command, development);
       if (!result.accepted) {
         store.setState({ error: result.reason }); // Internal command diagnostics only.
         return false;

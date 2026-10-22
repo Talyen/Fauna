@@ -47,7 +47,14 @@ export function createBrowserPlatform(storage?: Storage): Platform {
         }
         const backups = [`${KEY}.backup1`, `${KEY}.backup2`].filter((key) => readable.has(key));
         for (let index = backups.length - 1; index >= 0; index--)
-          if (intact[index] !== undefined) source.setItem(backups[index]!, intact[index]!);
+          if (intact[index] !== undefined) {
+            try {
+              source.setItem(backups[index]!, intact[index]!);
+            } catch {
+              // Backup growth may exceed quota while replacing the primary still fits.
+              // A failed setItem leaves the existing recovery slot intact.
+            }
+          }
         source.setItem(KEY, data);
       },
     },

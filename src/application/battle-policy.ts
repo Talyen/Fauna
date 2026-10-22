@@ -1,9 +1,9 @@
-import { controlled, mostInjured } from "../game/combat";
+import { controlled, hasHarmfulEffects, mostInjured } from "../game/combat";
 import { actionValue, cardCost, physicalBonus } from "../game/rules";
 import { definition, species } from "../game/content";
 import type { Command, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 16;
+export const BATTLE_POLICY_VERSION = 17;
 /** Only visible information enters scoring; no forecasts or gameplay RNG are sampled. */
 export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
   if (state.phase !== "battle" || !state.battle) return [];
@@ -71,7 +71,14 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
             ? [mostInjured(allies)!]
             : allies) {
           const missing = species(ally.species).health - ally.health;
-          if (missing > 0) add(id, 3000 + Math.min(value, missing), def.target ? undefined : ally.id);
+          const cleanses =
+            hasHarmfulEffects(ally) &&
+            def.effects?.some((effect) => effect.kind === "cleanse" && effect.target === "recipient");
+          add(
+            id,
+            missing > 0 ? 3000 + Math.min(value, missing) : cleanses ? 150 : 0,
+            def.target ? undefined : ally.id,
+          );
         }
     } else if (def.effect === "mana") {
       add(id, 400 + Math.min(value, state.battle.maxMana - state.battle.mana + cardCost(card, state)));
