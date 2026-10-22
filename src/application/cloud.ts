@@ -25,6 +25,22 @@ const digest = /^[a-f0-9]{64}$/;
 export const cloudName = (s: Pick<CloudSnapshot, "device" | "sequence">) =>
   `fauna-v1-${s.device}-${s.sequence % 2}.json`;
 const isCloudName = (name: string) => /^fauna-v1-[a-f0-9]{32}-[01]\.json$/.test(name);
+async function bounded(operation: Promise<void>, timeout: number, expired = () => {}) {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  try {
+    await Promise.race([
+      operation,
+      new Promise<void>((resolve) => {
+        timer = setTimeout(() => {
+          expired();
+          resolve();
+        }, timeout);
+      }),
+    ]);
+  } finally {
+    clearTimeout(timer);
+  }
+}
 async function sha(text: string) {
   const bytes = await globalThis.crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
   return Array.from(new Uint8Array(bytes), (b) => b.toString(16).padStart(2, "0")).join("");
@@ -113,7 +129,11 @@ export function createCloud(
     retryTimer = setTimeout(() => {
       retryTimer = undefined;
       retrying = true;
-      void (initialized ? reconcile(true) : initialize(localData, true)).finally(() => {
+      const operation = initialized ? reconcile(true) : initialize(localData, true);
+      const token = generation;
+      void bounded(operation, 5000, () => {
+        if (token === generation) offline();
+      }).finally(() => {
         retrying = false;
         if (view.status === "Pending") scheduleRetry();
       });
@@ -183,7 +203,7 @@ export function createCloud(
     upload(next);
   }
   async function reconcile(background = false) {
-    if (!port || !identity?.available || identity.enabled === false) return;
+    if (!alive || !port || !identity?.available || identity.enabled === false) return;
     const token = ++generation;
     remoteReady = false;
     update({
@@ -194,18 +214,22 @@ export function createCloud(
     try {
       // An in-flight write must finish before comparing remote heads.
       await running;
+      if (!alive || token !== generation) return;
       const files = (await port.list()).filter(isCloudName);
+      if (!alive || token !== generation) return;
       if (files.length > 64) throw new Error("Cloud device limit reached. Local progress remains available.");
       const streams = new Map<string, CloudSnapshot>();
       let invalid = false;
       for (const name of files) {
         const raw = await port.read(name);
+        if (!alive || token !== generation) return;
         if (!raw) {
           invalid = true;
           continue;
         }
         try {
           const record = await parseSnapshot(raw, identity.profile);
+          if (!alive || token !== generation) return;
           if (cloudName(record) !== name) throw new Error("Cloud slot identity differs.");
           const previous = streams.get(record.device);
           if (!previous || record.sequence > previous.sequence) streams.set(record.device, record);
@@ -255,6 +279,7 @@ export function createCloud(
       }
       remoteReady = !invalid;
       if (current) await persist(current.payload, background || heads.length > 1 ? heads : [current]);
+      if (!alive || token !== generation) return;
       update({
         status: invalid ? "Pending" : current && acknowledged !== current.id ? "Syncing" : "Synced",
         blocking: false,
@@ -266,6 +291,7 @@ export function createCloud(
     }
   }
   const offline = () => {
+    if (!alive) return false;
     if (replacing) return false;
     generation++;
     remoteReady = false;
@@ -273,6 +299,7 @@ export function createCloud(
     return true;
   };
   async function initialize(data: string | null, background = false) {
+    if (!alive) return;
     const starting = ++generation;
     localData = data;
     if (!port) return;
@@ -352,6 +379,7 @@ export function createCloud(
       return view;
     },
     async start(data: string | null) {
+      if (!alive) return;
       let timer: ReturnType<typeof setTimeout> | undefined;
       try {
         await Promise.race([
@@ -393,7 +421,8 @@ export function createCloud(
       clearTimeout(retryTimer);
       generation++;
       remoteReady = false;
-      return metadataWrites;
+      // Gameplay is already durable; optional metadata cannot hold session teardown.
+      return bounded(metadataWrites, 2000);
     },
   };
 }

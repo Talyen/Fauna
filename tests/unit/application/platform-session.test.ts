@@ -111,57 +111,62 @@ it("does not attempt cloud metadata or report pending sync when Steam is unavail
   await session.dispose();
 });
 
-it("keeps newer local saves and bounded close independent of stalled cloud metadata", async () => {
-  vi.useFakeTimers();
-  let release!: () => void;
-  const gate = new Promise<void>((resolve) => {
-    release = resolve;
-  });
-  const metadata = vi.fn(async () => {
-    await gate;
-  });
-  const saved: number[] = [];
-  const quit = vi.fn(async () => {});
-  const session = createSession({
-    desktop: true,
-    steam: { available: false },
-    quit,
-    saves: {
-      readCandidates: async () => [],
-      write: async (data) => {
-        saved.push(JSON.parse(data).revision);
+it.each(["quit", "dispose"] as const)(
+  "keeps newer local saves and bounded %s independent of stalled cloud metadata",
+  async (close) => {
+    vi.useFakeTimers();
+    let release!: () => void;
+    const gate = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    const metadata = vi.fn(async () => {
+      await gate;
+    });
+    const saved: number[] = [];
+    const quit = vi.fn(async () => {});
+    const session = createSession({
+      desktop: true,
+      steam: { available: false },
+      quit,
+      saves: {
+        readCandidates: async () => [],
+        write: async (data) => {
+          saved.push(JSON.parse(data).revision);
+        },
       },
-    },
-    cloud: {
-      identity: async () => ({
-        available: true,
-        device: "a".repeat(32),
-        profile: "b".repeat(32),
-        importAvailable: false,
-      }),
-      readLocal: async () => null,
-      writeLocal: metadata,
-      preserve: async () => {},
-      importStandalone: async () => [],
-      list: async () => [],
-      read: async () => null,
-      write: async () => {},
-    },
-  });
-  try {
-    await session.load();
-    session.command({ type: "draft", species: session.store.getState().game.starterOffers[0]! });
-    await vi.waitFor(() => expect(metadata).toHaveBeenCalledOnce());
-    session.command({ type: "start" });
-    const closing = session.quit();
-    await vi.advanceTimersByTimeAsync(2100);
-    expect(saved).toEqual([1, 2]);
-    expect(quit).toHaveBeenCalledOnce();
-    release();
-    await closing;
-  } finally {
-    release();
-    await session.dispose();
-    vi.useRealTimers();
-  }
-});
+      cloud: {
+        identity: async () => ({
+          available: true,
+          device: "a".repeat(32),
+          profile: "b".repeat(32),
+          importAvailable: false,
+        }),
+        readLocal: async () => null,
+        writeLocal: metadata,
+        preserve: async () => {},
+        importStandalone: async () => [],
+        list: async () => [],
+        read: async () => null,
+        write: async () => {},
+      },
+    });
+    try {
+      await session.load();
+      session.command({ type: "draft", species: session.store.getState().game.starterOffers[0]! });
+      await vi.waitFor(() => expect(metadata).toHaveBeenCalledOnce());
+      session.command({ type: "start" });
+      let closed = false;
+      const closing = session[close]().then(() => (closed = true));
+      await vi.advanceTimersByTimeAsync(2100);
+      expect(closed).toBe(true);
+      expect(saved).toEqual([1, 2]);
+      expect(quit).toHaveBeenCalledTimes(close === "quit" ? 1 : 0);
+      release();
+      await closing;
+    } finally {
+      release();
+      await session.dispose();
+      vi.useRealTimers();
+    }
+  },
+);

@@ -456,3 +456,74 @@ it("flush waits for admitted hashing, metadata and the resulting upload", async 
     await f.manager.dispose();
   }
 });
+
+it("bounds disposal when an admitted metadata write never finishes", async () => {
+  vi.useFakeTimers();
+  const f = fixture();
+  let release!: () => void;
+  const gate = new Promise<void>((resolve) => (release = resolve));
+  try {
+    await f.manager.start(null);
+    f.port.writeLocal = vi.fn(async () => gate);
+    const committing = f.manager.commit(progress);
+    await vi.waitFor(() => expect(f.port.writeLocal).toHaveBeenCalledOnce());
+    let disposed = false;
+    const closing = f.manager.dispose().then(() => (disposed = true));
+    await vi.advanceTimersByTimeAsync(2000);
+    expect(disposed).toBe(true);
+    await closing;
+    release();
+    await committing;
+    expect(f.files.size).toBe(0);
+  } finally {
+    release();
+    await f.manager.dispose();
+    vi.useRealTimers();
+  }
+});
+
+it("revokes retained retry and start capabilities after disposal", async () => {
+  const f = fixture();
+  await f.manager.start(initial);
+  await f.manager.flush();
+  await f.manager.dispose();
+  const list = (f.port.list = vi.fn(f.port.list));
+  const identify = (f.port.identity = vi.fn(f.port.identity));
+  await f.manager.retry();
+  await f.manager.start(progress);
+  expect(list).not.toHaveBeenCalled();
+  expect(identify).not.toHaveBeenCalled();
+});
+
+it("retries again after a stalled background read and ignores its late result", async () => {
+  vi.useFakeTimers();
+  const f = fixture();
+  let release!: () => void;
+  const gate = new Promise<void>((resolve) => (release = resolve));
+  try {
+    f.port.list = async () => {
+      throw new Error("offline");
+    };
+    await f.manager.start(initial);
+    const remote = await snapshot(progress, other, 1);
+    f.files.set(cloudName(remote), JSON.stringify(remote));
+    const list = (f.port.list = vi.fn(async () => {
+      if (list.mock.calls.length === 1) await gate;
+      return [...f.files.keys()];
+    }));
+    await vi.advanceTimersByTimeAsync(15000);
+    expect(list).toHaveBeenCalledTimes(1);
+    await vi.advanceTimersByTimeAsync(20000);
+    await vi.waitFor(() => expect(f.manager.view.status).toBe("Synced"));
+    const saved = f.local.data;
+    expect(list).toHaveBeenCalledTimes(2);
+    release();
+    await vi.advanceTimersByTimeAsync(0);
+    expect(f.local.data).toBe(saved);
+    expect(f.install).not.toHaveBeenCalled();
+  } finally {
+    release();
+    await f.manager.dispose();
+    vi.useRealTimers();
+  }
+});
