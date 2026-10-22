@@ -1,5 +1,5 @@
 import { expect, it, vi } from "vitest";
-import { createDiagnostics } from "../../src/application/diagnostics";
+import { createDiagnostics } from "../../../src/application/diagnostics";
 
 it("prevents diagnostic consumers from corrupting retained and persisted evidence", () => {
   const write = vi.fn();
