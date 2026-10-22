@@ -3,6 +3,8 @@ dist/
 release/
 reports/
 playwright-report/
+blob-report/
+all-blob-reports/
 test-results/
 .integration-lock/
 *.log
