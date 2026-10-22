@@ -60,7 +60,8 @@ jobs:
           node-version-file: .node-version
           cache: npm
       - name: Install dependencies
-        run: npm ci
+        timeout-minutes: 3
+        run: npm ci --no-audit --no-fund
       - name: Verify release version
         run: npm run verify:release-version
       - name: Draft unreleased player notes
@@ -104,7 +105,8 @@ jobs:
           node-version-file: .node-version
           cache: npm
       - name: Install dependencies
-        run: npm ci
+        timeout-minutes: 3
+        run: npm ci --no-audit --no-fund
       - name: Unit and DOM suites
         run: npm run test:full -- --reporter=default --reporter=json --outputFile.json=reports/vitest.json
       - name: Summarize unit results
@@ -139,7 +141,8 @@ jobs:
           node-version-file: .node-version
           cache: npm
       - name: Install dependencies
-        run: npm ci
+        timeout-minutes: 3
+        run: npm ci --no-audit --no-fund
       - name: Build production browser assets
         run: npm run build
       - name: Bundle allowance
@@ -200,7 +203,8 @@ jobs:
           node-version-file: .node-version
           cache: npm
       - name: Install dependencies
-        run: npm ci
+        timeout-minutes: 3
+        run: npm ci --no-audit --no-fund
       - name: Download browser-build
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
@@ -253,7 +257,8 @@ jobs:
           node-version-file: .node-version
           cache: npm
       - name: Install dependencies
-        run: npm ci
+        timeout-minutes: 3
+        run: npm ci --no-audit --no-fund
       - name: Download browser-build
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
@@ -301,7 +306,8 @@ jobs:
           node-version-file: .node-version
           cache: npm
       - name: Install dependencies
-        run: npm ci
+        timeout-minutes: 3
+        run: npm ci --no-audit --no-fund
       - name: Verify release version
         run: npm run verify:release-version
       - name: Package Windows
@@ -355,7 +361,9 @@ jobs:
         with:
           node-version-file: .node-version
           cache: npm
-      - run: npm ci
+      - name: Install dependencies
+        timeout-minutes: 3
+        run: npm ci --no-audit --no-fund
       - name: Download browser-shard-*
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         if: always()
