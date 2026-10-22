@@ -47,6 +47,7 @@ Gameplay settles before visual feedback. Accepted commands automatically save; f
 
 Current contracts and workflows:
 
+- [Feature roadmap: completed work and future suggestions](Docs/ROADMAP.md)
 - [Contribution workflow and verification](CONTRIBUTING.md), [agent instructions](AGENTS.md) and [script implementation map](scripts/README.md)
 - [Architecture, commands and saves](Docs/ARCHITECTURE.md)
 - [Content, ability costs and artwork](Docs/CONTENT.md)
