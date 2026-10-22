@@ -1,7 +1,7 @@
 import { createGame } from "../../src/game/engine";
 import { encodeSave } from "../../src/game/save";
 import { createRequire } from "node:module";
-import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { describe, it, expect } from "vitest";
@@ -47,4 +47,35 @@ it("trusts only an exact explicit loopback HTTP development origin", () => {
     "file:///tmp/index.html",
   ])
     expect(isDevelopmentUrl(url)).toBe(false);
+});
+
+it.each(["expedition.json", "expedition.json.bak1"])(
+  "recovers readable desktop slots when %s is unreadable",
+  async (unreadable) => {
+    const directory = await mkdtemp(path.join(tmpdir(), "fauna-storage-"));
+    try {
+      const data = encodeSave(createGame(7));
+      await mkdir(path.join(directory, unreadable));
+      await writeFile(
+        path.join(directory, unreadable === "expedition.json" ? "expedition.json.bak1" : "expedition.json"),
+        data,
+      );
+      expect(await createStorage(directory).readCandidates()).toContainEqual({
+        source: unreadable === "expedition.json" ? "backup" : "primary",
+        data,
+      });
+    } finally {
+      await rm(directory, { recursive: true });
+    }
+  },
+);
+
+it("reports unreadable desktop storage when no candidate can be recovered", async () => {
+  const directory = await mkdtemp(path.join(tmpdir(), "fauna-storage-"));
+  try {
+    await mkdir(path.join(directory, "expedition.json"));
+    await expect(createStorage(directory).readCandidates()).rejects.toThrow("unreadable");
+  } finally {
+    await rm(directory, { recursive: true });
+  }
 });
