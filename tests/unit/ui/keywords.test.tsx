@@ -188,7 +188,7 @@ describe("keyword foundation", () => {
 
   it("uses Alchemy colors and shared selectors for canonical keyword and damage labels", () => {
     const tokens = readFileSync(new URL("../../../src/ui/tokens.css", import.meta.url), "utf8");
-    const styles = readFileSync(new URL("../../../src/ui/styles.css", import.meta.url), "utf8");
+    const styles = readFileSync(new URL("../../../src/ui/shared/keywords.css", import.meta.url), "utf8");
     const alchemyColors: Partial<Record<(typeof KEYWORD_IDS)[number], string>> = {
       poison: "15803d",
       nature: "059669",

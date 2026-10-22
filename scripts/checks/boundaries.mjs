@@ -55,7 +55,10 @@ export function boundaryViolations(file, source) {
   const app = file.startsWith("src/application/");
   const platform = file.startsWith("src/platform/");
   const tooling = file.startsWith("src/tooling/");
-  const ui = file.startsWith("src/ui/") || file.startsWith("src/components/");
+  const utility = file.startsWith("src/lib/");
+  const infrastructure = file.startsWith("src/ui/infrastructure/");
+  const primitive = file.startsWith("src/components/ui/");
+  const ui = file.startsWith("src/ui/") || file.startsWith("src/components/") || file.startsWith("src/lib/");
   const errors = [];
   const fail = (message) => errors.push(`${file}: ${message}`);
   const ast = parseSync(source, { syntax: "typescript", tsx: file.endsWith(".tsx"), target: "es2022" });
@@ -66,6 +69,17 @@ export function boundaryViolations(file, source) {
         ? path.posix.normalize(path.posix.join(path.posix.dirname(file), specifier))
         : specifier;
     const within = (dir) => target.startsWith(`src/${dir}/`);
+    if (
+      (utility || infrastructure || primitive) &&
+      (within("game") ||
+        within("application") ||
+        within("platform") ||
+        (within("ui") && !within("ui/infrastructure")) ||
+        ((utility || infrastructure) && within("components")))
+    )
+      fail("Presentation foundations cannot import gameplay, application, platform or feature owners.");
+    if (utility && (/^react(?:-dom)?(?:\/|$)/.test(target) || within("ui/infrastructure")))
+      fail("React and DOM lifecycle helpers belong in src/ui/infrastructure.");
     if (file.startsWith("src/") && !tooling && within("tooling"))
       fail(`Runtime imports a development harness: ${specifier}`);
     if (tooling && (within("ui") || within("components") || /^(react(?:-dom)?)(\/|$)/.test(target)))

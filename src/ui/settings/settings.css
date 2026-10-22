@@ -1,0 +1,115 @@
+.setting-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--screen-item-gap) var(--screen-section-gap);
+  min-height: var(--control-height);
+  padding-block: var(--space-2);
+}
+.setting-row + .setting-row {
+  border-top: 1px solid var(--border);
+}
+.setting-label {
+  display: flex;
+  align-items: center;
+  gap: var(--screen-item-gap);
+  flex: 2 1 var(--settings-label-basis);
+  min-width: 0;
+}
+.setting-label svg,
+.settings-tabs svg {
+  width: var(--space-5);
+  height: var(--space-5);
+  flex-shrink: 0;
+  color: var(--primary);
+}
+.setting-control {
+  flex: 3 1 var(--settings-control-basis);
+  min-width: 0;
+  max-width: 100%;
+}
+.setting-toggle {
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.settings-heading {
+  color: var(--gold-pale);
+  font-size: var(--text-body);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: var(--screen-item-gap);
+  margin-bottom: var(--screen-item-gap);
+}
+.settings-controls {
+  display: grid;
+  gap: var(--screen-section-gap);
+  margin-top: var(--screen-section-gap);
+}
+.settings-panel {
+  margin-top: 0;
+  grid-area: 2 / 1;
+}
+.text-size-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--screen-item-gap);
+}
+.text-size-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--control-height);
+  cursor: pointer;
+}
+.settings-screen {
+  max-width: var(--settings-screen-width);
+}
+.settings-screen .settings-controls,
+.settings-combined .settings-controls {
+  flex: 0 0 auto;
+  margin-top: 0;
+  grid-template-rows: auto auto;
+}
+.settings-screen .settings-panel,
+.settings-combined .settings-panel {
+  min-height: 0;
+  overflow: visible;
+  padding: var(--space-2);
+}
+
+.volume-controls {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--screen-item-gap);
+}
+.volume-controls output {
+  min-width: 4ch;
+  text-align: right;
+  color: var(--primary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Settings hierarchy: title, section, option, supporting text. */
+.settings-screen h1 {
+  font-size: var(--text-title);
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.settings-panel[data-state="inactive"] {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.settings-heading::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--border), transparent);
+}
+.setting-control {
+  display: flex;
+  justify-content: flex-end;
+}

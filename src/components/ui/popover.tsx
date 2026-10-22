@@ -2,8 +2,8 @@
 import * as React from "react";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { cn } from "@/lib/utils";
-import { useSurfaceRef } from "../../lib/surface-ref";
-import { useModalSurfaceRef } from "../../lib/modal-surface-ref";
+import { useSurfaceRef } from "../../ui/infrastructure/surface-ref";
+import { useModalSurfaceRef } from "../../ui/infrastructure/modal-surface-ref";
 
 export const Popover = PopoverPrimitive.Root;
 export const PopoverAnchor = PopoverPrimitive.Anchor;

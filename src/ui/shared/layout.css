@@ -1,0 +1,180 @@
+.loading {
+  padding: var(--space-12);
+}
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: var(--overlay);
+}
+.dialog-content {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+  width: min(720px, calc(100vw - var(--space-12)));
+  max-height: calc(100dvh - var(--space-12));
+  overflow: visible;
+  padding: var(--space-12) var(--space-6);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--popover);
+  color: var(--foreground);
+}
+.popover-content {
+  z-index: 50;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--popover);
+  color: var(--popover-foreground);
+  padding: var(--space-3);
+}
+:root[data-focus="visible"] button:focus {
+  outline: 2px solid var(--selected);
+  outline-offset: 6px;
+}
+.progress-track {
+  height: var(--progress-height);
+  position: relative;
+  background: var(--muted);
+  border-radius: var(--radius-round);
+  overflow: hidden;
+}
+.progress-track > span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+.progress-current {
+  background: currentColor;
+}
+.progress-previous {
+  width: var(--previous);
+  background: repeating-linear-gradient(120deg, currentColor 0 2px, var(--muted) 2px 5px);
+}
+.page-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--screen-section-gap);
+}
+.screen-heading {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  margin-inline: auto;
+  align-items: center;
+  gap: var(--screen-section-gap);
+  width: min(var(--screen-heading-width), 100%);
+  max-width: 100%;
+}
+.screen-heading-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--screen-item-gap);
+}
+.screen-heading > button {
+  justify-self: end;
+}
+.screen-heading > h1 {
+  margin: 0;
+  text-align: center;
+}
+.screen-heading > button {
+  flex-shrink: 0;
+}
+.confirm-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *:before,
+  *:after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+/* Automatic focus and pointer interaction never expose navigation decoration,
+   including shadcn rings in portaled dialogs and tab panels. */
+:root:not([data-focus="visible"]) :focus {
+  outline: none;
+  /* Remove focus decoration immediately while retaining pointer hover motion. */
+  transition-property: scale, border-color, background-color, color, transform;
+}
+.keyword-progress-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--screen-section-gap);
+  width: 100%;
+}
+
+/* Center screen composition; retain paired data alignment and spatial battle controls. */
+.page-heading h1,
+.dialog-content > h2,
+.dialog-content > p {
+  text-align: center;
+}
+.page-heading {
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+/* The viewport owns the surface. Long content uses explicit pages, never scroll areas. */
+html,
+body,
+#root {
+  height: 100%;
+  overflow: clip;
+}
+.app {
+  overflow: clip;
+}
+.paged-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--screen-section-gap);
+  min-height: 0;
+  width: 100%;
+}
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--screen-item-gap);
+  flex: 0 0 auto;
+}
+.pagination span {
+  color: var(--muted-foreground);
+  font-variant-numeric: tabular-nums;
+}
+.cloud-candidates {
+  display: grid;
+  gap: var(--screen-section-gap);
+}
+
+.cloud-candidates > section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--screen-item-gap);
+}
+.pagination-spacer {
+  min-height: var(--control-height);
+}
+[data-adaptive="true"] {
+  min-height: var(--adaptive-page-height, 0px);
+}

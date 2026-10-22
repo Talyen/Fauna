@@ -37,7 +37,7 @@ export const topics = {
     entries: ["src/game/progression.ts", "src/game/encounters.ts"],
   },
   ui: {
-    patterns: ["src/ui/", "src/components/", "design/"],
+    patterns: ["src/ui/", "src/components/", "src/lib/", "design/"],
     docs: ["Docs/UI.md", "Docs/MENU_DESIGN.md"],
     entries: ["src/ui/App.tsx", "src/ui/tokens.css"],
   },

@@ -36,7 +36,7 @@ Before removal, ignored artifacts (reports, screenshots, logs and other ignored 
 
 ## Verification
 
-The [CI speed improvement plan](Docs/CI_SPEED_PLAN.md) describes parallel jobs, browser sharding, measurements and rollout acceptance criteria.
+The archived [CI speed improvement plan](Docs/archive/CI_SPEED_PLAN.md) records parallel jobs, browser sharding, measurements and rollout acceptance criteria.
 
 | When                | Command                                                                                                            | Evidence                                                                                                             |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
@@ -67,7 +67,7 @@ CI checks the JavaScript allowance after each production build and never builds 
 
 ## Test organization
 
-Unit suites are grouped by their contract owner under `tests/unit/`: `game/`, `application/`, `platform/`, `ui/`, `tooling/` and `simulation/`. Put shared gameplay scenario builders in `tests/support/game.ts`, so browser suites do not depend on a unit-suite directory. Keep browser integration journeys in `tests/e2e/`. Moving a suite requires updating the fixed local smoke selection when affected, plus explicit route or documentation references; the recursive full-suite discovery remains unchanged.
+Focused suites are grouped by their contract owner under `tests/unit/`: `game/`, `application/`, `platform/`, `ui/`, `tooling/` and `simulation/`. Cross-layer scenarios live under `tests/integration/`: `creatures/` keeps complete kit, Auto-play, save/resume and presentation regressions together; `gameplay/` covers journey, resource and feedback contracts; `recovery/` covers recovery through application and presentation boundaries. Both groups are discovered by `vitest.config.ts` and run in the existing CI unit job, with the same per-suite Node or DOM environment. Do not split or remove valuable assertions merely to classify a suite. Put shared gameplay scenario builders in `tests/support/game.ts`, so browser suites do not depend on a unit-suite directory. Keep browser integration journeys in `tests/e2e/`. Moving a suite requires updating the fixed local smoke selection when affected, plus explicit route or documentation references; the recursive full-suite discovery must include both groups.
 
 ## Test value and coverage
 

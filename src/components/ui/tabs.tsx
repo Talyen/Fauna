@@ -4,7 +4,7 @@
 import * as React from "react";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
 
-import { useSurfaceRef } from "../../lib/surface-ref";
+import { useSurfaceRef } from "../../ui/infrastructure/surface-ref";
 import { cn } from "@/lib/utils";
 
 const Tabs = TabsPrimitive.Root;

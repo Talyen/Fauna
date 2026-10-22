@@ -1,0 +1,28 @@
+.deck-dialog {
+  width: min(
+    calc(var(--art-portrait-width) * 3 + var(--space-4) * 2 + var(--space-6) * 2 + 2px),
+    calc(100vw - 48px)
+  );
+}
+.deck-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+}
+.deck-grid .action-card {
+  width: var(--art-portrait-width);
+}
+
+.deck-dialog > .paged-content {
+  margin-top: var(--screen-section-gap);
+}
+
+/* Portrait size and readable rule-column width are independent. */
+.deck-dialog:has(> .paged-content .boon-options) {
+  width: min(var(--boon-dialog-width), calc(100vw - var(--space-12)));
+}
+.deck-dialog > .paged-content .boon-options .reward-option {
+  width: calc((100% - var(--screen-section-gap)) / 2);
+  align-items: center;
+}

@@ -1,0 +1,166 @@
+.creature-wrap {
+  min-width: 0;
+  position: relative;
+}
+.creature-card,
+.action-card {
+  padding: 0;
+  position: relative;
+  display: block;
+  overflow: visible;
+  border: var(--border-art-width) solid var(--border-art);
+  background: var(--surface);
+  border-radius: var(--radius);
+}
+.creature-card {
+  aspect-ratio: var(--art-creature-ratio);
+  width: var(--art-landscape-width);
+}
+.action-card {
+  aspect-ratio: var(--art-action-ratio);
+  width: var(--art-portrait-width);
+  flex: 0 0 auto;
+}
+.creature-card > img,
+.action-card > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: calc(var(--radius) - var(--border-art-width));
+  corner-shape: inherit;
+}
+.selected {
+  box-shadow:
+    0 0 0 var(--selection-gap) var(--background),
+    0 0 0 calc(var(--selection-gap) + var(--selection-width)) var(--selected);
+}
+.knocked-out .creature-card {
+  opacity: var(--unavailable-opacity);
+  filter: grayscale(1);
+}
+.creature-card[aria-disabled="true"],
+.action-card[aria-disabled="true"] {
+  opacity: var(--unavailable-opacity);
+}
+.game-button {
+  transition:
+    scale var(--motion-hover) ease-out,
+    border-color var(--motion-hover) ease-out,
+    background-color var(--motion-hover) ease-out,
+    color var(--motion-hover) ease-out,
+    box-shadow var(--motion-hover) ease-out;
+}
+.game-button:not(:disabled):not([aria-disabled="true"]):hover,
+:root[data-focus="visible"] .game-button:not(:disabled):not([aria-disabled="true"]):focus {
+  scale: var(--hover-scale);
+}
+.game-button:is(.creature-card, .action-card)::after {
+  content: "";
+  position: absolute;
+  inset: calc(var(--hover-frame-overlap) - var(--hover-frame-width));
+  border: var(--hover-frame-width) solid transparent;
+  border-radius: calc(var(--radius) + var(--hover-frame-width) - var(--hover-frame-overlap));
+  corner-shape: inherit;
+  pointer-events: none;
+  transition: border-color var(--motion-hover) ease-out;
+}
+.game-button:is(.creature-card, .action-card):not(.selected):not(:disabled):not(
+    [aria-disabled="true"]
+  ):hover::after {
+  border-color: var(--art-keyword-color, var(--primary));
+}
+.card-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: var(--text-body);
+  line-height: 1.5;
+}
+.card-details > strong {
+  font-size: var(--text-heading);
+}
+.card-details > p {
+  color: var(--muted-foreground);
+}
+.card-details > div > .action-effect {
+  display: block;
+}
+.action-effect {
+  font-weight: 400;
+  font-size: var(--text-rule);
+  line-height: 1.4;
+}
+/* Radix positions a separate wrapper; enlarged details must not cover controls. */
+[data-radix-popper-content-wrapper]:has(> .game-tooltip) {
+  pointer-events: none;
+}
+.game-tooltip {
+  --text-body: var(--tooltip-text-body);
+  --text-rule: var(--tooltip-text-body);
+  --text-heading: var(--tooltip-text-heading);
+  --text-name: var(--tooltip-text-heading);
+  --text-secondary: var(--tooltip-text-secondary);
+  font-size: var(--text-body);
+  /* Radix modal layers set an inline pointer override; hover details must not intercept controls. */
+  pointer-events: none !important;
+  width: max-content;
+  max-width: min(calc(var(--tooltip-max-width) * var(--tooltip-scale, 1)), calc(100vw - var(--space-8)));
+  padding: var(--space-3);
+  border-radius: var(--radius);
+  --tooltip-offset-x: 0px;
+  --tooltip-offset-y: var(--tooltip-travel);
+  overflow-wrap: anywhere;
+  overflow: visible;
+}
+.game-tooltip[data-side="bottom"] {
+  --tooltip-offset-y: calc(-1 * var(--tooltip-travel));
+}
+.game-tooltip[data-side="left"] {
+  --tooltip-offset-x: var(--tooltip-travel);
+  --tooltip-offset-y: 0px;
+}
+.game-tooltip[data-side="right"] {
+  --tooltip-offset-x: calc(-1 * var(--tooltip-travel));
+  --tooltip-offset-y: 0px;
+}
+.game-tooltip[data-state="instant-open"],
+.game-tooltip[data-state="delayed-open"] {
+  animation: tooltip-enter var(--tooltip-enter-duration) ease-out;
+}
+.game-tooltip[data-state="closed"] {
+  animation: tooltip-exit var(--tooltip-exit-duration) ease-out forwards;
+}
+@keyframes tooltip-enter {
+  from {
+    opacity: 0;
+    translate: var(--tooltip-offset-x) var(--tooltip-offset-y);
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@keyframes tooltip-exit {
+  from {
+    opacity: 1;
+    translate: 0 0;
+  }
+  to {
+    opacity: 0;
+    translate: var(--tooltip-offset-x) var(--tooltip-offset-y);
+  }
+}
+:root:not([data-focus="visible"]) :focus:not(.selected) {
+  box-shadow: none;
+}
+.creature-wrap:not(.knocked-out) .creature-card.invalid-target {
+  opacity: var(--unavailable-opacity);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .game-button {
+    scale: 1 !important;
+  }
+}

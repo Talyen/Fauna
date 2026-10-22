@@ -3,7 +3,7 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   test: {
     include: [
-      "tests/unit/game/mana.test.ts",
+      "tests/integration/gameplay/mana.test.ts",
       "tests/unit/application/session.test.ts",
       "tests/unit/tooling/verification.test.mjs",
     ],

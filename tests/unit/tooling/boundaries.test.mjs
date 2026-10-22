@@ -56,3 +56,27 @@ it("keeps development harnesses outside runtime dependencies and presentation", 
     boundaryViolations("src/tooling/a.ts", 'import {createSession} from "../application/session"'),
   ).toEqual([]);
 });
+
+it("prevents utilities and presentation foundations from bypassing feature and privileged boundaries", () => {
+  for (const file of ["src/lib/a.ts", "src/ui/infrastructure/a.ts", "src/components/ui/a.tsx"]) {
+    for (const source of [
+      'import {dispatch} from "@/game/engine"',
+      'export * from "@/application/session"',
+      'import("@/platform/browser")',
+      'import {App} from "@/ui/App"',
+      'import fs from "node:fs"',
+    ])
+      expect(boundaryViolations(file, source).length).toBeGreaterThan(0);
+  }
+  expect(boundaryViolations("src/lib/a.ts", 'import React from "react"').length).toBeGreaterThan(0);
+  expect(
+    boundaryViolations("src/ui/infrastructure/a.ts", 'import {Button} from "@/components/ui/button"').length,
+  ).toBeGreaterThan(0);
+  expect(
+    boundaryViolations(
+      "src/components/ui/a.tsx",
+      'import {useSurfaceRef} from "@/ui/infrastructure/surface-ref"',
+    ),
+  ).toEqual([]);
+  expect(boundaryViolations("src/lib/a.ts", 'import {clsx} from "clsx"')).toEqual([]);
+});

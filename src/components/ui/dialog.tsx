@@ -1,7 +1,7 @@
 // Adapted from shadcn/ui (MIT): https://ui.shadcn.com/r/styles/new-york/dialog.json
 import * as React from "react";
-import { useSurfaceRef } from "../../lib/surface-ref";
-import { useModalSurfaceRef } from "../../lib/modal-surface-ref";
+import { useSurfaceRef } from "../../ui/infrastructure/surface-ref";
+import { useModalSurfaceRef } from "../../ui/infrastructure/modal-surface-ref";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";

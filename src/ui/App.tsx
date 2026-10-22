@@ -1,14 +1,14 @@
+import { UnlockScreen } from "./expedition/unlock-screen";
+import { HomeScreen } from "./menu/home-screen";
+import { GlossaryScreen } from "./menu/glossary-screen";
+import { MenuActions, type MenuPage } from "./menu/menu-actions";
+import { OwnedBoons } from "./expedition/owned-boons";
 import { Screen, ScreenHeading, HeaderNavigation } from "./shared/screen";
-import { PagedItems } from "./shared/pagination";
 import { captureSwapMotion } from "./battle/swap-motion";
 import { SurfaceTransition } from "./shared/surface-transition";
 import { Loading } from "./shared/loading";
 import { SupportScreen } from "./expedition/support-screen";
-import { BOONS, KEYWORDS, availablePoints } from "../game/progression";
-import { ArtCard } from "./shared/art-card";
-import { assetUrl } from "./shared/assets";
-import { CreatureCard } from "./shared/cards";
-import { species } from "../game/content";
+import { KEYWORDS, availablePoints } from "../game/progression";
 import { readPreference, writePreference } from "../platform/preferences";
 import { useAutoplay } from "./battle/autoplay";
 import { observeUnlocks } from "./expedition/unlock-reveals";
@@ -17,26 +17,10 @@ import { Settings, TEXT_SCALES } from "./settings/settings";
 import { useAudioPreferences } from "./settings/audio-preferences";
 import { useGameAudio } from "./audio/game-audio";
 import { JourneyResults } from "./expedition/journey-results";
-import { KeywordText } from "./shared/keyword-text";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
 import { flushSync } from "react-dom";
-import {
-  Menu,
-  ArrowLeftRight,
-  Repeat,
-  Pause,
-  Swords,
-  Users,
-  Sparkles,
-  PawPrint,
-  Gift,
-  BookOpen,
-  Settings2,
-  House,
-  LogOut,
-  FastForward,
-} from "lucide-react";
+import { Menu, ArrowLeftRight, Repeat, Pause, FastForward } from "lucide-react";
 import type { Session } from "../application/session";
 import { Button } from "../components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../components/ui/dialog";
@@ -56,7 +40,6 @@ import { Inspector } from "./inspection/inspection";
 import { connectInput, moveFocus, type InputAction } from "./shared/input";
 import { isAvailableFocusTarget, returnFocus } from "./shared/focus";
 import { useCombatFeedback } from "./battle/combat-feedback";
-import { GLOSSARY } from "../game/glossary";
 import type { Command } from "../game/types";
 import type { SpeciesId } from "../game/content";
 import "./battle/mana-crystals.css";
@@ -201,7 +184,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     setModalInstance((instance) => instance + 1);
     setModal(next);
   };
-  const navigate = (next: "talents" | "collection" | "settings" | "glossary") => {
+  const navigate = (next: MenuPage) => {
     origin.current = menu ? "play" : route;
     // Menu pages unmount their opener; retain its label for the recreated menu.
     menuReturnLabel.current = {
@@ -363,103 +346,42 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
       </Screen>
     );
   const menuItems = (home: boolean) => (
-    <>
-      <Button
-        variant={home ? "default" : "ghost"}
-        className="primary-menu-action"
-        onClick={() => {
-          if (!home || active) {
-            setRoute("play");
-            setMenu(false);
-          } else if (send({ type: "newRun", seed: Date.now() >>> 0 })) {
-            setDraftStarted(true);
-            setRoute("play");
-            setMenu(false);
-          }
-        }}
-      >
-        <Swords aria-hidden="true" />
-        {home && !active ? "Play" : "Continue"}
-      </Button>
-      {canManageLineup ? (
-        <Button variant="ghost" onClick={() => openModal("lineup")}>
-          <Users aria-hidden="true" className="menu-icon-lineup" />
-          Lineup
-        </Button>
-      ) : null}
-      <Button
-        variant="ghost"
-        aria-label="Talents"
-        aria-describedby={talentPoints > 0 ? `menu-talent-points-${home}` : undefined}
-        onClick={() => navigate("talents")}
-      >
-        <Sparkles aria-hidden="true" className="menu-icon-talents" />
-        Talents
-        {talentPoints > 0 ? (
-          <span
-            className="menu-talent-points"
-            id={`menu-talent-points-${home}`}
-            aria-label={`${talentPoints} talent ${talentPoints === 1 ? "point" : "points"} available`}
-          >
-            {talentPoints}
-          </span>
-        ) : null}
-      </Button>
-      <Button variant="ghost" onClick={() => navigate("collection")}>
-        <PawPrint aria-hidden="true" className="menu-icon-collection" />
-        Collection
-      </Button>
-      {active && game.boons.length > 0 ? (
-        <Button variant="ghost" onClick={() => openModal("boons")}>
-          <Gift aria-hidden="true" className="menu-icon-boons" />
-          Boons
-        </Button>
-      ) : null}
-      <Button variant="ghost" onClick={() => navigate("glossary")}>
-        <BookOpen aria-hidden="true" className="menu-icon-glossary" />
-        Glossary
-      </Button>
-      <Button variant="ghost" onClick={() => navigate("settings")}>
-        <Settings2 aria-hidden="true" className="menu-icon-settings" />
-        Settings
-      </Button>
-      {!home && active ? (
-        <Button
-          variant="ghost"
-          className="end-journey"
-          onClick={() => {
-            if (send({ type: "abandon" })) {
-              menuReturnLabel.current = null;
-              setDraftStarted(false);
-              setMenu(false);
-              setRoute(game.phase === "draft" ? "home" : "play");
-            }
-          }}
-        >
-          <LogOut aria-hidden="true" className="menu-icon-end" />
-          End journey
-        </Button>
-      ) : null}
-      {!home ? (
-        <Button
-          variant="ghost"
-          onClick={() => {
-            setMenu(false);
-            if (["victory", "defeat"].includes(game.phase)) leaveResults();
-            else setRoute("home");
-          }}
-        >
-          <House aria-hidden="true" className="menu-icon-home" />
-          Main menu
-        </Button>
-      ) : null}
-      {desktop ? (
-        <Button variant="ghost" busy={view.closing} onClick={() => void session.quit()}>
-          <LogOut aria-hidden="true" className="menu-icon-quit" />
-          Save & quit
-        </Button>
-      ) : null}
-    </>
+    <MenuActions
+      home={home}
+      active={active}
+      canManageLineup={canManageLineup}
+      hasBoons={game.boons.length > 0}
+      talentPoints={talentPoints}
+      desktop={desktop}
+      closing={view.closing}
+      onContinue={() => {
+        if (!home || active) {
+          setRoute("play");
+          setMenu(false);
+        } else if (send({ type: "newRun", seed: Date.now() >>> 0 })) {
+          setDraftStarted(true);
+          setRoute("play");
+          setMenu(false);
+        }
+      }}
+      onLineup={() => openModal("lineup")}
+      onBoons={() => openModal("boons")}
+      onNavigate={navigate}
+      onEndJourney={() => {
+        if (send({ type: "abandon" })) {
+          menuReturnLabel.current = null;
+          setDraftStarted(false);
+          setMenu(false);
+          setRoute(game.phase === "draft" ? "home" : "play");
+        }
+      }}
+      onHome={() => {
+        setMenu(false);
+        if (["victory", "defeat"].includes(game.phase)) leaveResults();
+        else setRoute("home");
+      }}
+      onQuit={() => void session.quit()}
+    />
   );
   const overlays = (
     <>
@@ -531,26 +453,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
               pile={modal === "deck" ? undefined : modal}
             />
           ) : modal === "boons" ? (
-            <PagedItems items={game.boons} pageSize={2} className="boon-options" label="Boon pages">
-              {(id) => {
-                const boon = BOONS.find((entry) => entry.id === id)!;
-                return (
-                  <section className="reward-option" key={id}>
-                    <ArtCard
-                      aspect="action"
-                      artwork={assetUrl(`boon.${id}`)}
-                      effectText={boon.text}
-                      presentation
-                      aria-label={boon.name}
-                    />
-                    <h2>{boon.name}</h2>
-                    <p>
-                      <KeywordText text={boon.text} />
-                    </p>
-                  </section>
-                );
-              }}
-            </PagedItems>
+            <OwnedBoons boons={game.boons} />
           ) : null}
           {inspection ? (
             <Inspector
@@ -596,38 +499,18 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
         >
           {!view.cloud.blocking ? (
             <>
-              {route === "home" ? (
-                <Screen className="home-screen menu-layout">
-                  <h1 className="menu-title">Fauna</h1>
-                  <nav className="menu-choices" aria-label="Main menu">
-                    {menuItems(true)}
-                  </nav>
-                </Screen>
-              ) : null}
+              {route === "home" ? <HomeScreen>{menuItems(true)}</HomeScreen> : null}
               {route === "unlocks" && reveals[0] ? (
-                <Screen className="unlock-screen">
-                  <ScreenHeading back={() => setRoute("home")} openMenu={() => setRoute("home")}>
-                    Creature unlocked
-                  </ScreenHeading>
-                  <div className="unlock-creature">
-                    <CreatureCard
-                      progression={game}
-                      kind={reveals[0]}
-                      label={`Inspect ${species(reveals[0]).name}`}
-                      onClick={() => setInspection({ species: reveals[0]! })}
-                      onInspect={() => setInspection({ species: reveals[0]! })}
-                    />
-                    <h2>{species(reveals[0]).name}</h2>
-                  </div>
-                  <Button
-                    onClick={() => {
-                      setReveals((old) => old.slice(1));
-                      if (reveals.length === 1) setRoute("home");
-                    }}
-                  >
-                    Continue
-                  </Button>
-                </Screen>
+                <UnlockScreen
+                  game={game}
+                  kind={reveals[0]}
+                  inspect={setInspection}
+                  onHome={() => setRoute("home")}
+                  onContinue={() => {
+                    setReveals((old) => old.slice(1));
+                    if (reveals.length === 1) setRoute("home");
+                  }}
+                />
               ) : null}
               {route === "talents" ? (
                 <Talents game={game} send={send} openMenu={backFromPage} controls={talentControls} />
@@ -635,55 +518,29 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
               {route === "collection" ? (
                 <Collection game={game} controls={collectionControls} openMenu={backFromPage} />
               ) : null}
-              {route === "settings" || route === "glossary" ? (
-                <Screen className={`menu-screen ${route}-screen`} aria-labelledby="menu-screen-title">
+              {route === "glossary" ? <GlossaryScreen scale={scale} back={backFromPage} /> : null}
+              {route === "settings" ? (
+                <Screen className="menu-screen settings-screen" aria-labelledby="menu-screen-title">
                   <header className="collection-heading">
                     <ScreenHeading id="menu-screen-title" back={backFromPage} openMenu={backFromPage}>
-                      {route === "settings" ? "Settings" : "Glossary & controls"}
+                      Settings
                     </ScreenHeading>
                   </header>
-                  {route === "settings" ? (
-                    <Settings
-                      session={session}
-                      audio={audioPreferences}
-                      updateAudio={updateAudioPreferences}
-                      scale={scale}
-                      setScale={setScale}
-                      tooltipScale={tooltipScale}
-                      setTooltipScale={setTooltipScale}
-                      desktop={desktop}
-                      autoEndTurn={autoEndTurn}
-                      setAutoEndTurn={(value) => {
-                        setAutoEndTurn(value);
-                        writePreference("fauna.auto-end-turn", String(value));
-                      }}
-                    />
-                  ) : (
-                    <>
-                      <p>
-                        W/A/S/D or Tab to navigate. A/D switches targets. Enter/controller A selects. Escape/B
-                        goes back. Controller Y ends the turn. View creature abilities in Collection from the
-                        menu.
-                      </p>
-                      <PagedItems
-                        items={GLOSSARY}
-                        pageSize={scale > 1 ? 2 : 3}
-                        className="glossary-entries"
-                        label="Glossary pages"
-                      >
-                        {(entry) => (
-                          <dl key={entry.term}>
-                            <dt>
-                              <KeywordText text={entry.term} />
-                            </dt>
-                            <dd>
-                              <KeywordText text={entry.definition} />
-                            </dd>
-                          </dl>
-                        )}
-                      </PagedItems>
-                    </>
-                  )}
+                  <Settings
+                    session={session}
+                    audio={audioPreferences}
+                    updateAudio={updateAudioPreferences}
+                    scale={scale}
+                    setScale={setScale}
+                    tooltipScale={tooltipScale}
+                    setTooltipScale={setTooltipScale}
+                    desktop={desktop}
+                    autoEndTurn={autoEndTurn}
+                    setAutoEndTurn={(value) => {
+                      setAutoEndTurn(value);
+                      writePreference("fauna.auto-end-turn", String(value));
+                    }}
+                  />
                 </Screen>
               ) : null}
               <div className="play-surface" hidden={route !== "play"} inert={route !== "play"}>

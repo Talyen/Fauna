@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 import { Button, type ButtonProps } from "../../components/ui/button";
-import { useSurfaceRef } from "../../lib/surface-ref";
+import { useSurfaceRef } from "../infrastructure/surface-ref";
 import { keywordText } from "../../game/keywords";
 import { cn } from "../../lib/utils";
 type ArtCardProps = Omit<ButtonProps, "children" | "variant" | "size"> & {

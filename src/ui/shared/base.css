@@ -1,0 +1,113 @@
+@theme inline {
+  --text-base: var(--text-body);
+  --text-sm: var(--text-secondary);
+  --text-xl: var(--text-heading);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-full: var(--radius-round);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--background);
+}
+@layer base {
+  button {
+    font: inherit;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+  button:disabled {
+    cursor: default;
+  }
+}
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+h1,
+h2 {
+  font-size: var(--text-title);
+  font-weight: 600;
+  line-height: 1.3;
+}
+strong {
+  font-weight: 600;
+}
+.app {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: var(--page-block-gutter) var(--page-inline-gutter);
+  background: var(--background);
+  position: relative;
+}
+.app > .screen-stage,
+.play-surface {
+  flex: 1;
+  min-height: 0;
+}
+.play-surface {
+  display: flex;
+  flex-direction: column;
+}
+.screen-stage {
+  height: 100%;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.screen-stage > main {
+  height: auto;
+  flex: 0 0 auto;
+  min-height: 0;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: center;
+}
+/* Standalone startup and failure surfaces have the same viewport owner. */
+#root > .screen-stage {
+  padding: var(--page-block-gutter) var(--page-inline-gutter);
+}
+.screen-stage > .loading {
+  display: flex;
+  align-items: center;
+}
+.app.in-battle {
+  padding-block: var(--screen-item-gap);
+}
+[hidden] {
+  display: none !important;
+}

@@ -1,0 +1,165 @@
+/* Keyword identity owns text, combat feedback and progression colors. */
+.rule-keyword {
+  font-weight: 600;
+}
+
+[data-damage-type="physical"],
+[data-combat-tone="physical"],
+[data-keyword="physical"] {
+  color: var(--keyword-physical);
+}
+[data-damage-type="poison"],
+[data-combat-tone="poison"],
+[data-keyword="poison"] {
+  color: var(--keyword-poison);
+}
+[data-damage-type="water"],
+[data-combat-tone="water"],
+[data-keyword="water"] {
+  color: var(--keyword-water);
+}
+[data-keyword="waterThorns"],
+[data-combat-tone="waterThorns"] {
+  color: var(--keyword-waterThorns);
+}
+[data-damage-type="nature"],
+[data-combat-tone="nature"],
+[data-keyword="nature"] {
+  color: var(--keyword-nature);
+}
+[data-damage-type="light"],
+[data-combat-tone="light"],
+[data-keyword="light"] {
+  color: var(--keyword-light);
+}
+[data-combat-tone="health"],
+[data-keyword="health"] {
+  color: var(--keyword-health);
+}
+[data-combat-tone="mana"],
+[data-keyword="mana"] {
+  color: var(--keyword-mana);
+}
+[data-combat-tone="block"],
+[data-keyword="block"] {
+  color: var(--keyword-block);
+}
+[data-combat-tone="thorns"],
+[data-keyword="thorns"] {
+  color: var(--keyword-thorns);
+}
+[data-combat-tone="blind"],
+[data-keyword="blind"] {
+  color: var(--keyword-blind);
+}
+[data-art-keyword="blind"] {
+  --art-keyword-color: var(--keyword-blind);
+}
+[data-combat-tone="dodge"],
+[data-keyword="dodge"] {
+  color: var(--keyword-dodge);
+}
+[data-combat-tone="armor"],
+[data-keyword="armor"] {
+  color: var(--keyword-armor);
+}
+[data-damage-type="burn"],
+[data-combat-tone="burn"],
+[data-keyword="burn"] {
+  color: var(--keyword-burn);
+}
+[data-damage-type="freeze"],
+[data-combat-tone="freeze"],
+[data-keyword="freeze"] {
+  color: var(--keyword-freeze);
+}
+[data-damage-type="bleed"],
+[data-combat-tone="bleed"],
+[data-keyword="bleed"] {
+  color: var(--keyword-bleed);
+}
+[data-damage-type="stun"],
+[data-combat-tone="stun"],
+[data-keyword="stun"] {
+  color: var(--keyword-stun);
+}
+[data-combat-tone="leech"],
+[data-keyword="leech"] {
+  color: var(--keyword-leech);
+}
+[data-combat-tone="cleanse"],
+[data-keyword="cleanse"] {
+  color: var(--keyword-cleanse);
+}
+[data-combat-tone="nullify"],
+[data-keyword="nullify"] {
+  color: var(--keyword-nullify);
+}
+[data-combat-tone="reflect"],
+[data-keyword="reflect"] {
+  color: var(--keyword-reflect);
+}
+[data-combat-tone="purge"],
+[data-keyword="purge"] {
+  color: var(--keyword-purge);
+}
+
+[data-effect-art] {
+  --art-keyword-color: var(--muted-foreground);
+}
+[data-art-keyword="physical"] {
+  --art-keyword-color: var(--keyword-physical);
+}
+[data-art-keyword="poison"] {
+  --art-keyword-color: var(--keyword-poison);
+}
+[data-art-keyword="nature"] {
+  --art-keyword-color: var(--keyword-nature);
+}
+[data-art-keyword="light"] {
+  --art-keyword-color: var(--keyword-light);
+}
+[data-art-keyword="health"] {
+  --art-keyword-color: var(--keyword-health);
+}
+[data-art-keyword="mana"] {
+  --art-keyword-color: var(--keyword-mana);
+}
+[data-art-keyword="block"] {
+  --art-keyword-color: var(--keyword-block);
+}
+[data-art-keyword="thorns"] {
+  --art-keyword-color: var(--keyword-thorns);
+}
+[data-art-keyword="dodge"] {
+  --art-keyword-color: var(--keyword-dodge);
+}
+[data-art-keyword="armor"] {
+  --art-keyword-color: var(--keyword-armor);
+}
+[data-art-keyword="burn"] {
+  --art-keyword-color: var(--keyword-burn);
+}
+[data-art-keyword="freeze"] {
+  --art-keyword-color: var(--keyword-freeze);
+}
+[data-art-keyword="bleed"] {
+  --art-keyword-color: var(--keyword-bleed);
+}
+[data-art-keyword="stun"] {
+  --art-keyword-color: var(--keyword-stun);
+}
+[data-art-keyword="leech"] {
+  --art-keyword-color: var(--keyword-leech);
+}
+[data-art-keyword="cleanse"] {
+  --art-keyword-color: var(--keyword-cleanse);
+}
+[data-art-keyword="purge"] {
+  --art-keyword-color: var(--keyword-purge);
+}
+
+:root[data-focus="visible"]
+  .game-button[data-effect-art]:not(.selected):not([aria-disabled="true"]):focus::after {
+  border-color: var(--art-keyword-color);
+}

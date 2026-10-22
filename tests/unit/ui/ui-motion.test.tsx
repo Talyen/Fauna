@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { afterEach, expect, it, vi } from "vitest";
 import { act, cleanup, fireEvent, render, waitFor } from "@testing-library/react";
-import { useModalSurfaceRef } from "../../../src/lib/modal-surface-ref";
+import { useModalSurfaceRef } from "../../../src/ui/infrastructure/modal-surface-ref";
 import { CreatureDetails } from "../../../src/ui/shared/card-details";
 import { Button } from "../../../src/components/ui/button";
 import { assetUrl } from "../../../src/ui/shared/assets";

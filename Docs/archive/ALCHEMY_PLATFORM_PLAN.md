@@ -1,6 +1,6 @@
 # Alchemy tools and platform adoption plan
 
-This is a historical scope and delivery record. Current behavior and verification policy belong to [Architecture](ARCHITECTURE.md), [UI](UI.md), [journey design](EXPEDITION_DESIGN.md), [Release readiness](RELEASE.md) and [Contributing](../CONTRIBUTING.md). Later decisions replace the proposed Cloud recovery UI with silent automatic recovery, open Merchant visits directly, and require scroll-free layouts with shared artwork profiles. Acceptance criteria below are requirements, not evidence that native or live Steam qualification passed.
+This is a historical scope and delivery record. Current behavior and verification policy belong to [Architecture](../ARCHITECTURE.md), [UI](../UI.md), [journey design](../EXPEDITION_DESIGN.md), [Release readiness](../RELEASE.md) and [Contributing](../../CONTRIBUTING.md). Later decisions replace the proposed Cloud recovery UI with silent automatic recovery, open Merchant visits directly, and require scroll-free layouts with shared artwork profiles. Acceptance criteria below are requirements, not evidence that native or live Steam qualification passed.
 
 Add stronger architecture checks and unused-code detection, hardened Electron packages, optional non-combat encounters, desktop display modes, Steam Cloud saves, and Steam overlay pause. Adapt Alchemy's patterns to Fauna's existing game, application, and platform owners. Fauna retains independent code, content selection, application identity, and saves.
 
@@ -55,7 +55,7 @@ Windows CI must package once, verify the actual unpacked artifact, then exercise
 
 Acceptance: incorrect fuse values and missing required snapshots fail verification; the hardened Windows artifact starts and saves; optional Steam failure still permits offline play. Browser builds retain their existing behavior. Installer signing, installer acceptance and Steam distribution stay separate release gates.
 
-Reference: `Alchemy: desktop/after-pack.cjs` and its package-layout tests. See [current packaged integrity](RELEASE.md#packaged-integrity).
+Reference: `Alchemy: desktop/after-pack.cjs` and its package-layout tests. See [current packaged integrity](../RELEASE.md#packaged-integrity).
 
 ## Desktop display modes
 
@@ -109,7 +109,7 @@ Extend the production headless policy with explicit deterministic support decisi
 
 Acceptance: Merchant occurs at most once per scheduled offer; Campfire follows the roster Health threshold; all eight battles and normal rewards remain reachable; support inspection never rerolls combat; rejected purchases preserve state/RNG; save/resume cannot duplicate benefits or spending; starting a new journey drops bought Boons and retains currency. Cover low funds, full Health, cap boundaries, one/no eligible Boons, abandonment and all visit resume phases.
 
-References: `Alchemy: src/features/alchemy/run-loop/shop/shop-transactions.ts`, `Alchemy: src/features/alchemy/run-loop/shop/trinket-shop-commands.ts`, and `Alchemy: src/lib/mystery/types.ts`. This scope supersedes only the previously unselected support-location and currency-spending portions of [journey design](EXPEDITION_DESIGN.md); update that canonical document during implementation.
+References: `Alchemy: src/features/alchemy/run-loop/shop/shop-transactions.ts`, `Alchemy: src/features/alchemy/run-loop/shop/trinket-shop-commands.ts`, and `Alchemy: src/lib/mystery/types.ts`. This scope supersedes only the previously unselected support-location and currency-spending portions of [journey design](../EXPEDITION_DESIGN.md); update that canonical document during implementation.
 
 ## Steam runtime and overlay pause
 
@@ -165,7 +165,7 @@ Bounded ancestry may make a very old common ancestor unprovable; treat that case
 
 At launch, reconcile before enabling progression commands. After five seconds, automatically continue locally and ignore late remote results. Proven descendants fast-forward; divergent or unprovable heads automatically retain the intact local head, or select by stable snapshot ID without local progress. Preserve competing payloads before publishing ancestry for the resolution; never merge gameplay values. Preservation failure keeps local play available without overwriting remote alternatives. Reconnect must not roll back an active journey.
 
-There is no conflict UI, save warning, sync status or retry control. The [silent recovery policy](UI.md#silent-recovery-policy) owns player-facing behavior for every failure.
+There is no conflict UI, save warning, sync status or retry control. The [silent recovery policy](../UI.md#silent-recovery-policy) owns player-facing behavior for every failure.
 
 ### Local saves, upload queue and shutdown
 
@@ -206,6 +206,6 @@ Physical controller, Steam client, Windows installer/signing, and Steam Deck/Pro
 
 Implementation can proceed with fake Steam capabilities and offline defaults. Enabling real Steam Cloud and live overlay qualification requires Fauna's own App ID, configured Cloud quotas/platform support, correct native binary packaging and access to the intended Steam application. If those are unavailable, deliver the adapter and tests with real sync unavailable; report the exact live acceptance gates still blocked. Never fill the gap with another game's identity.
 
-Task-scoped repository pushes and hosted CI follow [AGENTS.md](../AGENTS.md#worktrees-and-integration). Remote Steam partner changes, credentials, PRs, uploads, signing enrollment and release publication require separate authorization. Do not enable both Steam Auto-Cloud filesystem synchronization and this application-managed remote namespace over the same profile; choose and document one owner. Cloud account separation does not introduce a custom authentication service.
+Task-scoped repository pushes and hosted CI follow [AGENTS.md](../../AGENTS.md#worktrees-and-integration). Remote Steam partner changes, credentials, PRs, uploads, signing enrollment and release publication require separate authorization. Do not enable both Steam Auto-Cloud filesystem synchronization and this application-managed remote namespace over the same profile; choose and document one owner. Cloud account separation does not introduce a custom authentication service.
 
 At handoff report the integrated commit, features delivered, focused/local checks, observed CI evidence, remaining tuning or asset choices, and each platform gate actually exercised. Stop after the requested stage; neither this plan nor a successful package authorizes remote publication.

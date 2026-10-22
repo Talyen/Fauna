@@ -2,7 +2,7 @@
 
 Reduce full verification time while retaining every required check, player journey and rendered evidence surface. Start with eight browser shards on standard GitHub runners and concurrent verification jobs. Aim first for complete results in 2–3 minutes excluding runner queue time; treat a one-minute result as a stretch goal requiring measured improvements to setup, long individual tests and Windows packaging.
 
-The workflow now implements these stages, with the current execution policy in [Contributing](../CONTRIBUTING.md#verification). Full execution and performance comparisons belong in hosted CI. The rollout evidence below distinguishes measurements from targets.
+The workflow now implements these stages, with the current execution policy in [Contributing](../../CONTRIBUTING.md#verification). Full execution and performance comparisons belong in hosted CI. The rollout evidence below distinguishes measurements from targets.
 
 ## Baseline and success measures
 
@@ -79,7 +79,7 @@ Defer path-based omission of gameplay, browser and Windows gates. First make the
 3. Enable four shards, then benchmark eight on the same candidate coverage. Inspect merged screenshots and failure diagnostics
 4. Exercise deliberate failures through isolated CI fixtures or a temporary validation branch: failed test, failed static check, failed Windows job, absent report and interrupted shard. Confirm the required gate rejects each outcome
 5. Run complete hosted verification on the final candidate, inspect browser evidence, and record the measured improvement and remaining bottleneck
-6. Update [Contributing](../CONTRIBUTING.md#verification), the [script map](../scripts/README.md) and required-check configuration together. Remove temporary failure probes and duplicate validation runs before handoff
+6. Update [Contributing](../../CONTRIBUTING.md#verification), the [script map](../../scripts/README.md) and required-check configuration together. Remove temporary failure probes and duplicate validation runs before handoff
 
 Accept the change when all prior required coverage is represented, every gate passes on the exact candidate commit, merged evidence remains usable, failure propagation is demonstrated and repeated runs show improved elapsed time without additional instability. Keep Windows, browser simulation, physical controller, Steam client and Steam Deck evidence boundaries distinct.
 

@@ -1,0 +1,417 @@
+.draft-screen {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--screen-section-gap);
+  max-width: 1400px;
+  margin: auto;
+}
+.draft-screen h1 {
+  margin: 0;
+}
+.starter-option {
+  text-align: center;
+  min-width: 0;
+}
+.starter-option h2 {
+  font-size: var(--text-heading);
+  font-weight: 500;
+  margin: var(--space-3) 0 var(--space-1);
+}
+.starter-selection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: var(--space-6);
+  color: var(--primary);
+  font-size: var(--text-secondary);
+}
+.starter-selection svg {
+  width: var(--space-4);
+  height: var(--space-4);
+}
+.draft-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-5);
+  max-width: calc(var(--art-landscape-width) * 3 + var(--space-5) * 2);
+  width: 100%;
+}
+
+.team-selection {
+  --selection-card: var(--art-landscape-width);
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-6);
+}
+.selection-row {
+  display: grid;
+  grid-template-columns: repeat(3, var(--selection-card));
+  gap: var(--space-6);
+  justify-content: center;
+}
+.team-selection > .selection-row {
+  display: flex;
+}
+.team-selection > .selection-row .creature-wrap {
+  width: var(--selection-card);
+}
+.reserve-row {
+  grid-template-columns: repeat(3, calc(var(--selection-card) * 0.72));
+}
+.selection-group h2 {
+  width: calc(var(--selection-card) * 3 + 48px);
+  margin: 0 auto var(--space-2);
+  font-size: var(--text-secondary);
+  font-weight: 400;
+  color: var(--muted-foreground);
+}
+.empty-reserve {
+  aspect-ratio: var(--art-creature-ratio);
+  border: 1px solid var(--muted);
+  border-radius: var(--radius);
+}
+.selection-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  width: calc(var(--selection-card) * 3 + 48px);
+  margin: 0 auto;
+}
+.reward-screen {
+  width: min(calc(var(--art-landscape-width) * 3 + var(--space-6) * 2), 100%);
+  container-type: inline-size;
+  margin: auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.reward-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0;
+}
+.reward-choice-content > h2 {
+  font-size: var(--text-name);
+}
+.reward-keyword-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+  color: var(--foreground);
+}
+.reward-progress-detail {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  color: var(--muted-foreground);
+  margin-top: var(--space-2);
+}
+.reward-footer {
+  min-height: var(--control-height);
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--screen-section-gap);
+}
+.reward-choices {
+  margin-top: var(--screen-section-gap);
+  /* Reserve the recruitment pager as well as captions so Boon headings share the same anchor. */
+  min-height: calc(var(--art-long-side) + var(--screen-item-gap) * 3 + var(--text-name) * 4.2);
+  display: flex;
+  align-items: center;
+}
+.reward-choice-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--screen-item-gap);
+  width: 100%;
+}
+.recruit-options,
+.boon-options {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  width: 100%;
+}
+.reward-option {
+  display: flex;
+  flex-direction: column;
+  gap: var(--screen-item-gap);
+  width: var(--art-landscape-width);
+  min-width: 0;
+  text-align: center;
+}
+.boon-options .reward-option {
+  width: var(--art-portrait-width);
+}
+.boon-choice {
+  width: 100%;
+}
+.reward-option h2 {
+  font-size: var(--text-name);
+}
+.end-screen {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--screen-section-gap);
+}
+.unlock-card {
+  width: 240px;
+}
+.unlock-card p {
+  text-align: center;
+  color: var(--muted-foreground);
+  margin-top: var(--space-3);
+}
+
+.destinations-screen {
+  width: min(1120px, 100%);
+  min-height: 0;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-6);
+}
+.destination-heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.journey-totals p {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.journey-totals svg {
+  width: 20px;
+  height: 20px;
+}
+.journey-results {
+  width: min(640px, 100%);
+  min-height: 0;
+  margin: auto;
+  padding: var(--space-8) 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-6);
+}
+.journey-gains {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+.journey-kept {
+  color: var(--muted-foreground);
+  font-size: var(--text-secondary);
+  text-align: center;
+}
+.journey-totals,
+.journey-results-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+}
+.keyword-progress-grid .reward-keyword {
+  width: 240px;
+}
+.destination-heading p,
+.destination-option p {
+  color: var(--muted-foreground);
+  font-size: var(--text-secondary);
+}
+.destination-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-6);
+}
+.destination-option {
+  flex: 0 0 var(--art-landscape-width);
+  max-width: var(--art-landscape-width);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.destination-option .creature-card {
+  width: 100%;
+}
+.destination-option h2 {
+  font-size: var(--text-name);
+  font-weight: 600;
+}
+.destination-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+}
+@media (max-width: 640px) {
+  .destination-grid {
+    flex-wrap: wrap;
+  }
+  .destination-option {
+    flex-basis: 100%;
+  }
+}
+
+/* Center screen composition; retain paired data alignment and spatial battle controls. */
+.draft-screen h1,
+.reward-screen h1,
+.destination-heading,
+.destination-option h2,
+.destination-option p,
+.journey-results-heading {
+  text-align: center;
+}
+.reward-heading {
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-3);
+}
+.selection-footer,
+.reward-footer,
+.destination-footer {
+  justify-content: center;
+}
+.campfire-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--screen-section-gap);
+}
+.campfire-roster {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--screen-item-gap);
+}
+.campfire-roster > div {
+  width: var(--art-landscape-width);
+  text-align: center;
+}
+.unlock-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--screen-section-gap);
+  padding: var(--page-block-gutter) var(--page-inline-gutter);
+}
+
+.unlock-creature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--screen-item-gap);
+}
+.starter-kit {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.campfire-screen {
+  justify-content: center;
+}
+.campfire-roster {
+  flex-wrap: nowrap;
+}
+.campfire-roster > div {
+  width: var(--art-landscape-width);
+}
+
+/* Alchemy's compact shelves keep the decision controls aligned below the art. */
+.merchant-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--screen-item-gap);
+}
+.merchant-wallet {
+  color: var(--gold-pale);
+  font-variant-numeric: tabular-nums;
+}
+.merchant-terms,
+.merchant-status {
+  color: var(--muted-foreground);
+  font-size: var(--text-secondary);
+}
+.merchant-offer > .game-button:not(.action-card) {
+  width: 100%;
+}
+
+.merchant-status {
+  min-height: calc(var(--text-secondary) * 1.4);
+}
+.reward-screen:has(.recruit-comparison) {
+  width: min(calc(var(--art-landscape-width) * 6 + var(--screen-section-gap) * 5), 100%);
+}
+.recruit-comparison {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--screen-section-gap);
+}
+.incoming-recruit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--screen-item-gap);
+  flex: 0 0 var(--art-landscape-width);
+}
+.incoming-recruit .creature-wrap {
+  width: 100%;
+}
+.recruit-roster {
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--screen-item-gap);
+}
+.rest-recovery {
+  position: fixed;
+  left: var(--page-inline-gutter);
+  right: var(--page-inline-gutter);
+  bottom: var(--page-block-gutter);
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  gap: var(--screen-section-gap);
+}
+.rest-recovery > div {
+  flex: 1 1 0;
+  max-width: var(--art-landscape-width);
+  display: grid;
+  gap: var(--screen-item-gap);
+}
+.rest-recovery p {
+  font-size: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+.campfire-roster,
+.recruit-options {
+  align-items: flex-start;
+}
+.campfire-roster > div,
+.recruit-options > .reward-option {
+  flex-shrink: 0;
+}

@@ -1,7 +1,7 @@
 // Adapted from shadcn/ui (MIT): https://ui.shadcn.com/r/styles/new-york/tooltip.json
 import * as React from "react";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
-import { useSurfaceRef } from "../../lib/surface-ref";
+import { useSurfaceRef } from "../../ui/infrastructure/surface-ref";
 import { cn } from "@/lib/utils";
 
 export function TooltipProvider(props: React.ComponentProps<typeof TooltipPrimitive.Provider>) {
