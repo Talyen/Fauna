@@ -54,7 +54,7 @@
 .inspection-back {
   margin-top: calc(-1 * var(--space-6));
 }
-/* The native 4:3 hero plus three 3:4 abilities use 43/36 of their shared width in height. */
+/* Retain the baseline fit budget so both independent artwork scales stay exact at each viewport. */
 .creature-inspection {
   --inspection-art-width: min(
     var(--inspection-art-max-width),
@@ -82,9 +82,14 @@
   top: var(--space-6);
   right: var(--space-6);
 }
-.inspection-creature,
+.inspection-creature {
+  width: calc(var(--inspection-art-width) * var(--inspection-creature-scale));
+}
 .creature-inspection .inspection-abilities {
-  width: var(--inspection-art-width);
+  width: calc(
+    (var(--inspection-art-width) - var(--screen-item-gap) * 2) * var(--inspection-ability-scale) +
+      var(--screen-item-gap) * 2
+  );
 }
 .inspection-creature .creature-card {
   width: 100%;

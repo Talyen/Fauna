@@ -18,6 +18,9 @@
   text-align: center;
   min-width: 0;
 }
+.starter-option > .recruit-button {
+  align-self: center;
+}
 .starter-option h2 {
   font-size: var(--text-heading);
   font-weight: 500;

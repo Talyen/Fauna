@@ -84,7 +84,7 @@ describe("artwork-first inspection", () => {
         await user.click(screen.getByRole("button", { name: `Recruit ${creature.name}` }));
         expect(session.store.getState().game.selected).toEqual([kind]);
         expect(screen.queryByRole("dialog")).toBeNull();
-        expect(document.activeElement).toBe(screen.getByRole("button", { name: `Inspect ${creature.name}` }));
+        expect(session.store.getState().game.phase).toBe("teamSelection");
       } finally {
         cleanup();
         await session.dispose();
