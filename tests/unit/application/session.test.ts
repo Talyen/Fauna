@@ -912,7 +912,7 @@ it.each(["timeout", "dispose"] as const)(
     const p = platform();
     p.saves.readCandidates = vi.fn(
       () =>
-        new Promise((_, reject) => {
+        new Promise<Awaited<ReturnType<Platform["saves"]["readCandidates"]>>>((_, reject) => {
           rejectRead = reject;
         }),
     );
