@@ -1,5 +1,5 @@
 import { freeze } from "immer";
-import { ENCOUNTERS, species, type DamageType, type SpeciesId } from "./content";
+import { ENCOUNTERS, species, type SpeciesId } from "./content";
 import type { GameState } from "./types";
 
 export const JOURNEY_LENGTH = 8;
@@ -76,7 +76,6 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
     species: SpeciesId;
     health: number;
     power: number;
-    damageType: DamageType;
   }[];
 } {
   const route = game.expedition;
@@ -101,22 +100,6 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
       species: kind,
       health: scaleEnemyStat(species(kind).health, game.encounter),
       power: 1 + game.encounter / 10,
-      damageType:
-        kind === "shadebrim" || kind === "stillara"
-          ? "freeze"
-          : kind === "chimecricket" || kind === "ringpalm"
-            ? "stun"
-            : kind === "coralcurl" || kind === "sternshell" || kind === "neradora"
-              ? "water"
-              : kind === "dunefox"
-                ? "physical"
-                : kind === "emberback" || kind === "cindernewt" || kind === "wickwaltz"
-                  ? "burn"
-                  : kind === "captoad"
-                    ? "poison"
-                    : kind === "mossguard" || kind === "reedstag"
-                      ? "nature"
-                      : "light",
     })),
   };
 }

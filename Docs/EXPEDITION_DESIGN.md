@@ -13,7 +13,7 @@ These are the agreed directions from the design review. They supersede the proto
 - During your turn, Swap opens a centered dialog with three deployed creatures and two backup at the shared artwork size. Backup are hidden on the battlefield.
 - Select either creature first, then one from the opposite group to commit immediately. Swaps are free and unlimited; no Mana, draw, shuffle, turn advancement, or confirmation.
 - A free manual swap replaces the outgoing owner's three cards in their existing hand, overflow, draw, and discard positions. Spent cards stay spent. Card upgrades do not transfer to incoming creatures.
-- Swap cards choose a random living backup, remove the departing kit from all zones, and shuffle the incoming kit into the draw pile before any draw effect. Without living backup they swap positions with a random living ally; alone the swap part does nothing. See [Captoad](CONTENT.md#captoad).
+- Swap cards choose a random living backup, remove the departing kit from all zones, and shuffle the incoming kit into the draw pile before any draw effect. Without living backup they swap positions with a random living ally; alone the swap part does nothing. See [Captoad](content/creatures/captoad.md).
 - Creature identity, health, Block, and first-attack state stay with the creature. Normal turn expiration applies in backup; swapping never heals, cleanses, or repeats opening bonuses.
 - Living backup can replace knocked-out deployed creatures. Fallen creatures remain unavailable for the battle.
 - If the deployed row falls, remaining enemy attacks stop and the next player turn begins with restored Mana. Healthy backup can still enter through Swap. Defeat requires the whole roster to fall.
@@ -47,7 +47,7 @@ These are the agreed directions from the design review. They supersede the proto
 - Clicking an available talent purchases it immediately, without a detail-dialog purchase step or confirmation.
 - Reset operates on the entire keyword category, refunding all spent points in that category while retaining its XP. Reset is available at any time, including during a journey; talent effects update immediately. Individual-talent refunds are not the chosen interaction.
 - Use Alchemy’s current point pacing: cumulative thresholds are 10, 40, 100, 180, and 280 keyword XP. Total XP for point n is 10 × n × (n + 1) − 10 × min(n, 2). This is initial tuning for playtesting.
-- Fifteen consolidated categories offer 135 distinct talents, adapted from Alchemy; effects requiring excluded mechanics are omitted. Burn, Freeze, Stun and Health use their matching progression; Thorns belongs to Nature, Cleanse to Health, and Purge to Light. Forge is removed. The authored catalog and effects are owned by `src/game/progression.ts` and `src/game/combat.ts`.
+- Fifteen consolidated categories offer 135 distinct talents, adapted from Alchemy; effects requiring excluded mechanics are omitted. Burn, Freeze, Stun and Health use their matching progression; Thorns belongs to Nature, Cleanse to Health, and Purge to Light. Forge is removed. The authored catalog and effects are owned by `src/game/progression.ts` and `src/game/combat/index.ts`.
 - Abandonment banks the XP earned by accepted plays, with no victory currency or boons. Auto-play dispatches ordinary accepted plays; each awards keyword XP once. Talent repeats resolve at most once and award no extra accepted-play XP.
 
 ## Recruitment

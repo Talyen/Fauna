@@ -1,6 +1,11 @@
 // @vitest-environment jsdom
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { connectInput, gamepadActions, moveFocus, type InputAction } from "../../../src/ui/shared/input";
+import {
+  connectInput,
+  gamepadActions,
+  moveFocus,
+  type InputAction,
+} from "../../../src/ui/shared/navigation/input";
 
 afterEach(() => {
   vi.unstubAllGlobals();

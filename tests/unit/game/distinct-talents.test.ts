@@ -6,7 +6,7 @@ import {
   removeEffects,
   restoreHealth,
   tickStatuses,
-} from "../../../src/game/combat";
+} from "../../../src/game/combat/index";
 import { dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import type { GameEvent } from "../../../src/game/types";

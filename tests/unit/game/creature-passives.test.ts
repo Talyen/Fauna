@@ -5,7 +5,7 @@ import { creaturePassive } from "../../../src/game/progression";
 import { actionValue, enemyAbilityValue, retainedBlock } from "../../../src/game/rules";
 import { contentCatalog, validateCatalog } from "../../../src/game/content-validation";
 import { createGame } from "../../../src/game/engine";
-import { hit } from "../../../src/game/combat";
+import { hit } from "../../../src/game/combat/index";
 import type { GameEvent } from "../../../src/game/types";
 import { accept, teamRun } from "../../support/game";
 

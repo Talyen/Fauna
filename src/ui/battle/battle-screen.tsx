@@ -1,25 +1,25 @@
-import { sharedDodgeChance } from "../../game/combat";
-import { Screen } from "../shared/screen";
+import { sharedDodgeChance } from "../../game/combat/index";
+import { Screen } from "../shared/navigation/screen";
 import { HandMotion } from "./hand-motion";
-import { combatStatuses } from "../shared/combat-status";
+import { combatStatuses } from "../shared/combat/combat-status";
 import { motionValue } from "../shared/motion-values";
-import { ActionDetails } from "../shared/card-details";
+import { ActionDetails } from "../shared/cards/card-details";
 import { cardCost } from "../../game/rules";
-import { controlled } from "../../game/combat";
+import { controlled } from "../../game/combat/index";
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Button } from "../../components/ui/button";
-import { ActionCard, AllyCard, EnemyCard } from "../shared/cards";
+import { ActionCard, AllyCard, EnemyCard } from "../shared/cards/cards";
 import { definition, species } from "../../game/content";
 import type { Command, GameState } from "../../game/types";
 import { previewPlay } from "../../game/preview";
-import type { InputAction } from "../shared/input";
-import { returnFocus } from "../shared/focus";
+import type { InputAction } from "../shared/navigation/input";
+import { returnFocus } from "../shared/navigation/focus";
 import { TargetPreview } from "./target-preview";
 import { CombatFeedback, type Burst } from "./combat-feedback";
 import { ManaCrystals } from "./mana-crystals";
-import { ArtCard } from "../shared/art-card";
+import { ArtCard } from "../shared/cards/art-card";
 import { assetUrl } from "../shared/assets";
-import type { Controls } from "../shared/input";
+import type { Controls } from "../shared/navigation/input";
 function FanSlot({ index, count, children }: { index: number; count: number; children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {

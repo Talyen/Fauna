@@ -1,4 +1,4 @@
-import { Screen, ScreenHeading } from "../shared/screen";
+import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { useLayoutEffect, useRef } from "react";
 import { Coins, Tag } from "lucide-react";
 import type { Command, GameState } from "../../game/types";
@@ -6,7 +6,7 @@ import { canVisitMerchant } from "../../game/support";
 import { BOONS } from "../../game/progression";
 import { Button } from "../../components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
-import { ArtCard } from "../shared/art-card";
+import { ArtCard } from "../shared/cards/art-card";
 import { KeywordText } from "../shared/keyword-text";
 import { assetUrl } from "../shared/assets";
 export function SupportOffer({ game, send }: { game: GameState; send: (c: Command) => boolean }) {

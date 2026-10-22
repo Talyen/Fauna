@@ -7,10 +7,10 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../../src
 import { Tabs, TabsList, TabsTrigger } from "../../src/components/ui/tabs";
 import { Switch } from "../../src/components/ui/switch";
 import { TooltipProvider } from "../../src/components/ui/tooltip";
-import { ArtCard } from "../../src/ui/shared/art-card";
-import { ActionCard } from "../../src/ui/shared/cards";
-import { ActionDetails } from "../../src/ui/shared/card-details";
-import { connectInput, moveFocus, type InputAction } from "../../src/ui/shared/input";
+import { ArtCard } from "../../src/ui/shared/cards/art-card";
+import { ActionCard } from "../../src/ui/shared/cards/cards";
+import { ActionDetails } from "../../src/ui/shared/cards/card-details";
+import { connectInput, moveFocus, type InputAction } from "../../src/ui/shared/navigation/input";
 import { CARDS, species } from "../../src/game/content";
 import type { Card, Creature } from "../../src/game/types";
 import "@fontsource-variable/inter/wght.css";

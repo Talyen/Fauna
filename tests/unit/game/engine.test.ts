@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../../src/game/engine";
-import { combat, freshCombat, hit } from "../../../src/game/combat";
+import { combat, freshCombat, hit } from "../../../src/game/combat/index";
 import { definition, species, SPECIES } from "../../../src/game/content";
 import { decodeSave, encodeSave, validateContent } from "../../../src/game/save";
 import { recruitChoice, accept, policy, run, teamRun, winBattle } from "../../support/game";

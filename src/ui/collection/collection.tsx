@@ -1,5 +1,5 @@
-import { Screen, ScreenHeading } from "../shared/screen";
-import { PageControls } from "../shared/pagination";
+import { Screen, ScreenHeading } from "../shared/navigation/screen";
+import { PageControls } from "../shared/navigation/pagination";
 
 import { EmptyState } from "../shared/empty-state";
 
@@ -9,14 +9,14 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "../../components/ui/ta
 import { useLayoutEffect, useRef, useState } from "react";
 import { Star, LayoutGrid, BookOpen, LockKeyhole } from "lucide-react";
 
-import { CreatureCard } from "../shared/cards";
-import { ArtCard } from "../shared/art-card";
+import { CreatureCard } from "../shared/cards/cards";
+import { ArtCard } from "../shared/cards/art-card";
 import { CollectionCreature } from "./collection-creature";
-import { returnFocus } from "../shared/focus";
+import { returnFocus } from "../shared/navigation/focus";
 import { SPECIES, type SpeciesId } from "../../game/content";
 import { creatureStars, MAX_CREATURE_STARS } from "../../game/progression";
 import type { GameState } from "../../game/types";
-import type { Controls } from "../shared/input";
+import type { Controls } from "../shared/navigation/input";
 
 export function Collection({
   game,

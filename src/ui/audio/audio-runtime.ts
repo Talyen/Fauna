@@ -82,6 +82,7 @@ export function createAudioRuntime(
   let requested: MusicCue = "menu";
   let music: { cue: MusicCue; media: MediaVoice; fade: number } | undefined;
   const voices = new Set<MediaVoice>();
+  const starting = new WeakSet<MediaVoice>();
   const voiceGain = new WeakMap<MediaVoice, number>();
   const fading = new Map<MediaVoice, ReturnType<typeof setInterval>>();
   const warm = new Set<MediaVoice>();
@@ -97,6 +98,7 @@ export function createAudioRuntime(
     if (timer) clearInterval(timer);
     fading.delete(media);
     voices.delete(media);
+    starting.delete(media);
     warm.delete(media);
     media.onended = null;
     media.onerror = null;
@@ -111,19 +113,19 @@ export function createAudioRuntime(
   const volume = (kind: "music" | "effects") =>
     audible() ? ((preferences.master / 100) * preferences[kind]) / 100 : 0;
   const start = (media: MediaVoice, failed: () => void) => {
-    if (media.paused === false) return;
-    try {
-      void Promise.resolve(media.play()).catch((error) => {
-        if (!disposed && (voices.has(media) || music?.media === media)) {
-          report(error);
-          failed();
-        }
-      });
-    } catch (error) {
-      if (!disposed) {
+    if (media.paused === false || starting.has(media)) return;
+    starting.add(media);
+    const failure = (error: unknown) => {
+      starting.delete(media);
+      if (!disposed && (voices.has(media) || music?.media === media)) {
         report(error);
         failed();
       }
+    };
+    try {
+      void Promise.resolve(media.play()).then(() => starting.delete(media), failure);
+    } catch (error) {
+      failure(error);
     }
   };
   function updateMusic() {

@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { Button } from "../../src/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "../../src/components/ui/radio-group";
 import { Switch } from "../../src/components/ui/switch";
-import { ArtCard } from "../../src/ui/shared/art-card";
+import { ArtCard } from "../../src/ui/shared/cards/art-card";
 import { assetUrl } from "../../src/ui/shared/assets";
 import "@fontsource-variable/inter/wght.css";
 import "../../src/ui/styles.css";

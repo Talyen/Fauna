@@ -1,45 +1,25 @@
-import { executeAbility } from "./abilities";
-import {
-  merchantPrice,
-  canVisitCampfire,
-  campfireRecovery,
-  canVisitMerchant,
-  canRecruitDestination,
-} from "./support";
+import { executeAbility } from "./combat/abilities";
+import { canVisitCampfire, campfireRecovery, canVisitMerchant, canRecruitDestination } from "./support";
 import saveFormat from "./save-format.json" with { type: "json" };
 import { freeze, produce } from "immer";
 import {
   collectedSpecies,
   starterCount,
-  creaturePassive,
   MAX_CREATURE_STARS,
   KEYWORDS,
-  BOONS,
   cardKeywords,
   canBuyTalent,
-  hasTalent,
 } from "./progression";
-import {
-  combat,
-  gainMana,
-  grantArmor,
-  freshCombat,
-  grantStatus,
-  grantBlock,
-  restoreHealth,
-  mostInjured,
-  startAction,
-  tickStatuses,
-  controlled,
-  TURN_MANA,
-  TURN_DRAW,
-} from "./combat";
-import { shuffle, roll } from "./random";
-import { fillHand, draw, drawKeyword } from "./card-zones";
-import { retainedBlock, actionValue, cardCost, enemyAbilityValue } from "./rules";
-import { CARDS, SPECIES, FIRST_RUN_STARTERS, definition, species, enemyCard, enemyCanUse } from "./content";
-import { bossEncounter, encounterSource, finalEncounter, encounterPacks } from "./encounters";
-import type { Card, Command, CommandResult, GameEvent, GameState } from "./types";
+import { combat, gainMana, restoreHealth, controlled } from "./combat/index";
+import { fillHand } from "./card-zones";
+import { actionValue, cardCost } from "./rules";
+import { CARDS, SPECIES, definition, species } from "./content";
+import { bossEncounter } from "./encounters";
+import type { Command, CommandResult, GameEvent, GameState } from "./types";
+import { offerStarters, prepareEncounter, beginBattle, bankBattleXP, settle, afterRewards } from "./journey";
+import { ownedCards, prepareLineup, swapBackup, swapFromCard } from "./team";
+import { finishTurn, livingChorus } from "./combat/turns";
+
 export function createGame(seed = 1): GameState {
   const state: GameState = {
     version: saveFormat.version,
@@ -71,411 +51,11 @@ export function createGame(seed = 1): GameState {
   offerStarters(state);
   return freeze(state, true);
 }
-function offerStarters(state: GameState) {
-  const collected = collectedSpecies(state);
-  const pool = collected.length ? collected : FIRST_RUN_STARTERS;
-  if (state.selected.length === starterCount(state)) {
-    state.starterOffers = [];
-    return;
-  }
-  const shuffled = shuffle(state, [...pool]);
-  state.starterOffers = Array.from({ length: 3 }, (_, index) => shuffled[index % shuffled.length]!);
-}
-const random = roll;
-const OPTIONAL_DESTINATION_CHANCE = 0.25;
-function prepareEncounter(state: GameState) {
-  const route = state.expedition!;
-  route.pack = Math.floor(random(state) * encounterPacks(state.encounter).length);
-  const kind =
-    route.lastRoom !== "merchant" &&
-    state.currency >= merchantPrice(state) &&
-    random(state) < OPTIONAL_DESTINATION_CHANCE
-      ? "merchant"
-      : null;
-  route.recruit =
-    route.lastRoom !== "recruit" && state.roster.length < 5 && random(state) < OPTIONAL_DESTINATION_CHANCE
-      ? SPECIES[Math.floor(random(state) * SPECIES.length)]!.id
-      : null;
-  const stock =
-    kind === "merchant"
-      ? shuffle(
-          state,
-          BOONS.filter((b) => !state.boons.includes(b.id)),
-        )
-          .slice(0, 3)
-          .map((b, i) => ({
-            slot: `slot-${i}`,
-            boon: b.id,
-            price: merchantPrice(state),
-          }))
-      : [];
-  state.support =
-    kind && stock.length
-      ? {
-          id: `support-${state.encounter}`,
-          kind,
-          encounter: state.encounter,
-          resolved: false,
-          purchased: null,
-          stock,
-        }
-      : null;
-}
-function living(state: GameState) {
-  return state.team.filter((c) => c.health > 0);
-}
-function ownedCards(id: string, kind: GameState["team"][number]["species"]): Card[] {
-  return CARDS.filter((c) => c.species === kind).map((c) => ({
-    id: `${id}:${c.id}`,
-    definitionId: c.id,
-    ownerId: id,
-    level: 0,
-  }));
-}
-function intents(state: GameState) {
-  const alive = living(state);
-  for (const enemy of state.battle!.enemies) {
-    if (enemy.health > 0)
-      enemy.targetId = alive.length ? alive[Math.floor(random(state) * alive.length)]!.id : state.team[0]!.id;
-  }
-}
-export function beginBattle(state: GameState, events: GameEvent[] = []) {
-  const encounter = encounterSource(state);
-  for (const enemy of encounter.enemies)
-    if (!state.discovery.encountered.includes(enemy.species)) state.discovery.encountered.push(enemy.species);
-  const all = [...state.team, ...state.reserves];
-  state.team = state.lineup.map((id) => all.find((c) => c.id === id)!);
-  state.reserves = all.filter((c) => !state.lineup.includes(c.id));
-  rebuildCards(state);
-  for (const c of [...state.team, ...state.reserves]) {
-    c.combat = freshCombat();
-    c.block = 0;
-    c.attacked = false;
-  }
-  state.battle = {
-    earnedGold: 0,
-    freeBurnUsed: false,
-    meteoriteUsed: false,
-    cardsPlayedThisTurn: 0,
-    turn: 1,
-    mana: TURN_MANA + Number(hasTalent(state, "mana.leyline-attunement")),
-    maxMana: TURN_MANA + Number(hasTalent(state, "mana.leyline-attunement")),
-    draw: shuffle(
-      state,
-      state.cards.map((c) => c.id),
-    ),
-    hand: [],
-    buffer: [],
-    discard: [],
-    enemies: encounter.enemies.map((e, i) => {
-      const enemy = {
-        id: `enemy-${i}`,
-        name: e.name,
-        species: e.species,
-        health: e.health,
-        maxHealth: e.health,
-        power: e.power,
-        targetId: "",
-        block: 0,
-        combat: freshCombat(),
-        lastAbility: null,
-      };
-      for (const effect of creaturePassive(undefined, e.species).effects) {
-        if (effect.kind !== "battleStart") continue;
-        if (effect.effect === "block") enemy.block += effect.amount;
-        else enemy.combat[effect.effect] += effect.amount;
-      }
-      return enemy;
-    }),
-  };
-  state.phase = "battle";
-  draw(state, TURN_DRAW + (state.boons.includes("tattered-pages") ? 1 : 0));
-  if (hasTalent(state, "nature.ecosystem")) drawKeyword(state, "nature");
-  for (const unit of state.team) {
-    if (hasTalent(state, "armor.bulwark")) grantArmor(state, unit, 2, events);
-    for (const effect of creaturePassive(state, unit.species).effects) {
-      if (effect.kind !== "battleStart") continue;
-      if (effect.effect === "block") grantBlock(state, unit, effect.amount, events);
-      else if (effect.effect === "armor") grantArmor(state, unit, effect.amount, events);
-      else grantStatus(unit, "thorns", effect.amount, events, state);
-    }
-    if (hasTalent(state, "mana.mana-bulwark")) grantBlock(state, unit, state.battle.maxMana, events);
-    if (hasTalent(state, "mana.mana-shell")) grantArmor(state, unit, state.battle.maxMana, events);
-    if (hasTalent(state, "health.combat-surge")) restoreHealth(unit, 4, events, false, state);
-  }
-  state.reward = null;
-  state.battleXP = {};
-  intents(state);
-}
-function bankBattleXP(state: GameState) {
-  const xp: GameState["battleXP"] = {};
-  for (const keyword of KEYWORDS) {
-    const previous = state.keywordXP[keyword] ?? 0;
-    const total = Math.min(1_000_000, previous + (state.battleXP[keyword] ?? 0));
-    state.keywordXP[keyword] = total;
-    if (total > previous) {
-      xp[keyword] = total - previous;
-      if (state.journey) state.journey.xp[keyword] = (state.journey.xp[keyword] ?? 0) + total - previous;
-    }
-  }
-  state.battleXP = {};
-  return xp;
-}
-function finishBattle(state: GameState, defeated: boolean) {
-  const xp = bankBattleXP(state);
-  const earnedGold = state.battle?.earnedGold ?? 0;
-  const previousCurrency = state.currency;
-  state.currency = Math.min(
-    1_000_000,
-    state.currency +
-      (defeated ? 0 : (bossEncounter(state) ? 40 : 20) + (state.boons.includes("smugglers-map") ? 2 : 0)),
-  );
-  const currency = state.currency - previousCurrency + earnedGold;
-  const outcome = defeated ? "defeat" : finalEncounter(state) ? "victory" : "next";
-  if (state.journey) {
-    state.journey.currency = Math.min(1_000_000, state.journey.currency + currency - earnedGold);
-    state.journey.lastBattle = { xp, currency };
-    if (!defeated) state.journey.victories++;
-    if (outcome !== "next") state.journey.outcome = outcome;
-  }
-  if (outcome === "victory") {
-    state.wins = Math.min(1_000_000, state.wins + 1);
-  }
-  const boons =
-    defeated || outcome === "victory" || !bossEncounter(state)
-      ? []
-      : shuffle(
-          state,
-          BOONS.filter((r) => !state.boons.includes(r.id)).map((r) => r.id),
-        ).slice(0, 3);
-  state.reward = {
-    xp,
-    currency,
-    outcome,
-    recruits:
-      defeated || outcome === "victory" || bossEncounter(state)
-        ? []
-        : encounterSource(state).enemies.map((enemy) => enemy.species),
-    boons,
-  };
-  enterReward(state);
-}
-function settle(state: GameState, events: GameEvent[]): boolean {
-  if (![...state.team, ...state.reserves].some((c) => c.health > 0)) {
-    finishBattle(state, true);
-    events.push({ kind: "knockout", text: "Your journey has ended." });
-    return true;
-  }
-  if (state.battle!.enemies.every((e) => e.health <= 0)) {
-    for (const creature of [...state.team, ...state.reserves]) {
-      if (hasTalent(state, "health.vitality")) restoreHealth(creature, 4, events, false, state);
-      creature.block = 0;
-      creature.combat = freshCombat();
-    }
-    for (const enemy of state.battle!.enemies) {
-      enemy.combat = freshCombat();
-      enemy.block = 0;
-    }
-    finishBattle(state, false);
-    events.push({
-      kind: state.phase === "victory" || state.reward?.outcome === "victory" ? "victory" : "reward",
-      text: "Battle complete. Rewards saved.",
-    });
-    return true;
-  }
-  return false;
-}
-function prepareLineup(state: GameState) {
-  const all = [...state.team, ...state.reserves];
-  state.team = state.lineup.map((id) => all.find((c) => c.id === id)!);
-  state.reserves = all.filter((c) => !state.lineup.includes(c.id));
-  rebuildCards(state);
-}
-function afterRewards(state: GameState) {
-  if (state.reward!.outcome === "victory") {
-    state.phase = "victory";
-    return;
-  }
-  state.encounter++;
-  if (state.expedition) prepareEncounter(state);
-  state.phase = "teamSelection";
-  state.battle = null;
-  state.reward = null;
-  prepareLineup(state);
-}
-function enterReward(state: GameState) {
-  const reward = state.reward!;
-  if (reward.outcome === "defeat") state.phase = "defeat";
-  else if (reward.outcome === "victory") state.phase = "victory";
-  else if (reward.recruits.length > 0) state.phase = "recruit";
-  else if (reward.boons.length) state.phase = "boon";
-  else afterRewards(state);
-}
-function rebuildCards(state: GameState) {
-  const previous = state.cards;
-  state.cards = state.team
-    .flatMap((c) => ownedCards(c.id, c.species))
-    .map(
-      (card) =>
-        previous.find(
-          (old) =>
-            old.id === card.id && old.ownerId === card.ownerId && old.definitionId === card.definitionId,
-        ) ?? card,
-    );
-  if (state.battle) {
-    state.battle.hand = [];
-    state.battle.buffer = [];
-    state.battle.discard = [];
-    state.battle.draw = state.cards.map((c) => c.id);
-  }
-}
-/** Manual swaps retain zone slots; swap cards return the incoming kit to the draw pile. */
-function swapBackup(
-  state: GameState,
-  activeId: string,
-  backupId: string,
-  events: GameEvent[],
-  fromCard = false,
-) {
-  const index = state.team.findIndex((unit) => unit.id === activeId);
-  const backupIndex = state.reserves.findIndex((unit) => unit.id === backupId);
-  const outgoing = state.team[index]!;
-  const incoming = state.reserves[backupIndex]!;
-  state.team[index] = incoming;
-  state.reserves[backupIndex] = outgoing;
-  const oldDefs = CARDS.filter((card) => card.species === outgoing.species);
-  const newDefs = CARDS.filter((card) => card.species === incoming.species);
-  const replaced = state.cards.filter((card) => card.ownerId === outgoing.id);
-  for (const card of replaced) {
-    card.definitionId = newDefs[oldDefs.findIndex((def) => def.id === card.definitionId)]!.id;
-    card.ownerId = incoming.id;
-    card.level = 0;
-  }
-  if (state.battle) {
-    for (const enemy of state.battle.enemies)
-      if (enemy.targetId === outgoing.id) enemy.targetId = incoming.id;
-    if (fromCard) {
-      const ids = new Set(replaced.map((card) => card.id));
-      for (const zone of ["draw", "hand", "buffer", "discard"] as const)
-        state.battle[zone] = state.battle[zone].filter((id) => !ids.has(id));
-      state.battle.draw = shuffle(state, [...state.battle.draw, ...ids]);
-    }
-  }
-  if (state.phase !== "battle") state.lineup = state.team.map((unit) => unit.id);
-  events.push({
-    kind: "action",
-    actionType: "swap",
-    actorId: incoming.id,
-    text: `${species(incoming.species).name} replaces ${species(outgoing.species).name}.`,
-  });
-}
-function swapFromCard(state: GameState, actor: import("./combat").Combatant, events: GameEvent[]) {
-  const allied = !("maxHealth" in actor);
-  const backup = allied ? state.reserves.filter((unit) => unit.health > 0) : [];
-  if (backup.length) {
-    const incoming = backup[Math.floor(random(state) * backup.length)]!;
-    swapBackup(state, actor.id, incoming.id, events, true);
-    return;
-  }
-  const row = allied ? state.team : state.battle!.enemies;
-  const others = row.filter((unit) => unit.id !== actor.id && unit.health > 0);
-  if (!others.length) return;
-  const other = others[Math.floor(random(state) * others.length)]!;
-  const from = row.findIndex((unit) => unit.id === actor.id);
-  const to = row.findIndex((unit) => unit.id === other.id);
-  [row[from], row[to]] = [row[to]!, row[from]!];
-  events.push({
-    kind: "action",
-    actionType: "swap",
-    actorId: actor.id,
-    targetId: other.id,
-    text: `${species(actor.species).name} swaps positions with ${species(other.species).name}.`,
-  });
-}
-function livingChorus(state: GameState, enemy: boolean, events: GameEvent[]) {
-  const row = enemy ? state.battle!.enemies : state.team;
-  for (const singer of row) {
-    if (singer.health <= 0) continue;
-    const amount = creaturePassive(enemy ? undefined : state, singer.species).effects.reduce(
-      (sum, effect) => sum + (effect.kind === "livingChorus" ? effect.amount : 0),
-      0,
-    );
-    const recipient = amount > 0 ? mostInjured<import("./combat").Combatant>(row) : undefined;
-    if (recipient) restoreHealth(recipient, amount, events, false, state, false, singer);
-  }
-}
-function finishTurn(draft: GameState, events: GameEvent[]) {
-  const battle = draft.battle!;
-  const bonusMana = Number(
-    battle.mana > 0 ? hasTalent(draft, "mana.wellspring") : hasTalent(draft, "mana.dark-recovery"),
-  );
-  // Enemy-phase draws and existing overflow survive into the next player turn.
-  battle.discard.push(...battle.hand.splice(0));
-  for (let pass = 0; pass < 3; pass++) {
-    // Swaps can reorder the battlefield; each enemy keeps its single action window.
-    const actionOrder = battle.enemies.slice();
-    let enemyCardsPlayed = 0;
-    for (const enemy of actionOrder) {
-      if (enemy.health <= 0) continue;
-      tickStatuses(draft, enemy, events);
-      if (settle(draft, events)) return;
-      if (enemy.health <= 0) continue;
-      enemy.block = retainedBlock(enemy);
-      if (!startAction(enemy, events, draft)) continue;
-      const target = living(draft).find((c) => c.id === enemy.targetId) ?? living(draft)[0];
-      if (!target) break;
-      const abilities = CARDS.filter((card) => card.species === enemy.species && enemyCanUse(card));
-      const alternatives = abilities.filter((card) => card.id !== enemy.lastAbility);
-      const pool = alternatives.length ? alternatives : abilities;
-      const def = enemyCard(pool[Math.floor(random(draft) * pool.length)]!);
-      enemy.lastAbility = def.id;
-      executeAbility(
-        draft,
-        {
-          side: "enemy",
-          actor: enemy,
-          def,
-          value: enemyAbilityValue(enemy, def),
-          targetId: target.id,
-          allyTargetId: def.effect === "heal" ? mostInjured(battle.enemies)?.id : enemy.id,
-        },
-        events,
-        { swap: swapFromCard },
-      );
-      if (++enemyCardsPlayed === 2) livingChorus(draft, true, events);
-      if (settle(draft, events)) return;
-    }
-    for (const c of [...draft.team, ...draft.reserves]) {
-      if (c.health <= 0) continue;
-      tickStatuses(draft, c, events);
-      if (settle(draft, events)) return;
-    }
-    for (const c of [...draft.team, ...draft.reserves]) {
-      const stats = combat(c);
-      if (stats.grace > 0) stats.grace--;
-      c.block = retainedBlock(c, draft);
-      c.attacked = false;
-      startAction(c, events, draft);
-    }
-    battle.maxMana = TURN_MANA + Number(hasTalent(draft, "mana.leyline-attunement")) + bonusMana;
-    battle.mana = 0;
-    gainMana(draft, battle.maxMana, events);
-    battle.turn++;
-    battle.cardsPlayedThisTurn = 0;
-    intents(draft);
-    if (
-      living(draft).some((c) => !controlled(c)) ||
-      draft.reserves.some((c) => c.health > 0 && !controlled(c))
-    )
-      break;
-  }
-  draw(draft, TURN_DRAW);
-  events.push({ kind: "turn", text: `Turn ${battle.turn}. ${battle.maxMana} Mana restored.` });
-}
 
 function reject(state: GameState, reason: string): CommandResult {
   return { accepted: false, state, reason, events: [] };
 }
+
 const commandTypes = {
   draft: true,
   start: true,
@@ -501,14 +81,17 @@ const commandTypes = {
   newRun: true,
   abandon: true,
 } satisfies Record<Command["type"], true>;
+
 export function dispatch(state: GameState, command: Command, development = false): CommandResult {
   if (command.type === "devWinBattle" && !development)
     return reject(state, "Development command unavailable.");
   return resolve(state, command, false);
 }
+
 export function previewCard(state: GameState, cardId: string, targetId?: string): CommandResult {
   return resolve(state, { type: "play", cardId, targetId }, true);
 }
+
 function resolve(state: GameState, command: Command, preview: boolean): CommandResult {
   if (!Object.hasOwn(commandTypes, command.type)) return reject(state, "Unknown command.");
   const b = state.battle;

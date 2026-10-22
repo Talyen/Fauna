@@ -14,7 +14,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../
 import { KeywordText } from "../../src/ui/shared/keyword-text";
 import { KEYWORD_DEFINITIONS } from "../../src/game/keywords";
 import { Settings } from "../../src/ui/settings/settings";
-import { returnFocus } from "../../src/ui/shared/focus";
+import { returnFocus } from "../../src/ui/shared/navigation/focus";
 import { defaultAudioPreferences, type AudioPreferences } from "../../src/ui/settings/audio-preferences";
 import "@fontsource-variable/inter/wght.css";
 import "../../src/ui/styles.css";

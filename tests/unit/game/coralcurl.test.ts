@@ -1,7 +1,7 @@
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, cardText, species } from "../../../src/game/content";
-import { freshCombat, hit, removeEffects, tickStatuses } from "../../../src/game/combat";
+import { freshCombat, hit, removeEffects, tickStatuses } from "../../../src/game/combat/index";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { canBuyTalent, TALENTS } from "../../../src/game/progression";
 import { decodeSave, encodeSave } from "../../../src/game/save";

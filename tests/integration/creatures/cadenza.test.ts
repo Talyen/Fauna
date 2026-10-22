@@ -1,7 +1,7 @@
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, cardText, FIRST_RUN_STARTERS } from "../../../src/game/content";
-import { freshCombat } from "../../../src/game/combat";
+import { freshCombat } from "../../../src/game/combat/index";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { COMBAT_PACKS } from "../../../src/game/encounters";

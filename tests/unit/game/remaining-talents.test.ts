@@ -8,7 +8,7 @@ import {
   restoreHealth,
   startAction,
   tickStatuses,
-} from "../../../src/game/combat";
+} from "../../../src/game/combat/index";
 import { drawKeyword } from "../../../src/game/card-zones";
 import * as content from "../../../src/game/content";
 import { definition, species } from "../../../src/game/content";

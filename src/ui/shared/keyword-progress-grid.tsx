@@ -1,4 +1,4 @@
-import { PagedItems, useCompactLayout } from "./pagination";
+import { PagedItems, useCompactLayout } from "./navigation/pagination";
 import { KeywordIcon } from "./keyword-icon";
 import { KEYWORDS, keywordLabel, keywordProgress, type KeywordXP } from "../../game/progression";
 import { Keyword as KeywordLabel } from "./keyword-text";

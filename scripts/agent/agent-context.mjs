@@ -13,9 +13,9 @@ export const topics = {
   combat: {
     patterns: [
       "src/game/engine",
+      "src/game/journey",
+      "src/game/team",
       "src/game/combat",
-      "src/game/abilities",
-      "src/game/ability-values",
       "src/game/card-zones",
       "src/game/random",
       "src/game/rules",
@@ -27,14 +27,16 @@ export const topics = {
     docs: ["Docs/ARCHITECTURE.md", "Docs/KEYWORDS.md"],
     entries: [
       "src/game/engine.ts",
-      "src/game/abilities.ts",
-      "src/game/combat.ts",
+      "src/game/combat/abilities.ts",
+      "src/game/combat/index.ts",
       "src/application/battle-policy.ts",
     ],
   },
   progression: {
     patterns: [
       "src/game/progression",
+      "src/game/journey",
+      "src/game/team",
       "src/game/content/talents",
       "src/game/content/boons",
       "src/game/encounters",

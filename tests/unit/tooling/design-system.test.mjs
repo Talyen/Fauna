@@ -17,7 +17,7 @@ describe("design-system enforcement", () => {
       "root.scrollTo?.(0, 0);",
       "root.scrollTop = 10;",
     ])
-      expect(sourceViolations("src/ui/shared/screen.tsx", source).length).toBeGreaterThan(0);
+      expect(sourceViolations("src/ui/shared/navigation/screen.tsx", source).length).toBeGreaterThan(0);
     expect(sourceViolations("src/ui/screen.css", ".surface { overflow: clip; }")).toEqual([]);
   });
   it("rejects a screen bypassing shared controls, artwork and styling", () => {
@@ -63,12 +63,12 @@ it("rejects handmade widgets and unregistered primitive escape hatches", () => {
     "<summary>Settings</summary>",
     'React.createElement("button", {onClick: select})',
   ])
-    expect(sourceViolations("src/ui/shared/screen.tsx", source).length).toBeGreaterThan(0);
+    expect(sourceViolations("src/ui/shared/navigation/screen.tsx", source).length).toBeGreaterThan(0);
   expect(sourceViolations("src/components/ui/homemade-tabs.tsx", "<button />").length).toBeGreaterThan(0);
   expect(sourceViolations("src/components/ui/tabs.tsx", "<button />").length).toBeGreaterThan(0);
   expect(
     sourceViolations(
-      "src/ui/shared/screen.tsx",
+      "src/ui/shared/navigation/screen.tsx",
       '<Tabs><TabsList><TabsTrigger value="fire">Fire</TabsTrigger></TabsList><TabsContent value="fire" /></Tabs>',
     ),
   ).toEqual([]);
@@ -80,7 +80,7 @@ it("rejects color literals in code, named CSS colors and utility palette escapes
     '<Button className="bg-white" />',
     'const theme = { primary: "#ccaa66" };',
   ])
-    expect(sourceViolations("src/ui/shared/screen.tsx", source).length).toBeGreaterThan(0);
+    expect(sourceViolations("src/ui/shared/navigation/screen.tsx", source).length).toBeGreaterThan(0);
   expect(
     sourceViolations("src/ui/screen.css", ".control { color: gold; background: white; }").length,
   ).toBeGreaterThan(0);
@@ -146,7 +146,7 @@ it("rejects sharp-corner overrides", () => {
 
 it("keeps control states in the shared shadcn skin and rejects selected-hover thickening", () => {
   expect(
-    sourceViolations("src/ui/shared/screen.tsx", '<Button className="hover:bg-primary" />').length,
+    sourceViolations("src/ui/shared/navigation/screen.tsx", '<Button className="hover:bg-primary" />').length,
   ).toBeGreaterThan(0);
   expect(
     sourceViolations("src/ui/screen.css", ".ui-tab { background: var(--muted); }").length,

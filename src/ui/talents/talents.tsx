@@ -1,5 +1,5 @@
-import { Screen, ScreenHeading } from "../shared/screen";
-import { PagedItems } from "../shared/pagination";
+import { Screen, ScreenHeading } from "../shared/navigation/screen";
+import { PagedItems } from "../shared/navigation/pagination";
 import { motionValue } from "../shared/motion-values";
 
 import { assetUrl } from "../shared/assets";
@@ -38,8 +38,8 @@ import {
 } from "lucide-react";
 import { Button } from "../../components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
-import { ArtCard } from "../shared/art-card";
-import { returnFocus } from "../shared/focus";
+import { ArtCard } from "../shared/cards/art-card";
+import { returnFocus } from "../shared/navigation/focus";
 import {
   KEYWORDS,
   TALENTS,
@@ -51,7 +51,7 @@ import {
 } from "../../game/progression";
 import type { Command, GameState } from "../../game/types";
 import type { Inspection } from "../shared/inspection-model";
-import type { Controls } from "../shared/input";
+import type { Controls } from "../shared/navigation/input";
 import { Progress } from "../shared/progress";
 
 const originalTalentSymbols = {

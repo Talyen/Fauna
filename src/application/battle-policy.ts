@@ -1,4 +1,4 @@
-import { controlled, hasHarmfulEffects, mostInjured } from "../game/combat";
+import { controlled, hasHarmfulEffects, mostInjured } from "../game/combat/index";
 import { actionValue, cardCost, physicalBonus } from "../game/rules";
 import { definition, species } from "../game/content";
 import type { Command, GameState } from "../game/types";

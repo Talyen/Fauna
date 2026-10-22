@@ -6,7 +6,7 @@ import {
   restoreHealth,
   startAction,
   tickStatuses,
-} from "../../../src/game/combat";
+} from "../../../src/game/combat/index";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { previewCard } from "../../../src/game/engine";
 import { BOONS } from "../../../src/game/progression";

@@ -1,12 +1,16 @@
 # Content and artwork
 
-`src/game/encounters.ts` owns encounter progression, enemy packs, and explicit room power. `src/game/abilities.ts` executes abilities for players, previews and enemies inside the command transaction. `src/game/ability-values.ts` shares magnitude scaling between execution and descriptions. New primary effects and extras require exhaustive execution, magnitude and enemy-support decisions; keep hand, Mana, XP and settlement in the command engine. `src/game/content/` owns authored species, cards, talents, Boons and stable encounter templates. `src/game/content.ts` exposes roster/card lookups; `src/game/card-rules.ts` owns displayed effect descriptions and exhaustive enemy adaptation. Catalog order remains intentional. Each species contributes exactly three unique card definitions. Content validation runs at startup and in tests. Keep authored IDs and their consumers consistent; obsolete development formats are rejected under the [save contract](ARCHITECTURE.md#save-contract).
+`src/game/encounters.ts` owns encounter progression, enemy packs, and explicit room power. `src/game/combat/abilities.ts` executes abilities for players, previews and enemies inside the command transaction. `src/game/combat/ability-values.ts` shares magnitude scaling between execution and descriptions. New primary effects and extras require exhaustive execution, magnitude and enemy-support decisions; keep hand, Mana, XP and settlement in the command engine. `src/game/content/` owns authored species, cards, talents, Boons and stable encounter templates. `src/game/content.ts` exposes roster/card lookups; `src/game/card-rules.ts` owns displayed effect descriptions and exhaustive enemy adaptation. Catalog order remains intentional. Each species contributes exactly three unique card definitions. Content validation runs at startup and in tests. Keep authored IDs and their consumers consistent; obsolete development formats are rejected under the [save contract](ARCHITECTURE.md#save-contract).
 
 The roster consists of Mossguard, Emberback, Pollenmoth, Prismram, Captoad, Dunefox, Reedstag, Cindernewt, Coralcurl, Chimecricket, Dawncall, Bloomquail, Shadebrim, Ringpalm, Glintstride, Wickwaltz, Sternshell, Neradora, Stillara and Cadenza. The first journey offers three distinct creatures whose kits include an attack, so each can fight alone; Bloomquail, Neradora, Stillara and Cadenza remain recruitable and available in later three-creature drafts. Later journeys draft only collected species. Ordinary encounters and boss escorts use this same roster; victory grants no additional species unlock. The current version is owned by [save-format.json](../src/game/save-format.json); obsolete development saves are rejected without migration. Each deployed creature contributes three cards, so the starting three-card deck grows to nine cards with a full lineup; recruitment adds defeated species to the five-slot roster. Only the deployed lineup of up to three creatures contributes cards, and free combat swaps replace cards in their existing zones. Starting lineups are remembered and optionally editable from the menu between battles. Health and knockouts persist between battles; Campfire appears beside the encounter whenever any roster creature, including a backup or knockout, is missing at least 30% of maximum Health. Rest restores 30% maximum Health to the whole roster, capped at full Health, and returns to the same combat encounter without advancing the encounter or changing RNG. The most recently visited room type is suppressed on return, so Campfire cannot be repeated immediately. There is no elemental chart.
 
 ## Ability costs
 
 Every ability, for every creature, has a base cost of exactly **1 Mana**. This applies to all current and future action cards, including attacks, defense, healing and utility. Balance abilities through their damage, protection, status effects and other values rather than varying their authored Mana cost. Card upgrades retain the same base cost. Explicit gameplay modifiers such as talents that make a play free still apply at runtime.
+
+## Ability balance and targeting
+
+Ability design aims for roughly 6 total value per card across its affected targets, with adjustment for effects such as lasting statuses. This is a design guideline rather than an arithmetic equivalence between damage, Armor and control; it does not retroactively rebalance existing creatures. Single chosen targets are implicit in descriptions; group targets and self-granted effects are explicit. Area attacks resolve living opponents in board order and stop if retaliation knocks out the acting creature. Player area attacks need no chosen target; enemy area attacks affect deployed allies, excluding backup. Both sides use the same authored area damage. Enemy ability damage, healing and Block gain 10% of their authored base per room after the first, rounded normally; all other amounts retain their authored rules. Mixed Block-or-Thorns abilities scale Block only. This room modifier also applies to supplemental damage and healing, without scaling chances, effect counts or resources.
 
 ## Artwork contracts
 
@@ -19,7 +23,7 @@ Displayed artwork uses equal-area preferred dimensions of 200×266⅔ portrait a
 
 These are separate compositions, not crops of one format into another. Replace the selected sources in `public/art/` or the shared library, update `assets/manifest.json` where needed, and explicitly prepare the new generation. Images use their native aspect ratio with no stretching. All text is rendered by the UI, not baked into artwork. Artwork contains no text or UI overlays except the thin health bars inside battlefield creature frames. Creature inspection shows artwork beside the active named trait and three action thumbnails; Rank progression opens a separate paginated view in the same dialog. Selecting a thumbnail pins action artwork with hover/focus rules; keyboard/controller cycling has no Previous/Next buttons. Battle uses hover/focus details without pinned inspection. Collection creature pages show the trait and all three base abilities with readable names, Mana costs and rules outside artwork. See [inspection and Collection rules](UI.md#other-screens).
 
-The retired creature placeholders and their authoring script have been removed; earlier immutable prepared generations remain preserved. Mana UI sprites were adapted from Alchemy; no species illustrations or fonts were copied from Alchemy. Keyword artwork reuse is documented below.
+The retired creature placeholders and their authoring script have been removed; earlier prepared outputs remain recoverable from Git history. Mana UI sprites were adapted from Alchemy; no species illustrations or fonts were copied from Alchemy. Keyword artwork reuse is documented below.
 
 ## Keyword artwork
 
@@ -37,7 +41,7 @@ The retired creature placeholders and their authoring script have been removed; 
 | Block         | `block.webp`     | `talent-block.webp`    |
 | Health        | `heal.webp`      | `talent-health.webp`   |
 
-Source directory: `Alchemy: src/assets/optimized/`. Artwork reuse does not import Alchemy's keyword mechanics. The nine original keyword illustrations and additional category selections are registered in `assets/manifest.json`; see [talent category portraits](#talent-category-portraits) and [Water](#coralcurl-and-water).
+Source directory: `Alchemy: src/assets/optimized/`. Artwork reuse does not import Alchemy's keyword mechanics. The nine original keyword illustrations and additional category selections are registered in `assets/manifest.json`; see [talent category portraits](#talent-category-portraits) and [Water](content/creatures/coralcurl.md).
 
 ## Composition
 
@@ -55,7 +59,7 @@ npm run assets:check          # Verify selected sources, recipes and output hash
 npm run assets:check:outputs  # Validate committed outputs without the source library
 ```
 
-Preparation reads and validates all selected sources before publication. Each immutable object lives under `public/prepared/objects/<fingerprint>/`; its fingerprint includes source bytes, recipe settings, output format and the encoder toolchain. Each object has a hash receipt; unchanged objects are reused without rewriting or re-encoding. `src/assets/prepared.json` is the complete generated lookup and publication receipt. The pointer changes atomically only after every selected output passes validation. Missing sources, corrupt objects and encoding failures preserve the prior pointer. Original artwork, library files and historical generations are never modified or deleted. Generated files are not edited by hand.
+Preparation reads and validates all selected sources before publication. Each immutable object lives under `public/prepared/objects/<fingerprint>/`; its fingerprint includes source bytes, recipe settings, output format and the encoder toolchain. Each object has a hash receipt; unchanged objects are reused without rewriting or re-encoding. `src/assets/prepared.json` is the complete generated lookup and publication receipt. The pointer changes atomically only after every selected output passes validation. Missing sources, corrupt objects and encoding failures preserve the prior pointer. Preparation never modifies or deletes original artwork, library files or historical generations. Generated files are not edited by hand. Explicit repository cleanup may retire unreferenced tracked outputs after validating the active lookup and checking all repository references; Git history retains those outputs. Original source artwork and active objects remain preserved.
 
 ### Artwork resolution and quality
 
@@ -70,7 +74,7 @@ npm run assets:check:bundle  # Verify an existing build's exact active media inv
 
 Artwork review writes `reports/art-review/index.html`, a contact sheet of optimized selections and a size summary. Inspect the comparison at 2× display density and use CI's actual hand, creature, Collection and inspection evidence for visual acceptance. This review does not establish in-game rendering quality or physical-device acceptance.
 
-Runtime artwork/audio resolves stable IDs through the generated lookup. Ordinary development and production builds run output-only checks; they never regenerate media or need access to the library. The build disables automatic public-directory copying and emits only the active lookup's files plus its build receipt. Authoring originals, cache receipts and old generations stay out of the shipped renderer. Build validation rejects extra/missing media, changed bytes and unapproved public resources, with a 128 MiB total-media limit and 3 MiB limit per image. JavaScript retains its separate measured budget. Historical outputs can remain available locally without increasing each new build; cleanup is separate and explicit.
+Runtime artwork/audio resolves stable IDs through the generated lookup. Ordinary development and production builds run output-only checks; they never regenerate media or need access to the library. The build disables automatic public-directory copying and emits only the active lookup's files plus its build receipt. Authoring originals, cache receipts and old generations stay out of the shipped renderer. Build validation rejects extra/missing media, changed bytes and unapproved public resources, with a 128 MiB total-media limit and 3 MiB limit per image. JavaScript retains its separate measured budget. Historical outputs can remain available locally without increasing each new build; cleanup is separate and explicit. The obsolete whole-generation directories under `public/prepared/<fingerprint>/` have been retired; the current object layout avoids duplicating every unchanged asset for each selection change.
 
 Source checks are required after media authoring. Output-only checks verify the recipe contract without requiring the preparing machine's exact native encoder versions; source checks additionally verify selected source bytes. Hash/geometry/decode checks do not establish visual suitability, source-license clearance or listening acceptance. Retain upstream source-license metadata; the manifest records the shared-library selection and provenance, not a new license grant.
 
@@ -110,297 +114,12 @@ Existing complete Overgrowth, Molten Shell, Cross-Pollination and Refraction pro
 
 ## Battle pile artwork
 
-`public/art/battle/draw-pile.webp`, `discard-pile.webp` and `card-back.webp` are unchanged 420×560 optimized artwork copied from `Alchemy: src/assets/optimized/`, with reuse explicitly requested by the user. The prepared manifest owns `pile.draw`, `pile.discard` and `card.back`; runtime has no sibling-project dependency. Draw and discard ArtCards preserve the 3:4 aspect ratio. Flying discards use the same top-card crop and landing bounds as Alchemy: x=25/420, y=25/560, width=328/420, height=432/560. The source library, original placeholders and earlier immutable prepared generations remain preserved.
+`public/art/battle/draw-pile.webp`, `discard-pile.webp` and `card-back.webp` are unchanged 420×560 optimized artwork copied from `Alchemy: src/assets/optimized/`, with reuse explicitly requested by the user. The prepared manifest owns `pile.draw`, `pile.discard` and `card.back`; runtime has no sibling-project dependency. Draw and discard ArtCards preserve the 3:4 aspect ratio. Flying discards use the same top-card crop and landing bounds as Alchemy: x=25/420, y=25/560, width=328/420, height=432/560. The source library and original placeholders remain preserved; earlier prepared outputs remain recoverable from Git history.
 
 ## Talent category portraits
 
 Armor, Bleed, Dodge, Leech and Mana now use their distinct existing Alchemy portraits, copied unchanged from `Alchemy: src/assets/optimized/talent-<keyword>.webp` into `public/art/keywords/`. These follow the existing Alchemy keyword-art reuse, with source provenance in `assets/manifest.json` and Fauna-owned prepared outputs. There is no runtime dependency on Alchemy.
 
-## Emberback
+## Creature references
 
-Emberback is an armored brawler with 30 Health. Its unique passive, Molten Shell, reads: "When your Armor breaks, deal 1 Burn damage to all enemies" Damage scales from 1 through 6 at zero through five stars, replacing the previous tier. It grants no starting Armor. It appears in ordinary combat packs and becomes collectible through the existing recruitment flow.
-
-All three abilities cost 1 Mana:
-
-- **Ember Charge:** Deal 4 Physical damage; Gain 2 Armor
-- **Furnace Breath:** Deal 2 Burn damage to all enemies
-- **Magma Stomp:** Deal 2 Stun damage to all enemies
-
-Ability design aims for roughly 6 total value per card across its affected targets, with adjustment for effects such as lasting statuses. This is a design guideline rather than an arithmetic equivalence between damage, Armor and control; it does not retroactively rebalance existing creatures. Single chosen targets are implicit in descriptions; group targets and self-granted effects are explicit. Area attacks resolve living opponents in board order and stop if retaliation knocks out the acting creature. Player area attacks need no chosen target; enemy area attacks affect deployed allies, excluding backup. Both sides use the same authored area damage. Enemy ability damage, healing and Block gain 10% of their authored base per room after the first, rounded normally; all other amounts retain their authored rules. Mixed Block-or-Thorns abilities scale Block only. This room modifier also applies to supplemental damage and healing, without scaling chances, effect counts or resources.
-
-The selected creature portrait (`04.png`) and three ability portraits are copied unchanged from the user's [Emberback Drive folder](https://drive.google.com/drive/folders/1BAcTaOpKsPQonWJ4mZzJgRE3se0SrGp9) into `public/art/emberback/`. The manifest records each original file URL. Ability-specific artwork is used consistently in battle, inspection and Collection. Ashen Vanish remains outside the playable kit; its Drive source is preserved. PNG selections are copied at their original resolution and aspect ratio without cropping or conversion. Prepared output checks do not establish rendered acceptance.
-
-Molten Shell triggers once per positive-to-zero Armor transition, after the effect that removes Armor completes. Damage, periodic damage, shattering, Purge and Armor theft can break Armor. No burst occurs while Armor remains, when Armor was already zero, or after the creature is knocked out. New Armor can enable another burst. Burn packets use existing mitigation and buildup, without Dodge, Critical hits or ordinary attack retaliation. Player bursts use the collected tier and hit living enemies; enemy bursts use the base tier and hit deployed living allies. Passives should typically have a unique species mechanic and concise rules without naming abilities.
-
-## Mossguard
-
-Mossguard is a new species ID replacing the removed Mossback content and occupies its former starter and encounter slots. He has 32 Health and three 1 Mana abilities: Boulder Brace grants 6 Block to himself, Rooted Stomp deals 2 Stun damage to every living enemy, and Moss Renewal restores 2 Health to every living deployed ally, including himself. Group healing does not revive knockouts or affect backup. Upgrades and explicit gameplay modifiers use the existing rules.
-
-Overgrowth retains 10%, 20%, 30%, 40%, 50% or 60% more Block at zero through five stars. This is a relative increase over the ordinary 50% retention: 55%, 60%, 65%, 70%, 75% or 80% of remaining Block survives, rounded normally. It applies on each turn transition, including in backup. Enemy Mossguard always uses the base tier.
-
-The portrait and three distinct ability illustrations are unchanged PNGs imported from the user-provided [Mossguard Drive folder](https://drive.google.com/drive/folders/1xzid2xsfO4044-xra9i3KU1K1dx_Kxgz). Source provenance is recorded per file in the asset manifest. Removed Mossback placeholders are no longer selected; prior immutable prepared generations are preserved. Source art was inspected at native aspect ratios; in-game rendered review remains a separate gate.
-
-## Pollenmoth
-
-Pollenmoth is a 23 Health support creature encountered and recruited on ordinary routes. Each ability costs 1 Mana: Dazzle Burst deals 3 Light damage to a random living enemy; Petal Shelter gives living deployed allies 2 Block; Bloomwake restores 3 Health to the most injured living deployed ally, including Pollenmoth. Injury is measured by remaining Health percentage, with battlefield order breaking ties. Backup and knockouts are excluded.
-
-Cross-Pollination has six complete passive tiers:
-
-1. Light damage bounces once
-2. Light damage bounces once; 50% chance to bounce twice
-3. Light damage bounces twice
-4. Light damage bounces twice; Health restoration has a 50% chance to bounce once
-5. Light damage bounces twice; Health restoration bounces once; 50% chance to bounce twice
-6. Light damage and Health restoration bounce twice
-
-Each bounce repeats the original effect amount, with defenses and healing modifiers applied separately. Damage selects a random living opponent not already visited; healing selects the most injured remaining ally missing Health. Bounces cannot revisit a recipient or start another chain. A Dodged initial hit does not bounce; a knocked-out source stops its chain. Full-Health healing attempts do not bounce. Chance rolls and random targets use committed seeded combat randomness, so previews never consume live RNG. Enemy Pollenmoths use their base passive. Healing bounces belong to Pollenmoth's own healing abilities, not another creature's healing or automatic recovery.
-
-The creature portrait and three dedicated action illustrations are unchanged copies from the user's Pollenmoth Google Drive folder. Their original URLs and rights notes are recorded in the asset manifest. Prepared assets retain the native 4:3 creature and 3:4 action compositions. Rendered gameplay review remains pending.
-
-## Prismram
-
-Prismram is a 30 Health crystal defender found in ordinary combat packs and collected through recruitment. All three abilities cost 1 Mana:
-
-- **Prism Charge:** Deal 6 Physical damage
-- **Faceted Ward:** Gain 3 Block; Reflect the next harmful status effect
-- **Spectrum Lance:** Deal 4 Light damage; Purge target: remove 1 effect
-
-**Refraction** gives harmful status effects received a 10%, 20%, 30%, 40%, 50% or 60% chance to redirect to a random living enemy at zero through five stars. Enemy Prismram always uses 10%. Faceted Ward guarantees the next reflection before passive chance is considered; repeated Wards refresh one pending reflection rather than stacking. The pending effect persists across turns, swaps and current-format saves, resets for each battle and can be Purged.
-
-Reflection transfers the incoming Burn, Poison, Bleed, Stun or Freeze buildup at its original post-mitigation strength; direct damage still lands on the original target. The recipient uses normal control thresholds and immunity. Reflected effects belong to the reflecting creature and cannot reflect again. Only living deployed opponents are eligible, including the attacker. Fully blocked damage, periodic ticks, retaliation and immune control applications do not consume a Ward or roll Refraction.
-
-The landscape portrait (`04.png`) and three portrait ability illustrations are unchanged PNGs from the user's [Prismram Drive folder](https://drive.google.com/drive/folders/1_-fYMW69ianG7xHrSc0fukfMX_kl42Vb), copied into `public/art/prismram/`. The manifest records the original file URLs. Creature and ability artwork use the shared prepared-media pipeline for battle, inspection and Collection. Source images were visually inspected; in-game rendered acceptance remains pending.
-
-## Captoad
-
-Captoad has 30 Health and joins ordinary encounter and recruitment pools. Its base passive, Sporecoat, reads "Retaliate with 1 Poison damage when hit"; retaliation scales from 1 through 6 Poison damage at zero through five stars. A landed direct attack triggers once even when Block or Armor absorbs it completely. Dodge, periodic damage, derived damage and retaliation do not trigger it. A knocked-out Captoad cannot retaliate. The Poison packet cannot Dodge, crit or start another retaliation; resolved Poison damage adds ordinary Poison stacks and source attribution, respecting Block and harmful-status reflection. Enemies use the same base passive.
-
-All three abilities cost 1 Mana:
-
-- **Spore Puff:** Deal 2 Poison damage to all enemies
-- **Mushroom Guard:** Gain 3 Block; Restore 3 Health
-- **Bogbound Leap:** Swap out for a random backup; Draw 2 cards
-
-Mushroom Guard heals only its actor through ordinary card-healing rules. Bogbound Leap first selects a random living backup with seeded RNG, preserving both creatures' Health and effects and the remembered starting lineup. It removes the departing creature's cards from hand, overflow, draw and discard; the incoming three cards are shuffled into the draw pile before drawing two, making the new kit immediately drawable. Other creatures' cards retain their zones. With no living backup, it swaps battlefield positions with a random living ally; alone it still draws two. Enemy Leap swaps with another living enemy and has no shared-hand draw. Reordering never gives an enemy an extra action in that turn window and retains enemy identity for save validation. Free manual Swap retains its existing card-slot replacement behavior.
-
-The unchanged portrait and three ability PNGs come from the user's [Captoad Drive folder](https://drive.google.com/drive/folders/16zyEo4h2IGJGun_C1VqTCqV3U3-HMdGI). Each source URL is recorded in the manifest; native 4:3 and 3:4 compositions are retained. Prepared output checks do not establish rendered acceptance. Player-facing vocabulary uses Backup in place of Reserves; internal save fields retain their existing names.
-
-## Dunefox
-
-Dunefox is a 24 Health evasive support creature available through ordinary encounters, recruitment and starter drafts. Each ability costs 1 Mana:
-
-- **Sandburst Pounce:** Deal 6 Physical damage
-- **Dune Whirl:** Deal 1 Physical damage to all enemies; Blind all enemies
-- **Mirage Step:** Gain 30% Dodge until your next turn; Draw 1 card
-
-**Shifting Sands** reads "Allies gain 15% of your Dodge chance" at zero stars and scales to 20%, 25%, 30%, 35% and 40% at one through five stars. Other living deployed allies receive that fraction of Dunefox's intrinsic current Dodge chance, including the ordinary 5%, talents and temporary bonuses, before adding received Shifting Sands bonuses. Multiple providers contribute independently without recursive amplification; Dunefox does not benefit from its own aura. Total Dodge remains capped at 75%. For example, Mirage Step raises an otherwise unmodified Dunefox to 35% Dodge, sharing 5.25 percentage points at the base tier. Knockouts and backup providers contribute nothing; swaps, control and expiring bonuses update the live aura automatically. Enemies use the base tier.
-
-Blind grants a 50% chance to miss the next attack and expires after that attack whether it hits or misses. A single seeded roll covers all recipients and supplemental damage packets of that attack; support abilities, skipped turns, periodic damage and retaliation do not consume Blind. A miss emits the existing Dodge outcome and icon for each recipient and activates ordinary Dodge rewards, including against a recipient unable to Dodge normally. Blind is a harmful, non-stacking status that can be Cleansed or reflected once through the existing harmful-status owner. Dune Whirl applies Blind to surviving enemies after its damage, including enemies that Dodged that damage.
-
-Mirage Step grants a separate temporary Dodge bonus, removed at the start of the owner's next turn, including in backup or on a skipped turn. Purge removes both ordinary and temporary granted Dodge together; unrelated permanent Dodge survives ordinary expiry. Enemy Mirage Step grants the same 30% Dodge and omits the player-only draw. The current save format stores Blind and temporary Dodge and rejects obsolete development saves without migration.
-
-The unchanged landscape portrait and three action PNGs come from the user's [Dunefox Drive folder](https://drive.google.com/drive/folders/1NI9Ud-lqluU5whB6A3066vh2Oop5DUP3). Each original file URL is recorded in the asset manifest; the shared preparation pipeline retains native 4:3 creature and 3:4 action compositions. Source artwork was visually inspected; in-game rendered review remains pending.
-
-## Reedstag
-
-Reedstag is a 30 Health marsh guardian available through starter drafts, ordinary encounters and recruitment. All three abilities cost 1 Mana:
-
-- **Reed Rush:** Deal 6 Nature damage
-- **Reed Shelter:** Gain 3 Block and 3 Thorns
-- **Mending Spring:** Restore 4 Health and Cleanse the most injured ally
-
-Mending Spring selects the living deployed ally with the lowest remaining Health percentage, including Reedstag; battlefield order breaks ties. Healing and removal of all harmful effects apply to that same recipient, selected before healing. Full-Health allies remain eligible for Cleanse. Backup and knocked-out creatures are excluded. Enemy healing and cleansing select from living enemies and retain authored healing and explicit room power.
-
-**Reedguard** reads "Block and Thorns have a 20% chance to be shared with allies" and scales through 40%, 60%, 80% and 90% to "Block and Thorns are shared with allies" at five stars. Each positive Block or Thorns gain rolls separately, once for all other living deployed allies; success copies the amount actually gained without spending Reedstag's own gain. Card, talent and Boon grants participate. Shared gains never trigger further sharing, including through another Reedstag. Backup and knockouts neither share nor receive; enemies use the 20% base tier and share only with living enemies. Guaranteed sharing and gains with no eligible recipients consume no sharing RNG.
-
-The unchanged landscape portrait (`05.png`) and three portrait ability PNGs come from the user's [Reedstag Drive folder](https://drive.google.com/drive/folders/1VpBD8PLbx5hEHMJTi1ZZv9NvCK_IRQRt). Each original URL is recorded in the asset manifest. The shared preparation pipeline retains native 4:3 creature and 3:4 action compositions. Source artwork was visually inspected; in-game rendered review remains pending.
-
-## Cindernewt
-
-Cindernewt is a 24 Health creature eligible for starter drafts, ordinary encounters and recruitment. Cinderstep reads "When you Dodge, deal 1 Burn damage to the attacker" and scales from 1 through 6 damage at zero through five stars. Enemies use the base tier. Both ordinary Dodge and Blind misses trigger it. Its retaliation uses normal mitigation, Burn buildup and source attribution, cannot Dodge or critically hit, and cannot trigger attack retaliation or another Dodge. Periodic and derived damage do not trigger Cinderstep.
-
-All three abilities cost 1 Mana:
-
-- **Cinder Lash:** Deal 6 Physical or Burn damage at random
-- **Ember Breath:** Deal 1 Burn damage to all enemies; Remove 50% of all enemies’ Armor, rounded up
-- **Ashen Veil:** Deal 1 Burn damage to all enemies; Blind all enemies
-
-Cinder Lash selects Physical or Burn with equal probability using committed seeded randomness once per attack execution; repeats select again. Both authored damage categories participate in card XP, costs and card-level talent eligibility; resolved damage uses only the selected type. Previews use detached RNG and rejected commands consume none. Ember Breath melts surviving opponents' Armor after damage, even if they Dodged or blocked it. Five Armor loses three, and one loses one. Removing the last Armor triggers ordinary Armor-break passives; a knocked-out actor stops further effects. Ashen Veil applies Blind to surviving enemies after damage, including enemies that Dodged it. Enemy abilities use ordinary encounter damage scaling and affect deployed allies, excluding backup. The current save format rejects obsolete development saves without migration; Cindernewt uses the shared combat fields.
-
-The unchanged landscape portrait (`03.png`) and three action PNGs come from the user's [Cindernewt Drive folder](https://drive.google.com/drive/folders/1MBRRJHBSdA-mKYA4SR2L7l5wYCIOlCG1). Each original file URL is recorded in the asset manifest; native 4:3 creature and 3:4 action compositions are retained. Source artwork was visually inspected; in-game rendered review remains pending.
-
-## Coralcurl and Water
-
-Coralcurl has 28 Health and is available through ordinary encounters, recruitment and starter drafts. All abilities cost 1 Mana:
-
-- **Bubble Ward:** Gain 6 Block
-- **Reef Jet:** Deal 6 Water damage
-- **Coral Spiral:** Swap out for a random backup; Blind all enemies
-
-**Bubbleburst** reads "Deal 1 Water damage when your Block breaks" at zero stars and scales to 2, 3, 4, 5 and 6. When a direct attack spends the last Block, a surviving Coralcurl damages the living attacker, including an exactly absorbed attack. The captured break still triggers if another reward restores Block. Purge, expiry, periodic damage and retaliation do not trigger it; Bubbleburst cannot chain retaliation. Enemies use the base tier.
-
-Coral Spiral follows the existing random living backup swap and card-zone rules, then Blinds every living enemy. Without backup it exchanges positions with a random living ally; alone it stays in place and still Blinds enemies. Enemy Spiral exchanges battlefield positions and Blinds deployed allies.
-
-Water is a direct damage and talent category with its own blue token, distinct from Mana, Block and Freeze. Block absorbs Water; Armor does not reduce it, and it adds no status. Water cards earn Water XP once per accepted play; passive damage does not award card XP. The six Water talents form three rows: Pressure (+1 Water attack damage), Seafoam (Water hits grant 2 Block), High Tide (+25% Water attack damage while protected by Block), Erosion (Water hits remove 2 Armor), Cleansing Current (20% chance to Cleanse 1 harmful effect on a Water hit), and Riptide (20% chance to draw a Water card on a Water hit). Hit rewards include fully absorbed hits, exclude Dodges and require a surviving actor; passive damage cannot activate them.
-
-The unchanged portrait and three action PNGs come from the user's [Coralcurl Drive folder](https://drive.google.com/drive/folders/19NVnBIdFleyfmnqCTyg4GeSiQkMbI2TE). The manifest records original URLs, and Water's talent artwork reuses Reef Jet. Water currently uses the existing generic impact audio. Source artwork was visually inspected; rendered gameplay and balance acceptance remain pending.
-
-## Chimecricket
-
-Chimecricket is a 24 Health musical support creature available through starter drafts, ordinary encounters and recruitment. All three abilities cost 1 Mana:
-
-- **Resonant Leap:** Deal 4 Stun damage; Draw a card
-- **Hush Dome:** Nullify the next harmful status effect on each ally
-- **Lullaby Drift:** Restore 4 Health and Cleanse the most injured ally
-
-**Encore** gives Chimecricket's first accepted ability each turn a 10%, 20%, 30%, 40%, 50% or 60% chance to repeat at zero through five stars. The complete ability repeats once for free, with no additional accepted-play XP or card count. Talent repeats and Encore together still produce at most one repeat. A failed roll spends that turn's opportunity; rejection does not. The receipt survives swaps and current-format saves and resets at the next turn or battle. Enemies use the 10% base tier. Repeats stop if the actor or attack target falls. Lullaby Drift reselects the most injured living deployed ally for each repetition, including Chimecricket, using Health percentage and battlefield order for ties; healing and full Cleanse affect that same recipient. Backup and knockouts are excluded.
-
-Hush Dome gives each living deployed ally, including Chimecricket, one non-stacking Nullify protection. It remains until consumed or Purged, including across turns, swaps and resume. The next applicable Burn, Poison, Bleed, Stun, Freeze or Blind application consumes it without applying that status; direct damage still lands. Existing statuses remain. Dodge, fully blocked damage, periodic ticks and immune or already capped status applications do not consume it. Nullify precedes reflection and can stop reflected statuses. Repeated Hush Dome refreshes one protection rather than stacking charges. Enemy Hush Dome protects only living enemies.
-
-The unchanged landscape portrait (`05.png`) and three portrait ability PNGs come from the user's [Chimecricket Drive folder](https://drive.google.com/drive/folders/1kAT543t5YDsXpU-an5j9XeROepKrKPeX). Each original file URL is recorded in the asset manifest. The shared preparation pipeline retains native 4:3 creature and 3:4 action compositions. Source artwork was visually inspected; in-game rendered review remains pending.
-
-## Dawncall
-
-Dawncall is a 24 Health support creature available through starter drafts, ordinary encounters and recruitment. All three abilities cost 1 Mana:
-
-- **Dawn Cry:** Cleanse 1 harmful effect from all allies; Draw 1 card
-- **Sunwing Sweep:** Deal 2 Light damage to all enemies
-- **Morning Bloom:** Restore 2 Health to all allies
-
-**Early Bird** grants the first attack each turn 20%, 35%, 50%, 65% or 80% additional Critical hit chance at zero through four stars. At five stars, the first attack each turn is a guaranteed Critical Hit against every enemy it hits. Bonuses add to the ordinary allied 5% Critical hit chance; each landed target rolls independently below the guaranteed tier. Dodge still prevents damage. The first attack consumes the opening opportunity even if it misses; support abilities, periodic damage, retaliation and derived packets do not consume it. Repeats are subsequent attacks. The opportunity persists through swaps and current-format resume, refreshes at the owner's next turn even in backup or control, and resets for each battle. Enemy Dawncall uses the base 20% chance with no ordinary enemy Critical bonus, independently for each landed target.
-
-Dawn Cry removes one harmful category from each living deployed ally through ordinary Cleanse rules, then draws one card even if no harmful effects were present. Morning Bloom heals each living deployed ally, including Dawncall. Neither affects backup nor revives knocked-out creatures. Enemy Dawn Cry Cleanses living enemies and omits the player-only draw; enemy Morning Bloom uses ordinary encounter healing scaling. The current save format stores the opening-attack receipt and rejects obsolete development saves without migration.
-
-The original landscape portrait (`03.png`) and Dawn Cry, Sunwing Sweep and Morning Bloom action PNGs come from the user's [Dawncall Drive folder](https://drive.google.com/drive/folders/1yPgufTCHVyQTjXPWwlGwkGz0H7k38EtR). Unchanged originals live in `public/art/dawncall/`; the manifest records each original URL and the shared prepared-media pipeline supplies lossless WebP derivatives. Source artwork was visually inspected; rendered gameplay and balance acceptance remain pending.
-
-## Bloomquail
-
-Bloomquail is a 26 Health support creature available through ordinary encounters, recruitment and later three-creature starter drafts. Each ability costs 1 Mana:
-
-- **Petal Rampart:** Gain 6 Block
-- **Bloom Cradle:** Draw 2 cards; Restore 2 Health
-- **Petal Veil:** Restore 2 Health to all allies; Blind all enemies
-
-**Full Bloom** reads "Convert 50% of your Block into Health for the most injured ally" at zero stars, increasing to 60%, 70%, 80% and 90%. Its five-star text is "Convert your Block into Health for the most injured ally". Conversion happens immediately whenever deployed Bloomquail gains Block from a card, talent or shared grant. Only the newly gained, stack-capped amount participates; existing Block is untouched. Round the converted amount normally and cap it by the recipient's missing Health, retaining the remainder as Block. Full-Health teams keep all gained Block. Select the living deployed ally with the lowest remaining Health percentage, including Bloomquail; battlefield order breaks ties. Backups and knockouts neither convert nor receive healing. Ordinary healing modifiers and healing-triggered Boons apply; passive healing cannot trigger card-only overhealing rewards or bounces.
-
-Enemies use the base 50% conversion and heal their own side. Bloom Cradle draws two cards then restores two Health to Bloomquail itself; its healing never targets another ally. Enemies omit its player-only draw and heal themselves through authored healing and explicit room power. Petal Veil heals each living ally and applies Blind to opponents once per play, independently of how many allies were healed. Its Blind remains useful when allies are already at full Health.
-
-The unchanged landscape portrait and three portrait action PNGs are imported from the user's [Bloomquail Drive folder](https://drive.google.com/drive/folders/15IdDXgCiwta6JLr2VJhR-j0w7kQRvtWt). Original source URLs and rights notes live in the asset manifest. Prepared media preserves the native 4:3 creature and 3:4 action compositions. In-game rendered review remains pending.
-
-## Shadebrim
-
-Shadebrim has 28 Health and is available through starter drafts, ordinary encounters and recruitment. All three abilities cost 1 Mana:
-
-- **Noonward:** Gain 4 Block; Reflect the next Burn
-- **Coolfront:** Deal 1 Freeze damage to all enemies; Cleanse all allies
-- **Noon Bloom:** Draw 2 cards; Gain 1 Mana
-
-**Cool Refuge** reduces Burn damage taken by living deployed allies, including Shadebrim, by 10%, 20%, 30%, 40%, 50% or 60% at zero through five stars. Direct hits, derived damage and periodic Burn ticks use the same reduction before rounding and Block. Other resistance modifiers multiply with it. Multiple Shadebrim use the strongest active tier rather than stacking. Backup and knocked-out creatures neither supply nor receive the protection. Enemies use the 10% base tier on their own side. Swaps and knockouts change protection immediately.
-
-Noonward follows the ordinary Reflect contract, restricted to Burn status buildup: direct damage still lands, and the next applicable Burn is redirected at its resolved strength to a random living opponent. Other harmful effects do not consume it. Dodge, full absorption, periodic ticks, Nullify and capped buildup do not consume it either. It does not stack, survives turns and swaps, and can be Purged. Burn-only protection is spent before an unrestricted Reflect charge; reflected statuses cannot reflect again. Its distinct visible status describes the Burn restriction. The current save format stores the protection and rejects obsolete development saves without migration.
-
-Coolfront damages opponents first, then fully Cleanses every living deployed ally, including its actor, even if its attacks miss. Backup and knockouts are excluded. Enemy Coolfront Cleanses living enemies. Noon Bloom draws before returning Mana, uses the ordinary hand and Mana caps, and grants accepted-play XP once. Its refund happens before automatic end turn. Enemies omit this player-only ability and alternate Noonward and Coolfront, using ordinary encounter damage and defense scaling.
-
-The unchanged landscape portrait (`03.png`) and Noonward, Coolfront and Noon Bloom action PNGs come from the user's [Shadebrim Drive folder](https://drive.google.com/drive/folders/1iJFM9EwjiVDMIZdTMjCXSMpTjtR7uOhz). Original URLs and rights notes are recorded in the asset manifest. Prepared media preserves the native 4:3 creature and 3:4 action compositions. Source artwork was visually inspected; rendered gameplay and balance acceptance remain pending.
-
-## Ringpalm
-
-Ringpalm has 30 Health and is available through starter drafts, ordinary encounters and recruitment. All three abilities cost 1 Mana:
-
-- **Ringclap:** Deal 6 Stun damage
-- **Harmonic Set:** Deal 1 Stun damage to all enemies; Gain 1 Armor; 20% chance to repeat
-- **Seedling Circle:** Grant all allies 2 Block or Thorns
-
-**Resonance** gives Ringpalm's Stun damage a 10%, 20%, 30%, 40%, 50% or 60% chance to repeat at zero through five stars. Each Stun packet that removes Health rolls independently while both source and target remain alive, including supplemental Stun damage from talents and packets in repeated abilities. Misses, fully mitigated packets, periodic damage, retaliation and derived damage do not roll. The repeat uses the same base packet with ordinary defenses and Stun buildup, without another Dodge, Critical, retaliation, attack-triggered talent chain or Resonance roll. Enemies use the base 10% chance regardless of player collection rank.
-
-Harmonic Set independently rolls its 20% chance once per accepted play and repeats the complete ability once, including its Armor. Intrinsic, Encore and talent ability repeats together still allow at most two complete resolutions; each resolution can independently trigger Resonance on each enemy. Ability and damage repeats grant no additional accepted-play XP, card count or Mana cost. Resolution stops if the actor falls or no living attack recipients remain.
-
-Seedling Circle rolls one seeded, equally likely choice per resolution and gives that same protection to every living deployed ally, including Ringpalm. Backups and knockouts are excluded. Block and Thorns use their ordinary grant rules and passive interactions. Enemies protect only their own side using authored support values with explicit room power. Classification awards Block and Nature XP once per accepted play, matching other cards with random alternative effects. Previews use detached state and preserve the source RNG; current-format saves retain the resulting outcomes.
-
-The unchanged landscape portrait (`03.png`) and three portrait action PNGs come from the user's [Ringpalm Drive folder](https://drive.google.com/drive/folders/1uQOzqWfnYQEIQ9XQFpejGV-syxth8zcp). Original URLs and rights notes are recorded in the asset manifest. Prepared media preserves the native 4:3 creature and 3:4 action compositions. Source artwork was visually inspected; rendered gameplay and balance acceptance remain pending.
-
-## Glintstride
-
-Glintstride has 24 Health and three abilities, each costing 1 Mana:
-
-| Ability       | Base effect                                      |
-| ------------- | ------------------------------------------------ |
-| Prism Shear   | Deal 6 Light damage                              |
-| Mirage Run    | Gain 30% Dodge until your next turn; Draw 1 card |
-| False Horizon | Blind all enemies                                |
-
-**Wrong Foot** reads “Glintstride’s attacks deal 1 additional Light damage to Blinded enemies” at zero stars, scaling to 2, 3, 4, 5 and 6 at one through five stars. Each landed attack packet against an already Blinded enemy adds one supplemental Light packet through ordinary defenses and Light interactions. Misses, periodic damage, retaliation, derived damage and supplemental procs do not trigger another bonus. Other creatures do not receive this passive. Blind remains until its owner's next attack; False Horizon uses ordinary Nullify and Reflect handling without dealing damage. Enemy Glintstride uses the base passive tier and its own side's targeting. Mirage Run's draw applies only to players.
-
-The unchanged creature portrait and three action PNGs come from the user's [Glintstride Drive folder](https://drive.google.com/drive/folders/12K2vU8w7JeWpr0RWUATMbZ56yTsNvTaP). Source URLs and rights notes are recorded in the asset manifest. Prepared media retains the native 4:3 creature and 3:4 action compositions. Source artwork was visually inspected; rendered gameplay and balance acceptance remain pending.
-
-## Wickwaltz
-
-Wickwaltz has 28 Health and is available through starter drafts, ordinary encounters and recruitment. Its three abilities each cost 1 Mana:
-
-- **Ember Pirouette:** Deal 2 Burn damage to all enemies
-- **Saffron Screen:** Gain 3 Block; Nullify the next Freeze damage
-- **Thermal Rise:** Draw 2 cards; Gain 1 Mana
-
-**Kindling Flourish** gives Wickwaltz’s second accepted card each turn a 20%, 36%, 52%, 68%, 84% or 100% chance to repeat at zero through five stars. The last tier reads “Wickwaltz’s second card each turn repeats”. Each creature counts only its own accepted plays, including free plays; repeats and rejected commands do not count. The counter survives saves and swaps, resets at the next turn even in backup, and starts empty each battle. Repeating resolves the complete ability once more, including draws and Mana, for no extra cost or card XP. Other repeat sources share the existing two-resolution cap. Attacks stop if their actor falls or no living recipients remain. Enemies use the base tier and normally play only one card per turn.
-
-Saffron Screen’s ward prevents one landed Freeze damage packet entirely, before Block, Health loss and Freeze buildup. A miss, Dodge, zero-value packet or another damage type leaves it intact. It lasts until consumed or Purged, survives turn changes and swaps, and does not stack. Ordinary Nullify remains a separate defense against harmful statuses. The current save format includes the ward and repeat counter; obsolete development saves are rejected without migration.
-
-The unchanged creature portrait (`Wickwaltz_02.png`) and the Ember Pirouette, Saffron Screen and Thermal Rise action illustrations come from the user’s [Wickwaltz Drive folder](https://drive.google.com/drive/folders/1T7f1XtjbmZIHqbfvQYmCSLGwMwf56pV0). Source URLs and rights notes are recorded in the asset manifest. Wickstep and Hearth Circle are excluded. Source artwork was visually inspected; prepared media retains the native landscape and portrait compositions. Rendered gameplay and balance acceptance remain pending.
-
-## Sternshell
-
-Sternshell has 32 Health and is available through starter drafts, ordinary encounters and recruitment. All three abilities cost 1 Mana:
-
-- **Surge Ram:** Deal 3 Physical damage; Doubled if you have Armor
-- **Siphon Vault:** Swap out for a random backup; Draw 1 card
-- **Spiral Return:** Deal 1 Water damage to all enemies; Gain 1 Mana
-
-**Shelter** grants Sternshell 2, 3, 4, 5, 6 or 7 Armor at combat start, from zero through five stars. Enemies use the base 2 Armor. It follows ordinary opening grants: deployed creatures receive it once per battle; swaps and resume do not grant it again. Sternshell starting in backup receives no opening Armor.
-
-Surge Ram doubles its intrinsic damage, including card upgrades, while its actor has Armor; ordinary offensive modifiers and target defenses then apply. It does not spend Armor. Enemies use the same doubling condition with explicit room power. Siphon Vault uses ordinary seeded swap rules, shuffles the incoming kit before drawing, and still draws without a living backup; with no backup it swaps positions with a random living ally, or stays in place when alone. Spiral Return refunds Mana once after its attacks, before automatic end turn. Enemy abilities omit player-only draws and Mana refunds.
-
-The unchanged creature portrait (`Sternshell_03.png`) and Surge Ram, Siphon Vault and Spiral Return illustrations come from the user's [Sternshell Drive folder](https://drive.google.com/drive/folders/1xjBLqhme5buwclO6BpNvko_Q1gw_rovb). Original source URLs and rights notes are recorded in the asset manifest. Prepared media preserves native landscape and portrait compositions. Source artwork was visually inspected; rendered gameplay and balance acceptance remain pending.
-
-## Neradora
-
-Neradora has 28 Health and is available through ordinary encounters, recruitment and later three-creature drafts. Its support kit excludes it from the first solo starter pool. Each ability costs 1 Mana:
-
-- **Undertow Knot:** Gain 3 Water Thorns
-- **Bloom Shelter:** Restore 2 Health to all allies
-- **Tide Cup:** Draw 2 cards; Gain 1 Mana
-
-**Tidal Regeneration** restores Neradora's own Health every other turn, scaling through 1, 2, 3, 4, 5 and 6 Health at zero through five stars. It triggers at the start of its owner's second, fourth and subsequent even-numbered battle turns, after periodic damage and before resolving control skips. It works while Stunned or Frozen, but only while alive and deployed. Backup misses its scheduled healing without banking it; swaps and current-format resume retain the battle's cadence. Each battle begins again on turn one. Passive healing uses ordinary healing modifiers and Boons without card-only overhealing or bounces. Enemies use the base 1 Health tier, without automatic enemy regeneration.
-
-Water Thorns use a separate stack pool from ordinary Nature Thorns. A landed opposing attack that removes Health triggers each available pool while its defender survives, dealing that pool's current stacks as its damage type, then spending one stack. Water retaliation uses ordinary Block and Water mitigation; Armor does not reduce it. Dodge, full absorption, periodic damage, derived packets and retaliation cannot trigger or spend either pool. Water Thorns persist through turns and swaps, stack to the ordinary limit and can be Purged as a separate beneficial category after Nature Thorns. Granting Water Thorns shares the same protection-sharing boundary and retains its Water identity. Undertow Knot grants Water XP, Bloom Shelter grants Health XP and Tide Cup grants Mana XP once per accepted play.
-
-Bloom Shelter heals every living deployed ally, including Neradora, without reviving knockouts or reaching backup. Tide Cup draws before restoring Mana, follows ordinary hand and Mana caps and refunds before automatic end turn. Enemies omit Tide Cup and alternate Undertow Knot and Bloom Shelter using authored ability values and explicit room power. The current save format persists Water Thorns.
-
-The unchanged creature portrait (`Neradora_02.png`) and Undertow Knot, Bloom Shelter and Tide Cup action PNGs come from the user's [Neradora Drive folder](https://drive.google.com/drive/folders/1g3jJYLQNAqF9zMim3AQlKLBo-MFS1Mpd). The manifest records each original URL and rights note; prepared media retains the native 4:3 creature and 3:4 action compositions. Hidden Spring and Salt Release are excluded. Source artwork was visually inspected; rendered gameplay and balance acceptance remain pending.
-
-## Stillara
-
-Stillara has 26 Health and is available through ordinary encounters, recruitment and later starter drafts. Its support-only kit excludes it from the first solo starter pool. All three abilities cost 1 Mana:
-
-- **Reed Reservoir:** Gain 2 Mana
-- **Thaw Path:** Cleanse all Freeze build-up from allies; Draw 1 card
-- **Water Remembers:** Restore 1 Health to all allies; Draw 1 card
-
-**First Thaw** reduces Freeze damage taken by living deployed allies, including Stillara, by 10%, 20%, 30%, 40%, 50% or 60% at zero through five stars. It applies before rounding and Block, and multiplies with other resistances. Multiple Stillara use the strongest active tier. Backups and knockouts neither supply nor receive protection; enemies use the base 10% tier on their own side.
-
-Thaw Path removes all accumulated Freeze from living deployed allies, including Stillara, without removing active Freeze, Stun, immunity or other harmful effects. Actual removal triggers ordinary Cleanse rewards once per recipient; an empty removal grants none. Water Remembers heals each living deployed ally, including Stillara, then draws once even if nobody needed healing. Neither card affects backups or revives knockouts. Reed Reservoir grants its Mana after paying its cost and before automatic end turn, respecting the shared Mana cap. Enemies alternate Thaw Path and Water Remembers on their own side, with authored healing and explicit room power and no player-only draws or Mana grants.
-
-The unchanged creature portrait (`Stillara_03.png`) and three ability illustrations come from the user's [Stillara Drive folder](https://drive.google.com/drive/folders/1g5R_eKq24--2itoo7M57hHEMkjvmSJbP). Source URLs and rights notes are recorded in the asset manifest. Source artwork was visually inspected; prepared media retains native landscape and portrait compositions. Rendered gameplay and balance acceptance remain pending.
-
-## Cadenza
-
-Cadenza has 28 Health and is available through ordinary encounters, recruitment and later three-creature drafts. Its support-only kit excludes it from the first solo starter pool. All three abilities cost 1 Mana:
-
-- **Resonant Well:** Draw 2 cards; Gain 1 Mana
-- **Echoes Remember:** Return a random discarded card to your hand
-- **Rousing Refrain:** Give all allies 20% Dodge until your next turn; Draw 1 card
-
-**Living Chorus** restores 1, 2, 3, 4, 5 or 6 Health to the most injured living deployed ally after the team's second accepted card each turn. Any ally's card counts, including free plays; rejected commands and repeated resolutions do not count. Healing resolves after the card's effects, once per turn, while Cadenza is alive and deployed, including while controlled. The existing team counter survives swaps and current-format resume and resets each turn and battle. Backup and knocked-out creatures neither supply nor receive the healing. Ordinary passive healing modifiers and Boons apply, without card-only overhealing or bounces. Enemies use the base tier after their side's second ability each turn.
-
-Echoes Remember uses seeded randomness across the entire discard pile, including itself and other creatures' cards. It moves one existing card without duplication, fills the ordinary hand buffer first, and uses overflow when the hand is full. It does not reshuffle the draw pile and card upgrades do not increase its one-card recovery. Resonant Well draws before refunding Mana, respecting ordinary caps and refunding before automatic end turn. Rousing Refrain grants temporary Dodge to each living deployed ally, using ordinary stacking, caps and expiry; it draws once. Enemies use Rousing Refrain each turn, without player-only draw, Mana or discard recovery. Cadenza uses existing persisted fields; the current version is owned by [save-format.json](../src/game/save-format.json).
-
-The unchanged creature portrait (`Cadenza_04.png`) and selected three action illustrations come from the user's [Cadenza Drive folder](https://drive.google.com/drive/folders/1luTmk1AG5RF-Wt8a_FBjgtf7a-zDxF3f). The manifest records source URLs and rights notes; preparation preserves native landscape and portrait compositions. Encore of Spring and Held Note are excluded. Source artwork was visually inspected. Rendered gameplay and balance acceptance remain pending.
+The [creature index](content/creatures/README.md) links each complete kit and passive reference. Artwork provenance and implementation-time validation notes are kept in a separate section of each reference; source and prepared-asset contracts remain here

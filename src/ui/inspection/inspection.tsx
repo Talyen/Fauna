@@ -1,5 +1,5 @@
-import { sharedDodgeChance } from "../../game/combat";
-import { PagedItems } from "../shared/pagination";
+import { sharedDodgeChance } from "../../game/combat/index";
+import { PagedItems } from "../shared/navigation/pagination";
 import { creaturePassive, creatureStars } from "../../game/progression";
 import { KeywordText } from "../shared/keyword-text";
 import { enemyInspectionValue } from "../../game/rules";
@@ -9,12 +9,12 @@ import { ChevronLeft } from "lucide-react";
 import type { Session } from "../../application/session";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../../components/ui/dialog";
 import { Button } from "../../components/ui/button";
-import { ActionCard, CreatureCard } from "../shared/cards";
+import { ActionCard, CreatureCard } from "../shared/cards/cards";
 import { CARDS, definition, species } from "../../game/content";
 import type { Card } from "../../game/types";
-import { isAvailableFocusTarget, returnFocus } from "../shared/focus";
+import { isAvailableFocusTarget, returnFocus } from "../shared/navigation/focus";
 import type { Inspection } from "../shared/inspection-model";
-import type { Controls } from "../shared/input";
+import type { Controls } from "../shared/navigation/input";
 export function Inspector({
   item,
   session,

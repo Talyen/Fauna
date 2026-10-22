@@ -83,9 +83,9 @@ it("prevents utilities and presentation foundations from bypassing feature and p
 
 it("keeps the shared ability executor behind application commands", () => {
   for (const source of [
-    'import {executeAbility as run} from "../../game/abilities"',
-    'import * as abilities from "@/game/abilities"',
-    'import("@/game/abilities.ts")',
+    'import {executeAbility as run} from "../../game/combat/abilities"',
+    'import * as abilities from "@/game/combat/abilities"',
+    'import("@/game/combat/abilities.ts")',
   ])
     expect(boundaryViolations("src/ui/battle/fixture.ts", source)).toEqual([
       "src/ui/battle/fixture.ts: UI must use application commands and read-only previews.",
@@ -107,28 +107,62 @@ it("keeps shared presentation independent of feature compositions", () => {
   expect(
     boundaryViolations(
       "src/ui/shared/fixture.tsx",
-      'import {CombatStatus} from "./combat-status"; import {useSurfaceRef} from "../infrastructure/surface-ref";',
+      'import {CombatStatus} from "./combat/combat-status"; import {useSurfaceRef} from "../infrastructure/surface-ref";',
     ),
   ).toEqual([]);
 });
 
 it("keeps combat continuations below public entry points and outside presentation", () => {
   expect(
-    boundaryViolations("src/ui/battle/fixture.ts", 'import {resolveCombat} from "@/game/combat-resolution"'),
+    boundaryViolations("src/ui/battle/fixture.ts", 'import {resolveCombat} from "@/game/combat/resolution"'),
   ).toHaveLength(1);
   for (const file of [
-    "src/game/combat-state.ts",
-    "src/game/combat-policy.ts",
-    "src/game/combat-resolution.ts",
+    "src/game/combat/state.ts",
+    "src/game/combat/policy.ts",
+    "src/game/combat/resolution.ts",
   ])
-    for (const target of ["./combat", "@/game/engine", "./abilities.ts"])
+    for (const target of [
+      "./index",
+      "@/game/combat",
+      "../combat",
+      "@/game/engine",
+      "./abilities.ts",
+      "../journey",
+      "../team",
+      "./turns",
+    ])
       expect(boundaryViolations(file, `import * as higher from "${target}"`)).toHaveLength(1);
-  for (const file of ["src/game/combat-state.ts", "src/game/combat-policy.ts"])
-    expect(boundaryViolations(file, 'export * from "./combat-resolution"')).toHaveLength(1);
+  for (const file of ["src/game/combat/state.ts", "src/game/combat/policy.ts"])
+    expect(boundaryViolations(file, 'export * from "./resolution"')).toHaveLength(1);
   expect(
-    boundaryViolations("src/game/combat.ts", 'import {resolveCombat} from "./combat-resolution"'),
+    boundaryViolations("src/game/combat/index.ts", 'import {resolveCombat} from "./resolution"'),
   ).toEqual([]);
-  expect(
-    boundaryViolations("src/game/combat-resolution.ts", 'import {removeArmor} from "./combat-state"'),
-  ).toEqual([]);
+  expect(boundaryViolations("src/game/combat/resolution.ts", 'import {removeArmor} from "./state"')).toEqual(
+    [],
+  );
+});
+
+it("keeps handlers on the synchronous operation stack", () => {
+  for (const owner of ["damage", "protection", "statuses", "lifecycle"]) {
+    const file = `src/game/combat/${owner}.ts`;
+    for (const target of ["resolution", "damage", "protection", "statuses", "lifecycle"])
+      expect(boundaryViolations(file, `import * as mutation from "./${target}"`)).toHaveLength(1);
+    expect(boundaryViolations(file, 'import {reaction} from "./operations"')).toEqual([]);
+    expect(boundaryViolations(file, 'import type {grantBlock} from "./protection"')).toEqual([]);
+  }
+});
+it("keeps extracted command helpers outside presentation", () => {
+  for (const target of [
+    "journey",
+    "team",
+    "combat/damage",
+    "combat/protection",
+    "combat/statuses",
+    "combat/lifecycle",
+    "combat/operations",
+    "combat/turns",
+  ])
+    expect(
+      boundaryViolations("src/ui/battle/fixture.ts", `import * as mutation from "@/game/${target}"`),
+    ).toHaveLength(1);
 });

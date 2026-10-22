@@ -1,4 +1,4 @@
-import { Screen } from "./ui/shared/screen";
+import { Screen } from "./ui/shared/navigation/screen";
 import { useEffect, useState } from "react";
 import { Loading } from "./ui/shared/loading";
 import { assetUrl } from "./ui/shared/assets";

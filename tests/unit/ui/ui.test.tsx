@@ -1,8 +1,8 @@
 import { species } from "../../../src/game/content";
-import { freshCombat } from "../../../src/game/combat";
-import { combat, hit } from "../../../src/game/combat";
+import { freshCombat } from "../../../src/game/combat/index";
+import { combat, hit } from "../../../src/game/combat/index";
 import { assetUrl } from "../../../src/ui/shared/assets";
-import { ActionCard } from "../../../src/ui/shared/cards";
+import { ActionCard } from "../../../src/ui/shared/cards/cards";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
 import { produce } from "immer";
 import { createGame } from "../../../src/game/engine";
@@ -17,7 +17,7 @@ import userEvent from "@testing-library/user-event";
 import { App } from "../../../src/ui/App";
 import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
-import { gamepadActions } from "../../../src/ui/shared/input";
+import { gamepadActions } from "../../../src/ui/shared/navigation/input";
 beforeEach(() => {
   vi.stubGlobal(
     "ResizeObserver",
@@ -393,7 +393,7 @@ it("keeps unavailable cards inspectable and denies activation without explanator
 });
 
 it("omits health from creature hover details while retaining block and the passive", async () => {
-  const { CreatureDetails } = await import("../../../src/ui/shared/card-details");
+  const { CreatureDetails } = await import("../../../src/ui/shared/cards/card-details");
   render(<CreatureDetails kind="mossguard" block={4} />);
   expect(screen.getByText("4 block")).toBeTruthy();
   expect(screen.queryByText(/health/i)).toBeNull();

@@ -91,19 +91,43 @@ export function boundaryViolations(file, source) {
       fail(`Runtime imports a development harness: ${specifier}`);
     if (tooling && (within("ui") || within("components") || /^(react(?:-dom)?)(\/|$)/.test(target)))
       fail(`Development harness imports presentation: ${specifier}`);
-    const combatTarget = target.replace(/\.ts$/, "");
+    const combatTarget = target.replace(/\.ts$/, "").replace(/^src\/game\/combat$/, "src/game/combat/index");
+    const combatModule = file.replace(/^src\/game\/combat\//, "").replace(/\.ts$/, "");
+    const combatInternal = [
+      "state",
+      "policy",
+      "operations",
+      "resolution",
+      "damage",
+      "protection",
+      "statuses",
+      "lifecycle",
+    ].includes(combatModule);
     if (
-      ["src/game/combat-state.ts", "src/game/combat-policy.ts", "src/game/combat-resolution.ts"].includes(
-        file,
-      ) &&
-      ["src/game/combat", "src/game/abilities", "src/game/engine"].includes(combatTarget)
+      combatInternal &&
+      [
+        "src/game/combat/index",
+        "src/game/combat/abilities",
+        "src/game/combat/turns",
+        "src/game/engine",
+        "src/game/journey",
+        "src/game/team",
+      ].includes(combatTarget)
     )
       fail("Combat internals cannot import their public entry points or command owners.");
     if (
-      ["src/game/combat-state.ts", "src/game/combat-policy.ts"].includes(file) &&
-      combatTarget === "src/game/combat-resolution"
+      ["state", "policy"].includes(combatModule) &&
+      /^src\/game\/combat\/(?:resolution|operations|damage|protection|statuses|lifecycle)$/.test(combatTarget)
     )
       fail("Combat foundations cannot schedule reactions.");
+    if (
+      ["damage", "protection", "statuses", "lifecycle"].includes(combatModule) &&
+      !declaration?.typeOnly &&
+      /^src\/game\/combat\/(?:resolution|damage|protection|statuses|lifecycle)$/.test(combatTarget)
+    )
+      fail(
+        "Combat handlers must yield typed operations instead of entering other handlers or the scheduler.",
+      );
     if (game && !within("game") && !["immer", "zod"].includes(target))
       fail(`Gameplay import escapes its owner: ${specifier}`);
     if (
@@ -122,7 +146,12 @@ export function boundaryViolations(file, source) {
         target.startsWith("desktop/"))
     )
       fail(`Renderer imports privileged implementation: ${specifier}`);
-    if (ui && /^src\/game\/(?:abilities|combat-resolution)(?:\.ts)?$/.test(target))
+    if (
+      ui &&
+      /^src\/game\/(?:(?:journey|team)|combat\/(?:abilities|resolution|operations|damage|protection|statuses|lifecycle|turns))(?:\.ts)?$/.test(
+        target,
+      )
+    )
       fail("UI must use application commands and read-only previews.");
     if (
       ui &&

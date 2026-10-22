@@ -2,10 +2,10 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, expect, it, vi } from "vitest";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
-import { freshCombat } from "../../../src/game/combat";
+import { freshCombat } from "../../../src/game/combat/index";
 import type { Creature, Enemy } from "../../../src/game/types";
-import { ArtCard } from "../../../src/ui/shared/art-card";
-import { AllyCard, EnemyCard } from "../../../src/ui/shared/cards";
+import { ArtCard } from "../../../src/ui/shared/cards/art-card";
+import { AllyCard, EnemyCard } from "../../../src/ui/shared/cards/cards";
 import { run } from "../../support/game";
 
 afterEach(cleanup);

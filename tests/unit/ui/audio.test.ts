@@ -154,3 +154,35 @@ it("keeps activation quieter than combat across live volume changes and mute", (
   expect(media).toHaveLength(count);
   runtime.dispose();
 });
+
+it("owns one pending music start across gestures and preference updates", async () => {
+  vi.useFakeTimers();
+  let rejectStart!: (error: Error) => void;
+  const play = vi.fn(
+    () =>
+      new Promise<void>((_, reject) => {
+        rejectStart = reject;
+      }),
+  );
+  const runtime = createAudioRuntime(vi.fn(), () => ({
+    volume: 0,
+    loop: false,
+    preload: "",
+    onended: null,
+    onerror: null,
+    play,
+    pause() {},
+    load() {},
+    removeAttribute() {},
+  }));
+  runtime.unlock();
+  runtime.unlock();
+  runtime.configure(defaultAudioPreferences);
+  expect(play).toHaveBeenCalledTimes(1);
+  rejectStart(new Error("Playback denied"));
+  await Promise.resolve();
+  runtime.unlock();
+  expect(play).toHaveBeenCalledTimes(2);
+  runtime.dispose();
+  expect(vi.getTimerCount()).toBe(0);
+});

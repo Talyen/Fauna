@@ -1,4 +1,4 @@
-import { primaryAbilityValue } from "./ability-values";
+import { primaryAbilityValue } from "./combat/ability-values";
 import { definition, enemyCard, type CardDefinition, type PassiveTier } from "./content";
 import { creaturePassive, cardKeywords, hasTalent } from "./progression";
 import type { Card, Creature, GameState } from "./types";

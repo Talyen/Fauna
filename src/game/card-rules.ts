@@ -1,4 +1,4 @@
-import { abilityExtras, primaryAbilityValue, scalePower } from "./ability-values";
+import { abilityExtras, primaryAbilityValue, scalePower } from "./combat/ability-values";
 import { DAMAGE_TYPES, keywordLabel } from "./keywords";
 import type { CardDefinition, DamageType } from "./content/types";
 export const DAMAGE_LABELS = Object.fromEntries(DAMAGE_TYPES.map((id) => [id, keywordLabel(id)])) as Record<

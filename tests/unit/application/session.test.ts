@@ -912,7 +912,7 @@ it.each(["timeout", "dispose"] as const)(
     const p = platform();
     p.saves.readCandidates = vi.fn(
       () =>
-        new Promise<Awaited<ReturnType<typeof p.saves.readCandidates>>>((_, reject) => {
+        new Promise<Awaited<ReturnType<Platform["saves"]["readCandidates"]>>>((_, reject) => {
           rejectRead = reject;
         }),
     );
@@ -935,3 +935,18 @@ it.each(["timeout", "dispose"] as const)(
     }
   },
 );
+
+it("retains distinct recovery checkpoints after loading a backup and retrying saves", async () => {
+  const memory = new MemoryStorage();
+  const older = JSON.stringify({ ...run(), revision: 10 });
+  const newer = JSON.stringify({ ...run(), revision: 11 });
+  memory.setItem("fauna.save.v1", "broken");
+  memory.setItem("fauna.save.v1.backup1", newer);
+  memory.setItem("fauna.save.v1.backup2", older);
+  const browser = createBrowserPlatform(memory);
+  const recoverable = (data: string) => data === newer || data === older;
+  await browser.saves.write(newer, recoverable);
+  await browser.saves.write(newer, recoverable);
+  expect(memory.getItem("fauna.save.v1.backup1")).toBe(newer);
+  expect(memory.getItem("fauna.save.v1.backup2")).toBe(older);
+});

@@ -3,7 +3,7 @@ import { StrictMode, createRef } from "react";
 import { afterEach, expect, it, vi } from "vitest";
 import { cleanup, render } from "@testing-library/react";
 import { Button } from "../../../src/components/ui/button";
-import { ArtCard } from "../../../src/ui/shared/art-card";
+import { ArtCard } from "../../../src/ui/shared/cards/art-card";
 
 const observers: { resize: (width: number, height: number) => void; disconnect: ReturnType<typeof vi.fn> }[] =
   [];

@@ -103,7 +103,7 @@ export function sourceViolations(file, source) {
     if (/<[a-z][\w-]*\b[^>]*\b(?:onClick|onKeyDown|onPointerDown)\s*=/.test(source))
       fail("Do not turn layout elements into controls; compose a shadcn primitive.");
   }
-  if (/<img(?=[\s/>])/.test(source) && file !== "src/ui/shared/art-card.tsx")
+  if (/<img(?=[\s/>])/.test(source) && file !== "src/ui/shared/cards/art-card.tsx")
     fail("Game artwork must use ArtCard to preserve composition and states.");
   if (/\brounded-(?:none\b|\[)/.test(source))
     fail("Use the shared nonzero shadcn radius scale; no sharp-corner overrides.");

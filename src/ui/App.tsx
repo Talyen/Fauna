@@ -1,19 +1,20 @@
+import { useActivationAudio } from "./audio/activation-audio";
+import { useDisplayPreferences } from "./settings/display-preferences";
 import { UnlockScreen } from "./expedition/unlock-screen";
 import { HomeScreen } from "./menu/home-screen";
 import { GlossaryScreen } from "./menu/glossary-screen";
 import { MenuActions, type MenuPage } from "./menu/menu-actions";
 import { OwnedBoons } from "./expedition/owned-boons";
-import { Screen, ScreenHeading, HeaderNavigation } from "./shared/screen";
+import { Screen, ScreenHeading, HeaderNavigation } from "./shared/navigation/screen";
 import { captureSwapMotion } from "./battle/swap-motion";
 import { SurfaceTransition } from "./shared/surface-transition";
 import { Loading } from "./shared/loading";
 import { SupportScreen } from "./expedition/support-screen";
 import { KEYWORDS, availablePoints } from "../game/progression";
-import { readPreference, writePreference } from "../platform/preferences";
 import { useAutoplay } from "./battle/autoplay";
 import { observeUnlocks } from "./expedition/unlock-reveals";
 import { Campfire } from "./expedition/campfire";
-import { Settings, TEXT_SCALES } from "./settings/settings";
+import { Settings } from "./settings/settings";
 import { useAudioPreferences } from "./settings/audio-preferences";
 import { useGameAudio } from "./audio/game-audio";
 import { JourneyResults } from "./expedition/journey-results";
@@ -28,17 +29,17 @@ import { Popover, PopoverAnchor, PopoverContent } from "../components/ui/popover
 import { TooltipProvider } from "../components/ui/tooltip";
 import { BattleScreen } from "./battle/battle-screen";
 import type { Inspection } from "./shared/inspection-model";
-import type { Controls } from "./shared/input";
+import type { Controls } from "./shared/navigation/input";
 import { Draft } from "./expedition/draft";
 import { TeamSelection } from "./expedition/team-selection";
 import { Rewards } from "./expedition/rewards";
 import { Talents } from "./talents/talents";
 import { Collection } from "./collection/collection";
-import { DeckCards } from "./shared/deck-cards";
-import { RosterPicker } from "./shared/roster-picker";
+import { DeckCards } from "./shared/cards/deck-cards";
+import { RosterPicker } from "./shared/cards/roster-picker";
 import { Inspector } from "./inspection/inspection";
-import { connectInput, moveFocus, type InputAction } from "./shared/input";
-import { isAvailableFocusTarget, returnFocus } from "./shared/focus";
+import { connectInput, moveFocus, type InputAction } from "./shared/navigation/input";
+import { isAvailableFocusTarget, returnFocus } from "./shared/navigation/focus";
 import { useCombatFeedback } from "./battle/combat-feedback";
 import type { Command } from "../game/types";
 import type { SpeciesId } from "../game/content";
@@ -51,9 +52,6 @@ export function App(props: { session: Session; desktop?: boolean }) {
       <Game {...props} />
     </TooltipProvider>
   );
-}
-function preference(key: string, fallback: string) {
-  return readPreference(key) ?? fallback;
 }
 function Game({ session, desktop = false }: { session: Session; desktop?: boolean }) {
   const view = useStore(session.store),
@@ -81,32 +79,9 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
   const [navigation, setNavigation] = useState(false);
   const [audioPreferences, updateAudioPreferences] = useAudioPreferences();
   const playSound = useGameAudio(session, audioPreferences, route === "home");
-  useEffect(() => {
-    const activate = (event: MouseEvent) => {
-      const button = event.target instanceof Element ? event.target.closest<HTMLElement>("button") : null;
-      if (!button || button.matches(':disabled, [aria-disabled="true"]') || button.closest("[inert]")) return;
-      if (
-        button.matches(
-          ".home-screen button, .menu-panel button, .settings-screen button, .ui-tab, .dialog-close",
-        )
-      )
-        playSound("activate");
-    };
-    window.addEventListener("click", activate);
-    return () => window.removeEventListener("click", activate);
-  }, [playSound]);
-  const [scale, setScale] = useState(() => {
-    const n = Number(preference("fauna.text-scale", "1"));
-    return TEXT_SCALES.some((value) => value === n) ? n : 1;
-  });
-  const [tooltipScale, setTooltipScale] = useState(() => {
-    const value = Number(preference("fauna.tooltip-scale", "1"));
-    return TEXT_SCALES.some((scale) => scale === value) ? value : 1;
-  });
-  useEffect(() => {
-    document.documentElement.style.setProperty("--tooltip-scale", String(tooltipScale));
-    writePreference("fauna.tooltip-scale", String(tooltipScale));
-  }, [tooltipScale]);
+  useActivationAudio(playSound);
+  const { scale, setScale, tooltipScale, setTooltipScale, autoEndTurn, setAutoEndTurn } =
+    useDisplayPreferences();
   const origin = useRef<Route>("home"),
     pauseOpener = useRef<HTMLElement | null>(null),
     modalOpener = useRef<HTMLElement | null>(null);
@@ -118,7 +93,6 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     game.phase === "campfire" ||
     game.phase === "support" ||
     (["recruit", "boon"].includes(game.phase) && game.reward?.outcome === "next");
-  const [autoEndTurn, setAutoEndTurn] = useState(() => preference("fauna.auto-end-turn", "true") !== "false");
   const [pendingUnlocks, setPendingUnlocks] = useState<SpeciesId[]>([]);
   const [reveals, setReveals] = useState<SpeciesId[]>([]);
   useEffect(
@@ -137,10 +111,6 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
     if (route !== "play") setAutoplay(false);
   }, [route, setAutoplay]);
   const { bursts, deny } = useCombatFeedback(session, root, playSound, paused);
-  useEffect(() => {
-    document.documentElement.style.setProperty("--text-scale", String(scale));
-    writePreference("fauna.text-scale", String(scale));
-  }, [scale]);
   const swapMotion = useRef<ReturnType<typeof captureSwapMotion> | null>(null);
   useEffect(() => () => swapMotion.current?.cancel(), []);
   const send = useCallback(
@@ -540,10 +510,7 @@ function Game({ session, desktop = false }: { session: Session; desktop?: boolea
                     setTooltipScale={setTooltipScale}
                     desktop={desktop}
                     autoEndTurn={autoEndTurn}
-                    setAutoEndTurn={(value) => {
-                      setAutoEndTurn(value);
-                      writePreference("fauna.auto-end-turn", String(value));
-                    }}
+                    setAutoEndTurn={setAutoEndTurn}
                   />
                 </Screen>
               ) : null}

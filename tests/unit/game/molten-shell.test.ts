@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
 import { produce } from "immer";
-import { combat, freshCombat, hit, removeEffects, tickStatuses } from "../../../src/game/combat";
+import { combat, freshCombat, hit, removeEffects, tickStatuses } from "../../../src/game/combat/index";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { creaturePassive } from "../../../src/game/progression";

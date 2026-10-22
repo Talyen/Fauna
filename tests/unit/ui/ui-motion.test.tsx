@@ -2,7 +2,7 @@
 import { afterEach, expect, it, vi } from "vitest";
 import { act, cleanup, fireEvent, render, waitFor } from "@testing-library/react";
 import { useModalSurfaceRef } from "../../../src/ui/infrastructure/modal-surface-ref";
-import { CreatureDetails } from "../../../src/ui/shared/card-details";
+import { CreatureDetails } from "../../../src/ui/shared/cards/card-details";
 import { Button } from "../../../src/components/ui/button";
 import { assetUrl } from "../../../src/ui/shared/assets";
 import { HandMotion } from "../../../src/ui/battle/hand-motion";
