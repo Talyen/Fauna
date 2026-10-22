@@ -16,7 +16,8 @@ export type SpeciesId =
   | "shadebrim"
   | "ringpalm"
   | "glintstride"
-  | "wickwaltz";
+  | "wickwaltz"
+  | "sternshell";
 type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
   | { kind: "kindlingFlourish"; amount: number }
@@ -78,6 +79,7 @@ export type CardDefinition = CardBase &
         effect: "attack";
         damageType: DamageType;
         alternateDamageType?: DamageType;
+        doubleWithArmor?: boolean;
         target?: "allEnemies" | "randomEnemy";
       }
     | { effect: "guard"; target?: "self" }
@@ -85,6 +87,40 @@ export type CardDefinition = CardBase &
     | { effect: Exclude<Effect, "attack" | "guard" | "heal">; target?: never }
   );
 export const SPECIES: readonly Species[] = [
+  {
+    id: "sternshell",
+    name: "Sternshell",
+    title: "The steadfast voyager",
+    health: 32,
+    color: "#cb7c45",
+    trait: "Shelter",
+    passiveTiers: [
+      {
+        description: "Sternshell starts combat with 2 Armor",
+        effects: [{ kind: "battleStart", effect: "armor", amount: 2 }],
+      },
+      {
+        description: "Sternshell starts combat with 3 Armor",
+        effects: [{ kind: "battleStart", effect: "armor", amount: 3 }],
+      },
+      {
+        description: "Sternshell starts combat with 4 Armor",
+        effects: [{ kind: "battleStart", effect: "armor", amount: 4 }],
+      },
+      {
+        description: "Sternshell starts combat with 5 Armor",
+        effects: [{ kind: "battleStart", effect: "armor", amount: 5 }],
+      },
+      {
+        description: "Sternshell starts combat with 6 Armor",
+        effects: [{ kind: "battleStart", effect: "armor", amount: 6 }],
+      },
+      {
+        description: "Sternshell starts combat with 7 Armor",
+        effects: [{ kind: "battleStart", effect: "armor", amount: 7 }],
+      },
+    ],
+  },
   {
     id: "wickwaltz",
     name: "Wickwaltz",
@@ -712,6 +748,23 @@ const attack = (
 });
 export const CARDS: readonly CardDefinition[] = [
   {
+    ...attack("sternshell", "Surge Ram", 3, "physical"),
+    doubleWithArmor: true,
+    artwork: "action.sternshell.surge-ram",
+  },
+  {
+    ...card("sternshell", "Siphon Vault", "swap", 1),
+    effects: [{ kind: "draw", amount: 1 }],
+    artwork: "action.sternshell.siphon-vault",
+  },
+  {
+    ...attack("sternshell", "Spiral Return", 1, "water"),
+    id: "sternshell-spiral-return",
+    target: "allEnemies",
+    effects: [{ kind: "mana", amount: 1 }],
+    artwork: "action.sternshell.spiral-return",
+  },
+  {
     ...attack("wickwaltz", "Ember Pirouette", 2, "burn"),
     target: "allEnemies",
     artwork: "action.wickwaltz.ember-pirouette",
@@ -1001,7 +1054,10 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
   let text: string;
   switch (card.effect) {
     case "attack":
+      // Keep the conditional rule at its base value so resolved previews do not imply a second doubling
+      if (card.doubleWithArmor) value = card.value + level * 2;
       text = `Deal ${value} ${DAMAGE_LABELS[card.damageType]}${card.alternateDamageType ? ` or ${DAMAGE_LABELS[card.alternateDamageType]}` : ""} damage${card.alternateDamageType ? " at random" : ""}${card.target === "allEnemies" ? " to all enemies" : card.target === "randomEnemy" ? " to a random enemy" : ""}`;
+      if (card.doubleWithArmor) text += "; Doubled if you have Armor";
       break;
     case "guard":
       text = card.target === "self" ? `Gain ${value} Block` : `Give an ally ${value} Block`;

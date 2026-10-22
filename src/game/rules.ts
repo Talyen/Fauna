@@ -9,7 +9,10 @@ export function actionValue(
 ): number {
   const def = definition(card.definitionId);
   return (
-    def.value + card.level * 2 + passiveCardBonus(def, creaturePassive(state, actor.species), actor.attacked)
+    (def.value +
+      card.level * 2 +
+      passiveCardBonus(def, creaturePassive(state, actor.species), actor.attacked)) *
+    (def.effect === "attack" && def.doubleWithArmor && (actor.combat?.armor ?? 0) > 0 ? 2 : 1)
   );
 }
 function passiveCardBonus(def: CardDefinition, passive: PassiveTier, attacked: boolean) {
@@ -53,18 +56,20 @@ export function physicalBonus(actor: Pick<Creature, "block" | "combat">, state: 
 
 /** Enemy repertoire uses encounter magnitudes and its own native trait, never player progression. */
 export function enemyAbilityValue(
-  enemy: Pick<import("./types").Enemy, "species" | "damage">,
+  enemy: Pick<import("./types").Enemy, "species" | "damage"> &
+    Partial<Pick<import("./types").Enemy, "combat">>,
   card: import("./content").CardDefinition,
 ) {
   return (
-    (card.effect === "dodge" || card.effect === "teamCleanse" || card.effect === "teamBlind"
+    ((card.effect === "dodge" || card.effect === "teamCleanse" || card.effect === "teamBlind"
       ? card.value
       : card.effect === "attack"
         ? card.target === "allEnemies"
           ? Math.max(1, Math.round(enemy.damage / 3))
           : enemy.damage
         : Math.max(1, Math.round(enemy.damage / 2))) +
-    passiveCardBonus(card, creaturePassive(undefined, enemy.species), false)
+      passiveCardBonus(card, creaturePassive(undefined, enemy.species), false)) *
+    (card.effect === "attack" && card.doubleWithArmor && (enemy.combat?.armor ?? 0) > 0 ? 2 : 1)
   );
 }
 
