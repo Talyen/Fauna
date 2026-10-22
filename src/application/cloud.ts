@@ -122,6 +122,7 @@ export function createCloud(
   let retrying = false;
   let initialized = false;
   let metadataWrites = Promise.resolve();
+  let localCommits = Promise.resolve();
   const commits = new Set<Promise<void>>();
   const scheduleRetry = () => {
     if (!alive || retryTimer || retrying || identity?.available === false || identity?.enabled === false)
@@ -218,21 +219,19 @@ export function createCloud(
       const files = (await port.list()).filter(isCloudName);
       if (!alive || token !== generation) return;
       if (files.length > 64) throw new Error("Cloud device limit reached. Local progress remains available.");
-      const streams = new Map<string, CloudSnapshot>();
+      const streams = new Set<string>();
+      const remote: CloudSnapshot[] = [];
       let invalid = false;
       for (const name of files) {
-        const raw = await port.read(name);
-        if (!alive || token !== generation) return;
-        if (!raw) {
-          invalid = true;
-          continue;
-        }
         try {
+          const raw = await port.read(name);
+          if (!alive || token !== generation) return;
+          if (!raw) throw new Error("Cloud slot is unreadable.");
           const record = await parseSnapshot(raw, identity.profile);
           if (!alive || token !== generation) return;
           if (cloudName(record) !== name) throw new Error("Cloud slot identity differs.");
-          const previous = streams.get(record.device);
-          if (!previous || record.sequence > previous.sequence) streams.set(record.device, record);
+          streams.add(record.device);
+          remote.push(record);
           if (record.device === identity.device) sequence = Math.max(sequence, record.sequence);
         } catch {
           invalid = true;
@@ -244,7 +243,8 @@ export function createCloud(
       if (invalid && streams.size === 0) throw new Error("No valid cloud snapshots; remote files preserved.");
       if (background && localData && current?.payload !== localData) await persist(localData);
       if (!alive || token !== generation) return;
-      const records = [...streams.values(), ...(current ? [current] : [])];
+      // Sequence counters select write slots; only ancestry can retire a competing snapshot.
+      const records = [...remote, ...(current ? [current] : [])];
       const heads = newestHeads(records);
       if (!alive || token !== generation) return;
       if (background && !current) {
@@ -395,7 +395,9 @@ export function createCloud(
       }
     },
     commit(data: string) {
-      const operation = commit(data);
+      // Include hashing and publication in the lane so each commit sees its durable parent.
+      const operation = localCommits.then(() => commit(data));
+      localCommits = operation.catch(() => {});
       commits.add(operation);
       void operation.finally(() => commits.delete(operation));
       return operation;
