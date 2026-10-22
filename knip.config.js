@@ -1,6 +1,7 @@
 /** Runtime and tool entrypoints are explicit so native adapters and SSR harnesses remain visible. */
 export default {
   entry: [
+    "src/ui/styles.css", // Tailwind is consumed through stylesheet imports, not JavaScript.
     "desktop/preload.cjs",
     "desktop/after-pack.cjs",
     "desktop/steam-worker.cjs",
@@ -10,7 +11,7 @@ export default {
     "design/**/*.tsx",
   ],
   project: [
-    "src/**/*.{ts,tsx}",
+    "src/**/*.{ts,tsx,css}",
     "desktop/**/*.cjs",
     "scripts/**/*.mjs",
     "design/**/*.{ts,tsx}",
