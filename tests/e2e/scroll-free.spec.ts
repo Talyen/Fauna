@@ -202,13 +202,25 @@ for (const [width, height, scale] of LAYOUT_CASES) {
         await page.mouse.move(0, 0);
         await settleScreen(page);
         const id = await card.getAttribute("data-card-id");
-        const point = await card.evaluate((el) => {
-          const rect = el.getBoundingClientRect();
-          for (let y = Math.max(0, rect.top) + 8; y < Math.min(innerHeight, rect.bottom); y += 12)
-            for (let x = Math.max(0, rect.left) + 8; x < Math.min(innerWidth, rect.right); x += 12)
-              if (el.contains(document.elementFromPoint(x, y))) return { x, y };
-          return null;
-        });
+        const hitPoint = () =>
+          card.evaluate((el) => {
+            const rect = el.getBoundingClientRect();
+            for (let y = Math.max(0, rect.top) + 8; y < Math.min(innerHeight, rect.bottom); y += 12)
+              for (let x = Math.max(0, rect.left) + 8; x < Math.min(innerWidth, rect.right); x += 12)
+                if (
+                  [-8, 0, 8].every((dx) =>
+                    [-8, 0, 8].every((dy) => el.contains(document.elementFromPoint(x + dx, y + dy))),
+                  )
+                )
+                  return { x, y };
+            return null;
+          });
+        let point = await hitPoint();
+        expect(point).not.toBeNull();
+        await page.mouse.move(point!.x, point!.y);
+        await settleScreen(page);
+        // Hover lifts the fan card; click its settled position rather than its old silhouette.
+        point = await hitPoint();
         expect(point).not.toBeNull();
         await page.mouse.click(point!.x, point!.y);
         const def = definition(before.cards.find((entry) => entry.id === id)!.definitionId);
