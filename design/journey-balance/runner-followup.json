@@ -8373,5 +8373,25 @@
     ],
     "resumeEvery": 17,
     "checkpointEquality": true
+  },
+  "integration": {
+    "status": "blocked",
+    "branch": "task/runner-cycle-and-roster",
+    "requiredSuite": "tests/unit/game/engine.test.ts",
+    "reason": "Required per-suite 60000 ms deadline exhausted",
+    "mainAdvanced": false,
+    "passed": [
+      "selected formatting",
+      "changed-source lint and contracts",
+      "tsconfig.json",
+      "tsconfig.game.json",
+      "tsconfig.node.json",
+      "tsconfig.test.json",
+      "focused runner and UI regressions",
+      "426 controlled cases",
+      "exact career and boss replays",
+      "resume/no-resume regeneration parity"
+    ],
+    "fullCI": "skipped by request"
   }
 }
