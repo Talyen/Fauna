@@ -2,6 +2,8 @@
 
 The [ability resolution plan and implementation record](plans/COMBAT_RESOLUTION_PLAN.md) documents the shared player/enemy executor, approved rule alignment and explicit room scaling.
 
+The proposed [combat reaction architecture plan](plans/COMBAT_REACTIONS_PLAN.md) assesses the remaining implicit reaction ordering below that executor and defines a staged, behavior-preserving replacement.
+
 `src/game/` owns content, commands, battle rules, seeded RNG, and save validation. It imports only its own modules, Immer, and Zod. It does not access the DOM, React, filesystem, Steam, clocks, or ambient randomness. `scripts/checks/boundaries.mjs` parses source and checks resolved import paths and ambient capability references; CI also runs Knip for unused files, exports and dependencies.
 
 `dispatch(state, command)` returns either an accepted immutable state with ordered presentation events or a rejection retaining the original state. Validation occurs before RNG consumption or mutation. Gameplay and progression settle synchronously. Animation is a consumer of results; it cannot pay mana, damage a creature, grant a reward, or unlock content.
