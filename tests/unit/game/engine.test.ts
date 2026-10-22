@@ -3,7 +3,8 @@ import { produce } from "immer";
 import { createGame, dispatch } from "../../../src/game/engine";
 import { combat, freshCombat, hit } from "../../../src/game/combat/index";
 import { definition, species, SPECIES } from "../../../src/game/content";
-import { decodeSave, encodeSave, validateContent } from "../../../src/game/save";
+import { decodeSave, encodeSave } from "../../../src/game/save";
+import { validateContent } from "../../../src/game/content-validation";
 import { recruitChoice, accept, policy, run, teamRun, winBattle } from "../../support/game";
 function expectDeeplyFrozen(value: unknown) {
   if (value === null || typeof value !== "object") return;

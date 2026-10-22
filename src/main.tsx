@@ -6,7 +6,7 @@ import { GameErrorBoundary } from "./ui/shared/diagnostics";
 import { createRoot } from "react-dom/client";
 import { createSession } from "./application/session";
 import { createPlatform } from "./platform";
-import { validateContent } from "./game/save";
+import { validateContent } from "./game/content-validation";
 import { App } from "./ui/App";
 import "@fontsource-variable/inter/wght.css";
 import "./ui/styles.css";

@@ -2,7 +2,7 @@ import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { useLayoutEffect, useRef } from "react";
 import { Coins, Tag } from "lucide-react";
 import type { Command, GameState } from "../../game/types";
-import { canVisitMerchant } from "../../game/support";
+import { canVisitMerchant } from "../../game/destinations";
 import { BOONS } from "../../game/content";
 import { Button } from "../../components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";

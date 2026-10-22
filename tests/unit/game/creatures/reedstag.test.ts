@@ -1,11 +1,12 @@
 import { expect, it } from "vitest";
 import { produce } from "immer";
-import { CARDS, cardText, definition, species } from "../../../src/game/content";
-import { freshCombat, grantBlock, grantStatus, restoreHealth } from "../../../src/game/combat/index";
-import { createGame, dispatch, previewCard } from "../../../src/game/engine";
-import { COMBAT_PACKS } from "../../../src/game/encounters";
-import { decodeSave, encodeSave } from "../../../src/game/save";
-import { accept, teamRun, winBattle } from "../../support/game";
+import { CARDS, definition, species } from "../../../../src/game/content";
+import { cardText } from "../../../../src/game/card-rules";
+import { freshCombat, grantBlock, grantStatus, restoreHealth } from "../../../../src/game/combat";
+import { createGame, dispatch, previewCard } from "../../../../src/game/engine";
+import { COMBAT_PACKS } from "../../../../src/game/encounters";
+import { decodeSave, encodeSave } from "../../../../src/game/save";
+import { accept, teamRun, winBattle } from "../../../support/game";
 
 function ready(id = "reedstag-guard") {
   return produce(teamRun(1, ["reedstag", "mossguard", "reedstag"]), (game) => {

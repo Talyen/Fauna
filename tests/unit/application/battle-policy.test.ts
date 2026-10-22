@@ -58,3 +58,57 @@ it.each(["mossguard-guard", "pollenmoth-teamGuard", "ringpalm-teamProtection"])(
     expect(chooseBattleCommand(capped, false)).toEqual({ type: "endTurn" });
   },
 );
+
+it("Auto-play avoids recovering Echoes Remember itself or a knocked-out owner's card", () => {
+  const state = produce(teamRun(42, ["cadenza", "mossguard"]), (game) => {
+    const recover = game.cards.find((card) => card.definitionId === "cadenza-echoes-remember")!;
+    game.battle!.hand = [recover.id];
+    game.battle!.buffer = [];
+    game.battle!.discard = [];
+    game.battle!.draw = game.cards.filter((card) => card.id !== recover.id).map((card) => card.id);
+  });
+  expect(chooseBattleCommand(state, false)).toEqual({ type: "endTurn" });
+  const useful = produce(state, (game) => {
+    game.battle!.discard.push(game.battle!.draw.pop()!);
+  });
+  expect(chooseBattleCommand(useful, false)).toMatchObject({ type: "play", cardId: state.battle!.hand[0] });
+  const inert = produce(useful, (game) => {
+    game.team[1]!.health = 0;
+  });
+  expect(chooseBattleCommand(inert, false)).toEqual({ type: "endTurn" });
+});
+
+it.each([
+  ["bloomquail", "health.overflow"],
+  ["reedstag", "health.overflow"],
+  ["bloomquail", "health.clean-slate"],
+] as const)(
+  "Auto-play uses %s full-health healing for %s and stops when it has no benefit",
+  (kind, talent) => {
+    const state = produce(teamRun(42, [kind]), (game) => {
+      const heal = game.cards.find((card) => card.definitionId === `${kind}-heal`)!;
+      game.battle!.hand = [heal.id];
+      game.battle!.buffer = [];
+      game.battle!.discard = [];
+      game.battle!.draw = game.cards.filter((card) => card.id !== heal.id).map((card) => card.id);
+      game.talents = [talent];
+      for (const enemy of game.battle!.enemies) enemy.combat.blind = true;
+      if (talent === "health.clean-slate") {
+        game.team[0]!.combat!.poison = 2;
+      }
+    });
+    const command = chooseBattleCommand(state, false);
+    expect(command).toMatchObject({ type: "play", cardId: state.battle!.hand[0] });
+    const result = dispatch(state, command);
+    expect(result.accepted).toBe(true);
+    if (talent === "health.overflow")
+      expect(result.state.team[0]!.block).toBeGreaterThan(state.team[0]!.block);
+    else expect(result.state.team[0]!.combat!.poison).toBe(0);
+    const spent = produce(state, (game) => {
+      game.team[0]!.combat!.burn = 0;
+      game.team[0]!.combat!.poison = 0;
+      game.team[0]!.block = 1_000_000;
+    });
+    expect(chooseBattleCommand(spent, false)).toEqual({ type: "endTurn" });
+  },
+);

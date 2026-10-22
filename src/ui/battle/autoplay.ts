@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
 import type { Session } from "../../application/session";
 import { chooseBattleCommand } from "../../application/battle-policy";
@@ -15,7 +15,13 @@ export function scheduleAutoplay(action: () => void, schedule = setTimeout, canc
   };
 }
 export function useAutoplay(session: Session, paused: boolean, autoEndTurn: boolean) {
-  const [enabled, setEnabled] = useState(false);
+  const [enabled, setEnabledState] = useState(false);
+  const enabledNow = useRef(false);
+  const setEnabled = useCallback((value: boolean) => {
+    // Manual takeover revokes queued work before React commits effect cleanup.
+    enabledNow.current = value;
+    setEnabledState(value);
+  }, []);
   const [foreground, setForeground] = useState(
     () => document.visibilityState !== "hidden" && document.hasFocus(),
   );
@@ -40,13 +46,14 @@ export function useAutoplay(session: Session, paused: boolean, autoEndTurn: bool
   }, []);
   useEffect(() => {
     if (view.game.phase !== "battle" || view.closing || !view.ready) setEnabled(false);
-  }, [view.game.phase, view.closing, view.ready]);
+  }, [view.game.phase, view.closing, view.ready, setEnabled]);
   useEffect(() => {
     if (!enabled || paused || !foreground || view.closing || view.game.phase !== "battle") return;
     const revision = view.game.revision;
     return scheduleAutoplay(() => {
       const current = session.store.getState();
       if (
+        !enabledNow.current ||
         !foregroundNow.current ||
         document.visibilityState === "hidden" ||
         !document.hasFocus() ||
@@ -59,6 +66,16 @@ export function useAutoplay(session: Session, paused: boolean, autoEndTurn: bool
         return;
       if (!session.command(chooseBattleCommand(current.game, autoEndTurn))) setEnabled(false);
     });
-  }, [session, enabled, paused, foreground, autoEndTurn, view.game.revision, view.game.phase, view.closing]);
+  }, [
+    session,
+    enabled,
+    paused,
+    foreground,
+    autoEndTurn,
+    view.game.revision,
+    view.game.phase,
+    view.closing,
+    setEnabled,
+  ]);
   return [enabled, setEnabled] as const;
 }

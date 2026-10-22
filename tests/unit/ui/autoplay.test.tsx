@@ -107,3 +107,29 @@ it("pauses overlays and blur, revokes on disposal and keeps playing through a sa
   });
   expect(session.store.getState().game.revision).toBe(stopped);
 });
+
+it("manual takeover revokes the queued move before React runs effect cleanup", async () => {
+  vi.spyOn(document, "hasFocus").mockReturnValue(true);
+  const session = createSession({
+    desktop: false,
+    steam: { available: false },
+    saves: {
+      readCandidates: async () => [{ source: "primary", data: encodeSave(run()) }],
+      write: async () => {},
+    },
+  });
+  await session.load();
+  vi.useFakeTimers();
+  const hook = renderHook(() => useAutoplay(session, false, false));
+  act(() => hook.result.current[1](true));
+  const revision = session.store.getState().game.revision;
+  act(() => {
+    hook.result.current[1](false);
+    vi.advanceTimersByTime(700);
+  });
+  expect(session.store.getState().game.revision).toBe(revision);
+  expect(hook.result.current[0]).toBe(false);
+  await act(async () => {
+    await session.dispose();
+  });
+});

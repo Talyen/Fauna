@@ -13,8 +13,9 @@ import {
   TURN_DRAW,
 } from "./index";
 import { draw } from "../card-zones";
-import { retainedBlock, enemyAbilityValue } from "../rules";
-import { CARDS, enemyCard, enemyCanUse } from "../content";
+import { retainedBlock, enemyAbilityValue } from "../ability-rules";
+import { CARDS } from "../content";
+import { enemyCard, enemyCanUse } from "../card-rules";
 import type { GameEvent, GameState } from "../types";
 import { living, swapFromCard } from "../team";
 import { settle, intents } from "../journey";
@@ -41,6 +42,8 @@ export function finishTurn(draft: GameState, events: GameEvent[]) {
   for (let pass = 0; pass < 3; pass++) {
     // Swaps can reorder the battlefield; each enemy keeps its single action window.
     const actionOrder = battle.enemies.slice();
+    // Expire the previous round before an ally can grant Dodge for this round.
+    for (const enemy of actionOrder) combat(enemy).temporaryDodge = 0;
     let enemyCardsPlayed = 0;
     for (const enemy of actionOrder) {
       if (enemy.health <= 0) continue;
@@ -48,7 +51,7 @@ export function finishTurn(draft: GameState, events: GameEvent[]) {
       if (settle(draft, events)) return;
       if (enemy.health <= 0) continue;
       enemy.block = retainedBlock(enemy);
-      if (!startAction(enemy, events, draft)) continue;
+      if (!startAction(enemy, events, draft, false)) continue;
       const target = living(draft).find((c) => c.id === enemy.targetId) ?? living(draft)[0];
       if (!target) continue;
       const abilities = CARDS.filter((card) => card.species === enemy.species && enemyCanUse(card));
