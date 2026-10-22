@@ -23,6 +23,8 @@
 | `npm run test:desktop`                                                           | [smoke-desktop.mjs](smoke-desktop.mjs)                                                                                                                                                     |
 | Placeholder authoring                                                            | [create-location-placeholders.mjs](create-location-placeholders.mjs); [artwork policy](../Docs/CONTENT.md)                                                                                 |
 
+CI orchestration and completeness are owned by [ci.mjs](ci.mjs) and the [workflow](../.github/workflows/ci.yml). The gate checks exact build/run identities, all discovered browser cases, upstream job results, unit results and the seeded interaction trace. [ci-timings.mjs](ci-timings.mjs) records GitHub job and step timings for a run and optional attempt; see [CI measurements](../Docs/CI_SPEED_PLAN.md#baseline-and-success-measures).
+
 Additional opt-in tools:
 
 - `npm run assets:review`: [original/prepared comparisons](art-review.mjs); see [quality and resolution](../Docs/CONTENT.md#artwork-resolution-and-quality).

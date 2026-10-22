@@ -1,3 +1,8 @@
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import path from "node:path";
+import { spawnSync } from "node:child_process";
+import { identity } from "../../scripts/lib/tool-runtime.mjs";
 import { describe, expect, it } from "vitest";
 import {
   validateBrowserCoverage,
@@ -104,4 +109,127 @@ describe("CI coverage gate", () => {
     expect(() => validateInteraction({ ...trace, complete: false }, "current")).toThrow();
     expect(() => validateInteraction(trace, "stale")).toThrow();
   });
+});
+
+describe("workflow timing measurements", () => {
+  it("separates dependency start delay from execution and records failed steps", async () => {
+    const { timingReport } = await import("../../scripts/ci-timings.mjs");
+    const result = timingReport(
+      {
+        id: 1,
+        run_attempt: 2,
+        head_sha: "sha",
+        conclusion: "failure",
+        created_at: "2026-10-21T00:00:00Z",
+        run_started_at: "2026-10-21T00:00:05Z",
+        updated_at: "2026-10-21T00:02:00Z",
+      },
+      [
+        {
+          name: "browser",
+          conclusion: "failure",
+          started_at: "2026-10-21T00:00:30Z",
+          completed_at: "2026-10-21T00:02:00Z",
+          steps: [
+            {
+              name: "tests",
+              conclusion: "failure",
+              started_at: "2026-10-21T00:01:00Z",
+              completed_at: "2026-10-21T00:02:00Z",
+            },
+          ],
+        },
+      ],
+    );
+    expect(result.initialQueueSeconds).toBe(5);
+    expect(result.runnerSeconds).toBe(90);
+    expect(result.jobs[0].startDelaySeconds).toBe(25);
+    expect(result.jobs[0].steps[0]).toEqual({ name: "tests", conclusion: "failure", seconds: 60 });
+  });
+});
+
+it("fails the executable final gate for upstream failures, missing reports and interrupted shards", async () => {
+  const root = mkdtempSync(path.join(tmpdir(), "fauna-ci-gate-"));
+  const script = path.resolve(import.meta.dirname, "../../scripts/ci.mjs");
+  const ids = { sha: "commit", run: "123", attempt: "1" };
+  const jobs = Object.fromEntries(
+    ["prepare", "static", "unit", "build", "browser", "interactions", "windows"].map((name) => [
+      name,
+      { result: "success" },
+    ]),
+  );
+  const put = (file, value) => {
+    mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
+    writeFileSync(path.join(root, file), JSON.stringify(value));
+  };
+  const run = (needs = jobs) =>
+    spawnSync(process.execPath, [script, "gate"], {
+      cwd: root,
+      encoding: "utf8",
+      env: {
+        ...process.env,
+        GITHUB_SHA: ids.sha,
+        GITHUB_RUN_ID: ids.run,
+        GITHUB_RUN_ATTEMPT: ids.attempt,
+        GITHUB_STEP_SUMMARY: path.join(root, "summary.md"),
+        CI_SHARDS: "1",
+        CI_NEEDS: JSON.stringify(needs),
+      },
+    });
+  try {
+    put("reports/ci/build.json", ids);
+    put("reports/ci/discovery.json", test("a"));
+    put("reports/playwright.json", test("a"));
+    put("reports/shards/browser-shard-1/reports/ci/shard.json", { ...ids, shard: 1, total: 1 });
+    put("reports/shards/browser-shard-1/reports/playwright.json", test("a"));
+    put("reports/vitest.json", {
+      success: true,
+      numFailedTests: 0,
+      numFailedTestSuites: 0,
+      numPendingTests: 0,
+      numPendingTestSuites: 0,
+      numTotalTests: 1,
+      numPassedTests: 1,
+      testResults: [{}],
+    });
+    put("reports/interactions/ci/report.json", {
+      complete: true,
+      failure: null,
+      identity: await identity(),
+      seed: 42,
+      actions: Array(12).fill({}),
+    });
+    const green = run();
+    expect(green.stderr).toBe("");
+    expect(green.status).toBe(0);
+    expect(readFileSync(path.join(root, "summary.md"), "utf8")).toContain("All required jobs succeeded");
+    for (const job of ["static", "browser", "windows"])
+      expect(run({ ...jobs, [job]: { result: "failure" } }).status).not.toBe(0);
+    for (const file of [
+      "reports/vitest.json",
+      "reports/ci/discovery.json",
+      "reports/shards/browser-shard-1/reports/ci/shard.json",
+      "reports/playwright.json",
+    ]) {
+      const original = readFileSync(path.join(root, file), "utf8");
+      rmSync(path.join(root, file));
+      expect(run().status).not.toBe(0);
+      writeFileSync(path.join(root, file), original);
+    }
+    put(
+      "reports/shards/browser-shard-1/reports/playwright.json",
+      test("a", { results: [{ status: "interrupted", retry: 0 }] }),
+    );
+    expect(run().status).not.toBe(0);
+    put("reports/shards/browser-shard-1/reports/playwright.json", test("a"));
+    put("reports/shards/browser-shard-1/reports/ci/shard.json", {
+      ...ids,
+      attempt: "old",
+      shard: 1,
+      total: 1,
+    });
+    expect(run().status).not.toBe(0);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
 });

@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { appendFileSync, copyFileSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import { identity as interactionIdentity } from "./lib/tool-runtime.mjs";
 
 const read = (file) => JSON.parse(readFileSync(file, "utf8"));
 const write = (file, value) => {
@@ -141,7 +142,15 @@ async function main(command) {
       `run=${run}\nshards=${JSON.stringify(Array.from({ length: count }, (_, i) => i + 1))}\ntotal=${count}\n`,
     );
   } else if (command === "build") {
-    write("reports/ci/build.json", { ...identity(), files: buildHashes() });
+    write("reports/ci/build.json", {
+      ...identity(),
+      environment: {
+        node: process.version,
+        image: process.env.ImageOS,
+        imageVersion: process.env.ImageVersion,
+      },
+      files: buildHashes(),
+    });
   } else if (command === "verify-build") {
     const manifest = read("reports/ci/build.json");
     assertIdentity(manifest);
@@ -152,6 +161,11 @@ async function main(command) {
       ...identity(),
       shard: Number(process.env.CI_SHARD),
       total: Number(process.env.CI_SHARDS),
+      environment: {
+        node: process.version,
+        image: process.env.ImageOS,
+        imageVersion: process.env.ImageVersion,
+      },
     });
   } else if (command === "collect") {
     mkdirSync("all-blob-reports", { recursive: true });
@@ -176,7 +190,21 @@ async function main(command) {
     const count = validateBrowserCoverage(discovery, reports);
     validateBrowserCoverage(discovery, [read("reports/playwright.json")]);
     validateUnit(read("reports/vitest.json"));
-    validateInteraction(read("reports/interactions/ci/report.json"), process.env.CI_INTERACTION_IDENTITY);
+    validateInteraction(read("reports/interactions/ci/report.json"), await interactionIdentity());
+    const slowest = reports
+      .flatMap((report) =>
+        browserCases(report).map((row) => ({
+          title: row.title,
+          duration: row.test.results?.[0]?.duration ?? 0,
+        })),
+      )
+      .sort((a, b) => b.duration - a.duration)
+      .slice(0, 10);
+    write("reports/ci/browser-timings.json", {
+      ...identity(),
+      shards: reports.map((report, index) => ({ shard: index + 1, duration: report.stats?.duration })),
+      slowest,
+    });
     appendFileSync(
       process.env.GITHUB_STEP_SUMMARY,
       `\nAll required jobs succeeded; ${count} browser cases accounted for across ${total} shards\n`,
