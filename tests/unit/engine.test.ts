@@ -5,6 +5,11 @@ import { combat, freshCombat, hit } from "../../src/game/combat";
 import { definition, species, SPECIES } from "../../src/game/content";
 import { decodeSave, encodeSave, validateContent } from "../../src/game/save";
 import { recruitChoice, accept, policy, run, teamRun, winBattle } from "./helpers";
+function expectDeeplyFrozen(value: unknown) {
+  if (value === null || typeof value !== "object") return;
+  expect(Object.isFrozen(value)).toBe(true);
+  for (const child of Object.values(value)) expectDeeplyFrozen(child);
+}
 describe("game commands", () => {
   it("validates authored content and starts with one unlocked creature and its three cards", () => {
     validateContent();
@@ -28,9 +33,16 @@ describe("game commands", () => {
   it("publishes deeply frozen state and leaves the previous state untouched", () => {
     const s = run();
     const before = JSON.stringify(s);
-    accept(s, { type: "endTurn" });
+    const next = accept(s, { type: "endTurn" });
+    expect(next).not.toBe(s);
+    expect(next.revision).toBe(s.revision + 1);
+    expect(next.battle!.turn).toBe(s.battle!.turn + 1);
     expect(JSON.stringify(s)).toBe(before);
-    expect(Object.isFrozen(s.battle!.hand)).toBe(true);
+    expectDeeplyFrozen(next);
+    expect(() => next.battle!.hand.push("invented-card")).toThrow(TypeError);
+    expect(() => {
+      next.team[0]!.combat!.armor = 999;
+    }).toThrow(TypeError);
   });
   it("rejects wrong targets, absent cards, and insufficient mana before consuming RNG", () => {
     const s = produce(run(), (game) => {
@@ -48,11 +60,15 @@ describe("game commands", () => {
       const result = dispatch(s, cmd);
       expect(result.accepted).toBe(false);
       expect(result.state).toBe(s);
+      expect(result.events).toEqual([]);
     }
     const empty = produce(s, (d) => {
       d.battle!.mana = 0;
     });
-    expect(dispatch(empty, { type: "play", cardId: attack.id, targetId: "enemy-0" }).state).toBe(empty);
+    const rejected = dispatch(empty, { type: "play", cardId: attack.id, targetId: "enemy-0" });
+    expect(rejected.accepted).toBe(false);
+    expect(rejected.state).toBe(empty);
+    expect(rejected.events).toEqual([]);
   });
   it("spends mana, applies traits, and commits ordered feedback", () => {
     let s = run();

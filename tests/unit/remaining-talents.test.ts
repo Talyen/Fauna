@@ -597,11 +597,12 @@ it("Armored Surge triggers on a Block card once and Radiant Guard draws an eligi
   throw new Error("No Radiant Guard draw");
 });
 
-it("combined talent builds keep accepted turns and pending rewards saveable", () => {
+it("combined talent builds keep accepted cards and turns unchanged through save/resume", () => {
   for (let seed = 0; seed < 5; seed++) {
     let state = structuredClone(teamRun(seed, ["prismram", "emberback", "mossguard"]));
     state.talents = TALENTS.map((t) => t.id);
     state.keywordXP = Object.fromEntries(TALENTS.map((t) => [t.keyword, 10000]));
+    let acceptedPlays = 0;
     for (let turn = 0; turn < 10 && state.phase === "battle"; turn++) {
       for (const cardId of state.battle!.hand) {
         if (state.phase !== "battle") break;
@@ -612,11 +613,24 @@ it("combined talent builds keep accepted turns and pending rewards saveable", ()
             ? state.battle!.enemies.find((e) => e.health > 0)?.id
             : state.team.find((c) => c.health > 0)?.id;
         const result = dispatch(state, { type: "play", cardId, targetId, autoEndTurn: false });
-        if (result.accepted) state = structuredClone(decodeSave(encodeSave(result.state)));
+        if (result.accepted) {
+          acceptedPlays++;
+          const resumed = decodeSave(encodeSave(result.state));
+          expect(resumed).toEqual(result.state);
+          state = structuredClone(resumed);
+        } else {
+          expect(result.state).toBe(state);
+          expect(result.events).toEqual([]);
+        }
       }
-      if (state.phase === "battle")
-        state = structuredClone(decodeSave(encodeSave(accept(state, { type: "endTurn" }))));
+      if (state.phase === "battle") {
+        const next = accept(state, { type: "endTurn" });
+        const resumed = decodeSave(encodeSave(next));
+        expect(resumed).toEqual(next);
+        state = structuredClone(resumed);
+      }
     }
+    expect(acceptedPlays, `seed ${seed} must exercise accepted card plays`).toBeGreaterThan(0);
   }
 });
 

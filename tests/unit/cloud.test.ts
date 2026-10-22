@@ -38,13 +38,43 @@ function fixture() {
   const manager = createCloud(port, () => {}, install);
   return { manager, port, files, local, install, preserve };
 }
-it("validates payload bytes, metadata and slot hashes", async () => {
+it("round-trips valid snapshots and rejects changed payload bytes or another profile", async () => {
   const s = await snapshot(initial, identity, 1);
   expect(await parseSnapshot(JSON.stringify(s), identity.profile)).toEqual(s);
   await expect(
     parseSnapshot(JSON.stringify({ ...s, payload: progress }), identity.profile),
   ).rejects.toThrow();
   await expect(parseSnapshot(JSON.stringify(s), "wrong-account")).rejects.toThrow();
+});
+it.each([
+  ["device", { device: "d".repeat(32) }],
+  ["sequence", { sequence: 2 }],
+  ["ancestors", { ancestors: ["d".repeat(64)] }],
+  ["payload hash", { hash: "d".repeat(64) }],
+  ["snapshot identity", { id: "d".repeat(64) }],
+] as const)("rejects well-formed %s tampering against the snapshot signature", async (_field, patch) => {
+  const s = await snapshot(initial, identity, 1);
+  expect(await parseSnapshot(JSON.stringify(s), identity.profile)).toEqual(s);
+  await expect(parseSnapshot(JSON.stringify({ ...s, ...patch }), identity.profile)).rejects.toThrow(
+    "Cloud snapshot failed validation",
+  );
+});
+it.each([
+  ["obsolete version", { version: 0 }],
+  ["invalid device", { device: "unknown" }],
+  ["zero sequence", { sequence: 0 }],
+  ["fractional sequence", { sequence: 1.5 }],
+  ["unsafe sequence", { sequence: Number.MAX_SAFE_INTEGER + 1 }],
+  ["duplicate ancestors", { ancestors: ["d".repeat(64), "d".repeat(64)] }],
+  [
+    "unbounded ancestry",
+    { ancestors: Array.from({ length: 65 }, (_, i) => i.toString(16).padStart(64, "0")) },
+  ],
+] as const)("rejects %s metadata", async (_field, patch) => {
+  const s = await snapshot(initial, identity, 1);
+  await expect(parseSnapshot(JSON.stringify({ ...s, ...patch }), identity.profile)).rejects.toThrow(
+    "Invalid cloud metadata",
+  );
 });
 it("uploads only after durable local metadata, keeping devices in distinct slots", async () => {
   const f = fixture();

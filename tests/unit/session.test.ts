@@ -98,36 +98,64 @@ describe("save orchestration", () => {
     failed.retrySave();
     expect(await failed.flush()).toBe(true);
   });
-  it("serializes writes and quit waits for the newest accepted revision", async () => {
-    const saved: string[] = [];
-    let release: () => void = () => {};
-    const blocked = new Promise<void>((resolve) => (release = resolve));
-    let quit = false;
-    const s = createSession({
-      ...platform(),
-      saves: {
-        async readCandidates() {
-          return [];
-        },
-        async write(data) {
-          await blocked;
-          saved.push(data);
-        },
-      },
-      async quit() {
-        quit = true;
-      },
-    });
-    await s.load();
-    s.command({ type: "draft", species: s.store.getState().game.starterOffers[0]! });
-    s.command({ type: "start" });
-    const quitting = s.quit();
-    expect(quit).toBe(false);
-    release();
-    await quitting;
-    expect(saved.map((raw) => JSON.parse(raw).revision)).toEqual([1, 2]);
-    expect(quit).toBe(true);
-  });
+  it.each(["quit", "dispose"] as const)(
+    "serializes writes and %s drains every admitted revision",
+    async (close) => {
+      const saved: string[] = [];
+      let releaseFirst!: () => void;
+      let releaseSecond!: () => void;
+      let enteredSecond!: () => void;
+      const first = new Promise<void>((resolve) => (releaseFirst = resolve));
+      const second = new Promise<void>((resolve) => (releaseSecond = resolve));
+      const secondStarted = new Promise<void>((resolve) => (enteredSecond = resolve));
+      let active = 0;
+      let maximumActive = 0;
+      const write = vi.fn(async (data: string) => {
+        maximumActive = Math.max(maximumActive, ++active);
+        if (JSON.parse(data).revision === 1) await first;
+        else {
+          enteredSecond();
+          await second;
+        }
+        saved.push(data);
+        active--;
+      });
+      const quit = vi.fn(async () => {});
+      const s = createSession({
+        ...platform(),
+        saves: { readCandidates: async () => [], write },
+        quit,
+      });
+      await s.load();
+      expect(s.command({ type: "draft", species: s.store.getState().game.starterOffers[0]! })).toBe(true);
+      expect(s.command({ type: "start" })).toBe(true);
+      let finished = false;
+      const closing = s[close]().then(() => {
+        finished = true;
+      });
+      try {
+        await vi.waitFor(() => expect(write).toHaveBeenCalledOnce());
+        expect(finished).toBe(false);
+        expect(quit).not.toHaveBeenCalled();
+        expect(s.command({ type: "beginBattle" })).toBe(false);
+        releaseFirst();
+        await secondStarted;
+        expect(saved.map((raw) => JSON.parse(raw).revision)).toEqual([1]);
+        expect(finished).toBe(false);
+        expect(quit).not.toHaveBeenCalled();
+        releaseSecond();
+        await closing;
+        expect(saved.map((raw) => JSON.parse(raw).revision)).toEqual([1, 2]);
+        expect(maximumActive).toBe(1);
+        expect(quit).toHaveBeenCalledTimes(close === "quit" ? 1 : 0);
+      } finally {
+        releaseFirst();
+        releaseSecond();
+        await closing;
+        await s.dispose();
+      }
+    },
+  );
   it("permits in-memory play without overwriting inaccessible storage after read failure", async () => {
     let writes = 0;
     const s = createSession({

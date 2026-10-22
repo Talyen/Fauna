@@ -3,7 +3,7 @@ import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { creatureStars, talentPoints, xpThreshold, keywordProgress } from "../../src/game/progression";
-import { accept, winBattle } from "./helpers";
+import { accept, teamRun, winBattle } from "./helpers";
 
 it("discovers only committed encounters and retains knowledge independently of starter unlocks", () => {
   const fresh = createGame();
@@ -86,17 +86,27 @@ it("collects only accepted recruits, caps stars at five, and retains ranks acros
   expect(Object.values(state.discovery.recruited)).toContain(6);
 });
 
+it.each([1, 2, 3, 4, 5, 6])("accepts permanent recruitment count %i without changing it", (count) => {
+  const state = produce(teamRun(42, ["mossguard"]), (draft) => {
+    draft.discovery.recruited.mossguard = count;
+  });
+  expect(decodeSave(encodeSave(state))).toEqual(state);
+});
+
 it.each([0, -1, 7, 1.5, "2", null])("rejects invalid permanent recruitment counts: %s", (count) => {
-  const data = JSON.parse(encodeSave(createGame()));
-  data.discovery.encountered = ["mossguard"];
-  data.discovery.recruited = { mossguard: count };
+  const state = teamRun(42, ["mossguard"]);
+  expect(decodeSave(encodeSave(state))).toEqual(state);
+  const data = JSON.parse(encodeSave(state));
+  data.discovery.recruited.mossguard = count;
   expect(() => decodeSave(JSON.stringify(data))).toThrow();
 });
 it("rejects obsolete and unknown collection records", () => {
-  const data = JSON.parse(encodeSave(createGame()));
-  data.discovery.recruited = { unknown: 1 };
-  expect(() => decodeSave(JSON.stringify(data))).toThrow();
-  data.version = 20;
-  data.discovery.recruited = [];
-  expect(() => decodeSave(JSON.stringify(data))).toThrow();
+  const state = teamRun(42, ["mossguard"]);
+  expect(decodeSave(encodeSave(state))).toEqual(state);
+  for (const change of [
+    { discovery: { ...state.discovery, recruited: { ...state.discovery.recruited, unknown: 1 } } },
+    { discovery: { ...state.discovery, recruited: [] } },
+    { version: 20 },
+  ])
+    expect(() => decodeSave(JSON.stringify({ ...state, ...change }))).toThrow();
 });
