@@ -79,7 +79,7 @@ it("preserves offers through Campfire and reload, then suppresses consecutive Ca
   expect(decodeSave(encodeSave(accept(recruited, { type: "abandon" })))).toBeTruthy();
 });
 
-it("rolls Recruit and affordable Merchants independently at equal frequency across the entire species pool", () => {
+it("rolls Recruit and affordable Merchants independently at equal frequency across the ordinary species pool", () => {
   let recruits = 0,
     merchants = 0,
     together = 0;
@@ -104,7 +104,11 @@ it("rolls Recruit and affordable Merchants independently at equal frequency acro
   expect(merchants).toBeGreaterThan(180);
   expect(merchants).toBeLessThan(320);
   expect(together).toBeGreaterThan(20);
-  expect([...offered].sort()).toEqual(SPECIES.map((creature) => creature.id).sort());
+  expect([...offered].sort()).toEqual(
+    SPECIES.filter((creature) => !creature.legendary)
+      .map((creature) => creature.id)
+      .sort(),
+  );
   expect(starterJourney(7, "mossguard").support).toBeNull();
 });
 

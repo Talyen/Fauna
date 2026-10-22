@@ -1,6 +1,8 @@
 import { KEYWORDS, keywordLabel } from "../../src/game/progression";
 import { test, expect, type Locator } from "@playwright/test";
 import { produce } from "immer";
+import { dispatch } from "../../src/game/engine";
+import { definition } from "../../src/game/content";
 import { run } from "../support/game";
 import { SPECIES } from "../../src/game/content";
 import { decodeSave, encodeSave } from "../../src/game/save";
@@ -199,6 +201,7 @@ for (const [width, height, scale] of LAYOUT_CASES) {
         // Escape changes selection immediately; the previous card can still be lowering over this one.
         await page.mouse.move(0, 0);
         await settleScreen(page);
+        const id = await card.getAttribute("data-card-id");
         const point = await card.evaluate((el) => {
           const rect = el.getBoundingClientRect();
           for (let y = Math.max(0, rect.top) + 8; y < Math.min(innerHeight, rect.bottom); y += 12)
@@ -208,10 +211,26 @@ for (const [width, height, scale] of LAYOUT_CASES) {
         });
         expect(point).not.toBeNull();
         await page.mouse.click(point!.x, point!.y);
-        await expect(card).toHaveAttribute("aria-pressed", "true");
-        await expectScrollFree(page);
-        await page.keyboard.press("Escape");
-        await expect(card).toHaveAttribute("aria-pressed", "false");
+        const def = definition(before.cards.find((entry) => entry.id === id)!.definitionId);
+        const needsTarget =
+          (def.effect === "attack" && !def.target) ||
+          (def.effect === "guard" && def.target !== "self") ||
+          (def.effect === "heal" && !def.target);
+        if (needsTarget) {
+          await expect(card).toHaveAttribute("aria-pressed", "true");
+          await expectScrollFree(page);
+          await page.keyboard.press("Escape");
+          await expect(card).toHaveAttribute("aria-pressed", "false");
+          expect(await state(page)).toEqual(before);
+        } else {
+          const expected = dispatch(before, { type: "play", cardId: id! });
+          expect(expected.accepted).toBe(true);
+          await expect.poll(() => state(page)).toEqual(expected.state);
+          await expectScrollFree(page);
+          // The fixture's init script restores this same hand and text preferences on reload.
+          await page.reload();
+          await page.getByRole("button", { name: "Continue", exact: true }).click();
+        }
       }
       await page.mouse.move(0, 0);
       await captureScreen(page, { path: `reports/scroll-free/battle-${width}-${height}-${scale}.png` });

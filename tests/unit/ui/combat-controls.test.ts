@@ -6,7 +6,15 @@ import { chooseBattleCommand } from "../../../src/application/battle-policy";
 import { createSession } from "../../../src/application/session";
 import { observeUnlocks } from "../../../src/ui/expedition/unlock-reveals";
 import { scheduleAutoplay } from "../../../src/ui/battle/autoplay";
-import { prepareDestination, accept, run, victoryReady, bossReward, teamRun } from "../../support/game";
+import {
+  prepareDestination,
+  accept,
+  run,
+  victoryReady,
+  bossReward,
+  teamRun,
+  recruitChoice,
+} from "../../support/game";
 
 describe("combat controls", () => {
   it("manual turn keeps zero Mana while preview never settles and victory still settles", () => {
@@ -61,8 +69,10 @@ describe("combat controls", () => {
       { type: "beginBattle" },
     );
     const won = dispatch(ready, { type: "devWinBattle" }, true);
-    expect(won.state.phase).toBe("boon");
-    expect(won.state.reward!.boons).toHaveLength(3);
+    expect(won.state.phase).toBe("recruit");
+    const reward = accept(won.state, recruitChoice(won.state));
+    expect(reward.phase).toBe("boon");
+    expect(reward.reward!.boons).toHaveLength(3);
     const state = produce(run(), (d) => {
       const reserve = d.team.pop()!;
       d.reserves = [reserve];
