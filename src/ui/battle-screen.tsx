@@ -102,10 +102,12 @@ export function BattleScreen({
     def?.effect === "teamGuard" ||
     def?.effect === "teamProtection" ||
     def?.effect === "teamCleanse" ||
+    def?.effect === "teamThaw" ||
     def?.effect === "nullify" ||
     (def?.effect === "heal" && def.target === "allAllies");
   const selfTarget =
     def?.effect === "draw" ||
+    def?.effect === "mana" ||
     def?.effect === "dodge" ||
     def?.effect === "waterThorns" ||
     ((def?.effect === "guard" || def?.effect === "heal") && def.target === "self");

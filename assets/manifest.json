@@ -1571,6 +1571,50 @@
       "aspect": [3, 4],
       "provenance": "Unchanged Neradora artwork selected from user Google Drive: https://drive.google.com/file/d/1KmzqipzOummTHk13IMR4G1XfNFY48quE/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "creature.stillara",
+      "origin": "repository",
+      "source": "public/art/stillara/portrait.png",
+      "output": "art/stillara/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Stillara artwork selected from user Google Drive: https://drive.google.com/file/d/14J9-2YTFSgMqIhIOhp4UKWIi6PaWmp3i/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.stillara.reed-reservoir",
+      "origin": "repository",
+      "source": "public/art/stillara/reed-reservoir.png",
+      "output": "art/stillara/reed-reservoir.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Stillara artwork selected from user Google Drive: https://drive.google.com/file/d/1y0TfOj1Bprbt3k0XqV73V4-hKPfj6nCL/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.stillara.thaw-path",
+      "origin": "repository",
+      "source": "public/art/stillara/thaw-path.png",
+      "output": "art/stillara/thaw-path.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Stillara artwork selected from user Google Drive: https://drive.google.com/file/d/1xEnMf6c-Sht97bcHs222pPixd50pveVp/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.stillara.water-remembers",
+      "origin": "repository",
+      "source": "public/art/stillara/water-remembers.png",
+      "output": "art/stillara/water-remembers.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Stillara artwork selected from user Google Drive: https://drive.google.com/file/d/1hNbzH7d1MxNJWfir9lY3V-OhuyyZD7ex/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

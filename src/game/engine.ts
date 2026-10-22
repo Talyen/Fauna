@@ -31,6 +31,7 @@ import {
   restoreHealth,
   mostInjured,
   removeEffects,
+  removeFreezeBuildup,
   roll,
   startAction,
   tickStatuses,
@@ -553,7 +554,8 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
         (card) =>
           card.species === enemy.species &&
           card.id !== enemy.lastAbility &&
-          enemyCard(card).effect !== "draw",
+          enemyCard(card).effect !== "draw" &&
+          card.effect !== "mana",
       );
       const def = enemyCard(abilities[Math.floor(random(draft) * abilities.length)]!);
       if (def.effect === "attack" && def.target === "randomEnemy") {
@@ -613,6 +615,9 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
           grantStatus(enemy, "waterThorns", value, events, draft);
         } else if (def.effect === "teamBlind") {
           for (const recipient of living(draft)) applyBlind(draft, enemy, recipient, events);
+        } else if (def.effect === "teamThaw") {
+          for (const recipient of battle.enemies.filter((unit) => unit.health > 0))
+            removeFreezeBuildup(draft, recipient, events);
         } else if (def.effect === "teamCleanse") {
           for (const recipient of battle.enemies.filter((unit) => unit.health > 0))
             removeEffects(recipient, "cleanse", value, events, draft);
@@ -989,6 +994,9 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
           }
           if (def.effect === "waterThorns") grantStatus(actor, "waterThorns", value, events, draft);
           if (def.effect === "draw") draw(draft, value);
+          if (def.effect === "mana") gainMana(draft, value, events);
+          if (def.effect === "teamThaw")
+            for (const recipient of living(draft)) removeFreezeBuildup(draft, recipient, events);
           if (def.effect === "teamBlind")
             for (const recipient of battle.enemies.filter((unit) => unit.health > 0))
               applyBlind(draft, actor, recipient, events);
