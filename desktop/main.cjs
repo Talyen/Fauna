@@ -146,9 +146,9 @@ void app.whenReady().then(async () => {
     authorize(event);
     return storage.readCandidates();
   });
-  ipcMain.handle("fauna:write", (event, data) => {
+  ipcMain.handle("fauna:write", (event, data, recoverable) => {
     authorize(event);
-    return storage.write(data);
+    return storage.write(data, recoverable);
   });
   ipcMain.handle("fauna:quit", (event) => {
     authorize(event);

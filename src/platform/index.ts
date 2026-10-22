@@ -11,7 +11,21 @@ export function createPlatform(): Platform {
     onOverlay: bridge.onOverlay,
     diagnostics: browserDiagnostics(),
     steam: { available: false },
-    saves: { readCandidates: () => bridge.readCandidates(), write: (data) => bridge.writeSave(data) },
+    saves: {
+      readCandidates: () => bridge.readCandidates(),
+      async write(data, isRecoverable) {
+        const recoverable: string[] = [];
+        if (isRecoverable)
+          for (const candidate of await bridge.readCandidates()) {
+            try {
+              if (isRecoverable(candidate.data)) recoverable.push(candidate.data);
+            } catch {
+              // A failed validation cannot promote a checkpoint into recovery storage.
+            }
+          }
+        await bridge.writeSave(data, recoverable);
+      },
+    },
     quit: () => bridge.quit(),
     onCloseRequested: (listener) => bridge.onCloseRequested(listener),
   };

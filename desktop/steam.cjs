@@ -31,6 +31,8 @@ async function createSteam({
   const requests = new Map();
   const root = directory;
   let lane = Promise.resolve();
+  /** @type {Promise<void> | undefined} */
+  let disposal;
   /** @param {string} file @param {string} data */
   async function atomic(file, data) {
     await fs.mkdir(path.dirname(file), { recursive: true });
@@ -70,7 +72,13 @@ async function createSteam({
         reject,
         timer,
       });
-      worker?.postMessage({ id, operation, args });
+      try {
+        worker?.postMessage({ id, operation, args });
+      } catch (error) {
+        requests.delete(id);
+        clearTimeout(timer);
+        reject(error);
+      }
     });
   }
   if (!isolated) {
@@ -92,6 +100,7 @@ async function createSteam({
           );
         if (event !== undefined && callback?.register)
           overlay = callback.register(event, ({ active }) => {
+            if (dead) return;
             overlayActive = active === true;
             pause(overlayActive);
           });
@@ -255,16 +264,26 @@ async function createSteam({
         throw new Error("Cannot overwrite another device's slot.");
       await request("write", [name, data]);
     },
-    async dispose() {
+    dispose() {
+      if (disposal) return disposal;
       dead = true;
-      overlay?.disconnect();
-      worker?.kill();
-      for (const entry of requests.values()) {
-        clearTimeout(entry.timer);
-        entry.reject(new Error("Steam transport disposed."));
-      }
-      requests.clear();
-      await lane;
+      // Own teardown before native cleanup can reenter or throw.
+      disposal = Promise.resolve().then(async () => {
+        for (const close of [() => overlay?.disconnect(), () => worker?.kill()]) {
+          try {
+            close();
+          } catch {
+            // Independent cleanup and admitted metadata must still finish.
+          }
+        }
+        for (const entry of requests.values()) {
+          clearTimeout(entry.timer);
+          entry.reject(new Error("Steam transport disposed."));
+        }
+        requests.clear();
+        await lane;
+      });
+      return disposal;
     },
   };
 }

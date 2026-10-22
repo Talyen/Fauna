@@ -1,11 +1,125 @@
 import { it, expect, vi } from "vitest";
 import { EventEmitter } from "node:events";
+import { createRequire } from "node:module";
 import { mkdtemp, rm, writeFile, mkdir, readdir } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { createGame } from "../../../src/game/engine";
 import { encodeSave } from "../../../src/game/save";
 import { createSteam } from "../../../desktop/steam.cjs";
+
+async function transportFixture() {
+  const directory = await mkdtemp(path.join(tmpdir(), "fauna-transport-lifetime-"));
+  const env = process.env.FAUNA_STEAM_APP_ID;
+  process.env.FAUNA_STEAM_APP_ID = "999999999";
+  const worker = new EventEmitter();
+  worker.kill = vi.fn();
+  worker.postMessage = vi.fn(({ id, operation }) => {
+    queueMicrotask(() => {
+      worker.emit("message", {
+        id,
+        value: operation === "init" ? "76561190000000000" : operation === "list" ? [] : true,
+      });
+    });
+  });
+  const disconnect = vi.fn();
+  const pause = vi.fn();
+  let overlay;
+  try {
+    const adapter = await createSteam({
+      app: { isPackaged: false },
+      directory,
+      isolated: false,
+      pause,
+      utilityProcess: { fork: () => worker },
+      loadBinding: () => ({
+        electronEnableSteamOverlay() {},
+        SteamCallback: { GameOverlayActivated: 1 },
+        init: () => ({
+          callback: {
+            register: (_id, handler) => {
+              overlay = handler;
+              return { disconnect };
+            },
+          },
+          localplayer: { getSteamId: () => ({ steamId64: 76561190000000000n }) },
+        }),
+      }),
+    });
+    return { adapter, directory, worker, disconnect, pause, overlay };
+  } finally {
+    if (env === undefined) delete process.env.FAUNA_STEAM_APP_ID;
+    else process.env.FAUNA_STEAM_APP_ID = env;
+  }
+}
+
+it("retires a failed native send without leaving a timeout that kills later transport", async () => {
+  const f = await transportFixture();
+  vi.useFakeTimers();
+  try {
+    f.worker.postMessage.mockImplementationOnce(() => {
+      throw new Error("native send failed");
+    });
+    await expect(f.adapter.list()).rejects.toThrow("native send failed");
+    expect(vi.getTimerCount()).toBe(0);
+    await vi.advanceTimersByTimeAsync(5000);
+    expect(f.worker.kill).not.toHaveBeenCalled();
+    expect(await f.adapter.list()).toEqual([]);
+  } finally {
+    await f.adapter.dispose();
+    vi.useRealTimers();
+    await rm(f.directory, { recursive: true, force: true });
+  }
+});
+
+it.each(["disconnect", "kill"])(
+  "completes shared Steam teardown when %s throws and ignores late overlay callbacks",
+  async (failed) => {
+    const f = await transportFixture();
+    const nativeFs = createRequire(import.meta.url)("node:fs/promises");
+    const rename = nativeFs.rename;
+    let entered;
+    const writing = new Promise((resolve) => (entered = resolve));
+    let release;
+    const gate = new Promise((resolve) => (release = resolve));
+    const renaming = vi.spyOn(nativeFs, "rename").mockImplementation(async (from, to) => {
+      if (String(to).endsWith("cloud.json")) {
+        entered();
+        await gate;
+      }
+      return rename(from, to);
+    });
+    let closing;
+    try {
+      const saving = f.adapter.writeLocal("admitted metadata");
+      await writing;
+      f.worker.postMessage.mockImplementationOnce(() => {});
+      const rejected = expect(f.adapter.list()).rejects.toThrow("disposed");
+      (failed === "disconnect" ? f.disconnect : f.worker.kill).mockImplementationOnce(() => {
+        throw new Error("native cleanup failed");
+      });
+      let closed = false;
+      closing = f.adapter.dispose();
+      expect(f.adapter.dispose()).toBe(closing);
+      void closing.then(() => (closed = true));
+      await rejected;
+      expect(f.worker.kill).toHaveBeenCalledOnce();
+      expect(f.disconnect).toHaveBeenCalledOnce();
+      expect(closed).toBe(false);
+      f.overlay({ active: true });
+      expect(f.pause).not.toHaveBeenCalled();
+      release();
+      await Promise.all([saving, closing]);
+      expect(closed).toBe(true);
+    } finally {
+      release();
+      await closing?.catch(() => {});
+      renaming.mockRestore();
+      await rm(f.directory, { recursive: true, force: true });
+    }
+  },
+);
+
 it("pins account storage, limits slot ownership and closes only its own worker", async () => {
   const directory = await mkdtemp(path.join(tmpdir(), "fauna-transport-"));
   const env = process.env.FAUNA_STEAM_APP_ID;
