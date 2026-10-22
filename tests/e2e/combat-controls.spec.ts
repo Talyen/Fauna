@@ -2,7 +2,7 @@ import { captureScreen, settleScreen } from "./rendered-evidence";
 import { test, expect, type Page } from "@playwright/test";
 import { produce } from "immer";
 import { accept, run, victoryReady } from "../support/game";
-import { encodeSave } from "../../src/game/save";
+import { decodeSave, encodeSave } from "../../src/game/save";
 async function seed(page: Page, initial: string, scale: string) {
   await page.addInitScript(
     ({ initial, scale }) => {
@@ -179,8 +179,10 @@ test("manual zero-Mana turns resume without losing the battle", async ({ page })
     draft.battle!.enemies.forEach((enemy) => {
       enemy.health = enemy.maxHealth;
       enemy.combat.controlled = null;
+      enemy.combat.controlTurns = 0;
     });
   });
+  expect(decodeSave(encodeSave(initial))).toEqual(initial);
   await page.addInitScript(() => localStorage.setItem("fauna.auto-end-turn", "false"));
   await seed(page, encodeSave(initial), "1");
   await page
