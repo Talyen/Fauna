@@ -61,6 +61,6 @@ No new dependencies, compatibility migrations, legacy resolver, asynchronous gam
 
 ## Verification record
 
-The baseline engine, combat and presentation suites passed 1,186 tests before implementation. Task checks and focused regressions cover shared execution, depth scaling, save/resume and inspection. The full browser expedition retains its 400-command bound with an updated fixed seed after the approved rules changed; its matching command test completes in 371 commands. Full static checks, complete units, builds, browser journeys/replay and Windows package validation remain CI-owned under [Contributing](../../CONTRIBUTING.md#verification).
+The baseline engine, combat and presentation suites passed 1,186 tests before implementation. Task checks and focused regressions cover shared execution, depth scaling, save/resume and inspection. The full browser expedition retains its 400-command bound with an updated fixed seed after the approved rules changed; its matching command test completes in 201 commands. Full static checks, complete units, builds, browser journeys/replay and Windows package validation remain CI-owned under [Contributing](../../CONTRIBUTING.md#verification).
 
 The final handoff must identify the evaluated commit and CI outcome, distinguish local tests from rendered evidence, and report unrun physical-controller, Steam client and Steam Deck checks. Existing saves are disposable development data; the schema version changes without a migration.

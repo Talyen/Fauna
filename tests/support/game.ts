@@ -5,7 +5,7 @@ import { createGame, dispatch } from "../../src/game/engine";
 import { CARDS, definition, species, type SpeciesId } from "../../src/game/content";
 import type { Command, GameState } from "../../src/game/types";
 // This seeded first journey finishes within the browser's 400-command budget
-export const FULL_JOURNEY_SEED = 1035485675;
+export const FULL_JOURNEY_SEED = 1648773224;
 export function run(seed = 42) {
   return teamRun(seed, ["mossguard", "emberback", "prismram"]);
 }
