@@ -5,7 +5,7 @@ import { dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { BOONS, TALENTS, KEYWORDS } from "../../../src/game/progression";
 import { freshCombat } from "../../../src/game/combat";
-import { policy, teamRun } from "../../support/game";
+import { policy, teamRun, victoryReady } from "../../support/game";
 import type { SpeciesId } from "../../../src/game/content";
 
 const cases: { name: string; seed: number; team: SpeciesId[] }[] = [
@@ -40,14 +40,28 @@ it.each(cases)("preserves committed command traces for $name", ({ seed, team }) 
     expect(result.accepted).toBe(true);
     const resumed = dispatch(decodeSave(encodeSave(state)), command);
     expect(resumed).toEqual(result);
+    // The recorded oracle predates format 43; save/resume above validates the live format.
+    // Keep format metadata at its baseline value so format bumps do not recapture combat outcomes.
+    const baselineResult = { ...result, state: { ...result.state, version: 42 } };
     trace.push({
       command,
       phase: result.state.phase,
       rng: result.state.rng,
-      digest: createHash("sha256").update(JSON.stringify(result)).digest("hex"),
+      digest: createHash("sha256").update(JSON.stringify(baselineResult)).digest("hex"),
     });
     state = result.state;
   }
   expect(trace.length).toBeGreaterThan(0);
   expect(trace).toMatchSnapshot();
+});
+
+it("keeps the shared victory checkpoint resumable before its final play", () => {
+  const checkpoint = victoryReady(teamRun(42, ["mossguard", "emberback", "prismram"]));
+  const resumed = decodeSave(encodeSave(checkpoint));
+  expect(resumed).toEqual(checkpoint);
+  expect(
+    resumed.battle!.enemies.map((enemy) => [enemy.combat.controlled, enemy.combat.controlTurns]),
+  ).toEqual([["stun", 1], ...resumed.battle!.enemies.slice(1).map(() => [null, 0])]);
+  const command = { type: "play" as const, cardId: checkpoint.battle!.hand[0]!, targetId: "enemy-0" };
+  expect(dispatch(resumed, command)).toEqual(dispatch(checkpoint, command));
 });

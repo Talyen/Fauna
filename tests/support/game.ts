@@ -61,6 +61,7 @@ export function victoryReady(s = run()) {
       e.block = 0;
       e.combat.armor = 0;
       e.combat.controlled = i === 0 ? "stun" : null;
+      e.combat.controlTurns = i === 0 ? 1 : 0;
       e.combat.cooldown = 0;
       e.combat.skipped = false;
     });
