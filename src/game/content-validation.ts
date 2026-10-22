@@ -148,18 +148,11 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
     )
       error(boss.id, "encounter", "Invalid or repeated boss encounter.");
     encounters.add(boss.encounter);
-    if (!boss.name.trim() || !Number.isSafeInteger(boss.damage) || boss.damage < 0)
-      error(boss.id, "stats", "Invalid boss name or stats.");
+    if (!boss.name.trim()) error(boss.id, "stats", "Invalid boss name or stats.");
   }
   for (const encounter of ENCOUNTERS)
     for (const enemy of encounter.enemies) {
-      if (
-        !species.has(enemy.species) ||
-        !Number.isSafeInteger(enemy.health) ||
-        enemy.health < 1 ||
-        !Number.isSafeInteger(enemy.damage) ||
-        enemy.damage < 0
-      )
+      if (!species.has(enemy.species) || !Number.isSafeInteger(enemy.health) || enemy.health < 1)
         error(encounter.name, "enemies", "Invalid legacy enemy.");
     }
   for (const talent of catalog.talents) {

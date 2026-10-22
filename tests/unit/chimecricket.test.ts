@@ -314,7 +314,7 @@ it.each(["Resonant Leap", "Hush Dome", "Lullaby Drift"])(
         expect(result.state.team.every((e) => !e.combat!.nullify)).toBe(true);
       } else {
         expect(
-          result.events.filter((e) => e.kind === "heal" && e.targetId === "enemy-1" && e.amount === 2),
+          result.events.filter((e) => e.kind === "heal" && e.targetId === "enemy-1" && e.amount === 4),
         ).toHaveLength(2);
         expect(result.state.battle!.enemies[1]!.combat.blind).toBe(false);
         expect(result.state.battle!.enemies[1]!.combat.controlled).toBeNull();

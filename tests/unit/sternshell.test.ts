@@ -93,9 +93,9 @@ it.each([0, 1, 7])("doubles Surge Ram only with Armor (%i)", (armor) => {
   expect(result.state.team[0]!.combat!.armor).toBe(armor);
   const card = { ...game.cards.find((card) => card.definitionId === "sternshell-attack")!, level: 1 };
   expect(actionValue(card, game.team[0]!, game)).toBe(armor ? 10 : 5);
-  const enemy = { species: "sternshell" as const, damage: 5, combat: { ...freshCombat(), armor } };
-  expect(enemyAbilityValue(enemy, definition(card.definitionId))).toBe(armor ? 10 : 5);
-  expect(enemyInspectionValue(enemy, definition(card.definitionId))).toBe(armor ? 10 : 5);
+  const enemy = { species: "sternshell" as const, power: 1, combat: { ...freshCombat(), armor } };
+  expect(enemyAbilityValue(enemy, definition(card.definitionId))).toBe(armor ? 6 : 3);
+  expect(enemyInspectionValue(enemy, definition(card.definitionId))).toBe(armor ? 6 : 3);
 });
 it("swaps to a living backup before drawing from the incoming kit", () => {
   const game = produce(ready(), (draft) => {

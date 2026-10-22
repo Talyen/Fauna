@@ -215,7 +215,7 @@ it.each([
     const enemy = draft.battle!.enemies[0]!;
     enemy.species = "dawncall";
     enemy.name = "Dawncall";
-    enemy.damage = 6;
+    enemy.power = 1;
     for (const unit of draft.team) unit.block = 100;
     for (const other of draft.battle!.enemies.slice(1)) {
       Object.assign(other.combat, { controlled: "freeze", controlTurns: 2, blind: true, burn: 2 });
@@ -241,7 +241,7 @@ it.each([
   } else {
     expect(
       result.events.filter(
-        (event) => event.kind === "heal" && event.amount === 3 && event.targetId!.startsWith("enemy-"),
+        (event) => event.kind === "heal" && event.amount === 2 && event.targetId!.startsWith("enemy-"),
       ),
     ).toHaveLength(3);
   }

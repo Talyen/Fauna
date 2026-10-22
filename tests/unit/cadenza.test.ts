@@ -118,7 +118,7 @@ it("Rousing Refrain protects only living deployed allies and expires at their ne
       combat: freshCombat(),
     });
     draft.battle!.enemies.forEach((enemy) => {
-      enemy.damage = 0;
+      enemy.power = 0;
     });
   });
   const result = play(game);
@@ -202,7 +202,7 @@ it("enemy Cadenza can use its sole support ability on consecutive turns and heal
     enemies[1]!.health = 1;
     enemies[1]!.maxHealth = 100;
     enemies.forEach((enemy) => {
-      enemy.damage = 0;
+      enemy.power = 0;
     });
   });
   for (let turn = 0; turn < 2; turn++) {

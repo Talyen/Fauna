@@ -46,7 +46,7 @@ describe("keyword progression and rewards", () => {
     const defeat = produce(run(), (d) => {
       d.battleXP = { burn: 7 };
       d.team.forEach((c) => (c.health = 1));
-      d.battle!.enemies.forEach((e) => (e.damage = 100));
+      d.battle!.enemies.forEach((e) => (e.power = 100));
     });
     let s = defeat;
     for (let turn = 0; turn < 100 && s.phase === "battle"; turn++) s = accept(s, { type: "endTurn" });

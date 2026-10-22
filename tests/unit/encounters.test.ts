@@ -28,19 +28,17 @@ describe("journey encounters", () => {
     expect(loaded).toEqual(s);
     const battle = accept(loaded, { type: "beginBattle" });
     expect(
-      battle.battle!.enemies.map(({ name, species, maxHealth, damage }) => ({
+      battle.battle!.enemies.map(({ name, species, maxHealth, power }) => ({
         name,
         species,
         health: maxHealth,
-        damage,
+        power,
       })),
-    ).toEqual(
-      preview.enemies.map(({ name, species, health, damage }) => ({ name, species, health, damage })),
-    );
+    ).toEqual(preview.enemies.map(({ name, species, health, power }) => ({ name, species, health, power })));
     expect(decodeSave(encodeSave(battle))).toEqual(battle);
   });
 
-  it("scales species base Health and encounter damage additively for all enemies", () => {
+  it("persists explicit room power and scales base Health by 10 percent per room", () => {
     const initial = start();
     for (let encounter = 0; encounter < JOURNEY_LENGTH; encounter++) {
       for (let pack = 0; pack < encounterPacks(encounter).length; pack++) {
@@ -50,30 +48,18 @@ describe("journey encounters", () => {
         });
         const battle = enter(state);
         for (const enemy of battle.battle!.enemies) {
-          const baseDamage =
-            encounter === 3
-              ? enemy.id === "enemy-0"
-                ? 5
-                : 3
-              : encounter === 7
-                ? enemy.id === "enemy-0"
-                  ? 10
-                  : 3
-                : [2, 3, 4, 0, 4, 4, 4][encounter]!;
           const health = Math.round(species(enemy.species).health * (1 + encounter * 0.1));
           expect(enemy.health).toBe(health);
           expect(enemy.maxHealth).toBe(health);
-          expect(enemy.damage).toBe(Math.round(baseDamage * (1 + encounter * 0.1)));
+          expect(enemy.power).toBe(1 + encounter / 10);
         }
       }
     }
     for (let encounter = 0; encounter < ENCOUNTERS.length; encounter++) {
       const source = encounterSource({ expedition: null, encounter });
-      for (const [index, enemy] of source.enemies.entries()) {
+      for (const enemy of source.enemies) {
         expect(enemy.health).toBe(Math.round(species(enemy.species).health * (1 + encounter * 0.1)));
-        expect(enemy.damage).toBe(
-          Math.round(ENCOUNTERS[encounter]!.enemies[index]!.damage * (1 + encounter * 0.1)),
-        );
+        expect(enemy.power).toBe(1 + encounter / 10);
       }
     }
   });
@@ -135,7 +121,7 @@ describe("journey encounters", () => {
         d.encounter = 2;
       },
       (d: typeof s) => {
-        d.battle!.enemies[0]!.damage++;
+        d.battle!.enemies[0]!.power++;
       },
       (d: typeof s) => {
         d.battle!.enemies[0]!.maxHealth++;

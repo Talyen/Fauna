@@ -100,7 +100,7 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Freeze",
       "status",
       "active",
-      "Damage builds toward Frozen: skip one turn at half an ally's maximum Health or an enemy's pre-hit Health; Recovery grants 3 turns of shared Stun/Freeze immunity",
+      "Damage builds toward Frozen: skip one turn at half maximum Health; Recovery grants 3 turns of shared Stun/Freeze immunity",
       ["Freezes", "Frozen"],
     ),
     bleed: entry("Bleed", "damage", "active", "Repeat damage next turn, then clear", ["Bleeds", "Bleeding"]),
@@ -108,7 +108,7 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Stun",
       "status",
       "active",
-      "Damage builds toward Stunned: skip one turn at half an ally's maximum Health or an enemy's pre-hit Health; Recovery grants 3 turns of shared Stun/Freeze immunity",
+      "Damage builds toward Stunned: skip one turn at half maximum Health; Recovery grants 3 turns of shared Stun/Freeze immunity",
       ["Stunned"],
     ),
     leech: entry(

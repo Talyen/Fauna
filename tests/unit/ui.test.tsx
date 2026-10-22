@@ -348,7 +348,7 @@ it("previews Block depletion, exact health loss and knockout without visible HP 
     d.team[0]!.block = 5;
     d.battle!.enemies.forEach((enemy, i) => {
       enemy.targetId = "ally-0";
-      enemy.damage = 8;
+      enemy.power = 8;
       if (i > 0) enemy.health = 0;
     });
   });

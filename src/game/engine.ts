@@ -1,3 +1,4 @@
+import { executeAbility } from "./abilities";
 import { MERCHANT_PRICE, canVisitCampfire, campfireRecovery, canVisitMerchant } from "./support";
 import saveFormat from "./save-format.json" with { type: "json" };
 import { freeze, produce } from "immer";
@@ -13,25 +14,17 @@ import {
 } from "./progression";
 import {
   combat,
-  beginAttack,
-  openingCriticalBonus,
-  applyBlind,
-  grantTemporaryDodge,
   shuffle,
   fillHand,
   draw,
   drawKeyword,
   gainMana,
   grantArmor,
-  triggerArmorBreak,
   freshCombat,
   grantStatus,
   grantBlock,
-  hit,
   restoreHealth,
   mostInjured,
-  removeEffects,
-  removeFreezeBuildup,
   roll,
   startAction,
   tickStatuses,
@@ -41,7 +34,7 @@ import {
   HAND_LIMIT,
 } from "./combat";
 import { retainedBlock, actionValue, cardCost, enemyAbilityValue } from "./rules";
-import { CARDS, SPECIES, FIRST_RUN_STARTERS, definition, species, enemyCard } from "./content";
+import { CARDS, SPECIES, FIRST_RUN_STARTERS, definition, species, enemyCard, enemyCanUse } from "./content";
 import { bossEncounter, encounterSource, finalEncounter, encounterPacks } from "./encounters";
 import type { Card, Command, CommandResult, GameEvent, GameState } from "./types";
 export function createGame(seed = 1): GameState {
@@ -172,7 +165,7 @@ export function beginBattle(state: GameState, events: GameEvent[] = []) {
         species: e.species,
         health: e.health,
         maxHealth: e.health,
-        damage: e.damage,
+        power: e.power,
         targetId: "",
         block: 0,
         combat: freshCombat(),
@@ -390,27 +383,6 @@ function swapFromCard(state: GameState, actor: import("./combat").Combatant, eve
     text: `${species(actor.species).name} swaps positions with ${species(other.species).name}.`,
   });
 }
-function encore(state: GameState, actor: import("./combat").Combatant) {
-  const stats = combat(actor);
-  const chance = creaturePassive("maxHealth" in actor ? undefined : state, actor.species).effects.reduce(
-    (total, effect) => total + (effect.kind === "encore" ? effect.amount : 0),
-    0,
-  );
-  if (chance <= 0 || stats.encoreUsed) return false;
-  stats.encoreUsed = true;
-  return roll(state) < chance / 100;
-}
-function kindlingFlourish(state: GameState, actor: import("./combat").Combatant) {
-  const stats = combat(actor);
-  if (stats.cardsPlayedThisTurn >= 2) return false;
-  stats.cardsPlayedThisTurn++;
-  if (stats.cardsPlayedThisTurn !== 2) return false;
-  const chance = creaturePassive("maxHealth" in actor ? undefined : state, actor.species).effects.reduce(
-    (total, effect) => total + (effect.kind === "kindlingFlourish" ? effect.amount : 0),
-    0,
-  );
-  return chance > 0 && (chance === 100 || roll(state) < chance / 100);
-}
 function livingChorus(state: GameState, enemy: boolean, events: GameEvent[]) {
   const row = enemy ? state.battle!.enemies : state.team;
   for (const singer of row) {
@@ -421,141 +393,6 @@ function livingChorus(state: GameState, enemy: boolean, events: GameEvent[]) {
     );
     const recipient = amount > 0 ? mostInjured<import("./combat").Combatant>(row) : undefined;
     if (recipient) restoreHealth(recipient, amount, events, false, state, false, singer);
-  }
-}
-function recoverDiscard(state: GameState, events: GameEvent[]) {
-  const battle = state.battle!;
-  if (!battle.discard.length) return;
-  const index = Math.floor(roll(state) * battle.discard.length);
-  const id = battle.discard.splice(index, 1)[0]!;
-  fillHand(state);
-  (battle.hand.length < HAND_LIMIT ? battle.hand : battle.buffer).push(id);
-  const card = state.cards.find((entry) => entry.id === id)!;
-  events.push({
-    kind: "action",
-    actionType: "support",
-    actorId: card.ownerId,
-    text: `${definition(card.definitionId).name} returns to your hand`,
-  });
-}
-function hushDome(state: GameState, enemy: boolean, events: GameEvent[]) {
-  for (const unit of enemy ? state.battle!.enemies : state.team) {
-    if (unit.health <= 0) continue;
-    combat(unit).nullify = true;
-    events.push({
-      kind: "status",
-      targetId: unit.id,
-      status: "nullify",
-      outcome: "apply",
-      text: `${species(unit.species).name} nullifies the next harmful status effect`,
-    });
-  }
-}
-
-function teamProtection(state: GameState, enemy: boolean, amount: number, events: GameEvent[]) {
-  const block = roll(state) < 0.5;
-  for (const unit of enemy ? state.battle!.enemies : state.team) {
-    if (unit.health <= 0) continue;
-    if (block) grantBlock(state, unit, amount, events);
-    else grantStatus(unit, "thorns", amount, events, state);
-  }
-}
-
-function applyExtras(
-  state: GameState,
-  actor: import("./combat").Combatant,
-  def: import("./content").CardDefinition,
-  events: GameEvent[],
-  enemy = false,
-  target?: import("./combat").Combatant,
-  blindMiss = false,
-  criticalBonus = 0,
-  recipientOnly = false,
-) {
-  for (const effect of def.effects ?? []) {
-    // Targeted Cleanse follows each healed ally; global extras run once after the primary effect
-    if (recipientOnly !== (effect.kind === "cleanse" && effect.target === "recipient")) continue;
-    if (actor.health <= 0) break;
-    switch (effect.kind) {
-      case "damage":
-        if (target)
-          hit(state, actor, target, effect.amount, effect.damageType, events, {
-            blindMiss,
-            criticalBonus,
-            leech: effect.leech,
-            cardLeech:
-              !enemy &&
-              (def.leech || def.effects?.some((effect) => effect.kind === "damage" && effect.leech)),
-          });
-        break;
-      case "status":
-        if (effect.status === "armor") grantArmor(state, actor, effect.amount, events);
-        else grantStatus(actor, effect.status, effect.amount, events, state);
-        break;
-      case "meltArmor":
-        for (const recipient of enemy ? state.team : state.battle!.enemies) {
-          if (actor.health <= 0) break;
-          if (recipient.health <= 0) continue;
-          const stats = combat(recipient);
-          const removed = Math.ceil((stats.armor * effect.amount) / 100);
-          if (!removed) continue;
-          stats.armor -= removed;
-          events.push({
-            kind: "status",
-            actorId: actor.id,
-            targetId: recipient.id,
-            status: "armor",
-            outcome: "remove",
-            amount: removed,
-            text: `${species(recipient.species).name} loses ${removed} Armor`,
-          });
-          if (stats.armor === 0) triggerArmorBreak(state, recipient, events);
-        }
-        break;
-      case "blind":
-        for (const recipient of enemy ? state.team : state.battle!.enemies)
-          if (recipient.health > 0) applyBlind(state, actor, recipient, events);
-        break;
-      case "nullifyFreeze":
-        combat(actor).nullifyFreeze = true;
-        events.push({
-          kind: "status",
-          targetId: actor.id,
-          status: "nullify",
-          outcome: "apply",
-          text: "Nullify the next Freeze damage",
-        });
-        break;
-      case "reflect":
-        if (effect.status === "burn") combat(actor).reflectBurn = true;
-        else combat(actor).reflect = true;
-        events.push({
-          kind: "status",
-          targetId: actor.id,
-          status: "reflect",
-          outcome: "apply",
-          text: effect.status === "burn" ? "Reflect the next Burn" : "Reflect the next harmful status effect",
-        });
-        break;
-      case "cleanse":
-        for (const recipient of effect.target === "allAllies"
-          ? (enemy ? state.battle!.enemies : state.team).filter((unit) => unit.health > 0)
-          : [effect.target === "recipient" && target ? target : actor])
-          removeEffects(recipient, "cleanse", effect.amount, events, state);
-        break;
-      case "purge":
-        if (target) removeEffects(target, "purge", effect.amount, events, state);
-        break;
-      case "heal":
-        restoreHealth(actor, effect.amount, events, false, state, !enemy, actor);
-        break;
-      case "draw":
-        if (!enemy) draw(state, effect.amount);
-        break;
-      case "mana":
-        if (!enemy) gainMana(state, effect.amount, events);
-        break;
-    }
   }
 }
 function finishTurn(draft: GameState, events: GameEvent[]) {
@@ -576,100 +413,26 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
       if (enemy.health <= 0) continue;
       enemy.block = retainedBlock(enemy);
       if (!startAction(enemy, events, draft)) continue;
-      let target = living(draft).find((c) => c.id === enemy.targetId) ?? living(draft)[0];
+      const target = living(draft).find((c) => c.id === enemy.targetId) ?? living(draft)[0];
       if (!target) break;
-      const abilities = CARDS.filter(
-        (card) =>
-          card.species === enemy.species &&
-          enemyCard(card).effect !== "draw" &&
-          card.effect !== "mana" &&
-          card.effect !== "recover",
-      );
+      const abilities = CARDS.filter((card) => card.species === enemy.species && enemyCanUse(card));
       const alternatives = abilities.filter((card) => card.id !== enemy.lastAbility);
       const pool = alternatives.length ? alternatives : abilities;
       const def = enemyCard(pool[Math.floor(random(draft) * pool.length)]!);
-      if (def.effect === "attack" && def.target === "randomEnemy") {
-        const allies = living(draft);
-        target = allies[Math.floor(random(draft) * allies.length)]!;
-      }
-      const value = enemyAbilityValue(enemy, def);
       enemy.lastAbility = def.id;
-      events.push({
-        kind: "action",
-        actionType: def.effect === "attack" ? "attack" : "support",
-        actorId: enemy.id,
-        targetId: def.effect === "attack" && def.target === "allEnemies" ? undefined : target.id,
-        text: `${enemy.name} uses ${def.name}.`,
-      });
-      const flourishRepeat = kindlingFlourish(draft, enemy);
-      const encoreRepeat = encore(draft, enemy);
-      const abilityRepeat = def.repeatChance !== undefined && roll(draft) < def.repeatChance / 100;
-      for (let play = 0; play < (encoreRepeat || abilityRepeat || flourishRepeat ? 2 : 1); play++) {
-        if (
-          enemy.health <= 0 ||
-          (def.effect === "attack" &&
-            (def.target === "allEnemies" ? !living(draft).length : target.health <= 0))
-        )
-          break;
-        if (play === 1)
-          events.push({
-            kind: "action",
-            actionType: "support",
-            actorId: enemy.id,
-            text: `${enemy.name} repeats ${def.name}${flourishRepeat ? " with Kindling Flourish" : encoreRepeat ? " with Encore" : ""}`,
-          });
-        const criticalBonus = def.effect === "attack" ? openingCriticalBonus(draft, enemy) : 0;
-        const blindMiss = def.effect === "attack" ? beginAttack(draft, enemy) : false;
-        if (def.effect === "attack") {
-          const damageType =
-            def.alternateDamageType && roll(draft) < 0.5 ? def.alternateDamageType : def.damageType;
-          const targets = def.target === "allEnemies" ? living(draft) : target.health > 0 ? [target] : [];
-          if (!targets.length) break;
-          for (const recipient of targets) {
-            if (enemy.health <= 0) break;
-            hit(draft, enemy, recipient, value, damageType, events, {
-              leech: def.leech,
-              blindMiss,
-              criticalBonus,
-            });
-          }
-        } else if (def.effect === "heal") {
-          const injured = def.target === "self" ? enemy : mostInjured(battle.enemies)!;
-          for (const recipient of def.target === "allAllies"
-            ? battle.enemies.filter((e) => e.health > 0)
-            : [injured]) {
-            restoreHealth(recipient, value, events, false, draft, false, enemy);
-            applyExtras(draft, enemy, def, events, true, recipient, false, 0, true);
-          }
-        } else if (def.effect === "waterThorns") {
-          grantStatus(enemy, "waterThorns", value, events, draft);
-        } else if (def.effect === "teamBlind") {
-          for (const recipient of living(draft)) applyBlind(draft, enemy, recipient, events);
-        } else if (def.effect === "teamThaw") {
-          for (const recipient of battle.enemies.filter((unit) => unit.health > 0))
-            removeFreezeBuildup(draft, recipient, events);
-        } else if (def.effect === "teamCleanse") {
-          for (const recipient of battle.enemies.filter((unit) => unit.health > 0))
-            removeEffects(recipient, "cleanse", value, events, draft);
-        } else if (def.effect === "nullify") {
-          hushDome(draft, true, events);
-        } else if (def.effect === "teamProtection") {
-          teamProtection(draft, true, value, events);
-        } else if (def.effect === "teamDodge") {
-          for (const unit of battle.enemies) grantTemporaryDodge(unit, value, events);
-        } else if (def.effect === "dodge") {
-          grantTemporaryDodge(enemy, value, events);
-        } else if (def.effect === "swap") {
-          swapFromCard(draft, enemy, events);
-        } else {
-          for (const unit of def.effect === "teamGuard"
-            ? battle.enemies.filter((e) => e.health > 0)
-            : [enemy]) {
-            grantBlock(draft, unit, value, events);
-          }
-        }
-        applyExtras(draft, enemy, def, events, true, target, blindMiss, criticalBonus);
-      }
+      executeAbility(
+        draft,
+        {
+          side: "enemy",
+          actor: enemy,
+          def,
+          value: enemyAbilityValue(enemy, def),
+          targetId: target.id,
+          allyTargetId: def.effect === "heal" ? mostInjured(battle.enemies)?.id : enemy.id,
+        },
+        events,
+        { swap: swapFromCard },
+      );
       if (++enemyCardsPlayed === 2) livingChorus(draft, true, events);
       if (settle(draft, events)) return;
     }
@@ -678,7 +441,6 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
       tickStatuses(draft, c, events);
       if (settle(draft, events)) return;
     }
-    for (const enemy of battle.enemies) restoreHealth(enemy, 1, events, false, draft);
     for (const c of [...draft.team, ...draft.reserves]) {
       const stats = combat(c);
       if (stats.grace > 0) stats.grace--;
@@ -920,130 +682,19 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         if (keywords.includes("burn")) battle.freeBurnUsed = true;
         battle.hand.splice(battle.hand.indexOf(card.id), 1);
         battle.discard.push(card.id);
-        events.push({
-          kind: "action",
-          actionType: def.effect === "attack" ? "attack" : "support",
-          text: `${species(actor.species).name} uses ${def.name}.`,
-          actorId: actor.id,
-          targetId: command.targetId,
-        });
-        const target =
-          def.effect === "attack" && def.target === "randomEnemy"
-            ? (() => {
-                const enemies = battle.enemies.filter((enemy) => enemy.health > 0);
-                return enemies[Math.floor(random(draft) * enemies.length)];
-              })()
-            : def.effect === "attack" && def.target === "allEnemies"
-              ? undefined
-              : battle.enemies.find((e) => e.id === command.targetId);
-        if (target && keywords.includes("leech") && hasTalent(draft, "leech.armor-siphon")) {
-          const stolen = Math.min(1, target.combat.armor);
-          target.combat.armor -= stolen;
-          grantArmor(draft, actor, stolen, events);
-          if (stolen > 0 && target.combat.armor === 0) triggerArmorBreak(draft, target, events);
-        }
-        if (keywords.includes("block") && hasTalent(draft, "armor.armored-surge") && roll(draft) < 0.1)
-          grantArmor(draft, actor, 6, events);
-        const repeatTalents = [
-          ["burn", "burn.flash-fire"],
-          ["freeze", "freeze.winter-s-grasp"],
-          ["nature", "nature.overgrowth"],
-          ["poison", "poison.venom-strike"],
-          ["stun", "stun.jarring-blow"],
-        ] as const;
-        const flourishRepeat = kindlingFlourish(draft, actor);
-        const encoreRepeat = encore(draft, actor);
-        const abilityRepeat = def.repeatChance !== undefined && roll(draft) < def.repeatChance / 100;
-        const repeat = repeatTalents.some(
-          ([keyword, talent]) => keywords.includes(keyword) && hasTalent(draft, talent) && roll(draft) < 0.1,
+        executeAbility(
+          draft,
+          {
+            side: "player",
+            actor,
+            def,
+            value,
+            targetId: command.targetId,
+            allyTargetId: command.targetId,
+          },
+          events,
+          { swap: swapFromCard },
         );
-        for (
-          let play = 0;
-          play < (repeat || encoreRepeat || abilityRepeat || flourishRepeat ? 2 : 1);
-          play++
-        ) {
-          if (
-            actor.health <= 0 ||
-            (def.effect === "attack" &&
-              (def.target === "allEnemies"
-                ? battle.enemies.every((enemy) => enemy.health <= 0)
-                : !target || target.health <= 0))
-          )
-            break;
-          if (play === 1 && (encoreRepeat || abilityRepeat || flourishRepeat))
-            events.push({
-              kind: "action",
-              actionType: "support",
-              actorId: actor.id,
-              text: `${species(actor.species).name} repeats ${def.name}${flourishRepeat ? " with Kindling Flourish" : encoreRepeat ? " with Encore" : ""}`,
-            });
-          const criticalBonus = def.effect === "attack" ? openingCriticalBonus(draft, actor) : 0;
-          const blindMiss = def.effect === "attack" ? beginAttack(draft, actor) : false;
-          if (def.effect === "attack") {
-            const damageType =
-              def.alternateDamageType && roll(draft) < 0.5 ? def.alternateDamageType : def.damageType;
-            const targets =
-              def.target === "allEnemies"
-                ? battle.enemies.filter((enemy) => enemy.health > 0)
-                : target && target.health > 0
-                  ? [target]
-                  : [];
-            if (!targets.length) break;
-            for (const enemy of targets) {
-              if (actor.health <= 0) break;
-              hit(draft, actor, enemy, value, damageType, events, {
-                blindMiss,
-                criticalBonus,
-                leech: def.leech,
-                cardLeech: keywords.includes("leech"),
-              });
-            }
-            actor.attacked = true;
-          }
-          if (def.effect === "guard" || def.effect === "teamGuard") {
-            const targets =
-              def.effect === "teamGuard"
-                ? living(draft)
-                : def.target === "self"
-                  ? [actor]
-                  : draft.team.filter((c) => c.id === command.targetId);
-            for (const target of targets) {
-              grantBlock(draft, target, value, events);
-            }
-          }
-          if (def.effect === "heal") {
-            const targets =
-              def.target === "allAllies"
-                ? living(draft)
-                : def.target === "self"
-                  ? [actor]
-                  : def.target === "mostInjured"
-                    ? [mostInjured(draft.team)!]
-                    : draft.team.filter((c) => c.id === command.targetId && c.health > 0);
-            for (const recipient of targets) {
-              restoreHealth(recipient, value, events, false, draft, true, actor);
-              applyExtras(draft, actor, def, events, false, recipient, false, 0, true);
-            }
-          }
-          if (def.effect === "waterThorns") grantStatus(actor, "waterThorns", value, events, draft);
-          if (def.effect === "draw") draw(draft, value);
-          if (def.effect === "recover") recoverDiscard(draft, events);
-          if (def.effect === "teamDodge")
-            for (const unit of living(draft)) grantTemporaryDodge(unit, value, events);
-          if (def.effect === "mana") gainMana(draft, value, events);
-          if (def.effect === "teamThaw")
-            for (const recipient of living(draft)) removeFreezeBuildup(draft, recipient, events);
-          if (def.effect === "teamBlind")
-            for (const recipient of battle.enemies.filter((unit) => unit.health > 0))
-              applyBlind(draft, actor, recipient, events);
-          if (def.effect === "teamCleanse")
-            for (const recipient of living(draft)) removeEffects(recipient, "cleanse", value, events, draft);
-          if (def.effect === "nullify") hushDome(draft, false, events);
-          if (def.effect === "teamProtection") teamProtection(draft, false, value, events);
-          if (def.effect === "dodge") grantTemporaryDodge(actor, value, events);
-          if (def.effect === "swap") swapFromCard(draft, actor, events);
-          applyExtras(draft, actor, def, events, false, target, blindMiss, criticalBonus);
-        }
         if (battle.cardsPlayedThisTurn < 3) {
           battle.cardsPlayedThisTurn++;
           if (battle.cardsPlayedThisTurn === 2) livingChorus(draft, false, events);

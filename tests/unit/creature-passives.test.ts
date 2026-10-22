@@ -55,9 +55,9 @@ it("uses the exact tier for card rules and battle start without scaling enemies"
     const battle = accept(game, { type: "beginBattle" });
     expect(battle.team[0]!.block).toBe(upgraded ? rank + 1 : 0);
     expect(battle.team[0]!.combat!.thorns).toBe(upgraded ? rank + 2 : 0);
-    expect(
-      enemyAbilityValue({ species: "prismram", damage: 8 }, content.definition(guard.definitionId)),
-    ).toBe(4);
+    expect(enemyAbilityValue({ species: "prismram", power: 1 }, content.definition(guard.definitionId))).toBe(
+      3,
+    );
   }
 });
 

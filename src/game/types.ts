@@ -57,7 +57,7 @@ export interface Enemy {
   species: SpeciesId;
   health: number;
   maxHealth: number;
-  damage: number;
+  power: number;
   targetId: string;
   block: number;
   combat: CombatState;

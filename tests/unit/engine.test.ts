@@ -144,7 +144,7 @@ describe("game commands", () => {
         c.health = 1;
         combat(c).deathDoorUsed = true;
       });
-      d.battle!.enemies[0]!.damage = 100;
+      d.battle!.enemies[0]!.power = 100;
     });
     for (let i = 0; i < 20 && s.phase === "battle"; i++) s = accept(s, { type: "endTurn" });
     expect(s.phase).toBe("defeat");

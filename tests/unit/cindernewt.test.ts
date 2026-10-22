@@ -281,6 +281,6 @@ it.each([
   expect(result.events.find((event) => event.kind === "damage")).toMatchObject({
     actorId: "enemy-0",
     damageType,
-    amount: game.battle!.enemies[0]!.damage,
+    amount: 6,
   });
 });

@@ -36,12 +36,14 @@ export function ActionDetails({
   modifiers,
   enemy = false,
   enemyValue,
+  enemyPower = 1,
   compact = false,
 }: {
   card: Card;
   compact?: boolean;
   enemy?: boolean;
   enemyValue?: number;
+  enemyPower?: number;
   ownerName: string;
   actor?: Creature;
   modifiers?: GameState;
@@ -64,6 +66,7 @@ export function ActionDetails({
       )}
       <CardRules
         card={def}
+        power={enemyPower}
         level={card.level}
         value={
           enemyValue ??
