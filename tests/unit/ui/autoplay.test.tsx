@@ -7,7 +7,38 @@ import { encodeSave } from "../../../src/game/save";
 import { run } from "../../support/game";
 afterEach(() => {
   cleanup();
+  vi.restoreAllMocks();
   vi.useRealTimers();
+});
+it("revokes a queued action synchronously on blur before React runs effect cleanup", async () => {
+  vi.spyOn(document, "hasFocus").mockReturnValue(true);
+  const session = createSession({
+    desktop: false,
+    steam: { available: false },
+    saves: {
+      readCandidates: async () => [{ source: "primary", data: encodeSave(run()) }],
+      write: async () => {},
+    },
+  });
+  await session.load();
+  vi.useFakeTimers();
+  const hook = renderHook(() => useAutoplay(session, false, false));
+  act(() => hook.result.current[1](true));
+  const revision = session.store.getState().game.revision;
+  act(() => {
+    window.dispatchEvent(new Event("blur"));
+    vi.advanceTimersByTime(700);
+  });
+  expect(session.store.getState().game.revision).toBe(revision);
+  act(() => window.dispatchEvent(new Event("focus")));
+  await act(async () => {
+    vi.advanceTimersByTime(700);
+    await session.flush();
+  });
+  expect(session.store.getState().game.revision).toBe(revision + 1);
+  await act(async () => {
+    await session.dispose();
+  });
 });
 it("pauses overlays and blur, revokes on disposal and keeps playing through a save failure", async () => {
   vi.spyOn(document, "hasFocus").mockReturnValue(true);

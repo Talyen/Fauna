@@ -138,6 +138,8 @@ export function createAudioRuntime(
     }
     if (music) {
       const old = music;
+      // The outgoing voice belongs to its fade even if creating its successor fails.
+      music = undefined;
       // Each fade owns only its captured voice; completion cannot stop a successor.
       for (const media of fading.keys()) {
         if (media === old.media) {
