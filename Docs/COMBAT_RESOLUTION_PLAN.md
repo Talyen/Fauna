@@ -24,16 +24,16 @@ These are deliberate behavior changes. Matching historical enemy outcomes or RNG
 
 ## Resulting owners
 
-| Owner                                                                         | Responsibility                                                                                                                                      |
-| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [abilities.ts](../src/game/abilities.ts)                                      | Single synchronous execution sequence, targeting, repeats, primary effects, recipient extras and global extras                                      |
-| [ability-values.ts](../src/game/ability-values.ts)                            | Exhaustive primary/extra magnitude policy shared with descriptions; no resource/chance scaling                                                      |
-| [rules.ts](../src/game/rules.ts)                                              | Shared intrinsic values and passive bonuses; player upgrades and enemy room power supplied explicitly                                               |
-| [content.ts](../src/game/content.ts)                                          | Authored definitions, descriptions and exhaustive enemy repertoire/resource adaptation                                                              |
-| [engine.ts](../src/game/engine.ts)                                            | Validate before mutation/RNG; pay Mana; move card slots; award XP; invoke execution; count accepted plays; refill hand; schedule turns; settle once |
-| [combat.ts](../src/game/combat.ts)                                            | Shared packets, defenses, healing, statuses and reactive effects                                                                                    |
-| [encounters.ts](../src/game/encounters.ts) and [save.ts](../src/game/save.ts) | Construct and validate exact room power and initial Health; reject obsolete development formats                                                     |
-| [session.ts](../src/application/session.ts)                                   | Publish accepted state/events and serialize saves                                                                                                   |
+| Owner                                                                               | Responsibility                                                                                                                                      |
+| ----------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [abilities.ts](../src/game/abilities.ts)                                            | Single synchronous execution sequence, targeting, repeats, primary effects, recipient extras and global extras                                      |
+| [ability-values.ts](../src/game/ability-values.ts)                                  | Exhaustive primary/extra magnitude policy shared with descriptions; no resource/chance scaling                                                      |
+| [rules.ts](../src/game/rules.ts)                                                    | Shared intrinsic values and passive bonuses; player upgrades and enemy room power supplied explicitly                                               |
+| [content.ts](../src/game/content.ts) and [card-rules.ts](../src/game/card-rules.ts) | Authored definitions, descriptions and exhaustive enemy repertoire/resource adaptation                                                              |
+| [engine.ts](../src/game/engine.ts)                                                  | Validate before mutation/RNG; pay Mana; move card slots; award XP; invoke execution; count accepted plays; refill hand; schedule turns; settle once |
+| [combat.ts](../src/game/combat.ts)                                                  | Shared packets, defenses, healing, statuses and reactive effects                                                                                    |
+| [encounters.ts](../src/game/encounters.ts) and [save.ts](../src/game/save.ts)       | Construct and validate exact room power and initial Health; reject obsolete development formats                                                     |
+| [session.ts](../src/application/session.ts)                                         | Publish accepted state/events and serialize saves                                                                                                   |
 
 The executor runs inside the existing command draft. It does not dispatch commands, open another transaction, settle rewards, save, publish or await animations. A narrow swap operation supplied by the engine avoids importing orchestration into execution. Friendly/opposing rows are read again for each resolution so swaps and knockouts cannot leave stale group targets.
 
