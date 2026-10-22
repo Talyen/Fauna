@@ -7,17 +7,20 @@ description: Critique rendered Fauna UI changes for composition, copy, artwork i
 
 Use [current UI contracts](../../../Docs/UI.md) and the [reference pack](../../../design/visual-quality/README.md). Inspect actual images and the changed player flow. If you only have source, request or capture the permitted focused preview and label the missing visual evidence; do not issue aesthetic approval from code.
 
-First inspect the full frame without reading the author's rationale. Identify the first visual focus, the player's next action, and the supporting information. Then compare against the previous version and the relevant visual reference at the same state and size.
+First inspect the full frame without reading the author's rationale. Assess the composition against the requested visual direction and accepted references before enumerating possible changes. Identify the visual focus and how the player accesses necessary information. Then compare against the previous version and the relevant visual reference at the same state and size.
+
+Separate observed defects from design hypotheses; do not promote your own preferred treatment to a requirement.
 
 Look for concrete defects:
 
-- Composition: competing focal points, detached heading/actions, accidental gaps, weak grouping, uneven alignment, excessive or insufficient density
+- Composition: unintended focal points, broken grouping, accidental gaps or clipping; do not classify deliberate symmetry, equal choice emphasis or compact spacing as defects without evidence
 - Copy: repeated meaning, obvious instructions, unnecessary subtitles, promotional language, success narration; preserve exact rules and useful unavailable reasons
 - Artwork: distortion/cropping, inconsistent scale, muddy contrast, lighting or material mismatch, decorative framing that competes with the image
-- Interaction: ambiguous targets, equal emphasis on unrelated actions, weak selected/unavailable distinction, tooltip collisions, lost focus, unclear committed outcome
+- Interaction: ambiguous targets, controls that misrepresent their action roles, weak selected/unavailable distinction, tooltip collisions, lost focus, unclear committed outcome
+- Contrast: inspect computed text/icon colors against the actual rendered fill, including screen overrides and hover/focus; valid token definitions alone do not prove readable controls
 - Fit: full content at supported sizes and enlarged text, readable type, reachable controls and unchanged minimum hit areas
 
-For each finding, name the screen/state, visible evidence, player consequence and smallest useful correction. “Feels premium”, “more polished” and numeric self-ratings are not evidence. A missing preference decision is different from a defect. Changing an identified imperfection is not proof the overall composition improved. Test your critique against the rejected Merchant B pilot: it passed layout and interaction checks but lost to A.
+For each finding, name the screen/state, visible evidence, player consequence and smallest useful correction. “Feels premium”, “more polished” and numeric self-ratings are not evidence. A missing preference decision is different from a defect. Do not reward a candidate for implementing your suggestions. Reassess the full image independently; a list of changes, more visible information or passing checks cannot establish visual improvement. Test your critique against the rejected Merchant B pilot: it passed layout and interaction checks but lost to A.
 
 After correction, inspect fresh captures. Report separately: functional checks; rendered evidence inspected; unresolved aesthetic choice; user acceptance. Never call CI screenshots aesthetic approval, infer user preference from silence, or label your own candidate as a golden reference.
 

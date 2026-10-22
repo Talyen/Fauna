@@ -1,0 +1,107 @@
+{
+  "status": "User-directed composition; aesthetic acceptance pending",
+  "sourceSha256": {
+    "src/ui/design-system.css": "6b9eace44658a32722063ebcaf8a0279531af9318e227ef709e4221733058819",
+    "src/ui/expedition/support-screen.tsx": "7447b2d13d5e9225d3aaeaed579b45e4d197ee7318134bf891d9b3df6e4db8fe",
+    "src/ui/expedition/expedition.css": "0787a0622214574e7d61d52c76805d37d5e05a36a3a86bf965baade36b2d5214",
+    "src/ui/tokens.css": "f912b53bf6402eda4d5d350892f4fe63e4d4d1eae4365fee9a9038e3168348fa"
+  },
+  "seed": 7,
+  "motion": "reduce",
+  "browser": "Chromium headless via Playwright",
+  "evidence": [
+    {
+      "file": "merchant-1920-1.png",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "errors": [],
+      "layoutFailures": []
+    },
+    {
+      "file": "inspection-1920-1.png",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "errors": [],
+      "layoutFailures": []
+    },
+    {
+      "file": "purchased-1920-1.png",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "errors": [],
+      "layoutFailures": []
+    },
+    {
+      "file": "settings-benchmark-1920-1.png",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "errors": [],
+      "layoutFailures": []
+    },
+    {
+      "file": "merchant-1280-1.png",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "errors": [],
+      "layoutFailures": []
+    },
+    {
+      "file": "inspection-1280-1.png",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "errors": [],
+      "layoutFailures": []
+    },
+    {
+      "file": "purchased-1280-1.png",
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "errors": [],
+      "layoutFailures": []
+    },
+    {
+      "file": "merchant-1280-1.25.png",
+      "width": 1280,
+      "height": 720,
+      "scale": 1.25,
+      "errors": [],
+      "layoutFailures": []
+    },
+    {
+      "file": "inspection-1280-1.25.png",
+      "width": 1280,
+      "height": 720,
+      "scale": 1.25,
+      "errors": [],
+      "layoutFailures": []
+    },
+    {
+      "file": "purchased-1280-1.25.png",
+      "width": 1280,
+      "height": 720,
+      "scale": 1.25,
+      "errors": [],
+      "layoutFailures": []
+    },
+    {
+      "file": "unavailable-1280-1.25.png",
+      "width": 1280,
+      "height": 720,
+      "scale": 1.25,
+      "layoutFailures": []
+    }
+  ],
+  "imagesSha256": {
+    "merchant-current-1280-large.png": "5c41c771b200ee28df1932b029214b5838d78bd0c9d23ecf18675ec489772c3a",
+    "merchant-current-1280.png": "d4bda81f1e3ec11ca566e89c3456ad1e888de09dd4e5dcd979e6e38af3198315",
+    "merchant-current-1920.png": "c8f44ffd953d3c9cf6a92e54a1a6af6b029aadea0a44a357e5a4487e71c12e32",
+    "merchant-current-inspection.png": "b521dd0fc2ee0df13c94cb413629c2c250e7a95e18040277a6217a147d1cdf8e"
+  }
+}

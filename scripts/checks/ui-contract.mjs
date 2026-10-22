@@ -55,6 +55,12 @@ export function sourceViolations(file, source) {
       fail("Shared shadcn state styling belongs in src/ui/design-system.css; screens own layout only.");
     for (const [, selector, declarations] of source.matchAll(/([^{}]+)\{([^{}]*)\}/g))
       if (
+        file !== "src/ui/design-system.css" &&
+        /\.control-primary\b/.test(selector) &&
+        /(?:^|;)\s*color\s*:/.test(declarations)
+      )
+        fail("Primary control foreground belongs in src/ui/design-system.css.");
+      else if (
         selector.includes(":hover") &&
         /(?:\.selected|aria-(?:pressed|selected)=["']true|data-state=["'](?:active|checked))/.test(
           selector,

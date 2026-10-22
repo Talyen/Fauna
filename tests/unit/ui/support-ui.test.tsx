@@ -70,7 +70,9 @@ it("labels the wallet and prices as Gold", () => {
   render(<SupportScreen game={requireMerchant(game)} send={() => true} />);
   expect(screen.getAllByText("20 Gold")[0]).toBeTruthy();
   expect(screen.getAllByRole("button", { name: /^Buy .+ for 20 Gold$/ })).toHaveLength(3);
-  expect(screen.getByText("Limit 1 per customer")).toBeTruthy();
+  expect(screen.getByText("Limit 1")).toBeTruthy();
+  expect(screen.queryByRole("heading", { level: 2 })).toBeNull();
+  expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(3);
 });
 
 it("keeps unavailable offers inspectable and rejects purchases with their specific reason", () => {

@@ -1,3 +1,4 @@
+import { expectControlColors } from "./support/control-colors";
 import { LAYOUT_CASES, REVIEW_VIEWPORTS } from "./support/layout-contract";
 import { captureScreen } from "./support/rendered-evidence";
 import { test, expect } from "@playwright/test";
@@ -169,12 +170,22 @@ for (const [width, height, scale] of LAYOUT_CASES)
       { save: JSON.stringify(fixture), scale },
     );
     await page.goto("/");
+    await expectControlColors(
+      page.getByRole("button", { name: "Continue", exact: true }),
+      "--primary-foreground",
+    );
     await page.getByRole("button", { name: "Continue", exact: true }).click();
     await page.getByRole("button", { name: "Visit Boon Merchant", exact: true }).click();
     const entered = accept(fixture, { type: "enterSupport", visit });
     await expect(page.getByRole("heading", { name: "Boon Merchant", exact: true })).toBeVisible();
-    await expect(page.getByText("Limit 1 per customer", { exact: true })).toBeVisible();
+    await expect(page.getByText("Limit 1", { exact: true })).toBeVisible();
     await expect(page.getByRole("button", { name: /^Buy .+ for 20 Gold$/ })).toHaveCount(3);
+    await expect(page.locator(".merchant-offer h2, .merchant-offer > p:not(.merchant-status)")).toHaveCount(
+      0,
+    );
+    for (const control of await page.getByRole("button", { name: /^Buy / }).all()) {
+      await expectControlColors(control, "--foreground");
+    }
     await captureScreen(page, { path: `reports/boon-merchant-shelf-${width}.png`, fullPage: true });
     await page
       .getByRole("button", { name: /^Buy .+ for 20 Gold$/ })

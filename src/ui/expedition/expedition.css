@@ -338,16 +338,23 @@
 
 /* Match Alchemy's centered three-item shelf and aligned price controls. */
 .merchant-heading {
+  width: min(var(--screen-heading-width), 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--screen-item-gap);
 }
+.merchant-context {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--screen-section-gap);
+  width: 100%;
+}
 .merchant-wallet {
   display: flex;
   align-items: center;
   gap: var(--screen-item-gap);
-  color: var(--gold-pale);
   font-variant-numeric: tabular-nums;
 }
 .merchant-wallet svg {
@@ -366,15 +373,8 @@
 .merchant-offer {
   width: var(--art-portrait-width);
 }
-.merchant-offer h2 {
-  min-height: calc(var(--text-name) * 2.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 .merchant-offer > .merchant-price {
   width: 100%;
-  color: var(--gold-pale);
   font-variant-numeric: tabular-nums;
 }
 .merchant-leave {

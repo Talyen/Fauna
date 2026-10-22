@@ -16,10 +16,11 @@ if (!identity.ok || !/^[a-f0-9-]{36}$/.test(await identity.text()))
 const output = path.join(root, "reports/visual-quality", label);
 await mkdir(output, { recursive: true });
 const server = await createServer({ root, server: { middlewareMode: true }, appType: "custom" });
-let fixture, battle, unavailable, layoutViolations;
+let fixture, battle, unavailable, layoutViolations, expectControlColors;
 try {
   const { createGame } = await server.ssrLoadModule("/src/game/engine.ts");
   const { accept, winBattle, recruitChoice, run } = await server.ssrLoadModule("/tests/support/game.ts");
+  ({ expectControlColors } = await server.ssrLoadModule("/tests/e2e/support/control-colors.ts"));
   ({ layoutViolations } = await server.ssrLoadModule("/tests/e2e/support/layout-contract.ts"));
   fixture = accept(accept(createGame(7), { type: "draft", species: createGame(7).starterOffers[0] }), {
     type: "start",
@@ -52,6 +53,10 @@ try {
         { save: JSON.stringify(fixture), scale },
       );
       await page.goto(origin);
+      await expectControlColors(
+        page.getByRole("button", { name: "Continue", exact: true }),
+        "--primary-foreground",
+      );
       await page.getByRole("button", { name: "Continue", exact: true }).click();
       await page.getByRole("button", { name: "Visit Boon Merchant", exact: true }).click();
       async function capture(name, resting = true) {
@@ -66,6 +71,11 @@ try {
         await page.screenshot({ path: path.join(output, file) });
         evidence.push({ file, width, height, scale, errors: [...errors], layoutFailures: failures });
         expect(errors).toEqual([]);
+      }
+      for (const control of await page.getByRole("button", { name: /^Buy / }).all()) {
+        await expectControlColors(control, "--foreground");
+        await control.hover();
+        await expectControlColors(control, "--foreground");
       }
       await capture("merchant");
       const before = JSON.parse(await page.evaluate(() => localStorage.getItem("fauna.save.v1")));
