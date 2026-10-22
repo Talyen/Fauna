@@ -148,13 +148,7 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
     )
       error(boss.id, "encounter", "Invalid or repeated boss encounter.");
     encounters.add(boss.encounter);
-    if (
-      !boss.name.trim() ||
-      !Number.isSafeInteger(boss.health) ||
-      boss.health < 1 ||
-      !Number.isSafeInteger(boss.damage) ||
-      boss.damage < 0
-    )
+    if (!boss.name.trim() || !Number.isSafeInteger(boss.damage) || boss.damage < 0)
       error(boss.id, "stats", "Invalid boss name or stats.");
   }
   for (const encounter of ENCOUNTERS)

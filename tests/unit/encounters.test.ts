@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
 import { JOURNEY_LENGTH, encounterSource, encounterPacks } from "../../src/game/encounters";
+import { ENCOUNTERS, species } from "../../src/game/content";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { recruitChoice, accept, winBattle } from "./helpers";
 
@@ -39,6 +40,44 @@ describe("journey encounters", () => {
     expect(decodeSave(encodeSave(battle))).toEqual(battle);
   });
 
+  it("scales species base Health and encounter damage additively for all enemies", () => {
+    const initial = start();
+    for (let encounter = 0; encounter < JOURNEY_LENGTH; encounter++) {
+      for (let pack = 0; pack < encounterPacks(encounter).length; pack++) {
+        const state = produce(initial, (draft) => {
+          draft.encounter = encounter;
+          draft.expedition!.pack = pack;
+        });
+        const battle = enter(state);
+        for (const enemy of battle.battle!.enemies) {
+          const baseDamage =
+            encounter === 3
+              ? enemy.id === "enemy-0"
+                ? 5
+                : 3
+              : encounter === 7
+                ? enemy.id === "enemy-0"
+                  ? 10
+                  : 3
+                : [2, 3, 4, 0, 4, 4, 4][encounter]!;
+          const health = Math.round(species(enemy.species).health * (1 + encounter * 0.1));
+          expect(enemy.health).toBe(health);
+          expect(enemy.maxHealth).toBe(health);
+          expect(enemy.damage).toBe(Math.round(baseDamage * (1 + encounter * 0.1)));
+        }
+      }
+    }
+    for (let encounter = 0; encounter < ENCOUNTERS.length; encounter++) {
+      const source = encounterSource({ expedition: null, encounter });
+      for (const [index, enemy] of source.enemies.entries()) {
+        expect(enemy.health).toBe(Math.round(species(enemy.species).health * (1 + encounter * 0.1)));
+        expect(enemy.damage).toBe(
+          Math.round(ENCOUNTERS[encounter]!.enemies[index]!.damage * (1 + encounter * 0.1)),
+        );
+      }
+    }
+  });
+
   it("uses the same ordinary enemy pool throughout the journey", () => {
     for (const encounter of [0, 1, 2, 4, 5, 6]) expect(encounterPacks(encounter)).toEqual(encounterPacks(0));
   });
@@ -59,6 +98,7 @@ describe("journey encounters", () => {
       expect(s.support?.encounter ?? null).toBe([1, 5].includes(index) ? index : null);
       expect(encounterSource(s).name).toBe(index % 4 === 3 ? "Boss" : "Combat");
       expect(encounterSource(s).enemies).toHaveLength(Math.min(3, index + 1));
+      expect(decodeSave(encodeSave(enter(s)))).toEqual(enter(s));
       const route = s.expedition;
       s = winBattle(enter(s));
       expect(["recruit", "boon", "teamSelection", "victory"]).toContain(s.phase);
@@ -98,6 +138,9 @@ describe("journey encounters", () => {
         d.battle!.enemies[0]!.damage++;
       },
       (d: typeof s) => {
+        d.battle!.enemies[0]!.maxHealth++;
+      },
+      (d: typeof s) => {
         d.expedition!.pack = null;
       },
     ])
@@ -105,7 +148,7 @@ describe("journey encounters", () => {
   });
 
   it("rejects obsolete destination and biome saves", () => {
-    for (const version of [16, 17, 18])
+    for (const version of [16, 17, 18, 38])
       expect(() => decodeSave(JSON.stringify({ ...start(), version }))).toThrow();
   });
 

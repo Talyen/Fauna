@@ -28,7 +28,7 @@ These are the agreed directions from the design review. They supersede the proto
 - Combat and Boss use blank 4:3 artwork with the encounter type below it. Campfire uses Rest beneath its location art; entering it commits a saved visit and exposes Rest as its only option. A quiet heading shows the encounter number out of eight.
 - Activating Combat or Boss immediately commits the saved encounter and starts battle. There is no enemy preview, inspection dialog or separate Begin battle action. Creature and action inspection remain available during battle.
 - Seeded gameplay chooses and saves one enemy pack when entering the encounter screen. Menus, support visits and reload never reroll enemies or consume randomness.
-- The shared enemy pool varies between runs. Initial enemy stats grow with encounter progress, with a one-enemy first battle and two-enemy second battle. These values are playtest tuning, not final balance.
+- The shared enemy pool varies between runs. Every enemy, including boss placeholders and escorts, uses its species’ authored base Health, matching recruited creatures. Health and authored encounter damage gain an additive 10% of their base per room after the first: 100% in room 1 through 170% in room 8, rounded to the nearest whole number. Support visits do not advance this scaling. Enemy damage retains encounter tuning, with a one-enemy first battle and two-enemy second battle. These values are playtest tuning, not final balance.
 
 ## Keyword XP and talents
 

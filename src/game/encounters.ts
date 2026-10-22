@@ -46,7 +46,6 @@ export const BOSSES = [
     encounter: 3,
     name: "The Briar Warden",
     pack: ["emberback", "mossguard", "pollenmoth"],
-    health: 36,
     damage: 5,
   },
   {
@@ -54,23 +53,17 @@ export const BOSSES = [
     encounter: 7,
     name: "The Hollow Crown",
     pack: ["prismram", "emberback", "pollenmoth"],
-    health: 68,
     damage: 10,
   },
 ] as const;
-const COMBAT_STATS = [
-  { health: 8, damage: 2 },
-  { health: 13, damage: 3 },
-  { health: 18, damage: 4 },
-  null,
-  { health: 20, damage: 4 },
-  { health: 22, damage: 4 },
-  { health: 24, damage: 4 },
-  null,
-] as const;
+const COMBAT_DAMAGE = [2, 3, 4, null, 4, 4, 4, null] as const;
 export function encounterPacks(encounter: number) {
   const boss = BOSSES.find((entry) => entry.encounter === encounter);
   return boss ? [boss.pack] : COMBAT_PACKS;
+}
+
+function scaleEnemyStat(base: number, encounter: number) {
+  return Math.round((base * (10 + encounter)) / 10);
 }
 
 /** Authored encounters also support standalone battle fixtures. */
@@ -85,18 +78,30 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
   }[];
 } {
   const route = game.expedition;
-  if (!route) return ENCOUNTERS[game.encounter]!;
+  if (!route) {
+    const source = ENCOUNTERS[game.encounter]!;
+    return {
+      ...source,
+      enemies: source.enemies.map((enemy) => ({
+        ...enemy,
+        health: scaleEnemyStat(enemy.health, game.encounter),
+        damage: scaleEnemyStat(enemy.damage, game.encounter),
+      })),
+    };
+  }
   const pack = route.pack === null ? undefined : encounterPacks(game.encounter)[route.pack];
   if (!pack) throw new Error("Missing encounter pack.");
   const boss = BOSSES.find((entry) => entry.encounter === game.encounter);
-  const ordinary = COMBAT_STATS[game.encounter]!;
-  const escort = { health: 18, damage: 3 };
   return {
     name: boss ? "Boss" : "Combat",
     enemies: pack.slice(0, Math.min(3, game.encounter + 1)).map((kind, index) => ({
       name: boss && index === 0 ? boss.name : species(kind).name,
       species: kind,
-      ...(boss ? (index === 0 ? { health: boss.health, damage: boss.damage } : escort) : ordinary),
+      health: scaleEnemyStat(species(kind).health, game.encounter),
+      damage: scaleEnemyStat(
+        boss ? (index === 0 ? boss.damage : 3) : COMBAT_DAMAGE[game.encounter]!,
+        game.encounter,
+      ),
       damageType:
         kind === "shadebrim"
           ? "freeze"
