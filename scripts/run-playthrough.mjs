@@ -1,9 +1,9 @@
 import { fork } from "node:child_process";
 import { randomUUID } from "node:crypto";
-import { readFile, mkdir, writeFile, appendFile } from "node:fs/promises";
+import { readFile, writeFile, appendFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { identity as sourceIdentity } from "./lib/tool-runtime.mjs";
+import { identity as sourceIdentity, reportDirectory } from "./lib/tool-runtime.mjs";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const args = process.argv.slice(2);
 if (!args.includes("--worker")) {
@@ -72,10 +72,7 @@ if (!args.includes("--worker")) {
       !FIRST_RUN_STARTERS.includes(config.starter)
     )
       throw new Error("Invalid scenario configuration.");
-    const output = path.resolve(root, value("--out", "reports/playthrough"));
-    if (!output.startsWith(path.join(root, "reports") + path.sep))
-      throw new Error("Reports must stay under reports/.");
-    await mkdir(output, { recursive: true });
+    const output = await reportDirectory(value("--out"), "reports/playthrough");
     const baseline = value("--compare") ? JSON.parse(await readFile(value("--compare"), "utf8")) : undefined;
     const journalPath = path.join(output, `journal-${randomUUID()}.jsonl`);
     const { createGame } = await server.ssrLoadModule("/src/game/engine.ts");

@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { readFile, readdir, mkdir } from "node:fs/promises";
+import { readFile, readdir, mkdir, lstat } from "node:fs/promises";
 import path from "node:path";
 export const ROOT = path.resolve(import.meta.dirname, "../..");
 export const hash = (value) => createHash("sha256").update(value).digest("hex");
@@ -31,10 +31,23 @@ export async function runtime() {
     appType: "custom",
   });
 }
-export async function reportDirectory(input, fallback) {
-  const directory = path.resolve(ROOT, input ?? fallback);
-  if (!directory.startsWith(path.join(ROOT, "reports") + path.sep))
+export async function reportDirectory(input, fallback, { root = ROOT } = {}) {
+  const directory = path.resolve(root, input ?? fallback);
+  if (!directory.startsWith(path.join(root, "reports") + path.sep))
     throw new Error("Reports must remain under reports/.");
-  await mkdir(directory, { recursive: true });
+  // Check each component before creating children so an existing symlink cannot
+  // redirect even mkdir's side effects into another checkout or source tree.
+  let current = root;
+  for (const component of path.relative(root, directory).split(path.sep)) {
+    current = path.join(current, component);
+    try {
+      await mkdir(current);
+    } catch (error) {
+      if (error.code !== "EEXIST") throw error;
+    }
+    const entry = await lstat(current);
+    if (!entry.isDirectory() || entry.isSymbolicLink())
+      throw new Error("Reports must remain under reports/ without symlink directories.");
+  }
   return directory;
 }

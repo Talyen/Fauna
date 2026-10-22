@@ -295,7 +295,7 @@ test("controller reconnection and background input cannot activate journey comma
   await pad.frames();
   await pad.press(3);
   await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
-  expect(await revision()).toBe(before + 1);
+  await expect.poll(revision).toBe(before + 1);
 });
 
 test("mouse use cancels held-stick navigation until release", async ({ page }) => {
