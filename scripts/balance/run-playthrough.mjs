@@ -112,7 +112,9 @@ async function worker(args) {
     const summary = {
       complete: bundle.complete,
       reason: bundle.reason,
+      diagnostics: bundle.diagnostics,
       identity,
+      policyVersion: bundle.policyVersion,
       config,
       actions: bundle.steps.length,
       results: bundle.results,

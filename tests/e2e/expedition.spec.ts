@@ -45,8 +45,10 @@ test("one starter grows a lineup through a full expedition", async ({ page }) =>
   await activate(page.getByRole("button", { name: `Recruit ${name}`, exact: true }));
   await activate(page.getByRole("button", { name: "Begin journey", exact: true }));
   expect((await state(page)).lineup).toEqual(["ally-0"]);
+  let deployedThree = false;
   for (let i = 0; i < FULL_JOURNEY_COMMAND_BUDGET; i++) {
     const s = await state(page);
+    deployedThree ||= s.team.length === 3;
     if (s.phase === "victory") break;
     expect(s.phase).not.toBe("defeat");
     expect(s.reward?.outcome).not.toBe("defeat");
@@ -65,5 +67,7 @@ test("one starter grows a lineup through a full expedition", async ({ page }) =>
     } else await step(page, activate, s, s.phase === "battle" ? chooseBattleCommand(s) : policy(s));
   }
   await expect(page.getByRole("heading", { name: "Journey complete", exact: true })).toBeVisible();
-  expect((await state(page)).team).toHaveLength(3);
+  const final = await state(page);
+  expect(deployedThree).toBe(true);
+  expect(final.team).toHaveLength(species(final.team[0]!.species).legendary ? 1 : 3);
 });

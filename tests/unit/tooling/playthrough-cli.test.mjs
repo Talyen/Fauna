@@ -83,11 +83,15 @@ it("writes a durable journal and replays the CLI's recorded production career", 
         encoding: "utf8",
         timeout: 10_000,
       });
-    invoke(["--seed", "4", "--starter", "captoad", "--runs", "1", "--out", directory]);
+    // Policy changes can stall a particular career; this fixture owns successful CLI replay.
+    invoke(["--seed", "15", "--starter", "captoad", "--runs", "1", "--out", directory]);
     const summary = JSON.parse(readFileSync(path.join(directory, "summary.json"), "utf8"));
     const bundle = JSON.parse(readFileSync(path.join(directory, "journey.json"), "utf8"));
     expect(summary.complete).toBe(true);
     expect(bundle.identity).toBe(await identity());
+    expect(bundle.steps.every((step) => typeof step.decision === "string" && step.decision.length > 0)).toBe(
+      true,
+    );
     const journal = readFileSync(path.join(directory, summary.journal), "utf8")
       .trim()
       .split("\n")

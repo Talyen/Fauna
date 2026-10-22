@@ -6,9 +6,15 @@ import { actionValue, cardCost, physicalBonus } from "../game/ability-rules";
 import { definition, species } from "../game/content";
 import type { Command, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 23;
+export const BATTLE_POLICY_VERSION = 24;
+const BATTLE_FINISH_PRIORITY = 1_000_000_000;
+export interface BattleChoice {
+  command: Command;
+  score: number;
+  reason: string;
+}
 /** Only visible information enters scoring; no forecasts or gameplay RNG are sampled. */
-export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
+export function rankedBattleChoices(state: GameState, autoEndTurn = true): BattleChoice[] {
   if (state.phase !== "battle") return [];
   const order = <T extends { id: string }>(items: T[]) => [...items].sort((a, b) => a.id.localeCompare(b.id));
   const outgoing = pendingReplacement(state);
@@ -18,18 +24,25 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
   if (outgoing && incoming)
     return [
       {
-        type: "swap",
-        activeId: outgoing.id,
-        reserve: incoming.id,
-        ...(autoEndTurn ? {} : { autoEndTurn: false }),
+        command: {
+          type: "swap",
+          activeId: outgoing.id,
+          reserve: incoming.id,
+          ...(autoEndTurn ? {} : { autoEndTurn: false }),
+        },
+        score: BATTLE_FINISH_PRIORITY,
+        reason: "Replace a knocked-out creature with a living, preferably uncontrolled backup",
       },
     ];
-  const options: { command: Command; score: number; key: string }[] = [];
-  const add = (cardId: string, score: number, targetId?: string) => {
+  const options: (BattleChoice & { key: string })[] = [];
+  const add = (cardId: string, score: number, targetId?: string, reason?: string) => {
     if (score > 0)
       options.push({
         command: { type: "play", cardId, targetId, autoEndTurn },
         score,
+        reason:
+          reason ??
+          `Use ${definition(state.cards.find((card) => card.id === cardId)!.definitionId).name} for its visible benefit`,
         key: `${cardId}:${targetId ?? ""}`,
       });
   };
@@ -39,9 +52,7 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
     const def = definition(card.definitionId);
     if (!actor || actor.health === 0 || controlled(actor) || cardCost(card, state) > state.battle.mana)
       continue;
-    const value =
-      actionValue(card, actor, state) +
-      (def.effect === "attack" && def.damageType === "physical" ? physicalBonus(actor, state) : 0);
+    const value = actionValue(card, actor, state);
     if (def.effect === "procession") {
       const echoes = (state.battle.minions ?? []).filter(
         (unit) => unit.minion.ownerId === actor.id && unit.health > 0,
@@ -51,21 +62,90 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
       add(id, def.effect === "pearl" ? 500 : state.cards.length < 256 ? 400 : 0);
     } else if (def.effect === "attack") {
       const enemies = battlefield(state, "enemy").filter((e) => e.health > 0);
-      const score = (enemy: (typeof enemies)[number]) => {
-        const physical = def.damageType === "physical" || def.damageType === "stun";
-        // Rank ordinary landed hits; do not roll Dodge or Critical outcomes.
-        const damage = value * (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1);
-        const effective = Math.max(0, damage - enemy.block - (physical ? enemy.combat.armor : 0));
-        return (effective >= enemy.health ? 2000 : 1000) + Math.min(value, enemy.health);
+      const progress = (enemy: (typeof enemies)[number]) => {
+        // Ordinary primary hits only; chance effects and hidden RNG are never forecast.
+        const outcomes = [def.damageType, ...(def.alternateDamageType ? [def.alternateDamageType] : [])].map(
+          (type) => {
+            const damage =
+              value * (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1) +
+              (type === "physical" ? physicalBonus(actor, state) : 0);
+            const armored = type === "physical" || type === "stun";
+            const armor = armored
+              ? Math.max(0, enemy.combat.armor - (state.boons.includes("sundering-charm") ? 2 : 0))
+              : 0;
+            const lost =
+              type === "freeze" && enemy.combat.nullifyFreeze ? 0 : Math.max(0, damage - enemy.block - armor);
+            const blocked = Math.min(damage, enemy.block);
+            const eroded =
+              armored && state.boons.includes("sundering-charm") ? Math.min(2, enemy.combat.armor) : 0;
+            const main = !enemy.minion;
+            const lethal = lost >= enemy.health;
+            const score =
+              lost > 0
+                ? (main ? 1000 : 250) + (lethal ? (main ? 1000 : 250) : 0) + Math.min(lost, enemy.health)
+                : blocked > 0
+                  ? (main ? 500 : 125) + blocked
+                  : eroded > 0
+                    ? 300 + eroded
+                    : 0;
+            // A blocked primary hit can still carry useful authored follow-up effects.
+            const extra = def.effects?.some((effect) =>
+              ["damage", "purge", "meltArmor", "blind", "draw", "mana", "status"].includes(effect.kind),
+            )
+              ? 200
+              : 0;
+            return { score: Math.max(score, extra), lethal };
+          },
+        );
+        return {
+          score: outcomes.reduce((sum, outcome) => sum + outcome.score, 0) / outcomes.length,
+          lethal: outcomes.every((outcome) => outcome.lethal),
+        };
       };
+      const remaining = state.battle.enemies.filter((enemy) => enemy.health > 0);
+      const winning =
+        !actor.combat?.blind &&
+        remaining.length > 0 &&
+        (def.target === "allEnemies"
+          ? remaining.every((enemy) => progress(enemy).lethal)
+          : def.target === "randomEnemy"
+            ? enemies.every((enemy) => !enemy.minion && progress(enemy).lethal) && remaining.length === 1
+            : false);
       if (def.target === "allEnemies")
         add(
           id,
-          enemies.reduce((sum, enemy) => sum + score(enemy), 0),
+          (winning ? BATTLE_FINISH_PRIORITY : 0) +
+            enemies.reduce((sum, enemy) => sum + progress(enemy).score, 0),
+          undefined,
+          winning
+            ? "Attempt to finish every remaining enemy on ordinary hits"
+            : "Damage enemies; give roster creatures priority over Minions",
         );
       else if (def.target === "randomEnemy")
-        add(id, enemies.length ? enemies.reduce((sum, enemy) => sum + score(enemy), 0) / enemies.length : 0);
-      else for (const enemy of enemies) add(id, score(enemy), enemy.id);
+        add(
+          id,
+          (winning ? BATTLE_FINISH_PRIORITY : 0) +
+            (enemies.length
+              ? enemies.reduce((sum, enemy) => sum + progress(enemy).score, 0) / enemies.length
+              : 0),
+          undefined,
+          "Use the average visible benefit across random targets",
+        );
+      else
+        for (const enemy of enemies) {
+          const finish =
+            !actor.combat?.blind && remaining.length === 1 && !enemy.minion && progress(enemy).lethal;
+          add(
+            id,
+            (finish ? BATTLE_FINISH_PRIORITY : 0) + progress(enemy).score,
+            enemy.id,
+            finish
+              ? "Attempt to finish the last enemy before healing or attacking Minions"
+              : enemy.minion
+                ? "Reduce a Minion threat"
+                : "Make progress against an enemy creature",
+          );
+        }
     } else if (def.effect === "heal") {
       const allies = state.team.filter((c) => c.health > 0);
       const healingBenefit = (ally: (typeof allies)[number]) => {
@@ -151,7 +231,15 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
             enemy.combat.nullify ||
             enemy.combat.nullifyFreeze),
       ).length;
-      add(id, useful > 0 ? 160 + useful : 0);
+      const defense = state.battle.enemies.some(
+        (enemy) => enemy.health > 0 && (enemy.block > 0 || enemy.combat.armor > 0),
+      );
+      add(
+        id,
+        useful > 0 ? (defense ? 1700 : 160) + useful : 0,
+        undefined,
+        "Remove visible defenses before spending Mana on blocked attacks",
+      );
     } else if (def.effect === "teamCleanse") {
       add(id, 150);
     } else if (
@@ -185,7 +273,12 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
       }
     }
   }
-  return options.sort((a, b) => b.score - a.score || a.key.localeCompare(b.key)).map((o) => o.command);
+  return options
+    .sort((a, b) => b.score - a.score || a.key.localeCompare(b.key))
+    .map(({ command, score, reason }) => ({ command, score, reason }));
+}
+export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
+  return rankedBattleChoices(state, autoEndTurn).map((choice) => choice.command);
 }
 export function chooseBattleCommand(state: GameState, autoEndTurn = true): Command {
   return battleChoices(state, autoEndTurn)[0] ?? { type: "endTurn" };

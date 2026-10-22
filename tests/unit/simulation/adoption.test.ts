@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { createDiagnostics } from "../../../src/application/diagnostics";
 import { runJourney, type JourneyConfig } from "../../../src/tooling/playthrough";
+import { teamRun } from "../../support/game";
+import { encodeSave } from "../../../src/game/save";
 import { contentCatalog, validateCatalog } from "../../../src/game/content-validation";
 const config: JourneyConfig = {
   // Complete current-catalog journeys; arbitrary lineups may legitimately exhaust the turn budget.
@@ -27,6 +29,22 @@ describe("headless production sessions", () => {
     await expect(runJourney(config, "fixture", journey.initial, changed)).rejects.toThrow("diverged");
     await expect(runJourney(config, "different", journey.initial, journey)).rejects.toThrow("identity");
   }, 30000);
+  it("retains decision reasons and live battle diagnostics when an action budget is exhausted", async () => {
+    const initial = encodeSave(teamRun(42, ["mossguard"]));
+    const journey = await runJourney({ ...config, runs: 1, maxActions: 1 }, "fixture", initial);
+    expect(journey.complete).toBe(false);
+    expect(journey.results).toEqual([]);
+    expect(journey.diagnostics).toMatchObject({ encounter: 0, stalled: false });
+    expect(journey.steps[0]!.decision.length).toBeGreaterThan(0);
+    const replay = await runJourney(
+      { ...config, runs: 1, maxActions: 1, resumeEvery: 1 },
+      "fixture",
+      initial,
+      journey,
+    );
+    expect(replay.steps).toEqual(journey.steps);
+    expect(replay.diagnostics).toEqual(journey.diagnostics);
+  });
   it("reports exhausted budgets as incomplete", async () => {
     const journey = await runJourney({ ...config, maxActions: 2 }, "fixture");
     expect(journey.complete).toBe(false);
