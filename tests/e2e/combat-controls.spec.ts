@@ -61,6 +61,8 @@ test("combat preferences, autoplay pause and manual takeover", async ({ page }) 
   await autoplay.click();
   await expect(autoplay).toHaveAttribute("aria-pressed", "true");
   await page.getByRole("button", { name: "Open menu" }).click();
+  await expect(page.getByRole("dialog", { name: "Pause menu" })).toBeVisible();
+  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
   const revision = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).revision);
   await page.waitForTimeout(900);
   expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).revision)).toBe(
