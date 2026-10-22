@@ -54,6 +54,16 @@ afterEach(() => {
 });
 
 describe("documentation contracts", () => {
+  it("keeps archives and task evidence historical while validating maintained links into them", () => {
+    const root = repo();
+    put(root, "Docs/archive/old.md", "# Historical\n`src/retired.ts`\n[Old](gone.md)\nnpm run retired\n");
+    put(root, "Docs/task-evidence/task.md", "# Task evidence\n`src/renamed.ts`\nnpm run old-command\n");
+    expect(checkDocumentation(root)).toEqual([]);
+    put(root, "README.md", "# Fauna\n[Workflow](Docs/workflow.md)\n[History](Docs/archive/old.md#missing)\n");
+    expect(checkDocumentation(root)).toEqual(["README.md: missing heading Docs/archive/old.md#missing"]);
+    put(root, "Docs/new-guide.md", "# Maintained guide\n");
+    expect(checkDocumentation(root).join("\n")).toContain("Docs/new-guide.md: document is unreachable");
+  });
   it("detects broken links, commands, anchors, paths and orphaned documents including untracked docs", () => {
     const root = repo();
     expect(checkDocumentation(root)).toEqual([]);

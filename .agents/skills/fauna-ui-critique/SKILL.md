@@ -5,9 +5,9 @@ description: Critique rendered Fauna UI changes for composition, copy, artwork i
 
 # Fauna UI critique
 
-Use [current UI contracts](../../../Docs/UI.md) and the [reference pack](../../../design/visual-quality/README.md). Inspect actual images and the changed player flow. If you only have source, request or capture the permitted focused preview and label the missing visual evidence; do not issue aesthetic approval from code.
+Use [current UI contracts](../../../Docs/UI.md), the affected screen specification and its review tier. For composition or art-direction work, open the relevant images in the [reference pack](../../../design/visual-quality/README.md). Inspect actual images and the changed player flow. If you only have source, request or capture the permitted focused preview and label the missing visual evidence; do not issue aesthetic approval from code.
 
-First inspect the full frame without reading the author's rationale. Assess the composition against the requested visual direction and accepted references before enumerating possible changes. Identify the visual focus and how the player accesses necessary information. Then compare against the previous version and the relevant visual reference at the same state and size.
+First inspect the full frame without reading the author's rationale. Assess the composition against the requested visual direction and accepted references before enumerating possible changes. Identify the visual focus and how the player accesses necessary information. Compare against the previous version and visual reference when required by the [review tier](../../../Docs/UI.md#required-review); small adjustments do not require an extra baseline or reference study.
 
 Separate observed defects from design hypotheses; do not promote your own preferred treatment to a requirement.
 

@@ -1,21 +1,31 @@
 import path from "node:path";
-import { lstatSync, readFileSync, existsSync } from "node:fs";
+import { lstatSync, readFileSync, existsSync, realpathSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import { execFileSync, spawnSync } from "node:child_process";
 import { boundaryViolations } from "./boundaries.mjs";
 import { sourceViolations } from "./ui-contract.mjs";
+import { taskBase } from "../lib/task-selection.mjs";
+import {
+  verificationIdentity,
+  verified,
+  clearVerification,
+  recordVerification,
+} from "./verification-record.mjs";
+import { affectedTests } from "./affected-tests.mjs";
+import { matchingDependencies, dependenciesAvailable } from "../dependencies.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "../..");
-const CI_NOTICE =
-  "Selected local checks. CI owns complete static, unit, build, browser and desktop validation.";
+const CI_NOTICE = "Task checks. CI owns complete static, unit, build, browser and desktop validation.";
 
 export function parseCheckArgs(args) {
   const paths = [];
   let base = null,
-    diff = false;
+    diff = false,
+    plan = false;
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
-    if (arg === "--diff") diff = true;
+    if (arg === "--plan") plan = true;
+    else if (arg === "--diff" || arg === "--working-tree") diff = true;
     else if (arg === "--base") {
       if (base || !args[i + 1] || args[i + 1].startsWith("-"))
         throw new Error("--base requires one Git commit or branch.");
@@ -23,8 +33,9 @@ export function parseCheckArgs(args) {
     } else if (arg.startsWith("-")) throw new Error(`Unknown local check option: ${arg}`);
     else paths.push(arg);
   }
+  if (base && diff) throw new Error("Choose --base or --working-tree, not both.");
   if (paths.length && (base || diff)) throw new Error("Choose explicit paths or a Git diff, not both.");
-  return { paths, base: base ?? "HEAD" };
+  return { paths, base: base ?? (diff ? "HEAD" : null), ...(plan ? { plan: true } : {}) };
 }
 
 function git(root, args) {
@@ -59,7 +70,7 @@ export function selectedPaths(root, selection) {
         throw new Error(`No repository files match: ${input}`);
     return files;
   }
-  const base = git(root, ["rev-parse", "--verify", "--end-of-options", `${selection.base}^{commit}`]).trim();
+  const base = taskBase(root, selection.base);
   return [
     ...new Set(
       [
@@ -72,11 +83,26 @@ export function selectedPaths(root, selection) {
 
 export function formatSelection(root, paths) {
   const files = paths.filter((file) => lstatSync(path.join(root, file), { throwIfNoEntry: false })?.isFile());
-  const bounded =
-    files.length <= 50 &&
-    files.every((file) => lstatSync(path.join(root, file)).size <= 256_000) &&
-    Buffer.byteLength(JSON.stringify(files)) <= 8000;
-  return { files: bounded ? files : [], deferred: !bounded };
+  const batches = [];
+  let batch = [],
+    bytes = 0;
+  for (const file of files) {
+    const size = lstatSync(path.join(root, file)).size;
+    if (
+      batch.length &&
+      (batch.length >= 50 ||
+        bytes + size > 256_000 ||
+        Buffer.byteLength(JSON.stringify([...batch, file])) > 8000)
+    ) {
+      batches.push(batch);
+      batch = [];
+      bytes = 0;
+    }
+    batch.push(file);
+    bytes += size;
+  }
+  if (batch.length) batches.push(batch);
+  return { files, batches };
 }
 
 export function checkPlan(root, paths) {
@@ -109,15 +135,82 @@ export function checkPlan(root, paths) {
       for (const extension of ["ts", "tsx", "mjs", "js"])
         tests.add(`tests/unit/${owner[1] ?? `tooling/${path.posix.basename(owner[2])}`}.test.${extension}`);
   }
+  const primary = [...tests].filter((file) => existsSync(path.join(root, file)));
+  const files = paths.some((file) => /\.(?:[cm]?[jt]sx?|json|css)$/.test(file))
+    ? git(root, ["ls-files", "-z", "--cached", "--others", "--exclude-standard"])
+        .split("\0")
+        .filter(
+          (file) =>
+            /\.(?:[cm]?[jt]sx?|json|css)$/.test(file) &&
+            lstatSync(path.join(root, file), { throwIfNoEntry: false })?.isFile(),
+        )
+    : [];
+  const affected = affectedTests(root, paths, files);
+  const related = affected.tests.filter((file) => !primary.includes(file));
   return {
     configs: [...configs],
-    tests: [...tests].filter((file) => existsSync(path.join(root, file))),
+    tests: [...primary, ...related.slice(0, 12)],
+    deferredTests: related.slice(12),
+    unresolved: affected.unresolved,
   };
 }
 
-export function runCheck(args = [], { root = ROOT, runner = spawnSync, log = console.log } = {}) {
-  const paths = selectedPaths(root, parseCheckArgs(args));
+export function runCheck(
+  args = [],
+  { root = ROOT, runner = spawnSync, log = console.log, cache = runner === spawnSync } = {},
+) {
+  const selection = parseCheckArgs(args);
+  const base = taskBase(root, selection.base);
+  const paths = selectedPaths(root, { ...selection, base });
   const format = formatSelection(root, paths);
+  const plan = checkPlan(root, paths);
+  const docs = paths.some((file) => /\.md$/i.test(file));
+  const docsOnly = paths.length > 0 && paths.every((file) => /\.md$/i.test(file));
+  log(CI_NOTICE);
+  log(
+    `Selection base: ${base}${selection.paths.length ? "; explicit paths" : "; committed and working changes"}.`,
+  );
+  log(
+    `Plan: ${paths.length} selected files; ${format.batches.length} formatting batches; batched lint and source contracts; compilers: ${plan.configs.join(", ") || "none"}; documentation: ${docs ? "yes" : "no"}.`,
+  );
+  log(
+    plan.tests.length
+      ? `Focused suites: ${plan.tests.join(", ")}`
+      : docsOnly
+        ? "Documentation only; no tests needed."
+        : "No matching suite; running fixed Node smoke (not affected-behavior coverage).",
+  );
+  if (plan.deferredTests.length)
+    log(`Additional related suites left to CI: ${plan.deferredTests.join(", ")}`);
+  if (plan.unresolved.length)
+    log(`Import graph could not parse: ${plan.unresolved.join(", ")}. CI retains full coverage.`);
+  log(
+    "Selection follows static imports and literal import()/require(); computed imports, runtime file reads and external dependencies may need a named regression suite. Builds, full CI and rendered review are separate evidence.",
+  );
+  if (selection.plan) {
+    log("Plan only; no checks ran.");
+    return 0;
+  }
+  const modules = path.join(root, "node_modules");
+  if (
+    lstatSync(modules, { throwIfNoEntry: false })?.isSymbolicLink() &&
+    (!existsSync(modules) ||
+      !matchingDependencies(root, path.dirname(realpathSync(modules))) ||
+      !dependenciesAvailable(root))
+  ) {
+    log(
+      "Shared dependencies are incomplete or do not match this task. Run npm run deps, then retry the task check.",
+    );
+    return 1;
+  }
+  const identity = cache ? verificationIdentity(root, base, paths) : null;
+  if (cache && verified(root, identity)) {
+    log(
+      "Reused passing task check: source, selection, base, runtime, environment and installed dependency metadata match. Rendered review and full CI remain separate.",
+    );
+    return 0;
+  }
+  if (cache) clearVerification(root);
   const run = (script, argv = [], timeout = 60_000) => {
     const result = runner(process.execPath, [path.join(root, script), ...argv], {
       cwd: root,
@@ -133,49 +226,42 @@ export function runCheck(args = [], { root = ROOT, runner = spawnSync, log = con
     if (result.error) log(`Local check ${script} could not finish: ${result.error.message}`);
     return result.status ?? 1;
   };
-  log(CI_NOTICE);
-  if (format.deferred)
-    log(
-      "File-based formatting, lint and contracts deferred to CI: selection exceeds the local file, size or argument budget.",
-    );
-  else if (format.files.length) {
+  for (const batch of format.batches) {
     const status = run("node_modules/prettier/bin/prettier.cjs", [
       "--check",
       "--ignore-unknown",
       "--",
-      ...format.files,
+      ...batch,
     ]);
     if (status !== 0) return status;
   }
-  if (paths.length && paths.every((file) => /\.md$/i.test(file))) {
-    return run("scripts/checks/check-docs.mjs");
-  }
-  const sourceFiles = format.files.filter((file) => /\.[cm]?[jt]sx?$/.test(file));
-  {
-    const violations = sourceFiles.flatMap((file) => {
-      const source = readFileSync(path.join(root, file), "utf8");
-      return [
-        ...(file.startsWith("src/") ? boundaryViolations(file, source) : []),
-        ...sourceViolations(file, source),
-      ];
-    });
-    for (const file of format.files.filter((file) => file.endsWith(".css")))
-      violations.push(...sourceViolations(file, readFileSync(path.join(root, file), "utf8")));
-    if (violations.length) {
-      log(violations.join("\n"));
-      return 1;
+  for (const batch of format.batches) {
+    const sourceFiles = batch.filter((file) => /\.[cm]?[jt]sx?$/.test(file));
+    {
+      const violations = sourceFiles.flatMap((file) => {
+        const source = readFileSync(path.join(root, file), "utf8");
+        return [
+          ...(file.startsWith("src/") ? boundaryViolations(file, source) : []),
+          ...sourceViolations(file, source),
+        ];
+      });
+      for (const file of batch.filter((file) => file.endsWith(".css")))
+        violations.push(...sourceViolations(file, readFileSync(path.join(root, file), "utf8")));
+      if (violations.length) {
+        log(violations.join("\n"));
+        return 1;
+      }
+    }
+    if (sourceFiles.length) {
+      const lint = run("node_modules/oxlint/bin/oxlint", [
+        "--type-aware",
+        "--deny-warnings",
+        "--",
+        ...sourceFiles,
+      ]);
+      if (lint !== 0) return lint;
     }
   }
-  if (sourceFiles.length) {
-    const lint = run("node_modules/oxlint/bin/oxlint", [
-      "--type-aware",
-      "--deny-warnings",
-      "--",
-      ...sourceFiles,
-    ]);
-    if (lint !== 0) return lint;
-  }
-  const plan = checkPlan(root, paths);
   if (plan.configs.length) {
     const compiler = "node_modules/typescript/bin/tsc";
     for (const config of plan.configs) {
@@ -184,20 +270,14 @@ export function runCheck(args = [], { root = ROOT, runner = spawnSync, log = con
       if (status !== 0) return status;
     }
   }
-  if (paths.some((file) => /\.md$/i.test(file))) {
+  if (docs) {
     const status = run("scripts/checks/check-docs.mjs");
     if (status !== 0) return status;
   }
-  if (plan.tests.length > 50 || Buffer.byteLength(JSON.stringify(plan.tests)) > 8000) {
-    log("Focused suite selection exceeds the local budget; complete suites deferred to CI.");
-    plan.tests = [];
+  if (!plan.tests.length && !docsOnly) {
+    const status = run("scripts/checks/run-local-tests.mjs");
+    if (status !== 0) return status;
   }
-  log(
-    plan.tests.length
-      ? `Focused suites: ${plan.tests.join(", ")}`
-      : "No matching suite; running fixed Node smoke.",
-  );
-  if (!plan.tests.length) return run("scripts/checks/run-local-tests.mjs");
   for (const suite of plan.tests) {
     const status = run("node_modules/vitest/vitest.mjs", [
       "run",
@@ -207,6 +287,16 @@ export function runCheck(args = [], { root = ROOT, runner = spawnSync, log = con
     ]);
     if (status !== 0) return status;
   }
+  if (cache) {
+    if (verificationIdentity(root, base, paths) !== identity) {
+      log("Verification inputs changed during the check; retry before handoff.");
+      return 1;
+    }
+    recordVerification(root, identity);
+  }
+  log(
+    "Task checks passed. Local handoff gate complete; full CI and any required rendered review remain separate.",
+  );
   return 0;
 }
 

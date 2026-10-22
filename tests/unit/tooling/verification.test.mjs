@@ -42,7 +42,8 @@ afterEach(() => {
 
 describe("lightweight local verification", () => {
   it("rejects unknown options and ambiguous or incomplete selections", () => {
-    expect(parseCheckArgs([])).toEqual({ paths: [], base: "HEAD" });
+    expect(parseCheckArgs([])).toEqual({ paths: [], base: null });
+    expect(parseCheckArgs(["--working-tree"])).toEqual({ paths: [], base: "HEAD" });
     expect(parseCheckArgs(["--base", "main"])).toEqual({ paths: [], base: "main" });
     for (const args of [
       ["--full"],
@@ -50,6 +51,7 @@ describe("lightweight local verification", () => {
       ["--base", "--diff"],
       ["--base", "main", "README.md"],
       ["--diff", "src"],
+      ["--working-tree", "--base", "main"],
     ])
       expect(() => parseCheckArgs(args)).toThrow();
   });
@@ -131,31 +133,93 @@ describe("lightweight local verification", () => {
     }
   });
 
-  it("bounds formatting by file count, individual size and argument bytes", () => {
+  it("batches every file by count, source size and argument bytes without dropping coverage", () => {
     const root = fixture();
     const files = Array.from({ length: 51 }, (_, i) => `src/file-${i}.ts`);
     for (const file of files) writeFileSync(path.join(root, file), "export {};\n");
-    expect(formatSelection(root, files.slice(0, 50)).deferred).toBe(false);
-    expect(formatSelection(root, files)).toEqual({ files: [], deferred: true });
+    expect(formatSelection(root, files.slice(0, 50)).batches).toHaveLength(1);
+    expect(formatSelection(root, files).batches.map((batch) => batch.length)).toEqual([50, 1]);
+    expect(formatSelection(root, files).batches.flat()).toEqual(files);
     writeFileSync(path.join(root, "src/large.ts"), " ".repeat(256_001));
-    expect(formatSelection(root, ["src/large.ts"]).deferred).toBe(true);
+    expect(formatSelection(root, ["src/large.ts"]).batches).toEqual([["src/large.ts"]]);
     const long = Array.from({ length: 36 }, (_, i) => `src/${"x".repeat(220)}-${i}.ts`);
     for (const file of long) writeFileSync(path.join(root, file), "export {};\n");
-    expect(formatSelection(root, long).deferred).toBe(true);
+    expect(formatSelection(root, long).batches.length).toBeGreaterThan(1);
+    expect(formatSelection(root, long).batches.flat()).toEqual(long);
     expect(formatSelection(root, ["missing.ts"]).files).toEqual([]);
   });
 
-  it("still runs smoke when formatting is too large for the local budget", () => {
+  it("checks large files individually and reports a complete plan before execution", () => {
     const root = fixture(),
       runner = vi.fn(() => ({ status: 0 })),
       messages = [];
     writeFileSync(path.join(root, "src/large.ts"), " ".repeat(256_001));
     expect(runCheck(["src/large.ts"], { root, runner, log: (message) => messages.push(message) })).toBe(0);
     expect(runner.mock.calls.map((call) => path.basename(call[1][0]))).toEqual([
+      "prettier.cjs",
+      "oxlint",
       "tsc",
       "run-local-tests.mjs",
     ]);
-    expect(messages.join(" ")).toContain("deferred to CI");
+    expect(messages.join(" ")).toContain("Plan: 1 selected files; 1 formatting batches");
+    expect(messages.join(" ")).toContain("Task checks passed");
+  });
+
+  it("can inspect the plan without running checks and never misses contracts in later batches", () => {
+    const root = fixture(),
+      runner = vi.fn(() => ({ status: 0 })),
+      messages = [];
+    expect(runCheck(["--plan", "src"], { root, runner, log: (message) => messages.push(message) })).toBe(0);
+    expect(runner).not.toHaveBeenCalled();
+    expect(messages.join(" ")).toContain("Plan only; no checks ran");
+    for (let i = 0; i < 51; i++) writeFileSync(path.join(root, `src/file-${i}.ts`), "export {};\n");
+    writeFileSync(path.join(root, "src/zzz.ts"), 'import * as Dialog from "@radix-ui/react-dialog";');
+    expect(runCheck(["src"], { root, runner, log: () => {} })).toBe(1);
+    expect(runner.mock.calls.filter((call) => call[1][0].endsWith("prettier.cjs"))).toHaveLength(2);
+  });
+
+  it("selects transitive cross-layer regressions through aliases, re-exports and deleted dependencies", () => {
+    const root = fixture();
+    for (const dir of ["src/game", "src/application", "tests/integration"])
+      mkdirSync(path.join(root, dir), { recursive: true });
+    writeFileSync(path.join(root, "src/game/value.ts"), "export const value = 1;");
+    writeFileSync(path.join(root, "src/game/index.ts"), 'export { value } from "./value.js";');
+    writeFileSync(
+      path.join(root, "src/application/commands.ts"),
+      'import { value } from "@/game/index"; export { value };',
+    );
+    writeFileSync(
+      path.join(root, "tests/integration/renamed.test.ts"),
+      'import { value } from "../../src/application/commands";',
+    );
+    writeFileSync(
+      path.join(root, "tests/integration/lazy.test.mjs"),
+      'await import("../../src/application/commands.ts");',
+    );
+    writeFileSync(
+      path.join(root, "tests/integration/required.test.mjs"),
+      'require("../../src/application/commands.ts");',
+    );
+    const regressions = [
+      "tests/integration/lazy.test.mjs",
+      "tests/integration/renamed.test.ts",
+      "tests/integration/required.test.mjs",
+    ];
+    expect(checkPlan(root, ["src/game/value.ts"]).tests).toEqual(regressions);
+    rmSync(path.join(root, "src/game/value.ts"));
+    expect(checkPlan(root, ["src/game/value.ts"]).tests).toEqual(regressions);
+  });
+
+  it("reports additional related suites instead of pretending a bounded selection is exhaustive", () => {
+    const root = fixture();
+    mkdirSync(path.join(root, "tests/integration"), { recursive: true });
+    for (let i = 0; i < 14; i++)
+      writeFileSync(path.join(root, `tests/integration/case-${i}.test.ts`), 'import "../../src/game";');
+    const plan = checkPlan(root, ["src/game.ts"]);
+    expect(plan.tests).toHaveLength(12);
+    expect(plan.deferredTests).toHaveLength(2);
+    // Explicitly selected regressions are never displaced by the related-suite limit.
+    expect(checkPlan(root, ["src/game.ts", ...plan.deferredTests]).tests).toHaveLength(14);
   });
 
   it("runs smoke on a clean checkout and never treats Git discovery failure as success", () => {

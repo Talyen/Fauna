@@ -4,6 +4,9 @@ import { pathToFileURL } from "node:url";
 import { git } from "../lib/git.mjs";
 import { extractMarkdownLinkTargets, headingSlugs, stripFencedBlocks } from "../lib/markdown.mjs";
 
+// Historical records retain their context without becoming live source/command contracts.
+const record = (file) => /^(?:Docs\/archive|Docs\/task-evidence)\//.test(file);
+
 export function checkDocumentation(root) {
   const files = [
     ...new Set(
@@ -23,6 +26,7 @@ export function checkDocumentation(root) {
   const edges = new Map();
   const fail = (file, message) => failures.push(`${file}: ${message}`);
   for (const [file, source] of docs) {
+    if (record(file)) continue;
     const prose = stripFencedBlocks(source);
     const links = extractMarkdownLinkTargets(prose);
     const targets = new Set();
@@ -79,7 +83,8 @@ export function checkDocumentation(root) {
       }
     }
   for (const file of docs.keys())
-    if (!reachable.has(file)) fail(file, "document is unreachable from README.md or AGENTS.md");
+    if (!record(file) && !reachable.has(file))
+      fail(file, "document is unreachable from README.md or AGENTS.md");
   return failures;
 }
 

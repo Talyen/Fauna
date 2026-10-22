@@ -51,7 +51,7 @@ Development saves are disposable. There are no released player saves to preserve
 
 Review the final diff and integration. Express behavior through names, types and valuable tests; comments explain non-obvious reasons, ordering or compatibility. Justify lint suppressions.
 
-Run `npm run check -- <task-owned paths>` before handoff; it selects bounded local static checks, documentation contracts and focused suites. [Contributing](CONTRIBUTING.md#verification) owns execution budgets and CI boundaries. Complete static checks, full unit runs, builds, exhaustive browser/desktop journeys, packaging, coverage and performance remain CI-owned unless explicitly requested locally.
+Run `npm run review:diff` and `npm run check` in the task checkout; both include committed and working task changes by default. Use explicit paths to narrow mixed work or `--base <commit>` to select another base. Follow [Contributing](CONTRIBUTING.md#verification) for completion, bounded diagnostics and CI boundaries. Use `npm run deps` for missing or changed task dependencies.
 
 For visual changes, follow the single [rendered review procedure](Docs/UI.md#required-review). Task-owned focused preview/review is authorized by default. Integrate only after current rendered evidence is inspected; preserve work on its branch if that evidence is unavailable.
 

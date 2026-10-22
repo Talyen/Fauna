@@ -1,7 +1,8 @@
-import { existsSync, mkdirSync, readFileSync, symlinkSync, realpathSync } from "node:fs";
+import { existsSync, mkdirSync, symlinkSync, realpathSync, lstatSync } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { git, worktrees } from "./lib/git.mjs";
+import { matchingDependencies } from "./dependencies.mjs";
 
 export function createWorktree(root, slug, base = "main") {
   root = realpathSync(root);
@@ -18,7 +19,13 @@ export function createWorktree(root, slug, base = "main") {
   if (registered) {
     if (registered.branch !== `refs/heads/${branch}`)
       throw new Error("Existing task worktree has a different branch; preserve it.");
-    return { path: target, branch, reused: true, linked: existsSync(path.join(target, "node_modules")) };
+    return {
+      path: target,
+      branch,
+      reused: true,
+      linked:
+        lstatSync(path.join(target, "node_modules"), { throwIfNoEntry: false })?.isSymbolicLink() ?? false,
+    };
   }
   if (existsSync(target))
     throw new Error("Task directory already exists; preserve it and choose another name.");
@@ -27,13 +34,7 @@ export function createWorktree(root, slug, base = "main") {
   mkdirSync(path.dirname(target), { recursive: true });
   git(root, ["worktree", "add", "-b", branch, target, commit]);
   let linked = false;
-  const matchingDependencies = ["package.json", "package-lock.json"].every(
-    (file) =>
-      existsSync(path.join(root, file)) &&
-      existsSync(path.join(target, file)) &&
-      readFileSync(path.join(root, file)).equals(readFileSync(path.join(target, file))),
-  );
-  if (matchingDependencies && existsSync(path.join(root, "node_modules"))) {
+  if (matchingDependencies(root, target) && existsSync(path.join(root, "node_modules"))) {
     try {
       symlinkSync(
         path.join(root, "node_modules"),
@@ -54,8 +55,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.ar
   const result = createWorktree(process.cwd(), slug, base);
   console.log(`${result.reused ? "Reusing" : "Created"} ${result.path} on ${result.branch}.`);
   console.log(
-    result.linked
-      ? "Dependencies available; use a separate install if dependency manifests change."
-      : "Run npm ci in the task checkout before verification.",
+    existsSync(path.join(result.path, "node_modules"))
+      ? "Dependencies available; run npm run deps after dependency changes or missing-package errors."
+      : "Run npm run deps in the task checkout before verification.",
   );
 }

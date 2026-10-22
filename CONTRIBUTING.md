@@ -1,10 +1,10 @@
 # Contributing
 
-[AGENTS.md](AGENTS.md) owns scope, Git authorization, preservation of unrelated work, and gameplay invariants. [Scripts](scripts/README.md) maps commands to their implementation. Use the Node 24 LTS patch in `.node-version` and npm 12.2.1 (`npm install --global npm@12.2.1 --ignore-scripts`), and install dependencies with `npm ci`.
+[AGENTS.md](AGENTS.md) owns authorization, preservation of unrelated work and gameplay invariants. Use the Node version in `.node-version` and the npm version in `package.json`. Install dependencies with `npm ci` in a standalone checkout; use `npm run deps` in task worktrees.
 
 ## Worktrees and integration
 
-Create or reuse this task's isolated checkout from the main checkout:
+From the main checkout, create or reuse this task's isolated checkout:
 
 ```sh
 npm run worktree -- creature-feedback
@@ -12,87 +12,56 @@ npm run worktree -- creature-feedback
 npm run worktree -- creature-feedback <base-ref>
 ```
 
-The command creates `.worktrees/<task-name>` on `task/<task-name>` from committed local main by default. An existing matching checkout is reused without resetting files. Existing branches without that checkout and conflicting directories are preserved and rejected. Dependencies are linked from main only when both dependency manifests match; otherwise run `npm ci` in the task checkout. If dependencies change later, remove only the task's dependency link before installing a separate dependency tree; never install through a link into another checkout.
+Work in the printed directory on its task branch. Setup preserves dirty main and existing task edits. Use `npm run deps` if dependencies are missing or change; never install through a shared dependency link.
 
-Review the task diff, run its checks, and commit task-owned files. From clean main:
+Review, verify and commit task-owned changes. From clean main:
 
 ```sh
 node scripts/integrate.mjs task/creature-feedback
 ```
 
-Integration holds one repository-wide lock, incorporates the locked main commit in the task checkout, checks the combined result and advances clean main. Dirty checkouts and unfinished Git operations block it. A competing integration fails as busy; retry later without terminating its owner. The OS releases the lock on exit, including crashes. A legacy directory lock is respected during the transition; inspect its owner before any separately authorized cleanup. Both worktrees are rechecked before main advances. Failed checks preserve committed task work. Successful integration removes its clean merged checkout and local branch while still holding the lock. Cleanup failure for the integrated task is reported separately even if main already advanced; inspect that task and retry its cleanup. Git authorization is defined only in [AGENTS.md](AGENTS.md#worktrees-and-integration).
+Integration holds the shared lock, incorporates current main, verifies the combined result and advances clean main. It reuses a passing check only when its inputs match. Busy locks, dirty main, ambiguous conflicts and unfinished Git operations preserve task work; resolve understood conflicts in the task checkout and retry. Successful integration archives ignored evidence and removes only this task's clean merged checkout and branch. Close task-owned preview processes first.
 
-Optional repository maintenance, independent of completing an implementation task: audit accumulated local task branches and worktrees from clean main:
-
-```sh
-npm run worktree:cleanup
-# Remove eligible merged tasks:
-npm run worktree:cleanup -- --apply
-```
-
-Only local branches under `task/` or `codex/` whose commits are already in main are eligible. The sweep uses the integration lock and preserves dirty, unmerged, locked and unfinished checkouts. It never merges unreviewed work, forces removal, deletes remote branches or terminates preview processes. Preserved tasks are expected and reported without failing the sweep; they do not block another task. Operational failures such as an unavailable lock still fail. Integration automatically cleans only the task being integrated, so another chat's newly created clean checkout is not swept during routine integration.
-
-Before removal, ignored artifacts (reports, screenshots, logs and other ignored files) are copied to `fauna-worktree-archives/` inside the shared Git directory, with a manifest identifying the original checkout, branch and commit. Dependency installs and links under the checkout's root `node_modules` are disposable and are not archived. Archives remain local and are never automatically deleted; find them with `git rev-parse --git-common-dir`. Tracked and untracked changes always block removal. Close only preview processes owned by the completed task before its integration; cleanup does not stop processes or establish that another chat has finished.
+[Worktree operations](scripts/README.md#worktree-operations) explains dependency sharing, recovery, artifact archives and optional cleanup. Other unfinished tasks do not block completion.
 
 ## Verification
 
-The archived [CI speed improvement plan](Docs/archive/CI_SPEED_PLAN.md) records parallel jobs, browser sharding, measurements and rollout acceptance criteria.
+In the task checkout:
 
-| When                | Command                                                                                                            | Evidence                                                                                                             |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
-| Local smoke         | `npm test`                                                                                                         | Fixed Node smoke only                                                                                                |
-| Task handoff        | `npm run check -- <task-owned paths>`                                                                              | Selected formatting, lint, source contracts, compiler environments and focused suites                                |
-| Dirty set           | `npm run check -- --diff`                                                                                          | Includes tracked and untracked changes                                                                               |
-| Committed task      | `npm run check -- --base <commit>`                                                                                 | Combined committed and dirty changes                                                                                 |
-| Documentation edits | `npm run docs:check`                                                                                               | Local links, anchors, file references, npm commands and document reachability                                        |
-| Focused regression  | `npm run test:full -- <test paths>`                                                                                | Only the named unit suites                                                                                           |
-| CI                  | Parallel jobs in [the workflow](.github/workflows/ci.yml)                                                          | Full static, documentation, content, all units/DOM, build, bundle allowance, browser journeys and interaction replay |
-| Windows CI          | `npm run package:win`, `npm run verify:package -- release/win-unpacked`, then `npm run test:desktop -- --packaged` | Unpacked x64 build, artifact integrity and packaged startup/save/resume/isolation                                    |
+```sh
+npm run review:diff
+npm run check
+# Show selected coverage without executing checks:
+npm run check -- --plan
+```
 
-`npm run verify` aliases the local check. Use explicit paths in a mixed checkout. Markdown changes automatically run the documentation gate through `check`, including during integration. The documentation gate reads Git-listed files, skips deleted files, treats README and AGENTS as entry points, and checks commands in fenced examples. Prefix historical or foreign inline source references with their repository name, such as `Alchemy: src/example.ts`, rather than implying they are current Fauna files. Link every durable document from an existing owner or index.
+On task/ and codex/ branches, these commands include committed and working changes since the common ancestor with local main. On main, other branches and detached checkouts, they select working changes against HEAD. Use `--base <commit>` for another base or `--working-tree` for uncommitted changes only; `--diff` retains the working-tree alias. Explicit paths narrow the selection. Review preserves separate committed, staged and unstaged patches, including reverted edits. The check prints omissions; add a named regression suite if the selection misses affected behavior.
 
-The standalone `npm test` smoke has one worker, a 512 MiB heap, lower process priority when available and a 30-second deadline. Formatting checks at most 50 existing files, each at most 256,000 bytes, within an 8,000-byte argument budget; larger selections are explicitly deferred to CI. For bounded selections, `check` lints changed code, applies architecture/UI source contracts, type-checks the owning compiler environments and runs changed unit/integration suites plus existing suites matching source filenames. It uses fixed Node smoke only when no matching suite exists; this mapping does not claim complete dependency or behavioral coverage. Deleted source files still select their compiler environment. Dependency/configuration changes select all compiler environments. Focused suites run serially, one file per subprocess, so unrelated suites do not consume each other's deadline. Each lint/compiler/focused-suite subprocess has a 60-second deadline, a 1 GiB Node heap and one test worker; timeouts fail with the unfinished check identified. Source selections beyond the formatting budget defer file-based formatting/lint/contracts to CI; owning compiler environments still run. The gate never installs dependencies, builds or launches browsers/Electron.
+`npm run verify` aliases `check`. Passing checks are recorded locally per worktree and reused only for matching source bytes, file selection, base, Node runtime, environment and installed dependency metadata. Committing unchanged checked files preserves reuse. Changes during verification fail the gate. A reused result establishes no rendered or hosted-CI evidence.
 
-Complete static checks, full unit runs, builds, exhaustive browser/desktop journeys, packaging, coverage and performance runs are CI-owned by default. The bounded checks selected by `check` and focused unit suites are authorized locally. Broader local execution needs an explicit request, except for the bounded visual preview/review authorized in [UI rules](Docs/UI.md#required-review). That exception covers the changed flow and representative sizes, not a full browser suite. Do not substitute raw tool invocations to bypass this policy. Passing local integration is not full verification or release evidence.
+Local completion requires reviewing the final diff, passing the task check, inspecting any required [rendered evidence](Docs/UI.md#required-review), committing task-owned work and protected integration. Report CI as pending unless exact-commit results are available. A blocked integration leaves reviewed work committed on its branch. Pushes and publication follow [AGENTS.md](AGENTS.md#worktrees-and-integration).
 
-CI selects the pinned npm version and installs with the lockfile. Install scripts require version-specific approval in `package.json`; `.npmrc` rejects unreviewed scripts. `npm run security:audit` checks all dependency advisories and retains the full report. The only temporary exception is the moderate `sprintf-js` formatter denial of service in the latest stable electron-builder download proxy logger (GHSA-hp3w-g68c-fv3c), expiring November 21, 2026; no player format strings reach that build-only path. New advisories and expired exceptions fail.
+### Execution and evidence
 
-CI dependency installs omit non-gating audit/funding requests and have a three-minute deadline. CI runs static/content checks, units/DOM, a Linux browser build and Windows packaging independently after a small planning job. Browser tests use eight duration-balanced shards with one worker each; interaction replay consumes the same Linux build. The build manifest binds assets to the evaluated commit, run and attempt. Every consumer verifies the downloaded build hashes. `npm run verify:full` remains the complete sequential verification command; it is CI-owned under the same local execution policy.
+Task checks, named regression suites, documentation checks and focused previews/captures are authorized locally. Run one verification or investigation command at a time per task; use isolated browser profiles and close only owned processes.
 
-The final `verify` job allows workflow cancellation and runs even when upstream checks fail and requires every upstream job, every shard, the full discovered browser case set, passing unit results and the complete seeded interaction trace. Only the named development-preview browser case is intentionally excluded from production CI. Focused `.only` tests, unexpected skips, retries, missing cases, duplicate cases and interrupted suites fail the gate. The five-failure browser limit applies separately to each shard. Failed jobs may be rerun within the same workflow run and commit, reusing earlier successful jobs. Every recorded attempt must be positive and no later than the current attempt; unit evidence must match its successful job, and browser/interaction evidence must match the SHA-256 file inventory of the selected build. Missing evidence, another run/commit, or changed build bytes fail. A rebuilt artifact with different bytes requires rerunning its browser and interaction consumers. The final evidence manifest records the contributing attempts. See [GitHub rerun semantics](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/re-run-workflows-and-jobs).
+For a concrete task failure or uncertainty that the ordinary gate cannot resolve, bounded broader diagnostics are also authorized:
 
-CI retains unit JSON, per-shard blob reports containing screenshots/traces, merged browser JSON/HTML, player notes and Windows output for seven days. JSON attachments share the merged HTML report's `browser-html/data/` store; shard uploads keep the blob attachments rather than a second copy of `test-results/`. The `browser-review` artifact contains the merged report; `browser-shard-N` artifacts retain raw evidence. Missing reports are failures, not substitute passing summaries. Artifact collection and report merging run on failure where the runner remains available. Windows retains its own package verification and packaged startup/save/resume/isolation checks.
+```sh
+npm run investigate -- types
+npm run investigate -- static
+npm run investigate -- build
+npm run investigate -- unit tests/unit/game/engine.test.ts
+npm run investigate -- browser battle
+npm run investigate -- performance battle
+```
 
-The build job creates an exact test-list plan from complete discovery, assigning the longest estimated cases first to the lightest shard. Estimates in `scripts/ci/browser-durations.json` affect scheduling only; new cases receive a default estimate and the final coverage gate still requires every discovered identity exactly once. Each successful gate exports refreshed estimates in `browser-review`; copy its `ci/browser-durations.json` to the checked-in estimate file when refreshing the baseline. Renames and new tests must never be omitted for missing timing history.
+The launcher allows one command with a five-minute deadline and 2 GiB Node heap. Unit diagnostics require one to twelve named suites and use one worker; browser diagnostics select an existing route with one worker on an owned free-port production preview; performance selects one existing scenario. Build first when the selected browser/performance tool requires production output. Use only diagnostics directly relevant to the task and reassess the hypothesis after failure; this allowance does not authorize repeated exhaustive runs. The diagnostic commands never install dependencies or publish anything.
 
-The workflow supports manual runs with one, four or eight browser shards for equivalent-coverage comparisons. Its `browser_runtime` input compares Chromium headless-shell installation with the official version-matched Playwright container, derived from the lockfile. Normal CI installs only the headless shell used by its existing browser configuration and interaction replay; headed local review still needs a full Chromium installation. Compare complete runs including container initialization before changing the default. Record completed-run timing with `node scripts/ci/ci-timings.mjs <run-id> [attempt]`; this reads GitHub metadata and writes timing JSON without executing tests. It requires an authenticated GitHub CLI. Timing captured inside the final job is provisional until that job finishes. Branch pushes with an open PR defer to PR verification; main pushes, tags and fork PRs retain their gates. Superseded automatic branch runs are cancelled; manual benchmarks run independently.
+Full unit/browser matrices, packaging, coverage and extended performance sweeps remain [hosted-CI](Docs/CI.md) work by default; broader local execution needs an explicit request. Local checks, preview captures and diagnostic runs establish only their actual coverage. Report relevant unverified platform boundaries.
 
-CI checks the JavaScript allowance after each production build and never builds twice solely to measure size. Full CI and release evidence must refer to the exact commit. See [release boundaries](Docs/RELEASE.md) and [required rendered review](Docs/UI.md#required-review).
+### Documentation scope
 
-## Test organization
+The task check validates maintained Markdown links, anchors, file references, npm examples and reachability when Markdown changes. Link durable guides from an existing owner. Historical records belong under `Docs/archive/` or `Docs/task-evidence/<task>.md`; ignored runtime reports and screenshots belong under `reports/`. Historical records cannot be the sole owner of a current rule. Prefix foreign file references with their repository.
 
-Focused suites are grouped by their contract owner under `tests/unit/`: `game/`, `application/`, `platform/`, `ui/`, `tooling/` and `simulation/`. Focused creature kits belong in `tests/unit/game/creatures/`; gameplay-only save round trips remain part of those suites. Kits that also exercise application policy or presentation belong in `tests/integration/creatures/`. Keep the complete scenario with its owning suite rather than splitting assertions to fit folders. Cross-layer scenarios live under `tests/integration/`: `creatures/` keeps complete kit, Auto-play, save/resume and presentation regressions together; `gameplay/` covers journey, resource and feedback contracts; `recovery/` covers recovery through application and presentation boundaries. Both groups are discovered by `vitest.config.ts` and run in the existing CI unit job, with the same per-suite Node or DOM environment. Do not split or remove valuable assertions merely to classify a suite. Put shared gameplay scenario builders in `tests/support/game.ts`, so browser suites do not depend on a unit-suite directory. Keep browser integration journeys in `tests/e2e/`, grouped by player flow; the complete starter-to-victory journey remains in `expedition.spec.ts`. Browser-only save setup, input simulation, layout contracts, rendered-evidence capture and journey driving belong in `tests/e2e/support/`. Moving a suite requires updating the fixed local smoke selection when affected, plus explicit route or documentation references; the recursive full-suite discovery must include both groups.
-
-## Test value and coverage
-
-Protect consequential player behavior, command rejection, ownership, persistence, lifecycle ordering and architectural boundaries. First inspect existing protection and choose the cheapest layer that can detect the plausible failure. Strengthen a nearby assertion where useful. Adding no permanent test is appropriate when existing coverage is adequate or a change is documentation-only.
-
-Prefer focused behavioral assertions over tests of incidental implementation, markup or wrappers. Browser coverage should protect actual interaction and integration failures; arithmetic already covered in the engine rarely needs another browser journey. Never remove or weaken a regression test just to obtain a passing gate. Retain full coverage in CI while keeping routine local work bounded. Report exact suites run and remaining verification boundaries.
-
-### Browser and UI coverage
-
-Keep one full starter-to-victory browser expedition. Use seeded, bounded scenarios for keyboard/controller activation, combat swaps, rewards, save/resume, recovery and menu focus. Repeating a full expedition for each input mode adds cost without exercising directional navigation; the focused controller/menu journeys own that behavior. Controller coverage here is browser simulation, with physical-device and packaged validation governed by the release gates.
-
-`tests/e2e/scroll-free.spec.ts` separates Collection/rank pages, Talents/Glossary/Settings and battle-hand layout into independently seeded cases, preserving cross-screen coverage using `LAYOUT_CASES` in `tests/e2e/support/layout-contract.ts`: both text sizes at 1280×720, then one text size at each remaining supported viewport. Browse every creature, rank page and talent category at 1280×720 with enlarged text; sample the first and last catalog entries and talent categories elsewhere while checking every Collection grid page. Keep geometry checks for artwork profiles, ultrawide composition, reward anchors and the overlapping battle hand. The six-card hand journey owns both dock geometry and card hit-target checks using a single seeded battle per layout case; Collection artwork area checks belong to the kit browsing journey. A separate live-resize journey protects later-page selection, filter memory and focus return while moving between desktop and minimum viewports. Combat feedback additionally covers all four text/motion combinations at minimum size. This samples combinations deliberately; it does not prove every content/viewport/text/motion combination fits.
-
-DOM tests own exhaustive rules, command rejection, focus ownership, pagination/resize and lifecycle cancellation. Reuse one mounted application for catalog browsing when cases do not require fresh state; retain independent cases for disposal, persistence and competing focus owners. Menu focus covers every page/exit pair and both origins per page rather than their full Cartesian product. Add a browser case only for a distinct integration or rendering failure, and keep screenshots to distinct visible states (one per Boons page, rather than one per item on that same page). Preserve timing waits that verify held-input suppression, autoplay pauses or real audio; use state/animation readiness for ordinary transitions.
-
-Owned Boons exhaust content and capture every page at minimum size; other viewports capture the first and last pages. Merchant shelf and purchased-state layouts run across `LAYOUT_CASES`, while Merchant resume and independent tooltip preference persistence run once at minimum size. Keep full state comparisons around browsing and purchases; viewport repetition is for rendered layout, not repeated persistence policy.
-
-Playwright listing verifies discovery only. Report measured execution time separately from case-count reductions; the CI browser report remains the runtime and rendered evidence source.
-
-The lint gate enforces Hooks, accessibility, promise ownership and React Compiler immutability/ref/effect diagnostics. Any exception must be local, explain the specific ownership or DOM lifecycle requirement, and preserve behavioral coverage; mutable DOM nodes do not justify disabling checks across the application. Native ARIA roles remain valid where changing tags could alter layout or control contracts. Type-aware template coercion, string-sort style and test mock method binding are outside this gate. Prototype design labels are excluded from label association checks; player UI keeps those checks.
-
-The ordinary desktop configuration checks all native code. `tsconfig.desktop-boundary.json` additionally requires explicit parameter types, unknown catch variables and exact optional properties in storage, preload, Steam transport/worker and resource/recovery boundaries. Remaining display/bootstrap code stays in the broader checked-JavaScript configuration while its consumers use typed native capabilities. Native wire results are validated before resolving those capabilities.
-
-Automated accessibility scans in `tests/e2e/accessibility.spec.ts` cover home, all settings tabs, battle, pause and recruitment at the minimum viewport. WCAG A/AA violations fail ordinary browser CI, with full JSON and screenshots retained by the existing report pipeline. These scans supplement keyboard, controller simulation and rendered review; they do not establish manual assistive-technology or physical-device acceptance.
+For maintenance details, read [task check implementation](scripts/README.md#task-check-implementation), [test organization and coverage](tests/README.md) or the relevant [script owner](scripts/README.md). These are reference material, not extra steps for ordinary tasks.
