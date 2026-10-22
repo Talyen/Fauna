@@ -57,3 +57,7 @@ The [Legendary battle](references/memento-battle-1920.png), [full-roster Swap](r
 ## Tournelle and required replacements
 
 The [Tournelle creature reference](../../Docs/content/creatures/tournelle.md#rendered-review) links focused Collection, battle, rank and knockout-replacement captures. These document implementation of the user's selected kit and unchanged Drive artwork, including removal of voluntary Swap and Lineup controls. The [evidence record](references/tournelle-evidence.json) records viewport/input coverage and limits; technical review does not establish balance or platform acceptance
+
+## Creature inspection studies
+
+On October 22, 2026 the user rejected both the current creature inspection and the compact tooltip-passive proposal. The passive and its ranks must be visible. The [three replacement studies](../inspection-options/README.md) are candidates, not accepted references. Ability details remain hover/focus disclosures.

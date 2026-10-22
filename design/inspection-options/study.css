@@ -1,0 +1,163 @@
+.inspection-study-launcher {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+}
+.inspection-study {
+  width: min(calc(var(--art-long-side) * 3 + var(--space-6) * 3), calc(100vw - var(--space-12)));
+  display: grid;
+  gap: var(--space-6);
+  padding: var(--space-6);
+}
+.study-back {
+  grid-column: 1 / -1;
+}
+.study-artwork,
+.study-passive {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.study-artwork {
+  align-items: center;
+}
+.study-artwork > .creature-wrap {
+  width: var(--art-long-side);
+}
+.study-artwork .creature-card {
+  width: 100%;
+}
+.study-abilities {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+  width: var(--art-long-side);
+}
+.study-abilities .action-card {
+  width: 100%;
+}
+.study-passive h2 {
+  font-size: var(--text-title);
+}
+.study-passive p {
+  margin: 0;
+}
+.option-a {
+  grid-template-columns: var(--art-long-side) minmax(0, 1fr);
+  align-items: center;
+}
+.study-rank-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--space-3);
+}
+.study-rank-list li {
+  display: grid;
+  grid-template-columns: var(--control-height) minmax(0, 1fr) var(--space-6);
+  gap: var(--space-3);
+  align-items: center;
+  color: var(--muted-foreground);
+}
+.study-rank {
+  display: flex;
+  gap: var(--space-1);
+  align-items: center;
+  justify-content: center;
+}
+.study-rank svg,
+.study-current,
+.study-rank-table svg {
+  width: var(--compact-icon-size);
+  height: var(--compact-icon-size);
+}
+.study-rank-list [aria-current="step"] {
+  color: var(--foreground);
+}
+.study-rank-list [aria-current="step"] .study-rank,
+.study-current {
+  color: var(--gold-light);
+}
+.study-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+}
+.option-b .study-artwork {
+  flex-direction: row;
+  justify-content: center;
+  gap: var(--space-6);
+}
+.option-b .study-abilities {
+  width: calc(var(--art-long-side) * 1.5);
+}
+.option-b .study-passive {
+  align-items: center;
+  text-align: center;
+}
+.option-b .ui-tabs-list {
+  gap: var(--space-3);
+}
+.option-b .ui-tab {
+  gap: var(--space-1);
+}
+.option-b .ui-tab svg {
+  width: var(--compact-icon-size);
+  height: var(--compact-icon-size);
+}
+.option-b .ui-tab-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+.option-b .ui-tab-panel[hidden] {
+  display: none;
+}
+.study-rank-status {
+  color: var(--muted-foreground);
+  font-size: var(--text-secondary);
+}
+.option-c {
+  width: min(calc(var(--art-long-side) * 1.5 + var(--space-6) * 2), calc(100vw - var(--space-12)));
+}
+.option-c .study-passive {
+  text-align: center;
+}
+.study-rank-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-body);
+}
+.study-rank-table th {
+  font-weight: 400;
+  color: var(--muted-foreground);
+  padding-block: var(--space-1);
+}
+.study-rank-table th svg {
+  display: inline;
+  margin-left: var(--space-1);
+  vertical-align: middle;
+}
+.study-rank-table td {
+  vertical-align: top;
+  padding-block: var(--space-2);
+}
+.study-rank-table td svg {
+  display: block;
+  margin: var(--space-1) auto 0;
+}
+.study-rank-table [aria-current="step"] {
+  color: var(--gold-light);
+  font-weight: 600;
+}
+.study-action {
+  display: flex;
+  flex-direction: column;
+  width: min(calc(var(--art-long-side) + var(--space-12)), calc(100vw - var(--space-12)));
+}
+.study-action > .action-card {
+  width: var(--art-portrait-width);
+  margin-inline: auto;
+}

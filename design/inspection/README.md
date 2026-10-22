@@ -11,3 +11,7 @@ Click a portrait thumbnail to replace the same dialog's contents with enlarged a
 The Enemy switch shows battle health and effects separately from the collectible Species kit. It reveals no intents. The shared action artwork is a placeholder; production artwork is being handled separately.
 
 Both compositions were rendered and inspected at 1920×1080 and 1280×800. Browser checks cover aspect ratios, fit, layout switching, enemy labeling, hover details, card cycling, Back/Escape, and focus restoration. Physical controller, native desktop, Windows, Steam client, and Steam Deck were not verified for this sample.
+
+## New passive-rank studies
+
+The user rejected both the current panel and the first compact proposal on October 22, 2026, then requested a visible passive and rank progression. The [three new inspection studies](../inspection-options/README.md) compare full tier text, a visible rank selector and a shared rule with rank values. All remain candidates awaiting preference.

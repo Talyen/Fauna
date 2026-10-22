@@ -1,0 +1,48 @@
+{
+  "status": "Three unapproved design studies; previous A and B rejected by user",
+  "captures": [
+    {
+      "option": "a",
+      "width": 1280,
+      "height": 720,
+      "scale": 1.25,
+      "errors": []
+    },
+    {
+      "option": "b",
+      "width": 1280,
+      "height": 720,
+      "scale": 1.25,
+      "errors": []
+    },
+    {
+      "option": "c",
+      "width": 1280,
+      "height": 720,
+      "scale": 1.25,
+      "errors": []
+    },
+    {
+      "option": "a",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "errors": []
+    },
+    {
+      "option": "b",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "errors": []
+    },
+    {
+      "option": "c",
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "errors": []
+    }
+  ],
+  "limitations": "Mossguard only; standalone study uses shared game artwork and controls; no production changes applied; no full CI or native testing"
+}
