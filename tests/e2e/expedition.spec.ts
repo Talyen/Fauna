@@ -1517,7 +1517,7 @@ test("a fallen deployed row resumes with no playable cards and can recover throu
   expect(restored.battle!.hand).toEqual(fallen.battle!.hand);
   await page.getByRole("button", { name: "Swap", exact: true }).click();
   await expect(
-    page.getByRole("button", { name: `${species(outgoing.species).name}, backup`, exact: true }),
+    page.getByRole("dialog").locator(`[data-actor-id="${outgoing.id}"] .creature-card`),
   ).toHaveAttribute("aria-disabled", "true");
 });
 

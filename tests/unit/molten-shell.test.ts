@@ -136,6 +136,7 @@ it.each(["physical", "poison", "freeze", "stun"] as const)(
     const events: GameEvent[] = [];
     produce(battle(), (draft) => {
       const enemy = draft.battle!.enemies[0]!;
+      enemy.health = 18;
       enemy.combat.armor = type === "physical" || type === "poison" ? 2 : 4;
       draft.rng = 1;
       if (type === "physical") draft.boons.push("sundering-charm");
