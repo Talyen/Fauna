@@ -1,5 +1,5 @@
+import { chance as succeeds } from "../chance";
 import { isEnemy, battlefield } from "../battlefield";
-import { roll } from "../random";
 import { hasTalent, creaturePassive } from "../progression";
 import { species } from "../content";
 import type { CombatState, Creature, Enemy, GameEvent, GameState } from "../types";
@@ -151,11 +151,11 @@ export function grantTemporaryDodge(unit: Combatant, amount: number, events: Gam
   });
 }
 /** One Blind roll owns the attack, including area targets and authored extra packets. */
-export function beginAttack(state: GameState, source: Combatant): boolean {
+export function beginAttack(state: GameState, source: Combatant, events: GameEvent[] = []): boolean {
   const stats = combat(source);
   if (!stats.blind) return false;
   stats.blind = false;
-  return roll(state) < 0.5;
+  return !succeeds(state, 0.5, isEnemy(source), events, true);
 }
 /** Capture once per attack so every area target receives the same opening bonus. */
 export function openingCriticalBonus(state: GameState, source: Combatant): number {

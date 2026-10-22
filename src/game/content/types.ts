@@ -22,9 +22,11 @@ export type SpeciesId =
   | "stillara"
   | "sternshell"
   | "neradora"
-  | "memento";
+  | "memento"
+  | "euphera";
 export type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
+  | { kind: "goodFortune"; amount: number }
   | { kind: "courtRemembers"; amount: number }
   | { kind: "wellRead"; amount: number }
   | { kind: "livingChorus"; amount: number }
@@ -87,6 +89,7 @@ export type CardDefinition = CardBase &
         damageType: DamageType;
         alternateDamageType?: DamageType;
         doubleWithArmor?: boolean;
+        purgeThorns?: true;
         target?: "allEnemies" | "randomEnemy";
       }
     | { effect: "guard"; target?: "self" }

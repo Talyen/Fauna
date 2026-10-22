@@ -1,5 +1,5 @@
+import { chance as succeeds } from "../chance";
 import { isEnemy, battlefield } from "../battlefield";
-import { roll } from "../random";
 import { drawKeyword } from "../card-zones";
 import { hasTalent, creaturePassive } from "../progression";
 
@@ -77,7 +77,7 @@ export function* shareProtection(
     (total, entry) => total + (entry.kind === "shareProtection" ? entry.amount : 0),
     0,
   );
-  if (chance <= 0 || (chance < 100 && roll(state) >= chance / 100)) return;
+  if (!succeeds(state, chance / 100, !allied, events)) return;
   for (const recipient of recipients) {
     if (effect === "block") yield* reaction("grantBlock", state, recipient, amount, events, false);
     else yield* reaction("grantStatus", recipient, effect, amount, events, state, false);
@@ -119,7 +119,7 @@ export function* grantBlock(
     amount: gained,
     text: `${unitName(unit)} gains ${gained} Block.`,
   });
-  if (!isEnemy(unit) && hasTalent(state, "light.radiant-guard") && roll(state) < 0.1)
+  if (!isEnemy(unit) && hasTalent(state, "light.radiant-guard") && succeeds(state, 0.1, false, events))
     drawKeyword(state, "light", events);
   if (!isEnemy(unit) && state.boons.includes("ironwood-buckler"))
     yield* reaction("grantStatus", unit, "thorns", 1, events, state, sharing);
@@ -146,10 +146,15 @@ export function* grantArmor(
     before = combat(unit).armor;
   if (allied) {
     if (hasTalent(state, "armor.last-stand") && unit.health < maximumHealth(unit) / 2) amount *= 1.25;
-    if (hasTalent(state, "armor.reinforced") && roll(state) < 0.1) amount *= 2;
+    if (hasTalent(state, "armor.reinforced") && succeeds(state, 0.1, false, events)) amount *= 2;
   }
   yield* reaction("grantStatus", unit, "armor", Math.round(amount), events, state);
-  if (allied && combat(unit).armor > before && hasTalent(state, "armor.purification") && roll(state) < 0.1)
+  if (
+    allied &&
+    combat(unit).armor > before &&
+    hasTalent(state, "armor.purification") &&
+    succeeds(state, 0.1, false, events)
+  )
     yield* reaction("removeEffects", unit, "cleanse", 1, events, state);
 }
 export function* leechHealth(
@@ -170,16 +175,17 @@ export function* leechHealth(
   yield* reaction("restoreHealth", unit, amount, events, false, state);
   const restored = unit.health - before;
   if (!isEnemy(unit) && restored > 0) {
-    if (hasTalent(state, "leech.blood-debt") && roll(state) < 0.1) gainGold(state, restored, events);
+    if (hasTalent(state, "leech.blood-debt") && succeeds(state, 0.1, false, events))
+      gainGold(state, restored, events);
     if (
       hasTalent(state, "leech.sanguine-overflow") &&
       before < maximumHealth(unit) &&
       unit.health === maximumHealth(unit)
     )
       yield* reaction("gainMana", state, 1, events);
-    if (hasTalent(state, "leech.bloodletting") && roll(state) < 0.1)
+    if (hasTalent(state, "leech.bloodletting") && succeeds(state, 0.1, false, events))
       yield* reaction("removeEffects", unit, "cleanse", 1, events, state);
-    if (hasTalent(state, "leech.mana-siphon") && roll(state) < 0.1)
+    if (hasTalent(state, "leech.mana-siphon") && succeeds(state, 0.1, false, events))
       yield* reaction("gainMana", state, 1, events);
   }
 }

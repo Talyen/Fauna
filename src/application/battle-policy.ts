@@ -122,6 +122,8 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
       add(id, recoverable ? 200 : 0);
     } else if (def.effect === "teamDodge") {
       add(id, 150 + value);
+    } else if (def.effect === "redraw") {
+      add(id, state.battle.hand.length > 1 ? 190 : 0);
     } else if (def.effect === "draw") {
       add(id, 200 + value);
     } else if (def.effect === "teamBlind") {
@@ -147,7 +149,11 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
       add(id, useful > 0 ? 160 + useful : 0);
     } else if (def.effect === "teamCleanse") {
       add(id, 150);
-    } else if (def.effect === "teamGuard" || def.effect === "teamProtection") {
+    } else if (
+      def.effect === "teamGuard" ||
+      def.effect === "redistributeBlock" ||
+      def.effect === "teamProtection"
+    ) {
       const useful = state.team
         .filter((c) => c.health > 0)
         .reduce(

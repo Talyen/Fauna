@@ -1780,6 +1780,50 @@
       "aspect": [3, 4],
       "provenance": "Generated with built-in ImageGen on 2026-10-22 using Memento and Treasury Echo as references",
       "rights": "User-provided Fauna references; project artwork"
+    },
+    {
+      "id": "creature.euphera",
+      "origin": "repository",
+      "source": "public/art/euphera/portrait.png",
+      "output": "art/euphera/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Euphera_03.png selected from user Google Drive: https://drive.google.com/file/d/17rUsdI_3UbsgLZj_TFUtQ3fKCItJnSNY/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.euphera.twilight-lance",
+      "origin": "repository",
+      "source": "public/art/euphera/twilight-lance.png",
+      "output": "art/euphera/twilight-lance.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Euphera_Ability-Expansion-03_TwilightLance.png selected from user Google Drive: https://drive.google.com/file/d/1SLvQZOji5jYr9kyc9pfrvxuYw7GqgsmH/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.euphera.wish-exchange",
+      "origin": "repository",
+      "source": "public/art/euphera/wish-exchange.png",
+      "output": "art/euphera/wish-exchange.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Euphera_Ability-Expansion-01_WishExchange.png selected from user Google Drive: https://drive.google.com/file/d/1fDrY7sWYTJ9AVPK2S5eIjmmnhp3M83eK/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.euphera.possible-path",
+      "origin": "repository",
+      "source": "public/art/euphera/possible-path.png",
+      "output": "art/euphera/possible-path.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Euphera_Ability-Utility-02_PossiblePath.png selected from user Google Drive: https://drive.google.com/file/d/1ZNbjN4OuSIBPIUdSMJSnPquXgXqVoRc5/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

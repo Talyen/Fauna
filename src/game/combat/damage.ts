@@ -1,3 +1,4 @@
+import { chance as succeeds } from "../chance";
 import { isEnemy, battlefield } from "../battlefield";
 import { packetPolicy, type DamagePacket, type AttackPacket } from "./policy";
 import { roll } from "../random";
@@ -55,7 +56,7 @@ export function* bounce(
           (effect !== "heal" || unit.health < maximumHealth(unit)),
       );
       if (source.health <= 0 || !eligible.length) return;
-      if (entry.chance !== undefined && roll(state) >= entry.chance) return;
+      if (entry.chance !== undefined && !succeeds(state, entry.chance, !allied, action.events)) return;
       const target =
         effect === "heal" ? mostInjured(eligible)! : eligible[Math.floor(roll(state) * eligible.length)]!;
       visited.add(target.id);
@@ -110,7 +111,7 @@ export function* hit(
       (total, effect) => total + (effect.kind === "resonance" ? effect.amount : 0),
       0,
     );
-    if (chance > 0 && roll(state) < chance / 100) {
+    if (succeeds(state, chance / 100, isEnemy(source), events)) {
       events.push({
         kind: "action",
         actionType: "support",
@@ -166,10 +167,13 @@ export function* resolveHit(
     hasTalent(state, "light.blessed-leech") &&
     source.health < maximumHealth(source) / 2;
   const blindMiss =
-    direct && ((options.origin === "ability" ? options.blindMiss : undefined) ?? beginAttack(state, source));
+    direct &&
+    ((options.origin === "ability" ? options.blindMiss : undefined) ?? beginAttack(state, source, events));
   if (
     direct &&
-    (blindMiss || (dodgeChance(state, target) > 0 && roll(state) < dodgeChance(state, target) / 100))
+    (blindMiss ||
+      (dodgeChance(state, target) > 0 &&
+        succeeds(state, dodgeChance(state, target) / 100, !alliedTarget, events)))
   ) {
     events.push({
       kind: "status",
@@ -334,7 +338,7 @@ export function* resolveHit(
   const criticalChance =
     0.05 + ((options.origin === "ability" ? options.criticalBonus : undefined) ?? 0) / 100;
   const critical =
-    direct && (riposte || (criticalChance > 0 && (criticalChance >= 1 || roll(state) < criticalChance)));
+    direct && (riposte || (criticalChance > 0 && succeeds(state, criticalChance, !alliedSource, events)));
   if (riposte) combat(source).riposte = false;
   const partingCut = direct && alliedSource && type === "physical" && combat(source).partingCut;
   if (partingCut) combat(source).partingCut = false;
@@ -409,11 +413,21 @@ export function* resolveHit(
     yield* reaction("restoreHealth", source, 3, events, false, state);
   if (alliedSource && !alliedTarget && lost > 0 && (source.health > 0 || policy.deadSource)) {
     if (type === "bleed" && state.boons.includes("cutpurse-knife")) gainGold(state, 1, events);
-    if (type === "poison" && state.boons.includes("parasitic-bloom") && roll(state) < 0.1)
+    if (type === "poison" && state.boons.includes("parasitic-bloom") && succeeds(state, 0.1, false, events))
       yield* reaction("leechHealth", state, source, lost, events, true);
-    if (attack && type === "nature" && state.boons.includes("lucky-clover") && roll(state) < 0.1)
+    if (
+      attack &&
+      type === "nature" &&
+      state.boons.includes("lucky-clover") &&
+      succeeds(state, 0.1, false, events)
+    )
       gainGold(state, lost, events);
-    if (attack && type === "light" && state.boons.includes("brass-censer") && roll(state) < 0.2) {
+    if (
+      attack &&
+      type === "light" &&
+      state.boons.includes("brass-censer") &&
+      succeeds(state, 0.2, false, events)
+    ) {
       if (roll(state) < 0.5)
         yield* reaction("hit", state, source, target, damage, "burn", events, { origin: "proc" });
       else yield* reaction("leechHealth", state, source, lost, events, stats.poison > 0 || stats.bleed > 0);
@@ -426,9 +440,10 @@ export function* resolveHit(
     if (hasTalent(state, "water.erosion")) {
       erode(2);
     }
-    if (hasTalent(state, "water.cleansing-current") && roll(state) < 0.2)
+    if (hasTalent(state, "water.cleansing-current") && succeeds(state, 0.2, false, events))
       yield* reaction("removeEffects", source, "cleanse", 1, events, state);
-    if (hasTalent(state, "water.riptide") && roll(state) < 0.2) drawKeyword(state, "water", events);
+    if (hasTalent(state, "water.riptide") && succeeds(state, 0.2, false, events))
+      drawKeyword(state, "water", events);
   }
   if (policy.buildup && damage > 0 && source.health > 0) {
     const bleedBefore = stats.bleed;
@@ -437,14 +452,23 @@ export function* resolveHit(
     });
     depletions.push(...statusResult.depletions);
     if (direct && alliedSource && !alliedTarget && source.health > 0) {
-      if (type === "nature" && hasTalent(state, "nature.bramblegrowth") && roll(state) < 0.1)
+      if (
+        type === "nature" &&
+        hasTalent(state, "nature.bramblegrowth") &&
+        succeeds(state, 0.1, false, events)
+      )
         yield* reaction("grantStatus", source, "thorns", damage, events, state);
-      if (type === "light" && lost > 0 && hasTalent(state, "light.faith-barrier") && roll(state) < 0.1)
+      if (
+        type === "light" &&
+        lost > 0 &&
+        hasTalent(state, "light.faith-barrier") &&
+        succeeds(state, 0.1, false, events)
+      )
         yield* reaction("grantBlock", state, source, lost, events);
     }
     if (direct && alliedSource && !alliedTarget && source.health > 0) {
       const proc = (id: import("../content").TalentId, chance: number) =>
-        source.health > 0 && hasTalent(state, id) && roll(state) < chance;
+        source.health > 0 && hasTalent(state, id) && succeeds(state, chance, false, events);
 
       if (type === "physical") {
         if (proc("physical.heavy-blows", 0.1))

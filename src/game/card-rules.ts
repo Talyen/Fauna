@@ -49,6 +49,7 @@ export function enemyCanUse(card: CardDefinition): boolean {
       return card.species === "memento";
     case "mana":
     case "recover":
+    case "redraw":
       return false;
     case "attack":
     case "guard":
@@ -63,6 +64,7 @@ export function enemyCanUse(card: CardDefinition): boolean {
     case "nullify":
     case "swap":
     case "teamGuard":
+    case "redistributeBlock":
     case "teamProtection":
       return true;
     default: {
@@ -96,6 +98,7 @@ export function cardText(
       // Keep the conditional rule at its base value so resolved previews do not imply a second doubling
       if (card.doubleWithArmor) value = primaryAbilityValue(card, card.value + level * 2, power);
       text = `Deal ${value} ${DAMAGE_LABELS[card.damageType]}${card.alternateDamageType ? ` or ${DAMAGE_LABELS[card.alternateDamageType]}` : ""} damage${card.alternateDamageType ? " at random" : ""}${card.target === "allEnemies" ? " to all enemies" : card.target === "randomEnemy" ? " to a random enemy" : ""}`;
+      if (card.purgeThorns) text = `Purge enemy Thorns; ${text}`;
       if (card.doubleWithArmor) text += "; Doubled if you have Armor";
       break;
     case "guard":
@@ -142,6 +145,12 @@ export function cardText(
       break;
     case "draw":
       text = `Draw ${value} card${value === 1 ? "" : "s"}`;
+      break;
+    case "redraw":
+      text = "Shuffle your hand into your deck; Draw that many cards";
+      break;
+    case "redistributeBlock":
+      text = `Redistribute allied Block evenly; Allies gain ${value} Block`;
       break;
     case "teamGuard":
       text = `Allies gain ${value} Block`;
