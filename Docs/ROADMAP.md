@@ -103,7 +103,7 @@ Tools: [development tools](DEVELOPMENT_TOOLS.md), [verification policy](../CONTR
 
 These are known completion needs before substantial expansion:
 
-- [ ] **Balance the complete journey:** playtest starter strength, team combinations, passive ranks, talents, Boons, Merchant value and Campfire recovery and optional-event frequency against clear difficulty and journey-length goals
+- [ ] **Balance the complete journey:** playtest starter strength, team combinations, passive ranks, talents, Boons, Merchant value and Campfire recovery and optional-event frequency against clear difficulty and journey-length goals; the [first pass](JOURNEY_BALANCE.md) curates solo starters and records the remaining attrition problems
 - [ ] **Finish encounter and support artwork:** replace remaining placeholders through the prepared-media workflow and review them in the actual screens
 - [ ] **Approve media and audio:** confirm source rights, track/effect selections, relative volumes and long-session listening comfort
 - [ ] **Qualify rendered flows:** inspect exact-commit CI evidence for the complete journey, minimum viewport, enlarged text, tooltips and keyboard/controller navigation

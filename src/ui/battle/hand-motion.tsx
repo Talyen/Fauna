@@ -11,7 +11,14 @@ type Pose = {
   height: number;
 };
 type Snapshot = Map<string, Pose>;
-type Props = { revision: number; turn?: number; opening?: boolean; paused: boolean; children: ReactNode };
+type Props = {
+  revision: number;
+  turn?: number;
+  opening?: boolean;
+  paused: boolean;
+  cardIds: readonly string[];
+  children: ReactNode;
+};
 // Alchemy uses the CSS ease-in-out curve for one uninterrupted half-turn.
 function flipEase(time: number) {
   if (time <= 0 || time >= 1) return time;
@@ -161,6 +168,9 @@ export class HandMotion extends Component<Props> {
       const duration =
         motionValue("--motion-hand-flight") / (items.length >= 4 ? 1.6 : items.length === 3 ? 1.4 : 1);
       for (const [, pose] of items) {
+        // Unplayed Consume cards still discard; played ones leave the battle inventory.
+        if (!draw && pose.node.dataset.consume && !this.props.cardIds.includes(pose.node.dataset.cardId!))
+          continue;
         const pile = board.querySelector<HTMLElement>(`[data-pile="${draw ? "draw" : "discard"}"]`);
         if (!pile || !pose.rect.width) continue;
         flights.push({ pose, destination: draw ? pose.node : pile, draw, duration, start });

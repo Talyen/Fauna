@@ -53,7 +53,7 @@ it("registers the agreed kit, ranks, recruitment and enemy support", () => {
     [20, 35, 50, 70, 85, 100].map((amount) => [{ kind: "wellRead", amount }]),
   );
   expect(species("rookhaven").passiveTiers[5].description).toBe("Drawing a card copies it");
-  expect(FIRST_RUN_STARTERS).toContain("rookhaven");
+  expect(FIRST_RUN_STARTERS).not.toContain("rookhaven");
   expect(CARDS.filter((card) => card.species === "rookhaven").map(enemyCanUse)).toEqual([true, true, false]);
   let game = produce(teamRun(1, ["mossguard", "emberback", "prismram"]), (draft) => {
     prepareDestination(draft);

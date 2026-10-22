@@ -10,14 +10,6 @@ export const memento: CreatureKit = {
     trait: "The Court Remembers",
     passiveTiers: [
       {
-        description: "Each time you play a card, an Echo attacks for 1 Water damage",
-        effects: [{ kind: "courtRemembers", amount: 1 }],
-      },
-      {
-        description: "Each time you play a card, an Echo attacks for 2 Water damage",
-        effects: [{ kind: "courtRemembers", amount: 2 }],
-      },
-      {
         description: "Each time you play a card, an Echo attacks for 3 Water damage",
         effects: [{ kind: "courtRemembers", amount: 3 }],
       },
@@ -32,6 +24,14 @@ export const memento: CreatureKit = {
       {
         description: "Each time you play a card, an Echo attacks for 6 Water damage",
         effects: [{ kind: "courtRemembers", amount: 6 }],
+      },
+      {
+        description: "Each time you play a card, an Echo attacks for 7 Water damage",
+        effects: [{ kind: "courtRemembers", amount: 7 }],
+      },
+      {
+        description: "Each time you play a card, an Echo attacks for 8 Water damage",
+        effects: [{ kind: "courtRemembers", amount: 8 }],
       },
     ],
   },
@@ -70,6 +70,7 @@ export const PEARL: CardDefinition = {
   species: "memento",
   name: "Pearl",
   effect: "pearl",
+  consume: true,
   value: 2,
   cost: 1,
   artwork: "action.memento.pearl",

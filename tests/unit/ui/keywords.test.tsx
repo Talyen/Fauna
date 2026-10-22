@@ -20,6 +20,7 @@ import { BattleReadout } from "../../../src/ui/shared/combat/battle-readout";
 import { CardRules } from "../../../src/ui/shared/combat/combat-values";
 import { KeywordText } from "../../../src/ui/shared/keyword-text";
 import { run } from "../../support/game";
+import { PEARL } from "../../../src/game/content/creatures/memento";
 
 describe("keyword foundation", () => {
   it("classifies authored effects without reading names or rules text, using only current talent categories", () => {
@@ -93,6 +94,9 @@ describe("keyword foundation", () => {
       ["light"],
       ["block"],
       [],
+      ["health"],
+      ["light"],
+      [],
     ];
     expect(CARDS.map((card) => cardKeywords({ definitionId: card.id }))).toEqual(expected);
     expect(definitionKeywords({ effect: "attack", damageType: "poison" })).toEqual(["poison"]);
@@ -125,7 +129,6 @@ describe("keyword foundation", () => {
       "currency",
       "gold",
       "wish",
-      "consume",
       "companion",
       "archery",
     ]) {
@@ -134,6 +137,9 @@ describe("keyword foundation", () => {
       expect(TALENTS.some((talent) => talent.id.startsWith(`${id}.`))).toBe(false);
     }
     expect(isKeywordId("mark")).toBe(false);
+    expect(isKeywordId("consume")).toBe(true);
+    expect(PROGRESSION_KEYWORDS).not.toContain("consume");
+    expect(TALENTS.some((talent) => talent.id.startsWith("consume."))).toBe(false);
     expect(CARDS.every((card) => String(card.effect) !== "mark")).toBe(true);
     const state = run();
     const obsolete = { ...state, version: 22 };
@@ -156,6 +162,7 @@ describe("keyword foundation", () => {
     expect(parts.map((part) => part.text).join("")).toBe(text);
     expect(parts.filter((part) => part.keyword).map((part) => [part.text, part.keyword])).toEqual([
       ["Health", "health"],
+      ["Consume", "consume"],
       ["Burn", "burn"],
     ]);
     expect(
@@ -177,6 +184,9 @@ describe("keyword foundation", () => {
     expect(html).toContain('data-keyword="burn">Burn</span>');
     expect(html.replace(/<[^>]+>/g, "")).toBe("Deal 13 Burn damage to all enemies");
     expect(html).not.toContain('data-keyword="consume"');
+    const pearl = renderToStaticMarkup(<CardRules card={PEARL} value={2} />);
+    expect(pearl).toContain('data-keyword="consume">Consume</span>');
+    expect(pearl.replace(/<[^>]+>/g, "")).toBe("Consume; Gain 2 Block or 2 Mana at random");
     const unsafe = renderToStaticMarkup(<KeywordText text={"<script>Fire</script>"} />);
     expect(unsafe).toContain("&lt;script&gt;");
     expect(unsafe).not.toContain("<script>");

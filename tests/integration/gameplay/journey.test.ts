@@ -3,7 +3,7 @@ import { freshCombat } from "../../../src/game/combat/index";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../../src/game/engine";
-import { FIRST_RUN_STARTERS, species, BOONS } from "../../../src/game/content";
+import { SPECIES, species, BOONS } from "../../../src/game/content";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { previewPlay } from "../../../src/game/preview";
 import {
@@ -91,8 +91,8 @@ describe("journey earnings and results", () => {
     const s = produce(run(), (d) => {
       d.expedition = started.expedition;
       d.journey = started.journey;
-      d.discovery.encountered = [...FIRST_RUN_STARTERS];
-      d.discovery.recruited = Object.fromEntries(FIRST_RUN_STARTERS.map((kind) => [kind, 1]));
+      d.discovery.encountered = SPECIES.map((entry) => entry.id);
+      d.discovery.recruited = Object.fromEntries(SPECIES.map((entry) => [entry.id, 1]));
       d.roster = [...d.team.map((unit) => unit.species), "pollenmoth", "captoad"];
       d.reserves = (["pollenmoth", "captoad"] as const).map((kind) => ({
         id: kind,

@@ -1,0 +1,6574 @@
+{
+  "date": "2026-10-22",
+  "baselineCommit": "1a19fe1c5a7084b5b5e0f810b13d02d44ad30522",
+  "limitations": "Automated visible-information policy observations; fixtures and incomplete outcomes are explicit. Different curated offers and save version change starting checkpoints; no paired before/after journey win-rate claim.",
+  "openings": {
+    "baseline": {
+      "identity": "2d2e8d070af1e57cb309c43a7be20b2b67aada9eef64a61a1eb02b93f7f076c9",
+      "fixture": "Explicit offered starter and encounter pack; no progression; normal production commands and Auto-play; 40-turn budget",
+      "total": 1311,
+      "byStarter": [
+        {
+          "starter": "rookhaven",
+          "n": 69,
+          "victories": 52,
+          "defeats": 14,
+          "incomplete": 3,
+          "meanObservedTurnsCappedAt40": 16.333333333333332
+        },
+        {
+          "starter": "sternshell",
+          "n": 69,
+          "victories": 68,
+          "defeats": 1,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 2.8840579710144927
+        },
+        {
+          "starter": "wickwaltz",
+          "n": 69,
+          "victories": 69,
+          "defeats": 0,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 1.9565217391304348
+        },
+        {
+          "starter": "mossguard",
+          "n": 69,
+          "victories": 39,
+          "defeats": 5,
+          "incomplete": 25,
+          "meanObservedTurnsCappedAt40": 27.82608695652174
+        },
+        {
+          "starter": "emberback",
+          "n": 69,
+          "victories": 69,
+          "defeats": 0,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 3.1159420289855073
+        },
+        {
+          "starter": "pollenmoth",
+          "n": 69,
+          "victories": 58,
+          "defeats": 4,
+          "incomplete": 7,
+          "meanObservedTurnsCappedAt40": 17.463768115942027
+        },
+        {
+          "starter": "prismram",
+          "n": 69,
+          "victories": 69,
+          "defeats": 0,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 3.1739130434782608
+        },
+        {
+          "starter": "captoad",
+          "n": 69,
+          "victories": 69,
+          "defeats": 0,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 3.3043478260869565
+        },
+        {
+          "starter": "dunefox",
+          "n": 69,
+          "victories": 69,
+          "defeats": 0,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 2.608695652173913
+        },
+        {
+          "starter": "reedstag",
+          "n": 69,
+          "victories": 68,
+          "defeats": 0,
+          "incomplete": 1,
+          "meanObservedTurnsCappedAt40": 6.057971014492754
+        },
+        {
+          "starter": "cindernewt",
+          "n": 69,
+          "victories": 69,
+          "defeats": 0,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 2.608695652173913
+        },
+        {
+          "starter": "coralcurl",
+          "n": 69,
+          "victories": 68,
+          "defeats": 0,
+          "incomplete": 1,
+          "meanObservedTurnsCappedAt40": 6.782608695652174
+        },
+        {
+          "starter": "chimecricket",
+          "n": 69,
+          "victories": 69,
+          "defeats": 0,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 2.420289855072464
+        },
+        {
+          "starter": "dawncall",
+          "n": 69,
+          "victories": 65,
+          "defeats": 3,
+          "incomplete": 1,
+          "meanObservedTurnsCappedAt40": 14.043478260869565
+        },
+        {
+          "starter": "ringpalm",
+          "n": 69,
+          "victories": 69,
+          "defeats": 0,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 4.0144927536231885
+        },
+        {
+          "starter": "shadebrim",
+          "n": 69,
+          "victories": 62,
+          "defeats": 7,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 9.927536231884059
+        },
+        {
+          "starter": "glintstride",
+          "n": 69,
+          "victories": 69,
+          "defeats": 0,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 2.608695652173913
+        },
+        {
+          "starter": "euphera",
+          "n": 69,
+          "victories": 69,
+          "defeats": 0,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 4.463768115942029
+        },
+        {
+          "starter": "tournelle",
+          "n": 69,
+          "victories": 69,
+          "defeats": 0,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 4.159420289855072
+        }
+      ]
+    },
+    "curated": {
+      "identity": "07bfa80c9c84b34593968571067324c6d2e7634d3e1fc3ba04475207921384ac",
+      "fixture": "Explicit offered starter and encounter pack; no progression; normal production commands and Auto-play; 40-turn budget",
+      "total": 966,
+      "byStarter": [
+        {
+          "starter": "sternshell",
+          "n": 69,
+          "victories": 68,
+          "defeats": 1,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 3.246376811594203
+        },
+        {
+          "starter": "wickwaltz",
+          "n": 69,
+          "victories": 69,
+          "defeats": 0,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 2.1159420289855073
+        },
+        {
+          "starter": "emberback",
+          "n": 69,
+          "victories": 69,
+          "defeats": 0,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 3.0869565217391304
+        },
+        {
+          "starter": "prismram",
+          "n": 69,
+          "victories": 69,
+          "defeats": 0,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 3.463768115942029
+        },
+        {
+          "starter": "captoad",
+          "n": 69,
+          "victories": 69,
+          "defeats": 0,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 3.391304347826087
+        },
+        {
+          "starter": "dunefox",
+          "n": 69,
+          "victories": 69,
+          "defeats": 0,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 2.8840579710144927
+        },
+        {
+          "starter": "reedstag",
+          "n": 69,
+          "victories": 69,
+          "defeats": 0,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 6.478260869565218
+        },
+        {
+          "starter": "cindernewt",
+          "n": 69,
+          "victories": 69,
+          "defeats": 0,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 2.9565217391304346
+        },
+        {
+          "starter": "coralcurl",
+          "n": 69,
+          "victories": 69,
+          "defeats": 0,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 7.115942028985507
+        },
+        {
+          "starter": "chimecricket",
+          "n": 69,
+          "victories": 69,
+          "defeats": 0,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 2.463768115942029
+        },
+        {
+          "starter": "ringpalm",
+          "n": 69,
+          "victories": 69,
+          "defeats": 0,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 4.173913043478261
+        },
+        {
+          "starter": "glintstride",
+          "n": 69,
+          "victories": 69,
+          "defeats": 0,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 2.753623188405797
+        },
+        {
+          "starter": "euphera",
+          "n": 69,
+          "victories": 69,
+          "defeats": 0,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 4.521739130434782
+        },
+        {
+          "starter": "tournelle",
+          "n": 69,
+          "victories": 69,
+          "defeats": 0,
+          "incomplete": 0,
+          "meanObservedTurnsCappedAt40": 4.246376811594203
+        }
+      ]
+    }
+  },
+  "careers": {
+    "legacyBenchmark": {
+      "identity": "2d2e8d070af1e57cb309c43a7be20b2b67aada9eef64a61a1eb02b93f7f076c9",
+      "settings": {
+        "policyVersion": 23,
+        "autoEndTurn": true,
+        "maxActions": 5000,
+        "maxTurns": 100,
+        "resumeEvery": 17
+      },
+      "total": 50,
+      "victories": 25,
+      "defeats": 1,
+      "incomplete": 24,
+      "distinctSeedStarterOpeningCombinations": 15
+    },
+    "baseline": {
+      "identity": "2d2e8d070af1e57cb309c43a7be20b2b67aada9eef64a61a1eb02b93f7f076c9",
+      "settings": {
+        "policyVersion": 23,
+        "autoEndTurn": true,
+        "maxActions": 5000,
+        "maxTurns": 100,
+        "resumeEvery": 17
+      },
+      "total": 57,
+      "victories": 15,
+      "defeats": 1,
+      "incomplete": 41,
+      "cases": [
+        {
+          "key": "rookhaven-11",
+          "preference": "rookhaven",
+          "actualStarter": "rookhaven",
+          "seed": 11,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 226,
+            "health": 205,
+            "encounter": 7,
+            "swaps": 2,
+            "currency": 172,
+            "xp": 1776
+          }
+        },
+        {
+          "key": "rookhaven-20",
+          "preference": "rookhaven",
+          "actualStarter": "rookhaven",
+          "seed": 20,
+          "complete": true,
+          "outcome": "defeat",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 0,
+            "turns": 8,
+            "health": 0,
+            "encounter": 0,
+            "swaps": 0,
+            "currency": 0,
+            "xp": 27
+          }
+        },
+        {
+          "key": "rookhaven-32",
+          "preference": "rookhaven",
+          "actualStarter": "rookhaven",
+          "seed": 32,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 43,
+            "health": 126,
+            "encounter": 3,
+            "swaps": 1,
+            "currency": 39,
+            "xp": 164
+          }
+        },
+        {
+          "key": "sternshell-26",
+          "preference": "sternshell",
+          "actualStarter": "sternshell",
+          "seed": 26,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 41,
+            "health": 136,
+            "encounter": 4,
+            "swaps": 0,
+            "currency": 100,
+            "xp": 176
+          }
+        },
+        {
+          "key": "sternshell-29",
+          "preference": "sternshell",
+          "actualStarter": "sternshell",
+          "seed": 29,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Action budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 65,
+            "health": 80,
+            "encounter": 5,
+            "swaps": 2,
+            "currency": 120,
+            "xp": 331
+          }
+        },
+        {
+          "key": "sternshell-37",
+          "preference": "sternshell",
+          "actualStarter": "sternshell",
+          "seed": 37,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 4,
+            "health": 32,
+            "encounter": 1,
+            "swaps": 0,
+            "currency": 20,
+            "xp": 15
+          }
+        },
+        {
+          "key": "wickwaltz-16",
+          "preference": "wickwaltz",
+          "actualStarter": "wickwaltz",
+          "seed": 16,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 199,
+            "health": 139,
+            "encounter": 7,
+            "swaps": 8,
+            "currency": 200,
+            "xp": 1149
+          }
+        },
+        {
+          "key": "wickwaltz-19",
+          "preference": "wickwaltz",
+          "actualStarter": "wickwaltz",
+          "seed": 19,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 11,
+            "health": 22,
+            "encounter": 2,
+            "swaps": 2,
+            "currency": 40,
+            "xp": 59
+          }
+        },
+        {
+          "key": "wickwaltz-22",
+          "preference": "wickwaltz",
+          "actualStarter": "wickwaltz",
+          "seed": 22,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 171,
+            "health": 156,
+            "encounter": 7,
+            "swaps": 0,
+            "currency": 200,
+            "xp": 898
+          }
+        },
+        {
+          "key": "mossguard-11",
+          "preference": "mossguard",
+          "actualStarter": "mossguard",
+          "seed": 11,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 113,
+            "health": 158,
+            "encounter": 4,
+            "swaps": 0,
+            "currency": 39,
+            "xp": 410
+          }
+        },
+        {
+          "key": "mossguard-24",
+          "preference": "mossguard",
+          "actualStarter": "mossguard",
+          "seed": 24,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 0,
+            "health": 32,
+            "encounter": 0,
+            "swaps": 0,
+            "currency": 0,
+            "xp": 0
+          }
+        },
+        {
+          "key": "mossguard-44",
+          "preference": "mossguard",
+          "actualStarter": "mossguard",
+          "seed": 44,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 67,
+            "health": 64,
+            "encounter": 1,
+            "swaps": 0,
+            "currency": 20,
+            "xp": 135
+          }
+        },
+        {
+          "key": "emberback-73",
+          "preference": "emberback",
+          "actualStarter": "emberback",
+          "seed": 73,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 105,
+            "health": 171,
+            "encounter": 7,
+            "swaps": 3,
+            "currency": 200,
+            "xp": 527
+          }
+        },
+        {
+          "key": "emberback-76",
+          "preference": "emberback",
+          "actualStarter": "emberback",
+          "seed": 76,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 35,
+            "health": 84,
+            "encounter": 4,
+            "swaps": 1,
+            "currency": 100,
+            "xp": 165
+          }
+        },
+        {
+          "key": "emberback-79",
+          "preference": "emberback",
+          "actualStarter": "emberback",
+          "seed": 79,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 99,
+            "health": 49,
+            "encounter": 6,
+            "swaps": 7,
+            "currency": 120,
+            "xp": 524
+          }
+        },
+        {
+          "key": "pollenmoth-10",
+          "preference": "pollenmoth",
+          "actualStarter": "pollenmoth",
+          "seed": 10,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 170,
+            "health": 198,
+            "encounter": 7,
+            "swaps": 0,
+            "currency": 150,
+            "xp": 762
+          }
+        },
+        {
+          "key": "pollenmoth-22",
+          "preference": "pollenmoth",
+          "actualStarter": "pollenmoth",
+          "seed": 22,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 52,
+            "health": 137,
+            "encounter": 3,
+            "swaps": 0,
+            "currency": 60,
+            "xp": 182
+          }
+        },
+        {
+          "key": "pollenmoth-23",
+          "preference": "pollenmoth",
+          "actualStarter": "pollenmoth",
+          "seed": 23,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 269,
+            "health": 149,
+            "encounter": 7,
+            "swaps": 1,
+            "currency": 200,
+            "xp": 939
+          }
+        },
+        {
+          "key": "prismram-15",
+          "preference": "prismram",
+          "actualStarter": "prismram",
+          "seed": 15,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Action budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 98,
+            "health": 28,
+            "encounter": 6,
+            "swaps": 5,
+            "currency": 90,
+            "xp": 385
+          }
+        },
+        {
+          "key": "prismram-16",
+          "preference": "prismram",
+          "actualStarter": "prismram",
+          "seed": 16,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 172,
+            "health": 178,
+            "encounter": 7,
+            "swaps": 1,
+            "currency": 169,
+            "xp": 832
+          }
+        },
+        {
+          "key": "prismram-21",
+          "preference": "prismram",
+          "actualStarter": "prismram",
+          "seed": 21,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 133,
+            "health": 175,
+            "encounter": 7,
+            "swaps": 2,
+            "currency": 106,
+            "xp": 568
+          }
+        },
+        {
+          "key": "captoad-10",
+          "preference": "captoad",
+          "actualStarter": "captoad",
+          "seed": 10,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 107,
+            "health": 131,
+            "encounter": 6,
+            "swaps": 1,
+            "currency": 104,
+            "xp": 688
+          }
+        },
+        {
+          "key": "captoad-13",
+          "preference": "captoad",
+          "actualStarter": "captoad",
+          "seed": 13,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 145,
+            "health": 61,
+            "encounter": 5,
+            "swaps": 3,
+            "currency": 83,
+            "xp": 964
+          }
+        },
+        {
+          "key": "captoad-23",
+          "preference": "captoad",
+          "actualStarter": "captoad",
+          "seed": 23,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 98,
+            "health": 140,
+            "encounter": 7,
+            "swaps": 3,
+            "currency": 131,
+            "xp": 516
+          }
+        },
+        {
+          "key": "dunefox-15",
+          "preference": "dunefox",
+          "actualStarter": "dunefox",
+          "seed": 15,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 67,
+            "health": 71,
+            "encounter": 5,
+            "swaps": 3,
+            "currency": 88,
+            "xp": 339
+          }
+        },
+        {
+          "key": "dunefox-19",
+          "preference": "dunefox",
+          "actualStarter": "dunefox",
+          "seed": 19,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 281,
+            "health": 183,
+            "encounter": 7,
+            "swaps": 4,
+            "currency": 147,
+            "xp": 1904
+          }
+        },
+        {
+          "key": "dunefox-21",
+          "preference": "dunefox",
+          "actualStarter": "dunefox",
+          "seed": 21,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 144,
+            "health": 166,
+            "encounter": 7,
+            "swaps": 5,
+            "currency": 200,
+            "xp": 784
+          }
+        },
+        {
+          "key": "reedstag-13",
+          "preference": "reedstag",
+          "actualStarter": "reedstag",
+          "seed": 13,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 279,
+            "health": 182,
+            "encounter": 7,
+            "swaps": 1,
+            "currency": 200,
+            "xp": 1347
+          }
+        },
+        {
+          "key": "reedstag-17",
+          "preference": "reedstag",
+          "actualStarter": "reedstag",
+          "seed": 17,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 102,
+            "health": 178,
+            "encounter": 4,
+            "swaps": 0,
+            "currency": 80,
+            "xp": 395
+          }
+        },
+        {
+          "key": "reedstag-18",
+          "preference": "reedstag",
+          "actualStarter": "reedstag",
+          "seed": 18,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 109,
+            "health": 176,
+            "encounter": 7,
+            "swaps": 1,
+            "currency": 66,
+            "xp": 492
+          }
+        },
+        {
+          "key": "cindernewt-12",
+          "preference": "cindernewt",
+          "actualStarter": "cindernewt",
+          "seed": 12,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 43,
+            "health": 149,
+            "encounter": 4,
+            "swaps": 0,
+            "currency": 87,
+            "xp": 208
+          }
+        },
+        {
+          "key": "cindernewt-16",
+          "preference": "cindernewt",
+          "actualStarter": "cindernewt",
+          "seed": 16,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 134,
+            "health": 189,
+            "encounter": 7,
+            "swaps": 2,
+            "currency": 172,
+            "xp": 625
+          }
+        },
+        {
+          "key": "cindernewt-24",
+          "preference": "cindernewt",
+          "actualStarter": "cindernewt",
+          "seed": 24,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 46,
+            "health": 108,
+            "encounter": 4,
+            "swaps": 2,
+            "currency": 70,
+            "xp": 241
+          }
+        },
+        {
+          "key": "coralcurl-17",
+          "preference": "coralcurl",
+          "actualStarter": "coralcurl",
+          "seed": 17,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 37,
+            "health": 144,
+            "encounter": 3,
+            "swaps": 0,
+            "currency": 5,
+            "xp": 133
+          }
+        },
+        {
+          "key": "coralcurl-40",
+          "preference": "coralcurl",
+          "actualStarter": "coralcurl",
+          "seed": 40,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 63,
+            "health": 162,
+            "encounter": 4,
+            "swaps": 0,
+            "currency": 76,
+            "xp": 281
+          }
+        },
+        {
+          "key": "coralcurl-42",
+          "preference": "coralcurl",
+          "actualStarter": "coralcurl",
+          "seed": 42,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 60,
+            "health": 110,
+            "encounter": 4,
+            "swaps": 1,
+            "currency": 100,
+            "xp": 217
+          }
+        },
+        {
+          "key": "chimecricket-10",
+          "preference": "chimecricket",
+          "actualStarter": "chimecricket",
+          "seed": 10,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 190,
+            "health": 171,
+            "encounter": 7,
+            "swaps": 1,
+            "currency": 120,
+            "xp": 744
+          }
+        },
+        {
+          "key": "chimecricket-14",
+          "preference": "chimecricket",
+          "actualStarter": "chimecricket",
+          "seed": 14,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 69,
+            "health": 152,
+            "encounter": 3,
+            "swaps": 0,
+            "currency": 60,
+            "xp": 233
+          }
+        },
+        {
+          "key": "chimecricket-24",
+          "preference": "chimecricket",
+          "actualStarter": "chimecricket",
+          "seed": 24,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 29,
+            "health": 137,
+            "encounter": 3,
+            "swaps": 0,
+            "currency": 26,
+            "xp": 155
+          }
+        },
+        {
+          "key": "dawncall-19",
+          "preference": "dawncall",
+          "actualStarter": "dawncall",
+          "seed": 19,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 143,
+            "health": 154,
+            "encounter": 5,
+            "swaps": 0,
+            "currency": 88,
+            "xp": 548
+          }
+        },
+        {
+          "key": "dawncall-22",
+          "preference": "dawncall",
+          "actualStarter": "dawncall",
+          "seed": 22,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 208,
+            "health": 163,
+            "encounter": 7,
+            "swaps": 4,
+            "currency": 143,
+            "xp": 895
+          }
+        },
+        {
+          "key": "dawncall-23",
+          "preference": "dawncall",
+          "actualStarter": "dawncall",
+          "seed": 23,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 111,
+            "health": 112,
+            "encounter": 7,
+            "swaps": 3,
+            "currency": 99,
+            "xp": 486
+          }
+        },
+        {
+          "key": "ringpalm-11",
+          "preference": "ringpalm",
+          "actualStarter": "ringpalm",
+          "seed": 11,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 14,
+            "health": 32,
+            "encounter": 2,
+            "swaps": 0,
+            "currency": 40,
+            "xp": 67
+          }
+        },
+        {
+          "key": "ringpalm-12",
+          "preference": "ringpalm",
+          "actualStarter": "ringpalm",
+          "seed": 12,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Action budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 37,
+            "health": 83,
+            "encounter": 4,
+            "swaps": 2,
+            "currency": 37,
+            "xp": 204
+          }
+        },
+        {
+          "key": "ringpalm-13",
+          "preference": "ringpalm",
+          "actualStarter": "ringpalm",
+          "seed": 13,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 54,
+            "health": 92,
+            "encounter": 4,
+            "swaps": 2,
+            "currency": 67,
+            "xp": 267
+          }
+        },
+        {
+          "key": "shadebrim-15",
+          "preference": "shadebrim",
+          "actualStarter": "shadebrim",
+          "seed": 15,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 49,
+            "health": 122,
+            "encounter": 3,
+            "swaps": 0,
+            "currency": 29,
+            "xp": 384
+          }
+        },
+        {
+          "key": "shadebrim-20",
+          "preference": "shadebrim",
+          "actualStarter": "shadebrim",
+          "seed": 20,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 183,
+            "health": 134,
+            "encounter": 7,
+            "swaps": 1,
+            "currency": 80,
+            "xp": 1368
+          }
+        },
+        {
+          "key": "shadebrim-27",
+          "preference": "shadebrim",
+          "actualStarter": "shadebrim",
+          "seed": 27,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 70,
+            "health": 130,
+            "encounter": 3,
+            "swaps": 0,
+            "currency": 35,
+            "xp": 417
+          }
+        },
+        {
+          "key": "glintstride-17",
+          "preference": "glintstride",
+          "actualStarter": "glintstride",
+          "seed": 17,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 79,
+            "health": 149,
+            "encounter": 4,
+            "swaps": 1,
+            "currency": 79,
+            "xp": 353
+          }
+        },
+        {
+          "key": "glintstride-21",
+          "preference": "glintstride",
+          "actualStarter": "glintstride",
+          "seed": 21,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 35,
+            "health": 171,
+            "encounter": 4,
+            "swaps": 0,
+            "currency": 69,
+            "xp": 151
+          }
+        },
+        {
+          "key": "glintstride-35",
+          "preference": "glintstride",
+          "actualStarter": "glintstride",
+          "seed": 35,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 43,
+            "health": 149,
+            "encounter": 4,
+            "swaps": 1,
+            "currency": 71,
+            "xp": 162
+          }
+        },
+        {
+          "key": "euphera-14",
+          "preference": "euphera",
+          "actualStarter": "euphera",
+          "seed": 14,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 4,
+            "health": 32,
+            "encounter": 1,
+            "swaps": 0,
+            "currency": 20,
+            "xp": 13
+          }
+        },
+        {
+          "key": "euphera-18",
+          "preference": "euphera",
+          "actualStarter": "euphera",
+          "seed": 18,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Action budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 85,
+            "health": 28,
+            "encounter": 4,
+            "swaps": 4,
+            "currency": 49,
+            "xp": 316
+          }
+        },
+        {
+          "key": "euphera-28",
+          "preference": "euphera",
+          "actualStarter": "euphera",
+          "seed": 28,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 51,
+            "health": 89,
+            "encounter": 4,
+            "swaps": 1,
+            "currency": 100,
+            "xp": 210
+          }
+        },
+        {
+          "key": "tournelle-12",
+          "preference": "tournelle",
+          "actualStarter": "tournelle",
+          "seed": 12,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 25,
+            "health": 6,
+            "encounter": 3,
+            "swaps": 1,
+            "currency": 60,
+            "xp": 93
+          }
+        },
+        {
+          "key": "tournelle-18",
+          "preference": "tournelle",
+          "actualStarter": "tournelle",
+          "seed": 18,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Action budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 71,
+            "health": 79,
+            "encounter": 4,
+            "swaps": 2,
+            "currency": 100,
+            "xp": 358
+          }
+        },
+        {
+          "key": "tournelle-20",
+          "preference": "tournelle",
+          "actualStarter": "tournelle",
+          "seed": 20,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 132,
+            "health": 163,
+            "encounter": 7,
+            "swaps": 0,
+            "currency": 139,
+            "xp": 529
+          }
+        }
+      ]
+    },
+    "treasuryOne": {
+      "identity": "791c9f5d4cd28e7a095c10473f2773f9c1cb96b40d78e6dc7e4f9f44cdab1a01",
+      "settings": {
+        "policyVersion": 23,
+        "autoEndTurn": true,
+        "maxActions": 5000,
+        "maxTurns": 100,
+        "resumeEvery": 17
+      },
+      "total": 57,
+      "victories": 13,
+      "defeats": 3,
+      "incomplete": 41,
+      "cases": [
+        {
+          "key": "rookhaven-11",
+          "preference": "rookhaven",
+          "actualStarter": "rookhaven",
+          "seed": 11,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 84,
+            "health": 54,
+            "encounter": 5,
+            "swaps": 5,
+            "currency": 59,
+            "xp": 413
+          }
+        },
+        {
+          "key": "rookhaven-20",
+          "preference": "rookhaven",
+          "actualStarter": "rookhaven",
+          "seed": 20,
+          "complete": true,
+          "outcome": "defeat",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 0,
+            "turns": 8,
+            "health": 0,
+            "encounter": 0,
+            "swaps": 0,
+            "currency": 0,
+            "xp": 27
+          }
+        },
+        {
+          "key": "rookhaven-32",
+          "preference": "rookhaven",
+          "actualStarter": "rookhaven",
+          "seed": 32,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 266,
+            "health": 150,
+            "encounter": 7,
+            "swaps": 2,
+            "currency": 14,
+            "xp": 1194
+          }
+        },
+        {
+          "key": "sternshell-26",
+          "preference": "sternshell",
+          "actualStarter": "sternshell",
+          "seed": 26,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 127,
+            "health": 117,
+            "encounter": 7,
+            "swaps": 5,
+            "currency": 160,
+            "xp": 708
+          }
+        },
+        {
+          "key": "sternshell-29",
+          "preference": "sternshell",
+          "actualStarter": "sternshell",
+          "seed": 29,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 167,
+            "health": 151,
+            "encounter": 7,
+            "swaps": 1,
+            "currency": 200,
+            "xp": 1053
+          }
+        },
+        {
+          "key": "sternshell-37",
+          "preference": "sternshell",
+          "actualStarter": "sternshell",
+          "seed": 37,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 4,
+            "health": 32,
+            "encounter": 1,
+            "swaps": 0,
+            "currency": 20,
+            "xp": 15
+          }
+        },
+        {
+          "key": "wickwaltz-16",
+          "preference": "wickwaltz",
+          "actualStarter": "wickwaltz",
+          "seed": 16,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 58,
+            "health": 23,
+            "encounter": 5,
+            "swaps": 6,
+            "currency": 120,
+            "xp": 349
+          }
+        },
+        {
+          "key": "wickwaltz-19",
+          "preference": "wickwaltz",
+          "actualStarter": "wickwaltz",
+          "seed": 19,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 11,
+            "health": 22,
+            "encounter": 2,
+            "swaps": 2,
+            "currency": 40,
+            "xp": 59
+          }
+        },
+        {
+          "key": "wickwaltz-22",
+          "preference": "wickwaltz",
+          "actualStarter": "wickwaltz",
+          "seed": 22,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 142,
+            "health": 115,
+            "encounter": 5,
+            "swaps": 1,
+            "currency": 120,
+            "xp": 688
+          }
+        },
+        {
+          "key": "mossguard-11",
+          "preference": "mossguard",
+          "actualStarter": "mossguard",
+          "seed": 11,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 160,
+            "health": 111,
+            "encounter": 5,
+            "swaps": 1,
+            "currency": 57,
+            "xp": 753
+          }
+        },
+        {
+          "key": "mossguard-24",
+          "preference": "mossguard",
+          "actualStarter": "mossguard",
+          "seed": 24,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 0,
+            "health": 32,
+            "encounter": 0,
+            "swaps": 0,
+            "currency": 0,
+            "xp": 0
+          }
+        },
+        {
+          "key": "mossguard-44",
+          "preference": "mossguard",
+          "actualStarter": "mossguard",
+          "seed": 44,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 67,
+            "health": 64,
+            "encounter": 1,
+            "swaps": 0,
+            "currency": 20,
+            "xp": 135
+          }
+        },
+        {
+          "key": "emberback-73",
+          "preference": "emberback",
+          "actualStarter": "emberback",
+          "seed": 73,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 102,
+            "health": 133,
+            "encounter": 7,
+            "swaps": 4,
+            "currency": 141,
+            "xp": 668
+          }
+        },
+        {
+          "key": "emberback-76",
+          "preference": "emberback",
+          "actualStarter": "emberback",
+          "seed": 76,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 43,
+            "health": 74,
+            "encounter": 5,
+            "swaps": 3,
+            "currency": 120,
+            "xp": 244
+          }
+        },
+        {
+          "key": "emberback-79",
+          "preference": "emberback",
+          "actualStarter": "emberback",
+          "seed": 79,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 100,
+            "health": 98,
+            "encounter": 5,
+            "swaps": 3,
+            "currency": 100,
+            "xp": 615
+          }
+        },
+        {
+          "key": "pollenmoth-10",
+          "preference": "pollenmoth",
+          "actualStarter": "pollenmoth",
+          "seed": 10,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 242,
+            "health": 102,
+            "encounter": 7,
+            "swaps": 1,
+            "currency": 160,
+            "xp": 1491
+          }
+        },
+        {
+          "key": "pollenmoth-22",
+          "preference": "pollenmoth",
+          "actualStarter": "pollenmoth",
+          "seed": 22,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 52,
+            "health": 137,
+            "encounter": 3,
+            "swaps": 0,
+            "currency": 60,
+            "xp": 182
+          }
+        },
+        {
+          "key": "pollenmoth-23",
+          "preference": "pollenmoth",
+          "actualStarter": "pollenmoth",
+          "seed": 23,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 166,
+            "health": 193,
+            "encounter": 7,
+            "swaps": 1,
+            "currency": 163,
+            "xp": 694
+          }
+        },
+        {
+          "key": "prismram-15",
+          "preference": "prismram",
+          "actualStarter": "prismram",
+          "seed": 15,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 69,
+            "health": 114,
+            "encounter": 4,
+            "swaps": 2,
+            "currency": 100,
+            "xp": 270
+          }
+        },
+        {
+          "key": "prismram-16",
+          "preference": "prismram",
+          "actualStarter": "prismram",
+          "seed": 16,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 153,
+            "health": 171,
+            "encounter": 7,
+            "swaps": 1,
+            "currency": 169,
+            "xp": 635
+          }
+        },
+        {
+          "key": "prismram-21",
+          "preference": "prismram",
+          "actualStarter": "prismram",
+          "seed": 21,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 49,
+            "health": 137,
+            "encounter": 4,
+            "swaps": 0,
+            "currency": 100,
+            "xp": 201
+          }
+        },
+        {
+          "key": "captoad-10",
+          "preference": "captoad",
+          "actualStarter": "captoad",
+          "seed": 10,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 146,
+            "health": 192,
+            "encounter": 7,
+            "swaps": 1,
+            "currency": 164,
+            "xp": 877
+          }
+        },
+        {
+          "key": "captoad-13",
+          "preference": "captoad",
+          "actualStarter": "captoad",
+          "seed": 13,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 198,
+            "health": 177,
+            "encounter": 7,
+            "swaps": 1,
+            "currency": 143,
+            "xp": 921
+          }
+        },
+        {
+          "key": "captoad-23",
+          "preference": "captoad",
+          "actualStarter": "captoad",
+          "seed": 23,
+          "complete": true,
+          "outcome": "defeat",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 0,
+            "turns": 77,
+            "health": 0,
+            "encounter": 4,
+            "swaps": 5,
+            "currency": 100,
+            "xp": 450
+          }
+        },
+        {
+          "key": "dunefox-15",
+          "preference": "dunefox",
+          "actualStarter": "dunefox",
+          "seed": 15,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 136,
+            "health": 177,
+            "encounter": 7,
+            "swaps": 3,
+            "currency": 107,
+            "xp": 650
+          }
+        },
+        {
+          "key": "dunefox-19",
+          "preference": "dunefox",
+          "actualStarter": "dunefox",
+          "seed": 19,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 77,
+            "health": 100,
+            "encounter": 4,
+            "swaps": 1,
+            "currency": 80,
+            "xp": 358
+          }
+        },
+        {
+          "key": "dunefox-21",
+          "preference": "dunefox",
+          "actualStarter": "dunefox",
+          "seed": 21,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 49,
+            "health": 146,
+            "encounter": 4,
+            "swaps": 0,
+            "currency": 100,
+            "xp": 295
+          }
+        },
+        {
+          "key": "reedstag-13",
+          "preference": "reedstag",
+          "actualStarter": "reedstag",
+          "seed": 13,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 180,
+            "health": 172,
+            "encounter": 7,
+            "swaps": 1,
+            "currency": 68,
+            "xp": 788
+          }
+        },
+        {
+          "key": "reedstag-17",
+          "preference": "reedstag",
+          "actualStarter": "reedstag",
+          "seed": 17,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 101,
+            "health": 137,
+            "encounter": 4,
+            "swaps": 0,
+            "currency": 100,
+            "xp": 390
+          }
+        },
+        {
+          "key": "reedstag-18",
+          "preference": "reedstag",
+          "actualStarter": "reedstag",
+          "seed": 18,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 221,
+            "health": 206,
+            "encounter": 7,
+            "swaps": 1,
+            "currency": 78,
+            "xp": 1014
+          }
+        },
+        {
+          "key": "cindernewt-12",
+          "preference": "cindernewt",
+          "actualStarter": "cindernewt",
+          "seed": 12,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 166,
+            "health": 176,
+            "encounter": 7,
+            "swaps": 1,
+            "currency": 160,
+            "xp": 716
+          }
+        },
+        {
+          "key": "cindernewt-16",
+          "preference": "cindernewt",
+          "actualStarter": "cindernewt",
+          "seed": 16,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 96,
+            "health": 157,
+            "encounter": 7,
+            "swaps": 2,
+            "currency": 78,
+            "xp": 484
+          }
+        },
+        {
+          "key": "cindernewt-24",
+          "preference": "cindernewt",
+          "actualStarter": "cindernewt",
+          "seed": 24,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 126,
+            "health": 61,
+            "encounter": 5,
+            "swaps": 3,
+            "currency": 120,
+            "xp": 547
+          }
+        },
+        {
+          "key": "coralcurl-17",
+          "preference": "coralcurl",
+          "actualStarter": "coralcurl",
+          "seed": 17,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 37,
+            "health": 144,
+            "encounter": 3,
+            "swaps": 0,
+            "currency": 5,
+            "xp": 133
+          }
+        },
+        {
+          "key": "coralcurl-40",
+          "preference": "coralcurl",
+          "actualStarter": "coralcurl",
+          "seed": 40,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 195,
+            "health": 203,
+            "encounter": 7,
+            "swaps": 0,
+            "currency": 141,
+            "xp": 1531
+          }
+        },
+        {
+          "key": "coralcurl-42",
+          "preference": "coralcurl",
+          "actualStarter": "coralcurl",
+          "seed": 42,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 83,
+            "health": 108,
+            "encounter": 5,
+            "swaps": 2,
+            "currency": 120,
+            "xp": 374
+          }
+        },
+        {
+          "key": "chimecricket-10",
+          "preference": "chimecricket",
+          "actualStarter": "chimecricket",
+          "seed": 10,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 76,
+            "health": 173,
+            "encounter": 4,
+            "swaps": 0,
+            "currency": 40,
+            "xp": 288
+          }
+        },
+        {
+          "key": "chimecricket-14",
+          "preference": "chimecricket",
+          "actualStarter": "chimecricket",
+          "seed": 14,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 69,
+            "health": 152,
+            "encounter": 3,
+            "swaps": 0,
+            "currency": 60,
+            "xp": 233
+          }
+        },
+        {
+          "key": "chimecricket-24",
+          "preference": "chimecricket",
+          "actualStarter": "chimecricket",
+          "seed": 24,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 29,
+            "health": 137,
+            "encounter": 3,
+            "swaps": 0,
+            "currency": 26,
+            "xp": 155
+          }
+        },
+        {
+          "key": "dawncall-19",
+          "preference": "dawncall",
+          "actualStarter": "dawncall",
+          "seed": 19,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 243,
+            "health": 163,
+            "encounter": 7,
+            "swaps": 0,
+            "currency": 140,
+            "xp": 938
+          }
+        },
+        {
+          "key": "dawncall-22",
+          "preference": "dawncall",
+          "actualStarter": "dawncall",
+          "seed": 22,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 123,
+            "health": 154,
+            "encounter": 4,
+            "swaps": 1,
+            "currency": 70,
+            "xp": 539
+          }
+        },
+        {
+          "key": "dawncall-23",
+          "preference": "dawncall",
+          "actualStarter": "dawncall",
+          "seed": 23,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 110,
+            "health": 141,
+            "encounter": 7,
+            "swaps": 3,
+            "currency": 85,
+            "xp": 514
+          }
+        },
+        {
+          "key": "ringpalm-11",
+          "preference": "ringpalm",
+          "actualStarter": "ringpalm",
+          "seed": 11,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 14,
+            "health": 32,
+            "encounter": 2,
+            "swaps": 0,
+            "currency": 40,
+            "xp": 67
+          }
+        },
+        {
+          "key": "ringpalm-12",
+          "preference": "ringpalm",
+          "actualStarter": "ringpalm",
+          "seed": 12,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Action budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 36,
+            "health": 79,
+            "encounter": 4,
+            "swaps": 2,
+            "currency": 62,
+            "xp": 195
+          }
+        },
+        {
+          "key": "ringpalm-13",
+          "preference": "ringpalm",
+          "actualStarter": "ringpalm",
+          "seed": 13,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 136,
+            "health": 182,
+            "encounter": 7,
+            "swaps": 4,
+            "currency": 129,
+            "xp": 601
+          }
+        },
+        {
+          "key": "shadebrim-15",
+          "preference": "shadebrim",
+          "actualStarter": "shadebrim",
+          "seed": 15,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 49,
+            "health": 122,
+            "encounter": 3,
+            "swaps": 0,
+            "currency": 29,
+            "xp": 384
+          }
+        },
+        {
+          "key": "shadebrim-20",
+          "preference": "shadebrim",
+          "actualStarter": "shadebrim",
+          "seed": 20,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 198,
+            "health": 178,
+            "encounter": 7,
+            "swaps": 0,
+            "currency": 200,
+            "xp": 1282
+          }
+        },
+        {
+          "key": "shadebrim-27",
+          "preference": "shadebrim",
+          "actualStarter": "shadebrim",
+          "seed": 27,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 70,
+            "health": 131,
+            "encounter": 3,
+            "swaps": 0,
+            "currency": 35,
+            "xp": 417
+          }
+        },
+        {
+          "key": "glintstride-17",
+          "preference": "glintstride",
+          "actualStarter": "glintstride",
+          "seed": 17,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 146,
+            "health": 115,
+            "encounter": 5,
+            "swaps": 4,
+            "currency": 73,
+            "xp": 717
+          }
+        },
+        {
+          "key": "glintstride-21",
+          "preference": "glintstride",
+          "actualStarter": "glintstride",
+          "seed": 21,
+          "complete": true,
+          "outcome": "defeat",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 0,
+            "turns": 144,
+            "health": 0,
+            "encounter": 4,
+            "swaps": 4,
+            "currency": 100,
+            "xp": 1008
+          }
+        },
+        {
+          "key": "glintstride-35",
+          "preference": "glintstride",
+          "actualStarter": "glintstride",
+          "seed": 35,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 53,
+            "health": 86,
+            "encounter": 4,
+            "swaps": 2,
+            "currency": 35,
+            "xp": 203
+          }
+        },
+        {
+          "key": "euphera-14",
+          "preference": "euphera",
+          "actualStarter": "euphera",
+          "seed": 14,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 4,
+            "health": 32,
+            "encounter": 1,
+            "swaps": 0,
+            "currency": 20,
+            "xp": 13
+          }
+        },
+        {
+          "key": "euphera-18",
+          "preference": "euphera",
+          "actualStarter": "euphera",
+          "seed": 18,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Action budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 90,
+            "health": 88,
+            "encounter": 4,
+            "swaps": 2,
+            "currency": 69,
+            "xp": 333
+          }
+        },
+        {
+          "key": "euphera-28",
+          "preference": "euphera",
+          "actualStarter": "euphera",
+          "seed": 28,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 213,
+            "health": 190,
+            "encounter": 7,
+            "swaps": 0,
+            "currency": 141,
+            "xp": 1712
+          }
+        },
+        {
+          "key": "tournelle-12",
+          "preference": "tournelle",
+          "actualStarter": "tournelle",
+          "seed": 12,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 65,
+            "health": 119,
+            "encounter": 4,
+            "swaps": 0,
+            "currency": 63,
+            "xp": 303
+          }
+        },
+        {
+          "key": "tournelle-18",
+          "preference": "tournelle",
+          "actualStarter": "tournelle",
+          "seed": 18,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 52,
+            "health": 130,
+            "encounter": 4,
+            "swaps": 0,
+            "currency": 100,
+            "xp": 260
+          }
+        },
+        {
+          "key": "tournelle-20",
+          "preference": "tournelle",
+          "actualStarter": "tournelle",
+          "seed": 20,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 76,
+            "health": 146,
+            "encounter": 7,
+            "swaps": 1,
+            "currency": 99,
+            "xp": 391
+          }
+        }
+      ]
+    },
+    "curated": {
+      "identity": "07bfa80c9c84b34593968571067324c6d2e7634d3e1fc3ba04475207921384ac",
+      "settings": {
+        "policyVersion": 23,
+        "autoEndTurn": true,
+        "maxActions": 5000,
+        "maxTurns": 100,
+        "resumeEvery": 17
+      },
+      "total": 42,
+      "victories": 11,
+      "defeats": 2,
+      "incomplete": 29,
+      "cases": [
+        {
+          "key": "sternshell-20",
+          "preference": "sternshell",
+          "actualStarter": "sternshell",
+          "seed": 20,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 27,
+            "health": 120,
+            "encounter": 3,
+            "swaps": 1,
+            "currency": 36,
+            "xp": 127
+          }
+        },
+        {
+          "key": "sternshell-21",
+          "preference": "sternshell",
+          "actualStarter": "sternshell",
+          "seed": 21,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Action budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 3,
+            "health": 23,
+            "encounter": 1,
+            "swaps": 0,
+            "currency": 20,
+            "xp": 12
+          }
+        },
+        {
+          "key": "sternshell-24",
+          "preference": "sternshell",
+          "actualStarter": "sternshell",
+          "seed": 24,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 41,
+            "health": 141,
+            "encounter": 3,
+            "swaps": 0,
+            "currency": 39,
+            "xp": 186
+          }
+        },
+        {
+          "key": "wickwaltz-22",
+          "preference": "wickwaltz",
+          "actualStarter": "wickwaltz",
+          "seed": 22,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 41,
+            "health": 145,
+            "encounter": 3,
+            "swaps": 0,
+            "currency": 28,
+            "xp": 219
+          }
+        },
+        {
+          "key": "wickwaltz-24",
+          "preference": "wickwaltz",
+          "actualStarter": "wickwaltz",
+          "seed": 24,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 25,
+            "health": 143,
+            "encounter": 3,
+            "swaps": 0,
+            "currency": 38,
+            "xp": 131
+          }
+        },
+        {
+          "key": "wickwaltz-26",
+          "preference": "wickwaltz",
+          "actualStarter": "wickwaltz",
+          "seed": 26,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 89,
+            "health": 98,
+            "encounter": 4,
+            "swaps": 1,
+            "currency": 42,
+            "xp": 458
+          }
+        },
+        {
+          "key": "emberback-11",
+          "preference": "emberback",
+          "actualStarter": "emberback",
+          "seed": 11,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 111,
+            "health": 117,
+            "encounter": 7,
+            "swaps": 6,
+            "currency": 140,
+            "xp": 787
+          }
+        },
+        {
+          "key": "emberback-12",
+          "preference": "emberback",
+          "actualStarter": "emberback",
+          "seed": 12,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 131,
+            "health": 170,
+            "encounter": 7,
+            "swaps": 3,
+            "currency": 127,
+            "xp": 582
+          }
+        },
+        {
+          "key": "emberback-18",
+          "preference": "emberback",
+          "actualStarter": "emberback",
+          "seed": 18,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 66,
+            "health": 137,
+            "encounter": 7,
+            "swaps": 6,
+            "currency": 99,
+            "xp": 351
+          }
+        },
+        {
+          "key": "prismram-131",
+          "preference": "prismram",
+          "actualStarter": "prismram",
+          "seed": 131,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 121,
+            "health": 143,
+            "encounter": 7,
+            "swaps": 2,
+            "currency": 174,
+            "xp": 562
+          }
+        },
+        {
+          "key": "prismram-134",
+          "preference": "prismram",
+          "actualStarter": "prismram",
+          "seed": 134,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 53,
+            "health": 170,
+            "encounter": 4,
+            "swaps": 1,
+            "currency": 100,
+            "xp": 202
+          }
+        },
+        {
+          "key": "prismram-136",
+          "preference": "prismram",
+          "actualStarter": "prismram",
+          "seed": 136,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 108,
+            "health": 165,
+            "encounter": 7,
+            "swaps": 3,
+            "currency": 167,
+            "xp": 569
+          }
+        },
+        {
+          "key": "captoad-10",
+          "preference": "captoad",
+          "actualStarter": "captoad",
+          "seed": 10,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 21,
+            "health": 100,
+            "encounter": 3,
+            "swaps": 0,
+            "currency": 25,
+            "xp": 60
+          }
+        },
+        {
+          "key": "captoad-13",
+          "preference": "captoad",
+          "actualStarter": "captoad",
+          "seed": 13,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 39,
+            "health": 132,
+            "encounter": 4,
+            "swaps": 1,
+            "currency": 43,
+            "xp": 172
+          }
+        },
+        {
+          "key": "captoad-16",
+          "preference": "captoad",
+          "actualStarter": "captoad",
+          "seed": 16,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 24,
+            "health": 117,
+            "encounter": 3,
+            "swaps": 0,
+            "currency": 29,
+            "xp": 81
+          }
+        },
+        {
+          "key": "dunefox-14",
+          "preference": "dunefox",
+          "actualStarter": "dunefox",
+          "seed": 14,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 175,
+            "health": 131,
+            "encounter": 7,
+            "swaps": 10,
+            "currency": 160,
+            "xp": 1000
+          }
+        },
+        {
+          "key": "dunefox-15",
+          "preference": "dunefox",
+          "actualStarter": "dunefox",
+          "seed": 15,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Action budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 56,
+            "health": 74,
+            "encounter": 5,
+            "swaps": 3,
+            "currency": 85,
+            "xp": 319
+          }
+        },
+        {
+          "key": "dunefox-25",
+          "preference": "dunefox",
+          "actualStarter": "dunefox",
+          "seed": 25,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 45,
+            "health": 140,
+            "encounter": 3,
+            "swaps": 1,
+            "currency": 60,
+            "xp": 202
+          }
+        },
+        {
+          "key": "reedstag-10",
+          "preference": "reedstag",
+          "actualStarter": "reedstag",
+          "seed": 10,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 102,
+            "health": 109,
+            "encounter": 5,
+            "swaps": 1,
+            "currency": 81,
+            "xp": 510
+          }
+        },
+        {
+          "key": "reedstag-11",
+          "preference": "reedstag",
+          "actualStarter": "reedstag",
+          "seed": 11,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Action budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 58,
+            "health": 73,
+            "encounter": 5,
+            "swaps": 2,
+            "currency": 120,
+            "xp": 288
+          }
+        },
+        {
+          "key": "reedstag-12",
+          "preference": "reedstag",
+          "actualStarter": "reedstag",
+          "seed": 12,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 137,
+            "health": 152,
+            "encounter": 7,
+            "swaps": 3,
+            "currency": 143,
+            "xp": 749
+          }
+        },
+        {
+          "key": "cindernewt-16",
+          "preference": "cindernewt",
+          "actualStarter": "cindernewt",
+          "seed": 16,
+          "complete": true,
+          "outcome": "defeat",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 0,
+            "turns": 46,
+            "health": 0,
+            "encounter": 2,
+            "swaps": 0,
+            "currency": 40,
+            "xp": 199
+          }
+        },
+        {
+          "key": "cindernewt-30",
+          "preference": "cindernewt",
+          "actualStarter": "cindernewt",
+          "seed": 30,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 208,
+            "health": 166,
+            "encounter": 7,
+            "swaps": 0,
+            "currency": 166,
+            "xp": 1135
+          }
+        },
+        {
+          "key": "cindernewt-33",
+          "preference": "cindernewt",
+          "actualStarter": "cindernewt",
+          "seed": 33,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 158,
+            "health": 105,
+            "encounter": 7,
+            "swaps": 10,
+            "currency": 139,
+            "xp": 1059
+          }
+        },
+        {
+          "key": "coralcurl-12",
+          "preference": "coralcurl",
+          "actualStarter": "coralcurl",
+          "seed": 12,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 184,
+            "health": 191,
+            "encounter": 7,
+            "swaps": 0,
+            "currency": 183,
+            "xp": 1307
+          }
+        },
+        {
+          "key": "coralcurl-16",
+          "preference": "coralcurl",
+          "actualStarter": "coralcurl",
+          "seed": 16,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 49,
+            "health": 137,
+            "encounter": 3,
+            "swaps": 1,
+            "currency": 60,
+            "xp": 223
+          }
+        },
+        {
+          "key": "coralcurl-19",
+          "preference": "coralcurl",
+          "actualStarter": "coralcurl",
+          "seed": 19,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 204,
+            "health": 173,
+            "encounter": 7,
+            "swaps": 0,
+            "currency": 154,
+            "xp": 927
+          }
+        },
+        {
+          "key": "chimecricket-15",
+          "preference": "chimecricket",
+          "actualStarter": "chimecricket",
+          "seed": 15,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 88,
+            "health": 136,
+            "encounter": 6,
+            "swaps": 1,
+            "currency": 115,
+            "xp": 341
+          }
+        },
+        {
+          "key": "chimecricket-17",
+          "preference": "chimecricket",
+          "actualStarter": "chimecricket",
+          "seed": 17,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 43,
+            "health": 164,
+            "encounter": 4,
+            "swaps": 0,
+            "currency": 44,
+            "xp": 172
+          }
+        },
+        {
+          "key": "chimecricket-24",
+          "preference": "chimecricket",
+          "actualStarter": "chimecricket",
+          "seed": 24,
+          "complete": true,
+          "outcome": "defeat",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 0,
+            "turns": 151,
+            "health": 0,
+            "encounter": 6,
+            "swaps": 5,
+            "currency": 144,
+            "xp": 658
+          }
+        },
+        {
+          "key": "ringpalm-14",
+          "preference": "ringpalm",
+          "actualStarter": "ringpalm",
+          "seed": 14,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Action budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 15,
+            "health": 15,
+            "encounter": 2,
+            "swaps": 1,
+            "currency": 40,
+            "xp": 64
+          }
+        },
+        {
+          "key": "ringpalm-21",
+          "preference": "ringpalm",
+          "actualStarter": "ringpalm",
+          "seed": 21,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 43,
+            "health": 153,
+            "encounter": 4,
+            "swaps": 1,
+            "currency": 48,
+            "xp": 236
+          }
+        },
+        {
+          "key": "ringpalm-23",
+          "preference": "ringpalm",
+          "actualStarter": "ringpalm",
+          "seed": 23,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 51,
+            "health": 156,
+            "encounter": 3,
+            "swaps": 0,
+            "currency": 60,
+            "xp": 253
+          }
+        },
+        {
+          "key": "glintstride-11",
+          "preference": "glintstride",
+          "actualStarter": "glintstride",
+          "seed": 11,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 20,
+            "health": 116,
+            "encounter": 3,
+            "swaps": 1,
+            "currency": 60,
+            "xp": 102
+          }
+        },
+        {
+          "key": "glintstride-14",
+          "preference": "glintstride",
+          "actualStarter": "glintstride",
+          "seed": 14,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 35,
+            "health": 44,
+            "encounter": 3,
+            "swaps": 3,
+            "currency": 60,
+            "xp": 124
+          }
+        },
+        {
+          "key": "glintstride-15",
+          "preference": "glintstride",
+          "actualStarter": "glintstride",
+          "seed": 15,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 80,
+            "health": 138,
+            "encounter": 6,
+            "swaps": 1,
+            "currency": 59,
+            "xp": 339
+          }
+        },
+        {
+          "key": "euphera-10",
+          "preference": "euphera",
+          "actualStarter": "euphera",
+          "seed": 10,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 205,
+            "health": 126,
+            "encounter": 7,
+            "swaps": 1,
+            "currency": 127,
+            "xp": 1270
+          }
+        },
+        {
+          "key": "euphera-13",
+          "preference": "euphera",
+          "actualStarter": "euphera",
+          "seed": 13,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 172,
+            "health": 178,
+            "encounter": 7,
+            "swaps": 3,
+            "currency": 159,
+            "xp": 728
+          }
+        },
+        {
+          "key": "euphera-17",
+          "preference": "euphera",
+          "actualStarter": "euphera",
+          "seed": 17,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 200,
+            "health": 170,
+            "encounter": 7,
+            "swaps": 3,
+            "currency": 175,
+            "xp": 1065
+          }
+        },
+        {
+          "key": "tournelle-23",
+          "preference": "tournelle",
+          "actualStarter": "tournelle",
+          "seed": 23,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 206,
+            "health": 194,
+            "encounter": 7,
+            "swaps": 3,
+            "currency": 200,
+            "xp": 830
+          }
+        },
+        {
+          "key": "tournelle-32",
+          "preference": "tournelle",
+          "actualStarter": "tournelle",
+          "seed": 32,
+          "complete": false,
+          "outcome": "incomplete",
+          "reason": "Turn budget exhausted",
+          "metrics": {
+            "win": 0,
+            "turns": 67,
+            "health": 52,
+            "encounter": 4,
+            "swaps": 1,
+            "currency": 100,
+            "xp": 235
+          }
+        },
+        {
+          "key": "tournelle-34",
+          "preference": "tournelle",
+          "actualStarter": "tournelle",
+          "seed": 34,
+          "complete": true,
+          "outcome": "victory",
+          "reason": "Completed requested journeys",
+          "metrics": {
+            "win": 1,
+            "turns": 159,
+            "health": 178,
+            "encounter": 7,
+            "swaps": 1,
+            "currency": 144,
+            "xp": 774
+          }
+        }
+      ]
+    }
+  },
+  "progression": {
+    "baseline": {
+      "identity": "2d2e8d070af1e57cb309c43a7be20b2b67aada9eef64a61a1eb02b93f7f076c9",
+      "fixture": "Explicit team, rank and talent grants, equal XP budgets, room index and Boon loadouts before battle start; ordinary production commands; 100-turn and 5000-action budgets; no claim of earned progression",
+      "boons": [
+        {
+          "boon": null,
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 41,
+          "actions": 162,
+          "health": 83
+        },
+        {
+          "boon": null,
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 48,
+          "actions": 190,
+          "health": 83
+        },
+        {
+          "boon": null,
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 48,
+          "actions": 190,
+          "health": 82
+        },
+        {
+          "boon": "tattered-pages",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 34,
+          "actions": 136,
+          "health": 83
+        },
+        {
+          "boon": "tattered-pages",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 58,
+          "actions": 232,
+          "health": 83
+        },
+        {
+          "boon": "tattered-pages",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 34,
+          "actions": 135,
+          "health": 82
+        },
+        {
+          "boon": "bone-charm",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 52,
+          "actions": 206,
+          "health": 83
+        },
+        {
+          "boon": "bone-charm",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 45,
+          "actions": 178,
+          "health": 83
+        },
+        {
+          "boon": "bone-charm",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 36,
+          "actions": 143,
+          "health": 83
+        },
+        {
+          "boon": "ironwood-buckler",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 38,
+          "actions": 150,
+          "health": 83
+        },
+        {
+          "boon": "ironwood-buckler",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 34,
+          "actions": 133,
+          "health": 83
+        },
+        {
+          "boon": "ironwood-buckler",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 44,
+          "actions": 175,
+          "health": 83
+        },
+        {
+          "boon": "icy-heart",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 41,
+          "actions": 162,
+          "health": 83
+        },
+        {
+          "boon": "icy-heart",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 48,
+          "actions": 190,
+          "health": 83
+        },
+        {
+          "boon": "icy-heart",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 48,
+          "actions": 190,
+          "health": 82
+        },
+        {
+          "boon": "meteorite",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 41,
+          "actions": 162,
+          "health": 83
+        },
+        {
+          "boon": "meteorite",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 48,
+          "actions": 190,
+          "health": 83
+        },
+        {
+          "boon": "meteorite",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 48,
+          "actions": 190,
+          "health": 82
+        },
+        {
+          "boon": "sin-eaters-lantern",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 41,
+          "actions": 162,
+          "health": 83
+        },
+        {
+          "boon": "sin-eaters-lantern",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 48,
+          "actions": 190,
+          "health": 83
+        },
+        {
+          "boon": "sin-eaters-lantern",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 48,
+          "actions": 190,
+          "health": 82
+        },
+        {
+          "boon": "thunderstone",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 41,
+          "actions": 162,
+          "health": 83
+        },
+        {
+          "boon": "thunderstone",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 38,
+          "actions": 150,
+          "health": 83
+        },
+        {
+          "boon": "thunderstone",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 47,
+          "actions": 187,
+          "health": 80
+        },
+        {
+          "boon": "groves-favor",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 64,
+          "actions": 255,
+          "health": 83
+        },
+        {
+          "boon": "groves-favor",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 49,
+          "actions": 193,
+          "health": 83
+        },
+        {
+          "boon": "groves-favor",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 39,
+          "actions": 154,
+          "health": 83
+        },
+        {
+          "boon": "brass-censer",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 39,
+          "actions": 156,
+          "health": 83
+        },
+        {
+          "boon": "brass-censer",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 31,
+          "actions": 123,
+          "health": 82
+        },
+        {
+          "boon": "brass-censer",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 42,
+          "actions": 168,
+          "health": 82
+        },
+        {
+          "boon": "parasitic-bloom",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 43,
+          "actions": 171,
+          "health": 83
+        },
+        {
+          "boon": "parasitic-bloom",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 43,
+          "actions": 170,
+          "health": 83
+        },
+        {
+          "boon": "parasitic-bloom",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 65,
+          "actions": 259,
+          "health": 83
+        },
+        {
+          "boon": "cutpurse-knife",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 41,
+          "actions": 162,
+          "health": 83
+        },
+        {
+          "boon": "cutpurse-knife",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 48,
+          "actions": 190,
+          "health": 83
+        },
+        {
+          "boon": "cutpurse-knife",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 48,
+          "actions": 190,
+          "health": 82
+        },
+        {
+          "boon": "merchants-favor",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 41,
+          "actions": 162,
+          "health": 83
+        },
+        {
+          "boon": "merchants-favor",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 48,
+          "actions": 190,
+          "health": 83
+        },
+        {
+          "boon": "merchants-favor",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 48,
+          "actions": 190,
+          "health": 82
+        },
+        {
+          "boon": "plague-doctors-mask",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 41,
+          "actions": 162,
+          "health": 83
+        },
+        {
+          "boon": "plague-doctors-mask",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 48,
+          "actions": 190,
+          "health": 83
+        },
+        {
+          "boon": "plague-doctors-mask",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 48,
+          "actions": 190,
+          "health": 82
+        },
+        {
+          "boon": "sundering-charm",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 41,
+          "actions": 162,
+          "health": 83
+        },
+        {
+          "boon": "sundering-charm",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 48,
+          "actions": 190,
+          "health": 83
+        },
+        {
+          "boon": "sundering-charm",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 48,
+          "actions": 190,
+          "health": 82
+        },
+        {
+          "boon": "resonant-chimes",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 31,
+          "actions": 152,
+          "health": 83
+        },
+        {
+          "boon": "resonant-chimes",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 43,
+          "actions": 208,
+          "health": 83
+        },
+        {
+          "boon": "resonant-chimes",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 43,
+          "actions": 204,
+          "health": 83
+        },
+        {
+          "boon": "smugglers-map",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 41,
+          "actions": 162,
+          "health": 83
+        },
+        {
+          "boon": "smugglers-map",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 48,
+          "actions": 190,
+          "health": 83
+        },
+        {
+          "boon": "smugglers-map",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 48,
+          "actions": 190,
+          "health": 82
+        },
+        {
+          "boon": "frozen-pocketwatch",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 41,
+          "actions": 162,
+          "health": 83
+        },
+        {
+          "boon": "frozen-pocketwatch",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 48,
+          "actions": 190,
+          "health": 83
+        },
+        {
+          "boon": "frozen-pocketwatch",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 48,
+          "actions": 190,
+          "health": 82
+        },
+        {
+          "boon": "lucky-clover",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 41,
+          "actions": 162,
+          "health": 83
+        },
+        {
+          "boon": "lucky-clover",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 48,
+          "actions": 190,
+          "health": 83
+        },
+        {
+          "boon": "lucky-clover",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 48,
+          "actions": 190,
+          "health": 82
+        }
+      ],
+      "groups": [
+        {
+          "team": "offense",
+          "profile": "base",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 2, 2],
+          "actions": [9, 7, 6],
+          "health": [76, 82, 81]
+        },
+        {
+          "team": "offense",
+          "profile": "base",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [19, 17, 22],
+          "actions": [74, 66, 85],
+          "health": [36, 46, 40]
+        },
+        {
+          "team": "offense",
+          "profile": "base",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [22, 21, 28],
+          "actions": [86, 82, 110],
+          "health": [32, 34, 30]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-1",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 2, 2],
+          "actions": [9, 7, 6],
+          "health": [76, 82, 81]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-1",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [19, 24, 22],
+          "actions": [76, 94, 86],
+          "health": [39, 25, 26]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-1",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [23, 27, 27],
+          "actions": [89, 106, 105],
+          "health": [37, 25, 20]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-2",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 2, 2],
+          "actions": [9, 7, 6],
+          "health": [76, 82, 81]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-2",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [15, 13, 14],
+          "actions": [59, 52, 56],
+          "health": [37, 44, 50]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-2",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [23, 20, 20],
+          "actions": [92, 78, 78],
+          "health": [11, 33, 39]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-3",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 2, 2],
+          "actions": [9, 7, 6],
+          "health": [76, 82, 81]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-3",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [10, 11, 14],
+          "actions": [39, 43, 56],
+          "health": [58, 41, 41]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-3",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [15, 14, 17],
+          "actions": [60, 54, 68],
+          "health": [50, 39, 41]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-4",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 2, 2],
+          "actions": [9, 7, 6],
+          "health": [76, 82, 81]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-4",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [20, 9, 13],
+          "actions": [78, 36, 51],
+          "health": [42, 45, 45]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-4",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [28, 15, 15],
+          "actions": [111, 60, 58],
+          "health": [34, 38, 41]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-5",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 2, 2],
+          "actions": [9, 7, 6],
+          "health": [76, 82, 81]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-5",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [14, 11, 10],
+          "actions": [55, 42, 38],
+          "health": [52, 50, 62]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-5",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [18, 13, 13],
+          "actions": [70, 50, 52],
+          "health": [45, 50, 58]
+        },
+        {
+          "team": "offense",
+          "profile": "talents-partial",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 2, 1],
+          "actions": [9, 7, 4],
+          "health": [84, 84, 84]
+        },
+        {
+          "team": "offense",
+          "profile": "talents-partial",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [18, 14, 15],
+          "actions": [86, 70, 74],
+          "health": [72, 68, 69]
+        },
+        {
+          "team": "offense",
+          "profile": "talents-partial",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [20, 16, 19],
+          "actions": [96, 80, 91],
+          "health": [72, 68, 67]
+        },
+        {
+          "team": "offense",
+          "profile": "talents-full",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 2, 1],
+          "actions": [6, 7, 2],
+          "health": [84, 84, 84]
+        },
+        {
+          "team": "offense",
+          "profile": "talents-full",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 4, 2],
+          "actions": [7, 19, 6],
+          "health": [84, 84, 84]
+        },
+        {
+          "team": "offense",
+          "profile": "talents-full",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 4, 2],
+          "actions": [13, 19, 10],
+          "health": [84, 84, 84]
+        },
+        {
+          "team": "offense",
+          "profile": "partial",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 2, 1],
+          "actions": [9, 7, 4],
+          "health": [84, 84, 84]
+        },
+        {
+          "team": "offense",
+          "profile": "partial",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [10, 13, 15],
+          "actions": [46, 63, 74],
+          "health": [72, 71, 71]
+        },
+        {
+          "team": "offense",
+          "profile": "partial",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [12, 16, 20],
+          "actions": [59, 78, 95],
+          "health": [69, 68, 60]
+        },
+        {
+          "team": "offense",
+          "profile": "full",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 2, 1],
+          "actions": [6, 7, 2],
+          "health": [84, 84, 84]
+        },
+        {
+          "team": "offense",
+          "profile": "full",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 4, 2],
+          "actions": [7, 19, 6],
+          "health": [84, 84, 84]
+        },
+        {
+          "team": "offense",
+          "profile": "full",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 4, 2],
+          "actions": [13, 19, 10],
+          "health": [84, 84, 84]
+        },
+        {
+          "team": "defense",
+          "profile": "base",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [5, 4, 4],
+          "actions": [17, 14, 13],
+          "health": [86, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "base",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["incomplete", "victory", "incomplete"],
+          "turns": [100, 80, 100],
+          "actions": [384, 308, 383],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "base",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["incomplete", "incomplete", "incomplete"],
+          "turns": [100, 100, 100],
+          "actions": [384, 388, 383],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-1",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [5, 4, 4],
+          "actions": [17, 14, 13],
+          "health": [86, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-1",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["incomplete", "victory", "victory"],
+          "turns": [100, 99, 84],
+          "actions": [384, 381, 328],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-1",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["incomplete", "incomplete", "incomplete"],
+          "turns": [100, 100, 100],
+          "actions": [384, 387, 391],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-2",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [5, 4, 4],
+          "actions": [16, 14, 13],
+          "health": [90, 87, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-2",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "incomplete", "victory"],
+          "turns": [86, 100, 84],
+          "actions": [332, 383, 319],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-2",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["incomplete", "incomplete", "victory"],
+          "turns": [100, 100, 89],
+          "actions": [389, 383, 340],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-3",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [5, 4, 4],
+          "actions": [16, 14, 13],
+          "health": [90, 87, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-3",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["incomplete", "incomplete", "victory"],
+          "turns": [100, 100, 83],
+          "actions": [384, 388, 316],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-3",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["incomplete", "incomplete", "victory"],
+          "turns": [100, 100, 89],
+          "actions": [384, 388, 340],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-4",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [4, 4, 4],
+          "actions": [15, 14, 13],
+          "health": [90, 87, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-4",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["incomplete", "incomplete", "incomplete"],
+          "turns": [100, 100, 100],
+          "actions": [384, 388, 387],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-4",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["incomplete", "incomplete", "incomplete"],
+          "turns": [100, 100, 100],
+          "actions": [384, 388, 387],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-5",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [5, 4, 4],
+          "actions": [15, 13, 13],
+          "health": [88, 84, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-5",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "incomplete", "victory"],
+          "turns": [87, 100, 70],
+          "actions": [336, 385, 271],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-5",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["incomplete", "incomplete", "victory"],
+          "turns": [100, 100, 83],
+          "actions": [387, 385, 320],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "talents-partial",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [5, 5, 5],
+          "actions": [19, 22, 19],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "talents-partial",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [61, 90, 83],
+          "actions": [252, 371, 346],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "talents-partial",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [85, 98, 98],
+          "actions": [350, 403, 407],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "talents-full",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [4, 3, 2],
+          "actions": [17, 12, 7],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "talents-full",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [28, 17, 18],
+          "actions": [148, 88, 96],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "talents-full",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [32, 21, 19],
+          "actions": [170, 113, 100],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "partial",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 6, 5],
+          "actions": [11, 23, 19],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "partial",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "incomplete", "victory"],
+          "turns": [66, 100, 91],
+          "actions": [274, 418, 375],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "partial",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "incomplete", "incomplete"],
+          "turns": [82, 100, 100],
+          "actions": [339, 418, 416],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "full",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [4, 2, 2],
+          "actions": [16, 6, 7],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "full",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [11, 30, 17],
+          "actions": [59, 154, 95],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "full",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [15, 32, 20],
+          "actions": [81, 165, 111],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "mixed",
+          "profile": "base",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 4, 3],
+          "actions": [11, 13, 11],
+          "health": [82, 79, 72]
+        },
+        {
+          "team": "mixed",
+          "profile": "base",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [41, 48, 48],
+          "actions": [162, 190, 190],
+          "health": [83, 83, 82]
+        },
+        {
+          "team": "mixed",
+          "profile": "base",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [67, 70, 74],
+          "actions": [268, 278, 293],
+          "health": [83, 83, 81]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-1",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 4, 3],
+          "actions": [11, 13, 10],
+          "health": [82, 79, 72]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-1",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [46, 29, 41],
+          "actions": [181, 116, 163],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-1",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [55, 49, 51],
+          "actions": [219, 195, 202],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-2",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 3, 3],
+          "actions": [8, 12, 10],
+          "health": [83, 79, 72]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-2",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [16, 30, 38],
+          "actions": [64, 117, 151],
+          "health": [81, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-2",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [20, 42, 31],
+          "actions": [79, 167, 121],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-3",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 2, 2],
+          "actions": [8, 8, 8],
+          "health": [83, 83, 77]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-3",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [28, 48, 17],
+          "actions": [109, 192, 65],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-3",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [35, 62, 20],
+          "actions": [140, 247, 79],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-4",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 2, 2],
+          "actions": [8, 8, 8],
+          "health": [83, 83, 79]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-4",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [21, 34, 15],
+          "actions": [81, 136, 57],
+          "health": [82, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-4",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [23, 44, 32],
+          "actions": [92, 173, 127],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-5",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 2, 2],
+          "actions": [8, 8, 8],
+          "health": [83, 83, 79]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-5",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [24, 17, 25],
+          "actions": [93, 66, 100],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-5",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [28, 20, 30],
+          "actions": [112, 78, 118],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "talents-partial",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 3, 3],
+          "actions": [10, 14, 10],
+          "health": [81, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "talents-partial",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [35, 35, 33],
+          "actions": [174, 167, 158],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "talents-partial",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [42, 41, 51],
+          "actions": [208, 195, 246],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "talents-full",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 3, 1],
+          "actions": [7, 13, 3],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "talents-full",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [10, 5, 6],
+          "actions": [54, 29, 35],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "talents-full",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [12, 9, 12],
+          "actions": [65, 47, 68],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "partial",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 2, 2],
+          "actions": [9, 9, 9],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "partial",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [31, 42, 31],
+          "actions": [150, 202, 148],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "partial",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [37, 51, 36],
+          "actions": [177, 242, 170],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "full",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 1, 1],
+          "actions": [6, 6, 2],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "full",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [7, 4, 3],
+          "actions": [40, 23, 12],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "full",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [8, 6, 3],
+          "actions": [46, 31, 16],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "legendary",
+          "profile": "base",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [6, 4, 6],
+          "actions": [32, 27, 31],
+          "health": [57, 58, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "base",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["incomplete", "incomplete", "incomplete"],
+          "turns": [100, 100, 100],
+          "actions": [565, 564, 556],
+          "health": [36, 23, 45]
+        },
+        {
+          "team": "legendary",
+          "profile": "base",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["incomplete", "incomplete", "incomplete"],
+          "turns": [100, 100, 100],
+          "actions": [565, 564, 556],
+          "health": [36, 23, 45]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-1",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 2, 3],
+          "actions": [15, 15, 13],
+          "health": [57, 58, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-1",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [28, 35, 45],
+          "actions": [175, 206, 253],
+          "health": [54, 59, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-1",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [42, 40, 56],
+          "actions": [259, 235, 312],
+          "health": [54, 59, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-2",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [1, 1, 2],
+          "actions": [10, 9, 9],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-2",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [5, 8, 20],
+          "actions": [44, 55, 101],
+          "health": [57, 59, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-2",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [10, 13, 23],
+          "actions": [71, 82, 122],
+          "health": [57, 59, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-3",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [1, 1, 2],
+          "actions": [8, 7, 7],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-3",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 4, 13],
+          "actions": [27, 31, 70],
+          "health": [57, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-3",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [5, 8, 17],
+          "actions": [42, 51, 86],
+          "health": [57, 59, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-4",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [1, 1, 1],
+          "actions": [5, 6, 5],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-4",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 4, 8],
+          "actions": [19, 26, 42],
+          "health": [57, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-4",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 4, 13],
+          "actions": [27, 31, 68],
+          "health": [57, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-5",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [1, 1, 1],
+          "actions": [5, 5, 4],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-5",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 3, 3],
+          "actions": [14, 16, 16],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-5",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 3, 3],
+          "actions": [21, 20, 20],
+          "health": [57, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "talents-partial",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 2, 3],
+          "actions": [15, 15, 12],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "talents-partial",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [17, 25, 42],
+          "actions": [121, 161, 262],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "talents-partial",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [28, 36, 50],
+          "actions": [186, 223, 307],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "talents-full",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [1, 1, 2],
+          "actions": [11, 11, 13],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "talents-full",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [8, 8, 9],
+          "actions": [55, 58, 62],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "talents-full",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [11, 11, 11],
+          "actions": [76, 81, 77],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "partial",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [1, 1, 2],
+          "actions": [8, 7, 7],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "partial",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 5, 5],
+          "actions": [26, 33, 33],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "partial",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 6, 7],
+          "actions": [33, 43, 49],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "full",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [1, 1, 1],
+          "actions": [4, 4, 3],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "full",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 2, 1],
+          "actions": [11, 12, 8],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "full",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 3, 2],
+          "actions": [13, 17, 13],
+          "health": [60, 60, 60]
+        }
+      ]
+    },
+    "curated": {
+      "identity": "07bfa80c9c84b34593968571067324c6d2e7634d3e1fc3ba04475207921384ac",
+      "fixture": "Explicit team, rank and talent grants, equal XP budgets, room index and Boon loadouts before battle start; ordinary production commands; 100-turn and 5000-action budgets; no claim of earned progression",
+      "boons": [
+        {
+          "boon": null,
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 29,
+          "actions": 116,
+          "health": 81
+        },
+        {
+          "boon": null,
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 42,
+          "actions": 166,
+          "health": 83
+        },
+        {
+          "boon": null,
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 49,
+          "actions": 193,
+          "health": 83
+        },
+        {
+          "boon": "tattered-pages",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 48,
+          "actions": 192,
+          "health": 83
+        },
+        {
+          "boon": "tattered-pages",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 39,
+          "actions": 155,
+          "health": 83
+        },
+        {
+          "boon": "tattered-pages",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 53,
+          "actions": 212,
+          "health": 83
+        },
+        {
+          "boon": "bone-charm",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 30,
+          "actions": 118,
+          "health": 83
+        },
+        {
+          "boon": "bone-charm",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 40,
+          "actions": 160,
+          "health": 83
+        },
+        {
+          "boon": "bone-charm",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 35,
+          "actions": 137,
+          "health": 83
+        },
+        {
+          "boon": "ironwood-buckler",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 27,
+          "actions": 108,
+          "health": 83
+        },
+        {
+          "boon": "ironwood-buckler",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 35,
+          "actions": 137,
+          "health": 83
+        },
+        {
+          "boon": "ironwood-buckler",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 39,
+          "actions": 156,
+          "health": 83
+        },
+        {
+          "boon": "icy-heart",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 29,
+          "actions": 116,
+          "health": 81
+        },
+        {
+          "boon": "icy-heart",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 42,
+          "actions": 166,
+          "health": 83
+        },
+        {
+          "boon": "icy-heart",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 49,
+          "actions": 193,
+          "health": 83
+        },
+        {
+          "boon": "meteorite",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 29,
+          "actions": 116,
+          "health": 81
+        },
+        {
+          "boon": "meteorite",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 42,
+          "actions": 166,
+          "health": 83
+        },
+        {
+          "boon": "meteorite",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 49,
+          "actions": 193,
+          "health": 83
+        },
+        {
+          "boon": "sin-eaters-lantern",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 29,
+          "actions": 116,
+          "health": 81
+        },
+        {
+          "boon": "sin-eaters-lantern",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 42,
+          "actions": 166,
+          "health": 83
+        },
+        {
+          "boon": "sin-eaters-lantern",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 49,
+          "actions": 193,
+          "health": 83
+        },
+        {
+          "boon": "thunderstone",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 29,
+          "actions": 116,
+          "health": 81
+        },
+        {
+          "boon": "thunderstone",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 42,
+          "actions": 166,
+          "health": 83
+        },
+        {
+          "boon": "thunderstone",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 49,
+          "actions": 193,
+          "health": 83
+        },
+        {
+          "boon": "groves-favor",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 42,
+          "actions": 165,
+          "health": 83
+        },
+        {
+          "boon": "groves-favor",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 33,
+          "actions": 131,
+          "health": 83
+        },
+        {
+          "boon": "groves-favor",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 33,
+          "actions": 132,
+          "health": 83
+        },
+        {
+          "boon": "brass-censer",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 55,
+          "actions": 217,
+          "health": 83
+        },
+        {
+          "boon": "brass-censer",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 48,
+          "actions": 190,
+          "health": 83
+        },
+        {
+          "boon": "brass-censer",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 40,
+          "actions": 160,
+          "health": 83
+        },
+        {
+          "boon": "parasitic-bloom",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 43,
+          "actions": 169,
+          "health": 83
+        },
+        {
+          "boon": "parasitic-bloom",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 29,
+          "actions": 116,
+          "health": 83
+        },
+        {
+          "boon": "parasitic-bloom",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 39,
+          "actions": 154,
+          "health": 83
+        },
+        {
+          "boon": "cutpurse-knife",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 29,
+          "actions": 116,
+          "health": 81
+        },
+        {
+          "boon": "cutpurse-knife",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 42,
+          "actions": 166,
+          "health": 83
+        },
+        {
+          "boon": "cutpurse-knife",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 49,
+          "actions": 193,
+          "health": 83
+        },
+        {
+          "boon": "merchants-favor",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 29,
+          "actions": 116,
+          "health": 81
+        },
+        {
+          "boon": "merchants-favor",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 42,
+          "actions": 166,
+          "health": 83
+        },
+        {
+          "boon": "merchants-favor",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 49,
+          "actions": 193,
+          "health": 83
+        },
+        {
+          "boon": "plague-doctors-mask",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 29,
+          "actions": 116,
+          "health": 81
+        },
+        {
+          "boon": "plague-doctors-mask",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 42,
+          "actions": 166,
+          "health": 83
+        },
+        {
+          "boon": "plague-doctors-mask",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 49,
+          "actions": 193,
+          "health": 83
+        },
+        {
+          "boon": "sundering-charm",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 29,
+          "actions": 116,
+          "health": 81
+        },
+        {
+          "boon": "sundering-charm",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 42,
+          "actions": 166,
+          "health": 83
+        },
+        {
+          "boon": "sundering-charm",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 49,
+          "actions": 193,
+          "health": 83
+        },
+        {
+          "boon": "resonant-chimes",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 38,
+          "actions": 185,
+          "health": 83
+        },
+        {
+          "boon": "resonant-chimes",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 37,
+          "actions": 181,
+          "health": 82
+        },
+        {
+          "boon": "resonant-chimes",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 43,
+          "actions": 205,
+          "health": 82
+        },
+        {
+          "boon": "smugglers-map",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 29,
+          "actions": 116,
+          "health": 81
+        },
+        {
+          "boon": "smugglers-map",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 42,
+          "actions": 166,
+          "health": 83
+        },
+        {
+          "boon": "smugglers-map",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 49,
+          "actions": 193,
+          "health": 83
+        },
+        {
+          "boon": "frozen-pocketwatch",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 29,
+          "actions": 116,
+          "health": 81
+        },
+        {
+          "boon": "frozen-pocketwatch",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 42,
+          "actions": 166,
+          "health": 83
+        },
+        {
+          "boon": "frozen-pocketwatch",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 49,
+          "actions": 193,
+          "health": 83
+        },
+        {
+          "boon": "lucky-clover",
+          "seed": 21,
+          "outcome": "victory",
+          "turns": 29,
+          "actions": 116,
+          "health": 81
+        },
+        {
+          "boon": "lucky-clover",
+          "seed": 42,
+          "outcome": "victory",
+          "turns": 42,
+          "actions": 166,
+          "health": 83
+        },
+        {
+          "boon": "lucky-clover",
+          "seed": 63,
+          "outcome": "victory",
+          "turns": 49,
+          "actions": 193,
+          "health": 83
+        }
+      ],
+      "groups": [
+        {
+          "team": "offense",
+          "profile": "base",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 3, 4],
+          "actions": [9, 10, 13],
+          "health": [70, 78, 73]
+        },
+        {
+          "team": "offense",
+          "profile": "base",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [20, 18, 24],
+          "actions": [78, 69, 95],
+          "health": [36, 42, 24]
+        },
+        {
+          "team": "offense",
+          "profile": "base",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [25, 25, 31],
+          "actions": [100, 98, 124],
+          "health": [32, 28, 20]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-1",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 3, 3],
+          "actions": [9, 10, 12],
+          "health": [70, 78, 73]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-1",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [16, 19, 26],
+          "actions": [63, 74, 104],
+          "health": [25, 42, 36]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-1",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [21, 23, 31],
+          "actions": [82, 92, 122],
+          "health": [21, 42, 29]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-2",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 3, 3],
+          "actions": [9, 10, 11],
+          "health": [70, 78, 69]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-2",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [14, 16, 24],
+          "actions": [54, 62, 95],
+          "health": [30, 47, 37]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-2",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [17, 21, 31],
+          "actions": [68, 82, 121],
+          "health": [27, 42, 29]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-3",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 3, 3],
+          "actions": [9, 10, 10],
+          "health": [70, 78, 69]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-3",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [14, 14, 16],
+          "actions": [56, 56, 61],
+          "health": [38, 48, 45]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-3",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [17, 18, 20],
+          "actions": [66, 72, 78],
+          "health": [34, 42, 42]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-4",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 3, 3],
+          "actions": [9, 10, 10],
+          "health": [70, 78, 69]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-4",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [18, 12, 13],
+          "actions": [71, 47, 52],
+          "health": [35, 52, 45]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-4",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [23, 17, 17],
+          "actions": [90, 66, 68],
+          "health": [29, 48, 42]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-5",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 3, 3],
+          "actions": [9, 10, 10],
+          "health": [70, 78, 69]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-5",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [12, 7, 6],
+          "actions": [48, 28, 24],
+          "health": [54, 63, 65]
+        },
+        {
+          "team": "offense",
+          "profile": "rank-5",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [17, 10, 9],
+          "actions": [66, 40, 34],
+          "health": [49, 59, 62]
+        },
+        {
+          "team": "offense",
+          "profile": "talents-partial",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 3, 3],
+          "actions": [10, 11, 11],
+          "health": [75, 84, 77]
+        },
+        {
+          "team": "offense",
+          "profile": "talents-partial",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [14, 12, 13],
+          "actions": [69, 57, 65],
+          "health": [74, 78, 75]
+        },
+        {
+          "team": "offense",
+          "profile": "talents-partial",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [17, 15, 16],
+          "actions": [81, 71, 80],
+          "health": [70, 72, 78]
+        },
+        {
+          "team": "offense",
+          "profile": "talents-full",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [1, 1, 1],
+          "actions": [4, 5, 3],
+          "health": [84, 84, 84]
+        },
+        {
+          "team": "offense",
+          "profile": "talents-full",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 2, 1],
+          "actions": [6, 8, 5],
+          "health": [84, 84, 84]
+        },
+        {
+          "team": "offense",
+          "profile": "talents-full",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 3, 2],
+          "actions": [6, 14, 8],
+          "health": [84, 84, 84]
+        },
+        {
+          "team": "offense",
+          "profile": "partial",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 3, 3],
+          "actions": [10, 11, 11],
+          "health": [75, 84, 77]
+        },
+        {
+          "team": "offense",
+          "profile": "partial",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [12, 10, 11],
+          "actions": [59, 46, 51],
+          "health": [74, 75, 80]
+        },
+        {
+          "team": "offense",
+          "profile": "partial",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [15, 12, 13],
+          "actions": [71, 57, 65],
+          "health": [74, 75, 80]
+        },
+        {
+          "team": "offense",
+          "profile": "full",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [1, 1, 1],
+          "actions": [4, 5, 3],
+          "health": [84, 84, 84]
+        },
+        {
+          "team": "offense",
+          "profile": "full",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 2, 1],
+          "actions": [6, 8, 5],
+          "health": [84, 84, 84]
+        },
+        {
+          "team": "offense",
+          "profile": "full",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 3, 2],
+          "actions": [6, 14, 8],
+          "health": [84, 84, 84]
+        },
+        {
+          "team": "defense",
+          "profile": "base",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [5, 7, 6],
+          "actions": [17, 24, 21],
+          "health": [88, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "base",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "incomplete"],
+          "turns": [94, 79, 100],
+          "actions": [357, 302, 388],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "base",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["incomplete", "victory", "incomplete"],
+          "turns": [100, 98, 100],
+          "actions": [382, 376, 388],
+          "health": [90, 89, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-1",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [5, 6, 6],
+          "actions": [17, 21, 21],
+          "health": [88, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-1",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "incomplete", "victory"],
+          "turns": [91, 100, 90],
+          "actions": [348, 385, 345],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-1",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["incomplete", "incomplete", "incomplete"],
+          "turns": [100, 100, 100],
+          "actions": [384, 385, 386],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-2",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [5, 6, 6],
+          "actions": [17, 21, 21],
+          "health": [88, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-2",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [91, 97, 97],
+          "actions": [348, 375, 373],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-2",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["incomplete", "incomplete", "incomplete"],
+          "turns": [100, 100, 100],
+          "actions": [384, 388, 386],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-3",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 6, 6],
+          "actions": [12, 21, 21],
+          "health": [86, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-3",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "incomplete"],
+          "turns": [73, 97, 100],
+          "actions": [283, 374, 386],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-3",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "incomplete", "incomplete"],
+          "turns": [88, 100, 100],
+          "actions": [340, 387, 386],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-4",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 8, 6],
+          "actions": [12, 28, 21],
+          "health": [87, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-4",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "incomplete"],
+          "turns": [73, 97, 100],
+          "actions": [283, 374, 382],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-4",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "incomplete", "incomplete"],
+          "turns": [88, 100, 100],
+          "actions": [340, 387, 382],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-5",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [4, 8, 4],
+          "actions": [16, 28, 14],
+          "health": [88, 90, 80]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-5",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "incomplete"],
+          "turns": [69, 77, 100],
+          "actions": [269, 298, 387],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "rank-5",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "incomplete", "incomplete"],
+          "turns": [92, 100, 100],
+          "actions": [357, 386, 387],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "talents-partial",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [4, 4, 7],
+          "actions": [15, 12, 27],
+          "health": [88, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "talents-partial",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [70, 42, 70],
+          "actions": [292, 174, 292],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "talents-partial",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [84, 69, 88],
+          "actions": [348, 285, 366],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "talents-full",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [4, 2, 1],
+          "actions": [18, 6, 2],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "talents-full",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [19, 21, 14],
+          "actions": [97, 109, 74],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "talents-full",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [21, 29, 26],
+          "actions": [108, 151, 138],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "partial",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [4, 4, 7],
+          "actions": [15, 12, 27],
+          "health": [88, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "partial",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [63, 40, 70],
+          "actions": [263, 167, 292],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "partial",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [73, 66, 88],
+          "actions": [306, 272, 366],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "full",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [4, 2, 1],
+          "actions": [17, 10, 2],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "full",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [13, 8, 15],
+          "actions": [68, 42, 82],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "defense",
+          "profile": "full",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [17, 11, 19],
+          "actions": [89, 59, 103],
+          "health": [90, 90, 90]
+        },
+        {
+          "team": "mixed",
+          "profile": "base",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 3, 3],
+          "actions": [12, 9, 12],
+          "health": [74, 79, 73]
+        },
+        {
+          "team": "mixed",
+          "profile": "base",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [29, 42, 49],
+          "actions": [116, 166, 193],
+          "health": [81, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "base",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [37, 45, 60],
+          "actions": [147, 178, 240],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-1",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 3, 3],
+          "actions": [12, 9, 12],
+          "health": [74, 79, 80]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-1",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [38, 28, 42],
+          "actions": [150, 109, 166],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-1",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [46, 31, 51],
+          "actions": [183, 121, 201],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-2",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 2, 3],
+          "actions": [10, 8, 9],
+          "health": [71, 79, 77]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-2",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [26, 43, 24],
+          "actions": [101, 170, 95],
+          "health": [83, 81, 81]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-2",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [28, 44, 39],
+          "actions": [112, 176, 153],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-3",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 2, 2],
+          "actions": [11, 8, 8],
+          "health": [71, 83, 77]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-3",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [18, 39, 21],
+          "actions": [70, 154, 84],
+          "health": [82, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-3",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [37, 56, 23],
+          "actions": [148, 222, 92],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-4",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 2, 2],
+          "actions": [10, 8, 8],
+          "health": [74, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-4",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [19, 20, 20],
+          "actions": [76, 80, 78],
+          "health": [82, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-4",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [25, 34, 23],
+          "actions": [100, 133, 89],
+          "health": [83, 82, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-5",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 2, 2],
+          "actions": [8, 8, 8],
+          "health": [80, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-5",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [24, 11, 26],
+          "actions": [93, 43, 102],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "rank-5",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [29, 14, 36],
+          "actions": [115, 56, 141],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "talents-partial",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 2, 3],
+          "actions": [10, 9, 14],
+          "health": [73, 83, 75]
+        },
+        {
+          "team": "mixed",
+          "profile": "talents-partial",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [31, 30, 32],
+          "actions": [147, 147, 154],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "talents-partial",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [43, 40, 37],
+          "actions": [208, 195, 177],
+          "health": [83, 83, 82]
+        },
+        {
+          "team": "mixed",
+          "profile": "talents-full",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 2, 1],
+          "actions": [12, 11, 5],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "talents-full",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [10, 10, 3],
+          "actions": [55, 58, 18],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "talents-full",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [11, 20, 4],
+          "actions": [62, 111, 19],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "partial",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 2, 3],
+          "actions": [6, 9, 11],
+          "health": [74, 83, 75]
+        },
+        {
+          "team": "mixed",
+          "profile": "partial",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [19, 31, 41],
+          "actions": [90, 146, 196],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "partial",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [21, 37, 56],
+          "actions": [104, 173, 267],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "full",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [1, 2, 1],
+          "actions": [5, 7, 3],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "full",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [5, 5, 2],
+          "actions": [30, 24, 7],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "mixed",
+          "profile": "full",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [8, 6, 4],
+          "actions": [43, 35, 18],
+          "health": [83, 83, 83]
+        },
+        {
+          "team": "legendary",
+          "profile": "base",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [7, 5, 10],
+          "actions": [36, 32, 55],
+          "health": [60, 60, 46]
+        },
+        {
+          "team": "legendary",
+          "profile": "base",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["incomplete", "incomplete", "incomplete"],
+          "turns": [100, 100, 100],
+          "actions": [565, 567, 550],
+          "health": [55, 38, 52]
+        },
+        {
+          "team": "legendary",
+          "profile": "base",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["incomplete", "incomplete", "incomplete"],
+          "turns": [100, 100, 100],
+          "actions": [565, 567, 550],
+          "health": [55, 38, 52]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-1",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 3, 5],
+          "actions": [15, 15, 22],
+          "health": [60, 60, 58]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-1",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [35, 15, 44],
+          "actions": [203, 103, 234],
+          "health": [60, 59, 55]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-1",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [46, 27, 61],
+          "actions": [267, 173, 332],
+          "health": [60, 59, 54]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-2",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 2, 3],
+          "actions": [10, 10, 11],
+          "health": [60, 60, 58]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-2",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [8, 7, 10],
+          "actions": [50, 55, 55],
+          "health": [60, 60, 55]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-2",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [11, 12, 14],
+          "actions": [69, 80, 78],
+          "health": [60, 60, 55]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-3",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 2, 3],
+          "actions": [8, 8, 9],
+          "health": [60, 60, 58]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-3",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [6, 3, 7],
+          "actions": [35, 29, 37],
+          "health": [60, 60, 55]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-3",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [8, 6, 8],
+          "actions": [47, 49, 43],
+          "health": [60, 60, 55]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-4",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 1, 2],
+          "actions": [6, 6, 5],
+          "health": [60, 60, 58]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-4",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [6, 3, 5],
+          "actions": [31, 24, 26],
+          "health": [60, 60, 55]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-4",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [6, 4, 7],
+          "actions": [35, 33, 33],
+          "health": [60, 60, 55]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-5",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 1, 1],
+          "actions": [5, 5, 4],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-5",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [4, 2, 4],
+          "actions": [19, 15, 20],
+          "health": [60, 60, 55]
+        },
+        {
+          "team": "legendary",
+          "profile": "rank-5",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [5, 3, 4],
+          "actions": [25, 23, 24],
+          "health": [60, 60, 55]
+        },
+        {
+          "team": "legendary",
+          "profile": "talents-partial",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 2, 3],
+          "actions": [15, 15, 13],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "talents-partial",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [18, 24, 30],
+          "actions": [124, 159, 194],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "talents-partial",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [23, 30, 40],
+          "actions": [158, 193, 251],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "talents-full",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 2, 2],
+          "actions": [9, 12, 10],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "talents-full",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [6, 5, 7],
+          "actions": [45, 41, 52],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "talents-full",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [9, 7, 7],
+          "actions": [66, 61, 55],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "partial",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 2, 2],
+          "actions": [8, 8, 7],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "partial",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [4, 3, 4],
+          "actions": [36, 28, 29],
+          "health": [60, 60, 59]
+        },
+        {
+          "team": "legendary",
+          "profile": "partial",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [7, 6, 7],
+          "actions": [51, 46, 44],
+          "health": [60, 60, 59]
+        },
+        {
+          "team": "legendary",
+          "profile": "full",
+          "encounter": 0,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [1, 1, 1],
+          "actions": [3, 4, 3],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "full",
+          "encounter": 3,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [2, 1, 2],
+          "actions": [12, 9, 13],
+          "health": [60, 60, 60]
+        },
+        {
+          "team": "legendary",
+          "profile": "full",
+          "encounter": 7,
+          "seeds": [21, 42, 63],
+          "outcomes": ["victory", "victory", "victory"],
+          "turns": [3, 2, 2],
+          "actions": [16, 15, 15],
+          "health": [60, 60, 60]
+        }
+      ]
+    }
+  },
+  "economy": {
+    "sourceIdentity": "2d2e8d070af1e57cb309c43a7be20b2b67aada9eef64a61a1eb02b93f7f076c9",
+    "completed": 16,
+    "wins": 15,
+    "defeats": 1,
+    "incomplete": 41,
+    "completedMeanTurns": 176.3125,
+    "battleSummaries": [
+      {
+        "encounter": 1,
+        "n": 56,
+        "mean": 6.732142857142857,
+        "max": 67
+      },
+      {
+        "encounter": 2,
+        "n": 52,
+        "mean": 9.5,
+        "max": 26
+      },
+      {
+        "encounter": 3,
+        "n": 50,
+        "mean": 14.88,
+        "max": 52
+      },
+      {
+        "encounter": 4,
+        "n": 42,
+        "mean": 35.142857142857146,
+        "max": 87
+      },
+      {
+        "encounter": 5,
+        "n": 26,
+        "mean": 29.846153846153847,
+        "max": 82
+      },
+      {
+        "encounter": 6,
+        "n": 22,
+        "mean": 24.681818181818183,
+        "max": 88
+      },
+      {
+        "encounter": 7,
+        "n": 19,
+        "mean": 25.63157894736842,
+        "max": 71
+      },
+      {
+        "encounter": 8,
+        "n": 15,
+        "mean": 38.733333333333334,
+        "max": 97
+      }
+    ],
+    "rests": 145,
+    "restored": 2980,
+    "revived": 54,
+    "merchantOffers": 70,
+    "unaffordableShelves": 17,
+    "buys": 53,
+    "spent": 1495,
+    "meanPrice": 28.20754716981132,
+    "boonBuys": {
+      "icy-heart": 4,
+      "brass-censer": 5,
+      "cutpurse-knife": 5,
+      "smugglers-map": 3,
+      "merchants-favor": 3,
+      "bone-charm": 5,
+      "sundering-charm": 2,
+      "groves-favor": 5,
+      "plague-doctors-mask": 2,
+      "frozen-pocketwatch": 3,
+      "thunderstone": 1,
+      "sin-eaters-lantern": 3,
+      "parasitic-bloom": 3,
+      "lucky-clover": 1,
+      "tattered-pages": 1,
+      "meteorite": 3,
+      "resonant-chimes": 4
+    },
+    "recruits": 341
+  }
+}

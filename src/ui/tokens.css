@@ -234,6 +234,7 @@
   --keyword-purge: #e879f9;
   --keyword-reflect: #c4b5fd;
   --keyword-nullify: #c4b5fd;
+  --keyword-consume: #cbd5e1;
   --damage-physical: var(--keyword-physical);
   --damage-poison: var(--keyword-poison);
   --damage-water: var(--keyword-water);

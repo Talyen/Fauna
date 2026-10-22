@@ -18,7 +18,7 @@ export function bossDeck(state: GameState, enemy: Enemy): EnemyDeck {
     buffer: [],
     discard: [],
     mana: 4,
-    created: 0,
+    pearls: 0,
   };
 }
 export function drawBossCards(state: GameState, deck: EnemyDeck, count: number) {
@@ -42,11 +42,11 @@ export function createPearls(
   for (let i = 0; i < count; i++) {
     if (side === "enemy" && "deck" in actor && actor.deck) {
       const deck = actor.deck;
-      if (deck.created >= MAX_BATTLE_CARDS - 6) break;
-      deck.created++;
+      if (deck.pearls >= MAX_BATTLE_CARDS - 6) break;
+      deck.pearls++;
       (deck.hand.length < MAX_HAND_SIZE ? deck.hand : deck.buffer).push(PEARL.id);
     } else {
-      if (state.cards.length >= MAX_BATTLE_CARDS || state.battle.copySerial >= MAX_BATTLE_CARDS) break;
+      if (state.cards.length >= MAX_BATTLE_CARDS || state.battle.copySerial >= Number.MAX_SAFE_INTEGER) break;
       const card = {
         id: `copy-${state.battle.copySerial++}`,
         definitionId: PEARL.id,

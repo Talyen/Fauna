@@ -59,7 +59,7 @@ export interface EnemyDeck {
   buffer: string[];
   discard: string[];
   mana: number;
-  created: number;
+  pearls: number;
 }
 export interface Enemy {
   minion?: { ownerId: string; side: "player" | "enemy" };

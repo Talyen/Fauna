@@ -2,7 +2,8 @@ import { swapFixture } from "../../../support/game";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { accept, run, teamRun, prepareDestination } from "../../../support/game";
-import { dispatch } from "../../../../src/game/engine";
+import { dispatch, previewCard } from "../../../../src/game/engine";
+import { createPearls } from "../../../../src/game/combat/legendary";
 import { ownedCards } from "../../../../src/game/team";
 import { definition } from "../../../../src/game/content";
 import { draw } from "../../../../src/game/card-zones";
@@ -18,7 +19,6 @@ function memento() {
     state.battle!.discard = [];
     state.battle!.buffer = [];
     state.battle!.enemies.forEach((enemy) => {
-      enemy.health = enemy.maxHealth = 1000;
       enemy.combat.dodge = 0;
     });
   }) as BattleState;
@@ -61,7 +61,7 @@ describe("Memento and Legendary formations", () => {
     const ended = accept(state, { type: "endTurn" });
     expect(ended.battle!.minions!.every((echo) => echo.health <= 6)).toBe(true);
   });
-  it("creates persistent battle-only Pearl cards; playing one triggers the court", () => {
+  it("consumes a played Pearl after its effect and one court trigger, preserving unplayed Pearls", () => {
     let state = play(memento(), "procession").state;
     const result = play(state, "createPearls");
     state = result.state;
@@ -73,9 +73,32 @@ describe("Memento and Legendary formations", () => {
     expect(pearlPlay.state.battle!.mana === 4 || pearlPlay.state.team[0]!.block === 2).toBe(true);
     expect(
       pearlPlay.state.cards.filter((card) => definition(card.definitionId).effect === "pearl"),
-    ).toHaveLength(2);
+    ).toHaveLength(1);
+    const consumed = pearls[0]!.id;
+    expect(pearlPlay.state.cards.some((card) => card.id === consumed)).toBe(false);
+    for (const zone of ["hand", "draw", "discard", "buffer"] as const)
+      expect(pearlPlay.state.battle![zone]).not.toContain(consumed);
+    expect(decodeSave(encodeSave(pearlPlay.state))).toEqual(pearlPlay.state);
+    const replay = dispatch(pearlPlay.state, { type: "play", cardId: consumed });
+    expect(replay.accepted).toBe(false);
+    expect(replay.state).toBe(pearlPlay.state);
+    expect(state.cards).toContain(pearls[0]);
   });
-  it("recycles immediately after the last draw, including generated Pearls", () => {
+  it("previews consumption without changing the source and rejects an unaffordable Pearl unchanged", () => {
+    const state = play(teamRun(42, ["memento"]), "createPearls").state;
+    const pearl = state.cards.find((card) => card.temporary)!;
+    const before = encodeSave(state);
+    const preview = previewCard(state, pearl.id);
+    expect(preview).toEqual(dispatch(state, { type: "play", cardId: pearl.id, autoEndTurn: false }));
+    expect(encodeSave(state)).toBe(before);
+    const empty = produce(state, (draft) => {
+      draft.battle!.mana = 0;
+    });
+    const rejected = dispatch(empty, { type: "play", cardId: pearl.id });
+    expect(rejected.accepted).toBe(false);
+    expect(rejected.state).toBe(empty);
+  });
+  it("recycles immediately after the last draw, including unplayed Pearls", () => {
     let state = play(memento(), "createPearls").state as BattleState;
     state = produce(state, (draft) => {
       const cards = draft.cards.map((card) => card.id);
@@ -88,6 +111,20 @@ describe("Memento and Legendary formations", () => {
     expect(state.battle.discard).toEqual([]);
     expect(state.battle.draw).toHaveLength(state.cards.length - 1);
     expect(state.battle.draw.some((id) => state.cards.find((card) => card.id === id)!.temporary)).toBe(true);
+  });
+  it("keeps generation capacity available after consumed cards while preserving unique IDs", () => {
+    let state = produce(memento(), (draft) => {
+      draft.battle.copySerial = 300;
+    });
+    state = play(state, "createPearls").state as BattleState;
+    const first = state.cards.filter((card) => card.temporary).map((card) => card.id);
+    expect(first).toHaveLength(2);
+    state = play(state, "pearl").state as BattleState;
+    state = play(state, "createPearls").state as BattleState;
+    expect(state.cards.filter((card) => card.temporary)).toHaveLength(3);
+    expect(state.cards.some((card) => card.id === first[0])).toBe(false);
+    expect(new Set(state.cards.map((card) => card.id)).size).toBe(state.cards.length);
+    expect(decodeSave(encodeSave(state))).toEqual(state);
   });
   it("rejects illegal plays without advancing RNG or summoning", () => {
     const state = produce(memento(), (draft) => {
@@ -195,6 +232,42 @@ describe("Memento and Legendary formations", () => {
     });
     expect(() => decodeSave(encodeSave(forged))).toThrow();
   });
+  it("consumes boss Pearls, retaining the core kit and an accurate resumable live count", () => {
+    const destination = produce(run(), (draft) => {
+      draft.encounter = 3;
+      draft.expedition = { pack: 0, recruit: null, lastRoom: "boss" };
+      prepareDestination(draft);
+      draft.journey!.victories = 3;
+    });
+    const ready = produce(accept(destination, { type: "beginBattle" }), (draft) => {
+      const boss = draft.battle!.enemies[0]!;
+      createPearls(draft as BattleState, boss, "enemy", 2, []);
+      // End-turn draw takes the two Pearls and two Processions before the draw/generation cards.
+      boss.deck!.draw = [
+        ...boss.deck!.draw.filter((id) => id !== "memento-lost-procession"),
+        "memento-lost-procession",
+        "memento-lost-procession",
+        ...boss.deck!.hand,
+      ];
+      boss.deck!.hand = [];
+    });
+    const result = dispatch(ready, { type: "endTurn" });
+    expect(result.events.some((event) => event.actorId === "enemy-0" && event.text.includes("Pearl"))).toBe(
+      true,
+    );
+    const deck = result.state.battle!.enemies[0]!.deck!;
+    expect(deck.pearls).toBe(0);
+    const zones = [...deck.draw, ...deck.hand, ...deck.discard, ...deck.buffer];
+    expect(zones.filter((id) => id === "memento-pearl")).toHaveLength(deck.pearls);
+    expect(deck.discard).not.toContain("memento-pearl");
+    for (const id of ["memento-lost-procession", "memento-treasury-echo", "memento-drowned-revelation"])
+      expect(zones.filter((entry) => entry === id)).toHaveLength(2);
+    expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
+    const forged = produce(result.state, (draft) => {
+      draft.battle!.enemies[0]!.deck!.pearls++;
+    });
+    expect(() => decodeSave(encodeSave(forged))).toThrow();
+  });
   it.each([0, 1, 2, 3, 4, 5])(
     "scales the court at passive tier %s and never attacks autonomously",
     (tier) => {
@@ -205,7 +278,8 @@ describe("Memento and Legendary formations", () => {
       const packet = result.events.find(
         (event) => event.kind === "damage" && event.actorId?.startsWith("echo-"),
       );
-      if (packet) expect(packet.amount).toBe((tier + 1) * (packet.critical ? 2 : 1));
+      expect(packet).toBeDefined();
+      expect(packet!.amount).toBe((tier + 3) * (packet!.critical ? 2 : 1));
       expect(result.events.filter((event) => event.text === "The Court Remembers")).toHaveLength(1);
       const end = dispatch(result.state, { type: "endTurn" });
       expect(end.events.filter((event) => event.text === "The Court Remembers")).toHaveLength(0);

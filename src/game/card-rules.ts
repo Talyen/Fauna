@@ -92,10 +92,7 @@ export function cardText(
       text = `Create ${value} Pearls`;
       break;
     case "pearl":
-      text =
-        power === 1
-          ? `Gain ${value} Block or Mana`
-          : `Gain ${scalePower(value, power)} Block or ${value} Mana`;
+      text = `Gain ${scalePower(value, power)} Block or ${value} Mana at random`;
       break;
     case "attack":
       // Keep the conditional rule at its base value so resolved previews do not imply a second doubling
@@ -208,5 +205,6 @@ export function cardText(
   }
   if (card.leech) text += "; Leech";
   if (card.repeatChance) text += `; ${card.repeatChance}% chance to repeat`;
+  if (card.consume) text = `Consume; ${text}`;
   return text;
 }

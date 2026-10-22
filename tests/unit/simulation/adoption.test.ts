@@ -4,7 +4,7 @@ import { runJourney, type JourneyConfig } from "../../../src/tooling/playthrough
 import { contentCatalog, validateCatalog } from "../../../src/game/content-validation";
 const config: JourneyConfig = {
   // Complete current-catalog journeys; arbitrary lineups may legitimately exhaust the turn budget.
-  seed: 4,
+  seed: 15,
   runs: 2,
   starter: "captoad",
   policy: "heuristic",

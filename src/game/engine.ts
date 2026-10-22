@@ -272,7 +272,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         if (keywords.includes("light")) combat(actor).freeLight = false;
         if (keywords.includes("burn")) battle.freeBurnUsed = true;
         battle.hand.splice(battle.hand.indexOf(card.id), 1);
-        battle.discard.push(card.id);
+        if (!def.consume) battle.discard.push(card.id);
         executeAbility(
           draft,
           {
@@ -287,6 +287,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
           { swap: swapFromCard },
         );
         courtRemembers(draft, actor, events);
+        if (def.consume) draft.cards = draft.cards.filter((entry) => entry.id !== card.id);
         removeDepartedMinions(draft);
         recycleDiscard(draft);
         if (battle.cardsPlayedThisTurn < 3) {

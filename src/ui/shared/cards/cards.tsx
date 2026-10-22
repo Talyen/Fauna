@@ -273,6 +273,7 @@ export function ActionCard({
       effectText={effectText}
       data-card-id={card.id}
       data-effect={def.effect}
+      data-consume={def.consume || undefined}
       aria-label={
         label ??
         `${def.name}${card.level ? ` +${card.level}` : ""}, ${ownerName}, ${enemy ? "" : `${modifiers ? cardCost(card, modifiers) : def.cost} mana, `}${effectText}`

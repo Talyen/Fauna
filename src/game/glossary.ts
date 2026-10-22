@@ -19,7 +19,7 @@ export const GLOSSARY = [
   {
     term: "Pearl",
     definition:
-      "A battle-only card created in your hand; Costs 1 Mana; Randomly grants 2 Block or 2 Mana; Can be drawn and discarded normally",
+      "A battle-only card created in your hand; Costs 1 Mana; Randomly grants 2 Block or 2 Mana; Consume removes it after play; Unplayed Pearls can be drawn and discarded normally",
   },
   {
     term: "Health",
@@ -70,7 +70,7 @@ export const GLOSSARY = [
   {
     term: "Draw / discard",
     definition:
-      "All teammates share one deck, hand, and discard pile; Played and unplayed end-of-turn cards go to discard; Shuffle discard into the draw pile as soon as the draw pile is empty",
+      "All teammates share one deck, hand, and discard pile; Played cards go to discard unless they have Consume; Unplayed end-of-turn cards go to discard; Shuffle discard into the draw pile as soon as the draw pile is empty",
   },
   {
     term: "Copy",

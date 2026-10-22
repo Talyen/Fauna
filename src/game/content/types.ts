@@ -82,6 +82,7 @@ export interface CardBase {
   cost: 1;
   artwork?: string;
   leech?: boolean;
+  consume?: boolean;
   repeatChance?: number;
   effects?: readonly CardEffect[];
 }

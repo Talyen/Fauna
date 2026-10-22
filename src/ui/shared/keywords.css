@@ -103,6 +103,9 @@
 [data-keyword="purge"] {
   color: var(--keyword-purge);
 }
+[data-keyword="consume"] {
+  color: var(--keyword-consume);
+}
 
 [data-effect-art] {
   --art-keyword-color: var(--muted-foreground);
