@@ -6,13 +6,24 @@ import { pathToFileURL } from "node:url";
 const seconds = (start, end) =>
   start && end ? Math.max(0, (Date.parse(end) - Date.parse(start)) / 1000) : null;
 export function timingReport(run, jobs) {
+  const starts = jobs
+    .map((job) => job.started_at)
+    .filter(Boolean)
+    .sort();
+  const completions = jobs
+    .map((job) => job.completed_at)
+    .filter(Boolean)
+    .sort();
+  const firstStart = starts[0];
+  const lastCompletion = jobs.every((job) => job.completed_at) ? completions.at(-1) : undefined;
   return {
     run: run.id,
     attempt: run.run_attempt,
     sha: run.head_sha,
     conclusion: run.conclusion,
-    elapsedSeconds: seconds(run.created_at, run.updated_at),
-    initialQueueSeconds: seconds(run.created_at, run.run_started_at),
+    elapsedSeconds: seconds(run.run_started_at ?? run.created_at, lastCompletion ?? run.updated_at),
+    activeElapsedSeconds: seconds(firstStart, lastCompletion),
+    initialQueueSeconds: seconds(run.run_started_at ?? run.created_at, firstStart),
     runnerSeconds: jobs.reduce((sum, job) => sum + (seconds(job.started_at, job.completed_at) ?? 0), 0),
     jobs: jobs.map((job) => ({
       name: job.name,
@@ -55,7 +66,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.ar
   const output = `reports/ci/timings-${id}-${run.run_attempt}.json`;
   mkdirSync("reports/ci", { recursive: true });
   writeFileSync(output, JSON.stringify(result, null, 2) + "\n");
-  const summary = `\n## Workflow timings\n\nRun ${id}, attempt ${run.run_attempt}, ${run.head_sha}\n\nElapsed: ${result.elapsedSeconds}s; initial queue: ${result.initialQueueSeconds}s; completed runner time: ${result.runnerSeconds}s\n\n| Job | Execution seconds | Result |\n| --- | ---: | --- |\n${result.jobs.map((job) => `| ${job.name} | ${job.executionSeconds ?? "running"} | ${job.conclusion ?? "pending"} |`).join("\n")}\n\nTiming captured before final artifact upload is provisional; rerun this read-only command after completion for final measurements\n`;
+  const summary = `\n## Workflow timings\n\nRun ${id}, attempt ${run.run_attempt}, ${run.head_sha}\n\nElapsed: ${result.elapsedSeconds}s; after first job started: ${result.activeElapsedSeconds ?? "pending"}s; initial queue: ${result.initialQueueSeconds}s; completed runner time: ${result.runnerSeconds}s\n\n| Job | Execution seconds | Result |\n| --- | ---: | --- |\n${result.jobs.map((job) => `| ${job.name} | ${job.executionSeconds ?? "running"} | ${job.conclusion ?? "pending"} |`).join("\n")}\n\nTiming captured before final artifact upload is provisional; rerun this read-only command after completion for final measurements\n`;
   if (process.env.GITHUB_STEP_SUMMARY) appendFileSync(process.env.GITHUB_STEP_SUMMARY, summary);
   console.log(output);
 }

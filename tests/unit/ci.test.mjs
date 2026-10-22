@@ -142,7 +142,8 @@ describe("workflow timing measurements", () => {
         },
       ],
     );
-    expect(result.initialQueueSeconds).toBe(5);
+    expect(result.initialQueueSeconds).toBe(25);
+    expect(result.activeElapsedSeconds).toBe(90);
     expect(result.runnerSeconds).toBe(90);
     expect(result.jobs[0].startDelaySeconds).toBe(25);
     expect(result.jobs[0].steps[0]).toEqual({ name: "tests", conclusion: "failure", seconds: 60 });
