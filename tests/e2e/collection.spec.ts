@@ -1,6 +1,8 @@
 import { captureScreen, settleScreen } from "./support/rendered-evidence";
 import { test, expect, type Locator } from "@playwright/test";
-import { CARDS } from "../../src/game/content";
+import { produce } from "immer";
+import { expectScrollFree } from "./support/layout-contract";
+import { CARDS, SPECIES } from "../../src/game/content";
 import { run } from "../support/game";
 import { seed, state, resume } from "./support/session";
 import { gamepad } from "./support/gamepad";
@@ -139,3 +141,40 @@ for (const [width, height] of [
     await page.keyboard.press("Escape");
     await expect(page.getByRole("button", { name: "Inspect Mossguard", exact: true })).toBeFocused();
   });
+
+test("Collection keeps a later-page creature and focus through live resize and filter changes", async ({
+  page,
+}) => {
+  const fixture = produce(run(7), (game) => {
+    game.discovery.recruited = Object.fromEntries(SPECIES.map((entry) => [entry.id, 1]));
+  });
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
+  await seed(page, fixture);
+  await page.getByRole("button", { name: "Collection", exact: true }).click();
+  const next = page.getByRole("button", { name: "Next page", exact: true });
+  for (let count = 0; count < SPECIES.length && (await next.isEnabled()); count++) await next.click();
+  await expect(next).toBeDisabled();
+  const creature = SPECIES.at(-1)!;
+  const opener = page.getByRole("button", { name: `Inspect ${creature.name}`, exact: true });
+  await opener.click();
+  // Resize while the gallery is hidden: its observer and return-focus owner must cooperate.
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await captureScreen(page, { path: "reports/collection/resized-details.png" });
+  await page.keyboard.press("Escape");
+  await expect(opener).toBeFocused();
+  await expect(next).toBeDisabled();
+  await expectScrollFree(page);
+  await page.getByRole("tab", { name: "Uncollected", exact: true }).click();
+  await expect(page.getByRole("img", { name: "No creatures in this view" })).toBeVisible();
+  await page.getByRole("tab", { name: "All", exact: true }).click();
+  await expect(opener).toBeVisible();
+  await expect(next).toBeDisabled();
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  await settleScreen(page);
+  await expectScrollFree(page);
+  await opener.click();
+  await page.keyboard.press("Escape");
+  await expect(opener).toBeFocused();
+  expect(await state(page)).toEqual(fixture);
+});

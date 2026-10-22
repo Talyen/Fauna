@@ -5,6 +5,8 @@ import { run } from "../support/game";
 import { SPECIES } from "../../src/game/content";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { expectScrollFree, layoutViolations, LAYOUT_CASES } from "./support/layout-contract";
+import { state } from "./support/session";
+import { expectBattleGeometry } from "./support/battle-layout";
 import { captureScreen, settleScreen } from "./support/rendered-evidence";
 import { snapshot, cloudName } from "../../src/application/cloud";
 
@@ -63,9 +65,9 @@ for (const [width, height] of [
     await captureScreen(page, { path: `reports/scroll-free/cloud-settings-${width}.png` });
   });
 
-async function everyPage(root: Locator, check: () => Promise<void>) {
+async function everyPage(root: Locator, check: (page: number) => Promise<void>) {
   for (let count = 0; count < 100; count++) {
-    await check();
+    await check(count);
     const next = root.getByRole("button", { name: "Next page", exact: true });
     if (!(await next.count()) || (await next.isDisabled())) return;
     await next.click();
@@ -105,34 +107,44 @@ for (const [width, height, scale] of LAYOUT_CASES) {
       await page.getByRole("button", { name: "Collection", exact: true }).click();
       await captureScreen(page, { path: `reports/scroll-free/collection-${width}-${height}-${scale}.png` });
       // Exhaust the authored catalog at the most constrained size. Other cases
-      // cover responsive layout with the first and last visible entries.
+      // cover every grid page, but open only the first and last catalog entries.
       const exhaustive = width === 1280 && height === 720 && scale === 1.25;
       const seen = new Set<string>();
-      await everyPage(page.locator(".collection-screen"), async () => {
+      await everyPage(page.locator(".collection-screen"), async (pageIndex) => {
         await page.mouse.move(0, 0);
         await expectScrollFree(page);
         const cards = page.locator(".collection-grid .creature-card");
         const count = await cards.count();
+        const lastPage = await page.getByRole("button", { name: "Next page", exact: true }).isDisabled();
         const indices = exhaustive
           ? Array.from({ length: count }, (_, index) => index)
-          : [...new Set([0, count - 1])];
+          : [...new Set([...(pageIndex === 0 ? [0] : []), ...(lastPage ? [count - 1] : [])])];
         for (const index of indices) {
           const card = cards.nth(index);
-          seen.add((await card.getAttribute("aria-label"))!);
+          const kind = (await card.getAttribute("data-species"))!;
+          seen.add(kind);
           await card.click();
           const details = page.locator(".collection-creature-screen");
           await expect(details.locator(".collection-ability")).toHaveCount(3);
           await captureScreen(page, {
-            path: `reports/scroll-free/kit-${(await card.getAttribute("data-species"))!}-${width}-${height}-${scale}.png`,
+            path: `reports/scroll-free/kit-${kind}-${width}-${height}-${scale}.png`,
           });
+          const creatureArea = await details
+            .locator(".collection-creature-trait .creature-card")
+            .evaluate((el: HTMLElement) => el.offsetWidth * el.offsetHeight);
+          for (const artwork of await details.locator(".action-card").all()) {
+            const area = await artwork.evaluate((el: HTMLElement) => el.offsetWidth * el.offsetHeight);
+            expect(Math.abs(area / creatureArea - 1)).toBeLessThan(0.025);
+          }
           await details.getByRole("tab", { name: "Rank progression", exact: true }).click();
           await everyPage(details, () => expectScrollFree(page));
           await page.keyboard.press("Escape");
           await expect(card).toBeFocused();
         }
       });
-      if (exhaustive) expect(seen.size).toBe(SPECIES.length);
-      else expect(seen.size).toBeGreaterThan(0);
+      expect([...seen]).toEqual(
+        (exhaustive ? SPECIES : [SPECIES[0]!, SPECIES.at(-1)!]).map((entry) => entry.id),
+      );
       await page.getByRole("button", { name: "Open menu", exact: true }).click();
       await page.getByRole("button", { name: "Talents", exact: true }).click();
       await expect(page.locator(".talents-screen")).toBeVisible();
@@ -170,8 +182,10 @@ for (const [width, height, scale] of LAYOUT_CASES) {
 
     test("battle hand and draw pile", async ({ page }) => {
       await page.getByRole("button", { name: "Continue", exact: true }).click();
+      const before = await state(page);
       await page.mouse.move(0, 0);
       await expectScrollFree(page);
+      await expectBattleGeometry(page, width, height);
       await page.mouse.wheel(500, 500);
       await page.keyboard.press("Tab");
       await expectScrollFree(page);
@@ -203,6 +217,7 @@ for (const [width, height, scale] of LAYOUT_CASES) {
       await captureScreen(page, { path: `reports/scroll-free/battle-${width}-${height}-${scale}.png` });
       await page.getByRole("button", { name: "Inspect Draw Pile" }).click();
       await expectScrollFree(page);
+      expect(await state(page)).toEqual(before);
     });
   });
 }

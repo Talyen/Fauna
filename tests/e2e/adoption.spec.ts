@@ -2,6 +2,7 @@ import { expectControlColors } from "./support/control-colors";
 import { LAYOUT_CASES, REVIEW_VIEWPORTS } from "./support/layout-contract";
 import { captureScreen } from "./support/rendered-evidence";
 import { test, expect } from "@playwright/test";
+import { seed, state } from "./support/session";
 import { SPECIES } from "../../src/game/content";
 test("switch thumbs stay within their tracks in both states", async ({ page }) => {
   await page.goto("/");
@@ -97,9 +98,7 @@ for (const [width, height] of REVIEW_VIEWPORTS)
     fixture.boons = BOONS.map((boon) => boon.id);
     await page.setViewportSize({ width, height });
     await page.emulateMedia({ reducedMotion: "reduce" });
-    await page.goto("/");
-    await page.evaluate((data) => localStorage.setItem("fauna.save.v1", data), JSON.stringify(fixture));
-    await page.reload();
+    await seed(page, fixture);
     await page.getByRole("button", { name: "Settings", exact: true }).click();
     await page.getByRole("radio", { name: "125%", exact: true }).click();
     await page.getByRole("radio", { name: "Tooltip 125%", exact: true }).click();
@@ -132,8 +131,11 @@ for (const [width, height] of REVIEW_VIEWPORTS)
         .evaluate((node) => node.getBoundingClientRect().width),
     ).toBeCloseTo(height <= 760 ? 160 : height <= 900 ? 180 : 200, 0);
     await captureScreen(page, { path: `reports/owned-boons-${width}-${height}.png` });
+    const exhaustive = width === 1280 && height === 720;
     for (let index = 2; index < BOONS.length; index += 2) {
       await dialog.getByRole("button", { name: "Next page" }).click();
+      // Every page is reachable; exhaustive content/geometry belongs to minimum size.
+      if (!exhaustive && index + 2 < BOONS.length) continue;
       for (const boon of BOONS.slice(index, index + 2)) {
         await expect(dialog.getByRole("heading", { name: boon.name, exact: true })).toBeInViewport();
         await expect(dialog).toContainText(boon.text);
@@ -143,10 +145,12 @@ for (const [width, height] of REVIEW_VIEWPORTS)
     await page.keyboard.press("Escape");
     await expect(opener).toBeFocused();
     expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(fixture);
-    await page.reload();
-    await page.getByRole("button", { name: "Settings", exact: true }).click();
-    await expect(page.getByRole("radio", { name: "Tooltip 125%", exact: true })).toBeChecked();
-    await expect(page.getByRole("radio", { name: "125%", exact: true })).toBeChecked();
+    if (exhaustive) {
+      await page.reload();
+      await page.getByRole("button", { name: "Settings", exact: true }).click();
+      await expect(page.getByRole("radio", { name: "Tooltip 125%", exact: true })).toBeChecked();
+      await expect(page.getByRole("radio", { name: "125%", exact: true })).toBeChecked();
+    }
   });
 
 for (const [width, height, scale] of LAYOUT_CASES)
@@ -198,12 +202,15 @@ for (const [width, height, scale] of LAYOUT_CASES)
     await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
     expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(purchased);
     await captureScreen(page, { path: `reports/merchant-${width}.png`, fullPage: true });
-    await page.reload();
-    await page.getByRole("button", { name: "Continue", exact: true }).click();
-    await expect(page.getByRole("heading", { name: "Boon received", exact: true })).toBeVisible();
-    await expect(page.getByRole("region", { name: "Purchased Boon" })).toBeVisible();
-    await expect(page.getByRole("button", { name: /^Buy / })).toHaveCount(0);
-    expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(purchased);
+    if (width === 1280 && height === 720 && scale === 1.25) {
+      // Save/resume is viewport independent; keep it once alongside all shelf/receipt layouts.
+      await page.reload();
+      await page.getByRole("button", { name: "Continue", exact: true }).click();
+      await expect(page.getByRole("heading", { name: "Boon received", exact: true })).toBeVisible();
+      await expect(page.getByRole("region", { name: "Purchased Boon" })).toBeVisible();
+      await expect(page.getByRole("button", { name: /^Buy / })).toHaveCount(0);
+      expect(await state(page)).toEqual(purchased);
+    }
     await page.getByRole("button", { name: "Continue", exact: true }).click();
     await expect(page.getByRole("button", { name: "Visit Boon Merchant", exact: true })).toHaveCount(0);
     await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
