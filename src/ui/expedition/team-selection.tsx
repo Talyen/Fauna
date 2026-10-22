@@ -10,7 +10,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/too
 import { ArtCard } from "../shared/art-card";
 
 import type { Command, GameState, GameEvent } from "../../game/types";
-import type { Inspection } from "../inspection/model";
+import type { Inspection } from "../shared/inspection-model";
 
 import { BattleEarnings } from "../battle/battle-earnings";
 import { bossEncounter, encounterSource, JOURNEY_LENGTH } from "../../game/encounters";

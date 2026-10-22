@@ -27,7 +27,7 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../compon
 import { Popover, PopoverAnchor, PopoverContent } from "../components/ui/popover";
 import { TooltipProvider } from "../components/ui/tooltip";
 import { BattleScreen } from "./battle/battle-screen";
-import type { Inspection } from "./inspection/model";
+import type { Inspection } from "./shared/inspection-model";
 import type { Controls } from "./shared/input";
 import { Draft } from "./expedition/draft";
 import { TeamSelection } from "./expedition/team-selection";

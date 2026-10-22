@@ -14,7 +14,7 @@ import { returnFocus } from "../shared/focus";
 import { species, type SpeciesId } from "../../game/content";
 import { creatureStars, MAX_CREATURE_STARS, BOONS } from "../../game/progression";
 import type { Command, GameState } from "../../game/types";
-import type { Inspection } from "../inspection/model";
+import type { Inspection } from "../shared/inspection-model";
 
 import { BattleEarnings } from "../battle/battle-earnings";
 type Props = { game: GameState; send: (command: Command) => boolean; inspect: (item: Inspection) => void };

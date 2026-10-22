@@ -6,7 +6,7 @@ import { ActionCard } from "./cards";
 
 import { CARDS, species } from "../../game/content";
 import type { Command, GameState } from "../../game/types";
-import type { Inspection } from "../inspection/model";
+import type { Inspection } from "./inspection-model";
 
 type Props = { game: GameState; send: (command: Command) => boolean; inspect: (item: Inspection) => void };
 export function DeckCards({

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { CreatureCard } from "./cards";
 import { species } from "../../game/content";
 import type { Command, Creature, GameState } from "../../game/types";
-import type { Inspection } from "../inspection/model";
+import type { Inspection } from "./inspection-model";
 /** Shared by optional starting-lineup management and free combat swaps. */
 export function RosterPicker({
   game,

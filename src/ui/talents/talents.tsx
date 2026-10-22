@@ -50,7 +50,7 @@ import {
   type Keyword,
 } from "../../game/progression";
 import type { Command, GameState } from "../../game/types";
-import type { Inspection } from "../inspection/model";
+import type { Inspection } from "../shared/inspection-model";
 import type { Controls } from "../shared/input";
 import { Progress } from "../shared/progress";
 

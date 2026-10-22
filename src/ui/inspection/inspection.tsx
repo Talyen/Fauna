@@ -13,7 +13,7 @@ import { ActionCard, CreatureCard } from "../shared/cards";
 import { CARDS, definition, species } from "../../game/content";
 import type { Card } from "../../game/types";
 import { isAvailableFocusTarget, returnFocus } from "../shared/focus";
-import type { Inspection } from "./model";
+import type { Inspection } from "../shared/inspection-model";
 import type { Controls } from "../shared/input";
 export function Inspector({
   item,

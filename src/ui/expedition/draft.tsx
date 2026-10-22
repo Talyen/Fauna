@@ -9,7 +9,7 @@ import { CreatureCard } from "../shared/cards";
 
 import { species } from "../../game/content";
 import type { Command, GameState } from "../../game/types";
-import type { Inspection } from "../inspection/model";
+import type { Inspection } from "../shared/inspection-model";
 
 type Props = { game: GameState; send: (command: Command) => boolean; inspect: (item: Inspection) => void };
 export function Draft({ game, send, inspect }: Props) {
