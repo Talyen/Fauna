@@ -6,6 +6,6 @@ Terms currently defined: Health, Block, Mana, Action card, Attack, Damage, Hit, 
 
 Damage, status, defense and keyword contracts are defined in [Keywords](KEYWORDS.md). There are no elemental reactions. Gold is permanent battle-earned currency spent at Merchants, rather than a keyword or talent category. Wish, Consume, Companion and Archery are excluded.
 
-See [Keywords](KEYWORDS.md) for the Alchemy-derived catalog, color identity, current rules, and planned mechanics.
+See [Keywords](KEYWORDS.md) for the Alchemy-derived catalog, color identity and current rules.
 
 Boon replaces the old relic label for passive journey items. Burn, Freeze, Stun and Health are the canonical keyword and talent identities. Thorns, Water Thorns, Cleanse and Purge remain combat vocabulary but use Nature, Water, Health and Light progression respectively. Forge is retired.

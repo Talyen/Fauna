@@ -1,50 +1,53 @@
 # Fauna roadmap
 
-Last inventoried: October 21, 2026
+Last inventoried: October 22, 2026
 
 Fauna has a complete short playable journey. Checked items below are implemented in the repository; they do not imply release readiness or fresh verification on every platform. Unchecked items are future work. Suggestions are not approved commitments or dated promises. Detailed rules remain in the linked design documents; [release readiness](RELEASE.md) owns shipping acceptance.
 
 ## Done: journeys and team building
 
-- [x] First-journey starter selection from three seeded offers; later journeys draft three creatures from collected species
-- [x] Eight combat encounters, with bosses fourth and last and enemy groups growing from one to three creatures
+- [x] First-journey starter selection from three seeded offers; later journeys draft three creatures from collected species, or one Legendary chosen first
+- [x] Eight combat encounters, with bosses fourth and last, ordinary enemy groups growing from one to three creatures and solo Legendary bosses
 - [x] Recruitment from defeated enemies, including duplicate species with independent Health and battle state
-- [x] Five-creature roster with three deployed creatures and two reserves
+- [x] Five-creature roster with up to three ordinary deployed creatures or one Legendary, with the remaining creatures in backup
 - [x] Full-roster recruitment with a cancellable release choice before committing a replacement
-- [x] Remembered starting lineup, editable between battles
-- [x] Free combat swaps preserving Health, effects and card positions without bonus draws or Mana costs
+- [x] Saved lineup that follows committed formation changes into later battles
+- [x] Required knockout replacements preserving Health, effects and reusable card slots without bonus draws or Mana costs; ability-driven swaps shuffle incoming kits into Draw
 - [x] Persistent Health and knockouts between battles; defeat requires the entire roster to fall
 - [x] Optional Campfire recovery for the whole roster, including knocked-out creatures
 - [x] Independently rolled Recruit and Boon Merchant destinations at equal frequency, with open-roster and affordability criteria, saved three-Boon shelves, purchase rewards, fresh destinations after Merchant rooms and direct recruitment
-- [x] Shared Victory screen for recruitment or intermediate-boss Boons
+- [x] Shared Victory screen for recruitment followed by intermediate-boss Boons when available
 - [x] Final victory, defeat and return-home results with retained permanent earnings
 
 Rules: [journey progression](EXPEDITION_DESIGN.md)
 
 ## Done: cards and combat
 
-- [x] One shared deck, with three unique abilities contributed by each deployed creature
+- [x] One shared deck, with three unique abilities contributed by each ordinary deployed creature and two copies of each ability for a Legendary
 - [x] Exactly 1 base Mana per ability; four shared Mana and four draws each turn; six-card hand
 - [x] Draw/discard recycling and an ordered overflow buffer that fills opened hand slots and survives turn changes
 - [x] Targeted and team-wide actions, healing, defense, utility and card-driven swaps
 - [x] Physical, Burn, Poison, Bleed, Freeze, Stun, Nature, Light and Water damage mechanics
 - [x] Block, Armor, Dodge, critical hits, Blind, Leech, Thorns, Water Thorns, Cleanse and Purge
 - [x] Crowd-control windows and immunity, plus Death's Door protection against fatal damage
-- [x] Enemy use of species abilities without immediate repeats; upcoming actions remain hidden
+- [x] Ordinary enemies use species abilities without immediate repeats; upcoming actions remain hidden for all enemies
 - [x] Target forecasts for Health damage, absorbed damage, Block, statuses and lethal outcomes
 - [x] Inspectable draw/discard piles without exposing draw order
 - [x] Optional Auto-end turn and per-battle Auto-play, paused by menus, inspection and loss of focus
 - [x] Deterministic seeded outcomes, atomic rewards and rejected commands that preserve state and randomness
+- [x] Battle-only generated cards with bounded growth, persistent overflow and current-format save/resume
+- [x] Legendary enemy decks and Mana, plus battle-owned Minions with summoner-bound lifetimes
 
 Rules: [keywords](KEYWORDS.md), [architecture](ARCHITECTURE.md)
 
 ## Done: collection and permanent progression
 
-- [x] Twenty creature species and sixty unique base abilities
+- [x] Twenty-four creature species and seventy-two unique base abilities, plus Memento’s generated Pearl
 - [x] Mossguard, Emberback, Pollenmoth, Prismram and Captoad
 - [x] Dunefox, Reedstag, Cindernewt, Coralcurl and Chimecricket
 - [x] Dawncall, Bloomquail, Shadebrim, Ringpalm and Glintstride
 - [x] Wickwaltz, Sternshell, Neradora, Stillara and Cadenza
+- [x] Rookhaven, Euphera, Tournelle and the Legendary Memento
 - [x] Six distinct passive tiers per species, from zero to five stars, improved through permanent recruitment counts
 - [x] Collection browsing with artwork, active traits, all three base abilities and rank progression
 - [x] Separate encountered and recruited discovery records; recruitment determines the collected roster
@@ -104,10 +107,10 @@ These are known completion needs before substantial expansion:
 - [ ] **Finish encounter and support artwork:** replace remaining placeholders through the prepared-media workflow and review them in the actual screens
 - [ ] **Approve media and audio:** confirm source rights, track/effect selections, relative volumes and long-session listening comfort
 - [ ] **Qualify rendered flows:** inspect exact-commit CI evidence for the complete journey, minimum viewport, enlarged text, tooltips and keyboard/controller navigation
-- [ ] **Qualify Windows and physical controllers:** test installation, signing, save/resume, display changes and controller disconnect/reconnect
+- [ ] **Qualify Windows and physical controllers:** test the unsigned Steam candidate on clean Windows, save/resume, display changes and controller disconnect/reconnect
 - [ ] **Complete Steam setup and live testing:** configure Fauna's App/depot, App ID and Cloud quota; verify overlay, account switching, offline divergence and recovery on two devices
 - [ ] **Qualify Steam Deck:** test handheld readability, bindings, sleep/resume, offline launch and performance through the intended distribution path
-- [ ] **Prepare release material:** finalize store assets, installer acceptance and privacy/crash-reporting decisions
+- [ ] **Prepare release material:** finalize store assets, Steam depot acceptance and privacy/crash-reporting decisions; qualify the optional signed installer only if that distribution path is selected
 
 These remain open until their own acceptance evidence is recorded. This inventory does not claim those gates have passed.
 

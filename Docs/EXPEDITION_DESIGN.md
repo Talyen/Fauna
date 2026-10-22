@@ -5,7 +5,7 @@ These are the agreed directions from the design review. They supersede the proto
 ## Roster and battles
 
 - Your first journey begins with one creature, chosen from three seeded offers from the configured `FIRST_RUN_STARTERS` pool in `src/game/content.ts`; only kits with an attack are eligible, while the full roster remains available for recruitment and later drafts. Committing Begin journey adds that creature to Collection. Inspecting and canceling do not collect it.
-- Later journeys draft three starters from collected species: choose one of three offers, three times. Each choice commits immediately and prepares the next saved offer; Begin journey becomes available after all three choices. Species may repeat across rounds. Pools smaller than three repeat species within the offer, so an early loss never prevents a new journey. With three or more collected species, each offer contains three distinct species.
+- Later journeys normally draft three starters from collected species: choose one of three offers, three times. Choosing a Legendary as the first pick instead completes the draft with that creature alone; later rounds offer only ordinary creatures. Each choice commits immediately and saves any next offer; Begin journey becomes available when the draft is complete. Species may repeat across rounds. Eligible pools smaller than three repeat species within the offer, so an early loss never prevents a new journey. With three or more eligible species, each offer contains three distinct species.
 - Clicking starter artwork opens inspection with a Choose action. Browsing, canceling and reloading preserve the current offers and earlier picks. After drafting, the chosen team remains inspectable before Begin journey.
 - A journey roster grows to five creatures: up to three ordinary creatures deployed, or one Legendary with up to four backup. Multiple copies of a species are allowed. The drafted team supplies the remembered starting lineup. On the first journey, recruits fill its second and third slots before joining backup. The encounter screen offers one Combat or Boss placeholder ArtCard that starts battle directly. Deck remains available without requiring team selection.
 - Formation changes only through knockout replacement, abilities and explicit game mechanics; there is no free Swap control or manual lineup editor. The changed formation persists into later battles.
@@ -51,8 +51,8 @@ These are the agreed directions from the design review. They supersede the proto
 
 ## Recruitment
 
-- Optional Recruit destinations offer one uniformly selected creature from the entire species catalog, including uncollected and already-owned species. They roll only while the roster has fewer than five creatures and stop appearing at five.
-- The destination shows creature artwork, Recruit and the species name. Hover/focus shows its current passive and all three ability rules. Activating recruits directly at full Health, filling the starting lineup up to three and then reserves, without a confirmation or release step. Recruitment counts toward permanent collection and passive ranks.
+- Optional Recruit destinations offer one uniformly selected creature from the ordinary species catalog, including uncollected and already-owned species. Legendaries are excluded from optional Recruit destinations. They roll only while the roster has fewer than five creatures and stop appearing at five.
+- The destination shows creature artwork, Recruit and the species name. Hover/focus shows its current passive and all three ability rules. Activating recruits directly at full Health, filling an ordinary starting lineup up to three and then reserves; a deployed Legendary keeps new recruits in backup. There is no confirmation or release step. Recruitment counts toward permanent collection and passive ranks.
 - Claiming consumes the saved offer atomically without advancing the encounter, spending Gold or changing RNG. Starting the battle skips any unclaimed offer. Optional recruitment does not change ordinary victory recruitment.
 
 - Recruit from defeated enemy species after an ordinary combat victory.
@@ -70,7 +70,7 @@ These are the agreed directions from the design review. They supersede the proto
 - Initial battle item rewards focus on run-wide boons: passive effects for the whole journey.
 - When a battle awards a Boon, offer up to three distinct unowned choices.
 - Choose one boon or skip the reward. Boons use 3:4 portrait artwork wherever displayed, matching hand cards. All 18 Boons use copied Alchemy artwork; names stay below the art and effects in hover/focus tooltips. Owned Boons are inspectable from the menu during a journey.
-- Starter tuning: Currency pays 20 per ordinary victory and 40 for each boss. Intermediate bosses offer up to three distinct unowned Boons; smaller nonempty pools remain available. Ordinary combat offers recruitment, never boons; intermediate bosses offer Legendary recruitment followed by Boons; the final Boss offers recruitment before journey completion. Eighteen Boons are authored in `src/game/progression.ts`; their ownership lasts only for the journey. Material types and permanent upgrade purchases remain undefined.
+- Starter tuning: Currency pays 20 per ordinary victory and 40 for each boss. Intermediate bosses offer up to three distinct unowned Boons; smaller nonempty pools remain available. Ordinary combat offers recruitment, never boons; intermediate bosses offer Legendary recruitment followed by Boons; the final Boss offers recruitment before journey completion. Eighteen Boons are authored in `src/game/content/boons.ts`; their ownership lasts only for the journey. Material types and permanent upgrade purchases remain undefined.
 
 ## Screen flow and Journey results
 
@@ -92,7 +92,7 @@ See [UI design system](UI.md) for composition and interaction rules.
 
 ## Turn and combat foundation
 
-Each turn normally restores four shared Mana and draws four cards, with explicit talent and Boon modifiers. The hand holds six cards; FIFO overflow persists across turns. Block halves rather than clearing. Creatures share Alchemy's core packet, status and crowd-control rules through the [keyword contract](KEYWORDS.md), with no elemental reactions. Their individual effects persist while in backup and cannot be refreshed by swaps. Enemy actions use a non-repeating species repertoire without showing the next ability. Draw and discard piles are inspectable without revealing draw order or changing gameplay.
+Each turn normally restores four shared Mana and draws four cards, with explicit talent and Boon modifiers. The hand holds six cards; FIFO overflow persists across turns. Block halves rather than clearing. Creatures share Alchemy's core packet, status and crowd-control rules through the [keyword contract](KEYWORDS.md), with no elemental reactions. Their individual effects persist while in backup and cannot be refreshed by swaps. Ordinary enemies use a species repertoire without immediate repeats; enemy Legendaries cycle their own cards. Neither shows the next ability. Draw and discard piles are inspectable without revealing draw order or changing gameplay.
 
 ## Combat assistance
 
