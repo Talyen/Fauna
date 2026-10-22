@@ -46,7 +46,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
   static:
     needs: [prepare]
-    if: needs.prepare.outputs.run == 'true'
+    if: ${{ !cancelled() && needs.prepare.result == 'success' && needs.prepare.outputs.run == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     outputs:
@@ -93,7 +93,7 @@ jobs:
 
   unit:
     needs: [prepare]
-    if: needs.prepare.outputs.run == 'true'
+    if: ${{ !cancelled() && needs.prepare.result == 'success' && needs.prepare.outputs.run == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     outputs:
@@ -129,7 +129,7 @@ jobs:
 
   build:
     needs: [prepare]
-    if: needs.prepare.outputs.run == 'true'
+    if: ${{ !cancelled() && needs.prepare.result == 'success' && needs.prepare.outputs.run == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     outputs:
@@ -181,7 +181,7 @@ jobs:
 
   browser:
     needs: [prepare, build]
-    if: needs.prepare.outputs.run == 'true'
+    if: ${{ !cancelled() && needs.prepare.result == 'success' && needs.prepare.outputs.run == 'true' && needs.build.result == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     strategy:
@@ -240,7 +240,7 @@ jobs:
             test-results/
   interactions:
     needs: [prepare, build]
-    if: needs.prepare.outputs.run == 'true'
+    if: ${{ !cancelled() && needs.prepare.result == 'success' && needs.prepare.outputs.run == 'true' && needs.build.result == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     outputs:
@@ -292,7 +292,7 @@ jobs:
 
   windows:
     needs: [prepare]
-    if: needs.prepare.outputs.run == 'true'
+    if: ${{ !cancelled() && needs.prepare.result == 'success' && needs.prepare.outputs.run == 'true' }}
     runs-on: windows-latest
     timeout-minutes: 20
     env:
@@ -337,7 +337,7 @@ jobs:
 
   verify:
     needs: [prepare, static, unit, build, browser, interactions, windows]
-    if: always() && needs.prepare.outputs.run != 'false'
+    if: ${{ !cancelled() && needs.prepare.outputs.run != 'false' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:

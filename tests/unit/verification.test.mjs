@@ -196,6 +196,7 @@ describe("lightweight local verification", () => {
       expect(workflow).toContain(`run: npm run ${command}`);
     expect(workflow).toContain("run: npx playwright test --shard=");
     expect(workflow).toContain("node scripts/ci.mjs gate");
+    expect(workflow).toContain("if: ${{ !cancelled() && needs.prepare.outputs.run != 'false' }}");
     expect(workflow).toContain("if: always()");
     expect(workflow).toContain("name: browser-review");
     expect(workflow).toContain("reports/");
