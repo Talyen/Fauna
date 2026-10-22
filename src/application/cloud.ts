@@ -11,15 +11,15 @@ export interface CloudSnapshot {
   id: string;
 }
 export interface CloudView {
-  status: "Unavailable" | "Syncing" | "Synced" | "Pending";
-  blocking: boolean;
-  error: string;
+  readonly status: "Unavailable" | "Syncing" | "Synced" | "Pending";
+  readonly blocking: boolean;
+  readonly error: string;
 }
-export const initialCloudView: CloudView = {
+export const initialCloudView: CloudView = Object.freeze({
   status: "Unavailable",
   blocking: false,
   error: "",
-};
+});
 const identifier = /^[a-f0-9]{32}$/;
 const digest = /^[a-f0-9]{64}$/;
 export const cloudName = (s: Pick<CloudSnapshot, "device" | "sequence">) =>
@@ -106,7 +106,7 @@ export function createCloud(
   publish: (view: CloudView) => void,
   install: (data: string) => Promise<void>,
 ) {
-  let view = { ...initialCloudView },
+  let view = initialCloudView,
     identity: CloudIdentity | undefined,
     current: CloudSnapshot | null = null;
   let alive = true,
@@ -141,7 +141,7 @@ export function createCloud(
   };
   const update = (patch: Partial<CloudView>) => {
     if (alive) {
-      view = { ...view, ...patch };
+      view = Object.freeze({ ...view, ...patch });
       publish(view);
       if (view.status === "Pending") scheduleRetry();
     }

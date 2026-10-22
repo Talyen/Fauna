@@ -1118,8 +1118,10 @@ function resolveHit(
   if (direct && alliedSource && !alliedTarget && source.health > 0 && type === "water") {
     if (hasTalent(state, "water.seafoam")) grantBlock(state, source, 2, events);
     if (hasTalent(state, "water.erosion")) {
+      // Bonus damage may already have broken Armor and fired its reaction.
+      const armorBeforeErosion = stats.armor;
       stats.armor = Math.max(0, stats.armor - 2);
-      armorBroken ||= initialArmor > 0 && stats.armor === 0;
+      armorBroken ||= armorBeforeErosion > 0 && stats.armor === 0;
     }
     if (hasTalent(state, "water.cleansing-current") && roll(state) < 0.2)
       removeEffects(source, "cleanse", 1, events, state);
