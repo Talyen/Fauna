@@ -74,7 +74,7 @@ export function rendererPath(reference) {
     throw new Error(`Renderer resource escapes its root: ${reference}`);
   return path.posix.join("dist", decoded);
 }
-export function verifyArchive(read, { expected, receipt, desktopFiles, rendererFiles = {}, releaseTag }) {
+export function verifyArchive(read, { expected, receipt, runtimeFiles, rendererFiles = {}, releaseTag }) {
   const required = (name) => {
     const bytes = read(name);
     if (!bytes?.length) throw new Error(`Missing or empty packaged file: ${name}`);
@@ -85,7 +85,7 @@ export function verifyArchive(read, { expected, receipt, desktopFiles, rendererF
     throw new Error("Packaged Fauna identity/version differs.");
   if (releaseTag && releaseTag !== `v${pkg.version}` && releaseTag !== pkg.version)
     throw new Error("Release tag differs from package version.");
-  for (const [name, bytes] of Object.entries(desktopFiles))
+  for (const [name, bytes] of Object.entries(runtimeFiles))
     if (!required(name).equals(bytes)) throw new Error(`Packaged runtime differs: ${name}`);
   for (const [name, bytes] of Object.entries(rendererFiles))
     if (!required(name).equals(bytes)) throw new Error(`Packaged renderer differs: ${name}`);
@@ -166,11 +166,12 @@ export async function verifyPackage(directory = path.join(ROOT, "release/win-unp
   )
     throw new Error("Invalid archive path.");
   const receipt = await assets({ repository: ROOT, mode: "outputs" });
-  const desktopFiles = Object.fromEntries(
+  const runtimeFiles = Object.fromEntries(
     readdirSync(path.join(ROOT, "desktop"))
       .filter((name) => /\.(cjs|json)$/.test(name))
       .map((name) => [`desktop/${name}`, readFileSync(path.join(ROOT, "desktop", name))]),
   );
+  runtimeFiles["src/game/save-format.json"] = readFileSync(path.join(ROOT, "src/game/save-format.json"));
   const rendererFiles = Object.fromEntries(
     readdirSync(path.join(ROOT, "dist"), { recursive: true })
       .filter((name) => statSync(path.join(ROOT, "dist", name)).isFile())
@@ -181,7 +182,7 @@ export async function verifyPackage(directory = path.join(ROOT, "release/win-unp
   const result = verifyArchive(readArchive, {
     expected,
     receipt,
-    desktopFiles,
+    runtimeFiles,
     rendererFiles,
     releaseTag,
   });

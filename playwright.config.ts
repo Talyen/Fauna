@@ -3,6 +3,7 @@ export default defineConfig({
   testDir: "tests/e2e",
   fullyParallel: false,
   workers: 1,
+  forbidOnly: !!process.env.CI,
   // A broken shared layout otherwise repeats the same failure across every viewport.
   // Green runs still execute the complete suite.
   maxFailures: process.env.CI ? 5 : undefined,
