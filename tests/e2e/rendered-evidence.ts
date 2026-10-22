@@ -30,7 +30,7 @@ export async function captureScreen(page: Page, options: Parameters<Page["screen
 /** Attach frames to their owning test so shard reports keep distinct evidence paths. */
 export async function captureFrame(page: Page, options: Parameters<Page["screenshot"]>[0]) {
   const name = String(options?.path ?? "screen.png").replace(/[^a-zA-Z0-9_.-]/g, "_");
-  const file = test.info().outputPath(name);
+  const file = test.info().outputPath(`${test.info().attachments.length}-${name}`);
   const result = await page.screenshot({ ...options, path: file });
   await test.info().attach(name, { path: file, contentType: "image/png" });
   return result;
