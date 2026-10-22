@@ -2,6 +2,8 @@
 
 [Content authoring contracts](../../CONTENT.md) own shared rules. Each reference describes its creature kit and passive; its separate artwork section retains provenance and implementation-time validation notes
 
+For new kits, use the [creature design workflow](../../CREATURE_DESIGN.md) and [reusable skill](../../../.agents/skills/fauna-creature-design/SKILL.md), including the [Boss and Legendary section](../../CREATURE_DESIGN.md#boss-and-legendary-creatures).
+
 - [Emberback](emberback.md) · [implementation](../../../src/game/content/creatures/emberback.ts)
 - [Mossguard](mossguard.md) · [implementation](../../../src/game/content/creatures/mossguard.ts)
 - [Pollenmoth](pollenmoth.md) · [implementation](../../../src/game/content/creatures/pollenmoth.ts)

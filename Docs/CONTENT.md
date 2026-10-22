@@ -4,6 +4,8 @@
 
 Author each creature's stats, six passive tiers and three abilities together in `src/game/content/creatures/`; the [creature reference index](content/creatures/README.md) links each kit and its design notes. [Creature catalogs](../src/game/content/creatures.ts) retain explicit, separate species and card order because seeded offers and selections consume them. Author talent trees by keyword in `src/game/content/talents/`; [the talent catalog](../src/game/content/talents.ts) retains their existing combined order. Shared definition types and card builders remain outside individual kits. There is no elemental chart. Consumers access catalogs through `src/game/content.ts`; progression calculations belong to `src/game/progression.ts`.
 
+Use [Creature design](CREATURE_DESIGN.md) and the [creature design skill](../.agents/skills/fauna-creature-design/SKILL.md) when proposing or implementing a new kit: inspect its artwork, compare current mechanics, present passive and ability alternatives, budget the complete kit and validate its player/enemy behavior. The workflow includes [Boss and Legendary design](CREATURE_DESIGN.md#boss-and-legendary-creatures) grounded in Memento.
+
 [Journey progression](EXPEDITION_DESIGN.md) owns roster limits, starter eligibility, recruitment, swaps, Campfire recovery and reward flow. [Architecture](ARCHITECTURE.md#save-contract) owns the current save contract and disposable development-save policy.
 
 ## Ability costs

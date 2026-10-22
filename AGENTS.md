@@ -22,6 +22,7 @@ Task-scoped branch/worktree creation, commits, local integration, non-force push
 
 - [Architecture, application commands, saves and platform boundaries](Docs/ARCHITECTURE.md): `src/game/`, `src/application/session.ts`, and `src/platform/`.
 - [Content and artwork](Docs/CONTENT.md): `src/game/content.ts` and `public/art/`.
+- [Creature design](Docs/CREATURE_DESIGN.md): use the [creature design skill](.agents/skills/fauna-creature-design/SKILL.md) for artwork-led passive and ability options, kit implementation, and Boss/Legendary design.
 - [Visual design workflow and references](design/visual-quality/README.md): use the repo [UI design](.agents/skills/fauna-ui-design/SKILL.md), [UI critique](.agents/skills/fauna-ui-critique/SKILL.md), and [art direction](.agents/skills/fauna-art-direction/SKILL.md) skills for their corresponding visual tasks
 - [UI, interaction and accessibility](Docs/UI.md), [menus and inspection](Docs/MENU_DESIGN.md), [expedition and progression](Docs/EXPEDITION_DESIGN.md).
 - [Gameplay vocabulary](Docs/GLOSSARY.md): `src/game/glossary.ts`.
