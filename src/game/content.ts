@@ -17,9 +17,11 @@ export type SpeciesId =
   | "ringpalm"
   | "glintstride"
   | "wickwaltz"
-  | "sternshell";
+  | "sternshell"
+  | "neradora";
 type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
+  | { kind: "tidalRegeneration"; amount: number }
   | { kind: "kindlingFlourish"; amount: number }
   | { kind: "resonance"; amount: number }
   | { kind: "wrongFoot"; amount: number }
@@ -87,6 +89,40 @@ export type CardDefinition = CardBase &
     | { effect: Exclude<Effect, "attack" | "guard" | "heal">; target?: never }
   );
 export const SPECIES: readonly Species[] = [
+  {
+    id: "neradora",
+    name: "Neradora",
+    title: "The living tide flower",
+    health: 28,
+    color: "#ed795c",
+    trait: "Tidal Regeneration",
+    passiveTiers: [
+      {
+        description: "Restore 1 Health every other turn",
+        effects: [{ kind: "tidalRegeneration", amount: 1 }],
+      },
+      {
+        description: "Restore 2 Health every other turn",
+        effects: [{ kind: "tidalRegeneration", amount: 2 }],
+      },
+      {
+        description: "Restore 3 Health every other turn",
+        effects: [{ kind: "tidalRegeneration", amount: 3 }],
+      },
+      {
+        description: "Restore 4 Health every other turn",
+        effects: [{ kind: "tidalRegeneration", amount: 4 }],
+      },
+      {
+        description: "Restore 5 Health every other turn",
+        effects: [{ kind: "tidalRegeneration", amount: 5 }],
+      },
+      {
+        description: "Restore 6 Health every other turn",
+        effects: [{ kind: "tidalRegeneration", amount: 6 }],
+      },
+    ],
+  },
   {
     id: "sternshell",
     name: "Sternshell",
@@ -748,6 +784,23 @@ const attack = (
 });
 export const CARDS: readonly CardDefinition[] = [
   {
+    ...card("neradora", "Undertow Knot", "waterThorns", 3),
+    id: "neradora-undertow-knot",
+    artwork: "action.neradora.undertow-knot",
+  },
+  {
+    ...card("neradora", "Bloom Shelter", "heal", 2),
+    id: "neradora-bloom-shelter",
+    target: "allAllies",
+    artwork: "action.neradora.bloom-shelter",
+  },
+  {
+    ...card("neradora", "Tide Cup", "draw", 2),
+    id: "neradora-tide-cup",
+    effects: [{ kind: "mana", amount: 1 }],
+    artwork: "action.neradora.tide-cup",
+  },
+  {
     ...attack("sternshell", "Surge Ram", 3, "physical"),
     doubleWithArmor: true,
     artwork: "action.sternshell.surge-ram",
@@ -1067,6 +1120,9 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
         card.target === "self"
           ? `Restore ${value} Health`
           : `Restore ${value} Health to ${card.target === "allAllies" ? "all allies" : card.target === "mostInjured" ? "the most injured ally" : "a living ally"}`;
+      break;
+    case "waterThorns":
+      text = `Gain ${value} Water Thorns`;
       break;
     case "dodge":
       text = `Gain ${value}% Dodge until your next turn`;

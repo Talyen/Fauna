@@ -28,6 +28,7 @@ export function freshCombat(): CombatState {
     desperateGuardUsed: false,
     armor: 0,
     thorns: 0,
+    waterThorns: 0,
     dodge: 0,
     temporaryDodge: 0,
     blind: false,
@@ -144,7 +145,7 @@ export function restoreHealth(
 function shareProtection(
   state: GameState,
   source: Combatant,
-  effect: "block" | "thorns",
+  effect: "block" | "thorns" | "waterThorns",
   amount: number,
   events: GameEvent[],
 ) {
@@ -161,7 +162,7 @@ function shareProtection(
   if (chance <= 0 || (chance < 100 && roll(state) >= chance / 100)) return;
   for (const recipient of recipients) {
     if (effect === "block") grantBlock(state, recipient, amount, events, false);
-    else grantStatus(recipient, "thorns", amount, events, state, false);
+    else grantStatus(recipient, effect, amount, events, state, false);
   }
 }
 export function grantBlock(
@@ -334,7 +335,7 @@ function healthThresholds(state: GameState, unit: Combatant, before: number, eve
 }
 export function grantStatus(
   unit: Combatant,
-  status: "armor" | "thorns" | "dodge",
+  status: "armor" | "thorns" | "waterThorns" | "dodge",
   amount: number,
   events: GameEvent[],
   state?: GameState,
@@ -352,9 +353,10 @@ export function grantStatus(
       amount: gain,
       status,
       outcome: "gain",
-      text: `${unitName(unit)} gains ${gain} ${status}.`,
+      text: `${unitName(unit)} gains ${gain} ${status === "waterThorns" ? "Water Thorns" : status}.`,
     });
-  if (status === "thorns" && state && sharing) shareProtection(state, unit, "thorns", gain, events);
+  if ((status === "thorns" || status === "waterThorns") && state && sharing)
+    shareProtection(state, unit, status, gain, events);
 }
 /** Resolve after the Armor-removing effect, so its original hit completes first. */
 export function triggerArmorBreak(state: GameState, unit: Combatant, events: GameEvent[]) {
@@ -387,7 +389,16 @@ export function removeEffects(
   const statuses =
     kind === "cleanse"
       ? (["burn", "poison", "bleed", "stun", "freeze", "blind"] as const)
-      : (["armor", "thorns", "dodge", "reflect", "reflectBurn", "nullify", "nullifyFreeze"] as const);
+      : ([
+          "armor",
+          "thorns",
+          "waterThorns",
+          "dodge",
+          "reflect",
+          "reflectBurn",
+          "nullify",
+          "nullifyFreeze",
+        ] as const);
   if (kind === "purge" && unit.block > 0 && count > 0) {
     unit.block = 0;
     removedStatuses.push("block");
@@ -431,7 +442,7 @@ export function removeEffects(
       status: kind,
       outcome: "remove",
       affectedStatus,
-      text: `${unitName(unit)}: ${kind === "cleanse" ? "Cleanse" : "Purge"} ${affectedStatus}.`,
+      text: `${unitName(unit)}: ${kind === "cleanse" ? "Cleanse" : "Purge"} ${affectedStatus === "waterThorns" ? "Water Thorns" : affectedStatus}.`,
     });
   if (removedStatuses.length === 0)
     events.push({
@@ -1166,10 +1177,16 @@ function resolveHit(
         leechHealth(state, source, lost, events, stats.poison > 0 || stats.bleed > 0);
     }
     // Captured damage remains valid even if retaliation later removes the attacker.
-    if (direct && lost > 0 && stats.thorns > 0 && target.health > 0) {
-      const reflected = stats.thorns;
-      stats.thorns--;
-      hit(state, target, source, reflected, "nature", events, { retaliation: true });
+    if (direct && lost > 0 && target.health > 0) {
+      for (const [status, type] of [
+        ["thorns", "nature"],
+        ["waterThorns", "water"],
+      ] as const) {
+        const reflected = stats[status];
+        if (reflected <= 0) continue;
+        stats[status]--;
+        hit(state, target, source, reflected, type, events, { retaliation: true });
+      }
     }
     if ((options.leech || blessedLeech) && type !== "bleed" && source.health > 0)
       leechHealth(state, source, lost, events, stats.poison > 0 || stats.bleed > 0);
@@ -1271,6 +1288,19 @@ export function startAction(unit: Combatant, events: GameEvent[], state?: GameSt
   stats.cardsPlayedThisTurn = 0;
   stats.firstAttackUsed = false;
   stats.skipped = !!stats.controlled;
+  if (state?.phase === "battle" && state.battle && unit.health > 0) {
+    const enemy = "maxHealth" in unit;
+    const row = enemy ? state.battle.enemies : state.team;
+    // The allied turn number advances after startAction; enemies act on the current number
+    const turn = state.battle.turn + Number(!enemy);
+    if (turn % 2 === 0 && row.some((deployed) => deployed.id === unit.id)) {
+      const amount = creaturePassive(enemy ? undefined : state, unit.species).effects.reduce(
+        (sum, effect) => sum + (effect.kind === "tidalRegeneration" ? effect.amount : 0),
+        0,
+      );
+      if (amount > 0) restoreHealth(unit, amount, events, false, state);
+    }
+  }
   if (stats.controlled) {
     events.push({
       kind: "status",

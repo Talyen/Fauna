@@ -37,6 +37,8 @@ export const COMBAT_PACKS = [
   ["mossguard", "sternshell", "captoad"],
   ["wickwaltz", "shadebrim", "prismram"],
   ["mossguard", "wickwaltz", "captoad"],
+  ["neradora", "coralcurl", "prismram"],
+  ["mossguard", "neradora", "captoad"],
 ] as const;
 export const BOSSES = [
   {
@@ -105,7 +107,7 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
           ? "freeze"
           : kind === "chimecricket" || kind === "ringpalm"
             ? "stun"
-            : kind === "coralcurl" || kind === "sternshell"
+            : kind === "coralcurl" || kind === "sternshell" || kind === "neradora"
               ? "water"
               : kind === "dunefox"
                 ? "physical"

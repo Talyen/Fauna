@@ -63,6 +63,7 @@ describe("Alchemy combat foundations", () => {
     const events: Parameters<typeof hit>[5] = [];
     const next = produce(run(), (s) => {
       const enemy = s.battle!.enemies[0]!;
+      enemy.health = 18;
       enemy.block = 20;
       Object.assign(enemy.combat, { burn: 5, poison: 5, bleed: 5 });
       tickStatuses(s, enemy, events);
@@ -259,6 +260,7 @@ it("allows Dodge again after the control skip resolves while shared buildup immu
   const events: Parameters<typeof hit>[5] = [];
   const next = produce(run(), (s) => {
     const enemy = s.battle!.enemies[0]!;
+    enemy.health = 18;
     enemy.combat.controlled = "freeze";
     startAction(enemy, events);
     s.rng = seed;

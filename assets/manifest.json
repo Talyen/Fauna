@@ -1527,6 +1527,50 @@
       "aspect": [3, 4],
       "provenance": "Unchanged Sternshell artwork selected from user Google Drive: https://drive.google.com/file/d/15IQQNM8yjoxF77EXt4oaUs4gLNrY0xBK/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "creature.neradora",
+      "origin": "repository",
+      "source": "public/art/neradora/portrait.png",
+      "output": "art/neradora/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Neradora artwork selected from user Google Drive: https://drive.google.com/file/d/1TnJ2jJqJAeAjEGfQiWUNNiSZ1h83dM4L/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.neradora.undertow-knot",
+      "origin": "repository",
+      "source": "public/art/neradora/undertow-knot.png",
+      "output": "art/neradora/undertow-knot.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Neradora artwork selected from user Google Drive: https://drive.google.com/file/d/1bYipiPJlSvnKvclh3e9jKNJSnOgOw7Ou/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.neradora.bloom-shelter",
+      "origin": "repository",
+      "source": "public/art/neradora/bloom-shelter.png",
+      "output": "art/neradora/bloom-shelter.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Neradora artwork selected from user Google Drive: https://drive.google.com/file/d/1L2VlVyrQmfxOUu7P5rjnyqzaULszLKPQ/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.neradora.tide-cup",
+      "origin": "repository",
+      "source": "public/art/neradora/tide-cup.png",
+      "output": "art/neradora/tide-cup.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Neradora artwork selected from user Google Drive: https://drive.google.com/file/d/1KmzqipzOummTHk13IMR4G1XfNFY48quE/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

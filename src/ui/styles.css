@@ -1269,6 +1269,10 @@ strong {
 [data-keyword="water"] {
   color: var(--keyword-water);
 }
+[data-keyword="waterThorns"],
+[data-combat-tone="waterThorns"] {
+  color: var(--keyword-waterThorns);
+}
 [data-damage-type="nature"],
 [data-combat-tone="nature"],
 [data-keyword="nature"] {
