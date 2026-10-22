@@ -283,3 +283,113 @@ it("allows play after a stalled local read and ignores its late result", async (
     vi.useRealTimers();
   }
 });
+
+it("persists commands issued synchronously by committed-state subscribers in revision order", async () => {
+  const saved: number[] = [];
+  const s = createSession({
+    ...platform(),
+    saves: {
+      readCandidates: async () => [],
+      write: async (data) => {
+        saved.push(JSON.parse(data).revision);
+      },
+    },
+  });
+  await s.load();
+  const unsubscribe = s.store.subscribe((view, previous) => {
+    if (view.game.revision === 1 && previous.game.revision === 0) s.command({ type: "start" });
+  });
+  s.command({ type: "draft", species: s.store.getState().game.starterOffers[0]! });
+  await s.flush();
+  expect(s.store.getState().game.revision).toBe(2);
+  expect(saved).toEqual([1, 2]);
+  unsubscribe();
+  await s.dispose();
+});
+
+it.each(["saved", "empty", "invalid"])(
+  "keeps command admission closed throughout %s startup cloud reconciliation",
+  async (candidate) => {
+    let release!: () => void;
+    const gate = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    const identity = vi.fn(async () => {
+      await gate;
+      return { available: false, device: "", profile: "", importAvailable: false };
+    });
+    const s = createSession({
+      ...platform(candidate === "saved" ? JSON.stringify(run()) : candidate === "invalid" ? "broken" : null),
+      cloud: {
+        identity,
+        readLocal: async () => null,
+        writeLocal: async () => {},
+        preserve: async () => {},
+        importStandalone: async () => [],
+        list: async () => [],
+        read: async () => null,
+        write: async () => {},
+      },
+    });
+    const admitted: boolean[] = [];
+    let observedReady = false;
+    const unsubscribe = s.store.subscribe((view) => {
+      if (view.ready && !view.cloud.blocking && !observedReady) {
+        observedReady = true;
+        admitted.push(s.command({ type: "endTurn" }));
+      }
+    });
+    const loading = s.load();
+    await vi.waitFor(() => expect(identity).toHaveBeenCalledOnce());
+    expect(admitted).toEqual([]);
+    release();
+    unsubscribe();
+    await loading;
+    expect(s.store.getState().ready).toBe(true);
+    await s.dispose();
+  },
+);
+
+it("bounds a stalled recovery read so saving and shutdown can finish without overwriting unknown data", async () => {
+  vi.useFakeTimers();
+  let s: ReturnType<typeof createSession> | undefined;
+  try {
+    let reads = 0;
+    let release!: () => void;
+    const stalled = new Promise<[]>((resolve) => {
+      release = () => resolve([]);
+    });
+    const write = vi.fn(async () => {});
+    const quit = vi.fn(async () => {});
+    s = createSession({
+      ...platform(),
+      quit,
+      saves: {
+        readCandidates: async () => {
+          if (++reads <= 2) throw new Error("permission denied");
+          return stalled;
+        },
+        write,
+      },
+    });
+    await s.load();
+    s.command({ type: "draft", species: s.store.getState().game.starterOffers[0]! });
+    let flushed: boolean | undefined;
+    void s.flush().then((result) => {
+      flushed = result;
+    });
+    await vi.advanceTimersByTimeAsync(5000);
+    expect(flushed).toBe(false);
+    const closing = s.quit();
+    await vi.advanceTimersByTimeAsync(5000);
+    await closing;
+    expect(quit).toHaveBeenCalledOnce();
+    release();
+    await vi.advanceTimersByTimeAsync(0);
+    expect(write).not.toHaveBeenCalled();
+    expect(s.store.getState().loadFailed).toBe(true);
+  } finally {
+    void s?.dispose();
+    vi.useRealTimers();
+  }
+});
