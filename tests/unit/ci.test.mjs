@@ -233,3 +233,36 @@ it("fails the executable final gate for upstream failures, missing reports and i
     rmSync(root, { recursive: true, force: true });
   }
 });
+
+it("ships portable merged JSON attachments and rejects missing resources", () => {
+  const root = mkdtempSync(path.join(tmpdir(), "fauna-ci-evidence-"));
+  const script = path.resolve(import.meta.dirname, "../../scripts/ci.mjs");
+  try {
+    mkdirSync(path.join(root, "reports"));
+    mkdirSync(path.join(root, "all-blob-reports/resources"), { recursive: true });
+    const image = path.join(root, "all-blob-reports/resources/frame.png");
+    writeFileSync(image, "image bytes");
+    const report = test("screen", {
+      results: [
+        {
+          status: "passed",
+          retry: 0,
+          attachments: [{ path: image, name: "screen", contentType: "image/png" }],
+        },
+      ],
+    });
+    writeFileSync(path.join(root, "reports/playwright.json"), JSON.stringify(report));
+    const run = () => spawnSync(process.execPath, [script, "portable"], { cwd: root, encoding: "utf8" });
+    expect(run().status).toBe(0);
+    const portable = JSON.parse(readFileSync(path.join(root, "reports/playwright.json"), "utf8"));
+    expect(portable.suites[0].specs[0].tests[0].results[0].attachments[0].path).toBe(
+      "browser-resources/frame.png",
+    );
+    expect(readFileSync(path.join(root, "reports/browser-resources/frame.png"), "utf8")).toBe("image bytes");
+    writeFileSync(path.join(root, "reports/playwright.json"), JSON.stringify(report));
+    rmSync(image);
+    expect(run().status).not.toBe(0);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});

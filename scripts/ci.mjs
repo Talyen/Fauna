@@ -173,6 +173,21 @@ async function main(command) {
       (file) => file.endsWith(".zip") && file.includes("blob-report"),
     ))
       copyFileSync(file, path.join("all-blob-reports", `${file.split(path.sep)[2]}-${path.basename(file)}`));
+  } else if (command === "portable") {
+    const report = read("reports/playwright.json");
+    mkdirSync("reports/browser-resources", { recursive: true });
+    for (const row of browserCases(report))
+      for (const result of row.test.results ?? [])
+        for (const attachment of result.attachments ?? []) {
+          if (!attachment.path) continue;
+          const source = path.resolve(attachment.path);
+          if (!source.startsWith(path.resolve("all-blob-reports/resources") + path.sep))
+            throw new Error("Merged attachment is outside blob resources");
+          const relative = `browser-resources/${path.basename(source)}`;
+          copyFileSync(source, path.join("reports", relative));
+          attachment.path = relative;
+        }
+    write("reports/playwright.json", report);
   } else if (command === "gate") {
     validateJobs(JSON.parse(process.env.CI_NEEDS));
     const total = Number(process.env.CI_SHARDS);

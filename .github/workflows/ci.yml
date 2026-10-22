@@ -330,6 +330,9 @@ jobs:
       - name: Merge browser results
         if: always()
         run: npx playwright merge-reports --reporter=json,html all-blob-reports
+      - name: Make merged JSON evidence portable
+        if: always()
+        run: node scripts/ci.mjs portable
       - name: Summarize browser results
         if: always()
         run: node scripts/ci-summarize.mjs playwright reports/playwright.json
@@ -352,5 +355,6 @@ jobs:
           path: |
             reports/playwright.json
             reports/browser-html/
+            reports/browser-resources/
             reports/ci/browser-timings.json
             reports/ci/timings-*.json
