@@ -350,4 +350,30 @@ describe("isolated worktrees and protected integration", () => {
     expect(git(root, "rev-parse", "HEAD")).toBe(original);
     expect(readFileSync(path.join(task.path, "late.txt"), "utf8")).toContain("unfinished");
   });
+
+  it("preserves a clean worktree with a multi-commit cherry-pick still in progress", async () => {
+    const root = repo();
+    const task = createWorktree(root, "sequenced");
+    put(root, "README.md", "Main change\n");
+    git(root, "add", "README.md");
+    git(root, "commit", "-qm", "main change");
+    const first = git(root, "rev-parse", "HEAD");
+    put(root, "second.txt", "Next cherry-pick\n");
+    git(root, "add", "second.txt");
+    git(root, "commit", "-qm", "next change");
+    const mainHead = git(root, "rev-parse", "HEAD");
+    put(task.path, "README.md", "Task change\n");
+    git(task.path, "add", "README.md");
+    git(task.path, "commit", "-qm", "task change");
+    expect(() => git(task.path, "cherry-pick", first, mainHead)).toThrow();
+    put(task.path, "README.md", "Main change\n");
+    git(task.path, "add", "README.md");
+    git(task.path, "commit", "-qm", "resolve first pick");
+    expect(git(task.path, "status", "--porcelain")).toBe("");
+    const runner = vi.fn(() => ({ status: 0 }));
+    await expect(integrate(root, task.branch, { runner })).rejects.toThrow("sequencer");
+    expect(runner).not.toHaveBeenCalled();
+    expect(git(root, "rev-parse", "HEAD")).toBe(mainHead);
+    expect(existsSync(task.path)).toBe(true);
+  });
 });

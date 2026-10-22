@@ -1,25 +1,51 @@
-import { fork } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { readFile, writeFile, appendFile } from "node:fs/promises";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import { runOwnedWorker } from "../lib/worker.mjs";
 import { identity as sourceIdentity, reportDirectory } from "../lib/tool-runtime.mjs";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-const args = process.argv.slice(2);
-if (!args.includes("--worker")) {
-  const child = fork(fileURLToPath(import.meta.url), [...args, "--worker"], { stdio: "inherit" });
-  process.once("SIGINT", () => child.kill());
-  process.once("SIGTERM", () => child.kill());
-  const timer = setTimeout(() => {
-    child.kill();
-    console.error("Incomplete: playthrough exceeded 60-second watchdog.");
-    process.exitCode = 1;
-  }, 60_000);
-  child.once("exit", (code) => {
-    clearTimeout(timer);
-    process.exitCode = code ?? 1;
-  });
-} else {
+export function parsePlaythroughArgs(args) {
+  const options = {};
+  const allowed = new Set([
+    "--seed",
+    "--runs",
+    "--starter",
+    "--policy",
+    "--out",
+    "--save",
+    "--replay",
+    "--compare",
+  ]);
+  for (let index = 0; index < args.length; index += 2) {
+    const flag = args[index],
+      value = args[index + 1];
+    if (!allowed.has(flag) || !value || value.startsWith("--") || Object.hasOwn(options, flag))
+      throw new Error(`Invalid or duplicate playthrough option: ${flag}`);
+    options[flag] = value;
+  }
+  return options;
+}
+
+export async function runPlaythrough(args, { timeout = 60_000, spawnWorker } = {}) {
+  parsePlaythroughArgs(args);
+  const controller = new AbortController();
+  const cancel = () => controller.abort();
+  process.once("SIGINT", cancel);
+  process.once("SIGTERM", cancel);
+  try {
+    await runOwnedWorker(fileURLToPath(import.meta.url), [...args, "--worker"], timeout, {
+      signal: controller.signal,
+      spawnWorker,
+    });
+  } finally {
+    process.removeListener("SIGINT", cancel);
+    process.removeListener("SIGTERM", cancel);
+  }
+}
+
+async function worker(args) {
+  const options = parsePlaythroughArgs(args);
   const { createServer } = await import("vite");
   const server = await createServer({
     root,
@@ -29,25 +55,7 @@ if (!args.includes("--worker")) {
     appType: "custom",
   });
   try {
-    const value = (name, fallback) => {
-      const index = args.indexOf(name);
-      return index < 0 ? fallback : args[index + 1];
-    };
-    const allowed = new Set([
-      "--seed",
-      "--runs",
-      "--starter",
-      "--policy",
-      "--out",
-      "--save",
-      "--replay",
-      "--compare",
-      "--worker",
-    ]);
-    for (let index = 0; index < args.length; index++) {
-      if (!allowed.has(args[index])) throw new Error(`Unknown option ${args[index]}`);
-      if (args[index] !== "--worker") index++;
-    }
+    const value = (name, fallback) => options[name] ?? fallback;
     const identity = await sourceIdentity();
     const { runJourney } = await server.ssrLoadModule("/src/tooling/playthrough.ts");
     const { FIRST_RUN_STARTERS } = await server.ssrLoadModule("/src/game/content.ts");
@@ -126,5 +134,18 @@ if (!args.includes("--worker")) {
     if (!bundle.complete) process.exitCode = 1;
   } finally {
     await server.close();
+  }
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+  const args = process.argv.slice(2);
+  if (args.at(-1) === "--worker") await worker(args.slice(0, -1));
+  else {
+    try {
+      await runPlaythrough(args);
+    } catch (error) {
+      console.error(error.message);
+      process.exitCode = 1;
+    }
   }
 }

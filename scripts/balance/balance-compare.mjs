@@ -1,8 +1,8 @@
-import { fork } from "node:child_process";
 import { readFile, writeFile, appendFile } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { ROOT, runtime, identity, hash, reportDirectory } from "../lib/tool-runtime.mjs";
+import { runOwnedWorker } from "../lib/worker.mjs";
 import { compareBalance } from "./paired-balance.mjs";
 import { writeBalanceFindings } from "./balance-findings.mjs";
 const load = async (file) => JSON.parse(await readFile(path.resolve(file), "utf8"));
@@ -22,38 +22,13 @@ export async function worker(input, output) {
     await server.close();
   }
 }
-export function runWorker(input, output, timeout, { signal, spawnWorker = fork } = {}) {
-  signal?.throwIfAborted();
-  return new Promise((resolve, reject) => {
-    const child = spawnWorker(
-      path.join(ROOT, "scripts/balance/balance-compare.mjs"),
-      ["--worker", input, output],
-      {
-        stdio: ["ignore", "inherit", "inherit", "ipc"],
-      },
-    );
-    let failure;
-    const stop = () => {
-      failure = new Error("Incomplete: balance run cancelled.");
-      child.kill("SIGKILL");
-    };
-    signal?.addEventListener("abort", stop, { once: true });
-    const timer = setTimeout(() => {
-      failure = new Error("Incomplete: case watchdog exhausted.");
-      child.kill("SIGKILL");
-    }, timeout);
-    const finish = (error) => {
-      clearTimeout(timer);
-      signal?.removeEventListener("abort", stop);
-      if (error) reject(error);
-      else resolve();
-    };
-    child.once("error", finish);
-    // Wait for exit before admitting another case, including after the watchdog.
-    child.once("exit", (code) => {
-      finish(failure ?? (code === 0 ? undefined : new Error(`Incomplete: case worker exited ${code}.`)));
-    });
-  });
+export function runWorker(input, output, timeout, options) {
+  return runOwnedWorker(
+    path.join(ROOT, "scripts/balance/balance-compare.mjs"),
+    ["--worker", input, output],
+    timeout,
+    options,
+  );
 }
 export async function main(args = process.argv.slice(2), { runCase = runWorker } = {}) {
   if (args[0] === "--worker") return worker(args[1], args[2]);

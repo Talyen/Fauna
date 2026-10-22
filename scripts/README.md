@@ -44,6 +44,7 @@ Additional opt-in tools:
 - `npm run test:e2e:route`: [named route launcher](performance/test-route.mjs), [route definitions](performance/routes.mjs).
 - `npm run test:interactions`: [rendered seeded runner](performance/run-interactions.mjs), [bounded reducer and replay validation](lib/interaction-replay.mjs).
 - Shared source identities, report-directory confinement and Node module loading: [tool-runtime.mjs](lib/tool-runtime.mjs).
+- Playthrough and balance worker deadlines, cancellation and exit ownership: [worker.mjs](lib/worker.mjs).
 - Isolated smoke and performance desktop launch environments: [desktop-environment.mjs](lib/desktop-environment.mjs).
 
 See [Development tools](../Docs/DEVELOPMENT_TOOLS.md) for scenarios, defaults, evidence and limitations.

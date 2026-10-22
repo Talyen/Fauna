@@ -36,6 +36,7 @@ export function assertClean(root, branch) {
     "BISECT_START",
     "rebase-merge",
     "rebase-apply",
+    "sequencer",
   ]) {
     const file = git(root, ["rev-parse", "--git-path", marker]).trim();
     if (existsSync(path.resolve(root, file)))
