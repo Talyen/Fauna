@@ -51,7 +51,7 @@ Development saves are disposable. There are no released player saves to preserve
 
 Review the final diff and integration. Express behavior through names, types and valuable tests; comments explain non-obvious reasons, ordering or compatibility. Justify lint suppressions.
 
-Run `npm run check -- <task-owned paths>` before handoff, or `--base <commit>` for committed work; add `--plan` to inspect coverage without running checks. This is the local completion gate: batched static checks, documentation contracts and selected regression suites. Review the diff, inspect any required rendered evidence and integrate through the shared script. Report local completion and any remaining CI coverage explicitly; a task does not need push authorization to finish locally. [Contributing](CONTRIBUTING.md#verification) owns the single execution policy and CI boundaries. Use `npm run deps` for missing or changed task dependencies; it safely handles shared links.
+Run `npm run review:diff` and `npm run check` in the task checkout; both include committed and working task changes by default. Use explicit paths to narrow mixed work or `--base <commit>` to select another base. Follow [Contributing](CONTRIBUTING.md#verification) for completion, bounded diagnostics and CI boundaries. Use `npm run deps` for missing or changed task dependencies.
 
 For visual changes, follow the single [rendered review procedure](Docs/UI.md#required-review). Task-owned focused preview/review is authorized by default. Integrate only after current rendered evidence is inspected; preserve work on its branch if that evidence is unavailable.
 

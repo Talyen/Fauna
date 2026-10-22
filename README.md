@@ -35,7 +35,7 @@ Gameplay settles before visual feedback. Accepted commands automatically save; f
 
 ## Verify
 
-[Contributing](CONTRIBUTING.md#verification) owns the verification commands, local resource limits and CI policy. Default local checks cover bounded formatting and fixed Node smoke; full static, unit/DOM, build, browser and packaged Windows verification belong to CI. See [release boundaries](Docs/RELEASE.md) for the remaining shipping gates.
+[Contributing](CONTRIBUTING.md#verification) owns the verification commands, local resource limits and CI policy. Default local checks cover selected static checks and affected regression suites; full static, unit/DOM, build, browser and packaged Windows verification belong to CI, with bounded task diagnostics authorized by the contribution policy. See [release boundaries](Docs/RELEASE.md) for the remaining shipping gates.
 
 ## Architecture and authoring
 

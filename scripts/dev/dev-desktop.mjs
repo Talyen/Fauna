@@ -1,2 +1,2 @@
-process.argv.push("--desktop");
-await import("./preview.mjs");
+import { preview } from "./preview.mjs";
+await preview(["--desktop"]);

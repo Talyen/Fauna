@@ -2,11 +2,23 @@
 
 ## Task checkouts and previews
 
-`npm run worktree -- short-name` from the main checkout creates `task/short-name` from committed local main in `.worktrees/short-name`, or reuses the matching checkout. Dirty main is preserved. Dependencies are shared only when install identities match; `npm run deps` safely reuses or detaches the task link before installing. Continue to integrate with `node scripts/integrate.mjs task/short-name` from clean main. Setup does not delete checkouts or push branches.
+[Contributing](../CONTRIBUTING.md) gives the everyday checkout, verification and integration commands. Use the following tools for focused visual evidence:
 
-`npm run preview:task -- --browser` starts a quiet Vite preview on its own localhost port and opens a fresh headed Chromium context at 1920×1080. `--desktop` opens Electron with a separate user-data directory. Without either flag, the command starts only the server. Browser mode requires an installed Playwright Chromium binary. Task-owned visual and interaction changes authorize a bounded preview under the [review tiers](UI.md#required-review); [Contributing](../CONTRIBUTING.md#execution-and-evidence) owns execution policy.
+```sh
+npm run preview:task -- --browser --scenario battle
+npm run preview:task -- --browser --scenario collection --viewport 1920x1080 --text-scale 1
+npm run capture:task -- --scenario battle --label before
+npm run capture:task -- --scenario battle --label after
+npm run capture:task -- --scenario settings --tier small --label candidate
+```
 
-Each session records its random identity, port, checkout and owner PID under ignored `reports/previews/`. Readiness verifies a per-session endpoint. Ctrl+C closes only owned process handles and that server/context. Records never authorize killing a PID later. Quiet previews cannot emit game audio. Use normal `npm run dev` for an audible browser listening session; `npm run dev:desktop` uses the owned quiet desktop preview. Only dispose sessions opened for the current task.
+Browser previews default to 1280×720, 125% text and reduced motion. Available seeded scenarios are home, settings, collection, battle, pause, recruit, merchant and merchant-unavailable. They reuse validated current-format [gameplay fixtures](../tests/support/game.ts) in fresh browser contexts; reload retains interactions committed after seeding. Without a scenario, preview opens the ordinary main menu. `--desktop` retains an isolated Electron profile; seeded browser options do not apply to desktop. Without a browser/desktop flag, preview starts only its owned server. Headed browser mode requires installed Playwright Chromium; capture uses its headless runtime.
+
+Capture starts and closes its own quiet preview and writes a unique directory under ignored reports. The default layout tier captures 1280×720 at 125% text and 1920×1080 at default text; small and interaction tiers capture only the minimum viewport with enlarged text. Custom viewport/text options produce one additional custom-condition capture and cannot be combined with an explicit tier. Evidence includes the validated checkpoint, its hash, source identity, conditions, frame paths and completion/failure status. It waits for finite transitions and artwork, checks the existing shared layout contract and rejects browser errors. Compare matching checkpoint hashes and conditions across before/after records. Inspect the images; capture does not approve visual quality or exercise changed interactions. [UI review](UI.md#required-review) owns acceptance.
+
+Sessions record their identity, port, checkout and owner PID under ignored reports. Ctrl+C closes owned process handles only; records do not authorize killing a PID later. Quiet previews emit no game audio. Use normal `npm run dev` for an audible listening session; `npm run dev:desktop` uses the quiet desktop preview. The older [Merchant study capture](../design/visual-quality/capture.mjs) remains available for its additional purchase/inspection states.
+
+[Shared browser helpers](../tests/README.md#browser-and-ui-coverage) own pagination/resize and focus checks, session seeding, settled screenshots and scroll-free assertions. Existing cross-layer recovery scenarios remain under `tests/integration/recovery/`, with browser recovery coverage in [scroll-free journeys](../tests/e2e/scroll-free.spec.ts). Reuse these owners for new coverage; product layout and silent-recovery rules remain in [UI contracts](UI.md).
 
 ## Content checks
 

@@ -42,7 +42,8 @@ afterEach(() => {
 
 describe("lightweight local verification", () => {
   it("rejects unknown options and ambiguous or incomplete selections", () => {
-    expect(parseCheckArgs([])).toEqual({ paths: [], base: "HEAD" });
+    expect(parseCheckArgs([])).toEqual({ paths: [], base: null });
+    expect(parseCheckArgs(["--working-tree"])).toEqual({ paths: [], base: "HEAD" });
     expect(parseCheckArgs(["--base", "main"])).toEqual({ paths: [], base: "main" });
     for (const args of [
       ["--full"],
@@ -50,6 +51,7 @@ describe("lightweight local verification", () => {
       ["--base", "--diff"],
       ["--base", "main", "README.md"],
       ["--diff", "src"],
+      ["--working-tree", "--base", "main"],
     ])
       expect(() => parseCheckArgs(args)).toThrow();
   });

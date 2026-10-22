@@ -5,6 +5,8 @@ import { mkdirSync, readFileSync, writeFileSync, lstatSync, readlinkSync } from 
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 
+import { taskBase } from "../lib/task-selection.mjs";
+
 const ROOT = path.resolve(import.meta.dirname, "../..");
 export function reviewGit(root, args) {
   return execFileSync("git", ["--no-optional-locks", "--literal-pathspecs", "--no-pager", ...args], {
@@ -21,7 +23,7 @@ export function selectPaths(root, inputs) {
     return relative || ".";
   });
 }
-export function inventory(root) {
+export function inventory(root, base = "HEAD") {
   const fields = reviewGit(root, ["status", "--porcelain=v1", "-z", "--untracked-files=all"]).split("\0");
   const entries = [];
   for (let i = 0; i < fields.length; i++) {
@@ -32,15 +34,43 @@ export function inventory(root) {
     const from = /[RC]/.test(status) ? fields[++i] : undefined;
     entries.push({ status, file, ...(from ? { from } : {}) });
   }
+  const committed = reviewGit(root, [
+    "diff",
+    "--name-status",
+    "-z",
+    "--find-renames",
+    base,
+    "HEAD",
+    "--",
+  ]).split("\0");
+  for (let i = 0; i < committed.length && committed[i];) {
+    const status = committed[i++];
+    const from = committed[i++];
+    const file = /^[RC]/.test(status) ? committed[i++] : from;
+    const names = [file, ...(/^[RC]/.test(status) ? [from] : [])];
+    const existing = entries.find((entry) =>
+      names.some((name) => entry.file === name || entry.from === name),
+    );
+    if (existing)
+      existing.names = [
+        ...new Set([...(existing.names ?? []), existing.file, existing.from, ...names].filter(Boolean)),
+      ];
+    else entries.push({ status, file, ...(/^[RC]/.test(status) ? { from } : {}) });
+  }
   return entries;
 }
-export function review(root, inputs = [], { status = false, summary = false, budget = 12000 } = {}) {
+export function review(
+  root,
+  inputs = [],
+  { status = false, summary = false, budget = 12000, base: requestedBase } = {},
+) {
   const paths = selectPaths(root, inputs);
-  const all = inventory(root);
+  const base = taskBase(root, requestedBase);
+  const all = inventory(root, base);
   const selected = all.filter(
     (entry) =>
       !paths.length ||
-      [entry.file, entry.from]
+      [entry.file, entry.from, ...(entry.names ?? [])]
         .filter(Boolean)
         .some((file) => paths.some((p) => p === "." || file === p || file.startsWith(`${p}/`))),
   );
@@ -48,9 +78,10 @@ export function review(root, inputs = [], { status = false, summary = false, bud
     const directory = path.join(root, "reports", "agent-diff", randomUUID());
     mkdirSync(directory, { recursive: true });
     const indexPath = path.join(directory, "index.json");
-    writeFileSync(indexPath, JSON.stringify({ inventory: all, selected }, null, 2));
+    writeFileSync(indexPath, JSON.stringify({ base, inventory: all, selected }, null, 2));
     const rendered = JSON.stringify(selected, null, 2);
     return {
+      base,
       inventory: all,
       selected,
       indexPath,
@@ -61,23 +92,27 @@ export function review(root, inputs = [], { status = false, summary = false, bud
     };
   }
   const patches = selected.map((entry) => {
+    const names = entry.names ?? [entry.file, entry.from].filter(Boolean);
+    const committed = reviewGit(root, ["diff", "--binary", base, "HEAD", "--", ...names]);
     if (entry.status === "??") {
       const file = path.join(root, entry.file);
       if (lstatSync(file).isSymbolicLink())
-        return { ...entry, patch: `New symlink: ${JSON.stringify(readlinkSync(file))}` };
+        return { ...entry, patch: `${committed}\nNew symlink: ${JSON.stringify(readlinkSync(file))}` };
       const bytes = readFileSync(file);
       return {
         ...entry,
         patch:
-          bytes.includes(0) || !isUtf8(bytes)
+          committed +
+          "\n" +
+          (bytes.includes(0) || !isUtf8(bytes)
             ? `Binary file: ${bytes.length} bytes; sha256=${createHash("sha256").update(bytes).digest("hex")}`
-            : bytes.toString("utf8"),
+            : bytes.toString("utf8")),
       };
     }
-    const names = [entry.file, entry.from].filter(Boolean);
     return {
       ...entry,
       patch: [
+        committed,
         reviewGit(root, ["diff", "--cached", "--binary", "--", ...names]),
         reviewGit(root, ["diff", "--binary", "--", ...names]),
       ].join("\n"),
@@ -96,6 +131,7 @@ export function review(root, inputs = [], { status = false, summary = false, bud
     };
   });
   const index = {
+    base,
     inventory: all,
     selected: sections.map((s) => s.index),
     patches: path.join(directory, "patches.txt"),
@@ -114,16 +150,35 @@ export function review(root, inputs = [], { status = false, summary = false, bud
   };
 }
 export function main(args = process.argv.slice(2)) {
-  const flags = new Set(args.filter((arg) => ["--status", "--summary", "--json"].includes(arg)));
-  const paths = args.filter((arg) => !flags.has(arg) && arg !== "--");
+  let base;
+  const remaining = [];
+  for (let i = 0; i < args.length; i++) {
+    if (args[i] === "--base") {
+      if (base || !args[i + 1] || args[i + 1].startsWith("--")) throw new Error("--base requires one ref.");
+      base = args[++i];
+    } else remaining.push(args[i]);
+  }
+  const flags = new Set(
+    remaining.filter((arg) => ["--status", "--summary", "--json", "--working-tree", "--diff"].includes(arg)),
+  );
+  if ((flags.has("--working-tree") || flags.has("--diff")) && base)
+    throw new Error("Choose --base or --working-tree.");
+  if (flags.has("--working-tree") || flags.has("--diff")) base = "HEAD";
+  const paths = remaining.filter((arg) => !flags.has(arg) && arg !== "--");
   if (paths.some((arg) => arg.startsWith("--")))
-    throw new Error("Usage: review:diff -- [--status|--summary] [--json] [paths]");
-  const result = review(ROOT, paths, { status: flags.has("--status"), summary: flags.has("--summary") });
+    throw new Error(
+      "Usage: review:diff -- [--status|--summary] [--json] [--base ref|--working-tree] [paths]",
+    );
+  const result = review(ROOT, paths, {
+    status: flags.has("--status"),
+    summary: flags.has("--summary"),
+    base,
+  });
   if (flags.has("--json"))
     console.log(JSON.stringify({ ...result, inventory: undefined, selected: undefined }));
   else
     console.log(
-      `${result.preview}\nOmitted characters: ${result.omittedCharacters}. Full inventory and patch ranges: ${result.indexPath}\nFull patches: ${result.patches ?? "not collected in status mode"}\nRead omitted patches before claiming a complete review.`,
+      `Selection base: ${result.base}\n${result.preview}\nOmitted characters: ${result.omittedCharacters}. Full inventory and patch ranges: ${result.indexPath}\nFull patches: ${result.patches ?? "not collected in status mode"}\nRead omitted patches before claiming a complete review.`,
     );
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) main();

@@ -1,0 +1,249 @@
+import { afterEach, expect, it, vi } from "vitest";
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, symlinkSync } from "node:fs";
+import { tmpdir } from "node:os";
+import path from "node:path";
+import { execFileSync } from "node:child_process";
+import { selectedPaths, parseCheckArgs, runCheck } from "../../../scripts/checks/check.mjs";
+import { verificationIdentity } from "../../../scripts/checks/verification-record.mjs";
+import { review } from "../../../scripts/agent/agent-review.mjs";
+import { investigationArgs, investigate } from "../../../scripts/agent/investigate.mjs";
+import { runInvestigation } from "../../../scripts/agent/investigation-process.mjs";
+import { integrate } from "../../../scripts/integrate.mjs";
+import { createWorktree } from "../../../scripts/worktree.mjs";
+import { reviewOptions } from "../../../scripts/dev/review-options.mjs";
+
+const roots = [];
+const git = (root, ...args) =>
+  execFileSync("git", ["-c", "commit.gpgsign=false", ...args], {
+    cwd: root,
+    encoding: "utf8",
+    stdio: "pipe",
+  }).trim();
+function put(root, file, value) {
+  mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
+  writeFileSync(path.join(root, file), value);
+}
+function fixture() {
+  const root = mkdtempSync(path.join(tmpdir(), "fauna-agent-workflow-"));
+  roots.push(root);
+  git(root, "init", "-qb", "main");
+  git(root, "config", "user.name", "Workflow fixture");
+  git(root, "config", "user.email", "fixture@example.invalid");
+  git(root, "config", "core.hooksPath", path.join(root, "no-hooks"));
+  put(root, ".gitignore", "reports/\nnode_modules/\n.worktrees/\n");
+  put(root, "README.md", "# Baseline\n");
+  git(root, "add", ".");
+  git(root, "commit", "-qm", "base");
+  return root;
+}
+afterEach(() => {
+  for (const root of roots.splice(0)) rmSync(root, { recursive: true, force: true });
+  vi.restoreAllMocks();
+  vi.unstubAllEnvs();
+});
+
+it("defaults check and review to committed task work without importing concurrent main changes", () => {
+  const root = fixture();
+  git(root, "checkout", "-qb", "task/example");
+  put(root, "README.md", "# Committed task\n");
+  git(root, "add", ".");
+  git(root, "commit", "-qm", "task");
+  git(root, "checkout", "main");
+  put(root, "main-only.md", "# Concurrent main\n");
+  git(root, "add", ".");
+  git(root, "commit", "-qm", "main");
+  git(root, "checkout", "task/example");
+  expect(selectedPaths(root, parseCheckArgs([]))).toEqual(["README.md"]);
+  expect(selectedPaths(root, parseCheckArgs(["--working-tree"]))).toEqual([]);
+  expect(readFileSync(review(root).patches, "utf8")).toContain("+\u0023 Committed task");
+  expect(review(root, [], { base: "HEAD" }).selected).toEqual([]);
+  put(root, "README.md", "# Staged task\n");
+  git(root, "add", "README.md");
+  put(root, "README.md", "# Working task\n");
+  put(root, "new.md", "# New\n");
+  const patch = readFileSync(review(root).patches, "utf8");
+  for (const value of ["Committed task", "Staged task", "Working task", "# New"])
+    expect(patch).toContain(value);
+  expect(selectedPaths(root, parseCheckArgs([])).sort()).toEqual(["README.md", "new.md"]);
+  expect(patch).not.toContain("Concurrent main");
+});
+
+it("retains committed renames/deletions and literal unusual paths in task review", () => {
+  const root = fixture();
+  put(root, "delete.md", "gone\n");
+  git(root, "add", ".");
+  git(root, "commit", "-qm", "second base");
+  git(root, "checkout", "-qb", "codex/rename");
+  const unusual = "odd ' $() [file]\n.md";
+  git(root, "mv", "README.md", unusual);
+  git(root, "rm", "delete.md");
+  git(root, "commit", "-qm", "rename and delete");
+  const result = review(root);
+  expect(result.selected).toHaveLength(2);
+  const patch = readFileSync(result.patches, "utf8");
+  expect(patch).toContain("rename from README.md");
+  expect(patch).toContain("-gone");
+  const finalName = "final.md";
+  git(root, "mv", unusual, finalName);
+  put(root, finalName, "# Working rename\n");
+  const renamed = readFileSync(review(root, ["README.md"]).patches, "utf8");
+  expect(renamed).toContain("rename from README.md");
+  expect(renamed).toContain("+# Working rename");
+});
+
+it("reuses stable verification across committing, but invalidates edits, selection, base and failed attempts", () => {
+  const root = fixture();
+  git(root, "checkout", "-qb", "task/cache");
+  put(root, "README.md", "# Checked\n");
+  const runner = vi.fn(() => ({ status: 0 }));
+  const options = { root, runner, cache: true, log: () => {} };
+  expect(runCheck([], options)).toBe(0);
+  const calls = runner.mock.calls.length;
+  git(root, "add", ".");
+  git(root, "commit", "-qm", "checked task");
+  expect(runCheck([], options)).toBe(0);
+  expect(runner).toHaveBeenCalledTimes(calls);
+  put(root, "README.md", "# Changed\n");
+  runner.mockReturnValue({ status: 1 });
+  expect(runCheck([], options)).toBe(1);
+  put(root, "README.md", "# Checked\n");
+  runner.mockReturnValue({ status: 0 });
+  expect(runCheck([], options)).toBe(0);
+  expect(runner.mock.calls.length).toBeGreaterThan(calls);
+  const beforeSelection = runner.mock.calls.length;
+  expect(runCheck(["README.md", ".gitignore"], options)).toBe(0);
+  expect(runner.mock.calls.length).toBeGreaterThan(beforeSelection);
+  const beforeBase = runner.mock.calls.length;
+  expect(runCheck(["--base", "HEAD"], options)).toBe(0);
+  expect(runner.mock.calls.length).toBeGreaterThan(beforeBase);
+});
+
+it("invalidates dependency edits, unselected source, symlinks and environment while ignoring output caches", () => {
+  const root = fixture();
+  put(root, "node_modules/tool/index.js", "tool");
+  const base = git(root, "rev-parse", "HEAD");
+  const identity = () => verificationIdentity(root, base, ["README.md"]);
+  let before = identity();
+  put(root, "node_modules/.vite/output", "generated");
+  put(root, "node_modules/.vitest-cache/results.json", "generated");
+  put(root, "reports/capture.png", "generated");
+  expect(identity()).toBe(before);
+  put(root, "node_modules/tool/index.js", "changed tool");
+  expect(identity()).not.toBe(before);
+  before = identity();
+  put(root, "other.md", "unselected input");
+  expect(identity()).not.toBe(before);
+  before = identity();
+  symlinkSync("README.md", path.join(root, "link"));
+  expect(identity()).not.toBe(before);
+  before = identity();
+  vi.stubEnv("FAUNA_WORKFLOW_TEST", "different environment");
+  expect(identity()).not.toBe(before);
+  vi.unstubAllEnvs();
+});
+
+it("refuses to record success when inputs mutate during verification, and plan never records", () => {
+  const root = fixture();
+  const runner = vi.fn(() => {
+    put(root, "late.md", "changed");
+    return { status: 0 };
+  });
+  const log = vi.fn();
+  expect(runCheck(["README.md"], { root, runner, log, cache: true })).toBe(1);
+  expect(log.mock.calls.flat().join(" ")).toContain("inputs changed");
+  runner.mockClear();
+  expect(runCheck(["--plan", "README.md"], { root, runner, log, cache: true })).toBe(0);
+  expect(runner).not.toHaveBeenCalled();
+});
+
+it("selects bounded diagnostics without exposing arbitrary npm commands or broad browser runs", async () => {
+  const root = fixture();
+  put(root, "tests/unit/game/example.test.ts", "export {};");
+  expect(investigationArgs(root, ["unit", "tests/unit/game/example.test.ts"])).toEqual([
+    "run",
+    "test:full",
+    "--",
+    "--maxWorkers=1",
+    "--no-file-parallelism",
+    "tests/unit/game/example.test.ts",
+  ]);
+  expect(investigationArgs(root, ["browser", "battle"])).toEqual(["run", "test:e2e:route", "--", "battle"]);
+  for (const args of [
+    ["unit"],
+    ["unit", "tests/unit/missing.test.ts"],
+    ["browser"],
+    ["browser", "unknown"],
+    ["build", "--publish"],
+    ["unit", "../other.test.ts"],
+    ["performance", "--suite"],
+  ])
+    expect(() => investigationArgs(root, args)).toThrow();
+  const runner = vi.fn(() => ({ status: null, signal: "SIGTERM" }));
+  expect(await investigate(["types"], { root, runner })).toBe(1);
+  expect(runner.mock.calls[0][2]).toMatchObject({ timeout: 300_000 });
+  expect(runner.mock.calls[0][2].env.NODE_OPTIONS).toMatch(/--max-old-space-size=2048$/);
+});
+
+it("prepares required review conditions and rejects ambiguous, unsupported or repeated options", () => {
+  expect(reviewOptions([], { capture: true }).conditions).toEqual([
+    { width: 1280, height: 720, scale: 1.25 },
+    { width: 1920, height: 1080, scale: 1 },
+  ]);
+  expect(reviewOptions(["--tier", "small"], { capture: true }).conditions).toEqual([
+    { width: 1280, height: 720, scale: 1.25 },
+  ]);
+  expect(reviewOptions(["--browser", "--scenario", "recruit"]).scenario).toBe("recruit");
+  expect(
+    reviewOptions(["--viewport", "1920x1080", "--text-scale", "1"], { capture: true }).conditions,
+  ).toEqual([{ width: 1920, height: 1080, scale: 1 }]);
+  for (const args of [
+    ["--scenario", "unknown"],
+    ["--label", "../outside"],
+    ["--viewport", "800x600"],
+    ["--text-scale", "0.8"],
+    ["--tier", "small", "--viewport", "1920x1080"],
+    ["--tier", "small", "--tier", "layout"],
+    ["--label"],
+    ["--bogus"],
+  ])
+    expect(() => reviewOptions(args, { capture: true })).toThrow();
+  for (const args of [
+    ["--scenario", "battle"],
+    ["--desktop", "--scenario", "battle"],
+    ["--browser", "--desktop"],
+  ])
+    expect(() => reviewOptions(args)).toThrow();
+});
+
+it("reuses the checked task during protected integration without weakening the clean-main guard", async () => {
+  const root = fixture();
+  const task = createWorktree(root, "reuse");
+  put(task.path, "README.md", "# Verified task\n");
+  const runner = vi.fn(() => ({ status: 0 }));
+  const options = { root: task.path, runner, cache: true, log: () => {} };
+  expect(runCheck([], options)).toBe(0);
+  git(task.path, "add", ".");
+  git(task.path, "commit", "-qm", "task");
+  runner.mockClear();
+  const launch = (_command, args) => ({ status: runCheck(args.slice(args.indexOf("--") + 1), options) });
+  put(root, "unfinished.md", "unrelated\n");
+  await expect(integrate(root, task.branch, { runner: launch, log: () => {} })).rejects.toThrow(
+    "unfinished work",
+  );
+  expect(runner).not.toHaveBeenCalled();
+  rmSync(path.join(root, "unfinished.md"));
+  await integrate(root, task.branch, { runner: launch, log: () => {} });
+  expect(runner).not.toHaveBeenCalled();
+  expect(git(root, "show", "HEAD:README.md")).toBe("# Verified task");
+});
+
+it("terminates a timed-out diagnostic instead of accepting a late successful exit", async () => {
+  const result = await runInvestigation(process.execPath, ["-e", "setInterval(() => {}, 1000)"], {
+    timeout: 100,
+    stdio: "ignore",
+  });
+  expect(result.error.message).toContain("deadline");
+  expect(result.status).not.toBe(0);
+  const failedSpawn = await runInvestigation("/missing/fauna-command", [], { timeout: 100, stdio: "ignore" });
+  expect(failedSpawn.error).toBeTruthy();
+});

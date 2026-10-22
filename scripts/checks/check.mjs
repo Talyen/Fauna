@@ -4,6 +4,13 @@ import { pathToFileURL } from "node:url";
 import { execFileSync, spawnSync } from "node:child_process";
 import { boundaryViolations } from "./boundaries.mjs";
 import { sourceViolations } from "./ui-contract.mjs";
+import { taskBase } from "../lib/task-selection.mjs";
+import {
+  verificationIdentity,
+  verified,
+  clearVerification,
+  recordVerification,
+} from "./verification-record.mjs";
 import { affectedTests } from "./affected-tests.mjs";
 import { matchingDependencies, dependenciesAvailable } from "../dependencies.mjs";
 
@@ -18,7 +25,7 @@ export function parseCheckArgs(args) {
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
     if (arg === "--plan") plan = true;
-    else if (arg === "--diff") diff = true;
+    else if (arg === "--diff" || arg === "--working-tree") diff = true;
     else if (arg === "--base") {
       if (base || !args[i + 1] || args[i + 1].startsWith("-"))
         throw new Error("--base requires one Git commit or branch.");
@@ -26,8 +33,9 @@ export function parseCheckArgs(args) {
     } else if (arg.startsWith("-")) throw new Error(`Unknown local check option: ${arg}`);
     else paths.push(arg);
   }
+  if (base && diff) throw new Error("Choose --base or --working-tree, not both.");
   if (paths.length && (base || diff)) throw new Error("Choose explicit paths or a Git diff, not both.");
-  return { paths, base: base ?? "HEAD", ...(plan ? { plan: true } : {}) };
+  return { paths, base: base ?? (diff ? "HEAD" : null), ...(plan ? { plan: true } : {}) };
 }
 
 function git(root, args) {
@@ -62,7 +70,7 @@ export function selectedPaths(root, selection) {
         throw new Error(`No repository files match: ${input}`);
     return files;
   }
-  const base = git(root, ["rev-parse", "--verify", "--end-of-options", `${selection.base}^{commit}`]).trim();
+  const base = taskBase(root, selection.base);
   return [
     ...new Set(
       [
@@ -147,14 +155,21 @@ export function checkPlan(root, paths) {
   };
 }
 
-export function runCheck(args = [], { root = ROOT, runner = spawnSync, log = console.log } = {}) {
+export function runCheck(
+  args = [],
+  { root = ROOT, runner = spawnSync, log = console.log, cache = runner === spawnSync } = {},
+) {
   const selection = parseCheckArgs(args);
-  const paths = selectedPaths(root, selection);
+  const base = taskBase(root, selection.base);
+  const paths = selectedPaths(root, { ...selection, base });
   const format = formatSelection(root, paths);
   const plan = checkPlan(root, paths);
   const docs = paths.some((file) => /\.md$/i.test(file));
   const docsOnly = paths.length > 0 && paths.every((file) => /\.md$/i.test(file));
   log(CI_NOTICE);
+  log(
+    `Selection base: ${base}${selection.paths.length ? "; explicit paths" : "; committed and working changes"}.`,
+  );
   log(
     `Plan: ${paths.length} selected files; ${format.batches.length} formatting batches; batched lint and source contracts; compilers: ${plan.configs.join(", ") || "none"}; documentation: ${docs ? "yes" : "no"}.`,
   );
@@ -188,6 +203,14 @@ export function runCheck(args = [], { root = ROOT, runner = spawnSync, log = con
     );
     return 1;
   }
+  const identity = cache ? verificationIdentity(root, base, paths) : null;
+  if (cache && verified(root, identity)) {
+    log(
+      "Reused passing task check: source, selection, base, runtime, environment and installed dependency metadata match. Rendered review and full CI remain separate.",
+    );
+    return 0;
+  }
+  if (cache) clearVerification(root);
   const run = (script, argv = [], timeout = 60_000) => {
     const result = runner(process.execPath, [path.join(root, script), ...argv], {
       cwd: root,
@@ -263,6 +286,13 @@ export function runCheck(args = [], { root = ROOT, runner = spawnSync, log = con
       suite,
     ]);
     if (status !== 0) return status;
+  }
+  if (cache) {
+    if (verificationIdentity(root, base, paths) !== identity) {
+      log("Verification inputs changed during the check; retry before handoff.");
+      return 1;
+    }
+    recordVerification(root, identity);
   }
   log(
     "Task checks passed. Local handoff gate complete; full CI and any required rendered review remain separate.",

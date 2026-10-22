@@ -70,7 +70,7 @@ export const topics = {
       "vitest",
       "playwright.config",
     ],
-    docs: ["CONTRIBUTING.md", "Docs/DEVELOPMENT_TOOLS.md", "scripts/README.md"],
+    docs: ["CONTRIBUTING.md", "scripts/README.md", "tests/README.md"],
     entries: ["scripts/checks/check.mjs"],
   },
   release: {
