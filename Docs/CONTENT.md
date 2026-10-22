@@ -92,7 +92,7 @@ Resonant Chimes refunds 1 shared Mana after the third accepted card of each turn
 
 ## Support encounter content
 
-Merchant prices, affordability and Campfire eligibility/recovery are owned by `src/game/support.ts`. Stock selects from the existing Boon catalog and persists with each visit. Merchant currently reuses the prepared Silken Clearing location illustration, an explicit existing placeholder rather than a newly approved source-library selection. Boon portraits retain their existing asset manifests and receipts. Replace location selections through the prepared-asset workflow when final art is selected.
+Boon Merchant prices, affordability and Campfire eligibility/recovery are owned by `src/game/support.ts`. Stock selects up to three unowned Boons from the existing catalog and persists with each visit; purchase receipts also persist through the Boon reward screen. Boon Merchant currently reuses the prepared Silken Clearing location illustration, an explicit existing placeholder rather than a newly approved source-library selection. Boon portraits retain their existing asset manifests and receipts. Replace location selections through the prepared-asset workflow when final art is selected.
 
 ## Encounter placeholders
 

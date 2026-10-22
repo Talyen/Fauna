@@ -3,6 +3,7 @@ import { it, expect, vi, afterEach } from "vitest";
 import type { ReactElement } from "react";
 import { render as renderUI, screen, fireEvent, cleanup } from "@testing-library/react";
 import { produce } from "immer";
+import { decodeSave, encodeSave } from "../../../src/game/save";
 import { createGame } from "../../../src/game/engine";
 import { recruitChoice, accept, winBattle } from "../../support/game";
 import { TeamSelection } from "../../../src/ui/expedition/team-selection";
@@ -21,17 +22,32 @@ it("opens Merchant directly with the saved visit identity", () => {
   const game = merchant(),
     send = vi.fn(() => true);
   render(<SupportOffer game={game} send={send} />);
-  fireEvent.click(screen.getByRole("button", { name: "Visit Merchant" }));
+  fireEvent.click(screen.getByRole("button", { name: "Visit Boon Merchant" }));
   expect(send).toHaveBeenCalledExactlyOnceWith({ type: "enterSupport", visit: game.support!.id });
   expect(screen.queryByRole("dialog")).toBeNull();
 });
-it("resolved purchase leaves its own slot visibly owned and all further purchases disabled", () => {
+it("replaces the shelf with the purchased Boon reward, restores it on reload and focuses Continue", () => {
   let game = merchant();
   game = accept(game, { type: "enterSupport", visit: game.support!.id });
+  const send = vi.fn(() => true);
+  const { rerender } = render(<SupportScreen game={game} send={send} />);
+  fireEvent.click(screen.getAllByRole("button", { name: /^Buy .+ for 20 Gold$/ })[0]!);
+  expect(send).toHaveBeenCalledExactlyOnceWith({
+    type: "buyBoon",
+    visit: game.support!.id,
+    slot: game.support!.stock[0]!.slot,
+  });
   game = accept(game, { type: "buyBoon", visit: game.support!.id, slot: game.support!.stock[0]!.slot });
-  render(<SupportScreen game={game} send={() => true} />);
-  expect(screen.getByRole("button", { name: "Owned" }).getAttribute("aria-disabled")).toBe("true");
-  expect((screen.getByRole("button", { name: "Leave" }) as HTMLButtonElement).disabled).toBe(false);
+  rerender(<SupportScreen game={game} send={send} />);
+  expect(screen.getByRole("heading", { name: "Boon received" })).toBeTruthy();
+  expect(screen.getByRole("region", { name: "Purchased Boon" })).toBeTruthy();
+  expect(screen.queryByRole("button", { name: /^Buy / })).toBeNull();
+  expect(screen.getByText("For this journey")).toBeTruthy();
+  expect(document.activeElement).toBe(screen.getByRole("button", { name: "Continue" }));
+  cleanup();
+  render(<SupportScreen game={decodeSave(encodeSave(game))} send={send} />);
+  fireEvent.click(screen.getByRole("button", { name: "Continue" }));
+  expect(send).toHaveBeenLastCalledWith({ type: "leaveSupport", visit: game.support!.id });
 });
 
 it.each([19, 20])("shows Merchant only when an item is affordable with %s Gold", (gold) => {
@@ -39,14 +55,15 @@ it.each([19, 20])("shows Merchant only when an item is affordable with %s Gold",
     d.currency = gold;
   });
   render(<SupportOffer game={game} send={() => true} />);
-  expect(!!screen.queryByRole("button", { name: "Visit Merchant" })).toBe(gold >= 20);
+  expect(!!screen.queryByRole("button", { name: "Visit Boon Merchant" })).toBe(gold >= 20);
 });
 it("labels the wallet and prices as Gold", () => {
   const s = merchant();
   const game = accept(s, { type: "enterSupport", visit: s.support!.id });
   render(<SupportScreen game={game} send={() => true} />);
-  expect(screen.getByText(/Gold: 20/)).toBeTruthy();
-  expect(screen.getAllByRole("button", { name: "Buy · 20 Gold" })).toHaveLength(2);
+  expect(screen.getAllByText("20 Gold")[0]).toBeTruthy();
+  expect(screen.getAllByRole("button", { name: /^Buy .+ for 20 Gold$/ })).toHaveLength(3);
+  expect(screen.getByText("Limit 1 per customer")).toBeTruthy();
 });
 
 it("keeps unavailable offers inspectable and rejects purchases with their specific reason", () => {
@@ -56,9 +73,9 @@ it("keeps unavailable offers inspectable and rejects purchases with their specif
   });
   const send = vi.fn(() => true);
   const { rerender } = render(<SupportScreen game={game} send={send} />);
-  expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(2);
-  expect(screen.getAllByText("Not enough Gold")).toHaveLength(2);
-  fireEvent.click(screen.getAllByRole("button", { name: "Buy · 20 Gold" })[0]!);
+  expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(3);
+  expect(screen.getAllByText("Not enough Gold")).toHaveLength(3);
+  fireEvent.click(screen.getAllByRole("button", { name: /^Buy .+ for 20 Gold$/ })[0]!);
   expect(send).not.toHaveBeenCalled();
   rerender(
     <SupportScreen
@@ -68,8 +85,8 @@ it("keeps unavailable offers inspectable and rejects purchases with their specif
       send={send}
     />,
   );
-  expect(screen.getAllByText("Purchase used")).toHaveLength(2);
-  fireEvent.click(screen.getAllByRole("button", { name: "Buy · 20 Gold" })[0]!);
+  expect(screen.getAllByText("Purchase used")).toHaveLength(3);
+  fireEvent.click(screen.getAllByRole("button", { name: /^Buy .+ for 20 Gold$/ })[0]!);
   expect(send).not.toHaveBeenCalled();
 });
 

@@ -164,7 +164,7 @@ const currentShape = z.object({
       purchased: boonId.nullable(),
       stock: z
         .array(z.object({ slot: id, boon: boonId, price: z.number().int().min(1).max(1_000_000) }))
-        .max(2),
+        .max(3),
     })
     .nullable(),
   battle,

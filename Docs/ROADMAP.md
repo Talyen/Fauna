@@ -15,7 +15,7 @@ Fauna has a complete short playable journey. Checked items below are implemented
 - [x] Free combat swaps preserving Health, effects and card positions without bonus draws or Mana costs
 - [x] Persistent Health and knockouts between battles; defeat requires the entire roster to fall
 - [x] Optional Campfire recovery for the whole roster, including knocked-out creatures
-- [x] Independently rolled Recruit and Merchant destinations at equal frequency, with open-roster and affordability criteria, saved offers and direct recruitment
+- [x] Independently rolled Recruit and Boon Merchant destinations at equal frequency, with open-roster and affordability criteria, saved three-Boon shelves, purchase rewards, fresh destinations after Merchant rooms and direct recruitment
 - [x] Shared Victory screen for recruitment or intermediate-boss Boons
 - [x] Final victory, defeat and return-home results with retained permanent earnings
 

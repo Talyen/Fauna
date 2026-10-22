@@ -336,7 +336,7 @@
   width: var(--art-landscape-width);
 }
 
-/* Alchemy's compact shelves keep the decision controls aligned below the art. */
+/* Match Alchemy's centered three-item shelf and aligned price controls. */
 .merchant-heading {
   display: flex;
   flex-direction: column;
@@ -344,20 +344,49 @@
   gap: var(--screen-item-gap);
 }
 .merchant-wallet {
+  display: flex;
+  align-items: center;
+  gap: var(--screen-item-gap);
   color: var(--gold-pale);
   font-variant-numeric: tabular-nums;
+}
+.merchant-wallet svg {
+  width: var(--icon-size);
+  height: var(--icon-size);
 }
 .merchant-terms,
 .merchant-status {
   color: var(--muted-foreground);
   font-size: var(--text-secondary);
 }
-.merchant-offer > .game-button:not(.action-card) {
-  width: 100%;
+.merchant-stock {
+  flex-wrap: nowrap;
+  align-items: flex-start;
 }
-
-.merchant-status {
-  min-height: calc(var(--text-secondary) * 1.4);
+.merchant-offer {
+  width: var(--art-portrait-width);
+}
+.merchant-offer h2 {
+  min-height: calc(var(--text-name) * 2.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.merchant-offer > .merchant-price {
+  width: 100%;
+  color: var(--gold-pale);
+  font-variant-numeric: tabular-nums;
+}
+.merchant-leave {
+  min-width: var(--art-portrait-width);
+}
+.merchant-reward {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--screen-item-gap);
+  text-align: center;
+  max-width: calc(var(--art-portrait-width) * 3);
 }
 .reward-screen:has(.recruit-comparison) {
   width: min(calc(var(--art-landscape-width) * 6 + var(--screen-section-gap) * 5), 100%);

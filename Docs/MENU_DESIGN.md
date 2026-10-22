@@ -30,11 +30,11 @@ The upper-right battle controls include an Auto-play icon Button with an accessi
 
 A live creature unlock opens an artwork-centered Creature unlocked screen when leaving results, with ordinary kit inspection and Continue. Continue advances through pending reveals and then Main menu. It does not add inspection to Journey results.
 
-Journey screens with headings use the same Back, heading and Open menu row. Back leaves Merchant or Campfire for the unchanged encounter without buying or resting, cancels recruit replacement before leaving Victory, returns from an unlock reveal to the main menu, and otherwise returns to the main menu without undoing committed gameplay. The root main menu keeps its Fauna title; battle has no main heading and retains its corner menu control.
+Journey screens with headings use the same Back, heading and Open menu row. Back completes the Boon Merchant room and prepares fresh destinations, leaves Campfire for the unchanged encounter without resting, cancels recruit replacement before leaving Victory, returns from an unlock reveal to the main menu, and otherwise returns to the main menu without undoing committed gameplay. The root main menu keeps its Fauna title; battle has no main heading and retains its corner menu control.
 
 ## Journey decisions and inspection
 
-Drafting, encounter, Victory, Merchant and Campfire headings offer the same icon-only Deck control beside Back, with the title centered independently of the side controls. It opens the shared Deck inspection without committing gameplay; drafting previews the action cards contributed by the already chosen starters. Closing restores the Deck opener.
+Drafting, encounter, Victory, Boon Merchant and Campfire headings offer the same icon-only Deck control beside Back, with the title centered independently of the side controls. It opens the shared Deck inspection without committing gameplay; drafting previews the action cards contributed by the already chosen starters. Closing restores the Deck opener.
 
 When the roster is full, recruit replacement keeps the incoming recruit visible and inspectable beside the paginated existing roster. Only activating a Release choice commits recruitment. Back or Cancel restores the original offer and its focus. Inspecting or paging never releases a creature.
 

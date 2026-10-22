@@ -11,7 +11,7 @@ function merchant() {
   s = winBattle(accept(s, { type: "beginBattle" }));
   return accept(s, recruitChoice(s));
 }
-it("saves an atomic purchase, rejects repeats and leaves the exact destination offers", () => {
+it("saves an atomic purchase, rejects repeats and progresses to fresh destinations", () => {
   const s = merchant();
   const v = s.support!;
   const entered = accept(s, { type: "enterSupport", visit: v.id });
@@ -21,7 +21,12 @@ it("saves an atomic purchase, rejects repeats and leaves the exact destination o
   expect(decodeSave(encodeSave(bought))).toEqual(bought);
   expect(dispatch(bought, { type: "buyBoon", visit: v.id, slot: v.stock[1]!.slot }).state).toBe(bought);
   const left = accept(bought, { type: "leaveSupport", visit: v.id });
-  expect(left.expedition).toEqual({ ...s.expedition, lastRoom: "merchant" });
+  expect(left.expedition!.lastRoom).toBe("merchant");
+  expect(left.encounter).toBe(s.encounter);
+  expect(left.rng).not.toBe(bought.rng);
+  expect(left.expedition!.pack).not.toBe(s.expedition!.pack);
+  expect(left.support).toBeNull();
+  expect(decodeSave(encodeSave(left))).toEqual(left);
   expect(dispatch(left, { type: "enterSupport", visit: v.id }).state).toBe(left);
 });
 it("rejects stale and unaffordable purchases without changing state or RNG", () => {
@@ -140,7 +145,7 @@ it("discounts each new Merchant with Favor and persists the paid price", () => {
       state = accept(state, recruitChoice(state));
     }
   }
-  expect(state.support!.stock.map((slot) => slot.price)).toEqual([13, 13]);
+  expect(state.support!.stock.map((slot) => slot.price)).toEqual([13, 13, 13]);
   const before = state.currency;
   state = accept(state, { type: "enterSupport", visit: state.support!.id });
   state = accept(state, { type: "buyBoon", visit: state.support!.id, slot: state.support!.stock[0]!.slot });
@@ -179,3 +184,48 @@ it("leaves Campfire without healing or changing the encounter and rejects leavin
   expect(left.rng).toBe(before.rng);
   expect(decodeSave(encodeSave(left))).toEqual(left);
 });
+
+it("leaving without buying progresses once and replaces the old destination set", () => {
+  const before = produce(merchant(), (draft) => {
+    draft.expedition!.recruit = "cadenza";
+  });
+  const entered = accept(before, { type: "enterSupport", visit: before.support!.id });
+  expect(decodeSave(encodeSave(entered))).toEqual(entered);
+  const command = { type: "leaveSupport", visit: entered.support!.id } as const;
+  const left = accept(entered, command);
+  expect(left.currency).toBe(before.currency);
+  expect(left.boons).toEqual(before.boons);
+  expect(left.team).toEqual(before.team);
+  expect(left.journey).toEqual(before.journey);
+  expect(left.encounter).toBe(before.encounter);
+  expect(left.expedition!.lastRoom).toBe("merchant");
+  expect(left.expedition).not.toEqual(before.expedition);
+  expect(left.rng).not.toBe(before.rng);
+  expect(left.support).toBeNull();
+  expect(decodeSave(encodeSave(left))).toEqual(left);
+  expect(dispatch(left, command).state).toBe(left);
+  expect(dispatch(left, { type: "enterSupport", visit: command.visit }).state).toBe(left);
+});
+
+it.each([0, 1, 2, 3, BOONS.length])(
+  "stocks up to three distinct unowned Boons when %s remain",
+  (remaining) => {
+    const initial = createGame(7);
+    let game = accept(initial, { type: "draft", species: initial.starterOffers[0]! });
+    game = produce(game, (draft) => {
+      draft.currency = 100;
+      draft.boons = BOONS.slice(0, BOONS.length - remaining).map((boon) => boon.id);
+      // Fix a successful independent Merchant roll, including before battle one.
+      draft.rng = 10;
+    });
+    game = accept(game, { type: "start" });
+    if (!remaining) expect(game.support).toBeNull();
+    else {
+      expect(game.support!.stock).toHaveLength(Math.min(3, remaining));
+      const ids = game.support!.stock.map((slot) => slot.boon);
+      expect(new Set(ids).size).toBe(ids.length);
+      expect(ids.some((id) => game.boons.includes(id))).toBe(false);
+    }
+    expect(decodeSave(encodeSave(game))).toEqual(game);
+  },
+);

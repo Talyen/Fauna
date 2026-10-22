@@ -1,4 +1,4 @@
-import { REVIEW_VIEWPORTS } from "./layout-contract";
+import { LAYOUT_CASES, REVIEW_VIEWPORTS } from "./layout-contract";
 import { captureScreen } from "./rendered-evidence";
 import { test, expect } from "@playwright/test";
 import { SPECIES } from "../../src/game/content";
@@ -148,59 +148,61 @@ for (const [width, height] of REVIEW_VIEWPORTS)
     await expect(page.getByRole("radio", { name: "125%", exact: true })).toBeChecked();
   });
 
-test("Merchant purchase resumes without duplicate spending", async ({ page }) => {
-  const width = 1280;
-  const { accept, winBattle, recruitChoice } = await import("../support/game");
-  const { createGame } = await import("../../src/game/engine");
-  let fixture = accept(accept(createGame(7), { type: "draft", species: createGame(7).starterOffers[0]! }), {
-    type: "start",
+for (const [width, height, scale] of LAYOUT_CASES)
+  test(`Boon Merchant shelf and purchase resume at ${width}×${height}, text ${scale}`, async ({ page }) => {
+    const { accept, winBattle, recruitChoice } = await import("../support/game");
+    const { createGame } = await import("../../src/game/engine");
+    let fixture = accept(accept(createGame(7), { type: "draft", species: createGame(7).starterOffers[0]! }), {
+      type: "start",
+    });
+    fixture = winBattle(accept(fixture, { type: "beginBattle" }));
+    fixture = accept(fixture, recruitChoice(fixture));
+    const visit = fixture.support!.id;
+    const slot = fixture.support!.stock[0]!;
+    await page.setViewportSize({ width, height });
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.addInitScript(
+      ({ save, scale }) => {
+        if (!localStorage.getItem("fauna.save.v1")) localStorage.setItem("fauna.save.v1", save);
+        localStorage.setItem("fauna.text-scale", String(scale));
+      },
+      { save: JSON.stringify(fixture), scale },
+    );
+    await page.goto("/");
+    await page.getByRole("button", { name: "Continue", exact: true }).click();
+    await page.getByRole("button", { name: "Visit Boon Merchant", exact: true }).click();
+    const entered = accept(fixture, { type: "enterSupport", visit });
+    await expect(page.getByRole("heading", { name: "Boon Merchant", exact: true })).toBeVisible();
+    await expect(page.getByText("Limit 1 per customer", { exact: true })).toBeVisible();
+    await expect(page.getByRole("button", { name: /^Buy .+ for 20 Gold$/ })).toHaveCount(3);
+    await captureScreen(page, { path: `reports/boon-merchant-shelf-${width}.png`, fullPage: true });
+    await page
+      .getByRole("button", { name: /^Buy .+ for 20 Gold$/ })
+      .first()
+      .click();
+    await expect(page.getByRole("heading", { name: "Boon received", exact: true })).toBeVisible();
+    await expect(page.getByRole("button", { name: /^Buy / })).toHaveCount(0);
+    const purchased = accept(entered, { type: "buyBoon", visit, slot: slot.slot });
+    await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
+    expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(purchased);
+    await captureScreen(page, { path: `reports/merchant-${width}.png`, fullPage: true });
+    await page.reload();
+    await page.getByRole("button", { name: "Continue", exact: true }).click();
+    await expect(page.getByRole("heading", { name: "Boon received", exact: true })).toBeVisible();
+    await expect(page.getByRole("region", { name: "Purchased Boon" })).toBeVisible();
+    await expect(page.getByRole("button", { name: /^Buy / })).toHaveCount(0);
+    expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(purchased);
+    await page.getByRole("button", { name: "Continue", exact: true }).click();
+    await expect(page.getByRole("button", { name: "Visit Boon Merchant", exact: true })).toHaveCount(0);
+    await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
+    const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!));
+    expect(saved).toEqual(accept(purchased, { type: "leaveSupport", visit }));
+    expect(saved.currency).toBe(0);
+    expect(saved.journey.currency).toBe(20);
+    expect(saved.expedition.lastRoom).toBe("merchant");
+    expect(saved.rng).not.toBe(purchased.rng);
+    expect(saved.support).toBeNull();
   });
-  fixture = winBattle(accept(fixture, { type: "beginBattle" }));
-  fixture = accept(fixture, recruitChoice(fixture));
-  const pack = fixture.expedition!.pack;
-  const visit = fixture.support!.id;
-  const slot = fixture.support!.stock[0]!;
-  await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.addInitScript((save) => {
-    if (!localStorage.getItem("fauna.save.v1")) localStorage.setItem("fauna.save.v1", save);
-    localStorage.setItem("fauna.text-scale", "1.25");
-  }, JSON.stringify(fixture));
-  await page.goto("/");
-  await page.getByRole("button", { name: "Continue", exact: true }).click();
-  await page.getByRole("button", { name: "Visit Merchant", exact: true }).click();
-  const entered = accept(fixture, { type: "enterSupport", visit });
-  await expect(page.getByRole("heading", { name: "Merchant", exact: true })).toBeVisible();
-  await page.getByRole("button", { name: "Buy · 20 Gold", exact: true }).first().click();
-  await expect(page.getByRole("button", { name: "Owned", exact: true })).toHaveAttribute(
-    "aria-disabled",
-    "true",
-  );
-  const purchased = accept(entered, { type: "buyBoon", visit, slot: slot.slot });
-  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
-  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(purchased);
-  await captureScreen(page, { path: `reports/merchant-${width}.png`, fullPage: true });
-  await page.reload();
-  await page.getByRole("button", { name: "Continue", exact: true }).click();
-  await expect(page.getByRole("heading", { name: "Merchant", exact: true })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Owned", exact: true })).toHaveAttribute(
-    "aria-disabled",
-    "true",
-  );
-  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(purchased);
-  await page.getByRole("button", { name: "Owned", exact: true }).focus();
-  await page.keyboard.press("Enter");
-  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
-  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(purchased);
-  await page.getByRole("button", { name: "Leave", exact: true }).click();
-  await expect(page.getByRole("button", { name: "Visit Merchant", exact: true })).toHaveCount(0);
-  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
-  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!));
-  expect(saved).toEqual(accept(purchased, { type: "leaveSupport", visit }));
-  expect(saved.currency).toBe(0);
-  expect(saved.journey.currency).toBe(20);
-  expect(saved.expedition.pack).toEqual(pack);
-});
 
 test("Settings panel switches preserve screen, tab and icon geometry", async ({ page }) => {
   await page.goto("/");

@@ -18,7 +18,7 @@ export const BOONS = [
   {
     id: "merchants-favor",
     name: "Merchant's Favor",
-    text: "Your first purchase at each Merchant costs 7 less Gold",
+    text: "Your purchase at each Boon Merchant costs 7 less Gold",
   },
   {
     id: "plague-doctors-mask",

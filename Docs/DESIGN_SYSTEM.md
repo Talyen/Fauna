@@ -2,7 +2,7 @@
 
 The user approved production adoption on 2026-10-20. [Phone decisions](../design/PHONE_DECISIONS.md), the [button study](../design/button-interactions/README.md), [artwork choices](../design/artwork-interactions/README.md) and the later Settings refinements are the decision record. This document records implementation ownership and verification, not blanket visual acceptance.
 
-The current palette adopts Alchemy’s warm near-black canvas, charcoal surfaces, ivory text and gold accents through the shared semantic tokens. Merchant uses a compact inspectable shelf with aligned external purchase controls and explicit availability reasons. Creature inspection prioritizes the active trait and Abilities, with paginated Rank progression in a separate view of the same dialog. Starter tooltips summarize kit keywords and action names with current Mana costs. Both menus expose spendable talent points.
+The current palette adopts Alchemy’s warm near-black canvas, charcoal surfaces, ivory text and gold accents through the shared semantic tokens. Boon Merchant uses Alchemy’s centered three-item inspectable shelf, aligned price tag Buttons and explicit availability reasons, followed by a purchased-Boon reward screen. Creature inspection prioritizes the active trait and Abilities, with paginated Rank progression in a separate view of the same dialog. Starter tooltips summarize kit keywords and action names with current Mana costs. Both menus expose spendable talent points.
 
 ## Canonical owners
 
