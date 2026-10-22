@@ -25,6 +25,7 @@ const statusOrder: readonly string[] = [
   "reflect",
   "reflectBurn",
   "nullify",
+  "nullifyFreeze",
   "blind",
 ];
 type Status = { id: string; text: string; count: number; exit?: boolean; changed?: boolean };
@@ -68,6 +69,11 @@ export function combatStatuses(combat?: CombatState, sharedDodge = 0): Status[] 
       ["freeLight", Number(combat.freeLight), "Divine Favor: next Light card is free"],
       ["freeCard", Number(combat.freeCard), "Free Follow-up: next card is free"],
       ["blind", Number(combat.blind), `Blind: ${KEYWORD_DEFINITIONS.blind.description}`],
+      [
+        "nullifyFreeze",
+        Number(combat.nullifyFreeze),
+        "Nullify the next Freeze damage; Lasts until consumed or Purged; Does not stack",
+      ],
       ["nullify", Number(combat.nullify), `Nullify: ${KEYWORD_DEFINITIONS.nullify.description}`],
       [
         "reflectBurn",
@@ -168,7 +174,9 @@ export function CombatStatus({
               key={s.count}
               className={s.exit ? undefined : s.changed ? "status-changed" : "status-enter"}
             >
-              {s.id === "reflectBurn" ? (
+              {s.id === "nullifyFreeze" ? (
+                <KeywordIcon id="nullify" />
+              ) : s.id === "reflectBurn" ? (
                 <KeywordIcon id="reflect" />
               ) : isKeywordId(s.id) ? (
                 <KeywordIcon id={s.id} />

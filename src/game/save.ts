@@ -25,6 +25,8 @@ const combatState = z
     reflect: z.boolean(),
     reflectBurn: z.boolean(),
     nullify: z.boolean(),
+    nullifyFreeze: z.boolean(),
+    cardsPlayedThisTurn: z.number().int().min(0).max(2),
     encoreUsed: z.boolean(),
     firstAttackUsed: z.boolean(),
     desperateGuardUsed: z.boolean(),

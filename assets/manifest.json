@@ -1439,6 +1439,50 @@
       "aspect": [3, 4],
       "provenance": "Unchanged Glintstride artwork selected from user Google Drive: https://drive.google.com/file/d/1XZ_a6Jmmg0iVok-O83STGSEPbew0kwik/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "creature.wickwaltz",
+      "origin": "repository",
+      "source": "public/art/wickwaltz/wickwaltz.png",
+      "output": "art/wickwaltz/wickwaltz.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Wickwaltz artwork selected from user Google Drive: https://drive.google.com/file/d/14k_1s-X0eY9TuU80eCElPTTYpisKFWIv/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.wickwaltz.ember-pirouette",
+      "origin": "repository",
+      "source": "public/art/wickwaltz/ember-pirouette.png",
+      "output": "art/wickwaltz/ember-pirouette.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Wickwaltz artwork selected from user Google Drive: https://drive.google.com/file/d/1xlShX_Lzmk2cGn_-F2hQtH4KrL8M_Nbd/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.wickwaltz.saffron-screen",
+      "origin": "repository",
+      "source": "public/art/wickwaltz/saffron-screen.png",
+      "output": "art/wickwaltz/saffron-screen.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Wickwaltz artwork selected from user Google Drive: https://drive.google.com/file/d/1Zy01BPJes4bLY7kE-wvcLx83z8E8SvoD/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.wickwaltz.thermal-rise",
+      "origin": "repository",
+      "source": "public/art/wickwaltz/thermal-rise.png",
+      "output": "art/wickwaltz/thermal-rise.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Wickwaltz artwork selected from user Google Drive: https://drive.google.com/file/d/1w15QAUoJtPjn0WmwT7kQf_9frfh7nOV4/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

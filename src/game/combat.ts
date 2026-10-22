@@ -21,6 +21,8 @@ export function freshCombat(): CombatState {
     reflect: false,
     reflectBurn: false,
     nullify: false,
+    nullifyFreeze: false,
+    cardsPlayedThisTurn: 0,
     encoreUsed: false,
     firstAttackUsed: false,
     desperateGuardUsed: false,
@@ -385,7 +387,7 @@ export function removeEffects(
   const statuses =
     kind === "cleanse"
       ? (["burn", "poison", "bleed", "stun", "freeze", "blind"] as const)
-      : (["armor", "thorns", "dodge", "reflect", "reflectBurn", "nullify"] as const);
+      : (["armor", "thorns", "dodge", "reflect", "reflectBurn", "nullify", "nullifyFreeze"] as const);
   if (kind === "purge" && unit.block > 0 && count > 0) {
     unit.block = 0;
     removedStatuses.push("block");
@@ -403,7 +405,13 @@ export function removeEffects(
   for (const status of statuses)
     if (count > 0 && (Number(stats[status]) > 0 || (status === "dodge" && stats.temporaryDodge > 0))) {
       if (status === "dodge") stats.temporaryDodge = 0;
-      if (status === "reflect" || status === "reflectBurn" || status === "blind" || status === "nullify")
+      if (
+        status === "reflect" ||
+        status === "reflectBurn" ||
+        status === "blind" ||
+        status === "nullify" ||
+        status === "nullifyFreeze"
+      )
         stats[status] = false;
       else stats[status] = 0;
       if (kind === "cleanse") {
@@ -412,7 +420,9 @@ export function removeEffects(
       }
       if (status === "bleed") stats.bleedLeech = [];
       count--;
-      removedStatuses.push(status === "reflectBurn" ? "reflect" : status);
+      removedStatuses.push(
+        status === "reflectBurn" ? "reflect" : status === "nullifyFreeze" ? "nullify" : status,
+      );
     }
   for (const affectedStatus of new Set(removedStatuses))
     events.push({
@@ -883,6 +893,18 @@ function resolveHit(
     if (alliedTarget) state.battleXP.dodge = Math.min(STACK_LIMIT, (state.battleXP.dodge ?? 0) + 1);
     return;
   }
+  if (type === "freeze" && stats.nullifyFreeze) {
+    stats.nullifyFreeze = false;
+    events.push({
+      kind: "status",
+      targetId: target.id,
+      status: "nullify",
+      outcome: "immune",
+      affectedStatus: "freeze",
+      text: `${unitName(target)} nullifies Freeze damage`,
+    });
+    return 0;
+  }
   const nextPhysical = direct && alliedSource ? combat(source).nextPhysical : 0;
   if (nextPhysical) combat(source).nextPhysical = 0;
   let damage = value;
@@ -1246,6 +1268,7 @@ export function startAction(unit: Combatant, events: GameEvent[], state?: GameSt
   const stats = combat(unit);
   stats.temporaryDodge = 0;
   stats.encoreUsed = false;
+  stats.cardsPlayedThisTurn = 0;
   stats.firstAttackUsed = false;
   stats.skipped = !!stats.controlled;
   if (stats.controlled) {

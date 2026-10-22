@@ -15,9 +15,11 @@ export type SpeciesId =
   | "bloomquail"
   | "shadebrim"
   | "ringpalm"
-  | "glintstride";
+  | "glintstride"
+  | "wickwaltz";
 type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
+  | { kind: "kindlingFlourish"; amount: number }
   | { kind: "resonance"; amount: number }
   | { kind: "wrongFoot"; amount: number }
   | { kind: "teamBurnResistance"; amount: number }
@@ -53,6 +55,7 @@ export const DAMAGE_LABELS = Object.fromEntries(DAMAGE_TYPES.map((id) => [id, ke
   string
 >;
 type CardEffect =
+  | { kind: "nullifyFreeze"; amount: number }
   | { kind: "damage"; damageType: DamageType; amount: number; leech?: boolean }
   | { kind: "status"; status: "armor" | "thorns" | "dodge"; amount: number }
   | { kind: "cleanse"; amount: number; target?: "recipient" | "allAllies" }
@@ -82,6 +85,40 @@ export type CardDefinition = CardBase &
     | { effect: Exclude<Effect, "attack" | "guard" | "heal">; target?: never }
   );
 export const SPECIES: readonly Species[] = [
+  {
+    id: "wickwaltz",
+    name: "Wickwaltz",
+    title: "The kindling dancer",
+    health: 28,
+    color: "#c96d39",
+    trait: "Kindling Flourish",
+    passiveTiers: [
+      {
+        description: "Wickwaltz’s second card each turn has a 20% chance to repeat",
+        effects: [{ kind: "kindlingFlourish", amount: 20 }],
+      },
+      {
+        description: "Wickwaltz’s second card each turn has a 36% chance to repeat",
+        effects: [{ kind: "kindlingFlourish", amount: 36 }],
+      },
+      {
+        description: "Wickwaltz’s second card each turn has a 52% chance to repeat",
+        effects: [{ kind: "kindlingFlourish", amount: 52 }],
+      },
+      {
+        description: "Wickwaltz’s second card each turn has a 68% chance to repeat",
+        effects: [{ kind: "kindlingFlourish", amount: 68 }],
+      },
+      {
+        description: "Wickwaltz’s second card each turn has an 84% chance to repeat",
+        effects: [{ kind: "kindlingFlourish", amount: 84 }],
+      },
+      {
+        description: "Wickwaltz’s second card each turn repeats",
+        effects: [{ kind: "kindlingFlourish", amount: 100 }],
+      },
+    ],
+  },
   {
     id: "mossguard",
     name: "Mossguard",
@@ -675,6 +712,22 @@ const attack = (
 });
 export const CARDS: readonly CardDefinition[] = [
   {
+    ...attack("wickwaltz", "Ember Pirouette", 2, "burn"),
+    target: "allEnemies",
+    artwork: "action.wickwaltz.ember-pirouette",
+  },
+  {
+    ...card("wickwaltz", "Saffron Screen", "guard", 3),
+    target: "self",
+    effects: [{ kind: "nullifyFreeze", amount: 1 }],
+    artwork: "action.wickwaltz.saffron-screen",
+  },
+  {
+    ...card("wickwaltz", "Thermal Rise", "draw", 2),
+    effects: [{ kind: "mana", amount: 1 }],
+    artwork: "action.wickwaltz.thermal-rise",
+  },
+  {
     ...attack("glintstride", "Prism Shear", 6, "light"),
     artwork: "action.glintstride.prism-shear",
   },
@@ -917,7 +970,17 @@ export function enemyCard(card: CardDefinition): CardDefinition {
   return {
     ...card,
     effects: card.effects?.filter((effect) =>
-      ["damage", "status", "cleanse", "purge", "reflect", "heal", "blind", "meltArmor"].includes(effect.kind),
+      [
+        "damage",
+        "status",
+        "cleanse",
+        "purge",
+        "reflect",
+        "heal",
+        "blind",
+        "meltArmor",
+        "nullifyFreeze",
+      ].includes(effect.kind),
     ),
   };
 }
@@ -977,29 +1040,31 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
   for (const effect of card.effects ?? []) {
     text +=
       "; " +
-      (effect.kind === "damage"
-        ? `Deal ${effect.amount} ${DAMAGE_LABELS[effect.damageType]} damage${effect.leech ? " with Leech" : ""}`
-        : effect.kind === "status"
-          ? `Gain ${effect.amount} ${keywordLabel(effect.status)}`
-          : effect.kind === "draw"
-            ? `Draw ${effect.amount} card${effect.amount === 1 ? "" : "s"}`
-            : effect.kind === "mana"
-              ? `Gain ${effect.amount} Mana`
-              : effect.kind === "heal"
-                ? `Restore ${effect.amount} Health`
-                : effect.kind === "blind"
-                  ? "Blind all enemies"
-                  : effect.kind === "meltArmor"
-                    ? `Remove ${effect.amount}% of all enemies’ Armor, rounded up`
-                    : effect.kind === "reflect"
-                      ? effect.status === "burn"
-                        ? "Reflect the next Burn"
-                        : "Reflect the next harmful status effect"
-                      : effect.kind === "cleanse" && effect.target === "allAllies"
-                        ? "Cleanse all allies"
-                        : effect.kind === "cleanse" && effect.target === "recipient"
-                          ? "Cleanse the healed ally"
-                          : `${effect.kind === "cleanse" ? "Cleanse acting creature" : "Purge target"}: remove ${effect.amount} effect${effect.amount === 1 ? "" : "s"}`);
+      (effect.kind === "nullifyFreeze"
+        ? "Nullify the next Freeze damage"
+        : effect.kind === "damage"
+          ? `Deal ${effect.amount} ${DAMAGE_LABELS[effect.damageType]} damage${effect.leech ? " with Leech" : ""}`
+          : effect.kind === "status"
+            ? `Gain ${effect.amount} ${keywordLabel(effect.status)}`
+            : effect.kind === "draw"
+              ? `Draw ${effect.amount} card${effect.amount === 1 ? "" : "s"}`
+              : effect.kind === "mana"
+                ? `Gain ${effect.amount} Mana`
+                : effect.kind === "heal"
+                  ? `Restore ${effect.amount} Health`
+                  : effect.kind === "blind"
+                    ? "Blind all enemies"
+                    : effect.kind === "meltArmor"
+                      ? `Remove ${effect.amount}% of all enemies’ Armor, rounded up`
+                      : effect.kind === "reflect"
+                        ? effect.status === "burn"
+                          ? "Reflect the next Burn"
+                          : "Reflect the next harmful status effect"
+                        : effect.kind === "cleanse" && effect.target === "allAllies"
+                          ? "Cleanse all allies"
+                          : effect.kind === "cleanse" && effect.target === "recipient"
+                            ? "Cleanse the healed ally"
+                            : `${effect.kind === "cleanse" ? "Cleanse acting creature" : "Purge target"}: remove ${effect.amount} effect${effect.amount === 1 ? "" : "s"}`);
   }
   if (card.leech) text += "; Leech";
   if (card.repeatChance) text += `; ${card.repeatChance}% chance to repeat`;

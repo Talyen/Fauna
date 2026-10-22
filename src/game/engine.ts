@@ -399,6 +399,17 @@ function encore(state: GameState, actor: import("./combat").Combatant) {
   stats.encoreUsed = true;
   return roll(state) < chance / 100;
 }
+function kindlingFlourish(state: GameState, actor: import("./combat").Combatant) {
+  const stats = combat(actor);
+  if (stats.cardsPlayedThisTurn >= 2) return false;
+  stats.cardsPlayedThisTurn++;
+  if (stats.cardsPlayedThisTurn !== 2) return false;
+  const chance = creaturePassive("maxHealth" in actor ? undefined : state, actor.species).effects.reduce(
+    (total, effect) => total + (effect.kind === "kindlingFlourish" ? effect.amount : 0),
+    0,
+  );
+  return chance > 0 && (chance === 100 || roll(state) < chance / 100);
+}
 function hushDome(state: GameState, enemy: boolean, events: GameEvent[]) {
   for (const unit of enemy ? state.battle!.enemies : state.team) {
     if (unit.health <= 0) continue;
@@ -477,6 +488,16 @@ function applyExtras(
         for (const recipient of enemy ? state.team : state.battle!.enemies)
           if (recipient.health > 0) applyBlind(state, actor, recipient, events);
         break;
+      case "nullifyFreeze":
+        combat(actor).nullifyFreeze = true;
+        events.push({
+          kind: "status",
+          targetId: actor.id,
+          status: "nullify",
+          outcome: "apply",
+          text: "Nullify the next Freeze damage",
+        });
+        break;
       case "reflect":
         if (effect.status === "burn") combat(actor).reflectBurn = true;
         else combat(actor).reflect = true;
@@ -548,9 +569,10 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
         targetId: def.effect === "attack" && def.target === "allEnemies" ? undefined : target.id,
         text: `${enemy.name} uses ${def.name}.`,
       });
+      const flourishRepeat = kindlingFlourish(draft, enemy);
       const encoreRepeat = encore(draft, enemy);
       const abilityRepeat = def.repeatChance !== undefined && roll(draft) < def.repeatChance / 100;
-      for (let play = 0; play < (encoreRepeat || abilityRepeat ? 2 : 1); play++) {
+      for (let play = 0; play < (encoreRepeat || abilityRepeat || flourishRepeat ? 2 : 1); play++) {
         if (
           enemy.health <= 0 ||
           (def.effect === "attack" &&
@@ -562,7 +584,7 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
             kind: "action",
             actionType: "support",
             actorId: enemy.id,
-            text: `${enemy.name} repeats ${def.name}${encoreRepeat ? " with Encore" : ""}`,
+            text: `${enemy.name} repeats ${def.name}${flourishRepeat ? " with Kindling Flourish" : encoreRepeat ? " with Encore" : ""}`,
           });
         const criticalBonus = def.effect === "attack" ? openingCriticalBonus(draft, enemy) : 0;
         const blindMiss = def.effect === "attack" ? beginAttack(draft, enemy) : false;
@@ -889,12 +911,17 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
           ["poison", "poison.venom-strike"],
           ["stun", "stun.jarring-blow"],
         ] as const;
+        const flourishRepeat = kindlingFlourish(draft, actor);
         const encoreRepeat = encore(draft, actor);
         const abilityRepeat = def.repeatChance !== undefined && roll(draft) < def.repeatChance / 100;
         const repeat = repeatTalents.some(
           ([keyword, talent]) => keywords.includes(keyword) && hasTalent(draft, talent) && roll(draft) < 0.1,
         );
-        for (let play = 0; play < (repeat || encoreRepeat || abilityRepeat ? 2 : 1); play++) {
+        for (
+          let play = 0;
+          play < (repeat || encoreRepeat || abilityRepeat || flourishRepeat ? 2 : 1);
+          play++
+        ) {
           if (
             actor.health <= 0 ||
             (def.effect === "attack" &&
@@ -903,12 +930,12 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
                 : !target || target.health <= 0))
           )
             break;
-          if (play === 1 && (encoreRepeat || abilityRepeat))
+          if (play === 1 && (encoreRepeat || abilityRepeat || flourishRepeat))
             events.push({
               kind: "action",
               actionType: "support",
               actorId: actor.id,
-              text: `${species(actor.species).name} repeats ${def.name}${encoreRepeat ? " with Encore" : ""}`,
+              text: `${species(actor.species).name} repeats ${def.name}${flourishRepeat ? " with Kindling Flourish" : encoreRepeat ? " with Encore" : ""}`,
             });
           const criticalBonus = def.effect === "attack" ? openingCriticalBonus(draft, actor) : 0;
           const blindMiss = def.effect === "attack" ? beginAttack(draft, actor) : false;

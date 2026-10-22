@@ -33,6 +33,8 @@ export const COMBAT_PACKS = [
   ["mossguard", "ringpalm", "captoad"],
   ["glintstride", "dunefox", "prismram"],
   ["mossguard", "glintstride", "captoad"],
+  ["wickwaltz", "shadebrim", "prismram"],
+  ["mossguard", "wickwaltz", "captoad"],
 ] as const;
 export const BOSSES = [
   {
@@ -100,7 +102,7 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
               ? "water"
               : kind === "dunefox"
                 ? "physical"
-                : kind === "emberback" || kind === "cindernewt"
+                : kind === "emberback" || kind === "cindernewt" || kind === "wickwaltz"
                   ? "burn"
                   : kind === "captoad"
                     ? "poison"

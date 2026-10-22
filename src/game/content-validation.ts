@@ -117,6 +117,7 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
           "heal",
           "blind",
           "meltArmor",
+          "nullifyFreeze",
         ].includes(effect.kind)
       )
         error(card.id, "effects", "Unknown supplemental effect.");
