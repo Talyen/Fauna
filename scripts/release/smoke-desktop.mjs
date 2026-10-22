@@ -138,8 +138,8 @@ try {
     JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
   );
   await window.locator(`.app:not([inert]) .hand [data-card-id=${JSON.stringify(attackCardId)}]`).click();
-  if (await window.locator(".battle-screen").getAttribute("data-selected-card"))
-    await window.locator('.app:not([inert]) .enemy-row [data-enemy-id="enemy-0"]').click();
+  await window.locator('.app:not([inert]) .battle-screen:not([data-selected-card=""])').waitFor();
+  await window.locator('.app:not([inert]) .enemy-row [data-enemy-id="enemy-0"]').click();
   // Close immediately while hit feedback is still animating; the handshake must flush the accepted command.
   await app.close();
   app = undefined;
