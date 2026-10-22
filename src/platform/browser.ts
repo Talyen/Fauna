@@ -40,7 +40,7 @@ export function createBrowserPlatform(storage?: Storage): Platform {
           }
           if (previous === null) continue;
           try {
-            if (isRecoverable(previous)) intact.push(previous);
+            if (isRecoverable(previous) && !intact.includes(previous)) intact.push(previous);
           } catch {
             // A failed validation cannot promote this checkpoint into recovery storage.
           }

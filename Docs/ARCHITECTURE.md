@@ -1,8 +1,8 @@
 # Architecture
 
-The [ability resolution plan and implementation record](plans/COMBAT_RESOLUTION_PLAN.md) documents the shared player/enemy executor, approved rule alignment and explicit room scaling.
+The [ability resolution plan and implementation record](archive/COMBAT_RESOLUTION_PLAN.md) documents the shared player/enemy executor, approved rule alignment and explicit room scaling.
 
-The [combat reaction architecture plan and implementation record](plans/COMBAT_REACTIONS_PLAN.md) documents typed damage origins, synchronous reaction continuations and the approved immediate cancellation after actor knockout.
+The [combat reaction architecture plan and implementation record](archive/COMBAT_REACTIONS_PLAN.md) documents typed damage origins, synchronous reaction continuations and the approved immediate cancellation after actor knockout.
 
 `src/game/` owns content, commands, battle rules, seeded RNG, and save validation. It imports only its own modules, Immer, and Zod. It does not access the DOM, React, filesystem, Steam, clocks, or ambient randomness. `scripts/checks/boundaries.mjs` parses source and checks resolved import paths and ambient capability references; CI also runs Knip for unused files, exports and dependencies.
 

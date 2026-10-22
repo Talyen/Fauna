@@ -121,7 +121,16 @@ it("keeps combat continuations below public entry points and outside presentatio
     "src/game/combat/policy.ts",
     "src/game/combat/resolution.ts",
   ])
-    for (const target of ["./index", "@/game/engine", "./abilities.ts", "../journey", "../team", "./turns"])
+    for (const target of [
+      "./index",
+      "@/game/combat",
+      "../combat",
+      "@/game/engine",
+      "./abilities.ts",
+      "../journey",
+      "../team",
+      "./turns",
+    ])
       expect(boundaryViolations(file, `import * as higher from "${target}"`)).toHaveLength(1);
   for (const file of ["src/game/combat/state.ts", "src/game/combat/policy.ts"])
     expect(boundaryViolations(file, 'export * from "./resolution"')).toHaveLength(1);

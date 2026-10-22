@@ -3,7 +3,16 @@ import { drawKeyword } from "../card-zones";
 import { hasTalent, creaturePassive } from "../progression";
 
 import type { GameEvent, GameState } from "../types";
-import { combat, maximumHealth, unitName, mostInjured, STACK_LIMIT, gainGold, type Combatant } from "./state";
+import {
+  combat,
+  maximumHealth,
+  unitName,
+  mostInjured,
+  STACK_LIMIT,
+  harmfulStatuses,
+  gainGold,
+  type Combatant,
+} from "./state";
 
 import { reaction, type Resolution } from "./operations";
 
@@ -198,6 +207,6 @@ export function* healthThresholds(
       unit.health < maximumHealth(unit) / 4 &&
       hasTalent(state, "health.last-resort")
     )
-      yield* reaction("removeEffects", unit, "cleanse", 6, events, state);
+      yield* reaction("removeEffects", unit, "cleanse", harmfulStatuses.length + 1, events, state);
   }
 }

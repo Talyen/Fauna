@@ -298,7 +298,7 @@ export function* applyHarmfulStatus(
     const beforeStacks = stats[type];
     stats[type] = Math.min(STACK_LIMIT, stats[type] + damage);
     stats.statusSources[type] = source.id;
-    if (type === "bleed" && options.leech) deferLeech(target, source, damage);
+    if (type === "bleed" && options.leech) deferLeech(target, source, stats.bleed - beforeStacks);
     events.push({
       kind: "status",
       targetId: target.id,

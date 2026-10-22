@@ -759,3 +759,45 @@ it.each(["write", "read", "acknowledge"] as const)(
     }
   },
 );
+
+it("durably restores metadata when recovering this device's remote checkpoint", async () => {
+  const f = fixture();
+  const remote = await snapshot(progress, identity, 8);
+  f.files.set(cloudName(remote), JSON.stringify(remote));
+  try {
+    await f.manager.start(null);
+    await f.manager.flush();
+    expect(f.install).toHaveBeenCalledWith(progress);
+    expect(f.local.data).not.toBeNull();
+    const restored = await parseSnapshot(f.local.data!, identity.profile);
+    expect(restored.payload).toBe(progress);
+    expect(restored.id === remote.id || restored.ancestors.includes(remote.id)).toBe(true);
+  } finally {
+    await f.manager.dispose();
+  }
+});
+
+it("flush drains progress admitted by an upload-completion subscriber", async () => {
+  const f = fixture();
+  let manager: ReturnType<typeof createCloud>;
+  let committed: Promise<void> | undefined;
+  manager = createCloud(
+    f.port,
+    (view) => {
+      if (view.status === "Synced" && !committed) committed = manager.commit(progress);
+    },
+    f.install,
+  );
+  try {
+    await manager.start(initial);
+    await manager.flush();
+    expect(committed).toBeDefined();
+    expect((await parseSnapshot(f.local.data!, identity.profile)).payload).toBe(progress);
+    expect(manager.view.status).toBe("Synced");
+    expect([...f.files.values()].some((raw) => JSON.parse(raw).payload === progress)).toBe(true);
+  } finally {
+    await committed;
+    await manager.dispose();
+    await f.manager.dispose();
+  }
+});

@@ -91,7 +91,7 @@ export function boundaryViolations(file, source) {
       fail(`Runtime imports a development harness: ${specifier}`);
     if (tooling && (within("ui") || within("components") || /^(react(?:-dom)?)(\/|$)/.test(target)))
       fail(`Development harness imports presentation: ${specifier}`);
-    const combatTarget = target.replace(/\.ts$/, "");
+    const combatTarget = target.replace(/\.ts$/, "").replace(/^src\/game\/combat$/, "src/game/combat/index");
     const combatModule = file.replace(/^src\/game\/combat\//, "").replace(/\.ts$/, "");
     const combatInternal = [
       "state",
