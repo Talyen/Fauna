@@ -101,10 +101,14 @@ async function startSampler(page) {
 export async function action(page, step) {
   if (step.kind === "click") await page.getByRole("button", { name: step.name, exact: true }).click();
   else if (step.kind === "play") {
-    await page.locator(`[data-card-id=${JSON.stringify(step.command.cardId)}]`).click();
+    await page
+      .locator(`.app:not([inert]) .hand [data-card-id=${JSON.stringify(step.command.cardId)}]`)
+      .click();
     if (step.command.targetId)
-      await page.locator(`[data-actor-id=${JSON.stringify(step.command.targetId)}] .creature-card`).click();
-    else await page.locator(".confirm-play").click();
+      await page
+        .locator(`.app:not([inert]) [data-actor-id=${JSON.stringify(step.command.targetId)}] .creature-card`)
+        .click();
+    else await page.locator(".app:not([inert]) .confirm-play").click();
   } else if (step.kind === "endTurn")
     await page.getByRole("button", { name: "End turn", exact: true }).click();
   else if (step.kind === "swap") {
