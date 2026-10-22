@@ -215,7 +215,8 @@ it("round-trips a committed defeat receipt with knocked-out reserves", () => {
       c.health = 0;
     });
   });
-  while (s.phase === "battle") s = accept(s, { type: "endTurn" });
+  for (let turn = 0; turn < 100 && s.phase === "battle"; turn++) s = accept(s, { type: "endTurn" });
+  expect(s.phase).toBe("defeat");
   const restored = decodeSave(encodeSave(s));
   expect(restored).toEqual(s);
   expect(restored.reserves.every((c) => c.health === 0)).toBe(true);

@@ -5,6 +5,7 @@ import { createGame, dispatch } from "../../src/game/engine";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { cardKeywords, talentPoints } from "../../src/game/progression";
 import { cardCost } from "../../src/game/rules";
+import { previewPlay } from "../../src/game/preview";
 import { teamRun, recruitChoice, accept, run, winBattle, policy, bossReward } from "./helpers";
 describe("keyword progression and rewards", () => {
   it("awards keywords once per accepted play, banks once on victory, and never banks previews", () => {
@@ -16,11 +17,20 @@ describe("keyword progression and rewards", () => {
       : card.definitionId.endsWith("attack")
         ? "enemy-0"
         : "ally-0";
+    const before = encodeSave(s);
+    const preview = previewPlay(s, card.id, def);
+    expect(preview.accepted).toBe(true);
+    expect(preview.state.keywordXP).toEqual({});
+    expect(previewPlay(s, card.id, def)).toEqual(preview);
+    expect(encodeSave(s)).toBe(before);
     const result = dispatch(s, { type: "play", cardId: card.id, targetId: def });
     expect(result.accepted).toBe(true);
     expect(result.state.keywordXP).toEqual({});
     keywords.forEach((k) => expect(result.state.battleXP[k]).toBe(1));
-    expect(dispatch(result.state, { type: "play", cardId: card.id, targetId: def }).accepted).toBe(false);
+    const repeated = dispatch(result.state, { type: "play", cardId: card.id, targetId: def });
+    expect(repeated.accepted).toBe(false);
+    expect(repeated.state).toBe(result.state);
+    expect(repeated.events).toEqual([]);
     const won = winBattle(result.state);
     expect(Object.values(won.battleXP)).toEqual([]);
     expect(Object.values(won.keywordXP).reduce((a, b) => a + b, 0)).toBe(
@@ -39,7 +49,8 @@ describe("keyword progression and rewards", () => {
       d.battle!.enemies.forEach((e) => (e.damage = 100));
     });
     let s = defeat;
-    while (s.phase === "battle") s = accept(s, { type: "endTurn" });
+    for (let turn = 0; turn < 100 && s.phase === "battle"; turn++) s = accept(s, { type: "endTurn" });
+    expect(s.phase).toBe("defeat");
     expect(s.keywordXP.burn).toBe(7);
     expect(s.currency).toBe(0);
     expect(s.reward!.outcome).toBe("defeat");
@@ -209,7 +220,8 @@ it("final victory banks permanent rewards without offering recruitment or run-on
   for (let i = 0; i < 3; i++) {
     s = winBattle(s);
     if (i < 2) {
-      while (s.phase !== "teamSelection") s = accept(s, policy(s));
+      for (let choice = 0; choice < 3 && s.phase !== "teamSelection"; choice++) s = accept(s, policy(s));
+      expect(s.phase).toBe("teamSelection");
       s = accept(s, { type: "beginBattle" });
     }
   }

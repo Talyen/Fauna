@@ -19,6 +19,13 @@ import { createSession } from "../../src/application/session";
 import { createBrowserPlatform } from "../../src/platform/browser";
 import { gamepadActions } from "../../src/ui/input";
 beforeEach(() => {
+  vi.stubGlobal(
+    "ResizeObserver",
+    class {
+      observe() {}
+      disconnect() {}
+    },
+  );
   vi.spyOn(HTMLMediaElement.prototype, "play").mockResolvedValue();
   vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {});
   vi.spyOn(HTMLMediaElement.prototype, "load").mockImplementation(() => {});
@@ -26,16 +33,10 @@ beforeEach(() => {
 afterEach(() => {
   cleanup();
   localStorage.clear();
+  vi.unstubAllGlobals();
 });
 describe("player interface", () => {
   it("keeps overflow invisible and unplayable while filling a hand slot after a play", async () => {
-    vi.stubGlobal(
-      "ResizeObserver",
-      class {
-        observe() {}
-        disconnect() {}
-      },
-    );
     const game = produce(run(), (d) => {
       d.battle!.hand = d.cards.slice(0, 7).map((card) => card.id);
       d.battle!.buffer = d.cards.slice(7).map((card) => card.id);
@@ -122,13 +123,6 @@ describe("player interface", () => {
     await session.dispose();
   });
   it("shows journey gains only when ending the journey and preserves permanent gains", async () => {
-    vi.stubGlobal(
-      "ResizeObserver",
-      class {
-        observe() {}
-        disconnect() {}
-      },
-    );
     const started = accept(
       accept(createGame(7), { type: "draft", species: createGame(7).starterOffers[0]! }),
       { type: "start" },
@@ -230,13 +224,6 @@ describe("player interface", () => {
     expect(session.store.getState().game.selected).toEqual([chosen]);
     await user.click(enter);
     expect(session.store.getState().game.phase).toBe("teamSelection");
-    vi.stubGlobal(
-      "ResizeObserver",
-      class {
-        observe() {}
-        disconnect() {}
-      },
-    );
     await user.click(screen.getByRole("button", { name: "Combat" }));
     expect(session.store.getState().game.phase).toBe("battle");
     expect(screen.getByRole("region", { name: "Enemy row" })).toBeTruthy();
@@ -274,13 +261,6 @@ describe("player interface", () => {
   it.each(["hover", "keyboard"])(
     "shows each creature copy with current Block and no Health totals using %s",
     async (input) => {
-      vi.stubGlobal(
-        "ResizeObserver",
-        class {
-          observe() {}
-          disconnect() {}
-        },
-      );
       const game = produce(teamRun(7, ["mossguard", "mossguard", "prismram"]), (d) => {
         d.team[0]!.health = 7;
         d.team[1]!.health = 19;

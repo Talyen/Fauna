@@ -85,6 +85,7 @@ it("Echoes Remember recovers other creatures' cards with seeded randomness and n
     expect(battle.discard).not.toContain(recovered);
     expect(battle.hand).toHaveLength(1);
     const zones = [...battle.hand, ...battle.draw, ...battle.discard, ...battle.buffer];
+    expect(zones).toHaveLength(game.cards.length);
     expect(new Set(zones).size).toBe(game.cards.length);
   }
   expect(selected.size).toBeGreaterThan(1);
