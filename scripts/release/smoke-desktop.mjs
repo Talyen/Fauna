@@ -55,12 +55,12 @@ try {
   await window.getByRole("button", { name: "Continue", exact: true }).click();
   if ((await window.evaluate(async () => (await window.faunaDesktop.readCandidates())[0].data)) !== inspected)
     throw new Error("Collection browsing changed the saved battle.");
-  // Exercise free swaps through the actual renderer and current-format desktop storage.
+  // Exercise required knockout replacement through the renderer and desktop storage.
   await window.evaluate(async () => {
     const state = JSON.parse((await window.faunaDesktop.readCandidates())[0].data);
     if (state.team.length !== 1 || state.cards.length !== 3)
       throw new Error("The expedition did not begin with one starter.");
-    // Continue swap coverage with a grown lineup and its complete card slots.
+    // Continue replacement coverage with a grown formation and complete card slots.
     for (const [kind, health, effects] of [
       ["emberback", 30, ["attack", "furnace-breath", "magma-stomp"]],
       ["prismram", 30, ["attack", "guard", "spectrum-lance"]],
@@ -92,13 +92,12 @@ try {
       block: 0,
       attacked: false,
     }));
+    state.team[0].health = 0;
     await window.faunaDesktop.writeSave(JSON.stringify(state));
   });
   await window.reload();
   await window.getByRole("button", { name: "Continue", exact: true }).click();
-  await window.getByRole("button", { name: "Swap", exact: true }).click();
   await window.getByRole("button", { name: "Pollenmoth, backup", exact: true }).click();
-  await window.locator('.swap-roster [data-actor-id="ally-0"] .creature-card').click();
   await window.locator('.app:not([inert])[data-save-status="saved"]').waitFor();
   const swapped = await window.evaluate(async () =>
     JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
@@ -107,14 +106,11 @@ try {
     swapped.version !== saveFormat.version ||
     swapped.team[0].species !== "pollenmoth" ||
     swapped.battle.mana !== 4 ||
-    swapped.lineup[0] !== "ally-0"
+    swapped.lineup[0] !== "recruit-pollenmoth"
   )
-    throw new Error("Desktop combat swap or lineup persistence failed.");
-  // Swap back to restore the original starter before checking automatic turns.
-  await window.getByRole("button", { name: "Swap", exact: true }).click();
-  await window.locator('.swap-roster [data-actor-id="recruit-pollenmoth"] .creature-card').click();
-  await window.locator('.swap-roster [data-actor-id="ally-0"] .creature-card').click();
-  await window.locator('.app:not([inert])[data-save-status="saved"]').waitFor();
+    throw new Error("Desktop knockout replacement or formation persistence failed.");
+  if (await window.getByRole("button", { name: "Swap", exact: true }).count())
+    throw new Error("A free Swap control remains available.");
   let attack = window.locator('.app:not([inert]) .hand .action-card[data-effect="attack"]').first();
   if (!(await attack.count())) {
     await window.getByRole("button", { name: "End turn" }).click();
@@ -210,7 +206,7 @@ try {
   }
   success = true;
   console.log(
-    `Desktop startup, draft, Collection ability and rank browsing, free swaps, lineup persistence, last-mana automatic turn quit/resume, renderer isolation passed${packaged ? ", including packaged application protocol and crash recovery" : ""}.`,
+    `Desktop startup, draft, Collection ability and rank browsing, knockout replacement, formation persistence, last-mana automatic turn quit/resume, renderer isolation passed${packaged ? ", including packaged application protocol and crash recovery" : ""}.`,
   );
 } finally {
   if (app && !success) {

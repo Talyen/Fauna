@@ -1,0 +1,43 @@
+{
+  "baseCommit": "d217ef3f9b6a8d495910d9836c308817088c3b6f",
+  "conditions": "Chromium fresh saves; reduced motion; 1280x720 at 125% text and 1920x1080 at 100% text",
+  "images": [
+    {
+      "file": "tournelle-collection-1280.png",
+      "sha256": "e544528a89b39f1e69fe15d02c849ff0e266d8bbc2b71fd420afdf51d33510cd"
+    },
+    {
+      "file": "tournelle-kit-1920.png",
+      "sha256": "947ec1972511304168cacd341ccaff231643f18ca27c2346f3dbff6b2e03a666"
+    },
+    {
+      "file": "tournelle-replacement-1280.png",
+      "sha256": "f80a72089e33df8604a14e18adecb5231b8b73b6735271ab0d5cd2728361daff"
+    },
+    {
+      "file": "tournelle-legendary-1280.png",
+      "sha256": "3a47246c85d149512e3e6fcc37ce567238a80316d4fed660d29d9926222693c7"
+    },
+    {
+      "file": "tournelle-rank-five-1280.png",
+      "sha256": "dbccfcd1bb13090d635989b9133bdf1f27193086eb1c2b22f59635dbbd5506f2"
+    }
+  ],
+  "coverage": [
+    "Battle without free Swap",
+    "Collection and all three base abilities",
+    "Gallantry ranks through 60%",
+    "Safe Passage and card ownership after swap",
+    "Required replacement, successive knockouts and reload",
+    "Four living backups after Legendary knockout",
+    "Keyboard choice and focus return",
+    "Standard-mapped controller A choice and focus return"
+  ],
+  "result": "No page errors or layout violations in the focused captures; artwork remains unchanged from the user-selected Drive sources",
+  "limits": [
+    "Full hosted CI pending",
+    "Native desktop and Windows packaging not run",
+    "Physical controller, Steam client and Steam Deck not tested",
+    "No win-rate or balance acceptance claim"
+  ]
+}

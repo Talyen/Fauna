@@ -28,9 +28,6 @@
   min-height: var(--control-height);
   white-space: normal;
 }
-.menu-icon-lineup {
-  color: var(--menu-icon-lineup);
-}
 .menu-icon-talents {
   color: var(--menu-icon-talents);
 }

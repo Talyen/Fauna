@@ -36,9 +36,7 @@ function legendaryTeam() {
   });
 }
 
-test("Legendary stays centered; Swap shows all five roster creatures and Pearls survive reload", async ({
-  page,
-}) => {
+test("Legendary stays centered without free swaps and Pearls survive reload", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.emulateMedia({ reducedMotion: "reduce" });
   await seed(page, legendaryTeam());
@@ -46,14 +44,7 @@ test("Legendary stays centered; Swap shows all five roster creatures and Pearls 
   const boss = await page.locator('.player-row [data-actor-id="legend"] .creature-card').boundingBox();
   expect(Math.abs(boss!.x + boss!.width / 2 - 640)).toBeLessThan(1);
   await expect(page.locator(".hand .action-card")).toHaveCount(6);
-  await page.getByRole("button", { name: "Swap", exact: true }).click();
-  const dialog = page.getByRole("dialog");
-  await expect(dialog.locator(".creature-card")).toHaveCount(5);
-  for (const creature of await dialog.locator(".creature-card").all())
-    await expect(creature).toBeInViewport();
-  await expect(dialog.getByRole("heading", { name: /^(Deployed|Backup)$/ })).toHaveCount(0);
-  await expect(dialog.getByRole("button", { name: "Next page" })).toHaveCount(0);
-  await page.keyboard.press("Escape");
+  await expect(page.getByRole("button", { name: "Swap", exact: true })).toHaveCount(0);
   await page.locator('.hand [data-effect="pearl"]').first().click();
   const saved = await state(page);
   expect(saved.cards.filter((card) => card.definitionId === "memento-pearl")).toHaveLength(2);
@@ -84,4 +75,28 @@ test("enemy Echoes are targetable without being roster creatures", async ({ page
   const committed = await state(page);
   expect(committed.roster).toEqual(fixture.roster);
   expect(committed.battle!.minions![0]!.health).toBeLessThan(6);
+});
+
+test("a knocked-out Legendary offers all four living backups and clears its summons on replacement", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  const fixture = produce(legendaryTeam(), (d) => {
+    d.team[0]!.health = 0;
+    d.battle!.minions = [];
+  });
+  await seed(page, fixture);
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  const dialog = page.getByRole("dialog", { name: "Choose a replacement" });
+  await expect(dialog.locator(".creature-card")).toHaveCount(5);
+  for (const card of await dialog.locator(".creature-card").all()) await expect(card).toBeInViewport();
+  await dialog.getByRole("button", { name: "Mossguard, backup", exact: true }).click();
+  const next = await state(page);
+  expect(next.team).toHaveLength(1);
+  expect(next.team[0]!.species).toBe("mossguard");
+  expect(next.battle!.minions).toEqual([]);
+  expect(next.cards.some((card) => card.temporary)).toBe(false);
+  await page.reload();
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  expect(await state(page)).toEqual(next);
 });

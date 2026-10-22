@@ -3,7 +3,8 @@ import type { Session } from "../../application/session";
 import type { GameState, Command } from "../../game/types";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../../components/ui/dialog";
 import { OwnedBoons } from "../expedition/owned-boons";
-import { RosterPicker } from "../shared/cards/roster-picker";
+import { ReplacementPicker } from "../shared/cards/roster-picker";
+import { pendingReplacement } from "../../game/team";
 import { DeckCards } from "../shared/cards/deck-cards";
 import { Inspector } from "../inspection/inspection";
 import type { Inspection } from "../shared/inspection-model";
@@ -38,6 +39,7 @@ export function ShellOverlays({
   inspectionControls,
   route,
 }: ShellOverlaysProps) {
+  const replacement = pendingReplacement(game);
   return (
     <>
       {" "}
@@ -49,27 +51,15 @@ export function ShellOverlays({
         }}
       >
         <DialogContent
-          className={
-            modal === "swap" || modal === "lineup"
-              ? "swap-dialog"
-              : modal === "deck" || modal === "draw" || modal === "discard" || modal === "boons"
-                ? "deck-dialog"
-                : ""
-          }
+          className="deck-dialog"
           closeLabel={
-            modal === "swap"
-              ? "Close Swap"
-              : modal === "lineup"
-                ? "Close Lineup"
-                : modal === "draw"
-                  ? "Close draw pile"
-                  : modal === "discard"
-                    ? "Close discard pile"
-                    : modal === "deck"
-                      ? "Close deck"
-                      : modal === "boons"
-                        ? "Close Boons"
-                        : "Close dialog"
+            modal === "draw"
+              ? "Close draw pile"
+              : modal === "discard"
+                ? "Close discard pile"
+                : modal === "deck"
+                  ? "Close deck"
+                  : "Close Boons"
           }
           onCloseAutoFocus={(event) => {
             event.preventDefault();
@@ -77,31 +67,18 @@ export function ShellOverlays({
           }}
         >
           <DialogTitle>
-            {modal === "swap"
-              ? "Swap"
-              : modal === "lineup"
-                ? "Lineup"
-                : modal === "draw"
-                  ? "Draw Pile"
-                  : modal === "discard"
-                    ? "Discard Pile"
-                    : modal === "deck"
-                      ? "Deck"
-                      : modal === "boons"
-                        ? "Boons"
-                        : ""}
+            {modal === "draw"
+              ? "Draw Pile"
+              : modal === "discard"
+                ? "Discard Pile"
+                : modal === "deck"
+                  ? "Deck"
+                  : modal === "boons"
+                    ? "Boons"
+                    : ""}
           </DialogTitle>
           <DialogDescription className="sr-only">Game information and controls</DialogDescription>
-          {modal === "swap" || modal === "lineup" ? (
-            <RosterPicker
-              key={modal}
-              game={game}
-              lineup={modal === "lineup"}
-              send={send}
-              inspect={modal === "lineup" ? setInspection : undefined}
-              close={() => setModal(null)}
-            />
-          ) : modal === "deck" || modal === "draw" || modal === "discard" ? (
+          {modal === "deck" || modal === "draw" || modal === "discard" ? (
             <DeckCards
               game={game}
               inspect={game.phase === "battle" ? undefined : setInspection}
@@ -120,6 +97,38 @@ export function ShellOverlays({
           ) : null}
         </DialogContent>
       </Dialog>
+      {replacement && route === "play" && !menu && !modal && !inspection ? (
+        <Dialog key={replacement.id} open>
+          <DialogContent
+            className="swap-dialog"
+            showCloseButton={false}
+            onOpenAutoFocus={(event) => {
+              const first = document.querySelector<HTMLElement>('.swap-dialog [aria-label="Backup"] button');
+              if (first) {
+                event.preventDefault();
+                first.focus();
+              }
+            }}
+            onEscapeKeyDown={(event) => event.preventDefault()}
+            onPointerDownOutside={(event) => event.preventDefault()}
+            onCloseAutoFocus={(event) => {
+              event.preventDefault();
+              if (pendingReplacement(session.store.getState().game)) return;
+              returnFocus(
+                document.querySelector<HTMLElement>(
+                  ".app:not([inert]) .hand .action-card, .app:not([inert]) .end-turn",
+                ),
+              );
+            }}
+          >
+            <DialogTitle>Choose a replacement</DialogTitle>
+            <DialogDescription className="sr-only">
+              Choose a living backup for your knocked-out creature
+            </DialogDescription>
+            <ReplacementPicker key={replacement.id} game={game} outgoing={replacement} send={send} />
+          </DialogContent>
+        </Dialog>
+      ) : null}
       {!modal && inspection ? (
         <Inspector
           item={inspection}

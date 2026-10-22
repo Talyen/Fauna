@@ -1,13 +1,14 @@
-import { freshCombat } from "../../../src/game/combat/index";
+import { freshCombat, combat } from "../../../src/game/combat/index";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
-import { combat } from "../../../src/game/combat/index";
 import { dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { CARDS, species } from "../../../src/game/content";
-import { prepareDestination, recruitChoice, accept, run, winBattle } from "../../support/game";
+import { pendingReplacement } from "../../../src/game/team";
+import { chooseBattleCommand } from "../../../src/application/battle-policy";
+import { prepareDestination, recruitChoice, accept, run, winBattle, swapFixture } from "../../support/game";
 
-export function withReserves() {
+function withReserves() {
   return produce(run(), (d) => {
     for (const kind of ["pollenmoth", "emberback"] as const) {
       d.roster.push(kind);
@@ -22,239 +23,189 @@ export function withReserves() {
     }
   });
 }
-describe("free combat swaps", () => {
-  it("ticks every enemy's statuses while the deployed row waits for a living backup", () => {
-    let state = accept(
-      produce(withReserves(), (draft) => {
-        draft.encounter = 1;
-        prepareDestination(draft);
-      }),
-      { type: "beginBattle" },
-    );
-    state = produce(state, (draft) => {
-      for (const ally of draft.team) ally.health = 0;
-      for (const enemy of draft.battle!.enemies) {
-        enemy.combat = freshCombat();
-        enemy.combat.poison = 1;
-        enemy.combat.statusSources.poison = draft.reserves[0]!.id;
-      }
+
+describe("knockout replacements", () => {
+  it("rejects free swaps of healthy or controlled allies and removed lineup commands without changing RNG", () => {
+    const game = produce(withReserves(), (d) => {
+      d.team[0]!.combat!.controlled = "freeze";
     });
-    expect(state.battle!.enemies.length).toBeGreaterThan(1);
-    const next = accept(state, { type: "endTurn" });
-    expect(next.phase).toBe("battle");
-    expect(next.battle!.enemies.map((enemy) => enemy.health)).toEqual(
-      state.battle!.enemies.map((enemy) => enemy.health - 1),
-    );
-    expect(next.battle!.enemies.every((enemy) => enemy.combat.poison === 0)).toBe(true);
-    expect(decodeSave(encodeSave(next))).toEqual(next);
-    const recovered = accept(next, {
-      type: "swap",
-      activeId: next.team[0]!.id,
-      reserve: next.reserves[0]!.id,
-    });
-    expect(recovered.team[0]!.health).toBeGreaterThan(0);
+    for (const command of [
+      { type: "swap", activeId: "ally-0", reserve: "recruit-pollenmoth" },
+      { type: "swap", activeId: "", reserve: "recruit-pollenmoth" },
+      { type: "setLineup", activeId: "ally-0", reserve: "recruit-pollenmoth" },
+    ]) {
+      const result = dispatch(game, command as never);
+      expect(result.accepted).toBe(false);
+      expect(result.state).toBe(game);
+      expect(result.events).toEqual([]);
+    }
+    expect(chooseBattleCommand(game).type).not.toBe("swap");
   });
-  it("replaces cards in hand, draw and discard without paying, drawing, shuffling, or changing the starting lineup", () => {
-    const before = produce(withReserves(), (d) => {
-      const owned = d.cards.filter((c) => c.ownerId === "ally-1");
-      d.battle!.hand = [owned[0]!.id];
-      d.battle!.discard = [owned[1]!.id];
-      d.battle!.draw = d.cards.filter((c) => ![owned[0]!.id, owned[1]!.id].includes(c.id)).map((c) => c.id);
-      d.team[1]!.health = 9;
-      d.team[1]!.block = 7;
-      d.team[1]!.attacked = true;
-      d.battle!.enemies[0]!.targetId = "ally-1";
+  it("requires a living backup for the first knockout before cards or End turn, including after resume", () => {
+    const game = produce(withReserves(), (d) => {
+      d.team[0]!.health = 0;
+      d.team[1]!.health = 0;
+      d.reserves[1]!.health = 0;
     });
-    const after = accept(before, { type: "swap", activeId: "ally-1", reserve: "recruit-pollenmoth" });
-    expect(after.rng).toBe(before.rng);
-    expect(after.battle!.mana).toBe(4);
-    expect(after.battle!.turn).toBe(1);
-    for (const zone of ["hand", "draw", "discard"] as const)
-      expect(after.battle![zone]).toEqual(before.battle![zone]);
-    expect(after.lineup).toEqual(before.lineup);
-    expect(after.battle!.enemies[0]!.targetId).toBe(after.team[1]!.id);
-    expect(after.cards.filter((c) => c.ownerId === after.team[1]!.id).map((c) => c.definitionId)).toEqual(
+    const restored = decodeSave(encodeSave(game));
+    expect(pendingReplacement(restored)?.id).toBe("ally-0");
+    for (const command of [
+      { type: "play", cardId: restored.battle!.hand[0] },
+      { type: "endTurn" },
+      { type: "swap", activeId: "ally-1", reserve: "recruit-pollenmoth" },
+      { type: "swap", activeId: "ally-0", reserve: "recruit-emberback" },
+    ])
+      expect(dispatch(restored, command as never).state).toBe(restored);
+    const next = accept(restored, { type: "swap", activeId: "ally-0", reserve: "recruit-pollenmoth" });
+    expect(pendingReplacement(next)).toBeUndefined();
+    expect(next.battle!.mana).toBe(restored.battle!.mana);
+    expect(next.battle!.turn).toBe(restored.battle!.turn);
+    expect(decodeSave(encodeSave(next))).toEqual(next);
+  });
+  it("keeps spent card slots, hand/overflow order, effects and enemy target references on replacement", () => {
+    const game = produce(withReserves(), (d) => {
+      d.team[0]!.health = 0;
+      d.team[0]!.combat!.poison = 4;
+      const ids = d.cards.map((c) => c.id);
+      d.battle!.hand = ids.slice(0, 6);
+      d.battle!.buffer = ids.slice(6, 7);
+      d.battle!.draw = ids.slice(7, 8);
+      d.battle!.discard = ids.slice(8);
+      d.battle!.enemies[0]!.targetId = "ally-0";
+    });
+    const next = accept(game, { type: "swap", activeId: "ally-0", reserve: "recruit-pollenmoth" });
+    for (const zone of ["hand", "buffer", "draw", "discard"] as const)
+      expect(next.battle![zone]).toEqual(game.battle![zone]);
+    expect(next.rng).toBe(game.rng);
+    expect(next.battle!.enemies[0]!.targetId).toBe("recruit-pollenmoth");
+    expect(next.reserves.find((c) => c.id === "ally-0")!.combat!.poison).toBe(4);
+    expect(next.cards.filter((c) => c.ownerId === "recruit-pollenmoth").map((c) => c.definitionId)).toEqual(
       CARDS.filter((c) => c.species === "pollenmoth").map((c) => c.id),
     );
-    const back = accept(after, { type: "swap", activeId: after.team[1]!.id, reserve: "ally-1" });
-    expect(back.team[1]).toEqual(before.team[1]);
-    expect(back.battle!.hand).toEqual(before.battle!.hand);
-    expect(decodeSave(encodeSave(back))).toEqual(back);
+    expect(next.lineup).toEqual(next.team.map((c) => c.id));
+    expect(decodeSave(encodeSave(next))).toEqual(next);
   });
-  it("never repeats opening grants or resets first-attack traits when cycling creatures", () => {
-    let s = produce(withReserves(), (d) => {
+  it("allows a controlled living backup when it is the only survivor, with no repeated opening grants", () => {
+    const game = produce(withReserves(), (d) => {
+      d.team.forEach((c) => (c.health = 0));
+      d.reserves[0]!.combat!.controlled = "freeze";
+      d.reserves[0]!.combat!.controlTurns = 1;
+      d.reserves[0]!.combat!.freeze = 10;
+      d.reserves[1]!.health = 0;
+    });
+    const command = chooseBattleCommand(game);
+    expect(command).toEqual({ type: "swap", activeId: "ally-0", reserve: "recruit-pollenmoth" });
+    const next = accept(game, command);
+    expect(next.team[0]!.combat!.controlled).toBe("freeze");
+    expect(next.team[0]!.block).toBe(0);
+    expect(pendingReplacement(next)).toBeUndefined();
+    expect(decodeSave(encodeSave(next))).toEqual(next);
+  });
+  it("keeps repeated replacement choices pending until the available backups are deployed", () => {
+    let game = produce(withReserves(), (d) => d.team.forEach((c) => (c.health = 0)));
+    for (const reserve of ["recruit-pollenmoth", "recruit-emberback"]) {
+      game = accept(game, { type: "swap", activeId: pendingReplacement(game)!.id, reserve });
+      expect(decodeSave(encodeSave(game))).toEqual(game);
+    }
+    expect(pendingReplacement(game)).toBeUndefined();
+    expect(game.team.filter((c) => c.health > 0)).toHaveLength(2);
+  });
+  it("resumes automatic End turn after the final zero-Mana replacement and respects its opt-out", () => {
+    const game = produce(withReserves(), (d) => {
+      d.team[0]!.health = 0;
+      d.battle!.mana = 0;
+    });
+    const manual = accept(game, {
+      type: "swap",
+      activeId: "ally-0",
+      reserve: "recruit-pollenmoth",
+      autoEndTurn: false,
+    });
+    expect(manual.battle!.turn).toBe(game.battle!.turn);
+    const auto = accept(game, { type: "swap", activeId: "ally-0", reserve: "recruit-pollenmoth" });
+    expect(auto.battle!.turn).toBeGreaterThan(game.battle!.turn);
+  });
+  it("does not interrupt committed enemy/status resolution, then requires recovery before another turn", () => {
+    let game = produce(withReserves(), (d) => {
+      for (const ally of d.team) {
+        ally.health = 1;
+        combat(ally).deathDoorUsed = true;
+        combat(ally).poison = 2;
+      }
+    });
+    game = accept(game, { type: "endTurn" });
+    expect(game.phase).toBe("battle");
+    expect(game.team.every((c) => c.health === 0)).toBe(true);
+    expect(pendingReplacement(game)).toBeDefined();
+    expect(dispatch(game, { type: "endTurn" }).state).toBe(game);
+    expect(decodeSave(encodeSave(game))).toEqual(game);
+  });
+  it("never resets first-attack/once-per-battle effects or repeats opening grants when a mechanic cycles creatures", () => {
+    let game = produce(withReserves(), (d) => {
       d.team[1]!.attacked = true;
       d.team[1]!.block = 5;
+      combat(d.team[1]!).deathDoorUsed = true;
     });
     for (let i = 0; i < 5; i++) {
-      s = accept(s, { type: "swap", activeId: s.team[1]!.id, reserve: "recruit-pollenmoth" });
-      s = accept(s, { type: "swap", activeId: s.team[1]!.id, reserve: "ally-1" });
+      game = swapFixture(game, { type: "swap", activeId: game.team[1]!.id, reserve: "recruit-pollenmoth" });
+      game = swapFixture(game, { type: "swap", activeId: game.team[1]!.id, reserve: "ally-1" });
     }
-    expect(s.team[1]!.attacked).toBe(true);
-    expect(s.team[1]!.block).toBe(5);
-    s = accept(s, { type: "swap", activeId: s.team[1]!.id, reserve: "recruit-pollenmoth" });
-    s = accept(s, { type: "endTurn" });
-    const fox = s.reserves.find((c) => c.species === "emberback")!;
-    expect(fox.block).toBe(3);
-    expect(fox.attacked).toBe(false);
-    expect(decodeSave(encodeSave(s))).toEqual(s);
+    expect(game.team[1]!.attacked).toBe(true);
+    expect(game.team[1]!.block).toBe(5);
+    expect(game.team[1]!.combat!.deathDoorUsed).toBe(true);
+    expect(decodeSave(encodeSave(game))).toEqual(game);
   });
-  it("allows recovery after the deployed row falls, but rejects knocked-out reserves", () => {
-    let s = produce(withReserves(), (d) => {
-      d.team.forEach((c) => {
-        c.health = 0;
-        c.block = 0;
-      });
-      d.encounter = 1;
-      d.journey!.victories = d.encounter;
-      // Use a real three-enemy encounter so all three allies fall in one enemy turn.
+  it("retains the formation changed by a mechanic across victory and the next battle", () => {
+    let game = swapFixture(withReserves(), {
+      type: "swap",
+      activeId: "ally-0",
+      reserve: "recruit-pollenmoth",
     });
-    // Beginning that encounter supplies authored enemies; health is then reduced for the fixture.
-    s = accept(
-      produce(s, (draft) => {
-        prepareDestination(draft);
-      }),
-      { type: "beginBattle" },
-    );
-    s = produce(s, (d) =>
-      d.team.forEach((c) => {
-        c.health = 0;
-        c.block = 0;
-      }),
-    );
-    s = accept(s, { type: "endTurn" });
-    expect(s.team.every((c) => c.health === 0)).toBe(true);
-    expect(s.phase).toBe("battle");
-    expect(s.battle!.mana).toBe(4);
-    expect(decodeSave(encodeSave(s))).toEqual(s);
-    const ids = [...s.battle!.hand];
-    const slot = s.cards.find((c) => ids.includes(c.id))!.ownerId;
-    s = accept(s, { type: "swap", activeId: slot, reserve: "recruit-pollenmoth" });
+    game = winBattle(game);
+    if (game.phase === "recruit") game = accept(game, recruitChoice(game));
+    if (game.phase === "boon") game = accept(game, { type: "skipBoon" });
+    expect(game.team.map((c) => c.species)).toEqual(["pollenmoth", "emberback", "prismram"]);
+    game = accept(game, { type: "beginBattle" });
     expect(
-      s.cards.some(
-        (c) => ids.includes(c.id) && c.ownerId === s.team.find((c) => c.species === "pollenmoth")!.id,
+      game.cards.every((card) =>
+        game.team.some(
+          (c) =>
+            c.id === card.ownerId &&
+            CARDS.some((def) => def.id === card.definitionId && def.species === c.species),
+        ),
       ),
     ).toBe(true);
-    const outgoing = s.reserves.find((c) => c.health === 0)!;
-    expect(
-      dispatch(s, { type: "swap", activeId: s.team.find((c) => c.health > 0)!.id, reserve: outgoing.id })
-        .accepted,
-    ).toBe(false);
-    expect(decodeSave(encodeSave(s))).toEqual(s);
-  });
-  it("only loses when the entire five-creature roster is knocked out", () => {
-    let s = produce(withReserves(), (d) => {
-      d.team.forEach((c) => {
-        c.health = 1;
-        c.block = 0;
-        combat(c).deathDoorUsed = true;
-      });
-      d.reserves.forEach((c) => {
-        c.health = 0;
-      });
-    });
-    for (let i = 0; i < 20 && s.phase === "battle"; i++) s = accept(s, { type: "endTurn" });
-    expect(s.reward!.outcome).toBe("defeat");
-    expect(decodeSave(encodeSave(s))).toEqual(s);
-  });
-  it("rejects invalid swaps without touching state or randomness", () => {
-    const s = withReserves();
-    for (const [activeId, reserve] of [
-      ["missing", "pollenmoth"],
-      ["ally-0", "emberback"],
-      ["ally-0", "prismram"],
-    ] as const) {
-      expect(dispatch(s, { type: "swap", activeId, reserve }).state).toBe(s);
-    }
-    expect(
-      dispatch(s, { type: "setLineup", activeId: "ally-0", reserve: "recruit-pollenmoth" }).accepted,
-    ).toBe(false);
-  });
-});
-describe("optional starting lineup and save validation", () => {
-  it("remembers the starting lineup independently of combat swaps and applies optional edits next battle", () => {
-    let s = accept(withReserves(), { type: "swap", activeId: "ally-0", reserve: "recruit-pollenmoth" });
-    s = winBattle(s);
-    expect(s.reserves.every((c) => c.health === species(c.species).health)).toBe(true);
-    const snapshot = s.battle;
-    s = accept(s, { type: "setLineup", activeId: "ally-0", reserve: "recruit-emberback" });
-    expect(s.lineup).toEqual(["recruit-emberback", "ally-1", "ally-2"]);
-    expect(s.battle).toEqual(snapshot);
-    expect(decodeSave(encodeSave(s))).toEqual(s);
-    if (s.phase === "recruit") s = accept(s, recruitChoice(s));
-    if (s.phase === "boon") s = accept(s, { type: "skipBoon" });
-    s = accept(s, { type: "beginBattle" });
-    expect(s.team.map((c) => c.id)).toEqual(s.lineup);
-    expect(decodeSave(encodeSave(s))).toEqual(s);
-  });
-  it("rejects duplicate reserve identities, missing lineup members and a sixth creature", () => {
-    const s = withReserves();
-    for (const modify of [
-      (d: typeof s) => {
-        d.reserves[0]!.id = d.team[0]!.id;
-      },
-      (d: typeof s) => {
-        d.lineup = ["mossguard", "mossguard", "prismram"];
-      },
-      (d: typeof s) => {
-        d.roster.push("prismram");
-      },
-      (d: typeof s) => {
-        d.reserves.pop();
-      },
-    ])
-      expect(() => decodeSave(encodeSave(produce(s, modify)))).toThrow();
+    expect(decodeSave(encodeSave(game))).toEqual(game);
   });
 });
 
-it("restores the saved lineup after a tactical swap without retaining card owners from the bench", () => {
-  let s = accept(withReserves(), { type: "swap", activeId: "ally-0", reserve: "recruit-pollenmoth" });
-  s = winBattle(s);
-  if (s.phase === "recruit") s = accept(s, recruitChoice(s));
-  if (s.phase === "boon") s = accept(s, { type: "skipBoon" });
-  expect(s.team.map((c) => c.species)).toEqual(["mossguard", "emberback", "prismram"]);
-  expect(
-    s.cards.every((card) =>
-      s.team.some(
-        (c) =>
-          c.id === card.ownerId &&
-          CARDS.some((def) => def.id === card.definitionId && def.species === c.species),
-      ),
-    ),
-  ).toBe(true);
-  expect(decodeSave(encodeSave(s))).toEqual(s);
-  s = accept(s, { type: "beginBattle" });
-  expect(decodeSave(encodeSave(s))).toEqual(s);
-});
-
-it("rejects current saves with missing live cards or roster members", () => {
-  for (const corrupt of [
-    (s: Record<string, unknown>) => {
-      (s.battle as { draw: string[] }).draw = [];
+it("rejects duplicate identities, invalid lineup members, missing cards and extra roster members", () => {
+  for (const modify of [
+    (d: ReturnType<typeof withReserves>) => {
+      d.reserves[0]!.id = d.team[0]!.id;
     },
-    (s: Record<string, unknown>) => {
-      s.roster = ["mossguard", "emberback"];
+    (d: ReturnType<typeof withReserves>) => {
+      d.lineup = ["missing"];
     },
-  ]) {
-    const current = JSON.parse(encodeSave(withReserves()));
-    corrupt(current);
-    expect(() => decodeSave(JSON.stringify(current))).toThrow();
-  }
+    (d: ReturnType<typeof withReserves>) => {
+      d.roster.push("prismram");
+    },
+    (d: ReturnType<typeof withReserves>) => {
+      d.battle!.draw = [];
+    },
+  ])
+    expect(() => decodeSave(encodeSave(produce(withReserves(), modify)))).toThrow();
 });
-
-it("round-trips a committed defeat receipt with knocked-out reserves", () => {
-  let s = produce(withReserves(), (d) => {
+it("only loses when the entire roster falls and round-trips the defeat receipt", () => {
+  let game = produce(withReserves(), (d) => {
     d.team.forEach((c) => {
       c.health = 1;
-      c.block = 0;
+      combat(c).deathDoorUsed = true;
     });
-    d.reserves.forEach((c) => {
-      c.health = 0;
-    });
+    d.reserves.forEach((c) => (c.health = 0));
   });
-  for (let turn = 0; turn < 100 && s.phase === "battle"; turn++) s = accept(s, { type: "endTurn" });
-  expect(s.phase).toBe("defeat");
-  const restored = decodeSave(encodeSave(s));
-  expect(restored).toEqual(s);
-  expect(restored.reserves.every((c) => c.health === 0)).toBe(true);
+  for (let i = 0; i < 30 && game.phase === "battle"; i++) game = accept(game, { type: "endTurn" });
+  expect(game.phase).toBe("defeat");
+  expect(game.reserves.every((c) => c.health === 0)).toBe(true);
+  expect(decodeSave(encodeSave(game))).toEqual(game);
 });

@@ -90,8 +90,7 @@ export type Command =
   | { type: "draft"; species: SpeciesId }
   | { type: "start" }
   | { type: "beginBattle" }
-  | { type: "setLineup"; activeId: string; reserve: string }
-  | { type: "swap"; activeId: string; reserve: string }
+  | { type: "swap"; activeId: string; reserve: string; autoEndTurn?: boolean }
   | { type: "play"; cardId: string; targetId?: string; autoEndTurn?: boolean }
   | { type: "endTurn" }
   | { type: "devWinBattle" }

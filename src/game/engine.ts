@@ -31,7 +31,7 @@ import {
   leaveCampfire,
   returnHome,
 } from "./journey";
-import { ownedCards, prepareLineup, swapBackup, swapFromCard, formationForSwap } from "./team";
+import { ownedCards, prepareLineup, swapBackup, swapFromCard, pendingReplacement } from "./team";
 import { finishTurn, livingChorus } from "./combat/turns";
 
 export function createGame(seed = 1): GameState {
@@ -127,35 +127,16 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
   }
   if (command.type === "visitCampfire" && !canVisitCampfire(state))
     return reject(state, "There is no available Campfire.");
+  const replacement = pendingReplacement(state);
+  if ((command.type === "play" || command.type === "endTurn") && replacement)
+    return reject(state, "Choose a replacement first.");
   if (
     command.type === "swap" &&
-    (!(
-      state.team.some((c) => c.id === command.activeId) ||
-      (command.activeId === "" &&
-        state.team.length < 3 &&
-        !state.team.some((unit) => species(unit.species).legendary))
-    ) ||
-      !state.reserves.some((c) => c.id === command.reserve && (state.phase !== "battle" || c.health > 0)) ||
-      state.team.some((c) => c.id === command.reserve))
+    (!replacement ||
+      replacement.id !== command.activeId ||
+      !state.reserves.some((unit) => unit.id === command.reserve && unit.health > 0))
   )
-    return reject(state, "Choose an active creature and a backup.");
-  if (
-    command.type === "setLineup" &&
-    (!(
-      [...state.team, ...state.reserves].some(
-        (c) => c.id === command.activeId && state.lineup.includes(c.id),
-      ) ||
-      (command.activeId === "" &&
-        state.lineup.length < 3 &&
-        !state.lineup.some(
-          (id) =>
-            species([...state.team, ...state.reserves].find((unit) => unit.id === id)!.species).legendary,
-        ))
-    ) ||
-      ![...state.team, ...state.reserves].some((c) => c.id === command.reserve) ||
-      state.lineup.includes(command.reserve))
-  )
-    return reject(state, "Choose a starting creature and a backup between battles.");
+    return reject(state, "Choose a living backup for the knocked-out creature.");
   if (
     command.type === "recruit" &&
     (!state.reward?.recruits.includes(command.species) ||
@@ -316,7 +297,13 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         }
         fillHand(draft);
         if (!preview) settle(draft, events);
-        if (!preview && command.autoEndTurn !== false && draft.phase === "battle" && battle.mana === 0)
+        if (
+          !preview &&
+          command.autoEndTurn !== false &&
+          draft.phase === "battle" &&
+          battle.mana === 0 &&
+          !pendingReplacement(draft)
+        )
           finishTurn(draft, events);
         break;
       }
@@ -331,18 +318,15 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         finishTurn(draft, events);
         break;
       }
-      case "setLineup": {
-        draft.lineup = formationForSwap(
-          [...draft.team, ...draft.reserves],
-          draft.lineup,
-          command.activeId,
-          command.reserve,
-        );
-        if (["teamSelection", "campfire", "support"].includes(draft.phase)) prepareLineup(draft);
-        break;
-      }
       case "swap": {
         swapBackup(draft, command.activeId, command.reserve, events);
+        if (
+          draft.phase === "battle" &&
+          command.autoEndTurn !== false &&
+          draft.battle.mana === 0 &&
+          !pendingReplacement(draft)
+        )
+          finishTurn(draft, events);
         break;
       }
       case "recruitDestination":

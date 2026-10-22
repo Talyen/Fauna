@@ -1,3 +1,4 @@
+import { swapFixture } from "../../support/game";
 import { freshCombat } from "../../../src/game/combat/index";
 import { describe, it, expect } from "vitest";
 import { produce } from "immer";
@@ -92,7 +93,7 @@ describe("keyword progression and rewards", () => {
     expect(s.roster).toContain("emberback");
     expect(s.team.map((c) => c.species)).toEqual(["mossguard", "emberback", "prismram"]);
     expect(decodeSave(encodeSave(s))).toEqual(s);
-    s = accept(s, {
+    s = swapFixture(s, {
       type: "swap",
       activeId: "ally-0",
       reserve: s.reserves.find((c) => c.species === "emberback")!.id,
@@ -241,7 +242,7 @@ it("swapping one creature preserves unchanged teammates' legacy cards", () => {
   s = produce(s, (d) => {
     d.cards.find((c) => c.definitionId === "emberback-furnace-breath")!.level = 2;
   });
-  s = accept(s, {
+  s = swapFixture(s, {
     type: "swap",
     activeId: "ally-0",
     reserve: s.reserves.find((c) => c.species === "emberback")!.id,

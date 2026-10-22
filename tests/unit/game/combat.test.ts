@@ -1,3 +1,4 @@
+import { swapFixture } from "../../support/game";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import {
@@ -268,7 +269,7 @@ it("allows Dodge again after the control skip resolves while shared buildup immu
   expect(events.at(-1)!.text).toContain("Dodges");
 });
 
-it("keeps Campfire lineup changes resumable before and after Rest", () => {
+it("keeps a formation changed by a mechanic resumable through Campfire Rest", () => {
   let state = produce(run(), (s) => {
     prepareDestination(s);
     s.encounter = 3;
@@ -279,7 +280,7 @@ it("keeps Campfire lineup changes resumable before and after Rest", () => {
   });
   state = accept(state, { type: "visitCampfire" });
   const outgoing = state.team[0]!.id;
-  state = accept(state, { type: "setLineup", activeId: outgoing, reserve: "reserve-moth" });
+  state = swapFixture(state, { type: "swap", activeId: outgoing, reserve: "reserve-moth" });
   expect(state.team[0]!.id).toBe("reserve-moth");
   expect(state.cards.filter((card) => card.ownerId === "reserve-moth")).toHaveLength(3);
   state = decodeSave(encodeSave(state));

@@ -1,4 +1,5 @@
 import { euphera } from "./creatures/euphera";
+import { tournelle } from "./creatures/tournelle";
 import { memento } from "./creatures/memento";
 import { freeze } from "immer";
 import type { Species, SpeciesId, CardDefinition } from "./types";
@@ -48,6 +49,7 @@ const kits = [
   glintstride,
   memento,
   euphera,
+  tournelle,
 ];
 freeze(kits, true);
 export const SPECIES: readonly Species[] = kits.map((kit) => kit.species);
@@ -75,6 +77,7 @@ export const CARDS: readonly CardDefinition[] = [
   shadebrim,
   memento,
   euphera,
+  tournelle,
 ].flatMap((kit) => kit.cards);
 export function species(id: SpeciesId): Species {
   const result = SPECIES.find((s) => s.id === id);

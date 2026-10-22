@@ -1,3 +1,4 @@
+import { swapFixture } from "../../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, definition, FIRST_RUN_STARTERS, species } from "../../../../src/game/content";
@@ -78,8 +79,8 @@ it.each([1, 2, 3, 4, 5, 6])("grants Shelter once at combat start for %i copies",
     });
     draft.team[0]!.combat!.armor = 1;
   });
-  game = accept(game, { type: "swap", activeId: "ally-0", reserve: "backup" });
-  game = accept(decodeSave(encodeSave(game)), { type: "swap", activeId: "backup", reserve: "ally-0" });
+  game = swapFixture(game, { type: "swap", activeId: "ally-0", reserve: "backup" });
+  game = swapFixture(decodeSave(encodeSave(game)), { type: "swap", activeId: "backup", reserve: "ally-0" });
   expect(game.team[0]!.combat!.armor).toBe(1);
 });
 it.each([0, 1, 7])("doubles Surge Ram only with Armor (%i)", (armor) => {
@@ -178,7 +179,7 @@ it("grants enemy Shelter at base rank and does not grant opening Armor to backup
   expect(game.battle!.enemies[0]!.combat.armor).toBe(2);
   expect(game.reserves[0]!.species).toBe("sternshell");
   expect(game.reserves[0]!.combat!.armor).toBe(0);
-  game = accept(game, { type: "swap", activeId: "backup", reserve: "ally-0" });
+  game = swapFixture(game, { type: "swap", activeId: "backup", reserve: "ally-0" });
   expect(game.team[0]!.combat!.armor).toBe(0);
   expect(decodeSave(encodeSave(game))).toEqual(game);
 });

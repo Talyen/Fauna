@@ -1,3 +1,4 @@
+import { pendingReplacement } from "../../game/team";
 import { ShellOverlays } from "./overlays";
 import { routeInput } from "./input";
 import { useActivationAudio } from "../audio/activation-audio";
@@ -22,7 +23,7 @@ import { JourneyResults } from "../expedition/journey-results";
 import { useCallback, useEffect, useEffectEvent, useLayoutEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
 import { flushSync } from "react-dom";
-import { Menu, ArrowLeftRight, Repeat, Pause, FastForward } from "lucide-react";
+import { Menu, Repeat, Pause, FastForward } from "lucide-react";
 import type { Session } from "../../application/session";
 import { Button } from "../../components/ui/button";
 import { Popover, PopoverAnchor, PopoverContent } from "../../components/ui/popover";
@@ -76,19 +77,15 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
   const active =
     !["victory", "defeat"].includes(game.phase) &&
     (game.team.length > 0 || game.selected.length > 0 || (game.phase === "draft" && draftStarted));
-  const canManageLineup =
-    game.phase === "teamSelection" ||
-    game.phase === "campfire" ||
-    game.phase === "support" ||
-    game.phase === "recruit" ||
-    game.phase === "boon";
   const [pendingUnlocks, setPendingUnlocks] = useState<SpeciesId[]>([]);
   const [reveals, setReveals] = useState<SpeciesId[]>([]);
   useEffect(
     () => observeUnlocks(session, (ids) => setPendingUnlocks((old) => [...new Set([...old, ...ids])])),
     [session],
   );
+  const replacement = pendingReplacement(game);
   const paused =
+    !!replacement ||
     view.overlayActive ||
     view.cloud.blocking ||
     route !== "play" ||
@@ -106,11 +103,10 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
     (command: Command) => {
       setAutoplay(false);
       swapMotion.current?.cancel();
-      const motion =
-        command.type === "swap" || command.type === "setLineup"
-          ? captureSwapMotion(command.activeId, command.reserve)
-          : null;
-      const accepted = session.command(command.type === "play" ? { ...command, autoEndTurn } : command);
+      const motion = command.type === "swap" ? captureSwapMotion(command.activeId, command.reserve) : null;
+      const accepted = session.command(
+        command.type === "play" || command.type === "swap" ? { ...command, autoEndTurn } : command,
+      );
       if (accepted) {
         swapMotion.current = motion;
         motion?.start();
@@ -264,7 +260,6 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
     <MenuActions
       home={home}
       active={active}
-      canManageLineup={canManageLineup}
       hasBoons={game.boons.length > 0}
       talentPoints={talentPoints}
       desktop={desktop}
@@ -279,7 +274,6 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
           setMenu(false);
         }
       }}
-      onLineup={() => openModal("lineup")}
       onBoons={() => openModal("boons")}
       onNavigate={navigate}
       onEndJourney={() => {
@@ -418,24 +412,16 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                     <BattleScreen
                       key={game.encounter}
                       clearSelection={
-                        view.overlayActive || menu || modal !== null || inspection !== null || autoplay
+                        view.overlayActive ||
+                        menu ||
+                        modal !== null ||
+                        inspection !== null ||
+                        autoplay ||
+                        !!replacement
                       }
                       onManualStart={() => setAutoplay(false)}
                       openPile={(pile) => openModal(pile)}
                       openingDraw={view.committedCommand?.type === "beginBattle"}
-                      actions={
-                        <>
-                          <Button
-                            variant="outline"
-                            className="swap-trigger"
-                            disabled={!game.reserves.some((c) => c.health > 0)}
-                            onClick={() => openModal("swap")}
-                          >
-                            <ArrowLeftRight aria-hidden="true" />
-                            Swap
-                          </Button>
-                        </>
-                      }
                       game={game}
                       send={send}
                       controls={gameControls}

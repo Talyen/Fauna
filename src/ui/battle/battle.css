@@ -423,11 +423,6 @@
   stroke-linecap: round;
 }
 
-.swap-trigger svg {
-  width: var(--space-4);
-  height: var(--space-4);
-}
-
 .skip-combat-control {
   right: calc(var(--space-6) + 2 * (var(--control-height) + var(--screen-item-gap)));
 }

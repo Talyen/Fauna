@@ -1,3 +1,4 @@
+import { swapFixture } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, FIRST_RUN_STARTERS } from "../../../src/game/content";
@@ -130,8 +131,14 @@ it("Rousing Refrain protects only living deployed allies and expires at their ne
     draft.battle!.enemies.forEach((enemy) => {
       enemy.power = 0;
     });
+    draft.reserves[0]!.health = 0;
   });
   const result = play(game);
+  const withLivingBackup = produce(game, (draft) => {
+    draft.team[2]!.health = 1;
+    draft.reserves[0]!.health = 20;
+  });
+  expect(play(withLivingBackup).state.reserves[0]).toEqual(withLivingBackup.reserves[0]);
   expect(result.state.team.map((unit) => unit.combat!.temporaryDodge)).toEqual([20, 20, 0]);
   expect(result.state.reserves[0]!.combat!.temporaryDodge).toBe(0);
   expect(result.state.battle!.hand).toHaveLength(1);
@@ -294,8 +301,8 @@ it("swapping Cadenza out and back does not reset the team's second-card cadence"
     draft.team[1]!.health = 5;
   });
   let next = play(game).state;
-  next = accept(next, { type: "swap", activeId: "ally-0", reserve: "backup" });
-  next = accept(next, { type: "swap", activeId: "backup", reserve: "ally-0" });
+  next = swapFixture(next, { type: "swap", activeId: "ally-0", reserve: "backup" });
+  next = swapFixture(next, { type: "swap", activeId: "backup", reserve: "ally-0" });
   expect(next.battle!.cardsPlayedThisTurn).toBe(1);
   const result = play(next);
   expect(result.accepted).toBe(true);

@@ -53,3 +53,7 @@ Replace PORT with the actual port. The script requires a quiet-preview identity,
 ## Memento and battle artwork review
 
 The [Legendary battle](references/memento-battle-1920.png), [full-roster Swap](references/memento-swap-1280.png) and [Minion targeting](references/memento-targeting-1280.png) captures document the initial Memento implementation. Chromium review used fresh saves, reduced motion, 1920×1080 at default text and 1280×720 at 125% text. The Legendary stays centered, six-card hands retain 3:4 contain rendering, and Swap exposes all five roster creatures without headings or pagination. Fitted combatant artwork contracts when dense effects require more room; text and 44px controls retain their sizes. Source and generated artwork remain proposed pending user preference. These captures do not establish CI, native-platform, controller or balance acceptance.
+
+## Tournelle and required replacements
+
+The [Tournelle creature reference](../../Docs/content/creatures/tournelle.md#rendered-review) links focused Collection, battle, rank and knockout-replacement captures. These document implementation of the user's selected kit and unchanged Drive artwork, including removal of voluntary Swap and Lineup controls. The [evidence record](references/tournelle-evidence.json) records viewport/input coverage and limits; technical review does not establish balance or platform acceptance

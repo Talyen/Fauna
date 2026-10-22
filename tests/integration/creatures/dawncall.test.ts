@@ -1,3 +1,4 @@
+import { swapFixture } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, species } from "../../../src/game/content";
@@ -117,8 +118,14 @@ it("Cleanses one category per living deployed ally before drawing and leaves Ear
     draft.team[2]!.health = 0;
     draft.reserves.push({ ...draft.team[1]!, id: "backup", combat: { ...freshCombat(), burn: 2 } });
     draft.roster.push("mossguard");
+    draft.reserves[0]!.health = 0;
   });
   const result = play(game);
+  const withLivingBackup = produce(game, (draft) => {
+    draft.team[2]!.health = 1;
+    draft.reserves[0]!.health = 32;
+  });
+  expect(play(withLivingBackup).state.reserves[0]).toEqual(withLivingBackup.reserves[0]);
   expect(result.state.team.map((ally) => ally.combat!.burn)).toEqual([0, 0, 2]);
   expect(result.state.team.map((ally) => ally.combat!.poison)).toEqual([3, 3, 3]);
   expect(result.state.reserves[0]!.combat!.burn).toBe(2);
@@ -141,10 +148,16 @@ it("Morning Bloom heals all living deployed allies by two without reviving or he
     draft.team[2]!.health = 0;
     draft.reserves.push({ ...draft.team[1]!, id: "backup", health: 10, combat: freshCombat() });
     draft.roster.push("mossguard");
+    draft.reserves[0]!.health = 0;
   });
   const result = play(game);
+  const withLivingBackup = produce(game, (draft) => {
+    draft.team[2]!.health = 1;
+    draft.reserves[0]!.health = 10;
+  });
+  expect(play(withLivingBackup).state.reserves[0]).toEqual(withLivingBackup.reserves[0]);
   expect(result.state.team.map((ally) => ally.health)).toEqual([22, 32, 0]);
-  expect(result.state.reserves[0]!.health).toBe(10);
+  expect(result.state.reserves[0]!.health).toBe(0);
   expect(result.state.team[0]!.combat!.firstAttackUsed).toBe(false);
 });
 
@@ -153,12 +166,12 @@ it("retains the opening receipt through swaps and resume, resets in backup and a
     draft.reserves.push({ ...draft.team[1]!, id: "backup", combat: freshCombat() });
     draft.roster.push("mossguard");
   });
-  game = accept(game, { type: "swap", activeId: "ally-0", reserve: "backup" });
+  game = swapFixture(game, { type: "swap", activeId: "ally-0", reserve: "backup" });
   game = decodeSave(encodeSave(game));
   expect(game.reserves[0]!.combat!.firstAttackUsed).toBe(true);
   game = accept(game, { type: "endTurn" });
   expect(game.reserves[0]!.combat!.firstAttackUsed).toBe(false);
-  game = accept(game, { type: "swap", activeId: "backup", reserve: "ally-0" });
+  game = swapFixture(game, { type: "swap", activeId: "backup", reserve: "ally-0" });
   const result = play(rehand(game, "dawncall-attack"));
   expect(attacks(result.events).every((event) => event.critical)).toBe(true);
   game = produce(result.state, (draft) => {

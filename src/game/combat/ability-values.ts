@@ -23,6 +23,8 @@ export function primaryAbilityValue(card: CardDefinition, value: number, power =
     case "dodge":
     case "teamBlind":
     case "mana":
+    case "teamClearBlind":
+    case "swapLowest":
     case "teamThaw":
     case "teamPurge":
     case "teamCleanse":
@@ -50,6 +52,7 @@ export function abilityExtras(card: CardDefinition, power = 1) {
         case "nullifyFreeze":
         case "cleanse":
         case "reflect":
+        case "drawKeyword":
         case "draw":
         case "mana":
         case "purge":

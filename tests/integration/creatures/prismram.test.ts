@@ -1,3 +1,4 @@
+import { swapFixture } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, definition, species, type DamageType } from "../../../src/game/content";
@@ -238,12 +239,12 @@ it("refreshes one Ward, preserves it through swaps and turn changes, and resets 
       enemy.combat.controlTurns = 2;
     });
   });
-  game = accept(game, { type: "swap", activeId: "ally-0", reserve: "reserve" });
+  game = swapFixture(game, { type: "swap", activeId: "ally-0", reserve: "reserve" });
   expect(game.reserves.find((unit) => unit.id === "ally-0")!.combat!.reflect).toBe(true);
   game = accept(game, { type: "endTurn" });
   expect(game.reserves.find((unit) => unit.id === "ally-0")!.combat!.reflect).toBe(true);
   expect(decodeSave(encodeSave(game))).toEqual(game);
-  game = accept(game, { type: "swap", activeId: "reserve", reserve: "ally-0" });
+  game = swapFixture(game, { type: "swap", activeId: "reserve", reserve: "ally-0" });
   game = produce(game, (draft) => {
     prepareDestination(draft);
   });

@@ -38,9 +38,7 @@ export async function expectBattleGeometry(page: Page, width: number, height: nu
   ).toBe(18);
   const mana = (await page.getByRole("button", { name: /^Mana / }).boundingBox())!;
   const end = (await page.getByRole("button", { name: /^End turn/ }).boundingBox())!;
-  const swap = (await page.getByRole("button", { name: "Swap", exact: true }).boundingBox())!;
-  expect(swap.y + swap.height).toBeLessThan(end.y);
-  expect(Math.abs(swap.x - end.x)).toBeLessThan(1);
+  await expect(page.getByRole("button", { name: "Swap", exact: true })).toHaveCount(0);
   const draw = (await page.locator('.app:not([inert]) [data-pile="draw"]').boundingBox())!;
   const discard = (await page.locator('.app:not([inert]) [data-pile="discard"]').boundingBox())!;
   expect(mana.y + mana.height).toBeLessThan(draw.y);

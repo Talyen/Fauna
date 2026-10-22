@@ -1,3 +1,4 @@
+import { pendingReplacement } from "../../game/team";
 import type { Session } from "../../application/session";
 import type { GameState } from "../../game/types";
 import type { SpeciesId } from "../../game/content";
@@ -55,6 +56,7 @@ export function routeInput(action: InputAction, context: ShellInputContext) {
   if (inspection && inspectionControls.current?.(action)) return;
   if (route === "collection" && collectionControls.current?.(action)) return;
   if (action === "back") {
+    if (route === "play" && pendingReplacement(game) && !inspection && !modal && !menu) return;
     if (inspection) {
       setInspection(null);
       return;
@@ -92,8 +94,8 @@ export function routeInput(action: InputAction, context: ShellInputContext) {
     !inspection &&
     route !== "collection" &&
     !(route === "play" && game.phase === "battle") &&
-    (!menu || modal === "lineup") &&
-    (!modal || ["deck", "draw", "discard", "swap", "lineup"].includes(modal))
+    !menu &&
+    (!modal || ["deck", "draw", "discard"].includes(modal))
   ) {
     const focused = document.activeElement as HTMLElement | null;
     const card = game.cards.find(

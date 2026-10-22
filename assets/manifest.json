@@ -1824,6 +1824,50 @@
       "aspect": [3, 4],
       "provenance": "Unchanged Euphera_Ability-Utility-02_PossiblePath.png selected from user Google Drive: https://drive.google.com/file/d/1ZNbjN4OuSIBPIUdSMJSnPquXgXqVoRc5/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "creature.tournelle",
+      "origin": "repository",
+      "source": "public/art/tournelle/portrait.png",
+      "output": "art/tournelle/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged user-selected Tournelle artwork from Google Drive: https://drive.google.com/file/d/1TZfYsjvKSQeO5i_LHOT0bqyR7kx-gYem/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.tournelle.kindled-courage",
+      "origin": "repository",
+      "source": "public/art/tournelle/kindled-courage.png",
+      "output": "art/tournelle/kindled-courage.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged user-selected Tournelle artwork from Google Drive: https://drive.google.com/file/d/1gBMp0kBwlpyKgJnv_Tt32d-EcFfSoLbj/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.tournelle.valiant-challenge",
+      "origin": "repository",
+      "source": "public/art/tournelle/valiant-challenge.png",
+      "output": "art/tournelle/valiant-challenge.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged user-selected Tournelle artwork from Google Drive: https://drive.google.com/file/d/1ze5eKOdpZriAseUceIEWBJ-NDPilbgFw/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.tournelle.safe-passage",
+      "origin": "repository",
+      "source": "public/art/tournelle/safe-passage.png",
+      "output": "art/tournelle/safe-passage.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged user-selected Tournelle artwork from Google Drive: https://drive.google.com/file/d/1khPQmksWYiHy3GrLK0v3NB1uFPxIf4s9/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

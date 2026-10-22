@@ -70,7 +70,10 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
     }
     for (const tier of entry.passiveTiers)
       for (const effect of tier?.effects ?? []) {
-        if ((effect.kind === "wellRead" || effect.kind === "goodFortune") && effect.amount > 100)
+        if (
+          (effect.kind === "wellRead" || effect.kind === "goodFortune" || effect.kind === "gallantry") &&
+          effect.amount > 100
+        )
           error(entry.id, "passiveTiers", "Passive chance cannot exceed 100 percent");
         if (
           effect.kind === "bounce" &&
@@ -112,6 +115,7 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
           "damage",
           "status",
           "draw",
+          "drawKeyword",
           "mana",
           "cleanse",
           "purge",
@@ -123,6 +127,8 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
         ].includes(effect.kind)
       )
         error(card.id, "effects", "Unknown supplemental effect.");
+      if (effect.kind === "drawKeyword" && !["light", "nature", "water"].includes(effect.keyword))
+        error(card.id, "effects", "Unknown draw keyword.");
       if (effect.kind === "damage" && !DAMAGE_TYPES.includes(effect.damageType))
         error(card.id, "effects", "Unknown supplemental damage type.");
       if (effect.kind === "status" && !["armor", "thorns", "dodge"].includes(effect.status))

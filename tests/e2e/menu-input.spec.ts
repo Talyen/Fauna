@@ -115,16 +115,7 @@ test("minimum-size enlarged menus fit every action without scrolling", async ({ 
     .locator("button:not(.dialog-close)")
     .evaluateAll((buttons) => buttons.map((button) => button.getBoundingClientRect().height));
   expect(heights.every((height) => height >= 44)).toBe(true);
-  for (const name of [
-    "Lineup",
-    "Talents",
-    "Collection",
-    "Boons",
-    "Glossary",
-    "Settings",
-    "End journey",
-    "Main menu",
-  ]) {
+  for (const name of ["Talents", "Collection", "Boons", "Glossary", "Settings", "End journey", "Main menu"]) {
     await page.keyboard.press("s");
     const choice = page.getByRole("button", { name, exact: true });
     await expect(choice).toBeFocused();

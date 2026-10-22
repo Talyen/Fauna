@@ -22,9 +22,6 @@ function ready(kinds: SpeciesId[] = ["captoad"], cardId = "captoad-swap") {
 }
 function withBackup() {
   return produce(ready(["captoad", "emberback", "prismram"]), (game) => {
-    game.team.slice(1).forEach((unit) => {
-      unit.health = 0;
-    });
     game.roster.push("mossguard");
     game.reserves.push({
       id: "backup",
@@ -143,8 +140,11 @@ it("removes the outgoing kit from hand and piles before drawing the incoming kit
     const guard = draft.cards.find((card) => card.definitionId === "captoad-guard")!.id;
     const puff = draft.cards.find((card) => card.definitionId === "captoad-attack")!.id;
     draft.battle!.hand.push(guard);
-    draft.battle!.discard.push(puff);
-    draft.battle!.draw = draft.battle!.draw.filter((id) => id !== guard && id !== puff);
+    draft.battle!.discard = [
+      puff,
+      ...draft.cards.filter((card) => card.ownerId !== "ally-0").map((card) => card.id),
+    ];
+    draft.battle!.draw = [];
   });
   const result = play(game);
   expect(result.accepted).toBe(true);
@@ -154,15 +154,20 @@ it("removes the outgoing kit from hand and piles before drawing the incoming kit
       actor!.combat!.cardsPlayedThisTurn = 1;
     }),
   );
-  expect(result.state.lineup).toEqual(game.lineup);
+  expect(result.state.lineup).toEqual(result.state.team.map((unit) => unit.id));
   expect(
     result.state.cards
       .filter((card) => card.ownerId === "backup")
       .every((card) => card.ownerId === "backup" && definition(card.definitionId).species === "mossguard"),
   ).toBe(true);
   expect(result.state.battle!.hand).toHaveLength(2);
-  expect(result.state.battle!.draw).toHaveLength(7);
-  expect(result.state.battle!.discard).toEqual([]);
+  expect(result.state.battle!.draw).toHaveLength(1);
+  expect(result.state.battle!.discard).toHaveLength(6);
+  expect(
+    result.state.battle!.hand.every(
+      (id) => result.state.cards.find((card) => card.id === id)!.ownerId === "backup",
+    ),
+  ).toBe(true);
   expect(result.state.battle!.buffer).toEqual([]);
   expect(result.state.battle!.enemies.every((enemy) => enemy.targetId !== "ally-0")).toBe(true);
   expect(result.state.battle!.mana).toBe(3);
@@ -233,7 +238,7 @@ it("swaps positions with a living ally when no living backup exists, or just dra
   expect(result.team.map((unit) => unit.id)).toEqual(["ally-1", "ally-0"]);
   expect(result.cards).toEqual(game.cards);
   expect(result.battle!.hand).toHaveLength(2);
-  expect(result.lineup).toEqual(game.lineup);
+  expect(result.lineup).toEqual(result.team.map((unit) => unit.id));
   expect(decodeSave(encodeSave(result))).toEqual(result);
   const alone = ready();
   const solo = play(alone).state;

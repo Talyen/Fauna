@@ -1,3 +1,4 @@
+import { pendingReplacement } from "../game/team";
 import { battlefield } from "../game/battlefield";
 import { hasTalent } from "../game/progression";
 import { controlled, hasHarmfulEffects, mostInjured } from "../game/combat/index";
@@ -5,23 +6,24 @@ import { actionValue, cardCost, physicalBonus } from "../game/ability-rules";
 import { definition, species } from "../game/content";
 import type { Command, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 22;
+export const BATTLE_POLICY_VERSION = 23;
 /** Only visible information enters scoring; no forecasts or gameplay RNG are sampled. */
 export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
   if (state.phase !== "battle") return [];
   const order = <T extends { id: string }>(items: T[]) => [...items].sort((a, b) => a.id.localeCompare(b.id));
-  const outgoing = order(state.team).find((c) => c.health === 0 || controlled(c));
-  const incoming = order(state.reserves).find((c) => c.health > 0 && !controlled(c));
-  // A replacement is actionable; it cannot itself be selected as the next recovery swap.
-  if (outgoing && incoming) return [{ type: "swap", activeId: outgoing.id, reserve: incoming.id }];
-  if (
-    !outgoing &&
-    incoming &&
-    state.team.length < 3 &&
-    !state.team.some((unit) => species(unit.species).legendary) &&
-    !species(incoming.species).legendary
-  )
-    return [{ type: "swap", activeId: "", reserve: incoming.id }];
+  const outgoing = pendingReplacement(state);
+  const incoming = order(state.reserves)
+    .filter((c) => c.health > 0)
+    .sort((a, b) => Number(controlled(a)) - Number(controlled(b)))[0];
+  if (outgoing && incoming)
+    return [
+      {
+        type: "swap",
+        activeId: outgoing.id,
+        reserve: incoming.id,
+        ...(autoEndTurn ? {} : { autoEndTurn: false }),
+      },
+    ];
   const options: { command: Command; score: number; key: string }[] = [];
   const add = (cardId: string, score: number, targetId?: string) => {
     if (score > 0)
@@ -52,7 +54,8 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
       const score = (enemy: (typeof enemies)[number]) => {
         const physical = def.damageType === "physical" || def.damageType === "stun";
         // Rank ordinary landed hits; do not roll Dodge or Critical outcomes.
-        const effective = Math.max(0, value - enemy.block - (physical ? enemy.combat.armor : 0));
+        const damage = value * (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1);
+        const effective = Math.max(0, damage - enemy.block - (physical ? enemy.combat.armor : 0));
         return (effective >= enemy.health ? 2000 : 1000) + Math.min(value, enemy.health);
       };
       if (def.target === "allEnemies")
@@ -111,6 +114,8 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
         }
     } else if (def.effect === "mana") {
       add(id, 400 + Math.min(value, state.battle.maxMana - state.battle.mana + cardCost(card, state)));
+    } else if (def.effect === "teamClearBlind") {
+      add(id, 200 + state.team.filter((unit) => unit.health > 0 && unit.combat?.blind).length * 100);
     } else if (def.effect === "teamThaw") {
       const useful = state.team.filter((unit) => unit.health > 0 && (unit.combat?.freeze ?? 0) > 0).length;
       add(id, 200 + useful * 100);
@@ -171,7 +176,7 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
       add(id, 100 + value);
     } else if (def.effect === "dodge") {
       add(id, 150 + Math.max(0, value - (actor.combat?.temporaryDodge ?? 0)));
-    } else if (def.effect === "swap") {
+    } else if (def.effect === "swap" || def.effect === "swapLowest") {
       add(id, 150);
     } else {
       for (const ally of def.target === "self" ? [actor] : state.team.filter((c) => c.health > 0)) {

@@ -1,3 +1,4 @@
+import { swapFixture } from "../../support/game";
 import { expect, it } from "vitest";
 import {
   freshCombat,
@@ -71,7 +72,7 @@ it("doubles only the first allied direct Burn hit across swaps, previews and res
     roster: [...resumed.roster, reserve.species],
   };
   expect(
-    accept(swappable, { type: "swap", activeId: swappable.team[1]!.id, reserve: reserve.id }).battle!
+    swapFixture(swappable, { type: "swap", activeId: swappable.team[1]!.id, reserve: reserve.id }).battle!
       .meteoriteUsed,
   ).toBe(true);
   const won = winBattle(played);

@@ -8,6 +8,7 @@ export type DamagePacket =
       origin: "ability";
       delivery?: "bounce";
       blindMiss?: boolean;
+      interceptionChecked?: true;
       criticalBonus?: number;
     })
   | (AttackValues & { origin: "proc" | "resonance"; delivery?: "bounce" })

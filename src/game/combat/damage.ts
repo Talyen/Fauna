@@ -1,3 +1,4 @@
+import { interceptAttack } from "./interception";
 import { chance as succeeds } from "../chance";
 import { isEnemy, battlefield } from "../battlefield";
 import { packetPolicy, type DamagePacket, type AttackPacket } from "./policy";
@@ -87,6 +88,14 @@ export function* hit(
   events: GameEvent[],
   options: DamagePacket = { origin: "ability" },
 ): Resolution<number | undefined> {
+  if (
+    value > 0 &&
+    options.origin === "ability" &&
+    !options.delivery &&
+    !options.interceptionChecked &&
+    !options.blindMiss
+  )
+    target = interceptAttack(state, source, target, events);
   const policy = packetPolicy(options);
   const wrongFoot =
     target.combat?.blind && policy.wrongFoot

@@ -1,16 +1,14 @@
-import { Swords, Users, Sparkles, PawPrint, Gift, BookOpen, Settings2, LogOut, House } from "lucide-react";
+import { Swords, Sparkles, PawPrint, Gift, BookOpen, Settings2, LogOut, House } from "lucide-react";
 import { Button } from "../../components/ui/button";
 export type MenuPage = "talents" | "collection" | "settings" | "glossary";
 interface MenuActionsProps {
   home: boolean;
   active: boolean;
-  canManageLineup: boolean;
   hasBoons: boolean;
   talentPoints: number;
   desktop: boolean;
   closing: boolean;
   onContinue: () => void;
-  onLineup: () => void;
   onBoons: () => void;
   onNavigate: (page: MenuPage) => void;
   onEndJourney: () => void;
@@ -20,13 +18,11 @@ interface MenuActionsProps {
 export function MenuActions({
   home,
   active,
-  canManageLineup,
   hasBoons,
   talentPoints,
   desktop,
   closing,
   onContinue,
-  onLineup,
   onBoons,
   onNavigate,
   onEndJourney,
@@ -39,12 +35,6 @@ export function MenuActions({
         <Swords aria-hidden="true" />
         {home && !active ? "Play" : "Continue"}
       </Button>
-      {canManageLineup ? (
-        <Button variant="ghost" onClick={onLineup}>
-          <Users aria-hidden="true" className="menu-icon-lineup" />
-          Lineup
-        </Button>
-      ) : null}
       <Button
         variant="ghost"
         aria-label="Talents"

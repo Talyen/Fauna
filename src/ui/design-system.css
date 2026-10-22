@@ -397,10 +397,6 @@ h3 {
     scale: 1.08;
   }
 }
-.swap-roster .selected {
-  translate: 0 -4px;
-  transition: translate var(--motion-fast);
-}
 .empty-reserve {
   display: flex;
   align-items: center;
@@ -412,11 +408,6 @@ h3 {
 .empty-reserve svg {
   width: var(--empty-icon-size);
   height: var(--empty-icon-size);
-}
-@media (prefers-reduced-motion: reduce) {
-  .swap-roster .selected {
-    translate: none;
-  }
 }
 .hand-motion-owner {
   display: contents;

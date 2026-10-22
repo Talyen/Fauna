@@ -36,11 +36,8 @@ export async function step(
       await activate(replacement);
     }
   } else if (c.type === "swap") {
-    await activate(page.getByRole("button", { name: "Swap", exact: true }));
-    const dialog = page.getByRole("dialog");
-    if (c.activeId) await activate(dialog.locator(`[data-actor-id="${c.activeId}"] .creature-card`));
+    const dialog = page.getByRole("dialog", { name: "Choose a replacement" });
     await activate(dialog.locator(`[data-actor-id="${c.reserve}"] .creature-card`));
-    if (!c.activeId) await activate(dialog.getByRole("button", { name: "Deploy selected" }));
   } else if (c.type === "chooseBoon") {
     await expect(page.getByRole("button", { name: /^Recruit / })).toHaveCount(0);
     await activate(

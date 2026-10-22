@@ -1,3 +1,4 @@
+import { swapFixture } from "../../support/game";
 import { freshCombat } from "../../../src/game/combat/index";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
@@ -96,7 +97,7 @@ describe("hidden hand overflow", () => {
         .map((card) => card.id);
       d.battle!.discard = [];
     });
-    const next = accept(s, { type: "swap", activeId: "ally-1", reserve: "recruit-pollenmoth" });
+    const next = swapFixture(s, { type: "swap", activeId: "ally-1", reserve: "recruit-pollenmoth" });
     expect(next.battle!.buffer).toEqual(s.battle!.buffer);
     expect(next.cards.find((card) => card.id === next.battle!.buffer[0])!.ownerId).toBe("recruit-pollenmoth");
     expect(decodeSave(encodeSave(next))).toEqual(next);

@@ -1,3 +1,4 @@
+import { swapFixture } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, definition, FIRST_RUN_STARTERS, species } from "../../../src/game/content";
@@ -243,8 +244,14 @@ it.each([true, false])(
       draft.reserves.push({ ...draft.team[1]!, id: "backup", combat: freshCombat() });
       draft.roster.push("mossguard");
       if (!block) for (const unit of draft.team) unit.block = 10;
+      draft.reserves[0]!.health = 0;
     });
     const result = play(game);
+    const withLivingBackup = produce(game, (draft) => {
+      draft.team[2]!.health = 1;
+      draft.reserves[0]!.health = 32;
+    });
+    expect(play(withLivingBackup).state.reserves[0]).toEqual(withLivingBackup.reserves[0]);
     expect(result.state.team.map((unit) => (block ? unit.block : unit.combat!.thorns))).toEqual([2, 2, 0]);
     expect(result.state.reserves[0]!.block).toBe(0);
     expect(result.state.reserves[0]!.combat!.thorns).toBe(0);
@@ -276,9 +283,9 @@ it("rejects invalid or unaffordable plays without spending RNG and retains the s
     draft.reserves.push({ ...draft.team[1]!, id: "backup", combat: freshCombat() });
     draft.roster.push("mossguard");
   });
-  swapped = accept(swapped, { type: "swap", activeId: "ally-0", reserve: "backup" });
+  swapped = swapFixture(swapped, { type: "swap", activeId: "ally-0", reserve: "backup" });
   swapped = decodeSave(encodeSave(swapped));
-  swapped = accept(swapped, { type: "swap", activeId: "backup", reserve: "ally-0" });
+  swapped = swapFixture(swapped, { type: "swap", activeId: "backup", reserve: "ally-0" });
   expect(swapped.rng).toBe(game.rng);
   const resumed = decodeSave(encodeSave(swapped));
   expect(play(resumed, "enemy-0")).toEqual(play(swapped, "enemy-0"));

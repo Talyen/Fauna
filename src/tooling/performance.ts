@@ -66,6 +66,8 @@ export function performanceCases(seed = 42) {
     return encodeSave(decodeSave(encodeSave(result.state)));
   };
   const played = step(started.state, attack);
+  const knockedOut = structuredClone(started.state);
+  knockedOut.team[0]!.health = 0;
   return [
     {
       id: "battle",
@@ -82,13 +84,13 @@ export function performanceCases(seed = 42) {
     },
     {
       id: "swap",
-      initial,
+      initial: encodeSave(decodeSave(encodeSave(knockedOut))),
       fixture: "explicit-three-deployed-one-reserve-v1",
       actions: [
         {
           kind: "swap",
           command: { type: "swap", activeId: "ally-0", reserve: "reserve-0" },
-          checkpoint: step(started.state, { type: "swap", activeId: "ally-0", reserve: "reserve-0" }),
+          checkpoint: step(knockedOut, { type: "swap", activeId: "ally-0", reserve: "reserve-0" }),
         },
       ],
     },

@@ -1,5 +1,5 @@
 import { canVisitCampfire } from "../../src/game/destinations";
-import { ownedCards } from "../../src/game/team";
+import { ownedCards, swapBackup } from "../../src/game/team";
 import { freshCombat, combat } from "../../src/game/combat/index";
 import { controlled } from "../../src/game/combat/index";
 import { produce } from "immer";
@@ -50,6 +50,10 @@ export function accept(s: GameState, c: Command) {
   if (!result.accepted) throw new Error(result.reason);
   return result.state;
 }
+/** Set up formation/lifetime scenarios without admitting a free player command. */
+export function swapFixture(s: GameState, command: Extract<Command, { type: "swap" }>) {
+  return produce(s, (draft) => swapBackup(draft, command.activeId, command.reserve, []));
+}
 export function victoryReady(s = run()) {
   return produce(s, (d) => {
     d.battle!.enemies.forEach((e, i) => {
@@ -94,7 +98,7 @@ export function policy(s: GameState): Command {
   if (s.phase === "campfire") return { type: "rest" };
   const b = s.battle!;
   const fallen = s.team.find((c) => c.health <= 0);
-  const backup = s.reserves.find((c) => c.health > 0 && !controlled(c));
+  const backup = s.reserves.find((c) => c.health > 0);
   if (fallen && backup) return { type: "swap", activeId: fallen.id, reserve: backup.id };
   // A Physical/Stun-only lineup must focus Armor builders before they outgrow its damage
   const armorBound = s.cards.every((card) => {

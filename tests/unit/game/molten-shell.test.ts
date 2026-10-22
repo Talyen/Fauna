@@ -1,3 +1,4 @@
+import { swapFixture } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { combat, freshCombat, hit, removeEffects, tickStatuses } from "../../../src/game/combat/index";
@@ -110,7 +111,7 @@ it("does not activate Molten Shell when periodic damage breaks Armor after swapp
     combat(draft.team[0]!).armor = 1;
     combat(draft.team[0]!).burn = 1;
   });
-  const swapped = accept(game, { type: "swap", activeId: "ally-0", reserve: "backup-moss" });
+  const swapped = swapFixture(game, { type: "swap", activeId: "ally-0", reserve: "backup-moss" });
   const events: GameEvent[] = [];
   const next = produce(swapped, (draft) => tickStatuses(draft, draft.reserves[0]!, events));
   expect(next.reserves[0]!.health).toBe(swapped.reserves[0]!.health - 1);

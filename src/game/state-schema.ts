@@ -140,7 +140,7 @@ const shared = z.object({
   roster: z.array(speciesId).max(5),
   team: z.array(creature).max(3),
   reserves: z.array(creature).max(4),
-  /** Creature IDs in starting order, independent of tactical combat swaps. */
+  /** Saved deployment order, updated by knockout replacements and game mechanics. */
   lineup: z.array(id).max(3),
   cards: z
     .array(

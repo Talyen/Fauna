@@ -5,38 +5,22 @@ import { produce } from "immer";
 import { winBattle } from "../support/game";
 import { seed, state, resume } from "./support/session";
 
-test("recruitment adds a reserve, selection swaps its kit, and remembers active choices", async ({
-  page,
-}) => {
+test("recruitment adds a backup without exposing free lineup changes", async ({ page }) => {
   await seed(page, winBattle());
   await resume(page);
   await page.getByRole("button", { name: "Recruit Emberback", exact: true }).click();
-  expect((await state(page)).roster).toHaveLength(4);
-  expect((await state(page)).phase).toBe("teamSelection");
-  await expect(page.getByRole("button", { name: "Mossguard, starting", exact: true })).toHaveCount(0);
+  const recruited = await state(page);
+  expect(recruited.roster).toHaveLength(4);
+  expect(recruited.reserves[0]!.species).toBe("emberback");
+  expect(recruited.team[0]!.species).toBe("mossguard");
   await page.getByRole("button", { name: "Open menu" }).click();
-  await page.getByRole("button", { name: "Lineup", exact: true }).click();
-  const active = page.getByRole("button", { name: "Mossguard, starting", exact: true }),
-    reserve = page.getByRole("button", { name: "Emberback, backup", exact: true });
-  await reserve.focus();
-  await page.keyboard.press("i");
-  await expect(page.getByRole("dialog", { name: "Emberback", exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Lineup", exact: true })).toHaveCount(0);
   await page.keyboard.press("Escape");
-  await expect(reserve).toBeFocused();
-  await active.focus();
-  await page.keyboard.press("Enter");
-  await page.keyboard.press("s");
-  await expect(reserve).toBeFocused();
-  await page.keyboard.press("Enter");
-  await expect(page.getByRole("button", { name: "Lineup", exact: true })).toBeFocused();
-  await page.keyboard.press("Escape");
-  const s = await state(page);
-  expect(s.team.find((c) => c.id === s.lineup[0])!.species).toBe("emberback");
-  expect(s.cards.some((c) => c.definitionId.startsWith("mossguard"))).toBe(false);
   await page.reload();
   await resume(page);
+  expect(await state(page)).toEqual(recruited);
   await page.locator(".app:not([inert]) [data-encounter]").click();
-  expect((await state(page)).team[0]!.species).toBe("emberback");
+  expect((await state(page)).team[0]!.species).toBe("mossguard");
 });
 
 test("recruitment at five requires replacement and updates a released starter's lineup entry", async ({

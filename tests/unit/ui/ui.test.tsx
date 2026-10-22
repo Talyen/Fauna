@@ -296,7 +296,11 @@ describe("player interface", () => {
         else expect(tooltip).not.toMatch(/\d+ block/);
         if (input === "hover") await user.unhover(creature);
       }
-      await user.click(screen.getByRole("button", { name: "Swap" }));
+      const fallen = produce(game, (draft) => {
+        draft.team[2]!.health = 0;
+      });
+      act(() => session.store.setState({ game: fallen }));
+      expect(screen.queryByRole("button", { name: "Swap", exact: true })).toBeNull();
       const reserve = screen.getByRole("button", { name: "Mossguard, backup" });
       if (input === "hover") await user.hover(reserve);
       else {
@@ -306,7 +310,7 @@ describe("player interface", () => {
       const reserveTooltip = (await screen.findByRole("tooltip")).textContent!;
       expect(reserveTooltip).toContain("2 block");
       expect(reserveTooltip).not.toMatch(/\d+\/\d+ health/i);
-      expect(session.store.getState().game).toEqual(game);
+      expect(session.store.getState().game).toEqual(fallen);
       await session.dispose();
     },
   );

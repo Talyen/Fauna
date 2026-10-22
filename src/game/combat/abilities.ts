@@ -1,3 +1,4 @@
+import { interceptAttack } from "./interception";
 import { battlefield } from "../battlefield";
 import { summonEcho, createPearls, drawBossCards } from "./legendary";
 import { definition, species, type CardDefinition } from "../content";
@@ -25,7 +26,7 @@ import {
 } from "./index";
 import { chance as succeeds } from "../chance";
 import { roll } from "../random";
-import { fillHand, MAX_HAND_SIZE, draw, redrawHand } from "../card-zones";
+import { fillHand, MAX_HAND_SIZE, draw, drawKeyword, redrawHand } from "../card-zones";
 import type { Creature, Enemy, GameState, GameEvent, BattleState } from "../types";
 
 type AbilityAction = {
@@ -35,7 +36,7 @@ type AbilityAction = {
   allyTargetId?: string;
 } & ({ side: "player"; actor: Creature } | { side: "enemy"; actor: Enemy });
 interface AbilityOperations {
-  swap: (state: GameState, actor: Combatant, events: GameEvent[]) => void;
+  swap: (state: GameState, actor: Combatant, events: GameEvent[], backupOnly?: boolean) => void;
 }
 const actorPower = (action: AbilityAction) => (action.side === "enemy" ? action.actor.power : 1);
 const friendlyRow = (state: GameState, action: AbilityAction): Combatant[] => battlefield(state, action.side);
@@ -132,6 +133,7 @@ function applyExtras(
         if (target)
           hit(state, actor, target, effect.amount, effect.damageType, events, {
             origin: "ability",
+            interceptionChecked: true,
             blindMiss,
             criticalBonus,
             leech: effect.leech,
@@ -200,6 +202,9 @@ function applyExtras(
         break;
       case "heal":
         restoreHealth(actor, effect.amount, events, false, state, true, actor);
+        break;
+      case "drawKeyword":
+        if (!enemy) for (let i = 0; i < effect.amount; i++) drawKeyword(state, effect.keyword, events);
         break;
       case "draw":
         if (!enemy) draw(state, effect.amount, events);
@@ -292,6 +297,7 @@ export function executeAbility(
         actorId: actor.id,
         text: `${name} repeats ${def.name}${flourishRepeat ? " with Kindling Flourish" : encoreRepeat ? " with Encore" : ""}`,
       });
+    let attackTarget = target;
     const criticalBonus = def.effect === "attack" ? openingCriticalBonus(state, actor) : 0;
     const blindMiss = def.effect === "attack" ? beginAttack(state, actor, events) : false;
     const kind = def.effect;
@@ -317,8 +323,10 @@ export function executeAbility(
             : target && target.health > 0
               ? [target]
               : [];
-        for (const recipient of targets) {
+        for (const intended of targets) {
           if (actor.health <= 0) break;
+          const recipient = blindMiss ? intended : interceptAttack(state, actor, intended, events);
+          if (def.target !== "allEnemies") attackTarget = recipient;
           if (def.purgeThorns) {
             const stats = combat(recipient);
             for (const status of ["thorns", "waterThorns"] as const) {
@@ -337,13 +345,22 @@ export function executeAbility(
                 });
             }
           }
-          hit(state, actor, recipient, value, damageType, events, {
-            origin: "ability",
-            blindMiss,
-            criticalBonus,
-            leech: def.leech,
-            cardLeech: keywords.includes("leech"),
-          });
+          hit(
+            state,
+            actor,
+            recipient,
+            value * (def.doubleAgainstHealthier && recipient.health > actor.health ? 2 : 1),
+            damageType,
+            events,
+            {
+              origin: "ability",
+              interceptionChecked: true,
+              blindMiss,
+              criticalBonus,
+              leech: def.leech,
+              cardLeech: keywords.includes("leech"),
+            },
+          );
         }
         if (action.side === "player") action.actor.attacked = true;
         break;
@@ -421,6 +438,17 @@ export function executeAbility(
       case "dodge":
         grantTemporaryDodge(actor, value, events);
         break;
+      case "teamClearBlind":
+        for (const unit of alive(friendlyRow(state, action)))
+          if (combat(unit).blind) removeEffects(unit, "cleanse", 1, events, state, "blind");
+        break;
+      case "swapLowest": {
+        const outgoing = alive(action.side === "player" ? state.team : state.battle.enemies).sort(
+          (a, b) => a.health - b.health,
+        )[0];
+        if (outgoing) operations.swap(state, outgoing, events, true);
+        break;
+      }
       case "teamThaw":
         for (const unit of alive(friendlyRow(state, action)))
           removeControlBuildup(state, unit, "freeze", events);
@@ -452,6 +480,6 @@ export function executeAbility(
         throw new Error(`Unhandled ability effect: ${unhandled}`);
       }
     }
-    applyExtras(state, action, events, { target, blindMiss, criticalBonus });
+    applyExtras(state, action, events, { target: attackTarget, blindMiss, criticalBonus });
   }
 }

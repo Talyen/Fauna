@@ -8,17 +8,16 @@ These are the agreed directions from the design review. They supersede the proto
 - Later journeys draft three starters from collected species: choose one of three offers, three times. Each choice commits immediately and prepares the next saved offer; Begin journey becomes available after all three choices. Species may repeat across rounds. Pools smaller than three repeat species within the offer, so an early loss never prevents a new journey. With three or more collected species, each offer contains three distinct species.
 - Clicking starter artwork opens inspection with a Choose action. Browsing, canceling and reloading preserve the current offers and earlier picks. After drafting, the chosen team remains inspectable before Begin journey.
 - A journey roster grows to five creatures: up to three ordinary creatures deployed, or one Legendary with up to four backup. Multiple copies of a species are allowed. The drafted team supplies the remembered starting lineup. On the first journey, recruits fill its second and third slots before joining backup. The encounter screen offers one Combat or Boss placeholder ArtCard that starts battle directly. Deck remains available without requiring team selection.
-- Lineup is an optional menu dialog between battles, including ordinary reward screens. Changes save immediately. Combat swaps do not overwrite this starting lineup.
+- Formation changes only through knockout replacement, abilities and explicit game mechanics; there is no free Swap control or manual lineup editor. The changed formation persists into later battles.
 - Only deployed living creatures act and provide passive traits. Enemy intents remain hidden.
-- During your turn, Swap opens a centered dialog with deployed creatures and all backup at the shared artwork size. Backup are hidden on the battlefield.
-- Select either creature first, then one from the opposite group to commit immediately. Swaps are free and unlimited; no Mana, draw, shuffle, turn advancement, or confirmation.
-- A free manual swap replaces the outgoing owner's three cards in their existing hand, overflow, draw, and discard positions. Spent cards stay spent. Card upgrades do not transfer to incoming creatures.
-- Swap cards choose a random living backup, remove the departing kit from all zones, and shuffle the incoming kit into the draw pile before any draw effect. Without living backup they swap positions with a random living ally; alone the swap part does nothing. See [Captoad](content/creatures/captoad.md).
+- After the current action or turn resolves, a knocked-out deployed creature prompts a choice of living backup. Resolve knockouts in deployed order before another card or End turn; repeat while living backup remain. The choice is derived from saved roster state and resumes after reload.
+- Replacements retain the outgoing owner's card slots in hand, overflow, draw and discard. Spent cards stay spent; replacements cost no Mana, grant no extra draws, and do not transfer card upgrades. Players cannot use replacement to rotate healthy or controlled creatures.
+- Swap cards choose a random living backup, remove the departing kit from all zones, and shuffle the incoming kit into the draw pile before any draw effect. Without living backup they swap positions with a random living ally; alone the swap part does nothing. See [Captoad](content/creatures/captoad.md). [Tournelle](content/creatures/tournelle.md) instead swaps the lowest current-Health ally with a random living backup and draws one card; without backup it only draws.
 - Creature identity, health, Block, and first-attack state stay with the creature. Normal turn expiration applies in backup; swapping never heals, cleanses, or repeats opening bonuses.
 - Living backup can replace knocked-out deployed creatures. Fallen creatures remain unavailable for the battle.
-- If the deployed row falls, remaining enemy attacks stop and the next player turn begins with restored Mana. Healthy backup can still enter through Swap. Defeat requires the whole roster to fall.
+- If the deployed row falls, remaining enemy attacks stop and the next player turn begins with restored Mana. A required replacement choice brings in living backup. Defeat requires the whole roster to fall.
 - Knocked-out card slots remain inert in saved battle zones and are skipped by ordinary draws. When the entire deployed row falls, the next hand reserves slots for incoming creatures so recovery does not require a free extra draw. These slots never render as playable cards for knocked-out owners.
-- Victory preserves roster Health and knockouts. The next battle deploys the saved starting lineup; combat effects reset.
+- Victory preserves roster Health and knockouts. The next battle deploys the saved current formation; combat effects reset.
 - Recruitment at five requires choosing one creature to release. Replacing a starting creature updates that individual’s lineup entry.
 
 ## Encounters
@@ -93,11 +92,11 @@ See [UI design system](UI.md) for composition and interaction rules.
 
 ## Turn and combat foundation
 
-Each turn normally restores four shared Mana and draws four cards, with explicit talent and Boon modifiers. The hand holds six cards; FIFO overflow persists across turns. Block halves rather than clearing. Creatures share Alchemy's core packet, status and crowd-control rules through the [keyword contract](KEYWORDS.md), with no elemental reactions. Their individual effects persist while in backup and cannot be refreshed by free swaps. Enemy actions use a non-repeating species repertoire without showing the next ability. Draw and discard piles are inspectable without revealing draw order or changing gameplay.
+Each turn normally restores four shared Mana and draws four cards, with explicit talent and Boon modifiers. The hand holds six cards; FIFO overflow persists across turns. Block halves rather than clearing. Creatures share Alchemy's core packet, status and crowd-control rules through the [keyword contract](KEYWORDS.md), with no elemental reactions. Their individual effects persist while in backup and cannot be refreshed by swaps. Enemy actions use a non-repeating species repertoire without showing the next ability. Draw and discard piles are inspectable without revealing draw order or changing gameplay.
 
 ## Combat assistance
 
-Auto-end turn is enabled by default and advances only when Mana reaches zero. Its Settings switch persists separately from progression; disabling it allows free swaps before manually ending the turn. Victory and defeat settle immediately in either mode.
+Auto-end turn is enabled by default and advances only when Mana reaches zero. Its Settings switch persists separately from progression; disabling it leaves End turn under player control. Victory and defeat settle immediately in either mode.
 
 Auto-play is explicitly enabled for one battle. It uses visible information to choose legal recovery swaps, healing, finishing attacks, other attacks and useful defenses, then ends turns when no useful play remains. Actions occur no faster than every 700 ms. Menus, inspection, focus loss and hidden pages pause it; manual play stops it. Rewards, encounters, recruitment and talents always remain player choices. It stops on completion, home navigation and shutdown; save retries remain independent of combat assistance.
 
@@ -113,7 +112,7 @@ The Boon Merchant offers up to three distinct unowned Boons at independently rol
 
 ## Legendaries and Minions
 
-Legendaries appear as enemies only in Boss encounters and remain ordinary recruitable roster individuals. The five-creature roster accepts any combination of Legendaries and ordinary creatures. A Legendary starter fills the starting lineup alone. Deploying one returns every deployed creature to backup; replacing it with an ordinary creature leaves two vacant positions that can be filled through Swap. Starting lineup changes obey the same rule independently of combat swaps.
+Legendaries appear as enemies only in Boss encounters and remain ordinary recruitable roster individuals. The five-creature roster accepts any combination of Legendaries and ordinary creatures. A Legendary starter fills the starting lineup alone. Deploying one returns every deployed creature to backup; replacing it with an ordinary creature leaves two vacant positions; later recruits may fill them under the ordinary recruitment rules. No manual formation editing is available.
 
 Each deployed Legendary supplies two copies of each of its three abilities. Formation changes preserve existing spent zone positions, remove surplus slots, and shuffle additional slots into Draw without granting cards to hand. Generated cards disappear when their owner leaves the field.
 

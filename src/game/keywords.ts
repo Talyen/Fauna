@@ -205,6 +205,8 @@ export const EFFECT_KEYWORDS = freeze(
     teamCleanse: ["health"],
     teamPurge: ["light"],
     teamThaw: ["health"],
+    teamClearBlind: ["health"],
+    swapLowest: [],
     teamDodge: ["dodge"],
     recover: [],
     mana: ["mana"],

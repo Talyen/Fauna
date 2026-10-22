@@ -1,3 +1,4 @@
+import { swapFixture } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, FIRST_RUN_STARTERS, species } from "../../../src/game/content";
@@ -103,8 +104,14 @@ it("Thaw Path clears only allied Freeze buildup, rewards actual removal and draw
     draft.team[1]!.combat!.skipped = true;
     draft.team[2]!.health = 0;
     draft.battle!.enemies[0]!.combat.freeze = 2;
+    draft.reserves[0]!.health = 0;
   });
   const result = play(game);
+  const withLivingBackup = produce(game, (draft) => {
+    draft.team[2]!.health = 1;
+    draft.reserves[0]!.health = 12;
+  });
+  expect(play(withLivingBackup).state.reserves[0]).toEqual(withLivingBackup.reserves[0]);
   expect(result.accepted).toBe(true);
   expect(result.state.team[0]!.combat).toMatchObject({
     freeze: 0,
@@ -139,10 +146,16 @@ it("Water Remembers heals living deployed allies including self and draws once e
     draft.team[0]!.health -= 3;
     draft.team[1]!.health -= 3;
     draft.team[2]!.health = 0;
+    draft.reserves[0]!.health = 0;
   });
   const result = play(game);
+  const withLivingBackup = produce(game, (draft) => {
+    draft.team[2]!.health = 1;
+    draft.reserves[0]!.health = 20;
+  });
+  expect(play(withLivingBackup).state.reserves[0]).toEqual(withLivingBackup.reserves[0]);
   expect(result.state.team.map((unit) => unit.health)).toEqual([24, species("mossguard").health - 2, 0]);
-  expect(result.state.reserves[0]!.health).toBe(20);
+  expect(result.state.reserves[0]!.health).toBe(0);
   expect(result.state.battle!.hand).toHaveLength(1);
   expect(result.state.battleXP.health).toBe(1);
   expect(play(ready("water-remembers")).state.battle!.hand).toHaveLength(1);
@@ -239,7 +252,7 @@ it("updates First Thaw immediately across swaps and current-format resume", () =
     draft.discovery.recruited.stillara = 6;
     addBackup(draft);
   });
-  game = accept(game, { type: "swap", activeId: "ally-0", reserve: "backup" });
+  game = swapFixture(game, { type: "swap", activeId: "ally-0", reserve: "backup" });
   game = decodeSave(encodeSave(game));
   produce(game, (draft) => {
     const target = draft.team[1]!;
@@ -247,7 +260,7 @@ it("updates First Thaw immediately across swaps and current-format resume", () =
     hit(draft, draft.battle!.enemies[0]!, target, 10, "freeze", [], { origin: "proc" as const });
     expect(target.health).toBe(before - 10);
   });
-  game = accept(game, { type: "swap", activeId: "backup", reserve: "ally-0" });
+  game = swapFixture(game, { type: "swap", activeId: "backup", reserve: "ally-0" });
   game = decodeSave(encodeSave(game));
   produce(game, (draft) => {
     const target = draft.team[1]!;

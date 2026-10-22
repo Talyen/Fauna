@@ -23,9 +23,11 @@ export type SpeciesId =
   | "sternshell"
   | "neradora"
   | "memento"
-  | "euphera";
+  | "euphera"
+  | "tournelle";
 export type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
+  | { kind: "gallantry"; amount: number }
   | { kind: "goodFortune"; amount: number }
   | { kind: "courtRemembers"; amount: number }
   | { kind: "wellRead"; amount: number }
@@ -65,6 +67,7 @@ export interface Species {
   passiveTiers: readonly [PassiveTier, PassiveTier, PassiveTier, PassiveTier, PassiveTier, PassiveTier];
 }
 type CardEffect =
+  | { kind: "drawKeyword"; keyword: "light" | "nature" | "water"; amount: number }
   | { kind: "nullifyFreeze"; amount: number }
   | { kind: "damage"; damageType: DamageType; amount: number; leech?: boolean }
   | { kind: "status"; status: "armor" | "thorns" | "dodge"; amount: number }
@@ -89,6 +92,7 @@ export type CardDefinition = CardBase &
         damageType: DamageType;
         alternateDamageType?: DamageType;
         doubleWithArmor?: boolean;
+        doubleAgainstHealthier?: true;
         purgeThorns?: true;
         target?: "allEnemies" | "randomEnemy";
       }

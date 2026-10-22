@@ -104,6 +104,7 @@ export function* removeEffects(
   count: number,
   events: GameEvent[],
   state?: GameState,
+  onlyStatus?: (typeof harmfulStatuses)[number],
 ): Resolution<void> {
   const stats = combat(unit);
   let depletion: ArmorDepletion | null = null;
@@ -111,7 +112,9 @@ export function* removeEffects(
   const removedStatuses: NonNullable<GameEvent["affectedStatus"]>[] = [];
   const statuses =
     kind === "cleanse"
-      ? harmfulStatuses
+      ? onlyStatus
+        ? [onlyStatus]
+        : harmfulStatuses
       : ([
           "armor",
           "thorns",
@@ -127,7 +130,12 @@ export function* removeEffects(
     removedStatuses.push("block");
     count--;
   }
-  if (kind === "cleanse" && stats.controlled && count > 0) {
+  if (
+    kind === "cleanse" &&
+    stats.controlled &&
+    count > 0 &&
+    (!onlyStatus || onlyStatus === stats.controlled)
+  ) {
     removedStatuses.push(stats.controlled);
     stats.controlled = null;
     stats.controlTurns = 0;

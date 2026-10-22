@@ -45,7 +45,6 @@ export function BattleScreen({
   controller,
   navigateFocus,
   onDenied,
-  actions,
   clearSelection = false,
   onManualStart,
   openPile,
@@ -58,7 +57,6 @@ export function BattleScreen({
   controller: boolean;
   navigateFocus: boolean;
   onDenied: (element: HTMLElement) => void;
-  actions?: ReactNode;
   onManualStart?: () => void;
   clearSelection?: boolean;
   openPile?: (pile: "draw" | "discard") => void;
@@ -421,7 +419,6 @@ export function BattleScreen({
           </section>
           <div className="battle-dock">
             <div className="battle-actions">
-              {actions}
               <Button className="end-turn" onClick={() => play({ type: "endTurn" })}>
                 End turn{controller ? " · Y" : ""}
               </Button>

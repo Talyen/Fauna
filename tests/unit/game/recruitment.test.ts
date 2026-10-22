@@ -1,3 +1,4 @@
+import { swapFixture } from "../../support/game";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { dispatch } from "../../../src/game/engine";
@@ -45,7 +46,7 @@ describe("recruiting creature copies", () => {
     let s = accept(winBattle(run()), { type: "recruit", species: "emberback" });
     const copy = s.reserves[0]!;
     expect(copy.id).not.toBe("ally-1");
-    s = accept(s, { type: "setLineup", activeId: "ally-1", reserve: copy.id });
+    s = swapFixture(s, { type: "swap", activeId: "ally-1", reserve: copy.id });
     expect(s.lineup[1]).toBe(copy.id);
     s = accept(decodeSave(encodeSave(s)), { type: "beginBattle" });
     s = produce(s, (d) => {
@@ -54,7 +55,7 @@ describe("recruiting creature copies", () => {
       d.reserves[0]!.health = 17;
     });
     const zones = [s.battle!.hand, s.battle!.draw, s.battle!.discard];
-    s = accept(s, { type: "swap", activeId: copy.id, reserve: "ally-1" });
+    s = swapFixture(s, { type: "swap", activeId: copy.id, reserve: "ally-1" });
     expect(s.team[1]!.id).toBe("ally-1");
     expect(s.team[1]!.health).toBe(17);
     expect(s.reserves[0]!.health).toBe(9);
@@ -62,7 +63,7 @@ describe("recruiting creature copies", () => {
     expect(s.cards.filter((c) => c.ownerId === "ally-1")).toHaveLength(3);
     expect(s.cards.some((c) => c.ownerId === copy.id)).toBe(false);
     expect([s.battle!.hand, s.battle!.draw, s.battle!.discard]).toEqual(zones);
-    expect(s.lineup[1]).toBe(copy.id);
+    expect(s.lineup[1]).toBe("ally-1");
     expect(decodeSave(encodeSave(s))).toEqual(s);
   });
 

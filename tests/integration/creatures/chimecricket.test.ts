@@ -1,3 +1,4 @@
+import { swapFixture } from "../../support/game";
 import { cardText } from "../../../src/game/card-rules";
 import { expect, it } from "vitest";
 import { produce } from "immer";
@@ -139,8 +140,14 @@ it("refreshes one Nullify on living deployed allies and exposes visible status f
     draft.team[2]!.health = 0;
     draft.reserves.push({ ...draft.team[1]!, id: "backup", combat: freshCombat() });
     draft.roster.push("mossguard");
+    draft.reserves[0]!.health = 0;
   });
   const result = play(game);
+  const withLivingBackup = produce(game, (draft) => {
+    draft.team[2]!.health = 1;
+    draft.reserves[0]!.health = 32;
+  });
+  expect(play(withLivingBackup).state.reserves[0]).toEqual(withLivingBackup.reserves[0]);
   expect(result.state.team.map((unit) => unit.combat!.nullify)).toEqual([true, true, false]);
   expect(result.state.reserves[0]!.combat!.nullify).toBe(false);
   expect(result.state.team.map((unit) => unit.block)).toEqual([0, 0, 0]);
@@ -217,11 +224,11 @@ it("retains Nullify and spent Encore through swapping and resume, and resets the
     draft.roster.push(backup.species);
   });
   game = play(game).state;
-  game = accept(game, { type: "swap", activeId: "ally-0", reserve: "backup" });
+  game = swapFixture(game, { type: "swap", activeId: "ally-0", reserve: "backup" });
   game = decodeSave(encodeSave(game));
   expect(game.reserves[0]!.combat!.nullify).toBe(true);
   expect(game.reserves[0]!.combat!.encoreUsed).toBe(true);
-  game = accept(game, { type: "swap", activeId: "backup", reserve: "ally-0" });
+  game = swapFixture(game, { type: "swap", activeId: "backup", reserve: "ally-0" });
   expect(game.team[0]!.combat!.encoreUsed).toBe(true);
   game = produce(game, (draft) => {
     prepareDestination(draft);

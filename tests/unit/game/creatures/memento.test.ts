@@ -1,3 +1,4 @@
+import { swapFixture } from "../../../support/game";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { accept, run, teamRun, prepareDestination } from "../../../support/game";
@@ -113,7 +114,7 @@ describe("Memento and Legendary formations", () => {
       draft.battle!.discard = cards.slice(5);
       draft.battle!.buffer = [];
     });
-    let state = accept(initial, {
+    let state = swapFixture(initial, {
       type: "swap",
       activeId: initial.team[0]!.id,
       reserve: "legend",
@@ -123,10 +124,14 @@ describe("Memento and Legendary formations", () => {
     expect(state.cards).toHaveLength(6);
     expect(state.battle.hand).toHaveLength(2);
     state = play(state, "procession").state as BattleState;
-    state = accept(state, { type: "swap", activeId: "legend", reserve: initial.team[1]!.id }) as BattleState;
+    state = swapFixture(state, {
+      type: "swap",
+      activeId: "legend",
+      reserve: initial.team[1]!.id,
+    }) as BattleState;
     expect(battlefield(state, "player").some((unit) => "minion" in unit)).toBe(false);
     expect(state.cards.every((card) => !card.temporary && card.ownerId === state.team[0]!.id)).toBe(true);
-    state = accept(state, { type: "swap", activeId: "", reserve: initial.team[0]!.id }) as BattleState;
+    state = swapFixture(state, { type: "swap", activeId: "", reserve: initial.team[0]!.id }) as BattleState;
     expect(state.team).toHaveLength(2);
     expect(new Set(state.cards.map((card) => card.id)).size).toBe(state.cards.length);
     expect(decodeSave(encodeSave(state))).toEqual(state);
@@ -151,7 +156,7 @@ describe("Memento and Legendary formations", () => {
       draft.battle!.discard = [];
     });
     expect(decodeSave(encodeSave(initial))).toEqual(initial);
-    const next = accept(initial, { type: "swap", activeId: initial.team[0]!.id, reserve: "legend" });
+    const next = swapFixture(initial, { type: "swap", activeId: initial.team[0]!.id, reserve: "legend" });
     expect(next.battle!.hand).toHaveLength(6);
     expect(next.battle!.buffer).toEqual([]);
     expect(decodeSave(encodeSave(next))).toEqual(next);
@@ -257,7 +262,7 @@ describe("Memento and Legendary formations", () => {
         draft.roster.push("memento");
       }
     });
-    const next = accept(initial, { type: "swap", activeId: initial.team[0]!.id, reserve: "reserve-3" });
+    const next = swapFixture(initial, { type: "swap", activeId: initial.team[0]!.id, reserve: "reserve-3" });
     expect(next.team).toHaveLength(1);
     expect(next.reserves).toHaveLength(4);
     expect(next.cards).toHaveLength(6);

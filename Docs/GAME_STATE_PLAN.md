@@ -57,7 +57,7 @@ Do not introduce an event bus, asynchronous gameplay queue, state-machine librar
 
 Build a transition table from the actual command handlers, including allowed commands, required data, resulting phase and RNG use. Include global commands such as talent purchases and resets, development-only commands, and every legal return path. Record preview as a separate execution mode: it deliberately skips settlement and automatic turn completion and must never become a persisted lifecycle variant.
 
-Strengthen existing focused suites rather than duplicate the full expedition matrix. Capture representative seeded command sequences covering starter completion, combat, recruitment with and without replacement, Boon choice, Campfire, Merchant purchase and departure, victory, defeat and voluntary return. Include duplicate-species rosters and changes to starting lineup during reward choice. Compare complete states, RNG and ordered events across refactor steps while the old shape exists.
+Strengthen existing focused suites rather than duplicate the full expedition matrix. Capture representative seeded command sequences covering starter completion, combat, recruitment with and without replacement, Boon choice, Campfire, Merchant purchase and departure, victory, defeat and voluntary return. Include duplicate-species rosters and required knockout replacement and formation changes through abilities. Compare complete states, RNG and ordered events across refactor steps while the old shape exists.
 
 Exit: the transition table has no unclassified command, and the representative corpus records current acceptance, rejection and progression behavior. Separately demonstrate any actual defect before changing expectations.
 

@@ -13,10 +13,6 @@
   justify-content: center;
   gap: var(--space-3);
 }
-.swap-reserves {
-  width: 100%;
-  margin: auto;
-}
 
 .swap-direction {
   width: var(--space-6);

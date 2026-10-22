@@ -111,13 +111,8 @@ export async function action(page, step) {
   } else if (step.kind === "endTurn")
     await page.getByRole("button", { name: "End turn", exact: true }).click();
   else if (step.kind === "swap") {
-    await page.getByRole("button", { name: "Swap", exact: true }).click();
     await page
-      .getByRole("dialog", { name: "Swap", exact: true })
-      .locator(`[data-actor-id=${JSON.stringify(step.command.activeId)}] .creature-card`)
-      .click();
-    await page
-      .getByRole("dialog", { name: "Swap", exact: true })
+      .getByRole("dialog", { name: "Choose a replacement", exact: true })
       .locator(`[data-actor-id=${JSON.stringify(step.command.reserve)}] .creature-card`)
       .click();
   } else throw new Error(`Unknown performance action: ${step.kind}`);

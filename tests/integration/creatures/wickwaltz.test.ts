@@ -1,3 +1,4 @@
+import { swapFixture } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, FIRST_RUN_STARTERS } from "../../../src/game/content";
@@ -148,11 +149,11 @@ it("does not count teammate plays or rejected commands and retains the count acr
   const rejected = play(game, "wickwaltz-guard");
   expect(rejected.accepted).toBe(false);
   expect(rejected.state).toBe(game);
-  game = accept(game, { type: "swap", activeId: "ally-0", reserve: "backup" });
+  game = swapFixture(game, { type: "swap", activeId: "ally-0", reserve: "backup" });
   game = decodeSave(encodeSave(game));
   expect(game.reserves[0]!.combat!.cardsPlayedThisTurn).toBe(1);
   expect(game.reserves[0]!.combat!.nullifyFreeze).toBe(true);
-  game = accept(game, { type: "swap", activeId: "backup", reserve: "ally-0" });
+  game = swapFixture(game, { type: "swap", activeId: "backup", reserve: "ally-0" });
   const result = play(game, "wickwaltz-draw");
   expect(repeats(result.events)).toHaveLength(1);
   expect(repeats(play(decodeSave(encodeSave(result.state)), "wickwaltz-attack").events)).toHaveLength(0);

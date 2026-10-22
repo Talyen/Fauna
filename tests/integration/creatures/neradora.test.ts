@@ -1,3 +1,4 @@
+import { swapFixture } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, FIRST_RUN_STARTERS, species } from "../../../src/game/content";
@@ -185,10 +186,16 @@ it("heals all living deployed allies, caps at maximum and excludes backup and kn
     draft.team[1]!.health -= 1;
     draft.team[2]!.health = 0;
     draft.reserves.push({ ...draft.team[2]!, id: "backup", health: 1, combat: freshCombat() });
+    draft.reserves[0]!.health = 0;
   });
   const result = play(game, "bloom-shelter");
+  const withLivingBackup = produce(game, (draft) => {
+    draft.team[2]!.health = 1;
+    draft.reserves[0]!.health = 1;
+  });
+  expect(play(withLivingBackup, "bloom-shelter").state.reserves[0]).toEqual(withLivingBackup.reserves[0]);
   expect(result.state.team.map((unit) => unit.health)).toEqual([25, species("mossguard").health, 0]);
-  expect(result.state.reserves[0]!.health).toBe(1);
+  expect(result.state.reserves[0]!.health).toBe(0);
   expect(result.state.battleXP.health).toBe(1);
 });
 
@@ -295,10 +302,10 @@ it("retains Water Thorns through rejected commands and swaps without resetting t
   expect(rejected.accepted).toBe(false);
   expect(rejected.state).toBe(game);
   expect(rejected.state.rng).toBe(game.rng);
-  let swapped = accept(game, { type: "swap", activeId: "ally-0", reserve: "backup" });
+  let swapped = swapFixture(game, { type: "swap", activeId: "ally-0", reserve: "backup" });
   swapped = decodeSave(encodeSave(swapped));
   expect(swapped.reserves[0]!.combat!.waterThorns).toBe(3);
-  swapped = accept(swapped, { type: "swap", activeId: "backup", reserve: "ally-0" });
+  swapped = swapFixture(swapped, { type: "swap", activeId: "backup", reserve: "ally-0" });
   expect(swapped.team[0]!.combat!.waterThorns).toBe(3);
   expect(swapped.battle!.turn).toBe(1);
 });

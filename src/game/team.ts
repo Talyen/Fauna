@@ -41,7 +41,7 @@ export function rebuildCards(state: GameState) {
     state.battle.draw = state.cards.map((c) => c.id);
   }
 }
-export function formationForSwap(
+function formationForSwap(
   all: import("./types").Creature[],
   active: string[],
   outgoing: string,
@@ -104,7 +104,13 @@ function setFormation(state: GameState, ids: string[], events: GameEvent[] = [],
   }
   events.push({ kind: "action", actionType: "swap", actorId: ids[0], text: "Your formation changes" });
 }
-/** Manual swaps retain zone slots; swap cards return the incoming kit to the draw pile. */
+/** Knockout replacement is derived from the committed roster, including after resume. */
+export function pendingReplacement(state: GameState) {
+  return state.phase === "battle" && state.reserves.some((unit) => unit.health > 0)
+    ? state.team.find((unit) => unit.health <= 0)
+    : undefined;
+}
+/** Knockout replacements retain slots; abilities shuffle the incoming kit into the draw pile. */
 export function swapBackup(
   state: GameState,
   activeId: string,
@@ -128,7 +134,7 @@ export function swapBackup(
       events,
       fromCard,
     );
-    if (state.phase !== "battle") state.lineup = state.team.map((unit) => unit.id);
+    state.lineup = state.team.map((unit) => unit.id);
     return;
   }
   state.team[index] = incoming;
@@ -152,7 +158,7 @@ export function swapBackup(
     }
   }
   if (state.battle) recycleDiscard(state);
-  if (state.phase !== "battle") state.lineup = state.team.map((unit) => unit.id);
+  state.lineup = state.team.map((unit) => unit.id);
   events.push({
     kind: "action",
     actionType: "swap",
@@ -164,6 +170,7 @@ export function swapFromCard(
   state: GameState,
   actor: import("./combat/index").Combatant,
   events: GameEvent[],
+  backupOnly = false,
 ) {
   const allied = !("maxHealth" in actor);
   const backup = allied ? state.reserves.filter((unit) => unit.health > 0) : [];
@@ -172,6 +179,7 @@ export function swapFromCard(
     swapBackup(state, actor.id, incoming.id, events, true);
     return;
   }
+  if (backupOnly) return;
   const row = allied ? state.team : state.battle!.enemies;
   const others = row.filter((unit) => unit.id !== actor.id && unit.health > 0);
   if (!others.length) return;
@@ -179,6 +187,7 @@ export function swapFromCard(
   const from = row.findIndex((unit) => unit.id === actor.id);
   const to = row.findIndex((unit) => unit.id === other.id);
   [row[from], row[to]] = [row[to]!, row[from]!];
+  if (allied) state.lineup = state.team.map((unit) => unit.id);
   events.push({
     kind: "action",
     actionType: "swap",

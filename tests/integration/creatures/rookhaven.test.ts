@@ -1,3 +1,4 @@
+import { swapFixture } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, FIRST_RUN_STARTERS, definition, species } from "../../../src/game/content";
@@ -432,8 +433,7 @@ it("keeps the battle card limit and a saveable hand when deploying into a copy-f
     draft.battle!.discard = [];
   });
   roundTrip(game);
-  const result = dispatch(game, { type: "swap", activeId: "", reserve: "backup" });
-  expect(result.accepted).toBe(true);
+  const result = { state: swapFixture(game, { type: "swap", activeId: "", reserve: "backup" }) };
   expect(result.state.cards).toHaveLength(MAX_BATTLE_CARDS);
   expect(result.state.cards.filter((card) => card.ownerId === "backup")).toHaveLength(3);
   expect(result.state.cards.filter((card) => card.temporary)).toEqual(

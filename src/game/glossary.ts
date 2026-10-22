@@ -95,17 +95,17 @@ export const GLOSSARY = [
   {
     term: "Backup",
     definition:
-      "Recruit up to five creatures: up to three ordinary creatures or one Legendary deployed; Only deployed, living creatures provide passives; Swap freely during your turn through Swap; choose one deployed creature and one living backup in either order; Their cards replace one another in their existing hand, draw, and discard positions; Health and effects persist, and free swaps grant no extra draws or opening bonuses",
+      "Recruit up to five creatures: up to three ordinary creatures or one Legendary deployed; Only deployed living creatures provide passives; After a knockout, choose a living backup before continuing; Replacements preserve card slots and grant no extra draws or opening bonuses; Other swaps require abilities or game effects",
   },
   {
     term: "Swap cards",
     definition:
-      "Swap with a random living backup; Remove the departing creature's cards from hand and all piles, then shuffle the incoming kit into the draw pile before any draws; With no living backup, swap positions with a random living ally; Alone, only the swap part does nothing; Health and effects persist",
+      "Swap with a random living backup; Remove the departing creature's cards from hand and all piles, then shuffle the incoming kit into the draw pile before any draws; With no living backup, swap positions with a random living ally; Alone, only the swap part does nothing; Safe Passage instead swaps the lowest Health ally and needs a living backup; Health and effects persist",
   },
   {
     term: "Starting lineup",
     definition:
-      "Your original draft supplies the starting lineup; Edit Lineup from the menu between battles if desired; Combat swaps do not change this saved lineup; New recruits join backup; Selecting Combat or Boss deploys your saved lineup without asking you to choose again",
+      "Your draft supplies the initial formation; Knockout replacements and ability swaps update it for later battles; Recruits fill vacant ordinary positions before joining backup; Formation cannot be edited manually",
   },
   {
     term: "Boons",

@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "manifestHash": "54a1a5bfa352450fcd80dc7ae6ca8b796ddb155917448f5b76438cdf8076bcaf",
-  "generation": "3091f7eff7a06ebff4dd09fa632016e1cd1473bb385a3df2e0c7e8388b3c19e2",
+  "manifestHash": "b5a052863bc80e3106384c32908b403a9366398cf3c7f5dcabd773c49db0ea6d",
+  "generation": "28f7191945df2fa05c2c48e01caac8743c14e240d63eaf0f6a7cdde47d53cc07",
   "records": {
     "keyword.block": {
       "url": "./prepared/objects/735558c0801082a6bfbeabec58de75ff3b1ad59643b686fac19e7a169691902e/asset.webp",
@@ -2082,6 +2082,58 @@
       "outputHash": "6669e83cb9655396eebec96e757657c9ba104ef802c34140ef8265aa8b966082",
       "sourceBytes": 2266918,
       "outputBytes": 935752,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "creature.tournelle": {
+      "url": "./prepared/objects/473be55bd9d09d77986dd620aec8ff7ec328c83a669c6eb6276d02ed587444ee/asset.webp",
+      "sourceHash": "0d1785b1272133d053fdf7a64ca326bf92d720e4dc46882e6ac7d00f2a17c1ae",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "0f4e57db7cb0a6011258f81a59fa4a4b281ce9b95a77b3edebeacf7a2af16252",
+      "sourceBytes": 2205388,
+      "outputBytes": 811026,
+      "width": 960,
+      "height": 720,
+      "alpha": false
+    },
+    "action.tournelle.kindled-courage": {
+      "url": "./prepared/objects/4b53f3f20df9605a937623d759a1dc7447d100d82d23c1562c50e74ecfbc9246/asset.webp",
+      "sourceHash": "a2bfbebef7273454db20798ca829333896ec3779e9c6fd20279c58a4ca72d4a3",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "73f96ea73c107b617fb1f9a6ee21c84ebf8b974d3fe8e78fbf8d243c61433435",
+      "sourceBytes": 2237342,
+      "outputBytes": 829810,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "action.tournelle.valiant-challenge": {
+      "url": "./prepared/objects/6af81e002610988dd42440f071aace921f5ddd96a75aaca345a8ee19e58e89a5/asset.webp",
+      "sourceHash": "6ac6bdb4d4ef4a1ea8883a8d6a07448f138596212f15d5733f8db660eac3a0bc",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "952698012d9f02409032a76402b855349f2a2768158b41f09163e63551cfeffe",
+      "sourceBytes": 2298562,
+      "outputBytes": 864686,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "action.tournelle.safe-passage": {
+      "url": "./prepared/objects/9759851c94aaa18f76f2ed8c2bf092f4e7163fc657a9dbf445c4570b429057f4/asset.webp",
+      "sourceHash": "a419427090e47ad31c26cbd169af23682a6ef9c5ad95467ad3d45aea0d36495f",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "f30e07143895afb105115ca7fbdf636a869e9dc1ca2d33766f4ff54cbe5f1ea8",
+      "sourceBytes": 2328367,
+      "outputBytes": 902818,
       "width": 720,
       "height": 960,
       "alpha": false

@@ -1,3 +1,4 @@
+import { swapFixture } from "../../support/game";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../../src/game/engine";
@@ -96,6 +97,7 @@ describe("game commands", () => {
       d.battle!.hand = [attack.id];
       d.battle!.draw = d.cards.filter((c) => c.id !== attack.id).map((c) => c.id);
       d.battle!.enemies[0]!.health = 18;
+      d.rng = 42;
     });
     const r = dispatch(s, { type: "play", cardId: attack.id, targetId: "enemy-0" });
     expect(r.accepted).toBe(true);
@@ -183,7 +185,7 @@ describe("game commands", () => {
     s = accept(s, { type: "recruit", species: "emberback" });
     expect(s.roster).toHaveLength(4);
     expect(s.team[0]!.species).toBe("mossguard");
-    s = accept(s, { type: "swap", activeId: "ally-0", reserve: s.reserves[0]!.id });
+    s = swapFixture(s, { type: "swap", activeId: "ally-0", reserve: s.reserves[0]!.id });
     expect(s.team[0]!.species).toBe("emberback");
     expect(s.cards.some((c) => c.definitionId.startsWith("mossguard"))).toBe(false);
     expect(decodeSave(encodeSave(s))).toEqual(s);

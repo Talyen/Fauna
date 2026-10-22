@@ -1,85 +1,43 @@
-import { Button } from "../../../components/ui/button";
-import { ArrowDownUp } from "lucide-react";
-import { useState } from "react";
 import { CreatureCard } from "./cards";
+import { ArrowDownUp } from "lucide-react";
 import { species } from "../../../game/content";
 import type { Command, Creature, GameState } from "../../../game/types";
-import type { Inspection } from "../inspection-model";
-/** Shared by optional starting-lineup management and free combat swaps. */
-export function RosterPicker({
+
+export function ReplacementPicker({
   game,
-  lineup,
+  outgoing,
   send,
-  inspect,
-  close,
 }: {
   game: GameState;
-  lineup: boolean;
+  outgoing: Creature;
   send: (command: Command) => boolean;
-  inspect?: (item: Inspection) => void;
-  close: () => void;
 }) {
-  const [selected, setSelected] = useState<string | null>(null);
-  const all = [...game.team, ...game.reserves];
-  const active = lineup ? game.lineup.map((id) => all.find((c) => c.id === id)!) : game.team;
-  const reserves = all.filter((c) => !active.some((a) => a.id === c.id));
-  const selectedActive = active.some((c) => c.id === selected);
-  const choose = (creature: Creature, isActive: boolean) => {
-    if (!selected || selectedActive === isActive) {
-      setSelected(selected === creature.id ? null : creature.id);
-      return;
-    }
-    const outgoing = isActive ? creature : active.find((c) => c.id === selected)!;
-    const incoming = isActive ? reserves.find((c) => c.id === selected)! : creature;
-    if (send({ type: lineup ? "setLineup" : "swap", activeId: outgoing.id, reserve: incoming.id })) {
-      setSelected(null);
-      close();
-    }
-  };
-  const tile = (creature: Creature, isActive: boolean) => (
+  const tile = (creature: Creature, backup: boolean) => (
     <CreatureCard
-      progression={game}
       key={creature.id}
+      progression={game}
       kind={creature.species}
       actorId={creature.id}
       health={creature.health}
       maxHealth={species(creature.species).health}
       block={creature.block}
       combat={creature.combat}
-      selected={selected === creature.id}
-      disabled={!lineup && !isActive && creature.health === 0}
-      label={`${species(creature.species).name}, ${isActive ? (lineup ? "starting" : "deployed") : "backup"}`}
-      onClick={() => choose(creature, isActive)}
-      onInspect={inspect ? () => inspect({ species: creature.species, creatureId: creature.id }) : undefined}
+      disabled={!backup || creature.health <= 0}
+      label={`${species(creature.species).name}, ${backup ? "backup" : "knocked out"}`}
+      onClick={() => {
+        if (backup && creature.health > 0)
+          send({ type: "swap", activeId: outgoing.id, reserve: creature.id });
+      }}
     />
   );
   return (
     <>
-      <section aria-label={lineup ? "Starting lineup" : "Deployed"}>
-        <div className="swap-roster" data-nav-row>
-          {active.map((c) => tile(c, true))}
-          {!active.some((unit) => species(unit.species).legendary) && active.length < 3 && reserves.length ? (
-            <Button
-              variant="outline"
-              disabled={!selected || selectedActive}
-              onClick={() => {
-                if (
-                  selected &&
-                  send({ type: lineup ? "setLineup" : "swap", activeId: "", reserve: selected })
-                )
-                  close();
-              }}
-            >
-              Deploy selected
-            </Button>
-          ) : null}
-        </div>
+      <section className="swap-roster" aria-label="Knocked out">
+        {tile(outgoing, false)}
       </section>
       <ArrowDownUp className="swap-direction" aria-hidden="true" />
-      <section aria-label="Backup">
-        <div className="swap-roster swap-reserves" data-nav-row>
-          {reserves.map((creature) => tile(creature, false))}
-        </div>
+      <section className="swap-roster" aria-label="Backup" data-nav-row>
+        {game.reserves.filter((unit) => unit.health > 0).map((unit) => tile(unit, true))}
       </section>
     </>
   );
