@@ -1,5 +1,7 @@
 # Architecture
 
+The [ability resolution plan](COMBAT_RESOLUTION_PLAN.md) identifies duplicated player/enemy ability execution and proposes a shared executor while preserving deterministic ordering and command ownership. It is a proposed refactor, not the current implementation.
+
 `src/game/` owns content, commands, battle rules, seeded RNG, and save validation. It imports only its own modules, Immer, and Zod. It does not access the DOM, React, filesystem, Steam, clocks, or ambient randomness. `scripts/boundaries.mjs` parses source and checks resolved import paths and ambient capability references; CI also runs Knip for unused files, exports and dependencies.
 
 `dispatch(state, command)` returns either an accepted immutable state with ordered presentation events or a rejection retaining the original state. Validation occurs before RNG consumption or mutation. Gameplay and progression settle synchronously. Animation is a consumer of results; it cannot pay mana, damage a creature, grant a reward, or unlock content.
