@@ -17,11 +17,11 @@ interface ShellInputContext {
   menu: boolean;
   paused: boolean;
   game: GameState;
-  setInspection(value: Inspection | null): void;
-  setModal(value: Modal): void;
-  setMenu(value: boolean): void;
-  backFromPage(): void;
-  openMenu(): void;
+  setInspection: (value: Inspection | null) => void;
+  setModal: (value: Modal) => void;
+  setMenu: (value: boolean) => void;
+  backFromPage: () => void;
+  openMenu: () => void;
 }
 export function routeInput(action: InputAction, context: ShellInputContext) {
   const {
