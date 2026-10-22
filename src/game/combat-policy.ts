@@ -13,15 +13,23 @@ export type DamagePacket =
   | (AttackValues & { origin: "proc" | "resonance"; delivery?: "bounce" })
   | { origin: "periodic" | "retaliation" | "statusRetaliation" | "derived" };
 
+const inactive = {
+  attack: false,
+  direct: false,
+  buildup: false,
+  bypassBlock: false,
+  deadSource: false,
+  wrongFoot: false,
+  resonance: false,
+  bounce: false,
+};
+const attacking = { ...inactive, attack: true, buildup: true };
 export function packetPolicy(packet: DamagePacket) {
   switch (packet.origin) {
     case "ability":
       return {
-        attack: true,
+        ...attacking,
         direct: true,
-        buildup: true,
-        bypassBlock: false,
-        deadSource: false,
         wrongFoot: packet.delivery !== "bounce",
         resonance: true,
         bounce: packet.delivery !== "bounce",
@@ -29,38 +37,19 @@ export function packetPolicy(packet: DamagePacket) {
     case "proc":
     case "resonance":
       return {
-        attack: true,
-        direct: false,
-        buildup: true,
-        bypassBlock: false,
-        deadSource: false,
-        wrongFoot: false,
+        ...attacking,
         resonance: packet.origin !== "resonance",
         bounce: packet.delivery !== "bounce",
       };
     case "periodic":
-      return {
-        attack: false,
-        direct: false,
-        buildup: false,
-        bypassBlock: true,
-        deadSource: true,
-        wrongFoot: false,
-        resonance: false,
-        bounce: false,
-      };
+      return { ...inactive, bypassBlock: true, deadSource: true };
     case "retaliation":
     case "statusRetaliation":
     case "derived":
       return {
-        attack: false,
-        direct: false,
+        ...inactive,
         buildup: packet.origin === "statusRetaliation",
-        bypassBlock: false,
         deadSource: packet.origin === "derived",
-        wrongFoot: false,
-        resonance: false,
-        bounce: false,
       };
     default: {
       const unhandled: never = packet;

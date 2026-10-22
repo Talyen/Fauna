@@ -67,54 +67,10 @@ function* reaction<K extends OperationName>(
   return (yield { kind, args } as CombatOperation) as CombatResult<K>;
 }
 function frame(operation: CombatOperation): Resolution<unknown> {
-  switch (operation.kind) {
-    case "bounce":
-      return bounce(...operation.args);
-    case "restoreHealth":
-      return restoreHealth(...operation.args);
-    case "shareProtection":
-      return shareProtection(...operation.args);
-    case "grantBlock":
-      return grantBlock(...operation.args);
-    case "gainMana":
-      return gainMana(...operation.args);
-    case "gainGold":
-      return gainGold(...operation.args);
-    case "grantArmor":
-      return grantArmor(...operation.args);
-    case "leechHealth":
-      return leechHealth(...operation.args);
-    case "healthThresholds":
-      return healthThresholds(...operation.args);
-    case "grantStatus":
-      return grantStatus(...operation.args);
-    case "triggerArmorBreak":
-      return triggerArmorBreak(...operation.args);
-    case "removeFreezeBuildup":
-      return removeFreezeBuildup(...operation.args);
-    case "removeEffects":
-      return removeEffects(...operation.args);
-    case "cleanseRewards":
-      return cleanseRewards(...operation.args);
-    case "applyHarmfulStatus":
-      return applyHarmfulStatus(...operation.args);
-    case "controlRewards":
-      return controlRewards(...operation.args);
-    case "applyBlind":
-      return applyBlind(...operation.args);
-    case "hit":
-      return hit(...operation.args);
-    case "resolveHit":
-      return resolveHit(...operation.args);
-    case "tickStatuses":
-      return tickStatuses(...operation.args);
-    case "startAction":
-      return startAction(...operation.args);
-    default: {
-      const unhandled: never = operation;
-      throw new Error(`Unknown combat operation: ${unhandled}`);
-    }
-  }
+  // The discriminated request ties each argument tuple to this closed handler registry.
+  // Erase that correlation only at invocation; callers retain the typed request/result pair.
+  const handler = handlers[operation.kind] as (...args: unknown[]) => Resolution<unknown>;
+  return handler(...operation.args);
 }
 /** Each root owns its stack and draft arguments; no global current resolver or saved continuation. */
 export function resolveCombat<K extends OperationName>(
