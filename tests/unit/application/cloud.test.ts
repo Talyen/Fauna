@@ -16,6 +16,36 @@ const progress = encodeSave(
     encodeSave(dispatch(createGame(7), { type: "draft", species: createGame(7).starterOffers[0]! }).state),
   ),
 );
+it("keeps published cloud status immutable so consumers cannot change retry decisions", async () => {
+  vi.useFakeTimers();
+  const f = fixture();
+  f.port.list = vi.fn(async () => {
+    throw new Error("offline");
+  });
+  const mutations: boolean[] = [];
+  const manager = createCloud(
+    f.port,
+    (view) => {
+      mutations.push(Reflect.set(view, "status", "Synced"));
+    },
+    f.install,
+  );
+  try {
+    expect(Reflect.set(manager.view, "blocking", true)).toBe(false);
+    await manager.start(initial);
+    expect(manager.view.status).toBe("Pending");
+    expect(Reflect.set(manager.view, "status", "Synced")).toBe(false);
+    expect(mutations.length).toBeGreaterThan(0);
+    expect(mutations.every((changed) => !changed)).toBe(true);
+    const reads = vi.mocked(f.port.list).mock.calls.length;
+    await vi.advanceTimersByTimeAsync(15000);
+    expect(vi.mocked(f.port.list).mock.calls.length).toBeGreaterThan(reads);
+  } finally {
+    await manager.dispose();
+    await f.manager.dispose();
+    vi.useRealTimers();
+  }
+});
 function fixture() {
   const files = new Map<string, string>(),
     local = { data: null as string | null };

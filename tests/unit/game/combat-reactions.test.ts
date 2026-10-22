@@ -4,6 +4,33 @@ import { species } from "../../../src/game/content";
 import type { GameEvent } from "../../../src/game/types";
 import { run } from "../../support/game";
 
+it("Open Flank breaking Armor before Erosion triggers Molten Shell only once", () => {
+  const state = structuredClone(run());
+  state.talents = ["water.erosion"];
+  const ally = state.team[0]!;
+  const enemy = state.battle!.enemies[0]!;
+  ally.combat = freshCombat();
+  ally.combat.nextPhysical = 2;
+  enemy.species = "emberback";
+  enemy.health = enemy.maxHealth = 100;
+  enemy.block = 0;
+  enemy.combat = freshCombat();
+  enemy.combat.controlled = "stun";
+  enemy.combat.controlTurns = 1;
+  enemy.combat.armor = 2;
+  const events: GameEvent[] = [];
+  state.rng = 42;
+
+  hit(state, ally, enemy, 3, "water", events);
+
+  expect(enemy.combat.armor).toBe(0);
+  expect(
+    events
+      .filter((event) => event.kind === "damage" && event.actorId === enemy.id && event.damageType === "burn")
+      .map((event) => event.targetId),
+  ).toEqual(state.team.map((unit) => unit.id));
+});
+
 it.each(["burn", "poison", "bleed"] as const)(
   "Last Resort keeps %s cleansed when its own tick crosses the Health threshold",
   (status) => {
