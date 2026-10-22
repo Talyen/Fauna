@@ -26,7 +26,7 @@ function packet(
     s.battle!.enemies[0]!.health = 18;
     s.battle!.enemies[0]!.combat.thorns = 0;
     setup?.(s);
-    hit(s, s.team[1]!, s.battle!.enemies[0]!, amount, type, events, { leech });
+    hit(s, s.team[1]!, s.battle!.enemies[0]!, amount, type, events, { origin: "ability", leech });
   });
   return { next, events };
 }
@@ -155,13 +155,13 @@ describe("Alchemy combat foundations", () => {
       const target = s.team[0]!,
         enemy = s.battle!.enemies[0]!,
         events: Parameters<typeof hit>[5] = [];
-      hit(s, enemy, target, 999, "burn", events, { retaliation: true });
+      hit(s, enemy, target, 999, "burn", events, { origin: "retaliation" as const });
       expect(target.health).toBe(1);
       expect(combat(target)).toMatchObject({ deathDoorUsed: true, grace: 2 });
-      hit(s, enemy, target, 999, "burn", events, { retaliation: true });
+      hit(s, enemy, target, 999, "burn", events, { origin: "retaliation" as const });
       expect(target.health).toBe(1);
       combat(target).grace = 0;
-      hit(s, enemy, target, 999, "burn", events, { retaliation: true });
+      hit(s, enemy, target, 999, "burn", events, { origin: "retaliation" as const });
     });
     expect(next.team[0]!.health).toBe(0);
   });

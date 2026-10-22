@@ -148,11 +148,11 @@ it("refreshes one Nullify on living deployed allies and exposes visible status f
   );
   produce(result.state, (draft) => {
     const target = draft.team[0]!;
-    hit(draft, draft.battle!.enemies[0]!, target, 2, "poison", [], { proc: true });
+    hit(draft, draft.battle!.enemies[0]!, target, 2, "poison", [], { origin: "proc" as const });
     expect(target.health).toBe(22);
     expect(target.combat!.poison).toBe(0);
     expect(target.combat!.nullify).toBe(false);
-    hit(draft, draft.battle!.enemies[0]!, target, 2, "poison", [], { proc: true });
+    hit(draft, draft.battle!.enemies[0]!, target, 2, "poison", [], { origin: "proc" as const });
     expect(target.combat!.poison).toBe(2);
   });
 });
@@ -165,7 +165,7 @@ it.each(["burn", "poison", "bleed", "stun", "freeze", "blind"] as const)(
         source = game.battle!.enemies[0]!;
       Object.assign(target.combat!, { nullify: true, reflect: true });
       if (type === "blind") applyBlind(game, source, target, []);
-      else hit(game, source, target, 2, type, [], { proc: true, leech: true });
+      else hit(game, source, target, 2, type, [], { origin: "proc" as const, leech: true });
       expect(target.combat![type]).toBe(type === "blind" ? false : 0);
       expect(target.combat!.nullify).toBe(false);
       expect(target.combat!.reflect).toBe(true);
@@ -181,10 +181,10 @@ it("retains Nullify through turns, blocked damage, immunity, periodic ticks and 
       source = game.battle!.enemies[0]!;
     target.combat!.nullify = true;
     target.block = 5;
-    hit(game, source, target, 2, "poison", [], { proc: true });
+    hit(game, source, target, 2, "poison", [], { origin: "proc" as const });
     target.block = 0;
     target.combat!.cooldown = 3;
-    hit(game, source, target, 2, "stun", [], { proc: true });
+    hit(game, source, target, 2, "stun", [], { origin: "proc" as const });
     target.combat!.poison = 2;
     tickStatuses(game, target, []);
     target.combat!.blind = true;
@@ -202,7 +202,7 @@ it("stops a reflected harmful status with Nullify", () => {
       source = game.battle!.enemies[0]!;
     source.combat.reflect = true;
     target.combat!.nullify = true;
-    hit(game, target, source, 2, "poison", [], { proc: true });
+    hit(game, target, source, 2, "poison", [], { origin: "proc" as const });
     expect(source.combat.poison).toBe(0);
     expect(target.combat!.poison).toBe(0);
     expect(target.combat!.nullify).toBe(false);
@@ -362,7 +362,7 @@ it("does not spend Nullify on a Dodge or capped Poison", () => {
     expect(target.health).toBe(24);
     expect(target.combat!.nullify).toBe(true);
     target.combat!.poison = 1000000;
-    hit(game, source, target, 2, "poison", [], { proc: true });
+    hit(game, source, target, 2, "poison", [], { origin: "proc" as const });
     expect(target.combat!.nullify).toBe(true);
   });
 });

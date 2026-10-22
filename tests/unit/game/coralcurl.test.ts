@@ -75,10 +75,17 @@ it("does not burst on partial absorption, Dodge, Purge or retaliation", () => {
       target.block = 6;
       if (mode === "purge") removeEffects(target, "purge", 1, [], game);
       else
-        hit(game, attacker, target, mode === "partial" ? 2 : 6, "water", [], {
-          blindMiss: mode === "dodge",
-          retaliation: mode === "retaliation",
-        });
+        hit(
+          game,
+          attacker,
+          target,
+          mode === "partial" ? 2 : 6,
+          "water",
+          [],
+          mode === "retaliation"
+            ? { origin: "retaliation" }
+            : { origin: "ability", blindMiss: mode === "dodge" },
+        );
       expect(attacker.health).toBe(attacker.maxHealth);
     });
   }
@@ -206,10 +213,17 @@ it("Water hit rewards include full absorption and exclude missed and passive dam
       enemy.block = 20;
       enemy.combat.armor = 10;
       enemy.combat.controlled = "stun";
-      hit(game, actor, enemy, 6, "water", [], {
-        blindMiss: mode === "miss",
-        retaliation: mode === "retaliation",
-      });
+      hit(
+        game,
+        actor,
+        enemy,
+        6,
+        "water",
+        [],
+        mode === "retaliation"
+          ? { origin: "retaliation" }
+          : { origin: "ability", blindMiss: mode === "miss" },
+      );
       expect(actor.block).toBe(mode === "blocked" ? 2 : 0);
       expect(enemy.combat.armor).toBe(mode === "blocked" ? 8 : 10);
     });

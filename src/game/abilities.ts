@@ -128,6 +128,7 @@ function applyExtras(
       case "damage":
         if (target)
           hit(state, actor, target, effect.amount, effect.damageType, events, {
+            origin: "ability",
             blindMiss,
             criticalBonus,
             leech: effect.leech,
@@ -296,6 +297,7 @@ export function executeAbility(
         for (const recipient of targets) {
           if (actor.health <= 0) break;
           hit(state, actor, recipient, value, damageType, events, {
+            origin: "ability",
             blindMiss,
             criticalBonus,
             leech: def.leech,

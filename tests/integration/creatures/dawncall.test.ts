@@ -176,8 +176,8 @@ it("does not spend Early Bird on rejected commands, retaliation or periodic dama
   expect(play(rejected).state).toBe(rejected);
   expect(rejected.team[0]!.combat!.firstAttackUsed).toBe(false);
   produce(ready(), (draft) => {
-    hit(draft, draft.team[0]!, draft.battle!.enemies[0]!, 2, "light", [], { retaliation: true });
-    hit(draft, draft.team[0]!, draft.battle!.enemies[0]!, 2, "light", [], { periodic: true });
+    hit(draft, draft.team[0]!, draft.battle!.enemies[0]!, 2, "light", [], { origin: "retaliation" as const });
+    hit(draft, draft.team[0]!, draft.battle!.enemies[0]!, 2, "light", [], { origin: "periodic" as const });
     expect(draft.team[0]!.combat!.firstAttackUsed).toBe(false);
   });
   const missed = play(

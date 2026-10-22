@@ -175,14 +175,14 @@ it("absorbs exactly one Freeze packet before Block and buildup, preserving other
     target.combat!.nullify = true;
     const events: GameEvent[] = [];
     const health = target.health;
-    hit(game, source, target, 12, "freeze", events, { proc: true });
+    hit(game, source, target, 12, "freeze", events, { origin: "proc" as const });
     expect(target.health).toBe(health);
     expect(target.block).toBe(3);
     expect(target.combat!.freeze).toBe(0);
     expect(target.combat!.nullifyFreeze).toBe(false);
     expect(target.combat!.nullify).toBe(true);
     expect(events).toContainEqual(expect.objectContaining({ status: "nullify", outcome: "immune" }));
-    hit(game, source, target, 5, "freeze", events, { proc: true });
+    hit(game, source, target, 5, "freeze", events, { origin: "proc" as const });
     expect(target.health).toBe(health - 2);
     expect(target.block).toBe(0);
     expect(target.combat!.nullify).toBe(false);
@@ -194,12 +194,12 @@ it("keeps the ward on misses and other damage, allows Purge, and protects enemie
     const source = game.team[0]!,
       target = game.battle!.enemies[0]!;
     target.combat.nullifyFreeze = true;
-    hit(game, source, target, 3, "freeze", [], { blindMiss: true });
+    hit(game, source, target, 3, "freeze", [], { origin: "ability" as const, blindMiss: true });
     expect(target.combat.nullifyFreeze).toBe(true);
-    hit(game, source, target, 1, "light", [], { proc: true });
+    hit(game, source, target, 1, "light", [], { origin: "proc" as const });
     expect(target.combat.nullifyFreeze).toBe(true);
     const health = target.health;
-    hit(game, source, target, 12, "freeze", [], { proc: true });
+    hit(game, source, target, 12, "freeze", [], { origin: "proc" as const });
     expect(target.health).toBe(health);
     expect(target.combat.nullifyFreeze).toBe(false);
     target.combat.nullifyFreeze = true;

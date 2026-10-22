@@ -148,7 +148,7 @@ it("enemy Cinderstep uses its base tier and periodic damage cannot trigger Dodge
     hit(game, actor, target, 6, "physical", []);
     expect(actor.combat!.burn).toBe(1);
     const health = actor.health;
-    hit(game, actor, target, 1, "burn", [], { periodic: true });
+    hit(game, actor, target, 1, "burn", [], { origin: "periodic" as const });
     expect(actor.health).toBe(health);
   });
 });

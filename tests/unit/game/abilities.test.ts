@@ -151,7 +151,7 @@ it.each(["player", "enemy"] as const)(
       game.rng = 1;
       hit(game, actor, target, 10, "freeze", events);
       expect(target.combat.controlled).toBeNull();
-      hit(game, actor, target, 6, "freeze", events, { proc: true });
+      hit(game, actor, target, 6, "freeze", events, { origin: "proc" as const });
       expect(target.combat.controlled).toBe("freeze");
     });
   },

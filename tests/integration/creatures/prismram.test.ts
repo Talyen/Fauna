@@ -54,7 +54,7 @@ it.each(["burn", "poison", "bleed", "stun", "freeze"] as const)(
       game.battle!.enemies.forEach((enemy) => {
         enemy.combat.reflect = true;
       });
-      hit(game, game.battle!.enemies[0]!, ram, 4, type, events, { proc: true });
+      hit(game, game.battle!.enemies[0]!, ram, 4, type, events, { origin: "proc" as const });
     });
     expect(result.team[0]!.health).toBe(26);
     expect(result.team[0]!.combat![type]).toBe(0);
@@ -91,13 +91,13 @@ it.each([
     produce(setup, (game) => {
       game.discovery.recruited.prismram = count;
       game.rng = seed;
-      hit(game, game.battle!.enemies[0]!, game.team[0]!, 2, "poison", [], { proc: true });
+      hit(game, game.battle!.enemies[0]!, game.team[0]!, 2, "poison", [], { origin: "proc" as const });
     });
   expect(received(copies).team[0]!.combat!.poison).toBe(0);
   if (copies > 1) expect(received(copies - 1).team[0]!.combat!.poison).toBe(2);
   const missed = produce(setup, (game) => {
     game.rng = 1800; // First roll exceeds 90%
-    hit(game, game.battle!.enemies[0]!, game.team[0]!, 2, "poison", [], { proc: true });
+    hit(game, game.battle!.enemies[0]!, game.team[0]!, 2, "poison", [], { origin: "proc" as const });
   });
   expect(missed.team[0]!.combat!.poison).toBe(2);
   expect(species("prismram").passiveTiers[copies - 1]!.effects).toEqual([
@@ -110,19 +110,19 @@ it("preserves a Ward through blocked hits, control immunity and periodic damage,
     const ram = game.team[0]!;
     ram.combat!.reflect = true;
     ram.block = 5;
-    hit(game, game.battle!.enemies[0]!, ram, 4, "burn", [], { proc: true });
+    hit(game, game.battle!.enemies[0]!, ram, 4, "burn", [], { origin: "proc" as const });
     expect(ram.combat!.reflect).toBe(true);
     ram.block = 0;
     ram.combat!.cooldown = 3;
-    hit(game, game.battle!.enemies[0]!, ram, 1, "stun", [], { proc: true });
+    hit(game, game.battle!.enemies[0]!, ram, 1, "stun", [], { origin: "proc" as const });
     expect(ram.combat!.reflect).toBe(true);
     ram.combat!.poison = 2;
     tickStatuses(game, ram, []);
     expect(ram.combat!.reflect).toBe(true);
-    hit(game, game.battle!.enemies[0]!, ram, 1, "bleed", [], { proc: true });
+    hit(game, game.battle!.enemies[0]!, ram, 1, "bleed", [], { origin: "proc" as const });
     expect(ram.combat!.reflect).toBe(false);
     game.rng = 1; // Base passive misses
-    hit(game, game.battle!.enemies[0]!, ram, 1, "burn", [], { proc: true });
+    hit(game, game.battle!.enemies[0]!, ram, 1, "burn", [], { origin: "proc" as const });
   });
   expect(result.team[0]!.combat!.burn).toBe(1);
 });
@@ -133,13 +133,13 @@ it("chooses living deployed opponents for either side and never scales enemy Ref
     game.rng = 140; // 29% succeeds for upgraded allies, misses the enemy base tier
     const enemy = game.battle!.enemies[0]!;
     enemy.species = "prismram";
-    hit(game, game.team[1]!, enemy, 1, "poison", [], { proc: true });
+    hit(game, game.team[1]!, enemy, 1, "poison", [], { origin: "proc" as const });
     expect(enemy.combat.poison).toBe(1);
     enemy.combat.reflect = true;
     game.team[0]!.health = 0;
     game.team[2]!.health = 0;
     game.reserves.push({ ...game.team[0]!, id: "reserve", health: 30, combat: freshCombat() });
-    hit(game, game.team[1]!, enemy, 2, "burn", [], { proc: true });
+    hit(game, game.team[1]!, enemy, 2, "burn", [], { origin: "proc" as const });
   });
   expect(result.team[1]!.combat!.burn).toBe(2);
   expect(result.reserves[0]!.combat!.burn).toBe(0);
@@ -154,7 +154,7 @@ it("applies reflected control normally and allows Purge to remove a pending Ward
       enemy.health = 0;
     });
     game.battle!.enemies[0]!.health = 18;
-    hit(game, game.battle!.enemies[0]!, ram, 15, "freeze", [], { proc: true });
+    hit(game, game.battle!.enemies[0]!, ram, 15, "freeze", [], { origin: "proc" as const });
     expect(game.battle!.enemies[0]!.combat.controlled).toBe("freeze");
     expect(ram.combat!.controlled).toBeNull();
     ram.combat!.reflect = true;

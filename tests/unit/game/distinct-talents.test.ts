@@ -102,7 +102,7 @@ describe("distinct talent and Boon outcomes", () => {
       }
       hit(state, source, target, 6, type, events);
       expect(status === "block" ? source.block : source.combat.thorns).toBe(6);
-      hit(state, source, target, 6, type, events, { periodic: true });
+      hit(state, source, target, 6, type, events, { origin: "periodic" as const });
       expect(status === "block" ? source.block : source.combat.thorns).toBe(6);
     }
   });

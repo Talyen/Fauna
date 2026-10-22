@@ -1,3 +1,4 @@
+import { packetPolicy, type DamagePacket } from "./combat-policy";
 import { roll } from "./random";
 import { draw, drawKeyword } from "./card-zones";
 import { hasTalent, creaturePassive } from "./progression";
@@ -348,7 +349,7 @@ export function triggerArmorBreak(state: GameState, unit: Combatant, events: Gam
   const targets = allied ? state.battle.enemies : state.team;
   for (const target of targets) {
     if (unit.health <= 0) break;
-    if (target.health > 0) hit(state, unit, target, amount, "burn", events, { proc: true });
+    if (target.health > 0) hit(state, unit, target, amount, "burn", events, { origin: "proc" });
   }
 }
 export function removeFreezeBuildup(state: GameState, unit: Combatant, events: GameEvent[]) {
@@ -669,9 +670,9 @@ function controlRewards(
 ) {
   if (!("maxHealth" in source) && "maxHealth" in target) {
     if (type === "freeze" && state.boons.includes("icy-heart"))
-      hit(state, source, target, 6, "physical", events, { derived: true });
+      hit(state, source, target, 6, "physical", events, { origin: "derived" });
     if (type === "stun" && state.boons.includes("thunderstone"))
-      hit(state, source, target, 6, "nature", events, { derived: true });
+      hit(state, source, target, 6, "nature", events, { origin: "derived" });
   }
 }
 
@@ -755,15 +756,11 @@ export function hit(
   value: number,
   type: DamageType,
   events: GameEvent[],
-  options: Parameters<typeof resolveHit>[6] = {},
+  options: DamagePacket = { origin: "ability" },
 ): number | undefined {
+  const policy = packetPolicy(options);
   const wrongFoot =
-    target.combat?.blind &&
-    !options.periodic &&
-    !options.retaliation &&
-    !options.derived &&
-    !options.proc &&
-    !options.bounced
+    target.combat?.blind && policy.wrongFoot
       ? creaturePassive("maxHealth" in source ? undefined : state, source.species).effects.reduce(
           (total, effect) => total + (effect.kind === "wrongFoot" ? effect.amount : 0),
           0,
@@ -771,17 +768,14 @@ export function hit(
       : 0;
   const lost = resolveHit(state, source, target, value, type, events, options);
   if (lost !== undefined && wrongFoot > 0)
-    hit(state, source, target, wrongFoot, "light", events, { proc: true });
+    hit(state, source, target, wrongFoot, "light", events, { origin: "proc" });
   if (
     lost !== undefined &&
     lost > 0 &&
     type === "stun" &&
     source.health > 0 &&
     target.health > 0 &&
-    !options.periodic &&
-    !options.retaliation &&
-    !options.derived &&
-    !options.resonance
+    policy.resonance
   ) {
     const chance = creaturePassive("maxHealth" in source ? undefined : state, source.species).effects.reduce(
       (total, effect) => total + (effect.kind === "resonance" ? effect.amount : 0),
@@ -796,19 +790,17 @@ export function hit(
         text: `${unitName(source)} repeats Stun damage with Resonance`,
       });
       // Repeat the packet once, retaining Stun buildup but suppressing attack proc chains.
-      hit(state, source, target, value, type, events, { ...options, proc: true, resonance: true });
+      hit(state, source, target, value, type, events, { ...options, origin: "resonance" });
     }
   }
   if (
     lost !== undefined &&
     type === "light" &&
-    !options.periodic &&
-    !options.retaliation &&
-    !options.derived &&
-    !options.bounced
+    policy.bounce &&
+    (options.origin === "ability" || options.origin === "proc" || options.origin === "resonance")
   )
     bounce(state, source, target, "light", (recipient) =>
-      hit(state, source, recipient, value, type, events, { ...options, bounced: true }),
+      hit(state, source, recipient, value, type, events, { ...options, delivery: "bounce" }),
     );
   return lost;
 }
@@ -819,24 +811,13 @@ function resolveHit(
   value: number,
   type: DamageType,
   events: GameEvent[],
-  options: {
-    blindMiss?: boolean;
-    criticalBonus?: number;
-    bounced?: boolean;
-    periodic?: boolean;
-    retaliation?: boolean;
-    buildStatus?: boolean;
-    derived?: boolean;
-    leech?: boolean;
-    cardLeech?: boolean;
-    proc?: boolean;
-    resonance?: boolean;
-  } = {},
+  options: DamagePacket = { origin: "ability" },
 ): number | undefined {
-  if ((source.health <= 0 && !options.periodic && !options.derived) || target.health <= 0 || value <= 0)
-    return;
-  const attack = !options.periodic && !options.retaliation && !options.derived;
-  const direct = attack && !options.proc;
+  const policy = packetPolicy(options);
+  if ((source.health <= 0 && !policy.deadSource) || target.health <= 0 || value <= 0) return;
+  const { attack, direct } = policy;
+  const leech = "leech" in options && options.leech;
+  const cardLeech = "cardLeech" in options && options.cardLeech;
   const alliedSource = !("maxHealth" in source),
     alliedTarget = !("maxHealth" in target);
   const stats = combat(target),
@@ -847,7 +828,8 @@ function resolveHit(
     type === "light" &&
     hasTalent(state, "light.blessed-leech") &&
     source.health < maximumHealth(source) / 2;
-  const blindMiss = direct && (options.blindMiss ?? beginAttack(state, source));
+  const blindMiss =
+    direct && ((options.origin === "ability" ? options.blindMiss : undefined) ?? beginAttack(state, source));
   if (
     direct &&
     (blindMiss || (dodgeChance(state, target) > 0 && roll(state) < dodgeChance(state, target) / 100))
@@ -890,14 +872,13 @@ function resolveHit(
       if (hasTalent(state, "physical.riposte")) stats.riposte = true;
       if (hasTalent(state, "nature.windstep")) stats.freeNature = true;
       if (hasTalent(state, "burn.smoke-screen") && combat(source).burn > 0)
-        hit(state, target, source, 2, "burn", events, { proc: true });
+        hit(state, target, source, 2, "burn", events, { origin: "proc" });
     }
     const cinderstep = creaturePassive(alliedTarget ? state : undefined, target.species).effects.reduce(
       (sum, effect) => sum + (effect.kind === "dodgeBurn" ? effect.amount : 0),
       0,
     );
-    if (cinderstep)
-      hit(state, target, source, cinderstep, "burn", events, { retaliation: true, buildStatus: true });
+    if (cinderstep) hit(state, target, source, cinderstep, "burn", events, { origin: "statusRetaliation" });
     if (alliedTarget) state.battleXP.dodge = Math.min(STACK_LIMIT, (state.battleXP.dodge ?? 0) + 1);
     return;
   }
@@ -959,15 +940,16 @@ function resolveHit(
       damage += (state.battle?.mana ?? 0) * 0.25;
     if (type === "light" && hasTalent(state, "light.prosperity")) damage += state.currency * 0.01;
     if (type === "light" && stats.burn > 0 && hasTalent(state, "light.purge")) damage *= 1.1;
-    if (
-      options.cardLeech &&
-      target.health < maximumHealth(target) / 2 &&
-      hasTalent(state, "leech.cull-the-weak")
-    )
+    if (cardLeech && target.health < maximumHealth(target) / 2 && hasTalent(state, "leech.cull-the-weak"))
       damage *= 1.25;
     if (type === "bleed" && stats.bleed === 0 && hasTalent(state, "bleed.first-blood")) damage *= 1.25;
   }
-  if (alliedSource && !alliedTarget && !options.retaliation) {
+  if (
+    alliedSource &&
+    !alliedTarget &&
+    options.origin !== "retaliation" &&
+    options.origin !== "statusRetaliation"
+  ) {
     if (stats.poison > 0 && hasTalent(state, "poison.corrosive")) damage++;
     if (stats.controlled === "freeze" && hasTalent(state, "freeze.brittle-ice")) damage++;
     if (stats.controlled === "stun" && hasTalent(state, "stun.exploit-weakness")) damage *= 2;
@@ -1007,7 +989,8 @@ function resolveHit(
   }
   damage = Math.round(damage);
   const riposte = direct && alliedSource && type === "physical" && combat(source).riposte;
-  const criticalChance = 0.05 + (options.criticalBonus ?? 0) / 100;
+  const criticalChance =
+    0.05 + ((options.origin === "ability" ? options.criticalBonus : undefined) ?? 0) / 100;
   const critical =
     direct && (riposte || (criticalChance > 0 && (criticalChance >= 1 || roll(state) < criticalChance)));
   if (riposte) combat(source).riposte = false;
@@ -1015,7 +998,7 @@ function resolveHit(
   if (partingCut) combat(source).partingCut = false;
   if (critical) damage *= 2;
   const blockRatio = alliedTarget && type === "physical" && hasTalent(state, "block.reinforce") ? 1.1 : 1;
-  const blocked = options.periodic ? 0 : Math.min(Math.round(target.block * blockRatio), damage);
+  const blocked = policy.bypassBlock ? 0 : Math.min(Math.round(target.block * blockRatio), damage);
   const blockSpent = Math.min(target.block, Math.ceil(blocked / blockRatio));
   target.block -= blockSpent;
   const depletedBlock = blocked > 0 && target.block === 0;
@@ -1049,7 +1032,7 @@ function resolveHit(
   if (alliedTarget && lost > 0 && hasTalent(state, "dodge.finding-rhythm"))
     stats.rhythm = Math.min(70, stats.rhythm + 5);
   if (alliedTarget && depletedBlock && attack && hasTalent(state, "block.sun-struck-shield"))
-    hit(state, target, source, Math.round(blockSpent * 0.3), "light", events, { derived: true });
+    hit(state, target, source, Math.round(blockSpent * 0.3), "light", events, { origin: "derived" });
   // Depletion rewards use the original block payment, not any newly granted Block.
   if (alliedTarget && depletedBlock && hasTalent(state, "block.second-wind"))
     restoreHealth(target, 2, events, false, state);
@@ -1068,7 +1051,7 @@ function resolveHit(
     amount: lost,
     damageType: type,
     critical,
-    periodic: options.periodic === true,
+    periodic: options.origin === "periodic",
     text: `${unitName(target)} takes ${lost} ${type} damage${critical ? " (Critical)" : ""}.`,
   });
   if (target.health === 0)
@@ -1090,12 +1073,12 @@ function resolveHit(
     if (attack && type === "nature" && state.boons.includes("lucky-clover") && roll(state) < 0.1)
       gainGold(state, lost, events);
     if (attack && type === "light" && state.boons.includes("brass-censer") && roll(state) < 0.2) {
-      if (roll(state) < 0.5) hit(state, source, target, damage, "burn", events, { proc: true });
+      if (roll(state) < 0.5) hit(state, source, target, damage, "burn", events, { origin: "proc" });
       else leechHealth(state, source, lost, events, stats.poison > 0 || stats.bleed > 0);
     }
   }
   if (nextPhysical > 0 && source.health > 0)
-    hit(state, source, target, nextPhysical, "physical", events, { proc: true });
+    hit(state, source, target, nextPhysical, "physical", events, { origin: "proc" });
   if (direct && alliedSource && !alliedTarget && source.health > 0 && type === "water") {
     if (hasTalent(state, "water.seafoam")) grantBlock(state, source, 2, events);
     if (hasTalent(state, "water.erosion")) {
@@ -1108,9 +1091,9 @@ function resolveHit(
       removeEffects(source, "cleanse", 1, events, state);
     if (hasTalent(state, "water.riptide") && roll(state) < 0.2) drawKeyword(state, "water");
   }
-  if ((attack || options.buildStatus) && damage > 0) {
+  if (policy.buildup && damage > 0) {
     const statusResult = applyHarmfulStatus(state, source, target, damage, type, events, {
-      leech: options.leech,
+      leech: leech,
     });
     armorBroken ||= statusResult.armorBroken;
     if (direct && alliedSource && !alliedTarget && source.health > 0) {
@@ -1123,7 +1106,7 @@ function resolveHit(
       const proc = (id: import("./progression").TalentId, chance: number) =>
         hasTalent(state, id) && roll(state) < chance;
       const extra = (kind: DamageType, amount = damage) =>
-        hit(state, source, target, amount, kind, events, { proc: true });
+        hit(state, source, target, amount, kind, events, { origin: "proc" });
       if (type === "physical") {
         if (proc("physical.heavy-blows", 0.1)) extra("stun");
         if (proc("physical.lacerate", 0.1)) extra("bleed");
@@ -1135,7 +1118,7 @@ function resolveHit(
           stats.bleed = 0;
           stats.bleedLeech = [];
           delete stats.statusSources.bleed;
-          let remaining = hit(state, source, target, bleed, "bleed", events, { periodic: true }) ?? 0;
+          let remaining = hit(state, source, target, bleed, "bleed", events, { origin: "periodic" }) ?? 0;
           for (const payout of payouts) {
             const owner = [...state.team, ...state.reserves].find((unit) => unit.id === payout.sourceId);
             const paid = Math.min(remaining, payout.amount);
@@ -1169,9 +1152,9 @@ function resolveHit(
         (type === "bleed" && proc("bleed.sanguine", 0.1)) ||
         (type === "poison" && proc("leech.virulent-leech", 0.1)) ||
         (type === "nature" && proc("nature.verdant-cycle", 0.1));
-      if (chanceLeech && type === "bleed" && !options.leech) {
+      if (chanceLeech && type === "bleed" && !leech) {
         if (!statusResult.suppressed) deferLeech(target, source, damage);
-      } else if (chanceLeech && !options.leech && !blessedLeech)
+      } else if (chanceLeech && !leech && !blessedLeech)
         leechHealth(state, source, lost, events, stats.poison > 0 || stats.bleed > 0);
     }
     // Captured damage remains valid even if retaliation later removes the attacker.
@@ -1183,10 +1166,10 @@ function resolveHit(
         const reflected = stats[status];
         if (reflected <= 0) continue;
         stats[status]--;
-        hit(state, target, source, reflected, type, events, { retaliation: true });
+        hit(state, target, source, reflected, type, events, { origin: "retaliation" });
       }
     }
-    if ((options.leech || blessedLeech) && type !== "bleed" && source.health > 0)
+    if ((leech || blessedLeech) && type !== "bleed" && source.health > 0)
       leechHealth(state, source, lost, events, stats.poison > 0 || stats.bleed > 0);
     if (statusResult.appliedControl) controlRewards(state, source, target, type, events);
   }
@@ -1195,8 +1178,7 @@ function resolveHit(
       (sum, effect) => sum + (effect.kind === "poisonRetaliation" ? effect.amount : 0),
       0,
     );
-    if (amount > 0)
-      hit(state, target, source, amount, "poison", events, { retaliation: true, buildStatus: true });
+    if (amount > 0) hit(state, target, source, amount, "poison", events, { origin: "statusRetaliation" });
   }
   // Only direct attacks burst the bubble; derived damage cannot start retaliation chains
   if (direct && depletedBlock && target.health > 0 && source.health > 0) {
@@ -1204,7 +1186,7 @@ function resolveHit(
       (sum, effect) => sum + (effect.kind === "blockBreak" ? effect.amount : 0),
       0,
     );
-    if (amount > 0) hit(state, target, source, amount, "water", events, { retaliation: true });
+    if (amount > 0) hit(state, target, source, amount, "water", events, { origin: "retaliation" });
   }
   if (armorBroken) triggerArmorBreak(state, target, events);
   return lost;
@@ -1233,7 +1215,7 @@ export function tickStatuses(state: GameState, unit: Combatant, events: GameEven
       cleanseRewards(state, unit, 1, events);
     }
     const target = state.battle!.enemies.find((enemy) => enemy.health > 0);
-    if (target) hit(state, unit, target, Math.round(removed / 2), "poison", events, { proc: true });
+    if (target) hit(state, unit, target, Math.round(removed / 2), "poison", events, { origin: "proc" });
     if (state.battle!.enemies.every((enemy) => enemy.health <= 0)) return;
   }
   for (const status of ["burn", "poison", "bleed"] as const) {
@@ -1247,7 +1229,7 @@ export function tickStatuses(state: GameState, unit: Combatant, events: GameEven
       ) ?? unit;
     // Cleanse reactions may remove the wound, but cannot revoke healing earned by this tick.
     const payouts = status === "bleed" ? stats.bleedLeech : [];
-    const lost = hit(state, source, unit, amount, status, events, { periodic: true }) ?? 0;
+    const lost = hit(state, source, unit, amount, status, events, { origin: "periodic" }) ?? 0;
     if (status === "bleed") {
       stats.bleedLeech = [];
       let remaining = lost;

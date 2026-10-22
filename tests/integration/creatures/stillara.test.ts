@@ -150,11 +150,11 @@ it.each([10, 20, 30, 40, 50, 60])(
       game.discovery.recruited.stillara = percent / 10;
       for (const target of game.team) {
         const before = target.health;
-        hit(game, game.battle!.enemies[0]!, target, 10, "freeze", [], { proc: true });
+        hit(game, game.battle!.enemies[0]!, target, 10, "freeze", [], { origin: "proc" as const });
         expect(target.health).toBe(before - (10 - percent / 10));
         expect(target.combat!.freeze).toBe(10 - percent / 10);
         target.health = before;
-        hit(game, game.battle!.enemies[0]!, target, 10, "water", [], { proc: true });
+        hit(game, game.battle!.enemies[0]!, target, 10, "water", [], { origin: "proc" as const });
         expect(target.health).toBe(before - 10);
       }
     });
@@ -166,7 +166,7 @@ it("multiplies Freeze resistance before rounding and Block", () => {
     game.talents = ["freeze.cold-resistance"];
     const target = game.team[1]!;
     target.block = 3;
-    hit(game, game.battle!.enemies[0]!, target, 20, "freeze", [], { proc: true });
+    hit(game, game.battle!.enemies[0]!, target, 20, "freeze", [], { origin: "proc" as const });
     expect(target.block).toBe(0);
     expect(target.health).toBe(species(target.species).health - 1);
     expect(target.combat!.freeze).toBe(1);
@@ -188,14 +188,14 @@ it("uses only living deployed protectors and recipients, strongest tier and enem
       if (mode === "enemy") {
         attacker.species = "stillara";
         const recipient = game.battle!.enemies[1]!;
-        hit(game, protector, recipient, 10, "freeze", [], { proc: true });
+        hit(game, protector, recipient, 10, "freeze", [], { origin: "proc" as const });
         expect(recipient.health).toBe(recipient.maxHealth - 9);
       } else {
         if (mode === "reserveTarget") {
           game.team.splice(1, 1);
           game.reserves.push(target);
         }
-        hit(game, attacker, target, 10, "freeze", [], { proc: true });
+        hit(game, attacker, target, 10, "freeze", [], { origin: "proc" as const });
         expect(target.health).toBe(species(target.species).health - (mode === "duplicate" ? 4 : 10));
       }
     });
@@ -240,7 +240,7 @@ it("updates First Thaw immediately across swaps and current-format resume", () =
   produce(game, (draft) => {
     const target = draft.team[1]!;
     const before = target.health;
-    hit(draft, draft.battle!.enemies[0]!, target, 10, "freeze", [], { proc: true });
+    hit(draft, draft.battle!.enemies[0]!, target, 10, "freeze", [], { origin: "proc" as const });
     expect(target.health).toBe(before - 10);
   });
   game = accept(game, { type: "swap", activeId: "backup", reserve: "ally-0" });
@@ -248,7 +248,7 @@ it("updates First Thaw immediately across swaps and current-format resume", () =
   produce(game, (draft) => {
     const target = draft.team[1]!;
     const before = target.health;
-    hit(draft, draft.battle!.enemies[0]!, target, 10, "freeze", [], { proc: true });
+    hit(draft, draft.battle!.enemies[0]!, target, 10, "freeze", [], { origin: "proc" as const });
     expect(target.health).toBe(before - 4);
   });
 });

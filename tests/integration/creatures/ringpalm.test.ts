@@ -87,7 +87,7 @@ it.each([10, 20, 30, 40, 50, 60])(
         const source = game.team[0]!,
           target = game.battle!.enemies[0]!;
         // Supplemental Stun skips Dodge/Critical rolls, isolating the exact passive threshold.
-        hit(game, source, target, 2, "stun", events, { proc: true });
+        hit(game, source, target, 2, "stun", events, { origin: "proc" as const });
         expect(target.health).toBe(target.maxHealth - (repeats ? 4 : 2));
         expect(target.combat.stun).toBe(repeats ? 4 : 2);
         expect(game.battleXP.stun).toBeUndefined();
@@ -172,7 +172,7 @@ it("applies Armor separately to the repeated base packet and allows its Stun to 
       target = game.battle!.enemies[0]!;
     target.health = target.maxHealth = 18;
     target.combat.armor = 1;
-    hit(game, source, target, 5, "stun", [], { proc: true });
+    hit(game, source, target, 5, "stun", [], { origin: "proc" as const });
     expect(target.health).toBe(9);
     expect(target.combat.controlled).toBe("stun");
     expect(target.combat.armor).toBe(0);
@@ -196,13 +196,19 @@ it.each(["miss", "block", "armor", "kill", "actorKnockout", "derived", "periodic
         target.combat.thorns = 10;
       }
       const proc = mode !== "miss" && mode !== "actorKnockout";
-      hit(game, source, target, 2, "stun", events, {
-        proc,
-        blindMiss: mode === "miss",
-        derived: mode === "derived",
-        periodic: mode === "periodic",
-        retaliation: mode === "retaliation",
-      });
+      hit(
+        game,
+        source,
+        target,
+        2,
+        "stun",
+        events,
+        mode === "derived" || mode === "periodic" || mode === "retaliation"
+          ? { origin: mode }
+          : proc
+            ? { origin: "proc" as const }
+            : { origin: "ability", blindMiss: mode === "miss" },
+      );
       expect(events.some((event) => event.text.includes("with Resonance"))).toBe(false);
       if (mode === "actorKnockout") expect(source.health).toBe(0);
       if (proc) expect(game.rng).toBe(seed);
@@ -333,7 +339,7 @@ it.each(["Ringclap", "Harmonic Set", "Seedling Circle"])(
     const noRepeat = seedFor(([roll]) => roll! > 0.1 && roll! < 0.6);
     produce(game, (draft) => {
       draft.rng = noRepeat;
-      hit(draft, draft.battle!.enemies[0]!, draft.team[0]!, 2, "stun", events, { proc: true });
+      hit(draft, draft.battle!.enemies[0]!, draft.team[0]!, 2, "stun", events, { origin: "proc" as const });
     });
     expect(damage(events, "enemy-0")).toHaveLength(1);
   },

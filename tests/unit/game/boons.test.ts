@@ -23,6 +23,7 @@ function fixture() {
   target.combat = freshCombat();
   // Suppress Dodge without extra randomness so packet magnitudes are comparable.
   target.combat.controlled = "freeze";
+  target.combat.controlTurns = 1;
   state.rng = 42;
   return { state, source, target, events: [] as GameEvent[] };
 }
@@ -30,7 +31,7 @@ it("doubles only the first allied direct Burn hit across swaps, previews and res
   const { state, source, target, events } = fixture();
   state.boons = ["meteorite"];
   // A periodic packet neither consumes nor receives Meteorite.
-  hit(state, source, target, 2, "burn", events, { periodic: true });
+  hit(state, source, target, 2, "burn", events, { origin: "periodic" as const });
   expect(state.battle!.meteoriteUsed).toBe(false);
   hit(state, source, target, 5, "burn", events);
   expect(events.filter((event) => event.kind === "damage").map((event) => event.amount)).toEqual([2, 10]);
@@ -48,6 +49,7 @@ it("doubles only the first allied direct Burn hit across swaps, previews and res
   saved.battle!.buffer = [];
   saved.battle!.discard = [];
   saved.battle!.enemies[0]!.combat.controlled = "freeze";
+  saved.battle!.enemies[0]!.combat.controlTurns = 1;
   const preview = previewCard(saved, burn.id, "enemy-0");
   expect(preview.accepted && preview.state.battle!.meteoriteUsed).toBe(true);
   expect(saved.battle!.meteoriteUsed).toBe(false);
@@ -73,6 +75,7 @@ it("does not consume Meteorite on a Dodge or enemy hit", () => {
   const { state, source, target, events } = fixture();
   state.boons = ["meteorite"];
   target.combat.controlled = null;
+  target.combat.controlTurns = 0;
   target.combat.dodge = 70;
   hit(state, source, target, 5, "burn", events);
   expect(state.battle!.meteoriteUsed).toBe(false);
@@ -104,6 +107,7 @@ it("triggers Thunderstone once per successful Stun, without retaliation or statu
   const { state, source, target, events } = fixture();
   state.boons = ["thunderstone"];
   target.combat.controlled = null;
+  target.combat.controlTurns = 0;
   hit(state, source, target, 50, "stun", events);
   expect(target.health).toBe(44);
   expect(target.combat.controlled).toBe("stun");
@@ -134,11 +138,11 @@ it("strips Armor before Physical and Stun mitigation, including fully blocked hi
     const { state, source, target, events } = fixture();
     state.boons = ["sundering-charm"];
     target.combat.armor = 5;
-    hit(state, source, target, 8, type, events, { proc: true });
+    hit(state, source, target, 8, type, events, { origin: "proc" as const });
     expect(target.health).toBe(95);
     expect(target.combat.armor).toBe(2);
     target.block = 20;
-    hit(state, source, target, 8, type, events, { proc: true });
+    hit(state, source, target, 8, type, events, { origin: "proc" as const });
     expect(target.combat.armor).toBe(0);
     expect(target.health).toBe(95);
   }
@@ -149,7 +153,8 @@ it("extends enemy Freeze across resume and grants immunity only after both skipp
   target.maxHealth = encounterSource(state).enemies[0]!.health;
   target.health = 18;
   target.combat.controlled = null;
-  hit(state, source, target, 15, "freeze", events, { proc: true });
+  target.combat.controlTurns = 0;
+  hit(state, source, target, 15, "freeze", events, { origin: "proc" as const });
   expect(target.combat.controlTurns).toBe(2);
   const resumed = structuredClone(decodeSave(encodeSave(state)));
   const enemy = resumed.battle!.enemies[0]!;
@@ -166,7 +171,7 @@ it("banks Cutpurse Gold for hits and ticks exactly once and caps actual retained
   target.maxHealth = encounterSource(state).enemies[0]!.health;
   target.health = 18;
   const before = state.currency;
-  hit(state, source, target, 5, "bleed", events, { proc: true });
+  hit(state, source, target, 5, "bleed", events, { origin: "proc" as const });
   tickStatuses(state, target, events);
   expect(state.currency - before).toBe(2);
   expect(state.battle!.earnedGold).toBe(2);
@@ -174,7 +179,7 @@ it("banks Cutpurse Gold for hits and ticks exactly once and caps actual retained
   tickStatuses(state, target, events);
   expect(state.currency - before).toBe(2);
   state.currency = 1_000_000;
-  hit(state, source, target, 5, "bleed", events, { proc: true });
+  hit(state, source, target, 5, "bleed", events, { origin: "proc" as const });
   expect(state.battle!.earnedGold).toBe(2);
 });
 it("cleanses Poison before ticks, healing only a fully removed effect and attacking the first living enemy", () => {
@@ -202,7 +207,7 @@ it("uses seeded chances for Brass Censer, Parasitic Bloom and Lucky Clover witho
       source.health = 1;
       state.rng = seed * 100_003;
       const type = boon === "brass-censer" ? "light" : boon === "parasitic-bloom" ? "poison" : "nature";
-      hit(state, source, target, 8, type, events, { proc: true });
+      hit(state, source, target, 8, type, events, { origin: "proc" as const });
       if (target.combat.burn) seen.add("burn");
       if (source.health > 1) seen.add(boon);
       if (state.currency > 0) {
@@ -214,11 +219,11 @@ it("uses seeded chances for Brass Censer, Parasitic Bloom and Lucky Clover witho
       repeat.state.boons = [boon];
       repeat.source.health = 1;
       repeat.state.rng = seed * 100_003;
-      hit(repeat.state, repeat.source, repeat.target, 8, type, repeat.events, { proc: true });
+      hit(repeat.state, repeat.source, repeat.target, 8, type, repeat.events, { origin: "proc" as const });
       expect(repeat.events).toEqual(events);
       expect(repeat.state.rng).toBe(state.rng);
       const before = state.currency;
-      hit(state, target, source, 1, type, events, { proc: true });
+      hit(state, target, source, 1, type, events, { origin: "proc" as const });
       expect(state.currency).toBe(before);
     }
   }
@@ -261,12 +266,12 @@ it("does not pay Gold or roll offensive Boons on blocked damage or enemy packets
   for (const type of ["bleed", "poison", "nature", "light"] as const) {
     const before = state.rng;
     target.block = 100;
-    hit(state, source, target, 5, type, events, { proc: true });
+    hit(state, source, target, 5, type, events, { origin: "proc" as const });
     expect(state.rng).toBe(before);
     expect(state.currency).toBe(0);
     expect(source.health).toBe(10);
     source.block = 100;
-    hit(state, target, source, 5, type, events, { proc: true });
+    hit(state, target, source, 5, type, events, { origin: "proc" as const });
     expect(state.rng).toBe(before);
     expect(state.currency).toBe(0);
     expect(target.health).toBe(100);

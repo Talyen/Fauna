@@ -70,7 +70,7 @@ it.each([10, 20, 30, 40, 50, 60])(
       const attacker = game.battle!.enemies[0]!;
       for (const target of game.team) {
         const health = target.health;
-        hit(game, attacker, target, 10, "burn", [], { proc: true });
+        hit(game, attacker, target, 10, "burn", [], { origin: "proc" as const });
         expect(target.health).toBe(health - (10 - percent / 10));
         expect(target.combat!.burn).toBe(10 - percent / 10);
         target.health = health;
@@ -79,7 +79,7 @@ it.each([10, 20, 30, 40, 50, 60])(
         expect(target.health).toBe(health - (10 - percent / 10));
         expect(target.combat!.burn).toBe(5);
         target.health = health;
-        hit(game, attacker, target, 10, "water", [], { proc: true });
+        hit(game, attacker, target, 10, "water", [], { origin: "proc" as const });
         expect(target.health).toBe(health - 10);
       }
     });
@@ -92,7 +92,7 @@ it("combines Burn resistance with talents before rounding and spending Block", (
     game.talents = ["burn.fire-resistance"];
     const target = game.team[1]!;
     target.block = 3;
-    hit(game, game.battle!.enemies[0]!, target, 20, "burn", [], { proc: true });
+    hit(game, game.battle!.enemies[0]!, target, 20, "burn", [], { origin: "proc" as const });
     expect(target.block).toBe(0);
     expect(target.health).toBe(species(target.species).health - 1);
     expect(target.combat!.burn).toBe(1);
@@ -115,14 +115,14 @@ it("uses only living deployed protectors and the strongest canopy, including ene
       if (mode === "enemy") {
         attacker.species = "shadebrim";
         const recipient = game.battle!.enemies[1]!;
-        hit(game, protector, recipient, 10, "burn", [], { proc: true });
+        hit(game, protector, recipient, 10, "burn", [], { origin: "proc" as const });
         expect(recipient.health).toBe(recipient.maxHealth - 9);
       } else {
         if (mode === "reserveTarget") {
           game.team.splice(1, 1);
           game.reserves.push(target);
         }
-        hit(game, attacker, target, 10, "burn", [], { proc: true });
+        hit(game, attacker, target, 10, "burn", [], { origin: "proc" as const });
         expect(target.health).toBe(species(target.species).health - (mode === "duplicate" ? 4 : 10));
       }
     });
@@ -136,10 +136,10 @@ it("reflects only the next applicable Burn, retaining other reflection and preve
     const target = game.team[0]!,
       attacker = game.battle!.enemies[0]!;
     // Non-Burn statuses and fully absorbed hits leave Noonward's charge intact
-    hit(game, attacker, target, 2, "poison", [], { proc: true });
+    hit(game, attacker, target, 2, "poison", [], { origin: "proc" as const });
     expect(target.combat!.reflectBurn).toBe(true);
     expect(target.combat!.poison).toBe(0);
-    hit(game, attacker, target, 4, "poison", [], { proc: true });
+    hit(game, attacker, target, 4, "poison", [], { origin: "proc" as const });
     expect(target.combat!.poison).toBe(2);
     expect(target.combat!.reflectBurn).toBe(true);
     target.combat!.poison = 0;
@@ -148,7 +148,7 @@ it("reflects only the next applicable Burn, retaining other reflection and preve
       enemy.combat.reflectBurn = true;
     });
     const before = target.health;
-    hit(game, attacker, target, 10, "burn", [], { proc: true });
+    hit(game, attacker, target, 10, "burn", [], { origin: "proc" as const });
     expect(target.health).toBe(before - 9);
     expect(target.combat!.burn).toBe(0);
     expect(target.combat!.reflectBurn).toBe(false);
@@ -156,7 +156,7 @@ it("reflects only the next applicable Burn, retaining other reflection and preve
     expect(game.battle!.enemies.reduce((sum, enemy) => sum + enemy.combat.burn, 0)).toBe(9);
     expect(game.battle!.enemies.every((enemy) => enemy.combat.reflectBurn)).toBe(true);
     target.combat!.reflect = false;
-    hit(game, attacker, target, 2, "burn", [], { proc: true });
+    hit(game, attacker, target, 2, "burn", [], { origin: "proc" as const });
     expect(target.combat!.burn).toBe(2);
   });
 });
@@ -179,7 +179,11 @@ it("does not spend Burn reflection on Dodge, full absorption, ticks, Nullify or 
           2,
           "burn",
           [],
-          mode === "dodge" ? { blindMiss: true } : mode === "periodic" ? { periodic: true } : { proc: true },
+          mode === "dodge"
+            ? { origin: "ability" as const, blindMiss: true }
+            : mode === "periodic"
+              ? { origin: "periodic" as const }
+              : { origin: "proc" as const },
         );
       expect(target.combat!.reflectBurn).toBe(mode !== "purge");
     });

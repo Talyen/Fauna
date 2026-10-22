@@ -143,12 +143,17 @@ it.each(["dodge", "block", "periodic", "derived", "retaliation", "knockout"] as 
         unit.health = 1;
         unit.combat!.deathDoorUsed = true;
       }
-      hit(game, game.battle!.enemies[0]!, unit, 1, "water", events, {
-        blindMiss: kind === "dodge",
-        periodic: kind === "periodic",
-        derived: kind === "derived",
-        retaliation: kind === "retaliation",
-      });
+      hit(
+        game,
+        game.battle!.enemies[0]!,
+        unit,
+        1,
+        "water",
+        events,
+        kind === "periodic" || kind === "derived" || kind === "retaliation"
+          ? { origin: kind }
+          : { origin: "ability", blindMiss: kind === "dodge" },
+      );
       expect(unit.combat!.waterThorns).toBe(3);
       expect(events.some((event) => event.kind === "damage" && event.actorId === unit.id)).toBe(false);
     });

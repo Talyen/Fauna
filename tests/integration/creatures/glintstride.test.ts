@@ -97,11 +97,11 @@ it("does not grant Wrong Foot to teammates or trigger it from misses and non-att
     target.health = target.maxHealth = 100;
     target.combat.blind = true;
     for (const options of [
-      { blindMiss: true },
-      { periodic: true },
-      { retaliation: true },
-      { derived: true },
-      { proc: true },
+      { origin: "ability" as const, blindMiss: true },
+      { origin: "periodic" as const },
+      { origin: "retaliation" as const },
+      { origin: "derived" as const },
+      { origin: "proc" as const },
     ]) {
       const events: GameEvent[] = [];
       hit(game, source, target, 2, "light", events, options);

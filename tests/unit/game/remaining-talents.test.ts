@@ -82,7 +82,7 @@ describe("remaining Alchemy talents adapted to creatures", () => {
     const before = f.source.health;
     hit(f.state, f.target, f.source, 8, type, f.events);
     expect(f.source.health).toBe(before - 4);
-    hit(f.state, f.target, f.source, 8, type, f.events, { periodic: true });
+    hit(f.state, f.target, f.source, 8, type, f.events, { origin: "periodic" as const });
     expect(f.source.health).toBe(before - 8);
   });
   it.each([
@@ -91,7 +91,7 @@ describe("remaining Alchemy talents adapted to creatures", () => {
   ] as const)("%s mitigates damage with Armor", (talent, type) => {
     const f = fixture([talent]);
     f.source.combat!.armor = 4;
-    hit(f.state, f.target, f.source, 8, type, f.events, { periodic: true });
+    hit(f.state, f.target, f.source, 8, type, f.events, { origin: "periodic" as const });
     expect(f.source.health).toBe(6);
     expect(f.source.combat!.armor).toBe(3);
   });
@@ -101,7 +101,7 @@ describe("remaining Alchemy talents adapted to creatures", () => {
   ] as const)("%s protects while Block remains", (talent, type) => {
     const f = fixture([talent]);
     f.source.block = 2;
-    hit(f.state, f.target, f.source, 8, type, f.events, { periodic: true });
+    hit(f.state, f.target, f.source, 8, type, f.events, { origin: "periodic" as const });
     expect(f.source.health).toBe(6);
     expect(f.source.block).toBe(2);
   });
@@ -214,7 +214,7 @@ describe("remaining Alchemy talents adapted to creatures", () => {
   });
   it("grows Finding Rhythm only on damage and grants Last Gasp below half Health", () => {
     const f = fixture(["dodge.finding-rhythm"]);
-    hit(f.state, f.target, f.source, 1, "nature", f.events, { periodic: true });
+    hit(f.state, f.target, f.source, 1, "nature", f.events, { origin: "periodic" as const });
     expect(f.source.combat!.rhythm).toBe(5);
     f.state.talents = ["health.last-gasp"];
     f.state.rng = 1;
@@ -239,14 +239,18 @@ describe("remaining Alchemy talents adapted to creatures", () => {
     ]);
     f.source.health = maximumHealth(f.source);
     f.source.combat!.poison = 3;
-    hit(f.state, f.target, f.source, maximumHealth(f.source) - 4, "light", f.events, { periodic: true });
+    hit(f.state, f.target, f.source, maximumHealth(f.source) - 4, "light", f.events, {
+      origin: "periodic" as const,
+    });
     expect(f.source.combat!.armor).toBeGreaterThan(0);
     expect(f.source.block).toBe(6);
     expect(f.source.combat!.poison).toBe(0);
     restoreHealth(f.source, 99, f.events);
-    hit(f.state, f.target, f.source, maximumHealth(f.source) - 4, "light", f.events, { periodic: true });
+    hit(f.state, f.target, f.source, maximumHealth(f.source) - 4, "light", f.events, {
+      origin: "periodic" as const,
+    });
     expect(f.source.block).toBe(6);
-    hit(f.state, f.target, f.source, 100, "light", f.events, { periodic: true });
+    hit(f.state, f.target, f.source, 100, "light", f.events, { origin: "periodic" as const });
     expect(f.source.combat!.grace).toBe(3);
   });
   it("converts only card overhealing, cleanses once and charges Divine Favor", () => {
@@ -343,14 +347,14 @@ describe("remaining Alchemy talents adapted to creatures", () => {
     f.target.combat.poison = 1;
     f.source.health = maximumHealth(f.source) - 2;
     f.state.battle!.mana = 0;
-    hit(f.state, f.source, f.target, 10, "light", f.events, { leech: true });
+    hit(f.state, f.source, f.target, 10, "light", f.events, { origin: "ability", leech: true });
     expect(f.source.health).toBe(maximumHealth(f.source));
     expect(f.state.battle!.mana).toBe(1);
     for (const talent of ["leech.bloodletting", "leech.blood-debt", "leech.mana-siphon"])
       anyProc([talent], (f) => {
         f.source.combat!.poison = 1;
         f.state.battle!.mana = 0;
-        hit(f.state, f.source, f.target, 10, "light", f.events, { leech: true });
+        hit(f.state, f.source, f.target, 10, "light", f.events, { origin: "ability", leech: true });
         return talent.endsWith("bloodletting")
           ? f.source.combat!.poison === 0
           : talent.endsWith("blood-debt")
@@ -361,7 +365,11 @@ describe("remaining Alchemy talents adapted to creatures", () => {
   it("Cull the Weak boosts only Leech card packets", () => {
     const f = fixture(["leech.cull-the-weak"]);
     f.target.health = 100;
-    hit(f.state, f.source, f.target, 8, "physical", f.events, { leech: true, cardLeech: true });
+    hit(f.state, f.source, f.target, 8, "physical", f.events, {
+      origin: "ability",
+      leech: true,
+      cardLeech: true,
+    });
     expect(f.target.health).toBe(90);
   });
   it("Freezes strip defenses, preserve Poison, and draw once on thaw", () => {

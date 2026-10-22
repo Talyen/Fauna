@@ -104,7 +104,11 @@ it.each([0, 10])("Sporecoat retaliates on landed attacks even with %i Block", (b
 });
 
 it("Sporecoat ignores Dodges, ticks, derived packets and knockouts without recursive retaliation", () => {
-  for (const options of [{ periodic: true }, { derived: true }, { retaliation: true }]) {
+  for (const options of [
+    { origin: "periodic" as const },
+    { origin: "derived" as const },
+    { origin: "retaliation" as const },
+  ]) {
     const result = produce(ready(), (game) => {
       hit(game, game.battle!.enemies[0]!, game.team[0]!, 2, "nature", [], options);
     });
