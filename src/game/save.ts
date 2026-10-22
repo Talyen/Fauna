@@ -1,4 +1,4 @@
-import { needsCampfire, merchantPrice } from "./support";
+import { needsCampfire, merchantPrice } from "./destinations";
 import { freeze } from "immer";
 import { MAX_HAND_SIZE } from "./card-zones";
 import { starterCount, collectedSpecies, KEYWORDS, talentPoints } from "./progression";
@@ -225,4 +225,3 @@ export function decodeSave(raw: string): GameState {
 export function encodeSave(state: GameState) {
   return JSON.stringify(state);
 }
-export { validateContent } from "./content-validation";

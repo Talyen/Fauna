@@ -1,7 +1,7 @@
-import { AnimatedNumber } from "../expedition/result-presentation";
+import { AnimatedNumber } from "./result-presentation";
 import { Coins } from "lucide-react";
-import type { GameState } from "../../game/types";
-import { KeywordProgressGrid } from "../shared/keyword-progress-grid";
+import type { GameState } from "../../../game/types";
+import { KeywordProgressGrid } from "../keyword-progress-grid";
 export function BattleEarnings({ game, detailed = false }: { game: GameState; detailed?: boolean }) {
   const receipt = game.journey?.lastBattle;
   if (!receipt) return null;

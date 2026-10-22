@@ -1,6 +1,7 @@
 import { expect, it } from "vitest";
 import { produce } from "immer";
-import { CARDS, cardText, definition, species } from "../../../src/game/content";
+import { CARDS, definition, species } from "../../../src/game/content";
+import { cardText } from "../../../src/game/card-rules";
 import { applyBlind, freshCombat, hit } from "../../../src/game/combat/index";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";

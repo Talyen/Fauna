@@ -6,7 +6,7 @@ import { produce } from "immer";
 import { CARDS, definition, species } from "../../../src/game/content";
 import { encodeSave } from "../../../src/game/save";
 import { createGame } from "../../../src/game/engine";
-import { enemyInspectionValue } from "../../../src/game/rules";
+import { enemyInspectionValue } from "../../../src/game/ability-rules";
 import { freshCombat } from "../../../src/game/combat/index";
 import { ActionDetails, StarterDetails } from "../../../src/ui/shared/cards/card-details";
 import { App } from "../../../src/ui/App";

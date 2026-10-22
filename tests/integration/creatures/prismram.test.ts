@@ -1,6 +1,7 @@
 import { expect, it } from "vitest";
 import { produce } from "immer";
-import { CARDS, cardText, definition, species, type DamageType } from "../../../src/game/content";
+import { CARDS, definition, species, type DamageType } from "../../../src/game/content";
+import { cardText } from "../../../src/game/card-rules";
 import { freshCombat, hit, removeEffects, tickStatuses } from "../../../src/game/combat/index";
 import { createGame, dispatch, previewCard } from "../../../src/game/engine";
 import { COMBAT_PACKS } from "../../../src/game/encounters";

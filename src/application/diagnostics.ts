@@ -84,6 +84,8 @@ export function createDiagnostics(port?: DiagnosticPort) {
       try {
         // Never stringify arbitrary error context or full save payloads.
         const message = sanitize(errorMessage(error));
+        // Error getters can dispose the owner while the message is being inspected.
+        if (disposed) return;
         const match = entries.find((entry) => entry.source === source && entry.message === message);
         entries = retain(
           [

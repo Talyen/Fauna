@@ -15,7 +15,7 @@ import { definition, species, TALENTS } from "../../../src/game/content";
 import { dispatch } from "../../../src/game/engine";
 import { beginBattle } from "../../../src/game/journey";
 import { canBuyTalent } from "../../../src/game/progression";
-import { cardCost } from "../../../src/game/rules";
+import { cardCost } from "../../../src/game/ability-rules";
 import { previewPlay } from "../../../src/game/preview";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import type { GameEvent, GameState } from "../../../src/game/types";

@@ -1,6 +1,6 @@
 import { commandPhases } from "./command-phases";
 import { executeAbility } from "./combat/abilities";
-import { canVisitCampfire, campfireRecovery, canVisitMerchant, canRecruitDestination } from "./support";
+import { canVisitCampfire, campfireRecovery, canVisitMerchant, canRecruitDestination } from "./destinations";
 import saveFormat from "./save-format.json" with { type: "json" };
 import { freeze, produce } from "immer";
 import {
@@ -13,7 +13,7 @@ import {
 } from "./progression";
 import { combat, gainMana, restoreHealth, controlled } from "./combat/index";
 import { fillHand } from "./card-zones";
-import { actionValue, cardCost } from "./rules";
+import { actionValue, cardCost } from "./ability-rules";
 import { CARDS, SPECIES, definition, species } from "./content";
 import { bossEncounter } from "./encounters";
 import type { Command, CommandResult, GameEvent, GameState } from "./types";

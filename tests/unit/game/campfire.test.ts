@@ -2,7 +2,7 @@ import { expect, it } from "vitest";
 import { produce } from "immer";
 import { dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { canVisitCampfire } from "../../../src/game/support";
+import { canVisitCampfire } from "../../../src/game/destinations";
 import { prepareDestination, accept, run, starterJourney } from "../../support/game";
 function destinations() {
   return starterJourney(3, "captoad");

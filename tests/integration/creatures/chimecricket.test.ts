@@ -1,3 +1,4 @@
+import { cardText } from "../../../src/game/card-rules";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import * as content from "../../../src/game/content";
@@ -42,7 +43,7 @@ it("plays the approved one-Mana kit and resumes deterministic previews", () => {
   expect(
     content.CARDS.filter((card) => card.species === "chimecricket").map((card) => [
       card.cost,
-      content.cardText(card),
+      cardText(card),
     ]),
   ).toEqual([
     [1, "Deal 4 Stun damage; Draw 1 card"],

@@ -1,13 +1,14 @@
 import { expect, it } from "vitest";
 import { produce } from "immer";
-import { CARDS, cardText, definition, species } from "../../../src/game/content";
-import { freshCombat, hit } from "../../../src/game/combat/index";
-import { createGame, dispatch, previewCard } from "../../../src/game/engine";
-import { COMBAT_PACKS } from "../../../src/game/encounters";
-import { cardKeywords } from "../../../src/game/progression";
-import { decodeSave, encodeSave } from "../../../src/game/save";
-import { accept, teamRun, winBattle } from "../../support/game";
-import type { GameEvent } from "../../../src/game/types";
+import { CARDS, definition, species } from "../../../../src/game/content";
+import { cardText } from "../../../../src/game/card-rules";
+import { freshCombat, hit } from "../../../../src/game/combat";
+import { createGame, dispatch, previewCard } from "../../../../src/game/engine";
+import { COMBAT_PACKS } from "../../../../src/game/encounters";
+import { cardKeywords } from "../../../../src/game/progression";
+import { decodeSave, encodeSave } from "../../../../src/game/save";
+import { accept, teamRun, winBattle } from "../../../support/game";
+import type { GameEvent } from "../../../../src/game/types";
 
 function ready(id = "cindernewt-attack", seed = 1) {
   return produce(teamRun(1, ["cindernewt", "mossguard", "dunefox"]), (game) => {

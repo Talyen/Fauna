@@ -3,7 +3,7 @@ import { Progress } from "../shared/progress";
 import { motionValue } from "../shared/motion-values";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { PagedItems } from "../shared/navigation/pagination";
-import { campfireRecovery } from "../../game/support";
+import { campfireRecovery } from "../../game/destinations";
 import { species } from "../../game/content";
 import type { Command, GameState, GameEvent, StateAt } from "../../game/types";
 import { Button } from "../../components/ui/button";

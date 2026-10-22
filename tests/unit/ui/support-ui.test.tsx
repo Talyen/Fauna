@@ -1,5 +1,6 @@
 // @vitest-environment jsdom
 import { it, expect, vi, afterEach } from "vitest";
+import type { GameState } from "../../../src/game/types";
 import type { ReactElement } from "react";
 import { render as renderUI, screen, fireEvent, cleanup } from "@testing-library/react";
 import { produce } from "immer";
@@ -11,12 +12,18 @@ import { SupportOffer, SupportScreen } from "../../../src/ui/expedition/support-
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
 const render = (ui: ReactElement) => renderUI(ui, { wrapper: TooltipProvider });
 afterEach(cleanup);
+function requireMerchant(game: GameState) {
+  if (game.phase !== "support") throw new Error("Expected an active Merchant visit.");
+  return game;
+}
 function merchant() {
   let s = accept(accept(createGame(7), { type: "draft", species: createGame(7).starterOffers[0]! }), {
     type: "start",
   });
   s = winBattle(accept(s, { type: "beginBattle" }));
-  return accept(s, recruitChoice(s));
+  const ready = accept(s, recruitChoice(s));
+  if (ready.phase !== "teamSelection") throw new Error("Expected destination offers.");
+  return ready;
 }
 it("opens Merchant directly with the saved visit identity", () => {
   const game = merchant(),
@@ -27,10 +34,10 @@ it("opens Merchant directly with the saved visit identity", () => {
   expect(screen.queryByRole("dialog")).toBeNull();
 });
 it("replaces the shelf with the purchased Boon reward, restores it on reload and focuses Continue", () => {
-  let game = merchant();
+  let game: GameState = merchant();
   game = accept(game, { type: "enterSupport", visit: game.support!.id });
   const send = vi.fn(() => true);
-  const { rerender } = render(<SupportScreen game={game} send={send} />);
+  const { rerender } = render(<SupportScreen game={requireMerchant(game)} send={send} />);
   fireEvent.click(screen.getAllByRole("button", { name: /^Buy .+ for 20 Gold$/ })[0]!);
   expect(send).toHaveBeenCalledExactlyOnceWith({
     type: "buyBoon",
@@ -38,14 +45,14 @@ it("replaces the shelf with the purchased Boon reward, restores it on reload and
     slot: game.support!.stock[0]!.slot,
   });
   game = accept(game, { type: "buyBoon", visit: game.support!.id, slot: game.support!.stock[0]!.slot });
-  rerender(<SupportScreen game={game} send={send} />);
+  rerender(<SupportScreen game={requireMerchant(game)} send={send} />);
   expect(screen.getByRole("heading", { name: "Boon received" })).toBeTruthy();
   expect(screen.getByRole("region", { name: "Purchased Boon" })).toBeTruthy();
   expect(screen.queryByRole("button", { name: /^Buy / })).toBeNull();
   expect(screen.getByText("For this journey")).toBeTruthy();
   expect(document.activeElement).toBe(screen.getByRole("button", { name: "Continue" }));
   cleanup();
-  render(<SupportScreen game={decodeSave(encodeSave(game))} send={send} />);
+  render(<SupportScreen game={requireMerchant(decodeSave(encodeSave(game)))} send={send} />);
   fireEvent.click(screen.getByRole("button", { name: "Continue" }));
   expect(send).toHaveBeenLastCalledWith({ type: "leaveSupport", visit: game.support!.id });
 });
@@ -60,7 +67,7 @@ it.each([19, 20])("shows Merchant only when an item is affordable with %s Gold",
 it("labels the wallet and prices as Gold", () => {
   const s = merchant();
   const game = accept(s, { type: "enterSupport", visit: s.support!.id });
-  render(<SupportScreen game={game} send={() => true} />);
+  render(<SupportScreen game={requireMerchant(game)} send={() => true} />);
   expect(screen.getAllByText("20 Gold")[0]).toBeTruthy();
   expect(screen.getAllByRole("button", { name: /^Buy .+ for 20 Gold$/ })).toHaveLength(3);
   expect(screen.getByText("Limit 1 per customer")).toBeTruthy();
@@ -72,16 +79,18 @@ it("keeps unavailable offers inspectable and rejects purchases with their specif
     d.currency = 0;
   });
   const send = vi.fn(() => true);
-  const { rerender } = render(<SupportScreen game={game} send={send} />);
+  const { rerender } = render(<SupportScreen game={requireMerchant(game)} send={send} />);
   expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(3);
   expect(screen.getAllByText("Not enough Gold")).toHaveLength(3);
   fireEvent.click(screen.getAllByRole("button", { name: /^Buy .+ for 20 Gold$/ })[0]!);
   expect(send).not.toHaveBeenCalled();
   rerender(
     <SupportScreen
-      game={produce(game, (d) => {
-        d.support!.resolved = true;
-      })}
+      game={requireMerchant(
+        produce(game, (d) => {
+          d.support!.resolved = true;
+        }),
+      )}
       send={send}
     />,
   );

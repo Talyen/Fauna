@@ -4,7 +4,7 @@ import { produce } from "immer";
 import { createGame, dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { cardKeywords, talentPoints } from "../../../src/game/progression";
-import { cardCost } from "../../../src/game/rules";
+import { cardCost } from "../../../src/game/ability-rules";
 import { previewPlay } from "../../../src/game/preview";
 import { teamRun, recruitChoice, accept, run, winBattle, policy, bossReward } from "../../support/game";
 describe("keyword progression and rewards", () => {

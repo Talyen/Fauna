@@ -4,7 +4,7 @@ import { HandMotion } from "./hand-motion";
 import { combatStatuses } from "../shared/combat/combat-status";
 import { motionValue } from "../shared/motion-values";
 import { ActionDetails } from "../shared/cards/card-details";
-import { cardCost } from "../../game/rules";
+import { cardCost } from "../../game/ability-rules";
 import { controlled } from "../../game/combat/index";
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Button } from "../../components/ui/button";

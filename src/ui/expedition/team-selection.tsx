@@ -1,12 +1,13 @@
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
 
 import { RestRecovery } from "./campfire";
-import { canVisitCampfire, canRecruitDestination } from "../../game/support";
+import { canVisitCampfire, canRecruitDestination } from "../../game/destinations";
 import { SupportOffer } from "./support-screen";
 import { assetUrl } from "../shared/assets";
 import { CreatureCard } from "../shared/cards/cards";
 import { KeywordText } from "../shared/keyword-text";
-import { CARDS, cardText, species } from "../../game/content";
+import { CARDS, species } from "../../game/content";
+import { cardText } from "../../game/card-rules";
 import { CreatureDetails } from "../shared/cards/card-details";
 
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
@@ -15,7 +16,7 @@ import { ArtCard } from "../shared/cards/art-card";
 import type { Command, StateAt, GameEvent } from "../../game/types";
 import type { Inspection } from "../shared/inspection-model";
 
-import { BattleEarnings } from "../battle/battle-earnings";
+import { BattleEarnings } from "../shared/rewards/battle-earnings";
 import { bossEncounter, encounterSource, JOURNEY_LENGTH } from "../../game/encounters";
 type Props = {
   game: StateAt<"teamSelection">;

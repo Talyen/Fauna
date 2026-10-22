@@ -1,13 +1,14 @@
 import { produce } from "immer";
 import { expect, it } from "vitest";
-import { CARDS, cardText, definition, species, type SpeciesId } from "../../../src/game/content";
-import { freshCombat, hit, tickStatuses } from "../../../src/game/combat/index";
-import { dispatch, previewCard } from "../../../src/game/engine";
-import { COMBAT_PACKS, encounterSource } from "../../../src/game/encounters";
-import { definitionKeywords } from "../../../src/game/keywords";
-import { decodeSave, encodeSave } from "../../../src/game/save";
-import type { GameEvent } from "../../../src/game/types";
-import { prepareDestination, accept, teamRun, winBattle } from "../../support/game";
+import { CARDS, definition, species, type SpeciesId } from "../../../../src/game/content";
+import { cardText } from "../../../../src/game/card-rules";
+import { freshCombat, hit, tickStatuses } from "../../../../src/game/combat";
+import { dispatch, previewCard } from "../../../../src/game/engine";
+import { COMBAT_PACKS, encounterSource } from "../../../../src/game/encounters";
+import { definitionKeywords } from "../../../../src/game/keywords";
+import { decodeSave, encodeSave } from "../../../../src/game/save";
+import type { GameEvent } from "../../../../src/game/types";
+import { prepareDestination, accept, teamRun, winBattle } from "../../../support/game";
 
 function ready(kinds: SpeciesId[] = ["captoad"], cardId = "captoad-swap") {
   return produce(teamRun(1, kinds), (game) => {

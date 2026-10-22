@@ -1,7 +1,8 @@
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { renderToStaticMarkup } from "react-dom/server";
-import { CARDS, cardText, species } from "../../../src/game/content";
+import { CARDS, species } from "../../../src/game/content";
+import { cardText } from "../../../src/game/card-rules";
 import {
   applyBlind,
   beginAttack,

@@ -1,6 +1,7 @@
 import { expect, it } from "vitest";
 import { produce } from "immer";
-import { CARDS, cardText, FIRST_RUN_STARTERS } from "../../../src/game/content";
+import { CARDS, FIRST_RUN_STARTERS } from "../../../src/game/content";
+import { cardText } from "../../../src/game/card-rules";
 import { freshCombat } from "../../../src/game/combat/index";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
@@ -39,7 +40,13 @@ it("registers Cadenza's kit, recruitment, automatic targeting and save/preview p
     expect(previewCard(game, game.battle!.hand[0]!)).toEqual(result);
     expect(encodeSave(game)).toBe(before);
     expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
-    expect(battleChoices(game)).toContainEqual(
+    const policyGame =
+      ability === "echoes-remember"
+        ? produce(game, (draft) => {
+            draft.battle!.discard.push(draft.battle!.draw.pop()!);
+          })
+        : game;
+    expect(battleChoices(policyGame)).toContainEqual(
       expect.objectContaining({ type: "play", cardId: game.battle!.hand[0] }),
     );
   }
@@ -195,30 +202,37 @@ it("Living Chorus requires a living deployed singer", () => {
     expect(result.state.team.find((unit) => unit.id === "ally-1")!.health).toBe(5);
   }
 });
-it("enemy Cadenza can use its sole support ability on consecutive turns and heals its own side", () => {
-  let game = produce(ready(), (draft) => {
-    const enemies = draft.battle!.enemies;
-    enemies[0]!.species = "cadenza";
-    enemies[0]!.name = "Cadenza";
-    enemies[0]!.health = 10;
-    enemies[0]!.maxHealth = 28;
-    enemies[1]!.health = 1;
-    enemies[1]!.maxHealth = 100;
-    enemies.forEach((enemy) => {
-      enemy.power = 0;
+it.each([0, 2])(
+  "enemy Cadenza at position %s protects and heals its side on consecutive turns",
+  (position) => {
+    let game = produce(ready(), (draft) => {
+      const enemies = draft.battle!.enemies;
+      enemies[position]!.species = "cadenza";
+      enemies[position]!.name = "Cadenza";
+      enemies[position]!.health = 10;
+      enemies[position]!.maxHealth = 28;
+      enemies[1]!.health = 1;
+      enemies[1]!.maxHealth = 100;
+      enemies.forEach((enemy) => {
+        enemy.power = 0;
+      });
     });
-  });
-  for (let turn = 0; turn < 2; turn++) {
-    const result = dispatch(game, { type: "endTurn" });
-    expect(result.accepted).toBe(true);
-    expect(
-      result.events.filter((event) => event.kind === "heal" && event.targetId === "enemy-1").length,
-    ).toBeGreaterThan(0);
-    expect(result.state.battle!.enemies[0]!.lastAbility).toBe("cadenza-rousing-refrain");
-    expect(result.state.battle!.enemies[0]!.combat.temporaryDodge).toBe(20);
-    game = result.state;
-  }
-});
+    for (let turn = 0; turn < 2; turn++) {
+      const result = dispatch(game, { type: "endTurn" });
+      expect(result.accepted).toBe(true);
+      expect(
+        result.events.filter((event) => event.kind === "heal" && event.targetId === "enemy-1").length,
+      ).toBeGreaterThan(0);
+      expect(result.state.battle!.enemies[position]!.lastAbility).toBe("cadenza-rousing-refrain");
+      expect(
+        result.state
+          .battle!.enemies.filter((enemy) => enemy.health > 0)
+          .map((enemy) => enemy.combat.temporaryDodge),
+      ).toEqual([20, 20, 20]);
+      game = result.state;
+    }
+  },
+);
 it("Living Chorus chooses the lowest Health proportion, breaks ties by position and works while controlled", () => {
   for (const tie of [false, true]) {
     const game = produce(ready("echoes-remember"), (draft) => {

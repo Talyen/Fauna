@@ -65,7 +65,7 @@ export const GLOSSARY = [
   {
     term: "Talents",
     definition:
-      "Keyword XP earns points for that keyword's talents; The first point takes 20 XP, then another 40, then 60; Complete each row to open the next; Talents apply immediately to every matching creature; Reset a category at any time to refund all its points while retaining XP",
+      "Keyword XP earns points for that keyword's talents; The first point takes 10 XP, then another 30, then 60; Complete each row to open the next; Talents apply immediately to every matching creature; Reset a category at any time to refund all its points while retaining XP",
   },
   {
     term: "Backup",

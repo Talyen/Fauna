@@ -1,4 +1,4 @@
-import { merchantPrice } from "./support";
+import { merchantPrice } from "./destinations";
 import { collectedSpecies, starterCount, creaturePassive, KEYWORDS, hasTalent } from "./progression";
 import { BOONS, SPECIES, FIRST_RUN_STARTERS } from "./content";
 import {
