@@ -206,7 +206,19 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
   };
   const removeCloseListener = platform.onCloseRequested?.(prepareClose);
   return {
-    store: { getState: store.getState, getInitialState: store.getInitialState, subscribe: store.subscribe },
+    store: {
+      getState: store.getState,
+      getInitialState: store.getInitialState,
+      subscribe(listener: Parameters<typeof store.subscribe>[0]) {
+        return store.subscribe((view, previous) => {
+          try {
+            listener(view, previous);
+          } catch (error) {
+            diagnostics.record("render", error, view.game);
+          }
+        });
+      },
+    },
     diagnostics,
     display: platform.display,
     load,
@@ -255,10 +267,15 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
       disposed = true;
       clearTimeout(retryTimer);
       store.setState({ ready: false, closing: true });
-      diagnostics.dispose();
       const cloudWrites = cloud.dispose();
-      removeOverlay?.();
-      removeCloseListener?.();
+      for (const remove of [removeOverlay, removeCloseListener]) {
+        try {
+          remove?.();
+        } catch (error) {
+          diagnostics.record("global", error, store.getState().game);
+        }
+      }
+      diagnostics.dispose();
       generation++;
       complete(Promise.all([writes, cloudWrites]).then(() => {}));
       return disposal;

@@ -672,3 +672,113 @@ it("keeps browser backups intact when no application validation policy is suppli
   expect(memory.getItem("fauna.save.v1.backup1")).toBe(checkpoint);
   expect(memory.getItem("fauna.save.v1.backup2")).toBeNull();
 });
+
+it.each(["fauna.save.v1.backup1", "fauna.save.v1.backup2"])(
+  "continues saving while preserving unreadable backup %s",
+  async (unreadable) => {
+    const memory = new MemoryStorage();
+    const saved = JSON.stringify(run());
+    memory.setItem("fauna.save.v1", saved);
+    memory.setItem(unreadable, "unreadable checkpoint");
+    const read = memory.getItem.bind(memory);
+    memory.getItem = (key) => {
+      if (key === unreadable) throw new Error("slot unavailable");
+      return read(key);
+    };
+    const s = createSession(createBrowserPlatform(memory));
+    try {
+      await s.load();
+      expect(s.command({ type: "endTurn" })).toBe(true);
+      expect(await s.flush()).toBe(true);
+      expect(JSON.parse(read("fauna.save.v1")!).revision).toBe(s.store.getState().game.revision);
+      expect(read(unreadable)).toBe("unreadable checkpoint");
+      const availableBackup = unreadable.endsWith("backup1") ? "backup2" : "backup1";
+      expect(read(`fauna.save.v1.${availableBackup}`)).toBe(saved);
+    } finally {
+      await s.dispose();
+    }
+  },
+);
+
+it("refuses to overwrite an unreadable primary even when a backup can be loaded", async () => {
+  const memory = new MemoryStorage();
+  memory.setItem("fauna.save.v1", "unknown primary");
+  memory.setItem("fauna.save.v1.backup1", JSON.stringify(run()));
+  const read = memory.getItem.bind(memory);
+  memory.getItem = (key) => {
+    if (key === "fauna.save.v1") throw new Error("primary unavailable");
+    return read(key);
+  };
+  const s = createSession(createBrowserPlatform(memory));
+  try {
+    await s.load();
+    expect(s.command({ type: "endTurn" })).toBe(true);
+    expect(await s.flush()).toBe(false);
+    expect(read("fauna.save.v1")).toBe("unknown primary");
+    expect(read("fauna.save.v1.backup1")).toBe(JSON.stringify(run()));
+  } finally {
+    await s.dispose();
+  }
+});
+
+it("isolates throwing presentation subscribers from commands, other subscribers and saving", async () => {
+  const p = platform();
+  const s = createSession(p);
+  await s.load();
+  s.store.subscribe(() => {
+    throw new Error("presentation failed");
+  });
+  const observed: number[] = [];
+  s.store.subscribe((view) => observed.push(view.game.revision));
+  try {
+    expect(s.command({ type: "draft", species: s.store.getState().game.starterOffers[0]! })).toBe(true);
+    expect(await s.flush()).toBe(true);
+    expect(observed).toContain(1);
+    expect(JSON.parse((await p.saves.readCandidates())[0]!.data).revision).toBe(1);
+    expect(s.diagnostics.snapshot().some((entry) => entry.message === "presentation failed")).toBe(true);
+  } finally {
+    await s.dispose();
+  }
+});
+
+it.each(["overlay", "close"])(
+  "drains admitted saves and completes cleanup if %s unsubscribe fails",
+  async (failed) => {
+    let release!: () => void;
+    const gate = new Promise<void>((resolve) => (release = resolve));
+    const removeOverlay = vi.fn(() => {
+      if (failed === "overlay") throw new Error("overlay cleanup failed");
+    });
+    const removeClose = vi.fn(() => {
+      if (failed === "close") throw new Error("close cleanup failed");
+    });
+    const write = vi.fn(async () => gate);
+    const s = createSession({
+      ...platform(),
+      onOverlay: () => removeOverlay,
+      onCloseRequested: () => removeClose,
+      saves: { readCandidates: async () => [], write },
+    });
+    await s.load();
+    s.command({ type: "draft", species: s.store.getState().game.starterOffers[0]! });
+    let finished = false;
+    try {
+      const disposing = s.dispose();
+      void disposing.then(() => {
+        finished = true;
+      });
+      expect(s.dispose()).toBe(disposing);
+      expect(removeOverlay).toHaveBeenCalledOnce();
+      expect(removeClose).toHaveBeenCalledOnce();
+      await Promise.resolve();
+      expect(finished).toBe(false);
+      expect(s.command({ type: "start" })).toBe(false);
+      release();
+      await disposing;
+      expect(finished).toBe(true);
+      expect(write).toHaveBeenCalledOnce();
+    } finally {
+      release();
+    }
+  },
+);

@@ -26,17 +26,28 @@ export function createBrowserPlatform(storage?: Storage): Platform {
       async write(data, isRecoverable = () => false) {
         const source = storage ?? window.localStorage;
         // Only application-approved checkpoints may displace recovery slots.
-        const intact = [KEY, `${KEY}.backup1`, `${KEY}.backup2`].flatMap((key) => {
-          const previous = source.getItem(key);
-          if (previous === null) return [];
+        const readable = new Set<string>();
+        const intact: string[] = [];
+        for (const key of [KEY, `${KEY}.backup1`, `${KEY}.backup2`]) {
+          let previous: string | null;
           try {
-            return isRecoverable(previous) ? [previous] : [];
-          } catch {
-            return [];
+            previous = source.getItem(key);
+            readable.add(key);
+          } catch (error) {
+            // Never replace an unknown primary or overwrite an inaccessible backup.
+            if (key === KEY) throw error;
+            continue;
           }
-        });
-        if (intact[1] !== undefined) source.setItem(`${KEY}.backup2`, intact[1]);
-        if (intact[0] !== undefined) source.setItem(`${KEY}.backup1`, intact[0]);
+          if (previous === null) continue;
+          try {
+            if (isRecoverable(previous)) intact.push(previous);
+          } catch {
+            // A failed validation cannot promote this checkpoint into recovery storage.
+          }
+        }
+        const backups = [`${KEY}.backup1`, `${KEY}.backup2`].filter((key) => readable.has(key));
+        for (let index = backups.length - 1; index >= 0; index--)
+          if (intact[index] !== undefined) source.setItem(backups[index]!, intact[index]!);
         source.setItem(KEY, data);
       },
     },
