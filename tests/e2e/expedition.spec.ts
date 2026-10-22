@@ -9,7 +9,16 @@ import { assetUrl } from "../../src/ui/assets";
 import prepared from "../../src/assets/prepared.json" with { type: "json" };
 import { BOONS, TALENTS, KEYWORDS } from "../../src/game/progression";
 import type { Command, GameState } from "../../src/game/types";
-import { recruitChoice, accept, policy, winBattle, victoryReady, run, bossReward } from "../unit/helpers";
+import {
+  recruitChoice,
+  accept,
+  policy,
+  winBattle,
+  victoryReady,
+  run,
+  bossReward,
+  FULL_JOURNEY_SEED,
+} from "../unit/helpers";
 const key = "fauna.save.v1";
 async function seed(page: Page, game = createGame(7)) {
   if (page.url() === "about:blank") await page.goto("/");
@@ -33,8 +42,12 @@ async function state(page: Page): Promise<GameState> {
 async function resume(page: Page) {
   await page.getByRole("button", { name: "Continue", exact: true }).click();
 }
-async function step(page: Page, activate: (el: Locator) => Promise<void> = (el) => el.click()) {
-  const s = await state(page),
+async function step(
+  page: Page,
+  activate: (el: Locator) => Promise<void> = (el) => el.click(),
+  committed?: GameState,
+) {
+  const s = committed ?? (await state(page)),
     c = policy(s);
   if (c.type === "beginBattle") {
     await activate(page.locator(".app:not([inert]) [data-encounter]"));
@@ -386,7 +399,7 @@ for (const [width, enlarged] of [
 
 test("one starter grows a lineup through a full expedition", async ({ page }) => {
   test.setTimeout(120_000);
-  await page.clock.setFixedTime(new Date(36));
+  await page.clock.setFixedTime(new Date(FULL_JOURNEY_SEED));
   await page.emulateMedia({ reducedMotion: "reduce" });
   await seed(page);
   const activate = (el: Locator) => el.click();
@@ -414,7 +427,7 @@ test("one starter grows a lineup through a full expedition", async ({ page }) =>
       const recruited = await state(page);
       expect(recruited.lineup).toEqual(recruited.team.map((creature) => creature.id));
       expect(recruited.reserves).toHaveLength(Math.max(0, recruited.roster.length - 3));
-    } else await step(page, activate);
+    } else await step(page, activate, s);
   }
   await expect(page.getByRole("heading", { name: "Journey complete", exact: true })).toBeVisible();
   expect((await state(page)).team).toHaveLength(3);

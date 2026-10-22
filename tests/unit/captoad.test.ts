@@ -90,12 +90,13 @@ it("Puffs Poison onto every living enemy, excluding knockouts", () => {
 
 it.each([0, 10])("Sporecoat retaliates on landed attacks even with %i Block", (block) => {
   const events: GameEvent[] = [];
-  const result = produce(ready(), (game) => {
+  const initial = ready();
+  const result = produce(initial, (game) => {
     game.team[0]!.block = block;
     hit(game, game.battle!.enemies[0]!, game.team[0]!, 2, "nature", events);
   });
   expect(result.team[0]!.health).toBe(block ? 30 : 28);
-  expect(result.battle!.enemies[0]!.health).toBe(17);
+  expect(result.battle!.enemies[0]!.health).toBe(initial.battle!.enemies[0]!.health - 1);
   expect(result.battle!.enemies[0]!.combat.poison).toBe(1);
   expect(result.battle!.enemies[0]!.combat.statusSources.poison).toBe("ally-0");
   expect(events.filter((event) => event.kind === "damage")).toHaveLength(2);
@@ -273,7 +274,7 @@ it.each([1, 2, 3, 4, 5, 6])(
       game.discovery.recruited.captoad = copies;
       hit(game, game.battle!.enemies[0]!, game.team[0]!, 2, "nature", []);
     });
-    expect(result.battle!.enemies[0]!.health).toBe(18 - copies);
+    expect(result.battle!.enemies[0]!.health).toBe(result.battle!.enemies[0]!.maxHealth - copies);
     expect(result.battle!.enemies[0]!.combat.poison).toBe(copies);
     expect(decodeSave(encodeSave(result))).toEqual(result);
     const enemyResult = produce(ready(), (game) => {
