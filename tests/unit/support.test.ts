@@ -26,11 +26,29 @@ it("saves an atomic purchase, rejects repeats and leaves the exact destination o
 });
 it("rejects stale and unaffordable purchases without changing state or RNG", () => {
   const s = merchant();
-  const entered = produce(accept(s, { type: "enterSupport", visit: s.support!.id }), (d) => {
+  const entered = accept(s, { type: "enterSupport", visit: s.support!.id });
+  const purchase = {
+    type: "buyBoon" as const,
+    visit: entered.support!.id,
+    slot: entered.support!.stock[0]!.slot,
+  };
+  expect(dispatch(entered, purchase).accepted).toBe(true);
+  for (const command of [
+    { ...purchase, visit: `${purchase.visit}-stale` },
+    { ...purchase, slot: "constructor" },
+  ]) {
+    const result = dispatch(entered, command);
+    expect(result.accepted).toBe(false);
+    expect(result.state).toBe(entered);
+    expect(result.events).toEqual([]);
+  }
+  const poor = produce(entered, (d) => {
     d.currency = 0;
   });
-  for (const slot of [entered.support!.stock[0]!.slot, "constructor"])
-    expect(dispatch(entered, { type: "buyBoon", visit: entered.support!.id, slot }).state).toBe(entered);
+  const rejected = dispatch(poor, purchase);
+  expect(rejected.accepted).toBe(false);
+  expect(rejected.state).toBe(poor);
+  expect(rejected.events).toEqual([]);
 });
 it("offers no support visit after the second ordinary victory", () => {
   let s = merchant();

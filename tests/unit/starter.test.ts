@@ -28,23 +28,7 @@ describe("collected starter drafts", () => {
   });
   it("onboards with one of three eligible creatures and collects only the committed starter", () => {
     let s = createGame(7);
-    expect(SPECIES.map((entry) => entry.id)).toEqual([
-      "mossguard",
-      "emberback",
-      "pollenmoth",
-      "prismram",
-      "captoad",
-      "dunefox",
-      "reedstag",
-      "cindernewt",
-      "coralcurl",
-      "chimecricket",
-      "dawncall",
-      "bloomquail",
-      "ringpalm",
-      "shadebrim",
-      "glintstride",
-    ]);
+    expect(s.unlocked).toHaveLength(SPECIES.length);
     expect(new Set(s.unlocked)).toEqual(new Set(SPECIES.map((entry) => entry.id)));
     expect(s.discovery.recruited).toEqual({});
     expect(s.starterOffers).toHaveLength(3);

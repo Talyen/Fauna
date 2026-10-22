@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 import { createSession as createSeededSession } from "../../src/application/session";
 import { createBrowserPlatform } from "../../src/platform/browser";
 import type { Platform } from "../../src/platform/ports";
+import { dispatch } from "../../src/game/engine";
 import { run, winBattle } from "./helpers";
 // Keep lifecycle fixtures independent of roster-driven changes to the default starter offers.
 const createSession: typeof createSeededSession = (platform, seed = 3, capabilities) =>
@@ -149,12 +150,26 @@ describe("save orchestration", () => {
     await s.dispose();
   });
   it("revokes command capabilities and ignores stale load completions after disposal", async () => {
-    const s = createSession(platform());
+    let release!: (data: { source: string; data: string }[]) => void;
+    const pending = new Promise<{ source: string; data: string }[]>((resolve) => {
+      release = resolve;
+    });
+    const write = vi.fn(async () => {});
+    const s = createSession({
+      ...platform(),
+      saves: { readCandidates: () => pending, write },
+    });
     const loading = s.load();
     await s.dispose();
+    const disposed = s.store.getState();
+    release([{ source: "primary", data: JSON.stringify(run()) }]);
     await loading;
+    expect(s.store.getState()).toBe(disposed);
     expect(s.store.getState().ready).toBe(false);
     expect(s.command({ type: "draft", species: s.store.getState().game.starterOffers[0]! })).toBe(false);
+    s.retrySave();
+    await s.flush();
+    expect(write).not.toHaveBeenCalled();
   });
 });
 describe("desktop close handshake", () => {
@@ -162,7 +177,6 @@ describe("desktop close handshake", () => {
     let requestClose: (() => Promise<boolean>) | undefined;
     let release: () => void = () => {};
     const blocked = new Promise<void>((resolve) => (release = resolve));
-    let fail = false;
     const s = createSession({
       ...platform(),
       onCloseRequested(listener) {
@@ -177,18 +191,33 @@ describe("desktop close handshake", () => {
         },
         async write() {
           await blocked;
-          if (fail) throw new Error("full");
         },
       },
     });
     await s.load();
-    s.command({ type: "draft", species: s.store.getState().game.starterOffers[0]! });
+    expect(s.command({ type: "draft", species: s.store.getState().game.starterOffers[0]! })).toBe(true);
+    const game = s.store.getState().game;
+    expect(dispatch(game, { type: "start" }).accepted).toBe(true);
+    let closed = false;
     const closing = requestClose!();
-    expect(s.command({ type: "draft", species: "emberback" })).toBe(false);
-    release();
-    expect(await closing).toBe(true);
-    await s.dispose();
+    void closing.then(() => {
+      closed = true;
+    });
+    try {
+      await new Promise<void>((resolve) => setImmediate(resolve));
+      expect(closed).toBe(false);
+      expect(s.command({ type: "start" })).toBe(false);
+      expect(s.store.getState().game).toBe(game);
+      release();
+      expect(await closing).toBe(true);
+    } finally {
+      release();
+      await s.dispose();
+    }
     expect(requestClose).toBeUndefined();
+    const write = vi.fn(async () => {
+      throw new Error("full");
+    });
     const failure = createSession({
       ...platform(),
       onCloseRequested(listener) {
@@ -199,15 +228,17 @@ describe("desktop close handshake", () => {
         async readCandidates() {
           return [];
         },
-        async write() {
-          throw new Error("full");
-        },
+        write,
       },
     });
-    fail = true;
     await failure.load();
-    failure.command({ type: "draft", species: failure.store.getState().game.starterOffers[0]! });
+    expect(failure.command({ type: "draft", species: failure.store.getState().game.starterOffers[0]! })).toBe(
+      true,
+    );
+    expect(await failure.flush()).toBe(false);
+    expect(write).toHaveBeenCalledOnce();
     expect(await requestClose!()).toBe(true);
+    expect(write).toHaveBeenCalledTimes(2);
     expect(failure.store.getState().closing).toBe(true);
     expect(failure.command({ type: "start" })).toBe(false);
     await failure.dispose();
@@ -250,7 +281,12 @@ it("retries the latest committed state in the background and cancels retries on 
     await vi.advanceTimersByTimeAsync(5000);
     expect(await s.flush()).toBe(true);
     expect(JSON.parse(write.mock.calls.at(-1)![0]).revision).toBe(2);
+    fail = true;
+    expect(s.command({ type: "beginBattle" })).toBe(true);
+    expect(await s.flush()).toBe(false);
+    expect(vi.getTimerCount()).toBe(1);
     await s.dispose();
+    expect(vi.getTimerCount()).toBe(0);
     const count = write.mock.calls.length;
     await vi.advanceTimersByTimeAsync(10000);
     expect(write).toHaveBeenCalledTimes(count);

@@ -47,9 +47,14 @@ it("applies live volume, background mute, bounded voices and disposal", () => {
   runtime.background(false);
   runtime.music("boss");
   runtime.dispose();
+  const disposedCount = media.length;
   vi.runAllTimers();
   runtime.unlock();
   runtime.play("victory");
+  runtime.music("combat");
+  runtime.configure(defaultAudioPreferences);
+  runtime.background(false);
+  expect(media).toHaveLength(disposedCount);
   expect(media.every((voice) => vi.mocked(voice.pause).mock.calls.length > 0)).toBe(true);
   expect(vi.getTimerCount()).toBe(0);
 });

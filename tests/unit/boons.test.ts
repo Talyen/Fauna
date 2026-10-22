@@ -11,6 +11,7 @@ import { decodeSave, encodeSave } from "../../src/game/save";
 import { previewCard } from "../../src/game/engine";
 import { BOONS } from "../../src/game/progression";
 import { definition } from "../../src/game/content";
+import { encounterSource } from "../../src/game/encounters";
 import { recruitChoice, accept, run, winBattle } from "./helpers";
 import type { GameEvent } from "../../src/game/types";
 function fixture() {
@@ -145,7 +146,8 @@ it("strips Armor before Physical and Stun mitigation, including fully blocked hi
 it("extends enemy Freeze across resume and grants immunity only after both skipped turns", () => {
   const { state, source, target, events } = fixture();
   state.boons = ["frozen-pocketwatch"];
-  target.health = target.maxHealth = 18;
+  target.maxHealth = encounterSource(state).enemies[0]!.health;
+  target.health = 18;
   target.combat.controlled = null;
   hit(state, source, target, 9, "freeze", events, { proc: true });
   expect(target.combat.controlTurns).toBe(2);
@@ -161,7 +163,8 @@ it("extends enemy Freeze across resume and grants immunity only after both skipp
 it("banks Cutpurse Gold for hits and ticks exactly once and caps actual retained earnings", () => {
   const { state, source, target, events } = fixture();
   state.boons = ["cutpurse-knife"];
-  target.health = target.maxHealth = 18;
+  target.maxHealth = encounterSource(state).enemies[0]!.health;
+  target.health = 18;
   const before = state.currency;
   hit(state, source, target, 5, "bleed", events, { proc: true });
   tickStatuses(state, target, events);

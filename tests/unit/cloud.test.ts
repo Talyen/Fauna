@@ -50,24 +50,61 @@ it("uploads only after durable local metadata, keeping devices in distinct slots
   const f = fixture();
   const remote = await snapshot(initial, other, 4);
   f.files.set(cloudName(remote), JSON.stringify(remote));
-  await f.manager.start(null);
-  await f.manager.flush();
-  expect(f.install).toHaveBeenCalledWith(initial);
-  expect(f.files.get(cloudName(remote))).toBe(JSON.stringify(remote));
-  expect([...f.files.keys()].some((k) => k.includes(identity.device))).toBe(true);
-  expect(f.local.data).toBeTruthy();
-  f.manager.dispose();
+  let entered!: () => void;
+  const writing = new Promise<void>((resolve) => {
+    entered = resolve;
+  });
+  let release!: () => void;
+  const gate = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  f.port.writeLocal = async (data) => {
+    entered();
+    await gate;
+    f.local.data = data;
+  };
+  const starting = f.manager.start(null);
+  try {
+    await writing;
+    await new Promise<void>((resolve) => setImmediate(resolve));
+    expect(f.local.data).toBeNull();
+    expect(f.files).toEqual(new Map([[cloudName(remote), JSON.stringify(remote)]]));
+    release();
+    await starting;
+    await f.manager.flush();
+    expect(f.install).toHaveBeenCalledWith(initial);
+    expect(f.files.get(cloudName(remote))).toBe(JSON.stringify(remote));
+    const local = await parseSnapshot(f.local.data!, identity.profile);
+    expect(local.payload).toBe(initial);
+    expect(f.files.get(cloudName(local))).toBe(JSON.stringify(local));
+    expect(f.manager.view.status).toBe("Synced");
+  } finally {
+    release();
+    await starting;
+    await f.manager.dispose();
+  }
 });
 it("preserves divergent heads and automatically retains local progress without merging currency", async () => {
   const f = fixture();
-  const remote = await snapshot(progress, other, 1);
+  const local = encodeSave({ ...decodeSave(initial), currency: 20 });
+  const remoteProgress = encodeSave({ ...decodeSave(progress), currency: 40 });
+  const remote = await snapshot(remoteProgress, other, 1);
   f.files.set(cloudName(remote), JSON.stringify(remote));
-  await f.manager.start(initial);
+  await f.manager.start(local);
   expect(f.preserve).toHaveBeenCalled();
   expect(f.install).not.toHaveBeenCalled();
   await f.manager.flush();
   expect(f.manager.view.blocking).toBe(false);
   const resolved = await parseSnapshot(f.local.data!, identity.profile);
+  expect(resolved.payload).toBe(local);
+  expect(decodeSave(resolved.payload).currency).toBe(20);
+  expect(f.preserve.mock.calls.flatMap(([records]) => records.map((record) => JSON.parse(record)))).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({ payload: local }),
+      expect.objectContaining({ payload: remoteProgress }),
+    ]),
+  );
+  expect(f.files.get(cloudName(remote))).toBe(JSON.stringify(remote));
   expect(resolved.ancestors).toContain(remote.id);
   expect(newestHeads([resolved, remote])).toEqual([resolved]);
   f.manager.dispose();
@@ -87,7 +124,7 @@ it("keeps unknown remote progress intact during outages and permits explicit off
   expect((await parseSnapshot(f.local.data!, identity.profile)).payload).toBe(progress);
   f.manager.dispose();
 });
-it("does not install a late read after offline takeover or disposal", async () => {
+it.each(["offline", "dispose"] as const)("does not install a late read after %s", async (action) => {
   const f = fixture();
   const remote = await snapshot(progress, other, 1);
   f.files.set(cloudName(remote), JSON.stringify(remote));
@@ -95,17 +132,25 @@ it("does not install a late read after offline takeover or disposal", async () =
   const gate = new Promise<void>((r) => {
     release = r;
   });
+  let entered!: () => void;
+  const reading = new Promise<void>((resolve) => {
+    entered = resolve;
+  });
   f.port.list = async () => {
+    entered();
     await gate;
     return [...f.files.keys()];
   };
   const start = f.manager.start(null);
-  await vi.waitFor(() => expect(f.manager.view.status).toBe("Syncing"));
-  f.manager.offline();
+  await reading;
+  if (action === "offline") expect(f.manager.offline()).toBe(true);
+  else await f.manager.dispose();
   release();
   await start;
   expect(f.install).not.toHaveBeenCalled();
-  f.manager.dispose();
+  expect(f.local.data).toBeNull();
+  expect(f.files).toEqual(new Map([[cloudName(remote), JSON.stringify(remote)]]));
+  await f.manager.dispose();
 });
 it("refuses replacement when durable conflict preservation fails", async () => {
   const f = fixture();
@@ -142,7 +187,7 @@ it("does not upload after failed local metadata persistence", async () => {
   expect(f.files.size).toBe(0);
   f.manager.dispose();
 });
-it("automatically selects only proven descendants and keeps unrelated offline branches conflicting", async () => {
+it("automatically installs a proven descendant and retains its ancestry", async () => {
   const f = fixture();
   const ancestor = await snapshot(initial, identity, 1);
   f.local.data = JSON.stringify(ancestor);
@@ -151,7 +196,11 @@ it("automatically selects only proven descendants and keeps unrelated offline br
   await f.manager.start(initial);
   await f.manager.flush();
   expect(f.install).toHaveBeenCalledWith(progress);
-  expect(f.manager.view.status).not.toBe("Conflict");
+  expect(f.manager.view.status).toBe("Synced");
+  const resolved = await parseSnapshot(f.local.data!, identity.profile);
+  expect(resolved.payload).toBe(progress);
+  expect(resolved.ancestors).toEqual(expect.arrayContaining([ancestor.id, remote.id]));
+  expect(newestHeads([ancestor, remote, resolved])).toEqual([resolved]);
   f.manager.dispose();
 });
 it("continues locally when automatic installation fails and retries safely", async () => {
