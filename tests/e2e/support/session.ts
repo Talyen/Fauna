@@ -4,15 +4,30 @@ import type { GameState } from "../../../src/game/types";
 
 export const key = "fauna.save.v1";
 export async function seed(page: Page, game = createGame(7)) {
-  if (page.url() === "about:blank") await page.goto("/");
-  await page.evaluate(
-    ({ key, data }) => {
-      localStorage.clear();
-      localStorage.setItem(key, data);
-    },
-    { key, data: JSON.stringify(game) },
-  );
-  await page.reload();
+  const initial = page.url() === "about:blank";
+  const data = JSON.stringify(game);
+  if (initial) {
+    // Init scripts survive reloads; the per-page marker prevents restoring an old
+    // fixture over a save committed by the persistence tests.
+    await page.addInitScript(
+      ({ key, data }) => {
+        if (sessionStorage.getItem("fauna.test.seeded")) return;
+        localStorage.setItem(key, data);
+        sessionStorage.setItem("fauna.test.seeded", "1");
+      },
+      { key, data },
+    );
+    await page.goto("/");
+  } else {
+    await page.evaluate(
+      ({ key, data }) => {
+        localStorage.clear();
+        localStorage.setItem(key, data);
+      },
+      { key, data },
+    );
+    await page.reload();
+  }
   await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
 }
 

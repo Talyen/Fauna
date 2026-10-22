@@ -9,6 +9,11 @@ on:
         type: choice
         options: ["1", "4", "8"]
         default: "8"
+      browser_runtime:
+        description: Compare Chromium installation with the version-matched Playwright image
+        type: choice
+        options: ["install", "container"]
+        default: "install"
 permissions:
   contents: read
   pull-requests: read
@@ -28,11 +33,13 @@ jobs:
       attempt: ${{ steps.plan.outputs.attempt }}
       shards: ${{ steps.plan.outputs.shards }}
       total: ${{ steps.plan.outputs.total }}
+      browser_image: ${{ steps.plan.outputs.browser_image }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           sparse-checkout: |
             .node-version
+            package-lock.json
             scripts/ci/ci.mjs
             scripts/lib/tool-runtime.mjs
             scripts/lib/interaction-replay.mjs
@@ -160,6 +167,8 @@ jobs:
     if: ${{ !cancelled() && needs.prepare.result == 'success' && needs.prepare.outputs.run == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    env:
+      CI_SHARDS: ${{ needs.prepare.outputs.total }}
     outputs:
       attempt: ${{ steps.complete.outputs.attempt }}
     steps:
@@ -183,6 +192,8 @@ jobs:
         run: |
           mkdir -p reports/ci
           npx playwright test --list --reporter=json > reports/ci/discovery.json
+      - name: Balance complete browser coverage by duration
+        run: node scripts/ci/ci.mjs plan
       - name: Record exact build identity
         run: node scripts/ci/ci.mjs build
       - name: Upload browser-build
@@ -213,12 +224,14 @@ jobs:
     needs: [prepare, build]
     if: ${{ !cancelled() && needs.prepare.result == 'success' && needs.prepare.outputs.run == 'true' && needs.build.result == 'success' }}
     runs-on: ubuntu-latest
+    container: ${{ needs.prepare.outputs.browser_image || null }}
     timeout-minutes: 20
     strategy:
       fail-fast: false
       matrix:
         shard: ${{ fromJSON(needs.prepare.outputs.shards) }}
     env:
+      FAUNA_BROWSER_IMAGE: ${{ needs.prepare.outputs.browser_image }}
       CI_SHARD: ${{ matrix.shard }}
       CI_SHARDS: ${{ needs.prepare.outputs.total }}
     steps:
@@ -250,9 +263,10 @@ jobs:
       - name: Verify downloaded build identity
         run: node scripts/ci/ci.mjs verify-build
       - name: Install Chromium
+        if: ${{ needs.prepare.outputs.browser_image == '' }}
         run: npx playwright install --with-deps chromium
       - name: Browser shard
-        run: npx playwright test --shard=$CI_SHARD/$CI_SHARDS
+        run: npx playwright test --test-list=reports/ci/shard-$CI_SHARD.txt
       - name: Record shard identity
         if: always()
         run: node scripts/ci/ci.mjs shard
@@ -269,11 +283,11 @@ jobs:
             blob-report/
             reports/playwright.json
             reports/ci/shard.json
-            test-results/
   interactions:
     needs: [prepare, build]
     if: ${{ !cancelled() && needs.prepare.result == 'success' && needs.prepare.outputs.run == 'true' && needs.build.result == 'success' }}
     runs-on: ubuntu-latest
+    container: ${{ needs.prepare.outputs.browser_image || null }}
     timeout-minutes: 20
     outputs:
       attempt: ${{ steps.complete.outputs.attempt }}
@@ -306,6 +320,7 @@ jobs:
       - name: Verify downloaded build identity
         run: node scripts/ci/ci.mjs verify-build
       - name: Install Chromium
+        if: ${{ needs.prepare.outputs.browser_image == '' }}
         run: npx playwright install --with-deps chromium
       - name: Seeded interaction replay
         run: npm run test:interactions -- --seed 42 --steps 12 --out reports/interactions/ci
@@ -458,6 +473,7 @@ jobs:
           path: |
             reports/playwright.json
             reports/browser-html/
-            reports/browser-resources/
+            reports/ci/browser-durations.json
+            reports/ci/browser-plan.json
             reports/ci/browser-timings.json
             reports/ci/timings-*.json
