@@ -11,7 +11,7 @@ for (const [width, enlarged] of [
   test(`onboarding starter inspection, commitment and focus return at ${width}${enlarged ? " with enlarged text" : ""}`, async ({
     page,
   }) => {
-    await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
+    await page.setViewportSize({ width, height: width === 1280 ? 720 : 1080 });
     await page.emulateMedia({ reducedMotion: "reduce" });
     await seed(page);
     if (enlarged) {
@@ -36,28 +36,40 @@ for (const [width, enlarged] of [
     await captureScreen(page, { path: `reports/starter/tooltip-${width}-${enlarged}.png` });
     await mossguard.click();
     await page.locator(".inspection-thumbnails .action-card").first().click();
-    await expect(page.getByRole("button", { name: `Choose ${name}`, exact: true })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: /^Choose |^Recruit / })).toHaveCount(0);
     await page.keyboard.press("Escape");
-    await expect(page.getByRole("button", { name: `Choose ${name}`, exact: true })).toBeVisible();
+    await expect(page.getByRole("heading", { name, exact: true })).toBeVisible();
+    await expect(page.getByRole("img", { name: "0 of 5 stars", exact: true })).toBeVisible();
+    await page.getByRole("button", { name: "Back", exact: true }).focus();
+    await page.keyboard.press("s");
+    await expect(page.locator(".inspection-creature .creature-card")).toBeFocused();
+    await page.keyboard.press("s");
+    await expect(page.locator(".inspection-thumbnails .action-card").nth(1)).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(page.locator(".inspection.single-card")).toBeVisible();
     await page.keyboard.press("Escape");
-    await expect(mossguard).toBeFocused();
-    expect((await state(page)).revision).toBe(initial.revision);
-    await mossguard.press("Enter");
+    await expect(page.locator(".inspection-thumbnails .action-card").nth(1)).toBeFocused();
     await captureScreen(page, { path: `reports/starter/inspection-${width}-${enlarged}.png` });
-    const ranks = page.getByRole("button", { name: "Rank progression", exact: true });
-    await ranks.click();
-    await expect(page.getByRole("button", { name: `Choose ${name}`, exact: true })).toHaveCount(0);
-    await captureScreen(page, { path: `reports/starter/ranks-${width}-${enlarged}.png` });
+    const hero = (await page.locator(".inspection-creature .creature-card").boundingBox())!;
+    const abilities = page.locator(".inspection-thumbnails .action-card");
+    const first = (await abilities.first().boundingBox())!;
+    const last = (await abilities.last().boundingBox())!;
+    expect(Math.abs(hero.x - first.x)).toBeLessThan(1);
+    expect(Math.abs(hero.x + hero.width - last.x - last.width)).toBeLessThan(1);
+    expect(Math.abs(hero.width / hero.height - 4 / 3)).toBeLessThan(0.01);
+    for (const ability of await abilities.all()) {
+      const box = (await ability.boundingBox())!;
+      expect(Math.abs(box.width / box.height - 3 / 4)).toBeLessThan(0.01);
+    }
     await page.keyboard.press("Escape");
-    await expect(ranks).toBeFocused();
-    expect((await state(page)).revision).toBe(initial.revision);
-    await page.getByRole("button", { name: `Choose ${name}`, exact: true }).click();
     await expect(mossguard).toBeFocused();
+    expect((await state(page)).revision).toBe(initial.revision);
+    await page.getByRole("button", { name: `Recruit ${name}`, exact: true }).click();
     await expect(mossguard).toHaveAttribute("aria-pressed", "true");
     await expect(begin).toBeEnabled();
     expect((await state(page)).selected).toEqual([chosen]);
     await mossguard.click();
-    await expect(page.getByRole("button", { name: /^Choose / })).toHaveCount(0);
+    await expect(page.getByRole("button", { name: /^Choose |^Recruit / })).toHaveCount(0);
     await page.keyboard.press("Escape");
     await page.reload();
     await resume(page);
@@ -65,8 +77,8 @@ for (const [width, enlarged] of [
     if (!enlarged) await fits(page);
     for (const artwork of await page.locator(".draft-grid .creature-card").all()) {
       const bounds = (await artwork.boundingBox())!;
-      expect(Math.abs(bounds.width - (width === 1280 ? 240 : 800 / 3))).toBeLessThan(1);
-      expect(Math.abs(bounds.height - (width === 1280 ? 180 : 200))).toBeLessThan(1);
+      expect(Math.abs(bounds.width - (width === 1280 ? 640 / 3 : 800 / 3))).toBeLessThan(1);
+      expect(Math.abs(bounds.height - (width === 1280 ? 160 : 200))).toBeLessThan(1);
     }
     await captureScreen(page, {
       path: `reports/starter/selection-${width}-${enlarged}.png`,

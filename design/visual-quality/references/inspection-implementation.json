@@ -1,0 +1,57 @@
+{
+  "status": "User-directed composition implemented; rendered appearance not separately accepted",
+  "browser": "Chromium",
+  "reducedMotion": true,
+  "cases": [
+    {
+      "width": 1280,
+      "height": 720,
+      "scale": 1.25,
+      "hero": {
+        "x": 496.625,
+        "y": 154.09375,
+        "width": 286.734375,
+        "height": 215.046875
+      },
+      "errors": []
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "hero": {
+        "x": 720,
+        "y": 225.078125,
+        "width": 480,
+        "height": 360
+      },
+      "errors": []
+    }
+  ],
+  "additionalStates": [
+    "Memento at maximum rank",
+    "Victory artwork inspection and recruitment",
+    "Full-roster replacement, cancellation focus return and release"
+  ],
+  "checks": [
+    "native artwork ratios",
+    "matching hero and ability row outer edges",
+    "five stars, empty at rank zero",
+    "no recruitment inside inspection",
+    "tooltip/enlargement/focus return",
+    "draft recruitment and resume",
+    "Keyboard navigation from header through hero to nearest ability"
+  ],
+  "limits": [
+    "full CI not run locally",
+    "no native desktop, Windows package, physical controller, Steam or Steam Deck verification"
+  ],
+  "sourceHashes": {
+    "src/ui/inspection/inspection.tsx": "b13c4af5d7cffc1dad8e86dbeadd8856cc645c6b6e8670961ab0b677ce4254f1",
+    "src/ui/inspection/inspection.css": "94cd00054e30c84991f6475718b562949a7378409383bca03c60bda3454d697c",
+    "src/ui/tokens.css": "2f532663c82cdf1877d1a32bad28f86bbd69810280cc1b5508287558eb5f9f4d",
+    "src/ui/expedition/draft.tsx": "57baa9ef73743ec78802269e50d3054b8598cb0aea8fccd50d8fcaa64271a43d",
+    "src/ui/expedition/rewards.tsx": "87e82e8891e37568797a2babfbda62f029fe731d65d1de5fc60ac5e2fcaa4c19",
+    "src/components/ui/dialog.tsx": "9fc048f4345c2b20d7bac7d58edb40be6445da8baede0300421b329a2c9f8140"
+  }
+}

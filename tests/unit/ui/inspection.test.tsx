@@ -9,6 +9,8 @@ import { createGame } from "../../../src/game/engine";
 import { enemyInspectionValue } from "../../../src/game/ability-rules";
 import { freshCombat } from "../../../src/game/combat/index";
 import { ActionDetails, StarterDetails } from "../../../src/ui/shared/cards/card-details";
+import { Inspector } from "../../../src/ui/inspection/inspection";
+import { TooltipProvider } from "../../../src/components/ui/tooltip";
 import { App } from "../../../src/ui/App";
 import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
@@ -46,7 +48,7 @@ describe("artwork-first inspection", () => {
   });
 
   it.each([0, 1, 2])(
-    "previews starter slot %s without committing and restores it after choosing",
+    "inspects starter slot %s without committing and recruits only through its offer button",
     async (slot) => {
       const session = createSession(createBrowserPlatform(localStorage), 7);
       await session.load();
@@ -67,16 +69,19 @@ describe("artwork-first inspection", () => {
         }
         await user.click(opener);
         const dialog = screen.getByRole("dialog", { name: creature.name });
-        expect(dialog.querySelector(".passive-tiers")).toBeNull();
+        expect(within(dialog).getByRole("heading", { name: creature.name })).toBeTruthy();
         expect(within(dialog).getByRole("region", { name: "Trait" }).textContent).toContain(
           creature.passiveTiers[0].description,
         );
-        await user.click(within(dialog).getByRole("button", { name: "Rank progression" }));
-        expect(screen.queryByRole("button", { name: `Choose ${creature.name}` })).toBeNull();
+        expect(
+          within(dialog).getByRole("img", { name: "0 of 5 stars" }).querySelectorAll("svg"),
+        ).toHaveLength(5);
+        expect(dialog.querySelectorAll('[data-earned="true"]')).toHaveLength(0);
+        expect(within(dialog).queryByRole("button", { name: /Choose|Recruit|Rank progression/ })).toBeNull();
         await user.keyboard("{Escape}");
-        expect(document.activeElement).toBe(screen.getByRole("button", { name: "Rank progression" }));
+        expect(document.activeElement).toBe(opener);
         expect(session.store.getState().game).toBe(game);
-        await user.click(screen.getByRole("button", { name: `Choose ${creature.name}` }));
+        await user.click(screen.getByRole("button", { name: `Recruit ${creature.name}` }));
         expect(session.store.getState().game.selected).toEqual([kind]);
         expect(screen.queryByRole("dialog")).toBeNull();
         expect(document.activeElement).toBe(screen.getByRole("button", { name: `Inspect ${creature.name}` }));
@@ -86,6 +91,37 @@ describe("artwork-first inspection", () => {
       }
     },
   );
+
+  it.each([0, 3, 5])("fills %s progress stars and displays the corresponding passive", async (rank) => {
+    const game = produce(run(7), (draft) => {
+      draft.discovery.recruited.mossguard = rank + 1;
+    });
+    localStorage.setItem("fauna.save.v1", encodeSave(game));
+    const session = createSession(createBrowserPlatform(localStorage), 7);
+    await session.load();
+    try {
+      render(
+        <TooltipProvider>
+          <Inspector
+            item={{ species: "mossguard" }}
+            session={session}
+            controls={{ current: null }}
+            onClose={() => {}}
+          />
+        </TooltipProvider>,
+      );
+      const stars = screen.getByRole("img", { name: `${rank} of 5 stars` });
+      expect(stars.querySelectorAll("svg")).toHaveLength(5);
+      expect(stars.querySelectorAll('[data-earned="true"]')).toHaveLength(rank);
+      expect(screen.getByRole("region", { name: "Trait" }).textContent).toContain(
+        species("mossguard").passiveTiers[rank]!.description,
+      );
+      expect(session.store.getState().game).toEqual(game);
+    } finally {
+      cleanup();
+      await session.dispose();
+    }
+  });
 
   it("shows the trait and all base abilities directly in Collection, preserves rank browsing and returns focus", async () => {
     localStorage.setItem(

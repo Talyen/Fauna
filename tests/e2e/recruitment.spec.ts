@@ -8,6 +8,14 @@ import { seed, state, resume } from "./support/session";
 test("recruitment adds a backup without exposing free lineup changes", async ({ page }) => {
   await seed(page, winBattle());
   await resume(page);
+  const beforeInspection = await state(page);
+  const artwork = page.getByRole("button", { name: "Inspect Emberback", exact: true });
+  await artwork.click();
+  await expect(page.getByRole("heading", { name: "Emberback", exact: true })).toBeVisible();
+  await expect(page.getByRole("dialog").getByRole("button", { name: /Recruit|Choose/ })).toHaveCount(0);
+  await page.keyboard.press("Escape");
+  await expect(artwork).toBeFocused();
+  expect(await state(page)).toEqual(beforeInspection);
   await page.getByRole("button", { name: "Recruit Emberback", exact: true }).click();
   const recruited = await state(page);
   expect(recruited.roster).toHaveLength(4);

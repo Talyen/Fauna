@@ -1,15 +1,13 @@
 import { sharedDodgeChance } from "../../game/combat/index";
-import { PagedItems } from "../shared/navigation/pagination";
-import { creaturePassive, creatureStars } from "../../game/progression";
+import { creaturePassive, creatureStars, MAX_CREATURE_STARS } from "../../game/progression";
 import { KeywordText } from "../shared/keyword-text";
 import { enemyInspectionValue } from "../../game/ability-rules";
 import { useLayoutEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
-import { ChevronLeft, Info } from "lucide-react";
+import { ChevronLeft, Star } from "lucide-react";
 import type { Session } from "../../application/session";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../../components/ui/dialog";
 import { Button } from "../../components/ui/button";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
 import { ActionCard, CreatureCard } from "../shared/cards/cards";
 import { CARDS, definition, species } from "../../game/content";
 import type { Card } from "../../game/types";
@@ -21,13 +19,11 @@ export function Inspector({
   session,
   controls: controlsRef,
   onClose,
-  chooseStarter,
 }: {
   item: Inspection;
   session: Session;
   controls: Controls;
   onClose: () => void;
-  chooseStarter?: () => boolean;
 }) {
   const [opener] = useState(() => document.activeElement as HTMLElement | null);
   const game = useStore(session.store, (s) => s.game);
@@ -53,10 +49,6 @@ export function Inspector({
   const [selected, setSelected] = useState<number | null>(() =>
     rootCard ? cards.findIndex((c) => c.definitionId === rootCard.definitionId) : null,
   );
-  const [showRanks, setShowRanks] = useState(false);
-  const rankButton = useRef<HTMLButtonElement>(null);
-  const restoreRank = useRef(false);
-  const chosenStarter = useRef(false);
   const thumbnails = useRef<HTMLDivElement>(null),
     backButton = useRef<HTMLButtonElement>(null);
   const previousCard = useRef(selected),
@@ -65,23 +57,11 @@ export function Inspector({
     setSelected((index) => (index === null ? null : (index + direction + cards.length) % cards.length));
   const back = () => {
     if (rootCard) return false;
-    if (showRanks) {
-      restoreRank.current = true;
-      setShowRanks(false);
-      return true;
-    }
     if (selected === null) return false;
     restore.current = selected;
     setSelected(null);
     return true;
   };
-  useLayoutEffect(() => {
-    if (showRanks) backButton.current?.focus();
-    else if (restoreRank.current) {
-      restoreRank.current = false;
-      returnFocus(rankButton.current);
-    }
-  }, [showRanks]);
   useLayoutEffect(() => {
     if (selected !== null && previousCard.current === null) backButton.current?.focus();
     previousCard.current = selected;
@@ -121,14 +101,10 @@ export function Inspector({
       }}
     >
       <DialogContent
-        className={`inspection ${card ? "single-card" : "creature-inspection"}${showRanks ? " rank-inspection" : ""}`}
+        overlayClassName="inspection-overlay"
+        className={`inspection ${card ? "single-card" : "creature-inspection"}`}
         onCloseAutoFocus={(event) => {
           event.preventDefault();
-          // Completing the draft can replace the opener when its slot changes.
-          if (chosenStarter.current) {
-            returnFocus(document.querySelector<HTMLElement>(`.draft-grid [data-species="${kind}"]`));
-            return;
-          }
           const focused = document.activeElement as HTMLElement | null;
           if (focused !== document.body && isAvailableFocusTarget(focused)) return;
           returnFocus(opener);
@@ -146,6 +122,7 @@ export function Inspector({
           >
             <ChevronLeft aria-hidden="true" />
           </Button>
+          {!card ? <DialogTitle>{enemy?.name ?? creature.name}</DialogTitle> : null}
         </header>
         {card ? (
           <>
@@ -166,16 +143,11 @@ export function Inspector({
           </>
         ) : (
           <>
-            <DialogTitle className="sr-only">
-              {enemy?.name ?? creature.name}
-              {showRanks ? " rank progression" : ""}
-            </DialogTitle>
             <DialogDescription className="sr-only">
-              {showRanks
-                ? "Creature artwork and paginated passive tiers. Back returns to the creature kit."
-                : "Creature artwork and three action cards. Hover or focus the creature, trait or abilities for their details."}
+              Creature artwork, three abilities and current passive rank. Hover or focus abilities for their
+              details.
             </DialogDescription>
-            <div className="inspection-creature">
+            <div className="inspection-creature" data-nav-row>
               <CreatureCard
                 progression={enemy ? undefined : game}
                 kind={kind}
@@ -189,93 +161,42 @@ export function Inspector({
                 speciesKit
                 label={`${enemy?.name ?? creature.name} details`}
               />
-              {!showRanks ? (
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button className="inspection-trait" variant="ghost">
-                      <Info aria-hidden="true" />
-                      {creature.trait}
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <strong>{creature.trait}</strong>
-                    <p>
-                      <KeywordText text={passive.description} />
-                    </p>
-                  </TooltipContent>
-                </Tooltip>
-              ) : null}
             </div>
-            {!showRanks ? (
-              <>
-                <section className="inspection-abilities" aria-label="Abilities">
-                  <div className="inspection-thumbnails" ref={thumbnails} data-nav-row>
-                    {cards.map((action, index) => (
-                      <ActionCard
-                        key={action.id}
-                        card={action}
-                        ownerName={creature.name}
-                        actor={actor}
-                        modifiers={enemy ? undefined : game}
-                        enemy={!!enemy}
-                        enemyPower={enemy?.power}
-                        enemyValue={
-                          enemy ? enemyInspectionValue(enemy, definition(action.definitionId)) : undefined
-                        }
-                        onClick={() => setSelected(index)}
-                        onInspect={() => setSelected(index)}
-                      />
-                    ))}
-                  </div>
-                </section>
-                <footer className="inspection-actions" data-nav-row>
-                  <Button ref={rankButton} variant="outline" onClick={() => setShowRanks(true)}>
-                    Rank progression
-                  </Button>
-                  {chooseStarter ? (
-                    <Button
-                      onClick={() => {
-                        if (chooseStarter()) {
-                          chosenStarter.current = true;
-                          onClose();
-                        }
-                      }}
-                    >
-                      Choose {creature.name}
-                    </Button>
-                  ) : null}
-                </footer>
-              </>
-            ) : (
-              <section className="passive-tiers" aria-label={`${creature.trait} passive tiers`}>
-                <h2>Rank progression</h2>
-                <p>
-                  {enemy
-                    ? "Species kit · Enemy passives use the base tier."
-                    : `Collection rank: ${rank} / 5 stars`}
-                </p>
-                <PagedItems
-                  items={creature.passiveTiers}
-                  pageSize={1}
-                  className="passive-tier-page"
-                  contentRole="list"
-                  label="Passive tier pages"
-                >
-                  {(tier, tierRank) => (
-                    <div role="listitem" key={tierRank} aria-current={tierRank === rank ? "step" : undefined}>
-                      <strong>
-                        {tierRank} {tierRank === 1 ? "star" : "stars"}
-                        {tierRank === rank ? " · Current rank" : ""}
-                        {tierRank === passive.rank ? " · Active effect" : ""}
-                      </strong>
-                      <p>
-                        <KeywordText text={tier.description} />
-                      </p>
-                    </div>
-                  )}
-                </PagedItems>
-              </section>
-            )}
+            <section className="inspection-abilities" aria-label="Abilities">
+              <div className="inspection-thumbnails" ref={thumbnails} data-nav-row>
+                {cards.map((action, index) => (
+                  <ActionCard
+                    key={action.id}
+                    card={action}
+                    ownerName={creature.name}
+                    actor={actor}
+                    modifiers={enemy ? undefined : game}
+                    enemy={!!enemy}
+                    enemyPower={enemy?.power}
+                    enemyValue={
+                      enemy ? enemyInspectionValue(enemy, definition(action.definitionId)) : undefined
+                    }
+                    onClick={() => setSelected(index)}
+                    onInspect={() => setSelected(index)}
+                  />
+                ))}
+              </div>
+            </section>
+            <section className="inspection-active-trait" aria-label="Trait">
+              <h2>{creature.trait}</h2>
+              <span
+                className="inspection-stars"
+                role="img"
+                aria-label={`${rank} of ${MAX_CREATURE_STARS} stars`}
+              >
+                {Array.from({ length: MAX_CREATURE_STARS }, (_, index) => (
+                  <Star key={index} aria-hidden="true" data-earned={index < rank} />
+                ))}
+              </span>
+              <p>
+                <KeywordText text={passive.description} />
+              </p>
+            </section>
           </>
         )}
       </DialogContent>

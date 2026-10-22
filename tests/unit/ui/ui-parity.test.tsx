@@ -57,6 +57,10 @@ it("keeps the incoming recruit inspectable while browsing replacements, and canc
   const user = userEvent.setup();
   const incoming = game.reward!.recruits[0]!;
   const offer = screen.getByRole("button", { name: `Recruit ${species(incoming).name}` });
+  await user.click(screen.getByRole("button", { name: `Inspect ${species(incoming).name}` }));
+  expect(inspect).toHaveBeenCalledExactlyOnceWith({ species: incoming });
+  expect(send).not.toHaveBeenCalled();
+  expect(screen.queryByRole("region", { name: "Incoming recruit" })).toBeNull();
   await user.click(offer);
   const comparison = screen.getByRole("region", { name: "Incoming recruit" });
   await user.click(within(comparison).getByRole("button", { name: `Inspect ${species(incoming).name}` }));

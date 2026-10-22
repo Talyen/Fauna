@@ -135,15 +135,6 @@ export function ShellOverlays({
           session={session}
           controls={inspectionControls}
           onClose={() => setInspection(null)}
-          chooseStarter={
-            route === "play" &&
-            game.phase === "draft" &&
-            !menu &&
-            "species" in inspection &&
-            game.starterOffers.includes(inspection.species)
-              ? () => send({ type: "draft", species: inspection.species })
-              : undefined
-          }
         />
       ) : null}
     </>

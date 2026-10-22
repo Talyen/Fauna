@@ -19,7 +19,9 @@ export function Rewards({ game, send, inspect }: Props) {
   const choices = useRef<HTMLElement>(null);
   const returnTo = useRef<number | null>(null);
   useLayoutEffect(() => {
-    const buttons = choices.current?.querySelectorAll<HTMLButtonElement>(".recruit-options .creature-card");
+    const buttons = choices.current?.querySelectorAll<HTMLButtonElement>(
+      incoming ? ".recruit-options .creature-card" : ".recruit-options .recruit-button",
+    );
     if (incoming) returnFocus(buttons?.[0] ?? null);
     else if (returnTo.current !== null) {
       returnFocus(buttons?.[returnTo.current] ?? null);
@@ -76,27 +78,38 @@ export function Rewards({ game, send, inspect }: Props) {
                           progression={game}
                           kind={kind}
                           actorId={incoming ? id : undefined}
-                          label={incoming ? `Release ${species(kind).name}` : `Recruit ${species(kind).name}`}
+                          label={incoming ? `Release ${species(kind).name}` : `Inspect ${species(kind).name}`}
                           onInspect={() =>
                             inspect(incoming ? { species: kind, creatureId: id } : { species: kind })
                           }
                           onClick={() => {
                             if (incoming) send({ type: "recruit", species: incoming, replace: id });
-                            else if (game.roster.length === 5) {
-                              returnTo.current = Number(id);
-                              setIncoming(kind);
-                            } else send({ type: "recruit", species: kind });
+                            else inspect({ species: kind });
                           }}
                         />
-                        <h2>{species(kind).name}</h2>
+                        {incoming ? <h2>{species(kind).name}</h2> : null}
                         {!incoming ? (
-                          <p className="collection-uncollected">
-                            {!game.discovery.recruited[kind]
-                              ? "Unlock in Collection"
-                              : creatureStars(game, kind) === MAX_CREATURE_STARS
-                                ? `${MAX_CREATURE_STARS} stars · Max`
-                                : `${creatureStars(game, kind)} → ${creatureStars(game, kind) + 1} stars`}
-                          </p>
+                          <>
+                            <Button
+                              className="recruit-button"
+                              aria-label={`Recruit ${species(kind).name}`}
+                              onClick={() => {
+                                if (game.roster.length === 5) {
+                                  returnTo.current = Number(id);
+                                  setIncoming(kind);
+                                } else send({ type: "recruit", species: kind });
+                              }}
+                            >
+                              Recruit
+                            </Button>
+                            <p className="collection-uncollected">
+                              {!game.discovery.recruited[kind]
+                                ? "Unlock in Collection"
+                                : creatureStars(game, kind) === MAX_CREATURE_STARS
+                                  ? `${MAX_CREATURE_STARS} stars · Max`
+                                  : `${creatureStars(game, kind)} → ${creatureStars(game, kind) + 1} stars`}
+                            </p>
+                          </>
                         ) : null}
                       </div>
                     )}

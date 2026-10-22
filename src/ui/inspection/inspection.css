@@ -1,3 +1,6 @@
+.inspection-overlay {
+  background: var(--background);
+}
 .inspection {
   width: min(
     calc(var(--art-portrait-width) * 3 + var(--screen-item-gap) * 2 + var(--space-6) * 2 + 2px),
@@ -51,54 +54,43 @@
 .inspection-back {
   margin-top: calc(-1 * var(--space-6));
 }
+/* The native 4:3 hero plus three 3:4 abilities use 43/36 of their shared width in height. */
 .creature-inspection {
-  width: min(
-    calc(
-      var(--art-landscape-width) + var(--art-portrait-width) * 3 + var(--screen-item-gap) * 2 +
-        var(--screen-section-gap) + var(--space-6) * 2 + 2px
-    ),
-    calc(100vw - var(--space-12))
+  --inspection-art-width: min(
+    var(--inspection-art-max-width),
+    calc(100vw - var(--space-12) * 2),
+    calc((100dvh - var(--inspection-space-budget)) * 36 / 43)
   );
+  width: min(var(--inspection-dialog-width), calc(100vw - var(--space-12)));
   padding: var(--space-6);
-  display: grid;
-  grid-template-columns: var(--art-landscape-width) minmax(0, 1fr);
+  border-color: transparent;
+  background: var(--background);
   align-items: center;
 }
 .creature-inspection .inspection-back {
-  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: var(--control-height) minmax(0, 1fr) var(--control-height);
+  align-items: center;
+  width: 100%;
   margin-top: 0;
 }
-.inspection-creature {
-  grid-column: 1;
-  grid-row: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--screen-item-gap);
+.creature-inspection .inspection-back h2 {
+  text-align: center;
+  font-size: var(--text-title);
 }
-.inspection-trait {
-  color: var(--muted-foreground);
-  max-width: 100%;
-  white-space: normal;
-  height: auto;
-  min-height: var(--control-height);
+.creature-inspection > .dialog-close {
+  top: var(--space-6);
+  right: var(--space-6);
 }
-.creature-inspection .passive-tiers {
-  grid-column: 2;
-  grid-row: 2 / span 2;
+.inspection-creature,
+.creature-inspection .inspection-abilities {
+  width: var(--inspection-art-width);
+}
+.inspection-creature .creature-card {
+  width: 100%;
 }
 .creature-inspection .inspection-abilities {
-  grid-column: 2;
-  grid-row: 2;
-}
-.inspection-actions {
-  grid-column: 1 / -1;
-  display: flex;
-  justify-content: flex-end;
-  gap: var(--screen-item-gap);
-}
-.rank-inspection {
-  min-height: calc(var(--art-short-side) + var(--control-height) + var(--space-6) * 3);
+  margin-top: calc(var(--screen-item-gap) - var(--screen-section-gap));
 }
 .creature-inspection .inspection-thumbnails {
   display: grid;
@@ -107,17 +99,37 @@
 .creature-inspection .inspection-thumbnails .action-card {
   width: 100%;
 }
-.passive-tier-page {
-  min-height: calc(var(--text-body) * 7);
-}
-
-/* Alchemy's compact shelves keep the decision controls aligned below the art. */
-.inspection-abilities {
+.inspection-active-trait {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--screen-item-gap);
+  width: 100%;
+  text-align: center;
 }
+.inspection-active-trait h2 {
+  font-size: var(--text-heading);
+}
+.inspection-active-trait p {
+  font-size: var(--text-inspection);
+  line-height: 1.4;
+}
+.inspection-stars {
+  display: flex;
+  gap: var(--screen-item-gap);
+  color: var(--gold-light);
+}
+.inspection-stars svg {
+  width: var(--space-6);
+  height: var(--space-6);
+}
+.inspection-stars [data-earned="true"] {
+  fill: currentColor;
+}
+.passive-tier-page {
+  min-height: calc(var(--text-body) * 7);
+}
+
 .passive-tiers > h3 {
   color: var(--muted-foreground);
   font-size: var(--text-body);

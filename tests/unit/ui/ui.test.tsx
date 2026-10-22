@@ -219,7 +219,8 @@ describe("player interface", () => {
     const name = species(chosen).name;
     await user.click(screen.getByRole("button", { name: `Inspect ${name}` }));
     expect(session.store.getState().game.selected).toEqual([]);
-    await user.click(screen.getByRole("button", { name: `Choose ${name}` }));
+    await user.keyboard("{Escape}");
+    await user.click(screen.getByRole("button", { name: `Recruit ${name}` }));
     expect(session.store.getState().game.selected).toEqual([chosen]);
     await user.click(enter);
     expect(session.store.getState().game.phase).toBe("teamSelection");
@@ -232,7 +233,7 @@ describe("player interface", () => {
     expect(JSON.parse(localStorage.getItem("fauna.save.v1")!).phase).toBe("battle");
     await session.dispose();
   });
-  it("requires all three collection draft picks through inspection before beginning a later journey", async () => {
+  it("requires all three collection recruits before beginning a later journey", async () => {
     const fresh = createGame(7);
     const starter = fresh.starterOffers[0]!;
     const started = accept(accept(fresh, { type: "draft", species: starter }), { type: "start" });
@@ -247,8 +248,7 @@ describe("player interface", () => {
     for (let round = 0; round < 3; round++) {
       expect(begin.disabled).toBe(true);
       expect(screen.getByRole("heading", { name: "Choose your starter" })).toBeTruthy();
-      await user.click(screen.getAllByRole("button", { name: `Inspect ${species(starter).name}` })[0]!);
-      await user.click(screen.getByRole("button", { name: `Choose ${species(starter).name}` }));
+      await user.click(screen.getAllByRole("button", { name: `Recruit ${species(starter).name}` })[0]!);
       expect(session.store.getState().game.selected).toHaveLength(round + 1);
       expect(screen.queryByRole("dialog")).toBeNull();
     }
@@ -275,7 +275,7 @@ describe("player interface", () => {
         });
       });
       localStorage.setItem("fauna.save.v1", JSON.stringify(game));
-      const session = createSession(createBrowserPlatform(localStorage), 7);
+      let session = createSession(createBrowserPlatform(localStorage), 7);
       await session.load();
       render(<App session={session} />);
       const user = userEvent.setup();
@@ -299,7 +299,13 @@ describe("player interface", () => {
       const fallen = produce(game, (draft) => {
         draft.team[2]!.health = 0;
       });
-      act(() => session.store.setState({ game: fallen }));
+      cleanup();
+      await session.dispose();
+      localStorage.setItem("fauna.save.v1", JSON.stringify(fallen));
+      session = createSession(createBrowserPlatform(localStorage), 7);
+      await session.load();
+      render(<App session={session} />);
+      await user.click(screen.getByRole("button", { name: "Continue" }));
       expect(screen.queryByRole("button", { name: "Swap", exact: true })).toBeNull();
       const reserve = screen.getByRole("button", { name: "Mossguard, backup" });
       if (input === "hover") await user.hover(reserve);

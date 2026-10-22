@@ -12,6 +12,9 @@
   margin: 0;
 }
 .starter-option {
+  display: flex;
+  flex-direction: column;
+  gap: var(--screen-item-gap);
   text-align: center;
   min-width: 0;
 }
@@ -37,8 +40,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: var(--space-5);
-  max-width: calc(var(--art-landscape-width) * 3 + var(--space-5) * 2);
+  gap: var(--screen-section-gap);
+  max-width: calc(var(--art-landscape-width) * 3 + var(--screen-section-gap) * 2);
   width: 100%;
 }
 

@@ -123,3 +123,5 @@ Minions belong only to the active battle, have Health and combat effects, and ca
 Enemy Legendaries use six cards, four Mana and four draws per turn, with the six-card hand and persistent overflow used by the player. They create and cycle Pearl cards through their own zones. Automatic enemy decisions are bounded to 256 plays per turn.
 
 [Memento](content/creatures/memento.md) owns the first Legendary kit and initial tuning.
+
+Starter and post-battle recruit offers separate inspection from commitment: activating creature artwork opens details, and the Recruit button beneath that offer chooses it. Inspection has no Choose or Recruit button. Beginning the drafted journey remains a separate action.

@@ -63,6 +63,12 @@
   --menu-screen-width: 800px;
   --screen-heading-width: 640px;
   --boon-dialog-width: 720px;
+  --inspection-art-max-width: 480px;
+  --inspection-dialog-width: 640px;
+  --inspection-space-budget: calc(
+    var(--space-12) * 2 + var(--control-height) + var(--screen-section-gap) * 2 + var(--screen-item-gap) * 3 +
+      var(--text-heading) * 1.4 + var(--space-6) + var(--text-inspection) * 4.2
+  );
   --settings-label-basis: 200px;
   --settings-control-basis: 300px;
   --glossary-page-min-height: 320px;

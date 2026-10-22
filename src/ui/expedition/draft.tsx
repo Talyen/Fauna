@@ -1,4 +1,6 @@
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
+import { useLayoutEffect, useRef } from "react";
+import { returnFocus } from "../shared/navigation/focus";
 import { starterCount } from "../../game/progression";
 
 import { StarterDetails } from "../shared/cards/card-details";
@@ -17,12 +19,22 @@ type Props = {
   inspect: (item: Inspection) => void;
 };
 export function Draft({ game, send, inspect }: Props) {
+  const grid = useRef<HTMLDivElement>(null);
+  const restore = useRef<number | null>(null);
+  useLayoutEffect(() => {
+    if (restore.current === null) return;
+    const targets = grid.current?.querySelectorAll<HTMLElement>(
+      game.selected.length === starterCount(game) ? ".creature-card" : ".recruit-button",
+    );
+    returnFocus(targets?.[Math.min(restore.current, (targets?.length ?? 1) - 1)] ?? null);
+    restore.current = null;
+  }, [game]);
   return (
     <Screen className="draft-screen">
       <ScreenHeading>
         {game.selected.length < starterCount(game) ? "Choose your starter" : "Your starter team"}
       </ScreenHeading>
-      <div className="draft-grid" data-nav-row>
+      <div className="draft-grid" data-nav-row ref={grid}>
         {(game.selected.length === starterCount(game) ? game.selected : game.starterOffers).map(
           (kind, index) => {
             const s = species(kind);
@@ -37,14 +49,22 @@ export function Draft({ game, send, inspect }: Props) {
                   label={`Inspect ${s.name}`}
                   tooltipContent={<StarterDetails game={game} kind={s.id} />}
                 />
-                <h2>{s.name}</h2>
-                <span className="starter-selection">
-                  {game.selected.length === starterCount(game) ? (
-                    <>
-                      <Check aria-hidden="true" /> Selected
-                    </>
-                  ) : null}
-                </span>
+                {game.selected.length === starterCount(game) ? (
+                  <span className="starter-selection">
+                    <Check aria-hidden="true" /> Selected
+                  </span>
+                ) : (
+                  <Button
+                    className="recruit-button"
+                    aria-label={`Recruit ${s.name}`}
+                    onClick={() => {
+                      restore.current = index;
+                      if (!send({ type: "draft", species: s.id })) restore.current = null;
+                    }}
+                  >
+                    Recruit
+                  </Button>
+                )}
               </div>
             );
           },

@@ -39,3 +39,5 @@ Drafting, encounter, Victory, Boon Merchant and Campfire headings offer the same
 When the roster is full, recruit replacement keeps the incoming recruit visible and inspectable beside the paginated existing roster. Only activating a Release choice commits recruitment. Back or Cancel restores the original offer and its focus. Inspecting or paging never releases a creature.
 
 Settings uses a compact 640px maximum width and reserves the tallest category’s natural height in one grid cell. Inactive native tab panels stay invisible, inert and hidden from assistive technology so changing tabs preserves the heading and tabs without exposing inactive controls.
+
+Creature inspection outside battle and Collection uses a centered name, aligned creature and ability artwork, current named passive and five progress stars. Stars start empty and fill with permanent rank; inspection contains no rank controls or recruitment action. Starter and Victory creature artwork opens this inspection without committing, while the Recruit button beneath each offer commits that choice. Full-roster replacement retains its Release choices and Cancel focus return.
