@@ -1,3 +1,4 @@
+import { captureScreen } from "./support/rendered-evidence";
 import { test, expect } from "@playwright/test";
 import { winBattle, bossReward } from "../support/game";
 import { seed, state, resume } from "./support/session";
@@ -27,6 +28,7 @@ for (const [width, height, enlarged] of [
       const first = (await cards.first().boundingBox())!,
         last = (await cards.last().boundingBox())!;
       expect(Math.abs(first.x + last.x + last.width - width)).toBeLessThan(1);
+      await captureScreen(page, { path: `reports/rewards/${fixture.phase}-${width}.png` });
       anchors.push({
         heading: (await page.locator(".reward-heading").boundingBox())!.y,
       });

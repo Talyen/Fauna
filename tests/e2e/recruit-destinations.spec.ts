@@ -1,21 +1,15 @@
 import { test, expect } from "@playwright/test";
 import { produce } from "immer";
-import { createGame } from "../../src/game/engine";
 import { CARDS } from "../../src/game/content";
 import { decodeSave, encodeSave } from "../../src/game/save";
-import { accept, winBattle, recruitChoice } from "../support/game";
+import { accept, merchantDestination } from "../support/game";
 import { expectScrollFree } from "./support/layout-contract";
 import { captureScreen } from "./support/rendered-evidence";
 
 test("Recruit details and four destination options fit enlarged text and recruitment survives reload", async ({
   page,
 }) => {
-  const initial = createGame(7);
-  const started = accept(accept(initial, { type: "draft", species: initial.starterOffers[0]! }), {
-    type: "start",
-  });
-  const won = winBattle(accept(started, { type: "beginBattle" }));
-  const game = produce(accept(won, recruitChoice(won)), (draft) => {
+  const game = produce(merchantDestination(), (draft) => {
     draft.expedition!.recruit = "cadenza";
     draft.team[0]!.health = 0;
   });

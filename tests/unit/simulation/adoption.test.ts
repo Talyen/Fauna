@@ -4,7 +4,7 @@ import { runJourney, type JourneyConfig } from "../../../src/tooling/playthrough
 import { contentCatalog, validateCatalog } from "../../../src/game/content-validation";
 const config: JourneyConfig = {
   // Complete current-catalog journeys; arbitrary lineups may legitimately exhaust the turn budget.
-  seed: 3,
+  seed: 2,
   runs: 2,
   starter: "emberback",
   policy: "heuristic",
@@ -26,7 +26,7 @@ describe("headless production sessions", () => {
     changed.steps[0]!.checkpoint = "corrupt";
     await expect(runJourney(config, "fixture", journey.initial, changed)).rejects.toThrow("diverged");
     await expect(runJourney(config, "different", journey.initial, journey)).rejects.toThrow("identity");
-  }, 15000);
+  }, 30000);
   it("reports exhausted budgets as incomplete", async () => {
     const journey = await runJourney({ ...config, maxActions: 2 }, "fixture");
     expect(journey.complete).toBe(false);

@@ -15,7 +15,7 @@ export async function step(
   if (c.type === "beginBattle") {
     await activate(page.locator(".app:not([inert]) [data-encounter]"));
   } else if (c.type === "visitCampfire") {
-    await activate(page.getByRole("button", { name: /^Rest/ }));
+    await activate(page.getByRole("button", { name: "Visit Campfire", exact: true }));
   } else if (c.type === "rest") {
     await activate(page.getByRole("button", { name: /^Rest/ }));
   } else if (c.type === "recruit") {

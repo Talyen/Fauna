@@ -1,6 +1,7 @@
 import { definition, species } from "./content";
 import type { GameEvent, GameState } from "./types";
-import { shuffle, roll } from "./random";
+import { chance as succeeds } from "./chance";
+import { shuffle } from "./random";
 import { cardKeywords, creaturePassive } from "./progression";
 
 export const MAX_HAND_SIZE = 6;
@@ -30,7 +31,7 @@ function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
       (amount, effect) => amount + (effect.kind === "wellRead" ? effect.amount : 0),
       0,
     );
-    if (chance <= 0 || (chance < 100 && roll(state) >= chance / 100)) continue;
+    if (!succeeds(state, chance / 100, false, events)) continue;
     const copy = { ...original, id: `copy-${battle.copySerial++}`, temporary: true as const };
     state.cards.push(copy);
     (battle.hand.length < MAX_HAND_SIZE ? battle.hand : battle.buffer).push(copy.id);
@@ -97,4 +98,14 @@ export function drawKeyword(
     receiveDraw(state, id, events);
     recycleDiscard(state);
   }
+}
+
+/** Only the visible hand is exchanged; buffered draws retain their FIFO ownership. */
+export function redrawHand(state: GameState, events: GameEvent[]) {
+  const battle = state.battle!;
+  const returned = battle.hand.splice(0);
+  if (!returned.length) return;
+  battle.draw.push(...returned);
+  shuffle(state, battle.draw);
+  draw(state, returned.length, events);
 }
