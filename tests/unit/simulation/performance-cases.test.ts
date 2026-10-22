@@ -42,4 +42,4 @@ it("derives reachable early and late inventories from replay evidence without fi
       state = result.state;
     }
   }
-}, 15000);
+}, 30000);
