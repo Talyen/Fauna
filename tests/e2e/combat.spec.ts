@@ -97,9 +97,10 @@ for (const width of [1280, 1920]) {
     await expect(page.locator('[data-actor-id="enemy-0"]')).toHaveAttribute("data-active-target", "true");
     const recipientPreview = page.locator('[data-actor-id="enemy-0"] .target-preview');
     await expect(recipientPreview).toBeVisible();
+    const enemy = game.battle!.enemies[0]!;
     await expect(recipientPreview).toHaveAttribute(
       "aria-label",
-      "Target preview for Emberback: Health 18 to 12, Block 0 to 0",
+      `Target preview for ${enemy.name}: Health ${enemy.health} to ${enemy.health - 6}, Block 0 to 0`,
     );
     await expect(recipientPreview).toContainText("−6");
     await expect(page.locator(".target-preview")).toHaveCount(1);
