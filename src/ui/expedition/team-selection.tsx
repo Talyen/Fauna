@@ -36,6 +36,7 @@ export function TeamSelection({ game, send, recovery }: Props & { recovery?: Gam
               kind={game.expedition!.recruit!}
               progression={game}
               readout={false}
+              tooltipSide="right"
               label={`Recruit ${species(game.expedition!.recruit!).name}`}
               onClick={(element) => {
                 if (!send({ type: "recruitDestination", species: game.expedition!.recruit! })) return;
