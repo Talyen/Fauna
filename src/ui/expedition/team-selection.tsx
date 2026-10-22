@@ -9,7 +9,6 @@ import { CreatureDetails } from "../shared/card-details";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
 import { ArtCard } from "../shared/art-card";
 
-import { species } from "../../game/content";
 import type { Command, GameState, GameEvent } from "../../game/types";
 import type { Inspection } from "../inspection/model";
 
