@@ -182,7 +182,21 @@ describe("lightweight local verification", () => {
     for (const command of ["check:full", "test:full", "build", "test:e2e"])
       expect(scripts["verify:full"]).toContain(`npm run ${command}`);
     const workflow = readFileSync(path.join(repo, ".github/workflows/ci.yml"), "utf8");
-    expect(workflow).toContain("run: npm run verify:full");
+    for (const command of [
+      "check:full",
+      "docs:check",
+      "content:audit",
+      "test:full",
+      "build",
+      "check:bundle",
+      "assets:check:bundle",
+      "package:win",
+      "verify:package",
+    ])
+      expect(workflow).toContain(`run: npm run ${command}`);
+    expect(workflow).toContain("run: npx playwright test --shard=");
+    expect(workflow).toContain("node scripts/ci.mjs gate");
+    expect(workflow).toContain("if: ${{ !cancelled() && needs.prepare.outputs.run != 'false' }}");
     expect(workflow).toContain("if: always()");
     expect(workflow).toContain("name: browser-review");
     expect(workflow).toContain("reports/");

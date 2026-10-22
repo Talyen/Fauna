@@ -153,6 +153,7 @@ it("applies reflected control normally and allows Purge to remove a pending Ward
     game.battle!.enemies.slice(1).forEach((enemy) => {
       enemy.health = 0;
     });
+    game.battle!.enemies[0]!.health = 18;
     hit(game, game.battle!.enemies[0]!, ram, 9, "freeze", [], { proc: true });
     expect(game.battle!.enemies[0]!.combat.controlled).toBe("freeze");
     expect(ram.combat!.controlled).toBeNull();

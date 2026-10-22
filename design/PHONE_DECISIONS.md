@@ -1,5 +1,7 @@
 # Phone design decisions
 
+This preserves the original October 20 choices. Later decisions in the canonical [UI rules](../Docs/UI.md) supersede panel scrolling/scrollbars, visible failure/Retry and Cloud status, Health totals in tooltips, first-page resets for Collection filters, and the original combat-number timing. Current Collection filters remember their page anchors; technical recovery is silent. Use the [shared design system](../Docs/DESIGN_SYSTEM.md) for current implementation ownership. Historical choices below do not override those contracts.
+
 User choices from the text review on 2026-10-20. These supplement the earlier interactive studies. Approved interaction decisions are now adopted through the [shared design system](../Docs/DESIGN_SYSTEM.md); complete rendered/context acceptance remains pending. Continue with short text options while the user is on a phone; do not require HTML access or screenshots for each decision. Preserve registered shadcn/ui controls and their native behavior.
 
 ## Tabs

@@ -41,14 +41,19 @@ export function generatePatchNotes(root, { tag } = {}) {
     .filter((value) => /^v\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/.test(value));
   // Measure ancestry distance; tag date and unrelated newer tags cannot change the range.
   const candidates = tags
-    .filter((value) => !tag || git(root, ["rev-parse", `${value}^{commit}`]).trim() !== head)
+    .filter((value) => !tag || git(root, ["rev-parse", `refs/tags/${value}^{commit}`]).trim() !== head)
     .map((value) => ({
       tag: value,
-      distance: Number(git(root, ["rev-list", "--count", `${value}..${head}`])),
+      distance: Number(git(root, ["rev-list", "--count", `refs/tags/${value}..${head}`])),
     }))
     .sort((a, b) => a.distance - b.distance || a.tag.localeCompare(b.tag));
   const base = candidates[0]?.tag;
-  const commits = git(root, ["rev-list", "--reverse", "--no-merges", base ? `${base}..${head}` : head])
+  const commits = git(root, [
+    "rev-list",
+    "--reverse",
+    "--no-merges",
+    base ? `refs/tags/${base}..${head}` : head,
+  ])
     .trim()
     .split("\n")
     .filter(Boolean);

@@ -1,3 +1,4 @@
+import { chooseBattleCommand } from "../../src/application/battle-policy";
 import { captureScreen, settleScreen } from "./rendered-evidence";
 import { freshCombat } from "../../src/game/combat";
 import { test, expect, type Page, type Locator } from "@playwright/test";
@@ -9,7 +10,16 @@ import { assetUrl } from "../../src/ui/assets";
 import prepared from "../../src/assets/prepared.json" with { type: "json" };
 import { BOONS, TALENTS, KEYWORDS } from "../../src/game/progression";
 import type { Command, GameState } from "../../src/game/types";
-import { recruitChoice, accept, policy, winBattle, victoryReady, run, bossReward } from "../unit/helpers";
+import {
+  recruitChoice,
+  accept,
+  policy,
+  winBattle,
+  victoryReady,
+  run,
+  bossReward,
+  FULL_JOURNEY_SEED,
+} from "../unit/helpers";
 const key = "fauna.save.v1";
 async function seed(page: Page, game = createGame(7)) {
   if (page.url() === "about:blank") await page.goto("/");
@@ -33,9 +43,14 @@ async function state(page: Page): Promise<GameState> {
 async function resume(page: Page) {
   await page.getByRole("button", { name: "Continue", exact: true }).click();
 }
-async function step(page: Page, activate: (el: Locator) => Promise<void> = (el) => el.click()) {
-  const s = await state(page),
-    c = policy(s);
+async function step(
+  page: Page,
+  activate: (el: Locator) => Promise<void> = (el) => el.click(),
+  committed?: GameState,
+  selected?: Command,
+) {
+  const s = committed ?? (await state(page)),
+    c = selected ?? policy(s);
   if (c.type === "beginBattle") {
     await activate(page.locator(".app:not([inert]) [data-encounter]"));
   } else if (c.type === "recruit") {
@@ -293,12 +308,17 @@ test("main menu, draft and pre-battle deck lead into the first battle", async ({
   await page.getByRole("button", { name: "Begin journey" }).click();
   expect((await state(page)).phase).toBe("teamSelection");
   const destination = page.locator(".app:not([inert]) [data-encounter]").first();
+  const deckCards = (await state(page)).cards;
   await page.getByRole("button", { name: "Deck", exact: true }).click();
   await expect(page.getByRole("dialog").locator(".action-card")).toHaveCount(3);
-  await page.getByRole("dialog").locator(".action-card").first().click({ button: "right" });
+  const inspectedCard = page.getByRole("dialog").locator(".action-card").first();
+  const inspectedId = await inspectedCard.getAttribute("data-card-id");
+  await inspectedCard.click({ button: "right" });
   await expect(page.locator(".inspection.single-card")).toBeVisible();
   await page.locator(".inspection.single-card .action-card").hover();
-  await expect(page.getByRole("tooltip")).toContainText(CARDS.find((card) => card.species === chosen)!.name);
+  await expect(page.getByRole("tooltip")).toContainText(
+    definition(deckCards.find((card) => card.id === inspectedId)!.definitionId).name,
+  );
   await page.keyboard.press("Escape");
   await page.keyboard.press("Escape");
   await destination.click();
@@ -381,12 +401,12 @@ for (const [width, enlarged] of [
 
 test("one starter grows a lineup through a full expedition", async ({ page }) => {
   test.setTimeout(120_000);
-  await page.clock.setFixedTime(new Date(36));
+  await page.clock.setFixedTime(new Date(FULL_JOURNEY_SEED));
   await page.emulateMedia({ reducedMotion: "reduce" });
   await seed(page);
   const activate = (el: Locator) => el.click();
   await activate(page.getByRole("button", { name: "Play", exact: true }));
-  const chosen = "pollenmoth";
+  const chosen = (await state(page)).starterOffers[0]!;
   const name = species(chosen).name;
   await activate(page.getByRole("button", { name: `Inspect ${name}`, exact: true }));
   await activate(page.getByRole("button", { name: `Choose ${name}`, exact: true }));
@@ -409,7 +429,7 @@ test("one starter grows a lineup through a full expedition", async ({ page }) =>
       const recruited = await state(page);
       expect(recruited.lineup).toEqual(recruited.team.map((creature) => creature.id));
       expect(recruited.reserves).toHaveLength(Math.max(0, recruited.roster.length - 3));
-    } else await step(page, activate);
+    } else await step(page, activate, s, s.phase === "battle" ? chooseBattleCommand(s) : policy(s));
   }
   await expect(page.getByRole("heading", { name: "Journey complete", exact: true })).toBeVisible();
   expect((await state(page)).team).toHaveLength(3);
@@ -788,6 +808,12 @@ test("corrupt saves recover backups and all-invalid saves continue silently", as
   await expect(page.getByRole("button", { name: "Continue", exact: true })).toBeVisible();
   await resume(page);
   await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
+  await page.getByRole("button", { name: "End turn", exact: true }).click();
+  const recovered = accept(run(), { type: "endTurn" });
+  expect(await state(page)).toEqual(recovered);
+  await page.reload();
+  await resume(page);
+  expect(await state(page)).toEqual(recovered);
   await page.evaluate((key) => {
     localStorage.clear();
     localStorage.setItem(key, "broken");
@@ -1278,7 +1304,7 @@ test("navigation returns to the nearest remaining card; denial is visual and res
   expect((await state(page)).revision).toBe(before.revision);
   await expect(page.getByText("Not enough mana.", { exact: true })).toHaveCount(0);
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.waitForTimeout(200);
+  await settleScreen(page);
   await unavailable.click();
   expect(
     await unavailable.evaluate((el) =>
@@ -1499,7 +1525,7 @@ test("a fallen deployed row resumes with no playable cards and can recover throu
   expect(restored.battle!.hand).toEqual(fallen.battle!.hand);
   await page.getByRole("button", { name: "Swap", exact: true }).click();
   await expect(
-    page.getByRole("button", { name: `${species(outgoing.species).name}, backup`, exact: true }),
+    page.getByRole("dialog").locator(`[data-actor-id="${outgoing.id}"] .creature-card`),
   ).toHaveAttribute("aria-disabled", "true");
 });
 

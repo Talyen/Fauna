@@ -90,12 +90,13 @@ it("Puffs Poison onto every living enemy, excluding knockouts", () => {
 
 it.each([0, 10])("Sporecoat retaliates on landed attacks even with %i Block", (block) => {
   const events: GameEvent[] = [];
-  const result = produce(ready(), (game) => {
+  const initial = ready();
+  const result = produce(initial, (game) => {
     game.team[0]!.block = block;
     hit(game, game.battle!.enemies[0]!, game.team[0]!, 2, "nature", events);
   });
   expect(result.team[0]!.health).toBe(block ? 30 : 28);
-  expect(result.battle!.enemies[0]!.health).toBe(17);
+  expect(result.battle!.enemies[0]!.health).toBe(initial.battle!.enemies[0]!.health - 1);
   expect(result.battle!.enemies[0]!.combat.poison).toBe(1);
   expect(result.battle!.enemies[0]!.combat.statusSources.poison).toBe("ally-0");
   expect(events.filter((event) => event.kind === "damage")).toHaveLength(2);
@@ -143,7 +144,11 @@ it("removes the outgoing kit from hand and piles before drawing the incoming kit
   const result = play(game);
   expect(result.accepted).toBe(true);
   expect(result.state.team[0]).toEqual(game.reserves[0]);
-  expect(result.state.reserves[0]).toEqual(game.team[0]);
+  expect(result.state.reserves[0]).toEqual(
+    produce(game.team[0], (actor) => {
+      actor!.combat!.cardsPlayedThisTurn = 1;
+    }),
+  );
   expect(result.state.lineup).toEqual(game.lineup);
   expect(
     result.state.cards
@@ -224,7 +229,11 @@ it("swaps positions with a living ally when no living backup exists, or just dra
   expect(decodeSave(encodeSave(result))).toEqual(result);
   const alone = ready();
   const solo = play(alone).state;
-  expect(solo.team).toEqual(alone.team);
+  expect(solo.team).toEqual(
+    produce(alone.team, (team) => {
+      team[0]!.combat!.cardsPlayedThisTurn = 1;
+    }),
+  );
   expect(solo.battle!.hand).toHaveLength(2);
   expect(decodeSave(encodeSave(solo))).toEqual(solo);
 });
@@ -265,7 +274,7 @@ it.each([1, 2, 3, 4, 5, 6])(
       game.discovery.recruited.captoad = copies;
       hit(game, game.battle!.enemies[0]!, game.team[0]!, 2, "nature", []);
     });
-    expect(result.battle!.enemies[0]!.health).toBe(18 - copies);
+    expect(result.battle!.enemies[0]!.health).toBe(result.battle!.enemies[0]!.maxHealth - copies);
     expect(result.battle!.enemies[0]!.combat.poison).toBe(copies);
     expect(decodeSave(encodeSave(result))).toEqual(result);
     const enemyResult = produce(ready(), (game) => {

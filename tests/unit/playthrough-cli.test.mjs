@@ -3,7 +3,8 @@ import { readFileSync, rmSync } from "node:fs";
 import { randomUUID } from "node:crypto";
 import path from "node:path";
 import { expect, it } from "vitest";
-it("writes a durable journal and replays the CLI's recorded production career", () => {
+import { identity } from "../../scripts/lib/tool-runtime.mjs";
+it("writes a durable journal and replays the CLI's recorded production career", async () => {
   const directory = path.join("reports", `cli-fixture-${randomUUID()}`);
   const replayDirectory = path.join(directory, "replay");
   try {
@@ -16,6 +17,7 @@ it("writes a durable journal and replays the CLI's recorded production career", 
     const summary = JSON.parse(readFileSync(path.join(directory, "summary.json"), "utf8"));
     const bundle = JSON.parse(readFileSync(path.join(directory, "journey.json"), "utf8"));
     expect(summary.complete).toBe(true);
+    expect(bundle.identity).toBe(await identity());
     const journal = readFileSync(path.join(directory, summary.journal), "utf8")
       .trim()
       .split("\n")

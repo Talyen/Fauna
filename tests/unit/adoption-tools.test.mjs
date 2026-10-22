@@ -17,6 +17,58 @@ import {
 } from "../../scripts/verify-package.mjs";
 import { review } from "../../scripts/agent-review.mjs";
 import { context, sections } from "../../scripts/agent-context.mjs";
+import { performanceBuildIdentity } from "../../scripts/run-performance.mjs";
+import { isolatedDesktopEnvironment } from "../../scripts/lib/desktop-environment.mjs";
+
+it("identifies the complete performance artifact, including desktop code, save format and media", async () => {
+  const root = mkdtempSync(path.join(os.tmpdir(), "fauna-performance-build-"));
+  const files = {
+    "dist/index.html": '<script src="./assets/index.js"></script>',
+    "dist/assets/index.js": "renderer",
+    "dist/prepared/sound.ogg": "audio",
+    "desktop/main.cjs": "desktop",
+    "desktop/steam-config.json": "{}",
+    "package.json": '{"version":"1.0.0"}',
+    "src/game/save-format.json": '{"version":1}',
+  };
+  try {
+    for (const [name, bytes] of Object.entries(files)) {
+      mkdirSync(path.dirname(path.join(root, name)), { recursive: true });
+      writeFileSync(path.join(root, name), bytes);
+    }
+    const baseline = await performanceBuildIdentity(root);
+    for (const [name, bytes] of Object.entries(files)) {
+      writeFileSync(path.join(root, name), `${bytes}changed`);
+      expect(await performanceBuildIdentity(root), name).not.toBe(baseline);
+      writeFileSync(path.join(root, name), bytes);
+    }
+    expect(await performanceBuildIdentity(root)).toBe(baseline);
+    writeFileSync(path.join(root, "dist/index.html"), "");
+    await expect(performanceBuildIdentity(root)).rejects.toThrow("production renderer");
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+it("launches desktop verification against its own profile and built renderer despite inherited preview settings", () => {
+  const inherited = {
+    PATH: "tools",
+    ELECTRON_RUN_AS_NODE: "1",
+    FAUNA_DEV_URL: "http://127.0.0.1:48209",
+    FAUNA_PREVIEW_USER_DATA: "other-profile",
+    FAUNA_SMOKE_USER_DATA: "other-smoke",
+    FAUNA_PERF_CAPTURE: "1",
+    FAUNA_DISABLE_STEAM: "0",
+  };
+  const before = { ...inherited };
+  expect(isolatedDesktopEnvironment("owned-profile", inherited)).toEqual({
+    PATH: "tools",
+    FAUNA_SMOKE_USER_DATA: "owned-profile",
+    FAUNA_DISABLE_STEAM: "1",
+  });
+  expect(inherited).toEqual(before);
+});
+
 it("pairs matched samples, reports uncertainty and refuses incomplete or mismatched evidence", () => {
   expect(pairedStats([0, 1, -1])).toMatchObject({ mean: 0, noisy: true, n: 3 });
   expect(pairedStats([2, 2])).toMatchObject({ mean: 2, standardError: 0, noisy: false });
@@ -99,13 +151,17 @@ it("rejects broken Windows headers, escaping resources and corrupt packaged medi
   const entries = {
     "package.json": Buffer.from(JSON.stringify({ name: "fauna", version: "1.0", main: "desktop/main.cjs" })),
     "desktop/main.cjs": main,
+    "src/game/save-format.json": Buffer.from('{"version":1}'),
     "dist/index.html": Buffer.from('<script src="./app.js"></script>'),
     "dist/app.js": Buffer.from("production"),
     "dist/prepared/art.svg": Buffer.from("image"),
   };
   const options = {
     expected: { version: "1.0" },
-    desktopFiles: { "desktop/main.cjs": main },
+    runtimeFiles: {
+      "desktop/main.cjs": main,
+      "src/game/save-format.json": entries["src/game/save-format.json"],
+    },
     receipt: {
       records: {
         image: { url: "./prepared/art.svg", outputHash: createHash("sha256").update("image").digest("hex") },
@@ -114,6 +170,12 @@ it("rejects broken Windows headers, escaping resources and corrupt packaged medi
   };
   const read = (name) => entries[name];
   expect(verifyArchive(read, options).media).toBe(1);
+  const saveFormat = entries["src/game/save-format.json"];
+  delete entries["src/game/save-format.json"];
+  expect(() => verifyArchive(read, options)).toThrow("save-format.json");
+  entries["src/game/save-format.json"] = Buffer.from('{"version":0}');
+  expect(() => verifyArchive(read, options)).toThrow("runtime differs");
+  entries["src/game/save-format.json"] = saveFormat;
   expect(() => verifyArchive(read, { ...options, releaseTag: "v2" })).toThrow();
   expect(() =>
     verifyArchive(read, { ...options, rendererFiles: { "dist/app.js": Buffer.from("different") } }),

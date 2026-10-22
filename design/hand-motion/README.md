@@ -29,7 +29,7 @@ Read the local Alchemy checkout at commit `7790d47fb`:
 
 Reuse the choreography, not Alchemy's gameplay/presentation gating or component tree. Committed card movement, draw order, RNG and saves remain Fauna-owned and immediate. User input must not wait for a transfer; an interrupting action must reconcile or finish the visual presentation before acting on current committed state. No invisible control may capture input, and no card can stay hidden after cancellation.
 
-Keep Fauna's resting artwork dimensions and aspect ratio; any transfer scaling is transient presentation between measured endpoints. Isolate flight and reflow transforms from hover, focus, selection lift and rejection shake. Use Fauna assets for card backs and piles, not imported Alchemy media. Sound candidates use the existing local library and require a listening review.
+Keep Fauna's resting artwork dimensions and aspect ratio; any transfer scaling is transient presentation between measured endpoints. Isolate flight and reflow transforms from hover, focus, selection lift and rejection shake. Use Fauna-owned prepared card-back and pile selections, whose copied Alchemy source provenance is recorded in [Content](../../Docs/CONTENT.md#battle-pile-artwork); there is no sibling runtime dependency. Sound candidates use the existing local library and require a listening review.
 
 Reduced motion skips flight, flip and reflow. Leaving battle, pause, disposal, interruption and live reduced-motion changes clear owned overlays and stale callbacks, reveal the current committed hand and never replay cancelled sequences. Missing measurements settle directly to the committed layout.
 

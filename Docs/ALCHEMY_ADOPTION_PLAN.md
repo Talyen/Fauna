@@ -1,5 +1,7 @@
 # Alchemy feature adoption plan
 
+This is a historical delivery record, not a current implementation checklist. Later decisions supersede its diagnostic export/Retry UI, five-species starter pool, Known/Unknown Collection filters, fixed artwork sizes and worktree-cleanup restrictions. Current behavior belongs to [Architecture](ARCHITECTURE.md), [Content](CONTENT.md), [UI](UI.md), [journey design](EXPEDITION_DESIGN.md) and [Contributing](../CONTRIBUTING.md). Implementation or verification statements below describe that rollout only; they do not establish acceptance of current main.
+
 Adopt Alchemy's audio, volume controls, Collection discovery, talent XP curve, headless playthroughs, content validation, manifest-driven asset preparation, owned previews and worktrees, and local diagnostics. Keep Fauna's creature roster, free combat swaps, command ownership, fixed artwork sizes, shadcn controls, and lightweight local verification policy.
 
 Implementation is present on the task branch for all stages; local focused checks and media preparation are covered during handoff. Full CI, rendered review, listening/mix acceptance and physical platform checks remain pending. This plan records the delivery scope. It does not change current gameplay or authorize pushes, publication, or broader local validation. References were checked against Alchemy `6222f0523` and Fauna `96aef22`. Alchemy is a source reference; Fauna will have no runtime dependency on its sibling checkout.

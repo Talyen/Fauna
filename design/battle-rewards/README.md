@@ -1,5 +1,7 @@
 # Battle rewards review sample
 
+Historical flow: production uses one Victory screen with required recruitment after ordinary fights or optional Boons after intermediate bosses. There is no earnings Continue step or recruitment Skip. See [journey design](../../Docs/EXPEDITION_DESIGN.md#screen-flow-and-journey-results).
+
 Open `/design/battle-rewards/index.html` on the development server.
 
 Presentation fixtures only; no gameplay, persistence, currency awards or talent purchases. Three separate screens: XP/currency → recruitment → relic choice. Continue advances from XP; recruit one creature or Skip to reach relics. Recruit and relic choices commit immediately to local presentation state. Relic selection or Skip ends this sample; reload to reset. Full-roster replacement and next-battle selection are not part of this sample.
