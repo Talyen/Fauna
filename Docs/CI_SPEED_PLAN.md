@@ -2,7 +2,7 @@
 
 Reduce full verification time while retaining every required check, player journey and rendered evidence surface. Start with eight browser shards on standard GitHub runners and concurrent verification jobs. Aim first for complete results in 2–3 minutes excluding runner queue time; treat a one-minute result as a stretch goal requiring measured improvements to setup, long individual tests and Windows packaging.
 
-This is an implementation plan. The current execution policy in [Contributing](../CONTRIBUTING.md#verification) remains in force until the workflow and its documentation change together. Full execution and performance comparisons belong in hosted CI.
+The workflow now implements these stages, with the current execution policy in [Contributing](../CONTRIBUTING.md#verification). Full execution and performance comparisons belong in hosted CI. The rollout evidence below distinguishes measurements from targets.
 
 ## Baseline and success measures
 
