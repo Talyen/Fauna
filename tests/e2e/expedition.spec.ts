@@ -950,6 +950,10 @@ test("real audio output, hit recoil, reduced motion, and mute follow combat outc
     d.battle!.hand = cards.map((c) => c.id);
     d.battle!.draw = d.cards.filter((c) => !cards.some((card) => card.id === c.id)).map((c) => c.id);
     d.battle!.discard = [];
+    d.battle!.enemies.forEach((enemy) => {
+      enemy.combat.controlled = "freeze";
+      enemy.combat.controlTurns = 1;
+    });
   });
   await seed(page, fixture);
   await resume(page);
