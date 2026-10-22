@@ -102,7 +102,7 @@ function prepareEncounter(state: GameState) {
           state,
           BOONS.filter((b) => !state.boons.includes(b.id)),
         )
-          .slice(0, 2)
+          .slice(0, 3)
           .map((b, i) => ({
             slot: `slot-${i}`,
             boon: b.id,
@@ -679,6 +679,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
       case "leaveSupport":
         draft.support!.resolved = true;
         draft.expedition!.lastRoom = "merchant";
+        prepareEncounter(draft);
         draft.phase = "teamSelection";
         break;
       case "buyBoon": {

@@ -90,7 +90,7 @@ export const GLOSSARY = [
   {
     term: "Gold",
     definition:
-      "Gold earned in battle carries between journeys; Spend Gold at Merchants on Boons for the current journey; Gold is not a keyword or talent category",
+      "Gold earned in battle carries between journeys; Spend Gold at Boon Merchants on Boons for the current journey; Gold is not a keyword or talent category",
   },
   ...KEYWORD_IDS.filter(
     (id) => KEYWORD_DEFINITIONS[id].availability === "active" && !["health", "block", "mana"].includes(id),
