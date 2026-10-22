@@ -116,3 +116,30 @@ it("pays Bleed Leech for damage already dealt even when Last Resort Cleanses the
   tickStatuses(state, target, events);
   expect(source.health).toBe(before + 2);
 });
+
+it("cancels Thunderstone after Thorns knocks out the acting creature, retaining the landed Stun", () => {
+  const state = structuredClone(run());
+  state.boons = ["thunderstone"];
+  const source = state.team[0]!;
+  const target = state.battle!.enemies[0]!;
+  source.health = 1;
+  source.block = 0;
+  source.combat = freshCombat();
+  source.combat.deathDoorUsed = true;
+  target.health = target.maxHealth = 100;
+  target.block = 0;
+  target.combat = freshCombat();
+  target.combat.thorns = 5;
+  const events: GameEvent[] = [];
+  state.rng = 42;
+
+  hit(state, source, target, 50, "stun", events);
+
+  expect(source.health).toBe(0);
+  expect(target.combat.controlled).toBe("stun");
+  expect(target.health).toBe(50);
+  expect(events.filter((event) => event.kind === "damage").map((event) => event.damageType)).toEqual([
+    "stun",
+    "nature",
+  ]);
+});

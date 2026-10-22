@@ -252,6 +252,7 @@ export function executeAbility(
     if (keywords.includes("block") && hasTalent(state, "armor.armored-surge") && roll(state) < 0.1)
       grantArmor(state, actor, 6, events);
   }
+  if (actor.health <= 0) return;
   const flourishRepeat = kindlingFlourish(state, actor);
   const encoreRepeat = encore(state, actor);
   const abilityRepeat = def.repeatChance !== undefined && roll(state) < def.repeatChance / 100;

@@ -273,3 +273,50 @@ it.each([
     expect(cardText(def, 0, 2, 1.5)).toBe("Grant all allies 3 Block or 2 Thorns");
   },
 );
+
+it.each(["player", "enemy"] as const)(
+  "%s knockout during retaliation stops area targets, extras and repeats, while Death's Door permits continuation",
+  (side) => {
+    const def = { ...definition("ringpalm-harmonic-set"), repeatChance: 100 };
+    for (const survives of side === "player" ? [false, true] : [false]) {
+      const state = structuredClone(teamRun(42, ["ringpalm", "mossguard", "prismram"]));
+      const enemy = state.battle!.enemies[0]!;
+      state.battle!.enemies = Array.from({ length: 3 }, (_, index) => ({
+        ...structuredClone(enemy),
+        id: `enemy-${index}`,
+      }));
+      const actor = side === "player" ? state.team[0]! : state.battle!.enemies[0]!;
+      const targets = side === "player" ? state.battle!.enemies : state.team;
+      actor.health = 1;
+      actor.block = 0;
+      actor.combat = freshCombat();
+      actor.combat.deathDoorUsed = !survives;
+      for (const target of targets) {
+        target.health = 20;
+        target.block = 0;
+        target.combat = freshCombat();
+        target.combat.controlled = "stun";
+        target.combat.controlTurns = 1;
+        target.combat.thorns = 1;
+      }
+      const events: GameEvent[] = [];
+      executeAbility(
+        state,
+        side === "player"
+          ? { side, actor: state.team[0]!, def, value: 1 }
+          : { side, actor: state.battle!.enemies[0]!, def, value: 1 },
+        events,
+        { swap() {} },
+      );
+      expect(actor.health).toBe(survives ? 1 : 0);
+      const hits = events.filter((event) => event.kind === "damage" && event.actorId === actor.id);
+      if (survives) expect(hits.length).toBeGreaterThanOrEqual(targets.length * 2);
+      else expect(hits).toHaveLength(1);
+      expect(actor.combat!.armor).toBe(survives ? 2 : 0);
+      for (const target of targets.slice(1)) {
+        if (survives) expect(target.health).toBeLessThanOrEqual(18);
+        else expect(target.health).toBe(20);
+      }
+    }
+  },
+);

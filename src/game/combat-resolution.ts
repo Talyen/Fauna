@@ -1100,7 +1100,7 @@ function* resolveHit(
     yield* reaction("gainGold", state, 3, events);
   if (target.health === 0 && !alliedTarget && alliedSource && state.boons.includes("bone-charm"))
     yield* reaction("restoreHealth", source, 3, events, false, state);
-  if (alliedSource && !alliedTarget && lost > 0) {
+  if (alliedSource && !alliedTarget && lost > 0 && (source.health > 0 || policy.deadSource)) {
     if (type === "bleed" && state.boons.includes("cutpurse-knife"))
       yield* reaction("gainGold", state, 1, events);
     if (type === "poison" && state.boons.includes("parasitic-bloom") && roll(state) < 0.1)
@@ -1124,9 +1124,9 @@ function* resolveHit(
       yield* reaction("removeEffects", source, "cleanse", 1, events, state);
     if (hasTalent(state, "water.riptide") && roll(state) < 0.2) drawKeyword(state, "water");
   }
-  if (policy.buildup && damage > 0) {
+  if (policy.buildup && damage > 0 && source.health > 0) {
     const statusResult = yield* reaction("applyHarmfulStatus", state, source, target, damage, type, events, {
-      leech: leech,
+      leech,
     });
     depletions.push(...statusResult.depletions);
     if (direct && alliedSource && !alliedTarget && source.health > 0) {
@@ -1137,7 +1137,7 @@ function* resolveHit(
     }
     if (direct && alliedSource && !alliedTarget && source.health > 0) {
       const proc = (id: import("./progression").TalentId, chance: number) =>
-        hasTalent(state, id) && roll(state) < chance;
+        source.health > 0 && hasTalent(state, id) && roll(state) < chance;
 
       if (type === "physical") {
         if (proc("physical.heavy-blows", 0.1))
@@ -1145,11 +1145,11 @@ function* resolveHit(
         if (proc("physical.lacerate", 0.1))
           yield* reaction("hit", state, source, target, damage, "bleed", events, { origin: "proc" });
         if (proc("armor.iron-guard", 0.1)) yield* reaction("grantArmor", state, source, damage, events);
-        if (partingCut)
+        if (partingCut && source.health > 0)
           yield* reaction("hit", state, source, target, Math.round(damage / 2), "bleed", events, {
             origin: "proc",
           });
-        if (critical && hasTalent(state, "physical.rupture") && stats.bleed > 0) {
+        if (source.health > 0 && critical && hasTalent(state, "physical.rupture") && stats.bleed > 0) {
           const bleed = stats.bleed;
           const payouts = stats.bleedLeech;
           stats.bleed = 0;
@@ -1221,7 +1221,8 @@ function* resolveHit(
     }
     if ((leech || blessedLeech) && type !== "bleed" && source.health > 0)
       yield* reaction("leechHealth", state, source, lost, events, stats.poison > 0 || stats.bleed > 0);
-    if (statusResult.appliedControl) yield* reaction("controlRewards", state, source, target, type, events);
+    if (statusResult.appliedControl && source.health > 0)
+      yield* reaction("controlRewards", state, source, target, type, events);
   }
   if (direct && target.health > 0 && source.health > 0) {
     const amount = creaturePassive(alliedTarget ? state : undefined, target.species).effects.reduce(
@@ -1322,6 +1323,7 @@ function* tickStatuses(state: GameState, unit: Combatant, events: GameEvent[]): 
     if (stats[status] === 0) delete stats.statusSources[status];
   }
 }
+/** Called once at the start of the owner's turn, including while in reserve. */
 function* startAction(unit: Combatant, events: GameEvent[], state?: GameState): Resolution<boolean> {
   const stats = combat(unit);
   stats.temporaryDodge = 0;
