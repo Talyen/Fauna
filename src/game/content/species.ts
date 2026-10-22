@@ -1,3 +1,4 @@
+import { freeze } from "immer";
 import type { Species, SpeciesId } from "./types";
 export const SPECIES: readonly Species[] = [
   {
@@ -739,3 +740,5 @@ export function species(id: SpeciesId): Species {
   if (!result) throw new Error(`Unknown species: ${id}`);
   return result;
 }
+
+freeze(SPECIES, true);

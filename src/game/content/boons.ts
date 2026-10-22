@@ -1,3 +1,4 @@
+import { freeze } from "immer";
 export const BOONS = [
   { id: "tattered-pages", name: "Tattered Pages", text: "Draw 1 additional card at battle start" },
   { id: "bone-charm", name: "Bone Charm", text: "Restore 3 Health when you defeat an enemy" },
@@ -43,3 +44,5 @@ export const BOONS = [
   },
 ] as const;
 export type BoonId = (typeof BOONS)[number]["id"];
+
+freeze(BOONS, true);

@@ -1,3 +1,4 @@
+import { freeze } from "immer";
 export const TALENTS = [
   {
     id: "water.pressure",
@@ -1083,3 +1084,6 @@ export const TALENTS = [
 ] as const;
 export type TalentId = (typeof TALENTS)[number]["id"];
 export const TALENT_EFFECTS = TALENTS.map((talent) => talent.effect);
+
+freeze(TALENTS, true);
+freeze(TALENT_EFFECTS, true);

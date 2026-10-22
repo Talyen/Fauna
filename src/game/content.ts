@@ -1,3 +1,4 @@
+import { freeze } from "immer";
 import { CARDS } from "./content/cards";
 import { SPECIES } from "./content/species";
 import type { SpeciesId, CardDefinition } from "./content/types";
@@ -14,3 +15,5 @@ export function definition(id: string): CardDefinition {
   if (!result) throw new Error(`Unknown card: ${id}`);
   return result;
 }
+
+freeze(FIRST_RUN_STARTERS, true);

@@ -63,9 +63,13 @@ function kindlingFlourish(state: GameState, actor: Combatant) {
 }
 function recoverDiscard(state: GameState, events: GameEvent[]) {
   const battle = state.battle!;
-  if (!battle.discard.length) return;
-  const index = Math.floor(roll(state) * battle.discard.length);
-  const id = battle.discard.splice(index, 1)[0]!;
+  const available = battle.discard.filter((id) => {
+    const card = state.cards.find((entry) => entry.id === id)!;
+    return state.team.some((unit) => unit.id === card.ownerId && unit.health > 0);
+  });
+  if (!available.length) return;
+  const id = available[Math.floor(roll(state) * available.length)]!;
+  battle.discard.splice(battle.discard.indexOf(id), 1);
   fillHand(state);
   (battle.hand.length < MAX_HAND_SIZE ? battle.hand : battle.buffer).push(id);
   const card = state.cards.find((entry) => entry.id === id)!;

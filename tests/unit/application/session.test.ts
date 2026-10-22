@@ -618,6 +618,50 @@ it("shares disposal across reentrant subscribers while draining admitted saves",
   }
 });
 
+it("shares the close handshake and native quit across repeated requests", async () => {
+  let requestClose!: () => Promise<boolean>;
+  let release!: () => void;
+  const gate = new Promise<void>((resolve) => (release = resolve));
+  const quit = vi.fn(async () => {});
+  const s = createSession({
+    ...platform(),
+    quit,
+    onCloseRequested(listener) {
+      requestClose = listener;
+      return () => {};
+    },
+    saves: { readCandidates: async () => [], write: async () => gate },
+  });
+  await s.load();
+  s.command({ type: "draft", species: s.store.getState().game.starterOffers[0]! });
+  let reentrantQuit: Promise<void> | undefined;
+  let requested = false;
+  const unsubscribe = s.store.subscribe((view) => {
+    if (view.closing && !requested) {
+      requested = true;
+      reentrantQuit = s.quit();
+    }
+  });
+  try {
+    const firstClose = requestClose();
+    const secondClose = requestClose();
+    expect(secondClose).toBe(firstClose);
+    const firstQuit = s.quit();
+    const secondQuit = s.quit();
+    expect(secondQuit).toBe(firstQuit);
+    expect(reentrantQuit).toBe(firstQuit);
+    expect(s.command({ type: "start" })).toBe(false);
+    expect(quit).not.toHaveBeenCalled();
+    release();
+    await Promise.all([firstClose, secondClose, firstQuit, secondQuit, reentrantQuit]);
+    expect(quit).toHaveBeenCalledOnce();
+  } finally {
+    release();
+    unsubscribe();
+    await s.dispose();
+  }
+});
+
 it("keeps browser backups intact when no application validation policy is supplied", async () => {
   const memory = new MemoryStorage();
   const checkpoint = JSON.stringify(run());

@@ -1,3 +1,4 @@
+import { freeze } from "immer";
 import { ENCOUNTERS, species, type DamageType, type SpeciesId } from "./content";
 import type { GameState } from "./types";
 
@@ -126,3 +127,6 @@ export function finalEncounter(game: Pick<GameState, "expedition" | "encounter">
 export function bossEncounter(game: Pick<GameState, "expedition" | "encounter">) {
   return game.expedition ? BOSSES.some((boss) => boss.encounter === game.encounter) : game.encounter === 2;
 }
+
+freeze(COMBAT_PACKS, true);
+freeze(BOSSES, true);
