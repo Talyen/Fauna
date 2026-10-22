@@ -1,5 +1,5 @@
 import { MERCHANT_PRICE, canVisitCampfire, campfireRecovery, canVisitMerchant } from "./support";
-import saveFormat from "./save-format.json";
+import saveFormat from "./save-format.json" with { type: "json" };
 import { freeze, produce } from "immer";
 import {
   collectedSpecies,

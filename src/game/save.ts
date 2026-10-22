@@ -1,5 +1,5 @@
 import { needsCampfire } from "./support";
-import saveFormat from "./save-format.json";
+import saveFormat from "./save-format.json" with { type: "json" };
 import { freeze } from "immer";
 import { MAX_HAND_SIZE, starterCount } from "./engine";
 import { z } from "zod";
