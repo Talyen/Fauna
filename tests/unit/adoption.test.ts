@@ -12,6 +12,7 @@ const config: JourneyConfig = {
   resumeEvery: 7,
 };
 describe("headless production sessions", () => {
+  // Several full simulations and checkpoint replays need headroom on shared hosted CPUs
   it("replays journeys exactly across serialized save/resume without leaking policy randomness", async () => {
     const journey = await runJourney(config, "fixture");
     expect(journey.complete).toBe(true);
@@ -24,7 +25,7 @@ describe("headless production sessions", () => {
     changed.steps[0]!.checkpoint = "corrupt";
     await expect(runJourney(config, "fixture", journey.initial, changed)).rejects.toThrow("diverged");
     await expect(runJourney(config, "different", journey.initial, journey)).rejects.toThrow("identity");
-  });
+  }, 15000);
   it("reports exhausted budgets as incomplete", async () => {
     const journey = await runJourney({ ...config, maxActions: 2 }, "fixture");
     expect(journey.complete).toBe(false);

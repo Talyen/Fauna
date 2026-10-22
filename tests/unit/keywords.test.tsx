@@ -24,6 +24,9 @@ describe("keyword foundation", () => {
   it("classifies authored effects without reading names or rules text, using only current talent categories", () => {
     const expected = [
       ["mana"],
+      [],
+      ["dodge"],
+      ["mana"],
       ["health"],
       ["health"],
       ["water"],
