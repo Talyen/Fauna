@@ -65,6 +65,7 @@ export function ActionDetails({
           />
         </p>
       )}
+      {card.temporary ? <p>Copy · Lasts for this battle</p> : null}
       <CardRules
         card={def}
         power={enemyPower}

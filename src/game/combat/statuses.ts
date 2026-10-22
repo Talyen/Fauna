@@ -366,7 +366,7 @@ export function* applyHarmfulStatus(
           if (depletion) depletions.push(depletion);
         }
         if (type === "stun" && hasTalent(state, "stun.free-follow-up")) combat(source).freeCard = true;
-        if (type === "stun" && hasTalent(state, "stun.stun-insight")) draw(state, 1);
+        if (type === "stun" && hasTalent(state, "stun.stun-insight")) draw(state, 1, events);
         if (type === "stun" && hasTalent(state, "stun.stun-surge") && state.battle?.mana === 0)
           yield* reaction("gainMana", state, 1, events);
         if (type === "freeze" && hasTalent(state, "freeze.glacial-barrier"))

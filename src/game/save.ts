@@ -91,9 +91,23 @@ export function decodeSave(raw: string): GameState {
         ),
     ),
   );
+  const permanentCards = s.cards.filter((card) => !card.temporary);
+  invalid(
+    s.cards.some(
+      (card) =>
+        card.temporary &&
+        (s.phase !== "battle" ||
+          !/^copy-(0|[1-9]\d*)$/.test(card.id) ||
+          Number(card.id.slice(5)) >= s.battle.copySerial),
+    ),
+  );
+  invalid(permanentCards.some((card) => card.id.startsWith("copy-")));
+  if (s.battle) invalid(s.battle.copySerial !== s.cards.length - permanentCards.length);
   for (const creature of s.team)
     for (const def of CARDS.filter((d) => d.species === creature.species))
-      invalid(s.cards.filter((c) => c.ownerId === creature.id && c.definitionId === def.id).length !== 1);
+      invalid(
+        permanentCards.filter((c) => c.ownerId === creature.id && c.definitionId === def.id).length !== 1,
+      );
   for (const keyword of KEYWORDS) {
     const bought = TALENTS.filter((t) => t.keyword === keyword && s.talents.includes(t.id));
     invalid(bought.length > talentPoints(s.keywordXP[keyword] ?? 0));
@@ -112,7 +126,7 @@ export function decodeSave(raw: string): GameState {
     invalid(
       s.team.length < 1 ||
         s.team.length !== Math.min(3, s.roster.length) ||
-        s.cards.length !== s.team.length * 3 ||
+        permanentCards.length !== s.team.length * 3 ||
         s.lineup.length !== s.team.length,
     );
   if (s.phase === "teamSelection" || s.phase === "support" || s.phase === "campfire")

@@ -126,7 +126,7 @@ export function* startAction(
         state &&
         hasTalent(state, "freeze.thaw-dividend")
       )
-        draw(state, 1);
+        draw(state, 1, events);
       stats.controlled = null;
       stats.cooldown = 3;
     }

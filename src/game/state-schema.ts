@@ -1,6 +1,6 @@
 import { z } from "zod";
 import saveFormat from "./save-format.json" with { type: "json" };
-import { MAX_HAND_SIZE } from "./card-zones";
+import { MAX_BATTLE_CARDS, MAX_HAND_SIZE } from "./card-zones";
 import { MAX_CREATURE_STARS, KEYWORDS } from "./progression";
 import { SPECIES, BOONS, TALENTS } from "./content";
 import { JOURNEY_LENGTH } from "./encounters";
@@ -48,6 +48,7 @@ const combatState = z
   })
   .strict();
 const battle = z.object({
+  copySerial: z.number().int().min(0).max(MAX_BATTLE_CARDS),
   earnedGold: natural,
   freeBurnUsed: z.boolean(),
   meteoriteUsed: z.boolean(),
@@ -55,10 +56,10 @@ const battle = z.object({
   turn: z.number().int().min(1).max(1_000_000),
   mana: z.number().int().min(0).max(6),
   maxMana: z.number().int().min(4).max(6),
-  draw: z.array(id).max(9),
+  draw: z.array(id).max(MAX_BATTLE_CARDS),
   hand: z.array(id).max(MAX_HAND_SIZE),
-  buffer: z.array(id).max(9),
-  discard: z.array(id).max(9),
+  buffer: z.array(id).max(MAX_BATTLE_CARDS),
+  discard: z.array(id).max(MAX_BATTLE_CARDS),
   enemies: z
     .array(
       z.object({
@@ -121,9 +122,10 @@ const shared = z.object({
         definitionId: id,
         ownerId: id,
         level: z.number().int().min(0).max(3),
+        temporary: z.literal(true).optional(),
       }),
     )
-    .max(9),
+    .max(MAX_BATTLE_CARDS),
   encounter: z
     .number()
     .int()

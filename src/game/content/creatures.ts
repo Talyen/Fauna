@@ -1,5 +1,6 @@
 import { freeze } from "immer";
 import type { Species, SpeciesId, CardDefinition } from "./types";
+import { rookhaven } from "./creatures/rookhaven";
 import { cadenza } from "./creatures/cadenza";
 import { stillara } from "./creatures/stillara";
 import { neradora } from "./creatures/neradora";
@@ -22,6 +23,7 @@ import { shadebrim } from "./creatures/shadebrim";
 import { glintstride } from "./creatures/glintstride";
 // Catalog order determines seeded offers and selections
 const kits = [
+  rookhaven,
   cadenza,
   stillara,
   neradora,
@@ -46,6 +48,7 @@ const kits = [
 freeze(kits, true);
 export const SPECIES: readonly Species[] = kits.map((kit) => kit.species);
 export const CARDS: readonly CardDefinition[] = [
+  rookhaven,
   cadenza,
   stillara,
   neradora,

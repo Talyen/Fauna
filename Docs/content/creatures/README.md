@@ -22,3 +22,5 @@
 - [Neradora](neradora.md) · [implementation](../../../src/game/content/creatures/neradora.ts)
 - [Stillara](stillara.md) · [implementation](../../../src/game/content/creatures/stillara.ts)
 - [Cadenza](cadenza.md) · [implementation](../../../src/game/content/creatures/cadenza.ts)
+
+- [Rookhaven](rookhaven.md) · [implementation](../../../src/game/content/creatures/rookhaven.ts)

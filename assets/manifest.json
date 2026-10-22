@@ -1670,6 +1670,50 @@
       "aspect": [4, 3],
       "provenance": "Fauna_Gamboloom_Logo.png selected from Google Drive file 1JOEi0BXpZ8bnKfaHU3UxeebSzW_sHzY2; temporary main menu logo",
       "rights": "User-provided Fauna artwork selected for this game"
+    },
+    {
+      "id": "creature.rookhaven",
+      "origin": "repository",
+      "source": "public/art/rookhaven/portrait.png",
+      "output": "art/rookhaven/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Rookhaven artwork selected from user Google Drive: https://drive.google.com/file/d/156lU4CkNmk4kJ8m02DhSVtYM9YhY685V/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.rookhaven.borrowed-brilliance",
+      "origin": "repository",
+      "source": "public/art/rookhaven/borrowed-brilliance.png",
+      "output": "art/rookhaven/borrowed-brilliance.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Rookhaven artwork selected from user Google Drive: https://drive.google.com/file/d/1Cv_qwyGUdjwp3Pvh0TZ13zii2wGTSxzs/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.rookhaven.unwritten-ending",
+      "origin": "repository",
+      "source": "public/art/rookhaven/unwritten-ending.png",
+      "output": "art/rookhaven/unwritten-ending.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Rookhaven artwork selected from user Google Drive: https://drive.google.com/file/d/147B94Ws8DHXPkAWhfX36-Mqb2U0OK_12/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.rookhaven.margin-of-possibility",
+      "origin": "repository",
+      "source": "public/art/rookhaven/margin-of-possibility.png",
+      "output": "art/rookhaven/margin-of-possibility.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Rookhaven artwork selected from user Google Drive: https://drive.google.com/file/d/1a-S_nC4CbFZtjjKiM_SBzCeXL_2qgmG2/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

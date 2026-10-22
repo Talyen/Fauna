@@ -4,7 +4,7 @@ import { actionValue, cardCost, physicalBonus } from "../game/ability-rules";
 import { definition, species } from "../game/content";
 import type { Command, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 18;
+export const BATTLE_POLICY_VERSION = 19;
 /** Only visible information enters scoring; no forecasts or gameplay RNG are sampled. */
 export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
   if (state.phase !== "battle") return [];
@@ -113,6 +113,22 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
         (enemy) => enemy.health > 0 && !enemy.combat.blind && !enemy.combat.nullify,
       ).length;
       add(id, useful > 0 ? 150 + useful : 0);
+    } else if (def.effect === "teamPurge") {
+      const useful = state.battle.enemies.filter(
+        (enemy) =>
+          enemy.health > 0 &&
+          (enemy.block > 0 ||
+            enemy.combat.armor > 0 ||
+            enemy.combat.thorns > 0 ||
+            enemy.combat.waterThorns > 0 ||
+            enemy.combat.dodge > 0 ||
+            enemy.combat.temporaryDodge > 0 ||
+            enemy.combat.reflect ||
+            enemy.combat.reflectBurn ||
+            enemy.combat.nullify ||
+            enemy.combat.nullifyFreeze),
+      ).length;
+      add(id, useful > 0 ? 160 + useful : 0);
     } else if (def.effect === "teamCleanse") {
       add(id, 150);
     } else if (def.effect === "teamGuard" || def.effect === "teamProtection") {

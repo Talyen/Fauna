@@ -51,6 +51,7 @@ export interface Card {
   definitionId: string;
   ownerId: string;
   level: number;
+  temporary?: true;
 }
 export interface Enemy {
   id: string;
