@@ -36,6 +36,8 @@ Before removal, ignored artifacts (reports, screenshots, logs and other ignored 
 
 ## Verification
 
+The [CI speed improvement plan](Docs/CI_SPEED_PLAN.md) describes proposed parallel jobs, browser sharding and rollout acceptance criteria; the execution policy below remains current.
+
 | When                | Command                                                         | Evidence                                                                                |
 | ------------------- | --------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
 | Local smoke         | `npm test`                                                      | Fixed Node smoke only                                                                   |
