@@ -1,3 +1,4 @@
+import { chooseBattleCommand } from "../../src/application/battle-policy";
 import { captureScreen, settleScreen } from "./rendered-evidence";
 import { freshCombat } from "../../src/game/combat";
 import { test, expect, type Page, type Locator } from "@playwright/test";
@@ -46,9 +47,10 @@ async function step(
   page: Page,
   activate: (el: Locator) => Promise<void> = (el) => el.click(),
   committed?: GameState,
+  selected?: Command,
 ) {
   const s = committed ?? (await state(page)),
-    c = policy(s);
+    c = selected ?? policy(s);
   if (c.type === "beginBattle") {
     await activate(page.locator(".app:not([inert]) [data-encounter]"));
   } else if (c.type === "recruit") {
@@ -427,7 +429,7 @@ test("one starter grows a lineup through a full expedition", async ({ page }) =>
       const recruited = await state(page);
       expect(recruited.lineup).toEqual(recruited.team.map((creature) => creature.id));
       expect(recruited.reserves).toHaveLength(Math.max(0, recruited.roster.length - 3));
-    } else await step(page, activate, s);
+    } else await step(page, activate, s, s.phase === "battle" ? chooseBattleCommand(s) : policy(s));
   }
   await expect(page.getByRole("heading", { name: "Journey complete", exact: true })).toBeVisible();
   expect((await state(page)).team).toHaveLength(3);

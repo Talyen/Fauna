@@ -1,3 +1,4 @@
+import { chooseBattleCommand } from "../../src/application/battle-policy";
 import { freshCombat } from "../../src/game/combat";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
@@ -242,7 +243,9 @@ it("completes the one-starter recruitment path through the final boss within the
             species:
               game.reward!.recruits.find((kind) => !game.roster.includes(kind)) ?? game.reward!.recruits[0]!,
           }
-        : policy(game);
+        : game.phase === "battle"
+          ? chooseBattleCommand(game)
+          : policy(game);
     game = accept(game, command);
   }
   expect(game.phase).toBe("victory");
