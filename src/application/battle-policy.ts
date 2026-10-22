@@ -1,9 +1,10 @@
+import { hasTalent } from "../game/progression";
 import { controlled, hasHarmfulEffects, mostInjured } from "../game/combat/index";
 import { actionValue, cardCost, physicalBonus } from "../game/rules";
 import { definition, species } from "../game/content";
 import type { Command, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 17;
+export const BATTLE_POLICY_VERSION = 18;
 /** Only visible information enters scoring; no forecasts or gameplay RNG are sampled. */
 export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
   if (state.phase !== "battle" || !state.battle) return [];
@@ -48,21 +49,36 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
       else for (const enemy of enemies) add(id, score(enemy), enemy.id);
     } else if (def.effect === "heal") {
       const allies = state.team.filter((c) => c.health > 0);
+      const healingBenefit = (ally: (typeof allies)[number]) => {
+        const missing = species(ally.species).health - ally.health;
+        const amount = Math.round(value * (hasTalent(state, "health.mending") ? 1.1 : 1));
+        const restored = Math.min(amount, missing);
+        const excess = amount - restored;
+        const overflow = hasTalent(state, "health.overflow")
+          ? Math.min(Math.round(excess * 0.25), 1_000_000 - ally.block)
+          : 0;
+        const cleanses =
+          hasHarmfulEffects(ally) &&
+          ((excess > 0 && hasTalent(state, "health.clean-slate")) ||
+            !!def.effects?.some((effect) => effect.kind === "cleanse" && effect.target === "recipient"));
+        return { restored, utility: overflow + Number(cleanses) };
+      };
       if (def.target === "allAllies") {
-        const restored = allies.reduce(
-          (sum, ally) => sum + Math.min(value, species(ally.species).health - ally.health),
-          0,
-        );
+        const benefits = allies.map(healingBenefit);
+        const restored = benefits.reduce((sum, benefit) => sum + benefit.restored, 0);
+        const utility = benefits.reduce((sum, benefit) => sum + benefit.utility, 0);
         add(
           id,
           restored > 0
             ? 3000 + restored
-            : def.effects?.some((effect) => effect.kind === "blind") &&
-                state.battle.enemies.some((enemy) => enemy.health > 0 && !enemy.combat.blind)
-              ? 150
-              : def.effects?.some((effect) => effect.kind === "draw")
-                ? 200
-                : 0,
+            : utility > 0
+              ? 150 + utility
+              : def.effects?.some((effect) => effect.kind === "blind") &&
+                  state.battle.enemies.some((enemy) => enemy.health > 0 && !enemy.combat.blind)
+                ? 150
+                : def.effects?.some((effect) => effect.kind === "draw")
+                  ? 200
+                  : 0,
         );
       } else
         for (const ally of def.target === "self"
@@ -70,13 +86,10 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
           : def.target === "mostInjured"
             ? [mostInjured(allies)!]
             : allies) {
-          const missing = species(ally.species).health - ally.health;
-          const cleanses =
-            hasHarmfulEffects(ally) &&
-            def.effects?.some((effect) => effect.kind === "cleanse" && effect.target === "recipient");
+          const { restored, utility } = healingBenefit(ally);
           add(
             id,
-            missing > 0 ? 3000 + Math.min(value, missing) : cleanses ? 150 : 0,
+            restored > 0 ? 3000 + restored : utility > 0 ? 150 + utility : 0,
             def.target ? undefined : ally.id,
           );
         }
@@ -86,7 +99,11 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
       const useful = state.team.filter((unit) => unit.health > 0 && (unit.combat?.freeze ?? 0) > 0).length;
       add(id, 200 + useful * 100);
     } else if (def.effect === "recover") {
-      add(id, 200);
+      const recoverable = state.battle.discard.some((discarded) => {
+        const card = state.cards.find((card) => card.id === discarded)!;
+        return state.team.some((unit) => unit.id === card.ownerId && unit.health > 0);
+      });
+      add(id, recoverable ? 200 : 0);
     } else if (def.effect === "teamDodge") {
       add(id, 150 + value);
     } else if (def.effect === "draw") {

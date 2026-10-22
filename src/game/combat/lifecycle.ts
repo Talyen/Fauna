@@ -85,9 +85,14 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
   }
 }
 /** Called once at the start of the owner's turn, including while in reserve. */
-export function* startAction(unit: Combatant, events: GameEvent[], state?: GameState): Resolution<boolean> {
+export function* startAction(
+  unit: Combatant,
+  events: GameEvent[],
+  state?: GameState,
+  resetTemporaryDodge = true,
+): Resolution<boolean> {
   const stats = combat(unit);
-  stats.temporaryDodge = 0;
+  if (resetTemporaryDodge) stats.temporaryDodge = 0;
   stats.encoreUsed = false;
   stats.cardsPlayedThisTurn = 0;
   stats.firstAttackUsed = false;
