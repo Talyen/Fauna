@@ -189,8 +189,10 @@ function ButtonStudy() {
   useEffect(() => {
     try {
       localStorage.setItem(storageKey, JSON.stringify(picks));
+      // eslint-disable-next-line react/set-state-in-effect -- This prototype reports the result of writing to external browser storage
       setSaveFailed(false);
     } catch {
+      // eslint-disable-next-line react/set-state-in-effect -- Failed external storage writes must remain visible in the prototype
       setSaveFailed(true);
     }
   }, [picks]);

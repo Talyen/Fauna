@@ -50,10 +50,13 @@ function SwapStudy() {
     try {
       if (choice) localStorage.setItem(storageKey, choice);
       else localStorage.removeItem(storageKey);
+      // eslint-disable-next-line react/set-state-in-effect -- This prototype reports the result of writing to external browser storage
       setStorageFailed(false);
     } catch {
+      // eslint-disable-next-line react/set-state-in-effect -- Failed external storage writes must remain visible in the prototype
       setStorageFailed(true);
     }
+    // eslint-disable-next-line react/set-state-in-effect -- Changing the persisted study choice invalidates its clipboard confirmation
     setCopyState("");
   }, [choice]);
   useEffect(() => {

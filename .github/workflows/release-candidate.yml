@@ -14,6 +14,11 @@ concurrency:
   cancel-in-progress: false
 jobs:
   candidate:
+    permissions:
+      contents: read
+      actions: read
+      id-token: write
+      attestations: write
     runs-on: windows-latest
     timeout-minutes: 30
     environment: release-signing
@@ -64,6 +69,17 @@ jobs:
           foreach ($file in $files) {
             if ((Get-AuthenticodeSignature $file).Status -ne "Valid") { throw "Invalid Authenticode signature: $file" }
           }
+      - name: Inventory final signed components
+        run: npm run generate:release-inventory -- --package release/win-unpacked
+      - name: Attest signed installer provenance
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4
+        with:
+          subject-path: release/*.exe
+      - name: Attest installer dependency inventory
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4
+        with:
+          subject-path: release/*.exe
+          sbom-path: dist/dependencies.cdx.json
       - name: Packaged startup, saves and crash recovery
         run: npm run test:desktop -- --packaged
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -72,6 +88,9 @@ jobs:
           retention-days: 30
           if-no-files-found: error
           path: |
+            dist/dependencies.cdx.json
+            dist/THIRD-PARTY-NOTICES.txt
+            reports/release-inventory/
             release/*.exe
             release/*.blockmap
             release/win-unpacked/

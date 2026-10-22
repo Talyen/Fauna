@@ -87,7 +87,7 @@ export function Talents({
   game,
   send,
   openMenu,
-  controls,
+  controls: controlsRef,
 }: {
   game: GameState;
   send: Props["send"];
@@ -112,8 +112,8 @@ export function Talents({
       returnFocus(
         screen.current?.querySelector<HTMLElement>(`[data-talent-keyword="${lastKeyword.current}"]`) ?? null,
       );
-    if (controls)
-      controls.current = (action) => {
+    if (controlsRef)
+      controlsRef.current = (action) => {
         if (action === "back" && keyword) {
           setKeyword(null);
           return true;
@@ -121,9 +121,9 @@ export function Talents({
         return false;
       };
     return () => {
-      if (controls) controls.current = null;
+      if (controlsRef) controlsRef.current = null;
     };
-  }, [keyword, controls, treeReset]);
+  }, [keyword, controlsRef, treeReset]);
   const p = keywordProgress(keyword ? (game.keywordXP[keyword] ?? 0) : 0);
   const artwork: Record<Keyword, string> = {
     physical: "physical",

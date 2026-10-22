@@ -16,8 +16,9 @@ async function prepareClose() {
 const bridge = Object.freeze({
   display: Object.freeze({
     read: () => ipcRenderer.invoke("fauna:display-read"),
-    set: (mode) => ipcRenderer.invoke("fauna:display-set", mode),
-    subscribe: (listener) => {
+    set: (/** @type {import("../src/platform/ports").DisplayState["mode"]} */ mode) =>
+      ipcRenderer.invoke("fauna:display-set", mode),
+    subscribe: (/** @type {(state: import("../src/platform/ports").DisplayState) => void} */ listener) => {
       const handler = (
         /** @type {Electron.IpcRendererEvent} */ _event,
         /** @type {import("../src/platform/ports").DisplayState} */ state,
@@ -29,15 +30,16 @@ const bridge = Object.freeze({
   cloud: Object.freeze({
     identity: () => ipcRenderer.invoke("fauna:cloud-identity"),
     readLocal: () => ipcRenderer.invoke("fauna:cloud-readLocal"),
-    writeLocal: (data) => ipcRenderer.invoke("fauna:cloud-writeLocal", data),
-    acknowledge: (id) => ipcRenderer.invoke("fauna:cloud-acknowledge", id),
-    preserve: (records) => ipcRenderer.invoke("fauna:cloud-preserve", records),
-    importStandalone: (use) => ipcRenderer.invoke("fauna:cloud-importStandalone", use),
+    writeLocal: (/** @type {string} */ data) => ipcRenderer.invoke("fauna:cloud-writeLocal", data),
+    acknowledge: (/** @type {string} */ id) => ipcRenderer.invoke("fauna:cloud-acknowledge", id),
+    preserve: (/** @type {string[]} */ records) => ipcRenderer.invoke("fauna:cloud-preserve", records),
+    importStandalone: (/** @type {boolean} */ use) => ipcRenderer.invoke("fauna:cloud-importStandalone", use),
     list: () => ipcRenderer.invoke("fauna:cloud-list"),
-    read: (name) => ipcRenderer.invoke("fauna:cloud-read", name),
-    write: (name, data) => ipcRenderer.invoke("fauna:cloud-write", name, data),
+    read: (/** @type {string} */ name) => ipcRenderer.invoke("fauna:cloud-read", name),
+    write: (/** @type {string} */ name, /** @type {string} */ data) =>
+      ipcRenderer.invoke("fauna:cloud-write", name, data),
   }),
-  onOverlay: (listener) => {
+  onOverlay: (/** @type {(active: boolean) => void} */ listener) => {
     let live = true,
       notified = false;
     const handler = (/** @type {Electron.IpcRendererEvent} */ _event, /** @type {unknown} */ active) => {
@@ -57,9 +59,9 @@ const bridge = Object.freeze({
     };
   },
   readCandidates: () => ipcRenderer.invoke("fauna:read"),
-  writeSave: (data) => ipcRenderer.invoke("fauna:write", data),
+  writeSave: (/** @type {string} */ data) => ipcRenderer.invoke("fauna:write", data),
   quit: () => ipcRenderer.invoke("fauna:quit"),
-  onCloseRequested: (listener) => {
+  onCloseRequested: (/** @type {() => Promise<boolean>} */ listener) => {
     closeListener = listener;
     return () => {
       if (closeListener === listener) closeListener = null;

@@ -19,6 +19,7 @@ export function useCombatFeedback(
   const deny = useCallback((element: HTMLElement) => denial.current(element), []);
   useEffect(() => {
     if (paused) {
+      // eslint-disable-next-line react/set-state-in-effect -- Pausing cancels the imperative feedback timeline and drops its retained visual queue
       setBursts([]);
       return;
     }

@@ -1,14 +1,14 @@
 import { useCallback, useEffect, useRef, type ForwardedRef } from "react";
 /** Radix retains closing content for CSS exit animation. Retained pixels cannot own input. */
-export function useModalSurfaceRef(forwarded: ForwardedRef<HTMLDivElement>) {
+export function useModalSurfaceRef(forwardedRef: ForwardedRef<HTMLDivElement>) {
   const observer = useRef<MutationObserver | null>(null);
   useEffect(() => () => observer.current?.disconnect(), []);
   return useCallback(
     (node: HTMLDivElement | null) => {
       observer.current?.disconnect();
       observer.current = null;
-      if (typeof forwarded === "function") forwarded(node);
-      else if (forwarded) forwarded.current = node;
+      if (typeof forwardedRef === "function") forwardedRef(node);
+      else if (forwardedRef) forwardedRef.current = node;
       if (!node) return;
       let closed = false,
         hidden: string | null = null,
@@ -33,6 +33,6 @@ export function useModalSurfaceRef(forwarded: ForwardedRef<HTMLDivElement>) {
       observer.current = new MutationObserver(sync);
       observer.current.observe(node, { attributes: true, attributeFilter: ["data-state"] });
     },
-    [forwarded],
+    [forwardedRef],
   );
 }

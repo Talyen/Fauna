@@ -159,13 +159,17 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
     setRoute(origin.current);
     if (origin.current === "play") showMenu();
   };
-  useEffect(() => {
-    if (!view.cloud.blocking) return;
-    setModal(null);
-    setInspection(null);
-    setMenu(false);
-    setAutoplay(false);
-  }, [view.cloud.blocking, setAutoplay]);
+  useEffect(
+    () =>
+      session.store.subscribe((current, previous) => {
+        if (!current.cloud.blocking || previous.cloud.blocking) return;
+        setModal(null);
+        setInspection(null);
+        setMenu(false);
+        setAutoplay(false);
+      }),
+    [session, setAutoplay],
+  );
   useEffect(() => {
     if (!view.overlayActive) return;
     setAutoplay(false);

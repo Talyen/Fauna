@@ -20,7 +20,7 @@ import type { Controls } from "../shared/navigation/input";
 
 export function Collection({
   game,
-  controls,
+  controls: controlsRef,
   openMenu,
 }: {
   game: GameState;
@@ -39,7 +39,7 @@ export function Collection({
     setSelected(null);
   };
   useLayoutEffect(() => {
-    controls.current = (action) => {
+    controlsRef.current = (action) => {
       if (action === "inspect" && !selected) {
         const button = document.activeElement?.closest<HTMLButtonElement>(
           ".collection-grid button[data-species]",
@@ -54,9 +54,9 @@ export function Collection({
       return true;
     };
     return () => {
-      controls.current = null;
+      controlsRef.current = null;
     };
-  }, [controls, selected]);
+  }, [controlsRef, selected]);
   useLayoutEffect(() => {
     if (!selected && returning.current) {
       returning.current = false;

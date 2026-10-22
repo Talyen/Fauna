@@ -2,6 +2,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { CreatureCard } from "../../../src/ui/shared/cards/cards";
 import { Button } from "../../../src/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../../src/components/ui/tooltip";
 
@@ -106,4 +107,25 @@ describe("shared hover details", () => {
     await user.tab();
     expect(await screen.findByRole("tooltip")).toBeTruthy();
   });
+});
+
+it("does not reopen stale creature details when targeting reenables tooltips", async () => {
+  const card = (enabled: boolean) => (
+    <TooltipProvider delayDuration={0}>
+      <CreatureCard kind="mossguard" label="Inspect Mossguard" onClick={() => {}} tooltips={enabled} />
+    </TooltipProvider>
+  );
+  const view = render(card(true));
+  const user = userEvent.setup();
+  await user.hover(screen.getByRole("button", { name: "Inspect Mossguard" }));
+  expect(await screen.findByRole("tooltip")).toBeTruthy();
+  view.rerender(card(false));
+  expect(screen.queryByRole("tooltip")).toBeNull();
+  view.rerender(card(true));
+  expect(screen.queryByRole("tooltip")).toBeNull();
+  await user.pointer({
+    target: screen.getByRole("button", { name: "Inspect Mossguard" }),
+    coords: { x: 10, y: 10 },
+  });
+  expect(await screen.findByRole("tooltip")).toBeTruthy();
 });

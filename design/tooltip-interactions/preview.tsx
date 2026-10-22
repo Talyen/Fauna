@@ -143,8 +143,10 @@ function TooltipStudy() {
   useEffect(() => {
     try {
       localStorage.setItem(storageKey, JSON.stringify(picks));
+      // eslint-disable-next-line react/set-state-in-effect -- This prototype reports the result of writing to external browser storage
       setStorageFailed(false);
     } catch {
+      // eslint-disable-next-line react/set-state-in-effect -- Failed external storage writes must remain visible in the prototype
       setStorageFailed(true);
     }
   }, [picks]);

@@ -6,7 +6,9 @@ import { createAudioRuntime, type MusicCue, type SoundCue } from "./audio-runtim
 export function useGameAudio(session: Session, preferences: AudioPreferences, home: boolean) {
   const owner = useRef<ReturnType<typeof createAudioRuntime> | null>(null);
   const currentPreferences = useRef(preferences);
-  currentPreferences.current = preferences;
+  useEffect(() => {
+    currentPreferences.current = preferences;
+  }, [preferences]);
   useEffect(() => {
     const audio = createAudioRuntime(
       (error) => session.diagnostics.record("audio", error, session.store.getState().game),

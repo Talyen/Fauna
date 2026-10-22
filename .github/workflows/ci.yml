@@ -373,6 +373,8 @@ jobs:
           CSC_IDENTITY_AUTO_DISCOVERY: "false"
       - name: Verify package
         run: npm run verify:package
+      - name: Inventory packaged components
+        run: npm run generate:release-inventory -- --package release/win-unpacked
       - name: Verify tagged release identity
         if: startsWith(github.ref, 'refs/tags/v')
         run: npm run verify:release
@@ -388,6 +390,7 @@ jobs:
           compression-level: 0
           path: |
             release/win-unpacked
+            reports/release-inventory/
       - id: complete
         name: Record successful workflow attempt
         run: node scripts/ci/ci.mjs stamp

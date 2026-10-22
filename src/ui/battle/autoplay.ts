@@ -44,9 +44,13 @@ export function useAutoplay(session: Session, paused: boolean, autoEndTurn: bool
       document.removeEventListener("visibilitychange", focus);
     };
   }, []);
-  useEffect(() => {
-    if (view.game.phase !== "battle" || view.closing || !view.ready) setEnabled(false);
-  }, [view.game.phase, view.closing, view.ready, setEnabled]);
+  useEffect(
+    () =>
+      session.store.subscribe((current) => {
+        if (current.game.phase !== "battle" || current.closing || !current.ready) setEnabled(false);
+      }),
+    [session, setEnabled],
+  );
   useEffect(() => {
     if (!enabled || paused || !foreground || view.closing || view.game.phase !== "battle") return;
     const revision = view.game.revision;

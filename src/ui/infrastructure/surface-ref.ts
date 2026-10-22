@@ -1,12 +1,12 @@
 import { useCallback, type Ref } from "react";
 
 /** Measure the untransformed border box so hover scaling cannot change corner geometry. */
-export function useSurfaceRef<T extends HTMLElement>(forwarded?: Ref<T>) {
+export function useSurfaceRef<T extends HTMLElement>(forwardedRef?: Ref<T>) {
   return useCallback(
     (node: T | null) => {
       if (!node) return;
-      const release = typeof forwarded === "function" ? forwarded(node) : undefined;
-      if (forwarded && typeof forwarded !== "function") forwarded.current = node;
+      const release = typeof forwardedRef === "function" ? forwardedRef(node) : undefined;
+      if (forwardedRef && typeof forwardedRef !== "function") forwardedRef.current = node;
       let active = true;
       const update = (width: number, height: number) => {
         if (active && width > 0 && height > 0)
@@ -26,10 +26,10 @@ export function useSurfaceRef<T extends HTMLElement>(forwarded?: Ref<T>) {
         observer?.disconnect();
         node.style.removeProperty("--surface-short-side");
         if (typeof release === "function") release();
-        else if (typeof forwarded === "function") forwarded(null);
-        else if (forwarded) forwarded.current = null;
+        else if (typeof forwardedRef === "function") forwardedRef(null);
+        else if (forwardedRef) forwardedRef.current = null;
       };
     },
-    [forwarded],
+    [forwardedRef],
   );
 }

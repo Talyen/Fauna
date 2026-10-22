@@ -6,6 +6,8 @@ The [GitHub Actions workflow](../.github/workflows/ci.yml) runs full static/docu
 
 CI publishes compact unit/browser failure summaries. The `browser-review` artifact contains merged JSON with portable evidence paths and an HTML report; `browser-shard-N` artifacts retain raw screenshots, traces and blob reports. All have seven-day retention, including successful runs. The lightweight local gates do not replace CI. Linux skips the unused Electron binary download; Windows installs the binary needed for packaging and native smoke. The Windows executable uses electron-builder and the `com.fauna.game` application identity. Builds contain only the renderer, desktop code and required runtime dependencies.
 
+Use the [candidate qualification record](RELEASE_QUALIFICATION.md) to retain exact artifact identity, setup and manual Windows, Steam, controller and Deck evidence.
+
 Before shipping:
 
 - Configure Fauna's own Steam App/depot and Cloud quota, then set its App ID in `desktop/steam-config.json`. Optional cloud and overlay adapters are implemented with isolated account profiles and automatic conflict resolution. Live client, two-device divergence/recovery, callback support and native binary qualification remain required. Achievements are not implemented. Never use Alchemy's identities or saves.
@@ -71,3 +73,11 @@ The manually dispatched [signed candidate workflow](../.github/workflows/release
 Renderer crashes are recovered silently from durable saves with a two-reload process budget. Local crash dumps and bounded platform facts remain on the device; no crash uploads or telemetry are enabled. Treat crash records as potentially sensitive support artifacts and share only with player consent.
 
 Release acceptance still requires installing and uninstalling the signed candidate on clean Windows, checking upgrades and launch shortcuts, live two-device Steam Cloud and account switching, physical-controller disconnect/reconnect, and Deck/Proton overlay, sleep/resume and offline play. Automated checks cannot complete these hardware and account-dependent steps.
+
+## Dependency inventory and provenance
+
+Every production build runs `npm run generate:release-inventory` after Vite. The renderer includes `dependencies.cdx.json` (CycloneDX production npm build inputs plus the distributed Electron runtime) and `THIRD-PARTY-NOTICES.txt`. This is an input inventory, not a claim to enumerate every native Chromium component; retain Electron's packaged `LICENSE` and `LICENSES.chromium.html`. Installed production versions must match the lockfile and have nonempty license text. The published react-remove-scroll-bar 2.3.8 package omits its MIT text; its [supplemental license](third-party/react-remove-scroll-bar-LICENSE.txt) is copied from [upstream commit 7301c160](https://github.com/theKashey/react-remove-scroll-bar/blob/7301c160fda44cb8cf2b9fdfde61efad35736196/LICENSE), with the fallback scoped to that exact version. Font and shadcn source notices are included.
+
+Windows CI runs `npm run generate:release-inventory -- --package release/win-unpacked` after package validation to retain hashes of the final executable, archive and Electron license inventories. Signed candidates do the same after signing, and attest installer provenance and the matching dependency SBOM through the SHA-pinned GitHub attestation action. Candidate artifacts retain those inputs; normal repository CI does not acquire signing credentials or publish attestations. Installer and Steam acceptance remain separate, and the signed workflow is dispatched only for an explicitly selected release tag.
+
+The [scheduled dependency security workflow](../.github/workflows/security.yml) runs weekly and on manual dispatch, retaining audit details and failing on new advisories or expired exceptions. It uses the same policy as ordinary CI; the existing electron-builder advisory exception is not extended or replaced by a forced downgrade.

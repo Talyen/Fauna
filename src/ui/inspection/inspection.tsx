@@ -18,7 +18,7 @@ import type { Controls } from "../shared/navigation/input";
 export function Inspector({
   item,
   session,
-  controls,
+  controls: controlsRef,
   onClose,
   chooseStarter,
 }: {
@@ -90,7 +90,7 @@ export function Inspector({
     }
   }, [selected]);
   useLayoutEffect(() => {
-    controls.current = (action) => {
+    controlsRef.current = (action) => {
       if (action === "back") return back();
       if (selected !== null && (action === "left" || action === "right")) {
         cycle(action === "left" ? -1 : 1);
@@ -108,7 +108,7 @@ export function Inspector({
       return false;
     };
     return () => {
-      controls.current = null;
+      controlsRef.current = null;
     };
   });
   const card = selected === null ? null : cards[selected]!;

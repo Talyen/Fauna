@@ -38,7 +38,7 @@ function FanSlot({ index, count, children }: { index: number; count: number; chi
 export function BattleScreen({
   game,
   send,
-  controls,
+  controls: controlsRef,
   bursts,
   controller,
   navigateFocus,
@@ -63,9 +63,11 @@ export function BattleScreen({
   openingDraw?: boolean;
 }) {
   const [selected, setSelected] = useState<string | null>(null);
-  useEffect(() => {
+  const [previousClear, setPreviousClear] = useState(clearSelection);
+  if (previousClear !== clearSelection) {
+    setPreviousClear(clearSelection);
     if (clearSelection) setSelected(null);
-  }, [clearSelection]);
+  }
   const [hovered, setHovered] = useState<string | null>(null);
   const [denial, setDenial] = useState("");
   useEffect(() => {
@@ -207,9 +209,9 @@ export function BattleScreen({
     return false;
   };
   useLayoutEffect(() => {
-    controls.current = handle;
+    controlsRef.current = handle;
     return () => {
-      controls.current = null;
+      controlsRef.current = null;
     };
   });
   useLayoutEffect(() => {

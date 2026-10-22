@@ -120,6 +120,7 @@ export function CombatStatus({
       returnFocus(
         root.current?.closest(".creature-wrap")?.querySelector<HTMLElement>(".creature-card") ?? null,
       );
+    // eslint-disable-next-line react/set-state-in-effect -- Return focus before replacing a focused status, while retaining outgoing chips for animation
     setShown((old) =>
       [
         ...next.map((item) => ({

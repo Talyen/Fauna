@@ -1,6 +1,6 @@
 import { CombatStatus } from "../combat/combat-status";
 import { assetUrl } from "../assets";
-import { useEffect, useState, type ComponentProps, type ReactNode } from "react";
+import { useState, type ComponentProps, type ReactNode } from "react";
 import { BattleReadout } from "../combat/battle-readout";
 import { ArtCard } from "./art-card";
 import { ActionDetails, CreatureDetails } from "./card-details";
@@ -40,6 +40,12 @@ type CreatureProps = {
   speciesKit?: boolean;
   sharedDodge?: number;
 };
+function useCardTooltip(enabled: boolean) {
+  const [state, setState] = useState({ enabled, open: false });
+  if (state.enabled !== enabled) setState({ enabled, open: false });
+  return [enabled && state.open, (open: boolean) => setState({ enabled, open: enabled && open })] as const;
+}
+
 export function CreatureCard({
   progression,
   kind,
@@ -70,10 +76,7 @@ export function CreatureCard({
   speciesKit = false,
   sharedDodge = 0,
 }: CreatureProps) {
-  const [tooltipOpen, setTooltipOpen] = useState(false);
-  useEffect(() => {
-    if (!tooltips) setTooltipOpen(false);
-  }, [tooltips]);
+  const [tooltipOpen, setTooltipOpen] = useCardTooltip(tooltips);
   const info = species(kind);
   const artwork = (
     <ArtCard
@@ -224,10 +227,7 @@ export function ActionCard({
   tooltips?: boolean;
   onDenied?: (element: HTMLElement) => void;
 }) {
-  const [tooltipOpen, setTooltipOpen] = useState(false);
-  useEffect(() => {
-    if (!tooltips) setTooltipOpen(false);
-  }, [tooltips]);
+  const [tooltipOpen, setTooltipOpen] = useCardTooltip(tooltips);
   const def = enemy ? enemyCard(definition(card.definitionId)) : definition(card.definitionId);
   const effectText = cardText(
     def,

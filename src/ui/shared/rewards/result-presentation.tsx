@@ -33,14 +33,11 @@ export function AnimatedNumber({ value }: { value: number }) {
   const [shown, setShown] = useState(done ? value : 0);
   useEffect(() => {
     const duration = motionValue("--motion-result");
-    if (done || !duration) {
-      setShown(value);
-      return;
-    }
+    if (done) return;
     let frame = 0;
     const start = performance.now();
     const tick = () => {
-      const p = Math.min(1, (performance.now() - start) / duration);
+      const p = duration ? Math.min(1, (performance.now() - start) / duration) : 1;
       setShown(Math.round(value * (1 - (1 - p) ** 3)));
       if (p < 1) frame = requestAnimationFrame(tick);
     };

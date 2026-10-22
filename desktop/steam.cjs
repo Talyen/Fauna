@@ -180,7 +180,10 @@ async function createSteam({
   /** @template T @param {() => Promise<T>} fn */
   const serial = (fn) => {
     const operation = lane.then(fn);
-    lane = operation.catch(() => {});
+    lane = operation.then(
+      () => {},
+      () => {},
+    );
     return operation;
   };
   const requireAvailable = () => {
@@ -250,7 +253,7 @@ async function createSteam({
       requireAvailable();
       if (!validName(name) || !name.startsWith(`fauna-v1-${device}-`))
         throw new Error("Cannot overwrite another device's slot.");
-      return request("write", [name, data]);
+      await request("write", [name, data]);
     },
     async dispose() {
       dead = true;
