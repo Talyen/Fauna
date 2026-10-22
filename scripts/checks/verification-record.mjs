@@ -23,7 +23,7 @@ export function verificationIdentity(root, base, paths, env = process.env) {
   const environment = Object.entries(env)
     .filter(
       ([key]) =>
-        !/^(?:npm_lifecycle_(?:event|script)$|npm_command$|npm_config_local_prefix$|PWD$|OLDPWD$|INIT_CWD$|SHLVL$|_$)/.test(
+        !/^(?:npm_lifecycle_(?:event|script)$|npm_command$|npm_config_local_prefix$|CODEX_TOOL_CALL_ID$|PWD$|OLDPWD$|INIT_CWD$|SHLVL$|_$)/.test(
           key,
         ),
     )

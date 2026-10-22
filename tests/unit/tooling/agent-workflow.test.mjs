@@ -137,6 +137,11 @@ it("invalidates dependency edits, unselected source, symlinks and environment wh
   symlinkSync("README.md", path.join(root, "link"));
   expect(identity()).not.toBe(before);
   before = identity();
+  vi.stubEnv("CODEX_TOOL_CALL_ID", "another-call");
+  expect(identity()).toBe(before);
+  vi.stubEnv("npm_config_ignore_scripts", "different-config");
+  expect(identity()).not.toBe(before);
+  before = identity();
   vi.stubEnv("FAUNA_WORKFLOW_TEST", "different environment");
   expect(identity()).not.toBe(before);
   vi.unstubAllEnvs();
