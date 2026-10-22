@@ -15,17 +15,24 @@ export function scheduleAutoplay(action: () => void, schedule = setTimeout, canc
   };
 }
 export function useAutoplay(session: Session, paused: boolean, autoEndTurn: boolean) {
-  const actor = useMemo(createBattleActor, [session]);
-  const [enabled, setEnabledState] = useState(false);
-  const enabledNow = useRef(false);
+  const actor = useMemo(() => {
+    const policy = createBattleActor();
+    return {
+      reset: policy.reset,
+      choose: (autoEndTurn: boolean) => policy.choose(session.store.getState().game, autoEndTurn).command,
+    };
+  }, [session]);
+  const [enabledSession, setEnabledSession] = useState<Session | null>(null);
+  const enabled = enabledSession === session;
+  const enabledNow = useRef<Session | null>(null);
   const setEnabled = useCallback(
     (value: boolean) => {
       // Manual takeover revokes queued work before React commits effect cleanup.
       actor.reset();
-      enabledNow.current = value;
-      setEnabledState(value);
+      enabledNow.current = value ? session : null;
+      setEnabledSession(value ? session : null);
     },
-    [actor],
+    [actor, session],
   );
   const [foreground, setForeground] = useState(
     () => document.visibilityState !== "hidden" && document.hasFocus(),
@@ -62,7 +69,7 @@ export function useAutoplay(session: Session, paused: boolean, autoEndTurn: bool
     return scheduleAutoplay(() => {
       const current = session.store.getState();
       if (
-        !enabledNow.current ||
+        enabledNow.current !== session ||
         !foregroundNow.current ||
         document.visibilityState === "hidden" ||
         !document.hasFocus() ||
@@ -73,7 +80,7 @@ export function useAutoplay(session: Session, paused: boolean, autoEndTurn: bool
         current.game.phase !== "battle"
       )
         return;
-      if (!session.command(actor.choose(current.game, autoEndTurn).command)) setEnabled(false);
+      if (!session.command(actor.choose(autoEndTurn))) setEnabled(false);
     });
   }, [
     actor,

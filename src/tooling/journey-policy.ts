@@ -1,7 +1,7 @@
 import { canBuyTalent, starterCount, MAX_CREATURE_STARS } from "../game/progression";
 import { canVisitCampfire, canVisitMerchant, canRecruitDestination } from "../game/destinations";
 import { rankedBattleChoices } from "../application/battle-policy";
-import { TALENTS, BOONS, species, type SpeciesId, type BoonId } from "../game/content";
+import { TALENTS, BOONS, species, type BoonId } from "../game/content";
 import { capabilities, coverageScore, offenseValue } from "../application/team-policy";
 import { recruitLineup } from "../game/team";
 import { createBattleActor } from "../application/battle-actor";

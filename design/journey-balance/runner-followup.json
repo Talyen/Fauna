@@ -564,7 +564,17 @@
   },
   "sourceVerification": {
     "implementationCommit": "961f506",
-    "matchedFiles": 92,
+    "matchedFiles": 91,
+    "equivalent": [
+      {
+        "file": "src/tooling/journey-policy.ts",
+        "evaluatedSourceHash": "ec56512a802e791556fcfb1eb130106e21216d4e04a1deae83541cdbbc79adc5",
+        "finalSourceHash": "28e844574a6fa0621e86aa9fa46567e095f207004ab206eb545829c0023cd085",
+        "typeOnlyImportRemoved": true,
+        "otherSourceTextIdentical": true,
+        "note": "Unused type import removed after combined lint"
+      }
+    ],
     "measurementModule": "src/tooling/metric-boons.ts is additional and common to every arm"
   },
   "manual": {

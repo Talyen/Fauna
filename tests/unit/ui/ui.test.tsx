@@ -438,7 +438,7 @@ it("declines a recruit without collecting or releasing a creature and resumes th
   render(<App session={session} />);
   const user = userEvent.setup();
   await user.click(screen.getByRole("button", { name: "Continue" }));
-  await user.click(screen.getByRole("button", { name: "Skip", exact: true }));
+  await user.click(screen.getByRole("button", { name: "Skip" }));
   await session.flush();
   const next = session.store.getState().game;
   expect(next.phase).toBe("teamSelection");

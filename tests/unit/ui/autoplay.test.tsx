@@ -161,3 +161,38 @@ it("Auto-play escapes the recorded self-replacing draw loop", async () => {
     await session.dispose();
   });
 });
+
+it("does not carry enabled automation or decision history into a replacement session", async () => {
+  vi.spyOn(document, "hasFocus").mockReturnValue(true);
+  const open = async () => {
+    const session = createSession({
+      desktop: false,
+      steam: { available: false },
+      saves: {
+        readCandidates: async () => [{ source: "primary", data: encodeSave(run()) }],
+        write: async () => {},
+      },
+    });
+    await session.load();
+    return session;
+  };
+  const first = await open(),
+    second = await open();
+  vi.useFakeTimers();
+  const hook = renderHook(({ active }) => useAutoplay(active, false, false), {
+    initialProps: { active: first },
+  });
+  act(() => hook.result.current[1](true));
+  hook.rerender({ active: second });
+  expect(hook.result.current[0]).toBe(false);
+  const revision = second.store.getState().game.revision;
+  await act(async () => {
+    vi.advanceTimersByTime(1400);
+    await second.flush();
+  });
+  expect(second.store.getState().game.revision).toBe(revision);
+  await act(async () => {
+    await first.dispose();
+    await second.dispose();
+  });
+});
