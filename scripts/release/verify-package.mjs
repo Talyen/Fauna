@@ -9,7 +9,7 @@ import { extractFile, listPackage } from "@electron/asar";
 import { assets } from "../assets/assets.mjs";
 const ROOT = path.resolve(import.meta.dirname, "../..");
 const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
-// Runtime files shipped by the pinned Electron Windows x64 distribution.
+// Runtime files shipped by Electron 45 Windows x64; verified against its official ZIP.
 export const WINDOWS_RUNTIME_FILES = [
   "resources.pak",
   "icudtl.dat",
@@ -19,11 +19,9 @@ export const WINDOWS_RUNTIME_FILES = [
   "chrome_200_percent.pak",
   "locales/en-US.pak",
   "ffmpeg.dll",
-  "libEGL.dll",
-  "libGLESv2.dll",
+  "electron_wer.dll",
   "d3dcompiler_47.dll",
   "dxcompiler.dll",
-  "dxil.dll",
   "vulkan-1.dll",
   "vk_swiftshader.dll",
   "vk_swiftshader_icd.json",
