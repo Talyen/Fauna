@@ -133,7 +133,6 @@ test("final victory returns to the menu without a retired creature reveal", asyn
   );
   await seed(page, encodeSave(final), width === 1280 ? "1.25" : "1");
   await page.locator(`[data-card-id=${JSON.stringify(final.battle!.hand[0])}]`).click();
-  await page.locator(".confirm-play").click();
   await page.getByRole("heading", { name: "Journey complete" }).waitFor();
   await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
   const won = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!));

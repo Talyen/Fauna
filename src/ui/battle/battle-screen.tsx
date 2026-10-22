@@ -85,31 +85,9 @@ export function BattleScreen({
   );
   const card = game.cards.find((c) => c.id === selected),
     def = card ? definition(card.definitionId) : null;
-  const allEnemies =
-    def?.effect === "teamPurge" ||
-    def?.effect === "teamBlind" ||
-    (def?.effect === "attack" && def.target === "allEnemies");
-  const automaticTarget =
-    (def?.effect === "attack" && def.target === "randomEnemy") ||
-    (def?.effect === "heal" && def.target === "mostInjured");
-  const allAllies =
-    def?.effect === "teamDodge" ||
-    def?.effect === "teamGuard" ||
-    def?.effect === "teamProtection" ||
-    def?.effect === "teamCleanse" ||
-    def?.effect === "teamThaw" ||
-    def?.effect === "nullify" ||
-    (def?.effect === "heal" && def.target === "allAllies");
-  const selfTarget =
-    def?.effect === "recover" ||
-    def?.effect === "draw" ||
-    def?.effect === "mana" ||
-    def?.effect === "dodge" ||
-    def?.effect === "waterThorns" ||
-    ((def?.effect === "guard" || def?.effect === "heal") && def.target === "self");
-  const enemyTarget = def?.effect === "attack" && !def.target,
-    allyTarget =
-      (def?.effect === "heal" || def?.effect === "guard") && !allAllies && !selfTarget && !automaticTarget;
+  const enemyTarget = def?.effect === "attack" && !def.target;
+  const allyTarget =
+    (def?.effect === "guard" && def.target !== "self") || (def?.effect === "heal" && !def.target);
   const targets = enemyTarget
     ? battle.enemies.filter((e) => e.health > 0).map((e) => e.id)
     : allyTarget
@@ -123,10 +101,9 @@ export function BattleScreen({
     const side = enemyTarget ? "enemy" : "ally";
     setRemembered((old) => (old[side] === id ? old : { ...old, [side]: id }));
   };
-  const groupTarget = allAllies || allEnemies || selfTarget || automaticTarget || def?.effect === "swap";
   const preview = useMemo(
-    () => (selected && (target || groupTarget) ? previewPlay(game, selected, target) : null),
-    [game, selected, target, groupTarget],
+    () => (selected && target ? previewPlay(game, selected, target) : null),
+    [game, selected, target],
   );
   const affected = new Set(
     preview?.events.flatMap((event) => (event.targetId ? [event.targetId] : [])) ?? [],
@@ -147,9 +124,6 @@ export function BattleScreen({
     }
   }
   if (target) affected.add(target);
-  if (allAllies) game.team.filter((unit) => unit.health > 0).forEach((unit) => affected.add(unit.id));
-  if (selfTarget && card) affected.add(card.ownerId);
-  if (allEnemies) battle.enemies.filter((unit) => unit.health > 0).forEach((unit) => affected.add(unit.id));
   const allyRecipient = game.team.find((unit) => unit.id === target);
   const recipient =
     battle.enemies.find((unit) => unit.id === target)?.name ??
@@ -159,7 +133,9 @@ export function BattleScreen({
     setSelected(null);
     setHovered(null);
     setDenial("");
-    focusAfterCommand.current = navigateFocus ? Math.max(0, visibleHand.indexOf(selected ?? "")) : null;
+    focusAfterCommand.current = navigateFocus
+      ? Math.max(0, visibleHand.indexOf(command.type === "play" ? command.cardId : ""))
+      : null;
   };
   useLayoutEffect(() => {
     if (focusAfterCommand.current !== null && !selected) {
@@ -218,10 +194,8 @@ export function BattleScreen({
     };
   });
   useLayoutEffect(() => {
-    if (!selected || !navigateFocus) return;
-    board.current
-      ?.querySelector<HTMLElement>(target ? `[data-actor-id="${target}"] .creature-card` : ".confirm-play")
-      ?.focus();
+    if (!selected || !target || !navigateFocus) return;
+    board.current?.querySelector<HTMLElement>(`[data-actor-id="${target}"] .creature-card`)?.focus();
   }, [selected, target, navigateFocus]);
   useLayoutEffect(() => {
     const update = () => {
@@ -268,9 +242,9 @@ export function BattleScreen({
             enemy={enemy}
             sharedDodge={sharedDodgeChance(game, enemy)}
             tooltips={!selected}
-            invalidTarget={!!selected && ((!enemyTarget && !allEnemies) || enemy.health <= 0)}
-            validTarget={!!selected && (enemyTarget || allEnemies) && enemy.health > 0}
-            activeTarget={!!selected && (target === enemy.id || (allEnemies && enemy.health > 0))}
+            invalidTarget={!!selected && (!enemyTarget || enemy.health <= 0)}
+            validTarget={!!selected && enemyTarget && enemy.health > 0}
+            activeTarget={!!selected && target === enemy.id}
             onPreviewEnd={() => setHovered((old) => (old === enemy.id ? null : old))}
             onPreview={() => {
               if (selected && enemyTarget && enemy.health > 0) setTarget(enemy.id);
@@ -282,8 +256,8 @@ export function BattleScreen({
             }
             onClick={(element) => {
               if (selected) {
-                if ((enemyTarget || allEnemies) && enemy.health > 0)
-                  play({ type: "play", cardId: selected, ...(allEnemies ? {} : { targetId: enemy.id }) });
+                if (enemyTarget && enemy.health > 0)
+                  play({ type: "play", cardId: selected, targetId: enemy.id });
                 else onDenied(element);
               }
             }}
@@ -300,22 +274,10 @@ export function BattleScreen({
             sharedDodge={sharedDodgeChance(game, creature)}
             tooltips={!selected}
             acting={card?.ownerId === creature.id}
-            validTarget={
-              !!selected &&
-              creature.health > 0 &&
-              (allyTarget || allAllies || (selfTarget && creature.id === card?.ownerId))
-            }
-            activeTarget={
-              !!selected &&
-              creature.health > 0 &&
-              (target === creature.id || allAllies || (selfTarget && creature.id === card?.ownerId))
-            }
+            validTarget={!!selected && creature.health > 0 && allyTarget}
+            activeTarget={!!selected && creature.health > 0 && target === creature.id}
             onPreviewEnd={() => setHovered((old) => (old === creature.id ? null : old))}
-            invalidTarget={
-              !!selected &&
-              ((!allyTarget && !allAllies && !(selfTarget && creature.id === card?.ownerId)) ||
-                creature.health <= 0)
-            }
+            invalidTarget={!!selected && (!allyTarget || creature.health <= 0)}
             onPreview={() => {
               if (selected && allyTarget && creature.health > 0) setTarget(creature.id);
             }}
@@ -326,9 +288,7 @@ export function BattleScreen({
             }
             onClick={(element) => {
               if (selected) {
-                if (selfTarget && creature.id === card?.ownerId && creature.health > 0)
-                  play({ type: "play", cardId: selected });
-                else if (allyTarget && creature.health > 0)
+                if (allyTarget && creature.health > 0)
                   play({ type: "play", cardId: selected, targetId: creature.id });
                 else onDenied(element);
               }
@@ -349,26 +309,7 @@ export function BattleScreen({
             <>
               <p>
                 {species(def.species).name} ·{" "}
-                {recipient ??
-                  (allEnemies
-                    ? "All enemies"
-                    : def.effect === "swap"
-                      ? game.reserves.some((unit) => unit.health > 0)
-                        ? "Random backup"
-                        : game.team.some((unit) => unit.health > 0 && unit.id !== card.ownerId)
-                          ? "Random ally"
-                          : "Self"
-                      : automaticTarget
-                        ? def.effect === "attack"
-                          ? "Random enemy"
-                          : "Most injured ally"
-                        : allAllies
-                          ? "All allies"
-                          : selfTarget
-                            ? "Self"
-                            : enemyTarget
-                              ? "Choose an enemy"
-                              : "Choose an ally")}
+                {recipient ?? (enemyTarget ? "Choose an enemy" : "Choose an ally")}
               </p>
               <ActionDetails
                 compact
@@ -386,16 +327,9 @@ export function BattleScreen({
           ) : null}
         </div>
         {selected ? (
-          <>
-            {groupTarget ? (
-              <Button className="confirm-play" onClick={() => play({ type: "play", cardId: selected })}>
-                Play · {controller ? "A" : "Enter"}
-              </Button>
-            ) : null}
-            <Button variant="outline" onClick={cancel}>
-              Cancel
-            </Button>
-          </>
+          <Button variant="outline" onClick={cancel}>
+            Cancel
+          </Button>
         ) : null}
       </div>
       <HandMotion revision={game.revision} turn={battle.turn} opening={openingDraw} paused={clearSelection}>
@@ -442,7 +376,13 @@ export function BattleScreen({
                         onManualStart?.();
                         setHovered(null);
                         setDenial("");
-                        setSelected((old) => (old === id ? null : id));
+                        const action = definition(card.definitionId);
+                        const needsTarget =
+                          (action.effect === "attack" && !action.target) ||
+                          (action.effect === "guard" && action.target !== "self") ||
+                          (action.effect === "heal" && !action.target);
+                        if (needsTarget) setSelected((old) => (old === id ? null : id));
+                        else play({ type: "play", cardId: id });
                       }}
                     />
                   </FanSlot>

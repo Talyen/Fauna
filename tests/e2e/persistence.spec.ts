@@ -18,7 +18,6 @@ test("last mana saves the full turn before immediate close and does not replay o
   await seed(page, fixture);
   await resume(page);
   await page.locator(".app:not([inert]) .hand .action-card").click();
-  await page.locator(".confirm-play").click();
   await saved(page);
   const committed = await state(page);
   expect(committed.battle!.turn).toBe(2);

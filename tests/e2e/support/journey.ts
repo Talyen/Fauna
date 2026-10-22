@@ -52,6 +52,6 @@ export async function step(
           ? page.locator(`.app:not([inert]) .enemy-row [data-enemy-id="${c.targetId}"]`)
           : page.locator(`.app:not([inert]) .player-row [data-actor-id="${c.targetId}"] .creature-card`),
       );
-    } else await activate(page.getByRole("button", { name: /^Play ·/ }));
+    }
   } else await activate(page.getByRole("button", { name: /^End turn/ }));
 }

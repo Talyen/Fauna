@@ -6,7 +6,6 @@ import { TooltipProvider } from "../../../src/components/ui/tooltip";
 import { BattleScreen } from "../../../src/ui/battle/battle-screen";
 import type { Controls } from "../../../src/ui/shared/navigation/input";
 import { TargetPreview } from "../../../src/ui/battle/target-preview";
-import { assetUrl } from "../../../src/ui/shared/assets";
 import { moveFocus } from "../../../src/ui/shared/navigation/input";
 import { previewCard } from "../../../src/game/engine";
 import { produce } from "immer";
@@ -71,22 +70,6 @@ function open(game = fixture(), navigation = false) {
     view.container.querySelector<HTMLButtonElement>(`.hand [data-effect="${effect}"]`)!;
   return { ...view, send, controls, card };
 }
-it("activates Seedling Circle for the whole allied row without requiring a recipient", async () => {
-  const game = produce(teamRun(1, ["ringpalm", "mossguard", "prismram"]), (draft) => {
-    const circle = draft.cards.find((card) => card.definitionId === "ringpalm-teamProtection")!;
-    draft.battle!.hand = [circle.id];
-    draft.battle!.buffer = [];
-    draft.battle!.discard = [];
-    draft.battle!.draw = draft.cards.filter((card) => card.id !== circle.id).map((card) => card.id);
-  });
-  const { container, send, card } = open(game);
-  await userEvent.click(card("teamProtection"));
-  expect(container.querySelectorAll(".player-row [data-active-target]")).toHaveLength(3);
-  expect(container.querySelectorAll(".player-row .target-preview")).toHaveLength(3);
-  expect(send).not.toHaveBeenCalled();
-  await userEvent.click(screen.getByRole("button", { name: /^Play/ }));
-  expect(send.mock.calls).toEqual([[{ type: "play", cardId: game.battle!.hand[0]! }]]);
-});
 it("mouse selection waits for hover, clears on leave, switches cards, and cancels without commands", async () => {
   const { container, send, card } = open();
   await userEvent.click(card("attack"));
@@ -135,7 +118,7 @@ it("navigation previews and remembers a recipient, cancels back to the card, and
   });
   expect(container.querySelector(".target-preview")).toBeNull();
 });
-it("a sole living recipient still requires activation and team actions preview every living ally", async () => {
+it("a chosen-target card still requires activation with a sole living recipient", async () => {
   const game = produce(fixture(), (state) => {
     state.battle!.enemies.slice(1).forEach((unit) => {
       unit.health = 0;
@@ -147,13 +130,6 @@ it("a sole living recipient still requires activation and team actions preview e
   expect(container.querySelectorAll(".enemy-row [data-valid-target]")).toHaveLength(1);
   await userEvent.click(container.querySelector<HTMLButtonElement>(".enemy-row .creature-card")!);
   expect(send).toHaveBeenCalledTimes(1);
-  await userEvent.click(card("teamGuard"));
-  expect(container.querySelectorAll(".player-row [data-active-target]")).toHaveLength(3);
-  expect(container.querySelectorAll(".player-row .target-preview")).toHaveLength(3);
-  expect(send).toHaveBeenCalledTimes(1);
-  await userEvent.click(screen.getByRole("button", { name: /^Play/ }));
-  expect(send).toHaveBeenCalledTimes(2);
-  expect(send.mock.calls[1]).toEqual([{ type: "play", cardId: card("teamGuard").dataset.cardId }]);
 });
 it("explains unavailable Mana and control while leaving state unchanged", async () => {
   const game = produce(fixture(), (state) => {
@@ -228,174 +204,73 @@ it("moves between battle rows and reaches hand-side controls with directional in
   for (const control of controls) expect(reached.has(control)).toBe(true);
 });
 
-it.each(["emberback-furnace-breath", "emberback-magma-stomp", "mossguard-attack"])(
-  "previews every enemy for %s and confirms without choosing one target",
-  async (id) => {
-    const game = produce(teamRun(1, ["emberback", "mossguard", "prismram"]), (draft) => {
-      const chosen = draft.cards.find((card) => card.definitionId === id)!;
-      draft.battle!.hand = [chosen.id];
-      draft.battle!.buffer = [];
-      draft.battle!.discard = [];
-      draft.battle!.draw = draft.cards.filter((card) => card.id !== chosen.id).map((card) => card.id);
-    });
-    const { container, card, send, controls } = open(game, true);
-    const before = structuredClone(game);
-    expect(card("attack").querySelector("img")?.getAttribute("src")).toBe(
-      assetUrl(content.definition(id).artwork!),
-    );
-    await userEvent.click(card("attack"));
-    expect(
-      screen.getByText(`${id.startsWith("mossguard") ? "Mossguard" : "Emberback"} · All enemies`),
-    ).toBeTruthy();
-    expect(container.querySelectorAll(".enemy-row .target-preview")).toHaveLength(3);
-    expect(container.querySelectorAll(".enemy-row [data-active-target]")).toHaveLength(3);
-    expect(container.querySelector(".target-line")).toBeNull();
-    const confirm = screen.getByRole("button", { name: "Play · Enter" });
-    expect(document.activeElement).toBe(confirm);
-    act(() => {
-      controls.current!("back");
-    });
-    expect(send).not.toHaveBeenCalled();
-    expect(game).toEqual(before);
-    expect(document.activeElement).toBe(card("attack"));
-    await userEvent.click(card("attack"));
-    await userEvent.keyboard("{Enter}");
-    expect(send).toHaveBeenCalledExactlyOnceWith({ type: "play", cardId: game.battle!.hand[0]! });
-  },
-);
-
 it.each([
-  ["mossguard-guard", "guard", "Self", 1],
-  ["mossguard-heal", "heal", "All allies", 3],
-] as const)("previews and confirms %s without selecting an ally", async (id, effect, recipient, count) => {
-  const game = produce(teamRun(1, ["mossguard", "emberback", "prismram"]), (draft) => {
+  ["ringpalm", "ringpalm-teamProtection"],
+  ["emberback", "emberback-furnace-breath"],
+  ["emberback", "emberback-magma-stomp"],
+  ["mossguard", "mossguard-attack"],
+  ["mossguard", "mossguard-guard"],
+  ["mossguard", "mossguard-heal"],
+  ["pollenmoth", "pollenmoth-attack"],
+  ["pollenmoth", "pollenmoth-heal"],
+  ["captoad", "captoad-swap"],
+  ["dunefox", "dunefox-dodge"],
+  ["bloomquail", "bloomquail-draw"],
+  ["neradora", "neradora-undertow-knot"],
+  ["rookhaven", "rookhaven-unwritten-ending"],
+] as const)("plays %s's %s immediately without selecting or confirming a recipient", async (kind, id) => {
+  const game = produce(teamRun(7, [kind, "prismram"]), (draft) => {
     const chosen = draft.cards.find((card) => card.definitionId === id)!;
     draft.battle!.hand = [chosen.id];
     draft.battle!.buffer = [];
     draft.battle!.discard = [];
     draft.battle!.draw = draft.cards.filter((card) => card.id !== chosen.id).map((card) => card.id);
-    draft.team.forEach((ally) => {
-      ally.health -= 3;
-    });
+    draft.team[0]!.health -= 3;
   });
-  const { container, card, send } = open(game, true);
-  await userEvent.click(card(effect));
-  expect(screen.getByText(`Mossguard · ${recipient}`)).toBeTruthy();
-  expect(container.querySelectorAll(".player-row [data-active-target]")).toHaveLength(count);
-  expect(container.querySelectorAll(".player-row .target-preview")).toHaveLength(count);
-  expect(container.querySelector(".target-line")).toBeNull();
-  expect(send).not.toHaveBeenCalled();
-  await userEvent.keyboard("{Enter}");
+  const { container, send } = open(game);
+  await userEvent.click(container.querySelector<HTMLButtonElement>(".hand .action-card")!);
   expect(send).toHaveBeenCalledExactlyOnceWith({ type: "play", cardId: game.battle!.hand[0]! });
+  expect(container.querySelector(".battle-screen")?.getAttribute("data-selected-card")).toBe("");
+  expect(container.querySelector(".target-preview")).toBeNull();
+  expect(screen.queryByRole("button", { name: "Cancel" })).toBeNull();
 });
 
-it.each(["attack", "heal"])("confirms Pollenmoth's automatic %s without manual targeting", (effect) => {
-  const game = produce(teamRun(7, ["pollenmoth", "mossguard", "prismram"]), (draft) => {
-    draft.team[0]!.health -= 5;
-    draft.battle!.hand = draft.cards.map((card) => card.id);
-    draft.battle!.draw = [];
-    draft.battle!.buffer = [];
-    draft.battle!.discard = [];
-  });
-  const { container, send } = open(game, true);
-  const cardId = game.cards.find((card) => card.definitionId === `pollenmoth-${effect}`)!.id;
-  fireEvent.click(container.querySelector(`[data-card-id="${cardId}"]`)!);
-  expect(container.querySelector(".confirm-play")).toBeTruthy();
-  expect(container.querySelectorAll("[data-valid-target]")).toHaveLength(0);
-  expect(container.querySelector(".target-preview")).toBeTruthy();
-  fireEvent.click(container.querySelector(".confirm-play")!);
-  expect(send).toHaveBeenCalledTimes(1);
-  expect(send).toHaveBeenCalledWith({ type: "play", cardId });
-});
-
-it("confirms Bogbound Leap without asking for an ally target", async () => {
-  const game = produce(teamRun(1, ["captoad"]), (draft) => {
-    const leap = draft.cards.find((card) => card.definitionId === "captoad-swap")!;
-    draft.battle!.hand = [leap.id];
-    draft.battle!.draw = draft.cards.filter((card) => card.id !== leap.id).map((card) => card.id);
-  });
-  const { send, card } = open(game);
-  const leap = card("swap");
-  await userEvent.click(leap);
-  expect(send).not.toHaveBeenCalled();
-  const confirm = screen.getByRole("button", { name: /^Play/ });
-  expect(confirm.hasAttribute("disabled")).toBe(false);
-  await userEvent.click(confirm);
-  expect(send).toHaveBeenCalledWith({ type: "play", cardId: leap.dataset.cardId });
-});
-
-it("Mirage Step selects only Dunefox, previews its shared Dodge, and confirms without an ally target", async () => {
-  const game = produce(teamRun(7, ["dunefox", "mossguard", "captoad"]), (draft) => {
-    const step = draft.cards.find((card) => card.definitionId === "dunefox-dodge")!;
-    draft.battle!.hand = [step.id];
-    draft.battle!.draw = draft.cards.filter((card) => card.id !== step.id).map((card) => card.id);
-    draft.battle!.discard = [];
-    draft.battle!.buffer = [];
-  });
-  const { container, send, card } = open(game);
-  await userEvent.click(card("dodge"));
-  expect(container.querySelectorAll(".player-row [data-valid-target]")).toHaveLength(1);
-  expect(container.querySelectorAll(".target-preview")).toHaveLength(3);
-  expect(
-    screen.getByRole("status", { name: /Target preview for Mossguard/ }).getAttribute("aria-label"),
-  ).toContain("Dodge 0.75 → 5.25");
-  await userEvent.click(screen.getByRole("button", { name: /Play ·/ }));
-  expect(send).toHaveBeenCalledWith({ type: "play", cardId: game.battle!.hand[0]! });
-});
-
-it("Bloom Cradle previews self-healing and confirms without choosing an ally", async () => {
-  const game = produce(teamRun(1, ["bloomquail", "mossguard", "prismram"]), (draft) => {
-    const chosen = draft.cards.find((card) => card.definitionId === "bloomquail-draw")!;
-    draft.battle!.hand = [chosen.id];
-    draft.battle!.buffer = [];
-    draft.battle!.discard = [];
-    draft.battle!.draw = draft.cards.filter((card) => card.id !== chosen.id).map((card) => card.id);
-    draft.team[0]!.health -= 4;
-    draft.team[1]!.health = 1;
-  });
-  const { container, card, send } = open(game, true);
-  await userEvent.click(card("draw"));
-  expect(screen.getByText("Bloomquail · Self")).toBeTruthy();
-  expect(container.querySelectorAll(".player-row [data-active-target]")).toHaveLength(1);
-  expect(container.querySelector(".target-preview")?.getAttribute("aria-label")).toContain("Health 22 to 24");
+it("plays an automatic card on Enter without a confirmation control", async () => {
+  const { card, send } = open(fixture(), true);
+  card("teamGuard").focus();
   await userEvent.keyboard("{Enter}");
-  expect(send).toHaveBeenCalledExactlyOnceWith({ type: "play", cardId: game.battle!.hand[0]! });
+  expect(send).toHaveBeenCalledExactlyOnceWith({ type: "play", cardId: card("teamGuard").dataset.cardId });
 });
 
-it("targets Neradora itself for Undertow Knot and previews the separate Water Thorns pool", async () => {
-  const game = produce(teamRun(1, ["neradora", "mossguard", "prismram"]), (draft) => {
-    const knot = draft.cards.find((card) => card.definitionId === "neradora-undertow-knot")!;
-    draft.battle!.hand = [knot.id];
-    draft.battle!.buffer = [];
-    draft.battle!.discard = [];
-    draft.battle!.draw = draft.cards.filter((card) => card.id !== knot.id).map((card) => card.id);
-  });
-  const { container, send, card } = open(game);
-  await userEvent.click(card("waterThorns"));
-  expect(container.querySelectorAll(".player-row [data-active-target]")).toHaveLength(1);
-  expect(container.querySelectorAll(".player-row .target-preview")).toHaveLength(1);
-  expect(container.querySelector(".target-preview")?.textContent).toContain("Water Thorns 0 → 3");
-  await userEvent.click(screen.getByRole("button", { name: /^Play/ }));
-  expect(send.mock.calls).toEqual([[{ type: "play", cardId: game.battle!.hand[0]! }]]);
+it("plays an automatic card directly while replacing a pending chosen target", async () => {
+  const { container, card, send } = open();
+  await userEvent.click(card("attack"));
+  await userEvent.click(card("teamGuard"));
+  expect(send).toHaveBeenCalledExactlyOnceWith({ type: "play", cardId: card("teamGuard").dataset.cardId });
+  expect(container.querySelector(".battle-screen")?.getAttribute("data-selected-card")).toBe("");
 });
 
-it("previews and confirms Unwritten Ending for all enemies without a chosen target", async () => {
-  const game = produce(teamRun(1, ["rookhaven", "mossguard", "prismram"]), (draft) => {
-    const chosen = draft.cards.find((card) => card.definitionId === "rookhaven-unwritten-ending")!;
-    draft.battle!.hand = [chosen.id];
-    draft.battle!.buffer = [];
-    draft.battle!.discard = [];
-    draft.battle!.draw = draft.cards.filter((card) => card.id !== chosen.id).map((card) => card.id);
-    draft.battle!.enemies.forEach((enemy) => {
-      enemy.block = 4;
-    });
-  });
-  const { container, card, send } = open(game, true);
-  await userEvent.click(card("teamPurge"));
-  expect(screen.getByText("Rookhaven · All enemies")).toBeTruthy();
-  expect(container.querySelectorAll(".enemy-row [data-active-target]")).toHaveLength(3);
-  expect(container.querySelectorAll(".enemy-row .target-preview")).toHaveLength(3);
+it("keeps automatic cards unavailable when Mana is insufficient", async () => {
+  const { card, send } = open(
+    produce(fixture(), (game) => {
+      game.battle!.mana = 0;
+    }),
+  );
+  await userEvent.click(card("teamGuard"));
   expect(send).not.toHaveBeenCalled();
-  await userEvent.keyboard("{Enter}");
-  expect(send).toHaveBeenCalledExactlyOnceWith({ type: "play", cardId: game.battle!.hand[0]! });
+  expect(screen.getByText("Not enough Mana.")).toBeTruthy();
+});
+
+it("commits a chosen ally only when that ally is activated", async () => {
+  const { container, card, send } = open();
+  await userEvent.click(card("guard"));
+  expect(send).not.toHaveBeenCalled();
+  await userEvent.click(
+    container.querySelector<HTMLButtonElement>('[data-actor-id="ally-1"] .creature-card')!,
+  );
+  expect(send).toHaveBeenCalledExactlyOnceWith({
+    type: "play",
+    cardId: card("guard").dataset.cardId,
+    targetId: "ally-1",
+  });
 });

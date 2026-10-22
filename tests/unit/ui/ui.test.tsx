@@ -51,7 +51,6 @@ describe("player interface", () => {
     expect(document.querySelectorAll(".hand .action-card")).toHaveLength(7);
     expect(screen.queryByText(/buffer/i)).toBeNull();
     await user.click(document.querySelector<HTMLButtonElement>('.hand .action-card[data-effect="attack"]')!);
-    await user.click(document.querySelector<HTMLButtonElement>(".confirm-play")!);
     expect(session.store.getState().game.battle!.hand).toContain(game.battle!.buffer[0]);
     expect(session.store.getState().game.battle!.buffer).toHaveLength(1);
     expect(document.querySelectorAll(".hand .action-card")).toHaveLength(7);

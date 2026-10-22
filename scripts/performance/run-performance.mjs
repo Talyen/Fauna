@@ -108,7 +108,6 @@ export async function action(page, step) {
       await page
         .locator(`.app:not([inert]) [data-actor-id=${JSON.stringify(step.command.targetId)}] .creature-card`)
         .click();
-    else await page.locator(".app:not([inert]) .confirm-play").click();
   } else if (step.kind === "endTurn")
     await page.getByRole("button", { name: "End turn", exact: true }).click();
   else if (step.kind === "swap") {

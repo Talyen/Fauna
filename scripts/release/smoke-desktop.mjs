@@ -137,9 +137,8 @@ try {
     JSON.parse((await window.faunaDesktop.readCandidates())[0].data),
   );
   await attack.click();
-  const confirm = window.locator(".confirm-play");
-  if (await confirm.count()) await confirm.click();
-  else await window.locator('.app:not([inert]) .enemy-row [data-enemy-id="enemy-0"]').click();
+  if (await window.locator(".battle-screen").getAttribute("data-selected-card"))
+    await window.locator('.app:not([inert]) .enemy-row [data-enemy-id="enemy-0"]').click();
   // Close immediately while hit feedback is still animating; the handshake must flush the accepted command.
   await app.close();
   app = undefined;

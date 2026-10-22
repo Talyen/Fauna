@@ -58,7 +58,6 @@ test("real audio output, hit recoil, reduced motion, and mute follow combat outc
   await seed(page, fixture);
   await resume(page);
   await page.locator('.app:not([inert]) .hand [data-card-id="ally-0:mossguard-attack"]').click();
-  await page.locator(".confirm-play").click();
   const observed = () =>
     page.evaluate(
       () =>
