@@ -1,0 +1,665 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`preserves committed command traces for 'Armor bursts and status thresholds' 1`] = `
+[
+  {
+    "command": {
+      "cardId": "ally-2:prismram-attack",
+      "targetId": "enemy-1",
+      "type": "play",
+    },
+    "digest": "348754338d6f2fca79753963fe46641f9108731e7daddf303ea32f09f10b8787",
+    "phase": "battle",
+    "rng": 3564652193,
+  },
+  {
+    "command": {
+      "cardId": "ally-0:emberback-attack",
+      "targetId": "enemy-1",
+      "type": "play",
+    },
+    "digest": "2cdc842b1fc4c0130e77173258935f8b4f6b61eef119156715dd03d2a89c22d2",
+    "phase": "battle",
+    "rng": 3086441138,
+  },
+  {
+    "command": {
+      "cardId": "ally-0:emberback-furnace-breath",
+      "type": "play",
+    },
+    "digest": "3690d88dce17165c6b3dfa694c1194eb85575cfc1ce592c9b4dc272c645f0568",
+    "phase": "battle",
+    "rng": 3301820007,
+  },
+  {
+    "command": {
+      "cardId": "ally-1:mossguard-heal",
+      "type": "play",
+    },
+    "digest": "dc2e9e9ac309baf4eabb693da571c381b5262e2d723e751fa6b8efeacd77405f",
+    "phase": "battle",
+    "rng": 3301820007,
+  },
+  {
+    "command": {
+      "type": "endTurn",
+    },
+    "digest": "40c3f3cbaf67b3b8d464caa4922878ee95d8385022a319b78309c27c342fc82e",
+    "phase": "battle",
+    "rng": 3742209427,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:prismram-spectrum-lance",
+      "targetId": "enemy-0",
+      "type": "play",
+    },
+    "digest": "81a33501ee15fc15f123d3a5ca1c40ae351573479afa020ca5a4ac18c2f8ae7d",
+    "phase": "battle",
+    "rng": 442264513,
+  },
+  {
+    "command": {
+      "cardId": "ally-1:mossguard-attack",
+      "type": "play",
+    },
+    "digest": "9891b893ba463a103c02b7202f117eb06a505e66801ab6ac6f3b8eb1c8247e2b",
+    "phase": "battle",
+    "rng": 1317114400,
+  },
+  {
+    "command": {
+      "cardId": "ally-0:emberback-magma-stomp",
+      "type": "play",
+    },
+    "digest": "4c6b57438537b9044e81f402ea22cd66af433c13bbe752f9cea9bd6522308c97",
+    "phase": "battle",
+    "rng": 2594568867,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:prismram-guard",
+      "type": "play",
+    },
+    "digest": "449e4b1707f7dce321b09d50d410cdfa7753361f81ca74afef9bb7970d47d327",
+    "phase": "battle",
+    "rng": 2107454157,
+  },
+  {
+    "command": {
+      "type": "endTurn",
+    },
+    "digest": "301b3bc984208164f2a37c4183f65f17158188dce49cd631aa90612182e9b0fa",
+    "phase": "battle",
+    "rng": 4203618529,
+  },
+  {
+    "command": {
+      "cardId": "ally-1:mossguard-attack",
+      "type": "play",
+    },
+    "digest": "1fa4d8b5ed5d5022ef5d00fe3f3cb4343f903266d437f141042d2927bf632eba",
+    "phase": "battle",
+    "rng": 2104057536,
+  },
+  {
+    "command": {
+      "cardId": "ally-0:emberback-furnace-breath",
+      "type": "play",
+    },
+    "digest": "2b98ada6312b6f7226c9c87cfefcabb52bccb5eda6d8c8f6c85df45c0a3b670e",
+    "phase": "battle",
+    "rng": 1734577645,
+  },
+  {
+    "command": {
+      "cardId": "ally-1:mossguard-guard",
+      "type": "play",
+    },
+    "digest": "923650ebb9b010e3e9228ef53aa4ec0f500c9a1c895a4b367c3bef006c32623c",
+    "phase": "battle",
+    "rng": 2037551473,
+  },
+  {
+    "command": {
+      "type": "endTurn",
+    },
+    "digest": "623908ab086fd65d9c0bf7aede31b6c4f4671a7b1920ad4b4bddd8b0e63e9d8f",
+    "phase": "battle",
+    "rng": 4079972733,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:prismram-attack",
+      "targetId": "enemy-0",
+      "type": "play",
+    },
+    "digest": "1f972b1e5dd727840c356a6319c7e2aa20dfae32f1e1ea1b7fe5d844b0ce1a1f",
+    "phase": "battle",
+    "rng": 2323810156,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:prismram-spectrum-lance",
+      "targetId": "enemy-2",
+      "type": "play",
+    },
+    "digest": "87d94dda61b1c19d579cb981debfda1b4512f0c5a434af59e364da14b866166c",
+    "phase": "battle",
+    "rng": 4089864062,
+  },
+  {
+    "command": {
+      "cardId": "ally-0:emberback-attack",
+      "targetId": "enemy-2",
+      "type": "play",
+    },
+    "digest": "51c23ee8e1c69763491ea3398fb1baed27af95f1784ad80fc07315c5f3935180",
+    "phase": "battle",
+    "rng": 213432035,
+  },
+  {
+    "command": {
+      "cardId": "ally-0:emberback-magma-stomp",
+      "type": "play",
+    },
+    "digest": "6be73e6ea8eb5b464ab4d5a7ecd3e50a3544b94eddefac73508b8dd672da32f9",
+    "phase": "battle",
+    "rng": 3291432712,
+  },
+  {
+    "command": {
+      "type": "endTurn",
+    },
+    "digest": "e54d9db8bb685b1f2f998ec885805c5a73919913b3d52fe091a357b9b466d4eb",
+    "phase": "battle",
+    "rng": 2306071896,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:prismram-attack",
+      "targetId": "enemy-2",
+      "type": "play",
+    },
+    "digest": "1c5eac64e37b744c491d516cd6b52c0f07e7d4f84be624918ff66bc476c2201b",
+    "phase": "recruit",
+    "rng": 2645071845,
+  },
+]
+`;
+
+exports[`preserves committed command traces for 'bounce and healing' 1`] = `
+[
+  {
+    "command": {
+      "cardId": "ally-1:ringpalm-harmonic-set",
+      "type": "play",
+    },
+    "digest": "d63ca1467f420c40b8f3277a030e4b2a0a80b335def6ef22766e2899f1ddace7",
+    "phase": "battle",
+    "rng": 2353844709,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:dawncall-teamCleanse",
+      "type": "play",
+    },
+    "digest": "e93f4ecc2b43da212a9bf66c40644f097596931a96d7c8537c0e2d8646d45631",
+    "phase": "battle",
+    "rng": 2353844709,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:dawncall-attack",
+      "type": "play",
+    },
+    "digest": "d4776dc03f4fde1ab3bd1d6fa50d1bf8c5cb763de29fbd016e69035e5a36aed5",
+    "phase": "battle",
+    "rng": 3571407874,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:dawncall-heal",
+      "type": "play",
+    },
+    "digest": "01575c17ab71ec84c19daaa199c22fc526218923c663527522f2dba990b0beb9",
+    "phase": "battle",
+    "rng": 111242105,
+  },
+  {
+    "command": {
+      "cardId": "ally-0:glintstride-attack",
+      "targetId": "enemy-1",
+      "type": "play",
+    },
+    "digest": "1a935cc50e3e114fddbdfe7356c433b221a006621e8cfaa7da51289551e40223",
+    "phase": "battle",
+    "rng": 1751816951,
+  },
+  {
+    "command": {
+      "type": "endTurn",
+    },
+    "digest": "e7a5f6016ba34ea6cfe6e13122b79913a8ffb11d8780232551bd9b45a86840de",
+    "phase": "battle",
+    "rng": 3150962726,
+  },
+  {
+    "command": {
+      "cardId": "ally-1:ringpalm-attack",
+      "targetId": "enemy-1",
+      "type": "play",
+    },
+    "digest": "c94ac8eaf04bd4555418ef6f2c34f8c07c1fad090b4ea72839862dd5d0e8806f",
+    "phase": "battle",
+    "rng": 3874460346,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:dawncall-attack",
+      "type": "play",
+    },
+    "digest": "564a8f4ffcca06bcf9e130f015372833041cb66f6e29b68c29bda790605b6790",
+    "phase": "battle",
+    "rng": 1855664280,
+  },
+  {
+    "command": {
+      "cardId": "ally-0:glintstride-dodge",
+      "type": "play",
+    },
+    "digest": "9e41f512fdf2d22e0d0cd2398704adba3eee2a5dfb61091c6fba7014aa24448e",
+    "phase": "battle",
+    "rng": 1855664280,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:dawncall-teamCleanse",
+      "type": "play",
+    },
+    "digest": "41be4ba7500ef7297315f54254f7b807301aacfead29b9a2f63e6f36c01ab779",
+    "phase": "battle",
+    "rng": 1855664280,
+  },
+  {
+    "command": {
+      "cardId": "ally-1:ringpalm-teamProtection",
+      "type": "play",
+    },
+    "digest": "bedb38de23f933e840fb50b2825cb83779500b99a883db1ca7bc672ef21dafe3",
+    "phase": "battle",
+    "rng": 1898009694,
+  },
+  {
+    "command": {
+      "type": "endTurn",
+    },
+    "digest": "abb05cf551bbf192a0650271a4e492b395636c72d11fe9df63aa63de05faef8c",
+    "phase": "battle",
+    "rng": 2414117868,
+  },
+  {
+    "command": {
+      "cardId": "ally-0:glintstride-attack",
+      "targetId": "enemy-1",
+      "type": "play",
+    },
+    "digest": "3ab3703e9143965ed11691f2aa73d159d35c83e1210a17e50764c6b27f1fec07",
+    "phase": "battle",
+    "rng": 3162612809,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:dawncall-attack",
+      "type": "play",
+    },
+    "digest": "a3f9891330ba6da27612b827f165dc33da19a646e7a2cc4220f9438ebcbe3a47",
+    "phase": "battle",
+    "rng": 2510327057,
+  },
+  {
+    "command": {
+      "cardId": "ally-1:ringpalm-attack",
+      "targetId": "enemy-2",
+      "type": "play",
+    },
+    "digest": "0ebd7facb1d07f871fbf0a1195c5ddf97dcb400a26d0858613429130481e028d",
+    "phase": "battle",
+    "rng": 2419888341,
+  },
+  {
+    "command": {
+      "cardId": "ally-1:ringpalm-harmonic-set",
+      "type": "play",
+    },
+    "digest": "4c743d17aaa8dd3f330130d695c49bc7ac2af5c842aa374a86daf605d88415c2",
+    "phase": "battle",
+    "rng": 2889031803,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:dawncall-attack",
+      "type": "play",
+    },
+    "digest": "b7b38ad32610f448ddd89c5d2ea0ea1cccad6b805f75dbe1aee9abbadaaaa809",
+    "phase": "recruit",
+    "rng": 3012954546,
+  },
+]
+`;
+
+exports[`preserves committed command traces for 'repeats and control' 1`] = `
+[
+  {
+    "command": {
+      "cardId": "ally-0:chimecricket-attack",
+      "targetId": "enemy-1",
+      "type": "play",
+    },
+    "digest": "a167e551ad34a98a9120e4022abc8112be329558d7973bb74efea6c8607c891f",
+    "phase": "battle",
+    "rng": 270552769,
+  },
+  {
+    "command": {
+      "cardId": "ally-1:cadenza-resonant-well",
+      "type": "play",
+    },
+    "digest": "68c2eb180cceaa011521d1b5cfd8aa854f6406ab60b37d27d182f5f0cd002f43",
+    "phase": "battle",
+    "rng": 270552769,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:wickwaltz-draw",
+      "type": "play",
+    },
+    "digest": "77f7733b886ef6027dd7ff871f296843def023554ad2b4a55943402c53c6ec74",
+    "phase": "battle",
+    "rng": 270552769,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:wickwaltz-attack",
+      "type": "play",
+    },
+    "digest": "8927e6aca384ab4d2a0f0c2bc4883f474d8626b9cb376492e8fdde938a981ec7",
+    "phase": "battle",
+    "rng": 1386847910,
+  },
+  {
+    "command": {
+      "cardId": "ally-1:cadenza-rousing-refrain",
+      "type": "play",
+    },
+    "digest": "d91556505a231a03f8d15f6715b1c7f298a193c5039bbb1ba73d9930a0fd291e",
+    "phase": "battle",
+    "rng": 1571420474,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:wickwaltz-draw",
+      "type": "play",
+    },
+    "digest": "455e6812128a01cdcbf443be9a0c3bdc63b49fd3f120889871cdf668c1c029ba",
+    "phase": "battle",
+    "rng": 1571420474,
+  },
+  {
+    "command": {
+      "cardId": "ally-0:chimecricket-attack",
+      "targetId": "enemy-1",
+      "type": "play",
+    },
+    "digest": "579de7b0e33cc05f485cb37912cf41f8f11052ba013dc7e6463a67b51b195ef4",
+    "phase": "battle",
+    "rng": 3408954736,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:wickwaltz-attack",
+      "type": "play",
+    },
+    "digest": "1f8de2e69bcd23f586354acffa69be1e67738744683885c7dca6f40f82f58a41",
+    "phase": "battle",
+    "rng": 3951657309,
+  },
+  {
+    "command": {
+      "cardId": "ally-0:chimecricket-attack",
+      "targetId": "enemy-0",
+      "type": "play",
+    },
+    "digest": "9532690fcbad7ca4778bdc4bcf1d2360f617ac1c4b784886b4ac7c15c069f789",
+    "phase": "battle",
+    "rng": 3194479626,
+  },
+  {
+    "command": {
+      "cardId": "ally-1:cadenza-resonant-well",
+      "type": "play",
+    },
+    "digest": "516cbd233273ec60c5a1a6d0a4f3c7aa558938a2b421343de5f273aae4cd388d",
+    "phase": "battle",
+    "rng": 403262412,
+  },
+  {
+    "command": {
+      "cardId": "ally-0:chimecricket-attack",
+      "targetId": "enemy-0",
+      "type": "play",
+    },
+    "digest": "66051e89171ada5f8788bdb44eebfc7537ebf4a04e792d1ba9cdc627fee825bd",
+    "phase": "battle",
+    "rng": 2623497902,
+  },
+  {
+    "command": {
+      "cardId": "ally-0:chimecricket-attack",
+      "targetId": "enemy-0",
+      "type": "play",
+    },
+    "digest": "c9eb402c0fa0ec58ebf1a5c53d62b0ded9b28f1178f509e4ec7fe0c67f9762a3",
+    "phase": "battle",
+    "rng": 1681760825,
+  },
+  {
+    "command": {
+      "cardId": "ally-1:cadenza-resonant-well",
+      "type": "play",
+    },
+    "digest": "5b25771e710dfc194bc50bf20ebb18ab8bbe84e798bcee0f3c7abcde4cecabf0",
+    "phase": "battle",
+    "rng": 1681760825,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:wickwaltz-attack",
+      "type": "play",
+    },
+    "digest": "40b88c1f9390d10e4571faab1235611cadba7d8b95d07537caafd5fb5f911ffe",
+    "phase": "battle",
+    "rng": 3410205718,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:wickwaltz-draw",
+      "type": "play",
+    },
+    "digest": "02395ad526b7e5d70622ab4ac4683e58c60b62521ae792f3efc4cafba9806295",
+    "phase": "battle",
+    "rng": 1518507434,
+  },
+  {
+    "command": {
+      "cardId": "ally-0:chimecricket-attack",
+      "targetId": "enemy-2",
+      "type": "play",
+    },
+    "digest": "4bc642a38a9605a8317c405cd41c4f7686ad35edc35daa545b621dc18abb77c2",
+    "phase": "battle",
+    "rng": 2099295963,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:wickwaltz-attack",
+      "type": "play",
+    },
+    "digest": "75c1eb23bd4f6a3d82e6129ce285a4d4ce8f571ba5d65eadeadd4883d5c170ef",
+    "phase": "battle",
+    "rng": 805536319,
+  },
+  {
+    "command": {
+      "cardId": "ally-1:cadenza-rousing-refrain",
+      "type": "play",
+    },
+    "digest": "af8a1368b725683598d080b803fe0a7b7c38cedb1f3545e6588f87566b98b6ec",
+    "phase": "battle",
+    "rng": 805536319,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:wickwaltz-draw",
+      "type": "play",
+    },
+    "digest": "8fce969c054db159c4d2b5738d1ea0afe3829000d82e7c30b4ad7f0ac5183804",
+    "phase": "battle",
+    "rng": 468007828,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:wickwaltz-attack",
+      "type": "play",
+    },
+    "digest": "88105265b88fd232820c05d009f9fc69d64721d110d0b86e7dc5561a7b8f54ca",
+    "phase": "battle",
+    "rng": 2911280648,
+  },
+]
+`;
+
+exports[`preserves committed command traces for 'retaliation and exact absorption' 1`] = `
+[
+  {
+    "command": {
+      "cardId": "ally-0:coralcurl-attack",
+      "targetId": "enemy-1",
+      "type": "play",
+    },
+    "digest": "0d64e8f7e94a1f2e2aabc157a808fbbf09080230d54b84ed9cc8c0e67d99999f",
+    "phase": "battle",
+    "rng": 419702409,
+  },
+  {
+    "command": {
+      "cardId": "ally-0:coralcurl-attack",
+      "targetId": "enemy-1",
+      "type": "play",
+    },
+    "digest": "c2ae034d910f4c8e52f861546995ff5a973c8812ef55394a73d080d81341357c",
+    "phase": "battle",
+    "rng": 1230154952,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:emberback-magma-stomp",
+      "type": "play",
+    },
+    "digest": "e36bc73412320bf9b91728d95af09255e2b9d8d12966f6d824ba2eb70bc5bea2",
+    "phase": "battle",
+    "rng": 3083725227,
+  },
+  {
+    "command": {
+      "cardId": "ally-1:captoad-swap",
+      "type": "play",
+    },
+    "digest": "fc1e23fa7cdaee28a26fb115888d1b805c58d8000828ad7d0b741b5a70e2094c",
+    "phase": "battle",
+    "rng": 1857090318,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:emberback-furnace-breath",
+      "type": "play",
+    },
+    "digest": "2efbd9c273097164587e524e07badec65fc60e6f7ec55bca621b88226b430585",
+    "phase": "battle",
+    "rng": 1402938337,
+  },
+  {
+    "command": {
+      "cardId": "ally-1:captoad-guard",
+      "type": "play",
+    },
+    "digest": "824a49ada6c5f4b1e539298727af5dca3d32df5f11f89bd99b1d362136b202c5",
+    "phase": "battle",
+    "rng": 1335107125,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:emberback-attack",
+      "targetId": "enemy-0",
+      "type": "play",
+    },
+    "digest": "705df7928ca812bf6c449ceb9419ddcd1ad4c6a96cbf667a3b7b720e4c35ea85",
+    "phase": "battle",
+    "rng": 3044367571,
+  },
+  {
+    "command": {
+      "cardId": "ally-1:captoad-attack",
+      "type": "play",
+    },
+    "digest": "ca58f812f2dfd672ed3eb632f4a9e488c591807aaa6a91b6a210a56b45da685a",
+    "phase": "battle",
+    "rng": 2464503515,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:emberback-magma-stomp",
+      "type": "play",
+    },
+    "digest": "e6f48a9d4ff8159642818cae7918973ab454a3da84392c37a695c381ab9e997d",
+    "phase": "battle",
+    "rng": 3223327328,
+  },
+  {
+    "command": {
+      "cardId": "ally-0:coralcurl-guard",
+      "type": "play",
+    },
+    "digest": "6b4b09b3a4e7d430e992beb7d9372c30aca055eb8259afc38f6d17a7313e82fd",
+    "phase": "battle",
+    "rng": 1209453202,
+  },
+  {
+    "command": {
+      "type": "endTurn",
+    },
+    "digest": "b29388e453f1d255a7945dd388ae8f66b3f90b8d05fa3762cade7cb98bb14773",
+    "phase": "battle",
+    "rng": 238103996,
+  },
+  {
+    "command": {
+      "cardId": "ally-0:coralcurl-attack",
+      "targetId": "enemy-2",
+      "type": "play",
+    },
+    "digest": "45ac659f8deb7f76bf0aee7483f407f316d9ecf62bcf1c05c18f874ba19d091a",
+    "phase": "battle",
+    "rng": 1324670640,
+  },
+  {
+    "command": {
+      "cardId": "ally-2:emberback-furnace-breath",
+      "type": "play",
+    },
+    "digest": "147129e796c30740394444d57ed6c6209b637ef74c5dff8398756de418ec22f8",
+    "phase": "recruit",
+    "rng": 657814361,
+  },
+]
+`;

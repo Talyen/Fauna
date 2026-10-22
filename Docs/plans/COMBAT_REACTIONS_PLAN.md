@@ -122,3 +122,22 @@ This assessment changes documentation only. It does not establish new runtime, r
 Add no dependency, generic event bus, plugin framework, ECS, asynchronous combat or event-sourced save format. Do not redesign journey state, UI navigation, content values or the shared ability executor. No save migration or format change is needed if the transient design is respected; any unforeseen persisted change follows the disposable-development-save policy.
 
 Deliver the steps as reviewable commits in order, retaining a working implementation at each boundary. Stop converting a reaction family if its semantics cannot be explained or its seeded baseline diverges. Finish when reaction order and eligibility have one explicit owner, old recursive execution paths are removed, and the combined result meets acceptance gates. File count or line-count reduction is not the measure of success.
+
+## Implementation contract inventory
+
+Baseline for implementation: `8b37595`. Four deterministic command traces in the combat-resolution suite capture complete command-result hashes, RNG and save/resume equality before conversion.
+
+| Packet origin                            | Attack modifiers and buildup | Dodge / Critical / direct triggers | Extra eligibility                                                                                |
+| ---------------------------------------- | ---------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Ability, including authored extra damage | Yes                          | Yes                                | Wrong Foot on initial delivery; Resonance; Light bounce                                          |
+| Supplemental proc                        | Yes                          | No                                 | Resonance; Light bounce                                                                          |
+| Resonance copy                           | Yes                          | No                                 | No further Resonance                                                                             |
+| Periodic tick or Rupture                 | No                           | No                                 | Bypasses Block; may retain a knocked-out source's attribution                                    |
+| Retaliation                              | No                           | No                                 | Ordinary retaliation has no buildup; status retaliation explicitly builds it                     |
+| Derived control/depletion damage         | No                           | No                                 | Existing source-death permission retained; ability continuation still stops after actor knockout |
+
+Bounced delivery retains its parent packet's attack policy, forbids another bounce and excludes Wrong Foot. Blind is captured once per ability resolution; a direct bounced packet uses the same captured miss. Resonance retains the original damage value and Leech metadata. Shared protection forbids resharing; healing bounce does not pass its source to child heals; status reflection forbids a second reflection. These are distinct termination rules, not a global reaction limit.
+
+The packet sequence is: admission; Dodge and its reactions; Freeze Nullify; attack modifiers; Critical; Block payment; Armor modifiers and mitigation; Health payment and Armor decay; threshold reactions; Sun-Struck Shield; Second Wind; Block/damage/knockout events; earned Gold/healing and Boon effects; Open Flank; Water talents; buildup and control grants; attack procs; Thorns; Leech; control rewards; Sporecoat; Bubble Burst; Armor-break delivery. The outer hit then resolves Wrong Foot, Resonance and Light bounce. Each child completes at its insertion point before the parent resumes.
+
+Captured facts include actual Health loss, Block spent, initial Armor, pending Armor breaks and Bleed payout ownership. Threshold Cleanse can remove the ticking wound without revoking already earned Leech. Liveness and reaction eligibility are rechecked on continuation; approved actor knockout cancels unexecuted ability work without rolling back completed facts.
