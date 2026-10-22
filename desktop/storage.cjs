@@ -47,10 +47,16 @@ function createStorage(directory) {
           await handle.close();
         }
         for (let i = 2; i >= 1; i--) {
+          const backup = `${primary}.bak${i}`;
+          const staged = `${backup}.tmp`;
           try {
-            await fs.copyFile(i === 1 ? primary : `${primary}.bak${i - 1}`, `${primary}.bak${i}`);
+            // A failed copy must never truncate an existing recovery checkpoint.
+            await fs.copyFile(i === 1 ? primary : `${primary}.bak${i - 1}`, staged);
+            await fs.rename(staged, backup);
           } catch (error) {
             if (error.code !== "ENOENT") throw error;
+          } finally {
+            await fs.rm(staged, { force: true }).catch(() => {});
           }
         }
         await fs.rename(temp, primary);

@@ -24,8 +24,8 @@ export const grantArmor = (...args: CombatArguments<"grantArmor">) => resolveCom
 export const grantStatus = (...args: CombatArguments<"grantStatus">) => resolveCombat("grantStatus", ...args);
 export const triggerArmorBreak = (...args: CombatArguments<"triggerArmorBreak">) =>
   resolveCombat("triggerArmorBreak", ...args);
-export const removeFreezeBuildup = (...args: CombatArguments<"removeFreezeBuildup">) =>
-  resolveCombat("removeFreezeBuildup", ...args);
+export const removeControlBuildup = (...args: CombatArguments<"removeControlBuildup">) =>
+  resolveCombat("removeControlBuildup", ...args);
 export const removeEffects = (...args: CombatArguments<"removeEffects">) =>
   resolveCombat("removeEffects", ...args);
 export const applyBlind = (...args: CombatArguments<"applyBlind">) => resolveCombat("applyBlind", ...args);

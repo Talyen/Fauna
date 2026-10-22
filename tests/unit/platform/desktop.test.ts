@@ -4,7 +4,7 @@ import { createRequire } from "node:module";
 import { mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 const { createStorage } = createRequire(import.meta.url)("../../../desktop/storage.cjs");
 describe("desktop storage", () => {
   it("atomically installs serialized saves with rotating backups and drains admitted writes", async () => {
@@ -76,6 +76,38 @@ it("reports unreadable desktop storage when no candidate can be recovered", asyn
     await mkdir(path.join(directory, "expedition.json"));
     await expect(createStorage(directory).readCandidates()).rejects.toThrow("unreadable");
   } finally {
+    await rm(directory, { recursive: true });
+  }
+});
+
+it("preserves both recovery checkpoints when a backup copy fails partway through", async () => {
+  const fs = createRequire(import.meta.url)("node:fs/promises") as typeof import("node:fs/promises");
+  const directory = await mkdtemp(path.join(tmpdir(), "fauna-storage-"));
+  const storage = createStorage(directory);
+  const primary = path.join(directory, "expedition.json");
+  const values = [1, 2, 3, 4].map((revision) => encodeSave({ ...createGame(), revision }));
+  const copy = vi.spyOn(fs, "copyFile");
+  try {
+    for (const value of values.slice(0, 3)) await storage.write(value);
+    copy.mockImplementationOnce(async (_from, to) => {
+      await writeFile(to, "partial checkpoint");
+      throw new Error("disk full during backup copy");
+    });
+
+    await expect(storage.write(values[3])).rejects.toThrow("disk full");
+    expect(await readFile(primary, "utf8")).toBe(values[2]);
+    expect(await readFile(`${primary}.bak1`, "utf8")).toBe(values[1]);
+    expect(await readFile(`${primary}.bak2`, "utf8")).toBe(values[0]);
+
+    copy.mockRestore();
+    await storage.write(values[3]);
+    expect((await storage.readCandidates()).map((candidate: { data: string }) => candidate.data)).toEqual([
+      values[3],
+      values[2],
+      values[1],
+    ]);
+  } finally {
+    copy.mockRestore();
     await rm(directory, { recursive: true });
   }
 });
