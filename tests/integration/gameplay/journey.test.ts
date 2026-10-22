@@ -16,6 +16,7 @@ import {
   bossReward,
   policy,
   FULL_JOURNEY_SEED,
+  FULL_JOURNEY_COMMAND_BUDGET,
 } from "../../support/game";
 
 function startedJourney() {
@@ -47,33 +48,38 @@ describe("journey earnings and results", () => {
     expect(s.journey!.lastBattle).toBeNull();
   });
 
-  it.each(["choose", "skip"])("intermediate bosses offer only boons and %s advances directly", (action) => {
-    const reward = bossReward();
-    expect(reward.phase).toBe("boon");
-    expect(reward.reward!.recruits).toEqual([]);
-    expect(reward.reward!.boons).toHaveLength(3);
-    const chosen = reward.reward!.boons[0]!;
-    const command =
-      action === "choose" ? { type: "chooseBoon" as const, boon: chosen } : { type: "skipBoon" as const };
-    const next = accept(reward, command);
-    expect(next.phase).toBe("teamSelection");
-    expect(next.encounter).toBe(4);
-    expect(next.reward).toBeNull();
-    expect(next.currency).toBe(reward.currency);
-    expect(next.keywordXP).toEqual(reward.keywordXP);
-    expect(next.boons).toEqual(action === "choose" ? [chosen] : []);
-    expect(dispatch(next, command).accepted).toBe(false);
-    expect(decodeSave(encodeSave(next))).toEqual(next);
-  });
+  it.each(["choose", "skip"])(
+    "intermediate bosses offer boons after recruitment and %s advances directly",
+    (action) => {
+      const reward = bossReward();
+      expect(reward.phase).toBe("boon");
+      expect(reward.reward!.recruits).toEqual([]);
+      expect(reward.reward!.boons).toHaveLength(3);
+      const chosen = reward.reward!.boons[0]!;
+      const command =
+        action === "choose" ? { type: "chooseBoon" as const, boon: chosen } : { type: "skipBoon" as const };
+      const next = accept(reward, command);
+      expect(next.phase).toBe("teamSelection");
+      expect(next.encounter).toBe(4);
+      expect(next.reward).toBeNull();
+      expect(next.currency).toBe(reward.currency);
+      expect(next.keywordXP).toEqual(reward.keywordXP);
+      expect(next.boons).toEqual(action === "choose" ? [chosen] : []);
+      expect(dispatch(next, command).accepted).toBe(false);
+      expect(decodeSave(encodeSave(next))).toEqual(next);
+    },
+  );
 
-  it("skips the Reward screen when an intermediate boss has no available boon choices", () => {
+  it("finishes Boss rewards after recruitment when no Boons remain", () => {
     const ready = produce(bossReward(), (d) => {
       prepareDestination(d);
       d.reward = null;
       d.battle = null;
       d.boons = BOONS.map((boon) => boon.id);
     });
-    const won = winBattle(accept(ready, { type: "beginBattle" }));
+    const recruit = winBattle(accept(ready, { type: "beginBattle" }));
+    expect(recruit.phase).toBe("recruit");
+    const won = accept(recruit, recruitChoice(recruit));
     expect(won.phase).toBe("teamSelection");
     expect(won.encounter).toBe(4);
     expect(won.reward).toBeNull();
@@ -235,7 +241,7 @@ it("completes the one-starter recruitment path through the final boss within the
   let game = accept(accept(initial, { type: "draft", species: initial.starterOffers[0]! }), {
     type: "start",
   });
-  for (let step = 0; step < 400 && game.phase !== "victory"; step++) {
+  for (let step = 0; step < FULL_JOURNEY_COMMAND_BUDGET && game.phase !== "victory"; step++) {
     expect(game.phase).not.toBe("defeat");
     expect(game.reward?.outcome).not.toBe("defeat");
     const command =

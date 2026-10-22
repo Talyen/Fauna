@@ -2,6 +2,26 @@ import { KEYWORD_DEFINITIONS, KEYWORD_IDS } from "./keywords";
 
 export const GLOSSARY = [
   {
+    term: "Legendary",
+    definition:
+      "A creature deployed alone; Appears as an enemy only in Boss encounters; Can be recruited normally; Adds two copies of each ability to your deck",
+  },
+  {
+    term: "Minion",
+    definition:
+      "A battle-only summon with its own Health; Has no cards or roster slot; Disappears when its summoner falls or leaves the field",
+  },
+  {
+    term: "Echo",
+    definition:
+      "Memento's Minion; Has 6 Health before card upgrades; Attacks only through The Court Remembers; Up to two can be summoned",
+  },
+  {
+    term: "Pearl",
+    definition:
+      "A battle-only card created in your hand; Costs 1 Mana; Randomly grants 2 Block or 2 Mana; Can be drawn and discarded normally",
+  },
+  {
     term: "Health",
     definition: KEYWORD_DEFINITIONS.health.description,
   },
@@ -35,7 +55,7 @@ export const GLOSSARY = [
   {
     term: "Turn",
     definition:
-      "Play cards using shared mana; Spending your last mana automatically resolves the enemy turn; You can also press End turn at any time without confirmation; Discard remaining hand cards; restore 4 Mana and draw 4 cards for the next turn; The hand holds 7; overflow waits in order and survives turn changes",
+      "Play cards using shared mana; Spending your last mana automatically resolves the enemy turn; You can also press End turn at any time without confirmation; Discard remaining hand cards; restore 4 Mana and draw 4 cards for the next turn; The hand holds 6; overflow waits in order and survives turn changes",
   },
   {
     term: "Death's Door",
@@ -50,7 +70,7 @@ export const GLOSSARY = [
   {
     term: "Draw / discard",
     definition:
-      "All teammates share one deck, hand, and discard pile; Played and unplayed end-of-turn cards go to discard; Shuffle discard into the draw pile when needed",
+      "All teammates share one deck, hand, and discard pile; Played and unplayed end-of-turn cards go to discard; Shuffle discard into the draw pile as soon as the draw pile is empty",
   },
   {
     term: "Copy",
@@ -75,7 +95,7 @@ export const GLOSSARY = [
   {
     term: "Backup",
     definition:
-      "Recruit up to five creatures: three deployed and two in backup; Only deployed, living creatures provide passives; Swap freely during your turn through Swap; choose one deployed creature and one living backup in either order; Their cards replace one another in their existing hand, draw, and discard positions; Health and effects persist, and free swaps grant no extra draws or opening bonuses",
+      "Recruit up to five creatures: up to three ordinary creatures or one Legendary deployed; Only deployed, living creatures provide passives; Swap freely during your turn through Swap; choose one deployed creature and one living backup in either order; Their cards replace one another in their existing hand, draw, and discard positions; Health and effects persist, and free swaps grant no extra draws or opening bonuses",
   },
   {
     term: "Swap cards",
@@ -85,7 +105,7 @@ export const GLOSSARY = [
   {
     term: "Starting lineup",
     definition:
-      "Your original draft supplies the starting three; Edit Lineup from the menu between battles if desired; Combat swaps do not change this saved lineup; New recruits join backup; Selecting Combat or Boss deploys your saved three without asking you to choose again",
+      "Your original draft supplies the starting lineup; Edit Lineup from the menu between battles if desired; Combat swaps do not change this saved lineup; New recruits join backup; Selecting Combat or Boss deploys your saved lineup without asking you to choose again",
   },
   {
     term: "Boons",

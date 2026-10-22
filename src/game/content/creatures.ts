@@ -1,3 +1,4 @@
+import { memento } from "./creatures/memento";
 import { freeze } from "immer";
 import type { Species, SpeciesId, CardDefinition } from "./types";
 import { rookhaven } from "./creatures/rookhaven";
@@ -44,6 +45,7 @@ const kits = [
   ringpalm,
   shadebrim,
   glintstride,
+  memento,
 ];
 freeze(kits, true);
 export const SPECIES: readonly Species[] = kits.map((kit) => kit.species);
@@ -69,6 +71,7 @@ export const CARDS: readonly CardDefinition[] = [
   chimecricket,
   bloomquail,
   shadebrim,
+  memento,
 ].flatMap((kit) => kit.cards);
 export function species(id: SpeciesId): Species {
   const result = SPECIES.find((s) => s.id === id);

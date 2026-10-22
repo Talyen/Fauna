@@ -37,8 +37,8 @@ afterEach(() => {
 describe("player interface", () => {
   it("keeps overflow invisible and unplayable while filling a hand slot after a play", async () => {
     const game = produce(run(), (d) => {
-      d.battle!.hand = d.cards.slice(0, 7).map((card) => card.id);
-      d.battle!.buffer = d.cards.slice(7).map((card) => card.id);
+      d.battle!.hand = d.cards.slice(0, 6).map((card) => card.id);
+      d.battle!.buffer = d.cards.slice(6).map((card) => card.id);
       d.battle!.draw = [];
       d.battle!.discard = [];
     });
@@ -48,15 +48,15 @@ describe("player interface", () => {
     render(<App session={session} />);
     const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: "Continue" }));
-    expect(document.querySelectorAll(".hand .action-card")).toHaveLength(7);
+    expect(document.querySelectorAll(".hand .action-card")).toHaveLength(6);
     expect(screen.queryByText(/buffer/i)).toBeNull();
     await user.click(document.querySelector<HTMLButtonElement>('.hand .action-card[data-effect="attack"]')!);
     expect(session.store.getState().game.battle!.hand).toContain(game.battle!.buffer[0]);
-    expect(session.store.getState().game.battle!.buffer).toHaveLength(1);
-    expect(document.querySelectorAll(".hand .action-card")).toHaveLength(7);
+    expect(session.store.getState().game.battle!.buffer).toHaveLength(2);
+    expect(document.querySelectorAll(".hand .action-card")).toHaveLength(6);
     await user.click(screen.getByRole("button", { name: "End turn" }));
     expect(session.store.getState().game.battle!.buffer).toEqual([]);
-    expect(document.querySelectorAll(".hand .action-card")).toHaveLength(5);
+    expect(document.querySelectorAll(".hand .action-card")).toHaveLength(6);
     await session.dispose();
   });
   it("offers illustrated portrait boon cards with external names and commits the chosen boon", async () => {

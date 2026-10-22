@@ -47,7 +47,33 @@ const combatState = z
     bleedLeech: z.array(z.object({ sourceId: id, amount: natural })).max(9),
   })
   .strict();
+const enemyDeck = z.object({
+  draw: z.array(id).max(MAX_BATTLE_CARDS),
+  hand: z.array(id).max(MAX_HAND_SIZE),
+  buffer: z.array(id).max(MAX_BATTLE_CARDS),
+  discard: z.array(id).max(MAX_BATTLE_CARDS),
+  mana: z.number().int().min(0).max(4),
+  created: z
+    .number()
+    .int()
+    .min(0)
+    .max(MAX_BATTLE_CARDS - 6),
+});
+const minion = z.object({
+  id,
+  name: z.literal("Echo"),
+  species: z.literal("memento"),
+  health: natural,
+  maxHealth: natural,
+  power: z.number().min(1).max(2),
+  targetId: id,
+  block: natural,
+  combat: combatState,
+  lastAbility: z.null(),
+  minion: z.object({ ownerId: id, side: z.enum(["player", "enemy"]) }),
+});
 const battle = z.object({
+  minions: z.array(minion).max(12).optional(),
   copySerial: z.number().int().min(0).max(MAX_BATTLE_CARDS),
   earnedGold: natural,
   freeBurnUsed: z.boolean(),
@@ -73,6 +99,7 @@ const battle = z.object({
         block: natural,
         combat: combatState,
         lastAbility: id.nullable(),
+        deck: enemyDeck.optional(),
       }),
     )
     .min(1)
@@ -112,7 +139,7 @@ const shared = z.object({
   /** Species counts, including copies; individual state lives in team and reserves. */
   roster: z.array(speciesId).max(5),
   team: z.array(creature).max(3),
-  reserves: z.array(creature).max(2),
+  reserves: z.array(creature).max(4),
   /** Creature IDs in starting order, independent of tactical combat swaps. */
   lineup: z.array(id).max(3),
   cards: z
@@ -218,9 +245,9 @@ const phases = z.discriminatedUnion("phase", [
     ...finished,
     journey: activeJourney,
     reward: receipt.extend({
-      outcome: z.literal("next"),
+      outcome: z.enum(["next", "victory"]),
       recruits: z.array(speciesId).min(1).max(3),
-      boons: z.array(boonId).length(0),
+      boons: z.array(boonId).max(3),
     }),
   }),
   shared.extend({

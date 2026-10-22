@@ -1,3 +1,4 @@
+import { isEnemy, battlefield } from "../battlefield";
 import { roll } from "../random";
 import { drawKeyword } from "../card-zones";
 import { hasTalent, creaturePassive } from "../progression";
@@ -27,15 +28,15 @@ export function* restoreHealth(
 ): Resolution<void> {
   const baseAmount = amount;
   if (state?.phase === "battle") {
-    if (!("maxHealth" in unit) && hasTalent(state, "health.mending")) amount *= 1.1;
-    if ("maxHealth" in unit && unit.combat.poison > 0 && hasTalent(state, "poison.necrosis")) amount *= 0.5;
-    if ("maxHealth" in unit && unit.combat.bleed > 0 && hasTalent(state, "bleed.mortal-wound")) amount *= 0.5;
+    if (!isEnemy(unit) && hasTalent(state, "health.mending")) amount *= 1.1;
+    if (isEnemy(unit) && unit.combat.poison > 0 && hasTalent(state, "poison.necrosis")) amount *= 0.5;
+    if (isEnemy(unit) && unit.combat.bleed > 0 && hasTalent(state, "bleed.mortal-wound")) amount *= 0.5;
   }
   if (unit.health === 0 && !revive) return;
   const gain = Math.min(Math.max(0, Math.round(amount)), maximumHealth(unit) - unit.health);
   const excess = Math.max(0, Math.round(amount) - gain);
   unit.health += gain;
-  if (cardHealing && state && !("maxHealth" in unit) && excess > 0) {
+  if (cardHealing && state && !isEnemy(unit) && excess > 0) {
     if (hasTalent(state, "health.overflow"))
       yield* reaction("grantBlock", state, unit, Math.round(excess * 0.25), events);
     if (hasTalent(state, "health.clean-slate"))
@@ -48,12 +49,7 @@ export function* restoreHealth(
       amount: gain,
       text: `${unitName(unit)} restores ${gain} Health.`,
     });
-    if (
-      gain > 0 &&
-      state?.phase === "battle" &&
-      !("maxHealth" in unit) &&
-      state.boons.includes("groves-favor")
-    )
+    if (gain > 0 && state?.phase === "battle" && !isEnemy(unit) && state.boons.includes("groves-favor"))
       yield* reaction("grantStatus", unit, "thorns", 1, events, state);
   }
   if (gain > 0 && source && state?.phase === "battle")
@@ -72,8 +68,8 @@ export function* shareProtection(
   events: GameEvent[],
 ): Resolution<void> {
   if (state.phase !== "battle" || !state.battle || source.health <= 0 || amount <= 0) return;
-  const allied = !("maxHealth" in source);
-  const pool = allied ? state.team : state.battle.enemies;
+  const allied = !isEnemy(source);
+  const pool = battlefield(state, allied ? "player" : "enemy");
   if (!pool.some((unit) => unit.id === source.id)) return;
   const recipients = pool.filter((unit) => unit.id !== source.id && unit.health > 0);
   if (!recipients.length) return;
@@ -97,8 +93,8 @@ export function* grantBlock(
   if (unit.health <= 0 || amount <= 0) return;
   let gained = Math.min(STACK_LIMIT - unit.block, Math.round(amount));
   if (gained > 0 && state.phase === "battle" && state.battle) {
-    const allied = !("maxHealth" in unit);
-    const pool = allied ? state.team : state.battle.enemies;
+    const allied = !isEnemy(unit);
+    const pool = battlefield(state, allied ? "player" : "enemy");
     if (pool.some((recipient) => recipient.id === unit.id)) {
       const percent = creaturePassive(allied ? state : undefined, unit.species).effects.reduce(
         (sum, effect) => sum + (effect.kind === "blockConversion" ? effect.amount : 0),
@@ -123,9 +119,9 @@ export function* grantBlock(
     amount: gained,
     text: `${unitName(unit)} gains ${gained} Block.`,
   });
-  if (!("maxHealth" in unit) && hasTalent(state, "light.radiant-guard") && roll(state) < 0.1)
+  if (!isEnemy(unit) && hasTalent(state, "light.radiant-guard") && roll(state) < 0.1)
     drawKeyword(state, "light", events);
-  if (!("maxHealth" in unit) && state.boons.includes("ironwood-buckler"))
+  if (!isEnemy(unit) && state.boons.includes("ironwood-buckler"))
     yield* reaction("grantStatus", unit, "thorns", 1, events, state, sharing);
   if (sharing) yield* reaction("shareProtection", state, unit, "block", gained, events);
 }
@@ -146,7 +142,7 @@ export function* grantArmor(
   events: GameEvent[],
 ): Resolution<void> {
   if (unit.health <= 0 || amount <= 0) return;
-  const allied = !("maxHealth" in unit),
+  const allied = !isEnemy(unit),
     before = combat(unit).armor;
   if (allied) {
     if (hasTalent(state, "armor.last-stand") && unit.health < maximumHealth(unit) / 2) amount *= 1.25;
@@ -165,7 +161,7 @@ export function* leechHealth(
 ): Resolution<void> {
   if (lost <= 0) return;
   let amount = Math.round(lost / 2);
-  if (!("maxHealth" in unit)) {
+  if (!isEnemy(unit)) {
     if (afflicted && hasTalent(state, "leech.affliction-siphon")) amount *= 1.1;
     if (hasTalent(state, "leech.deep-siphon")) amount++;
     if (hasTalent(state, "leech.desperate-siphon") && unit.health < maximumHealth(unit) / 2) amount *= 2;
@@ -173,7 +169,7 @@ export function* leechHealth(
   const before = unit.health;
   yield* reaction("restoreHealth", unit, amount, events, false, state);
   const restored = unit.health - before;
-  if (!("maxHealth" in unit) && restored > 0) {
+  if (!isEnemy(unit) && restored > 0) {
     if (hasTalent(state, "leech.blood-debt") && roll(state) < 0.1) gainGold(state, restored, events);
     if (
       hasTalent(state, "leech.sanguine-overflow") &&
@@ -194,7 +190,7 @@ export function* healthThresholds(
   events: GameEvent[],
 ): Resolution<void> {
   const stats = combat(unit);
-  if (!("maxHealth" in unit) && unit.health > 0) {
+  if (!isEnemy(unit) && unit.health > 0) {
     if (before >= maximumHealth(unit) / 2 && unit.health < maximumHealth(unit) / 2) {
       if (hasTalent(state, "armor.steadfast")) yield* reaction("grantArmor", state, unit, 3, events);
       if (hasTalent(state, "health.desperate-guard") && !stats.desperateGuardUsed) {

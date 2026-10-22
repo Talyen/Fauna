@@ -61,6 +61,8 @@ export function canBuyTalent(state: Pick<GameState, "talents" | "keywordXP">, id
   );
 }
 
-export function starterCount(state: Pick<GameState, "discovery">) {
-  return collectedSpecies(state).length === 0 ? 1 : 3;
+export function starterCount(state: Pick<GameState, "discovery"> & Partial<Pick<GameState, "selected">>) {
+  return collectedSpecies(state).length === 0 || state.selected?.some((kind) => species(kind).legendary)
+    ? 1
+    : 3;
 }

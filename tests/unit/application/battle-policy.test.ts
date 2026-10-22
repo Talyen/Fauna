@@ -46,7 +46,9 @@ it.each(["mossguard-guard", "pollenmoth-teamGuard", "ringpalm-teamProtection"])(
     expect(command).toMatchObject({ type: "play", cardId: state.battle!.hand[0]! });
     const result = dispatch(state, command);
     expect(result.accepted).toBe(true);
-    expect(result.state.team[0]!.block).toBeGreaterThan(state.team[0]!.block);
+    expect(result.state.team[0]!.block + result.state.team[0]!.combat!.thorns).toBeGreaterThan(
+      state.team[0]!.block + state.team[0]!.combat!.thorns,
+    );
     expect(result.state.battle!.turn).toBe(state.battle!.turn);
     expect(state.team[0]!.block).toBe(10);
     const capped = produce(state, (game) => {

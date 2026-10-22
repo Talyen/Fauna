@@ -120,7 +120,9 @@
   --target-corner: calc(var(--radius-max) + var(--target-bracket-gap) + var(--target-bracket-width));
   --target-summary-width: 480px;
   --target-control-height: calc(96px * var(--text-scale, 1));
-  --target-readout-height: 60px;
+  --target-readout-height: 44px;
+  --battle-target-rail-width: clamp(180px, 16vw, 300px);
+  --battle-hand-hover-clearance: 24px;
   --target-outcomes-height: 44px;
   --target-denial-duration: 2400ms;
   --selection-gap: 3px;
@@ -176,12 +178,12 @@
   --screen-section-gap: 24px;
   --screen-item-gap: 12px;
   --hand-overlap: 48px;
-  --hand-fan-angle-step: 4deg;
-  --hand-fan-drop-step: 4px;
+  --hand-fan-angle-step: 6deg;
+  --hand-fan-drop-step: 5px;
   --hand-rest-inset: 0px;
   --mana-crystal-size: 18px;
   --battle-creature-width: calc(var(--art-landscape-width) * 1.1);
-  --battle-hand-width: calc(var(--art-portrait-width) * 0.9);
+  --battle-hand-width: var(--art-portrait-width);
   --battle-pile-width: calc(var(--battle-hand-width) * 0.8);
   --battle-dock-gap: clamp(16px, 2.19vw, 42px);
   --hand-side-clearance: calc(var(--battle-hand-width) * 0.32);
@@ -198,7 +200,7 @@
   --discard-back-left: -7.6219512195%;
   --discard-back-top: -5.787037037%;
   --rest-feedback-duration: 1800ms;
-  --battle-hand-height: calc(var(--art-long-side) * 0.9);
+  --battle-hand-height: var(--art-long-side);
   --art-long-side: calc(var(--art-short-side) * 4 / 3);
   --art-landscape-width: var(--art-long-side);
   --art-portrait-width: var(--art-short-side);

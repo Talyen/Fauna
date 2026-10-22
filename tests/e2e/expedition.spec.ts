@@ -1,7 +1,7 @@
 import { chooseBattleCommand } from "../../src/application/battle-policy";
 import { test, expect, type Locator } from "@playwright/test";
 import { definition, species } from "../../src/game/content";
-import { policy, FULL_JOURNEY_SEED } from "../support/game";
+import { policy, FULL_JOURNEY_SEED, FULL_JOURNEY_COMMAND_BUDGET } from "../support/game";
 import { seed, state } from "./support/session";
 import { step } from "./support/journey";
 
@@ -47,7 +47,7 @@ test("one starter grows a lineup through a full expedition", async ({ page }) =>
   await activate(page.getByRole("button", { name: `Choose ${name}`, exact: true }));
   await activate(page.getByRole("button", { name: "Begin journey", exact: true }));
   expect((await state(page)).lineup).toEqual(["ally-0"]);
-  for (let i = 0; i < 400; i++) {
+  for (let i = 0; i < FULL_JOURNEY_COMMAND_BUDGET; i++) {
     const s = await state(page);
     if (s.phase === "victory") break;
     expect(s.phase).not.toBe("defeat");

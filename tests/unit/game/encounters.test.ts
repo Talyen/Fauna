@@ -84,7 +84,7 @@ describe("journey encounters", () => {
       expect(s.encounter).toBe(index);
       if (s.support) expect(s.support.encounter).toBe(index);
       expect(encounterSource(s).name).toBe(index % 4 === 3 ? "Boss" : "Combat");
-      expect(encounterSource(s).enemies).toHaveLength(Math.min(3, index + 1));
+      expect(encounterSource(s).enemies).toHaveLength(index % 4 === 3 ? 1 : Math.min(3, index + 1));
       expect(decodeSave(encodeSave(enter(s)))).toEqual(enter(s));
       const route = enter(s).expedition;
       s = winBattle(enter(s));

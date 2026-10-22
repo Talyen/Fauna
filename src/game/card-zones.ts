@@ -3,17 +3,29 @@ import type { GameEvent, GameState } from "./types";
 import { shuffle, roll } from "./random";
 import { cardKeywords, creaturePassive } from "./progression";
 
-export const MAX_HAND_SIZE = 7;
+export const MAX_HAND_SIZE = 6;
 // Bound generated cards and their overflow within the supported save size.
 export const MAX_BATTLE_CARDS = 256;
 
+export function recycleDiscard(
+  state: GameState,
+  zones: { draw: string[]; discard: string[] } = state.battle!,
+) {
+  if (!zones.draw.length && zones.discard.length) zones.draw.push(...shuffle(state, zones.discard.splice(0)));
+}
+export function receiveCard(state: GameState, id: string) {
+  fillHand(state);
+  const battle = state.battle!;
+  (battle.hand.length < MAX_HAND_SIZE ? battle.hand : battle.buffer).push(id);
+}
 function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
   const battle = state.battle!;
   (battle.hand.length < MAX_HAND_SIZE ? battle.hand : battle.buffer).push(id);
   const original = state.cards.find((entry) => entry.id === id)!;
   // Copy insertion and buffer promotion are not draws and cannot recursively copy.
   for (const reader of state.team) {
-    if (reader.health <= 0 || state.cards.length >= MAX_BATTLE_CARDS) continue;
+    if (reader.health <= 0 || state.cards.length >= MAX_BATTLE_CARDS || battle.copySerial >= MAX_BATTLE_CARDS)
+      continue;
     const chance = creaturePassive(state, reader.species).effects.reduce(
       (amount, effect) => amount + (effect.kind === "wellRead" ? effect.amount : 0),
       0,
@@ -39,6 +51,7 @@ export function fillHand(state: GameState) {
 export function draw(state: GameState, count: number, events: GameEvent[] = []) {
   fillHand(state);
   const b = state.battle!;
+  recycleDiscard(state);
   // Knocked-out owners retain inert slots, so replacing them cannot refresh spent cards.
   const alive = state.team.filter((c) => c.health > 0);
   const eligible = (id: string) =>
@@ -54,6 +67,7 @@ export function draw(state: GameState, count: number, events: GameEvent[] = []) 
     if (index < 0) break;
     const card = b.draw.splice(index, 1)[0]!;
     receiveDraw(state, card, events);
+    recycleDiscard(state);
   }
 }
 
@@ -81,5 +95,6 @@ export function drawKeyword(
   if (index >= 0) {
     const id = battle.draw.splice(index, 1)[0]!;
     receiveDraw(state, id, events);
+    recycleDiscard(state);
   }
 }

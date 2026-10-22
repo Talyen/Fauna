@@ -65,7 +65,9 @@ export function ActionDetails({
           />
         </p>
       )}
-      {card.temporary ? <p>Copy · Lasts for this battle</p> : null}
+      {card.temporary ? (
+        <p>{def.effect === "pearl" ? "Lasts for this battle" : "Copy · Lasts for this battle"}</p>
+      ) : null}
       <CardRules
         card={def}
         power={enemyPower}
@@ -103,10 +105,13 @@ export function CreatureDetails({
   const info = species(kind);
   return (
     <div className="card-details">
-      <strong>{name ?? info.name}</strong>
+      <strong>
+        {name ?? info.name}
+        {info.legendary ? " · Legendary" : ""}
+      </strong>
       {block ? <p>{block} block</p> : null}
       <CombatStatus combat={combat} sharedDodge={sharedDodge} details />
-      {!name || speciesKit ? (
+      {!name || speciesKit || info.legendary ? (
         <>
           {name && speciesKit ? <strong>Species kit · {info.name}</strong> : null}
           {speciesKit ? <strong>{info.trait}</strong> : null}

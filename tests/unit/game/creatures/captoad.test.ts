@@ -186,14 +186,17 @@ it("removes outgoing overflow too, while preserving unrelated cards and filling 
     });
     const others = draft.cards.filter((card) => card.ownerId !== "ally-0").map((card) => card.id);
     const captoad = draft.cards.filter((card) => card.ownerId === "ally-0").map((card) => card.id);
-    draft.battle!.hand = [draft.cards.find((card) => card.definitionId === "captoad-swap")!.id, ...others];
-    draft.battle!.buffer = captoad.filter((id) => !draft.battle!.hand.includes(id));
+    draft.battle!.hand = [
+      draft.cards.find((card) => card.definitionId === "captoad-swap")!.id,
+      ...others.slice(0, 5),
+    ];
+    draft.battle!.buffer = [...others.slice(5), ...captoad.filter((id) => !draft.battle!.hand.includes(id))];
     draft.battle!.draw = [];
   });
   const result = play(game).state;
-  expect(result.battle!.hand.slice(0, 6)).toEqual(game.battle!.hand.slice(1));
-  expect(result.battle!.hand).toHaveLength(7);
-  expect(result.battle!.buffer).toHaveLength(1);
+  expect(result.battle!.hand.slice(0, 5)).toEqual(game.battle!.hand.slice(1));
+  expect(result.battle!.hand).toHaveLength(6);
+  expect(result.battle!.buffer).toHaveLength(2);
   expect(result.battle!.draw).toHaveLength(1);
   expect(result.cards.every((card) => card.ownerId !== "ally-0")).toBe(true);
   expect(decodeSave(encodeSave(result))).toEqual(result);

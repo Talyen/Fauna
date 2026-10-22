@@ -1,3 +1,4 @@
+import { battlefield } from "../../game/battlefield";
 import { KeywordIcon } from "../shared/keyword-icon";
 import { sharedDodgeChance } from "../../game/combat/index";
 import { combatStatuses } from "../shared/combat/combat-status";
@@ -18,11 +19,12 @@ export function TargetPreview({
   targetId: string;
 }) {
   if (!result?.accepted) return null;
-  const old =
-    before.team.find((c) => c.id === targetId) ?? before.battle?.enemies.find((e) => e.id === targetId);
-  const next =
-    result.state.team.find((c) => c.id === targetId) ??
-    result.state.battle?.enemies.find((e) => e.id === targetId);
+  const old = [...battlefield(before, "player"), ...battlefield(before, "enemy")].find(
+    (unit) => unit.id === targetId,
+  );
+  const next = [...battlefield(result.state, "player"), ...battlefield(result.state, "enemy")].find(
+    (unit) => unit.id === targetId,
+  );
   if (!old || !next) return null;
   const events = result.events.filter((e) => e.targetId === targetId);
   const previousStatuses = combatStatuses(old.combat, sharedDodgeChance(before, old));

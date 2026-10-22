@@ -11,6 +11,9 @@ export function primaryAbilityValue(card: CardDefinition, value: number, power =
     case "teamGuard":
       return scalePower(value, power);
     // Mixed protection scales its Block branch only, after the shared coin flip.
+    case "procession":
+    case "createPearls":
+    case "pearl":
     case "teamProtection":
     case "waterThorns":
     case "recover":

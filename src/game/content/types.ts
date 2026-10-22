@@ -21,9 +21,11 @@ export type SpeciesId =
   | "cadenza"
   | "stillara"
   | "sternshell"
-  | "neradora";
+  | "neradora"
+  | "memento";
 export type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
+  | { kind: "courtRemembers"; amount: number }
   | { kind: "wellRead"; amount: number }
   | { kind: "livingChorus"; amount: number }
   | { kind: "tidalRegeneration"; amount: number }
@@ -55,6 +57,7 @@ export interface Species {
   name: string;
   title: string;
   health: number;
+  legendary?: true;
   color: string;
   trait: string;
   passiveTiers: readonly [PassiveTier, PassiveTier, PassiveTier, PassiveTier, PassiveTier, PassiveTier];

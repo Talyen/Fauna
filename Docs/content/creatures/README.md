@@ -24,3 +24,5 @@
 - [Cadenza](cadenza.md) · [implementation](../../../src/game/content/creatures/cadenza.ts)
 
 - [Rookhaven](rookhaven.md) · [implementation](../../../src/game/content/creatures/rookhaven.ts)
+
+- [Memento](memento.md) — Legendary; Echoes and Pearls

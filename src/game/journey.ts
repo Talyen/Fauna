@@ -1,3 +1,6 @@
+import { battlefield } from "./battlefield";
+import { bossDeck, removeDepartedMinions } from "./combat/legendary";
+import { species } from "./content";
 import { merchantPriceRange } from "./destinations";
 import { collectedSpecies, starterCount, creaturePassive, KEYWORDS, hasTalent } from "./progression";
 import { BOONS, SPECIES, FIRST_RUN_STARTERS } from "./content";
@@ -14,12 +17,14 @@ import { shuffle, roll } from "./random";
 import { draw, drawKeyword } from "./card-zones";
 import { bossEncounter, encounterSource, finalEncounter, encounterPacks } from "./encounters";
 import type { GameEvent, GameState, Lifecycle, BattleState, RewardState, StateAt } from "./types";
-import { living, rebuildCards, prepareLineup } from "./team";
+import { rebuildCards, prepareLineup } from "./team";
 const OPTIONAL_DESTINATION_CHANCE = 0.25;
 
 export function offerStarters(state: GameState) {
   const collected = collectedSpecies(state);
-  const pool = collected.length ? collected : FIRST_RUN_STARTERS;
+  const pool = (collected.length ? collected : FIRST_RUN_STARTERS).filter(
+    (kind) => !state.selected.length || !species(kind).legendary,
+  );
   if (state.selected.length === starterCount(state)) {
     state.starterOffers = [];
     return;
@@ -37,7 +42,9 @@ function prepareEncounter(state: GameState) {
       : null;
   route.recruit =
     route.lastRoom !== "recruit" && state.roster.length < 5 && roll(state) < OPTIONAL_DESTINATION_CHANCE
-      ? SPECIES[Math.floor(roll(state) * SPECIES.length)]!.id
+      ? SPECIES.filter((entry) => !entry.legendary)[
+          Math.floor(roll(state) * SPECIES.filter((entry) => !entry.legendary).length)
+        ]!.id
       : null;
   const stock =
     kind === "merchant"
@@ -65,7 +72,7 @@ function prepareEncounter(state: GameState) {
       : null;
 }
 export function intents(state: BattleState) {
-  const alive = living(state);
+  const alive = battlefield(state, "player").filter((unit) => unit.health > 0);
   for (const enemy of state.battle.enemies) {
     if (enemy.health > 0)
       enemy.targetId = alive.length ? alive[Math.floor(roll(state) * alive.length)]!.id : state.team[0]!.id;
@@ -101,7 +108,7 @@ export function beginBattle(state: StateAt<"teamSelection">, events: GameEvent[]
     buffer: [],
     discard: [],
     enemies: encounter.enemies.map((e, i) => {
-      const enemy = {
+      const enemy: import("./types").Enemy = {
         id: `enemy-${i}`,
         name: e.name,
         species: e.species,
@@ -129,6 +136,10 @@ export function beginBattle(state: StateAt<"teamSelection">, events: GameEvent[]
     expedition: state.expedition,
     journey: { ...state.journey, outcome: null },
   });
+  for (const enemy of active.battle.enemies)
+    if (species(enemy.species).legendary) {
+      enemy.deck = bossDeck(active, enemy);
+    }
   draw(active, TURN_DRAW + (state.boons.includes("tattered-pages") ? 1 : 0), events);
   if (hasTalent(state, "nature.ecosystem")) drawKeyword(active, "nature", events);
   for (const unit of state.team) {
@@ -188,10 +199,7 @@ function finishBattle(state: BattleState, defeated: boolean) {
     xp,
     currency,
     outcome,
-    recruits:
-      defeated || outcome === "victory" || bossEncounter(state)
-        ? []
-        : encounterSource(state).enemies.map((enemy) => enemy.species),
+    recruits: defeated ? [] : encounterSource(state).enemies.map((enemy) => enemy.species),
     boons,
   };
   // Combat identity ends here. Receipts never refer to mutable roster or enemy objects.
@@ -204,31 +212,17 @@ function finishBattle(state: BattleState, defeated: boolean) {
       journey: { ...state.journey, outcome },
       reward: { ...receipt, outcome, recruits: [], boons: [] },
     });
-  else if (outcome === "victory")
-    enterPhase(state, {
-      ...finished,
-      phase: "victory",
-      journey: { ...state.journey, outcome },
-      reward: { ...receipt, outcome, recruits: [], boons: [] },
-    });
-  else if (receipt.recruits.length)
+  else
     enterPhase(state, {
       ...finished,
       phase: "recruit",
       journey: state.journey,
-      reward: { ...receipt, outcome: "next", boons: [] },
+      reward: { ...receipt, outcome },
     });
-  else if (boons.length)
-    enterPhase(state, {
-      ...finished,
-      phase: "boon",
-      journey: state.journey,
-      reward: { ...receipt, outcome: "next", recruits: [] },
-    });
-  else advanceEncounter(state);
 }
 
 export function settle(state: BattleState, events: GameEvent[]): boolean {
+  removeDepartedMinions(state);
   if (![...state.team, ...state.reserves].some((c) => c.health > 0)) {
     finishBattle(state, true);
     events.push({ kind: "knockout", text: "Your journey has ended." });
@@ -254,7 +248,16 @@ export function settle(state: BattleState, events: GameEvent[]): boolean {
   return false;
 }
 export function afterRewards(state: RewardState) {
-  advanceEncounter(state);
+  if (state.phase === "recruit" && state.reward.outcome === "next" && state.reward.boons.length) {
+    enterPhase(state, { ...state, phase: "boon", reward: { ...state.reward, recruits: [] } });
+  } else if (state.reward.outcome === "victory") {
+    enterPhase(state, {
+      ...state,
+      phase: "victory",
+      journey: { ...state.journey, outcome: "victory" },
+      reward: { ...state.reward, outcome: "victory", recruits: [], boons: [] },
+    });
+  } else advanceEncounter(state);
 }
 function advanceEncounter(state: BattleState | RewardState) {
   state.encounter++;

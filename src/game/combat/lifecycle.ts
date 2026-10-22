@@ -1,3 +1,4 @@
+import { isEnemy, battlefield } from "../battlefield";
 import { roll } from "../random";
 import { draw } from "../card-zones";
 import { hasTalent, creaturePassive } from "../progression";
@@ -9,12 +10,7 @@ import { reaction, type Resolution } from "./operations";
 
 export function* tickStatuses(state: GameState, unit: Combatant, events: GameEvent[]): Resolution<void> {
   const stats = combat(unit);
-  if (
-    !("maxHealth" in unit) &&
-    unit.health > 0 &&
-    stats.poison > 0 &&
-    state.boons.includes("plague-doctors-mask")
-  ) {
+  if (!isEnemy(unit) && unit.health > 0 && stats.poison > 0 && state.boons.includes("plague-doctors-mask")) {
     const removed = Math.min(2, stats.poison);
     stats.poison -= removed;
     events.push({
@@ -43,7 +39,7 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
     if (amount <= 0) continue;
     // Ticks bypass Block and do not reapply their own buildup.
     const source =
-      [...state.team, ...state.reserves, ...state.battle!.enemies].find(
+      [...battlefield(state, "player"), ...state.reserves, ...battlefield(state, "enemy")].find(
         (candidate) => candidate.id === stats.statusSources[status],
       ) ?? unit;
     // Cleanse reactions may remove the wound, but cannot revoke healing earned by this tick.
@@ -54,9 +50,11 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
       stats.bleedLeech = [];
       let remaining = lost;
       for (const payout of payouts) {
-        const owner = [...state.team, ...state.reserves, ...state.battle!.enemies].find(
-          (candidate) => candidate.id === payout.sourceId,
-        );
+        const owner = [
+          ...battlefield(state, "player"),
+          ...state.reserves,
+          ...battlefield(state, "enemy"),
+        ].find((candidate) => candidate.id === payout.sourceId);
         const paid = Math.min(remaining, payout.amount);
         if (owner) yield* reaction("leechHealth", state, owner, paid, events, true);
         remaining -= paid;
@@ -72,7 +70,7 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
             ? 0
             : Math.round(amount / 2)
           : Math.max(0, amount - Math.max(1, Math.round(amount * 0.2)));
-    if ("maxHealth" in unit && !("maxHealth" in source)) {
+    if (isEnemy(unit) && !isEnemy(source)) {
       if (status === "burn" && hasTalent(state, "burn.smoldering") && roll(state) < 0.1) stats.burn = amount;
       if (status === "poison") {
         if (stats.controlled === "freeze" && hasTalent(state, "freeze.cryo-preservation"))
@@ -98,8 +96,8 @@ export function* startAction(
   stats.firstAttackUsed = false;
   stats.skipped = !!stats.controlled;
   if (state?.phase === "battle" && state.battle && unit.health > 0) {
-    const enemy = "maxHealth" in unit;
-    const row = enemy ? state.battle.enemies : state.team;
+    const enemy = isEnemy(unit);
+    const row = battlefield(state, enemy ? "enemy" : "player");
     // The allied turn number advances after startAction; enemies act on the current number
     const turn = state.battle.turn + Number(!enemy);
     if (turn % 2 === 0 && row.some((deployed) => deployed.id === unit.id)) {
@@ -120,12 +118,7 @@ export function* startAction(
     });
     stats.controlTurns = Math.max(0, stats.controlTurns - 1);
     if (stats.controlTurns === 0) {
-      if (
-        stats.controlled === "freeze" &&
-        "maxHealth" in unit &&
-        state &&
-        hasTalent(state, "freeze.thaw-dividend")
-      )
+      if (stats.controlled === "freeze" && isEnemy(unit) && state && hasTalent(state, "freeze.thaw-dividend"))
         draw(state, 1, events);
       stats.controlled = null;
       stats.cooldown = 3;

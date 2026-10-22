@@ -1,3 +1,4 @@
+import { isEnemy, battlefield } from "../battlefield";
 import { packetPolicy, type DamagePacket, type AttackPacket } from "./policy";
 import { roll } from "../random";
 import { draw, drawKeyword } from "../card-zones";
@@ -34,7 +35,7 @@ export function* bounce(
 ): Resolution<void> {
   if (!state.battle) return;
   const { effect } = action;
-  const allied = !("maxHealth" in source);
+  const allied = !isEnemy(source);
   const pool =
     effect === "heal"
       ? allied
@@ -88,7 +89,7 @@ export function* hit(
   const policy = packetPolicy(options);
   const wrongFoot =
     target.combat?.blind && policy.wrongFoot
-      ? creaturePassive("maxHealth" in source ? undefined : state, source.species).effects.reduce(
+      ? creaturePassive(isEnemy(source) ? undefined : state, source.species).effects.reduce(
           (total, effect) => total + (effect.kind === "wrongFoot" ? effect.amount : 0),
           0,
         )
@@ -105,7 +106,7 @@ export function* hit(
     target.health > 0 &&
     policy.resonance
   ) {
-    const chance = creaturePassive("maxHealth" in source ? undefined : state, source.species).effects.reduce(
+    const chance = creaturePassive(isEnemy(source) ? undefined : state, source.species).effects.reduce(
       (total, effect) => total + (effect.kind === "resonance" ? effect.amount : 0),
       0,
     );
@@ -150,8 +151,8 @@ export function* resolveHit(
   const { attack, direct } = policy;
   const leech = "leech" in options && options.leech;
   const cardLeech = "cardLeech" in options && options.cardLeech;
-  const alliedSource = !("maxHealth" in source),
-    alliedTarget = !("maxHealth" in target);
+  const alliedSource = !isEnemy(source),
+    alliedTarget = !isEnemy(target);
   const stats = combat(target),
     before = target.health;
   const depletions: ArmorDepletion[] = [];
@@ -313,7 +314,7 @@ export function* resolveHit(
       damage *= 0.5;
   }
   if (type === "burn" || type === "freeze") {
-    const protectors = alliedTarget ? state.team : (state.battle?.enemies ?? []);
+    const protectors = battlefield(state, alliedTarget ? "player" : "enemy");
     // Use the strongest deployed protection; swaps and knockouts change it immediately.
     const resistance = protectors.reduce((best, unit) => {
       if (unit.health <= 0) return best;

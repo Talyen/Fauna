@@ -1,3 +1,6 @@
+import { PEARL } from "./content/creatures/memento";
+import { battlefield } from "./battlefield";
+import { ownedCards } from "./team";
 import { needsCampfire, merchantPriceRange } from "./destinations";
 import { freeze } from "immer";
 import { MAX_HAND_SIZE } from "./card-zones";
@@ -21,10 +24,11 @@ export function decodeSave(raw: string): GameState {
   );
   const collected = collectedSpecies(s);
   const starterPool = collected.length ? collected : FIRST_RUN_STARTERS;
+  const offerPool = starterPool.filter((kind) => !s.selected.length || !species(kind).legendary);
   const drafting = s.phase === "draft" && s.selected.length < starterCount(s);
   invalid(
-    new Set(s.starterOffers).size !== (drafting ? Math.min(3, starterPool.length) : 0) ||
-      s.starterOffers.some((kind) => !starterPool.includes(kind)) ||
+    new Set(s.starterOffers).size !== (drafting ? Math.min(3, offerPool.length) : 0) ||
+      s.starterOffers.some((kind) => !offerPool.includes(kind)) ||
       s.starterOffers.length !== (drafting ? 3 : 0),
   );
   if (s.journey) {
@@ -40,7 +44,7 @@ export function decodeSave(raw: string): GameState {
           receipt.encounter < s.encounter - 1 ||
           s.phase === "battle" ||
           (receipt.encounter === s.encounter - 1 && receipt.outcome !== "next") ||
-          (receipt.outcome === "victory" && s.phase !== "victory") ||
+          (receipt.outcome === "victory" && !["victory", "recruit", "boon"].includes(s.phase)) ||
           (receipt.outcome === "defeat" && (s.phase !== "defeat" || s.journey.outcome !== "defeat")),
       );
     if (summary.lastBattle)
@@ -87,7 +91,10 @@ export function decodeSave(raw: string): GameState {
     s.cards.some(
       (c) =>
         !s.team.some(
-          (t) => t.id === c.ownerId && CARDS.some((d) => d.id === c.definitionId && d.species === t.species),
+          (t) =>
+            t.id === c.ownerId &&
+            (CARDS.some((d) => d.id === c.definitionId && d.species === t.species) ||
+              (c.temporary && c.definitionId === PEARL.id && t.species === "memento")),
         ),
     ),
   );
@@ -102,11 +109,12 @@ export function decodeSave(raw: string): GameState {
     ),
   );
   invalid(permanentCards.some((card) => card.id.startsWith("copy-")));
-  if (s.battle) invalid(s.battle.copySerial !== s.cards.length - permanentCards.length);
+
   for (const creature of s.team)
     for (const def of CARDS.filter((d) => d.species === creature.species))
       invalid(
-        permanentCards.filter((c) => c.ownerId === creature.id && c.definitionId === def.id).length !== 1,
+        permanentCards.filter((c) => c.ownerId === creature.id && c.definitionId === def.id).length !==
+          (species(creature.species).legendary ? 2 : 1),
       );
   for (const keyword of KEYWORDS) {
     const bought = TALENTS.filter((t) => t.keyword === keyword && s.talents.includes(t.id));
@@ -125,10 +133,18 @@ export function decodeSave(raw: string): GameState {
   else
     invalid(
       s.team.length < 1 ||
-        s.team.length !== Math.min(3, s.roster.length) ||
-        permanentCards.length !== s.team.length * 3 ||
-        s.lineup.length !== s.team.length,
+        permanentCards.length !==
+          s.team.reduce((sum, unit) => sum + ownedCards(unit.id, unit.species).length, 0),
     );
+  for (const row of [
+    s.team,
+    s.lineup.map((id) => [...s.team, ...s.reserves].find((unit) => unit.id === id)!),
+  ])
+    invalid(
+      (row.length === 0 && s.phase !== "draft") ||
+        (row.some((unit) => species(unit.species).legendary) && row.length !== 1),
+    );
+  invalid(s.selected.some((kind) => species(kind).legendary) && s.selected.length !== 1);
   if (s.phase === "teamSelection" || s.phase === "support" || s.phase === "campfire")
     invalid(s.team.some((c, index) => c.id !== s.lineup[index]));
   if (s.support) {
@@ -165,7 +181,7 @@ export function decodeSave(raw: string): GameState {
         receipt.currency !== s.reward.currency ||
         KEYWORDS.some((keyword) => (receipt.xp[keyword] ?? 0) !== (s.reward!.xp[keyword] ?? 0)),
     );
-    invalid(bossEncounter(s) ? s.reward.recruits.length > 0 : s.reward.boons.length > 0);
+    invalid((!bossEncounter(s) || finalEncounter(s)) && s.reward.boons.length > 0);
     invalid(
       !unique(s.reward.boons) ||
         (s.reward.recruits.length > 0 &&
@@ -198,7 +214,8 @@ export function decodeSave(raw: string): GameState {
             !CARDS.some((card) => card.id === enemy.lastAbility && card.species === enemy.species)) ||
           enemy.combat.deathDoorUsed ||
           enemy.combat.grace > 0 ||
-          !s.team.some((c) => c.id === enemy.targetId),
+          (!battlefield(s, "player").some((c) => c.id === enemy.targetId) &&
+            !s.team.some((c) => c.id === enemy.targetId)),
       );
     });
     const zones = [...b.draw, ...b.hand, ...b.buffer, ...b.discard];
@@ -222,7 +239,51 @@ export function decodeSave(raw: string): GameState {
     }
   }
   invalid(s.phase === "victory" && (!finalEncounter(s) || s.wins === 0));
-  const allCombatants = [...s.team, ...s.reserves, ...(s.battle?.enemies ?? [])];
+  const allCombatants = [
+    ...s.team,
+    ...s.reserves,
+    ...(s.battle?.enemies ?? []),
+    ...(s.battle?.minions ?? []),
+  ];
+  if (s.battle) {
+    for (const enemy of s.battle.enemies) {
+      invalid(!!species(enemy.species).legendary !== !!enemy.deck);
+      if (enemy.deck) {
+        const deck = enemy.deck;
+        const zones = [...deck.draw, ...deck.hand, ...deck.buffer, ...deck.discard];
+        const defs = CARDS.filter((card) => card.species === enemy.species);
+        invalid(
+          zones.length !== 6 + deck.created ||
+            zones.filter((id) => id === PEARL.id).length !== deck.created ||
+            (deck.buffer.length > 0 && deck.hand.length < MAX_HAND_SIZE),
+        );
+        for (const def of defs) invalid(zones.filter((id) => id === def.id).length !== 2);
+        invalid(zones.some((id) => id !== PEARL.id && !defs.some((def) => def.id === id)));
+      }
+    }
+    for (const unit of s.battle.minions ?? []) {
+      const owners = unit.minion.side === "player" ? [...s.team, ...s.reserves] : s.battle.enemies;
+      const owner = owners.find((entry) => entry.id === unit.minion.ownerId);
+      invalid(
+        !owner ||
+          owner.species !== "memento" ||
+          unit.health > unit.maxHealth ||
+          ![6, 8, 10, 12].includes(unit.maxHealth) ||
+          ![0, 1].some((slot) => unit.id === `echo-${unit.minion.ownerId}-${slot}`) ||
+          unit.combat.deathDoorUsed ||
+          unit.combat.grace > 0,
+      );
+      invalid(
+        (s.battle.minions ?? []).filter((other) => other.minion.ownerId === unit.minion.ownerId).length > 2,
+      );
+      invalid(
+        unit.health > 0 &&
+          (!owner ||
+            owner.health === 0 ||
+            (unit.minion.side === "player" && !s.team.some((entry) => entry.id === owner.id))),
+      );
+    }
+  }
   invalid(!unique(allCombatants.map((unit) => unit.id)));
   for (const unit of allCombatants)
     if (unit.combat) {

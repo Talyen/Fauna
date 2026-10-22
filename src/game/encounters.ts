@@ -51,14 +51,14 @@ export const BOSSES = [
   {
     id: "briar-warden",
     encounter: 3,
-    name: "The Briar Warden",
-    pack: ["emberback", "mossguard", "pollenmoth"],
+    name: "Memento",
+    pack: ["memento"],
   },
   {
     id: "hollow-crown",
     encounter: 7,
-    name: "The Hollow Crown",
-    pack: ["prismram", "emberback", "pollenmoth"],
+    name: "Memento",
+    pack: ["memento"],
   },
 ] as const;
 export function encounterPacks(encounter: number) {

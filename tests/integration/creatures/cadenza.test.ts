@@ -105,12 +105,12 @@ it("Echoes Remember recovers other creatures' cards with seeded randomness and n
 it("Echoes Remember preserves overflow ordering and recovers exactly one card when upgraded", () => {
   const game = produce(ready("echoes-remember"), (draft) => {
     draft.cards.find((card) => card.id === draft.battle!.hand[0])!.level = 2;
-    draft.battle!.hand.push(...draft.battle!.draw.splice(0, 6));
+    draft.battle!.hand.push(...draft.battle!.draw.splice(0, 5));
     draft.battle!.buffer.push(draft.battle!.draw.pop()!);
     draft.battle!.discard.push(draft.battle!.draw.pop()!);
   });
   const result = play(game);
-  expect(result.state.battle!.hand).toHaveLength(7);
+  expect(result.state.battle!.hand).toHaveLength(6);
   expect(result.state.battle!.buffer).toHaveLength(1);
   expect(result.state.battle!.hand.at(-1)).toBe(game.battle!.buffer[0]);
   expect(result.state.battle!.discard).toHaveLength(1);

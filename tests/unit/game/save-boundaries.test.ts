@@ -169,7 +169,9 @@ it.each([999_999, 1_000_000])("keeps final victory saveable with %s previous win
   });
   const battle = accept(ready, { type: "beginBattle" });
   expect(decodeSave(encodeSave(battle))).toEqual(battle);
-  const won = winBattle(battle);
+  const reward = winBattle(battle);
+  expect(decodeSave(encodeSave(reward))).toEqual(reward);
+  const won = accept(reward, { type: "recruit", species: reward.reward!.recruits[0]! });
   expect(won.phase).toBe("victory");
   expect(won.wins).toBe(1_000_000);
   expect(decodeSave(encodeSave(won))).toEqual(won);

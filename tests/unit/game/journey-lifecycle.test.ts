@@ -6,8 +6,7 @@ import { decodeSave, encodeSave } from "../../../src/game/save";
 import { chooseBattleCommand } from "../../../src/application/battle-policy";
 import type { BattleState, Command, GameState, RewardState } from "../../../src/game/types";
 
-// Compare gameplay, RNG and ordered output while deliberately excluding the obsolete live
-// battle receipt and out-of-combat status data that the lifecycle refactor retires.
+// Compare gameplay, RNG and ordered output across the current journey rules.
 function fingerprint(state: GameState, events: unknown) {
   const { version: _version, battle, ...rest } = state;
   const projected = {
@@ -92,7 +91,8 @@ describe("journey lifecycle behavior baseline", () => {
           species: state.reward!.recruits[0]!,
           ...(state.roster.length === 5 ? { replace: state.lineup[0]! } : {}),
         });
-      } else if (state.phase === "boon") step({ type: "chooseBoon", boon: state.reward!.boons[0]! });
+      }
+      if (state.phase === "boon") step({ type: "chooseBoon", boon: state.reward!.boons[0]! });
       if (state.phase === "victory" || state.phase === "defeat") break;
       state = produce(state, (draft) => {
         draft.team[0]!.health = 1;

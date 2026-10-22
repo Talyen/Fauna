@@ -230,8 +230,8 @@ it("opening, next-turn and keyword draws copy, while empty draws and buffer prom
   });
   const opening = accept(destination, { type: "beginBattle" });
   expect(copies(opening)).toHaveLength(4);
-  expect(opening.battle!.hand).toHaveLength(7);
-  expect(opening.battle!.buffer).toHaveLength(1);
+  expect(opening.battle!.hand).toHaveLength(6);
+  expect(opening.battle!.buffer).toHaveLength(2);
   roundTrip(opening);
   const next = accept(opening, { type: "endTurn" });
   expect(copies(next).length).toBeGreaterThan(4);
@@ -243,7 +243,7 @@ it("opening, next-turn and keyword draws copy, while empty draws and buffer prom
   expect(definition(copies(keyword)[0]!.definitionId)).toMatchObject({ damageType: "light" });
   const empty = produce(keyword, (draft) => {
     draft.battle!.hand.push(...draft.battle!.draw.splice(0));
-    draft.battle!.buffer.push(...draft.battle!.hand.splice(7));
+    draft.battle!.buffer.push(...draft.battle!.hand.splice(6));
   });
   const promoted = produce(empty, (draft) => {
     draft.battle!.discard.push(draft.battle!.hand.pop()!);
@@ -294,7 +294,7 @@ it("copies survive play, discard, reshuffle, save/resume and copying a previousl
   roundTrip(game);
   game = produce(game, (draft) => {
     draft.battle!.hand.push(...draft.battle!.draw.splice(0));
-    draft.battle!.buffer.push(...draft.battle!.hand.splice(7));
+    draft.battle!.buffer.push(...draft.battle!.hand.splice(6));
     draw(draft, 1);
   });
   expect(copies(game)).toHaveLength(2);

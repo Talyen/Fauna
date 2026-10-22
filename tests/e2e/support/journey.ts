@@ -14,6 +14,10 @@ export async function step(
     c = selected ?? policy(s);
   if (c.type === "beginBattle") {
     await activate(page.locator(".app:not([inert]) [data-encounter]"));
+  } else if (c.type === "visitCampfire") {
+    await activate(page.getByRole("button", { name: /^Rest/ }));
+  } else if (c.type === "rest") {
+    await activate(page.getByRole("button", { name: /^Rest/ }));
   } else if (c.type === "recruit") {
     await expect(page.getByRole("button", { name: "Skip", exact: true })).toHaveCount(0);
     await expect(page.locator(".boon-choice")).toHaveCount(0);
@@ -34,8 +38,9 @@ export async function step(
   } else if (c.type === "swap") {
     await activate(page.getByRole("button", { name: "Swap", exact: true }));
     const dialog = page.getByRole("dialog");
-    await activate(dialog.locator(`[data-actor-id="${c.activeId}"] .creature-card`));
+    if (c.activeId) await activate(dialog.locator(`[data-actor-id="${c.activeId}"] .creature-card`));
     await activate(dialog.locator(`[data-actor-id="${c.reserve}"] .creature-card`));
+    if (!c.activeId) await activate(dialog.getByRole("button", { name: "Deploy selected" }));
   } else if (c.type === "chooseBoon") {
     await expect(page.getByRole("button", { name: /^Recruit / })).toHaveCount(0);
     await activate(
@@ -48,7 +53,8 @@ export async function step(
     await activate(page.locator(`.app:not([inert]) .hand [data-card-id="${c.cardId}"]`));
     if (c.targetId) {
       await activate(
-        c.targetId.startsWith("enemy-")
+        s.battle!.enemies.some((unit) => unit.id === c.targetId) ||
+          (s.battle!.minions ?? []).some((unit) => unit.id === c.targetId && unit.minion.side === "enemy")
           ? page.locator(`.app:not([inert]) .enemy-row [data-enemy-id="${c.targetId}"]`)
           : page.locator(`.app:not([inert]) .player-row [data-actor-id="${c.targetId}"] .creature-card`),
       );

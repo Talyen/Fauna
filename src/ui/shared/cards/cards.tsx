@@ -13,6 +13,7 @@ import type { Card, Creature, Enemy, GameState } from "../../../game/types";
 type CreatureProps = {
   progression?: Pick<GameState, "discovery">;
   kind: SpeciesId;
+  artworkId?: string;
   name?: string;
   health?: number;
   maxHealth?: number;
@@ -49,6 +50,7 @@ function useCardTooltip(enabled: boolean) {
 export function CreatureCard({
   progression,
   kind,
+  artworkId,
   name,
   health,
   maxHealth,
@@ -81,7 +83,7 @@ export function CreatureCard({
   const artwork = (
     <ArtCard
       aspect="creature"
-      artwork={assetUrl(`creature.${kind}`)}
+      artwork={assetUrl(artworkId ?? `creature.${kind}`)}
       control={health === 0 ? null : combat?.controlled}
       presentation={presentation}
       className={[selected ? "selected" : "", invalidTarget ? "invalid-target" : ""].join(" ")}
@@ -165,10 +167,21 @@ export function CreatureCard({
 export function AllyCard({
   creature,
   ...props
-}: { creature: Creature } & Omit<CreatureProps, "kind" | "health" | "block">) {
+}: { creature: Creature | Enemy } & Omit<CreatureProps, "kind" | "health" | "block">) {
   return (
     <CreatureCard
       actorId={creature.id}
+      artworkId={"minion" in creature && creature.minion ? "minion.echo" : undefined}
+      name={"name" in creature ? creature.name : undefined}
+      maxHealth={"maxHealth" in creature ? creature.maxHealth : undefined}
+      tooltipContent={
+        "minion" in creature && creature.minion ? (
+          <div className="card-details">
+            <strong>Echo · Minion</strong>
+            <p>Attacks through The Court Remembers</p>
+          </div>
+        ) : undefined
+      }
       kind={creature.species}
       health={creature.health}
       block={creature.block}
@@ -184,6 +197,15 @@ export function EnemyCard({
   return (
     <CreatureCard
       kind={enemy.species}
+      artworkId={enemy.minion ? "minion.echo" : undefined}
+      tooltipContent={
+        enemy.minion ? (
+          <div className="card-details">
+            <strong>Echo · Minion</strong>
+            <p>Attacks through The Court Remembers</p>
+          </div>
+        ) : undefined
+      }
       enemyId={enemy.id}
       name={enemy.name}
       health={enemy.health}

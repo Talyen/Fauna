@@ -41,7 +41,12 @@ export function enemyCard(card: CardDefinition): CardDefinition {
 export function enemyCanUse(card: CardDefinition): boolean {
   const effect = enemyCard(card).effect;
   switch (effect) {
+    case "createPearls":
+    case "pearl":
+    case "procession":
+      return true;
     case "draw":
+      return card.species === "memento";
     case "mana":
     case "recover":
       return false;
@@ -75,6 +80,18 @@ export function cardText(
   value ??= primaryAbilityValue(card, card.value + level * 2, power);
   let text: string;
   switch (card.effect) {
+    case "procession":
+      text = "Summon an Echo / Restore your Minions to full Health";
+      break;
+    case "createPearls":
+      text = `Create ${value} Pearls`;
+      break;
+    case "pearl":
+      text =
+        power === 1
+          ? `Gain ${value} Block or Mana`
+          : `Gain ${scalePower(value, power)} Block or ${value} Mana`;
+      break;
     case "attack":
       // Keep the conditional rule at its base value so resolved previews do not imply a second doubling
       if (card.doubleWithArmor) value = primaryAbilityValue(card, card.value + level * 2, power);

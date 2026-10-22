@@ -1,10 +1,11 @@
+import { battlefield } from "../game/battlefield";
 import { hasTalent } from "../game/progression";
 import { controlled, hasHarmfulEffects, mostInjured } from "../game/combat/index";
 import { actionValue, cardCost, physicalBonus } from "../game/ability-rules";
 import { definition, species } from "../game/content";
 import type { Command, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 19;
+export const BATTLE_POLICY_VERSION = 20;
 /** Only visible information enters scoring; no forecasts or gameplay RNG are sampled. */
 export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
   if (state.phase !== "battle") return [];
@@ -13,6 +14,14 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
   const incoming = order(state.reserves).find((c) => c.health > 0 && !controlled(c));
   // A replacement is actionable; it cannot itself be selected as the next recovery swap.
   if (outgoing && incoming) return [{ type: "swap", activeId: outgoing.id, reserve: incoming.id }];
+  if (
+    !outgoing &&
+    incoming &&
+    state.team.length < 3 &&
+    !state.team.some((unit) => species(unit.species).legendary) &&
+    !species(incoming.species).legendary
+  )
+    return [{ type: "swap", activeId: "", reserve: incoming.id }];
   const options: { command: Command; score: number; key: string }[] = [];
   const add = (cardId: string, score: number, targetId?: string) => {
     if (score > 0)
@@ -31,8 +40,15 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
     const value =
       actionValue(card, actor, state) +
       (def.effect === "attack" && def.damageType === "physical" ? physicalBonus(actor, state) : 0);
-    if (def.effect === "attack") {
-      const enemies = state.battle.enemies.filter((e) => e.health > 0);
+    if (def.effect === "procession") {
+      const echoes = (state.battle.minions ?? []).filter(
+        (unit) => unit.minion.ownerId === actor.id && unit.health > 0,
+      );
+      add(id, echoes.length < 2 ? 1600 : echoes.some((unit) => unit.health < unit.maxHealth) ? 1200 : 100);
+    } else if (def.effect === "createPearls" || def.effect === "pearl") {
+      add(id, def.effect === "pearl" ? 500 : state.cards.length < 256 ? 400 : 0);
+    } else if (def.effect === "attack") {
+      const enemies = battlefield(state, "enemy").filter((e) => e.health > 0);
       const score = (enemy: (typeof enemies)[number]) => {
         const physical = def.damageType === "physical" || def.damageType === "stun";
         // Rank ordinary landed hits; do not roll Dodge or Critical outcomes.

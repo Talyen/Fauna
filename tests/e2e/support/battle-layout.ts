@@ -1,21 +1,21 @@
 import { expect, type Page } from "@playwright/test";
 
-/** Geometry for the same seven-card fixture used by the hand interaction journey. */
+/** Geometry for the same six-card fixture used by the hand interaction journey. */
 export async function expectBattleGeometry(page: Page, width: number, height: number) {
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  const area = (element: HTMLElement) => element.offsetWidth * element.offsetHeight;
-  expect(
-    await page
-      .locator(".app:not([inert]) .player-row .creature-card")
-      .first()
-      .evaluate((el: HTMLElement) => ({ width: el.offsetWidth, height: el.offsetHeight })),
-  ).toEqual(
-    height <= 760
-      ? { width: 235, height: 176 }
-      : height <= 900
-        ? { width: 264, height: 198 }
-        : { width: 293, height: 220 },
-  );
+  const creatures = await page
+    .locator(".app:not([inert]) :is(.player-row, .enemy-row) .creature-card")
+    .evaluateAll((cards) =>
+      cards.map((card) => ({
+        width: (card as HTMLElement).offsetWidth,
+        height: (card as HTMLElement).offsetHeight,
+      })),
+    );
+  expect(creatures.length).toBeGreaterThan(0);
+  for (const card of creatures) {
+    expect(Math.abs(card.width / card.height - 4 / 3)).toBeLessThan(0.015);
+    expect(card.width).toBe(creatures[0]!.width);
+  }
   expect(
     await page
       .locator(".app:not([inert]) .hand .action-card")
@@ -23,10 +23,10 @@ export async function expectBattleGeometry(page: Page, width: number, height: nu
       .evaluate((el: HTMLElement) => ({ width: el.offsetWidth, height: el.offsetHeight })),
   ).toEqual(
     height <= 760
-      ? { width: 144, height: 192 }
+      ? { width: 160, height: 213 }
       : height <= 900
-        ? { width: 162, height: 216 }
-        : { width: 180, height: 240 },
+        ? { width: 180, height: 240 }
+        : { width: 200, height: 267 },
   );
   expect(
     await page
@@ -50,21 +50,22 @@ export async function expectBattleGeometry(page: Page, width: number, height: nu
   const fan = await page
     .locator(".app:not([inert]) .hand-slot")
     .evaluateAll((elements) => elements.map((el) => el.getBoundingClientRect().toJSON()));
-  expect(Math.abs(fan[0]!.top - fan[6]!.top)).toBeLessThan(1);
-  expect(Math.abs(fan[1]!.top - fan[5]!.top)).toBeLessThan(1);
+  expect(Math.abs(fan[0]!.top - fan[5]!.top)).toBeLessThan(1);
+  expect(Math.abs(fan[1]!.top - fan[4]!.top)).toBeLessThan(1);
   expect(fan[0]!.top).toBeGreaterThan(fan[1]!.top);
   expect(fan[1]!.top).toBeGreaterThan(fan[2]!.top);
   {
     expect(fan[0]!.bottom).toBeGreaterThan(height);
-    expect(fan[0]!.bottom).toBeLessThan(height + 64);
-    expect(Math.abs(fan[3]!.bottom - height)).toBeLessThan(1);
+    expect(fan[0]!.bottom).toBeLessThan(height + 96);
+    expect(Math.abs(fan[2]!.bottom - height)).toBeLessThan(16);
   }
-  const creatureArea = await page
-    .locator(".app:not([inert]) .player-row .creature-card")
-    .first()
-    .evaluate(area);
-  for (const card of await page.locator(".app:not([inert]) .hand .action-card").all())
-    expect(Math.abs((await card.evaluate(area)) / creatureArea - (0.9 / 1.1) ** 2)).toBeLessThan(0.025);
+  for (const card of await page.locator(".app:not([inert]) .hand .action-card").all()) {
+    const bounds = await card.evaluate((el: HTMLElement) => ({
+      width: el.offsetWidth,
+      height: el.offsetHeight,
+    }));
+    expect(Math.abs(bounds.width / bounds.height - 3 / 4)).toBeLessThan(0.01);
+  }
   for (const control of await page
     .locator(".app:not([inert]) .hand-toolbar .battle-dock button:enabled")
     .all()) {

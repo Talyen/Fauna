@@ -1,25 +1,27 @@
 .swap-dialog {
   width: min(
-    calc(var(--art-landscape-width) * 3 + var(--space-5) * 2 + var(--space-6) * 2 + 2px),
+    calc(var(--art-landscape-width) * 4 + var(--space-3) * 3 + var(--space-6) * 2 + 2px),
     calc(100vw - var(--space-12))
   );
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
 }
-.swap-dialog section h2 {
-  font-size: var(--text-heading);
-  color: var(--foreground);
-  font-weight: 600;
-  margin-bottom: var(--space-3);
-}
 .swap-roster {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: var(--space-5);
+  gap: var(--space-3);
 }
 .swap-reserves {
   width: 100%;
   margin: auto;
+}
+
+.swap-direction {
+  width: var(--space-6);
+  height: var(--space-6);
+  align-self: center;
+  color: var(--muted-foreground);
+  flex-shrink: 0;
 }

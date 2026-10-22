@@ -53,7 +53,17 @@ export interface Card {
   level: number;
   temporary?: true;
 }
+export interface EnemyDeck {
+  draw: string[];
+  hand: string[];
+  buffer: string[];
+  discard: string[];
+  mana: number;
+  created: number;
+}
 export interface Enemy {
+  minion?: { ownerId: string; side: "player" | "enemy" };
+  deck?: EnemyDeck;
   id: string;
   name: string;
   species: SpeciesId;

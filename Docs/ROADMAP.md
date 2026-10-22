@@ -24,7 +24,7 @@ Rules: [journey progression](EXPEDITION_DESIGN.md)
 ## Done: cards and combat
 
 - [x] One shared deck, with three unique abilities contributed by each deployed creature
-- [x] Exactly 1 base Mana per ability; four shared Mana and four draws each turn; seven-card hand
+- [x] Exactly 1 base Mana per ability; four shared Mana and four draws each turn; six-card hand
 - [x] Draw/discard recycling and an ordered overflow buffer that fills opened hand slots and survives turn changes
 - [x] Targeted and team-wide actions, healing, defense, utility and card-driven swaps
 - [x] Physical, Burn, Poison, Bleed, Freeze, Stun, Nature, Light and Water damage mechanics

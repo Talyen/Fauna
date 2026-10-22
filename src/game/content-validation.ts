@@ -140,6 +140,12 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
   for (const pack of [...catalog.combatPacks, ...catalog.bosses.map((boss) => boss.pack)])
     if (pack.length < 1 || pack.length > 3 || pack.some((id) => !species.has(id)))
       error("encounters", "packs", "Invalid encounter pack.");
+  for (const pack of catalog.combatPacks)
+    if (pack.some((id) => catalog.species.find((entry) => entry.id === id)?.legendary))
+      error("combat", "packs", "Legendaries only appear in Boss encounters");
+  for (const boss of catalog.bosses)
+    if (boss.pack.length !== 1 || !catalog.species.find((entry) => entry.id === boss.pack[0])?.legendary)
+      error(boss.id, "packs", "Boss encounters require one Legendary");
   const encounters = new Set<number>();
   for (const boss of catalog.bosses) {
     if (

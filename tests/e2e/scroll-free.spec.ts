@@ -83,8 +83,8 @@ for (const [width, height, scale] of LAYOUT_CASES) {
       const game = produce(run(7), (draft) => {
         draft.discovery.encountered = SPECIES.map((entry) => entry.id);
         draft.discovery.recruited = Object.fromEntries(SPECIES.map((entry) => [entry.id, 1]));
-        draft.battle!.hand = draft.cards.slice(0, 7).map((card) => card.id);
-        draft.battle!.buffer = draft.cards.slice(7).map((card) => card.id);
+        draft.battle!.hand = draft.cards.slice(0, 6).map((card) => card.id);
+        draft.battle!.buffer = draft.cards.slice(6).map((card) => card.id);
         draft.battle!.draw = [];
         draft.battle!.discard = [];
       });
@@ -194,7 +194,7 @@ for (const [width, height, scale] of LAYOUT_CASES) {
       ]);
       // The authored fan is the sole clipping exception; every card still needs a real hit target.
       const hand = page.locator(".app:not([inert]) .hand .action-card");
-      await expect(hand).toHaveCount(7);
+      await expect(hand).toHaveCount(6);
       for (const card of await hand.all()) {
         // Escape changes selection immediately; the previous card can still be lowering over this one.
         await page.mouse.move(0, 0);

@@ -8,15 +8,15 @@ import { prepareDestination, accept, run } from "../../support/game";
 
 function buffered() {
   return produce(run(), (d) => {
-    d.battle!.hand = d.cards.slice(0, 7).map((card) => card.id);
-    d.battle!.buffer = d.cards.slice(7, 9).map((card) => card.id);
-    d.battle!.draw = d.cards.slice(9).map((card) => card.id);
+    d.battle!.hand = d.cards.slice(0, 6).map((card) => card.id);
+    d.battle!.buffer = d.cards.slice(6, 8).map((card) => card.id);
+    d.battle!.draw = d.cards.slice(8).map((card) => card.id);
     d.battle!.discard = [];
   });
 }
 
 describe("hidden hand overflow", () => {
-  it("draws four opening cards plus Wind Feather without exceeding the seven-card hand", () => {
+  it("draws four opening cards plus Wind Feather without exceeding the six-card hand", () => {
     const s = accept(
       produce(run(), (d) => {
         prepareDestination(d);
@@ -42,12 +42,12 @@ describe("hidden hand overflow", () => {
     expect(preview.state.battle!.hand.at(-1)).toBe(first);
     expect(encodeSave(s)).toBe(before);
     s = accept(s, { type: "play", cardId: s.battle!.hand[0]! });
-    expect(s.battle!.hand).toHaveLength(7);
+    expect(s.battle!.hand).toHaveLength(6);
     expect(s.battle!.hand.at(-1)).toBe(first);
     expect(s.battle!.buffer).toEqual([second]);
     expect(s.rng).toBe(preview.state.rng);
     s = accept(s, { type: "play", cardId: s.battle!.hand[0]! });
-    expect(s.battle!.hand).toHaveLength(7);
+    expect(s.battle!.hand).toHaveLength(6);
     expect(s.battle!.hand.at(-1)).toBe(second);
     expect(s.battle!.buffer).toEqual([]);
     expect(decodeSave(encodeSave(s))).toEqual(s);
@@ -89,7 +89,7 @@ describe("hidden hand overflow", () => {
       d.battle!.buffer = [owned[0]!.id];
       d.battle!.hand = d.cards
         .filter((card) => card.id !== owned[0]!.id)
-        .slice(0, 7)
+        .slice(0, 6)
         .map((card) => card.id);
       d.battle!.draw = d.cards
         .filter((card) => ![...d.battle!.hand, ...d.battle!.buffer].includes(card.id))

@@ -1,4 +1,5 @@
-import { Plus } from "lucide-react";
+import { Button } from "../../../components/ui/button";
+import { ArrowDownUp } from "lucide-react";
 import { useState } from "react";
 import { CreatureCard } from "./cards";
 import { species } from "../../../game/content";
@@ -54,21 +55,30 @@ export function RosterPicker({
   );
   return (
     <>
-      <section aria-labelledby="roster-active-label">
-        <h2 id="roster-active-label">{lineup ? "Starting lineup" : "Deployed"}</h2>
+      <section aria-label={lineup ? "Starting lineup" : "Deployed"}>
         <div className="swap-roster" data-nav-row>
           {active.map((c) => tile(c, true))}
+          {!active.some((unit) => species(unit.species).legendary) && active.length < 3 && reserves.length ? (
+            <Button
+              variant="outline"
+              disabled={!selected || selectedActive}
+              onClick={() => {
+                if (
+                  selected &&
+                  send({ type: lineup ? "setLineup" : "swap", activeId: "", reserve: selected })
+                )
+                  close();
+              }}
+            >
+              Deploy selected
+            </Button>
+          ) : null}
         </div>
       </section>
-      <section aria-labelledby="roster-reserve-label">
-        <h2 id="roster-reserve-label">Backup</h2>
+      <ArrowDownUp className="swap-direction" aria-hidden="true" />
+      <section aria-label="Backup">
         <div className="swap-roster swap-reserves" data-nav-row>
-          {reserves.map((c) => tile(c, false))}
-          {Array.from({ length: 2 - reserves.length }, (_, index) => (
-            <div key={index} className="empty-reserve" role="img" aria-label="Empty backup slot">
-              <Plus aria-hidden="true" />
-            </div>
-          ))}
+          {reserves.map((creature) => tile(creature, false))}
         </div>
       </section>
     </>

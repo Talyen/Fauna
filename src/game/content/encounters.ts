@@ -24,7 +24,7 @@ export const ENCOUNTERS = (
     },
     {
       name: "Heart of the wilds",
-      enemies: [{ name: "The Hollow Crown", species: "prismram" as const }],
+      enemies: [{ name: "Memento", species: "memento" as const }],
     },
   ] as const
 ).map((encounter) => ({

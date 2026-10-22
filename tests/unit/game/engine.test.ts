@@ -220,14 +220,15 @@ describe("game commands", () => {
     }
     expect(a.phase).toBe("victory");
   });
-  for (let first = 0; first < SPECIES.length - 2; first++)
-    for (let second = first + 1; second < SPECIES.length - 1; second++)
-      for (let third = second + 1; third < SPECIES.length; third++) {
-        const lineup = [first, second, third].map((index) => SPECIES[index]!.name).join(", ");
+  const ordinarySpecies = SPECIES.filter((entry) => !entry.legendary);
+  for (let first = 0; first < ordinarySpecies.length - 2; first++)
+    for (let second = first + 1; second < ordinarySpecies.length - 1; second++)
+      for (let third = second + 1; third < ordinarySpecies.length; third++) {
+        const lineup = [first, second, third].map((index) => ordinarySpecies[index]!.name).join(", ");
         it(`supports ${lineup} without engine failures or invalid saves`, () => {
           let s = teamRun(
             first * 100 + second * 10 + third,
-            [first, second, third].map((index) => SPECIES[index]!.id),
+            [first, second, third].map((index) => ordinarySpecies[index]!.id),
           );
           for (let i = 0; i < 500 && !["victory", "defeat"].includes(s.phase); i++) {
             s = accept(s, policy(s));
@@ -247,7 +248,7 @@ describe("game commands", () => {
           }
           expect(
             ["victory", "defeat"],
-            `${[first, second, third].map((index) => SPECIES[index]!.id).join(", ")} at encounter ${s.encounter}, turn ${s.battle?.turn}`,
+            `${[first, second, third].map((index) => ordinarySpecies[index]!.id).join(", ")} at encounter ${s.encounter}, turn ${s.battle?.turn}`,
           ).toContain(s.phase);
         });
       }

@@ -1,3 +1,7 @@
+import { battlefield } from "../battlefield";
+import { definition } from "../content";
+import { drawBossCards, bossCardPriority, courtRemembers, removeDepartedMinions } from "./legendary";
+import { recycleDiscard, MAX_BATTLE_CARDS, MAX_HAND_SIZE } from "../card-zones";
 import { roll } from "../random";
 import { executeAbility } from "./abilities";
 import { creaturePassive, hasTalent } from "../progression";
@@ -39,11 +43,18 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
   );
   // Enemy-phase draws and existing overflow survive into the next player turn.
   battle.discard.push(...battle.hand.splice(0));
+  recycleDiscard(draft);
   for (let pass = 0; pass < 3; pass++) {
     // Swaps can reorder the battlefield; each enemy keeps its single action window.
     const actionOrder = battle.enemies.slice();
     // Expire the previous round before an ally can grant Dodge for this round.
     for (const enemy of actionOrder) combat(enemy).temporaryDodge = 0;
+    for (const minion of battlefield(draft, "enemy").filter((unit) => unit.minion && unit.health > 0)) {
+      tickStatuses(draft, minion, events);
+      if (settle(draft, events)) return;
+      minion.block = retainedBlock(minion);
+      startAction(minion, events, draft);
+    }
     let enemyCardsPlayed = 0;
     for (const enemy of actionOrder) {
       if (enemy.health <= 0) continue;
@@ -51,9 +62,56 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
       if (settle(draft, events)) return;
       if (enemy.health <= 0) continue;
       enemy.block = retainedBlock(enemy);
-      if (!startAction(enemy, events, draft, false)) continue;
-      const target = living(draft).find((c) => c.id === enemy.targetId) ?? living(draft)[0];
+      const canAct = startAction(enemy, events, draft, false);
+      if (enemy.deck) {
+        enemy.deck.discard.push(...enemy.deck.hand.splice(0));
+        enemy.deck.mana = TURN_MANA;
+        drawBossCards(draft, enemy.deck, TURN_DRAW);
+      }
+      if (!canAct) continue;
+      const targets = () => battlefield(draft, "player").filter((unit) => unit.health > 0);
+      const target = targets().find((c) => c.id === enemy.targetId) ?? targets()[0];
       if (!target) continue;
+      if (enemy.deck) {
+        const deck = enemy.deck;
+        // Bound automatic decision work even in a long Pearl/Mana chain.
+        for (
+          let action = 0;
+          action < MAX_BATTLE_CARDS && deck.mana > 0 && deck.hand.length && enemy.health > 0;
+          action++
+        ) {
+          const candidates = deck.hand
+            .slice()
+            .sort((a, b) => bossCardPriority(draft, enemy, b) - bossCardPriority(draft, enemy, a));
+          const id = candidates[0]!;
+          const def = definition(id);
+          const targetsNow = targets();
+          if (!targetsNow.length) break;
+          const victim = targetsNow[Math.floor(roll(draft) * targetsNow.length)]!;
+          deck.hand.splice(deck.hand.indexOf(id), 1);
+          deck.discard.push(id);
+          deck.mana -= def.cost;
+          executeAbility(
+            draft,
+            {
+              side: "enemy",
+              actor: enemy,
+              def,
+              value: enemyAbilityValue(enemy, def),
+              targetId: victim.id,
+              allyTargetId: enemy.id,
+            },
+            events,
+            { swap: swapFromCard },
+          );
+          courtRemembers(draft, enemy, events);
+          removeDepartedMinions(draft);
+          recycleDiscard(draft, deck);
+          while (deck.hand.length < MAX_HAND_SIZE && deck.buffer.length) deck.hand.push(deck.buffer.shift()!);
+          if (settle(draft, events)) return;
+        }
+        continue;
+      }
       const abilities = CARDS.filter((card) => card.species === enemy.species && enemyCanUse(card));
       const alternatives = abilities.filter((card) => card.id !== enemy.lastAbility);
       const pool = alternatives.length ? alternatives : abilities;
@@ -75,16 +133,16 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
       if (++enemyCardsPlayed === 2) livingChorus(draft, true, events);
       if (settle(draft, events)) return;
     }
-    for (const c of [...draft.team, ...draft.reserves]) {
+    for (const c of [...battlefield(draft, "player"), ...draft.reserves]) {
       if (c.health <= 0) continue;
       tickStatuses(draft, c, events);
       if (settle(draft, events)) return;
     }
-    for (const c of [...draft.team, ...draft.reserves]) {
+    for (const c of [...battlefield(draft, "player"), ...draft.reserves]) {
       const stats = combat(c);
       if (stats.grace > 0) stats.grace--;
       c.block = retainedBlock(c, draft);
-      c.attacked = false;
+      if ("attacked" in c) c.attacked = false;
       startAction(c, events, draft);
     }
     battle.maxMana = TURN_MANA + Number(hasTalent(draft, "mana.leyline-attunement")) + bonusMana;

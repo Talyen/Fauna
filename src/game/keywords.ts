@@ -50,7 +50,7 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Mana",
       "resource",
       "active",
-      "The shared resource spent to play action cards; Your team starts each turn with 4 Mana; Mana is shared; each turn draws 4 cards, with up to 7 in hand",
+      "The shared resource spent to play action cards; Your team starts each turn with 4 Mana; Mana is shared; each turn draws 4 cards, with up to 6 in hand",
     ),
     block: entry(
       "Block",
@@ -191,6 +191,9 @@ const progressionCategory: Partial<Record<KeywordId, ProgressionKeyword>> = {
 export const progressionLabel = (id: ProgressionKeyword) => keywordLabel(id);
 export const EFFECT_KEYWORDS = freeze(
   {
+    procession: ["health"],
+    createPearls: ["mana", "block"],
+    pearl: ["mana", "block"],
     attack: [],
     guard: ["block"],
     heal: ["health"],

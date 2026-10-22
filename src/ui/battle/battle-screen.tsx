@@ -1,3 +1,5 @@
+import { useBattleArtworkSize } from "./use-battle-artwork-size";
+import { battlefield } from "../../game/battlefield";
 import { sharedDodgeChance } from "../../game/combat/index";
 import { Screen } from "../shared/navigation/screen";
 import { HandMotion } from "./hand-motion";
@@ -77,9 +79,12 @@ export function BattleScreen({
   }, [denial]);
   const [remembered, setRemembered] = useState<{ enemy?: string; ally?: string }>({});
   const board = useRef<HTMLElement>(null);
+  useBattleArtworkSize(board);
   const [line, setLine] = useState("");
   const focusAfterCommand = useRef<number | null>(null);
   const battle = game.battle;
+  const enemyRow = battlefield(game, "enemy");
+  const playerRow = battlefield(game, "player");
   const visibleHand = battle.hand.filter((id) =>
     game.team.some((c) => c.health > 0 && c.id === game.cards.find((card) => card.id === id)?.ownerId),
   );
@@ -88,10 +93,19 @@ export function BattleScreen({
   const enemyTarget = def?.effect === "attack" && !def.target;
   const allyTarget =
     (def?.effect === "guard" && def.target !== "self") || (def?.effect === "heal" && !def.target);
+  const targetOrder = <T extends { id: string }>(row: T[]) =>
+    row.length > 1 &&
+    (enemyTarget ? battle.enemies : game.team).some((unit) => species(unit.species).legendary)
+      ? [row[1]!, row[0]!, ...row.slice(2)]
+      : row;
   const targets = enemyTarget
-    ? battle.enemies.filter((e) => e.health > 0).map((e) => e.id)
+    ? targetOrder(enemyRow)
+        .filter((e) => e.health > 0)
+        .map((e) => e.id)
     : allyTarget
-      ? game.team.filter((c) => c.health > 0).map((c) => c.id)
+      ? targetOrder(playerRow)
+          .filter((c) => c.health > 0)
+          .map((c) => c.id)
       : [];
   const last = enemyTarget ? remembered.enemy : remembered.ally;
   const navigationTarget = targets.includes(last ?? "") ? last : targets[0];
@@ -109,8 +123,8 @@ export function BattleScreen({
     preview?.events.flatMap((event) => (event.targetId ? [event.targetId] : [])) ?? [],
   );
   if (preview?.accepted) {
-    for (const unit of [...game.team, ...battle.enemies]) {
-      const next = [...preview.state.team, ...(preview.state.battle?.enemies ?? [])].find(
+    for (const unit of [...playerRow, ...enemyRow]) {
+      const next = [...battlefield(preview.state, "player"), ...battlefield(preview.state, "enemy")].find(
         (candidate) => candidate.id === unit.id,
       );
       if (
@@ -124,10 +138,14 @@ export function BattleScreen({
     }
   }
   if (target) affected.add(target);
-  const allyRecipient = game.team.find((unit) => unit.id === target);
+  const allyRecipient = playerRow.find((unit) => unit.id === target);
   const recipient =
-    battle.enemies.find((unit) => unit.id === target)?.name ??
-    (allyRecipient ? species(allyRecipient.species).name : undefined);
+    enemyRow.find((unit) => unit.id === target)?.name ??
+    (allyRecipient
+      ? "name" in allyRecipient
+        ? allyRecipient.name
+        : species(allyRecipient.species).name
+      : undefined);
   const play = (command: Command) => {
     if (!send(command)) return;
     setSelected(null);
@@ -235,71 +253,85 @@ export function BattleScreen({
       data-selected-card={selected ?? ""}
     >
       <CombatFeedback bursts={bursts} root={board} />
-      <section className="enemy-row" aria-label="Enemy row">
-        {battle.enemies.map((enemy) => (
-          <EnemyCard
-            key={enemy.id}
-            enemy={enemy}
-            sharedDodge={sharedDodgeChance(game, enemy)}
-            tooltips={!selected}
-            invalidTarget={!!selected && (!enemyTarget || enemy.health <= 0)}
-            validTarget={!!selected && enemyTarget && enemy.health > 0}
-            activeTarget={!!selected && target === enemy.id}
-            onPreviewEnd={() => setHovered((old) => (old === enemy.id ? null : old))}
-            onPreview={() => {
-              if (selected && enemyTarget && enemy.health > 0) setTarget(enemy.id);
-            }}
-            preview={
-              selected && affected.has(enemy.id) ? (
-                <TargetPreview before={game} result={preview} targetId={enemy.id} />
-              ) : undefined
-            }
-            onClick={(element) => {
-              if (selected) {
-                if (enemyTarget && enemy.health > 0)
-                  play({ type: "play", cardId: selected, targetId: enemy.id });
-                else onDenied(element);
+      <section
+        className="enemy-row"
+        aria-label="Enemy row"
+        data-legendary={battle.enemies.some((unit) => species(unit.species).legendary) || undefined}
+      >
+        {enemyRow
+          .filter((unit) => !unit.minion || unit.health > 0)
+          .map((enemy) => (
+            <EnemyCard
+              key={enemy.id}
+              enemy={enemy}
+              sharedDodge={sharedDodgeChance(game, enemy)}
+              tooltips={!selected}
+              invalidTarget={!!selected && (!enemyTarget || enemy.health <= 0)}
+              validTarget={!!selected && enemyTarget && enemy.health > 0}
+              activeTarget={!!selected && target === enemy.id}
+              onPreviewEnd={() => setHovered((old) => (old === enemy.id ? null : old))}
+              onPreview={() => {
+                if (selected && enemyTarget && enemy.health > 0) setTarget(enemy.id);
+              }}
+              preview={
+                selected && affected.has(enemy.id) ? (
+                  <TargetPreview before={game} result={preview} targetId={enemy.id} />
+                ) : undefined
               }
-            }}
-            label={selected && enemyTarget && enemy.health > 0 ? `Target ${enemy.name}` : enemy.name}
-          />
-        ))}
+              onClick={(element) => {
+                if (selected) {
+                  if (enemyTarget && enemy.health > 0)
+                    play({ type: "play", cardId: selected, targetId: enemy.id });
+                  else onDenied(element);
+                }
+              }}
+              label={selected && enemyTarget && enemy.health > 0 ? `Target ${enemy.name}` : enemy.name}
+            />
+          ))}
       </section>
-      <section className="player-row" aria-label="Player row">
-        {game.team.map((creature) => (
-          <AllyCard
-            progression={game}
-            key={creature.id}
-            creature={creature}
-            sharedDodge={sharedDodgeChance(game, creature)}
-            tooltips={!selected}
-            acting={card?.ownerId === creature.id}
-            validTarget={!!selected && creature.health > 0 && allyTarget}
-            activeTarget={!!selected && creature.health > 0 && target === creature.id}
-            onPreviewEnd={() => setHovered((old) => (old === creature.id ? null : old))}
-            invalidTarget={!!selected && (!allyTarget || creature.health <= 0)}
-            onPreview={() => {
-              if (selected && allyTarget && creature.health > 0) setTarget(creature.id);
-            }}
-            preview={
-              selected && affected.has(creature.id) ? (
-                <TargetPreview before={game} result={preview} targetId={creature.id} />
-              ) : undefined
-            }
-            onClick={(element) => {
-              if (selected) {
-                if (allyTarget && creature.health > 0)
-                  play({ type: "play", cardId: selected, targetId: creature.id });
-                else onDenied(element);
+      <section
+        className="player-row"
+        aria-label="Player row"
+        data-legendary={game.team.some((unit) => species(unit.species).legendary) || undefined}
+      >
+        {playerRow
+          .filter((unit) => !("minion" in unit) || unit.health > 0)
+          .map((creature) => (
+            <AllyCard
+              progression={game}
+              key={creature.id}
+              creature={creature}
+              sharedDodge={sharedDodgeChance(game, creature)}
+              tooltips={!selected}
+              acting={card?.ownerId === creature.id}
+              validTarget={!!selected && creature.health > 0 && allyTarget}
+              activeTarget={!!selected && creature.health > 0 && target === creature.id}
+              onPreviewEnd={() => setHovered((old) => (old === creature.id ? null : old))}
+              invalidTarget={!!selected && (!allyTarget || creature.health <= 0)}
+              onPreview={() => {
+                if (selected && allyTarget && creature.health > 0) setTarget(creature.id);
+              }}
+              preview={
+                selected && affected.has(creature.id) ? (
+                  <TargetPreview before={game} result={preview} targetId={creature.id} />
+                ) : undefined
               }
-            }}
-            label={
-              selected && allyTarget && creature.health > 0
-                ? `Target ${species(creature.species).name}`
-                : species(creature.species).name
-            }
-          />
-        ))}
+              onClick={(element) => {
+                if (selected) {
+                  if (allyTarget && creature.health > 0)
+                    play({ type: "play", cardId: selected, targetId: creature.id });
+                  else onDenied(element);
+                }
+              }}
+              label={
+                selected && allyTarget && creature.health > 0
+                  ? `Target ${"name" in creature ? creature.name : species(creature.species).name}`
+                  : "name" in creature
+                    ? creature.name
+                    : species(creature.species).name
+              }
+            />
+          ))}
       </section>
       <div className="target-control">
         <div className="target-summary" role="status" aria-live="polite">

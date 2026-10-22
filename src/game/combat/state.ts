@@ -1,3 +1,4 @@
+import { isEnemy, battlefield } from "../battlefield";
 import { roll } from "../random";
 import { hasTalent, creaturePassive } from "../progression";
 import { species } from "../content";
@@ -62,7 +63,8 @@ export function loseHealth(state: GameState, unit: Combatant, amount: number, ev
     stats = combat(unit);
   unit.health = Math.max(0, before - amount);
   if (
-    !("maxHealth" in unit) &&
+    !isEnemy(unit) &&
+    !("minion" in unit && unit.minion) &&
     unit.health === 0 &&
     before > 0 &&
     (!stats.deathDoorUsed || stats.grace > 0)
@@ -98,7 +100,7 @@ export function deferLeech(target: Combatant, source: Combatant, amount: number)
 }
 function ownDodgeChance(state: GameState, unit: Combatant): number {
   if (unit.health <= 0 || unit.combat?.controlled) return 0;
-  const allied = !("maxHealth" in unit);
+  const allied = !isEnemy(unit);
   const stats = unit.combat;
   if (!allied && (stats?.poison ?? 0) > 0 && hasTalent(state, "poison.torpor")) return 0;
   return Math.min(
@@ -115,8 +117,8 @@ function ownDodgeChance(state: GameState, unit: Combatant): number {
 }
 /** Share intrinsic Dodge only; received aura bonuses never amplify another provider. */
 export function sharedDodgeChance(state: GameState, target: Combatant): number {
-  const allied = !("maxHealth" in target);
-  const row = allied ? state.team : (state.battle?.enemies ?? []);
+  const allied = !isEnemy(target);
+  const row = battlefield(state, allied ? "player" : "enemy");
   if (target.health <= 0 || !row.some((unit) => unit.id === target.id)) return 0;
   return row
     .filter((unit) => unit.id !== target.id && unit.health > 0)
@@ -160,7 +162,7 @@ export function openingCriticalBonus(state: GameState, source: Combatant): numbe
   const stats = combat(source);
   if (stats.firstAttackUsed) return 0;
   stats.firstAttackUsed = true;
-  return creaturePassive("maxHealth" in source ? undefined : state, source.species).effects.reduce(
+  return creaturePassive(isEnemy(source) ? undefined : state, source.species).effects.reduce(
     (total, effect) => total + (effect.kind === "earlyBird" ? effect.amount : 0),
     0,
   );

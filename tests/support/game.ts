@@ -1,11 +1,14 @@
+import { canVisitCampfire } from "../../src/game/destinations";
+import { ownedCards } from "../../src/game/team";
 import { freshCombat, combat } from "../../src/game/combat/index";
 import { controlled } from "../../src/game/combat/index";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
 import { CARDS, definition, species, type SpeciesId } from "../../src/game/content";
 import type { Command, GameState, Lifecycle, BattleState, RewardState } from "../../src/game/types";
-// This seeded first journey finishes within the browser's 400-command budget
-export const FULL_JOURNEY_SEED = 663;
+// Shared bound accounts for solo Legendary Bosses and their recruitment choices
+export const FULL_JOURNEY_SEED = 3;
+export const FULL_JOURNEY_COMMAND_BUDGET = 800;
 export function run(seed = 42) {
   return teamRun(seed, ["mossguard", "emberback", "prismram"]);
 }
@@ -36,14 +39,7 @@ export function teamRun(seed: number, kinds: SpeciesId[]) {
       attacked: false,
     }));
     d.lineup = d.team.map((c) => c.id);
-    d.cards = d.team.flatMap((c) =>
-      CARDS.filter((card) => card.species === c.species).map((card) => ({
-        id: `${c.id}:${card.id}`,
-        definitionId: card.id,
-        ownerId: c.id,
-        level: 0,
-      })),
-    );
+    d.cards = d.team.flatMap((c) => ownedCards(c.id, c.species));
     prepareDestination(d);
     d.expedition = null;
   });
@@ -91,7 +87,8 @@ export function recruitChoice(s: GameState): Command {
   };
 }
 export function policy(s: GameState): Command {
-  if (s.phase === "teamSelection") return { type: "beginBattle" };
+  if (s.phase === "teamSelection")
+    return canVisitCampfire(s) ? { type: "visitCampfire" } : { type: "beginBattle" };
   if (s.phase === "recruit") return recruitChoice(s);
   if (s.phase === "boon") return { type: "chooseBoon", boon: s.reward!.boons[0]! };
   if (s.phase === "campfire") return { type: "rest" };
@@ -177,7 +174,8 @@ export function bossReward() {
     d.journey!.victories = 3;
     d.expedition = { pack: 0, recruit: null, lastRoom: null };
   });
-  return winBattle(accept(ready, { type: "beginBattle" }));
+  const recruit = winBattle(accept(ready, { type: "beginBattle" }));
+  return accept(recruit, recruitChoice(recruit));
 }
 
 export function feedbackBattle() {

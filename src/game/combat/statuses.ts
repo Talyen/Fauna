@@ -1,3 +1,4 @@
+import { isEnemy, battlefield } from "../battlefield";
 import { roll } from "../random";
 import { draw } from "../card-zones";
 import { hasTalent, creaturePassive } from "../progression";
@@ -58,17 +59,17 @@ export function* triggerArmorBreak(
   depletion.delivered = true;
   const { unit } = depletion;
   if (state.phase !== "battle" || unit.health <= 0 || !state.battle) return;
-  const allied = !("maxHealth" in unit);
+  const allied = !isEnemy(unit);
   if (allied && hasTalent(state, "armor.reactive-guard"))
     yield* reaction("grantBlock", state, unit, 3, events);
-  const row = allied ? state.team : state.battle.enemies;
+  const row = battlefield(state, allied ? "player" : "enemy");
   if (!row.some((deployed) => deployed.id === unit.id)) return;
   const amount = creaturePassive(allied ? state : undefined, unit.species).effects.reduce(
     (total, effect) => total + (effect.kind === "armorBreak" ? effect.amount : 0),
     0,
   );
   if (!amount) return;
-  const targets = allied ? state.battle.enemies : state.team;
+  const targets = battlefield(state, allied ? "enemy" : "player");
   for (const target of targets) {
     if (unit.health <= 0) break;
     if (target.health > 0)
@@ -185,7 +186,7 @@ export function* cleanseRewards(
   events: GameEvent[],
 ): Resolution<void> {
   const stats = combat(unit);
-  if (!("maxHealth" in unit)) {
+  if (!isEnemy(unit)) {
     if (hasTalent(state, "light.divine-favor")) stats.freeLight = true;
     const healing =
       Number(hasTalent(state, "health.renewal")) * 2 + (state.boons.includes("sin-eaters-lantern") ? 6 : 0);
@@ -211,8 +212,8 @@ export function* applyHarmfulStatus(
   )
     return { depletions: [], appliedControl: false, suppressed: false };
   const stats = combat(target);
-  const alliedSource = !("maxHealth" in source),
-    alliedTarget = !("maxHealth" in target);
+  const alliedSource = !isEnemy(source),
+    alliedTarget = !isEnemy(target);
   let appliedControl = false;
   const depletions: ArmorDepletion[] = [];
   const immune =
@@ -244,9 +245,7 @@ export function* applyHarmfulStatus(
     !immune &&
     Number(stats[type]) < (type === "blind" ? 1 : STACK_LIMIT)
   ) {
-    const enemies = (alliedTarget ? (state.battle?.enemies ?? []) : state.team).filter(
-      (unit) => unit.health > 0,
-    );
+    const enemies = battlefield(state, alliedTarget ? "enemy" : "player").filter((unit) => unit.health > 0);
     const chance = creaturePassive(alliedTarget ? state : undefined, target.species).effects.reduce(
       (sum, effect) => sum + (effect.kind === "statusReflection" ? effect.amount : 0),
       0,
@@ -396,7 +395,7 @@ export function* controlRewards(
   type: DamageType,
   events: GameEvent[],
 ): Resolution<void> {
-  if (!("maxHealth" in source) && "maxHealth" in target) {
+  if (!isEnemy(source) && isEnemy(target)) {
     if (type === "freeze" && state.boons.includes("icy-heart"))
       yield* reaction("hit", state, source, target, 6, "physical", events, { origin: "derived" });
     if (type === "stun" && state.boons.includes("thunderstone"))

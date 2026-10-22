@@ -1714,6 +1714,72 @@
       "aspect": [3, 4],
       "provenance": "Unchanged Rookhaven artwork selected from user Google Drive: https://drive.google.com/file/d/1a-S_nC4CbFZtjjKiM_SBzCeXL_2qgmG2/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "creature.memento",
+      "origin": "repository",
+      "source": "public/art/memento/portrait.png",
+      "output": "art/memento/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "https://drive.google.com/file/d/1YiU3Cs_3FgvEgcAOerA5DsRpm28uP7eb/view",
+      "rights": "User-provided Fauna references; project artwork"
+    },
+    {
+      "id": "action.memento.lost-procession",
+      "origin": "repository",
+      "source": "public/art/memento/lost-procession.png",
+      "output": "art/memento/lost-procession.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "https://drive.google.com/file/d/121y9PpkzvCu5vd_hCCP34TODrWCydWSa/view",
+      "rights": "User-provided Fauna references; project artwork"
+    },
+    {
+      "id": "action.memento.treasury-echo",
+      "origin": "repository",
+      "source": "public/art/memento/treasury-echo.png",
+      "output": "art/memento/treasury-echo.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "https://drive.google.com/file/d/1cu6RiPkyVZ8kg83MLcewPqiSi7o_Qr7j/view",
+      "rights": "User-provided Fauna references; project artwork"
+    },
+    {
+      "id": "action.memento.drowned-revelation",
+      "origin": "repository",
+      "source": "public/art/memento/drowned-revelation.png",
+      "output": "art/memento/drowned-revelation.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "https://drive.google.com/file/d/16o3OwTfeAtK0alP6IbX_yOx5z7C7iz2t/view",
+      "rights": "User-provided Fauna references; project artwork"
+    },
+    {
+      "id": "minion.echo",
+      "origin": "repository",
+      "source": "public/art/memento/echo.png",
+      "output": "art/memento/echo.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Generated with built-in ImageGen on 2026-10-22 using Memento and Lost Procession as references",
+      "rights": "User-provided Fauna references; project artwork"
+    },
+    {
+      "id": "action.memento.pearl",
+      "origin": "repository",
+      "source": "public/art/memento/pearl.png",
+      "output": "art/memento/pearl.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Generated with built-in ImageGen on 2026-10-22 using Memento and Treasury Echo as references",
+      "rights": "User-provided Fauna references; project artwork"
     }
   ]
 }

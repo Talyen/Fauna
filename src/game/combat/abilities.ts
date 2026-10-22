@@ -1,3 +1,5 @@
+import { battlefield } from "../battlefield";
+import { summonEcho, createPearls, drawBossCards } from "./legendary";
 import { definition, species, type CardDefinition } from "../content";
 import { creaturePassive, hasTalent } from "../progression";
 import { definitionKeywords } from "../keywords";
@@ -35,10 +37,9 @@ interface AbilityOperations {
   swap: (state: GameState, actor: Combatant, events: GameEvent[]) => void;
 }
 const actorPower = (action: AbilityAction) => (action.side === "enemy" ? action.actor.power : 1);
-const friendlyRow = (state: GameState, action: AbilityAction): Combatant[] =>
-  action.side === "player" ? state.team : state.battle!.enemies;
+const friendlyRow = (state: GameState, action: AbilityAction): Combatant[] => battlefield(state, action.side);
 const opposingRow = (state: GameState, action: AbilityAction): Combatant[] =>
-  action.side === "player" ? state.battle!.enemies : state.team;
+  battlefield(state, action.side === "player" ? "enemy" : "player");
 const alive = (row: Combatant[]) => row.filter((unit) => unit.health > 0);
 
 function encore(state: GameState, actor: Combatant) {
@@ -82,7 +83,7 @@ function recoverDiscard(state: GameState, events: GameEvent[]) {
   });
 }
 function hushDome(state: GameState, enemy: boolean, events: GameEvent[]) {
-  for (const unit of enemy ? state.battle!.enemies : state.team) {
+  for (const unit of battlefield(state, enemy ? "enemy" : "player")) {
     if (unit.health <= 0) continue;
     combat(unit).nullify = true;
     events.push({
@@ -103,7 +104,7 @@ function teamProtection(
   power: number,
 ) {
   const block = roll(state) < 0.5;
-  for (const unit of enemy ? state.battle!.enemies : state.team) {
+  for (const unit of battlefield(state, enemy ? "enemy" : "player")) {
     if (unit.health <= 0) continue;
     if (block) grantBlock(state, unit, scalePower(amount, power), events);
     else grantStatus(unit, "thorns", amount, events, state);
@@ -141,7 +142,7 @@ function applyExtras(
         else grantStatus(actor, effect.status, effect.amount, events, state);
         break;
       case "meltArmor":
-        for (const recipient of enemy ? state.team : state.battle!.enemies) {
+        for (const recipient of battlefield(state, enemy ? "player" : "enemy")) {
           if (actor.health <= 0) break;
           if (recipient.health <= 0) continue;
           const stats = combat(recipient);
@@ -163,7 +164,7 @@ function applyExtras(
         }
         break;
       case "blind":
-        for (const recipient of enemy ? state.team : state.battle!.enemies)
+        for (const recipient of battlefield(state, enemy ? "player" : "enemy"))
           if (recipient.health > 0) applyBlind(state, actor, recipient, events);
         break;
       case "nullifyFreeze":
@@ -189,7 +190,7 @@ function applyExtras(
         break;
       case "cleanse":
         for (const recipient of effect.target === "allAllies"
-          ? (enemy ? state.battle!.enemies : state.team).filter((unit) => unit.health > 0)
+          ? battlefield(state, enemy ? "enemy" : "player").filter((unit) => unit.health > 0)
           : [effect.target === "recipient" && target ? target : actor])
           removeEffects(recipient, "cleanse", effect.amount, events, state);
         break;
@@ -288,6 +289,18 @@ export function executeAbility(
     const blindMiss = def.effect === "attack" ? beginAttack(state, actor) : false;
     const kind = def.effect;
     switch (kind) {
+      case "procession":
+        summonEcho(state, actor, action.side, value, events);
+        break;
+      case "createPearls":
+        createPearls(state, actor, action.side, value, events);
+        break;
+      case "pearl":
+        if (roll(state) < 0.5) grantBlock(state, actor, scalePower(value, power), events);
+        else if (action.side === "enemy" && action.actor.deck)
+          action.actor.deck.mana = Math.min(4, action.actor.deck.mana + value);
+        else gainMana(state, value, events);
+        break;
       case "attack": {
         const damageType =
           def.alternateDamageType && roll(state) < 0.5 ? def.alternateDamageType : def.damageType;
@@ -341,7 +354,8 @@ export function executeAbility(
         grantStatus(actor, "waterThorns", value, events, state);
         break;
       case "draw":
-        if (!enemy) draw(state, value, events);
+        if (action.side === "enemy" && action.actor.deck) drawBossCards(state, action.actor.deck, value);
+        else if (!enemy) draw(state, value, events);
         break;
       case "recover":
         if (!enemy) recoverDiscard(state, events);

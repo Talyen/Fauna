@@ -1,3 +1,4 @@
+import { PEARL } from "./content/creatures/memento";
 import { freeze } from "immer";
 import { CARDS, SPECIES } from "./content/creatures";
 import type { SpeciesId, CardDefinition } from "./content/types";
@@ -9,7 +10,7 @@ export const FIRST_RUN_STARTERS: readonly SpeciesId[] = SPECIES.filter((entry) =
   CARDS.some((card) => card.species === entry.id && card.effect === "attack"),
 ).map((entry) => entry.id);
 export function definition(id: string): CardDefinition {
-  const result = CARDS.find((c) => c.id === id);
+  const result = id === PEARL.id ? PEARL : CARDS.find((c) => c.id === id);
   if (!result) throw new Error(`Unknown card: ${id}`);
   return result;
 }
