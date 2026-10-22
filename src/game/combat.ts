@@ -375,6 +375,23 @@ export function triggerArmorBreak(state: GameState, unit: Combatant, events: Gam
     if (target.health > 0) hit(state, unit, target, amount, "burn", events, { proc: true });
   }
 }
+export function removeFreezeBuildup(state: GameState, unit: Combatant, events: GameEvent[]) {
+  const stats = combat(unit);
+  if (stats.freeze <= 0) return;
+  const amount = stats.freeze;
+  stats.freeze = 0;
+  events.push({
+    kind: "status",
+    targetId: unit.id,
+    status: "cleanse",
+    affectedStatus: "freeze",
+    outcome: "remove",
+    amount,
+    text: `${unitName(unit)}: Cleanse Freeze build-up`,
+  });
+  cleanseRewards(state, unit, 1, events);
+}
+
 export function removeEffects(
   unit: Combatant,
   kind: "cleanse" | "purge",
@@ -992,15 +1009,17 @@ function resolveHit(
     )
       damage *= 0.5;
   }
-  if (type === "burn") {
+  if (type === "burn" || type === "freeze") {
     const protectors = alliedTarget ? state.team : (state.battle?.enemies ?? []);
-    // Multiple canopies use the strongest shelter; swapping or knockout removes it immediately.
+    // Use the strongest deployed protection; swaps and knockouts change it immediately.
     const resistance = protectors.reduce((best, unit) => {
       if (unit.health <= 0) return best;
       return Math.max(
         best,
         ...creaturePassive(alliedTarget ? state : undefined, unit.species).effects.map((effect) =>
-          effect.kind === "teamBurnResistance" ? effect.amount : 0,
+          effect.kind === (type === "burn" ? "teamBurnResistance" : "teamFreezeResistance")
+            ? effect.amount
+            : 0,
         ),
       );
     }, 0);

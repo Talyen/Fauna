@@ -17,6 +17,7 @@ export type SpeciesId =
   | "ringpalm"
   | "glintstride"
   | "wickwaltz"
+  | "stillara"
   | "sternshell"
   | "neradora";
 type Effect = keyof typeof EFFECT_KEYWORDS;
@@ -26,6 +27,7 @@ type PassiveEffect =
   | { kind: "resonance"; amount: number }
   | { kind: "wrongFoot"; amount: number }
   | { kind: "teamBurnResistance"; amount: number }
+  | { kind: "teamFreezeResistance"; amount: number }
   | { kind: "blockConversion"; amount: number }
   | { kind: "blockRetention"; amount: number }
   | { kind: "cardBonus"; trigger: "firstAttack" | "stunAttack" | "heal" | "guard"; amount: number }
@@ -89,6 +91,40 @@ export type CardDefinition = CardBase &
     | { effect: Exclude<Effect, "attack" | "guard" | "heal">; target?: never }
   );
 export const SPECIES: readonly Species[] = [
+  {
+    id: "stillara",
+    name: "Stillara",
+    title: "The keeper of summer",
+    health: 26,
+    color: "#94aabd",
+    trait: "First Thaw",
+    passiveTiers: [
+      {
+        description: "Allies take 10% less Freeze damage",
+        effects: [{ kind: "teamFreezeResistance", amount: 10 }],
+      },
+      {
+        description: "Allies take 20% less Freeze damage",
+        effects: [{ kind: "teamFreezeResistance", amount: 20 }],
+      },
+      {
+        description: "Allies take 30% less Freeze damage",
+        effects: [{ kind: "teamFreezeResistance", amount: 30 }],
+      },
+      {
+        description: "Allies take 40% less Freeze damage",
+        effects: [{ kind: "teamFreezeResistance", amount: 40 }],
+      },
+      {
+        description: "Allies take 50% less Freeze damage",
+        effects: [{ kind: "teamFreezeResistance", amount: 50 }],
+      },
+      {
+        description: "Allies take 60% less Freeze damage",
+        effects: [{ kind: "teamFreezeResistance", amount: 60 }],
+      },
+    ],
+  },
   {
     id: "neradora",
     name: "Neradora",
@@ -784,6 +820,24 @@ const attack = (
 });
 export const CARDS: readonly CardDefinition[] = [
   {
+    ...card("stillara", "Reed Reservoir", "mana", 2),
+    id: "stillara-reed-reservoir",
+    artwork: "action.stillara.reed-reservoir",
+  },
+  {
+    ...card("stillara", "Thaw Path", "teamThaw", 1),
+    id: "stillara-thaw-path",
+    effects: [{ kind: "draw", amount: 1 }],
+    artwork: "action.stillara.thaw-path",
+  },
+  {
+    ...card("stillara", "Water Remembers", "heal", 1),
+    id: "stillara-water-remembers",
+    target: "allAllies",
+    effects: [{ kind: "draw", amount: 1 }],
+    artwork: "action.stillara.water-remembers",
+  },
+  {
     ...card("neradora", "Undertow Knot", "waterThorns", 3),
     id: "neradora-undertow-knot",
     artwork: "action.neradora.undertow-knot",
@@ -1129,6 +1183,12 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
       break;
     case "teamBlind":
       text = "Blind all enemies";
+      break;
+    case "mana":
+      text = `Gain ${value} Mana`;
+      break;
+    case "teamThaw":
+      text = "Cleanse all Freeze build-up from allies";
       break;
     case "teamCleanse":
       text = `Cleanse ${value} harmful effect${value === 1 ? "" : "s"} from all allies`;

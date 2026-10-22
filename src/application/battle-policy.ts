@@ -3,7 +3,7 @@ import { actionValue, cardCost, physicalBonus } from "../game/rules";
 import { definition, species } from "../game/content";
 import type { Command, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 13;
+export const BATTLE_POLICY_VERSION = 14;
 /** Only visible information enters scoring; no forecasts or gameplay RNG are sampled. */
 export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
   if (state.phase !== "battle" || !state.battle) return [];
@@ -60,7 +60,9 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
             : def.effects?.some((effect) => effect.kind === "blind") &&
                 state.battle.enemies.some((enemy) => enemy.health > 0 && !enemy.combat.blind)
               ? 150
-              : 0,
+              : def.effects?.some((effect) => effect.kind === "draw")
+                ? 200
+                : 0,
         );
       } else
         for (const ally of def.target === "self"
@@ -71,6 +73,11 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
           const missing = species(ally.species).health - ally.health;
           if (missing > 0) add(id, 3000 + Math.min(value, missing), def.target ? undefined : ally.id);
         }
+    } else if (def.effect === "mana") {
+      add(id, 400 + Math.min(value, state.battle.maxMana - state.battle.mana + cardCost(card, state)));
+    } else if (def.effect === "teamThaw") {
+      const useful = state.team.filter((unit) => unit.health > 0 && (unit.combat?.freeze ?? 0) > 0).length;
+      add(id, 200 + useful * 100);
     } else if (def.effect === "draw") {
       add(id, 200 + value);
     } else if (def.effect === "teamBlind") {
