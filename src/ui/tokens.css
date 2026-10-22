@@ -27,6 +27,7 @@
   --gold-light: #e6c58e;
   --gold-deep: #986b32;
   --gold-pale: #f3e4ca;
+  --recruit-new-background: color-mix(in srgb, var(--primary) 20%, var(--background));
   /* Game aliases resolve through shadcn's semantic theme roles. */
   --bg: var(--background);
   --surface: var(--card);

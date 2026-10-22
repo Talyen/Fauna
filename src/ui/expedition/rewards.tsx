@@ -3,6 +3,7 @@ import { PagedItems } from "../shared/navigation/pagination";
 import { ResultPresentation } from "../shared/rewards/result-presentation";
 import { assetUrl } from "../shared/assets";
 import { useLayoutEffect, useRef, useState } from "react";
+import { Plus, Star } from "lucide-react";
 import { Button } from "../../components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
 import { CreatureCard } from "../shared/cards/cards";
@@ -14,6 +15,37 @@ import type { Command, RewardState } from "../../game/types";
 import type { Inspection } from "../shared/inspection-model";
 import { BattleEarnings } from "../shared/rewards/battle-earnings";
 type Props = { game: RewardState; send: (command: Command) => boolean; inspect: (item: Inspection) => void };
+function RecruitProgress({ game, kind }: { game: RewardState; kind: SpeciesId }) {
+  const collected = game.discovery.recruited[kind] !== undefined;
+  const rank = creatureStars(game, kind);
+  const next = Math.min(rank + 1, MAX_CREATURE_STARS);
+  return (
+    <div
+      className="recruit-progress"
+      role="img"
+      aria-label={
+        !collected
+          ? `${species(kind).name}: New to Collection, zero stars`
+          : rank === MAX_CREATURE_STARS
+            ? `${species(kind).name}: ${rank} of ${MAX_CREATURE_STARS} stars`
+            : `${species(kind).name}: ${rank} to ${next} of ${MAX_CREATURE_STARS} stars`
+      }
+    >
+      {!collected ? (
+        <span className="recruit-new">New!</span>
+      ) : (
+        <span className="recruit-stars" aria-hidden="true">
+          {Array.from({ length: MAX_CREATURE_STARS }, (_, index) => (
+            <span className="recruit-star" key={index} data-earned={index < rank} data-new={index === rank}>
+              <Star />
+              {index === rank ? <Plus className="recruit-star-plus" /> : null}
+            </span>
+          ))}
+        </span>
+      )}
+    </div>
+  );
+}
 export function Rewards({ game, send, inspect }: Props) {
   const [incoming, setIncoming] = useState<SpeciesId | null>(null);
   const choices = useRef<HTMLElement>(null);
@@ -102,13 +134,7 @@ export function Rewards({ game, send, inspect }: Props) {
                             >
                               Recruit
                             </Button>
-                            <p className="collection-uncollected">
-                              {!game.discovery.recruited[kind]
-                                ? "Unlock in Collection"
-                                : creatureStars(game, kind) === MAX_CREATURE_STARS
-                                  ? `${MAX_CREATURE_STARS} stars · Max`
-                                  : `${creatureStars(game, kind)} → ${creatureStars(game, kind) + 1} stars`}
-                            </p>
+                            <RecruitProgress game={game} kind={kind} />
                           </>
                         ) : null}
                       </div>
