@@ -295,10 +295,12 @@ test("main menu, draft and pre-battle deck lead into the first battle", async ({
   const destination = page.locator(".app:not([inert]) [data-encounter]").first();
   await page.getByRole("button", { name: "Deck", exact: true }).click();
   await expect(page.getByRole("dialog").locator(".action-card")).toHaveCount(3);
-  await page.getByRole("dialog").locator(".action-card").first().click({ button: "right" });
+  const inspectedCard = page.getByRole("dialog").locator(".action-card").first();
+  const inspectedId = await inspectedCard.getAttribute("data-card-id");
+  await inspectedCard.click({ button: "right" });
   await expect(page.locator(".inspection.single-card")).toBeVisible();
   await page.locator(".inspection.single-card .action-card").hover();
-  await expect(page.getByRole("tooltip")).toContainText(CARDS.find((card) => card.species === chosen)!.name);
+  await expect(page.getByRole("tooltip")).toContainText(definition(inspectedId!).name);
   await page.keyboard.press("Escape");
   await page.keyboard.press("Escape");
   await destination.click();
