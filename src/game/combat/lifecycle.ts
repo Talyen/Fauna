@@ -1,5 +1,5 @@
+import { chance as succeeds } from "../chance";
 import { isEnemy, battlefield } from "../battlefield";
-import { roll } from "../random";
 import { draw } from "../card-zones";
 import { hasTalent, creaturePassive } from "../progression";
 
@@ -71,11 +71,12 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
             : Math.round(amount / 2)
           : Math.max(0, amount - Math.max(1, Math.round(amount * 0.2)));
     if (isEnemy(unit) && !isEnemy(source)) {
-      if (status === "burn" && hasTalent(state, "burn.smoldering") && roll(state) < 0.1) stats.burn = amount;
+      if (status === "burn" && hasTalent(state, "burn.smoldering") && succeeds(state, 0.1, false, events))
+        stats.burn = amount;
       if (status === "poison") {
         if (stats.controlled === "freeze" && hasTalent(state, "freeze.cryo-preservation"))
           stats.poison = amount;
-        if (hasTalent(state, "poison.virulent") && roll(state) < 0.1)
+        if (hasTalent(state, "poison.virulent") && succeeds(state, 0.1, false, events))
           stats.poison = Math.min(STACK_LIMIT, amount + 1);
       }
     }

@@ -23,8 +23,9 @@ import {
   removeControlBuildup,
   type Combatant,
 } from "./index";
+import { chance as succeeds } from "../chance";
 import { roll } from "../random";
-import { fillHand, MAX_HAND_SIZE, draw } from "../card-zones";
+import { fillHand, MAX_HAND_SIZE, draw, redrawHand } from "../card-zones";
 import type { Creature, Enemy, GameState, GameEvent, BattleState } from "../types";
 
 type AbilityAction = {
@@ -42,7 +43,7 @@ const opposingRow = (state: GameState, action: AbilityAction): Combatant[] =>
   battlefield(state, action.side === "player" ? "enemy" : "player");
 const alive = (row: Combatant[]) => row.filter((unit) => unit.health > 0);
 
-function encore(state: GameState, actor: Combatant) {
+function encore(state: GameState, actor: Combatant, events: GameEvent[]) {
   const stats = combat(actor);
   const chance = creaturePassive("maxHealth" in actor ? undefined : state, actor.species).effects.reduce(
     (total, effect) => total + (effect.kind === "encore" ? effect.amount : 0),
@@ -50,9 +51,9 @@ function encore(state: GameState, actor: Combatant) {
   );
   if (chance <= 0 || stats.encoreUsed) return false;
   stats.encoreUsed = true;
-  return roll(state) < chance / 100;
+  return succeeds(state, chance / 100, "maxHealth" in actor, events);
 }
-function kindlingFlourish(state: GameState, actor: Combatant) {
+function kindlingFlourish(state: GameState, actor: Combatant, events: GameEvent[]) {
   const stats = combat(actor);
   if (stats.cardsPlayedThisTurn >= 2) return false;
   stats.cardsPlayedThisTurn++;
@@ -61,7 +62,7 @@ function kindlingFlourish(state: GameState, actor: Combatant) {
     (total, effect) => total + (effect.kind === "kindlingFlourish" ? effect.amount : 0),
     0,
   );
-  return chance > 0 && (chance === 100 || roll(state) < chance / 100);
+  return succeeds(state, chance / 100, "maxHealth" in actor, events);
 }
 function recoverDiscard(state: GameState, events: GameEvent[]) {
   const battle = state.battle!;
@@ -250,13 +251,18 @@ export function executeAbility(
       grantArmor(state, actor, stolen, events);
       triggerArmorBreak(state, depletion, events);
     }
-    if (keywords.includes("block") && hasTalent(state, "armor.armored-surge") && roll(state) < 0.1)
+    if (
+      keywords.includes("block") &&
+      hasTalent(state, "armor.armored-surge") &&
+      succeeds(state, 0.1, enemy, events)
+    )
       grantArmor(state, actor, 6, events);
   }
   if (actor.health <= 0) return;
-  const flourishRepeat = kindlingFlourish(state, actor);
-  const encoreRepeat = encore(state, actor);
-  const abilityRepeat = def.repeatChance !== undefined && roll(state) < def.repeatChance / 100;
+  const flourishRepeat = kindlingFlourish(state, actor, events);
+  const encoreRepeat = encore(state, actor, events);
+  const abilityRepeat =
+    def.repeatChance !== undefined && succeeds(state, def.repeatChance / 100, enemy, events);
   const repeatTalents = [
     ["burn", "burn.flash-fire"],
     ["freeze", "freeze.winter-s-grasp"],
@@ -267,7 +273,8 @@ export function executeAbility(
   const repeat =
     !enemy &&
     repeatTalents.some(
-      ([keyword, talent]) => keywords.includes(keyword) && hasTalent(state, talent) && roll(state) < 0.1,
+      ([keyword, talent]) =>
+        keywords.includes(keyword) && hasTalent(state, talent) && succeeds(state, 0.1, enemy, events),
     );
   for (let play = 0; play < (repeat || encoreRepeat || abilityRepeat || flourishRepeat ? 2 : 1); play++) {
     if (
@@ -286,7 +293,7 @@ export function executeAbility(
         text: `${name} repeats ${def.name}${flourishRepeat ? " with Kindling Flourish" : encoreRepeat ? " with Encore" : ""}`,
       });
     const criticalBonus = def.effect === "attack" ? openingCriticalBonus(state, actor) : 0;
-    const blindMiss = def.effect === "attack" ? beginAttack(state, actor) : false;
+    const blindMiss = def.effect === "attack" ? beginAttack(state, actor, events) : false;
     const kind = def.effect;
     switch (kind) {
       case "procession":
@@ -312,6 +319,24 @@ export function executeAbility(
               : [];
         for (const recipient of targets) {
           if (actor.health <= 0) break;
+          if (def.purgeThorns) {
+            const stats = combat(recipient);
+            for (const status of ["thorns", "waterThorns"] as const) {
+              const removed = stats[status];
+              stats[status] = 0;
+              if (removed)
+                events.push({
+                  kind: "status",
+                  actorId: actor.id,
+                  targetId: recipient.id,
+                  status: "purge",
+                  affectedStatus: status,
+                  outcome: "remove",
+                  amount: -removed,
+                  text: `Purge ${status === "thorns" ? "Thorns" : "Water Thorns"}`,
+                });
+            }
+          }
           hit(state, actor, recipient, value, damageType, events, {
             origin: "ability",
             blindMiss,
@@ -356,6 +381,33 @@ export function executeAbility(
       case "draw":
         if (action.side === "enemy" && action.actor.deck) drawBossCards(state, action.actor.deck, value);
         else if (!enemy) draw(state, value, events);
+        break;
+      case "redistributeBlock": {
+        const recipients = alive(friendlyRow(state, action));
+        const total = recipients.reduce((sum, unit) => sum + unit.block, 0);
+        const share = Math.floor(total / recipients.length);
+        const remainder = total % recipients.length;
+        // This moves existing protection, so it must not trigger gain/conversion/sharing rewards.
+        recipients.forEach((unit, index) => {
+          const next = share + Number(index < remainder);
+          const delta = next - unit.block;
+          unit.block = next;
+          if (delta)
+            events.push({
+              kind: "status",
+              status: "block",
+              outcome: delta > 0 ? "gain" : "remove",
+              actorId: actor.id,
+              targetId: unit.id,
+              amount: delta,
+              text: "Wish Exchange redistributes Block",
+            });
+        });
+        for (const recipient of recipients) grantBlock(state, recipient, value, events);
+        break;
+      }
+      case "redraw":
+        if (!enemy) redrawHand(state, events);
         break;
       case "recover":
         if (!enemy) recoverDiscard(state, events);

@@ -1,3 +1,4 @@
+import { chance as succeeds } from "../chance";
 import { isEnemy, battlefield } from "../battlefield";
 import { roll } from "../random";
 import { draw } from "../card-zones";
@@ -251,7 +252,10 @@ export function* applyHarmfulStatus(
       0,
     );
     const burnReflection = type === "burn" && stats.reflectBurn;
-    if (enemies.length && (burnReflection || stats.reflect || (chance > 0 && roll(state) < chance / 100))) {
+    if (
+      enemies.length &&
+      (burnReflection || stats.reflect || succeeds(state, chance / 100, !alliedTarget, events))
+    ) {
       const recipient = enemies[Math.floor(roll(state) * enemies.length)]!;
       if (burnReflection) stats.reflectBurn = false;
       else stats.reflect = false;

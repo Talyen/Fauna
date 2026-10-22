@@ -26,3 +26,5 @@
 - [Rookhaven](rookhaven.md) · [implementation](../../../src/game/content/creatures/rookhaven.ts)
 
 - [Memento](memento.md) — Legendary; Echoes and Pearls
+
+- [Euphera](euphera.md) · [implementation](../../../src/game/content/creatures/euphera.ts)
