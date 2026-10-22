@@ -8,7 +8,8 @@ export interface SaveCandidate {
 }
 interface SaveStorage {
   readCandidates(): Promise<SaveCandidate[]>;
-  write(data: string): Promise<void>;
+  /** The application supplies validation when an adapter rotates recoverable checkpoints. */
+  write(data: string, isRecoverable?: (data: string) => boolean): Promise<void>;
 }
 interface SteamCapabilities {
   readonly available: boolean;

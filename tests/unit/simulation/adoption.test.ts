@@ -3,7 +3,7 @@ import { createDiagnostics } from "../../../src/application/diagnostics";
 import { runJourney, type JourneyConfig } from "../../../src/tooling/playthrough";
 import { contentCatalog, validateCatalog } from "../../../src/game/content-validation";
 const config: JourneyConfig = {
-  seed: 42,
+  seed: 1648773224,
   runs: 2,
   starter: "emberback",
   policy: "heuristic",
@@ -15,7 +15,7 @@ describe("headless production sessions", () => {
   // Several full simulations and checkpoint replays need headroom on shared hosted CPUs
   it("replays journeys exactly across serialized save/resume without leaking policy randomness", async () => {
     const journey = await runJourney(config, "fixture");
-    expect(journey.complete).toBe(true);
+    expect(journey.complete, journey.reason).toBe(true);
     expect(journey.steps.every((step) => step.accepted)).toBe(true);
     const replay = await runJourney({ ...config, resumeEvery: 1 }, "fixture", journey.initial, journey);
     expect(replay.steps).toEqual(journey.steps);
