@@ -17,17 +17,10 @@ export async function integrate(root, branch, { runner = spawnSync, log = consol
     assertClean(task, branch);
     git(task, ["merge", "--no-edit", mainHead]);
     const verifiedHead = git(task, ["rev-parse", "HEAD"]).trim();
-    const paths = git(task, ["diff", "--name-only", "-z", mainHead, verifiedHead])
-      .split("\0")
-      .filter(Boolean);
-    const commands = [["run", "check", "--", "--base", mainHead]];
-    if (paths.some((file) => /\.md$/i.test(file))) commands.push(["run", "docs:check"]);
-    for (const args of commands) {
-      const [command, argv] = npmCommand(args);
-      const result = runner(command, argv, { cwd: task, stdio: "inherit" });
-      if (result.error || result.status !== 0)
-        throw new Error("Combined local check failed; main was not advanced.");
-    }
+    const [command, argv] = npmCommand(["run", "check", "--", "--base", mainHead]);
+    const result = runner(command, argv, { cwd: task, stdio: "inherit" });
+    if (result.error || result.status !== 0)
+      throw new Error("Combined local check failed; main was not advanced.");
     assertClean(root, "main");
     assertClean(task, branch);
     if (

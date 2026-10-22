@@ -3,7 +3,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { identity } from "../../../scripts/lib/tool-runtime.mjs";
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
 import {
   validateBrowserCoverage,
   validateJobs,
@@ -11,6 +11,8 @@ import {
   validateInteraction,
   planBrowserShards,
   browserDurations,
+  buildFingerprint,
+  validateBuildEvidence,
 } from "../../../scripts/ci/ci.mjs";
 
 const test = (id, overrides = {}) => ({
@@ -82,7 +84,11 @@ describe("CI coverage gate", () => {
       ]),
     );
     expect(() => validateJobs(jobs, "1")).not.toThrow();
-    expect(() => validateJobs(jobs, "2")).toThrow("another workflow attempt");
+    expect(() => validateJobs(jobs, "2")).not.toThrow();
+    for (const attempt of [undefined, "0", "future", "3"])
+      expect(() => validateJobs({ ...jobs, unit: { result: "success", outputs: { attempt } } }, "2")).toThrow(
+        "unit",
+      );
     for (const name of Object.keys(jobs))
       for (const result of ["failure", "cancelled", "skipped", undefined])
         expect(() => validateJobs({ ...jobs, [name]: { result } }, "1")).toThrow(name);
@@ -171,10 +177,17 @@ describe("workflow timing measurements", () => {
   });
 });
 
-it("fails the executable final gate for upstream failures, missing reports and interrupted shards", async () => {
+const gateRoots = [];
+afterEach(() => {
+  for (const root of gateRoots.splice(0)) rmSync(root, { recursive: true, force: true });
+});
+async function gateFixture() {
   const root = mkdtempSync(path.join(tmpdir(), "fauna-ci-gate-"));
+  gateRoots.push(root);
   const script = path.resolve(import.meta.dirname, "../../../scripts/ci/ci.mjs");
   const ids = { sha: "commit", run: "123", attempt: "1" };
+  const manifest = { ...ids, files: { "dist/index.js": "a".repeat(64) } };
+  const build = buildFingerprint(manifest);
   const jobs = Object.fromEntries(
     ["prepare", "static", "unit", "build", "browser", "interactions", "windows"].map((name) => [
       name,
@@ -185,7 +198,7 @@ it("fails the executable final gate for upstream failures, missing reports and i
     mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
     writeFileSync(path.join(root, file), JSON.stringify(value));
   };
-  const run = (needs = jobs) =>
+  const run = (needs = jobs, attempt = ids.attempt) =>
     spawnSync(process.execPath, [script, "gate"], {
       cwd: root,
       encoding: "utf8",
@@ -193,71 +206,120 @@ it("fails the executable final gate for upstream failures, missing reports and i
         ...process.env,
         GITHUB_SHA: ids.sha,
         GITHUB_RUN_ID: ids.run,
-        GITHUB_RUN_ATTEMPT: ids.attempt,
+        GITHUB_RUN_ATTEMPT: attempt,
         GITHUB_STEP_SUMMARY: path.join(root, "summary.md"),
         CI_SHARDS: "1",
         CI_NEEDS: JSON.stringify(needs),
       },
     });
-  try {
-    put("reports/ci/build.json", ids);
-    put("reports/ci/discovery.json", test("a"));
-    put("reports/playwright.json", test("a"));
-    put("reports/shards/browser-shard-1/reports/ci/shard.json", { ...ids, shard: 1, total: 1 });
-    put("reports/shards/browser-shard-1/reports/playwright.json", test("a"));
-    put("reports/vitest.json", {
-      success: true,
-      numFailedTests: 0,
-      numFailedTestSuites: 0,
-      numPendingTests: 0,
-      numPendingTestSuites: 0,
-      numTotalTests: 1,
-      numPassedTests: 1,
-      testResults: [{ status: "passed", assertionResults: [{ status: "passed" }] }],
-    });
-    put("reports/interactions/ci/report.json", {
-      format: 1,
-      family: "mixed",
-      initial: "checkpoint",
-      complete: true,
-      failure: null,
-      identity: await identity(),
-      seed: 42,
-      actions: Array(12).fill({ kind: "reload", checkpointHash: "a".repeat(64) }),
-    });
-    const green = run();
-    expect(green.stderr).toBe("");
-    expect(green.status).toBe(0);
-    expect(readFileSync(path.join(root, "summary.md"), "utf8")).toContain("All required jobs succeeded");
-    for (const job of ["static", "browser", "windows"])
-      expect(run({ ...jobs, [job]: { result: "failure" } }).status).not.toBe(0);
-    for (const file of [
-      "reports/vitest.json",
-      "reports/ci/discovery.json",
-      "reports/shards/browser-shard-1/reports/ci/shard.json",
-      "reports/playwright.json",
-    ]) {
-      const original = readFileSync(path.join(root, file), "utf8");
-      rmSync(path.join(root, file));
-      expect(run().status).not.toBe(0);
-      writeFileSync(path.join(root, file), original);
-    }
-    put(
-      "reports/shards/browser-shard-1/reports/playwright.json",
-      test("a", { results: [{ status: "interrupted", retry: 0 }] }),
-    );
-    expect(run().status).not.toBe(0);
-    put("reports/shards/browser-shard-1/reports/playwright.json", test("a"));
-    put("reports/shards/browser-shard-1/reports/ci/shard.json", {
-      ...ids,
-      attempt: "old",
-      shard: 1,
-      total: 1,
-    });
-    expect(run().status).not.toBe(0);
-  } finally {
-    rmSync(root, { recursive: true, force: true });
+  put("reports/ci/build.json", manifest);
+  put("reports/ci/unit.json", ids);
+  put("reports/interactions/ci/evidence.json", { ...ids, build });
+  put("reports/ci/discovery.json", test("a"));
+  put("reports/playwright.json", test("a"));
+  put("reports/shards/browser-shard-1/reports/ci/shard.json", { ...ids, build, shard: 1, total: 1 });
+  put("reports/shards/browser-shard-1/reports/playwright.json", test("a"));
+  put("reports/vitest.json", {
+    success: true,
+    numFailedTests: 0,
+    numFailedTestSuites: 0,
+    numPendingTests: 0,
+    numPendingTestSuites: 0,
+    numTotalTests: 1,
+    numPassedTests: 1,
+    testResults: [{ status: "passed", assertionResults: [{ status: "passed" }] }],
+  });
+  put("reports/interactions/ci/report.json", {
+    format: 1,
+    family: "mixed",
+    initial: "checkpoint",
+    complete: true,
+    failure: null,
+    identity: await identity(),
+    seed: 42,
+    actions: Array(12).fill({ kind: "reload", checkpointHash: "a".repeat(64) }),
+  });
+  const shardPath = "reports/shards/browser-shard-1/reports/ci/shard.json";
+  return { root, ids, build, jobs, put, run, shardPath };
+}
+
+it("accepts mixed successful attempts of the same run and records their build evidence", async () => {
+  const { root, ids, build, jobs, put, run, shardPath } = await gateFixture();
+  const green = run();
+  expect(green.stderr).toBe("");
+  expect(green.status).toBe(0);
+  expect(run(jobs, "2").status).toBe(0);
+  // A failed consumer reruns against the unchanged build while other successful jobs are reused.
+  put("reports/ci/unit.json", { ...ids, attempt: "2" });
+  put("reports/interactions/ci/evidence.json", { ...ids, attempt: "2", build });
+  put(shardPath, {
+    ...ids,
+    attempt: "2",
+    build,
+    shard: 1,
+    total: 1,
+  });
+  const mixed = {
+    ...jobs,
+    unit: { result: "success", outputs: { attempt: "2" } },
+    interactions: { result: "success", outputs: { attempt: "2" } },
+  };
+  expect(run(mixed, "2").status).toBe(0);
+  const record = JSON.parse(readFileSync(path.join(root, "reports/ci/evidence.json"), "utf8"));
+  expect(record.build.attempt).toBe("1");
+  expect(record.interaction.attempt).toBe("2");
+  expect(readFileSync(path.join(root, "summary.md"), "utf8")).toContain("All required jobs succeeded");
+});
+
+it("rejects unrelated, future and mismatched executable gate evidence", async () => {
+  const { ids, build, jobs, put, run, shardPath } = await gateFixture();
+  for (const change of [{ sha: "other" }, { run: "other" }, { attempt: "3" }, { build: "b".repeat(64) }]) {
+    put(shardPath, { ...ids, build, shard: 1, total: 1, ...change });
+    expect(run(jobs, "2").status).not.toBe(0);
   }
+  put(shardPath, { ...ids, build, shard: 1, total: 1 });
+  put("reports/ci/unit.json", { ...ids, attempt: "2" });
+  expect(run(jobs, "2").status).not.toBe(0);
+  put("reports/ci/unit.json", ids);
+  put("reports/interactions/ci/evidence.json", { ...ids, build: "b".repeat(64) });
+  expect(run(jobs, "2").status).not.toBe(0);
+  put("reports/interactions/ci/evidence.json", { ...ids, build });
+});
+
+it("fails the executable gate for upstream failures and missing reports", async () => {
+  const { root, jobs, run } = await gateFixture();
+  for (const job of ["static", "browser", "windows"])
+    expect(run({ ...jobs, [job]: { result: "failure" } }).status).not.toBe(0);
+  for (const file of [
+    "reports/ci/unit.json",
+    "reports/interactions/ci/evidence.json",
+    "reports/vitest.json",
+    "reports/ci/discovery.json",
+    "reports/shards/browser-shard-1/reports/ci/shard.json",
+    "reports/playwright.json",
+  ]) {
+    const original = readFileSync(path.join(root, file), "utf8");
+    rmSync(path.join(root, file));
+    expect(run().status).not.toBe(0);
+    writeFileSync(path.join(root, file), original);
+  }
+});
+
+it("rejects interrupted executable shards and invalid attempt identities", async () => {
+  const { ids, put, run } = await gateFixture();
+  put(
+    "reports/shards/browser-shard-1/reports/playwright.json",
+    test("a", { results: [{ status: "interrupted", retry: 0 }] }),
+  );
+  expect(run().status).not.toBe(0);
+  put("reports/shards/browser-shard-1/reports/playwright.json", test("a"));
+  put("reports/shards/browser-shard-1/reports/ci/shard.json", {
+    ...ids,
+    attempt: "old",
+    shard: 1,
+    total: 1,
+  });
+  expect(run().status).not.toBe(0);
 });
 
 it("ships portable merged JSON attachments and rejects missing resources", () => {
@@ -326,7 +388,21 @@ it("rejects modified or stale downloaded builds before starting browser consumer
     writeFileSync(path.join(root, "dist/extra.js"), "unexpected file");
     expect(run("verify-build").status).not.toBe(0);
     rmSync(path.join(root, "dist/extra.js"));
-    expect(run("verify-build", { GITHUB_RUN_ATTEMPT: "2" }).status).not.toBe(0);
+    expect(run("unit").status).toBe(0);
+    expect(JSON.parse(readFileSync(path.join(root, "reports/ci/unit.json"), "utf8")).attempt).toBe("1");
+    expect(run("interaction", { GITHUB_RUN_ATTEMPT: "2" }).status).toBe(0);
+    expect(
+      JSON.parse(readFileSync(path.join(root, "reports/interactions/ci/evidence.json"), "utf8")).build,
+    ).toBe(buildFingerprint(JSON.parse(readFileSync(path.join(root, "reports/ci/build.json"), "utf8"))));
+    expect(run("shard", { GITHUB_RUN_ATTEMPT: "2", CI_SHARD: "1", CI_SHARDS: "8" }).status).toBe(0);
+    expect(JSON.parse(readFileSync(path.join(root, "reports/ci/shard.json"), "utf8"))).toMatchObject({
+      attempt: "2",
+      shard: 1,
+      total: 8,
+    });
+    expect(run("verify-build", { GITHUB_RUN_ATTEMPT: "2" }).status).toBe(0);
+    expect(run("verify-build", { GITHUB_RUN_ATTEMPT: "0" }).status).not.toBe(0);
+    expect(run("verify-build", { GITHUB_RUN_ID: "other" }).status).not.toBe(0);
     expect(run("verify-build", { GITHUB_SHA: "another commit" }).status).not.toBe(0);
   } finally {
     rmSync(root, { recursive: true, force: true });
@@ -384,4 +460,29 @@ describe("duration-balanced browser planning", () => {
     failed.suites[0].suites[0].specs[0].tests[0].results[0].status = "failed";
     expect(browserDurations(failed)).toEqual({});
   });
+});
+
+it("reuses identical build bytes across attempts and rejects changed, empty or invalid inventories", () => {
+  const manifest = {
+    sha: "commit",
+    run: "123",
+    attempt: "1",
+    files: { "dist/a.js": "a".repeat(64), "dist/b.js": "b".repeat(64) },
+  };
+  const evidence = { sha: "commit", run: "123", attempt: "2", build: buildFingerprint(manifest) };
+  expect(() =>
+    validateBuildEvidence(evidence, {
+      ...manifest,
+      attempt: "3",
+      files: { "dist/b.js": "b".repeat(64), "dist/a.js": "a".repeat(64) },
+    }),
+  ).not.toThrow();
+  for (const change of [
+    { sha: "other" },
+    { run: "other" },
+    { files: {} },
+    { files: { "dist/a.js": "bad" } },
+    { files: { "dist/a.js": "c".repeat(64) } },
+  ])
+    expect(() => validateBuildEvidence(evidence, { ...manifest, ...change })).toThrow();
 });

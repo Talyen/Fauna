@@ -319,7 +319,7 @@ describe("player interface", () => {
       await session.load();
       render(<App session={session} />);
       await user.click(screen.getByRole("button", { name: "Continue" }));
-      expect(screen.queryByRole("button", { name: "Swap", exact: true })).toBeNull();
+      expect(screen.queryByRole("button", { name: "Swap" })).toBeNull();
       const reserve = screen.getByRole("button", { name: "Mossguard, backup" });
       if (input === "hover") await user.hover(reserve);
       else {

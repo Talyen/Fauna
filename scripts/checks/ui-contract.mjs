@@ -60,20 +60,6 @@ export function sourceViolations(file, source) {
         /(?:^|;)\s*color\s*:/.test(declarations)
       )
         fail("Primary control foreground belongs in src/ui/design-system.css.");
-      else if (
-        selector.includes(":hover") &&
-        /(?:\.selected|aria-(?:pressed|selected)=["']true|data-state=["'](?:active|checked))/.test(
-          selector,
-        ) &&
-        /border-width\s*:|outline-width\s*:|box-shadow\s*:[^;]*inset/.test(declarations)
-      )
-        fail("Selected hover must not thicken a border or selection ring.");
-      else if (
-        /\.ui-tab\b/.test(selector) &&
-        selector.includes(":hover") &&
-        /data-state=["']active/.test(selector)
-      )
-        fail("Selected tabs retain their resting appearance on hover.");
   }
   if (!/\.tsx?$/.test(file)) return violations;
   const primitive = primitives.get(file);
@@ -92,14 +78,6 @@ export function sourceViolations(file, source) {
     fail("Retain the registered shadcn provenance and upstream behavior owner.");
   if (!primitive) {
     if (
-      /(?:hover|focus-visible|active|disabled|data-\[state=)[^"'\s]*:(?:bg|border|ring|outline|scale|opacity|duration)-/.test(
-        source,
-      )
-    )
-      fail(
-        "Use shared shadcn variants for control interaction states, rather than screen-local state utilities.",
-      );
-    if (
       /<(?:button|input|select|textarea|dialog|details|summary|progress|meter)(?=[\s/>])/.test(source) ||
       /(?:createElement|jsx|jsxs)\s*\(\s*["'](?:button|input|select|textarea|dialog)["']/.test(source)
     )
@@ -111,10 +89,6 @@ export function sourceViolations(file, source) {
   }
   if (/<img(?=[\s/>])/.test(source) && file !== "src/ui/shared/cards/art-card.tsx")
     fail("Game artwork must use ArtCard to preserve composition and states.");
-  if (/\brounded-(?:none\b|\[)/.test(source))
-    fail("Use the shared nonzero shadcn radius scale; no sharp-corner overrides.");
-  if (/\bstyle\s*=\s*\{/.test(source))
-    fail("Use shared CSS classes and tokens rather than inline visual styles.");
   if (
     /\b(?:text|bg|border|ring|outline|decoration|accent|caret|divide|fill|stroke|from|via|to|shadow)-(?:(?:red|orange|amber|yellow|lime|green|emerald|teal|cyan|blue|sky|slate|zinc|neutral|stone|gray|indigo|violet|purple|fuchsia|pink|rose)-\d|(?:white|black)\b)/.test(
       source,

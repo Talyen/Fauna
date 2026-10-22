@@ -76,14 +76,20 @@ export async function cleanupWorktrees(root, { apply = false, log = console.log 
         const task = worktrees(root).find((entry) => entry.branch === `refs/heads/${branch}`);
         if (task?.locked) throw new Error(`Locked worktree: ${task.path}`);
         if (task) assertClean(task.path, branch);
+      } catch (error) {
+        results.push({ branch, status: "preserved", reason: error.message });
+        log(`Preserved ${branch}: ${error.message}`);
+        continue;
+      }
+      try {
         const result = apply ? removeMergedTask(root, branch) : { branch };
         results.push({ ...result, status: apply ? "removed" : "eligible" });
         log(
           `${apply ? "Removed" : "Eligible"} ${branch}${result.archive ? `; artifacts: ${result.archive}` : ""}`,
         );
       } catch (error) {
-        results.push({ branch, status: "preserved", reason: error.message });
-        log(`Preserved ${branch}: ${error.message}`);
+        results.push({ branch, status: "failed", reason: error.message });
+        log(`Cleanup failed for ${branch}: ${error.message}`);
       }
     }
     return results;
@@ -97,5 +103,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.ar
   if (args.length > 1 || (args.length && args[0] !== "--apply"))
     throw new Error("Usage: npm run worktree:cleanup -- [--apply]");
   const results = await cleanupWorktrees(process.cwd(), { apply: args[0] === "--apply" });
-  if (args[0] === "--apply" && results.some((entry) => entry.status === "preserved")) process.exitCode = 1;
+  if (results.some((entry) => entry.status === "failed")) process.exitCode = 1;
+  console.log(
+    `${results.filter((entry) => entry.status === "preserved").length} unfinished or protected tasks preserved; these do not block other tasks.`,
+  );
 }

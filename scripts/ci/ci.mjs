@@ -24,9 +24,33 @@ const identity = () => ({
   run: process.env.GITHUB_RUN_ID,
   attempt: process.env.GITHUB_RUN_ATTEMPT,
 });
-function assertIdentity(value) {
-  for (const [key, expected] of Object.entries(identity()))
-    if (!expected || value[key] !== expected) throw new Error(`CI ${key} identity mismatch`);
+function assertIdentity(value, expectedAttempt) {
+  const current = identity();
+  for (const key of ["sha", "run"])
+    if (!current[key] || value[key] !== current[key]) throw new Error(`CI ${key} identity mismatch`);
+  if (!validAttempt(value.attempt, current.attempt) || (expectedAttempt && value.attempt !== expectedAttempt))
+    throw new Error("CI attempt identity mismatch");
+}
+function validAttempt(attempt, current) {
+  return (
+    /^[1-9]\d*$/.test(attempt ?? "") && /^[1-9]\d*$/.test(current ?? "") && Number(attempt) <= Number(current)
+  );
+}
+export function buildFingerprint(manifest) {
+  if (
+    !manifest.files ||
+    !Object.keys(manifest.files).length ||
+    Object.values(manifest.files).some((hash) => !/^[a-f0-9]{64}$/.test(hash))
+  )
+    throw new Error("Missing or invalid build hashes");
+  return createHash("sha256")
+    .update(JSON.stringify(Object.entries(manifest.files).sort(([a], [b]) => a.localeCompare(b, "en"))))
+    .digest("hex");
+}
+export function validateBuildEvidence(evidence, manifest) {
+  for (const key of ["sha", "run"])
+    if (!manifest[key] || evidence[key] !== manifest[key]) throw new Error(`CI ${key} identity mismatch`);
+  if (evidence.build !== buildFingerprint(manifest)) throw new Error("Evidence tested a different build");
 }
 function files(directory) {
   return readdirSync(directory, { withFileTypes: true })
@@ -156,8 +180,8 @@ export function validateJobs(needs, attempt) {
   for (const name of names) {
     if (needs[name]?.result !== "success")
       throw new Error(`Required job ${name}: ${needs[name]?.result ?? "missing"}`);
-    if (name !== "browser" && needs[name].outputs?.attempt !== attempt)
-      throw new Error(`Required job ${name} belongs to another workflow attempt`);
+    if (name !== "browser" && !validAttempt(needs[name].outputs?.attempt, attempt))
+      throw new Error(`Required job ${name} has an invalid workflow attempt`);
   }
 }
 export function validateUnit(report) {
@@ -242,9 +266,18 @@ async function main(command) {
     assertIdentity(manifest);
     if (JSON.stringify(manifest.files) !== JSON.stringify(buildHashes()))
       throw new Error("Downloaded build differs from this run's build");
+  } else if (command === "unit") {
+    write("reports/ci/unit.json", identity());
+  } else if (command === "interaction") {
+    const manifest = read("reports/ci/build.json");
+    assertIdentity(manifest);
+    write("reports/interactions/ci/evidence.json", { ...identity(), build: buildFingerprint(manifest) });
   } else if (command === "shard") {
+    const manifest = read("reports/ci/build.json");
+    assertIdentity(manifest);
     write("reports/ci/shard.json", {
       ...identity(),
+      build: buildFingerprint(manifest),
       shard: Number(process.env.CI_SHARD),
       total: Number(process.env.CI_SHARDS),
       environment: {
@@ -277,16 +310,26 @@ async function main(command) {
   } else if (command === "durations") {
     write("reports/ci/browser-durations.json", browserDurations(read("reports/playwright.json")));
   } else if (command === "gate") {
-    validateJobs(JSON.parse(process.env.CI_NEEDS), process.env.GITHUB_RUN_ATTEMPT);
+    const needs = JSON.parse(process.env.CI_NEEDS);
+    validateJobs(needs, process.env.GITHUB_RUN_ATTEMPT);
     const total = Number(process.env.CI_SHARDS);
     if (![1, 4, 8].includes(total)) throw new Error("Invalid shard count");
-    assertIdentity(read("reports/ci/build.json"));
+    const manifest = read("reports/ci/build.json");
+    assertIdentity(manifest, needs.build.outputs.attempt);
+    const unit = read("reports/ci/unit.json");
+    assertIdentity(unit, needs.unit.outputs.attempt);
+    const interaction = read("reports/interactions/ci/evidence.json");
+    assertIdentity(interaction, needs.interactions.outputs.attempt);
+    validateBuildEvidence(interaction, manifest);
     const reports = [];
+    const evidence = { ...identity(), build: manifest, unit, interaction, shards: [] };
     for (let shard = 1; shard <= total; shard++) {
       const root = `reports/shards/browser-shard-${shard}`;
       const metadata = read(`${root}/reports/ci/shard.json`);
       assertIdentity(metadata);
+      validateBuildEvidence(metadata, manifest);
       if (metadata.shard !== shard || metadata.total !== total) throw new Error("Wrong shard identity");
+      evidence.shards.push(metadata);
       reports.push(read(`${root}/reports/playwright.json`));
     }
     const discovery = read("reports/ci/discovery.json");
@@ -294,6 +337,7 @@ async function main(command) {
     validateBrowserCoverage(discovery, [read("reports/playwright.json")]);
     validateUnit(read("reports/vitest.json"));
     validateInteraction(read("reports/interactions/ci/report.json"), await interactionIdentity());
+    write("reports/ci/evidence.json", evidence);
     write("reports/ci/browser-durations.json", browserDurations(read("reports/playwright.json")));
     const slowest = reports
       .flatMap((report) =>

@@ -87,6 +87,7 @@ jobs:
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: dependency-audit
+          overwrite: true
           retention-days: 7
           if-no-files-found: error
           path: reports/security/
@@ -147,6 +148,9 @@ jobs:
       - name: Summarize unit results
         if: always()
         run: node scripts/ci/ci-summarize.mjs vitest reports/vitest.json
+      - name: Record unit evidence identity
+        if: always()
+        run: node scripts/ci/ci.mjs unit
       - name: Upload unit-results
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
@@ -158,6 +162,7 @@ jobs:
           compression-level: 0
           path: |
             reports/vitest.json
+            reports/ci/unit.json
       - id: complete
         name: Record successful workflow attempt
         run: node scripts/ci/ci.mjs stamp
@@ -330,6 +335,9 @@ jobs:
         run: npx playwright install --with-deps --only-shell chromium
       - name: Seeded interaction replay
         run: npm run test:interactions -- --seed 42 --steps 12 --out reports/interactions/ci
+      - name: Record interaction build identity
+        if: always()
+        run: node scripts/ci/ci.mjs interaction
       - name: Upload interaction-results
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()
@@ -487,6 +495,7 @@ jobs:
             reports/ci/browser-durations.json
             reports/ci/browser-plan.json
             reports/ci/browser-timings.json
+            reports/ci/evidence.json
             reports/ci/timings-*.json
 
   provenance:

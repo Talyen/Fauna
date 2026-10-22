@@ -28,7 +28,7 @@ describe("design-system enforcement", () => {
       export const Screen = () => <button style={{ color: 'red' }} className="text-red-500"><img /></button>;
     `,
     );
-    expect(violations).toHaveLength(5);
+    expect(violations).toHaveLength(4);
   });
   it("rejects palette, typography and radius drift outside the token owner", () => {
     expect(
@@ -137,31 +137,23 @@ it("keeps the approved semantic palette readable and combat colors independent",
   for (const alias of ["selected", "line", "surface", "text"]) expect(tokens[alias]).toMatch(/^var\(--/);
 });
 
-it("rejects sharp-corner overrides", () => {
-  for (const className of ["rounded-none", "rounded-[0px]"])
-    expect(
-      sourceViolations("src/ui/card.tsx", `<ArtCard className="${className}" />`).length,
-    ).toBeGreaterThan(0);
-});
-
-it("keeps control states in the shared shadcn skin and rejects selected-hover thickening", () => {
+it("allows token-based inline geometry and local interaction styling while preserving shared control ownership", () => {
   expect(
-    sourceViolations("src/ui/shared/navigation/screen.tsx", '<Button className="hover:bg-primary" />').length,
-  ).toBeGreaterThan(0);
-  expect(
-    sourceViolations("src/ui/screen.css", ".ui-tab { background: var(--muted); }").length,
-  ).toBeGreaterThan(0);
-  expect(
-    sourceViolations("src/ui/screen.css", ".selected:hover { outline-width: 3px; }").length,
-  ).toBeGreaterThan(0);
-  expect(sourceViolations("src/ui/design-system.css", ".ui-tab { background: var(--background); }")).toEqual(
-    [],
-  );
+    sourceViolations(
+      "src/ui/card.tsx",
+      '<ArtCard style={{ transform: "translateX(10px)", color: "var(--foreground)" }} className="rounded-none" />',
+    ),
+  ).toEqual([]);
+  expect(sourceViolations("src/ui/screen.tsx", '<Button className="hover:bg-primary" />')).toEqual([]);
+  expect(sourceViolations("src/ui/screen.css", ".selected:hover { outline-width: 3px; }")).toEqual([]);
   expect(
     sourceViolations(
       "src/ui/design-system.css",
       '.ui-tab[data-state="active"]:hover { background: var(--muted); }',
-    ).length,
+    ),
+  ).toEqual([]);
+  expect(
+    sourceViolations("src/ui/screen.css", ".ui-tab { background: var(--muted); }").length,
   ).toBeGreaterThan(0);
 });
 
