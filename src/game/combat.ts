@@ -356,8 +356,10 @@ export function grantStatus(
 }
 /** Resolve after the Armor-removing effect, so its original hit completes first. */
 export function triggerArmorBreak(state: GameState, unit: Combatant, events: GameEvent[]) {
-  if (unit.health <= 0 || !state.battle) return;
+  if (state.phase !== "battle" || unit.health <= 0 || !state.battle) return;
   const allied = !("maxHealth" in unit);
+  const row = allied ? state.team : state.battle.enemies;
+  if (!row.some((deployed) => deployed.id === unit.id)) return;
   const amount = creaturePassive(allied ? state : undefined, unit.species).effects.reduce(
     (total, effect) => total + (effect.kind === "armorBreak" ? effect.amount : 0),
     0,

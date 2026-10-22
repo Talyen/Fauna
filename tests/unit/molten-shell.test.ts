@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
 import { produce } from "immer";
-import { combat, freshCombat, hit, removeEffects } from "../../src/game/combat";
+import { combat, freshCombat, hit, removeEffects, tickStatuses } from "../../src/game/combat";
 import { dispatch, previewCard } from "../../src/game/engine";
 import { COMBAT_PACKS } from "../../src/game/encounters";
 import { creaturePassive } from "../../src/game/progression";
@@ -97,6 +97,22 @@ it("keeps enemy Molten Shell at its base tier and excludes reserves", () => {
   expect(next.team.map((ally, index) => game.team[index]!.health - ally.health)).toEqual([1, 1, 1]);
   expect(next.team.map((ally) => ally.combat!.burn)).toEqual([1, 1, 1]);
   expect(next.reserves).toEqual(game.reserves);
+});
+
+it("does not activate Molten Shell when periodic damage breaks Armor after swapping into backup", () => {
+  const game = produce(battle(6), (draft) => {
+    draft.roster.push("mossguard");
+    draft.reserves.push({ ...draft.team[1]!, id: "backup-moss", combat: freshCombat() });
+    combat(draft.team[0]!).armor = 1;
+    combat(draft.team[0]!).burn = 1;
+  });
+  const swapped = accept(game, { type: "swap", activeId: "ally-0", reserve: "backup-moss" });
+  const events: GameEvent[] = [];
+  const next = produce(swapped, (draft) => tickStatuses(draft, draft.reserves[0]!, events));
+  expect(next.reserves[0]!.health).toBe(swapped.reserves[0]!.health - 1);
+  expect(next.reserves[0]!.combat!.armor).toBe(0);
+  expect(next.battle!.enemies).toEqual(swapped.battle!.enemies);
+  expect(decodeSave(encodeSave(next))).toEqual(next);
 });
 
 it("resolves opposing Molten Shells once each without a retaliation loop", () => {
