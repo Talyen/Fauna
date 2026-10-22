@@ -5,12 +5,13 @@ import {
   normalizeAudioPreferences,
 } from "../../../src/ui/settings/audio-preferences";
 
-function fixture(quiet = false) {
+function fixture(quiet = false, beforeCreate = (_url: string) => {}) {
   const media: (MediaVoice & { url: string })[] = [];
   const report = vi.fn();
   const runtime = createAudioRuntime(
     report,
     (url) => {
+      beforeCreate(url);
       const voice = {
         url,
         volume: 0,
@@ -31,6 +32,27 @@ function fixture(quiet = false) {
   return { runtime, media, report };
 }
 afterEach(() => vi.useRealTimers());
+it("recreates the previous track after a failed transition instead of replaying released media", () => {
+  vi.useFakeTimers();
+  let fail = false;
+  const { runtime, media, report } = fixture(false, () => {
+    if (fail) throw new Error("Media unavailable");
+  });
+  runtime.unlock();
+  vi.advanceTimersByTime(200);
+  const old = media.at(-1)!;
+  fail = true;
+  runtime.music("boss");
+  vi.advanceTimersByTime(200);
+  expect(report).toHaveBeenCalledTimes(1);
+  expect(old.removeAttribute).toHaveBeenCalledWith("src");
+  fail = false;
+  runtime.music("menu");
+  expect(media.at(-1)).not.toBe(old);
+  expect(vi.mocked(old.play)).toHaveBeenCalledTimes(1);
+  expect(media.at(-1)!.play).toHaveBeenCalledTimes(1);
+  runtime.dispose();
+});
 it("applies live volume, background mute, bounded voices and disposal", () => {
   vi.useFakeTimers();
   const { runtime, media } = fixture();

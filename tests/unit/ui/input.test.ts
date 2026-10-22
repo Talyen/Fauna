@@ -6,7 +6,7 @@ afterEach(() => {
   vi.unstubAllGlobals();
   vi.restoreAllMocks();
 });
-function harness() {
+function harness(onAction?: (action: InputAction) => void, suspended = () => false) {
   vi.spyOn(document, "hasFocus").mockReturnValue(true);
   let frame: FrameRequestCallback = () => {};
   let pads: Array<Pick<Gamepad, "mapping" | "buttons" | "axes"> | null> = [];
@@ -18,7 +18,14 @@ function harness() {
   vi.stubGlobal("cancelAnimationFrame", vi.fn());
   const actions: InputAction[] = [];
   const modes = vi.fn();
-  const dispose = connectInput((action) => actions.push(action), modes);
+  const dispose = connectInput(
+    (action) => {
+      actions.push(action);
+      onAction?.(action);
+    },
+    modes,
+    suspended,
+  );
   const tick = (now: number, buttons: number[] = [], axes = [0, 0]) => {
     pads = [
       {
@@ -43,6 +50,28 @@ function harness() {
 }
 
 describe("player input ownership", () => {
+  it("revokes the rest of a controller sample when an action suspends input", () => {
+    let suspended = false;
+    const h = harness(
+      () => {
+        suspended = true;
+      },
+      () => suspended,
+    );
+    try {
+      h.tick(10, [0, 1, 13]);
+      expect(h.actions).toEqual(["confirm"]);
+      h.tick(20, [0, 1, 13]);
+      suspended = false;
+      h.tick(30, [0, 1, 13]);
+      expect(h.actions).toEqual(["confirm"]);
+      h.tick(40);
+      h.tick(50, [1]);
+      expect(h.actions).toEqual(["confirm", "back"]);
+    } finally {
+      h.dispose();
+    }
+  });
   it("does not unwind multiple menu levels when Escape or inspect is held", () => {
     const h = harness();
     try {

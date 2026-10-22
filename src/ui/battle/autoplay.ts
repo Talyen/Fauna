@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
 import type { Session } from "../../application/session";
 import { chooseBattleCommand } from "../../application/battle-policy";
@@ -19,10 +19,16 @@ export function useAutoplay(session: Session, paused: boolean, autoEndTurn: bool
   const [foreground, setForeground] = useState(
     () => document.visibilityState !== "hidden" && document.hasFocus(),
   );
+  const foregroundNow = useRef(foreground);
   const view = useStore(session.store);
   useEffect(() => {
-    const blur = () => setForeground(false);
-    const focus = () => setForeground(document.visibilityState !== "hidden" && document.hasFocus());
+    const updateForeground = (value: boolean) => {
+      // Revoke queued actions before React commits the corresponding effect cleanup.
+      foregroundNow.current = value;
+      setForeground(value);
+    };
+    const blur = () => updateForeground(false);
+    const focus = () => updateForeground(document.visibilityState !== "hidden" && document.hasFocus());
     window.addEventListener("blur", blur);
     window.addEventListener("focus", focus);
     document.addEventListener("visibilitychange", focus);
@@ -41,6 +47,9 @@ export function useAutoplay(session: Session, paused: boolean, autoEndTurn: bool
     return scheduleAutoplay(() => {
       const current = session.store.getState();
       if (
+        !foregroundNow.current ||
+        document.visibilityState === "hidden" ||
+        !document.hasFocus() ||
         current.game.revision !== revision ||
         current.closing ||
         current.overlayActive ||

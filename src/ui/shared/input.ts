@@ -255,12 +255,25 @@ export function connectInput(
     }
     connected = present;
     for (const action of blocked) if (!actions.has(action)) blocked.delete(action);
+    const revoked = () => {
+      if (disposed || suspended || externallySuspended() || !document.hasFocus()) {
+        // An earlier action in this sample can revoke admission synchronously.
+        for (const held of actions) blocked.add(held);
+        connected.clear();
+        repeatAt.clear();
+        return true;
+      }
+      return false;
+    };
     for (const action of actions) {
-      if (blocked.has(action) || disposed) continue;
+      if (revoked()) break;
+      if (blocked.has(action)) continue;
       const directional = ["left", "right", "up", "down"].includes(action);
       if (!previous.has(action) || (directional && now >= (repeatAt.get(action) ?? 0))) {
         changeMode("controller", navigation || directional || action === "confirm" || action === "inspect");
+        if (revoked()) break;
         onAction(action);
+        if (revoked()) break;
         if (directional) repeatAt.set(action, now + (previous.has(action) ? 160 : 350));
       }
     }
