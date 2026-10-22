@@ -1,6 +1,7 @@
 const fs = require("node:fs/promises");
 const path = require("node:path");
 const saveFormat = require("../src/game/save-format.json");
+/** @param {string} directory */
 function createStorage(directory) {
   const primary = path.join(directory, "expedition.json");
   let queue = Promise.resolve();
@@ -25,6 +26,7 @@ function createStorage(directory) {
         throw new AggregateError(failures, "Save slots are unreadable.");
       return candidates;
     },
+    /** @param {string} data */
     write(data) {
       if (typeof data !== "string" || Buffer.byteLength(data) > 100000)
         return Promise.reject(new Error("Invalid save payload."));

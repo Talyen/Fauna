@@ -9,9 +9,7 @@ const FUSES = Object.freeze({
   [FuseV1Options.EnableEmbeddedAsarIntegrityValidation]: true,
   [FuseV1Options.OnlyLoadAppFromAsar]: true,
   [FuseV1Options.LoadBrowserProcessSpecificV8Snapshot]: true,
-  // Fauna's trusted file: renderer loads modules, fonts and media from local files.
-  // Disable this only alongside a verified replacement application protocol.
-  [FuseV1Options.GrantFileProtocolExtraPrivileges]: true,
+  [FuseV1Options.GrantFileProtocolExtraPrivileges]: false,
   [FuseV1Options.WasmTrapHandlers]: true,
 });
 async function installSnapshots(directory) {

@@ -1,6 +1,6 @@
 # Contributing
 
-[AGENTS.md](AGENTS.md) owns scope, Git authorization, preservation of unrelated work, and gameplay invariants. [Scripts](scripts/README.md) maps commands to their implementation. Use Node 24 and npm 11+, and install dependencies with `npm ci`.
+[AGENTS.md](AGENTS.md) owns scope, Git authorization, preservation of unrelated work, and gameplay invariants. [Scripts](scripts/README.md) maps commands to their implementation. Use the Node 24 LTS patch in `.node-version` and npm 12.2.1 (`npm install --global npm@12.2.1 --ignore-scripts`), and install dependencies with `npm ci`.
 
 ## Worktrees and integration
 
@@ -55,7 +55,9 @@ Local smoke has one worker, a 512 MiB heap, lower process priority when availabl
 
 Full unit runs, static checks, builds, browser/desktop journeys, packaging, coverage and performance runs are CI-owned by default. Agents run them locally only on explicit request. Do not substitute raw tool invocations to bypass this policy. Passing local integration is not full verification or release evidence.
 
-CI dependency installs use the lockfile, omit non-gating audit/funding requests and have a three-minute deadline. CI runs static/content checks, units/DOM, a Linux browser build and Windows packaging independently after a small planning job. Browser tests use eight shards with one worker each; interaction replay consumes the same Linux build. The build manifest binds assets to the evaluated commit, run and attempt. Every consumer verifies the downloaded build hashes. `npm run verify:full` remains the complete sequential verification command; it is CI-owned under the same local execution policy.
+CI selects the pinned npm version and installs with the lockfile. Install scripts require version-specific approval in `package.json`; `.npmrc` rejects unreviewed scripts. `npm run security:audit` checks all dependency advisories and retains the full report. The only temporary exception is the moderate `sprintf-js` formatter denial of service in the latest stable electron-builder download proxy logger (GHSA-hp3w-g68c-fv3c), expiring November 21, 2026; no player format strings reach that build-only path. New advisories and expired exceptions fail.
+
+CI dependency installs omit non-gating audit/funding requests and have a three-minute deadline. CI runs static/content checks, units/DOM, a Linux browser build and Windows packaging independently after a small planning job. Browser tests use eight shards with one worker each; interaction replay consumes the same Linux build. The build manifest binds assets to the evaluated commit, run and attempt. Every consumer verifies the downloaded build hashes. `npm run verify:full` remains the complete sequential verification command; it is CI-owned under the same local execution policy.
 
 The final `verify` job allows workflow cancellation and runs even when upstream checks fail and requires every upstream job, every shard, the full discovered browser case set, passing unit results and the complete seeded interaction trace. Only the named development-preview browser case is intentionally excluded from production CI. Focused `.only` tests, unexpected skips, retries, missing cases, duplicate cases and interrupted suites fail the gate. The five-failure browser limit applies separately to each shard. Use a full-workflow rerun: partial reruns cannot combine evidence from different attempts.
 

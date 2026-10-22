@@ -4,3 +4,38 @@ updates:
     directory: /
     schedule:
       interval: weekly
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      renderer:
+        patterns:
+          [
+            "react",
+            "react-dom",
+            "@types/react",
+            "@types/react-dom",
+            "@radix-ui/*",
+            "tailwind*",
+            "@tailwindcss/*",
+            "lucide-react",
+          ]
+      testing:
+        patterns: ["vitest", "jsdom", "@testing-library/*", "@playwright/test"]
+      desktop:
+        patterns: ["electron", "electron-builder", "@electron/*", "steamworks.js"]
+      tooling:
+        patterns:
+          [
+            "typescript",
+            "vite",
+            "@vitejs/*",
+            "oxlint*",
+            "knip",
+            "prettier",
+            "@swc/*",
+            "@rolldown/*",
+            "babel-plugin-react-compiler",
+          ]

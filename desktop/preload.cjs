@@ -1,4 +1,5 @@
 const { contextBridge, ipcRenderer } = require("electron");
+/** @type {(() => Promise<boolean>) | null} */
 let closeListener = null;
 ipcRenderer.on("fauna:prepare-close", async () => {
   let saved = false;
@@ -8,60 +9,55 @@ ipcRenderer.on("fauna:prepare-close", async () => {
     await ipcRenderer.invoke("fauna:close-ready", saved);
   }
 });
-contextBridge.exposeInMainWorld(
-  "faunaDesktop",
-  Object.freeze({
-    display: Object.freeze({
-      read: () => ipcRenderer.invoke("fauna:display-read"),
-      set: (mode) => ipcRenderer.invoke("fauna:display-set", mode),
-      subscribe: (listener) => {
-        const handler = (_event, state) => listener(state);
-        ipcRenderer.on("fauna:display-state", handler);
-        return () => ipcRenderer.removeListener("fauna:display-state", handler);
-      },
-    }),
-    cloud: Object.freeze(
-      Object.fromEntries(
-        [
-          "identity",
-          "readLocal",
-          "writeLocal",
-          "acknowledge",
-          "preserve",
-          "importStandalone",
-          "list",
-          "read",
-          "write",
-        ].map((method) => [method, (...args) => ipcRenderer.invoke(`fauna:cloud-${method}`, ...args)]),
-      ),
-    ),
-    onOverlay: (listener) => {
-      let live = true,
-        notified = false;
-      const handler = (_event, active) => {
-        notified = true;
-        if (live) listener(active === true);
-      };
-      ipcRenderer.on("fauna:overlay", handler);
-      ipcRenderer
-        .invoke("fauna:overlay-state")
-        .then((active) => {
-          if (live && !notified) listener(active === true);
-        })
-        .catch(() => {});
-      return () => {
-        live = false;
-        ipcRenderer.removeListener("fauna:overlay", handler);
-      };
-    },
-    readCandidates: () => ipcRenderer.invoke("fauna:read"),
-    writeSave: (data) => ipcRenderer.invoke("fauna:write", data),
-    quit: () => ipcRenderer.invoke("fauna:quit"),
-    onCloseRequested: (listener) => {
-      closeListener = listener;
-      return () => {
-        if (closeListener === listener) closeListener = null;
-      };
+/** @type {import("../src/platform/ports").DesktopBridge} */
+const bridge = Object.freeze({
+  display: Object.freeze({
+    read: () => ipcRenderer.invoke("fauna:display-read"),
+    set: (mode) => ipcRenderer.invoke("fauna:display-set", mode),
+    subscribe: (listener) => {
+      const handler = (_event, state) => listener(state);
+      ipcRenderer.on("fauna:display-state", handler);
+      return () => ipcRenderer.removeListener("fauna:display-state", handler);
     },
   }),
-);
+  cloud: Object.freeze({
+    identity: () => ipcRenderer.invoke("fauna:cloud-identity"),
+    readLocal: () => ipcRenderer.invoke("fauna:cloud-readLocal"),
+    writeLocal: (data) => ipcRenderer.invoke("fauna:cloud-writeLocal", data),
+    acknowledge: (id) => ipcRenderer.invoke("fauna:cloud-acknowledge", id),
+    preserve: (records) => ipcRenderer.invoke("fauna:cloud-preserve", records),
+    importStandalone: (use) => ipcRenderer.invoke("fauna:cloud-importStandalone", use),
+    list: () => ipcRenderer.invoke("fauna:cloud-list"),
+    read: (name) => ipcRenderer.invoke("fauna:cloud-read", name),
+    write: (name, data) => ipcRenderer.invoke("fauna:cloud-write", name, data),
+  }),
+  onOverlay: (listener) => {
+    let live = true,
+      notified = false;
+    const handler = (_event, active) => {
+      notified = true;
+      if (live) listener(active === true);
+    };
+    ipcRenderer.on("fauna:overlay", handler);
+    ipcRenderer
+      .invoke("fauna:overlay-state")
+      .then((active) => {
+        if (live && !notified) listener(active === true);
+      })
+      .catch(() => {});
+    return () => {
+      live = false;
+      ipcRenderer.removeListener("fauna:overlay", handler);
+    };
+  },
+  readCandidates: () => ipcRenderer.invoke("fauna:read"),
+  writeSave: (data) => ipcRenderer.invoke("fauna:write", data),
+  quit: () => ipcRenderer.invoke("fauna:quit"),
+  onCloseRequested: (listener) => {
+    closeListener = listener;
+    return () => {
+      if (closeListener === listener) closeListener = null;
+    };
+  },
+});
+contextBridge.exposeInMainWorld("faunaDesktop", bridge);

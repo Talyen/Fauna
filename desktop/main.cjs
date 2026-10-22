@@ -1,6 +1,19 @@
-const { app, BrowserWindow, ipcMain, screen, utilityProcess } = require("electron");
+const {
+  app,
+  BrowserWindow,
+  ipcMain,
+  screen,
+  utilityProcess,
+  protocol,
+  net,
+  crashReporter,
+} = require("electron");
 const path = require("node:path");
-const { pathToFileURL } = require("node:url");
+const { ENTRY, createResourceHandler } = require("./protocol.cjs");
+const { createRecovery } = require("./recovery.cjs");
+protocol.registerSchemesAsPrivileged([
+  { scheme: "fauna", privileges: { standard: true, secure: true, supportFetchAPI: true, corsEnabled: true } },
+]);
 const { createSteam } = require("./steam.cjs");
 const { createDisplay } = require("./display.cjs");
 const { isDevelopmentUrl } = require("./dev-url.cjs");
@@ -41,9 +54,14 @@ let display;
 let steam;
 const dev = app.isPackaged ? undefined : process.env.FAUNA_DEV_URL;
 if (dev && !isDevelopmentUrl(dev)) throw new Error("Untrusted development URL.");
-const entry = pathToFileURL(path.join(__dirname, "../dist/index.html")).href;
+const entry = ENTRY;
 const trusted = (url) => (dev ? url === `${dev}/` || url === dev : url === entry);
 app.whenReady().then(async () => {
+  protocol.handle(
+    "fauna",
+    createResourceHandler(path.join(__dirname, "../dist"), (url) => net.fetch(url)),
+  );
+  crashReporter.start({ uploadToServer: false });
   const isolated =
     process.env.FAUNA_DISABLE_STEAM === "1" ||
     !!process.env.FAUNA_SMOKE_USER_DATA ||
@@ -90,6 +108,7 @@ app.whenReady().then(async () => {
   const authorize = (event) => {
     if (
       closing ||
+      rendererGone ||
       event.sender !== window.webContents ||
       event.senderFrame !== window.webContents.mainFrame ||
       !trusted(event.senderFrame.url)
@@ -142,9 +161,19 @@ app.whenReady().then(async () => {
     if (saved === true) finishClose();
     else closeRequested = false;
   });
-  window.webContents.on("render-process-gone", () => {
+  const recovery = createRecovery({
+    directory: path.join(app.getPath("userData"), "diagnostics"),
+    drain: async () => {
+      await storage.drain();
+      await steam.readLocal();
+    },
+    reload: () => window.loadURL(dev || entry),
+    closing: () => closing || closeRequested || quitting || window.isDestroyed(),
+  });
+  window.webContents.on("render-process-gone", (_event, details) => {
     rendererGone = true;
     if (closeRequested) finishClose();
+    else void recovery.recover(details);
   });
   window.webContents.on("did-start-loading", () => {
     rendererGone = false;
@@ -159,6 +188,7 @@ app.whenReady().then(async () => {
   window.webContents.on("will-navigate", (event, url) => {
     if (!trusted(url)) event.preventDefault();
   });
+  window.webContents.session.setPermissionCheckHandler(() => false);
   window.webContents.session.setPermissionRequestHandler((_webContents, _permission, callback) =>
     callback(false),
   );
