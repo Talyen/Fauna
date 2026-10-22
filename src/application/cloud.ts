@@ -118,12 +118,12 @@ export function createCloud(
   let localData: string | null = null;
   let replacing = false;
   let acknowledged: string | null = null;
+  let durable: string | null = null;
   let retryTimer: ReturnType<typeof setTimeout> | undefined;
   let retrying = false;
   let initialized = false;
   let metadataWrites = Promise.resolve();
   let localCommits = Promise.resolve();
-  const commits = new Set<Promise<void>>();
   const scheduleRetry = () => {
     if (!alive || retryTimer || retrying || identity?.available === false || identity?.enabled === false)
       return;
@@ -186,6 +186,7 @@ export function createCloud(
     if (!port || !identity?.available) return;
     if (
       current?.payload === data &&
+      durable === current.id &&
       current.device === identity.device &&
       parents.length === 1 &&
       parents[0]?.id === current.id
@@ -198,7 +199,10 @@ export function createCloud(
     const next = await snapshot(data, identity, ++sequence, parents);
     if (!alive || token !== generation) return;
     const writing = metadataWrites.then(async () => {
-      if (alive && token === generation) await port.writeLocal(JSON.stringify(next));
+      if (alive && token === generation) {
+        await port.writeLocal(JSON.stringify(next));
+        durable = next.id;
+      }
     });
     metadataWrites = writing.catch(() => {});
     await writing;
@@ -344,6 +348,7 @@ export function createCloud(
         try {
           const saved = await parseSnapshot(raw, identity.profile);
           sequence = saved.device === identity.device ? saved.sequence : 0;
+          durable = saved.id;
           if (saved.payload === data) current = saved;
         } catch {
           /* Unknown ancestry stays a conflict, never a fabricated descendant. */
@@ -402,8 +407,6 @@ export function createCloud(
       // Include hashing and publication in the lane so each commit sees its durable parent.
       const operation = localCommits.then(() => commit(data));
       localCommits = operation.catch(() => {});
-      commits.add(operation);
-      void operation.finally(() => commits.delete(operation));
       return operation;
     },
     retry: reconcile,
@@ -412,9 +415,19 @@ export function createCloud(
       let timer: ReturnType<typeof setTimeout> | undefined;
       await Promise.race([
         (async () => {
-          await Promise.all([...commits, metadataWrites]);
-          // Commits may start an upload after hashing and local metadata persistence.
-          await running;
+          // Completion subscribers may admit another commit while an upload settles.
+          // Drain until both local and transport lanes remain unchanged.
+          let local: Promise<void>;
+          let metadata: Promise<void>;
+          let transport: Promise<void> | null;
+          do {
+            local = localCommits;
+            await local;
+            metadata = metadataWrites;
+            await metadata;
+            transport = running;
+            await transport;
+          } while (local !== localCommits || metadata !== metadataWrites || running !== null);
         })(),
         new Promise<void>((resolve) => {
           timer = setTimeout(resolve, timeout);
