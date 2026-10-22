@@ -185,10 +185,11 @@ describe("game commands", () => {
     }
     expect(a.phase).toBe("victory");
   });
-  it("supports all unlocked team combinations without engine failures or invalid saves", () => {
-    for (let first = 0; first < SPECIES.length - 2; first++)
-      for (let second = first + 1; second < SPECIES.length - 1; second++)
-        for (let third = second + 1; third < SPECIES.length; third++) {
+  for (let first = 0; first < SPECIES.length - 2; first++)
+    for (let second = first + 1; second < SPECIES.length - 1; second++)
+      for (let third = second + 1; third < SPECIES.length; third++) {
+        const lineup = [first, second, third].map((index) => SPECIES[index]!.name).join(", ");
+        it(`supports ${lineup} without engine failures or invalid saves`, () => {
           let s = teamRun(
             first * 100 + second * 10 + third,
             [first, second, third].map((index) => SPECIES[index]!.id),
@@ -213,8 +214,8 @@ describe("game commands", () => {
             ["victory", "defeat"],
             `${[first, second, third].map((index) => SPECIES[index]!.id).join(", ")} at encounter ${s.encounter}, turn ${s.battle?.turn}`,
           ).toContain(s.phase);
-        }
-  }, 30_000);
+        });
+      }
 });
 describe("save validation", () => {
   it.each(["not json", "{}", JSON.stringify({ ...createGame(), version: 999 }), "x".repeat(100001)])(
