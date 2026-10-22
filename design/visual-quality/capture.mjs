@@ -18,15 +18,10 @@ await mkdir(output, { recursive: true });
 const server = await createServer({ root, server: { middlewareMode: true }, appType: "custom" });
 let fixture, battle, unavailable, layoutViolations, expectControlColors;
 try {
-  const { createGame } = await server.ssrLoadModule("/src/game/engine.ts");
-  const { accept, winBattle, recruitChoice, run } = await server.ssrLoadModule("/tests/support/game.ts");
+  const { accept, merchantDestination, run } = await server.ssrLoadModule("/tests/support/game.ts");
   ({ expectControlColors } = await server.ssrLoadModule("/tests/e2e/support/control-colors.ts"));
   ({ layoutViolations } = await server.ssrLoadModule("/tests/e2e/support/layout-contract.ts"));
-  fixture = accept(accept(createGame(7), { type: "draft", species: createGame(7).starterOffers[0] }), {
-    type: "start",
-  });
-  fixture = winBattle(accept(fixture, { type: "beginBattle" }));
-  fixture = accept(fixture, recruitChoice(fixture));
+  fixture = merchantDestination();
   battle = run(42);
   unavailable = { ...accept(fixture, { type: "enterSupport", visit: fixture.support.id }), currency: 0 };
 } finally {

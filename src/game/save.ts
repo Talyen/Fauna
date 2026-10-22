@@ -1,4 +1,4 @@
-import { needsCampfire, merchantPrice } from "./destinations";
+import { needsCampfire, merchantPriceRange } from "./destinations";
 import { freeze } from "immer";
 import { MAX_HAND_SIZE } from "./card-zones";
 import { starterCount, collectedSpecies, KEYWORDS, talentPoints } from "./progression";
@@ -120,7 +120,7 @@ export function decodeSave(raw: string): GameState {
   if (s.support) {
     const v = s.support;
     // Stock keeps its original price when this visit sells Merchant's Favor.
-    const price = merchantPrice({ boons: s.boons.filter((boon) => boon !== v.purchased) });
+    const prices = merchantPriceRange({ boons: s.boons.filter((boon) => boon !== v.purchased) });
     invalid(
       !s.expedition ||
         v.encounter !== s.encounter ||
@@ -132,7 +132,8 @@ export function decodeSave(raw: string): GameState {
         v.stock.some(
           (r, i) =>
             r.slot !== `slot-${i}` ||
-            r.price !== price ||
+            r.price < prices.min ||
+            r.price > prices.max ||
             (s.boons.includes(r.boon) && v.purchased !== r.boon),
         ) ||
         (v.purchased !== null &&

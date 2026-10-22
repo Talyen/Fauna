@@ -11,11 +11,13 @@ export function ScreenHeading({
   back,
   openMenu,
   id,
+  trailing,
 }: {
   children: ReactNode;
   back?: () => void;
   openMenu?: () => void;
   id?: string;
+  trailing?: ReactNode;
 }) {
   const navigation = useContext(HeaderNavigation);
   return (
@@ -43,15 +45,18 @@ export function ScreenHeading({
         ) : null}
       </div>
       <h1 id={id}>{children}</h1>
-      <Button
-        variant="ghost"
-        size="icon"
-        className="compact-icon-control"
-        aria-label="Open menu"
-        onClick={openMenu ?? navigation.openMenu}
-      >
-        <Menu aria-hidden="true" />
-      </Button>
+      <div className="screen-heading-actions screen-heading-trailing">
+        {trailing}
+        <Button
+          variant="ghost"
+          size="icon"
+          className="compact-icon-control"
+          aria-label="Open menu"
+          onClick={openMenu ?? navigation.openMenu}
+        >
+          <Menu aria-hidden="true" />
+        </Button>
+      </div>
     </div>
   );
 }

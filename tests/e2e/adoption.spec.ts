@@ -151,13 +151,8 @@ for (const [width, height] of REVIEW_VIEWPORTS)
 
 for (const [width, height, scale] of LAYOUT_CASES)
   test(`Boon Merchant shelf and purchase resume at ${width}×${height}, text ${scale}`, async ({ page }) => {
-    const { accept, winBattle, recruitChoice } = await import("../support/game");
-    const { createGame } = await import("../../src/game/engine");
-    let fixture = accept(accept(createGame(7), { type: "draft", species: createGame(7).starterOffers[0]! }), {
-      type: "start",
-    });
-    fixture = winBattle(accept(fixture, { type: "beginBattle" }));
-    fixture = accept(fixture, recruitChoice(fixture));
+    const { accept, merchantDestination } = await import("../support/game");
+    const fixture = merchantDestination();
     const visit = fixture.support!.id;
     const slot = fixture.support!.stock[0]!;
     await page.setViewportSize({ width, height });
@@ -178,8 +173,14 @@ for (const [width, height, scale] of LAYOUT_CASES)
     await page.getByRole("button", { name: "Visit Boon Merchant", exact: true }).click();
     const entered = accept(fixture, { type: "enterSupport", visit });
     await expect(page.getByRole("heading", { name: "Boon Merchant", exact: true })).toBeVisible();
-    await expect(page.getByText("Limit 1", { exact: true })).toBeVisible();
-    await expect(page.getByRole("button", { name: /^Buy .+ for 20 Gold$/ })).toHaveCount(3);
+    await expect(page.getByText("Limit 1 per customer - No Refunds!", { exact: true })).toBeVisible();
+    await expect(page.locator(".merchant-policy em")).toHaveText("Limit 1 per customer - No Refunds!");
+    await expect(page.locator(".merchant-policy em")).toHaveCSS("font-style", "italic");
+    const row = await page.locator(".merchant-heading .screen-heading").boundingBox();
+    const wallet = await page.locator(".merchant-wallet").boundingBox();
+    expect(wallet!.y).toBeGreaterThanOrEqual(row!.y);
+    expect(wallet!.y + wallet!.height).toBeLessThanOrEqual(row!.y + row!.height);
+    await expect(page.getByRole("button", { name: /^Buy .+ for \d+ Gold$/ })).toHaveCount(3);
     await expect(page.locator(".merchant-offer h2, .merchant-offer > p:not(.merchant-status)")).toHaveCount(
       0,
     );
@@ -188,7 +189,7 @@ for (const [width, height, scale] of LAYOUT_CASES)
     }
     await captureScreen(page, { path: `reports/boon-merchant-shelf-${width}.png`, fullPage: true });
     await page
-      .getByRole("button", { name: /^Buy .+ for 20 Gold$/ })
+      .getByRole("button", { name: /^Buy .+ for \d+ Gold$/ })
       .first()
       .click();
     await expect(page.getByRole("heading", { name: "Boon received", exact: true })).toBeVisible();
@@ -208,7 +209,7 @@ for (const [width, height, scale] of LAYOUT_CASES)
     await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
     const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!));
     expect(saved).toEqual(accept(purchased, { type: "leaveSupport", visit }));
-    expect(saved.currency).toBe(0);
+    expect(saved.currency).toBe(fixture.currency - slot.price);
     expect(saved.journey.currency).toBe(20);
     expect(saved.expedition.lastRoom).toBe("merchant");
     expect(saved.rng).not.toBe(purchased.rng);

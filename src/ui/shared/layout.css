@@ -74,14 +74,14 @@
   align-items: center;
   gap: var(--screen-item-gap);
 }
-.screen-heading > button {
+.screen-heading-trailing {
   justify-self: end;
 }
 .screen-heading > h1 {
   margin: 0;
   text-align: center;
 }
-.screen-heading > button {
+.screen-heading-trailing > button {
   flex-shrink: 0;
 }
 .confirm-actions {

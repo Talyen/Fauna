@@ -36,16 +36,19 @@ export function SupportScreen({ game, send }: { game: StateAt<"support">; send: 
   return (
     <Screen className="campfire-screen merchant-screen">
       <header className="merchant-heading">
-        <ScreenHeading back={finish}>{purchased ? "Boon received" : "Boon Merchant"}</ScreenHeading>
-        {!purchased ? (
-          <div className="merchant-context">
-            <p className="merchant-wallet">
-              <Coins className="gold-icon" aria-hidden="true" />
-              {game.currency} Gold
-            </p>
-            <p className="merchant-terms">Limit 1</p>
-          </div>
-        ) : null}
+        <ScreenHeading
+          back={finish}
+          trailing={
+            !purchased ? (
+              <p className="merchant-wallet">
+                <Coins className="gold-icon" aria-hidden="true" />
+                {game.currency} Gold
+              </p>
+            ) : undefined
+          }
+        >
+          {purchased ? "Boon received" : "Boon Merchant"}
+        </ScreenHeading>
       </header>
       {purchased ? (
         <section className="merchant-reward" aria-label="Purchased Boon">
@@ -63,58 +66,63 @@ export function SupportScreen({ game, send }: { game: StateAt<"support">; send: 
           <p className="merchant-terms">For this journey</p>
         </section>
       ) : (
-        <section className="boon-options merchant-stock" aria-label="Boon Merchant stock" data-nav-row>
-          {visit.stock.map((slot) => {
-            const boon = BOONS.find((b) => b.id === slot.boon)!;
-            const unavailable = visit.resolved || game.currency < slot.price;
-            const reason = visit.resolved
-              ? "Purchase used"
-              : game.currency < slot.price
-                ? "Not enough Gold"
-                : "";
-            const statusId = `merchant-${slot.slot}-status`;
-            return (
-              <section className="reward-option merchant-offer" key={slot.slot}>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <ArtCard
-                      aspect="action"
-                      artwork={assetUrl(`boon.${boon.id}`)}
-                      effectText={boon.text}
-                      aria-label={`Inspect ${boon.name}`}
-                    />
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <strong>{boon.name}</strong>
-                    <p>
-                      <KeywordText text={boon.text} />
+        <>
+          <p className="merchant-terms merchant-policy">
+            <em>Limit 1 per customer - No Refunds!</em>
+          </p>
+          <section className="boon-options merchant-stock" aria-label="Boon Merchant stock" data-nav-row>
+            {visit.stock.map((slot) => {
+              const boon = BOONS.find((b) => b.id === slot.boon)!;
+              const unavailable = visit.resolved || game.currency < slot.price;
+              const reason = visit.resolved
+                ? "Purchase used"
+                : game.currency < slot.price
+                  ? "Not enough Gold"
+                  : "";
+              const statusId = `merchant-${slot.slot}-status`;
+              return (
+                <section className="reward-option merchant-offer" key={slot.slot}>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <ArtCard
+                        aspect="action"
+                        artwork={assetUrl(`boon.${boon.id}`)}
+                        effectText={boon.text}
+                        aria-label={`Inspect ${boon.name}`}
+                      />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <strong>{boon.name}</strong>
+                      <p>
+                        <KeywordText text={boon.text} />
+                      </p>
+                      <p>For this journey</p>
+                      {reason ? <p>{reason}</p> : null}
+                    </TooltipContent>
+                  </Tooltip>
+                  <Button
+                    variant="secondary"
+                    className="merchant-price"
+                    aria-label={`Buy ${boon.name} for ${slot.price} Gold`}
+                    aria-disabled={unavailable}
+                    aria-describedby={reason ? statusId : undefined}
+                    onClick={() => {
+                      if (!unavailable) send({ type: "buyBoon", visit: visit.id, slot: slot.slot });
+                    }}
+                  >
+                    <Coins className="gold-icon" aria-hidden="true" />
+                    {slot.price} Gold
+                  </Button>
+                  {reason ? (
+                    <p className="merchant-status" id={statusId}>
+                      {reason}
                     </p>
-                    <p>For this journey</p>
-                    {reason ? <p>{reason}</p> : null}
-                  </TooltipContent>
-                </Tooltip>
-                <Button
-                  variant="secondary"
-                  className="merchant-price"
-                  aria-label={`Buy ${boon.name} for ${slot.price} Gold`}
-                  aria-disabled={unavailable}
-                  aria-describedby={reason ? statusId : undefined}
-                  onClick={() => {
-                    if (!unavailable) send({ type: "buyBoon", visit: visit.id, slot: slot.slot });
-                  }}
-                >
-                  <Coins className="gold-icon" aria-hidden="true" />
-                  {slot.price} Gold
-                </Button>
-                {reason ? (
-                  <p className="merchant-status" id={statusId}>
-                    {reason}
-                  </p>
-                ) : null}
-              </section>
-            );
-          })}
-        </section>
+                  ) : null}
+                </section>
+              );
+            })}
+          </section>
+        </>
       )}
       <Button ref={leave} variant="outline" className="merchant-leave" onClick={finish}>
         {purchased ? "Continue" : "Leave"}

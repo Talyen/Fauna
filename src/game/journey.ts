@@ -1,4 +1,4 @@
-import { merchantPrice } from "./destinations";
+import { merchantPriceRange } from "./destinations";
 import { collectedSpecies, starterCount, creaturePassive, KEYWORDS, hasTalent } from "./progression";
 import { BOONS, SPECIES, FIRST_RUN_STARTERS } from "./content";
 import {
@@ -30,10 +30,9 @@ export function offerStarters(state: GameState) {
 function prepareEncounter(state: GameState) {
   const route = state.expedition!;
   route.pack = Math.floor(roll(state) * encounterPacks(state.encounter).length);
+  const prices = merchantPriceRange(state);
   const kind =
-    route.lastRoom !== "merchant" &&
-    state.currency >= merchantPrice(state) &&
-    roll(state) < OPTIONAL_DESTINATION_CHANCE
+    route.lastRoom !== "merchant" && state.currency >= prices.min && roll(state) < OPTIONAL_DESTINATION_CHANCE
       ? "merchant"
       : null;
   route.recruit =
@@ -50,7 +49,7 @@ function prepareEncounter(state: GameState) {
           .map((b, i) => ({
             slot: `slot-${i}`,
             boon: b.id,
-            price: merchantPrice(state),
+            price: prices.min + Math.floor(roll(state) * (prices.max - prices.min + 1)),
           }))
       : [];
   state.support =
