@@ -108,7 +108,7 @@ export async function reachablePerformanceCases(seed = 42) {
     {
       seed,
       runs: 3,
-      starter: "chimecricket",
+      starter: "captoad",
       policy: "heuristic",
       maxActions: 5000,
       maxTurns: 100,

@@ -40,7 +40,7 @@ import {
   HAND_LIMIT,
 } from "./combat";
 import { retainedBlock, actionValue, cardCost, enemyAbilityValue } from "./rules";
-import { CARDS, FIRST_RUN_STARTERS, definition, species, enemyCard } from "./content";
+import { CARDS, SPECIES, FIRST_RUN_STARTERS, definition, species, enemyCard } from "./content";
 import { bossEncounter, encounterSource, finalEncounter, encounterPacks } from "./encounters";
 import type { Card, Command, CommandResult, GameEvent, GameState } from "./types";
 export function createGame(seed = 1): GameState {
@@ -51,7 +51,7 @@ export function createGame(seed = 1): GameState {
     revision: 0,
     rng: seed >>> 0,
     phase: "draft",
-    unlocked: [...FIRST_RUN_STARTERS],
+    unlocked: SPECIES.map((entry) => entry.id),
     wins: 0,
     selected: [],
     starterOffers: [],

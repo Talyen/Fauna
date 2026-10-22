@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch, starterCount } from "../../src/game/engine";
-import { FIRST_RUN_STARTERS, SPECIES } from "../../src/game/content";
+import { CARDS, FIRST_RUN_STARTERS, SPECIES } from "../../src/game/content";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { accept, recruitChoice, winBattle } from "./helpers";
 
@@ -11,6 +11,21 @@ function firstJourney(seed = 7) {
 }
 
 describe("collected starter drafts", () => {
+  it("offers only solo-capable starters while retaining collected support creatures for later drafts", () => {
+    for (const kind of FIRST_RUN_STARTERS)
+      expect(CARDS.some((card) => card.species === kind && card.effect === "attack")).toBe(true);
+    const fresh = createGame(42);
+    expect(fresh.unlocked).toContain("bloomquail");
+    expect(FIRST_RUN_STARTERS).not.toContain("bloomquail");
+    expect(dispatch(fresh, { type: "draft", species: "bloomquail" }).state).toBe(fresh);
+    const collected = produce(fresh, (draft) => {
+      draft.discovery = { encountered: ["bloomquail"], recruited: { bloomquail: 1 } };
+    });
+    const later = accept(collected, { type: "newRun", seed: 42 });
+    expect(starterCount(later)).toBe(3);
+    expect(later.starterOffers).toEqual(["bloomquail", "bloomquail", "bloomquail"]);
+    expect(dispatch(later, { type: "draft", species: "bloomquail" }).accepted).toBe(true);
+  });
   it("onboards with one of three eligible creatures and collects only the committed starter", () => {
     let s = createGame(7);
     expect(SPECIES.map((entry) => entry.id)).toEqual([

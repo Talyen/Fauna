@@ -117,7 +117,7 @@ const currentShape = z.object({
     "victory",
     "defeat",
   ]),
-  unlocked: z.array(speciesId).min(FIRST_RUN_STARTERS.length).max(SPECIES.length),
+  unlocked: z.array(speciesId).min(SPECIES.length).max(SPECIES.length),
   wins: natural,
   selected: z.array(speciesId).max(3),
   starterOffers: z.array(speciesId).max(3),
@@ -241,7 +241,7 @@ export function decodeSave(raw: string): GameState {
   } else invalid(s.encounter > 2);
   invalid(
     !unique(s.unlocked) ||
-      FIRST_RUN_STARTERS.some((kind) => !s.unlocked.includes(kind)) ||
+      SPECIES.some((entry) => !s.unlocked.includes(entry.id)) ||
       s.selected.some((kind) => !starterPool.includes(kind)) ||
       (s.phase === "draft" && s.selected.length > starterCount(s)) ||
       (s.phase !== "draft" && !collected.length),
