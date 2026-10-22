@@ -75,11 +75,11 @@ it("preserves eight battles after Merchant purchases", () => {
       s = accept(s, { type: "leaveSupport", visit: s.support!.id });
     }
     s = winBattle(accept(s, { type: "beginBattle" }));
+    if (s.phase === "recruit") s = accept(s, recruitChoice(s));
     if (s.phase === "boon") {
       expect(s.reward!.boons.length).toBeGreaterThan(0);
       s = accept(s, { type: "chooseBoon", boon: s.reward!.boons[0]! });
     }
-    if (s.phase === "recruit") s = accept(s, recruitChoice(s));
     expect(decodeSave(encodeSave(s))).toEqual(s);
   }
   expect(s.journey!.victories).toBe(8);
@@ -127,6 +127,9 @@ it.each([BOONS.length - 2, BOONS.length - 1, BOONS.length])(
       d.boons = BOONS.slice(0, owned).map((b) => b.id);
     });
     s = winBattle(accept(s, { type: "beginBattle" }));
+    expect(s.phase).toBe("recruit");
+    expect(decodeSave(encodeSave(s))).toEqual(s);
+    s = accept(s, recruitChoice(s));
     expect(s.phase).toBe(owned === BOONS.length ? "teamSelection" : "boon");
     if (owned < BOONS.length) expect(s.reward!.boons).toHaveLength(BOONS.length - owned);
     expect(decodeSave(encodeSave(s))).toEqual(s);
@@ -140,7 +143,6 @@ it("discounts each new Merchant with Favor and persists the paid price", () => {
   // Stock is already committed. Favor applies when the next Merchant is prepared.
   for (let battle = 0; battle < 4; battle++) {
     state = winBattle(accept(state, { type: "beginBattle" }));
-    if (state.phase === "boon") state = accept(state, { type: "skipBoon" });
     if (state.phase === "recruit") {
       // Fix the preparation roll; this test owns pricing rather than event frequency.
       if (battle === 3)
@@ -149,6 +151,7 @@ it("discounts each new Merchant with Favor and persists the paid price", () => {
         });
       state = accept(state, recruitChoice(state));
     }
+    if (state.phase === "boon") state = accept(state, { type: "skipBoon" });
   }
   expect(state.support!.stock.every((slot) => slot.price >= 13 && slot.price <= 33)).toBe(true);
   const price = state.support!.stock[0]!.price;

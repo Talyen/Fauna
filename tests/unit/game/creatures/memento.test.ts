@@ -131,6 +131,31 @@ describe("Memento and Legendary formations", () => {
     expect(new Set(state.cards.map((card) => card.id)).size).toBe(state.cards.length);
     expect(decodeSave(encodeSave(state))).toEqual(state);
   });
+  it("promotes retained overflow when a Legendary replaces a hand of temporary copies", () => {
+    const initial = produce(run(), (draft) => {
+      draft.reserves.push({
+        id: "legend",
+        species: "memento",
+        health: 60,
+        block: 0,
+        attacked: false,
+        combat: freshCombat(),
+      });
+      draft.roster.push("memento");
+      const cards = draft.cards.map((card) => card.id);
+      for (let i = 0; i < 6; i++) draft.cards.push({ ...draft.cards[0]!, id: `copy-${i}`, temporary: true });
+      draft.battle!.copySerial = 6;
+      draft.battle!.hand = draft.cards.filter((card) => card.temporary).map((card) => card.id);
+      draft.battle!.buffer = cards;
+      draft.battle!.draw = [];
+      draft.battle!.discard = [];
+    });
+    expect(decodeSave(encodeSave(initial))).toEqual(initial);
+    const next = accept(initial, { type: "swap", activeId: initial.team[0]!.id, reserve: "legend" });
+    expect(next.battle!.hand).toHaveLength(6);
+    expect(next.battle!.buffer).toEqual([]);
+    expect(decodeSave(encodeSave(next))).toEqual(next);
+  });
   it("runs a solo Boss with a six-card deck and offers its recruitment before a Boon", () => {
     let state: GameState = produce(run(), (draft) => {
       draft.encounter = 3;

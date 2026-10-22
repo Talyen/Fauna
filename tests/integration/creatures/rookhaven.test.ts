@@ -407,3 +407,35 @@ it("defeat clears copies before publishing the saved result", () => {
   expect(next.cards).toHaveLength(9);
   roundTrip(next);
 });
+
+it("keeps the battle card limit and a saveable hand when deploying into a copy-filled formation", () => {
+  const game = produce(teamRun(1, ["rookhaven", "mossguard"]), (draft) => {
+    draft.roster.push("prismram");
+    draft.reserves.push({
+      id: "backup",
+      species: "prismram",
+      health: species("prismram").health,
+      block: 0,
+      attacked: false,
+      combat: freshCombat(),
+    });
+    const original = draft.cards[0]!;
+    while (draft.cards.length < MAX_BATTLE_CARDS) {
+      draft.cards.push({ ...original, id: `copy-${draft.battle!.copySerial++}`, temporary: true });
+    }
+    const ids = draft.cards.map((card) => card.id);
+    draft.battle!.hand = ids.slice(0, 6);
+    draft.battle!.buffer = ids.slice(6);
+    draft.battle!.draw = [];
+    draft.battle!.discard = [];
+  });
+  roundTrip(game);
+  const result = dispatch(game, { type: "swap", activeId: "", reserve: "backup" });
+  expect(result.accepted).toBe(true);
+  expect(result.state.cards).toHaveLength(MAX_BATTLE_CARDS);
+  expect(result.state.cards.filter((card) => card.ownerId === "backup")).toHaveLength(3);
+  expect(result.state.cards.filter((card) => card.temporary)).toEqual(
+    game.cards.filter((card) => card.temporary).slice(0, -3),
+  );
+  roundTrip(result.state);
+});

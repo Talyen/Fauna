@@ -1,4 +1,4 @@
-import { recycleDiscard } from "./card-zones";
+import { recycleDiscard, fillHand, MAX_BATTLE_CARDS } from "./card-zones";
 import { removeDepartedMinions } from "./combat/legendary";
 import { shuffle, roll } from "./random";
 import { CARDS, species } from "./content";
@@ -73,7 +73,17 @@ export function setFormation(state: GameState, ids: string[], events: GameEvent[
     used.add(id);
     return { ...card, id };
   });
-  state.cards = [...retained, ...mapped];
+  // New permanent kits take priority over the newest generated copies at the battle limit.
+  const overflow = Math.max(0, retained.length + mapped.length - MAX_BATTLE_CARDS);
+  const removed = new Set(
+    overflow
+      ? retained
+          .filter((card) => card.temporary)
+          .slice(-overflow)
+          .map((card) => card.id)
+      : [],
+  );
+  state.cards = [...retained.filter((card) => !removed.has(card.id)), ...mapped];
   if (state.battle) {
     const kept = new Set(state.cards.map((card) => card.id));
     const changed = new Set(mapped.map((card) => card.id));
@@ -89,6 +99,7 @@ export function setFormation(state: GameState, ids: string[], events: GameEvent[
     if (added.length) state.battle.draw = shuffle(state, [...state.battle.draw, ...added]);
     for (const enemy of state.battle.enemies) if (departing.has(enemy.targetId)) enemy.targetId = ids[0]!;
     removeDepartedMinions(state);
+    fillHand(state);
     recycleDiscard(state);
   }
   events.push({ kind: "action", actionType: "swap", actorId: ids[0], text: "Your formation changes" });

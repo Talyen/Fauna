@@ -17,4 +17,4 @@ The Court Remembers: Each time you play a card, an Echo attacks for 1 Water dama
 
 Memento currently fills both Boss encounters while it is the only authored Legendary. Ordinary enemies and Recruit destinations exclude it; recruiting it unlocks it as a solo starter. Health and the two-Echo limit are initial tuning.
 
-The battle card limit is 256 including generated cards. Enemy automatic play is bounded to 256 decisions per turn. Sources and generated images are preserved under `public/art/memento/`; derivatives use the normal asset recipe. Artistic acceptance and full CI/platform validation remain separate from local checks.
+The battle card limit is 256 including generated cards. Deploying an additional creature at that limit replaces the newest generated copies with its permanent kit. Enemy automatic play is bounded to 256 decisions per turn. Sources and generated images are preserved under `public/art/memento/`; derivatives use the normal asset recipe. Artistic acceptance and full CI/platform validation remain separate from local checks.
