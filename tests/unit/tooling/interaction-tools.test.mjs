@@ -1,6 +1,6 @@
 import { it, expect } from "vitest";
 import { shrinkTrace, validateInteractionReport } from "../../../scripts/lib/interaction-replay.mjs";
-import { routeArguments, routes } from "../../../scripts/lib/test-routes.mjs";
+import { routeArguments, routes } from "../../../scripts/performance/routes.mjs";
 import { existsSync } from "node:fs";
 it("shrinks only fresh valid replays of the same failure within its attempt budget", async () => {
   const trace = [{ kind: "collection" }, { kind: "settings" }, { kind: "battle" }, { kind: "reload" }];

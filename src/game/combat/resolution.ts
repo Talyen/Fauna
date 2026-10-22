@@ -11,7 +11,7 @@ import {
 import {
   grantStatus,
   triggerArmorBreak,
-  removeFreezeBuildup,
+  removeControlBuildup,
   removeEffects,
   cleanseRewards,
   applyHarmfulStatus,
@@ -39,7 +39,7 @@ const handlers = {
   healthThresholds,
   grantStatus,
   triggerArmorBreak,
-  removeFreezeBuildup,
+  removeControlBuildup,
   removeEffects,
   cleanseRewards,
   applyHarmfulStatus,

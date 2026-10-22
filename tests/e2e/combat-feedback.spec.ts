@@ -1,5 +1,5 @@
-import { captureFrame, settleScreen } from "./rendered-evidence";
-import { expectScrollFree, LAYOUT_CASES } from "./layout-contract";
+import { captureFrame, settleScreen } from "./support/rendered-evidence";
+import { expectScrollFree, LAYOUT_CASES } from "./support/layout-contract";
 import { test, expect, type Page } from "@playwright/test";
 import { feedbackBattle } from "../support/game";
 import { encodeSave } from "../../src/game/save";

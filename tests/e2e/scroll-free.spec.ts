@@ -4,8 +4,8 @@ import { produce } from "immer";
 import { run } from "../support/game";
 import { SPECIES } from "../../src/game/content";
 import { decodeSave, encodeSave } from "../../src/game/save";
-import { expectScrollFree, layoutViolations, LAYOUT_CASES } from "./layout-contract";
-import { captureScreen, settleScreen } from "./rendered-evidence";
+import { expectScrollFree, layoutViolations, LAYOUT_CASES } from "./support/layout-contract";
+import { captureScreen, settleScreen } from "./support/rendered-evidence";
 import { snapshot, cloudName } from "../../src/application/cloud";
 
 // Each action is local and immediate; do not spend a full journey timeout on a missing control.

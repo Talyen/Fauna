@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { CARDS, DAMAGE_LABELS } from "../../../src/game/content";
+import { CARDS, DAMAGE_LABELS, TALENTS } from "../../../src/game/content";
 import { GLOSSARY } from "../../../src/game/glossary";
 import {
   DAMAGE_TYPES,
@@ -12,7 +12,7 @@ import {
   isKeywordId,
   keywordText,
 } from "../../../src/game/keywords";
-import { cardKeywords, KEYWORDS, TALENTS } from "../../../src/game/progression";
+import { cardKeywords, KEYWORDS } from "../../../src/game/progression";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { appendFeedback, CombatFeedback } from "../../../src/ui/battle/combat-feedback";
 import { BattleReadout } from "../../../src/ui/shared/combat/battle-readout";

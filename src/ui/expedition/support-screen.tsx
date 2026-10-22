@@ -3,7 +3,7 @@ import { useLayoutEffect, useRef } from "react";
 import { Coins, Tag } from "lucide-react";
 import type { Command, GameState } from "../../game/types";
 import { canVisitMerchant } from "../../game/support";
-import { BOONS } from "../../game/progression";
+import { BOONS } from "../../game/content";
 import { Button } from "../../components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
 import { ArtCard } from "../shared/cards/art-card";

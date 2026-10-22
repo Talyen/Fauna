@@ -2,7 +2,7 @@
 
 [Contributing](../CONTRIBUTING.md) owns command selection and verification policy; [AGENTS.md](../AGENTS.md) owns authorization and invariants.
 
-Implementation folders follow workflows: `agent/`, `assets/`, `balance/`, `checks/`, `ci/`, `dev/`, `performance/` and `release/`. Shared Node helpers remain in `lib/`. Worktree creation, cleanup and integration retain their root entrypoints. Use the existing npm commands from any task checkout; file moves do not change command names or verification policy.
+Implementation folders follow workflows: `agent/`, `assets/`, `balance/`, `checks/`, `ci/`, `dev/`, `performance/` and `release/`. Shared Node infrastructure remains in `lib/`; balance analysis lives beside its commands in `balance/`, and performance metrics and route definitions live in `performance/`. Interaction replay validation remains shared because both performance tooling and CI consume it. Worktree creation, cleanup and integration retain their root entrypoints. Use the existing npm commands from any task checkout; file moves do not change command names or verification policy.
 
 | Command or concern                                                               | Implementation owner                                                                                                                                                                                                   |
 | -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -31,17 +31,17 @@ Additional opt-in tools:
 
 - `npm run assets:review`: [original/prepared comparisons](assets/art-review.mjs); see [quality and resolution](../Docs/CONTENT.md#artwork-resolution-and-quality).
 - `npm run assets:check:bundle`: [active media inventory and size budgets](assets/active-assets.mjs) against an existing build.
-- `npm run balance:findings`: [ranked findings](balance/balance-findings.mjs), [analysis and thresholds](lib/balance-findings.mjs); analyzes existing reports without simulations.
+- `npm run balance:findings`: [ranked findings](balance/balance-findings.mjs), [analysis and thresholds](balance/findings.mjs); analyzes existing reports without simulations.
 - `npm run verify:release-version`, `npm run verify:release`: [read-only release gate](release/verify-release.mjs), [build identity](lib/release-identity.mjs); no build or publication.
 - `npm run generate:patch-notes`: [history filtering and draft generation](release/generate-patch-notes.mjs); see [release workflow](../Docs/RELEASE.md#release-verification-and-player-notes).
-- `npm run balance:compare`: [balance-compare.mjs](balance/balance-compare.mjs), [paired report math](lib/paired-balance.mjs), [production cases](../src/tooling/balance.ts).
-- `npm run perf`, `npm run perf:replay`, `npm run perf:compare`: [capture driver](performance/run-performance.mjs), [metrics](lib/performance-metrics.mjs), [validated fixtures](../src/tooling/performance.ts).
+- `npm run balance:compare`: [balance-compare.mjs](balance/balance-compare.mjs), [paired report math](balance/paired-balance.mjs), [production cases](../src/tooling/balance.ts).
+- `npm run perf`, `npm run perf:replay`, `npm run perf:compare`: [capture driver](performance/run-performance.mjs), [metrics](performance/metrics.mjs), [validated fixtures](../src/tooling/performance.ts).
 - `npm run verify:package`: [package gate](release/verify-package.mjs), [after-pack hardening](../desktop/after-pack.cjs), [packaged renderer launcher](lib/packaged-desktop.mjs).
 - `npm run check:types`: the gameplay, renderer, Node tooling and test/design compiler environments described in [architecture](../Docs/ARCHITECTURE.md#typescript-environments); CI-owned as part of `npm run check:full`.
 - `npm run deadcode`: [Knip entrypoints](../knip.config.js); full CI static verification only.
 - `npm run context`: [owner lookup](agent/agent-context.mjs), including runtime guidance for focused unit suites alongside test policy.
 - `npm run review:status`, `npm run review:diff`: [bounded patch review](agent/agent-review.mjs).
-- `npm run test:e2e:route`: [named route launcher](performance/test-route.mjs), [route definitions](lib/test-routes.mjs).
+- `npm run test:e2e:route`: [named route launcher](performance/test-route.mjs), [route definitions](performance/routes.mjs).
 - `npm run test:interactions`: [rendered seeded runner](performance/run-interactions.mjs), [bounded reducer and replay validation](lib/interaction-replay.mjs).
 - Shared source identities, report-directory confinement and Node module loading: [tool-runtime.mjs](lib/tool-runtime.mjs).
 - Isolated smoke and performance desktop launch environments: [desktop-environment.mjs](lib/desktop-environment.mjs).

@@ -1,6 +1,6 @@
 import { it, expect } from "vitest";
-import { rankBalanceFindings } from "../../../scripts/lib/balance-findings.mjs";
-import { compareBalance } from "../../../scripts/lib/paired-balance.mjs";
+import { rankBalanceFindings } from "../../../scripts/balance/findings.mjs";
+import { compareBalance } from "../../../scripts/balance/paired-balance.mjs";
 const row = (starter, seed, win = 0, turns = 20) => ({
   key: `${starter}-${seed}`,
   starter,

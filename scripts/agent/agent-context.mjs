@@ -51,7 +51,7 @@ export const topics = {
   ui: {
     patterns: ["src/ui/", "src/components/", "src/lib/", "design/"],
     docs: ["Docs/UI.md", "Docs/MENU_DESIGN.md"],
-    entries: ["src/ui/App.tsx", "src/ui/tokens.css"],
+    entries: ["src/ui/App.tsx", "src/ui/shell/game-shell.tsx", "src/ui/tokens.css"],
   },
   content: {
     patterns: ["src/game/content", "src/game/card-rules", "src/assets/", "public/", "assets/"],

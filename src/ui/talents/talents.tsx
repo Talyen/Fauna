@@ -1,10 +1,8 @@
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { PagedItems } from "../shared/navigation/pagination";
 import { motionValue } from "../shared/motion-values";
-
 import { assetUrl } from "../shared/assets";
 import { KeywordText } from "../shared/keyword-text";
-
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   Swords,
@@ -42,13 +40,13 @@ import { ArtCard } from "../shared/cards/art-card";
 import { returnFocus } from "../shared/navigation/focus";
 import {
   KEYWORDS,
-  TALENTS,
   keywordLabel,
   keywordProgress,
   availablePoints,
   canBuyTalent,
   type Keyword,
 } from "../../game/progression";
+import { TALENTS } from "../../game/content";
 import type { Command, GameState } from "../../game/types";
 import type { Inspection } from "../shared/inspection-model";
 import type { Controls } from "../shared/navigation/input";

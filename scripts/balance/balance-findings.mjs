@@ -2,7 +2,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { reportDirectory } from "../lib/tool-runtime.mjs";
-import { rankBalanceFindings, findingsMarkdown } from "../lib/balance-findings.mjs";
+import { rankBalanceFindings, findingsMarkdown } from "./findings.mjs";
 export async function writeBalanceFindings(report, directory) {
   const result = rankBalanceFindings(report);
   await writeFile(path.join(directory, "findings.json"), JSON.stringify(result, null, 2) + "\n");

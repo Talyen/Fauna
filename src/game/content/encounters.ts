@@ -1,5 +1,5 @@
 import { freeze } from "immer";
-import { species } from "./species";
+import { species } from "./creatures";
 /** Stable legacy route; new expeditions use the saved packs in encounters.ts. */
 export const ENCOUNTERS = (
   [

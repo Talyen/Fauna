@@ -1,4 +1,4 @@
-import { captureScreen } from "./rendered-evidence";
+import { captureScreen } from "./support/rendered-evidence";
 import { test, expect, type Locator } from "@playwright/test";
 import { produce } from "immer";
 import { createGame } from "../../src/game/engine";

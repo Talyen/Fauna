@@ -11,10 +11,10 @@ import {
 } from "../../../src/game/combat/index";
 import { drawKeyword } from "../../../src/game/card-zones";
 import * as content from "../../../src/game/content";
-import { definition, species } from "../../../src/game/content";
+import { definition, species, TALENTS } from "../../../src/game/content";
 import { dispatch } from "../../../src/game/engine";
 import { beginBattle } from "../../../src/game/journey";
-import { TALENTS, canBuyTalent } from "../../../src/game/progression";
+import { canBuyTalent } from "../../../src/game/progression";
 import { cardCost } from "../../../src/game/rules";
 import { previewPlay } from "../../../src/game/preview";
 import { decodeSave, encodeSave } from "../../../src/game/save";

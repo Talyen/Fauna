@@ -1,6 +1,5 @@
 import { expect, type Page, type Locator } from "@playwright/test";
-import { species } from "../../../src/game/content";
-import { BOONS } from "../../../src/game/progression";
+import { species, BOONS } from "../../../src/game/content";
 import type { Command, GameState } from "../../../src/game/types";
 import { policy } from "../../support/game";
 import { state } from "./session";

@@ -20,7 +20,6 @@ import {
   type ArmorDepletion,
   type Combatant,
 } from "./state";
-
 import { reaction, type Resolution } from "./operations";
 
 type HitResult = { outcome: "ignored" | "miss" } | { outcome: "landed"; lost: number };
@@ -200,8 +199,8 @@ export function* resolveHit(
       }
       if (hasTalent(state, "dodge.open-flank")) stats.nextPhysical = 2;
       if (hasTalent(state, "dodge.unburdened")) {
-        stats.stun = 0;
-        stats.freeze = 0;
+        yield* reaction("removeControlBuildup", state, target, "stun", events);
+        yield* reaction("removeControlBuildup", state, target, "freeze", events);
       }
       if (hasTalent(state, "dodge.tailwind")) draw(state, 1);
       if (hasTalent(state, "dodge.perfect-timing") && stats.armor === 0)
@@ -443,7 +442,7 @@ export function* resolveHit(
         yield* reaction("grantBlock", state, source, lost, events);
     }
     if (direct && alliedSource && !alliedTarget && source.health > 0) {
-      const proc = (id: import("../progression").TalentId, chance: number) =>
+      const proc = (id: import("../content").TalentId, chance: number) =>
         source.health > 0 && hasTalent(state, id) && roll(state) < chance;
 
       if (type === "physical") {

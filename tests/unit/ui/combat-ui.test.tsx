@@ -6,7 +6,8 @@ import { produce } from "immer";
 import { App } from "../../../src/ui/App";
 import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
-import { KEYWORDS, TALENTS, keywordLabel } from "../../../src/game/progression";
+import { KEYWORDS, keywordLabel } from "../../../src/game/progression";
+import { TALENTS } from "../../../src/game/content";
 import { run } from "../../support/game";
 import type { GameState } from "../../../src/game/types";
 

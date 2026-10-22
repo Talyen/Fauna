@@ -1,6 +1,7 @@
 import type { KeywordId } from "./keywords";
-import type { SpeciesId, DamageType } from "./content";
-import type { Keyword, KeywordXP, BoonId } from "./progression";
+import type { SpeciesId, DamageType, BoonId } from "./content";
+import type { Keyword, KeywordXP } from "./progression";
+
 export interface CombatState {
   controlTurns: number;
   rhythm: number;

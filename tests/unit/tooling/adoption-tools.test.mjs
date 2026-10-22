@@ -5,8 +5,8 @@ import os from "node:os";
 import path from "node:path";
 import { createHash } from "node:crypto";
 import { worker } from "../../../scripts/balance/balance-compare.mjs";
-import { compareBalance, pairedStats } from "../../../scripts/lib/paired-balance.mjs";
-import { summarizeSample, comparePerformance } from "../../../scripts/lib/performance-metrics.mjs";
+import { compareBalance, pairedStats } from "../../../scripts/balance/paired-balance.mjs";
+import { summarizeSample, comparePerformance } from "../../../scripts/performance/metrics.mjs";
 import {
   verifyArchive,
   verifyWindowsRuntime,

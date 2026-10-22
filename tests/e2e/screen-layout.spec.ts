@@ -1,4 +1,4 @@
-import { captureScreen } from "./rendered-evidence";
+import { captureScreen } from "./support/rendered-evidence";
 import { freshCombat } from "../../src/game/combat/index";
 import { test, expect } from "@playwright/test";
 import { produce } from "immer";

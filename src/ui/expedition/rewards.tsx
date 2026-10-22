@@ -1,21 +1,17 @@
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { PagedItems } from "../shared/navigation/pagination";
-
 import { ResultPresentation } from "./result-presentation";
-
 import { assetUrl } from "../shared/assets";
-
 import { useLayoutEffect, useRef, useState } from "react";
 import { Button } from "../../components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
 import { CreatureCard } from "../shared/cards/cards";
 import { ArtCard } from "../shared/cards/art-card";
 import { returnFocus } from "../shared/navigation/focus";
-import { species, type SpeciesId } from "../../game/content";
-import { creatureStars, MAX_CREATURE_STARS, BOONS } from "../../game/progression";
+import { species, type SpeciesId, BOONS } from "../../game/content";
+import { creatureStars, MAX_CREATURE_STARS } from "../../game/progression";
 import type { Command, GameState } from "../../game/types";
 import type { Inspection } from "../shared/inspection-model";
-
 import { BattleEarnings } from "../battle/battle-earnings";
 type Props = { game: GameState; send: (command: Command) => boolean; inspect: (item: Inspection) => void };
 export function Rewards({ game, send, inspect }: Props) {

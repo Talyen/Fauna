@@ -1,9 +1,9 @@
-import { captureScreen } from "./rendered-evidence";
+import { captureScreen } from "./support/rendered-evidence";
 import { test, expect, type Page, type Locator } from "@playwright/test";
 import { accept, run } from "../support/game";
 import { createGame } from "../../src/game/engine";
 import { produce } from "immer";
-import { BOONS } from "../../src/game/progression";
+import { BOONS } from "../../src/game/content";
 
 async function expectCenteredMenu(choices: Locator) {
   const buttons = await choices.locator("button").evaluateAll((elements) =>
