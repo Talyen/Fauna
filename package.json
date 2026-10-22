@@ -12,7 +12,7 @@
     "dev": "node scripts/dev/dev.mjs",
     "dev:desktop": "node scripts/dev/dev-desktop.mjs",
     "check": "node scripts/checks/check.mjs",
-    "check:full": "npm run check:types && oxlint --type-aware src tests scripts desktop design --deny-warnings && prettier --check . && node scripts/checks/boundaries.mjs && node scripts/checks/ui-contract.mjs && npm run deadcode",
+    "check:full": "npm run check:types && npm run check:lint && npm run check:format && npm run check:boundaries && npm run deadcode",
     "format": "prettier --write .",
     "test": "node scripts/checks/run-local-tests.mjs",
     "test:full": "vitest run",
@@ -53,9 +53,12 @@
     "generate:patch-notes": "node scripts/release/generate-patch-notes.mjs",
     "assets:check:bundle": "node scripts/assets/active-assets.mjs",
     "assets:review": "node scripts/assets/art-review.mjs",
-    "check:types": "tsc --noEmit -p tsconfig.game.json && tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.test.json && tsc --noEmit -p tsconfig.desktop.json",
+    "check:types": "node scripts/checks/typecheck.mjs",
     "security:audit": "node scripts/checks/security-audit.mjs",
-    "package:installer": "npm run build && npm run check:bundle && npm run assets:check:bundle && electron-builder --win --x64 --publish never"
+    "package:installer": "npm run build && npm run check:bundle && npm run assets:check:bundle && electron-builder --win --x64 --publish never",
+    "check:lint": "oxlint --type-aware src tests scripts desktop design --deny-warnings",
+    "check:format": "prettier --check .",
+    "check:boundaries": "node scripts/checks/boundaries.mjs && node scripts/checks/ui-contract.mjs"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.3.0",

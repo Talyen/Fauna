@@ -165,7 +165,8 @@ app.whenReady().then(async () => {
     directory: path.join(app.getPath("userData"), "diagnostics"),
     drain: async () => {
       await storage.drain();
-      await steam.readLocal();
+      // Reading through the metadata lane waits for admitted writes; unreadable optional metadata cannot block reload.
+      await steam.readLocal().catch(() => {});
     },
     reload: () => window.loadURL(dev || entry),
     closing: () => closing || closeRequested || quitting || window.isDestroyed(),

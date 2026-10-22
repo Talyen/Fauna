@@ -83,8 +83,21 @@ jobs:
           retention-days: 7
           if-no-files-found: error
           path: reports/security/
-      - name: Static checks
-        run: npm run check:full
+      - name: Type checking
+        if: ${{ !cancelled() }}
+        run: npm run check:types
+      - name: Lint
+        if: ${{ !cancelled() }}
+        run: npm run check:lint
+      - name: Formatting
+        if: ${{ !cancelled() }}
+        run: npm run check:format
+      - name: Architecture and UI boundaries
+        if: ${{ !cancelled() }}
+        run: npm run check:boundaries
+      - name: Unused code and dependencies
+        if: ${{ !cancelled() }}
+        run: npm run deadcode
       - name: Documentation contracts
         run: npm run docs:check
       - name: Content audit
