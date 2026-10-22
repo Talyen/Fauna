@@ -1,11 +1,11 @@
 import { expect, it } from "vitest";
 import { produce } from "immer";
-import { createGame, dispatch } from "../../src/game/engine";
+import { dispatch } from "../../src/game/engine";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { canVisitCampfire } from "../../src/game/support";
-import { accept, run } from "./helpers";
+import { accept, run, starterJourney } from "./helpers";
 function destinations() {
-  return accept(accept(createGame(3), { type: "draft", species: "captoad" }), { type: "start" });
+  return starterJourney(3, "captoad");
 }
 it.each([22, 21, 20, 0])("uses the exact 30%% missing Health threshold at %s/30", (health) => {
   const s = produce(destinations(), (d) => {

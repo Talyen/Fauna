@@ -41,11 +41,17 @@ it("pages through the full collection, resets filters and preserves focus across
     .getAllByRole("button", { name: /^Inspect / })
     .map((card) => card.getAttribute("aria-label"));
   expect(firstPage).toHaveLength(8);
-  await user.click(screen.getByRole("button", { name: "Next page" }));
-  const lastPage = screen
-    .getAllByRole("button", { name: /^Inspect / })
-    .map((card) => card.getAttribute("aria-label"));
-  expect([...firstPage, ...lastPage]).toEqual(SPECIES.map((creature) => `Inspect ${creature.name}`));
+  const visited = [...firstPage];
+  let lastPage = firstPage;
+  while (!(screen.getByRole("button", { name: "Next page" }) as HTMLButtonElement).disabled) {
+    expect(visited.length).toBeLessThan(SPECIES.length);
+    await user.click(screen.getByRole("button", { name: "Next page" }));
+    lastPage = screen
+      .getAllByRole("button", { name: /^Inspect / })
+      .map((card) => card.getAttribute("aria-label"));
+    visited.push(...lastPage);
+  }
+  expect(visited).toEqual(SPECIES.map((creature) => `Inspect ${creature.name}`));
   const lastCard = screen.getAllByRole("button", { name: /^Inspect / }).at(-1)!;
   lastCard.focus();
   vi.stubGlobal("innerHeight", 720);

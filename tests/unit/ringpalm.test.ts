@@ -88,7 +88,7 @@ it.each([10, 20, 30, 40, 50, 60])(
           target = game.battle!.enemies[0]!;
         // Supplemental Stun skips Dodge/Critical rolls, isolating the exact passive threshold.
         hit(game, source, target, 2, "stun", events, { proc: true });
-        expect(target.health).toBe(18 - (repeats ? 4 : 2));
+        expect(target.health).toBe(target.maxHealth - (repeats ? 4 : 2));
         expect(target.combat.stun).toBe(repeats ? 4 : 2);
         expect(game.battleXP.stun).toBeUndefined();
       });
@@ -170,6 +170,7 @@ it("applies Armor separately to the repeated base packet and allows its Stun to 
   produce(ready("ringpalm-attack", seed), (game) => {
     const source = game.team[0]!,
       target = game.battle!.enemies[0]!;
+    target.health = 18;
     target.combat.armor = 1;
     hit(game, source, target, 5, "stun", [], { proc: true });
     expect(target.health).toBe(9);

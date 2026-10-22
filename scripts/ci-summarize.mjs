@@ -89,7 +89,10 @@ export function summarizeReport(kind, report) {
       ...failures.slice(0, 10).map((failure) => `- ${failure}`),
       ...(failures.length > 10 ? [`- ${failures.length - 10} more failures; see the JSON report.`] : []),
       ...(kind === "playwright"
-        ? ["", "Screenshots and failure traces: browser-review artifact, reports/ and test-results/."]
+        ? [
+            "",
+            "Merged report and portable attachments: browser-review; raw screenshots and traces: browser-shard-N artifacts.",
+          ]
         : []),
     ].join("\n") + "\n"
   );

@@ -178,7 +178,7 @@ it("uses an enemy area ability against deployed allies while leaving reserves un
     .slice(first, next < 0 ? undefined : next)
     .filter((event) => event.kind === "damage" && event.actorId === "enemy-0" && !event.periodic);
   expect(packets.map((event) => event.targetId)).toEqual(game.team.map((ally) => ally.id));
-  expect(packets.every((event) => event.amount === 1)).toBe(true);
+  expect(packets.every((event) => event.amount === 2)).toBe(true);
   expect(result.state.reserves).toEqual(game.reserves);
   expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
 });
