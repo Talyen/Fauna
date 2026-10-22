@@ -1,12 +1,12 @@
 {
-  "status": "User-directed header and randomized prices; aesthetic acceptance pending",
+  "status": "User-directed Merchant spacing and header symmetry; aesthetic acceptance pending",
   "sourceSha256": {
     "src/main.tsx": "89f5cf7773e0bc4fbc9b35b3bcda0436ea9ef130e551054feabdea8a7c751352",
     "src/ui/shared/navigation/screen.tsx": "a5eac7ecfa1fe4240ea6a5f6d989b8f6ffe33b53ca69bece8545128058f6cad7",
-    "src/ui/shared/layout.css": "d076b70cf27f6c060792eb5aba6d83eff5552d5d13c4e8bc19bd867caf94ca03",
+    "src/ui/shared/layout.css": "6582a3448d241595e6677af38908c9d1b7fb31693a90cb628902ac351312b811",
     "src/ui/design-system.css": "6b9eace44658a32722063ebcaf8a0279531af9318e227ef709e4221733058819",
     "src/ui/expedition/support-screen.tsx": "82daeee43b12b39a494a792a4f586e68f8016e061db83b7296d4507af84cda5e",
-    "src/ui/expedition/expedition.css": "d578d9cc6d24b8ea9c1db9111cb85a43a57c1fd92a12bb07a47f3c6e0b53893d",
+    "src/ui/expedition/expedition.css": "4847006c341fcfcbf2c997e309b22f7faf7b54a738c6913d4f41dafcf4406062",
     "src/ui/tokens.css": "f912b53bf6402eda4d5d350892f4fe63e4d4d1eae4365fee9a9038e3168348fa",
     "src/game/destinations.ts": "e932a3045ccd546c47788d0439d3bca373864e077638027dd6a6b65a96edcc09",
     "src/game/journey.ts": "58b083389566897d5acd76ae7212091e8501f332d75857bc93f93d77df58f520",
@@ -110,10 +110,147 @@
     }
   ],
   "imagesSha256": {
-    "merchant-current-1280-large.png": "6260491ff8feea9899ccb320b1c683c71761f3854bc9bf4d1264aa7965a51c80",
-    "merchant-current-1280.png": "6f381c8d3c9efc22ec7e8e51725c968f950b56b317200d1b0ea76a279bdd0cb1",
-    "merchant-current-1920.png": "c544cfe1036c07ffa006704eb083a1b9bcd13e63946ba56f1fd8af7cc1b485cf",
-    "merchant-current-inspection.png": "96126bff1158042092f5936722c8e28a6465d2ca7f027dccda8ea9b2b3ae2014"
+    "merchant-current-1280-large.png": "0b274f1dbad6dc07d62b75e9d288d5ff2470cd49aea9057e2309fe5f8b38a494",
+    "merchant-current-1280.png": "7d84b9c203de9174152276800b07b985a35dcc24142855143a15535650dbd27e",
+    "merchant-current-1920.png": "721f4e3722afcab5f7aa5dfa701bf63f89c063e90811b19d9ca1abe347d481e2",
+    "merchant-current-inspection.png": "82a7b4a180ea9209f4bcc540c836669d8cd946063ed39c4e52c93e0b467c08ae"
   },
-  "fixturePreparationRng": 10
+  "fixturePreparationRng": 10,
+  "spacingMeasurements": [
+    {
+      "width": 1280,
+      "height": 720,
+      "scale": 1,
+      "center": 639.9921875,
+      "backDistance": 297.9921875,
+      "menuDistance": 298.0078125,
+      "policy": {
+        "top": 200.53125,
+        "bottom": 220.125
+      },
+      "visibleHeaderBottom": 176.53125,
+      "stockTop": 244.125,
+      "gaps": ["8px", "8px", "8px", "8px"],
+      "header": {
+        "x": 320,
+        "y": 138.53125,
+        "width": 640,
+        "height": 44,
+        "top": 138.53125,
+        "right": 960,
+        "bottom": 182.53125,
+        "left": 320
+      },
+      "title": {
+        "x": 551.421875,
+        "y": 144.9375,
+        "width": 177.140625,
+        "height": 31.1875,
+        "top": 144.9375,
+        "right": 728.5625,
+        "bottom": 176.125,
+        "left": 551.421875
+      },
+      "wallet": {
+        "x": 815.75,
+        "y": 149.328125,
+        "width": 88.25,
+        "height": 22.390625,
+        "top": 149.328125,
+        "right": 904,
+        "bottom": 171.71875,
+        "left": 815.75
+      }
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "scale": 1.25,
+      "center": 639.9921875,
+      "backDistance": 297.9921875,
+      "menuDistance": 298.0078125,
+      "policy": {
+        "top": 198.078125,
+        "bottom": 222.578125
+      },
+      "visibleHeaderBottom": 174.078125,
+      "stockTop": 246.578125,
+      "gaps": ["8px", "8px", "8px", "8px"],
+      "header": {
+        "x": 320,
+        "y": 136.078125,
+        "width": 640,
+        "height": 44,
+        "top": 136.078125,
+        "right": 960,
+        "bottom": 180.078125,
+        "left": 320
+      },
+      "title": {
+        "x": 529.28125,
+        "y": 138.578125,
+        "width": 221.421875,
+        "height": 39,
+        "top": 138.578125,
+        "right": 750.703125,
+        "bottom": 177.578125,
+        "left": 529.28125
+      },
+      "wallet": {
+        "x": 800.6875,
+        "y": 144.078125,
+        "width": 103.3125,
+        "height": 28,
+        "top": 144.078125,
+        "right": 904,
+        "bottom": 172.078125,
+        "left": 800.6875
+      }
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "center": 959.9921875,
+      "backDistance": 297.9921875,
+      "menuDistance": 298.0078125,
+      "policy": {
+        "top": 353.875,
+        "bottom": 373.46875
+      },
+      "visibleHeaderBottom": 329.875,
+      "stockTop": 397.46875,
+      "gaps": ["8px", "8px", "8px", "8px"],
+      "header": {
+        "x": 640,
+        "y": 291.875,
+        "width": 640,
+        "height": 44,
+        "top": 291.875,
+        "right": 1280,
+        "bottom": 335.875,
+        "left": 640
+      },
+      "title": {
+        "x": 871.421875,
+        "y": 298.28125,
+        "width": 177.140625,
+        "height": 31.1875,
+        "top": 298.28125,
+        "right": 1048.5625,
+        "bottom": 329.46875,
+        "left": 871.421875
+      },
+      "wallet": {
+        "x": 1135.75,
+        "y": 302.671875,
+        "width": 88.25,
+        "height": 22.390625,
+        "top": 302.671875,
+        "right": 1224,
+        "bottom": 325.0625,
+        "left": 1135.75
+      }
+    }
+  ]
 }

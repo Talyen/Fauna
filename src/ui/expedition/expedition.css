@@ -344,10 +344,13 @@
   align-items: center;
   gap: var(--screen-item-gap);
 }
+.merchant-wallet,
+.merchant-price {
+  gap: var(--space-2);
+}
 .merchant-wallet {
   display: flex;
   align-items: center;
-  gap: var(--screen-item-gap);
   font-variant-numeric: tabular-nums;
 }
 .merchant-wallet svg {
@@ -361,6 +364,8 @@
 }
 .merchant-policy {
   text-align: center;
+  /* Compact header faces sit inside larger hit targets; balance their visible whitespace. */
+  margin-top: calc((var(--compact-control-size) - var(--control-height)) / 2);
 }
 .merchant-stock {
   flex-wrap: nowrap;
