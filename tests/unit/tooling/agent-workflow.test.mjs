@@ -8,6 +8,8 @@ import { verificationIdentity } from "../../../scripts/checks/verification-recor
 import { review } from "../../../scripts/agent/agent-review.mjs";
 import { investigationArgs, investigate } from "../../../scripts/agent/investigate.mjs";
 import { runInvestigation } from "../../../scripts/agent/investigation-process.mjs";
+import { acquireIntegrationLock } from "../../../scripts/lib/integration-lock.mjs";
+import { captureFrame } from "../../../scripts/dev/capture.mjs";
 import { integrate } from "../../../scripts/integrate.mjs";
 import { createWorktree } from "../../../scripts/worktree.mjs";
 import { reviewOptions } from "../../../scripts/dev/review-options.mjs";
@@ -251,4 +253,93 @@ it("terminates a timed-out diagnostic instead of accepting a late successful exi
   expect(result.status).not.toBe(0);
   const failedSpawn = await runInvestigation("/missing/fauna-command", [], { timeout: 100, stdio: "ignore" });
   expect(failedSpawn.error).toBeTruthy();
+});
+
+it("retains diagnostic screenshots for both layout and preparation failures", async () => {
+  const page = {
+    on: vi.fn(),
+    evaluate: vi.fn(async () => ["offscreen control"]),
+    screenshot: vi.fn(async () => {}),
+  };
+  const options = { path: "diagnostic.png", prepare: async () => {}, layoutViolations: () => [] };
+  expect(await captureFrame(page, options)).toEqual({
+    file: "diagnostic.png",
+    layoutFailures: ["offscreen control"],
+    errors: [],
+  });
+  expect(page.screenshot).toHaveBeenCalledWith({ path: "diagnostic.png" });
+  expect(
+    await captureFrame(page, {
+      ...options,
+      prepare: async () => {
+        throw new Error("not settled");
+      },
+    }),
+  ).toMatchObject({ file: "diagnostic.png", errors: ["not settled"] });
+  page.screenshot.mockRejectedValue(new Error("closed page"));
+  expect(await captureFrame(page, options)).toMatchObject({
+    file: null,
+    errors: ["Screenshot unavailable: closed page"],
+  });
+});
+
+it("waits for its integration lock without disturbing the owner and bounds exhausted waits", async () => {
+  const root = fixture();
+  const release = await acquireIntegrationLock(root);
+  let ownerReleased = false;
+  try {
+    await expect(acquireIntegrationLock(root, { timeoutMs: 20, retryMs: 5 })).rejects.toThrow(
+      "bounded wait exhausted",
+    );
+    const waiting = acquireIntegrationLock(root, { timeoutMs: 1000, retryMs: 5 });
+    await release();
+    ownerReleased = true;
+    const finish = await waiting;
+    await finish();
+  } finally {
+    if (!ownerReleased) await release();
+  }
+});
+
+it("reports successful integration separately from failed cleanup and preserves its checkout", async () => {
+  const root = fixture();
+  const task = createWorktree(root, "cleanup-failure");
+  put(task.path, "README.md", "# Integrated\n");
+  git(task.path, "add", ".");
+  git(task.path, "commit", "-qm", "task");
+  const result = await integrate(root, task.branch, {
+    runner: () => ({ status: 0 }),
+    log: () => {},
+    cleanup: () => {
+      throw new Error("archive unavailable");
+    },
+  });
+  expect(result).toMatchObject({
+    integrated: true,
+    cleanup: { status: "pending", reason: "archive unavailable" },
+  });
+  expect(git(root, "show", "HEAD:README.md")).toBe("# Integrated");
+  expect(readFileSync(path.join(task.path, "README.md"), "utf8")).toBe("# Integrated\n");
+});
+
+it("ignores unrelated environment and documentation for code checks while preserving render inputs", () => {
+  const root = fixture();
+  put(root, "src/value.ts", "export const value = 1;");
+  const base = git(root, "rev-parse", "HEAD");
+  const code = () => verificationIdentity(root, base, ["src/value.ts"]);
+  const capture = () => verificationIdentity(root, base, [], process.env, "capture");
+  const beforeCode = code(),
+    beforeCapture = capture();
+  put(root, "unrelated.md", "unrelated documentation");
+  vi.stubEnv("UNRELATED_SESSION_LABEL", "new session");
+  expect(code()).toBe(beforeCode);
+  expect(capture()).toBe(beforeCapture);
+  put(root, "Docs/CONTENT.md", "# Maintained contract");
+  expect(code()).not.toBe(beforeCode);
+  expect(capture()).toBe(beforeCapture);
+  put(root, "src/value.ts", "export const value = 2;");
+  expect(code()).not.toBe(beforeCode);
+  expect(capture()).not.toBe(beforeCapture);
+  vi.stubEnv("NODE_OPTIONS", "--conditions=development");
+  expect(code()).not.toBe(verificationIdentity(root, base, ["src/value.ts"], {}));
 });

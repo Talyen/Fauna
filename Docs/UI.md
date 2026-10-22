@@ -154,7 +154,7 @@ See [adaptive browsing and effect borders](ui/screens.md#adaptive-browsing-and-e
 
 ## Shared layout recipes
 
-Use existing owners before adding resize observers, breakpoints or pagination state:
+Use existing owners before adding resize observers, breakpoints or pagination state. `usePagination` owns per-view/filter anchors, resize preservation and shortened-list clamping for both Collection and PagedItems. `useGridColumns` owns fixed-row gallery width measurement; PagedItems additionally measures available row height:
 
 | Content                              | Shared owner                                                                      | Screen supplies                                                    |
 | ------------------------------------ | --------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
@@ -163,6 +163,6 @@ Use existing owners before adding resize observers, breakpoints or pagination st
 | Explicit fixed pages                 | PagedItems and PageControls in that same owner                                    | Items and page size; shared controls handle bounds and focus       |
 | Artwork sizing                       | [ArtCard](../src/ui/shared/cards/art-card.tsx) and [tokens](../src/ui/tokens.css) | Native ratio and existing profile; screen CSS arranges the cells   |
 
-For an adaptive grid, pass `adaptive={{ columns: 4, rows: 2 }}` with the existing grid class and preferred `pageSize={8}`. PagedItems measures available stage space, reserves pagination even on a single page, retains measured row heights and keeps the first visible item when capacity changes. Campfire and recruit replacement use one-row variants; talent trees use up to three rows. Reuse those consumers for their actual CSS constraints. The shared owner handles measurement and lifecycle; screens should not duplicate it. Collection keeps its existing filter-specific page anchors and measured gallery owner.
+For an adaptive grid, pass `adaptive={{ columns: 4, rows: 2 }}` with the existing grid class and preferred `pageSize={8}`. PagedItems measures available stage space, reserves pagination even on a single page, retains measured row heights and keeps the first visible item when capacity changes. Campfire and recruit replacement use one-row variants; talent trees use up to three rows. Reuse those consumers for their actual CSS constraints. The shared owner handles measurement and lifecycle; screens should not duplicate it. Collection uses the shared hooks with filter-specific anchors and its reserved two-row gallery.
 
 Keep the no-scrolling product rule, selected typography, 44px hit areas and native artwork ratios. Add a shared capability only when an affected consumer actually needs it. [Layout assertions](../tests/e2e/support/layout-contract.ts) cover overflow, reachability and centering in CI; focused rendered review still checks the changed flow.

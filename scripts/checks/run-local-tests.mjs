@@ -26,13 +26,16 @@ export function runLocalTests({ root = ROOT, runner = spawnSync } = {}) {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
-  if (process.argv.length > 2)
-    throw new Error("Local smoke is fixed. Use npm run test:full -- <paths> for focused unit tests.");
-  try {
-    setPriority(0, constants.priority.PRIORITY_BELOW_NORMAL);
-  } catch {
-    // Some hosts disallow priority changes; the worker, heap and deadline limits still apply.
+  if (process.argv.length > 2) {
+    const { investigate } = await import("../agent/investigate.mjs");
+    process.exitCode = await investigate(["unit", ...process.argv.slice(2)]);
+  } else {
+    try {
+      setPriority(0, constants.priority.PRIORITY_BELOW_NORMAL);
+    } catch {
+      // Some hosts disallow priority changes; the worker, heap and deadline limits still apply.
+    }
+    console.log("Local Node smoke only. Full unit and DOM validation belongs to CI.");
+    process.exitCode = runLocalTests();
   }
-  console.log("Local Node smoke only. Full unit and DOM validation belongs to CI.");
-  process.exitCode = runLocalTests();
 }

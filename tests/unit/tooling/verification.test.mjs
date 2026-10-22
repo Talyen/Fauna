@@ -9,6 +9,7 @@ import {
   formatSelection,
   checkPlan,
   runCheck,
+  verify,
 } from "../../../scripts/checks/check.mjs";
 import { runLocalTests } from "../../../scripts/checks/run-local-tests.mjs";
 import localConfig from "../../../vitest.local.config.mjs";
@@ -222,6 +223,41 @@ describe("lightweight local verification", () => {
     expect(checkPlan(root, ["src/game.ts", ...plan.deferredTests]).tests).toHaveLength(14);
   });
 
+  it("runs named regressions alongside the changed selection and dispatches bounded diagnostics", async () => {
+    const root = fixture();
+    mkdirSync(path.join(root, "tests/unit"), { recursive: true });
+    writeFileSync(path.join(root, "tests/unit/named.test.mjs"), "");
+    const runner = vi.fn(() => ({ status: 0 }));
+    expect(
+      runCheck(["--test", "tests/unit/named.test.mjs", "src/game.ts"], { root, runner, log: () => {} }),
+    ).toBe(0);
+    expect(runner.mock.calls.at(-1)[1]).toContain("tests/unit/named.test.mjs");
+    expect(() => runCheck(["--test", "../outside.test.mjs"], { root, runner })).toThrow();
+    expect(await verify(["--diagnostic", "types"], { root, runner })).toBe(0);
+    expect(runner.mock.calls.at(-1)[1].slice(-2)).toEqual(["run", "check:types"]);
+  });
+
+  it("prioritizes direct consumers over alphabetically earlier transitive suites within the time budget", () => {
+    const root = fixture();
+    mkdirSync(path.join(root, "tests/integration"), { recursive: true });
+    writeFileSync(path.join(root, "src/indirect.ts"), 'import "./game";');
+    const indirect = Array.from({ length: 13 }, (_, i) => `tests/integration/a-${i}.test.ts`);
+    for (const file of indirect) writeFileSync(path.join(root, file), 'import "../../src/indirect";');
+    const direct = "tests/integration/z-direct.test.ts";
+    writeFileSync(path.join(root, direct), 'import "../../src/game";');
+    expect(checkPlan(root, ["src/game.ts"]).tests[0]).toBe(direct);
+    mkdirSync(path.join(root, "reports"));
+    writeFileSync(
+      path.join(root, "reports/task-tests.json"),
+      JSON.stringify({ testResults: [{ name: path.join(root, direct), startTime: 1, endTime: 59001 }] }),
+    );
+    const plan = checkPlan(root, ["src/game.ts"]);
+    expect(plan.tests).toEqual([direct]);
+    expect(plan.deferredTests).toHaveLength(13);
+    writeFileSync(path.join(root, "reports/task-tests.json"), JSON.stringify({ testResults: {} }));
+    expect(checkPlan(root, ["src/game.ts"]).tests).toHaveLength(12);
+  });
+
   it("runs smoke on a clean checkout and never treats Git discovery failure as success", () => {
     const root = fixture(),
       runner = vi.fn(() => ({ status: 0 }));
@@ -274,7 +310,7 @@ describe("lightweight local verification", () => {
     ).toBe(8);
   });
 
-  it("bounds each selected suite independently and stops when a regression fails", () => {
+  it("batches selected regressions with one worker and a bounded deadline, propagating failure", () => {
     const root = fixture();
     mkdirSync(path.join(root, "tests/unit"), { recursive: true });
     for (const name of ["first", "second"]) writeFileSync(path.join(root, `tests/unit/${name}.test.mjs`), "");
@@ -282,8 +318,10 @@ describe("lightweight local verification", () => {
     const runner = vi.fn(() => ({ status: 0 }));
     expect(runCheck(suites, { root, runner, log: () => {} })).toBe(0);
     const calls = runner.mock.calls.filter((call) => call[1][0].endsWith("vitest.mjs"));
-    expect(calls.map((call) => call[1].slice(4))).toEqual(suites.map((suite) => [suite]));
-    expect(calls.every((call) => call[2].timeout === 60_000)).toBe(true);
+    expect(calls).toHaveLength(1);
+    expect(calls[0][1].slice(-2)).toEqual(suites);
+    expect(calls[0][1]).toContain("--bail=1");
+    expect(calls[0][2].timeout).toBe(300_000);
     const failure = vi.fn((_command, args) => ({
       status: args.includes(suites[0]) && args[0].endsWith("vitest.mjs") ? 9 : 0,
     }));

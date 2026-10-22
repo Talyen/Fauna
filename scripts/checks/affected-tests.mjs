@@ -68,12 +68,19 @@ export function affectedTests(root, changed, files) {
     }
   }
   const visited = new Set(changed);
+  const distance = new Map(changed.map((file) => [file, 0]));
   const queue = [...changed];
   for (let i = 0; i < queue.length; i++)
     for (const consumer of consumers.get(queue[i]) ?? [])
       if (!visited.has(consumer)) {
         visited.add(consumer);
+        distance.set(consumer, distance.get(queue[i]) + 1);
         queue.push(consumer);
       }
-  return { tests: files.filter((file) => suite.test(file) && visited.has(file)).sort(), unresolved };
+  return {
+    tests: files
+      .filter((file) => suite.test(file) && visited.has(file))
+      .sort((a, b) => distance.get(a) - distance.get(b) || a.localeCompare(b)),
+    unresolved,
+  };
 }

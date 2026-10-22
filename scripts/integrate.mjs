@@ -6,9 +6,16 @@ import { acquireIntegrationLock } from "./lib/integration-lock.mjs";
 import { removeMergedTask } from "./worktree-cleanup.mjs";
 import { npmCommand } from "./lib/npm-command.mjs";
 
-export async function integrate(root, branch, { runner = spawnSync, log = console.log } = {}) {
+export async function integrate(
+  root,
+  branch,
+  { runner = spawnSync, log = console.log, cleanup = removeMergedTask, lockTimeoutMs = 30_000 } = {},
+) {
   if (!/^(?:task|codex)\//.test(branch ?? "")) throw new Error("Provide a task/ or codex/ branch.");
-  const release = await acquireIntegrationLock(root);
+  const release = await acquireIntegrationLock(root, {
+    timeoutMs: lockTimeoutMs,
+    onBusy: () => log(`Waiting up to ${lockTimeoutMs / 1000} seconds for the shared integration lock…`),
+  });
   try {
     assertClean(root, "main");
     const mainHead = git(root, ["rev-parse", "HEAD"]).trim();
@@ -31,10 +38,16 @@ export async function integrate(root, branch, { runner = spawnSync, log = consol
     git(root, ["merge", "--ff-only", verifiedHead]);
     log(`Integrated ${branch} into main after the local gate. Full CI validation remains pending.`);
     try {
-      const { archive } = removeMergedTask(root, branch);
+      const { archive } = cleanup(root, branch);
       log(`Removed integrated task checkout and branch.${archive ? ` Artifacts: ${archive}` : ""}`);
+      return { integrated: true, commit: verifiedHead, cleanup: { status: "complete", archive } };
     } catch (error) {
-      throw new Error(`Integration succeeded, but cleanup is incomplete: ${error.message}`, { cause: error });
+      log(`Integration succeeded at ${verifiedHead}. Cleanup remains pending: ${error.message}`);
+      return {
+        integrated: true,
+        commit: verifiedHead,
+        cleanup: { status: "pending", reason: error.message },
+      };
     }
   } finally {
     await release();
