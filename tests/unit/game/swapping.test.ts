@@ -5,7 +5,7 @@ import { combat } from "../../../src/game/combat/index";
 import { dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { CARDS, species } from "../../../src/game/content";
-import { recruitChoice, accept, run, winBattle } from "../../support/game";
+import { prepareDestination, recruitChoice, accept, run, winBattle } from "../../support/game";
 
 export function withReserves() {
   return produce(run(), (d) => {
@@ -25,7 +25,10 @@ export function withReserves() {
 describe("free combat swaps", () => {
   it("ticks every enemy's statuses while the deployed row waits for a living backup", () => {
     let state = accept(
-      { ...structuredClone(withReserves()), phase: "teamSelection", battle: null, encounter: 1 },
+      produce(withReserves(), (draft) => {
+        draft.encounter = 1;
+        prepareDestination(draft);
+      }),
       { type: "beginBattle" },
     );
     state = produce(state, (draft) => {
@@ -107,7 +110,12 @@ describe("free combat swaps", () => {
       // Use a real three-enemy encounter so all three allies fall in one enemy turn.
     });
     // Beginning that encounter supplies authored enemies; health is then reduced for the fixture.
-    s = accept({ ...s, phase: "teamSelection", battle: null }, { type: "beginBattle" });
+    s = accept(
+      produce(s, (draft) => {
+        prepareDestination(draft);
+      }),
+      { type: "beginBattle" },
+    );
     s = produce(s, (d) =>
       d.team.forEach((c) => {
         c.health = 0;

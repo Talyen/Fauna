@@ -1,10 +1,10 @@
 # Make journey lifecycle states explicit
 
-Status: proposed; no runtime changes
+Status: implemented; exact-commit CI and rendered evidence are reported in the task handoff
 
 Assessment baseline: local main `e701315`, 2026-10-21
 
-## Finding
+## Original finding
 
 The biggest remaining architectural problem is that the journey lifecycle has no single structural contract. `GameState` stores a phase alongside independently nullable battle, reward, expedition, support and journey objects. Commands construct their relationships procedurally; save decoding reconstructs those relationships separately. The type system permits combinations that neither commands nor loading should accept.
 
@@ -110,3 +110,43 @@ The change is complete when:
 Follow [verification policy](../CONTRIBUTING.md#verification). Run path-scoped local checks and focused unit suites appropriate to each step; run documentation checks for document edits. Full static/type checks, unit/DOM suites, build, browser journeys and packaging remain CI-owned. Observe CI for the exact implementation commit, including rendered reward, results, roster, menu and resume evidence when presentation consumers change. Browser simulation does not establish native desktop, Windows packaging, physical controller, Steam client or Steam Deck behavior.
 
 Integrate each coherent, reviewed and verified slice through the shared repository lock. Each intermediate commit must have one supported current save format, passing relevant checks and no partially wired transition. If a slice cannot meet that condition, keep it on the task branch until it can; do not ship an adapter that quietly accepts contradictory lifecycle state.
+
+## Implementation record
+
+The shared structural contract lives in [state-schema.ts](../src/game/state-schema.ts), with types inferred in [types.ts](../src/game/types.ts). [journey.ts](../src/game/journey.ts) owns complete lifecycle transitions. Live combat ends at settlement, while the journey retains a detached receipt containing encounter, outcome, XP and currency. Pending rewards retain offers and earnings without enemy identities or card zones. Recruitment no longer patches historical combat. Current development saves use version 45; obsolete saves are rejected without migration.
+
+The [phase table](../src/game/command-phases.ts) covers every command. Command-specific conditions still validate before mutation or RNG use. Global talent commands retain their existing rules in every phase. Preview remains an unpublished execution mode and skips settlement and Auto-end turn.
+
+| Command             | Allowed phases                                       | Result and RNG behavior                                                                                          |
+| ------------------- | ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Draft               | Draft                                                | Adds a starter and rerolls offers until complete                                                                 |
+| Start               | Draft                                                | Enters team selection; prepares seeded destinations                                                              |
+| Begin battle        | Team selection                                       | Enters battle; initializes seeded draw and targets                                                               |
+| Set lineup          | Team selection, Recruit, Boon, Campfire, Merchant    | Updates the next starting lineup; no RNG                                                                         |
+| Swap                | Team selection, battle                               | Exchanges an active creature and backup; manual swap retains zones and RNG                                       |
+| Play                | Battle                                               | Resolves the ability and reactions, then settles or completes a turn when applicable; seeded effects consume RNG |
+| End turn            | Battle                                               | Resolves enemy actions and statuses; settles or starts the next seeded player turn                               |
+| Development victory | Battle, with development capability                  | Settles the current battle using ordinary reward rules                                                           |
+| Visit Campfire      | Team selection                                       | Enters Campfire with the existing destination offers; no RNG                                                     |
+| Rest                | Campfire                                             | Restores Health and returns to the same destinations; no RNG                                                     |
+| Leave Campfire      | Campfire                                             | Returns to the same destinations; no RNG                                                                         |
+| Enter Merchant      | Team selection                                       | Enters the exact offered visit; no RNG                                                                           |
+| Buy Boon            | Merchant                                             | Spends currency and resolves the exact stock slot once; no RNG                                                   |
+| Leave Merchant      | Merchant                                             | Completes the visit and prepares seeded destinations at the same encounter                                       |
+| Recruit             | Recruit                                              | Adds or replaces the selected creature, consumes the reward and prepares the next seeded encounter               |
+| Recruit destination | Team selection                                       | Consumes the saved offer without advancing the encounter or RNG                                                  |
+| Skip Recruit        | Recruit, only when there is no offer                 | Rejected for all current valid Recruit states, which require an offer                                            |
+| Choose Boon         | Boon                                                 | Grants the selected Boon and prepares the next seeded encounter                                                  |
+| Skip Boon           | Boon                                                 | Consumes the choice and prepares the next seeded encounter                                                       |
+| Buy talent          | All phases                                           | Uses the existing progression eligibility and point rules; no RNG                                                |
+| Reset talents       | All phases                                           | Removes the purchased category; no RNG                                                                           |
+| New run             | Draft, victory, defeat                               | Retains permanent progress and prepares offers from the supplied seed                                            |
+| Abandon             | Draft with a selection, or any ongoing journey phase | Clears draft choices and rerolls offers, or banks pending XP and records voluntary return without a new reward   |
+
+The retained Skip Recruit command remains rejected for current valid saves; removing its public command is outside this behavior-preserving refactor. Available destination offers and active Merchant context remain separate lifetimes. Voluntary return preserves completed earnings without pretending to be a combat defeat.
+
+[Lifecycle regressions](../tests/unit/game/journey-lifecycle.test.ts) retain three seeded command and output baselines captured before the runtime changes, plus required phase type checks, save payload rejection, detached recruitment receipts, duplicate settlement rejection and return/resume coverage. Baseline normalization excludes the save version, obsolete completed battle objects and out-of-combat Block/status fields; it compares the original earnings fields of last-battle receipts while dedicated tests cover their new encounter and outcome fields. No baseline expectations were regenerated after refactoring. Scenario builders explicitly construct destination states, including journey counts, instead of manufacturing inconsistent phase and payload combinations.
+
+Two terminal digests in the older combat-resolution corpus were recalculated with the normalized projection against the committed pre-refactor engine (`af55a6b` parent), then verified unchanged against the new engine. Live combat digests and their recorded RNG and commands remain unchanged. This preserves the original behavioral oracle while excluding the retired battle object and newly required summary.
+
+The application save queue, publication and disposal owners remain unchanged. Battle, reward and earnings presentation consume the explicit contract; layout, input behavior and focus owners retain their existing implementation. Full CI owns type, lint, unit/DOM, build, rendered browser and packaged Windows verification.

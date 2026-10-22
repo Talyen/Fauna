@@ -67,12 +67,12 @@ export function prepareEncounter(state: GameState) {
 }
 export function intents(state: BattleState) {
   const alive = living(state);
-  for (const enemy of state.battle!.enemies) {
+  for (const enemy of state.battle.enemies) {
     if (enemy.health > 0)
       enemy.targetId = alive.length ? alive[Math.floor(roll(state) * alive.length)]!.id : state.team[0]!.id;
   }
 }
-export function beginBattle(state: GameState, events: GameEvent[] = []) {
+export function beginBattle(state: StateAt<"teamSelection">, events: GameEvent[] = []) {
   const encounter = encounterSource(state);
   for (const enemy of encounter.enemies)
     if (!state.discovery.encountered.includes(enemy.species)) state.discovery.encountered.push(enemy.species);
@@ -121,7 +121,6 @@ export function beginBattle(state: GameState, events: GameEvent[] = []) {
       return enemy;
     }),
   };
-  if (!state.journey) throw new Error("Battle requires a journey.");
   const active = enterPhase(state, {
     phase: "battle",
     battle,
@@ -130,8 +129,8 @@ export function beginBattle(state: GameState, events: GameEvent[] = []) {
     expedition: state.expedition,
     journey: { ...state.journey, outcome: null },
   });
-  draw(state, TURN_DRAW + (state.boons.includes("tattered-pages") ? 1 : 0));
-  if (hasTalent(state, "nature.ecosystem")) drawKeyword(state, "nature");
+  draw(active, TURN_DRAW + (state.boons.includes("tattered-pages") ? 1 : 0));
+  if (hasTalent(state, "nature.ecosystem")) drawKeyword(active, "nature");
   for (const unit of state.team) {
     if (hasTalent(state, "armor.bulwark")) grantArmor(state, unit, 2, events);
     for (const effect of creaturePassive(state, unit.species).effects) {
@@ -237,13 +236,13 @@ export function settle(state: BattleState, events: GameEvent[]): boolean {
     events.push({ kind: "knockout", text: "Your journey has ended." });
     return true;
   }
-  if (state.battle!.enemies.every((e) => e.health <= 0)) {
+  if (state.battle.enemies.every((e) => e.health <= 0)) {
     for (const creature of [...state.team, ...state.reserves]) {
       if (hasTalent(state, "health.vitality")) restoreHealth(creature, 4, events, false, state);
       creature.block = 0;
       creature.combat = freshCombat();
     }
-    for (const enemy of state.battle!.enemies) {
+    for (const enemy of state.battle.enemies) {
       enemy.combat = freshCombat();
       enemy.block = 0;
     }

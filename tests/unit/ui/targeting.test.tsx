@@ -11,7 +11,7 @@ import { moveFocus } from "../../../src/ui/shared/navigation/input";
 import { previewCard } from "../../../src/game/engine";
 import { produce } from "immer";
 import * as content from "../../../src/game/content";
-import { teamRun } from "../../support/game";
+import { requireBattle, teamRun } from "../../support/game";
 
 beforeEach(() => {
   // Keep chosen-ally targeting covered even though the current kits use self or group guards.
@@ -57,7 +57,7 @@ function open(game = fixture(), navigation = false) {
   const view = render(
     <TooltipProvider>
       <BattleScreen
-        game={game}
+        game={requireBattle(game)}
         send={send}
         controls={controls}
         bursts={[]}

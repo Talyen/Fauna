@@ -235,6 +235,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         break;
       }
       case "beginBattle":
+        if (draft.phase !== "teamSelection") throw new Error("Invalid battle transition.");
         draft.support = null;
         if (draft.expedition) {
           draft.expedition.recruit = null;

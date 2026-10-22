@@ -151,7 +151,6 @@ it("uses an enemy area ability against deployed allies while leaving reserves un
   let game = accept(
     produce(teamRun(1, ["mossguard", "emberback", "prismram"]), (draft) => {
       prepareDestination(draft);
-      draft.battle = null;
       draft.encounter = 2;
       draft.journey!.victories = draft.encounter;
       draft.expedition = {

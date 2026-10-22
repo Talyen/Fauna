@@ -10,7 +10,7 @@ import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import { createGame } from "../../../src/game/engine";
 import { species } from "../../../src/game/content";
-import { accept, recruitChoice, run, winBattle, starterJourney } from "../../support/game";
+import { requireReward, accept, recruitChoice, run, winBattle, starterJourney } from "../../support/game";
 
 beforeEach(() => {
   vi.stubGlobal(
@@ -44,7 +44,7 @@ it("keeps the incoming recruit inspectable while browsing replacements, and canc
     inspect = vi.fn();
   render(
     <TooltipProvider>
-      <Rewards game={game} send={send} inspect={inspect} />
+      <Rewards game={requireReward(game)} send={send} inspect={inspect} />
     </TooltipProvider>,
   );
   const user = userEvent.setup();

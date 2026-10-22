@@ -275,7 +275,6 @@ it("enemy Shadebrim alternates useful abilities, Cleanses its own side and never
 it("encounters and recruits Shadebrim through the ordinary journey pool", () => {
   let game = produce(teamRun(1, ["mossguard", "emberback", "prismram"]), (draft) => {
     prepareDestination(draft);
-    draft.battle = null;
     draft.expedition = {
       recruit: null,
       lastRoom: null,

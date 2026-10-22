@@ -129,7 +129,10 @@ const shared = z.object({
     .max(JOURNEY_LENGTH - 1),
   keywordXP: xp,
   battleXP: xp,
-  talents: z.array(z.enum(TALENTS.map((t) => t.id))).max(TALENTS.length),
+  talents: z
+    .array(z.enum(TALENTS.map((t) => t.id)))
+    .max(TALENTS.length)
+    .transform((ids): string[] => ids),
   currency: natural,
   boons: z.array(boonId).max(BOONS.length),
 });
@@ -188,7 +191,7 @@ const activeJourney = journey.extend({ outcome: z.null() });
 const destination = { battle: z.null(), reward: z.null(), journey: activeJourney, expedition, support };
 const finished = { battle: z.null(), expedition, support: z.null() };
 
-export const gameStateSchema = z.discriminatedUnion("phase", [
+const phases = z.discriminatedUnion("phase", [
   shared.extend({ phase: z.literal("draft"), ...destination, journey: z.null(), support: z.null() }),
   shared.extend({ phase: z.literal("teamSelection"), ...destination }),
   shared.extend({ phase: z.literal("campfire"), ...destination, expedition: expedition.unwrap() }),
@@ -236,16 +239,25 @@ export const gameStateSchema = z.discriminatedUnion("phase", [
       boons: z.array(boonId).length(0),
     }),
   }),
+]);
+
+// Voluntary return and combat defeat share a player surface, but have different receipts.
+export const gameStateSchema = z.union([
+  phases,
   shared.extend({
     phase: z.literal("defeat"),
     ...finished,
-    journey: journey.extend({ outcome: z.enum(["defeat", "returned"]) }),
-    reward: receipt
-      .extend({
-        outcome: z.literal("defeat"),
-        recruits: z.array(speciesId).length(0),
-        boons: z.array(boonId).length(0),
-      })
-      .nullable(),
+    journey: journey.extend({ outcome: z.literal("defeat") }),
+    reward: receipt.extend({
+      outcome: z.literal("defeat"),
+      recruits: z.array(speciesId).length(0),
+      boons: z.array(boonId).length(0),
+    }),
+  }),
+  shared.extend({
+    phase: z.literal("defeat"),
+    ...finished,
+    journey: journey.extend({ outcome: z.literal("returned") }),
+    reward: z.null(),
   }),
 ]);

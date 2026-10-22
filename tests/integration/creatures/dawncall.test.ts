@@ -162,7 +162,6 @@ it("retains the opening receipt through swaps and resume, resets in backup and a
   expect(attacks(result.events).every((event) => event.critical)).toBe(true);
   game = produce(result.state, (draft) => {
     prepareDestination(draft);
-    draft.battle = null;
   });
   game = accept(game, { type: "beginBattle" });
   expect(game.team[0]!.combat!.firstAttackUsed).toBe(false);

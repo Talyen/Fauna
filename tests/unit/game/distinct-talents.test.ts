@@ -210,7 +210,6 @@ it("applies opening draws and Armor once, without granting reserve Armor", () =>
   for (let seed = 0; seed < 10; seed++) {
     const ready = structuredClone(run(seed));
     prepareDestination(ready);
-    ready.battle = null;
     const reserve = ready.team.pop()!;
     ready.reserves.push(reserve);
     ready.lineup = ready.team.map((c) => c.id);

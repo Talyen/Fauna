@@ -35,7 +35,6 @@ it.each([0, 1, 2, 3, 4, 5, 6, 7])("offers Campfire at encounter %s without rerol
 it("counts reserves and restores knocked-out reserves without overfilling healthy allies", () => {
   const s = produce(run(), (d) => {
     prepareDestination(d);
-    d.battle = null;
     d.expedition = destinations().expedition;
     d.roster.push("emberback");
     d.reserves.push({ id: "reserve", species: "emberback", health: 0, block: 0, attacked: false });

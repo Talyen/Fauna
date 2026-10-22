@@ -256,7 +256,6 @@ it("encounters discover and recruit Dunefox; enemy Mirage Step and auras use the
     const game = accept(
       produce(ready(), (draft) => {
         prepareDestination(draft);
-        draft.battle = null;
         draft.encounter = 1;
         draft.journey!.victories = draft.encounter;
         draft.expedition = {

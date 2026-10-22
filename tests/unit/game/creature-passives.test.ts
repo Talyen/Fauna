@@ -46,7 +46,6 @@ it("uses the exact tier for card rules and battle start without scaling enemies"
     const game = produce(teamRun(42, ["prismram", "emberback", "pollenmoth"]), (draft) => {
       draft.discovery.recruited.prismram = copies;
       prepareDestination(draft);
-      draft.battle = null;
     });
     const upgraded = copies >= 3;
     const rank = copies - 1;

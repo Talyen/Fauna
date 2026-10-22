@@ -124,7 +124,6 @@ describe("combat controls", () => {
         d.encounter = 7;
         d.journey!.victories = d.encounter;
         prepareDestination(d);
-        d.battle = null;
         d.expedition = { pack: 0, recruit: null, lastRoom: null };
       }),
       { type: "beginBattle" },

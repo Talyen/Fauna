@@ -245,7 +245,6 @@ it("refreshes one Ward, preserves it through swaps and turn changes, and resets 
   game = accept(game, { type: "swap", activeId: "reserve", reserve: "ally-0" });
   game = produce(game, (draft) => {
     prepareDestination(draft);
-    draft.battle = null;
   });
   game = accept(game, { type: "beginBattle" });
   expect(game.team[0]!.combat!.reflect).toBe(false);

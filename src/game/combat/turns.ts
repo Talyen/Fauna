@@ -32,7 +32,7 @@ export function livingChorus(state: GameState, enemy: boolean, events: GameEvent
   }
 }
 export function finishTurn(draft: BattleState, events: GameEvent[]) {
-  const battle = draft.battle!;
+  const battle = draft.battle;
   const bonusMana = Number(
     battle.mana > 0 ? hasTalent(draft, "mana.wellspring") : hasTalent(draft, "mana.dark-recovery"),
   );

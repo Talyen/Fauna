@@ -207,7 +207,6 @@ describe("combat commands and journey health", () => {
   it("heals the whole roster including knockouts without permitting consecutive Campfire visits", () => {
     let s = produce(run(), (d) => {
       prepareDestination(d);
-      d.battle = null;
       d.encounter = 3;
       d.journey!.victories = d.encounter;
       d.expedition = { pack: 0, recruit: null, lastRoom: null };
@@ -272,7 +271,6 @@ it("allows Dodge again after the control skip resolves while shared buildup immu
 it("keeps Campfire lineup changes resumable before and after Rest", () => {
   let state = produce(run(), (s) => {
     prepareDestination(s);
-    s.battle = null;
     s.encounter = 3;
     s.journey!.victories = s.encounter;
     s.expedition = { pack: 0, recruit: null, lastRoom: null };

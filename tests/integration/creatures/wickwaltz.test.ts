@@ -160,7 +160,6 @@ it("does not count teammate plays or rejected commands and retains the count acr
   const nextBattle = accept(
     produce(result.state, (draft) => {
       prepareDestination(draft);
-      draft.battle = null;
     }),
     { type: "beginBattle" },
   );

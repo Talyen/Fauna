@@ -3,7 +3,7 @@ import { controlled } from "../../src/game/combat/index";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../src/game/engine";
 import { CARDS, definition, species, type SpeciesId } from "../../src/game/content";
-import type { Command, GameState, Lifecycle } from "../../src/game/types";
+import type { Command, GameState, Lifecycle, BattleState, RewardState } from "../../src/game/types";
 // This seeded first journey finishes within the browser's 400-command budget
 export const FULL_JOURNEY_SEED = 98;
 export function run(seed = 42) {
@@ -172,7 +172,6 @@ export function policy(s: GameState): Command {
 export function bossReward() {
   const ready = produce(run(), (d) => {
     prepareDestination(d);
-    d.battle = null;
     d.encounter = 3;
     d.journey!.victories = d.encounter;
     d.journey!.victories = 3;
@@ -229,4 +228,14 @@ export function prepareDestination(state: GameState) {
     },
   } satisfies Lifecycle;
   return Object.assign(state, next);
+}
+
+export function requireBattle(state: GameState): BattleState {
+  if (state.phase !== "battle") throw new Error("Scenario requires active combat.");
+  return state;
+}
+export function requireReward(state: GameState): RewardState {
+  if (state.phase !== "recruit" && state.phase !== "boon")
+    throw new Error("Scenario requires a reward choice.");
+  return state;
 }

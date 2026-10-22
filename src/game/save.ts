@@ -39,7 +39,9 @@ export function decodeSave(raw: string): GameState {
         receipt.encounter > s.encounter ||
           receipt.encounter < s.encounter - 1 ||
           s.phase === "battle" ||
-          (receipt.encounter === s.encounter - 1 && receipt.outcome !== "next"),
+          (receipt.encounter === s.encounter - 1 && receipt.outcome !== "next") ||
+          (receipt.outcome === "victory" && s.phase !== "victory") ||
+          (receipt.outcome === "defeat" && (s.phase !== "defeat" || s.journey.outcome !== "defeat")),
       );
     if (summary.lastBattle)
       invalid(
@@ -138,7 +140,6 @@ export function decodeSave(raw: string): GameState {
     );
   }
   if (s.phase === "campfire") invalid(s.expedition.lastRoom === "campfire" || !needsCampfire(s));
-  if (s.phase === "defeat") invalid((s.journey.outcome === "returned") !== (s.reward === null));
   if (s.phase !== "battle") invalid(Object.values(s.battleXP).some((n) => n !== 0));
   if (s.reward) {
     const receipt = s.journey!.lastBattle;

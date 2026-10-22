@@ -20,7 +20,6 @@ describe("hidden hand overflow", () => {
     const s = accept(
       produce(run(), (d) => {
         prepareDestination(d);
-        d.battle = null;
         d.boons = ["tattered-pages"];
       }),
       { type: "beginBattle" },

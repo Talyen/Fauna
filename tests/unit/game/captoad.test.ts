@@ -67,7 +67,6 @@ it("Puffs Poison onto every living enemy, excluding knockouts", () => {
     draft.encounter = 1;
     draft.journey!.victories = draft.encounter;
     prepareDestination(draft);
-    draft.battle = null;
   });
   const started = produce(accept(game, { type: "beginBattle" }), (draft) => {
     const card = draft.cards.find((card) => card.definitionId === "captoad-attack")!;
@@ -251,7 +250,6 @@ it("enemy Leaps reorder the battlefield without extra actions, and saves retain 
         draft.encounter = 2;
         draft.journey!.victories = draft.encounter;
         prepareDestination(draft);
-        draft.battle = null;
         draft.expedition = {
           recruit: null,
           lastRoom: null,

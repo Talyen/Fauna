@@ -91,7 +91,6 @@ it("shows exact Campfire recovery and commits one persisted Rest without currenc
   const session = await open(
     produce(run(), (s) => {
       prepareDestination(s);
-      s.battle = null;
       s.encounter = 3;
       s.journey!.victories = s.encounter;
       s.expedition = { pack: 0, recruit: null, lastRoom: null };

@@ -8,7 +8,7 @@ import { actionValue, enemyAbilityValue } from "../../../src/game/rules";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import type { GameEvent } from "../../../src/game/types";
-import { teamRun } from "../../support/game";
+import { requireBattle, teamRun } from "../../support/game";
 
 it.each(CARDS.filter((card) => enemyCanUse(card) && card.effect !== "draw"))(
   "$id resolves the same combat effects on either side at base room power",
@@ -41,7 +41,7 @@ it.each(CARDS.filter((card) => enemyCanUse(card) && card.effect !== "draw"))(
       const state = produce(game, (draft) => {
         if (side === "player")
           executeAbility(
-            draft,
+            requireBattle(draft),
             {
               side,
               def,
@@ -59,7 +59,7 @@ it.each(CARDS.filter((card) => enemyCanUse(card) && card.effect !== "draw"))(
           );
         else
           executeAbility(
-            draft,
+            requireBattle(draft),
             {
               side,
               def,
@@ -212,7 +212,7 @@ it("applies room power once to primary Block and supplemental damage/healing bef
     actor.combat = freshCombat();
     draft.team[0]!.block = 2;
     executeAbility(
-      draft,
+      requireBattle(draft),
       {
         side: "enemy",
         actor,
@@ -253,7 +253,7 @@ it.each([
       actor.species = def.species;
       actor.power = 1.5;
       executeAbility(
-        draft,
+        requireBattle(draft),
         {
           side: "enemy",
           actor,
@@ -301,7 +301,7 @@ it.each(["player", "enemy"] as const)(
       }
       const events: GameEvent[] = [];
       executeAbility(
-        state,
+        requireBattle(state),
         side === "player"
           ? { side, actor: state.team[0]!, def, value: 1 }
           : { side, actor: state.battle!.enemies[0]!, def, value: 1 },

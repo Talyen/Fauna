@@ -45,7 +45,6 @@ it("registers Cadenza's kit, recruitment, automatic targeting and save/preview p
   }
   let game = produce(teamRun(1, ["mossguard", "emberback", "prismram"]), (draft) => {
     prepareDestination(draft);
-    draft.battle = null;
     draft.expedition = {
       recruit: null,
       lastRoom: null,

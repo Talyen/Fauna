@@ -53,7 +53,6 @@ for (const width of [1280, 1920]) {
     await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
     const game = produce(run(), (s) => {
       prepareDestination(s);
-      s.battle = null;
       s.encounter = 3;
       s.journey!.victories = s.encounter;
       s.expedition = { pack: 0, recruit: null, lastRoom: null };

@@ -1,10 +1,10 @@
 import { createHash } from "node:crypto";
 import { produce } from "immer";
-import { describe, expect, it } from "vitest";
+import { describe, expect, expectTypeOf, it } from "vitest";
 import { createGame, dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { chooseBattleCommand } from "../../../src/application/battle-policy";
-import type { Command, GameState } from "../../../src/game/types";
+import type { BattleState, Command, GameState, RewardState } from "../../../src/game/types";
 
 // Compare gameplay, RNG and ordered output while deliberately excluding the obsolete live
 // battle receipt and out-of-combat status data that the lifecycle refactor retires.
@@ -43,6 +43,8 @@ function fingerprint(state: GameState, events: unknown) {
     .update(JSON.stringify(canonical(projected)))
     .digest("hex");
 }
+
+import { accept, starterJourney, winBattle } from "../../support/game";
 
 describe("journey lifecycle behavior baseline", () => {
   it.each([3, 10, 98])("preserves seeded commands and outputs for seed %s", (seed) => {
@@ -108,8 +110,7 @@ describe("journey lifecycle behavior baseline", () => {
   });
 });
 
-it("keeps a completed receipt detached from recruitment and rejects repeated settlement", async () => {
-  const { accept, starterJourney, winBattle } = await import("../../support/game");
+it("keeps a completed receipt detached from recruitment and rejects repeated settlement", () => {
   const won = winBattle(accept(starterJourney(3, "captoad"), { type: "beginBattle" }));
   expect(won.phase).toBe("recruit");
   expect(won.battle).toBeNull();
@@ -136,8 +137,7 @@ it("keeps a completed receipt detached from recruitment and rejects repeated set
   }
 });
 
-it("rejects phase payload mismatches and contradictory completed receipts", async () => {
-  const { accept, starterJourney, winBattle } = await import("../../support/game");
+it("rejects phase payload mismatches and contradictory completed receipts", () => {
   const ready = starterJourney(3, "captoad");
   const battle = accept(ready, { type: "beginBattle" });
   const won = winBattle(battle);
@@ -155,8 +155,7 @@ it("rejects phase payload mismatches and contradictory completed receipts", asyn
   for (const candidate of cases) expect(() => decodeSave(JSON.stringify(candidate))).toThrow();
 });
 
-it("preserves the returned result before combat and after a completed reward", async () => {
-  const { accept, starterJourney, winBattle } = await import("../../support/game");
+it("preserves the returned result before combat and after a completed reward", () => {
   const ready = starterJourney(3, "captoad");
   const won = winBattle(accept(ready, { type: "beginBattle" }));
   for (const state of [ready, won]) {
@@ -168,4 +167,11 @@ it("preserves the returned result before combat and after a completed reward", a
     expect(returned.journey!.lastBattle).toEqual(state.journey!.lastBattle);
     expect(decodeSave(encodeSave(returned))).toEqual(returned);
   }
+});
+
+it("exposes required phase payloads in the shared schema types", () => {
+  expectTypeOf<BattleState["battle"]>().toEqualTypeOf<NonNullable<GameState["battle"]>>();
+  expectTypeOf<BattleState["reward"]>().toEqualTypeOf<null>();
+  expectTypeOf<RewardState["battle"]>().toEqualTypeOf<null>();
+  expectTypeOf<RewardState["reward"]>().toEqualTypeOf<NonNullable<RewardState["reward"]>>();
 });

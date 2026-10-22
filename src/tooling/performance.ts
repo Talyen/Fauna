@@ -44,6 +44,7 @@ export function performanceCases(seed = 42) {
   );
   Object.assign(fixture, {
     phase: "teamSelection",
+    expedition: null,
     battle: null,
     reward: null,
     support: null,

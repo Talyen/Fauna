@@ -314,7 +314,6 @@ it("caps passive healing without card-only overhealing rewards and resets on a n
     actor.health = 10;
     actor.combat!.waterThorns = 8;
     prepareDestination(draft);
-    draft.battle = null;
   });
   const next = accept(game, { type: "beginBattle" });
   expect(next.battle!.turn).toBe(1);

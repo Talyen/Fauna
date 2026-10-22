@@ -58,7 +58,6 @@ it("registers the support kit, recruitment, preview parity and current saves", (
   expect(() => decodeSave(JSON.stringify({ ...ready(), version: 40 }))).toThrow();
   let game = produce(teamRun(1, ["mossguard", "emberback", "prismram"]), (draft) => {
     prepareDestination(draft);
-    draft.battle = null;
     draft.expedition = {
       recruit: null,
       lastRoom: null,

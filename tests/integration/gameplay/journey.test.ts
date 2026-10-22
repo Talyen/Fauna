@@ -100,7 +100,9 @@ describe("journey earnings and results", () => {
     });
     // Start from the committed pack so the saved battle receipt matches its encounter.
     const battle = accept(
-      { ...s, phase: "teamSelection", battle: null, expedition: s.expedition },
+      produce(s, (draft) => {
+        prepareDestination(draft);
+      }),
       { type: "beginBattle" },
     );
     const ready = victoryReady(battle);

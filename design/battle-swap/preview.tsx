@@ -15,19 +15,20 @@ import type { Controls } from "../../src/ui/shared/navigation/input";
 import { CreatureCard } from "../../src/ui/shared/cards/cards";
 import { createGame, dispatch } from "../../src/game/engine";
 import { CARDS, species } from "../../src/game/content";
-import type { Creature, GameState } from "../../src/game/types";
+import type { Creature, BattleState } from "../../src/game/types";
 import "@fontsource-variable/inter/wght.css";
 import "../../src/ui/styles.css";
 import "../../src/ui/battle/mana-crystals.css";
 import "./swap.css";
 
 // Presentation sandbox only. No persistence, production swap command, or progression changes.
-function fixture(): GameState {
+function fixture(): BattleState {
   let game = createGame(71);
   for (const kind of ["mossguard", "emberback", "prismram"] as const)
     game = dispatch(game, { type: "draft", species: kind }).state;
   game = dispatch(game, { type: "start" }).state;
   game = dispatch({ ...game, encounter: 1 }, { type: "beginBattle" }).state;
+  if (game.phase !== "battle") throw new Error("Preview requires an active battle.");
   return {
     ...game,
     roster: ["mossguard", "emberback", "prismram", "pollenmoth", "emberback"],

@@ -12,7 +12,6 @@ describe("recruiting creature copies", () => {
     const battle = accept(
       produce(started, (d) => {
         prepareDestination(d);
-        d.battle = null;
         d.encounter = 4;
         d.journey!.victories = d.encounter;
         d.journey!.victories = 4;
@@ -78,7 +77,6 @@ describe("recruiting creature copies", () => {
       accept(
         produce(s, (d) => {
           prepareDestination(d);
-          d.battle = null;
           d.encounter = 0;
           d.journey!.victories = d.encounter;
           d.journey!.victories = 0;

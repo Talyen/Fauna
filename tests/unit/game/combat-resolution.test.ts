@@ -40,9 +40,21 @@ it.each(cases)("preserves committed command traces for $name", ({ seed, team }) 
     expect(result.accepted).toBe(true);
     const resumed = dispatch(decodeSave(encodeSave(state)), command);
     expect(resumed).toEqual(result);
-    // The recorded oracle predates format 43; save/resume above validates the live format.
-    // Keep format metadata at its baseline value so format bumps do not recapture combat outcomes.
-    const baselineResult = { ...result, state: { ...result.state, version: 42 } };
+    // The oracle predates required journey summaries and separate completed receipts.
+    // Normalize only retired lifecycle data; compare live combat and all ordered events.
+    const combatOnly = (units: typeof state.team) =>
+      units.map(({ combat: _combat, block: _block, ...unit }) => unit);
+    const baselineResult = {
+      ...result,
+      state: {
+        ...result.state,
+        version: 42,
+        journey: null,
+        battle: result.state.phase === "battle" ? result.state.battle : null,
+        team: result.state.phase === "battle" ? result.state.team : combatOnly(result.state.team),
+        reserves: result.state.phase === "battle" ? result.state.reserves : combatOnly(result.state.reserves),
+      },
+    };
     trace.push({
       command,
       phase: result.state.phase,

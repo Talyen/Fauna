@@ -153,7 +153,6 @@ test("a fallen deployed row resumes with no playable cards and can recover throu
       attacked: false,
     }));
     prepareDestination(d);
-    d.battle = null;
     d.encounter = 1;
     d.journey!.victories = d.encounter;
   });

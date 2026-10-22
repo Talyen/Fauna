@@ -224,7 +224,6 @@ it("retains Nullify and spent Encore through swapping and resume, and resets the
   expect(game.team[0]!.combat!.encoreUsed).toBe(true);
   game = produce(game, (draft) => {
     prepareDestination(draft);
-    draft.battle = null;
   });
   game = accept(game, { type: "beginBattle" });
   expect(game.team[0]!.combat!.nullify).toBe(false);

@@ -502,11 +502,10 @@ it("persists free-card ownership and spends the reward on only the matching crea
 
 it("opening Mana, Armor and healing apply once, while victory heals living roster members", () => {
   const state = structuredClone(run());
-  prepareDestination(state);
-  state.battle = null;
+  const ready = prepareDestination(state);
   state.talents = ["mana.leyline-attunement", "mana.mana-bulwark", "mana.mana-shell", "health.combat-surge"];
   state.team.forEach((c) => (c.health = 10));
-  beginBattle(state);
+  beginBattle(ready);
   expect(state.battle!.maxMana).toBe(5);
   expect(state.team.every((c) => c.block === 5 && c.combat!.armor === 5 && c.health === 14)).toBe(true);
   state.talents = ["health.vitality"];

@@ -13,7 +13,6 @@ function battle(copies = 1) {
     produce(teamRun(1, ["emberback", "mossguard", "prismram"]), (game) => {
       game.discovery.recruited.emberback = copies;
       prepareDestination(game);
-      game.battle = null;
       game.encounter = 2;
       game.journey!.victories = game.encounter;
       game.expedition = {
@@ -171,7 +170,6 @@ it("previews Armor theft and commits the same passive burst without mutating the
   const withLeech = accept(
     produce(teamRun(1, ["emberback", "emberback", "prismram"]), (draft) => {
       prepareDestination(draft);
-      draft.battle = null;
       draft.encounter = 2;
       draft.journey!.victories = draft.encounter;
       draft.expedition = {
