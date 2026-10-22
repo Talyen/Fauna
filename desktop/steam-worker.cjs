@@ -17,7 +17,7 @@ parentPort.on("message", (/** @type {{data: unknown}} */ { data }) => {
     return;
   }
   const { id, operation, args } = message;
-  lane = lane.then(async () => {
+  lane = lane.then(() => {
     try {
       let value;
       if (operation === "init") {
@@ -49,14 +49,14 @@ parentPort.on("message", (/** @type {{data: unknown}} */ { data }) => {
           if (operation === "read") {
             if (!client.cloud.fileExists(name)) value = null;
             else {
-              const raw = await client.cloud.readFile(name);
+              const raw = client.cloud.readFile(name);
               if (raw == null || Buffer.byteLength(raw) > MAX) throw new Error("Cloud read failed.");
               value = Buffer.isBuffer(raw) ? raw.toString("utf8") : raw;
             }
           } else if (operation === "write") {
             if (typeof payload !== "string" || Buffer.byteLength(payload) > MAX)
               throw new Error("Invalid cloud payload.");
-            if (!(await client.cloud.writeFile(name, payload))) throw new Error("Cloud upload failed.");
+            if (!client.cloud.writeFile(name, payload)) throw new Error("Cloud upload failed.");
             value = true;
           } else throw new Error("Unknown cloud operation.");
         }

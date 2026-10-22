@@ -19,6 +19,7 @@ it("rejects malformed native requests and results before they reach application 
     ["list", ["slot", 1]],
     ["read", {}],
     ["write", null],
+    ["write", false],
   ])
     expect(() => parseReply(operation, value)).toThrow("Invalid Steam response");
   expect(parseReply("read", null)).toBeNull();

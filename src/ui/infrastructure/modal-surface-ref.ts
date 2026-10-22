@@ -8,6 +8,7 @@ export function useModalSurfaceRef(forwardedRef: ForwardedRef<HTMLDivElement>) {
       observer.current?.disconnect();
       observer.current = null;
       if (typeof forwardedRef === "function") forwardedRef(node);
+      // eslint-disable-next-line react/immutability -- React forwards object refs during commit and releases them during callback cleanup
       else if (forwardedRef) forwardedRef.current = node;
       if (!node) return;
       let closed = false,

@@ -109,7 +109,7 @@ async function createSteam({
             if (!entry) return;
             requests.delete(id);
             clearTimeout(entry.timer);
-            if (error) entry.reject(new Error(String(error)));
+            if (error) entry.reject(new Error(typeof error === "string" ? error : "Steam operation failed."));
             else entry.resolve(value);
           },
         );

@@ -64,6 +64,9 @@ it("emits exactly the active inventory without originals, old generations, recei
       output,
       await readFile(path.join(repository, "public", receipt.records[entry.id].url.slice(2))),
     );
+    await writeFile(path.join(dist, "dependencies.cdx.json"), "{}");
+    await writeFile(path.join(dist, "THIRD-PARTY-NOTICES.txt"), "license notices");
+    expect((await verifyAssetBundle(dist, receipt)).files).toBe(1);
     await mkdir(path.join(dist, "art"));
     await expect(verifyAssetBundle(dist, receipt)).rejects.toThrow("unapproved");
   } finally {

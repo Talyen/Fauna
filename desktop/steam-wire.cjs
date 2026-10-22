@@ -23,7 +23,8 @@ function parseRequest(value) {
 function parseReply(operation, value) {
   const valid =
     (operation === "init" && typeof value === "string" && /^\d{1,20}$/.test(value)) ||
-    ((operation === "enabled" || operation === "write") && typeof value === "boolean") ||
+    (operation === "enabled" && typeof value === "boolean") ||
+    (operation === "write" && value === true) ||
     (operation === "list" &&
       Array.isArray(value) &&
       value.length <= 64 &&

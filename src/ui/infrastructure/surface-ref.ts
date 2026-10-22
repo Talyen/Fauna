@@ -6,6 +6,7 @@ export function useSurfaceRef<T extends HTMLElement>(forwardedRef?: Ref<T>) {
     (node: T | null) => {
       if (!node) return;
       const release = typeof forwardedRef === "function" ? forwardedRef(node) : undefined;
+      // eslint-disable-next-line react/immutability -- React forwards object refs during commit and releases them during callback cleanup
       if (forwardedRef && typeof forwardedRef !== "function") forwardedRef.current = node;
       let active = true;
       const update = (width: number, height: number) => {
@@ -27,6 +28,7 @@ export function useSurfaceRef<T extends HTMLElement>(forwardedRef?: Ref<T>) {
         node.style.removeProperty("--surface-short-side");
         if (typeof release === "function") release();
         else if (typeof forwardedRef === "function") forwardedRef(null);
+        // eslint-disable-next-line react/immutability -- React forwards object refs during commit and releases them during callback cleanup
         else if (forwardedRef) forwardedRef.current = null;
       };
     },

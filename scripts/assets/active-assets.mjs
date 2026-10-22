@@ -32,9 +32,21 @@ export async function verifyAssetBundle(directory, receipt) {
   const published = JSON.parse(await readFile(path.join(directory, "prepared/manifest.json"), "utf8"));
   if (JSON.stringify(published) !== JSON.stringify(receipt))
     throw new Error("Build media receipt differs from the active selection.");
-  // All remaining emitted resources belong to Vite or the release identity plugin.
+  // Remaining resources belong to Vite, release identity or the dependency inventory.
   const rootEntries = await readdir(directory);
-  if (rootEntries.some((name) => !["assets", "prepared", "index.html", "release.json"].includes(name)))
+  if (
+    rootEntries.some(
+      (name) =>
+        ![
+          "assets",
+          "prepared",
+          "index.html",
+          "release.json",
+          "dependencies.cdx.json",
+          "THIRD-PARTY-NOTICES.txt",
+        ].includes(name),
+    )
+  )
     throw new Error("Build contains unapproved public resources or authoring originals.");
   let total = 0;
   for (const url of inventory(receipt)) {

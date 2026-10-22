@@ -3,7 +3,7 @@ export interface SteamRequests {
   enabled: { args: []; result: boolean };
   list: { args: []; result: string[] };
   read: { args: [string]; result: string | null };
-  write: { args: [string, string]; result: boolean };
+  write: { args: [string, string]; result: true };
 }
 export type SteamRequest = {
   [K in keyof SteamRequests]: { id: number; operation: K; args: SteamRequests[K]["args"] };
