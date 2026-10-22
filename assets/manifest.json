@@ -1483,6 +1483,50 @@
       "aspect": [3, 4],
       "provenance": "Unchanged Wickwaltz artwork selected from user Google Drive: https://drive.google.com/file/d/1w15QAUoJtPjn0WmwT7kQf_9frfh7nOV4/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "creature.sternshell",
+      "origin": "repository",
+      "source": "public/art/sternshell/sternshell.png",
+      "output": "art/sternshell/sternshell.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Sternshell artwork selected from user Google Drive: https://drive.google.com/file/d/1XfR0JrLdVQguF8AVeQRUKtYUCvJ1iTeM/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.sternshell.surge-ram",
+      "origin": "repository",
+      "source": "public/art/sternshell/surge-ram.png",
+      "output": "art/sternshell/surge-ram.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Sternshell artwork selected from user Google Drive: https://drive.google.com/file/d/1shTKZ0bq0xUeYKUvvW32O8uG5Y52wHc8/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.sternshell.siphon-vault",
+      "origin": "repository",
+      "source": "public/art/sternshell/siphon-vault.png",
+      "output": "art/sternshell/siphon-vault.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Sternshell artwork selected from user Google Drive: https://drive.google.com/file/d/1UuNcTdwmPu-9v-FSma4fSEfqoEEnTamt/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.sternshell.spiral-return",
+      "origin": "repository",
+      "source": "public/art/sternshell/spiral-return.png",
+      "output": "art/sternshell/spiral-return.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Sternshell artwork selected from user Google Drive: https://drive.google.com/file/d/15IQQNM8yjoxF77EXt4oaUs4gLNrY0xBK/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }
