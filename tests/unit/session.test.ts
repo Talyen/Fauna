@@ -457,3 +457,33 @@ it("bounds a stalled recovery read so saving and shutdown can finish without ove
     vi.useRealTimers();
   }
 });
+
+it.each(["fauna.save.v1", "fauna.save.v1.backup1"])(
+  "recovers readable slots when %s cannot be read",
+  async (unreadable) => {
+    const memory = new MemoryStorage();
+    const saved = JSON.stringify(run());
+    memory.setItem(unreadable === "fauna.save.v1" ? "fauna.save.v1.backup1" : "fauna.save.v1", saved);
+    const read = memory.getItem.bind(memory);
+    memory.getItem = (key) => {
+      if (key === unreadable) throw new Error("slot unavailable");
+      return read(key);
+    };
+    const s = createSession(createBrowserPlatform(memory));
+    try {
+      await s.load();
+      expect(s.store.getState().game).toEqual(JSON.parse(saved));
+      expect(s.store.getState().ready).toBe(true);
+    } finally {
+      await s.dispose();
+    }
+  },
+);
+
+it("reports unreadable browser storage instead of treating inaccessible slots as an empty profile", async () => {
+  const memory = new MemoryStorage();
+  memory.getItem = () => {
+    throw new Error("permission denied");
+  };
+  await expect(createBrowserPlatform(memory).saves.readCandidates()).rejects.toThrow("unreadable");
+});

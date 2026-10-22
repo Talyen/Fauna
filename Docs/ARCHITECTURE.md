@@ -1,5 +1,7 @@
 # Architecture
 
+The [ability resolution plan](COMBAT_RESOLUTION_PLAN.md) identifies duplicated player/enemy ability execution and proposes a shared executor while preserving deterministic ordering and command ownership. It is a proposed refactor, not the current implementation.
+
 `src/game/` owns content, commands, battle rules, seeded RNG, and save validation. It imports only its own modules, Immer, and Zod. It does not access the DOM, React, filesystem, Steam, clocks, or ambient randomness. `scripts/boundaries.mjs` parses source and checks resolved import paths and ambient capability references; CI also runs Knip for unused files, exports and dependencies.
 
 `dispatch(state, command)` returns either an accepted immutable state with ordered presentation events or a rejection retaining the original state. Validation occurs before RNG consumption or mutation. Gameplay and progression settle synchronously. Animation is a consumer of results; it cannot pay mana, damage a creature, grant a reward, or unlock content.
@@ -26,7 +28,7 @@ The current save version is owned by [save-format.json](../src/game/save-format.
 
 Battle settlement banks actual retained currency and keyword XP once. Ordinary fights offer recruitment only; intermediate bosses offer up to three unowned Boons only. The shared Victory screen consumes committed receipts, requires recruitment when offered, and accepts a Boon choice or Skip for boss rewards, with no acknowledgement phase or Continue command. An empty eligible pool advances immediately; final victory and defeat go directly to Journey results. The journey summary retains the outcome, battle count, gains, new unlocks, and last-battle receipt; opening results never grants rewards or saves.
 
-Hands contain at most seven cards. Extra draws enter a FIFO buffer, which cannot be played or inspected as a separate zone. Accepted plays refill newly open hand slots from that queue without RNG. End turn discards the visible hand, retains overflow, restores four Mana and draws four cards after promoting waiting cards. Free manual swaps preserve buffered card slots and update their owner along with other zones. Save validation includes the buffer in zone uniqueness/completeness and rejects a waiting buffer alongside an unfilled hand.
+Hands contain at most seven cards. Extra draws enter a FIFO buffer, which cannot be played or inspected as a separate zone. Accepted plays refill newly open hand slots from that queue without RNG. End turn discards the visible hand, retains overflow, restores the next player turn’s maximum Mana (four before talent modifiers) and draws four cards after promoting waiting cards. Free manual swaps preserve buffered card slots and update their owner along with other zones. Save validation includes the buffer in zone uniqueness/completeness and rejects a waiting buffer alongside an unfilled hand.
 
 Browser saves rotate primary to backup1 and backup1 to backup2 before installing the next snapshot. Desktop serializes writes, flushes a temporary file, rotates backups, then renames it over the primary. A partial backup rotation still leaves the old primary intact. Atomic rename guarantees depend on filesystem behavior; sudden power loss is not equivalent to graceful quit.
 
@@ -35,6 +37,8 @@ Desktop window close and application quit request a renderer flush first. The se
 ## Integration
 
 The [contribution workflow](../CONTRIBUTING.md#worktrees-and-integration) owns worktree creation, the shared integration lock, combined-diff verification and retained-checkout policy. [Script owners](../scripts/README.md) locate the implementation. Integration is local evidence only; CI and release checks remain separate.
+
+## Command resolution and previews
 
 With Auto-end turn enabled (the default), spending the final Mana resolves the enemy turn inside the same command and revision. The play command records its effective preference. Disabling it retains a saveable and resumable player turn at zero Mana; normal victory/defeat settlement remains immediate. Preview resolution is independent of this setting. Victory takes precedence over automatic turn advancement. Card previews run the same card-effect resolution without settling battle rewards, advancing the enemy turn, or publishing/saving the preview state. This retains the final enemy health forecast even when committing the card will advance directly to destinations.
 

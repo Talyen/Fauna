@@ -8,7 +8,7 @@ Individual comparisons hold other properties at 2px inner hover frame, no pointe
 
 Unavailable and knocked-out samples retain focus and hover details but cannot toggle selection. Unavailable artwork remains colored; knockout adds grayscale. Their opacity decisions are separate. The combined preview applies opacity only when its matching availability mode is selected. It combines explicit preferences, reports undecided values and permits selected-plus-focused review. These are selection samples, not implemented inspection, hand fan, combat targeting or reserve-swap flows.
 
-Tooltips use the user's [reviewed choices](../tooltip-interactions/reviewed-choices.ts): immediate, above, 8px gap, 100ms fade and neutral border. Production UI is unchanged. Full context acceptance, controller, desktop and CI validation remain pending.
+Tooltips use the user's [reviewed choices](../tooltip-interactions/reviewed-choices.ts): immediate, above, 8px gap, 100ms fade and neutral border. The study does not apply saved choices to production. Approved choices are adopted through the [shared design system](../../Docs/DESIGN_SYSTEM.md); full context acceptance, controller, desktop and CI validation remain separate.
 
 ## Reviewed choices and selected-hover refinement
 

@@ -111,7 +111,9 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
           retryTimer = undefined;
           store.setState({ saveStatus: "saved", error: "" });
         }
-        return cloud.commit(data);
+        // Cloud metadata has its own serialized lane and bounded shutdown flush.
+        // A stalled sync must not prevent the next gameplay snapshot reaching disk.
+        void cloud.commit(data);
       })
       .catch((error) => {
         diagnostics.record("save-write", error, store.getState().game);

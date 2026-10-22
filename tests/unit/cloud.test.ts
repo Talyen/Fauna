@@ -412,3 +412,47 @@ it("recovers local metadata before retrying uploads after a startup read failure
     vi.useRealTimers();
   }
 });
+
+it("retains every direct conflict head when parent ancestry fills the history limit", async () => {
+  let parent = await snapshot(initial, identity, 1);
+  for (let sequence = 2; sequence <= 65; sequence++)
+    parent = await snapshot(initial, identity, sequence, [parent]);
+  const competing = await snapshot(progress, other, 1);
+  const resolved = await snapshot(initial, identity, 66, [parent, competing]);
+  expect(resolved.ancestors).toHaveLength(64);
+  expect(resolved.ancestors).toContain(parent.id);
+  expect(resolved.ancestors).toContain(competing.id);
+  expect(newestHeads([parent, competing, resolved])).toEqual([resolved]);
+});
+
+it("flush waits for admitted hashing, metadata and the resulting upload", async () => {
+  const f = fixture();
+  await f.manager.start(null);
+  let release!: () => void;
+  const gate = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  const write = f.port.write;
+  f.port.write = async (name, data) => {
+    await gate;
+    await write(name, data);
+  };
+  const committing = f.manager.commit(progress);
+  let flushed = false;
+  const flushing = f.manager.flush().then(() => {
+    flushed = true;
+  });
+  try {
+    await committing;
+    await new Promise<void>((resolve) => setImmediate(resolve));
+    expect(flushed).toBe(false);
+    release();
+    await flushing;
+    expect(f.manager.view.status).toBe("Synced");
+    expect([...f.files.values()].map((raw) => JSON.parse(raw).payload)).toContain(progress);
+  } finally {
+    release();
+    await flushing;
+    await f.manager.dispose();
+  }
+});

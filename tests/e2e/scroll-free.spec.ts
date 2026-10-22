@@ -179,8 +179,10 @@ for (const [width, height, scale] of LAYOUT_CASES)
       });
       expect(point).not.toBeNull();
       await page.mouse.click(point!.x, point!.y);
+      await expect(card).toHaveAttribute("aria-pressed", "true");
       await expectScrollFree(page);
       await page.keyboard.press("Escape");
+      await expect(card).toHaveAttribute("aria-pressed", "false");
     }
     await page.mouse.move(0, 0);
     await captureScreen(page, { path: `reports/scroll-free/battle-${width}-${height}-${scale}.png` });

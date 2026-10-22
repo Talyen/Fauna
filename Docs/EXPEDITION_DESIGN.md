@@ -28,7 +28,7 @@ These are the agreed directions from the design review. They supersede the proto
 - Combat and Boss entrances use 4:3 ArtCards, with Combat or the boss name below the artwork. Campfire uses Rest beneath its location art; entering it commits a saved visit and exposes Rest as its only option. A quiet heading shows the encounter number out of eight.
 - Activating Combat or Boss immediately commits the saved encounter and starts battle. There is no enemy preview, inspection dialog or separate Begin battle action. Creature and action hover/focus details remain available during battle; pinned kit inspection belongs outside battle and in Collection.
 - Seeded gameplay chooses and saves one enemy pack when entering the encounter screen. Menus, support visits and reload never reroll enemies or consume randomness.
-- The shared enemy pool varies between runs. Every enemy, including boss placeholders and escorts, uses its species’ authored base Health, matching recruited creatures. Health and authored encounter damage gain an additive 10% of their base per room after the first: 100% in room 1 through 170% in room 8, rounded to the nearest whole number. Support visits do not advance this scaling. Enemy damage retains encounter tuning, with a one-enemy first battle and two-enemy second battle. These values are playtest tuning, not final balance.
+- The shared enemy pool varies between runs. Every enemy, including named bosses and escorts, starts from its species’ authored base Health before encounter scaling; recruits use the unscaled species Health. Health and authored encounter damage gain an additive 10% of their base per room after the first: 100% in room 1 through 170% in room 8, rounded to the nearest whole number. Support visits do not advance this scaling. Enemy damage retains encounter tuning, with a one-enemy first battle and two-enemy second battle. These values are playtest tuning, not final balance.
 
 ## Keyword XP and talents
 
@@ -89,7 +89,7 @@ See [UI design system](UI.md) for composition and interaction rules.
 
 ## Turn and combat foundation
 
-Each turn restores four shared Mana and draws four cards, with a seven-card hand and FIFO overflow retained across turns. Block halves rather than clearing. Creatures share Alchemy's core packet, status and crowd-control rules through the [keyword contract](KEYWORDS.md), with no elemental reactions. Their individual effects persist while in backup and cannot be refreshed by free swaps. Enemy actions use a non-repeating species repertoire without showing the next ability. Draw and discard piles are inspectable without revealing draw order or changing gameplay.
+Each turn normally restores four shared Mana and draws four cards, with explicit talent and Boon modifiers. The hand holds seven cards; FIFO overflow persists across turns. Block halves rather than clearing. Creatures share Alchemy's core packet, status and crowd-control rules through the [keyword contract](KEYWORDS.md), with no elemental reactions. Their individual effects persist while in backup and cannot be refreshed by free swaps. Enemy actions use a non-repeating species repertoire without showing the next ability. Draw and discard piles are inspectable without revealing draw order or changing gameplay.
 
 ## Combat assistance
 

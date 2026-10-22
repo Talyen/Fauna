@@ -16,6 +16,8 @@ Blind gives the next attack a 50% miss chance and expires on that attack, hit or
 
 Leech restores half actual Health lost, capped by overkill and maximum Health. Bleed defers its Leech until the later Bleed tick; cleansing Bleed cancels that pending payout. Healing does not revive during combat. Cleanse removes harmful categories in Burn, Poison, Bleed, Stun, Freeze, Blind order, handling active control first. Purge removes Block first, then Armor, Thorns, Water Thorns, bonus Dodge, Reflect, Burn-only Reflect, Nullify and the Freeze-damage ward, each as a separate beneficial category. Both remove up to the card's stated number of categories.
 
+**Nullify** prevents the next applicable harmful status effect while leaving direct damage intact. Protection does not stack, persists until consumed or Purged and can stop reflected statuses. It does not remove existing effects or spend protection on immune, capped or already present non-stacking effects. Hush Dome grants it to each living deployed ally, including its actor. Nullify is combat vocabulary, not a separate progression category.
+
 Each allied creature has Death's Door once per battle: fatal damage leaves one Health with two grace turns. Fatal packets during grace still leave one Health; subsequent damage can knock it out after grace expires. Reserve turns also spend grace. Combat effects, immunity and Death's Door reset for each battle; Health and knockouts persist between destinations.
 
 ## Classification and progression
@@ -33,5 +35,3 @@ Talent Gold banks immediately, survives defeat and abandonment, and is included 
 ## Extending the system
 
 Implement rules in the pure gameplay owner before exposing a keyword. Add structured effect classification, generated wording, current-format save validation and semantic presentation together. Cover actual outcomes, timing, preview parity, rejected commands, swaps and resume at their owning boundaries. Development saves are disposable: reject obsolete versions without migrations. Full static, rendered and platform verification remain CI-owned.
-
-**Nullify** prevents the next applicable harmful status effect while leaving direct damage intact. Protection does not stack, persists until consumed or Purged and can stop reflected statuses. It does not remove existing effects or spend protection on immune, capped or already present non-stacking effects. Hush Dome grants it to each living deployed ally, including its actor. Nullify is combat vocabulary, not a separate progression category.

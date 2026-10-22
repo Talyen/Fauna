@@ -10,6 +10,7 @@ import {
 } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import { validateInteractionReport } from "./lib/interaction-replay.mjs";
 import { identity as interactionIdentity } from "./lib/tool-runtime.mjs";
 
 const read = (file) => JSON.parse(readFileSync(file, "utf8"));
@@ -107,19 +108,27 @@ export function validateUnit(report) {
     report.numFailedTestSuites !== 0 ||
     report.numPendingTests !== 0 ||
     report.numPendingTestSuites !== 0 ||
+    !Number.isSafeInteger(report.numTotalTests) ||
     report.numTotalTests < 1 ||
     report.numPassedTests !== report.numTotalTests ||
-    !report.testResults?.length
+    !Array.isArray(report.testResults) ||
+    !report.testResults.length ||
+    report.testResults.some((suite) => suite.status !== "passed" || !Array.isArray(suite.assertionResults)) ||
+    report.testResults.flatMap((suite) => suite.assertionResults).length !== report.numTotalTests ||
+    report.testResults.some((suite) => suite.assertionResults.some((test) => test.status !== "passed"))
   )
     throw new Error("Incomplete or failed unit results");
 }
 export function validateInteraction(report, expectedIdentity) {
+  validateInteractionReport(report);
   if (
     report.complete !== true ||
     report.failure !== null ||
     report.identity !== expectedIdentity ||
     report.seed !== 42 ||
-    report.actions?.length !== 12
+    report.family !== "mixed" ||
+    report.actions.length !== 12 ||
+    report.actions.some((action) => !/^[a-f0-9]{64}$/.test(action.checkpointHash))
   )
     throw new Error("Incomplete or mismatched interaction trace");
 }

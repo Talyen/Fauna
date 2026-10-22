@@ -1,4 +1,4 @@
-import { expect, it } from "vitest";
+import { expect, it, vi } from "vitest";
 import { createSession as createSeededSession } from "../../src/application/session";
 import type { Platform } from "../../src/platform/ports";
 // Keep lifecycle fixtures independent of roster-driven changes to the default starter offers.
@@ -77,7 +77,7 @@ it("keeps local saving successful when cloud metadata cannot be written", async 
   );
   expect(await session.flush()).toBe(true);
   expect(JSON.parse(local).selected).toEqual(session.store.getState().game.selected);
-  expect(session.store.getState().cloud.status).toBe("Pending");
+  await vi.waitFor(() => expect(session.store.getState().cloud.status).toBe("Pending"));
   expect(session.store.getState().saveStatus).toBe("saved");
   await session.dispose();
 });
@@ -109,4 +109,59 @@ it("does not attempt cloud metadata or report pending sync when Steam is unavail
   expect(metadataWrites).toBe(0);
   expect(session.store.getState().cloud.status).toBe("Unavailable");
   await session.dispose();
+});
+
+it("keeps newer local saves and bounded close independent of stalled cloud metadata", async () => {
+  vi.useFakeTimers();
+  let release!: () => void;
+  const gate = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  const metadata = vi.fn(async () => {
+    await gate;
+  });
+  const saved: number[] = [];
+  const quit = vi.fn(async () => {});
+  const session = createSession({
+    desktop: true,
+    steam: { available: false },
+    quit,
+    saves: {
+      readCandidates: async () => [],
+      write: async (data) => {
+        saved.push(JSON.parse(data).revision);
+      },
+    },
+    cloud: {
+      identity: async () => ({
+        available: true,
+        device: "a".repeat(32),
+        profile: "b".repeat(32),
+        importAvailable: false,
+      }),
+      readLocal: async () => null,
+      writeLocal: metadata,
+      preserve: async () => {},
+      importStandalone: async () => [],
+      list: async () => [],
+      read: async () => null,
+      write: async () => {},
+    },
+  });
+  try {
+    await session.load();
+    session.command({ type: "draft", species: session.store.getState().game.starterOffers[0]! });
+    await vi.waitFor(() => expect(metadata).toHaveBeenCalledOnce());
+    session.command({ type: "start" });
+    const closing = session.quit();
+    await vi.advanceTimersByTimeAsync(2100);
+    expect(saved).toEqual([1, 2]);
+    expect(quit).toHaveBeenCalledOnce();
+    release();
+    await closing;
+  } finally {
+    release();
+    await session.dispose();
+    vi.useRealTimers();
+  }
 });

@@ -8,6 +8,7 @@ function createStorage(directory) {
     async readCandidates() {
       await queue;
       const candidates = [];
+      const failures = [];
       for (const [index, file] of [primary, `${primary}.bak1`, `${primary}.bak2`].entries()) {
         try {
           const stat = await fs.stat(file);
@@ -17,9 +18,11 @@ function createStorage(directory) {
           }
           candidates.push({ source: index ? "backup" : "primary", data: await fs.readFile(file, "utf8") });
         } catch (error) {
-          if (error.code !== "ENOENT") throw error;
+          if (error.code !== "ENOENT") failures.push(error);
         }
       }
+      if (failures.length && !candidates.length)
+        throw new AggregateError(failures, "Save slots are unreadable.");
       return candidates;
     },
     write(data) {
