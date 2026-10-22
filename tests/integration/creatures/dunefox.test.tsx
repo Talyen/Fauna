@@ -139,7 +139,7 @@ it("one Blind roll covers every recipient and supplemental packet in an attack",
     const blindMiss = beginAttack(draft, actor);
     const events: GameEvent[] = [];
     for (const type of ["physical", "burn"] as const)
-      hit(draft, actor, draft.battle!.enemies[0]!, 5, type, events, { blindMiss });
+      hit(draft, actor, draft.battle!.enemies[0]!, 5, type, events, { origin: "ability", blindMiss });
     expect(events.filter((event) => event.kind === "damage")).toHaveLength(0);
     expect(draft.battle!.enemies[0]!.combat.burn).toBe(0);
   });
