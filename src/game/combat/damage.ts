@@ -2,7 +2,7 @@ import { packetPolicy, type DamagePacket, type AttackPacket } from "./policy";
 import { roll } from "../random";
 import { draw, drawKeyword } from "../card-zones";
 import { hasTalent, creaturePassive } from "../progression";
-import { physicalBonus } from "../rules";
+import { physicalBonus } from "../ability-rules";
 import type { DamageType } from "../content";
 import type { GameEvent, GameState } from "../types";
 import {

@@ -1,4 +1,4 @@
-import { motionValue } from "../shared/motion-values";
+import { motionValue } from "../motion-values";
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 const Finished = createContext(true);
 export function ResultPresentation({ children }: { children: ReactNode }) {

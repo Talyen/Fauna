@@ -13,8 +13,9 @@ import {
   TURN_DRAW,
 } from "./index";
 import { draw } from "../card-zones";
-import { retainedBlock, enemyAbilityValue } from "../rules";
-import { CARDS, enemyCard, enemyCanUse } from "../content";
+import { retainedBlock, enemyAbilityValue } from "../ability-rules";
+import { CARDS } from "../content";
+import { enemyCard, enemyCanUse } from "../card-rules";
 import type { GameEvent, GameState } from "../types";
 import { living, swapFromCard } from "../team";
 import { settle, intents } from "../journey";

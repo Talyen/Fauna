@@ -1,9 +1,10 @@
 import { creaturePassive } from "../../../game/progression";
 import { CombatStatus } from "../combat/combat-status";
 import { KeywordText } from "../keyword-text";
-import { CARDS, definition, enemyCard, species, type SpeciesId } from "../../../game/content";
+import { CARDS, definition, species, type SpeciesId } from "../../../game/content";
+import { enemyCard } from "../../../game/card-rules";
 import { definitionKeywords, keywordLabel } from "../../../game/keywords";
-import { actionValue, cardCost, physicalBonus } from "../../../game/rules";
+import { actionValue, cardCost, physicalBonus } from "../../../game/ability-rules";
 import type { Creature, Card, GameState } from "../../../game/types";
 import { CardRules } from "../combat/combat-values";
 export function StarterDetails({ game, kind }: { game: GameState; kind: SpeciesId }) {

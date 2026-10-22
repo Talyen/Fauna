@@ -10,6 +10,7 @@
 @import "./menu/menu.css";
 @import "./expedition/expedition.css";
 @import "./shared/combat/combat.css";
+@import "./shared/rewards/rewards.css";
 @import "./battle/battle.css";
 @import "./inspection/inspection.css";
 @import "./talents/talents.css";

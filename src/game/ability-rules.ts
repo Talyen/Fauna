@@ -1,5 +1,6 @@
 import { primaryAbilityValue } from "./combat/ability-values";
-import { definition, enemyCard, type CardDefinition, type PassiveTier } from "./content";
+import { definition, type CardDefinition, type PassiveTier } from "./content";
+import { enemyCard } from "./card-rules";
 import { creaturePassive, cardKeywords, hasTalent } from "./progression";
 import type { Card, Creature, GameState } from "./types";
 /** Intrinsic effect value; healing caps resolve in the command. */

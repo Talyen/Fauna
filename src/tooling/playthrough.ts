@@ -1,5 +1,5 @@
 import { starterCount, canBuyTalent, KEYWORDS, talentPoints } from "../game/progression";
-import { canVisitCampfire, canVisitMerchant, canRecruitDestination } from "../game/support";
+import { canVisitCampfire, canVisitMerchant, canRecruitDestination } from "../game/destinations";
 import { battleChoices } from "../application/battle-policy";
 import { createSession, type Session } from "../application/session";
 import { createGame } from "../game/engine";

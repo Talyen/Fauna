@@ -2,7 +2,7 @@ import { sharedDodgeChance } from "../../game/combat/index";
 import { PagedItems } from "../shared/navigation/pagination";
 import { creaturePassive, creatureStars } from "../../game/progression";
 import { KeywordText } from "../shared/keyword-text";
-import { enemyInspectionValue } from "../../game/rules";
+import { enemyInspectionValue } from "../../game/ability-rules";
 import { useLayoutEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
 import { ChevronLeft } from "lucide-react";
