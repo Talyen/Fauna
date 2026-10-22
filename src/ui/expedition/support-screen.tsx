@@ -36,14 +36,14 @@ export function SupportScreen({ game, send }: { game: StateAt<"support">; send: 
   return (
     <Screen className="campfire-screen merchant-screen">
       <header className="merchant-heading">
-        <ScreenHeading back={finish}>Boon Merchant</ScreenHeading>
+        <ScreenHeading back={finish}>{purchased ? "Boon received" : "Boon Merchant"}</ScreenHeading>
         {!purchased ? (
           <div className="merchant-context">
-            <p className="merchant-terms">1 Boon · For this journey</p>
             <p className="merchant-wallet">
-              <Coins aria-hidden="true" />
+              <Coins className="gold-icon" aria-hidden="true" />
               {game.currency} Gold
             </p>
+            <p className="merchant-terms">Limit 1</p>
           </div>
         ) : null}
       </header>
@@ -73,7 +73,6 @@ export function SupportScreen({ game, send }: { game: StateAt<"support">; send: 
                 ? "Not enough Gold"
                 : "";
             const statusId = `merchant-${slot.slot}-status`;
-            const effectId = `merchant-${slot.slot}-effect`;
             return (
               <section className="reward-option merchant-offer" key={slot.slot}>
                 <Tooltip>
@@ -94,41 +93,30 @@ export function SupportScreen({ game, send }: { game: StateAt<"support">; send: 
                     {reason ? <p>{reason}</p> : null}
                   </TooltipContent>
                 </Tooltip>
-                <h2>{boon.name}</h2>
-                <p className="merchant-effect" id={effectId}>
-                  <KeywordText text={boon.text} />
-                </p>
-                <div className="merchant-purchase">
-                  <Button
-                    variant="outline"
-                    className="merchant-price"
-                    aria-label={`Buy ${boon.name} for ${slot.price} Gold`}
-                    aria-disabled={unavailable}
-                    aria-describedby={`${effectId}${reason ? ` ${statusId}` : ""}`}
-                    onClick={() => {
-                      if (!unavailable) send({ type: "buyBoon", visit: visit.id, slot: slot.slot });
-                    }}
-                  >
-                    <Coins aria-hidden="true" />
-                    {slot.price} Gold
-                  </Button>
-                  {reason ? (
-                    <p className="merchant-status" id={statusId}>
-                      {reason}
-                    </p>
-                  ) : null}
-                </div>
+                <Button
+                  variant="secondary"
+                  className="merchant-price"
+                  aria-label={`Buy ${boon.name} for ${slot.price} Gold`}
+                  aria-disabled={unavailable}
+                  aria-describedby={reason ? statusId : undefined}
+                  onClick={() => {
+                    if (!unavailable) send({ type: "buyBoon", visit: visit.id, slot: slot.slot });
+                  }}
+                >
+                  <Coins className="gold-icon" aria-hidden="true" />
+                  {slot.price} Gold
+                </Button>
+                {reason ? (
+                  <p className="merchant-status" id={statusId}>
+                    {reason}
+                  </p>
+                ) : null}
               </section>
             );
           })}
         </section>
       )}
-      <Button
-        ref={leave}
-        variant={purchased ? "default" : "ghost"}
-        className="merchant-leave"
-        onClick={finish}
-      >
+      <Button ref={leave} variant="outline" className="merchant-leave" onClick={finish}>
         {purchased ? "Continue" : "Leave"}
       </Button>
     </Screen>

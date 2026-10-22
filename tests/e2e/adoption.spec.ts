@@ -1,7 +1,8 @@
+import { expectControlColors } from "./support/control-colors";
 import { LAYOUT_CASES, REVIEW_VIEWPORTS } from "./support/layout-contract";
 import { captureScreen } from "./support/rendered-evidence";
 import { test, expect } from "@playwright/test";
-import { SPECIES, BOONS } from "../../src/game/content";
+import { SPECIES } from "../../src/game/content";
 test("switch thumbs stay within their tracks in both states", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Settings", exact: true }).click();
@@ -169,24 +170,28 @@ for (const [width, height, scale] of LAYOUT_CASES)
       { save: JSON.stringify(fixture), scale },
     );
     await page.goto("/");
+    await expectControlColors(
+      page.getByRole("button", { name: "Continue", exact: true }),
+      "--primary-foreground",
+    );
     await page.getByRole("button", { name: "Continue", exact: true }).click();
     await page.getByRole("button", { name: "Visit Boon Merchant", exact: true }).click();
     const entered = accept(fixture, { type: "enterSupport", visit });
     await expect(page.getByRole("heading", { name: "Boon Merchant", exact: true })).toBeVisible();
-    await expect(page.getByText("1 Boon · For this journey", { exact: true })).toBeVisible();
+    await expect(page.getByText("Limit 1", { exact: true })).toBeVisible();
     await expect(page.getByRole("button", { name: /^Buy .+ for 20 Gold$/ })).toHaveCount(3);
-    for (const offer of entered.support!.stock) {
-      const boon = BOONS.find((candidate) => candidate.id === offer.boon)!;
-      await expect(
-        page.getByRole("button", { name: `Buy ${boon.name} for ${offer.price} Gold` }),
-      ).toHaveAccessibleDescription(boon.text);
+    await expect(page.locator(".merchant-offer h2, .merchant-offer > p:not(.merchant-status)")).toHaveCount(
+      0,
+    );
+    for (const control of await page.getByRole("button", { name: /^Buy / }).all()) {
+      await expectControlColors(control, "--foreground");
     }
     await captureScreen(page, { path: `reports/boon-merchant-shelf-${width}.png`, fullPage: true });
     await page
       .getByRole("button", { name: /^Buy .+ for 20 Gold$/ })
       .first()
       .click();
-    await expect(page.getByRole("heading", { name: "Boon Merchant", exact: true })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Boon received", exact: true })).toBeVisible();
     await expect(page.getByRole("button", { name: /^Buy / })).toHaveCount(0);
     const purchased = accept(entered, { type: "buyBoon", visit, slot: slot.slot });
     await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
@@ -194,7 +199,7 @@ for (const [width, height, scale] of LAYOUT_CASES)
     await captureScreen(page, { path: `reports/merchant-${width}.png`, fullPage: true });
     await page.reload();
     await page.getByRole("button", { name: "Continue", exact: true }).click();
-    await expect(page.getByRole("heading", { name: "Boon Merchant", exact: true })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Boon received", exact: true })).toBeVisible();
     await expect(page.getByRole("region", { name: "Purchased Boon" })).toBeVisible();
     await expect(page.getByRole("button", { name: /^Buy / })).toHaveCount(0);
     expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(purchased);

@@ -164,3 +164,16 @@ it("keeps control states in the shared shadcn skin and rejects selected-hover th
     ).length,
   ).toBeGreaterThan(0);
 });
+
+it("rejects primary control foreground overrides even when they use valid palette tokens", () => {
+  const override = ".shop .control-primary { color: var(--gold-pale); }";
+  expect(sourceViolations("src/ui/shop.css", override)).toEqual([
+    "src/ui/shop.css: Primary control foreground belongs in src/ui/design-system.css.",
+  ]);
+  expect(
+    sourceViolations(
+      "src/ui/design-system.css",
+      ".game-button.control-primary { color: var(--primary-foreground); }",
+    ),
+  ).toEqual([]);
+});

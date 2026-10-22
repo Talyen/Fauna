@@ -34,6 +34,12 @@
     var(--radius-max)
   );
 }
+.game-button.control-primary {
+  color: var(--primary-foreground);
+}
+.gold-icon {
+  color: var(--primary);
+}
 .game-button.control-outline {
   border: 1px solid var(--border);
   background: var(--background);

@@ -336,23 +336,25 @@
   width: var(--art-landscape-width);
 }
 
-/* Shared rows keep the artwork, rules and purchase actions aligned across offers. */
+/* Match Alchemy's centered three-item shelf and aligned price controls. */
 .merchant-heading {
   width: min(var(--screen-heading-width), 100%);
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: var(--screen-item-gap);
 }
 .merchant-context {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   gap: var(--screen-section-gap);
+  width: 100%;
 }
 .merchant-wallet {
   display: flex;
   align-items: center;
   gap: var(--screen-item-gap);
-  color: var(--gold-pale);
   font-variant-numeric: tabular-nums;
 }
 .merchant-wallet svg {
@@ -365,34 +367,13 @@
   font-size: var(--text-secondary);
 }
 .merchant-stock {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: var(--art-landscape-width);
-  grid-template-rows: auto auto auto auto;
-  column-gap: var(--screen-section-gap);
-  row-gap: var(--screen-item-gap);
+  flex-wrap: nowrap;
+  align-items: flex-start;
 }
-.merchant-stock .merchant-offer {
-  display: grid;
-  grid-template-rows: subgrid;
-  grid-row: span 4;
-  width: auto;
-  text-align: left;
+.merchant-offer {
+  width: var(--art-portrait-width);
 }
-.merchant-offer > .action-card {
-  justify-self: center;
-}
-.merchant-offer h2 {
-  font-weight: 500;
-}
-.merchant-effect {
-  line-height: 1.5;
-}
-.merchant-purchase {
-  display: grid;
-  gap: var(--screen-item-gap);
-}
-.merchant-price {
+.merchant-offer > .merchant-price {
   width: 100%;
   font-variant-numeric: tabular-nums;
 }

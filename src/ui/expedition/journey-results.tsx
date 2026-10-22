@@ -26,7 +26,7 @@ export function JourneyResults({ game, home }: { game: StateAt<"victory" | "defe
             {summary.currency > 0 ? (
               <div className="journey-totals">
                 <p>
-                  <Coins aria-hidden="true" />
+                  <Coins className="gold-icon" aria-hidden="true" />
                   <strong>
                     <AnimatedNumber value={summary.currency} />
                   </strong>{" "}
