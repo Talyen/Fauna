@@ -1,7 +1,9 @@
+import { settleScreen } from "./rendered-evidence";
 import { expect, type Page } from "@playwright/test";
 
 /** Geometry for the same six-card fixture used by the hand interaction journey. */
 export async function expectBattleGeometry(page: Page, width: number, height: number) {
+  await settleScreen(page);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   const creatures = await page
     .locator(".app:not([inert]) :is(.player-row, .enemy-row) .creature-card")
@@ -39,8 +41,8 @@ export async function expectBattleGeometry(page: Page, width: number, height: nu
   const swap = (await page.getByRole("button", { name: "Swap", exact: true }).boundingBox())!;
   expect(swap.y + swap.height).toBeLessThan(end.y);
   expect(Math.abs(swap.x - end.x)).toBeLessThan(1);
-  const draw = (await page.locator('[data-pile="draw"]').boundingBox())!;
-  const discard = (await page.locator('[data-pile="discard"]').boundingBox())!;
+  const draw = (await page.locator('.app:not([inert]) [data-pile="draw"]').boundingBox())!;
+  const discard = (await page.locator('.app:not([inert]) [data-pile="discard"]').boundingBox())!;
   expect(mana.y + mana.height).toBeLessThan(draw.y);
   expect(end.y + end.height).toBeLessThan(discard.y);
   expect(Math.abs(mana.x + mana.width / 2 - draw.x - draw.width / 2)).toBeLessThan(1);

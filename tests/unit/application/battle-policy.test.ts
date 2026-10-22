@@ -2,8 +2,7 @@ import { expect, it } from "vitest";
 import { produce } from "immer";
 import { chooseBattleCommand } from "../../../src/application/battle-policy";
 import { dispatch } from "../../../src/game/engine";
-import { summonEcho } from "../../../src/game/combat/legendary";
-import { teamRun, run, accept, prepareDestination, requireBattle } from "../../support/game";
+import { teamRun } from "../../support/game";
 
 it.each(["reedstag", "chimecricket"] as const)(
   "Auto-play uses %s healing to Cleanse a full-health recipient",
@@ -115,25 +114,3 @@ it.each([
     expect(chooseBattleCommand(spent, false)).toEqual({ type: "endTurn" });
   },
 );
-
-it("Auto-play targets the summoner instead of repeatedly killing replacement Echoes", () => {
-  const ready = produce(run(), (game) => {
-    prepareDestination(game);
-    game.encounter = 3;
-    game.journey!.victories = 3;
-    game.expedition = { pack: 0, recruit: null, lastRoom: "boss" };
-  });
-  const state = produce(accept(ready, { type: "beginBattle" }), (game) => {
-    const battle = requireBattle(game);
-    summonEcho(battle, battle.battle.enemies[0]!, "enemy", 6, []);
-    battle.battle.minions![0]!.health = 1;
-    const attack = game.cards.find((card) => card.definitionId === "emberback-attack")!;
-    game.battle!.hand = [attack.id];
-    game.battle!.buffer = [];
-    game.battle!.discard = [];
-    game.battle!.draw = game.cards.filter((card) => card.id !== attack.id).map((card) => card.id);
-  });
-  const command = chooseBattleCommand(state, false);
-  expect(command).toMatchObject({ type: "play", targetId: "enemy-0" });
-  expect(dispatch(state, command).accepted).toBe(true);
-});

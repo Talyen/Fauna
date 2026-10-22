@@ -154,10 +154,11 @@
   text-align: center;
 }
 .boon-options .reward-option {
-  width: var(--art-portrait-width);
+  width: var(--art-landscape-width);
 }
 .boon-choice {
-  width: 100%;
+  width: var(--art-portrait-width);
+  align-self: center;
 }
 .reward-option h2 {
   font-size: var(--text-name);

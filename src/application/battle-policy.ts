@@ -5,7 +5,7 @@ import { actionValue, cardCost, physicalBonus } from "../game/ability-rules";
 import { definition, species } from "../game/content";
 import type { Command, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 21;
+export const BATTLE_POLICY_VERSION = 20;
 /** Only visible information enters scoring; no forecasts or gameplay RNG are sampled. */
 export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
   if (state.phase !== "battle") return [];
@@ -53,15 +53,7 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
         const physical = def.damageType === "physical" || def.damageType === "stun";
         // Rank ordinary landed hits; do not roll Dodge or Critical outcomes.
         const effective = Math.max(0, value - enemy.block - (physical ? enemy.combat.armor : 0));
-        // Defeating the summoner removes its Echoes; farming replacement Minions can stall forever.
-        const priority = enemy.minion
-          ? effective >= enemy.health
-            ? 500
-            : 250
-          : effective >= enemy.health
-            ? 2000
-            : 1000;
-        return priority + Math.min(value, enemy.health);
+        return (effective >= enemy.health ? 2000 : 1000) + Math.min(value, enemy.health);
       };
       if (def.target === "allEnemies")
         add(

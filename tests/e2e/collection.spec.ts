@@ -146,6 +146,7 @@ test("Collection keeps a later-page creature and focus through live resize and f
   page,
 }) => {
   const fixture = produce(run(7), (game) => {
+    game.discovery.encountered = SPECIES.map((entry) => entry.id);
     game.discovery.recruited = Object.fromEntries(SPECIES.map((entry) => [entry.id, 1]));
   });
   await page.setViewportSize({ width: 1920, height: 1080 });
