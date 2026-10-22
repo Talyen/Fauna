@@ -9,7 +9,7 @@ import {
   DialogTrigger,
 } from "../../src/components/ui/dialog";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../src/components/ui/tooltip";
-import { KeywordText } from "../../src/ui/keyword-text";
+import { KeywordText } from "../../src/ui/shared/keyword-text";
 import { GLOSSARY } from "../../src/game/glossary";
 import "@fontsource-variable/inter/wght.css";
 import "../../src/ui/styles.css";

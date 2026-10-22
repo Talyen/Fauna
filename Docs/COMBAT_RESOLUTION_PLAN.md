@@ -105,7 +105,7 @@ Exit: `play` and `finishTurn` contain orchestration but no separate ability inte
 
 Review the final diff for accidental balance changes, moved settlement checkpoints, RNG reordering and new import cycles. Update [Architecture](ARCHITECTURE.md) and the relevant ability-authoring guidance in [Content](CONTENT.md) with the actual execution owner and how to extend it.
 
-Use existing [battle policy](../src/application/battle-policy.ts), [target previews](../src/ui/target-preview.tsx), inspection and feedback consumers to check the unchanged public contracts. Battle-policy scores remain heuristics; do not replace them with RNG-consuming execution or broaden this work into a UI rewrite.
+Use existing [battle policy](../src/application/battle-policy.ts), [target previews](../src/ui/battle/target-preview.tsx), inspection and feedback consumers to check the unchanged public contracts. Battle-policy scores remain heuristics; do not replace them with RNG-consuming execution or broaden this work into a UI rewrite.
 
 Run the task-scoped check and focused affected unit suites under the [verification policy](../CONTRIBUTING.md#verification). Run the documentation gate for edited documentation. Integrate through the protected integration script. Full static checks, complete units, builds, browser journeys, replay and Windows package validation remain CI-owned and must be observed for the exact implementation commit. Review rendered combat evidence for action sequencing, previews, repeat feedback and automatic turn advancement when available; passing unit tests alone does not establish presentation quality.
 

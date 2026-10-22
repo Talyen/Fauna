@@ -5,8 +5,8 @@ import { RadioGroup, RadioGroupItem } from "../../src/components/ui/radio-group"
 import { Switch } from "../../src/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../src/components/ui/tabs";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../src/components/ui/tooltip";
-import { ArtCard } from "../../src/ui/art-card";
-import { assetUrl } from "../../src/ui/assets";
+import { ArtCard } from "../../src/ui/shared/art-card";
+import { assetUrl } from "../../src/ui/shared/assets";
 import { reviewedArtworkChoices } from "./reviewed-choices";
 import { reviewedTooltipChoices } from "../tooltip-interactions/reviewed-choices";
 import "@fontsource-variable/inter/wght.css";

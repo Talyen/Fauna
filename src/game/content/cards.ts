@@ -1,0 +1,348 @@
+import type { Effect, SpeciesId, CardBase, CardDefinition, DamageType } from "./types";
+const card = <T extends Exclude<Effect, "attack">>(
+  species: SpeciesId,
+  name: string,
+  effect: T,
+  value: number,
+): CardBase & { effect: T } => ({
+  id: `${species}-${effect}`,
+  species,
+  name,
+  effect,
+  value,
+  cost: 1,
+});
+const attack = (
+  species: SpeciesId,
+  name: string,
+  value: number,
+  damageType: DamageType,
+): Extract<CardDefinition, { effect: "attack" }> => ({
+  id: `${species}-attack`,
+  species,
+  name,
+  effect: "attack",
+  value,
+  cost: 1,
+  damageType,
+});
+export const CARDS: readonly CardDefinition[] = [
+  {
+    ...card("cadenza", "Resonant Well", "draw", 2),
+    id: "cadenza-resonant-well",
+    effects: [{ kind: "mana", amount: 1 }],
+    artwork: "action.cadenza.resonant-well",
+  },
+  {
+    ...card("cadenza", "Echoes Remember", "recover", 1),
+    id: "cadenza-echoes-remember",
+    artwork: "action.cadenza.echoes-remember",
+  },
+  {
+    ...card("cadenza", "Rousing Refrain", "teamDodge", 20),
+    id: "cadenza-rousing-refrain",
+    effects: [{ kind: "draw", amount: 1 }],
+    artwork: "action.cadenza.rousing-refrain",
+  },
+  {
+    ...card("stillara", "Reed Reservoir", "mana", 2),
+    id: "stillara-reed-reservoir",
+    artwork: "action.stillara.reed-reservoir",
+  },
+  {
+    ...card("stillara", "Thaw Path", "teamThaw", 1),
+    id: "stillara-thaw-path",
+    effects: [{ kind: "draw", amount: 1 }],
+    artwork: "action.stillara.thaw-path",
+  },
+  {
+    ...card("stillara", "Water Remembers", "heal", 1),
+    id: "stillara-water-remembers",
+    target: "allAllies",
+    effects: [{ kind: "draw", amount: 1 }],
+    artwork: "action.stillara.water-remembers",
+  },
+  {
+    ...card("neradora", "Undertow Knot", "waterThorns", 3),
+    id: "neradora-undertow-knot",
+    artwork: "action.neradora.undertow-knot",
+  },
+  {
+    ...card("neradora", "Bloom Shelter", "heal", 2),
+    id: "neradora-bloom-shelter",
+    target: "allAllies",
+    artwork: "action.neradora.bloom-shelter",
+  },
+  {
+    ...card("neradora", "Tide Cup", "draw", 2),
+    id: "neradora-tide-cup",
+    effects: [{ kind: "mana", amount: 1 }],
+    artwork: "action.neradora.tide-cup",
+  },
+  {
+    ...attack("sternshell", "Surge Ram", 3, "physical"),
+    doubleWithArmor: true,
+    artwork: "action.sternshell.surge-ram",
+  },
+  {
+    ...card("sternshell", "Siphon Vault", "swap", 1),
+    effects: [{ kind: "draw", amount: 1 }],
+    artwork: "action.sternshell.siphon-vault",
+  },
+  {
+    ...attack("sternshell", "Spiral Return", 1, "water"),
+    id: "sternshell-spiral-return",
+    target: "allEnemies",
+    effects: [{ kind: "mana", amount: 1 }],
+    artwork: "action.sternshell.spiral-return",
+  },
+  {
+    ...attack("wickwaltz", "Ember Pirouette", 2, "burn"),
+    target: "allEnemies",
+    artwork: "action.wickwaltz.ember-pirouette",
+  },
+  {
+    ...card("wickwaltz", "Saffron Screen", "guard", 3),
+    target: "self",
+    effects: [{ kind: "nullifyFreeze", amount: 1 }],
+    artwork: "action.wickwaltz.saffron-screen",
+  },
+  {
+    ...card("wickwaltz", "Thermal Rise", "draw", 2),
+    effects: [{ kind: "mana", amount: 1 }],
+    artwork: "action.wickwaltz.thermal-rise",
+  },
+  {
+    ...attack("glintstride", "Prism Shear", 6, "light"),
+    artwork: "action.glintstride.prism-shear",
+  },
+  {
+    ...card("glintstride", "Mirage Run", "dodge", 30),
+    effects: [{ kind: "draw", amount: 1 }],
+    artwork: "action.glintstride.mirage-run",
+  },
+  {
+    ...card("glintstride", "False Horizon", "teamBlind", 1),
+    artwork: "action.glintstride.false-horizon",
+  },
+  {
+    ...attack("ringpalm", "Ringclap", 6, "stun"),
+    artwork: "action.ringpalm.ringclap",
+  },
+  {
+    ...attack("ringpalm", "Harmonic Set", 1, "stun"),
+    id: "ringpalm-harmonic-set",
+    target: "allEnemies",
+    effects: [{ kind: "status", status: "armor", amount: 1 }],
+    repeatChance: 20,
+    artwork: "action.ringpalm.harmonic-set",
+  },
+  {
+    ...card("ringpalm", "Seedling Circle", "teamProtection", 2),
+    artwork: "action.ringpalm.seedling-circle",
+  },
+  {
+    ...card("dawncall", "Dawn Cry", "teamCleanse", 1),
+    effects: [{ kind: "draw", amount: 1 }],
+    artwork: "action.dawncall.dawn-cry",
+  },
+  {
+    ...attack("dawncall", "Sunwing Sweep", 2, "light"),
+    target: "allEnemies",
+    artwork: "action.dawncall.sunwing-sweep",
+  },
+  {
+    ...card("dawncall", "Morning Bloom", "heal", 2),
+    target: "allAllies",
+    artwork: "action.dawncall.morning-bloom",
+  },
+  {
+    ...card("coralcurl", "Bubble Ward", "guard", 6),
+    target: "self",
+    artwork: "action.coralcurl.bubble-ward",
+  },
+  { ...attack("coralcurl", "Reef Jet", 6, "water"), artwork: "action.coralcurl.reef-jet" },
+  {
+    ...card("coralcurl", "Coral Spiral", "swap", 1),
+    effects: [{ kind: "blind", amount: 1 }],
+    artwork: "action.coralcurl.coral-spiral",
+  },
+  {
+    ...attack("cindernewt", "Cinder Lash", 6, "physical"),
+    alternateDamageType: "burn",
+    artwork: "action.cindernewt.cinder-lash",
+  },
+  {
+    ...attack("cindernewt", "Ember Breath", 1, "burn"),
+    id: "cindernewt-ember-breath",
+    target: "allEnemies",
+    effects: [{ kind: "meltArmor", amount: 50 }],
+    artwork: "action.cindernewt.ember-breath",
+  },
+  {
+    ...attack("cindernewt", "Ashen Veil", 1, "burn"),
+    id: "cindernewt-ashen-veil",
+    target: "allEnemies",
+    effects: [{ kind: "blind", amount: 1 }],
+    artwork: "action.cindernewt.ashen-veil",
+  },
+  {
+    ...attack("reedstag", "Reed Rush", 6, "nature"),
+    artwork: "action.reedstag.reed-rush",
+  },
+  {
+    ...card("reedstag", "Reed Shelter", "guard", 3),
+    target: "self",
+    effects: [{ kind: "status", status: "thorns", amount: 3 }],
+    artwork: "action.reedstag.reed-shelter",
+  },
+  {
+    ...card("reedstag", "Mending Spring", "heal", 4),
+    target: "mostInjured",
+    effects: [{ kind: "cleanse", amount: 7, target: "recipient" }],
+    artwork: "action.reedstag.mending-spring",
+  },
+  {
+    ...attack("dunefox", "Sandburst Pounce", 6, "physical"),
+    artwork: "action.dunefox.sandburst-pounce",
+  },
+  {
+    ...attack("dunefox", "Dune Whirl", 1, "physical"),
+    id: "dunefox-dune-whirl",
+    target: "allEnemies",
+    effects: [{ kind: "blind", amount: 1 }],
+    artwork: "action.dunefox.dune-whirl",
+  },
+  {
+    ...card("dunefox", "Mirage Step", "dodge", 30),
+    effects: [{ kind: "draw", amount: 1 }],
+    artwork: "action.dunefox.mirage-step",
+  },
+  {
+    ...card("mossguard", "Boulder Brace", "guard", 6),
+    target: "self",
+    artwork: "action.mossguard.boulder-brace",
+  },
+  {
+    ...attack("mossguard", "Rooted Stomp", 2, "stun"),
+    target: "allEnemies",
+    artwork: "action.mossguard.rooted-stomp",
+  },
+  {
+    ...card("mossguard", "Moss Renewal", "heal", 2),
+    target: "allAllies",
+    artwork: "action.mossguard.moss-renewal",
+  },
+  {
+    ...attack("emberback", "Ember Charge", 4, "physical"),
+    artwork: "action.emberback.ember-charge",
+    effects: [{ kind: "status", status: "armor", amount: 2 }],
+  },
+  {
+    ...attack("emberback", "Furnace Breath", 2, "burn"),
+    id: "emberback-furnace-breath",
+    artwork: "action.emberback.furnace-breath",
+    target: "allEnemies",
+  },
+  {
+    ...attack("emberback", "Magma Stomp", 2, "stun"),
+    id: "emberback-magma-stomp",
+    artwork: "action.emberback.magma-stomp",
+    target: "allEnemies",
+  },
+  {
+    ...attack("pollenmoth", "Dazzle Burst", 3, "light"),
+    artwork: "action.pollenmoth.dazzle-burst",
+    target: "randomEnemy",
+  },
+  {
+    ...card("pollenmoth", "Petal Shelter", "teamGuard", 2),
+    artwork: "action.pollenmoth.petal-shelter",
+  },
+  {
+    ...card("pollenmoth", "Bloomwake", "heal", 3),
+    effect: "heal",
+    artwork: "action.pollenmoth.bloomwake",
+    target: "mostInjured",
+  },
+  {
+    ...attack("prismram", "Prism Charge", 6, "physical"),
+    artwork: "action.prismram.prism-charge",
+  },
+  {
+    ...card("prismram", "Faceted Ward", "guard", 3),
+    target: "self",
+    artwork: "action.prismram.faceted-ward",
+    effects: [{ kind: "reflect", amount: 1 }],
+  },
+  {
+    ...attack("prismram", "Spectrum Lance", 4, "light"),
+    id: "prismram-spectrum-lance",
+    artwork: "action.prismram.spectrum-lance",
+    effects: [{ kind: "purge", amount: 1 }],
+  },
+  {
+    ...attack("captoad", "Spore Puff", 2, "poison"),
+    target: "allEnemies",
+    artwork: "action.captoad.spore-puff",
+  },
+  {
+    ...card("captoad", "Mushroom Guard", "guard", 3),
+    target: "self",
+    effects: [{ kind: "heal", amount: 3 }],
+    artwork: "action.captoad.mushroom-guard",
+  },
+  {
+    ...card("captoad", "Bogbound Leap", "swap", 1),
+    effects: [{ kind: "draw", amount: 2 }],
+    artwork: "action.captoad.bogbound-leap",
+  },
+  {
+    ...attack("chimecricket", "Resonant Leap", 4, "stun"),
+    effects: [{ kind: "draw", amount: 1 }],
+    artwork: "action.chimecricket.resonant-leap",
+  },
+  {
+    ...card("chimecricket", "Hush Dome", "nullify", 1),
+    artwork: "action.chimecricket.hush-dome",
+  },
+  {
+    ...card("chimecricket", "Lullaby Drift", "heal", 4),
+    target: "mostInjured",
+    effects: [{ kind: "cleanse", amount: 6, target: "recipient" }],
+    artwork: "action.chimecricket.lullaby-drift",
+  },
+  {
+    ...card("bloomquail", "Petal Rampart", "guard", 6),
+    target: "self",
+    artwork: "action.bloomquail.petal-rampart",
+  },
+  {
+    ...card("bloomquail", "Bloom Cradle", "draw", 2),
+    effects: [{ kind: "heal", amount: 2 }],
+    artwork: "action.bloomquail.bloom-cradle",
+  },
+  {
+    ...card("bloomquail", "Petal Veil", "heal", 2),
+    target: "allAllies",
+    effects: [{ kind: "blind", amount: 1 }],
+    artwork: "action.bloomquail.petal-veil",
+  },
+  {
+    ...card("shadebrim", "Noonward", "guard", 4),
+    target: "self",
+    effects: [{ kind: "reflect", amount: 1, status: "burn" }],
+    artwork: "action.shadebrim.noonward",
+  },
+  {
+    ...attack("shadebrim", "Coolfront", 1, "freeze"),
+    target: "allEnemies",
+    effects: [{ kind: "cleanse", amount: 7, target: "allAllies" }],
+    artwork: "action.shadebrim.coolfront",
+  },
+  {
+    ...card("shadebrim", "Noon Bloom", "draw", 2),
+    effects: [{ kind: "mana", amount: 1 }],
+    artwork: "action.shadebrim.noon-bloom",
+  },
+];

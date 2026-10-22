@@ -25,7 +25,7 @@ Excluded: Homestead, additional currencies, permanent upgrade purchases, Gear, c
 
 ## Architecture checks and unused code
 
-Replace the source-pattern import checks in `scripts/boundaries.mjs` with parser-backed checks. Prefer configured Oxlint rules for syntax and restricted globals/imports; use a resolved dependency graph only for boundaries those rules cannot establish. Evaluate Alchemy's Oxlint rules and dependency-cruiser configuration, but do not import its feature hierarchy, barrel requirements, or session-singleton exceptions. Use one authoritative Fauna rule definition rather than separate inconsistent lists.
+Replace the source-pattern import checks in `scripts/checks/boundaries.mjs` with parser-backed checks. Prefer configured Oxlint rules for syntax and restricted globals/imports; use a resolved dependency graph only for boundaries those rules cannot establish. Evaluate Alchemy's Oxlint rules and dependency-cruiser configuration, but do not import its feature hierarchy, barrel requirements, or session-singleton exceptions. Use one authoritative Fauna rule definition rather than separate inconsistent lists.
 
 Enforce these existing contracts:
 
@@ -49,7 +49,7 @@ Add a Fauna-owned after-pack hook using `@electron/fuses`. Disable RunAsNode, NO
 
 If enabling a browser-process-specific V8 snapshot, install the corresponding snapshot beside every required runtime snapshot before setting its fuse. Adopt the snapshot preparation and fuse changes as one tested unit. Do not copy Alchemy's application name, paths, signing identity, or Steam metadata. Apply fuse changes before signing; preserve platform signing requirements and document that signing setup remains separate.
 
-Extend `scripts/verify-package.mjs` to read actual executable fuse values, verify required snapshot files and their expected relationship to the pinned runtime, check the native Steam module layout when introduced, and retain current archive/source/media identity checks. Verify required files inside and outside ASAR according to their packaging contract. Native modules must remain loadable with the selected ASAR and fuse policy.
+Extend `scripts/release/verify-package.mjs` to read actual executable fuse values, verify required snapshot files and their expected relationship to the pinned runtime, check the native Steam module layout when introduced, and retain current archive/source/media identity checks. Verify required files inside and outside ASAR according to their packaging contract. Native modules must remain loadable with the selected ASAR and fuse policy.
 
 Windows CI must package once, verify the actual unpacked artifact, then exercise launch, gameplay save/resume, backup recovery and graceful close. Check that production ignores development URLs and prohibited environment overrides without launching external commands. Include a failed-fuse or missing-snapshot fixture to prove the package gate rejects it. A structural check cannot replace startup smoke.
 

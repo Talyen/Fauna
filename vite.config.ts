@@ -2,7 +2,7 @@ import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
 import { releaseIdentityPlugin } from "./scripts/lib/release-identity.mjs";
-import { activeAssetsPlugin } from "./scripts/active-assets.mjs";
+import { activeAssetsPlugin } from "./scripts/assets/active-assets.mjs";
 import react from "@vitejs/plugin-react";
 import tailwind from "@tailwindcss/vite";
 export default defineConfig(({ command }) => ({

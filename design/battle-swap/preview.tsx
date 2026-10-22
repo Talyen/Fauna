@@ -10,14 +10,14 @@ import {
   DialogTrigger,
 } from "../../src/components/ui/dialog";
 import { TooltipProvider } from "../../src/components/ui/tooltip";
-import { BattleScreen, type Controls } from "../../src/ui/battle-screen";
-import { CreatureCard } from "../../src/ui/cards";
+import { BattleScreen, type Controls } from "../../src/ui/battle/battle-screen";
+import { CreatureCard } from "../../src/ui/shared/cards";
 import { createGame, dispatch } from "../../src/game/engine";
 import { CARDS, species } from "../../src/game/content";
 import type { Creature, GameState } from "../../src/game/types";
 import "@fontsource-variable/inter/wght.css";
 import "../../src/ui/styles.css";
-import "../../src/ui/mana-crystals.css";
+import "../../src/ui/battle/mana-crystals.css";
 import "./swap.css";
 
 // Presentation sandbox only. No persistence, production swap command, or progression changes.

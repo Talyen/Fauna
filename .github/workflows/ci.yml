@@ -33,7 +33,7 @@ jobs:
         with:
           sparse-checkout: |
             .node-version
-            scripts/ci.mjs
+            scripts/ci/ci.mjs
             scripts/lib/tool-runtime.mjs
             scripts/lib/interaction-replay.mjs
           sparse-checkout-cone-mode: false
@@ -42,7 +42,7 @@ jobs:
           node-version-file: .node-version
       - id: plan
         name: Choose shards and suppress duplicate branch runs
-        run: node scripts/ci.mjs prepare
+        run: node scripts/ci/ci.mjs prepare
         env:
           GH_TOKEN: ${{ github.token }}
   static:
@@ -90,7 +90,7 @@ jobs:
             reports/release-notes/
       - id: complete
         name: Record successful workflow attempt
-        run: node scripts/ci.mjs stamp
+        run: node scripts/ci/ci.mjs stamp
 
   unit:
     needs: [prepare]
@@ -112,7 +112,7 @@ jobs:
         run: npm run test:full -- --reporter=default --reporter=json --outputFile.json=reports/vitest.json
       - name: Summarize unit results
         if: always()
-        run: node scripts/ci-summarize.mjs vitest reports/vitest.json
+        run: node scripts/ci/ci-summarize.mjs vitest reports/vitest.json
       - name: Upload unit-results
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
@@ -126,7 +126,7 @@ jobs:
             reports/vitest.json
       - id: complete
         name: Record successful workflow attempt
-        run: node scripts/ci.mjs stamp
+        run: node scripts/ci/ci.mjs stamp
 
   build:
     needs: [prepare]
@@ -155,7 +155,7 @@ jobs:
           mkdir -p reports/ci
           npx playwright test --list --reporter=json > reports/ci/discovery.json
       - name: Record exact build identity
-        run: node scripts/ci.mjs build
+        run: node scripts/ci/ci.mjs build
       - name: Upload browser-build
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
@@ -178,7 +178,7 @@ jobs:
             reports/ci/
       - id: complete
         name: Record successful workflow attempt
-        run: node scripts/ci.mjs stamp
+        run: node scripts/ci/ci.mjs stamp
 
   browser:
     needs: [prepare, build]
@@ -217,14 +217,14 @@ jobs:
           name: browser-manifest
           path: reports/ci
       - name: Verify downloaded build identity
-        run: node scripts/ci.mjs verify-build
+        run: node scripts/ci/ci.mjs verify-build
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
       - name: Browser shard
         run: npx playwright test --shard=$CI_SHARD/$CI_SHARDS
       - name: Record shard identity
         if: always()
-        run: node scripts/ci.mjs shard
+        run: node scripts/ci/ci.mjs shard
       - name: Upload browser-shard-${{ matrix.shard }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
@@ -271,7 +271,7 @@ jobs:
           name: browser-manifest
           path: reports/ci
       - name: Verify downloaded build identity
-        run: node scripts/ci.mjs verify-build
+        run: node scripts/ci/ci.mjs verify-build
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
       - name: Seeded interaction replay
@@ -289,7 +289,7 @@ jobs:
             reports/interactions/
       - id: complete
         name: Record successful workflow attempt
-        run: node scripts/ci.mjs stamp
+        run: node scripts/ci/ci.mjs stamp
 
   windows:
     needs: [prepare]
@@ -321,7 +321,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/v')
         run: npm run verify:release
       - name: Packaged desktop smoke
-        run: node scripts/smoke-desktop.mjs --packaged
+        run: node scripts/release/smoke-desktop.mjs --packaged
       - name: Upload fauna-windows-x64
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
@@ -334,7 +334,7 @@ jobs:
             release/win-unpacked
       - id: complete
         name: Record successful workflow attempt
-        run: node scripts/ci.mjs stamp
+        run: node scripts/ci/ci.mjs stamp
 
   verify:
     needs: [prepare, static, unit, build, browser, interactions, windows]
@@ -391,24 +391,24 @@ jobs:
           path: reports/interactions
       - name: Collect shard blobs
         if: always()
-        run: node scripts/ci.mjs collect
+        run: node scripts/ci/ci.mjs collect
       - name: Merge browser results
         if: always()
         run: npx playwright merge-reports --reporter=json,html all-blob-reports
       - name: Make merged JSON evidence portable
         if: always()
-        run: node scripts/ci.mjs portable
+        run: node scripts/ci/ci.mjs portable
       - name: Summarize browser results
         if: always()
-        run: node scripts/ci-summarize.mjs playwright reports/playwright.json
+        run: node scripts/ci/ci-summarize.mjs playwright reports/playwright.json
       - name: Capture stage and runner timings
         if: always()
-        run: node scripts/ci-timings.mjs "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT"
+        run: node scripts/ci/ci-timings.mjs "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT"
         env:
           GH_TOKEN: ${{ github.token }}
       - name: Require every job and complete first-attempt results
         if: always()
-        run: node scripts/ci.mjs gate
+        run: node scripts/ci/ci.mjs gate
       - name: Upload browser-review
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()

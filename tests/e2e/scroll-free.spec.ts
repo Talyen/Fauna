@@ -1,7 +1,7 @@
 import { KEYWORDS, keywordLabel } from "../../src/game/progression";
 import { test, expect, type Locator } from "@playwright/test";
 import { produce } from "immer";
-import { run } from "../unit/helpers";
+import { run } from "../support/game";
 import { SPECIES } from "../../src/game/content";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { expectScrollFree, layoutViolations, LAYOUT_CASES } from "./layout-contract";

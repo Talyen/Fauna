@@ -1,6 +1,6 @@
 # Hand motion — Alchemy direction
 
-The user chose Alchemy's card draw, discard and hand reflow animations on 2026-10-20 instead of selecting new motion independently. The production choreography is implemented in `src/ui/hand-motion.tsx`; full rendered acceptance remains pending. Retain Fauna's shadcn controls, ArtCard ownership, fixed card dimensions and current hand fan geometry.
+The user chose Alchemy's card draw, discard and hand reflow animations on 2026-10-20 instead of selecting new motion independently. The production choreography is implemented in `src/ui/battle/hand-motion.tsx`; full rendered acceptance remains pending. Retain Fauna's shadcn controls, ArtCard ownership, fixed card dimensions and current hand fan geometry.
 
 ## Inspected source
 

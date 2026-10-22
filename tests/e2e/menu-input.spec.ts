@@ -1,6 +1,6 @@
 import { captureScreen } from "./rendered-evidence";
 import { test, expect, type Page, type Locator } from "@playwright/test";
-import { accept, run } from "../unit/helpers";
+import { accept, run } from "../support/game";
 import { createGame } from "../../src/game/engine";
 import { produce } from "immer";
 import { BOONS } from "../../src/game/progression";

@@ -1,14 +1,14 @@
-import { assetUrl } from "../../src/ui/assets";
+import { assetUrl } from "../../src/ui/shared/assets";
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { Shield, Menu } from "lucide-react";
 import { Button } from "../../src/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "../../src/components/ui/dialog";
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "../../src/components/ui/tooltip";
-import { ArtCard } from "../../src/ui/art-card";
-import { ActionCard } from "../../src/ui/cards";
+import { ArtCard } from "../../src/ui/shared/art-card";
+import { ActionCard } from "../../src/ui/shared/cards";
 import { ManaCrystals } from "./mana-crystals";
-import { ActionDetails, CreatureDetails } from "../../src/ui/card-details";
+import { ActionDetails, CreatureDetails } from "../../src/ui/shared/card-details";
 import { definition, species, ENCOUNTERS, type SpeciesId } from "../../src/game/content";
 import { actionValue } from "../../src/game/rules";
 import type { Card, Creature } from "../../src/game/types";

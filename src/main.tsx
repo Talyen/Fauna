@@ -1,8 +1,8 @@
-import { Screen } from "./ui/screen";
+import { Screen } from "./ui/shared/screen";
 import { useEffect, useState } from "react";
-import { Loading } from "./ui/loading";
-import { assetUrl } from "./ui/assets";
-import { GameErrorBoundary } from "./ui/diagnostics";
+import { Loading } from "./ui/shared/loading";
+import { assetUrl } from "./ui/shared/assets";
+import { GameErrorBoundary } from "./ui/shared/diagnostics";
 import { createRoot } from "react-dom/client";
 import { createSession } from "./application/session";
 import { createPlatform } from "./platform";
