@@ -7,30 +7,33 @@ Use this record with [release readiness](RELEASE.md) for each candidate. Copy it
 - Version/tag:
 - Full source commit:
 - Successful full CI URL and attempt for that commit:
-- Signed candidate workflow URL:
-- Installer SHA-256 from the attested artifact:
-- Authenticode signer and verification result:
+- Distribution/signing policy: unsigned Windows Steam candidate; paid signing deferred
+- Windows artifact and provenance URLs:
+- Executable and ASAR SHA-256 from the attested artifact:
+- Authenticode signer and verification result: not applicable to the unsigned Steam candidate
 - Windows version and display scaling:
 - Controller models and connection types:
 - Steam client version:
 - Steam Deck model, SteamOS/Proton version and distribution path:
 - Reviewer and observation date:
 
-Retain the immutable signed installer, its matching dependency SBOM and third-party notices, package hash inventory and GitHub attestations. Verify provenance with `gh attestation verify <installer-path> --repo Talyen/Fauna`. An attestation identifies the builder and artifact; it does not establish gameplay or hardware acceptance. The SBOM describes production npm build inputs and the Electron runtime; Electron's packaged Chromium license inventory covers its native third-party components.
+Retain the immutable Windows candidate, its matching dependency SBOM and third-party notices, package hash inventory and GitHub attestations. Verify provenance with `gh attestation verify <executable-or-asar-path> --repo Talyen/Fauna`. GitHub provenance is separate from Windows Authenticode signing and does not make an unsigned executable trusted by Windows. An attestation identifies the builder and artifact; it does not establish gameplay or hardware acceptance. The SBOM describes production npm build inputs and the Electron runtime; Electron's packaged Chromium license inventory covers its native third-party components.
 
 ## External setup
 
 - [ ] Configure Fauna's own Steam App ID in [Steam configuration](../desktop/steam-config.json); qualify its native binding against that client
 - [ ] Configure application-managed Cloud quota for 32 device streams, two slots each, up to 1 MiB per slot; do not also Auto-Cloud those progression paths
-- [ ] Configure the protected `release-signing` GitHub environment, trusted dispatch access and Windows certificate secrets described in [candidate signing](RELEASE.md#candidate-signing-and-qualification)
+- Paid signing remains deferred; configure the optional [signed installer path](RELEASE.md#candidate-signing-and-qualification) only after an explicit distribution decision
 - [ ] Confirm the privacy/support policy for device-local diagnostics; sharing remains player initiated and no uploads are enabled
 
-## Clean Windows and installer acceptance
+## Clean Windows and Steam acceptance
 
-- [ ] Install the signed candidate on a clean Windows x64 system; verify publisher, shortcuts and ordinary launch
+- [ ] Install the actual Steam depot on clean Windows x64 systems and verify ordinary launch without administrator privileges
+- [ ] On clean Windows 11 with Smart App Control enabled, verify launch with normal Defender/antivirus protection; retain any warning or blocking evidence and resolve it before qualification
 - [ ] Complete a journey, quit through the menu and through the window, then resume the saved checkpoint
-- [ ] Install an upgrade over the previous candidate and verify current-format saves and separate device preferences
-- [ ] Uninstall; inspect shortcuts and remaining files against the intended save-retention policy
+- [ ] Apply a Steam update over the previous candidate and verify current-format saves and separate device preferences
+- [ ] Uninstall through Steam; inspect remaining files against the intended save-retention policy
+- Optional direct-download installer acceptance: if that path is used, separately verify Authenticode, install/upgrade/uninstall and launch shortcuts
 - [ ] Check minimum renderer size, high DPI, 125% text, fullscreen/windowed switching, display removal and restored bounds
 - [ ] Exercise crash recovery and confirm durable progress resumes without recovery UI; collect local diagnostics only with consent
 

@@ -209,3 +209,16 @@ describe("lightweight local verification", () => {
     expect(workflow).toContain("node scripts/release/smoke-desktop.mjs --packaged");
   });
 });
+
+it("keeps Steam provenance independent of paid signing and untrusted build permissions", () => {
+  const workflow = readFileSync(path.join(repo, ".github/workflows/ci.yml"), "utf8");
+  const windows = workflow.slice(workflow.indexOf("  windows:"), workflow.indexOf("  verify:"));
+  const provenance = workflow.slice(workflow.indexOf("  provenance:"));
+  expect(windows).not.toContain("attestations: write");
+  expect(windows).not.toContain("id-token: write");
+  expect(provenance).toContain("needs: [verify]");
+  expect(provenance).toContain("github.event_name == 'push'");
+  expect(provenance).toContain("refs/heads/main");
+  expect(provenance).toContain("candidate/dist/dependencies.cdx.json");
+  expect(provenance).not.toContain("secrets.");
+});

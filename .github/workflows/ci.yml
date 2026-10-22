@@ -391,6 +391,8 @@ jobs:
           path: |
             release/win-unpacked
             reports/release-inventory/
+            dist/dependencies.cdx.json
+            dist/THIRD-PARTY-NOTICES.txt
       - id: complete
         name: Record successful workflow attempt
         run: node scripts/ci/ci.mjs stamp
@@ -486,3 +488,33 @@ jobs:
             reports/ci/browser-plan.json
             reports/ci/browser-timings.json
             reports/ci/timings-*.json
+
+  provenance:
+    needs: [verify]
+    if: ${{ needs.verify.result == 'success' && github.event_name == 'push' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      actions: read
+      id-token: write
+      attestations: write
+    steps:
+      - name: Download the verified Windows artifact from this run
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: fauna-windows-x64
+          path: candidate
+      - name: Attest verified Steam candidate provenance
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4
+        with:
+          subject-path: |
+            candidate/release/win-unpacked/Fauna.exe
+            candidate/release/win-unpacked/resources/app.asar
+      - name: Attest Steam candidate dependency inventory
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4
+        with:
+          subject-path: |
+            candidate/release/win-unpacked/Fauna.exe
+            candidate/release/win-unpacked/resources/app.asar
+          sbom-path: candidate/dist/dependencies.cdx.json
