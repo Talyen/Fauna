@@ -71,10 +71,6 @@
   max-width: 100%;
   border: 0;
   background: transparent;
-  border-radius: 0;
-}
-.menu-logo.creature-card > img {
-  border-radius: 0;
 }
 .menu-choices {
   display: grid;
