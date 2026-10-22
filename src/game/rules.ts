@@ -61,7 +61,10 @@ export function enemyAbilityValue(
   card: import("./content").CardDefinition,
 ) {
   return (
-    ((card.effect === "dodge" || card.effect === "teamCleanse" || card.effect === "teamBlind"
+    ((card.effect === "dodge" ||
+    card.effect === "teamDodge" ||
+    card.effect === "teamCleanse" ||
+    card.effect === "teamBlind"
       ? card.value
       : card.effect === "attack"
         ? card.target === "allEnemies"

@@ -411,6 +411,33 @@ function kindlingFlourish(state: GameState, actor: import("./combat").Combatant)
   );
   return chance > 0 && (chance === 100 || roll(state) < chance / 100);
 }
+function livingChorus(state: GameState, enemy: boolean, events: GameEvent[]) {
+  const row = enemy ? state.battle!.enemies : state.team;
+  for (const singer of row) {
+    if (singer.health <= 0) continue;
+    const amount = creaturePassive(enemy ? undefined : state, singer.species).effects.reduce(
+      (sum, effect) => sum + (effect.kind === "livingChorus" ? effect.amount : 0),
+      0,
+    );
+    const recipient = amount > 0 ? mostInjured<import("./combat").Combatant>(row) : undefined;
+    if (recipient) restoreHealth(recipient, amount, events, false, state, false, singer);
+  }
+}
+function recoverDiscard(state: GameState, events: GameEvent[]) {
+  const battle = state.battle!;
+  if (!battle.discard.length) return;
+  const index = Math.floor(roll(state) * battle.discard.length);
+  const id = battle.discard.splice(index, 1)[0]!;
+  fillHand(state);
+  (battle.hand.length < HAND_LIMIT ? battle.hand : battle.buffer).push(id);
+  const card = state.cards.find((entry) => entry.id === id)!;
+  events.push({
+    kind: "action",
+    actionType: "support",
+    actorId: card.ownerId,
+    text: `${definition(card.definitionId).name} returns to your hand`,
+  });
+}
 function hushDome(state: GameState, enemy: boolean, events: GameEvent[]) {
   for (const unit of enemy ? state.battle!.enemies : state.team) {
     if (unit.health <= 0) continue;
@@ -541,6 +568,7 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
   for (let pass = 0; pass < 3; pass++) {
     // Swaps can reorder the battlefield; each enemy keeps its single action window.
     const actionOrder = battle.enemies.slice();
+    let enemyCardsPlayed = 0;
     for (const enemy of actionOrder) {
       if (enemy.health <= 0) continue;
       tickStatuses(draft, enemy, events);
@@ -553,11 +581,13 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
       const abilities = CARDS.filter(
         (card) =>
           card.species === enemy.species &&
-          card.id !== enemy.lastAbility &&
           enemyCard(card).effect !== "draw" &&
-          card.effect !== "mana",
+          card.effect !== "mana" &&
+          card.effect !== "recover",
       );
-      const def = enemyCard(abilities[Math.floor(random(draft) * abilities.length)]!);
+      const alternatives = abilities.filter((card) => card.id !== enemy.lastAbility);
+      const pool = alternatives.length ? alternatives : abilities;
+      const def = enemyCard(pool[Math.floor(random(draft) * pool.length)]!);
       if (def.effect === "attack" && def.target === "randomEnemy") {
         const allies = living(draft);
         target = allies[Math.floor(random(draft) * allies.length)]!;
@@ -625,6 +655,8 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
           hushDome(draft, true, events);
         } else if (def.effect === "teamProtection") {
           teamProtection(draft, true, value, events);
+        } else if (def.effect === "teamDodge") {
+          for (const unit of battle.enemies) grantTemporaryDodge(unit, value, events);
         } else if (def.effect === "dodge") {
           grantTemporaryDodge(enemy, value, events);
         } else if (def.effect === "swap") {
@@ -638,6 +670,7 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
         }
         applyExtras(draft, enemy, def, events, true, target, blindMiss, criticalBonus);
       }
+      if (++enemyCardsPlayed === 2) livingChorus(draft, true, events);
       if (settle(draft, events)) return;
     }
     for (const c of [...draft.team, ...draft.reserves]) {
@@ -994,6 +1027,9 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
           }
           if (def.effect === "waterThorns") grantStatus(actor, "waterThorns", value, events, draft);
           if (def.effect === "draw") draw(draft, value);
+          if (def.effect === "recover") recoverDiscard(draft, events);
+          if (def.effect === "teamDodge")
+            for (const unit of living(draft)) grantTemporaryDodge(unit, value, events);
           if (def.effect === "mana") gainMana(draft, value, events);
           if (def.effect === "teamThaw")
             for (const recipient of living(draft)) removeFreezeBuildup(draft, recipient, events);
@@ -1010,6 +1046,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         }
         if (battle.cardsPlayedThisTurn < 3) {
           battle.cardsPlayedThisTurn++;
+          if (battle.cardsPlayedThisTurn === 2) livingChorus(draft, false, events);
           if (battle.cardsPlayedThisTurn === 3 && draft.boons.includes("resonant-chimes"))
             gainMana(draft, 1, events);
         }

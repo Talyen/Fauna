@@ -3,7 +3,7 @@ import { actionValue, cardCost, physicalBonus } from "../game/rules";
 import { definition, species } from "../game/content";
 import type { Command, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 14;
+export const BATTLE_POLICY_VERSION = 15;
 /** Only visible information enters scoring; no forecasts or gameplay RNG are sampled. */
 export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
   if (state.phase !== "battle" || !state.battle) return [];
@@ -78,6 +78,10 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
     } else if (def.effect === "teamThaw") {
       const useful = state.team.filter((unit) => unit.health > 0 && (unit.combat?.freeze ?? 0) > 0).length;
       add(id, 200 + useful * 100);
+    } else if (def.effect === "recover") {
+      add(id, 200);
+    } else if (def.effect === "teamDodge") {
+      add(id, 150 + value);
     } else if (def.effect === "draw") {
       add(id, 200 + value);
     } else if (def.effect === "teamBlind") {

@@ -99,6 +99,7 @@ export function BattleScreen({
     (def?.effect === "attack" && def.target === "randomEnemy") ||
     (def?.effect === "heal" && def.target === "mostInjured");
   const allAllies =
+    def?.effect === "teamDodge" ||
     def?.effect === "teamGuard" ||
     def?.effect === "teamProtection" ||
     def?.effect === "teamCleanse" ||
@@ -106,6 +107,7 @@ export function BattleScreen({
     def?.effect === "nullify" ||
     (def?.effect === "heal" && def.target === "allAllies");
   const selfTarget =
+    def?.effect === "recover" ||
     def?.effect === "draw" ||
     def?.effect === "mana" ||
     def?.effect === "dodge" ||
