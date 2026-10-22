@@ -12,6 +12,7 @@ export {
   grantTemporaryDodge,
   beginAttack,
   openingCriticalBonus,
+  removeArmor,
 } from "./combat-state";
 export type { Combatant } from "./combat-state";
 export const restoreHealth = (...args: CombatArguments<"restoreHealth">) =>

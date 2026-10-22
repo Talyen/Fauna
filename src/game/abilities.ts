@@ -9,6 +9,7 @@ import {
   grantArmor,
   restoreHealth,
   triggerArmorBreak,
+  removeArmor,
   applyBlind,
   removeEffects,
   gainMana,
@@ -144,9 +145,11 @@ function applyExtras(
           if (actor.health <= 0) break;
           if (recipient.health <= 0) continue;
           const stats = combat(recipient);
-          const removed = Math.ceil((stats.armor * effect.amount) / 100);
+          const { removed, depletion } = removeArmor(
+            recipient,
+            Math.ceil((stats.armor * effect.amount) / 100),
+          );
           if (!removed) continue;
-          stats.armor -= removed;
           events.push({
             kind: "status",
             actorId: actor.id,
@@ -156,7 +159,7 @@ function applyExtras(
             amount: removed,
             text: `${species(recipient.species).name} loses ${removed} Armor`,
           });
-          if (stats.armor === 0) triggerArmorBreak(state, recipient, events);
+          triggerArmorBreak(state, depletion, events);
         }
         break;
       case "blind":
@@ -242,10 +245,9 @@ export function executeAbility(
   const keywords = definitionKeywords(def);
   if (!enemy) {
     if (target && keywords.includes("leech") && hasTalent(state, "leech.armor-siphon")) {
-      const stolen = Math.min(1, combat(target).armor);
-      combat(target).armor -= stolen;
+      const { removed: stolen, depletion } = removeArmor(target, 1);
       grantArmor(state, actor, stolen, events);
-      if (stolen > 0 && combat(target).armor === 0) triggerArmorBreak(state, target, events);
+      triggerArmorBreak(state, depletion, events);
     }
     if (keywords.includes("block") && hasTalent(state, "armor.armored-surge") && roll(state) < 0.1)
       grantArmor(state, actor, 6, events);

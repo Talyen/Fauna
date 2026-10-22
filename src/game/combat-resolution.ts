@@ -16,11 +16,15 @@ import {
   dodgeChance,
   beginAttack,
   STACK_LIMIT,
+  removeArmor,
+  type ArmorDepletion,
   type Combatant,
 } from "./combat-state";
 
+type HitResult = { outcome: "ignored" | "miss" } | { outcome: "landed"; lost: number };
+
 interface StatusResult {
-  armorBroken: boolean;
+  depletions: ArmorDepletion[];
   appliedControl: boolean;
   suppressed: boolean;
 }
@@ -50,7 +54,7 @@ const handlers = {
 type Operations = typeof handlers;
 type OperationName = keyof Operations;
 export type CombatArguments<K extends OperationName> = Parameters<Operations[K]>;
-export type CombatResult<K extends OperationName> =
+type CombatResult<K extends OperationName> =
   ReturnType<Operations[K]> extends Generator<unknown, infer R, unknown> ? R : never;
 type CombatOperation = { [K in OperationName]: { kind: K; args: CombatArguments<K> } }[OperationName];
 type Resolution<R = void> = Generator<CombatOperation, R, unknown>;
@@ -409,7 +413,14 @@ function* grantStatus(
   if ((status === "thorns" || status === "waterThorns") && state && sharing)
     yield* reaction("shareProtection", state, unit, status, gain, events);
 }
-function* triggerArmorBreak(state: GameState, unit: Combatant, events: GameEvent[]): Resolution<void> {
+function* triggerArmorBreak(
+  state: GameState,
+  depletion: ArmorDepletion | null,
+  events: GameEvent[],
+): Resolution<void> {
+  if (!depletion || depletion.delivered) return;
+  depletion.delivered = true;
+  const { unit } = depletion;
   if (state.phase !== "battle" || unit.health <= 0 || !state.battle) return;
   const allied = !("maxHealth" in unit);
   if (allied && hasTalent(state, "armor.reactive-guard"))
@@ -451,8 +462,8 @@ function* removeEffects(
   events: GameEvent[],
   state?: GameState,
 ): Resolution<void> {
-  const stats = combat(unit),
-    armorBefore = stats.armor;
+  const stats = combat(unit);
+  let depletion: ArmorDepletion | null = null;
   let cleansed = 0;
   const removedStatuses: NonNullable<GameEvent["affectedStatus"]>[] = [];
   const statuses =
@@ -493,6 +504,7 @@ function* removeEffects(
         status === "nullifyFreeze"
       )
         stats[status] = false;
+      else if (status === "armor") depletion = removeArmor(unit, stats.armor).depletion;
       else stats[status] = 0;
       if (kind === "cleanse") {
         cleansed++;
@@ -523,8 +535,7 @@ function* removeEffects(
       text: `${unitName(unit)}: ${kind === "cleanse" ? "Cleanse" : "Purge"} removes no effects.`,
     });
   if (cleansed > 0 && state) yield* reaction("cleanseRewards", state, unit, cleansed, events);
-  if (state && armorBefore > 0 && stats.armor === 0)
-    yield* reaction("triggerArmorBreak", state, unit, events);
+  if (state) yield* reaction("triggerArmorBreak", state, depletion, events);
 }
 function* cleanseRewards(
   state: GameState,
@@ -557,12 +568,12 @@ function* applyHarmfulStatus(
     type !== "freeze" &&
     type !== "blind"
   )
-    return { armorBroken: false, appliedControl: false, suppressed: false };
+    return { depletions: [], appliedControl: false, suppressed: false };
   const stats = combat(target);
   const alliedSource = !("maxHealth" in source),
     alliedTarget = !("maxHealth" in target);
-  let appliedControl = false,
-    armorBroken = false;
+  let appliedControl = false;
+  const depletions: ArmorDepletion[] = [];
   const immune =
     (type === "stun" || type === "freeze") &&
     (stats.controlled ||
@@ -584,7 +595,7 @@ function* applyHarmfulStatus(
       outcome: "remove",
       text: `${unitName(target)} nullifies ${type}`,
     });
-    return { armorBroken: false, appliedControl: false, suppressed: true };
+    return { depletions: [], appliedControl: false, suppressed: true };
   }
   if (
     target.health > 0 &&
@@ -627,8 +638,9 @@ function* applyHarmfulStatus(
       );
       if (reflected.appliedControl && type !== "blind")
         yield* reaction("controlRewards", state, target, recipient, type, events);
-      if (reflected.armorBroken) yield* reaction("triggerArmorBreak", state, recipient, events);
-      return { armorBroken: false, appliedControl: false, suppressed: true };
+      for (const depletion of reflected.depletions)
+        yield* reaction("triggerArmorBreak", state, depletion, events);
+      return { depletions: [], appliedControl: false, suppressed: true };
     }
   }
   if (type === "blind" && target.health > 0 && !stats.blind) {
@@ -709,8 +721,8 @@ function* applyHarmfulStatus(
       if (alliedSource && !alliedTarget) {
         if (type === "freeze" && hasTalent(state, "freeze.icebound")) target.block = 0;
         if (type === "freeze" && hasTalent(state, "freeze.brittle-armor")) {
-          armorBroken ||= stats.armor > 0;
-          stats.armor = 0;
+          const { depletion } = removeArmor(target, stats.armor);
+          if (depletion) depletions.push(depletion);
         }
         if (type === "stun" && hasTalent(state, "stun.free-follow-up")) combat(source).freeCard = true;
         if (type === "stun" && hasTalent(state, "stun.stun-insight")) draw(state, 1);
@@ -721,8 +733,8 @@ function* applyHarmfulStatus(
         if (type === "stun" && hasTalent(state, "stun.guarded-counter") && source.block === 0)
           yield* reaction("grantBlock", state, source, 4, events);
         if (type === "stun" && hasTalent(state, "stun.shatter-guard")) {
-          armorBroken ||= stats.armor > 0;
-          stats.armor = 0;
+          const { depletion } = removeArmor(target, stats.armor);
+          if (depletion) depletions.push(depletion);
         }
       }
       events.push({
@@ -734,7 +746,7 @@ function* applyHarmfulStatus(
       });
     }
   }
-  return { armorBroken, appliedControl, suppressed: false };
+  return { depletions, appliedControl, suppressed: false };
 }
 function* controlRewards(
   state: GameState,
@@ -775,7 +787,8 @@ function* hit(
           0,
         )
       : 0;
-  const lost = yield* reaction("resolveHit", state, source, target, value, type, events, options);
+  const result = yield* reaction("resolveHit", state, source, target, value, type, events, options);
+  const lost = result.outcome === "landed" ? result.lost : undefined;
   if (lost !== undefined && wrongFoot > 0)
     yield* reaction("hit", state, source, target, wrongFoot, "light", events, { origin: "proc" });
   if (
@@ -824,17 +837,22 @@ function* resolveHit(
   type: DamageType,
   events: GameEvent[],
   options: DamagePacket = { origin: "ability" },
-): Resolution<number | undefined> {
+): Resolution<HitResult> {
   const policy = packetPolicy(options);
-  if ((source.health <= 0 && !policy.deadSource) || target.health <= 0 || value <= 0) return;
+  if ((source.health <= 0 && !policy.deadSource) || target.health <= 0 || value <= 0)
+    return { outcome: "ignored" };
   const { attack, direct } = policy;
   const leech = "leech" in options && options.leech;
   const cardLeech = "cardLeech" in options && options.cardLeech;
   const alliedSource = !("maxHealth" in source),
     alliedTarget = !("maxHealth" in target);
   const stats = combat(target),
-    before = target.health,
-    initialArmor = stats.armor;
+    before = target.health;
+  const depletions: ArmorDepletion[] = [];
+  const erode = (amount: number) => {
+    const { depletion } = removeArmor(target, amount);
+    if (depletion) depletions.push(depletion);
+  };
   const blessedLeech =
     alliedSource &&
     type === "light" &&
@@ -897,7 +915,7 @@ function* resolveHit(
         origin: "statusRetaliation",
       });
     if (alliedTarget) state.battleXP.dodge = Math.min(STACK_LIMIT, (state.battleXP.dodge ?? 0) + 1);
-    return;
+    return { outcome: "miss" };
   }
   if (type === "freeze" && stats.nullifyFreeze) {
     stats.nullifyFreeze = false;
@@ -909,7 +927,7 @@ function* resolveHit(
       affectedStatus: "freeze",
       text: `${unitName(target)} nullifies Freeze damage`,
     });
-    return 0;
+    return { outcome: "landed", lost: 0 };
   }
   const nextPhysical = direct && alliedSource ? combat(source).nextPhysical : 0;
   if (nextPhysical) combat(source).nextPhysical = 0;
@@ -1027,7 +1045,7 @@ function* resolveHit(
     state.boons.includes("sundering-charm") &&
     (type === "physical" || type === "stun")
   )
-    stats.armor = Math.max(0, stats.armor - 2);
+    erode(2);
   if (
     type === "physical" ||
     type === "stun" ||
@@ -1038,13 +1056,10 @@ function* resolveHit(
     damage = Math.max(0, damage - stats.armor);
   const lost = loseHealth(state, target, damage, events);
   if (damage > 0) {
-    stats.armor = Math.max(0, stats.armor - 1);
-    if (alliedSource && type === "poison" && hasTalent(state, "poison.caustic"))
-      stats.armor = Math.max(0, stats.armor - damage);
-    if (alliedSource && type === "burn" && hasTalent(state, "burn.melting-point"))
-      stats.armor = Math.max(0, stats.armor - damage);
+    erode(1);
+    if (alliedSource && type === "poison" && hasTalent(state, "poison.caustic")) erode(damage);
+    if (alliedSource && type === "burn" && hasTalent(state, "burn.melting-point")) erode(damage);
   }
-  let armorBroken = initialArmor > 0 && stats.armor === 0;
   if (lost > 0) yield* reaction("healthThresholds", state, target, before, events);
   if (alliedTarget && lost > 0 && hasTalent(state, "dodge.finding-rhythm"))
     stats.rhythm = Math.min(70, stats.rhythm + 5);
@@ -1103,10 +1118,7 @@ function* resolveHit(
   if (direct && alliedSource && !alliedTarget && source.health > 0 && type === "water") {
     if (hasTalent(state, "water.seafoam")) yield* reaction("grantBlock", state, source, 2, events);
     if (hasTalent(state, "water.erosion")) {
-      // Bonus damage may already have broken Armor and fired its reaction.
-      const armorBeforeErosion = stats.armor;
-      stats.armor = Math.max(0, stats.armor - 2);
-      armorBroken ||= armorBeforeErosion > 0 && stats.armor === 0;
+      erode(2);
     }
     if (hasTalent(state, "water.cleansing-current") && roll(state) < 0.2)
       yield* reaction("removeEffects", source, "cleanse", 1, events, state);
@@ -1116,7 +1128,7 @@ function* resolveHit(
     const statusResult = yield* reaction("applyHarmfulStatus", state, source, target, damage, type, events, {
       leech: leech,
     });
-    armorBroken ||= statusResult.armorBroken;
+    depletions.push(...statusResult.depletions);
     if (direct && alliedSource && !alliedTarget && source.health > 0) {
       if (type === "nature" && hasTalent(state, "nature.bramblegrowth") && roll(state) < 0.1)
         yield* reaction("grantStatus", source, "thorns", damage, events, state);
@@ -1174,7 +1186,7 @@ function* resolveHit(
           yield* reaction("hit", state, source, target, damage, "stun", events, { origin: "proc" });
       }
       if (type === "bleed") {
-        if (proc("bleed.flay", 0.2)) stats.armor = Math.round(stats.armor / 2);
+        if (proc("bleed.flay", 0.2)) erode(stats.armor - Math.round(stats.armor / 2));
         if (proc("bleed.tainted-wound", 0.1))
           yield* reaction("hit", state, source, target, Math.round(damage / 2), "poison", events, {
             origin: "proc",
@@ -1230,8 +1242,8 @@ function* resolveHit(
     if (amount > 0)
       yield* reaction("hit", state, target, source, amount, "water", events, { origin: "retaliation" });
   }
-  if (armorBroken) yield* reaction("triggerArmorBreak", state, target, events);
-  return lost;
+  for (const depletion of depletions) yield* reaction("triggerArmorBreak", state, depletion, events);
+  return { outcome: "landed", lost };
 }
 function* tickStatuses(state: GameState, unit: Combatant, events: GameEvent[]): Resolution<void> {
   const stats = combat(unit);

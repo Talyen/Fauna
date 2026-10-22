@@ -161,3 +161,18 @@ export function openingCriticalBonus(state: GameState, source: Combatant): numbe
     0,
   );
 }
+
+/** A transient receipt for one positive-to-zero transition; never part of the saved aggregate. */
+export interface ArmorDepletion {
+  readonly unit: Combatant;
+  delivered: boolean;
+}
+export function removeArmor(unit: Combatant, amount: number) {
+  const stats = combat(unit);
+  const before = stats.armor;
+  const removed = Math.min(before, Math.max(0, amount));
+  stats.armor -= removed;
+  const depletion: ArmorDepletion | null =
+    before > 0 && stats.armor === 0 ? { unit, delivered: false } : null;
+  return { removed, depletion };
+}
