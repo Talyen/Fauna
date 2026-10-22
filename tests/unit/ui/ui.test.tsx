@@ -1,6 +1,6 @@
-import { species } from "../../../src/game/content";
-import { freshCombat } from "../../../src/game/combat/index";
-import { combat, hit } from "../../../src/game/combat/index";
+import { TargetPreview } from "../../../src/ui/battle/target-preview";
+import { species, BOONS } from "../../../src/game/content";
+import { freshCombat, combat, hit } from "../../../src/game/combat/index";
 import { assetUrl } from "../../../src/ui/shared/assets";
 import { ActionCard } from "../../../src/ui/shared/cards/cards";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
@@ -8,8 +8,7 @@ import { produce } from "immer";
 import { createGame } from "../../../src/game/engine";
 import { accept, run, teamRun, starterJourney, winBattle, bossReward } from "../../support/game";
 import { encounterSource } from "../../../src/game/encounters";
-import { BOONS } from "../../../src/game/progression";
-import { TargetPreview } from "../../../src/ui/battle/target-preview";
+
 // @vitest-environment jsdom
 import { beforeEach, afterEach, describe, it, expect, vi } from "vitest";
 import { render, screen, cleanup, act, waitFor } from "@testing-library/react";

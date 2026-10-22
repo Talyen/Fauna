@@ -3,7 +3,7 @@ import { readFile, writeFile, appendFile } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { ROOT, runtime, identity, hash, reportDirectory } from "../lib/tool-runtime.mjs";
-import { compareBalance } from "../lib/paired-balance.mjs";
+import { compareBalance } from "./paired-balance.mjs";
 import { writeBalanceFindings } from "./balance-findings.mjs";
 const load = async (file) => JSON.parse(await readFile(path.resolve(file), "utf8"));
 export async function worker(input, output) {

@@ -1,9 +1,8 @@
 import { freeze } from "immer";
-import { CARDS } from "./content/cards";
-import { SPECIES } from "./content/species";
+import { CARDS, SPECIES } from "./content/creatures";
 import type { SpeciesId, CardDefinition } from "./content/types";
-export { CARDS } from "./content/cards";
-export { SPECIES, species } from "./content/species";
+export { CARDS } from "./content/creatures";
+export { SPECIES, species } from "./content/creatures";
 export { ENCOUNTERS } from "./content/encounters";
 export type { SpeciesId, Species, PassiveTier, CardDefinition, DamageType } from "./content/types";
 export { DAMAGE_LABELS, enemyCard, enemyCanUse, cardText } from "./card-rules";
@@ -17,3 +16,6 @@ export function definition(id: string): CardDefinition {
 }
 
 freeze(FIRST_RUN_STARTERS, true);
+
+export { BOONS, type BoonId } from "./content/boons";
+export { TALENTS, TALENT_EFFECTS, type TalentId } from "./content/talents";

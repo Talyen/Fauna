@@ -1,6 +1,14 @@
-import { cardText, CARDS, SPECIES, FIRST_RUN_STARTERS, ENCOUNTERS } from "./content";
+import {
+  cardText,
+  CARDS,
+  SPECIES,
+  FIRST_RUN_STARTERS,
+  ENCOUNTERS,
+  BOONS,
+  TALENTS,
+  TALENT_EFFECTS,
+} from "./content";
 import { BOSSES, COMBAT_PACKS, JOURNEY_LENGTH } from "./encounters";
-import { BOONS, TALENTS, TALENT_EFFECTS } from "./progression";
 import { DAMAGE_TYPES, EFFECT_KEYWORDS, PROGRESSION_KEYWORDS, definitionKeywords } from "./keywords";
 
 export const contentCatalog = {

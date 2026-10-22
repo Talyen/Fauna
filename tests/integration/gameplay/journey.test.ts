@@ -3,8 +3,7 @@ import { freshCombat } from "../../../src/game/combat/index";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../../src/game/engine";
-import { FIRST_RUN_STARTERS, species } from "../../../src/game/content";
-import { BOONS } from "../../../src/game/progression";
+import { FIRST_RUN_STARTERS, species, BOONS } from "../../../src/game/content";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { previewPlay } from "../../../src/game/preview";
 import {

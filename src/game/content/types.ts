@@ -88,3 +88,8 @@ export type CardDefinition = CardBase &
     | { effect: "heal"; target?: "allAllies" | "mostInjured" | "self" }
     | { effect: Exclude<Effect, "attack" | "guard" | "heal">; target?: never }
   );
+
+export interface CreatureKit {
+  species: Species;
+  cards: readonly [CardDefinition, CardDefinition, CardDefinition];
+}

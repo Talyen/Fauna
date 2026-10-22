@@ -1,6 +1,6 @@
 import { spawnSync } from "node:child_process";
 import { createRequire } from "node:module";
-import { routeArguments } from "../lib/test-routes.mjs";
+import { routeArguments } from "./routes.mjs";
 try {
   const [name, ...extras] = process.argv.slice(2);
   const args = routeArguments(name, extras);

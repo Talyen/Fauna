@@ -1,4 +1,4 @@
-import { captureScreen } from "./rendered-evidence";
+import { captureScreen } from "./support/rendered-evidence";
 import { test, expect } from "@playwright/test";
 import { CARDS, species } from "../../src/game/content";
 import { seed, state, resume } from "./support/session";

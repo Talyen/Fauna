@@ -1,8 +1,9 @@
-import { captureScreen } from "./rendered-evidence";
+import { captureScreen } from "./support/rendered-evidence";
 import { test, expect } from "@playwright/test";
 import { produce } from "immer";
 import { createGame } from "../../src/game/engine";
-import { TALENTS, KEYWORDS } from "../../src/game/progression";
+import { KEYWORDS } from "../../src/game/progression";
+import { TALENTS } from "../../src/game/content";
 import { run } from "../support/game";
 import { seed, state, resume } from "./support/session";
 import { fits } from "./support/layout";

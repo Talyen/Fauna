@@ -1,11 +1,10 @@
-import { starterCount } from "../game/progression";
+import { starterCount, canBuyTalent, KEYWORDS, talentPoints } from "../game/progression";
 import { canVisitCampfire, canVisitMerchant, canRecruitDestination } from "../game/support";
 import { battleChoices } from "../application/battle-policy";
 import { createSession, type Session } from "../application/session";
 import { createGame } from "../game/engine";
 import { decodeSave, encodeSave } from "../game/save";
-import { type SpeciesId } from "../game/content";
-import { TALENTS, canBuyTalent, KEYWORDS, talentPoints } from "../game/progression";
+import { type SpeciesId, TALENTS } from "../game/content";
 import type { Command, GameState } from "../game/types";
 
 export interface JourneyConfig {

@@ -1,5 +1,6 @@
 import { merchantPrice } from "./support";
-import { collectedSpecies, starterCount, creaturePassive, KEYWORDS, BOONS, hasTalent } from "./progression";
+import { collectedSpecies, starterCount, creaturePassive, KEYWORDS, hasTalent } from "./progression";
+import { BOONS, SPECIES, FIRST_RUN_STARTERS } from "./content";
 import {
   grantArmor,
   freshCombat,
@@ -11,7 +12,6 @@ import {
 } from "./combat/index";
 import { shuffle, roll } from "./random";
 import { draw, drawKeyword } from "./card-zones";
-import { SPECIES, FIRST_RUN_STARTERS } from "./content";
 import { bossEncounter, encounterSource, finalEncounter, encounterPacks } from "./encounters";
 import type { GameEvent, GameState } from "./types";
 import { living, rebuildCards, prepareLineup } from "./team";

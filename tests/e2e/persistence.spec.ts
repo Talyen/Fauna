@@ -1,7 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { produce } from "immer";
-import { species } from "../../src/game/content";
-import { BOONS } from "../../src/game/progression";
+import { species, BOONS } from "../../src/game/content";
 import { accept, winBattle, run, bossReward } from "../support/game";
 import { key, seed, saved, state, resume } from "./support/session";
 

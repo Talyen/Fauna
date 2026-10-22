@@ -9,8 +9,7 @@ import {
 } from "../../../src/game/combat/index";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { previewCard } from "../../../src/game/engine";
-import { BOONS } from "../../../src/game/progression";
-import { definition } from "../../../src/game/content";
+import { BOONS, definition } from "../../../src/game/content";
 import { encounterSource } from "../../../src/game/encounters";
 import { recruitChoice, accept, run, winBattle } from "../../support/game";
 import type { GameEvent } from "../../../src/game/types";

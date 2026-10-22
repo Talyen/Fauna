@@ -4,8 +4,8 @@ import { createGame } from "../../src/game/engine";
 import { CARDS } from "../../src/game/content";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { accept, winBattle, recruitChoice } from "../support/game";
-import { expectScrollFree } from "./layout-contract";
-import { captureScreen } from "./rendered-evidence";
+import { expectScrollFree } from "./support/layout-contract";
+import { captureScreen } from "./support/rendered-evidence";
 
 test("Recruit details and four destination options fit enlarged text and recruitment survives reload", async ({
   page,

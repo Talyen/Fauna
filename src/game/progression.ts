@@ -1,8 +1,4 @@
-import { TALENTS, type TalentId } from "./content/talents";
-export { TALENTS, TALENT_EFFECTS, type TalentId } from "./content/talents";
-export { BOONS, type BoonId } from "./content/boons";
-import type { SpeciesId } from "./content";
-import { definition, species, SPECIES } from "./content";
+import { TALENTS, type TalentId, type SpeciesId, definition, species, SPECIES } from "./content";
 import { PROGRESSION_KEYWORDS, definitionKeywords, type ProgressionKeyword } from "./keywords";
 export { progressionLabel as keywordLabel } from "./keywords";
 import type { Card, GameState } from "./types";

@@ -1,4 +1,4 @@
-import { captureScreen, settleScreen } from "./rendered-evidence";
+import { captureScreen, settleScreen } from "./support/rendered-evidence";
 import { test, expect, type Page } from "@playwright/test";
 import { produce } from "immer";
 import { accept, run, victoryReady } from "../support/game";

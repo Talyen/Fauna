@@ -6,7 +6,7 @@ import os from "node:os";
 import { performance } from "node:perf_hooks";
 import { pathToFileURL } from "node:url";
 import { ROOT, runtime, identity, hash, reportDirectory } from "../lib/tool-runtime.mjs";
-import { comparePerformance, summarizeSample } from "../lib/performance-metrics.mjs";
+import { comparePerformance, summarizeSample } from "./metrics.mjs";
 import { isolatedDesktopEnvironment } from "../lib/desktop-environment.mjs";
 const read = async (file) => JSON.parse(await readFile(path.resolve(file), "utf8"));
 export async function performanceBuildIdentity(repository = ROOT) {

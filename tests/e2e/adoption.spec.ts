@@ -1,5 +1,5 @@
-import { LAYOUT_CASES, REVIEW_VIEWPORTS } from "./layout-contract";
-import { captureScreen } from "./rendered-evidence";
+import { LAYOUT_CASES, REVIEW_VIEWPORTS } from "./support/layout-contract";
+import { captureScreen } from "./support/rendered-evidence";
 import { test, expect } from "@playwright/test";
 import { SPECIES } from "../../src/game/content";
 test("switch thumbs stay within their tracks in both states", async ({ page }) => {
@@ -92,7 +92,7 @@ for (const [width, height] of REVIEW_VIEWPORTS)
   test(`illustrated Boons and independent tooltip sizing at ${width}×${height}`, async ({ page }) => {
     const { run } = await import("../support/game");
     const fixture = structuredClone(run(7));
-    const { BOONS } = await import("../../src/game/progression");
+    const { BOONS } = await import("../../src/game/content");
     fixture.boons = BOONS.map((boon) => boon.id);
     await page.setViewportSize({ width, height });
     await page.emulateMedia({ reducedMotion: "reduce" });

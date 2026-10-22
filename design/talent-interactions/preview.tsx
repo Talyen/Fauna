@@ -6,7 +6,7 @@ import { RadioGroup, RadioGroupItem } from "../../src/components/ui/radio-group"
 import { Switch } from "../../src/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../src/components/ui/tabs";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../src/components/ui/tooltip";
-import { TALENTS } from "../../src/game/progression";
+import { TALENTS } from "../../src/game/content";
 import "@fontsource-variable/inter/wght.css";
 import "../../src/ui/styles.css";
 import "../button-interactions/study.css";

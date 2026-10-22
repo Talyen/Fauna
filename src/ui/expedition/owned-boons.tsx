@@ -1,4 +1,4 @@
-import { BOONS, type BoonId } from "../../game/progression";
+import { BOONS, type BoonId } from "../../game/content";
 import { ArtCard } from "../shared/cards/art-card";
 import { assetUrl } from "../shared/assets";
 import { KeywordText } from "../shared/keyword-text";

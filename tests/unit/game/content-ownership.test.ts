@@ -6,8 +6,10 @@ import {
   species,
   ENCOUNTERS,
   FIRST_RUN_STARTERS,
+  BOONS,
+  TALENTS,
+  TALENT_EFFECTS,
 } from "../../../src/game/content";
-import { BOONS, TALENTS, TALENT_EFFECTS } from "../../../src/game/progression";
 import { BOSSES, COMBAT_PACKS } from "../../../src/game/encounters";
 
 it("keeps shared authored rules immutable across lookup and direct catalog access", () => {

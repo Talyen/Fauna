@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
 import { produce } from "immer";
-import { BOONS } from "../../../src/game/progression";
+import { BOONS } from "../../../src/game/content";
 import { createGame, dispatch } from "../../../src/game/engine";
 import { encodeSave, decodeSave } from "../../../src/game/save";
 import { recruitChoice, accept, winBattle } from "../../support/game";
