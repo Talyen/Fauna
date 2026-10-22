@@ -15,7 +15,8 @@ const sanitize = (value: string) =>
     .slice(0, 1200);
 
 export function createDiagnostics(port?: DiagnosticPort) {
-  let entries: Diagnostic[] = [];
+  const retain = (values: Diagnostic[]) => Object.freeze(values.map((entry) => Object.freeze(entry)));
+  let entries = retain([]);
   let disposed = false,
     writing = false;
   const listeners = new Set<() => void>();
@@ -24,34 +25,36 @@ export function createDiagnostics(port?: DiagnosticPort) {
     if (raw && raw.length < 100_000) {
       const parsed: unknown = JSON.parse(raw);
       if (Array.isArray(parsed))
-        entries = parsed.slice(-50).flatMap((entry) => {
-          if (
-            !entry ||
-            typeof entry.message !== "string" ||
-            ![
-              "startup",
-              "render",
-              "save-read",
-              "save-write",
-              "validation",
-              "audio",
-              "cloud",
-              "global",
-            ].includes(entry.source)
-          )
-            return [];
-          return [
-            {
-              source: entry.source,
-              message: sanitize(entry.message),
-              count:
-                Number.isSafeInteger(entry.count) && entry.count > 0 ? Math.min(entry.count, 1_000_000) : 1,
-              ...(Number.isSafeInteger(entry.revision) && typeof entry.phase === "string"
-                ? { revision: entry.revision, phase: entry.phase.slice(0, 40) }
-                : {}),
-            },
-          ];
-        });
+        entries = retain(
+          parsed.slice(-50).flatMap((entry) => {
+            if (
+              !entry ||
+              typeof entry.message !== "string" ||
+              ![
+                "startup",
+                "render",
+                "save-read",
+                "save-write",
+                "validation",
+                "audio",
+                "cloud",
+                "global",
+              ].includes(entry.source)
+            )
+              return [];
+            return [
+              {
+                source: entry.source,
+                message: sanitize(entry.message),
+                count:
+                  Number.isSafeInteger(entry.count) && entry.count > 0 ? Math.min(entry.count, 1_000_000) : 1,
+                ...(Number.isSafeInteger(entry.revision) && typeof entry.phase === "string"
+                  ? { revision: entry.revision, phase: entry.phase.slice(0, 40) }
+                  : {}),
+              },
+            ];
+          }),
+        );
     }
   } catch {
     /* Diagnostics remain usable when optional persistence fails. */
@@ -71,15 +74,17 @@ export function createDiagnostics(port?: DiagnosticPort) {
         error instanceof Error ? error.message : typeof error === "string" ? error : "Unknown failure",
       );
       const match = entries.find((entry) => entry.source === source && entry.message === message);
-      entries = [
-        ...entries.filter((entry) => entry !== match),
-        {
-          source,
-          message,
-          count: Math.min((match?.count ?? 0) + 1, 1_000_000),
-          ...(context ? { revision: context.revision, phase: context.phase } : {}),
-        },
-      ].slice(-50);
+      entries = retain(
+        [
+          ...entries.filter((entry) => entry !== match),
+          {
+            source,
+            message,
+            count: Math.min((match?.count ?? 0) + 1, 1_000_000),
+            ...(context ? { revision: context.revision, phase: context.phase } : {}),
+          },
+        ].slice(-50),
+      );
       writing = true;
       try {
         try {

@@ -2,7 +2,11 @@ import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {
-    include: ["tests/unit/mana.test.ts", "tests/unit/session.test.ts", "tests/unit/verification.test.mjs"],
+    include: [
+      "tests/unit/game/mana.test.ts",
+      "tests/unit/application/session.test.ts",
+      "tests/unit/tooling/verification.test.mjs",
+    ],
     environment: "node",
     pool: "threads",
     maxWorkers: 1,

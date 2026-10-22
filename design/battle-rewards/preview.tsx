@@ -1,11 +1,11 @@
-import { assetUrl } from "../../src/ui/assets";
+import { assetUrl } from "../../src/ui/shared/assets";
 import { useRef, useState, useLayoutEffect, type CSSProperties } from "react";
 import { createRoot } from "react-dom/client";
 import { Coins, Flame, Shield, Leaf, Gem, Feather, Shell, Check } from "lucide-react";
 import { Button } from "../../src/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../src/components/ui/tooltip";
-import { ArtCard } from "../../src/ui/art-card";
-import { CreatureDetails } from "../../src/ui/card-details";
+import { ArtCard } from "../../src/ui/shared/art-card";
+import { CreatureDetails } from "../../src/ui/shared/card-details";
 import { species, type SpeciesId } from "../../src/game/content";
 import "@fontsource-variable/inter/wght.css";
 import "../../src/ui/styles.css";

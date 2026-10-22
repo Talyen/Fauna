@@ -6,7 +6,7 @@ import { produce } from "immer";
 import { encounterSource } from "../../src/game/encounters";
 import { createGame } from "../../src/game/engine";
 import { CARDS, definition, species } from "../../src/game/content";
-import { assetUrl } from "../../src/ui/assets";
+import { assetUrl } from "../../src/ui/shared/assets";
 import prepared from "../../src/assets/prepared.json" with { type: "json" };
 import { BOONS, TALENTS, KEYWORDS } from "../../src/game/progression";
 import type { Command, GameState } from "../../src/game/types";
@@ -19,7 +19,7 @@ import {
   run,
   bossReward,
   FULL_JOURNEY_SEED,
-} from "../unit/helpers";
+} from "../support/game";
 const key = "fauna.save.v1";
 async function seed(page: Page, game = createGame(7)) {
   if (page.url() === "about:blank") await page.goto("/");

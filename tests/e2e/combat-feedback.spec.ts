@@ -1,7 +1,7 @@
 import { captureFrame, settleScreen } from "./rendered-evidence";
 import { expectScrollFree, LAYOUT_CASES } from "./layout-contract";
 import { test, expect, type Page } from "@playwright/test";
-import { feedbackBattle } from "../unit/helpers";
+import { feedbackBattle } from "../support/game";
 import { encodeSave } from "../../src/game/save";
 
 async function freezeFeedback(page: Page, time = 180) {

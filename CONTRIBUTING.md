@@ -61,9 +61,13 @@ The final `verify` job allows workflow cancellation and runs even when upstream 
 
 CI retains unit JSON, per-shard blob reports/screenshots/traces, merged browser JSON/HTML, player notes and Windows output for seven days. The `browser-review` artifact contains the merged report; `browser-shard-N` artifacts retain raw evidence. Missing reports are failures, not substitute passing summaries. Artifact collection and report merging run on failure where the runner remains available. Windows retains its own package verification and packaged startup/save/resume/isolation checks.
 
-The workflow supports manual runs with one, four or eight browser shards for equivalent-coverage comparisons. Record completed-run timing with `node scripts/ci-timings.mjs <run-id> [attempt]`; this reads GitHub metadata and writes timing JSON without executing tests. It requires an authenticated GitHub CLI. Timing captured inside the final job is provisional until that job finishes. Branch pushes with an open PR defer to PR verification; main pushes, tags and fork PRs retain their gates. Superseded automatic branch runs are cancelled; manual benchmarks run independently.
+The workflow supports manual runs with one, four or eight browser shards for equivalent-coverage comparisons. Record completed-run timing with `node scripts/ci/ci-timings.mjs <run-id> [attempt]`; this reads GitHub metadata and writes timing JSON without executing tests. It requires an authenticated GitHub CLI. Timing captured inside the final job is provisional until that job finishes. Branch pushes with an open PR defer to PR verification; main pushes, tags and fork PRs retain their gates. Superseded automatic branch runs are cancelled; manual benchmarks run independently.
 
 CI checks the JavaScript allowance after each production build and never builds twice solely to measure size. Full CI and release evidence must refer to the exact commit. See [release boundaries](Docs/RELEASE.md) and [required rendered review](Docs/UI.md#required-review).
+
+## Test organization
+
+Unit suites are grouped by their contract owner under `tests/unit/`: `game/`, `application/`, `platform/`, `ui/`, `tooling/` and `simulation/`. Put shared gameplay scenario builders in `tests/support/game.ts`, so browser suites do not depend on a unit-suite directory. Keep browser integration journeys in `tests/e2e/`. Moving a suite requires updating the fixed local smoke selection when affected, plus explicit route or documentation references; the recursive full-suite discovery remains unchanged.
 
 ## Test value and coverage
 

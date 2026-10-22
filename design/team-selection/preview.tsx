@@ -1,11 +1,11 @@
-import { assetUrl } from "../../src/ui/assets";
+import { assetUrl } from "../../src/ui/shared/assets";
 import { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { Button } from "../../src/components/ui/button";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "../../src/components/ui/dialog";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../src/components/ui/tooltip";
-import { ArtCard } from "../../src/ui/art-card";
-import { CreatureDetails, ActionDetails } from "../../src/ui/card-details";
+import { ArtCard } from "../../src/ui/shared/art-card";
+import { CreatureDetails, ActionDetails } from "../../src/ui/shared/card-details";
 import { CARDS, ENCOUNTERS, species, type SpeciesId } from "../../src/game/content";
 import "@fontsource-variable/inter/wght.css";
 import "../../src/ui/styles.css";

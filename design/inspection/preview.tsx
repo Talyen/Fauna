@@ -1,4 +1,4 @@
-import { assetUrl } from "../../src/ui/assets";
+import { assetUrl } from "../../src/ui/shared/assets";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -7,10 +7,10 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../../src
 import { Tabs, TabsList, TabsTrigger } from "../../src/components/ui/tabs";
 import { Switch } from "../../src/components/ui/switch";
 import { TooltipProvider } from "../../src/components/ui/tooltip";
-import { ArtCard } from "../../src/ui/art-card";
-import { ActionCard } from "../../src/ui/cards";
-import { ActionDetails } from "../../src/ui/card-details";
-import { connectInput, moveFocus, type InputAction } from "../../src/ui/input";
+import { ArtCard } from "../../src/ui/shared/art-card";
+import { ActionCard } from "../../src/ui/shared/cards";
+import { ActionDetails } from "../../src/ui/shared/card-details";
+import { connectInput, moveFocus, type InputAction } from "../../src/ui/shared/input";
 import { CARDS, species } from "../../src/game/content";
 import type { Card, Creature } from "../../src/game/types";
 import "@fontsource-variable/inter/wght.css";

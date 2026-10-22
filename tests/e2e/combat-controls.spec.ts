@@ -1,7 +1,7 @@
 import { captureScreen, settleScreen } from "./rendered-evidence";
 import { test, expect, type Page } from "@playwright/test";
 import { produce } from "immer";
-import { accept, run, victoryReady } from "../unit/helpers";
+import { accept, run, victoryReady } from "../support/game";
 import { encodeSave } from "../../src/game/save";
 async function seed(page: Page, initial: string, scale: string) {
   await page.addInitScript(

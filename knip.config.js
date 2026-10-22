@@ -5,7 +5,8 @@ export default {
     "desktop/after-pack.cjs",
     "desktop/steam-worker.cjs",
     "scripts/*.mjs",
-    "src/application/{playthrough,balance,performance}.ts",
+    "scripts/{agent,assets,balance,checks,ci,dev,performance,release}/*.mjs",
+    "src/tooling/{playthrough,balance,performance}.ts",
     "design/**/*.tsx",
   ],
   project: [

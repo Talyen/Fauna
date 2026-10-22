@@ -467,6 +467,30 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
 function reject(state: GameState, reason: string): CommandResult {
   return { accepted: false, state, reason, events: [] };
 }
+const commandTypes = {
+  draft: true,
+  start: true,
+  beginBattle: true,
+  setLineup: true,
+  swap: true,
+  play: true,
+  endTurn: true,
+  devWinBattle: true,
+  visitCampfire: true,
+  rest: true,
+  leaveCampfire: true,
+  enterSupport: true,
+  buyBoon: true,
+  leaveSupport: true,
+  recruit: true,
+  skipRecruit: true,
+  chooseBoon: true,
+  skipBoon: true,
+  buyTalent: true,
+  resetTalents: true,
+  newRun: true,
+  abandon: true,
+} satisfies Record<Command["type"], true>;
 export function dispatch(state: GameState, command: Command, development = false): CommandResult {
   if (command.type === "devWinBattle" && !development)
     return reject(state, "Development command unavailable.");
@@ -476,6 +500,7 @@ export function previewCard(state: GameState, cardId: string, targetId?: string)
   return resolve(state, { type: "play", cardId, targetId }, true);
 }
 function resolve(state: GameState, command: Command, preview: boolean): CommandResult {
+  if (!Object.hasOwn(commandTypes, command.type)) return reject(state, "Unknown command.");
   const b = state.battle;
   if (
     command.type === "newRun" &&
@@ -824,5 +849,5 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         break;
     }
   });
-  return { accepted: true, state: next, events };
+  return { accepted: true, state: next, events: freeze(events, true) };
 }

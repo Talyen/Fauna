@@ -7,9 +7,9 @@ The current palette adopts Alchemy’s warm near-black canvas, charcoal surfaces
 ## Canonical owners
 
 - `src/components/ui/` retains registered upstream shadcn/Radix controls and their native keyboard, focus, modal and value behavior. Controls expose stable `ui-*` skin classes; screens compose them rather than implementing widgets.
-- `src/ui/tokens.css` owns colors, typography, spacing, artwork geometry, talent-caption dimensions, interaction sizes and motion values. `src/ui/motion-values.ts` reads those same tokens for JavaScript presentation; absent styles settle immediately.
+- `src/ui/tokens.css` owns colors, typography, spacing, artwork geometry, talent-caption dimensions, interaction sizes and motion values. `src/ui/shared/motion-values.ts` reads those same tokens for JavaScript presentation; absent styles settle immediately.
 - `src/ui/design-system.css` owns shared button, tab, switch, radio, slider, dialog, progress, empty-state, status, talent, reward treatments. `src/ui/styles.css` retains screen layout, including the responsive talents overview, artwork and semantic game presentation. No screen-specific state utility classes may bypass the shared controls.
-- `scripts/ui-contract.mjs` enforces registered primitive ownership, semantic colors, typography/radius tokens, artwork ownership, no handmade controls or inline JSX visual styles, central `ui-*` control styling, no screen-local interaction utilities, and no selected-hover border/ring thickening. CI runs the complete source gate; fixture tests protect these policy boundaries.
+- `scripts/checks/ui-contract.mjs` enforces registered primitive ownership, semantic colors, typography/radius tokens, artwork ownership, no handmade controls or inline JSX visual styles, central `ui-*` control styling, no screen-local interaction utilities, and no selected-hover border/ring thickening. CI runs the complete source gate; fixture tests protect these policy boundaries.
 
 ## Adopted behavior
 

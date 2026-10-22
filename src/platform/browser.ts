@@ -1,3 +1,4 @@
+import { decodeSave } from "../game/save";
 import { browserDiagnostics } from "./preferences";
 import type { Platform, SaveCandidate } from "./ports";
 const KEY = "fauna.save.v1";
@@ -25,10 +26,19 @@ export function createBrowserPlatform(storage?: Storage): Platform {
       },
       async write(data) {
         const source = storage ?? window.localStorage;
-        for (let i = 2; i >= 1; i--) {
-          const previous = source.getItem(i === 1 ? KEY : `${KEY}.backup${i - 1}`);
-          if (previous !== null) source.setItem(`${KEY}.backup${i}`, previous);
-        }
+        // Corrupt slots must never displace the intact checkpoint used for recovery.
+        const intact = [KEY, `${KEY}.backup1`, `${KEY}.backup2`].flatMap((key) => {
+          const previous = source.getItem(key);
+          if (previous === null) return [];
+          try {
+            decodeSave(previous);
+            return [previous];
+          } catch {
+            return [];
+          }
+        });
+        if (intact[1] !== undefined) source.setItem(`${KEY}.backup2`, intact[1]);
+        if (intact[0] !== undefined) source.setItem(`${KEY}.backup1`, intact[0]);
         source.setItem(KEY, data);
       },
     },

@@ -90,7 +90,7 @@ test("settings categories remain reachable at minimum size with enlarged text", 
 
 for (const [width, height] of REVIEW_VIEWPORTS)
   test(`illustrated Boons and independent tooltip sizing at ${width}×${height}`, async ({ page }) => {
-    const { run } = await import("../unit/helpers");
+    const { run } = await import("../support/game");
     const fixture = structuredClone(run(7));
     const { BOONS } = await import("../../src/game/progression");
     fixture.boons = BOONS.map((boon) => boon.id);
@@ -150,7 +150,7 @@ for (const [width, height] of REVIEW_VIEWPORTS)
 
 test("Merchant purchase resumes without duplicate spending", async ({ page }) => {
   const width = 1280;
-  const { accept, winBattle, recruitChoice } = await import("../unit/helpers");
+  const { accept, winBattle, recruitChoice } = await import("../support/game");
   const { createGame } = await import("../../src/game/engine");
   let fixture = accept(accept(createGame(7), { type: "draft", species: createGame(7).starterOffers[0]! }), {
     type: "start",

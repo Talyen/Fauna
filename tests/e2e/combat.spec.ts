@@ -1,7 +1,7 @@
 import { captureScreen } from "./rendered-evidence";
 import { test, expect, type Page } from "@playwright/test";
 import { produce } from "immer";
-import { run } from "../unit/helpers";
+import { run } from "../support/game";
 import type { GameState } from "../../src/game/types";
 async function seed(page: Page, game: GameState) {
   await page.addInitScript((game) => {

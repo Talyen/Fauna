@@ -2,7 +2,7 @@
 
 The [ability resolution plan and implementation record](COMBAT_RESOLUTION_PLAN.md) documents the shared player/enemy executor, approved rule alignment and explicit room scaling.
 
-`src/game/` owns content, commands, battle rules, seeded RNG, and save validation. It imports only its own modules, Immer, and Zod. It does not access the DOM, React, filesystem, Steam, clocks, or ambient randomness. `scripts/boundaries.mjs` parses source and checks resolved import paths and ambient capability references; CI also runs Knip for unused files, exports and dependencies.
+`src/game/` owns content, commands, battle rules, seeded RNG, and save validation. It imports only its own modules, Immer, and Zod. It does not access the DOM, React, filesystem, Steam, clocks, or ambient randomness. `scripts/checks/boundaries.mjs` parses source and checks resolved import paths and ambient capability references; CI also runs Knip for unused files, exports and dependencies.
 
 `dispatch(state, command)` returns either an accepted immutable state with ordered presentation events or a rejection retaining the original state. Validation occurs before RNG consumption or mutation. Gameplay and progression settle synchronously. Animation is a consumer of results; it cannot pay mana, damage a creature, grant a reward, or unlock content.
 
@@ -11,6 +11,20 @@ The [ability resolution plan and implementation record](COMBAT_RESOLUTION_PLAN.m
 `src/platform/` defines storage, desktop quit, and optional Steam cloud/achievement capabilities. The browser uses localStorage; desktop uses a sandboxed preload IPC bridge. Steam is optional. Desktop adapters expose display preferences, account-scoped cloud transport and overlay state; gameplay never requires Steam. Cloud reconciliation belongs to the application and native calls run in an owned utility process.
 
 `src/ui/` consumes the session and owns transient targeting, inspection, menu, and input modality. Zustand subscriptions expose application state. Motion respects the user's reduced-motion preference. Standard gamepads and keyboard navigation feed semantic actions and share focus navigation.
+
+## Repository organization
+
+The runtime keeps its layer boundaries: gameplay in `src/game/`, command and save orchestration in `src/application/`, capability adapters in `src/platform/`, presentation in `src/ui/`, and privileged Electron code in `desktop/`. [Architecture checks](../scripts/checks/boundaries.mjs) enforce import direction, including keeping development harnesses outside runtime dependencies.
+
+Within presentation, `battle/`, `expedition/`, `collection/`, `talents/`, `settings/` and `inspection/` own their features. `audio/` owns playback; `shared/` owns reusable artwork, layout, focus and input. [App](../src/ui/App.tsx) composes screens and coordinates transient navigation. [Inspection requests](../src/ui/inspection/model.ts) and [input controls](../src/ui/shared/input.ts) are owned independently of screen implementations. Registered upstream primitives remain in `src/components/ui/`; theme tokens and shared styles remain at the UI root.
+
+Authored [species](../src/game/content/species.ts), [cards](../src/game/content/cards.ts), [talents](../src/game/content/talents.ts), [Boons](../src/game/content/boons.ts) and [encounter templates](../src/game/content/encounters.ts) live in `src/game/content/`, with shared definition types beside them. `content.ts` retains the catalog lookup API, [card rules](../src/game/card-rules.ts) own effect descriptions and enemy adaptation, and `progression.ts` owns progression calculations. Catalog array order is intentional: preserve it when reorganizing definitions because seeded offers and selection consume it.
+
+`src/tooling/` owns playthrough, balance and performance harnesses. These consume runtime contracts; runtime code cannot import them. Auto-play's shared battle policy remains in `src/application/battle-policy.ts` because the player application uses it.
+
+`tests/unit/` groups suites by owner: `game/`, `application/`, `platform/`, `ui/`, `tooling/` and `simulation/`. Shared scenario builders live in [tests/support/game.ts](../tests/support/game.ts), available to unit and browser suites. `tests/e2e/` retains rendered integration journeys. [Verification policy](../CONTRIBUTING.md#verification) and the fixed local smoke selection are unchanged.
+
+[Scripts](../scripts/README.md) are grouped by workflow. npm command names remain the public interface; worktree creation, cleanup and integration retain their root script entrypoints. Configuration, documentation, source-policy checks and owner lookup must follow file moves together.
 
 ## Domain identity
 

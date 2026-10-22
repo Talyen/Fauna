@@ -11,11 +11,11 @@ import {
 } from "../../src/components/ui/dialog";
 import { Switch } from "../../src/components/ui/switch";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../../src/components/ui/tooltip";
-import { KeywordText } from "../../src/ui/keyword-text";
+import { KeywordText } from "../../src/ui/shared/keyword-text";
 import { KEYWORD_DEFINITIONS } from "../../src/game/keywords";
-import { Settings } from "../../src/ui/settings";
-import { returnFocus } from "../../src/ui/focus";
-import { defaultAudioPreferences, type AudioPreferences } from "../../src/ui/audio-preferences";
+import { Settings } from "../../src/ui/settings/settings";
+import { returnFocus } from "../../src/ui/shared/focus";
+import { defaultAudioPreferences, type AudioPreferences } from "../../src/ui/settings/audio-preferences";
 import "@fontsource-variable/inter/wght.css";
 import "../../src/ui/styles.css";
 import "../button-interactions/study.css";
