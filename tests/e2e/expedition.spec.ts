@@ -469,7 +469,7 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     expect(Object.values(won.keywordXP).reduce((a, b) => a + b, 0)).toBeGreaterThan(0);
     await page.reload();
     await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
-    expect((await state(page)).revision).toBe(won.revision);
+    expect(await state(page)).toEqual(won);
     await page.getByRole("button", { name: "Collection", exact: true }).click();
     await expect(page.getByRole("button", { name: "Inspect Prismram" })).toHaveCount(1);
   });
@@ -773,27 +773,40 @@ test("last mana saves the full turn before immediate close and does not replay o
   await expect(reopened.locator(".combat-number")).toHaveCount(0);
 });
 test("rewards resume without duplicate XP, currency, recruitment or boons", async ({ page }) => {
+  const recruitReward = winBattle();
+  await seed(page, recruitReward);
+  await resume(page);
+  await page.reload();
+  await resume(page);
+  expect(await state(page)).toEqual(recruitReward);
+  const recruit = recruitReward.reward!.recruits[0]!;
+  await page.getByRole("button", { name: `Recruit ${species(recruit).name}`, exact: true }).click();
+  const recruited = accept(recruitReward, { type: "recruit", species: recruit });
+  expect(await state(page)).toEqual(recruited);
+  await page.reload();
+  await resume(page);
+  expect(await state(page)).toEqual(recruited);
+
   const fixture = bossReward();
   await seed(page, fixture);
   await resume(page);
   await page.reload();
   await resume(page);
-  expect((await state(page)).currency).toBe(fixture.currency);
-  const before = await state(page);
-  await page.reload();
-  await resume(page);
-  const boon = page.locator(".boon-choice").first();
+  expect(await state(page)).toEqual(fixture);
+  const boon = fixture.reward!.boons[0]!;
+  const choice = page.getByRole("button", {
+    name: `Choose ${BOONS.find((entry) => entry.id === boon)!.name}`,
+    exact: true,
+  });
   await page.keyboard.press("Tab");
-  await boon.focus();
+  await choice.focus();
   await expect(page.getByRole("tooltip")).toBeVisible();
   await page.keyboard.press("Enter");
-  const after = await state(page);
-  expect(after.currency).toBe(before.currency);
-  expect(after.keywordXP).toEqual(before.keywordXP);
-  expect(after.boons).toHaveLength(1);
+  const after = accept(fixture, { type: "chooseBoon", boon });
+  expect(await state(page)).toEqual(after);
   await page.reload();
   await resume(page);
-  expect((await state(page)).boons).toEqual(after.boons);
+  expect(await state(page)).toEqual(after);
 });
 test("corrupt saves recover backups and all-invalid saves continue silently", async ({ page }) => {
   await page.goto("/");
@@ -1476,7 +1489,7 @@ for (const [width, height] of [
     expect(edited.reward).toEqual(reward.reward);
     await page.reload();
     await resume(page);
-    expect((await state(page)).lineup[0]).toBe("recruit-pollenmoth");
+    expect(await state(page)).toEqual(edited);
   });
 
 test("a fallen deployed row resumes with no playable cards and can recover through a reserve swap", async ({
@@ -1566,7 +1579,7 @@ test("recruitment at five requires replacement and updates a released starter's 
   expect(recruited.phase).toBe("teamSelection");
   await page.reload();
   await resume(page);
-  expect((await state(page)).lineup).toEqual(recruited.lineup);
+  expect(await state(page)).toEqual(recruited);
 });
 
 for (const input of ["mouse", "keyboard", "controller"] as const)
