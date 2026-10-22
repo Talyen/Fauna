@@ -22,13 +22,17 @@ export function Draft({ game, send, inspect }: Props) {
   const grid = useRef<HTMLDivElement>(null);
   const restore = useRef<number | null>(null);
   useLayoutEffect(() => {
+    if (game.selected.length === starterCount(game)) {
+      send({ type: "start" });
+      return;
+    }
     if (restore.current === null) return;
     const targets = grid.current?.querySelectorAll<HTMLElement>(
       game.selected.length === starterCount(game) ? ".creature-card" : ".recruit-button",
     );
     returnFocus(targets?.[Math.min(restore.current, (targets?.length ?? 1) - 1)] ?? null);
     restore.current = null;
-  }, [game]);
+  }, [game, send]);
   return (
     <Screen className="draft-screen">
       <ScreenHeading>
@@ -70,14 +74,6 @@ export function Draft({ game, send, inspect }: Props) {
           },
         )}
       </div>
-      <footer className="selection-footer" data-nav-row>
-        <Button
-          disabled={game.selected.length !== starterCount(game)}
-          onClick={() => send({ type: "start" })}
-        >
-          Begin journey
-        </Button>
-      </footer>
     </Screen>
   );
 }

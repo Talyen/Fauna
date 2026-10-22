@@ -9,11 +9,10 @@ test("main menu, draft and pre-battle deck lead into the first battle", async ({
   await seed(page);
   await expect(page.getByRole("button", { name: "Play", exact: true })).toBeFocused();
   await page.getByRole("button", { name: "Play", exact: true }).click();
-  await expect(page.getByRole("button", { name: "Begin journey" })).toBeDisabled();
+  await expect(page.getByRole("button", { name: "Begin journey" })).toHaveCount(0);
   const chosen = (await state(page)).starterOffers[0]!;
   const name = species(chosen).name;
   await page.getByRole("button", { name: `Recruit ${name}`, exact: true }).click();
-  await page.getByRole("button", { name: "Begin journey" }).click();
   expect((await state(page)).phase).toBe("teamSelection");
   const destination = page.locator(".app:not([inert]) [data-encounter]").first();
   const deckCards = (await state(page)).cards;
@@ -43,7 +42,6 @@ test("one starter grows a lineup through a full expedition", async ({ page }) =>
   const chosen = (await state(page)).starterOffers[0]!;
   const name = species(chosen).name;
   await activate(page.getByRole("button", { name: `Recruit ${name}`, exact: true }));
-  await activate(page.getByRole("button", { name: "Begin journey", exact: true }));
   expect((await state(page)).lineup).toEqual(["ally-0"]);
   let deployedThree = false;
   for (let i = 0; i < FULL_JOURNEY_COMMAND_BUDGET; i++) {

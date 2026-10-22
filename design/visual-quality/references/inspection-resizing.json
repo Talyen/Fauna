@@ -1,0 +1,95 @@
+{
+  "status": "User-directed sizing implemented; rendered appearance not separately accepted",
+  "browser": "Chromium",
+  "reducedMotion": true,
+  "cases": [
+    {
+      "width": 1280,
+      "height": 720,
+      "scale": 1.25,
+      "hero": {
+        "x": 525.296875,
+        "y": 163.921875,
+        "width": 229.390625,
+        "height": 172.03125
+      },
+      "ability": {
+        "x": 470.359375,
+        "y": 347.953125,
+        "width": 105.09375,
+        "height": 140.125
+      },
+      "previousHero": {
+        "x": 496.625,
+        "y": 154.09375,
+        "width": 286.734375,
+        "height": 215.046875
+      },
+      "creatureRatio": 0.8000108985886327,
+      "abilityRatio": 1.2,
+      "starterButton": {
+        "x": 823.515625,
+        "y": 457.984375,
+        "width": 107.59375,
+        "height": 44
+      },
+      "errors": []
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "scale": 1,
+      "hero": {
+        "x": 768,
+        "y": 240.8125,
+        "width": 384,
+        "height": 288
+      },
+      "ability": {
+        "x": 674.40625,
+        "y": 540.8125,
+        "width": 182.390625,
+        "height": 243.1875
+      },
+      "previousHero": {
+        "x": 720,
+        "y": 225.078125,
+        "width": 480,
+        "height": 360
+      },
+      "creatureRatio": 0.8,
+      "abilityRatio": 1.199938322368421,
+      "starterButton": {
+        "x": 1207.609375,
+        "y": 657.984375,
+        "width": 86.078125,
+        "height": 44
+      },
+      "errors": []
+    }
+  ],
+  "checks": [
+    "creature width is 80% of prior width",
+    "individual ability width is 120% of prior width",
+    "centered artwork with different outer widths and native ratios",
+    "starter Recruit buttons fit content",
+    "no Begin journey control",
+    "final Recruit starts journey",
+    "three-choice and first-journey recruitment",
+    "ability hover and enlargement",
+    "Escape and focus return",
+    "save and resume",
+    "no layout violations or page errors"
+  ],
+  "limits": [
+    "full CI not run locally",
+    "no native desktop, Windows package, physical controller, Steam or Steam Deck verification"
+  ],
+  "sourceHashes": {
+    "src/ui/inspection/inspection.tsx": "b13c4af5d7cffc1dad8e86dbeadd8856cc645c6b6e8670961ab0b677ce4254f1",
+    "src/ui/inspection/inspection.css": "dc8581daed153338f01cca8402e9f65be3b7f7c8988a4451066f11108f229dcf",
+    "src/ui/tokens.css": "1fb8563b73df80a218bec18bfc166e06e5ad3c73b4e12418f531937c1eb74d4f",
+    "src/ui/expedition/draft.tsx": "519677aa349eb2501b80e9b337970fac24f138977fddaf8e596c94b7feb805fb",
+    "src/ui/expedition/expedition.css": "c8da96a2dcea43a98ec60af5999e0b1184a830837a2661022953aaeae4146d8d"
+  }
+}
