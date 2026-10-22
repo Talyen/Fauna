@@ -70,6 +70,22 @@ function open(game = fixture(), navigation = false) {
     view.container.querySelector<HTMLButtonElement>(`.hand [data-effect="${effect}"]`)!;
   return { ...view, send, controls, card };
 }
+it("activates Seedling Circle for the whole allied row without requiring a recipient", async () => {
+  const game = produce(teamRun(1, ["ringpalm", "mossguard", "prismram"]), (draft) => {
+    const circle = draft.cards.find((card) => card.definitionId === "ringpalm-teamProtection")!;
+    draft.battle!.hand = [circle.id];
+    draft.battle!.buffer = [];
+    draft.battle!.discard = [];
+    draft.battle!.draw = draft.cards.filter((card) => card.id !== circle.id).map((card) => card.id);
+  });
+  const { container, send, card } = open(game);
+  await userEvent.click(card("teamProtection"));
+  expect(container.querySelectorAll(".player-row [data-active-target]")).toHaveLength(3);
+  expect(container.querySelectorAll(".player-row .target-preview")).toHaveLength(3);
+  expect(send).not.toHaveBeenCalled();
+  await userEvent.click(screen.getByRole("button", { name: /^Play/ }));
+  expect(send.mock.calls).toEqual([[{ type: "play", cardId: game.battle!.hand[0]! }]]);
+});
 it("mouse selection waits for hover, clears on leave, switches cards, and cancels without commands", async () => {
   const { container, send, card } = open();
   await userEvent.click(card("attack"));

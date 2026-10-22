@@ -3,7 +3,7 @@ import { actionValue, cardCost, physicalBonus } from "../game/rules";
 import { definition, species } from "../game/content";
 import type { Command, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 10;
+export const BATTLE_POLICY_VERSION = 11;
 /** Only visible information enters scoring; no forecasts or gameplay RNG are sampled. */
 export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
   if (state.phase !== "battle" || !state.battle) return [];
@@ -75,10 +75,16 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
       add(id, 200 + value);
     } else if (def.effect === "teamCleanse") {
       add(id, 150);
-    } else if (def.effect === "teamGuard") {
+    } else if (def.effect === "teamGuard" || def.effect === "teamProtection") {
       const useful = state.team
         .filter((c) => c.health > 0)
-        .reduce((n, c) => n + Math.max(0, value - c.block), 0);
+        .reduce(
+          (n, c) =>
+            n +
+            Math.max(0, value - c.block) +
+            (def.effect === "teamProtection" ? Math.max(0, value - (c.combat?.thorns ?? 0)) : 0),
+          0,
+        );
       add(id, useful > 0 ? 100 + useful : 0);
     } else if (def.effect === "nullify") {
       const useful = state.team.filter((c) => c.health > 0 && !c.combat?.nullify).length;

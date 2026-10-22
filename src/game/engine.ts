@@ -413,6 +413,15 @@ function hushDome(state: GameState, enemy: boolean, events: GameEvent[]) {
   }
 }
 
+function teamProtection(state: GameState, enemy: boolean, amount: number, events: GameEvent[]) {
+  const block = roll(state) < 0.5;
+  for (const unit of enemy ? state.battle!.enemies : state.team) {
+    if (unit.health <= 0) continue;
+    if (block) grantBlock(state, unit, amount, events);
+    else grantStatus(unit, "thorns", amount, events, state);
+  }
+}
+
 function applyExtras(
   state: GameState,
   actor: import("./combat").Combatant,
@@ -540,10 +549,12 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
         text: `${enemy.name} uses ${def.name}.`,
       });
       const encoreRepeat = encore(draft, enemy);
-      for (let play = 0; play < (encoreRepeat ? 2 : 1); play++) {
+      const abilityRepeat = def.repeatChance !== undefined && roll(draft) < def.repeatChance / 100;
+      for (let play = 0; play < (encoreRepeat || abilityRepeat ? 2 : 1); play++) {
         if (
           enemy.health <= 0 ||
-          (def.effect === "attack" && def.target !== "allEnemies" && target.health <= 0)
+          (def.effect === "attack" &&
+            (def.target === "allEnemies" ? !living(draft).length : target.health <= 0))
         )
           break;
         if (play === 1)
@@ -551,7 +562,7 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
             kind: "action",
             actionType: "support",
             actorId: enemy.id,
-            text: `${enemy.name} repeats ${def.name} with Encore`,
+            text: `${enemy.name} repeats ${def.name}${encoreRepeat ? " with Encore" : ""}`,
           });
         const criticalBonus = def.effect === "attack" ? openingCriticalBonus(draft, enemy) : 0;
         const blindMiss = def.effect === "attack" ? beginAttack(draft, enemy) : false;
@@ -581,6 +592,8 @@ function finishTurn(draft: GameState, events: GameEvent[]) {
             removeEffects(recipient, "cleanse", value, events, draft);
         } else if (def.effect === "nullify") {
           hushDome(draft, true, events);
+        } else if (def.effect === "teamProtection") {
+          teamProtection(draft, true, value, events);
         } else if (def.effect === "dodge") {
           grantTemporaryDodge(enemy, value, events);
         } else if (def.effect === "swap") {
@@ -875,21 +888,25 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
           ["stun", "stun.jarring-blow"],
         ] as const;
         const encoreRepeat = encore(draft, actor);
+        const abilityRepeat = def.repeatChance !== undefined && roll(draft) < def.repeatChance / 100;
         const repeat = repeatTalents.some(
           ([keyword, talent]) => keywords.includes(keyword) && hasTalent(draft, talent) && roll(draft) < 0.1,
         );
-        for (let play = 0; play < (repeat || encoreRepeat ? 2 : 1); play++) {
+        for (let play = 0; play < (repeat || encoreRepeat || abilityRepeat ? 2 : 1); play++) {
           if (
             actor.health <= 0 ||
-            (def.effect === "attack" && def.target !== "allEnemies" && (!target || target.health <= 0))
+            (def.effect === "attack" &&
+              (def.target === "allEnemies"
+                ? battle.enemies.every((enemy) => enemy.health <= 0)
+                : !target || target.health <= 0))
           )
             break;
-          if (play === 1 && encoreRepeat)
+          if (play === 1 && (encoreRepeat || abilityRepeat))
             events.push({
               kind: "action",
               actionType: "support",
               actorId: actor.id,
-              text: `${species(actor.species).name} repeats ${def.name} with Encore`,
+              text: `${species(actor.species).name} repeats ${def.name}${encoreRepeat ? " with Encore" : ""}`,
             });
           const criticalBonus = def.effect === "attack" ? openingCriticalBonus(draft, actor) : 0;
           const blindMiss = def.effect === "attack" ? beginAttack(draft, actor) : false;
@@ -943,6 +960,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
           if (def.effect === "teamCleanse")
             for (const recipient of living(draft)) removeEffects(recipient, "cleanse", value, events, draft);
           if (def.effect === "nullify") hushDome(draft, false, events);
+          if (def.effect === "teamProtection") teamProtection(draft, false, value, events);
           if (def.effect === "dodge") grantTemporaryDodge(actor, value, events);
           if (def.effect === "swap") swapFromCard(draft, actor, events);
           applyExtras(draft, actor, def, events, false, target, blindMiss, criticalBonus);

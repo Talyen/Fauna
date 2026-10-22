@@ -1351,6 +1351,50 @@
       "aspect": [3, 4],
       "provenance": "Unchanged Shadebrim artwork selected from user Google Drive: https://drive.google.com/file/d/1h7XAGAL8CqD79TbtzcKP3gR5gci0VnpO/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "creature.ringpalm",
+      "origin": "repository",
+      "source": "public/art/ringpalm/portrait.png",
+      "output": "art/ringpalm/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Ringpalm artwork selected from user Google Drive: https://drive.google.com/file/d/1-CQIjrUj481RnLcUz3hJ6LdmxFbuNopV/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.ringpalm.ringclap",
+      "origin": "repository",
+      "source": "public/art/ringpalm/ringclap.png",
+      "output": "art/ringpalm/ringclap.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Ringpalm artwork selected from user Google Drive: https://drive.google.com/file/d/1aNxm5EDm1FFncdKkcnjXZq5MKMIRlI7w/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.ringpalm.harmonic-set",
+      "origin": "repository",
+      "source": "public/art/ringpalm/harmonic-set.png",
+      "output": "art/ringpalm/harmonic-set.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Ringpalm artwork selected from user Google Drive: https://drive.google.com/file/d/1uWwhlj5pGLSVeQliD2vNGdkn6f13USW-/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.ringpalm.seedling-circle",
+      "origin": "repository",
+      "source": "public/art/ringpalm/seedling-circle.png",
+      "output": "art/ringpalm/seedling-circle.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Ringpalm artwork selected from user Google Drive: https://drive.google.com/file/d/1uhRllN3wMJOB84iTWG7Io7SrSN6Z4bkX/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

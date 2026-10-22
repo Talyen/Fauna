@@ -742,6 +742,33 @@ export function hit(
   const lost = resolveHit(state, source, target, value, type, events, options);
   if (
     lost !== undefined &&
+    lost > 0 &&
+    type === "stun" &&
+    source.health > 0 &&
+    target.health > 0 &&
+    !options.periodic &&
+    !options.retaliation &&
+    !options.derived &&
+    !options.resonance
+  ) {
+    const chance = creaturePassive("maxHealth" in source ? undefined : state, source.species).effects.reduce(
+      (total, effect) => total + (effect.kind === "resonance" ? effect.amount : 0),
+      0,
+    );
+    if (chance > 0 && roll(state) < chance / 100) {
+      events.push({
+        kind: "action",
+        actionType: "support",
+        actorId: source.id,
+        targetId: target.id,
+        text: `${unitName(source)} repeats Stun damage with Resonance`,
+      });
+      // Repeat the packet once, retaining Stun buildup but suppressing attack proc chains.
+      hit(state, source, target, value, type, events, { ...options, proc: true, resonance: true });
+    }
+  }
+  if (
+    lost !== undefined &&
     type === "light" &&
     !options.periodic &&
     !options.retaliation &&
@@ -771,6 +798,7 @@ function resolveHit(
     leech?: boolean;
     cardLeech?: boolean;
     proc?: boolean;
+    resonance?: boolean;
   } = {},
 ): number | undefined {
   if ((source.health <= 0 && !options.periodic && !options.derived) || target.health <= 0 || value <= 0)

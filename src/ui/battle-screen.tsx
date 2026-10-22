@@ -100,6 +100,7 @@ export function BattleScreen({
     (def?.effect === "heal" && def.target === "mostInjured");
   const allAllies =
     def?.effect === "teamGuard" ||
+    def?.effect === "teamProtection" ||
     def?.effect === "teamCleanse" ||
     def?.effect === "nullify" ||
     (def?.effect === "heal" && def.target === "allAllies");

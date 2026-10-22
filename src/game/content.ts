@@ -13,9 +13,11 @@ export type SpeciesId =
   | "chimecricket"
   | "dawncall"
   | "bloomquail"
-  | "shadebrim";
+  | "shadebrim"
+  | "ringpalm";
 type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
+  | { kind: "resonance"; amount: number }
   | { kind: "teamBurnResistance"; amount: number }
   | { kind: "blockConversion"; amount: number }
   | { kind: "blockRetention"; amount: number }
@@ -62,6 +64,7 @@ interface CardBase {
   cost: 1;
   artwork?: string;
   leech?: boolean;
+  repeatChance?: number;
   effects?: readonly CardEffect[];
 }
 export type CardDefinition = CardBase &
@@ -539,6 +542,40 @@ export const SPECIES: readonly Species[] = [
     ],
   },
   {
+    id: "ringpalm",
+    name: "Ringpalm",
+    title: "The stone-circle guardian",
+    health: 30,
+    color: "#9ead70",
+    trait: "Resonance",
+    passiveTiers: [
+      {
+        description: "Ringpalm’s Stun damage has a 10% chance to repeat",
+        effects: [{ kind: "resonance", amount: 10 }],
+      },
+      {
+        description: "Ringpalm’s Stun damage has a 20% chance to repeat",
+        effects: [{ kind: "resonance", amount: 20 }],
+      },
+      {
+        description: "Ringpalm’s Stun damage has a 30% chance to repeat",
+        effects: [{ kind: "resonance", amount: 30 }],
+      },
+      {
+        description: "Ringpalm’s Stun damage has a 40% chance to repeat",
+        effects: [{ kind: "resonance", amount: 40 }],
+      },
+      {
+        description: "Ringpalm’s Stun damage has a 50% chance to repeat",
+        effects: [{ kind: "resonance", amount: 50 }],
+      },
+      {
+        description: "Ringpalm’s Stun damage has a 60% chance to repeat",
+        effects: [{ kind: "resonance", amount: 60 }],
+      },
+    ],
+  },
+  {
     id: "shadebrim",
     name: "Shadebrim",
     title: "The cool refuge",
@@ -601,6 +638,22 @@ const attack = (
   damageType,
 });
 export const CARDS: readonly CardDefinition[] = [
+  {
+    ...attack("ringpalm", "Ringclap", 6, "stun"),
+    artwork: "action.ringpalm.ringclap",
+  },
+  {
+    ...attack("ringpalm", "Harmonic Set", 1, "stun"),
+    id: "ringpalm-harmonic-set",
+    target: "allEnemies",
+    effects: [{ kind: "status", status: "armor", amount: 1 }],
+    repeatChance: 20,
+    artwork: "action.ringpalm.harmonic-set",
+  },
+  {
+    ...card("ringpalm", "Seedling Circle", "teamProtection", 2),
+    artwork: "action.ringpalm.seedling-circle",
+  },
   {
     ...card("dawncall", "Dawn Cry", "teamCleanse", 1),
     effects: [{ kind: "draw", amount: 1 }],
@@ -865,6 +918,9 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
     case "teamGuard":
       text = `Allies gain ${value} Block`;
       break;
+    case "teamProtection":
+      text = `Grant all allies ${value} Block or Thorns`;
+      break;
   }
   for (const effect of card.effects ?? []) {
     text +=
@@ -894,6 +950,7 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
                           : `${effect.kind === "cleanse" ? "Cleanse acting creature" : "Purge target"}: remove ${effect.amount} effect${effect.amount === 1 ? "" : "s"}`);
   }
   if (card.leech) text += "; Leech";
+  if (card.repeatChance) text += `; ${card.repeatChance}% chance to repeat`;
   return text;
 }
 /** Stable legacy route; new expeditions use the saved packs in encounters.ts. */

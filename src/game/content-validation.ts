@@ -97,6 +97,11 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
       error(card.id, "alternateDamageType", "Unknown alternate damage type.");
     for (const tag of [card.leech])
       if (tag !== undefined && typeof tag !== "boolean") error(card.id, "tags", "Invalid card tag.");
+    if (
+      card.repeatChance !== undefined &&
+      (!Number.isSafeInteger(card.repeatChance) || card.repeatChance < 1 || card.repeatChance > 100)
+    )
+      error(card.id, "repeatChance", "Repeat chance must be a whole percentage from 1 to 100.");
     for (const effect of card.effects ?? []) {
       if (!Number.isSafeInteger(effect.amount) || effect.amount < 1 || effect.amount > 100)
         error(card.id, "effects", "Unsupported supplemental amount.");

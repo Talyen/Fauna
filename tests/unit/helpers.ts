@@ -138,7 +138,9 @@ export function policy(s: GameState): Command {
       ...(def.effect === "heal" && !def.target ? { targetId: injured.id } : {}),
     };
   }
-  const teamGuard = cards.find((c) => ["teamGuard", "nullify"].includes(definition(c.definitionId).effect));
+  const teamGuard = cards.find((c) =>
+    ["teamGuard", "teamProtection", "nullify"].includes(definition(c.definitionId).effect),
+  );
   if (teamGuard) return { type: "play", cardId: teamGuard.id };
   const guard = cards.find((c) => definition(c.definitionId).effect === "guard");
   if (guard) {
