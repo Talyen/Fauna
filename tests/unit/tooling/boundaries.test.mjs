@@ -94,3 +94,20 @@ it("keeps the shared ability executor behind application commands", () => {
     boundaryViolations("src/ui/battle/fixture.ts", 'import {previewPlay} from "../../game/preview"'),
   ).toEqual([]);
 });
+
+it("keeps shared presentation independent of feature compositions", () => {
+  for (const source of [
+    'import {CombatStatus} from "../battle/combat-status"',
+    'export * from "@/ui/collection/collection"',
+    'import("@/ui/battle/target-preview")',
+  ])
+    expect(boundaryViolations("src/ui/shared/fixture.tsx", source)).toEqual([
+      "src/ui/shared/fixture.tsx: Shared presentation cannot import feature owners.",
+    ]);
+  expect(
+    boundaryViolations(
+      "src/ui/shared/fixture.tsx",
+      'import {CombatStatus} from "./combat-status"; import {useSurfaceRef} from "../infrastructure/surface-ref";',
+    ),
+  ).toEqual([]);
+});

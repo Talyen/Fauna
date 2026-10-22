@@ -1,7 +1,7 @@
-import { CombatStatus } from "../battle/combat-status";
+import { CombatStatus } from "./combat-status";
 import { assetUrl } from "./assets";
 import { useEffect, useState, type ReactNode } from "react";
-import { BattleReadout } from "../battle/target-preview";
+import { BattleReadout } from "./battle-readout";
 import { ArtCard } from "./art-card";
 import { ActionDetails, CreatureDetails } from "./card-details";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";

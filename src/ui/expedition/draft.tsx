@@ -1,5 +1,5 @@
 import { Screen, ScreenHeading } from "../shared/screen";
-import { starterCount } from "../../game/engine";
+import { starterCount } from "../../game/progression";
 
 import { StarterDetails } from "../shared/card-details";
 

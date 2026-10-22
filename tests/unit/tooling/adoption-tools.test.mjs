@@ -20,6 +20,22 @@ import { context, sections } from "../../../scripts/agent/agent-context.mjs";
 import { performanceBuildIdentity } from "../../../scripts/performance/run-performance.mjs";
 import { isolatedDesktopEnvironment } from "../../../scripts/lib/desktop-environment.mjs";
 
+it("finds gameplay and presentation owners from current modules and focused suites", () => {
+  const root = path.resolve(import.meta.dirname, "../../..");
+  for (const file of [
+    "src/game/abilities.ts",
+    "src/game/ability-values.ts",
+    "src/game/card-zones.ts",
+    "src/game/random.ts",
+    "tests/unit/game/combat.test.ts",
+  ])
+    expect(context(root, [file]).topics).toContain("combat");
+  expect(context(root, ["src/game/support.ts"]).topics).toContain("progression");
+  const collection = context(root, ["tests/unit/ui/collection-ui.test.tsx"]);
+  expect(collection.topics).toEqual(expect.arrayContaining(["ui", "progression", "tooling"]));
+  expect(collection.entries).toContain("src/ui/App.tsx");
+});
+
 it("identifies the complete performance artifact, including desktop code, save format and media", async () => {
   const root = mkdtempSync(path.join(os.tmpdir(), "fauna-performance-build-"));
   const files = {

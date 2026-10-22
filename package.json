@@ -12,7 +12,7 @@
     "dev": "node scripts/dev/dev.mjs",
     "dev:desktop": "node scripts/dev/dev-desktop.mjs",
     "check": "node scripts/checks/check.mjs",
-    "check:full": "tsc --noEmit && oxlint src tests scripts desktop design --deny-warnings && prettier --check . && node scripts/checks/boundaries.mjs && node scripts/checks/ui-contract.mjs && npm run deadcode",
+    "check:full": "npm run check:types && oxlint src tests scripts desktop design --deny-warnings && prettier --check . && node scripts/checks/boundaries.mjs && node scripts/checks/ui-contract.mjs && npm run deadcode",
     "format": "prettier --write .",
     "test": "node scripts/checks/run-local-tests.mjs",
     "test:full": "vitest run",
@@ -52,7 +52,8 @@
     "verify:release": "node scripts/release/verify-release.mjs",
     "generate:patch-notes": "node scripts/release/generate-patch-notes.mjs",
     "assets:check:bundle": "node scripts/assets/active-assets.mjs",
-    "assets:review": "node scripts/assets/art-review.mjs"
+    "assets:review": "node scripts/assets/art-review.mjs",
+    "check:types": "tsc --noEmit -p tsconfig.game.json && tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.test.json"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.3.0",

@@ -4,9 +4,6 @@ import { definitionKeywords } from "./keywords";
 import { abilityExtras, scalePower } from "./ability-values";
 import {
   combat,
-  roll,
-  fillHand,
-  HAND_LIMIT,
   grantBlock,
   grantStatus,
   grantArmor,
@@ -14,7 +11,6 @@ import {
   triggerArmorBreak,
   applyBlind,
   removeEffects,
-  draw,
   gainMana,
   beginAttack,
   openingCriticalBonus,
@@ -24,6 +20,8 @@ import {
   removeFreezeBuildup,
   type Combatant,
 } from "./combat";
+import { roll } from "./random";
+import { fillHand, MAX_HAND_SIZE, draw } from "./card-zones";
 import type { Creature, Enemy, GameState, GameEvent } from "./types";
 
 type AbilityAction = {
@@ -69,7 +67,7 @@ function recoverDiscard(state: GameState, events: GameEvent[]) {
   const index = Math.floor(roll(state) * battle.discard.length);
   const id = battle.discard.splice(index, 1)[0]!;
   fillHand(state);
-  (battle.hand.length < HAND_LIMIT ? battle.hand : battle.buffer).push(id);
+  (battle.hand.length < MAX_HAND_SIZE ? battle.hand : battle.buffer).push(id);
   const card = state.cards.find((entry) => entry.id === id)!;
   events.push({
     kind: "action",

@@ -1,11 +1,12 @@
-import { cardKeywords, hasTalent, creaturePassive } from "./progression";
+import { roll } from "./random";
+import { draw, drawKeyword } from "./card-zones";
+import { hasTalent, creaturePassive } from "./progression";
 import { physicalBonus } from "./rules";
 import { species, type DamageType } from "./content";
 import type { CombatState, Creature, Enemy, GameEvent, GameState } from "./types";
 
 export const TURN_MANA = 4;
 export const TURN_DRAW = 4;
-export const HAND_LIMIT = 7;
 const STACK_LIMIT = 1_000_000;
 export type Combatant = Creature | Enemy;
 export function freshCombat(): CombatState {
@@ -48,10 +49,6 @@ export function freshCombat(): CombatState {
 }
 export function combat(unit: Combatant): CombatState {
   return unit.combat ?? (unit.combat = freshCombat());
-}
-export function roll(state: GameState) {
-  state.rng = (Math.imul(state.rng, 1664525) + 1013904223) >>> 0;
-  return state.rng / 4294967296;
 }
 const maximumHealth = (unit: Combatant) =>
   "maxHealth" in unit ? unit.maxHealth : species(unit.species).health;
@@ -224,28 +221,6 @@ function gainGold(state: GameState, amount: number, events: GameEvent[]) {
   state.battle.earnedGold += gained;
   if (state.journey) state.journey.currency = Math.min(STACK_LIMIT, state.journey.currency + gained);
   if (gained) events.push({ kind: "reward", amount: gained, text: `Gain ${gained} Gold.` });
-}
-export function drawKeyword(state: GameState, keyword: "light" | "nature" | "water") {
-  const battle = state.battle;
-  if (!battle) return;
-  fillHand(state);
-  const eligible = (id: string) => {
-    const card = state.cards.find((c) => c.id === id)!;
-    return (
-      state.team.some((c) => c.id === card.ownerId && c.health > 0) && cardKeywords(card).includes(keyword)
-    );
-  };
-  if (!battle.draw.some(eligible)) {
-    const available = battle.discard.filter(eligible);
-    battle.discard = battle.discard.filter((id) => !eligible(id));
-    battle.draw.push(...shuffle(state, available));
-  }
-  let index = battle.draw.length - 1;
-  while (index >= 0 && !eligible(battle.draw[index]!)) index--;
-  if (index >= 0) {
-    const id = battle.draw.splice(index, 1)[0]!;
-    (battle.hand.length < HAND_LIMIT ? battle.hand : battle.buffer).push(id);
-  }
 }
 export function grantArmor(state: GameState, unit: Combatant, amount: number, events: GameEvent[]) {
   if (unit.health <= 0 || amount <= 0) return;
@@ -1342,37 +1317,4 @@ export function startAction(unit: Combatant, events: GameEvent[], state?: GameSt
     }
   } else if (stats.cooldown > 0) stats.cooldown--;
   return !stats.skipped;
-}
-
-export function shuffle<T>(state: GameState, cards: T[]): T[] {
-  for (let i = cards.length - 1; i > 0; i--) {
-    const j = Math.floor(roll(state) * (i + 1));
-    [cards[i], cards[j]] = [cards[j]!, cards[i]!];
-  }
-  return cards;
-}
-export function fillHand(state: GameState) {
-  const battle = state.battle!;
-  while (battle.hand.length < HAND_LIMIT && battle.buffer.length) battle.hand.push(battle.buffer.shift()!);
-}
-export function draw(state: GameState, count: number) {
-  fillHand(state);
-  const b = state.battle!;
-  // Knocked-out owners retain inert slots, so replacing them cannot refresh spent cards.
-  const alive = state.team.filter((c) => c.health > 0);
-  const eligible = (id: string) =>
-    !alive.length || alive.some((c) => c.id === state.cards.find((card) => card.id === id)?.ownerId);
-  for (let i = 0; i < count; i++) {
-    if (!b.draw.some(eligible)) {
-      const available = b.discard.filter(eligible);
-      b.discard = b.discard.filter((id) => !eligible(id));
-      b.draw.push(...shuffle(state, available));
-    }
-    let index = b.draw.length - 1;
-    while (index >= 0 && !eligible(b.draw[index]!)) index--;
-    if (index < 0) break;
-    const card = b.draw.splice(index, 1)[0]!;
-    if (b.hand.length < HAND_LIMIT) b.hand.push(card);
-    else b.buffer.push(card);
-  }
 }

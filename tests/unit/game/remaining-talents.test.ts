@@ -4,12 +4,12 @@ import {
   grantArmor,
   grantBlock,
   gainMana,
-  drawKeyword,
   hit,
   restoreHealth,
   startAction,
   tickStatuses,
 } from "../../../src/game/combat";
+import { drawKeyword } from "../../../src/game/card-zones";
 import * as content from "../../../src/game/content";
 import { definition, species } from "../../../src/game/content";
 import { beginBattle, dispatch } from "../../../src/game/engine";

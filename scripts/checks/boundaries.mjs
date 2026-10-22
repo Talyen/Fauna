@@ -70,6 +70,13 @@ export function boundaryViolations(file, source) {
         : specifier;
     const within = (dir) => target.startsWith(`src/${dir}/`);
     if (
+      file.startsWith("src/ui/shared/") &&
+      within("ui") &&
+      !within("ui/shared") &&
+      !within("ui/infrastructure")
+    )
+      fail("Shared presentation cannot import feature owners.");
+    if (
       (utility || infrastructure || primitive) &&
       (within("game") ||
         within("application") ||

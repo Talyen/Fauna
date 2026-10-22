@@ -1,11 +1,11 @@
 import { creaturePassive } from "../../game/progression";
-import { CombatStatus } from "../battle/combat-status";
+import { CombatStatus } from "./combat-status";
 import { KeywordText } from "./keyword-text";
 import { CARDS, definition, enemyCard, species, type SpeciesId } from "../../game/content";
 import { definitionKeywords, keywordLabel } from "../../game/keywords";
 import { actionValue, cardCost, physicalBonus } from "../../game/rules";
 import type { Creature, Card, GameState } from "../../game/types";
-import { CardRules } from "../battle/combat-values";
+import { CardRules } from "./combat-values";
 export function StarterDetails({ game, kind }: { game: GameState; kind: SpeciesId }) {
   const creature = species(kind);
   const actions = CARDS.filter((card) => card.species === kind);
