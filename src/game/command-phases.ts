@@ -12,7 +12,7 @@ const all = [
   "defeat",
 ] as const;
 const destinations = ["teamSelection", "recruit", "boon", "campfire", "support"] as const;
-/** Command admission uses the same exhaustive phase table as lifecycle regression coverage. */
+/** One exhaustive phase gate precedes command-specific validation and mutation. */
 export const commandPhases = {
   draft: ["draft"],
   start: ["draft"],

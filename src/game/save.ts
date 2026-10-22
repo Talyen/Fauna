@@ -1,7 +1,7 @@
 import { needsCampfire, merchantPrice } from "./support";
 import { freeze } from "immer";
 import { MAX_HAND_SIZE } from "./card-zones";
-import { starterCount, collectedSpecies, MAX_CREATURE_STARS, KEYWORDS, talentPoints } from "./progression";
+import { starterCount, collectedSpecies, KEYWORDS, talentPoints } from "./progression";
 import { gameStateSchema } from "./state-schema";
 import { CARDS, SPECIES, FIRST_RUN_STARTERS, species, TALENTS } from "./content";
 import { encounterPacks, encounterSource, finalEncounter, bossEncounter } from "./encounters";

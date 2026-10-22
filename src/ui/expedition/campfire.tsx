@@ -5,11 +5,11 @@ import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { PagedItems } from "../shared/navigation/pagination";
 import { campfireRecovery } from "../../game/support";
 import { species } from "../../game/content";
-import type { Command, GameState, GameEvent } from "../../game/types";
+import type { Command, GameState, GameEvent, StateAt } from "../../game/types";
 import { Button } from "../../components/ui/button";
 import { AllyCard } from "../shared/cards/cards";
 import { KeywordText } from "../shared/keyword-text";
-export function Campfire({ game, send }: { game: GameState; send: (command: Command) => boolean }) {
+export function Campfire({ game, send }: { game: StateAt<"campfire">; send: (command: Command) => boolean }) {
   const creatures = [...game.team, ...game.reserves];
   return (
     <Screen className="campfire-screen">

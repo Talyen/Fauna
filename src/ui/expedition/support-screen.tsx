@@ -1,7 +1,7 @@
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { useLayoutEffect, useRef } from "react";
 import { Coins, Tag } from "lucide-react";
-import type { Command, GameState } from "../../game/types";
+import type { Command, GameState, StateAt } from "../../game/types";
 import { canVisitMerchant } from "../../game/support";
 import { BOONS } from "../../game/content";
 import { Button } from "../../components/ui/button";
@@ -25,8 +25,8 @@ export function SupportOffer({ game, send }: { game: GameState; send: (c: Comman
   );
 }
 
-export function SupportScreen({ game, send }: { game: GameState; send: (c: Command) => boolean }) {
-  const visit = game.support!;
+export function SupportScreen({ game, send }: { game: StateAt<"support">; send: (c: Command) => boolean }) {
+  const visit = game.support;
   const purchased = BOONS.find((boon) => boon.id === visit.purchased);
   const leave = useRef<HTMLButtonElement>(null);
   useLayoutEffect(() => {

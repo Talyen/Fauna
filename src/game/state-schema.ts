@@ -108,9 +108,11 @@ const shared = z.object({
   wins: natural,
   selected: z.array(speciesId).max(3),
   starterOffers: z.array(speciesId).max(3),
+  /** Species counts, including copies; individual state lives in team and reserves. */
   roster: z.array(speciesId).max(5),
   team: z.array(creature).max(3),
   reserves: z.array(creature).max(2),
+  /** Creature IDs in starting order, independent of tactical combat swaps. */
   lineup: z.array(id).max(3),
   cards: z
     .array(

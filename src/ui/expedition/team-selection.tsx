@@ -12,12 +12,16 @@ import { CreatureDetails } from "../shared/cards/card-details";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
 import { ArtCard } from "../shared/cards/art-card";
 
-import type { Command, GameState, GameEvent } from "../../game/types";
+import type { Command, StateAt, GameEvent } from "../../game/types";
 import type { Inspection } from "../shared/inspection-model";
 
 import { BattleEarnings } from "../battle/battle-earnings";
 import { bossEncounter, encounterSource, JOURNEY_LENGTH } from "../../game/encounters";
-type Props = { game: GameState; send: (command: Command) => boolean; inspect: (item: Inspection) => void };
+type Props = {
+  game: StateAt<"teamSelection">;
+  send: (command: Command) => boolean;
+  inspect: (item: Inspection) => void;
+};
 export function TeamSelection({ game, send, recovery }: Props & { recovery?: GameEvent[] }) {
   const boss = bossEncounter(game);
   const bossEnemy = boss ? encounterSource(game).enemies[0]! : null;

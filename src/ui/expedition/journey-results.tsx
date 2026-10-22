@@ -3,9 +3,9 @@ import { ResultPresentation, AnimatedNumber } from "./result-presentation";
 import { EmptyState } from "../shared/empty-state";
 import { Coins } from "lucide-react";
 import { Button } from "../../components/ui/button";
-import type { GameState } from "../../game/types";
+import type { StateAt } from "../../game/types";
 import { KeywordProgressGrid } from "../shared/keyword-progress-grid";
-export function JourneyResults({ game, home }: { game: GameState; home: () => void }) {
+export function JourneyResults({ game, home }: { game: StateAt<"victory" | "defeat">; home: () => void }) {
   const summary = game.journey;
   const title =
     game.phase === "victory"
