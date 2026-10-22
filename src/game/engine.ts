@@ -239,7 +239,7 @@ function finishBattle(state: GameState, defeated: boolean) {
     if (outcome !== "next") state.journey.outcome = outcome;
   }
   if (outcome === "victory") {
-    state.wins++;
+    state.wins = Math.min(1_000_000, state.wins + 1);
   }
   const boons =
     defeated || outcome === "victory" || !bossEncounter(state)

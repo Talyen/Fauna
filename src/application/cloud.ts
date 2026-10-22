@@ -155,16 +155,18 @@ export function createCloud(
       update({ status: "Syncing", error: "" });
       try {
         await port.write(cloudName(item), JSON.stringify(item));
-        if (!alive) return;
+        if (!alive || !remoteReady) return;
         const confirmation = await port.read(cloudName(item));
-        if (!alive) return;
+        if (!alive || !remoteReady) return;
         if (!confirmation || (await parseSnapshot(confirmation, item.profile)).id !== item.id)
           throw new Error("Cloud upload could not be verified.");
-        if (!alive) return;
+        if (!alive || !remoteReady) return;
         await port.acknowledge?.(item.id);
+        if (!alive || !remoteReady) return;
         acknowledged = item.id;
         if (current?.id === item.id) update({ status: "Synced" });
       } catch (error) {
+        if (!alive || !remoteReady) return;
         if (!pending) pending = item;
         remoteReady = false;
         update({ status: "Pending", error: errorText(error) });

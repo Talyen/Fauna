@@ -149,3 +149,18 @@ it.each(["control", "reward", "price"])(
     }
   },
 );
+
+it.each([999_999, 1_000_000])("keeps final victory saveable with %s previous wins", (wins) => {
+  const ready = produce(starterJourney(3, "captoad"), (draft) => {
+    draft.encounter = 7;
+    draft.expedition = { pack: 0, recruit: null, lastRoom: null };
+    draft.wins = wins;
+    draft.journey!.victories = 7;
+  });
+  const battle = accept(ready, { type: "beginBattle" });
+  expect(decodeSave(encodeSave(battle))).toEqual(battle);
+  const won = winBattle(battle);
+  expect(won.phase).toBe("victory");
+  expect(won.wins).toBe(1_000_000);
+  expect(decodeSave(encodeSave(won))).toEqual(won);
+});
