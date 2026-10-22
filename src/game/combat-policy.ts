@@ -68,3 +68,5 @@ export function packetPolicy(packet: DamagePacket) {
     }
   }
 }
+
+export type AttackPacket = Extract<DamagePacket, { origin: "ability" | "proc" | "resonance" }>;
