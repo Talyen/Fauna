@@ -241,6 +241,9 @@ jobs:
             scripts
             src
             tests
+      - name: Trust the mounted container checkout
+        if: ${{ needs.prepare.outputs.browser_image != '' }}
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .node-version
@@ -298,6 +301,9 @@ jobs:
             scripts
             src
             tests
+      - name: Trust the mounted container checkout
+        if: ${{ needs.prepare.outputs.browser_image != '' }}
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version-file: .node-version
