@@ -713,3 +713,49 @@ it.each(["write", "read"] as const)(
     }
   },
 );
+
+it.each(["write", "read", "acknowledge"] as const)(
+  "revokes an upload paused at %s after offline takeover and safely retries it",
+  async (stage) => {
+    const f = fixture();
+    await f.manager.start(null);
+    let release!: () => void;
+    const gate = new Promise<void>((resolve) => (release = resolve));
+    let entered!: () => void;
+    const started = new Promise<void>((resolve) => (entered = resolve));
+    const pause = async () => {
+      entered();
+      await gate;
+    };
+    const write = f.port.write;
+    const read = f.port.read;
+    f.port.write = vi.fn(async (name, data) => {
+      if (stage === "write") await pause();
+      await write(name, data);
+    });
+    f.port.read = vi.fn(async (name) => {
+      if (stage === "read") await pause();
+      return read(name);
+    });
+    f.port.acknowledge = vi.fn(async () => {
+      if (stage === "acknowledge") await pause();
+    });
+    try {
+      await f.manager.commit(progress);
+      await started;
+      expect(f.manager.offline()).toBe(true);
+      release();
+      await f.manager.flush();
+      expect(f.port.read).toHaveBeenCalledTimes(stage === "write" ? 0 : 1);
+      expect(f.port.acknowledge).toHaveBeenCalledTimes(stage === "acknowledge" ? 1 : 0);
+      expect(f.manager.view.status).toBe("Pending");
+      await f.manager.retry();
+      await f.manager.flush();
+      expect(f.manager.view.status).toBe("Synced");
+      expect((await parseSnapshot(f.local.data!, identity.profile)).payload).toBe(progress);
+    } finally {
+      release();
+      await f.manager.dispose();
+    }
+  },
+);

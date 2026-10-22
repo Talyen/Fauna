@@ -903,3 +903,35 @@ it.each(["non-string", "throwing"])(
     }
   },
 );
+
+it.each(["timeout", "dispose"] as const)(
+  "does not retry a late save-read failure after %s",
+  async (ending) => {
+    vi.useFakeTimers();
+    let rejectRead!: (error: Error) => void;
+    const p = platform();
+    p.saves.readCandidates = vi.fn(
+      () =>
+        new Promise((_, reject) => {
+          rejectRead = reject;
+        }),
+    );
+    const s = createSession(p);
+    try {
+      const loading = s.load();
+      await vi.advanceTimersByTimeAsync(0);
+      if (ending === "timeout") {
+        await vi.advanceTimersByTimeAsync(5000);
+        await loading;
+        expect(s.store.getState().ready).toBe(true);
+      } else await s.dispose();
+      rejectRead(new Error("late read failure"));
+      await vi.advanceTimersByTimeAsync(0);
+      expect(p.saves.readCandidates).toHaveBeenCalledTimes(1);
+      await loading;
+    } finally {
+      await s.dispose();
+      vi.useRealTimers();
+    }
+  },
+);

@@ -55,13 +55,15 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
     }, 5000);
   };
   const readCandidates = async (retry = false) => {
+    let active = true;
     let timer: ReturnType<typeof setTimeout> | undefined;
     try {
       return await Promise.race([
         Promise.resolve()
           .then(() => platform.saves.readCandidates())
           .catch((error) => {
-            if (retry) return platform.saves.readCandidates();
+            if (retry && active && !disposed && !store.getState().closing)
+              return platform.saves.readCandidates();
             throw error;
           }),
         new Promise<never>((_, reject) => {
@@ -69,6 +71,7 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
         }),
       ]);
     } finally {
+      active = false;
       clearTimeout(timer);
     }
   };
