@@ -94,7 +94,7 @@ export function BattleScreen({
   );
   const card = game.cards.find((c) => c.id === selected),
     def = card ? definition(card.definitionId) : null;
-  const allEnemies = def?.effect === "attack" && def.target === "allEnemies";
+  const allEnemies = def?.effect === "teamBlind" || (def?.effect === "attack" && def.target === "allEnemies");
   const automaticTarget =
     (def?.effect === "attack" && def.target === "randomEnemy") ||
     (def?.effect === "heal" && def.target === "mostInjured");

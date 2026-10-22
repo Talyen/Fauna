@@ -14,10 +14,12 @@ export type SpeciesId =
   | "dawncall"
   | "bloomquail"
   | "shadebrim"
-  | "ringpalm";
+  | "ringpalm"
+  | "glintstride";
 type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
   | { kind: "resonance"; amount: number }
+  | { kind: "wrongFoot"; amount: number }
   | { kind: "teamBurnResistance"; amount: number }
   | { kind: "blockConversion"; amount: number }
   | { kind: "blockRetention"; amount: number }
@@ -609,6 +611,40 @@ export const SPECIES: readonly Species[] = [
       },
     ],
   },
+  {
+    id: "glintstride",
+    name: "Glintstride",
+    title: "A step beyond the shimmer",
+    health: 24,
+    color: "#83c9ce",
+    trait: "Wrong Foot",
+    passiveTiers: [
+      {
+        description: "Glintstride’s attacks deal 1 additional Light damage to Blinded enemies",
+        effects: [{ kind: "wrongFoot", amount: 1 }],
+      },
+      {
+        description: "Glintstride’s attacks deal 2 additional Light damage to Blinded enemies",
+        effects: [{ kind: "wrongFoot", amount: 2 }],
+      },
+      {
+        description: "Glintstride’s attacks deal 3 additional Light damage to Blinded enemies",
+        effects: [{ kind: "wrongFoot", amount: 3 }],
+      },
+      {
+        description: "Glintstride’s attacks deal 4 additional Light damage to Blinded enemies",
+        effects: [{ kind: "wrongFoot", amount: 4 }],
+      },
+      {
+        description: "Glintstride’s attacks deal 5 additional Light damage to Blinded enemies",
+        effects: [{ kind: "wrongFoot", amount: 5 }],
+      },
+      {
+        description: "Glintstride’s attacks deal 6 additional Light damage to Blinded enemies",
+        effects: [{ kind: "wrongFoot", amount: 6 }],
+      },
+    ],
+  },
 ];
 const card = <T extends Exclude<Effect, "attack">>(
   species: SpeciesId,
@@ -638,6 +674,19 @@ const attack = (
   damageType,
 });
 export const CARDS: readonly CardDefinition[] = [
+  {
+    ...attack("glintstride", "Prism Shear", 6, "light"),
+    artwork: "action.glintstride.prism-shear",
+  },
+  {
+    ...card("glintstride", "Mirage Run", "dodge", 30),
+    effects: [{ kind: "draw", amount: 1 }],
+    artwork: "action.glintstride.mirage-run",
+  },
+  {
+    ...card("glintstride", "False Horizon", "teamBlind", 1),
+    artwork: "action.glintstride.false-horizon",
+  },
   {
     ...attack("ringpalm", "Ringclap", 6, "stun"),
     artwork: "action.ringpalm.ringclap",
@@ -902,6 +951,9 @@ export function cardText(card: CardDefinition, level = 0, value = card.value + l
       break;
     case "dodge":
       text = `Gain ${value}% Dodge until your next turn`;
+      break;
+    case "teamBlind":
+      text = "Blind all enemies";
       break;
     case "teamCleanse":
       text = `Cleanse ${value} harmful effect${value === 1 ? "" : "s"} from all allies`;

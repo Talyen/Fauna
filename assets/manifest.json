@@ -1395,6 +1395,50 @@
       "aspect": [3, 4],
       "provenance": "Unchanged Ringpalm artwork selected from user Google Drive: https://drive.google.com/file/d/1uhRllN3wMJOB84iTWG7Io7SrSN6Z4bkX/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "creature.glintstride",
+      "origin": "repository",
+      "source": "public/art/glintstride/portrait.png",
+      "output": "art/glintstride/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Glintstride artwork selected from user Google Drive: https://drive.google.com/file/d/1d6M5AykR0MA979vbp8pp432swPiAFfoS/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.glintstride.prism-shear",
+      "origin": "repository",
+      "source": "public/art/glintstride/prism-shear.png",
+      "output": "art/glintstride/prism-shear.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Glintstride artwork selected from user Google Drive: https://drive.google.com/file/d/1-kPWlO0Vo1kum05qZnREJx9yvE3NkYp7/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.glintstride.mirage-run",
+      "origin": "repository",
+      "source": "public/art/glintstride/mirage-run.png",
+      "output": "art/glintstride/mirage-run.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Glintstride artwork selected from user Google Drive: https://drive.google.com/file/d/1vonf0e7rraFLt3RbWXAKmGtyxAoxZ1Dq/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.glintstride.false-horizon",
+      "origin": "repository",
+      "source": "public/art/glintstride/false-horizon.png",
+      "output": "art/glintstride/false-horizon.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Glintstride artwork selected from user Google Drive: https://drive.google.com/file/d/1XZ_a6Jmmg0iVok-O83STGSEPbew0kwik/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

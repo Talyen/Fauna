@@ -739,7 +739,21 @@ export function hit(
   events: GameEvent[],
   options: Parameters<typeof resolveHit>[6] = {},
 ): number | undefined {
+  const wrongFoot =
+    target.combat?.blind &&
+    !options.periodic &&
+    !options.retaliation &&
+    !options.derived &&
+    !options.proc &&
+    !options.bounced
+      ? creaturePassive("maxHealth" in source ? undefined : state, source.species).effects.reduce(
+          (total, effect) => total + (effect.kind === "wrongFoot" ? effect.amount : 0),
+          0,
+        )
+      : 0;
   const lost = resolveHit(state, source, target, value, type, events, options);
+  if (lost !== undefined && wrongFoot > 0)
+    hit(state, source, target, wrongFoot, "light", events, { proc: true });
   if (
     lost !== undefined &&
     lost > 0 &&
