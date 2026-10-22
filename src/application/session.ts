@@ -268,7 +268,7 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
       quitting = Promise.resolve().then(async () => {
         if ((await prepareClose()) && !disposed) await platform.quit?.();
       });
-      prepareClose();
+      void prepareClose();
       return quitting;
     },
     dispose() {

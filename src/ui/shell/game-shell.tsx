@@ -19,7 +19,7 @@ import { Settings } from "../settings/settings";
 import { useAudioPreferences } from "../settings/audio-preferences";
 import { useGameAudio } from "../audio/game-audio";
 import { JourneyResults } from "../expedition/journey-results";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useEffectEvent, useLayoutEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
 import { flushSync } from "react-dom";
 import { Menu, ArrowLeftRight, Repeat, Pause, FastForward } from "lucide-react";
@@ -220,8 +220,8 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
       if (previousFocus === undefined) delete document.documentElement.dataset.focus;
       else document.documentElement.dataset.focus = previousFocus;
     };
-  }, []);
-  useLayoutEffect(() => {
+  }, [session.store]);
+  const focusScreen = useEffectEvent(() => {
     if (!view.ready || menu || modal || inspection || (route === "play" && mode === "pointer")) return;
     const buttons = Array.from(
       root.current?.querySelectorAll<HTMLElement>("main button:not(:disabled)") ?? [],
@@ -245,6 +245,9 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
     // Screen transitions must not replace focus the player already moved onto the new screen.
     if (buttons.includes(document.activeElement as HTMLElement)) return;
     (buttons.find((el) => el.classList.contains("primary-menu-action")) ?? buttons[0])?.focus();
+  });
+  useLayoutEffect(() => {
+    focusScreen();
   }, [route, game.phase, view.ready, view.cloud.blocking, view.cloud.status]);
   if (!view.ready)
     return (

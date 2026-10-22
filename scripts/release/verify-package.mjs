@@ -9,7 +9,7 @@ import { extractFile, listPackage } from "@electron/asar";
 import { assets } from "../assets/assets.mjs";
 const ROOT = path.resolve(import.meta.dirname, "../..");
 const sha = (bytes) => createHash("sha256").update(bytes).digest("hex");
-// Runtime files shipped by the pinned Electron Windows x64 distribution.
+// Runtime files shipped by Electron 45 Windows x64; verified against its official ZIP.
 export const WINDOWS_RUNTIME_FILES = [
   "resources.pak",
   "icudtl.dat",
@@ -19,11 +19,9 @@ export const WINDOWS_RUNTIME_FILES = [
   "chrome_200_percent.pak",
   "locales/en-US.pak",
   "ffmpeg.dll",
-  "libEGL.dll",
-  "libGLESv2.dll",
+  "electron_wer.dll",
   "d3dcompiler_47.dll",
   "dxcompiler.dll",
-  "dxil.dll",
   "vulkan-1.dll",
   "vk_swiftshader.dll",
   "vk_swiftshader_icd.json",
@@ -33,9 +31,10 @@ export function verifyWindowsRuntime(size) {
     if (!(size(name) > 0)) throw new Error(`Missing or empty Electron runtime: ${name}`);
 }
 export function verifyFuses(wire) {
+  for (const index of Object.keys(wire))
+    if (/^\d+$/.test(index) && !Object.hasOwn(hardening.FUSES, index))
+      throw new Error(`Unknown Electron fuse ${index}`);
   for (const [index, enabled] of Object.entries(hardening.FUSES)) {
-    // Pinned Electron may predate a newer optional fuse; every present fuse must match.
-    if (wire[index] === undefined && Number(index) >= 8) continue;
     if (wire[index] !== (enabled ? FuseState.ENABLE : FuseState.DISABLE))
       throw new Error(`Unexpected Electron fuse ${index}`);
   }

@@ -18,7 +18,7 @@ import {
   hit,
   mostInjured,
   grantTemporaryDodge,
-  removeFreezeBuildup,
+  removeControlBuildup,
   type Combatant,
 } from "./index";
 import { roll } from "../random";
@@ -356,7 +356,8 @@ export function executeAbility(
         grantTemporaryDodge(actor, value, events);
         break;
       case "teamThaw":
-        for (const unit of alive(friendlyRow(state, action))) removeFreezeBuildup(state, unit, events);
+        for (const unit of alive(friendlyRow(state, action)))
+          removeControlBuildup(state, unit, "freeze", events);
         break;
       case "teamBlind":
         for (const unit of alive(opposingRow(state, action))) applyBlind(state, actor, unit, events);

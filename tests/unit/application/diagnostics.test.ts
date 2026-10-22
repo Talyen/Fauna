@@ -15,3 +15,20 @@ it("prevents diagnostic consumers from corrupting retained and persisted evidenc
   expect(JSON.parse(write.mock.calls[0]![0])).toEqual(diagnostics.snapshot());
   expect(snapshot).toEqual([{ source: "save-write", message: "disk full", count: 1 }]);
 });
+
+it("owns diagnostic collection before inspecting reentrant error messages", () => {
+  const write = vi.fn();
+  const diagnostics = createDiagnostics({ read: () => null, write });
+  const error = new Error();
+  Object.defineProperty(error, "message", {
+    get() {
+      diagnostics.record("global", "recursive inspection");
+      return "disk failure";
+    },
+  });
+
+  diagnostics.record("save-write", error);
+
+  expect(diagnostics.snapshot()).toEqual([{ source: "save-write", message: "disk failure", count: 1 }]);
+  expect(write).toHaveBeenCalledTimes(1);
+});

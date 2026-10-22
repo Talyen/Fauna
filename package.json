@@ -6,13 +6,13 @@
   "main": "desktop/main.cjs",
   "engines": {
     "node": ">=24 <25",
-    "npm": ">=11"
+    "npm": ">=12.2.1 <13"
   },
   "scripts": {
     "dev": "node scripts/dev/dev.mjs",
     "dev:desktop": "node scripts/dev/dev-desktop.mjs",
     "check": "node scripts/checks/check.mjs",
-    "check:full": "npm run check:types && oxlint src tests scripts desktop design --deny-warnings && prettier --check . && node scripts/checks/boundaries.mjs && node scripts/checks/ui-contract.mjs && npm run deadcode",
+    "check:full": "npm run check:types && npm run check:lint && npm run check:format && npm run check:boundaries && npm run deadcode",
     "format": "prettier --write .",
     "test": "node scripts/checks/run-local-tests.mjs",
     "test:full": "vitest run",
@@ -53,7 +53,12 @@
     "generate:patch-notes": "node scripts/release/generate-patch-notes.mjs",
     "assets:check:bundle": "node scripts/assets/active-assets.mjs",
     "assets:review": "node scripts/assets/art-review.mjs",
-    "check:types": "tsc --noEmit -p tsconfig.game.json && tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.test.json"
+    "check:types": "node scripts/checks/typecheck.mjs",
+    "security:audit": "node scripts/checks/security-audit.mjs",
+    "package:installer": "npm run build && npm run check:bundle && npm run assets:check:bundle && electron-builder --win --x64 --publish never",
+    "check:lint": "oxlint --type-aware src tests scripts desktop design --deny-warnings",
+    "check:format": "prettier --check .",
+    "check:boundaries": "node scripts/checks/boundaries.mjs && node scripts/checks/ui-contract.mjs"
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.3.0",
@@ -68,38 +73,41 @@
     "@radix-ui/react-tooltip": "^1.4.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "immer": "11.1.8",
-    "lucide-react": "^1.59.0",
-    "react": "19.2.5",
-    "react-dom": "19.2.5",
+    "immer": "11.2.7",
+    "lucide-react": "^1.61.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
     "steamworks.js": "0.4.0",
     "tailwind-merge": "^3.7.0",
-    "zod": "4.4.3",
-    "zustand": "5.0.13"
+    "zod": "4.6.7",
+    "zustand": "5.0.16"
   },
   "devDependencies": {
-    "@electron/asar": "^3.4.1",
+    "@electron/asar": "^4.3.1",
     "@electron/fuses": "2.1.3",
-    "@playwright/test": "^1.60.0",
-    "@swc/core": "1.16.13",
-    "@tailwindcss/vite": "^4.3.0",
-    "@testing-library/react": "^16.3.2",
-    "@testing-library/user-event": "^14.6.1",
-    "@types/node": "^24.0.0",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.1",
-    "electron": "^39.2.6",
-    "electron-builder": "^26.0.12",
-    "jsdom": "^29.1.1",
-    "knip": "6.14.2",
-    "oxlint": "1.87.0",
-    "prettier": "^3.8.3",
-    "sharp": "0.34.5",
-    "tailwindcss": "^4.3.0",
+    "@playwright/test": "^1.64.1",
+    "@rolldown/plugin-babel": "0.2.4",
+    "@swc/core": "1.16.18",
+    "@tailwindcss/vite": "^4.3.3",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.8",
+    "@types/node": "^24.19.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "babel-plugin-react-compiler": "1.0.0",
+    "electron": "^45.0.0",
+    "electron-builder": "^26.15.3",
+    "jsdom": "^30.1.3",
+    "knip": "6.42.1",
+    "oxlint": "1.89.0",
+    "oxlint-tsgolint": "7.0.2004",
+    "prettier": "^3.9.10",
+    "sharp": "0.35.5",
+    "tailwindcss": "^4.3.3",
     "typescript": "7.0.2",
-    "vite": "^8.0.10",
-    "vitest": "^4.1.5"
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5"
   },
   "build": {
     "appId": "com.fauna.game",
@@ -131,9 +139,9 @@
     "npmRebuild": false
   },
   "allowScripts": {
-    "@swc/core": true,
-    "electron": true,
-    "electron-winstaller": true,
-    "sharp": true
-  }
+    "@swc/core@1.16.18": true,
+    "electron-winstaller@5.4.0": true,
+    "fsevents@2.3.3": true
+  },
+  "packageManager": "npm@12.2.1"
 }

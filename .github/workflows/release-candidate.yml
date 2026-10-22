@@ -1,0 +1,77 @@
+name: Signed Windows candidate
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing version tag to build and sign without publication
+        required: true
+        type: string
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: signed-windows-candidate
+  cancel-in-progress: false
+jobs:
+  candidate:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    environment: release-signing
+    env:
+      RELEASE_TAG: ${{ inputs.tag }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ inputs.tag }}
+          fetch-depth: 0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - name: Require signing configuration
+        env:
+          CSC_LINK: ${{ secrets.WINDOWS_CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.WINDOWS_CSC_KEY_PASSWORD }}
+        shell: pwsh
+        run: |
+          if (!$env:CSC_LINK -or !$env:CSC_KEY_PASSWORD) { throw "Configure Windows signing secrets in release-signing" }
+      - name: Select pinned npm
+        run: npm install --global npm@12.2.1 --ignore-scripts --no-audit --no-fund
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Verify tag and version
+        run: npm run verify:release-version
+      - name: Require complete verification for the tagged commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: pwsh
+        run: |
+          $sha = git rev-parse HEAD
+          $runs = gh run list --workflow ci.yml --commit $sha --limit 50 --json conclusion,headSha | ConvertFrom-Json
+          if (!($runs | Where-Object { $_.headSha -eq $sha -and $_.conclusion -eq "success" })) { throw "Tagged commit requires successful full CI" }
+      - name: Build signed installer
+        env:
+          CSC_LINK: ${{ secrets.WINDOWS_CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.WINDOWS_CSC_KEY_PASSWORD }}
+        run: npm run package:installer
+      - name: Verify signed package identity
+        run: npm run verify:release
+      - name: Verify executable and installer signatures
+        shell: pwsh
+        run: |
+          $files = @("release/win-unpacked/Fauna.exe") + @(Get-ChildItem release -Filter "*.exe" | ForEach-Object FullName)
+          if ($files.Count -lt 2) { throw "Installer missing" }
+          foreach ($file in $files) {
+            if ((Get-AuthenticodeSignature $file).Status -ne "Valid") { throw "Invalid Authenticode signature: $file" }
+          }
+      - name: Packaged startup, saves and crash recovery
+        run: npm run test:desktop -- --packaged
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: signed-windows-candidate-${{ inputs.tag }}
+          retention-days: 30
+          if-no-files-found: error
+          path: |
+            release/*.exe
+            release/*.blockmap
+            release/win-unpacked/

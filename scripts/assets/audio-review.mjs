@@ -44,7 +44,10 @@ await writeFile("reports/audio-review/index.html", html);
 await writeFile("reports/audio-review/media.json", JSON.stringify(media, null, 2));
 console.log("Generated reports/audio-review/index.html. Use --serve for listening.");
 if (args.includes("--serve")) {
-  const server = createServer(async (request, response) => {
+  const server = createServer((request, response) => {
+    void serve(request, response);
+  });
+  async function serve(request, response) {
     try {
       if (request.url === "/") {
         response.setHeader("Content-Type", "text/html; charset=utf-8");
@@ -68,7 +71,7 @@ if (args.includes("--serve")) {
     } catch {
       response.writeHead(500).end("Could not read prepared media.");
     }
-  });
+  }
   server.listen(0, "127.0.0.1", () => console.log(`Sound desk: http://127.0.0.1:${server.address().port}`));
   const close = () => server.close();
   process.once("SIGINT", close);

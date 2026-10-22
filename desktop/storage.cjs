@@ -1,6 +1,7 @@
 const fs = require("node:fs/promises");
 const path = require("node:path");
 const saveFormat = require("../src/game/save-format.json");
+/** @param {string} directory */
 function createStorage(directory) {
   const primary = path.join(directory, "expedition.json");
   let queue = Promise.resolve();
@@ -25,6 +26,7 @@ function createStorage(directory) {
         throw new AggregateError(failures, "Save slots are unreadable.");
       return candidates;
     },
+    /** @param {string} data */
     write(data) {
       if (typeof data !== "string" || Buffer.byteLength(data) > 100000)
         return Promise.reject(new Error("Invalid save payload."));
@@ -45,10 +47,16 @@ function createStorage(directory) {
           await handle.close();
         }
         for (let i = 2; i >= 1; i--) {
+          const backup = `${primary}.bak${i}`;
+          const staged = `${backup}.tmp`;
           try {
-            await fs.copyFile(i === 1 ? primary : `${primary}.bak${i - 1}`, `${primary}.bak${i}`);
+            // A failed copy must never truncate an existing recovery checkpoint.
+            await fs.copyFile(i === 1 ? primary : `${primary}.bak${i - 1}`, staged);
+            await fs.rename(staged, backup);
           } catch (error) {
             if (error.code !== "ENOENT") throw error;
+          } finally {
+            await fs.rm(staged, { force: true }).catch(() => {});
           }
         }
         await fs.rename(temp, primary);

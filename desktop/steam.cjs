@@ -12,9 +12,9 @@ async function createSteam({
   loadBinding = () => require("steamworks.js"),
 }) {
   let available = false,
-    account = null,
+    account = /** @type {string | null} */ (null),
     worker,
-    overlay = null,
+    overlay = /** @type {{disconnect(): void} | null} */ (null),
     overlayActive = false;
   let device,
     profile = "",
@@ -57,9 +57,17 @@ async function createSteam({
         const binding = loadBinding();
         binding.electronEnableSteamOverlay();
         const client = binding.init(appId);
-        const event = binding.SteamCallback?.GameOverlayActivated;
-        if (event !== undefined && client.callback?.register)
-          overlay = client.callback.register(event, ({ active }) => {
+        // The optional overlay extension is not declared by steamworks.js 0.4; probe it before use.
+        const extensions = /** @type {{SteamCallback?: {GameOverlayActivated?: number}}} */ (
+          /** @type {unknown} */ (binding)
+        );
+        const event = extensions.SteamCallback?.GameOverlayActivated;
+        const callback =
+          /** @type {{ register?: (event: number, listener: (value: {active: boolean}) => void) => {disconnect(): void} }} */ (
+            /** @type {unknown} */ (client.callback)
+          );
+        if (event !== undefined && callback?.register)
+          overlay = callback.register(event, ({ active }) => {
             overlayActive = active === true;
             pause(overlayActive);
           });

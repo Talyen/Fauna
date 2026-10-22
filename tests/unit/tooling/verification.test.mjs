@@ -183,7 +183,11 @@ describe("lightweight local verification", () => {
       expect(scripts["verify:full"]).toContain(`npm run ${command}`);
     const workflow = readFileSync(path.join(repo, ".github/workflows/ci.yml"), "utf8");
     for (const command of [
-      "check:full",
+      "check:types",
+      "check:lint",
+      "check:format",
+      "check:boundaries",
+      "deadcode",
       "docs:check",
       "content:audit",
       "test:full",

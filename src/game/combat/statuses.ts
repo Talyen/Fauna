@@ -75,23 +75,24 @@ export function* triggerArmorBreak(
       yield* reaction("hit", state, unit, target, amount, "burn", events, { origin: "proc" });
   }
 }
-export function* removeFreezeBuildup(
+export function* removeControlBuildup(
   state: GameState,
   unit: Combatant,
+  status: "stun" | "freeze",
   events: GameEvent[],
 ): Resolution<void> {
   const stats = combat(unit);
-  if (stats.freeze <= 0) return;
-  const amount = stats.freeze;
-  stats.freeze = 0;
+  if (stats[status] <= 0) return;
+  const amount = stats[status];
+  stats[status] = 0;
   events.push({
     kind: "status",
     targetId: unit.id,
     status: "cleanse",
-    affectedStatus: "freeze",
+    affectedStatus: status,
     outcome: "remove",
     amount,
-    text: `${unitName(unit)}: Cleanse Freeze build-up`,
+    text: `${unitName(unit)}: Cleanse ${status === "freeze" ? "Freeze" : "Stun"} build-up`,
   });
   yield* reaction("cleanseRewards", state, unit, 1, events);
 }

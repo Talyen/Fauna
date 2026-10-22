@@ -21,7 +21,12 @@ it("drains native resources once when renderer close acknowledgement races rende
   const steam = { dispose: vi.fn(() => pending) };
   const require = createRequire(import.meta.url);
   const context = vm.createContext({
-    require: (name) => (name === "electron" ? { app } : name.startsWith("./") ? {} : require(name)),
+    require: (name) =>
+      name === "electron"
+        ? { app, protocol: { registerSchemesAsPrivileged() {} } }
+        : name.startsWith("./")
+          ? {}
+          : require(name),
     process: { env: {} },
     __dirname: "/fauna/desktop",
     resources: { storage, display, steam },

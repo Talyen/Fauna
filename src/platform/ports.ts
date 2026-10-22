@@ -26,7 +26,7 @@ export interface Platform {
   quit?: () => Promise<void>;
   onCloseRequested?: (listener: () => Promise<boolean>) => () => void;
 }
-interface DesktopBridge {
+export interface DesktopBridge {
   display?: DisplayPort;
   cloud?: CloudPort;
   onOverlay?: (listener: (active: boolean) => void) => () => void;

@@ -11,7 +11,7 @@ import type {
 import type {
   grantStatus,
   triggerArmorBreak,
-  removeFreezeBuildup,
+  removeControlBuildup,
   removeEffects,
   cleanseRewards,
   applyHarmfulStatus,
@@ -33,7 +33,7 @@ export type Operations = {
   healthThresholds: typeof healthThresholds;
   grantStatus: typeof grantStatus;
   triggerArmorBreak: typeof triggerArmorBreak;
-  removeFreezeBuildup: typeof removeFreezeBuildup;
+  removeControlBuildup: typeof removeControlBuildup;
   removeEffects: typeof removeEffects;
   cleanseRewards: typeof cleanseRewards;
   applyHarmfulStatus: typeof applyHarmfulStatus;

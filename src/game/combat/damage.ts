@@ -199,8 +199,8 @@ export function* resolveHit(
       }
       if (hasTalent(state, "dodge.open-flank")) stats.nextPhysical = 2;
       if (hasTalent(state, "dodge.unburdened")) {
-        stats.stun = 0;
-        stats.freeze = 0;
+        yield* reaction("removeControlBuildup", state, target, "stun", events);
+        yield* reaction("removeControlBuildup", state, target, "freeze", events);
       }
       if (hasTalent(state, "dodge.tailwind")) draw(state, 1);
       if (hasTalent(state, "dodge.perfect-timing") && stats.armor === 0)

@@ -79,22 +79,23 @@ export function createDiagnostics(port?: DiagnosticPort) {
     snapshot: () => entries,
     record(source: DiagnosticSource, error: unknown, context?: { revision: number; phase: string }) {
       if (disposed || writing) return;
-      // Never stringify arbitrary error context or full save payloads.
-      const message = sanitize(errorMessage(error));
-      const match = entries.find((entry) => entry.source === source && entry.message === message);
-      entries = retain(
-        [
-          ...entries.filter((entry) => entry !== match),
-          {
-            source,
-            message,
-            count: Math.min((match?.count ?? 0) + 1, 1_000_000),
-            ...(context ? { revision: context.revision, phase: context.phase } : {}),
-          },
-        ].slice(-50),
-      );
+      // Own the operation before error inspection can invoke user-defined getters.
       writing = true;
       try {
+        // Never stringify arbitrary error context or full save payloads.
+        const message = sanitize(errorMessage(error));
+        const match = entries.find((entry) => entry.source === source && entry.message === message);
+        entries = retain(
+          [
+            ...entries.filter((entry) => entry !== match),
+            {
+              source,
+              message,
+              count: Math.min((match?.count ?? 0) + 1, 1_000_000),
+              ...(context ? { revision: context.revision, phase: context.phase } : {}),
+            },
+          ].slice(-50),
+        );
         try {
           port?.write(JSON.stringify(entries));
         } catch {

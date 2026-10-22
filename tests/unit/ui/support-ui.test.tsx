@@ -98,7 +98,7 @@ it("shows the offered Recruit directly and commits only that creature without op
   render(<TeamSelection game={game} send={send} inspect={() => {}} />);
   document.documentElement.dataset.focus = "visible";
   fireEvent.click(screen.getByRole("button", { name: "Recruit Cadenza" }));
-  expect(document.activeElement).toBe(screen.getByRole("button", { name: "Combat" }));
+  expect(document.activeElement).toBe(screen.getByRole("button", { name: /^Combat$/ }));
   delete document.documentElement.dataset.focus;
   expect(send).toHaveBeenCalledExactlyOnceWith({ type: "recruitDestination", species: "cadenza" });
   expect(screen.queryByRole("dialog")).toBeNull();

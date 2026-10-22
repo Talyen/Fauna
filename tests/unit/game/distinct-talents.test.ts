@@ -225,3 +225,22 @@ it("applies opening draws and Armor once, without granting reserve Armor", () =>
     expect(new Set(boosted.battle!.hand).size).toBe(boosted.battle!.hand.length);
   }
 });
+
+it.each(["stun", "freeze", "both", "neither"] as const)(
+  "Unburdened awards Cleanse reactions only for removed %s buildup",
+  (buildup) => {
+    const { state, source, target, events } = fixture();
+    state.talents = ["dodge.unburdened", "health.renewal", "light.divine-favor"];
+    source.combat.stun = buildup === "stun" || buildup === "both" ? 3 : 0;
+    source.combat.freeze = buildup === "freeze" || buildup === "both" ? 3 : 0;
+    // Blind misses use the ordinary Dodge reaction path, without relying on a random Dodge roll
+    hit(state, target, source, 1, "physical", events, { origin: "ability", blindMiss: true });
+
+    const count = buildup === "both" ? 2 : buildup === "neither" ? 0 : 1;
+    expect(source.health).toBe(10 + count * 2);
+    expect(source.combat.stun).toBe(0);
+    expect(source.combat.freeze).toBe(0);
+    expect(source.combat.freeLight).toBe(count > 0);
+    expect(events.filter((event) => event.status === "cleanse")).toHaveLength(count);
+  },
+);
