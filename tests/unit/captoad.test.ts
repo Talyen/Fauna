@@ -143,7 +143,11 @@ it("removes the outgoing kit from hand and piles before drawing the incoming kit
   const result = play(game);
   expect(result.accepted).toBe(true);
   expect(result.state.team[0]).toEqual(game.reserves[0]);
-  expect(result.state.reserves[0]).toEqual(game.team[0]);
+  expect(result.state.reserves[0]).toEqual(
+    produce(game.team[0], (actor) => {
+      actor!.combat!.cardsPlayedThisTurn = 1;
+    }),
+  );
   expect(result.state.lineup).toEqual(game.lineup);
   expect(
     result.state.cards
@@ -224,7 +228,11 @@ it("swaps positions with a living ally when no living backup exists, or just dra
   expect(decodeSave(encodeSave(result))).toEqual(result);
   const alone = ready();
   const solo = play(alone).state;
-  expect(solo.team).toEqual(alone.team);
+  expect(solo.team).toEqual(
+    produce(alone.team, (team) => {
+      team[0]!.combat!.cardsPlayedThisTurn = 1;
+    }),
+  );
   expect(solo.battle!.hand).toHaveLength(2);
   expect(decodeSave(encodeSave(solo))).toEqual(solo);
 });

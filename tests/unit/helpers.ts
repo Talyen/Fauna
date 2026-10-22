@@ -7,6 +7,13 @@ import type { Command, GameState } from "../../src/game/types";
 export function run(seed = 42) {
   return teamRun(seed, ["mossguard", "emberback", "prismram"]);
 }
+/** Fix the offered starter for scenarios whose behavior depends on that creature's kit. */
+export function starterJourney(seed: number, kind: SpeciesId) {
+  const initial = produce(createGame(seed), (draft) => {
+    draft.starterOffers = [kind, ...draft.starterOffers.filter((offer) => offer !== kind)].slice(0, 3);
+  });
+  return accept(accept(initial, { type: "draft", species: kind }), { type: "start" });
+}
 /** A progressed lineup fixture for multi-creature combat coverage. */
 export function teamRun(seed: number, kinds: SpeciesId[]) {
   let s = createGame(seed);

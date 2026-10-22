@@ -29,6 +29,7 @@ describe("collected starter drafts", () => {
   it("onboards with one of three eligible creatures and collects only the committed starter", () => {
     let s = createGame(7);
     expect(SPECIES.map((entry) => entry.id)).toEqual([
+      "wickwaltz",
       "mossguard",
       "emberback",
       "pollenmoth",

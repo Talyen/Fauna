@@ -23,6 +23,15 @@ import { run } from "./helpers";
 describe("keyword foundation", () => {
   it("classifies authored effects without reading names or rules text, using only current talent categories", () => {
     const expected = [
+      ["burn"],
+      ["block"],
+      ["mana"],
+      ["light"],
+      ["dodge"],
+      [],
+      ["stun"],
+      ["stun", "armor"],
+      ["block", "nature"],
       ["health"],
       ["light"],
       ["health"],
