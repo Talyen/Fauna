@@ -1,4 +1,3 @@
-import { decodeSave } from "../game/save";
 import { browserDiagnostics } from "./preferences";
 import type { Platform, SaveCandidate } from "./ports";
 const KEY = "fauna.save.v1";
@@ -24,15 +23,14 @@ export function createBrowserPlatform(storage?: Storage): Platform {
           throw new AggregateError(failures, "Save slots are unreadable.");
         return results;
       },
-      async write(data) {
+      async write(data, isRecoverable = () => false) {
         const source = storage ?? window.localStorage;
-        // Corrupt slots must never displace the intact checkpoint used for recovery.
+        // Only application-approved checkpoints may displace recovery slots.
         const intact = [KEY, `${KEY}.backup1`, `${KEY}.backup2`].flatMap((key) => {
           const previous = source.getItem(key);
           if (previous === null) return [];
           try {
-            decodeSave(previous);
-            return [previous];
+            return isRecoverable(previous) ? [previous] : [];
           } catch {
             return [];
           }

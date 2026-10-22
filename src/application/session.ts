@@ -67,7 +67,14 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
       await readCandidates();
       if (!disposed) store.setState({ loadFailed: false });
     }
-    await platform.saves.write(data);
+    await platform.saves.write(data, (candidate) => {
+      try {
+        decodeSave(candidate);
+        return true;
+      } catch {
+        return false;
+      }
+    });
   };
   const cloud = createCloud(
     platform.cloud,

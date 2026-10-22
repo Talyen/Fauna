@@ -101,7 +101,7 @@ describe("save orchestration", () => {
     const memory = new MemoryStorage();
     const p = createBrowserPlatform(memory);
     const snapshots = [1, 2, 3].map((revision) => JSON.stringify({ ...run(), revision }));
-    for (const data of snapshots) await p.saves.write(data);
+    for (const data of snapshots) await p.saves.write(data, (candidate) => snapshots.includes(candidate));
     expect((await p.saves.readCandidates()).map((c) => c.data)).toEqual([...snapshots].reverse());
     let fail = true;
     const failed = createSession({
@@ -660,4 +660,15 @@ it("shares the close handshake and native quit across repeated requests", async 
     unsubscribe();
     await s.dispose();
   }
+});
+
+it("keeps browser backups intact when no application validation policy is supplied", async () => {
+  const memory = new MemoryStorage();
+  const checkpoint = JSON.stringify(run());
+  memory.setItem("fauna.save.v1", "unrecognized");
+  memory.setItem("fauna.save.v1.backup1", checkpoint);
+  const browser = createBrowserPlatform(memory);
+  await browser.saves.write("new data");
+  expect(memory.getItem("fauna.save.v1.backup1")).toBe(checkpoint);
+  expect(memory.getItem("fauna.save.v1.backup2")).toBeNull();
 });
