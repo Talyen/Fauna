@@ -12,7 +12,8 @@ import {
 import { drawKeyword } from "../../../src/game/card-zones";
 import * as content from "../../../src/game/content";
 import { definition, species } from "../../../src/game/content";
-import { beginBattle, dispatch } from "../../../src/game/engine";
+import { dispatch } from "../../../src/game/engine";
+import { beginBattle } from "../../../src/game/journey";
 import { TALENTS, canBuyTalent } from "../../../src/game/progression";
 import { cardCost } from "../../../src/game/rules";
 import { previewPlay } from "../../../src/game/preview";

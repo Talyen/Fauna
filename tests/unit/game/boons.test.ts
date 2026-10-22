@@ -27,6 +27,15 @@ function fixture() {
   state.rng = 42;
   return { state, source, target, events: [] as GameEvent[] };
 }
+it("preserves Meteorite through triggered Burn for the next direct Burn hit", () => {
+  const { state, source, target, events } = fixture();
+  state.boons = ["meteorite"];
+  hit(state, source, target, 3, "burn", events, { origin: "proc" });
+  expect(state.battle!.meteoriteUsed).toBe(false);
+  hit(state, source, target, 5, "burn", events);
+  expect(state.battle!.meteoriteUsed).toBe(true);
+  expect(events.filter((event) => event.kind === "damage").map((event) => event.amount)).toEqual([3, 10]);
+});
 it("doubles only the first allied direct Burn hit across swaps, previews and resume", () => {
   const { state, source, target, events } = fixture();
   state.boons = ["meteorite"];

@@ -23,6 +23,34 @@ export function withReserves() {
   });
 }
 describe("free combat swaps", () => {
+  it("ticks every enemy's statuses while the deployed row waits for a living backup", () => {
+    let state = accept(
+      { ...structuredClone(withReserves()), phase: "teamSelection", battle: null, encounter: 1 },
+      { type: "beginBattle" },
+    );
+    state = produce(state, (draft) => {
+      for (const ally of draft.team) ally.health = 0;
+      for (const enemy of draft.battle!.enemies) {
+        enemy.combat = freshCombat();
+        enemy.combat.poison = 1;
+        enemy.combat.statusSources.poison = draft.reserves[0]!.id;
+      }
+    });
+    expect(state.battle!.enemies.length).toBeGreaterThan(1);
+    const next = accept(state, { type: "endTurn" });
+    expect(next.phase).toBe("battle");
+    expect(next.battle!.enemies.map((enemy) => enemy.health)).toEqual(
+      state.battle!.enemies.map((enemy) => enemy.health - 1),
+    );
+    expect(next.battle!.enemies.every((enemy) => enemy.combat.poison === 0)).toBe(true);
+    expect(decodeSave(encodeSave(next))).toEqual(next);
+    const recovered = accept(next, {
+      type: "swap",
+      activeId: next.team[0]!.id,
+      reserve: next.reserves[0]!.id,
+    });
+    expect(recovered.team[0]!.health).toBeGreaterThan(0);
+  });
   it("replaces cards in hand, draw and discard without paying, drawing, shuffling, or changing the starting lineup", () => {
     const before = produce(withReserves(), (d) => {
       const owned = d.cards.filter((c) => c.ownerId === "ally-1");
