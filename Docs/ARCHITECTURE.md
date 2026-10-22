@@ -1,5 +1,7 @@
 # Architecture
 
+The proposed [journey lifecycle state plan](GAME_STATE_PLAN.md) addresses phase and payload ownership, separates active combat from completed battle receipts, and defines a staged refactor with behavior and save guarantees.
+
 The [ability resolution plan and implementation record](archive/COMBAT_RESOLUTION_PLAN.md) documents the shared player/enemy executor, approved rule alignment and explicit room scaling.
 
 The [combat reaction architecture plan and implementation record](archive/COMBAT_REACTIONS_PLAN.md) documents typed damage origins, synchronous reaction continuations and the approved immediate cancellation after actor knockout.
