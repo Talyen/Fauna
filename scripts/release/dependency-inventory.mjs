@@ -74,7 +74,7 @@ export function generateInventory(root = ROOT) {
 }
 
 export function packageInventory(directory, output = path.resolve(ROOT, "reports/release-inventory")) {
-  const files = ["Fauna.exe", "resources/app.asar", "LICENSE", "LICENSES.chromium.html"];
+  const files = ["Fauna.exe", "resources/app.asar", "LICENSE.electron.txt", "LICENSES.chromium.html"];
   const manifest = files.map((name) => {
     const bytes = readFileSync(path.join(directory, name));
     if (!bytes.length) throw new Error(`Empty packaged component: ${name}`);

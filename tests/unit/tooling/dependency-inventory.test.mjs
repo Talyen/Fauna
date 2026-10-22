@@ -42,7 +42,7 @@ it("binds the final executable, archive and Chromium notices to retained hashes"
   const root = mkdtempSync(path.join(os.tmpdir(), "fauna-package-inventory-"));
   try {
     mkdirSync(path.join(root, "resources"));
-    for (const name of ["Fauna.exe", "resources/app.asar", "LICENSE", "LICENSES.chromium.html"])
+    for (const name of ["Fauna.exe", "resources/app.asar", "LICENSE.electron.txt", "LICENSES.chromium.html"])
       writeFileSync(path.join(root, name), name);
     const output = path.join(root, "inventory");
     const manifest = packageInventory(root, output);
