@@ -82,7 +82,6 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
   if (!Object.hasOwn(commandPhases, command.type)) return reject(state, "Unknown command.");
   const phases: readonly GameState["phase"][] = commandPhases[command.type];
   if (!phases.includes(state.phase)) return reject(state, "That action is unavailable here.");
-  const b = state.battle;
   if (
     command.type === "newRun" &&
     (!Number.isSafeInteger(command.seed) || command.seed < 0 || command.seed > 0xffffffff)
@@ -96,17 +95,19 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
   if (command.type === "start" && state.selected.length !== starterCount(state))
     return reject(state, "Complete your starter choices first.");
   if (command.type === "play") {
+    if (state.phase !== "battle") throw new Error("Invalid battle admission.");
+    const battle = state.battle;
     const card = state.cards.find((c) => c.id === command.cardId);
-    if (!card || !b!.hand.includes(card.id)) return reject(state, "That card is not in your hand.");
+    if (!card || !battle.hand.includes(card.id)) return reject(state, "That card is not in your hand.");
     const actor = state.team.find((c) => c.id === card.ownerId);
     if (!actor || actor.health <= 0) return reject(state, "That creature is knocked out.");
     if (controlled(actor)) return reject(state, "That creature is Stunned or Frozen.");
     const def = definition(card.definitionId);
-    if (b!.mana < cardCost(card, state)) return reject(state, "Not enough mana.");
+    if (battle.mana < cardCost(card, state)) return reject(state, "Not enough mana.");
     if (
       def.effect === "attack" &&
       !def.target &&
-      !b!.enemies.some((e) => e.id === command.targetId && e.health > 0)
+      !battle.enemies.some((e) => e.id === command.targetId && e.health > 0)
     )
       return reject(state, "Choose a living enemy.");
     if (
@@ -241,7 +242,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
           draft.expedition.recruit = null;
           draft.expedition.lastRoom = bossEncounter(draft) ? "boss" : "combat";
         }
-        if (draft.journey) draft.journey.lastBattle = null;
+        draft.journey.lastBattle = null;
         beginBattle(draft, events);
         events.push({ kind: "turn", text: "Your journey begins." });
         break;
@@ -261,7 +262,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         break;
       case "play": {
         if (draft.phase !== "battle") throw new Error("Invalid battle action.");
-        const battle = draft.battle!;
+        const battle = draft.battle;
         const card = draft.cards.find((c) => c.id === command.cardId)!;
         const def = definition(card.definitionId);
         const actor = draft.team.find((c) => c.id === card.ownerId)!;
@@ -303,7 +304,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
       }
       case "devWinBattle": {
         if (draft.phase !== "battle") throw new Error("Invalid development battle action.");
-        for (const enemy of draft.battle!.enemies) enemy.health = 0;
+        for (const enemy of draft.battle.enemies) enemy.health = 0;
         settle(draft, events);
         break;
       }

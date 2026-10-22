@@ -27,7 +27,7 @@ export function offerStarters(state: GameState) {
   const shuffled = shuffle(state, [...pool]);
   state.starterOffers = Array.from({ length: 3 }, (_, index) => shuffled[index % shuffled.length]!);
 }
-export function prepareEncounter(state: GameState) {
+function prepareEncounter(state: GameState) {
   const route = state.expedition!;
   route.pack = Math.floor(roll(state) * encounterPacks(state.encounter).length);
   const kind =
@@ -146,7 +146,7 @@ export function beginBattle(state: StateAt<"teamSelection">, events: GameEvent[]
   state.battleXP = {};
   intents(active);
 }
-export function bankBattleXP(state: GameState) {
+function bankBattleXP(state: Exclude<GameState, StateAt<"draft">>) {
   const xp: GameState["battleXP"] = {};
   for (const keyword of KEYWORDS) {
     const previous = state.keywordXP[keyword] ?? 0;
@@ -154,7 +154,7 @@ export function bankBattleXP(state: GameState) {
     state.keywordXP[keyword] = total;
     if (total > previous) {
       xp[keyword] = total - previous;
-      if (state.journey) state.journey.xp[keyword] = (state.journey.xp[keyword] ?? 0) + total - previous;
+      state.journey.xp[keyword] = (state.journey.xp[keyword] ?? 0) + total - previous;
     }
   }
   state.battleXP = {};
@@ -162,7 +162,7 @@ export function bankBattleXP(state: GameState) {
 }
 function finishBattle(state: BattleState, defeated: boolean) {
   const xp = bankBattleXP(state);
-  const earnedGold = state.battle?.earnedGold ?? 0;
+  const earnedGold = state.battle.earnedGold;
   const previousCurrency = state.currency;
   state.currency = Math.min(
     1_000_000,
@@ -171,11 +171,9 @@ function finishBattle(state: BattleState, defeated: boolean) {
   );
   const currency = state.currency - previousCurrency + earnedGold;
   const outcome = defeated ? "defeat" : finalEncounter(state) ? "victory" : "next";
-  if (state.journey) {
-    state.journey.currency = Math.min(1_000_000, state.journey.currency + currency - earnedGold);
-    state.journey.lastBattle = { xp, currency, encounter: state.encounter, outcome };
-    if (!defeated) state.journey.victories++;
-  }
+  state.journey.currency = Math.min(1_000_000, state.journey.currency + currency - earnedGold);
+  state.journey.lastBattle = { xp, currency, encounter: state.encounter, outcome };
+  if (!defeated) state.journey.victories++;
   if (outcome === "victory") {
     state.wins = Math.min(1_000_000, state.wins + 1);
   }
@@ -258,7 +256,7 @@ export function settle(state: BattleState, events: GameEvent[]): boolean {
 export function afterRewards(state: RewardState) {
   advanceEncounter(state);
 }
-function advanceEncounter(state: GameState) {
+function advanceEncounter(state: BattleState | RewardState) {
   state.encounter++;
   if (state.expedition) prepareEncounter(state);
   enterDestination(state);
@@ -275,8 +273,7 @@ function clearCombat(state: GameState) {
     creature.combat = freshCombat();
   }
 }
-function enterDestination(state: GameState) {
-  if (!state.journey) throw new Error("Destination requires a journey.");
+function enterDestination(state: Exclude<GameState, StateAt<"draft">>) {
   enterPhase(state, {
     phase: "teamSelection",
     battle: null,
