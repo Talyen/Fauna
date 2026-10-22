@@ -76,13 +76,14 @@ describe("CI coverage gate", () => {
     const jobs = Object.fromEntries(
       ["prepare", "static", "unit", "build", "browser", "interactions", "windows"].map((name) => [
         name,
-        { result: "success" },
+        { result: "success", outputs: { attempt: "1" } },
       ]),
     );
-    expect(() => validateJobs(jobs)).not.toThrow();
+    expect(() => validateJobs(jobs, "1")).not.toThrow();
+    expect(() => validateJobs(jobs, "2")).toThrow("another workflow attempt");
     for (const name of Object.keys(jobs))
       for (const result of ["failure", "cancelled", "skipped", undefined])
-        expect(() => validateJobs({ ...jobs, [name]: { result } })).toThrow(name);
+        expect(() => validateJobs({ ...jobs, [name]: { result } }, "1")).toThrow(name);
   });
   it("rejects incomplete unit suites and interaction traces", () => {
     const units = {
@@ -155,7 +156,7 @@ it("fails the executable final gate for upstream failures, missing reports and i
   const jobs = Object.fromEntries(
     ["prepare", "static", "unit", "build", "browser", "interactions", "windows"].map((name) => [
       name,
-      { result: "success" },
+      { result: "success", outputs: { attempt: "1" } },
     ]),
   );
   const put = (file, value) => {
@@ -264,6 +265,35 @@ it("ships portable merged JSON attachments and rejects missing resources", () =>
     writeFileSync(path.join(root, "reports/playwright.json"), JSON.stringify(report));
     rmSync(image);
     expect(run().status).not.toBe(0);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+it("rejects modified or stale downloaded builds before starting browser consumers", () => {
+  const root = mkdtempSync(path.join(tmpdir(), "fauna-ci-build-"));
+  const script = path.resolve(import.meta.dirname, "../../scripts/ci.mjs");
+  const env = { ...process.env, GITHUB_SHA: "commit", GITHUB_RUN_ID: "123", GITHUB_RUN_ATTEMPT: "1" };
+  const run = (command, overrides = {}) =>
+    spawnSync(process.execPath, [script, command], {
+      cwd: root,
+      encoding: "utf8",
+      env: { ...env, ...overrides },
+    });
+  try {
+    mkdirSync(path.join(root, "dist/assets"), { recursive: true });
+    const entry = path.join(root, "dist/assets/index.js");
+    writeFileSync(entry, "original build");
+    expect(run("build").status).toBe(0);
+    expect(run("verify-build").status).toBe(0);
+    writeFileSync(entry, "modified build");
+    expect(run("verify-build").status).not.toBe(0);
+    writeFileSync(entry, "original build");
+    writeFileSync(path.join(root, "dist/extra.js"), "unexpected file");
+    expect(run("verify-build").status).not.toBe(0);
+    rmSync(path.join(root, "dist/extra.js"));
+    expect(run("verify-build", { GITHUB_RUN_ATTEMPT: "2" }).status).not.toBe(0);
+    expect(run("verify-build", { GITHUB_SHA: "another commit" }).status).not.toBe(0);
   } finally {
     rmSync(root, { recursive: true, force: true });
   }

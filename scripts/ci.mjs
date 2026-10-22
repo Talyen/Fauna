@@ -90,11 +90,15 @@ export function validateBrowserCoverage(discovery, reports) {
     throw new Error(`Incomplete browser coverage: ${observed.size}/${expected.size}`);
   return observed.size;
 }
-export function validateJobs(needs) {
+export function validateJobs(needs, attempt) {
+  if (!attempt) throw new Error("Missing workflow attempt");
   const names = ["prepare", "static", "unit", "build", "browser", "interactions", "windows"];
-  for (const name of names)
+  for (const name of names) {
     if (needs[name]?.result !== "success")
       throw new Error(`Required job ${name}: ${needs[name]?.result ?? "missing"}`);
+    if (name !== "browser" && needs[name].outputs?.attempt !== attempt)
+      throw new Error(`Required job ${name} belongs to another workflow attempt`);
+  }
 }
 export function validateUnit(report) {
   if (
@@ -147,8 +151,10 @@ async function main(command) {
     }
     appendFileSync(
       process.env.GITHUB_OUTPUT,
-      `run=${run}\nshards=${JSON.stringify(Array.from({ length: count }, (_, i) => i + 1))}\ntotal=${count}\n`,
+      `attempt=${process.env.GITHUB_RUN_ATTEMPT}\nrun=${run}\nshards=${JSON.stringify(Array.from({ length: count }, (_, i) => i + 1))}\ntotal=${count}\n`,
     );
+  } else if (command === "stamp") {
+    appendFileSync(process.env.GITHUB_OUTPUT, `attempt=${process.env.GITHUB_RUN_ATTEMPT}\n`);
   } else if (command === "build") {
     write("reports/ci/build.json", {
       ...identity(),
@@ -197,7 +203,7 @@ async function main(command) {
         }
     write("reports/playwright.json", report);
   } else if (command === "gate") {
-    validateJobs(JSON.parse(process.env.CI_NEEDS));
+    validateJobs(JSON.parse(process.env.CI_NEEDS), process.env.GITHUB_RUN_ATTEMPT);
     const total = Number(process.env.CI_SHARDS);
     if (![1, 4, 8].includes(total)) throw new Error("Invalid shard count");
     assertIdentity(read("reports/ci/build.json"));

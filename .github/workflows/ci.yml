@@ -25,6 +25,7 @@ jobs:
     timeout-minutes: 5
     outputs:
       run: ${{ steps.plan.outputs.run }}
+      attempt: ${{ steps.plan.outputs.attempt }}
       shards: ${{ steps.plan.outputs.shards }}
       total: ${{ steps.plan.outputs.total }}
     steps:
@@ -48,6 +49,8 @@ jobs:
     if: needs.prepare.outputs.run == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    outputs:
+      attempt: ${{ steps.complete.outputs.attempt }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -82,11 +85,17 @@ jobs:
           compression-level: 0
           path: |
             reports/release-notes/
+      - id: complete
+        name: Record successful workflow attempt
+        run: node scripts/ci.mjs stamp
+
   unit:
     needs: [prepare]
     if: needs.prepare.outputs.run == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    outputs:
+      attempt: ${{ steps.complete.outputs.attempt }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -110,11 +119,17 @@ jobs:
           compression-level: 0
           path: |
             reports/vitest.json
+      - id: complete
+        name: Record successful workflow attempt
+        run: node scripts/ci.mjs stamp
+
   build:
     needs: [prepare]
     if: needs.prepare.outputs.run == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    outputs:
+      attempt: ${{ steps.complete.outputs.attempt }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -153,6 +168,10 @@ jobs:
           compression-level: 0
           path: |
             reports/ci/
+      - id: complete
+        name: Record successful workflow attempt
+        run: node scripts/ci.mjs stamp
+
   browser:
     needs: [prepare, build]
     if: needs.prepare.outputs.run == 'true'
@@ -213,6 +232,8 @@ jobs:
     if: needs.prepare.outputs.run == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    outputs:
+      attempt: ${{ steps.complete.outputs.attempt }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -250,6 +271,10 @@ jobs:
           compression-level: 0
           path: |
             reports/interactions/
+      - id: complete
+        name: Record successful workflow attempt
+        run: node scripts/ci.mjs stamp
+
   windows:
     needs: [prepare]
     if: needs.prepare.outputs.run == 'true'
@@ -257,6 +282,8 @@ jobs:
     timeout-minutes: 20
     env:
       ELECTRON_SKIP_BINARY_DOWNLOAD: ""
+    outputs:
+      attempt: ${{ steps.complete.outputs.attempt }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
@@ -287,6 +314,10 @@ jobs:
           compression-level: 0
           path: |
             release/win-unpacked
+      - id: complete
+        name: Record successful workflow attempt
+        run: node scripts/ci.mjs stamp
+
   verify:
     needs: [prepare, static, unit, build, browser, interactions, windows]
     if: always() && needs.prepare.outputs.run != 'false'
