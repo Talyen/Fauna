@@ -111,3 +111,24 @@ it("keeps shared presentation independent of feature compositions", () => {
     ),
   ).toEqual([]);
 });
+
+it("keeps combat continuations below public entry points and outside presentation", () => {
+  expect(
+    boundaryViolations("src/ui/battle/fixture.ts", 'import {resolveCombat} from "@/game/combat-resolution"'),
+  ).toHaveLength(1);
+  for (const file of [
+    "src/game/combat-state.ts",
+    "src/game/combat-policy.ts",
+    "src/game/combat-resolution.ts",
+  ])
+    for (const target of ["./combat", "@/game/engine", "./abilities.ts"])
+      expect(boundaryViolations(file, `import * as higher from "${target}"`)).toHaveLength(1);
+  for (const file of ["src/game/combat-state.ts", "src/game/combat-policy.ts"])
+    expect(boundaryViolations(file, 'export * from "./combat-resolution"')).toHaveLength(1);
+  expect(
+    boundaryViolations("src/game/combat.ts", 'import {resolveCombat} from "./combat-resolution"'),
+  ).toEqual([]);
+  expect(
+    boundaryViolations("src/game/combat-resolution.ts", 'import {removeArmor} from "./combat-state"'),
+  ).toEqual([]);
+});

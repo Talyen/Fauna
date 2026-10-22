@@ -1,6 +1,6 @@
 # Make combat reaction ordering explicit
 
-Status: proposed; implementation is outside this assessment
+Status: implemented; exact-commit hosted CI and rendered verification are reported in the task handoff
 
 Assessment baseline: local main `25457b3`, 2026-10-21; subsequent main changes through `9178ce9` do not change the combat owners assessed here
 
@@ -115,7 +115,7 @@ Use existing focused suites, especially [combat](../../tests/unit/game/combat.te
 
 Follow [Contributing](../../CONTRIBUTING.md#verification): task-path checks and useful named unit suites locally; documentation checks for Markdown. Full static checks, all units, build, browser/replay and Windows packaging remain CI-owned. For implementation, observe CI for the exact integrated commit and inspect combat feedback evidence because event order is player-visible. Report desktop, physical controller, Steam client and Steam Deck boundaries separately; unrun checks remain pending.
 
-This assessment changes documentation only. It does not establish new runtime, rendered or performance evidence.
+The original assessment changed documentation only. The implementation record below identifies runtime changes and the local verification boundary.
 
 ## Scope and stopping conditions
 
@@ -141,3 +141,13 @@ Bounced delivery retains its parent packet's attack policy, forbids another boun
 The packet sequence is: admission; Dodge and its reactions; Freeze Nullify; attack modifiers; Critical; Block payment; Armor modifiers and mitigation; Health payment and Armor decay; threshold reactions; Sun-Struck Shield; Second Wind; Block/damage/knockout events; earned Gold/healing and Boon effects; Open Flank; Water talents; buildup and control grants; attack procs; Thorns; Leech; control rewards; Sporecoat; Bubble Burst; Armor-break delivery. The outer hit then resolves Wrong Foot, Resonance and Light bounce. Each child completes at its insertion point before the parent resumes.
 
 Captured facts include actual Health loss, Block spent, initial Armor, pending Armor breaks and Bleed payout ownership. Threshold Cleanse can remove the ticking wound without revoking already earned Leech. Liveness and reaction eligibility are rechecked on continuation; approved actor knockout cancels unexecuted ability work without rolling back completed facts.
+
+## Implementation record
+
+All five implementation stages are complete. `combat.ts` retains public entry points; `combat-policy.ts` names packet origins and eligibility; `combat-resolution.ts` uses generator frames as typed continuations on a synchronous local stack; `combat-state.ts` supplies atomic mutations and queries. Children yield one operation to the stack and never recursively enter another mutation handler. State, RNG and event ordering remain owned by the existing command transaction. Architecture checks protect the dependency direction and keep direct resolver access out of presentation.
+
+Armor reductions now use one atomic owner and transient depletion receipts, including damage decay, Erosion, control removal, Purge, melting and theft. A receipt is consumed before its reaction runs; a new Armor gain and break can produce another receipt. Internal packet results distinguish ignored/missed packets from landed packets with zero Health loss. Neither change alters the saved aggregate or format.
+
+The approved knockout correction is recorded separately: Thunderstone previously dealt its derived follow-up after Thorns had knocked out the acting creature. It now stops. Later proc checks also stop consuming RNG after a prior child kills the actor, and pre-ability Armor-break knockout stops repeat admission. Regressions protect both sides' area targets, extra effects and repeats, plus Death's Door continuation. Applied damage/control and independently earned periodic attribution remain intact.
+
+All four pre-refactor deterministic traces still match their recorded complete-result hashes exactly. The focused local selection passed 534 tests across 27 combat, species, presentation and application save-ordering suites before the final architecture-policy check. Two Boon fixtures were corrected to pair Freeze with a positive control duration and clear it when control is removed, matching the existing current-format validator. No gameplay save schema change was needed. Full CI, build, browser/replay, Windows packaging and rendered evidence remain separate gates; the task handoff records observed results.

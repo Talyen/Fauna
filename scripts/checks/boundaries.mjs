@@ -91,6 +91,19 @@ export function boundaryViolations(file, source) {
       fail(`Runtime imports a development harness: ${specifier}`);
     if (tooling && (within("ui") || within("components") || /^(react(?:-dom)?)(\/|$)/.test(target)))
       fail(`Development harness imports presentation: ${specifier}`);
+    const combatTarget = target.replace(/\.ts$/, "");
+    if (
+      ["src/game/combat-state.ts", "src/game/combat-policy.ts", "src/game/combat-resolution.ts"].includes(
+        file,
+      ) &&
+      ["src/game/combat", "src/game/abilities", "src/game/engine"].includes(combatTarget)
+    )
+      fail("Combat internals cannot import their public entry points or command owners.");
+    if (
+      ["src/game/combat-state.ts", "src/game/combat-policy.ts"].includes(file) &&
+      combatTarget === "src/game/combat-resolution"
+    )
+      fail("Combat foundations cannot schedule reactions.");
     if (game && !within("game") && !["immer", "zod"].includes(target))
       fail(`Gameplay import escapes its owner: ${specifier}`);
     if (
@@ -109,7 +122,7 @@ export function boundaryViolations(file, source) {
         target.startsWith("desktop/"))
     )
       fail(`Renderer imports privileged implementation: ${specifier}`);
-    if (ui && /^src\/game\/abilities(?:\.ts)?$/.test(target))
+    if (ui && /^src\/game\/(?:abilities|combat-resolution)(?:\.ts)?$/.test(target))
       fail("UI must use application commands and read-only previews.");
     if (
       ui &&

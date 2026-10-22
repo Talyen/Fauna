@@ -51,6 +51,7 @@ export const maximumHealth = (unit: Combatant) =>
   "maxHealth" in unit ? unit.maxHealth : species(unit.species).health;
 export const unitName = (unit: Combatant) => ("name" in unit ? unit.name : species(unit.species).name);
 export const controlled = (unit: Combatant) => !!unit.combat?.controlled || !!unit.combat?.skipped;
+/** Ties retain battlefield order; reserves and knockouts are never recipients. */
 export function mostInjured<T extends Combatant>(units: readonly T[]): T | undefined {
   return units
     .filter((unit) => unit.health > 0)
@@ -112,6 +113,7 @@ function ownDodgeChance(state: GameState, unit: Combatant): number {
         : 0),
   );
 }
+/** Share intrinsic Dodge only; received aura bonuses never amplify another provider. */
 export function sharedDodgeChance(state: GameState, target: Combatant): number {
   const allied = !("maxHealth" in target);
   const row = allied ? state.team : (state.battle?.enemies ?? []);
@@ -146,12 +148,14 @@ export function grantTemporaryDodge(unit: Combatant, amount: number, events: Gam
     text: `${unitName(unit)} gains ${gained}% Dodge until its next turn`,
   });
 }
+/** One Blind roll owns the attack, including area targets and authored extra packets. */
 export function beginAttack(state: GameState, source: Combatant): boolean {
   const stats = combat(source);
   if (!stats.blind) return false;
   stats.blind = false;
   return roll(state) < 0.5;
 }
+/** Capture once per attack so every area target receives the same opening bonus. */
 export function openingCriticalBonus(state: GameState, source: Combatant): number {
   const stats = combat(source);
   if (stats.firstAttackUsed) return 0;
