@@ -73,7 +73,10 @@ it("uses reachable release ancestry and leaves Git unchanged when generating not
     expect(result.markdown).toContain("Meteorite doubles your first Burn hit.");
     expect(result.markdown).not.toContain("initialize");
     expect(generatePatchNotes(root).markdown).toContain("No player-facing changes");
-    git("checkout", "-qb", "unrelated", "v0.9.0");
+    // A branch named like a release tag must not change the selected history.
+    git("branch", "v0.9.0", "HEAD");
+    expect(generatePatchNotes(root, { tag: "v1.0.0" }).markdown).toBe(result.markdown);
+    git("checkout", "-qb", "unrelated", "refs/tags/v0.9.0");
     writeFileSync(path.join(root, "unrelated"), "other branch");
     git("add", ".");
     git("commit", "-qm", "feat: unrelated");

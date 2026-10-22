@@ -35,7 +35,7 @@ const hand: Card[] = [
   level: 0,
   ownerId: team.find((creature) => creature.species === definition(id).species)!.id,
 }));
-const enemies = ENCOUNTERS[1].enemies.map((enemy, index) => ({
+const enemies = ENCOUNTERS[1]!.enemies.map((enemy, index) => ({
   ...enemy,
   id: `enemy-${index}`,
   current: [19, 15, 12][index]!,

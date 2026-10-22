@@ -7,8 +7,9 @@ import { performance } from "node:perf_hooks";
 import { pathToFileURL } from "node:url";
 import { ROOT, runtime, identity, hash, reportDirectory } from "./lib/tool-runtime.mjs";
 import { comparePerformance, summarizeSample } from "./lib/performance-metrics.mjs";
+import { isolatedDesktopEnvironment } from "./lib/desktop-environment.mjs";
 const read = async (file) => JSON.parse(await readFile(path.resolve(file), "utf8"));
-async function buildIdentity() {
+export async function performanceBuildIdentity(repository = ROOT) {
   const files = [];
   async function walk(dir) {
     for (const entry of (await readdir(dir, { withFileTypes: true })).sort((a, b) =>
@@ -16,13 +17,15 @@ async function buildIdentity() {
     )) {
       const file = path.join(dir, entry.name);
       if (entry.isDirectory()) await walk(file);
-      else if (/\.(?:js|css|html)$/.test(file))
-        files.push(`${path.relative(ROOT, file)}:${hash(await readFile(file))}`);
+      else files.push(`${path.relative(repository, file)}:${hash(await readFile(file))}`);
     }
   }
-  await walk(path.join(ROOT, "dist"));
-  await walk(path.join(ROOT, "desktop"));
-  if (!files.length) throw new Error("Build the production renderer before capturing performance.");
+  if (!(await readFile(path.join(repository, "dist/index.html"))).length)
+    throw new Error("Build the production renderer before capturing performance.");
+  await walk(path.join(repository, "dist"));
+  await walk(path.join(repository, "desktop"));
+  for (const name of ["package.json", "src/game/save-format.json"])
+    files.push(`${name}:${hash(await readFile(path.join(repository, name)))}`);
   return hash(files.join("\n"));
 }
 async function startSampler(page) {
@@ -144,11 +147,8 @@ async function capture(browser, url, scenario, measured, native = false, cold = 
     if (native) {
       profile = await mkdtemp(path.join(os.tmpdir(), "fauna-perf-"));
       await writeFile(path.join(profile, "expedition.json"), scenario.initial);
-      const env = { ...process.env, FAUNA_SMOKE_USER_DATA: profile };
+      const env = isolatedDesktopEnvironment(profile);
       env.FAUNA_PERF_CAPTURE = "1";
-      delete env.FAUNA_DEV_URL;
-      delete env.FAUNA_PREVIEW_USER_DATA;
-      delete env.ELECTRON_RUN_AS_NODE;
       app = await electron.launch({
         ...(process.env.FAUNA_ELECTRON_EXECUTABLE
           ? { executablePath: process.env.FAUNA_ELECTRON_EXECUTABLE }
@@ -262,7 +262,7 @@ export async function main(args = process.argv.slice(2)) {
     format: 2,
     complete: false,
     identity: await identity(),
-    buildIdentity: await buildIdentity(),
+    buildIdentity: await performanceBuildIdentity(),
     replayOf: prior?.buildIdentity ?? null,
     environment: null,
     cases: [],

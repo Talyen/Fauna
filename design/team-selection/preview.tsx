@@ -100,7 +100,7 @@ function TeamSelection({ hints = false, sample = "" }: { hints?: boolean; sample
     <main className="team-sample" ref={board}>
       {sample ? <h1 className="sample-label">{sample}</h1> : null}
       <section className="team-row" aria-label="Enemy lineup">
-        {ENCOUNTERS[1].enemies.map((enemy, index) => tile(enemy.species, 0, index, undefined, enemy.name))}
+        {ENCOUNTERS[1]!.enemies.map((enemy, index) => tile(enemy.species, 0, index, undefined, enemy.name))}
       </section>
       <section className="team-roster-group" aria-labelledby={`${sample}-active-label`}>
         <h2 id={`${sample}-active-label`}>Active</h2>

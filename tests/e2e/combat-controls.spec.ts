@@ -87,15 +87,31 @@ test("combat preferences, autoplay pause and manual takeover", async ({ page }) 
     Object.defineProperty(navigator, "getGamepads", { value: () => [pad], configurable: true });
     (window as unknown as { controlPad: typeof pad }).controlPad = pad;
   });
-  await page.waitForTimeout(100);
+  const frames = () =>
+    page.evaluate(
+      () =>
+        new Promise<void>((resolve) => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))),
+    );
+  await frames();
+  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
+  const beforeController = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!));
   await page.evaluate(() => {
     (
       window as unknown as { controlPad: { buttons: { pressed: boolean }[] } }
     ).controlPad.buttons[3]!.pressed = true;
   });
+  await frames();
+  await page.evaluate(() => {
+    (
+      window as unknown as { controlPad: { buttons: { pressed: boolean }[] } }
+    ).controlPad.buttons[3]!.pressed = false;
+  });
+  await frames();
   await expect
     .poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).revision))
-    .toBeGreaterThan(revision + 1);
+    .toBe(beforeController.revision + 1);
+  const afterController = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!));
+  expect(afterController.battle.turn).toBe(beforeController.battle.turn + 1);
 });
 test("final victory returns to the menu without a retired creature reveal", async ({ page }) => {
   const width = 1280;
@@ -117,12 +133,16 @@ test("final victory returns to the menu without a retired creature reveal", asyn
   await page.locator(`[data-card-id=${JSON.stringify(final.battle!.hand[0])}]`).click();
   await page.locator(".confirm-play").click();
   await page.getByRole("heading", { name: "Journey complete" }).waitFor();
+  await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
+  const won = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!));
+  expect(won.phase).toBe("victory");
   await page.getByRole("button", { name: "Main menu", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Creature unlocked" })).toHaveCount(0);
   await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
   await page.reload();
   await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Creature unlocked" })).toHaveCount(0);
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(won);
 });
 
 test("development skip wins once through normal rewards", async ({ page }) => {
@@ -170,9 +190,11 @@ test("manual zero-Mana turns resume without losing the battle", async ({ page })
     .poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).battle.mana))
     .toBe(0);
   await page.locator(".app:not([inert])[data-save-status=saved]").waitFor();
+  const committed = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!));
   await page.reload();
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
+  expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(committed);
   await page.getByRole("button", { name: "End turn", exact: true }).click();
   await expect
     .poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).battle.turn))

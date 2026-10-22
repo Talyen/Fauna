@@ -62,13 +62,20 @@ export async function main(args = process.argv.slice(2)) {
     const server = await runtime();
     try {
       if (record.identity !== (await identity())) throw new Error("Replay code/content identity differs.");
+      let result;
       if (record.config.checkpoint) {
         const { balanceCase } = await server.ssrLoadModule("/src/application/balance.ts");
-        await balanceCase(record.config, record.identity, record.replay);
+        result = await balanceCase(record.config, record.identity, record.replay);
       } else {
         const { runJourney } = await server.ssrLoadModule("/src/application/playthrough.ts");
-        await runJourney(record.replay.config, record.identity, record.replay.initial, record.replay);
+        result = await runJourney(
+          record.replay.config,
+          record.identity,
+          record.replay.initial,
+          record.replay,
+        );
       }
+      if (!result.complete) throw new Error(`Incomplete balance replay: ${result.reason}`);
       console.log("Balance replay matched all checkpoints.");
     } finally {
       await server.close();

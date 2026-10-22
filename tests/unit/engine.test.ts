@@ -258,7 +258,7 @@ describe("creature traits and deck circulation", () => {
       d.battle!.draw = d.cards.filter((c) => ![attack.id, heal.id].includes(c.id)).map((c) => c.id);
     });
     s = accept(s, { type: "play", cardId: attack.id, targetId: "enemy-0" });
-    expect(s.battle!.enemies[0]!.health).toBe(12);
+    expect(s.battle!.enemies[0]!.health).toBe(s.battle!.enemies[0]!.maxHealth - 6);
     s = accept(s, { type: "play", cardId: heal.id, targetId: "ally-2" });
     expect(s.team[2]!.health).toBe(13);
     expect(s.battleXP.health).toBe(1);
@@ -279,11 +279,11 @@ describe("creature traits and deck circulation", () => {
       d.team[0]!.block = 4;
       combat(d.team[0]!).thorns = 2;
       hit(d, d.battle!.enemies[0]!, d.team[0]!, 4, "nature", events, { retaliation: true });
-      expect(d.battle!.enemies[0]!.health).toBe(18);
+      expect(d.battle!.enemies[0]!.health).toBe(d.battle!.enemies[0]!.maxHealth);
       d.rng = 1;
       hit(d, d.battle!.enemies[1]!, d.team[0]!, 4, "burn", events);
     });
-    expect(s.battle!.enemies[1]!.health).toBe(14);
+    expect(s.battle!.enemies[1]!.health).toBe(s.battle!.enemies[1]!.maxHealth - 2);
     expect(s.team[0]!.combat!.thorns).toBe(1);
   });
   it("reshuffles deterministically and retains every live card exactly once across zones", () => {

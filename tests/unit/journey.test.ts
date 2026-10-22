@@ -1,3 +1,4 @@
+import { chooseBattleCommand } from "../../src/application/battle-policy";
 import { freshCombat } from "../../src/game/combat";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
@@ -6,7 +7,16 @@ import { FIRST_RUN_STARTERS, species } from "../../src/game/content";
 import { BOONS } from "../../src/game/progression";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { previewPlay } from "../../src/game/preview";
-import { recruitChoice, accept, run, winBattle, victoryReady, bossReward, policy } from "./helpers";
+import {
+  recruitChoice,
+  accept,
+  run,
+  winBattle,
+  victoryReady,
+  bossReward,
+  policy,
+  FULL_JOURNEY_SEED,
+} from "./helpers";
 
 function startedJourney() {
   return accept(accept(createGame(7), { type: "draft", species: createGame(7).starterOffers[0]! }), {
@@ -219,7 +229,10 @@ describe("journey earnings and results", () => {
 });
 
 it("completes the one-starter recruitment path through the final boss within the browser journey budget", () => {
-  let game = accept(accept(createGame(36), { type: "draft", species: "pollenmoth" }), { type: "start" });
+  const initial = createGame(FULL_JOURNEY_SEED);
+  let game = accept(accept(initial, { type: "draft", species: initial.starterOffers[0]! }), {
+    type: "start",
+  });
   for (let step = 0; step < 400 && game.phase !== "victory"; step++) {
     expect(game.phase).not.toBe("defeat");
     expect(game.reward?.outcome).not.toBe("defeat");
@@ -230,7 +243,9 @@ it("completes the one-starter recruitment path through the final boss within the
             species:
               game.reward!.recruits.find((kind) => !game.roster.includes(kind)) ?? game.reward!.recruits[0]!,
           }
-        : policy(game);
+        : game.phase === "battle"
+          ? chooseBattleCommand(game)
+          : policy(game);
     game = accept(game, command);
   }
   expect(game.phase).toBe("victory");

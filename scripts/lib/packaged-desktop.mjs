@@ -2,13 +2,14 @@ import { spawn } from "node:child_process";
 import { readFile, rm } from "node:fs/promises";
 import path from "node:path";
 import { chromium } from "@playwright/test";
+import { isolatedDesktopEnvironment } from "./desktop-environment.mjs";
 /** Renderer CDP works with disabled Node inspector fuses; no package is modified for testing. */
 export async function launchPackaged(profile) {
   await rm(path.join(profile, "DevToolsActivePort"), { force: true });
   const child = spawn(
     path.resolve("release/win-unpacked/Fauna.exe"),
     ["--remote-debugging-port=0", `--user-data-dir=${profile}`, "--mute-audio"],
-    { env: { ...process.env, FAUNA_SMOKE_USER_DATA: profile, FAUNA_DISABLE_STEAM: "1" }, stdio: "ignore" },
+    { env: isolatedDesktopEnvironment(profile), stdio: "ignore" },
   );
   let browser, launchError;
   child.once("error", (error) => {

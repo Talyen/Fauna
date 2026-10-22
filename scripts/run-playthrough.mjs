@@ -1,8 +1,9 @@
 import { fork } from "node:child_process";
-import { createHash, randomUUID } from "node:crypto";
-import { readdir, readFile, mkdir, writeFile, appendFile } from "node:fs/promises";
+import { randomUUID } from "node:crypto";
+import { readFile, mkdir, writeFile, appendFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { identity as sourceIdentity } from "./lib/tool-runtime.mjs";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const args = process.argv.slice(2);
 if (!args.includes("--worker")) {
@@ -47,22 +48,7 @@ if (!args.includes("--worker")) {
       if (!allowed.has(args[index])) throw new Error(`Unknown option ${args[index]}`);
       if (args[index] !== "--worker") index++;
     }
-    const hash = createHash("sha256");
-    async function fingerprint(directory) {
-      for (const entry of (await readdir(directory, { withFileTypes: true })).sort((a, b) =>
-        a.name.localeCompare(b.name),
-      )) {
-        const file = path.join(directory, entry.name);
-        if (entry.isDirectory()) await fingerprint(file);
-        else if (entry.name.endsWith(".ts")) {
-          hash.update(path.relative(root, file));
-          hash.update(await readFile(file));
-        }
-      }
-    }
-    await fingerprint(path.join(root, "src/game"));
-    await fingerprint(path.join(root, "src/application"));
-    const identity = hash.digest("hex");
+    const identity = await sourceIdentity();
     const { runJourney } = await server.ssrLoadModule("/src/application/playthrough.ts");
     const { FIRST_RUN_STARTERS } = await server.ssrLoadModule("/src/game/content.ts");
     const replay = value("--replay") ? JSON.parse(await readFile(value("--replay"), "utf8")) : undefined;

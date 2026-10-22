@@ -1,4 +1,5 @@
 import { launchPackaged } from "./lib/packaged-desktop.mjs";
+import { isolatedDesktopEnvironment } from "./lib/desktop-environment.mjs";
 import { _electron as electron } from "@playwright/test";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -14,7 +15,7 @@ try {
     ? await launchPackaged(userData)
     : await electron.launch({
         args: ["."],
-        env: { ...process.env, FAUNA_SMOKE_USER_DATA: userData },
+        env: isolatedDesktopEnvironment(userData),
       });
   const window = await app.firstWindow();
   window.setDefaultTimeout(20000);
@@ -146,7 +147,7 @@ try {
     ? await launchPackaged(userData)
     : await electron.launch({
         args: ["."],
-        env: { ...process.env, FAUNA_SMOKE_USER_DATA: userData },
+        env: isolatedDesktopEnvironment(userData),
       });
   const resumed = await app.firstWindow();
   resumed.setDefaultTimeout(20000);
