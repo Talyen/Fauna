@@ -487,3 +487,64 @@ it("reports unreadable browser storage instead of treating inaccessible slots as
   };
   await expect(createBrowserPlatform(memory).saves.readCandidates()).rejects.toThrow("unreadable");
 });
+
+it("shares startup loading so a second caller cannot later replace committed play", async () => {
+  let release!: () => void;
+  const gate = new Promise<void>((resolve) => (release = resolve));
+  let releaseLater!: () => void;
+  const later = new Promise<void>((resolve) => (releaseLater = resolve));
+  let reads = 0;
+  const readCandidates = vi.fn(async () => {
+    await (++reads === 1 ? gate : later);
+    return [{ source: "primary", data: JSON.stringify(run()) }];
+  });
+  const s = createSession({ ...platform(), saves: { readCandidates, write: async () => {} } });
+  try {
+    const first = s.load();
+    const second = s.load();
+    await vi.waitFor(() => expect(readCandidates).toHaveBeenCalled());
+    release();
+    await first;
+    expect(s.store.getState().ready).toBe(true);
+    expect(s.command({ type: "endTurn" })).toBe(true);
+    const committed = s.store.getState().game;
+    releaseLater();
+    await second;
+    expect(s.store.getState().game).toBe(committed);
+  } finally {
+    release();
+    releaseLater();
+    await s.dispose();
+  }
+});
+
+it("flush drains writes admitted by save-completion subscribers", async () => {
+  let release!: () => void;
+  const gate = new Promise<void>((resolve) => (release = resolve));
+  const write = vi.fn(async () => {
+    if (write.mock.calls.length === 2) await gate;
+  });
+  const s = createSession({ ...platform(), saves: { readCandidates: async () => [], write } });
+  await s.load();
+  let queued = false;
+  const unsubscribe = s.store.subscribe((view) => {
+    if (view.saveStatus === "saved" && !queued) {
+      queued = true;
+      s.command({ type: "start" });
+    }
+  });
+  try {
+    s.command({ type: "draft", species: s.store.getState().game.starterOffers[0]! });
+    let finished = false;
+    const flushing = s.flush().then(() => (finished = true));
+    await vi.waitFor(() => expect(write).toHaveBeenCalledTimes(2));
+    expect(finished).toBe(false);
+    release();
+    await flushing;
+    expect(s.store.getState().saveStatus).toBe("saved");
+  } finally {
+    release();
+    unsubscribe();
+    await s.dispose();
+  }
+});

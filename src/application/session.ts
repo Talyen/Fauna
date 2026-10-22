@@ -125,7 +125,16 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
     // Admit persistence before subscribers can issue another command or dispose.
     store.setState({ ...committed, saveStatus: "saving" });
   };
-  async function load() {
+  let loading: Promise<void> | undefined;
+  function load() {
+    // Assign ownership before load publishes to synchronous subscribers.
+    return (loading ??= Promise.resolve()
+      .then(loadOnce)
+      .finally(() => {
+        loading = undefined;
+      }));
+  }
+  async function loadOnce() {
     const current = store.getState();
     if (disposed || current.closing || current.ready) return;
     const token = ++generation;
@@ -162,13 +171,20 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
       if (!disposed && !store.getState().closing && token === generation) await startCloud(null);
     }
   }
+  const drainWrites = async () => {
+    let pending: Promise<void>;
+    do {
+      pending = writes;
+      await pending;
+    } while (pending !== writes);
+  };
   const prepareClose = async () => {
     if (disposed) return true;
     store.setState({ closing: true });
-    await writes;
+    await drainWrites();
     if (store.getState().saveStatus === "error") {
       save(store.getState().game);
-      await writes;
+      await drainWrites();
     }
     await cloud.flush();
     return true;
@@ -201,7 +217,7 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
       save(view.game);
     },
     async flush() {
-      await writes;
+      await drainWrites();
       return store.getState().saveStatus !== "error";
     },
     async quit() {
