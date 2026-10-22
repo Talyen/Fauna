@@ -59,7 +59,8 @@ const bridge = Object.freeze({
     };
   },
   readCandidates: () => ipcRenderer.invoke("fauna:read"),
-  writeSave: (/** @type {string} */ data) => ipcRenderer.invoke("fauna:write", data),
+  writeSave: (/** @type {string} */ data, /** @type {string[]} */ recoverable = []) =>
+    ipcRenderer.invoke("fauna:write", data, recoverable),
   quit: () => ipcRenderer.invoke("fauna:quit"),
   onCloseRequested: (/** @type {() => Promise<boolean>} */ listener) => {
     closeListener = listener;

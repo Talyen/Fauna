@@ -26,10 +26,17 @@ function createStorage(directory) {
         throw new AggregateError(failures, "Save slots are unreadable.");
       return candidates;
     },
-    /** @param {string} data */
-    write(data) {
+    /** @param {string} data @param {string[]} recoverable */
+    write(data, recoverable = []) {
       if (typeof data !== "string" || Buffer.byteLength(data) > 100000)
         return Promise.reject(new Error("Invalid save payload."));
+      if (
+        !Array.isArray(recoverable) ||
+        recoverable.length > 3 ||
+        recoverable.some((value) => typeof value !== "string" || Buffer.byteLength(value) > 100000)
+      )
+        return Promise.reject(new Error("Invalid recovery checkpoints."));
+      const approved = new Set(recoverable);
       try {
         const value = JSON.parse(data);
         if (value.version !== saveFormat.version) throw new Error("Unsupported save.");
@@ -38,6 +45,23 @@ function createStorage(directory) {
       }
       const operation = queue.then(async () => {
         await fs.mkdir(directory, { recursive: true });
+        const backups = [`${primary}.bak1`, `${primary}.bak2`];
+        const readable = new Set();
+        /** @type {{file: string, data: string}[]} */
+        const intact = [];
+        for (const file of [primary, ...backups]) {
+          try {
+            const stat = await fs.stat(file);
+            const previous = stat.size <= 100000 ? await fs.readFile(file, "utf8") : null;
+            readable.add(file);
+            if (previous !== null && approved.has(previous) && !intact.some((item) => item.data === previous))
+              intact.push({ file, data: previous });
+          } catch (error) {
+            if (error instanceof Error && "code" in error && error.code === "ENOENT") readable.add(file);
+            else if (file === primary) throw error;
+            // Inaccessible backups retain their existing contents.
+          }
+        }
         const temp = `${primary}.tmp`;
         const handle = await fs.open(temp, "w");
         try {
@@ -46,15 +70,16 @@ function createStorage(directory) {
         } finally {
           await handle.close();
         }
-        for (let i = 2; i >= 1; i--) {
-          const backup = `${primary}.bak${i}`;
+        const targets = backups.filter((file) => readable.has(file));
+        for (let i = targets.length - 1; i >= 0; i--) {
+          const checkpoint = intact[i];
+          const backup = targets[i];
+          if (!checkpoint || !backup) continue;
           const staged = `${backup}.tmp`;
           try {
             // A failed copy must never truncate an existing recovery checkpoint.
-            await fs.copyFile(i === 1 ? primary : `${primary}.bak${i - 1}`, staged);
+            await fs.copyFile(checkpoint.file, staged);
             await fs.rename(staged, backup);
-          } catch (error) {
-            if (!(error instanceof Error && "code" in error && error.code === "ENOENT")) throw error;
           } finally {
             await fs.rm(staged, { force: true }).catch(() => {});
           }

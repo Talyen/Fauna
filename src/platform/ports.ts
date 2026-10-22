@@ -31,7 +31,8 @@ export interface DesktopBridge {
   cloud?: CloudPort;
   onOverlay?: (listener: (active: boolean) => void) => () => void;
   readCandidates(): Promise<SaveCandidate[]>;
-  writeSave(data: string): Promise<void>;
+  /** Exact existing checkpoints approved by application validation for backup rotation. */
+  writeSave(data: string, recoverable?: string[]): Promise<void>;
   quit(): Promise<void>;
   onCloseRequested(listener: () => Promise<boolean>): () => void;
 }
