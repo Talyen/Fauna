@@ -37,8 +37,9 @@ Additional opt-in tools:
 - `npm run balance:compare`: [balance-compare.mjs](balance/balance-compare.mjs), [paired report math](lib/paired-balance.mjs), [production cases](../src/tooling/balance.ts).
 - `npm run perf`, `npm run perf:replay`, `npm run perf:compare`: [capture driver](performance/run-performance.mjs), [metrics](lib/performance-metrics.mjs), [validated fixtures](../src/tooling/performance.ts).
 - `npm run verify:package`: [package gate](release/verify-package.mjs), [after-pack hardening](../desktop/after-pack.cjs), [packaged renderer launcher](lib/packaged-desktop.mjs).
+- `npm run check:types`: the gameplay, renderer, Node tooling and test/design compiler environments described in [architecture](../Docs/ARCHITECTURE.md#typescript-environments); CI-owned as part of `npm run check:full`.
 - `npm run deadcode`: [Knip entrypoints](../knip.config.js); full CI static verification only.
-- `npm run context`: [owner lookup](agent/agent-context.mjs).
+- `npm run context`: [owner lookup](agent/agent-context.mjs), including runtime guidance for focused unit suites alongside test policy.
 - `npm run review:status`, `npm run review:diff`: [bounded patch review](agent/agent-review.mjs).
 - `npm run test:e2e:route`: [named route launcher](performance/test-route.mjs), [route definitions](lib/test-routes.mjs).
 - `npm run test:interactions`: [rendered seeded runner](performance/run-interactions.mjs), [bounded reducer and replay validation](lib/interaction-replay.mjs).

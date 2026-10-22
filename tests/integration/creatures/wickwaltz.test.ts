@@ -6,7 +6,7 @@ import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { definitionKeywords } from "../../../src/game/keywords";
-import { combatStatuses } from "../../../src/ui/battle/combat-status";
+import { combatStatuses } from "../../../src/ui/shared/combat-status";
 import type { GameEvent, GameState } from "../../../src/game/types";
 import { accept, teamRun } from "../../support/game";
 

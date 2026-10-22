@@ -5,7 +5,7 @@ import type { GameState } from "../../game/types";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs";
 import { ArtCard } from "../shared/art-card";
 import { assetUrl } from "../shared/assets";
-import { CardRules } from "../battle/combat-values";
+import { CardRules } from "../shared/combat-values";
 import { KeywordText } from "../shared/keyword-text";
 import { PagedItems } from "../shared/pagination";
 import { Screen, ScreenHeading } from "../shared/screen";

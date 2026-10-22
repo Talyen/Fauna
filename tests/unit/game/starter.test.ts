@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
-import { createGame, dispatch, starterCount } from "../../../src/game/engine";
+import { createGame, dispatch } from "../../../src/game/engine";
+import { starterCount } from "../../../src/game/progression";
 import { CARDS, FIRST_RUN_STARTERS, SPECIES } from "../../../src/game/content";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { accept, recruitChoice, winBattle } from "../../support/game";

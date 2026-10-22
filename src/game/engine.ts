@@ -4,6 +4,7 @@ import saveFormat from "./save-format.json" with { type: "json" };
 import { freeze, produce } from "immer";
 import {
   collectedSpecies,
+  starterCount,
   creaturePassive,
   MAX_CREATURE_STARS,
   KEYWORDS,
@@ -14,10 +15,6 @@ import {
 } from "./progression";
 import {
   combat,
-  shuffle,
-  fillHand,
-  draw,
-  drawKeyword,
   gainMana,
   grantArmor,
   freshCombat,
@@ -25,14 +22,14 @@ import {
   grantBlock,
   restoreHealth,
   mostInjured,
-  roll,
   startAction,
   tickStatuses,
   controlled,
   TURN_MANA,
   TURN_DRAW,
-  HAND_LIMIT,
 } from "./combat";
+import { shuffle, roll } from "./random";
+import { fillHand, draw, drawKeyword } from "./card-zones";
 import { retainedBlock, actionValue, cardCost, enemyAbilityValue } from "./rules";
 import { CARDS, SPECIES, FIRST_RUN_STARTERS, definition, species, enemyCard, enemyCanUse } from "./content";
 import { bossEncounter, encounterSource, finalEncounter, encounterPacks } from "./encounters";
@@ -67,9 +64,6 @@ export function createGame(seed = 1): GameState {
   };
   offerStarters(state);
   return freeze(state, true);
-}
-export function starterCount(state: GameState) {
-  return collectedSpecies(state).length === 0 ? 1 : 3;
 }
 function offerStarters(state: GameState) {
   const collected = collectedSpecies(state);
@@ -122,7 +116,6 @@ function ownedCards(id: string, kind: GameState["team"][number]["species"]): Car
     level: 0,
   }));
 }
-export const MAX_HAND_SIZE = HAND_LIMIT;
 function intents(state: GameState) {
   const alive = living(state);
   for (const enemy of state.battle!.enemies) {

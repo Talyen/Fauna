@@ -15,8 +15,8 @@ import {
 import { cardKeywords, KEYWORDS, TALENTS } from "../../../src/game/progression";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { appendFeedback, CombatFeedback } from "../../../src/ui/battle/combat-feedback";
-import { BattleReadout } from "../../../src/ui/battle/target-preview";
-import { CardRules } from "../../../src/ui/battle/combat-values";
+import { BattleReadout } from "../../../src/ui/shared/battle-readout";
+import { CardRules } from "../../../src/ui/shared/combat-values";
 import { KeywordText } from "../../../src/ui/shared/keyword-text";
 import { run } from "../../support/game";
 

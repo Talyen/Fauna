@@ -1,4 +1,4 @@
-import { KeywordText } from "../shared/keyword-text";
+import { KeywordText } from "./keyword-text";
 import { Droplet, Flame, FlaskConical, Leaf, Snowflake, Sun, Swords, Zap } from "lucide-react";
 import { cardText, DAMAGE_LABELS, type CardDefinition, type DamageType } from "../../game/content";
 const DAMAGE_ICONS = {

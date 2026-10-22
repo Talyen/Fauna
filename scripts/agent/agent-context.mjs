@@ -14,6 +14,10 @@ export const topics = {
     patterns: [
       "src/game/engine",
       "src/game/combat",
+      "src/game/abilities",
+      "src/game/ability-values",
+      "src/game/card-zones",
+      "src/game/random",
       "src/game/rules",
       "src/game/preview",
       "src/game/keywords",
@@ -21,7 +25,12 @@ export const topics = {
       "src/ui/battle",
     ],
     docs: ["Docs/ARCHITECTURE.md", "Docs/KEYWORDS.md"],
-    entries: ["src/game/engine.ts", "src/game/combat.ts", "src/application/battle-policy.ts"],
+    entries: [
+      "src/game/engine.ts",
+      "src/game/abilities.ts",
+      "src/game/combat.ts",
+      "src/application/battle-policy.ts",
+    ],
   },
   progression: {
     patterns: [
@@ -29,12 +38,13 @@ export const topics = {
       "src/game/content/talents",
       "src/game/content/boons",
       "src/game/encounters",
+      "src/game/support",
       "src/ui/expedition/",
       "src/ui/collection/",
       "src/ui/talents/",
     ],
     docs: ["Docs/EXPEDITION_DESIGN.md"],
-    entries: ["src/game/progression.ts", "src/game/encounters.ts"],
+    entries: ["src/game/progression.ts", "src/game/encounters.ts", "src/game/support.ts"],
   },
   ui: {
     patterns: ["src/ui/", "src/components/", "src/lib/", "design/"],
@@ -93,8 +103,17 @@ export function context(root, paths = [], requested = []) {
     if (!Object.hasOwn(topics, topic)) throw new Error(`Unknown topic: ${topic}`);
   const selected = new Set(requested);
   for (const file of selectPaths(root, paths)) {
+    // Focused suites inherit their runtime owner's guidance as well as test policy.
+    const owner = /^tests\/unit\/(game|application|platform|ui|tooling)\/(.+)\.test\.[^.]+$/.exec(file);
+    const candidates = [file];
+    if (owner) {
+      candidates.push(`src/${owner[1]}/${owner[2]}`);
+      if (owner[1] === "ui") candidates.push(`src/ui/${owner[2].replace(/-ui$/, "")}/`);
+      if (owner[1] === "game") candidates.push("src/game/types");
+    }
+    if (file.startsWith("tests/integration/")) candidates.push("src/game/types");
     const matches = Object.keys(topics).filter((topic) =>
-      topics[topic].patterns.some((prefix) => file.startsWith(prefix)),
+      topics[topic].patterns.some((prefix) => candidates.some((candidate) => candidate.startsWith(prefix))),
     );
     for (const topic of matches.length ? matches : ["architecture"]) selected.add(topic);
   }

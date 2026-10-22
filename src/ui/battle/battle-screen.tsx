@@ -1,7 +1,7 @@
 import { sharedDodgeChance } from "../../game/combat";
 import { Screen } from "../shared/screen";
 import { HandMotion } from "./hand-motion";
-import { combatStatuses } from "./combat-status";
+import { combatStatuses } from "../shared/combat-status";
 import { motionValue } from "../shared/motion-values";
 import { ActionDetails } from "../shared/card-details";
 import { cardCost } from "../../game/rules";

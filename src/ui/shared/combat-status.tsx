@@ -1,12 +1,12 @@
-import { PagedItems } from "../shared/pagination";
-import { returnFocus } from "../shared/focus";
-import { KeywordText } from "../shared/keyword-text";
-import { motionValue } from "../shared/motion-values";
+import { PagedItems } from "./pagination";
+import { returnFocus } from "./focus";
+import { KeywordText } from "./keyword-text";
+import { motionValue } from "./motion-values";
 import { useEffect, useLayoutEffect, useState, useRef } from "react";
 import { Hourglass, Skull, Timer } from "lucide-react";
 import type { CombatState } from "../../game/types";
 import { isKeywordId, KEYWORD_DEFINITIONS } from "../../game/keywords";
-import { KeywordIcon } from "../shared/keyword-icon";
+import { KeywordIcon } from "./keyword-icon";
 import { Button } from "../../components/ui/button";
 import { Tooltip, TooltipTrigger, TooltipContent } from "../../components/ui/tooltip";
 const stats = [

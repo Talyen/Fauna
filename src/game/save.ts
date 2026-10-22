@@ -1,7 +1,8 @@
 import { needsCampfire } from "./support";
 import saveFormat from "./save-format.json" with { type: "json" };
 import { freeze } from "immer";
-import { MAX_HAND_SIZE, starterCount } from "./engine";
+import { MAX_HAND_SIZE } from "./card-zones";
+import { starterCount } from "./progression";
 import { z } from "zod";
 import { CARDS, SPECIES, FIRST_RUN_STARTERS, species } from "./content";
 import { JOURNEY_LENGTH, encounterPacks, encounterSource, finalEncounter, bossEncounter } from "./encounters";

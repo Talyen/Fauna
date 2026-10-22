@@ -1,4 +1,4 @@
-import { starterCount } from "../game/engine";
+import { starterCount } from "../game/progression";
 import { canVisitCampfire, canVisitMerchant } from "../game/support";
 import { battleChoices } from "../application/battle-policy";
 import { createSession, type Session } from "../application/session";
