@@ -31,7 +31,14 @@ import {
   leaveCampfire,
   returnHome,
 } from "./journey";
-import { ownedCards, prepareLineup, swapBackup, swapFromCard, pendingReplacement } from "./team";
+import {
+  ownedCards,
+  prepareLineup,
+  recruitLineup,
+  swapBackup,
+  swapFromCard,
+  pendingReplacement,
+} from "./team";
 import { finishTurn, livingChorus } from "./combat/turns";
 
 export function createGame(seed = 1): GameState {
@@ -150,8 +157,6 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
     (!canRecruitDestination(state) || state.expedition?.recruit !== command.species)
   )
     return reject(state, "That recruit is unavailable.");
-  if (command.type === "skipRecruit" && !!state.reward?.recruits.length)
-    return reject(state, "Choose a creature to recruit.");
   if (
     command.type === "chooseBoon" &&
     (!state.reward?.boons.includes(command.boon) || state.boons.includes(command.boon))
@@ -350,27 +355,20 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
           block: 0,
           attacked: false,
         };
+        const lineup = recruitLineup(draft, recruited, replacement);
         if (replacement) {
           const released = [...draft.team, ...draft.reserves].find((c) => c.id === replacement)!;
           draft.roster[draft.roster.indexOf(released.species)] = command.species;
-          draft.lineup = draft.lineup.map((id) => (id === replacement ? recruited.id : id));
-          if (draft.lineup.includes(recruited.id) && species(recruited.species).legendary)
-            draft.lineup = [recruited.id];
           const active = draft.team.some((unit) => unit.id === replacement);
           if (active) {
             draft.team[draft.team.findIndex((unit) => unit.id === replacement)] = recruited;
           } else draft.reserves[draft.reserves.findIndex((unit) => unit.id === replacement)] = recruited;
         } else {
           draft.roster.push(command.species);
-          if (
-            draft.lineup.length < 3 &&
-            !species(command.species).legendary &&
-            !draft.team.some((unit) => species(unit.species).legendary)
-          ) {
-            draft.lineup.push(recruited.id);
-            draft.team.push(recruited);
-          } else draft.reserves.push(recruited);
+          if (lineup.includes(recruited.id)) draft.team.push(recruited);
+          else draft.reserves.push(recruited);
         }
+        draft.lineup = lineup;
         prepareLineup(draft);
         if (command.type === "recruitDestination") {
           draft.expedition!.recruit = null;

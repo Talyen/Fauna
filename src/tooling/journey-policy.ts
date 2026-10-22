@@ -1,61 +1,16 @@
-import { canBuyTalent, creaturePassive, starterCount } from "../game/progression";
+import { canBuyTalent, starterCount, MAX_CREATURE_STARS } from "../game/progression";
 import { canVisitCampfire, canVisitMerchant, canRecruitDestination } from "../game/destinations";
 import { rankedBattleChoices } from "../application/battle-policy";
-import { CARDS, TALENTS, BOONS, species, type SpeciesId, type BoonId } from "../game/content";
-import { definitionKeywords } from "../game/keywords";
+import { TALENTS, BOONS, species, type SpeciesId, type BoonId } from "../game/content";
+import { capabilities, coverageScore, offenseValue } from "../application/team-policy";
+import { recruitLineup } from "../game/team";
+import { createBattleActor } from "../application/battle-actor";
 import type { Command, GameState } from "../game/types";
 import type { JourneyConfig } from "./playthrough";
 
 export interface JourneyDecision {
   command: Command;
   reason: string;
-}
-function capabilities(state: GameState, kinds: readonly SpeciesId[]) {
-  const result = new Set<string>();
-  for (const kind of kinds) {
-    for (const card of CARDS.filter((card) => card.species === kind)) {
-      for (const keyword of definitionKeywords(card)) result.add(keyword);
-      if (card.effect === "attack") {
-        result.add("attack");
-        if (
-          [card.damageType, card.alternateDamageType].some(
-            (type) => type && type !== "physical" && type !== "stun",
-          )
-        )
-          result.add("armorBypass");
-      }
-      if (
-        card.effect === "waterThorns" ||
-        card.effect === "teamProtection" ||
-        card.effects?.some(
-          (effect) =>
-            effect.kind === "damage" && effect.damageType !== "physical" && effect.damageType !== "stun",
-        )
-      )
-        result.add("armorBypass");
-      if (card.effect === "teamPurge" || card.effects?.some((effect) => effect.kind === "purge"))
-        result.add("purge");
-      if (card.effect === "teamCleanse" || card.effects?.some((effect) => effect.kind === "cleanse"))
-        result.add("cleanse");
-    }
-    for (const effect of creaturePassive(state, kind).effects) {
-      if (effect.kind === "courtRemembers") {
-        result.add("attack");
-        result.add("water");
-        result.add("armorBypass");
-      }
-      if (effect.kind === "livingChorus" || effect.kind === "tidalRegeneration") result.add("health");
-      if (effect.kind === "dodgeBurn") {
-        result.add("burn");
-        result.add("armorBypass");
-      }
-      if (effect.kind === "poisonRetaliation") {
-        result.add("poison");
-        result.add("armorBypass");
-      }
-    }
-  }
-  return result;
 }
 /** Rough usefulness, never a power or win-rate estimate; absent triggers score zero. */
 export function boonValue(
@@ -115,67 +70,88 @@ export function boonValue(
     }
   }
 }
-function coverageScore(state: GameState, kinds: SpeciesId[]) {
-  const has = capabilities(state, kinds);
-  return (
-    (has.has("attack") ? 3000 : 0) +
-    (has.has("armorBypass") ? 1000 : 0) +
-    (has.has("purge") ? 800 : 0) +
-    (has.has("health") ? 200 : 0) +
-    (has.has("cleanse") ? 100 : 0) +
-    has.size * 20
-  );
-}
 function recruitDecision(state: GameState): JourneyDecision {
   const roster = [...state.team, ...state.reserves];
+  const living = (units: typeof roster) => units.filter((unit) => unit.health > 0);
   const before = capabilities(
     state,
-    roster.map((unit) => unit.species),
+    living(roster).map((unit) => unit.species),
   );
+  const score = (next: typeof roster, active: typeof roster) =>
+    coverageScore(
+      state,
+      living(next).map((unit) => unit.species),
+    ) +
+    coverageScore(
+      state,
+      living(active).map((unit) => unit.species),
+    ) *
+      2 +
+    living(active).reduce((sum, unit) => sum + offenseValue(state, unit.species) * 300 + 200, 0) +
+    next.reduce((sum, unit) => sum + unit.health / species(unit.species).health, 0) * 20 +
+    state.boons.reduce(
+      (sum, boon) =>
+        sum +
+        boonValue(
+          state,
+          boon,
+          living(next).map((unit) => unit.species),
+        ),
+      0,
+    );
+  const keep = score(roster, state.team);
   const options = state.reward!.recruits.flatMap((kind) =>
     (roster.length === 5 ? roster : [undefined]).map((released) => {
-      const next = [
-        ...roster.filter((unit) => unit !== released),
-        { id: "candidate", species: kind, health: species(kind).health },
-      ];
-      const kinds = next.map((unit) => unit.species);
-      const after = capabilities(state, kinds);
+      const incoming = {
+        id: "candidate",
+        species: kind,
+        health: species(kind).health,
+        block: 0,
+        attacked: false,
+      };
+      const next = [...roster.filter((unit) => unit !== released), incoming];
+      const active = recruitLineup(state, incoming, released?.id).map((id) =>
+        next.find((unit) => unit.id === id)!,
+      );
+      const after = capabilities(
+        state,
+        living(next).map((unit) => unit.species),
+      );
       const lost = ["armorBypass", "purge"].filter((role) => before.has(role) && !after.has(role));
-      let active = state.team.map((unit) => (unit === released ? kind : unit.species));
-      if (
-        !released &&
-        active.length < 3 &&
-        !species(kind).legendary &&
-        !active.some((kind) => species(kind).legendary)
-      )
-        active.push(kind);
-      if (active.some((kind) => species(kind).legendary))
-        active = active.filter((kind) => species(kind).legendary);
-      const score =
-        coverageScore(
-          state,
-          next.filter((unit) => unit.health > 0).map((unit) => unit.species),
-        ) +
-        coverageScore(state, active) +
-        next.reduce((sum, unit) => sum + unit.health / species(unit.species).health, 0) * 20 +
-        state.boons.reduce((sum, boon) => sum + boonValue(state, boon, kinds), 0);
-      return { kind, released, lost, score, key: `${kind}:${released?.id ?? ""}` };
+      // A repeated recruit can improve an owned passive even when deployment is unchanged.
+      const rankGain =
+        (state.discovery.recruited[kind] ?? 0) > 0 &&
+        (state.discovery.recruited[kind] ?? 0) < MAX_CREATURE_STARS + 1
+          ? 100
+          : 0;
+      return {
+        kind,
+        released,
+        lost,
+        score: score(next, active) + rankGain,
+        key: `${kind}:${released?.id ?? ""}`,
+      };
     }),
   );
   options.sort((a, b) => a.lost.length - b.lost.length || b.score - a.score || a.key.localeCompare(b.key));
   const chosen = options[0];
-  if (!chosen) return { command: { type: "skipRecruit" }, reason: "No recruit was offered" };
+  if (!chosen || chosen.lost.length || chosen.score <= keep)
+    return {
+      command: { type: "skipRecruit" },
+      reason: "Keep the current roster and its deployed damage, recovery and unique coverage",
+    };
   return {
     command: {
       type: "recruit",
       species: chosen.kind,
       ...(chosen.released ? { replace: chosen.released.id } : {}),
     },
-    reason: `Recruit ${species(chosen.kind).name}${chosen.released ? `; release ${species(chosen.released.species).name}` : ""}; retain Armor bypass and Purge where possible, then favor living damage coverage, recovery and owned Boons`,
+    reason: `Recruit ${species(chosen.kind).name}${chosen.released ? `; release ${species(chosen.released.species).name}` : ""}; improve the legal deployment while preserving living damage, Armor bypass and Purge`,
   };
 }
 
 export function createJourneyActor(config: Pick<JourneyConfig, "seed" | "starter" | "policy">) {
+  const battle = createBattleActor();
   let rng = (config.seed ^ 0x9e3779b9) >>> 0;
   const pick = <T>(items: readonly T[]) => {
     rng = (Math.imul(rng, 1664525) + 1013904223) >>> 0;
@@ -290,6 +266,7 @@ export function createJourneyActor(config: Pick<JourneyConfig, "seed" | "starter
           "Begin the next requested journey",
         );
       case "battle": {
+        if (config.policy !== "random") return battle.choose(state);
         const choices = rankedBattleChoices(state);
         return choices.length
           ? config.policy === "random"

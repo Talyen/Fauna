@@ -1,4 +1,4 @@
-import { chooseBattleCommand } from "../../src/application/battle-policy";
+import { createBattleActor } from "../../src/application/battle-actor";
 import { test, expect, type Locator } from "@playwright/test";
 import { definition, species } from "../../src/game/content";
 import { policy, FULL_JOURNEY_SEED, FULL_JOURNEY_COMMAND_BUDGET } from "../support/game";
@@ -44,6 +44,7 @@ test("one starter grows a lineup through a full expedition", async ({ page }) =>
   await activate(page.getByRole("button", { name: `Recruit ${name}`, exact: true }));
   expect((await state(page)).lineup).toEqual(["ally-0"]);
   let deployedThree = false;
+  const actor = createBattleActor();
   for (let i = 0; i < FULL_JOURNEY_COMMAND_BUDGET; i++) {
     const s = await state(page);
     deployedThree ||= s.team.length === 3;
@@ -62,7 +63,7 @@ test("one starter grows a lineup through a full expedition", async ({ page }) =>
       const recruited = await state(page);
       expect(recruited.lineup).toEqual(recruited.team.map((creature) => creature.id));
       expect(recruited.reserves).toHaveLength(Math.max(0, recruited.roster.length - 3));
-    } else await step(page, activate, s, s.phase === "battle" ? chooseBattleCommand(s) : policy(s));
+    } else await step(page, activate, s, s.phase === "battle" ? actor.choose(s).command : policy(s));
   }
   await expect(page.getByRole("heading", { name: "Journey complete", exact: true })).toBeVisible();
   const final = await state(page);

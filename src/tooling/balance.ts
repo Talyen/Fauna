@@ -1,5 +1,6 @@
 import { createSession } from "../application/session";
-import { rankedBattleChoices, BATTLE_POLICY_VERSION } from "../application/battle-policy";
+import { BATTLE_POLICY_VERSION } from "../application/battle-policy";
+import { createBattleActor } from "../application/battle-actor";
 import { createBattleProgress } from "./battle-progress";
 import { createGame } from "../game/engine";
 import { decodeSave, encodeSave } from "../game/save";
@@ -82,6 +83,7 @@ export async function balanceCase(
   };
   let session = await open();
   const steps: JourneyStep[] = [];
+  const actor = createBattleActor();
   const progress = createBattleProgress();
   progress.observe(session.store.getState().game);
   let turns = 1;
@@ -97,10 +99,7 @@ export async function balanceCase(
       }
       const selected = replay
         ? { command: replay.steps[i]!.command, reason: replay.steps[i]!.decision }
-        : (rankedBattleChoices(before)[0] ?? {
-            command: { type: "endTurn" as const },
-            reason: "No affordable playable card has a scored visible benefit",
-          });
+        : actor.choose(before);
       const command = selected.command;
       await journal?.({ type: "attempt", index: i, command, decision: selected.reason });
       const accepted = session.command(command);

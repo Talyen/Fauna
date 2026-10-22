@@ -59,7 +59,7 @@ These are the agreed directions from the design review. They supersede the proto
 - Recruiting adds a creature to the journey roster rather than forcing an immediate active-team replacement.
 - The first battle contains one enemy, the second contains two, and every later ordinary battle contains three; Boss encounters begin with one Legendary. Choose a Recruit shows the exact defeated enemy entries in battle order, including repeated species and species already in the roster. Recruiting creates a new individual with independent identity and battle state.
 - Recruitment remains a direct commitment on the final choice, without a separate confirmation.
-- Recruit one defeated creature whenever recruits are offered; recruitment cannot be skipped, including at a full roster. Collected species persist after release, defeat and return home. Encountering a species or unlocking it through victory does not collect it.
+- Recruit one defeated creature or Skip to keep the current roster, including at a full roster. Collected species persist after release, defeat and return home. Encountering a species or unlocking it through victory does not collect it.
 - When the roster is full, choose the incoming species, then choose an existing creature to release. The final replacement choice commits immediately; canceling before that choice preserves the roster.
 
 ## Currency and items
@@ -86,7 +86,7 @@ Final victory or defeat → Journey results. Ending a started journey voluntaril
 - Results offer a single centered Main menu action. Start a new journey only from the main menu.
 - Play resets journey totals and roster/boons while preserving permanent progress. Results appear only when ending the journey; returning to the main menu or loading a completed journey does not reopen them.
 - Development saves are disposable; obsolete formats are rejected rather than migrated. Journey totals are recorded from current-format journeys, never inferred from lifetime XP or currency.
-- Material types remain undefined and are not shown. The shared Victory shell shows compact automatic earnings and one encounter-specific choice: recruitment or boons. Only Boon choices have a Skip action; recruitment is required. There is no Continue action. Full-roster replacement changes the contents of that same screen and may be canceled before committing.
+- Material types remain undefined and are not shown. The shared Victory shell shows compact automatic earnings and one encounter-specific choice: recruitment or boons. Recruitment and Boon choices each have a Skip action. There is no Continue action. Full-roster replacement changes the contents of that same screen and may be canceled before committing.
 
 See [UI design system](UI.md) for composition and interaction rules.
 

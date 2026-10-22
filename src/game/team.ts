@@ -17,6 +17,22 @@ export function ownedCards(id: string, kind: GameState["team"][number]["species"
     })),
   );
 }
+/** Recruitment and its policy projection use the same legal deployment rules. */
+export function recruitLineup(
+  state: GameState,
+  incoming: Pick<import("./types").Creature, "id" | "species">,
+  replacement?: string,
+): string[] {
+  if (replacement) {
+    const ids = state.lineup.map((id) => (id === replacement ? incoming.id : id));
+    return ids.includes(incoming.id) && species(incoming.species).legendary ? [incoming.id] : ids;
+  }
+  return state.lineup.length < 3 &&
+    !species(incoming.species).legendary &&
+    !state.team.some((unit) => species(unit.species).legendary)
+    ? [...state.lineup, incoming.id]
+    : [...state.lineup];
+}
 export function prepareLineup(state: GameState) {
   const all = [...state.team, ...state.reserves];
   state.team = state.lineup.map((id) => all.find((c) => c.id === id)!);
@@ -41,7 +57,7 @@ export function rebuildCards(state: GameState) {
     state.battle.draw = state.cards.map((c) => c.id);
   }
 }
-function formationForSwap(
+export function formationForSwap(
   all: import("./types").Creature[],
   active: string[],
   outgoing: string,

@@ -33,12 +33,12 @@ const prior = options.replay
 const build = await identity();
 if (prior && prior.identity !== build) throw new Error("Interaction replay code/content identity differs.");
 const loader = await runtime();
-let initial, dispatch, decodeSave, encodeSave, battleChoices;
+let initial, dispatch, decodeSave, encodeSave, createBattleActor;
 try {
   const perf = await loader.ssrLoadModule("/src/tooling/performance.ts");
   ({ dispatch } = await loader.ssrLoadModule("/src/game/engine.ts"));
   ({ decodeSave, encodeSave } = await loader.ssrLoadModule("/src/game/save.ts"));
-  ({ battleChoices } = await loader.ssrLoadModule("/src/application/battle-policy.ts"));
+  ({ createBattleActor } = await loader.ssrLoadModule("/src/application/battle-actor.ts"));
   initial = prior?.initial ?? perf.performanceCases()[0].initial;
   decodeSave(initial);
   const out = await reportDirectory(options.out, `reports/interactions/run-${Date.now()}`);
@@ -77,6 +77,7 @@ try {
     shrunk: null,
   };
   async function replay(trace, generate = false) {
+    const actor = createBattleActor();
     const context = await browser.newContext({
       viewport: { width: 1280, height: 800 },
       reducedMotion: "reduce",
@@ -94,8 +95,7 @@ try {
       await page.getByRole("button", { name: "Continue", exact: true }).waitFor();
       for (index = 0; index < (generate ? options.steps : trace.length); index++) {
         const step = generate ? { kind: pick(kinds) } : structuredClone(trace[index]);
-        if (generate && step.kind === "battle")
-          step.command = battleChoices(state, false)[0] ?? { type: "endTurn" };
+        if (generate && step.kind === "battle") step.command = actor.choose(state, false).command;
         let expected = state;
         if (step.kind === "battle") {
           const result = dispatch(state, step.command);

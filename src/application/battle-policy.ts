@@ -1,4 +1,5 @@
-import { pendingReplacement } from "../game/team";
+import { pendingReplacement, formationForSwap } from "../game/team";
+import { coverageScore, offenseValue } from "./team-policy";
 import { battlefield } from "../game/battlefield";
 import { hasTalent } from "../game/progression";
 import { controlled, hasHarmfulEffects, mostInjured } from "../game/combat/index";
@@ -6,7 +7,7 @@ import { actionValue, cardCost, physicalBonus } from "../game/ability-rules";
 import { definition, species } from "../game/content";
 import type { Command, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 24;
+export const BATTLE_POLICY_VERSION = 25;
 const BATTLE_FINISH_PRIORITY = 1_000_000_000;
 export interface BattleChoice {
   command: Command;
@@ -18,9 +19,26 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
   if (state.phase !== "battle") return [];
   const order = <T extends { id: string }>(items: T[]) => [...items].sort((a, b) => a.id.localeCompare(b.id));
   const outgoing = pendingReplacement(state);
-  const incoming = order(state.reserves)
-    .filter((c) => c.health > 0)
-    .sort((a, b) => Number(controlled(a)) - Number(controlled(b)))[0];
+  const remaining = state.team.filter((unit) => unit.health > 0 && !controlled(unit));
+  const needsDamage = !remaining.some((unit) => offenseValue(state, unit.species) > 0);
+  const incoming = order(outgoing ? state.reserves : [])
+    .filter((unit) => unit.health > 0)
+    .map((unit) => {
+      const all = [...state.team, ...state.reserves];
+      const ids = formationForSwap(all, state.lineup, outgoing?.id ?? "", unit.id);
+      const lineup = ids
+        .map((id) => all.find((entry) => entry.id === id)!)
+        .filter((entry) => entry.health > 0);
+      const kinds = lineup.map((entry) => entry.species);
+      const score =
+        (needsDamage && offenseValue(state, unit.species) > 0 ? 1_000_000 : 0) +
+        (!controlled(unit) ? 100_000 : 0) +
+        coverageScore(state, kinds) +
+        (needsDamage ? offenseValue(state, unit.species) * 100 : 0) +
+        (unit.health / species(unit.species).health) * 100;
+      return { unit, score };
+    })
+    .sort((a, b) => b.score - a.score)[0]?.unit;
   if (outgoing && incoming)
     return [
       {
@@ -31,7 +49,8 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
           ...(autoEndTurn ? {} : { autoEndTurn: false }),
         },
         score: BATTLE_FINISH_PRIORITY,
-        reason: "Replace a knocked-out creature with a living, preferably uncontrolled backup",
+        reason:
+          "Replace a knocked-out creature; restore missing deployed damage, then favor usable complementary backups",
       },
     ];
   const options: (BattleChoice & { key: string })[] = [];

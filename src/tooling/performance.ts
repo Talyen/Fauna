@@ -2,6 +2,7 @@ import { createGame, dispatch } from "../game/engine";
 import { CARDS, species, type SpeciesId, definition } from "../game/content";
 import { freshCombat } from "../game/combat/index";
 import { encodeSave, decodeSave } from "../game/save";
+import { createBattleActor } from "../application/battle-actor";
 import { battleChoices } from "../application/battle-policy";
 import type { Command, GameState } from "../game/types";
 
@@ -144,8 +145,9 @@ export async function reachablePerformanceCases(seed = 42) {
       hand: state.battle!.hand.map((id) => state.cards.find((card) => card.id === id)!.definitionId),
     };
     const actions = [];
+    const actor = createBattleActor();
     for (let count = 0; count < 3 && state.phase === "battle"; count++) {
-      const command = battleChoices(state, false)[0] ?? { type: "endTurn" as const };
+      const command = actor.choose(state, false).command;
       const result = dispatch(state, command);
       if (!result.accepted) throw new Error(`Reachable performance command rejected: ${result.reason}`);
       state = result.state;

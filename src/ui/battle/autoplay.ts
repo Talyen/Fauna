@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useStore } from "zustand";
 import type { Session } from "../../application/session";
-import { chooseBattleCommand } from "../../application/battle-policy";
+import { createBattleActor } from "../../application/battle-actor";
 
 /** One pending action per owner; cancellation invalidates even a queued timer callback. */
 export function scheduleAutoplay(action: () => void, schedule = setTimeout, cancel = clearTimeout) {
@@ -15,13 +15,18 @@ export function scheduleAutoplay(action: () => void, schedule = setTimeout, canc
   };
 }
 export function useAutoplay(session: Session, paused: boolean, autoEndTurn: boolean) {
+  const actor = useMemo(createBattleActor, [session]);
   const [enabled, setEnabledState] = useState(false);
   const enabledNow = useRef(false);
-  const setEnabled = useCallback((value: boolean) => {
-    // Manual takeover revokes queued work before React commits effect cleanup.
-    enabledNow.current = value;
-    setEnabledState(value);
-  }, []);
+  const setEnabled = useCallback(
+    (value: boolean) => {
+      // Manual takeover revokes queued work before React commits effect cleanup.
+      actor.reset();
+      enabledNow.current = value;
+      setEnabledState(value);
+    },
+    [actor],
+  );
   const [foreground, setForeground] = useState(
     () => document.visibilityState !== "hidden" && document.hasFocus(),
   );
@@ -68,9 +73,10 @@ export function useAutoplay(session: Session, paused: boolean, autoEndTurn: bool
         current.game.phase !== "battle"
       )
         return;
-      if (!session.command(chooseBattleCommand(current.game, autoEndTurn))) setEnabled(false);
+      if (!session.command(actor.choose(current.game, autoEndTurn).command)) setEnabled(false);
     });
   }, [
+    actor,
     session,
     enabled,
     paused,

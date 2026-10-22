@@ -4,6 +4,7 @@ import { afterEach, it, expect, vi } from "vitest";
 import { createSession } from "../../../src/application/session";
 import { useAutoplay } from "../../../src/ui/battle/autoplay";
 import { encodeSave } from "../../../src/game/save";
+import checkpoint from "../application/fixtures/cadenza-reedstag.json";
 import { run } from "../../support/game";
 afterEach(() => {
   cleanup();
@@ -129,6 +130,33 @@ it("manual takeover revokes the queued move before React runs effect cleanup", a
   });
   expect(session.store.getState().game.revision).toBe(revision);
   expect(hook.result.current[0]).toBe(false);
+  await act(async () => {
+    await session.dispose();
+  });
+});
+
+it("Auto-play escapes the recorded self-replacing draw loop", async () => {
+  vi.spyOn(document, "hasFocus").mockReturnValue(true);
+  const session = createSession({
+    desktop: false,
+    steam: { available: false },
+    saves: {
+      readCandidates: async () => [{ source: "primary", data: JSON.stringify(checkpoint) }],
+      write: async () => {},
+    },
+  });
+  await session.load();
+  vi.useFakeTimers();
+  const turn = session.store.getState().game.battle!.turn;
+  const hook = renderHook(() => useAutoplay(session, false, false));
+  act(() => hook.result.current[1](true));
+  for (let count = 0; count < 32 && session.store.getState().game.battle?.turn === turn; count++) {
+    await act(async () => {
+      vi.advanceTimersByTime(700);
+      await session.flush();
+    });
+  }
+  expect(session.store.getState().game.battle!.turn).toBeGreaterThan(turn);
   await act(async () => {
     await session.dispose();
   });

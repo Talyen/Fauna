@@ -114,7 +114,7 @@ describe("player interface", () => {
     expect(progress.getAttribute("aria-valuemax")).toBe("30");
     expect(screen.queryByText(/keyword XP|talent point|4 \/ 40 XP/)).toBeNull();
     expect(screen.queryByRole("button", { name: "Continue" })).toBeNull();
-    expect(screen.queryByRole("button", { name: "Skip" })).toBeNull();
+    expect(screen.getByRole("button", { name: "Skip" })).toBeTruthy();
     await user.click(screen.getByRole("button", { name: /^Recruit / }));
     expect(session.store.getState().game.phase).toBe("teamSelection");
     expect(screen.queryByRole("heading", { name: "Choose a Boon" })).toBeNull();
@@ -428,4 +428,27 @@ it("omits health from creature hover details while retaining block and the passi
   expect(screen.queryByText(/Rooted Stomp/)).toBeNull();
   expect(screen.queryByText(/Shelter/)).toBeNull();
   expect(screen.queryByText(/Moss Renewal/)).toBeNull();
+});
+
+it("declines a recruit without collecting or releasing a creature and resumes that decision", async () => {
+  const game = winBattle(run());
+  localStorage.setItem("fauna.save.v1", JSON.stringify(game));
+  const session = createSession(createBrowserPlatform(localStorage), 42);
+  await session.load();
+  render(<App session={session} />);
+  const user = userEvent.setup();
+  await user.click(screen.getByRole("button", { name: "Continue" }));
+  await user.click(screen.getByRole("button", { name: "Skip", exact: true }));
+  await session.flush();
+  const next = session.store.getState().game;
+  expect(next.phase).toBe("teamSelection");
+  expect(next.roster).toEqual(game.roster);
+  expect(next.discovery).toEqual(game.discovery);
+  expect(screen.queryByRole("heading", { name: "Choose a Recruit" })).toBeNull();
+  await session.dispose();
+  const resumed = createSession(createBrowserPlatform(localStorage), 42);
+  await resumed.load();
+  expect(resumed.store.getState().game.phase).toBe("teamSelection");
+  expect(resumed.store.getState().game.roster).toEqual(game.roster);
+  await resumed.dispose();
 });

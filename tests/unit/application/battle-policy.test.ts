@@ -218,3 +218,31 @@ it("Purges Armor before a fully blocked attack and still values attacks that dep
   });
   expect(chooseBattleCommand(block, false)).toMatchObject({ type: "play", cardId: state.battle!.hand[0] });
 });
+
+it("restores missing deployed damage instead of choosing the first support backup", () => {
+  const state = produce(teamRun(42, ["mossguard", "cadenza"]), (game) => {
+    game.team[0]!.health = 0;
+    game.reserves = [
+      { ...game.team[1]!, id: "a-support" },
+      { ...game.team[0]!, id: "z-attacker", species: "emberback", health: 20 },
+    ];
+    game.roster.push("cadenza", "emberback");
+  });
+  const selected = chooseBattleCommand(state, false);
+  expect(selected).toMatchObject({ type: "swap", reserve: "z-attacker" });
+  const result = dispatch(state, selected);
+  expect(result.accepted).toBe(true);
+  expect(result.state.team.some((unit) => unit.species === "emberback" && unit.health > 0)).toBe(true);
+});
+
+it("favors a healthy complementary backup when deployed damage is already available", () => {
+  const state = produce(teamRun(42, ["mossguard", "prismram"]), (game) => {
+    game.team[0]!.health = 0;
+    game.reserves = [
+      { ...game.team[0]!, id: "a-attacker", species: "emberback", health: 1 },
+      { ...game.team[0]!, id: "z-support", species: "cadenza", health: 28 },
+    ];
+    game.roster.push("emberback", "cadenza");
+  });
+  expect(chooseBattleCommand(state, false)).toMatchObject({ type: "swap", reserve: "z-support" });
+});

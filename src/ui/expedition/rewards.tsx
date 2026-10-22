@@ -151,11 +151,11 @@ export function Rewards({ game, send, inspect }: Props) {
             <Button variant="outline" onClick={() => setIncoming(null)}>
               Cancel
             </Button>
-          ) : !recruiting ? (
-            <Button variant="ghost" onClick={() => send({ type: "skipBoon" })}>
+          ) : (
+            <Button variant="ghost" onClick={() => send({ type: recruiting ? "skipRecruit" : "skipBoon" })}>
               Skip
             </Button>
-          ) : null}
+          )}
         </footer>
       </Screen>
     </ResultPresentation>

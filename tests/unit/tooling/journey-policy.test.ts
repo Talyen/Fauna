@@ -2,9 +2,10 @@ import { expect, it } from "vitest";
 import { produce } from "immer";
 import { createJourneyActor, boonValue } from "../../../src/tooling/journey-policy";
 import { createBattleProgress } from "../../../src/tooling/battle-progress";
+import { ownedCards } from "../../../src/game/team";
 import { dispatch } from "../../../src/game/engine";
 import { teamRun, winBattle } from "../../support/game";
-import type { BoonId, SpeciesId } from "../../../src/game/content";
+import { species, type BoonId, type SpeciesId } from "../../../src/game/content";
 const actor = () => createJourneyActor({ seed: 42, starter: "mossguard", policy: "heuristic" });
 
 function shelf(boons: BoonId[], prices = boons.map(() => 20)) {
@@ -117,4 +118,72 @@ it("reports long absence of enemy Health progress without mistaking Minion damag
   expect(progress.snapshot()).toMatchObject({ turnsWithoutHealthProgress: 1 });
   progress.observe(winBattle(initial));
   expect(progress.snapshot()).toBeNull();
+});
+
+it("improves a reserve instead of replacing a healthy Legendary with weaker solo damage", () => {
+  const base = winBattle(teamRun(42, ["prismram"]));
+  const state = produce(base, (game) => {
+    game.team[0]!.species = "memento";
+    game.team[0]!.health = 60;
+    game.cards = ownedCards(game.team[0]!.id, "memento");
+    game.discovery.recruited.memento = 1;
+    game.roster = ["memento", "captoad", "emberback", "bloomquail", "cadenza"];
+    game.reserves = game.roster.slice(1).map((kind, index) => ({
+      ...game.team[0]!,
+      id: `reserve-${index}`,
+      species: kind,
+      health: 10,
+    }));
+    game.reward!.recruits = ["prismram"];
+  });
+  const selected = actor()(state);
+  expect(selected.command).toMatchObject({ type: "recruit", species: "prismram" });
+  expect(selected.command).not.toHaveProperty("replace", state.team[0]!.id);
+  const result = dispatch(state, selected.command);
+  expect(result.accepted).toBe(true);
+  expect(result.state.lineup).toEqual(state.lineup);
+  expect(result.state.team[0]!.species).toBe("memento");
+});
+
+it("releases a reserve when a Legendary recruit would otherwise collapse a stronger deployed team", () => {
+  const full = produce(teamRun(42, ["emberback", "prismram", "rookhaven"]), (game) => {
+    game.reserves = [
+      { ...game.team[0]!, id: "reserve-1", species: "cadenza", health: 0 },
+      { ...game.team[0]!, id: "reserve-2", species: "mossguard", health: 0 },
+    ];
+    game.roster.push("cadenza", "mossguard");
+  });
+  const state = produce(winBattle(full), (game) => {
+    game.reward!.recruits = ["memento"];
+  });
+  const selected = actor()(state);
+  expect(selected.command).toMatchObject({ type: "recruit", species: "memento" });
+  expect(selected.command.type === "recruit" && selected.command.replace?.startsWith("reserve-")).toBe(true);
+  const result = dispatch(state, selected.command);
+  expect(result.accepted).toBe(true);
+  expect(result.state.lineup).toEqual(state.lineup);
+});
+
+it("skips recruitment when the full healthy roster and passive ranks cannot improve", () => {
+  const base = winBattle(teamRun(42, ["prismram"]));
+  const state = produce(base, (game) => {
+    game.team[0]!.species = "memento";
+    game.team[0]!.health = 60;
+    game.cards = ownedCards(game.team[0]!.id, "memento");
+    game.roster = ["memento", "captoad", "emberback", "bloomquail", "cadenza"];
+    for (const kind of game.roster) game.discovery.recruited[kind] = 6;
+    game.reserves = game.roster.slice(1).map((kind, index) => ({
+      ...game.team[0]!,
+      id: `reserve-${index}`,
+      species: kind,
+      health: species(kind).health,
+    }));
+    game.reward!.recruits = ["cadenza"];
+  });
+  const command = actor()(state).command;
+  expect(command).toEqual({ type: "skipRecruit" });
+  const result = dispatch(state, command);
+  expect(result.accepted).toBe(true);
+  expect(result.state.roster).toEqual(state.roster);
+  expect(result.state.lineup).toEqual(state.lineup);
 });
