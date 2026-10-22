@@ -149,7 +149,7 @@ it("extends enemy Freeze across resume and grants immunity only after both skipp
   target.maxHealth = encounterSource(state).enemies[0]!.health;
   target.health = 18;
   target.combat.controlled = null;
-  hit(state, source, target, 9, "freeze", events, { proc: true });
+  hit(state, source, target, 15, "freeze", events, { proc: true });
   expect(target.combat.controlTurns).toBe(2);
   const resumed = structuredClone(decodeSave(encodeSave(state)));
   const enemy = resumed.battle!.enemies[0]!;

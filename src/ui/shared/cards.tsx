@@ -202,10 +202,12 @@ export function ActionCard({
   onDenied,
   enemy = false,
   enemyValue,
+  enemyPower = 1,
 }: {
   card: Card;
   enemy?: boolean;
   enemyValue?: number;
+  enemyPower?: number;
   selected?: boolean;
   disabled?: boolean;
   onClick: () => void;
@@ -233,6 +235,7 @@ export function ActionCard({
             ? physicalBonus(actor, modifiers)
             : 0),
       ),
+    enemyPower,
   );
   const artwork = (
     <ArtCard
@@ -287,6 +290,7 @@ export function ActionCard({
           modifiers={modifiers}
           enemy={enemy}
           enemyValue={enemyValue}
+          enemyPower={enemyPower}
         />
       </TooltipContent>
     </Tooltip>

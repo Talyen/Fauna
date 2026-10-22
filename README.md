@@ -45,7 +45,7 @@ Gameplay settles before visual feedback. Accepted commands automatically save; f
 
 ## Architecture and authoring
 
-Current contracts and workflows live directly under `Docs/`; active proposals live under `Docs/plans/`, and completed adoption and rollout plans live under `Docs/archive/`.
+Current contracts and workflows live directly under `Docs/`; active proposals and implementation plans pending validation live under `Docs/plans/`, and completed adoption and rollout plans live under `Docs/archive/`.
 
 Current contracts and workflows:
 

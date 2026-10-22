@@ -80,3 +80,17 @@ it("prevents utilities and presentation foundations from bypassing feature and p
   ).toEqual([]);
   expect(boundaryViolations("src/lib/a.ts", 'import {clsx} from "clsx"')).toEqual([]);
 });
+
+it("keeps the shared ability executor behind application commands", () => {
+  for (const source of [
+    'import {executeAbility as run} from "../../game/abilities"',
+    'import * as abilities from "@/game/abilities"',
+    'import("@/game/abilities.ts")',
+  ])
+    expect(boundaryViolations("src/ui/battle/fixture.ts", source)).toEqual([
+      "src/ui/battle/fixture.ts: UI must use application commands and read-only previews.",
+    ]);
+  expect(
+    boundaryViolations("src/ui/battle/fixture.ts", 'import {previewPlay} from "../../game/preview"'),
+  ).toEqual([]);
+});

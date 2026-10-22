@@ -499,7 +499,7 @@ function applyHarmfulStatus(
   damage: number,
   type: DamageType | "blind",
   events: GameEvent[],
-  options: { beforeHealth: number; leech?: boolean; reflected?: boolean },
+  options: { leech?: boolean; reflected?: boolean } = {},
 ): { armorBroken: boolean; appliedControl: boolean; suppressed: boolean } {
   if (
     type !== "burn" &&
@@ -513,7 +513,6 @@ function applyHarmfulStatus(
   const stats = combat(target);
   const alliedSource = !("maxHealth" in source),
     alliedTarget = !("maxHealth" in target);
-  const before = options.beforeHealth;
   let appliedControl = false,
     armorBroken = false;
   const immune =
@@ -567,7 +566,6 @@ function applyHarmfulStatus(
         text: `${unitName(target)} reflects ${type} to ${unitName(recipient)}`,
       });
       const reflected = applyHarmfulStatus(state, target, recipient, damage, type, events, {
-        beforeHealth: recipient.health,
         reflected: true,
       });
       if (reflected.appliedControl && type !== "blind")
@@ -636,7 +634,7 @@ function applyHarmfulStatus(
       text: `${unitName(target)} gains ${stats[type] - beforeStacks} ${type} buildup.`,
     });
     const threshold =
-      ("maxHealth" in target ? before : maximumHealth(target)) *
+      maximumHealth(target) *
       (alliedSource &&
       ((type === "freeze" && hasTalent(state, "freeze.bitter-cold")) ||
         (type === "stun" && hasTalent(state, "stun.concussive-force")))
@@ -749,7 +747,7 @@ export function grantTemporaryDodge(unit: Combatant, amount: number, events: Gam
   });
 }
 export function applyBlind(state: GameState, source: Combatant, target: Combatant, events: GameEvent[]) {
-  applyHarmfulStatus(state, source, target, 1, "blind", events, { beforeHealth: target.health });
+  applyHarmfulStatus(state, source, target, 1, "blind", events);
 }
 /** One Blind roll owns an entire attack, including all recipients and supplemental packets. */
 export function beginAttack(state: GameState, source: Combatant): boolean {
@@ -1028,7 +1026,7 @@ function resolveHit(
   }
   damage = Math.round(damage);
   const riposte = direct && alliedSource && type === "physical" && combat(source).riposte;
-  const criticalChance = (alliedSource ? 0.05 : 0) + (options.criticalBonus ?? 0) / 100;
+  const criticalChance = 0.05 + (options.criticalBonus ?? 0) / 100;
   const critical =
     direct && (riposte || (criticalChance > 0 && (criticalChance >= 1 || roll(state) < criticalChance)));
   if (riposte) combat(source).riposte = false;
@@ -1129,7 +1127,6 @@ function resolveHit(
   }
   if ((attack || options.buildStatus) && damage > 0) {
     const statusResult = applyHarmfulStatus(state, source, target, damage, type, events, {
-      beforeHealth: before,
       leech: options.leech,
     });
     armorBroken ||= statusResult.armorBroken;

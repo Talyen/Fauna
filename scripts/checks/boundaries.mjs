@@ -102,6 +102,8 @@ export function boundaryViolations(file, source) {
         target.startsWith("desktop/"))
     )
       fail(`Renderer imports privileged implementation: ${specifier}`);
+    if (ui && /^src\/game\/abilities(?:\.ts)?$/.test(target))
+      fail("UI must use application commands and read-only previews.");
     if (
       ui &&
       within("game") &&

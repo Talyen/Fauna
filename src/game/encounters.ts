@@ -50,17 +50,14 @@ export const BOSSES = [
     encounter: 3,
     name: "The Briar Warden",
     pack: ["emberback", "mossguard", "pollenmoth"],
-    damage: 5,
   },
   {
     id: "hollow-crown",
     encounter: 7,
     name: "The Hollow Crown",
     pack: ["prismram", "emberback", "pollenmoth"],
-    damage: 10,
   },
 ] as const;
-const COMBAT_DAMAGE = [2, 3, 4, null, 4, 4, 4, null] as const;
 export function encounterPacks(encounter: number) {
   const boss = BOSSES.find((entry) => entry.encounter === encounter);
   return boss ? [boss.pack] : COMBAT_PACKS;
@@ -77,7 +74,7 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
     name: string;
     species: SpeciesId;
     health: number;
-    damage: number;
+    power: number;
     damageType: DamageType;
   }[];
 } {
@@ -89,7 +86,7 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
       enemies: source.enemies.map((enemy) => ({
         ...enemy,
         health: scaleEnemyStat(enemy.health, game.encounter),
-        damage: scaleEnemyStat(enemy.damage, game.encounter),
+        power: 1 + game.encounter / 10,
       })),
     };
   }
@@ -102,10 +99,7 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
       name: boss && index === 0 ? boss.name : species(kind).name,
       species: kind,
       health: scaleEnemyStat(species(kind).health, game.encounter),
-      damage: scaleEnemyStat(
-        boss ? (index === 0 ? boss.damage : 3) : COMBAT_DAMAGE[game.encounter]!,
-        game.encounter,
-      ),
+      power: 1 + game.encounter / 10,
       damageType:
         kind === "shadebrim" || kind === "stillara"
           ? "freeze"

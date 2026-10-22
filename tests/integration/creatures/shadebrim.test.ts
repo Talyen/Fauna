@@ -245,7 +245,7 @@ it("enemy Shadebrim alternates useful abilities, Cleanses its own side and never
     const enemy = draft.battle!.enemies[0]!;
     enemy.species = "shadebrim";
     enemy.name = "Shadebrim";
-    enemy.damage = 3;
+    enemy.power = 1;
     enemy.lastAbility = "shadebrim-guard";
     draft.battle!.enemies[1]!.combat.blind = true;
     draft.team.forEach((unit) => {
@@ -255,7 +255,11 @@ it("enemy Shadebrim alternates useful abilities, Cleanses its own side and never
   const result = dispatch(game, { type: "endTurn" });
   expect(result.accepted).toBe(true);
   expect(result.state.battle!.enemies[0]!.lastAbility).toBe("shadebrim-attack");
-  expect(result.state.battle!.enemies[0]!.block).toBe(0);
+  const nextActor = result.events.findIndex(
+    (event) => event.kind === "action" && event.actorId !== "enemy-0",
+  );
+  const firstAbility = nextActor < 0 ? result.events : result.events.slice(0, nextActor);
+  expect(firstAbility.some((event) => event.kind === "block" && event.targetId === "enemy-0")).toBe(false);
   expect(result.events).toContainEqual(
     expect.objectContaining({ status: "cleanse", targetId: "enemy-1", affectedStatus: "blind" }),
   );
