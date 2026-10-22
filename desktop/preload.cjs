@@ -2,7 +2,7 @@ const { contextBridge, ipcRenderer } = require("electron");
 /** @type {(() => Promise<boolean>) | null} */
 let closeListener = null;
 ipcRenderer.on("fauna:prepare-close", () => {
-  void prepareClose();
+  void prepareClose().catch(() => {});
 });
 async function prepareClose() {
   let saved = false;

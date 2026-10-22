@@ -58,8 +58,10 @@ async function createSteam({
         binding.electronEnableSteamOverlay();
         const client = binding.init(appId);
         // The optional overlay extension is not declared by steamworks.js 0.4; probe it before use.
-        const event = /** @type {{GameOverlayActivated?: number}} */ (binding.SteamCallback)
-          ?.GameOverlayActivated;
+        const extensions = /** @type {{SteamCallback?: {GameOverlayActivated?: number}}} */ (
+          /** @type {unknown} */ (binding)
+        );
+        const event = extensions.SteamCallback?.GameOverlayActivated;
         const callback =
           /** @type {{ register?: (event: number, listener: (value: {active: boolean}) => void) => {disconnect(): void} }} */ (
             /** @type {unknown} */ (client.callback)

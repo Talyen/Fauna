@@ -45,6 +45,7 @@ function finishClose() {
     app.quit();
   });
 }
+/** @type {import("electron").BrowserWindow} */
 let window;
 let storage;
 let display;
@@ -102,6 +103,7 @@ void app.whenReady().then(async () => {
     },
   });
   display.attach(window);
+  /** @param {import("electron").IpcMainInvokeEvent} event */
   const authorize = (event) => {
     if (
       closing ||

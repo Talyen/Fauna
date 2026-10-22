@@ -97,11 +97,11 @@ async function createDisplay({ directory, screen, isolated = false, notify = () 
     if (mode === "fullscreen" && read().mode === "windowed") preferences.bounds = window.getBounds();
     if (process.platform === "darwin") window.setSimpleFullScreen(mode === "fullscreen");
     else if (window.isFullScreen() !== (mode === "fullscreen")) {
-      await new Promise((/** @type {() => void} */ resolve, reject) => {
+      await new Promise((resolve, reject) => {
         const event = mode === "fullscreen" ? "enter-full-screen" : "leave-full-screen";
         const done = () => {
           clearTimeout(timeout);
-          resolve();
+          resolve(undefined);
         };
         const timeout = setTimeout(() => {
           window.removeListener(event, done);
