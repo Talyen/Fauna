@@ -83,4 +83,6 @@ Focused regression suites cover starter eligibility, actual recruitment into lat
 
 Rendered browser review at 1280×720 covered a manual Cindernewt opening, recruitment, three-enemy shared-deck play, Campfire revival and Merchant inspection before the pool change. Afterward it covered the curated draft, inspection, opening victory and recruitment of Shadebrim, one of the creatures removed from the first solo offers. Auto-play-assisted battles are identified as such; this is focused interaction evidence, not a complete manual journey or artistic acceptance.
 
+The live-edit preview logged a React error-boundary recovery during experimentation; the final resumed draft, victory and recruitment flow completed afterward. No production reproduction was established.
+
 The bounded local gate and documentation contracts are required before integration. Full static, full unit/DOM, exhaustive browser journeys, builds, packaged Windows, physical controllers, live Steam and Steam Deck remain separate gates; this report does not mark any of them passed.
