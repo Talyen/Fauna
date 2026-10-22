@@ -3,6 +3,7 @@ import { expect, test, type Page } from "@playwright/test";
 
 /** Wait for navigation copies and finite visual transitions to settle before measuring. */
 export async function settleScreen(page: Page) {
+  await page.evaluate(() => document.fonts.ready.then(() => undefined));
   await expect(page.locator("body > .app[inert], .card-transfer")).toHaveCount(0);
   await expect
     .poll(() =>

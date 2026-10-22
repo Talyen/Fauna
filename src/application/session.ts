@@ -42,10 +42,28 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
       if (!disposed && !store.getState().closing) save(store.getState().game);
     }, 5000);
   };
+  const readCandidates = async (retry = false) => {
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    try {
+      return await Promise.race([
+        Promise.resolve()
+          .then(() => platform.saves.readCandidates())
+          .catch((error) => {
+            if (retry) return platform.saves.readCandidates();
+            throw error;
+          }),
+        new Promise<never>((_, reject) => {
+          timer = setTimeout(() => reject(new Error("Local save read timed out.")), 5000);
+        }),
+      ]);
+    } finally {
+      clearTimeout(timer);
+    }
+  };
   const writeLocal = async (data: string) => {
     // Do not rotate unreadable storage until access has recovered.
     if (store.getState().loadFailed) {
-      await platform.saves.readCandidates();
+      await readCandidates();
       if (!disposed) store.setState({ loadFailed: false });
     }
     await platform.saves.write(data);
@@ -69,7 +87,6 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
           if (!disposed)
             store.setState({
               game,
-              ready: true,
               loadFailed: false,
               saveStatus: "saved",
               events: [],
@@ -84,9 +101,8 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
   const removeOverlay = platform.onOverlay?.((overlayActive) => {
     if (!disposed) store.setState({ overlayActive });
   });
-  const save = (game: GameState) => {
+  const save = (game: GameState, committed: Partial<SessionView> = {}) => {
     const data = encodeSave(game);
-    store.setState({ saveStatus: "saving" });
     writes = writes
       .then(() => writeLocal(data))
       .then(() => {
@@ -104,52 +120,44 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
           scheduleSaveRetry();
         }
       });
+    // Admit persistence before subscribers can issue another command or dispose.
+    store.setState({ ...committed, saveStatus: "saving" });
   };
   async function load() {
     const current = store.getState();
     if (disposed || current.closing || current.ready) return;
     const token = ++generation;
     store.setState({ ready: false, error: "", loadFailed: false });
-    let timer: ReturnType<typeof setTimeout> | undefined;
+    const startCloud = async (data: string | null) => {
+      await cloud.start(data);
+      if (!disposed && !store.getState().closing && token === generation) store.setState({ ready: true });
+    };
     try {
-      const candidates = await Promise.race([
-        platform.saves.readCandidates().catch(() => platform.saves.readCandidates()),
-        new Promise<never>((_, reject) => {
-          timer = setTimeout(() => reject(new Error("Local save read timed out.")), 5000);
-        }),
-      ]);
-      clearTimeout(timer);
-      if (disposed || token !== generation) return;
+      const candidates = await readCandidates(true);
+      if (disposed || store.getState().closing || token !== generation) return;
       for (const candidate of candidates) {
         try {
           const game = decodeSave(candidate.data);
           store.setState({
             game,
-            ready: true,
             saveStatus: "saved",
           });
-          await cloud.start(encodeSave(game));
+          await startCloud(encodeSave(game));
           return;
         } catch {
           diagnostics.record("validation", "Invalid current-format save candidate.", store.getState().game);
           /* Try the next intact backup. */
         }
       }
-      store.setState({
-        ready: true,
-      });
-      await cloud.start(null);
+      await startCloud(null);
     } catch (error) {
       diagnostics.record("save-read", error, store.getState().game);
       if (!disposed && token === generation)
         store.setState({
-          ready: true,
           loadFailed: true,
           error: "",
         });
-      if (!disposed && token === generation) await cloud.start(null);
-    } finally {
-      clearTimeout(timer);
+      if (!disposed && !store.getState().closing && token === generation) await startCloud(null);
     }
   }
   const prepareClose = async () => {
@@ -177,13 +185,12 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
         store.setState({ error: result.reason }); // Internal command diagnostics only.
         return false;
       }
-      store.setState({
+      save(result.state, {
         game: result.state,
         events: result.events,
         committedCommand: Object.freeze({ ...command }),
         error: "",
       });
-      save(result.state);
       return true;
     },
     retrySave() {
