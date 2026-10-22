@@ -1,3 +1,4 @@
+import { freeze } from "immer";
 import { species } from "./species";
 /** Stable legacy route; new expeditions use the saved packs in encounters.ts. */
 export const ENCOUNTERS = (
@@ -31,3 +32,5 @@ export const ENCOUNTERS = (
   ...encounter,
   enemies: encounter.enemies.map((enemy) => ({ ...enemy, health: species(enemy.species).health })),
 }));
+
+freeze(ENCOUNTERS, true);

@@ -1,3 +1,4 @@
+import { freeze } from "immer";
 import type { Effect, SpeciesId, CardBase, CardDefinition, DamageType } from "./types";
 const card = <T extends Exclude<Effect, "attack">>(
   species: SpeciesId,
@@ -346,3 +347,5 @@ export const CARDS: readonly CardDefinition[] = [
     artwork: "action.shadebrim.noon-bloom",
   },
 ];
+
+freeze(CARDS, true);

@@ -93,7 +93,7 @@ export function cardText(
       text = `Gain ${value} Water Thorns`;
       break;
     case "recover":
-      text = "Return a random discarded card to your hand";
+      text = "Return a random discarded card from a living ally to your hand";
       break;
     case "teamDodge":
       text = `Give all allies ${value}% Dodge until your next turn`;

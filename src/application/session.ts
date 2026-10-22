@@ -179,16 +179,23 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
       await pending;
     } while (pending !== writes);
   };
-  const prepareClose = async () => {
-    if (disposed) return true;
-    store.setState({ closing: true });
-    await drainWrites();
-    if (store.getState().saveStatus === "error") {
-      save(store.getState().game);
+  let closing: Promise<boolean> | undefined;
+  let quitting: Promise<void> | undefined;
+  const prepareClose = () => {
+    if (closing) return closing;
+    if (disposed) return Promise.resolve(true);
+    // Own the handshake before synchronous subscribers can request close again.
+    closing = Promise.resolve().then(async () => {
       await drainWrites();
-    }
-    await cloud.flush();
-    return true;
+      if (!disposed && store.getState().saveStatus === "error") {
+        save(store.getState().game);
+        await drainWrites();
+      }
+      await cloud.flush();
+      return true;
+    });
+    store.setState({ closing: true });
+    return closing;
   };
   const removeCloseListener = platform.onCloseRequested?.(prepareClose);
   return {
@@ -221,9 +228,15 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
       await drainWrites();
       return store.getState().saveStatus !== "error";
     },
-    async quit() {
-      if (!platform.quit || disposed) return;
-      if (await prepareClose()) await platform.quit?.();
+    quit() {
+      if (!platform.quit || disposed) return Promise.resolve();
+      if (quitting) return quitting;
+      // Own native quit before prepareClose publishes to subscribers.
+      quitting = Promise.resolve().then(async () => {
+        if ((await prepareClose()) && !disposed) await platform.quit?.();
+      });
+      prepareClose();
+      return quitting;
     },
     dispose() {
       if (disposal) return disposal;

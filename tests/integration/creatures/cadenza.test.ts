@@ -27,7 +27,7 @@ it("registers Cadenza's kit, recruitment, automatic targeting and save/preview p
     CARDS.filter((card) => card.species === "cadenza").map((card) => [card.cost, cardText(card)]),
   ).toEqual([
     [1, "Draw 2 cards; Gain 1 Mana"],
-    [1, "Return a random discarded card to your hand"],
+    [1, "Return a random discarded card from a living ally to your hand"],
     [1, "Give all allies 20% Dodge until your next turn; Draw 1 card"],
   ]);
   expect(FIRST_RUN_STARTERS).not.toContain("cadenza");
@@ -283,4 +283,20 @@ it("swapping Cadenza out and back does not reset the team's second-card cadence"
   const result = play(next);
   expect(result.accepted).toBe(true);
   expect(result.state.team[1]!.health).toBe(6);
+});
+
+it("Echoes Remember leaves knocked-out owners' inert slots in discard", () => {
+  const game = produce(ready("echoes-remember"), (draft) => {
+    draft.team[1]!.health = 0;
+    const fallenCards = draft.cards.filter((card) => card.ownerId === "ally-1").map((card) => card.id);
+    draft.battle!.discard = fallenCards;
+    draft.battle!.draw = draft.battle!.draw.filter((id) => !fallenCards.includes(id));
+    draft.rng = 1;
+  });
+  const result = play(game);
+  const recovered = result.state.cards.find((card) => card.id === result.state.battle!.hand[0])!;
+  expect(recovered.ownerId).toBe("ally-0");
+  expect(result.state.battle!.discard).toEqual(game.battle!.discard);
+  expect(previewCard(game, game.battle!.hand[0]!)).toEqual(result);
+  expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
 });
