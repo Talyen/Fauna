@@ -1,8 +1,8 @@
 # Runner and Memento evaluation
 
-October 22, 2026. The strategic runner improves controlled journey results, but its remaining draw loops prevent a clean balance verdict. Consume is worth keeping; the current Court damage also turns many former stalemates into defeats. Fix the confirmed runner loops and investigate deployed damage before further content tuning. Merchant stock and prices remain random within their existing range.
+October 22, 2026. The initial evaluation found runner draw loops and excessive Court pressure in some controlled matchups. The approved policy 25 follow-up below fixes those loops, improves recruitment and replacement, and raises controlled career victories from thirteen to twenty-three with no incomplete current-content careers. Memento balance remains an open design question. Merchant stock and prices remain random within their existing range.
 
-This evaluation changes no gameplay. The user requested the runner comparison, isolated Memento comparison and manual stalled-case investigation, explicitly skipping full CI. It follows the [balance pass](JOURNEY_BALANCE.md), and retains [structured results](../design/journey-balance/runner-memento-evaluation.json) for all 426 cases.
+The initial evaluation changed no gameplay; the later approved implementation adds runner fixes and optional post-battle recruitment. The user requested the runner comparison, isolated Memento comparison and manual stalled-case investigation, explicitly skipping full CI. It follows the [balance pass](JOURNEY_BALANCE.md), and retains [structured results](../design/journey-balance/runner-memento-evaluation.json) for all 426 cases.
 
 ## Controlled method
 
@@ -85,7 +85,9 @@ All manual inputs used the rendered browser at 1280×720 with Auto-play off, on 
 
 **Tournelle, seed 0:** the second 5,000-action exhaustion repeated the same Well for its final hundred commands at final-boss turn 11. I manually cast Well and reproduced the unchanged hand and Mana, then ended the turn. Combat advanced to turn 12 and existing Burn reduced Memento from 54 to 52 Health. This confirms the same defect in another career, without assuming that escaping it guarantees victory.
 
-## Recommended next changes
+## Recommendations from the initial evaluation
+
+The policy 25 follow-up below implements and remeasures these runner recommendations.
 
 1. **Prevent repeated tactical states in automated card selection.** Remember visible tactical states within a turn and skip choices that close an unchanged cycle; choose another useful action or End turn. Include hand, pile counts, Mana, Health, Block and statuses, while excluding hidden card order and future RNG. A card that actually changes combat through Memento's passive must remain playable repeatedly. Add regressions using both recorded Cadenza checkpoints and a productive draw/passive control. Keep incomplete diagnostics as a backstop.
 2. **Evaluate the deployed formation after recruitment and release.** Current scoring protects roster-wide capabilities, yet a surviving damage dealer in reserve does not help a solo support deployed after losing a Legendary. The Reedstag trace releases Memento for Prismram, leaving one deployed creature and four living reserves. Score legal resulting deployments and protect reachable damage, including this transition from a Legendary's solo formation; the observation does not yet justify a gameplay formation-rule change. Re-run the same fixed cases after the policy change.
@@ -99,3 +101,37 @@ The structured evidence retains every case's source identity, initial-save hash,
 The repository's standard paired-balance significance helper requires matching policy versions and complete cases. This evaluation deliberately reports descriptive matched outcomes across policy versions and preserves incomplete cases; it does not claim that helper's statistical acceptance or exclude inconvenient runs.
 
 These observations establish controlled runner behavior and focused browser interaction only. Full CI was skipped as requested. Full static, full unit/DOM suites, production builds, exhaustive browser journeys, desktop, Windows packaging, physical controllers, Steam client and Steam Deck remain unrun for this evaluation. The required lightweight path check and documentation contracts are separate from those gates.
+
+## Implementation and repeat: policy 25
+
+The approved runner changes are implemented in `961f506`: bounded tactical cycle detection shared by Auto-play and automated drivers, recruitment scored against keeping the roster using the game's actual formation rules, and knockout replacement that restores missing deployed damage. The [runner follow-up](JOURNEY_BALANCE.md#runner-cycle-and-roster-fixes) records the behavior. Making the approved keep-roster choice reachable also makes post-battle recruitment optional for players; the existing Victory footer now offers Skip. No Memento card, passive, Mana cost, Merchant stock rule or price range changed.
+
+The completed repeat retains 426 cases with no rejected commands or worker failures. It uses the same forty-two fixed starter saves, four teams, passive ranks, encounters and seeds. All arms share the new legal recruitment/formation code; the before arm retains policy 24 and reproduces its previous 13 wins, 26 defeats and 3 incomplete cases exactly. Initial saves match across paired arms. The final evaluated gameplay, application and tooling files are byte-identical to the committed implementation; the read-only measurement classifier is common and additional.
+
+| Runner            | Victories | Defeats | Incomplete |
+| ----------------- | --------: | ------: | ---------: |
+| Before, policy 24 |        13 |      26 |          3 |
+| After, policy 25  |        23 |      19 |          0 |
+
+All thirteen earlier victories remain victories. Nine defeats and one incomplete case become victories; seventeen defeats remain defeats, and two incomplete cases become defeats. For the thirteen common victories, the new runner uses 18.5 fewer total turns on average. This is a conditional comparison, not an expected human journey duration. The Reedstag draw-loop career now wins in 437 actions; Tournelle and Emberback now end in defeat in 189 and 217 actions. There are no current-content incomplete careers left in this small cohort to investigate manually. That does not establish termination for every seed or an optimal policy.
+
+The four content arms with the new runner produce:
+
+| Memento treatment           | Victories | Defeats | Incomplete |
+| --------------------------- | --------: | ------: | ---------: |
+| Recycling, Court 1–6        |        24 |       6 |         12 |
+| Consume, Court 1–6          |        34 |       5 |          3 |
+| Recycling, Court 3–8        |        23 |      13 |          6 |
+| Consume, Court 3–8, current |        23 |      19 |          0 |
+
+The higher Court damage still trades fewer incomplete careers for more defeats with the improved runner. The approved 3-damage start remains in place; these descriptive fixtures do not establish a replacement number or justify an attack cap. All remaining incomplete experimental careers exhausted the turn budget, rather than repeating an action until the action budget. The [repeat evidence](../design/journey-balance/runner-followup.json) retains the complete matched cohort and source fingerprints.
+
+The boss outcome totals remain 30 wins/18 incomplete for either 1–6 treatment, 27 wins/13 defeats/8 incomplete for recycling at 3–8, and 25 wins/23 defeats for the approved treatment. All twenty-four ordinary Memento fixtures win. The unchanged boss outcome counts after the runner fixes keep the pressure concern open; low-damage defensive stalemates also remain in experimental content arms.
+
+Merchants expose fifty-seven shelves and forty-three purchases with the new runner, versus forty-four shelves and thirty-one purchases before. Neither arm buys a Boon classified as lacking a supported trigger. Mean paid prices are 27.81 and 28.61 Gold respectively. Different progress exposes different stock, so this is not a Merchant price treatment or an independent ranking of Boon power.
+
+The earlier two recorded Cadenza checkpoints are permanent regressions. Both escape through accepted production commands with save/resume between actions. A productive Memento fixture retains repeated damaging plays without an attacks-per-turn cap. Five representative career journals and four boss journals replay with exact checkpoint equality. Three careers regenerate identical decisions and checkpoints with periodic resume enabled or disabled. The production-command counterpart of the existing browser journey reaches victory in 359 actions, inside its unchanged budget. This last check executes no browser assertions.
+
+Rendered review inspected matching before/after recruitment frames at 1280×720 with 125% text and 1920×1080 at default text. The added Skip uses the existing registered Button and reserved reward footer; artwork positions, selected typography and control sizes remain unchanged. Its measured hit height is 44px and foreground/fill contrast is 15.67:1. No clipping or scrolling was observed in these frames. At a full roster, Cancel restores focus to the chosen recruit; Tab reaches Skip and Enter commits it. Declining preserves roster, lineup, cards, Collection ranks and Gold, and reload/Continue resumes the next encounter. Live Auto-play advances the retained Cadenza checkpoint from turn 12 to turn 13. Captures and saved states remain in the local report and integration archive. This is functional/rendered evidence, not a new aesthetic approval.
+
+Focused local regressions cover the battle actor, battle policy, recruitment and collection, starter growth, application save/resume, Auto-play, reward UI, controlled battle replay, CLI replay and performance fixtures. Boss recruitment skips retain intermediate Boon choices and final victory without duplicate gains. Full CI remains skipped at the user's request; no full static, full unit, production build, exhaustive browser, desktop, packaged Windows, physical-controller, Steam-client or Steam Deck result is claimed.

@@ -10,6 +10,8 @@ import { accept, teamRun } from "../../support/game";
 it.each([reedstag, tournelle])("escapes a recorded Resonant Well cycle across save/resume", (fixture) => {
   let state = decodeSave(JSON.stringify(fixture));
   const actor = createBattleActor();
+  const uninterrupted = createBattleActor();
+  let withoutResume = state;
   const turn = state.battle!.turn;
   const untouched = encodeSave(state);
   const first = actor.choose(state, false);
@@ -18,9 +20,14 @@ it.each([reedstag, tournelle])("escapes a recorded Resonant Well cycle across sa
   expect(first.command.type).toBe("play");
   for (let count = 0; count < 32 && state.phase === "battle" && state.battle.turn === turn; count++) {
     const selected = actor.choose(state, false);
+    expect(uninterrupted.choose(withoutResume, false)).toEqual(selected);
     const result = dispatch(state, selected.command);
+    const continuous = dispatch(withoutResume, selected.command);
     expect(result.accepted).toBe(true);
+    expect(continuous.accepted).toBe(true);
+    withoutResume = continuous.state;
     state = decodeSave(encodeSave(result.state));
+    expect(encodeSave(withoutResume)).toBe(encodeSave(state));
   }
   expect(state.phase !== "battle" || state.battle.turn > turn).toBe(true);
 });
