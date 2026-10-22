@@ -4,7 +4,7 @@ const KEY = "fauna.save.v1";
 export function createBrowserPlatform(storage?: Storage): Platform {
   return {
     desktop: false,
-    diagnostics: browserDiagnostics(),
+    diagnostics: browserDiagnostics(storage),
     steam: { available: false },
     saves: {
       async readCandidates() {

@@ -14,6 +14,16 @@ const sanitize = (value: string) =>
     .replace(/(?:token|password|secret|authorization)\s*[:=]\s*\S+/gi, "[redacted]")
     .slice(0, 1200);
 
+function errorMessage(error: unknown): string {
+  try {
+    const message: unknown = error instanceof Error ? error.message : error;
+    if (typeof message === "string") return message;
+  } catch {
+    // Thrown values can expose getters or proxies that fail during inspection.
+  }
+  return "Unknown failure";
+}
+
 export function createDiagnostics(port?: DiagnosticPort) {
   const retain = (values: Diagnostic[]) => Object.freeze(values.map((entry) => Object.freeze(entry)));
   let entries = retain([]);
@@ -70,9 +80,7 @@ export function createDiagnostics(port?: DiagnosticPort) {
     record(source: DiagnosticSource, error: unknown, context?: { revision: number; phase: string }) {
       if (disposed || writing) return;
       // Never stringify arbitrary error context or full save payloads.
-      const message = sanitize(
-        error instanceof Error ? error.message : typeof error === "string" ? error : "Unknown failure",
-      );
+      const message = sanitize(errorMessage(error));
       const match = entries.find((entry) => entry.source === source && entry.message === message);
       entries = retain(
         [

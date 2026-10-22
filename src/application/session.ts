@@ -1,6 +1,7 @@
 import { createCloud, initialCloudView, type CloudView } from "./cloud";
 import { createDiagnostics } from "./diagnostics";
 import { createStore } from "zustand/vanilla";
+import { freeze } from "immer";
 import { createGame, dispatch } from "../game/engine";
 import { decodeSave, encodeSave } from "../game/save";
 import type { Command, GameEvent, GameState } from "../game/types";
@@ -20,18 +21,27 @@ export interface SessionView {
 export function createSession(platform: Platform, seed = 1, capabilities: { development?: boolean } = {}) {
   const development = capabilities.development === true;
   const diagnostics = createDiagnostics(platform.diagnostics);
-  const store = createStore<SessionView>(() => ({
-    game: createGame(seed),
-    cloud: initialCloudView,
-    overlayActive: false,
-    ready: false,
-    closing: false,
-    loadFailed: false,
-    error: "",
-    saveStatus: "saved",
-    events: [],
-    committedCommand: null,
-  }));
+  const store = createStore<SessionView>(() =>
+    freeze(
+      {
+        game: createGame(seed),
+        cloud: initialCloudView,
+        overlayActive: false,
+        ready: false,
+        closing: false,
+        loadFailed: false,
+        error: "",
+        saveStatus: "saved",
+        events: [],
+        committedCommand: null,
+      },
+      true,
+    ),
+  );
+  const publish = (patch: Partial<SessionView>) => {
+    // Replace the complete view so Zustand does not merge into a mutable snapshot.
+    store.setState(freeze({ ...store.getState(), ...patch }, true), true);
+  };
   let writes = Promise.resolve();
   let disposed = false;
   let disposal: Promise<void> | undefined;
@@ -66,7 +76,7 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
     // Do not rotate unreadable storage until access has recovered.
     if (store.getState().loadFailed) {
       await readCandidates();
-      if (!disposed) store.setState({ loadFailed: false });
+      if (!disposed) publish({ loadFailed: false });
     }
     await platform.saves.write(data, (candidate) => {
       try {
@@ -84,7 +94,7 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
         const previous = store.getState();
         if (view.error && view.error !== previous.cloud.error)
           diagnostics.record("cloud", view.error, previous.game);
-        store.setState({ cloud: view });
+        publish({ cloud: view });
       }
     },
     async (data) => {
@@ -94,7 +104,7 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
         .then(() => writeLocal(data))
         .then(() => {
           if (!disposed)
-            store.setState({
+            publish({
               game,
               loadFailed: false,
               saveStatus: "saved",
@@ -108,7 +118,7 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
     },
   );
   const removeOverlay = platform.onOverlay?.((overlayActive) => {
-    if (!disposed) store.setState({ overlayActive });
+    if (!disposed) publish({ overlayActive });
   });
   const save = (game: GameState, committed: Partial<SessionView> = {}) => {
     const data = encodeSave(game);
@@ -118,7 +128,7 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
         if (!disposed && store.getState().game.revision === game.revision) {
           clearTimeout(retryTimer);
           retryTimer = undefined;
-          store.setState({ saveStatus: "saved", error: "" });
+          publish({ saveStatus: "saved", error: "" });
         }
         // Cloud metadata has its own serialized lane and bounded shutdown flush.
         // A stalled sync must not prevent the next gameplay snapshot reaching disk.
@@ -127,12 +137,12 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
       .catch((error) => {
         diagnostics.record("save-write", error, store.getState().game);
         if (!disposed) {
-          store.setState({ saveStatus: "error", error: "" });
+          publish({ saveStatus: "error", error: "" });
           scheduleSaveRetry();
         }
       });
     // Admit persistence before subscribers can issue another command or dispose.
-    store.setState({ ...committed, saveStatus: "saving" });
+    publish({ ...committed, saveStatus: "saving" });
   };
   let loading: Promise<void> | undefined;
   function load() {
@@ -147,10 +157,10 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
     const current = store.getState();
     if (disposed || current.closing || current.ready) return;
     const token = ++generation;
-    store.setState({ ready: false, error: "", loadFailed: false });
+    publish({ ready: false, error: "", loadFailed: false });
     const startCloud = async (data: string | null) => {
       await cloud.start(data);
-      if (!disposed && !store.getState().closing && token === generation) store.setState({ ready: true });
+      if (!disposed && !store.getState().closing && token === generation) publish({ ready: true });
     };
     try {
       const candidates = await readCandidates(true);
@@ -158,7 +168,7 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
       for (const candidate of candidates) {
         try {
           const game = decodeSave(candidate.data);
-          store.setState({
+          publish({
             game,
             saveStatus: "saved",
           });
@@ -173,7 +183,7 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
     } catch (error) {
       diagnostics.record("save-read", error, store.getState().game);
       if (!disposed && token === generation)
-        store.setState({
+        publish({
           loadFailed: true,
           error: "",
         });
@@ -202,7 +212,7 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
       await cloud.flush();
       return true;
     });
-    store.setState({ closing: true });
+    publish({ closing: true });
     return closing;
   };
   const removeCloseListener = platform.onCloseRequested?.(prepareClose);
@@ -228,7 +238,7 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
       if (disposed || view.closing || view.overlayActive || view.cloud.blocking || !view.ready) return false;
       const result = dispatch(view.game, command, development);
       if (!result.accepted) {
-        store.setState({ error: result.reason }); // Internal command diagnostics only.
+        publish({ error: result.reason }); // Internal command diagnostics only.
         return false;
       }
       save(result.state, {
@@ -267,7 +277,7 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
       });
       disposed = true;
       clearTimeout(retryTimer);
-      store.setState({ ready: false, closing: true });
+      publish({ ready: false, closing: true });
       const cloudWrites = cloud.dispose();
       for (const remove of [removeOverlay, removeCloseListener]) {
         try {

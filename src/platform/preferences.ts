@@ -1,8 +1,8 @@
 import type { DiagnosticPort } from "./ports";
-export function browserDiagnostics(): DiagnosticPort {
+export function browserDiagnostics(storage?: Storage): DiagnosticPort {
   return {
-    read: () => localStorage.getItem("fauna.diagnostics"),
-    write: (data) => localStorage.setItem("fauna.diagnostics", data),
+    read: () => (storage ?? localStorage).getItem("fauna.diagnostics"),
+    write: (data) => (storage ?? localStorage).setItem("fauna.diagnostics", data),
   };
 }
 

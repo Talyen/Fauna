@@ -825,3 +825,81 @@ it.each(["overlay", "close"])(
     }
   },
 );
+
+it("keeps session snapshots immutable across startup, commands and disposal", async () => {
+  const s = createSession(platform());
+  try {
+    expect(Reflect.set(s.store.getInitialState(), "ready", true)).toBe(false);
+    expect(s.command({ type: "draft", species: s.store.getState().game.starterOffers[0]! })).toBe(false);
+    await s.load();
+    s.store.subscribe((view) => {
+      Reflect.set(view, "game", s.store.getInitialState().game);
+      Reflect.set(view, "closing", false);
+    });
+    expect(s.command({ type: "draft", species: s.store.getState().game.starterOffers[0]! })).toBe(true);
+    expect(s.store.getState().game.revision).toBe(1);
+    expect(await s.flush()).toBe(true);
+    await s.dispose();
+    expect(Reflect.set(s.store.getState(), "ready", true)).toBe(false);
+    expect(s.store.getState().closing).toBe(true);
+  } finally {
+    await s.dispose();
+  }
+});
+
+it("keeps browser diagnostics in the supplied storage profile", async () => {
+  const memory = new MemoryStorage();
+  memory.setItem(
+    "fauna.diagnostics",
+    JSON.stringify([{ source: "render", message: "prior failure", count: 1 }]),
+  );
+  const s = createSession(createBrowserPlatform(memory));
+  try {
+    expect(s.diagnostics.snapshot()).toContainEqual({ source: "render", message: "prior failure", count: 1 });
+    s.diagnostics.record("audio", "playback failed");
+    expect(JSON.parse(memory.getItem("fauna.diagnostics")!)).toContainEqual({
+      source: "audio",
+      message: "playback failed",
+      count: 1,
+    });
+  } finally {
+    await s.dispose();
+  }
+});
+
+it.each(["non-string", "throwing"])(
+  "isolates a subscriber throwing an Error with a %s message",
+  async (kind) => {
+    const p = platform();
+    const s = createSession(p);
+    await s.load();
+    const failure = new Error("failed");
+    Object.defineProperty(
+      failure,
+      "message",
+      kind === "throwing"
+        ? {
+            get() {
+              throw new Error("unreadable error");
+            },
+          }
+        : { value: null },
+    );
+    s.store.subscribe(() => {
+      throw failure;
+    });
+    const observed: number[] = [];
+    s.store.subscribe((view) => observed.push(view.game.revision));
+    try {
+      expect(s.command({ type: "draft", species: s.store.getState().game.starterOffers[0]! })).toBe(true);
+      expect(await s.flush()).toBe(true);
+      expect(observed).toContain(1);
+      expect(JSON.parse((await p.saves.readCandidates())[0]!.data).revision).toBe(1);
+      expect(s.diagnostics.snapshot()).toContainEqual(
+        expect.objectContaining({ source: "render", message: "Unknown failure" }),
+      );
+    } finally {
+      await s.dispose();
+    }
+  },
+);
