@@ -362,6 +362,7 @@ export function grantStatus(
 export function triggerArmorBreak(state: GameState, unit: Combatant, events: GameEvent[]) {
   if (state.phase !== "battle" || unit.health <= 0 || !state.battle) return;
   const allied = !("maxHealth" in unit);
+  if (allied && hasTalent(state, "armor.reactive-guard")) grantBlock(state, unit, 3, events);
   const row = allied ? state.team : state.battle.enemies;
   if (!row.some((deployed) => deployed.id === unit.id)) return;
   const amount = creaturePassive(allied ? state : undefined, unit.species).effects.reduce(
@@ -1036,7 +1037,8 @@ function resolveHit(
   if (critical) damage *= 2;
   const blockRatio = alliedTarget && type === "physical" && hasTalent(state, "block.reinforce") ? 1.1 : 1;
   const blocked = options.periodic ? 0 : Math.min(Math.round(target.block * blockRatio), damage);
-  target.block -= Math.min(target.block, Math.ceil(blocked / blockRatio));
+  const blockSpent = Math.min(target.block, Math.ceil(blocked / blockRatio));
+  target.block -= blockSpent;
   const depletedBlock = blocked > 0 && target.block === 0;
   damage -= blocked;
   if (
@@ -1055,7 +1057,6 @@ function resolveHit(
         (type === "bleed" && hasTalent(state, "armor.thick-hide"))))
   )
     damage = Math.max(0, damage - stats.armor);
-  const armorBefore = stats.armor;
   const lost = loseHealth(state, target, damage, events);
   if (damage > 0) {
     stats.armor = Math.max(0, stats.armor - 1);
@@ -1063,15 +1064,13 @@ function resolveHit(
       stats.armor = Math.max(0, stats.armor - damage);
     if (alliedSource && type === "burn" && hasTalent(state, "burn.melting-point"))
       stats.armor = Math.max(0, stats.armor - damage);
-    if (alliedTarget && armorBefore > 0 && stats.armor === 0 && hasTalent(state, "armor.reactive-guard"))
-      grantBlock(state, target, 3, events);
   }
   let armorBroken = initialArmor > 0 && stats.armor === 0;
   if (lost > 0) healthThresholds(state, target, before, events);
   if (alliedTarget && lost > 0 && hasTalent(state, "dodge.finding-rhythm"))
     stats.rhythm = Math.min(70, stats.rhythm + 5);
   if (alliedTarget && depletedBlock && attack && hasTalent(state, "block.sun-struck-shield"))
-    hit(state, target, source, Math.round(blocked * 0.3), "light", events, { derived: true });
+    hit(state, target, source, Math.round(blockSpent * 0.3), "light", events, { derived: true });
   // Depletion rewards use the original block payment, not any newly granted Block.
   if (alliedTarget && depletedBlock && hasTalent(state, "block.second-wind"))
     restoreHealth(target, 2, events, false, state);
@@ -1267,6 +1266,8 @@ export function tickStatuses(state: GameState, unit: Combatant, events: GameEven
         (candidate) => candidate.id === stats.statusSources[status],
       ) ?? unit;
     const lost = hit(state, source, unit, amount, status, events, { periodic: true }) ?? 0;
+    // Threshold reactions can Cleanse the ticking status; decay must not restore it.
+    if (stats[status] === 0) continue;
     stats[status] =
       status === "bleed"
         ? 0
