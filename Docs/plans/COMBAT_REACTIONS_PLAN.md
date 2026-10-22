@@ -29,6 +29,12 @@ I rank this above the other candidates inspected:
 - **App composition:** [App.tsx](../../src/ui/App.tsx) concentrates navigation, input and modal ownership. These responsibilities have an intentional single owner and feature components already exist; further splitting has less direct benefit to gameplay correctness
 - **Platform and persistence layering:** gameplay is already isolated from I/O, and the application owns publication and serialized saving. Keep those boundaries
 
+## Approved design intent
+
+If retaliation knocks out the acting creature, stop its remaining hits and extra effects immediately, including remaining area targets and ability repeats. Check liveness after child reactions resolve and before continuing the acting creature's work. Already applied effects remain committed. Death's Door retaining the creature at 1 Health is not a knockout.
+
+This rule was explicitly approved by the user. If current execution differs, record the correction separately from behavior-preserving restructuring and add a focused regression. Reaction-chain eligibility and the distinction between fully blocked attacks and Health damage retain current behavior; the other design suggestions have not been approved.
+
 ## Target architecture
 
 Keep one synchronous Immer transaction per accepted command. Inside it, make combat resolution an explicit sequence of typed operations and continuations. The command still returns complete immutable state and ordered presentation events before saving or animation.
@@ -91,7 +97,7 @@ Review the complete diff for duplicate policy, changed RNG consumption, event or
 
 ## Acceptance and verification
 
-Require exact state, RNG, acceptance/rejection and ordered-event equality for the baseline corpus. Do not regenerate expectations to hide a mismatch. A separately demonstrated existing bug needs a focused regression and an explicitly documented behavior change, rather than a broad balance adjustment.
+Require exact state, RNG, acceptance/rejection and ordered-event equality for the baseline corpus, except for separately documented corrections needed to meet the approved knockout rule. Do not regenerate expectations to hide a mismatch. A separately demonstrated existing bug needs a focused regression and an explicitly documented behavior change, rather than a broad balance adjustment.
 
 Required coverage includes:
 
@@ -100,6 +106,7 @@ Required coverage includes:
 - Open Flank plus Erosion causing one Armor break; opposing Molten Shells; genuine Armor regrant/break causing another reaction; Purge, theft and control-based Armor removal
 - Last Resort during Burn/Poison/Bleed ticks; captured Bleed Leech paid once after Cleanse; decay never restoring a removed wound
 - Dodge and reflection; bounce and Resonance; retaliation eligibility and termination; actor/target knockout during children
+- Retaliation knocking out the acting creature cancels its remaining hits, area targets, extra effects and repeats on both sides, without undoing applied effects; Death's Door survival permits continuation
 - Healing/protection sharing without amplification; reserve exclusion; live deployed-row checks after swaps; repeat and area-target cutoffs
 - Rejected commands retaining original identity/RNG; detached previews resolving the same effects without settlement; identical command continuation after save/resume
 - Once-only rewards after the complete chain; synchronous completion; unchanged command/save/publication ordering
