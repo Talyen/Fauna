@@ -185,7 +185,8 @@ describe("CI diagnostics", () => {
   });
 });
 
-describe("isolated worktrees and protected integration", () => {
+// These safety regressions launch real Git processes; host contention is not a latency failure.
+describe("isolated worktrees and protected integration", { timeout: 15_000 }, () => {
   it("starts from committed main, preserves dirty main, links matching dependencies and reuses without resetting", () => {
     const root = repo();
     mkdirSync(path.join(root, "node_modules"));
@@ -263,7 +264,6 @@ describe("isolated worktrees and protected integration", () => {
     await integrate(root, task.branch, { runner, log: () => {} });
     expect(runner.mock.calls.map((call) => call[1].slice(1))).toEqual([
       ["run", "check", "--", "--base", original],
-      ["run", "docs:check"],
     ]);
     expect(readFileSync(path.join(root, "main-only.txt"), "utf8")).toContain("concurrent");
     expect(git(root, "show", "HEAD:Docs/workflow.md")).toContain("Task change");

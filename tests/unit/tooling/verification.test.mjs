@@ -3,7 +3,13 @@ import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from "nod
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
-import { parseCheckArgs, selectedPaths, formatSelection, runCheck } from "../../../scripts/checks/check.mjs";
+import {
+  parseCheckArgs,
+  selectedPaths,
+  formatSelection,
+  checkPlan,
+  runCheck,
+} from "../../../scripts/checks/check.mjs";
 import { runLocalTests } from "../../../scripts/checks/run-local-tests.mjs";
 import localConfig from "../../../vitest.local.config.mjs";
 
@@ -86,7 +92,8 @@ describe("lightweight local verification", () => {
     const root = fixture(),
       runner = vi.fn(() => ({ status: 0 }));
     expect(runCheck(["README.md"], { root, runner, log: () => {} })).toBe(0);
-    expect(runner).toHaveBeenCalledTimes(1);
+    expect(runner).toHaveBeenCalledTimes(2);
+    expect(runner.mock.calls[1][1]).toEqual([path.join(root, "scripts/checks/check-docs.mjs")]);
     expect(runner.mock.calls[0][0]).toBe(process.execPath);
     expect(runner.mock.calls[0][1]).toEqual([
       path.join(root, "node_modules/prettier/bin/prettier.cjs"),
@@ -98,14 +105,19 @@ describe("lightweight local verification", () => {
     expect(runner.mock.calls[0][2].shell).toBeUndefined();
   });
 
-  it("runs only selected formatting and fixed smoke for source changes", () => {
+  it("runs selected lint and the owning compiler before smoke", () => {
     const root = fixture(),
       runner = vi.fn(() => ({ status: 0 })),
       messages = [];
     expect(runCheck(["src/game.ts"], { root, runner, log: (message) => messages.push(message) })).toBe(0);
-    expect(runner).toHaveBeenCalledTimes(2);
-    expect(runner.mock.calls[1][1]).toEqual([path.join(root, "scripts/checks/run-local-tests.mjs")]);
-    expect(messages.join(" ")).toContain("CI owns full unit, static, build, browser and desktop validation");
+    expect(runner.mock.calls.map((call) => path.basename(call[1][0]))).toEqual([
+      "prettier.cjs",
+      "oxlint",
+      "tsc",
+      "run-local-tests.mjs",
+    ]);
+    expect(runner.mock.calls[2][1].slice(1)).toEqual(["--noEmit", "-p", "tsconfig.json"]);
+    expect(messages.join(" ")).toContain("CI owns complete static");
   });
 
   it("stops on formatting failure and propagates smoke failure or termination", () => {
@@ -139,9 +151,11 @@ describe("lightweight local verification", () => {
       messages = [];
     writeFileSync(path.join(root, "src/large.ts"), " ".repeat(256_001));
     expect(runCheck(["src/large.ts"], { root, runner, log: (message) => messages.push(message) })).toBe(0);
-    expect(runner).toHaveBeenCalledTimes(1);
-    expect(runner.mock.calls[0][1]).toEqual([path.join(root, "scripts/checks/run-local-tests.mjs")]);
-    expect(messages.join(" ")).toContain("Formatting deferred to CI");
+    expect(runner.mock.calls.map((call) => path.basename(call[1][0]))).toEqual([
+      "tsc",
+      "run-local-tests.mjs",
+    ]);
+    expect(messages.join(" ")).toContain("deferred to CI");
   });
 
   it("runs smoke on a clean checkout and never treats Git discovery failure as success", () => {
@@ -151,6 +165,66 @@ describe("lightweight local verification", () => {
     expect(runner.mock.calls[0][1]).toEqual([path.join(root, "scripts/checks/run-local-tests.mjs")]);
     expect(() => runCheck(["--base", "missing"], { root, runner, log: () => {} })).toThrow();
     expect(runner).toHaveBeenCalledTimes(1);
+  });
+
+  it("selects existing owner suites, changed regressions and compiler environments for deleted sources", () => {
+    const root = fixture();
+    mkdirSync(path.join(root, "tests/unit/game"), { recursive: true });
+    writeFileSync(path.join(root, "tests/unit/game/engine.test.ts"), "");
+    const plan = checkPlan(root, [
+      "src/game/engine.ts",
+      "src/platform/ports.ts",
+      "tests/unit/game/engine.test.ts",
+    ]);
+    expect(plan.tests).toEqual(["tests/unit/game/engine.test.ts"]);
+    expect(plan.configs).toEqual([
+      "tsconfig.game.json",
+      "tsconfig.json",
+      "tsconfig.desktop.json",
+      "tsconfig.desktop-boundary.json",
+      "tsconfig.test.json",
+    ]);
+    expect(checkPlan(root, ["package-lock.json"]).configs).toHaveLength(6);
+  });
+
+  it("blocks handoff on selected lint, compiler, documentation or source contract failures", () => {
+    const root = fixture();
+    for (const failed of ["oxlint", "tsc"]) {
+      const runner = vi.fn((_command, args) => ({ status: path.basename(args[0]) === failed ? 7 : 0 }));
+      expect(runCheck(["src/game.ts"], { root, runner, log: () => {} })).toBe(7);
+      expect(runner.mock.calls.some((call) => call[1][0].endsWith("run-local-tests.mjs"))).toBe(false);
+    }
+    writeFileSync(path.join(root, "src/game.ts"), 'import * as Dialog from "@radix-ui/react-dialog";');
+    expect(runCheck(["src/game.ts"], { root, runner: vi.fn(() => ({ status: 0 })), log: () => {} })).toBe(1);
+    mkdirSync(path.join(root, "src/ui"));
+    writeFileSync(path.join(root, "src/ui/screen.css"), ".panel { overflow: scroll; }");
+    expect(
+      runCheck(["src/ui/screen.css"], { root, runner: vi.fn(() => ({ status: 0 })), log: () => {} }),
+    ).toBe(1);
+    expect(
+      runCheck(["README.md"], {
+        root,
+        runner: (_command, args) => ({ status: args[0].endsWith("check-docs.mjs") ? 8 : 0 }),
+        log: () => {},
+      }),
+    ).toBe(8);
+  });
+
+  it("bounds each selected suite independently and stops when a regression fails", () => {
+    const root = fixture();
+    mkdirSync(path.join(root, "tests/unit"), { recursive: true });
+    for (const name of ["first", "second"]) writeFileSync(path.join(root, `tests/unit/${name}.test.mjs`), "");
+    const suites = ["tests/unit/first.test.mjs", "tests/unit/second.test.mjs"];
+    const runner = vi.fn(() => ({ status: 0 }));
+    expect(runCheck(suites, { root, runner, log: () => {} })).toBe(0);
+    const calls = runner.mock.calls.filter((call) => call[1][0].endsWith("vitest.mjs"));
+    expect(calls.map((call) => call[1].slice(4))).toEqual(suites.map((suite) => [suite]));
+    expect(calls.every((call) => call[2].timeout === 60_000)).toBe(true);
+    const failure = vi.fn((_command, args) => ({
+      status: args.includes(suites[0]) && args[0].endsWith("vitest.mjs") ? 9 : 0,
+    }));
+    expect(runCheck(suites, { root, runner: failure, log: () => {} })).toBe(9);
+    expect(failure.mock.calls.filter((call) => call[1][0].endsWith("vitest.mjs"))).toHaveLength(1);
   });
 
   it("keeps smoke in Node with one worker, a 512 MiB heap and a 30-second deadline", () => {

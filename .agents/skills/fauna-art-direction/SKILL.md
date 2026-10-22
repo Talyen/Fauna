@@ -15,4 +15,4 @@ Review both the source and its real ArtCard rendering: creatures are 4:3 landsca
 
 Reject mismatched framing, illegible detail, unexplained glow, generic ornament, unintended text, broken anatomy or geometry, and styles inconsistent with the selected references. Correct the supported defect and inspect again. Do not try to compensate for weak composition by increasing saturation, glow or detail.
 
-Deliver the asset in context with reference provenance, conditions inspected and any unresolved choice. Route taste decisions through the reference pack's A/B process. Source generation, rendered verification and user acceptance are separate facts.
+Deliver the asset in context with reference provenance, conditions inspected and any unresolved choice. Follow the [rendered review procedure](../../../Docs/UI.md#required-review) for in-game evidence and preference decisions. Source generation, rendered verification and user acceptance are separate facts.

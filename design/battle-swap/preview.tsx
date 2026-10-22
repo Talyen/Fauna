@@ -1,14 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { ArrowLeftRight } from "lucide-react";
-import { Button } from "../../src/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-  DialogTrigger,
-} from "../../src/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../../src/components/ui/dialog";
 import { TooltipProvider } from "../../src/components/ui/tooltip";
 import { BattleScreen } from "../../src/ui/battle/battle-screen";
 import type { Controls } from "../../src/ui/shared/navigation/input";
@@ -133,14 +125,6 @@ function Preview() {
             controller={false}
             navigateFocus={false}
             onDenied={() => {}}
-            actions={
-              <DialogTrigger asChild>
-                <Button variant="outline" className="swap-trigger">
-                  <ArrowLeftRight aria-hidden="true" />
-                  Swap
-                </Button>
-              </DialogTrigger>
-            }
           />
           <DialogContent className="swap-dialog" closeLabel="Close Swap">
             <DialogTitle>Swap</DialogTitle>
