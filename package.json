@@ -24,6 +24,7 @@
     "verify": "node scripts/checks/check.mjs",
     "verify:full": "npm run check:full && npm run docs:check && npm run content:audit && npm run test:full -- --reporter=default --reporter=json --outputFile.json=reports/vitest.json && npm run build && npm run check:bundle && npm run assets:check:bundle && npm run test:e2e",
     "worktree": "node scripts/worktree.mjs",
+    "deps": "node scripts/dependencies.mjs",
     "worktree:cleanup": "node scripts/worktree-cleanup.mjs",
     "docs:check": "node scripts/checks/check-docs.mjs",
     "check:bundle": "node scripts/checks/check-bundle-budget.mjs",
