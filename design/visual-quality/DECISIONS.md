@@ -1,10 +1,10 @@
 # Fauna visual decision records
 
-The [reference index](README.md) owns reference status and the current image set; [UI contracts](../../Docs/UI.md#required-review) own the review procedure. These records preserve screen-specific evidence and user decisions.
-
-## Evidence scope
-
-These are dated implementation observations, not acceptance of current main. Browser evidence means Chromium simulation; individual sections retain their source/image identities, conditions and observed interactions. None establishes full CI, native desktop, Windows packaging, physical-controller, Steam-client, Steam Deck or measured-balance acceptance. Artistic approval extends only to explicitly recorded user choices.
+> **Status/source:** dated implementation observations and explicit user choices; each section retains source/image identities, conditions and exercised interactions
+>
+> **Current owners:** [reference status and image index](README.md) and [UI review procedure](../../Docs/UI.md#required-review)
+>
+> **Evidence:** Chromium simulation only; no full CI, native desktop, Windows packaging, physical-controller, Steam-client, Steam Deck or measured-balance acceptance; artistic approval covers only explicit user choices, not current main
 
 ## Merchant
 

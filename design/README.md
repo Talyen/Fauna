@@ -1,6 +1,8 @@
 # Design references
 
-These samples record reviewed composition choices and historical alternatives. Some deliberately retain retired flows, smaller reserve cards, scrolling, synthetic errors or earlier colors. Instructions for operating a study apply only to that sandbox. Review procedures and saved choices describe the recorded session, not a task to resume or current production behavior. They are not current rendered acceptance evidence. See the canonical [UI rules](../Docs/UI.md) and [required review](../Docs/UI.md#required-review).
+Historical studies preserve scoped user choices, alternatives and verification evidence. Some retain retired flows, smaller reserve cards, scrolling, synthetic errors or earlier colors. Operating instructions apply only to their sandbox; recorded reviews neither resume a task nor qualify current production. Use [UI contracts](../Docs/UI.md) and [required review](../Docs/UI.md#required-review) for new work.
+
+When shortening a record, keep its source/date, current owner and evidence scope together. Preserve explicit choices, source identities and evidence paths, with attempt-specific observations and limitations beside their attempt.
 
 - [Battle layout and mana provenance](battle-layout/README.md)
 - [Menu options](menu-options/README.md)
@@ -9,7 +11,7 @@ These samples record reviewed composition choices and historical alternatives. S
 - [Battle swaps](battle-swap/README.md)
 - [Battle rewards](battle-rewards/README.md)
 - [Interactive button states](button-interactions/README.md)
-- [Interactive UI review process and complete element queue](UI_REVIEW.md)
+- [Historical UI review process and element inventory](UI_REVIEW.md)
 - [Interactive icon button sizes](icon-buttons/README.md)
 - [Tooltip review batch](tooltip-interactions/README.md)
 - [Artwork interaction batch](artwork-interactions/README.md)
