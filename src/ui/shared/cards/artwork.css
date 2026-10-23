@@ -29,14 +29,12 @@
   height: 100%;
   object-fit: contain;
   border-radius: calc(var(--radius) - var(--border-art-width));
-  corner-shape: inherit;
 }
 .control-art-effect {
   position: absolute;
   inset: 0;
   overflow: hidden;
   border-radius: calc(var(--radius) - var(--border-art-width));
-  corner-shape: inherit;
   pointer-events: none;
 }
 .control-art-effect svg {
@@ -154,7 +152,6 @@
   inset: calc(var(--hover-frame-overlap) - var(--hover-frame-width));
   border: var(--hover-frame-width) solid transparent;
   border-radius: calc(var(--radius) + var(--hover-frame-width) - var(--hover-frame-overlap));
-  corner-shape: inherit;
   pointer-events: none;
   transition: border-color var(--motion-hover) ease-out;
 }
@@ -189,6 +186,13 @@
   pointer-events: none;
 }
 .game-tooltip {
+  --foreground: var(--tooltip-foreground);
+  --muted-foreground: var(--tooltip-muted-foreground);
+  color: var(--muted-foreground);
+  background: var(--tooltip-background);
+  border-color: var(--tooltip-border);
+  box-shadow: var(--tooltip-shadow);
+  line-height: 1.625;
   --text-body: var(--tooltip-text-body);
   --text-rule: var(--tooltip-text-body);
   --text-heading: var(--tooltip-text-heading);
@@ -205,6 +209,29 @@
   --tooltip-offset-y: var(--tooltip-travel);
   overflow-wrap: anywhere;
   overflow: visible;
+}
+.game-tooltip .card-details {
+  gap: var(--space-1);
+  line-height: inherit;
+}
+.game-tooltip .action-effect {
+  line-height: inherit;
+}
+.game-tooltip > strong,
+.game-tooltip .card-details > strong:first-child {
+  display: block;
+  margin-bottom: var(--space-1);
+  color: var(--foreground);
+  font-size: var(--text-heading);
+  font-weight: 700;
+  line-height: 1.333333;
+}
+.game-tooltip .card-details > strong:first-child {
+  margin-bottom: 0;
+}
+.game-tooltip > p {
+  margin-top: var(--space-1);
+  color: var(--muted-foreground);
 }
 .game-tooltip[data-side="bottom"] {
   --tooltip-offset-y: calc(-1 * var(--tooltip-travel));
@@ -227,7 +254,7 @@
 @keyframes tooltip-enter {
   from {
     opacity: 0;
-    translate: var(--tooltip-offset-x) var(--tooltip-offset-y);
+    translate: calc(var(--tooltip-offset-x) * 2) calc(var(--tooltip-offset-y) * 2);
   }
   to {
     opacity: 1;

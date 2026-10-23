@@ -27,7 +27,6 @@
   inset: 0;
   padding: var(--shine-width, 2px);
   border-radius: inherit;
-  corner-shape: inherit;
   pointer-events: none;
   background-size: 300% 300%;
   mask:

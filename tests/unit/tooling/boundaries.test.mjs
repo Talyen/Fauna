@@ -75,7 +75,7 @@ it("prevents utilities and presentation foundations from bypassing feature and p
   expect(
     boundaryViolations(
       "src/components/ui/a.tsx",
-      'import {useSurfaceRef} from "@/ui/infrastructure/surface-ref"',
+      'import {useModalSurfaceRef} from "@/ui/infrastructure/modal-surface-ref"',
     ),
   ).toEqual([]);
   expect(boundaryViolations("src/lib/a.ts", 'import {clsx} from "clsx"')).toEqual([]);
@@ -107,7 +107,7 @@ it("keeps shared presentation independent of feature compositions", () => {
   expect(
     boundaryViolations(
       "src/ui/shared/fixture.tsx",
-      'import {CombatStatus} from "./combat/combat-status"; import {useSurfaceRef} from "../infrastructure/surface-ref";',
+      'import {CombatStatus} from "./combat/combat-status"; import {useModalSurfaceRef} from "../infrastructure/modal-surface-ref";',
     ),
   ).toEqual([]);
 });

@@ -15,7 +15,6 @@
   inset: calc(var(--hover-frame-overlap) - var(--hover-frame-width));
   border: var(--hover-frame-width) solid transparent;
   border-radius: calc(var(--radius) + var(--hover-frame-width) - var(--hover-frame-overlap));
-  corner-shape: inherit;
   pointer-events: none;
   transition: border-color var(--motion-hover) ease-out;
 }

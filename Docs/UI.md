@@ -61,7 +61,7 @@ This policy does not authorize swallowing exceptions, replaying commands or inve
 
 ### Tooltips
 
-Shared tooltips follow Alchemy's immediate hover behavior: compact charcoal panels, shared measured corners, 12px padding, content-sized width capped at 320px at 100% Tooltip size (scaled with Tooltip size), and a 100ms opacity fade on entry and exit, preferring above with an 8px gap. Details stay pointer-transparent, collision-aware and available on intentional keyboard/controller focus. Clicking dismisses details; fresh mouse movement over the artwork restores them. Window blur or a hidden document dismisses open details.
+Shared tooltips follow Alchemy's immediate hover behavior: charcoal panels with Alchemy's exact fill, ivory heading, muted body, subtle border and soft shadow; 20px rounded corners; 12px padding; content-sized width capped at 320px (scaled with Tooltip size); and a 180ms entry / 120ms exit fade with a 2px directional offset (4px on entry), preferring above with an 8px gap. Details stay pointer-transparent, collision-aware and available on intentional keyboard/controller focus. Clicking dismisses details; fresh mouse movement over the artwork restores them. Window blur or a hidden document dismisses open details.
 
 ### Artwork and availability
 
@@ -134,11 +134,11 @@ Alchemy's warm near-black canvas (`hsl(30 10% 3%)`), charcoal surfaces (`hsl(30 
 
 ### Geometry
 
-Shared smooth corners use native CSS `corner-shape: squircle` (a superellipse approximation). Shared surfaces derive their radius from 22.37% of the measured shorter border-box side, bounded to 10–32px. Unmeasured controls use their 44px height; empty artwork slots use the shared artwork short side. Artwork, dialogs, tooltips, buttons and tabs share this rule; pills and circular controls remain fully rounded.
+Shared surfaces use Alchemy's ordinary rounded corners and fixed role radii: 12px controls/buttons/tabs, 14px compact icon faces, 20px tooltips, 22px popovers, 26px dialogs and 30px artwork/empty artwork slots. Tooltip corners scale with Tooltip size; artwork corners stay fixed across sizes and hover transforms. Pills and circular controls remain fully rounded.
 
-Artwork images inset their radius by the border width; outer interaction frames expand it by their offset. Browsers without corner-shape support retain ordinary rounded corners. Semantic shadcn sm/md/lg/xl radii remain derived at 0.6/0.8/1/1.4 times the local base. No sharp visible corners or `rounded-none` overrides.
+Artwork images inset their radius by the border width; outer interaction frames expand it by their offset. Semantic shadcn sm/md/lg/xl radii match Alchemy's 20/22/24/12px values. No sharp visible corners or `rounded-none` overrides.
 
-Thin borders, keyword plasma, shine borders and short-label shines follow the shared effects owner; other decorative shadows, glows and textures remain excluded. Artwork has no UI scrim; external selection rings remain interaction indicators.
+Thin borders, keyword plasma, shine borders and short-label shines follow the shared effects owner; Alchemy's soft tooltip shadow is the only panel shadow; other decorative shadows, glows and textures remain excluded. Artwork has no UI scrim; external selection rings remain interaction indicators.
 
 ### Motion
 
