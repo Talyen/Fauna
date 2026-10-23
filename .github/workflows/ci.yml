@@ -143,6 +143,14 @@ jobs:
       - name: Install dependencies
         timeout-minutes: 3
         run: npm ci --no-audit --no-fund
+      - name: Diagnose the journey fixture in hosted CI
+        run: npm test -- tests/integration/gameplay/journey.test.ts -t "diagnoses a representative journey seed" > reports/journey-seed.log 2>&1
+      - name: Retain the journey diagnostic
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: journey-seed-diagnostic
+          path: reports/journey-seed.log
       - name: Unit and DOM suites
         run: npm run test:full -- --reporter=default --reporter=json --outputFile.json=reports/vitest.json
       - name: Summarize unit results
