@@ -1,6 +1,6 @@
 # Fauna visual references
 
-Use this pack with the repo [UI design](../../.agents/skills/fauna-ui-design/SKILL.md), [UI critique](../../.agents/skills/fauna-ui-critique/SKILL.md) and [art direction](../../.agents/skills/fauna-art-direction/SKILL.md) skills. [UI contracts](../../Docs/UI.md) own behavior, accessibility, layout and tokens; this pack supplies visual evidence and preference records. Open the images before applying a reference.
+Consult this pack for composition or art-direction work through the [UI task procedure](../../Docs/UI.md#required-review). It supplies visual evidence and preference records; it adds no separate checklist. Open the relevant images and carry forward only the recorded acceptance scope.
 
 ## Reference status
 

@@ -117,7 +117,7 @@ it("retains committed renames/deletions and literal unusual paths in task review
   expect(renamed).toContain("+# Working rename");
 });
 
-it("executes verification every time, including after committing and after failed attempts", () => {
+it("executes nonempty verification every time, including after committing and failed attempts", () => {
   const root = fixture();
   git(root, "checkout", "-qb", "task/cache");
   put(root, "README.md", "# Checked\n");
@@ -141,7 +141,7 @@ it("executes verification every time, including after committing and after faile
   expect(runner.mock.calls.length).toBeGreaterThan(beforeSelection);
   const beforeBase = runner.mock.calls.length;
   expect(runCheck(["--base", "HEAD"], options)).toBe(0);
-  expect(runner.mock.calls.length).toBeGreaterThan(beforeBase);
+  expect(runner.mock.calls.length).toBe(beforeBase);
 });
 
 it("fingerprints repository inputs without traversing installed dependencies or output caches", () => {
@@ -252,26 +252,47 @@ it("prepares required review conditions and rejects ambiguous, unsupported or re
     expect(() => reviewOptions(args)).toThrow();
 });
 
-it("rechecks the combined task during integration without weakening the clean-main guard", async () => {
+it("runs one final combined gate with added regressions and preserves the clean-main guard", async () => {
   const root = fixture();
-  const task = createWorktree(root, "reuse");
+  const task = createWorktree(root, "final-gate");
   put(task.path, "README.md", "# Verified task\n");
-  const runner = vi.fn(() => ({ status: 0 }));
-  const options = { root: task.path, runner, log: () => {} };
-  expect(runCheck([], options)).toBe(0);
+  const suite = "tests/unit/regression.test.mjs";
+  put(task.path, suite, "export {};\n");
   git(task.path, "add", ".");
   git(task.path, "commit", "-qm", "task");
-  runner.mockClear();
-  const launch = (_command, args) => ({ status: runCheck(args.slice(args.indexOf("--") + 1), options) });
+  const runner = vi.fn(() => ({ status: 0 }));
+  const launch = vi.fn((_command, args) => ({
+    status: runCheck(args.slice(args.indexOf("--") + 1), { root: task.path, runner, log: () => {} }),
+  }));
   put(root, "unfinished.md", "unrelated\n");
-  await expect(integrate(root, task.branch, { runner: launch, log: () => {} })).rejects.toThrow(
-    "unfinished work",
-  );
-  expect(runner).not.toHaveBeenCalled();
+  await expect(
+    integrate(root, task.branch, { runner: launch, log: () => {}, tests: [suite] }),
+  ).rejects.toThrow("unfinished work");
+  expect(launch).not.toHaveBeenCalled();
   rmSync(path.join(root, "unfinished.md"));
-  await integrate(root, task.branch, { runner: launch, log: () => {} });
-  expect(runner).toHaveBeenCalled();
+  await integrate(root, task.branch, { runner: launch, log: () => {}, tests: [suite] });
+  expect(launch).toHaveBeenCalledTimes(1);
+  const testRuns = runner.mock.calls.filter((call) => call[1][0].endsWith("vitest.mjs"));
+  expect(testRuns).toHaveLength(1);
+  expect(testRuns[0][1]).toContain(suite);
   expect(git(root, "show", "HEAD:README.md")).toBe("# Verified task");
+});
+
+it("rejects CLI options that could narrow or bypass the final integration gate", () => {
+  const root = fixture();
+  const task = createWorktree(root, "no-bypass");
+  const before = git(root, "rev-parse", "HEAD");
+  for (const args of [["--working-tree"], ["--base", "HEAD"], ["--plan"], ["--test"]]) {
+    expect(() =>
+      execFileSync(
+        process.execPath,
+        [path.resolve(import.meta.dirname, "../../../scripts/integrate.mjs"), task.branch, ...args],
+        { cwd: root, stdio: "pipe" },
+      ),
+    ).toThrow("Usage: npm run integrate");
+    expect(git(root, "rev-parse", "HEAD")).toBe(before);
+    expect(git(task.path, "status", "--porcelain")).toBe("");
+  }
 });
 
 it("terminates a timed-out diagnostic instead of accepting a late successful exit", async () => {

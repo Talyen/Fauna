@@ -207,9 +207,9 @@ describe("lightweight local verification", () => {
       "tests/integration/renamed.test.ts",
       "tests/integration/required.test.mjs",
     ];
-    expect(checkPlan(root, ["src/game/value.ts"]).relatedTests).toEqual(regressions);
+    expect(checkPlan(root, ["src/game/value.ts"], [], { related: true }).relatedTests).toEqual(regressions);
     rmSync(path.join(root, "src/game/value.ts"));
-    expect(checkPlan(root, ["src/game/value.ts"]).relatedTests).toEqual(regressions);
+    expect(checkPlan(root, ["src/game/value.ts"], [], { related: true }).relatedTests).toEqual(regressions);
   });
 
   it("reports additional related suites instead of pretending a bounded selection is exhaustive", () => {
@@ -217,7 +217,8 @@ describe("lightweight local verification", () => {
     mkdirSync(path.join(root, "tests/integration"), { recursive: true });
     for (let i = 0; i < 14; i++)
       writeFileSync(path.join(root, `tests/integration/case-${i}.test.ts`), 'import "../../src/game";');
-    const plan = checkPlan(root, ["src/game.ts"]);
+    expect(checkPlan(root, ["src/game.ts"]).relatedTests).toEqual([]);
+    const plan = checkPlan(root, ["src/game.ts"], [], { related: true });
     expect(plan.tests).toEqual([]);
     expect(plan.relatedTests).toHaveLength(14);
     // Explicitly selected regressions are never displaced by automatic discovery.
@@ -245,7 +246,7 @@ describe("lightweight local verification", () => {
       "tests/unit/ui/pagination.test.tsx",
     ]);
     // A moved or deleted contract must be repaired in the checked-in owner map.
-    for (const suites of Object.values(owners))
+    for (const { suites } of Object.values(owners))
       for (const file of suites)
         expect(readFileSync(path.join(repo, file), "utf8").length).toBeGreaterThan(0);
   });
@@ -272,27 +273,27 @@ describe("lightweight local verification", () => {
     for (const file of indirect) writeFileSync(path.join(root, file), 'import "../../src/indirect";');
     const direct = "tests/integration/z-direct.test.ts";
     writeFileSync(path.join(root, direct), 'import "../../src/game";');
-    expect(checkPlan(root, ["src/game.ts"]).relatedTests[0]).toBe(direct);
-    const before = checkPlan(root, ["src/game.ts"]);
+    expect(checkPlan(root, ["src/game.ts"], [], { related: true }).relatedTests[0]).toBe(direct);
+    const before = checkPlan(root, ["src/game.ts"], [], { related: true });
     mkdirSync(path.join(root, "reports"));
     writeFileSync(
       path.join(root, "reports/task-tests.json"),
       JSON.stringify({ testResults: [{ name: path.join(root, direct), startTime: 1, endTime: 59001 }] }),
     );
-    const plan = checkPlan(root, ["src/game.ts"]);
+    const plan = checkPlan(root, ["src/game.ts"], [], { related: true });
     expect(plan).toEqual(before);
     expect(plan.relatedTests).toHaveLength(14);
     writeFileSync(path.join(root, "reports/task-tests.json"), JSON.stringify({ testResults: {} }));
-    expect(checkPlan(root, ["src/game.ts"])).toEqual(before);
+    expect(checkPlan(root, ["src/game.ts"], [], { related: true })).toEqual(before);
   });
 
-  it("runs smoke on a clean checkout and never treats Git discovery failure as success", () => {
+  it("reports an empty changed selection without implying test coverage and fails closed on Git errors", () => {
     const root = fixture(),
       runner = vi.fn(() => ({ status: 0 }));
     expect(runCheck([], { root, runner, log: () => {} })).toBe(0);
-    expect(runner.mock.calls[0][1]).toEqual([path.join(root, "scripts/checks/run-local-tests.mjs")]);
+    expect(runner).not.toHaveBeenCalled();
     expect(() => runCheck(["--base", "missing"], { root, runner, log: () => {} })).toThrow();
-    expect(runner).toHaveBeenCalledTimes(1);
+    expect(runner).not.toHaveBeenCalled();
   });
 
   it("selects existing owner suites, changed regressions and compiler environments for deleted sources", () => {
@@ -380,9 +381,10 @@ describe("lightweight local verification", () => {
 
   it("keeps full validation on the CI entrypoint when local defaults become lightweight", () => {
     const { scripts } = JSON.parse(readFileSync(path.join(repo, "package.json"), "utf8"));
-    expect(scripts.check).toBe("node scripts/checks/check.mjs");
+    expect(scripts.check).toBe("npm run check:full");
     expect(scripts.verify).toBe("node scripts/checks/check.mjs");
-    expect(scripts.test).toBe(scripts.verify);
+    expect(scripts["verify:changed"]).toBe(scripts.verify);
+    expect(scripts.test).toBe("vitest run");
     expect(scripts["test:smoke"]).toBe("node scripts/checks/run-local-tests.mjs");
     expect(scripts["package:win"]).toContain("--publish never");
     for (const command of ["check:full", "test:full", "build", "test:e2e"])

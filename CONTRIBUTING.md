@@ -4,61 +4,53 @@
 
 ## Worktrees and integration
 
-From the main checkout, create or reuse this task's isolated checkout:
+1. From main, run `npm run worktree -- <task-name>` and work in the printed checkout. An optional second argument selects another base. Setup preserves dirty main and existing task edits
+2. Implement the task and inspect `npm run review:diff`. For UI work, follow the [UI task procedure](Docs/UI.md#required-review). Run focused checks during development when useful
+3. Commit task-owned paths. Close task-owned preview processes. From clean main, run `npm run integrate -- task/<task-name>`; add `--test <suite>` for any task-specific regression beyond the declared contracts
 
-```sh
-npm run worktree -- creature-feedback
-# Optional explicit base:
-npm run worktree -- creature-feedback <base-ref>
-```
+Integration is the single required final local gate. It holds the shared lock, incorporates current main, verifies the combined result and advances clean main only after success. A separate full changed-file check immediately before integration is unnecessary. Early checks are optional diagnostics; results are not cached. This avoids both duplicate required gates and persistent cache invalidation machinery.
 
-Work in the printed directory on its task branch. Setup preserves dirty main and existing task edits. Use `npm run deps` if dependencies are missing or change; never install through a shared dependency link.
+A busy lock waits up to 30 seconds; retry after its bounded wait without disturbing the owner. Dirty main, unfinished Git operations, failed checks and ambiguous conflicts preserve task work. Resolve understood conflicts in the task checkout and retry. Integration and cleanup have separate outcomes: an archival failure reports cleanup pending after successful integration. Cleanup archives ignored evidence and removes only this task's clean merged checkout and branch. Other unfinished tasks do not block completion.
 
-Review, verify and commit task-owned changes. From clean main:
-
-```sh
-node scripts/integrate.mjs task/creature-feedback
-```
-
-Integration holds the shared lock, incorporates current main, verifies the combined result and advances clean main. It always checks the combined result; earlier task checks are not cached. Integration waits up to 30 seconds for a busy lock. Dirty main, ambiguous conflicts and unfinished Git operations preserve task work; resolve understood conflicts in the task checkout and retry. Integration and cleanup have separate outcomes; an archival failure preserves the checkout and reports cleanup pending after successful integration. Successful cleanup archives ignored evidence and removes only this task's clean merged checkout and branch. Close task-owned preview processes first.
-
-[Worktree operations](scripts/README.md#worktree-operations) explains dependency sharing, recovery, artifact archives and optional cleanup. Other unfinished tasks do not block completion.
+[Worktree operations](scripts/README.md#worktree-operations) covers dependency sharing, recovery, archives and optional cleanup. Use `npm run deps` when task dependencies are missing or change; never install through a shared dependency link.
 
 ## Verification
 
-Use one entry point in the task checkout:
+Choose the command by coverage:
+
+| Command                  | Coverage                                                                                            |
+| ------------------------ | --------------------------------------------------------------------------------------------------- |
+| `npm run verify:changed` | Changed-file formatting, lint, boundaries, owning compilers and focused contract suites             |
+| `npm test -- <suite>`    | Vitest unit/DOM tests for the named suite; without a suite, the full unit/DOM set                   |
+| `npm run check`          | Full static checks: types, lint, formatting, boundaries and unused code                             |
+| `npm run test:smoke`     | Fixed lightweight Node smoke set                                                                    |
+| `npm run verify:full`    | Full static, docs, content, unit, build and browser checks; extended execution policy below applies |
+
+`npm run verify` remains a compatibility alias for `verify:changed`. `test:full` and `check:full` retain their full-suite meanings. Test and static commands have the same scope on every branch.
+
+Changed-file verification and review include committed and working changes since the common ancestor with local main on task/ and codex/ branches; elsewhere they select working changes against HEAD. A clean selection reports no changed files and executes no checks. Explicit paths narrow selection, `--base <commit>` changes the base, and `--working-tree` selects only uncommitted changes. Review retains committed, staged and unstaged patches, including reverted edits.
 
 ```sh
-npm run review:diff
-npm run verify
-# Add a regression to the changed-file gate:
-npm run verify -- --test tests/unit/game/engine.test.ts
-# Inspect coverage without executing:
-npm run verify -- --plan
-# Diagnose a concrete failure or uncertainty:
-npm run verify -- --diagnostic build
+npm run verify:changed -- --plan
+npm run verify:changed -- --test tests/unit/game/engine.test.ts
+# Explore import-related suites only when investigating a coverage question:
+npm run verify:changed -- --plan --related
+# Bounded diagnostic for a concrete failure:
+npm run verify:changed -- --diagnostic build
 ```
 
-Review and verification include committed and working changes since the common ancestor with local main on task/ and codex/ branches; elsewhere they select working changes against HEAD. Explicit paths narrow verification. `--base <commit>` selects another base; `--working-tree` selects uncommitted changes. Repeat `--test <suite>` to add regressions without replacing the changed-file gate. Review preserves separate committed, staged and unstaged patches, including reverted edits.
+The required set consists of changed tests, filename-matched tests and the nearest declared [boundary contracts](scripts/checks/test-owners.json). Each boundary records why its small suite set is required. Import-graph suggestions are opt-in with `--related`; they never displace required or explicitly added suites. Add task-specific regressions with `--test`; pass those suites to integration for the final combined check. Full coverage remains in CI.
 
-The gate runs changed tests, filename-matched suites and the nearest declared [owner suites](scripts/checks/test-owners.json). This selection is deterministic and does not depend on timing reports. Related suites found through imports are suggestions; add relevant behavior with `--test`. The plan lists required suites, suggestions and unresolved imports. Full coverage remains in CI.
-
-Every invocation executes its checks. Input fingerprints detect repository changes during a run; they do not cache passing results or scan installed dependency trees. Captures retain a separate identity for reproducible comparisons.
-
-Local completion requires final diff review, a passing gate, any required [rendered evidence](Docs/UI.md#required-review), task-owned commits and protected integration. Report CI pending unless exact-commit results are available. Blocked integration leaves reviewed work committed on its branch. Pushes and publication follow [AGENTS.md](AGENTS.md#worktrees-and-integration).
+Local completion requires final diff review, any required rendered evidence, task-owned commits and protected integration with its passing gate. Report CI pending unless exact-commit results are available. Blocked integration leaves reviewed work committed on its branch. Pushes and publication follow [AGENTS.md](AGENTS.md#worktrees-and-integration).
 
 ### Execution and evidence
 
-Focused verification and investigation needed for the task are authorized locally, including builds, named test suites and browser previews/captures. Use isolated profiles, run resource-heavy checks sequentially and close only owned processes. Use `npm run deps` when task dependencies are missing or change.
+Focused verification and investigation needed for the task are authorized locally, including builds, named test suites and browser previews/captures. Use isolated profiles, run resource-heavy checks sequentially and close only owned processes. `verify:changed -- --diagnostic <mode>` bounds types, static checks, builds, named unit suites, browser routes and performance scenarios; [implementation details](scripts/README.md#task-check-implementation) are reference material.
 
-Use `npm run verify -- --diagnostic <mode>` for types, static checks, a build, named unit suites, a named browser route or a performance scenario. The launcher validates scope and enforces resource limits; [implementation details](scripts/README.md#task-check-implementation) are reference material. Reassess the hypothesis after a failure.
-
-`npm test` and `npm run check` are aliases of `verify`, including its selection options. `npm run test:smoke` explicitly runs the fixed smoke set. Existing diagnostic and full-suite commands remain available; ordinary task instructions use `verify`.
-
-Full test matrices, packaging, coverage and extended performance sweeps run in [hosted CI](Docs/CI.md) by default. Broader local execution needs an explicit request. CI pending does not block local completion; report actual coverage and relevant unverified platforms.
+Full test matrices, packaging, coverage and extended performance sweeps run in [hosted CI](Docs/CI.md) by default. Broader local execution needs an explicit request. CI pending does not block local completion; report actual coverage and relevant unverified platforms. Input fingerprints detect repository changes during checks; captures retain their own reproducible identity. No check result is cached.
 
 ### Documentation scope
 
-The task check validates maintained Markdown links, anchors, file references, npm examples and reachability when Markdown changes. Link durable guides from an existing owner. Historical records belong under `Docs/archive/` or `Docs/task-evidence/<task>.md`; ignored runtime reports and screenshots belong under `reports/`. Historical records cannot be the sole owner of a current rule. Prefix foreign file references with their repository.
+Markdown changes check maintained links, anchors, file references and npm examples across the repository. Reachability from README or AGENTS is advisory and never blocks a task. Link durable guides where useful for discovery. Historical records belong under `Docs/archive/` or `Docs/task-evidence/<task>.md`; ignored runtime reports and screenshots belong under `reports/`. Historical records cannot be the sole owner of a current rule. Prefix foreign file references with their repository.
 
-For maintenance details, read [task check implementation](scripts/README.md#task-check-implementation), [test organization and coverage](tests/README.md) or the relevant [script owner](scripts/README.md). These are reference material, not extra steps for ordinary tasks.
+For maintenance details, see [script owners](scripts/README.md) or [test maintenance](tests/README.md). These are references, not extra steps for ordinary tasks.

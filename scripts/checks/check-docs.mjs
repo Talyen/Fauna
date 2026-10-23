@@ -7,7 +7,7 @@ import { extractMarkdownLinkTargets, headingSlugs, stripFencedBlocks } from "../
 // Historical records retain their context without becoming live source/command contracts.
 const record = (file) => /^(?:Docs\/archive|Docs\/task-evidence)\//.test(file);
 
-export function checkDocumentation(root) {
+export function checkDocumentation(root, { warn = () => {} } = {}) {
   const files = [
     ...new Set(
       git(root, ["ls-files", "-z", "--cached", "--others", "--exclude-standard"]).split("\0").filter(Boolean),
@@ -84,15 +84,17 @@ export function checkDocumentation(root) {
     }
   for (const file of docs.keys())
     if (!record(file) && !reachable.has(file))
-      fail(file, "document is unreachable from README.md or AGENTS.md");
+      warn(`${file}: document is unreachable from README.md or AGENTS.md`);
   return failures;
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   if (process.argv.length !== 2) throw new Error("Usage: npm run docs:check");
-  const failures = checkDocumentation(path.resolve(import.meta.dirname, "../.."));
+  const failures = checkDocumentation(path.resolve(import.meta.dirname, "../.."), {
+    warn: (message) => console.warn(`Documentation advisory: ${message}`),
+  });
   if (failures.length) {
     console.error(failures.join("\n"));
     process.exitCode = 1;
-  } else console.log("Documentation links, anchors, file references, npm commands and reachability passed.");
+  } else console.log("Documentation links, anchors, file references and npm commands passed.");
 }

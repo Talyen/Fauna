@@ -119,22 +119,32 @@ See [combat movement and sound](ui/battle.md#combat-movement-and-sound) for the 
 
 ## Required review
 
-Choose the row that describes the actual effect; use the layout row whenever fit or artwork geometry changes. This procedure is the sole owner of local rendered evidence requirements.
+This is the single task procedure for UI design, implementation and critique. Read the shared contracts above and only the affected [battle](ui/battle.md) or [screen](ui/screens.md) section. [Design system](DESIGN_SYSTEM.md) and [tool details](DEVELOPMENT_TOOLS.md#task-checkouts-and-previews) are optional references when needed.
 
-| Change                                                                                         | Local evidence                                                                                                                                                                                |
-| ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Small copy, icon or color adjustment with unchanged layout and behavior                        | Inspect a fresh whole-screen capture at 1280×720 with 125% text; check the changed content and contrast where applicable; a baseline capture is optional                                      |
-| Layout, artwork scale, typography, shared visual tokens or composition                         | Inspect the current flow and relevant reference images before editing; compare matching before/after states at 1280×720 with 125% text and 1920×1080 with default text                        |
-| Interaction with unchanged geometry                                                            | Inspect a fresh capture at 1280×720 with 125% text; exercise the changed action, cancellation/focus return and unavailable state where applicable; use the layout row too if geometry changes |
-| Documentation, tooling or behavior-preserving source changes with no visual/interaction effect | No rendered evidence required; use the task check and relevant regression suites                                                                                                              |
+1. Identify the player's decision and the information available at rest versus through inspection. Preserve the requested disclosure layout and action roles; equally valid choices may have equal emphasis
+2. For layout or artwork work, inspect the current rendered flow and relevant [reference images](../design/visual-quality/README.md) before editing. References carry their recorded acceptance scope; existing screens and agent candidates do not imply user approval
+3. Use the shared layout recipes, tokens, ArtCard and registered controls. Compose the complete screen around artwork, reading order and a bounded content group. Retain useful rules, availability and outcomes; remove redundant copy while preserving accessible names
+4. Capture and inspect the evidence for the applicable row below. Exercise changed interactions separately from capture. Inspect the full frame independently of the implementation rationale: composition, copy, artwork, contrast, fit, focus and committed outcomes. Correct observed defects and inspect fresh captures
+5. Record evidence paths, conditions, exercised interactions and relevant limitations in the handoff or an existing evidence record. If artistic direction remains unresolved, present comparable A/B options without persuasive labels. Only the user's explicit choice establishes artistic approval; record its date and scope
+6. Integrate visual or interaction changes only after current rendered evidence is inspected. If evidence is unavailable, commit the task on its branch and report the blocker
 
-[Seeded preview and capture commands](DEVELOPMENT_TOOLS.md#task-checkouts-and-previews) prepare the standard review conditions using existing gameplay fixtures and shared layout assertions. Capture records are implementation evidence; inspect the images and exercise changed interactions.
+| Change                                                                                         | Local evidence                                                                                                                                                                      |
+| ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Small copy, icon or color adjustment with unchanged layout and behavior                        | Fresh whole-screen capture at 1280×720 with 125% text; inspect the content and contrast; baseline optional                                                                          |
+| Layout, artwork scale, typography, shared visual tokens or composition                         | Matching before/after states at 1280×720 with 125% text and 1920×1080 with default text, plus the pre-edit inspection in step 2                                                     |
+| Interaction with unchanged geometry                                                            | Fresh capture at 1280×720 with 125% text; exercise the changed action, cancellation/focus return and unavailable state where applicable; use the layout row too if geometry changes |
+| Documentation, tooling or behavior-preserving source changes with no visual/interaction effect | No rendered evidence; use the task gate and relevant regressions                                                                                                                    |
 
-Keep gameplay state, input and motion conditions constant for comparisons. Inspect composition, copy, artwork, readability and reachability; correct observed defects and inspect fresh captures. Record evidence paths, conditions, exercised interactions and relevant limitations in the handoff or existing evidence record. Additional states are required only when directly implicated by the change.
+Use the layout row whenever fit or artwork geometry changes. For example:
 
-Open the relevant [reference images](../design/visual-quality/README.md) for composition or art-direction work, distinguishing accepted direction from candidates and rejected examples. If artistic direction remains unresolved, present comparable A/B options without persuasive labels and ask which the user prefers; record the selected image, date and scope. User preference is required before labeling a direction approved.
+```sh
+npm run preview:task -- --browser --scenario battle
+npm run capture:task -- --scenario battle --label before
+npm run capture:task -- --scenario battle --label after
+# For the small or interaction row, add --tier small or --tier interaction
+```
 
-Current rendered evidence is required before integrating visual or interaction changes. If unavailable, keep the task committed on its branch and report the blocker. Geometry assertions and CI screenshots establish implementation evidence, but cannot establish visual quality alone.
+Keep gameplay state, input and motion conditions constant for comparisons. Captures check shared layout assertions and prepare standard review conditions; inspect the images and exercise changed interactions. Additional states are required only when directly implicated by the change. Geometry assertions and CI screenshots alone cannot establish visual quality.
 
 CI covers the wider viewport, text, motion and exceptional-state matrix. Report only relevant boundaries: browser controller simulation, native desktop, Windows packaging, physical controller, Steam client and Steam Deck remain separate facts.
 

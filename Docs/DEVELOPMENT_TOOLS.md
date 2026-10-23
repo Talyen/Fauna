@@ -66,7 +66,7 @@ Run the identical suite in each code version, then use `npm run balance:compare 
 
 ## Reproducible performance captures
 
-Focused builds and performance diagnostics needed for a task are authorized through `npm run verify -- --diagnostic`; extended sweeps remain CI work by default. The commands below describe capture capabilities and evidence.
+Focused builds and performance diagnostics needed for a task are authorized through `npm run verify:changed -- --diagnostic`; extended sweeps remain CI work by default. The commands below describe capture capabilities and evidence.
 
 Build once with `npm run build`, then run `npm run perf -- --out reports/performance/baseline`. The three scenarios cover card play/enemy turns, required knockout replacements, and Collection/menu transitions. `--scenario battle`, `swap`, or `menus` selects one. A named fixture explicitly grants three deployed creatures and one reserve; it is validated as a current-format save, not claimed to be earned progression. The driver uses normal controls in fresh browser contexts, an owned production preview on a free port, and muted speaker output.
 

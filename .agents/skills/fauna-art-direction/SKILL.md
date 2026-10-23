@@ -5,7 +5,7 @@ description: Create, select or revise Fauna artwork and artistic treatments usin
 
 # Fauna art direction
 
-Read [content ownership](../../../Docs/CONTENT.md), [UI contracts](../../../Docs/UI.md) and the [visual references](../../../design/visual-quality/README.md). Inspect the relevant existing artwork and the screen where it will appear before choosing or producing an asset. Fauna does not inherit another game's house style merely because that skill is installed.
+Follow the [UI task procedure](../../../Docs/UI.md#required-review) for in-game review. Inspect the relevant artwork, screen and visual references linked there before choosing or producing an asset. Consult [content ownership](../../../Docs/CONTENT.md#prepared-assets) when authoring or preparing assets. Fauna does not inherit another game's house style merely because that skill is installed.
 
 Define the asset's job and intended display size. Use a small, explicit set of project references for subject silhouette, composition, palette, light direction, contrast and material/mark-making. Keep subject identity and gameplay readability ahead of ornamental detail. If no accepted artistic direction exists, create a limited comparison and label it proposed; do not silently establish a new house style.
 

@@ -33,7 +33,7 @@ export function investigationArgs(root, args) {
   if (kind === "performance" && inputs.length === 1 && ["battle", "swap", "menus"].includes(inputs[0]))
     return ["run", "perf", "--", "--scenario", inputs[0]];
   throw new Error(
-    "Usage: npm run verify -- --diagnostic types|static|build|unit <suite files>|browser <route>|performance <battle|swap|menus>",
+    "Usage: npm run verify:changed -- --diagnostic types|static|build|unit <suite files>|browser <route>|performance <battle|swap|menus>",
   );
 }
 
@@ -52,7 +52,7 @@ export async function investigate(
   try {
     if (args[0] === "browser") {
       if (!existsSync(path.join(root, "dist/index.html")))
-        throw new Error("Build this task first with npm run verify -- --diagnostic build.");
+        throw new Error("Build this task first with npm run verify:changed -- --diagnostic build.");
       const { preview: start } = await import("vite");
       preview = await start({ root, preview: { host: "127.0.0.1", port: 0, strictPort: true, open: false } });
       env.FAUNA_TEST_URL = `http://127.0.0.1:${preview.httpServer.address().port}`;

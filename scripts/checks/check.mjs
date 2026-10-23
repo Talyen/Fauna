@@ -20,10 +20,12 @@ export function parseCheckArgs(args) {
   const tests = [];
   let base = null,
     diff = false,
-    plan = false;
+    plan = false,
+    related = false;
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
     if (arg === "--plan") plan = true;
+    else if (arg === "--related") related = true;
     else if (arg === "--diff" || arg === "--working-tree") diff = true;
     else if (arg === "--test") {
       if (!args[i + 1] || args[i + 1].startsWith("-"))
@@ -42,6 +44,7 @@ export function parseCheckArgs(args) {
     paths,
     base: base ?? (diff ? "HEAD" : null),
     ...(plan ? { plan: true } : {}),
+    ...(related ? { related: true } : {}),
     ...(tests.length ? { tests } : {}),
   };
 }
@@ -72,14 +75,18 @@ export function formatSelection(root, paths) {
   return { files, batches };
 }
 
-export function checkPlan(root, paths, namedTests = []) {
+export function checkPlan(root, paths, namedTests = [], { related = false } = {}) {
   const configs = new Set();
   const tests = new Set(namedTests);
+  const contracts = new Set();
   for (const file of paths) {
     const owner = Object.keys(owners)
-      .filter((prefix) => file.startsWith(prefix))
+      .filter((prefix) => file === prefix || (prefix.endsWith("/") && file.startsWith(prefix)))
       .sort((a, b) => b.length - a.length)[0];
-    for (const suite of owners[owner] ?? []) tests.add(suite);
+    if (owner) {
+      contracts.add(owner);
+      for (const suite of owners[owner].suites) tests.add(suite);
+    }
     const typed = /\.tsx?$/.test(file);
     if (typed && file.startsWith("src/game/")) configs.add("tsconfig.game.json");
     if (typed && file.startsWith("src/") && !file.startsWith("src/tooling/")) configs.add("tsconfig.json");
@@ -109,19 +116,21 @@ export function checkPlan(root, paths, namedTests = []) {
         );
   }
   const primary = [...tests].filter((file) => existsSync(path.join(root, file))).sort();
-  const files = paths.some((file) => /\.(?:[cm]?[jt]sx?|json|css)$/.test(file))
-    ? git(root, ["ls-files", "-z", "--cached", "--others", "--exclude-standard"])
-        .split("\0")
-        .filter(
-          (file) =>
-            /\.(?:[cm]?[jt]sx?|json|css)$/.test(file) &&
-            lstatSync(path.join(root, file), { throwIfNoEntry: false })?.isFile(),
-        )
-    : [];
-  const affected = affectedTests(root, paths, files);
+  const files =
+    related && paths.some((file) => /\.(?:[cm]?[jt]sx?|json|css)$/.test(file))
+      ? git(root, ["ls-files", "-z", "--cached", "--others", "--exclude-standard"])
+          .split("\0")
+          .filter(
+            (file) =>
+              /\.(?:[cm]?[jt]sx?|json|css)$/.test(file) &&
+              lstatSync(path.join(root, file), { throwIfNoEntry: false })?.isFile(),
+          )
+      : [];
+  const affected = related ? affectedTests(root, paths, files) : { tests: [], unresolved: [] };
   return {
     configs: [...configs],
     tests: primary,
+    contracts: [...contracts].map((owner) => ({ owner, reason: owners[owner].reason })),
     relatedTests: affected.tests.filter((file) => !primary.includes(file)),
     unresolved: affected.unresolved,
   };
@@ -141,7 +150,7 @@ export function runCheck(args = [], { root = ROOT, runner = spawnSync, log = con
   });
   const paths = [...new Set([...taskPaths(root, { ...selection, base }), ...namedTests])];
   const format = formatSelection(root, paths);
-  const plan = checkPlan(root, paths, namedTests);
+  const plan = checkPlan(root, paths, namedTests, selection);
   const docs = paths.some((file) => /\.md$/i.test(file));
   const docsOnly = paths.length > 0 && paths.every((file) => /\.md$/i.test(file));
   log(CI_NOTICE);
@@ -156,19 +165,23 @@ export function runCheck(args = [], { root = ROOT, runner = spawnSync, log = con
       ? `Focused suites: ${plan.tests.join(", ")}`
       : docsOnly
         ? "Documentation only; no tests needed."
-        : "No matching suite; running fixed Node smoke (not affected-behavior coverage).",
+        : paths.length
+          ? "No matching suite; running fixed Node smoke (not affected-behavior coverage)."
+          : "No changed files; no checks needed. Use npm test for unit/DOM tests or npm run check for full static checks.",
   );
+  for (const { owner, reason } of plan.contracts) log(`Contract ${owner}: ${reason}`);
   if (plan.relatedTests.length)
     log(`Related suites (optional --test additions; full coverage in CI): ${plan.relatedTests.join(", ")}`);
   if (plan.unresolved.length)
     log(`Import graph could not parse: ${plan.unresolved.join(", ")}. CI retains full coverage.`);
   log(
-    "Selection follows static imports and literal import()/require(); computed imports, runtime file reads and external dependencies may need a named regression suite. Builds, full CI and rendered review are separate evidence.",
+    "Required suites cover declared boundaries, changed tests and matching filenames. Add task-specific regressions with --test; --plan --related explores import dependencies. Full CI and rendered review remain separate evidence.",
   );
   if (selection.plan) {
     log("Plan only; no checks ran.");
     return 0;
   }
+  if (!paths.length) return 0;
   const modules = path.join(root, "node_modules");
   if (
     lstatSync(modules, { throwIfNoEntry: false })?.isSymbolicLink() &&

@@ -1,39 +1,82 @@
 {
-  "src/game/": ["tests/unit/game/engine.test.ts"],
-  "src/game/combat/": [
-    "tests/unit/game/combat-resolution.test.ts",
-    "tests/unit/game/combat-reactions.test.ts"
-  ],
-  "src/game/content/": [
-    "tests/unit/game/content-ownership.test.ts",
-    "tests/unit/game/creature-passives.test.ts"
-  ],
-  "src/application/": ["tests/unit/application/session.test.ts"],
-  "src/platform/": ["tests/unit/application/platform-session.test.ts"],
-  "desktop/": ["tests/unit/platform/desktop.test.ts", "tests/unit/platform/shutdown.test.mjs"],
-  "src/components/": ["tests/unit/tooling/design-system.test.mjs", "tests/unit/ui/input.test.ts"],
-  "src/ui/": ["tests/unit/ui/ui.test.tsx"],
-  "src/ui/collection/": ["tests/unit/ui/collection-ui.test.tsx"],
-  "src/ui/settings/": ["tests/unit/ui/settings.test.tsx"],
-  "src/ui/battle/": ["tests/unit/ui/combat-ui.test.tsx"],
-  "src/ui/shared/navigation/": [
-    "tests/unit/ui/pagination.test.tsx",
-    "tests/unit/ui/menu-navigation.test.tsx",
-    "tests/unit/ui/input.test.ts"
-  ],
-  "src/ui/shared/cards/": [
-    "tests/unit/ui/control-art-effect.test.tsx",
-    "tests/unit/ui/adaptive-browsing.test.tsx"
-  ],
-  "scripts/": ["tests/unit/tooling/tooling.test.mjs"],
-  "scripts/checks/": [
-    "tests/unit/tooling/verification.test.mjs",
-    "tests/unit/tooling/design-system.test.mjs",
-    "tests/unit/tooling/boundaries.test.mjs"
-  ],
-  "scripts/agent/": [
-    "tests/unit/tooling/agent-workflow.test.mjs",
-    "tests/unit/tooling/adoption-tools.test.mjs"
-  ],
-  "scripts/lib/": ["tests/unit/tooling/agent-workflow.test.mjs", "tests/unit/tooling/tool-runtime.test.mjs"]
+  "src/game/": {
+    "reason": "Seeded command acceptance and engine state transitions",
+    "suites": ["tests/unit/game/engine.test.ts"]
+  },
+  "src/game/combat/": {
+    "reason": "Combat resolution order and reaction ownership",
+    "suites": ["tests/unit/game/combat-resolution.test.ts", "tests/unit/game/combat-reactions.test.ts"]
+  },
+  "src/game/content/": {
+    "reason": "Content catalog ownership and all six passive tiers",
+    "suites": ["tests/unit/game/content-ownership.test.ts", "tests/unit/game/creature-passives.test.ts"]
+  },
+  "src/application/": {
+    "reason": "Command lifecycle and serialized save ordering",
+    "suites": ["tests/unit/application/session.test.ts"]
+  },
+  "src/platform/": {
+    "reason": "Application and platform capability contracts",
+    "suites": ["tests/unit/application/platform-session.test.ts"]
+  },
+  "desktop/": {
+    "reason": "Native storage, adapter contracts and shutdown safety",
+    "suites": ["tests/unit/platform/desktop.test.ts", "tests/unit/platform/shutdown.test.mjs"]
+  },
+  "src/components/": {
+    "reason": "Shared control policy and keyboard/controller routing",
+    "suites": ["tests/unit/tooling/design-system.test.mjs", "tests/unit/ui/input.test.ts"]
+  },
+  "src/ui/": {
+    "reason": "Player screen actions and committed outcomes",
+    "suites": ["tests/unit/ui/ui.test.tsx"]
+  },
+  "src/ui/collection/": {
+    "reason": "Collection browsing and selection",
+    "suites": ["tests/unit/ui/collection-ui.test.tsx"]
+  },
+  "src/ui/settings/": {
+    "reason": "Settings persistence and control behavior",
+    "suites": ["tests/unit/ui/settings.test.tsx"]
+  },
+  "src/ui/battle/": {
+    "reason": "Battle actions, targeting and committed feedback",
+    "suites": ["tests/unit/ui/combat-ui.test.tsx"]
+  },
+  "src/ui/shared/navigation/": {
+    "reason": "Pagination anchors, menu focus and input ownership",
+    "suites": [
+      "tests/unit/ui/pagination.test.tsx",
+      "tests/unit/ui/menu-navigation.test.tsx",
+      "tests/unit/ui/input.test.ts"
+    ]
+  },
+  "src/ui/shared/cards/": {
+    "reason": "Artwork interaction lifetime and adaptive layout",
+    "suites": ["tests/unit/ui/control-art-effect.test.tsx", "tests/unit/ui/adaptive-browsing.test.tsx"]
+  },
+  "scripts/": {
+    "reason": "Documentation, build and worktree safety",
+    "suites": ["tests/unit/tooling/tooling.test.mjs"]
+  },
+  "scripts/checks/": {
+    "reason": "Verification selection and architecture/UI enforcement",
+    "suites": [
+      "tests/unit/tooling/verification.test.mjs",
+      "tests/unit/tooling/design-system.test.mjs",
+      "tests/unit/tooling/boundaries.test.mjs"
+    ]
+  },
+  "scripts/agent/": {
+    "reason": "Agent workflow and bounded diagnostics",
+    "suites": ["tests/unit/tooling/agent-workflow.test.mjs", "tests/unit/tooling/adoption-tools.test.mjs"]
+  },
+  "scripts/lib/": {
+    "reason": "Task scope, process lifetime and runtime identity",
+    "suites": ["tests/unit/tooling/agent-workflow.test.mjs", "tests/unit/tooling/tool-runtime.test.mjs"]
+  },
+  "scripts/integrate.mjs": {
+    "reason": "Combined verification, clean-main protection, integration locking and cleanup",
+    "suites": ["tests/unit/tooling/agent-workflow.test.mjs", "tests/unit/tooling/worktree.test.mjs"]
+  }
 }

@@ -62,9 +62,13 @@ describe("documentation contracts", () => {
     put(root, "README.md", "# Fauna\n[Workflow](Docs/workflow.md)\n[History](Docs/archive/old.md#missing)\n");
     expect(checkDocumentation(root)).toEqual(["README.md: missing heading Docs/archive/old.md#missing"]);
     put(root, "Docs/new-guide.md", "# Maintained guide\n");
-    expect(checkDocumentation(root).join("\n")).toContain("Docs/new-guide.md: document is unreachable");
+    const warnings = [];
+    expect(checkDocumentation(root, { warn: (message) => warnings.push(message) })).toEqual([
+      "README.md: missing heading Docs/archive/old.md#missing",
+    ]);
+    expect(warnings.join("\n")).toContain("Docs/new-guide.md: document is unreachable");
   });
-  it("detects broken links, commands, anchors, paths and orphaned documents including untracked docs", () => {
+  it("blocks broken links, commands, anchors and paths while advising on orphaned untracked docs", () => {
     const root = repo();
     expect(checkDocumentation(root)).toEqual([]);
     put(
@@ -73,15 +77,17 @@ describe("documentation contracts", () => {
       "# Workflow\n\n## Commands\n[Missing](gone.md) [Wrong anchor](../README.md#missing)\n`src/gone.ts`\n```sh\nnpm run absent\n```\n",
     );
     put(root, "Docs/orphan.md", "# Orphan\n");
-    const failures = checkDocumentation(root).join("\n");
+    const warnings = [];
+    const failures = checkDocumentation(root, { warn: (message) => warnings.push(message) }).join("\n");
     for (const message of [
       "missing link gone.md",
       "missing heading ../README.md#missing",
       "missing file reference src/gone.ts",
       "unknown npm script absent",
-      "document is unreachable",
     ])
       expect(failures).toContain(message);
+    expect(failures).not.toContain("document is unreachable");
+    expect(warnings).toEqual(["Docs/orphan.md: document is unreachable from README.md or AGENTS.md"]);
   });
 
   it("ignores sample file paths, external provenance and ignored dependency docs, but validates commands in examples", () => {
@@ -273,7 +279,7 @@ describe("isolated worktrees and protected integration", { timeout: 15_000 }, ()
     const runner = vi.fn(() => ({ status: 0 }));
     await integrate(root, task.branch, { runner, log: () => {} });
     expect(runner.mock.calls.map((call) => call[1].slice(1))).toEqual([
-      ["run", "verify", "--", "--base", original],
+      ["run", "verify:changed", "--", "--base", original],
     ]);
     expect(readFileSync(path.join(root, "main-only.txt"), "utf8")).toContain("concurrent");
     expect(git(root, "show", "HEAD:Docs/workflow.md")).toContain("Task change");

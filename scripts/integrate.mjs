@@ -9,7 +9,13 @@ import { npmCommand } from "./lib/npm-command.mjs";
 export async function integrate(
   root,
   branch,
-  { runner = spawnSync, log = console.log, cleanup = removeMergedTask, lockTimeoutMs = 30_000 } = {},
+  {
+    runner = spawnSync,
+    log = console.log,
+    cleanup = removeMergedTask,
+    lockTimeoutMs = 30_000,
+    tests = [],
+  } = {},
 ) {
   if (!/^(?:task|codex)\//.test(branch ?? "")) throw new Error("Provide a task/ or codex/ branch.");
   const release = await acquireIntegrationLock(root, {
@@ -24,7 +30,14 @@ export async function integrate(
     assertClean(task, branch);
     git(task, ["merge", "--no-edit", mainHead]);
     const verifiedHead = git(task, ["rev-parse", "HEAD"]).trim();
-    const [command, argv] = npmCommand(["run", "verify", "--", "--base", mainHead]);
+    const [command, argv] = npmCommand([
+      "run",
+      "verify:changed",
+      "--",
+      "--base",
+      mainHead,
+      ...tests.flatMap((suite) => ["--test", suite]),
+    ]);
     const result = runner(command, argv, { cwd: task, stdio: "inherit" });
     if (result.error || result.status !== 0)
       throw new Error("Combined local check failed; main was not advanced.");
@@ -55,6 +68,12 @@ export async function integrate(
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
-  if (process.argv.length !== 3) throw new Error("Usage: node scripts/integrate.mjs <task-branch>");
-  await integrate(process.cwd(), process.argv[2]);
+  const [branch, ...args] = process.argv.slice(2);
+  const tests = [];
+  for (let i = 0; i < args.length; i += 2) {
+    if (args[i] !== "--test" || !args[i + 1] || args[i + 1].startsWith("-"))
+      throw new Error("Usage: npm run integrate -- <task-branch> [--test <suite> ...]");
+    tests.push(args[i + 1]);
+  }
+  await integrate(process.cwd(), branch, { tests });
 }
