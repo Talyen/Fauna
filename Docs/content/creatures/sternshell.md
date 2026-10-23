@@ -14,6 +14,4 @@ Surge Ram doubles its intrinsic damage, including card upgrades, while its actor
 
 ## Artwork provenance and validation record
 
-These retained notes record source selection and verification at implementation time; they do not establish current rendered acceptance
-
-The unchanged creature portrait (`Sternshell_03.png`) and Surge Ram, Siphon Vault and Spiral Return illustrations come from the user's [Sternshell Drive folder](https://drive.google.com/drive/folders/1xjBLqhme5buwclO6BpNvko_Q1gw_rovb). Original source URLs and rights notes are recorded in the asset manifest. Prepared media preserves native landscape and portrait compositions. Source artwork was visually inspected; rendered gameplay and balance acceptance remain pending.
+The unchanged creature portrait (`Sternshell_03.png`) and Surge Ram, Siphon Vault and Spiral Return illustrations come from the user's [Sternshell Drive folder](https://drive.google.com/drive/folders/1xjBLqhme5buwclO6BpNvko_Q1gw_rovb). Original source URLs and rights notes are recorded in the asset manifest. Source artwork was visually inspected; rendered gameplay and balance acceptance remain pending.

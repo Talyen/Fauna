@@ -1,6 +1,6 @@
 # Combined Settings review
 
-Historical sandbox: its constrained scrolling and synthetic error/Retry controls are study features. Production Settings is full screen, fits without scrolling at supported viewports and follows [the recovery policy](../../Docs/UI.md#recovery-and-persistent-failures). Its current hierarchy is defined in [UI rules](../../Docs/UI.md#adaptive-browsing-and-effect-borders).
+Historical Settings sandbox. Constrained scrolling, typography and synthetic error/Retry controls below are recorded study behavior. Current [Settings](../../Docs/ui/screens.md#settings) and [recovery rules](../../Docs/UI.md#recovery-and-persistent-failures) take precedence.
 
 Open `/design/settings-combined/index.html`. This composes the recorded choices into a playable Settings dialog rather than asking for another round of isolated choices. It renders Fauna's actual Settings, AudioSettings and setting-row compositions using the registered shadcn primitives. Switch/slider/button/dialog interaction overrides remain scoped to this study. Feedback on tabs, hierarchy, size choices, icons, audio defaults and diagnostic removal is shared with production Settings.
 

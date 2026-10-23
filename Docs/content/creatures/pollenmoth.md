@@ -17,6 +17,4 @@ Each bounce repeats the original effect amount, with defenses and healing modifi
 
 ## Artwork provenance and validation record
 
-These retained notes record source selection and verification at implementation time; they do not establish current rendered acceptance
-
 The creature portrait and three dedicated action illustrations are unchanged copies from the user's Pollenmoth Google Drive folder. Their original URLs and rights notes are recorded in the asset manifest. Prepared assets retain the native 4:3 creature and 3:4 action compositions. Rendered gameplay review remains pending.

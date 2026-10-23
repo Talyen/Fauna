@@ -18,7 +18,7 @@ Work independently. Do not discover or message other chats for routine coordinat
 
 Task-scoped branch/worktree creation, commits, local integration and hosted CI execution are authorized unless the task restricts them. Pushes, PRs, releases, deployments, destructive cleanup and changes outside this game require an explicit user request. This file is the repository's authority for Git authorization; other workflow documents link here instead of defining separate permissions.
 
-After review, commit task-owned paths and run `npm run finish` from the task checkout. Integration is the single required final local verification gate; a separate pre-integration gate is unnecessary. The command holds the shared integration lock, incorporates current main, checks the combined result and advances clean main. It retains the task checkout, branch and evidence for follow-up work. A busy lock waits briefly; retry after its bounded wait and never remove another process's lock. Resolve understood conflicts in the task worktree and retry; preserve ambiguous conflicts or dirty-main blockers. Retiring completed checkouts is separate, optional maintenance under the authorization above; unrelated unfinished tasks do not block completion. See the [workflow](CONTRIBUTING.md#worktrees-and-integration).
+After review and required rendered evidence, commit task-owned paths and run `npm run finish` from the task checkout. It is the single final local gate: under the shared lock, incorporate current main, verify the combined result and advance clean main. Never disturb another lock owner or overwrite dirty main. Resolve understood conflicts in the task checkout; preserve ambiguous conflicts and blocked work. Retain the checkout, branch and evidence. Optional retirement requires the cleanup authorization above and is separate from completion. See [workflow and recovery](CONTRIBUTING.md#worktrees-and-integration).
 
 ## Find the owner
 
@@ -49,7 +49,7 @@ Development saves are disposable. There are no released player saves to preserve
 
 Review the final diff and integration. Express behavior through names, types and valuable tests; comments explain non-obvious reasons, ordering or compatibility. Justify lint suppressions.
 
-Run `npm run review:diff` in the task checkout, commit task-owned paths and run `npm run finish`. Integration runs the final changed-file gate. During development, use `npm run verify:changed` for focused checks, `--test <suite>` for extra regressions and `--diagnostic <mode>` for bounded investigation. Extra `--test <suite>` selections are remembered for integration; use `--forget-test <suite>` to remove an obsolete selection. `npm test` runs unit/DOM tests; `npm run check` runs full static checks. Follow [Contributing](CONTRIBUTING.md#verification) for coverage and CI boundaries; use `npm run deps` for missing or changed task dependencies.
+Follow [Contributing](CONTRIBUTING.md#verification) for command selection, extra regression suites, resource limits and evidence. Review with `npm run review:diff`, commit task-owned paths and finish through protected integration. Documentation-only changes need no new tests.
 
 For visual changes, follow the single [rendered review procedure](Docs/UI.md#required-review). Task-owned focused preview/review is authorized by default. Integrate only after current rendered evidence is inspected; preserve work on its branch if that evidence is unavailable.
 

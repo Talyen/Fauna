@@ -82,13 +82,12 @@ The [shared command launcher](local.mjs) applies local worker, heap and deadline
 
 The command creates `.worktrees/<task-name>` on `task/<task-name>` from committed local main by default. An existing matching checkout is reused without resetting files. Existing branches without that checkout and conflicting directories are preserved and rejected. Dependencies are linked from main only when dependency manifests, install settings and lifecycle scripts match. Run `npm run deps` in the task checkout when dependencies are missing or change: it reuses a matching shared link or detaches only that link and runs `npm ci` locally, using the project-pinned npm without changing the global install. Never run `npm ci` through a shared dependency link. Changing ordinary npm task commands alone does not invalidate dependencies.
 
-Review the task diff and commit task-owned files. From the task checkout, run the single final gate:
+[Contributing](../CONTRIBUTING.md#worktrees-and-integration) owns the review/commit/finish procedure. Implementation details for integration:
 
-```sh
-npm run finish
-```
-
-Integration holds one repository-wide lock, incorporates the locked main commit in the task checkout, checks the combined result and advances clean main. Separate pre-integration verification is optional. Recorded extra regressions are reused; `--test <suite>` can add more at finish; narrowing the combined changed-file gate is not supported. Dirty checkouts and unfinished Git operations block it. A competing integration waits up to 30 seconds, then preserves task work if still busy; retry later without terminating its owner. The OS file lock releases on exit, including crashes, and a separate owner record supplies PID, checkout, branch and start time. [fs-native-extensions](https://github.com/holepunchto/fs-native-extensions) supplies cross-platform OS locking as a development-only dependency. The first upgrade briefly reserves the previous socket protocol until its bounded waiters expire; a persistent lock file makes older tools refuse new integrations. Legacy directory locks remain protected. Never delete the persistent lock file to unlock integration. Both worktrees are rechecked before main advances. Failed checks preserve committed task work. Successful integration returns `integrated: true`, the commit and the retained worktree path. It never retires the checkout or branch; evidence links and the chat's working directory remain usable. Cleanup is a separate optional operation. Git authorization is defined only in [AGENTS.md](../AGENTS.md#worktrees-and-integration).
+- The repository-wide OS file lock releases on process exit; a separate owner record contains PID, checkout, branch and start time. The development-only `fs-native-extensions` dependency supplies cross-platform locking
+- Both worktrees are rechecked before main advances. Dirty checkouts and unfinished Git operations block integration; checks cannot be narrowed. Extra regressions recorded by `--test` run again, and finish accepts additional `--test <suite>` selections
+- Failed checks preserve committed task work. Success returns `integrated: true`, the commit and retained checkout path; cleanup never runs implicitly
+- During the socket-protocol upgrade, bounded older waiters remain protected and a persistent lock file makes older tools refuse integration. Legacy directory locks also remain protected. Never delete a persistent lock file to unlock integration
 
 Optional repository maintenance, independent of completing an implementation task: audit accumulated local task branches and worktrees from clean main:
 

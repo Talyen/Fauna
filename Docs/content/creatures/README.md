@@ -1,6 +1,8 @@
 # Creature references
 
-[Content authoring contracts](../../CONTENT.md) own shared rules. Each reference describes its creature kit and passive; its separate artwork section retains provenance and implementation-time validation notes
+[Content](../../CONTENT.md) owns shared costs, passive tiers, save policy and media preparation. Each reference retains its kit, distinctive edge rules and artwork choices; per-file sources and rights live in `assets/manifest.json`. Originals remain preserved and use native landscape/portrait compositions through the shared pipeline.
+
+Artwork/validation sections record implementation-time observations only. Source inspection, prepared-output checks, rendered review, artistic approval and measured balance are separate facts; older notes do not qualify current main. Use the [UI review procedure](../../UI.md#required-review) for changed flows and [Release](../../RELEASE.md) for platform qualification.
 
 For new kits, use the [creature design workflow](../../CREATURE_DESIGN.md) and [reusable skill](../../../.agents/skills/fauna-creature-design/SKILL.md), including the [Boss and Legendary section](../../CREATURE_DESIGN.md#boss-and-legendary-creatures).
 
@@ -24,11 +26,7 @@ For new kits, use the [creature design workflow](../../CREATURE_DESIGN.md) and [
 - [Neradora](neradora.md) · [implementation](../../../src/game/content/creatures/neradora.ts)
 - [Stillara](stillara.md) · [implementation](../../../src/game/content/creatures/stillara.ts)
 - [Cadenza](cadenza.md) · [implementation](../../../src/game/content/creatures/cadenza.ts)
-
 - [Rookhaven](rookhaven.md) · [implementation](../../../src/game/content/creatures/rookhaven.ts)
-
 - [Memento](memento.md) · [implementation](../../../src/game/content/creatures/memento.ts) — Legendary; Echoes and Pearls
-
 - [Euphera](euphera.md) · [implementation](../../../src/game/content/creatures/euphera.ts)
-
 - [Tournelle](tournelle.md) · [implementation](../../../src/game/content/creatures/tournelle.ts)

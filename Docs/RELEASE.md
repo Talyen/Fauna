@@ -2,9 +2,7 @@
 
 Fauna targets Windows x64 on Steam, with controller and Steam Deck experience considered from the foundation. The current app runs offline without Steam, game servers, or accounts.
 
-The [GitHub Actions workflow](../.github/workflows/ci.yml) runs full static/documentation/content checks, all Node/DOM unit suites, a shared Linux production build, eight browser shards and seeded interaction replay. Windows independently builds and verifies an unpacked x64 package and runs Electron startup/resume/isolation smoke. The final `verify` gate requires complete results from the same run and commit, with browser/interaction evidence bound to the selected build hashes across partial reruns, including every discovered browser case. Unexpected skips and missing reports fail it. See [verification policy](../CONTRIBUTING.md#verification) for commands and reruns.
-
-CI publishes compact unit/browser failure summaries. The `browser-review` artifact contains merged JSON with portable evidence paths and an HTML report; `browser-shard-N` artifacts retain raw screenshots, traces and blob reports. All have seven-day retention, including successful runs. The lightweight local gates do not replace CI. Linux skips the unused Electron binary download; Windows installs the binary needed for packaging and native smoke. The Windows executable uses electron-builder and the `com.fauna.game` application identity. Builds contain only the renderer, desktop code and required runtime dependencies.
+[CI](CI.md) owns automated coverage, exact-commit/build identity, reruns and retained artifacts. Windows produces an unpacked x64 package using electron-builder and `com.fauna.game`, containing only the renderer, desktop code and required runtime dependencies. Automated checks support the candidate qualification below; they do not establish hardware acceptance.
 
 Use the [candidate qualification record](RELEASE_QUALIFICATION.md) to retain exact artifact identity, setup and manual Windows, Steam, controller and Deck evidence.
 
@@ -16,7 +14,7 @@ Before shipping:
 - Test on Steam Deck hardware through the intended Windows/Proton or native distribution path, including handheld text, overlay, sleep/resume, battery/performance, and offline startup. Native Linux/macOS packaging is not configured.
 - Verify Steam client behavior, cloud conflicts/recovery, and packaged quit/resume on Windows. Local macOS Electron testing does not establish Windows packaging or Steam behavior.
 
-No release upload, remote publication, automatic promotion, telemetry, or Steam credential handling is configured. Progress sync remains unavailable until Fauna's own Steam App ID is configured. Task-scoped repository pushes, hosted CI and local integration follow the authorization in [AGENTS.md](../AGENTS.md#worktrees-and-integration). PRs, release publication and Steam delivery require separate authorization.
+No release upload, remote publication, automatic promotion, telemetry, or Steam credential handling is configured. Progress sync remains unavailable until Fauna's own Steam App ID is configured. Git and external-action authorization belongs to [AGENTS.md](../AGENTS.md#worktrees-and-integration).
 
 ## Packaged integrity
 
@@ -60,7 +58,7 @@ Without a tag, the range starts at the nearest reachable release tag and ends at
 
 Conventional `feat`, `balance`, `fix` and `perf` commits touching player runtime/content produce New, Balance, Fixes and Performance sections. Tooling-only commits are omitted. A `Player-Note: <player-facing sentence>` commit trailer supplies explicit wording and inclusion; `User-Facing: yes` includes other commit types under Changes, and `User-Facing: no` always excludes a commit. Duplicate lines are collapsed. Review the generated wording before publication; commit subjects are a fallback, not editorial approval. Linux CI fetches complete history and retains the draft in the seven-day `player-notes` artifact, including when later validation fails.
 
-Patch-note generation and verification never publish. Task-scoped repository pushes and hosted CI follow AGENTS.md. Release tags, release signing/setup, Steam delivery and public promotion remain separately authorized.
+Patch-note generation and verification never publish. Release tags, signing/setup, Steam delivery and public promotion require separate authorization under AGENTS.md.
 
 ## Display acceptance
 

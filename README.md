@@ -2,7 +2,7 @@
 
 A single-player creature-collecting card battler for Steam. Choose a starter and recruit companions, combining their cards in one shared deck. Find combinations, recruit new teammates, and reach the heart of the wilds.
 
-Play an eight-encounter journey with bosses fourth and last, collect keyword XP and Gold, recruit backup creatures, and choose journey Boons. The first journey starts with one creature chosen from three seeded offers; later journeys draft three starters from Collection, or one Legendary chosen as the first pick. Creatures and abilities use production illustrations; encounter and location artwork still includes placeholders.
+Creatures and abilities use production illustrations; some encounter/location artwork remains placeholder. See the [roadmap](Docs/ROADMAP.md) for current capabilities and open work.
 
 ## Run
 
@@ -19,7 +19,7 @@ Open http://127.0.0.1:48209. Prepared outputs are checked before startup; media 
 npm run dev:desktop
 ```
 
-Owned previews use isolated ports and disposable browser/desktop profiles; `npm run dev:desktop` opens a quiet owned preview. Browser and normal desktop profiles are separate. Desktop saves live in Electron's Fauna user-data directory under `saves/expedition.json`; browser saves use the `fauna.save.v1` localStorage key. Both keep two backups. Development saves are disposable: only the current format is supported, with no migration or backward-compatibility requirement. Use a fresh browser context for experiments instead of deleting player saves.
+Task previews use isolated ports and disposable profiles; `dev:desktop` opens a quiet preview. Browser and normal desktop saves are separate. [Architecture](Docs/ARCHITECTURE.md#save-contract) owns saving/recovery and [development tools](Docs/DEVELOPMENT_TOOLS.md#task-checkouts-and-previews) explains previews.
 
 ## Play
 
@@ -31,7 +31,7 @@ Between battles, recruit teammates, buy journey Boons, or recover at a Campfire 
 - Keyboard: W/A/S/D navigate, Enter/Space activate, I opens inspection outside battle, Escape cancels or opens the menu. Tab remains available.
 - Standard controller: D-pad/left stick navigate, south/A confirms, east/B backs out, west/X inspects outside battle, north/Y ends the turn. Button mapping follows standard Xbox-style positions. Non-standard mappings are not yet supported.
 
-Gameplay settles before visual feedback. Accepted commands automatically save; failed writes retry automatically in the background, with a nonmodal notice after repeated failures. Desktop close requests wait for queued saves. Browsers show no save warning on exit; abrupt browser/process termination cannot guarantee completion of queued writes.
+Accepted commands save automatically. Desktop close drains queued saves; abrupt browser/process termination cannot guarantee pending writes. Desktop saves live under Electron’s Fauna user-data `saves/expedition.json`; browser saves use `fauna.save.v1`. Both keep two backups. Follow the [development-save policy](AGENTS.md#development-saves); use fresh browser contexts for experiments.
 
 ## Verify
 

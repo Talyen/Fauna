@@ -16,6 +16,4 @@ Bloom Shelter heals every living deployed ally, including Neradora, without revi
 
 ## Artwork provenance and validation record
 
-These retained notes record source selection and verification at implementation time; they do not establish current rendered acceptance
-
 The unchanged creature portrait (`Neradora_02.png`) and Undertow Knot, Bloom Shelter and Tide Cup action PNGs come from the user's [Neradora Drive folder](https://drive.google.com/drive/folders/1g3jJYLQNAqF9zMim3AQlKLBo-MFS1Mpd). The manifest records each original URL and rights note; prepared media retains the native 4:3 creature and 3:4 action compositions. Hidden Spring and Salt Release are excluded. Source artwork was visually inspected; rendered gameplay and balance acceptance remain pending.

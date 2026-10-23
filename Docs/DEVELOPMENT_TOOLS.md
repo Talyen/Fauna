@@ -1,8 +1,18 @@
 # Development tools
 
+[Contributing](../CONTRIBUTING.md) owns everyday checks and resource limits; the [script map](../scripts/README.md) locates implementations. This is the opt-in workflow reference.
+
+- [Preview and capture](#task-checkouts-and-previews), [focused interactions](#focused-routes-and-seeded-interactions)
+- [Content audit](#content-checks), [media and listening](#prepared-media-and-sound-desk)
+- [Headless journeys](#headless-journeys), [paired balance](#paired-balance-reports), [findings](#ranked-balance-findings)
+- [Performance](#reproducible-performance-captures), [native/reachable scenarios](#native-and-reachable-performance-scenarios), [compiler trial](#periodic-performance-and-compiler-trial)
+- [Diagnostics](#local-diagnostics), [review/lookup](#review-and-owner-lookup), [platform checks](#architecture-and-packaged-platform-checks)
+
+Reports remain under ignored `reports/`; retain their source/checkpoint identities and actual completion status. Failed/incomplete captures are diagnostics, never accepted evidence. Browser automation simulates input; [Release](RELEASE.md) owns native, package and hardware qualification. [UI review](UI.md#required-review) owns rendered acceptance.
+
 ## Task checkouts and previews
 
-[Contributing](../CONTRIBUTING.md) gives the everyday checkout, verification and integration commands. Use the following tools for focused visual evidence:
+Use the seeded preview and capture owners for focused visual evidence:
 
 ```sh
 npm run preview:task -- --browser --scenario battle
@@ -20,11 +30,25 @@ Sessions record their identity, port, checkout and owner PID under ignored repor
 
 [Shared browser helpers](../tests/README.md#browser-and-ui-coverage) own pagination/resize and focus checks, session seeding, settled screenshots and bounded-layout assertions. Existing cross-layer recovery scenarios remain under `tests/integration/recovery/`, with browser recovery coverage in [scroll-free journeys](../tests/e2e/scroll-free.spec.ts). Reuse these owners for new coverage; product layout and recovery rules remain in [UI contracts](UI.md).
 
+## Focused routes and seeded interactions
+
+`npm run test:e2e:route -- battle --list` lists a named route without launching it. Routes are battle, settings, collection, progression and persistence; remove `--list` to run one. They select fixed files and title filters and accept only `--list`, `--headed` or `--debug`, so a typo cannot silently launch the whole suite. CI still runs every browser test.
+
+After building, `npm run test:interactions -- --seed 42 --steps 24 --family mixed` drives rendered controls in an isolated profile. Navigation, battle and persistence families can also run separately. Reports retain seed, current-format initial checkpoint, source identity, attempted actions and checkpoint hashes under ignored reports. Battle actions are checked against the production dispatcher; menu actions must preserve progression. Reload exercises save/resume. This is bounded seeded coverage, not exhaustive UI exploration.
+
+`npm run test:interactions -- --replay reports/interactions/example/report.json` replays exact actions and hashes, rejecting changed source identity. Add `--shrink true` on failure for deletion-based reduction, with a fresh context for each candidate and a budget of 40 attempts / 30 seconds. Inapplicable commands and different failure signatures cannot replace the original failure. The original trace remains intact; `minimal.json` is a separate replayable candidate. A bounded shrink does not claim global minimality.
+
 ## Content checks
 
 `npm run content:audit` reports authored-content errors and warnings by stable ID and field, and writes `reports/content-audit.json`. The pure validator in `src/game/content-validation.ts` also supplies startup validation through the existing `validateContent` export. It checks IDs, owners, supported magnitudes/costs, effect and keyword registration, encounter packs, boss positions, stats, and talent rows/references. Missing player cards for a progression keyword are advisory warnings.
 
-Card descriptions derive from their structured effects. Handwritten traits, boons and talent prose still need focused gameplay tests and review; the validator does not prove arbitrary English describes a resolver correctly. Media checks validate manifest coverage, image geometry, preparation identities and output bytes. CI runs the content audit; it is not added to the bounded default local smoke.
+Card descriptions derive from their structured effects. Handwritten traits, boons and talent prose still need focused gameplay tests and review; the validator does not prove arbitrary English describes a resolver correctly. Media checks validate manifest coverage, image geometry, preparation identities and output bytes. CI runs the content audit.
+
+## Prepared media and Sound desk
+
+See [Content and artwork](CONTENT.md#prepared-assets) for manifest authoring, preparation, receipts and source checks. `npm run audio:review` generates ignored review inputs. `npm run audio:review -- --serve` opens an explicitly served local Sound desk on a free port; run it for listening only when requested. It serves only registered prepared media and the review page.
+
+The desk compares current assignments with any prepared candidate of the same kind, offers original or level-matched playback, and saves local choices against the manifest identity. Playback stops on another audition, selection changes, page hiding, or Stop. Export choices explicitly; auditioning and choosing never install replacements. Exported source/output hashes identify the exact recording. Adopt a choice by updating the manifest and preparing again. Listening and device/mix acceptance remain separate from successful metadata checks.
 
 ## Headless journeys
 
@@ -42,18 +66,6 @@ The opt-in runner uses production application commands, current save validation,
 
 An external 60-second watchdog, 5,000-action budget and 100-turn-per-battle budget prevent hangs from becoming reported victories or defeats. The watchdog and cancellation stop the owned worker and wait for its exit; the command still fails if the stopped worker exits zero. Missing, duplicate and unknown CLI options fail before a worker starts. Incomplete runs fail the command. Small focused replay tests run in CI; larger sweeps remain opt-in. These are automated-policy observations, not human win-rate estimates or rendered acceptance.
 
-## Local diagnostics
-
-The internal collector retains bounded deduplicated failures with selected revision/phase fields. Error text is truncated and common absolute paths and credential assignments are redacted. Full saves and arbitrary context objects are never captured. Entries persist separately from progression; unavailable storage leaves in-memory evidence. There is no player-facing diagnostics tab, report or clipboard export. Nothing is uploaded automatically.
-
-The application session owns collection lifetime and records save read/write and validation failures. The root boundary records render failures; startup registers global error/rejection listeners. Audio failures are non-fatal diagnostics. Disposing a session revokes further collection while admitted saves drain normally.
-
-## Prepared media and Sound desk
-
-See [Content and artwork](CONTENT.md#prepared-assets) for manifest authoring, preparation, receipts and source checks. `npm run audio:review` generates ignored review inputs. `npm run audio:review -- --serve` opens an explicitly served local Sound desk on a free port; run it for listening only when requested. It serves only registered prepared media and the review page.
-
-The desk compares current assignments with any prepared candidate of the same kind, offers original or level-matched playback, and saves local choices against the manifest identity. Playback stops on another audition, selection changes, page hiding, or Stop. Export choices explicitly; auditioning and choosing never install replacements. Exported source/output hashes identify the exact recording. Adopt a choice by updating the manifest and preparing again. Listening and device/mix acceptance remain separate from successful metadata checks.
-
 ## Paired balance reports
 
 `npm run balance:compare -- run` defaults to five starter preferences (Emberback, Prismram, Captoad, Dunefox and Cindernewt) crossed with seeds 0–9, serially. This is a fixed benchmark subset, not coverage of the full current starter pool; each preference is chosen only when present in the seeded offers. Each case uses the production heuristic policy, explicit Auto-end turn enabled, a 5,000-action/100-turn limit, save/resume every 17 actions and a 60-second watchdog. The suite has a fifteen-minute deadline. Ctrl+C or termination stops the owned worker and prevents further cases; the report remains incomplete. A watchdog waits for the stopped worker to exit before another case can start. `--starters emberback --seeds 0,1 --out reports/balance/smoke` provides a bounded two-case smoke. Custom suites accept up to five distinct starter preferences and ten distinct seeds. Reports contain explicit incomplete outcomes rather than converting timeouts to defeats. Each career case records the requested `starter` preference and the `actualStarter` from its first accepted draft. Species findings include only cases that actually selected the preferred species; fallback or unrecorded drafts produce a coverage watch item instead of being attributed to that creature. More preferences on the same seeds do not establish more independent opening matchups.
@@ -64,49 +76,6 @@ Run the identical suite in each code version, then use `npm run balance:compare 
 
 `npm run balance:compare -- replay reports/balance/smoke/case-0.json` directly replays recorded commands and fails on code identity, checkpoint divergence or incomplete execution. Playthrough and balance tools share a source fingerprint covering gameplay and application files, including the save-format JSON. Record fresh journals after changing these inputs. All output remains under ignored `reports/`. The existing `balance:playthrough` replay format is now version 3; obsolete journals are rejected.
 
-## Reproducible performance captures
-
-The [October 22 frame pacing investigation](task-evidence/2026-10-22-frame-pacing.md) records
-shared layout and animation optimizations, visual parity evidence and remaining device qualification.
-
-Focused builds and performance diagnostics needed for a task are authorized through `npm run verify:changed -- --diagnostic`; extended sweeps remain CI work by default. The commands below describe capture capabilities and evidence.
-
-Build once with `npm run build`, then run `npm run perf -- --out reports/performance/baseline`. The three scenarios cover card play/enemy turns, required knockout replacements, and Collection/menu transitions. `--scenario battle`, `swap`, or `menus` selects one. A named fixture explicitly grants three deployed creatures and one reserve; it is validated as a current-format save, not claimed to be earned progression. The driver uses normal controls in fresh browser contexts, an owned production preview on a free port, and muted speaker output.
-
-Each scenario gets one unmeasured warm-up and one measured run at 1280×800 with normal motion and Auto-end turn disabled. Action segments retain 1,200 ms of ordinary transition/feedback time. Reports include frame percentiles, gap counts over 20/33.3/50/100 ms, supported long-task/input timings, and heap/DOM/media observations. Unsupported metrics are null. At least sixty frame gaps and ten frames per completed action segment are required. Stalled actions, missing samples and divergent saves fail the capture.
-
-`npm run perf:replay -- reports/performance/baseline/report.json reports/performance/replay` repeats its exact checkpoint and controls. `npm run perf:compare -- reports/performance/baseline/report.json reports/performance/replay/report.json` writes differences only for compatible environments, fixtures and action/checkpoint hashes. Raw samples, segments, build hashes and replay inputs remain beside the summary. Build hashes cover every emitted renderer and media file, desktop files, package metadata and the save-format JSON. Run captures without competing local workloads; browser timing is observational and does not prove physical controller, GPU presentation, Proton or Deck performance. Capture and replay do not rebuild.
-
-## Review and owner lookup
-
-`npm run context -- --task combat --task ui` prints canonical documentation section ranges and implementation entrypoints. It also accepts source paths and `--json`. With no paths, it uses the same recorded task base as review and verification, independent of branch naming. `--base <ref>` changes the base; `--working-tree` (legacy `--diff`) limits selection to uncommitted work. Use `--help` to list topics, including `layout` and `recovery`. Unknown topics fail. Output is bounded, with explicit omitted-pointer counts and a complete JSON selection under `reports/agent-context/`. Owner pointers are navigation aids, not test coverage.
-
-`npm run review:status -- [paths]` provides a bounded inventory without reading patch bodies; `npm run review:diff -- --summary [paths]` adds patch ranges. Ordinary `review:diff` prints readable multiline patches for the net task change; `--layers` exposes committed, staged and unstaged changes separately, including reverted edits; `--json` supplies structured output. Status and summary modes print compact file lists. A complete inventory, patch text and 1-based patch index are written under ignored `reports/agent-diff/`. Truncation is explicit; read omitted patches before claiming a complete review. Commands use literal Git paths, never stage files or mutate checkout state, and never inspect chats.
-
-The packaged artifact gate is documented in [Release readiness](RELEASE.md#packaged-integrity). These opt-in tools do not expand the default local verification gate.
-
-## Focused routes and seeded interactions
-
-`npm run test:e2e:route -- battle --list` lists a named route without launching it. Routes are battle, settings, collection, progression and persistence; remove `--list` to run one. They select fixed files and title filters and accept only `--list`, `--headed` or `--debug`, so a typo cannot silently launch the whole suite. CI still runs every browser test.
-
-After building, `npm run test:interactions -- --seed 42 --steps 24 --family mixed` drives rendered controls in an isolated profile. Navigation, battle and persistence families can also run separately. Reports retain seed, current-format initial checkpoint, source identity, attempted actions and checkpoint hashes under ignored reports. Battle actions are checked against the production dispatcher; menu actions must preserve progression. Reload exercises save/resume. This is bounded seeded coverage, not exhaustive UI exploration.
-
-`npm run test:interactions -- --replay reports/interactions/example/report.json` replays exact actions and hashes, rejecting changed source identity. Add `--shrink true` on failure for deletion-based reduction, with a fresh context for each candidate and a budget of 40 attempts / 30 seconds. Inapplicable commands and different failure signatures cannot replace the original failure. The original trace remains intact; `minimal.json` is a separate replayable candidate. A bounded shrink does not claim global minimality.
-
-## Native and reachable performance scenarios
-
-`npm run perf -- --electron --scenario battle` uses the production renderer through Electron's sandboxed preload and file saves in a fresh temporary profile. Speaker output is muted without disabling the audio graph. Native captures use a frameless 1280×800 content window so desktop title bars cannot clamp the viewport. This harness setting is recorded and does not alter ordinary launch behavior. Set `FAUNA_ELECTRON_EXECUTABLE` only to explicitly select an installed runtime; the report records its actual version. `npm run perf -- --electron --cold` captures new-process launch to visible Continue, followed by an idle frame sample. Cold startup uses default preferences and issues no gameplay commands. Each warm-up and measured run launches a distinct process/profile; OS caches are not cleared. Startup time includes process launch, application readiness, window creation and renderer load, separate from post-ready frame pacing. This is unpackaged native evidence, not Windows package or physical-device performance.
-
-`npm run perf -- --suite reachable --seed 42` generates three journeys through accepted production commands and save/resume, then captures early and late battle checkpoints. Reports retain the generating journal and inventories of encounter, turn, roster, hand, talents and Boons. Empty inventories are explicit; reaching a checkpoint does not imply every talent or reward was exercised. The fixed synthetic fixture remains the default. Both suites support replay and matching-environment comparisons. Performance format 2 rejects old reports; native/browser, cold/warm, seed, suite, viewport, actual DPR and motion settings must match. Timings remain observational.
-
-## Architecture and packaged platform checks
-
-`npm run deadcode` runs Knip with explicit application, native, SSR harness and tooling entrypoints. Parser-based architecture checks resolve relative and alias imports, re-exports and literal dynamic access and reject gameplay ambient capabilities. Both run in full CI static verification; the default bounded local gate is unchanged. Keep registered upstream primitives and dynamic consumers explicit rather than removing live code to satisfy a report.
-
-Electron after-pack configuration installs browser-process snapshots and sets hardened fuses. `npm run verify:package` checks actual executable fuse values, snapshot bytes, required Steam native files, desktop runtime and save-format bytes, and existing renderer/media identity. Packaged smoke connects only to the owned renderer's loopback CDP endpoint; it does not weaken Node inspection fuses. It retains draft, inspection, knockout replacement, saving and quit/resume coverage. Unpackaged smoke retains its Electron main-process preference assertions. Desktop verification launches clear inherited preview URLs, preview profiles and Electron Node mode, use their own temporary profiles, and disable live Steam access. Browser/CDP evidence is separate from physical input and live Steam acceptance.
-
-All native automated launchers use isolated profiles and disable real Steam. `desktop/steam-config.json` defaults to a null App ID; a development-only `FAUNA_STEAM_APP_ID` may explicitly select Fauna's own configured app. Production ignores that environment override. No verification command configures Steam partner settings or uploads progression. Display settings use the profile's separate `display.json`; Cloud metadata and recovery snapshots stay with the pinned Steam profile. Do not delete player saves to reset tests.
-
 ## Ranked balance findings
 
 Balance runs, experiments and comparisons now write ranked `findings.json` and `findings.md` beside their evidence. `npm run balance:findings -- reports/balance/smoke/report.json` reanalyzes an existing suite without running simulations; an optional second argument selects a directory under ignored reports. It also accepts a generated `comparison.json`. No finding changes gameplay or tuning automatically.
@@ -115,8 +84,47 @@ Critical findings identify incomplete evidence, including watchdogs and rejected
 
 At least five samples are needed for review-level statistical findings. Extreme 0%/100% success, small samples and noisy paired effects remain watch items; zero observed variance at an extreme is not certainty. Within each severity, findings rank by threshold-relative magnitude and then stable ID, retaining case/journal references. Career success comparisons are observational, with differing recruitment and policy choices; investigate individual matchups before attributing causation. One-checkpoint experiments remain explicitly small samples. No findings does not establish balanced content or a human win rate.
 
-Release artifact identity checks and player patch-note drafts are documented in [Release readiness](RELEASE.md#release-verification-and-player-notes).
+## Reproducible performance captures
+
+The [October 22 frame pacing investigation](task-evidence/2026-10-22-frame-pacing.md) records
+shared layout and animation optimizations, visual parity evidence and remaining device qualification.
+
+Use `npm run verify:changed -- --diagnostic` for bounded performance investigation; the commands below describe capture/replay capabilities.
+
+Build once with `npm run build`, then run `npm run perf -- --out reports/performance/baseline`. The three scenarios cover card play/enemy turns, required knockout replacements, and Collection/menu transitions. `--scenario battle`, `swap`, or `menus` selects one. A named fixture explicitly grants three deployed creatures and one reserve; it is validated as a current-format save, not claimed to be earned progression. The driver uses normal controls in fresh browser contexts, an owned production preview on a free port, and muted speaker output.
+
+Each scenario gets one unmeasured warm-up and one measured run at 1280×800 with normal motion and Auto-end turn disabled. Action segments retain 1,200 ms of ordinary transition/feedback time. Reports include frame percentiles, gap counts over 20/33.3/50/100 ms, supported long-task/input timings, and heap/DOM/media observations. Unsupported metrics are null. At least sixty frame gaps and ten frames per completed action segment are required. Stalled actions, missing samples and divergent saves fail the capture.
+
+`npm run perf:replay -- reports/performance/baseline/report.json reports/performance/replay` repeats its exact checkpoint and controls. `npm run perf:compare -- reports/performance/baseline/report.json reports/performance/replay/report.json` writes differences only for compatible environments, fixtures and action/checkpoint hashes. Raw samples, segments, build hashes and replay inputs remain beside the summary. Build hashes cover every emitted renderer and media file, desktop files, package metadata and the save-format JSON. Run captures without competing local workloads; browser timing is observational and does not prove physical controller, GPU presentation, Proton or Deck performance. Capture and replay do not rebuild.
+
+## Native and reachable performance scenarios
+
+`npm run perf -- --electron --scenario battle` uses the production renderer through Electron's sandboxed preload and file saves in a fresh temporary profile. Speaker output is muted without disabling the audio graph. Native captures use a frameless 1280×800 content window so desktop title bars cannot clamp the viewport. This harness setting is recorded and does not alter ordinary launch behavior. Set `FAUNA_ELECTRON_EXECUTABLE` only to explicitly select an installed runtime; the report records its actual version. `npm run perf -- --electron --cold` captures new-process launch to visible Continue, followed by an idle frame sample. Cold startup uses default preferences and issues no gameplay commands. Each warm-up and measured run launches a distinct process/profile; OS caches are not cleared. Startup time includes process launch, application readiness, window creation and renderer load, separate from post-ready frame pacing. This is unpackaged native evidence, not Windows package or physical-device performance.
+
+`npm run perf -- --suite reachable --seed 42` generates three journeys through accepted production commands and save/resume, then captures early and late battle checkpoints. Reports retain the generating journal and inventories of encounter, turn, roster, hand, talents and Boons. Empty inventories are explicit; reaching a checkpoint does not imply every talent or reward was exercised. The fixed synthetic fixture remains the default. Both suites support replay and matching-environment comparisons. Performance format 2 rejects old reports; native/browser, cold/warm, seed, suite, viewport, actual DPR and motion settings must match. Timings remain observational.
 
 ## Periodic performance and compiler trial
 
 The [performance workflow](../.github/workflows/performance.yml) runs weekly or on manual dispatch. It serializes three baseline captures and three React Compiler captures on the same hosted runner, retaining samples and comparisons for 30 days. `FAUNA_REACT_COMPILER=1 npm run build` enables the stable Babel compiler for the trial; ordinary builds keep it disabled until repeated observations and rendered interaction review justify adoption. Each report hashes the actual build. Hosted timings are observations, without timing pass/fail thresholds; capture completion and checkpoint correctness remain required. Compare equivalent reports and inspect frame gaps, input delay and heap behavior before promoting any optimization. This does not qualify packaged Windows or Deck performance.
+
+## Local diagnostics
+
+The internal collector retains bounded deduplicated failures with selected revision/phase fields. Error text is truncated and common absolute paths and credential assignments are redacted. Full saves and arbitrary context objects are never captured. Entries persist separately from progression; unavailable storage leaves in-memory evidence. There is no player-facing diagnostics tab, report or clipboard export. Nothing is uploaded automatically.
+
+The application session owns collection lifetime and records save read/write and validation failures. The root boundary records render failures; startup registers global error/rejection listeners. Audio failures are non-fatal diagnostics. Disposing a session revokes further collection while admitted saves drain normally.
+
+## Review and owner lookup
+
+`npm run context -- --task combat --task ui` prints canonical documentation section ranges and implementation entrypoints. It also accepts source paths and `--json`. With no paths, it uses the same recorded task base as review and verification, independent of branch naming. `--base <ref>` changes the base; `--working-tree` (legacy `--diff`) limits selection to uncommitted work. Use `--help` to list topics, including `layout` and `recovery`. Unknown topics fail. Output is bounded, with explicit omitted-pointer counts and a complete JSON selection under `reports/agent-context/`. Owner pointers are navigation aids, not test coverage.
+
+`npm run review:status -- [paths]` provides a bounded inventory without reading patch bodies; `npm run review:diff -- --summary [paths]` adds patch ranges. Ordinary `review:diff` prints readable multiline patches for the net task change; `--layers` exposes committed, staged and unstaged changes separately, including reverted edits; `--json` supplies structured output. Status and summary modes print compact file lists. A complete inventory, patch text and 1-based patch index are written under ignored `reports/agent-diff/`. Truncation is explicit; read omitted patches before claiming a complete review. Commands use literal Git paths, never stage files or mutate checkout state, and never inspect chats.
+
+Release [artifact identity and player-note tools](RELEASE.md#release-verification-and-player-notes) and [package integrity](RELEASE.md#packaged-integrity) have their own reference.
+
+## Architecture and packaged platform checks
+
+`npm run deadcode` runs Knip with explicit application, native, SSR harness and tooling entrypoints. Parser-based architecture checks resolve relative and alias imports, re-exports and literal dynamic access and reject gameplay ambient capabilities. Both run in full CI static verification. Keep registered upstream primitives and dynamic consumers explicit rather than removing live code to satisfy a report.
+
+Electron after-pack configuration installs browser-process snapshots and sets hardened fuses. `npm run verify:package` checks actual executable fuse values, snapshot bytes, required Steam native files, desktop runtime and save-format bytes, and existing renderer/media identity. Packaged smoke connects only to the owned renderer's loopback CDP endpoint; it does not weaken Node inspection fuses. It retains draft, inspection, knockout replacement, saving and quit/resume coverage. Unpackaged smoke retains its Electron main-process preference assertions. Desktop verification launches clear inherited preview URLs, preview profiles and Electron Node mode, use their own temporary profiles, and disable live Steam access. Browser/CDP evidence is separate from physical input and live Steam acceptance.
+
+All native automated launchers use isolated profiles and disable real Steam. `desktop/steam-config.json` defaults to a null App ID; a development-only `FAUNA_STEAM_APP_ID` may explicitly select Fauna's own configured app. Production ignores that environment override. No verification command configures Steam partner settings or uploads progression. Display settings use the profile's separate `display.json`; Cloud metadata and recovery snapshots stay with the pinned Steam profile. Do not delete player saves to reset tests.

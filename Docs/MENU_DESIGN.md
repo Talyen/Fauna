@@ -1,43 +1,38 @@
-# Menus and navigation — design decisions
+# Menus and navigation
 
-Implemented direction from the design review.
+This guide owns routes, actions and focus return. [Screen specifications](ui/screens.md) own composition; [UI contracts](UI.md) own shared interaction behavior. Navigation never changes game revision or undoes committed gameplay.
 
-- The main menu uses a centered primary button above a two-column grid of narrower secondary buttons on the warm near-black background, a simple Fauna title, and gameplay destinations only. No promotional copy, decorative panels or reward previews.
-- Launching with a saved journey opens the main menu with Continue selected. Do not automatically resume gameplay.
-- While a journey exists, offer Continue. End journey appears only in the hamburger pause menu and ends immediately without confirmation; Play appears only when no run exists.
-- Opening the menu during a journey pauses play and shows a compact vertical dropdown anchored below and aligned to the right edge of its Open menu button, without dimming the current screen.
-- Talents opens full screen from the menu. The header hamburger opens the originating main or pause menu directly, including from a talent tree. Escape/controller B returns through the talent overview to the originating menu while preserving the journey and its prior screen.
-- Collection is available from the main and pause menus, including during battle, for reviewing permanently collected species, passives and action cards. It is separate from the journey roster.
-- The header hamburger or Escape/controller B from Collection or the Talents overview returns to the originating main or pause menu with its Collection or Talents choice focused.
-- Locked species show grayscale artwork, no unlock requirement, and no hover tooltip.
-- Selecting a collected species opens the shared centered creature inspector: landscape artwork, three portrait abilities, the active named trait and five permanent progress stars. Ability names, base Mana costs and full base rules appear on hover or focus; activating a portrait enlarges it in the same dialog. Species abilities exclude journey card levels, talents and temporary battle modifiers. There are no separate ability or rank progression tabs. Back and Escape/controller B return from an action to the creature, then to the same gallery filter, page and creature focus. Battle Pause restores its Collection choice, and Continue resumes the unchanged battle with Auto-play off.
-- Collection lists collected species first, followed by uncollected species. All, Collected and Uncollected tabs filter that list. Encountered species remain uncollected until recruited; the committed onboarding starter also joins Collection.
-- There is no Lineup editor or free Swap control. Knockout replacements and abilities change the formation, and the resulting lineup persists into later battles. Required replacement choices resume from committed roster state after reload.
-- Journey results appear once when a journey is completed, defeated, or voluntarily ended; the main menu has no results entry. End journey on a started journey opens results; clearing an unfinished starter choice returns to the main menu.
-- Settings and Glossary open full screen; the header hamburger and Escape/controller B return to the originating menu and restore its choice. Full screens use icon-only Back and Open menu buttons in balanced leading and trailing slots around the independently centered heading; the shared header frame is at most 640px wide. Back returns to the originating screen or menu; in a talent tree it returns to the overview.
+## Menu actions
 
-Collection uses a centered title, tabs, a gallery and pagination. Back and Open menu occupy the leading and trailing slots of the shared balanced header frame. The gallery shows up to two rows of four creatures per page using the bounded artwork profiles; measured width reduces the column count before artwork is reduced. Pagination uses Previous and Next icon buttons without page counts. It reserves gallery and footer space so partial pages and filters keep controls stable. Each filter remembers its first visible creature while mounted. Changing capacity keeps that creature on the visible page, and shortened lists clamp the page. Locked species are noninteractive. Menu order is Continue/Play, Talents, Collection, optional owned Boons during a journey, Glossary, Settings, then End journey when applicable in Pause only. Pause also offers Main menu; desktop adds Save & quit.
+Launch opens Main menu, selecting Continue when a journey exists; never resume automatically. Offer Play only without a journey, Continue while one exists.
 
-See [UI rules](UI.md) and [journey design](EXPEDITION_DESIGN.md) for shared interaction and progression decisions.
+Menu order is Continue/Play, Talents, Collection, optional owned Boons during a journey, Glossary and Settings. Pause also offers Main menu and End journey; desktop adds Save & quit. End journey is immediate, without confirmation, and appears only in Pause.
 
-## Shared menu treatment
+Collection, Talents, Settings and Glossary open full screen from either menu, including during battle. The hamburger opens the originating menu directly, even from a talent tree. Menus pause Auto-play; returning from Collection leaves it off. Main menu preserves the saved journey; Continue resumes its committed state.
 
-Main and pause menus show the available talent-point count beside Talents with an accessible description; it updates from committed progression and disappears when spent. Main menu buttons are 180px wide, keeping labels on one line through 125% text size, with each icon and natural-width label centered together as a group with an 8px gap. Continue/Play sits centered above the two-by-two Talents, Collection, Glossary and Settings grid. Conditional choices add rows, with a lone final choice centered. Main menu buttons use uniform 12px horizontal and vertical gaps, including beneath the primary action. The pause menu is a 240px-wide shadcn Popover with one vertical list, left-aligned icons and labels, and 4px gaps between controls. It has no title, close icon or dimmed backdrop. Its surface and border use the shared overlay theme. Radix positions it 8px from the menu button and keeps it within the viewport when space is limited. Continue, clicking outside, or Escape/controller B dismisses it; focus returns to its opener. The main menu uses a default Button for Continue/Play and ghost Buttons for secondary choices; the dropdown uses ghost Buttons throughout. Use the charcoal/ivory/muted-gold semantic theme in `src/ui/tokens.css`. Settings keeps Display, Sound and Battle tabs; desktop adds native display controls within Display. Cloud reconciliation has no Settings surface. It uses Switch for Sound and Auto-end turn (in Battle), and RadioGroup for explicit text-size choices; changes save immediately. End journey appears only in the hamburger pause menu, with a red label and red Lucide LogOut icon, and commits immediately without confirmation.
+Ending a started journey opens Journey results as Returned home. Ending an unfinished starter choice returns to Main menu. Results have one Main menu action and no menu entry for reopening them. Reward settlement belongs to [journey rules](EXPEDITION_DESIGN.md#screen-flow-and-journey-results).
 
-## Battle assistance and reveals
+## Back and focus return
 
-The upper-right battle controls include an Auto-play icon Button with an accessible pressed state, initially off for each battle. Manual card selection stops it; ordinary menus pause it. Battle has no pinned inspection; hover/focus details remain available. Development battles include a Skip combat icon beside Auto-play. Production contains no developer action.
+| Surface                                           | Back / Escape / controller B                                                                        |
+| ------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Pause                                             | Dismiss to its opener                                                                               |
+| Collection, Settings, Glossary, Talents overview  | Restore the originating menu and its corresponding choice                                           |
+| Talent tree                                       | Return to the overview; the hamburger still opens the originating menu directly                     |
+| Creature-parent action inspection                 | Return to the creature and focus the current thumbnail; a second Back closes to the original opener |
+| Direct hand/deck action inspection                | Close to its opener, without creating a creature parent                                             |
+| Boon Merchant shelf or purchased reward           | Complete the room and prepare fresh destinations                                                    |
+| Campfire                                          | Leave without Rest, preserving the encounter                                                        |
+| Unchosen recruitment                              | Return home without changing saved offers                                                           |
+| Team confirmation / required knockout replacement | No Back/Cancel bypass; complete the required choice                                                 |
+| Other journey screens                             | Return home without reversing committed gameplay                                                    |
 
-A live creature unlock opens an artwork-centered Creature unlocked screen when leaving results, with ordinary kit inspection and Continue. Continue advances through pending reveals and then Main menu. It does not add inspection to Journey results.
+Inspection X/outside click closes the entire Dialog. Nested surfaces own their focus and restore a connected, enabled opener; otherwise use the current-screen fallback. Inspection returns Collection to the same filter, page and creature. Opening child menu dialogs replaces Pause so only one trap owns focus. The mandatory replacement Dialog ignores Escape/outside click.
 
-Journey screens with headings normally share a Back, heading and Open menu row; team confirmation omits Back. Back completes the Boon Merchant room and prepares fresh destinations, leaves Campfire for the unchanged encounter without resting, returns from unchosen recruitment to the main menu without changing reward offers, returns from an unlock reveal to the main menu, and otherwise returns to the main menu without undoing committed gameplay. The root main menu keeps its Fauna title; battle has no main heading and retains its corner menu control.
+Journey headings offer read-only Deck inspection; closing restores the Deck opener. During drafting, Deck reflects already chosen starters. [Screen headings](ui/screens.md#screen-headings) own geometry and control placement.
 
-## Journey decisions and inspection
+## Battle and external pause
 
-Drafting, encounter, Victory, Boon Merchant and Campfire headings offer the same icon-only Deck control beside Back, with the title centered independently of the side controls. It opens the shared Deck inspection without committing gameplay; drafting previews the action cards contributed by the already chosen starters. Closing restores the Deck opener.
+Battle has no pinned inspection: right-click, I and controller X do not open it. Hover/focus details remain available. Escape/controller B cancels targeting first, then opens Pause. Manual card selection stops Auto-play; its per-battle control starts off. Development alone exposes Skip combat beside Auto-play, through the explicit session capability.
 
-At a full roster, Recruit immediately banks Collection progress and opens Choose your team with the original five creatures selected. The incoming recruit remains visible and inspectable above the roster; artwork previews one exchange at a time and can reverse it. Confirm alone commits the displayed team, including keeping the original roster. There is no Back or Cancel action in team confirmation; reload restores the banked recruit and original team preview. Inspection and previews never change the saved roster.
-
-Settings uses a compact 640px maximum width and reserves the tallest category’s natural height in one grid cell. Inactive native tab panels stay invisible, inert and hidden from assistive technology so changing tabs preserves the heading and tabs without exposing inactive controls.
-
-Creature inspection outside battle and Collection uses a centered name, aligned creature and ability artwork, current named passive and five progress stars. Stars start empty and fill with permanent rank; inspection contains no rank controls or recruitment action. Starter and Victory creature artwork opens this inspection without committing, while the Recruit button beneath each offer commits that choice. Full-roster recruitment uses the separate team preview and Confirm flow above.
+Steam overlay activation revokes commands, preserves higher-priority inspection, clears targeting, stops Auto-play and opens Pause. Closing the overlay does not resume automatically. Held confirmation must be released before acting again. [Input rules](UI.md#interaction-states-and-accessibility) own modality/reconnect behavior; [Architecture](ARCHITECTURE.md#cloud-reconciliation-and-device-preferences) owns native admission.

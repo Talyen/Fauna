@@ -4,115 +4,30 @@ Last inventoried: October 23, 2026
 
 Fauna has a complete short playable journey. Checked items below are implemented in the repository; they do not imply release readiness or fresh verification on every platform. Unchecked items are future work. Suggestions are not approved commitments or dated promises. Detailed rules remain in the linked design documents; [release readiness](RELEASE.md) owns shipping acceptance.
 
-## Done: journeys and team building
+## Current capabilities
 
-- [x] First-journey starter selection from three seeded offers; later journeys draft three creatures from collected species, or one Legendary chosen first
-- [x] Eight combat encounters, with bosses fourth and last, ordinary enemy groups growing from one to three creatures and solo Legendary bosses
-- [x] Recruitment from defeated enemies, including duplicate species with independent Health and battle state
-- [x] Five-creature roster with up to three ordinary deployed creatures or one Legendary, with the remaining creatures in backup
-- [x] Full-roster recruitment that banks Collection progress before a reversible team preview and explicit Confirm
-- [x] Saved lineup that follows committed formation changes into later battles
-- [x] Required knockout replacements preserving Health, effects and reusable card slots without bonus draws or Mana costs; ability-driven swaps shuffle incoming kits into Draw
-- [x] Persistent Health and knockouts between battles; defeat requires the entire roster to fall
-- [x] Optional Campfire recovery for the whole roster, including knocked-out creatures
-- [x] Independently rolled Recruit and Boon Merchant destinations at equal frequency, with open-roster and affordability criteria, saved three-Boon shelves, purchase rewards, fresh destinations after Merchant rooms and direct recruitment
-- [x] Shared Victory screen for recruitment followed by intermediate-boss Boons when available
-- [x] Final victory, defeat and return-home results with retained permanent earnings
+| Area                 | Implemented scope                                                                                                                          | Rules and ownership                                                           |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------- |
+| Journeys             | Eight encounters, recruitment, five-creature roster, ordinary/Legendary deployment, persistent Health and optional support visits          | [Journey design](EXPEDITION_DESIGN.md)                                        |
+| Combat               | Shared deck, targeting, statuses, forecasts, overflow, required replacements, generated cards and Legendary Minions                        | [Keywords](KEYWORDS.md), [Architecture](ARCHITECTURE.md)                      |
+| Progression          | Collection, six passive tiers, shared keyword XP/talents, permanent Gold and journey Boons                                                 | [Content and catalogs](CONTENT.md)                                            |
+| Presentation         | Illustrated ArtCards, inspection, combat motion/feedback, accessible mouse/keyboard/standard-controller flows and device-local preferences | [UI contracts](UI.md)                                                         |
+| Persistence/platform | Offline browser/Electron saves, validated backups, graceful close, optional Steam/Cloud adapters and Windows package checks                | [Architecture](ARCHITECTURE.md), [Release](RELEASE.md)                        |
+| Development          | Isolated worktrees, locked integration, media preparation, audits, replay/balance/performance tools and full hosted verification           | [Contributing](../CONTRIBUTING.md), [Development tools](DEVELOPMENT_TOOLS.md) |
 
-Rules: [journey progression](EXPEDITION_DESIGN.md)
-
-## Done: cards and combat
-
-- [x] One shared deck, with three unique abilities contributed by each ordinary deployed creature and two copies of each ability for a Legendary
-- [x] Exactly 1 base Mana per ability; four shared Mana and four draws each turn; six-card hand
-- [x] Draw/discard recycling and an ordered overflow buffer that fills opened hand slots and survives turn changes
-- [x] Targeted and team-wide actions, healing, defense, utility and card-driven swaps
-- [x] Physical, Burn, Poison, Bleed, Freeze, Stun, Nature, Light and Water damage mechanics
-- [x] Block, Armor, Dodge, critical hits, Blind, Leech, Thorns, Water Thorns, Cleanse and Purge
-- [x] Crowd-control windows and immunity, plus Death's Door protection against fatal damage
-- [x] Ordinary enemies use species abilities without immediate repeats; upcoming actions remain hidden for all enemies
-- [x] Target forecasts for Health damage, absorbed damage, Block, statuses and lethal outcomes
-- [x] Inspectable draw/discard piles without exposing draw order
-- [x] Optional Auto-end turn and per-battle Auto-play, paused by menus, inspection and loss of focus
-- [x] Deterministic seeded outcomes, atomic rewards and rejected commands that preserve state and randomness
-- [x] Battle-only generated cards with bounded growth, persistent overflow and current-format save/resume
-- [x] Legendary enemy decks and Mana, plus battle-owned Minions with summoner-bound lifetimes
-
-Rules: [keywords](KEYWORDS.md), [architecture](ARCHITECTURE.md)
-
-## Done: collection and permanent progression
-
-- [x] Twenty-four creature species and seventy-two unique base abilities, plus Memento’s generated Pearl
-- [x] Mossguard, Emberback, Pollenmoth, Prismram and Captoad
-- [x] Dunefox, Reedstag, Cindernewt, Coralcurl and Chimecricket
-- [x] Dawncall, Bloomquail, Shadebrim, Ringpalm and Glintstride
-- [x] Wickwaltz, Sternshell, Neradora, Stillara and Cadenza
-- [x] Rookhaven, Euphera, Tournelle and the Legendary Memento
-- [x] Six distinct passive tiers per species, from zero to five stars, improved through permanent recruitment counts
-- [x] Collection browsing with artwork, the active passive, all three base abilities and permanent progress stars
-- [x] Separate encountered and recruited discovery records; recruitment determines the collected roster
-- [x] Shared permanent keyword XP earned through accepted plays and banked on victory, defeat or return home
-- [x] Fifteen talent categories with 135 distinct talents, row unlocks and immediate effects
-- [x] Free category-wide talent resets that refund points while retaining XP
-- [x] Permanent Gold retained between journeys and spendable at Merchants
-- [x] Eighteen journey Boons shared between boss rewards and Merchants, with owned-Boon inspection
-
-Catalogs: [content](CONTENT.md), [progression](EXPEDITION_DESIGN.md)
-
-## Done: presentation, controls and settings
-
-- [x] Production creature and action illustrations; prepared portraits for Boons and talent categories
-- [x] Landscape creature and portrait action ArtCards, with names and rules outside the artwork
-- [x] Hover/focus rules, keyword explanations and out-of-battle pinned inspection with the active passive, progress stars and ability browsing
-- [x] Visible targeting, unavailable-action feedback, Health/status readouts and knockout states
-- [x] Combat numbers and impacts, hand draw/discard flights, swap motion and Campfire recovery feedback
-- [x] Reduced-motion support and visible outcomes that remain understandable with sound muted
-- [x] Mouse, keyboard and standard controller navigation, accessible names, modal focus and focus return
-- [x] Paginated collection, talent and roster browsing with responsive artwork profiles and layout coverage from 1280×720
-- [x] Separate text and tooltip sizing preferences
-- [x] Recorded combat/interface effects, menu/combat/boss music, volume controls, Sound toggle and background mute
-- [x] Display, Sound and Battle settings; native Windowed and Fullscreen modes on desktop
-
-Design: [UI and required review](UI.md), [menus](MENU_DESIGN.md)
-
-## Done: saves and desktop foundation
-
-- [x] Offline browser play and an Electron desktop shell with separate save profiles
-- [x] Automatic saves after accepted commands, two backups, current-format validation and silent recovery/retries
-- [x] Serialized writes and graceful desktop close that drains admitted saves
-- [x] Device-local preferences and bounded internal diagnostics separate from progression
-- [x] Optional Steam runtime, account isolation, overlay pause and Cloud reconciliation adapters
-- [x] Windows x64 packaging configuration, package-integrity checks and hardened desktop boundaries
-
-Steam adapters still need Fauna's own App ID, external setup and live qualification. Packaging infrastructure does not establish installer, signing, Steam or hardware acceptance. See [release readiness](RELEASE.md).
-
-## Done: development and verification tools
-
-- [x] Isolated worktrees, task previews and locked local integration
-- [x] Content validation, architecture/UI contracts, unused-code checks and documentation checks
-- [x] Manifest-driven immutable media preparation, output integrity checks and active-media build budgets
-- [x] Artwork comparisons/contact sheets and a Sound desk for audio review
-- [x] Seeded headless journeys, replay, paired balance reports and ranked balance findings
-- [x] Focused browser routes, interaction replay and reproducible performance captures
-- [x] Unit/DOM and browser journey suites; CI orchestration for full checks, browser shards and Windows packaged smoke
-- [x] Release identity/artifact verification and player-facing patch-note draft generation
-
-Tools: [development tools](DEVELOPMENT_TOOLS.md), [verification policy](../CONTRIBUTING.md#verification)
+Catalogs own current creature, ability, talent and Boon counts. Implemented adapters and passing automation do not establish live Steam or hardware acceptance.
 
 ## Next: finish and validate the current experience
 
-These are known completion needs before substantial expansion:
+Before substantial expansion:
 
-- [ ] **Balance the complete journey:** playtest starter strength, team combinations, passive ranks, talents, Boons, Merchant value and Campfire recovery and optional-event frequency against clear difficulty and journey-length goals; the [first pass](archive/JOURNEY_BALANCE.md) curates solo starters and records the remaining attrition problems
-- [ ] **Finish encounter and support artwork:** replace remaining placeholders through the prepared-media workflow and review them in the actual screens
-- [ ] **Approve media and audio:** confirm source rights, track/effect selections, relative volumes and long-session listening comfort
-- [ ] **Qualify rendered flows:** inspect exact-commit CI evidence for the complete journey, minimum viewport, enlarged text, tooltips and keyboard/controller navigation
-- [ ] **Qualify Windows and physical controllers:** test the unsigned Steam candidate on clean Windows, save/resume, display changes and controller disconnect/reconnect
-- [ ] **Complete Steam setup and live testing:** configure Fauna's App/depot, App ID and Cloud quota; verify overlay, account switching, offline divergence and recovery on two devices
-- [ ] **Qualify Steam Deck:** test handheld readability, bindings, sleep/resume, offline launch and performance through the intended distribution path
-- [ ] **Prepare release material:** finalize store assets, Steam depot acceptance and privacy/crash-reporting decisions; qualify the optional signed installer only if that distribution path is selected
+- [ ] Balance the complete journey against clear difficulty and duration goals, including starter/team strength, ranks, talents, Boons and support-visit value; use the [first balance pass](archive/JOURNEY_BALANCE.md) as historical evidence
+- [ ] Replace remaining encounter/support artwork placeholders and inspect them in play
+- [ ] Approve source rights, artwork/audio selections, mix and long-session listening comfort
+- [ ] Qualify current rendered flows, Windows, physical controllers, live Steam/two-device Cloud and Steam Deck through the [release checklist](RELEASE_QUALIFICATION.md)
+- [ ] Finalize store material, distribution and privacy/support decisions under [release readiness](RELEASE.md)
 
-These remain open until their own acceptance evidence is recorded. This inventory does not claim those gates have passed.
+These remain open until their own evidence is recorded. The release guide owns the detailed platform/setup requirements.
 
 ## Suggested future features
 

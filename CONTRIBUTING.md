@@ -8,11 +8,9 @@
 2. Implement the task and inspect `npm run review:diff`. For UI work, follow the [UI task procedure](Docs/UI.md#required-review). Run focused checks during development when useful
 3. Commit task-owned paths. Close task-owned preview processes. Run `npm run finish` from the task checkout; it finds main and reuses recorded extra regression suites. `npm run integrate -- <branch>` remains available from main
 
-Integration is the single required final local gate. It holds the shared lock, incorporates current main, verifies the combined result and advances clean main only after success. A separate full changed-file check immediately before integration is unnecessary. Early checks are optional diagnostics; results are not cached. This avoids both duplicate required gates and persistent cache invalidation machinery.
+Integration incorporates current main, verifies the combined result under the shared lock and advances clean main only after success. No separate pre-integration gate is required; early checks are optional and results are never cached. It retains the task checkout, branch and evidence, updates the recorded base and clears completed extra-test selections.
 
-Integration uses an OS file lock with owner diagnostics and automatic release on process exit. A busy lock waits up to 30 seconds; retry after its bounded wait without disturbing the owner. Dirty main, unfinished Git operations, failed checks and ambiguous conflicts preserve task work. Resolve understood conflicts in the task checkout and retry. Integration retains the task checkout, branch and evidence at their original paths. On success it advances the recorded base and clears completed extra test selections. Optional cleanup is a separate operation that archives ignored evidence before removing eligible clean merged tasks. Other unfinished tasks do not block completion.
-
-[Worktree operations](scripts/README.md#worktree-operations) covers dependency sharing, recovery, archives and optional cleanup. Normal local commands prepare missing or mismatched dependencies automatically. `npm run deps` remains the explicit repair command and safely detaches a shared dependency link before installing.
+A busy lock waits up to 30 seconds; retry without disturbing its owner. Dirty main, unfinished Git operations, failed checks and ambiguous conflicts preserve task work. Resolve understood conflicts in the task checkout and retry. [Worktree operations](scripts/README.md#worktree-operations) explains dependency sharing, lock diagnostics and optional cleanup; unrelated unfinished tasks do not block completion. Normal commands prepare dependencies automatically; `npm run deps` repairs them safely.
 
 ## Verification
 
@@ -45,9 +43,11 @@ Local completion requires final diff review, any required rendered evidence, tas
 
 ### Execution and evidence
 
-Focused verification and investigation needed for the task are authorized locally, including builds, named test suites and browser previews/captures. Use isolated profiles, run resource-heavy checks sequentially and close only owned processes. `verify:changed -- --diagnostic <mode>` bounds types, static checks, builds, named unit suites, browser routes and performance scenarios; [implementation details](scripts/README.md#task-check-implementation) are reference material.
+Local verification needed for the task is authorized regardless of suite breadth, including builds, named tests and focused browser previews/captures. Use isolated profiles and close only owned processes. Run one resource-heavy command at a time, one test worker, at most 2 GiB Node heap and a five-minute deadline per command. Split longer investigations or use [hosted CI](Docs/CI.md); a larger resource budget requires an explicit request.
 
-Local verification needed for the task is authorized regardless of suite breadth. Run one resource-heavy command at a time, use one test worker, cap Node heap at 2 GiB and give each command a five-minute deadline; split longer investigations or use [hosted CI](Docs/CI.md). Ordinary test, static, build, browser-test and verification entrypoints enforce these limits automatically through the shared command launcher. Nested commands share the outer deadline; CI retains its configured budgets and parallelism. The diagnostic launcher remains available for named investigations. A larger resource budget needs an explicit request; choosing more relevant tests within that budget does not. Hosted CI remains the default for packaging and extended matrices. CI pending does not block local completion; report actual coverage and relevant unverified platforms. Input fingerprints detect repository changes during checks; captures retain their own reproducible identity. No check result is cached.
+Ordinary test, static, build, browser-test and verification entrypoints enforce these limits through the shared launcher; nested commands share the outer deadline. `verify:changed -- --diagnostic <mode>` offers [bounded investigations](scripts/README.md#task-check-implementation). CI keeps its own budgets/parallelism and remains the default for packaging and extended matrices.
+
+Input fingerprints detect repository changes during checks; captures retain reproducible identities and no passing result is cached. CI pending does not block local completion. Report actual checks and relevant unverified platforms; only exact-commit results establish CI completion.
 
 ### Documentation scope
 

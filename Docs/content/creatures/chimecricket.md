@@ -14,6 +14,4 @@ Hush Dome gives each living deployed ally, including Chimecricket, one non-stack
 
 ## Artwork provenance and validation record
 
-These retained notes record source selection and verification at implementation time; they do not establish current rendered acceptance
-
-The unchanged landscape portrait (`05.png`) and three portrait ability PNGs come from the user's [Chimecricket Drive folder](https://drive.google.com/drive/folders/1kAT543t5YDsXpU-an5j9XeROepKrKPeX). Each original file URL is recorded in the asset manifest. The shared preparation pipeline retains native 4:3 creature and 3:4 action compositions. Source artwork was visually inspected; in-game rendered review remains pending.
+The unchanged landscape portrait (`05.png`) and three portrait ability PNGs come from the user's [Chimecricket Drive folder](https://drive.google.com/drive/folders/1kAT543t5YDsXpU-an5j9XeROepKrKPeX). Each original file URL is recorded in the asset manifest. Source artwork was visually inspected; in-game rendered review remains pending.
