@@ -1,4 +1,4 @@
-import { authoredPack, swapFixture } from "../../support/game";
+import { authoredPack, swapFixture, addBackups } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, FIRST_RUN_STARTERS, definition, species } from "../../../src/game/content";
@@ -269,7 +269,7 @@ it.each(["knocked out", "backup"])("a %s Rookhaven supplies no copies", (mode) =
   const game = produce(ready(), (draft) => {
     if (mode === "knocked out") draft.team[0]!.health = 0;
     else {
-      draft.reserves.push({
+      addBackups(draft, {
         id: "backup",
         species: "emberback",
         health: species("emberback").health,
@@ -313,7 +313,7 @@ it("copies survive play, discard, reshuffle, save/resume and copying a previousl
   roundTrip(game);
 });
 it.each([false, true])(
-  "swaps preserve copy ownership, definitions and zones (card-driven %s)",
+  "swaps retire outgoing copies and preserve permanent slots (card-driven %s)",
   (fromCard) => {
     const game = produce(ready(), (draft) => {
       draft.battle!.draw.sort(
@@ -322,7 +322,7 @@ it.each([false, true])(
           Number(draft.cards.find((card) => card.id === b)!.ownerId === "ally-0"),
       );
       draw(draft, 1);
-      draft.reserves.push({
+      addBackups(draft, {
         id: "backup",
         species: "sternshell",
         health: 32,
@@ -335,10 +335,19 @@ it.each([false, true])(
     const next = produce(game, (draft) => {
       swapBackup(draft, "ally-0", "backup", [], fromCard);
     });
-    expect(copies(next)[0]).toMatchObject({ id: copied.id, ownerId: "backup", temporary: true });
-    expect(definition(copies(next)[0]!.definitionId).species).toBe("sternshell");
-    if (fromCard) expect(next.battle!.draw).toContain(copied.id);
-    else expect(next.battle!.hand).toEqual(game.battle!.hand);
+    expect(next.cards.some((card) => card.id === copied.id)).toBe(false);
+    for (const zone of ["hand", "draw", "buffer", "discard"] as const)
+      expect(next.battle![zone]).not.toContain(copied.id);
+    const kit = next.cards.filter((card) => card.ownerId === "backup");
+    expect(kit).toHaveLength(3);
+    expect(
+      kit.every((card) => !card.temporary && definition(card.definitionId).species === "sternshell"),
+    ).toBe(true);
+    const retained = game.battle!.hand.filter((id) => {
+      const card = game.cards.find((entry) => entry.id === id)!;
+      return id !== copied.id && (!fromCard || card.ownerId !== "ally-0");
+    });
+    expect(next.battle!.hand.slice(0, retained.length)).toEqual(retained);
     roundTrip(next);
   },
 );
@@ -417,7 +426,7 @@ it("defeat clears copies before publishing the saved result", () => {
 
 it("keeps the battle card limit and a saveable hand when deploying into a copy-filled formation", () => {
   const game = produce(teamRun(1, ["rookhaven", "mossguard"]), (draft) => {
-    draft.reserves.push({
+    addBackups(draft, {
       id: "backup",
       species: "prismram",
       health: species("prismram").health,

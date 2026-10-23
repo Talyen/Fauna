@@ -1,5 +1,5 @@
 import type { GameEvent } from "../../../src/game/types";
-import { authoredPack, swapFixture } from "../../support/game";
+import { authoredPack, swapFixture, addBackups } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, FIRST_RUN_STARTERS, species } from "../../../src/game/content";
@@ -27,7 +27,7 @@ function play(game: GameState, autoEndTurn = false) {
   return dispatch(game, { type: "play", cardId: game.battle!.hand[0]!, autoEndTurn });
 }
 function addBackup(game: GameState) {
-  game.reserves.push({
+  addBackups(game, {
     id: "backup",
     species: "coralcurl",
     health: 20,
@@ -46,7 +46,9 @@ it("registers the support kit, recruitment, preview parity and current saves", (
   expect(kit.map(definitionKeywords)).toEqual([["mana"], ["health"], ["health"]]);
   expect(FIRST_RUN_STARTERS).not.toContain("stillara");
   for (const ability of ["reed-reservoir", "thaw-path", "water-remembers"]) {
-    const game = ready(ability);
+    const game = produce(ready(ability), (draft) => {
+      draft.battle!.mana = 1;
+    });
     const before = encodeSave(game);
     const result = play(game);
     expect(result.accepted).toBe(true);
