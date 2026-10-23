@@ -68,6 +68,7 @@ it(
       expect(failure.status).not.toBe(0);
       expect(failure.stdout).toContain("Cleanup failed for task/archive");
       expect(readFileSync(path.join(archived.path, "reports/evidence.json"), "utf8")).toBe("{}");
+      rmSync(path.join(directory, ".git/fauna-integration.lock"));
       mkdirSync(path.join(directory, ".git/fauna-integration.lock"));
       expect(cleanup().status).not.toBe(0);
     } finally {

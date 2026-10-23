@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { describe, it, expect } from "vitest";
-import { sourceViolations } from "../../../scripts/checks/ui-contract.mjs";
+import { sourceViolations, registryViolations } from "../../../scripts/checks/ui-contract.mjs";
 
 describe("design-system enforcement", () => {
   it("leaves bounded scrolling and reachability to the rendered layout contract", () => {
@@ -216,4 +216,24 @@ it("allows color-like player copy and nonactivating container handlers", () => {
     '<div style={enabled ? { color: "red" } : { color: "var(--foreground)" }} />',
   ])
     expect(sourceViolations("src/ui/example.tsx", source)).not.toEqual([]);
+});
+
+it("records provenance independently of primitive comments and parses CSS values without confusing content for rules", () => {
+  expect(registryViolations()).toEqual([]);
+  expect(registryViolations({ button: { dependency: "@radix-ui/react-slot" } })).not.toEqual([]);
+  expect(
+    sourceViolations(
+      "src/components/ui/button.tsx",
+      `import { Slot } from "@radix-ui/react-slot"; export const Button = Slot;`,
+    ),
+  ).toEqual([]);
+  expect(
+    sourceViolations(
+      "src/ui/example.css",
+      `.label::after { content: "a; color: #fff; font-size: 2px; } .ui-tab {"; color: var(--foreground); }`,
+    ),
+  ).toEqual([]);
+  expect(
+    sourceViolations("src/ui/example.css", `@media (width > 100px) { .label { color: #fff } }`),
+  ).not.toEqual([]);
 });

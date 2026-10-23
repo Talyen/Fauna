@@ -57,7 +57,13 @@ export async function investigate(
       preview = await start({ root, preview: { host: "127.0.0.1", port: 0, strictPort: true, open: false } });
       env.FAUNA_TEST_URL = `http://127.0.0.1:${preview.httpServer.address().port}`;
     }
-    const result = await runner(command, commandArgs, { cwd: root, stdio: "inherit", timeout: 300_000, env });
+    const result = await runner(command, commandArgs, {
+      cwd: root,
+      stdio: "inherit",
+      timeout: 300_000,
+      env,
+      grouped: process.env.FAUNA_COMMAND_BUDGET !== "1",
+    });
     if (result.error) console.error(`Bounded investigation could not finish: ${result.error.message}`);
     return result.error ? 1 : (result.status ?? 1);
   } finally {

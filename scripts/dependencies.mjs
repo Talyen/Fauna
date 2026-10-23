@@ -7,9 +7,27 @@ import { npmCommand } from "./lib/npm-command.mjs";
 
 export function dependenciesAvailable(root) {
   const manifest = JSON.parse(readFileSync(path.join(root, "package.json"), "utf8"));
+  const lockFile = path.join(root, "package-lock.json");
+  const locked = existsSync(lockFile) ? (JSON.parse(readFileSync(lockFile, "utf8")).packages ?? {}) : {};
   return Object.keys({ ...manifest.dependencies, ...manifest.devDependencies })
     .filter((name) => !Object.hasOwn(manifest.optionalDependencies ?? {}, name))
-    .every((name) => existsSync(path.join(root, "node_modules", name, "package.json")));
+    .every((name) => {
+      const installed = path.join(root, "node_modules", name, "package.json");
+      return (
+        existsSync(installed) &&
+        (!locked[`node_modules/${name}`]?.version ||
+          JSON.parse(readFileSync(installed, "utf8")).version === locked[`node_modules/${name}`].version)
+      );
+    });
+}
+
+export function ensureDependencies(root, options = {}) {
+  if (!existsSync(path.join(root, "package.json"))) return 0;
+  const modules = path.join(root, "node_modules");
+  const linked = lstatSync(modules, { throwIfNoEntry: false })?.isSymbolicLink();
+  if (linked) return installDependencies(root, { ...options, quiet: true });
+  if (dependenciesAvailable(root)) return 0;
+  return installDependencies(root, options);
 }
 
 export function matchingDependencies(left, right) {
@@ -58,7 +76,10 @@ export function matchingDependencies(left, right) {
   }
 }
 
-export function installDependencies(root, { runner = spawnSync, log = console.log, env = process.env } = {}) {
+export function installDependencies(
+  root,
+  { runner = spawnSync, log = console.log, env = process.env, quiet = false } = {},
+) {
   root = realpathSync(root);
   const modules = path.join(root, "node_modules");
   const linked = lstatSync(modules, { throwIfNoEntry: false })?.isSymbolicLink();
@@ -70,7 +91,7 @@ export function installDependencies(root, { runner = spawnSync, log = console.lo
     if (existsSync(modules) && realpathSync(modules) !== realpathSync(path.join(main, "node_modules")))
       throw new Error("Dependency link has an unexpected owner; preserved it.");
     if (existsSync(modules) && matchingDependencies(root, main) && dependenciesAvailable(root)) {
-      log("Shared dependencies match; no installation needed.");
+      if (!quiet) log("Shared dependencies match; no installation needed.");
       return 0;
     }
     // Remove the task's link itself, never the linked checkout's dependency directory.
@@ -84,7 +105,12 @@ export function installDependencies(root, { runner = spawnSync, log = console.lo
     pinned && running !== pinned ? ["exec", "--yes", `--package=npm@${pinned}`, "--", "npm", "ci"] : ["ci"],
     env,
   );
-  const result = runner(command, args, { cwd: root, stdio: "inherit", env });
+  const result = runner(command, args, {
+    cwd: root,
+    stdio: "inherit",
+    env,
+    ...(env.CI !== "true" ? { timeout: 300_000, killSignal: "SIGTERM" } : {}),
+  });
   if (result.error) log(result.error.message);
   return result.status ?? 1;
 }

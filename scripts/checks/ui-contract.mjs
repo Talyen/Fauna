@@ -3,12 +3,10 @@ import path from "node:path";
 import registry from "./shadcn-registry.json" with { type: "json" };
 import { pathToFileURL } from "node:url";
 import { parseSync } from "@swc/core";
+import postcss from "postcss";
 
 const primitives = new Map(
-  Object.entries(registry).map(([name, dependency]) => [
-    `src/components/ui/${name}.tsx`,
-    { name, dependency },
-  ]),
+  Object.entries(registry).map(([name, entry]) => [`src/components/ui/${name}.tsx`, { name, ...entry }]),
 );
 const rawControls = new Set([
   "button",
@@ -71,24 +69,26 @@ export function sourceViolations(file, source) {
   const controls = () => fail("Use shared shadcn control primitives instead of raw controls.");
 
   if (file.endsWith(".css")) {
-    const css = source.replace(/\/\*[\s\S]*?\*\//g, "");
-    if (file !== "src/ui/tokens.css") {
-      for (const [, property, raw] of css.matchAll(/(?:^|[;{])\s*([-\w]+)\s*:\s*([^;{}]+)/g)) {
-        const value = paintValue(raw);
+    const css = postcss.parse(source, { from: file });
+    css.walkDecls((declaration) => {
+      const { prop: property, value: raw } = declaration;
+      const value = paintValue(raw);
+      if (file !== "src/ui/tokens.css") {
         if (cssPaintProperty.test(property) && embeddedColor.test(value)) colors();
         if (cssPaintProperty.test(property) && namedColor.test(value.trim()))
           fail("Use semantic theme tokens instead of named color literals.");
+        if (property === "font-size" && /^[\d.]/.test(value)) fail("Use the shared typography tokens.");
+        if (property === "border-radius" && /^[\d.]/.test(value)) fail("Use the shared radius token.");
       }
-      if (/font-size\s*:\s*(?!var\()[\d.]/.test(css)) fail("Use the shared typography tokens.");
-      if (/border-radius\s*:\s*(?!var\(|inherit)[\d.]/.test(css)) fail("Use the shared radius token.");
-    }
-    if (file !== "src/ui/design-system.css") {
-      if (/\.ui-(?:tab|switch|slider|radio)\b/.test(css))
-        fail("Shared shadcn state styling belongs in src/ui/design-system.css; screens own layout only.");
-      for (const [, selector, declarations] of css.matchAll(/([^{}]+)\{([^{}]*)\}/g))
-        if (/\.control-primary\b/.test(selector) && /(?:^|;)\s*color\s*:/.test(declarations))
-          fail("Primary control foreground belongs in src/ui/design-system.css.");
-    }
+      const selector = declaration.parent.type === "rule" ? declaration.parent.selector : "";
+      if (file !== "src/ui/design-system.css" && /\.control-primary\b/.test(selector) && property === "color")
+        fail("Primary control foreground belongs in src/ui/design-system.css.");
+    });
+    if (file !== "src/ui/design-system.css")
+      css.walkRules((rule) => {
+        if (/\.ui-(?:tab|switch|slider|radio)\b/.test(rule.selector))
+          fail("Shared shadcn state styling belongs in src/ui/design-system.css; screens own layout only.");
+      });
     return [...violations];
   }
   if (!/\.tsx?$/.test(file)) return [];
@@ -191,17 +191,24 @@ export function sourceViolations(file, source) {
   visit(parseSync(source, { syntax: "typescript", tsx: file.endsWith(".tsx"), target: "es2022" }));
   if ([...radixImports].some((dependency) => dependency !== primitive?.dependency))
     fail("Compose Radix through its registered source-owned shadcn primitive.");
-  if (
-    primitive &&
-    (!source.includes(`https://ui.shadcn.com/r/styles/new-york/${primitive.name}.json`) ||
-      !radixImports.has(primitive.dependency))
-  )
-    fail("Retain the registered shadcn provenance and upstream behavior owner.");
+  if (primitive && !radixImports.has(primitive.dependency))
+    fail("Retain the registered upstream behavior owner.");
   return [...violations];
 }
 
+export function registryViolations(entries = registry) {
+  return Object.entries(entries).flatMap(([name, entry]) =>
+    entry &&
+    typeof entry.dependency === "string" &&
+    entry.dependency.startsWith("@radix-ui/") &&
+    entry.source === `https://ui.shadcn.com/r/styles/new-york/${name}.json`
+      ? []
+      : [`${name}: Record the upstream shadcn source and Radix behavior owner in the primitive registry.`],
+  );
+}
+
 async function check() {
-  const violations = [];
+  const violations = registryViolations();
   async function inspect(directory) {
     for (const entry of await readdir(directory, { withFileTypes: true })) {
       const file = path.posix.join(directory, entry.name);
