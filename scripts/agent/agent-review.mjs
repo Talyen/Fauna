@@ -52,14 +52,43 @@ export function inventory(root, base = "HEAD") {
   }
   return entries;
 }
+
+function netInventory(root, base) {
+  const fields = reviewGit(root, ["diff", "--name-status", "-z", "--find-renames", base, "--"]).split("\0");
+  const entries = [];
+  for (let i = 0; i < fields.length && fields[i];) {
+    const status = fields[i++];
+    const from = fields[i++];
+    const renamed = /^[RC]/.test(status);
+    entries.push({ status, file: renamed ? fields[i++] : from, ...(renamed ? { from } : {}) });
+  }
+  for (const file of reviewGit(root, ["ls-files", "--others", "--exclude-standard", "-z"])
+    .split("\0")
+    .filter(Boolean))
+    entries.push({ status: "??", file });
+  return entries;
+}
 export function review(
   root,
   inputs = [],
-  { status = false, summary = false, budget = 12000, base: requestedBase } = {},
+  { status = false, summary = false, layers = false, budget = 48000, base: requestedBase } = {},
 ) {
   const paths = selectPaths(root, inputs);
   const base = taskBase(root, requestedBase);
-  const all = inventory(root, base);
+  const all = layers ? inventory(root, base) : netInventory(root, base);
+  if (!layers && paths.length) {
+    const history = inventory(root, base);
+    for (const entry of all) {
+      const related = history.filter((item) =>
+        [item.file, item.from, ...(item.names ?? [])]
+          .filter(Boolean)
+          .some((name) => name === entry.file || name === entry.from),
+      );
+      entry.names = [
+        ...new Set(related.flatMap((item) => [item.file, item.from, ...(item.names ?? [])]).filter(Boolean)),
+      ];
+    }
+  }
   const selected = all.filter(
     (entry) =>
       !paths.length ||
@@ -85,8 +114,10 @@ export function review(
     };
   }
   const patches = selected.map((entry) => {
-    const names = entry.names ?? [entry.file, entry.from].filter(Boolean);
-    const committed = reviewGit(root, ["diff", "--binary", base, "HEAD", "--", ...names]);
+    const names = layers
+      ? (entry.names ?? [entry.file, entry.from].filter(Boolean))
+      : [entry.file, entry.from].filter(Boolean);
+    const committed = layers ? reviewGit(root, ["diff", "--binary", base, "HEAD", "--", ...names]) : "";
     if (entry.status === "??") {
       const file = path.join(root, entry.file);
       if (lstatSync(file).isSymbolicLink())
@@ -104,11 +135,14 @@ export function review(
     }
     return {
       ...entry,
-      patch: [
-        committed,
-        reviewGit(root, ["diff", "--cached", "--binary", "--", ...names]),
-        reviewGit(root, ["diff", "--binary", "--", ...names]),
-      ].join("\n"),
+      patch: (layers
+        ? [
+            committed,
+            reviewGit(root, ["diff", "--cached", "--binary", "--", ...names]),
+            reviewGit(root, ["diff", "--binary", "--", ...names]),
+          ]
+        : [reviewGit(root, ["diff", "--binary", "--find-renames", base, "--", ...names])]
+      ).join("\n"),
     };
   });
   const directory = path.join(root, "reports", "agent-diff", randomUUID());
@@ -158,7 +192,9 @@ export function main(args = process.argv.slice(2)) {
     } else remaining.push(args[i]);
   }
   const flags = new Set(
-    remaining.filter((arg) => ["--status", "--summary", "--json", "--working-tree", "--diff"].includes(arg)),
+    remaining.filter((arg) =>
+      ["--status", "--summary", "--json", "--working-tree", "--diff", "--layers"].includes(arg),
+    ),
   );
   if ((flags.has("--working-tree") || flags.has("--diff")) && base)
     throw new Error("Choose --base or --working-tree.");
@@ -166,18 +202,19 @@ export function main(args = process.argv.slice(2)) {
   const paths = remaining.filter((arg) => !flags.has(arg) && arg !== "--");
   if (paths.some((arg) => arg.startsWith("--")))
     throw new Error(
-      "Usage: review:diff -- [--status|--summary] [--json] [--base ref|--working-tree] [paths]",
+      "Usage: review:diff -- [--status|--summary] [--json] [--layers] [--base ref|--working-tree] [paths]",
     );
   const result = review(ROOT, paths, {
     status: flags.has("--status"),
     summary: flags.has("--summary"),
+    layers: flags.has("--layers"),
     base,
   });
   if (flags.has("--json"))
     console.log(JSON.stringify({ ...result, inventory: undefined, selected: undefined }));
   else
     console.log(
-      `Selection base: ${result.base}\n${result.preview}\n${result.omittedCharacters ? `Omitted ${result.omittedCharacters} characters; read the remaining patches before completing review.\n` : ""}Full inventory and patch ranges: ${result.indexPath}\nFull patches: ${result.patches ?? "not collected in status mode"}`,
+      `Selection base: ${result.base}; ${flags.has("--layers") ? "committed/staged/unstaged layers" : "net task change"}\n${!result.selected.length ? "EMPTY REVIEW: no net changed files selected. No patch was reviewed.\n" : ""}${result.preview}\n${result.omittedCharacters ? `Omitted ${result.omittedCharacters} characters; read the remaining patches before completing review.\n` : ""}Full inventory and patch ranges: ${result.indexPath}\nFull patches: ${result.patches ?? "not collected in status mode"}`,
     );
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) main();

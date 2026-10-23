@@ -3,6 +3,10 @@ import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, symlinkSyn
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
+import { createHash } from "node:crypto";
+import net from "node:net";
+import { taskIntent, recordTaskIntent } from "../../../scripts/lib/task-intent.mjs";
+import { runLocal } from "../../../scripts/local.mjs";
 import { selectedPaths, parseCheckArgs, runCheck } from "../../../scripts/checks/check.mjs";
 import { verificationIdentity } from "../../../scripts/checks/input-identity.mjs";
 import { taskContext } from "../../../scripts/agent/agent-context.mjs";
@@ -64,7 +68,7 @@ it("defaults check and review to committed task work without importing concurren
   git(root, "add", "README.md");
   put(root, "README.md", "# Working task\n");
   put(root, "new.md", "# New\n");
-  const patch = readFileSync(review(root).patches, "utf8");
+  const patch = readFileSync(review(root, [], { layers: true }).patches, "utf8");
   for (const value of ["Committed task", "Staged task", "Working task", "# New"])
     expect(patch).toContain(value);
   expect(selectedPaths(root, parseCheckArgs([])).sort()).toEqual(["README.md", "new.md"]);
@@ -113,7 +117,8 @@ it("retains committed renames/deletions and literal unusual paths in task review
   git(root, "mv", unusual, finalName);
   put(root, finalName, "# Working rename\n");
   const renamed = readFileSync(review(root, ["README.md"]).patches, "utf8");
-  expect(renamed).toContain("rename from README.md");
+  expect(renamed).toContain("README.md");
+  expect(renamed).toContain("final.md");
   expect(renamed).toContain("+# Working rename");
 });
 
@@ -258,33 +263,37 @@ it("prepares required review conditions and rejects ambiguous, unsupported or re
     expect(() => reviewOptions(args)).toThrow();
 });
 
-it("runs one final combined gate with added regressions and preserves the clean-main guard", async () => {
-  const root = fixture();
-  const task = createWorktree(root, "final-gate");
-  put(task.path, "README.md", "# Verified task\n");
-  const suite = "tests/unit/regression.test.mjs";
-  put(task.path, suite, "export {};\n");
-  git(task.path, "add", ".");
-  git(task.path, "commit", "-qm", "task");
-  const runner = vi.fn(() => ({ status: 0 }));
-  const launch = vi.fn((_command, args) => ({
-    status: runCheck(args.slice(args.indexOf("--") + 1), { root: task.path, runner, log: () => {} }),
-  }));
-  put(root, "unfinished.md", "unrelated\n");
-  await expect(
-    integrate(root, task.branch, { runner: launch, log: () => {}, tests: [suite] }),
-  ).rejects.toThrow("unfinished work");
-  expect(launch).not.toHaveBeenCalled();
-  rmSync(path.join(root, "unfinished.md"));
-  await integrate(root, task.branch, { runner: launch, log: () => {}, tests: [suite] });
-  expect(launch).toHaveBeenCalledTimes(1);
-  const testRuns = runner.mock.calls.filter((call) => call[1][0].endsWith("vitest.mjs"));
-  expect(testRuns).toHaveLength(1);
-  expect(testRuns[0][1]).toContain(suite);
-  expect(git(root, "show", "HEAD:README.md")).toBe("# Verified task");
-});
+it(
+  "runs one final combined gate with added regressions and preserves the clean-main guard",
+  { timeout: 30_000 },
+  async () => {
+    const root = fixture();
+    const task = createWorktree(root, "final-gate");
+    put(task.path, "README.md", "# Verified task\n");
+    const suite = "tests/unit/regression.test.mjs";
+    put(task.path, suite, "export {};\n");
+    git(task.path, "add", ".");
+    git(task.path, "commit", "-qm", "task");
+    const runner = vi.fn(() => ({ status: 0 }));
+    const launch = vi.fn((_command, args) => ({
+      status: runCheck(args.slice(args.indexOf("--") + 1), { root: task.path, runner, log: () => {} }),
+    }));
+    put(root, "unfinished.md", "unrelated\n");
+    await expect(
+      integrate(root, task.branch, { runner: launch, log: () => {}, tests: [suite] }),
+    ).rejects.toThrow("unfinished work");
+    expect(launch).not.toHaveBeenCalled();
+    rmSync(path.join(root, "unfinished.md"));
+    await integrate(root, task.branch, { runner: launch, log: () => {}, tests: [suite] });
+    expect(launch).toHaveBeenCalledTimes(1);
+    const testRuns = runner.mock.calls.filter((call) => call[1][0].endsWith("vitest.mjs"));
+    expect(testRuns).toHaveLength(1);
+    expect(testRuns[0][1]).toContain(suite);
+    expect(git(root, "show", "HEAD:README.md")).toBe("# Verified task");
+  },
+);
 
-it("rejects CLI options that could narrow or bypass the final integration gate", () => {
+it("rejects CLI options that could narrow or bypass the final integration gate", { timeout: 30_000 }, () => {
   const root = fixture();
   const task = createWorktree(root, "no-bypass");
   const before = git(root, "rev-parse", "HEAD");
@@ -409,3 +418,142 @@ it("prints ordinary multiline patches while retaining bounded output and machine
   expect(bounded.preview + full.slice(20)).toBe(full);
   expect(bounded.omittedCharacters).toBe(full.length - 20);
 });
+
+it(
+  "keeps a recorded custom task base across branch renames and reports empty checks explicitly",
+  { timeout: 30_000 },
+  () => {
+    const root = fixture();
+    git(root, "checkout", "-qb", "feature/custom-base");
+    put(root, "feature.md", "base feature\n");
+    git(root, "add", ".");
+    git(root, "commit", "-qm", "feature base");
+    const base = git(root, "rev-parse", "HEAD");
+    recordTaskIntent(root, { base });
+    put(root, "task.md", "task change\n");
+    git(root, "add", ".");
+    git(root, "commit", "-qm", "task change");
+    git(root, "branch", "-m", "arbitrary-name");
+    expect(selectedPaths(root, parseCheckArgs([]))).toEqual(["task.md"]);
+    expect(review(root).selected.map((entry) => entry.file)).toEqual(["task.md"]);
+    const log = vi.fn();
+    const runner = vi.fn();
+    expect(runCheck(["--working-tree"], { root, runner, log })).toBe(0);
+    expect(runner).not.toHaveBeenCalled();
+    expect(log.mock.calls.flat().join(" ")).toContain("EMPTY CHECK");
+  },
+);
+
+it("includes committed work on an unregistered branch regardless of its prefix", { timeout: 30_000 }, () => {
+  const root = fixture();
+  git(root, "checkout", "-qb", "fix-without-prefix");
+  put(root, "README.md", "# Committed fix\n");
+  git(root, "add", ".");
+  git(root, "commit", "-qm", "fix");
+  expect(selectedPaths(root, parseCheckArgs([]))).toEqual(["README.md"]);
+});
+
+it(
+  "remembers extra regressions after failure and finishes from a renamed task checkout",
+  { timeout: 30_000 },
+  async () => {
+    const root = fixture();
+    const suite = "tests/unit/existing.test.mjs";
+    put(root, suite, "export {};\n");
+    git(root, "add", ".");
+    git(root, "commit", "-qm", "existing regression");
+    const task = createWorktree(root, "remember-tests");
+    put(task.path, "README.md", "# Task\n");
+    git(task.path, "add", ".");
+    git(task.path, "commit", "-qm", "task");
+    const initialBase = taskIntent(task.path).base;
+    const runner = vi.fn(() => ({ status: 1 }));
+    expect(runCheck(["--base", "HEAD", "--test", suite], { root: task.path, runner, log: () => {} })).toBe(1);
+    expect(taskIntent(task.path).tests).toEqual([suite]);
+    expect(taskIntent(task.path).base).toBe(initialBase);
+    expect(runCheck(["--plan", "--forget-test", suite], { root: task.path, runner, log: () => {} })).toBe(0);
+    expect(taskIntent(task.path).tests).toEqual([suite]);
+    git(task.path, "branch", "-m", "feature/renamed-task");
+    const launch = vi.fn(() => ({ status: 0 }));
+    await integrate(task.path, undefined, { runner: launch, log: () => {} });
+    expect(launch.mock.calls[0][1]).toContain(suite);
+    expect(selectedPaths(task.path, parseCheckArgs([]))).toEqual([]);
+    expect(git(root, "show", "HEAD:README.md")).toBe("# Task");
+    runner.mockReturnValue({ status: 0 });
+    runCheck(["--forget-test", suite], { root: task.path, runner, log: () => {} });
+    expect(taskIntent(task.path).tests).toEqual([]);
+  },
+);
+
+it("shows the final net change once and exposes reverted intermediate edits only on demand", () => {
+  const root = fixture();
+  git(root, "checkout", "-qb", "feature/review");
+  put(root, "README.md", "# Intermediate\n");
+  git(root, "add", ".");
+  git(root, "commit", "-qm", "intermediate");
+  put(root, "README.md", "# Final\n");
+  const result = review(root);
+  expect(result.preview).toContain("+# Final");
+  expect(result.preview).not.toContain("Intermediate");
+  expect(result.preview.match(/diff --git/g)).toHaveLength(1);
+  put(root, "unrelated.md", "unrelated change\n");
+  expect(review(root, ["README.md"]).selected.map((entry) => entry.file)).toEqual(["README.md"]);
+  rmSync(path.join(root, "unrelated.md"));
+  put(root, "README.md", "# Baseline\n");
+  expect(review(root).selected).toEqual([]);
+  expect(review(root, [], { layers: true }).preview).toContain("Intermediate");
+});
+
+it("enforces ordinary local command budgets while retaining CI parallelism and failing recipes early", async () => {
+  const root = fixture();
+  const runner = vi.fn(async () => ({ status: 0 }));
+  expect(await runLocal("test", ["--maxWorkers=8"], { root, env: {}, runner })).toBe(0);
+  const [, args, options] = runner.mock.calls[0];
+  expect(args.at(-2)).toBe("--maxWorkers=1");
+  expect(args.at(-1)).toBe("--no-file-parallelism");
+  expect(options.timeout).toBeGreaterThan(0);
+  expect(options.timeout).toBeLessThanOrEqual(300_000);
+  expect(options.env.NODE_OPTIONS).toMatch(/--max-old-space-size=2048$/);
+  runner.mockClear();
+  await runLocal("test", [], { root, env: { CI: "true" }, runner });
+  expect(runner.mock.calls[0][1]).not.toContain("--maxWorkers=1");
+  expect(runner.mock.calls[0][2].timeout).toBeUndefined();
+  runner.mockClear().mockResolvedValue({ status: 7 });
+  expect(await runLocal("build", [], { root, env: {}, runner })).toBe(7);
+  expect(runner).toHaveBeenCalledTimes(1);
+});
+
+it(
+  "migrates the old socket lock once and then ignores unrelated services on its former port",
+  { timeout: 45000 },
+  async () => {
+    const root = fixture();
+    put(root, "scripts/lib/integration-lock.mjs", "// previous integration entrypoint\n");
+    const common = git(root, "rev-parse", "--absolute-git-dir");
+    const port = 20000 + (createHash("sha256").update(common).digest().readUInt32BE(0) % 40000);
+    const unrelated = net.createServer();
+    const listen = () =>
+      new Promise((resolve, reject) => {
+        unrelated.once("error", reject);
+        unrelated.listen({ host: "127.0.0.1", port, exclusive: true }, resolve);
+      });
+    const close = () =>
+      new Promise((resolve, reject) => unrelated.close((error) => (error ? reject(error) : resolve())));
+    await listen();
+    try {
+      await expect(acquireIntegrationLock(root)).rejects.toThrow("one-time upgrade");
+    } finally {
+      await close();
+    }
+    const release = await acquireIntegrationLock(root);
+    await expect(acquireIntegrationLock(root)).rejects.toThrow("Integration lock is occupied");
+    await release();
+    await listen();
+    try {
+      const finish = await acquireIntegrationLock(root);
+      await finish();
+    } finally {
+      await close();
+    }
+  },
+);

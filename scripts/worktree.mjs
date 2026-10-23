@@ -3,6 +3,7 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { git, worktrees } from "./lib/git.mjs";
 import { matchingDependencies } from "./dependencies.mjs";
+import { recordTaskIntent, taskIntent } from "./lib/task-intent.mjs";
 
 export function createWorktree(root, slug, base = "main") {
   root = realpathSync(root);
@@ -19,6 +20,8 @@ export function createWorktree(root, slug, base = "main") {
   if (registered) {
     if (registered.branch !== `refs/heads/${branch}`)
       throw new Error("Existing task worktree has a different branch; preserve it.");
+    if (!taskIntent(target).base)
+      recordTaskIntent(target, { base: git(target, ["merge-base", "HEAD", base]).trim() });
     return {
       path: target,
       branch,
@@ -33,6 +36,7 @@ export function createWorktree(root, slug, base = "main") {
     throw new Error("Task branch already exists; inspect it before choosing another name.");
   mkdirSync(path.dirname(target), { recursive: true });
   git(root, ["worktree", "add", "-b", branch, target, commit]);
+  recordTaskIntent(target, { base: commit });
   let linked = false;
   if (matchingDependencies(root, target) && existsSync(path.join(root, "node_modules"))) {
     try {

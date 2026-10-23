@@ -3,7 +3,11 @@ import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, lstatSync,
 import path from "node:path";
 import os from "node:os";
 import { afterEach, expect, it, vi } from "vitest";
-import { installDependencies, matchingDependencies } from "../../../scripts/dependencies.mjs";
+import {
+  installDependencies,
+  matchingDependencies,
+  ensureDependencies,
+} from "../../../scripts/dependencies.mjs";
 import { createWorktree } from "../../../scripts/worktree.mjs";
 
 const roots = [];
@@ -113,4 +117,27 @@ it("uses the project's pinned npm without changing the global installation", () 
     "npm",
     "ci",
   ]);
+});
+
+it("prepares mismatched task links automatically while preserving main's install", () => {
+  const { main, task } = fixture();
+  writeFileSync(path.join(task, "package.json"), JSON.stringify({ dependencies: { example: "2" } }));
+  const runner = vi.fn(() => ({ status: 9 }));
+  expect(ensureDependencies(task, { runner, log: () => {} })).toBe(9);
+  expect(lstatSync(path.join(main, "node_modules")).isDirectory()).toBe(true);
+  expect(readFileSync(path.join(main, "node_modules/example/package.json"), "utf8")).toContain(
+    '"version":"1"',
+  );
+  expect(runner).toHaveBeenCalledOnce();
+});
+
+it("detects a stale owned installation against the resolved lockfile", () => {
+  const { main } = fixture();
+  writeFileSync(
+    path.join(main, "package-lock.json"),
+    JSON.stringify({ packages: { "node_modules/example": { version: "2" } } }),
+  );
+  const runner = vi.fn(() => ({ status: 7 }));
+  expect(ensureDependencies(main, { runner, log: () => {} })).toBe(7);
+  expect(runner).toHaveBeenCalledOnce();
 });

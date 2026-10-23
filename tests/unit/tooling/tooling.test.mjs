@@ -239,7 +239,7 @@ describe("isolated worktrees and protected integration", { timeout: 30_000 }, ()
       [
         "--input-type=module",
         "-e",
-        `import { acquireIntegrationLock } from ${JSON.stringify(module)}; await acquireIntegrationLock(${JSON.stringify(root)}); console.log("locked");`,
+        `import { acquireIntegrationLock } from ${JSON.stringify(module)}; await acquireIntegrationLock(${JSON.stringify(root)}); console.log("locked"); setInterval(() => {}, 1000);`,
       ],
       { stdio: ["ignore", "pipe", "pipe"] },
     );
@@ -258,6 +258,7 @@ describe("isolated worktrees and protected integration", { timeout: 30_000 }, ()
     }
     const release = await acquireIntegrationLock(root);
     await release();
+    rmSync(path.join(root, ".git/fauna-integration.lock"));
     mkdirSync(path.join(root, ".git/fauna-integration.lock"));
     await expect(acquireIntegrationLock(root)).rejects.toThrow("Legacy integration lock");
   });

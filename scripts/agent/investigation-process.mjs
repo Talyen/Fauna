@@ -1,24 +1,27 @@
 import { spawn, spawnSync } from "node:child_process";
 
 /** The deadline and cancellation own the entire command tree, including npm grandchildren. */
-export function runInvestigation(command, args, { timeout, ...options }) {
+export function runInvestigation(
+  command,
+  args,
+  { timeout, grouped = process.platform !== "win32", ...options },
+) {
   return new Promise((resolve) => {
-    const grouped = process.platform !== "win32";
-    const child = spawn(command, args, { ...options, detached: grouped });
+    const child = spawn(command, args, { ...options, detached: grouped && process.platform !== "win32" });
     let failure;
     let escalation;
     const kill = (signal) => {
       if (!child.pid) return;
-      if (!grouped) {
+      if (process.platform === "win32") {
         spawnSync("taskkill", ["/PID", String(child.pid), "/T", "/F"], { stdio: "ignore" });
         child.kill(signal);
-      } else {
+      } else if (grouped) {
         try {
           process.kill(-child.pid, signal);
         } catch (error) {
           if (error.code !== "ESRCH") throw error;
         }
-      }
+      } else child.kill(signal);
     };
     const stop = (reason) => {
       failure = reason;
@@ -28,7 +31,9 @@ export function runInvestigation(command, args, { timeout, ...options }) {
     const interrupted = () => stop(new Error("Investigation canceled."));
     process.once("SIGINT", interrupted);
     process.once("SIGTERM", interrupted);
-    const timer = setTimeout(() => stop(new Error("Investigation deadline exhausted.")), timeout);
+    const timer = timeout
+      ? setTimeout(() => stop(new Error("Command deadline exhausted.")), timeout)
+      : undefined;
     let spawnError;
     child.once("error", (error) => {
       spawnError = error;
