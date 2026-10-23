@@ -231,12 +231,16 @@ export function definitionKeywords(definition: {
   leech?: boolean;
   effects?: readonly { kind: string; status?: string; damageType?: DamageType; leech?: boolean }[];
 }): ProgressionKeyword[] {
-  const raw: string[] =
-    definition.effect === "attack" ? [definition.damageType!] : [...EFFECT_KEYWORDS[definition.effect]];
-  if (definition.effect === "attack" && definition.alternateDamageType)
-    raw.push(definition.alternateDamageType);
+  const keywords: ProgressionKeyword[] = [];
+  const add = (id: string) => {
+    const keyword = (progressionCategory[id as KeywordId] ?? id) as ProgressionKeyword;
+    if (PROGRESSION_KEYWORDS.includes(keyword) && !keywords.includes(keyword)) keywords.push(keyword);
+  };
+  if (definition.effect === "attack") add(definition.damageType!);
+  else for (const keyword of EFFECT_KEYWORDS[definition.effect]) add(keyword);
+  if (definition.effect === "attack" && definition.alternateDamageType) add(definition.alternateDamageType);
   for (const effect of definition.effects ?? []) {
-    raw.push(
+    add(
       effect.kind === "heal"
         ? "health"
         : effect.kind === "damage"
@@ -247,16 +251,10 @@ export function definitionKeywords(definition: {
               ? "purge"
               : effect.kind,
     );
-    if (effect.leech) raw.push("leech");
+    if (effect.leech) add("leech");
   }
-  if (definition.leech) raw.push("leech");
-  return [
-    ...new Set(
-      raw
-        .map((id) => progressionCategory[id as KeywordId] ?? id)
-        .filter((id): id is ProgressionKeyword => PROGRESSION_KEYWORDS.includes(id as ProgressionKeyword)),
-    ),
-  ];
+  if (definition.leech) add("leech");
+  return keywords;
 }
 
 export interface KeywordTextPart {

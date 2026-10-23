@@ -6,13 +6,18 @@ Fauna targets Windows x64 on Steam, with controller and Steam Deck experience co
 
 ## Shipping requirements
 
-Use the [candidate qualification record](RELEASE_QUALIFICATION.md) for setup and observed Windows, live Steam/two-device Cloud, physical-controller and Deck results. Before shipping:
+The current path is an **unsigned Windows x64 Steam depot**. Paid signing is deferred; native Linux/macOS packaging is not configured.
 
-- Configure Fauna's own App/depot, Cloud quota and App ID in `desktop/steam-config.json`; never use Alchemy's identities or saves. Cloud/overlay adapters exist, but progress sync remains unavailable with a null App ID. Achievements are not implemented
-- Qualify the actual unsigned Windows x64 Steam depot on clean Windows, including Windows 11 Smart App Control. Paid Authenticode signing is deferred; revisit it for launch blocks or direct-download distribution
-- Complete production art/audio, source-rights review, store material and privacy/support decisions
-- Complete a journey with physical controllers, including disconnect/reconnect and prompts. Browser input is simulated, standard-mapped and Xbox-labeled
-- Qualify Steam Deck readability, overlay, sleep/resume, battery/performance and offline startup through the intended Windows/Proton or native path. Native Linux/macOS packaging is not configured
+| Stage               | Requirement                                                                                                                                                                                                                             |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Setup               | Configure Fauna's own App/depot, Cloud quota and App ID in `desktop/steam-config.json`; never use Alchemy's identities or saves. Cloud/overlay adapters exist, but a null App ID disables progress sync; achievements are unimplemented |
+| Artifact            | Build/package the final clean tagged commit, retain exact-commit full CI and run the [release identity gate](#release-verification-and-player-notes)                                                                                    |
+| Windows             | Qualify the actual Steam depot on clean Windows, including Windows 11 Smart App Control; resolve any launch block                                                                                                                       |
+| Controls            | Complete a journey with physical controllers, including disconnect/reconnect and prompts; browser input is standard-mapped Xbox-labeled simulation                                                                                      |
+| Deck                | Qualify readability, overlay, sleep/resume, battery/performance and offline startup through the intended Windows/Proton or native path                                                                                                  |
+| Content and support | Complete production artwork/audio, source-rights review, store material and privacy/support decisions                                                                                                                                   |
+
+Record setup and actual device results in the [candidate qualification record](RELEASE_QUALIFICATION.md), using the immutable artifact. Publication requires separate authorization.
 
 No release upload, automatic promotion, telemetry or Steam credential handling is configured. External actions follow [AGENTS.md](../AGENTS.md#worktrees-and-integration).
 
@@ -20,9 +25,16 @@ No release upload, automatic promotion, telemetry or Steam credential handling i
 
 Windows packaging explicitly disables electron-builder publication. The hardening hook configures every Electron 45 fuse, including the Wasm trap handler, and strictly rejects unknown or incomplete fuse wires.
 
-`npm run verify:package -- release/win-unpacked` reads an existing Windows x64 artifact without building, modifying or publishing it. Windows CI runs it after packaging and before startup smoke. It verifies PE architecture, Fauna package identity/version, required Electron runtime files, ASAR paths, exact runtime/preload source bytes and sandbox configuration, relative nonempty renderer references, exact renderer bytes against the matching existing `dist/` build, and prepared media hashes against validated receipts. Every renderer JavaScript chunk is checked for accidental development controls. Packaged startup ignores `FAUNA_DEV_URL`, and production sessions never enable development victory.
+`npm run verify:package -- release/win-unpacked` checks an existing Windows x64 artifact without building, modifying or publishing it. Windows CI runs it between packaging and startup smoke. Set `RELEASE_TAG` to require a matching package version; ordinary package checks need no tag.
 
-Set `RELEASE_TAG` explicitly to check the package version against that tag; no tag is required for ordinary package verification. Missing, empty, corrupt, mismatched and escaping resources fail. Passing structural checks is separate from Windows startup/resume smoke, installer/signing acceptance and Steam delivery. The after-pack hook disables Node execution/environment/inspection paths, requires ASAR loading, enables supported ASAR integrity, and prepares browser-specific V8 snapshots. The gate reads the executable fuse wire and snapshot bytes and checks native Steam module packaging. Its runtime inventory follows the official Electron 45 Windows archive, including `electron_wer.dll`; obsolete ANGLE and DXIL DLL names are not required. File-protocol privileges are disabled; the renderer loads through the confined `fauna://app/` protocol. Platform integrity enforcement and startup still require the exact artifact tests.
+| Check          | Required identity or boundary                                                                                                                                                    |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Native package | PE architecture, Fauna identity/version, Electron runtime files, native Steam module and ASAR paths                                                                              |
+| Runtime        | Exact desktop/preload/save-format bytes, sandbox configuration, no renderer development controls; packaged startup ignores `FAUNA_DEV_URL` and never enables development victory |
+| Renderer/media | Relative nonempty references, exact bytes matching the existing `dist/` build and validated prepared-media receipts                                                              |
+| Hardening      | Actual executable fuse wire and browser-specific V8 snapshot bytes, including disabled Node execution/environment/inspection, required ASAR loading and supported integrity      |
+
+Missing, empty, corrupt, mismatched or escaping resources fail. The runtime inventory follows Electron 45's Windows archive, including `electron_wer.dll`; obsolete ANGLE/DXIL DLL names are not required. The confined `fauna://app/` protocol replaces file-protocol privileges. Structural integrity does not establish Windows startup/resume, signing, installer or Steam delivery acceptance; qualify the exact artifact.
 
 Native performance uses an unpackaged production renderer in isolated profiles. Cold captures measure a new process/profile with ordinary OS caches; they do not replace packaged Windows startup, physical controller, Steam client or Steam Deck review. See [performance scenarios](DEVELOPMENT_TOOLS.md#native-and-reachable-performance-scenarios).
 
@@ -66,15 +78,15 @@ Qualify every supported viewport listed in [UI](UI.md#layout-artwork-size-and-sp
 
 ## Candidate signing and qualification
 
-The current distribution decision is an unsigned Windows Steam build, with no paid signing service or Azure subscription. Steam acceptance and Windows security behavior are separate: unfamiliar unsigned binaries can still be blocked by Smart App Control or antivirus. Validate the actual depot on clean Windows with normal protections enabled; a launch block is an unresolved qualification failure. See [Microsoft reputation guidance](https://learn.microsoft.com/windows/apps/package-and-deploy/smartscreen-reputation).
-
-The signed installer workflow below is optional future infrastructure, not a requirement to obtain the ordinary Windows CI artifact or qualify the Steam candidate. No certificate or signing environment is currently configured.
-
-The manually dispatched [signed candidate workflow](../.github/workflows/release-candidate.yml) requires successful full CI for an existing version tag, including the exact commit’s successful final `verify` job, then builds it, signs the executable and NSIS installer, verifies Authenticode and package identity, runs packaged smoke and retains candidate artifacts without publication. Configure `WINDOWS_CSC_LINK` and `WINDOWS_CSC_KEY_PASSWORD` in the protected `release-signing` GitHub environment before dispatch; missing secrets fail rather than producing an unsigned candidate. The [CI prerequisite checker](../scripts/release/require-ci.mjs) pins the inspected run attempt and rejects duplicate-suppressed runs whose final verification was skipped. Certificate procurement, secret installation and live installer acceptance remain external setup. `npm run package:installer` creates an installer without publication; ordinary CI continues using the unpacked package.
-
 Renderer crashes are recovered silently from durable saves with a two-reload process budget. Local crash dumps and bounded platform facts remain on the device; no crash uploads or telemetry are enabled. Treat crash records as potentially sensitive support artifacts and share only with player consent.
 
 Complete the [qualification record](RELEASE_QUALIFICATION.md) for the actual distribution path; signed-installer acceptance applies only if that optional path is used.
+
+### Optional signed installer
+
+Use this path only after an explicit distribution decision, such as direct downloads or unresolved native launch blocks. It is not required for the ordinary Windows CI artifact or unsigned Steam candidate. No certificate, signing environment, paid service or Azure subscription is configured. Steam acceptance does not imply Windows trust; test normal protections using [Microsoft's reputation guidance](https://learn.microsoft.com/windows/apps/package-and-deploy/smartscreen-reputation).
+
+The manually dispatched [signed candidate workflow](../.github/workflows/release-candidate.yml) requires successful full CI for an existing version tag, including the exact commit’s successful final `verify` job, then builds it, signs the executable and NSIS installer, verifies Authenticode and package identity, runs packaged smoke and retains candidate artifacts without publication. Configure `WINDOWS_CSC_LINK` and `WINDOWS_CSC_KEY_PASSWORD` in the protected `release-signing` GitHub environment before dispatch; missing secrets fail rather than producing an unsigned candidate. The [CI prerequisite checker](../scripts/release/require-ci.mjs) pins the inspected run attempt and rejects duplicate-suppressed runs whose final verification was skipped. Certificate procurement, secret installation and live installer acceptance remain external setup. `npm run package:installer` creates an installer without publication; ordinary CI continues using the unpacked package.
 
 ## Dependency inventory and provenance
 

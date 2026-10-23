@@ -1,10 +1,10 @@
 # Further codebase simplification
 
-Assessment date: October 23, 2026. Source baseline: `f0d462e9bddb74d15668a132ca253ac64620447c` on local main. This is a proposed implementation plan; this assessment changes documentation only.
+Assessment date: October 23, 2026. Source baseline: `f0d462e9bddb74d15668a132ca253ac64620447c` on local main; findings rechecked against main through `18e54964e6ab32cf999e19e9824b4dad2c6e9894` during integration. This is a proposed implementation plan; this assessment changes documentation only.
 
 The most expensive remaining complexity is concentrated in combat rules and battle interaction. The problem is how many facts and ordering rules a maintainer must hold in their head to make one safe change. File length alone is not the criterion, and additional frameworks would make these areas worse.
 
-The recent [simplification work](SIMPLIFICATION_PLAN.md) already removed competing journey routes, persisted roster/lineup mirrors, unreachable Collection reveals and distributed navigation ownership. The lifecycle union, shared ability executor and explicit combat stack also already exist. Keep those improvements; this plan addresses the remaining complexity inside and between their owners.
+The recent [simplification work](archive/SIMPLIFICATION_IMPLEMENTATION.md) already removed competing journey routes, persisted roster/lineup mirrors, unreachable Collection reveals and distributed navigation ownership. The lifecycle union, shared ability executor and explicit combat stack also already exist. Keep those improvements; this plan addresses the remaining complexity inside and between their owners.
 
 ## Priorities
 

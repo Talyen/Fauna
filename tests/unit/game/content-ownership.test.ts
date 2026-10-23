@@ -10,6 +10,15 @@ import {
   TALENT_EFFECTS,
 } from "../../../src/game/content";
 import { BOSSES, COMBAT_PACKS } from "../../../src/game/encounters";
+import { PEARL } from "../../../src/game/content/creatures/memento";
+
+it("resolves every authored identity without changing catalog order or sharing", () => {
+  for (const card of CARDS) expect(definition(card.id)).toBe(card);
+  for (const entry of SPECIES) expect(species(entry.id)).toBe(entry);
+  expect(definition(PEARL.id)).toBe(PEARL);
+  for (const id of ["missing", "constructor", "__proto__"])
+    expect(() => definition(id)).toThrow(`Unknown card: ${id}`);
+});
 
 it("keeps shared authored rules immutable across lookup and direct catalog access", () => {
   const attempts: [object, string, unknown][] = [

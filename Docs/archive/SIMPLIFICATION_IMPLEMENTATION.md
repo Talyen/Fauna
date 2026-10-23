@@ -1,0 +1,22 @@
+# Codebase simplification implementation
+
+Historical implementation record for October 23, 2026, through combined main `b57ff0e`. Current contracts belong to [Architecture](../ARCHITECTURE.md); the verification approach below records its original scope, not fresh acceptance of current main.
+
+The [approved assessment and detailed plan](SIMPLIFICATION_PLAN.md) records the original evidence, implementation sequence and acceptance criteria. All six changes preserve the current eight-battle journey and presentation contract.
+
+## Implemented ownership
+
+1. **One journey:** [encounter rules](../../src/game/encounters.ts) always consume committed expedition packs. Bosses remain fourth and eighth; the obsolete three-battle fallback and its content catalog are removed. Test and performance builders now arrange explicit current-route packs.
+2. **Collection without unreachable reveals:** all species remain available to encounter and recruit. Encountered species, recruited copy counts, passive tiers and collected-starter eligibility remain authoritative. The catalog-wide unlock array, empty unlock receipts, observer, reveal queue, screen and reveal-only styles are removed. Results return directly home.
+3. **One formation:** ordered `team` and `reserves` own creature identity, Health and deployment. Species membership and deployed IDs are derived when needed. Recruitment, copies, Legendary deployment and swaps no longer synchronize persisted roster/lineup mirrors. Development save format 53 rejects obsolete saves without migrations; current-format validation still checks identity, card ownership, zones, encounter scaling and lifecycle payloads.
+4. **Explicit navigation:** [the reducer](../../src/ui/shell/navigation.ts) owns pages, pause, dialogs and inspection nesting. Its active-surface query supplies rendering, input, effects and Auto-play priority. [The focus adapter](../../src/ui/shell/focus.ts) owns DOM references and semantic menu-action restoration, with generation checks for stale closing callbacks.
+5. **Complete committed events:** [event variants](../../src/game/types.ts) require damage type, amount and target for damage, target and amount for healing/Block, and actor/action type for actions. Status facts remain separate from untargeted Mana announcements. [Feedback adaptation](../../src/ui/battle/combat-feedback-model.ts) converts committed facts to presentation entries once; audio and impact consumers narrow variants instead of inventing defaults. Producer event order and serialized facts remain unchanged.
+6. **Cloud policy and lifetime:** [snapshots](../../src/application/cloud-snapshots.ts) own validation, identity and hashing; [pure reconciliation policy](../../src/application/cloud-policy.ts) chooses heads, preservation and installation; [the controller](../../src/application/cloud.ts) owns transport, lifecycle and cancellation. One metadata queue serializes snapshot creation, local metadata writes and publication. Optional transport stays independent of gameplay save durability.
+
+## Verification approach
+
+Current-route lifecycle and ordered combat fingerprints were captured before runtime edits, omitting only retired fields and save version. Their captured play commands are fixed inputs, so later Auto-play policy revisions cannot rewrite the baseline. Those fingerprints must pass unchanged after implementation. Existing gameplay, save, recruitment, copy/Legendary, Cloud race, shell focus and presentation tests retain their behavior coverage; navigation nesting and pure Cloud policy have focused regressions.
+
+Local verification retains the five-minute deadline, one test worker and 2 GiB memory cap. The exhaustive creature-combination suite moved intact to `tests/exhaustive/`; ordinary full Vitest discovery and hosted CI still execute every combination and intermediate save assertion. Changed-file integration checks its owning command/save contract instead of repeating the full matrix locally. Full CI owns broad static, unit, build, browser, interaction replay and Windows packaging/startup verification. See [test coverage policy](../../tests/README.md).
+
+Rendered review compares task-owned before/after captures of battle at minimum and desktop sizes, pause, Collection inspection, recruitment confirmation and results. Focused browser journeys exercise menu return, nested dialogs and results-to-home behavior. Capture and integration evidence is retained in the task checkout under `reports/`; physical controllers, a Steam client and Steam Deck remain separate release boundaries.

@@ -1,77 +1,95 @@
-# Journey progression — design decisions
+# Journey rules
 
 This guide owns journey rules and progression. [Screen specifications](ui/screens.md) own presentation; [Menu design](MENU_DESIGN.md) owns navigation and [Keywords](KEYWORDS.md) owns combat packets/statuses.
 
 ## Roster and battles
 
-- Your first journey begins with one creature, chosen from three seeded offers from the curated `FIRST_RUN_STARTERS` pool in `src/game/content.ts`. Team-oriented kits outside that solo pool remain recruitable and available in later collected drafts. The [first balance pass](archive/JOURNEY_BALANCE.md) records the opening-matchup evidence. The Recruit button commits that creature and immediately starts the journey, adding it to Collection. Inspecting and canceling do not collect it.
-- Later journeys normally draft three starters from collected species: choose one of three offers, three times. Choosing a Legendary as the first pick instead completes the draft with that creature alone; later rounds offer only ordinary creatures. Each choice commits immediately and saves any next offer; the final required Recruit starts the journey automatically; no Begin journey control appears. Species may repeat across rounds. Eligible pools smaller than three repeat species within the offer, so an early loss never prevents a new journey. With three or more eligible species, each offer contains three distinct species.
-- Browsing, canceling and reloading preserve starter offers and committed picks. Completing or resuming a completed draft starts the journey automatically. [Starter presentation](ui/screens.md#starter-draft) separates inspection from recruitment.
-- A journey roster grows to five creatures: up to three ordinary creatures deployed, or one Legendary with up to four backup. Multiple copies of a species are allowed. The drafted team supplies the remembered starting lineup. On the first journey, recruits fill its second and third slots before joining backup. The encounter screen offers one Combat or Boss placeholder ArtCard that starts battle directly. Deck remains available without requiring team selection.
-- Formation changes only through knockout replacement, abilities and explicit game mechanics; there is no free Swap control or manual lineup editor. The changed formation persists into later battles.
-- Only deployed living creatures act and provide passive traits. Enemy intents remain hidden.
-- After the current action or turn resolves, a knocked-out deployed creature prompts a choice of living backup. Resolve knockouts in deployed order before another card or End turn; repeat while living backup remain. The choice is derived from saved roster state and resumes after reload.
-- Replacements retain the outgoing owner's card slots in hand, overflow, draw and discard. Spent cards stay spent; replacements cost no Mana, grant no extra draws, and do not transfer card upgrades. Players cannot use replacement to rotate healthy or controlled creatures.
-- Swap cards choose a random living backup, remove the departing kit from all zones, and shuffle the incoming kit into the draw pile before any draw effect. Without living backup they swap positions with a random living ally; alone the swap part does nothing. See [Captoad](content/creatures/captoad.md). [Tournelle](content/creatures/tournelle.md) instead swaps the lowest current-Health ally with a random living backup and draws one card; without backup it only draws.
-- Creature identity, health, Block, and first-attack state stay with the creature. Normal turn expiration applies in backup; swapping never heals, cleanses, or repeats opening bonuses.
-- If the deployed row falls, remaining enemy attacks stop and the next player turn begins with restored Mana. A required replacement choice brings in living backup. Defeat requires the whole roster to fall.
-- Knocked-out card slots remain inert in saved battle zones and are skipped by ordinary draws. When the entire deployed row falls, the next hand reserves slots for incoming creatures so recovery does not require a free extra draw. These slots never render as playable cards for knocked-out owners.
-- Victory preserves roster Health and knockouts. The next battle deploys the saved current formation; combat effects reset.
-- Recruitment at five banks Collection progress before a team confirmation step. Players may replace one creature or keep the original roster; replacing a deployed creature updates the saved team directly.
+### Starter draft
+
+The first journey starts with one creature chosen from three seeded offers in `FIRST_RUN_STARTERS` in `src/game/content.ts`. Recruit commits the choice, adds it to Collection and starts the journey. Team-oriented kits outside this solo pool remain available through encounters, recruitment and later drafts. The [first balance pass](archive/JOURNEY_BALANCE.md) records the opening-matchup evidence.
+
+Later journeys draft from collected species: choose one of three offers, three times. A Legendary first pick completes the draft alone; later rounds offer only ordinary creatures. Species may repeat between rounds. Pools smaller than three repeat species within an offer; pools of at least three offer three distinct species, so an early loss cannot prevent another journey.
+
+Each choice commits immediately and saves the next offer. Browsing, inspection, cancellation and reload preserve offers and earlier picks. The final required Recruit starts the journey automatically, including when resuming a completed draft. [Starter presentation](ui/screens.md#starter-draft) separates inspection from recruitment.
+
+### Formation
+
+A roster holds five individuals, including duplicate species. Deploy up to three ordinary creatures or one Legendary with up to four backup. The draft supplies the remembered starting lineup; on the first journey, recruits fill slots two and three before joining backup.
+
+Only living deployed creatures act and provide passives. Formation changes through knockout replacement, abilities and explicit mechanics; there is no free Swap or lineup editor. The resulting formation persists between battles. Health, Block, first-attack state and effects belong to each individual; normal turn expiration applies in backup. Swapping never heals, cleanses or repeats opening bonuses. Victory preserves Health and knockouts while combat effects reset for the next battle.
+
+### Knockout replacement and ability swaps
+
+| Change                             | Card zones and resources                                                                                                                            |
+| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Required knockout replacement      | Retain the outgoing owner's slots in Hand, overflow, Draw and Discard; spent cards stay spent; no Mana, extra draws or transferred card upgrades    |
+| Ordinary swap ability              | Select random living backup with seeded RNG; remove the departing kit from every zone and shuffle the incoming kit into Draw before any draw effect |
+| Swap ability without living backup | Swap positions with a random living ally; alone, the swap portion does nothing                                                                      |
+
+After an action or turn resolves, replace knocked-out deployed creatures in deployment order while living backup remain, before another card or End turn. Reload reconstructs these required choices from saved roster state. Replacement cannot rotate healthy or controlled creatures.
+
+If the deployed row falls, stop remaining enemy attacks and begin the next player turn with restored Mana and required replacements. Defeat requires the whole roster to fall. Knocked-out card slots remain inert in saved zones and ordinary draws skip them. The next hand reserves incoming slots after a whole-row knockout, avoiding a free extra draw; knocked-out slots never appear as playable cards.
+
+[Captoad](content/creatures/captoad.md) illustrates ordinary swap abilities. [Tournelle](content/creatures/tournelle.md) instead swaps the lowest current-Health ally with random living backup and draws one; without backup it only draws. [Legendary formation changes](#legendaries-and-minions) adjust kit sizes separately. [Recruitment](#recruitment) defines full-roster confirmation and deployed replacements.
 
 ## Encounters
 
-- A journey has eight encounters: Combat, Combat, Combat, Boss, Combat, Combat, Combat, Boss. Only the final boss completes the journey.
-- Each step has one saved encounter: Combat for the three ordinary battles, then Boss. Ordinary packs come from the shared combat pool; each Boss begins with one authored Legendary unless that species is on the roster, in which case it uses one eligible ordinary creature. Packs remain unchanged through menus, Campfire and reload; leaving a Boon Merchant prepares a new pack at the same combat encounter. Combat uses blank landscape artwork; Boss shows its authored name and species artwork, with names beneath. Campfire appears alongside the encounter whenever any roster creature, including a backup or knockout, is missing at least 30% of maximum Health. Rest restores 30% maximum Health to the whole roster, capped at full Health, and returns without advancing the encounter or changing RNG. The room type most recently visited is omitted from the returning destination options. Resting or leaving Campfire therefore suppresses Campfire until another room has been visited. Combat or Boss remains available as the required progression fallback.
-- Entering Campfire commits a saved visit; Rest is its only recovery action. [Encounter](ui/screens.md#encounter-and-required-replacement) and [Campfire](ui/screens.md#campfire) specifications own artwork, labels and readouts.
-- Activating Combat or Boss immediately commits the saved encounter and starts battle. There is no enemy preview, inspection dialog or separate Begin battle action. Creature and action hover/focus details remain available during battle; pinned kit inspection belongs outside battle and in Collection.
-- Enemy generation excludes every species on the player’s roster, including backups and knocked-out creatures. Replace matching slots with seeded ordinary species while preserving the encounter’s enemy count. Recruiting at an optional destination replaces only newly conflicting enemy slots; later recruitment never rewrites completed battle rewards.
-- Seeded gameplay chooses and saves the exact species in one enemy pack when entering the encounter screen. Menus, Campfire and reload never reroll enemies or consume randomness; completing a Boon Merchant room prepares fresh destinations.
-- The shared enemy pool varies between runs. Every enemy, including Legendaries, starts from its species’ authored base Health before encounter scaling; recruits use the unscaled species Health. Health and authored ability damage, healing and Block gain an additive 10% of their base per room after the first: 100% in room 1 through 170% in room 8, rounded to the nearest whole number. Support visits do not advance this scaling. Enemies use shared authored ability values, including area attacks, modified by explicit room power rather than replacement encounter damage. Chances, effect counts, resources and passive tiers do not scale; mixed Block-or-Thorns effects scale only Block. Supplemental ability damage/healing scales once through the same room power. The first battle has one enemy and the second has two. These values are playtest tuning, not final balance.
+A journey has eight battles, with Bosses fourth and eighth. Only the final Boss completes it. Ordinary enemy counts are one in battle 1, two in battle 2 and three thereafter. Bosses begin with one authored Legendary; if its species is on the roster, use one eligible ordinary creature instead.
+
+### Saved enemy packs
+
+Prepare and save the exact enemy pack with seeded RNG on entering the encounter screen. Ordinary packs use the shared combat pool. Exclude every roster species, including backup and knockouts; replace conflicting slots with seeded ordinary species while retaining pack size. Optional recruitment replaces only newly conflicting slots and never rewrites completed rewards.
+
+Menus, Campfire and reload preserve packs and consume no pack RNG. Completing a Merchant room prepares a fresh pack at the same battle ordinal. Combat or Boss always remains available as the progression fallback.
+
+Activating the encounter commits its pack and starts battle directly, without an enemy preview, inspection dialog, Begin battle step or team selection. Deck remains available. Enemy intents stay hidden; pinned kit inspection belongs outside battle and in Collection. [Encounter presentation](ui/screens.md#encounter-and-required-replacement) owns artwork, labels and readouts.
+
+### Enemy scaling
+
+Enemies, including Legendaries, start from authored species Health; recruits use unscaled Health. Health and authored damage, healing and Block gain 10% of their base per room after the first: 100% in room 1 through 170% in room 8, rounded to the nearest whole number. Support visits do not advance scaling.
+
+Shared ability values, including area attacks and supplemental damage/healing, scale once through explicit room power. Chances, effect counts, resources and passive tiers do not scale; mixed Block-or-Thorns effects scale only Block. Enemy pools vary between runs. These values are playtest tuning, not final balance.
 
 ## Keyword XP and talents
 
-- Progression uses permanent keyword XP and talents rather than individual creature training.
-- Keyword progression is shared across the collection. Talents benefit any creature using the relevant keyword, rather than belonging to individual species.
-- Each accepted card play earns 1 XP for each eligible keyword on that card, regardless of effect magnitude. A Burn + Block card earns 1 Burn XP and 1 Block XP.
-- Earned keyword XP becomes permanent after each battle, including defeat.
-- Talents are accessible through the main menu at any time. Purchases take effect immediately, including during a journey.
-- Do not interrupt journeys or prompt players to spend talent points.
-- Talents mix straightforward stat bonuses with new interactions and combo effects. The applicable Alchemy effects are implemented in the authored catalog.
-- Every talent can eventually be unlocked; there is no limited active-talent loadout.
-- [Keywords](KEYWORDS.md#classification-and-progression) owns talent categories, prerequisites and combat effects.
-- [Talent presentation](ui/screens.md#talents) owns category browsing and disclosure. All talents have distinct effects; do not repeat a shared set across keywords.
-- Clicking an available talent purchases it immediately, without a detail-dialog purchase step or confirmation.
-- Reset operates on the entire keyword category, refunding all spent points in that category while retaining its XP. Reset is available at any time, including during a journey; talent effects update immediately. Individual-talent refunds are not the chosen interaction.
-- Use Alchemy’s current point pacing: cumulative thresholds are 10, 40, 100, 180, and 280 keyword XP. Total XP for point n is 10 × n × (n + 1) − 10 × min(n, 2). This is initial tuning for playtesting.
-- The [authored talent catalog](../src/game/content/talents.ts) defines available talents; [progression.ts](../src/game/progression.ts) owns point calculations. Keyword classification follows [Keywords](KEYWORDS.md#classification-and-progression).
-- Abandonment banks the XP earned by accepted plays, with no victory currency or boons. Auto-play dispatches ordinary accepted plays; each awards keyword XP once. Talent repeats resolve at most once and award no extra accepted-play XP.
+Keyword XP and talents are permanent and shared across species. Each accepted card play earns 1 XP per distinct eligible keyword regardless of magnitude: Burn + Block earns one of each. Repeats resolve at most once and grant no extra accepted-play XP. Auto-play uses ordinary accepted commands.
+
+Battle settlement banks XP even on defeat. Returning home banks pending accepted-play XP without victory currency or Boons. Talents remain menu-driven; never interrupt a journey or prompt spending.
+
+| Operation     | Rule                                                                                                                                              |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Purchase      | Immediate through the menu, including during a journey; every talent is eventually obtainable, without an active loadout or purchase confirmation |
+| Prerequisites | Follow [keyword categories and rows](KEYWORDS.md#classification-and-progression); each talent has a distinct effect                               |
+| Reset         | Refund the whole category while retaining XP; available at any time and effects update immediately; no individual refunds                         |
+| Point pacing  | Cumulative thresholds 10, 40, 100, 180 and 280 XP; point n requires total XP `10 × n × (n + 1) − 10 × min(n, 2)`                                  |
+
+Point pacing is initial tuning adapted from Alchemy. [progression.ts](../src/game/progression.ts) owns calculations; the [talent catalog](../src/game/content/talents.ts) owns stat bonuses and interactions. [Talent presentation](ui/screens.md#talents) owns browsing, visible rules and availability.
 
 ## Collection and passive ranks
 
-Actual recruitment permanently collects a species. Its first copy gives zero stars; the sixth reaches five stars. Counts persist across journeys and cap at six. Committing the first onboarding starter grants one initial copy; later starter drafts and encounter discovery grant none. [Content](CONTENT.md#creature-passive-tiers) owns tier authoring; player creatures use permanent rank and enemies use the base tier.
+Actual recruitment permanently collects a species. Its first copy gives zero stars; the sixth reaches five stars. Counts persist across journeys and cap at six; collection survives release, defeat and return home. Committing the first onboarding starter grants one initial copy; later starter drafts and encounter discovery grant none. All species are available to encounter and recruit; later starter eligibility requires collection. [Content](CONTENT.md#creature-passive-tiers) owns tier authoring; player creatures use permanent rank and enemies use the base tier.
 
 ## Recruitment
 
-- Optional Recruit destinations offer one uniformly selected creature from the ordinary species catalog, including uncollected and already-owned species. Legendaries are excluded from optional Recruit destinations. They roll only while the roster has fewer than five creatures and stop appearing at five.
-- Activating optional Recruit recruits directly at full Health, filling an ordinary lineup up to three and then backup; a deployed Legendary keeps recruits in backup. There is no confirmation/release step. Recruitment counts toward permanent Collection and passive ranks. [Optional Recruit presentation](ui/screens.md#optional-recruit-destination) owns artwork, labels and full-kit hover/focus disclosure.
-- Claiming consumes the saved offer atomically without advancing the encounter, spending Gold or changing RNG. Starting the battle skips any unclaimed offer. Optional recruitment does not change ordinary victory recruitment.
+### Optional Recruit destinations
 
-- Recruit from defeated enemy species after an ordinary combat victory.
-- Recruiting adds a creature to the journey roster rather than forcing an immediate active-team replacement.
-- The first battle contains one enemy, the second contains two, and every later ordinary battle contains three; Boss encounters begin with one Legendary. Choose a Recruit shows the exact defeated enemy entries in battle order, including repeated species and species already in the roster. Recruiting creates a new individual with independent identity and battle state.
-- With an open roster, Recruit adds the creature immediately. At a full roster, it commits Collection progress before the separate team confirmation described below.
-- Recruit one defeated creature; recruitment commits Collection progress immediately and cannot be canceled. Collected species persist after release, defeat and return home. Encountering a species or unlocking it through victory does not collect it.
-- At a full roster, recruitment banks Collection progress and opens a local team preview. Only Confirm changes the roster; keeping the original team is valid. Previews never save, consume RNG or grant progress. Reload resumes the banked recruit with the original team preview, without collecting twice. [Team confirmation](ui/screens.md#choose-your-team) owns exchange controls and motion.
+Offer one uniformly selected ordinary species, including uncollected and already-owned species, only while the roster has fewer than five individuals. Legendaries are excluded. [Support visits](#optional-support-visits) defines destination rolls.
+
+Activating Recruit consumes the saved offer and recruits at full Health directly, without confirmation or release. Fill ordinary deployment up to three, then backup; a deployed Legendary keeps recruits in backup. The command grants Collection progress without advancing the battle, spending Gold or consuming RNG. Starting battle forfeits the unclaimed offer. This is independent of victory recruitment. [Optional Recruit presentation](ui/screens.md#optional-recruit-destination) owns full-kit disclosure.
+
+### Victory recruitment
+
+Victories require recruiting one defeated creature, following the [outcome flow](#screen-flow-and-journey-results). Offers preserve defeated entries in battle order, including repeated species and species already owned. Each recruit is a new individual with independent identity and battle state.
+
+With roster space, add the recruit immediately. At five creatures, bank Collection progress and open a local preview of the original team. Only Confirm changes the roster; keeping the original team is valid, and replacing a deployed member updates the saved formation. Previews never save, consume RNG or grant progress. Reload restores the original-team preview around the saved recruit without collecting twice. Recruitment cannot be canceled after committing it. [Team confirmation](ui/screens.md#choose-your-team) owns exchange controls and motion.
 
 ## Currency and items
 
-- All Gold is permanent and carries between journeys.
-- Gold buys journey Boons at Boon Merchants; permanent upgrade purchases and other currencies are undefined.
-- [Optional support visits](#optional-support-visits) own Recruit/Merchant rolls, prices and saved offers. Spending atomically reduces the wallet; journey earnings measure gross retained income.
-- When a battle awards a Boon, offer up to three distinct unowned choices.
-- Choose one Boon or skip its reward. Owned Boons remain inspectable from the menu during a journey; [screen specifications](ui/screens.md#victory-recruitment-and-team-confirmation) own artwork and disclosure.
-- Starter tuning: Currency pays 20 per ordinary victory and 40 for each boss. Intermediate bosses offer up to three distinct unowned Boons; smaller nonempty pools remain available. Ordinary combat offers recruitment, never boons; intermediate bosses offer Legendary recruitment followed by Boons; the final Boss offers recruitment before journey completion. The [Boon catalog](../src/game/content/boons.ts) owns available items; ownership lasts only for the journey. Material types and permanent upgrade purchases remain undefined.
+Gold is permanent and buys journey Boons at Merchants. Ordinary victories grant 20 and Boss victories 40 as initial tuning. Spending atomically reduces the wallet; journey earnings measure gross retained income. Permanent upgrade purchases, other currencies and material/item rewards are undefined.
+
+Intermediate Bosses offer up to three distinct unowned Boons after recruitment. Choose one or Skip; smaller nonempty pools remain available and empty pools advance automatically. Ordinary victories offer recruitment only; the final Boss offers recruitment before results. Boons last for the journey and remain inspectable through its menu.
+
+The [Boon catalog](../src/game/content/boons.ts) defines available items. [Support visits](#optional-support-visits) defines stock, rolls and saved prices; [reward presentation](ui/screens.md#victory-recruitment-and-team-confirmation) defines disclosure.
 
 ## Screen flow and Journey results
 
@@ -94,7 +112,9 @@ Starting a new journey resets its totals, roster and Boons while preserving perm
 
 ## Turn and combat foundation
 
-Each turn normally restores four shared Mana and draws four cards, with explicit talent and Boon modifiers. The hand holds six cards; FIFO overflow persists across turns; End turn promotes waiting cards before normal draws, and accepted plays fill open slots from the buffer without RNG. Block halves rather than clearing. Creatures share Alchemy's core packet, status and crowd-control rules through the [keyword contract](KEYWORDS.md), with no elemental reactions. Their individual effects persist while in backup and cannot be refreshed by swaps. Ordinary enemies use a species repertoire without immediate repeats; enemy Legendaries cycle their own cards. Neither shows the next ability. Draw and discard piles are inspectable without revealing draw order or changing gameplay.
+Each turn normally restores four shared Mana and draws four cards, with explicit talent and Boon modifiers. The hand holds six cards; FIFO overflow persists across turns. End turn promotes waiting cards before normal draws, and accepted plays fill open slots from overflow without RNG. Draw/Discard inspection never reveals draw order or changes gameplay.
+
+[Keywords](KEYWORDS.md) defines packets, defenses, statuses and crowd control, including halving Block and the absence of elemental reactions. Effects tick and expire in backup; swaps cannot refresh them. Ordinary enemies choose from species abilities without immediate repeats; Legendaries cycle their own cards. Neither reveals the next ability.
 
 ## Combat assistance
 
@@ -102,21 +122,27 @@ Auto-end turn is enabled by default and advances only when Mana reaches zero. It
 
 Auto-play is explicitly enabled for one battle. It uses visible information to choose legal recovery swaps, healing, finishing attacks, other attacks and useful defenses, then ends turns when no useful play remains. Actions occur no faster than every 700 ms. Menus, inspection, focus loss and hidden pages pause it; manual play stops it. Rewards, encounters, recruitment and talents always remain player choices. It stops on completion, home navigation and shutdown; save retries remain independent of combat assistance.
 
-### Catalog availability
-
-Leaving results returns directly home. All species are available to encounter and recruit; Collection and later starter eligibility depend on actual recruitment. Reopening results grants no additional progress.
-
-Development builds add a Skip combat icon beside the battle menu and Auto-play controls. It settles a normal victory with normal rewards and only XP already earned by actual plays; roster Health is preserved. It is unavailable in production and rejects repeated settlement.
+Development builds expose Skip combat beside the battle menu and Auto-play. It settles ordinary victory rewards with only XP earned by actual plays, preserves roster Health and rejects repeated settlement. Production cannot use it.
 
 ## Optional support visits
 
-Boon Merchant rolls independently alongside Recruit at the shared 25% rate when preparing destinations, only when at least one unowned Boon is affordable and the last room was not a Merchant. It does not replace or advance a battle. Activating the Boon Merchant ArtCard commits the saved visit directly and rechecks affordability. Leaving, including Back, completes that room even without buying: prepare a fresh combat pack and optional Recruit destination, suppress the Boon Merchant, and retain the current battle ordinal and all eight battles. Beginning a battle instead forfeits the unvisited Merchant.
+Recruit and Boon Merchant roll independently at 25% when preparing destinations, subject to their eligibility rules. Support visits never advance the battle ordinal or remove any of the eight battles. Omit the most recently visited room type from returning options; Combat or Boss remains available.
 
-The Boon Merchant offers up to three distinct unowned Boons at independently rolled integer prices of 20–40 Gold each, inclusive (13–33 with Merchant’s Favor when stock is prepared). Prices are committed with the offers and never reroll through inspection, menus, Campfire or reload. Purchase commits one Boon and opens its saved reward screen; [Merchant presentation](ui/screens.md#boon-merchant) owns layout and disclosure. The purchase is already granted; Continue or Back completes the room without granting it again. Both the shelf and purchased reward survive menus and reload without rerolling, duplicate grants or repeated spending. Gold carries between journeys; bought Boons last only for that journey. Omit the Merchant with no eligible stock or insufficient Gold. Campfire visits preserve a pending Merchant offer. Merchant and Campfire grant no keyword XP or recruitment; Recruit grants only its offered creature.
+### Campfire
+
+Offer Campfire when any roster member, including backup or knockout, is missing at least 30% maximum Health, unless Campfire was the last visited room. Entering commits a saved visit; Rest is its only recovery action. Rest restores 30% maximum Health to the whole roster, capped at full, without advancing the battle or consuming RNG.
+
+Resting or leaving suppresses Campfire until another room is visited. Both preserve the enemy pack; Campfire also preserves pending Merchant offers. [Campfire presentation](ui/screens.md#campfire) owns recovery readouts.
+
+### Boon Merchant
+
+Offer Merchant only when it was not the last room and at least one unowned Boon is affordable. Entering commits the saved visit and rechecks affordability. Starting battle forfeits an unvisited Merchant.
+
+Stock contains up to three distinct unowned Boons, each with an independently rolled integer price of 20–40 Gold inclusive. Merchant's Favor subtracts 7 when stock is prepared, yielding 13–33. Inspection, menus, Campfire and reload preserve prices.
+
+Purchase commits one Boon and opens its saved reward screen. Continue or Back completes the room without another grant. Shelf and purchased reward survive menus/reload without rerolls, duplicate grants or spending. Leaving, including Back without buying, prepares a fresh combat pack and optional Recruit offer at the same ordinal and suppresses Merchant. Gold remains permanent; the bought Boon lasts for the journey. Merchant and Campfire grant no XP or recruits; Recruit grants only its offered creature. [Merchant presentation](ui/screens.md#boon-merchant) owns layout and disclosure.
 
 ## Legendaries and Minions
-
-Memento’s Pearls have Consume: played Pearls leave the battle after their effects and court trigger, while unplayed Pearls discard and recycle normally. The Court Remembers deals 3–8 Water damage across its six passive tiers, once per accepted card with no attacks-per-turn limit. Treasury Echo still creates two Pearls; Drowned Revelation only draws two cards.
 
 Legendaries appear as enemies only in Boss encounters and remain ordinary recruitable roster individuals. The five-creature roster accepts any combination of Legendaries and ordinary creatures. A Legendary starter fills the starting lineup alone. Deploying one returns every deployed creature to backup; replacing it with an ordinary creature leaves two vacant positions; later recruits may fill them under the ordinary recruitment rules. No manual formation editing is available.
 
@@ -124,6 +150,6 @@ Each deployed Legendary supplies two copies of each of its three abilities. Form
 
 Minions belong only to the active battle, have Health and combat effects, and can be attacked or affected by group abilities. They have no roster slots, backup, cards, autonomous turns or Death's Door. They disappear when their summoner falls or leaves the field. Defeating an enemy Legendary wins even if its Minions remain.
 
-Enemy Legendaries use six cards, four Mana and four draws per turn, with the six-card hand and persistent overflow used by the player. They create and cycle Pearl cards through their own zones. Automatic enemy decisions are bounded to 256 plays per turn.
+Enemy Legendaries use six cards, four Mana and four draws per turn, with the six-card hand and persistent overflow used by the player. Automatic enemy decisions are bounded to 256 plays per turn.
 
-[Memento](content/creatures/memento.md) owns the first Legendary kit and initial tuning.
+[Memento](content/creatures/memento.md) defines the first Legendary kit, Echoes, Pearl generation/Consume and initial tuning.

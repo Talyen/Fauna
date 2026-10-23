@@ -7,6 +7,7 @@ import { combat, freshCombat, hit } from "../../../src/game/combat/index";
 import { definition, species, SPECIES } from "../../../src/game/content";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { validateContent } from "../../../src/game/content-validation";
+import { expectSupportedLineup, ordinaryLineups } from "../../support/lineups";
 function expectDeeplyFrozen(value: unknown) {
   if (value === null || typeof value !== "object") return;
   expect(Object.isFrozen(value)).toBe(true);
@@ -211,6 +212,19 @@ describe("game commands", () => {
     expect(s.currency).toBe(bank);
     expect([...s.team, ...s.reserves].map((unit) => unit.species)).toEqual([]);
   });
+  const scenarios = ordinaryLineups();
+  for (const kinds of [
+    ["sternshell", "emberback", "mossguard"],
+    ["prismram", "cindernewt", "coralcurl"],
+    ["mossguard", "pollenmoth", "dawncall"],
+    ["reedstag", "ringpalm", "dunefox"],
+    ["glintstride", "chimecricket", "captoad"],
+  ] as const) {
+    const scenario = scenarios.find((entry) => kinds.every((kind) => entry.kinds.includes(kind)))!;
+    it(`supports representative lineup ${scenario.name} through commands and save round trips`, () => {
+      expectSupportedLineup(scenario);
+    });
+  }
 });
 describe("save validation", () => {
   it.each(["not json", "{}", JSON.stringify({ ...createGame(), version: 999 }), "x".repeat(100001)])(
