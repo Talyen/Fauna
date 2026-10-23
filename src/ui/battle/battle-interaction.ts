@@ -32,7 +32,15 @@ function selection(state: Selection, action: SelectionAction): Selection {
         denial: "",
       };
     case "target":
-      return { ...state, hovered: action.id, remembered: { ...state.remembered, [action.side]: action.id } };
+      if (state.hovered === action.id && state.remembered[action.side] === action.id) return state;
+      return {
+        ...state,
+        hovered: action.id,
+        remembered:
+          state.remembered[action.side] === action.id
+            ? state.remembered
+            : { ...state.remembered, [action.side]: action.id },
+      };
     case "leave":
       return state.hovered === action.id ? { ...state, hovered: null } : state;
     case "denial":
