@@ -5,13 +5,14 @@ import { species } from "../game/content";
 import { availablePlays } from "../game/play-queries";
 import {
   battleBenefits,
+  battleBenefitFacts,
   type BattleBenefit,
   type OrdinaryHit,
   type SupportPriority,
 } from "./battle-benefits";
 import type { Command, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 27;
+export const BATTLE_POLICY_VERSION = 28;
 const BATTLE_FINISH_PRIORITY = 1_000_000_000;
 const priorities = {
   none: 0,
@@ -103,9 +104,10 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
         },
       ];
   }
+  const facts = battleBenefitFacts(state);
   return availablePlays(state, autoEndTurn)
     .flatMap((play) =>
-      battleBenefits(state, play).flatMap((benefit) => {
+      battleBenefits(state, play, facts).flatMap((benefit) => {
         const score = benefitScore(benefit);
         const command = play.commands.find((command) => command.targetId === benefit.targetId);
         return score > 0 && command

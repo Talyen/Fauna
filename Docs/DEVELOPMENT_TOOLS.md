@@ -6,7 +6,7 @@
 - [Content audit](#content-checks), [media and listening](#prepared-media-and-sound-desk)
 - [Headless journeys](#headless-journeys), [paired balance](#paired-balance-reports), [findings](#ranked-balance-findings)
 - [Performance](#reproducible-performance-captures), [native/reachable scenarios](#native-and-reachable-performance-scenarios), [compiler trial](#periodic-performance-and-compiler-trial)
-- [Diagnostics](#local-diagnostics), [review/lookup](#review-and-owner-lookup), [platform checks](#architecture-and-packaged-platform-checks)
+- [Diagnostics](#local-diagnostics), [task selection](#task-selection-and-diagnostics), [review/lookup](#review-and-owner-lookup), [platform checks](#architecture-and-packaged-platform-checks)
 
 Reports remain under ignored `reports/`; retain their source/checkpoint identities and actual completion status. Failed/incomplete captures are diagnostics, never accepted evidence. Browser automation simulates input; [Release](RELEASE.md) owns native, package and hardware qualification. [UI review](UI.md#required-review) owns rendered acceptance.
 
@@ -152,9 +152,27 @@ The [performance workflow](../.github/workflows/performance.yml) runs weekly or 
 
 The [session-owned collector](ARCHITECTURE.md#discovery-and-diagnostics) records bounded, redacted failures separately from progression. It has no player report/export surface or automatic upload. Inspect its persistence port and focused tests when investigating collection, deduplication or disposal; ordinary features reuse it rather than collecting saves or arbitrary context.
 
+## Task selection and diagnostics
+
+Verification, context and review share the base recorded in worktree-local Git metadata, surviving commits and branch renames. Unregistered non-main branches and detached checkouts use their common ancestor with local main; main defaults to HEAD. Empty selections explicitly run no checks or review.
+
+| Option                  | Behavior                                                                                                                                          |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Explicit paths          | Narrow the selection                                                                                                                              |
+| `--base <commit>`       | Override the base                                                                                                                                 |
+| `--working-tree`        | Select only uncommitted changes                                                                                                                   |
+| Review `--layers`       | Show committed, staged and unstaged patches, including reverted edits; default review shows the net task change                                   |
+| `--test <suite>`        | Run and remember extra suites for integration, including failed attempts; explicitly requested CI-owned suites run locally within the same limits |
+| `--forget-test <suite>` | Remove an obsolete extra selection                                                                                                                |
+| `--plan`                | Preview selection without changing remembered intent                                                                                              |
+| `--plan --related`      | Suggest import-related tests for coverage investigation; suggestions never displace required or explicit suites                                   |
+| `--diagnostic <mode>`   | Run a [bounded investigation](../scripts/README.md#task-check-implementation), such as `npm run verify:changed -- --diagnostic build`             |
+
+Only the base and extra suite paths are stored, never passing results. Test and static commands have the same scope on every branch; [Contributing](../CONTRIBUTING.md#verification) owns required coverage and suite maintenance.
+
 ## Review and owner lookup
 
-[Contributing](../CONTRIBUTING.md#verification) defines task-base selection, review layers and verification coverage. These read-only tools locate and inspect that selection without staging files or inspecting chats:
+[Task selection](#task-selection-and-diagnostics) applies to these read-only tools; [Contributing](../CONTRIBUTING.md#verification) owns verification coverage. They locate and inspect the selection without staging files or inspecting chats:
 
 | Command                                      | Output                                                                                                              |
 | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |

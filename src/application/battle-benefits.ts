@@ -1,7 +1,7 @@
 import { MAX_BATTLE_CARDS } from "../game/card-zones";
 import { battlefield } from "../game/battlefield";
-import { hasTalent } from "../game/progression";
-import { hasHarmfulEffects, mostInjured, STACK_LIMIT } from "../game/combat/state";
+import { creaturePassive, hasTalent } from "../game/progression";
+import { hasHarmfulEffects, mostInjured, maximumHealth, STACK_LIMIT } from "../game/combat/state";
 import { actionValue, cardCost, physicalBonus } from "../game/ability-rules";
 import { armoredDamage, blockPayment } from "../game/combat/damage-values";
 import { healingValue, restoration, overflowBlock } from "../game/combat/healing-values";
@@ -48,8 +48,38 @@ function healBenefit(state: BattleState, ally: Creature, value: number, play: Av
   return { restored: gain, utility: overflow + Number(cleanses) };
 }
 
+/** Share visible target discovery across the hand, without caching mutable state across commands. */
+export function battleBenefitFacts(state: BattleState) {
+  const injuredAllies = battlefield(state, "player").some(
+    (unit) => unit.health > 0 && unit.health < maximumHealth(unit),
+  );
+  const healingOnPlay =
+    injuredAllies &&
+    ((state.battle.cardsPlayedThisTurn === 1 &&
+      state.team.some(
+        (unit) =>
+          unit.health > 0 &&
+          creaturePassive(state, unit.species).effects.some(
+            (effect) => effect.kind === "livingChorus" && effect.amount > 0,
+          ),
+      )) ||
+      (state.battle.cardsPlayedThisTurn === 2 &&
+        state.boons.includes("resonant-chimes") &&
+        hasTalent(state, "mana.arcane-mending")));
+  let enemies: ReturnType<typeof battlefield> | undefined;
+  return {
+    injuredAllies,
+    healingOnPlay,
+    livingEnemies: () => (enemies ??= battlefield(state, "enemy").filter((unit) => unit.health > 0)),
+  };
+}
+
 /** Visible facts and explicit approximations; ranking weights live with the application policy. */
-export function battleBenefits(state: BattleState, play: AvailablePlay): BattleBenefit[] {
+export function battleBenefits(
+  state: BattleState,
+  play: AvailablePlay,
+  facts: ReturnType<typeof battleBenefitFacts>,
+): BattleBenefit[] {
   const { card, actor, def } = play;
   const value = actionValue(card, actor, state);
   const healing = restoration(
@@ -68,6 +98,24 @@ export function battleBenefits(state: BattleState, play: AvailablePlay): BattleB
     reason?: string,
   ): BattleBenefit[] => [{ kind: "support", priority, amount, targetId, reason }];
   const allies = state.team.filter((unit) => unit.health > 0);
+  // Drawing only this card back cannot justify an already capped Dodge grant.
+  const usefulDraw = () =>
+    !!def.effects?.some((effect) => effect.kind === "draw" && effect.amount > 0) &&
+    ([...state.battle.draw, ...state.battle.discard, ...state.battle.buffer].some((id) => {
+      const drawn = state.cards.find((entry) => entry.id === id)!;
+      return allies.some((unit) => unit.id === drawn.ownerId);
+    }) ||
+      (state.cards.length < MAX_BATTLE_CARDS &&
+        allies.some((unit) =>
+          creaturePassive(state, unit.species).effects.some(
+            (effect) => effect.kind === "wellRead" && effect.amount > 0,
+          ),
+        )));
+  const dodgeSupport = (useful: number) =>
+    support(
+      useful > 0 ? "utility" : facts.healingOnPlay ? "healing" : usefulDraw() ? "standardUtility" : "none",
+      useful > 0 ? useful : 0,
+    );
   switch (def.effect) {
     case "procession": {
       const echoes = (state.battle.minions ?? []).filter(
@@ -86,7 +134,7 @@ export function battleBenefits(state: BattleState, play: AvailablePlay): BattleB
     case "pearl":
       return support("pearl");
     case "attack": {
-      const enemies = battlefield(state, "enemy").filter((unit) => unit.health > 0);
+      const enemies = facts.livingEnemies();
       const outcomes = (enemy: (typeof enemies)[number]): OrdinaryHit[] =>
         [def.damageType, ...(def.alternateDamageType ? [def.alternateDamageType] : [])].map((type) => {
           // Ordinary primary packets omit chance effects and most talent reactions deliberately.
@@ -190,11 +238,16 @@ export function battleBenefits(state: BattleState, play: AvailablePlay): BattleB
         );
       });
     }
-    case "mana":
+    case "mana": {
+      const cost = cardCost(card, state);
+      const regained = Math.min(value, state.battle.maxMana - state.battle.mana + cost);
+      const net = regained - cost;
+      const mending = regained > 0 && hasTalent(state, "mana.arcane-mending") && facts.injuredAllies;
       return support(
-        "resource",
-        Math.min(value, state.battle.maxMana - state.battle.mana + cardCost(card, state)),
+        net > 0 ? "resource" : mending || facts.healingOnPlay ? "healing" : "none",
+        net > 0 ? net : mending || facts.healingOnPlay ? regained : 0,
       );
+    }
     case "teamClearBlind":
       return support("controlRemoval", allies.filter((unit) => unit.combat?.blind).length);
     case "teamThaw":
@@ -207,19 +260,24 @@ export function battleBenefits(state: BattleState, play: AvailablePlay): BattleB
       return support(useful ? "standardUtility" : "none");
     }
     case "teamDodge":
-      return support("utility", value);
+      return dodgeSupport(
+        battlefield(state, "player")
+          .filter((unit) => unit.health > 0)
+          .reduce((sum, unit) => sum + Math.min(value, 70 - (unit.combat?.temporaryDodge ?? 0)), 0),
+      );
     case "redraw":
       return support(state.battle.hand.length > 1 ? "redraw" : "none");
     case "draw":
       return support(healing > 0 ? "healing" : "standardUtility", healing > 0 ? healing : value);
     case "teamBlind": {
-      const useful = battlefield(state, "enemy").filter(
-        (enemy) => enemy.health > 0 && !enemy.combat.blind && !enemy.combat.nullify,
-      ).length;
+      const useful = facts
+        .livingEnemies()
+        .filter((enemy) => enemy.health > 0 && !enemy.combat.blind && !enemy.combat.nullify).length;
       return support(useful > 0 ? "utility" : "none", useful);
     }
     case "teamPurge": {
-      const useful = state.battle.enemies.filter(
+      const enemies = facts.livingEnemies();
+      const useful = enemies.filter(
         (enemy) =>
           enemy.health > 0 &&
           (enemy.block > 0 ||
@@ -233,7 +291,7 @@ export function battleBenefits(state: BattleState, play: AvailablePlay): BattleB
             enemy.combat.nullify ||
             enemy.combat.nullifyFreeze),
       ).length;
-      const defense = state.battle.enemies.some(
+      const defense = enemies.some(
         (enemy) => enemy.health > 0 && (enemy.block > 0 || enemy.combat.armor > 0),
       );
       return support(
@@ -266,19 +324,37 @@ export function battleBenefits(state: BattleState, play: AvailablePlay): BattleB
       return support(useful > 0 ? "protection" : "none", useful);
     }
     case "dodge":
-      return support("utility", Math.max(0, value - (actor.combat?.temporaryDodge ?? 0)));
+      return dodgeSupport(Math.min(value, 70 - (actor.combat?.temporaryDodge ?? 0)));
     case "swap":
     case "swapLowest":
       return support("utility");
-    case "guard":
+    case "guard": {
+      const protection =
+        def.effects?.reduce((sum, effect) => {
+          if (effect.kind === "reflect")
+            return (
+              sum + Number(!(effect.status === "burn" ? actor.combat?.reflectBurn : actor.combat?.reflect))
+            );
+          if (effect.kind === "nullifyFreeze") return sum + Number(!actor.combat?.nullifyFreeze);
+          if (effect.kind === "status")
+            return (
+              sum +
+              Math.min(
+                effect.amount,
+                (effect.status === "dodge" ? 70 : STACK_LIMIT) - (actor.combat?.[effect.status] ?? 0),
+              )
+            );
+          return sum;
+        }, 0) ?? 0;
       return (def.target === "self" ? [actor] : allies).flatMap((ally) => {
         const useful = Math.min(value, STACK_LIMIT - ally.block);
         return support(
-          healing > 0 ? "healing" : useful > 0 ? "protection" : "none",
-          healing > 0 ? healing : useful,
+          healing > 0 ? "healing" : useful + protection > 0 ? "protection" : "none",
+          healing > 0 ? healing : useful + protection,
           def.target === "self" ? undefined : ally.id,
         );
       });
+    }
     default: {
       const unhandled: never = def;
       throw new Error(`Unhandled battle benefit: ${unhandled}`);

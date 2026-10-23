@@ -9,7 +9,7 @@ The [approved plan](../archive/COMPLEXITY_REDUCTION_PLAN.md) was implemented in 
 - The combat type derives from the saved aggregate. `ensureCombat` names initialization explicitly; allegiance and roster membership use distinct queries. The saved layout and format stay unchanged
 - Target classification and read-only admission queries serve commands, execution, presentation and legal Auto-play candidates. Random selection, interception and group rereads remain execution work
 - Battle selection uses one reducer and DOM adapter; geometry has its own hook. One preview projection supplies affected IDs, status changes and event readouts without mutating authoritative results
-- Auto-play uses exhaustive benefit handling and one ranking owner, retaining numeric priorities, ordinary-hit assumptions, stable ties and the existing cycle guard. Its policy version remains 27
+- Auto-play uses exhaustive benefit handling and one ranking owner, retaining numeric priorities, ordinary-hit assumptions, stable ties and the existing cycle guard. Its policy version follows main at 28
 
 Review covered captured versus live values, reaction ordering, RNG consumption, control recovery, earned Bleed obligations, query/command equivalence, hidden-information boundaries, focus restoration, effect cleanup and superseded code removal. The original deterministic gameplay snapshots remain unchanged. Main's concurrent authored-kit caches, allocation reductions, temporary-card cleanup and boundary fixes were retained during reconciliation.
 

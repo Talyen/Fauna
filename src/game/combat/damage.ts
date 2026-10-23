@@ -46,25 +46,29 @@ export function* bounce(
   if (!state.battle) return;
   const { effect } = action;
   const allied = !isEnemy(source);
-  const pool = battlefield(
-    state,
-    effect === "heal" ? (allied ? "player" : "enemy") : allied ? "enemy" : "player",
-  );
-  const visited = new Set([first.id]);
+  let pool: Combatant[] | undefined;
+  let visited: Set<string> | undefined;
   for (const entry of creaturePassive(allied ? state : undefined, source.species).effects) {
     if (entry.kind !== "bounce" || entry.effect !== effect) continue;
+    // Ordinary hits and heals need no bounce snapshot or visited-target tracking.
+    pool ??= battlefield(
+      state,
+      effect === "heal" ? (allied ? "player" : "enemy") : allied ? "enemy" : "player",
+    );
+    visited ??= new Set([first.id]);
+    const visitedTargets = visited;
     for (let i = 0; i < entry.amount; i++) {
       const eligible = pool.filter(
         (unit) =>
           unit.health > 0 &&
-          !visited.has(unit.id) &&
+          !visitedTargets.has(unit.id) &&
           (effect !== "heal" || unit.health < maximumHealth(unit)),
       );
       if (source.health <= 0 || !eligible.length) return;
       if (entry.chance !== undefined && !succeeds(state, entry.chance, !allied, action.events)) return;
       const target =
         effect === "heal" ? mostInjured(eligible)! : eligible[Math.floor(roll(state) * eligible.length)]!;
-      visited.add(target.id);
+      visitedTargets.add(target.id);
       if (action.effect === "heal")
         yield* reaction(
           "restoreHealth",

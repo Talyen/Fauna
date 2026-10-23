@@ -2,9 +2,11 @@
 
 The user chose Alchemy's wind-up, swing and hit reactions instead of individually selecting a new recoil distance on 2026-10-20. The choreography is implemented in Fauna. Retain shadcn controls and ArtCard; do not import Alchemy's control components or change Fauna's gameplay rules.
 
-## Evidence scope
-
-These notes record the October 20, 2026 adoption. Full viewport, desktop, physical-controller and CI acceptance were pending; implementation does not establish visual acceptance of current main. The source identities, choreography and checks below retain that historical scope.
+> **Status/source:** historical Alchemy adoption, October 20, 2026; source identities and choreography follow below
+>
+> **Current owners:** [design system](../../Docs/DESIGN_SYSTEM.md) and [required rendered review](../../Docs/UI.md#required-review)
+>
+> **Evidence:** full viewport, desktop, physical-controller and CI acceptance were pending; implementation does not establish visual acceptance of current main
 
 ## Inspected source
 
@@ -43,7 +45,3 @@ Use a dedicated presentation wrapper so wind-up/swing/recoil cannot overwrite Ar
 ## Implementation ownership and acceptance
 
 Presentation owners are `src/ui/battle/combat-impact.ts`, `src/ui/battle/combat-feedback.tsx` and the separate motion/reaction wrappers in `src/ui/shared/cards/cards.tsx`. Committed events distinguish attack/support/swap. Ownership tests cover interruption, reduced motion and disposal; required review also covers classification, blocked/zero/periodic damage, repeated/overlapping actions, transform isolation and unchanged gameplay/saves. Render both attack directions at short viewports.
-
-## Production adoption
-
-Current implementation ownership is mapped in the [design system](../../Docs/DESIGN_SYSTEM.md); new work follows [required rendered review](../../Docs/UI.md#required-review).

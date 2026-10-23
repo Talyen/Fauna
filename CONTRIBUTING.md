@@ -34,21 +34,7 @@ Ordinary test, static, build, browser-test and verification entrypoints enforce 
 
 ### Advanced selection and diagnostics
 
-Verification, context and review share the base recorded in worktree-local Git metadata, surviving commits and branch renames. Unregistered non-main branches and detached checkouts use their common ancestor with local main; main defaults to HEAD. Empty selections explicitly run no checks or review.
-
-| Option                  | Behavior                                                                                                                                          |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Explicit paths          | Narrow the selection                                                                                                                              |
-| `--base <commit>`       | Override the base                                                                                                                                 |
-| `--working-tree`        | Select only uncommitted changes                                                                                                                   |
-| Review `--layers`       | Show committed, staged and unstaged patches, including reverted edits; default review shows the net task change                                   |
-| `--test <suite>`        | Run and remember extra suites for integration, including failed attempts; explicitly requested CI-owned suites run locally within the same limits |
-| `--forget-test <suite>` | Remove an obsolete extra selection                                                                                                                |
-| `--plan`                | Preview selection without changing remembered intent                                                                                              |
-| `--plan --related`      | Suggest import-related tests for coverage investigation; suggestions never displace required or explicit suites                                   |
-| `--diagnostic <mode>`   | Run a [bounded investigation](scripts/README.md#task-check-implementation), such as `npm run verify:changed -- --diagnostic build`                |
-
-Only the base and extra suite paths are stored, never passing results. Moving or retiring a required suite requires updating the owner registry, including changed/deleted CI-owned entries. `verify` remains an alias for `verify:changed`; `test:full` and `check:full` retain full-suite coverage. Test and static commands have the same scope on every branch.
+Use the [tool selection reference](Docs/DEVELOPMENT_TOOLS.md#task-selection-and-diagnostics) for base overrides, review layers, remembered suites and bounded investigations. Moving or retiring a required suite requires updating the owner registry, including changed/deleted CI-owned entries. `verify` aliases `verify:changed`; `test:full` and `check:full` retain full-suite coverage on every branch.
 
 ### Documentation scope
 
