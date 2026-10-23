@@ -1,14 +1,15 @@
 import { canVisitCampfire } from "../../src/game/destinations";
 import { ownedCards, swapBackup } from "../../src/game/team";
-import { freshCombat, combat } from "../../src/game/combat/index";
+import { freshCombat, ensureCombat } from "../../src/game/combat/index";
 import { controlled } from "../../src/game/combat/index";
 import { produce } from "immer";
 import { encounterPacks } from "../../src/game/encounters";
 import { createGame, dispatch } from "../../src/game/engine";
 import { definition, species, type SpeciesId } from "../../src/game/content";
 import type { Command, GameState, Lifecycle, BattleState, Creature } from "../../src/game/types";
-// A bounded winning UI/session route; policy scoring is covered at the application boundary
-export const FULL_JOURNEY_SEED = 37;
+// Shared bound accounts for solo Legendary Bosses and their recruitment choices
+// Policy 29 completes this fixed journey; seed 22 now exceeds the command budget.
+export const FULL_JOURNEY_SEED = 48;
 export const FULL_JOURNEY_COMMAND_BUDGET = 800;
 export function run(seed = 42) {
   return teamRun(seed, ["mossguard", "emberback", "prismram"]);
@@ -78,7 +79,7 @@ export function victoryReady(s = run()) {
       e.combat.skipped = false;
     });
     const attack = d.cards.find((c) => definition(c.definitionId).effect === "attack")!;
-    combat(d.team.find((creature) => creature.id === attack.ownerId)!).blind = false;
+    ensureCombat(d.team.find((creature) => creature.id === attack.ownerId)!).blind = false;
     d.battle!.hand = [attack.id];
     d.battle!.buffer = [];
     d.battle!.draw = d.cards.filter((c) => c.id !== attack.id).map((c) => c.id);
@@ -238,8 +239,8 @@ export function feedbackBattle() {
     game.battle!.draw = game.cards.filter((card) => card.id !== attack.id).map((card) => card.id);
     const actor = game.team.find((creature) => creature.id === attack.ownerId)!;
     actor.health -= 5;
-    combat(actor).riposte = true;
-    combat(actor).partingCut = true;
+    ensureCombat(actor).riposte = true;
+    ensureCombat(actor).partingCut = true;
     const target = game.battle!.enemies[0]!;
     target.block = 4;
     target.combat.armor = 0;

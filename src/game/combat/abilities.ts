@@ -1,12 +1,13 @@
+import { cardTargeting } from "../card-rules";
 import { interceptAttack } from "./interception";
-import { battlefield } from "../battlefield";
+import { battlefield, isRosterCreature } from "../battlefield";
 import { summonEcho, createPearls, drawBossCards } from "./legendary";
 import { definition, species, type CardDefinition } from "../content";
 import { creaturePassive, hasTalent } from "../progression";
 import { definitionKeywords } from "../keywords";
 import { abilityExtras, scalePower } from "./ability-values";
 import {
-  combat,
+  ensureCombat,
   grantBlock,
   grantStatus,
   grantArmor,
@@ -46,21 +47,21 @@ const opposingRow = (state: GameState, action: AbilityAction): Combatant[] =>
 const alive = (row: Combatant[]) => row.filter((unit) => unit.health > 0);
 
 function encore(state: GameState, actor: Combatant, events: GameEvent[]) {
-  const stats = combat(actor);
-  const chance = creaturePassive("maxHealth" in actor ? undefined : state, actor.species).effects.reduce(
+  const stats = ensureCombat(actor);
+  const chance = creaturePassive(isRosterCreature(actor) ? state : undefined, actor.species).effects.reduce(
     (total, effect) => total + (effect.kind === "encore" ? effect.amount : 0),
     0,
   );
   if (chance <= 0 || stats.encoreUsed) return false;
   stats.encoreUsed = true;
-  return succeeds(state, chance / 100, "maxHealth" in actor, events);
+  return succeeds(state, chance / 100, !isRosterCreature(actor), events);
 }
 function kindlingFlourish(state: GameState, actor: Combatant, events: GameEvent[]) {
-  const chance = creaturePassive("maxHealth" in actor ? undefined : state, actor.species).effects.reduce(
+  const chance = creaturePassive(isRosterCreature(actor) ? state : undefined, actor.species).effects.reduce(
     (total, effect) => total + (effect.kind === "kindlingFlourish" ? effect.amount : 0),
     0,
   );
-  return succeeds(state, chance / 100, "maxHealth" in actor, events);
+  return succeeds(state, chance / 100, !isRosterCreature(actor), events);
 }
 function recoverDiscard(state: GameState, events: GameEvent[]) {
   const battle = state.battle!;
@@ -84,7 +85,7 @@ function recoverDiscard(state: GameState, events: GameEvent[]) {
 function hushDome(state: GameState, enemy: boolean, events: GameEvent[]) {
   for (const unit of battlefield(state, enemy ? "enemy" : "player")) {
     if (unit.health <= 0) continue;
-    combat(unit).nullify = true;
+    ensureCombat(unit).nullify = true;
     events.push({
       kind: "status",
       targetId: unit.id,
@@ -151,7 +152,7 @@ function applyExtras(
         for (const recipient of battlefield(state, enemy ? "player" : "enemy")) {
           if (actor.health <= 0) break;
           if (recipient.health <= 0 || options.negated?.has(recipient.id)) continue;
-          const stats = combat(recipient);
+          const stats = ensureCombat(recipient);
           const { removed, depletion } = removeArmor(
             recipient,
             Math.ceil((stats.armor * effect.amount) / 100),
@@ -175,7 +176,7 @@ function applyExtras(
             applyBlind(state, actor, recipient, events);
         break;
       case "nullifyFreeze":
-        combat(actor).nullifyFreeze = true;
+        ensureCombat(actor).nullifyFreeze = true;
         events.push({
           kind: "status",
           targetId: actor.id,
@@ -185,8 +186,8 @@ function applyExtras(
         });
         break;
       case "reflect":
-        if (effect.status === "burn") combat(actor).reflectBurn = true;
-        else combat(actor).reflect = true;
+        if (effect.status === "burn") ensureCombat(actor).reflectBurn = true;
+        else ensureCombat(actor).reflect = true;
         events.push({
           kind: "status",
           targetId: actor.id,
@@ -269,7 +270,7 @@ export function executeAbility(
       grantArmor(state, actor, 6, events);
   }
   if (actor.health <= 0) return;
-  const stats = combat(actor);
+  const stats = ensureCombat(actor);
   const previousPlays = stats.cardsPlayedThisTurn;
   stats.cardsPlayedThisTurn = Math.min(2, previousPlays + 1);
   const flourishRepeat = previousPlays === 1 && kindlingFlourish(state, actor, events);
@@ -341,7 +342,7 @@ export function executeAbility(
             continue;
           }
           if (def.purgeThorns) {
-            const stats = combat(recipient);
+            const stats = ensureCombat(recipient);
             for (const status of ["thorns", "waterThorns"] as const) {
               const removed = stats[status];
               stats[status] = 0;
@@ -383,7 +384,7 @@ export function executeAbility(
         const targets =
           def.effect === "teamGuard"
             ? alive(friendlyRow(state, action))
-            : def.target === "self"
+            : cardTargeting(def) === "self"
               ? [actor]
               : friendlyRow(state, action).filter((unit) => unit.id === action.allyTargetId);
         for (const recipient of targets) grantBlock(state, recipient, value, events);
@@ -394,7 +395,7 @@ export function executeAbility(
         const targets =
           def.target === "allAllies"
             ? alive(allies)
-            : def.target === "self"
+            : cardTargeting(def) === "self"
               ? [actor]
               : def.target === "mostInjured"
                 ? [mostInjured(allies)!]
@@ -407,7 +408,7 @@ export function executeAbility(
       }
       case "dreamDouble":
         grantStatus(actor, "thorns", value, events, state);
-        combat(actor).negate = true;
+        ensureCombat(actor).negate = true;
         events.push({
           kind: "status",
           actorId: actor.id,
@@ -474,7 +475,7 @@ export function executeAbility(
         break;
       case "teamClearBlind":
         for (const unit of alive(friendlyRow(state, action)))
-          if (combat(unit).blind) removeEffects(unit, "cleanse", 1, events, state, "blind");
+          if (ensureCombat(unit).blind) removeEffects(unit, "cleanse", 1, events, state, "blind");
         break;
       case "swapLowest": {
         const outgoing = alive(action.side === "player" ? state.team : state.battle.enemies).sort(

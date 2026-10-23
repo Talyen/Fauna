@@ -4,15 +4,24 @@ import { draw } from "../card-zones";
 import { hasTalent, creaturePassive } from "../progression";
 
 import type { GameEvent, GameState } from "../types";
-import { combat, unitName, STACK_LIMIT, type Combatant } from "./state";
+import { ensureCombat, unitName, STACK_LIMIT, type Combatant } from "./state";
 
 import { reaction, type Resolution } from "./operations";
+import {
+  beginControlTurn,
+  consumeControlTurn,
+  advanceControlImmunity,
+  reducePeriodicStacks,
+  periodicTick,
+  finishBleedTick,
+  bleedPayments,
+  setPeriodicStacks,
+} from "./status-state";
 
 export function* tickStatuses(state: GameState, unit: Combatant, events: GameEvent[]): Resolution<void> {
-  const stats = combat(unit);
+  const stats = ensureCombat(unit);
   if (!isEnemy(unit) && unit.health > 0 && stats.poison > 0 && state.boons.includes("plague-doctors-mask")) {
-    const removed = Math.min(2, stats.poison);
-    stats.poison -= removed;
+    const removed = reducePeriodicStacks(stats, "poison", 2);
     events.push({
       kind: "status",
       targetId: unit.id,
@@ -23,7 +32,6 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
       text: `${unitName(unit)} Cleanses ${removed} Poison.`,
     });
     if (stats.poison === 0) {
-      delete stats.statusSources.poison;
       yield* reaction("cleanseRewards", state, unit, 1, events);
     }
     const target = state.battle!.enemies.find((enemy) => enemy.health > 0);
@@ -35,34 +43,30 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
   }
   for (const status of ["burn", "poison", "bleed"] as const) {
     if (unit.health <= 0) break;
-    const amount = stats[status];
-    if (amount <= 0) continue;
+    if (stats[status] <= 0) continue;
+    const { amount, sourceId, payouts } = periodicTick(stats, status);
     // Ticks bypass Block and do not reapply their own buildup.
     const source =
       [...battlefield(state, "player"), ...state.reserves, ...battlefield(state, "enemy")].find(
-        (candidate) => candidate.id === stats.statusSources[status],
+        (candidate) => candidate.id === sourceId,
       ) ?? unit;
     // Cleanse reactions may remove the wound, but cannot revoke healing earned by this tick.
-    const payouts = status === "bleed" ? stats.bleedLeech : [];
     const lost =
       (yield* reaction("hit", state, source, unit, amount, status, events, { origin: "periodic" })) ?? 0;
     if (status === "bleed") {
-      stats.bleedLeech = [];
-      let remaining = lost;
-      for (const payout of payouts) {
+      finishBleedTick(stats);
+      for (const payout of bleedPayments(payouts, lost)) {
         const owner = [
           ...battlefield(state, "player"),
           ...state.reserves,
           ...battlefield(state, "enemy"),
         ].find((candidate) => candidate.id === payout.sourceId);
-        const paid = Math.min(remaining, payout.amount);
-        if (owner) yield* reaction("leechHealth", state, owner, paid, events, true);
-        remaining -= paid;
+        if (owner) yield* reaction("leechHealth", state, owner, payout.amount, events, true);
       }
     }
     // Threshold reactions can Cleanse the ticking status; decay must not restore it.
     if (stats[status] === 0) continue;
-    stats[status] =
+    let next =
       status === "bleed"
         ? 0
         : status === "burn"
@@ -72,15 +76,14 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
           : Math.max(0, amount - Math.max(1, Math.round(amount * 0.2)));
     if (isEnemy(unit) && !isEnemy(source)) {
       if (status === "burn" && hasTalent(state, "burn.smoldering") && succeeds(state, 0.1, false, events))
-        stats.burn = amount;
+        next = amount;
       if (status === "poison") {
-        if (stats.controlled === "freeze" && hasTalent(state, "freeze.cryo-preservation"))
-          stats.poison = amount;
+        if (stats.controlled === "freeze" && hasTalent(state, "freeze.cryo-preservation")) next = amount;
         if (hasTalent(state, "poison.virulent") && succeeds(state, 0.1, false, events))
-          stats.poison = Math.min(STACK_LIMIT, amount + 1);
+          next = Math.min(STACK_LIMIT, amount + 1);
       }
     }
-    if (stats[status] === 0) delete stats.statusSources[status];
+    setPeriodicStacks(stats, status, next);
   }
 }
 /** Called once at the start of the owner's turn, including while in reserve. */
@@ -90,12 +93,12 @@ export function* startAction(
   state?: GameState,
   resetTemporaryDodge = true,
 ): Resolution<boolean> {
-  const stats = combat(unit);
+  const stats = ensureCombat(unit);
   if (resetTemporaryDodge) stats.temporaryDodge = 0;
   stats.encoreUsed = false;
   stats.cardsPlayedThisTurn = 0;
   stats.firstAttackUsed = false;
-  stats.skipped = !!stats.controlled;
+  beginControlTurn(stats);
   if (state?.phase === "battle" && state.battle && unit.health > 0) {
     const enemy = isEnemy(unit);
     const row = battlefield(state, enemy ? "enemy" : "player");
@@ -117,13 +120,9 @@ export function* startAction(
       outcome: "skip",
       text: `${unitName(unit)} skips its ${stats.controlled === "freeze" ? "Frozen" : "Stunned"} turn.`,
     });
-    stats.controlTurns = Math.max(0, stats.controlTurns - 1);
-    if (stats.controlTurns === 0) {
-      if (stats.controlled === "freeze" && isEnemy(unit) && state && hasTalent(state, "freeze.thaw-dividend"))
-        draw(state, 1, events);
-      stats.controlled = null;
-      stats.cooldown = 3;
-    }
-  } else if (stats.cooldown > 0) stats.cooldown--;
+    const recovered = consumeControlTurn(stats);
+    if (recovered === "freeze" && isEnemy(unit) && state && hasTalent(state, "freeze.thaw-dividend"))
+      draw(state, 1, events);
+  } else advanceControlImmunity(stats);
   return !stats.skipped;
 }

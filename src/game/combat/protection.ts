@@ -1,3 +1,4 @@
+import { healingValue, restoration, overflowBlock } from "./healing-values";
 import { chance as succeeds } from "../chance";
 import { isEnemy, battlefield } from "../battlefield";
 import { drawKeyword } from "../card-zones";
@@ -5,7 +6,7 @@ import { hasTalent, creaturePassive } from "../progression";
 
 import type { GameEvent, GameState } from "../types";
 import {
-  combat,
+  ensureCombat,
   maximumHealth,
   unitName,
   mostInjured,
@@ -27,18 +28,13 @@ export function* restoreHealth(
   source?: Combatant,
 ): Resolution<void> {
   const baseAmount = amount;
-  if (state?.phase === "battle") {
-    if (!isEnemy(unit) && hasTalent(state, "health.mending")) amount *= 1.1;
-    if (isEnemy(unit) && unit.combat.poison > 0 && hasTalent(state, "poison.necrosis")) amount *= 0.5;
-    if (isEnemy(unit) && unit.combat.bleed > 0 && hasTalent(state, "bleed.mortal-wound")) amount *= 0.5;
-  }
+  amount = healingValue(state, unit, amount);
   if (unit.health === 0 && !revive) return;
-  const gain = Math.min(Math.max(0, Math.round(amount)), maximumHealth(unit) - unit.health);
-  const excess = Math.max(0, Math.round(amount) - gain);
+  const { gain, excess } = restoration(unit, amount);
   unit.health += gain;
   if (cardHealing && state && !isEnemy(unit) && excess > 0) {
     if (hasTalent(state, "health.overflow"))
-      yield* reaction("grantBlock", state, unit, Math.round(excess * 0.25), events);
+      yield* reaction("grantBlock", state, unit, overflowBlock(excess), events);
     if (hasTalent(state, "health.clean-slate"))
       yield* reaction("removeEffects", unit, "cleanse", 1, events, state);
   }
@@ -147,7 +143,7 @@ export function* grantArmor(
 ): Resolution<void> {
   if (unit.health <= 0 || amount <= 0) return;
   const allied = !isEnemy(unit),
-    before = combat(unit).armor;
+    before = ensureCombat(unit).armor;
   if (allied) {
     if (hasTalent(state, "armor.last-stand") && unit.health < maximumHealth(unit) / 2) amount *= 1.25;
     if (hasTalent(state, "armor.reinforced") && succeeds(state, 0.1, false, events)) amount *= 2;
@@ -155,7 +151,7 @@ export function* grantArmor(
   yield* reaction("grantStatus", unit, "armor", Math.round(amount), events, state);
   if (
     allied &&
-    combat(unit).armor > before &&
+    ensureCombat(unit).armor > before &&
     hasTalent(state, "armor.purification") &&
     succeeds(state, 0.1, false, events)
   )
@@ -199,7 +195,7 @@ export function* healthThresholds(
   before: number,
   events: GameEvent[],
 ): Resolution<void> {
-  const stats = combat(unit);
+  const stats = ensureCombat(unit);
   if (!isEnemy(unit) && unit.health > 0) {
     if (before >= maximumHealth(unit) / 2 && unit.health < maximumHealth(unit) / 2) {
       if (hasTalent(state, "armor.steadfast")) yield* reaction("grantArmor", state, unit, 3, events);

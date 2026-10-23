@@ -9,7 +9,7 @@ const id = z.string().min(1).max(120);
 const speciesId = z.enum(SPECIES.map((entry) => entry.id));
 const xp = z.partialRecord(z.enum(KEYWORDS), natural);
 const boonId = z.enum(BOONS.map((r) => r.id));
-const combatState = z
+const combatStateSchema = z
   .object({
     controlTurns: z.number().int().min(0).max(2),
     rhythm: z.number().int().min(0).max(70),
@@ -69,7 +69,7 @@ const minion = z.object({
   power: z.number().min(1).max(2),
   targetId: id,
   block: natural,
-  combat: combatState,
+  combat: combatStateSchema,
   lastAbility: z.null(),
   minion: z.object({ ownerId: id, side: z.enum(["player", "enemy"]) }),
 });
@@ -98,7 +98,7 @@ const battle = z.object({
         power: z.number().min(1).max(2),
         targetId: id,
         block: natural,
-        combat: combatState,
+        combat: combatStateSchema,
         lastAbility: id.nullable(),
         deck: enemyDeck.optional(),
       }),
@@ -112,7 +112,7 @@ const creature = z.object({
   health: natural,
   block: natural,
   attacked: z.boolean(),
-  combat: combatState.optional(),
+  combat: combatStateSchema.optional(),
 });
 const shared = z.object({
   version: z.literal(saveFormat.version),

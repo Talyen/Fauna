@@ -181,14 +181,13 @@ describe("journey earnings and results", () => {
     expect(s.journey).toBeNull();
     expect(s.keywordXP).toEqual(oldXP);
     expect(s.currency).toBe(200);
-    // Controlled victories below need ordinary attackers, independent of offer ordering.
-    while (s.selected.length < starterCount(s)) {
-      const starter = s.starterOffers.find(
-        (kind) => !species(kind).legendary && speciesCards(kind).some((card) => card.effect === "attack"),
-      );
-      expect(starter).toBeDefined();
-      s = accept(s, { type: "draft", species: starter! });
-    }
+    // The battle-finishing fixture needs an attacking starter, rather than a solo support Legendary.
+    const attacker = s.starterOffers.find((kind) =>
+      speciesCards(kind).some((card) => card.effect === "attack"),
+    )!;
+    s = accept(s, { type: "draft", species: attacker });
+    while (s.selected.length < starterCount(s))
+      s = accept(s, { type: "draft", species: s.starterOffers[0]! });
     s = accept(s, { type: "start" });
     expect(s.journey).toMatchObject({ outcome: null, victories: 0, currency: 0, xp: {} });
     for (let i = 0; i < 8; i++) {

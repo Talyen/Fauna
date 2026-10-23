@@ -6,7 +6,7 @@ import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import net from "node:net";
 import { taskIntent, recordTaskIntent } from "../../../scripts/lib/task-intent.mjs";
-import { runLocal } from "../../../scripts/local.mjs";
+import { runLocal, localPolicy } from "../../../scripts/local.mjs";
 import { selectedPaths, parseCheckArgs, runCheck } from "../../../scripts/checks/check.mjs";
 import { verificationIdentity } from "../../../scripts/checks/input-identity.mjs";
 import { taskContext } from "../../../scripts/agent/agent-context.mjs";
@@ -245,7 +245,7 @@ it("bounds diagnostic resources independently of the number of unit suites", asy
   ])
     expect(() => investigationArgs(root, args)).toThrow();
   const runner = vi.fn(() => ({ status: null, signal: "SIGTERM" }));
-  expect(await investigate(["types"], { root, runner })).toBe(1);
+  expect(await investigate(["types"], { root, runner, env: { FAUNA_LOCAL_HEAVY: "1" } })).toBe(1);
   expect(runner.mock.calls[0][2]).toMatchObject({ timeout: 300_000 });
   expect(runner.mock.calls[0][2].env.NODE_OPTIONS).toMatch(/--max-old-space-size=2048$/);
 });
@@ -522,10 +522,55 @@ it("shows the final net change once and exposes reverted intermediate edits only
   expect(review(root, [], { layers: true }).preview).toContain("Intermediate");
 });
 
+it("blocks expensive local entrypoints before launching work and bounds one exact regression", async () => {
+  const root = fixture();
+  const runner = vi.fn(async () => ({ status: 0 }));
+  const error = vi.spyOn(console, "error").mockImplementation(() => {});
+  for (const kind of [
+    "test:full",
+    "verify:full",
+    "check:full",
+    "check:types",
+    "check:lint",
+    "check:format",
+    "check:boundaries",
+    "deadcode",
+    "build",
+    "test:e2e",
+    "test:desktop",
+    "test:interactions",
+    "test:e2e:route",
+    "perf",
+    "balance:playthrough",
+    "balance:compare",
+  ]) {
+    expect(await runLocal(kind, [], { root, env: {}, runner })).toBe(1);
+    expect(localPolicy(kind, [], { root, env: { CI: "true" } })).toBeNull();
+    expect(localPolicy(kind, [], { root, env: { FAUNA_LOCAL_HEAVY: "1" } })).toBeNull();
+  }
+  for (const args of [["tests"], ["--maxWorkers=8"], ["missing.test.ts"], ["tests/unit/../other.test.ts"]])
+    expect(await runLocal("test", args, { root, env: {}, runner })).toBe(1);
+  expect(await investigate(["browser", "battle"], { root, env: {}, runner })).toBe(1);
+  expect(runner).not.toHaveBeenCalled();
+  expect(error.mock.calls.flat().join(" ")).toContain("CI-owned");
+  const suite = "tests/unit/example.test.mjs";
+  put(root, suite, "export {};\n");
+  expect(await runLocal("test", [suite], { root, env: {}, runner })).toBe(0);
+  expect(runner.mock.calls[0][2].timeout).toBeLessThanOrEqual(30_000);
+  expect(runner.mock.calls[0][2].env.NODE_OPTIONS).toMatch(/--max-old-space-size=1024$/);
+  expect(localPolicy("test", [suite, "-t", "one regression"], { root, env: {} })).toBeNull();
+  expect(localPolicy("test", [suite, "--maxWorkers=8"], { root, env: {} })).toContain("CI-owned");
+  runner.mockClear();
+  expect(await runLocal("test", [], { root, env: {}, runner })).toBe(0);
+  expect(runner.mock.calls[0][1][0]).toMatch(/run-local-tests\.mjs$/);
+});
+
 it("enforces ordinary local command budgets while retaining CI parallelism and failing recipes early", async () => {
   const root = fixture();
   const runner = vi.fn(async () => ({ status: 0 }));
-  expect(await runLocal("test", ["--maxWorkers=8"], { root, env: {}, runner })).toBe(0);
+  expect(await runLocal("test", ["--maxWorkers=8"], { root, env: { FAUNA_LOCAL_HEAVY: "1" }, runner })).toBe(
+    0,
+  );
   const [, args, options] = runner.mock.calls[0];
   expect(args.at(-2)).toBe("--maxWorkers=1");
   expect(args.at(-1)).toBe("--no-file-parallelism");
@@ -537,7 +582,7 @@ it("enforces ordinary local command budgets while retaining CI parallelism and f
   expect(runner.mock.calls[0][1]).not.toContain("--maxWorkers=1");
   expect(runner.mock.calls[0][2].timeout).toBeUndefined();
   runner.mockClear().mockResolvedValue({ status: 7 });
-  expect(await runLocal("build", [], { root, env: {}, runner })).toBe(7);
+  expect(await runLocal("build", [], { root, env: { FAUNA_LOCAL_HEAVY: "1" }, runner })).toBe(7);
   expect(runner).toHaveBeenCalledTimes(1);
 });
 

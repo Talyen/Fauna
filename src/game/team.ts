@@ -1,3 +1,4 @@
+import { isRosterCreature } from "./battlefield";
 import { recycleDiscard, fillHand, MAX_BATTLE_CARDS } from "./card-zones";
 import { removeDepartedMinions } from "./combat/legendary";
 import { shuffle, roll } from "./random";
@@ -215,7 +216,7 @@ export function swapFromCard(
   events: GameEvent[],
   backupOnly = false,
 ) {
-  const allied = !("maxHealth" in actor);
+  const allied = isRosterCreature(actor);
   const backup = allied ? state.reserves.filter((unit) => unit.health > 0) : [];
   if (backup.length) {
     const incoming = backup[Math.floor(roll(state) * backup.length)]!;

@@ -4,6 +4,7 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { npmCommand } from "../lib/npm-command.mjs";
 import { selectPaths } from "./agent-review.mjs";
+import { localPolicy } from "../local.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "../..");
 
@@ -39,14 +40,19 @@ export function investigationArgs(root, args) {
 
 export async function investigate(
   args = process.argv.slice(2),
-  { root = ROOT, runner = runInvestigation } = {},
+  { root = ROOT, runner = runInvestigation, env: parentEnv = process.env } = {},
 ) {
   const argv = investigationArgs(root, args);
+  const denied = localPolicy(argv[1], argv.slice(3), { root, env: parentEnv });
+  if (denied) {
+    console.error(denied);
+    return 1;
+  }
   const [command, commandArgs] = npmCommand(argv);
   let preview;
   const env = {
-    ...process.env,
-    NODE_OPTIONS: `${process.env.NODE_OPTIONS ?? ""} --max-old-space-size=2048`.trim(),
+    ...parentEnv,
+    NODE_OPTIONS: `${parentEnv.NODE_OPTIONS ?? ""} --max-old-space-size=2048`.trim(),
     RAYON_NUM_THREADS: "1",
   };
   try {
@@ -62,7 +68,7 @@ export async function investigate(
       stdio: "inherit",
       timeout: 300_000,
       env,
-      grouped: process.env.FAUNA_COMMAND_BUDGET !== "1",
+      grouped: parentEnv.FAUNA_COMMAND_BUDGET !== "1",
     });
     if (result.error) console.error(`Bounded investigation could not finish: ${result.error.message}`);
     return result.error ? 1 : (result.status ?? 1);

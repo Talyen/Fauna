@@ -1,4 +1,4 @@
-import { authoredPack, swapFixture } from "../../support/game";
+import { authoredPack, swapFixture, addBackups } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, definition, species, type DamageType } from "../../../src/game/content";
@@ -142,7 +142,7 @@ it("chooses living deployed opponents for either side and never scales enemy Ref
     enemy.combat.reflect = true;
     game.team[0]!.health = 0;
     game.team[2]!.health = 0;
-    game.reserves.push({ ...game.team[0]!, id: "reserve", health: 30, combat: freshCombat() });
+    addBackups(game, { ...game.team[0]!, id: "reserve", health: 30, combat: freshCombat() });
     hit(game, game.team[1]!, enemy, 2, "burn", [], { origin: "proc" as const });
   });
   expect(result.team[1]!.combat!.burn).toBe(2);
@@ -218,7 +218,7 @@ it("refreshes one Ward, preserves it through swaps and turn changes, and resets 
   let game = accept(ready(), { type: "play", cardId: ready().battle!.hand[0]!, autoEndTurn: false });
   game = produce(game, (draft) => {
     draft.battle!.hand = draft.battle!.discard.splice(0);
-    draft.reserves.push({
+    addBackups(draft, {
       ...draft.team[1]!,
       id: "reserve",
       species: "emberback",
@@ -231,7 +231,7 @@ it("refreshes one Ward, preserves it through swaps and turn changes, and resets 
   // Use a separate live battle for the tactical swaps and transition.
   game = produce(ready(), (draft) => {
     draft.team[0]!.combat!.reflect = true;
-    draft.reserves.push({
+    addBackups(draft, {
       ...draft.team[1]!,
       id: "reserve",
       species: "emberback",

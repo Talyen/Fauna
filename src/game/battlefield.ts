@@ -1,6 +1,7 @@
 import type { Creature, Enemy, GameState } from "./types";
 export const isEnemy = (unit: Creature | Enemy): unit is Enemy =>
   "maxHealth" in unit && unit.minion?.side !== "player";
+export const isRosterCreature = (unit: Creature | Enemy): unit is Creature => !("maxHealth" in unit);
 /** Battle-only summons never enter the roster, backup, lineup or creature deck. */
 export function battlefield(state: GameState, side: "player"): (Creature | Enemy)[];
 export function battlefield(state: GameState, side: "enemy"): Enemy[];

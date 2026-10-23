@@ -153,7 +153,11 @@ export function checkPlan(root, paths, namedTests = [], { related = false } = {}
   };
 }
 
-export function runCheck(args = [], { root = ROOT, runner = spawnSync, log = console.log } = {}) {
+export function runCheck(
+  args = [],
+  { root = ROOT, runner = spawnSync, log = console.log, env = process.env } = {},
+) {
+  const detailed = env.CI === "true" || env.FAUNA_LOCAL_HEAVY === "1";
   const selection = parseCheckArgs(args);
   const base = taskBase(root, selection.base);
   const normalize = (file) => path.relative(root, path.resolve(root, file)).split(path.sep).join("/");
@@ -186,13 +190,15 @@ export function runCheck(args = [], { root = ROOT, runner = spawnSync, log = con
   );
   log(
     plan.tests.length
-      ? `Focused suites: ${plan.tests.join(", ")}`
+      ? `${detailed ? "Focused suites" : "Deferred suites (CI)"}: ${plan.tests.join(", ")}`
       : plan.missingContracts.length
         ? "Verification blocked: required owner suites are missing."
         : docsOnly
           ? "Documentation only; no tests needed."
           : paths.length
-            ? "No matching suite; running fixed Node smoke (not affected-behavior coverage)."
+            ? detailed
+              ? "No matching suite; running fixed Node smoke (not affected-behavior coverage)."
+              : "No matching suite; tests remain in CI."
             : "EMPTY CHECK: no changed files selected; no checks ran. Use npm test for unit/DOM tests, npm run check for full static checks, or --base to select a task range.",
   );
   for (const { owner, reason } of plan.contracts) log(`Contract ${owner}: ${reason}`);
@@ -210,6 +216,10 @@ export function runCheck(args = [], { root = ROOT, runner = spawnSync, log = con
   log(
     "Required suites cover declared boundaries, changed tests and matching filenames. Add task-specific regressions with --test; --plan --related explores import dependencies. Full CI and rendered review remain separate evidence.",
   );
+  if (!detailed)
+    log(
+      "Lightweight gate only: changed-file formatting, syntax lint, source contracts and documentation; compilers and all selected/remembered tests are deferred to CI. --test records coverage intent without launching tests locally.",
+    );
   if (selection.plan) {
     log("Plan only; no checks ran.");
     return 0;
@@ -237,8 +247,8 @@ export function runCheck(args = [], { root = ROOT, runner = spawnSync, log = con
       timeout,
       killSignal: "SIGTERM",
       env: {
-        ...process.env,
-        NODE_OPTIONS: `${process.env.NODE_OPTIONS ?? ""} --max-old-space-size=1024`.trim(),
+        ...env,
+        NODE_OPTIONS: `${env.NODE_OPTIONS ?? ""} --max-old-space-size=1024`.trim(),
         RAYON_NUM_THREADS: "1",
       },
     });
@@ -273,7 +283,7 @@ export function runCheck(args = [], { root = ROOT, runner = spawnSync, log = con
     }
     if (sourceFiles.length) {
       const lint = run("node_modules/oxlint/bin/oxlint", [
-        "--type-aware",
+        ...(detailed ? ["--type-aware"] : []),
         "--deny-warnings",
         "--",
         ...sourceFiles,
@@ -281,7 +291,7 @@ export function runCheck(args = [], { root = ROOT, runner = spawnSync, log = con
       if (lint !== 0) return lint;
     }
   }
-  if (plan.configs.length) {
+  if (detailed && plan.configs.length) {
     const compiler = "node_modules/typescript/bin/tsc";
     for (const config of plan.configs) {
       log(`Type checking ${config}`);
@@ -293,11 +303,11 @@ export function runCheck(args = [], { root = ROOT, runner = spawnSync, log = con
     const status = run("scripts/checks/check-docs.mjs");
     if (status !== 0) return status;
   }
-  if (!plan.tests.length && !docsOnly) {
+  if (detailed && !plan.tests.length && !docsOnly) {
     const status = run("scripts/checks/run-local-tests.mjs");
     if (status !== 0) return status;
   }
-  if (plan.tests.length) {
+  if (detailed && plan.tests.length) {
     mkdirSync(path.join(root, "reports"), { recursive: true });
     const status = run(
       "node_modules/vitest/vitest.mjs",
@@ -320,7 +330,7 @@ export function runCheck(args = [], { root = ROOT, runner = spawnSync, log = con
     return 1;
   }
   log(
-    "Task checks passed. Local handoff gate complete; full CI and any required rendered review remain separate.",
+    `Task checks passed. ${detailed ? "Local handoff gate" : "Lightweight local gate"} complete; full CI and any required rendered review remain separate.`,
   );
   return 0;
 }

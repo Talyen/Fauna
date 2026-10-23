@@ -1,22 +1,71 @@
 import { pendingReplacement, formationForSwap } from "../game/team";
 import { coverageScore, offenseValue } from "./team-policy";
-import { battlefield } from "../game/battlefield";
-import { MAX_BATTLE_CARDS } from "../game/card-zones";
-import { creaturePassive, hasTalent } from "../game/progression";
-import { controlled, hasHarmfulEffects, mostInjured } from "../game/combat/index";
-import { maximumHealth } from "../game/combat/state";
-import { actionValue, cardCost, physicalBonus } from "../game/ability-rules";
-import { definition, species } from "../game/content";
-import type { Card, Command, Enemy, GameState } from "../game/types";
+import { controlled } from "../game/combat/state";
+import { species } from "../game/content";
+import { availablePlays } from "../game/play-queries";
+import {
+  battleBenefits,
+  battleBenefitFacts,
+  type BattleBenefit,
+  type OrdinaryHit,
+  type SupportPriority,
+} from "./battle-benefits";
+import type { Command, GameState } from "../game/types";
 
 export const BATTLE_POLICY_VERSION = 29;
 const BATTLE_FINISH_PRIORITY = 1_000_000_000;
+const priorities = {
+  none: 0,
+  summon: 1600,
+  summonRecovery: 1200,
+  protection: 100,
+  pearl: 500,
+  resource: 400,
+  healing: 3000,
+  utility: 150,
+  standardUtility: 200,
+  controlRemoval: 200,
+  redraw: 190,
+  defensePurge: 1700,
+  purge: 160,
+  statusHarvest: 2000,
+} satisfies Record<SupportPriority, number>;
 export interface BattleChoice {
   command: Command;
   score: number;
   reason: string;
 }
-/** Only visible information enters scoring; no forecasts or gameplay RNG are sampled. */
+
+function ordinaryHitScore(hit: OrdinaryHit) {
+  const damagePriority = hit.main ? 1000 : 250;
+  const defensePriority = hit.main ? 500 : 125;
+  const progress = hit.negated
+    ? hit.main
+      ? 400
+      : 100
+    : hit.lost > 0
+      ? damagePriority + (hit.lethal ? damagePriority : 0) + Math.min(hit.lost, hit.health)
+      : hit.blocked > 0
+        ? defensePriority + hit.blocked
+        : hit.eroded > 0
+          ? 300 + hit.eroded
+          : 0;
+  return Math.max(progress, hit.usefulExtras ? priorities.standardUtility : 0);
+}
+function benefitScore(benefit: BattleBenefit) {
+  if (benefit.kind === "support") {
+    const unitValue = benefit.priority === "controlRemoval" ? 100 : 1;
+    return priorities[benefit.priority] + benefit.amount * unitValue;
+  }
+  const sum = benefit.groups.reduce(
+    (total, group) => total + group.reduce((sum, hit) => sum + ordinaryHitScore(hit), 0) / group.length,
+    0,
+  );
+  const progress = benefit.aggregate === "mean" && benefit.groups.length ? sum / benefit.groups.length : sum;
+  return (benefit.finish ? BATTLE_FINISH_PRIORITY : 0) + progress;
+}
+
+/** Legal candidates, visible benefits and deterministic ranking have distinct owners. */
 export function rankedBattleChoices(state: GameState, autoEndTurn = true): BattleChoice[] {
   if (state.phase !== "battle") return [];
   const outgoing = pendingReplacement(state);
@@ -59,331 +108,24 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
         },
       ];
   }
-  const injuredAllies = battlefield(state, "player").some(
-    (unit) => unit.health > 0 && unit.health < maximumHealth(unit),
-  );
-  // A capped resource can still be worth playing to deliver a once-per-turn healing trigger.
-  const healingOnPlay =
-    injuredAllies &&
-    ((state.battle.cardsPlayedThisTurn === 1 &&
-      state.team.some(
-        (unit) =>
-          unit.health > 0 &&
-          creaturePassive(state, unit.species).effects.some(
-            (effect) => effect.kind === "livingChorus" && effect.amount > 0,
-          ),
-      )) ||
-      (state.battle.cardsPlayedThisTurn === 2 &&
-        state.boons.includes("resonant-chimes") &&
-        hasTalent(state, "mana.arcane-mending")));
-  const options: (BattleChoice & { key: string })[] = [];
-  const add = (card: Card, score: number, targetId?: string, reason?: string) => {
-    if (score > 0)
-      options.push({
-        command: { type: "play", cardId: card.id, targetId, autoEndTurn },
-        score,
-        reason: reason ?? `Use ${definition(card.definitionId).name} for its visible benefit`,
-        key: `${card.id}:${targetId ?? ""}`,
-      });
-  };
-  // Ranking only reads this snapshot; share target discovery across hand cards.
-  let enemies: Enemy[] | undefined;
-  const livingEnemies = () => (enemies ??= battlefield(state, "enemy").filter((enemy) => enemy.health > 0));
-  for (const id of state.battle.hand) {
-    const card = state.cards.find((c) => c.id === id)!;
-    const actor = state.team.find((c) => c.id === card.ownerId);
-    const def = definition(card.definitionId);
-    if (!actor || actor.health === 0 || controlled(actor) || cardCost(card, state) > state.battle.mana)
-      continue;
-    const value = actionValue(card, actor, state);
-    // Drawing only this card back cannot justify an already capped Dodge grant.
-    const usefulDraw = () =>
-      !!def.effects?.some((effect) => effect.kind === "draw" && effect.amount > 0) &&
-      ([...state.battle.draw, ...state.battle.discard, ...state.battle.buffer].some((id) => {
-        const drawn = state.cards.find((entry) => entry.id === id)!;
-        return state.team.some((unit) => unit.id === drawn.ownerId && unit.health > 0);
-      }) ||
-        (state.cards.length < MAX_BATTLE_CARDS &&
-          state.team.some(
-            (unit) =>
-              unit.health > 0 &&
-              creaturePassive(state, unit.species).effects.some(
-                (effect) => effect.kind === "wellRead" && effect.amount > 0,
-              ),
-          )));
-    const protection =
-      def.effects?.reduce((sum, effect) => {
-        if (effect.kind === "reflect")
-          return (
-            sum + Number(!(effect.status === "burn" ? actor.combat?.reflectBurn : actor.combat?.reflect))
-          );
-        if (effect.kind === "nullifyFreeze") return sum + Number(!actor.combat?.nullifyFreeze);
-        if (effect.kind === "status")
-          return (
-            sum +
-            Math.min(
-              effect.amount,
-              (effect.status === "dodge" ? 70 : 1_000_000) - (actor.combat?.[effect.status] ?? 0),
-            )
-          );
-        return sum;
-      }, 0) ?? 0;
-    const healing = Math.min(
-      species(actor.species).health - actor.health,
-      def.effects?.reduce(
-        (sum, effect) =>
-          sum +
-          (effect.kind === "heal"
-            ? Math.round(effect.amount * (hasTalent(state, "health.mending") ? 1.1 : 1))
-            : 0),
-        0,
-      ) ?? 0,
-    );
-    if (def.effect === "procession") {
-      const echoes = (state.battle.minions ?? []).filter(
-        (unit) => unit.minion.ownerId === actor.id && unit.health > 0,
-      );
-      add(card, echoes.length < 2 ? 1600 : echoes.some((unit) => unit.health < unit.maxHealth) ? 1200 : 100);
-    } else if (def.effect === "createPearls" || def.effect === "pearl") {
-      add(card, def.effect === "pearl" ? 500 : state.cards.length < MAX_BATTLE_CARDS ? 400 : 0);
-    } else if (def.effect === "attack") {
-      const enemies = livingEnemies();
-      const attacks = enemies.map((enemy) => {
-        // Ordinary primary hits only; chance effects and hidden RNG are never forecast.
-        const outcomes = [def.damageType, ...(def.alternateDamageType ? [def.alternateDamageType] : [])].map(
-          (type) => {
-            const damage =
-              value * (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1) +
-              (type === "physical" ? physicalBonus(actor, state) : 0);
-            const armored = type === "physical" || type === "stun";
-            const armor = armored
-              ? Math.max(0, enemy.combat.armor - (state.boons.includes("sundering-charm") ? 2 : 0))
-              : 0;
-            const lost =
-              enemy.combat.negate || (type === "freeze" && enemy.combat.nullifyFreeze)
-                ? 0
-                : Math.max(0, damage - enemy.block - armor);
-            const blocked = enemy.combat.negate ? 0 : Math.min(damage, enemy.block);
-            const eroded =
-              !enemy.combat.negate && armored && state.boons.includes("sundering-charm")
-                ? Math.min(2, enemy.combat.armor)
-                : 0;
-            const main = !enemy.minion;
-            const lethal = lost >= enemy.health;
-            const score = enemy.combat.negate
-              ? main
-                ? 400
-                : 100
-              : lost > 0
-                ? (main ? 1000 : 250) + (lethal ? (main ? 1000 : 250) : 0) + Math.min(lost, enemy.health)
-                : blocked > 0
-                  ? (main ? 500 : 125) + blocked
-                  : eroded > 0
-                    ? 300 + eroded
-                    : 0;
-            // A blocked primary hit can still carry useful authored follow-up effects.
-            const extra = def.effects?.some((effect) =>
-              ["damage", "purge", "meltArmor", "blind", "draw", "mana", "status"].includes(effect.kind),
-            )
-              ? 200
-              : 0;
-            return { score: Math.max(score, extra), lethal };
-          },
-        );
-        return {
-          enemy,
-          score: outcomes.reduce((sum, outcome) => sum + outcome.score, 0) / outcomes.length,
-          lethal: outcomes.every((outcome) => outcome.lethal),
-        };
-      });
-      const remaining = attacks.filter(({ enemy }) => !enemy.minion);
-      const winning =
-        !actor.combat?.blind &&
-        remaining.length > 0 &&
-        (def.target === "allEnemies"
-          ? remaining.every((attack) => attack.lethal)
-          : def.target === "randomEnemy"
-            ? attacks.every(({ enemy, lethal }) => !enemy.minion && lethal) && remaining.length === 1
-            : false);
-      if (def.target === "allEnemies")
-        add(
-          card,
-          (winning ? BATTLE_FINISH_PRIORITY : 0) + attacks.reduce((sum, attack) => sum + attack.score, 0),
-          undefined,
-          winning
-            ? "Attempt to finish every remaining enemy on ordinary hits"
-            : "Damage enemies; give roster creatures priority over Minions",
-        );
-      else if (def.target === "randomEnemy")
-        add(
-          card,
-          (winning ? BATTLE_FINISH_PRIORITY : 0) +
-            (attacks.length ? attacks.reduce((sum, attack) => sum + attack.score, 0) / attacks.length : 0),
-          undefined,
-          "Use the average visible benefit across random targets",
-        );
-      else
-        for (const { enemy, lethal, score } of attacks) {
-          const finish = !actor.combat?.blind && remaining.length === 1 && !enemy.minion && lethal;
-          add(
-            card,
-            (finish ? BATTLE_FINISH_PRIORITY : 0) + score,
-            enemy.id,
-            finish
-              ? "Attempt to finish the last enemy before healing or attacking Minions"
-              : enemy.minion
-                ? "Reduce a Minion threat"
-                : "Make progress against an enemy creature",
-          );
-        }
-    } else if (def.effect === "heal") {
-      const allies = state.team.filter((c) => c.health > 0);
-      const healingBenefit = (ally: (typeof allies)[number]) => {
-        const missing = species(ally.species).health - ally.health;
-        const amount = Math.round(value * (hasTalent(state, "health.mending") ? 1.1 : 1));
-        const restored = Math.min(amount, missing);
-        const excess = amount - restored;
-        const overflow = hasTalent(state, "health.overflow")
-          ? Math.min(Math.round(excess * 0.25), 1_000_000 - ally.block)
-          : 0;
-        const cleanses =
-          hasHarmfulEffects(ally) &&
-          ((excess > 0 && hasTalent(state, "health.clean-slate")) ||
-            !!def.effects?.some((effect) => effect.kind === "cleanse" && effect.target === "recipient"));
-        return { restored, utility: overflow + Number(cleanses) };
-      };
-      if (def.target === "allAllies") {
-        const benefits = allies.map(healingBenefit);
-        const restored = benefits.reduce((sum, benefit) => sum + benefit.restored, 0);
-        const utility = benefits.reduce((sum, benefit) => sum + benefit.utility, 0);
-        add(
-          card,
-          restored > 0
-            ? 3000 + restored
-            : utility > 0
-              ? 150 + utility
-              : def.effects?.some((effect) => effect.kind === "blind") &&
-                  state.battle.enemies.some((enemy) => enemy.health > 0 && !enemy.combat.blind)
-                ? 150
-                : def.effects?.some((effect) => effect.kind === "draw")
-                  ? 200
-                  : 0,
-        );
-      } else
-        for (const ally of def.target === "self"
-          ? [actor]
-          : def.target === "mostInjured"
-            ? [mostInjured(allies)!]
-            : allies) {
-          const { restored, utility } = healingBenefit(ally);
-          add(
-            card,
-            restored > 0 ? 3000 + restored : utility > 0 ? 150 + utility : 0,
-            def.target ? undefined : ally.id,
-          );
-        }
-    } else if (def.effect === "mana") {
-      const cost = cardCost(card, state);
-      const regained = Math.min(value, state.battle.maxMana - state.battle.mana + cost);
-      const net = regained - cost;
-      const mending = regained > 0 && hasTalent(state, "mana.arcane-mending") && injuredAllies;
-      add(card, net > 0 ? 400 + net : mending || healingOnPlay ? 3000 + regained : 0);
-    } else if (def.effect === "teamClearBlind") {
-      add(card, 200 + state.team.filter((unit) => unit.health > 0 && unit.combat?.blind).length * 100);
-    } else if (def.effect === "teamThaw") {
-      const useful = state.team.filter((unit) => unit.health > 0 && (unit.combat?.freeze ?? 0) > 0).length;
-      add(card, 200 + useful * 100);
-    } else if (def.effect === "recover") {
-      const recoverable = state.battle.discard.some((discarded) => {
-        const card = state.cards.find((card) => card.id === discarded)!;
-        return state.team.some((unit) => unit.id === card.ownerId && unit.health > 0);
-      });
-      add(card, recoverable ? 200 : 0);
-    } else if (def.effect === "teamDodge") {
-      const useful = battlefield(state, "player")
-        .filter((unit) => unit.health > 0)
-        .reduce((sum, unit) => sum + Math.min(value, 70 - (unit.combat?.temporaryDodge ?? 0)), 0);
-      add(card, useful > 0 ? 150 + useful : healingOnPlay ? 3000 : usefulDraw() ? 200 : 0);
-    } else if (def.effect === "redraw") {
-      add(card, state.battle.hand.length > 1 ? 190 : 0);
-    } else if (def.effect === "draw") {
-      add(card, healing > 0 ? 3000 + healing : 200 + value);
-    } else if (def.effect === "teamBlind") {
-      const useful = livingEnemies().filter((enemy) => !enemy.combat.blind && !enemy.combat.nullify).length;
-      add(card, useful > 0 ? 150 + useful : 0);
-    } else if (def.effect === "teamPurge") {
-      const enemies = livingEnemies();
-      const useful = enemies.filter(
-        (enemy) =>
-          enemy.health > 0 &&
-          (enemy.block > 0 ||
-            enemy.combat.armor > 0 ||
-            enemy.combat.thorns > 0 ||
-            enemy.combat.waterThorns > 0 ||
-            enemy.combat.dodge > 0 ||
-            enemy.combat.temporaryDodge > 0 ||
-            enemy.combat.reflect ||
-            enemy.combat.reflectBurn ||
-            enemy.combat.nullify ||
-            enemy.combat.nullifyFreeze ||
-            enemy.combat.negate),
-      ).length;
-      const defense = enemies.some(
-        (enemy) => enemy.health > 0 && (enemy.block > 0 || enemy.combat.armor > 0),
-      );
-      add(
-        card,
-        useful > 0 ? (defense ? 1700 : 160) + useful : 0,
-        undefined,
-        "Remove visible defenses before spending Mana on blocked attacks",
-      );
-    } else if (def.effect === "dreamDouble") {
-      add(card, actor.combat?.negate ? 100 + value : 400 + value);
-    } else if (def.effect === "nightmareHarvest") {
-      const useful = battlefield(state, "player").filter(
-        (unit) => unit.health > 0 && hasHarmfulEffects(unit),
-      ).length;
-      add(card, useful > 0 ? 2000 + useful : 0);
-    } else if (def.effect === "teamCleanse") {
-      add(card, 150);
-    } else if (
-      def.effect === "teamGuard" ||
-      def.effect === "redistributeBlock" ||
-      def.effect === "teamProtection"
-    ) {
-      const useful = state.team
-        .filter((c) => c.health > 0)
-        .reduce(
-          (n, c) =>
-            n +
-            Math.min(value, 1_000_000 - c.block) +
-            (def.effect === "teamProtection" ? Math.min(value, 1_000_000 - (c.combat?.thorns ?? 0)) : 0),
-          0,
-        );
-      add(card, useful > 0 ? 100 + useful : 0);
-    } else if (def.effect === "nullify") {
-      const useful = state.team.filter((c) => c.health > 0 && !c.combat?.nullify).length;
-      add(card, useful > 0 ? 150 + useful : 0);
-    } else if (def.effect === "waterThorns") {
-      const useful = Math.min(value, 1_000_000 - (actor.combat?.waterThorns ?? 0));
-      add(card, useful > 0 ? 100 + useful : 0);
-    } else if (def.effect === "dodge") {
-      const useful = Math.min(value, 70 - (actor.combat?.temporaryDodge ?? 0));
-      add(card, useful > 0 ? 150 + useful : healingOnPlay ? 3000 : usefulDraw() ? 200 : 0);
-    } else if (def.effect === "swap" || def.effect === "swapLowest") {
-      add(card, 150);
-    } else {
-      for (const ally of def.target === "self" ? [actor] : state.team.filter((c) => c.health > 0)) {
-        const useful = Math.min(value, 1_000_000 - ally.block);
-        add(
-          card,
-          healing > 0 ? 3000 + healing : useful + protection > 0 ? 100 + useful + protection : 0,
-          def.target === "self" ? undefined : ally.id,
-        );
-      }
-    }
-  }
-  return options
+  const facts = battleBenefitFacts(state);
+  return availablePlays(state, autoEndTurn)
+    .flatMap((play) =>
+      battleBenefits(state, play, facts).flatMap((benefit) => {
+        const score = benefitScore(benefit);
+        const command = play.commands.find((command) => command.targetId === benefit.targetId);
+        return score > 0 && command
+          ? [
+              {
+                command,
+                score,
+                reason: benefit.reason ?? `Use ${play.def.name} for its visible benefit`,
+                key: `${play.card.id}:${benefit.targetId ?? ""}`,
+              },
+            ]
+          : [];
+      }),
+    )
     .sort((a, b) => b.score - a.score || a.key.localeCompare(b.key))
     .map(({ command, score, reason }) => ({ command, score, reason }));
 }

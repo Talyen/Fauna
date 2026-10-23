@@ -12,7 +12,7 @@ import {
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import {
-  combat,
+  ensureCombat,
   freshCombat,
   grantStatus,
   hit,
@@ -178,10 +178,10 @@ describe("Alchemy combat foundations", () => {
         events: Parameters<typeof hit>[5] = [];
       hit(s, enemy, target, 999, "burn", events, { origin: "retaliation" as const });
       expect(target.health).toBe(1);
-      expect(combat(target)).toMatchObject({ deathDoorUsed: true, grace: 2 });
+      expect(ensureCombat(target)).toMatchObject({ deathDoorUsed: true, grace: 2 });
       hit(s, enemy, target, 999, "burn", events, { origin: "retaliation" as const });
       expect(target.health).toBe(1);
-      combat(target).grace = 0;
+      ensureCombat(target).grace = 0;
       hit(s, enemy, target, 999, "burn", events, { origin: "retaliation" as const });
     });
     expect(next.team[0]!.health).toBe(0);
@@ -190,14 +190,14 @@ describe("Alchemy combat foundations", () => {
     const next = produce(run(), (s) => {
       const target = s.team[0]!;
       const rng = s.rng;
-      Object.assign(combat(target), { burn: 8, poison: 5, armor: 3 });
+      Object.assign(ensureCombat(target), { burn: 8, poison: 5, armor: 3 });
       target.block = 9;
       removeEffects(target, "cleanse", 1, []);
-      expect(combat(target)).toMatchObject({ burn: 0, poison: 5, armor: 3 });
+      expect(ensureCombat(target)).toMatchObject({ burn: 0, poison: 5, armor: 3 });
       removeEffects(target, "purge", 1, []);
       expect(target.block).toBe(0);
       grantStatus(target, "dodge", 999, []);
-      expect(combat(target).dodge).toBe(70);
+      expect(ensureCombat(target).dodge).toBe(70);
       expect(s.rng).toBe(rng);
     });
     expect(decodeSave(encodeSave(next))).toEqual(next);

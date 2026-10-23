@@ -1,0 +1,75 @@
+import { cardTargeting } from "./card-rules";
+import { definition, type CardDefinition } from "./content";
+import { cardCost } from "./ability-rules";
+import { controlled } from "./combat/state";
+import { battlefield } from "./battlefield";
+import { pendingReplacement } from "./team";
+import type { BattleState, Card, Creature, Command } from "./types";
+
+/** Explicit recipients only; random/group delivery remains live execution work. */
+export function chosenRecipients(state: BattleState, def: CardDefinition) {
+  const mode = cardTargeting(def);
+  return mode === "enemy" || mode === "ally"
+    ? battlefield(state, mode === "enemy" ? "enemy" : "player").filter((unit) => unit.health > 0)
+    : [];
+}
+
+export function playTargetError(state: BattleState, def: CardDefinition, actorId: string, targetId?: string) {
+  const mode = cardTargeting(def);
+  if (
+    (mode === "enemy" || mode === "ally") &&
+    !chosenRecipients(state, def).some((unit) => unit.id === targetId)
+  )
+    return mode === "enemy" ? "Choose a living enemy." : "Choose a living ally.";
+  if (mode === "self" && targetId !== undefined && targetId !== actorId)
+    return "This ability targets its acting creature.";
+  return null;
+}
+
+export interface PlayableCard {
+  card: Card;
+  actor: Creature;
+  def: CardDefinition;
+}
+
+/** Card-local admission; command admission retains its original validation order. */
+export function inspectCardPlay(
+  state: BattleState,
+  cardId: string,
+): ({ allowed: true } & PlayableCard) | { allowed: false; reason: string } {
+  const card = state.cards.find((entry) => entry.id === cardId);
+  if (!card || !state.battle.hand.includes(card.id))
+    return { allowed: false, reason: "That card is not in your hand." };
+  const actor = state.team.find((unit) => unit.id === card.ownerId);
+  if (!actor || actor.health <= 0) return { allowed: false, reason: "That creature is knocked out." };
+  if (controlled(actor)) return { allowed: false, reason: "That creature is Stunned or Frozen." };
+  const def = definition(card.definitionId);
+  if (state.battle.mana < cardCost(card, state)) return { allowed: false, reason: "Not enough mana." };
+  return { allowed: true, card, actor, def };
+}
+
+export interface AvailablePlay extends PlayableCard {
+  commands: Extract<Command, { type: "play" }>[];
+}
+
+/** Enumerate legal commands without previewing, choosing random recipients or touching RNG. */
+export function availablePlays(state: BattleState, autoEndTurn = true): AvailablePlay[] {
+  if (pendingReplacement(state)) return [];
+  return state.battle.hand.flatMap((cardId) => {
+    const play = inspectCardPlay(state, cardId);
+    if (!play.allowed) return [];
+    const mode = cardTargeting(play.def);
+    const ids =
+      mode === "enemy" || mode === "ally"
+        ? chosenRecipients(state, play.def).map((unit) => unit.id)
+        : [undefined];
+    return [
+      {
+        card: play.card,
+        actor: play.actor,
+        def: play.def,
+        commands: ids.map((targetId) => ({ type: "play" as const, cardId, targetId, autoEndTurn })),
+      },
+    ];
+  });
+}

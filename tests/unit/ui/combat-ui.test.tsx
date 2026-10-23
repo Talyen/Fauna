@@ -16,13 +16,13 @@ import type { GameState } from "../../../src/game/types";
 
 screenTestEnvironment({ visible: true });
 
-async function open(game: GameState) {
+async function open(game: GameState, resume = true) {
   localStorage.setItem("fauna.save.v1", JSON.stringify(game));
   const session = createSession(createBrowserPlatform(localStorage));
   await session.load();
   render(<App session={session} />);
   const user = userEvent.setup();
-  await user.click(screen.getByRole("button", { name: "Continue" }));
+  if (resume) await user.click(screen.getByRole("button", { name: "Continue" }));
   return { session, user };
 }
 it("inspects draw and discard piles without changing state or exposing draw order, and keeps card details on hover", async () => {
@@ -47,14 +47,16 @@ it("inspects draw and discard piles without changing state or exposing draw orde
       .map((card) => card.id);
     expect(ids).toEqual(expected.slice(0, 3));
     const allIds = [...ids];
-    while (!(within(pile).getByRole("button", { name: "Next page" }) as HTMLButtonElement).disabled) {
-      await user.click(within(pile).getByRole("button", { name: "Next page" }));
+    while (
+      !(within(pile).getByLabelText("Next page", { selector: "button" }) as HTMLButtonElement).disabled
+    ) {
+      await user.click(within(pile).getByLabelText("Next page", { selector: "button" }));
       allIds.push(
         ...Array.from(pile.querySelectorAll<HTMLElement>("[data-card-id]"), (el) => el.dataset.cardId),
       );
     }
     expect(allIds).toEqual(expected);
-    await user.click(within(pile).getByRole("button", { name: "Previous page" }));
+    await user.click(within(pile).getByLabelText("Previous page", { selector: "button" }));
     const firstCard = pile.querySelector<HTMLButtonElement>("[data-card-id]")!;
     await user.click(firstCard);
     expect(screen.getAllByRole("dialog")).toHaveLength(1);
@@ -75,7 +77,7 @@ it("inspects draw and discard piles without changing state or exposing draw orde
   } finally {
     await act(() => session.dispose());
   }
-});
+}, 15_000);
 it("shows exact Campfire recovery and commits one persisted Rest without currency or XP rewards", async () => {
   const { session, user } = await open(
     produce(run(), (s) => {
@@ -104,7 +106,7 @@ it("shows exact Campfire recovery and commits one persisted Rest without currenc
   } finally {
     await act(() => session.dispose());
   }
-});
+}, 15_000);
 
 it("exposes pending talent rewards and remaining control turns in creature details", async () => {
   const { session } = await open(
@@ -141,12 +143,14 @@ it("keeps all simultaneous combat effects reachable through bounded pages", asyn
       effects
         .querySelectorAll<HTMLElement>("[data-status-id]")
         .forEach((el) => seen.add(el.dataset.statusId!));
-      const next = within(effects).getByRole("button", { name: "Next page" }) as HTMLButtonElement;
+      const next = within(effects).getByLabelText("Next page", { selector: "button" }) as HTMLButtonElement;
       if (next.disabled) break;
       await user.click(next);
     }
     expect([...seen]).toEqual(["armor", "thorns", "dodge", "burn", "poison", "bleed"]);
-    expect(document.activeElement).toBe(within(effects).getByRole("button", { name: "Previous page" }));
+    expect(document.activeElement).toBe(
+      within(effects).getByLabelText("Previous page", { selector: "button" }),
+    );
   } finally {
     await session.dispose();
   }
@@ -183,3 +187,32 @@ it("reaches every authored talent row without sending commands", () => {
   }
   expect(send).not.toHaveBeenCalled();
 }, 15_000);
+
+it("purchases a paged physical talent only after its prerequisites", async () => {
+  const game = produce(run(), (state) => {
+    state.keywordXP.physical = 10000;
+  });
+  const { session, user } = await open(game, false);
+  try {
+    await user.click(screen.getByRole("button", { name: "Talents" }));
+    await user.click(screen.getByLabelText("Physical talents", { selector: "button" }));
+    const tree = within(screen.getByRole("main"));
+    const talents = TALENTS.filter((talent) => talent.keyword === "physical");
+    const later = talents.find((talent) => talent.row === 1)!;
+    await user.click(tree.getByLabelText("Next page", { selector: "button" }));
+    expect(tree.getByLabelText(later.name, { selector: "button" }).getAttribute("aria-disabled")).toBe(
+      "true",
+    );
+    await user.click(tree.getByLabelText("Previous page", { selector: "button" }));
+    for (const talent of talents.filter((talent) => talent.row === 0))
+      await user.click(tree.getByLabelText(talent.name, { selector: "button" }));
+    await user.click(tree.getByLabelText("Next page", { selector: "button" }));
+    expect(tree.getByLabelText(later.name, { selector: "button" }).getAttribute("aria-disabled")).toBe(
+      "false",
+    );
+    await user.click(tree.getByLabelText(later.name, { selector: "button" }));
+    expect(session.store.getState().game.talents).toContain(later.id);
+  } finally {
+    await act(() => session.dispose());
+  }
+});

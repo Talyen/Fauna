@@ -3,7 +3,7 @@ import { swapFixture, completeRecruitment, accept, run, teamRun, winBattle } fro
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../../src/game/engine";
-import { combat, freshCombat, hit } from "../../../src/game/combat/index";
+import { ensureCombat, freshCombat, hit } from "../../../src/game/combat/index";
 import { definition, species, SPECIES } from "../../../src/game/content";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { validateContent } from "../../../src/game/content-validation";
@@ -167,7 +167,7 @@ describe("game commands", () => {
     s = produce(s, (d) => {
       d.team.forEach((c) => {
         c.health = 1;
-        combat(c).deathDoorUsed = true;
+        ensureCombat(c).deathDoorUsed = true;
       });
       d.battle!.enemies[0]!.power = 100;
     });
@@ -294,10 +294,10 @@ describe("creature traits and deck circulation", () => {
       }
       d.rng = 1;
       d.team[0]!.block = 4;
-      combat(d.team[0]!).thorns = 2;
+      ensureCombat(d.team[0]!).thorns = 2;
       hit(d, d.battle!.enemies[0]!, d.team[0]!, 4, "nature", events);
       expect(d.battle!.enemies[0]!.health).toBe(d.battle!.enemies[0]!.maxHealth);
-      expect(combat(d.team[0]!).thorns).toBe(2);
+      expect(ensureCombat(d.team[0]!).thorns).toBe(2);
       expect(d.team[0]!.health).toBe(s.team[0]!.health);
       d.rng = 1;
       hit(d, d.battle!.enemies[1]!, d.team[0]!, 4, "burn", events);

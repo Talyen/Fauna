@@ -78,7 +78,7 @@ export function matchingDependencies(left, right) {
 
 export function installDependencies(
   root,
-  { runner = spawnSync, log = console.log, env = process.env, quiet = false } = {},
+  { runner = spawnSync, log = console.log, env = process.env, quiet = false, allowInstall = true } = {},
 ) {
   root = realpathSync(root);
   const modules = path.join(root, "node_modules");
@@ -94,9 +94,21 @@ export function installDependencies(
       if (!quiet) log("Shared dependencies match; no installation needed.");
       return 0;
     }
+    if (!allowInstall) {
+      log(
+        "Dependencies are unavailable or do not match. Run npm run deps separately; routine verification never installs automatically.",
+      );
+      return 1;
+    }
     // Remove the task's link itself, never the linked checkout's dependency directory.
     unlinkSync(modules);
     log("Detached task dependency link; installing in this checkout.");
+  }
+  if (!allowInstall) {
+    log(
+      "Dependencies are unavailable. Run npm run deps separately; routine verification never installs automatically.",
+    );
+    return 1;
   }
   const manifest = JSON.parse(readFileSync(path.join(root, "package.json"), "utf8"));
   const pinned = /^npm@([\d.]+)$/.exec(manifest.packageManager ?? "")?.[1];

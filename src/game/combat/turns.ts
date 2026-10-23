@@ -6,7 +6,7 @@ import { roll } from "../random";
 import { executeAbility } from "./abilities";
 import { creaturePassive, hasTalent } from "../progression";
 import {
-  combat,
+  ensureCombat,
   gainMana,
   restoreHealth,
   mostInjured,
@@ -50,7 +50,7 @@ export function unhurried(state: BattleState, enemy: boolean, events: GameEvent[
     );
     if (amount <= 0) continue;
     for (const recipient of row)
-      if (combat(recipient).cardsPlayedThisTurn === 0)
+      if (ensureCombat(recipient).cardsPlayedThisTurn === 0)
         restoreHealth(recipient, amount, events, false, state, false, dreamer);
   }
 }
@@ -67,7 +67,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
     // Swaps can reorder the battlefield; each enemy keeps its single action window.
     const actionOrder = battle.enemies.slice();
     // Expire the previous round before an ally can grant Dodge for this round.
-    for (const enemy of actionOrder) combat(enemy).temporaryDodge = 0;
+    for (const enemy of actionOrder) ensureCombat(enemy).temporaryDodge = 0;
     for (const minion of battlefield(draft, "enemy").filter((unit) => unit.minion && unit.health > 0)) {
       tickStatuses(draft, minion, events);
       if (settle(draft, events)) return;
@@ -167,7 +167,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
       if (settle(draft, events)) return;
     }
     for (const c of [...battlefield(draft, "player"), ...draft.reserves]) {
-      const stats = combat(c);
+      const stats = ensureCombat(c);
       if (stats.grace > 0) stats.grace--;
       c.block = retainedBlock(c, draft);
       if ("attacked" in c) c.attacked = false;

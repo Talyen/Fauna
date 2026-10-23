@@ -1,7 +1,8 @@
 import { screenTestEnvironment } from "../../support/ui";
+import { playPreviewModel } from "../../../src/ui/battle/play-preview-model";
 import { TargetPreview } from "../../../src/ui/battle/target-preview";
 import { species, BOONS } from "../../../src/game/content";
-import { freshCombat, combat, hit } from "../../../src/game/combat/index";
+import { freshCombat, ensureCombat, hit } from "../../../src/game/combat/index";
 import { assetUrl } from "../../../src/ui/shared/assets";
 import { ActionCard } from "../../../src/ui/shared/cards/cards";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
@@ -379,12 +380,12 @@ it("previews Block depletion, exact health loss and knockout without visible HP 
     });
   });
   const after = produce(before, (d) => {
-    combat(d.team[0]!).deathDoorUsed = true;
+    ensureCombat(d.team[0]!).deathDoorUsed = true;
     d.rng = 1;
     hit(d, d.battle!.enemies[0]!, d.team[0]!, 8, "nature", []);
   });
   const result = { accepted: true as const, state: after, events: [] };
-  render(<TargetPreview before={before} result={result} targetId="ally-0" />);
+  render(<TargetPreview forecast={playPreviewModel(before, result).units.get("ally-0")} />);
   expect(screen.getByLabelText("Block 5 to 0")).toBeTruthy();
   expect(screen.getByLabelText("Knockout")).toBeTruthy();
   expect(screen.getByRole("progressbar", { name: "Health" }).getAttribute("aria-valuenow")).toBe("0");

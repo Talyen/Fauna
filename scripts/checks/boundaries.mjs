@@ -99,6 +99,10 @@ export function boundaryViolations(file, source) {
       "operations",
       "resolution",
       "damage",
+      "damage-reactions",
+      "damage-values",
+      "healing-values",
+      "status-state",
       "protection",
       "statuses",
       "lifecycle",
@@ -116,12 +120,14 @@ export function boundaryViolations(file, source) {
     )
       fail("Combat internals cannot import their public entry points or command owners.");
     if (
-      ["state", "policy"].includes(combatModule) &&
-      /^src\/game\/combat\/(?:resolution|operations|damage|protection|statuses|lifecycle)$/.test(combatTarget)
+      ["state", "policy", "damage-values", "healing-values", "status-state"].includes(combatModule) &&
+      /^src\/game\/combat\/(?:resolution|operations|damage(?:-reactions)?|protection|statuses|lifecycle)$/.test(
+        combatTarget,
+      )
     )
       fail("Combat foundations cannot schedule reactions.");
     if (
-      ["damage", "protection", "statuses", "lifecycle"].includes(combatModule) &&
+      ["damage", "damage-reactions", "protection", "statuses", "lifecycle"].includes(combatModule) &&
       !declaration?.typeOnly &&
       /^src\/game\/combat\/(?:resolution|damage|protection|statuses|lifecycle)$/.test(combatTarget)
     )
@@ -149,7 +155,7 @@ export function boundaryViolations(file, source) {
     if (
       ui &&
       !declaration?.typeOnly &&
-      /^src\/game\/(?:(?:journey|team)|combat\/(?:abilities|resolution|operations|damage|protection|statuses|lifecycle|turns))(?:\.ts)?$/.test(
+      /^src\/game\/(?:(?:journey|team)|combat\/(?:abilities|resolution|operations|damage(?:-reactions)?|status-state|protection|statuses|lifecycle|turns))(?:\.ts)?$/.test(
         target,
       ) &&
       // This selector reads committed state; importing its module's mutators remains forbidden.
@@ -169,7 +175,9 @@ export function boundaryViolations(file, source) {
       ui &&
       within("game") &&
       declaration?.specifiers?.some((s) =>
-        ["dispatch", "createGame", "encodeSave"].includes(s.imported?.value ?? s.local?.value),
+        ["dispatch", "createGame", "encodeSave", "ensureCombat"].includes(
+          s.imported?.value ?? s.local?.value,
+        ),
       )
     )
       fail("UI must use application commands and read-only previews.");

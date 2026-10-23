@@ -1,4 +1,4 @@
-import { freshCombat, combat } from "../../../src/game/combat/index";
+import { freshCombat, ensureCombat } from "../../../src/game/combat/index";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { dispatch } from "../../../src/game/engine";
@@ -161,8 +161,8 @@ describe("knockout replacements", () => {
     let game = produce(withReserves(), (d) => {
       for (const ally of d.team) {
         ally.health = 1;
-        combat(ally).deathDoorUsed = true;
-        combat(ally).poison = 2;
+        ensureCombat(ally).deathDoorUsed = true;
+        ensureCombat(ally).poison = 2;
       }
     });
     game = accept(game, { type: "endTurn" });
@@ -176,7 +176,7 @@ describe("knockout replacements", () => {
     let game = produce(withReserves(), (d) => {
       d.team[1]!.attacked = true;
       d.team[1]!.block = 5;
-      combat(d.team[1]!).deathDoorUsed = true;
+      ensureCombat(d.team[1]!).deathDoorUsed = true;
     });
     for (let i = 0; i < 5; i++) {
       game = swapFixture(game, { type: "swap", activeId: game.team[1]!.id, reserve: "recruit-pollenmoth" });
@@ -230,7 +230,7 @@ it("only loses when the entire roster falls and round-trips the defeat receipt",
   let game = produce(withReserves(), (d) => {
     d.team.forEach((c) => {
       c.health = 1;
-      combat(c).deathDoorUsed = true;
+      ensureCombat(c).deathDoorUsed = true;
     });
     d.reserves.forEach((c) => (c.health = 0));
   });

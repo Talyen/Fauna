@@ -1,3 +1,4 @@
+import { settleScreen } from "./support/rendered-evidence";
 import { expect } from "@playwright/test";
 import { produce } from "immer";
 import { run } from "../support/game";
@@ -113,6 +114,7 @@ test("controller navigation preserves its device mode and can confirm a pointer-
   });
   await seed(page, fixture);
   await page.getByRole("button", { name: "Talents", exact: true }).click();
+  await settleScreen(page);
   await page.getByRole("button", { name: "Physical talents", exact: true }).focus();
   await press(15);
   await expect(page.getByRole("button", { name: "Burn talents", exact: true })).toBeFocused();

@@ -1,11 +1,66 @@
 import { expect, it } from "vitest";
 import { produce } from "immer";
-import { chooseBattleCommand } from "../../../src/application/battle-policy";
+import { chooseBattleCommand, rankedBattleChoices } from "../../../src/application/battle-policy";
 import { dispatch } from "../../../src/game/engine";
 import { accept, authoredPack, prepareDestination, requireBattle, teamRun } from "../../support/game";
 import { summonEcho } from "../../../src/game/combat/legendary";
-import { species } from "../../../src/game/content";
+import { species, SPECIES, TALENTS, BOONS } from "../../../src/game/content";
+import { KEYWORDS } from "../../../src/game/progression";
+import { encodeSave, decodeSave } from "../../../src/game/save";
 
+it.each(SPECIES)("preserves visible rankings and legal choices for $id", ({ id }) => {
+  const rankings = ["ordinary", "injured", "defended", "talented"].map((condition) => {
+    const state = produce(teamRun(42, [id]), (game) => {
+      const battle = game.battle!;
+      battle.hand = game.cards.map((card) => card.id);
+      battle.draw = [];
+      battle.buffer = [];
+      battle.discard = [];
+      if (condition === "talented") {
+        game.talents = TALENTS.map((talent) => talent.id);
+        game.keywordXP = Object.fromEntries(KEYWORDS.map((keyword) => [keyword, 1_000_000]));
+        game.boons = BOONS.map((boon) => boon.id);
+      }
+      if (condition === "injured" || condition === "talented") {
+        game.team[0]!.health = 1;
+        game.team[0]!.combat!.poison = 2;
+      }
+      if (condition === "defended" || condition === "talented") {
+        for (const enemy of battle.enemies) {
+          enemy.block = 10;
+          enemy.combat.armor = 4;
+          enemy.combat.thorns = 2;
+        }
+      }
+    });
+    const saved = encodeSave(state);
+    const ranked = rankedBattleChoices(state, false);
+    for (const choice of ranked) expect(dispatch(state, choice.command).accepted).toBe(true);
+    const hidden = produce(state, (game) => {
+      game.rng ^= 0x7fffffff;
+      game.battle!.draw.reverse();
+      game.battle!.enemies.forEach((enemy) => enemy.deck?.draw.reverse());
+    });
+    expect(rankedBattleChoices(hidden, false)).toEqual(ranked);
+    expect(rankedBattleChoices(decodeSave(saved), false)).toEqual(ranked);
+    expect(encodeSave(state)).toBe(saved);
+    return [condition, ranked.map((choice) => JSON.stringify(choice))];
+  });
+  expect(rankings).toMatchSnapshot();
+});
+
+it("ignores hidden draw order and RNG while ranking a partly hidden deck", () => {
+  const state = teamRun(42, ["prismram", "emberback", "mossguard"]);
+  expect(state.battle!.draw.length).toBeGreaterThan(1);
+  const ranked = rankedBattleChoices(state, false);
+  const saved = encodeSave(state);
+  const hidden = produce(state, (game) => {
+    game.rng ^= 0x7fffffff;
+    game.battle!.draw.reverse();
+  });
+  expect(rankedBattleChoices(hidden, false)).toEqual(ranked);
+  expect(encodeSave(state)).toBe(saved);
+});
 it("Auto-play prioritizes Bloom Cradle's healing over an ordinary attack", () => {
   const state = produce(teamRun(42, ["bloomquail", "emberback"]), (game) => {
     const heal = game.cards.find((card) => card.definitionId === "bloomquail-draw")!;
