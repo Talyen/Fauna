@@ -51,6 +51,8 @@ The Vercel project `talyen-s-projects/fauna` connects to `Talyen/Fauna` with Nod
 
 Git push deployments are disabled, matching Alchemy's deliberate QA deployment pattern. After the configuration reaches GitHub, deploy a reviewed `main` commit deliberately through Vercel. The project-level Ignored Build Step, `test ! -f vercel.json`, skips source revisions without this configuration. Vercel Authentication protects the default deployment URLs. Do not add a public custom domain without an explicit publication decision.
 
+Content-hashed prepared artwork and audio use a one-year immutable browser cache, reducing repeat downloads. HTML, the prepared manifest and the unversioned startup script retain ordinary revalidation so new deployments can take effect. The site uses static files without Functions, runtime middleware, image optimization or added analytics services. Manual deployments conserve build usage; traffic can still exhaust the Hobby allowance. Check the team's Vercel Usage page before wider testing.
+
 The SPA fallback serves the application entry point for browser navigation. Saves remain in that browser's local storage; desktop Steam Cloud, native controls and packaged Windows behavior require their own qualification. A Vercel build establishes web build evidence, not the complete GitHub CI or native release gate. Release-tag Deploy Hook automation is not configured.
 
 ## Steam qualification
