@@ -1,5 +1,5 @@
 import type { GameEvent } from "../../../../src/game/types";
-import { authoredPack, swapFixture } from "../../../support/game";
+import { addBackups, authoredPack, swapFixture } from "../../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, definition, FIRST_RUN_STARTERS, species } from "../../../../src/game/content";
@@ -69,7 +69,7 @@ it.each([1, 2, 3, 4, 5, 6])("grants Shelter once at combat start for %i copies",
     `Sternshell starts combat with ${copies + 1} Armor`,
   );
   game = produce(game, (draft) => {
-    draft.reserves.push({
+    addBackups(draft, {
       id: "backup",
       species: "coralcurl",
       health: 26,
@@ -102,7 +102,8 @@ it.each([0, 1, 7])("doubles Surge Ram only with Armor (%i)", (armor) => {
 });
 it("swaps to a living backup before drawing from the incoming kit", () => {
   const game = produce(ready(), (draft) => {
-    draft.reserves.push(
+    addBackups(
+      draft,
       { id: "backup", species: "coralcurl", health: 26, block: 0, combat: freshCombat(), attacked: false },
       { id: "fallen", species: "emberback", health: 0, block: 0, combat: freshCombat(), attacked: false },
     );
@@ -169,7 +170,7 @@ it("grants enemy Shelter at base rank and does not grant opening Armor to backup
       ),
     };
     draft.discovery.recruited.sternshell = 6;
-    draft.reserves.push({
+    addBackups(draft, {
       id: "backup",
       species: "coralcurl",
       health: species("coralcurl").health,
@@ -179,7 +180,7 @@ it("grants enemy Shelter at base rank and does not grant opening Armor to backup
     });
     const outgoing = draft.team[0]!;
     draft.team[0] = draft.reserves.pop()!;
-    draft.reserves.push(outgoing);
+    addBackups(draft, outgoing);
   });
   game = accept(game, { type: "beginBattle" });
   expect(game.battle!.enemies[0]!.species).toBe("sternshell");

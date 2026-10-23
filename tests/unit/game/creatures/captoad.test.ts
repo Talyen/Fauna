@@ -8,7 +8,14 @@ import { COMBAT_PACKS, encounterSource } from "../../../../src/game/encounters";
 import { definitionKeywords } from "../../../../src/game/keywords";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
 import type { GameEvent } from "../../../../src/game/types";
-import { authoredPack, prepareDestination, accept, teamRun, winBattle } from "../../../support/game";
+import {
+  addBackups,
+  authoredPack,
+  prepareDestination,
+  accept,
+  teamRun,
+  winBattle,
+} from "../../../support/game";
 
 function ready(kinds: SpeciesId[] = ["captoad"], cardId = "captoad-swap") {
   return produce(teamRun(1, kinds), (game) => {
@@ -22,7 +29,7 @@ function ready(kinds: SpeciesId[] = ["captoad"], cardId = "captoad-swap") {
 }
 function withBackup() {
   return produce(ready(["captoad", "emberback", "prismram"]), (game) => {
-    game.reserves.push({
+    addBackups(game, {
       id: "backup",
       species: "mossguard",
       health: 17,
@@ -183,7 +190,7 @@ it("removes the outgoing kit from hand and piles before drawing the incoming kit
 
 it("removes outgoing overflow too, while preserving unrelated cards and filling their vacant hand slots", () => {
   const game = produce(ready(["captoad", "emberback", "prismram"]), (draft) => {
-    draft.reserves.push({
+    addBackups(draft, {
       id: "backup",
       species: "mossguard",
       health: 32,
@@ -211,7 +218,7 @@ it("removes outgoing overflow too, while preserving unrelated cards and filling 
 
 it("chooses only living backup with seeded RNG; rejected plays consume none", () => {
   const setup = produce(withBackup(), (game) => {
-    game.reserves.push({ ...game.reserves[0]!, id: "other", species: "emberback", health: 24 });
+    addBackups(game, { ...game.reserves[0]!, id: "other", species: "emberback", health: 24 });
   });
   const chosen = new Set<string>();
   for (const seed of [1, 1000]) {

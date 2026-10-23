@@ -12,7 +12,42 @@ import {
   winBattle,
   merchantDestination,
   completeRecruitment,
+  run,
 } from "../../support/game";
+
+it.each(["roster", "destination"] as const)(
+  "recovers a backup instead of loading inconsistent %s ownership",
+  async (kind) => {
+    const good = kind === "roster" ? run() : merchantDestination();
+    const corrupt = produce(good, (draft) => {
+      if (kind === "roster") delete draft.discovery.recruited[draft.team[1]!.species];
+      else draft.expedition.recruit = "memento";
+    });
+    expect(() => decodeSave(encodeSave(corrupt))).toThrow();
+    if (kind === "destination") {
+      const result = dispatch(corrupt, { type: "recruitDestination", species: "memento" });
+      expect(result.accepted).toBe(false);
+      expect(result.state).toBe(corrupt);
+    }
+    const session = createSession({
+      desktop: false,
+      steam: { available: false },
+      saves: {
+        readCandidates: async () => [
+          { source: "primary", data: encodeSave(corrupt) },
+          { source: "backup", data: encodeSave(good) },
+        ],
+        write: async () => {},
+      },
+    });
+    try {
+      await session.load();
+      expect(session.store.getState().game).toEqual(good);
+    } finally {
+      await session.dispose();
+    }
+  },
+);
 
 it.each([
   { controlled: "stun" as const, controlTurns: 0 },
