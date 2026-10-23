@@ -1,8 +1,4 @@
-.inspection-overlay {
-  background: var(--background);
-}
 .inspection {
-  background: transparent;
   width: min(
     calc(var(--art-portrait-width) * 3 + var(--screen-item-gap) * 2 + var(--space-6) * 2 + 2px),
     calc(100vw - var(--space-12))
@@ -14,19 +10,6 @@
 .inspection > * {
   flex-shrink: 0;
 }
-.inspection > .creature-wrap {
-  margin-inline: auto;
-}
-.inspection-thumbnails {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--screen-item-gap);
-}
-.inspection-thumbnails .action-card {
-  width: var(--art-portrait-width);
-}
 .inspection > .action-card {
   width: var(--art-portrait-width);
   margin: auto;
@@ -34,29 +17,20 @@
 .inspection.single-card {
   width: min(440px, calc(100vw - var(--space-12)));
 }
-.inspection-back {
-  margin-top: calc(-1 * var(--space-6));
-}
-/* Retain the baseline fit budget so both independent artwork scales stay exact at each viewport. */
 .creature-inspection {
-  --inspection-art-width: min(
-    var(--inspection-art-max-width),
-    calc(100vw - var(--space-12) * 2),
-    calc((100dvh - var(--inspection-space-budget)) * 36 / 43)
-  );
   width: min(var(--inspection-dialog-width), calc(100vw - var(--space-12)));
   padding: var(--space-6);
-  border-color: transparent;
   align-items: center;
 }
-.creature-inspection .inspection-back {
-  display: grid;
-  grid-template-columns: var(--control-height) minmax(0, 1fr) var(--control-height);
+.inspection-heading {
+  display: flex;
   align-items: center;
+  justify-content: center;
+  min-height: var(--control-height);
+  padding-inline: var(--control-height);
   width: 100%;
-  margin-top: 0;
 }
-.creature-inspection .inspection-back h2 {
+.inspection-heading h2 {
   text-align: center;
   font-size: var(--text-title);
 }
@@ -64,26 +38,19 @@
   top: var(--space-6);
   right: var(--space-6);
 }
-.inspection-creature {
-  width: calc(var(--inspection-art-width) * var(--inspection-creature-scale));
-}
 .creature-inspection .inspection-abilities {
-  width: calc(
-    (var(--inspection-art-width) - var(--screen-item-gap) * 2) * var(--inspection-ability-scale) +
-      var(--screen-item-gap) * 2
+  width: min(
+    100%,
+    calc(var(--inspection-ability-max-width) * 3 + var(--screen-item-gap) * 2),
+    calc((100dvh - var(--inspection-space-budget)) * 9 / 4 + var(--screen-item-gap) * 2)
   );
 }
-.inspection-creature .creature-card {
-  width: 100%;
-}
-.creature-inspection .inspection-abilities {
-  margin-top: calc(var(--screen-item-gap) - var(--screen-section-gap));
-}
-.creature-inspection .inspection-thumbnails {
+.inspection-thumbnails {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--screen-item-gap);
 }
-.creature-inspection .inspection-thumbnails .action-card {
+.inspection-thumbnails .action-card {
   width: 100%;
 }
 .inspection-active-trait {

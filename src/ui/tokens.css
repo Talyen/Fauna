@@ -62,9 +62,7 @@
   --menu-screen-width: 800px;
   --screen-heading-width: 640px;
   --boon-dialog-width: 720px;
-  --inspection-art-max-width: 480px;
-  --inspection-creature-scale: 0.8;
-  --inspection-ability-scale: 1.2;
+  --inspection-ability-max-width: 184px;
   --inspection-dialog-width: 640px;
   --inspection-space-budget: calc(
     var(--space-12) * 2 + var(--control-height) + var(--screen-section-gap) * 2 + var(--screen-item-gap) * 3 +

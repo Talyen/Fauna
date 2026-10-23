@@ -43,10 +43,8 @@ for (const [width, enlarged] of [
     await page.keyboard.press("Escape");
     await expect(page.getByRole("heading", { name, exact: true })).toBeVisible();
     await expect(page.getByRole("img", { name: "0 of 5 stars", exact: true })).toBeVisible();
-    await page.getByRole("button", { name: "Back", exact: true }).focus();
-    await page.keyboard.press("s");
-    await expect(page.locator(".inspection-creature .creature-card")).toBeFocused();
-    await page.keyboard.press("s");
+    await page.locator(".inspection-thumbnails .action-card").first().focus();
+    await page.keyboard.press("d");
     await expect(page.locator(".inspection-thumbnails .action-card").nth(1)).toBeFocused();
     await page.keyboard.press("Enter");
     await expect(page.locator(".inspection.single-card")).toBeVisible();
@@ -54,13 +52,12 @@ for (const [width, enlarged] of [
     await expect(page.locator(".inspection-thumbnails .action-card").nth(1)).toBeFocused();
     await captureScreen(page, { path: `reports/starter/inspection-${width}-${enlarged}.png` });
     await fits(page);
-    const hero = (await page.locator(".inspection-creature .creature-card").boundingBox())!;
+    await expect(page.locator(".creature-inspection .creature-card")).toHaveCount(0);
+    await expect(page.getByRole("dialog").getByRole("button", { name: "Back", exact: true })).toHaveCount(0);
     const abilities = page.locator(".inspection-thumbnails .action-card");
     const first = (await abilities.first().boundingBox())!;
     const last = (await abilities.last().boundingBox())!;
-    expect(Math.abs(hero.x + hero.width / 2 - (first.x + last.x + last.width) / 2)).toBeLessThan(1);
-    expect(first.width).toBeGreaterThan(hero.width / 3);
-    expect(Math.abs(hero.width / hero.height - 4 / 3)).toBeLessThan(0.01);
+    expect(Math.abs((first.x + last.x + last.width) / 2 - width / 2)).toBeLessThan(1);
     for (const ability of await abilities.all()) {
       const box = (await ability.boundingBox())!;
       expect(Math.abs(box.width / box.height - 3 / 4)).toBeLessThan(0.01);

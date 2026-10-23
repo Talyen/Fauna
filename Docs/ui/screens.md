@@ -24,13 +24,13 @@ Starter hover/focus adds kit keywords and the three action names/current Mana co
 
 ## Creature and action inspection
 
-Outside battle, use one shadcn Dialog on an opaque warm near-black backdrop. Center the creature name above landscape artwork, then a wider centered row of three native portrait abilities with 12px gaps. Show the current named trait, five progress stars and active passive description below. Stars fill left to right from zero to five; no rank controls or separate rank view appear. Ability names and rules are available through hover or intentional navigation focus. Keep accessible dialog titles.
+Outside battle, use one centered shadcn Dialog panel over the shared dimmed backdrop, keeping the originating screen visible beneath it. Center the creature name above a row of three native portrait abilities with 12px gaps; omit the creature's base artwork. Show the current named trait, five progress stars and active passive description below. Stars fill left to right from zero to five; no rank controls or separate rank view appear. Ability names and rules are available through hover or intentional navigation focus. Keep accessible dialog titles.
 
-[Inspection CSS](../../src/ui/inspection/inspection.css) owns `--inspection-art-width`, fitted to the viewport and capped by the 480px `--inspection-art-max-width`. Creature width uses `--inspection-creature-scale` (0.8); individual abilities use `--inspection-ability-scale` (1.2) after accounting for gaps. Keep the common center axis and [shared layout constraints](../UI.md#layout-artwork-size-and-spacing).
+[Inspection CSS](../../src/ui/inspection/inspection.css) fits the ability row to the panel width and remaining viewport height, capped by the 184px `--inspection-ability-max-width` per portrait. Keep the common center axis and [shared layout constraints](../UI.md#layout-artwork-size-and-spacing).
 
 Activating a thumbnail pins its enlarged artwork in the same Dialog. A/D and controller left/right cycle the three actions without Previous/Next buttons. Card rules show final effects without a bonus breakdown or embedded Glossary definitions. Inspection has no Recruit/Choose action.
 
-Every creature/action inspection has an accessible icon-only Back button; [menu rules](../MENU_DESIGN.md#back-and-focus-return) own nesting, Back and whole-dialog dismissal. Battle, piles opened in battle and required replacement use hover/focus details without nested pinned inspection. Enemy details show current effects and never reveal intents; full species kits belong in Collection.
+Creature/action inspection has no Back button. The accessible Close inspection X and outside click dismiss the whole overlay; Escape/controller B returns one level, restoring the selected ability or original opener. [Menu rules](../MENU_DESIGN.md#back-and-focus-return) own nesting and dismissal. Battle, piles opened in battle and required replacement use hover/focus details without nested pinned inspection. Enemy details show current effects and never reveal intents; full species kits belong in Collection.
 
 ## Collection
 
