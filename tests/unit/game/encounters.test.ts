@@ -4,7 +4,7 @@ import { createGame, dispatch } from "../../../src/game/engine";
 import { JOURNEY_LENGTH, encounterSource, encounterPacks } from "../../../src/game/encounters";
 import { ENCOUNTERS, species } from "../../../src/game/content";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { recruitChoice, accept, winBattle } from "../../support/game";
+import { completeRecruitment, accept, winBattle } from "../../support/game";
 
 function start(seed = 7) {
   return accept(accept(createGame(seed), { type: "draft", species: createGame(seed).starterOffers[0]! }), {
@@ -97,7 +97,7 @@ describe("journey encounters", () => {
         s =
           s.roster.length < 3
             ? accept(s, { type: "recruit", species: s.reward!.recruits[0]! })
-            : accept(s, recruitChoice(s));
+            : completeRecruitment(s);
         expect(decodeSave(encodeSave(s))).toEqual(s);
       }
       if (s.phase === "boon") s = accept(s, { type: "skipBoon" });

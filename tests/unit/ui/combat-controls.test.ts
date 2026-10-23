@@ -13,7 +13,7 @@ import {
   victoryReady,
   bossReward,
   teamRun,
-  recruitChoice,
+  completeRecruitment,
 } from "../../support/game";
 
 describe("combat controls", () => {
@@ -70,7 +70,7 @@ describe("combat controls", () => {
     );
     const won = dispatch(ready, { type: "devWinBattle" }, true);
     expect(won.state.phase).toBe("recruit");
-    const reward = accept(won.state, recruitChoice(won.state));
+    const reward = completeRecruitment(won.state);
     expect(reward.phase).toBe("boon");
     expect(reward.reward!.boons).toHaveLength(3);
     const state = produce(run(), (d) => {

@@ -3,7 +3,15 @@ import { test, expect, type Locator } from "@playwright/test";
 import { produce } from "immer";
 import { createGame } from "../../src/game/engine";
 import type { Command } from "../../src/game/types";
-import { prepareDestination, recruitChoice, accept, winBattle, victoryReady, run } from "../support/game";
+import {
+  prepareDestination,
+  recruitChoice,
+  accept,
+  winBattle,
+  victoryReady,
+  run,
+  completeRecruitment,
+} from "../support/game";
 import { seed, state, resume } from "./support/session";
 import { gamepad } from "./support/gamepad";
 import { step } from "./support/journey";
@@ -27,7 +35,7 @@ for (const [width, enlarged, outcome] of [
           game =
             game.roster.length < 5
               ? accept(game, { type: "recruit", species: game.reward!.recruits[0]! })
-              : accept(game, recruitChoice(game));
+              : completeRecruitment(game);
         if (game.phase === "boon") game = accept(game, { type: "chooseBoon", boon: game.reward!.boons[0]! });
       }
       game = victoryReady(accept(game, { type: "beginBattle" }));
@@ -61,7 +69,7 @@ for (const [width, enlarged, outcome] of [
       await page.getByRole("button", { name: "End journey", exact: true }).click();
     }
     game = accept(game, ending);
-    if (game.phase === "recruit") {
+    for (let choice = 0; choice < 2 && game.phase === "recruit"; choice++) {
       const recruit = recruitChoice(game);
       await step(page, undefined, game, recruit);
       game = accept(game, recruit);

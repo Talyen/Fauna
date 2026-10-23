@@ -100,9 +100,9 @@ export type Command =
   | { type: "enterSupport"; visit: string }
   | { type: "buyBoon"; visit: string; slot: string }
   | { type: "leaveSupport"; visit: string }
-  | { type: "recruit"; species: SpeciesId; replace?: string }
+  | { type: "recruit"; species: SpeciesId }
+  | { type: "confirmRecruit"; replace?: string }
   | { type: "recruitDestination"; species: SpeciesId }
-  | { type: "skipRecruit" }
   | { type: "chooseBoon"; boon: BoonId }
   | { type: "skipBoon" }
   | { type: "buyTalent"; talentId: string }

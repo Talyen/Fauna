@@ -10,14 +10,7 @@ import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import { createGame } from "../../../src/game/engine";
 import { species } from "../../../src/game/content";
-import {
-  requireReward,
-  accept,
-  run,
-  winBattle,
-  starterJourney,
-  merchantDestination,
-} from "../../support/game";
+import { accept, winBattle, starterJourney, merchantDestination, fullRosterReward } from "../../support/game";
 
 beforeEach(() => {
   vi.stubGlobal(
@@ -39,50 +32,26 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
-it("keeps the incoming recruit inspectable while browsing replacements, and cancellation preserves the offer", async () => {
-  const game = produce(winBattle(run()), (draft) => {
-    for (const [index, kind] of (["emberback", "pollenmoth"] as const).entries()) {
-      const id = `reserve-${index}`;
-      draft.roster.push(kind);
-      draft.reserves.push({ id, species: kind, health: species(kind).health, block: 0, attacked: false });
-    }
-  });
+it("inspects a recruit without committing it and then commits the chosen offer", async () => {
+  const game = fullRosterReward();
   const send = vi.fn(() => true),
     inspect = vi.fn();
   render(
     <TooltipProvider>
-      <Rewards game={requireReward(game)} send={send} inspect={inspect} />
+      <Rewards game={game} send={send} inspect={inspect} />
     </TooltipProvider>,
   );
   const user = userEvent.setup();
   await user.click(screen.getByRole("button", { name: "Continue" }));
-  const incoming = game.reward!.recruits[0]!;
+  const incoming = game.reward.recruits[0]!;
   const offer = screen.getByRole("button", { name: `Recruit ${species(incoming).name}` });
   expect(document.activeElement).toBe(offer);
   await user.click(screen.getByRole("button", { name: `Inspect ${species(incoming).name}` }));
   expect(inspect).toHaveBeenCalledExactlyOnceWith({ species: incoming });
   expect(send).not.toHaveBeenCalled();
-  expect(screen.queryByRole("region", { name: "Incoming recruit" })).toBeNull();
+  expect(screen.queryByRole("button", { name: "Skip" })).toBeNull();
   await user.click(offer);
-  const comparison = screen.getByRole("region", { name: "Incoming recruit" });
-  await user.click(within(comparison).getByRole("button", { name: `Inspect ${species(incoming).name}` }));
-  expect(inspect).toHaveBeenCalledWith({ species: incoming });
-  expect(send).not.toHaveBeenCalled();
-  await user.click(screen.getByRole("button", { name: "Next page" }));
-  expect(screen.getByRole("region", { name: "Incoming recruit" })).toBe(comparison);
-  await user.click(screen.getByRole("button", { name: "Cancel" }));
-  expect(screen.queryByRole("region", { name: "Incoming recruit" })).toBeNull();
-  expect(send).not.toHaveBeenCalled();
-  expect(document.activeElement).toBe(
-    screen.getByRole("button", { name: `Recruit ${species(incoming).name}` }),
-  );
-  await user.click(screen.getByRole("button", { name: `Recruit ${species(incoming).name}` }));
-  await user.click(screen.getAllByRole("button", { name: /^Release / })[0]!);
-  expect(send).toHaveBeenCalledExactlyOnceWith({
-    type: "recruit",
-    species: incoming,
-    replace: game.team[0]!.id,
-  });
+  expect(send).toHaveBeenCalledExactlyOnceWith({ type: "recruit", species: incoming });
 });
 
 it("makes Deck available in drafting, rewards and Merchant without committing inspection", async () => {

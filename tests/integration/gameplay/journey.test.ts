@@ -8,7 +8,7 @@ import { decodeSave, encodeSave } from "../../../src/game/save";
 import { previewPlay } from "../../../src/game/preview";
 import {
   prepareDestination,
-  recruitChoice,
+  completeRecruitment,
   accept,
   run,
   winBattle,
@@ -39,7 +39,7 @@ describe("journey earnings and results", () => {
     expect(s.journey!.xp).toEqual(s.reward!.xp);
     const receipt = s.journey!.lastBattle;
     expect(dispatch(s, { type: "skipBoon" }).state).toBe(s);
-    s = accept(s, recruitChoice(s));
+    s = completeRecruitment(s);
     expect(s.phase).toBe("teamSelection");
     expect(s.reward).toBeNull();
     expect(s.journey!.lastBattle).toEqual(receipt);
@@ -79,7 +79,7 @@ describe("journey earnings and results", () => {
     });
     const recruit = winBattle(accept(ready, { type: "beginBattle" }));
     expect(recruit.phase).toBe("recruit");
-    const won = accept(recruit, recruitChoice(recruit));
+    const won = completeRecruitment(recruit);
     expect(won.phase).toBe("teamSelection");
     expect(won.encounter).toBe(4);
     expect(won.reward).toBeNull();
@@ -161,7 +161,7 @@ describe("journey earnings and results", () => {
     let s = startedJourney();
     for (let i = 0; i < 8; i++) {
       s = winBattle(accept(s, { type: "beginBattle" }));
-      if (s.phase === "recruit") s = accept(s, recruitChoice(s));
+      if (s.phase === "recruit") s = completeRecruitment(s);
       if (s.phase === "boon") s = accept(s, { type: "skipBoon" });
     }
     expect(s.phase).toBe("victory");
@@ -185,7 +185,7 @@ describe("journey earnings and results", () => {
     expect(s.journey).toMatchObject({ outcome: null, victories: 0, currency: 0, xp: {}, unlocks: [] });
     for (let i = 0; i < 8; i++) {
       s = winBattle(accept(s, { type: "beginBattle" }));
-      if (s.phase === "recruit") s = accept(s, recruitChoice(s));
+      if (s.phase === "recruit") s = completeRecruitment(s);
       if (s.phase === "boon") s = accept(s, { type: "skipBoon" });
     }
     expect(s.journey!.unlocks).toEqual([]);
@@ -260,7 +260,11 @@ it("completes the one-starter recruitment path through the final boss within the
   }
   expect(game.phase).toBe("victory");
   expect(deployedThree).toBe(true);
-  expect(game.team).toHaveLength(species(game.team[0]!.species).legendary ? 1 : 3);
+  // Replacing a solo Legendary can leave one ordinary creature deployed; reserves stay on the roster.
+  expect(game.team.length).toBeGreaterThanOrEqual(1);
+  expect(game.team.length).toBeLessThanOrEqual(3);
+  if (game.team.some((unit) => species(unit.species).legendary)) expect(game.team).toHaveLength(1);
+  expect(game.team.map((unit) => unit.id)).toEqual(game.lineup);
   expect(game.roster).toHaveLength(5);
   expect(decodeSave(encodeSave(game))).toEqual(game);
 });

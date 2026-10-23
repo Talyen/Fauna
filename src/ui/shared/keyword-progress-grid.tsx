@@ -32,7 +32,7 @@ export function KeywordProgressGrid({ earned, totals }: { earned: KeywordXP; tot
                 <KeywordIcon id={keyword} />
                 <KeywordLabel id={keyword} />
               </span>
-              <span>Lv {progress.points + 1}</span>
+              <span data-keyword={keyword}>Lv {progress.points + 1}</span>
             </div>
             <Progress
               value={progress.current}

@@ -33,6 +33,28 @@ export function recruitLineup(
     ? [...state.lineup, incoming.id]
     : [...state.lineup];
 }
+/** Joining a roster changes individuals and deployment; Collection progress is granted separately. */
+export function addRecruit(state: GameState, kind: import("./content").SpeciesId, replacement?: string) {
+  const all = [...state.team, ...state.reserves];
+  let id = `recruit-${state.revision}`;
+  for (let suffix = 1; all.some((creature) => creature.id === id); suffix++)
+    id = `recruit-${state.revision}-${suffix}`;
+  const incoming = { id, species: kind, health: species(kind).health, block: 0, attacked: false };
+  const lineup = recruitLineup(state, incoming, replacement);
+  if (replacement) {
+    const released = all.find((unit) => unit.id === replacement)!;
+    state.roster[state.roster.indexOf(released.species)] = kind;
+    const active = state.team.findIndex((unit) => unit.id === replacement);
+    if (active >= 0) state.team[active] = incoming;
+    else state.reserves[state.reserves.findIndex((unit) => unit.id === replacement)] = incoming;
+  } else {
+    state.roster.push(kind);
+    if (lineup.includes(incoming.id)) state.team.push(incoming);
+    else state.reserves.push(incoming);
+  }
+  state.lineup = lineup;
+  prepareLineup(state);
+}
 export function prepareLineup(state: GameState) {
   const all = [...state.team, ...state.reserves];
   state.team = state.lineup.map((id) => all.find((c) => c.id === id)!);

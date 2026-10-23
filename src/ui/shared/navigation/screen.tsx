@@ -14,7 +14,7 @@ export function ScreenHeading({
   trailing,
 }: {
   children: ReactNode;
-  back?: () => void;
+  back?: (() => void) | false;
   openMenu?: () => void;
   id?: string;
   trailing?: ReactNode;
@@ -23,15 +23,17 @@ export function ScreenHeading({
   return (
     <div className="screen-heading">
       <div className="screen-heading-actions">
-        <Button
-          variant="ghost"
-          size="icon"
-          className="compact-icon-control"
-          aria-label="Back"
-          onClick={back ?? navigation.back}
-        >
-          <ArrowLeft aria-hidden="true" />
-        </Button>
+        {back !== false ? (
+          <Button
+            variant="ghost"
+            size="icon"
+            className="compact-icon-control"
+            aria-label="Back"
+            onClick={back ?? navigation.back}
+          >
+            <ArrowLeft aria-hidden="true" />
+          </Button>
+        ) : null}
         {navigation.deck ? (
           <Button
             variant="ghost"

@@ -29,7 +29,7 @@ export const commandPhases = {
   leaveSupport: ["support"],
   recruit: ["recruit"],
   recruitDestination: ["teamSelection"],
-  skipRecruit: ["recruit"],
+  confirmRecruit: ["recruit"],
   chooseBoon: ["boon"],
   skipBoon: ["boon"],
   buyTalent: all,

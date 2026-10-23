@@ -7,6 +7,8 @@ export const SCENARIOS = [
   "battle",
   "pause",
   "recruit",
+  "recruit-replacement",
+  "recruit-team-preview",
   "battle-rewards",
   "merchant",
   "merchant-unavailable",
@@ -30,9 +32,28 @@ export async function reviewScenario(server, name) {
   const { encodeSave, decodeSave } = await server.ssrLoadModule("/src/game/save.ts");
   let game = name.startsWith("merchant")
     ? merchantDestination()
-    : ["recruit", "battle-rewards"].includes(name)
+    : ["recruit", "recruit-replacement", "recruit-team-preview", "battle-rewards"].includes(name)
       ? winBattle()
       : run();
+  if (["recruit-replacement", "recruit-team-preview"].includes(name)) {
+    const { species } = await server.ssrLoadModule("/src/game/content.ts");
+    const reserves = ["pollenmoth", "prismram"].map((kind, index) => ({
+      id: `review-reserve-${index}`,
+      species: kind,
+      health: species(kind).health,
+      block: 0,
+      attacked: false,
+    }));
+    game = {
+      ...game,
+      roster: [...game.roster, ...reserves.map((unit) => unit.species)],
+      reserves,
+      discovery: {
+        ...game.discovery,
+        recruited: { ...game.discovery.recruited, pollenmoth: 1 },
+      },
+    };
+  }
   if (name.startsWith("merchant")) game = accept(game, { type: "enterSupport", visit: game.support.id });
   if (name === "merchant-unavailable") game = { ...game, currency: 0 };
   const save = encodeSave(game);
@@ -77,12 +98,18 @@ export async function openReviewScenario(page, origin, scenario, scale) {
     await button(scenario.name === "draw-pile" ? "Inspect Draw Pile" : "Inspect Discard Pile").click();
   if (["battle", "pause"].includes(scenario.name))
     await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
-  if (scenario.name === "recruit") {
+  if (["recruit", "recruit-replacement", "recruit-team-preview"].includes(scenario.name)) {
     await page
       .locator(".battle-rewards-screen")
       .getByRole("button", { name: "Continue", exact: true })
       .click();
     await expect(page.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeVisible();
+    if (["recruit-replacement", "recruit-team-preview"].includes(scenario.name)) {
+      await page.getByRole("button", { name: "Recruit Emberback", exact: true }).click();
+      await expect(page.getByRole("heading", { name: "Choose your team", exact: true })).toBeVisible();
+      if (scenario.name === "recruit-team-preview")
+        await page.locator(".recruit-team-roster .creature-card").first().click();
+    }
   }
   if (scenario.name === "battle-rewards")
     await expect(page.getByRole("heading", { name: "Victory", exact: true })).toBeVisible();

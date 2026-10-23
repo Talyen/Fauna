@@ -1,4 +1,13 @@
-import { swapFixture } from "../../support/game";
+import {
+  swapFixture,
+  completeRecruitment,
+  teamRun,
+  accept,
+  run,
+  winBattle,
+  policy,
+  bossReward,
+} from "../../support/game";
 import { freshCombat } from "../../../src/game/combat/index";
 import { describe, it, expect } from "vitest";
 import { produce } from "immer";
@@ -7,7 +16,6 @@ import { decodeSave, encodeSave } from "../../../src/game/save";
 import { cardKeywords, talentPoints } from "../../../src/game/progression";
 import { cardCost } from "../../../src/game/ability-rules";
 import { previewPlay } from "../../../src/game/preview";
-import { teamRun, recruitChoice, accept, run, winBattle, policy, bossReward } from "../../support/game";
 describe("keyword progression and rewards", () => {
   it("awards keywords once per accepted play, banks once on victory, and never banks previews", () => {
     const s = run(),
@@ -39,7 +47,7 @@ describe("keyword progression and rewards", () => {
     );
     const resumed = decodeSave(encodeSave(won));
     expect(resumed).toEqual(won);
-    const next = accept(resumed, recruitChoice(resumed));
+    const next = completeRecruitment(resumed);
     expect(next.keywordXP).toEqual(won.keywordXP);
     expect(dispatch(next, { type: "skipBoon" }).accepted).toBe(false);
   });
@@ -105,7 +113,7 @@ describe("keyword progression and rewards", () => {
     s = accept(s, { type: "beginBattle" });
     expect(dispatch(s, { type: "swap", activeId: "ally-0", reserve: "ally-0" }).accepted).toBe(false);
   });
-  it("requires a replacement at five and can replace either deployed or reserved species", () => {
+  it("confirms either deployed or reserved replacements after committing recruitment", () => {
     for (const replace of ["ally-0", "recruit-pollenmoth"] as const) {
       let s = produce(winBattle(), (d) => {
         d.roster.push("pollenmoth", "prismram");
@@ -119,19 +127,18 @@ describe("keyword progression and rewards", () => {
         }));
         d.wins = 1;
       });
-      expect(dispatch(s, { type: "recruit", species: "emberback" }).accepted).toBe(false);
-      expect(dispatch(s, { type: "recruit", species: "emberback", replace: "emberback" }).accepted).toBe(
-        false,
-      );
+      expect(dispatch(s, { type: "confirmRecruit" }).accepted).toBe(false);
+      s = accept(s, { type: "recruit", species: "emberback" });
+      expect(dispatch(s, { type: "confirmRecruit", replace: "emberback" }).accepted).toBe(false);
       const released = [...s.team, ...s.reserves].find((c) => c.id === replace)!.species;
-      s = accept(s, { type: "recruit", species: "emberback", replace });
+      s = accept(s, { type: "confirmRecruit", replace });
       expect(s.roster).toHaveLength(5);
       expect(new Set([...s.team, ...s.reserves].map((c) => c.id)).size).toBe(5);
       expect(s.roster).not.toContain(released);
       expect(decodeSave(encodeSave(s))).toEqual(s);
     }
     const s = winBattle();
-    expect(dispatch(s, { type: "recruit", species: "emberback", replace: "mossguard" }).accepted).toBe(false);
+    expect(dispatch(s, { type: "confirmRecruit", replace: "mossguard" }).accepted).toBe(false);
   });
   it("offers three unique unowned boons, commits one once, and applies opening effects only at battle start", () => {
     let s = bossReward();
@@ -232,7 +239,7 @@ it("final victory banks rewards once before recruitment and offers no run-only B
   expect(s.reward!.boons).toEqual([]);
   expect(decodeSave(encodeSave(s))).toEqual(s);
   const banked = { currency: s.currency, keywordXP: s.keywordXP, wins: s.wins };
-  s = accept(s, recruitChoice(s));
+  s = completeRecruitment(s);
   expect(s.phase).toBe("victory");
   expect({ currency: s.currency, keywordXP: s.keywordXP, wins: s.wins }).toEqual(banked);
   expect(decodeSave(encodeSave(s))).toEqual(s);

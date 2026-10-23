@@ -59,8 +59,8 @@ These are the agreed directions from the design review. They supersede the proto
 - Recruiting adds a creature to the journey roster rather than forcing an immediate active-team replacement.
 - The first battle contains one enemy, the second contains two, and every later ordinary battle contains three; Boss encounters begin with one Legendary. Choose a Recruit shows the exact defeated enemy entries in battle order, including repeated species and species already in the roster. Recruiting creates a new individual with independent identity and battle state.
 - Recruitment remains a direct commitment on the final choice, without a separate confirmation.
-- Recruit one defeated creature or Skip to keep the current roster, including at a full roster. Collected species persist after release, defeat and return home. Encountering a species or unlocking it through victory does not collect it.
-- When the roster is full, choose the incoming species, then choose an existing creature to release. The final replacement choice commits immediately; canceling before that choice preserves the roster.
+- Recruit one defeated creature; recruitment commits Collection progress immediately and cannot be canceled. Collected species persist after release, defeat and return home. Encountering a species or unlocking it through victory does not collect it.
+- At a full roster, the committed recruit opens Choose your team. The original five-creature team is selected initially. Artwork exchanges preview one replacement at a time using the shared battle arc motion; choosing another target restores the previous individual, and activating the selected creature or the upper exchange artwork reverses the preview. Confirm accepts the displayed team, including keeping the original team without a swap. Only Confirm changes the roster; previews never save or grant progress. Reload resumes the banked recruit with the original team preview and never grants Collection progress twice.
 
 ## Currency and items
 
@@ -86,7 +86,7 @@ Final victory or defeat → Journey results. Ending a started journey voluntaril
 - Results offer a single centered Main menu action. Start a new journey only from the main menu.
 - Play resets journey totals and roster/boons while preserving permanent progress. Results appear only when ending the journey; returning to the main menu or loading a completed journey does not reopen them.
 - Development saves are disposable; obsolete formats are rejected rather than migrated. Journey totals are recorded from current-format journeys, never inferred from lifetime XP or currency.
-- Material types remain undefined and are not shown. Victory shows automatic earnings before Continue opens a separate recruitment step; intermediate Boss Boon choices follow recruitment. Recruitment and Boon choices each have a Skip action. Continue leaves the already committed Gold, XP and reward offers unchanged. Full-roster replacement changes the contents of that same screen and may be canceled before committing.
+- Material types remain undefined and are not shown. Victory shows automatic earnings before Continue opens a separate recruitment step; intermediate Boss Boon choices follow recruitment. Recruitment has no Skip action; Boon choices retain Skip. Continue leaves the already committed Gold, XP and reward offers unchanged. Full-roster recruitment saves the chosen species before a separate team confirmation step; reversible previews leave the committed roster unchanged.
 
 See [UI design system](UI.md) for composition and interaction rules.
 

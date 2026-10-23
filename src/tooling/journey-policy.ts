@@ -71,6 +71,8 @@ export function boonValue(
   }
 }
 function recruitDecision(state: GameState): JourneyDecision {
+  const selected = state.phase === "recruit" ? state.reward.selectedRecruit : undefined;
+  const offers = selected === undefined ? state.reward!.recruits : [selected];
   const roster = [...state.team, ...state.reserves];
   const living = (units: typeof roster) => units.filter((unit) => unit.health > 0);
   const before = capabilities(
@@ -100,7 +102,7 @@ function recruitDecision(state: GameState): JourneyDecision {
       0,
     );
   const keep = score(roster, state.team);
-  const options = state.reward!.recruits.flatMap((kind) =>
+  const options = offers.flatMap((kind) =>
     (roster.length === 5 ? roster : [undefined]).map((released) => {
       const incoming = {
         id: "candidate",
@@ -120,6 +122,7 @@ function recruitDecision(state: GameState): JourneyDecision {
       const lost = ["armorBypass", "purge"].filter((role) => before.has(role) && !after.has(role));
       // A repeated recruit can improve an owned passive even when deployment is unchanged.
       const rankGain =
+        selected === undefined &&
         (state.discovery.recruited[kind] ?? 0) > 0 &&
         (state.discovery.recruited[kind] ?? 0) < MAX_CREATURE_STARS + 1
           ? 100
@@ -135,18 +138,19 @@ function recruitDecision(state: GameState): JourneyDecision {
   );
   options.sort((a, b) => a.lost.length - b.lost.length || b.score - a.score || a.key.localeCompare(b.key));
   const chosen = options[0];
+  if (selected === undefined)
+    return {
+      command: { type: "recruit", species: chosen?.kind ?? offers[0]! },
+      reason: "Commit the offered recruit to Collection before choosing the team",
+    };
   if (!chosen || chosen.lost.length || chosen.score <= keep)
     return {
-      command: { type: "skipRecruit" },
+      command: { type: "confirmRecruit" },
       reason: "Keep the current roster and its deployed damage, recovery and unique coverage",
     };
   return {
-    command: {
-      type: "recruit",
-      species: chosen.kind,
-      ...(chosen.released ? { replace: chosen.released.id } : {}),
-    },
-    reason: `Recruit ${species(chosen.kind).name}${chosen.released ? `; release ${species(chosen.released.species).name}` : ""}; improve the legal deployment while preserving living damage, Armor bypass and Purge`,
+    command: { type: "confirmRecruit", replace: chosen.released!.id },
+    reason: `Add ${species(selected).name}; release ${species(chosen.released!.species).name}; preserve living damage, Armor bypass and Purge`,
   };
 }
 
@@ -228,18 +232,15 @@ export function createJourneyActor(config: Pick<JourneyConfig, "seed" | "starter
       case "recruit":
         return config.policy === "heuristic"
           ? recruitDecision(state)
-          : state.reward!.recruits.length
+          : state.reward.selectedRecruit !== undefined
             ? decision(
-                {
-                  type: "recruit",
-                  species: pick(state.reward!.recruits),
-                  ...(state.roster.length === 5
-                    ? { replace: pick([...state.team, ...state.reserves]).id }
-                    : {}),
-                },
-                "Choose recruit and release using policy RNG",
+                { type: "confirmRecruit", replace: pick([...state.team, ...state.reserves]).id },
+                "Choose a replacement using policy RNG",
               )
-            : decision({ type: "skipRecruit" }, "No recruit was offered");
+            : decision(
+                { type: "recruit", species: pick(state.reward.recruits) },
+                "Choose a recruit using policy RNG",
+              );
       case "boon": {
         const offers = state.reward!.boons;
         const boon =

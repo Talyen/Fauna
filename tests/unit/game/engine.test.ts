@@ -1,4 +1,12 @@
-import { swapFixture } from "../../support/game";
+import {
+  swapFixture,
+  completeRecruitment,
+  accept,
+  policy,
+  run,
+  teamRun,
+  winBattle,
+} from "../../support/game";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../../src/game/engine";
@@ -6,7 +14,6 @@ import { combat, freshCombat, hit } from "../../../src/game/combat/index";
 import { definition, species, SPECIES } from "../../../src/game/content";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { validateContent } from "../../../src/game/content-validation";
-import { recruitChoice, accept, policy, run, teamRun, winBattle } from "../../support/game";
 function expectDeeplyFrozen(value: unknown) {
   if (value === null || typeof value !== "object") return;
   expect(Object.isFrozen(value)).toBe(true);
@@ -197,7 +204,7 @@ describe("game commands", () => {
       const bank = s.currency;
       expect(dispatch(s, { type: "skipBoon" }).accepted).toBe(false);
       expect(s.currency).toBe(bank);
-      if (s.phase === "recruit") s = accept(s, recruitChoice(s));
+      if (s.phase === "recruit") s = completeRecruitment(s);
       if (s.phase === "boon") s = accept(s, { type: "skipBoon" });
       if (s.phase === "teamSelection") s = accept(s, { type: "beginBattle" });
     }

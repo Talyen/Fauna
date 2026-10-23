@@ -192,7 +192,16 @@ export function decodeSave(raw: string): GameState {
       (s.reward.outcome === "next" && finalEncounter(s)) ||
         (s.reward.outcome === "victory" && !finalEncounter(s)),
     );
-    if (s.phase === "recruit") invalid(s.reward.recruits.length !== encounterSource(s).enemies.length);
+    if (s.phase === "recruit") {
+      invalid(s.reward.recruits.length !== encounterSource(s).enemies.length);
+      const selected = s.reward.selectedRecruit;
+      if (selected !== undefined)
+        invalid(
+          s.roster.length !== 5 ||
+            !s.reward.recruits.includes(selected) ||
+            s.discovery.recruited[selected] === undefined,
+        );
+    }
     if (s.phase === "boon") invalid(s.reward.boons.some((r) => s.boons.includes(r)));
     if (s.reward.outcome === "defeat") invalid([...s.team, ...s.reserves].some((c) => c.health > 0));
   }

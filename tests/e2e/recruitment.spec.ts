@@ -1,8 +1,6 @@
 import { captureScreen } from "./support/rendered-evidence";
-import { freshCombat } from "../../src/game/combat/index";
 import { test, expect } from "@playwright/test";
-import { produce } from "immer";
-import { winBattle } from "../support/game";
+import { winBattle, fullRosterReward } from "../support/game";
 import { seed, state, resume } from "./support/session";
 import { continueToRecruit } from "./support/journey";
 
@@ -33,41 +31,37 @@ test("recruitment adds a backup without exposing free lineup changes", async ({ 
   expect((await state(page)).team[0]!.species).toBe("mossguard");
 });
 
-test("recruitment at five requires replacement and updates a released starter's lineup entry", async ({
+test("full-roster recruitment banks Collection progress and confirms only the displayed team", async ({
   page,
 }) => {
-  const fixture = produce(winBattle(), (d) => {
-    d.wins = 1;
-    d.roster.push("pollenmoth", "prismram");
-    d.reserves = ["pollenmoth", "prismram"].map((kind) => ({
-      id: `recruit-${kind}`,
-      species: kind as "pollenmoth" | "prismram",
-      health: 20,
-      block: 0,
-      combat: freshCombat(),
-      attacked: false,
-    }));
-  });
+  const fixture = fullRosterReward();
   await seed(page, fixture);
   await resume(page);
   await continueToRecruit(page);
+  await expect(page.getByRole("button", { name: "Skip", exact: true })).toHaveCount(0);
   await page.getByRole("button", { name: "Recruit Emberback", exact: true }).click();
-  expect((await state(page)).roster).toEqual(fixture.roster);
-  await expect(page.getByRole("heading", { name: "Replace a creature", exact: true })).toBeVisible();
-  await expect(
-    page
-      .getByRole("region", { name: "Incoming recruit" })
-      .getByRole("button", { name: "Inspect Emberback", exact: true }),
-  ).toBeVisible();
-  await captureScreen(page, { path: "reports/implementation/recruit-replacement.png" });
-  await page.getByRole("button", { name: "Cancel", exact: true }).click();
-  expect((await state(page)).revision).toBe(fixture.revision);
-  await page.getByRole("button", { name: "Recruit Emberback", exact: true }).click();
-  await page.getByRole("button", { name: "Release Mossguard", exact: true }).click();
+  const banked = await state(page);
+  expect(banked.roster).toEqual(fixture.roster);
+  expect(banked.discovery.recruited.emberback).toBe((fixture.discovery.recruited.emberback ?? 0) + 1);
+  await expect(page.getByRole("heading", { name: "Choose your team", exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Back", exact: true })).toHaveCount(0);
+  const first = page.locator('.recruit-team-roster [data-roster-slot="ally-0"] .creature-card');
+  await first.click();
+  await expect(first).toHaveAttribute("data-species", "emberback");
+  expect(await state(page)).toEqual(banked);
+  await captureScreen(page, { path: "reports/implementation/recruit-team-preview.png" });
+  await page.reload();
+  await resume(page);
+  await expect(page.getByRole("heading", { name: "Choose your team", exact: true })).toBeVisible();
+  await expect(first).toHaveAttribute("data-species", "mossguard");
+  expect(await state(page)).toEqual(banked);
+  await first.click();
+  await page.getByRole("button", { name: "Confirm", exact: true }).click();
   const recruited = await state(page);
   expect(recruited.roster).toHaveLength(5);
   expect(recruited.roster).not.toContain("mossguard");
   expect(recruited.team.find((c) => c.id === recruited.lineup[0])!.species).toBe("emberback");
+  expect(recruited.discovery).toEqual(banked.discovery);
   expect(recruited.phase).toBe("teamSelection");
   await page.reload();
   await resume(page);

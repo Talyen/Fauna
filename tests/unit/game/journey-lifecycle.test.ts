@@ -89,9 +89,10 @@ describe("journey lifecycle behavior baseline", () => {
         step({
           type: "recruit",
           species: state.reward!.recruits[0]!,
-          ...(state.roster.length === 5 ? { replace: state.lineup[0]! } : {}),
         });
       }
+      if (state.phase === "recruit" && state.reward.selectedRecruit !== undefined)
+        step({ type: "confirmRecruit", replace: state.lineup[0]! });
       if (state.phase === "boon") step({ type: "chooseBoon", boon: state.reward!.boons[0]! });
       if (state.phase === "victory" || state.phase === "defeat") break;
       state = produce(state, (draft) => {

@@ -6,7 +6,7 @@ import { decodeSave, encodeSave } from "../../../src/game/save";
 import { CARDS, species } from "../../../src/game/content";
 import { pendingReplacement } from "../../../src/game/team";
 import { chooseBattleCommand } from "../../../src/application/battle-policy";
-import { prepareDestination, recruitChoice, accept, run, winBattle, swapFixture } from "../../support/game";
+import { completeRecruitment, accept, run, winBattle, swapFixture } from "../../support/game";
 
 function withReserves() {
   return produce(run(), (d) => {
@@ -162,7 +162,7 @@ describe("knockout replacements", () => {
       reserve: "recruit-pollenmoth",
     });
     game = winBattle(game);
-    if (game.phase === "recruit") game = accept(game, recruitChoice(game));
+    if (game.phase === "recruit") game = completeRecruitment(game);
     if (game.phase === "boon") game = accept(game, { type: "skipBoon" });
     expect(game.team.map((c) => c.species)).toEqual(["pollenmoth", "emberback", "prismram"]);
     game = accept(game, { type: "beginBattle" });

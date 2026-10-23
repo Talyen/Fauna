@@ -4,7 +4,13 @@ import { produce } from "immer";
 import { BOONS } from "../../../src/game/content";
 import { createGame, dispatch } from "../../../src/game/engine";
 import { encodeSave, decodeSave } from "../../../src/game/save";
-import { recruitChoice, accept, winBattle, merchantDestination as merchant } from "../../support/game";
+import {
+  recruitChoice,
+  accept,
+  winBattle,
+  merchantDestination as merchant,
+  completeRecruitment,
+} from "../../support/game";
 it("saves an atomic purchase, rejects repeats and progresses to fresh destinations", () => {
   const s = merchant();
   const v = s.support!;
@@ -76,7 +82,7 @@ it("preserves eight battles after Merchant purchases", () => {
       s = accept(s, { type: "leaveSupport", visit: s.support!.id });
     }
     s = winBattle(accept(s, { type: "beginBattle" }));
-    if (s.phase === "recruit") s = accept(s, recruitChoice(s));
+    if (s.phase === "recruit") s = completeRecruitment(s);
     if (s.phase === "boon") {
       expect(s.reward!.boons.length).toBeGreaterThan(0);
       s = accept(s, { type: "chooseBoon", boon: s.reward!.boons[0]! });
@@ -121,7 +127,7 @@ it.each([BOONS.length - 2, BOONS.length - 1, BOONS.length])(
     let s: GameState = merchant();
     for (let i = 0; i < 2; i++) {
       s = winBattle(accept(s, { type: "beginBattle" }));
-      s = accept(s, recruitChoice(s));
+      s = completeRecruitment(s);
     }
     // Explicit loadout fixture; these Boons are not claimed as earned purchases.
     s = produce(s, (d) => {
@@ -130,7 +136,7 @@ it.each([BOONS.length - 2, BOONS.length - 1, BOONS.length])(
     s = winBattle(accept(s, { type: "beginBattle" }));
     expect(s.phase).toBe("recruit");
     expect(decodeSave(encodeSave(s))).toEqual(s);
-    s = accept(s, recruitChoice(s));
+    s = completeRecruitment(s);
     expect(s.phase).toBe(owned === BOONS.length ? "teamSelection" : "boon");
     if (owned < BOONS.length) expect(s.reward!.boons).toHaveLength(BOONS.length - owned);
     expect(decodeSave(encodeSave(s))).toEqual(s);
@@ -150,7 +156,7 @@ it("discounts each new Merchant with Favor and persists the paid price", () => {
         state = produce(state, (draft) => {
           draft.rng = 10;
         });
-      state = accept(state, recruitChoice(state));
+      state = completeRecruitment(state);
     }
     if (state.phase === "boon") state = accept(state, { type: "skipBoon" });
   }

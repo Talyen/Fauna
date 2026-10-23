@@ -5,7 +5,7 @@ import { starterCount } from "../../../src/game/progression";
 import { CARDS, FIRST_RUN_STARTERS, SPECIES } from "../../../src/game/content";
 import { encounterPacks } from "../../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { accept, recruitChoice, winBattle } from "../../support/game";
+import { accept, completeRecruitment, winBattle } from "../../support/game";
 
 function firstJourney(seed = 7) {
   const game = createGame(seed);
@@ -81,16 +81,14 @@ describe("collected starter drafts", () => {
     expect(decodeSave(encodeSave(s))).toEqual(s);
   });
 
-  it("grows the onboarding team through optional recruitment against one, then two enemies", () => {
+  it("grows the onboarding team through recruitment against one, then two enemies", () => {
     let s = firstJourney();
     for (let round = 0; round < 2; round++) {
       s = accept(s, { type: "beginBattle" });
       expect(s.battle!.enemies).toHaveLength(round + 1);
       s = winBattle(s);
       expect(s.reward!.recruits).toHaveLength(round + 1);
-      expect(dispatch(s, { type: "skipRecruit" }).accepted).toBe(true);
-      expect(dispatch(s, { type: "skipRecruit" }).state.roster).toEqual(s.roster);
-      s = accept(s, recruitChoice(s));
+      s = completeRecruitment(s);
       expect(s.team).toHaveLength(round + 2);
       expect(s.cards).toHaveLength((round + 2) * 3);
       expect(decodeSave(encodeSave(s))).toEqual(s);

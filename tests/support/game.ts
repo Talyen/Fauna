@@ -83,12 +83,36 @@ export function winBattle(s = run()) {
     targetId: s.battle!.enemies.find((enemy) => enemy.health > 0)!.id,
   });
 }
+/** A full roster at the recruitment boundary, including distinct backup individuals. */
+export function fullRosterReward(state = winBattle()) {
+  if (state.phase !== "recruit") throw new Error("Expected a Recruit reward");
+  return produce(state, (draft) => {
+    const kinds = ["pollenmoth", "prismram"] as const;
+    for (let index = 0; draft.roster.length < 5; index++) {
+      const kind = kinds[index % kinds.length]!;
+      draft.roster.push(kind);
+      draft.reserves.push({
+        id: `reward-reserve-${index}`,
+        species: kind,
+        health: species(kind).health,
+        block: 0,
+        attacked: false,
+      });
+      if (!draft.discovery.encountered.includes(kind)) draft.discovery.encountered.push(kind);
+      draft.discovery.recruited[kind] ??= 1;
+    }
+  });
+}
 export function recruitChoice(s: GameState): Command {
-  return {
-    type: "recruit",
-    species: s.reward!.recruits[0]!,
-    ...(s.roster.length === 5 ? { replace: [...s.team, ...s.reserves].at(-1)!.id } : {}),
-  };
+  if (s.phase !== "recruit") throw new Error("Expected recruitment choice");
+  return s.reward.selectedRecruit !== undefined
+    ? { type: "confirmRecruit", replace: [...s.team, ...s.reserves].at(-1)!.id }
+    : { type: "recruit", species: s.reward.recruits[0]! };
+}
+/** Finish the two-command recruitment boundary for fixtures that need the next room. */
+export function completeRecruitment(state: GameState) {
+  const recruited = accept(state, recruitChoice(state));
+  return recruited.phase === "recruit" ? accept(recruited, recruitChoice(recruited)) : recruited;
 }
 export function policy(s: GameState): Command {
   if (s.phase === "teamSelection")

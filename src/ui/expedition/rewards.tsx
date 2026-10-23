@@ -13,6 +13,7 @@ import { species, type SpeciesId, BOONS } from "../../game/content";
 import { creatureStars, MAX_CREATURE_STARS } from "../../game/progression";
 import type { Command, RewardState } from "../../game/types";
 import type { Inspection } from "../shared/inspection-model";
+import { RecruitTeam } from "./recruit-team";
 import { BattleEarnings } from "../shared/rewards/battle-earnings";
 type Props = { game: RewardState; send: (command: Command) => boolean; inspect: (item: Inspection) => void };
 function RecruitProgress({ game, kind }: { game: RewardState; kind: SpeciesId }) {
@@ -47,25 +48,20 @@ function RecruitProgress({ game, kind }: { game: RewardState; kind: SpeciesId })
   );
 }
 export function Rewards({ game, send, inspect }: Props) {
-  const [choosing, setChoosing] = useState(game.phase === "boon");
-  const [incoming, setIncoming] = useState<SpeciesId | null>(null);
+  const selectedRecruit = game.phase === "recruit" ? game.reward.selectedRecruit : undefined;
+  const [choosing, setChoosing] = useState(game.phase === "boon" || selectedRecruit !== undefined);
   const proceed = useRef<HTMLButtonElement>(null);
   const choices = useRef<HTMLElement>(null);
-  const returnTo = useRef<number | null>(null);
   useLayoutEffect(() => {
-    if (!choosing) {
-      returnFocus(proceed.current);
-      return;
-    }
-    const buttons = choices.current?.querySelectorAll<HTMLButtonElement>(
-      incoming ? ".recruit-options .creature-card" : ".recruit-options .recruit-button",
+    if (selectedRecruit !== undefined) return;
+    returnFocus(
+      choosing
+        ? (choices.current?.querySelector<HTMLButtonElement>(".recruit-button, .boon-choice") ?? null)
+        : proceed.current,
     );
-    if (incoming) returnFocus(buttons?.[0] ?? null);
-    else if (returnTo.current !== null) {
-      returnFocus(buttons?.[returnTo.current] ?? null);
-      returnTo.current = null;
-    } else returnFocus(buttons?.[0] ?? null);
-  }, [incoming, choosing]);
+  }, [choosing, selectedRecruit]);
+  if (game.phase === "recruit" && selectedRecruit !== undefined)
+    return <RecruitTeam game={game} incoming={selectedRecruit} send={send} inspect={inspect} />;
   const reward = game.reward;
   const recruiting = game.phase === "recruit";
   if (!choosing)
@@ -84,82 +80,38 @@ export function Rewards({ game, send, inspect }: Props) {
     <ResultPresentation>
       <Screen className="reward-screen">
         <header className="reward-heading">
-          <ScreenHeading back={incoming ? () => setIncoming(null) : undefined}>
-            {recruiting ? (incoming ? "Replace a creature" : "Choose a Recruit") : "Choose a Boon"}
-          </ScreenHeading>
+          <ScreenHeading>{recruiting ? "Choose a Recruit" : "Choose a Boon"}</ScreenHeading>
         </header>
         <section className="reward-choices" ref={choices}>
           <div className="reward-choice-content">
             {recruiting ? (
-              <div className={incoming ? "recruit-comparison" : undefined}>
-                {incoming ? (
-                  <section className="incoming-recruit" aria-label="Incoming recruit">
-                    <h3>Recruit</h3>
+              <PagedItems
+                className="recruit-options"
+                label="Recruit pages"
+                pageSize={3}
+                adaptive={{ columns: 3, rows: 1 }}
+                items={reward.recruits.map((kind, index) => ({ kind, id: index }))}
+              >
+                {({ kind, id }) => (
+                  <div className="reward-option" key={id}>
                     <CreatureCard
                       progression={game}
-                      kind={incoming}
-                      label={`Inspect ${species(incoming).name}`}
-                      onClick={() => inspect({ species: incoming })}
-                      onInspect={() => inspect({ species: incoming })}
+                      kind={kind}
+                      label={`Inspect ${species(kind).name}`}
+                      onInspect={() => inspect({ species: kind })}
+                      onClick={() => inspect({ species: kind })}
                     />
-                    <h2>{species(incoming).name}</h2>
-                  </section>
-                ) : null}
-                <div className="recruit-roster">
-                  {incoming ? <h3>Release</h3> : null}
-                  <PagedItems
-                    key={incoming ?? "recruits"}
-                    className="recruit-options"
-                    label="Recruit pages"
-                    pageSize={3}
-                    adaptive={{ columns: incoming ? 5 : 3, rows: 1 }}
-                    items={
-                      incoming
-                        ? [...game.team, ...game.reserves].map((creature) => ({
-                            kind: creature.species,
-                            id: creature.id,
-                          }))
-                        : reward.recruits.map((kind, index) => ({ kind, id: String(index) }))
-                    }
-                  >
-                    {({ kind, id }) => (
-                      <div className="reward-option" key={id}>
-                        <CreatureCard
-                          progression={game}
-                          kind={kind}
-                          actorId={incoming ? id : undefined}
-                          label={incoming ? `Release ${species(kind).name}` : `Inspect ${species(kind).name}`}
-                          onInspect={() =>
-                            inspect(incoming ? { species: kind, creatureId: id } : { species: kind })
-                          }
-                          onClick={() => {
-                            if (incoming) send({ type: "recruit", species: incoming, replace: id });
-                            else inspect({ species: kind });
-                          }}
-                        />
-                        {incoming ? <h2>{species(kind).name}</h2> : null}
-                        {!incoming ? (
-                          <>
-                            <Button
-                              className="recruit-button"
-                              aria-label={`Recruit ${species(kind).name}`}
-                              onClick={() => {
-                                if (game.roster.length === 5) {
-                                  returnTo.current = Number(id);
-                                  setIncoming(kind);
-                                } else send({ type: "recruit", species: kind });
-                              }}
-                            >
-                              Recruit
-                            </Button>
-                            <RecruitProgress game={game} kind={kind} />
-                          </>
-                        ) : null}
-                      </div>
-                    )}
-                  </PagedItems>
-                </div>
-              </div>
+                    <Button
+                      className="recruit-button"
+                      aria-label={`Recruit ${species(kind).name}`}
+                      onClick={() => send({ type: "recruit", species: kind })}
+                    >
+                      Recruit
+                    </Button>
+                    <RecruitProgress game={game} kind={kind} />
+                  </div>
+                )}
+              </PagedItems>
             ) : (
               <div className="boon-options">
                 {reward.boons.map((id) => {
@@ -190,17 +142,13 @@ export function Rewards({ game, send, inspect }: Props) {
             )}
           </div>
         </section>
-        <footer className="reward-footer">
-          {incoming ? (
-            <Button variant="outline" onClick={() => setIncoming(null)}>
-              Cancel
-            </Button>
-          ) : (
-            <Button variant="ghost" onClick={() => send({ type: recruiting ? "skipRecruit" : "skipBoon" })}>
+        {!recruiting ? (
+          <footer className="reward-footer">
+            <Button variant="ghost" onClick={() => send({ type: "skipBoon" })}>
               Skip
             </Button>
-          )}
-        </footer>
+          </footer>
+        ) : null}
       </Screen>
     </ResultPresentation>
   );

@@ -1,4 +1,11 @@
-import { swapFixture } from "../../support/game";
+import {
+  swapFixture,
+  completeRecruitment,
+  prepareDestination,
+  accept,
+  run,
+  victoryReady,
+} from "../../support/game";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import {
@@ -13,7 +20,6 @@ import {
 import { dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { cardKeywords } from "../../../src/game/progression";
-import { prepareDestination, recruitChoice, accept, run, victoryReady } from "../../support/game";
 
 function packet(
   type: Parameters<typeof hit>[4],
@@ -200,7 +206,7 @@ describe("combat commands and journey health", () => {
       d.battle!.draw = d.cards.filter((c) => c.id !== attack.id).map((c) => c.id);
     });
     s = accept(s, { type: "play", cardId: attack.id, targetId: "enemy-0" });
-    s = accept(s, recruitChoice(s));
+    s = completeRecruitment(s);
     expect(s.team.map((c) => c.health)).toEqual([0, 7, 30]);
     s = accept(decodeSave(encodeSave(s)), { type: "beginBattle" });
     expect(s.team.map((c) => c.health)).toEqual([0, 7, 30]);

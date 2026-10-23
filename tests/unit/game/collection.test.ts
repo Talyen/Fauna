@@ -63,11 +63,9 @@ it("collects only accepted recruits, caps stars at five, and retains ranks acros
     );
     const kind = state.reward!.recruits[0]!;
     const before = state.discovery;
-    const invalid = dispatch(state, { type: "recruit", species: kind, replace: "missing" });
+    const invalid = dispatch(state, { type: "confirmRecruit", replace: "missing" });
     expect(invalid.accepted).toBe(false);
     expect(invalid.state).toBe(state);
-    expect(dispatch(state, { type: "skipRecruit" }).accepted).toBe(true);
-    expect(dispatch(state, { type: "skipRecruit" }).state.roster).toEqual(state.roster);
     const expected = Math.min((before.recruited[kind] ?? 0) + 1, 6);
     state = accept(state, { type: "recruit", species: kind });
     expect(state.discovery.recruited[kind]).toBe(expected);

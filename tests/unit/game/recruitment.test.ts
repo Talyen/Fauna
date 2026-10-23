@@ -1,10 +1,17 @@
-import { swapFixture } from "../../support/game";
+import {
+  swapFixture,
+  prepareDestination,
+  accept,
+  run,
+  teamRun,
+  winBattle,
+  fullRosterReward,
+} from "../../support/game";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { dispatch } from "../../../src/game/engine";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { prepareDestination, accept, run, teamRun, winBattle } from "../../support/game";
 
 describe("recruiting creature copies", () => {
   it("offers exactly the three defeated enemies, including repeated species and roster members", () => {
@@ -85,11 +92,9 @@ describe("recruiting creature copies", () => {
         { type: "beginBattle" },
       ),
     );
-    expect(dispatch(s, { type: "skipRecruit" }).accepted).toBe(true);
-    expect(dispatch(s, { type: "skipRecruit" }).state.roster).toEqual(s.roster);
-    expect(dispatch(s, { type: "recruit", species: "emberback" }).accepted).toBe(false);
     expect(s.discovery.recruited.emberback).toBe(2);
-    s = accept(s, { type: "recruit", species: "emberback", replace: "ally-1" });
+    s = accept(s, { type: "recruit", species: "emberback" });
+    s = accept(s, { type: "confirmRecruit", replace: "ally-1" });
     expect(s.discovery.recruited.emberback).toBe(3);
     expect(s.discovery.recruited.mossguard).toBe(2);
     const all = [...s.team, ...s.reserves];
@@ -102,38 +107,71 @@ describe("recruiting creature copies", () => {
   });
 });
 
-it("declining recruitment preserves collection ranks, card ownership and lineup across resume", () => {
-  const state = winBattle(run());
-  const result = dispatch(state, { type: "skipRecruit" });
-  expect(result.accepted).toBe(true);
-  expect(result.state.phase).toBe("teamSelection");
-  expect(result.state.roster).toEqual(state.roster);
-  expect(result.state.lineup).toEqual(state.lineup);
-  expect(result.state.cards).toEqual(state.cards);
-  expect(result.state.discovery).toEqual(state.discovery);
-  expect(result.state.currency).toBe(state.currency);
-  expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
-  const repeated = dispatch(result.state, { type: "skipRecruit" });
-  expect(repeated.accepted).toBe(false);
-  expect(repeated.state).toBe(result.state);
+it("banks a full-roster recruit once, before the saved team decision", () => {
+  const reward = fullRosterReward();
+  expect(dispatch(reward, { type: "confirmRecruit" }).accepted).toBe(false);
+  const selected = accept(reward, { type: "recruit", species: "emberback" });
+  expect(selected.phase).toBe("recruit");
+  expect(selected.discovery.recruited.emberback).toBe((reward.discovery.recruited.emberback ?? 0) + 1);
+  expect(selected.roster).toEqual(reward.roster);
+  expect(selected.team).toEqual(reward.team);
+  expect(selected.reserves).toEqual(reward.reserves);
+  expect(selected.cards).toEqual(reward.cards);
+  expect(selected.lineup).toEqual(reward.lineup);
+  expect(selected.rng).toBe(reward.rng);
+  const resumed = decodeSave(encodeSave(selected));
+  expect(resumed).toEqual(selected);
+  for (const kind of reward.reward.recruits) {
+    const repeated = dispatch(resumed, { type: "recruit", species: kind });
+    expect(repeated.accepted).toBe(false);
+    expect(repeated.state).toBe(resumed);
+    expect(repeated.state.rng).toBe(resumed.rng);
+  }
+  const invalid = dispatch(resumed, { type: "confirmRecruit", replace: "missing" });
+  expect(invalid.accepted).toBe(false);
+  expect(invalid.state).toBe(resumed);
+  const kept = accept(resumed, { type: "confirmRecruit" });
+  expect(kept.phase).toBe("teamSelection");
+  expect(kept.roster).toEqual(reward.roster);
+  expect(kept.team).toEqual(reward.team);
+  expect(kept.reserves).toEqual(reward.reserves);
+  expect(kept.cards).toEqual(reward.cards);
+  expect(kept.lineup).toEqual(reward.lineup);
+  expect(kept.discovery).toEqual(selected.discovery);
+  expect(decodeSave(encodeSave(kept))).toEqual(kept);
+  expect(dispatch(kept, { type: "confirmRecruit" }).state).toBe(kept);
+});
+
+it("rejects impossible saved recruitment selections", () => {
+  const reward = fullRosterReward();
+  const selected = accept(reward, { type: "recruit", species: "emberback" });
+  for (const broken of [
+    produce(selected, (draft) => {
+      if (draft.phase === "recruit") draft.reward.selectedRecruit = "memento";
+    }),
+    produce(selected, (draft) => {
+      delete draft.discovery.recruited.emberback;
+    }),
+  ])
+    expect(() => decodeSave(encodeSave(broken))).toThrow();
 });
 
 it.each([3, 7])(
-  "declining Boss recruitment at encounter %s preserves the remaining reward flow",
+  "keeping the team after Boss recruitment at encounter %s preserves reward ordering",
   (encounter) => {
     const ready = produce(teamRun(42, ["prismram"]), (game) => {
       game.encounter = encounter;
       prepareDestination(game);
       game.expedition = { pack: 0, recruit: null, lastRoom: "boss" };
     });
-    const reward = winBattle(accept(ready, { type: "beginBattle" }));
-    expect(reward.phase).toBe("recruit");
-    const next = accept(decodeSave(encodeSave(reward)), { type: "skipRecruit" });
+    const reward = fullRosterReward(winBattle(accept(ready, { type: "beginBattle" })));
+    const selected = accept(reward, { type: "recruit", species: reward.reward.recruits[0]! });
+    const next = accept(decodeSave(encodeSave(selected)), { type: "confirmRecruit" });
     expect(next.phase).toBe(encounter === 7 ? "victory" : "boon");
     expect(next.roster).toEqual(reward.roster);
-    expect(next.discovery).toEqual(reward.discovery);
+    expect(next.discovery).toEqual(selected.discovery);
     expect(next.currency).toBe(reward.currency);
     expect(decodeSave(encodeSave(next))).toEqual(next);
-    expect(dispatch(next, { type: "skipRecruit" }).accepted).toBe(false);
+    expect(dispatch(next, { type: "confirmRecruit" }).accepted).toBe(false);
   },
 );

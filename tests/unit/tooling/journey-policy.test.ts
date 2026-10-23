@@ -93,7 +93,11 @@ it.each(["cadenza", "mossguard", "emberback"] as SpeciesId[])(
     expect(JSON.stringify(state)).toBe(before);
     const result = dispatch(state, selected.command);
     expect(result.accepted).toBe(true);
-    expect(result.state.roster).toContain("rookhaven");
+    const confirmation = actor()(result.state);
+    expect(confirmation.command).not.toHaveProperty("replace", state.team[1]!.id);
+    const confirmed = dispatch(result.state, confirmation.command);
+    expect(confirmed.accepted).toBe(true);
+    expect(confirmed.state.roster).toContain("rookhaven");
   },
 );
 it("reports long absence of enemy Health progress without mistaking Minion damage for a boss defeat", () => {
@@ -142,7 +146,11 @@ it("improves a reserve instead of replacing a healthy Legendary with weaker solo
   const result = dispatch(state, selected.command);
   expect(result.accepted).toBe(true);
   expect(result.state.lineup).toEqual(state.lineup);
-  expect(result.state.team[0]!.species).toBe("memento");
+  const confirmation = actor()(result.state);
+  expect(confirmation.command).not.toHaveProperty("replace", state.team[0]!.id);
+  const confirmed = dispatch(result.state, confirmation.command);
+  expect(confirmed.accepted).toBe(true);
+  expect(confirmed.state.team[0]!.species).toBe("memento");
 });
 
 it("releases a reserve when a Legendary recruit would otherwise collapse a stronger deployed team", () => {
@@ -158,13 +166,18 @@ it("releases a reserve when a Legendary recruit would otherwise collapse a stron
   });
   const selected = actor()(state);
   expect(selected.command).toMatchObject({ type: "recruit", species: "memento" });
-  expect(selected.command.type === "recruit" && selected.command.replace?.startsWith("reserve-")).toBe(true);
   const result = dispatch(state, selected.command);
   expect(result.accepted).toBe(true);
-  expect(result.state.lineup).toEqual(state.lineup);
+  const confirmation = actor()(result.state);
+  expect(
+    confirmation.command.type === "confirmRecruit" && confirmation.command.replace?.startsWith("reserve-"),
+  ).toBe(true);
+  const confirmed = dispatch(result.state, confirmation.command);
+  expect(confirmed.accepted).toBe(true);
+  expect(confirmed.state.lineup).toEqual(state.lineup);
 });
 
-it("skips recruitment when the full healthy roster and passive ranks cannot improve", () => {
+it("keeps the team after recruitment when the full healthy roster and passive ranks cannot improve", () => {
   const base = winBattle(teamRun(42, ["prismram"]));
   const state = produce(base, (game) => {
     game.team[0]!.species = "memento";
@@ -181,9 +194,13 @@ it("skips recruitment when the full healthy roster and passive ranks cannot impr
     game.reward!.recruits = ["cadenza"];
   });
   const command = actor()(state).command;
-  expect(command).toEqual({ type: "skipRecruit" });
+  expect(command).toEqual({ type: "recruit", species: "cadenza" });
   const result = dispatch(state, command);
   expect(result.accepted).toBe(true);
-  expect(result.state.roster).toEqual(state.roster);
-  expect(result.state.lineup).toEqual(state.lineup);
+  const confirmation = actor()(result.state);
+  expect(confirmation.command).toEqual({ type: "confirmRecruit" });
+  const confirmed = dispatch(result.state, confirmation.command);
+  expect(confirmed.accepted).toBe(true);
+  expect(confirmed.state.roster).toEqual(state.roster);
+  expect(confirmed.state.lineup).toEqual(state.lineup);
 });

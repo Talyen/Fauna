@@ -6,7 +6,15 @@ import { ActionCard } from "../../../src/ui/shared/cards/cards";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
 import { produce } from "immer";
 import { createGame } from "../../../src/game/engine";
-import { accept, run, teamRun, starterJourney, winBattle, bossReward } from "../../support/game";
+import {
+  accept,
+  run,
+  teamRun,
+  starterJourney,
+  winBattle,
+  bossReward,
+  fullRosterReward,
+} from "../../support/game";
 import { encounterSource } from "../../../src/game/encounters";
 
 // @vitest-environment jsdom
@@ -119,7 +127,7 @@ describe("player interface", () => {
     expect(screen.queryByLabelText("Last battle earnings")).toBeNull();
     expect(screen.getByRole("heading", { name: "Choose a Recruit", level: 1 })).toBeTruthy();
     expect(document.querySelectorAll(".recruit-options .creature-card")).toHaveLength(1);
-    expect(screen.getByRole("button", { name: "Skip" })).toBeTruthy();
+    expect(screen.queryByRole("button", { name: "Skip" })).toBeNull();
     await user.click(screen.getByRole("button", { name: /^Recruit / }));
     expect(session.store.getState().game.phase).toBe("teamSelection");
     expect(screen.queryByRole("heading", { name: "Choose a Boon" })).toBeNull();
@@ -436,8 +444,8 @@ it("omits health from creature hover details while retaining block and the passi
   expect(screen.queryByText(/Moss Renewal/)).toBeNull();
 });
 
-it("declines a recruit without collecting or releasing a creature and resumes that decision", async () => {
-  const game = winBattle(run());
+it("keeps the team after committing a recruit to Collection and resumes the result", async () => {
+  const game = fullRosterReward();
   localStorage.setItem("fauna.save.v1", JSON.stringify(game));
   const session = createSession(createBrowserPlatform(localStorage), 42);
   await session.load();
@@ -445,12 +453,13 @@ it("declines a recruit without collecting or releasing a creature and resumes th
   const user = userEvent.setup();
   await user.click(screen.getByRole("button", { name: "Continue" }));
   await user.click(screen.getByRole("button", { name: "Continue" }));
-  await user.click(screen.getByRole("button", { name: "Skip" }));
+  await user.click(screen.getByRole("button", { name: "Recruit Emberback" }));
+  await user.click(screen.getByRole("button", { name: "Confirm" }));
   await session.flush();
   const next = session.store.getState().game;
   expect(next.phase).toBe("teamSelection");
   expect(next.roster).toEqual(game.roster);
-  expect(next.discovery).toEqual(game.discovery);
+  expect(next.discovery.recruited.emberback).toBe((game.discovery.recruited.emberback ?? 0) + 1);
   expect(screen.queryByRole("heading", { name: "Choose a Recruit" })).toBeNull();
   await session.dispose();
   const resumed = createSession(createBrowserPlatform(localStorage), 42);

@@ -248,6 +248,7 @@ export function settle(state: BattleState, events: GameEvent[]): boolean {
   return false;
 }
 export function afterRewards(state: RewardState) {
+  if (state.phase === "recruit") delete state.reward.selectedRecruit;
   if (state.phase === "recruit" && state.reward.outcome === "next" && state.reward.boons.length) {
     enterPhase(state, {
       ...state,

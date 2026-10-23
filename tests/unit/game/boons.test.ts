@@ -1,4 +1,4 @@
-import { swapFixture } from "../../support/game";
+import { swapFixture, completeRecruitment, accept, run, winBattle } from "../../support/game";
 import { expect, it } from "vitest";
 import {
   freshCombat,
@@ -12,7 +12,6 @@ import { decodeSave, encodeSave } from "../../../src/game/save";
 import { previewCard } from "../../../src/game/engine";
 import { BOONS, definition } from "../../../src/game/content";
 import { encounterSource } from "../../../src/game/encounters";
-import { recruitChoice, accept, run, winBattle } from "../../support/game";
 import type { GameEvent } from "../../../src/game/types";
 function fixture() {
   const state = structuredClone(run());
@@ -76,7 +75,7 @@ it("doubles only the first allied direct Burn hit across swaps, previews and res
       .meteoriteUsed,
   ).toBe(true);
   const won = winBattle(played);
-  const next = accept(won, recruitChoice(won));
+  const next = completeRecruitment(won);
   expect(next.phase).toBe("teamSelection");
   expect(accept(next, { type: "beginBattle" }).battle!.meteoriteUsed).toBe(false);
 });

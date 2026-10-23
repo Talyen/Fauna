@@ -34,20 +34,10 @@ export async function step(
     await activate(
       page.getByRole("button", { name: `Recruit ${species(c.species).name}`, exact: true }).first(),
     );
-    if (c.replace) {
-      const replacement = page.locator(`.recruit-options [data-actor-id="${c.replace}"] .creature-card`);
-      while ((await replacement.count()) === 0) {
-        const next = page
-          .getByRole("navigation", { name: "Recruit pages" })
-          .getByRole("button", { name: "Next page" });
-        await expect(next).toBeEnabled();
-        await activate(next);
-      }
-      await activate(replacement);
-    }
-  } else if (c.type === "skipRecruit") {
-    await continueToRecruit(page, activate);
-    await activate(page.getByRole("button", { name: "Skip", exact: true }));
+  } else if (c.type === "confirmRecruit") {
+    if (c.replace)
+      await activate(page.locator(`.recruit-team-roster [data-roster-slot="${c.replace}"] .creature-card`));
+    await activate(page.getByRole("button", { name: "Confirm", exact: true }));
   } else if (c.type === "swap") {
     const dialog = page.getByRole("dialog", { name: "Choose a replacement" });
     await activate(dialog.locator(`[data-actor-id="${c.reserve}"] .creature-card`));

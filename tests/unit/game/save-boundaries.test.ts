@@ -10,6 +10,7 @@ import {
   starterJourney,
   winBattle,
   merchantDestination,
+  completeRecruitment,
 } from "../../support/game";
 
 it.each([
@@ -79,7 +80,7 @@ it("rejects a Merchant discount without Merchant's Favor", () => {
 it("keeps the committed full price when Favor is purchased from the current Merchant", () => {
   for (let seed = 1; seed <= 100; seed++) {
     const won = winBattle(accept(starterJourney(seed, "captoad"), { type: "beginBattle" }));
-    const destinations = produce(accept(won, recruitChoice(won)), (draft) => {
+    const destinations = produce(completeRecruitment(won), (draft) => {
       draft.currency = 40;
     });
     const visit = destinations.support;

@@ -4,7 +4,7 @@ import { createGame, dispatch } from "../../../src/game/engine";
 import { SPECIES, species } from "../../../src/game/content";
 import { canRecruitDestination, canVisitCampfire, canVisitMerchant } from "../../../src/game/destinations";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { accept, starterJourney, winBattle, recruitChoice } from "../../support/game";
+import { accept, starterJourney, winBattle, completeRecruitment } from "../../support/game";
 
 function offer(size = 1) {
   let game = starterJourney(7, "mossguard");
@@ -57,7 +57,7 @@ it("rejects other species, full rosters and recruitment during combat without ch
   }
   const full = offer(5);
   const won = winBattle(accept(full, { type: "beginBattle" }));
-  const next = accept(won, recruitChoice(won));
+  const next = completeRecruitment(won);
   expect(next.expedition!.recruit).toBeNull();
   expect(canRecruitDestination(next)).toBe(false);
 });

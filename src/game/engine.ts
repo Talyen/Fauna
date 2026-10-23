@@ -31,14 +31,7 @@ import {
   leaveCampfire,
   returnHome,
 } from "./journey";
-import {
-  ownedCards,
-  prepareLineup,
-  recruitLineup,
-  swapBackup,
-  swapFromCard,
-  pendingReplacement,
-} from "./team";
+import { ownedCards, addRecruit, swapBackup, swapFromCard, pendingReplacement } from "./team";
 import { finishTurn, livingChorus } from "./combat/turns";
 
 export function createGame(seed = 1): GameState {
@@ -146,12 +139,20 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
     return reject(state, "Choose a living backup for the knocked-out creature.");
   if (
     command.type === "recruit" &&
-    (!state.reward?.recruits.includes(command.species) ||
-      (state.roster.length === 5
-        ? !command.replace || ![...state.team, ...state.reserves].some((c) => c.id === command.replace)
-        : !!command.replace))
+    (state.phase !== "recruit" ||
+      state.reward.selectedRecruit !== undefined ||
+      !state.reward.recruits.includes(command.species))
   )
-    return reject(state, "Choose an offered species and, if full, a creature to release.");
+    return reject(state, "Choose an offered species once.");
+  if (
+    command.type === "confirmRecruit" &&
+    (state.phase !== "recruit" ||
+      state.reward.selectedRecruit === undefined ||
+      state.roster.length !== 5 ||
+      (command.replace !== undefined &&
+        ![...state.team, ...state.reserves].some((creature) => creature.id === command.replace)))
+  )
+    return reject(state, "Confirm the current team or choose a creature to replace.");
   if (
     command.type === "recruitDestination" &&
     (!canRecruitDestination(state) || state.expedition?.recruit !== command.species)
@@ -337,39 +338,18 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
       }
       case "recruitDestination":
       case "recruit": {
-        const replacement = command.type === "recruit" ? command.replace : undefined;
         if (!draft.discovery.encountered.includes(command.species))
           draft.discovery.encountered.push(command.species);
         draft.discovery.recruited[command.species] = Math.min(
           MAX_CREATURE_STARS + 1,
           (draft.discovery.recruited[command.species] ?? 0) + 1,
         );
-        const all = [...draft.team, ...draft.reserves];
-        let id = `recruit-${draft.revision}`;
-        for (let suffix = 1; all.some((creature) => creature.id === id); suffix++)
-          id = `recruit-${draft.revision}-${suffix}`;
-        const recruited = {
-          id,
-          species: command.species,
-          health: species(command.species).health,
-          block: 0,
-          attacked: false,
-        };
-        const lineup = recruitLineup(draft, recruited, replacement);
-        if (replacement) {
-          const released = [...draft.team, ...draft.reserves].find((c) => c.id === replacement)!;
-          draft.roster[draft.roster.indexOf(released.species)] = command.species;
-          const active = draft.team.some((unit) => unit.id === replacement);
-          if (active) {
-            draft.team[draft.team.findIndex((unit) => unit.id === replacement)] = recruited;
-          } else draft.reserves[draft.reserves.findIndex((unit) => unit.id === replacement)] = recruited;
-        } else {
-          draft.roster.push(command.species);
-          if (lineup.includes(recruited.id)) draft.team.push(recruited);
-          else draft.reserves.push(recruited);
+        if (command.type === "recruit" && draft.roster.length === 5) {
+          if (draft.phase !== "recruit") throw new Error("Invalid Recruit choice.");
+          draft.reward.selectedRecruit = command.species;
+          break;
         }
-        draft.lineup = lineup;
-        prepareLineup(draft);
+        addRecruit(draft, command.species);
         if (command.type === "recruitDestination") {
           draft.expedition!.recruit = null;
           draft.expedition!.lastRoom = "recruit";
@@ -380,8 +360,10 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         }
         break;
       }
-      case "skipRecruit":
-        if (draft.phase !== "recruit") throw new Error("Invalid Recruit skip.");
+      case "confirmRecruit":
+        if (draft.phase !== "recruit" || draft.reward.selectedRecruit === undefined)
+          throw new Error("Invalid team confirmation.");
+        if (command.replace !== undefined) addRecruit(draft, draft.reward.selectedRecruit, command.replace);
         afterRewards(draft);
         break;
       case "chooseBoon":

@@ -296,7 +296,7 @@
   gap: var(--space-3);
 }
 .keyword-progress-grid .reward-keyword {
-  width: 240px;
+  width: var(--keyword-progress-width);
 }
 .destination-heading p,
 .destination-option p {
@@ -455,33 +455,78 @@
   text-align: center;
   max-width: calc(var(--art-portrait-width) * 3);
 }
-.reward-screen:has(.recruit-comparison) {
-  width: min(calc(var(--art-landscape-width) * 6 + var(--screen-section-gap) * 5), 100%);
-}
-.recruit-comparison {
-  width: 100%;
+.recruit-team-screen {
+  max-width: calc(
+    var(--art-landscape-width) * 5 + var(--screen-item-gap) * 4 + var(--screen-section-gap) * 2
+  );
+  margin: auto;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   gap: var(--screen-section-gap);
 }
-.incoming-recruit {
+.recruit-team-exchange {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--screen-item-gap);
-  flex: 0 0 var(--art-landscape-width);
 }
-.incoming-recruit .creature-wrap {
-  width: 100%;
+.recruit-team-exchange .creature-wrap,
+.recruit-team-slot {
+  width: var(--art-landscape-width);
 }
-.recruit-roster {
-  min-width: 0;
+.recruit-team-swap {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  color: var(--muted-foreground);
+  margin-block: calc(var(--screen-item-gap) * -1);
+  flex-shrink: 0;
+}
+.recruit-team-tray {
   width: 100%;
+  padding: var(--screen-item-gap) var(--screen-section-gap);
+  background: var(--recruit-team-tray-background);
+  border-radius: var(--radius);
+}
+.recruit-team-tray h2 {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
   gap: var(--screen-item-gap);
+  margin: 0 0 var(--screen-item-gap);
+  font-size: var(--text-body);
+  font-weight: 500;
+  line-height: 1.2;
+}
+.recruit-team-tray h2 svg {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  color: var(--muted-foreground);
+}
+.recruit-team-roster {
+  display: flex;
+  justify-content: center;
+  gap: var(--screen-item-gap);
+}
+.recruit-team-screen .combatant-details:empty {
+  display: none;
+}
+.recruit-team-footer {
+  display: flex;
+  justify-content: center;
+}
+/* Five cards, four item gaps, tray padding and page gutters must fit without pagination. */
+@media (max-width: 1494px) {
+  .recruit-team-screen {
+    --art-landscape-width: min(
+      calc(var(--art-short-side) * 4 / 3),
+      calc(var(--art-compact-short-side) * 4 / 3)
+    );
+  }
+}
+@media (max-width: 1360px) {
+  .recruit-team-screen {
+    --art-landscape-width: calc(var(--art-minimum-short-side) * 4 / 3);
+  }
 }
 .rest-recovery {
   position: fixed;

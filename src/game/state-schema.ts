@@ -247,6 +247,7 @@ const phases = z.discriminatedUnion("phase", [
     reward: receipt.extend({
       outcome: z.enum(["next", "victory"]),
       recruits: z.array(speciesId).min(1).max(3),
+      selectedRecruit: speciesId.optional(),
       boons: z.array(boonId).max(3),
     }),
   }),
