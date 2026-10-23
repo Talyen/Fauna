@@ -705,6 +705,41 @@ exports[`preserves visible rankings and legal choices for reedstag 1`] = `
 ]
 `;
 
+exports[`preserves visible rankings and legal choices for reverie 1`] = `
+[
+  [
+    "ordinary",
+    [
+      "{"command":{"type":"play","cardId":"ally-0:reverie-dream-double","autoEndTurn":false},"score":403,"reason":"Use Dream Double for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:reverie-waking-wonder","autoEndTurn":false},"score":202,"reason":"Use Waking Wonder for its visible benefit"}",
+    ],
+  ],
+  [
+    "injured",
+    [
+      "{"command":{"type":"play","cardId":"ally-0:reverie-nightmare-harvest","autoEndTurn":false},"score":2001,"reason":"Use Nightmare Harvest for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:reverie-dream-double","autoEndTurn":false},"score":403,"reason":"Use Dream Double for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:reverie-waking-wonder","autoEndTurn":false},"score":202,"reason":"Use Waking Wonder for its visible benefit"}",
+    ],
+  ],
+  [
+    "defended",
+    [
+      "{"command":{"type":"play","cardId":"ally-0:reverie-dream-double","autoEndTurn":false},"score":403,"reason":"Use Dream Double for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:reverie-waking-wonder","autoEndTurn":false},"score":202,"reason":"Use Waking Wonder for its visible benefit"}",
+    ],
+  ],
+  [
+    "talented",
+    [
+      "{"command":{"type":"play","cardId":"ally-0:reverie-nightmare-harvest","autoEndTurn":false},"score":2001,"reason":"Use Nightmare Harvest for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:reverie-dream-double","autoEndTurn":false},"score":403,"reason":"Use Dream Double for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:reverie-waking-wonder","autoEndTurn":false},"score":202,"reason":"Use Waking Wonder for its visible benefit"}",
+    ],
+  ],
+]
+`;
+
 exports[`preserves visible rankings and legal choices for ringpalm 1`] = `
 [
   [

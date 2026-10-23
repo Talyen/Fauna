@@ -51,4 +51,5 @@ it("collects every generated lineup in the full suite without executing the simu
       )
       .sort(),
   );
-});
+  // Collection launches a subprocess with its own 30-second deadline.
+}, 35_000);
