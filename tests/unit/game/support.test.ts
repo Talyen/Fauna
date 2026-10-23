@@ -151,12 +151,22 @@ it("discounts each new Merchant with Favor and persists the paid price", () => {
   for (let battle = 0; battle < 4; battle++) {
     state = winBattle(accept(state, { type: "beginBattle" }));
     if (state.phase === "recruit") {
-      // Fix the preparation roll; this test owns pricing rather than event frequency.
-      if (battle === 3)
-        state = produce(state, (draft) => {
-          draft.rng = 10;
-        });
-      state = completeRecruitment(state);
+      if (battle === 3) {
+        // Select a Merchant independently of the roster-dependent enemy replacement rolls.
+        const reward = state;
+        for (let seed = 0; seed < 100; seed++) {
+          const candidate = completeRecruitment(
+            produce(reward, (draft) => {
+              draft.rng = seed;
+            }),
+          );
+          if (candidate.support) {
+            state = candidate;
+            break;
+          }
+        }
+        expect(state.support).not.toBeNull();
+      } else state = completeRecruitment(state);
     }
     if (state.phase === "boon") state = accept(state, { type: "skipBoon" });
   }
