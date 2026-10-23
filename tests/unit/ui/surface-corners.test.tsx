@@ -8,8 +8,8 @@ import { ArtCard } from "../../../src/ui/shared/cards/art-card";
 const observers: { resize: (width: number, height: number) => void; disconnect: ReturnType<typeof vi.fn> }[] =
   [];
 function measurements() {
-  vi.spyOn(HTMLElement.prototype, "offsetWidth", "get").mockReturnValue(200);
-  vi.spyOn(HTMLElement.prototype, "offsetHeight", "get").mockReturnValue(100);
+  const width = vi.spyOn(HTMLElement.prototype, "offsetWidth", "get").mockReturnValue(200);
+  const height = vi.spyOn(HTMLElement.prototype, "offsetHeight", "get").mockReturnValue(100);
   vi.stubGlobal(
     "ResizeObserver",
     class {
@@ -31,6 +31,7 @@ function measurements() {
       observe() {}
     },
   );
+  return { width, height };
 }
 afterEach(() => {
   cleanup();
@@ -40,11 +41,14 @@ afterEach(() => {
 });
 
 it("sizes artwork from its untransformed shorter side and follows layout resizing", () => {
-  measurements();
+  const { width, height } = measurements();
   const ref = createRef<HTMLButtonElement>();
   const view = render(<ArtCard ref={ref} artwork="/art.webp" aspect="creature" aria-label="Creature" />);
   const card = view.getByRole("button", { name: "Creature" });
   expect(ref.current).toBe(card);
+  expect(width).not.toHaveBeenCalled();
+  expect(height).not.toHaveBeenCalled();
+  observers[0]!.resize(200, 100);
   expect(card.style.getPropertyValue("--surface-short-side")).toBe("100px");
   // Border-box measurements exclude the hover scale; flipping aspect preserves the radius.
   observers[0]!.resize(100, 200);
@@ -81,6 +85,8 @@ it("releases callback refs and old observers across Strict Mode and ref replacem
   expect(old.disconnect).toHaveBeenCalledOnce();
   expect(second.current).toBe(card);
   old.resize(1, 1);
+  expect(card.style.getPropertyValue("--surface-short-side")).toBe("");
+  observers.at(-1)!.resize(200, 100);
   expect(card.style.getPropertyValue("--surface-short-side")).toBe("100px");
   view.unmount();
   expect(second.current).toBeNull();

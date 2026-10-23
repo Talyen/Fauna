@@ -59,13 +59,15 @@ export function captureArtworkSwap(
       window.addEventListener("keydown", cancel, true);
       const start = performance.now();
       const tick = () => {
-        const t = Math.min(1, (performance.now() - start) / motionValue("--motion-fast")),
+        const duration = motionValue("--motion-fast");
+        const arc = motionValue("--swap-arc-height");
+        const t = Math.min(1, (performance.now() - start) / duration),
           p = 1 - (1 - t) ** 3;
         records.forEach((record, index) => {
           const target = records[(index + 1) % records.length];
           if (!record || !target) return;
           record.clone.style.left = `${record.rect.x + (target.rect.x - record.rect.x) * p}px`;
-          record.clone.style.top = `${record.rect.y + (target.rect.y - record.rect.y) * p + (index ? 1 : -1) * Math.sin(Math.PI * p) * motionValue("--swap-arc-height")}px`;
+          record.clone.style.top = `${record.rect.y + (target.rect.y - record.rect.y) * p + (index ? 1 : -1) * Math.sin(Math.PI * p) * arc}px`;
         });
         if (t < 1) frame = requestAnimationFrame(tick);
         else cancel();
