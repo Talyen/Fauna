@@ -194,7 +194,8 @@ describe("keyword foundation", () => {
       return r! * 0.2126 + g! * 0.7152 + b! * 0.0722;
     };
     for (const id of KEYWORD_IDS) {
-      const match = new RegExp(`--keyword-${id}: #([a-f0-9]{6});`).exec(tokens);
+      const alias = new RegExp(`--keyword-${id}: var\\(--keyword-([\\w]+)\\);`).exec(tokens);
+      const match = new RegExp(`--keyword-${alias?.[1] ?? id}: #([a-f0-9]{6});`).exec(tokens);
       expect(match, id).not.toBeNull();
       // The darker Alchemy identities intentionally replace Fauna's lighter contrast variants.
       if (alchemyColors[id]) expect(match![1], id).toBe(alchemyColors[id]);

@@ -140,19 +140,24 @@ describe("Oathara", () => {
       game.battle.hand.every((id) => game.cards.find((card) => card.id === id)!.ownerId === game.team[1]!.id),
     ).toBe(true);
     expect(inspectCardPlay(game, game.battle.hand[0]!).allowed).toBe(false);
-    const keywordGame = produce(game, (draft) => {
-      draft.team[2]!.health = 0;
-      draft.battle.hand = [];
-      draft.battle.draw = draft.cards.map((card) => card.id);
-      draft.battle.discard = [];
-    });
+    const keywordGame = produce(
+      requireBattle(teamRun(42, ["oathara", "pollenmoth", "mossguard"])),
+      (draft) => {
+        draft.team[0]!.combat!.fallenCardsPlayedThisTurn = 1;
+        draft.team[1]!.health = 0;
+        draft.battle.hand = [];
+        draft.battle.draw = draft.cards.map((card) => card.id);
+        draft.battle.discard = [];
+        draft.battle.buffer = [];
+      },
+    );
     const drawn = produce(keywordGame, (draft) => {
-      drawKeyword(draft, "nature");
+      drawKeyword(draft, "light");
     });
     expect(drawn.battle.hand).toHaveLength(1);
     const absent = produce(keywordGame, (draft) => {
       draft.team[0]!.health = 0;
-      drawKeyword(draft, "nature");
+      drawKeyword(draft, "light");
     });
     expect(absent.battle.hand).toEqual([]);
   });
