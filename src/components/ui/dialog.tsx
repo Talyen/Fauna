@@ -30,6 +30,7 @@ export const DialogContent = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
     overlayClassName?: string;
     overlayChildren?: React.ReactNode;
+    onOverlayClick?: React.MouseEventHandler<HTMLDivElement>;
     closeLabel?: string;
     showCloseButton?: boolean;
   }
@@ -40,6 +41,7 @@ export const DialogContent = React.forwardRef<
       children,
       overlayClassName,
       overlayChildren,
+      onOverlayClick,
       closeLabel = "Close inspection",
       showCloseButton = true,
       ...props
@@ -49,7 +51,7 @@ export const DialogContent = React.forwardRef<
     const surface = useModalSurfaceRef(ref);
     return (
       <DialogPrimitive.Portal>
-        <DialogPrimitive.Overlay className={cn("dialog-overlay", overlayClassName)}>
+        <DialogPrimitive.Overlay className={cn("dialog-overlay", overlayClassName)} onClick={onOverlayClick}>
           {overlayChildren}
         </DialogPrimitive.Overlay>
         <DialogPrimitive.Content ref={surface} className={cn("dialog-content", className)} {...props}>

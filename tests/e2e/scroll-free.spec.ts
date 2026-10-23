@@ -138,7 +138,8 @@ for (const [width, height, scale] of LAYOUT_CASES) {
           await captureScreen(page, {
             path: `reports/scroll-free/kit-${kind}-${width}-${height}-${scale}.png`,
           });
-          await expect(details.locator(".inspection-creature .creature-card")).toBeVisible();
+          await expect(details.locator(".creature-card")).toHaveCount(0);
+          await expect(details.getByRole("region", { name: "Trait", exact: true })).toBeVisible();
           await page.keyboard.press("Escape");
           await expect(card).toBeFocused();
         }

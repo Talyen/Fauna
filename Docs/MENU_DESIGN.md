@@ -14,20 +14,20 @@ Collection, Talents, Settings and Glossary open full screen from either menu, in
 
 ## Back and focus return
 
-| Surface                                           | Back / Escape / controller B                                                                        |
-| ------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| Pause                                             | Dismiss to its opener                                                                               |
-| Collection, Settings, Glossary, Talents overview  | Restore the originating menu and its corresponding choice                                           |
-| Talent tree                                       | Return to the overview; the hamburger still opens the originating menu directly                     |
-| Creature-parent action inspection                 | Return to the creature and focus the current thumbnail; a second Back closes to the original opener |
-| Direct hand/deck action inspection                | Close to its opener, without creating a creature parent                                             |
-| Boon Merchant shelf or purchased reward           | Complete the room and prepare fresh destinations                                                    |
-| Campfire                                          | Leave without Rest, preserving the encounter                                                        |
-| Unchosen recruitment                              | Return home without changing saved offers                                                           |
-| Team confirmation / required knockout replacement | No Back/Cancel bypass; complete the required choice                                                 |
-| Other journey screens                             | Return home without reversing committed gameplay                                                    |
+| Surface                                           | Back / Escape / controller B                                                                                       |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Pause                                             | Dismiss to its opener                                                                                              |
+| Collection, Settings, Glossary, Talents overview  | Restore the originating menu and its corresponding choice                                                          |
+| Talent tree                                       | Return to the overview; the hamburger still opens the originating menu directly                                    |
+| Creature-parent action inspection                 | Return to the creature and focus the current thumbnail; a second Escape/controller B closes to the original opener |
+| Direct hand/deck action inspection                | Close to its opener, without creating a creature parent                                                            |
+| Boon Merchant shelf or purchased reward           | Complete the room and prepare fresh destinations                                                                   |
+| Campfire                                          | Leave without Rest, preserving the encounter                                                                       |
+| Unchosen recruitment                              | Return home without changing saved offers                                                                          |
+| Team confirmation / required knockout replacement | No Back/Cancel bypass; complete the required choice                                                                |
+| Other journey screens                             | Return home without reversing committed gameplay                                                                   |
 
-Inspection X/outside click closes the entire Dialog. Nested surfaces own their focus and restore a connected, enabled opener; otherwise use the current-screen fallback. Inspection returns Collection to the same filter, page and creature. Opening child menu dialogs replaces Pause so only one trap owns focus. The mandatory replacement Dialog ignores Escape/outside click.
+Inspection has no visible Back button; X/outside click closes the entire Dialog overlay. Nested surfaces own their focus and restore a connected, enabled opener; otherwise use the current-screen fallback. Inspection returns Collection to the same filter, page and creature. Opening child menu dialogs replaces Pause so only one trap owns focus. The mandatory replacement Dialog ignores Escape/outside click.
 
 Journey headings offer read-only Deck inspection; closing restores the Deck opener. During drafting, Deck reflects already chosen starters. [Screen headings](ui/screens.md#screen-headings) own geometry and control placement.
 

@@ -96,7 +96,8 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     else await page.keyboard.press("Escape");
     await expect(charge).toBeFocused();
     await expect(page.getByRole("dialog")).toHaveCount(1);
-    if (input === "mouse") await details.getByRole("button", { name: "Back", exact: true }).click();
+    if (input === "mouse")
+      await details.getByRole("button", { name: "Close inspection", exact: true }).click();
     else if (press) await press(1);
     else await page.keyboard.press("Escape");
     await expect(page.getByRole("button", { name: "Inspect Emberback", exact: true })).toBeFocused();
@@ -132,8 +133,9 @@ for (const [width, height] of [
       .evaluateAll((imgs) => Promise.all(imgs.map((img) => (img as HTMLImageElement).decode())));
     await page.mouse.move(0, 0);
     await fits(page);
-    const creature = (await details.locator(".creature-card").boundingBox())!;
-    expect(Math.abs(creature.width / creature.height - 4 / 3)).toBeLessThan(0.01);
+    await expect(details.locator(".creature-card")).toHaveCount(0);
+    await expect(details.getByRole("button", { name: "Back", exact: true })).toHaveCount(0);
+    await expect(details.locator(".action-card")).toHaveCount(3);
     for (const artwork of await details.locator(".action-card").all()) {
       const bounds = (await artwork.boundingBox())!;
       expect(Math.abs(bounds.width / bounds.height - 3 / 4)).toBeLessThan(0.01);
