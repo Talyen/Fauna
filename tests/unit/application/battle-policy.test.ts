@@ -2,7 +2,8 @@ import { expect, it } from "vitest";
 import { produce } from "immer";
 import { chooseBattleCommand } from "../../../src/application/battle-policy";
 import { dispatch } from "../../../src/game/engine";
-import { teamRun } from "../../support/game";
+import { accept, authoredPack, prepareDestination, requireBattle, teamRun } from "../../support/game";
+import { summonEcho } from "../../../src/game/combat/legendary";
 
 it.each(["reedstag", "chimecricket"] as const)(
   "Auto-play uses %s healing to Cleanse a full-health recipient",
@@ -247,4 +248,68 @@ it("favors a healthy complementary backup when deployed damage is already availa
     ];
   });
   expect(chooseBattleCommand(state, false)).toMatchObject({ type: "swap", reserve: "z-support" });
+});
+
+it("Auto-play Blinds new Echoes even when their summoner is already Blind", () => {
+  const destination = produce(teamRun(42, ["glintstride"]), (game) => {
+    prepareDestination(game);
+    game.encounter = 3;
+    game.journey!.victories = 3;
+    game.expedition = { pack: authoredPack(3), recruit: null, lastRoom: "boss" };
+  });
+  const state = produce(requireBattle(accept(destination, { type: "beginBattle" })), (game) => {
+    const card = game.cards.find((card) => card.definitionId === "glintstride-teamBlind")!;
+    game.battle!.hand = [card.id];
+    game.battle!.buffer = [];
+    game.battle!.discard = [];
+    game.battle!.draw = game.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+    const boss = game.battle!.enemies[0]!;
+    boss.combat.blind = true;
+    summonEcho(game, boss, "enemy", 6, []);
+  });
+  const command = chooseBattleCommand(state, false);
+  expect(command).toMatchObject({ type: "play", cardId: state.battle!.hand[0] });
+  const result = dispatch(state, command);
+  expect(result.accepted).toBe(true);
+  expect(result.state.battle!.minions![0]!.combat.blind).toBe(true);
+});
+
+it("Auto-play uses Mushroom Guard's healing at the Block cap and stops at full Health", () => {
+  const state = produce(teamRun(42, ["captoad"]), (game) => {
+    const card = game.cards.find((card) => card.definitionId === "captoad-guard")!;
+    game.battle!.hand = [card.id];
+    game.battle!.buffer = [];
+    game.battle!.discard = [];
+    game.battle!.draw = game.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+    game.team[0]!.block = 1_000_000;
+    game.team[0]!.health -= 5;
+  });
+  const command = chooseBattleCommand(state, false);
+  expect(command).toMatchObject({ type: "play", cardId: state.battle!.hand[0] });
+  const result = dispatch(state, command);
+  expect(result.accepted).toBe(true);
+  expect(result.state.team[0]!.health).toBe(state.team[0]!.health + 3);
+  expect(result.state.team[0]!.block).toBe(1_000_000);
+  const healthy = produce(state, (game) => {
+    game.team[0]!.health += 5;
+  });
+  expect(chooseBattleCommand(healthy, false)).toEqual({ type: "endTurn" });
+});
+
+it("Auto-play values Mushroom Guard's healing ahead of ordinary group protection", () => {
+  const state = produce(teamRun(42, ["captoad", "pollenmoth"]), (game) => {
+    game.battle!.hand = game.cards
+      .filter((card) => ["captoad-guard", "pollenmoth-teamGuard"].includes(card.definitionId))
+      .map((card) => card.id);
+    game.battle!.buffer = [];
+    game.battle!.discard = [];
+    game.battle!.draw = game.cards
+      .filter((card) => !game.battle!.hand.includes(card.id))
+      .map((card) => card.id);
+    game.team[0]!.health = 1;
+  });
+  expect(chooseBattleCommand(state, false)).toMatchObject({
+    type: "play",
+    cardId: state.cards.find((card) => card.definitionId === "captoad-guard")!.id,
+  });
 });

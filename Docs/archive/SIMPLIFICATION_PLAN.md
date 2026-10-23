@@ -302,11 +302,7 @@ Each increment should leave a working game and remove its transitional code befo
 
 ### Verification during implementation
 
-Run focused owning checks through `npm run verify:changed`, adding relevant existing suites with `--test` so integration remembers them. Split resource-heavy runs to respect the repository's one-worker, 2 GiB, five-minute local limits. Preserve complete static, unit, browser and package coverage through CI where appropriate; use exact-commit results when reporting it.
-
-For UI changes in items 1, 2, 4 and 5, follow the [required rendered review](UI.md#required-review). Inspect full player flows at supported viewports, preserving focus, input, artwork, effects, motion timing and readable feedback. A screenshot of a loading state or passing source checks does not establish parity. Item 3 also needs rendered review if roster or swap presentation changes.
-
-Review `npm run review:diff`, commit only task-owned paths and run `npm run finish`. That protected integration command incorporates current main and runs the final combined local gate while holding the shared lock. Do not add a second mandatory pre-integration gate. Do not push or publish without separate authorization.
+Follow [Contributing](../../CONTRIBUTING.md#verification) for focused checks, remembered extra suites and protected integration. For UI changes in items 1, 2, 4 and 5, use the [required rendered review](../UI.md#required-review), preserving input, focus, art, effects, timing and readable feedback. Item 3 also needs rendered review if roster/swap presentation changes. Passing source checks or a loading-state capture cannot establish parity.
 
 ### Definition of success
 

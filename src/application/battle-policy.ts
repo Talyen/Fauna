@@ -7,7 +7,7 @@ import { actionValue, cardCost, physicalBonus } from "../game/ability-rules";
 import { definition, species } from "../game/content";
 import type { Command, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 25;
+export const BATTLE_POLICY_VERSION = 26;
 const BATTLE_FINISH_PRIORITY = 1_000_000_000;
 export interface BattleChoice {
   command: Command;
@@ -236,7 +236,7 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
     } else if (def.effect === "draw") {
       add(id, 200 + value);
     } else if (def.effect === "teamBlind") {
-      const useful = state.battle.enemies.filter(
+      const useful = battlefield(state, "enemy").filter(
         (enemy) => enemy.health > 0 && !enemy.combat.blind && !enemy.combat.nullify,
       ).length;
       add(id, useful > 0 ? 150 + useful : 0);
@@ -291,9 +291,24 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
     } else if (def.effect === "swap" || def.effect === "swapLowest") {
       add(id, 150);
     } else {
+      const healing = Math.min(
+        species(actor.species).health - actor.health,
+        def.effects?.reduce(
+          (sum, effect) =>
+            sum +
+            (effect.kind === "heal"
+              ? Math.round(effect.amount * (hasTalent(state, "health.mending") ? 1.1 : 1))
+              : 0),
+          0,
+        ) ?? 0,
+      );
       for (const ally of def.target === "self" ? [actor] : state.team.filter((c) => c.health > 0)) {
         const useful = Math.min(value, 1_000_000 - ally.block);
-        add(id, useful > 0 ? 100 + useful : 0, def.target === "self" ? undefined : ally.id);
+        add(
+          id,
+          healing > 0 ? 3000 + healing : useful > 0 ? 100 + useful : 0,
+          def.target === "self" ? undefined : ally.id,
+        );
       }
     }
   }

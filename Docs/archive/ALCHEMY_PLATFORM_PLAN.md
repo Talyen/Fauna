@@ -165,7 +165,7 @@ Bounded ancestry may make a very old common ancestor unprovable; treat that case
 
 At launch, reconcile before enabling progression commands. After five seconds, automatically continue locally and ignore late remote results. Proven descendants fast-forward; divergent or unprovable heads automatically retain the intact local head, or select by stable snapshot ID without local progress. Preserve competing payloads before publishing ancestry for the resolution; never merge gameplay values. Preservation failure keeps local play available without overwriting remote alternatives. Reconnect must not roll back an active journey.
 
-There is no conflict UI, save warning, sync status or retry control. The [silent recovery policy](../UI.md#silent-recovery-policy) owns player-facing behavior for every failure.
+There is no conflict UI, save warning, sync status or retry control. The [silent recovery policy](../UI.md#recovery-and-persistent-failures) owns player-facing behavior for every failure.
 
 ### Local saves, upload queue and shutdown
 

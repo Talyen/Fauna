@@ -1,6 +1,6 @@
 # Pre-battle team selection review sample
 
-Historical alternative: production has a five-creature roster, optional Lineup management between battles and direct encounter entry. It has no mandatory pre-battle team-selection screen. See [roster decisions](../../Docs/EXPEDITION_DESIGN.md#roster-and-battles).
+Historical pre-battle team-selection alternative. Its editable formation and six-species roster belong only to this fixture. Current deployment and encounter entry follow [roster rules](../../Docs/EXPEDITION_DESIGN.md#roster-and-battles).
 
 Open `/design/team-selection/index.html` on the development server. Frozen presentation fixtures only; no gameplay session, saves or progression. Uses a full six-species roster to review maximum layout capacity, including Prismram as a placeholder regardless of real unlock state.
 

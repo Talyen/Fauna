@@ -1,6 +1,6 @@
 # Battle rewards review sample
 
-Historical flow: production uses one Victory screen with required recruitment after ordinary fights or optional Boons after intermediate bosses. There is no earnings Continue step or recruitment Skip. See [journey design](../../Docs/EXPEDITION_DESIGN.md#screen-flow-and-journey-results).
+Historical reward-flow study. Its Continue/Skip/relic behavior describes the fixture below, not current gameplay. Use [journey rules](../../Docs/EXPEDITION_DESIGN.md#screen-flow-and-journey-results) and [reward presentation](../../Docs/ui/screens.md#victory-recruitment-and-team-confirmation) for current behavior.
 
 Open `/design/battle-rewards/index.html` on the development server.
 

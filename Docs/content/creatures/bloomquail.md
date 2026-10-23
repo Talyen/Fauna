@@ -14,6 +14,4 @@ Enemies use the base 50% conversion and heal their own side. Bloom Cradle draws 
 
 ## Artwork provenance and validation record
 
-These retained notes record source selection and verification at implementation time; they do not establish current rendered acceptance
-
-The unchanged landscape portrait and three portrait action PNGs are imported from the user's [Bloomquail Drive folder](https://drive.google.com/drive/folders/15IdDXgCiwta6JLr2VJhR-j0w7kQRvtWt). Original source URLs and rights notes live in the asset manifest. Prepared media preserves the native 4:3 creature and 3:4 action compositions. In-game rendered review remains pending.
+The unchanged landscape portrait and three portrait action PNGs are imported from the user's [Bloomquail Drive folder](https://drive.google.com/drive/folders/15IdDXgCiwta6JLr2VJhR-j0w7kQRvtWt). Original source URLs and rights notes live in the asset manifest. In-game rendered review remains pending.
