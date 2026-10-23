@@ -15,6 +15,7 @@ export interface CombatState {
   reflectBurn: boolean;
   nullify: boolean;
   nullifyFreeze: boolean;
+  negate: boolean;
   cardsPlayedThisTurn: number;
   encoreUsed: boolean;
   firstAttackUsed: boolean;

@@ -37,6 +37,19 @@ export function livingChorus(state: GameState, enemy: boolean, events: GameEvent
     if (recipient) restoreHealth(recipient, amount, events, false, state, false, singer);
   }
 }
+export function unhurried(state: BattleState, enemy: boolean, events: GameEvent[]) {
+  const row = battlefield(state, enemy ? "enemy" : "player").filter((unit) => unit.health > 0);
+  for (const dreamer of row) {
+    const amount = creaturePassive(enemy ? undefined : state, dreamer.species).effects.reduce(
+      (sum, effect) => sum + (effect.kind === "unhurried" ? effect.amount : 0),
+      0,
+    );
+    if (amount <= 0) continue;
+    for (const recipient of row)
+      if (combat(recipient).cardsPlayedThisTurn === 0)
+        restoreHealth(recipient, amount, events, false, state, false, dreamer);
+  }
+}
 export function finishTurn(draft: BattleState, events: GameEvent[]) {
   const battle = draft.battle;
   const bonusMana = Number(
@@ -46,6 +59,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
   battle.discard.push(...battle.hand.splice(0));
   recycleDiscard(draft);
   for (let pass = 0; pass < 3; pass++) {
+    unhurried(draft, false, events);
     // Swaps can reorder the battlefield; each enemy keeps its single action window.
     const actionOrder = battle.enemies.slice();
     // Expire the previous round before an ally can grant Dodge for this round.
@@ -141,6 +155,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
       if (++enemyCardsPlayed === 2) livingChorus(draft, true, events);
       if (settle(draft, events)) return;
     }
+    unhurried(draft, true, events);
     for (const c of [...battlefield(draft, "player"), ...draft.reserves]) {
       if (c.health <= 0) continue;
       tickStatuses(draft, c, events);

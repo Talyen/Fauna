@@ -25,6 +25,45 @@ import {
 } from "./state";
 import { reaction, type Resolution } from "./operations";
 
+function* retaliateThorns(
+  state: GameState,
+  source: Combatant,
+  target: Combatant,
+  events: GameEvent[],
+): Resolution<void> {
+  const stats = combat(target);
+  for (const [status, type] of [
+    ["thorns", "nature"],
+    ["waterThorns", "water"],
+  ] as const) {
+    const amount = stats[status];
+    if (amount <= 0) continue;
+    stats[status]--;
+    yield* reaction("hit", state, target, source, amount, type, events, { origin: "retaliation" });
+  }
+}
+
+/** Consumed once per incoming attack, before its target's defenses or harmful follow-ups. */
+export function* negateAttack(
+  state: GameState,
+  source: Combatant,
+  target: Combatant,
+  events: GameEvent[],
+): Resolution<boolean> {
+  if (source.health <= 0 || target.health <= 0 || !combat(target).negate) return false;
+  combat(target).negate = false;
+  events.push({
+    kind: "status",
+    actorId: source.id,
+    targetId: target.id,
+    status: "negate",
+    outcome: "immune",
+    text: `${unitName(target)} negates the attack; Thorns still retaliate`,
+  });
+  yield* retaliateThorns(state, source, target, events);
+  return true;
+}
+
 type HitResult = { outcome: "ignored" | "miss" } | { outcome: "landed"; lost: number };
 
 export function* bounce(
@@ -95,6 +134,13 @@ export function* hit(
     if (!options.interceptionChecked && !options.blindMiss)
       target = interceptAttack(state, source, target, events);
   }
+  if (
+    value > 0 &&
+    options.origin === "ability" &&
+    !options.blindMiss &&
+    (yield* reaction("negateAttack", state, source, target, events))
+  )
+    return undefined;
   const policy = packetPolicy(options);
   const wrongFoot =
     target.combat?.blind && policy.wrongFoot
@@ -530,15 +576,7 @@ export function* resolveHit(
     }
     // Captured damage remains valid even if retaliation later removes the attacker.
     if (direct && lost > 0 && target.health > 0) {
-      for (const [status, type] of [
-        ["thorns", "nature"],
-        ["waterThorns", "water"],
-      ] as const) {
-        const reflected = stats[status];
-        if (reflected <= 0) continue;
-        stats[status]--;
-        yield* reaction("hit", state, target, source, reflected, type, events, { origin: "retaliation" });
-      }
+      yield* retaliateThorns(state, source, target, events);
     }
     if ((leech || blessedLeech) && type !== "bleed" && source.health > 0)
       yield* reaction("leechHealth", state, source, lost, events, stats.poison > 0 || stats.bleed > 0);

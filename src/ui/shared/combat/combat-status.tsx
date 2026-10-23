@@ -38,6 +38,7 @@ const statusOrder: readonly string[] = [
   "reflectBurn",
   "nullify",
   "nullifyFreeze",
+  "negate",
   "blind",
 ];
 type Status = { id: string; text: string; count: number; exit?: boolean; changed?: boolean };
@@ -86,6 +87,7 @@ export function combatStatuses(combat?: CombatState, sharedDodge = 0): Status[] 
         Number(combat.nullifyFreeze),
         "Nullify the next Freeze damage; Lasts until consumed or Purged; Does not stack",
       ],
+      ["negate", Number(combat.negate), `Negate: ${KEYWORD_DEFINITIONS.negate.description}`],
       ["nullify", Number(combat.nullify), `Nullify: ${KEYWORD_DEFINITIONS.nullify.description}`],
       [
         "reflectBurn",

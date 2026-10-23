@@ -91,6 +91,10 @@
 [data-keyword="cleanse"] {
   color: var(--keyword-cleanse);
 }
+[data-combat-tone="negate"],
+[data-keyword="negate"] {
+  color: var(--keyword-negate);
+}
 [data-combat-tone="nullify"],
 [data-keyword="nullify"] {
   color: var(--keyword-nullify);

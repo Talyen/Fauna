@@ -5,6 +5,8 @@ export const scalePower = (amount: number, power = 1) => Math.round(amount * pow
 export function primaryAbilityValue(card: CardDefinition, value: number, power = 1): number {
   const kind = card.effect;
   switch (kind) {
+    case "nightmareHarvest":
+      return card.value;
     case "attack":
     case "heal":
     case "guard":
@@ -16,6 +18,7 @@ export function primaryAbilityValue(card: CardDefinition, value: number, power =
     case "createPearls":
     case "pearl":
     case "teamProtection":
+    case "dreamDouble":
     case "waterThorns":
     case "recover":
     case "redraw":

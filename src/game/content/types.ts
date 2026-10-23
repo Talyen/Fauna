@@ -24,9 +24,11 @@ export type SpeciesId =
   | "neradora"
   | "memento"
   | "euphera"
-  | "tournelle";
+  | "tournelle"
+  | "reverie";
 export type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
+  | { kind: "unhurried"; amount: number }
   | { kind: "gallantry"; amount: number }
   | { kind: "goodFortune"; amount: number }
   | { kind: "courtRemembers"; amount: number }
