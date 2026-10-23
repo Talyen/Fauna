@@ -1,13 +1,15 @@
 import { pendingReplacement, formationForSwap } from "../game/team";
 import { coverageScore, offenseValue } from "./team-policy";
 import { battlefield } from "../game/battlefield";
-import { hasTalent } from "../game/progression";
+import { MAX_BATTLE_CARDS } from "../game/card-zones";
+import { creaturePassive, hasTalent } from "../game/progression";
 import { controlled, hasHarmfulEffects, mostInjured } from "../game/combat/index";
+import { maximumHealth } from "../game/combat/state";
 import { actionValue, cardCost, physicalBonus } from "../game/ability-rules";
 import { definition, species } from "../game/content";
 import type { Command, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 27;
+export const BATTLE_POLICY_VERSION = 28;
 const BATTLE_FINISH_PRIORITY = 1_000_000_000;
 export interface BattleChoice {
   command: Command;
@@ -57,6 +59,23 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
         },
       ];
   }
+  const injuredAllies = battlefield(state, "player").some(
+    (unit) => unit.health > 0 && unit.health < maximumHealth(unit),
+  );
+  // A capped resource can still be worth playing to deliver a once-per-turn healing trigger.
+  const healingOnPlay =
+    injuredAllies &&
+    ((state.battle.cardsPlayedThisTurn === 1 &&
+      state.team.some(
+        (unit) =>
+          unit.health > 0 &&
+          creaturePassive(state, unit.species).effects.some(
+            (effect) => effect.kind === "livingChorus" && effect.amount > 0,
+          ),
+      )) ||
+      (state.battle.cardsPlayedThisTurn === 2 &&
+        state.boons.includes("resonant-chimes") &&
+        hasTalent(state, "mana.arcane-mending")));
   const options: (BattleChoice & { key: string })[] = [];
   const add = (cardId: string, score: number, targetId?: string, reason?: string) => {
     if (score > 0)
@@ -76,6 +95,38 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
     if (!actor || actor.health === 0 || controlled(actor) || cardCost(card, state) > state.battle.mana)
       continue;
     const value = actionValue(card, actor, state);
+    // Drawing only this card back cannot justify an already capped Dodge grant.
+    const usefulDraw = () =>
+      !!def.effects?.some((effect) => effect.kind === "draw" && effect.amount > 0) &&
+      ([...state.battle.draw, ...state.battle.discard, ...state.battle.buffer].some((id) => {
+        const drawn = state.cards.find((entry) => entry.id === id)!;
+        return state.team.some((unit) => unit.id === drawn.ownerId && unit.health > 0);
+      }) ||
+        (state.cards.length < MAX_BATTLE_CARDS &&
+          state.team.some(
+            (unit) =>
+              unit.health > 0 &&
+              creaturePassive(state, unit.species).effects.some(
+                (effect) => effect.kind === "wellRead" && effect.amount > 0,
+              ),
+          )));
+    const protection =
+      def.effects?.reduce((sum, effect) => {
+        if (effect.kind === "reflect")
+          return (
+            sum + Number(!(effect.status === "burn" ? actor.combat?.reflectBurn : actor.combat?.reflect))
+          );
+        if (effect.kind === "nullifyFreeze") return sum + Number(!actor.combat?.nullifyFreeze);
+        if (effect.kind === "status")
+          return (
+            sum +
+            Math.min(
+              effect.amount,
+              (effect.status === "dodge" ? 70 : 1_000_000) - (actor.combat?.[effect.status] ?? 0),
+            )
+          );
+        return sum;
+      }, 0) ?? 0;
     const healing = Math.min(
       species(actor.species).health - actor.health,
       def.effects?.reduce(
@@ -93,7 +144,7 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
       );
       add(id, echoes.length < 2 ? 1600 : echoes.some((unit) => unit.health < unit.maxHealth) ? 1200 : 100);
     } else if (def.effect === "createPearls" || def.effect === "pearl") {
-      add(id, def.effect === "pearl" ? 500 : state.cards.length < 256 ? 400 : 0);
+      add(id, def.effect === "pearl" ? 500 : state.cards.length < MAX_BATTLE_CARDS ? 400 : 0);
     } else if (def.effect === "attack") {
       const enemies = battlefield(state, "enemy").filter((e) => e.health > 0);
       const attacks = enemies.map((enemy) => {
@@ -224,7 +275,11 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
           );
         }
     } else if (def.effect === "mana") {
-      add(id, 400 + Math.min(value, state.battle.maxMana - state.battle.mana + cardCost(card, state)));
+      const cost = cardCost(card, state);
+      const regained = Math.min(value, state.battle.maxMana - state.battle.mana + cost);
+      const net = regained - cost;
+      const mending = regained > 0 && hasTalent(state, "mana.arcane-mending") && injuredAllies;
+      add(id, net > 0 ? 400 + net : mending || healingOnPlay ? 3000 + regained : 0);
     } else if (def.effect === "teamClearBlind") {
       add(id, 200 + state.team.filter((unit) => unit.health > 0 && unit.combat?.blind).length * 100);
     } else if (def.effect === "teamThaw") {
@@ -237,7 +292,10 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
       });
       add(id, recoverable ? 200 : 0);
     } else if (def.effect === "teamDodge") {
-      add(id, 150 + value);
+      const useful = battlefield(state, "player")
+        .filter((unit) => unit.health > 0)
+        .reduce((sum, unit) => sum + Math.min(value, 70 - (unit.combat?.temporaryDodge ?? 0)), 0);
+      add(id, useful > 0 ? 150 + useful : healingOnPlay ? 3000 : usefulDraw() ? 200 : 0);
     } else if (def.effect === "redraw") {
       add(id, state.battle.hand.length > 1 ? 190 : 0);
     } else if (def.effect === "draw") {
@@ -248,7 +306,8 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
       ).length;
       add(id, useful > 0 ? 150 + useful : 0);
     } else if (def.effect === "teamPurge") {
-      const useful = state.battle.enemies.filter(
+      const enemies = battlefield(state, "enemy");
+      const useful = enemies.filter(
         (enemy) =>
           enemy.health > 0 &&
           (enemy.block > 0 ||
@@ -262,7 +321,7 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
             enemy.combat.nullify ||
             enemy.combat.nullifyFreeze),
       ).length;
-      const defense = state.battle.enemies.some(
+      const defense = enemies.some(
         (enemy) => enemy.health > 0 && (enemy.block > 0 || enemy.combat.armor > 0),
       );
       add(
@@ -295,7 +354,8 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
       const useful = Math.min(value, 1_000_000 - (actor.combat?.waterThorns ?? 0));
       add(id, useful > 0 ? 100 + useful : 0);
     } else if (def.effect === "dodge") {
-      add(id, 150 + Math.max(0, value - (actor.combat?.temporaryDodge ?? 0)));
+      const useful = Math.min(value, 70 - (actor.combat?.temporaryDodge ?? 0));
+      add(id, useful > 0 ? 150 + useful : healingOnPlay ? 3000 : usefulDraw() ? 200 : 0);
     } else if (def.effect === "swap" || def.effect === "swapLowest") {
       add(id, 150);
     } else {
@@ -303,7 +363,7 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
         const useful = Math.min(value, 1_000_000 - ally.block);
         add(
           id,
-          healing > 0 ? 3000 + healing : useful > 0 ? 100 + useful : 0,
+          healing > 0 ? 3000 + healing : useful + protection > 0 ? 100 + useful + protection : 0,
           def.target === "self" ? undefined : ally.id,
         );
       }
