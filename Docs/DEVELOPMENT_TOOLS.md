@@ -66,7 +66,7 @@ Run the identical suite in each code version, then use `npm run balance:compare 
 
 ## Reproducible performance captures
 
-Builds and performance captures are CI-owned by default; the commands below are for an explicitly requested local investigation or an authorized CI run.
+Focused builds and performance diagnostics needed for a task are authorized through `npm run verify -- --diagnostic`; extended sweeps remain CI work by default. The commands below describe capture capabilities and evidence.
 
 Build once with `npm run build`, then run `npm run perf -- --out reports/performance/baseline`. The three scenarios cover card play/enemy turns, required knockout replacements, and Collection/menu transitions. `--scenario battle`, `swap`, or `menus` selects one. A named fixture explicitly grants three deployed creatures and one reserve; it is validated as a current-format save, not claimed to be earned progression. The driver uses normal controls in fresh browser contexts, an owned production preview on a free port, and muted speaker output.
 
@@ -76,9 +76,9 @@ Each scenario gets one unmeasured warm-up and one measured run at 1280×800 with
 
 ## Review and owner lookup
 
-`npm run context -- --task combat --task ui` prints canonical documentation section ranges and implementation entrypoints. It also accepts source paths or `--diff`, including untracked files, and `--json`. Unknown topics fail. Output is bounded, with explicit omitted-pointer counts and a complete JSON selection under `reports/agent-context/`. Owner pointers are navigation aids, not test coverage.
+`npm run context -- --task combat --task ui` prints canonical documentation section ranges and implementation entrypoints. It also accepts source paths and `--json`. With no paths, it uses the same committed-and-working task selection as review and verification. `--base <ref>` changes the base; `--working-tree` (legacy `--diff`) limits selection to uncommitted work. Use `--help` to list topics, including `layout` and `recovery`. Unknown topics fail. Output is bounded, with explicit omitted-pointer counts and a complete JSON selection under `reports/agent-context/`. Owner pointers are navigation aids, not test coverage.
 
-`npm run review:status -- [paths]` provides a bounded inventory without reading patch bodies; `npm run review:diff -- --summary [paths]` adds patch ranges. Ordinary `review:diff` previews staged, unstaged and untracked changes; `--json` supplies structured output. A complete inventory, patch text and 1-based patch index are written under ignored `reports/agent-diff/`. Truncation is explicit; read omitted patches before claiming a complete review. Commands use literal Git paths, never stage files or mutate checkout state, and never inspect chats.
+`npm run review:status -- [paths]` provides a bounded inventory without reading patch bodies; `npm run review:diff -- --summary [paths]` adds patch ranges. Ordinary `review:diff` previews committed task changes plus staged, unstaged and untracked changes; `--json` supplies structured output. A complete inventory, patch text and 1-based patch index are written under ignored `reports/agent-diff/`. Truncation is explicit; read omitted patches before claiming a complete review. Commands use literal Git paths, never stage files or mutate checkout state, and never inspect chats.
 
 The packaged artifact gate is documented in [Release readiness](RELEASE.md#packaged-integrity). These opt-in tools do not expand the default local verification gate.
 

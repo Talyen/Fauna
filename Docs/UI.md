@@ -10,7 +10,7 @@ Read shared rules here and only the affected [battle](ui/battle.md) or [screen s
 
 Use source-owned shadcn/ui for every standard UI control and its interaction behavior. Current approved primitives: Button, Dialog, Popover, Tooltip, Tabs, Switch, RadioGroup, Slider, and Progress. Preserve native Tab, arrow-key, Space, Enter, Escape, focus trapping and return behavior. W/A/S/D and gamepad navigation adapt to those components rather than replacing their state machines.
 
-`scripts/checks/shadcn-registry.json` explicitly lists reviewed primitives and their Radix owners. New standard controls must come from upstream shadcn, retain provenance, and be registered during review. Do not build custom toggles, tabs, dropdowns, dialogs, or clickable layout elements. The check rejects raw native controls, handmade widget roles, direct Radix imports, unregistered primitives, competing UI libraries. These source guards complement interaction tests; they cannot prove all behavior by static analysis.
+`scripts/checks/shadcn-registry.json` explicitly lists reviewed primitives and their Radix owners. New standard controls must come from upstream shadcn, retain provenance, and be registered during review. Do not build custom toggles, tabs, dropdowns, dialogs, or clickable layout elements. The production source check rejects raw native controls, handmade widget roles, direct Radix imports, unregistered primitives and competing UI libraries. JavaScript/JSX checks inspect syntax, so comments and test fixtures are not player surfaces; container keyboard handlers may route navigation without becoming widgets. These source guards complement interaction tests; they cannot prove all behavior by static analysis.
 
 Explicit gameplay compositions are artwork cards, the hand fan, targeting, mana crystals, combat feedback and forecast overlays on shadcn Progress bars. They use shadcn controls where interactive and shared tokens; no general-purpose custom widget is permitted under this exception. Warm near-black canvas, typography, semantic combat colors and minimum hit areas remain project theme decisions.
 
@@ -33,6 +33,20 @@ Never show players errors, technical failure messages, save or sync status, reco
 Recover automatically at the owning boundary. Try validated current-format saves and backups, retain competing progress before replacement, and continue locally when cloud access fails or exceeds the startup wait. Resolve divergent cloud heads automatically: prefer intact local progress; otherwise use the stable snapshot-ID order. Never combine currency, rewards or progression fields. If all development saves are invalid, continue with a fresh profile silently. Inaccessible storage allows in-memory play; do not rotate unknown local data until reads recover. Retry failed writes in the background using the latest committed state. Remove save warnings on browser exit; desktop close drains admitted writes and makes one final retry, then closes silently even if storage remains unavailable.
 
 Optional features retain their last usable state or fall back silently. Rendering failures remount presentation with bounded retry frequency while retaining the session; no commands or rewards are replayed. A neutral loading indicator may cover recovery, without exposing the failure or asking the player to act. Persistent storage failure cannot guarantee durable progress, and persistently broken content/rendering cannot guarantee playable output; hiding a message does not count as repairing the cause. CI must exercise recovery and verify the resulting player flow.
+
+### Recovery owners
+
+Reuse these boundaries rather than adding feature-specific retry loops, save handling or error screens. Ordinary features call the session or their platform port and consume committed state; only changes to failure behavior need to inspect the corresponding recovery owner. `npm run context -- --task recovery` locates them.
+
+| Failure                                                       | Existing owner                                                                    | Regression coverage                                               |
+| ------------------------------------------------------------- | --------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| Local loading, backup choice, save ordering and write retries | [Application session](../src/application/session.ts)                              | [Session tests](../tests/unit/application/session.test.ts)        |
+| Cloud reconciliation and background retries                   | [Cloud controller](../src/application/cloud.ts)                                   | [Cloud tests](../tests/unit/application/cloud.test.ts)            |
+| Native storage rotation and recovery snapshots                | [Storage](../desktop/storage.cjs) and [recovery](../desktop/recovery.cjs)         | [Desktop tests](../tests/unit/platform/desktop.test.ts)           |
+| Rendering failures                                            | [GameErrorBoundary](../src/ui/shared/diagnostics.tsx) around the existing session | [Recovery integration](../tests/integration/recovery/)            |
+| Bounded internal diagnostics                                  | [Session diagnostics](../src/application/diagnostics.ts)                          | [Diagnostic tests](../tests/unit/application/diagnostics.test.ts) |
+
+This policy does not authorize swallowing exceptions, replaying commands or inventing fallback progression. Change and verify the owning boundary when existing recovery cannot satisfy a new failure mode.
 
 ## Interaction states and accessibility
 
@@ -154,7 +168,7 @@ See [adaptive browsing and effect borders](ui/screens.md#adaptive-browsing-and-e
 
 ## Shared layout recipes
 
-Use existing owners before adding resize observers, breakpoints or pagination state. `usePagination` owns per-view/filter anchors, resize preservation and shortened-list clamping for both Collection and PagedItems. `useGridColumns` owns fixed-row gallery width measurement; PagedItems additionally measures available row height:
+Start with `npm run context -- --task layout` and the recipes below instead of reconstructing the viewport rules for each screen. Use existing owners before adding resize observers, breakpoints or pagination state. `usePagination` owns per-view/filter anchors, resize preservation and shortened-list clamping for both Collection and PagedItems. `useGridColumns` owns fixed-row gallery width measurement; PagedItems additionally measures available row height:
 
 | Content                              | Shared owner                                                                      | Screen supplies                                                    |
 | ------------------------------------ | --------------------------------------------------------------------------------- | ------------------------------------------------------------------ |

@@ -1,18 +1,16 @@
 import path from "node:path";
 import { lstatSync, readFileSync, existsSync, realpathSync, mkdirSync } from "node:fs";
 import { pathToFileURL } from "node:url";
-import { execFileSync, spawnSync } from "node:child_process";
+import { spawnSync } from "node:child_process";
 import { boundaryViolations } from "./boundaries.mjs";
 import { sourceViolations } from "./ui-contract.mjs";
-import { taskBase } from "../lib/task-selection.mjs";
-import {
-  verificationIdentity,
-  verified,
-  clearVerification,
-  recordVerification,
-} from "./verification-record.mjs";
+import { taskBase, taskPaths } from "../lib/task-selection.mjs";
+import { verificationIdentity } from "./input-identity.mjs";
+import owners from "./test-owners.json" with { type: "json" };
 import { affectedTests } from "./affected-tests.mjs";
 import { matchingDependencies, dependenciesAvailable } from "../dependencies.mjs";
+
+import { git } from "../lib/git.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "../..");
 const CI_NOTICE = "Task checks. CI owns complete static, unit, build, browser and desktop validation.";
@@ -48,48 +46,7 @@ export function parseCheckArgs(args) {
   };
 }
 
-function git(root, args) {
-  return execFileSync("git", ["-c", "core.fsmonitor=false", "-c", "core.untrackedCache=false", ...args], {
-    cwd: root,
-    encoding: "utf8",
-    stdio: ["ignore", "pipe", "pipe"],
-  });
-}
-
-export function selectedPaths(root, selection) {
-  if (selection.paths.length) {
-    const paths = selection.paths.map((input) => {
-      const relative = path.relative(root, path.resolve(root, input));
-      if (relative === ".." || relative.startsWith(`..${path.sep}`) || path.isAbsolute(relative))
-        throw new Error(`Check paths must stay inside this repository: ${input}`);
-      return relative.split(path.sep).join("/") || ".";
-    });
-    const selected = git(root, [
-      "--literal-pathspecs",
-      "ls-files",
-      "-z",
-      "--cached",
-      "--others",
-      "--exclude-standard",
-      "--",
-      ...paths,
-    ]);
-    const files = [...new Set(selected.split("\0").filter(Boolean))];
-    for (const input of paths)
-      if (!files.some((file) => input === "." || file === input || file.startsWith(`${input}/`)))
-        throw new Error(`No repository files match: ${input}`);
-    return files;
-  }
-  const base = taskBase(root, selection.base);
-  return [
-    ...new Set(
-      [
-        ...git(root, ["diff", "--name-only", "-z", "--diff-filter=ACMRD", base, "--"]).split("\0"),
-        ...git(root, ["ls-files", "--others", "--exclude-standard", "-z"]).split("\0"),
-      ].filter(Boolean),
-    ),
-  ];
-}
+export { taskPaths as selectedPaths } from "../lib/task-selection.mjs";
 
 export function formatSelection(root, paths) {
   const files = paths.filter((file) => lstatSync(path.join(root, file), { throwIfNoEntry: false })?.isFile());
@@ -119,6 +76,10 @@ export function checkPlan(root, paths, namedTests = []) {
   const configs = new Set();
   const tests = new Set(namedTests);
   for (const file of paths) {
+    const owner = Object.keys(owners)
+      .filter((prefix) => file.startsWith(prefix))
+      .sort((a, b) => b.length - a.length)[0];
+    for (const suite of owners[owner] ?? []) tests.add(suite);
     const typed = /\.tsx?$/.test(file);
     if (typed && file.startsWith("src/game/")) configs.add("tsconfig.game.json");
     if (typed && file.startsWith("src/") && !file.startsWith("src/tooling/")) configs.add("tsconfig.json");
@@ -140,12 +101,14 @@ export function checkPlan(root, paths, namedTests = []) {
       ])
         configs.add(config);
     if (/^tests\/(?:unit|integration)\/.*\.test\.[cm]?[jt]sx?$/.test(file)) tests.add(file);
-    const owner = /^(?:src\/(.+)|scripts\/(.+))\.[cm]?[jt]sx?$/.exec(file);
-    if (owner)
+    const filenameOwner = /^(?:src\/(.+)|scripts\/(.+))\.[cm]?[jt]sx?$/.exec(file);
+    if (filenameOwner)
       for (const extension of ["ts", "tsx", "mjs", "js"])
-        tests.add(`tests/unit/${owner[1] ?? `tooling/${path.posix.basename(owner[2])}`}.test.${extension}`);
+        tests.add(
+          `tests/unit/${filenameOwner[1] ?? `tooling/${path.posix.basename(filenameOwner[2])}`}.test.${extension}`,
+        );
   }
-  const primary = [...tests].filter((file) => existsSync(path.join(root, file)));
+  const primary = [...tests].filter((file) => existsSync(path.join(root, file))).sort();
   const files = paths.some((file) => /\.(?:[cm]?[jt]sx?|json|css)$/.test(file))
     ? git(root, ["ls-files", "-z", "--cached", "--others", "--exclude-standard"])
         .split("\0")
@@ -156,46 +119,15 @@ export function checkPlan(root, paths, namedTests = []) {
         )
     : [];
   const affected = affectedTests(root, paths, files);
-  const related = affected.tests.filter((file) => !primary.includes(file));
-  // Past suite durations guide the budget; unknown suites reserve five seconds.
-  // Proximity in the import graph takes priority over filename ordering.
-  let timings = [];
-  try {
-    const results = JSON.parse(readFileSync(path.join(root, "reports/task-tests.json"), "utf8"))?.testResults;
-    timings = Array.isArray(results)
-      ? results.filter((entry) => entry && Number.isFinite(entry.startTime) && Number.isFinite(entry.endTime))
-      : [];
-  } catch {
-    /* Missing or interrupted reports use conservative estimates. */
-  }
-  const estimate = (file) => {
-    const timing = timings.find((entry) => entry.name === path.join(root, file));
-    return timing && timing.endTime > timing.startTime
-      ? Math.max(1000, timing.endTime - timing.startTime)
-      : 5000;
-  };
-  let remaining = 60_000;
-  const selected = [],
-    deferred = [];
-  for (const file of related) {
-    const cost = estimate(file);
-    if (cost <= remaining) {
-      selected.push(file);
-      remaining -= cost;
-    } else deferred.push(file);
-  }
   return {
     configs: [...configs],
-    tests: [...primary, ...selected],
-    deferredTests: deferred,
+    tests: primary,
+    relatedTests: affected.tests.filter((file) => !primary.includes(file)),
     unresolved: affected.unresolved,
   };
 }
 
-export function runCheck(
-  args = [],
-  { root = ROOT, runner = spawnSync, log = console.log, cache = runner === spawnSync } = {},
-) {
+export function runCheck(args = [], { root = ROOT, runner = spawnSync, log = console.log } = {}) {
   const selection = parseCheckArgs(args);
   const base = taskBase(root, selection.base);
   const namedTests = (selection.tests ?? []).map((file) => {
@@ -207,7 +139,7 @@ export function runCheck(
       throw new Error(`Choose an existing unit/integration suite: ${file}`);
     return relative;
   });
-  const paths = [...new Set([...selectedPaths(root, { ...selection, base }), ...namedTests])];
+  const paths = [...new Set([...taskPaths(root, { ...selection, base }), ...namedTests])];
   const format = formatSelection(root, paths);
   const plan = checkPlan(root, paths, namedTests);
   const docs = paths.some((file) => /\.md$/i.test(file));
@@ -226,8 +158,8 @@ export function runCheck(
         ? "Documentation only; no tests needed."
         : "No matching suite; running fixed Node smoke (not affected-behavior coverage).",
   );
-  if (plan.deferredTests.length)
-    log(`Additional related suites left to CI: ${plan.deferredTests.join(", ")}`);
+  if (plan.relatedTests.length)
+    log(`Related suites (optional --test additions; full coverage in CI): ${plan.relatedTests.join(", ")}`);
   if (plan.unresolved.length)
     log(`Import graph could not parse: ${plan.unresolved.join(", ")}. CI retains full coverage.`);
   log(
@@ -249,14 +181,7 @@ export function runCheck(
     );
     return 1;
   }
-  const identity = cache ? verificationIdentity(root, base, [...new Set([...paths, ...plan.tests])]) : null;
-  if (cache && verified(root, identity)) {
-    log(
-      "Reused passing task check: relevant source, selection, base, runtime, execution environment and installed dependency metadata match. Rendered review and full CI remain separate.",
-    );
-    return 0;
-  }
-  if (cache) clearVerification(root);
+  const identity = verificationIdentity(root, base, [...new Set([...paths, ...plan.tests])]);
   const run = (script, argv = [], timeout = 60_000) => {
     const result = runner(process.execPath, [path.join(root, script), ...argv], {
       cwd: root,
@@ -342,12 +267,9 @@ export function runCheck(
     );
     if (status !== 0) return status;
   }
-  if (cache) {
-    if (verificationIdentity(root, base, [...new Set([...paths, ...plan.tests])]) !== identity) {
-      log("Verification inputs changed during the check; retry before handoff.");
-      return 1;
-    }
-    recordVerification(root, identity);
+  if (verificationIdentity(root, base, [...new Set([...paths, ...plan.tests])]) !== identity) {
+    log("Verification inputs changed during the check; retry before handoff.");
+    return 1;
   }
   log(
     "Task checks passed. Local handoff gate complete; full CI and any required rendered review remain separate.",

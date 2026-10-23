@@ -16,7 +16,7 @@ import {
   verifyWindowsIdentity,
 } from "../../../scripts/release/verify-package.mjs";
 import { review } from "../../../scripts/agent/agent-review.mjs";
-import { context, sections } from "../../../scripts/agent/agent-context.mjs";
+import { context, sections, taskContext } from "../../../scripts/agent/agent-context.mjs";
 import { performanceBuildIdentity } from "../../../scripts/performance/run-performance.mjs";
 import { isolatedDesktopEnvironment } from "../../../scripts/lib/desktop-environment.mjs";
 
@@ -34,6 +34,26 @@ it("finds gameplay and presentation owners from current modules and focused suit
   const collection = context(root, ["tests/unit/ui/collection-ui.test.tsx"]);
   expect(collection.topics).toEqual(expect.arrayContaining(["ui", "progression", "tooling"]));
   expect(collection.entries).toContain("src/ui/App.tsx");
+});
+
+it("locates shared layout and recovery owners without adding unrelated task topics", () => {
+  const root = path.resolve(import.meta.dirname, "../../..");
+  const layout = taskContext(root, { topics: ["layout"] });
+  expect(layout.topics).toEqual(["layout"]);
+  expect(layout.sections.map((section) => section.heading)).not.toContain("Silent recovery policy");
+  expect(layout.sections.map((section) => section.heading)).toContain("Shared layout recipes");
+  expect(layout.entries).toContain("src/ui/shared/navigation/pagination.tsx");
+  const recovery = taskContext(root, { topics: ["recovery"] });
+  expect(recovery.topics).toEqual(["recovery"]);
+  expect(recovery.sections.map((section) => section.heading)).not.toContain("Combat vocabulary");
+  expect(recovery.sections.map((section) => section.heading)).toContain("Recovery owners");
+  expect(recovery.entries).toEqual(
+    expect.arrayContaining([
+      "src/application/session.ts",
+      "src/application/cloud.ts",
+      "src/ui/shared/diagnostics.tsx",
+    ]),
+  );
 });
 
 it("identifies the complete performance artifact, including desktop code, save format and media", async () => {

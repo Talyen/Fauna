@@ -2,7 +2,7 @@ import { readFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { randomUUID } from "node:crypto";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
-import { reviewGit, selectPaths } from "./agent-review.mjs";
+import { selectPaths, taskPaths } from "../lib/task-selection.mjs";
 const ROOT = path.resolve(import.meta.dirname, "../..");
 export const topics = {
   architecture: {
@@ -52,6 +52,56 @@ export const topics = {
     patterns: ["src/ui/", "src/components/", "src/lib/", "design/"],
     docs: ["Docs/UI.md", "Docs/MENU_DESIGN.md"],
     entries: ["src/ui/App.tsx", "src/ui/shell/game-shell.tsx", "src/ui/tokens.css"],
+  },
+  layout: {
+    patterns: [
+      "src/ui/shared/navigation/pagination",
+      "src/ui/shared/navigation/screen",
+      "src/ui/shared/cards/art-card",
+      "src/ui/tokens.css",
+    ],
+    docs: ["Docs/UI.md"],
+    headings: [
+      "Shared layout recipes",
+      "Layout, artwork size and spacing",
+      "Shared components and enforcement",
+      "Required review",
+    ],
+    entries: [
+      "src/ui/shared/navigation/pagination.tsx",
+      "src/ui/shared/navigation/screen.tsx",
+      "src/ui/shared/cards/art-card.tsx",
+      "src/ui/tokens.css",
+      "tests/unit/ui/adaptive-browsing.test.tsx",
+    ],
+  },
+  recovery: {
+    patterns: [
+      "src/application/session",
+      "src/application/cloud",
+      "src/application/diagnostics",
+      "src/ui/shared/diagnostics",
+      "desktop/storage",
+      "desktop/recovery",
+      "tests/integration/recovery/",
+    ],
+    docs: ["Docs/ARCHITECTURE.md", "Docs/UI.md"],
+    headings: [
+      "Silent recovery policy",
+      "Recovery owners",
+      "Save contract",
+      "Cloud reconciliation and device preferences",
+      "Discovery and diagnostics",
+    ],
+    entries: [
+      "src/application/session.ts",
+      "src/application/cloud.ts",
+      "src/application/diagnostics.ts",
+      "src/ui/shared/diagnostics.tsx",
+      "desktop/storage.cjs",
+      "desktop/recovery.cjs",
+      "tests/integration/recovery",
+    ],
   },
   content: {
     patterns: ["src/game/content", "src/game/card-rules", "src/assets/", "public/", "assets/"],
@@ -123,37 +173,48 @@ export function context(root, paths = [], requested = []) {
   const docs = [...new Set([...selected].flatMap((topic) => topics[topic].docs))];
   return {
     topics: [...selected],
-    sections: docs.flatMap((file) => sections(root, file)),
+    sections: docs.flatMap((file) => {
+      const owners = [...selected].filter((topic) => topics[topic].docs.includes(file));
+      return sections(root, file).filter((section) =>
+        owners.some((topic) => !topics[topic].headings || topics[topic].headings.includes(section.heading)),
+      );
+    }),
     entries: [...new Set([...selected].flatMap((topic) => topics[topic].entries))],
   };
 }
+export function taskContext(root, { paths = [], base, topics: requested = [] } = {}) {
+  const files = requested.length && !paths.length && !base ? [] : taskPaths(root, { paths, base });
+  return context(root, files, requested);
+}
+
 export function main(args = process.argv.slice(2)) {
   const requested = [],
     paths = [];
   let json = false,
-    diff = false;
+    working = false,
+    base;
   for (let i = 0; i < args.length; i++) {
+    if (args[i] === "--help") continue;
     if (args[i] === "--task") requested.push(args[++i]);
     else if (args[i] === "--json") json = true;
-    else if (args[i] === "--diff") diff = true;
-    else if (args[i] !== "--") {
+    else if (args[i] === "--diff" || args[i] === "--working-tree") working = true;
+    else if (args[i] === "--base") {
+      if (base || !args[i + 1] || args[i + 1].startsWith("-")) throw new Error("--base requires one ref.");
+      base = args[++i];
+    } else if (args[i] !== "--") {
       if (args[i].startsWith("--")) throw new Error(`Unknown option: ${args[i]}`);
       paths.push(args[i]);
     }
   }
-  if (!args.length) {
+  if (args.includes("--help")) {
     console.log(
-      `Topics: ${Object.keys(topics).join(", ")}\nUsage: context -- [paths|--diff] [--task topic] [--json]`,
+      `Topics: ${Object.keys(topics).join(", ")}\nUsage: context -- [paths|--base ref|--working-tree] [--task topic] [--json]`,
     );
     return;
   }
-  if (diff && paths.length) throw new Error("Choose paths or --diff.");
-  if (diff)
-    paths.push(
-      ...reviewGit(ROOT, ["diff", "--name-only", "-z", "HEAD"]).split("\0").filter(Boolean),
-      ...reviewGit(ROOT, ["ls-files", "--others", "--exclude-standard", "-z"]).split("\0").filter(Boolean),
-    );
-  const result = context(ROOT, paths, requested);
+  if (base && working) throw new Error("Choose --base or --working-tree.");
+  if (paths.length && (base || working)) throw new Error("Choose paths or a Git diff.");
+  const result = taskContext(ROOT, { paths, base: working ? "HEAD" : base, topics: requested });
   const directory = path.join(ROOT, "reports", "agent-context");
   mkdirSync(directory, { recursive: true });
   const reportPath = path.join(directory, `${randomUUID()}.json`);
