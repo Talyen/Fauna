@@ -18,7 +18,7 @@ Work independently. Do not discover or message other chats for routine coordinat
 
 Task-scoped branch/worktree creation, commits, local integration and hosted CI execution are authorized unless the task restricts them. Pushes, PRs, releases, deployments, destructive cleanup and changes outside this game require an explicit user request. This file is the repository's authority for Git authorization; other workflow documents link here instead of defining separate permissions.
 
-After review, commit task-owned paths and run `node scripts/integrate.mjs <task-branch>` from main. The command holds the shared integration lock, incorporates current main, checks the combined result, advances clean main and removes only this task's clean merged checkout and branch. Retry a busy lock later; never remove another process's lock. Resolve understood conflicts in the task worktree and retry; preserve ambiguous conflicts or dirty-main blockers. The [workflow](CONTRIBUTING.md#worktrees-and-integration) explains recovery and artifact archival. Unrelated unfinished tasks do not block completion. Repository-wide cleanup is optional maintenance, not a task handoff requirement.
+After review, commit task-owned paths and run `node scripts/integrate.mjs <task-branch>` from main. The command holds the shared integration lock, incorporates current main, checks the combined result, advances clean main and removes only this task's clean merged checkout and branch. The command waits briefly for a busy lock; retry after its bounded wait if needed and never remove another process's lock. Cleanup pending does not undo successful integration. Resolve understood conflicts in the task worktree and retry; preserve ambiguous conflicts or dirty-main blockers. The [workflow](CONTRIBUTING.md#worktrees-and-integration) explains recovery and artifact archival. Unrelated unfinished tasks do not block completion. Repository-wide cleanup is optional maintenance, not a task handoff requirement.
 
 ## Find the owner
 
@@ -51,7 +51,7 @@ Development saves are disposable. There are no released player saves to preserve
 
 Review the final diff and integration. Express behavior through names, types and valuable tests; comments explain non-obvious reasons, ordering or compatibility. Justify lint suppressions.
 
-Run `npm run review:diff` and `npm run check` in the task checkout; both include committed and working task changes by default. Use explicit paths to narrow mixed work or `--base <commit>` to select another base. Follow [Contributing](CONTRIBUTING.md#verification) for completion, bounded diagnostics and CI boundaries. Use `npm run deps` for missing or changed task dependencies.
+Run `npm run review:diff` and `npm run verify` in the task checkout; both include committed and working task changes by default. Add regressions with `verify -- --test <suite>`; use `verify -- --diagnostic <mode>` for bounded diagnostics. Use explicit paths to narrow mixed work or `--base <commit>` to select another base. Follow [Contributing](CONTRIBUTING.md#verification) for completion, bounded diagnostics and CI boundaries. Use `npm run deps` for missing or changed task dependencies.
 
 For visual changes, follow the single [rendered review procedure](Docs/UI.md#required-review). Task-owned focused preview/review is authorized by default. Integrate only after current rendered evidence is inspected; preserve work on its branch if that evidence is unavailable.
 

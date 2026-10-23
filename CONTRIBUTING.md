@@ -20,45 +20,42 @@ Review, verify and commit task-owned changes. From clean main:
 node scripts/integrate.mjs task/creature-feedback
 ```
 
-Integration holds the shared lock, incorporates current main, verifies the combined result and advances clean main. It reuses a passing check only when its inputs match. Busy locks, dirty main, ambiguous conflicts and unfinished Git operations preserve task work; resolve understood conflicts in the task checkout and retry. Successful integration archives ignored evidence and removes only this task's clean merged checkout and branch. Close task-owned preview processes first.
+Integration holds the shared lock, incorporates current main, verifies the combined result and advances clean main. It reuses a passing check only when its inputs match. Integration waits up to 30 seconds for a busy lock. Dirty main, ambiguous conflicts and unfinished Git operations preserve task work; resolve understood conflicts in the task checkout and retry. Integration and cleanup have separate outcomes; an archival failure preserves the checkout and reports cleanup pending after successful integration. Successful cleanup archives ignored evidence and removes only this task's clean merged checkout and branch. Close task-owned preview processes first.
 
 [Worktree operations](scripts/README.md#worktree-operations) explains dependency sharing, recovery, artifact archives and optional cleanup. Other unfinished tasks do not block completion.
 
 ## Verification
 
-In the task checkout:
+Use one entry point in the task checkout:
 
 ```sh
 npm run review:diff
-npm run check
-# Show selected coverage without executing checks:
-npm run check -- --plan
+npm run verify
+# Add a regression to the changed-file gate:
+npm run verify -- --test tests/unit/game/engine.test.ts
+# Inspect coverage without executing:
+npm run verify -- --plan
+# Diagnose a concrete failure or uncertainty:
+npm run verify -- --diagnostic build
 ```
 
-On task/ and codex/ branches, these commands include committed and working changes since the common ancestor with local main. On main, other branches and detached checkouts, they select working changes against HEAD. Use `--base <commit>` for another base or `--working-tree` for uncommitted changes only; `--diff` retains the working-tree alias. Explicit paths narrow the selection. Review preserves separate committed, staged and unstaged patches, including reverted edits. The check prints omissions; add a named regression suite if the selection misses affected behavior.
+Review and verification include committed and working changes since the common ancestor with local main on task/ and codex/ branches; elsewhere they select working changes against HEAD. Explicit paths narrow verification. `--base <commit>` selects another base; `--working-tree` selects uncommitted changes. Repeat `--test <suite>` to add regressions without replacing the changed-file gate. Review preserves separate committed, staged and unstaged patches, including reverted edits.
 
-`npm run verify` aliases `check`. Passing checks are recorded locally per worktree and reused only for matching source bytes, file selection, base, Node runtime, environment and installed dependency metadata. Committing unchanged checked files preserves reuse. Changes during verification fail the gate. A reused result establishes no rendered or hosted-CI evidence.
+The gate selects changed tests and filename-matched owner suites first, then related suites by import distance within an estimated one-minute budget. Prior task timings refine estimates; unknown suites reserve five seconds. Explicit regressions always run. Selected suites share one worker and one runner with a five-minute deadline. Omissions and unresolved imports are printed; use `--test` for relevant behavior the static graph cannot discover. A passing scoped gate does not establish exhaustive coverage.
 
-Local completion requires reviewing the final diff, passing the task check, inspecting any required [rendered evidence](Docs/UI.md#required-review), committing task-owned work and protected integration. Report CI as pending unless exact-commit results are available. A blocked integration leaves reviewed work committed on its branch. Pushes and publication follow [AGENTS.md](AGENTS.md#worktrees-and-integration).
+Checks cache matching relevant repository inputs, selected coverage, base, runtime, execution environment and installed dependency metadata. Maintained guides and selected Markdown remain check inputs; unrelated notes are included only when the documentation gate runs. Unrelated environment variables do not invalidate checks. Committing unchanged checked files preserves reuse; inputs changing during verification fail the gate. Captures use a separate render-input identity. Reuse establishes no rendered or hosted-CI evidence.
+
+Local completion requires final diff review, a passing gate, any required [rendered evidence](Docs/UI.md#required-review), task-owned commits and protected integration. Report CI pending unless exact-commit results are available. Blocked integration leaves reviewed work committed on its branch. Pushes and publication follow [AGENTS.md](AGENTS.md#worktrees-and-integration).
 
 ### Execution and evidence
 
-Task checks, named regression suites, documentation checks and focused previews/captures are authorized locally. Run one verification or investigation command at a time per task; use isolated browser profiles and close only owned processes.
+Task checks, named regressions, documentation checks and focused previews/captures are authorized locally. Run one verification or investigation command at a time per task; use isolated browser profiles and close only owned processes.
 
-For a concrete task failure or uncertainty that the ordinary gate cannot resolve, bounded broader diagnostics are also authorized:
+`verify -- --diagnostic` accepts `types`, `static`, `build`, `unit <suite files>`, `browser <route>` or `performance <scenario>`. It applies a five-minute deadline and 2 GiB Node heap. Unit diagnostics take one to twelve named suites and one worker. Browser routes are battle, settings, collection, progression and persistence; the launcher owns a free-port production preview. Performance scenarios are battle, swap and menus. Build first if production output is required. Reassess the hypothesis after failure; diagnostics do not authorize repeated exhaustive runs, dependency installation or publication.
 
-```sh
-npm run investigate -- types
-npm run investigate -- static
-npm run investigate -- build
-npm run investigate -- unit tests/unit/game/engine.test.ts
-npm run investigate -- browser battle
-npm run investigate -- performance battle
-```
+Existing `check`, `investigate`, `test:full` and full-CI commands remain compatible. `npm test` retains its fixed smoke default and now accepts named suite paths for bounded unit diagnostics. New task instructions should use `verify`.
 
-The launcher allows one command with a five-minute deadline and 2 GiB Node heap. Unit diagnostics require one to twelve named suites and use one worker; browser diagnostics select an existing route with one worker on an owned free-port production preview; performance selects one existing scenario. Build first when the selected browser/performance tool requires production output. Use only diagnostics directly relevant to the task and reassess the hypothesis after failure; this allowance does not authorize repeated exhaustive runs. The diagnostic commands never install dependencies or publish anything.
-
-Full unit/browser matrices, packaging, coverage and extended performance sweeps remain [hosted-CI](Docs/CI.md) work by default; broader local execution needs an explicit request. Local checks, preview captures and diagnostic runs establish only their actual coverage. Report relevant unverified platform boundaries.
+Full unit/browser matrices, packaging, coverage and extended performance sweeps remain [hosted-CI](Docs/CI.md) work by default; broader local execution needs an explicit request. Report only actual coverage and relevant unverified platform boundaries.
 
 ### Documentation scope
 

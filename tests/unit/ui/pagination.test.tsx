@@ -97,3 +97,13 @@ it("supports count-free pagination with accessible controls and boundary focus",
   expect((next as HTMLButtonElement).disabled).toBe(true);
   expect(document.activeElement).toBe(screen.getByRole("button", { name: "Previous page" }));
 });
+
+it("does not revive an invalid page when a shortened list later grows", async () => {
+  const view = render(<Gallery size={1} />);
+  await userEvent.click(screen.getByRole("button", { name: "Next page" }));
+  await userEvent.click(screen.getByRole("button", { name: "Next page" }));
+  view.rerender(<Gallery size={1} items={[entries[0]!]} />);
+  view.rerender(<Gallery size={1} />);
+  expect(screen.getByRole("button", { name: "Mossguard" })).toBeTruthy();
+  expect((screen.getByRole("button", { name: "Previous page" }) as HTMLButtonElement).disabled).toBe(true);
+});

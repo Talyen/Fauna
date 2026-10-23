@@ -1,5 +1,5 @@
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
-import { PageControls } from "../shared/navigation/pagination";
+import { PageControls, usePagination, useGridColumns } from "../shared/navigation/pagination";
 
 import { EmptyState } from "../shared/empty-state";
 
@@ -64,11 +64,19 @@ export function Collection({
     }
   }, [selected]);
   const [filter, setFilter] = useState("all");
-  const [pageStarts, setPageStarts] = useState<Record<string, number>>({});
-  const pageStart = pageStarts[filter] ?? 0;
-  const setPageStart = (start: number) => setPageStarts((current) => ({ ...current, [filter]: start }));
-  const [columns, setColumns] = useState(4);
   const gridRef = useRef<HTMLDivElement>(null);
+  const columns = useGridColumns(gridRef, 4, filter);
+  const known = (id: SpeciesId) => game.discovery.recruited[id] !== undefined;
+  const ordered = [...SPECIES]
+    .filter((entry) => filter === "all" || (filter === "known" ? known(entry.id) : !known(entry.id)))
+    .sort((a, b) => Number(known(b.id)) - Number(known(a.id)));
+  const pageSize = columns * 2;
+  const {
+    page: activePage,
+    pages: totalPages,
+    start: pageStart,
+    change,
+  } = usePagination(ordered.length, pageSize, filter);
   const focusedControl = useRef<HTMLElement | null>(null);
   useLayoutEffect(() => {
     if (
@@ -78,34 +86,6 @@ export function Collection({
     )
       returnFocus(gridRef.current?.querySelector<HTMLElement>("button:not(:disabled)") ?? null);
   }, [pageStart, filter, columns]);
-  const known = (id: SpeciesId) => game.discovery.recruited[id] !== undefined;
-  const ordered = [...SPECIES]
-    .filter((entry) => filter === "all" || (filter === "known" ? known(entry.id) : !known(entry.id)))
-    .sort((a, b) => Number(known(b.id)) - Number(known(a.id)));
-  useLayoutEffect(() => {
-    const grid = gridRef.current;
-    if (!grid) return;
-    const measure = () => {
-      const width = grid.getBoundingClientRect().width;
-      const itemWidth = grid.firstElementChild?.getBoundingClientRect().width ?? 0;
-      if (!width || !itemWidth) return;
-      const gap = Number.parseFloat(getComputedStyle(grid).columnGap) || 0;
-      setColumns(Math.max(1, Math.min(4, Math.floor((width + gap) / (itemWidth + gap)))));
-    };
-    measure();
-    const observer = new ResizeObserver(measure);
-    observer.observe(grid);
-    if (grid.firstElementChild) observer.observe(grid.firstElementChild);
-    window.addEventListener("resize", measure);
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("resize", measure);
-    };
-  }, [filter]);
-  const pageSize = columns * 2;
-  const totalPages = Math.max(1, Math.ceil(ordered.length / pageSize));
-  const activePage = Math.min(Math.floor(pageStart / pageSize), totalPages - 1);
-  if (pageStart >= ordered.length && pageStart !== 0) setPageStart(activePage * pageSize);
   return (
     <>
       <div className="collection-gallery-page" hidden={selected !== null} inert={selected !== null}>
@@ -187,7 +167,7 @@ export function Collection({
                   <PageControls
                     page={activePage}
                     pages={totalPages}
-                    change={(next) => setPageStart(next * pageSize)}
+                    change={change}
                     label="Collection pages"
                     showCount={false}
                   />

@@ -9,6 +9,15 @@ export const SCENARIOS = [
   "recruit",
   "merchant",
   "merchant-unavailable",
+  "glossary",
+  "talents",
+  "talent-tree",
+  "collection-creature",
+  "collection-ranks",
+  "settings-sound",
+  "settings-battle",
+  "draw-pile",
+  "discard-pile",
 ];
 
 /** Reuse the same current-format gameplay fixtures as browser regressions. */
@@ -40,12 +49,27 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   await page.goto(origin);
   await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
   const button = (name) => page.getByRole("button", { name, exact: true });
-  if (["settings", "collection"].includes(scenario.name)) {
-    await button(scenario.name === "settings" ? "Settings" : "Collection").click();
+  const menu = scenario.name === "talent-tree" ? "talents" : scenario.name.split("-")[0];
+  if (["settings", "collection", "talents", "glossary"].includes(menu)) {
+    await button(menu[0].toUpperCase() + menu.slice(1)).click();
   } else if (scenario.name !== "home") {
     await button("Continue").click();
     if (scenario.name === "pause") await button("Open menu").click();
   }
+  if (["collection-creature", "collection-ranks"].includes(scenario.name)) {
+    await button("Inspect Mossguard").click();
+    await expect(page.getByRole("heading", { name: "Mossguard", exact: true })).toBeVisible();
+    if (scenario.name === "collection-ranks")
+      await page.getByRole("tab", { name: "Rank progression", exact: true }).click();
+  }
+  if (scenario.name === "talent-tree")
+    await page.locator('.talents-screen button[aria-label$=" talents"]').first().click();
+  if (["settings-sound", "settings-battle"].includes(scenario.name))
+    await page
+      .getByRole("tab", { name: scenario.name === "settings-sound" ? "Sound" : "Battle", exact: true })
+      .click();
+  if (["draw-pile", "discard-pile"].includes(scenario.name))
+    await button(scenario.name === "draw-pile" ? "Inspect Draw Pile" : "Inspect Discard Pile").click();
   if (["battle", "pause"].includes(scenario.name))
     await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
   if (scenario.name === "recruit")

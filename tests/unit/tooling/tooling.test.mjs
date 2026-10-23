@@ -333,7 +333,7 @@ describe("isolated worktrees and protected integration", { timeout: 15_000 }, ()
         runner: () => ({ status: 0 }),
         log: () => {},
       }),
-    ).rejects.toThrow("Integration succeeded, but cleanup is incomplete");
+    ).resolves.toMatchObject({ integrated: true, cleanup: { status: "pending" } });
     expect(git(root, "show", "HEAD:feature.txt")).toBe("reviewed change");
     expect(existsSync(task.path)).toBe(true);
     git(root, "worktree", "unlock", task.path);

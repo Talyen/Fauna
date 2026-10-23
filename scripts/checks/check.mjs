@@ -1,5 +1,5 @@
 import path from "node:path";
-import { lstatSync, readFileSync, existsSync, realpathSync } from "node:fs";
+import { lstatSync, readFileSync, existsSync, realpathSync, mkdirSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import { execFileSync, spawnSync } from "node:child_process";
 import { boundaryViolations } from "./boundaries.mjs";
@@ -19,6 +19,7 @@ const CI_NOTICE = "Task checks. CI owns complete static, unit, build, browser an
 
 export function parseCheckArgs(args) {
   const paths = [];
+  const tests = [];
   let base = null,
     diff = false,
     plan = false;
@@ -26,7 +27,11 @@ export function parseCheckArgs(args) {
     const arg = args[i];
     if (arg === "--plan") plan = true;
     else if (arg === "--diff" || arg === "--working-tree") diff = true;
-    else if (arg === "--base") {
+    else if (arg === "--test") {
+      if (!args[i + 1] || args[i + 1].startsWith("-"))
+        throw new Error("--test requires a unit/integration suite path.");
+      tests.push(args[++i]);
+    } else if (arg === "--base") {
       if (base || !args[i + 1] || args[i + 1].startsWith("-"))
         throw new Error("--base requires one Git commit or branch.");
       base = args[++i];
@@ -35,7 +40,12 @@ export function parseCheckArgs(args) {
   }
   if (base && diff) throw new Error("Choose --base or --working-tree, not both.");
   if (paths.length && (base || diff)) throw new Error("Choose explicit paths or a Git diff, not both.");
-  return { paths, base: base ?? (diff ? "HEAD" : null), ...(plan ? { plan: true } : {}) };
+  return {
+    paths,
+    base: base ?? (diff ? "HEAD" : null),
+    ...(plan ? { plan: true } : {}),
+    ...(tests.length ? { tests } : {}),
+  };
 }
 
 function git(root, args) {
@@ -105,9 +115,9 @@ export function formatSelection(root, paths) {
   return { files, batches };
 }
 
-export function checkPlan(root, paths) {
+export function checkPlan(root, paths, namedTests = []) {
   const configs = new Set();
-  const tests = new Set();
+  const tests = new Set(namedTests);
   for (const file of paths) {
     const typed = /\.tsx?$/.test(file);
     if (typed && file.startsWith("src/game/")) configs.add("tsconfig.game.json");
@@ -147,10 +157,37 @@ export function checkPlan(root, paths) {
     : [];
   const affected = affectedTests(root, paths, files);
   const related = affected.tests.filter((file) => !primary.includes(file));
+  // Past suite durations guide the budget; unknown suites reserve five seconds.
+  // Proximity in the import graph takes priority over filename ordering.
+  let timings = [];
+  try {
+    const results = JSON.parse(readFileSync(path.join(root, "reports/task-tests.json"), "utf8"))?.testResults;
+    timings = Array.isArray(results)
+      ? results.filter((entry) => entry && Number.isFinite(entry.startTime) && Number.isFinite(entry.endTime))
+      : [];
+  } catch {
+    /* Missing or interrupted reports use conservative estimates. */
+  }
+  const estimate = (file) => {
+    const timing = timings.find((entry) => entry.name === path.join(root, file));
+    return timing && timing.endTime > timing.startTime
+      ? Math.max(1000, timing.endTime - timing.startTime)
+      : 5000;
+  };
+  let remaining = 60_000;
+  const selected = [],
+    deferred = [];
+  for (const file of related) {
+    const cost = estimate(file);
+    if (cost <= remaining) {
+      selected.push(file);
+      remaining -= cost;
+    } else deferred.push(file);
+  }
   return {
     configs: [...configs],
-    tests: [...primary, ...related.slice(0, 12)],
-    deferredTests: related.slice(12),
+    tests: [...primary, ...selected],
+    deferredTests: deferred,
     unresolved: affected.unresolved,
   };
 }
@@ -161,9 +198,18 @@ export function runCheck(
 ) {
   const selection = parseCheckArgs(args);
   const base = taskBase(root, selection.base);
-  const paths = selectedPaths(root, { ...selection, base });
+  const namedTests = (selection.tests ?? []).map((file) => {
+    const relative = path.relative(root, path.resolve(root, file)).split(path.sep).join("/");
+    if (
+      !/^tests\/(?:unit|integration)\/.+\.test\.[cm]?[jt]sx?$/.test(relative) ||
+      !existsSync(path.join(root, relative))
+    )
+      throw new Error(`Choose an existing unit/integration suite: ${file}`);
+    return relative;
+  });
+  const paths = [...new Set([...selectedPaths(root, { ...selection, base }), ...namedTests])];
   const format = formatSelection(root, paths);
-  const plan = checkPlan(root, paths);
+  const plan = checkPlan(root, paths, namedTests);
   const docs = paths.some((file) => /\.md$/i.test(file));
   const docsOnly = paths.length > 0 && paths.every((file) => /\.md$/i.test(file));
   log(CI_NOTICE);
@@ -203,10 +249,10 @@ export function runCheck(
     );
     return 1;
   }
-  const identity = cache ? verificationIdentity(root, base, paths) : null;
+  const identity = cache ? verificationIdentity(root, base, [...new Set([...paths, ...plan.tests])]) : null;
   if (cache && verified(root, identity)) {
     log(
-      "Reused passing task check: source, selection, base, runtime, environment and installed dependency metadata match. Rendered review and full CI remain separate.",
+      "Reused passing task check: relevant source, selection, base, runtime, execution environment and installed dependency metadata match. Rendered review and full CI remain separate.",
     );
     return 0;
   }
@@ -278,17 +324,26 @@ export function runCheck(
     const status = run("scripts/checks/run-local-tests.mjs");
     if (status !== 0) return status;
   }
-  for (const suite of plan.tests) {
-    const status = run("node_modules/vitest/vitest.mjs", [
-      "run",
-      "--maxWorkers=1",
-      "--no-file-parallelism",
-      suite,
-    ]);
+  if (plan.tests.length) {
+    mkdirSync(path.join(root, "reports"), { recursive: true });
+    const status = run(
+      "node_modules/vitest/vitest.mjs",
+      [
+        "run",
+        "--maxWorkers=1",
+        "--no-file-parallelism",
+        "--bail=1",
+        "--reporter=default",
+        "--reporter=json",
+        "--outputFile.json=reports/task-tests.json",
+        ...plan.tests,
+      ],
+      300_000,
+    );
     if (status !== 0) return status;
   }
   if (cache) {
-    if (verificationIdentity(root, base, paths) !== identity) {
+    if (verificationIdentity(root, base, [...new Set([...paths, ...plan.tests])]) !== identity) {
       log("Verification inputs changed during the check; retry before handoff.");
       return 1;
     }
@@ -300,5 +355,13 @@ export function runCheck(
   return 0;
 }
 
+export async function verify(args = process.argv.slice(2), options = {}) {
+  if (args[0] === "--diagnostic") {
+    const { investigate } = await import("../agent/investigate.mjs");
+    return investigate(args.slice(1), options);
+  }
+  return runCheck(args, options);
+}
+
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href)
-  process.exitCode = runCheck(process.argv.slice(2));
+  process.exitCode = await verify();

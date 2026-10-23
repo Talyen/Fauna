@@ -1,4 +1,11 @@
-import { useLayoutEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
+import {
+  useLayoutEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type ReactNode,
+  type RefObject,
+} from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "../../../components/ui/button";
 const compactViewport = () => window.innerHeight <= 900;
@@ -8,6 +15,52 @@ function subscribeViewport(update: () => void) {
 }
 /** One height breakpoint shared with the compact artwork tokens. */
 export const useCompactLayout = () => useSyncExternalStore(subscribeViewport, compactViewport);
+
+/** Anchors belong to a view/filter and survive resize without reviving invalid pages. */
+export function usePagination(count: number, pageSize: number, group = "default") {
+  const capacity = Math.max(1, pageSize);
+  const [anchors, setAnchors] = useState<Record<string, number>>({});
+  const anchor = anchors[group] ?? 0;
+  const pages = Math.max(1, Math.ceil(count / capacity));
+  const page = Math.min(Math.floor(anchor / capacity), pages - 1);
+  const change = (next: number) =>
+    setAnchors((current) => ({
+      ...current,
+      [group]: Math.max(0, Math.min(next, pages - 1)) * capacity,
+    }));
+  if (anchor >= count && anchor !== 0) change(page);
+  return { page, pages, start: page * capacity, change };
+}
+
+function fittedColumns(width: number, cellWidth: number, gap: number, maximum: number) {
+  return Math.max(1, Math.min(maximum, Math.floor((width + gap) / (cellWidth + gap))));
+}
+
+/** Fixed-row galleries share width measurement; PagedItems additionally measures row height. */
+export function useGridColumns(gridRef: RefObject<HTMLDivElement | null>, maximum: number, group: string) {
+  const [columns, setColumns] = useState(maximum);
+  useLayoutEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+    const measure = () => {
+      const width = grid.getBoundingClientRect().width;
+      const cellWidth = grid.firstElementChild?.getBoundingClientRect().width ?? 0;
+      if (!(width > 0 && cellWidth > 0)) return;
+      const gap = Number.parseFloat(getComputedStyle(grid).columnGap) || 0;
+      setColumns(fittedColumns(width, cellWidth, gap, maximum));
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(grid);
+    if (grid.firstElementChild) observer.observe(grid.firstElementChild);
+    window.addEventListener("resize", measure);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, [gridRef, maximum, group]);
+  return columns;
+}
 
 export function PageControls({
   page,
@@ -96,7 +149,6 @@ export function PagedItems<T>({
   label: string;
   contentRole?: "list";
 }) {
-  const [anchor, setAnchor] = useState(0);
   const root = useRef<HTMLDivElement>(null);
   const [measuredCapacity, setMeasuredCapacity] = useState<number | null>(null);
   const capacity = Math.max(1, adaptive ? (measuredCapacity ?? pageSize) : pageSize);
@@ -133,10 +185,7 @@ export function PagedItems<T>({
         stage.getBoundingClientRect().height -
         main.getBoundingClientRect().height +
         grid.getBoundingClientRect().height;
-      const columns = Math.max(
-        1,
-        Math.min(maxColumns, Math.floor((width + columnGap) / (cellWidth + columnGap))),
-      );
+      const columns = fittedColumns(width, cellWidth, columnGap, maxColumns);
       const rows = Math.max(
         1,
         Math.min(maxRows, Math.floor((available + rowGap) / (tallestCell.current.height + rowGap))),
@@ -156,8 +205,7 @@ export function PagedItems<T>({
       window.removeEventListener("resize", measure);
     };
   }, [maxColumns, maxRows, items, capacity]);
-  const pages = Math.max(1, Math.ceil(items.length / capacity));
-  const page = Math.min(Math.floor(anchor / capacity), pages - 1);
+  const { page, pages, change } = usePagination(items.length, capacity);
   const focusedItem = useRef<HTMLElement | null>(null);
   useLayoutEffect(() => {
     const focused = focusedItem.current;
@@ -183,7 +231,7 @@ export function PagedItems<T>({
           .map((item, index) => children(item, page * capacity + index))}
       </div>
       {pages > 1 ? (
-        <PageControls page={page} pages={pages} change={(next) => setAnchor(next * capacity)} label={label} />
+        <PageControls page={page} pages={pages} change={change} label={label} />
       ) : adaptive ? (
         <div className="pagination-spacer" aria-hidden="true" />
       ) : null}

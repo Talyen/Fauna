@@ -13,12 +13,33 @@ import { verificationIdentity } from "../checks/verification-record.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "../..");
 
+/** Preserve the visible failure even when preparation or layout validation fails. */
+export async function captureFrame(page, { path: framePath, prepare, layoutViolations }) {
+  const errors = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  let failures = [];
+  try {
+    await prepare();
+    failures = await page.evaluate(layoutViolations);
+  } catch (error) {
+    errors.push(error.message);
+  }
+  let file = framePath;
+  try {
+    await page.screenshot({ path: framePath });
+  } catch (error) {
+    file = null;
+    errors.push(`Screenshot unavailable: ${error.message}`);
+  }
+  return { file, layoutFailures: failures, errors };
+}
+
 export async function capture(args = process.argv.slice(2)) {
   const options = reviewOptions(args, { capture: true });
   const output = await reportDirectory(null, `reports/review/${options.label}-${randomUUID()}`);
   const base = taskBase(ROOT);
   const environment = { ...process.env };
-  const source = verificationIdentity(ROOT, base, [], environment);
+  const source = verificationIdentity(ROOT, base, [], environment, "capture");
   const evidence = {
     complete: false,
     runtime: "Vite browser preview",
@@ -58,25 +79,28 @@ export async function capture(args = process.argv.slice(2)) {
       const context = await browser.newContext({ viewport: { width, height }, reducedMotion: "reduce" });
       try {
         const page = await context.newPage();
-        const errors = [];
-        page.on("pageerror", (error) => errors.push(error.message));
-        await openReviewScenario(page, session.url, scenario, scale);
-        await page.mouse.move(0, 0);
-        await settleScreen(page);
-        await page
-          .locator("img:visible")
-          .evaluateAll((images) => Promise.all(images.map((image) => image.decode())));
-        const failures = await page.evaluate(layoutViolations);
-        if (failures.length || errors.length) throw new Error(JSON.stringify({ layout: failures, errors }));
         const file = `${options.scenario}-${width}x${height}-${scale}.png`;
-        await page.screenshot({ path: path.join(output, file) });
-        evidence.frames.push({ file, width, height, scale, layoutFailures: failures, errors });
+        const frame = await captureFrame(page, {
+          path: path.join(output, file),
+          layoutViolations,
+          prepare: async () => {
+            await openReviewScenario(page, session.url, scenario, scale);
+            await page.mouse.move(0, 0);
+            await settleScreen(page);
+            await page
+              .locator("img:visible")
+              .evaluateAll((images) => Promise.all(images.map((image) => image.decode())));
+          },
+        });
+        evidence.frames.push({ ...frame, file: frame.file ? file : null, width, height, scale });
+        if (frame.layoutFailures.length || frame.errors.length) failure ??= new Error(JSON.stringify(frame));
       } finally {
         await context.close();
       }
     }
-    if (verificationIdentity(ROOT, base, [], environment) !== source)
+    if (verificationIdentity(ROOT, base, [], environment, "capture") !== source)
       throw new Error("Source or dependencies changed during capture; repeat for comparable evidence.");
+    if (failure) throw failure;
     evidence.complete = true;
   } catch (error) {
     evidence.failure = error.message;
