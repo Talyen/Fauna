@@ -42,7 +42,9 @@ export function teamRun(seed: number, kinds: SpeciesId[]) {
     d.lineup = d.team.map((c) => c.id);
     d.cards = d.team.flatMap((c) => ownedCards(c.id, c.species));
     prepareDestination(d);
-    d.expedition = null;
+    d.encounter = 2;
+    d.journey!.victories = 2;
+    d.expedition = { pack: ["emberback", "pollenmoth", "mossguard"], recruit: null, lastRoom: null };
   });
   return accept(s, { type: "beginBattle" });
 }
@@ -211,11 +213,11 @@ export function feedbackBattle() {
   const battle = accept(
     produce(teamRun(42, ["mossguard", "emberback", "prismram"]), (game) => {
       prepareDestination(game);
-      game.encounter = 1;
+      game.encounter = 2;
       game.journey!.victories = game.encounter;
-      game.journey!.victories = 1;
+      game.journey!.victories = 2;
       game.battle = null;
-      game.expedition = null;
+      game.expedition = { pack: ["prismram", "pollenmoth", "mossguard"], recruit: null, lastRoom: null };
     }),
     { type: "beginBattle" },
   );

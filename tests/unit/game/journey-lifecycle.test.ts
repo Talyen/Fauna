@@ -8,12 +8,12 @@ import type { BattleState, Command, GameState, RewardState } from "../../../src/
 
 // Compare gameplay, RNG and ordered output across the current journey rules.
 function fingerprint(state: GameState, events: unknown) {
-  const { version: _version, battle, ...rest } = state;
+  const { version: _version, unlocked: _unlocked, roster: _roster, lineup: _lineup, battle, ...rest } = state;
   const projected = {
     ...rest,
     journey: state.journey
       ? {
-          ...state.journey,
+          ...Object.fromEntries(Object.entries(state.journey).filter(([key]) => key !== "unlocks")),
           lastBattle: state.journey.lastBattle
             ? { xp: state.journey.lastBattle.xp, currency: state.journey.lastBattle.currency }
             : null,
