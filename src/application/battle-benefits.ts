@@ -6,7 +6,7 @@ import { actionValue, cardCost, physicalBonus } from "../game/ability-rules";
 import { armoredDamage, blockPayment } from "../game/combat/damage-values";
 import { healingValue, restoration, overflowBlock } from "../game/combat/healing-values";
 import type { AvailablePlay } from "../game/play-queries";
-import type { BattleState, Creature } from "../game/types";
+import type { BattleState, Creature, Enemy } from "../game/types";
 
 export type SupportPriority =
   | "none"
@@ -66,7 +66,7 @@ export function battleBenefitFacts(state: BattleState) {
       (state.battle.cardsPlayedThisTurn === 2 &&
         state.boons.includes("resonant-chimes") &&
         hasTalent(state, "mana.arcane-mending")));
-  let enemies: ReturnType<typeof battlefield> | undefined;
+  let enemies: Enemy[] | undefined;
   return {
     injuredAllies,
     healingOnPlay,
