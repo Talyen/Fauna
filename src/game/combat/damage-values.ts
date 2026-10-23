@@ -4,7 +4,6 @@ import { physicalBonus } from "../ability-rules";
 import type { DamageType } from "../content";
 import type { GameState } from "../types";
 import type { DamagePacket } from "./policy";
-import { packetPolicy } from "./policy";
 import { maximumHealth, type Combatant } from "./state";
 
 /** Current attack facts only; no RNG, flag consumption, events or child reactions. */
@@ -15,8 +14,8 @@ export function modifiedDamage(
   value: number,
   type: DamageType,
   options: DamagePacket,
+  attack: boolean,
 ) {
-  const { attack } = packetPolicy(options);
   const alliedSource = !isEnemy(source),
     alliedTarget = !isEnemy(target);
   const stats = target.combat!;

@@ -7,7 +7,6 @@ export {
   ensureCombat,
   controlled,
   mostInjured,
-  hasHarmfulEffects,
   sharedDodgeChance,
   dodgeChance,
   grantTemporaryDodge,

@@ -1,6 +1,7 @@
+import { MAX_BATTLE_CARDS } from "../game/card-zones";
 import { battlefield } from "../game/battlefield";
 import { hasTalent } from "../game/progression";
-import { hasHarmfulEffects, mostInjured } from "../game/combat/state";
+import { hasHarmfulEffects, mostInjured, STACK_LIMIT } from "../game/combat/state";
 import { actionValue, cardCost, physicalBonus } from "../game/ability-rules";
 import { armoredDamage, blockPayment } from "../game/combat/damage-values";
 import { healingValue, restoration, overflowBlock } from "../game/combat/healing-values";
@@ -17,6 +18,7 @@ export type SupportPriority =
   | "healing"
   | "utility"
   | "standardUtility"
+  | "controlRemoval"
   | "redraw"
   | "defensePurge"
   | "purge";
@@ -37,7 +39,7 @@ export type BattleBenefit = { targetId?: string; reason?: string } & (
 function healBenefit(state: BattleState, ally: Creature, value: number, play: AvailablePlay) {
   const { gain, excess } = restoration(ally, healingValue(state, ally, value));
   const overflow = hasTalent(state, "health.overflow")
-    ? Math.min(overflowBlock(excess), 1_000_000 - ally.block)
+    ? Math.min(overflowBlock(excess), STACK_LIMIT - ally.block)
     : 0;
   const cleanses =
     hasHarmfulEffects(ally) &&
@@ -80,7 +82,7 @@ export function battleBenefits(state: BattleState, play: AvailablePlay): BattleB
       );
     }
     case "createPearls":
-      return support(state.cards.length < 256 ? "resource" : "none");
+      return support(state.cards.length < MAX_BATTLE_CARDS ? "resource" : "none");
     case "pearl":
       return support("pearl");
     case "attack": {
@@ -194,9 +196,9 @@ export function battleBenefits(state: BattleState, play: AvailablePlay): BattleB
         Math.min(value, state.battle.maxMana - state.battle.mana + cardCost(card, state)),
       );
     case "teamClearBlind":
-      return support("standardUtility", allies.filter((unit) => unit.combat?.blind).length * 100);
+      return support("controlRemoval", allies.filter((unit) => unit.combat?.blind).length);
     case "teamThaw":
-      return support("standardUtility", allies.filter((unit) => (unit.combat?.freeze ?? 0) > 0).length * 100);
+      return support("controlRemoval", allies.filter((unit) => (unit.combat?.freeze ?? 0) > 0).length);
     case "recover": {
       const useful = state.battle.discard.some((id) => {
         const card = state.cards.find((entry) => entry.id === id)!;
@@ -249,8 +251,8 @@ export function battleBenefits(state: BattleState, play: AvailablePlay): BattleB
       const useful = allies.reduce(
         (sum, ally) =>
           sum +
-          Math.min(value, 1_000_000 - ally.block) +
-          (def.effect === "teamProtection" ? Math.min(value, 1_000_000 - (ally.combat?.thorns ?? 0)) : 0),
+          Math.min(value, STACK_LIMIT - ally.block) +
+          (def.effect === "teamProtection" ? Math.min(value, STACK_LIMIT - (ally.combat?.thorns ?? 0)) : 0),
         0,
       );
       return support(useful > 0 ? "protection" : "none", useful);
@@ -260,7 +262,7 @@ export function battleBenefits(state: BattleState, play: AvailablePlay): BattleB
       return support(useful > 0 ? "utility" : "none", useful);
     }
     case "waterThorns": {
-      const useful = Math.min(value, 1_000_000 - (actor.combat?.waterThorns ?? 0));
+      const useful = Math.min(value, STACK_LIMIT - (actor.combat?.waterThorns ?? 0));
       return support(useful > 0 ? "protection" : "none", useful);
     }
     case "dodge":
@@ -270,7 +272,7 @@ export function battleBenefits(state: BattleState, play: AvailablePlay): BattleB
       return support("utility");
     case "guard":
       return (def.target === "self" ? [actor] : allies).flatMap((ally) => {
-        const useful = Math.min(value, 1_000_000 - ally.block);
+        const useful = Math.min(value, STACK_LIMIT - ally.block);
         return support(
           healing > 0 ? "healing" : useful > 0 ? "protection" : "none",
           healing > 0 ? healing : useful,

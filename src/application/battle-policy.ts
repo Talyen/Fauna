@@ -23,6 +23,7 @@ const priorities = {
   healing: 3000,
   utility: 150,
   standardUtility: 200,
+  controlRemoval: 200,
   redraw: 190,
   defensePurge: 1700,
   purge: 160,
@@ -47,7 +48,10 @@ function ordinaryHitScore(hit: OrdinaryHit) {
   return Math.max(progress, hit.usefulExtras ? priorities.standardUtility : 0);
 }
 function benefitScore(benefit: BattleBenefit) {
-  if (benefit.kind === "support") return priorities[benefit.priority] + benefit.amount;
+  if (benefit.kind === "support") {
+    const unitValue = benefit.priority === "controlRemoval" ? 100 : 1;
+    return priorities[benefit.priority] + benefit.amount * unitValue;
+  }
   const sum = benefit.groups.reduce(
     (total, group) => total + group.reduce((sum, hit) => sum + ordinaryHitScore(hit), 0) / group.length,
     0,

@@ -9,7 +9,7 @@ const id = z.string().min(1).max(120);
 const speciesId = z.enum(SPECIES.map((entry) => entry.id));
 const xp = z.partialRecord(z.enum(KEYWORDS), natural);
 const boonId = z.enum(BOONS.map((r) => r.id));
-export const combatStateSchema = z
+const combatStateSchema = z
   .object({
     controlTurns: z.number().int().min(0).max(2),
     rhythm: z.number().int().min(0).max(70),

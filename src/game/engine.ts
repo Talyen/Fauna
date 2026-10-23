@@ -13,7 +13,6 @@ import {
   canBuyTalent,
 } from "./progression";
 import { ensureCombat, gainMana, restoreHealth } from "./combat/index";
-import { battlefield } from "./battlefield";
 import { courtRemembers, removeDepartedMinions } from "./combat/legendary";
 import { fillHand, recycleDiscard } from "./card-zones";
 import { actionValue, cardCost } from "./ability-rules";

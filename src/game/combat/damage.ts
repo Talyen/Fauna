@@ -220,7 +220,7 @@ export function* resolveHit(
     state.battle.meteoriteUsed = true;
     damage *= 2;
   }
-  damage = modifiedDamage(state, source, target, damage, type, options);
+  damage = modifiedDamage(state, source, target, damage, type, options, attack);
   const riposte = direct && alliedSource && type === "physical" && ensureCombat(source).riposte;
   const criticalChance =
     0.05 + ((options.origin === "ability" ? options.criticalBonus : undefined) ?? 0) / 100;
@@ -258,7 +258,7 @@ export function* resolveHit(
   const facts: HitPayment = { damage, lost, blocked, blockSpent, depletedBlock, critical };
   yield* blockDepletionRewards(context, facts, attack);
   publishHit(context, facts, options);
-  yield* damageRewards(context, facts, options);
+  yield* damageRewards(context, facts, policy);
   if (nextPhysical > 0 && source.health > 0)
     yield* reaction("hit", state, source, target, nextPhysical, "physical", events, { origin: "proc" });
   if (direct && alliedSource && !alliedTarget && source.health > 0 && type === "water") {

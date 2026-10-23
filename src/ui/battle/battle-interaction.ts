@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useReducer, useRef, useState, type RefObject } from "react";
+import { useEffect, useLayoutEffect, useReducer, useRef, useState, type RefObject } from "react";
 import { battlefield } from "../../game/battlefield";
 import { chosenRecipients } from "../../game/play-queries";
 import { cardTargeting } from "../../game/card-rules";
@@ -52,7 +52,7 @@ function selection(state: Selection, action: SelectionAction): Selection {
 export function useBattleInteraction({
   game,
   send,
-  controls,
+  controls: controlsRef,
   navigateFocus,
   clearSelection,
   board,
@@ -122,11 +122,11 @@ export function useBattleInteraction({
       returnFocus(cards[index] ?? board.current?.querySelector<HTMLElement>(".end-turn") ?? null);
     }
   }, [game.revision, selected, board]);
-  const cancel = useCallback(() => {
+  const cancel = () => {
     const opener = board.current?.querySelector<HTMLElement>(`[data-card-id="${selected}"]`) ?? null;
     update({ type: "cancel" });
     if (navigateFocus) returnFocus(opener);
-  }, [selected, navigateFocus, board]);
+  };
   useEffect(() => {
     const root = board.current;
     const clear = (event: PointerEvent) => {
@@ -163,9 +163,9 @@ export function useBattleInteraction({
     return false;
   };
   useLayoutEffect(() => {
-    controls.current = handle;
+    controlsRef.current = handle;
     return () => {
-      controls.current = null;
+      controlsRef.current = null;
     };
   });
   useLayoutEffect(() => {

@@ -6,7 +6,7 @@ import { hasTalent, creaturePassive } from "../progression";
 import type { DamageType } from "../content";
 import type { GameEvent, GameState } from "../types";
 import { ensureCombat, unitName, STACK_LIMIT, gainGold, type Combatant } from "./state";
-import { packetPolicy, type DamagePacket } from "./policy";
+import type { packetPolicy, DamagePacket } from "./policy";
 import { reaction, type Resolution } from "./operations";
 import { reducePeriodicStacks, deferLeech, detonateBleedStacks, bleedPayments } from "./status-state";
 
@@ -112,10 +112,9 @@ export function publishHit(
 export function* damageRewards(
   { state, source, target, type, events }: HitContext,
   { damage, lost }: HitPayment,
-  options: DamagePacket,
+  policy: ReturnType<typeof packetPolicy>,
 ): Resolution<void> {
-  const policy = packetPolicy(options),
-    { attack } = policy;
+  const { attack } = policy;
   const alliedSource = !isEnemy(source),
     alliedTarget = !isEnemy(target),
     stats = ensureCombat(target);

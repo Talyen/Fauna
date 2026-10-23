@@ -43,8 +43,8 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
   }
   for (const status of ["burn", "poison", "bleed"] as const) {
     if (unit.health <= 0) break;
+    if (stats[status] <= 0) continue;
     const { amount, sourceId, payouts } = periodicTick(stats, status);
-    if (amount <= 0) continue;
     // Ticks bypass Block and do not reapply their own buildup.
     const source =
       [...battlefield(state, "player"), ...state.reserves, ...battlefield(state, "enemy")].find(

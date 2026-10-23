@@ -2,7 +2,7 @@ import type { KeywordId } from "./keywords";
 import type { SpeciesId, DamageType, BoonId } from "./content";
 import type { Keyword } from "./progression";
 
-export type CombatState = import("zod").infer<typeof import("./state-schema").combatStateSchema>;
+export type CombatState = NonNullable<GameState["team"][number]["combat"]>;
 export interface Creature {
   id: string;
   species: SpeciesId;
