@@ -22,8 +22,9 @@ export function ManaCrystals({
     <Button
       style={
         {
-          "--mana-full-image": `url("${assetUrl("mana.full")}")`,
-          "--mana-empty-image": `url("${assetUrl("mana.empty")}")`,
+          // Custom-property URLs otherwise resolve relative to the bundled stylesheet.
+          "--mana-full-image": `url("${new URL(assetUrl("mana.full"), document.baseURI).href}")`,
+          "--mana-empty-image": `url("${new URL(assetUrl("mana.empty"), document.baseURI).href}")`,
         } as CSSProperties
       }
       variant="ghost"

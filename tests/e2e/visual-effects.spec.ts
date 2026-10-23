@@ -42,6 +42,14 @@ test("keyword effects follow battle hover, Death's Door, inspection, settings an
   ).toBe("#a78bfa");
   await expect(page.locator(".effect-backdrop")).toHaveAttribute("data-active-palette", keywords!);
   await expect(page.locator(".mana-full").first()).toHaveCSS("background-image", /prepared\/objects/);
+  await page
+    .locator(".mana-full")
+    .first()
+    .evaluate(async (element) => {
+      const image = new Image();
+      image.src = getComputedStyle(element).backgroundImage.slice(5, -2);
+      await image.decode();
+    });
   await captureScreen(page, { path: "effects-battle.png" });
   await page.getByRole("button", { name: "Open menu", exact: true }).click();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
@@ -66,7 +74,7 @@ test("keyword effects follow battle hover, Death's Door, inspection, settings an
 });
 
 test("inspection owns the opaque backdrop and restores the underlying recruit palette", async ({ page }) => {
-  await seed(page(winBattle()));
+  await seed(page, winBattle());
   await page.bringToFront();
   await resume(page);
   await page.getByRole("button", { name: "Continue", exact: true }).click();
