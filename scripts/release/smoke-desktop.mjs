@@ -17,13 +17,14 @@ try {
         args: ["."],
         env: isolatedDesktopEnvironment(userData),
       });
-  // Resolve the real packaged native API without initializing Steam or requiring an account.
-  await app.evaluate(({ app }) => {
-    const { createRequire } = process.getBuiltinModule("module");
-    const require = createRequire(`${app.getAppPath()}/package.json`);
-    const overlayModule = `${app.getAppPath()}/desktop/steam-overlay.cjs`;
-    require(overlayModule).loadOverlayApi();
-  });
+  // Packaged SDK exports are bound by verify-package; its renderer-only launcher has no main inspector.
+  if (!packaged)
+    await app.evaluate(({ app }) => {
+      const { createRequire } = process.getBuiltinModule("module");
+      const require = createRequire(`${app.getAppPath()}/package.json`);
+      const overlayModule = `${app.getAppPath()}/desktop/steam-overlay.cjs`;
+      require(overlayModule).loadOverlayApi();
+    });
   const window = await app.firstWindow();
   window.setDefaultTimeout(20000);
   await window.getByRole("button", { name: "Collection", exact: true }).click({ timeout: 60000 });

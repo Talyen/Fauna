@@ -1,9 +1,8 @@
 const path = require("node:path");
 
 /** Load only the flat API; steamworks.js runs ordinary callbacks in the separate Cloud process. */
-function loadOverlayApi() {
+function loadOverlayApi(directory = path.dirname(require.resolve("steamworks.js"))) {
   const koffi = require("koffi");
-  const directory = path.dirname(require.resolve("steamworks.js"));
   const libraries = /** @type {Partial<Record<NodeJS.Platform, string>>} */ ({
     win32: "dist/win64/steam_api64.dll",
     darwin: "dist/osx/libsteam_api.dylib",

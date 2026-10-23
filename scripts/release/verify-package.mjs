@@ -1,5 +1,6 @@
 import { getCurrentFuseWire, FuseState } from "@electron/fuses";
 import hardening from "../../desktop/after-pack.cjs";
+import { loadOverlayApi } from "../../desktop/steam-overlay.cjs";
 import { execFileSync } from "node:child_process";
 import { readFileSync, statSync, readdirSync } from "node:fs";
 import { createHash } from "node:crypto";
@@ -139,6 +140,8 @@ export async function verifyPackage(directory = path.join(ROOT, "release/win-unp
   if (process.platform === "win32" && !ffiBytes.equals(readFileSync(path.join(ROOT, ffiNative))))
     throw new Error("Packaged Steam callback binding differs.");
   if (process.platform === "win32") {
+    // Bind the shipped SDK exports without initializing Steam or opening a main-process inspector.
+    loadOverlayApi(path.resolve(nativeRoot, "../.."));
     const details = JSON.parse(
       execFileSync(
         "powershell.exe",
