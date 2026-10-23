@@ -8,6 +8,6 @@ Swap sits beside End turn; reserves remain hidden on the battlefield. The center
 
 The local preview replaces card definitions in place while preserving card IDs and hand/draw/discard positions. Swaps are free; health and combat data stay with the creature. This is not validation of production save, knockout circulation, passive, or defeat rules.
 
-This sample retains the earlier free-swap and editable-lineup direction. Production at `/` now changes formation only through required knockout replacements and abilities, persists that formation into later battles, and supports solo Legendaries. Its required replacement dialog cannot be dismissed while living backup remain. See [current journey rules](../../Docs/EXPEDITION_DESIGN.md#roster-and-battles) and [UI rules](../../Docs/UI.md#other-screens); this frozen sample does not validate those flows.
+This sample retains the earlier free-swap/editable-lineup direction. Use [journey rules](../../Docs/EXPEDITION_DESIGN.md#roster-and-battles) and [required replacement](../../Docs/ui/screens.md#encounter-and-required-replacement) for current behavior; this frozen study does not validate those flows.
 
 Reviewed in Chromium at 1920×1080 and 1280×800, including selection in either order, repeated swaps, replacing a knocked-out creature, Escape dismissal, focus restoration, and unchanged Mana. Native desktop, Windows, physical controller, Steam client, and Steam Deck were not verified for this sample.

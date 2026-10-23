@@ -16,6 +16,4 @@ Water is a direct damage and talent category with its own blue token, distinct f
 
 ## Artwork provenance and validation record
 
-These retained notes record source selection and verification at implementation time; they do not establish current rendered acceptance
-
 The unchanged portrait and three action PNGs come from the user's [Coralcurl Drive folder](https://drive.google.com/drive/folders/19NVnBIdFleyfmnqCTyg4GeSiQkMbI2TE). The manifest records original URLs, and Water's talent artwork reuses Reef Jet. Water currently uses the existing generic impact audio. Source artwork was visually inspected; rendered gameplay and balance acceptance remain pending.

@@ -1,6 +1,6 @@
 # Creature inspection comparison
 
-Historical comparison: production now uses centered creature artwork above a wider centered row of native portrait abilities, the creature name, active passive and five progress stars; action cycling has no Previous/Next buttons. Battle has no pinned inspection. See [current inspection rules](../../Docs/UI.md#other-screens).
+Historical stacked/side-by-side comparison. Dimensions, cycling controls and enemy views below describe this fixture; use the [inspection specification](../../Docs/ui/screens.md#creature-and-action-inspection) for current behavior.
 
 Open `/design/inspection/index.html` on the development server. Use the layout tabs to compare A (stacked) and B (side-by-side). Both use identical content, a 320×240 creature image, and three 96×128 action thumbnails. The layout tabs and Enemy switch are review controls, not proposed game UI. Add `?layout=side` to open B or `&enemy=1` to show the separately labeled Species kit.
 

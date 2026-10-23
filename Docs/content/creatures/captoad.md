@@ -14,6 +14,4 @@ Mushroom Guard heals only its actor through ordinary card-healing rules. Bogboun
 
 ## Artwork provenance and validation record
 
-These retained notes record source selection and verification at implementation time; they do not establish current rendered acceptance
-
-The unchanged portrait and three ability PNGs come from the user's [Captoad Drive folder](https://drive.google.com/drive/folders/16zyEo4h2IGJGun_C1VqTCqV3U3-HMdGI). Each source URL is recorded in the manifest; native 4:3 and 3:4 compositions are retained. Prepared output checks do not establish rendered acceptance. Player-facing vocabulary uses Backup in place of Reserves; internal save fields retain their existing names.
+The unchanged portrait and three ability PNGs come from the user's [Captoad Drive folder](https://drive.google.com/drive/folders/16zyEo4h2IGJGun_C1VqTCqV3U3-HMdGI). Each source URL is recorded in the manifest; native 4:3 and 3:4 compositions are retained. Player-facing vocabulary uses Backup in place of Reserves; internal save fields retain their existing names.

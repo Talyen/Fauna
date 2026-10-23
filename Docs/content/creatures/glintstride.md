@@ -14,6 +14,4 @@ Glintstride has 24 Health and three abilities, each costing 1 Mana:
 
 ## Artwork provenance and validation record
 
-These retained notes record source selection and verification at implementation time; they do not establish current rendered acceptance
-
-The unchanged creature portrait and three action PNGs come from the user's [Glintstride Drive folder](https://drive.google.com/drive/folders/12K2vU8w7JeWpr0RWUATMbZ56yTsNvTaP). Source URLs and rights notes are recorded in the asset manifest. Prepared media retains the native 4:3 creature and 3:4 action compositions. Source artwork was visually inspected; rendered gameplay and balance acceptance remain pending.
+The unchanged creature portrait and three action PNGs come from the user's [Glintstride Drive folder](https://drive.google.com/drive/folders/12K2vU8w7JeWpr0RWUATMbZ56yTsNvTaP). Source URLs and rights notes are recorded in the asset manifest. Source artwork was visually inspected; rendered gameplay and balance acceptance remain pending.

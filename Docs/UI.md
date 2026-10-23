@@ -1,10 +1,18 @@
-# Fauna design system
+# UI contracts
 
 Fauna's screens are game surfaces. Show cards, decision-relevant state, and the actions required to play. The background uses Alchemy’s warm near-black canvas (`hsl(30 10% 3%)`). No promotional copy, decorative chrome, permanent save-success indicators, or visible combat log.
 
 Every screen centers its complete content composition horizontally and vertically within the available area after page gutters and gameplay feedback. The shared Screen stage owns that area; headings, content groups, pagination and primary actions remain together in the bounded main surface. Preserve paired numeric alignment, readable rule paragraphs, non-scrolling tabs, and battle controls whose positions convey meaning.
 
-Read shared rules here and only the affected [battle](ui/battle.md) or [screen specification](ui/screens.md) section. Navigation and progression remain in their existing owners.
+Read the shared rules here and the affected screen section. Each guide owns a different concern:
+
+| Concern                           | Guide                                                           |
+| --------------------------------- | --------------------------------------------------------------- |
+| Screen composition and disclosure | [Battle](ui/battle.md), [other screens](ui/screens.md)          |
+| Navigation, Back and menu actions | [Menu design](MENU_DESIGN.md)                                   |
+| Gameplay and progression          | [Journey design](EXPEDITION_DESIGN.md), [Keywords](KEYWORDS.md) |
+| Implementation entrypoints        | [Design system](DESIGN_SYSTEM.md)                               |
+| Visual evidence and acceptance    | [Required review](#required-review) below                       |
 
 ## Shared components and enforcement
 
@@ -18,19 +26,11 @@ ArtCard is the sole artwork surface: exactly one image. Battlefield health bars 
 
 Keywords in rule prose are semibold inline words in their semantic colors, with normal word spacing. They have no individual hover tooltip, click action or keyboard focus stop; definitions remain in the Glossary. Rules inside a surrounding hover/inspection tooltip retain this same plain-text treatment.
 
-## Battle composition
-
-See [battle composition](ui/battle.md#battle-composition) for the screen contract.
-
-## Other screens
-
-See [other screens](ui/screens.md#other-screens) for the screen contract.
-
 ## Recovery and persistent failures
 
 Recover transient failures automatically without interrupting play. Keep technical errors, save-success indicators, sync status, conflict choices and feature-specific retry controls out of player surfaces. Persistent failures that prevent saving or displaying the game receive one concise, accessible explanation of the player consequence; raw errors, paths and diagnostics remain internal. Keep ordinary gameplay rules, availability and outcomes clear.
 
-Recover automatically at the owning boundary. Try validated current-format saves and backups, retain competing progress before replacement, and continue locally when cloud access fails or exceeds the startup wait. Resolve divergent cloud heads automatically: prefer intact local progress; otherwise use the stable snapshot-ID order. Never combine currency, rewards or progression fields. If all development saves are invalid, continue with a fresh profile silently. Inaccessible storage allows in-memory play; do not rotate unknown local data until reads recover. Retry failed writes in the background using the latest committed state. Two consecutive write failures show a nonmodal notice asking the player to keep Fauna open while saving retries; a successful save of the latest state removes it. Exhausted startup read recovery shows the same notice while in-memory play remains available. Desktop close still drains admitted writes and makes one final retry before closing; do not add competing close or save orchestration in presentation.
+Recover automatically at the owning boundary. Use the [save and Cloud contracts](ARCHITECTURE.md#save-contract) for validated backups, conflict preservation and bounded offline startup. If all development saves are invalid, continue with a fresh profile silently. Inaccessible storage allows in-memory play; do not rotate unknown local data until reads recover. Retry failed writes in the background using the latest committed state. Two consecutive write failures show a nonmodal notice asking the player to keep Fauna open while saving retries; a successful save of the latest state removes it. Exhausted startup read recovery shows the same notice while in-memory play remains available. Desktop close still drains admitted writes and makes one final retry before closing; do not add competing close or save orchestration in presentation.
 
 Optional features retain their last usable state or fall back silently. Rendering failures remount presentation with bounded retry frequency while retaining the session; no commands or rewards are replayed. A neutral loading indicator covers brief recovery; after three render failures within the recovery window, show a brief explanation while bounded retries continue. Thirty seconds of successful rendering resets that window. Persistent storage failure cannot guarantee durable progress, and persistently broken content/rendering cannot guarantee playable output; hiding a message does not count as repairing the cause. CI must exercise recovery and verify the resulting player flow.
 
@@ -58,25 +58,40 @@ Mouse, W/A/S/D/Tab, and standard-mapped controller actions share the same comman
 
 The browser and shadcn/Radix own native Tab order, widget navigation, modal trapping and focus return. The game input adapter supplies controller actions and spatial navigation. Focus outlines, focus rings and focus-only hand lifts appear only during intentional keyboard/controller navigation or activation. Pointer movement, clicks or wheel scrolling remove them completely, including inside portaled dialogs. Automatic focus and Escape/B after pointer use do not enable them. A held stick cannot reclaim navigation after pointer/keyboard use until released. Escape and inspection shortcuts act once per key press. Background windows ignore game input; returning to the window or reconnecting a controller requires releasing held controller controls before they can act.
 
+## Shared control states and feedback
+
+| Surface      | Treatment                                                                                                                                                                                               |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Buttons      | Primary gold, destructive red, quiet controls neutral; press shrinks 2%, disabled 50%; busy text/spinner prevents repeated activation                                                                   |
+| Artwork      | Selection uses a 3px external gap and 2px ring; pointer hover never adds a second frame or thickens selection; unavailable/knockout opacity 45%, with grayscale for knockout                            |
+| Tabs         | Centered with 12px gaps/padding, neutral 2px boundaries and gold selection/hover borders; regular labels, no strip, no selected-hover change; panels switch instantly                                   |
+| Switches     | Gold/gray track, 150ms thumb travel, subtle hover brightening without growth                                                                                                                            |
+| Radios       | Gold outline/dot; hover brightens the existing outline; focus encloses circle and label                                                                                                                 |
+| Sliders      | Gold/gray track, ivory thumb, thin hover border and thicker drag border; whole-slider focus, immediate values in 10-point steps                                                                         |
+| Dialogs      | Near-black surface, neutral border, 80% black backdrop and 150ms opacity-only entry/exit; closing surfaces are inert and hidden from assistive technology; outgoing controls cannot navigate or confirm |
+| Progress     | Rounded 8px track, 150ms fill changes; forecasts update immediately                                                                                                                                     |
+| Status icons | Fixed catalog order, names/counts in tooltips and accessible descriptions; 200ms entrance/pulse, 150ms removal; zero removes without an extra pulse                                                     |
+| Empty state  | Centered muted 24px icon and accessible label; no visible filler, action or tooltip                                                                                                                     |
+
+Ordinary loading indicators wait 200ms; ready content never waits for them. [Startup](ui/screens.md#startup-loading) has its own deliberate splash duration. Menu/settings activation uses a quiet prepared click; hover/focus stay silent and rejection retains its denial cue. Audio unlocks on interaction, respects volume/mute preferences and never controls gameplay. Listening approval belongs to the media evidence.
+
+Navigation crossfades decorative inert snapshots over 150ms, or 250ms into battle, without duplicating IDs, effects or focus. Collection paging is instant. Result earnings count over 400ms; rewards arrive 75ms apart and level-up icons pulse to 110% over 250ms. Input finishes presentation and accepts the original action. Shared swap copies use opposing 32px arcs over 150ms and a 4px/150ms selected lift; slot ownership and dialog focus settle immediately.
+
+Reduced motion removes spatial effects and makes control transitions immediate, showing final results without replay. Pause, interruption and teardown revoke owned animations, timers and stale callbacks. [Battle presentation](ui/battle.md) owns combat-specific motion and feedback.
+
 ## Layout, artwork size and spacing
 
 The minimum supported renderer content viewport is **1280×720 CSS pixels**, independent of device pixel ratio. CI layout coverage uses 1280×720, 1280×800, 1920×1080, 2560×1080 and 3440×1440. Smaller windows are unsupported and are not review targets. Electron minimum outer bounds include the native frame, capped by the available work area; fullscreen and monitor changes reapply the display policy.
 
 The document, battle, artwork browsing, action surfaces and tooltips fit without scrolling. Glossary, Settings panels and help dialogs may use bounded vertical scrolling for secondary content. Mark each such region with `data-scroll-region`, `role="region"`, an accessible name and `tabIndex={0}`; use the shared `.secondary-scroll-region` style and retain visible navigation outside it. Mouse wheel, native keyboard scrolling and controller up/down must reach the complete contents; Back/Escape restores the originating screen. Horizontal scrolling and hidden inaccessible content remain defects. Other long content uses explicit pages with standard shadcn Buttons, accessible Previous/Next names and a page indicator. Collection remembers a page anchor per filter; other filtered pickers reset to page one. Resizing clamps page bounds and keeps the current item on a visible page where possible. Inspection returns to its opener on its original page.
 
-`tokens.css` owns preferred artwork dimensions: portrait 200×266⅔ and landscape 266⅔×200, with equal area. Battle fits creature artwork to the largest common size that clears both rows, readouts, target feedback and the hand; hand cards use the active portrait profile. Up to 900px viewport height, the shared short side is 180px (90%); up to 760px, it is 160px (80%). Larger displays retain the preferred sizes. Preserve artwork ratios, contain rendering and ArtCard ownership. Reflow before reducing artwork; paginate when the minimum size cannot fit. Never automatically scale typography, control hit areas or the whole interface. Text enlargement remains an explicit player preference. The talents overview packs at most five categories per row around their artwork widths with 12px column gaps (currently three centered rows of five). Its portrait artwork grows without a fixed cap to the largest size that fits both the row width and remaining height, reserving full-size category names, available-point labels and gaps.
+`tokens.css` owns preferred artwork dimensions: portrait 200×266⅔ and landscape 266⅔×200, with equal area. Battle fits creature artwork to the largest common size that clears both rows, readouts, target feedback and the hand; hand cards use the active portrait profile. Up to 900px viewport height, the shared short side is 180px (90%); up to 760px, it is 160px (80%). Larger displays retain the preferred sizes. Preserve artwork ratios, contain rendering and ArtCard ownership. Reflow before reducing artwork; paginate when the minimum size cannot fit. Never automatically scale typography, control hit areas or the whole interface. Text enlargement remains an explicit player preference. The [talents overview](ui/screens.md#talents) has a viewport-fitted artwork exception.
 
-Use 24px between screen sections and 12px between related items. Page gutters are 32px horizontally and 24px vertically. Dialogs reserve room for the close control. Screens reserve their actual remaining height after gameplay feedback. Collection reserves two artwork rows and a pagination slot. Its measured width resolves one to four columns independently of the current item count, with pagination outside the gallery. Deck, talent rows, passive tiers, owned Boons, Campfire and keyword earnings use bounded pages. Glossary uses one bounded scrolling reading region. Settings keeps native category tabs and may scroll long panel content within a named secondary region.
+Use 24px between screen sections and 12px between related items. Page gutters are 32px horizontally and 24px vertically. Dialogs reserve room for the close control. Screens reserve their actual remaining height after gameplay feedback. Screen-specific grid and reading-region rules belong to the [screen specifications](ui/screens.md).
 
 Battle-specific geometry follows the [battle layout](ui/battle.md#layout).
 
 The rendered layout assertion enforces scrolling scope and reachability; source syntax alone cannot establish whether a region fits. It checks document and nested overflow, viewport bounds, hidden clipping, hit areas and obscured controls, including portaled dialogs and tooltips. Approved secondary regions allow offscreen vertical content, with interaction tests exercising its reachability. It also checks screen content centering within its available stage and dialog centering within the viewport, with the pause dropdown aligned to its menu button. Screenshots pass that assertion before capture. Geometry checks are regression protection; rendered review still establishes readability and composition.
-
-## Startup loading
-
-The HTML shell shows an uppercase filling gold Fauna wordmark, independent blowing leaves and rotating preparation phrases before importing React. The same splash remains mounted through startup; React never restarts its animation. It lasts at least five seconds from navigation start, then fades over 180ms after the ready application commits. Reduced motion keeps the wordmark gold, hides leaves, stops phrase rotation and removes the dismissal fade while retaining the minimum duration. Saved text size applies before first paint.
-
-Startup validates content and loads the application session through their existing owners. Prepared menu/shared artwork and the saved journey's immediate screen are fetched and decoded in batches of four before reveal; remaining image artwork warms without gating play. Essential image references survive until the ready screen commits; deferred images are not retained as a whole-catalog decoded cache. Image/decode waits settle after 15 seconds and font waits after 10 seconds, with failures recorded in diagnostics. Presentation recovery retains the session and uses the existing neutral loading indicator without repeating startup.
 
 ## Tokens
 
@@ -84,14 +99,12 @@ Startup validates content and loads the application session through their existi
 
 The color policy rejects raw hexadecimal/function/named colors in player UI, direct Tailwind palette colors (including black/white and arbitrary hex colors), and literal colors in inline JSX styles. Checks inspect class/style contexts and leave player copy, IDs and unrelated metadata alone. Token-based inline values and measured geometry remain permitted. Palette changes belong in the token owner; contrast tests validate foreground/background role pairs. Use opacity/state variants of semantic utilities instead of inventing colors per component.
 
-- Typography: locally bundled Inter Variable, regular rules, medium controls, semibold names, tabular numbers. 16px rules/controls, 20px names, 24px screen headings, 14px secondary information. Inspection enlarges rules to 18px and names to 28px. Font license: `Docs/FONT-LICENSE.txt`.
+- Typography: locally bundled Inter Variable, regular rules, medium controls, semibold names, tabular numbers; names wrap without ellipsis and rules remain left-aligned. 16px rules/controls, 20px names, 24px screen headings, 14px secondary information. Inspection enlarges rules to 18px and names to 28px. Font license: `Docs/FONT-LICENSE.txt`.
 - Spacing: a 4px grid, using layout instead of decorative separators or panels.
 - Color: Alchemy's warm near-black canvas (`hsl(30 10% 3%)`), charcoal surfaces (`hsl(30 8% 6%)`), ivory text (`hsl(40 25% 88%)`), warm muted text (`hsl(35 12% 62%)`), subtle warm borders (`hsl(30 8% 16%)`), and gold (`#cd9b51`, with light, deep and pale roles). Shared semantic tokens own the palette; gameplay keyword identities remain unchanged. Gold marks primary actions, selection and focus. Knockout adds grayscale; affordability never prevents inspection.
-- Geometry: Apple-inspired smooth corners use native CSS `corner-shape: squircle` (a superellipse approximation, not an exact Figma 60% smoothing curve). Shared surfaces derive their radius from 22.37% of the measured shorter border-box side, bounded to 10–32px. Unmeasured controls use their 44px height; empty artwork slots use the shared artwork short side. Artwork, dialogs, tooltips, buttons and tabs share this rule; pills and circular controls remain fully rounded. Artwork images inset their radius by the border width; outer interaction frames expand it by their offset. Browsers without corner-shape support retain ordinary rounded corners. Semantic shadcn sm/md/lg/xl radii remain derived at 0.6/0.8/1/1.4 times the local base. No sharp visible surface corners or `rounded-none` overrides, thin borders, keyword-driven plasma, shine borders and short-label text shines follow the shared effects owner; other decorative shadows, glows and textures remain excluded (the external selection ring is an interaction indicator). Artwork has no UI scrim.
+- Geometry: shared smooth corners use native CSS `corner-shape: squircle` (a superellipse approximation). Shared surfaces derive their radius from 22.37% of the measured shorter border-box side, bounded to 10–32px. Unmeasured controls use their 44px height; empty artwork slots use the shared artwork short side. Artwork, dialogs, tooltips, buttons and tabs share this rule; pills and circular controls remain fully rounded. Artwork images inset their radius by the border width; outer interaction frames expand it by their offset. Browsers without corner-shape support retain ordinary rounded corners. Semantic shadcn sm/md/lg/xl radii remain derived at 0.6/0.8/1/1.4 times the local base. No sharp visible corners or `rounded-none` overrides. Thin borders, keyword plasma, shine borders and short-label shines follow the shared effects owner; other decorative shadows, glows and textures remain excluded. Artwork has no UI scrim; external selection rings remain interaction indicators.
 - Motion: 150ms general transitions, with the shared hover and tooltip timings above; respect reduced motion. Gameplay commits before visual feedback and input never waits on animations.
-- Icons: Lucide, with accessible names and immediate hover/focus details where applicable. Status effects show icons only; their counts and names live in tooltips.
-
-The hand shows at most six playable cards. Extra draws remain entirely hidden in an unplayable buffer, with no count, controls or inspection view. Playing a card fills the open slot from the buffer in draw order. Ending the turn discards the visible hand and retains the buffer.
+- Icons: Lucide, normally 20px within 44px hit areas; compact header exceptions belong to the screen specification. Use accessible names and immediate hover/focus details where applicable. Status effects show icons only; their counts and names live in tooltips.
 
 ## Combat vocabulary
 
@@ -113,25 +126,17 @@ Shared keyword colors match Alchemy's catalog base colors, including darker Pois
 
 Types are content metadata, carried on damage presentation events. Enemy types derive from the resolved species ability. Burn, Poison, Bleed, Stun and Freeze packets use the combat rules in [Keywords](KEYWORDS.md). Fire, Ice, Lightning and Healing are not separate keyword identities.
 
-Use shadcn/ui for dialogs, tooltips, menus, sliders, and shared controls, composing gameplay cards from the same primitives and tokens. Gamepad navigation remains an application responsibility and must be verified through these compositions. Adopting a library is not a reason to add more controls or containers.
-
 ## Keyword visual effects
 
 `src/ui/shared/effects/` owns Alchemy-derived WebGL plasma, Canvas 2D rising embers, CSS masked border shine and short-label text shine. Keyword palettes resolve through `tokens.css`; shared keywords use Alchemy palettes (Holy maps to Light and Consume is violet). Fauna-only keywords retain their primary identities with darker secondary stops. Visual keyword extraction follows displayed rules and aliases, independently of progression categories and Mana costs. Unknown species do not expose a palette.
 
+Action/Boon borders use every distinct keyword in displayed effect text, including aliases. Creature artwork reveals its kit palette on hover or intentional focus. Unavailable actions gain no availability shine, while legitimate inspection still supplies a palette.
+
 Plasma uses the first two distinct keywords, or one keyword's light/deep pair; keyword-less content uses neutral Physical. Single-keyword borders use light/deep/light; multiple keywords form a primary-color loop. Text shines use at most three keyword colors with faded stops and a white highlight; ordinary rules retain solid keyword colors. Artwork ratios, squircle corners, focus outlines, selection rings and target feedback remain independent.
 
-The mounted app owns one active backdrop. Scoped hover and intentional keyboard/controller focus override detail/selection baselines, then screen baselines. Hidden screens, closing dialogs and transition snapshots cannot own a source. Inspection supplies a host inside its opaque backdrop, with transparent inspection content so the same effects remain visible behind the artwork and rules. Available talents and the menu's available-points action use attention shine; living creatures at Death's Door use the urgent red frame. Settings, unlocks, selected talent categories, Collection details and journey results supply contextual baselines.
+The mounted app owns one active backdrop. Scoped hover and intentional keyboard/controller focus override detail/selection baselines, then screen baselines. Hidden screens, closing dialogs and transition snapshots cannot own a source. Inspection supplies a host inside its opaque backdrop, with transparent inspection content so the same effects remain visible behind the artwork and rules. Available talents and the menu's available-points action use attention shine; living creatures at Death's Door use the urgent red frame. Settings, selected talent categories, Collection details and journey results supply contextual baselines.
 
-Settings → Display exposes Background Glow and Background Particles, each 0–100% with 100% defaults. Zero removes that renderer; particles change opacity rather than density. Preferences are local to the device, independent of saves and Cloud. Reduced motion hides moving backgrounds and freezes shine without changing saved intensity. Unfocused/hidden windows park their renderers. Missing WebGL uses static radial decoration and never blocks play. Ambient ember colors follow the screen, not hovered keywords: 40 gold embers normally, 80 warmer embers in battle with stronger Boss opacity, and warm Campfire embers; starter selection has no particles.
-
-## Floating combat feedback
-
-See [floating combat feedback](ui/battle.md#floating-combat-feedback) for the screen contract.
-
-## Combat movement and sound
-
-See [combat movement and sound](ui/battle.md#combat-movement-and-sound) for the screen contract.
+The [Display settings](ui/screens.md#settings) own intensity preferences. Zero intensity removes its renderer; particles change opacity rather than density. Reduced motion hides moving backgrounds and freezes shine without changing saved intensity. Unfocused/hidden windows park their renderers. Missing WebGL uses static radial decoration and never blocks play. Ambient ember colors follow the screen, not hovered keywords: 40 gold embers normally, 80 warmer embers in battle with stronger Boss opacity, and warm Campfire embers; starter selection has no particles.
 
 ## Required review
 
@@ -163,34 +168,6 @@ npm run capture:task -- --scenario battle --label after
 Keep gameplay state, input and motion conditions constant for comparisons. Captures check shared layout assertions and prepare standard review conditions; inspect the images and exercise changed interactions. Additional states are required only when directly implicated by the change. Geometry assertions and CI screenshots alone cannot establish visual quality.
 
 CI covers the wider viewport, text, motion and exceptional-state matrix. Report only relevant boundaries: browser controller simulation, native desktop, Windows packaging, physical controller, Steam client and Steam Deck remain separate facts.
-
-## Battle interaction decisions
-
-See [battle interaction decisions](ui/battle.md#battle-interaction-decisions) for the screen contract.
-
-## Collection and audio settings
-
-See [collection and audio settings](ui/screens.md#collection-and-audio-settings) for the screen contract.
-
-## Piles, effects and Campfire
-
-See [piles, effects and campfire](ui/screens.md#piles-effects-and-campfire) for the screen contract.
-
-## Support visits and platform settings
-
-See [support visits and platform settings](ui/screens.md#support-visits-and-platform-settings) for the screen contract.
-
-## Shared implementation
-
-[Design system](DESIGN_SYSTEM.md) maps accepted decisions to shared primitives, tokens and presentation owners, records enforcement and remaining validation. Screen styles own layout; control interaction states belong in the shared shadcn skin.
-
-## Hand transfers
-
-See [hand transfers](ui/battle.md#hand-transfers) for the screen contract.
-
-## Adaptive browsing and effect borders
-
-See [adaptive browsing and effect borders](ui/screens.md#adaptive-browsing-and-effect-borders) for the screen contract.
 
 ## Shared layout recipes
 
