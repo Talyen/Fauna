@@ -14,4 +14,4 @@ Dawn Cry removes one harmful category from each living deployed ally through ord
 
 ## Artwork provenance and validation record
 
-The original landscape portrait (`03.png`) and Dawn Cry, Sunwing Sweep and Morning Bloom action PNGs come from the user's [Dawncall Drive folder](https://drive.google.com/drive/folders/1yPgufTCHVyQTjXPWwlGwkGz0H7k38EtR). Unchanged originals live in `public/art/dawncall/`; the manifest records each original URL and the shared prepared-media pipeline supplies lossless WebP derivatives. Source artwork was visually inspected; rendered gameplay and balance acceptance remain pending.
+Source: [Dawncall Drive folder](https://drive.google.com/drive/folders/1yPgufTCHVyQTjXPWwlGwkGz0H7k38EtR). Portrait: `03.png`; originals: `public/art/dawncall/`. Source inspected; rendered gameplay and balance acceptance were pending.

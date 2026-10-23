@@ -34,7 +34,9 @@ The [Legendary battle](references/memento-battle-1920.png), [full-roster Swap](r
 
 ## Tournelle and required replacements
 
-The [Tournelle creature reference](../../Docs/content/creatures/tournelle.md#rendered-review) links focused Collection, battle, rank and knockout-replacement captures. These document implementation of the user's selected kit and unchanged Drive artwork, including removal of voluntary Swap and Lineup controls. The [evidence record](references/tournelle-evidence.json) records viewport/input coverage and limits
+The user's selected kit and unchanged Drive artwork are documented in the [creature reference](../../Docs/content/creatures/tournelle.md). This implementation also removed voluntary Swap and Lineup controls.
+
+Focused Chromium review inspected the unchanged artwork in [Collection at 1280×720 with 125% text](references/tournelle-collection-1280.png), [battle at 1920×1080](references/tournelle-kit-1920.png), [required replacement](references/tournelle-replacement-1280.png), [four Legendary backups](references/tournelle-legendary-1280.png) and [Gallantry's final tier](references/tournelle-rank-five-1280.png). The [evidence record](references/tournelle-evidence.json) records conditions and limits. Whole-screen review found readable, uncropped artwork and reachable choices without overflow. Keyboard, mouse and standard-mapped controller simulation covered replacement and focus return; successive choices survive reload.
 
 ## Creature inspection and recruitment
 
@@ -61,3 +63,13 @@ Recruit commits Collection progress before this screen. The original roster is t
 Rendered implementation review used the focused `recruit-replacement` and `recruit-team-preview` scenarios at 1280×720 with 125% text and 1920×1080 with default text, plus 1280×1080 with 125% text. All five creatures and Confirm remain visible without scrolling. Task-local evidence is retained under `reports/review/recruit-team-final-d41a2ccf-0d4d-409b-9f53-d21e68948ebc`, `reports/review/recruit-team-preview-final-63edcef2-fde9-4660-8fbd-7019fddb8ee4` and `reports/review/recruit-team-tall-final-cef95713-46f6-4a33-ac2f-6142b93e7353`. The earnings captures in `reports/review/recruit-xp-final-05e361eb-796e-412d-aae6-7d838f12107f` verify the shorter keyword-colored XP bars and level labels.
 
 A separate fresh Chromium session exercised reward continuation, recruitment without Skip, replacement, retargeting, undo, reload into the banked choice and confirmation into the next encounter. Arc geometry was inspected with a temporary slower motion token, then restored to the battle timing; `reports/recruit-team-implemented.png` shows the normal-speed settled preview. Unit coverage additionally accepts Confirm with animation frames held, checks cleanup, and verifies previews never save.
+
+## Rookhaven implementation review
+
+Conditions: reduced motion; the seven-card hand and six rank pages below describe that historical fixture, not current gameplay or Collection layout.
+
+The four source images were inspected together at card-like scale. Focused Chromium review covered the Collection kit, all six rank pages, a full seven-card battle hand, the copied-card tooltip, selection and execution of all three abilities, and copy persistence after reload at 1920×1080 with default text and 1280×720 with 125% text. The source set retained readable silhouettes and uncropped compositions at those sizes; rules, target feedback and controls fit without scrolling. Review caught and corrected missing all-enemy UI targeting for Unwritten Ending, with a keyboard confirmation regression added to the targeting suite. The task preview used isolated dependency caches after an outdated Vite optimization cache prevented its initial load. Screenshots and geometry/error metadata are preserved in task reports.
+
+## Euphera implementation review
+
+Focused Chromium review covered Collection, all six passive tiers, battle targeting and cancellation, Thorns removal, Block redistribution and hand replacement at 1920×1080 with default text and 1280×720 with 125% text, using fresh disposable saves and reduced motion. The four compositions remain uncropped and readable at shared card sizes; the selected rules and controls fit without scrolling. Task screenshots and interaction evidence are retained with the archived worktree reports.

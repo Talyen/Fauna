@@ -27,21 +27,7 @@ Use native aspect ratios without stretching or converting one composition into a
 
 ## Keyword artwork
 
-`public/art/keywords/` contains unchanged optimized portrait artwork copied from Alchemy for optional keyword illustrations. Talents uses a portrait ArtCard overview that opens dedicated category trees. The original nine selections below are 420 × 563 pixels; additional category portraits and Water’s reused ability artwork are registered in the manifest. Use contain rendering and the [talents overview sizing rule](UI.md#layout-artwork-size-and-spacing).
-
-| Fauna keyword | Local file       | Alchemy source         |
-| ------------- | ---------------- | ---------------------- |
-| Physical      | `physical.webp`  | `talent-physical.webp` |
-| Burn          | `fire.webp`      | `talent-burn.webp`     |
-| Freeze        | `ice.webp`       | `talent-freeze.webp`   |
-| Stun          | `lightning.webp` | `talent-stun.webp`     |
-| Poison        | `poison.webp`    | `talent-poison.webp`   |
-| Nature        | `nature.webp`    | `talent-nature.webp`   |
-| Light         | `light.webp`     | `talent-holy.webp`     |
-| Block         | `block.webp`     | `talent-block.webp`    |
-| Health        | `heal.webp`      | `talent-health.webp`   |
-
-Source directory: `Alchemy: src/assets/optimized/`. Artwork reuse does not import Alchemy's keyword mechanics. The nine original keyword illustrations and additional category selections are registered in `assets/manifest.json`; see [talent category portraits](#talent-category-portraits) and [Water](content/creatures/coralcurl.md).
+The [manifest](../assets/manifest.json) identifies keyword/category portraits, copy recipes and later Alchemy source selections. The [original nine-source mapping](archive/ALCHEMY_ADOPTION_PLAN.md#keyword-source-selections) retains provenance referenced by older manifest entries. These unchanged Alchemy portraits are Fauna-owned copies, independent of Alchemy's mechanics or runtime. Water reuses [Coralcurl's Reef Jet](content/creatures/coralcurl.md). Use contain rendering and the [talents overview sizing rule](ui/screens.md#talents).
 
 ## Prepared assets
 
@@ -80,19 +66,17 @@ Recorded sounds cover typed combat outcomes, healing, defense, rejected actions,
 
 [boons.ts](../src/game/content/boons.ts) owns available Boons, IDs and displayed rules; [combat execution](../src/game/combat/) and its [Boon regressions](../tests/unit/game/boons.test.ts) define timing, caps, actual-outcome triggers and recursion limits. Use those owners for exact values rather than maintaining a second catalog here.
 
-Portraits are unchanged WebP selections copied from `Alchemy: src/assets/optimized/`; the manifest records per-file sources, rights and hashes. Prepared copies have no sibling runtime dependency. Light replaces Alchemy's Holy terminology. Forge, Wish, Potion and Companion Boons are excluded because Fauna lacks their mechanics; Consume-dependent Boons and talents are excluded despite Pearls using Consume.
+Portraits are unchanged WebP selections copied from `Alchemy: src/assets/optimized/`; the manifest records per-file sources, rights and hashes. Light replaces Alchemy's Holy terminology. Forge, Wish, Potion and Companion Boons are excluded because Fauna lacks their mechanics; Consume-dependent Boons and talents are excluded despite Pearls using Consume.
 
 [Journey rules](EXPEDITION_DESIGN.md#currency-and-items) own reward pools and journey-only ownership; [Merchant rules](EXPEDITION_DESIGN.md#optional-support-visits) own stock and prices. Inspect new portraits through the UI review procedure.
 
 ## Support encounter content
 
-Boon Merchant prices, affordability and Campfire eligibility/recovery are owned by `src/game/destinations.ts`. Stock selects up to three unowned Boons from the existing catalog and persists with each visit; purchase receipts also persist through the Boon reward screen. Boon Merchant currently reuses the prepared Silken Clearing location illustration, an explicit existing placeholder rather than a newly approved source-library selection. Boon portraits retain their existing asset manifests and receipts. Replace location selections through the prepared-asset workflow when final art is selected.
+[destinations.ts](../src/game/destinations.ts) owns support eligibility, saved stock, prices and receipts under the [journey rules](EXPEDITION_DESIGN.md#optional-support-visits). Merchant art uses Silken Clearing as a placeholder; replace it through the prepared-asset workflow when final art is selected.
 
 ## Encounter placeholders
 
-`public/art/encounters/` preserves original blank Combat and Boss landscape SVGs, registered as `encounter.combat` and `encounter.boss`. Location assets remain available for support art. Boss screens currently use species artwork; [screen specifications](ui/screens.md#encounter-and-required-replacement) own composition.
-
-Combat music uses `music.fernwood`; that historical source ID does not imply biomes or select progression. [Journey design](EXPEDITION_DESIGN.md#encounters) owns encounter packs and boss cadence.
+`public/art/encounters/` preserves blank landscape SVGs registered as `encounter.combat` and `encounter.boss`; location assets remain available for support art. [Encounter presentation](ui/screens.md#encounter-and-required-replacement) uses blank Combat art and species art for Bosses. The music ID `music.fernwood` identifies a recording, not a biome or progression rule.
 
 ## Creature passive tiers
 
@@ -102,14 +86,10 @@ Favor species-exclusive mechanics independent of named abilities. Add new mechan
 
 ## Battle pile artwork
 
-`public/art/battle/draw-pile.webp`, `discard-pile.webp` and `card-back.webp` are unchanged 420×560 optimized artwork copied from `Alchemy: src/assets/optimized/`, with reuse explicitly requested by the user. The prepared manifest owns `pile.draw`, `pile.discard` and `card.back`; runtime has no sibling-project dependency. Draw and discard ArtCards preserve the 3:4 aspect ratio. Flying discards use the same top-card crop and landing bounds as Alchemy: x=25/420, y=25/560, width=328/420, height=432/560. The source library and original placeholders remain preserved; earlier prepared outputs remain recoverable from Git history.
-
-## Talent category portraits
-
-Armor, Bleed, Dodge, Leech and Mana now use their distinct existing Alchemy portraits, copied unchanged from `Alchemy: src/assets/optimized/talent-<keyword>.webp` into `public/art/keywords/`. These follow the existing Alchemy keyword-art reuse, with source provenance in `assets/manifest.json` and Fauna-owned prepared outputs. There is no runtime dependency on Alchemy.
+The user authorized unchanged 420×560 Alchemy copies for `pile.draw`, `pile.discard` and `card.back`. The manifest records their sources under `public/art/battle/`; preserve source-library originals and placeholders; earlier prepared outputs remain recoverable from Git. Flying discards match the source top-card bounds: x=25/420, y=25/560, width=328/420, height=432/560. Display keeps the 3:4 ratio.
 
 ## Creature references
 
 The [creature index](content/creatures/README.md) links kits, distinctive edge rules and artwork rationale. The manifest owns per-file provenance/rights; dated rendered observations remain historical evidence. Shared authoring and preparation rules belong here.
 
-Memento uses the four original selections from its user-provided Drive folder, plus generated Echo (4:3) and Pearl (3:4) artwork based on those selections. Originals are retained in `public/art/memento/`; the asset manifest records provenance and prepared WebP derivatives. See [Memento](content/creatures/memento.md) and its [generation prompts](content/creatures/memento-art-prompts.md).
+[Memento](content/creatures/memento.md) records its four original selections and proposed Echo/Pearl artwork; [generation prompts](content/creatures/memento-art-prompts.md) retain the references and intent.

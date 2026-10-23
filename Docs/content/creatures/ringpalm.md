@@ -16,4 +16,4 @@ Seedling Circle rolls one seeded, equally likely choice per resolution and gives
 
 ## Artwork provenance and validation record
 
-The unchanged landscape portrait (`03.png`) and three portrait action PNGs come from the user's [Ringpalm Drive folder](https://drive.google.com/drive/folders/1uQOzqWfnYQEIQ9XQFpejGV-syxth8zcp). Original URLs and rights notes are recorded in the asset manifest. Source artwork was visually inspected; rendered gameplay and balance acceptance remain pending.
+Source: [Ringpalm Drive folder](https://drive.google.com/drive/folders/1uQOzqWfnYQEIQ9XQFpejGV-syxth8zcp). Portrait: `03.png`. Source inspected; rendered gameplay and balance acceptance were pending.

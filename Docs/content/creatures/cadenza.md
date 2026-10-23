@@ -14,4 +14,4 @@ Echoes Remember uses seeded randomness across the entire discard pile, including
 
 ## Artwork provenance and validation record
 
-The unchanged creature portrait (`Cadenza_04.png`) and selected three action illustrations come from the user's [Cadenza Drive folder](https://drive.google.com/drive/folders/1luTmk1AG5RF-Wt8a_FBjgtf7a-zDxF3f). The manifest records source URLs and rights notes; preparation preserves native landscape and portrait compositions. Encore of Spring and Held Note are excluded. Source artwork was visually inspected. Rendered gameplay and balance acceptance remain pending.
+Source: [Cadenza Drive folder](https://drive.google.com/drive/folders/1luTmk1AG5RF-Wt8a_FBjgtf7a-zDxF3f). Portrait: `Cadenza_04.png`; Encore of Spring and Held Note are excluded. Source inspected; rendered gameplay and balance acceptance were pending.

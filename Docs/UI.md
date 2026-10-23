@@ -1,28 +1,37 @@
 # UI contracts
 
-Fauna's screens are game surfaces. Show cards, decision-relevant state, and the actions required to play. The background uses Alchemy’s warm near-black canvas (`hsl(30 10% 3%)`). No promotional copy, decorative chrome, permanent save-success indicators, or visible combat log.
+## Start here
 
-Every screen centers its complete content composition horizontally and vertically within the available area after page gutters and gameplay feedback. The shared Screen stage owns that area; headings, content groups, pagination and primary actions remain together in the bounded main surface. Preserve paired numeric alignment, readable rule paragraphs, non-scrolling tabs, and battle controls whose positions convey meaning.
+Apply these rules to every UI change, then read only the affected sections below and the relevant [screen](ui/screens.md) or [battle](ui/battle.md) specification:
 
-Read the shared rules here and the affected screen section. Each guide owns a different concern:
+- Center the complete composition horizontally and vertically in the available Screen stage, keeping headings, artwork, pagination and actions together
+- Show decision-relevant state and actions; preserve disclosure layers and accessible names; omit promotional copy, decorative chrome, save-success indicators and a visible combat log
+- Use registered shadcn controls, shared tokens and ArtCard; keep artwork uncropped at native ratios and ordinary names/rules outside it
+- Preserve selected text size, reachable controls, numeric alignment, readable rules and non-scrolling tabs; fit gameplay to the viewport
+- Keep mouse, keyboard and standard-controller flows equivalent; focus and selection remain distinct, and color/sound never carry meaning alone
+- Consume committed gameplay; navigation, previews and animation never grant rewards, save progression or block commands
+- Follow [required review](#required-review) before integrating visual or interaction changes; only explicit user choices establish artistic approval
 
-| Concern                           | Guide                                                           |
-| --------------------------------- | --------------------------------------------------------------- |
-| Screen composition and disclosure | [Battle](ui/battle.md), [other screens](ui/screens.md)          |
-| Navigation, Back and menu actions | [Menu design](MENU_DESIGN.md)                                   |
-| Gameplay and progression          | [Journey design](EXPEDITION_DESIGN.md), [Keywords](KEYWORDS.md) |
-| Implementation entrypoints        | [Design system](DESIGN_SYSTEM.md)                               |
-| Visual evidence and acceptance    | [Required review](#required-review) below                       |
+| When changing                 | Read                                                                                                                                                                        |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Controls or input             | [Components](#shared-components-and-enforcement), [interaction/accessibility](#interaction-states-and-accessibility), [control states](#shared-control-states-and-feedback) |
+| Composition or fit            | [Layout and artwork](#layout-artwork-size-and-spacing), [shared recipes](#shared-layout-recipes), affected screen                                                           |
+| Typography, colors or effects | [Tokens](#tokens), [combat vocabulary](#combat-vocabulary), [keyword effects](#keyword-visual-effects)                                                                      |
+| Failure behavior              | [Recovery policy and owners](#recovery-and-persistent-failures)                                                                                                             |
+| Navigation or progression     | [Menus](MENU_DESIGN.md), [Journey](EXPEDITION_DESIGN.md), [Keywords](KEYWORDS.md)                                                                                           |
+| Implementation or checks      | [Design system](DESIGN_SYSTEM.md); [preview/capture tools](DEVELOPMENT_TOOLS.md#task-checkouts-and-previews)                                                                |
+
+These contracts remain applicable when a shared change affects several flows; selective reading does not exempt affected behavior.
 
 ## Shared components and enforcement
 
 Use source-owned shadcn/ui for every standard UI control and its interaction behavior. Current approved primitives: Button, Dialog, Popover, Tooltip, Tabs, Switch, RadioGroup, Slider, and Progress. Preserve native Tab, arrow-key, Space, Enter, Escape, focus trapping and return behavior. W/A/S/D and gamepad navigation adapt to those components rather than replacing their state machines.
 
-`scripts/checks/shadcn-registry.json` explicitly lists reviewed primitives and their Radix owners. New standard controls must come from upstream shadcn and record their source URL and Radix behavior owner in that registry during review. Provenance is metadata; source comments and formatting do not establish it. Do not build custom toggles, tabs, dropdowns, dialogs, or clickable layout elements. The production source check rejects raw native controls, handmade widget roles and focusable native click targets, direct Radix imports, unregistered primitives and competing UI libraries. JavaScript/JSX and CSS checks parse syntax, so comments and test fixtures are not player surfaces; container keyboard, pointer gesture and delegated click handlers may route input without becoming widgets. These source guards complement interaction tests; they cannot prove all behavior by static analysis.
+Register new upstream shadcn controls with their source URL and Radix behavior owner. Custom general-purpose widgets, direct Radix imports and competing UI libraries are prohibited. [Source checks](DESIGN_SYSTEM.md#source-checks-and-registration) describe enforcement and permitted routing handlers.
 
 Explicit gameplay compositions are artwork cards, the hand fan, targeting, mana crystals, combat feedback and forecast overlays on shadcn Progress bars. They use shadcn controls where interactive and shared tokens; no general-purpose custom widget is permitted under this exception. Warm near-black canvas, typography, semantic combat colors and minimum hit areas remain project theme decisions.
 
-ArtCard is the sole artwork surface: exactly one image. Battlefield health bars are the sole UI overlay, placed just inside the bottom edge; other text and UI stay outside artwork. Creature artwork stays 4:3 landscape and action artwork 3:4 portrait, with contain rendering; never stretch or crop to another ratio. Ordinary artwork names and rules belong in hover/focus details. See [inspection](ui/screens.md#creature-and-action-inspection) and [Collection](ui/screens.md#collection) for their disclosure rules. Dynamic progress geometry is owned by Progress; hand geometry by FanSlot; measured page geometry by PagedItems. All visual colors, text sizes, and radii use shared tokens. The source gate enforces component ownership, palette and typography rules. Token-based inline styles and local motion/geometry are permitted; interaction styling and radius choices are reviewed through rendered behavior rather than blanket syntax bans.
+ArtCard is the sole artwork surface: exactly one image. Battlefield health bars are the sole UI overlay, placed just inside the bottom edge; other text and UI stay outside artwork. Creature artwork stays 4:3 landscape and action artwork 3:4 portrait, with contain rendering; never stretch or crop to another ratio. Ordinary artwork names and rules belong in hover/focus details. See [inspection](ui/screens.md#creature-and-action-inspection) and [Collection](ui/screens.md#collection) for their disclosure rules. All visual colors, text sizes, and radii use shared tokens. The source gate enforces component ownership, palette and typography rules. Token-based inline styles and local motion/geometry are permitted; interaction styling and radius choices are reviewed through rendered behavior rather than blanket syntax bans.
 
 Keywords in rule prose are semibold inline words in their semantic colors, with normal word spacing. They have no individual hover tooltip, click action or keyboard focus stop; definitions remain in the Glossary. Rules inside a surrounding hover/inspection tooltip retain this same plain-text treatment.
 
@@ -91,13 +100,11 @@ Use 24px between screen sections and 12px between related items. Page gutters ar
 
 Battle-specific geometry follows the [battle layout](ui/battle.md#layout).
 
-The rendered layout assertion enforces scrolling scope and reachability; source syntax alone cannot establish whether a region fits. It checks document and nested overflow, viewport bounds, hidden clipping, hit areas and obscured controls, including portaled dialogs and tooltips. Approved secondary regions allow offscreen vertical content, with interaction tests exercising its reachability. It also checks screen content centering within its available stage and dialog centering within the viewport, with the pause dropdown aligned to its menu button. Screenshots pass that assertion before capture. Geometry checks are regression protection; rendered review still establishes readability and composition.
+[Layout assertions](DESIGN_SYSTEM.md#geometry-and-layout-assertions) check scrolling, reachability, centering and clipping before capture. Rendered review also assesses readability and composition.
 
 ## Tokens
 
-`src/ui/tokens.css` owns semantic shadcn theme tokens and combat colors. Use `background`/`foreground` for the canvas, `card`/`card-foreground` for artwork surfaces, `popover`/`popover-foreground` for dialogs and tooltips, using warm charcoal surfaces and the shared subtle `border`, `primary`/`primary-foreground` for primary actions, `secondary` and `accent` pairs for quiet controls and hover, `muted`/`muted-foreground` for supporting information, `border`/`input` for boundaries, `ring` for focus, and `destructive` for destructive actions. Tailwind's theme mappings reference these tokens directly. Existing gameplay aliases resolve to these same roles; they are not independent palettes. Damage types, health and block remain separate semantic game tokens.
-
-The color policy rejects raw hexadecimal/function/named colors in player UI, direct Tailwind palette colors (including black/white and arbitrary hex colors), and literal colors in inline JSX styles. Checks inspect class/style contexts and leave player copy, IDs and unrelated metadata alone. Token-based inline values and measured geometry remain permitted. Palette changes belong in the token owner; contrast tests validate foreground/background role pairs. Use opacity/state variants of semantic utilities instead of inventing colors per component.
+Use semantic tokens from `src/ui/tokens.css` for theme, typography, geometry and combat colors. Palette changes belong there; use opacity/state variants rather than per-component colors. [Token bindings and checks](DESIGN_SYSTEM.md#token-bindings) describe role pairs, Tailwind mappings and permitted measured styles.
 
 - Typography: locally bundled Inter Variable, regular rules, medium controls, semibold names, tabular numbers; names wrap without ellipsis and rules remain left-aligned. 16px rules/controls, 20px names, 24px screen headings, 14px secondary information. Inspection enlarges rules to 18px and names to 28px. Font license: `Docs/FONT-LICENSE.txt`.
 - Spacing: a 4px grid, using layout instead of decorative separators or panels.
@@ -140,7 +147,7 @@ The [Display settings](ui/screens.md#settings) own intensity preferences. Zero i
 
 ## Required review
 
-This is the single task procedure for UI design, implementation and critique. Read the shared contracts above and only the affected [battle](ui/battle.md) or [screen](ui/screens.md) section. [Design system](DESIGN_SYSTEM.md) and [tool details](DEVELOPMENT_TOOLS.md#task-checkouts-and-previews) are optional references when needed.
+This is the single task procedure for UI design, implementation and critique. Read [Start here](#start-here), the sections implicated by the change and the affected [battle](ui/battle.md) or [screen](ui/screens.md) specification. [Design system](DESIGN_SYSTEM.md) and [tool details](DEVELOPMENT_TOOLS.md#task-checkouts-and-previews) are optional references when needed.
 
 1. Identify the player's decision and the information available at rest versus through inspection. Preserve the requested disclosure layout and action roles; equally valid choices may have equal emphasis
 2. For layout or artwork work, inspect the current rendered flow and relevant [reference images](../design/visual-quality/README.md) before editing. References carry their recorded acceptance scope; existing screens and agent candidates do not imply user approval

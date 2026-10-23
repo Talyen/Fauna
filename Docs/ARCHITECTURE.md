@@ -124,4 +124,4 @@ The packaged renderer uses `fauna://app/` confined to `dist/`, rejecting foreign
 
 ## Plans and history
 
-The [simplification implementation record](SIMPLIFICATION_PLAN.md) documents the six changes and links the approved assessment, verification boundaries and retained evidence. Historical records retain [lifecycle](archive/GAME_STATE_PLAN.md), [ability resolution](archive/COMBAT_RESOLUTION_PLAN.md) and [reaction ordering](archive/COMBAT_REACTIONS_PLAN.md) decisions and their original verification scope.
+The [simplification implementation record](archive/SIMPLIFICATION_IMPLEMENTATION.md) documents the six changes and links the approved assessment, verification boundaries and retained evidence. Historical records retain [lifecycle](archive/GAME_STATE_PLAN.md), [ability resolution](archive/COMBAT_RESOLUTION_PLAN.md) and [reaction ordering](archive/COMBAT_REACTIONS_PLAN.md) decisions and their original verification scope.
