@@ -27,6 +27,7 @@ async function open(game: GameState, resume = true) {
   return { session, user };
 }
 it("keeps fallen cards visible, uses Oathara's allowance and permits targeting a knockout for resurrection", async () => {
+  document.documentElement.style.setProperty("--target-denial-duration", "2400ms");
   const { session, user } = await open(oatharaBattle());
   try {
     await user.click(screen.getByRole("button", { name: /^Ember Charge, Oathara,/ }));
@@ -56,6 +57,7 @@ it("keeps fallen cards visible, uses Oathara's allowance and permits targeting a
     expect(JSON.parse(localStorage.getItem("fauna.save.v1")!).team[1].health).toBe(6);
   } finally {
     await act(() => session.dispose());
+    document.documentElement.style.removeProperty("--target-denial-duration");
   }
 });
 

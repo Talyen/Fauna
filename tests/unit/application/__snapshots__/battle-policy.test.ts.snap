@@ -1023,3 +1023,36 @@ exports[`preserves visible rankings and legal choices for wickwaltz 1`] = `
   ],
 ]
 `;
+
+exports[`preserves visible rankings and legal choices for oathara 1`] = `
+[
+  [
+    "ordinary",
+    [
+      "{"command":{"type":"play","cardId":"ally-0:oathara-never-lost","autoEndTurn":false},"score":190,"reason":"Use Never Lost for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:oathara-travelers-ward","autoEndTurn":false},"score":101,"reason":"Use Traveler’s Ward for its visible benefit"}",
+    ],
+  ],
+  [
+    "injured",
+    [
+      "{"command":{"type":"play","cardId":"ally-0:oathara-never-lost","autoEndTurn":false},"score":190,"reason":"Use Never Lost for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:oathara-travelers-ward","autoEndTurn":false},"score":101,"reason":"Use Traveler’s Ward for its visible benefit"}",
+    ],
+  ],
+  [
+    "defended",
+    [
+      "{"command":{"type":"play","cardId":"ally-0:oathara-never-lost","autoEndTurn":false},"score":190,"reason":"Use Never Lost for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:oathara-travelers-ward","autoEndTurn":false},"score":101,"reason":"Use Traveler’s Ward for its visible benefit"}",
+    ],
+  ],
+  [
+    "talented",
+    [
+      "{"command":{"type":"play","cardId":"ally-0:oathara-never-lost","autoEndTurn":false},"score":190,"reason":"Use Never Lost for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:oathara-travelers-ward","autoEndTurn":false},"score":101,"reason":"Use Traveler’s Ward for its visible benefit"}",
+    ],
+  ],
+]
+`;
