@@ -1,7 +1,7 @@
-import { test, expect } from "@playwright/test";
+import { expect } from "@playwright/test";
 import { produce } from "immer";
 import { run } from "../support/game";
-import { seed, state, resume } from "./support/session";
+import { reloadHome, test, seed, state, resume } from "./support/session";
 import { gamepad } from "./support/gamepad";
 
 test("controller edges, inspect and pause do not repeat a held confirm", async ({ page }) => {
@@ -39,7 +39,7 @@ test("enlarged text and keyboard/controller row navigation keep hover details an
 }) => {
   await seed(page, run());
   await page.evaluate(() => localStorage.setItem("fauna.text-scale", "1.25"));
-  await page.reload();
+  await reloadHome(page);
   await resume(page);
   const card = page.locator(".app:not([inert]) .hand .action-card").first();
   await card.focus();

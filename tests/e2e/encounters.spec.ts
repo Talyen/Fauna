@@ -1,10 +1,10 @@
 import { captureScreen, settleScreen } from "./support/rendered-evidence";
-import { test, expect } from "@playwright/test";
+import { expect } from "@playwright/test";
 import { produce } from "immer";
 import { encounterSource } from "../../src/game/encounters";
 import { createGame } from "../../src/game/engine";
 import { authoredPack, accept } from "../support/game";
-import { seed, state, resume } from "./support/session";
+import { reloadHome, test, seed, state, resume } from "./support/session";
 import { fits } from "./support/layout";
 
 for (const [width, enlarged, encounter] of [
@@ -49,7 +49,7 @@ for (const [width, enlarged, encounter] of [
     await page.keyboard.press("i");
     await expect(page.getByRole("dialog")).toHaveCount(0);
     expect(await state(page)).toEqual(game);
-    await page.reload();
+    await reloadHome(page);
     await resume(page);
     expect(await state(page)).toEqual(game);
     await enter.focus();

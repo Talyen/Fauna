@@ -1,7 +1,8 @@
-// @vitest-environment jsdom
-import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
-import { cleanup, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { screenTestEnvironment } from "../../support/ui";
+// @vitest-environment jsdom
+import { describe, expect, it } from "vitest";
+import { cleanup, render, screen, within } from "@testing-library/react";
 import { produce } from "immer";
 import { App } from "../../../src/ui/App";
 import { createGame } from "../../../src/game/engine";
@@ -9,26 +10,7 @@ import { SPECIES } from "../../../src/game/content";
 import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 
-beforeEach(() => {
-  vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
-  vi.stubGlobal(
-    "ResizeObserver",
-    class {
-      observe() {}
-      unobserve() {}
-      disconnect() {}
-    },
-  );
-  vi.spyOn(HTMLMediaElement.prototype, "play").mockResolvedValue();
-  vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {});
-  vi.spyOn(HTMLMediaElement.prototype, "load").mockImplementation(() => {});
-});
-afterEach(() => {
-  cleanup();
-  localStorage.clear();
-  vi.restoreAllMocks();
-  vi.unstubAllGlobals();
-});
+screenTestEnvironment({ visible: true });
 
 describe("menu browsing", () => {
   it("explains talents before hover and updates requirements after purchases and category reset", async () => {

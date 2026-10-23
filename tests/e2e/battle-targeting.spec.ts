@@ -1,8 +1,8 @@
 import { captureScreen, settleScreen } from "./support/rendered-evidence";
-import { test, expect, type Locator } from "@playwright/test";
+import { expect, type Locator } from "@playwright/test";
 import { produce } from "immer";
 import { run } from "../support/game";
-import { seed, state, resume } from "./support/session";
+import { test, seed, state, resume } from "./support/session";
 import { fits } from "./support/layout";
 
 test("battle artwork stays still at the minimum viewport with enlarged text", async ({ page }) => {

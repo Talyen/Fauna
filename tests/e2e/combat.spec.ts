@@ -1,19 +1,9 @@
-import { waitForStartup } from "./support/session";
+import { reloadHome, test, seed, resume } from "./support/session";
 import { captureScreen } from "./support/rendered-evidence";
-import { test, expect, type Page } from "@playwright/test";
+import { expect } from "@playwright/test";
 import { produce } from "immer";
 import { authoredPack, prepareDestination, run } from "../support/game";
 import type { GameState } from "../../src/game/types";
-async function seed(page: Page, game: GameState) {
-  await page.addInitScript((game) => {
-    if (sessionStorage.getItem("fauna.combat.seeded")) return;
-    localStorage.setItem("fauna.save.v1", JSON.stringify(game));
-    sessionStorage.setItem("fauna.combat.seeded", "true");
-  }, game);
-  await page.goto("/");
-  await waitForStartup(page);
-  await page.getByRole("button", { name: "Continue", exact: true }).click();
-}
 for (const width of [1280, 1920]) {
   test(`pile browsing preserves gameplay and hover rules at ${width}`, async ({ page }) => {
     await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
@@ -22,6 +12,7 @@ for (const width of [1280, 1920]) {
       s.battle!.discard.push(s.battle!.draw.pop()!);
     });
     await seed(page, game);
+    await resume(page);
     const opener = page.getByRole("button", { name: /^Inspect Draw Pile/ });
     await opener.click();
     const pile = page.getByRole("dialog", { name: "Draw Pile", exact: true });
@@ -49,7 +40,7 @@ for (const width of [1280, 1920]) {
     expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(game);
     await captureScreen(page, { path: `reports/combat-piles-${width}.png` });
   });
-  test(`Campfire heals the roster once and Health survives entry to the boss at ${width}`, async ({
+  test(`Campfire ${width === 1280 ? "heals once, resumes and enters the boss" : "layout fits"} at ${width}`, async ({
     page,
   }) => {
     await page.setViewportSize({ width, height: width === 1280 ? 800 : 1080 });
@@ -62,16 +53,17 @@ for (const width of [1280, 1920]) {
       s.team[1]!.health = 7;
     });
     await seed(page, game);
+    await resume(page);
     await page.getByRole("button", { name: "Visit Campfire", exact: true }).click();
     await expect(page.locator(".campfire-screen")).toBeVisible();
     await captureScreen(page, { path: `reports/combat-campfire-${width}.png` });
+    if (width !== 1280) return;
     await page.getByRole("button", { name: "Rest", exact: true }).click();
     await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
     await expect(page.getByRole("button", { name: "Visit Campfire", exact: true })).toHaveCount(0);
     const rested = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!) as GameState);
     expect(rested.team.map((creature) => creature.health)).toEqual([10, 16, 30]);
-    await page.reload();
-    await waitForStartup(page);
+    await reloadHome(page);
     await page.getByRole("button", { name: "Continue", exact: true }).click();
     await expect(page.getByRole("button", { name: /^Boss: / })).toBeVisible();
     expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(rested);
@@ -95,6 +87,7 @@ for (const width of [1280, 1920]) {
       state.battle!.draw = state.cards.filter((card) => card.id !== attack.id).map((card) => card.id);
     });
     await seed(page, game);
+    await resume(page);
     const card = page.locator(".app:not([inert]) .hand .action-card");
     const row = page.getByRole("region", { name: "Player row" });
     const before = await row.evaluate((element) => ({

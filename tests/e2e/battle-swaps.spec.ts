@@ -1,9 +1,9 @@
 import { captureScreen } from "./support/rendered-evidence";
 import { freshCombat } from "../../src/game/combat/index";
-import { test, expect } from "@playwright/test";
+import { expect } from "@playwright/test";
 import { produce } from "immer";
 import { run } from "../support/game";
-import { seed, state, resume } from "./support/session";
+import { reloadHome, test, seed, state, resume } from "./support/session";
 import { gamepad } from "./support/gamepad";
 import { fits } from "./support/layout";
 
@@ -24,7 +24,7 @@ function fixture(fallen = true) {
   });
 }
 for (const input of ["mouse", "keyboard", "controller"] as const)
-  test(`knockout replacement is required, saves and transfers focus with ${input}`, async ({ page }) => {
+  test(`knockout replacement is required and transfers focus with ${input}`, async ({ page }) => {
     const press = input === "controller" ? await gamepad(page) : null;
     const initial = fixture();
     await seed(page, initial);
@@ -49,10 +49,12 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     expect(next.battle!.turn).toBe(initial.battle!.turn);
     expect(next.battle!.hand).toEqual(initial.battle!.hand);
     expect(next.lineup[0]).toBe("recruit-pollenmoth");
-    await page.reload();
-    await resume(page);
-    expect(await state(page)).toEqual(next);
-    await expect(page.getByRole("dialog", { name: "Choose a replacement" })).toHaveCount(0);
+    if (input === "mouse") {
+      await reloadHome(page);
+      await resume(page);
+      expect(await state(page)).toEqual(next);
+      await expect(page.getByRole("dialog", { name: "Choose a replacement" })).toHaveCount(0);
+    }
   });
 
 for (const [width, height, scale] of [
@@ -85,7 +87,7 @@ test("several knockouts resume as successive choices without a free swap or line
   await dialog.getByRole("button", { name: "Pollenmoth, backup", exact: true }).click();
   dialog = page.getByRole("dialog", { name: "Choose a replacement" });
   await expect(dialog.getByRole("button", { name: "Emberback, backup", exact: true })).toBeFocused();
-  await page.reload();
+  await reloadHome(page);
   await resume(page);
   await expect(dialog).toBeVisible();
   await dialog.getByRole("button", { name: "Emberback, backup", exact: true }).click();

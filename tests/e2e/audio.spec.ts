@@ -1,9 +1,9 @@
-import { test, expect } from "@playwright/test";
+import { expect } from "@playwright/test";
 import { produce } from "immer";
 import { assetUrl } from "../../src/ui/shared/assets";
 import prepared from "../../src/assets/prepared.json" with { type: "json" };
 import { run } from "../support/game";
-import { seed, resume, waitForStartup } from "./support/session";
+import { reloadHome, test, seed, resume } from "./support/session";
 
 test("real audio output, hit recoil, reduced motion, and mute follow combat outcomes", async ({ page }) => {
   const soundUrls = Object.keys(prepared.records)
@@ -91,8 +91,7 @@ test("real audio output, hit recoil, reduced motion, and mute follow combat outc
       ),
     ),
   ).toBe(true);
-  await page.reload();
-  await waitForStartup(page);
+  await reloadHome(page);
   await page.getByRole("button", { name: "Settings", exact: true }).click();
   await page.getByRole("tab", { name: "Sound", exact: true }).click();
   await expect(page.getByRole("switch", { name: "Sound", exact: true })).not.toBeChecked();

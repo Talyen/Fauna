@@ -1,11 +1,11 @@
-import { test, expect } from "@playwright/test";
+import { expect } from "@playwright/test";
 import { produce } from "immer";
 import { authoredPack, accept, prepareDestination, run } from "../support/game";
 import { ownedCards } from "../../src/game/team";
 import { freshCombat } from "../../src/game/combat/index";
 import { createPearls, summonEcho } from "../../src/game/combat/legendary";
 import type { BattleState } from "../../src/game/types";
-import { seed, state, waitForStartup } from "./support/session";
+import { reloadHome, test, seed, state } from "./support/session";
 
 function legendaryTeam() {
   return produce(run(), (draft) => {
@@ -52,8 +52,7 @@ test("Legendary stays centered and only unplayed Pearls survive reload", async (
   const saved = await state(page);
   expect(saved.cards.filter((card) => card.definitionId === "memento-pearl")).toHaveLength(1);
   expect(saved.cards.some((card) => card.id === consumed)).toBe(false);
-  await page.reload();
-  await waitForStartup(page);
+  await reloadHome(page);
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   expect(await state(page)).toEqual(saved);
 });
@@ -87,11 +86,18 @@ test("a knocked-out Legendary offers all four living backups and clears its summ
 }) => {
   await page.setViewportSize({ width: 1280, height: 720 });
   const fixture = produce(legendaryTeam(), (d) => {
-    d.team[0]!.health = 0;
-    d.battle!.minions = [];
+    d.team[0]!.health = 1;
+    d.team[0]!.combat!.deathDoorUsed = true;
+    d.team[0]!.combat!.burn = 1;
   });
   await seed(page, fixture);
   await page.getByRole("button", { name: "Continue", exact: true }).click();
+  expect((await state(page)).battle!.minions!.map((echo) => echo.health)).toEqual([6, 6]);
+  await page.getByRole("button", { name: "End turn", exact: true }).click();
+  const knockedOut = await state(page);
+  expect(knockedOut.team[0]!.health).toBe(0);
+  expect(knockedOut.battle!.minions!.map((echo) => echo.health)).toEqual([0, 0]);
+  await expect(page.locator('.player-row [data-actor-id^="echo-legend-"]')).toHaveCount(0);
   const dialog = page.getByRole("dialog", { name: "Choose a replacement" });
   await expect(dialog.locator(".creature-card")).toHaveCount(5);
   for (const card of await dialog.locator(".creature-card").all()) await expect(card).toBeInViewport();
@@ -99,10 +105,10 @@ test("a knocked-out Legendary offers all four living backups and clears its summ
   const next = await state(page);
   expect(next.team).toHaveLength(1);
   expect(next.team[0]!.species).toBe("mossguard");
-  expect(next.battle!.minions).toEqual([]);
+  expect(next.battle!.minions!.map((echo) => echo.health)).toEqual([0, 0]);
+  await expect(page.locator('.player-row [data-actor-id^="echo-legend-"]')).toHaveCount(0);
   expect(next.cards.some((card) => card.temporary)).toBe(false);
-  await page.reload();
-  await waitForStartup(page);
+  await reloadHome(page);
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   expect(await state(page)).toEqual(next);
 });

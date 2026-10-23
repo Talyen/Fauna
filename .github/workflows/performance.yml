@@ -28,6 +28,8 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Build ordinary renderer
         run: npm run build
+      - name: Observe background effects in battle and menus
+        run: npx playwright test --config=playwright.performance.config.ts
       - name: Capture baseline on this runner
         run: |
           for trial in 1 2 3; do

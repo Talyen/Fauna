@@ -1,18 +1,20 @@
-import { test, expect } from "@playwright/test";
+import { expect } from "@playwright/test";
 import { assetUrl } from "../../src/ui/shared/assets";
 import { run } from "../support/game";
-import { seed, resume } from "./support/session";
+import { test, seed, resume } from "./support/session";
+import { captureFrame } from "./support/rendered-evidence";
 import { fits } from "./support/layout";
+
+test.use({ realStartup: true });
 
 for (const [width, height, scale] of [
   [1280, 720, 1.25],
   [1920, 1080, 1],
 ] as const) {
-  test(`one splash survives delayed React, then reveals a ready menu at ${width}`, async ({ page }, info) => {
+  test(`one splash survives delayed React, then reveals a ready menu at ${width}`, async ({ page }) => {
     await page.setViewportSize({ width, height });
     await page.addInitScript((scale) => localStorage.setItem("fauna.text-scale", String(scale)), scale);
     const errors: string[] = [];
-    page.on("pageerror", (error) => errors.push(error.message));
     page.on("response", (response) => {
       if (response.status() >= 400) errors.push(`${response.status()} ${response.url()}`);
     });
@@ -47,7 +49,7 @@ for (const [width, height, scale] of [
         getComputedStyle(document.documentElement).getPropertyValue("--text-scale").trim(),
       ),
     ).toBe(String(scale));
-    await page.screenshot({ path: info.outputPath("pre-react.png") });
+    await captureFrame(page, { path: "pre-react.png" });
     await expect(page.locator("#startup-splash-phrase")).not.toHaveText("Adventure awaits…");
     allowReact();
     // Main CSS has arrived; the same title must keep its geometry and animation clock.
@@ -80,13 +82,13 @@ for (const [width, height, scale] of [
       before.width,
       before.height,
     ]);
-    await page.screenshot({ path: info.outputPath("react-loading.png") });
+    await captureFrame(page, { path: "react-loading.png" });
     await expect(page.locator("#startup-splash")).toHaveCount(0, { timeout: 30000 });
     expect(await page.evaluate(() => performance.now())).toBeGreaterThanOrEqual(5000);
     await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
     await page.locator(".menu-logo img").evaluate((image: HTMLImageElement) => image.decode());
     await fits(page);
-    await page.screenshot({ path: info.outputPath("menu.png") });
+    await captureFrame(page, { path: "menu.png" });
     await page.keyboard.press("Tab");
     expect(await page.evaluate(() => document.activeElement?.tagName)).toBe("BUTTON");
     await page.getByRole("button", { name: "Play", exact: true }).click();
@@ -120,9 +122,7 @@ test("slow essential art holds the splash, and an image error still permits play
   await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
 });
 
-test("reduced motion stays static, dismisses without a fade and resumes a saved battle", async ({
-  page,
-}, info) => {
+test("reduced motion stays static, dismisses without a fade and resumes a saved battle", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   const game = run(7);
   await page.addInitScript((game) => localStorage.setItem("fauna.save.v1", JSON.stringify(game)), game);
@@ -131,7 +131,7 @@ test("reduced motion stays static, dismisses without a fade and resumes a saved 
   await expect(page.locator(".startup-leaves")).toBeHidden();
   await expect(page.locator(".startup-logo-fill")).toHaveCSS("animation-name", "none");
   await expect(page.locator("#startup-splash-phrase")).toHaveText("Adventure awaits…");
-  await page.screenshot({ path: info.outputPath("reduced-motion.png") });
+  await captureFrame(page, { path: "reduced-motion.png" });
   await expect(page.locator("#startup-splash")).toHaveCount(0, { timeout: 30000 });
   expect(await page.evaluate(() => performance.now())).toBeGreaterThanOrEqual(5000);
   await resume(page);

@@ -1,7 +1,7 @@
 import { captureScreen } from "./support/rendered-evidence";
-import { test, expect } from "@playwright/test";
+import { expect } from "@playwright/test";
 import { winBattle, bossReward } from "../support/game";
-import { seed, state, resume } from "./support/session";
+import { test, seed, state, resume } from "./support/session";
 
 for (const [width, height, enlarged] of [
   [1280, 720, true],
@@ -52,5 +52,6 @@ for (const [width, height, enlarged] of [
         await page.getByRole("button", { name: "Recruit Emberback", exact: true }).click();
         expect((await state(page)).roster.filter((kind) => kind === "emberback")).toHaveLength(2);
       } else await page.getByRole("button", { name: "Skip", exact: true }).click();
+      await captureScreen(page, { path: `reports/rewards/team-after-${fixture.phase}-${width}.png` });
     }
   });

@@ -1,5 +1,5 @@
-import { waitForStartup } from "./support/session";
-import { test, expect } from "@playwright/test";
+import { openHome, reloadHome, test } from "./support/session";
+import { expect } from "@playwright/test";
 import { produce } from "immer";
 import { CARDS } from "../../src/game/content";
 import { decodeSave, encodeSave } from "../../src/game/save";
@@ -22,8 +22,7 @@ test("Recruit details and four destination options fit enlarged text and recruit
     localStorage.setItem("fauna.text-scale", "1.25");
     localStorage.setItem("fauna.tooltip-scale", "1.25");
   }, fixture);
-  await page.goto("/");
-  await waitForStartup(page);
+  await openHome(page);
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   await expect(page.locator(".destination-option")).toHaveCount(4);
   const recruit = page.getByRole("button", { name: "Recruit Cadenza", exact: true });
@@ -40,8 +39,7 @@ test("Recruit details and four destination options fit enlarged text and recruit
   await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
   const expected = accept(game, { type: "recruitDestination", species: "cadenza" });
   expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(expected);
-  await page.reload();
-  await waitForStartup(page);
+  await reloadHome(page);
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   await expect(page.getByRole("button", { name: "Recruit Cadenza", exact: true })).toHaveCount(0);
   await expectScrollFree(page);

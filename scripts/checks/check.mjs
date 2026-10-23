@@ -93,7 +93,10 @@ export function checkPlan(root, paths, namedTests = [], { related = false } = {}
     const typed = /\.tsx?$/.test(file);
     if (typed && file.startsWith("src/game/")) configs.add("tsconfig.game.json");
     if (typed && file.startsWith("src/") && !file.startsWith("src/tooling/")) configs.add("tsconfig.json");
-    if (typed && (file.startsWith("src/tooling/") || /^(?:vite|vitest|playwright)\.config\.ts$/.test(file)))
+    if (
+      typed &&
+      (file.startsWith("src/tooling/") || /^(?:vite|vitest|playwright(?:\.[\w-]+)?)\.config\.ts$/.test(file))
+    )
       configs.add("tsconfig.node.json");
     if (typed && (file.startsWith("tests/") || file.startsWith("design/"))) configs.add("tsconfig.test.json");
     if (file.startsWith("desktop/") || file === "src/platform/ports.ts") {

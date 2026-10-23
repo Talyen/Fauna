@@ -1,7 +1,8 @@
-// @vitest-environment jsdom
-import { afterEach, beforeEach, expect, it, vi } from "vitest";
-import { act, cleanup, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { screenTestEnvironment } from "../../support/ui";
+// @vitest-environment jsdom
+import { expect, it, vi } from "vitest";
+import { act, render, screen, within } from "@testing-library/react";
 import { produce } from "immer";
 import { App } from "../../../src/ui/App";
 import { Rewards } from "../../../src/ui/expedition/rewards";
@@ -12,25 +13,7 @@ import { createGame } from "../../../src/game/engine";
 import { species } from "../../../src/game/content";
 import { accept, winBattle, starterJourney, merchantDestination, fullRosterReward } from "../../support/game";
 
-beforeEach(() => {
-  vi.stubGlobal(
-    "ResizeObserver",
-    class {
-      observe() {}
-      disconnect() {}
-    },
-  );
-  vi.spyOn(HTMLMediaElement.prototype, "play").mockResolvedValue();
-  vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {});
-  vi.spyOn(HTMLMediaElement.prototype, "load").mockImplementation(() => {});
-  vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
-});
-afterEach(() => {
-  cleanup();
-  localStorage.clear();
-  vi.restoreAllMocks();
-  vi.unstubAllGlobals();
-});
+screenTestEnvironment({ visible: true });
 
 it("inspects a recruit without committing it and then commits the chosen offer", async () => {
   const game = fullRosterReward();

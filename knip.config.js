@@ -1,5 +1,6 @@
 /** Runtime and tool entrypoints are explicit so native adapters and SSR harnesses remain visible. */
 export default {
+  playwright: { config: ["playwright*.config.ts"] },
   entry: [
     "src/ui/styles.css", // Tailwind is consumed through stylesheet imports, not JavaScript.
     "src/ui/startup/splash.css", // The HTML shell loads this before JavaScript starts.

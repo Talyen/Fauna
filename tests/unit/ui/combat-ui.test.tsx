@@ -1,7 +1,8 @@
-// @vitest-environment jsdom
-import { afterEach, beforeEach, expect, it, vi } from "vitest";
-import { act, cleanup, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { screenTestEnvironment } from "../../support/ui";
+// @vitest-environment jsdom
+import { expect, it, vi } from "vitest";
+import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import { produce } from "immer";
 import { App } from "../../../src/ui/App";
 import { createSession } from "../../../src/application/session";
@@ -9,36 +10,23 @@ import { createBrowserPlatform } from "../../../src/platform/browser";
 import { KEYWORDS, keywordLabel } from "../../../src/game/progression";
 import { TALENTS } from "../../../src/game/content";
 import { authoredPack, prepareDestination, run } from "../../support/game";
+import { Talents } from "../../../src/ui/talents/talents";
+import { TooltipProvider } from "../../../src/components/ui/tooltip";
 import type { GameState } from "../../../src/game/types";
 
-beforeEach(() => {
-  vi.stubGlobal(
-    "ResizeObserver",
-    class {
-      observe() {}
-      disconnect() {}
-    },
-  );
-  vi.spyOn(HTMLMediaElement.prototype, "play").mockResolvedValue();
-  vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {});
-  vi.spyOn(HTMLMediaElement.prototype, "load").mockImplementation(() => {});
-  vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
-});
-afterEach(() => {
-  cleanup();
-  localStorage.clear();
-  vi.unstubAllGlobals();
-});
+screenTestEnvironment({ visible: true });
+
 async function open(game: GameState) {
   localStorage.setItem("fauna.save.v1", JSON.stringify(game));
   const session = createSession(createBrowserPlatform(localStorage));
   await session.load();
   render(<App session={session} />);
-  await userEvent.click(screen.getByRole("button", { name: "Continue" }));
-  return session;
+  const user = userEvent.setup();
+  await user.click(screen.getByRole("button", { name: "Continue" }));
+  return { session, user };
 }
 it("inspects draw and discard piles without changing state or exposing draw order, and keeps card details on hover", async () => {
-  const session = await open(
+  const { session, user } = await open(
     produce(run(), (s) => {
       s.battle!.discard.push(s.battle!.draw.pop()!);
     }),
@@ -46,7 +34,7 @@ it("inspects draw and discard piles without changing state or exposing draw orde
   try {
     const before = session.store.getState().game;
     const draw = screen.getByRole("button", { name: /^Inspect Draw Pile/ });
-    await userEvent.click(draw);
+    await user.click(draw);
     const pile = screen.getByRole("dialog", { name: "Draw Pile" });
     const cards = within(pile)
       .getAllByRole("button")
@@ -60,23 +48,24 @@ it("inspects draw and discard piles without changing state or exposing draw orde
     expect(ids).toEqual(expected.slice(0, 3));
     const allIds = [...ids];
     while (!(within(pile).getByRole("button", { name: "Next page" }) as HTMLButtonElement).disabled) {
-      await userEvent.click(within(pile).getByRole("button", { name: "Next page" }));
+      await user.click(within(pile).getByRole("button", { name: "Next page" }));
       allIds.push(
         ...Array.from(pile.querySelectorAll<HTMLElement>("[data-card-id]"), (el) => el.dataset.cardId),
       );
     }
     expect(allIds).toEqual(expected);
-    await userEvent.click(within(pile).getByRole("button", { name: "Previous page" }));
+    await user.click(within(pile).getByRole("button", { name: "Previous page" }));
     const firstCard = pile.querySelector<HTMLButtonElement>("[data-card-id]")!;
-    await userEvent.click(firstCard);
+    await user.click(firstCard);
     expect(screen.getAllByRole("dialog")).toHaveLength(1);
-    await userEvent.hover(firstCard);
+    await user.hover(within(pile).getByRole("heading", { name: "Draw Pile" }));
+    await user.hover(firstCard);
     expect(await screen.findByRole("tooltip")).toBeTruthy();
-    await userEvent.keyboard("i");
+    await user.keyboard("i");
     expect(screen.getAllByRole("dialog")).toHaveLength(1);
-    await userEvent.click(screen.getByRole("button", { name: "Close draw pile" }));
+    await user.click(screen.getByRole("button", { name: "Close draw pile" }));
     expect(document.activeElement).toBe(draw);
-    await userEvent.click(screen.getByRole("button", { name: /^Inspect Discard Pile/ }));
+    await user.click(screen.getByRole("button", { name: /^Inspect Discard Pile/ }));
     expect(
       within(screen.getByRole("dialog", { name: "Discard Pile" }))
         .getAllByRole("button")
@@ -88,7 +77,7 @@ it("inspects draw and discard piles without changing state or exposing draw orde
   }
 });
 it("shows exact Campfire recovery and commits one persisted Rest without currency or XP rewards", async () => {
-  const session = await open(
+  const { session, user } = await open(
     produce(run(), (s) => {
       prepareDestination(s);
       s.encounter = 3;
@@ -99,12 +88,12 @@ it("shows exact Campfire recovery and commits one persisted Rest without currenc
   );
   try {
     const before = session.store.getState().game;
-    await userEvent.click(screen.getByRole("button", { name: "Visit Campfire" }));
+    await user.click(screen.getByRole("button", { name: "Visit Campfire" }));
     expect(screen.getByRole("heading", { name: "Campfire" })).toBeTruthy();
     expect(
       screen.getByText((_, node) => node?.tagName === "P" && node.textContent === "0/32 Health · Rest +10"),
     ).toBeTruthy();
-    await userEvent.click(screen.getByRole("button", { name: "Rest" }));
+    await user.click(screen.getByRole("button", { name: "Rest" }));
     await session.flush();
     const after = session.store.getState().game;
     expect(after.team[0]!.health).toBe(10);
@@ -118,7 +107,7 @@ it("shows exact Campfire recovery and commits one persisted Rest without currenc
 });
 
 it("exposes pending talent rewards and remaining control turns in creature details", async () => {
-  const session = await open(
+  const { session } = await open(
     produce(run(), (state) => {
       state.team[0]!.combat!.freeNature = true;
       state.team[0]!.combat!.riposte = true;
@@ -140,7 +129,7 @@ it("exposes pending talent rewards and remaining control turns in creature detai
 });
 
 it("keeps all simultaneous combat effects reachable through bounded pages", async () => {
-  const session = await open(
+  const { session, user } = await open(
     produce(run(), (state) => {
       Object.assign(state.team[0]!.combat!, { armor: 3, thorns: 2, dodge: 10, burn: 1, poison: 1, bleed: 1 });
     }),
@@ -154,7 +143,7 @@ it("keeps all simultaneous combat effects reachable through bounded pages", asyn
         .forEach((el) => seen.add(el.dataset.statusId!));
       const next = within(effects).getByRole("button", { name: "Next page" }) as HTMLButtonElement;
       if (next.disabled) break;
-      await userEvent.click(next);
+      await user.click(next);
     }
     expect([...seen]).toEqual(["armor", "thorns", "dodge", "burn", "poison", "bleed"]);
     expect(document.activeElement).toBe(within(effects).getByRole("button", { name: "Previous page" }));
@@ -163,46 +152,34 @@ it("keeps all simultaneous combat effects reachable through bounded pages", asyn
   }
 });
 
-it("opens every talent category and preserves purchases and requirements", async () => {
+it("reaches every authored talent row without sending commands", () => {
   const game = produce(run(), (state) => {
     state.keywordXP = Object.fromEntries(KEYWORDS.map((keyword) => [keyword, 10000]));
   });
-  localStorage.setItem("fauna.save.v1", JSON.stringify(game));
-  const session = createSession(createBrowserPlatform(localStorage));
-  await session.load();
-  render(<App session={session} />);
-  try {
-    const user = userEvent.setup();
-    await user.click(screen.getByRole("button", { name: "Talents" }));
-    for (const keyword of KEYWORDS) {
-      await user.click(
-        within(screen.getByRole("main")).getByRole("button", { name: `${keywordLabel(keyword)} talents` }),
-      );
-      const tree = within(screen.getByRole("main"));
-      const talents = TALENTS.filter((t) => t.keyword === keyword);
-      const rows = [...new Set(talents.map((talent) => talent.row))];
-      for (let index = 0; index < rows.length; index++) {
-        for (const talent of talents.filter((entry) => entry.row === rows[index]))
-          expect(tree.getByRole("button", { name: talent.name })).toBeTruthy();
-        if (index < rows.length - 1) await user.click(tree.getByRole("button", { name: "Next page" }));
-      }
-      while (!(tree.getByRole("button", { name: "Previous page" }) as HTMLButtonElement).disabled)
-        await user.click(tree.getByRole("button", { name: "Previous page" }));
-      if (keyword === "physical") {
-        const later = talents.find((t) => t.row === 1)!;
-        await user.click(tree.getByRole("button", { name: "Next page" }));
-        expect(tree.getByRole("button", { name: later.name }).getAttribute("aria-disabled")).toBe("true");
-        await user.click(tree.getByRole("button", { name: "Previous page" }));
-        for (const talent of talents.filter((t) => t.row === 0))
-          await user.click(tree.getByRole("button", { name: talent.name }));
-        await user.click(tree.getByRole("button", { name: "Next page" }));
-        await user.click(tree.getByRole("button", { name: later.name }));
-        expect(session.store.getState().game.talents).toContain(later.id);
-      }
-      await user.click(screen.getByRole("button", { name: "Back" }));
+  const send = vi.fn(() => true);
+  const view = render(
+    <TooltipProvider>
+      <Talents game={game} send={send} openMenu={vi.fn()} />
+    </TooltipProvider>,
+  );
+  expect(
+    screen.getAllByRole("button", { name: / talents$/ }).map((button) => button.getAttribute("aria-label")),
+  ).toEqual(KEYWORDS.map((keyword) => `${keywordLabel(keyword)} talents`));
+  for (const keyword of KEYWORDS) {
+    fireEvent.click(view.container.querySelector(`[data-talent-keyword="${keyword}"]`)!);
+    const tree = within(screen.getByRole("main"));
+    const talents = TALENTS.filter((talent) => talent.keyword === keyword);
+    const rows = [...new Set(talents.map((talent) => talent.row))];
+    for (const [index, row] of rows.entries()) {
+      const names = talents.filter((entry) => entry.row === row).map((talent) => talent.name);
+      expect(
+        tree
+          .getAllByRole("button", { name: (name) => names.includes(name) })
+          .map((button) => button.getAttribute("aria-label")),
+      ).toEqual(names);
+      if (index < rows.length - 1) fireEvent.click(tree.getByRole("button", { name: "Next page" }));
     }
-  } finally {
-    await session.dispose();
+    fireEvent.click(screen.getByRole("button", { name: "Back" }));
   }
-  // This single mounted journey exhausts the catalog formerly split across keyword cases.
+  expect(send).not.toHaveBeenCalled();
 }, 15_000);

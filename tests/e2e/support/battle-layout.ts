@@ -17,6 +17,7 @@ export async function expectBattleGeometry(page: Page, width: number, height: nu
   for (const card of creatures) {
     expect(Math.abs(card.width / card.height - 4 / 3)).toBeLessThan(0.015);
     expect(card.width).toBe(creatures[0]!.width);
+    expect(card.width).toBeGreaterThan(44);
   }
   expect(
     await page
@@ -64,7 +65,14 @@ export async function expectBattleGeometry(page: Page, width: number, height: nu
       width: el.offsetWidth,
       height: el.offsetHeight,
     }));
-    expect(Math.abs(bounds.width / bounds.height - 3 / 4)).toBeLessThan(0.01);
+    expect(bounds).toEqual(
+      height <= 760
+        ? { width: 160, height: 213 }
+        : height <= 900
+          ? { width: 180, height: 240 }
+          : { width: 200, height: 267 },
+    );
+    await expect(card.locator("img")).toHaveAttribute("width", "600");
   }
   for (const control of await page
     .locator(".app:not([inert]) .hand-toolbar .battle-dock button:enabled")

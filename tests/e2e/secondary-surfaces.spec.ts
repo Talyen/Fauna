@@ -1,7 +1,7 @@
-import { test, expect } from "@playwright/test";
+import { expect } from "@playwright/test";
 import { GLOSSARY } from "../../src/game/glossary";
 import { run } from "../support/game";
-import { seed, state, resume, saved } from "./support/session";
+import { test, seed, state, resume, saved } from "./support/session";
 import { gamepad } from "./support/gamepad";
 import { captureScreen } from "./support/rendered-evidence";
 import { layoutViolations } from "./support/layout-contract";

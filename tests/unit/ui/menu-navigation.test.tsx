@@ -1,7 +1,8 @@
-// @vitest-environment jsdom
-import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
-import { act, cleanup, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { screenTestEnvironment } from "../../support/ui";
+// @vitest-environment jsdom
+import { describe, expect, it, vi } from "vitest";
+import { act, cleanup, render, screen, waitFor } from "@testing-library/react";
 import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import { produce } from "immer";
@@ -9,25 +10,7 @@ import { encodeSave } from "../../../src/game/save";
 import { run } from "../../support/game";
 import { App } from "../../../src/ui/App";
 
-beforeEach(() => {
-  vi.stubGlobal(
-    "ResizeObserver",
-    class {
-      observe() {}
-      unobserve() {}
-      disconnect() {}
-    },
-  );
-  vi.spyOn(HTMLMediaElement.prototype, "play").mockResolvedValue();
-  vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {});
-  vi.spyOn(HTMLMediaElement.prototype, "load").mockImplementation(() => {});
-});
-afterEach(() => {
-  cleanup();
-  localStorage.clear();
-  vi.unstubAllGlobals();
-  vi.restoreAllMocks();
-});
+screenTestEnvironment();
 
 describe("menu page focus return", () => {
   it.each(

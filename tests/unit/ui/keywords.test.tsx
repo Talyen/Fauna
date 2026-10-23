@@ -24,82 +24,53 @@ import { PEARL } from "../../../src/game/content/creatures/memento";
 
 describe("keyword foundation", () => {
   it("classifies authored effects without reading names or rules text, using only current talent categories", () => {
-    const expected = [
-      ["light"],
-      ["light"],
-      [],
-      ["mana"],
-      [],
-      ["dodge"],
-      ["mana"],
-      ["health"],
-      ["health"],
-      ["water"],
-      ["health"],
-      ["mana"],
-      ["physical"],
-      [],
-      ["water", "mana"],
-      ["burn"],
-      ["block"],
-      ["mana"],
-      ["light"],
-      ["dodge"],
-      [],
-      ["stun"],
-      ["stun", "armor"],
-      ["block", "nature"],
-      ["health"],
-      ["light"],
-      ["health"],
-      ["block"],
-      ["water"],
-      [],
-      ["physical", "burn"],
-      ["burn", "light"],
-      ["burn"],
-      ["nature"],
-      ["block", "nature"],
-      ["health"],
-      ["physical"],
-      ["physical"],
-      ["dodge"],
-      ["block"],
-      ["stun"],
-      ["health"],
-      ["physical", "armor"],
-      ["burn"],
-      ["stun"],
-      ["light"],
-      ["block"],
-      ["health"],
-      ["physical"],
-      ["block"],
-      ["light"],
-      ["poison"],
-      ["block", "health"],
-      [],
-      ["stun"],
-      [],
-      ["health"],
-      ["block"],
-      ["health"],
-      ["health"],
-      ["block"],
-      ["freeze", "health"],
-      ["mana"],
-      ["health"],
-      ["mana", "block"],
-      [],
-      ["light"],
-      ["block"],
-      [],
-      ["health"],
-      ["light"],
-      [],
-    ];
-    expect(CARDS.map((card) => cardKeywords({ definitionId: card.id }))).toEqual(expected);
-    expect(definitionKeywords({ effect: "attack", damageType: "poison" })).toEqual(["poison"]);
+    for (const damageType of DAMAGE_TYPES)
+      expect(definitionKeywords({ effect: "attack", damageType })).toEqual([damageType]);
+    for (const [effects, expected] of [
+      [["guard", "teamGuard", "redistributeBlock"], ["block"]],
+      [["heal", "procession", "teamCleanse", "teamThaw", "teamClearBlind"], ["health"]],
+      [
+        ["createPearls", "pearl"],
+        ["mana", "block"],
+      ],
+      [["redraw", "swapLowest", "recover", "teamBlind", "swap", "draw", "nullify"], []],
+      [["teamDodge", "dodge"], ["dodge"]],
+      [["mana"], ["mana"]],
+      [["waterThorns"], ["water"]],
+      [["teamPurge"], ["light"]],
+    ] as const)
+      for (const effect of effects) expect(definitionKeywords({ effect })).toEqual(expected);
+    const cases = [
+      [{ effect: "attack", damageType: "poison" }, ["poison"]],
+      [
+        { effect: "attack", damageType: "physical", alternateDamageType: "burn", leech: true },
+        ["physical", "burn", "leech"],
+      ],
+      [{ effect: "heal", effects: [{ kind: "cleanse" }] }, ["health"]],
+      [{ effect: "guard", effects: [{ kind: "status", status: "thorns" }] }, ["block", "nature"]],
+      [
+        {
+          effect: "draw",
+          effects: [{ kind: "damage", damageType: "water", leech: true }, { kind: "meltArmor" }],
+        },
+        ["water", "leech", "light"],
+      ],
+      [{ effect: "teamProtection" }, ["block", "nature"]],
+      [{ effect: "createPearls" }, ["mana", "block"]],
+      [{ effect: "redraw" }, []],
+      [{ effect: "guard", effects: [{ kind: "status", status: "block" }, { kind: "unknown" }] }, ["block"]],
+    ] as const;
+    for (const [definition, expected] of cases) expect(definitionKeywords(definition)).toEqual(expected);
+    for (const card of CARDS) {
+      const keywords = cardKeywords({ definitionId: card.id });
+      expect(new Set(keywords).size, card.id).toBe(keywords.length);
+      expect(
+        keywords.every((id) => PROGRESSION_KEYWORDS.includes(id)),
+        card.id,
+      ).toBe(true);
+      const renamed = { ...card, name: "Burn Heal", description: "Deal Water damage" };
+      expect(definitionKeywords(renamed)).toEqual(keywords);
+    }
     expect(KEYWORDS).toEqual([
       "physical",
       "burn",
@@ -117,7 +88,6 @@ describe("keyword foundation", () => {
       "leech",
       "mana",
     ]);
-    expect(definitionKeywords({ effect: "heal", effects: [{ kind: "cleanse" }] })).toEqual(["health"]);
     expect(new Set(TALENTS.map((talent) => talent.keyword))).toEqual(new Set(KEYWORDS));
     for (const id of [
       "fire",

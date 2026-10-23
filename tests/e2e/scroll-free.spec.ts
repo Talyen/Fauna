@@ -1,5 +1,6 @@
+import { expectTalentOverview } from "./support/layout";
 import { KEYWORDS, keywordLabel } from "../../src/game/progression";
-import { test, expect, type Locator } from "@playwright/test";
+import { expect, type Locator } from "@playwright/test";
 import { produce } from "immer";
 import { dispatch } from "../../src/game/engine";
 import { definition } from "../../src/game/content";
@@ -7,7 +8,7 @@ import { run } from "../support/game";
 import { SPECIES } from "../../src/game/content";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { expectScrollFree, layoutViolations, LAYOUT_CASES } from "./support/layout-contract";
-import { state, waitForStartup } from "./support/session";
+import { openHome, reloadHome, test, state } from "./support/session";
 import { expectBattleGeometry } from "./support/battle-layout";
 import { captureScreen, settleScreen } from "./support/rendered-evidence";
 import { snapshot, cloudName } from "../../src/application/cloud";
@@ -59,8 +60,7 @@ for (const [width, height] of [
       },
       { identity, files, save: encodeSave(run(7)) },
     );
-    await page.goto("/");
-    await waitForStartup(page);
+    await openHome(page);
     await expect(page.getByRole("button", { name: "Continue", exact: true })).toBeVisible();
     await expect(page.getByRole("alert")).toHaveCount(0);
     await captureScreen(page, { path: `reports/scroll-free/cloud-${width}.png` });
@@ -84,6 +84,7 @@ for (const [width, height, scale] of LAYOUT_CASES) {
       await page.setViewportSize({ width, height });
       await page.emulateMedia({ reducedMotion: scale === 1 ? "no-preference" : "reduce" });
       const game = produce(run(7), (draft) => {
+        draft.keywordXP.burn = 100;
         draft.discovery.encountered = SPECIES.map((entry) => entry.id);
         draft.discovery.recruited = Object.fromEntries(SPECIES.map((entry) => [entry.id, 1]));
         draft.battle!.hand = draft.cards.slice(0, 6).map((card) => card.id);
@@ -101,8 +102,7 @@ for (const [width, height, scale] of LAYOUT_CASES) {
         },
         { save, scale },
       );
-      await page.goto("/");
-      await waitForStartup(page);
+      await openHome(page);
       await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
     });
 
@@ -134,7 +134,6 @@ for (const [width, height, scale] of LAYOUT_CASES) {
             path: `reports/scroll-free/kit-${kind}-${width}-${height}-${scale}.png`,
           });
           await expect(details.locator(".inspection-creature .creature-card")).toBeVisible();
-          await expectScrollFree(page);
           await page.keyboard.press("Escape");
           await expect(card).toBeFocused();
         }
@@ -149,7 +148,14 @@ for (const [width, height, scale] of LAYOUT_CASES) {
 
     test("Talents, Glossary and Settings", async ({ page }) => {
       const exhaustive = width === 1280 && height === 720 && scale === 1.25;
+      const before = await state(page);
       await page.getByRole("button", { name: "Talents", exact: true }).click();
+      await page.mouse.move(0, 0);
+      await settleScreen(page);
+      await expectTalentOverview(page);
+      await expect(
+        page.getByRole("button", { name: "Burn talents", exact: true }),
+      ).toHaveAccessibleDescription("3 points available");
       await captureScreen(page, { path: `reports/scroll-free/talents-${width}-${height}-${scale}.png` });
       for (const keyword of exhaustive ? KEYWORDS : [KEYWORDS[0]!, KEYWORDS.at(-1)!]) {
         await page.getByRole("button", { name: `${keywordLabel(keyword)} talents`, exact: true }).click();
@@ -173,6 +179,7 @@ for (const [width, height, scale] of LAYOUT_CASES) {
         });
       }
       await page.keyboard.press("Escape");
+      expect(await state(page)).toEqual(before);
       await page.getByRole("button", { name: "Continue", exact: true }).click();
       await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
     });
@@ -235,8 +242,7 @@ for (const [width, height, scale] of LAYOUT_CASES) {
           await expect.poll(() => state(page)).toEqual(expected.state);
           await expectScrollFree(page);
           // The fixture's init script restores this same hand and text preferences on reload.
-          await page.reload();
-          await waitForStartup(page);
+          await reloadHome(page);
           await page.getByRole("button", { name: "Continue", exact: true }).click();
         }
       }

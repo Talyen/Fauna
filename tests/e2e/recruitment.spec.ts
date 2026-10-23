@@ -1,7 +1,7 @@
 import { captureScreen } from "./support/rendered-evidence";
-import { test, expect } from "@playwright/test";
+import { expect } from "@playwright/test";
 import { winBattle, fullRosterReward } from "../support/game";
-import { seed, state, resume } from "./support/session";
+import { reloadHome, test, seed, state, resume } from "./support/session";
 import { continueToRecruit } from "./support/journey";
 
 test("recruitment adds a backup without exposing free lineup changes", async ({ page }) => {
@@ -24,7 +24,7 @@ test("recruitment adds a backup without exposing free lineup changes", async ({ 
   await page.getByRole("button", { name: "Open menu" }).click();
   await expect(page.getByRole("button", { name: "Lineup", exact: true })).toHaveCount(0);
   await page.keyboard.press("Escape");
-  await page.reload();
+  await reloadHome(page);
   await resume(page);
   expect(await state(page)).toEqual(recruited);
   await page.locator(".app:not([inert]) [data-encounter]").click();
@@ -52,7 +52,7 @@ test("full-roster recruitment banks Collection progress and confirms only the di
   await expect(first).toHaveAttribute("data-species", "emberback");
   expect(await state(page)).toEqual(banked);
   await captureScreen(page, { path: "reports/implementation/recruit-team-preview.png" });
-  await page.reload();
+  await reloadHome(page);
   await resume(page);
   await expect(page.getByRole("heading", { name: "Choose your team", exact: true })).toBeVisible();
   await expect(first).toHaveAttribute("data-species", "mossguard");
@@ -65,7 +65,7 @@ test("full-roster recruitment banks Collection progress and confirms only the di
   expect(recruited.team.find((c) => c.id === recruited.lineup[0])!.species).toBe("emberback");
   expect(recruited.discovery).toEqual(banked.discovery);
   expect(recruited.phase).toBe("teamSelection");
-  await page.reload();
+  await reloadHome(page);
   await resume(page);
   expect(await state(page)).toEqual(recruited);
 });

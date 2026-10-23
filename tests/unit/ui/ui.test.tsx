@@ -1,3 +1,4 @@
+import { screenTestEnvironment } from "../../support/ui";
 import { TargetPreview } from "../../../src/ui/battle/target-preview";
 import { species, BOONS } from "../../../src/game/content";
 import { freshCombat, combat, hit } from "../../../src/game/combat/index";
@@ -19,30 +20,15 @@ import {
 import { encounterSource } from "../../../src/game/encounters";
 
 // @vitest-environment jsdom
-import { beforeEach, afterEach, describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen, cleanup, act, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { App } from "../../../src/ui/App";
 import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import { gamepadActions } from "../../../src/ui/shared/navigation/input";
-beforeEach(() => {
-  vi.stubGlobal(
-    "ResizeObserver",
-    class {
-      observe() {}
-      disconnect() {}
-    },
-  );
-  vi.spyOn(HTMLMediaElement.prototype, "play").mockResolvedValue();
-  vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {});
-  vi.spyOn(HTMLMediaElement.prototype, "load").mockImplementation(() => {});
-});
-afterEach(() => {
-  cleanup();
-  localStorage.clear();
-  vi.unstubAllGlobals();
-});
+screenTestEnvironment();
+
 describe("player interface", () => {
   it("keeps overflow invisible and unplayable while filling a hand slot after a play", async () => {
     const game = produce(run(), (d) => {

@@ -1,8 +1,8 @@
 import { createBattleActor } from "../../src/application/battle-actor";
-import { test, expect, type Locator } from "@playwright/test";
+import { expect, type Locator } from "@playwright/test";
 import { definition, species } from "../../src/game/content";
 import { policy, FULL_JOURNEY_SEED, FULL_JOURNEY_COMMAND_BUDGET } from "../support/game";
-import { seed, state } from "./support/session";
+import { test, seed, state } from "./support/session";
 import { continueToRecruit, step } from "./support/journey";
 
 test("main menu, draft and pre-battle deck lead into the first battle", async ({ page }) => {

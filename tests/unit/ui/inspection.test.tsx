@@ -1,7 +1,8 @@
-// @vitest-environment jsdom
-import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
-import { act, cleanup, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { screenTestEnvironment } from "../../support/ui";
+// @vitest-environment jsdom
+import { describe, expect, it } from "vitest";
+import { act, cleanup, render, screen, within } from "@testing-library/react";
 import { produce } from "immer";
 import { CARDS, definition, species } from "../../../src/game/content";
 import { encodeSave } from "../../../src/game/save";
@@ -16,26 +17,7 @@ import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import { run, teamRun } from "../../support/game";
 
-beforeEach(() => {
-  // jsdom has no layout; this checks focus ownership, not rendered geometry.
-  vi.stubGlobal(
-    "ResizeObserver",
-    class {
-      observe() {}
-      disconnect() {}
-    },
-  );
-  vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
-  vi.spyOn(HTMLMediaElement.prototype, "play").mockResolvedValue();
-  vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {});
-  vi.spyOn(HTMLMediaElement.prototype, "load").mockImplementation(() => {});
-});
-afterEach(() => {
-  cleanup();
-  localStorage.clear();
-  vi.restoreAllMocks();
-  vi.unstubAllGlobals();
-});
+screenTestEnvironment({ visible: true });
 
 describe("artwork-first inspection", () => {
   it("shows talent-adjusted Mana costs in the starter kit", () => {

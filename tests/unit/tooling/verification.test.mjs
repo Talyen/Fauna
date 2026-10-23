@@ -337,6 +337,7 @@ describe("lightweight local verification", () => {
       "tsconfig.test.json",
     ]);
     expect(checkPlan(root, ["package-lock.json"]).configs).toHaveLength(6);
+    expect(checkPlan(root, ["playwright.performance.config.ts"]).configs).toEqual(["tsconfig.node.json"]);
   });
 
   it("blocks handoff on selected lint, compiler, documentation or source contract failures", () => {

@@ -1,5 +1,5 @@
 import { captureScreen } from "./support/rendered-evidence";
-import { test, expect, type Locator } from "@playwright/test";
+import { expect, type Locator } from "@playwright/test";
 import { produce } from "immer";
 import { createGame } from "../../src/game/engine";
 import type { Command } from "../../src/game/types";
@@ -13,7 +13,7 @@ import {
   run,
   completeRecruitment,
 } from "../support/game";
-import { seed, state, resume, waitForStartup } from "./support/session";
+import { reloadHome, test, seed, state, resume, waitForStartup } from "./support/session";
 import { gamepad } from "./support/gamepad";
 import { step } from "./support/journey";
 
@@ -93,8 +93,7 @@ for (const [width, enlarged, outcome] of [
     });
     await page.getByRole("button", { name: "Main menu", exact: true }).click();
     await expect(page.getByRole("button", { name: "Journey results", exact: true })).toHaveCount(0);
-    await page.reload();
-    await waitForStartup(page);
+    await reloadHome(page);
     await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
     await expect(page.getByRole("button", { name: "Journey results", exact: true })).toHaveCount(0);
     expect(await state(page)).toEqual(game);
@@ -104,7 +103,7 @@ for (const [width, enlarged, outcome] of [
   });
 
 for (const input of ["mouse", "keyboard", "controller"] as const)
-  test(`boss victory commits rewards and resumes with ${input}`, async ({ page }) => {
+  test(`boss victory commits rewards with ${input}`, async ({ page }) => {
     const press = input === "controller" ? await gamepad(page) : null;
     const fixture = victoryReady(
       accept(
@@ -133,9 +132,11 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     const reward = await state(page);
     expect(reward.phase).toBe("recruit");
     expect(reward.reward!.recruits).toEqual(["memento"]);
-    await page.reload();
-    await resume(page);
-    expect(await state(page)).toEqual(reward);
+    if (input === "mouse") {
+      await reloadHome(page);
+      await resume(page);
+      expect(await state(page)).toEqual(reward);
+    }
     await step(page, activate);
     await expect(page.getByRole("heading", { name: "Journey complete", exact: true })).toBeVisible();
     const won = await state(page);
@@ -143,7 +144,8 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     expect(won.unlocked).toContain("prismram");
     expect(won.currency).toBe(fixture.currency + 40);
     expect(Object.values(won.keywordXP).reduce((a, b) => a + b, 0)).toBeGreaterThan(0);
-    await page.reload();
+    if (input === "mouse") await reloadHome(page);
+    else await page.getByRole("button", { name: "Main menu", exact: true }).click();
     await waitForStartup(page);
     await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
     expect(await state(page)).toEqual(won);

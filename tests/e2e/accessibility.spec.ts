@@ -1,7 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
-import { test, expect, type Page } from "@playwright/test";
+import { expect, type Page } from "@playwright/test";
 import { run, winBattle } from "../support/game";
-import { seed, resume } from "./support/session";
+import { test, seed, resume } from "./support/session";
 import { captureScreen, settleScreen } from "./support/rendered-evidence";
 import { continueToRecruit } from "./support/journey";
 

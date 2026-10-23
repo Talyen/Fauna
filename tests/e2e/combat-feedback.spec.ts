@@ -1,7 +1,7 @@
-import { waitForStartup } from "./support/session";
+import { openHome, test } from "./support/session";
 import { captureFrame, settleScreen } from "./support/rendered-evidence";
 import { expectScrollFree, LAYOUT_CASES } from "./support/layout-contract";
-import { test, expect, type Page } from "@playwright/test";
+import { expect, type Page } from "@playwright/test";
 import { feedbackBattle } from "../support/game";
 import { encodeSave } from "../../src/game/save";
 
@@ -71,8 +71,7 @@ for (const [width, height, scale, reduced] of [
       },
       { save, scale },
     );
-    await page.goto("/");
-    await waitForStartup(page);
+    await openHome(page);
     await page.getByRole("button", { name: "Continue", exact: true }).click();
     await expect(page.locator(".enemy-row .creature-card")).toHaveCount(3);
     if (reduced) {

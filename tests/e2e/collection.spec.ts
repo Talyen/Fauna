@@ -1,10 +1,10 @@
 import { captureScreen, settleScreen } from "./support/rendered-evidence";
-import { test, expect, type Locator } from "@playwright/test";
+import { expect, type Locator } from "@playwright/test";
 import { produce } from "immer";
 import { expectScrollFree } from "./support/layout-contract";
 import { CARDS, SPECIES } from "../../src/game/content";
 import { run } from "../support/game";
-import { seed, state, resume } from "./support/session";
+import { test, seed, state, resume } from "./support/session";
 import { gamepad } from "./support/gamepad";
 import { fits } from "./support/layout";
 

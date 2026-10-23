@@ -1,7 +1,7 @@
 import { captureScreen } from "./support/rendered-evidence";
-import { test, expect } from "@playwright/test";
+import { expect } from "@playwright/test";
 import { CARDS, species } from "../../src/game/content";
-import { seed, state, resume } from "./support/session";
+import { reloadHome, test, seed, state, resume } from "./support/session";
 import { fits } from "./support/layout";
 
 for (const [width, enlarged] of [
@@ -71,7 +71,7 @@ for (const [width, enlarged] of [
     await recruit.click();
     await expect(page.getByRole("button", { name: "Begin journey", exact: true })).toHaveCount(0);
     expect((await state(page)).phase).toBe("teamSelection");
-    await page.reload();
+    await reloadHome(page);
     await resume(page);
     const started = await state(page);
     expect(started.roster).toEqual([chosen]);

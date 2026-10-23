@@ -13,7 +13,8 @@ export default defineConfig({
   use: {
     baseURL: process.env.FAUNA_TEST_URL ?? "http://127.0.0.1:48210",
     viewport: { width: 1280, height: 800 },
-    trace: "retain-on-failure",
+    trace: { mode: "retain-on-failure", screenshots: false },
+    screenshot: "only-on-failure",
   },
   webServer: process.env.FAUNA_TEST_URL
     ? undefined

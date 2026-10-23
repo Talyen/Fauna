@@ -1,7 +1,8 @@
-// @vitest-environment jsdom
-import { afterEach, beforeEach, expect, it, vi } from "vitest";
-import { cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { screenTestEnvironment } from "../../support/ui";
+// @vitest-environment jsdom
+import { afterEach, expect, it, vi } from "vitest";
+import { render, screen } from "@testing-library/react";
 import { RecruitTeam } from "../../../src/ui/expedition/recruit-team";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
 import { App } from "../../../src/ui/App";
@@ -9,26 +10,8 @@ import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import { accept, fullRosterReward } from "../../support/game";
 
-beforeEach(() => {
-  vi.stubGlobal(
-    "ResizeObserver",
-    class {
-      observe() {}
-      disconnect() {}
-    },
-  );
-  vi.spyOn(HTMLMediaElement.prototype, "play").mockResolvedValue();
-  vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {});
-  vi.spyOn(HTMLMediaElement.prototype, "load").mockImplementation(() => {});
-  vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
-});
-afterEach(() => {
-  cleanup();
-  localStorage.clear();
-  vi.restoreAllMocks();
-  vi.unstubAllGlobals();
-  document.documentElement.style.removeProperty("--motion-fast");
-});
+screenTestEnvironment({ visible: true });
+afterEach(() => document.documentElement.style.removeProperty("--motion-fast"));
 function selected() {
   const game = accept(fullRosterReward(), { type: "recruit", species: "emberback" });
   if (game.phase !== "recruit") throw new Error("Expected committed recruitment");
