@@ -124,11 +124,14 @@ it.each(["block", "armor"] as const)(
 
     hit(state, source, target, 2, "physical", events);
 
-    expect(events.find((event) => event.damageType === "physical")).toMatchObject({
+    expect(events.find((event) => event.kind === "damage" && event.damageType === "physical")).toMatchObject({
       amount: 0,
       critical: true,
     });
-    expect(events.find((event) => event.damageType === "bleed")).toMatchObject({ amount: 6, periodic: true });
+    expect(events.find((event) => event.kind === "damage" && event.damageType === "bleed")).toMatchObject({
+      amount: 6,
+      periodic: true,
+    });
     expect(target.health).toBe(94);
     expect(target.combat.bleed).toBe(0);
     expect(target.combat.statusSources.bleed).toBeUndefined();
@@ -159,7 +162,9 @@ it("a blinded Echo misses its intended recipient before Gallantry can intercept 
   hit(state, source, target, 3, "water", events);
 
   expect(events.some((event) => event.text.includes("intercepts"))).toBe(false);
-  expect(events.find((event) => event.outcome === "dodge")?.targetId).toBe(target.id);
+  expect(events.find((event) => event.kind === "status" && event.outcome === "dodge")?.targetId).toBe(
+    target.id,
+  );
   expect(source.combat.blind).toBe(false);
   expect(target.health).toBe(1);
   expect(protector.health).toBe(species(protector.species).health);
