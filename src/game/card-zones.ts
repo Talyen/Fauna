@@ -63,6 +63,12 @@ function recycleEligibleDiscard(state: GameState, eligible: (id: string) => bool
   battle.draw.push(...shuffle(state, available));
 }
 
+function lastEligibleIndex(ids: readonly string[], eligible: (id: string) => boolean) {
+  let index = ids.length - 1;
+  while (index >= 0 && !eligible(ids[index]!)) index--;
+  return index;
+}
+
 export function draw(state: GameState, count: number, events: GameEvent[] = []) {
   fillHand(state);
   const b = state.battle!;
@@ -75,9 +81,11 @@ export function draw(state: GameState, count: number, events: GameEvent[] = []) 
     return alive.some((unit) => unit.id === ownerId);
   };
   for (let i = 0; i < count; i++) {
-    if (!b.draw.some(eligible)) recycleEligibleDiscard(state, eligible);
-    let index = b.draw.length - 1;
-    while (index >= 0 && !eligible(b.draw[index]!)) index--;
+    let index = lastEligibleIndex(b.draw, eligible);
+    if (index < 0) {
+      recycleEligibleDiscard(state, eligible);
+      index = lastEligibleIndex(b.draw, eligible);
+    }
     if (index < 0) break;
     const card = b.draw.splice(index, 1)[0]!;
     receiveDraw(state, card, events);
@@ -99,9 +107,11 @@ export function drawKeyword(
       state.team.some((c) => c.id === card.ownerId && c.health > 0) && cardKeywords(card).includes(keyword)
     );
   };
-  if (!battle.draw.some(eligible)) recycleEligibleDiscard(state, eligible);
-  let index = battle.draw.length - 1;
-  while (index >= 0 && !eligible(battle.draw[index]!)) index--;
+  let index = lastEligibleIndex(battle.draw, eligible);
+  if (index < 0) {
+    recycleEligibleDiscard(state, eligible);
+    index = lastEligibleIndex(battle.draw, eligible);
+  }
   if (index >= 0) {
     const id = battle.draw.splice(index, 1)[0]!;
     receiveDraw(state, id, events);
