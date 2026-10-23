@@ -79,8 +79,9 @@ export const CARDS: readonly CardDefinition[] = [
   euphera,
   tournelle,
 ].flatMap((kit) => kit.cards);
+const speciesById = new Map(SPECIES.map((entry) => [entry.id, entry]));
 export function species(id: SpeciesId): Species {
-  const result = SPECIES.find((s) => s.id === id);
+  const result = speciesById.get(id);
   if (!result) throw new Error(`Unknown species: ${id}`);
   return result;
 }

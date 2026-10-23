@@ -17,9 +17,9 @@ Keep complete scenarios with their contract owner; do not split or remove useful
 | `tests/e2e/`                   | Browser player flows; `expedition.spec.ts` retains the full starter-to-victory journey |
 | `tests/e2e/support/`           | Browser saves, input, layout, evidence capture and journey driving                     |
 
-`vitest.config.ts` discovers unit and integration suites in the same CI job, retaining each suite's Node or DOM environment. Moving suites requires updating declared owner suites, explicit routes/documentation and affected fixed smoke selections; recursive full discovery must retain both groups.
+`vitest.config.ts` discovers unit, integration and exhaustive suites in the same CI job, retaining each suite's Node or DOM environment. Moving suites requires updating declared owner suites, explicit routes/documentation and affected fixed smoke selections; recursive full discovery must retain all three groups.
 
-`tests/exhaustive/` contains extended matrices, including every ordinary three-creature combination and every intermediate save boundary. Full Vitest discovery (`npm test`) and hosted CI include this directory. Local changed-file integration checks the matrix’s declared engine command/save contract; it does not rerun the exhaustive matrix. This keeps the five-minute local deadline, one worker and 2 GiB cap without reducing full CI coverage.
+`tests/exhaustive/` contains extended matrices governed by the [local/CI selection policy](../CONTRIBUTING.md#verification). [The lineup scenarios](support/lineups.ts) share the same command limit, seeded identities, save round trips and terminal/abandonment assertions between five fixed local trios and [the complete ordinary-lineup matrix](exhaustive/roster-combinations.test.ts). Its local contracts include coverage checks for every distinct ordinary trio and full-suite discovery. Preserve all exhaustive cases and assertions when separating these tiers; retain focused contracts for the changed boundary.
 
 ## Test value and coverage
 
