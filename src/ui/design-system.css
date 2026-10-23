@@ -1,38 +1,21 @@
 /* Shared interaction skin for registered shadcn primitives. Screen CSS owns layout only. */
-/* Every surface resolves the shared formula locally; custom properties otherwise
-   inherit an already-resolved radius from their parent. Unmeasured controls use 44px. */
-:where(
-  .game-button,
-  .ui-tabs-list,
-  .ui-tab,
-  .dialog-content,
-  .popover-content,
-  .game-tooltip,
-  .creature-card,
-  .action-card,
-  .empty-reserve,
-  label:has(> .ui-radio),
-  .ui-slider
-) {
-  --surface-short-side: var(--control-height);
-  --radius: clamp(
-    var(--radius-min),
-    calc(var(--surface-short-side, var(--control-height)) * var(--radius-ratio)),
-    var(--radius-max)
-  );
+/* Fixed role radii match Alchemy; artwork and its health clip share one value. */
+:where(.game-button, .ui-tabs-list, .ui-tab, label:has(> .ui-radio), .ui-slider) {
+  --radius: var(--radius-control);
   border-radius: var(--radius);
-  corner-shape: var(--corner-shape);
 }
-:where(.creature-card, .action-card, .empty-reserve) {
-  --surface-short-side: var(--art-short-side);
+:where(.creature-card, .action-card, .empty-reserve, .combatant-reaction) {
+  --radius: var(--radius-artwork);
+  border-radius: var(--radius);
 }
-/* Match the health-bar clipping surface to the creature's artwork corners. */
-.combatant-reaction {
-  --radius: clamp(
-    var(--radius-min),
-    calc(var(--battle-creature-width) * 3 / 4 * var(--radius-ratio)),
-    var(--radius-max)
-  );
+.dialog-content {
+  --radius: var(--radius-dialog);
+}
+.popover-content {
+  --radius: var(--radius-panel);
+}
+.game-tooltip {
+  --radius: var(--radius-tooltip);
 }
 .game-button.control-primary {
   color: var(--primary-foreground);
@@ -80,6 +63,7 @@
   background: transparent;
 }
 .game-button.compact-icon-control::before {
+  --radius: var(--radius-compact);
   content: "";
   position: absolute;
   inset: 0;
@@ -88,7 +72,6 @@
   height: var(--compact-control-size);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  corner-shape: inherit;
   background: var(--background);
   z-index: -1;
   pointer-events: none;

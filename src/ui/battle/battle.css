@@ -158,7 +158,6 @@
   inset: calc(-1 * var(--target-bracket-gap));
   border: var(--target-bracket-width) solid var(--muted-foreground);
   border-radius: calc(var(--radius) + var(--target-bracket-gap));
-  corner-shape: inherit;
   clip-path: polygon(
     0 0,
     var(--target-corner) 0,
@@ -228,7 +227,6 @@
   height: calc(var(--battle-creature-width) * 3 / 4 - 2px);
   overflow: hidden;
   border-radius: calc(var(--radius) - 1px);
-  corner-shape: var(--corner-shape);
 }
 .battle-screen .health-forecast .progress-track {
   position: absolute;

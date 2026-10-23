@@ -4,7 +4,6 @@
 import * as React from "react";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
 
-import { useSurfaceRef } from "../../ui/infrastructure/surface-ref";
 import { cn } from "@/lib/utils";
 
 const Tabs = TabsPrimitive.Root;
@@ -13,10 +12,9 @@ const TabsList = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.List>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
 >(({ className, ...props }, ref) => {
-  const surface = useSurfaceRef(ref);
   return (
     <TabsPrimitive.List
-      ref={surface}
+      ref={ref}
       className={cn(
         "ui-tabs-list inline-flex min-h-[var(--control-height)] items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground",
         className,
@@ -31,10 +29,9 @@ const TabsTrigger = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
 >(({ className, ...props }, ref) => {
-  const surface = useSurfaceRef(ref);
   return (
     <TabsPrimitive.Trigger
-      ref={surface}
+      ref={ref}
       className={cn(
         "ui-tab inline-flex items-center justify-center whitespace-nowrap rounded-lg min-h-[var(--control-height)] px-3 py-1 text-base font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow",
         className,
