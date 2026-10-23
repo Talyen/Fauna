@@ -620,7 +620,7 @@ exports[`preserves visible rankings and legal choices for prismram 1`] = `
       "{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-lance","targetId":"enemy-0","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-lance","targetId":"enemy-1","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-lance","targetId":"enemy-2","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}",
-      "{"command":{"type":"play","cardId":"ally-0:prismram-guard","autoEndTurn":false},"score":103,"reason":"Use Faceted Ward for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:prismram-guard","autoEndTurn":false},"score":104,"reason":"Use Faceted Ward for its visible benefit"}",
     ],
   ],
   [
@@ -632,7 +632,7 @@ exports[`preserves visible rankings and legal choices for prismram 1`] = `
       "{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-lance","targetId":"enemy-0","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-lance","targetId":"enemy-1","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-lance","targetId":"enemy-2","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}",
-      "{"command":{"type":"play","cardId":"ally-0:prismram-guard","autoEndTurn":false},"score":103,"reason":"Use Faceted Ward for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:prismram-guard","autoEndTurn":false},"score":104,"reason":"Use Faceted Ward for its visible benefit"}",
     ],
   ],
   [
@@ -644,7 +644,7 @@ exports[`preserves visible rankings and legal choices for prismram 1`] = `
       "{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-lance","targetId":"enemy-0","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-lance","targetId":"enemy-1","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-lance","targetId":"enemy-2","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}",
-      "{"command":{"type":"play","cardId":"ally-0:prismram-guard","autoEndTurn":false},"score":103,"reason":"Use Faceted Ward for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:prismram-guard","autoEndTurn":false},"score":104,"reason":"Use Faceted Ward for its visible benefit"}",
     ],
   ],
   [
@@ -656,7 +656,7 @@ exports[`preserves visible rankings and legal choices for prismram 1`] = `
       "{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-lance","targetId":"enemy-0","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-lance","targetId":"enemy-1","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:prismram-spectrum-lance","targetId":"enemy-2","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}",
-      "{"command":{"type":"play","cardId":"ally-0:prismram-guard","autoEndTurn":false},"score":103,"reason":"Use Faceted Ward for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:prismram-guard","autoEndTurn":false},"score":104,"reason":"Use Faceted Ward for its visible benefit"}",
     ],
   ],
 ]
@@ -670,7 +670,7 @@ exports[`preserves visible rankings and legal choices for reedstag 1`] = `
       "{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-0","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-1","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-2","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}",
-      "{"command":{"type":"play","cardId":"ally-0:reedstag-guard","autoEndTurn":false},"score":103,"reason":"Use Reed Shelter for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:reedstag-guard","autoEndTurn":false},"score":106,"reason":"Use Reed Shelter for its visible benefit"}",
     ],
   ],
   [
@@ -680,7 +680,7 @@ exports[`preserves visible rankings and legal choices for reedstag 1`] = `
       "{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-0","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-1","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-2","autoEndTurn":false},"score":1006,"reason":"Make progress against an enemy creature"}",
-      "{"command":{"type":"play","cardId":"ally-0:reedstag-guard","autoEndTurn":false},"score":103,"reason":"Use Reed Shelter for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:reedstag-guard","autoEndTurn":false},"score":106,"reason":"Use Reed Shelter for its visible benefit"}",
     ],
   ],
   [
@@ -689,7 +689,7 @@ exports[`preserves visible rankings and legal choices for reedstag 1`] = `
       "{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-0","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-1","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-2","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}",
-      "{"command":{"type":"play","cardId":"ally-0:reedstag-guard","autoEndTurn":false},"score":103,"reason":"Use Reed Shelter for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:reedstag-guard","autoEndTurn":false},"score":106,"reason":"Use Reed Shelter for its visible benefit"}",
     ],
   ],
   [
@@ -699,7 +699,7 @@ exports[`preserves visible rankings and legal choices for reedstag 1`] = `
       "{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-0","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-1","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:reedstag-attack","targetId":"enemy-2","autoEndTurn":false},"score":506,"reason":"Make progress against an enemy creature"}",
-      "{"command":{"type":"play","cardId":"ally-0:reedstag-guard","autoEndTurn":false},"score":103,"reason":"Use Reed Shelter for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:reedstag-guard","autoEndTurn":false},"score":106,"reason":"Use Reed Shelter for its visible benefit"}",
     ],
   ],
 ]
@@ -798,7 +798,7 @@ exports[`preserves visible rankings and legal choices for shadebrim 1`] = `
     [
       "{"command":{"type":"play","cardId":"ally-0:shadebrim-attack","autoEndTurn":false},"score":3003,"reason":"Damage enemies; give roster creatures priority over Minions"}",
       "{"command":{"type":"play","cardId":"ally-0:shadebrim-draw","autoEndTurn":false},"score":202,"reason":"Use Noon Bloom for its visible benefit"}",
-      "{"command":{"type":"play","cardId":"ally-0:shadebrim-guard","autoEndTurn":false},"score":104,"reason":"Use Noonward for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:shadebrim-guard","autoEndTurn":false},"score":105,"reason":"Use Noonward for its visible benefit"}",
     ],
   ],
   [
@@ -806,7 +806,7 @@ exports[`preserves visible rankings and legal choices for shadebrim 1`] = `
     [
       "{"command":{"type":"play","cardId":"ally-0:shadebrim-attack","autoEndTurn":false},"score":3003,"reason":"Damage enemies; give roster creatures priority over Minions"}",
       "{"command":{"type":"play","cardId":"ally-0:shadebrim-draw","autoEndTurn":false},"score":202,"reason":"Use Noon Bloom for its visible benefit"}",
-      "{"command":{"type":"play","cardId":"ally-0:shadebrim-guard","autoEndTurn":false},"score":104,"reason":"Use Noonward for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:shadebrim-guard","autoEndTurn":false},"score":105,"reason":"Use Noonward for its visible benefit"}",
     ],
   ],
   [
@@ -814,7 +814,7 @@ exports[`preserves visible rankings and legal choices for shadebrim 1`] = `
     [
       "{"command":{"type":"play","cardId":"ally-0:shadebrim-attack","autoEndTurn":false},"score":1503,"reason":"Damage enemies; give roster creatures priority over Minions"}",
       "{"command":{"type":"play","cardId":"ally-0:shadebrim-draw","autoEndTurn":false},"score":202,"reason":"Use Noon Bloom for its visible benefit"}",
-      "{"command":{"type":"play","cardId":"ally-0:shadebrim-guard","autoEndTurn":false},"score":104,"reason":"Use Noonward for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:shadebrim-guard","autoEndTurn":false},"score":105,"reason":"Use Noonward for its visible benefit"}",
     ],
   ],
   [
@@ -822,7 +822,7 @@ exports[`preserves visible rankings and legal choices for shadebrim 1`] = `
     [
       "{"command":{"type":"play","cardId":"ally-0:shadebrim-attack","autoEndTurn":false},"score":1503,"reason":"Damage enemies; give roster creatures priority over Minions"}",
       "{"command":{"type":"play","cardId":"ally-0:shadebrim-draw","autoEndTurn":false},"score":202,"reason":"Use Noon Bloom for its visible benefit"}",
-      "{"command":{"type":"play","cardId":"ally-0:shadebrim-guard","autoEndTurn":false},"score":104,"reason":"Use Noonward for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:shadebrim-guard","autoEndTurn":false},"score":105,"reason":"Use Noonward for its visible benefit"}",
     ],
   ],
 ]
@@ -878,7 +878,6 @@ exports[`preserves visible rankings and legal choices for stillara 1`] = `
   [
     "ordinary",
     [
-      "{"command":{"type":"play","cardId":"ally-0:stillara-reed-reservoir","autoEndTurn":false},"score":401,"reason":"Use Reed Reservoir for its visible benefit"}",
       "{"command":{"type":"play","cardId":"ally-0:stillara-thaw-path","autoEndTurn":false},"score":200,"reason":"Use Thaw Path for its visible benefit"}",
       "{"command":{"type":"play","cardId":"ally-0:stillara-water-remembers","autoEndTurn":false},"score":200,"reason":"Use Water Remembers for its visible benefit"}",
     ],
@@ -887,14 +886,12 @@ exports[`preserves visible rankings and legal choices for stillara 1`] = `
     "injured",
     [
       "{"command":{"type":"play","cardId":"ally-0:stillara-water-remembers","autoEndTurn":false},"score":3001,"reason":"Use Water Remembers for its visible benefit"}",
-      "{"command":{"type":"play","cardId":"ally-0:stillara-reed-reservoir","autoEndTurn":false},"score":401,"reason":"Use Reed Reservoir for its visible benefit"}",
       "{"command":{"type":"play","cardId":"ally-0:stillara-thaw-path","autoEndTurn":false},"score":200,"reason":"Use Thaw Path for its visible benefit"}",
     ],
   ],
   [
     "defended",
     [
-      "{"command":{"type":"play","cardId":"ally-0:stillara-reed-reservoir","autoEndTurn":false},"score":401,"reason":"Use Reed Reservoir for its visible benefit"}",
       "{"command":{"type":"play","cardId":"ally-0:stillara-thaw-path","autoEndTurn":false},"score":200,"reason":"Use Thaw Path for its visible benefit"}",
       "{"command":{"type":"play","cardId":"ally-0:stillara-water-remembers","autoEndTurn":false},"score":200,"reason":"Use Water Remembers for its visible benefit"}",
     ],
@@ -902,8 +899,8 @@ exports[`preserves visible rankings and legal choices for stillara 1`] = `
   [
     "talented",
     [
+      "{"command":{"type":"play","cardId":"ally-0:stillara-reed-reservoir","autoEndTurn":false},"score":3001,"reason":"Use Reed Reservoir for its visible benefit"}",
       "{"command":{"type":"play","cardId":"ally-0:stillara-water-remembers","autoEndTurn":false},"score":3001,"reason":"Use Water Remembers for its visible benefit"}",
-      "{"command":{"type":"play","cardId":"ally-0:stillara-reed-reservoir","autoEndTurn":false},"score":401,"reason":"Use Reed Reservoir for its visible benefit"}",
       "{"command":{"type":"play","cardId":"ally-0:stillara-thaw-path","autoEndTurn":false},"score":200,"reason":"Use Thaw Path for its visible benefit"}",
     ],
   ],
@@ -962,7 +959,7 @@ exports[`preserves visible rankings and legal choices for wickwaltz 1`] = `
     [
       "{"command":{"type":"play","cardId":"ally-0:wickwaltz-attack","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}",
       "{"command":{"type":"play","cardId":"ally-0:wickwaltz-draw","autoEndTurn":false},"score":202,"reason":"Use Thermal Rise for its visible benefit"}",
-      "{"command":{"type":"play","cardId":"ally-0:wickwaltz-guard","autoEndTurn":false},"score":103,"reason":"Use Saffron Screen for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:wickwaltz-guard","autoEndTurn":false},"score":104,"reason":"Use Saffron Screen for its visible benefit"}",
     ],
   ],
   [
@@ -970,7 +967,7 @@ exports[`preserves visible rankings and legal choices for wickwaltz 1`] = `
     [
       "{"command":{"type":"play","cardId":"ally-0:wickwaltz-attack","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}",
       "{"command":{"type":"play","cardId":"ally-0:wickwaltz-draw","autoEndTurn":false},"score":202,"reason":"Use Thermal Rise for its visible benefit"}",
-      "{"command":{"type":"play","cardId":"ally-0:wickwaltz-guard","autoEndTurn":false},"score":103,"reason":"Use Saffron Screen for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:wickwaltz-guard","autoEndTurn":false},"score":104,"reason":"Use Saffron Screen for its visible benefit"}",
     ],
   ],
   [
@@ -978,7 +975,7 @@ exports[`preserves visible rankings and legal choices for wickwaltz 1`] = `
     [
       "{"command":{"type":"play","cardId":"ally-0:wickwaltz-attack","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}",
       "{"command":{"type":"play","cardId":"ally-0:wickwaltz-draw","autoEndTurn":false},"score":202,"reason":"Use Thermal Rise for its visible benefit"}",
-      "{"command":{"type":"play","cardId":"ally-0:wickwaltz-guard","autoEndTurn":false},"score":103,"reason":"Use Saffron Screen for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:wickwaltz-guard","autoEndTurn":false},"score":104,"reason":"Use Saffron Screen for its visible benefit"}",
     ],
   ],
   [
@@ -986,7 +983,7 @@ exports[`preserves visible rankings and legal choices for wickwaltz 1`] = `
     [
       "{"command":{"type":"play","cardId":"ally-0:wickwaltz-attack","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}",
       "{"command":{"type":"play","cardId":"ally-0:wickwaltz-draw","autoEndTurn":false},"score":202,"reason":"Use Thermal Rise for its visible benefit"}",
-      "{"command":{"type":"play","cardId":"ally-0:wickwaltz-guard","autoEndTurn":false},"score":103,"reason":"Use Saffron Screen for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:wickwaltz-guard","autoEndTurn":false},"score":104,"reason":"Use Saffron Screen for its visible benefit"}",
     ],
   ],
 ]
