@@ -343,7 +343,10 @@ it.each([
     } else {
       expect(
         result.events.filter(
-          (event) => event.kind === "heal" && event.targetId === "enemy-1" && event.amount === 4,
+          (event) =>
+            event.kind === "heal" &&
+            event.targetId === "enemy-1" &&
+            event.amount === Math.round(4 * game.battle!.enemies[0]!.power),
         ),
       ).toHaveLength(resolutions);
       expect(result.state.battle!.enemies[1]!.combat.blind).toBe(false);
