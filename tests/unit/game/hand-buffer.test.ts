@@ -8,6 +8,50 @@ import { decodeSave, encodeSave } from "../../../src/game/save";
 import { prepareDestination, accept, run, teamRun } from "../../support/game";
 import { draw, drawKeyword } from "../../../src/game/card-zones";
 import { shuffle } from "../../../src/game/random";
+import type { GameEvent } from "../../../src/game/types";
+
+it("keeps draw eligibility and seeded recycling stable while Well Read grows a large deck", () => {
+  const initial = produce(teamRun(42, ["rookhaven", "reedstag", "reedstag"]), (state) => {
+    state.discovery.recruited.rookhaven = 6;
+    state.team[1]!.health = 0;
+    state.team[2]!.health = 0;
+    state.cards = state.cards.filter((card) => !card.temporary);
+    const inert = state.cards.find((card) => card.ownerId === state.team[1]!.id)!;
+    for (let index = 0; index < 200; index++)
+      state.cards.push({ ...inert, id: `copy-${index}`, temporary: true });
+    const active = state.cards.filter((card) => card.ownerId === state.team[0]!.id);
+    state.battle!.copySerial = 200;
+    state.battle!.hand = [];
+    state.battle!.buffer = [];
+    state.battle!.draw = [
+      active[0]!.id,
+      ...state.cards.filter((card) => card.ownerId !== state.team[0]!.id).map((card) => card.id),
+    ];
+    state.battle!.discard = active.slice(1).map((card) => card.id);
+    state.rng = 17;
+  });
+  expect(decodeSave(encodeSave(initial))).toEqual(initial);
+  const random = { ...initial };
+  const recycled = shuffle(random, [...initial.battle!.discard]).reverse();
+  const drawn = [initial.battle!.draw[0]!, ...recycled];
+  const events: GameEvent[] = [];
+  const result = produce(initial, (state) => draw(state, 3, events));
+  expect(result.battle!.hand).toEqual(drawn.flatMap((id, index) => [id, `copy-${200 + index}`]));
+  expect(result.battle!.draw).toEqual(initial.battle!.draw.slice(1));
+  expect(result.battle!.discard).toEqual([]);
+  expect(result.cards).toHaveLength(initial.cards.length + 3);
+  expect(decodeSave(encodeSave(result))).toEqual(result);
+  expect(result.rng).toBe(random.rng);
+  expect(events).toHaveLength(3);
+  expect(initial.cards).toHaveLength(209);
+
+  const revived = produce(result, (state) => {
+    state.team[1]!.health = 1;
+    draw(state, 1);
+  });
+  expect(revived.battle!.buffer).toEqual(["copy-199", "copy-203"]);
+  expect(revived.rng).toBe(result.rng);
+});
 
 it.each([false, true])("preserves seeded draw recycling with all owners knocked out: %s", (allDead) => {
   const initial = produce(run(), (state) => {

@@ -8,15 +8,7 @@ Retain the [recent simplification](archive/SIMPLIFICATION_IMPLEMENTATION.md): on
 
 ## Priorities
 
-| Priority   | Area                                   | Concrete cost today                                                                                                                          | Intended result                                                                  | Refactor risk                                                 |
-| ---------- | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------- |
-| 1          | Damage calculation and reactions       | One `resolveHit` spans lines 148–585 and interleaves calculation, payment, child reactions and presentation facts                            | A readable ordered coordinator with small calculation and reaction owners        | High: RNG, rounding and reaction order are observable         |
-| 2          | Status lifecycle and bookkeeping       | Control, status attribution and deferred Leech require coordinated writes across several modules                                             | Named atomic transitions with one owner for each bookkeeping invariant           | High: turn timing and saved state must remain coherent        |
-| 3          | Targeting rules and battle interaction | Engine admission, ability execution and UI repeat targeting interpretations; the screen also owns input, focus, preview diffing and geometry | Shared read-only targeting rules plus a small battle interaction owner           | Medium: preserve input and rendered behavior                  |
-| 4          | Auto-play evaluation                   | A second set of damage/healing formulas sits beside a long scoring chain and numeric priorities                                              | Separate legal candidates, shared visible arithmetic and explicit scoring policy | Medium to high: policy changes alter balance-tool decisions   |
-| Supporting | Combatant identity and read access     | Player summons use the `Enemy` shape; property tests and mutable accessors obscure intent                                                    | Named side/role queries and distinct read versus initialize operations           | Medium if kept bounded; high if expanded into a state rewrite |
-
-Prioritize damage and status ownership, then targeting and Auto-play. Make supporting identity changes within those stages. Confidence is high in the observed structural costs; maintenance benefit is a judgment, not a reproduced bug or measured speedup.
+Address damage and status ownership first, then targeting and Auto-play; make supporting identity/read-access changes within those stages. The [delivery sequence](#delivery-sequence) records dependencies and gates once. Confidence is high in the observed structural costs; maintenance benefit is a judgment, not a reproduced bug or measured speedup.
 
 ## Shared safeguards
 
@@ -24,7 +16,7 @@ These apply to every stage; the acceptance lists below add boundary-specific req
 
 - Preserve complete command results: acceptance/rejection, ordered events, RNG and final state. Capture baselines before runtime edits; investigate pre-existing failures separately and never refresh golden results to hide unexplained divergence
 - Keep one synchronous command transaction. Calculations and transient payment facts do not become saved continuations, event-triggered gameplay or asynchronous combat
-- Keep each slice working and independently reviewable, removing superseded code before completion. Split demonstrated gameplay fixes into separate changes with regressions; identify/version intentional ranking changes and assess them with paired balance runs
+- Keep each slice working and independently reviewable; remove superseded code, dual implementations, compatibility shims and partial conversions before completion. Split demonstrated gameplay fixes into separate changes with regressions; identify/version intentional ranking changes and assess them with paired balance runs
 - Stop when captured versus live values or deterministic differences cannot be explained. Add no dependencies, generic rule language, plugin/stage framework, ECS, universal registry or rewritten runner merely to shorten files
 - Preserve current-format semantic validation. A persisted-shape change updates schema, version and fixtures together and rejects obsolete development saves without migrations. Normalize only the explicitly changed representation/version in parity comparisons; test decoding separately
 - Follow [verification and protected integration](../CONTRIBUTING.md#verification) and [rendered review](UI.md#required-review). Source inspection cannot establish performance or visual parity; retain task evidence and report actual CI/platform boundaries
@@ -33,7 +25,7 @@ These apply to every stage; the acceptance lists below add boundary-specific req
 
 ### Evidence
 
-[Damage resolution](../src/game/combat/damage.ts) already uses the typed generator stack correctly, but its largest handler still owns nearly every rule involved in a hit:
+[Damage resolution](../src/game/combat/damage.ts) already uses the typed generator stack correctly, but its `resolveHit` handler (lines 148–585 at the assessment baseline) interleaves:
 
 - Admission, Blind/Dodge and Dodge talents at the beginning of `resolveHit`
 - Offensive modifiers, target modifiers, deployed resistance auras and rounding
@@ -48,7 +40,7 @@ These apply to every stage; the acceptance lists below add boundary-specific req
 
 ### Proposed design
 
-Retain [packet policy](../src/game/combat/policy.ts), [typed operations](../src/game/combat/operations.ts) and the [depth-first scheduler](../src/game/combat/resolution.ts).
+Risk is high: RNG, rounding and reaction order are observable. Retain [packet policy](../src/game/combat/policy.ts), [typed operations](../src/game/combat/operations.ts) and the [depth-first scheduler](../src/game/combat/resolution.ts).
 
 1. Make the coordinator show the current sequence as direct calls/generator delegations: Dodge response, offensive arithmetic, mitigation, defense/Health payment, attack procs and retaliation. Use named functions without runtime sorting
 2. Extract pure arithmetic over current combatants, packet eligibility and explicit attack facts. Return numeric facts without RNG, consumed flags, mutations or events; preserve rounding and expression order
@@ -80,7 +72,7 @@ Coordinated mutations are the problem:
 - Burn, Poison and Bleed amounts have parallel `statusSources`; Bleed also has ordered `bleedLeech` obligations
 - Clean Getaway directly reduces stacks and trims Bleed payouts in [damage](../src/game/combat/damage.ts). Ordinary Cleanse clears them in `removeEffects`. Ticking captures payouts and decays stacks in `tickStatuses`. Rupture captures and clears them again in `detonateBleed`
 
-Keep partial reduction, full removal, decay, detonation and rewarded Cleanse distinct while centralizing their bookkeeping.
+Risk is high: turn timing and saved state must remain coherent. Keep partial reduction, full removal, decay, detonation and rewarded Cleanse distinct while centralizing bookkeeping.
 
 ### Proposed design
 
@@ -113,7 +105,7 @@ Reduce invalid combinations through these transitions, not extensible effect obj
 
 The 474-line screen also owns selected and hovered cards/targets, remembered recipients, denial timers, controller navigation, post-command focus, pointer cancellation, authoritative preview execution, status comparisons, target-line geometry and JSX. [TargetPreview](../src/ui/battle/target-preview.tsx) repeats before/after lookup and status comparison work. `JSON.stringify` of rendered status records is used to decide which units need previews.
 
-[Targeting tests](../tests/unit/ui/targeting.test.tsx) protect the player-facing distinctions; changing those rules should not require understanding SVG measurement or focus restoration.
+Risk is medium: preserve input and rendered behavior. [Targeting tests](../tests/unit/ui/targeting.test.tsx) protect the player-facing distinctions; changing those rules should not require understanding SVG measurement or focus restoration.
 
 ### Proposed design
 
@@ -145,7 +137,7 @@ This stage requires rendered/input evidence under [required review](UI.md#requir
 
 The attack `progress` helper independently calculates modified value, Armor, Block, Freeze nullification and lethal eligibility. Healing independently applies Mending, overflow and Clean Slate conditions. These calculations overlap [damage](../src/game/combat/damage.ts) and [protection](../src/game/combat/protection.ts), while classification of follow-up utility repeats knowledge about authored extras.
 
-Retain approximate evaluation of visible facts. Separating approximation policy from mechanics makes intentional omissions distinguishable from drift.
+Risk is medium to high: policy changes alter balance-tool decisions. Retain approximate evaluation of visible facts, separating intentional omissions from mechanical drift.
 
 ### Proposed design
 
@@ -174,7 +166,7 @@ Do not substitute per-candidate `previewPlay`: detached execution can read hidde
 
 Also, `combat(unit)` sounds like a read accessor but initializes state when absent. Initialization is useful inside drafts, while read-only policy/presentation must avoid it. This makes the query/mutation boundary harder to see in code review.
 
-During the preceding stages:
+Risk is medium when bounded, high if expanded into a state rewrite. During the preceding stages:
 
 1. Use named allegiance, roster/summon and maximum-Health queries rather than treating one property test as all three answers
 2. Distinguish read access from initialization; initialize combat state at battle creation and admitted transitions. Give any remaining lazy initializer a mutation-signaling name
@@ -185,37 +177,23 @@ Retain existing arrays and object ownership; add no duplicate roster, live-state
 
 ## Delivery sequence
 
-Use sequential review slices in one task worktree; counts below are not time estimates and may change with reaction semantics.
+Use sequential review slices in one task worktree. Slice counts are planning estimates, not time estimates; reaction semantics may change them. Every stage also meets its section's acceptance list and the [shared safeguards](#shared-safeguards).
 
-| Stage | Work                                                     | Expected review slices | Dependency and exit gate                                                                                            |
-| ----- | -------------------------------------------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| A     | Capture baseline and ownership inventory                 | 1                      | Current deterministic traces, existing regressions and representative policy rankings recorded before runtime edits |
-| B     | Damage calculation and ordered coordinator               | 3–5                    | A; complete command/event/RNG parity before proceeding                                                              |
-| C     | Atomic status/control transitions and payout bookkeeping | 2–4                    | A and stable B; save/resume and control/deferred-payout parity                                                      |
-| D     | Shared targeting queries                                 | 1–2                    | A; admission/recipient equivalence, no presentation change yet                                                      |
-| E     | Battle interaction and preview presentation model        | 2–3                    | D; rendered/input evidence and event/preview parity                                                                 |
-| F     | Auto-play candidate/benefit/ranking separation           | 2–3                    | B and D; ranking, information-boundary and cycle regressions                                                        |
-| G     | Final combined review and protected integration          | 1                      | Required verification and rendered evidence pass on current main combined with the task                             |
+| Stage (review slices) | Depends on  | Work and exit evidence                                                                                                                                                                                                      |
+| --------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A (1)                 | —           | Capture ownership, existing regressions, [combat traces](../tests/unit/game/combat-resolution.test.ts), [fixed-input journey traces](../tests/unit/game/journey-lifecycle.test.ts) and policy rankings before runtime edits |
+| B (3–5)               | A           | Extract damage arithmetic and ordered coordinator; complete command/event/RNG parity, including save/resume                                                                                                                 |
+| C (2–4)               | A, stable B | Centralize status/control transitions and payouts; control/deferred-payout and save/resume parity, with only explicit representation/version normalization                                                                  |
+| D (1–2)               | A           | Share targeting queries; admission/recipient equivalence without presentation changes                                                                                                                                       |
+| E (2–3)               | D           | Separate interaction/preview presentation; record baseline inputs before runtime edits, compare matching after captures (seed/commands/viewport/text/motion), and run targeting/input/motion tests and browser flows        |
+| F (2–3)               | B, D        | Separate Auto-play candidates, benefits and ranking; information-boundary/cycle regressions and fixed-state rankings kept separate from seeded journeys, without rewriting gameplay's fixed command inputs                  |
+| G (1)                 | B–F         | Review the combined diff and pass protected integration and required rendered review on current main plus the task; use changed-file checks and meaningful named suites during development                                  |
 
-Small identity/read-access changes accompany the stage that needs them. The optional persisted control-shape change is its own review slice after C; omit it if helper ownership already removes the substantive risk. B and C should not both change the same reaction semantics in one commit.
-
-### Baseline and verification details
-
-| Stage | Evidence beyond the shared safeguards                                                                                                                                                              |
-| ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| A     | Preserve [combat traces](../tests/unit/game/combat-resolution.test.ts), [fixed-input journey traces](../tests/unit/game/journey-lifecycle.test.ts) and representative policy rankings before edits |
-| B/C   | Compare full results through save/resume, preserving events/RNG; retain the optional representation-only normalization described above                                                             |
-| D/E   | Focused targeting, input and motion tests plus browser flows; capture matching seed, commands, viewport, text size and motion before runtime edits                                                 |
-| F     | Fixed-state rankings separately from seeded journeys; policy changes must not rewrite the fixed command inputs validating gameplay parity                                                          |
-| G     | Final diff review and protected combined integration gate on current main; use changed-file checks and meaningful named suites during development                                                  |
+Small identity/read-access changes accompany their consumer stage. Any optional persisted control-shape change is a separate slice after C; omit it if helpers remove the risk. B and C must not change the same reaction semantics in one commit.
 
 Extend existing [reaction](../tests/unit/game/combat-reactions.test.ts), [combat regression](../tests/unit/game/combat-bug-regressions.test.ts), [policy](../tests/unit/application/battle-policy.test.ts), [actor](../tests/unit/application/battle-actor.test.ts), [save](../tests/unit/game/save-boundaries.test.ts) and [targeting](../tests/unit/ui/targeting.test.tsx) suites only for missing boundaries. Avoid implementation-shaped helper tests and parallel test hierarchies.
 
 Report broad static, full unit/exhaustive, build, browser/replay and Windows packaging/startup results for the exact CI commit when available. Local completion, CI, physical controllers, Steam client and Steam Deck are separate outcomes.
-
-### Stop conditions
-
-Apply the [shared safeguards](#shared-safeguards) at each exit gate. Do not retain dual implementations, compatibility shims or partial conversions. Reject extra abstraction/navigation whose only benefit is a shorter file.
 
 ## Areas to retain
 

@@ -59,13 +59,25 @@ This policy does not authorize swallowing exceptions, replaying commands or inve
 
 ## Interaction states and accessibility
 
+### Tooltips
+
 Shared tooltips follow Alchemy's immediate hover behavior: compact charcoal panels, shared measured corners, 12px padding, content-sized width capped at 120% of the standard creature artwork width (320px at 100% Tooltip size, scaled with Tooltip size), and a 100ms opacity fade on entry and exit, preferring above with an 8px gap. Details stay pointer-transparent, collision-aware and available on intentional keyboard/controller focus. Clicking dismisses details; fresh mouse movement over the artwork restores them. Window blur or a hidden document dismisses open details.
 
-Idle artwork has no visible border; other controls use thin neutral borders. Enabled Buttons scale to 1.035 on hover or intentional navigation focus over 150ms; artwork also animates a 2px gold ring with 1px overlapping the artwork and 1px outside it on hover. This transient interaction scale preserves fixed layout dimensions and composes with the battle hand's existing lift and rotation. Disabled artwork stays inspectable without scale or border emphasis. Reduced motion removes scale and tooltip motion. Hover brightens controls; focus uses an external solid gold outline; selection uses a solid external ring. Knockout adds grayscale and dimming. Talent effects and unlock requirements stay visible without hovering. Unavailable talents distinguish missing points from incomplete earlier rows, remain readable and focusable for their tooltip, and cannot issue purchase commands. All non-art controls provide at least 44px hit height. Icons have accessible labels and are paired with values or names. Color alone never conveys availability or selection.
+### Artwork and availability
+
+Idle artwork has no visible border; other controls use thin neutral borders. Enabled Buttons scale to 1.035 on hover or intentional navigation focus over 150ms; artwork also animates a 2px gold ring with 1px overlapping the artwork and 1px outside it on hover. This transient interaction scale preserves fixed layout dimensions and composes with the battle hand's existing lift and rotation.
+
+Disabled artwork stays inspectable without scale or border emphasis. Reduced motion removes scale and tooltip motion. Hover brightens controls; focus uses an external solid gold outline; selection uses a solid external ring. Knockout adds grayscale and dimming. Talent effects and unlock requirements stay visible without hovering. Unavailable talents distinguish missing points from incomplete earlier rows, remain readable and focusable for their tooltip, and cannot issue purchase commands.
+
+All non-art controls provide at least 44px hit height. Icons have accessible labels and are paired with values or names. Color alone never conveys availability or selection.
+
+### Input and focus
 
 Mouse, W/A/S/D/Tab, and standard-mapped controller actions share the same commands and focus paths. Enter/Space and controller A activate focused controls; B/Escape returns one level. Nested dialogs own their focus and restore a connected, enabled opener; fallback goes to the current screen. Text enlargement, reduced motion, and sound preferences persist independently of game saves. Larger text retains its selected size; reflow, explicit pages and permitted secondary scrolling keep content and controls reachable without hidden clipping. Pause, inspection and navigation do not alter the game revision.
 
-The browser and shadcn/Radix own native Tab order, widget navigation, modal trapping and focus return. The game input adapter supplies controller actions and spatial navigation. Focus outlines, focus rings and focus-only hand lifts appear only during intentional keyboard/controller navigation or activation. Pointer movement, clicks or wheel scrolling remove them completely, including inside portaled dialogs. Automatic focus and Escape/B after pointer use do not enable them. A held stick cannot reclaim navigation after pointer/keyboard use until released. Escape and inspection shortcuts act once per key press. Background windows ignore game input; returning to the window or reconnecting a controller requires releasing held controller controls before they can act.
+The browser and shadcn/Radix own native Tab order, widget navigation, modal trapping and focus return. The game input adapter supplies controller actions and spatial navigation. Focus outlines, focus rings and focus-only hand lifts appear only during intentional keyboard/controller navigation or activation. Pointer movement, clicks or wheel scrolling remove them completely, including inside portaled dialogs. Automatic focus and Escape/B after pointer use do not enable them.
+
+A held stick cannot reclaim navigation after pointer/keyboard use until released. Escape and inspection shortcuts act once per key press. Background windows ignore game input; returning to the window or reconnecting a controller requires releasing held controller controls before they can act.
 
 ## Shared control states and feedback
 
@@ -86,7 +98,9 @@ Ordinary loading indicators wait 200ms; ready content never waits for them. [Sta
 
 Navigation crossfades decorative inert snapshots over 150ms, or 250ms into battle, without duplicating IDs, effects or focus. Collection paging is instant. Result earnings count over 400ms; rewards arrive 75ms apart and level-up icons pulse to 110% over 250ms. Input finishes presentation and accepts the original action. Shared swap copies use opposing 32px arcs over 150ms and a 4px/150ms selected lift; slot ownership and dialog focus settle immediately.
 
-Reduced motion removes spatial effects and makes control transitions immediate, showing final results without replay. Pause, interruption and teardown revoke owned animations, timers and stale callbacks. [Battle presentation](ui/battle.md) owns combat-specific motion and feedback.
+### Presentation lifetime
+
+Animations and feedback consume committed state; they never issue gameplay commands, grant rewards, save previews or delay command acceptance. Reduced motion removes spatial effects and makes control transitions immediate, showing final results without replay. Pause and interruption revoke owned animations, timers and stale callbacks; resume never replays canceled actions. Teardown also releases owned listeners and voices. Decorative copies are inert, hidden from assistive technology and stripped of IDs. [Battle presentation](ui/battle.md) defines feedback lifetimes, interruption and motion exceptions.
 
 ## Layout, artwork size and spacing
 
@@ -106,12 +120,33 @@ Battle-specific geometry follows the [battle layout](ui/battle.md#layout).
 
 Use semantic tokens from `src/ui/tokens.css` for theme, typography, geometry and combat colors. Palette changes belong there; use opacity/state variants rather than per-component colors. [Token bindings and checks](DESIGN_SYSTEM.md#token-bindings) describe role pairs, Tailwind mappings and permitted measured styles.
 
-- Typography: locally bundled Inter Variable, regular rules, medium controls, semibold names, tabular numbers; names wrap without ellipsis and rules remain left-aligned. 16px rules/controls, 20px names, 24px screen headings, 14px secondary information. Inspection enlarges rules to 18px and names to 28px. Font license: `Docs/FONT-LICENSE.txt`.
-- Spacing: a 4px grid, using layout instead of decorative separators or panels.
-- Color: Alchemy's warm near-black canvas (`hsl(30 10% 3%)`), charcoal surfaces (`hsl(30 8% 6%)`), ivory text (`hsl(40 25% 88%)`), warm muted text (`hsl(35 12% 62%)`), subtle warm borders (`hsl(30 8% 16%)`), and gold (`#cd9b51`, with light, deep and pale roles). Shared semantic tokens own the palette; gameplay keyword identities remain unchanged. Gold marks primary actions, selection and focus. Knockout adds grayscale; affordability never prevents inspection.
-- Geometry: shared smooth corners use native CSS `corner-shape: squircle` (a superellipse approximation). Shared surfaces derive their radius from 22.37% of the measured shorter border-box side, bounded to 10–32px. Unmeasured controls use their 44px height; empty artwork slots use the shared artwork short side. Artwork, dialogs, tooltips, buttons and tabs share this rule; pills and circular controls remain fully rounded. Artwork images inset their radius by the border width; outer interaction frames expand it by their offset. Browsers without corner-shape support retain ordinary rounded corners. Semantic shadcn sm/md/lg/xl radii remain derived at 0.6/0.8/1/1.4 times the local base. No sharp visible corners or `rounded-none` overrides. Thin borders, keyword plasma, shine borders and short-label shines follow the shared effects owner; other decorative shadows, glows and textures remain excluded. Artwork has no UI scrim; external selection rings remain interaction indicators.
-- Motion: 150ms general transitions; control, feedback and reduced-motion behavior follow [shared states](#shared-control-states-and-feedback).
-- Icons: Lucide, normally 20px within 44px hit areas; compact header exceptions belong to the screen specification. Use accessible names and immediate hover/focus details where applicable.
+### Typography
+
+Use locally bundled Inter Variable, regular rules, medium controls, semibold names, tabular numbers; names wrap without ellipsis and rules remain left-aligned. 16px rules/controls, 20px names, 24px screen headings, 14px secondary information. Inspection enlarges rules to 18px and names to 28px. Font license: `Docs/FONT-LICENSE.txt`.
+
+### Spacing
+
+Use a 4px grid, using layout instead of decorative separators or panels.
+
+### Color
+
+Alchemy's warm near-black canvas (`hsl(30 10% 3%)`), charcoal surfaces (`hsl(30 8% 6%)`), ivory text (`hsl(40 25% 88%)`), warm muted text (`hsl(35 12% 62%)`), subtle warm borders (`hsl(30 8% 16%)`), and gold (`#cd9b51`, with light, deep and pale roles). Shared semantic tokens own the palette; gameplay keyword identities remain unchanged. Gold marks primary actions, selection and focus. Knockout adds grayscale; affordability never prevents inspection.
+
+### Geometry
+
+Shared smooth corners use native CSS `corner-shape: squircle` (a superellipse approximation). Shared surfaces derive their radius from 22.37% of the measured shorter border-box side, bounded to 10–32px. Unmeasured controls use their 44px height; empty artwork slots use the shared artwork short side. Artwork, dialogs, tooltips, buttons and tabs share this rule; pills and circular controls remain fully rounded.
+
+Artwork images inset their radius by the border width; outer interaction frames expand it by their offset. Browsers without corner-shape support retain ordinary rounded corners. Semantic shadcn sm/md/lg/xl radii remain derived at 0.6/0.8/1/1.4 times the local base. No sharp visible corners or `rounded-none` overrides.
+
+Thin borders, keyword plasma, shine borders and short-label shines follow the shared effects owner; other decorative shadows, glows and textures remain excluded. Artwork has no UI scrim; external selection rings remain interaction indicators.
+
+### Motion
+
+150ms general transitions; control, feedback and reduced-motion behavior follow [shared states](#shared-control-states-and-feedback).
+
+### Icons
+
+Lucide, normally 20px within 44px hit areas; compact header exceptions belong to the screen specification. Use accessible names and immediate hover/focus details where applicable.
 
 ## Combat vocabulary
 
