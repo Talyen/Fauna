@@ -1,0 +1,4521 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`preserves visible rankings and legal choices for bloomquail 1`] = `
+[
+  [
+    "ordinary",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:bloomquail-draw",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Bloom Cradle for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:bloomquail-heal",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Petal Veil for its visible benefit",
+        "score": 150,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:bloomquail-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Petal Rampart for its visible benefit",
+        "score": 106,
+      },
+    ],
+  ],
+  [
+    "injured",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:bloomquail-draw",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Bloom Cradle for its visible benefit",
+        "score": 3002,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:bloomquail-heal",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Petal Veil for its visible benefit",
+        "score": 3002,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:bloomquail-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Petal Rampart for its visible benefit",
+        "score": 106,
+      },
+    ],
+  ],
+  [
+    "defended",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:bloomquail-draw",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Bloom Cradle for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:bloomquail-heal",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Petal Veil for its visible benefit",
+        "score": 150,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:bloomquail-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Petal Rampart for its visible benefit",
+        "score": 106,
+      },
+    ],
+  ],
+  [
+    "talented",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:bloomquail-draw",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Bloom Cradle for its visible benefit",
+        "score": 3002,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:bloomquail-heal",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Petal Veil for its visible benefit",
+        "score": 3002,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:bloomquail-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Petal Rampart for its visible benefit",
+        "score": 106,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`preserves visible rankings and legal choices for cadenza 1`] = `
+[
+  [
+    "ordinary",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cadenza-resonant-well",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Resonant Well for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cadenza-rousing-refrain",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Rousing Refrain for its visible benefit",
+        "score": 170,
+      },
+    ],
+  ],
+  [
+    "injured",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cadenza-resonant-well",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Resonant Well for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cadenza-rousing-refrain",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Rousing Refrain for its visible benefit",
+        "score": 170,
+      },
+    ],
+  ],
+  [
+    "defended",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cadenza-resonant-well",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Resonant Well for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cadenza-rousing-refrain",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Rousing Refrain for its visible benefit",
+        "score": 170,
+      },
+    ],
+  ],
+  [
+    "talented",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cadenza-resonant-well",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Resonant Well for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cadenza-rousing-refrain",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Rousing Refrain for its visible benefit",
+        "score": 170,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`preserves visible rankings and legal choices for captoad 1`] = `
+[
+  [
+    "ordinary",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:captoad-attack",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:captoad-swap",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Bogbound Leap for its visible benefit",
+        "score": 150,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:captoad-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Mushroom Guard for its visible benefit",
+        "score": 103,
+      },
+    ],
+  ],
+  [
+    "injured",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:captoad-attack",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:captoad-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Mushroom Guard for its visible benefit",
+        "score": 3003,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:captoad-swap",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Bogbound Leap for its visible benefit",
+        "score": 150,
+      },
+    ],
+  ],
+  [
+    "defended",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:captoad-attack",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:captoad-swap",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Bogbound Leap for its visible benefit",
+        "score": 150,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:captoad-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Mushroom Guard for its visible benefit",
+        "score": 103,
+      },
+    ],
+  ],
+  [
+    "talented",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:captoad-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Mushroom Guard for its visible benefit",
+        "score": 3003,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:captoad-attack",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:captoad-swap",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Bogbound Leap for its visible benefit",
+        "score": 150,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`preserves visible rankings and legal choices for chimecricket 1`] = `
+[
+  [
+    "ordinary",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:chimecricket-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1004,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:chimecricket-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1004,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:chimecricket-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1004,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:chimecricket-nullify",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Hush Dome for its visible benefit",
+        "score": 151,
+      },
+    ],
+  ],
+  [
+    "injured",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:chimecricket-heal",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Lullaby Drift for its visible benefit",
+        "score": 3004,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:chimecricket-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1004,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:chimecricket-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1004,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:chimecricket-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1004,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:chimecricket-nullify",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Hush Dome for its visible benefit",
+        "score": 151,
+      },
+    ],
+  ],
+  [
+    "defended",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:chimecricket-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 504,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:chimecricket-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 504,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:chimecricket-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 504,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:chimecricket-nullify",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Hush Dome for its visible benefit",
+        "score": 151,
+      },
+    ],
+  ],
+  [
+    "talented",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:chimecricket-heal",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Lullaby Drift for its visible benefit",
+        "score": 3004,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:chimecricket-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 504,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:chimecricket-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 504,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:chimecricket-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 504,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:chimecricket-nullify",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Hush Dome for its visible benefit",
+        "score": 151,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`preserves visible rankings and legal choices for cindernewt 1`] = `
+[
+  [
+    "ordinary",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cindernewt-ashen-veil",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3003,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cindernewt-ember-breath",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3003,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cindernewt-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cindernewt-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cindernewt-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+    ],
+  ],
+  [
+    "injured",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cindernewt-ashen-veil",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3003,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cindernewt-ember-breath",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3003,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cindernewt-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cindernewt-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cindernewt-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+    ],
+  ],
+  [
+    "defended",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cindernewt-ashen-veil",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1503,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cindernewt-ember-breath",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1503,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cindernewt-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cindernewt-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cindernewt-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+    ],
+  ],
+  [
+    "talented",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cindernewt-ashen-veil",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1503,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cindernewt-ember-breath",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1503,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cindernewt-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cindernewt-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:cindernewt-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`preserves visible rankings and legal choices for coralcurl 1`] = `
+[
+  [
+    "ordinary",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:coralcurl-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:coralcurl-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:coralcurl-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:coralcurl-swap",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Coral Spiral for its visible benefit",
+        "score": 150,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:coralcurl-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Bubble Ward for its visible benefit",
+        "score": 106,
+      },
+    ],
+  ],
+  [
+    "injured",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:coralcurl-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:coralcurl-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:coralcurl-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:coralcurl-swap",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Coral Spiral for its visible benefit",
+        "score": 150,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:coralcurl-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Bubble Ward for its visible benefit",
+        "score": 106,
+      },
+    ],
+  ],
+  [
+    "defended",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:coralcurl-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:coralcurl-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:coralcurl-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:coralcurl-swap",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Coral Spiral for its visible benefit",
+        "score": 150,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:coralcurl-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Bubble Ward for its visible benefit",
+        "score": 106,
+      },
+    ],
+  ],
+  [
+    "talented",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:coralcurl-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:coralcurl-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:coralcurl-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:coralcurl-swap",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Coral Spiral for its visible benefit",
+        "score": 150,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:coralcurl-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Bubble Ward for its visible benefit",
+        "score": 106,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`preserves visible rankings and legal choices for dawncall 1`] = `
+[
+  [
+    "ordinary",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dawncall-attack",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dawncall-teamCleanse",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Dawn Cry for its visible benefit",
+        "score": 150,
+      },
+    ],
+  ],
+  [
+    "injured",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dawncall-attack",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dawncall-heal",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Morning Bloom for its visible benefit",
+        "score": 3002,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dawncall-teamCleanse",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Dawn Cry for its visible benefit",
+        "score": 150,
+      },
+    ],
+  ],
+  [
+    "defended",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dawncall-attack",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dawncall-teamCleanse",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Dawn Cry for its visible benefit",
+        "score": 150,
+      },
+    ],
+  ],
+  [
+    "talented",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dawncall-heal",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Morning Bloom for its visible benefit",
+        "score": 3002,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dawncall-attack",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dawncall-teamCleanse",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Dawn Cry for its visible benefit",
+        "score": 150,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`preserves visible rankings and legal choices for dunefox 1`] = `
+[
+  [
+    "ordinary",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dunefox-dune-whirl",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3003,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dunefox-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dunefox-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dunefox-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dunefox-dodge",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Mirage Step for its visible benefit",
+        "score": 180,
+      },
+    ],
+  ],
+  [
+    "injured",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dunefox-dune-whirl",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3003,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dunefox-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dunefox-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dunefox-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dunefox-dodge",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Mirage Step for its visible benefit",
+        "score": 180,
+      },
+    ],
+  ],
+  [
+    "defended",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dunefox-dune-whirl",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1503,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dunefox-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dunefox-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dunefox-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dunefox-dodge",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Mirage Step for its visible benefit",
+        "score": 180,
+      },
+    ],
+  ],
+  [
+    "talented",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dunefox-dune-whirl",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1503,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dunefox-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dunefox-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dunefox-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:dunefox-dodge",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Mirage Step for its visible benefit",
+        "score": 180,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`preserves visible rankings and legal choices for emberback 1`] = `
+[
+  [
+    "ordinary",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:emberback-furnace-breath",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:emberback-magma-stomp",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:emberback-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1004,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:emberback-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1004,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:emberback-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1004,
+      },
+    ],
+  ],
+  [
+    "injured",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:emberback-furnace-breath",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:emberback-magma-stomp",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:emberback-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1004,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:emberback-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1004,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:emberback-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1004,
+      },
+    ],
+  ],
+  [
+    "defended",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:emberback-furnace-breath",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:emberback-magma-stomp",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:emberback-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 504,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:emberback-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 504,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:emberback-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 504,
+      },
+    ],
+  ],
+  [
+    "talented",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:emberback-furnace-breath",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:emberback-magma-stomp",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:emberback-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 504,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:emberback-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 504,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:emberback-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 504,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`preserves visible rankings and legal choices for euphera 1`] = `
+[
+  [
+    "ordinary",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:euphera-twilight-lance",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1005,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:euphera-twilight-lance",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1005,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:euphera-twilight-lance",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1005,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:euphera-possible-path",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Possible Path for its visible benefit",
+        "score": 190,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:euphera-wish-exchange",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Wish Exchange for its visible benefit",
+        "score": 101,
+      },
+    ],
+  ],
+  [
+    "injured",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:euphera-twilight-lance",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1005,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:euphera-twilight-lance",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1005,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:euphera-twilight-lance",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1005,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:euphera-possible-path",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Possible Path for its visible benefit",
+        "score": 190,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:euphera-wish-exchange",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Wish Exchange for its visible benefit",
+        "score": 101,
+      },
+    ],
+  ],
+  [
+    "defended",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:euphera-twilight-lance",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 505,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:euphera-twilight-lance",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 505,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:euphera-twilight-lance",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 505,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:euphera-possible-path",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Possible Path for its visible benefit",
+        "score": 190,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:euphera-wish-exchange",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Wish Exchange for its visible benefit",
+        "score": 101,
+      },
+    ],
+  ],
+  [
+    "talented",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:euphera-twilight-lance",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 505,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:euphera-twilight-lance",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 505,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:euphera-twilight-lance",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 505,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:euphera-possible-path",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Possible Path for its visible benefit",
+        "score": 190,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:euphera-wish-exchange",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Wish Exchange for its visible benefit",
+        "score": 101,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`preserves visible rankings and legal choices for glintstride 1`] = `
+[
+  [
+    "ordinary",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:glintstride-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:glintstride-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:glintstride-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:glintstride-dodge",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Mirage Run for its visible benefit",
+        "score": 180,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:glintstride-teamBlind",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use False Horizon for its visible benefit",
+        "score": 153,
+      },
+    ],
+  ],
+  [
+    "injured",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:glintstride-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:glintstride-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:glintstride-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:glintstride-dodge",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Mirage Run for its visible benefit",
+        "score": 180,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:glintstride-teamBlind",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use False Horizon for its visible benefit",
+        "score": 153,
+      },
+    ],
+  ],
+  [
+    "defended",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:glintstride-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:glintstride-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:glintstride-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:glintstride-dodge",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Mirage Run for its visible benefit",
+        "score": 180,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:glintstride-teamBlind",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use False Horizon for its visible benefit",
+        "score": 153,
+      },
+    ],
+  ],
+  [
+    "talented",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:glintstride-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:glintstride-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:glintstride-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:glintstride-dodge",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Mirage Run for its visible benefit",
+        "score": 180,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:glintstride-teamBlind",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use False Horizon for its visible benefit",
+        "score": 153,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`preserves visible rankings and legal choices for memento 1`] = `
+[
+  [
+    "ordinary",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:memento-lost-procession",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Lost Procession for its visible benefit",
+        "score": 1600,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:memento-lost-procession:2",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Lost Procession for its visible benefit",
+        "score": 1600,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:memento-treasury-echo",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Treasury Echo for its visible benefit",
+        "score": 400,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:memento-treasury-echo:2",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Treasury Echo for its visible benefit",
+        "score": 400,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:memento-drowned-revelation",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Drowned Revelation for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:memento-drowned-revelation:2",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Drowned Revelation for its visible benefit",
+        "score": 202,
+      },
+    ],
+  ],
+  [
+    "injured",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:memento-lost-procession",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Lost Procession for its visible benefit",
+        "score": 1600,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:memento-lost-procession:2",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Lost Procession for its visible benefit",
+        "score": 1600,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:memento-treasury-echo",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Treasury Echo for its visible benefit",
+        "score": 400,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:memento-treasury-echo:2",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Treasury Echo for its visible benefit",
+        "score": 400,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:memento-drowned-revelation",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Drowned Revelation for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:memento-drowned-revelation:2",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Drowned Revelation for its visible benefit",
+        "score": 202,
+      },
+    ],
+  ],
+  [
+    "defended",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:memento-lost-procession",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Lost Procession for its visible benefit",
+        "score": 1600,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:memento-lost-procession:2",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Lost Procession for its visible benefit",
+        "score": 1600,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:memento-treasury-echo",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Treasury Echo for its visible benefit",
+        "score": 400,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:memento-treasury-echo:2",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Treasury Echo for its visible benefit",
+        "score": 400,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:memento-drowned-revelation",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Drowned Revelation for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:memento-drowned-revelation:2",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Drowned Revelation for its visible benefit",
+        "score": 202,
+      },
+    ],
+  ],
+  [
+    "talented",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:memento-lost-procession",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Lost Procession for its visible benefit",
+        "score": 1600,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:memento-lost-procession:2",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Lost Procession for its visible benefit",
+        "score": 1600,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:memento-treasury-echo",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Treasury Echo for its visible benefit",
+        "score": 400,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:memento-treasury-echo:2",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Treasury Echo for its visible benefit",
+        "score": 400,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:memento-drowned-revelation",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Drowned Revelation for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:memento-drowned-revelation:2",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Drowned Revelation for its visible benefit",
+        "score": 202,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`preserves visible rankings and legal choices for mossguard 1`] = `
+[
+  [
+    "ordinary",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:mossguard-attack",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:mossguard-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Boulder Brace for its visible benefit",
+        "score": 106,
+      },
+    ],
+  ],
+  [
+    "injured",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:mossguard-attack",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:mossguard-heal",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Moss Renewal for its visible benefit",
+        "score": 3002,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:mossguard-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Boulder Brace for its visible benefit",
+        "score": 106,
+      },
+    ],
+  ],
+  [
+    "defended",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:mossguard-attack",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:mossguard-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Boulder Brace for its visible benefit",
+        "score": 106,
+      },
+    ],
+  ],
+  [
+    "talented",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:mossguard-heal",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Moss Renewal for its visible benefit",
+        "score": 3002,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:mossguard-attack",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:mossguard-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Boulder Brace for its visible benefit",
+        "score": 106,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`preserves visible rankings and legal choices for neradora 1`] = `
+[
+  [
+    "ordinary",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:neradora-tide-cup",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Tide Cup for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:neradora-undertow-knot",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Undertow Knot for its visible benefit",
+        "score": 103,
+      },
+    ],
+  ],
+  [
+    "injured",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:neradora-bloom-shelter",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Bloom Shelter for its visible benefit",
+        "score": 3002,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:neradora-tide-cup",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Tide Cup for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:neradora-undertow-knot",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Undertow Knot for its visible benefit",
+        "score": 103,
+      },
+    ],
+  ],
+  [
+    "defended",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:neradora-tide-cup",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Tide Cup for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:neradora-undertow-knot",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Undertow Knot for its visible benefit",
+        "score": 103,
+      },
+    ],
+  ],
+  [
+    "talented",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:neradora-bloom-shelter",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Bloom Shelter for its visible benefit",
+        "score": 3002,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:neradora-tide-cup",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Tide Cup for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:neradora-undertow-knot",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Undertow Knot for its visible benefit",
+        "score": 103,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`preserves visible rankings and legal choices for pollenmoth 1`] = `
+[
+  [
+    "ordinary",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:pollenmoth-attack",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use the average visible benefit across random targets",
+        "score": 1003,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:pollenmoth-teamGuard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Petal Shelter for its visible benefit",
+        "score": 102,
+      },
+    ],
+  ],
+  [
+    "injured",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:pollenmoth-heal",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Bloomwake for its visible benefit",
+        "score": 3003,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:pollenmoth-attack",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use the average visible benefit across random targets",
+        "score": 1003,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:pollenmoth-teamGuard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Petal Shelter for its visible benefit",
+        "score": 102,
+      },
+    ],
+  ],
+  [
+    "defended",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:pollenmoth-attack",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use the average visible benefit across random targets",
+        "score": 503,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:pollenmoth-teamGuard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Petal Shelter for its visible benefit",
+        "score": 102,
+      },
+    ],
+  ],
+  [
+    "talented",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:pollenmoth-heal",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Bloomwake for its visible benefit",
+        "score": 3003,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:pollenmoth-attack",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use the average visible benefit across random targets",
+        "score": 503,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:pollenmoth-teamGuard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Petal Shelter for its visible benefit",
+        "score": 102,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`preserves visible rankings and legal choices for prismram 1`] = `
+[
+  [
+    "ordinary",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-spectrum-lance",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1004,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-spectrum-lance",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1004,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-spectrum-lance",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1004,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Faceted Ward for its visible benefit",
+        "score": 103,
+      },
+    ],
+  ],
+  [
+    "injured",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-spectrum-lance",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1004,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-spectrum-lance",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1004,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-spectrum-lance",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1004,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Faceted Ward for its visible benefit",
+        "score": 103,
+      },
+    ],
+  ],
+  [
+    "defended",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-spectrum-lance",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 504,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-spectrum-lance",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 504,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-spectrum-lance",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 504,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Faceted Ward for its visible benefit",
+        "score": 103,
+      },
+    ],
+  ],
+  [
+    "talented",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-spectrum-lance",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 504,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-spectrum-lance",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 504,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-spectrum-lance",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 504,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:prismram-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Faceted Ward for its visible benefit",
+        "score": 103,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`preserves visible rankings and legal choices for reedstag 1`] = `
+[
+  [
+    "ordinary",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:reedstag-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:reedstag-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:reedstag-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:reedstag-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Reed Shelter for its visible benefit",
+        "score": 103,
+      },
+    ],
+  ],
+  [
+    "injured",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:reedstag-heal",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Mending Spring for its visible benefit",
+        "score": 3004,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:reedstag-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:reedstag-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:reedstag-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:reedstag-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Reed Shelter for its visible benefit",
+        "score": 103,
+      },
+    ],
+  ],
+  [
+    "defended",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:reedstag-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:reedstag-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:reedstag-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:reedstag-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Reed Shelter for its visible benefit",
+        "score": 103,
+      },
+    ],
+  ],
+  [
+    "talented",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:reedstag-heal",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Mending Spring for its visible benefit",
+        "score": 3004,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:reedstag-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:reedstag-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:reedstag-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:reedstag-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Reed Shelter for its visible benefit",
+        "score": 103,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`preserves visible rankings and legal choices for ringpalm 1`] = `
+[
+  [
+    "ordinary",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:ringpalm-harmonic-set",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3003,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:ringpalm-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:ringpalm-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:ringpalm-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:ringpalm-teamProtection",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Seedling Circle for its visible benefit",
+        "score": 104,
+      },
+    ],
+  ],
+  [
+    "injured",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:ringpalm-harmonic-set",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3003,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:ringpalm-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:ringpalm-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:ringpalm-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:ringpalm-teamProtection",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Seedling Circle for its visible benefit",
+        "score": 104,
+      },
+    ],
+  ],
+  [
+    "defended",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:ringpalm-harmonic-set",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1503,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:ringpalm-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:ringpalm-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:ringpalm-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:ringpalm-teamProtection",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Seedling Circle for its visible benefit",
+        "score": 104,
+      },
+    ],
+  ],
+  [
+    "talented",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:ringpalm-harmonic-set",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1503,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:ringpalm-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:ringpalm-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:ringpalm-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:ringpalm-teamProtection",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Seedling Circle for its visible benefit",
+        "score": 104,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`preserves visible rankings and legal choices for rookhaven 1`] = `
+[
+  [
+    "ordinary",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:rookhaven-borrowed-brilliance",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3003,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:rookhaven-margin-of-possibility",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Margin of Possibility for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "copy-0",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Margin of Possibility for its visible benefit",
+        "score": 202,
+      },
+    ],
+  ],
+  [
+    "injured",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:rookhaven-borrowed-brilliance",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3003,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:rookhaven-margin-of-possibility",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Margin of Possibility for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "copy-0",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Margin of Possibility for its visible benefit",
+        "score": 202,
+      },
+    ],
+  ],
+  [
+    "defended",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:rookhaven-unwritten-ending",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Remove visible defenses before spending Mana on blocked attacks",
+        "score": 1703,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "copy-1",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Remove visible defenses before spending Mana on blocked attacks",
+        "score": 1703,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:rookhaven-borrowed-brilliance",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1503,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:rookhaven-margin-of-possibility",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Margin of Possibility for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "copy-0",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Margin of Possibility for its visible benefit",
+        "score": 202,
+      },
+    ],
+  ],
+  [
+    "talented",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:rookhaven-unwritten-ending",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Remove visible defenses before spending Mana on blocked attacks",
+        "score": 1703,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "copy-1",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Remove visible defenses before spending Mana on blocked attacks",
+        "score": 1703,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:rookhaven-borrowed-brilliance",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1503,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:rookhaven-margin-of-possibility",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Margin of Possibility for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "copy-0",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Margin of Possibility for its visible benefit",
+        "score": 202,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`preserves visible rankings and legal choices for shadebrim 1`] = `
+[
+  [
+    "ordinary",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:shadebrim-attack",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3003,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:shadebrim-draw",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Noon Bloom for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:shadebrim-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Noonward for its visible benefit",
+        "score": 104,
+      },
+    ],
+  ],
+  [
+    "injured",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:shadebrim-attack",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3003,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:shadebrim-draw",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Noon Bloom for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:shadebrim-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Noonward for its visible benefit",
+        "score": 104,
+      },
+    ],
+  ],
+  [
+    "defended",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:shadebrim-attack",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1503,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:shadebrim-draw",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Noon Bloom for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:shadebrim-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Noonward for its visible benefit",
+        "score": 104,
+      },
+    ],
+  ],
+  [
+    "talented",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:shadebrim-attack",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1503,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:shadebrim-draw",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Noon Bloom for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:shadebrim-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Noonward for its visible benefit",
+        "score": 104,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`preserves visible rankings and legal choices for sternshell 1`] = `
+[
+  [
+    "ordinary",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:sternshell-spiral-return",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3003,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:sternshell-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:sternshell-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:sternshell-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:sternshell-swap",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Siphon Vault for its visible benefit",
+        "score": 150,
+      },
+    ],
+  ],
+  [
+    "injured",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:sternshell-spiral-return",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3003,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:sternshell-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:sternshell-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:sternshell-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:sternshell-swap",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Siphon Vault for its visible benefit",
+        "score": 150,
+      },
+    ],
+  ],
+  [
+    "defended",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:sternshell-spiral-return",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1503,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:sternshell-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:sternshell-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:sternshell-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:sternshell-swap",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Siphon Vault for its visible benefit",
+        "score": 150,
+      },
+    ],
+  ],
+  [
+    "talented",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:sternshell-spiral-return",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1503,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:sternshell-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 507,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:sternshell-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 507,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:sternshell-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 507,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:sternshell-swap",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Siphon Vault for its visible benefit",
+        "score": 150,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`preserves visible rankings and legal choices for stillara 1`] = `
+[
+  [
+    "ordinary",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:stillara-reed-reservoir",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Reed Reservoir for its visible benefit",
+        "score": 401,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:stillara-thaw-path",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Thaw Path for its visible benefit",
+        "score": 200,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:stillara-water-remembers",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Water Remembers for its visible benefit",
+        "score": 200,
+      },
+    ],
+  ],
+  [
+    "injured",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:stillara-water-remembers",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Water Remembers for its visible benefit",
+        "score": 3001,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:stillara-reed-reservoir",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Reed Reservoir for its visible benefit",
+        "score": 401,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:stillara-thaw-path",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Thaw Path for its visible benefit",
+        "score": 200,
+      },
+    ],
+  ],
+  [
+    "defended",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:stillara-reed-reservoir",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Reed Reservoir for its visible benefit",
+        "score": 401,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:stillara-thaw-path",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Thaw Path for its visible benefit",
+        "score": 200,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:stillara-water-remembers",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Water Remembers for its visible benefit",
+        "score": 200,
+      },
+    ],
+  ],
+  [
+    "talented",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:stillara-water-remembers",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Water Remembers for its visible benefit",
+        "score": 3001,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:stillara-reed-reservoir",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Reed Reservoir for its visible benefit",
+        "score": 401,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:stillara-thaw-path",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Thaw Path for its visible benefit",
+        "score": 200,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`preserves visible rankings and legal choices for tournelle 1`] = `
+[
+  [
+    "ordinary",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:tournelle-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1008,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:tournelle-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1008,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:tournelle-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1004,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:tournelle-teamClearBlind",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Kindled Courage for its visible benefit",
+        "score": 200,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:tournelle-swapLowest",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Safe Passage for its visible benefit",
+        "score": 150,
+      },
+    ],
+  ],
+  [
+    "injured",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:tournelle-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1008,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:tournelle-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1008,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:tournelle-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 1008,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:tournelle-teamClearBlind",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Kindled Courage for its visible benefit",
+        "score": 200,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:tournelle-swapLowest",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Safe Passage for its visible benefit",
+        "score": 150,
+      },
+    ],
+  ],
+  [
+    "defended",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:tournelle-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 508,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:tournelle-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 508,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:tournelle-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 504,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:tournelle-teamClearBlind",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Kindled Courage for its visible benefit",
+        "score": 200,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:tournelle-swapLowest",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Safe Passage for its visible benefit",
+        "score": 150,
+      },
+    ],
+  ],
+  [
+    "talented",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:tournelle-attack",
+          "targetId": "enemy-0",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 508,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:tournelle-attack",
+          "targetId": "enemy-1",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 508,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:tournelle-attack",
+          "targetId": "enemy-2",
+          "type": "play",
+        },
+        "reason": "Make progress against an enemy creature",
+        "score": 508,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:tournelle-teamClearBlind",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Kindled Courage for its visible benefit",
+        "score": 200,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:tournelle-swapLowest",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Safe Passage for its visible benefit",
+        "score": 150,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`preserves visible rankings and legal choices for wickwaltz 1`] = `
+[
+  [
+    "ordinary",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:wickwaltz-attack",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:wickwaltz-draw",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Thermal Rise for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:wickwaltz-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Saffron Screen for its visible benefit",
+        "score": 103,
+      },
+    ],
+  ],
+  [
+    "injured",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:wickwaltz-attack",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 3006,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:wickwaltz-draw",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Thermal Rise for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:wickwaltz-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Saffron Screen for its visible benefit",
+        "score": 103,
+      },
+    ],
+  ],
+  [
+    "defended",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:wickwaltz-attack",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:wickwaltz-draw",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Thermal Rise for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:wickwaltz-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Saffron Screen for its visible benefit",
+        "score": 103,
+      },
+    ],
+  ],
+  [
+    "talented",
+    [
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:wickwaltz-attack",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Damage enemies; give roster creatures priority over Minions",
+        "score": 1506,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:wickwaltz-draw",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Thermal Rise for its visible benefit",
+        "score": 202,
+      },
+      {
+        "command": {
+          "autoEndTurn": false,
+          "cardId": "ally-0:wickwaltz-guard",
+          "targetId": undefined,
+          "type": "play",
+        },
+        "reason": "Use Saffron Screen for its visible benefit",
+        "score": 103,
+      },
+    ],
+  ],
+]
+`;
