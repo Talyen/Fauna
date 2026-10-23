@@ -13,7 +13,7 @@ The [approved assessment and detailed plan](archive/SIMPLIFICATION_PLAN.md) reco
 
 ## Verification approach
 
-Current-route lifecycle and ordered combat fingerprints were captured before runtime edits, omitting only retired fields and save version. Those fingerprints must pass unchanged after implementation. Existing gameplay, save, recruitment, copy/Legendary, Cloud race, shell focus and presentation tests retain their behavior coverage; navigation nesting and pure Cloud policy have focused regressions.
+Current-route lifecycle and ordered combat fingerprints were captured before runtime edits, omitting only retired fields and save version. Their captured play commands are fixed inputs, so later Auto-play policy revisions cannot rewrite the baseline. Those fingerprints must pass unchanged after implementation. Existing gameplay, save, recruitment, copy/Legendary, Cloud race, shell focus and presentation tests retain their behavior coverage; navigation nesting and pure Cloud policy have focused regressions.
 
 Local verification retains the five-minute deadline, one test worker and 2 GiB memory cap. The exhaustive creature-combination suite moved intact to `tests/exhaustive/`; ordinary full Vitest discovery and hosted CI still execute every combination and intermediate save assertion. Changed-file integration checks its owning command/save contract instead of repeating the full matrix locally. Full CI owns broad static, unit, build, browser, interaction replay and Windows packaging/startup verification. See [test coverage policy](../tests/README.md).
 

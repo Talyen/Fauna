@@ -3,7 +3,7 @@ import { produce } from "immer";
 import { describe, expect, expectTypeOf, it } from "vitest";
 import { createGame, dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { chooseBattleCommand } from "../../../src/application/battle-policy";
+import { journeyBaselinePlays } from "./fixtures/journey-baseline-plays";
 import type { BattleState, Command, GameState, RewardState } from "../../../src/game/types";
 
 // Compare gameplay, RNG and ordered output across the current journey rules.
@@ -75,8 +75,8 @@ describe("journey lifecycle behavior baseline", () => {
       if (state.expedition?.recruit && state.team.length + state.reserves.length < 5)
         step({ type: "recruitDestination", species: state.expedition.recruit });
       step({ type: "beginBattle" });
-      const command = chooseBattleCommand(state, false);
-      if (command.type === "play") {
+      const command = journeyBaselinePlays[seed]![room];
+      if (command) {
         const preview = previewCard(state, command.cardId, command.targetId);
         expect(state).toEqual(decodeSave(encodeSave(state)));
         trace.push(["preview", preview.accepted, fingerprint(preview.state, preview.events)]);
