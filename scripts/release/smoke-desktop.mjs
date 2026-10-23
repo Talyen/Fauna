@@ -21,7 +21,8 @@ try {
   await app.evaluate(({ app }) => {
     const { createRequire } = process.getBuiltinModule("module");
     const require = createRequire(`${app.getAppPath()}/package.json`);
-    require("./desktop/steam-overlay.cjs").loadOverlayApi();
+    const overlayModule = `${app.getAppPath()}/desktop/steam-overlay.cjs`;
+    require(overlayModule).loadOverlayApi();
   });
   const window = await app.firstWindow();
   window.setDefaultTimeout(20000);
