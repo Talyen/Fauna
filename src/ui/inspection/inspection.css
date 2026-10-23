@@ -2,6 +2,7 @@
   background: var(--background);
 }
 .inspection {
+  background: transparent;
   width: min(
     calc(var(--art-portrait-width) * 3 + var(--screen-item-gap) * 2 + var(--space-6) * 2 + 2px),
     calc(100vw - var(--space-12))
@@ -46,7 +47,6 @@
   width: min(var(--inspection-dialog-width), calc(100vw - var(--space-12)));
   padding: var(--space-6);
   border-color: transparent;
-  background: var(--background);
   align-items: center;
 }
 .creature-inspection .inspection-back {
