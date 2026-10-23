@@ -27,6 +27,13 @@ export function dependencyNotices(root, lock) {
       location.includes("\\")
     )
       throw new Error(`Invalid dependency location: ${location}`);
+    // Platform-specific optional native binaries are absent on other build hosts.
+    if (
+      location.startsWith("node_modules/@koromix/koffi-") &&
+      entry.optional &&
+      ((entry.os && !entry.os.includes(process.platform)) || (entry.cpu && !entry.cpu.includes(process.arch)))
+    )
+      continue;
     const directory = path.join(root, location);
     const manifest = readJSON(path.join(directory, "package.json"));
     if (manifest.version !== entry.version) throw new Error(`Dependency version differs: ${location}`);
@@ -38,7 +45,10 @@ export function dependencyNotices(root, lock) {
       )
       .sort();
     const texts = files.map((name) => readFileSync(path.join(directory, name), "utf8"));
-    const supplement = SUPPLEMENTS.get(identity);
+    // Koffi 3.3.3 publishes its platform binaries separately under the same MIT license.
+    const supplement =
+      SUPPLEMENTS.get(identity) ??
+      (/^@koromix\/koffi-[a-z0-9-]+@3\.3\.3$/.test(identity) ? "node_modules/koffi/LICENSE.txt" : undefined);
     if (!texts.length && supplement) texts.push(readFileSync(path.join(root, supplement), "utf8"));
     if (!texts.length || texts.some((text) => !text.trim()))
       throw new Error(`Missing dependency license text: ${identity}`);

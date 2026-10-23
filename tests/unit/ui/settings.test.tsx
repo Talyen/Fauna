@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { act, cleanup, render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import userEvent, { PointerEventsCheckLevel } from "@testing-library/user-event";
 import { App } from "../../../src/ui/App";
 import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
@@ -31,7 +31,8 @@ it("applies slider and switch changes live, persists preferences, and preserves 
   vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
   const session = createSession(createBrowserPlatform(localStorage), 7);
   await session.load();
-  const user = userEvent.setup();
+  // Layout and pointer hit testing run in the browser; this DOM suite checks state and persistence.
+  const user = userEvent.setup({ pointerEventsCheck: PointerEventsCheckLevel.Never });
   const view = render(<App session={session} />);
   const game = session.store.getState().game;
   try {
@@ -46,6 +47,8 @@ it("applies slider and switch changes live, persists preferences, and preserves 
     expect(screen.queryByRole("radio", { name: "75%" })).toBeNull();
     expect(screen.getByRole("switch", { name: "Auto-end turn" }).getAttribute("aria-checked")).toBe("true");
     await user.click(screen.getByRole("switch", { name: "Auto-end turn" }));
+    await user.click(screen.getByRole("radio", { name: "PlayStation" }));
+    expect(localStorage.getItem("fauna.controller-prompts")).toBe("playstation");
     await user.click(screen.getByRole("tab", { name: "Sound" }));
     for (const label of ["Master volume", "Music volume", "Sound effects volume"])
       expect(screen.getByRole("slider", { name: label }).getAttribute("aria-valuenow")).toBe("50");
@@ -72,6 +75,7 @@ it("applies slider and switch changes live, persists preferences, and preserves 
     expect(screen.getByRole("radio", { name: "75%" }).getAttribute("aria-checked")).toBe("true");
     expect(screen.getByRole("radio", { name: "Tooltip 125%" }).getAttribute("aria-checked")).toBe("true");
     await user.click(screen.getByRole("tab", { name: "Battle" }));
+    expect(screen.getByRole("radio", { name: "PlayStation" }).getAttribute("aria-checked")).toBe("true");
     expect(screen.getByRole("switch", { name: "Auto-end turn" }).getAttribute("aria-checked")).toBe("false");
     await user.click(screen.getByRole("tab", { name: "Sound" }));
     expect(screen.getByRole("slider", { name: "Master volume" }).getAttribute("aria-valuenow")).toBe("0");
@@ -94,7 +98,8 @@ it("normalizes and independently persists background controls without changing g
   localStorage.setItem("fauna.background-particles", "101");
   const session = createSession(createBrowserPlatform(localStorage), 7);
   await session.load();
-  const user = userEvent.setup();
+  // Layout and pointer hit testing run in the browser; this DOM suite checks state and persistence.
+  const user = userEvent.setup({ pointerEventsCheck: PointerEventsCheckLevel.Never });
   const view = render(<App session={session} />);
   const game = session.store.getState().game;
   try {

@@ -30,6 +30,7 @@ import { Button } from "../../components/ui/button";
 import { Popover, PopoverAnchor, PopoverContent } from "../../components/ui/popover";
 import { BattleScreen } from "../battle/battle-screen";
 import type { Inspection } from "../shared/inspection-model";
+import { CONTROLLER_PROMPTS, type ControllerFamily } from "../shared/navigation/controller-prompts";
 import { type Controls, connectInput, type InputAction } from "../shared/navigation/input";
 import { Draft } from "../expedition/draft";
 import { TeamSelection } from "../expedition/team-selection";
@@ -63,12 +64,22 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
     [],
   );
   const [mode, setMode] = useState<"pointer" | "keyboard" | "controller">("pointer");
+  const [detectedController, setDetectedController] = useState<ControllerFamily>("xbox");
   const [navigation, setNavigation] = useState(false);
   const [audioPreferences, updateAudioPreferences] = useAudioPreferences();
   const playSound = useGameAudio(session, audioPreferences, route === "home");
   useActivationAudio(playSound);
-  const { scale, setScale, tooltipScale, setTooltipScale, autoEndTurn, setAutoEndTurn } =
-    useDisplayPreferences();
+  const {
+    scale,
+    setScale,
+    tooltipScale,
+    setTooltipScale,
+    autoEndTurn,
+    setAutoEndTurn,
+    controller,
+    setController,
+  } = useDisplayPreferences();
+  const controllerPrompts = CONTROLLER_PROMPTS[controller === "auto" ? detectedController : controller];
   const active =
     !["victory", "defeat"].includes(game.phase) &&
     (game.team.length > 0 || game.selected.length > 0 || (game.phase === "draft" && draftStarted));
@@ -171,6 +182,13 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
       backFromPage,
       openMenu,
     });
+  const disconnectRef = useRef(() => {});
+  useEffect(() => {
+    disconnectRef.current = () => {
+      setAutoplay(false);
+      if (route === "play") showMenu();
+    };
+  }, [route, setAutoplay, showMenu]);
   const actionRef = useRef(input);
   useEffect(() => {
     actionRef.current = input;
@@ -194,6 +212,7 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
         });
       },
       () => session.store.getState().overlayActive,
+      { detected: setDetectedController, disconnected: () => disconnectRef.current() },
     );
     return () => {
       disconnect();
@@ -297,7 +316,13 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                     inspect={inspect}
                   />
                 ) : null}
-                {route === "glossary" ? <GlossaryScreen back={backFromPage} /> : null}
+                {route === "glossary" ? (
+                  <GlossaryScreen
+                    back={backFromPage}
+                    controller={mode === "controller"}
+                    prompts={controllerPrompts}
+                  />
+                ) : null}
                 {route === "settings" ? (
                   <Screen className="menu-screen settings-screen" aria-labelledby="menu-screen-title">
                     <header className="collection-heading">
@@ -317,6 +342,8 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                       desktop={desktop}
                       autoEndTurn={autoEndTurn}
                       setAutoEndTurn={setAutoEndTurn}
+                      controller={controller}
+                      setController={setController}
                     />
                   </Screen>
                 ) : null}
@@ -393,6 +420,7 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                           bursts={bursts}
                           onDenied={deny}
                           controller={mode === "controller"}
+                          endTurnPrompt={controllerPrompts.endTurn}
                           navigateFocus={navigation}
                         />
                       ) : game.phase === "recruit" || game.phase === "boon" ? (

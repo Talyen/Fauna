@@ -2,6 +2,7 @@ import type { MutableRefObject } from "react";
 export type Controls = MutableRefObject<((action: InputAction) => boolean) | null>;
 
 import { isAvailableFocusTarget } from "./focus";
+import { controllerFamily, type ControllerFamily } from "./controller-prompts";
 
 // Game navigation forwards arrow events to Radix without changing the active input device.
 const bridgedKeys = new WeakSet<KeyboardEvent>();
@@ -136,6 +137,7 @@ export function connectInput(
   onAction: (action: InputAction) => void,
   onMode: (mode: "keyboard" | "controller" | "pointer", navigation: boolean) => void,
   externallySuspended: () => boolean = () => false,
+  controller: { detected?: (family: ControllerFamily) => void; disconnected?: () => void } = {},
 ) {
   let interactionMode: "keyboard" | "controller" | "pointer" | undefined;
   let navigation = false;
@@ -143,6 +145,7 @@ export function connectInput(
   let disposed = false;
   let previous = new Set<InputAction>();
   let connected = new Set<number>();
+  let activePad: number | undefined;
   const blocked = new Set<InputAction>();
   const repeatAt = new Map<InputAction, number>();
   const changeMode = (mode: "keyboard" | "controller" | "pointer", navigating = navigation) => {
@@ -269,6 +272,16 @@ export function connectInput(
       }
     }
     connected = present;
+    if (
+      !suspended &&
+      !externallySuspended() &&
+      document.hasFocus() &&
+      activePad !== undefined &&
+      !present.has(activePad)
+    ) {
+      activePad = undefined;
+      if (interactionMode === "controller") controller.disconnected?.();
+    }
     for (const action of blocked) if (!actions.has(action)) blocked.delete(action);
     const revoked = () => {
       if (disposed || suspended || externallySuspended() || !document.hasFocus()) {
@@ -285,6 +298,14 @@ export function connectInput(
       if (blocked.has(action)) continue;
       const directional = ["left", "right", "up", "down"].includes(action);
       if (!previous.has(action) || (directional && now >= (repeatAt.get(action) ?? 0))) {
+        const pad = pads.find(
+          (pad) =>
+            pad?.connected !== false && pad?.mapping === "standard" && gamepadActions(pad).includes(action),
+        );
+        if (pad) {
+          activePad = pads.indexOf(pad);
+          controller.detected?.(controllerFamily(pad.id ?? ""));
+        }
         changeMode("controller", navigation || directional || action === "confirm" || action === "inspect");
         if (revoked()) break;
         onAction(action);

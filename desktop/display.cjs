@@ -26,11 +26,17 @@ function clampBounds(bounds, displays, minimum = MINIMUM_CONTENT_SIZE) {
     height: Math.round(height),
   };
 }
-/** @param {{directory: string, screen: import("electron").Screen, isolated?: boolean, notify?: (state: import("../src/platform/ports").DisplayState) => void}} options */
-async function createDisplay({ directory, screen, isolated = false, notify = () => {} }) {
+/** @param {{directory: string, screen: import("electron").Screen, isolated?: boolean, notify?: (state: import("../src/platform/ports").DisplayState) => void, bigPicture?: boolean}} options */
+async function createDisplay({
+  directory,
+  screen,
+  isolated = false,
+  notify = () => {},
+  bigPicture = process.env.SteamTenfoot === "1",
+}) {
   const file = path.join(directory, "display.json");
   /** @type {{mode: "windowed" | "fullscreen", bounds: import("electron").Rectangle | null}} */
-  let preferences = { mode: "windowed", bounds: null };
+  let preferences = { mode: bigPicture ? "fullscreen" : "windowed", bounds: null };
   if (!isolated)
     try {
       const value = JSON.parse(await fs.readFile(file, "utf8"));

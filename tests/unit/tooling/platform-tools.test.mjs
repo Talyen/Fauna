@@ -134,3 +134,19 @@ it("serializes fullscreen requests and persists device preferences outside game 
     await rm(dir, { recursive: true, force: true });
   }
 });
+
+it("defaults Big Picture to fullscreen while preserving an explicit windowed preference", async () => {
+  const dir = await mkdtemp(path.join(tmpdir(), "fauna-tenfoot-"));
+  const screen = { getAllDisplays: () => [{ workArea: { x: 0, y: 0, width: 1920, height: 1080 } }] };
+  try {
+    const first = await createDisplay({ directory: dir, screen, bigPicture: true });
+    expect(first.read().mode).toBe("fullscreen");
+    await first.dispose();
+    await writeFile(path.join(dir, "display.json"), JSON.stringify({ mode: "windowed", bounds: null }));
+    const saved = await createDisplay({ directory: dir, screen, bigPicture: true });
+    expect(saved.read().mode).toBe("windowed");
+    await saved.dispose();
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
+});

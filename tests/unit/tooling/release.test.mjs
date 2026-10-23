@@ -10,8 +10,26 @@ import {
   verifyBuildIdentity,
   releaseIdentityPlugin,
 } from "../../../scripts/lib/release-identity.mjs";
-import { releaseArgs, verifyRelease } from "../../../scripts/release/verify-release.mjs";
+import {
+  releaseArgs,
+  verifyRelease,
+  verifySteamConfiguration,
+} from "../../../scripts/release/verify-release.mjs";
 import { requireVerifiedCI } from "../../../scripts/release/require-ci.mjs";
+
+it("blocks Steam releases with missing, development or invalid App IDs", async () => {
+  await repository(async (root) => {
+    mkdirSync(path.join(root, "desktop"));
+    const file = path.join(root, "desktop/steam-config.json");
+    for (const appId of [null, 0, -1, 480, "123456", 1.5, 0x100000000]) {
+      writeFileSync(file, JSON.stringify({ appId }));
+      await expect(verifySteamConfiguration(root)).rejects.toThrow("Fauna's own App ID");
+    }
+    writeFileSync(file, JSON.stringify({ appId: 123456 }));
+    await expect(verifySteamConfiguration(root)).resolves.toBe(123456);
+    await expect(verifyRelease(root, { versionOnly: true })).resolves.toMatchObject({ version: "1.0.0" });
+  });
+});
 
 it("requires the exact commit's successful final CI gate, excluding suppressed duplicate runs", () => {
   const commit = "a".repeat(40);

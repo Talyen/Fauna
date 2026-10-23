@@ -88,7 +88,8 @@
     "steamworks.js": "0.4.0",
     "tailwind-merge": "^3.7.0",
     "zod": "4.6.7",
-    "zustand": "5.0.16"
+    "zustand": "5.0.16",
+    "koffi": "3.3.3"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.14.0",
@@ -145,14 +146,17 @@
     },
     "afterPack": "desktop/after-pack.cjs",
     "asarUnpack": [
-      "**/node_modules/steamworks.js/**/*"
+      "**/node_modules/steamworks.js/**/*",
+      "**/node_modules/koffi/**/*",
+      "**/node_modules/@koromix/koffi-*/**/*"
     ],
     "npmRebuild": false
   },
   "allowScripts": {
     "@swc/core@1.16.18": true,
     "electron-winstaller@5.4.0": true,
-    "fsevents@2.3.3": true
+    "fsevents@2.3.3": true,
+    "koffi@3.3.3": true
   },
   "packageManager": "npm@12.2.1"
 }

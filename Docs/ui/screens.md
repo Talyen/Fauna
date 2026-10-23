@@ -88,8 +88,10 @@ Use distinct Lucide icons, a 24px semibold light title, body-size pale-gold sect
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | Display              | Independent Text size and Tooltip size radios: 75%, 100%, 125%, default 100%; Background Glow and Background Particles: 0–100%, default 100% |
 | Sound                | Sound switch, Master/Music/Sound effects sliders with percentage readouts in 10-point steps (all default 50%), Mute in background            |
-| Battle               | Auto-end turn switch, enabled by default                                                                                                     |
+| Battle               | Auto-end turn switch, enabled by default; Controller prompts radios: Automatic (default), Xbox / Deck, PlayStation, Nintendo                 |
 | Desktop Display only | Windowed/Fullscreen radios reflecting confirmed native state                                                                                 |
+
+Controller prompts detect known browser device IDs; Steam Input may expose an Xbox identity for another controller, so manual selection takes precedence. Standard gamepad button positions remain unchanged. Losing the controller currently being used stops autoplay and opens pause during play; reconnecting does not resume.
 
 Changes persist immediately outside progression and Cloud. Tooltip size changes tooltip type/width without scaling artwork. Sound changes apply live without replaying actions. Sliders retain native keyboard behavior; W/A/S/D and controller navigation adjust horizontally and move between rows vertically.
 

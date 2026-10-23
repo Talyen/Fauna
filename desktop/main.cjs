@@ -21,6 +21,23 @@ app.setName("Fauna");
 const isolatedDirectory = process.env.FAUNA_PREVIEW_USER_DATA || process.env.FAUNA_SMOKE_USER_DATA;
 if (isolatedDirectory) app.setPath("userData", path.resolve(isolatedDirectory));
 if (!app.requestSingleInstanceLock()) app.exit(0);
+const isolated =
+  process.env.FAUNA_DISABLE_STEAM === "1" ||
+  !!process.env.FAUNA_SMOKE_USER_DATA ||
+  !!process.env.FAUNA_PREVIEW_USER_DATA ||
+  process.env.FAUNA_PERF_CAPTURE === "1";
+// Chromium graphics switches must be installed before app readiness and device creation.
+if (!isolated) {
+  try {
+    const config = require("./steam-config.json");
+    const appId = app.isPackaged ? config.appId : Number(process.env.FAUNA_STEAM_APP_ID || config.appId);
+    if (typeof appId === "number" && Number.isSafeInteger(appId) && appId > 0)
+      require("steamworks.js").electronEnableSteamOverlay();
+  } catch {
+    console.warn("[steam] Overlay graphics setup unavailable; local play remains available.");
+  }
+}
+
 app.on("second-instance", () => {
   if (window && !window.isDestroyed()) {
     if (window.isMinimized()) window.restore();
@@ -64,11 +81,6 @@ void app.whenReady().then(async () => {
     createResourceHandler(path.join(__dirname, "../dist"), (url) => net.fetch(url)),
   );
   crashReporter.start({ uploadToServer: false });
-  const isolated =
-    process.env.FAUNA_DISABLE_STEAM === "1" ||
-    !!process.env.FAUNA_SMOKE_USER_DATA ||
-    !!process.env.FAUNA_PREVIEW_USER_DATA ||
-    process.env.FAUNA_PERF_CAPTURE === "1";
   steam = await createSteam({
     app,
     utilityProcess,
