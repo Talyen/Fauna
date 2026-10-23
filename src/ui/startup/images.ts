@@ -1,5 +1,5 @@
 const IMAGE_TIMEOUT_MS = 15000;
-export const FONT_TIMEOUT_MS = 10000;
+const FONT_TIMEOUT_MS = 10000;
 type Report = (message: string) => void;
 
 /** Fetch and decode share one deadline, including cached and synchronously failed images. */

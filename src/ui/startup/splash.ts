@@ -1,4 +1,4 @@
-export const STARTUP_MINIMUM_MS = 5000;
+const STARTUP_MINIMUM_MS = 5000;
 const PHRASES = [
   "Adventure awaits…",
   "Shuffling decks…",

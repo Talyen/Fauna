@@ -92,7 +92,7 @@ try {
       const page = await context.newPage();
       page.setDefaultTimeout(5000);
       await page.goto(url);
-      await page.getByRole("button", { name: "Continue", exact: true }).waitFor();
+      await page.getByRole("button", { name: "Continue", exact: true }).waitFor({ timeout: 30000 });
       for (index = 0; index < (generate ? options.steps : trace.length); index++) {
         const step = generate ? { kind: pick(kinds) } : structuredClone(trace[index]);
         if (generate && step.kind === "battle") step.command = actor.choose(state, false).command;
@@ -107,7 +107,7 @@ try {
         if (generate) report.actions.push(step); // Record attempted actions before touching rendered controls.
         if (step.kind === "reload") {
           await page.reload();
-          await page.getByRole("button", { name: "Continue", exact: true }).waitFor();
+          await page.getByRole("button", { name: "Continue", exact: true }).waitFor({ timeout: 30000 });
         } else if (step.kind === "battle") {
           await page.getByRole("button", { name: "Continue", exact: true }).click();
           await battleAction(page, {
