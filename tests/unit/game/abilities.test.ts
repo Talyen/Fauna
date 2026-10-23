@@ -2,7 +2,9 @@ import { expect, it, vi } from "vitest";
 import { produce } from "immer";
 import { executeAbility } from "../../../src/game/combat/abilities";
 import { abilityExtras } from "../../../src/game/combat/ability-values";
-import { CARDS, definition, species } from "../../../src/game/content";
+import { CARDS, SPECIES, definition, species } from "../../../src/game/content";
+import { availablePlays, playTargetError } from "../../../src/game/play-queries";
+import { battlefield } from "../../../src/game/battlefield";
 import { enemyCanUse, enemyCard, cardText } from "../../../src/game/card-rules";
 import { freshCombat, hit, mostInjured } from "../../../src/game/combat/index";
 import { actionValue, enemyAbilityValue } from "../../../src/game/ability-rules";
@@ -10,6 +12,37 @@ import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import type { GameEvent } from "../../../src/game/types";
 import { requireBattle, teamRun } from "../../support/game";
+
+it.each(SPECIES)("shares explicit target admission with commands for $id", ({ id }) => {
+  const game = requireBattle(
+    produce(teamRun(42, [id]), (state) => {
+      state.battle!.hand = state.cards.map((card) => card.id);
+      state.battle!.draw = [];
+      state.battle!.discard = [];
+      state.battle!.buffer = [];
+    }),
+  );
+  const saved = encodeSave(game);
+  const candidates = availablePlays(game, false);
+  expect(candidates).toHaveLength(game.cards.length);
+  for (const play of candidates) {
+    for (const command of play.commands) expect(dispatch(game, command).accepted).toBe(true);
+    for (const targetId of [
+      undefined,
+      "missing",
+      ...battlefield(game, "player").map((unit) => unit.id),
+      ...battlefield(game, "enemy").map((unit) => unit.id),
+    ]) {
+      const error = playTargetError(game, play.def, play.actor.id, targetId);
+      const result = dispatch(game, { type: "play", cardId: play.card.id, targetId, autoEndTurn: false });
+      if (error) {
+        expect(result).toMatchObject({ accepted: false, reason: error, events: [] });
+        expect(result.state).toBe(game);
+      } else expect(result.accepted).toBe(true);
+    }
+  }
+  expect(encodeSave(game)).toBe(saved);
+});
 
 it("heals the lowest living Health fraction, retaining battlefield order on ties", () => {
   const allies = teamRun(1, ["mossguard", "prismram", "emberback"]).team;

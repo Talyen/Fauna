@@ -5,6 +5,21 @@ export const DAMAGE_LABELS = Object.fromEntries(DAMAGE_TYPES.map((id) => [id, ke
   DamageType,
   string
 >;
+export function cardTargeting(def: CardDefinition): "enemy" | "ally" | "self" | "automatic" {
+  switch (def.effect) {
+    case "attack":
+      return def.target ? "automatic" : "enemy";
+    case "guard":
+      return def.target === "self" ? "self" : "ally";
+    case "heal":
+      return def.target === "self" ? "self" : def.target ? "automatic" : "ally";
+    case "dodge":
+      return "self";
+    default:
+      return "automatic";
+  }
+}
+
 export function enemyCard(card: CardDefinition): CardDefinition {
   // Enemies have no hand; retain the self-healing half of a draw ability
   if (card.effect === "draw") {

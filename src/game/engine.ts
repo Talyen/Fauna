@@ -1,3 +1,4 @@
+import { inspectCardPlay, playTargetError } from "./play-queries";
 import { commandPhases } from "./command-phases";
 import { executeAbility } from "./combat/abilities";
 import { canVisitCampfire, campfireRecovery, canVisitMerchant, canRecruitDestination } from "./destinations";
@@ -11,7 +12,7 @@ import {
   cardKeywords,
   canBuyTalent,
 } from "./progression";
-import { ensureCombat, gainMana, restoreHealth, controlled } from "./combat/index";
+import { ensureCombat, gainMana, restoreHealth } from "./combat/index";
 import { battlefield } from "./battlefield";
 import { courtRemembers, removeDepartedMinions } from "./combat/legendary";
 import { fillHand, recycleDiscard } from "./card-zones";
@@ -95,33 +96,12 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
     return reject(state, "Complete your starter choices first.");
   if (command.type === "play") {
     if (state.phase !== "battle") throw new Error("Invalid battle admission.");
-    const battle = state.battle;
-    const card = state.cards.find((c) => c.id === command.cardId);
-    if (!card || !battle.hand.includes(card.id)) return reject(state, "That card is not in your hand.");
-    const actor = state.team.find((c) => c.id === card.ownerId);
-    if (!actor || actor.health <= 0) return reject(state, "That creature is knocked out.");
-    if (controlled(actor)) return reject(state, "That creature is Stunned or Frozen.");
-    const def = definition(card.definitionId);
-    if (battle.mana < cardCost(card, state)) return reject(state, "Not enough mana.");
-    if (
-      def.effect === "attack" &&
-      !def.target &&
-      !battlefield(state, "enemy").some((e) => e.id === command.targetId && e.health > 0)
-    )
-      return reject(state, "Choose a living enemy.");
-    if (
-      ((def.effect === "guard" && def.target !== "self") || (def.effect === "heal" && !def.target)) &&
-      !battlefield(state, "player").some((c) => c.id === command.targetId && c.health > 0)
-    )
-      return reject(state, "Choose a living ally.");
-    if (
-      (def.effect === "dodge" ||
-        ((def.effect === "guard" || def.effect === "heal") && def.target === "self")) &&
-      command.targetId !== undefined &&
-      command.targetId !== actor.id
-    )
-      return reject(state, "This ability targets its acting creature.");
+    const play = inspectCardPlay(state, command.cardId);
+    if (!play.allowed) return reject(state, play.reason);
+    const targetError = playTargetError(state, play.def, play.actor.id, command.targetId);
+    if (targetError) return reject(state, targetError);
   }
+
   if (command.type === "visitCampfire" && !canVisitCampfire(state))
     return reject(state, "There is no available Campfire.");
   const replacement = pendingReplacement(state);

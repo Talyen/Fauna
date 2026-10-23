@@ -1,3 +1,4 @@
+import { cardTargeting } from "../card-rules";
 import { interceptAttack } from "./interception";
 import { battlefield, isEnemy } from "../battlefield";
 import { summonEcho, createPearls, drawBossCards } from "./legendary";
@@ -370,7 +371,7 @@ export function executeAbility(
         const targets =
           def.effect === "teamGuard"
             ? alive(friendlyRow(state, action))
-            : def.target === "self"
+            : cardTargeting(def) === "self"
               ? [actor]
               : friendlyRow(state, action).filter((unit) => unit.id === action.allyTargetId);
         for (const recipient of targets) grantBlock(state, recipient, value, events);
@@ -381,7 +382,7 @@ export function executeAbility(
         const targets =
           def.target === "allAllies"
             ? alive(allies)
-            : def.target === "self"
+            : cardTargeting(def) === "self"
               ? [actor]
               : def.target === "mostInjured"
                 ? [mostInjured(allies)!]
