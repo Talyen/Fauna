@@ -11,7 +11,10 @@ export interface Diagnostic {
 const sanitize = (value: string) =>
   value
     .replace(/(?:\/[\w .-]+){2,}\/|[A-Z]:\\(?:[^\\\n]+\\)+/g, "[path]/")
-    .replace(/(?:token|password|secret|authorization)\s*[:=]\s*\S+/gi, "[redacted]")
+    .replace(
+      /(?:token|password|secret|authorization)["']?\s*[:=]\s*(?:(?:Bearer|Basic)\s+)?(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\S+)/gi,
+      "[redacted]",
+    )
     .slice(0, 1200);
 
 function errorMessage(error: unknown): string {

@@ -221,9 +221,10 @@ describe("game commands", () => {
     ["glintstride", "chimecricket", "captoad"],
   ] as const) {
     const scenario = scenarios.find((entry) => kinds.every((kind) => entry.kinds.includes(kind)))!;
+    // Full command/checkpoint journeys need headroom during combined local verification.
     it(`supports representative lineup ${scenario.name} through commands and save round trips`, () => {
       expectSupportedLineup(scenario);
-    });
+    }, 15_000);
   }
 });
 describe("save validation", () => {

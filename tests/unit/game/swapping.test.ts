@@ -4,14 +4,14 @@ import { produce } from "immer";
 import { dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { CARDS, species } from "../../../src/game/content";
-import { pendingReplacement } from "../../../src/game/team";
+import { pendingReplacement, swapBackup } from "../../../src/game/team";
 import { chooseBattleCommand } from "../../../src/application/battle-policy";
-import { completeRecruitment, accept, run, winBattle, swapFixture } from "../../support/game";
+import { addBackups, completeRecruitment, accept, run, winBattle, swapFixture } from "../../support/game";
 
 function withReserves() {
   return produce(run(), (d) => {
     for (const kind of ["pollenmoth", "emberback"] as const) {
-      d.reserves.push({
+      addBackups(d, {
         id: `recruit-${kind}`,
         species: kind,
         health: species(kind).health,
@@ -22,6 +22,40 @@ function withReserves() {
     }
   });
 }
+
+it.each([false, true])(
+  "removes the outgoing creature's generated cards on a swap (ability: %s)",
+  (fromCard) => {
+    const game = produce(withReserves(), (draft) => {
+      const original = draft.cards.find((card) => card.ownerId === draft.team[0]!.id)!;
+      for (let index = 0; index < 4; index++) {
+        const id = `copy-${index}`;
+        draft.cards.push({ ...original, id, temporary: true });
+      }
+      const retained = draft.cards.find((card) => card.ownerId === draft.team[1]!.id)!;
+      draft.cards.push({ ...retained, id: "copy-4", temporary: true });
+      draft.battle!.copySerial = 5;
+      const permanent = draft.cards.filter((card) => !card.temporary).map((card) => card.id);
+      draft.battle!.hand = ["copy-0", ...permanent.slice(0, 5)];
+      draft.battle!.buffer = ["copy-1", "copy-4"];
+      draft.battle!.draw = ["copy-2", ...permanent.slice(5)];
+      draft.battle!.discard = ["copy-3"];
+      draft.team[0]!.health = 0;
+    });
+    expect(decodeSave(encodeSave(game))).toEqual(game);
+    const next = produce(game, (draft) => {
+      swapBackup(draft, draft.team[0]!.id, draft.reserves[0]!.id, [], fromCard);
+    });
+    expect(next.cards.filter((card) => card.temporary).map((card) => card.id)).toEqual(["copy-4"]);
+    for (const zone of ["hand", "buffer", "draw", "discard"] as const)
+      expect(next.battle![zone].some((id) => ["copy-0", "copy-1", "copy-2", "copy-3"].includes(id))).toBe(
+        false,
+      );
+    expect(next.battle!.hand).toContain("copy-4");
+    if (!fromCard) expect(next.rng).toBe(game.rng);
+    expect(decodeSave(encodeSave(next))).toEqual(next);
+  },
+);
 
 describe("knockout replacements", () => {
   it("rejects free swaps of healthy or controlled allies and removed lineup commands without changing RNG", () => {
@@ -180,7 +214,7 @@ describe("knockout replacements", () => {
 it("rejects duplicate identities, missing cards and more than five individuals", () => {
   for (const modify of [
     (d: ReturnType<typeof withReserves>) => {
-      d.reserves.push({ ...d.reserves[0]!, id: "extra-owned-creature" });
+      addBackups(d, { ...d.reserves[0]!, id: "extra-owned-creature" });
     },
     (d: ReturnType<typeof withReserves>) => {
       d.reserves[0]!.id = d.team[0]!.id;

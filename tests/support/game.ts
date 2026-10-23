@@ -6,7 +6,7 @@ import { produce } from "immer";
 import { encounterPacks } from "../../src/game/encounters";
 import { createGame, dispatch } from "../../src/game/engine";
 import { definition, species, type SpeciesId } from "../../src/game/content";
-import type { Command, GameState, Lifecycle, BattleState } from "../../src/game/types";
+import type { Command, GameState, Lifecycle, BattleState, Creature } from "../../src/game/types";
 // Shared bound accounts for solo Legendary Bosses and their recruitment choices
 export const FULL_JOURNEY_SEED = 22;
 export const FULL_JOURNEY_COMMAND_BUDGET = 800;
@@ -52,6 +52,15 @@ export function accept(s: GameState, c: Command) {
   const result = dispatch(s, c);
   if (!result.accepted) throw new Error(result.reason);
   return result.state;
+}
+/** Backups in valid checkpoints already have committed Collection records. */
+export function addBackups(state: GameState, ...creatures: Creature[]) {
+  for (const creature of creatures) {
+    if (!state.discovery.encountered.includes(creature.species))
+      state.discovery.encountered.push(creature.species);
+    state.discovery.recruited[creature.species] ??= 1;
+  }
+  state.reserves.push(...creatures);
 }
 /** Set up formation/lifetime scenarios without admitting a free player command. */
 export function swapFixture(s: GameState, command: Extract<Command, { type: "swap" }>) {

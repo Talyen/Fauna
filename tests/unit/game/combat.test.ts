@@ -1,5 +1,6 @@
 import type { GameEvent } from "../../../src/game/types";
 import {
+  addBackups,
   authoredPack,
   swapFixture,
   completeRecruitment,
@@ -294,7 +295,7 @@ it("keeps a formation changed by a mechanic resumable through Campfire Rest", ()
     s.encounter = 3;
     s.journey!.victories = s.encounter;
     s.expedition = { pack: authoredPack(s.encounter), recruit: null, lastRoom: null };
-    s.reserves.push({ id: "reserve-moth", species: "pollenmoth", health: 5, block: 0, attacked: false });
+    addBackups(s, { id: "reserve-moth", species: "pollenmoth", health: 5, block: 0, attacked: false });
   });
   state = accept(state, { type: "visitCampfire" });
   const outgoing = state.team[0]!.id;

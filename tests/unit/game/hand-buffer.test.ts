@@ -1,4 +1,4 @@
-import { swapFixture } from "../../support/game";
+import { addBackups, swapFixture } from "../../support/game";
 import { freshCombat } from "../../../src/game/combat/index";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
@@ -134,7 +134,7 @@ describe("hidden hand overflow", () => {
 
   it("preserves buffered card slots and switches their owner during a reserve swap", () => {
     const s = produce(run(), (d) => {
-      d.reserves.push({
+      addBackups(d, {
         id: "recruit-pollenmoth",
         species: "pollenmoth",
         health: 23,

@@ -7,6 +7,7 @@ import {
   run,
   winBattle,
   bossReward,
+  addBackups,
 } from "../../support/game";
 import { freshCombat } from "../../../src/game/combat/index";
 import { describe, it, expect } from "vitest";
@@ -153,14 +154,17 @@ describe("keyword progression and rewards", () => {
   it("confirms either deployed or reserved replacements after committing recruitment", () => {
     for (const replace of ["ally-0", "recruit-pollenmoth"] as const) {
       let s = produce(winBattle(), (d) => {
-        d.reserves = ["pollenmoth", "prismram"].map((kind) => ({
-          id: `recruit-${kind}`,
-          species: kind as "pollenmoth" | "prismram",
-          health: 20,
-          block: 0,
-          combat: freshCombat(),
-          attacked: false,
-        }));
+        addBackups(
+          d,
+          ...["pollenmoth", "prismram"].map((kind) => ({
+            id: `recruit-${kind}`,
+            species: kind as "pollenmoth" | "prismram",
+            health: 20,
+            block: 0,
+            combat: freshCombat(),
+            attacked: false,
+          })),
+        );
         d.wins = 1;
       });
       expect(dispatch(s, { type: "confirmRecruit" }).accepted).toBe(false);

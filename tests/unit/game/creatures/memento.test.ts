@@ -1,5 +1,5 @@
 import type { GameEvent } from "../../../../src/game/types";
-import { authoredPack, swapFixture } from "../../../support/game";
+import { addBackups, authoredPack, swapFixture } from "../../../support/game";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { accept, run, teamRun, prepareDestination } from "../../../support/game";
@@ -137,7 +137,7 @@ describe("Memento and Legendary formations", () => {
   });
   it("deploys a Legendary alone, clears summons on departure and preserves spent slots", () => {
     const initial = produce(run(), (draft) => {
-      draft.reserves.push({
+      addBackups(draft, {
         id: "legend",
         species: "memento",
         health: 60,
@@ -175,7 +175,7 @@ describe("Memento and Legendary formations", () => {
   });
   it("promotes retained overflow when a Legendary replaces a hand of temporary copies", () => {
     const initial = produce(run(), (draft) => {
-      draft.reserves.push({
+      addBackups(draft, {
         id: "legend",
         species: "memento",
         health: 60,
@@ -325,7 +325,7 @@ describe("Memento and Legendary formations", () => {
   it("accepts five Legendaries in the roster while deploying exactly one", () => {
     const initial = produce(teamRun(42, ["memento"]), (draft) => {
       for (let i = 0; i < 4; i++) {
-        draft.reserves.push({
+        addBackups(draft, {
           id: `reserve-${i}`,
           species: "memento",
           health: 60,
