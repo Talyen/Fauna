@@ -22,6 +22,12 @@ import { ManaCrystals } from "./mana-crystals";
 import { ArtCard } from "../shared/cards/art-card";
 import { assetUrl } from "../shared/assets";
 import type { Controls } from "../shared/navigation/input";
+function usePlayPreview(game: BattleState, cardId: string | null, targetId?: string) {
+  return useMemo(
+    () => (cardId && targetId ? previewPlay(game, cardId, targetId) : null),
+    [game, cardId, targetId],
+  );
+}
 function FanSlot({ index, count, children }: { index: number; count: number; children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {
@@ -113,10 +119,7 @@ export function BattleScreen({
     const side = enemyTarget ? "enemy" : "ally";
     setRemembered((old) => (old[side] === id ? old : { ...old, [side]: id }));
   };
-  const preview = useMemo(
-    () => (selected && target ? previewPlay(game, selected, target) : null),
-    [game, selected, target],
-  );
+  const preview = usePlayPreview(game, selected, target);
   const affected = new Set(
     preview?.events.flatMap((event) => (event.targetId ? [event.targetId] : [])) ?? [],
   );
