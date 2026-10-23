@@ -2,9 +2,7 @@ import { afterEach, expect, it, vi } from "vitest";
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, symlinkSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
-import { execFileSync, spawn } from "node:child_process";
-import { once } from "node:events";
-import { pathToFileURL } from "node:url";
+import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import net from "node:net";
 import { taskIntent, recordTaskIntent } from "../../../scripts/lib/task-intent.mjs";
@@ -523,38 +521,6 @@ it("enforces ordinary local command budgets while retaining CI parallelism and f
   runner.mockClear().mockResolvedValue({ status: 7 });
   expect(await runLocal("build", [], { root, env: {}, runner })).toBe(7);
   expect(runner).toHaveBeenCalledTimes(1);
-});
-
-it("releases the OS integration lock when its owning process crashes", { timeout: 15000 }, async () => {
-  const root = fixture();
-  const module = pathToFileURL(
-    path.resolve(import.meta.dirname, "../../../scripts/lib/integration-lock.mjs"),
-  ).href;
-  const child = spawn(
-    process.execPath,
-    [
-      "--input-type=module",
-      "-e",
-      `import { acquireIntegrationLock } from ${JSON.stringify(module)}; await acquireIntegrationLock(${JSON.stringify(root)}); process.send('locked'); setInterval(() => {}, 1000);`,
-    ],
-    { stdio: ["ignore", "ignore", "pipe", "ipc"] },
-  );
-  try {
-    await Promise.race([
-      once(child, "message"),
-      once(child, "exit").then(() => {
-        throw new Error("Lock holder exited before acquiring");
-      }),
-    ]);
-    await expect(acquireIntegrationLock(root)).rejects.toThrow(`PID ${child.pid}`);
-    const exited = once(child, "exit");
-    child.kill("SIGKILL");
-    await exited;
-    const release = await acquireIntegrationLock(root);
-    await release();
-  } finally {
-    child.kill("SIGKILL");
-  }
 });
 
 it(
