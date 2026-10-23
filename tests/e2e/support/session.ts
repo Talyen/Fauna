@@ -28,7 +28,8 @@ export async function seed(page: Page, game = createGame(7)) {
     );
     await page.reload();
   }
-  await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible({ timeout: 30000 });
+  await expect(page.locator("#startup-splash")).toHaveCount(0);
 }
 
 export async function saved(page: Page) {

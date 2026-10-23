@@ -1,6 +1,4 @@
-import { Screen } from "./ui/shared/navigation/screen";
-import { useEffect, useState } from "react";
-import { Loading } from "./ui/shared/loading";
+import { useLayoutEffect } from "react";
 import { assetUrl } from "./ui/shared/assets";
 import { GameErrorBoundary } from "./ui/shared/diagnostics";
 import { createRoot } from "react-dom/client";
@@ -8,63 +6,55 @@ import { createSession } from "./application/session";
 import { createPlatform } from "./platform";
 import { validateContent } from "./game/content-validation";
 import { App } from "./ui/App";
-import "@fontsource-variable/inter/wght.css";
+import { prepareStartup } from "./ui/startup/prepare";
+import type { StartupSplash } from "./ui/startup/splash";
 import "@fontsource-variable/inter/wght-italic.css";
 import "./ui/styles.css";
 for (const name of ["full", "empty"])
   document.documentElement.style.setProperty(`--mana-${name}-image`, `url("${assetUrl(`mana.${name}`)}")`);
-const platform = createPlatform();
-const session = createSession(platform, Date.now() >>> 0, { development: import.meta.env.DEV });
-function Game() {
-  const [ready, setReady] = useState(false);
-  useEffect(() => {
-    let timer: ReturnType<typeof setTimeout> | undefined;
-    let alive = true;
-    const start = () => {
-      try {
-        validateContent();
-        setReady(true);
-        void session.load();
-      } catch (error) {
-        session.diagnostics.record("validation", error);
-        if (alive) timer = setTimeout(start, 5000);
-      }
-    };
-    start();
-    return () => {
-      alive = false;
-      clearTimeout(timer);
-    };
-  }, []);
-  return ready ? (
-    <App session={session} desktop={platform.desktop} />
-  ) : (
-    <Screen className="loading">
-      <Loading />
-    </Screen>
-  );
-}
-const onError = (event: ErrorEvent) => session.diagnostics.record("global", event.error ?? event.message);
-const onRejection = (event: PromiseRejectionEvent) => session.diagnostics.record("global", event.reason);
-window.addEventListener("error", onError);
-window.addEventListener("unhandledrejection", onRejection);
-const onPageHide = (event: PageTransitionEvent) => {
-  if (event.persisted) return;
-  window.removeEventListener("error", onError);
-  window.removeEventListener("unhandledrejection", onRejection);
-};
-window.addEventListener("pagehide", onPageHide);
-const root = createRoot(document.getElementById("root")!);
-root.render(
-  <GameErrorBoundary diagnostics={session.diagnostics}>
-    <Game />
-  </GameErrorBoundary>,
-);
-if (import.meta.hot)
-  import.meta.hot.dispose(() => {
+export function mountGame(splash: StartupSplash) {
+  const platform = createPlatform();
+  const session = createSession(platform, Date.now() >>> 0, { development: import.meta.env.DEV });
+  const startup = prepareStartup(session, splash, validateContent);
+  let disposed = false;
+  function Game() {
+    useLayoutEffect(() => {
+      splash.dismiss();
+      startup.releaseImages();
+    }, []);
+    return (
+      <GameErrorBoundary diagnostics={session.diagnostics}>
+        <App session={session} desktop={platform.desktop} />
+      </GameErrorBoundary>
+    );
+  }
+  const onError = (event: ErrorEvent) => session.diagnostics.record("global", event.error ?? event.message);
+  const onRejection = (event: PromiseRejectionEvent) => session.diagnostics.record("global", event.reason);
+  window.addEventListener("error", onError);
+  window.addEventListener("unhandledrejection", onRejection);
+  const onPageHide = (event: PageTransitionEvent) => {
+    if (event.persisted) return;
+    disposed = true;
+    startup.dispose();
+    splash.dispose();
+    window.removeEventListener("error", onError);
+    window.removeEventListener("unhandledrejection", onRejection);
+  };
+  window.addEventListener("pagehide", onPageHide);
+  const root = createRoot(document.getElementById("root")!);
+  void startup.ready.then(() => {
+    if (!disposed && session.store.getState().ready) root.render(<Game />);
+  });
+  const dispose = async () => {
+    disposed = true;
+    startup.dispose();
+    splash.dispose();
     root.unmount();
-    void session.dispose();
     window.removeEventListener("error", onError);
     window.removeEventListener("unhandledrejection", onRejection);
     window.removeEventListener("pagehide", onPageHide);
-  });
+    await session.dispose();
+  };
+  if (import.meta.hot) import.meta.hot.dispose(() => void dispose());
+  return dispose;
+}
