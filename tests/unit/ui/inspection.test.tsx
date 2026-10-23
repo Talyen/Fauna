@@ -123,13 +123,16 @@ describe("artwork-first inspection", () => {
     }
   });
 
-  it("shows the trait and all base abilities directly in Collection, preserves rank browsing and returns focus", async () => {
+  it("uses the shared inspector for Collection with base abilities, current stars and nested return focus", async () => {
     localStorage.setItem(
       "fauna.save.v1",
       encodeSave(
         produce(run(7), (draft) => {
           draft.discovery.recruited.mossguard = 4;
           draft.cards[0]!.level = 1;
+          draft.keywordXP.stun = 100;
+          draft.keywordXP.burn = 10;
+          draft.talents = ["burn.flashpoint"];
         }),
       ),
     );
@@ -142,34 +145,35 @@ describe("artwork-first inspection", () => {
       await user.click(screen.getByRole("button", { name: "Collection" }));
       const opener = screen.getByRole("button", { name: "Inspect Mossguard" });
       await user.click(opener);
-      expect(screen.queryByRole("dialog")).toBeNull();
-      expect(screen.getByRole("heading", { name: "Mossguard" })).toBeTruthy();
-      expect(screen.getByRole("region", { name: "Trait" }).textContent).toContain(
+      const dialog = screen.getByRole("dialog", { name: "Mossguard" });
+      expect(within(dialog).getByRole("heading", { name: "Mossguard" })).toBeTruthy();
+      expect(within(dialog).getByRole("region", { name: "Trait" }).textContent).toContain(
         "Retain 40% more Block between turns",
       );
+      expect(within(dialog).getByRole("img", { name: "3 of 5 stars" })).toBeTruthy();
+      expect(within(dialog).queryByRole("tab")).toBeNull();
       for (const card of CARDS.filter((c) => c.species === "mossguard")) {
-        const ability = screen.getByRole("region", { name: card.name });
-        expect(ability.textContent).toContain(`${card.cost} Mana`);
-        expect(ability.querySelector(".action-effect")?.textContent).toBeTruthy();
-        expect(within(ability).queryByRole("button")).toBeNull();
+        const ability = within(dialog).getByRole("button", { name: new RegExp(`^${card.name},`) });
+        expect(ability.getAttribute("aria-label")).toContain(`${card.cost} mana`);
+        expect(ability.textContent).toBe("");
       }
-      expect(screen.getByRole("region", { name: "Rooted Stomp" }).textContent).toContain(
-        "Deal 2 Stun damage to all enemies",
+      const stomp = within(dialog).getByRole("button", { name: /^Rooted Stomp,/ });
+      expect(stomp.getAttribute("aria-label")).toContain("Deal 2 Stun damage to all enemies");
+      await user.click(stomp);
+      expect(screen.getByRole("dialog", { name: "Rooted Stomp details" })).toBeTruthy();
+      await user.keyboard("d");
+      expect(screen.getByRole("dialog", { name: "Moss Renewal details" })).toBeTruthy();
+      await user.keyboard("{Escape}");
+      expect(document.activeElement).toBe(
+        within(screen.getByRole("dialog")).getByRole("button", { name: /^Moss Renewal,/ }),
       );
-      await user.keyboard("i");
-      expect(screen.queryByRole("dialog")).toBeNull();
-      await user.click(screen.getByRole("tab", { name: "Rank progression" }));
-      const tiers = screen.getByRole("region", { name: "Overgrowth passive tiers" });
-      expect(tiers.textContent).toContain("0 stars");
-      for (let rank = 0; rank < 3; rank++)
-        await user.click(within(tiers).getByRole("button", { name: "Next page" }));
-      expect(tiers.querySelector('[aria-current="step"]')?.textContent).toContain(
-        "3 stars · Current rank · Active effect",
-      );
-      await user.click(screen.getByRole("tab", { name: "Base abilities" }));
-      expect(screen.getByRole("region", { name: "Boulder Brace" })).toBeTruthy();
       await user.keyboard("{Escape}");
       expect(document.activeElement).toBe(opener);
+      await user.click(screen.getByRole("button", { name: "Inspect Emberback" }));
+      expect(screen.getByRole("button", { name: /^Furnace Breath,/ }).getAttribute("aria-label")).toContain(
+        "1 mana",
+      );
+      await user.keyboard("{Escape}");
       expect(session.store.getState().game).toBe(game);
     } finally {
       cleanup();

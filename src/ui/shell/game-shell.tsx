@@ -330,7 +330,12 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                 <Talents game={game} send={send} openMenu={backFromPage} controls={talentControls} />
               ) : null}
               {route === "collection" ? (
-                <Collection game={game} controls={collectionControls} openMenu={backFromPage} />
+                <Collection
+                  game={game}
+                  controls={collectionControls}
+                  openMenu={backFromPage}
+                  inspect={setInspection}
+                />
               ) : null}
               {route === "glossary" ? <GlossaryScreen back={backFromPage} /> : null}
               {route === "settings" ? (

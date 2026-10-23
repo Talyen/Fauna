@@ -43,15 +43,17 @@ try {
   await window.getByRole("button", { name: "Open menu", exact: true }).click();
   await window.getByRole("button", { name: "Collection", exact: true }).click();
   await window.getByRole("button", { name: `Inspect ${starterName}`, exact: true }).click();
-  await window.locator(".collection-ability").first().waitFor();
-  if ((await window.locator(".collection-ability").count()) !== 3)
-    throw new Error("Collection did not expose three base abilities.");
-  const rules = await window.locator(".collection-ability .action-effect").allTextContents();
-  if (rules.some((text) => !text.trim())) throw new Error("Collection ability rules are missing.");
-  await window.getByRole("tab", { name: "Rank progression", exact: true }).click();
-  await window.getByRole("button", { name: "Next page", exact: true }).click();
-  await window.getByRole("tab", { name: "Base abilities", exact: true }).click();
-  await window.getByRole("button", { name: "Back", exact: true }).click();
+  const inspection = window.locator(".creature-inspection");
+  await inspection.waitFor();
+  const abilities = inspection.locator(".inspection-thumbnails .action-card");
+  if ((await abilities.count()) !== 3) throw new Error("Collection did not expose three base abilities.");
+  await abilities.first().hover();
+  await window.getByRole("tooltip").locator(".action-effect").first().waitFor();
+  await abilities.first().click();
+  await window.locator(".inspection.single-card").waitFor();
+  await window.keyboard.press("Escape");
+  await inspection.waitFor();
+  await window.keyboard.press("Escape");
   await window.getByRole("button", { name: "Open menu", exact: true }).click();
   await window.getByRole("button", { name: "Continue", exact: true }).click();
   if ((await window.evaluate(async () => (await window.faunaDesktop.readCandidates())[0].data)) !== inspected)

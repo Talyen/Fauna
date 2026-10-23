@@ -182,7 +182,6 @@
   --art-compact-short-side: 180px;
   --art-minimum-short-side: 160px;
   --collection-rows: 2;
-  --collection-ability-width: 240px;
   --art-short-side: var(--art-standard-short-side);
   --page-inline-gutter: 32px;
   --page-block-gutter: 24px;
