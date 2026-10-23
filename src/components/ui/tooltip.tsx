@@ -1,7 +1,6 @@
 // Adapted from shadcn/ui (MIT): https://ui.shadcn.com/r/styles/new-york/tooltip.json
 import * as React from "react";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
-import { useSurfaceRef } from "../../ui/infrastructure/surface-ref";
 import { cn } from "@/lib/utils";
 
 export function TooltipProvider(props: React.ComponentProps<typeof TooltipPrimitive.Provider>) {
@@ -83,13 +82,12 @@ export const TooltipContent = React.forwardRef<
   React.ElementRef<typeof TooltipPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
 >(({ className, sideOffset = 8, ...props }, ref) => {
-  const surface = useSurfaceRef(ref);
   const interaction = React.useContext(TooltipInteraction);
   return (
     <TooltipPrimitive.Portal>
       <TooltipPrimitive.Content
         side="top"
-        ref={surface}
+        ref={ref}
         sideOffset={sideOffset}
         collisionPadding={16}
         aria-hidden={interaction?.open === false || undefined}

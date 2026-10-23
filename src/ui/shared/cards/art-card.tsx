@@ -1,6 +1,5 @@
 import { forwardRef } from "react";
 import { Button, type ButtonProps } from "../../../components/ui/button";
-import { useSurfaceRef } from "../../infrastructure/surface-ref";
 import type { KeywordId } from "../../../game/keywords";
 import { effectPalette, visualKeywords, type EffectTone } from "../effects/palettes";
 import { useEffectMetadata } from "../effects/effects";
@@ -37,7 +36,6 @@ export const ArtCard = forwardRef<HTMLButtonElement, ArtCardProps>(function ArtC
   },
   ref,
 ) {
-  const surface = useSurfaceRef<HTMLDivElement>();
   const image = (
     <img
       src={artwork}
@@ -61,7 +59,7 @@ export const ArtCard = forwardRef<HTMLButtonElement, ArtCardProps>(function ArtC
   const classes = cn(`${aspect}-card`, className);
   if (presentation)
     return (
-      <div ref={surface} className={classes} role="img" aria-label={props["aria-label"]} {...metadata}>
+      <div className={classes} role="img" aria-label={props["aria-label"]} {...metadata}>
         {image}
         {shine}
         <ControlArtEffect kind={aspect === "creature" ? control : null} />

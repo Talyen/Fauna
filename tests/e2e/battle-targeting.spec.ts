@@ -63,26 +63,9 @@ test("battle targeting uses remembered targets, forecasts bars, and has no targe
 test("battle tooltips, pointer targeting, Mana forecast and corners follow the design system", async ({
   page,
 }) => {
-  const expectCorners = async (el: Locator) => {
-    await expect
-      .poll(() =>
-        el.evaluate((node) => {
-          const style = getComputedStyle(node);
-          const ratio = parseFloat(style.getPropertyValue("--radius-ratio"));
-          const minimum = parseFloat(style.getPropertyValue("--radius-min"));
-          const maximum = parseFloat(style.getPropertyValue("--radius-max"));
-          const expected = Math.max(
-            minimum,
-            Math.min(
-              maximum,
-              Math.min((node as HTMLElement).offsetWidth, (node as HTMLElement).offsetHeight) * ratio,
-            ),
-          );
-          return Math.abs(parseFloat(style.borderTopLeftRadius) - expected);
-        }),
-      )
-      .toBeLessThan(0.25);
-    expect(["squircle", "superellipse(2)"]).toContain(
+  const expectCorners = async (el: Locator, radius: number) => {
+    expect(await el.evaluate((node) => getComputedStyle(node).borderTopLeftRadius)).toBe(`${radius}px`);
+    expect(["round", "superellipse(1)"]).toContain(
       await el.evaluate((node) => getComputedStyle(node).getPropertyValue("corner-shape")),
     );
   };
@@ -100,7 +83,7 @@ test("battle tooltips, pointer targeting, Mana forecast and corners follow the d
   const enemy = page.locator(".app:not([inert]) .enemy-row .creature-card").first();
   await enemy.hover();
   await expect(page.locator(".game-tooltip").first()).toHaveAttribute("data-side", "bottom");
-  await expectCorners(page.locator(".game-tooltip").first());
+  await expectCorners(page.locator(".game-tooltip").first(), 20);
   const ally = page.locator(".app:not([inert]) .player-row .creature-card").first();
   await ally.hover();
   await expect(page.locator(".game-tooltip").first()).toHaveAttribute("data-side", "top");
@@ -142,7 +125,8 @@ test("battle tooltips, pointer targeting, Mana forecast and corners follow the d
     await captureScreen(page, { path: `reports/battle-review/targeting-${width}.png` });
   }
   await page.setViewportSize({ width: 1280, height: 800 });
-  for (const el of [enemy, ally, card, page.locator(".end-turn")]) await expectCorners(el);
+  for (const el of [enemy, ally, card]) await expectCorners(el, 30);
+  await expectCorners(page.locator(".end-turn"), 12);
   await page.getByRole("button", { name: "Cancel", exact: true }).click();
   await expect(page.locator(".battle-screen")).toHaveAttribute("data-selected-card", "");
   await expect(page.locator('.mana-gem[data-preview-spent="true"]')).toHaveCount(0);
