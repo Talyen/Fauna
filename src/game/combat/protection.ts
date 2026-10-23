@@ -132,7 +132,8 @@ export function* gainMana(state: GameState, amount: number, events: GameEvent[])
   if (gained > 0) {
     events.push({ kind: "status", amount: gained, text: `Gain ${gained} Mana.` });
     if (hasTalent(state, "mana.arcane-mending"))
-      for (const unit of state.team) yield* reaction("restoreHealth", unit, gained, events, false, state);
+      for (const unit of battlefield(state, "player"))
+        yield* reaction("restoreHealth", unit, gained, events, false, state);
   }
 }
 export function* grantArmor(

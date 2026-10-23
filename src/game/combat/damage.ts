@@ -38,14 +38,10 @@ export function* bounce(
   if (!state.battle) return;
   const { effect } = action;
   const allied = !isEnemy(source);
-  const pool =
-    effect === "heal"
-      ? allied
-        ? state.team
-        : state.battle.enemies
-      : allied
-        ? state.battle.enemies
-        : state.team;
+  const pool = battlefield(
+    state,
+    effect === "heal" ? (allied ? "player" : "enemy") : allied ? "enemy" : "player",
+  );
   const visited = new Set([first.id]);
   for (const entry of creaturePassive(allied ? state : undefined, source.species).effects) {
     if (entry.kind !== "bounce" || entry.effect !== effect) continue;
