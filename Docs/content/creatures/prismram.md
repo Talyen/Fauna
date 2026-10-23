@@ -14,4 +14,4 @@ Reflection transfers the incoming Burn, Poison, Bleed, Stun or Freeze buildup at
 
 ## Artwork provenance and validation record
 
-The landscape portrait (`04.png`) and three portrait ability illustrations are unchanged PNGs from the user's [Prismram Drive folder](https://drive.google.com/drive/folders/1_-fYMW69ianG7xHrSc0fukfMX_kl42Vb), copied into `public/art/prismram/`. The manifest records the original file URLs. Creature and ability artwork use the shared prepared-media pipeline for battle, inspection and Collection. Source images were visually inspected; in-game rendered acceptance remains pending.
+Source: [Prismram Drive folder](https://drive.google.com/drive/folders/1_-fYMW69ianG7xHrSc0fukfMX_kl42Vb). Portrait: `04.png`; originals: `public/art/prismram/`. Source inspected; rendered acceptance was pending.

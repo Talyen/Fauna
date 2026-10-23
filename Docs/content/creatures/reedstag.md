@@ -14,4 +14,4 @@ Mending Spring selects the living deployed ally with the lowest remaining Health
 
 ## Artwork provenance and validation record
 
-The unchanged landscape portrait (`05.png`) and three portrait ability PNGs come from the user's [Reedstag Drive folder](https://drive.google.com/drive/folders/1VpBD8PLbx5hEHMJTi1ZZv9NvCK_IRQRt). Each original URL is recorded in the asset manifest. Source artwork was visually inspected; in-game rendered review remains pending.
+Source: [Reedstag Drive folder](https://drive.google.com/drive/folders/1VpBD8PLbx5hEHMJTi1ZZv9NvCK_IRQRt). Portrait: `05.png`. Source inspected; rendered review was pending.

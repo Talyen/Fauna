@@ -14,4 +14,4 @@ Cinder Lash selects Physical or Burn with equal probability using committed seed
 
 ## Artwork provenance and validation record
 
-The unchanged landscape portrait (`03.png`) and three action PNGs come from the user's [Cindernewt Drive folder](https://drive.google.com/drive/folders/1MBRRJHBSdA-mKYA4SR2L7l5wYCIOlCG1). Each original file URL is recorded in the asset manifest; native 4:3 creature and 3:4 action compositions are retained. Source artwork was visually inspected; in-game rendered review remains pending.
+Source: [Cindernewt Drive folder](https://drive.google.com/drive/folders/1MBRRJHBSdA-mKYA4SR2L7l5wYCIOlCG1). Portrait: `03.png`. Source inspected; rendered review was pending.

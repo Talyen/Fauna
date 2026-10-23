@@ -14,4 +14,4 @@ Saffron Screen’s ward prevents one landed Freeze damage packet entirely, befor
 
 ## Artwork provenance and validation record
 
-The unchanged creature portrait (`Wickwaltz_02.png`) and the Ember Pirouette, Saffron Screen and Thermal Rise action illustrations come from the user’s [Wickwaltz Drive folder](https://drive.google.com/drive/folders/1T7f1XtjbmZIHqbfvQYmCSLGwMwf56pV0). Source URLs and rights notes are recorded in the asset manifest. Wickstep and Hearth Circle are excluded. Source artwork was visually inspected; prepared media retains the native landscape and portrait compositions. Rendered gameplay and balance acceptance remain pending.
+Source: [Wickwaltz Drive folder](https://drive.google.com/drive/folders/1T7f1XtjbmZIHqbfvQYmCSLGwMwf56pV0). Portrait: `Wickwaltz_02.png`; Wickstep and Hearth Circle are excluded. Source inspected; rendered gameplay and balance acceptance were pending.

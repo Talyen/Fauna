@@ -14,4 +14,4 @@ Glintstride has 24 Health and three abilities:
 
 ## Artwork provenance and validation record
 
-The unchanged creature portrait and three action PNGs come from the user's [Glintstride Drive folder](https://drive.google.com/drive/folders/12K2vU8w7JeWpr0RWUATMbZ56yTsNvTaP). Source URLs and rights notes are recorded in the asset manifest. Source artwork was visually inspected; rendered gameplay and balance acceptance remain pending.
+Source: [Glintstride Drive folder](https://drive.google.com/drive/folders/12K2vU8w7JeWpr0RWUATMbZ56yTsNvTaP). Source inspected; rendered gameplay and balance acceptance were pending.
