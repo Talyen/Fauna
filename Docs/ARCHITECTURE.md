@@ -1,5 +1,7 @@
 # Architecture
 
+The [codebase simplification plan](SIMPLIFICATION_PLAN.md) prioritizes obsolete journey paths, duplicated roster state, shell navigation, event contracts and Cloud ownership, with implementation steps and verification criteria.
+
 The [journey lifecycle implementation record](archive/GAME_STATE_PLAN.md) documents phase and payload ownership, completed battle receipts, transition contracts and regression evidence.
 
 The [ability resolution plan and implementation record](archive/COMBAT_RESOLUTION_PLAN.md) documents the shared player/enemy executor, approved rule alignment and explicit room scaling.
