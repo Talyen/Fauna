@@ -12,7 +12,7 @@ Coralcurl has 28 Health and is available through ordinary encounters, recruitmen
 
 Coral Spiral follows [ordinary swap rules](../../EXPEDITION_DESIGN.md#knockout-replacement-and-ability-swaps), then Blinds every living enemy, including when alone without backup. Enemy Spiral exchanges battlefield positions and Blinds deployed allies.
 
-[Keywords](../../KEYWORDS.md#combat-rules) owns Water mitigation and [XP classification](../../KEYWORDS.md#classification-and-progression); its blue token is distinct from Mana, Block and Freeze. The six [Water talents](../../../src/game/content/talents/water.ts) form three rows. Their hit rewards include fully absorbed hits, exclude Dodges and require a surviving actor; passive damage cannot activate them.
+[Keywords](../../KEYWORDS.md#damage-identities) owns Water mitigation and [XP classification](../../KEYWORDS.md#classification-and-progression); its blue token is distinct from Mana, Block and Freeze. The six [Water talents](../../../src/game/content/talents/water.ts) form three rows. Their hit rewards include fully absorbed hits, exclude Dodges and require a surviving actor; passive damage cannot activate them.
 
 ## Artwork provenance and validation record
 
