@@ -35,6 +35,8 @@ test("talents purchase immediately, gate rows, reset a category, and return to t
   if (!(await later.isVisible())) await page.getByRole("button", { name: "Next page" }).click();
   await expect(later).toHaveAttribute("aria-disabled", "false");
   await expect(page.getByText("1 point available", { exact: true })).toBeVisible();
+  await later.click();
+  expect((await state(page)).talents).toContain(laterTalent.id);
   const reset = page.getByRole("button", { name: "Reset Burn talents", exact: true });
   await reset.click();
   expect((await state(page)).talents).toEqual(["block.second-wind"]);

@@ -8,21 +8,21 @@ const clockPages = new WeakSet<Page>();
 export const test = base.extend<{ realStartup: boolean; allowedPageErrors: RegExp[] }>({
   realStartup: [false, { option: true }],
   allowedPageErrors: [[], { option: true }],
-  context: async ({ context, realStartup, allowedPageErrors }, use) => {
+  context: async ({ context, realStartup, allowedPageErrors }, provide) => {
     if (!realStartup) fastContexts.add(context);
     const errors: string[] = [];
     const observe = (page: Page) => page.on("pageerror", (error) => errors.push(error.message));
     context.on("page", observe);
     context.pages().forEach(observe);
-    await use(context);
+    await provide(context);
     expect(
       errors.filter((message) => !allowedPageErrors.some((pattern) => pattern.test(message))),
       "Unexpected uncaught browser errors",
     ).toEqual([]);
   },
-  page: async ({ page }, use) => {
+  page: async ({ page }, provide) => {
     await prepareClock(page);
-    await use(page);
+    await provide(page);
   },
 });
 
