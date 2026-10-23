@@ -64,7 +64,7 @@ export function ShineIcon({
     <svg className="effect-shine-icon" viewBox="0 0 24 24" aria-hidden="true">
       <defs>
         <mask id={mask} maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
-          <g color="white">{children}</g>
+          <g color="var(--effect-highlight)">{children}</g>
         </mask>
       </defs>
       <foreignObject width="24" height="24" mask={`url(#${mask})`}>
