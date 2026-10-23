@@ -140,10 +140,19 @@ describe("Oathara", () => {
       game.battle.hand.every((id) => game.cards.find((card) => card.id === id)!.ownerId === game.team[1]!.id),
     ).toBe(true);
     expect(inspectCardPlay(game, game.battle.hand[0]!).allowed).toBe(false);
-    const absent = produce(game, (draft) => {
+    const keywordGame = produce(game, (draft) => {
+      draft.team[2]!.health = 0;
+      draft.battle.hand = [];
+      draft.battle.draw = draft.cards.map((card) => card.id);
+      draft.battle.discard = [];
+    });
+    const drawn = produce(keywordGame, (draft) => {
+      drawKeyword(draft, "nature");
+    });
+    expect(drawn.battle.hand).toHaveLength(1);
+    const absent = produce(keywordGame, (draft) => {
       draft.team[0]!.health = 0;
-      draft.battle.draw = draft.battle.hand.splice(0);
-      drawKeyword(draft, "burn");
+      drawKeyword(draft, "nature");
     });
     expect(absent.battle.hand).toEqual([]);
   });

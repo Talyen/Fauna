@@ -183,7 +183,11 @@ export function* hit(
         text: `${unitName(source)} repeats Stun damage with Resonance`,
       });
       // Repeat the packet once, retaining Stun buildup but suppressing attack proc chains.
-      yield* reaction("hit", state, source, target, value, type, events, { ...options, origin: "resonance" });
+      yield* reaction("hit", state, source, target, value, type, events, {
+        ...options,
+        origin: "resonance",
+        delivery: "delivery" in options && options.delivery === "bounce" ? "bounce" : undefined,
+      });
     }
   }
   if (
