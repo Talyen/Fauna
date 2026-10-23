@@ -41,7 +41,8 @@ it.each(cases)("preserves committed command traces for $name", ({ seed, team }) 
     const resumed = dispatch(decodeSave(encodeSave(state)), command);
     expect(resumed).toEqual(result);
     // The oracle predates required journey summaries and separate completed receipts.
-    // Normalize only retired lifecycle data; compare live combat and all ordered events.
+    // Normalize retired lifecycle data and inactive protection added after the oracle;
+    // active protection, live combat and every ordered event must still match.
     const combatOnly = (units: typeof state.team) =>
       units.map(({ combat: _combat, block: _block, ...unit }) => unit);
     const committed = result.state;
@@ -60,7 +61,13 @@ it.each(cases)("preserves committed command traces for $name", ({ seed, team }) 
       command,
       phase: result.state.phase,
       rng: result.state.rng,
-      digest: createHash("sha256").update(JSON.stringify(baselineResult)).digest("hex"),
+      digest: createHash("sha256")
+        .update(
+          JSON.stringify(baselineResult, (key, value: unknown) =>
+            key === "negate" && value === false ? undefined : value,
+          ),
+        )
+        .digest("hex"),
     });
     state = result.state;
   }
