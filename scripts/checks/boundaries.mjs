@@ -99,6 +99,8 @@ export function boundaryViolations(file, source) {
       "operations",
       "resolution",
       "damage",
+      "damage-reactions",
+      "damage-values",
       "protection",
       "statuses",
       "lifecycle",
@@ -116,12 +118,12 @@ export function boundaryViolations(file, source) {
     )
       fail("Combat internals cannot import their public entry points or command owners.");
     if (
-      ["state", "policy"].includes(combatModule) &&
+      ["state", "policy", "damage-values"].includes(combatModule) &&
       /^src\/game\/combat\/(?:resolution|operations|damage|protection|statuses|lifecycle)$/.test(combatTarget)
     )
       fail("Combat foundations cannot schedule reactions.");
     if (
-      ["damage", "protection", "statuses", "lifecycle"].includes(combatModule) &&
+      ["damage", "damage-reactions", "protection", "statuses", "lifecycle"].includes(combatModule) &&
       !declaration?.typeOnly &&
       /^src\/game\/combat\/(?:resolution|damage|protection|statuses|lifecycle)$/.test(combatTarget)
     )
@@ -149,7 +151,7 @@ export function boundaryViolations(file, source) {
     if (
       ui &&
       !declaration?.typeOnly &&
-      /^src\/game\/(?:(?:journey|team)|combat\/(?:abilities|resolution|operations|damage|protection|statuses|lifecycle|turns))(?:\.ts)?$/.test(
+      /^src\/game\/(?:(?:journey|team)|combat\/(?:abilities|resolution|operations|damage(?:-reactions)?|protection|statuses|lifecycle|turns))(?:\.ts)?$/.test(
         target,
       ) &&
       // This selector reads committed state; importing its module's mutators remains forbidden.

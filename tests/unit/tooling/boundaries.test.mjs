@@ -132,7 +132,11 @@ it("keeps combat continuations below public entry points and outside presentatio
       "./turns",
     ])
       expect(boundaryViolations(file, `import * as higher from "${target}"`)).toHaveLength(1);
-  for (const file of ["src/game/combat/state.ts", "src/game/combat/policy.ts"])
+  for (const file of [
+    "src/game/combat/state.ts",
+    "src/game/combat/policy.ts",
+    "src/game/combat/damage-values.ts",
+  ])
     expect(boundaryViolations(file, 'export * from "./resolution"')).toHaveLength(1);
   expect(
     boundaryViolations("src/game/combat/index.ts", 'import {resolveCombat} from "./resolution"'),
@@ -143,7 +147,7 @@ it("keeps combat continuations below public entry points and outside presentatio
 });
 
 it("keeps handlers on the synchronous operation stack", () => {
-  for (const owner of ["damage", "protection", "statuses", "lifecycle"]) {
+  for (const owner of ["damage", "damage-reactions", "protection", "statuses", "lifecycle"]) {
     const file = `src/game/combat/${owner}.ts`;
     for (const target of ["resolution", "damage", "protection", "statuses", "lifecycle"])
       expect(boundaryViolations(file, `import * as mutation from "./${target}"`)).toHaveLength(1);
@@ -156,6 +160,7 @@ it("keeps extracted command helpers outside presentation", () => {
     "journey",
     "team",
     "combat/damage",
+    "combat/damage-reactions",
     "combat/protection",
     "combat/statuses",
     "combat/lifecycle",
