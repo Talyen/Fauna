@@ -1,5 +1,6 @@
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import { homedir } from "node:os";
 import { createRequire } from "node:module";
 import { lstatSync } from "node:fs";
 import { runInvestigation } from "./agent/investigation-process.mjs";
@@ -19,7 +20,7 @@ const heavyScripts = {
 };
 
 export function localPolicy(kind, args, { root = ROOT, env = process.env } = {}) {
-  if (env.CI === "true" || env.FAUNA_LOCAL_HEAVY === "1") return null;
+  if (env.GITHUB_ACTIONS === "true" || env.FAUNA_LOCAL_HEAVY === "1") return null;
   if (["integrate", "verify:changed"].includes(kind)) return null;
   if (kind === "test") {
     if (!args.length) return null;
@@ -97,11 +98,57 @@ export async function runLocal(
   args = [],
   { root = ROOT, env = process.env, runner = runInvestigation } = {},
 ) {
-  const ci = env.CI === "true";
+  const ci = env.GITHUB_ACTIONS === "true";
   const denied = localPolicy(kind, args, { root, env });
   if (denied) {
     console.error(denied);
     return 1;
+  }
+  // Re-enter only the outer heavy command before dependencies or tools start.
+  // Inherited admission keeps nested npm recipes from taking the same lock twice.
+  if (
+    !ci &&
+    process.platform === "darwin" &&
+    env.FAUNA_LOCAL_HEAVY === "1" &&
+    !["integrate", "verify:changed"].includes(kind) &&
+    !env.RYAN_HEAVY_LANE_ACTIVE
+  ) {
+    const helper =
+      env.CODEX_HEAVY_LANE_HELPER ?? path.join(homedir(), "Developer/.coordination/heavy_lane.py");
+    if (!lstatSync(helper, { throwIfNoEntry: false })?.isFile()) {
+      console.error(
+        "Deferred: shared heavy-work admission helper unavailable. Use hosted CI or configure CODEX_HEAVY_LANE_HELPER; no work started.",
+      );
+      return 75;
+    }
+    const result = await runner(
+      "python3",
+      [
+        helper,
+        "--owner",
+        env.CODEX_THREAD_ID ?? `fauna:${process.pid}`,
+        "--wait",
+        "30",
+        "--timeout",
+        "300",
+        "--",
+        process.execPath,
+        path.join(root, "scripts/local.mjs"),
+        kind,
+        ...args,
+      ],
+      {
+        cwd: root,
+        stdio: "inherit",
+        env,
+        grouped: false,
+        // The helper owns its process group and needs time to finish cancellation.
+        timeout: 315_000,
+        cleanupGraceMs: 12_000,
+      },
+    );
+    if (result.error) console.error(result.error.message);
+    return result.error ? result.status || 1 : (result.status ?? 1);
   }
   const bounded = !ci && env.FAUNA_COMMAND_BUDGET !== "1";
   const timeout = !ci && env.FAUNA_LOCAL_HEAVY !== "1" && kind !== "integrate" ? 30_000 : 300_000;

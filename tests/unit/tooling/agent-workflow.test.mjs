@@ -545,7 +545,7 @@ it("blocks expensive local entrypoints before launching work and bounds one exac
     "balance:compare",
   ]) {
     expect(await runLocal(kind, [], { root, env: {}, runner })).toBe(1);
-    expect(localPolicy(kind, [], { root, env: { CI: "true" } })).toBeNull();
+    expect(localPolicy(kind, [], { root, env: { GITHUB_ACTIONS: "true" } })).toBeNull();
     expect(localPolicy(kind, [], { root, env: { FAUNA_LOCAL_HEAVY: "1" } })).toBeNull();
   }
   for (const args of [["tests"], ["--maxWorkers=8"], ["missing.test.ts"], ["tests/unit/../other.test.ts"]])
@@ -568,9 +568,13 @@ it("blocks expensive local entrypoints before launching work and bounds one exac
 it("enforces ordinary local command budgets while retaining CI parallelism and failing recipes early", async () => {
   const root = fixture();
   const runner = vi.fn(async () => ({ status: 0 }));
-  expect(await runLocal("test", ["--maxWorkers=8"], { root, env: { FAUNA_LOCAL_HEAVY: "1" }, runner })).toBe(
-    0,
-  );
+  expect(
+    await runLocal("test", ["--maxWorkers=8"], {
+      root,
+      env: { FAUNA_LOCAL_HEAVY: "1", RYAN_HEAVY_LANE_ACTIVE: "1234" },
+      runner,
+    }),
+  ).toBe(0);
   const [, args, options] = runner.mock.calls[0];
   expect(args.at(-2)).toBe("--maxWorkers=1");
   expect(args.at(-1)).toBe("--no-file-parallelism");
@@ -578,11 +582,17 @@ it("enforces ordinary local command budgets while retaining CI parallelism and f
   expect(options.timeout).toBeLessThanOrEqual(300_000);
   expect(options.env.NODE_OPTIONS).toMatch(/--max-old-space-size=2048$/);
   runner.mockClear();
-  await runLocal("test", [], { root, env: { CI: "true" }, runner });
+  await runLocal("test", [], { root, env: { GITHUB_ACTIONS: "true" }, runner });
   expect(runner.mock.calls[0][1]).not.toContain("--maxWorkers=1");
   expect(runner.mock.calls[0][2].timeout).toBeUndefined();
   runner.mockClear().mockResolvedValue({ status: 7 });
-  expect(await runLocal("build", [], { root, env: { FAUNA_LOCAL_HEAVY: "1" }, runner })).toBe(7);
+  expect(
+    await runLocal("build", [], {
+      root,
+      env: { FAUNA_LOCAL_HEAVY: "1", RYAN_HEAVY_LANE_ACTIVE: "1234" },
+      runner,
+    }),
+  ).toBe(7);
   expect(runner).toHaveBeenCalledTimes(1);
 });
 
@@ -620,3 +630,49 @@ it(
     }
   },
 );
+
+it("admits outer heavy commands before setup, preserves busy status and avoids nested admission", async () => {
+  if (process.platform !== "darwin") return;
+  const root = fixture();
+  const helper = path.join(root, "admission.py");
+  put(root, "admission.py", "# mocked admission helper\n");
+  const runner = vi.fn(async () => ({ status: 75 }));
+  const env = { FAUNA_LOCAL_HEAVY: "1", CODEX_HEAVY_LANE_HELPER: helper, CODEX_THREAD_ID: "test-owner" };
+  expect(await runLocal("test", ["--maxWorkers=8"], { root, env, runner })).toBe(75);
+  expect(runner).toHaveBeenCalledTimes(1);
+  expect(runner.mock.calls[0][0]).toBe("python3");
+  expect(runner.mock.calls[0][1]).toEqual([
+    helper,
+    "--owner",
+    "test-owner",
+    "--wait",
+    "30",
+    "--timeout",
+    "300",
+    "--",
+    process.execPath,
+    path.join(root, "scripts/local.mjs"),
+    "test",
+    "--maxWorkers=8",
+  ]);
+  expect(runner.mock.calls[0][2]).toMatchObject({ grouped: false, cleanupGraceMs: 12000 });
+  runner.mockClear().mockResolvedValue({ status: 0, error: new Error("canceled") });
+  vi.spyOn(console, "error").mockImplementation(() => {});
+  expect(await runLocal("build", [], { root, env, runner })).toBe(1);
+  runner.mockClear().mockResolvedValue({ status: 0 });
+  expect(await runLocal("build", [], { root, env: { ...env, RYAN_HEAVY_LANE_ACTIVE: "1234" }, runner })).toBe(
+    0,
+  );
+  expect(runner.mock.calls.every(([command]) => command !== "python3")).toBe(true);
+  runner.mockClear();
+  vi.spyOn(console, "error").mockImplementation(() => {});
+  expect(
+    await runLocal("build", [], {
+      root,
+      env: { ...env, CODEX_HEAVY_LANE_HELPER: "/missing/helper.py" },
+      runner,
+    }),
+  ).toBe(75);
+  expect(runner).not.toHaveBeenCalled();
+  expect(localPolicy("build", [], { root, env: { CI: "true" } })).toContain("CI-owned");
+});

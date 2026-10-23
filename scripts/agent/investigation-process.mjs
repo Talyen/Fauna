@@ -4,7 +4,7 @@ import { spawn, spawnSync } from "node:child_process";
 export function runInvestigation(
   command,
   args,
-  { timeout, grouped = process.platform !== "win32", ...options },
+  { timeout, cleanupGraceMs = 1000, grouped = process.platform !== "win32", ...options },
 ) {
   return new Promise((resolve) => {
     const child = spawn(command, args, { ...options, detached: grouped && process.platform !== "win32" });
@@ -30,7 +30,7 @@ export function runInvestigation(
     const stop = (reason) => {
       failure = reason;
       kill("SIGTERM");
-      escalation ??= setTimeout(() => kill("SIGKILL"), 1000);
+      escalation ??= setTimeout(() => kill("SIGKILL"), cleanupGraceMs);
     };
     const interrupted = () => stop(new Error("Investigation canceled."));
     process.once("SIGINT", interrupted);
