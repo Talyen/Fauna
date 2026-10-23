@@ -179,6 +179,7 @@
   --art-standard-short-side: 200px;
   --art-compact-short-side: 180px;
   --art-minimum-short-side: 160px;
+  --art-creature-scale: 1.1;
   --collection-rows: 2;
   --art-short-side: var(--art-standard-short-side);
   --page-inline-gutter: 32px;
@@ -211,7 +212,7 @@
   --rest-feedback-duration: 1800ms;
   --battle-hand-height: var(--art-long-side);
   --art-long-side: calc(var(--art-short-side) * 4 / 3);
-  --art-landscape-width: var(--art-long-side);
+  --art-landscape-width: calc(var(--art-long-side) * var(--art-creature-scale));
   --art-portrait-width: var(--art-short-side);
   --art-creature-ratio: 4 / 3;
   --art-action-ratio: 3 / 4;

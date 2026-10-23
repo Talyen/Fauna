@@ -435,6 +435,14 @@
   max-width: calc(var(--art-portrait-width) * 3);
 }
 .recruit-team-screen {
+  /* Keep all five members visible when the preferred artwork exceeds the tray. */
+  --art-landscape-width: min(
+    calc(var(--art-short-side) * 4 / 3 * var(--art-creature-scale)),
+    calc(
+      (100dvw - var(--page-inline-gutter) * 2 - var(--screen-section-gap) * 2 - var(--screen-item-gap) * 4) /
+        5
+    )
+  );
   max-width: calc(
     var(--art-landscape-width) * 5 + var(--screen-item-gap) * 4 + var(--screen-section-gap) * 2
   );
@@ -492,20 +500,6 @@
 .recruit-team-footer {
   display: flex;
   justify-content: center;
-}
-/* Five cards, four item gaps, tray padding and page gutters must fit without pagination. */
-@media (max-width: 1494px) {
-  .recruit-team-screen {
-    --art-landscape-width: min(
-      calc(var(--art-short-side) * 4 / 3),
-      calc(var(--art-compact-short-side) * 4 / 3)
-    );
-  }
-}
-@media (max-width: 1360px) {
-  .recruit-team-screen {
-    --art-landscape-width: calc(var(--art-minimum-short-side) * 4 / 3);
-  }
 }
 .rest-recovery {
   position: fixed;
