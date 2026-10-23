@@ -5,7 +5,7 @@ import { mkdirSync, readFileSync, writeFileSync, lstatSync, readlinkSync } from 
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 
-import { taskBase } from "../lib/task-selection.mjs";
+import { taskBase, selectPaths } from "../lib/task-selection.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "../..");
 export function reviewGit(root, args) {
@@ -15,14 +15,7 @@ export function reviewGit(root, args) {
     maxBuffer: 64 * 1024 * 1024,
   });
 }
-export function selectPaths(root, inputs) {
-  return inputs.map((input) => {
-    const relative = path.relative(root, path.resolve(root, input)).split(path.sep).join("/");
-    if (relative === ".." || relative.startsWith("../") || path.isAbsolute(relative))
-      throw new Error(`Path outside repository: ${input}`);
-    return relative || ".";
-  });
-}
+export { selectPaths } from "../lib/task-selection.mjs";
 export function inventory(root, base = "HEAD") {
   const fields = reviewGit(root, ["status", "--porcelain=v1", "-z", "--untracked-files=all"]).split("\0");
   const entries = [];

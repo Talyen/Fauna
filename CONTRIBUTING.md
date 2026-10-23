@@ -20,7 +20,7 @@ Review, verify and commit task-owned changes. From clean main:
 node scripts/integrate.mjs task/creature-feedback
 ```
 
-Integration holds the shared lock, incorporates current main, verifies the combined result and advances clean main. It reuses a passing check only when its inputs match. Integration waits up to 30 seconds for a busy lock. Dirty main, ambiguous conflicts and unfinished Git operations preserve task work; resolve understood conflicts in the task checkout and retry. Integration and cleanup have separate outcomes; an archival failure preserves the checkout and reports cleanup pending after successful integration. Successful cleanup archives ignored evidence and removes only this task's clean merged checkout and branch. Close task-owned preview processes first.
+Integration holds the shared lock, incorporates current main, verifies the combined result and advances clean main. It always checks the combined result; earlier task checks are not cached. Integration waits up to 30 seconds for a busy lock. Dirty main, ambiguous conflicts and unfinished Git operations preserve task work; resolve understood conflicts in the task checkout and retry. Integration and cleanup have separate outcomes; an archival failure preserves the checkout and reports cleanup pending after successful integration. Successful cleanup archives ignored evidence and removes only this task's clean merged checkout and branch. Close task-owned preview processes first.
 
 [Worktree operations](scripts/README.md#worktree-operations) explains dependency sharing, recovery, artifact archives and optional cleanup. Other unfinished tasks do not block completion.
 
@@ -41,21 +41,21 @@ npm run verify -- --diagnostic build
 
 Review and verification include committed and working changes since the common ancestor with local main on task/ and codex/ branches; elsewhere they select working changes against HEAD. Explicit paths narrow verification. `--base <commit>` selects another base; `--working-tree` selects uncommitted changes. Repeat `--test <suite>` to add regressions without replacing the changed-file gate. Review preserves separate committed, staged and unstaged patches, including reverted edits.
 
-The gate selects changed tests and filename-matched owner suites first, then related suites by import distance within an estimated one-minute budget. Prior task timings refine estimates; unknown suites reserve five seconds. Explicit regressions always run. Selected suites share one worker and one runner with a five-minute deadline. Omissions and unresolved imports are printed; use `--test` for relevant behavior the static graph cannot discover. A passing scoped gate does not establish exhaustive coverage.
+The gate runs changed tests, filename-matched suites and the nearest declared [owner suites](scripts/checks/test-owners.json). This selection is deterministic and does not depend on timing reports. Related suites found through imports are suggestions; add relevant behavior with `--test`. The plan lists required suites, suggestions and unresolved imports. Full coverage remains in CI.
 
-Checks cache matching relevant repository inputs, selected coverage, base, runtime, execution environment and installed dependency metadata. Maintained guides and selected Markdown remain check inputs; unrelated notes are included only when the documentation gate runs. Unrelated environment variables do not invalidate checks. Committing unchanged checked files preserves reuse; inputs changing during verification fail the gate. Captures use a separate render-input identity. Reuse establishes no rendered or hosted-CI evidence.
+Every invocation executes its checks. Input fingerprints detect repository changes during a run; they do not cache passing results or scan installed dependency trees. Captures retain a separate identity for reproducible comparisons.
 
 Local completion requires final diff review, a passing gate, any required [rendered evidence](Docs/UI.md#required-review), task-owned commits and protected integration. Report CI pending unless exact-commit results are available. Blocked integration leaves reviewed work committed on its branch. Pushes and publication follow [AGENTS.md](AGENTS.md#worktrees-and-integration).
 
 ### Execution and evidence
 
-Task checks, named regressions, documentation checks and focused previews/captures are authorized locally. Run one verification or investigation command at a time per task; use isolated browser profiles and close only owned processes.
+Focused verification and investigation needed for the task are authorized locally, including builds, named test suites and browser previews/captures. Use isolated profiles, run resource-heavy checks sequentially and close only owned processes. Use `npm run deps` when task dependencies are missing or change.
 
-`verify -- --diagnostic` accepts `types`, `static`, `build`, `unit <suite files>`, `browser <route>` or `performance <scenario>`. It applies a five-minute deadline and 2 GiB Node heap. Unit diagnostics take one to twelve named suites and one worker. Browser routes are battle, settings, collection, progression and persistence; the launcher owns a free-port production preview. Performance scenarios are battle, swap and menus. Build first if production output is required. Reassess the hypothesis after failure; diagnostics do not authorize repeated exhaustive runs, dependency installation or publication.
+Use `npm run verify -- --diagnostic <mode>` for types, static checks, a build, named unit suites, a named browser route or a performance scenario. The launcher validates scope and enforces resource limits; [implementation details](scripts/README.md#task-check-implementation) are reference material. Reassess the hypothesis after a failure.
 
-Existing `check`, `investigate`, `test:full` and full-CI commands remain compatible. `npm test` retains its fixed smoke default and now accepts named suite paths for bounded unit diagnostics. New task instructions should use `verify`.
+`npm test` and `npm run check` are aliases of `verify`, including its selection options. `npm run test:smoke` explicitly runs the fixed smoke set. Existing diagnostic and full-suite commands remain available; ordinary task instructions use `verify`.
 
-Full unit/browser matrices, packaging, coverage and extended performance sweeps remain [hosted-CI](Docs/CI.md) work by default; broader local execution needs an explicit request. Report only actual coverage and relevant unverified platform boundaries.
+Full test matrices, packaging, coverage and extended performance sweeps run in [hosted CI](Docs/CI.md) by default. Broader local execution needs an explicit request. CI pending does not block local completion; report actual coverage and relevant unverified platforms.
 
 ### Documentation scope
 

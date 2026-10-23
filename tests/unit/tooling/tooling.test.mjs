@@ -273,7 +273,7 @@ describe("isolated worktrees and protected integration", { timeout: 15_000 }, ()
     const runner = vi.fn(() => ({ status: 0 }));
     await integrate(root, task.branch, { runner, log: () => {} });
     expect(runner.mock.calls.map((call) => call[1].slice(1))).toEqual([
-      ["run", "check", "--", "--base", original],
+      ["run", "verify", "--", "--base", original],
     ]);
     expect(readFileSync(path.join(root, "main-only.txt"), "utf8")).toContain("concurrent");
     expect(git(root, "show", "HEAD:Docs/workflow.md")).toContain("Task change");

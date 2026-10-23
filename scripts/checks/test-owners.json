@@ -1,0 +1,39 @@
+{
+  "src/game/": ["tests/unit/game/engine.test.ts"],
+  "src/game/combat/": [
+    "tests/unit/game/combat-resolution.test.ts",
+    "tests/unit/game/combat-reactions.test.ts"
+  ],
+  "src/game/content/": [
+    "tests/unit/game/content-ownership.test.ts",
+    "tests/unit/game/creature-passives.test.ts"
+  ],
+  "src/application/": ["tests/unit/application/session.test.ts"],
+  "src/platform/": ["tests/unit/application/platform-session.test.ts"],
+  "desktop/": ["tests/unit/platform/desktop.test.ts", "tests/unit/platform/shutdown.test.mjs"],
+  "src/components/": ["tests/unit/tooling/design-system.test.mjs", "tests/unit/ui/input.test.ts"],
+  "src/ui/": ["tests/unit/ui/ui.test.tsx"],
+  "src/ui/collection/": ["tests/unit/ui/collection-ui.test.tsx"],
+  "src/ui/settings/": ["tests/unit/ui/settings.test.tsx"],
+  "src/ui/battle/": ["tests/unit/ui/combat-ui.test.tsx"],
+  "src/ui/shared/navigation/": [
+    "tests/unit/ui/pagination.test.tsx",
+    "tests/unit/ui/menu-navigation.test.tsx",
+    "tests/unit/ui/input.test.ts"
+  ],
+  "src/ui/shared/cards/": [
+    "tests/unit/ui/control-art-effect.test.tsx",
+    "tests/unit/ui/adaptive-browsing.test.tsx"
+  ],
+  "scripts/": ["tests/unit/tooling/tooling.test.mjs"],
+  "scripts/checks/": [
+    "tests/unit/tooling/verification.test.mjs",
+    "tests/unit/tooling/design-system.test.mjs",
+    "tests/unit/tooling/boundaries.test.mjs"
+  ],
+  "scripts/agent/": [
+    "tests/unit/tooling/agent-workflow.test.mjs",
+    "tests/unit/tooling/adoption-tools.test.mjs"
+  ],
+  "scripts/lib/": ["tests/unit/tooling/agent-workflow.test.mjs", "tests/unit/tooling/tool-runtime.test.mjs"]
+}

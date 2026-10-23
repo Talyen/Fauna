@@ -24,7 +24,7 @@ export async function integrate(
     assertClean(task, branch);
     git(task, ["merge", "--no-edit", mainHead]);
     const verifiedHead = git(task, ["rev-parse", "HEAD"]).trim();
-    const [command, argv] = npmCommand(["run", "check", "--", "--base", mainHead]);
+    const [command, argv] = npmCommand(["run", "verify", "--", "--base", mainHead]);
     const result = runner(command, argv, { cwd: task, stdio: "inherit" });
     if (result.error || result.status !== 0)
       throw new Error("Combined local check failed; main was not advanced.");

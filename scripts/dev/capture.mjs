@@ -9,7 +9,7 @@ import { reviewScenario, openReviewScenario } from "./review-scenarios.mjs";
 import { reportDirectory } from "../lib/tool-runtime.mjs";
 import { git } from "../lib/git.mjs";
 import { taskBase } from "../lib/task-selection.mjs";
-import { verificationIdentity } from "../checks/verification-record.mjs";
+import { verificationIdentity } from "../checks/input-identity.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "../..");
 

@@ -1,22 +1,9 @@
-import { createHash, randomUUID } from "node:crypto";
-import {
-  lstatSync,
-  readFileSync,
-  readlinkSync,
-  readdirSync,
-  realpathSync,
-  writeFileSync,
-  renameSync,
-  rmSync,
-} from "node:fs";
+import { createHash } from "node:crypto";
+import { lstatSync, readFileSync, readlinkSync, realpathSync } from "node:fs";
 import path from "node:path";
 import { git } from "../lib/git.mjs";
 
-function recordPath(root) {
-  return path.resolve(root, git(root, ["rev-parse", "--git-path", "fauna-task-check.json"]).trim());
-}
-
-/** Separate checked inputs from rendered inputs; outputs never invalidate either identity. */
+/** Detect changing inputs during a run; this identity never skips verification. */
 export function verificationIdentity(root, base, paths, env = process.env, purpose = "check") {
   const digest = createHash("sha256");
   const add = (value) => digest.update(JSON.stringify(value) + "\n");
@@ -28,7 +15,7 @@ export function verificationIdentity(root, base, paths, env = process.env, purpo
     )
     .sort(([a], [b]) => a.localeCompare(b));
   add([
-    2,
+    3,
     purpose,
     realpathSync(root),
     base,
@@ -56,42 +43,5 @@ export function verificationIdentity(root, base, paths, env = process.env, purpo
     if (stat?.isSymbolicLink()) add(readlinkSync(absolute));
     else if (stat?.isFile()) digest.update(readFileSync(absolute));
   }
-  // Installed-file metadata detects reinstalls and edits, including shared installs.
-  // Tool-generated caches are outputs, not verification inputs.
-  function installed(directory) {
-    for (const name of readdirSync(directory).sort()) {
-      if ([".vite", ".vite-temp", ".vitest-cache", ".cache"].includes(name)) continue;
-      const file = path.join(directory, name);
-      const stat = lstatSync(file);
-      add([file, stat.mode, stat.size, stat.mtimeMs, stat.ctimeMs]);
-      if (stat.isDirectory()) installed(file);
-      else if (stat.isSymbolicLink()) add(readlinkSync(file));
-    }
-  }
-  const modules = path.join(root, "node_modules");
-  if (lstatSync(modules, { throwIfNoEntry: false })) installed(realpathSync(modules));
   return digest.digest("hex");
-}
-
-export function verified(root, identity) {
-  try {
-    return JSON.parse(readFileSync(recordPath(root), "utf8")).identity === identity;
-  } catch {
-    return false;
-  }
-}
-
-export function clearVerification(root) {
-  rmSync(recordPath(root), { force: true });
-}
-
-export function recordVerification(root, identity) {
-  const target = recordPath(root);
-  const temporary = `${target}.${randomUUID()}`;
-  try {
-    writeFileSync(temporary, JSON.stringify({ identity }));
-    renameSync(temporary, target);
-  } finally {
-    rmSync(temporary, { force: true });
-  }
 }

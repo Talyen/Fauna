@@ -4,7 +4,8 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { selectedPaths, parseCheckArgs, runCheck } from "../../../scripts/checks/check.mjs";
-import { verificationIdentity } from "../../../scripts/checks/verification-record.mjs";
+import { verificationIdentity } from "../../../scripts/checks/input-identity.mjs";
+import { taskContext } from "../../../scripts/agent/agent-context.mjs";
 import { review } from "../../../scripts/agent/agent-review.mjs";
 import { investigationArgs, investigate } from "../../../scripts/agent/investigate.mjs";
 import { runInvestigation } from "../../../scripts/agent/investigation-process.mjs";
@@ -70,6 +71,29 @@ it("defaults check and review to committed task work without importing concurren
   expect(patch).not.toContain("Concurrent main");
 });
 
+it("uses the same task scope for context, review and verification after commits and concurrent main work", () => {
+  const root = fixture();
+  for (const file of ["ARCHITECTURE", "UI", "MENU_DESIGN", "EXPEDITION_DESIGN", "RELEASE"])
+    put(root, `Docs/${file}.md`, `# ${file}\n`);
+  git(root, "add", ".");
+  git(root, "commit", "-qm", "owner docs");
+  git(root, "checkout", "-qb", "task/context");
+  put(root, "src/ui/collection/example.tsx", "export {};");
+  git(root, "add", ".");
+  git(root, "commit", "-qm", "committed UI task");
+  git(root, "checkout", "main");
+  put(root, "desktop/main.cjs", "module.exports = {};");
+  git(root, "add", ".");
+  git(root, "commit", "-qm", "concurrent desktop task");
+  git(root, "checkout", "task/context");
+  expect(taskContext(root).topics).toEqual(expect.arrayContaining(["ui", "progression"]));
+  expect(taskContext(root).topics).not.toContain("release");
+  expect(taskContext(root, { base: "HEAD" }).topics).toEqual(["architecture"]);
+  expect(selectedPaths(root, parseCheckArgs([]))).toEqual(review(root).selected.map((entry) => entry.file));
+  put(root, "src/ui/settings/example.tsx", "export {};");
+  expect(taskContext(root, { base: "HEAD" }).topics).toContain("ui");
+});
+
 it("retains committed renames/deletions and literal unusual paths in task review", () => {
   const root = fixture();
   put(root, "delete.md", "gone\n");
@@ -93,18 +117,18 @@ it("retains committed renames/deletions and literal unusual paths in task review
   expect(renamed).toContain("+# Working rename");
 });
 
-it("reuses stable verification across committing, but invalidates edits, selection, base and failed attempts", () => {
+it("executes verification every time, including after committing and after failed attempts", () => {
   const root = fixture();
   git(root, "checkout", "-qb", "task/cache");
   put(root, "README.md", "# Checked\n");
   const runner = vi.fn(() => ({ status: 0 }));
-  const options = { root, runner, cache: true, log: () => {} };
+  const options = { root, runner, log: () => {} };
   expect(runCheck([], options)).toBe(0);
   const calls = runner.mock.calls.length;
   git(root, "add", ".");
   git(root, "commit", "-qm", "checked task");
   expect(runCheck([], options)).toBe(0);
-  expect(runner).toHaveBeenCalledTimes(calls);
+  expect(runner).toHaveBeenCalledTimes(calls * 2);
   put(root, "README.md", "# Changed\n");
   runner.mockReturnValue({ status: 1 });
   expect(runCheck([], options)).toBe(1);
@@ -120,7 +144,7 @@ it("reuses stable verification across committing, but invalidates edits, selecti
   expect(runner.mock.calls.length).toBeGreaterThan(beforeBase);
 });
 
-it("invalidates dependency edits, unselected source, symlinks and environment while ignoring output caches", () => {
+it("fingerprints repository inputs without traversing installed dependencies or output caches", () => {
   const root = fixture();
   put(root, "node_modules/tool/index.js", "tool");
   const base = git(root, "rev-parse", "HEAD");
@@ -131,6 +155,9 @@ it("invalidates dependency edits, unselected source, symlinks and environment wh
   put(root, "reports/capture.png", "generated");
   expect(identity()).toBe(before);
   put(root, "node_modules/tool/index.js", "changed tool");
+  symlinkSync("missing-install", path.join(root, "node_modules/broken-link"));
+  expect(identity()).toBe(before);
+  put(root, "package-lock.json", "changed install inputs");
   expect(identity()).not.toBe(before);
   before = identity();
   put(root, "other.md", "unselected input");
@@ -149,17 +176,17 @@ it("invalidates dependency edits, unselected source, symlinks and environment wh
   vi.unstubAllEnvs();
 });
 
-it("refuses to record success when inputs mutate during verification, and plan never records", () => {
+it("fails when inputs mutate during verification, while plan executes nothing", () => {
   const root = fixture();
   const runner = vi.fn(() => {
     put(root, "late.md", "changed");
     return { status: 0 };
   });
   const log = vi.fn();
-  expect(runCheck(["README.md"], { root, runner, log, cache: true })).toBe(1);
+  expect(runCheck(["README.md"], { root, runner, log })).toBe(1);
   expect(log.mock.calls.flat().join(" ")).toContain("inputs changed");
   runner.mockClear();
-  expect(runCheck(["--plan", "README.md"], { root, runner, log, cache: true })).toBe(0);
+  expect(runCheck(["--plan", "README.md"], { root, runner, log })).toBe(0);
   expect(runner).not.toHaveBeenCalled();
 });
 
@@ -174,6 +201,9 @@ it("selects bounded diagnostics without exposing arbitrary npm commands or broad
     "--no-file-parallelism",
     "tests/unit/game/example.test.ts",
   ]);
+  const suites = Array.from({ length: 13 }, (_, index) => `tests/unit/game/case-${index}.test.ts`);
+  for (const suite of suites) put(root, suite, "export {};");
+  expect(investigationArgs(root, ["unit", ...suites]).slice(-13)).toEqual(suites);
   expect(investigationArgs(root, ["browser", "battle"])).toEqual(["run", "test:e2e:route", "--", "battle"]);
   for (const args of [
     ["unit"],
@@ -222,12 +252,12 @@ it("prepares required review conditions and rejects ambiguous, unsupported or re
     expect(() => reviewOptions(args)).toThrow();
 });
 
-it("reuses the checked task during protected integration without weakening the clean-main guard", async () => {
+it("rechecks the combined task during integration without weakening the clean-main guard", async () => {
   const root = fixture();
   const task = createWorktree(root, "reuse");
   put(task.path, "README.md", "# Verified task\n");
   const runner = vi.fn(() => ({ status: 0 }));
-  const options = { root: task.path, runner, cache: true, log: () => {} };
+  const options = { root: task.path, runner, log: () => {} };
   expect(runCheck([], options)).toBe(0);
   git(task.path, "add", ".");
   git(task.path, "commit", "-qm", "task");
@@ -240,7 +270,7 @@ it("reuses the checked task during protected integration without weakening the c
   expect(runner).not.toHaveBeenCalled();
   rmSync(path.join(root, "unfinished.md"));
   await integrate(root, task.branch, { runner: launch, log: () => {} });
-  expect(runner).not.toHaveBeenCalled();
+  expect(runner).toHaveBeenCalled();
   expect(git(root, "show", "HEAD:README.md")).toBe("# Verified task");
 });
 

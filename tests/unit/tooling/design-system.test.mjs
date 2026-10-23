@@ -28,7 +28,7 @@ describe("design-system enforcement", () => {
       export const Screen = () => <button style={{ color: 'red' }} className="text-red-500"><img /></button>;
     `,
     );
-    expect(violations).toHaveLength(4);
+    expect(violations).toHaveLength(5);
   });
   it("rejects palette, typography and radius drift outside the token owner", () => {
     expect(
@@ -168,4 +168,41 @@ it("rejects primary control foreground overrides even when they use valid palett
       ".game-button.control-primary { color: var(--primary-foreground); }",
     ),
   ).toEqual([]);
+});
+
+it("checks production syntax without policing comments, fixture markup or container navigation", () => {
+  for (const source of [
+    "// Compare against #ffffff and <button />\nexport const value = 1;",
+    "/* overflow: scroll; <img /> */ export const value = 1;",
+    'const message = "Artwork may mention #fff in a description";',
+    'const hint = "<button>example markup</button>";',
+    "<div onKeyDown={handleEscape}><Button>Back</Button></div>",
+  ])
+    expect(sourceViolations("src/ui/example.tsx", source)).toEqual([]);
+  for (const file of [
+    "tests/unit/ui/example.test.tsx",
+    "design/example/preview.tsx",
+    "src/tooling/fixture.tsx",
+  ])
+    expect(sourceViolations(file, '<button style={{ color: "red" }}><img /></button>')).toEqual([]);
+  expect(
+    sourceViolations("src/ui/example.css", "/* color: #fff; font-size: 7px; overflow: scroll; */"),
+  ).toEqual([]);
+  expect(sourceViolations("src/ui/example.tsx", "const example = <button>Back</button>;")).not.toEqual([]);
+  expect(sourceViolations("src/ui/example.tsx", '<div role="button" onKeyDown={activate} />')).not.toEqual(
+    [],
+  );
+});
+
+it("retains control, palette and scrolling guards for expressions and computed property access", () => {
+  for (const source of [
+    'const element = <div role={"switch"} />;',
+    "const element = <Button className={`bg-red-500`} />;",
+    'const element = React.createElement("button", {});',
+    'const element = <div style={{ backgroundColor: "#ffffff" }} />;',
+    'const element = <div style={{ background: "linear-gradient(90deg, #fff, #000)" }} />;',
+    'root["scrollIntoView"]();',
+    "root.scrollTop++;",
+  ])
+    expect(sourceViolations("src/ui/example.tsx", source)).not.toEqual([]);
 });

@@ -7,12 +7,12 @@ import { selectPaths } from "./agent-review.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "../..");
 
-/** Bounded diagnostics for a concrete task failure; ordinary completion still uses check. */
+/** Bounded diagnostics for a concrete task failure; ordinary completion uses verify. */
 export function investigationArgs(root, args) {
   const [kind, ...inputs] = args;
   if (["types", "static", "build"].includes(kind) && !inputs.length)
     return ["run", { types: "check:types", static: "check:full", build: "build" }[kind]];
-  if (kind === "unit" && inputs.length && inputs.length <= 12) {
+  if (kind === "unit" && inputs.length) {
     const files = selectPaths(root, inputs);
     if (
       files.some(
@@ -21,7 +21,7 @@ export function investigationArgs(root, args) {
           !existsSync(path.join(root, file)),
       )
     )
-      throw new Error("Choose up to twelve existing unit/integration suite files.");
+      throw new Error("Choose existing unit/integration suite files.");
     return ["run", "test:full", "--", "--maxWorkers=1", "--no-file-parallelism", ...files];
   }
   if (
@@ -33,7 +33,7 @@ export function investigationArgs(root, args) {
   if (kind === "performance" && inputs.length === 1 && ["battle", "swap", "menus"].includes(inputs[0]))
     return ["run", "perf", "--", "--scenario", inputs[0]];
   throw new Error(
-    "Usage: npm run investigate -- types|static|build|unit <suite files>|browser <route>|performance <battle|swap|menus>",
+    "Usage: npm run verify -- --diagnostic types|static|build|unit <suite files>|browser <route>|performance <battle|swap|menus>",
   );
 }
 
@@ -52,7 +52,7 @@ export async function investigate(
   try {
     if (args[0] === "browser") {
       if (!existsSync(path.join(root, "dist/index.html")))
-        throw new Error("Build this task first with npm run investigate -- build.");
+        throw new Error("Build this task first with npm run verify -- --diagnostic build.");
       const { preview: start } = await import("vite");
       preview = await start({ root, preview: { host: "127.0.0.1", port: 0, strictPort: true, open: false } });
       env.FAUNA_TEST_URL = `http://127.0.0.1:${preview.httpServer.address().port}`;
