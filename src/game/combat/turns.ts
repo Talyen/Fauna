@@ -1,5 +1,5 @@
 import { battlefield } from "../battlefield";
-import { definition } from "../content";
+import { definition, speciesCards, SPECIES } from "../content";
 import { drawBossCards, bossCardPriority, courtRemembers, removeDepartedMinions } from "./legendary";
 import { recycleDiscard, MAX_BATTLE_CARDS, MAX_HAND_SIZE } from "../card-zones";
 import { roll } from "../random";
@@ -18,11 +18,12 @@ import {
 } from "./index";
 import { draw } from "../card-zones";
 import { retainedBlock, enemyAbilityValue } from "../ability-rules";
-import { CARDS } from "../content";
 import { enemyCard, enemyCanUse } from "../card-rules";
 import type { GameEvent, GameState, BattleState } from "../types";
 import { living, pendingReplacement, swapFromCard } from "../team";
 import { settle, intents } from "../journey";
+
+const enemyAbilities = new Map(SPECIES.map(({ id }) => [id, speciesCards(id).filter(enemyCanUse)]));
 
 export function livingChorus(state: GameState, enemy: boolean, events: GameEvent[]) {
   const row = enemy ? state.battle!.enemies : state.team;
@@ -80,10 +81,16 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
           action < MAX_BATTLE_CARDS && deck.mana > 0 && deck.hand.length && enemy.health > 0;
           action++
         ) {
-          const candidates = deck.hand
-            .slice()
-            .sort((a, b) => bossCardPriority(draft, enemy, b) - bossCardPriority(draft, enemy, a));
-          const id = candidates[0]!;
+          let id = deck.hand[0]!;
+          let priority = bossCardPriority(draft, enemy, id);
+          for (let index = 1; index < deck.hand.length; index++) {
+            const candidate = deck.hand[index]!;
+            const candidatePriority = bossCardPriority(draft, enemy, candidate);
+            if (candidatePriority > priority) {
+              id = candidate;
+              priority = candidatePriority;
+            }
+          }
           const def = definition(id);
           const targetsNow = targets();
           if (!targetsNow.length) break;
@@ -113,7 +120,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
         }
         continue;
       }
-      const abilities = CARDS.filter((card) => card.species === enemy.species && enemyCanUse(card));
+      const abilities = enemyAbilities.get(enemy.species)!;
       const alternatives = abilities.filter((card) => card.id !== enemy.lastAbility);
       const pool = alternatives.length ? alternatives : abilities;
       const def = enemyCard(pool[Math.floor(roll(draft) * pool.length)]!);

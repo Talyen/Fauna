@@ -1,4 +1,4 @@
-import { CARDS, definition, species } from "../content";
+import { speciesCards, definition, species } from "../content";
 import { PEARL } from "../content/creatures/memento";
 import { creaturePassive } from "../progression";
 import { roll, shuffle } from "../random";
@@ -12,7 +12,7 @@ export function bossDeck(state: GameState, enemy: Enemy): EnemyDeck {
   return {
     draw: shuffle(
       state,
-      CARDS.filter((card) => card.species === enemy.species).flatMap((card) => [card.id, card.id]),
+      speciesCards(enemy.species).flatMap((card) => [card.id, card.id]),
     ),
     hand: [],
     buffer: [],
