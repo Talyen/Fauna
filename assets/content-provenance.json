@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "creator": "Project owner",
+  "confirmedOn": "2026-10-23",
+  "method": "pre-generated AI",
+  "scope": "All shipped player-facing content, including artwork, music, sound effects and text",
+  "liveGeneration": false,
+  "note": "Owner declaration; per-asset source locations remain in manifest.json; this record does not itself grant rights or identify service terms"
+}

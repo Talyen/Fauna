@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { beforeEach, afterEach, describe, expect, it, vi } from "vitest";
 import { act, cleanup, render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import userEvent, { PointerEventsCheckLevel } from "@testing-library/user-event";
 import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import { produce } from "immer";
@@ -200,7 +200,8 @@ it.each(["Back", "Escape", "Close inspection"])(
     localStorage.setItem("fauna.save.v1", encodeSave(run(7)));
     const session = createSession(createBrowserPlatform(localStorage), 7);
     await session.load();
-    const user = userEvent.setup();
+    // Browser journeys cover pointer hit testing; this DOM scenario checks focus and combat ownership.
+    const user = userEvent.setup({ pointerEventsCheck: PointerEventsCheckLevel.Never });
     render(<App session={session} />);
     try {
       await user.click(screen.getByRole("button", { name: "Continue" }));

@@ -7,7 +7,7 @@ export async function gamepad(page: Page) {
       buttons: Array.from({ length: 16 }, () => ({ pressed: false, touched: false, value: 0 })),
       axes: [0, 0, 0, 0],
     };
-    Object.defineProperty(navigator, "getGamepads", { value: () => [pad] });
+    Object.defineProperty(navigator, "getGamepads", { configurable: true, value: () => [pad] });
     Object.assign(window, { testPad: pad });
   });
   return async (index: number) => {

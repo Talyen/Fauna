@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { readPreference, writePreference } from "../../platform/preferences";
 import { TEXT_SCALES } from "./settings";
+import type { ControllerPreference } from "../shared/navigation/controller-prompts";
 
 function textScale(key: string) {
   const value = Number(readPreference(key) ?? "1");
@@ -8,6 +9,14 @@ function textScale(key: string) {
 }
 
 export function useDisplayPreferences() {
+  const [controller, updateController] = useState<ControllerPreference>(() => {
+    const saved = readPreference("fauna.controller-prompts");
+    return saved === "xbox" || saved === "playstation" || saved === "nintendo" ? saved : "auto";
+  });
+  const setController = useCallback((value: ControllerPreference) => {
+    updateController(value);
+    writePreference("fauna.controller-prompts", value);
+  }, []);
   const [scale, setScale] = useState(() => textScale("fauna.text-scale"));
   const [tooltipScale, setTooltipScale] = useState(() => textScale("fauna.tooltip-scale"));
   const [autoEndTurn, updateAutoEndTurn] = useState(
@@ -25,5 +34,14 @@ export function useDisplayPreferences() {
     updateAutoEndTurn(value);
     writePreference("fauna.auto-end-turn", String(value));
   }, []);
-  return { scale, setScale, tooltipScale, setTooltipScale, autoEndTurn, setAutoEndTurn };
+  return {
+    scale,
+    setScale,
+    tooltipScale,
+    setTooltipScale,
+    autoEndTurn,
+    setAutoEndTurn,
+    controller,
+    setController,
+  };
 }

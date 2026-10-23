@@ -4,6 +4,19 @@ import { pathToFileURL } from "node:url";
 import { git } from "../lib/git.mjs";
 import { buildIdentity, releaseVersion, verifyBuildIdentity } from "../lib/release-identity.mjs";
 const ROOT = path.resolve(import.meta.dirname, "../..");
+export async function verifySteamConfiguration(root) {
+  const config = JSON.parse(await readFile(path.join(root, "desktop/steam-config.json"), "utf8"));
+  if (
+    !Number.isSafeInteger(config.appId) ||
+    config.appId <= 0 ||
+    config.appId > 0xffffffff ||
+    config.appId === 480
+  )
+    throw new Error(
+      "Steam release requires Fauna's own App ID in desktop/steam-config.json; partner verification and App creation must finish first",
+    );
+  return config.appId;
+}
 export function releaseArgs(args, env = process.env) {
   const result = { tag: env.RELEASE_TAG || undefined, versionOnly: false, directory: undefined };
   const seen = new Set();
@@ -31,6 +44,7 @@ export async function verifyRelease(root, options) {
     throw new Error("Release tag does not identify HEAD.");
   const receipt = JSON.parse(await readFile(path.join(root, "dist/release.json"), "utf8"));
   verifyBuildIdentity(receipt, expected);
+  await verifySteamConfiguration(root);
   const { verifyPackage } = await import("./verify-package.mjs");
   const artifact = await verifyPackage(
     options.directory ? path.resolve(root, options.directory) : undefined,
