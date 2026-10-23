@@ -22,7 +22,7 @@ export function receiveCard(state: GameState, id: string) {
 function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
   const battle = state.battle!;
   (battle.hand.length < MAX_HAND_SIZE ? battle.hand : battle.buffer).push(id);
-  const original = state.cards.find((entry) => entry.id === id)!;
+  let original: GameState["cards"][number] | undefined;
   // Copy insertion and buffer promotion are not draws and cannot recursively copy.
   for (const reader of state.team) {
     if (
@@ -36,6 +36,7 @@ function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
       0,
     );
     if (!succeeds(state, chance / 100, false, events)) continue;
+    original ??= state.cards.find((entry) => entry.id === id)!;
     const copy = { ...original, id: `copy-${battle.copySerial++}`, temporary: true as const };
     state.cards.push(copy);
     (battle.hand.length < MAX_HAND_SIZE ? battle.hand : battle.buffer).push(copy.id);
@@ -51,7 +52,8 @@ function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
 
 export function fillHand(state: GameState) {
   const battle = state.battle!;
-  while (battle.hand.length < MAX_HAND_SIZE && battle.buffer.length) battle.hand.push(battle.buffer.shift()!);
+  const count = Math.min(MAX_HAND_SIZE - battle.hand.length, battle.buffer.length);
+  if (count > 0) battle.hand.push(...battle.buffer.splice(0, count));
 }
 
 function recycleEligibleDiscard(state: GameState, eligible: (id: string) => boolean) {

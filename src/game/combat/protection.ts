@@ -69,14 +69,15 @@ export function* shareProtection(
 ): Resolution<void> {
   if (state.phase !== "battle" || !state.battle || source.health <= 0 || amount <= 0) return;
   const allied = !isEnemy(source);
-  const pool = battlefield(state, allied ? "player" : "enemy");
-  if (!pool.some((unit) => unit.id === source.id)) return;
-  const recipients = pool.filter((unit) => unit.id !== source.id && unit.health > 0);
-  if (!recipients.length) return;
   const chance = creaturePassive(allied ? state : undefined, source.species).effects.reduce(
     (total, entry) => total + (entry.kind === "shareProtection" ? entry.amount : 0),
     0,
   );
+  if (chance <= 0) return;
+  const pool = battlefield(state, allied ? "player" : "enemy");
+  if (!pool.some((unit) => unit.id === source.id)) return;
+  const recipients = pool.filter((unit) => unit.id !== source.id && unit.health > 0);
+  if (!recipients.length) return;
   if (!succeeds(state, chance / 100, !allied, events)) return;
   for (const recipient of recipients) {
     if (effect === "block") yield* reaction("grantBlock", state, recipient, amount, events, false);
@@ -94,13 +95,15 @@ export function* grantBlock(
   let gained = Math.min(STACK_LIMIT - unit.block, Math.round(amount));
   if (gained > 0 && state.phase === "battle" && state.battle) {
     const allied = !isEnemy(unit);
-    const pool = battlefield(state, allied ? "player" : "enemy");
-    if (pool.some((recipient) => recipient.id === unit.id)) {
-      const percent = creaturePassive(allied ? state : undefined, unit.species).effects.reduce(
-        (sum, effect) => sum + (effect.kind === "blockConversion" ? effect.amount : 0),
-        0,
-      );
-      const recipient = percent > 0 ? mostInjured<Combatant>(pool) : undefined;
+    const percent = creaturePassive(allied ? state : undefined, unit.species).effects.reduce(
+      (sum, effect) => sum + (effect.kind === "blockConversion" ? effect.amount : 0),
+      0,
+    );
+    if (percent > 0) {
+      const pool = battlefield(state, allied ? "player" : "enemy");
+      const recipient = pool.some((recipient) => recipient.id === unit.id)
+        ? mostInjured<Combatant>(pool)
+        : undefined;
       if (recipient) {
         const converted = Math.min(
           Math.round((gained * percent) / 100),
