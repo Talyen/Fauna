@@ -1,3 +1,4 @@
+import { playPreviewModel } from "../../../src/ui/battle/play-preview-model";
 // @vitest-environment jsdom
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
@@ -157,7 +158,7 @@ it("forecasts Block absorption, Health damage and Stun buildup from the authorit
   const card = before.cards.find((card) => card.definitionId === "emberback-magma-stomp")!;
   const rng = before.rng;
   const result = previewCard(before, card.id, "enemy-0");
-  render(<TargetPreview before={before} result={result} targetId="enemy-0" />);
+  render(<TargetPreview forecast={playPreviewModel(before, result).units.get("enemy-0")} />);
   expect(screen.getByText(/absorbed/)).toBeTruthy();
   expect(screen.getByText(/Stun/, { selector: ".rule-keyword" })).toBeTruthy();
   expect(before.rng).toBe(rng);
