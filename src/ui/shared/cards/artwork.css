@@ -170,6 +170,11 @@
   font-size: var(--text-body);
   line-height: 1.5;
 }
+.creature-trait-name {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
 .card-details > strong {
   font-size: var(--text-heading);
 }

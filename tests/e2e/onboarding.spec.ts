@@ -35,7 +35,7 @@ for (const [width, enlarged] of [
     await expect(tooltip.locator("strong").first()).toHaveText(name);
     await expect(tooltip).toContainText(species(chosen).passiveTiers[0].description);
     for (const action of CARDS.filter((entry) => entry.species === chosen))
-      await expect(tooltip).toContainText(action.name);
+      await expect(tooltip).not.toContainText(action.name);
     await captureScreen(page, { path: `reports/starter/tooltip-${width}-${enlarged}.png` });
     await mossguard.click();
     await page.locator(".inspection-thumbnails .action-card").first().click();

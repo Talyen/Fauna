@@ -419,10 +419,12 @@ it("keeps unavailable cards inspectable and denies activation without explanator
   expect(inspect).toHaveBeenCalledOnce();
 });
 
-it("omits health from creature hover details while retaining block and the passive", async () => {
+it("limits creature hover details to the name and passive", async () => {
   const { CreatureDetails } = await import("../../../src/ui/shared/cards/card-details");
-  render(<CreatureDetails kind="mossguard" block={4} />);
-  expect(screen.getByText("4 block")).toBeTruthy();
+  render(<CreatureDetails kind="mossguard" />);
+  expect(screen.getByText("Mossguard")).toBeTruthy();
+  expect(screen.getByText("Overgrowth")).toBeTruthy();
+  expect(screen.queryByText(/\d+ block/i)).toBeNull();
   expect(screen.queryByText(/health/i)).toBeNull();
   expect(
     screen.getByText(

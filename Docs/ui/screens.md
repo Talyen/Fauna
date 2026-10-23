@@ -20,7 +20,7 @@ Both menus show spendable talent points beside Talents with an accessible descri
 
 Show three offers at shared artwork sizes, with content-width Recruit buttons beneath. Artwork opens inspection; Recruit commits the choice. Omit a Begin journey button: [starter rules](../EXPEDITION_DESIGN.md#roster-and-battles) own automatic start, saved choices, pools and Legendary eligibility.
 
-Starter hover/focus adds kit keywords and the three action names/current Mana costs. Other ordinary creature hover/focus details show name, Block, effects and passive without action lists; the optional Recruit destination below is an explicit exception.
+All creature hover/focus tooltips show only the creature name as the header, the passive trait name with a sparkle icon, and the current passive rules. Trait names and icons share the short-label shine palette from keywords in the passive rules; rules retain solid keyword colors. Omit rarity labels, Block, status effects, kit labels and ability lists. Echo minions have no passive and show only their name.
 
 ## Creature and action inspection
 
@@ -30,7 +30,7 @@ Outside battle, use one shadcn Dialog on an opaque warm near-black backdrop. Cen
 
 Activating a thumbnail pins its enlarged artwork in the same Dialog. A/D and controller left/right cycle the three actions without Previous/Next buttons. Card rules show final effects without a bonus breakdown or embedded Glossary definitions. Inspection has no Recruit/Choose action.
 
-Every creature/action inspection has an accessible icon-only Back button; [menu rules](../MENU_DESIGN.md#back-and-focus-return) own nesting, Back and whole-dialog dismissal. Battle, piles opened in battle and required replacement use hover/focus details without nested pinned inspection. Enemy details show current effects and never reveal intents; full species kits belong in Collection.
+Every creature/action inspection has an accessible icon-only Back button; [menu rules](../MENU_DESIGN.md#back-and-focus-return) own nesting, Back and whole-dialog dismissal. Battle, piles opened in battle and required replacement use hover/focus details without nested pinned inspection. Enemy tooltips follow the shared creature tooltip contract and never reveal intents; full species kits belong in Collection.
 
 ## Collection
 
@@ -76,7 +76,7 @@ When deployed knockouts have living backup, show a centered, nondismissible Choo
 
 ## Optional Recruit destination
 
-Show creature artwork, Recruit and its species name. Its hover/focus details include the current passive and all three ability rules. Activating the destination recruits directly, without a separate confirmation or roster-release step; unlike starter/reward offers, it is a direct-entry destination. [Journey rules](../EXPEDITION_DESIGN.md#recruitment) own eligibility and committed outcomes.
+Show creature artwork, Recruit and its species name. Its hover/focus details follow the shared creature tooltip contract. Activating the destination recruits directly, without a separate confirmation or roster-release step; unlike starter/reward offers, it is a direct-entry destination. [Journey rules](../EXPEDITION_DESIGN.md#recruitment) own eligibility and committed outcomes.
 
 ## Settings
 

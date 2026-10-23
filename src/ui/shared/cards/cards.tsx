@@ -41,7 +41,6 @@ type CreatureProps = {
   readout?: boolean;
   invalidTarget?: boolean;
   combat?: import("../../../game/types").CombatState;
-  speciesKit?: boolean;
   sharedDodge?: number;
 };
 function useCardTooltip(enabled: boolean) {
@@ -78,7 +77,6 @@ export function CreatureCard({
   readout = true,
   invalidTarget = false,
   combat,
-  speciesKit = false,
   sharedDodge = 0,
 }: CreatureProps) {
   const [tooltipOpen, setTooltipOpen] = useCardTooltip(tooltips);
@@ -143,17 +141,7 @@ export function CreatureCard({
             <Tooltip open={tooltips && tooltipOpen} onOpenChange={(open) => setTooltipOpen(tooltips && open)}>
               <TooltipTrigger asChild>{artwork}</TooltipTrigger>
               <TooltipContent side={tooltipSide}>
-                {tooltipContent ?? (
-                  <CreatureDetails
-                    progression={progression}
-                    kind={kind}
-                    name={name}
-                    block={block}
-                    speciesKit={speciesKit}
-                    combat={combat}
-                    sharedDodge={sharedDodge}
-                  />
-                )}
+                {tooltipContent ?? <CreatureDetails progression={progression} kind={kind} name={name} />}
               </TooltipContent>
             </Tooltip>
           )}
@@ -187,8 +175,7 @@ export function AllyCard({
       tooltipContent={
         "minion" in creature && creature.minion ? (
           <div className="card-details">
-            <strong>Echo · Minion</strong>
-            <p>Attacks through The Court Remembers</p>
+            <strong>Echo</strong>
           </div>
         ) : undefined
       }
@@ -211,8 +198,7 @@ export function EnemyCard({
       tooltipContent={
         enemy.minion ? (
           <div className="card-details">
-            <strong>Echo · Minion</strong>
-            <p>Attacks through The Court Remembers</p>
+            <strong>Echo</strong>
           </div>
         ) : undefined
       }

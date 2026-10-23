@@ -45,6 +45,16 @@
   filter: drop-shadow(0 1px 1px var(--effect-text-contour));
   animation: effect-text-shine 4.8s linear infinite;
 }
+.effect-shine-icon {
+  width: 20px;
+  height: 20px;
+  flex: none;
+}
+.effect-shine-icon-fill {
+  width: 100%;
+  height: 100%;
+  background-clip: border-box;
+}
 .game-button:has(> .effect-shine-border) {
   position: relative;
 }
@@ -98,7 +108,7 @@
   }
 }
 @supports not (background-clip: text) {
-  .effect-shine-text {
+  .effect-shine-text:not(.effect-shine-icon-fill) {
     color: var(--foreground);
     background-image: none !important;
   }

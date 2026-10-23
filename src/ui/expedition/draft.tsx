@@ -3,8 +3,6 @@ import { useLayoutEffect, useRef } from "react";
 import { returnFocus } from "../shared/navigation/focus";
 import { starterCount } from "../../game/progression";
 
-import { StarterDetails } from "../shared/cards/card-details";
-
 import { Check } from "lucide-react";
 import { EffectButton as Button } from "../shared/effects/treatments";
 import { creatureKeywords } from "../shared/effects/palettes";
@@ -52,7 +50,6 @@ export function Draft({ game, send, inspect }: Props) {
                   onClick={() => inspect({ species: s.id })}
                   onInspect={() => inspect({ species: s.id })}
                   label={`Inspect ${s.name}`}
-                  tooltipContent={<StarterDetails game={game} kind={s.id} />}
                 />
                 {game.selected.length === starterCount(game) ? (
                   <span className="starter-selection">

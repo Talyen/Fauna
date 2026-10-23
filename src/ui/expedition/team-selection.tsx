@@ -7,9 +7,7 @@ import { canVisitCampfire, canRecruitDestination } from "../../game/destinations
 import { SupportOffer } from "./support-screen";
 import { assetUrl } from "../shared/assets";
 import { CreatureCard } from "../shared/cards/cards";
-import { KeywordText } from "../shared/keyword-text";
-import { CARDS, species } from "../../game/content";
-import { cardText } from "../../game/card-rules";
+import { species } from "../../game/content";
 import { CreatureDetails } from "../shared/cards/card-details";
 
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
@@ -53,16 +51,6 @@ export function TeamSelection({ game, send, recovery }: Props & { recovery?: Gam
                     ?.querySelector<HTMLElement>("[data-encounter]")
                     ?.focus();
               }}
-              tooltipContent={
-                <div className="card-details">
-                  <CreatureDetails kind={game.expedition.recruit!} progression={game} speciesKit />
-                  {CARDS.filter((card) => card.species === game.expedition.recruit).map((card) => (
-                    <p key={card.id}>
-                      <strong>{card.name}</strong> · <KeywordText text={cardText(card)} />
-                    </p>
-                  ))}
-                </div>
-              }
             />
             <h2>Recruit</h2>
             <p>{species(game.expedition.recruit!).name}</p>
@@ -95,7 +83,7 @@ export function TeamSelection({ game, send, recovery }: Props & { recovery?: Gam
                 />
               </TooltipTrigger>
               <TooltipContent>
-                <CreatureDetails kind={bossEnemy.species} name={bossEnemy.name} speciesKit />
+                <CreatureDetails kind={bossEnemy.species} name={bossEnemy.name} />
               </TooltipContent>
             </Tooltip>
           ) : (

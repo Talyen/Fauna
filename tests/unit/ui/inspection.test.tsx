@@ -9,7 +9,7 @@ import { encodeSave } from "../../../src/game/save";
 import { createGame } from "../../../src/game/engine";
 import { enemyInspectionValue } from "../../../src/game/ability-rules";
 import { freshCombat } from "../../../src/game/combat/index";
-import { ActionDetails, StarterDetails } from "../../../src/ui/shared/cards/card-details";
+import { ActionDetails, CreatureDetails } from "../../../src/ui/shared/cards/card-details";
 import { Inspector } from "../../../src/ui/inspection/inspection";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
 import { App } from "../../../src/ui/App";
@@ -20,13 +20,29 @@ import { run, teamRun } from "../../support/game";
 screenTestEnvironment({ visible: true });
 
 describe("artwork-first inspection", () => {
-  it("shows talent-adjusted Mana costs in the starter kit", () => {
+  it.each([0, 3, 5])("shows only the name and shining current passive at rank %s", (rank) => {
     const game = produce(createGame(7), (draft) => {
-      draft.talents = ["burn.flashpoint"];
+      draft.discovery.recruited.mossguard = rank + 1;
     });
-    render(<StarterDetails game={game} kind="emberback" />);
-    expect(screen.getByText("Furnace Breath").closest("p")?.textContent).toContain("0 Mana");
-    expect(screen.getByText("Ember Charge").closest("p")?.textContent).toContain("1 Mana");
+    const { container } = render(<CreatureDetails progression={game} kind="mossguard" name="Guardian" />);
+    expect(container.textContent).toBe(
+      `GuardianOvergrowth${species("mossguard").passiveTiers[rank]!.description}`,
+    );
+    expect(container.querySelector(".effect-shine-icon")).toBeTruthy();
+    expect(
+      container.querySelector(".creature-trait-name .effect-shine-text")?.getAttribute("style"),
+    ).toContain("--keyword-block");
+    expect(container.querySelector(".effect-shine-icon-fill")?.getAttribute("style")).toContain(
+      "--keyword-block",
+    );
+  });
+
+  it("keeps named Legendary tooltips to the name and passive without rarity or kit labels", () => {
+    const creature = species("oathara");
+    const { container } = render(<CreatureDetails kind="oathara" name="The Wanderer" />);
+    expect(container.textContent).toBe(
+      `The Wanderer${creature.trait}${creature.passiveTiers[0].description}`,
+    );
   });
 
   it.each([0, 1, 2])(
@@ -46,8 +62,8 @@ describe("artwork-first inspection", () => {
         const tooltip = await screen.findByRole("tooltip");
         expect(tooltip.textContent).toContain(creature.trait);
         for (const action of CARDS.filter((entry) => entry.species === kind)) {
-          expect(tooltip.textContent).toContain(action.name);
-          expect(tooltip.textContent).toContain(`${action.cost} Mana`);
+          expect(tooltip.textContent).not.toContain(action.name);
+          expect(tooltip.textContent).not.toContain(`${action.cost} Mana`);
         }
         await user.click(opener);
         const dialog = screen.getByRole("dialog", { name: creature.name });
@@ -163,7 +179,7 @@ describe("artwork-first inspection", () => {
     }
   });
 
-  it("keeps modified hand rules and enemy effects on hover without any battle inspection", async () => {
+  it("keeps modified hand rules and only the enemy passive on hover without battle inspection", async () => {
     const fixture = produce(teamRun(7, ["emberback", "emberback", "prismram"]), (game) => {
       game.cards[0]!.level = 1;
       game.keywordXP.physical = 20;
@@ -201,7 +217,10 @@ describe("artwork-first inspection", () => {
       const tooltip = await screen.findByRole("tooltip");
       const enemy = before.battle!.enemies[0]!;
       expect(tooltip.textContent).toContain(enemy.name);
-      expect(tooltip.textContent).toContain("Thorns 2");
+      expect(tooltip.textContent).not.toContain("Thorns 2");
+      expect(tooltip.textContent).toBe(
+        `${enemy.name}${species(enemy.species).trait}${species(enemy.species).passiveTiers[0].description}`,
+      );
       expect(tooltip.textContent).not.toContain(`${enemy.health}/${enemy.maxHealth}`);
       expect(tooltip.textContent).not.toContain("Ember Charge");
       expect(session.store.getState().game).toBe(before);
