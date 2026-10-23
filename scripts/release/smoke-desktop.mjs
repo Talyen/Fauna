@@ -28,8 +28,9 @@ try {
   const starterOffer = window.locator(".draft-grid .creature-card").first();
   const starterName = (await starterOffer.getAttribute("aria-label")).replace(/^Inspect /, "");
   await starterOffer.click();
-  await window.getByRole("button", { name: `Choose ${starterName}`, exact: true }).click();
-  await window.getByRole("button", { name: "Begin journey" }).click();
+  await window.getByRole("heading", { name: starterName, exact: true }).waitFor();
+  await window.keyboard.press("Escape");
+  await window.getByRole("button", { name: `Recruit ${starterName}`, exact: true }).click();
   await window.getByRole("button", { name: "Deck", exact: true }).click();
   await window
     .locator(".deck-grid img")

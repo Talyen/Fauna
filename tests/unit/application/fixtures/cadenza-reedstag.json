@@ -1,5 +1,5 @@
 {
-  "version": 50,
+  "version": 52,
   "discovery": {
     "encountered": [
       "reedstag",
@@ -316,7 +316,15 @@
     "leech": 0,
     "mana": 58
   },
-  "battleXP": { "physical": 7, "light": 8, "block": 8, "dodge": 7, "poison": 3, "health": 13, "mana": 4529 },
+  "battleXP": {
+    "physical": 7,
+    "light": 8,
+    "block": 8,
+    "dodge": 7,
+    "poison": 3,
+    "health": 13,
+    "mana": 4529
+  },
   "talents": [
     "physical.shield-slam",
     "nature.bramblegrowth",
@@ -381,11 +389,16 @@
           "skipped": false,
           "deathDoorUsed": false,
           "grace": 0,
-          "statusSources": { "poison": "recruit-157" },
+          "statusSources": {
+            "poison": "recruit-157"
+          },
           "bleedLeech": []
         },
         "lastAbility": null,
-        "minion": { "ownerId": "enemy-0", "side": "enemy" }
+        "minion": {
+          "ownerId": "enemy-0",
+          "side": "enemy"
+        }
       },
       {
         "id": "echo-enemy-0-1",
@@ -429,11 +442,16 @@
           "skipped": false,
           "deathDoorUsed": false,
           "grace": 0,
-          "statusSources": { "poison": "recruit-157" },
+          "statusSources": {
+            "poison": "recruit-157"
+          },
           "bleedLeech": []
         },
         "lastAbility": null,
-        "minion": { "ownerId": "enemy-0", "side": "enemy" }
+        "minion": {
+          "ownerId": "enemy-0",
+          "side": "enemy"
+        }
       }
     ],
     "copySerial": 0,
@@ -536,6 +554,10 @@
     "unlocks": [],
     "lastBattle": null
   },
-  "expedition": { "pack": 0, "recruit": null, "lastRoom": "boss" },
+  "expedition": {
+    "pack": ["memento"],
+    "recruit": null,
+    "lastRoom": "boss"
+  },
   "support": null
 }

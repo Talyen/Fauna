@@ -45,7 +45,9 @@ test("full-roster recruitment banks Collection progress and confirms only the di
   expect(banked.discovery.recruited.emberback).toBe((fixture.discovery.recruited.emberback ?? 0) + 1);
   await expect(page.getByRole("heading", { name: "Choose your team", exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: "Back", exact: true })).toHaveCount(0);
-  const first = page.locator('.recruit-team-roster [data-roster-slot="ally-0"] .creature-card');
+  const first = page.locator(
+    '.app:not([inert]) .recruit-team-roster [data-roster-slot="ally-0"] .creature-card',
+  );
   await first.click();
   await expect(first).toHaveAttribute("data-species", "emberback");
   expect(await state(page)).toEqual(banked);
