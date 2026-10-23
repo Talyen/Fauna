@@ -44,7 +44,7 @@ Leech restores half actual Health lost, capped by overkill and maximum Health. B
 
 ### Cleanse and Purge
 
-Cleanse removes harmful categories in Burn, Poison, Bleed, Stun, Freeze, Blind order, handling active control first. Purge removes Block first, then Armor, Thorns, Water Thorns, bonus Dodge, Reflect, Burn-only Reflect, Nullify and the Freeze-damage ward, each as a separate beneficial category. Both remove up to the card's stated number of categories.
+Cleanse removes harmful categories in Burn, Poison, Bleed, Stun, Freeze, Blind order, handling active control first. Purge removes Block first, then Armor, Thorns, Water Thorns, bonus Dodge, Reflect, Burn-only Reflect, Nullify, the Freeze-damage ward and Negate, each as a separate beneficial category. Both remove up to the card's stated number of categories.
 
 ### Reflection
 
@@ -55,6 +55,10 @@ A pending Reflect charge guarantees the next eligible reflection before passive 
 ### Nullify
 
 **Nullify** prevents the next applicable Burn, Poison, Bleed, Stun, Freeze or Blind application while leaving direct damage intact and existing statuses unchanged. It is non-stacking, lasts until consumed or Purged, and survives turns, swaps and resume. Dodge, fully blocked damage, periodic ticks, immunity, capped buildup and already present non-stacking effects do not consume it. Nullify precedes reflection and can stop reflected statuses. Repeated grants refresh one protection rather than adding charges. It is combat vocabulary, not a progression category.
+
+### Negate
+
+**Negate** cancels the next incoming ability attack against its recipient after interception and before Dodge, preserving Block and Armor and preventing that attack's harmful follow-ups on that recipient. Thorns and Water Thorns still retaliate once with their normal decay. A Blind miss leaves protection intact; other recipients of an area attack and a subsequent repeat resolve independently. Periodic, proc and retaliation packets do not consume it. Protection does not stack, lasts until consumed or Purged and persists through swaps and resume. Dream Double grants it to its actor. Negate awards no separate keyword XP
 
 ### Consume
 

@@ -22,6 +22,8 @@ Retain the immutable Windows candidate, its matching dependency SBOM and third-p
 ## External setup
 
 - [ ] Configure Fauna's own Steam App ID in [Steam configuration](../desktop/steam-config.json); qualify its native binding against that client
+- [ ] Keep Dynamic Cloud Sync disabled until remote-file-change handling exists; publish Cloud settings after configuration
+- [ ] Complete the content survey and Store fields using [Store preparation](STEAM_STORE.md)
 - [ ] Configure application-managed Cloud quota for 32 device streams, two slots each, up to 1 MiB per slot; do not also Auto-Cloud those progression paths
 - Paid signing remains deferred; configure the optional [signed installer path](RELEASE.md#candidate-signing-and-qualification) only after an explicit distribution decision
 - [ ] Confirm the privacy/support policy for device-local diagnostics; sharing remains player initiated and no uploads are enabled
@@ -49,7 +51,8 @@ Retain the immutable Windows candidate, its matching dependency SBOM and third-p
 ## Physical controls and Steam Deck
 
 - [ ] Complete battle, targeting, swaps, rewards, settings, inspection and pause flows with each intended physical controller
-- [ ] Disconnect/reconnect during navigation, targeting and a modal; verify reachable focus, no repeated activation and usable prompts
+- [ ] Disconnect/reconnect during navigation, targeting and a modal; active-controller disconnection stops autoplay and opens pause without automatic resume; verify reachable focus, no repeated activation and usable prompts
+- [ ] Check Automatic and manual Xbox/Deck, PlayStation and Nintendo prompts, including Steam Input emulation; publish a recommended configuration for each supported controller family
 - [ ] On Deck, verify text and target readability on the handheld display, overlay and intended bindings
 - [ ] Exercise sleep/resume during battle and while Cloud work is pending, then quit and resume
 - [ ] Check cold offline launch, frame pacing, battery use and an extended journey through the intended Proton/native path

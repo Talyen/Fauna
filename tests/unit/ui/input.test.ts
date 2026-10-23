@@ -11,7 +11,7 @@ afterEach(() => {
   vi.unstubAllGlobals();
   vi.restoreAllMocks();
 });
-function harness(onAction?: (action: InputAction) => void, suspended = () => false) {
+function harness(onAction?: (action: InputAction) => void, suspended = () => false, disconnected = () => {}) {
   vi.spyOn(document, "hasFocus").mockReturnValue(true);
   let frame: FrameRequestCallback = () => {};
   let pads: Array<Pick<Gamepad, "mapping" | "buttons" | "axes"> | null> = [];
@@ -30,6 +30,7 @@ function harness(onAction?: (action: InputAction) => void, suspended = () => fal
     },
     modes,
     suspended,
+    { disconnected },
   );
   const tick = (now: number, buttons: number[] = [], axes = [0, 0]) => {
     pads = [
@@ -55,6 +56,29 @@ function harness(onAction?: (action: InputAction) => void, suspended = () => fal
 }
 
 describe("player input ownership", () => {
+  it("pauses only when the controller being used disconnects and never resumes on reconnect", () => {
+    const disconnected = vi.fn();
+    const h = harness(undefined, () => false, disconnected);
+    try {
+      h.disconnect(10);
+      expect(disconnected).not.toHaveBeenCalled();
+      h.tick(20);
+      h.tick(30, [13]);
+      h.disconnect(40);
+      h.disconnect(50);
+      expect(disconnected).toHaveBeenCalledOnce();
+      h.tick(60, [0]);
+      expect(h.actions).toEqual(["down"]);
+      h.tick(70);
+      h.tick(80, [0]);
+      expect(h.actions).toEqual(["down", "confirm"]);
+      window.dispatchEvent(new Event("pointerdown"));
+      h.disconnect(90);
+      expect(disconnected).toHaveBeenCalledOnce();
+    } finally {
+      h.dispose();
+    }
+  });
   it("revokes the rest of a controller sample when an action suspends input", () => {
     let suspended = false;
     const h = harness(

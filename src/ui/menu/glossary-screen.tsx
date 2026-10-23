@@ -1,7 +1,15 @@
 import { GLOSSARY } from "../../game/glossary";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { KeywordText } from "../shared/keyword-text";
-export function GlossaryScreen({ back }: { back: () => void }) {
+export function GlossaryScreen({
+  back,
+  controller = false,
+  prompts = { confirm: "A", back: "B", endTurn: "Y" },
+}: {
+  back: () => void;
+  controller?: boolean;
+  prompts?: { confirm: string; back: string; endTurn: string };
+}) {
   return (
     <Screen className="menu-screen glossary-screen" aria-labelledby="menu-screen-title">
       <header className="collection-heading">
@@ -10,8 +18,10 @@ export function GlossaryScreen({ back }: { back: () => void }) {
         </ScreenHeading>
       </header>
       <p>
-        W/A/S/D or Tab to navigate. A/D switches targets. Enter/controller A selects. Escape/B goes back.
-        Controller Y ends the turn. View creature abilities in Collection from the menu.
+        {controller
+          ? `Use the D-pad or left stick to navigate; ${prompts.confirm} selects; ${prompts.back} goes back; ${prompts.endTurn} ends the turn`
+          : "W/A/S/D or Tab to navigate; A/D switches targets; Enter selects; Escape goes back"}
+        {" · View creature abilities in Collection from the menu"}
       </p>
       {/* eslint-disable jsx-a11y/no-noninteractive-tabindex -- A named scrolling region needs focus for native keyboard scrolling and controller access */}
       <div

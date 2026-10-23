@@ -50,6 +50,7 @@ export function BattleScreen({
   controls: controlsRef,
   bursts,
   controller,
+  endTurnPrompt = "Y",
   navigateFocus,
   onDenied,
   clearSelection = false,
@@ -62,6 +63,7 @@ export function BattleScreen({
   controls: Controls;
   bursts: readonly Burst[];
   controller: boolean;
+  endTurnPrompt?: string;
   navigateFocus: boolean;
   onDenied: (element: HTMLElement) => void;
   onManualStart?: () => void;
@@ -436,7 +438,7 @@ export function BattleScreen({
           <div className="battle-dock">
             <div className="battle-actions">
               <Button className="end-turn" onClick={() => play({ type: "endTurn" })}>
-                End turn{controller ? " · Y" : ""}
+                End turn{controller ? ` · ${endTurnPrompt}` : ""}
               </Button>
             </div>
             <div className="battle-pile">

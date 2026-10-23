@@ -6,7 +6,7 @@ Fauna targets Windows x64 on Steam and runs offline without Steam, servers or ac
 
 ## Shipping requirements
 
-1. **Prepare:** configure Fauna's own App/depot, Cloud quota and App ID in `desktop/steam-config.json`; never reuse Alchemy's identities or saves. Cloud/overlay adapters exist, but a null App ID disables progress sync; achievements are unimplemented
+1. **Prepare:** configure Fauna's own App/depot, Cloud quota and App ID in `desktop/steam-config.json`; never reuse Alchemy's identities or saves. Cloud/overlay adapters exist, but a null App ID disables Steam integration; the full release gate rejects missing, invalid and Spacewar IDs; version-only and ordinary development checks remain available; achievements are unimplemented
 2. **Build and identify:** use the final clean tagged commit, retain its successful full CI and run the [release identity gate](#release-verification-and-player-notes). Windows uses electron-builder and `com.fauna.game`; the unpacked x64 package contains only the renderer, desktop code and required runtime dependencies
 3. **Qualify:** complete the [candidate record](RELEASE_QUALIFICATION.md) on the actual Steam depot, resolving Windows launch blocks and recording physical-controller, Deck, display and live Cloud results. Finish artwork/audio, source-rights review, store material and privacy/support decisions
 
@@ -49,11 +49,19 @@ Missing, empty, corrupt, mismatched or escaping resources fail. The runtime inve
 
 Configure application-managed Cloud in Fauna's versioned device-slot namespace: 32 streams, two slots each, at most 1 MiB per slot. Do not also Auto-Cloud those progression directories. [Architecture](ARCHITECTURE.md#cloud-reconciliation-and-device-preferences) owns ancestry, preservation, profile separation and offline behavior.
 
+The main process receives `GameOverlayActivated_t` through Valve's flat manual-dispatch API, using Koffi and the already bundled Steam library. Cloud uses steamworks.js in its separate utility process, so ordinary and manual callback dispatch never share a process. Graphics switches are installed before Electron readiness. Native export/payload tests and packaged smoke load the real callback binding without initializing Steam; they do not prove live overlay behavior.
+
+Keep **Dynamic Cloud Sync disabled** in Steamworks: the current adapter does not consume in-session remote-file-change callbacks. Ordinary session-start/session-exit Cloud remains the intended setup. Do not Auto-Cloud device preferences, diagnostics or identity metadata.
+
 Use the [live Steam/two-device checklist](RELEASE_QUALIFICATION.md#live-steam-and-two-device-cloud) and [physical controls/Deck checklist](RELEASE_QUALIFICATION.md#physical-controls-and-steam-deck). Fake events test lifecycle only; smoke, preview and performance profiles bypass real Steam.
+
+## Store setup and content disclosure
+
+Partner identity verification and creation of Fauna's application are pending; there is no Store page or assigned App ID yet. Configure the assigned ID in the existing Steam configuration once available. See [Store preparation](STEAM_STORE.md) for the owner-confirmed AI disclosure, feature claims and remaining external setup.
 
 ## Display acceptance
 
-Qualify every [supported viewport](UI.md#layout-artwork-size-and-spacing) at normal and 125% text with the largest tooltip setting. Follow bounded-scrolling rules and exercise reading regions with mouse, keyboard and controller. Native checks also cover windowed/fullscreen transitions, restored bounds, monitor removal and high DPI. Renderer CSS size differs from native frame size and OS scaling; smaller work areas remain unsupported. Record results in the candidate checklist.
+Qualify every [supported viewport](UI.md#layout-artwork-size-and-spacing) at normal and 125% text with the largest tooltip setting. Follow bounded-scrolling rules and exercise reading regions with mouse, keyboard and controller. First launch in Big Picture (`SteamTenfoot=1`) defaults to fullscreen; an existing device preference wins. Native checks also cover windowed/fullscreen transitions, restored bounds, monitor removal and high DPI. Renderer CSS size differs from native frame size and OS scaling; smaller work areas remain unsupported. Record results in the candidate checklist.
 
 ## Candidate signing and qualification
 

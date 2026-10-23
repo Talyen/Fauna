@@ -1,5 +1,5 @@
 {
-  "version": 53,
+  "version": 54,
   "discovery": {
     "encountered": [
       "reedstag",
@@ -72,7 +72,8 @@
         "deathDoorUsed": false,
         "grace": 0,
         "statusSources": {},
-        "bleedLeech": []
+        "bleedLeech": [],
+        "negate": false
       }
     }
   ],
@@ -117,7 +118,8 @@
         "deathDoorUsed": true,
         "grace": 0,
         "statusSources": {},
-        "bleedLeech": []
+        "bleedLeech": [],
+        "negate": false
       }
     },
     {
@@ -160,7 +162,8 @@
         "deathDoorUsed": true,
         "grace": 0,
         "statusSources": {},
-        "bleedLeech": []
+        "bleedLeech": [],
+        "negate": false
       }
     },
     {
@@ -203,7 +206,8 @@
         "deathDoorUsed": true,
         "grace": 0,
         "statusSources": {},
-        "bleedLeech": []
+        "bleedLeech": [],
+        "negate": false
       }
     },
     {
@@ -246,7 +250,8 @@
         "deathDoorUsed": false,
         "grace": 0,
         "statusSources": {},
-        "bleedLeech": []
+        "bleedLeech": [],
+        "negate": false
       }
     }
   ],
@@ -364,7 +369,8 @@
           "statusSources": {
             "poison": "recruit-157"
           },
-          "bleedLeech": []
+          "bleedLeech": [],
+          "negate": false
         },
         "lastAbility": null,
         "minion": {
@@ -417,7 +423,8 @@
           "statusSources": {
             "poison": "recruit-157"
           },
-          "bleedLeech": []
+          "bleedLeech": [],
+          "negate": false
         },
         "lastAbility": null,
         "minion": {
@@ -486,7 +493,8 @@
           "deathDoorUsed": false,
           "grace": 0,
           "statusSources": {},
-          "bleedLeech": []
+          "bleedLeech": [],
+          "negate": false
         },
         "lastAbility": null,
         "deck": {

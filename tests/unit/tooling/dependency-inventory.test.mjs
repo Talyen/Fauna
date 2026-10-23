@@ -20,6 +20,7 @@ it("retains production license text and rejects missing or mismatched installed 
         "": {},
         "node_modules/example": { version: "1.0.0", license: "MIT" },
         "node_modules/dev-only": { dev: true },
+        "node_modules/@koromix/koffi-other": { version: "3.3.3", optional: true, os: ["unsupported"] },
       },
     };
     const result = dependencyNotices(root, lock);
@@ -53,6 +54,36 @@ it("binds the final executable, archive and Chromium notices to retained hashes"
     );
     rmSync(path.join(root, "LICENSES.chromium.html"));
     expect(() => packageInventory(root, output)).toThrow();
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+it("includes the pinned native callback binary under Koffi's upstream license", () => {
+  const root = mkdtempSync(path.join(os.tmpdir(), "fauna-koffi-notice-"));
+  const name = `@koromix/koffi-${process.platform}-${process.arch}`;
+  const write = (file, text) => {
+    mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
+    writeFileSync(path.join(root, file), text);
+  };
+  try {
+    write("Docs/SHADCN-LICENSE.txt", "source license");
+    write("Docs/FONT-LICENSE.txt", "font license");
+    write("node_modules/koffi/LICENSE.txt", "Koffi copyright and MIT permission");
+    write(`node_modules/${name}/package.json`, JSON.stringify({ name, version: "3.3.3" }));
+    const result = dependencyNotices(root, {
+      packages: {
+        [`node_modules/${name}`]: {
+          version: "3.3.3",
+          optional: true,
+          os: [process.platform],
+          cpu: [process.arch],
+          license: "MIT",
+        },
+      },
+    });
+    expect(result.notices).toContain("Koffi copyright and MIT permission");
+    expect(result.inventory[0].name).toBe(name);
   } finally {
     rmSync(root, { recursive: true, force: true });
   }

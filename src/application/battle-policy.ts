@@ -9,7 +9,7 @@ import { actionValue, cardCost, physicalBonus } from "../game/ability-rules";
 import { definition, species } from "../game/content";
 import type { Card, Command, Enemy, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 28;
+export const BATTLE_POLICY_VERSION = 29;
 const BATTLE_FINISH_PRIORITY = 1_000_000_000;
 export interface BattleChoice {
   command: Command;
@@ -160,14 +160,21 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
               ? Math.max(0, enemy.combat.armor - (state.boons.includes("sundering-charm") ? 2 : 0))
               : 0;
             const lost =
-              type === "freeze" && enemy.combat.nullifyFreeze ? 0 : Math.max(0, damage - enemy.block - armor);
-            const blocked = Math.min(damage, enemy.block);
+              enemy.combat.negate || (type === "freeze" && enemy.combat.nullifyFreeze)
+                ? 0
+                : Math.max(0, damage - enemy.block - armor);
+            const blocked = enemy.combat.negate ? 0 : Math.min(damage, enemy.block);
             const eroded =
-              armored && state.boons.includes("sundering-charm") ? Math.min(2, enemy.combat.armor) : 0;
+              !enemy.combat.negate && armored && state.boons.includes("sundering-charm")
+                ? Math.min(2, enemy.combat.armor)
+                : 0;
             const main = !enemy.minion;
             const lethal = lost >= enemy.health;
-            const score =
-              lost > 0
+            const score = enemy.combat.negate
+              ? main
+                ? 400
+                : 100
+              : lost > 0
                 ? (main ? 1000 : 250) + (lethal ? (main ? 1000 : 250) : 0) + Math.min(lost, enemy.health)
                 : blocked > 0
                   ? (main ? 500 : 125) + blocked
@@ -318,7 +325,8 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
             enemy.combat.reflect ||
             enemy.combat.reflectBurn ||
             enemy.combat.nullify ||
-            enemy.combat.nullifyFreeze),
+            enemy.combat.nullifyFreeze ||
+            enemy.combat.negate),
       ).length;
       const defense = enemies.some(
         (enemy) => enemy.health > 0 && (enemy.block > 0 || enemy.combat.armor > 0),
@@ -329,6 +337,13 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
         undefined,
         "Remove visible defenses before spending Mana on blocked attacks",
       );
+    } else if (def.effect === "dreamDouble") {
+      add(card, actor.combat?.negate ? 100 + value : 400 + value);
+    } else if (def.effect === "nightmareHarvest") {
+      const useful = battlefield(state, "player").filter(
+        (unit) => unit.health > 0 && hasHarmfulEffects(unit),
+      ).length;
+      add(card, useful > 0 ? 2000 + useful : 0);
     } else if (def.effect === "teamCleanse") {
       add(card, 150);
     } else if (

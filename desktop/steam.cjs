@@ -6,7 +6,7 @@ const { createStorage } = require("./storage.cjs");
 /** @param {string} name */
 const validName = (name) => typeof name === "string" && /^fauna-v1-[a-f0-9]{32}-[01]\.json$/.test(name);
 /**
- * @param {{app: Pick<import("electron").App, "isPackaged">, utilityProcess: Pick<typeof import("electron").utilityProcess, "fork">, directory: string, isolated: boolean, pause: (active: boolean) => void, loadBinding?: () => typeof import("steamworks.js")}} options
+ * @param {{app: Pick<import("electron").App, "isPackaged">, utilityProcess: Pick<typeof import("electron").utilityProcess, "fork">, directory: string, isolated: boolean, pause: (active: boolean) => void, loadBinding?: () => typeof import("./steam-overlay.cjs")}} options
  * @returns {Promise<Required<import("../src/platform/ports").CloudPort> & {storage: ReturnType<typeof createStorage>, overlay: () => boolean, dispose: () => Promise<void>}>}
  */
 async function createSteam({
@@ -15,12 +15,12 @@ async function createSteam({
   directory,
   isolated,
   pause,
-  loadBinding = () => require("steamworks.js"),
+  loadBinding = () => require("./steam-overlay.cjs"),
 }) {
   let available = false,
     account = /** @type {string | null} */ (null),
     worker = /** @type {import("electron").UtilityProcess | undefined} */ (undefined),
-    overlay = /** @type {{disconnect(): void} | null} */ (null),
+    overlay = /** @type {{account: string, disconnect(): void} | null} */ (null),
     overlayActive = false;
   let device = /** @type {string | undefined} */ (undefined),
     profile = "",
@@ -86,26 +86,12 @@ async function createSteam({
       const config = JSON.parse(await fs.readFile(path.join(__dirname, "steam-config.json"), "utf8"));
       const appId = app.isPackaged ? config.appId : Number(process.env.FAUNA_STEAM_APP_ID || config.appId);
       if (Number.isSafeInteger(appId) && appId > 0) {
-        const binding = loadBinding();
-        binding.electronEnableSteamOverlay();
-        const client = binding.init(appId);
-        // The optional overlay extension is not declared by steamworks.js 0.4; probe it before use.
-        const extensions = /** @type {{SteamCallback?: {GameOverlayActivated?: number}}} */ (
-          /** @type {unknown} */ (binding)
-        );
-        const event = extensions.SteamCallback?.GameOverlayActivated;
-        const callback =
-          /** @type {{ register?: (event: number, listener: (value: {active: boolean}) => void) => {disconnect(): void} }} */ (
-            /** @type {unknown} */ (client.callback)
-          );
-        if (event !== undefined && callback?.register)
-          overlay = callback.register(event, ({ active }) => {
-            if (dead) return;
-            overlayActive = active === true;
-            pause(overlayActive);
-          });
-        else console.warn("[steam] Overlay callbacks unavailable; live overlay acceptance is pending.");
-        account = client.localplayer.getSteamId().steamId64.toString();
+        overlay = loadBinding().createOverlay(appId, (active) => {
+          if (dead) return;
+          overlayActive = active;
+          pause(active);
+        });
+        account = overlay.account;
         if (!/^\d{1,20}$/.test(account)) throw new Error("Invalid Steam account.");
         profile = createHash("sha256").update(`fauna:${account}`).digest("hex").slice(0, 32);
         worker = utilityProcess.fork(path.join(__dirname, "steam-worker.cjs"), [], {

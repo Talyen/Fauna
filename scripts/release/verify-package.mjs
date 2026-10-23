@@ -133,6 +133,11 @@ export async function verifyPackage(directory = path.join(ROOT, "release/win-unp
     if (!bytes.equals(readFileSync(path.join(ROOT, "node_modules/steamworks.js/dist/win64", name))))
       throw new Error(`Steam native file differs: ${name}`);
   }
+  const ffiNative = "node_modules/@koromix/koffi-win32-x64/win32_x64/koffi.node";
+  const ffiBytes = readFileSync(path.join(directory, "resources/app.asar.unpacked", ffiNative));
+  verifyPE(ffiBytes);
+  if (process.platform === "win32" && !ffiBytes.equals(readFileSync(path.join(ROOT, ffiNative))))
+    throw new Error("Packaged Steam callback binding differs.");
   if (process.platform === "win32") {
     const details = JSON.parse(
       execFileSync(

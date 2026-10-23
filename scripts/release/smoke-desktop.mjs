@@ -17,6 +17,12 @@ try {
         args: ["."],
         env: isolatedDesktopEnvironment(userData),
       });
+  // Resolve the real packaged native API without initializing Steam or requiring an account.
+  await app.evaluate(({ app }) => {
+    const { createRequire } = process.getBuiltinModule("module");
+    const require = createRequire(`${app.getAppPath()}/package.json`);
+    require("./desktop/steam-overlay.cjs").loadOverlayApi();
+  });
   const window = await app.firstWindow();
   window.setDefaultTimeout(20000);
   await window.getByRole("button", { name: "Collection", exact: true }).click({ timeout: 60000 });
@@ -92,6 +98,12 @@ try {
       block: 0,
       attacked: false,
     }));
+    // A grown formation must have committed Collection records in current saves.
+    for (const creature of [...state.team, ...state.reserves]) {
+      if (!state.discovery.encountered.includes(creature.species))
+        state.discovery.encountered.push(creature.species);
+      state.discovery.recruited[creature.species] ??= 1;
+    }
     state.team[0].health = 0;
     await window.faunaDesktop.writeSave(JSON.stringify(state));
   });

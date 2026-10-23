@@ -1,5 +1,5 @@
 import { Slider } from "../../components/ui/slider";
-import { Eclipse, Sparkles } from "lucide-react";
+import { Eclipse, Sparkles, Gamepad2 } from "lucide-react";
 import { EffectBaseline } from "../shared/effects/effects";
 import { effectPalette } from "../shared/effects/palettes";
 import type { useEffectPreferences } from "./effect-preferences";
@@ -12,6 +12,7 @@ import { RadioGroup, RadioGroupItem } from "../../components/ui/radio-group";
 import type { AudioPreferences } from "./audio-preferences";
 import { AudioSettings } from "./audio-settings";
 import { SettingRow, SettingToggle } from "./settings-controls";
+import type { ControllerPreference } from "../shared/navigation/controller-prompts";
 export const TEXT_SCALES = [0.75, 1, 1.25] as const;
 
 export function Settings({
@@ -25,6 +26,8 @@ export function Settings({
   setTooltipScale,
   autoEndTurn,
   setAutoEndTurn,
+  controller = "auto",
+  setController,
 }: {
   effects?: ReturnType<typeof useEffectPreferences>;
   session?: Session;
@@ -37,6 +40,8 @@ export function Settings({
   desktop: boolean;
   autoEndTurn: boolean;
   setAutoEndTurn: (value: boolean) => void;
+  controller?: ControllerPreference;
+  setController?: (value: ControllerPreference) => void;
 }) {
   const [tab, setTab] = useState("display");
   return (
@@ -138,6 +143,32 @@ export function Settings({
         className="settings-panel"
       >
         <h2 className="settings-heading">Battle</h2>
+        <SettingRow icon={Gamepad2} label="Controller prompts">
+          <RadioGroup
+            orientation="horizontal"
+            className="controller-prompt-options"
+            aria-label="Controller prompts"
+            value={controller}
+            onValueChange={(value) => {
+              if (value === "auto" || value === "xbox" || value === "playstation" || value === "nintendo")
+                setController?.(value);
+            }}
+          >
+            {(
+              [
+                ["auto", "Automatic"],
+                ["xbox", "Xbox / Deck"],
+                ["playstation", "PlayStation"],
+                ["nintendo", "Nintendo"],
+              ] as const
+            ).map(([value, label]) => (
+              <label key={value} className="text-size-option">
+                <RadioGroupItem value={value} aria-label={label} />
+                {label}
+              </label>
+            ))}
+          </RadioGroup>
+        </SettingRow>
         <SettingToggle
           icon={StepForward}
           label="Auto-end turn"

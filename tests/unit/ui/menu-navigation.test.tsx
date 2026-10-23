@@ -1,4 +1,4 @@
-import userEvent from "@testing-library/user-event";
+import userEvent, { PointerEventsCheckLevel } from "@testing-library/user-event";
 import { screenTestEnvironment } from "../../support/ui";
 // @vitest-environment jsdom
 import { describe, expect, it, vi } from "vitest";
@@ -183,7 +183,8 @@ it.each(["Back", "Escape", "Close inspection"])(
     localStorage.setItem("fauna.save.v1", encodeSave(run(7)));
     const session = createSession(createBrowserPlatform(localStorage), 7);
     await session.load();
-    const user = userEvent.setup();
+    // Browser journeys cover pointer hit testing; this DOM scenario checks focus and combat ownership.
+    const user = userEvent.setup({ pointerEventsCheck: PointerEventsCheckLevel.Never });
     render(<App session={session} />);
     try {
       await user.click(screen.getByRole("button", { name: "Continue" }));

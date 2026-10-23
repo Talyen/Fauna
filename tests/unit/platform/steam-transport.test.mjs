@@ -33,17 +33,10 @@ async function transportFixture() {
       pause,
       utilityProcess: { fork: () => worker },
       loadBinding: () => ({
-        electronEnableSteamOverlay() {},
-        SteamCallback: { GameOverlayActivated: 1 },
-        init: () => ({
-          callback: {
-            register: (_id, handler) => {
-              overlay = handler;
-              return { disconnect };
-            },
-          },
-          localplayer: { getSteamId: () => ({ steamId64: 76561190000000000n }) },
-        }),
+        createOverlay: (_appId, handler) => {
+          overlay = (value) => handler(value.active);
+          return { account: "76561190000000000", disconnect };
+        },
       }),
     });
     return { adapter, directory, worker, disconnect, pause, overlay };
@@ -158,17 +151,10 @@ it("pins account storage, limits slot ownership and closes only its own worker",
       pause,
       utilityProcess: { fork: () => new Worker() },
       loadBinding: () => ({
-        electronEnableSteamOverlay() {},
-        SteamCallback: { GameOverlayActivated: 1 },
-        init: () => ({
-          callback: {
-            register: (_id, handler) => {
-              overlay = handler;
-              return { disconnect };
-            },
-          },
-          localplayer: { getSteamId: () => ({ steamId64: 76561190000000000n }) },
-        }),
+        createOverlay: (_appId, handler) => {
+          overlay = (value) => handler(value.active);
+          return { account: "76561190000000000", disconnect };
+        },
       }),
     });
     const identity = await adapter.identity();
