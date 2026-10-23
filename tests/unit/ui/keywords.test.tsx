@@ -181,11 +181,11 @@ describe("keyword foundation", () => {
   it("renders the same keyword identity on card rules and prose without changing accessible text", () => {
     const attack = CARDS.find((card) => card.id === "emberback-furnace-breath")!;
     const html = renderToStaticMarkup(<CardRules card={attack} value={13} />);
-    expect(html).toContain('data-keyword="burn">Burn</span>');
+    expect(html).toMatch(/<span\b[^>]*\bdata-keyword="burn"[^>]*>Burn<\/span>/);
     expect(html.replace(/<[^>]+>/g, "")).toBe("Deal 13 Burn damage to all enemies");
     expect(html).not.toContain('data-keyword="consume"');
     const pearl = renderToStaticMarkup(<CardRules card={PEARL} value={2} />);
-    expect(pearl).toContain('data-keyword="consume">Consume</span>');
+    expect(pearl).toMatch(/<span\b[^>]*\bdata-keyword="consume"[^>]*>Consume<\/span>/);
     expect(pearl.replace(/<[^>]+>/g, "")).toBe("Consume; Gain 2 Block or 2 Mana at random");
     const unsafe = renderToStaticMarkup(<KeywordText text={"<script>Fire</script>"} />);
     expect(unsafe).toContain("&lt;script&gt;");

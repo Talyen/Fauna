@@ -225,7 +225,7 @@ it("keeps complete patch evidence for unusual filenames without staging or losin
   const root = mkdtempSync(path.join(os.tmpdir(), "fauna-review-"));
   const git = (...args) => execFileSync("git", args, { cwd: root, encoding: "utf8" });
   try {
-    git("init", "-q");
+    git("init", "-qb", "main");
     git("config", "user.email", "test@example.com");
     git("config", "user.name", "Test");
     writeFileSync(path.join(root, "tracked"), "base\n");
