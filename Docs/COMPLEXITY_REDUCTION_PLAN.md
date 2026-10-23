@@ -11,6 +11,6 @@ All implementation stages are complete:
 5. Separated battle selection/input, target geometry and one preview presentation model while preserving controls, focus and rendering
 6. Separated legal play candidates, exhaustive visible benefit assessment and ranking weights; shared suitable arithmetic with runtime execution and preserved Auto-play cycle history
 
-The existing saved field layout and development save version remain unchanged. Auto-play retains main's newer version 28 and its five decision fixes. Narrow identity queries and transition ownership made additional persisted representations unnecessary. Newer main changes retain their authored-card caches, allocation reductions, temporary-card cleanup and boundary fixes.
+The simplification adds no saved fields or format change. Main's concurrent Reverie feature supplies Negate, development save format 54 and Auto-play policy 29; those are retained alongside its decision fixes, authored-card caches, allocation reductions, temporary-card cleanup and Steam/input changes. Narrow identity queries and transition ownership made additional persisted representations unnecessary.
 
 Verification and protected integration are recorded in the implementation evidence. Runtime and rendered evidence qualify their recorded source and conditions; hosted CI and device-specific release gates remain separate.
