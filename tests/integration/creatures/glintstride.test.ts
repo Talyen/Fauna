@@ -46,9 +46,11 @@ it("plays the selected one-Mana kit with detached preview parity and current-for
     expect(encodeSave(game)).toBe(original);
     expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
     if (card.effect === "attack") {
-      expect(result.events.filter((event) => event.kind === "damage").map((event) => event.amount)).toEqual([
-        6,
-      ]);
+      expect(
+        result.events
+          .filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage")
+          .map((event) => event.amount),
+      ).toEqual([6]);
     } else if (card.effect === "dodge") {
       expect(result.state.team[0]!.combat!.temporaryDodge).toBe(30);
       expect(result.state.battle!.hand).toHaveLength(1);
@@ -71,8 +73,8 @@ it.each([1, 2, 3, 4, 5, 6])(
       const result = play(game, "enemy-0");
       expect(result.accepted).toBe(true);
       expect(
-        result.events
-          .filter((event) => event.kind === "damage")
+        Array.from(result.events)
+          .filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage")
           .map((event) => [event.damageType, event.amount]),
       ).toEqual(
         blinded
@@ -106,12 +108,16 @@ it("does not grant Wrong Foot to teammates or trigger it from misses and non-att
     ]) {
       const events: GameEvent[] = [];
       hit(game, source, target, 2, "light", events, options);
-      expect(events.filter((event) => event.kind === "damage")).toHaveLength("blindMiss" in options ? 0 : 1);
+      expect(
+        events.filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage"),
+      ).toHaveLength("blindMiss" in options ? 0 : 1);
     }
     const events: GameEvent[] = [];
     game.rng = 1;
     hit(game, game.team[1]!, target, 2, "light", events);
-    expect(events.filter((event) => event.kind === "damage")).toHaveLength(1);
+    expect(
+      events.filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage"),
+    ).toHaveLength(1);
   });
 });
 
@@ -130,7 +136,9 @@ it("routes the supplemental Light through remaining Block and Light resistance",
     expect(target.block).toBe(0);
     expect(target.health).toBe(health - 1);
     expect(
-      events.filter((event) => event.kind === "damage").map((event) => [event.damageType, event.amount]),
+      events
+        .filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage")
+        .map((event) => [event.damageType, event.amount]),
     ).toEqual([
       ["physical", 0],
       ["light", 1],
@@ -215,7 +223,9 @@ it("spends remaining Block on the bonus and suppresses it when the original atta
       hit(game, source, target, 6, "light", events);
       expect(target.health).toBe(health === 18 ? 14 : 0);
       expect(target.block).toBe(0);
-      expect(events.filter((event) => event.kind === "damage")).toHaveLength(health === 18 ? 2 : 1);
+      expect(
+        events.filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage"),
+      ).toHaveLength(health === 18 ? 2 : 1);
     });
   }
 });
@@ -237,6 +247,10 @@ it("Blind expires on the target's next attack and no longer enables Wrong Foot",
     const events: GameEvent[] = [];
     game.rng = 1;
     hit(game, source, target, 2, "light", events);
-    expect(events.filter((event) => event.kind === "damage").map((event) => event.amount)).toEqual([2]);
+    expect(
+      events
+        .filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage")
+        .map((event) => event.amount),
+    ).toEqual([2]);
   });
 });

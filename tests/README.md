@@ -19,6 +19,8 @@ Keep complete scenarios with their contract owner; do not split or remove useful
 
 `vitest.config.ts` discovers unit and integration suites in the same CI job, retaining each suite's Node or DOM environment. Moving suites requires updating declared owner suites, explicit routes/documentation and affected fixed smoke selections; recursive full discovery must retain both groups.
 
+`tests/exhaustive/` contains extended matrices, including every ordinary three-creature combination and every intermediate save boundary. Full Vitest discovery (`npm test`) and hosted CI include this directory. Local changed-file integration checks the matrix’s declared engine command/save contract; it does not rerun the exhaustive matrix. This keeps the five-minute local deadline, one worker and 2 GiB cap without reducing full CI coverage.
+
 ## Test value and coverage
 
 Protect consequential player behavior, command rejection, ownership, persistence, lifecycle ordering and architectural boundaries. First inspect existing protection and choose the cheapest layer that can detect the plausible failure. Strengthen a nearby assertion where useful. Adding no permanent test is appropriate when existing coverage is adequate or a change is documentation-only.

@@ -33,7 +33,11 @@ it("preserves Meteorite through triggered Burn for the next direct Burn hit", ()
   expect(state.battle!.meteoriteUsed).toBe(false);
   hit(state, source, target, 5, "burn", events);
   expect(state.battle!.meteoriteUsed).toBe(true);
-  expect(events.filter((event) => event.kind === "damage").map((event) => event.amount)).toEqual([3, 10]);
+  expect(
+    events
+      .filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage")
+      .map((event) => event.amount),
+  ).toEqual([3, 10]);
 });
 it("doubles only the first allied direct Burn hit across swaps, previews and resume", () => {
   const { state, source, target, events } = fixture();
@@ -42,9 +46,16 @@ it("doubles only the first allied direct Burn hit across swaps, previews and res
   hit(state, source, target, 2, "burn", events, { origin: "periodic" as const });
   expect(state.battle!.meteoriteUsed).toBe(false);
   hit(state, source, target, 5, "burn", events);
-  expect(events.filter((event) => event.kind === "damage").map((event) => event.amount)).toEqual([2, 10]);
+  expect(
+    events
+      .filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage")
+      .map((event) => event.amount),
+  ).toEqual([2, 10]);
   hit(state, source, target, 5, "burn", events);
-  expect(events.filter((event) => event.kind === "damage").at(-1)!.amount).toBe(5);
+  expect(
+    events.filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage").at(-1)!
+      .amount,
+  ).toBe(5);
 
   const saved = structuredClone(run());
   saved.boons = ["meteorite"];
@@ -68,7 +79,6 @@ it("doubles only the first allied direct Burn hit across swaps, previews and res
   const swappable = {
     ...structuredClone(resumed),
     reserves: [reserve],
-    roster: [...resumed.roster, reserve.species],
   };
   expect(
     swapFixture(swappable, { type: "swap", activeId: swappable.team[1]!.id, reserve: reserve.id }).battle!
@@ -121,7 +131,12 @@ it("triggers Thunderstone once per successful Stun, without retaliation or statu
   expect(target.combat.controlled).toBe("stun");
   hit(state, source, target, 1, "stun", events);
   tickStatuses(state, target, events);
-  expect(events.filter((event) => event.kind === "damage" && event.damageType === "nature")).toHaveLength(1);
+  expect(
+    events.filter(
+      (event): event is Extract<GameEvent, { kind: "damage" }> =>
+        event.kind === "damage" && event.damageType === "nature",
+    ),
+  ).toHaveLength(1);
 });
 it("grants Thorns only for actual allied healing in battle, never full Health or Campfire healing", () => {
   const { state, source, target, events } = fixture();
@@ -159,10 +174,10 @@ it("extends enemy Freeze across resume and grants immunity only after both skipp
   const { state, source, target, events } = fixture();
   state.boons = ["frozen-pocketwatch"];
   target.maxHealth = encounterSource(state).enemies[0]!.health;
-  target.health = 18;
+  target.health = target.maxHealth;
   target.combat.controlled = null;
   target.combat.controlTurns = 0;
-  hit(state, source, target, 15, "freeze", events, { origin: "proc" as const });
+  hit(state, source, target, target.maxHealth / 2, "freeze", events, { origin: "proc" as const });
   expect(target.combat.controlTurns).toBe(2);
   const resumed = structuredClone(decodeSave(encodeSave(state)));
   const enemy = resumed.battle!.enemies[0]!;

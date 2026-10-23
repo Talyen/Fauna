@@ -4,7 +4,6 @@ import { CARDS } from "./content/creatures";
 import type { SpeciesId, CardDefinition } from "./content/types";
 export { CARDS } from "./content/creatures";
 export { SPECIES, species } from "./content/creatures";
-export { ENCOUNTERS } from "./content/encounters";
 export type { SpeciesId, Species, PassiveTier, CardDefinition, DamageType } from "./content/types";
 // Curate solo openings separately from kits that shine after recruitment.
 export const FIRST_RUN_STARTERS: readonly SpeciesId[] = [

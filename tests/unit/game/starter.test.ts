@@ -51,7 +51,6 @@ describe("collected starter drafts", () => {
     for (const kind of FIRST_RUN_STARTERS)
       expect(CARDS.some((card) => card.species === kind && card.effect === "attack")).toBe(true);
     const fresh = createGame(42);
-    expect(fresh.unlocked).toContain("bloomquail");
     expect(FIRST_RUN_STARTERS).not.toContain("bloomquail");
     expect(dispatch(fresh, { type: "draft", species: "bloomquail" }).state).toBe(fresh);
     const collected = produce(fresh, (draft) => {
@@ -64,8 +63,6 @@ describe("collected starter drafts", () => {
   });
   it("onboards with one of three eligible creatures and collects only the committed starter", () => {
     let s = createGame(7);
-    expect(s.unlocked).toHaveLength(SPECIES.length);
-    expect(new Set(s.unlocked)).toEqual(new Set(SPECIES.map((entry) => entry.id)));
     expect(s.discovery.recruited).toEqual({});
     expect(s.starterOffers).toHaveLength(3);
     expect(new Set(s.starterOffers).size).toBe(3);

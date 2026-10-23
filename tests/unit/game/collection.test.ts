@@ -5,7 +5,7 @@ import { decodeSave, encodeSave } from "../../../src/game/save";
 import { creatureStars, talentPoints, xpThreshold, keywordProgress } from "../../../src/game/progression";
 import { authoredPack, accept, teamRun, winBattle } from "../../support/game";
 
-it("discovers only committed encounters and retains knowledge independently of starter unlocks", () => {
+it("discovers only committed encounters and retains knowledge across recruitment and journeys", () => {
   const fresh = createGame();
   const starter = fresh.starterOffers[0]!;
   let state = accept(accept(fresh, { type: "draft", species: starter }), { type: "start" });
@@ -16,14 +16,12 @@ it("discovers only committed encounters and retains knowledge independently of s
   expect(state.discovery.encountered).toEqual([
     ...new Set([starter, ...state.battle!.enemies.map((enemy) => enemy.species)]),
   ]);
-  const unlocked = state.unlocked;
   state = winBattle(state);
   const kind = state.reward!.recruits[0]!;
   state = accept(state, { type: "recruit", species: kind });
   expect(state.discovery.recruited).toEqual(
     kind === starter ? { [starter]: 2 } : { [starter]: 1, [kind]: 1 },
   );
-  expect(state.unlocked).toEqual(unlocked);
   state = accept(state, { type: "abandon" });
   const knowledge = state.discovery;
   expect(decodeSave(encodeSave(state)).discovery).toEqual(knowledge);

@@ -1,3 +1,4 @@
+import type { GameEvent } from "../../../../src/game/types";
 import { authoredPack, swapFixture } from "../../../support/game";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
@@ -144,7 +145,6 @@ describe("Memento and Legendary formations", () => {
         attacked: false,
         combat: freshCombat(),
       });
-      draft.roster.push("memento");
       const cards = draft.cards.map((card) => card.id);
       draft.battle!.hand = cards.slice(0, 2);
       draft.battle!.draw = cards.slice(2, 5);
@@ -183,7 +183,6 @@ describe("Memento and Legendary formations", () => {
         attacked: false,
         combat: freshCombat(),
       });
-      draft.roster.push("memento");
       const cards = draft.cards.map((card) => card.id);
       for (let i = 0; i < 6; i++) draft.cards.push({ ...draft.cards[0]!, id: `copy-${i}`, temporary: true });
       draft.battle!.copySerial = 6;
@@ -219,7 +218,7 @@ describe("Memento and Legendary formations", () => {
     expect(state.reward!.recruits).toEqual(["memento"]);
     expect(decodeSave(encodeSave(state))).toEqual(state);
     state = accept(state, { type: "recruit", species: "memento" });
-    expect(state.roster).toContain("memento");
+    expect([...state.team, ...state.reserves].map((unit) => unit.species)).toContain("memento");
     expect(state.phase).toBe("boon");
     expect(decodeSave(encodeSave(state))).toEqual(state);
   });
@@ -275,8 +274,9 @@ describe("Memento and Legendary formations", () => {
         draft.discovery.recruited.memento = tier + 1;
       });
       const result = play(state, "procession");
-      const packet = result.events.find(
-        (event) => event.kind === "damage" && event.actorId?.startsWith("echo-"),
+      const packet = Array.from(result.events).find(
+        (event): event is Extract<GameEvent, { kind: "damage" }> =>
+          event.kind === "damage" && !!event.actorId?.startsWith("echo-"),
       );
       expect(packet).toBeDefined();
       expect(packet!.amount).toBe((tier + 3) * (packet!.critical ? 2 : 1));
@@ -333,7 +333,6 @@ describe("Memento and Legendary formations", () => {
           attacked: false,
           combat: freshCombat(),
         });
-        draft.roster.push("memento");
       }
     });
     const next = swapFixture(initial, { type: "swap", activeId: initial.team[0]!.id, reserve: "reserve-3" });
@@ -358,9 +357,12 @@ describe("Memento and Legendary formations", () => {
     const result = dispatch(battle, { type: "endTurn" });
     expect(result.state.battle!.enemies[0]!.deck!.hand).toHaveLength(4);
     expect(result.state.battle!.enemies[0]!.deck!.mana).toBe(4);
-    expect(result.events.filter((event) => event.kind === "action" && event.actorId === "enemy-0")).toEqual(
-      [],
-    );
+    expect(
+      result.events.filter(
+        (event): event is Extract<GameEvent, { kind: "action" }> =>
+          event.kind === "action" && event.actorId === "enemy-0",
+      ),
+    ).toEqual([]);
     expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
   });
 });

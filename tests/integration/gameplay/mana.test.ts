@@ -62,12 +62,12 @@ describe("mana turn settlement", () => {
 describe("outcome-driven impact and sound", () => {
   it("keeps absorbed and ineffective hits still, with distinct nonzero sound cues", () => {
     const blocked = [
-      { kind: "damage" as const, targetId: "ally-0", amount: 0, text: "" },
+      { kind: "damage" as const, damageType: "physical" as const, targetId: "ally-0", amount: 0, text: "" },
       { kind: "block" as const, targetId: "ally-0", amount: -4, text: "" },
     ];
     expect(impactTargets(blocked)).toEqual([]);
     expect(selectCombatCue(blocked)).toBe("absorb");
-    expect(selectCombatCue([{ kind: "heal", amount: 0, text: "" }])).toBeUndefined();
+    expect(selectCombatCue([{ kind: "heal", targetId: "ally-0", amount: 0, text: "" }])).toBeUndefined();
     const hit = {
       kind: "damage" as const,
       targetId: "enemy-0",
@@ -76,7 +76,7 @@ describe("outcome-driven impact and sound", () => {
       text: "",
     };
     expect(impactTargets([hit, hit])).toEqual(["enemy-0"]);
-    expect(selectCombatCue([hit, { kind: "heal", amount: 8, text: "" }])).toBe("fire");
-    expect(selectCombatCue([{ kind: "heal", amount: 9, text: "" }, hit])).toBe("heal");
+    expect(selectCombatCue([hit, { kind: "heal", targetId: "ally-0", amount: 8, text: "" }])).toBe("fire");
+    expect(selectCombatCue([{ kind: "heal", targetId: "ally-0", amount: 9, text: "" }, hit])).toBe("heal");
   });
 });

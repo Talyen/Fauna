@@ -1,0 +1,40 @@
+import { describe, expect, it } from "vitest";
+import { SPECIES } from "../../src/game/content";
+import { decodeSave, encodeSave } from "../../src/game/save";
+import { accept, policy, teamRun } from "../support/game";
+
+// Full CI retains every combination and every intermediate save boundary.
+describe("all ordinary creature combinations", () => {
+  const ordinarySpecies = SPECIES.filter((entry) => !entry.legendary);
+  for (let first = 0; first < ordinarySpecies.length - 2; first++)
+    for (let second = first + 1; second < ordinarySpecies.length - 1; second++)
+      for (let third = second + 1; third < ordinarySpecies.length; third++) {
+        const lineup = [first, second, third].map((index) => ordinarySpecies[index]!.name).join(", ");
+        it(`supports ${lineup} without engine failures or invalid saves`, () => {
+          let s = teamRun(
+            first * 100 + second * 10 + third,
+            [first, second, third].map((index) => ordinarySpecies[index]!.id),
+          );
+          for (let i = 0; i < 500 && !["victory", "defeat"].includes(s.phase); i++) {
+            s = accept(s, policy(s));
+            decodeSave(encodeSave(s));
+          }
+          // Support-heavy teams can sustain combat; their escape must still bank progress safely.
+          if (!["victory", "defeat"].includes(s.phase)) {
+            const progress = { ...s.keywordXP };
+            const earned = { ...s.battleXP };
+            s = accept(s, { type: "abandon" });
+            expect(s.phase).toBe("defeat");
+            expect(s.reward).toBeNull();
+            expect(Object.values(s.battleXP).every((amount) => amount === 0)).toBe(true);
+            for (const keyword of Object.keys(earned) as (keyof typeof earned)[])
+              expect(s.keywordXP[keyword]).toBe((progress[keyword] ?? 0) + earned[keyword]!);
+            expect(decodeSave(encodeSave(s))).toEqual(s);
+          }
+          expect(
+            ["victory", "defeat"],
+            `${[first, second, third].map((index) => ordinarySpecies[index]!.id).join(", ")} at encounter ${s.encounter}, turn ${s.battle?.turn}`,
+          ).toContain(s.phase);
+        });
+      }
+});

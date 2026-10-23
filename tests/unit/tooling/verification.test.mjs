@@ -44,6 +44,15 @@ afterEach(() => {
 });
 
 describe("lightweight local verification", () => {
+  it("keeps exhaustive matrices in full CI while local changes verify their owning contract", () => {
+    const plan = checkPlan(repo, ["tests/exhaustive/roster-combinations.test.ts"]);
+    expect(plan.tests).toEqual(["tests/unit/game/engine.test.ts"]);
+    expect(plan.configs).toContain("tsconfig.test.json");
+    expect(readFileSync(path.join(repo, "vitest.config.ts"), "utf8")).toContain(
+      "unit,integration,exhaustive",
+    );
+  });
+
   it("rejects unknown options and ambiguous or incomplete selections", () => {
     expect(parseCheckArgs([])).toEqual({ paths: [], base: null });
     expect(parseCheckArgs(["--working-tree"])).toEqual({ paths: [], base: "HEAD" });

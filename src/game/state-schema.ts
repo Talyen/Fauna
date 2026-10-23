@@ -132,16 +132,11 @@ const shared = z.object({
     .nonnegative()
     .max(Number.MAX_SAFE_INTEGER - 1),
   rng: z.number().int().min(0).max(0xffffffff),
-  unlocked: z.array(speciesId).min(SPECIES.length).max(SPECIES.length),
   wins: natural,
   selected: z.array(speciesId).max(3),
   starterOffers: z.array(speciesId).max(3),
-  /** Species counts, including copies; individual state lives in team and reserves. */
-  roster: z.array(speciesId).max(5),
   team: z.array(creature).max(3),
   reserves: z.array(creature).max(4),
-  /** Saved deployment order, updated by knockout replacements and game mechanics. */
-  lineup: z.array(id).max(3),
   cards: z
     .array(
       z.object({
@@ -168,13 +163,11 @@ const shared = z.object({
   boons: z.array(boonId).max(BOONS.length),
 });
 
-const expedition = z
-  .object({
-    pack: z.array(speciesId).min(1).max(3).nullable(),
-    recruit: speciesId.nullable(),
-    lastRoom: z.enum(["combat", "boss", "merchant", "campfire", "recruit"]).nullable(),
-  })
-  .nullable();
+const expedition = z.object({
+  pack: z.array(speciesId).min(1).max(3).nullable(),
+  recruit: speciesId.nullable(),
+  lastRoom: z.enum(["combat", "boss", "merchant", "campfire", "recruit"]).nullable(),
+});
 const support = z
   .object({
     id,
@@ -203,7 +196,6 @@ const journey = z.object({
   victories: z.number().int().min(0).max(JOURNEY_LENGTH),
   currency: natural,
   xp,
-  unlocks: z.array(speciesId).max(0),
   lastBattle: z
     .object({
       xp,
@@ -225,11 +217,11 @@ const finished = { battle: z.null(), expedition, support: z.null() };
 const phases = z.discriminatedUnion("phase", [
   shared.extend({ phase: z.literal("draft"), ...destination, journey: z.null(), support: z.null() }),
   shared.extend({ phase: z.literal("teamSelection"), ...destination }),
-  shared.extend({ phase: z.literal("campfire"), ...destination, expedition: expedition.unwrap() }),
+  shared.extend({ phase: z.literal("campfire"), ...destination, expedition }),
   shared.extend({
     phase: z.literal("support"),
     ...destination,
-    expedition: expedition.unwrap(),
+    expedition,
     support: support.unwrap(),
   }),
   shared.extend({

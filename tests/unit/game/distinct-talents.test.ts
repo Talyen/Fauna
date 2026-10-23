@@ -54,7 +54,7 @@ describe("distinct talent and Boon outcomes", () => {
     expect(source.combat.thorns).toBe(1);
     hit(state, source, target, 1, "freeze", events);
     expect(target.health).toBe(53);
-    expect(events.filter((e) => e.damageType === "physical")).toHaveLength(1);
+    expect(events.filter((e) => e.kind === "damage" && e.damageType === "physical")).toHaveLength(1);
   });
   it("Stun removes Armor and grants Block only when none is present", () => {
     const { state, source, target, events } = fixture();
@@ -212,7 +212,7 @@ it("applies opening draws and Armor once, without granting reserve Armor", () =>
     prepareDestination(ready);
     const reserve = ready.team.pop()!;
     ready.reserves.push(reserve);
-    ready.lineup = ready.team.map((c) => c.id);
+
     ready.cards = ready.cards.filter((card) => card.ownerId !== reserve.id);
     const base = accept(ready, { type: "beginBattle" });
     ready.talents = ["nature.ecosystem", "armor.bulwark"];
@@ -240,6 +240,8 @@ it.each(["stun", "freeze", "both", "neither"] as const)(
     expect(source.combat.stun).toBe(0);
     expect(source.combat.freeze).toBe(0);
     expect(source.combat.freeLight).toBe(count > 0);
-    expect(events.filter((event) => event.status === "cleanse")).toHaveLength(count);
+    expect(events.filter((event) => event.kind === "status" && event.status === "cleanse")).toHaveLength(
+      count,
+    );
   },
 );

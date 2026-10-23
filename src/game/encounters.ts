@@ -1,5 +1,5 @@
 import { freeze } from "immer";
-import { ENCOUNTERS, SPECIES, species, type SpeciesId } from "./content";
+import { SPECIES, species, type SpeciesId } from "./content";
 import type { GameState } from "./types";
 import { roll } from "./random";
 
@@ -75,19 +75,18 @@ export function encounterPacks(encounter: number) {
 export function generateEncounterPack(state: GameState, savedPack?: readonly SpeciesId[]): SpeciesId[] {
   const packs = encounterPacks(state.encounter);
   const pack = savedPack ?? packs[Math.floor(roll(state) * packs.length)]!;
-  const eligible = SPECIES.filter((entry) => !entry.legendary && !state.roster.includes(entry.id));
+  const roster = [...state.team, ...state.reserves].map((unit) => unit.species);
+  const eligible = SPECIES.filter((entry) => !entry.legendary && !roster.includes(entry.id));
   return pack
     .slice(0, Math.min(3, state.encounter + 1))
-    .map((kind) =>
-      state.roster.includes(kind) ? eligible[Math.floor(roll(state) * eligible.length)]!.id : kind,
-    );
+    .map((kind) => (roster.includes(kind) ? eligible[Math.floor(roll(state) * eligible.length)]!.id : kind));
 }
 
 function scaleEnemyStat(base: number, encounter: number) {
   return Math.round((base * (10 + encounter)) / 10);
 }
 
-/** Authored encounters also support standalone battle fixtures. */
+/** Resolve the committed encounter pack without consuming randomness. */
 export function encounterSource(game: Pick<GameState, "expedition" | "encounter">): {
   name: string;
   enemies: readonly {
@@ -97,19 +96,7 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
     power: number;
   }[];
 } {
-  const route = game.expedition;
-  if (!route) {
-    const source = ENCOUNTERS[game.encounter]!;
-    return {
-      ...source,
-      enemies: source.enemies.map((enemy) => ({
-        ...enemy,
-        health: scaleEnemyStat(enemy.health, game.encounter),
-        power: 1 + game.encounter / 10,
-      })),
-    };
-  }
-  const pack = route.pack;
+  const pack = game.expedition.pack;
   if (!pack) throw new Error("Missing encounter pack.");
   const boss = BOSSES.find((entry) => entry.encounter === game.encounter);
   return {
@@ -123,11 +110,11 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
   };
 }
 
-export function finalEncounter(game: Pick<GameState, "expedition" | "encounter">) {
-  return game.encounter === (game.expedition ? JOURNEY_LENGTH - 1 : 2);
+export function finalEncounter(game: Pick<GameState, "encounter">) {
+  return game.encounter === JOURNEY_LENGTH - 1;
 }
-export function bossEncounter(game: Pick<GameState, "expedition" | "encounter">) {
-  return game.expedition ? BOSSES.some((boss) => boss.encounter === game.encounter) : game.encounter === 2;
+export function bossEncounter(game: Pick<GameState, "encounter">) {
+  return BOSSES.some((boss) => boss.encounter === game.encounter);
 }
 
 freeze(COMBAT_PACKS, true);

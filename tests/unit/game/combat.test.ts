@@ -1,3 +1,4 @@
+import type { GameEvent } from "../../../src/game/types";
 import {
   authoredPack,
   swapFixture,
@@ -47,7 +48,10 @@ describe("Alchemy combat foundations", () => {
     expect(next.battle!.enemies[0]!.health).toBe(14);
     expect(next.battle!.enemies[0]!.block).toBe(0);
     expect(next.battle!.enemies[0]!.combat.armor).toBe(1);
-    expect(events.find((event) => event.kind === "damage")?.amount).toBe(4);
+    expect(
+      events.find((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage")
+        ?.amount,
+    ).toBe(4);
     const blocked = packet("physical", 2, (s) => {
       s.battle!.enemies[0]!.combat.armor = 3;
     });
@@ -65,7 +69,9 @@ describe("Alchemy combat foundations", () => {
       s.battle!.enemies[0]!.combat.freeze = 8;
     });
     expect(next.battle!.enemies[0]!.health).toBe(16);
-    expect(events.filter((event) => event.kind === "damage")).toHaveLength(1);
+    expect(
+      events.filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage"),
+    ).toHaveLength(1);
   });
   it("ticks Burn then Poison then Bleed through Block, with matching decay and fatal cutoffs", () => {
     const events: Parameters<typeof hit>[5] = [];
@@ -79,23 +85,27 @@ describe("Alchemy combat foundations", () => {
     expect(next.battle!.enemies[0]!.health).toBe(3);
     expect(next.battle!.enemies[0]!.block).toBe(20);
     expect(next.battle!.enemies[0]!.combat).toMatchObject({ burn: 3, poison: 4, bleed: 0 });
-    expect(events.filter((event) => event.kind === "damage").map((event) => event.damageType)).toEqual([
-      "burn",
-      "poison",
-      "bleed",
-    ]);
+    expect(
+      events
+        .filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage")
+        .map((event) => event.kind === "damage" && event.damageType),
+    ).toEqual(["burn", "poison", "bleed"]);
     const fatal: typeof events = [];
     produce(next, (s) => {
       tickStatuses(s, s.battle!.enemies[0]!, fatal);
     });
-    expect(fatal.filter((event) => event.kind === "damage").map((event) => event.damageType)).toEqual([
-      "burn",
-    ]);
+    expect(
+      fatal
+        .filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage")
+        .map((event) => event.kind === "damage" && event.damageType),
+    ).toEqual(["burn"]);
   });
   it("uses maximum Health for CC on both sides, skips once, and shares three turns of immunity", () => {
-    const below = packet("stun", 14).next;
+    const below = packet("stun", 17).next;
     expect(below.battle!.enemies[0]!.combat.controlled).toBeNull();
-    const threshold = packet("freeze", 15).next;
+    const threshold = packet("freeze", 18, (state) => {
+      state.battle!.enemies[0]!.health = 30;
+    }).next;
     expect(threshold.battle!.enemies[0]!.combat.controlled).toBe("freeze");
     const next = produce(threshold, (s) => {
       const enemy = s.battle!.enemies[0]!,
@@ -131,7 +141,9 @@ describe("Alchemy combat foundations", () => {
       s.rng = critSeed;
     });
     expect(crit.next.battle!.enemies[0]!.health).toBe(12);
-    expect(crit.events.find((e) => e.kind === "damage")).toMatchObject({ critical: true, amount: 6 });
+    expect(
+      crit.events.find((e): e is Extract<GameEvent, { kind: "damage" }> => e.kind === "damage"),
+    ).toMatchObject({ critical: true, amount: 6 });
   });
   it("Leech caps overkill and Bleed defers its Leech until actual tick damage", () => {
     const immediate = packet(
@@ -282,7 +294,6 @@ it("keeps a formation changed by a mechanic resumable through Campfire Rest", ()
     s.encounter = 3;
     s.journey!.victories = s.encounter;
     s.expedition = { pack: authoredPack(s.encounter), recruit: null, lastRoom: null };
-    s.roster.push("pollenmoth");
     s.reserves.push({ id: "reserve-moth", species: "pollenmoth", health: 5, block: 0, attacked: false });
   });
   state = accept(state, { type: "visitCampfire" });
@@ -303,7 +314,7 @@ it("publishes actual control immunity, capped buildup and removed status identit
   });
   expect(immune.next.battle!.enemies[0]!.combat.freeze).toBe(0);
   expect(immune.events).toContainEqual(expect.objectContaining({ status: "freeze", outcome: "immune" }));
-  expect(immune.events.some((e) => e.outcome === "apply")).toBe(false);
+  expect(immune.events.some((e) => e.kind === "status" && e.outcome === "apply")).toBe(false);
   const gained = packet("burn", 3, (s) => {
     s.battle!.enemies[0]!.combat.burn = 999999;
   });
@@ -318,10 +329,11 @@ it("publishes actual control immunity, capped buildup and removed status identit
     target.combat.burn = 3;
     removeEffects(target, "cleanse", 2, events, s);
   });
-  expect(events.filter((e) => e.status === "cleanse").map((e) => e.affectedStatus)).toEqual([
-    "freeze",
-    "burn",
-  ]);
+  expect(
+    events
+      .filter((e) => e.kind === "status" && e.status === "cleanse")
+      .map((e) => e.kind === "status" && e.affectedStatus),
+  ).toEqual(["freeze", "burn"]);
 });
 
 it("does not admit an enemy action after its own status tick knocks it out", () => {
@@ -342,7 +354,7 @@ it("rejects a save whose allied creature shares an enemy identity", () => {
     const ally = draft.team[0]!;
     const previous = ally.id;
     ally.id = draft.battle!.enemies[0]!.id;
-    draft.lineup = draft.lineup.map((id) => (id === previous ? ally.id : id));
+
     for (const card of draft.cards) if (card.ownerId === previous) card.ownerId = ally.id;
     for (const enemy of draft.battle!.enemies) if (enemy.targetId === previous) enemy.targetId = ally.id;
   });

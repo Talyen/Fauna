@@ -3,7 +3,7 @@ import { afterEach, expect, it, vi } from "vitest";
 import { act, cleanup, render, renderHook } from "@testing-library/react";
 import { createRef } from "react";
 import type { Session, SessionView } from "../../../src/application/session";
-import type { GameEvent } from "../../../src/game/types";
+import type { GameEvent, DamageEvent } from "../../../src/game/types";
 import { useCombatFeedback, CombatFeedback, appendFeedback } from "../../../src/ui/battle/combat-feedback";
 
 afterEach(() => {
@@ -13,7 +13,7 @@ afterEach(() => {
   vi.unstubAllGlobals();
   vi.restoreAllMocks();
 });
-const hit = (amount: number, damageType: GameEvent["damageType"] = "burn"): GameEvent => ({
+const hit = (amount: number, damageType: DamageEvent["damageType"] = "burn"): DamageEvent => ({
   kind: "damage",
   targetId: "enemy-0",
   amount,

@@ -255,7 +255,11 @@ describe("player interface", () => {
     render(<App session={session} />);
     await userEvent.setup().click(screen.getByRole("button", { name: "Continue" }));
     expect(session.store.getState().game.phase).toBe("teamSelection");
-    expect(session.store.getState().game.roster).toEqual([chosen]);
+    expect(
+      [...session.store.getState().game.team, ...session.store.getState().game.reserves].map(
+        (unit) => unit.species,
+      ),
+    ).toEqual([chosen]);
     expect(screen.queryByRole("button", { name: "Begin journey" })).toBeNull();
     await session.flush();
     expect(JSON.parse(localStorage.getItem("fauna.save.v1")!).phase).toBe("teamSelection");
@@ -291,7 +295,6 @@ describe("player interface", () => {
         d.team[0]!.health = 7;
         d.team[1]!.health = 19;
         d.team[1]!.block = 4;
-        d.roster.push("mossguard");
         d.reserves.push({
           id: "reserve-copy",
           species: "mossguard",
@@ -459,13 +462,19 @@ it("keeps the team after committing a recruit to Collection and resumes the resu
   await session.flush();
   const next = session.store.getState().game;
   expect(next.phase).toBe("teamSelection");
-  expect(next.roster).toEqual(game.roster);
+  expect([...next.team, ...next.reserves].map((unit) => unit.species)).toEqual(
+    [...game.team, ...game.reserves].map((unit) => unit.species),
+  );
   expect(next.discovery.recruited.emberback).toBe((game.discovery.recruited.emberback ?? 0) + 1);
   expect(screen.queryByRole("heading", { name: "Choose a Recruit" })).toBeNull();
   await session.dispose();
   const resumed = createSession(createBrowserPlatform(localStorage), 42);
   await resumed.load();
   expect(resumed.store.getState().game.phase).toBe("teamSelection");
-  expect(resumed.store.getState().game.roster).toEqual(game.roster);
+  expect(
+    [...resumed.store.getState().game.team, ...resumed.store.getState().game.reserves].map(
+      (unit) => unit.species,
+    ),
+  ).toEqual([...game.team, ...game.reserves].map((unit) => unit.species));
   await resumed.dispose();
 });

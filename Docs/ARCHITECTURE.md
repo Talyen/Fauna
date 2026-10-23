@@ -33,6 +33,8 @@ Preserve independently authored species, card and talent order: seeded selection
 
 ### Presentation owners
 
+The shell [navigation reducer](../src/ui/shell/navigation.ts) owns page and overlay transitions and supplies one active-surface priority for rendering, input, effects and Auto-play. Its [focus adapter](../src/ui/shell/focus.ts) owns DOM references and semantic menu-action restoration.
+
 [App](../src/ui/App.tsx) mounts the tooltip provider and [game shell](../src/ui/shell/game-shell.tsx). The shell alone owns transient navigation, command callbacks and modal focus restoration. Its [input router](../src/ui/shell/input.ts) receives state/callbacks; controlled [overlays](../src/ui/shell/overlays.tsx) render without acquiring navigation ownership. Extracted content receives data and callbacks.
 
 Feature folders own their layouts; `shared/` owns reusable cards, combat readouts, rewards, navigation and effects. Shared presentation may consume gameplay queries and infrastructure, but cannot import UI feature folders. [Inspection requests](../src/ui/shared/inspection-model.ts) remain independent of the inspection feature. Registered controls, React infrastructure and dependency-light utilities have the lower-level boundaries described in the [design-system map](DESIGN_SYSTEM.md).
@@ -40,6 +42,10 @@ Feature folders own their layouts; `shared/` owns reusable cards, combat readout
 `src/ui/styles.css` owns stylesheet order. Preserve shared declarations and repeated-selector order when moving CSS; unchanged declarations alone do not prove rendering parity. Result presentation shares one completion context so input and reduced motion finish the same animation from any consumer.
 
 ## Command resolution and previews
+
+`team` and `reserves` are the authoritative ordered creature arrays. Owned species and deployed IDs are derived; saves contain no roster or lineup mirrors. Every phase has expedition state and prepared encounters consume committed packs under one eight-battle contract. All species are available to encounter and recruit; Collection and later starter eligibility depend on actual recruitment. Results return directly home without an unlock pipeline.
+
+[Committed event variants](../src/game/types.ts) require target, amount and damage type for damage and the corresponding facts for healing, Block, statuses and actions. [Feedback adaptation](../src/ui/battle/combat-feedback-model.ts) converts these facts to presentation entries without changing committed event order or inventing gameplay defaults.
 
 `dispatch(state, command)` returns an accepted immutable snapshot with ordered events, or rejects with the original state and RNG. The exhaustive phase table admits commands before command-specific validation; all validation precedes mutation and RNG consumption. An explicit linear-congruential RNG makes equal seeds and accepted command sequences reproducible.
 
@@ -65,7 +71,7 @@ Enemy targeting is policy over the shared executor. The pure [battle policy](../
 
 Desktop saves use Electron’s Fauna user-data `saves/expedition.json`; browser saves use `fauna.save.v1`. Both keep two backups. Follow the [development-save policy](../AGENTS.md#development-saves). [save-format.json](../src/game/save-format.json) is the single version shared by gameplay validation, native storage and the package. Update schemas, semantic validation and current-format fixtures together.
 
-[Save validation](../src/game/save.ts) checks content IDs, individual/card ownership, unique zones, Health bounds, lineup completeness, saved enemy packs with exact initial Health/room power, and phase/outcome coherence. Support visits validate stock, price bounds, visit/slot identities and purchase receipts with their phases. It validates FIFO overflow and rejects a waiting buffer alongside an unfilled hand. Generated copies require distinct IDs, valid battle ownership and complete permanent kits. Discovery rejects duplicates, unknown species, recruitment without encounter records, and invalid starter offers/selections. [Content validation](../src/game/content-validation.ts) is a separate startup/authoring boundary.
+[Save validation](../src/game/save.ts) checks content IDs, individual/card ownership, unique zones, Health bounds, formation limits, saved enemy packs with exact initial Health/room power, and phase/outcome coherence. Support visits validate stock, price bounds, visit/slot identities and purchase receipts with their phases. It validates FIFO overflow and rejects a waiting buffer alongside an unfilled hand. Generated copies require distinct IDs, valid battle ownership and complete permanent kits. Discovery rejects duplicates, unknown species, recruitment without encounter records, and invalid starter offers/selections. [Content validation](../src/game/content-validation.ts) is a separate startup/authoring boundary.
 
 ### Loading and writes
 
@@ -83,7 +89,7 @@ Renderer crash recovery drains admitted native writes before ordinary validated 
 
 ## Cloud reconciliation and device preferences
 
-[Cloud](../src/application/cloud.ts) validates payload hashes and causal ancestry without merging progression fields. Each device owns two alternating remote slots; other devices' slots are read-only. Unknown ancestry creates competing heads. Prefer intact local progress, otherwise stable snapshot-ID order; preserve alternatives durably **before** installation or recording them as ancestors. Bound ancestry to 64 entries and remote inventory to 32 streams / 64 files of at most 1 MiB each. Invalid/oversized files pause uploads without deletion.
+[Cloud snapshot validation and hashing](../src/application/cloud-snapshots.ts), [pure reconciliation policy](../src/application/cloud-policy.ts) and [the controller](../src/application/cloud.ts) have separate owners. One metadata queue serializes hashing, local metadata writes and publication; generation checks revoke stale work. Reconciliation never merges progression fields. Each device owns two alternating remote slots; other devices' slots are read-only. Unknown ancestry creates competing heads. Prefer intact local progress, otherwise stable snapshot-ID order; preserve alternatives durably **before** installation or recording them as ancestors. Bound ancestry to 64 entries and remote inventory to 32 streams / 64 files of at most 1 MiB each. Invalid/oversized files pause uploads without deletion.
 
 Local saves remain authoritative offline. Metadata becomes durable after the gameplay save and before upload; transport never holds the local save lane. Background retries preserve alternatives and cannot replace the active journey. Startup continues locally after failure or five seconds; late reads cannot install after offline takeover. Shutdown drains local writes and allows at most two seconds for uploads.
 
@@ -118,4 +124,4 @@ The packaged renderer uses `fauna://app/` confined to `dist/`, rejecting foreign
 
 ## Plans and history
 
-The [simplification plan](SIMPLIFICATION_PLAN.md) assesses dormant journey/unlock paths, roster mirrors, navigation, events and Cloud. It proposes work rather than defining new runtime contracts. Historical records retain [lifecycle](archive/GAME_STATE_PLAN.md), [ability resolution](archive/COMBAT_RESOLUTION_PLAN.md) and [reaction ordering](archive/COMBAT_REACTIONS_PLAN.md) decisions and their original verification scope.
+The [simplification implementation record](SIMPLIFICATION_PLAN.md) documents the six changes and links the approved assessment, verification boundaries and retained evidence. Historical records retain [lifecycle](archive/GAME_STATE_PLAN.md), [ability resolution](archive/COMBAT_RESOLUTION_PLAN.md) and [reaction ordering](archive/COMBAT_REACTIONS_PLAN.md) decisions and their original verification scope.

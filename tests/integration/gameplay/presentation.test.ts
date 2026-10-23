@@ -4,7 +4,7 @@ import { previewPlay } from "../../../src/game/preview";
 import { combat, hit } from "../../../src/game/combat/index";
 import { dispatch } from "../../../src/game/engine";
 import { appendFeedback, feedbackFrames } from "../../../src/ui/battle/combat-feedback-model";
-import type { GameEvent } from "../../../src/game/types";
+import type { GameEvent, DamageEvent } from "../../../src/game/types";
 import { run, feedbackBattle } from "../../support/game";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 describe("uncommitted previews", () => {
@@ -20,7 +20,9 @@ describe("uncommitted previews", () => {
     const preview = previewPlay(original, card, "enemy-0");
     expect(preview.accepted).toBe(true);
     expect(preview.state.battle!.enemies[0]!.health).toBe(0);
-    expect(preview.events.find((e) => e.kind === "damage")?.amount).toBe(6);
+    expect(
+      preview.events.find((e): e is Extract<GameEvent, { kind: "damage" }> => e.kind === "damage")?.amount,
+    ).toBe(6);
     expect(preview.events.some((e) => e.kind === "knockout" && e.targetId === "enemy-0")).toBe(true);
     expect(JSON.stringify(original)).toBe(serialized);
     expect(dispatch(original, { type: "play", cardId: card, targetId: "enemy-0" })).toEqual(preview);
@@ -78,11 +80,11 @@ describe("floating feedback", () => {
       [],
       [
         event,
-        { ...event, damageType: "nature" },
+        { ...event, damageType: "nature" as const },
         { ...event, targetId: "ally-0" },
         { kind: "block", targetId: "ally-0", amount: 4, text: "" },
         { kind: "block", targetId: "ally-0", amount: -4, text: "" },
-        { kind: "action", text: "Uses a card" },
+        { kind: "action", actionType: "support", actorId: "ally-0", text: "Uses a card" },
       ],
       1,
       0,
@@ -96,7 +98,7 @@ describe("floating feedback", () => {
   });
 });
 
-const damage = (amount: number, damageType: GameEvent["damageType"] = "burn"): GameEvent => ({
+const damage = (amount: number, damageType: DamageEvent["damageType"] = "burn"): DamageEvent => ({
   kind: "damage",
   targetId: "enemy-0",
   amount,

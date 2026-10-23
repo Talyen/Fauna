@@ -131,7 +131,9 @@ it("one Blind roll covers every recipient and supplemental packet in an attack",
   expect(result.state.battle!.enemies.map((enemy) => enemy.health)).toEqual(
     game.battle!.enemies.map((enemy) => enemy.health),
   );
-  expect(result.events.filter((event) => event.outcome === "dodge")).toHaveLength(3);
+  expect(result.events.filter((event) => event.kind === "status" && event.outcome === "dodge")).toHaveLength(
+    3,
+  );
   expect(result.state.battle!.enemies.every((enemy) => enemy.combat.blind)).toBe(true);
   produce(ready(), (draft) => {
     const actor = draft.team[0]!;
@@ -141,7 +143,9 @@ it("one Blind roll covers every recipient and supplemental packet in an attack",
     const events: GameEvent[] = [];
     for (const type of ["physical", "burn"] as const)
       hit(draft, actor, draft.battle!.enemies[0]!, 5, type, events, { origin: "ability", blindMiss });
-    expect(events.filter((event) => event.kind === "damage")).toHaveLength(0);
+    expect(
+      events.filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage"),
+    ).toHaveLength(0);
     expect(draft.battle!.enemies[0]!.combat.burn).toBe(0);
   });
 });
@@ -181,7 +185,7 @@ it("reflects Blind once without changing damage or creating reflection loops", (
     expect(ram.combat!.blind).toBe(false);
     expect(game.battle!.enemies.filter((enemy) => enemy.combat.blind)).toHaveLength(1);
     expect(game.battle!.enemies.every((enemy) => enemy.combat.reflect)).toBe(true);
-    expect(events.filter((event) => event.status === "reflect")).toHaveLength(1);
+    expect(events.filter((event) => event.kind === "status" && event.status === "reflect")).toHaveLength(1);
   });
 });
 

@@ -17,7 +17,7 @@ This guide owns journey rules and progression. [Screen specifications](ui/screen
 - If the deployed row falls, remaining enemy attacks stop and the next player turn begins with restored Mana. A required replacement choice brings in living backup. Defeat requires the whole roster to fall.
 - Knocked-out card slots remain inert in saved battle zones and are skipped by ordinary draws. When the entire deployed row falls, the next hand reserves slots for incoming creatures so recovery does not require a free extra draw. These slots never render as playable cards for knocked-out owners.
 - Victory preserves roster Health and knockouts. The next battle deploys the saved current formation; combat effects reset.
-- Recruitment at five banks Collection progress before a team confirmation step. Players may replace one creature or keep the original roster; replacing a starting creature updates that individual’s lineup entry.
+- Recruitment at five banks Collection progress before a team confirmation step. Players may replace one creature or keep the original roster; replacing a deployed creature updates the saved team directly.
 
 ## Encounters
 
@@ -104,7 +104,7 @@ Auto-play is explicitly enabled for one battle. It uses visible information to c
 
 ### Catalog availability
 
-All species are available to encounter/recruit; actual recruitment determines Collection and later starter eligibility. Current schemas require the complete `unlocked` catalog and an empty `journey.unlocks`, so the retained reveal pipeline is dormant. Older post-results reveal proposals are historical; the [simplification plan](SIMPLIFICATION_PLAN.md#2-delete-the-unreachable-creature-unlock-pipeline) records the proposed code removal, which this contract does not claim is implemented.
+Leaving results returns directly home. All species are available to encounter and recruit; Collection and later starter eligibility depend on actual recruitment. Reopening results grants no additional progress.
 
 Development builds add a Skip combat icon beside the battle menu and Auto-play controls. It settles a normal victory with normal rewards and only XP already earned by actual plays; roster Health is preserved. It is unavailable in production and rejects repeated settlement.
 
