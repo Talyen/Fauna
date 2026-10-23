@@ -2,13 +2,12 @@ import { expectTalentOverview } from "./support/layout";
 import { KEYWORDS, keywordLabel } from "../../src/game/progression";
 import { expect, type Locator } from "@playwright/test";
 import { produce } from "immer";
-import { dispatch } from "../../src/game/engine";
 import { definition } from "../../src/game/content";
-import { run } from "../support/game";
+import { run, teamRun } from "../support/game";
 import { SPECIES } from "../../src/game/content";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { expectScrollFree, layoutViolations, LAYOUT_CASES } from "./support/layout-contract";
-import { openHome, reloadHome, test, state } from "./support/session";
+import { openHome, test, seed, state } from "./support/session";
 import { expectBattleGeometry } from "./support/battle-layout";
 import { captureScreen, settleScreen } from "./support/rendered-evidence";
 import { snapshot, cloudName } from "../../src/application/cloud-snapshots";
@@ -78,35 +77,42 @@ async function everyPage(root: Locator, check: (page: number) => Promise<void>) 
   throw new Error("Pagination did not terminate");
 }
 
+function layoutGame(targetedHand = false) {
+  const game = produce(targetedHand ? teamRun(7, ["prismram", "prismram", "prismram"]) : run(7), (draft) => {
+    draft.keywordXP.burn = 100;
+    draft.discovery.encountered = SPECIES.map((entry) => entry.id);
+    draft.discovery.recruited = Object.fromEntries(SPECIES.map((entry) => [entry.id, 1]));
+    if (targetedHand) draft.discovery.recruited.prismram = 3;
+    const cards = targetedHand
+      ? draft.cards.filter((card) => {
+          const def = definition(card.definitionId);
+          return def.effect === "attack" && !def.target;
+        })
+      : draft.cards;
+    draft.battle!.hand = cards.slice(0, 6).map((card) => card.id);
+    draft.battle!.buffer = draft.cards
+      .filter((card) => !draft.battle!.hand.includes(card.id))
+      .map((card) => card.id);
+    draft.battle!.draw = [];
+    draft.battle!.discard = [];
+  });
+  expect(decodeSave(encodeSave(game))).toEqual(game);
+  return game;
+}
+
 for (const [width, height, scale] of LAYOUT_CASES) {
   test.describe(`scroll-free at ${width}×${height}, text ${scale}`, () => {
     test.beforeEach(async ({ page }) => {
       await page.setViewportSize({ width, height });
       await page.emulateMedia({ reducedMotion: scale === 1 ? "no-preference" : "reduce" });
-      const game = produce(run(7), (draft) => {
-        draft.keywordXP.burn = 100;
-        draft.discovery.encountered = SPECIES.map((entry) => entry.id);
-        draft.discovery.recruited = Object.fromEntries(SPECIES.map((entry) => [entry.id, 1]));
-        draft.battle!.hand = draft.cards.slice(0, 6).map((card) => card.id);
-        draft.battle!.buffer = draft.cards.slice(6).map((card) => card.id);
-        draft.battle!.draw = [];
-        draft.battle!.discard = [];
-      });
-      const save = encodeSave(game);
-      expect(decodeSave(save)).toEqual(game);
-      await page.addInitScript(
-        ({ save, scale }) => {
-          localStorage.setItem("fauna.save.v1", save);
-          localStorage.setItem("fauna.text-scale", String(scale));
-          localStorage.setItem("fauna.tooltip-scale", "1.25");
-        },
-        { save, scale },
-      );
-      await openHome(page);
-      await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
+      await page.addInitScript((scale) => {
+        localStorage.setItem("fauna.text-scale", String(scale));
+        localStorage.setItem("fauna.tooltip-scale", "1.25");
+      }, scale);
     });
 
     test("Collection and rank pages", async ({ page }) => {
+      await seed(page, layoutGame());
       await captureScreen(page, { path: `reports/scroll-free/home-${width}-${height}-${scale}.png` });
       await page.getByRole("button", { name: "Collection", exact: true }).click();
       await captureScreen(page, { path: `reports/scroll-free/collection-${width}-${height}-${scale}.png` });
@@ -147,6 +153,7 @@ for (const [width, height, scale] of LAYOUT_CASES) {
     });
 
     test("Talents, Glossary and Settings", async ({ page }) => {
+      await seed(page, layoutGame());
       const exhaustive = width === 1280 && height === 720 && scale === 1.25;
       const before = await state(page);
       await page.getByRole("button", { name: "Talents", exact: true }).click();
@@ -185,6 +192,8 @@ for (const [width, height, scale] of LAYOUT_CASES) {
     });
 
     test("battle hand and draw pile", async ({ page }) => {
+      // Targeted cards exercise every real hit target without committing a play and reloading
+      await seed(page, layoutGame(true));
       await page.getByRole("button", { name: "Continue", exact: true }).click();
       const before = await state(page);
       await page.mouse.move(0, 0);
@@ -203,7 +212,6 @@ for (const [width, height, scale] of LAYOUT_CASES) {
         // Escape changes selection immediately; the previous card can still be lowering over this one.
         await page.mouse.move(0, 0);
         await settleScreen(page);
-        const id = await card.getAttribute("data-card-id");
         const hitPoint = () =>
           card.evaluate((el) => {
             const rect = el.getBoundingClientRect();
@@ -225,26 +233,11 @@ for (const [width, height, scale] of LAYOUT_CASES) {
         point = await hitPoint();
         expect(point).not.toBeNull();
         await page.mouse.click(point!.x, point!.y);
-        const def = definition(before.cards.find((entry) => entry.id === id)!.definitionId);
-        const needsTarget =
-          (def.effect === "attack" && !def.target) ||
-          (def.effect === "guard" && def.target !== "self") ||
-          (def.effect === "heal" && !def.target);
-        if (needsTarget) {
-          await expect(card).toHaveAttribute("aria-pressed", "true");
-          await expectScrollFree(page);
-          await page.keyboard.press("Escape");
-          await expect(card).toHaveAttribute("aria-pressed", "false");
-          expect(await state(page)).toEqual(before);
-        } else {
-          const expected = dispatch(before, { type: "play", cardId: id! });
-          expect(expected.accepted).toBe(true);
-          await expect.poll(() => state(page)).toEqual(expected.state);
-          await expectScrollFree(page);
-          // The fixture's init script restores this same hand and text preferences on reload.
-          await reloadHome(page);
-          await page.getByRole("button", { name: "Continue", exact: true }).click();
-        }
+        await expect(card).toHaveAttribute("aria-pressed", "true");
+        await expectScrollFree(page);
+        await page.keyboard.press("Escape");
+        await expect(card).toHaveAttribute("aria-pressed", "false");
+        expect(await state(page)).toEqual(before);
       }
       await page.mouse.move(0, 0);
       await captureScreen(page, { path: `reports/scroll-free/battle-${width}-${height}-${scale}.png` });

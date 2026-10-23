@@ -1,4 +1,4 @@
-import { expect } from "@playwright/test";
+import { expect, type Page } from "@playwright/test";
 import { assetUrl } from "../../src/ui/shared/assets";
 import { run } from "../support/game";
 import { test, seed, resume } from "./support/session";
@@ -6,6 +6,18 @@ import { captureFrame } from "./support/rendered-evidence";
 import { fits } from "./support/layout";
 
 test.use({ realStartup: true });
+
+async function holdStartupResource(page: Page, url: string | RegExp, abort = false) {
+  let release = () => {};
+  const held = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  await page.route(url, async (route) => {
+    await held;
+    await (abort ? route.abort() : route.continue());
+  });
+  return release;
+}
 
 for (const [width, height, scale] of [
   [1280, 720, 1.25],
@@ -18,14 +30,10 @@ for (const [width, height, scale] of [
     page.on("response", (response) => {
       if (response.status() >= 400) errors.push(`${response.status()} ${response.url()}`);
     });
-    let allowReact = () => {};
-    const blocked = new Promise<void>((resolve) => {
-      allowReact = resolve;
-    });
-    await page.route(/\/(?:src\/main\.tsx|assets\/main-[^/]+\.js)(?:\?.*)?$/, async (route) => {
-      await blocked;
-      await route.continue();
-    });
+    const allowReact = await holdStartupResource(
+      page,
+      /\/(?:src\/main\.tsx|assets\/main-[^/]+\.js)(?:\?.*)?$/,
+    );
     await page.goto("/", { waitUntil: "domcontentloaded" });
     const splash = page.getByRole("status", { name: "Loading Fauna" });
     await expect(splash).toBeVisible();
@@ -105,14 +113,7 @@ for (const [width, height, scale] of [
 }
 
 test("slow essential art holds the splash, and an image error still permits play", async ({ page }) => {
-  let release = () => {};
-  const held = new Promise<void>((resolve) => {
-    release = resolve;
-  });
-  await page.route(`**/${assetUrl("logo.main-menu").slice(2)}`, async (route) => {
-    await held;
-    await route.abort();
-  });
+  const release = await holdStartupResource(page, `**/${assetUrl("logo.main-menu").slice(2)}`, true);
   await page.goto("/", { waitUntil: "domcontentloaded" });
   await expect(page.getByRole("status", { name: "Loading Fauna" })).toBeVisible();
   await page.waitForFunction(() => performance.now() >= 5100);
@@ -126,12 +127,18 @@ test("reduced motion stays static, dismisses without a fade and resumes a saved 
   await page.emulateMedia({ reducedMotion: "reduce" });
   const game = run(7);
   await page.addInitScript((game) => localStorage.setItem("fauna.save.v1", JSON.stringify(game)), game);
+  // Keep the splash available for inspection even if the driver is delayed past its minimum
+  const release = await holdStartupResource(page, `**/${assetUrl("logo.main-menu").slice(2)}`);
   await page.goto("/", { waitUntil: "domcontentloaded" });
-  await expect(page.getByRole("status", { name: "Loading Fauna" })).toBeVisible();
-  await expect(page.locator(".startup-leaves")).toBeHidden();
-  await expect(page.locator(".startup-logo-fill")).toHaveCSS("animation-name", "none");
-  await expect(page.locator("#startup-splash-phrase")).toHaveText("Adventure awaits…");
-  await captureFrame(page, { path: "reduced-motion.png" });
+  try {
+    await expect(page.getByRole("status", { name: "Loading Fauna" })).toBeVisible();
+    await expect(page.locator(".startup-leaves")).toBeHidden();
+    await expect(page.locator(".startup-logo-fill")).toHaveCSS("animation-name", "none");
+    await expect(page.locator("#startup-splash-phrase")).toHaveText("Adventure awaits…");
+    await captureFrame(page, { path: "reduced-motion.png" });
+  } finally {
+    release();
+  }
   await expect(page.locator("#startup-splash")).toHaveCount(0, { timeout: 30000 });
   expect(await page.evaluate(() => performance.now())).toBeGreaterThanOrEqual(5000);
   await resume(page);
