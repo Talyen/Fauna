@@ -1,6 +1,6 @@
 import { cardActor, unfinishedJourneyLimit } from "./card-actors";
 import { cardTargeting } from "./card-rules";
-import { definition, type CardDefinition } from "./content";
+import { definition, species, type CardDefinition } from "./content";
 import { cardCost } from "./ability-rules";
 import { controlled } from "./combat/state";
 import { battlefield } from "./battlefield";
@@ -50,7 +50,11 @@ export function inspectCardPlay(
     return { allowed: false, reason: "That card is not in your hand." };
   const actor = cardActor(state, card);
   if (!actor || actor.health <= 0) return { allowed: false, reason: "That creature is knocked out." };
-  if (controlled(actor)) return { allowed: false, reason: "That creature is Stunned or Frozen." };
+  if (controlled(actor))
+    return {
+      allowed: false,
+      reason: `${species(actor.species).name} cannot act ${actor.combat?.controlled ? `while ${actor.combat.controlled === "freeze" ? "Frozen" : "Stunned"}` : "this turn"}.`,
+    };
   if (
     actor.id !== card.ownerId &&
     (actor.combat?.fallenCardsPlayedThisTurn ?? 0) >= unfinishedJourneyLimit(state, actor)
@@ -59,7 +63,7 @@ export function inspectCardPlay(
   const def = definition(card.definitionId);
   if (def.effect === "resurrect" && !chosenRecipients(state, def).length)
     return { allowed: false, reason: "There are no knocked-out allies." };
-  if (state.battle.mana < cardCost(card, state)) return { allowed: false, reason: "Not enough mana." };
+  if (state.battle.mana < cardCost(card, state)) return { allowed: false, reason: "Not enough Mana." };
   return { allowed: true, card, actor, def };
 }
 

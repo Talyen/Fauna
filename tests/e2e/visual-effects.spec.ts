@@ -76,7 +76,7 @@ test("keyword effects follow battle hover, Death's Door, inspection, settings an
   expect(await state(page)).toEqual(before);
 });
 
-test("inspection owns the opaque backdrop and restores the underlying recruit palette", async ({ page }) => {
+test("inspection owns a dimmed backdrop and restores the underlying recruit palette", async ({ page }) => {
   await seed(page, winBattle());
   await page.bringToFront();
   await resume(page);
@@ -85,8 +85,8 @@ test("inspection owns the opaque backdrop and restores the underlying recruit pa
   await page.locator(".recruit-options .creature-card").first().click();
   await expect(page.locator(".inspection-overlay .effect-backdrop")).toHaveCount(1);
   await expect(page.locator(".effect-root .effect-backdrop")).toHaveCount(0);
-  await expect(page.locator(".inspection")).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
-  await expect(page.locator(".inspection-overlay")).not.toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
+  await expect(page.locator(".inspection")).not.toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
+  await expect(page.locator(".inspection-overlay")).toHaveCSS("background-color", "rgba(0, 0, 0, 0.8)");
   await captureScreen(page, { path: "effects-inspection.png" });
   await page.locator(".inspection-thumbnails .action-card").first().click();
   await page.keyboard.press("ArrowRight");

@@ -24,13 +24,13 @@ All creature hover/focus tooltips show only the creature name as the header, the
 
 ## Creature and action inspection
 
-Outside battle, use one shadcn Dialog on an opaque warm near-black backdrop. Center the creature name above landscape artwork, then a wider centered row of three native portrait abilities with 12px gaps. Show the current named trait, five progress stars and active passive description below. Stars fill left to right from zero to five; no rank controls or separate rank view appear. Ability names and rules are available through hover or intentional navigation focus. Keep accessible dialog titles.
+Outside battle, use one centered shadcn Dialog panel over the shared dimmed backdrop, keeping the originating screen visible beneath it. Center the creature name above a row of three native portrait abilities with 12px gaps; omit the creature's base artwork. Show the current named trait, five progress stars and active passive description below. Stars fill left to right from zero to five; no rank controls or separate rank view appear. Ability names and rules are available through hover or intentional navigation focus. Keep accessible dialog titles.
 
-[Inspection CSS](../../src/ui/inspection/inspection.css) owns `--inspection-art-width`, fitted to the viewport and capped by the 480px `--inspection-art-max-width`. Creature width uses `--inspection-creature-scale` (0.8); individual abilities use `--inspection-ability-scale` (1.2) after accounting for gaps. Keep the common center axis and [shared layout constraints](../UI.md#layout-artwork-size-and-spacing).
+[Inspection CSS](../../src/ui/inspection/inspection.css) fits the ability row to the panel width and remaining viewport height, capped by the 184px `--inspection-ability-max-width` per portrait. Keep the common center axis and [shared layout constraints](../UI.md#layout-artwork-size-and-spacing).
 
 Activating a thumbnail pins its enlarged artwork in the same Dialog. A/D and controller left/right cycle the three actions without Previous/Next buttons. Card rules show final effects without a bonus breakdown or embedded Glossary definitions. Inspection has no Recruit/Choose action.
 
-Every creature/action inspection has an accessible icon-only Back button; [menu rules](../MENU_DESIGN.md#back-and-focus-return) own nesting, Back and whole-dialog dismissal. Battle, piles opened in battle and required replacement use hover/focus details without nested pinned inspection. Enemy tooltips follow the shared creature tooltip contract and never reveal intents; full species kits belong in Collection.
+Creature/action inspection has no Back button. The accessible Close inspection X and outside click dismiss the whole overlay; Escape/controller B returns one level, restoring the selected ability or original opener. [Menu rules](../MENU_DESIGN.md#back-and-focus-return) own nesting and dismissal. Battle, piles opened in battle and required replacement use hover/focus details without nested pinned inspection. Enemy tooltips follow the shared creature tooltip contract and never reveal intents; full species kits belong in Collection.
 
 ## Collection
 
@@ -56,7 +56,7 @@ Owned borders are gold. Icons use keyword color at 65% while unowned and full st
 
 Show centered Victory earnings: keyword-colored icons/level labels with compact progress bars, then a separate Gold row. Continue opens Choose a Recruit without repeating earnings beside offers. An unchosen recruitment resumes through earnings; a banked full-roster recruit resumes directly at team confirmation.
 
-[Reward rules](../EXPEDITION_DESIGN.md#recruitment) own the exact defeated-species offers and boss cadence. Recruitment has no Skip. Recruit buttons commit below artwork; artwork only inspects. A first Collection unlock uses a small New! chip; otherwise show five stars, with earned ranks filled and the incoming star outlined with a plus. At maximum rank show five filled stars without a caption. Keep the group compact without unused pagination space. Boon choices retain their reserved choice area, external names and hover/focus effects; choose or Skip advances directly. An empty Boon pool advances automatically.
+[Reward rules](../EXPEDITION_DESIGN.md#recruitment) own the exact defeated-species offers and boss cadence. Recruitment has no Skip. Recruit buttons fit their label and standard padding, centered below artwork at the standard control height; artwork only inspects. This sizing also applies to starter recruitment. A first Collection unlock uses a small New! chip; otherwise show five stars, with earned ranks filled and the incoming star outlined with a plus. At maximum rank show five filled stars without a caption. Keep the group compact without unused pagination space. Boon choices retain their reserved choice area, external names and hover/focus effects; choose or Skip advances directly. An empty Boon pool advances automatically.
 
 ### Choose your team
 

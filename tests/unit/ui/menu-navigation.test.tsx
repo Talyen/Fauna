@@ -176,7 +176,7 @@ it.each(["home", "pause"])(
   },
 );
 
-it.each(["Back", "Escape", "Close inspection"])(
+it.each(["Escape", "Close inspection"])(
   "returns from battle Collection inspection using %s without changing combat",
   async (back) => {
     vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);

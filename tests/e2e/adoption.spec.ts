@@ -110,7 +110,7 @@ for (const [width, height] of REVIEW_VIEWPORTS)
     await expect(page.getByRole("tooltip")).toBeVisible();
     expect(await page.getByRole("tooltip").evaluate((node) => getComputedStyle(node).fontSize)).toBe("20px");
     expect(await art.evaluate((node) => node.getBoundingClientRect().width)).toBeCloseTo(
-      height <= 760 ? 213.333 : height <= 900 ? 240 : 266.667,
+      height <= 760 ? 234.667 : height <= 900 ? 264 : 293.333,
       0,
     );
     await captureScreen(page, { path: `reports/tooltip-independent-${width}-${height}.png` });

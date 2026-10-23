@@ -11,7 +11,7 @@ import { actionValue, enemyAbilityValue } from "../../../src/game/ability-rules"
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import type { GameEvent } from "../../../src/game/types";
-import { requireBattle, teamRun } from "../../support/game";
+import { addBackups, requireBattle, teamRun } from "../../support/game";
 
 it.each(SPECIES)("shares explicit target admission with commands for $id", ({ id }) => {
   const game = requireBattle(
@@ -20,6 +20,15 @@ it.each(SPECIES)("shares explicit target admission with commands for $id", ({ id
       state.battle!.draw = [];
       state.battle!.discard = [];
       state.battle!.buffer = [];
+      if (state.cards.some((card) => definition(card.definitionId).effect === "resurrect"))
+        addBackups(state, {
+          id: "fallen-backup",
+          species: "mossguard",
+          health: 0,
+          block: 0,
+          attacked: false,
+          combat: freshCombat(),
+        });
     }),
   );
   const saved = encodeSave(game);

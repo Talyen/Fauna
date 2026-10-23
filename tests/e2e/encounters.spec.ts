@@ -78,8 +78,8 @@ test("encounter placeholder uses bounded artwork at the minimum viewport", async
   await page.mouse.move(0, 0);
   await settleScreen(page);
   const bounds = await card.boundingBox();
-  expect(bounds!.width).toBeCloseTo(640 / 3, 1);
-  expect(bounds!.height).toBeCloseTo(160, 1);
+  expect(bounds!.width).toBeCloseTo((640 / 3) * 1.1, 1);
+  expect(bounds!.height).toBeCloseTo(176, 1);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await expect(page.locator(".app:not([inert]) [data-enemy-id]")).toHaveCount(0);
   await captureScreen(page, { path: "reports/encounters/narrow-choice.png", fullPage: true });

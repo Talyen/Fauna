@@ -3,17 +3,15 @@ import { creatureKeywords, effectPalette, visualKeywords } from "../shared/effec
 import { cardActor } from "../../game/card-actors";
 import { cardText } from "../../game/card-rules";
 import { ShineText } from "../shared/effects/treatments";
-import { sharedDodgeChance } from "../../game/combat/index";
 import { creaturePassive, creatureStars, MAX_CREATURE_STARS } from "../../game/progression";
 import { KeywordText } from "../shared/keyword-text";
 import { enemyInspectionValue } from "../../game/ability-rules";
 import { useLayoutEffect, useRef, useState } from "react";
 import { useStore } from "zustand";
-import { ChevronLeft, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import type { Session } from "../../application/session";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "../../components/ui/dialog";
-import { Button } from "../../components/ui/button";
-import { ActionCard, CreatureCard } from "../shared/cards/cards";
+import { ActionCard } from "../shared/cards/cards";
 import { CARDS, definition, species } from "../../game/content";
 import type { Card } from "../../game/types";
 import { isAvailableFocusTarget, returnFocus } from "../shared/navigation/focus";
@@ -57,7 +55,7 @@ export function Inspector({
     rootCard ? cards.findIndex((c) => c.definitionId === rootCard.definitionId) : null,
   );
   const thumbnails = useRef<HTMLDivElement>(null),
-    backButton = useRef<HTMLButtonElement>(null);
+    dialog = useRef<HTMLDivElement>(null);
   const previousCard = useRef(selected),
     restore = useRef<number | null>(null);
   const cycle = (direction: number) =>
@@ -70,7 +68,8 @@ export function Inspector({
     return true;
   };
   useLayoutEffect(() => {
-    if (selected !== null && previousCard.current === null) backButton.current?.focus();
+    if (selected !== null && previousCard.current === null)
+      dialog.current?.querySelector<HTMLButtonElement>(".dialog-close")?.focus();
     previousCard.current = selected;
     if (selected === null && restore.current !== null) {
       returnFocus(thumbnails.current?.querySelectorAll<HTMLButtonElement>("button")[restore.current] ?? null);
@@ -109,8 +108,13 @@ export function Inspector({
         }}
       >
         <DialogContent
+          ref={dialog}
           overlayClassName="inspection-overlay"
           overlayChildren={<EffectBackdropHost scope="inspection" />}
+          onOverlayClick={(event) => {
+            // A reopened inspection must close on its first backdrop click, even before Radix dismisses it.
+            if (event.target === event.currentTarget) onClose();
+          }}
           className={`inspection ${card ? "single-card" : "creature-inspection"}`}
           onCloseAutoFocus={(event) => {
             event.preventDefault();
@@ -127,20 +131,6 @@ export function Inspector({
                 : creatureKeywords(kind, enemy ? undefined : game),
             )}
           />
-          <header className="inspection-back" data-nav-row>
-            <Button
-              ref={backButton}
-              size="icon"
-              aria-label="Back"
-              variant="ghost"
-              onClick={() => {
-                if (!back()) onClose();
-              }}
-            >
-              <ChevronLeft aria-hidden="true" />
-            </Button>
-            {!card ? <DialogTitle>{enemy?.name ?? creature.name}</DialogTitle> : null}
-          </header>
           {card ? (
             <>
               <DialogTitle className="sr-only">{definition(card.definitionId).name} details</DialogTitle>
@@ -160,25 +150,12 @@ export function Inspector({
             </>
           ) : (
             <>
+              <header className="inspection-heading">
+                <DialogTitle>{enemy?.name ?? creature.name}</DialogTitle>
+              </header>
               <DialogDescription className="sr-only">
-                Creature artwork, three abilities and current passive rank. Hover or focus abilities for their
-                details.
+                Three abilities and current passive rank. Hover or focus abilities for their details.
               </DialogDescription>
-              <div className="inspection-creature" data-nav-row>
-                <CreatureCard
-                  progression={enemy ? undefined : game}
-                  kind={kind}
-                  name={enemy?.name}
-                  health={enemy?.health ?? ally?.health ?? creature.health}
-                  maxHealth={enemy?.maxHealth ?? creature.health}
-                  block={ally?.block ?? enemy?.block ?? 0}
-                  combat={ally?.combat ?? enemy?.combat}
-                  sharedDodge={ally || enemy ? sharedDodgeChance(game, (ally ?? enemy)!) : 0}
-                  readout={false}
-                  speciesKit
-                  label={`${enemy?.name ?? creature.name} details`}
-                />
-              </div>
               <section className="inspection-abilities" aria-label="Abilities">
                 <div className="inspection-thumbnails" ref={thumbnails} data-nav-row>
                   {cards.map((action, index) => (

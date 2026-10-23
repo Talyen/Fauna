@@ -68,6 +68,12 @@ describe("artwork-first inspection", () => {
         await user.click(opener);
         const dialog = screen.getByRole("dialog", { name: creature.name });
         expect(within(dialog).getByRole("heading", { name: creature.name })).toBeTruthy();
+        expect(dialog.querySelector(".creature-card")).toBeNull();
+        expect(
+          within(dialog).getByRole("region", { name: "Abilities" }).querySelectorAll("img"),
+        ).toHaveLength(3);
+        expect(within(dialog).queryByRole("button", { name: "Back" })).toBeNull();
+        expect(within(dialog).getByRole("button", { name: "Close inspection" })).toBeTruthy();
         expect(within(dialog).getByRole("region", { name: "Trait" }).textContent).toContain(
           creature.passiveTiers[0].description,
         );
@@ -77,6 +83,13 @@ describe("artwork-first inspection", () => {
         expect(dialog.querySelectorAll('[data-earned="true"]')).toHaveLength(0);
         expect(within(dialog).queryByRole("button", { name: /Choose|Recruit|Rank progression/ })).toBeNull();
         await user.keyboard("{Escape}");
+        expect(document.activeElement).toBe(opener);
+        expect(session.store.getState().game).toBe(game);
+        await user.click(opener);
+        await user.click(screen.getByRole("button", { name: "Close inspection" }));
+        await user.click(opener);
+        await user.click(document.querySelector<HTMLElement>(".inspection-overlay")!);
+        expect(screen.queryByRole("dialog")).toBeNull();
         expect(document.activeElement).toBe(opener);
         expect(session.store.getState().game).toBe(game);
         await user.click(screen.getByRole("button", { name: `Recruit ${creature.name}` }));
@@ -159,6 +172,7 @@ describe("artwork-first inspection", () => {
       expect(stomp.getAttribute("aria-label")).toContain("Deal 2 Stun damage to all enemies");
       await user.click(stomp);
       expect(screen.getByRole("dialog", { name: "Rooted Stomp details" })).toBeTruthy();
+      expect(document.activeElement).toBe(screen.getByRole("button", { name: "Close inspection" }));
       await user.keyboard("d");
       expect(screen.getByRole("dialog", { name: "Moss Renewal details" })).toBeTruthy();
       await user.keyboard("{Escape}");

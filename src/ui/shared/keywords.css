@@ -103,6 +103,14 @@
 [data-keyword="reflect"] {
   color: var(--keyword-reflect);
 }
+[data-combat-tone="attackReflection"],
+[data-keyword="attackReflection"] {
+  color: var(--keyword-attackReflection);
+}
+[data-combat-tone="resurrect"],
+[data-keyword="resurrect"] {
+  color: var(--keyword-resurrect);
+}
 [data-combat-tone="purge"],
 [data-keyword="purge"] {
   color: var(--keyword-purge);
