@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { defineConfig } from "vite";
@@ -25,6 +26,33 @@ export default defineConfig(({ command }) => ({
           : html,
     },
     activeAssetsPlugin(),
+    {
+      name: "startup-shell",
+      transformIndexHtml: {
+        order: "post",
+        handler(html) {
+          const prepared = JSON.parse(
+            readFileSync(new URL("./src/assets/prepared.json", import.meta.url), "utf8"),
+          );
+          return html
+            .replace(
+              "data-startup-preferences",
+              `src="./${command === "build" ? "assets/" : ""}startup-preferences.js"`,
+            )
+            .replace(
+              /data-startup-leaf="(green|gold)"/g,
+              (_match, color) => `src="${prepared.records[`loading.leaf-${color}`].url}"`,
+            );
+        },
+      },
+      generateBundle() {
+        this.emitFile({
+          type: "asset",
+          fileName: "assets/startup-preferences.js",
+          source: readFileSync(new URL("./public/startup-preferences.js", import.meta.url)),
+        });
+      },
+    },
     react(),
     // Compiler adoption is measured by the paired performance workflow before becoming the default.
     ...(process.env.FAUNA_REACT_COMPILER === "1"
@@ -34,5 +62,6 @@ export default defineConfig(({ command }) => ({
     releaseIdentityPlugin(fileURLToPath(new URL(".", import.meta.url))),
   ],
   server: { port: 48209, strictPort: true },
-  build: { target: "es2022" },
+  // Fauna's supported Chromium already implements modulepreload; keep the startup entry lean.
+  build: { target: "es2022", modulePreload: { polyfill: false } },
 }));

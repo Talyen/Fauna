@@ -1868,6 +1868,26 @@
       "aspect": [3, 4],
       "provenance": "Unchanged user-selected Tournelle artwork from Google Drive: https://drive.google.com/file/d/1khPQmksWYiHy3GrLK0v3NB1uFPxIf4s9/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "loading.leaf-green",
+      "origin": "repository",
+      "source": "public/art/loading/leaf-green.png",
+      "output": "art/loading/leaf-green.png",
+      "recipe": "copy",
+      "kind": "interface",
+      "provenance": "Alchemy: public/artwork/loading/leaf-green.png; independent loading leaf decoration",
+      "rights": "Existing shared project artwork; copied from Alchemy"
+    },
+    {
+      "id": "loading.leaf-gold",
+      "origin": "repository",
+      "source": "public/art/loading/leaf-gold.png",
+      "output": "art/loading/leaf-gold.png",
+      "recipe": "copy",
+      "kind": "interface",
+      "provenance": "Alchemy: public/artwork/loading/leaf-gold.png; independent loading leaf decoration",
+      "rights": "Existing shared project artwork; copied from Alchemy"
     }
   ]
 }

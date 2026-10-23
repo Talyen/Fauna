@@ -90,6 +90,8 @@
   --text-inspection: calc(18px * var(--text-scale, 1));
   --text-heading: calc(20px * var(--text-scale, 1));
   --text-title: calc(24px * var(--text-scale, 1));
+  --text-startup-logo: calc(36px * var(--text-scale, 1));
+  --startup-logo-line-height: calc(40px * var(--text-scale, 1));
   --text-result: calc(28px * var(--text-scale, 1));
   --motion-fast: 150ms;
   --motion-battle: 250ms;
