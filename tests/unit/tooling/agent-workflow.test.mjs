@@ -190,7 +190,7 @@ it("fails when inputs mutate during verification, while plan executes nothing", 
   expect(runner).not.toHaveBeenCalled();
 });
 
-it("selects bounded diagnostics without exposing arbitrary npm commands or broad browser runs", async () => {
+it("bounds diagnostic resources independently of the number of unit suites", async () => {
   const root = fixture();
   put(root, "tests/unit/game/example.test.ts", "export {};");
   expect(investigationArgs(root, ["unit", "tests/unit/game/example.test.ts"])).toEqual([
@@ -201,12 +201,18 @@ it("selects bounded diagnostics without exposing arbitrary npm commands or broad
     "--no-file-parallelism",
     "tests/unit/game/example.test.ts",
   ]);
+  expect(investigationArgs(root, ["unit"])).toEqual([
+    "run",
+    "test:full",
+    "--",
+    "--maxWorkers=1",
+    "--no-file-parallelism",
+  ]);
   const suites = Array.from({ length: 13 }, (_, index) => `tests/unit/game/case-${index}.test.ts`);
   for (const suite of suites) put(root, suite, "export {};");
   expect(investigationArgs(root, ["unit", ...suites]).slice(-13)).toEqual(suites);
   expect(investigationArgs(root, ["browser", "battle"])).toEqual(["run", "test:e2e:route", "--", "battle"]);
   for (const args of [
-    ["unit"],
     ["unit", "tests/unit/missing.test.ts"],
     ["browser"],
     ["browser", "unknown"],
@@ -352,25 +358,20 @@ it("waits for its integration lock without disturbing the owner and bounds exhau
   }
 });
 
-it("reports successful integration separately from failed cleanup and preserves its checkout", async () => {
+it("retains the integrated checkout, branch and evidence for follow-up work", async () => {
   const root = fixture();
-  const task = createWorktree(root, "cleanup-failure");
+  const task = createWorktree(root, "retained");
   put(task.path, "README.md", "# Integrated\n");
+  put(task.path, "reports/frame.png", "evidence");
   git(task.path, "add", ".");
   git(task.path, "commit", "-qm", "task");
-  const result = await integrate(root, task.branch, {
-    runner: () => ({ status: 0 }),
-    log: () => {},
-    cleanup: () => {
-      throw new Error("archive unavailable");
-    },
-  });
-  expect(result).toMatchObject({
-    integrated: true,
-    cleanup: { status: "pending", reason: "archive unavailable" },
-  });
+  const result = await integrate(root, task.branch, { runner: () => ({ status: 0 }), log: () => {} });
+  expect(result).toMatchObject({ integrated: true, worktree: task.path });
   expect(git(root, "show", "HEAD:README.md")).toBe("# Integrated");
-  expect(readFileSync(path.join(task.path, "README.md"), "utf8")).toBe("# Integrated\n");
+  expect(git(root, "branch", "--list", task.branch)).toContain(task.branch);
+  expect(readFileSync(path.join(task.path, "reports/frame.png"), "utf8")).toBe("evidence");
+  put(task.path, "follow-up.md", "ready for the next request");
+  expect(git(task.path, "status", "--porcelain")).toContain("follow-up.md");
 });
 
 it("ignores unrelated environment and documentation for code checks while preserving render inputs", () => {
@@ -393,4 +394,18 @@ it("ignores unrelated environment and documentation for code checks while preser
   expect(capture()).not.toBe(beforeCapture);
   vi.stubEnv("NODE_OPTIONS", "--conditions=development");
   expect(code()).not.toBe(verificationIdentity(root, base, ["src/value.ts"], {}));
+});
+
+it("prints ordinary multiline patches while retaining bounded output and machine-readable inventory", () => {
+  const root = fixture();
+  put(root, "README.md", "# Revised\nSecond line\n");
+  const result = review(root);
+  expect(result.preview).toContain("@@");
+  expect(result.preview).toContain("+# Revised\n+Second line");
+  expect(result.preview).not.toContain('"patch":');
+  expect(JSON.parse(readFileSync(result.indexPath, "utf8")).selected[0].file).toBe("README.md");
+  const bounded = review(root, [], { budget: 20 });
+  const full = readFileSync(bounded.patches, "utf8");
+  expect(bounded.preview + full.slice(20)).toBe(full);
+  expect(bounded.omittedCharacters).toBe(full.length - 20);
 });

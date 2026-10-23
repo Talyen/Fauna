@@ -1,8 +1,7 @@
 import { GLOSSARY } from "../../game/glossary";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
-import { PagedItems } from "../shared/navigation/pagination";
 import { KeywordText } from "../shared/keyword-text";
-export function GlossaryScreen({ scale, back }: { scale: number; back: () => void }) {
+export function GlossaryScreen({ back }: { back: () => void }) {
   return (
     <Screen className="menu-screen glossary-screen" aria-labelledby="menu-screen-title">
       <header className="collection-heading">
@@ -14,13 +13,15 @@ export function GlossaryScreen({ scale, back }: { scale: number; back: () => voi
         W/A/S/D or Tab to navigate. A/D switches targets. Enter/controller A selects. Escape/B goes back.
         Controller Y ends the turn. View creature abilities in Collection from the menu.
       </p>
-      <PagedItems
-        items={GLOSSARY}
-        pageSize={scale > 1 ? 2 : 3}
-        className="glossary-entries"
-        label="Glossary pages"
+      {/* eslint-disable jsx-a11y/no-noninteractive-tabindex -- A named scrolling region needs focus for native keyboard scrolling and controller access */}
+      <div
+        className="secondary-scroll-region glossary-entries"
+        data-scroll-region
+        role="region"
+        aria-label="Glossary entries"
+        tabIndex={0}
       >
-        {(entry) => (
+        {GLOSSARY.map((entry) => (
           <dl key={entry.term}>
             <dt>
               <KeywordText text={entry.term} />
@@ -29,8 +30,9 @@ export function GlossaryScreen({ scale, back }: { scale: number; back: () => voi
               <KeywordText text={entry.definition} />
             </dd>
           </dl>
-        )}
-      </PagedItems>
+        ))}
+      </div>
+      {/* eslint-enable jsx-a11y/no-noninteractive-tabindex */}
     </Screen>
   );
 }

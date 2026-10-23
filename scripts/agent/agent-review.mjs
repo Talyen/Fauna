@@ -72,7 +72,7 @@ export function review(
     mkdirSync(directory, { recursive: true });
     const indexPath = path.join(directory, "index.json");
     writeFileSync(indexPath, JSON.stringify({ base, inventory: all, selected }, null, 2));
-    const rendered = JSON.stringify(selected, null, 2);
+    const rendered = selected.map((entry) => `${entry.status} ${JSON.stringify(entry.file)}`).join("\n");
     return {
       base,
       inventory: all,
@@ -132,8 +132,14 @@ export function review(
   writeFileSync(index.patches, sections.map((s) => s.body).join("\n"));
   const indexPath = path.join(directory, "index.json");
   writeFileSync(indexPath, JSON.stringify(index, null, 2));
-  const detail = status ? selected : summary ? index.selected : patches;
-  const rendered = JSON.stringify(detail, null, 2);
+  const rendered = summary
+    ? index.selected
+        .map(
+          (entry) =>
+            `${entry.status} ${JSON.stringify(entry.file)} (patch lines ${entry.start}–${entry.end})`,
+        )
+        .join("\n")
+    : sections.map((section) => section.body).join("\n");
   return {
     ...index,
     indexPath,
@@ -171,7 +177,7 @@ export function main(args = process.argv.slice(2)) {
     console.log(JSON.stringify({ ...result, inventory: undefined, selected: undefined }));
   else
     console.log(
-      `Selection base: ${result.base}\n${result.preview}\nOmitted characters: ${result.omittedCharacters}. Full inventory and patch ranges: ${result.indexPath}\nFull patches: ${result.patches ?? "not collected in status mode"}\nRead omitted patches before claiming a complete review.`,
+      `Selection base: ${result.base}\n${result.preview}\n${result.omittedCharacters ? `Omitted ${result.omittedCharacters} characters; read the remaining patches before completing review.\n` : ""}Full inventory and patch ranges: ${result.indexPath}\nFull patches: ${result.patches ?? "not collected in status mode"}`,
     );
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) main();

@@ -15,6 +15,7 @@ export interface SessionView {
   loadFailed: boolean;
   error: string;
   saveStatus: "saved" | "saving" | "error";
+  saveUnavailable: boolean;
   events: GameEvent[];
   committedCommand: Command | null;
 }
@@ -32,6 +33,7 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
         loadFailed: false,
         error: "",
         saveStatus: "saved",
+        saveUnavailable: false,
         events: [],
         committedCommand: null,
       },
@@ -47,6 +49,7 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
   let disposal: Promise<void> | undefined;
   let generation = 0;
   let retryTimer: ReturnType<typeof setTimeout> | undefined;
+  let saveFailures = 0;
   const scheduleSaveRetry = () => {
     if (disposed || retryTimer) return;
     retryTimer = setTimeout(() => {
@@ -106,11 +109,13 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
       const installation = writes
         .then(() => writeLocal(data))
         .then(() => {
+          saveFailures = 0;
           if (!disposed)
             publish({
               game,
               loadFailed: false,
               saveStatus: "saved",
+              saveUnavailable: false,
               events: [],
               committedCommand: null,
               error: "",
@@ -128,10 +133,11 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
     writes = writes
       .then(() => writeLocal(data))
       .then(() => {
+        saveFailures = 0;
         if (!disposed && store.getState().game.revision === game.revision) {
           clearTimeout(retryTimer);
           retryTimer = undefined;
-          publish({ saveStatus: "saved", error: "" });
+          publish({ saveStatus: "saved", saveUnavailable: false, error: "" });
         }
         // Cloud metadata has its own serialized lane and bounded shutdown flush.
         // A stalled sync must not prevent the next gameplay snapshot reaching disk.
@@ -140,7 +146,12 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
       .catch((error) => {
         diagnostics.record("save-write", error, store.getState().game);
         if (!disposed) {
-          publish({ saveStatus: "error", error: "" });
+          saveFailures++;
+          publish({
+            saveStatus: "error",
+            saveUnavailable: store.getState().saveUnavailable || saveFailures >= 2,
+            error: "",
+          });
           scheduleSaveRetry();
         }
       });
@@ -188,6 +199,7 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
       if (!disposed && token === generation)
         publish({
           loadFailed: true,
+          saveUnavailable: true,
           error: "",
         });
       if (!disposed && !store.getState().closing && token === generation) await startCloud(null);

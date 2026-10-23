@@ -348,7 +348,7 @@ describe("player interface", () => {
     expect(gamepadActions({ buttons: [], axes: [0.1, -0.1] })).toEqual([]);
   });
 });
-it("silently allows play when browser storage access itself is denied", async () => {
+it("allows play and explains unavailable saving when browser storage access is denied", async () => {
   const original = Object.getOwnPropertyDescriptor(window, "localStorage")!;
   Object.defineProperty(window, "localStorage", {
     configurable: true,
@@ -362,6 +362,7 @@ it("silently allows play when browser storage access itself is denied", async ()
     render(<App session={session} />);
     expect(screen.getByRole("button", { name: "Play" })).toBeTruthy();
     expect(screen.queryByRole("alert")).toBeNull();
+    expect(screen.getByRole("status").textContent).toContain("Progress cannot be saved");
     expect(session.store.getState().loadFailed).toBe(true);
     await session.dispose();
   } finally {

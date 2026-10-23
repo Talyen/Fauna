@@ -148,8 +148,20 @@ export function boundaryViolations(file, source) {
       fail(`Renderer imports privileged implementation: ${specifier}`);
     if (
       ui &&
+      !declaration?.typeOnly &&
       /^src\/game\/(?:(?:journey|team)|combat\/(?:abilities|resolution|operations|damage|protection|statuses|lifecycle|turns))(?:\.ts)?$/.test(
         target,
+      ) &&
+      // This selector reads committed state; importing its module's mutators remains forbidden.
+      !(
+        target.replace(/\.ts$/, "") === "src/game/team" &&
+        declaration?.type === "ImportDeclaration" &&
+        declaration.specifiers.length > 0 &&
+        declaration.specifiers.every(
+          (specifier) =>
+            specifier.type === "ImportSpecifier" &&
+            (specifier.imported?.value ?? specifier.local?.value) === "pendingReplacement",
+        )
       )
     )
       fail("UI must use application commands and read-only previews.");

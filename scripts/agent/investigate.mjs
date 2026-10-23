@@ -12,7 +12,7 @@ export function investigationArgs(root, args) {
   const [kind, ...inputs] = args;
   if (["types", "static", "build"].includes(kind) && !inputs.length)
     return ["run", { types: "check:types", static: "check:full", build: "build" }[kind]];
-  if (kind === "unit" && inputs.length) {
+  if (kind === "unit") {
     const files = selectPaths(root, inputs);
     if (
       files.some(
@@ -33,7 +33,7 @@ export function investigationArgs(root, args) {
   if (kind === "performance" && inputs.length === 1 && ["battle", "swap", "menus"].includes(inputs[0]))
     return ["run", "perf", "--", "--scenario", inputs[0]];
   throw new Error(
-    "Usage: npm run verify:changed -- --diagnostic types|static|build|unit <suite files>|browser <route>|performance <battle|swap|menus>",
+    "Usage: npm run verify:changed -- --diagnostic types|static|build|unit [suite files]|browser <route>|performance <battle|swap|menus>",
   );
 }
 

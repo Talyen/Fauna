@@ -283,8 +283,8 @@ describe("isolated worktrees and protected integration", { timeout: 15_000 }, ()
     ]);
     expect(readFileSync(path.join(root, "main-only.txt"), "utf8")).toContain("concurrent");
     expect(git(root, "show", "HEAD:Docs/workflow.md")).toContain("Task change");
-    expect(existsSync(task.path)).toBe(false);
-    expect(git(root, "branch", "--list", task.branch)).toBe("");
+    expect(existsSync(task.path)).toBe(true);
+    expect(git(root, "branch", "--list", task.branch)).toContain(task.branch);
   });
 
   it("audits without removal, archives ignored artifacts and preserves dirty or unmerged tasks", async () => {
@@ -327,7 +327,7 @@ describe("isolated worktrees and protected integration", { timeout: 15_000 }, ()
     expect(git(unmerged.path, "show", "HEAD:feature.txt")).toBe("unique work");
   });
 
-  it("reports incomplete cleanup after integration when a task worktree is locked", async () => {
+  it("integrates a locked task without retiring its checkout", async () => {
     const root = repo();
     const task = createWorktree(root, "locked-integration");
     put(task.path, "feature.txt", "reviewed change");
@@ -339,7 +339,7 @@ describe("isolated worktrees and protected integration", { timeout: 15_000 }, ()
         runner: () => ({ status: 0 }),
         log: () => {},
       }),
-    ).resolves.toMatchObject({ integrated: true, cleanup: { status: "pending" } });
+    ).resolves.toMatchObject({ integrated: true, worktree: task.path });
     expect(git(root, "show", "HEAD:feature.txt")).toBe("reviewed change");
     expect(existsSync(task.path)).toBe(true);
     git(root, "worktree", "unlock", task.path);

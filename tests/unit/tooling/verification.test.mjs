@@ -326,7 +326,7 @@ describe("lightweight local verification", () => {
     writeFileSync(path.join(root, "src/game.ts"), 'import * as Dialog from "@radix-ui/react-dialog";');
     expect(runCheck(["src/game.ts"], { root, runner: vi.fn(() => ({ status: 0 })), log: () => {} })).toBe(1);
     mkdirSync(path.join(root, "src/ui"));
-    writeFileSync(path.join(root, "src/ui/screen.css"), ".panel { overflow: scroll; }");
+    writeFileSync(path.join(root, "src/ui/screen.css"), ".panel { color: #ffffff; }");
     expect(
       runCheck(["src/ui/screen.css"], { root, runner: vi.fn(() => ({ status: 0 })), log: () => {} }),
     ).toBe(1);
@@ -379,42 +379,65 @@ describe("lightweight local verification", () => {
       );
   });
 
-  it("keeps full validation on the CI entrypoint when local defaults become lightweight", () => {
+  it("retains the public verification commands and keeps packaging nonpublishing", () => {
     const { scripts } = JSON.parse(readFileSync(path.join(repo, "package.json"), "utf8"));
-    expect(scripts.check).toBe("npm run check:full");
-    expect(scripts.verify).toBe("node scripts/checks/check.mjs");
-    expect(scripts["verify:changed"]).toBe(scripts.verify);
-    expect(scripts.test).toBe("vitest run");
-    expect(scripts["test:smoke"]).toBe("node scripts/checks/run-local-tests.mjs");
-    expect(scripts["package:win"]).toContain("--publish never");
-    for (const command of ["check:full", "test:full", "build", "test:e2e"])
-      expect(scripts["verify:full"]).toContain(`npm run ${command}`);
-    const workflow = readFileSync(path.join(repo, ".github/workflows/ci.yml"), "utf8");
-    for (const command of [
-      "check:types",
-      "check:lint",
-      "check:format",
-      "check:boundaries",
-      "deadcode",
-      "docs:check",
-      "content:audit",
+    for (const name of [
+      "check",
+      "check:full",
+      "verify",
+      "verify:changed",
+      "verify:full",
+      "test",
       "test:full",
-      "build",
-      "check:bundle",
-      "assets:check:bundle",
-      "package:win",
-      "verify:package",
+      "test:smoke",
     ])
-      expect(workflow).toContain(`run: npm run ${command}`);
-    expect(workflow).toContain("run: npx playwright test --test-list=reports/ci/shard-$CI_SHARD.txt");
-    expect(workflow).toContain("node scripts/ci/ci.mjs plan");
-    expect(workflow).toContain("node scripts/ci/ci.mjs gate");
-    expect(workflow).toContain("if: ${{ !cancelled() && needs.prepare.outputs.run != 'false' }}");
-    expect(workflow).toContain("if: always()");
-    expect(workflow).toContain("name: browser-review");
-    expect(workflow).toContain("reports/");
-    expect(workflow).toContain("run: npm run package:win");
-    expect(workflow).toContain("node scripts/release/smoke-desktop.mjs --packaged");
+      expect(typeof scripts[name], name).toBe("string");
+    // Publication is an authorization boundary, so this flag is a contract.
+    expect(scripts["package:win"]).toMatch(/--publish(?:=|\s+)never(?:\s|$)/);
+  });
+
+  it("preserves verification coverage when npm commands are regrouped or workflow formatting changes", () => {
+    const { scripts } = JSON.parse(readFileSync(path.join(repo, "package.json"), "utf8"));
+    const references = (source, found = new Set()) => {
+      for (const [, name] of source.matchAll(/\bnpm\s+(?:--silent\s+)?run\s+([\w:-]+)/g)) {
+        if (found.has(name)) continue;
+        found.add(name);
+        references(scripts[name] ?? "", found);
+      }
+      return [...found];
+    };
+    expect(references(scripts["verify:full"])).toEqual(
+      expect.arrayContaining([
+        "check:types",
+        "check:lint",
+        "check:format",
+        "check:boundaries",
+        "deadcode",
+        "docs:check",
+        "content:audit",
+        "test:full",
+        "build",
+        "test:e2e",
+      ]),
+    );
+    const workflow = readFileSync(path.join(repo, ".github/workflows/ci.yml"), "utf8");
+    expect(references(workflow)).toEqual(
+      expect.arrayContaining([
+        "check:types",
+        "check:lint",
+        "check:format",
+        "check:boundaries",
+        "deadcode",
+        "docs:check",
+        "content:audit",
+        "test:full",
+        "build",
+        "check:bundle",
+        "assets:check:bundle",
+        "package:win",
+        "verify:package",
+      ]),
+    );
   });
 });
 

@@ -3,19 +3,12 @@ import { pathToFileURL } from "node:url";
 import { spawnSync } from "node:child_process";
 import { git, worktrees, assertClean } from "./lib/git.mjs";
 import { acquireIntegrationLock } from "./lib/integration-lock.mjs";
-import { removeMergedTask } from "./worktree-cleanup.mjs";
 import { npmCommand } from "./lib/npm-command.mjs";
 
 export async function integrate(
   root,
   branch,
-  {
-    runner = spawnSync,
-    log = console.log,
-    cleanup = removeMergedTask,
-    lockTimeoutMs = 30_000,
-    tests = [],
-  } = {},
+  { runner = spawnSync, log = console.log, lockTimeoutMs = 30_000, tests = [] } = {},
 ) {
   if (!/^(?:task|codex)\//.test(branch ?? "")) throw new Error("Provide a task/ or codex/ branch.");
   const release = await acquireIntegrationLock(root, {
@@ -50,18 +43,8 @@ export async function integrate(
       throw new Error("A branch advanced during verification; main was not advanced.");
     git(root, ["merge", "--ff-only", verifiedHead]);
     log(`Integrated ${branch} into main after the local gate. Full CI validation remains pending.`);
-    try {
-      const { archive } = cleanup(root, branch);
-      log(`Removed integrated task checkout and branch.${archive ? ` Artifacts: ${archive}` : ""}`);
-      return { integrated: true, commit: verifiedHead, cleanup: { status: "complete", archive } };
-    } catch (error) {
-      log(`Integration succeeded at ${verifiedHead}. Cleanup remains pending: ${error.message}`);
-      return {
-        integrated: true,
-        commit: verifiedHead,
-        cleanup: { status: "pending", reason: error.message },
-      };
-    }
+    log(`Retained ${task} and ${branch} for follow-up work and evidence. Cleanup is separate maintenance.`);
+    return { integrated: true, commit: verifiedHead, worktree: task };
   } finally {
     await release();
   }

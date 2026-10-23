@@ -87,7 +87,7 @@ export const topics = {
     ],
     docs: ["Docs/ARCHITECTURE.md", "Docs/UI.md"],
     headings: [
-      "Silent recovery policy",
+      "Recovery and persistent failures",
       "Recovery owners",
       "Save contract",
       "Cloud reconciliation and device preferences",

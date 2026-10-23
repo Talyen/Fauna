@@ -166,3 +166,17 @@ it("keeps extracted command helpers outside presentation", () => {
       boundaryViolations("src/ui/battle/fixture.ts", `import * as mutation from "@/game/${target}"`),
     ).toHaveLength(1);
 });
+
+it("allows the read-only replacement selector without admitting team mutations", () => {
+  const file = "src/ui/shell/game-shell.tsx";
+  expect(
+    boundaryViolations(file, 'import { pendingReplacement as pending } from "../../game/team";'),
+  ).toEqual([]);
+  for (const source of [
+    'import { swapBackup } from "../../game/team";',
+    'import { pendingReplacement, prepareLineup } from "../../game/team";',
+    'import * as team from "../../game/team";',
+    'const team = await import("../../game/team");',
+  ])
+    expect(boundaryViolations(file, source)).toHaveLength(1);
+});

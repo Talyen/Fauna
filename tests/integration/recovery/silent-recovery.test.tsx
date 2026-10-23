@@ -53,3 +53,31 @@ it("retains usable display controls after a failed preference read without an al
   expect(screen.getByRole("radio", { name: "Fullscreen" }).hasAttribute("disabled")).toBe(false);
   await session.dispose();
 });
+
+it("explains repeated rendering failure, keeps retrying and resets after healthy rendering", async () => {
+  vi.useFakeTimers();
+  vi.spyOn(console, "error").mockImplementation(() => {});
+  const diagnostics = createDiagnostics();
+  let broken = true;
+  function Scene() {
+    if (broken) throw new Error("repeated failure");
+    return <main>Recovered game</main>;
+  }
+  const view = () => (
+    <GameErrorBoundary diagnostics={diagnostics}>
+      <Scene />
+    </GameErrorBoundary>
+  );
+  const { rerender } = render(view());
+  await act(() => vi.advanceTimersByTimeAsync(1000));
+  expect(screen.queryByText(/could not display/)).toBeNull();
+  await act(() => vi.advanceTimersByTimeAsync(2000));
+  expect(screen.getByRole("status").textContent).toContain("could not display this screen");
+  broken = false;
+  await act(() => vi.advanceTimersByTimeAsync(4000));
+  expect(screen.getByRole("main").textContent).toBe("Recovered game");
+  await act(() => vi.advanceTimersByTimeAsync(30000));
+  broken = true;
+  rerender(view());
+  expect(screen.queryByText(/could not display/)).toBeNull();
+});

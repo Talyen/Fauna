@@ -10,7 +10,7 @@
 
 Integration is the single required final local gate. It holds the shared lock, incorporates current main, verifies the combined result and advances clean main only after success. A separate full changed-file check immediately before integration is unnecessary. Early checks are optional diagnostics; results are not cached. This avoids both duplicate required gates and persistent cache invalidation machinery.
 
-A busy lock waits up to 30 seconds; retry after its bounded wait without disturbing the owner. Dirty main, unfinished Git operations, failed checks and ambiguous conflicts preserve task work. Resolve understood conflicts in the task checkout and retry. Integration and cleanup have separate outcomes: an archival failure reports cleanup pending after successful integration. Cleanup archives ignored evidence and removes only this task's clean merged checkout and branch. Other unfinished tasks do not block completion.
+A busy lock waits up to 30 seconds; retry after its bounded wait without disturbing the owner. Dirty main, unfinished Git operations, failed checks and ambiguous conflicts preserve task work. Resolve understood conflicts in the task checkout and retry. Integration retains the task checkout, branch and evidence at their original paths. Optional cleanup is a separate operation that archives ignored evidence before removing eligible clean merged tasks. Other unfinished tasks do not block completion.
 
 [Worktree operations](scripts/README.md#worktree-operations) covers dependency sharing, recovery, archives and optional cleanup. Use `npm run deps` when task dependencies are missing or change; never install through a shared dependency link.
 
@@ -47,7 +47,7 @@ Local completion requires final diff review, any required rendered evidence, tas
 
 Focused verification and investigation needed for the task are authorized locally, including builds, named test suites and browser previews/captures. Use isolated profiles, run resource-heavy checks sequentially and close only owned processes. `verify:changed -- --diagnostic <mode>` bounds types, static checks, builds, named unit suites, browser routes and performance scenarios; [implementation details](scripts/README.md#task-check-implementation) are reference material.
 
-Full test matrices, packaging, coverage and extended performance sweeps run in [hosted CI](Docs/CI.md) by default. Broader local execution needs an explicit request. CI pending does not block local completion; report actual coverage and relevant unverified platforms. Input fingerprints detect repository changes during checks; captures retain their own reproducible identity. No check result is cached.
+Local verification needed for the task is authorized regardless of suite breadth. Run one resource-heavy command at a time, use one test worker, cap Node heap at 2 GiB and give each command a five-minute deadline; split longer investigations or use [hosted CI](Docs/CI.md). The diagnostic launcher enforces these limits, including `--diagnostic unit` for the full unit/DOM suite. A larger resource budget needs an explicit request; choosing more relevant tests within that budget does not. Hosted CI remains the default for packaging and extended matrices. CI pending does not block local completion; report actual coverage and relevant unverified platforms. Input fingerprints detect repository changes during checks; captures retain their own reproducible identity. No check result is cached.
 
 ### Documentation scope
 

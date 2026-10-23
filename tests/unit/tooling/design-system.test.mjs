@@ -3,22 +3,11 @@ import { describe, it, expect } from "vitest";
 import { sourceViolations } from "../../../scripts/checks/ui-contract.mjs";
 
 describe("design-system enforcement", () => {
-  it("rejects scrolling in CSS, utilities, and imperative navigation", () => {
-    for (const source of [
-      ".panel { overflow: auto; }",
-      ".panel { overflow-y: scroll; }",
-      ".panel { overflow: hidden auto; }",
-    ])
-      expect(sourceViolations("src/ui/screen.css", source).length).toBeGreaterThan(0);
-    for (const source of [
-      '<div className="overflow-x-auto" />',
-      "root.scrollBy({ top: 10 });",
-      "root.scrollIntoView();",
-      "root.scrollTo?.(0, 0);",
-      "root.scrollTop = 10;",
-    ])
-      expect(sourceViolations("src/ui/shared/navigation/screen.tsx", source).length).toBeGreaterThan(0);
-    expect(sourceViolations("src/ui/screen.css", ".surface { overflow: clip; }")).toEqual([]);
+  it("leaves bounded scrolling and reachability to the rendered layout contract", () => {
+    expect(sourceViolations("src/ui/screen.css", ".secondary-scroll-region { overflow-y: auto; }")).toEqual(
+      [],
+    );
+    expect(sourceViolations("src/ui/screen.tsx", "region.scrollBy({ top: 10 });")).toEqual([]);
   });
   it("rejects a screen bypassing shared controls, artwork and styling", () => {
     const violations = sourceViolations(
@@ -74,11 +63,11 @@ it("rejects handmade widgets and unregistered primitive escape hatches", () => {
   ).toEqual([]);
 });
 
-it("rejects color literals in code, named CSS colors and utility palette escapes", () => {
+it("rejects color literals in styling, named CSS colors and utility palette escapes", () => {
   for (const source of [
     '<Button className="text-amber-300" />',
     '<Button className="bg-white" />',
-    'const theme = { primary: "#ccaa66" };',
+    'const style = { color: "#ccaa66" };',
   ])
     expect(sourceViolations("src/ui/shared/navigation/screen.tsx", source).length).toBeGreaterThan(0);
   expect(
@@ -194,15 +183,37 @@ it("checks production syntax without policing comments, fixture markup or contai
   );
 });
 
-it("retains control, palette and scrolling guards for expressions and computed property access", () => {
+it("retains control and palette guards for styling expressions", () => {
   for (const source of [
     'const element = <div role={"switch"} />;',
     "const element = <Button className={`bg-red-500`} />;",
     'const element = React.createElement("button", {});',
     'const element = <div style={{ backgroundColor: "#ffffff" }} />;',
     'const element = <div style={{ background: "linear-gradient(90deg, #fff, #000)" }} />;',
-    'root["scrollIntoView"]();',
-    "root.scrollTop++;",
+  ])
+    expect(sourceViolations("src/ui/example.tsx", source)).not.toEqual([]);
+});
+
+it("allows color-like player copy and nonactivating container handlers", () => {
+  expect(
+    sourceViolations(
+      "src/ui/example.css",
+      '#abc::after { content: "#123"; background: url("art.svg#fff"); }',
+    ),
+  ).toEqual([]);
+  for (const source of [
+    'const issue = <p>Ticket {"#123"}</p>;',
+    'const label = "bg-red-500";',
+    '<div data-testid="bg-red-500" />',
+    "<div onPointerDown={trackGesture}><Button>Play</Button></div>",
+    "<div onClick={trackBubbledClick}><Button>Play</Button></div>",
+    'const metadata = { color: "red", primary: "#123" };',
+  ])
+    expect(sourceViolations("src/ui/example.tsx", source)).toEqual([]);
+  for (const source of [
+    'const classes = cn("bg-red-500");',
+    '<Button className={cn(enabled && "bg-[#fff]")} />',
+    '<div style={enabled ? { color: "red" } : { color: "var(--foreground)" }} />',
   ])
     expect(sourceViolations("src/ui/example.tsx", source)).not.toEqual([]);
 });

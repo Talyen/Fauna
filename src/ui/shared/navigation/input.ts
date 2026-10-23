@@ -14,6 +14,21 @@ export function moveFocus(direction: "left" | "right" | "up" | "down") {
       ),
     ).at(-1) ?? document;
   const focused = document.activeElement as HTMLElement | null;
+  if (
+    focused?.matches("[data-scroll-region]") &&
+    (root === document || root.contains(focused)) &&
+    (direction === "up" || direction === "down")
+  ) {
+    const top = focused.scrollTop;
+    const maximum = focused.scrollHeight - focused.clientHeight;
+    if ((direction === "down" && top < maximum - 1) || (direction === "up" && top > 1)) {
+      focused.scrollBy({
+        top: (direction === "up" ? -1 : 1) * focused.clientHeight * 0.75,
+        behavior: "instant",
+      });
+      return;
+    }
+  }
   const composite = focused?.closest('[role="tablist"], [role="radiogroup"], [role="slider"]');
   if (composite && (root === document || root.contains(composite))) {
     const horizontal = composite.getAttribute("aria-orientation") !== "vertical";

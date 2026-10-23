@@ -950,3 +950,39 @@ it("retains distinct recovery checkpoints after loading a backup and retrying sa
   expect(memory.getItem("fauna.save.v1.backup1")).toBe(newer);
   expect(memory.getItem("fauna.save.v1.backup2")).toBe(older);
 });
+
+it("explains consecutive save failures, preserves play and clears the notice after the latest state saves", async () => {
+  vi.useFakeTimers();
+  let failing = true;
+  let saved = "";
+  const write = vi.fn(async (data: string) => {
+    if (failing) throw new Error("disk full");
+    saved = data;
+  });
+  const session = createSession({
+    ...platform(JSON.stringify(run())),
+    saves: { readCandidates: async () => [{ source: "primary", data: JSON.stringify(run()) }], write },
+  });
+  try {
+    await session.load();
+    expect(session.command({ type: "endTurn" })).toBe(true);
+    await session.flush();
+    const committed = session.store.getState().game;
+    expect(session.store.getState().saveUnavailable).toBe(false);
+    await vi.advanceTimersByTimeAsync(5000);
+    await session.flush();
+    expect(write).toHaveBeenCalledTimes(2);
+    expect(session.store.getState().saveUnavailable).toBe(true);
+    expect(session.store.getState().game).toBe(committed);
+    failing = false;
+    expect(session.command({ type: "endTurn" })).toBe(true);
+    expect(await session.flush()).toBe(true);
+    expect(session.store.getState().saveUnavailable).toBe(false);
+    expect(JSON.parse(saved)).toEqual(session.store.getState().game);
+    await vi.advanceTimersByTimeAsync(5000);
+    expect(write).toHaveBeenCalledTimes(3);
+  } finally {
+    await session.dispose();
+    vi.useRealTimers();
+  }
+});

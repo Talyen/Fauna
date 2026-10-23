@@ -48,9 +48,11 @@ const widgetRoles = new Set([
 const palette =
   /\b(?:text|bg|border|ring|outline|decoration|accent|caret|divide|fill|stroke|from|via|to|shadow)-(?:(?:red|orange|amber|yellow|lime|green|emerald|teal|cyan|blue|sky|slate|zinc|neutral|stone|gray|indigo|violet|purple|fuchsia|pink|rose)-\d|(?:white|black)\b)/;
 const embeddedColor = /#[\da-f]{3,8}\b|\b(?:rgb|hsl|oklch|oklab|hwb|lab|lch)a?\(/i;
-const literalColor = /^(?:#[\da-f]{3,8}\b|(?:rgb|hsl|oklch|oklab|hwb|lab|lch)a?\()/i;
 const paintProperty =
   /^(?:color|background(?:Color|-color)?|borderColor|border-color|outlineColor|outline-color|fill|stroke)$/;
+const cssPaintProperty =
+  /^(?:--[\w-]+|color|background(?:-[\w-]+)?|border(?:-[\w-]+)?|outline(?:-[\w-]+)?|fill|stroke|(?:box|text)-shadow|(?:text-decoration|caret|accent|column-rule)-color)$/i;
+const paintValue = (value) => value.replace(/url\([^)]*\)/gi, "");
 const namedColor = /^(?:black|white|red|orange|yellow|green|blue|purple|pink|gray|grey|gold)$/i;
 const valueOf = (node) => (node?.type === "JSXExpressionContainer" ? valueOf(node.expression) : node?.value);
 const memberName = (node) =>
@@ -65,26 +67,20 @@ export function sourceViolations(file, source) {
   const violations = new Set();
   const fail = (message) => violations.add(`${file}: ${message}`);
   const presentation = file.startsWith("src/ui/") || file.startsWith("src/components/");
-  const scrolling = () =>
-    fail("Player UI cannot scroll. Reflow, resize artwork within its bounds, or paginate content.");
-  const imperativeScroll = () =>
-    fail("Player UI cannot scroll imperatively, including during focus navigation.");
   const colors = () => fail("Define literal colors in src/ui/tokens.css.");
   const controls = () => fail("Use shared shadcn control primitives instead of raw controls.");
 
   if (file.endsWith(".css")) {
     const css = source.replace(/\/\*[\s\S]*?\*\//g, "");
-    if (presentation && /\boverflow(?:-[xy])?\s*:\s*(?:hidden\s+)?(?:auto|scroll)\b/i.test(css)) scrolling();
     if (file !== "src/ui/tokens.css") {
-      if (/#[\da-f]{3,8}\b|\b(?:rgb|hsl|oklch|oklab|hwb|lab|lch)a?\(/i.test(css)) colors();
+      for (const [, property, raw] of css.matchAll(/(?:^|[;{])\s*([-\w]+)\s*:\s*([^;{}]+)/g)) {
+        const value = paintValue(raw);
+        if (cssPaintProperty.test(property) && embeddedColor.test(value)) colors();
+        if (cssPaintProperty.test(property) && namedColor.test(value.trim()))
+          fail("Use semantic theme tokens instead of named color literals.");
+      }
       if (/font-size\s*:\s*(?!var\()[\d.]/.test(css)) fail("Use the shared typography tokens.");
       if (/border-radius\s*:\s*(?!var\(|inherit)[\d.]/.test(css)) fail("Use the shared radius token.");
-      if (
-        /(?:color|background(?:-color)?|border-color|outline-color|fill|stroke)\s*:\s*(?:black|white|red|orange|yellow|green|blue|purple|pink|gray|grey|gold)\b/i.test(
-          css,
-        )
-      )
-        fail("Use semantic theme tokens instead of named color literals.");
     }
     if (file !== "src/ui/design-system.css") {
       if (/\.ui-(?:tab|switch|slider|radio)\b/.test(css))
@@ -100,11 +96,32 @@ export function sourceViolations(file, source) {
   if (file.startsWith("src/components/ui/") && !primitive)
     fail("Register a reviewed upstream shadcn primitive; custom controls are not allowed here.");
   const radixImports = new Set();
-  const inspectLiteral = (text) => {
-    if (typeof text !== "string" || !presentation) return;
-    if (literalColor.test(text.trim())) colors();
-    if (palette.test(text)) fail("Use semantic color tokens instead of utility palettes.");
-    if (/\boverflow(?:-[xy])?-(?:auto|scroll)\b/.test(text)) scrolling();
+  const inspectClasses = (node) => {
+    if (!node || typeof node !== "object" || !presentation) return;
+    const text = node.type === "TemplateElement" ? (node.cooked ?? node.raw) : valueOf(node);
+    if (typeof text === "string") {
+      if (embeddedColor.test(paintValue(text))) colors();
+      if (palette.test(text)) fail("Use semantic color tokens instead of utility palettes.");
+    }
+    for (const child of Object.values(node)) {
+      if (Array.isArray(child)) child.forEach(inspectClasses);
+      else if (child && typeof child === "object") inspectClasses(child);
+    }
+  };
+  const inspectStyle = (node) => {
+    if (!node || typeof node !== "object" || !presentation) return;
+    if (node.type === "KeyValueProperty") {
+      const key = valueOf(node.key),
+        value = valueOf(node.value);
+      if (paintProperty.test(key) && typeof value === "string") {
+        if (embeddedColor.test(paintValue(value))) colors();
+        if (namedColor.test(value)) fail("Use semantic theme tokens instead of named color literals.");
+      }
+    }
+    for (const child of Object.values(node)) {
+      if (Array.isArray(child)) child.forEach(inspectStyle);
+      else if (child && typeof child === "object") inspectStyle(child);
+    }
   };
   function visit(node) {
     if (!node || typeof node !== "object") return;
@@ -116,21 +133,18 @@ export function sourceViolations(file, source) {
       const dependency = node.source?.value;
       if (dependency?.startsWith("@radix-ui/")) radixImports.add(dependency);
     }
-    if (node.type === "StringLiteral") inspectLiteral(node.value);
-    if (node.type === "TemplateElement") inspectLiteral(node.cooked ?? node.raw);
     if (node.type === "KeyValueProperty") {
-      const key = valueOf(node.key),
-        value = valueOf(node.value);
-      if (presentation && paintProperty.test(key) && typeof value === "string" && embeddedColor.test(value))
-        colors();
-      if (presentation && paintProperty.test(key) && namedColor.test(value))
-        fail("Use semantic theme tokens instead of named color literals.");
-      if (presentation && /^overflow(?:[XY])?$/.test(key) && /^(?:hidden\s+)?(?:auto|scroll)$/.test(value))
-        scrolling();
+      if (valueOf(node.key) === "className") inspectClasses(node.value);
+      if (valueOf(node.key) === "style") inspectStyle(node.value);
+    }
+    if (node.type === "VariableDeclarator") {
+      if (/^(?:className|classes|classNames)$/.test(valueOf(node.id))) inspectClasses(node.init);
+      if (valueOf(node.id) === "style") inspectStyle(node.init);
     }
     if (node.type === "CallExpression") {
       const name = memberName(node.callee) ?? valueOf(node.callee);
-      if (presentation && ["scrollTo", "scrollBy", "scrollIntoView"].includes(name)) imperativeScroll();
+      if (["cn", "clsx", "cva"].includes(name))
+        node.arguments.forEach((argument) => inspectClasses(argument.expression));
       if (
         !primitive &&
         ["createElement", "jsx", "jsxs"].includes(name) &&
@@ -141,12 +155,6 @@ export function sourceViolations(file, source) {
       if ((node.callee?.type === "Import" || name === "require") && dependency?.startsWith("@radix-ui/"))
         radixImports.add(dependency);
     }
-    if (
-      presentation &&
-      ["AssignmentExpression", "UpdateExpression"].includes(node.type) &&
-      ["scrollTop", "scrollLeft"].includes(memberName(node.left ?? node.argument))
-    )
-      imperativeScroll();
     if (node.type === "JSXOpeningElement") {
       const tag = valueOf(node.name);
       if (!primitive && rawControls.has(tag)) controls();
@@ -154,10 +162,23 @@ export function sourceViolations(file, source) {
         fail("Game artwork must use ArtCard to preserve composition and states.");
       for (const attribute of node.attributes) {
         const name = valueOf(attribute.name);
+        if (name === "className") inspectClasses(attribute.value);
+        if (name === "style") inspectStyle(attribute.value);
+        if (presentation && paintProperty.test(name)) {
+          const value = valueOf(attribute.value);
+          if (typeof value === "string" && (embeddedColor.test(value) || namedColor.test(value))) colors();
+        }
         if (!primitive && name === "role" && widgetRoles.has(valueOf(attribute.value)))
           fail("Use the matching shadcn component instead of recreating widget roles.");
-        // Container keyboard handlers route Escape/navigation without making a widget.
-        if (!primitive && /^[a-z]/.test(tag ?? "") && ["onClick", "onPointerDown"].includes(name))
+        // A focusable click target is a control; bubbling and pointer gesture handlers alone are not.
+        if (
+          !primitive &&
+          /^[a-z]/.test(tag ?? "") &&
+          name === "onClick" &&
+          node.attributes.some(
+            (attr) => valueOf(attr.name) === "tabIndex" && Number(valueOf(attr.value)) >= 0,
+          )
+        )
           fail("Do not turn layout elements into controls; compose a shadcn primitive.");
       }
     }

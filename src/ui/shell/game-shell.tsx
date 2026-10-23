@@ -306,6 +306,11 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
           data-paused={paused || undefined}
           data-save-status={view.saveStatus}
         >
+          {view.saveUnavailable ? (
+            <p className="save-notice" role="status">
+              Progress cannot be saved right now; keep Fauna open while it retries
+            </p>
+          ) : null}
           {!view.cloud.blocking ? (
             <>
               {route === "home" ? <HomeScreen>{menuItems(true)}</HomeScreen> : null}
@@ -327,7 +332,7 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
               {route === "collection" ? (
                 <Collection game={game} controls={collectionControls} openMenu={backFromPage} />
               ) : null}
-              {route === "glossary" ? <GlossaryScreen scale={scale} back={backFromPage} /> : null}
+              {route === "glossary" ? <GlossaryScreen back={backFromPage} /> : null}
               {route === "settings" ? (
                 <Screen className="menu-screen settings-screen" aria-labelledby="menu-screen-title">
                   <header className="collection-heading">

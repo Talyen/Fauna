@@ -40,7 +40,7 @@ it("locates shared layout and recovery owners without adding unrelated task topi
   const root = path.resolve(import.meta.dirname, "../../..");
   const layout = taskContext(root, { topics: ["layout"] });
   expect(layout.topics).toEqual(["layout"]);
-  expect(layout.sections.map((section) => section.heading)).not.toContain("Silent recovery policy");
+  expect(layout.sections.map((section) => section.heading)).not.toContain("Recovery and persistent failures");
   expect(layout.sections.map((section) => section.heading)).toContain("Shared layout recipes");
   expect(layout.entries).toContain("src/ui/shared/navigation/pagination.tsx");
   const recovery = taskContext(root, { topics: ["recovery"] });
