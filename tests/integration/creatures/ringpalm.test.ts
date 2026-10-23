@@ -43,7 +43,8 @@ function seedFor(predicate: (rolls: number[]) => boolean) {
 }
 const damage = (events: GameEvent[], actorId = "ally-0") =>
   events.filter(
-    (event) => event.kind === "damage" && event.actorId === actorId && event.damageType === "stun",
+    (event): event is Extract<GameEvent, { kind: "damage" }> =>
+      event.kind === "damage" && event.actorId === actorId && event.damageType === "stun",
   );
 
 it("plays the approved one-Mana kit with detached previews and current-format resume", () => {
@@ -161,9 +162,11 @@ it.each(["actor", "enemies"] as const)("stops Harmonic Set repeats when the %s f
   const result = play(game);
   expect(damage(result.events)).toHaveLength(1);
   expect(result.events.some((event) => event.text === "Ringpalm repeats Harmonic Set")).toBe(false);
-  expect(result.events.filter((event) => event.status === "armor" && event.outcome === "gain")).toHaveLength(
-    fallen === "actor" ? 0 : 1,
-  );
+  expect(
+    result.events.filter(
+      (event) => event.kind === "status" && event.status === "armor" && event.outcome === "gain",
+    ),
+  ).toHaveLength(fallen === "actor" ? 0 : 1);
   if (fallen === "actor") expect(result.state.team[0]!.health).toBe(0);
 });
 
@@ -242,7 +245,6 @@ it.each([true, false])(
     const game = produce(ready("ringpalm-teamProtection", seed), (draft) => {
       draft.team[2]!.health = 0;
       draft.reserves.push({ ...draft.team[1]!, id: "backup", combat: freshCombat() });
-      draft.roster.push("mossguard");
       if (!block) for (const unit of draft.team) unit.block = 10;
       draft.reserves[0]!.health = 0;
     });
@@ -281,7 +283,6 @@ it("rejects invalid or unaffordable plays without spending RNG and retains the s
   expect(play(empty, "enemy-0").state).toBe(empty);
   let swapped = produce(game, (draft) => {
     draft.reserves.push({ ...draft.team[1]!, id: "backup", combat: freshCombat() });
-    draft.roster.push("mossguard");
   });
   swapped = swapFixture(swapped, { type: "swap", activeId: "ally-0", reserve: "backup" });
   swapped = decodeSave(encodeSave(swapped));
@@ -341,7 +342,11 @@ it.each(["Ringclap", "Harmonic Set", "Seedling Circle"])(
     if (name === "Seedling Circle") {
       expect(
         result.events
-          .filter((event) => (event.kind === "block" && (event.amount ?? 0) > 0) || event.status === "thorns")
+          .filter(
+            (event) =>
+              (event.kind === "block" && (event.amount ?? 0) > 0) ||
+              (event.kind === "status" && event.status === "thorns"),
+          )
           .every((event) => event.targetId?.startsWith("enemy-")),
       ).toBe(true);
     }

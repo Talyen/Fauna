@@ -17,11 +17,11 @@ export function investigationArgs(root, args) {
     if (
       files.some(
         (file) =>
-          !/^tests\/(?:unit|integration)\/.+\.test\.(?:[cm]?[jt]sx?)$/.test(file) ||
+          !/^tests\/(?:unit|integration|exhaustive)\/.+\.test\.(?:[cm]?[jt]sx?)$/.test(file) ||
           !existsSync(path.join(root, file)),
       )
     )
-      throw new Error("Choose existing unit/integration suite files.");
+      throw new Error("Choose existing unit/integration/exhaustive suite files.");
     return ["run", "test:full", "--", "--maxWorkers=1", "--no-file-parallelism", ...files];
   }
   if (

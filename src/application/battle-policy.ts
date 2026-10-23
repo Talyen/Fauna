@@ -7,7 +7,7 @@ import { actionValue, cardCost, physicalBonus } from "../game/ability-rules";
 import { definition, species } from "../game/content";
 import type { Command, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 26;
+export const BATTLE_POLICY_VERSION = 27;
 const BATTLE_FINISH_PRIORITY = 1_000_000_000;
 export interface BattleChoice {
   command: Command;
@@ -25,7 +25,12 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
     .filter((unit) => unit.health > 0)
     .map((unit) => {
       const all = [...state.team, ...state.reserves];
-      const ids = formationForSwap(all, state.lineup, outgoing?.id ?? "", unit.id);
+      const ids = formationForSwap(
+        all,
+        state.team.map((unit) => unit.id),
+        outgoing?.id ?? "",
+        unit.id,
+      );
       const lineup = ids
         .map((id) => all.find((entry) => entry.id === id)!)
         .filter((entry) => entry.health > 0);
@@ -72,6 +77,17 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
     if (!actor || actor.health === 0 || controlled(actor) || cardCost(card, state) > state.battle.mana)
       continue;
     const value = actionValue(card, actor, state);
+    const healing = Math.min(
+      species(actor.species).health - actor.health,
+      def.effects?.reduce(
+        (sum, effect) =>
+          sum +
+          (effect.kind === "heal"
+            ? Math.round(effect.amount * (hasTalent(state, "health.mending") ? 1.1 : 1))
+            : 0),
+        0,
+      ) ?? 0,
+    );
     if (def.effect === "procession") {
       const echoes = (state.battle.minions ?? []).filter(
         (unit) => unit.minion.ownerId === actor.id && unit.health > 0,
@@ -229,7 +245,7 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
     } else if (def.effect === "redraw") {
       add(id, state.battle.hand.length > 1 ? 190 : 0);
     } else if (def.effect === "draw") {
-      add(id, 200 + value);
+      add(id, healing > 0 ? 3000 + healing : 200 + value);
     } else if (def.effect === "teamBlind") {
       const useful = battlefield(state, "enemy").filter(
         (enemy) => enemy.health > 0 && !enemy.combat.blind && !enemy.combat.nullify,
@@ -280,23 +296,13 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
       const useful = state.team.filter((c) => c.health > 0 && !c.combat?.nullify).length;
       add(id, useful > 0 ? 150 + useful : 0);
     } else if (def.effect === "waterThorns") {
-      add(id, 100 + value);
+      const useful = Math.min(value, 1_000_000 - (actor.combat?.waterThorns ?? 0));
+      add(id, useful > 0 ? 100 + useful : 0);
     } else if (def.effect === "dodge") {
       add(id, 150 + Math.max(0, value - (actor.combat?.temporaryDodge ?? 0)));
     } else if (def.effect === "swap" || def.effect === "swapLowest") {
       add(id, 150);
     } else {
-      const healing = Math.min(
-        species(actor.species).health - actor.health,
-        def.effects?.reduce(
-          (sum, effect) =>
-            sum +
-            (effect.kind === "heal"
-              ? Math.round(effect.amount * (hasTalent(state, "health.mending") ? 1.1 : 1))
-              : 0),
-          0,
-        ) ?? 0,
-      );
       for (const ally of def.target === "self" ? [actor] : state.team.filter((c) => c.health > 0)) {
         const useful = Math.min(value, 1_000_000 - ally.block);
         add(

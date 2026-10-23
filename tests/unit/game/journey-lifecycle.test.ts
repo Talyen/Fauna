@@ -3,7 +3,7 @@ import { produce } from "immer";
 import { describe, expect, expectTypeOf, it } from "vitest";
 import { createGame, dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { chooseBattleCommand } from "../../../src/application/battle-policy";
+import { journeyBaselinePlays } from "./fixtures/journey-baseline-plays";
 import type { BattleState, Command, GameState, RewardState } from "../../../src/game/types";
 
 // Compare gameplay, RNG and ordered output across the current journey rules.
@@ -13,7 +13,7 @@ function fingerprint(state: GameState, events: unknown) {
     ...rest,
     journey: state.journey
       ? {
-          ...state.journey,
+          ...Object.fromEntries(Object.entries(state.journey).filter(([key]) => key !== "unlocks")),
           lastBattle: state.journey.lastBattle
             ? { xp: state.journey.lastBattle.xp, currency: state.journey.lastBattle.currency }
             : null,
@@ -72,11 +72,11 @@ describe("journey lifecycle behavior baseline", () => {
         step({ type: "buyBoon", visit: visit.id, slot: slot.slot });
         step({ type: "leaveSupport", visit: visit.id });
       }
-      if (state.expedition?.recruit && state.roster.length < 5)
+      if (state.expedition?.recruit && state.team.length + state.reserves.length < 5)
         step({ type: "recruitDestination", species: state.expedition.recruit });
       step({ type: "beginBattle" });
-      const command = chooseBattleCommand(state, false);
-      if (command.type === "play") {
+      const command = journeyBaselinePlays[seed]![room];
+      if (command) {
         const preview = previewCard(state, command.cardId, command.targetId);
         expect(state).toEqual(decodeSave(encodeSave(state)));
         trace.push(["preview", preview.accepted, fingerprint(preview.state, preview.events)]);
@@ -92,7 +92,7 @@ describe("journey lifecycle behavior baseline", () => {
         });
       }
       if (state.phase === "recruit" && state.reward.selectedRecruit !== undefined)
-        step({ type: "confirmRecruit", replace: state.lineup[0]! });
+        step({ type: "confirmRecruit", replace: state.team.map((unit) => unit.id)[0]! });
       if (state.phase === "boon") step({ type: "chooseBoon", boon: state.reward!.boons[0]! });
       if (state.phase === "victory" || state.phase === "defeat") break;
       state = produce(state, (draft) => {

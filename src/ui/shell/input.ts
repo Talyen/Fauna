@@ -1,4 +1,4 @@
-import { pendingReplacement } from "../../game/team";
+import type { ShellSurface } from "./navigation";
 import type { Session } from "../../application/session";
 import type { GameState } from "../../game/types";
 import type { SpeciesId } from "../../game/content";
@@ -18,9 +18,10 @@ interface ShellInputContext {
   menu: boolean;
   paused: boolean;
   game: GameState;
-  setInspection: (value: Inspection | null) => void;
-  setModal: (value: Modal) => void;
-  setMenu: (value: boolean) => void;
+  inspect: (value: Inspection | null) => void;
+  closeDialog: () => void;
+  closePause: () => void;
+  surface: ShellSurface;
   backFromPage: () => void;
   openMenu: () => void;
 }
@@ -37,9 +38,10 @@ export function routeInput(action: InputAction, context: ShellInputContext) {
     gameControls,
     paused,
     game,
-    setInspection,
-    setModal,
-    setMenu,
+    inspect,
+    closeDialog,
+    closePause,
+    surface,
     backFromPage,
     openMenu,
   } = context;
@@ -56,18 +58,20 @@ export function routeInput(action: InputAction, context: ShellInputContext) {
   if (inspection && inspectionControls.current?.(action)) return;
   if (!inspection && route === "collection" && collectionControls.current?.(action)) return;
   if (action === "back") {
-    if (route === "play" && pendingReplacement(game) && !inspection && !modal && !menu) return;
-    if (inspection) {
-      setInspection(null);
-      return;
-    }
-    if (modal) {
-      setModal(null);
-      return;
-    }
-    if (menu) {
-      setMenu(false);
-      return;
+    switch (surface) {
+      case "replacement":
+        return;
+      case "inspection":
+        inspect(null);
+        return;
+      case "dialog":
+        closeDialog();
+        return;
+      case "pause":
+        closePause();
+        return;
+      case "page":
+        break;
     }
     if (route === "talents" && talentControls.current?.(action)) return;
     if (["talents", "collection", "settings", "glossary"].includes(route)) {
@@ -102,9 +106,9 @@ export function routeInput(action: InputAction, context: ShellInputContext) {
       (c) => c.id === focused?.closest<HTMLElement>("[data-card-id]")?.dataset.cardId,
     );
     const kind = focused?.closest<HTMLElement>("[data-species]")?.dataset.species as SpeciesId | undefined;
-    if (card) setInspection({ card });
+    if (card) inspect({ card });
     else if (kind)
-      setInspection({
+      inspect({
         species: kind,
         enemyId: focused?.closest<HTMLElement>("[data-enemy-id]")?.dataset.enemyId,
         creatureId: focused?.closest<HTMLElement>("[data-actor-id]")?.dataset.actorId,

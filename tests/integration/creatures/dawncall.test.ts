@@ -45,7 +45,10 @@ function rehand(game: GameState, id: string) {
     draft.battle!.hand.unshift(card.id);
   });
 }
-const attacks = (events: GameEvent[]) => events.filter((e) => e.kind === "damage" && e.actorId === "ally-0");
+const attacks = (events: GameEvent[]) =>
+  events.filter(
+    (e): e is Extract<GameEvent, { kind: "damage" }> => e.kind === "damage" && e.actorId === "ally-0",
+  );
 
 it("uses the approved one-Mana kit with deterministic previews and current-format resume", () => {
   expect(
@@ -117,7 +120,6 @@ it("Cleanses one category per living deployed ally before drawing and leaves Ear
     for (const ally of draft.team) Object.assign(ally.combat!, { burn: 2, poison: 3 });
     draft.team[2]!.health = 0;
     draft.reserves.push({ ...draft.team[1]!, id: "backup", combat: { ...freshCombat(), burn: 2 } });
-    draft.roster.push("mossguard");
     draft.reserves[0]!.health = 0;
   });
   const result = play(game);
@@ -147,7 +149,6 @@ it("Morning Bloom heals all living deployed allies by two without reviving or he
     draft.team[1]!.health = 31;
     draft.team[2]!.health = 0;
     draft.reserves.push({ ...draft.team[1]!, id: "backup", health: 10, combat: freshCombat() });
-    draft.roster.push("mossguard");
     draft.reserves[0]!.health = 0;
   });
   const result = play(game);
@@ -164,7 +165,6 @@ it("Morning Bloom heals all living deployed allies by two without reviving or he
 it("retains the opening receipt through swaps and resume, resets in backup and at a new battle", () => {
   let game = produce(play(ready()).state, (draft) => {
     draft.reserves.push({ ...draft.team[1]!, id: "backup", combat: freshCombat() });
-    draft.roster.push("mossguard");
   });
   game = swapFixture(game, { type: "swap", activeId: "ally-0", reserve: "backup" });
   game = decodeSave(encodeSave(game));
@@ -173,7 +173,7 @@ it("retains the opening receipt through swaps and resume, resets in backup and a
   expect(game.reserves[0]!.combat!.firstAttackUsed).toBe(false);
   game = swapFixture(game, { type: "swap", activeId: "backup", reserve: "ally-0" });
   const result = play(rehand(game, "dawncall-attack"));
-  expect(attacks(result.events).every((event) => event.critical)).toBe(true);
+  expect(attacks(result.events).every((event) => event.kind === "damage" && event.critical)).toBe(true);
   game = produce(result.state, (draft) => {
     prepareDestination(draft);
   });
@@ -199,7 +199,9 @@ it("does not spend Early Bird on rejected commands, retaliation or periodic dama
     }),
   );
   expect(attacks(missed.events)).toHaveLength(0);
-  expect(missed.events.filter((event) => event.outcome === "dodge")).toHaveLength(3);
+  expect(missed.events.filter((event) => event.kind === "status" && event.outcome === "dodge")).toHaveLength(
+    3,
+  );
   expect(missed.state.team[0]!.combat!.firstAttackUsed).toBe(true);
 });
 
@@ -240,17 +242,27 @@ it.each([
   ).toBe(true);
   if (name === "Dawn Cry") {
     const removed = result.events.filter(
-      (event) => event.outcome === "remove" && event.status === "cleanse" && event.affectedStatus,
+      (event) =>
+        event.kind === "status" &&
+        event.outcome === "remove" &&
+        event.status === "cleanse" &&
+        event.affectedStatus,
     );
     expect(removed).toHaveLength(2);
-    expect(removed.every((event) => event.affectedStatus === "freeze")).toBe(true);
+    expect(removed.every((event) => event.kind === "status" && event.affectedStatus === "freeze")).toBe(true);
     expect(result.state.team.every((unit) => unit.combat!.burn === 0)).toBe(true);
   } else if (name === "Sunwing Sweep") {
-    const damage = result.events.filter((event) => event.kind === "damage" && event.actorId === "enemy-0");
-    expect(damage).toHaveLength(3);
-    expect(damage.every((event) => event.damageType === "light" && event.targetId!.startsWith("ally-"))).toBe(
-      true,
+    const damage = result.events.filter(
+      (event): event is Extract<GameEvent, { kind: "damage" }> =>
+        event.kind === "damage" && event.actorId === "enemy-0",
     );
+    expect(damage).toHaveLength(3);
+    expect(
+      damage.every(
+        (event) =>
+          event.kind === "damage" && event.damageType === "light" && event.targetId!.startsWith("ally-"),
+      ),
+    ).toBe(true);
   } else {
     expect(
       result.events.filter(

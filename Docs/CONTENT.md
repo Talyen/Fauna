@@ -8,7 +8,7 @@ Use [Creature design](CREATURE_DESIGN.md) for artwork-led kits, budgets and Boss
 
 ## Ability costs
 
-Every ability, for every creature, has a base cost of exactly **1 Mana**. This applies to all current and future action cards, including attacks, defense, healing and utility. Balance abilities through their damage, protection, status effects and other values rather than varying their authored Mana cost. Card upgrades retain the same base cost. Explicit gameplay modifiers such as talents that make a play free still apply at runtime.
+All authored abilities cost exactly **1 Mana**, including generated cards and upgrades. Balance their effects and values instead of their cost. Explicit gameplay modifiers may make a play free.
 
 ## Ability balance and targeting
 
@@ -68,7 +68,7 @@ npm run assets:review        # Generate original/prepared comparisons and a cont
 npm run assets:check:bundle  # Verify an existing build's exact active media inventory and budgets
 ```
 
-Artwork review writes `reports/art-review/index.html`, a contact sheet of optimized selections and a size summary. Inspect the comparison at 2× display density and use CI's actual hand, creature, Collection and inspection evidence for visual acceptance. This review does not establish in-game rendering quality or physical-device acceptance.
+Artwork review writes `reports/art-review/index.html`, a contact sheet of optimized selections and a size summary. Inspect comparisons at 2× display density, then follow [UI review](UI.md#required-review) for current hand, creature, Collection and inspection evidence. This review does not establish in-game rendering quality or physical-device acceptance.
 
 Runtime artwork/audio resolves stable IDs through the generated lookup. Ordinary development and production builds run output-only checks; they never regenerate media or need access to the library. The build disables automatic public-directory copying and emits only the active lookup's files plus its build receipt. Authoring originals, cache receipts and old generations stay out of the shipped renderer. Build validation rejects extra/missing media, changed bytes and unapproved public resources, with a 128 MiB total-media limit and 3 MiB limit per image. JavaScript retains its separate measured budget. Historical outputs can remain available locally without increasing each new build; cleanup is separate and explicit. The object layout reuses unchanged assets across selections.
 
@@ -78,17 +78,11 @@ Recorded sounds cover typed combat outcomes, healing, defense, rejected actions,
 
 ## Boon selections
 
-All 18 Boons use the corresponding portrait WebP files copied from `Alchemy: src/assets/optimized/` into `public/art/boons/`. The manifest records each source, provenance and output hash. Prepared assets are Fauna-owned copies with no sibling runtime dependency. Boon IDs and displayed rules are authored in `src/game/content/boons.ts`; combat effects are executed in `src/game/combat/`; intermediate-boss cadence is unchanged.
+[boons.ts](../src/game/content/boons.ts) owns available Boons, IDs and displayed rules; [combat execution](../src/game/combat/) and its [Boon regressions](../tests/unit/game/boons.test.ts) define timing, caps, actual-outcome triggers and recursion limits. Use those owners for exact values rather than maintaining a second catalog here.
 
-The 18 Boons share the same unowned reward and Merchant pools. Meteorite doubles the first allied direct Burn hit each battle, including supplemental Burn; a Dodge does not consume it. Its battle-wide receipt survives saves and swaps and resets only at the next battle. Sin-Eater's Lantern restores 6 Health per harmful effect actually removed by Cleanse and combines with Renewal. Thunderstone deals one derived 6 Nature damage packet when an allied hit successfully Stuns an enemy; it does not reapply statuses or retaliate. Grove's Favor grants the healed creature 1 Thorns per actual allied healing packet in battle; full-Health attempts and Campfire recovery grant none. Prepared portraits still require rendered review.
+Portraits are unchanged WebP selections copied from `Alchemy: src/assets/optimized/`; the manifest records per-file sources, rights and hashes. Prepared copies have no sibling runtime dependency. Light replaces Alchemy's Holy terminology. Forge, Wish, Potion and Companion Boons are excluded because Fauna lacks their mechanics; Consume-dependent Boons and talents are excluded despite Pearls using Consume.
 
-The remaining compatible Alchemy Boons are Brass Censer, Parasitic Bloom, Cutpurse Knife, Merchant's Favor, Plague Doctor's Mask, Sundering Charm, Resonant Chimes, Smuggler's Map, Frozen Pocketwatch and Lucky Clover. Light replaces Alchemy's Holy wording. Forge, Wish, Potion and Companion Boons remain excluded because Fauna has no matching mechanics. Consume exists on Pearls, but Consume-dependent Boons and talents remain excluded from this catalog.
-
-Brass Censer gives allied Light hits a 20% chance to either deal their damage again as Burn or Leech, with an equal split. Parasitic Bloom gives allied Poison hits and attributed ticks a 10% chance to Leech. Cutpurse Knife grants 1 Gold per allied Bleed hit or attributed tick that removes Health. Lucky Clover gives allied Nature hits a 10% chance to grant Gold equal to Health lost. These effects use seeded combat randomness and existing capped earnings and healing owners; derived damage cannot recursively trigger Brass Censer or Lucky Clover.
-
-Sundering Charm removes 2 enemy Armor before Physical or Stun hit mitigation, after Dodge. Frozen Pocketwatch extends enemy Freeze to two skipped turns, followed by the existing shared immunity. Before allied turn-start damage, Plague Doctor's Mask removes up to 2 Poison from each living creature, including backup, and deals half the removed amount (rounded normally) as Poison to the first living enemy. Fully removing Poison triggers Cleanse rewards; partial stack removal does not.
-
-Resonant Chimes refunds 1 shared Mana after the third accepted card of each turn, before automatic end turn. Repeated card effects count once. Its capped battle-wide counter survives previews, swaps and resume and resets each turn and battle. Merchant’s Favor reduces each new stock slot’s rolled price by 7 Gold, from 20–40 to 13–33 inclusive when stock is prepared; the one-purchase visit limit still applies. Smuggler's Map adds 2 Gold to victory rewards, including bosses, using ordinary settlement and retained-earnings limits.
+[Journey rules](EXPEDITION_DESIGN.md#currency-and-items) own reward pools and journey-only ownership; [Merchant rules](EXPEDITION_DESIGN.md#optional-support-visits) own stock and prices. Inspect new portraits through the UI review procedure.
 
 ## Support encounter content
 
@@ -102,9 +96,9 @@ Combat music uses `music.fernwood`; that historical source ID does not imply bio
 
 ## Creature passive tiers
 
-Each species in `src/game/content.ts` owns six `passiveTiers`, indexed by stars from zero through five. The first recruitment collects the species at zero stars; the sixth reaches five. Counts persist across journeys and cap at six. Committing the first onboarding starter supplies one initial copy. Later starter drafts and encounter discovery do not grant copies.
+Each species defines six complete `passiveTiers`, indexed by zero through five stars. Every tier must differ in gameplay effects from every other tier: amounts, chances or mechanics may change; wording, property order and effect order alone do not qualify. Each tier replaces the entire previous passive, so retain all intended effects explicitly. Types require six entries and catalog validation rejects duplicate effect sets.
 
-Every species must define all six tiers, and each tier must have different gameplay effects from every other tier. Scaling effect amounts or chances is the usual approach; new mechanics can also distinguish tiers. Changed wording, object property order or effect order alone does not count. The type contract requires six defined entries, and catalog validation rejects missing or duplicate effect sets. A tier replaces the whole previous passive rather than adding to it; include all retained effects in its effect list. Tiers can compose card bonuses, opening defenses and recurring effects. Favor species-exclusive mechanics independent of named abilities. New mechanics belong in the typed passive effect contract and its gameplay consumers alongside matching descriptions and regression coverage. Player rules, previews and inspection use the tier at the permanent rank. Enemies always use the base tier. Inspection shows only the active tier and current progress stars, following the [inspection contract](ui/screens.md#creature-and-action-inspection).
+Favor species-exclusive mechanics independent of named abilities. Add new mechanics to the typed passive contract, execution, descriptions and focused regressions together. Player rules and previews use permanent rank; enemies use the base tier. [Journey progression](EXPEDITION_DESIGN.md#collection-and-passive-ranks) owns copy counts and ranks; [inspection](ui/screens.md#creature-and-action-inspection) owns disclosure.
 
 ## Battle pile artwork
 

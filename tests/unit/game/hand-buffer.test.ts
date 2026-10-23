@@ -6,6 +6,30 @@ import { dispatch } from "../../../src/game/engine";
 import { previewPlay } from "../../../src/game/preview";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { prepareDestination, accept, run } from "../../support/game";
+import { draw } from "../../../src/game/card-zones";
+import { shuffle } from "../../../src/game/random";
+
+it.each([false, true])("preserves seeded draw recycling with all owners knocked out: %s", (allDead) => {
+  const initial = produce(run(), (state) => {
+    state.team[1]!.health = 0;
+    state.team[2]!.health = 0;
+    if (allDead) state.team[0]!.health = 0;
+    state.rng = 17;
+    const ids = state.cards.map((card) => card.id);
+    state.battle!.hand = [];
+    state.battle!.buffer = [];
+    state.battle!.draw = [ids[0]!, ids[3]!];
+    state.battle!.discard = [ids[1]!, ids[4]!, ids[2]!, ids[5]!];
+  });
+  const ids = initial.cards.map((card) => card.id);
+  const random = { ...initial };
+  const recycled = shuffle(random, allDead ? [ids[1]!, ids[4]!, ids[2]!, ids[5]!] : [ids[1]!, ids[2]!]);
+  const result = produce(initial, (state) => draw(state, allDead ? 6 : 3));
+  expect(result.battle!.hand).toEqual([...(allDead ? [ids[3]!, ids[0]!] : [ids[0]!]), ...recycled.reverse()]);
+  expect(result.battle!.draw).toEqual(allDead ? [] : [ids[3]!]);
+  expect(result.battle!.discard).toEqual(allDead ? [] : [ids[4]!, ids[5]!]);
+  expect(result.rng).toBe(random.rng);
+});
 
 function buffered() {
   return produce(run(), (d) => {
@@ -77,7 +101,6 @@ describe("hidden hand overflow", () => {
 
   it("preserves buffered card slots and switches their owner during a reserve swap", () => {
     const s = produce(run(), (d) => {
-      d.roster.push("pollenmoth");
       d.reserves.push({
         id: "recruit-pollenmoth",
         species: "pollenmoth",

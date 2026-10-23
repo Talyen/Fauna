@@ -26,7 +26,10 @@ it("Open Flank breaking Armor before Erosion triggers Molten Shell only once", (
   expect(enemy.combat.armor).toBe(0);
   expect(
     events
-      .filter((event) => event.kind === "damage" && event.actorId === enemy.id && event.damageType === "burn")
+      .filter(
+        (event): event is Extract<GameEvent, { kind: "damage" }> =>
+          event.kind === "damage" && event.actorId === enemy.id && event.damageType === "burn",
+      )
       .map((event) => event.targetId),
   ).toEqual(state.team.map((unit) => unit.id));
 });
@@ -45,7 +48,11 @@ it.each(["burn", "poison", "bleed"] as const)(
 
     tickStatuses(state, ally, events);
 
-    expect(events.some((event) => event.status === "cleanse" && event.affectedStatus === status)).toBe(true);
+    expect(
+      events.some(
+        (event) => event.kind === "status" && event.status === "cleanse" && event.affectedStatus === status,
+      ),
+    ).toBe(true);
     expect(ally.combat[status]).toBe(0);
     expect(ally.combat.statusSources[status]).toBeUndefined();
     const afterCleanse = ally.health;
@@ -71,7 +78,12 @@ it.each(["purge", "damage"] as const)(
 
     expect(ally.combat.armor).toBe(0);
     expect(ally.block).toBe(3);
-    expect(events.filter((event) => event.kind === "block" && event.amount === 3)).toHaveLength(1);
+    expect(
+      events.filter(
+        (event): event is Extract<GameEvent, { kind: "block" }> =>
+          event.kind === "block" && event.amount === 3,
+      ),
+    ).toHaveLength(1);
   },
 );
 
@@ -91,7 +103,7 @@ it("Sun-Struck Shield reflects Block spent rather than Reinforce's amplified abs
 
   expect(ally.block).toBe(0);
   expect(enemy.health).toBe(85);
-  expect(events.find((event) => event.damageType === "light")?.amount).toBe(15);
+  expect(events.find((event) => event.kind === "damage" && event.damageType === "light")?.amount).toBe(15);
 });
 
 it("pays Bleed Leech for damage already dealt even when Last Resort Cleanses the wound", () => {
@@ -138,10 +150,11 @@ it("cancels Thunderstone after Thorns knocks out the acting creature, retaining 
   expect(source.health).toBe(0);
   expect(target.combat.controlled).toBe("stun");
   expect(target.health).toBe(50);
-  expect(events.filter((event) => event.kind === "damage").map((event) => event.damageType)).toEqual([
-    "stun",
-    "nature",
-  ]);
+  expect(
+    events
+      .filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage")
+      .map((event) => event.kind === "damage" && event.damageType),
+  ).toEqual(["stun", "nature"]);
 });
 
 it("Last Resort removes active control and all six harmful buildups together", () => {

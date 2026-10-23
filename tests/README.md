@@ -4,7 +4,22 @@
 
 ## Test organization
 
-Focused suites are grouped by their contract owner under `tests/unit/`: `game/`, `application/`, `platform/`, `ui/`, `tooling/` and `simulation/`. Focused creature kits belong in `tests/unit/game/creatures/`; gameplay-only save round trips remain part of those suites. Kits that also exercise application policy or presentation belong in `tests/integration/creatures/`. Keep the complete scenario with its owning suite rather than splitting assertions to fit folders. Cross-layer scenarios live under `tests/integration/`: `creatures/` keeps complete kit, Auto-play, save/resume and presentation regressions together; `gameplay/` covers journey, resource and feedback contracts; `recovery/` covers recovery through application and presentation boundaries. Both groups are discovered by `vitest.config.ts` and run in the existing CI unit job, with the same per-suite Node or DOM environment. Do not split or remove valuable assertions merely to classify a suite. Put shared gameplay scenario builders in `tests/support/game.ts`, so browser suites do not depend on a unit-suite directory. Keep browser integration journeys in `tests/e2e/`, grouped by player flow; the complete starter-to-victory journey remains in `expedition.spec.ts`. Browser-only save setup, input simulation, layout contracts, rendered-evidence capture and journey driving belong in `tests/e2e/support/`. Moving a suite requires updating the declared owner suites and explicit route or documentation references, plus the fixed smoke selection when affected; the recursive full-suite discovery must include both groups.
+Keep complete scenarios with their contract owner; do not split or remove useful assertions to fit folders.
+
+| Location                       | Responsibility                                                                         |
+| ------------------------------ | -------------------------------------------------------------------------------------- |
+| `tests/unit/`                  | Focused game, application, platform, UI, tooling and simulation contracts              |
+| `tests/unit/game/creatures/`   | Gameplay-only kits, including their save round trips                                   |
+| `tests/integration/creatures/` | Complete cross-layer kit, Auto-play, save/resume and presentation scenarios            |
+| `tests/integration/gameplay/`  | Journey, resource and feedback contracts                                               |
+| `tests/integration/recovery/`  | Application/presentation recovery                                                      |
+| `tests/support/game.ts`        | Shared gameplay scenario builders, independent of unit-suite directories               |
+| `tests/e2e/`                   | Browser player flows; `expedition.spec.ts` retains the full starter-to-victory journey |
+| `tests/e2e/support/`           | Browser saves, input, layout, evidence capture and journey driving                     |
+
+`vitest.config.ts` discovers unit, integration and exhaustive suites in the same CI job, retaining each suite's Node or DOM environment. Moving suites requires updating declared owner suites, explicit routes/documentation and affected fixed smoke selections; recursive full discovery must retain all three groups.
+
+`tests/exhaustive/` contains extended matrices governed by the [local/CI selection policy](../CONTRIBUTING.md#verification). [The lineup scenarios](support/lineups.ts) share the same command limit, seeded identities, save round trips and terminal/abandonment assertions between five fixed local trios and [the complete ordinary-lineup matrix](exhaustive/roster-combinations.test.ts). Its local contracts include coverage checks for every distinct ordinary trio and full-suite discovery. Preserve all exhaustive cases and assertions when separating these tiers; retain focused contracts for the changed boundary.
 
 ## Test value and coverage
 
@@ -29,6 +44,8 @@ Owned Boons exhaust content and capture every page at minimum size; other viewpo
 Replacement and boss-victory activation/focus run with mouse, keyboard and simulated controller; reload/resume runs once per feature. Campfire geometry runs at both authored viewport profiles, with healing/persistence/next-battle behavior checked once. Startup screenshots attach to the owning test like other rendered evidence. Background-effects frame-pacing observations live in `tests/performance/effects.spec.ts`, run by `playwright.performance.config.ts` in the scheduled/manual performance workflow; ordinary browser CI retains the behavioral WebGL, reduced-motion and palette checks. Effect videos are opt-in with `FAUNA_EFFECT_VIDEO=1`, rather than encoding every passing journey. Failure traces retain DOM snapshots and network evidence without recording a redundant screenshot filmstrip for every passing action; distinct rendered captures remain attached, and failures get an automatic screenshot.
 
 Playwright listing verifies discovery only. Report measured execution time separately from case-count reductions; the CI browser report remains the runtime and rendered evidence source.
+
+## Static and accessibility checks
 
 The lint gate enforces Hooks, accessibility, promise ownership and React Compiler immutability/ref/effect diagnostics. Any exception must be local, explain the specific ownership or DOM lifecycle requirement, and preserve behavioral coverage; mutable DOM nodes do not justify disabling checks across the application. Native ARIA roles remain valid where changing tags could alter layout or control contracts. Type-aware template coercion, string-sort style and test mock method binding are outside this gate. Prototype design labels are excluded from label association checks; player UI keeps those checks.
 

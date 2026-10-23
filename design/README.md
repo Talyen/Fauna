@@ -1,6 +1,6 @@
 # Design references
 
-These samples record reviewed composition choices and historical alternatives. Some deliberately retain retired flows, smaller reserve cards, scrolling, synthetic errors or earlier colors. Descriptions below and linked study READMEs are snapshots of their recorded fixtures/decisions; their local controls and saved choices do not define current behavior. They are not current rendered acceptance evidence. See the canonical [UI rules](../Docs/UI.md) and [required review](../Docs/UI.md#required-review).
+These samples record reviewed composition choices and historical alternatives. Some deliberately retain retired flows, smaller reserve cards, scrolling, synthetic errors or earlier colors. Instructions for operating a study apply only to that sandbox. Review procedures and saved choices describe the recorded session, not a task to resume or current production behavior. They are not current rendered acceptance evidence. See the canonical [UI rules](../Docs/UI.md) and [required review](../Docs/UI.md#required-review).
 
 - [Battle layout and mana provenance](battle-layout/README.md)
 - [Menu options](menu-options/README.md)

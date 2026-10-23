@@ -1,12 +1,5 @@
-import {
-  swapFixture,
-  completeRecruitment,
-  accept,
-  policy,
-  run,
-  teamRun,
-  winBattle,
-} from "../../support/game";
+import type { GameEvent } from "../../../src/game/types";
+import { swapFixture, completeRecruitment, accept, run, teamRun, winBattle } from "../../support/game";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../../src/game/engine";
@@ -14,13 +7,14 @@ import { combat, freshCombat, hit } from "../../../src/game/combat/index";
 import { definition, species, SPECIES } from "../../../src/game/content";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { validateContent } from "../../../src/game/content-validation";
+import { expectSupportedLineup, ordinaryLineups } from "../../support/lineups";
 function expectDeeplyFrozen(value: unknown) {
   if (value === null || typeof value !== "object") return;
   expect(Object.isFrozen(value)).toBe(true);
   for (const child of Object.values(value)) expectDeeplyFrozen(child);
 }
 describe("game commands", () => {
-  it("validates authored content and starts with one unlocked creature and its three cards", () => {
+  it("validates authored content and starts with one collected starter and its three cards", () => {
     validateContent();
     let s = createGame(3);
     expect(dispatch(s, { type: "start" }).accepted).toBe(false);
@@ -33,7 +27,7 @@ describe("game commands", () => {
     expect(s.selected).toEqual([chosen]);
     s = accept(s, { type: "start" });
     s = accept(s, { type: "beginBattle" });
-    expect(s.roster).toEqual([chosen]);
+    expect([...s.team, ...s.reserves].map((unit) => unit.species)).toEqual([chosen]);
     expect(s.team).toHaveLength(1);
     expect(s.cards).toHaveLength(3);
     expect(s.battle!.hand).toHaveLength(3);
@@ -111,7 +105,10 @@ describe("game commands", () => {
     expect(r.state.battle!.mana).toBe(3);
     expect(r.state.battle!.enemies[0]!.health).toBe(14);
     expect(r.events.map((e) => e.kind)).toEqual(["action", "damage", "status"]);
-    expect(r.events.find((e) => e.kind === "damage")?.damageType).toBe("physical");
+    expect(
+      Array.from(r.events).find((e): e is Extract<GameEvent, { kind: "damage" }> => e.kind === "damage")
+        ?.damageType,
+    ).toBe("physical");
     expect(r.state.team[1]!.combat!.armor).toBe(2);
     expect(r.state.battleXP.armor).toBe(1);
     expect(r.state.battle!.discard).toContain(attack.id);
@@ -190,7 +187,7 @@ describe("game commands", () => {
     let s = winBattle();
     expect(dispatch(s, { type: "recruit", species: "prismram" }).accepted).toBe(false);
     s = accept(s, { type: "recruit", species: "emberback" });
-    expect(s.roster).toHaveLength(4);
+    expect([...s.team, ...s.reserves].map((unit) => unit.species)).toHaveLength(4);
     expect(s.team[0]!.species).toBe("mossguard");
     s = swapFixture(s, { type: "swap", activeId: "ally-0", reserve: s.reserves[0]!.id });
     expect(s.team[0]!.species).toBe("emberback");
@@ -199,7 +196,7 @@ describe("game commands", () => {
   });
   it("settles rewards once and preserves the complete eligible roster and permanent progress", () => {
     let s = run();
-    for (let battle = 0; battle < 3; battle++) {
+    for (let battle = s.encounter; battle < 8; battle++) {
       s = winBattle(s);
       const bank = s.currency;
       expect(dispatch(s, { type: "skipBoon" }).accepted).toBe(false);
@@ -210,57 +207,24 @@ describe("game commands", () => {
     }
     expect(s.phase).toBe("victory");
     expect(s.wins).toBe(1);
-    expect(s.unlocked.filter((id) => id === "prismram")).toHaveLength(1);
     const bank = s.currency;
     s = accept(s, { type: "newRun", seed: 123 });
     expect(s.currency).toBe(bank);
-    expect(s.unlocked).toContain("prismram");
-    expect(s.roster).toEqual([]);
+    expect([...s.team, ...s.reserves].map((unit) => unit.species)).toEqual([]);
   });
-  it("replays identical seeds and commands with identical results through complete expeditions", () => {
-    let a = run(7),
-      b = run(7);
-    for (let i = 0; i < 150 && !["victory", "defeat"].includes(a.phase); i++) {
-      const command = policy(a);
-      a = accept(a, command);
-      b = accept(b, command);
-      expect(b).toEqual(a);
-      expect(decodeSave(encodeSave(a))).toEqual(a);
-    }
-    expect(a.phase).toBe("victory");
-  });
-  const ordinarySpecies = SPECIES.filter((entry) => !entry.legendary);
-  for (let first = 0; first < ordinarySpecies.length - 2; first++)
-    for (let second = first + 1; second < ordinarySpecies.length - 1; second++)
-      for (let third = second + 1; third < ordinarySpecies.length; third++) {
-        const lineup = [first, second, third].map((index) => ordinarySpecies[index]!.name).join(", ");
-        it(`supports ${lineup} without engine failures or invalid saves`, () => {
-          let s = teamRun(
-            first * 100 + second * 10 + third,
-            [first, second, third].map((index) => ordinarySpecies[index]!.id),
-          );
-          for (let i = 0; i < 500 && !["victory", "defeat"].includes(s.phase); i++) {
-            s = accept(s, policy(s));
-            decodeSave(encodeSave(s));
-          }
-          // Support-heavy teams can sustain combat; their escape must still bank progress safely.
-          if (!["victory", "defeat"].includes(s.phase)) {
-            const progress = { ...s.keywordXP };
-            const earned = { ...s.battleXP };
-            s = accept(s, { type: "abandon" });
-            expect(s.phase).toBe("defeat");
-            expect(s.reward).toBeNull();
-            expect(Object.values(s.battleXP).every((amount) => amount === 0)).toBe(true);
-            for (const keyword of Object.keys(earned) as (keyof typeof earned)[])
-              expect(s.keywordXP[keyword]).toBe((progress[keyword] ?? 0) + earned[keyword]!);
-            expect(decodeSave(encodeSave(s))).toEqual(s);
-          }
-          expect(
-            ["victory", "defeat"],
-            `${[first, second, third].map((index) => ordinarySpecies[index]!.id).join(", ")} at encounter ${s.encounter}, turn ${s.battle?.turn}`,
-          ).toContain(s.phase);
-        });
-      }
+  const scenarios = ordinaryLineups();
+  for (const kinds of [
+    ["sternshell", "emberback", "mossguard"],
+    ["prismram", "cindernewt", "coralcurl"],
+    ["mossguard", "pollenmoth", "dawncall"],
+    ["reedstag", "ringpalm", "dunefox"],
+    ["glintstride", "chimecricket", "captoad"],
+  ] as const) {
+    const scenario = scenarios.find((entry) => kinds.every((kind) => entry.kinds.includes(kind)))!;
+    it(`supports representative lineup ${scenario.name} through commands and save round trips`, () => {
+      expectSupportedLineup(scenario);
+    });
+  }
 });
 describe("save validation", () => {
   it.each(["not json", "{}", JSON.stringify({ ...createGame(), version: 999 }), "x".repeat(100001)])(

@@ -81,7 +81,6 @@ it.each(["cadenza", "mossguard", "emberback"] as SpeciesId[])(
         { ...game.team[0]!, id: "backup-1" },
         { ...game.team[0]!, id: "backup-2", health: 0 },
       );
-      game.roster.push("mossguard", "mossguard");
     });
     const state = produce(winBattle(full), (game) => {
       game.reward!.recruits = [kind];
@@ -97,7 +96,9 @@ it.each(["cadenza", "mossguard", "emberback"] as SpeciesId[])(
     expect(confirmation.command).not.toHaveProperty("replace", state.team[1]!.id);
     const confirmed = dispatch(result.state, confirmation.command);
     expect(confirmed.accepted).toBe(true);
-    expect(confirmed.state.roster).toContain("rookhaven");
+    expect([...confirmed.state.team, ...confirmed.state.reserves].map((unit) => unit.species)).toContain(
+      "rookhaven",
+    );
   },
 );
 it("reports long absence of enemy Health progress without mistaking Minion damage for a boss defeat", () => {
@@ -131,8 +132,8 @@ it("improves a reserve instead of replacing a healthy Legendary with weaker solo
     game.team[0]!.health = 60;
     game.cards = ownedCards(game.team[0]!.id, "memento");
     game.discovery.recruited.memento = 1;
-    game.roster = ["memento", "captoad", "emberback", "bloomquail", "cadenza"];
-    game.reserves = game.roster.slice(1).map((kind, index) => ({
+
+    game.reserves = (["captoad", "emberback", "bloomquail", "cadenza"] as const).map((kind, index) => ({
       ...game.team[0]!,
       id: `reserve-${index}`,
       species: kind,
@@ -145,7 +146,7 @@ it("improves a reserve instead of replacing a healthy Legendary with weaker solo
   expect(selected.command).not.toHaveProperty("replace", state.team[0]!.id);
   const result = dispatch(state, selected.command);
   expect(result.accepted).toBe(true);
-  expect(result.state.lineup).toEqual(state.lineup);
+  expect(result.state.team.map((unit) => unit.id)).toEqual(state.team.map((unit) => unit.id));
   const confirmation = actor()(result.state);
   expect(confirmation.command).not.toHaveProperty("replace", state.team[0]!.id);
   const confirmed = dispatch(result.state, confirmation.command);
@@ -159,7 +160,6 @@ it("releases a reserve when a Legendary recruit would otherwise collapse a stron
       { ...game.team[0]!, id: "reserve-1", species: "cadenza", health: 0 },
       { ...game.team[0]!, id: "reserve-2", species: "mossguard", health: 0 },
     ];
-    game.roster.push("cadenza", "mossguard");
   });
   const state = produce(winBattle(full), (game) => {
     game.reward!.recruits = ["memento"];
@@ -174,7 +174,7 @@ it("releases a reserve when a Legendary recruit would otherwise collapse a stron
   ).toBe(true);
   const confirmed = dispatch(result.state, confirmation.command);
   expect(confirmed.accepted).toBe(true);
-  expect(confirmed.state.lineup).toEqual(state.lineup);
+  expect(confirmed.state.team.map((unit) => unit.id)).toEqual(state.team.map((unit) => unit.id));
 });
 
 it("keeps the team after recruitment when the full healthy roster and passive ranks cannot improve", () => {
@@ -183,9 +183,10 @@ it("keeps the team after recruitment when the full healthy roster and passive ra
     game.team[0]!.species = "memento";
     game.team[0]!.health = 60;
     game.cards = ownedCards(game.team[0]!.id, "memento");
-    game.roster = ["memento", "captoad", "emberback", "bloomquail", "cadenza"];
-    for (const kind of game.roster) game.discovery.recruited[kind] = 6;
-    game.reserves = game.roster.slice(1).map((kind, index) => ({
+
+    for (const kind of ["memento", "captoad", "emberback", "bloomquail", "cadenza"] as const)
+      game.discovery.recruited[kind] = 6;
+    game.reserves = (["captoad", "emberback", "bloomquail", "cadenza"] as const).map((kind, index) => ({
       ...game.team[0]!,
       id: `reserve-${index}`,
       species: kind,
@@ -201,6 +202,8 @@ it("keeps the team after recruitment when the full healthy roster and passive ra
   expect(confirmation.command).toEqual({ type: "confirmRecruit" });
   const confirmed = dispatch(result.state, confirmation.command);
   expect(confirmed.accepted).toBe(true);
-  expect(confirmed.state.roster).toEqual(state.roster);
-  expect(confirmed.state.lineup).toEqual(state.lineup);
+  expect([...confirmed.state.team, ...confirmed.state.reserves].map((unit) => unit.species)).toEqual(
+    [...state.team, ...state.reserves].map((unit) => unit.species),
+  );
+  expect(confirmed.state.team.map((unit) => unit.id)).toEqual(state.team.map((unit) => unit.id));
 });

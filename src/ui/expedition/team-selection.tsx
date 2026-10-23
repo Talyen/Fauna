@@ -32,7 +32,7 @@ export function TeamSelection({ game, send, recovery }: Props & { recovery?: Gam
     <Screen className="destinations-screen">
       <header className="destination-heading">
         <ScreenHeading>
-          Encounter {game.encounter + 1} of {game.expedition ? JOURNEY_LENGTH : 3}
+          Encounter {game.encounter + 1} of {JOURNEY_LENGTH}
         </ScreenHeading>
       </header>
       <section className="destination-grid" data-nav-row aria-label="Encounters">
@@ -40,13 +40,13 @@ export function TeamSelection({ game, send, recovery }: Props & { recovery?: Gam
         {canRecruitDestination(game) ? (
           <div className="destination-option">
             <CreatureCard
-              kind={game.expedition!.recruit!}
+              kind={game.expedition.recruit!}
               progression={game}
               readout={false}
               tooltipSide="right"
-              label={`Recruit ${species(game.expedition!.recruit!).name}`}
+              label={`Recruit ${species(game.expedition.recruit!).name}`}
               onClick={(element) => {
-                if (!send({ type: "recruitDestination", species: game.expedition!.recruit! })) return;
+                if (!send({ type: "recruitDestination", species: game.expedition.recruit! })) return;
                 if (document.documentElement.dataset.focus === "visible")
                   element
                     .closest(".destination-grid")
@@ -55,8 +55,8 @@ export function TeamSelection({ game, send, recovery }: Props & { recovery?: Gam
               }}
               tooltipContent={
                 <div className="card-details">
-                  <CreatureDetails kind={game.expedition!.recruit!} progression={game} speciesKit />
-                  {CARDS.filter((card) => card.species === game.expedition!.recruit).map((card) => (
+                  <CreatureDetails kind={game.expedition.recruit!} progression={game} speciesKit />
+                  {CARDS.filter((card) => card.species === game.expedition.recruit).map((card) => (
                     <p key={card.id}>
                       <strong>{card.name}</strong> · <KeywordText text={cardText(card)} />
                     </p>
@@ -65,7 +65,7 @@ export function TeamSelection({ game, send, recovery }: Props & { recovery?: Gam
               }
             />
             <h2>Recruit</h2>
-            <p>{species(game.expedition!.recruit!).name}</p>
+            <p>{species(game.expedition.recruit!).name}</p>
           </div>
         ) : null}
         {canVisitCampfire(game) ? (

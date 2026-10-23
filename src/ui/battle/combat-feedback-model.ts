@@ -1,8 +1,36 @@
-import type { GameEvent } from "../../game/types";
+import type { GameEvent, DamageEvent, StatusEvent } from "../../game/types";
 
-export interface FeedbackEntry extends GameEvent {
+/** Display aggregation can combine facts without pretending to be another committed event. */
+export interface FeedbackEntry {
   id: string;
+  kind: "damage" | "heal" | "block" | "knockout" | "status";
+  text: string;
+  targetId: string;
+  actorId?: string;
+  amount?: number;
+  damageType?: DamageEvent["damageType"];
+  critical?: boolean;
+  periodic?: boolean;
+  impact?: boolean;
+  additive?: boolean;
+  status?: StatusEvent["status"];
+  outcome?: StatusEvent["outcome"];
+  affectedStatus?: StatusEvent["affectedStatus"];
   reservedDigits?: number;
+}
+function feedbackEntry(event: GameEvent, id: string): FeedbackEntry | null {
+  switch (event.kind) {
+    case "damage":
+    case "heal":
+    case "block":
+      return { ...event, id };
+    case "status":
+      return event.targetId ? { ...event, targetId: event.targetId, id } : null;
+    case "knockout":
+      return event.targetId ? { ...event, targetId: event.targetId, id } : null;
+    default:
+      return null;
+  }
 }
 export interface Burst {
   id: string;
@@ -13,11 +41,11 @@ export interface Burst {
 }
 // Stylesheet-free callers use the ordinary readable lifetime. Runtime reads tokens.css.
 const DEFAULT_LIFETIME = 1100;
-export const isFeedbackNotice = (e: GameEvent) =>
+export const isFeedbackNotice = (e: Pick<FeedbackEntry, "kind" | "outcome" | "amount">) =>
   e.kind === "knockout" || (e.kind === "status" && !(e.outcome === "gain" && e.amount !== undefined));
-const priority = (e: GameEvent) =>
+const priority = (e: Pick<FeedbackEntry, "kind" | "outcome" | "amount">) =>
   isFeedbackNotice(e) ? 0 : e.kind === "damage" || (e.amount ?? 0) < 0 ? 1 : 2;
-function matches(a: GameEvent, b: GameEvent) {
+function matches(a: FeedbackEntry, b: FeedbackEntry) {
   return (
     a.kind === b.kind &&
     a.damageType === b.damageType &&
@@ -50,9 +78,9 @@ export function appendFeedback(
   let bursts = previous.filter((b) => now < b.started + b.lifetime);
   const targets = new Map<string, FeedbackEntry[]>();
   for (const [index, event] of events.entries()) {
-    if (!event.targetId || !["damage", "heal", "block", "knockout", "status"].includes(event.kind)) continue;
-    const entries = targets.get(event.targetId) ?? [];
-    const entry: FeedbackEntry = { ...event, id: `${id}:${index}` };
+    const entry = feedbackEntry(event, `${id}:${index}`);
+    if (!entry) continue;
+    const entries = targets.get(entry.targetId) ?? [];
     const prior = entries.findIndex(
       (e) =>
         matches(e, entry) &&
@@ -62,7 +90,7 @@ export function appendFeedback(
     );
     if (prior >= 0) entries[prior] = merge(entries[prior]!, entry);
     else entries.push(entry);
-    targets.set(event.targetId, entries);
+    targets.set(entry.targetId, entries);
   }
   const hasMeaningful = [...targets.values()].some((entries) => entries.some((e) => e.amount !== 0));
   let fallbackShown = false;
@@ -126,9 +154,8 @@ export function feedbackFrames(events: readonly GameEvent[]): GameEvent[][] {
   return frames.filter((frame) =>
     frame.some(
       (e) =>
-        e.actionType === "attack" ||
-        e.actionType === "support" ||
-        (e.targetId && ["damage", "heal", "block", "knockout", "status"].includes(e.kind)),
+        (e.kind === "action" && (e.actionType === "attack" || e.actionType === "support")) ||
+        ("targetId" in e && e.targetId && ["damage", "heal", "block", "knockout", "status"].includes(e.kind)),
     ),
   );
 }

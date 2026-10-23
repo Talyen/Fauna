@@ -68,8 +68,10 @@ it.each(["burn", "poison", "bleed", "stun", "freeze"] as const)(
     expect(result.battle!.enemies.map((enemy) => enemy.health)).toEqual(
       ready().battle!.enemies.map((enemy) => enemy.health),
     );
-    expect(events.filter((event) => event.kind === "damage")).toHaveLength(1);
-    expect(events.filter((event) => event.status === "reflect")).toHaveLength(1);
+    expect(
+      events.filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage"),
+    ).toHaveLength(1);
+    expect(events.filter((event) => event.kind === "status" && event.status === "reflect")).toHaveLength(1);
     if (["burn", "poison", "bleed"].includes(type)) {
       expect(recipients[0]!.combat.statusSources[type as "burn" | "poison" | "bleed"]).toBe("ally-0");
       expect(recipients[0]!.combat.bleedLeech).toEqual([]);
@@ -155,8 +157,9 @@ it("applies reflected control normally and allows Purge to remove a pending Ward
     game.battle!.enemies.slice(1).forEach((enemy) => {
       enemy.health = 0;
     });
-    game.battle!.enemies[0]!.health = 18;
-    hit(game, game.battle!.enemies[0]!, ram, 15, "freeze", [], { origin: "proc" as const });
+    const enemy = game.battle!.enemies[0]!;
+    enemy.health = enemy.maxHealth;
+    hit(game, enemy, ram, enemy.maxHealth / 2, "freeze", [], { origin: "proc" as const });
     expect(game.battle!.enemies[0]!.combat.controlled).toBe("freeze");
     expect(ram.combat!.controlled).toBeNull();
     ram.combat!.reflect = true;
@@ -222,7 +225,6 @@ it("refreshes one Ward, preserves it through swaps and turn changes, and resets 
       health: 24,
       combat: freshCombat(),
     });
-    draft.roster.push("emberback");
   });
   game = accept(game, { type: "play", cardId: game.battle!.hand[0]!, autoEndTurn: false });
   expect(game.team[0]!.combat!.reflect).toBe(true);
@@ -236,7 +238,6 @@ it("refreshes one Ward, preserves it through swaps and turn changes, and resets 
       health: 24,
       combat: freshCombat(),
     });
-    draft.roster.push("emberback");
     draft.battle!.enemies.forEach((enemy) => {
       enemy.combat.controlled = "freeze";
       enemy.combat.controlTurns = 2;

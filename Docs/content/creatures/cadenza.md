@@ -2,7 +2,7 @@
 
 [Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
 
-Cadenza has 28 Health and is available through ordinary encounters, recruitment and later three-creature drafts. Its support-only kit excludes it from the first solo starter pool. All three abilities cost 1 Mana:
+Cadenza has 28 Health and is available through ordinary encounters, recruitment and later three-creature drafts. Its support-only kit excludes it from the first solo starter pool. Its abilities:
 
 - **Resonant Well:** Draw 2 cards; Gain 1 Mana
 - **Echoes Remember:** Return a random discarded card to your hand

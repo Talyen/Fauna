@@ -4,7 +4,7 @@
 
 Captoad has 30 Health and joins ordinary encounter and recruitment pools. Its base passive, Sporecoat, reads "Retaliate with 1 Poison damage when hit"; retaliation scales from 1 through 6 Poison damage at zero through five stars. A landed direct attack triggers once even when Block or Armor absorbs it completely. Dodge, periodic damage, derived damage and retaliation do not trigger it. A knocked-out Captoad cannot retaliate. The Poison packet cannot Dodge, crit or start another retaliation; resolved Poison damage adds ordinary Poison stacks and source attribution, respecting Block and harmful-status reflection. Enemies use the same base passive.
 
-All three abilities cost 1 Mana:
+Abilities:
 
 - **Spore Puff:** Deal 2 Poison damage to all enemies
 - **Mushroom Guard:** Gain 3 Block; Restore 3 Health

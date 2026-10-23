@@ -2,7 +2,7 @@
 
 [Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
 
-Sternshell has 32 Health and is available through starter drafts, ordinary encounters and recruitment. All three abilities cost 1 Mana:
+Sternshell has 32 Health and is available through starter drafts, ordinary encounters and recruitment. Its abilities:
 
 - **Surge Ram:** Deal 3 Physical damage; Doubled if you have Armor
 - **Siphon Vault:** Swap out for a random backup; Draw 1 card

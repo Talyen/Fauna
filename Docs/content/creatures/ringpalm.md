@@ -2,7 +2,7 @@
 
 [Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
 
-Ringpalm has 30 Health and is available through starter drafts, ordinary encounters and recruitment. All three abilities cost 1 Mana:
+Ringpalm has 30 Health and is available through starter drafts, ordinary encounters and recruitment. Its abilities:
 
 - **Ringclap:** Deal 6 Stun damage
 - **Harmonic Set:** Deal 1 Stun damage to all enemies; Gain 1 Armor; 20% chance to repeat

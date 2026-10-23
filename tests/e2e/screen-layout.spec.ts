@@ -1,19 +1,18 @@
 import { freshCombat } from "../../src/game/combat/index";
 import { expect } from "@playwright/test";
 import { produce } from "immer";
-import { accept, policy, winBattle } from "../support/game";
+import { prepareDestination, run } from "../support/game";
 import { test, seed, resume } from "./support/session";
 import { fits } from "./support/layout";
 
 test("five-card hand with hidden overflow, three enemies and a full bench preserve fit and original artwork ratios", async ({
   page,
 }) => {
-  let s = winBattle();
-  while (s.phase !== "teamSelection") s = accept(s, policy(s));
-  s = produce(s, (d) => {
+  const s = produce(run(), (d) => {
+    prepareDestination(d);
     d.boons = ["tattered-pages"];
     d.wins = 1;
-    d.roster = ["mossguard", "emberback", "prismram", "pollenmoth", "emberback"];
+
     d.reserves = ["pollenmoth", "emberback"].map((kind) => ({
       id: `recruit-${kind}`,
       species: kind as "pollenmoth" | "emberback",

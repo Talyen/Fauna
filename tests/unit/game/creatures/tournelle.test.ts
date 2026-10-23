@@ -99,11 +99,10 @@ describe("Tournelle", () => {
       d.team[0]!.health = 20;
     });
     const next = play(game, game.battle!.enemies[0]!.id).state;
-    expect(next.battle!.enemies[0]!.health).toBe(18);
+    expect(next.battle!.enemies[0]!.health).toBe(game.battle!.enemies[0]!.health - 12);
   });
   it("swaps the lowest current-Health ally before drawing, retaining effects and the new formation", () => {
     const game = produce(fixture("tournelle-swapLowest"), (d) => {
-      d.roster.push("mossguard");
       d.reserves.push({
         id: "backup",
         species: "mossguard",
@@ -123,8 +122,7 @@ describe("Tournelle", () => {
     expect(result.state.reserves.find((c) => c.id === "ally-1")!.combat!.poison).toBe(3);
     expect(result.state.cards.some((c) => c.ownerId === "ally-1")).toBe(false);
     expect(result.state.battle!.hand).toHaveLength(1);
-    expect(result.state.lineup).toEqual(result.state.team.map((c) => c.id));
-    expect(result.events.findIndex((e) => e.actionType === "swap")).toBeGreaterThan(0);
+    expect(result.events.findIndex((e) => e.kind === "action" && e.actionType === "swap")).toBeGreaterThan(0);
     expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
   });
   it("still draws without a backup, without moving allies or consuming selection RNG", () => {
@@ -137,7 +135,6 @@ describe("Tournelle", () => {
   it("can swap Tournelle itself and still complete the draw", () => {
     const game = produce(fixture("tournelle-swapLowest"), (d) => {
       d.team[0]!.health = 1;
-      d.roster.push("mossguard");
       d.reserves.push({
         id: "backup",
         species: "mossguard",

@@ -74,6 +74,6 @@ for (const [width, enlarged] of [
     await reloadHome(page);
     await resume(page);
     const started = await state(page);
-    expect(started.roster).toEqual([chosen]);
+    expect([...started.team, ...started.reserves].map((unit) => unit.species)).toEqual([chosen]);
     expect(started.cards).toHaveLength(3);
   });

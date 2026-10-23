@@ -99,7 +99,10 @@ it("Borrowed Brilliance deals one area hit and Blinds living enemies without tar
   });
   const result = play(game);
   expect(result.state.battle!.enemies.map((enemy) => enemy.combat.blind)).toEqual([true, true, false]);
-  const hits = result.events.filter((event) => event.kind === "damage" && event.damageType === "light");
+  const hits = result.events.filter(
+    (event): event is Extract<GameEvent, { kind: "damage" }> =>
+      event.kind === "damage" && event.damageType === "light",
+  );
   expect(hits.map((event) => [event.targetId, event.amount])).toEqual([
     ["enemy-0", 1],
     ["enemy-1", 1],
@@ -266,7 +269,6 @@ it.each(["knocked out", "backup"])("a %s Rookhaven supplies no copies", (mode) =
   const game = produce(ready(), (draft) => {
     if (mode === "knocked out") draft.team[0]!.health = 0;
     else {
-      draft.roster.push("emberback");
       draft.reserves.push({
         id: "backup",
         species: "emberback",
@@ -320,7 +322,6 @@ it.each([false, true])(
           Number(draft.cards.find((card) => card.id === b)!.ownerId === "ally-0"),
       );
       draw(draft, 1);
-      draft.roster.push("sternshell");
       draft.reserves.push({
         id: "backup",
         species: "sternshell",
@@ -416,7 +417,6 @@ it("defeat clears copies before publishing the saved result", () => {
 
 it("keeps the battle card limit and a saveable hand when deploying into a copy-filled formation", () => {
   const game = produce(teamRun(1, ["rookhaven", "mossguard"]), (draft) => {
-    draft.roster.push("prismram");
     draft.reserves.push({
       id: "backup",
       species: "prismram",

@@ -69,8 +69,6 @@ try {
       ["prismram", 30, ["attack", "guard", "spectrum-lance"]],
     ]) {
       const id = `ally-${state.team.length}`;
-      state.roster.push(kind);
-      state.lineup.push(id);
       state.team.push({
         id,
         species: kind,
@@ -86,7 +84,6 @@ try {
         state.battle.draw.push(card.id);
       }
     }
-    state.roster.push("pollenmoth", "emberback");
     state.reserves = ["pollenmoth", "emberback"].map((kind) => ({
       id: `recruit-${kind}`,
       species: kind,
@@ -109,7 +106,7 @@ try {
     swapped.version !== saveFormat.version ||
     swapped.team[0].species !== "pollenmoth" ||
     swapped.battle.mana !== 4 ||
-    swapped.lineup[0] !== "recruit-pollenmoth"
+    swapped.team.map((unit) => unit.id)[0] !== "recruit-pollenmoth"
   )
     throw new Error("Desktop knockout replacement or formation persistence failed.");
   if (await window.getByRole("button", { name: "Swap", exact: true }).count())

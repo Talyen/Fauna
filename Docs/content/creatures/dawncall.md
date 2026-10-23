@@ -2,7 +2,7 @@
 
 [Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
 
-Dawncall is a 24 Health support creature available through starter drafts, ordinary encounters and recruitment. All three abilities cost 1 Mana:
+Dawncall is a 24 Health support creature available through starter drafts, ordinary encounters and recruitment. Its abilities:
 
 - **Dawn Cry:** Cleanse 1 harmful effect from all allies; Draw 1 card
 - **Sunwing Sweep:** Deal 2 Light damage to all enemies

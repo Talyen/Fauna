@@ -4,17 +4,17 @@ Fauna targets Windows x64 on Steam, with controller and Steam Deck experience co
 
 [CI](CI.md) owns automated coverage, exact-commit/build identity, reruns and retained artifacts. Windows produces an unpacked x64 package using electron-builder and `com.fauna.game`, containing only the renderer, desktop code and required runtime dependencies. Automated checks support the candidate qualification below; they do not establish hardware acceptance.
 
-Use the [candidate qualification record](RELEASE_QUALIFICATION.md) to retain exact artifact identity, setup and manual Windows, Steam, controller and Deck evidence.
+## Shipping requirements
 
-Before shipping:
+Use the [candidate qualification record](RELEASE_QUALIFICATION.md) for setup and observed Windows, live Steam/two-device Cloud, physical-controller and Deck results. Before shipping:
 
-- Configure Fauna's own Steam App/depot and Cloud quota, then set its App ID in `desktop/steam-config.json`. Optional cloud and overlay adapters are implemented with isolated account profiles and automatic conflict resolution. Live client, two-device divergence/recovery, callback support and native binary qualification remain required. Achievements are not implemented. Never use Alchemy's identities or saves.
-- Qualify the unsigned Windows build through the intended Steam depot on clean Windows, including Windows 11 Smart App Control. Paid Authenticode signing is deferred; revisit it if native qualification exposes blocks or direct-download distribution is planned. Complete production artwork and audio, privacy/crash-reporting choices, and store material.
-- Validate a complete journey with physical controllers, including disconnect/reconnect and device prompts. Current browser tests simulate standard gamepad input; prompts use Xbox-style labels.
-- Test on Steam Deck hardware through the intended Windows/Proton or native distribution path, including handheld text, overlay, sleep/resume, battery/performance, and offline startup. Native Linux/macOS packaging is not configured.
-- Verify Steam client behavior, cloud conflicts/recovery, and packaged quit/resume on Windows. Local macOS Electron testing does not establish Windows packaging or Steam behavior.
+- Configure Fauna's own App/depot, Cloud quota and App ID in `desktop/steam-config.json`; never use Alchemy's identities or saves. Cloud/overlay adapters exist, but progress sync remains unavailable with a null App ID. Achievements are not implemented
+- Qualify the actual unsigned Windows x64 Steam depot on clean Windows, including Windows 11 Smart App Control. Paid Authenticode signing is deferred; revisit it for launch blocks or direct-download distribution
+- Complete production art/audio, source-rights review, store material and privacy/support decisions
+- Complete a journey with physical controllers, including disconnect/reconnect and prompts. Browser input is simulated, standard-mapped and Xbox-labeled
+- Qualify Steam Deck readability, overlay, sleep/resume, battery/performance and offline startup through the intended Windows/Proton or native path. Native Linux/macOS packaging is not configured
 
-No release upload, remote publication, automatic promotion, telemetry, or Steam credential handling is configured. Progress sync remains unavailable until Fauna's own Steam App ID is configured. Git and external-action authorization belongs to [AGENTS.md](../AGENTS.md#worktrees-and-integration).
+No release upload, automatic promotion, telemetry or Steam credential handling is configured. External actions follow [AGENTS.md](../AGENTS.md#worktrees-and-integration).
 
 ## Packaged integrity
 
@@ -28,9 +28,9 @@ Native performance uses an unpackaged production renderer in isolated profiles. 
 
 ## Steam qualification
 
-Use application-managed Cloud only for the versioned Fauna device-slot namespace; do not also Auto-Cloud the same progression directories. Confirm configured quota supports 32 device streams with two 1 MiB slots each. Device snapshots carry current-format payload hashes and bounded ancestry; unrelated or unprovable heads automatically prefer intact local progress, then stable snapshot-ID order, after durable preservation. Offline startup and failed reads never authorize overwriting unknown remote progress. Settings, audio preferences and diagnostics are device-local. Client-free launch continues the last local profile without uploading; a different identified Steam account never adopts that profile automatically.
+Configure application-managed Cloud for Fauna's versioned device-slot namespace: 32 streams, two slots per stream, up to 1 MiB per slot. Do not also Auto-Cloud those progression directories. [Architecture](ARCHITECTURE.md#cloud-reconciliation-and-device-preferences) owns ancestry, preservation, profile separation and offline behavior.
 
-Smoke/preview/performance profiles explicitly bypass Steam. Live acceptance requires two actual devices, offline divergent journeys, automatic conflict resolution and preservation of all competing heads, account switching, disabled Cloud, reconnect and graceful quit. Verify overlay activation through the client and physical controller, including Deck sleep/resume and custom bindings. A fake event test establishes lifecycle behavior only. Keep Steam configuration, signing and publication separately authorized.
+The [live qualification checklist](RELEASE_QUALIFICATION.md#live-steam-and-two-device-cloud) requires actual devices, divergent offline progress, both reconnect orders, preserved alternatives, account switching, disabled Cloud and quit during sync. Verify overlay activation through the client and physical controller, including Deck sleep/resume and custom bindings. Fake-event tests establish lifecycle behavior only; isolated smoke/preview/performance profiles bypass real Steam.
 
 ## Release verification and player notes
 
@@ -62,7 +62,7 @@ Patch-note generation and verification never publish. Release tags, signing/setu
 
 ## Display acceptance
 
-The minimum supported renderer content viewport is 1280×720 CSS pixels. Review that size, 1280×800, 1920×1080, 2560×1080 and 3440×1440 at normal and 125% text, including the largest tooltip setting. Gameplay, artwork browsing and tooltips fit without scrolling. Glossary, Settings panels and help dialogs may use the named, bounded vertical reading regions defined in the [UI contract](UI.md#layout-artwork-size-and-spacing); verify their full contents are reachable with mouse, keyboard and controller. Include windowed/fullscreen transitions, restored window bounds, monitor removal and high-DPI displays; native frame size and OS scaling must not be mistaken for renderer viewport size. Smaller work areas are unsupported. Browser layout coverage does not establish packaged Electron, physical controller, Steam client or Steam Deck acceptance. See [required rendered review](UI.md#required-review).
+Qualify every supported viewport listed in [UI](UI.md#layout-artwork-size-and-spacing) at normal and 125% text, including the largest tooltip setting. Follow its bounded-scrolling rules. Native qualification additionally covers windowed/fullscreen transitions, restored bounds, monitor removal and high DPI. Distinguish renderer CSS dimensions from native frame size and OS scaling; smaller work areas remain unsupported. Exercise permitted reading regions with mouse, keyboard and controller. Browser layout coverage does not establish hardware or packaged acceptance.
 
 ## Candidate signing and qualification
 
@@ -74,7 +74,7 @@ The manually dispatched [signed candidate workflow](../.github/workflows/release
 
 Renderer crashes are recovered silently from durable saves with a two-reload process budget. Local crash dumps and bounded platform facts remain on the device; no crash uploads or telemetry are enabled. Treat crash records as potentially sensitive support artifacts and share only with player consent.
 
-Release acceptance still requires installing and launching the actual Steam depot on clean Windows, checking updates and normal Windows security behavior, live two-device Steam Cloud and account switching, physical-controller disconnect/reconnect, and Deck/Proton overlay, sleep/resume and offline play. Signed installer acceptance applies only if that optional distribution path is used. Automated checks cannot complete these hardware and account-dependent steps.
+Complete the [qualification record](RELEASE_QUALIFICATION.md) for the actual distribution path; signed-installer acceptance applies only if that optional path is used.
 
 ## Dependency inventory and provenance
 

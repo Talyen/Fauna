@@ -104,9 +104,12 @@ it("retaliates as Water through Block and Armor, spends one stack and cannot cha
     expect(attacker.combat.waterThorns).toBe(8);
     expect(attacker.combat.thorns).toBe(8);
     expect(defender.combat!.waterThorns).toBe(2);
-    expect(events.filter((event) => event.kind === "damage" && event.actorId === defender.id)).toEqual([
-      expect.objectContaining({ damageType: "water", amount: 2 }),
-    ]);
+    expect(
+      events.filter(
+        (event): event is Extract<GameEvent, { kind: "damage" }> =>
+          event.kind === "damage" && event.actorId === defender.id,
+      ),
+    ).toEqual([expect.objectContaining({ damageType: "water", amount: 2 })]);
   });
 });
 
@@ -122,7 +125,10 @@ it("allows Nature and Water Thorns to retaliate separately on the same hit", () 
     hit(game, attacker, defender, 1, "water", events);
     expect(
       events
-        .filter((event) => event.kind === "damage" && event.actorId === defender.id)
+        .filter(
+          (event): event is Extract<GameEvent, { kind: "damage" }> =>
+            event.kind === "damage" && event.actorId === defender.id,
+        )
         .map((event) => [event.damageType, event.amount]),
     ).toEqual([
       ["nature", 2],
@@ -280,13 +286,15 @@ it("runs enemy support on its own side and uses base regeneration independently 
   const second = dispatch(game, { type: "endTurn" });
   expect(second.state.battle!.enemies[0]!.lastAbility).toBe("neradora-bloom-shelter");
   expect(
-    second.events.filter((event) => event.kind === "heal" && event.targetId?.startsWith("enemy-")).length,
+    second.events.filter(
+      (event): event is Extract<GameEvent, { kind: "heal" }> =>
+        event.kind === "heal" && event.targetId?.startsWith("enemy-"),
+    ).length,
   ).toBeGreaterThan(0);
 });
 
 it("retains Water Thorns through rejected commands and swaps without resetting turn cadence", () => {
   const game = produce(play(ready(), "undertow-knot").state, (draft) => {
-    draft.roster.push("emberback");
     draft.discovery.recruited.emberback = 1;
     if (!draft.discovery.encountered.includes("emberback")) draft.discovery.encountered.push("emberback");
     draft.reserves.push({

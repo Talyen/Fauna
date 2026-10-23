@@ -109,22 +109,58 @@ export type Command =
   | { type: "resetTalents"; keyword: Keyword }
   | { type: "newRun"; seed: number }
   | { type: "abandon" };
-export interface GameEvent {
-  actionType?: "attack" | "support" | "swap";
-  kind: "action" | "damage" | "block" | "heal" | "knockout" | "turn" | "reward" | "victory" | "status";
+interface EventContext {
   text: string;
   actorId?: string;
   targetId?: string;
-  amount?: number;
-  damageType?: DamageType;
+}
+export type DamageEvent = EventContext & {
+  kind: "damage";
+  targetId: string;
+  amount: number;
+  damageType: DamageType;
   critical?: boolean;
   periodic?: boolean;
   additive?: boolean;
   impact?: boolean;
-  status?: KeywordId | "deathDoor";
-  outcome?: "gain" | "remove" | "apply" | "immune" | "dodge" | "skip";
+};
+export type StatusEvent = EventContext & {
+  kind: "status";
+  targetId: string;
+  status: KeywordId | "deathDoor";
+  outcome: "gain" | "remove" | "apply" | "immune" | "dodge" | "skip";
+  amount?: number;
   affectedStatus?: KeywordId;
-}
+  additive?: boolean;
+};
+/** Committed facts: numeric combat payloads are complete; announcements carry no invented combat data. */
+export type GameEvent =
+  | DamageEvent
+  | {
+      [K in "heal" | "block"]: EventContext & {
+        kind: K;
+        targetId: string;
+        amount: number;
+        additive?: boolean;
+      };
+    }["heal" | "block"]
+  | StatusEvent
+  | (EventContext & {
+      kind: "action";
+      actorId: string;
+      actionType: "attack" | "support" | "swap";
+      amount?: number;
+    })
+  | { [K in "turn" | "reward" | "victory" | "knockout"]: EventContext & { kind: K; amount?: number } }[
+      "turn" | "reward" | "victory" | "knockout"]
+  | (EventContext & {
+      kind: "status";
+      amount: number;
+      targetId?: undefined;
+      status?: undefined;
+      outcome?: undefined;
+      affectedStatus?: undefined;
+    });
 export type CommandResult =
   | { accepted: true; state: GameState; events: GameEvent[] }
   | { accepted: false; state: GameState; reason: string; events: [] };

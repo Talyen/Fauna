@@ -110,7 +110,11 @@ it("resumes the banked recruit directly at team selection, without saving previe
     await user.click(screen.getByRole("button", { name: "Continue" }));
     expect(document.querySelector('.recruit-team-roster .creature-card[aria-pressed="true"]')).toBeNull();
     await user.click(screen.getByRole("button", { name: "Confirm" }));
-    expect(session.store.getState().game.roster).toEqual(game.roster);
+    expect(
+      [...session.store.getState().game.team, ...session.store.getState().game.reserves].map(
+        (unit) => unit.species,
+      ),
+    ).toEqual([...game.team, ...game.reserves].map((unit) => unit.species));
     expect(session.store.getState().game.discovery).toEqual(game.discovery);
   } finally {
     await session.dispose();

@@ -11,7 +11,7 @@ import { expectScrollFree, layoutViolations, LAYOUT_CASES } from "./support/layo
 import { openHome, reloadHome, test, state } from "./support/session";
 import { expectBattleGeometry } from "./support/battle-layout";
 import { captureScreen, settleScreen } from "./support/rendered-evidence";
-import { snapshot, cloudName } from "../../src/application/cloud";
+import { snapshot, cloudName } from "../../src/application/cloud-snapshots";
 
 // Each action is local and immediate; do not spend a full journey timeout on a missing control.
 test.use({ actionTimeout: 5000 });

@@ -33,7 +33,6 @@ export function decodeSave(raw: string): GameState {
   );
   if (s.journey) {
     const summary = s.journey;
-    invalid(!unique(summary.unlocks) || summary.unlocks.some((kind) => !s.unlocked.includes(kind)));
     invalid(KEYWORDS.some((keyword) => (summary.xp[keyword] ?? 0) > (s.keywordXP[keyword] ?? 0)));
     const receipt = summary.lastBattle;
     const justWon = receipt?.encounter === s.encounter && receipt.outcome !== "defeat";
@@ -44,7 +43,9 @@ export function decodeSave(raw: string): GameState {
           receipt.encounter < s.encounter - 1 ||
           s.phase === "battle" ||
           (receipt.encounter === s.encounter - 1 && receipt.outcome !== "next") ||
-          (receipt.outcome === "victory" && !["victory", "recruit", "boon"].includes(s.phase)) ||
+          (receipt.outcome === "victory" &&
+            !["victory", "recruit", "boon"].includes(s.phase) &&
+            !(s.phase === "defeat" && summary.outcome === "returned" && finalEncounter(s) && s.wins > 0)) ||
           (receipt.outcome === "defeat" && (s.phase !== "defeat" || s.journey.outcome !== "defeat")),
       );
     if (summary.lastBattle)
@@ -53,7 +54,7 @@ export function decodeSave(raw: string): GameState {
           KEYWORDS.some((keyword) => (summary.lastBattle!.xp[keyword] ?? 0) > (summary.xp[keyword] ?? 0)),
       );
   }
-  if (s.expedition) {
+  {
     const route = s.expedition;
     if (s.phase === "draft")
       invalid(route.pack !== null || route.recruit !== null || route.lastRoom !== null || s.encounter !== 0);
@@ -64,34 +65,23 @@ export function decodeSave(raw: string): GameState {
           route.pack.some((kind) => species(kind).legendary && !bossEncounter(s)),
       );
     if (route.recruit !== null)
-      invalid(s.roster.length >= 5 || !["teamSelection", "support", "campfire"].includes(s.phase));
-  } else invalid(s.encounter > 2);
+      invalid(
+        s.team.length + s.reserves.length >= 5 || !["teamSelection", "support", "campfire"].includes(s.phase),
+      );
+  }
   invalid(
-    !unique(s.unlocked) ||
-      SPECIES.some((entry) => !s.unlocked.includes(entry.id)) ||
-      s.selected.some((kind) => !starterPool.includes(kind)) ||
+    s.selected.some((kind) => !starterPool.includes(kind)) ||
       (s.phase === "draft" && s.selected.length > starterCount(s)) ||
       (s.phase !== "draft" && !collected.length),
   );
   invalid(
     !unique([...s.team, ...s.reserves].map((c) => c.id)) ||
-      !unique(s.lineup) ||
-      s.lineup.some((id) => ![...s.team, ...s.reserves].some((c) => c.id === id)) ||
       !unique(s.cards.map((c) => c.id)) ||
       !unique(s.talents) ||
       !unique(s.boons),
   );
-  invalid(
-    [...s.team, ...s.reserves].some(
-      (c) => !s.roster.includes(c.species) || c.health > species(c.species).health,
-    ) ||
-      s.roster.length !== s.team.length + s.reserves.length ||
-      s.roster.some(
-        (kind) =>
-          s.roster.filter((k) => k === kind).length !==
-          [...s.team, ...s.reserves].filter((c) => c.species === kind).length,
-      ),
-  );
+  invalid(s.team.length + s.reserves.length > 5);
+  invalid([...s.team, ...s.reserves].some((c) => c.health > species(c.species).health));
   invalid(
     s.cards.some(
       (c) =>
@@ -127,38 +117,24 @@ export function decodeSave(raw: string): GameState {
     for (const talent of bought)
       invalid(TALENTS.some((t) => t.keyword === keyword && t.row < talent.row && !s.talents.includes(t.id)));
   }
-  if (s.phase === "draft")
-    invalid(
-      s.team.length !== 0 ||
-        s.cards.length !== 0 ||
-        s.roster.length !== 0 ||
-        s.reserves.length !== 0 ||
-        s.lineup.length !== 0,
-    );
+  if (s.phase === "draft") invalid(s.team.length !== 0 || s.cards.length !== 0 || s.reserves.length !== 0);
   else
     invalid(
       s.team.length < 1 ||
         permanentCards.length !==
           s.team.reduce((sum, unit) => sum + ownedCards(unit.id, unit.species).length, 0),
     );
-  for (const row of [
-    s.team,
-    s.lineup.map((id) => [...s.team, ...s.reserves].find((unit) => unit.id === id)!),
-  ])
-    invalid(
-      (row.length === 0 && s.phase !== "draft") ||
-        (row.some((unit) => species(unit.species).legendary) && row.length !== 1),
-    );
+  invalid(
+    (s.team.length === 0 && s.phase !== "draft") ||
+      (s.team.some((unit) => species(unit.species).legendary) && s.team.length !== 1),
+  );
   invalid(s.selected.some((kind) => species(kind).legendary) && s.selected.length !== 1);
-  if (s.phase === "teamSelection" || s.phase === "support" || s.phase === "campfire")
-    invalid(s.team.some((c, index) => c.id !== s.lineup[index]));
   if (s.support) {
     const v = s.support;
     // Stock keeps its original price when this visit sells Merchant's Favor.
     const prices = merchantPriceRange({ boons: s.boons.filter((boon) => boon !== v.purchased) });
     invalid(
-      !s.expedition ||
-        v.encounter !== s.encounter ||
+      v.encounter !== s.encounter ||
         v.id !== `support-${v.encounter}` ||
         !["teamSelection", "support", "campfire"].includes(s.phase) ||
         !v.stock.length ||
@@ -202,7 +178,7 @@ export function decodeSave(raw: string): GameState {
       const selected = s.reward.selectedRecruit;
       if (selected !== undefined)
         invalid(
-          s.roster.length !== 5 ||
+          s.team.length + s.reserves.length !== 5 ||
             !s.reward.recruits.includes(selected) ||
             s.discovery.recruited[selected] === undefined,
         );

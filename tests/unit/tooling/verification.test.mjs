@@ -15,6 +15,7 @@ import { runLocalTests } from "../../../scripts/checks/run-local-tests.mjs";
 import owners from "../../../scripts/checks/test-owners.json" with { type: "json" };
 import localConfig from "../../../vitest.local.config.mjs";
 import { localCommands } from "../../../scripts/local.mjs";
+import { investigationArgs } from "../../../scripts/agent/investigate.mjs";
 
 const roots = [];
 const repo = path.resolve(import.meta.dirname, "../../..");
@@ -44,6 +45,15 @@ afterEach(() => {
 });
 
 describe("lightweight local verification", () => {
+  it("keeps exhaustive matrices in full CI while local changes verify their owning contract", () => {
+    const plan = checkPlan(repo, ["tests/exhaustive/roster-combinations.test.ts"]);
+    expect(plan.tests).toEqual(["tests/unit/game/engine.test.ts", "tests/unit/game/lineups.test.ts"]);
+    expect(plan.configs).toContain("tsconfig.test.json");
+    expect(readFileSync(path.join(repo, "vitest.config.ts"), "utf8")).toContain(
+      "unit,integration,exhaustive",
+    );
+  });
+
   it("rejects unknown options and ambiguous or incomplete selections", () => {
     expect(parseCheckArgs([])).toEqual({ paths: [], base: null });
     expect(parseCheckArgs(["--working-tree"])).toEqual({ paths: [], base: "HEAD" });
@@ -272,6 +282,74 @@ describe("lightweight local verification", () => {
       expect(runCheck(["--plan", "src/game/value.ts"], options)).toBe(0);
       expect(runner).not.toHaveBeenCalled();
     }
+  });
+
+  it("defers registered extended suites while retaining local contracts and explicit requests", () => {
+    const root = fixture();
+    const extended = "tests/exhaustive/roster-combinations.test.ts";
+    const local = ["tests/unit/game/engine.test.ts", "tests/unit/game/lineups.test.ts"];
+    for (const file of [extended, ...local]) {
+      mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
+      writeFileSync(path.join(root, file), "export {};\n");
+    }
+    const plan = checkPlan(root, [extended, "src/game/engine.ts"]);
+    expect(plan.tests).toEqual(local);
+    expect(plan.ciTests).toContain(extended);
+    const runner = vi.fn(() => ({ status: 0 }));
+    const messages = [];
+    expect(runCheck([extended], { root, runner, log: (message) => messages.push(message) })).toBe(0);
+    const testCall = runner.mock.calls.find((call) => call[1][0].endsWith("vitest.mjs"));
+    for (const suite of local) expect(testCall[1]).toContain(suite);
+    expect(testCall[1]).not.toContain(extended);
+    expect(messages.join("\n")).toContain(`CI-owned extended suite (not run by this gate): ${extended}`);
+    expect(checkPlan(root, [extended], [extended]).tests).toEqual([...local, extended].sort());
+    const explicit = vi.fn(() => ({ status: 0 }));
+    expect(runCheck(["--test", extended], { root, runner: explicit, log: () => {} })).toBe(0);
+    expect(explicit.mock.calls.at(-1)[1]).toContain(extended);
+    expect(investigationArgs(root, ["unit", extended]).at(-1)).toBe(extended);
+    rmSync(path.join(root, extended));
+    expect(checkPlan(root, [extended]).missingContracts).toContainEqual({
+      owner: extended,
+      suite: extended,
+    });
+  });
+
+  it("discovers every declared CI-owned suite through the unchanged full unit command", () => {
+    const extended = Object.entries(owners)
+      .filter(([, owner]) => owner.tier === "ci")
+      .map(([file]) => file);
+    expect(extended.length).toBeGreaterThan(0);
+    for (const [file, owner] of Object.entries(owners)) {
+      if (owner.tier === undefined) continue;
+      expect(owner.tier).toBe("ci");
+      expect(file).toMatch(/^tests\/(?:unit|integration|exhaustive)\/.+\.test\.[cm]?[jt]sx?$/);
+      expect(owner.reason.length).toBeGreaterThan(0);
+      expect(owner.suites.length).toBeGreaterThan(0);
+      for (const local of owner.suites) expect(owners[local]?.tier).not.toBe("ci");
+      expect(checkPlan(repo, [file]).tests).toEqual(expect.arrayContaining(owner.suites));
+      expect(readFileSync(path.join(repo, file), "utf8").length).toBeGreaterThan(0);
+    }
+    const discovered = JSON.parse(
+      execFileSync(
+        process.execPath,
+        [
+          path.join(repo, "node_modules/vitest/vitest.mjs"),
+          "list",
+          ...extended,
+          "--filesOnly",
+          "--json",
+          "--maxWorkers=1",
+          "--no-file-parallelism",
+        ],
+        {
+          cwd: repo,
+          encoding: "utf8",
+          timeout: 30_000,
+          env: { ...process.env, NODE_OPTIONS: "--max-old-space-size=1024" },
+        },
+      ),
+    );
+    expect(discovered.map(({ file }) => path.relative(repo, file)).sort()).toEqual(extended.sort());
   });
 
   it("runs named regressions alongside the changed selection and dispatches bounded diagnostics", async () => {

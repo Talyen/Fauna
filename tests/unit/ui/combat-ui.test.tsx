@@ -1,6 +1,6 @@
+// @vitest-environment jsdom
 import userEvent from "@testing-library/user-event";
 import { screenTestEnvironment } from "../../support/ui";
-// @vitest-environment jsdom
 import { expect, it, vi } from "vitest";
 import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import { produce } from "immer";

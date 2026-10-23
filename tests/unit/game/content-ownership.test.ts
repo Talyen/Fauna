@@ -4,13 +4,21 @@ import {
   SPECIES,
   definition,
   species,
-  ENCOUNTERS,
   FIRST_RUN_STARTERS,
   BOONS,
   TALENTS,
   TALENT_EFFECTS,
 } from "../../../src/game/content";
 import { BOSSES, COMBAT_PACKS } from "../../../src/game/encounters";
+import { PEARL } from "../../../src/game/content/creatures/memento";
+
+it("resolves every authored identity without changing catalog order or sharing", () => {
+  for (const card of CARDS) expect(definition(card.id)).toBe(card);
+  for (const entry of SPECIES) expect(species(entry.id)).toBe(entry);
+  expect(definition(PEARL.id)).toBe(PEARL);
+  for (const id of ["missing", "constructor", "__proto__"])
+    expect(() => definition(id)).toThrow(`Unknown card: ${id}`);
+});
 
 it("keeps shared authored rules immutable across lookup and direct catalog access", () => {
   const attempts: [object, string, unknown][] = [
@@ -20,7 +28,6 @@ it("keeps shared authored rules immutable across lookup and direct catalog acces
     [definition("cadenza-resonant-well").effects![0]!, "amount", 999],
     [BOONS[0], "text", "Changed rules"],
     [TALENTS[0], "row", 99],
-    [ENCOUNTERS[0]!.enemies[0]!, "health", 999],
     [COMBAT_PACKS[0], "0", "cadenza"],
     [BOSSES[0].pack, "0", "cadenza"],
   ];
@@ -37,7 +44,6 @@ it("keeps shared authored rules immutable across lookup and direct catalog acces
     BOONS,
     TALENTS,
     TALENT_EFFECTS,
-    ENCOUNTERS,
     FIRST_RUN_STARTERS,
     COMBAT_PACKS,
     BOSSES,
