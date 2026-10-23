@@ -1,13 +1,13 @@
 import { git } from "./git.mjs";
 import path from "node:path";
+import { taskIntent } from "./task-intent.mjs";
 
-/** Task commands include committed work; main and ad-hoc branches keep HEAD selection. */
+/** Scope follows recorded task intent, never a branch-name prefix. */
 export function taskBase(root, base) {
   if (base) return git(root, ["rev-parse", "--verify", "--end-of-options", `${base}^{commit}`]).trim();
   const branch = git(root, ["branch", "--show-current"]).trim();
-  return /^(?:task|codex)\//.test(branch)
-    ? git(root, ["merge-base", "HEAD", "refs/heads/main"]).trim()
-    : git(root, ["rev-parse", "HEAD"]).trim();
+  if (branch === "main") return git(root, ["rev-parse", "HEAD"]).trim();
+  return taskIntent(root).base ?? git(root, ["merge-base", "HEAD", "refs/heads/main"]).trim();
 }
 
 export function selectPaths(root, inputs) {

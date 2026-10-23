@@ -238,7 +238,7 @@ it("keeps complete patch evidence for unusual filenames without staging or losin
     writeFileSync(path.join(root, unusual), "new content\n");
     writeFileSync(path.join(root, "invalid-utf8.bin"), Buffer.from([255, 254, 253]));
     const indexBefore = git("diff", "--cached");
-    const result = review(root, [], { budget: 30 });
+    const result = review(root, [], { budget: 30, layers: true });
     expect(result.omittedCharacters).toBeGreaterThan(0);
     const full = readFileSync(result.patches, "utf8");
     expect(full).toContain("+staged");

@@ -14,6 +14,7 @@ import {
 import { runLocalTests } from "../../../scripts/checks/run-local-tests.mjs";
 import owners from "../../../scripts/checks/test-owners.json" with { type: "json" };
 import localConfig from "../../../vitest.local.config.mjs";
+import { localCommands } from "../../../scripts/local.mjs";
 
 const roots = [];
 const repo = path.resolve(import.meta.dirname, "../../..");
@@ -406,7 +407,12 @@ describe("lightweight local verification", () => {
       }
       return [...found];
     };
-    expect(references(scripts["verify:full"])).toEqual(
+    const recipeReferences = (kind) =>
+      localCommands(kind, [], { ci: true }).flatMap(([, args]) => {
+        const name = args[args.indexOf("run") + 1];
+        return name === "check:full" ? [name, ...recipeReferences(name)] : [name];
+      });
+    expect(recipeReferences("verify:full")).toEqual(
       expect.arrayContaining([
         "check:types",
         "check:lint",

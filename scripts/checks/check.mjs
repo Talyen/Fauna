@@ -11,6 +11,7 @@ import { affectedTests } from "./affected-tests.mjs";
 import { matchingDependencies, dependenciesAvailable } from "../dependencies.mjs";
 
 import { git } from "../lib/git.mjs";
+import { taskIntent, recordTaskIntent } from "../lib/task-intent.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "../..");
 const CI_NOTICE = "Task checks. CI owns complete static, unit, build, browser and desktop validation.";
@@ -18,6 +19,7 @@ const CI_NOTICE = "Task checks. CI owns complete static, unit, build, browser an
 export function parseCheckArgs(args) {
   const paths = [];
   const tests = [];
+  const forget = [];
   let base = null,
     diff = false,
     plan = false,
@@ -27,10 +29,10 @@ export function parseCheckArgs(args) {
     if (arg === "--plan") plan = true;
     else if (arg === "--related") related = true;
     else if (arg === "--diff" || arg === "--working-tree") diff = true;
-    else if (arg === "--test") {
+    else if (arg === "--test" || arg === "--forget-test") {
       if (!args[i + 1] || args[i + 1].startsWith("-"))
-        throw new Error("--test requires a unit/integration suite path.");
-      tests.push(args[++i]);
+        throw new Error(`${arg} requires a unit/integration suite path.`);
+      (arg === "--test" ? tests : forget).push(args[++i]);
     } else if (arg === "--base") {
       if (base || !args[i + 1] || args[i + 1].startsWith("-"))
         throw new Error("--base requires one Git commit or branch.");
@@ -46,6 +48,7 @@ export function parseCheckArgs(args) {
     ...(plan ? { plan: true } : {}),
     ...(related ? { related: true } : {}),
     ...(tests.length ? { tests } : {}),
+    ...(forget.length ? { forget } : {}),
   };
 }
 
@@ -139,15 +142,22 @@ export function checkPlan(root, paths, namedTests = [], { related = false } = {}
 export function runCheck(args = [], { root = ROOT, runner = spawnSync, log = console.log } = {}) {
   const selection = parseCheckArgs(args);
   const base = taskBase(root, selection.base);
-  const namedTests = (selection.tests ?? []).map((file) => {
-    const relative = path.relative(root, path.resolve(root, file)).split(path.sep).join("/");
-    if (
-      !/^tests\/(?:unit|integration)\/.+\.test\.[cm]?[jt]sx?$/.test(relative) ||
-      !existsSync(path.join(root, relative))
-    )
-      throw new Error(`Choose an existing unit/integration suite: ${file}`);
-    return relative;
-  });
+  const normalize = (file) => path.relative(root, path.resolve(root, file)).split(path.sep).join("/");
+  const forget = (selection.forget ?? []).map(normalize);
+  const requested = (selection.tests ?? []).map(normalize);
+  const namedTests = [...new Set([...taskIntent(root).tests, ...requested])]
+    .filter((file) => !forget.includes(file))
+    .map((file) => {
+      const relative = path.relative(root, path.resolve(root, file)).split(path.sep).join("/");
+      if (
+        !/^tests\/(?:unit|integration)\/.+\.test\.[cm]?[jt]sx?$/.test(relative) ||
+        !existsSync(path.join(root, relative))
+      )
+        throw new Error(
+          `Choose an existing unit/integration suite: ${file}. Remove an obsolete selection with --forget-test ${file}.`,
+        );
+      return relative;
+    });
   const paths = [...new Set([...taskPaths(root, { ...selection, base }), ...namedTests])];
   const format = formatSelection(root, paths);
   const plan = checkPlan(root, paths, namedTests, selection);
@@ -167,7 +177,7 @@ export function runCheck(args = [], { root = ROOT, runner = spawnSync, log = con
         ? "Documentation only; no tests needed."
         : paths.length
           ? "No matching suite; running fixed Node smoke (not affected-behavior coverage)."
-          : "No changed files; no checks needed. Use npm test for unit/DOM tests or npm run check for full static checks.",
+          : "EMPTY CHECK: no changed files selected; no checks ran. Use npm test for unit/DOM tests, npm run check for full static checks, or --base to select a task range.",
   );
   for (const { owner, reason } of plan.contracts) log(`Contract ${owner}: ${reason}`);
   if (plan.relatedTests.length)
@@ -181,6 +191,7 @@ export function runCheck(args = [], { root = ROOT, runner = spawnSync, log = con
     log("Plan only; no checks ran.");
     return 0;
   }
+  if (requested.length || forget.length) recordTaskIntent(root, { tests: requested, forget });
   if (!paths.length) return 0;
   const modules = path.join(root, "node_modules");
   if (
