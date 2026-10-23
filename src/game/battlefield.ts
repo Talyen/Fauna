@@ -7,11 +7,12 @@ export function battlefield(state: GameState, side: "enemy"): Enemy[];
 export function battlefield(state: GameState, side: "player" | "enemy"): (Creature | Enemy)[];
 export function battlefield(state: GameState, side: "player" | "enemy"): (Creature | Enemy)[] {
   const row = side === "player" ? state.team : (state.battle?.enemies ?? []);
-  const owners = new Set(row.filter((unit) => unit.health > 0).map((unit) => unit.id));
-  return [
-    ...row,
-    ...(state.battle?.minions ?? []).filter(
-      (unit) => unit.minion.side === side && owners.has(unit.minion.ownerId),
-    ),
-  ];
+  const result: (Creature | Enemy)[] = [...row];
+  const minions = state.battle?.minions;
+  if (!minions?.length) return result;
+  const owners = new Set<string>();
+  for (const unit of row) if (unit.health > 0) owners.add(unit.id);
+  for (const unit of minions)
+    if (unit.minion.side === side && owners.has(unit.minion.ownerId)) result.push(unit);
+  return result;
 }

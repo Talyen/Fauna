@@ -17,47 +17,46 @@ export interface BattleChoice {
 /** Only visible information enters scoring; no forecasts or gameplay RNG are sampled. */
 export function rankedBattleChoices(state: GameState, autoEndTurn = true): BattleChoice[] {
   if (state.phase !== "battle") return [];
-  const order = <T extends { id: string }>(items: T[]) => [...items].sort((a, b) => a.id.localeCompare(b.id));
   const outgoing = pendingReplacement(state);
-  const remaining = state.team.filter((unit) => unit.health > 0 && !controlled(unit));
-  const needsDamage = !remaining.some((unit) => offenseValue(state, unit.species) > 0);
-  const incoming = order(outgoing ? state.reserves : [])
-    .filter((unit) => unit.health > 0)
-    .map((unit) => {
-      const all = [...state.team, ...state.reserves];
-      const ids = formationForSwap(
-        all,
-        state.team.map((unit) => unit.id),
-        outgoing?.id ?? "",
-        unit.id,
-      );
-      const lineup = ids
-        .map((id) => all.find((entry) => entry.id === id)!)
-        .filter((entry) => entry.health > 0);
-      const kinds = lineup.map((entry) => entry.species);
-      const score =
-        (needsDamage && offenseValue(state, unit.species) > 0 ? 1_000_000 : 0) +
-        (!controlled(unit) ? 100_000 : 0) +
-        coverageScore(state, kinds) +
-        (needsDamage ? offenseValue(state, unit.species) * 100 : 0) +
-        (unit.health / species(unit.species).health) * 100;
-      return { unit, score };
-    })
-    .sort((a, b) => b.score - a.score)[0]?.unit;
-  if (outgoing && incoming)
-    return [
-      {
-        command: {
-          type: "swap",
-          activeId: outgoing.id,
-          reserve: incoming.id,
-          ...(autoEndTurn ? {} : { autoEndTurn: false }),
+  if (outgoing) {
+    const remaining = state.team.filter((unit) => unit.health > 0 && !controlled(unit));
+    const needsDamage = !remaining.some((unit) => offenseValue(state, unit.species) > 0);
+    const all = [...state.team, ...state.reserves];
+    const active = state.team.map((unit) => unit.id);
+    const incoming = [...state.reserves]
+      .sort((a, b) => a.id.localeCompare(b.id))
+      .filter((unit) => unit.health > 0)
+      .map((unit) => {
+        const ids = formationForSwap(all, active, outgoing.id, unit.id);
+        const lineup = ids
+          .map((id) => all.find((entry) => entry.id === id)!)
+          .filter((entry) => entry.health > 0);
+        const kinds = lineup.map((entry) => entry.species);
+        const damage = needsDamage ? offenseValue(state, unit.species) : 0;
+        const score =
+          (damage > 0 ? 1_000_000 : 0) +
+          (!controlled(unit) ? 100_000 : 0) +
+          coverageScore(state, kinds) +
+          damage * 100 +
+          (unit.health / species(unit.species).health) * 100;
+        return { unit, score };
+      })
+      .sort((a, b) => b.score - a.score)[0]?.unit;
+    if (incoming)
+      return [
+        {
+          command: {
+            type: "swap",
+            activeId: outgoing.id,
+            reserve: incoming.id,
+            ...(autoEndTurn ? {} : { autoEndTurn: false }),
+          },
+          score: BATTLE_FINISH_PRIORITY,
+          reason:
+            "Replace a knocked-out creature; restore missing deployed damage, then favor usable complementary backups",
         },
-        score: BATTLE_FINISH_PRIORITY,
-        reason:
-          "Replace a knocked-out creature; restore missing deployed damage, then favor usable complementary backups",
-      },
-    ];
+      ];
+  }
   const options: (BattleChoice & { key: string })[] = [];
   const add = (cardId: string, score: number, targetId?: string, reason?: string) => {
     if (score > 0)
@@ -97,7 +96,7 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
       add(id, def.effect === "pearl" ? 500 : state.cards.length < 256 ? 400 : 0);
     } else if (def.effect === "attack") {
       const enemies = battlefield(state, "enemy").filter((e) => e.health > 0);
-      const progress = (enemy: (typeof enemies)[number]) => {
+      const attacks = enemies.map((enemy) => {
         // Ordinary primary hits only; chance effects and hidden RNG are never forecast.
         const outcomes = [def.damageType, ...(def.alternateDamageType ? [def.alternateDamageType] : [])].map(
           (type) => {
@@ -133,24 +132,24 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
           },
         );
         return {
+          enemy,
           score: outcomes.reduce((sum, outcome) => sum + outcome.score, 0) / outcomes.length,
           lethal: outcomes.every((outcome) => outcome.lethal),
         };
-      };
-      const remaining = state.battle.enemies.filter((enemy) => enemy.health > 0);
+      });
+      const remaining = attacks.filter(({ enemy }) => !enemy.minion);
       const winning =
         !actor.combat?.blind &&
         remaining.length > 0 &&
         (def.target === "allEnemies"
-          ? remaining.every((enemy) => progress(enemy).lethal)
+          ? remaining.every((attack) => attack.lethal)
           : def.target === "randomEnemy"
-            ? enemies.every((enemy) => !enemy.minion && progress(enemy).lethal) && remaining.length === 1
+            ? attacks.every(({ enemy, lethal }) => !enemy.minion && lethal) && remaining.length === 1
             : false);
       if (def.target === "allEnemies")
         add(
           id,
-          (winning ? BATTLE_FINISH_PRIORITY : 0) +
-            enemies.reduce((sum, enemy) => sum + progress(enemy).score, 0),
+          (winning ? BATTLE_FINISH_PRIORITY : 0) + attacks.reduce((sum, attack) => sum + attack.score, 0),
           undefined,
           winning
             ? "Attempt to finish every remaining enemy on ordinary hits"
@@ -160,19 +159,16 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
         add(
           id,
           (winning ? BATTLE_FINISH_PRIORITY : 0) +
-            (enemies.length
-              ? enemies.reduce((sum, enemy) => sum + progress(enemy).score, 0) / enemies.length
-              : 0),
+            (attacks.length ? attacks.reduce((sum, attack) => sum + attack.score, 0) / attacks.length : 0),
           undefined,
           "Use the average visible benefit across random targets",
         );
       else
-        for (const enemy of enemies) {
-          const finish =
-            !actor.combat?.blind && remaining.length === 1 && !enemy.minion && progress(enemy).lethal;
+        for (const { enemy, lethal, score } of attacks) {
+          const finish = !actor.combat?.blind && remaining.length === 1 && !enemy.minion && lethal;
           add(
             id,
-            (finish ? BATTLE_FINISH_PRIORITY : 0) + progress(enemy).score,
+            (finish ? BATTLE_FINISH_PRIORITY : 0) + score,
             enemy.id,
             finish
               ? "Attempt to finish the last enemy before healing or attacking Minions"
@@ -321,5 +317,5 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
   return rankedBattleChoices(state, autoEndTurn).map((choice) => choice.command);
 }
 export function chooseBattleCommand(state: GameState, autoEndTurn = true): Command {
-  return battleChoices(state, autoEndTurn)[0] ?? { type: "endTurn" };
+  return rankedBattleChoices(state, autoEndTurn)[0]?.command ?? { type: "endTurn" };
 }
