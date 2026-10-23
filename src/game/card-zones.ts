@@ -53,22 +53,39 @@ export function fillHand(state: GameState) {
   const battle = state.battle!;
   while (battle.hand.length < MAX_HAND_SIZE && battle.buffer.length) battle.hand.push(battle.buffer.shift()!);
 }
+
+function recycleEligibleDiscard(state: GameState, eligible: (id: string) => boolean) {
+  const battle = state.battle!;
+  const available: string[] = [];
+  const retained: string[] = [];
+  for (const id of battle.discard) (eligible(id) ? available : retained).push(id);
+  battle.discard = retained;
+  battle.draw.push(...shuffle(state, available));
+}
+
+function lastEligibleIndex(ids: readonly string[], eligible: (id: string) => boolean) {
+  let index = ids.length - 1;
+  while (index >= 0 && !eligible(ids[index]!)) index--;
+  return index;
+}
+
 export function draw(state: GameState, count: number, events: GameEvent[] = []) {
   fillHand(state);
   const b = state.battle!;
   recycleDiscard(state);
   // Knocked-out owners retain inert slots, so replacing them cannot refresh spent cards.
   const alive = state.team.filter((c) => c.health > 0);
-  const eligible = (id: string) =>
-    !alive.length || alive.some((c) => c.id === state.cards.find((card) => card.id === id)?.ownerId);
+  const eligible = (id: string) => {
+    if (!alive.length) return true;
+    const ownerId = state.cards.find((card) => card.id === id)?.ownerId;
+    return alive.some((unit) => unit.id === ownerId);
+  };
   for (let i = 0; i < count; i++) {
-    if (!b.draw.some(eligible)) {
-      const available = b.discard.filter(eligible);
-      b.discard = b.discard.filter((id) => !eligible(id));
-      b.draw.push(...shuffle(state, available));
+    let index = lastEligibleIndex(b.draw, eligible);
+    if (index < 0) {
+      recycleEligibleDiscard(state, eligible);
+      index = lastEligibleIndex(b.draw, eligible);
     }
-    let index = b.draw.length - 1;
-    while (index >= 0 && !eligible(b.draw[index]!)) index--;
     if (index < 0) break;
     const card = b.draw.splice(index, 1)[0]!;
     receiveDraw(state, card, events);
@@ -90,13 +107,11 @@ export function drawKeyword(
       state.team.some((c) => c.id === card.ownerId && c.health > 0) && cardKeywords(card).includes(keyword)
     );
   };
-  if (!battle.draw.some(eligible)) {
-    const available = battle.discard.filter(eligible);
-    battle.discard = battle.discard.filter((id) => !eligible(id));
-    battle.draw.push(...shuffle(state, available));
+  let index = lastEligibleIndex(battle.draw, eligible);
+  if (index < 0) {
+    recycleEligibleDiscard(state, eligible);
+    index = lastEligibleIndex(battle.draw, eligible);
   }
-  let index = battle.draw.length - 1;
-  while (index >= 0 && !eligible(battle.draw[index]!)) index--;
   if (index >= 0) {
     const id = battle.draw.splice(index, 1)[0]!;
     receiveDraw(state, id, events);

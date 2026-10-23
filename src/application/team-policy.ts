@@ -1,12 +1,12 @@
 import { creaturePassive } from "../game/progression";
-import { CARDS, species, type SpeciesId } from "../game/content";
+import { speciesCards, species, type SpeciesId } from "../game/content";
 import { definitionKeywords } from "../game/keywords";
 import type { GameState } from "../game/types";
 
 export function capabilities(state: GameState, kinds: readonly SpeciesId[]) {
   const result = new Set<string>();
   for (const kind of kinds) {
-    for (const card of CARDS.filter((card) => card.species === kind)) {
+    for (const card of speciesCards(kind)) {
       for (const keyword of definitionKeywords(card)) result.add(keyword);
       if (card.effect === "attack") {
         result.add("attack");
@@ -63,7 +63,7 @@ export function coverageScore(state: GameState, kinds: SpeciesId[]) {
 }
 /** Approximate damage over an authored kit rotation; no enemy intent or chance is sampled. */
 export function offenseValue(state: GameState, kind: SpeciesId): number {
-  const cards = CARDS.filter((card) => card.species === kind);
+  const cards = speciesCards(kind);
   const authored = cards.reduce(
     (sum, card) =>
       sum +

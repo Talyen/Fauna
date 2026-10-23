@@ -16,4 +16,4 @@ Coolfront damages opponents first, then fully Cleanses every living deployed all
 
 ## Artwork provenance and validation record
 
-The unchanged landscape portrait (`03.png`) and Noonward, Coolfront and Noon Bloom action PNGs come from the user's [Shadebrim Drive folder](https://drive.google.com/drive/folders/1iJFM9EwjiVDMIZdTMjCXSMpTjtR7uOhz). Original URLs and rights notes are recorded in the asset manifest. Source artwork was visually inspected; rendered gameplay and balance acceptance remain pending.
+Source: [Shadebrim Drive folder](https://drive.google.com/drive/folders/1iJFM9EwjiVDMIZdTMjCXSMpTjtR7uOhz). Portrait: `03.png`. Source inspected; rendered gameplay and balance acceptance were pending.

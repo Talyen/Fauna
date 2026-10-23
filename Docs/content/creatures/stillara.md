@@ -14,4 +14,4 @@ Thaw Path removes all accumulated Freeze from living deployed allies, including 
 
 ## Artwork provenance and validation record
 
-The unchanged creature portrait (`Stillara_03.png`) and three ability illustrations come from the user's [Stillara Drive folder](https://drive.google.com/drive/folders/1g5R_eKq24--2itoo7M57hHEMkjvmSJbP). Source URLs and rights notes are recorded in the asset manifest. Source artwork was visually inspected; prepared media retains native landscape and portrait compositions. Rendered gameplay and balance acceptance remain pending.
+Source: [Stillara Drive folder](https://drive.google.com/drive/folders/1g5R_eKq24--2itoo7M57hHEMkjvmSJbP). Portrait: `Stillara_03.png`. Source inspected; rendered gameplay and balance acceptance were pending.

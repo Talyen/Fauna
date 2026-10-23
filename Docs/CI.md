@@ -6,6 +6,8 @@
 
 After a small planning job, static/content checks, unit/DOM tests, the Linux browser build and Windows packaging run independently. Eight duration-balanced browser shards use one worker each; interaction replay consumes the same Linux build. Consumers verify its commit, run, attempt and file hashes. Windows retains its own build, package verification and packaged startup/save/resume/isolation checks.
 
+Unit CI retains every extended simulation, including all ordinary three-creature combinations, through full Vitest discovery. Focused regressions protect complete case registration and the shared journey assertions. [Contributing](../CONTRIBUTING.md#verification) owns the explicit local/CI selection policy; [test maintenance](../tests/README.md#test-organization) locates the scenarios.
+
 Static CI runs types, lint, formatting, boundaries and unused-code checks independently, retaining each failure while reporting all categories. `npm run check:full` remains their sequential entrypoint.
 
 CI installs with the pinned npm version and lockfile, omitting non-gating audit/funding requests under a three-minute deadline. `package.json` approves install scripts per version; `.npmrc` rejects unreviewed scripts. `npm run security:audit` retains all advisories and fails on new advisories or expired exceptions. The sole temporary exception is build-only `sprintf-js` denial of service GHSA-hp3w-g68c-fv3c, expiring November 21, 2026; no player format strings reach electron-builder's download-proxy logger.

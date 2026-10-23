@@ -79,8 +79,20 @@ export const CARDS: readonly CardDefinition[] = [
   euphera,
   tournelle,
 ].flatMap((kit) => kit.cards);
+const speciesById = new Map(SPECIES.map((entry) => [entry.id, entry]));
+const cardsBySpecies = new Map<SpeciesId, CardDefinition[]>();
+for (const card of CARDS) {
+  const cards = cardsBySpecies.get(card.species);
+  if (cards) cards.push(card);
+  else cardsBySpecies.set(card.species, [card]);
+}
+for (const cards of cardsBySpecies.values()) freeze(cards);
+/** Shared immutable kits retain the card catalog's order for seeded decisions and slot mapping. */
+export function speciesCards(id: SpeciesId): readonly CardDefinition[] {
+  return cardsBySpecies.get(id) ?? [];
+}
 export function species(id: SpeciesId): Species {
-  const result = SPECIES.find((s) => s.id === id);
+  const result = speciesById.get(id);
   if (!result) throw new Error(`Unknown species: ${id}`);
   return result;
 }

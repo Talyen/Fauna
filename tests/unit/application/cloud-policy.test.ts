@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { reconciliationPlan } from "../../../src/application/cloud-policy";
+import { newestHeads, reconciliationPlan } from "../../../src/application/cloud-policy";
 import type { CloudSnapshot } from "../../../src/application/cloud-snapshots";
 
 function head(id: string, ancestors: string[] = [], sequence = 1): CloudSnapshot {
@@ -14,6 +14,18 @@ function head(id: string, ancestors: string[] = [], sequence = 1): CloudSnapshot
     ancestors,
   };
 }
+
+it("keeps competing heads in input order and uses only the last record for duplicate identities", () => {
+  const retired = head("retired");
+  const competing = head("competing");
+  const stale = head("updated", [competing.id]);
+  const descendant = head("descendant", [retired.id, "missing"]);
+  const updated = head("updated", [descendant.id, retired.id], 2);
+  const records = [retired, stale, competing, descendant, updated];
+  expect(newestHeads(records)).toEqual([updated, competing]);
+  expect(records).toEqual([retired, stale, competing, descendant, updated]);
+  expect(newestHeads([])).toEqual([]);
+});
 
 it("adopts a proven descendant at startup and preserves alternatives before installation", () => {
   const current = head("local"),

@@ -2,7 +2,7 @@ import { parseSync } from "@swc/core";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 
-const suite = /^tests\/(?:unit|integration)\/.*\.test\.(?:[cm]?[jt]sx?)$/;
+const suite = /^tests\/(?:unit|integration|exhaustive)\/.*\.test\.(?:[cm]?[jt]sx?)$/;
 const code = /\.[cm]?[jt]sx?$/;
 
 /** Static imports, re-exports and literal import()/require() calls, including type imports. */

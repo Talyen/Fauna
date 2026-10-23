@@ -72,6 +72,7 @@ Dependency audit policy lives in [CI](../Docs/CI.md); release inventory, package
 | Batching           | Formatting/lint batches contain at most 50 files, 256,000 source bytes and 8,000 argument bytes; larger single files run alone; contracts cover all batches                                           |
 | Compiler selection | Deleted sources still select their environment; dependency/configuration changes select every environment                                                                                             |
 | Required suites    | Changed suites, filename matches and the longest matching prefix in [test-owners.json](checks/test-owners.json); missing required suites block verification                                           |
+| CI-owned suites    | Exact suite entries with `tier: "ci"` in the owner registry report deferred automatic execution and select local contracts; full Vitest discovery retains them                                        |
 | Extra suites       | [task-intent.mjs](lib/task-intent.mjs) retains explicit selectors through failed checks for integration; plan mode is read-only                                                                       |
 | Test execution     | One worker, fail-fast; ignored results in `reports/task-tests.json`; unmatched non-documentation changes use labeled smoke, documentation-only changes need no tests                                  |
 

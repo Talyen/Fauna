@@ -54,9 +54,17 @@ export const unitName = (unit: Combatant) => ("name" in unit ? unit.name : speci
 export const controlled = (unit: Combatant) => !!unit.combat?.controlled || !!unit.combat?.skipped;
 /** Ties retain battlefield order; reserves and knockouts are never recipients. */
 export function mostInjured<T extends Combatant>(units: readonly T[]): T | undefined {
-  return units
-    .filter((unit) => unit.health > 0)
-    .sort((a, b) => a.health / maximumHealth(a) - b.health / maximumHealth(b))[0];
+  let target: T | undefined;
+  let lowest = Infinity;
+  for (const unit of units) {
+    if (unit.health <= 0) continue;
+    const fraction = unit.health / maximumHealth(unit);
+    if (!target || fraction < lowest) {
+      target = unit;
+      lowest = fraction;
+    }
+  }
+  return target;
 }
 export function loseHealth(state: GameState, unit: Combatant, amount: number, events: GameEvent[]) {
   const before = unit.health,

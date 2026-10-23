@@ -1,15 +1,16 @@
 import { recycleDiscard, fillHand, MAX_BATTLE_CARDS } from "./card-zones";
 import { removeDepartedMinions } from "./combat/legendary";
 import { shuffle, roll } from "./random";
-import { CARDS, species } from "./content";
+import { speciesCards, species } from "./content";
 import type { Card, GameEvent, GameState } from "./types";
 
 export function living(state: GameState) {
   return state.team.filter((c) => c.health > 0);
 }
 export function ownedCards(id: string, kind: GameState["team"][number]["species"]): Card[] {
-  return CARDS.filter((c) => c.species === kind).flatMap((c) =>
-    Array.from({ length: species(kind).legendary ? 2 : 1 }, (_, index) => ({
+  const copies = species(kind).legendary ? 2 : 1;
+  return speciesCards(kind).flatMap((c) =>
+    Array.from({ length: copies }, (_, index) => ({
       id: `${id}:${c.id}${index ? ":2" : ""}`,
       definitionId: c.id,
       ownerId: id,
@@ -177,8 +178,8 @@ export function swapBackup(
     state.cards.filter((card) => card.ownerId === outgoing.id && card.temporary).map((card) => card.id),
   );
   state.cards = state.cards.filter((card) => !removed.has(card.id));
-  const oldDefs = CARDS.filter((card) => card.species === outgoing.species);
-  const newDefs = CARDS.filter((card) => card.species === incoming.species);
+  const oldDefs = speciesCards(outgoing.species);
+  const newDefs = speciesCards(incoming.species);
   const replaced = state.cards.filter((card) => card.ownerId === outgoing.id);
   for (const card of replaced) {
     card.definitionId = newDefs[oldDefs.findIndex((def) => def.id === card.definitionId)]!.id;

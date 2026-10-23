@@ -175,3 +175,19 @@ Boons are Tattered Pages, Bone Charm, Ironwood Buckler and Icy Heart, including 
 Development additions are seeded rendered interactions with replay and bounded shrinking, named browser routes, native Electron and cold startup captures, and reachable seeded-journey performance checkpoints with coverage inventories. Extend existing harnesses and application/save interfaces; never import Alchemy at runtime. See [Development tools](../DEVELOPMENT_TOOLS.md#focused-routes-and-seeded-interactions) and [native performance](../DEVELOPMENT_TOOLS.md#native-and-reachable-performance-scenarios).
 
 Delivery order: combat/catalog and save version 13; Boon art/menu and tooltip preference; tooling and focused regression/documentation coverage. Review the complete task diff, run selected formatting/smoke and docs checks, then commit and integrate through the shared lock. Broader rendered/native/performance checks follow the user's local-review authorization; Windows packaging remains CI-owned. Report actual checks and pending boundaries.
+
+## Keyword source selections
+
+The original nine keyword portraits were copied unchanged from `Alchemy: src/assets/optimized/` at 420 × 563 pixels. Local files below are under `public/art/keywords/`. This mapping retains the source provenance referenced by the asset manifest; artwork reuse does not adopt Alchemy's mechanics. Later Armor, Bleed, Dodge, Leech and Mana portraits have exact source paths in `assets/manifest.json`; Water reuses Coralcurl's Reef Jet. Current authoring rules belong to [Content](../CONTENT.md#keyword-artwork).
+
+| Fauna keyword | Local file       | Alchemy source         |
+| ------------- | ---------------- | ---------------------- |
+| Physical      | `physical.webp`  | `talent-physical.webp` |
+| Burn          | `fire.webp`      | `talent-burn.webp`     |
+| Freeze        | `ice.webp`       | `talent-freeze.webp`   |
+| Stun          | `lightning.webp` | `talent-stun.webp`     |
+| Poison        | `poison.webp`    | `talent-poison.webp`   |
+| Nature        | `nature.webp`    | `talent-nature.webp`   |
+| Light         | `light.webp`     | `talent-holy.webp`     |
+| Block         | `block.webp`     | `talent-block.webp`    |
+| Health        | `heal.webp`      | `talent-health.webp`   |

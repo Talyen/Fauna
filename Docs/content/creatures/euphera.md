@@ -20,6 +20,4 @@ Possible Path exchanges the remaining visible hand after its own card has entere
 
 ## Artwork provenance and validation record
 
-The unchanged `Euphera_03.png` portrait and Twilight Lance, Wish Exchange and Possible Path illustrations come from the user's [Euphera Drive folder](https://drive.google.com/drive/folders/1jm5_8I9N8Q5m6yT4QcN7xKuCupkhzAmq). Original PNGs are preserved under `public/art/euphera/`; the asset manifest records each file's provenance and lossless prepared derivative. All other ability artwork is excluded from the kit.
-
-Focused Chromium review covered Collection, all six passive tiers, battle targeting and cancellation, Thorns removal, Block redistribution and hand replacement at 1920×1080 with default text and 1280×720 with 125% text, using fresh disposable saves and reduced motion. The four compositions remain uncropped and readable at shared card sizes; the selected rules and controls fit without scrolling. This is browser evidence, not native-platform, physical-controller, hosted-CI or balance acceptance. Task screenshots and interaction evidence are retained with the archived worktree reports.
+Source: [Euphera Drive folder](https://drive.google.com/drive/folders/1jm5_8I9N8Q5m6yT4QcN7xKuCupkhzAmq). Portrait: `Euphera_03.png`; originals: `public/art/euphera/`. All other ability artwork is excluded. [Implementation-time review](../../../design/visual-quality/DECISIONS.md#euphera-implementation-review) retains the inspected states, findings, evidence location and verification scope.

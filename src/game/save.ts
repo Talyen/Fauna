@@ -1,12 +1,11 @@
 import { PEARL } from "./content/creatures/memento";
 import { battlefield } from "./battlefield";
-import { ownedCards } from "./team";
 import { needsCampfire, merchantPriceRange } from "./destinations";
 import { freeze } from "immer";
 import { MAX_HAND_SIZE } from "./card-zones";
 import { starterCount, collectedSpecies, KEYWORDS, talentPoints } from "./progression";
 import { gameStateSchema } from "./state-schema";
-import { CARDS, SPECIES, FIRST_RUN_STARTERS, species, TALENTS } from "./content";
+import { speciesCards, SPECIES, FIRST_RUN_STARTERS, species, TALENTS } from "./content";
 import { encounterSource, finalEncounter, bossEncounter } from "./encounters";
 import type { GameState } from "./types";
 const unique = (values: unknown[]) => new Set(values).size === values.length;
@@ -91,7 +90,7 @@ export function decodeSave(raw: string): GameState {
         !s.team.some(
           (t) =>
             t.id === c.ownerId &&
-            (CARDS.some((d) => d.id === c.definitionId && d.species === t.species) ||
+            (speciesCards(t.species).some((d) => d.id === c.definitionId) ||
               (c.temporary && c.definitionId === PEARL.id && t.species === "memento")),
         ),
     ),
@@ -108,12 +107,17 @@ export function decodeSave(raw: string): GameState {
   );
   invalid(permanentCards.some((card) => card.id.startsWith("copy-")));
 
-  for (const creature of s.team)
-    for (const def of CARDS.filter((d) => d.species === creature.species))
+  let expectedPermanentCards = 0;
+  for (const creature of s.team) {
+    const copies = species(creature.species).legendary ? 2 : 1;
+    for (const def of speciesCards(creature.species)) {
+      expectedPermanentCards += copies;
       invalid(
         permanentCards.filter((c) => c.ownerId === creature.id && c.definitionId === def.id).length !==
-          (species(creature.species).legendary ? 2 : 1),
+          copies,
       );
+    }
+  }
   for (const keyword of KEYWORDS) {
     const bought = TALENTS.filter((t) => t.keyword === keyword && s.talents.includes(t.id));
     invalid(bought.length > talentPoints(s.keywordXP[keyword] ?? 0));
@@ -121,12 +125,7 @@ export function decodeSave(raw: string): GameState {
       invalid(TALENTS.some((t) => t.keyword === keyword && t.row < talent.row && !s.talents.includes(t.id)));
   }
   if (s.phase === "draft") invalid(s.team.length !== 0 || s.cards.length !== 0 || s.reserves.length !== 0);
-  else
-    invalid(
-      s.team.length < 1 ||
-        permanentCards.length !==
-          s.team.reduce((sum, unit) => sum + ownedCards(unit.id, unit.species).length, 0),
-    );
+  else invalid(s.team.length < 1 || permanentCards.length !== expectedPermanentCards);
   invalid(
     (s.team.length === 0 && s.phase !== "draft") ||
       (s.team.some((unit) => species(unit.species).legendary) && s.team.length !== 1),
@@ -204,7 +203,7 @@ export function decodeSave(raw: string): GameState {
           enemy.power !== original.power ||
           enemy.health > enemy.maxHealth ||
           (enemy.lastAbility !== null &&
-            !CARDS.some((card) => card.id === enemy.lastAbility && card.species === enemy.species)) ||
+            !speciesCards(enemy.species).some((card) => card.id === enemy.lastAbility)) ||
           enemy.combat.deathDoorUsed ||
           enemy.combat.grace > 0 ||
           (!battlefield(s, "player").some((c) => c.id === enemy.targetId) &&
@@ -244,7 +243,7 @@ export function decodeSave(raw: string): GameState {
       if (enemy.deck) {
         const deck = enemy.deck;
         const zones = [...deck.draw, ...deck.hand, ...deck.buffer, ...deck.discard];
-        const defs = CARDS.filter((card) => card.species === enemy.species);
+        const defs = speciesCards(enemy.species);
         invalid(
           zones.length !== 6 + deck.pearls ||
             zones.filter((id) => id === PEARL.id).length !== deck.pearls ||

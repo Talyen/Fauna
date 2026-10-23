@@ -1,8 +1,12 @@
 # Creature references
 
-[Content](../../CONTENT.md) owns shared costs, passive tiers, save policy and media preparation. Each reference retains its kit, distinctive edge rules and artwork choices; per-file sources and rights live in `assets/manifest.json`. Originals remain preserved and use native landscape/portrait compositions through the shared pipeline.
+[Content](../../CONTENT.md) defines shared costs, six complete passive tiers and media preparation. [Keywords](../../KEYWORDS.md) defines ordinary effects; [Journey](../../EXPEDITION_DESIGN.md) defines scaling, formation and recruitment. Individual references summarize kits and document distinctive timing, stacking and ownership. Shared rules apply unless a reference states an exception; player passives use permanent rank, enemies the base tier. Keep common mechanics in these guides and link from the kit.
 
-Artwork/validation sections record implementation-time observations only. Source inspection, prepared-output checks, rendered review, artistic approval and measured balance are separate facts; older notes do not qualify current main. Use the [UI review procedure](../../UI.md#required-review) for changed flows and [Release](../../RELEASE.md) for platform qualification.
+## Shared artwork and evidence scope
+
+Unless an entry specifies otherwise, its selection is an unchanged creature portrait and three action PNGs from the linked user-provided Drive folder. Preserve originals and native 4:3 creature / 3:4 action compositions; derivatives use the shared prepared-media pipeline. [The manifest](../../../assets/manifest.json) retains per-file URLs, selections and rights notes. Entries keep specific variants, exclusions and selection rationale.
+
+Source-inspection and pending-review statements describe implementation-time observations, not current acceptance. Source checks, rendered evidence, artistic approval and measured balance are separate facts. Recorded browser review is Chromium simulation; it does not qualify full CI, native desktop, Windows packaging, physical controllers, Steam or Deck. [UI review](../../UI.md#required-review) and [Release](../../RELEASE.md) define current qualification.
 
 For new kits, use the [creature design workflow](../../CREATURE_DESIGN.md) and [reusable skill](../../../.agents/skills/fauna-creature-design/SKILL.md), including the [Boss and Legendary section](../../CREATURE_DESIGN.md#boss-and-legendary-creatures).
 

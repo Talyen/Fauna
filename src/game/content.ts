@@ -3,7 +3,7 @@ import { freeze } from "immer";
 import { CARDS } from "./content/creatures";
 import type { SpeciesId, CardDefinition } from "./content/types";
 export { CARDS } from "./content/creatures";
-export { SPECIES, species } from "./content/creatures";
+export { SPECIES, species, speciesCards } from "./content/creatures";
 export type { SpeciesId, Species, PassiveTier, CardDefinition, DamageType } from "./content/types";
 // Curate solo openings separately from kits that shine after recruitment.
 export const FIRST_RUN_STARTERS: readonly SpeciesId[] = [
@@ -22,8 +22,9 @@ export const FIRST_RUN_STARTERS: readonly SpeciesId[] = [
   "euphera",
   "tournelle",
 ];
+const cardsById = new Map(CARDS.map((card) => [card.id, card]));
 export function definition(id: string): CardDefinition {
-  const result = id === PEARL.id ? PEARL : CARDS.find((c) => c.id === id);
+  const result = id === PEARL.id ? PEARL : cardsById.get(id);
   if (!result) throw new Error(`Unknown card: ${id}`);
   return result;
 }

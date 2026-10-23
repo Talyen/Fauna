@@ -12,23 +12,31 @@ Reports remain under ignored `reports/`; retain their source/checkpoint identiti
 
 ## Task checkouts and previews
 
-Use the seeded preview and capture owners for focused visual evidence:
+Start a browser preview, then capture matching before/after states:
 
 ```sh
 npm run preview:task -- --browser --scenario battle
-npm run preview:task -- --browser --scenario collection --viewport 1920x1080 --text-scale 1
 npm run capture:task -- --scenario battle --label before
 npm run capture:task -- --scenario battle --label after
-npm run capture:task -- --scenario settings --tier small --label candidate
 ```
 
-Browser previews default to 1280×720, 125% text and reduced motion. Available seeded scenarios are home, settings, settings-sound, settings-battle, collection, collection-creature, talents, talent-tree, glossary, battle, pause, draw-pile, discard-pile, battle-rewards, recruit, recruit-replacement, recruit-team-preview, merchant, merchant-unavailable, campfire, boon, journey-results, death-door and inspection. Add affected states to the existing scenario owner rather than writing another capture script. They reuse validated current-format [gameplay fixtures](../tests/support/game.ts) in fresh browser contexts; reload retains interactions committed after seeding. Without a scenario, preview opens the ordinary main menu. `--desktop` retains an isolated Electron profile, clears inherited Electron Node/performance modes and disables live Steam; seeded browser options do not apply to desktop. Without a browser/desktop flag, preview starts only its owned server. Headed browser mode requires installed Playwright Chromium; capture uses its headless runtime.
+| Choice                                | Behavior                                                                                                                                                                                    |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Browser defaults                      | 1280×720, 125% text, reduced motion; headed preview needs full Playwright Chromium, capture uses the headless runtime                                                                       |
+| Scenario                              | Select a name from [review-scenarios.mjs](../scripts/dev/review-scenarios.mjs); no scenario opens Main menu; add new states there using validated [game fixtures](../tests/support/game.ts) |
+| Layout capture (default)              | 1280×720 at 125% text and 1920×1080 at default text                                                                                                                                         |
+| `--tier small` / `--tier interaction` | Minimum viewport with enlarged text; [UI review](UI.md#required-review) defines when each tier applies                                                                                      |
+| Custom conditions                     | For example, `--viewport 1920x1080 --text-scale 1`; capture adds one custom-condition frame and cannot combine these options with an explicit tier                                          |
+| `--desktop`                           | Isolated Electron profile, inherited Node/performance modes cleared and real Steam disabled; browser seeding options do not apply                                                           |
+| No browser/desktop flag               | Start only the owned server                                                                                                                                                                 |
 
-Capture starts and closes its own quiet preview and writes a unique directory under ignored reports. The default layout tier captures 1280×720 at 125% text and 1920×1080 at default text; small and interaction tiers capture only the minimum viewport with enlarged text. Custom viewport/text options produce one additional custom-condition capture and cannot be combined with an explicit tier. Evidence includes the validated checkpoint, its hash, render-input identity, conditions, frame paths and completion/failure status. It waits for finite transitions and artwork, checks the existing shared layout contract and rejects browser errors. Failed preparation, browser errors and layout failures retain diagnostic screenshots where the page remains capturable, with errors and `complete: false`; they never become accepted evidence. Compare matching checkpoint hashes and conditions across before/after records. Inspect the images; capture does not approve visual quality or exercise changed interactions. [UI review](UI.md#required-review) owns acceptance.
+Scenarios use fresh browser contexts; reload preserves commands committed after seeding. Capture owns and closes its quiet preview, waits for finite transitions/artwork, checks layout and rejects browser errors. It writes a unique directory under `reports/` containing the validated checkpoint/hash, render-input identity, conditions, frame paths and completion status. Preparation, browser or layout failures retain errors and any capturable diagnostic frames with `complete: false`.
 
-Sessions record their identity, port, checkout and owner PID under ignored reports. Ctrl+C closes owned process handles only; records do not authorize killing a PID later. Quiet previews emit no game audio. Use normal `npm run dev` for an audible listening session; `npm run dev:desktop` uses the quiet desktop preview. The older [Merchant study capture](../design/visual-quality/capture.mjs) remains available for its additional purchase/inspection states.
+Compare matching checkpoint hashes and conditions, inspect the frames, and exercise changed interactions separately. Capture cannot approve appearance or test an interaction on its own. The older [Merchant study capture](../design/visual-quality/capture.mjs) covers additional purchase/inspection states.
 
-[Shared browser helpers](../tests/README.md#browser-and-ui-coverage) own pagination/resize and focus checks, session seeding, settled screenshots and bounded-layout assertions. Existing cross-layer recovery scenarios remain under `tests/integration/recovery/`, with browser recovery coverage in [scroll-free journeys](../tests/e2e/scroll-free.spec.ts). Reuse these owners for new coverage; product layout and recovery rules remain in [UI contracts](UI.md).
+Session records contain identity, port, checkout and owner PID. Ctrl+C closes owned handles; an old PID record never authorizes terminating that process later. Previews, including `dev:desktop`, are quiet; use `npm run dev` for audible listening.
+
+Reuse [browser helpers](../tests/README.md#browser-and-ui-coverage) for seeding, pagination/resize, focus, layout and settled screenshots. Recovery scenarios live in `tests/integration/recovery/` and [scroll-free journeys](../tests/e2e/scroll-free.spec.ts); [UI contracts](UI.md) define their product behavior.
 
 ## Focused routes and seeded interactions
 
@@ -60,21 +68,54 @@ npm run balance:playthrough -- --seed 42 --runs 2 --compare reports/baseline/jou
 
 The opt-in runner uses production application commands, current save validation, serialized in-memory writes and periodic save/resume. Policy randomness is separate from gameplay randomness. The heuristic attacks vulnerable enemies, restores injured allies, buys available talents and replaces fallen deployed creatures with healthy reserves. Random policy randomizes visible legal card choices; both policies use only the player-visible offer and creature state. Neither reads enemy target intentions or future offers. Recruitment grows the roster and chooses an existing individual to release at capacity; those choices do not imply a human-optimal team.
 
-`--save path` explicitly starts from a current-format checkpoint. Otherwise each career begins without earned progression. Repeated journeys retain earned progress. `--seed`, `--runs` (1–20), `--starter`, `--policy` (`heuristic` or `random`) and `--out` select the scenario. `--starter` is a preference among the saved offers, not a forced pick: when it is absent, the policy chooses another offered species using its separate seeded RNG. The CLI accepts only species in `FIRST_RUN_STARTERS`, even with `--save`; a checkpoint still controls the actual available offers. Reports must stay under `reports/`; output directory components cannot be symlinks.
+| Option             | Meaning                                                                                                                                                       |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--save path`      | Begin from a current-format checkpoint; otherwise start without earned progression; subsequent journeys retain earned progress                                |
+| `--seed`, `--runs` | Scenario seed and 1–20 journeys                                                                                                                               |
+| `--starter`        | Preference among actual offers, restricted to `FIRST_RUN_STARTERS` even with a save; if absent from offers, the policy chooses another using its separate RNG |
+| `--policy`         | `heuristic` or `random`; neither reads hidden intentions or future offers                                                                                     |
+| `--out`            | Directory under ignored `reports/`; path components cannot be symlinks                                                                                        |
 
-`journey.json` contains the initial checkpoint, complete attempted command journal, acceptance results, and canonical validated state/RNG checkpoints. `summary.json` includes outcomes, encounters reached, cumulative action counts, battle lengths and lineups, first/second talent-point milestones, roster, retained currency/XP and completion status. An append-only per-attempt journal is written before each command and after its save acknowledgement; interrupted runs leave an incomplete summary and the journal path. Replay requires matching code/content identity and fails on any divergence. Comparison requires completed careers with matching initial checkpoints and scenario settings; a different code identity is reported explicitly. Changes to starting save formats require a fresh baseline rather than inventing historical state.
+| Output          | Contents and validity                                                                                                                         |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `journey.json`  | Initial checkpoint, every attempted command/acceptance result and canonical validated state/RNG checkpoints                                   |
+| `summary.json`  | Completion, outcomes, encounter reached, actions, battle lengths/lineups, first/second point milestones, roster and retained Gold/XP          |
+| Attempt journal | Append before each command and after save acknowledgement; interrupted runs retain an incomplete summary and journal path                     |
+| Replay          | Matching code/content identity and exact checkpoints required; any divergence fails                                                           |
+| Comparison      | Completed careers with matching initial checkpoints/settings; changed code identity is explicit; changed save formats require fresh baselines |
 
-An external 60-second watchdog, 5,000-action budget and 100-turn-per-battle budget prevent hangs from becoming reported victories or defeats. The watchdog and cancellation stop the owned worker and wait for its exit; the command still fails if the stopped worker exits zero. Missing, duplicate and unknown CLI options fail before a worker starts. Incomplete runs fail the command. Small focused replay tests run in CI; larger sweeps remain opt-in. These are automated-policy observations, not human win-rate estimates or rendered acceptance.
+Each run has a 60-second external watchdog, 5,000-action budget and 100-turn-per-battle limit. Cancellation/watchdog stops the owned worker and waits for exit; it fails even if that worker exits zero. Missing, duplicate or unknown options fail before launch. Incomplete runs fail rather than becoming wins or defeats. CI runs focused replay tests; larger sweeps are opt-in. These are automated-policy observations, not human win rates or rendered acceptance.
 
 ## Paired balance reports
 
-`npm run balance:compare -- run` defaults to five starter preferences (Emberback, Prismram, Captoad, Dunefox and Cindernewt) crossed with seeds 0–9, serially. This is a fixed benchmark subset, not coverage of the full current starter pool; each preference is chosen only when present in the seeded offers. Each case uses the production heuristic policy, explicit Auto-end turn enabled, a 5,000-action/100-turn limit, save/resume every 17 actions and a 60-second watchdog. The suite has an internal fifteen-minute deadline; local runs must also fit the [five-minute execution budget](../CONTRIBUTING.md#execution-and-evidence). Use bounded subsets locally or hosted CI for the full benchmark. Ctrl+C or termination stops the owned worker and prevents further cases; the report remains incomplete. A watchdog waits for the stopped worker to exit before another case can start. `--starters emberback --seeds 0,1 --out reports/balance/smoke` provides a bounded two-case smoke. Custom suites accept up to five distinct starter preferences and ten distinct seeds. Reports contain explicit incomplete outcomes rather than converting timeouts to defeats. Each career case records the requested `starter` preference and the `actualStarter` from its first accepted draft. Species findings include only cases that actually selected the preferred species; fallback or unrecorded drafts produce a coverage watch item instead of being attributed to that creature. More preferences on the same seeds do not establish more independent opening matchups.
+Use a bounded local subset, then compare identical suites from two code versions:
 
-Run the identical suite in each code version, then use `npm run balance:compare -- compare reports/balance/before/report.json reports/balance/after/report.json`. Reports require matching scenario settings and initial checkpoint hashes, but permit explicitly identified code/content changes. `comparison.json` records paired mean differences and standard errors for wins, turns, remaining roster Health, encounter reached, swaps, retained currency and XP. Differences within two standard errors are noisy; one pair cannot estimate uncertainty. These are automated-policy observations, not human win rates.
+```sh
+npm run balance:compare -- run --starters emberback --seeds 0,1 --out reports/balance/smoke
+npm run balance:compare -- compare reports/balance/before/report.json reports/balance/after/report.json
+npm run balance:compare -- replay reports/balance/smoke/case-0.json
+```
 
-`npm run balance:compare -- experiment --checkpoint reports/checkpoint.json --loadouts reports/loadouts.json --out reports/balance/experiment` compares two arms from the same validated battle checkpoint. The loadouts JSON has `baseline` and `treatment`, each containing explicit `talents` and `boons` ID arrays. Both retain the same XP budgets and all other checkpoint fields; invalid prerequisites, budgets and IDs fail. Grants are identified as fixtures, not earned progression. Already-settled battle-start effects are not replayed when injecting loadouts into an active battle; use a checkpoint with the intended starting combat state when studying them. Each arm writes command/checkpoint evidence and an automatic paired comparison.
+| Setting             | Contract                                                                                                                                                        |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Default suite       | Five preferences (Emberback, Prismram, Captoad, Dunefox, Cindernewt) × seeds 0–9, run serially; a fixed benchmark subset, not full starter coverage             |
+| Custom suite        | Up to five distinct preferences and ten distinct seeds                                                                                                          |
+| Each case           | Production heuristic, Auto-end turn on, 5,000 actions, 100 turns per battle, save/resume every 17 actions, 60-second watchdog                                   |
+| Suite deadline      | Internal 15 minutes; local commands still have the [five-minute limit](../CONTRIBUTING.md#execution-and-evidence); use bounded subsets or hosted CI             |
+| Interruption        | Stop/wait for the owned worker before another case; preserve incomplete reports rather than counting timeouts as defeats                                        |
+| Species attribution | Record requested `starter` and first accepted `actualStarter`; fallback or unrecorded drafts become coverage watch items, not results for the requested species |
 
-`npm run balance:compare -- replay reports/balance/smoke/case-0.json` directly replays recorded commands and fails on code identity, checkpoint divergence or incomplete execution. Playthrough and balance tools share a source fingerprint covering gameplay and application files, including the save-format JSON. Record fresh journals after changing these inputs. All output remains under ignored `reports/`. The current journal format and policy version are checked by [playthrough.ts](../src/tooling/playthrough.ts); obsolete or mismatched journals are rejected.
+More preferences on the same seeds do not establish independent opening matchups. Comparisons require matching settings and initial checkpoint hashes; explicitly identified code/content changes are allowed. `comparison.json` reports paired mean differences and standard errors for wins, turns, remaining roster Health, encounter reached, swaps, retained Gold and XP. Effects within two standard errors are noisy; a single pair cannot estimate uncertainty. These are automated-policy observations.
+
+For a controlled two-arm experiment:
+
+```sh
+npm run balance:compare -- experiment --checkpoint reports/checkpoint.json --loadouts reports/loadouts.json --out reports/balance/experiment
+```
+
+The JSON defines `baseline` and `treatment`, each with explicit `talents` and `boons` ID arrays. Both retain XP budgets and all other checkpoint fields; invalid IDs, prerequisites or budgets fail. Grants are fixtures, not earned progression. Injecting an active battle does not replay settled opening effects; choose the intended combat checkpoint. Each arm writes command/checkpoint evidence and a paired comparison.
+
+Replay requires matching code identity, checkpoints and complete execution. Balance and playthrough fingerprints cover gameplay/application source and save-format JSON; changing these inputs requires fresh journals. [playthrough.ts](../src/tooling/playthrough.ts) rejects obsolete journal/policy versions. All output stays under ignored `reports/`.
 
 ## Ranked balance findings
 

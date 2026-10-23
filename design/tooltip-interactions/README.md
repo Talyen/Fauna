@@ -12,6 +12,6 @@ Mouse/keyboard and local checks are review evidence only. Controller, screen-con
 
 ## Reviewed choices
 
-On 2026-10-20 the user supplied: Immediate opening, Above, 8px distance, 100ms fade, Neutral border. [Recorded preferences](reviewed-choices.ts) hold this baseline in later studies. Immediate opening and a 100ms fade are compatible: information begins appearing immediately and settles over 100ms. Collision handling and reduced motion remain required. These preferences are adopted through the [shared design system](../../Docs/DESIGN_SYSTEM.md); current rendered acceptance remains separate.
+On 2026-10-20 the user supplied: Immediate opening, Above, 8px distance, 100ms fade, Neutral border. [Recorded preferences](reviewed-choices.ts) hold this baseline in later studies. Immediate opening and a 100ms fade are compatible: information begins appearing immediately and settles over 100ms. Collision handling and reduced motion remain required. These preferences were adopted through the [shared design system](../../Docs/DESIGN_SYSTEM.md).
 
 The subsequent [artwork batch](../artwork-interactions/README.md) records its own choices.
