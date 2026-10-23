@@ -286,5 +286,5 @@ export function merchantDestination() {
 
 /** Choose an authored battle explicitly for kit and boundary fixtures. */
 export function authoredPack(encounter: number, index = 0): SpeciesId[] {
-  return [...encounterPacks(encounter)[index]!.slice(0, Math.min(3, encounter + 1))];
+  return encounterPacks(encounter)[index]!.slice(0, Math.min(3, encounter + 1));
 }
