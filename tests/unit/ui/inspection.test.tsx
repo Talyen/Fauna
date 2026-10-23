@@ -69,6 +69,13 @@ describe("artwork-first inspection", () => {
         await user.keyboard("{Escape}");
         expect(document.activeElement).toBe(opener);
         expect(session.store.getState().game).toBe(game);
+        await user.click(opener);
+        await user.click(screen.getByRole("button", { name: "Close inspection" }));
+        await user.click(opener);
+        await user.click(document.querySelector<HTMLElement>(".inspection-overlay")!);
+        expect(screen.queryByRole("dialog")).toBeNull();
+        expect(document.activeElement).toBe(opener);
+        expect(session.store.getState().game).toBe(game);
         await user.click(screen.getByRole("button", { name: `Recruit ${creature.name}` }));
         expect(session.store.getState().game.selected).toEqual([kind]);
         expect(screen.queryByRole("dialog")).toBeNull();

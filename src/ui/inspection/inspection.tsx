@@ -111,6 +111,10 @@ export function Inspector({
           ref={dialog}
           overlayClassName="inspection-overlay"
           overlayChildren={<EffectBackdropHost scope="inspection" />}
+          onOverlayClick={(event) => {
+            // A reopened inspection must close on its first backdrop click, even before Radix dismisses it.
+            if (event.target === event.currentTarget) onClose();
+          }}
           className={`inspection ${card ? "single-card" : "creature-inspection"}`}
           onCloseAutoFocus={(event) => {
             event.preventDefault();
