@@ -2,7 +2,7 @@
 
 [Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
 
-Euphera has 26 Health and joins starter drafts, ordinary encounters and recruitment. Its three abilities each cost 1 Mana:
+Euphera has 26 Health and joins starter drafts, ordinary encounters and recruitment. Its abilities:
 
 - **Twilight Lance:** Purge enemy Thorns; Deal 5 Light damage
 - **Wish Exchange:** Redistribute allied Block evenly; Allies gain 1 Block

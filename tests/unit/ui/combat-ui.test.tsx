@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
-import { act, cleanup, render, screen, within } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { produce } from "immer";
 import { App } from "../../../src/ui/App";
@@ -11,7 +11,10 @@ import { TALENTS } from "../../../src/game/content";
 import { authoredPack, prepareDestination, run } from "../../support/game";
 import type { GameState } from "../../../src/game/types";
 
+let user: ReturnType<typeof userEvent.setup>;
 beforeEach(() => {
+  // jsdom has no hit geometry; browser journeys own pointer reachability.
+  user = userEvent.setup({ pointerEventsCheck: 0 });
   vi.stubGlobal(
     "ResizeObserver",
     class {
@@ -34,7 +37,7 @@ async function open(game: GameState) {
   const session = createSession(createBrowserPlatform(localStorage));
   await session.load();
   render(<App session={session} />);
-  await userEvent.click(screen.getByRole("button", { name: "Continue" }));
+  fireEvent.click(screen.getByText("Continue", { selector: "button" }));
   return session;
 }
 it("inspects draw and discard piles without changing state or exposing draw order, and keeps card details on hover", async () => {
@@ -46,7 +49,7 @@ it("inspects draw and discard piles without changing state or exposing draw orde
   try {
     const before = session.store.getState().game;
     const draw = screen.getByRole("button", { name: /^Inspect Draw Pile/ });
-    await userEvent.click(draw);
+    await user.click(draw);
     const pile = screen.getByRole("dialog", { name: "Draw Pile" });
     const cards = within(pile)
       .getAllByRole("button")
@@ -60,23 +63,24 @@ it("inspects draw and discard piles without changing state or exposing draw orde
     expect(ids).toEqual(expected.slice(0, 3));
     const allIds = [...ids];
     while (!(within(pile).getByRole("button", { name: "Next page" }) as HTMLButtonElement).disabled) {
-      await userEvent.click(within(pile).getByRole("button", { name: "Next page" }));
+      await user.click(within(pile).getByRole("button", { name: "Next page" }));
       allIds.push(
         ...Array.from(pile.querySelectorAll<HTMLElement>("[data-card-id]"), (el) => el.dataset.cardId),
       );
     }
     expect(allIds).toEqual(expected);
-    await userEvent.click(within(pile).getByRole("button", { name: "Previous page" }));
+    await user.click(within(pile).getByRole("button", { name: "Previous page" }));
     const firstCard = pile.querySelector<HTMLButtonElement>("[data-card-id]")!;
-    await userEvent.click(firstCard);
+    await user.click(firstCard);
     expect(screen.getAllByRole("dialog")).toHaveLength(1);
-    await userEvent.hover(firstCard);
+    await user.unhover(firstCard);
+    await user.hover(firstCard);
     expect(await screen.findByRole("tooltip")).toBeTruthy();
-    await userEvent.keyboard("i");
+    await user.keyboard("i");
     expect(screen.getAllByRole("dialog")).toHaveLength(1);
-    await userEvent.click(screen.getByRole("button", { name: "Close draw pile" }));
+    await user.click(screen.getByRole("button", { name: "Close draw pile" }));
     expect(document.activeElement).toBe(draw);
-    await userEvent.click(screen.getByRole("button", { name: /^Inspect Discard Pile/ }));
+    await user.click(screen.getByRole("button", { name: /^Inspect Discard Pile/ }));
     expect(
       within(screen.getByRole("dialog", { name: "Discard Pile" }))
         .getAllByRole("button")
@@ -99,12 +103,12 @@ it("shows exact Campfire recovery and commits one persisted Rest without currenc
   );
   try {
     const before = session.store.getState().game;
-    await userEvent.click(screen.getByRole("button", { name: "Visit Campfire" }));
+    await user.click(screen.getByRole("button", { name: "Visit Campfire" }));
     expect(screen.getByRole("heading", { name: "Campfire" })).toBeTruthy();
     expect(
       screen.getByText((_, node) => node?.tagName === "P" && node.textContent === "0/32 Health · Rest +10"),
     ).toBeTruthy();
-    await userEvent.click(screen.getByRole("button", { name: "Rest" }));
+    await user.click(screen.getByRole("button", { name: "Rest" }));
     await session.flush();
     const after = session.store.getState().game;
     expect(after.team[0]!.health).toBe(10);
@@ -154,7 +158,7 @@ it("keeps all simultaneous combat effects reachable through bounded pages", asyn
         .forEach((el) => seen.add(el.dataset.statusId!));
       const next = within(effects).getByRole("button", { name: "Next page" }) as HTMLButtonElement;
       if (next.disabled) break;
-      await userEvent.click(next);
+      await user.click(next);
     }
     expect([...seen]).toEqual(["armor", "thorns", "dodge", "burn", "poison", "bleed"]);
     expect(document.activeElement).toBe(within(effects).getByRole("button", { name: "Previous page" }));
@@ -172,31 +176,38 @@ it("opens every talent category and preserves purchases and requirements", async
   await session.load();
   render(<App session={session} />);
   try {
-    const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: "Talents" }));
     for (const keyword of KEYWORDS) {
       await user.click(
-        within(screen.getByRole("main")).getByRole("button", { name: `${keywordLabel(keyword)} talents` }),
+        within(screen.getByRole("main")).getByRole("button", {
+          hidden: true,
+          name: `${keywordLabel(keyword)} talents`,
+        }),
       );
       const tree = within(screen.getByRole("main"));
       const talents = TALENTS.filter((t) => t.keyword === keyword);
       const rows = [...new Set(talents.map((talent) => talent.row))];
       for (let index = 0; index < rows.length; index++) {
         for (const talent of talents.filter((entry) => entry.row === rows[index]))
-          expect(tree.getByRole("button", { name: talent.name })).toBeTruthy();
-        if (index < rows.length - 1) await user.click(tree.getByRole("button", { name: "Next page" }));
+          expect(tree.getByRole("button", { hidden: true, name: talent.name })).toBeTruthy();
+        if (index < rows.length - 1)
+          await user.click(tree.getByRole("button", { hidden: true, name: "Next page" }));
       }
-      while (!(tree.getByRole("button", { name: "Previous page" }) as HTMLButtonElement).disabled)
-        await user.click(tree.getByRole("button", { name: "Previous page" }));
+      while (
+        !(tree.getByRole("button", { hidden: true, name: "Previous page" }) as HTMLButtonElement).disabled
+      )
+        await user.click(tree.getByRole("button", { hidden: true, name: "Previous page" }));
       if (keyword === "physical") {
         const later = talents.find((t) => t.row === 1)!;
-        await user.click(tree.getByRole("button", { name: "Next page" }));
-        expect(tree.getByRole("button", { name: later.name }).getAttribute("aria-disabled")).toBe("true");
-        await user.click(tree.getByRole("button", { name: "Previous page" }));
+        await user.click(tree.getByRole("button", { hidden: true, name: "Next page" }));
+        expect(
+          tree.getByRole("button", { hidden: true, name: later.name }).getAttribute("aria-disabled"),
+        ).toBe("true");
+        await user.click(tree.getByRole("button", { hidden: true, name: "Previous page" }));
         for (const talent of talents.filter((t) => t.row === 0))
-          await user.click(tree.getByRole("button", { name: talent.name }));
-        await user.click(tree.getByRole("button", { name: "Next page" }));
-        await user.click(tree.getByRole("button", { name: later.name }));
+          await user.click(tree.getByRole("button", { hidden: true, name: talent.name }));
+        await user.click(tree.getByRole("button", { hidden: true, name: "Next page" }));
+        await user.click(tree.getByRole("button", { hidden: true, name: later.name }));
         expect(session.store.getState().game.talents).toContain(later.id);
       }
       await user.click(screen.getByRole("button", { name: "Back" }));

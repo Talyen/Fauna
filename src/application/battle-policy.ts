@@ -25,7 +25,12 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
     .filter((unit) => unit.health > 0)
     .map((unit) => {
       const all = [...state.team, ...state.reserves];
-      const ids = formationForSwap(all, state.lineup, outgoing?.id ?? "", unit.id);
+      const ids = formationForSwap(
+        all,
+        state.team.map((unit) => unit.id),
+        outgoing?.id ?? "",
+        unit.id,
+      );
       const lineup = ids
         .map((id) => all.find((entry) => entry.id === id)!)
         .filter((entry) => entry.health > 0);

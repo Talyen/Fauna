@@ -1,4 +1,4 @@
-import { CARDS, SPECIES, FIRST_RUN_STARTERS, ENCOUNTERS, BOONS, TALENTS, TALENT_EFFECTS } from "./content";
+import { CARDS, SPECIES, FIRST_RUN_STARTERS, BOONS, TALENTS, TALENT_EFFECTS } from "./content";
 import { cardText } from "./card-rules";
 import { BOSSES, COMBAT_PACKS, JOURNEY_LENGTH } from "./encounters";
 import { DAMAGE_TYPES, EFFECT_KEYWORDS, PROGRESSION_KEYWORDS, definitionKeywords } from "./keywords";
@@ -164,11 +164,6 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
     encounters.add(boss.encounter);
     if (!boss.name.trim()) error(boss.id, "stats", "Invalid boss name or stats.");
   }
-  for (const encounter of ENCOUNTERS)
-    for (const enemy of encounter.enemies) {
-      if (!species.has(enemy.species) || !Number.isSafeInteger(enemy.health) || enemy.health < 1)
-        error(encounter.name, "enemies", "Invalid legacy enemy.");
-    }
   for (const talent of catalog.talents) {
     if (talent.text.includes(".")) error(talent.id, "description", "Effect descriptions must omit periods");
     if (!PROGRESSION_KEYWORDS.includes(talent.keyword) || !TALENT_EFFECTS.includes(talent.effect))

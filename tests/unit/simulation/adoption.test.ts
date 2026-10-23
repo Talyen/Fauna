@@ -30,11 +30,12 @@ describe("headless production sessions", () => {
     await expect(runJourney(config, "different", journey.initial, journey)).rejects.toThrow("identity");
   }, 30000);
   it("retains decision reasons and live battle diagnostics when an action budget is exhausted", async () => {
-    const initial = encodeSave(teamRun(42, ["mossguard"]));
+    const checkpoint = teamRun(42, ["mossguard"]);
+    const initial = encodeSave(checkpoint);
     const journey = await runJourney({ ...config, runs: 1, maxActions: 1 }, "fixture", initial);
     expect(journey.complete).toBe(false);
     expect(journey.results).toEqual([]);
-    expect(journey.diagnostics).toMatchObject({ encounter: 0, stalled: false });
+    expect(journey.diagnostics).toMatchObject({ encounter: checkpoint.encounter, stalled: false });
     expect(journey.steps[0]!.decision.length).toBeGreaterThan(0);
     const replay = await runJourney(
       { ...config, runs: 1, maxActions: 1, resumeEvery: 1 },

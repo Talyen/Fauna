@@ -22,7 +22,6 @@ function ready(kinds: SpeciesId[] = ["captoad"], cardId = "captoad-swap") {
 }
 function withBackup() {
   return produce(ready(["captoad", "emberback", "prismram"]), (game) => {
-    game.roster.push("mossguard");
     game.reserves.push({
       id: "backup",
       species: "mossguard",
@@ -79,10 +78,11 @@ it("Puffs Poison onto every living enemy, excluding knockouts", () => {
     draft.rng = 1;
   });
   const result = play(started);
-  expect(result.events.filter((event) => event.kind === "damage").map((event) => event.targetId)).toEqual([
-    "enemy-0",
-    "enemy-1",
-  ]);
+  expect(
+    result.events
+      .filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage")
+      .map((event) => event.targetId),
+  ).toEqual(["enemy-0", "enemy-1"]);
   expect(result.state.battle!.enemies.map((enemy) => enemy.combat.poison)).toEqual([2, 2, 0]);
 });
 
@@ -97,7 +97,9 @@ it.each([0, 10])("Sporecoat retaliates on landed attacks even with %i Block", (b
   expect(result.battle!.enemies[0]!.health).toBe(initial.battle!.enemies[0]!.health - 1);
   expect(result.battle!.enemies[0]!.combat.poison).toBe(1);
   expect(result.battle!.enemies[0]!.combat.statusSources.poison).toBe("ally-0");
-  expect(events.filter((event) => event.kind === "damage")).toHaveLength(2);
+  expect(
+    events.filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage"),
+  ).toHaveLength(2);
   expect(decodeSave(encodeSave(result))).toEqual(result);
 });
 
@@ -132,7 +134,9 @@ it("Sporecoat ignores Dodges, ticks, derived packets and knockouts without recur
     tickStatuses(game, game.battle!.enemies[0]!, events);
   });
   expect(mirrored.team[0]!.combat!.poison).toBe(0);
-  expect(events.filter((event) => event.kind === "damage")).toHaveLength(3);
+  expect(
+    events.filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage"),
+  ).toHaveLength(3);
 });
 
 it("removes the outgoing kit from hand and piles before drawing the incoming kit, retaining state and resume", () => {
@@ -154,7 +158,6 @@ it("removes the outgoing kit from hand and piles before drawing the incoming kit
       actor!.combat!.cardsPlayedThisTurn = 1;
     }),
   );
-  expect(result.state.lineup).toEqual(result.state.team.map((unit) => unit.id));
   expect(
     result.state.cards
       .filter((card) => card.ownerId === "backup")
@@ -180,7 +183,6 @@ it("removes the outgoing kit from hand and piles before drawing the incoming kit
 
 it("removes outgoing overflow too, while preserving unrelated cards and filling their vacant hand slots", () => {
   const game = produce(ready(["captoad", "emberback", "prismram"]), (draft) => {
-    draft.roster.push("mossguard");
     draft.reserves.push({
       id: "backup",
       species: "mossguard",
@@ -209,7 +211,6 @@ it("removes outgoing overflow too, while preserving unrelated cards and filling 
 
 it("chooses only living backup with seeded RNG; rejected plays consume none", () => {
   const setup = produce(withBackup(), (game) => {
-    game.roster.push("emberback");
     game.reserves.push({ ...game.reserves[0]!, id: "other", species: "emberback", health: 24 });
   });
   const chosen = new Set<string>();
@@ -238,7 +239,6 @@ it("swaps positions with a living ally when no living backup exists, or just dra
   expect(result.team.map((unit) => unit.id)).toEqual(["ally-1", "ally-0"]);
   expect(result.cards).toEqual(game.cards);
   expect(result.battle!.hand).toHaveLength(2);
-  expect(result.lineup).toEqual(result.team.map((unit) => unit.id));
   expect(decodeSave(encodeSave(result))).toEqual(result);
   const alone = ready();
   const solo = play(alone).state;
@@ -271,7 +271,10 @@ it("enemy Leaps reorder the battlefield without extra actions, and saves retain 
       { type: "beginBattle" },
     );
     const result = dispatch(game, { type: "endTurn" });
-    const actions = result.events.filter((event) => event.kind === "action" && event.actionType !== "swap");
+    const actions = result.events.filter(
+      (event): event is Extract<GameEvent, { kind: "action" }> =>
+        event.kind === "action" && event.actionType !== "swap",
+    );
     if (!actions.some((event) => event.text.includes("Bogbound Leap"))) continue;
     found = true;
     expect(actions).toHaveLength(3);

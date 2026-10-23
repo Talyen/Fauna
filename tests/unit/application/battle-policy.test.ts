@@ -279,7 +279,6 @@ it("restores missing deployed damage instead of choosing the first support backu
       { ...game.team[1]!, id: "a-support" },
       { ...game.team[0]!, id: "z-attacker", species: "emberback", health: 20 },
     ];
-    game.roster.push("cadenza", "emberback");
   });
   const selected = chooseBattleCommand(state, false);
   expect(selected).toMatchObject({ type: "swap", reserve: "z-attacker" });
@@ -295,7 +294,6 @@ it("favors a healthy complementary backup when deployed damage is already availa
       { ...game.team[0]!, id: "a-attacker", species: "emberback", health: 1 },
       { ...game.team[0]!, id: "z-support", species: "cadenza", health: 28 },
     ];
-    game.roster.push("emberback", "cadenza");
   });
   expect(chooseBattleCommand(state, false)).toMatchObject({ type: "swap", reserve: "z-support" });
 });

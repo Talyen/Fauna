@@ -1,3 +1,4 @@
+import type { GameEvent } from "../../../src/game/types";
 import { authoredPack, swapFixture } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
@@ -26,7 +27,6 @@ function play(game: GameState, autoEndTurn = false) {
   return dispatch(game, { type: "play", cardId: game.battle!.hand[0]!, autoEndTurn });
 }
 function addBackup(game: GameState) {
-  game.roster.push("coralcurl");
   game.reserves.push({
     id: "backup",
     species: "coralcurl",
@@ -133,8 +133,12 @@ it("Thaw Path clears only allied Freeze buildup, rewards actual removal and draw
   expect(result.state.team[2]!.combat!.freeze).toBe(3);
   expect(result.state.reserves[0]!.combat!.freeze).toBe(3);
   expect(result.state.battle!.enemies[0]!.combat.freeze).toBe(2);
-  expect(result.events.filter((event) => event.status === "cleanse")).toHaveLength(2);
-  expect(result.events.filter((event) => event.kind === "heal")).toHaveLength(2);
+  expect(result.events.filter((event) => event.kind === "status" && event.status === "cleanse")).toHaveLength(
+    2,
+  );
+  expect(
+    result.events.filter((event): event is Extract<GameEvent, { kind: "heal" }> => event.kind === "heal"),
+  ).toHaveLength(2);
   expect(result.state.battle!.hand).toHaveLength(1);
   expect(result.state.battleXP.health).toBe(1);
   const clean = produce(ready("thaw-path"), (draft) => {

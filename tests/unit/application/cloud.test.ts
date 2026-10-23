@@ -1,5 +1,7 @@
 import { expect, it, vi } from "vitest";
-import { createCloud, snapshot, parseSnapshot, cloudName, newestHeads } from "../../../src/application/cloud";
+import { createCloud } from "../../../src/application/cloud";
+import { snapshot, parseSnapshot, cloudName } from "../../../src/application/cloud-snapshots";
+import { newestHeads } from "../../../src/application/cloud-policy";
 import { createGame, dispatch } from "../../../src/game/engine";
 import { encodeSave, decodeSave } from "../../../src/game/save";
 import type { CloudIdentity, CloudPort } from "../../../src/platform/ports";

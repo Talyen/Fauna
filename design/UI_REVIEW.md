@@ -1,6 +1,6 @@
 # Interactive UI review
 
-This records the component review process and inventory from the October 20 rollout. Current production behavior belongs to [UI rules](../Docs/UI.md); older study controls and verification notes describe their recorded scope. For a new design comparison, review each Fauna UI element through playable HTML comparisons built from the registered shadcn/ui primitives and the real gameplay compositions. Keep the black, charcoal, ivory and gold foundation. Ordinary buttons have visible boundaries; primary actions use gold fill. The user authorized production adoption of all approved decisions on 2026-10-20. [Implementation ownership](../Docs/DESIGN_SYSTEM.md) records the rollout and validation boundaries.
+This records the component review process and inventory from the October 20 rollout. Current production behavior belongs to [UI rules](../Docs/UI.md); older study controls and verification notes describe their recorded scope. That rollout compared playable HTML samples built from registered shadcn/ui primitives and real gameplay compositions, using black, charcoal, ivory and gold, visible button boundaries and gold primary actions. The user authorized production adoption of all approved decisions on 2026-10-20. [Implementation ownership](../Docs/DESIGN_SYSTEM.md) records the rollout and validation boundaries.
 
 ## Current visual workflow
 

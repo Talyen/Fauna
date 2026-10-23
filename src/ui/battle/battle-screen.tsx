@@ -1,3 +1,4 @@
+import type { GameEvent } from "../../game/types";
 import { useBattleArtworkSize } from "./use-battle-artwork-size";
 import { battlefield } from "../../game/battlefield";
 import { sharedDodgeChance } from "../../game/combat/index";
@@ -352,7 +353,10 @@ export function BattleScreen({
                 modifiers={game}
               />
               {preview?.events
-                .filter((event) => event.kind === "status" && !event.targetId)
+                .filter(
+                  (event): event is Extract<GameEvent, { kind: "status" }> =>
+                    event.kind === "status" && !event.targetId,
+                )
                 .map((event, index) => (
                   <p key={index}>{event.text}</p>
                 ))}

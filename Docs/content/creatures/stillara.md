@@ -2,7 +2,7 @@
 
 [Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
 
-Stillara has 26 Health and is available through ordinary encounters, recruitment and later starter drafts. Its support-only kit excludes it from the first solo starter pool. All three abilities cost 1 Mana:
+Stillara has 26 Health and is available through ordinary encounters, recruitment and later starter drafts. Its support-only kit excludes it from the first solo starter pool. Its abilities:
 
 - **Reed Reservoir:** Gain 2 Mana
 - **Thaw Path:** Cleanse all Freeze build-up from allies; Draw 1 card

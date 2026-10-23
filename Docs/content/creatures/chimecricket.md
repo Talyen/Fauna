@@ -2,7 +2,7 @@
 
 [Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
 
-Chimecricket is a 24 Health musical support creature available through starter drafts, ordinary encounters and recruitment. All three abilities cost 1 Mana:
+Chimecricket is a 24 Health musical support creature available through starter drafts, ordinary encounters and recruitment. Its abilities:
 
 - **Resonant Leap:** Deal 4 Stun damage; Draw a card
 - **Hush Dome:** Nullify the next harmful status effect on each ally

@@ -2,7 +2,7 @@
 
 [Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
 
-Dunefox is a 24 Health evasive support creature available through ordinary encounters, recruitment and starter drafts. Each ability costs 1 Mana:
+Dunefox is a 24 Health evasive support creature available through ordinary encounters, recruitment and starter drafts. Its abilities:
 
 - **Sandburst Pounce:** Deal 6 Physical damage
 - **Dune Whirl:** Deal 1 Physical damage to all enemies; Blind all enemies

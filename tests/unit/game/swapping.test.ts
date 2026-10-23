@@ -11,7 +11,6 @@ import { completeRecruitment, accept, run, winBattle, swapFixture } from "../../
 function withReserves() {
   return produce(run(), (d) => {
     for (const kind of ["pollenmoth", "emberback"] as const) {
-      d.roster.push(kind);
       d.reserves.push({
         id: `recruit-${kind}`,
         species: kind,
@@ -82,7 +81,6 @@ describe("knockout replacements", () => {
     expect(next.cards.filter((c) => c.ownerId === "recruit-pollenmoth").map((c) => c.definitionId)).toEqual(
       CARDS.filter((c) => c.species === "pollenmoth").map((c) => c.id),
     );
-    expect(next.lineup).toEqual(next.team.map((c) => c.id));
     expect(decodeSave(encodeSave(next))).toEqual(next);
   });
   it("allows a controlled living backup when it is the only survivor, with no repeated opening grants", () => {
@@ -179,17 +177,15 @@ describe("knockout replacements", () => {
   });
 });
 
-it("rejects duplicate identities, invalid lineup members, missing cards and extra roster members", () => {
+it("rejects duplicate identities, missing cards and more than five individuals", () => {
   for (const modify of [
+    (d: ReturnType<typeof withReserves>) => {
+      d.reserves.push({ ...d.reserves[0]!, id: "extra-owned-creature" });
+    },
     (d: ReturnType<typeof withReserves>) => {
       d.reserves[0]!.id = d.team[0]!.id;
     },
-    (d: ReturnType<typeof withReserves>) => {
-      d.lineup = ["missing"];
-    },
-    (d: ReturnType<typeof withReserves>) => {
-      d.roster.push("prismram");
-    },
+
     (d: ReturnType<typeof withReserves>) => {
       d.battle!.draw = [];
     },

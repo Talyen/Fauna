@@ -9,7 +9,7 @@ import type { Command, GameState } from "../game/types";
 export function performanceCases(seed = 42) {
   const fixture = structuredClone(createGame(seed));
   const kinds: SpeciesId[] = ["mossguard", "emberback", "prismram", "pollenmoth"];
-  fixture.roster = kinds;
+
   fixture.selected = kinds.slice(0, 3);
   fixture.starterOffers = [];
   fixture.discovery = {
@@ -34,7 +34,7 @@ export function performanceCases(seed = 42) {
       attacked: false,
     },
   ];
-  fixture.lineup = fixture.team.map((c) => c.id);
+
   fixture.cards = fixture.team.flatMap((c) =>
     CARDS.filter((card) => card.species === c.species).map((card) => ({
       id: `${c.id}:${card.id}`,
@@ -45,13 +45,13 @@ export function performanceCases(seed = 42) {
   );
   Object.assign(fixture, {
     phase: "teamSelection",
-    expedition: null,
+    expedition: { pack: ["emberback", "pollenmoth", "mossguard"], recruit: null, lastRoom: null },
     battle: null,
     reward: null,
     support: null,
-    journey: { outcome: null, victories: 0, currency: 0, xp: {}, unlocks: [], lastBattle: null },
+    journey: { outcome: null, victories: 2, currency: 0, xp: {}, lastBattle: null },
   } satisfies import("../game/types").Lifecycle);
-  fixture.expedition = null;
+  fixture.encounter = 2;
   const started = dispatch(fixture, { type: "beginBattle" });
   if (!started.accepted) throw new Error(started.reason);
   const initial = encodeSave(decodeSave(encodeSave(started.state)));
@@ -73,7 +73,7 @@ export function performanceCases(seed = 42) {
     {
       id: "battle",
       initial,
-      fixture: "explicit-three-deployed-one-reserve-v1",
+      fixture: "explicit-three-deployed-one-reserve-v2",
       actions: [
         { kind: "play", command: attack, checkpoint: played },
         {
@@ -86,7 +86,7 @@ export function performanceCases(seed = 42) {
     {
       id: "swap",
       initial: encodeSave(decodeSave(encodeSave(knockedOut))),
-      fixture: "explicit-three-deployed-one-reserve-v1",
+      fixture: "explicit-three-deployed-one-reserve-v2",
       actions: [
         {
           kind: "swap",
@@ -98,7 +98,7 @@ export function performanceCases(seed = 42) {
     {
       id: "menus",
       initial,
-      fixture: "explicit-three-deployed-one-reserve-v1",
+      fixture: "explicit-three-deployed-one-reserve-v2",
       actions: [
         { kind: "click", name: "Collection", checkpoint: initial },
         { kind: "click", name: "Inspect Mossguard", checkpoint: initial },
@@ -139,7 +139,7 @@ export async function reachablePerformanceCases(seed = 42) {
       seed,
       encounter: state.encounter,
       turn: state.battle!.turn,
-      roster: state.roster,
+      roster: [...state.team, ...state.reserves].map((unit) => unit.species),
       talents: state.talents,
       boons: state.boons,
       hand: state.battle!.hand.map((id) => state.cards.find((card) => card.id === id)!.definitionId),

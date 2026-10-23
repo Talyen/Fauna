@@ -23,15 +23,16 @@ export function recruitLineup(
   incoming: Pick<import("./types").Creature, "id" | "species">,
   replacement?: string,
 ): string[] {
+  const active = state.team.map((unit) => unit.id);
   if (replacement) {
-    const ids = state.lineup.map((id) => (id === replacement ? incoming.id : id));
+    const ids = active.map((id) => (id === replacement ? incoming.id : id));
     return ids.includes(incoming.id) && species(incoming.species).legendary ? [incoming.id] : ids;
   }
-  return state.lineup.length < 3 &&
+  return active.length < 3 &&
     !species(incoming.species).legendary &&
     !state.team.some((unit) => species(unit.species).legendary)
-    ? [...state.lineup, incoming.id]
-    : [...state.lineup];
+    ? [...active, incoming.id]
+    : [...active];
 }
 /** Joining a roster changes individuals and deployment; Collection progress is granted separately. */
 export function addRecruit(state: GameState, kind: import("./content").SpeciesId, replacement?: string) {
@@ -42,23 +43,19 @@ export function addRecruit(state: GameState, kind: import("./content").SpeciesId
   const incoming = { id, species: kind, health: species(kind).health, block: 0, attacked: false };
   const lineup = recruitLineup(state, incoming, replacement);
   if (replacement) {
-    const released = all.find((unit) => unit.id === replacement)!;
-    state.roster[state.roster.indexOf(released.species)] = kind;
     const active = state.team.findIndex((unit) => unit.id === replacement);
     if (active >= 0) state.team[active] = incoming;
     else state.reserves[state.reserves.findIndex((unit) => unit.id === replacement)] = incoming;
   } else {
-    state.roster.push(kind);
     if (lineup.includes(incoming.id)) state.team.push(incoming);
     else state.reserves.push(incoming);
   }
-  state.lineup = lineup;
-  prepareLineup(state);
+  prepareLineup(state, lineup);
 }
-export function prepareLineup(state: GameState) {
+function prepareLineup(state: GameState, ids: string[]) {
   const all = [...state.team, ...state.reserves];
-  state.team = state.lineup.map((id) => all.find((c) => c.id === id)!);
-  state.reserves = all.filter((c) => !state.lineup.includes(c.id));
+  state.team = ids.map((id) => all.find((c) => c.id === id)!);
+  state.reserves = all.filter((c) => !ids.includes(c.id));
   rebuildCards(state);
 }
 export function rebuildCards(state: GameState) {
@@ -140,7 +137,7 @@ function setFormation(state: GameState, ids: string[], events: GameEvent[] = [],
     fillHand(state);
     recycleDiscard(state);
   }
-  events.push({ kind: "action", actionType: "swap", actorId: ids[0], text: "Your formation changes" });
+  events.push({ kind: "action", actionType: "swap", actorId: ids[0]!, text: "Your formation changes" });
 }
 /** Knockout replacement is derived from the committed roster, including after resume. */
 export function pendingReplacement(state: GameState) {
@@ -172,7 +169,6 @@ export function swapBackup(
       events,
       fromCard,
     );
-    state.lineup = state.team.map((unit) => unit.id);
     return;
   }
   state.team[index] = incoming;
@@ -196,7 +192,6 @@ export function swapBackup(
     }
   }
   if (state.battle) recycleDiscard(state);
-  state.lineup = state.team.map((unit) => unit.id);
   events.push({
     kind: "action",
     actionType: "swap",
@@ -225,7 +220,6 @@ export function swapFromCard(
   const from = row.findIndex((unit) => unit.id === actor.id);
   const to = row.findIndex((unit) => unit.id === other.id);
   [row[from], row[to]] = [row[to]!, row[from]!];
-  if (allied) state.lineup = state.team.map((unit) => unit.id);
   events.push({
     kind: "action",
     actionType: "swap",

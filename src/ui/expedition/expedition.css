@@ -236,14 +236,6 @@
   justify-content: center;
   gap: var(--screen-section-gap);
 }
-.unlock-card {
-  width: 240px;
-}
-.unlock-card p {
-  text-align: center;
-  color: var(--muted-foreground);
-  margin-top: var(--space-3);
-}
 
 .destinations-screen {
   width: min(1120px, 100%);
@@ -373,20 +365,7 @@
   width: var(--art-landscape-width);
   text-align: center;
 }
-.unlock-screen {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--screen-section-gap);
-  padding: var(--page-block-gutter) var(--page-inline-gutter);
-}
 
-.unlock-creature {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--screen-item-gap);
-}
 .starter-kit {
   display: flex;
   flex-direction: column;

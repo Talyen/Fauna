@@ -1,3 +1,4 @@
+import type { GameEvent } from "../../../../src/game/types";
 import { authoredPack, swapFixture } from "../../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
@@ -68,7 +69,6 @@ it.each([1, 2, 3, 4, 5, 6])("grants Shelter once at combat start for %i copies",
     `Sternshell starts combat with ${copies + 1} Armor`,
   );
   game = produce(game, (draft) => {
-    draft.roster.push("coralcurl");
     draft.reserves.push({
       id: "backup",
       species: "coralcurl",
@@ -88,9 +88,11 @@ it.each([0, 1, 7])("doubles Surge Ram only with Armor (%i)", (armor) => {
     draft.team[0]!.combat!.armor = armor;
   });
   const result = play(game, "sternshell-attack");
-  expect(result.events.filter((event) => event.kind === "damage").map((event) => event.amount)).toEqual([
-    armor ? 6 : 3,
-  ]);
+  expect(
+    result.events
+      .filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage")
+      .map((event) => event.amount),
+  ).toEqual([armor ? 6 : 3]);
   expect(result.state.team[0]!.combat!.armor).toBe(armor);
   const card = { ...game.cards.find((card) => card.definitionId === "sternshell-attack")!, level: 1 };
   expect(actionValue(card, game.team[0]!, game)).toBe(armor ? 10 : 5);
@@ -100,7 +102,6 @@ it.each([0, 1, 7])("doubles Surge Ram only with Armor (%i)", (armor) => {
 });
 it("swaps to a living backup before drawing from the incoming kit", () => {
   const game = produce(ready(), (draft) => {
-    draft.roster.push("coralcurl", "emberback");
     draft.reserves.push(
       { id: "backup", species: "coralcurl", health: 26, block: 0, combat: freshCombat(), attacked: false },
       { id: "fallen", species: "emberback", health: 0, block: 0, combat: freshCombat(), attacked: false },
@@ -145,9 +146,11 @@ it("hits every enemy and refunds Mana once before automatic end turn", () => {
   });
   const result = play(game, "sternshell-spiral-return", true);
   expect(result.accepted).toBe(true);
-  expect(result.events.filter((event) => event.kind === "damage").map((event) => event.amount)).toEqual(
-    game.battle!.enemies.map(() => 1),
-  );
+  expect(
+    result.events
+      .filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage")
+      .map((event) => event.amount),
+  ).toEqual(game.battle!.enemies.map(() => 1));
   expect(result.state.battle!.mana).toBe(1);
   expect(result.state.battle!.turn).toBe(1);
   expect(result.state.battleXP.water).toBe(1);
@@ -166,7 +169,6 @@ it("grants enemy Shelter at base rank and does not grant opening Armor to backup
       ),
     };
     draft.discovery.recruited.sternshell = 6;
-    draft.roster.push("coralcurl");
     draft.reserves.push({
       id: "backup",
       species: "coralcurl",
@@ -175,7 +177,9 @@ it("grants enemy Shelter at base rank and does not grant opening Armor to backup
       combat: freshCombat(),
       attacked: false,
     });
-    draft.lineup[0] = "backup";
+    const outgoing = draft.team[0]!;
+    draft.team[0] = draft.reserves.pop()!;
+    draft.reserves.push(outgoing);
   });
   game = accept(game, { type: "beginBattle" });
   expect(game.battle!.enemies[0]!.species).toBe("sternshell");

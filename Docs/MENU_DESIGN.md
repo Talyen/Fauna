@@ -10,7 +10,7 @@ Menu order is Continue/Play, Talents, Collection, optional owned Boons during a 
 
 Collection, Talents, Settings and Glossary open full screen from either menu, including during battle. The hamburger opens the originating menu directly, even from a talent tree. Menus pause Auto-play; returning from Collection leaves it off. Main menu preserves the saved journey; Continue resumes its committed state.
 
-Ending a started journey opens Journey results as Returned home. Ending an unfinished starter choice returns to Main menu. Results have one Main menu action and no menu entry for reopening them. Reward settlement belongs to [journey rules](EXPEDITION_DESIGN.md#screen-flow-and-journey-results).
+[Journey rules](EXPEDITION_DESIGN.md#screen-flow-and-journey-results) own End journey outcomes and reward settlement. Results have one Main menu action and no menu entry for reopening them.
 
 ## Back and focus return
 

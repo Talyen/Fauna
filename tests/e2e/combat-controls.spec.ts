@@ -131,7 +131,7 @@ test("final victory returns to the menu without a retired creature reveal", asyn
         d.encounter = 7;
         d.journey!.victories = d.encounter;
         prepareDestination(d);
-        d.journey = { outcome: null, victories: 7, currency: 0, xp: {}, unlocks: [], lastBattle: null };
+        d.journey = { outcome: null, victories: 7, currency: 0, xp: {}, lastBattle: null };
         d.expedition = { pack: authoredPack(d.encounter), recruit: null, lastRoom: null };
       }),
       { type: "beginBattle" },

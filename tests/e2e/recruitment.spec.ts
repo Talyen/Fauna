@@ -18,7 +18,7 @@ test("recruitment adds a backup without exposing free lineup changes", async ({ 
   expect(await state(page)).toEqual(beforeInspection);
   await page.getByRole("button", { name: "Recruit Emberback", exact: true }).click();
   const recruited = await state(page);
-  expect(recruited.roster).toHaveLength(4);
+  expect([...recruited.team, ...recruited.reserves].map((unit) => unit.species)).toHaveLength(4);
   expect(recruited.reserves[0]!.species).toBe("emberback");
   expect(recruited.team[0]!.species).toBe("mossguard");
   await page.getByRole("button", { name: "Open menu" }).click();
@@ -41,7 +41,9 @@ test("full-roster recruitment banks Collection progress and confirms only the di
   await expect(page.getByRole("button", { name: "Skip", exact: true })).toHaveCount(0);
   await page.getByRole("button", { name: "Recruit Emberback", exact: true }).click();
   const banked = await state(page);
-  expect(banked.roster).toEqual(fixture.roster);
+  expect([...banked.team, ...banked.reserves].map((unit) => unit.species)).toEqual(
+    [...fixture.team, ...fixture.reserves].map((unit) => unit.species),
+  );
   expect(banked.discovery.recruited.emberback).toBe((fixture.discovery.recruited.emberback ?? 0) + 1);
   await expect(page.getByRole("heading", { name: "Choose your team", exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: "Back", exact: true })).toHaveCount(0);
@@ -60,9 +62,11 @@ test("full-roster recruitment banks Collection progress and confirms only the di
   await first.click();
   await page.getByRole("button", { name: "Confirm", exact: true }).click();
   const recruited = await state(page);
-  expect(recruited.roster).toHaveLength(5);
-  expect(recruited.roster).not.toContain("mossguard");
-  expect(recruited.team.find((c) => c.id === recruited.lineup[0])!.species).toBe("emberback");
+  expect([...recruited.team, ...recruited.reserves].map((unit) => unit.species)).toHaveLength(5);
+  expect([...recruited.team, ...recruited.reserves].map((unit) => unit.species)).not.toContain("mossguard");
+  expect(recruited.team.find((c) => c.id === recruited.team.map((unit) => unit.id)[0])!.species).toBe(
+    "emberback",
+  );
   expect(recruited.discovery).toEqual(banked.discovery);
   expect(recruited.phase).toBe("teamSelection");
   await page.reload();

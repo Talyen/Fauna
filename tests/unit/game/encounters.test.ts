@@ -7,7 +7,7 @@ import {
   encounterPacks,
   generateEncounterPack,
 } from "../../../src/game/encounters";
-import { ENCOUNTERS, species } from "../../../src/game/content";
+import { species } from "../../../src/game/content";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import {
   authoredPack,
@@ -64,12 +64,16 @@ describe("journey encounters", () => {
             draft.journey!.victories = encounter;
             draft.team[0]!.health = 0;
             draft.reserves = draft.team.splice(1);
-            draft.lineup = draft.team.map((creature) => creature.id);
+
             draft.expedition = { pack: generateEncounterPack(draft), recruit: null, lastRoom: null };
           });
           const pack = state.expedition!.pack!;
           expect(pack).toHaveLength([3, 7].includes(encounter) ? 1 : Math.min(3, encounter + 1));
-          expect(pack.every((kind) => !state.roster.includes(kind))).toBe(true);
+          expect(
+            pack.every(
+              (kind) => ![...state.team, ...state.reserves].map((unit) => unit.species).includes(kind),
+            ),
+          ).toBe(true);
           expect(enter(state).battle!.enemies.map((enemy) => enemy.species)).toEqual(pack);
         }
       }
@@ -112,7 +116,11 @@ describe("journey encounters", () => {
     const pack = recruited.expedition!.pack!;
     expect(pack).toHaveLength(3);
     expect(pack[1]).toBe("dunefox");
-    expect(pack.every((kind) => !recruited.roster.includes(kind))).toBe(true);
+    expect(
+      pack.every(
+        (kind) => ![...recruited.team, ...recruited.reserves].map((unit) => unit.species).includes(kind),
+      ),
+    ).toBe(true);
     expect(decodeSave(encodeSave(recruited))).toEqual(recruited);
     const battle = enter(recruited);
     expect(battle.battle!.enemies.map((enemy) => enemy.species)).toEqual(pack);
@@ -137,13 +145,6 @@ describe("journey encounters", () => {
         }
       }
     }
-    for (let encounter = 0; encounter < ENCOUNTERS.length; encounter++) {
-      const source = encounterSource({ expedition: null, encounter });
-      for (const enemy of source.enemies) {
-        expect(enemy.health).toBe(Math.round(species(enemy.species).health * (1 + encounter * 0.1)));
-        expect(enemy.power).toBe(1 + encounter / 10);
-      }
-    }
   });
 
   it("uses the same ordinary enemy pool throughout the journey", () => {
@@ -166,7 +167,11 @@ describe("journey encounters", () => {
       if (s.support) expect(s.support.encounter).toBe(index);
       expect(encounterSource(s).name).toBe(index % 4 === 3 ? "Boss" : "Combat");
       expect(encounterSource(s).enemies).toHaveLength(index % 4 === 3 ? 1 : Math.min(3, index + 1));
-      expect(encounterSource(s).enemies.every((enemy) => !s.roster.includes(enemy.species))).toBe(true);
+      expect(
+        encounterSource(s).enemies.every(
+          (enemy) => ![...s.team, ...s.reserves].map((unit) => unit.species).includes(enemy.species),
+        ),
+      ).toBe(true);
       expect(decodeSave(encodeSave(enter(s)))).toEqual(enter(s));
       const route = enter(s).expedition;
       s = winBattle(enter(s));
@@ -177,7 +182,7 @@ describe("journey encounters", () => {
       expect(decodeSave(encodeSave(s))).toEqual(s);
       if (s.phase === "recruit") {
         s =
-          s.roster.length < 3
+          s.team.length + s.reserves.length < 3
             ? accept(s, { type: "recruit", species: s.reward!.recruits[0]! })
             : completeRecruitment(s);
         expect(decodeSave(encodeSave(s))).toEqual(s);
@@ -191,7 +196,6 @@ describe("journey encounters", () => {
     }
     expect(s.phase).toBe("victory");
     expect(s.wins).toBe(1);
-    expect(s.unlocked).toContain("prismram");
   });
 
   it("rejects forged packs, progress and enemy receipts", () => {
