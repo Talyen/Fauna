@@ -17,17 +17,17 @@ This guide owns runtime boundaries, command transactions and persistence. [Journ
 
 ### Gameplay owners
 
-| Contract                                        | Owner                                                                                                             |
-| ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| State shape and derived types                   | [state-schema.ts](../src/game/state-schema.ts), [types.ts](../src/game/types.ts)                                  |
-| Command admission and transaction               | [command-phases.ts](../src/game/command-phases.ts), [engine.ts](../src/game/engine.ts)                            |
-| Encounter preparation, setup and settlement     | [journey.ts](../src/game/journey.ts), [encounters.ts](../src/game/encounters.ts)                                  |
-| Creature identity, card ownership and formation | [team.ts](../src/game/team.ts)                                                                                    |
-| Draw, discard and FIFO overflow                 | [card-zones.ts](../src/game/card-zones.ts)                                                                        |
-| Shared player, preview and enemy execution      | [combat/abilities.ts](../src/game/combat/abilities.ts), [ability-values.ts](../src/game/combat/ability-values.ts) |
-| Turn scheduling and Legendary decisions         | [turns.ts](../src/game/combat/turns.ts), [legendary.ts](../src/game/combat/legendary.ts)                          |
-| Recovery, affordability and Recruit eligibility | [destinations.ts](../src/game/destinations.ts)                                                                    |
-| Catalogs, effect descriptions and progression   | [Content](CONTENT.md), [Keywords](KEYWORDS.md)                                                                    |
+| Contract                                        | Owner                                                                                                                                  |
+| ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| State shape and derived types                   | [state-schema.ts](../src/game/state-schema.ts), [types.ts](../src/game/types.ts)                                                       |
+| Command admission and transaction               | [command-phases.ts](../src/game/command-phases.ts), [play-queries.ts](../src/game/play-queries.ts), [engine.ts](../src/game/engine.ts) |
+| Encounter preparation, setup and settlement     | [journey.ts](../src/game/journey.ts), [encounters.ts](../src/game/encounters.ts)                                                       |
+| Creature identity, card ownership and formation | [team.ts](../src/game/team.ts)                                                                                                         |
+| Draw, discard and FIFO overflow                 | [card-zones.ts](../src/game/card-zones.ts)                                                                                             |
+| Shared player, preview and enemy execution      | [combat/abilities.ts](../src/game/combat/abilities.ts), [ability-values.ts](../src/game/combat/ability-values.ts)                      |
+| Turn scheduling and Legendary decisions         | [turns.ts](../src/game/combat/turns.ts), [legendary.ts](../src/game/combat/legendary.ts)                                               |
+| Recovery, affordability and Recruit eligibility | [destinations.ts](../src/game/destinations.ts)                                                                                         |
+| Catalogs, effect descriptions and progression   | [Content](CONTENT.md), [Keywords](KEYWORDS.md)                                                                                         |
 
 Preserve independently authored species, card and talent order: seeded selection consumes them. Stable definition IDs differ from journey creature IDs and card-instance slot IDs. Duplicate species remain separate individuals. Formation changes must preserve the distinct [replacement and swap rules](EXPEDITION_DESIGN.md#roster-and-battles), including Legendary kit sizes and [generated copies](content/creatures/rookhaven.md).
 
@@ -38,6 +38,8 @@ The shell [navigation reducer](../src/ui/shell/navigation.ts) owns page and over
 [App](../src/ui/App.tsx) mounts the tooltip provider and [game shell](../src/ui/shell/game-shell.tsx). The shell alone owns transient navigation, command callbacks and modal focus restoration. Its [input router](../src/ui/shell/input.ts) receives state/callbacks; controlled [overlays](../src/ui/shell/overlays.tsx) render without acquiring navigation ownership. Extracted content receives data and callbacks.
 
 Feature folders own their layouts; `shared/` owns reusable cards, combat readouts, rewards, navigation and effects. Shared presentation may consume gameplay queries and infrastructure, but cannot import UI feature folders. [Inspection requests](../src/ui/shared/inspection-model.ts) remain independent of the inspection feature. Registered controls, React infrastructure and dependency-light utilities have the lower-level boundaries described in the [design-system map](DESIGN_SYSTEM.md).
+
+[Battle interaction](../src/ui/battle/battle-interaction.ts) owns transient selection, input and focus. [Target geometry](../src/ui/battle/use-target-line.ts) measures the existing layout; one [preview presentation model](../src/ui/battle/play-preview-model.ts) supplies affected units and per-recipient readouts from the authoritative preview. [Card rules](../src/game/card-rules.ts) classify targets, and gameplay queries supply legal explicit recipients without choosing random or future group targets.
 
 `src/ui/styles.css` owns stylesheet order. Preserve shared declarations and repeated-selector order when moving CSS; unchanged declarations alone do not prove rendering parity. Result presentation shares one completion context so input and reduced motion finish the same animation from any consumer.
 
@@ -61,11 +63,11 @@ Development victory requires a capability supplied only by development startup; 
 
 The ability executor owns repeats, targets, primary effects and extras inside the engine's Immer draft. Exhaustive switches require execution, magnitude and enemy-support decisions for each effect. The engine retains validation, Mana, zones, accepted-play counters, XP and scheduling; application publication and saving remain outside gameplay.
 
-[Combat policy](../src/game/combat/policy.ts) defines packet origins and reaction eligibility. [Resolution](../src/game/combat/resolution.ts) drives a synchronous, depth-first generator stack of [typed operations](../src/game/combat/operations.ts). Damage, protection, status and lifecycle handlers yield child operations without runtime imports between handlers or back into the scheduler. Children finish before parents resume; mutation handlers do not recurse into each other. [State helpers](../src/game/combat/state.ts) own atomic mutations and queries.
+[Combat policy](../src/game/combat/policy.ts) defines packet origins and reaction eligibility. [Resolution](../src/game/combat/resolution.ts) drives a synchronous, depth-first generator stack of [typed operations](../src/game/combat/operations.ts). Damage, protection, status and lifecycle handlers yield child operations without runtime imports between handlers or back into the scheduler. Children finish before parents resume; mutation handlers do not recurse into each other. [State helpers](../src/game/combat/state.ts) own basic mutations and queries; [status transitions](../src/game/combat/status-state.ts) own control, attribution and deferred Bleed bookkeeping. `ensureCombat` explicitly initializes mutable draft state; read-only consumers use committed combat data. Damage resolution coordinates [pure arithmetic](../src/game/combat/damage-values.ts), captured payments and [ordered reaction families](../src/game/combat/damage-reactions.ts); [healing arithmetic](../src/game/combat/healing-values.ts) is also shared with visible policy assessment.
 
 Armor depletion records a once-delivered receipt at each positive-to-zero transition; regrant permits a new receipt. Scheduler frames, depletion receipts and continuations never enter saves or published state. Actor knockout cancels remaining hits, extras and repeats while retaining committed effects; Death's Door at 1 Health permits continuation. Enemies defeated by turn-start statuses cannot act.
 
-Enemy targeting is policy over the shared executor. The pure [battle policy](../src/application/battle-policy.ts) is shared by player Auto-play and headless heuristics; it reads only visible state, uses stable identity tie breaks and consumes no gameplay RNG. Rankings expose reasons for automation journals rather than claiming complete forecasts. Ordinary enemies select supported abilities without immediate repeats; adaptation omits player-only hand/Mana extras and unsupported resource-only abilities, retaining healing in draw-plus-heal cards. Legendary enemies own their deck/Mana rules. Enemy selection occurs at the action window, never inspection. Scaling and player-only exceptions belong to [journey rules](EXPEDITION_DESIGN.md#encounters) and [Keywords](KEYWORDS.md).
+Enemy targeting is policy over the shared executor. The pure [battle policy](../src/application/battle-policy.ts) is shared by player Auto-play and headless heuristics; it reads only visible state, uses stable identity tie breaks and consumes no gameplay RNG. Its [benefit assessment](../src/application/battle-benefits.ts) consumes [legal play candidates](../src/game/play-queries.ts) and retains explicit ordinary-hit approximations; ranking weights and tie breaks remain in the policy. Rankings expose reasons for automation journals rather than claiming complete forecasts. Ordinary enemies select supported abilities without immediate repeats; adaptation omits player-only hand/Mana extras and unsupported resource-only abilities, retaining healing in draw-plus-heal cards. Legendary enemies own their deck/Mana rules. Enemy selection occurs at the action window, never inspection. Scaling and player-only exceptions belong to [journey rules](EXPEDITION_DESIGN.md#encounters) and [Keywords](KEYWORDS.md).
 
 ## Save contract
 
@@ -124,6 +126,6 @@ The packaged renderer uses `fauna://app/` confined to `dist/`, rejecting foreign
 
 ## Plans and history
 
-The [further simplification plan](COMPLEXITY_REDUCTION_PLAN.md) prioritizes remaining damage-resolution, status-lifecycle, targeting and Auto-play complexity, with staged changes and behavior-preservation gates.
+The [combat and interaction implementation](COMPLEXITY_REDUCTION_PLAN.md) records the completed damage, status, targeting and Auto-play simplification and links its assessment and evidence.
 
 The [simplification implementation record](archive/SIMPLIFICATION_IMPLEMENTATION.md) documents the six changes and links the approved assessment, verification boundaries and retained evidence. Historical records retain [lifecycle](archive/GAME_STATE_PLAN.md), [ability resolution](archive/COMBAT_RESOLUTION_PLAN.md) and [reaction ordering](archive/COMBAT_REACTIONS_PLAN.md) decisions and their original verification scope.
