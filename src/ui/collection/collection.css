@@ -47,7 +47,7 @@
 .collection-gallery {
   min-height: calc(
     var(--collection-rows) *
-      (var(--art-short-side) + var(--screen-item-gap) + var(--collection-rank-height)) +
+      (var(--art-landscape-width) * 3 / 4 + var(--screen-item-gap) + var(--collection-rank-height)) +
       (var(--collection-rows) - 1) * var(--screen-item-gap)
   );
   display: flex;
