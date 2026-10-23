@@ -39,31 +39,40 @@ export function primaryAbilityValue(card: CardDefinition, value: number, power =
   }
 }
 
-/** Execution and descriptions use the same resolved supplemental amounts. */
-export function abilityExtras(card: CardDefinition, power = 1) {
-  return (
-    card.effects?.map((effect) => {
-      const kind = effect.kind;
-      switch (kind) {
-        case "damage":
-        case "heal":
-          return { ...effect, amount: scalePower(effect.amount, power) };
-        case "status":
-        case "nullifyFreeze":
-        case "cleanse":
-        case "reflect":
-        case "drawKeyword":
-        case "draw":
-        case "mana":
-        case "purge":
-        case "blind":
-        case "meltArmor":
-          return effect;
-        default: {
-          const unhandled: never = kind;
-          throw new Error(`Unhandled extra value: ${unhandled}`);
+const NO_EXTRAS: NonNullable<CardDefinition["effects"]> = Object.freeze([]);
+/** Execution and descriptions share read-only extras; copy only amounts changed by scaling. */
+export function abilityExtras(card: CardDefinition, power = 1): NonNullable<CardDefinition["effects"]> {
+  const effects = card.effects ?? NO_EXTRAS;
+  let scaled: (typeof effects)[number][] | undefined;
+  for (let index = 0; index < effects.length; index++) {
+    const effect = effects[index]!;
+    const kind = effect.kind;
+    switch (kind) {
+      case "damage":
+      case "heal": {
+        const amount = scalePower(effect.amount, power);
+        if (!Object.is(amount, effect.amount)) {
+          scaled ??= effects.slice();
+          scaled[index] = { ...effect, amount };
         }
+        break;
       }
-    }) ?? []
-  );
+      case "status":
+      case "nullifyFreeze":
+      case "cleanse":
+      case "reflect":
+      case "drawKeyword":
+      case "draw":
+      case "mana":
+      case "purge":
+      case "blind":
+      case "meltArmor":
+        break;
+      default: {
+        const unhandled: never = kind;
+        throw new Error(`Unhandled extra value: ${unhandled}`);
+      }
+    }
+  }
+  return scaled ?? effects;
 }

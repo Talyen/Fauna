@@ -1,5 +1,7 @@
 # Codebase simplification plan
 
+Historical proposal; the [implementation record](SIMPLIFICATION_IMPLEMENTATION.md) records completion of all six changes. The assessment below retains its original baseline, recommendations and acceptance criteria.
+
 Assessment date: October 23, 2026. Source baseline: `f7f319eed8399671608f6207c67af7f6898afa45`.
 
 This is an implementation plan, not a claim that these refactors have been performed. The assessment traced gameplay state, encounter construction, recruitment and swaps, save validation, shell navigation, event presentation, application persistence and Cloud reconciliation. It also inspected the verification and integration tooling. Findings below describe confirmed structural costs; they are not reports of reproduced player bugs or measured performance problems.

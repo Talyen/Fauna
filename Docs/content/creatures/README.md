@@ -1,6 +1,6 @@
 # Creature references
 
-[Content](../../CONTENT.md) defines shared costs, six complete passive tiers and media preparation. [Keywords](../../KEYWORDS.md) defines ordinary effects; [Journey](../../EXPEDITION_DESIGN.md) defines scaling, formation and recruitment. Individual references document kits and their distinctive timing, stacking and ownership rules.
+[Content](../../CONTENT.md) defines shared costs, six complete passive tiers and media preparation. [Keywords](../../KEYWORDS.md) defines ordinary effects; [Journey](../../EXPEDITION_DESIGN.md) defines scaling, formation and recruitment. Individual references summarize kits and document distinctive timing, stacking and ownership. Shared rules apply unless a reference states an exception; player passives use permanent rank, enemies the base tier. Keep common mechanics in these guides and link from the kit.
 
 ## Shared artwork and evidence scope
 

@@ -5,8 +5,8 @@ import { produce } from "immer";
 import { dispatch } from "../../../src/game/engine";
 import { previewPlay } from "../../../src/game/preview";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { prepareDestination, accept, run } from "../../support/game";
-import { draw } from "../../../src/game/card-zones";
+import { prepareDestination, accept, run, teamRun } from "../../support/game";
+import { draw, drawKeyword } from "../../../src/game/card-zones";
 import { shuffle } from "../../../src/game/random";
 
 it.each([false, true])("preserves seeded draw recycling with all owners knocked out: %s", (allDead) => {
@@ -29,6 +29,39 @@ it.each([false, true])("preserves seeded draw recycling with all owners knocked 
   expect(result.battle!.draw).toEqual(allDead ? [] : [ids[3]!]);
   expect(result.battle!.discard).toEqual(allDead ? [] : [ids[4]!, ids[5]!]);
   expect(result.rng).toBe(random.rng);
+});
+
+it("keyword draws prefer the last eligible slot and recycle only living owners' matching cards", () => {
+  const initial = produce(teamRun(42, ["reedstag", "reedstag", "reedstag"]), (state) => {
+    state.team[1]!.health = 0;
+    const [first, inert, recycled] = state.cards.filter((card) => card.definitionId === "reedstag-attack");
+    const second = state.cards.find((card) => card.definitionId === "reedstag-guard")!;
+    const unrelated = state.cards.find((card) => card.definitionId === "reedstag-heal")!;
+    const retained = state.cards.filter(
+      (card) =>
+        (card.ownerId === state.team[1]!.id && card.definitionId === "reedstag-guard") ||
+        (card.ownerId === state.team[2]!.id && card.definitionId === "reedstag-heal"),
+    );
+    state.battle!.hand = [];
+    state.battle!.buffer = [];
+    state.battle!.draw = [first!.id, second.id, unrelated.id, inert!.id];
+    state.battle!.discard = [recycled!.id, ...retained.map((card) => card.id)];
+  });
+  const first = produce(initial, (state) => drawKeyword(state, "nature"));
+  expect(first.battle!.hand).toEqual([initial.battle!.draw[1]]);
+  expect(first.battle!.discard).toEqual(initial.battle!.discard);
+  expect(first.rng).toBe(initial.rng);
+  const second = produce(first, (state) => drawKeyword(state, "nature"));
+  expect(second.battle!.hand).toEqual([initial.battle!.draw[1], initial.battle!.draw[0]]);
+  const third = produce(second, (state) => drawKeyword(state, "nature"));
+  expect(third.battle!.hand).toEqual([
+    initial.battle!.draw[1],
+    initial.battle!.draw[0],
+    initial.battle!.discard[0],
+  ]);
+  expect(third.battle!.draw).toEqual(initial.battle!.draw.slice(2));
+  expect(third.battle!.discard).toEqual(initial.battle!.discard.slice(1));
+  expect(third.rng).toBe(initial.rng);
 });
 
 function buffered() {

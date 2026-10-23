@@ -4,6 +4,7 @@ import {
   SPECIES,
   definition,
   species,
+  speciesCards,
   FIRST_RUN_STARTERS,
   BOONS,
   TALENTS,
@@ -49,4 +50,22 @@ it("keeps shared authored rules immutable across lookup and direct catalog acces
     BOSSES,
   ])
     expect(Object.isFrozen(catalog)).toBe(true);
+});
+
+it("keeps indexed kits immutable and in the original order for every species", () => {
+  for (const { id } of SPECIES) {
+    const cards = speciesCards(id);
+    const authored = CARDS.filter((card) => card.species === id);
+    expect(cards).toEqual(authored);
+    expect(Object.isFrozen(cards)).toBe(true);
+    for (let index = 0; index < cards.length; index++) expect(cards[index]).toBe(authored[index]);
+    expect(
+      Reflect.set(
+        cards,
+        "0",
+        CARDS.find((card) => card.species !== id),
+      ),
+    ).toBe(false);
+    expect(speciesCards(id)).toEqual(authored);
+  }
 });

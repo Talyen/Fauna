@@ -178,6 +178,33 @@ it("scales authored magnitudes without scaling percentages, effect counts or res
   expect(converted.target).toBe("self");
 });
 
+it("rounds each supplemental magnitude without changing its authored rules or another preview", () => {
+  const card = {
+    ...definition("mossguard-attack"),
+    effects: [
+      { kind: "damage" as const, damageType: "burn" as const, amount: 2 },
+      { kind: "mana" as const, amount: 1 },
+      { kind: "heal" as const, amount: 2.5 },
+      { kind: "damage" as const, damageType: "light" as const, amount: 5 },
+    ],
+  };
+  const authored = structuredClone(card);
+  const scaled = abilityExtras(card, 1.1);
+  expect(scaled.map((effect) => effect.amount)).toEqual([2, 1, 3, 6]);
+  expect(abilityExtras(card).map((effect) => effect.amount)).toEqual([2, 1, 3, 5]);
+  expect(abilityExtras(card, 1.5).map((effect) => effect.amount)).toEqual([3, 1, 4, 8]);
+  expect(scaled.map((effect) => effect.amount)).toEqual([2, 1, 3, 6]);
+  expect(card).toEqual(authored);
+  expect(abilityExtras(definition("mossguard-attack"))).toEqual([]);
+});
+
+it("admits enemy draw abilities only when they heal or belong to Memento", () => {
+  expect(enemyCanUse(definition("bloomquail-draw"))).toBe(true);
+  expect(enemyCanUse(definition("cadenza-resonant-well"))).toBe(false);
+  expect(enemyCanUse(definition("neradora-tide-cup"))).toBe(false);
+  expect(enemyCanUse(definition("memento-drowned-revelation"))).toBe(true);
+});
+
 it.each(["player", "enemy"] as const)(
   "%s attacks have the same base Critical chance and control threshold",
   (side) => {

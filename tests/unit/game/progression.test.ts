@@ -13,9 +13,46 @@ import { describe, it, expect } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { cardKeywords, talentPoints } from "../../../src/game/progression";
+import {
+  availablePoints,
+  canBuyTalent,
+  cardKeywords,
+  KEYWORDS,
+  talentPoints,
+  xpThreshold,
+} from "../../../src/game/progression";
+import { TALENTS } from "../../../src/game/content";
 import { cardCost } from "../../../src/game/ability-rules";
 import { previewPlay } from "../../../src/game/preview";
+
+it("caps each talent tree's budget and requires every earlier row after purchases or resets", () => {
+  for (const keyword of KEYWORDS) {
+    const tree = TALENTS.filter((talent) => talent.keyword === keyword);
+    const state = { talents: [] as (typeof TALENTS)[number]["id"][], keywordXP: { [keyword]: 1_000_000 } };
+    expect(availablePoints(state, keyword)).toBe(tree.length);
+    for (const talent of tree) {
+      const earlier = tree.filter((entry) => entry.row < talent.row);
+      state.talents = earlier.map((entry) => entry.id);
+      expect(canBuyTalent(state, talent.id)).toBe(true);
+      if (earlier.length) {
+        state.talents.pop();
+        expect(canBuyTalent(state, talent.id)).toBe(false);
+        state.talents.push(earlier.at(-1)!.id);
+      }
+      state.talents.push(talent.id);
+      expect(canBuyTalent(state, talent.id)).toBe(false);
+      expect(availablePoints(state, keyword)).toBe(tree.length - earlier.length - 1);
+    }
+    state.talents = [];
+    state.keywordXP[keyword] = xpThreshold(1) - 1;
+    expect(availablePoints(state, keyword)).toBe(0);
+    expect(canBuyTalent(state, tree[0]!.id)).toBe(false);
+    state.keywordXP[keyword]++;
+    expect(availablePoints(state, keyword)).toBe(1);
+    expect(canBuyTalent(state, tree[0]!.id)).toBe(true);
+  }
+});
+
 describe("keyword progression and rewards", () => {
   it("awards keywords once per accepted play, banks once on victory, and never banks previews", () => {
     const s = run(),

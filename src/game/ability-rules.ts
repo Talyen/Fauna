@@ -50,16 +50,21 @@ export function cardCost(
   state: GameState,
 ) {
   const actor = state.team.find((c) => c.id === ("ownerId" in card ? card.ownerId : undefined));
-  const keywords = cardKeywords(card);
-  if (
-    actor?.combat?.freeCard ||
-    (actor?.combat?.freeNature && keywords.includes("nature")) ||
-    (actor?.combat?.freeLight && keywords.includes("light"))
-  )
-    return 0;
-  return hasTalent(state, "burn.flashpoint") && !state.battle?.freeBurnUsed && keywords.includes("burn")
-    ? 0
-    : definition(card.definitionId).cost;
+  const def = definition(card.definitionId);
+  if (actor?.combat?.freeCard) return 0;
+  const freeNature = actor?.combat?.freeNature;
+  const freeLight = actor?.combat?.freeLight;
+  const freeBurn = hasTalent(state, "burn.flashpoint") && !state.battle?.freeBurnUsed;
+  if (freeNature || freeLight || freeBurn) {
+    const keywords = cardKeywords(card);
+    if (
+      (freeNature && keywords.includes("nature")) ||
+      (freeLight && keywords.includes("light")) ||
+      (freeBurn && keywords.includes("burn"))
+    )
+      return 0;
+  }
+  return def.cost;
 }
 export function physicalBonus(actor: Pick<Creature, "block" | "combat">, state: Pick<GameState, "talents">) {
   return (
