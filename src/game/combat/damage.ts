@@ -86,12 +86,15 @@ export function* hit(
 ): Resolution<number | undefined> {
   if (
     value > 0 &&
+    source.health > 0 &&
+    target.health > 0 &&
     options.origin === "ability" &&
-    !options.delivery &&
-    !options.interceptionChecked &&
-    !options.blindMiss
-  )
-    target = interceptAttack(state, source, target, events);
+    !options.delivery
+  ) {
+    options = { ...options, blindMiss: options.blindMiss ?? beginAttack(state, source, events) };
+    if (!options.interceptionChecked && !options.blindMiss)
+      target = interceptAttack(state, source, target, events);
+  }
   const policy = packetPolicy(options);
   const wrongFoot =
     target.combat?.blind && policy.wrongFoot
@@ -485,22 +488,8 @@ export function* resolveHit(
           yield* reaction("hit", state, source, target, Math.round(damage / 2), "bleed", events, {
             origin: "proc",
           });
-        if (source.health > 0 && critical && hasTalent(state, "physical.rupture") && stats.bleed > 0) {
-          const bleed = stats.bleed;
-          const payouts = stats.bleedLeech;
-          stats.bleed = 0;
-          stats.bleedLeech = [];
-          delete stats.statusSources.bleed;
-          let remaining =
-            (yield* reaction("hit", state, source, target, bleed, "bleed", events, { origin: "periodic" })) ??
-            0;
-          for (const payout of payouts) {
-            const owner = [...state.team, ...state.reserves].find((unit) => unit.id === payout.sourceId);
-            const paid = Math.min(remaining, payout.amount);
-            if (owner) yield* reaction("leechHealth", state, owner, paid, events, true);
-            remaining -= paid;
-          }
-        }
+        if (source.health > 0 && critical && hasTalent(state, "physical.rupture"))
+          yield* detonateBleed(state, source, target, events);
       }
       if (type === "nature") {
         if (proc("nature.thornskin", 0.1)) yield* reaction("grantArmor", state, source, damage, events);
@@ -560,6 +549,18 @@ export function* resolveHit(
     if (statusResult.appliedControl && source.health > 0)
       yield* reaction("controlRewards", state, source, target, type, events);
   }
+  // Absorbed critical hits still land; only damage-based procs require positive damage.
+  if (
+    damage === 0 &&
+    direct &&
+    alliedSource &&
+    !alliedTarget &&
+    type === "physical" &&
+    critical &&
+    source.health > 0 &&
+    hasTalent(state, "physical.rupture")
+  )
+    yield* detonateBleed(state, source, target, events);
   if (direct && target.health > 0 && source.health > 0) {
     const amount = creaturePassive(alliedTarget ? state : undefined, target.species).effects.reduce(
       (sum, effect) => sum + (effect.kind === "poisonRetaliation" ? effect.amount : 0),
@@ -581,4 +582,27 @@ export function* resolveHit(
   }
   for (const depletion of depletions) yield* reaction("triggerArmorBreak", state, depletion, events);
   return { outcome: "landed", lost };
+}
+
+function* detonateBleed(
+  state: GameState,
+  source: Combatant,
+  target: Combatant,
+  events: GameEvent[],
+): Resolution<void> {
+  const stats = combat(target);
+  if (stats.bleed <= 0) return;
+  const bleed = stats.bleed;
+  const payouts = stats.bleedLeech;
+  stats.bleed = 0;
+  stats.bleedLeech = [];
+  delete stats.statusSources.bleed;
+  let remaining =
+    (yield* reaction("hit", state, source, target, bleed, "bleed", events, { origin: "periodic" })) ?? 0;
+  for (const payout of payouts) {
+    const owner = [...state.team, ...state.reserves].find((unit) => unit.id === payout.sourceId);
+    const paid = Math.min(remaining, payout.amount);
+    if (owner) yield* reaction("leechHealth", state, owner, paid, events, true);
+    remaining -= paid;
+  }
 }

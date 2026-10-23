@@ -44,7 +44,9 @@ export function decodeSave(raw: string): GameState {
           receipt.encounter < s.encounter - 1 ||
           s.phase === "battle" ||
           (receipt.encounter === s.encounter - 1 && receipt.outcome !== "next") ||
-          (receipt.outcome === "victory" && !["victory", "recruit", "boon"].includes(s.phase)) ||
+          (receipt.outcome === "victory" &&
+            !["victory", "recruit", "boon"].includes(s.phase) &&
+            !(s.phase === "defeat" && summary.outcome === "returned" && finalEncounter(s) && s.wins > 0)) ||
           (receipt.outcome === "defeat" && (s.phase !== "defeat" || s.journey.outcome !== "defeat")),
       );
     if (summary.lastBattle)

@@ -4,6 +4,54 @@ import { chooseBattleCommand } from "../../../src/application/battle-policy";
 import { dispatch } from "../../../src/game/engine";
 import { accept, authoredPack, prepareDestination, requireBattle, teamRun } from "../../support/game";
 import { summonEcho } from "../../../src/game/combat/legendary";
+import { species } from "../../../src/game/content";
+
+it("Auto-play prioritizes Bloom Cradle's healing over an ordinary attack", () => {
+  const state = produce(teamRun(42, ["bloomquail", "emberback"]), (game) => {
+    const heal = game.cards.find((card) => card.definitionId === "bloomquail-draw")!;
+    const attack = game.cards.find((card) => card.definitionId === "emberback-attack")!;
+    game.battle!.hand = [heal.id, attack.id];
+    game.battle!.buffer = [];
+    game.battle!.discard = [];
+    game.battle!.draw = game.cards
+      .filter((card) => !game.battle!.hand.includes(card.id))
+      .map((card) => card.id);
+    game.team[0]!.health = 1;
+    game.battle!.enemies.forEach((enemy) => {
+      enemy.health = enemy.maxHealth;
+      enemy.block = 0;
+      enemy.combat.armor = 0;
+    });
+  });
+  const command = chooseBattleCommand(state, false);
+  expect(command).toMatchObject({ type: "play", cardId: state.battle!.hand[0] });
+  expect(dispatch(state, command).state.team[0]!.health).toBe(3);
+  const healthy = produce(state, (game) => {
+    game.team[0]!.health = species("bloomquail").health;
+  });
+  expect(chooseBattleCommand(healthy, false)).toMatchObject({
+    type: "play",
+    cardId: healthy.battle!.hand[1],
+  });
+});
+
+it("Auto-play preserves Mana when Undertow Knot cannot add Water Thorns", () => {
+  const state = produce(teamRun(42, ["neradora"]), (game) => {
+    const card = game.cards.find((card) => card.definitionId === "neradora-undertow-knot")!;
+    game.battle!.hand = [card.id];
+    game.battle!.buffer = [];
+    game.battle!.discard = [];
+    game.battle!.draw = game.cards.filter((other) => other.id !== card.id).map((card) => card.id);
+    game.team[0]!.combat!.waterThorns = 1_000_000;
+  });
+  expect(chooseBattleCommand(state, false)).toEqual({ type: "endTurn" });
+  const useful = produce(state, (game) => {
+    game.team[0]!.combat!.waterThorns--;
+  });
+  const command = chooseBattleCommand(useful, false);
+  expect(command).toMatchObject({ type: "play", cardId: useful.battle!.hand[0] });
+  expect(dispatch(useful, command).state.team[0]!.combat!.waterThorns).toBe(1_000_000);
+});
 
 it.each(["reedstag", "chimecricket"] as const)(
   "Auto-play uses %s healing to Cleanse a full-health recipient",
