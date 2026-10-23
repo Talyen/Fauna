@@ -190,29 +190,32 @@ test("navigation returns to the nearest remaining card; denial is visual and res
   const before = await state(page);
   await cards.first().click();
   const unavailable = page.locator(".app:not([inert]) .player-row .invalid-target").first();
+  await unavailable.evaluate((element) => {
+    // Observe after React handles the real click, before a slow driver round trip
+    // can outlast the short denial animation.
+    document.addEventListener("click", (event) => {
+      if (!(event.target instanceof Node) || !element.contains(event.target)) return;
+      element.setAttribute(
+        "data-denial-motion",
+        String(
+          element
+            .getAnimations()
+            .some(
+              (animation) =>
+                animation.effect instanceof KeyframeEffect &&
+                animation.effect.getKeyframes().some((frame) => "translate" in frame),
+            ),
+        ),
+      );
+    });
+  });
   await unavailable.click();
   await expect(page.getByRole("dialog")).toHaveCount(0);
-  expect(
-    await unavailable.evaluate((el) =>
-      el
-        .getAnimations()
-        .some(
-          (a) => a.effect instanceof KeyframeEffect && a.effect.getKeyframes().some((k) => "translate" in k),
-        ),
-    ),
-  ).toBe(true);
+  await expect(unavailable).toHaveAttribute("data-denial-motion", "true");
   expect((await state(page)).revision).toBe(before.revision);
   await expect(page.getByText("Not enough mana.", { exact: true })).toHaveCount(0);
   await page.emulateMedia({ reducedMotion: "reduce" });
   await settleScreen(page);
   await unavailable.click();
-  expect(
-    await unavailable.evaluate((el) =>
-      el
-        .getAnimations()
-        .some(
-          (a) => a.effect instanceof KeyframeEffect && a.effect.getKeyframes().some((k) => "translate" in k),
-        ),
-    ),
-  ).toBe(false);
+  await expect(unavailable).toHaveAttribute("data-denial-motion", "false");
 });
