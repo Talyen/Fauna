@@ -30,9 +30,10 @@ it("pages through the full collection, resets filters and preserves focus across
     draft.discovery.recruited.mossguard = 3;
   });
   const before = structuredClone(game);
+  const inspect = vi.fn();
   render(
     <TooltipProvider>
-      <Collection game={game} controls={{ current: null }} openMenu={vi.fn()} />
+      <Collection game={game} controls={{ current: null }} openMenu={vi.fn()} inspect={inspect} />
     </TooltipProvider>,
   );
   const user = userEvent.setup();
@@ -75,10 +76,7 @@ it("pages through the full collection, resets filters and preserves focus across
   expect(screen.queryByRole("status")).toBeNull();
   expect((screen.getByRole("button", { name: "Previous page" }) as HTMLButtonElement).disabled).toBe(true);
   await user.click(screen.getAllByRole("button", { name: /^Inspect / })[0]!);
-  expect(screen.getByRole("heading", { name: SPECIES[0]!.name })).toBeTruthy();
-  expect(screen.queryByRole("dialog")).toBeNull();
-  await user.click(screen.getByRole("button", { name: "Back" }));
-  expect(document.activeElement).toBe(screen.getAllByRole("button", { name: /^Inspect / })[0]);
+  expect(inspect).toHaveBeenCalledWith({ species: SPECIES[0]!.id, speciesKit: true });
   expect(game).toEqual(before);
 });
 
@@ -95,9 +93,10 @@ it("keeps encountered and eligible creatures out of the collected filter until r
     draft.discovery.recruited = { mossguard: 1 };
     draft.wins = 1;
   });
+  const inspect = vi.fn();
   render(
     <TooltipProvider>
-      <Collection game={game} controls={{ current: null }} openMenu={vi.fn()} />
+      <Collection game={game} controls={{ current: null }} openMenu={vi.fn()} inspect={inspect} />
     </TooltipProvider>,
   );
   const user = userEvent.setup();
@@ -128,9 +127,10 @@ it("remembers each filter's page and retains its first visible creature when cap
   const game = produce(createGame(), (draft) => {
     draft.discovery.recruited = Object.fromEntries(SPECIES.map((entry) => [entry.id, 1]));
   });
+  const inspect = vi.fn();
   render(
     <TooltipProvider>
-      <Collection game={game} controls={{ current: null }} openMenu={vi.fn()} />
+      <Collection game={game} controls={{ current: null }} openMenu={vi.fn()} inspect={inspect} />
     </TooltipProvider>,
   );
   const user = userEvent.setup();
@@ -145,7 +145,6 @@ it("remembers each filter's page and retains its first visible creature when cap
   expect(screen.getAllByRole("button", { name: /^Inspect / })).toHaveLength(2);
   expect(screen.getAllByRole("button", { name: /^Inspect / })[0]!.getAttribute("aria-label")).toBe(anchor);
   await user.click(screen.getByRole("button", { name: anchor }));
-  await user.click(screen.getByRole("button", { name: "Back" }));
   expect(screen.getByRole("tab", { name: "All" }).getAttribute("aria-selected")).toBe("true");
   expect(screen.getAllByRole("button", { name: /^Inspect / })[0]!.getAttribute("aria-label")).toBe(anchor);
   expect(document.activeElement).toBe(screen.getByRole("button", { name: anchor }));

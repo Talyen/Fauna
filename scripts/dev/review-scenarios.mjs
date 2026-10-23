@@ -21,7 +21,6 @@ export const SCENARIOS = [
   "talents",
   "talent-tree",
   "collection-creature",
-  "collection-ranks",
   "settings-sound",
   "settings-battle",
   "draw-pile",
@@ -102,11 +101,9 @@ export async function openReviewScenario(page, origin, scenario, scale) {
     await button("Continue").click();
     if (scenario.name === "pause") await button("Open menu").click();
   }
-  if (["collection-creature", "collection-ranks"].includes(scenario.name)) {
+  if (scenario.name === "collection-creature") {
     await button("Inspect Mossguard").click();
     await expect(page.getByRole("heading", { name: "Mossguard", exact: true })).toBeVisible();
-    if (scenario.name === "collection-ranks")
-      await page.getByRole("tab", { name: "Rank progression", exact: true }).click();
   }
   if (scenario.name === "talent-tree")
     await page.locator('.talents-screen button[aria-label$=" talents"]').first().click();

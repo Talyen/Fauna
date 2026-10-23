@@ -54,7 +54,7 @@ export function routeInput(action: InputAction, context: ShellInputContext) {
     return;
   }
   if (inspection && inspectionControls.current?.(action)) return;
-  if (route === "collection" && collectionControls.current?.(action)) return;
+  if (!inspection && route === "collection" && collectionControls.current?.(action)) return;
   if (action === "back") {
     if (route === "play" && pendingReplacement(game) && !inspection && !modal && !menu) return;
     if (inspection) {

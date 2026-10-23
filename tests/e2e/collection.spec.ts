@@ -8,7 +8,7 @@ import { seed, state, resume } from "./support/session";
 import { gamepad } from "./support/gamepad";
 import { fits } from "./support/layout";
 
-test("Collection hides uncollected tooltips and opens readable creature pages", async ({ page }) => {
+test("Collection hides uncollected tooltips and opens shared creature inspection", async ({ page }) => {
   await seed(page, run());
   await page.getByRole("button", { name: "Collection", exact: true }).click();
   await expect(page.getByRole("navigation", { name: "Collection pages" })).toHaveCount(1);
@@ -49,8 +49,8 @@ test("Collection hides uncollected tooltips and opens readable creature pages", 
   await expect(artwork).toHaveCSS("filter", "grayscale(1)");
   await expect(locked).toHaveCSS("scale", "none");
   await page.getByRole("button", { name: "Inspect Mossguard", exact: true }).click();
-  await expect(page.locator(".collection-creature-screen")).toBeVisible();
-  await expect(page.getByRole("dialog")).toHaveCount(0);
+  await expect(page.locator(".creature-inspection")).toBeVisible();
+  await expect(page.getByRole("dialog")).toHaveCount(1);
   await page.keyboard.press("Escape");
   await expect(page.getByRole("button", { name: "Inspect Mossguard", exact: true })).toBeFocused();
   await page.keyboard.press("Escape");
@@ -58,7 +58,7 @@ test("Collection hides uncollected tooltips and opens readable creature pages", 
 });
 
 for (const input of ["mouse", "keyboard", "controller"] as const)
-  test(`Collection from battle shows a complete kit and returns without changing combat with ${input}`, async ({
+  test(`Collection from battle shows the shared inspector and returns without changing combat with ${input}`, async ({
     page,
   }) => {
     const press = input === "controller" ? await gamepad(page) : null;
@@ -81,16 +81,21 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     await activate(page.getByRole("button", { name: "Open menu", exact: true }));
     await activate(page.getByRole("button", { name: "Collection", exact: true }));
     await activate(page.getByRole("button", { name: "Inspect Emberback", exact: true }));
-    const details = page.locator(".collection-creature-screen");
+    const details = page.locator(".creature-inspection");
     await expect(details.getByRole("region", { name: "Trait", exact: true })).toContainText("Molten Shell");
     for (const card of CARDS.filter((c) => c.species === "emberback"))
-      await expect(details.getByRole("region", { name: card.name, exact: true })).toContainText(
-        `${card.cost} Mana`,
+      await expect(details.getByRole("button", { name: new RegExp(`^${card.name},`) })).toHaveAttribute(
+        "aria-label",
+        new RegExp(`${card.cost} mana`),
       );
-    await expect(details.getByRole("region", { name: "Ember Charge", exact: true })).toContainText(
-      "Deal 4 Physical damage",
-    );
-    await expect(page.getByRole("dialog")).toHaveCount(0);
+    const charge = details.getByRole("button", { name: /^Ember Charge,/ });
+    await expect(charge).toHaveAttribute("aria-label", /Deal 4 Physical damage/);
+    await activate(charge);
+    await expect(page.getByRole("dialog", { name: "Ember Charge details", exact: true })).toBeVisible();
+    if (press) await press(1);
+    else await page.keyboard.press("Escape");
+    await expect(charge).toBeFocused();
+    await expect(page.getByRole("dialog")).toHaveCount(1);
     if (input === "mouse") await details.getByRole("button", { name: "Back", exact: true }).click();
     else if (press) await press(1);
     else await page.keyboard.press("Escape");
@@ -104,13 +109,15 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
   });
 
 for (const [width, height] of [
-  [1280, 800],
+  [1280, 720],
   [1920, 1080],
 ] as const)
-  test(`Collection kit preserves artwork ratios and visible rules at ${width}×${height}`, async ({
+  test(`Collection inspection preserves artwork ratios and hover rules at ${width}×${height}`, async ({
     page,
   }) => {
     await page.setViewportSize({ width, height });
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    if (width === 1280) await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
     await seed(page, run(7));
     await resume(page);
     await page.locator(".app:not([inert]) .player-row .creature-card").first().hover();
@@ -119,7 +126,7 @@ for (const [width, height] of [
     await page.getByRole("button", { name: "Open menu", exact: true }).click();
     await page.getByRole("button", { name: "Collection", exact: true }).click();
     await page.getByRole("button", { name: "Inspect Mossguard", exact: true }).click();
-    const details = page.locator(".collection-creature-screen");
+    const details = page.locator(".creature-inspection");
     await details
       .locator("img")
       .evaluateAll((imgs) => Promise.all(imgs.map((img) => (img as HTMLImageElement).decode())));
@@ -133,10 +140,12 @@ for (const [width, height] of [
       expect(await artwork.textContent()).toBe("");
     }
     for (const card of CARDS.filter((c) => c.species === "mossguard")) {
-      const region = details.getByRole("region", { name: card.name, exact: true });
-      await expect(region).toBeVisible();
-      await expect(region.locator(".action-effect")).not.toBeEmpty();
+      const ability = details.getByRole("button", { name: new RegExp(`^${card.name},`) });
+      await ability.hover();
+      await expect(page.getByRole("tooltip")).toContainText(card.name);
+      await expect(page.getByRole("tooltip").locator(".action-effect")).not.toBeEmpty();
     }
+    await page.mouse.move(0, 0);
     await captureScreen(page, { path: `reports/collection/kit-${width}.png` });
     await page.keyboard.press("Escape");
     await expect(page.getByRole("button", { name: "Inspect Mossguard", exact: true })).toBeFocused();
@@ -159,7 +168,7 @@ test("Collection keeps a later-page creature and focus through live resize and f
   const creature = SPECIES.at(-1)!;
   const opener = page.getByRole("button", { name: `Inspect ${creature.name}`, exact: true });
   await opener.click();
-  // Resize while the gallery is hidden: its observer and return-focus owner must cooperate.
+  // Resize behind the inspector while preserving the gallery page and return focus.
   await page.setViewportSize({ width: 1280, height: 720 });
   await captureScreen(page, { path: "reports/collection/resized-details.png" });
   await page.keyboard.press("Escape");

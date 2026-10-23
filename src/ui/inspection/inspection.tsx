@@ -37,7 +37,9 @@ export function Inspector({
   const creatureId = rootCard?.ownerId ?? ("creatureId" in item ? item.creatureId : undefined);
   const ally = creatureId ? [...game.team, ...game.reserves].find((c) => c.id === creatureId) : undefined;
   const enemy = "enemyId" in item ? game.battle?.enemies.find((e) => e.id === item.enemyId) : undefined;
-  const actor = enemy ? undefined : ally;
+  const speciesKit = "speciesKit" in item && item.speciesKit;
+  const actor = enemy || speciesKit ? undefined : ally;
+  const modifiers = enemy || speciesKit ? undefined : game;
   const rank = enemy ? 0 : creatureStars(game, kind);
   const passive = creaturePassive(enemy ? undefined : game, kind);
   const cards: Card[] = CARDS.filter((c) => c.species === kind).map((def) =>
@@ -148,7 +150,7 @@ export function Inspector({
                 card={card}
                 ownerName={creature.name}
                 actor={actor}
-                modifiers={enemy ? undefined : game}
+                modifiers={modifiers}
                 enemy={!!enemy}
                 enemyPower={enemy?.power}
                 enemyValue={enemy ? enemyInspectionValue(enemy, definition(card.definitionId)) : undefined}
@@ -184,7 +186,7 @@ export function Inspector({
                       card={action}
                       ownerName={creature.name}
                       actor={actor}
-                      modifiers={enemy ? undefined : game}
+                      modifiers={modifiers}
                       enemy={!!enemy}
                       enemyPower={enemy?.power}
                       enemyValue={

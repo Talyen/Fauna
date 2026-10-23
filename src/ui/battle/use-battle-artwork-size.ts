@@ -16,10 +16,10 @@ export function useBattleArtworkSize(board: RefObject<HTMLElement | null>) {
       const rowCss = getComputedStyle(rows[0]!);
       const columnGap = parseFloat(rowCss.columnGap);
       const rowPadding = parseFloat(rowCss.paddingLeft) + parseFloat(rowCss.paddingRight);
-      const extra = rows.reduce(
-        (sum, row) => sum + row.getBoundingClientRect().height - sample.offsetHeight,
-        0,
-      );
+      // offsetHeight rounds fractional artwork sizes, feeding a one-pixel
+      // oscillation back through ResizeObserver at height-constrained viewports.
+      const sampleHeight = parseFloat(getComputedStyle(sample).height) || sample.offsetHeight;
+      const extra = rows.reduce((sum, row) => sum + row.getBoundingClientRect().height - sampleHeight, 0);
       const hand = root.querySelector<HTMLElement>(".hand-section");
       const handTop = hand?.getBoundingClientRect().top ?? root.getBoundingClientRect().bottom;
       const clearance = parseFloat(css.getPropertyValue("--battle-hand-hover-clearance"));

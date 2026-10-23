@@ -11,8 +11,8 @@ import { Star, LayoutGrid, BookOpen, LockKeyhole } from "lucide-react";
 
 import { CreatureCard } from "../shared/cards/cards";
 import { ArtCard } from "../shared/cards/art-card";
-import { CollectionCreature } from "./collection-creature";
 import { returnFocus } from "../shared/navigation/focus";
+import type { Inspection } from "../shared/inspection-model";
 import { SPECIES, type SpeciesId } from "../../game/content";
 import { creatureStars, MAX_CREATURE_STARS } from "../../game/progression";
 import type { GameState } from "../../game/types";
@@ -22,47 +22,29 @@ export function Collection({
   game,
   controls: controlsRef,
   openMenu,
+  inspect,
 }: {
   game: GameState;
   controls: Controls;
   openMenu: () => void;
+  inspect: (item: Inspection) => void;
 }) {
-  const [selected, setSelected] = useState<SpeciesId | null>(null);
-  const opener = useRef<HTMLElement | null>(null);
-  const returning = useRef(false);
-  const showCreature = (kind: SpeciesId) => {
-    opener.current = document.activeElement as HTMLElement | null;
-    setSelected(kind);
-  };
-  const back = () => {
-    returning.current = true;
-    setSelected(null);
-  };
+  const showCreature = (kind: SpeciesId) => inspect({ species: kind, speciesKit: true });
   useLayoutEffect(() => {
     controlsRef.current = (action) => {
-      if (action === "inspect" && !selected) {
-        const button = document.activeElement?.closest<HTMLButtonElement>(
-          ".collection-grid button[data-species]",
-        );
-        const kind = button?.dataset.species as SpeciesId | undefined;
-        if (!kind) return false;
-        showCreature(kind);
-        return true;
-      }
-      if (action !== "back" || !selected) return false;
-      back();
+      if (action !== "inspect") return false;
+      const button = document.activeElement?.closest<HTMLButtonElement>(
+        ".collection-grid button[data-species]",
+      );
+      const kind = button?.dataset.species as SpeciesId | undefined;
+      if (!kind) return false;
+      showCreature(kind);
       return true;
     };
     return () => {
       controlsRef.current = null;
     };
-  }, [controlsRef, selected]);
-  useLayoutEffect(() => {
-    if (!selected && returning.current) {
-      returning.current = false;
-      returnFocus(opener.current);
-    }
-  }, [selected]);
+  });
   const [filter, setFilter] = useState("all");
   const gridRef = useRef<HTMLDivElement>(null);
   const columns = useGridColumns(gridRef, 4, filter);
@@ -87,97 +69,94 @@ export function Collection({
       returnFocus(gridRef.current?.querySelector<HTMLElement>("button:not(:disabled)") ?? null);
   }, [pageStart, filter, columns]);
   return (
-    <>
-      <div className="collection-gallery-page" hidden={selected !== null} inert={selected !== null}>
-        <Screen
-          className="collection-screen"
-          onFocusCapture={(event) => {
-            focusedControl.current = event.target as HTMLElement;
+    <div className="collection-gallery-page">
+      <Screen
+        className="collection-screen"
+        onFocusCapture={(event) => {
+          focusedControl.current = event.target as HTMLElement;
+        }}
+      >
+        <header className="collection-heading">
+          <ScreenHeading back={openMenu} openMenu={openMenu}>
+            Collection
+          </ScreenHeading>
+        </header>
+        <Tabs
+          className="collection-tabs"
+          value={filter}
+          onValueChange={(value) => {
+            setFilter(value);
           }}
         >
-          <header className="collection-heading">
-            <ScreenHeading back={openMenu} openMenu={openMenu}>
-              Collection
-            </ScreenHeading>
-          </header>
-          <Tabs
-            className="collection-tabs"
-            value={filter}
-            onValueChange={(value) => {
-              setFilter(value);
-            }}
-          >
-            <TabsList aria-label="Collection filter">
-              <TabsTrigger value="all">
-                <LayoutGrid aria-hidden="true" />
-                All
-              </TabsTrigger>
-              <TabsTrigger value="known">
-                <BookOpen aria-hidden="true" />
-                Collected
-              </TabsTrigger>
-              <TabsTrigger value="unknown">
-                <LockKeyhole aria-hidden="true" />
-                Uncollected
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent className="collection-content" value={filter}>
-              <div className="collection-gallery">
-                <div className="collection-grid" ref={gridRef}>
-                  {ordered.slice(activePage * pageSize, (activePage + 1) * pageSize).map((creature) =>
-                    known(creature.id) ? (
-                      <div className="collection-entry" key={creature.id}>
-                        <CreatureCard
-                          progression={game}
-                          kind={creature.id}
-                          onClick={() => showCreature(creature.id)}
-                          onInspect={() => showCreature(creature.id)}
-                          label={`Inspect ${creature.name}`}
-                        />
-                        <span
-                          className="collection-stars"
-                          role="img"
-                          aria-label={`${creature.name}: ${creatureStars(game, creature.id)} of ${MAX_CREATURE_STARS} stars`}
-                        >
-                          {Array.from({ length: MAX_CREATURE_STARS }, (_, index) => (
-                            <Star
-                              key={index}
-                              aria-hidden="true"
-                              data-earned={index < creatureStars(game, creature.id)}
-                            />
-                          ))}
-                        </span>
-                      </div>
-                    ) : (
-                      <div key={creature.id} className="locked-species">
-                        <ArtCard
-                          aspect="creature"
-                          artwork={assetUrl(`creature.${creature.id}`)}
-                          presentation
-                          aria-label="Locked species"
-                        />
-                      </div>
-                    ),
-                  )}
-                </div>
-                {ordered.length === 0 ? <EmptyState label="No creatures in this view" /> : null}
+          <TabsList aria-label="Collection filter">
+            <TabsTrigger value="all">
+              <LayoutGrid aria-hidden="true" />
+              All
+            </TabsTrigger>
+            <TabsTrigger value="known">
+              <BookOpen aria-hidden="true" />
+              Collected
+            </TabsTrigger>
+            <TabsTrigger value="unknown">
+              <LockKeyhole aria-hidden="true" />
+              Uncollected
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent className="collection-content" value={filter}>
+            <div className="collection-gallery">
+              <div className="collection-grid" ref={gridRef}>
+                {ordered.slice(activePage * pageSize, (activePage + 1) * pageSize).map((creature) =>
+                  known(creature.id) ? (
+                    <div className="collection-entry" key={creature.id}>
+                      <CreatureCard
+                        progression={game}
+                        kind={creature.id}
+                        onClick={() => showCreature(creature.id)}
+                        onInspect={() => showCreature(creature.id)}
+                        label={`Inspect ${creature.name}`}
+                      />
+                      <span
+                        className="collection-stars"
+                        role="img"
+                        aria-label={`${creature.name}: ${creatureStars(game, creature.id)} of ${MAX_CREATURE_STARS} stars`}
+                      >
+                        {Array.from({ length: MAX_CREATURE_STARS }, (_, index) => (
+                          <Star
+                            key={index}
+                            aria-hidden="true"
+                            data-earned={index < creatureStars(game, creature.id)}
+                          />
+                        ))}
+                      </span>
+                    </div>
+                  ) : (
+                    <div key={creature.id} className="locked-species">
+                      <ArtCard
+                        aspect="creature"
+                        artwork={assetUrl(`creature.${creature.id}`)}
+                        presentation
+                        aria-label="Locked species"
+                      />
+                    </div>
+                  ),
+                )}
               </div>
-              <div className="collection-pagination">
-                {totalPages > 1 ? (
-                  <PageControls
-                    page={activePage}
-                    pages={totalPages}
-                    change={change}
-                    label="Collection pages"
-                    showCount={false}
-                  />
-                ) : null}
-              </div>
-            </TabsContent>
-          </Tabs>
-        </Screen>
-      </div>
-      {selected ? <CollectionCreature game={game} kind={selected} back={back} openMenu={openMenu} /> : null}
-    </>
+              {ordered.length === 0 ? <EmptyState label="No creatures in this view" /> : null}
+            </div>
+            <div className="collection-pagination">
+              {totalPages > 1 ? (
+                <PageControls
+                  page={activePage}
+                  pages={totalPages}
+                  change={change}
+                  label="Collection pages"
+                  showCount={false}
+                />
+              ) : null}
+            </div>
+          </TabsContent>
+        </Tabs>
+      </Screen>
+    </div>
   );
 }

@@ -193,13 +193,14 @@ test("controller menu journey at minimum size with enlarged text", async ({ page
   const opener = await card.getAttribute("aria-label");
   await captureScreen(page, { path: `reports/menu-collection-${width}.png` });
   await pad.press(2);
-  await expect(page.locator(".collection-creature-screen")).toBeVisible();
+  await expect(page.locator(".creature-inspection")).toBeVisible();
   await expect(page.getByRole("button", { name: "Back", exact: true })).toBeFocused();
-  await expect(page.locator(".collection-ability")).toHaveCount(3);
-  await expect(page.getByRole("region", { name: "Rooted Stomp", exact: true })).toContainText(
-    "Deal 2 Stun damage to all enemies",
+  await expect(page.locator(".inspection-thumbnails .action-card")).toHaveCount(3);
+  await expect(page.getByRole("button", { name: /^Rooted Stomp,/ })).toHaveAttribute(
+    "aria-label",
+    /Deal 2 Stun damage to all enemies/,
   );
-  await expect(page.getByRole("dialog")).toHaveCount(0);
+  await expect(page.getByRole("dialog")).toHaveCount(1);
   await captureScreen(page, { path: `reports/menu-collection-kit-${width}.png` });
   await pad.press(1);
   await expect(page.getByRole("button", { name: opener!, exact: true })).toBeFocused();

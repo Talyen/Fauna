@@ -16,24 +16,6 @@
 .inspection > .creature-wrap {
   margin-inline: auto;
 }
-.passive-tiers {
-  display: flex;
-  flex-direction: column;
-  gap: var(--screen-item-gap);
-}
-.passive-tier-page {
-  display: flex;
-  flex-direction: column;
-  gap: var(--screen-item-gap);
-  list-style: none;
-  padding: 0;
-}
-.passive-tier-page > div {
-  color: var(--muted-foreground);
-}
-.passive-tiers [aria-current="step"] {
-  color: var(--foreground);
-}
 .inspection-thumbnails {
   width: 100%;
   display: flex;
@@ -130,12 +112,4 @@
 }
 .inspection-stars [data-earned="true"] {
   fill: currentColor;
-}
-.passive-tier-page {
-  min-height: calc(var(--text-body) * 7);
-}
-
-.passive-tiers > h3 {
-  color: var(--muted-foreground);
-  font-size: var(--text-body);
 }

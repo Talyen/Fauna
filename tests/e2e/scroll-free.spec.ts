@@ -128,20 +128,13 @@ for (const [width, height, scale] of LAYOUT_CASES) {
           const kind = (await card.getAttribute("data-species"))!;
           seen.add(kind);
           await card.click();
-          const details = page.locator(".collection-creature-screen");
-          await expect(details.locator(".collection-ability")).toHaveCount(3);
+          const details = page.locator(".creature-inspection");
+          await expect(details.locator(".inspection-thumbnails .action-card")).toHaveCount(3);
           await captureScreen(page, {
             path: `reports/scroll-free/kit-${kind}-${width}-${height}-${scale}.png`,
           });
-          const creatureArea = await details
-            .locator(".collection-creature-trait .creature-card")
-            .evaluate((el: HTMLElement) => el.offsetWidth * el.offsetHeight);
-          for (const artwork of await details.locator(".action-card").all()) {
-            const area = await artwork.evaluate((el: HTMLElement) => el.offsetWidth * el.offsetHeight);
-            expect(Math.abs(area / creatureArea - 1)).toBeLessThan(0.025);
-          }
-          await details.getByRole("tab", { name: "Rank progression", exact: true }).click();
-          await everyPage(details, () => expectScrollFree(page));
+          await expect(details.locator(".inspection-creature .creature-card")).toBeVisible();
+          await expectScrollFree(page);
           await page.keyboard.press("Escape");
           await expect(card).toBeFocused();
         }

@@ -282,10 +282,23 @@ it("discards and redraws the same card identities on a new turn using the matchi
   expect(originals.every((card) => card.style.opacity === "0")).toBe(true);
   fireEvent.pointerMove(originals[0]!);
   expect(document.querySelectorAll(".card-transfer")).toHaveLength(4);
+  const bounds = vi.mocked(HTMLElement.prototype.getBoundingClientRect);
+  const styles = Object.getPrototypeOf(document.documentElement.style) as CSSStyleDeclaration;
+  const left = vi.spyOn(styles, "left", "set");
+  bounds.mockClear();
   now = 420;
   act(() => frame(now));
+  // Live fan destinations must all be read before any flight moves. Alternating
+  // these operations forces a layout for every card in a multi-card discard.
+  expect(Math.max(...bounds.mock.invocationCallOrder)).toBeLessThan(
+    Math.min(...left.mock.invocationCallOrder),
+  );
   const discardBack = document.querySelector<HTMLImageElement>(".card-transfer img.discard-card-back")!;
   expect(discardBack.getAttribute("src")).toBe(assetUrl("pile.discard"));
+  const source = vi.spyOn(HTMLImageElement.prototype, "src", "set");
+  now = 421;
+  act(() => frame(now));
+  expect(source).not.toHaveBeenCalled();
   now = 1000;
   act(() => frame(now));
   expect(
