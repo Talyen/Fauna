@@ -193,8 +193,8 @@ it.each(["home", "pause"])(
   },
 );
 
-it.each(["Back", "Escape", "Open menu"])(
-  "returns from the battle Collection creature page using %s without changing combat",
+it.each(["Back", "Escape", "Close inspection"])(
+  "returns from battle Collection inspection using %s without changing combat",
   async (back) => {
     vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
     localStorage.setItem("fauna.save.v1", encodeSave(run(7)));
@@ -208,13 +208,15 @@ it.each(["Back", "Escape", "Open menu"])(
       await user.click(screen.getByRole("button", { name: "Open menu" }));
       await user.click(screen.getByRole("button", { name: "Collection" }));
       await user.click(screen.getByRole("button", { name: "Inspect Mossguard" }));
-      expect(screen.getByRole("region", { name: "Rooted Stomp" })).toBeTruthy();
+      expect(screen.getByRole("dialog", { name: "Mossguard" })).toBeTruthy();
+      expect(screen.getByRole("button", { name: /^Rooted Stomp,/ })).toBeTruthy();
       if (back === "Escape") await user.keyboard("{Escape}");
       else await user.click(screen.getByRole("button", { name: back }));
-      if (back !== "Open menu") {
-        expect(document.activeElement).toBe(screen.getByRole("button", { name: "Inspect Mossguard" }));
-        await user.keyboard("{Escape}");
-      }
+      await waitFor(() =>
+        expect(document.activeElement).toBe(screen.getByRole("button", { name: "Inspect Mossguard" })),
+      );
+      if (back === "Close inspection") await user.click(screen.getByRole("button", { name: "Open menu" }));
+      else await user.keyboard("{Escape}");
       await waitFor(() =>
         expect(document.activeElement).toBe(screen.getByRole("button", { name: "Collection" })),
       );
