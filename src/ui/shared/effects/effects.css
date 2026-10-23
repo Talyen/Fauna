@@ -1,0 +1,110 @@
+.effect-root {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.effect-backdrop-host,
+.effect-backdrop,
+.effect-plasma,
+.effect-fill {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.effect-backdrop {
+  overflow: hidden;
+}
+.effect-plasma {
+  mix-blend-mode: plus-lighter;
+}
+.app {
+  background: transparent;
+  z-index: 1;
+}
+.effect-shine-border {
+  position: absolute;
+  inset: 0;
+  padding: var(--shine-width, 2px);
+  border-radius: inherit;
+  corner-shape: inherit;
+  pointer-events: none;
+  background-size: 300% 300%;
+  mask:
+    var(--effect-shine-mask) content-box,
+    var(--effect-shine-mask);
+  mask-composite: exclude;
+  animation: effect-border-shine var(--shine-duration, 14s) linear infinite;
+  z-index: 2;
+}
+.effect-shine-text {
+  color: transparent;
+  background-clip: text;
+  background-size: 200% 100%;
+  -webkit-text-stroke: 0;
+  filter: drop-shadow(0 1px 1px var(--effect-text-contour));
+  animation: effect-text-shine 4.8s linear infinite;
+}
+.game-button:has(> .effect-shine-border) {
+  position: relative;
+}
+.creature-card > .effect-shine-border {
+  opacity: 0;
+  transition: opacity var(--motion-hover);
+}
+.creature-card:hover > .effect-shine-border,
+:root[data-focus="visible"] .creature-card:focus > .effect-shine-border,
+.creature-card[data-effect-urgent="true"] > .effect-shine-border,
+.creature-card[data-effect-acting="true"] > .effect-shine-border {
+  opacity: 1;
+}
+.game-button:is(.action-card, .creature-card):has(> .effect-shine-border)::after {
+  border-color: transparent;
+}
+.game-button:is(.action-card, .creature-card):hover > .effect-shine-border,
+:root[data-focus="visible"] .game-button:is(.action-card, .creature-card):focus > .effect-shine-border {
+  --shine-width: 3px;
+}
+.game-button[aria-disabled="true"] > .effect-shine-border,
+.knocked-out .effect-shine-border {
+  display: none;
+}
+.effect-readout-frame {
+  position: relative;
+  border-radius: var(--radius);
+}
+@keyframes effect-border-shine {
+  0%,
+  100% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+}
+@keyframes effect-text-shine {
+  from {
+    background-position: 100% 50%;
+  }
+  to {
+    background-position: 0% 50%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .effect-shine-border,
+  .effect-shine-text {
+    animation: none;
+    transition: none;
+  }
+}
+@supports not (background-clip: text) {
+  .effect-shine-text {
+    color: var(--foreground);
+    background-image: none !important;
+  }
+}
+
+body:has(.effect-backdrop[data-effects-active="false"]) :is(.effect-shine-border, .effect-shine-text),
+[inert] :is(.effect-shine-border, .effect-shine-text) {
+  animation-play-state: paused;
+}

@@ -1,3 +1,8 @@
+import { Slider } from "../../components/ui/slider";
+import { Eclipse, Sparkles } from "lucide-react";
+import { EffectBaseline } from "../shared/effects/effects";
+import { effectPalette } from "../shared/effects/palettes";
+import type { useEffectPreferences } from "./effect-preferences";
 import { useState } from "react";
 import type { Session } from "../../application/session";
 import { DisplaySettings } from "./platform-settings";
@@ -10,6 +15,7 @@ import { SettingRow, SettingToggle } from "./settings-controls";
 export const TEXT_SCALES = [0.75, 1, 1.25] as const;
 
 export function Settings({
+  effects,
   session,
   audio,
   updateAudio,
@@ -20,6 +26,7 @@ export function Settings({
   autoEndTurn,
   setAutoEndTurn,
 }: {
+  effects?: ReturnType<typeof useEffectPreferences>;
   session?: Session;
   audio: AudioPreferences;
   updateAudio: (patch: Partial<AudioPreferences>) => void;
@@ -34,6 +41,7 @@ export function Settings({
   const [tab, setTab] = useState("display");
   return (
     <Tabs value={tab} onValueChange={setTab} className="settings-controls">
+      <EffectBaseline palette={effectPalette([], "gold")} />
       <TabsList data-nav-row aria-label="Settings categories" className="settings-tabs">
         <TabsTrigger value="display">
           <Monitor aria-hidden="true" />
@@ -89,6 +97,29 @@ export function Settings({
             ))}
           </RadioGroup>
         </SettingRow>
+        {(
+          [
+            ["glow", "Background Glow", Eclipse],
+            ["particles", "Background Particles", Sparkles],
+          ] as const
+        ).map(([key, label, icon]) => (
+          <SettingRow key={key} icon={icon} label={label}>
+            <div className="volume-controls">
+              <Slider
+                min={0}
+                max={100}
+                step={1}
+                value={[effects?.[key] ?? 100]}
+                onValueChange={([value]) => {
+                  if (value !== undefined) effects?.update(key, value);
+                }}
+                aria-label={label}
+                aria-valuetext={`${effects?.[key] ?? 100}%`}
+              />
+              <output aria-label={`${label} value`}>{effects?.[key] ?? 100}%</output>
+            </div>
+          </SettingRow>
+        ))}
       </TabsContent>
       <TabsContent
         value="sound"

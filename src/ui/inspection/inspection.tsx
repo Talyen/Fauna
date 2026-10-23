@@ -1,3 +1,7 @@
+import { EffectScope, EffectBaseline, EffectBackdropHost } from "../shared/effects/effects";
+import { creatureKeywords, effectPalette, visualKeywords } from "../shared/effects/palettes";
+import { cardText } from "../../game/card-rules";
+import { ShineText } from "../shared/effects/treatments";
 import { sharedDodgeChance } from "../../game/combat/index";
 import { creaturePassive, creatureStars, MAX_CREATURE_STARS } from "../../game/progression";
 import { KeywordText } from "../shared/keyword-text";
@@ -94,112 +98,125 @@ export function Inspector({
   });
   const card = selected === null ? null : cards[selected]!;
   return (
-    <Dialog
-      open
-      onOpenChange={(open) => {
-        if (!open) onClose();
-      }}
-    >
-      <DialogContent
-        overlayClassName="inspection-overlay"
-        className={`inspection ${card ? "single-card" : "creature-inspection"}`}
-        onCloseAutoFocus={(event) => {
-          event.preventDefault();
-          const focused = document.activeElement as HTMLElement | null;
-          if (focused !== document.body && isAvailableFocusTarget(focused)) return;
-          returnFocus(opener);
+    <EffectScope name="inspection">
+      <Dialog
+        open
+        onOpenChange={(open) => {
+          if (!open) onClose();
         }}
       >
-        <header className="inspection-back" data-nav-row>
-          <Button
-            ref={backButton}
-            size="icon"
-            aria-label="Back"
-            variant="ghost"
-            onClick={() => {
-              if (!back()) onClose();
-            }}
-          >
-            <ChevronLeft aria-hidden="true" />
-          </Button>
-          {!card ? <DialogTitle>{enemy?.name ?? creature.name}</DialogTitle> : null}
-        </header>
-        {card ? (
-          <>
-            <DialogTitle className="sr-only">{definition(card.definitionId).name} details</DialogTitle>
-            <DialogDescription className="sr-only">
-              Action artwork. Hover or focus for the name, Mana cost, and final effects.
-            </DialogDescription>
-            <ActionCard
-              card={card}
-              ownerName={creature.name}
-              actor={actor}
-              modifiers={enemy ? undefined : game}
-              enemy={!!enemy}
-              enemyPower={enemy?.power}
-              enemyValue={enemy ? enemyInspectionValue(enemy, definition(card.definitionId)) : undefined}
-              onClick={() => {}}
-            />
-          </>
-        ) : (
-          <>
-            <DialogDescription className="sr-only">
-              Creature artwork, three abilities and current passive rank. Hover or focus abilities for their
-              details.
-            </DialogDescription>
-            <div className="inspection-creature" data-nav-row>
-              <CreatureCard
-                progression={enemy ? undefined : game}
-                kind={kind}
-                name={enemy?.name}
-                health={enemy?.health ?? ally?.health ?? creature.health}
-                maxHealth={enemy?.maxHealth ?? creature.health}
-                block={ally?.block ?? enemy?.block ?? 0}
-                combat={ally?.combat ?? enemy?.combat}
-                sharedDodge={ally || enemy ? sharedDodgeChance(game, (ally ?? enemy)!) : 0}
-                readout={false}
-                speciesKit
-                label={`${enemy?.name ?? creature.name} details`}
+        <DialogContent
+          overlayClassName="inspection-overlay"
+          overlayChildren={<EffectBackdropHost scope="inspection" />}
+          className={`inspection ${card ? "single-card" : "creature-inspection"}`}
+          onCloseAutoFocus={(event) => {
+            event.preventDefault();
+            const focused = document.activeElement as HTMLElement | null;
+            if (focused !== document.body && isAvailableFocusTarget(focused)) return;
+            returnFocus(opener);
+          }}
+        >
+          <EffectBaseline
+            priority={1}
+            palette={effectPalette(
+              card
+                ? visualKeywords(cardText(definition(card.definitionId), card.level))
+                : creatureKeywords(kind, enemy ? undefined : game),
+            )}
+          />
+          <header className="inspection-back" data-nav-row>
+            <Button
+              ref={backButton}
+              size="icon"
+              aria-label="Back"
+              variant="ghost"
+              onClick={() => {
+                if (!back()) onClose();
+              }}
+            >
+              <ChevronLeft aria-hidden="true" />
+            </Button>
+            {!card ? <DialogTitle>{enemy?.name ?? creature.name}</DialogTitle> : null}
+          </header>
+          {card ? (
+            <>
+              <DialogTitle className="sr-only">{definition(card.definitionId).name} details</DialogTitle>
+              <DialogDescription className="sr-only">
+                Action artwork. Hover or focus for the name, Mana cost, and final effects.
+              </DialogDescription>
+              <ActionCard
+                card={card}
+                ownerName={creature.name}
+                actor={actor}
+                modifiers={enemy ? undefined : game}
+                enemy={!!enemy}
+                enemyPower={enemy?.power}
+                enemyValue={enemy ? enemyInspectionValue(enemy, definition(card.definitionId)) : undefined}
+                onClick={() => {}}
               />
-            </div>
-            <section className="inspection-abilities" aria-label="Abilities">
-              <div className="inspection-thumbnails" ref={thumbnails} data-nav-row>
-                {cards.map((action, index) => (
-                  <ActionCard
-                    key={action.id}
-                    card={action}
-                    ownerName={creature.name}
-                    actor={actor}
-                    modifiers={enemy ? undefined : game}
-                    enemy={!!enemy}
-                    enemyPower={enemy?.power}
-                    enemyValue={
-                      enemy ? enemyInspectionValue(enemy, definition(action.definitionId)) : undefined
-                    }
-                    onClick={() => setSelected(index)}
-                    onInspect={() => setSelected(index)}
-                  />
-                ))}
+            </>
+          ) : (
+            <>
+              <DialogDescription className="sr-only">
+                Creature artwork, three abilities and current passive rank. Hover or focus abilities for their
+                details.
+              </DialogDescription>
+              <div className="inspection-creature" data-nav-row>
+                <CreatureCard
+                  progression={enemy ? undefined : game}
+                  kind={kind}
+                  name={enemy?.name}
+                  health={enemy?.health ?? ally?.health ?? creature.health}
+                  maxHealth={enemy?.maxHealth ?? creature.health}
+                  block={ally?.block ?? enemy?.block ?? 0}
+                  combat={ally?.combat ?? enemy?.combat}
+                  sharedDodge={ally || enemy ? sharedDodgeChance(game, (ally ?? enemy)!) : 0}
+                  readout={false}
+                  speciesKit
+                  label={`${enemy?.name ?? creature.name} details`}
+                />
               </div>
-            </section>
-            <section className="inspection-active-trait" aria-label="Trait">
-              <h2>{creature.trait}</h2>
-              <span
-                className="inspection-stars"
-                role="img"
-                aria-label={`${rank} of ${MAX_CREATURE_STARS} stars`}
-              >
-                {Array.from({ length: MAX_CREATURE_STARS }, (_, index) => (
-                  <Star key={index} aria-hidden="true" data-earned={index < rank} />
-                ))}
-              </span>
-              <p>
-                <KeywordText text={passive.description} />
-              </p>
-            </section>
-          </>
-        )}
-      </DialogContent>
-    </Dialog>
+              <section className="inspection-abilities" aria-label="Abilities">
+                <div className="inspection-thumbnails" ref={thumbnails} data-nav-row>
+                  {cards.map((action, index) => (
+                    <ActionCard
+                      key={action.id}
+                      card={action}
+                      ownerName={creature.name}
+                      actor={actor}
+                      modifiers={enemy ? undefined : game}
+                      enemy={!!enemy}
+                      enemyPower={enemy?.power}
+                      enemyValue={
+                        enemy ? enemyInspectionValue(enemy, definition(action.definitionId)) : undefined
+                      }
+                      onClick={() => setSelected(index)}
+                      onInspect={() => setSelected(index)}
+                    />
+                  ))}
+                </div>
+              </section>
+              <section className="inspection-active-trait" aria-label="Trait">
+                <h2>
+                  <ShineText keywords={visualKeywords(passive.description)}>{creature.trait}</ShineText>
+                </h2>
+                <span
+                  className="inspection-stars"
+                  role="img"
+                  aria-label={`${rank} of ${MAX_CREATURE_STARS} stars`}
+                >
+                  {Array.from({ length: MAX_CREATURE_STARS }, (_, index) => (
+                    <Star key={index} aria-hidden="true" data-earned={index < rank} />
+                  ))}
+                </span>
+                <p>
+                  <KeywordText text={passive.description} />
+                </p>
+              </section>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
+    </EffectScope>
   );
 }

@@ -1,3 +1,6 @@
+import { useEffectBaseline } from "../effects/effects";
+import { creatureKeywords, effectPalette, visualKeywords } from "../effects/palettes";
+import { ShineBorder } from "../effects/treatments";
 import { CombatStatus } from "../combat/combat-status";
 import { assetUrl } from "../assets";
 import { useState, type ComponentProps, type ReactNode } from "react";
@@ -80,10 +83,14 @@ export function CreatureCard({
 }: CreatureProps) {
   const [tooltipOpen, setTooltipOpen] = useCardTooltip(tooltips);
   const info = species(kind);
+  useEffectBaseline(selected ? effectPalette(creatureKeywords(kind, progression)) : null, 1);
   const artwork = (
     <ArtCard
       aspect="creature"
       artwork={assetUrl(artworkId ?? `creature.${kind}`)}
+      effectKeywords={artworkId === "minion.echo" ? [] : creatureKeywords(kind, progression)}
+      urgent={health !== 0 && !!combat?.grace}
+      acting={acting}
       control={health === 0 ? null : combat?.controlled}
       presentation={presentation}
       className={[selected ? "selected" : "", invalidTarget ? "invalid-target" : ""].join(" ")}
@@ -150,7 +157,10 @@ export function CreatureCard({
               </TooltipContent>
             </Tooltip>
           )}
-          <div className="combatant-details">
+          <div className={`combatant-details ${health !== 0 && combat?.grace ? "effect-readout-frame" : ""}`}>
+            {health !== 0 && combat?.grace ? (
+              <ShineBorder colors={effectPalette([], "death").border} duration={4} />
+            ) : null}
             {preview ? (
               preview
             ) : readout && health !== undefined && (actorId || enemyId) ? (
@@ -263,6 +273,7 @@ export function ActionCard({
       ),
     enemyPower,
   );
+  useEffectBaseline(selected ? effectPalette(visualKeywords(effectText)) : null, 1);
   const artwork = (
     <ArtCard
       aspect="action"

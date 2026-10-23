@@ -30,6 +30,7 @@ export const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
     overlayClassName?: string;
+    overlayChildren?: React.ReactNode;
     closeLabel?: string;
     showCloseButton?: boolean;
   }
@@ -39,6 +40,7 @@ export const DialogContent = React.forwardRef<
       className,
       children,
       overlayClassName,
+      overlayChildren,
       closeLabel = "Close inspection",
       showCloseButton = true,
       ...props
@@ -48,7 +50,9 @@ export const DialogContent = React.forwardRef<
     const surface = useSurfaceRef(useModalSurfaceRef(ref));
     return (
       <DialogPrimitive.Portal>
-        <DialogPrimitive.Overlay className={cn("dialog-overlay", overlayClassName)} />
+        <DialogPrimitive.Overlay className={cn("dialog-overlay", overlayClassName)}>
+          {overlayChildren}
+        </DialogPrimitive.Overlay>
         <DialogPrimitive.Content ref={surface} className={cn("dialog-content", className)} {...props}>
           {children}
           {showCloseButton ? (

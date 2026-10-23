@@ -1,7 +1,5 @@
 /* Authoritative visual values. Gameplay layouts consume semantic tokens. */
 :root {
-  --mana-full-image: url("/ui/mana/full.webp");
-  --mana-empty-image: url("/ui/mana/empty.webp");
   color-scheme: dark;
   --background: #080807;
   --foreground: #e8e3d9;
@@ -245,7 +243,7 @@
   --keyword-purge: #e879f9;
   --keyword-reflect: #c4b5fd;
   --keyword-nullify: #c4b5fd;
-  --keyword-consume: #cbd5e1;
+  --keyword-consume: #a78bfa;
   --damage-physical: var(--keyword-physical);
   --damage-poison: var(--keyword-poison);
   --damage-water: var(--keyword-water);
@@ -269,4 +267,50 @@
   :root {
     --art-short-side: var(--art-minimum-short-side);
   }
+}
+
+:root {
+  --keyword-physical-deep: #64748b;
+  --keyword-poison-deep: #14532d;
+  --keyword-nature-deep: #064e3b;
+  --keyword-light-deep: #d97706;
+  --keyword-health-deep: #b91c1c;
+  --keyword-water-deep: color-mix(in srgb, var(--keyword-water) 55%, var(--background));
+  --keyword-waterThorns-deep: color-mix(in srgb, var(--keyword-waterThorns) 55%, var(--background));
+  --keyword-mana-deep: #0284c7;
+  --keyword-block-deep: #0ea5e9;
+  --keyword-thorns-deep: #064e3b;
+  --keyword-dodge-deep: #65a30d;
+  --keyword-blind-deep: color-mix(in srgb, var(--keyword-blind) 55%, var(--background));
+  --keyword-armor-deep: #4b5563;
+  --keyword-burn-deep: #ea580c;
+  --keyword-freeze-deep: #06b6d4;
+  --keyword-bleed-deep: #7f1d1d;
+  --keyword-stun-deep: #d97706;
+  --keyword-leech-deep: #4c0519;
+  --keyword-cleanse-deep: color-mix(in srgb, var(--keyword-cleanse) 55%, var(--background));
+  --keyword-purge-deep: color-mix(in srgb, var(--keyword-purge) 55%, var(--background));
+  --keyword-reflect-deep: color-mix(in srgb, var(--keyword-reflect) 55%, var(--background));
+  --keyword-nullify-deep: color-mix(in srgb, var(--keyword-nullify) 55%, var(--background));
+  --keyword-consume-deep: #6d28d9;
+  --effect-highlight: #fff;
+  --effect-black: #000;
+  --effect-gold-primary: #fbbf24;
+  --effect-gold-deep: #78350f;
+  --effect-death-primary: #dc2626;
+  --effect-death-deep: #450a0a;
+  --effect-play-primary: #cd9b51;
+  --effect-play-deep: #251e18;
+  --effect-talents-primary: #a78bfa;
+  --effect-talents-deep: #4c1d95;
+  --effect-settings-primary: #a1a1aa;
+  --effect-settings-deep: #27272a;
+  --effect-embers-primary: #f5c45d;
+  --effect-embers-secondary: #dca046;
+  --effect-battle-primary: #ff9646;
+  --effect-battle-secondary: #ff6428;
+  --effect-campfire-primary: #ffb43c;
+  --effect-campfire-secondary: #f07828;
+  --effect-shine-mask: linear-gradient(#fff 0 0);
+  --effect-text-contour: #000b;
 }

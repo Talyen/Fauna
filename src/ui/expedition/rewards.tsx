@@ -1,10 +1,13 @@
+import { KeywordText } from "../shared/keyword-text";
+import { ShineText } from "../shared/effects/treatments";
+import { creatureKeywords, visualKeywords } from "../shared/effects/palettes";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { PagedItems } from "../shared/navigation/pagination";
 import { ResultPresentation } from "../shared/rewards/result-presentation";
 import { assetUrl } from "../shared/assets";
 import { useLayoutEffect, useRef, useState } from "react";
 import { Plus, Star } from "lucide-react";
-import { Button } from "../../components/ui/button";
+import { EffectButton as Button } from "../shared/effects/treatments";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
 import { CreatureCard } from "../shared/cards/cards";
 import { ArtCard } from "../shared/cards/art-card";
@@ -102,6 +105,7 @@ export function Rewards({ game, send, inspect }: Props) {
                       onClick={() => inspect({ species: kind })}
                     />
                     <Button
+                      effectKeywords={creatureKeywords(kind, game)}
                       className="recruit-button"
                       aria-label={`Recruit ${species(kind).name}`}
                       onClick={() => send({ type: "recruit", species: kind })}
@@ -130,11 +134,17 @@ export function Rewards({ game, send, inspect }: Props) {
                           />
                         </TooltipTrigger>
                         <TooltipContent>
-                          <strong>{boon.name}</strong>
-                          <p>{boon.text}</p>
+                          <strong>
+                            <ShineText keywords={visualKeywords(boon.text)}>{boon.name}</ShineText>
+                          </strong>
+                          <p>
+                            <KeywordText text={boon.text} />
+                          </p>
                         </TooltipContent>
                       </Tooltip>
-                      <h2>{boon.name}</h2>
+                      <h2>
+                        <ShineText keywords={visualKeywords(boon.text)}>{boon.name}</ShineText>
+                      </h2>
                     </div>
                   );
                 })}

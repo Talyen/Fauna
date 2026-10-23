@@ -76,6 +76,11 @@ test("combat preferences, autoplay pause and manual takeover", async ({ page }) 
   await page.locator(".app:not([inert]) .hand .action-card:not([aria-disabled=true])").first().click();
   await expect(autoplay).toHaveAttribute("aria-pressed", "false");
   await page.keyboard.press("Escape");
+  // Manual takeover can play immediately or select a target; Back can therefore open the menu.
+  const pause = page.getByRole("dialog", { name: "Pause menu" });
+  if (await pause.isVisible()) await page.keyboard.press("Escape");
+  await expect(pause).toBeHidden();
+  await expect(page.locator(".app:not([inert])")).not.toHaveAttribute("data-paused", "true");
   await captureScreen(page, { path: `reports/controls-battle-${width}.png` });
   await expect(page.getByRole("button", { name: "Skip combat", exact: true })).toHaveCount(0);
   // Browser controller simulation exercises the same semantic action as physical Y.

@@ -1,3 +1,6 @@
+import { EffectBaseline } from "../shared/effects/effects";
+import { effectPalette } from "../shared/effects/palettes";
+import { PROGRESSION_KEYWORDS } from "../../game/keywords";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { ResultPresentation, AnimatedNumber } from "../shared/rewards/result-presentation";
 import { EmptyState } from "../shared/empty-state";
@@ -18,6 +21,19 @@ export function JourneyResults({ game, home }: { game: StateAt<"victory" | "defe
   return (
     <ResultPresentation>
       <Screen className="journey-results">
+        <EffectBaseline
+          palette={
+            summary?.outcome === "defeat"
+              ? effectPalette([], "death")
+              : Object.values(summary?.xp ?? {}).some((value) => value > 0)
+                ? effectPalette(
+                    PROGRESSION_KEYWORDS.filter((id) => (summary?.xp[id] ?? 0) > 0).sort(
+                      (a, b) => (summary?.xp[b] ?? 0) - (summary?.xp[a] ?? 0),
+                    ),
+                  )
+                : effectPalette([], "gold")
+          }
+        />
         <header className="journey-results-heading">
           <ScreenHeading>{title}</ScreenHeading>
         </header>

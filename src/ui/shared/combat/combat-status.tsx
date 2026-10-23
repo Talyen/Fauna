@@ -1,3 +1,5 @@
+import { EffectButton } from "../effects/treatments";
+import { visualKeywords } from "../effects/palettes";
 import { PagedItems } from "../navigation/pagination";
 import { returnFocus } from "../navigation/focus";
 import { KeywordText } from "../keyword-text";
@@ -7,7 +9,7 @@ import { Hourglass, Skull, Timer } from "lucide-react";
 import type { CombatState } from "../../../game/types";
 import { isKeywordId, KEYWORD_DEFINITIONS } from "../../../game/keywords";
 import { KeywordIcon } from "../keyword-icon";
-import { Button } from "../../../components/ui/button";
+
 import { Tooltip, TooltipTrigger, TooltipContent } from "../../../components/ui/tooltip";
 const stats = [
   "armor",
@@ -169,7 +171,15 @@ export function CombatStatus({
     return (
       <Tooltip key={s.id}>
         <TooltipTrigger asChild>
-          <Button
+          <EffectButton
+            effectKeywords={
+              s.id === "controlled" && combat?.controlled
+                ? [combat.controlled]
+                : isKeywordId(s.id)
+                  ? [s.id]
+                  : visualKeywords(s.text)
+            }
+            effectTone={s.id === "grace" ? "death" : undefined}
             variant="ghost"
             size="icon"
             className="status-icon"
@@ -195,7 +205,7 @@ export function CombatStatus({
                 <Icon aria-hidden="true" />
               )}
             </span>
-          </Button>
+          </EffectButton>
         </TooltipTrigger>
         <TooltipContent>
           <KeywordText text={s.text} />

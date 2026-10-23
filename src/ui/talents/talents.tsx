@@ -1,3 +1,6 @@
+import { EffectBaseline } from "../shared/effects/effects";
+import { effectPalette } from "../shared/effects/palettes";
+import { EffectButton as Button, ShineText } from "../shared/effects/treatments";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { PagedItems } from "../shared/navigation/pagination";
 import { motionValue } from "../shared/motion-values";
@@ -34,7 +37,7 @@ import {
   Gem,
   Battery,
 } from "lucide-react";
-import { Button } from "../../components/ui/button";
+
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
 import { ArtCard } from "../shared/cards/art-card";
 import { returnFocus } from "../shared/navigation/focus";
@@ -144,9 +147,10 @@ export function Talents({
   };
   return (
     <Screen className="talents-screen" data-view={keyword ? "tree" : "overview"} ref={screen}>
+      <EffectBaseline palette={keyword ? effectPalette([keyword]) : null} />
       <header className="page-heading talents-heading">
         <ScreenHeading back={keyword ? () => setKeyword(null) : openMenu} openMenu={openMenu}>
-          {keyword ? keywordLabel(keyword) : "Talents"}
+          {keyword ? <ShineText keywords={[keyword]}>{keywordLabel(keyword)}</ShineText> : "Talents"}
         </ScreenHeading>
         {keyword ? (
           <Button
@@ -170,12 +174,15 @@ export function Talents({
                   <ArtCard
                     aspect="action"
                     artwork={assetUrl(`keyword.${artwork[id]}`)}
+                    effectKeywords={[id]}
                     data-talent-keyword={id}
                     aria-label={`${keywordLabel(id)} talents`}
                     aria-describedby={points > 0 ? `${id}-available-points` : undefined}
                     onClick={() => setKeyword(id)}
                   />
-                  <h2>{keywordLabel(id)}</h2>
+                  <h2>
+                    <ShineText keywords={[id]}>{keywordLabel(id)}</ShineText>
+                  </h2>
                   <p className="talent-category-points" id={`${id}-available-points`}>
                     {points > 0 ? `${points} ${points === 1 ? "point" : "points"} available` : null}
                   </p>
@@ -235,6 +242,8 @@ export function Talents({
                     <Tooltip key={t.id}>
                       <TooltipTrigger asChild>
                         <Button
+                          effectKeywords={[keyword]}
+                          attention={available}
                           variant="outline"
                           className="talent-node"
                           aria-label={`${t.name}${owned ? ", unlocked" : ""}`}
@@ -252,7 +261,9 @@ export function Talents({
                             <span data-keyword={keyword}>
                               <TalentSymbol className="talent-icon" aria-hidden="true" />
                             </span>
-                            <span className="talent-name">{t.name}</span>
+                            <span className="talent-name">
+                              <ShineText keywords={[keyword]}>{t.name}</ShineText>
+                            </span>
                           </span>
                           <span className="talent-effect" id={`${t.id}-effect`}>
                             <KeywordText text={t.text} />

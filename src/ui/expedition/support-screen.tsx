@@ -1,10 +1,12 @@
+import { ShineText } from "../shared/effects/treatments";
+import { visualKeywords } from "../shared/effects/palettes";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
 import { useLayoutEffect, useRef } from "react";
 import { Coins } from "lucide-react";
 import type { Command, GameState, StateAt } from "../../game/types";
 import { canVisitMerchant } from "../../game/destinations";
 import { BOONS } from "../../game/content";
-import { Button } from "../../components/ui/button";
+import { EffectButton as Button } from "../shared/effects/treatments";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../components/ui/tooltip";
 import { ArtCard } from "../shared/cards/art-card";
 import { KeywordText } from "../shared/keyword-text";
@@ -17,6 +19,7 @@ export function SupportOffer({ game, send }: { game: GameState; send: (c: Comman
       <ArtCard
         aspect="creature"
         artwork={assetUrl("location.silken-clearing")}
+        effectTone="gold"
         aria-label="Visit Boon Merchant"
         onClick={() => send({ type: "enterSupport", visit: visit.id })}
       />
@@ -59,7 +62,9 @@ export function SupportScreen({ game, send }: { game: StateAt<"support">; send: 
             presentation
             aria-label={purchased.name}
           />
-          <h2>{purchased.name}</h2>
+          <h2>
+            <ShineText keywords={visualKeywords(purchased.text)}>{purchased.name}</ShineText>
+          </h2>
           <p>
             <KeywordText text={purchased.text} />
           </p>
@@ -92,7 +97,9 @@ export function SupportScreen({ game, send }: { game: StateAt<"support">; send: 
                       />
                     </TooltipTrigger>
                     <TooltipContent>
-                      <strong>{boon.name}</strong>
+                      <strong>
+                        <ShineText keywords={visualKeywords(boon.text)}>{boon.name}</ShineText>
+                      </strong>
                       <p>
                         <KeywordText text={boon.text} />
                       </p>
@@ -101,6 +108,7 @@ export function SupportScreen({ game, send }: { game: StateAt<"support">; send: 
                     </TooltipContent>
                   </Tooltip>
                   <Button
+                    effectKeywords={visualKeywords(boon.text)}
                     variant="secondary"
                     className="merchant-price"
                     aria-label={`Buy ${boon.name} for ${slot.price} Gold`}

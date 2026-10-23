@@ -1,3 +1,5 @@
+import { creatureKeywords } from "../shared/effects/palettes";
+import { ShineText } from "../shared/effects/treatments";
 import { Screen, ScreenHeading } from "../shared/navigation/screen";
 
 import { RestRecovery } from "./campfire";
@@ -71,6 +73,7 @@ export function TeamSelection({ game, send, recovery }: Props & { recovery?: Gam
             <ArtCard
               aspect="creature"
               artwork={assetUrl("location.ember-grove")}
+              effectKeywords={["burn"]}
               aria-label="Visit Campfire"
               onClick={() => send({ type: "visitCampfire" })}
             />
@@ -85,6 +88,7 @@ export function TeamSelection({ game, send, recovery }: Props & { recovery?: Gam
                 <ArtCard
                   aspect="creature"
                   artwork={assetUrl(`creature.${bossEnemy.species}`)}
+                  effectKeywords={creatureKeywords(bossEnemy.species)}
                   data-encounter
                   aria-label={`Boss: ${bossEnemy.name}`}
                   onClick={() => send({ type: "beginBattle" })}
@@ -99,11 +103,18 @@ export function TeamSelection({ game, send, recovery }: Props & { recovery?: Gam
               aspect="creature"
               artwork={assetUrl("encounter.combat")}
               data-encounter
+              effectKeywords={["physical"]}
               aria-label="Combat"
               onClick={() => send({ type: "beginBattle" })}
             />
           )}
-          <h2>{bossEnemy?.name ?? "Combat"}</h2>
+          <h2>
+            {bossEnemy ? (
+              <ShineText keywords={creatureKeywords(bossEnemy.species)}>{bossEnemy.name}</ShineText>
+            ) : (
+              "Combat"
+            )}
+          </h2>
         </div>
       </section>
       <BattleEarnings game={game} />

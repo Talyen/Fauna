@@ -1,3 +1,5 @@
+import { EffectBaseline } from "../shared/effects/effects";
+import { creatureKeywords, effectPalette } from "../shared/effects/palettes";
 import { Button } from "../../components/ui/button";
 import { species, type SpeciesId } from "../../game/content";
 import type { GameState } from "../../game/types";
@@ -19,6 +21,7 @@ export function UnlockScreen({
 }) {
   return (
     <Screen className="unlock-screen">
+      <EffectBaseline palette={effectPalette(creatureKeywords(kind, game))} />
       <ScreenHeading back={onHome} openMenu={onHome}>
         Creature unlocked
       </ScreenHeading>

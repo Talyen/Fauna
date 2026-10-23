@@ -1,3 +1,7 @@
+import { EffectBaseline } from "../shared/effects/effects";
+import { creatureKeywords, effectPalette, visualKeywords } from "../shared/effects/palettes";
+import { ShineText } from "../shared/effects/treatments";
+import { cardText } from "../../game/card-rules";
 import { useLayoutEffect, useRef } from "react";
 import { CARDS, species, type SpeciesId } from "../../game/content";
 import { creaturePassive, creatureStars } from "../../game/progression";
@@ -30,12 +34,14 @@ export function CollectionCreature({
   }, []);
   return (
     <Screen className="collection-creature-screen" ref={root}>
+      <EffectBaseline priority={1} palette={effectPalette(creatureKeywords(kind, game))} />
       <ScreenHeading back={back} openMenu={openMenu}>
         {creature.name}
       </ScreenHeading>
       <div className="collection-creature-layout">
         <section className="collection-creature-trait" aria-label="Trait">
           <ArtCard
+            effectKeywords={creatureKeywords(kind, game)}
             aspect="creature"
             artwork={assetUrl(`creature.${kind}`)}
             presentation
@@ -43,7 +49,9 @@ export function CollectionCreature({
           />
           <p className="collection-creature-rank">Collection rank: {rank} / 5 stars</p>
           <div className="collection-creature-passive">
-            <h2>{creature.trait}</h2>
+            <h2>
+              <ShineText keywords={visualKeywords(passive.description)}>{creature.trait}</ShineText>
+            </h2>
             <p>
               <KeywordText text={passive.description} />
             </p>
@@ -63,6 +71,7 @@ export function CollectionCreature({
                   aria-labelledby={`collection-${card.id}`}
                 >
                   <ArtCard
+                    effectKeywords={visualKeywords(cardText(card))}
                     aspect="action"
                     artwork={assetUrl(card.artwork ?? `action.${kind}`)}
                     presentation

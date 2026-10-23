@@ -1,3 +1,4 @@
+import { EffectScope } from "../shared/effects/effects";
 import type { RefObject } from "react";
 import type { Session } from "../../application/session";
 import type { GameState, Command } from "../../game/types";
@@ -78,15 +79,17 @@ export function ShellOverlays({
                     : ""}
           </DialogTitle>
           <DialogDescription className="sr-only">Game information and controls</DialogDescription>
-          {modal === "deck" || modal === "draw" || modal === "discard" ? (
-            <DeckCards
-              game={game}
-              inspect={game.phase === "battle" ? undefined : setInspection}
-              pile={modal === "deck" ? undefined : modal}
-            />
-          ) : modal === "boons" ? (
-            <OwnedBoons boons={game.boons} />
-          ) : null}
+          <EffectScope name={modal ?? "modal"}>
+            {modal === "deck" || modal === "draw" || modal === "discard" ? (
+              <DeckCards
+                game={game}
+                inspect={game.phase === "battle" ? undefined : setInspection}
+                pile={modal === "deck" ? undefined : modal}
+              />
+            ) : modal === "boons" ? (
+              <OwnedBoons boons={game.boons} />
+            ) : null}
+          </EffectScope>
           {inspection ? (
             <Inspector
               item={inspection}
@@ -125,7 +128,9 @@ export function ShellOverlays({
             <DialogDescription className="sr-only">
               Choose a living backup for your knocked-out creature
             </DialogDescription>
-            <ReplacementPicker key={replacement.id} game={game} outgoing={replacement} send={send} />
+            <EffectScope name="replacement">
+              <ReplacementPicker key={replacement.id} game={game} outgoing={replacement} send={send} />
+            </EffectScope>
           </DialogContent>
         </Dialog>
       ) : null}

@@ -1,3 +1,5 @@
+import { ShineText } from "../effects/treatments";
+import { visualKeywords } from "../effects/palettes";
 import { creaturePassive } from "../../../game/progression";
 import { CombatStatus } from "../combat/combat-status";
 import { KeywordText } from "../keyword-text";
@@ -112,7 +114,13 @@ export function CreatureDetails({
       {!name || speciesKit || info.legendary ? (
         <>
           {name && speciesKit ? <strong>Species kit · {info.name}</strong> : null}
-          {speciesKit ? <strong>{info.trait}</strong> : null}
+          {speciesKit ? (
+            <strong>
+              <ShineText keywords={visualKeywords(creaturePassive(progression, kind).description)}>
+                {info.trait}
+              </ShineText>
+            </strong>
+          ) : null}
           <p>
             <KeywordText text={creaturePassive(progression, kind).description} />
           </p>

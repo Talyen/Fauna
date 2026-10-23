@@ -37,6 +37,16 @@ it("applies slider and switch changes live, persists preferences, and preserves 
   try {
     await user.click(screen.getByRole("button", { name: "Settings" }));
     expect(screen.queryByRole("slider", { name: "Master volume" })).toBeNull();
+    const glow = screen.getByRole("slider", { name: "Background Glow" });
+    glow.focus();
+    await user.keyboard("{Home}{ArrowRight}");
+    expect(glow.getAttribute("aria-valuenow")).toBe("1");
+    const particles = screen.getByRole("slider", { name: "Background Particles" });
+    particles.focus();
+    await user.keyboard("{Home}");
+    expect(particles.getAttribute("aria-valuenow")).toBe("0");
+    expect(localStorage.getItem("fauna.background-glow")).toBe("1");
+    expect(localStorage.getItem("fauna.background-particles")).toBe("0");
     await user.click(screen.getByRole("radio", { name: "75%" }));
     expect(document.documentElement.style.getPropertyValue("--tooltip-scale")).toBe("1");
     await user.click(screen.getByRole("radio", { name: "Tooltip 125%" }));
@@ -69,6 +79,10 @@ it("applies slider and switch changes live, persists preferences, and preserves 
     view.unmount();
     render(<App session={session} />);
     await user.click(screen.getByRole("button", { name: "Settings" }));
+    expect(screen.getByRole("slider", { name: "Background Glow" }).getAttribute("aria-valuenow")).toBe("1");
+    expect(screen.getByRole("slider", { name: "Background Particles" }).getAttribute("aria-valuenow")).toBe(
+      "0",
+    );
     expect(screen.getByRole("radio", { name: "75%" }).getAttribute("aria-checked")).toBe("true");
     expect(screen.getByRole("radio", { name: "Tooltip 125%" }).getAttribute("aria-checked")).toBe("true");
     await user.click(screen.getByRole("tab", { name: "Battle" }));

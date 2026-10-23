@@ -1,3 +1,6 @@
+import { EffectScope, EffectsScene } from "../shared/effects/effects";
+import { useEffectPreferences } from "../settings/effect-preferences";
+import { bossEncounter } from "../../game/encounters";
 import { pendingReplacement } from "../../game/team";
 import { ShellOverlays } from "./overlays";
 import { routeInput } from "./input";
@@ -51,6 +54,7 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
     inspectionControls: Controls = useRef(null),
     talentControls: Controls = useRef(null),
     collectionControls: Controls = useRef(null);
+  const effectPreferences = useEffectPreferences();
   const [draftStarted, setDraftStarted] = useState(false);
   const [route, setRoute] = useState<Route>("home"),
     [menu, setMenu] = useState(false),
@@ -293,223 +297,255 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
     />
   );
   return (
-    <SurfaceTransition token={`${route}:${game.phase}`} battle={route === "play" && game.phase === "battle"}>
-      <Popover modal open={menu && !modal && !inspection} onOpenChange={setMenu}>
-        <PopoverAnchor virtualRef={menuAnchor} />
-        <div
-          ref={root}
-          className={`app ${route === "play" && game.phase === "battle" ? "in-battle" : ""}`}
-          data-input={mode}
-          data-focus={navigation ? "visible" : "hidden"}
-          data-route={route}
-          data-phase={game.phase}
-          data-paused={paused || undefined}
-          data-save-status={view.saveStatus}
-        >
-          {view.saveUnavailable ? (
-            <p className="save-notice" role="status">
-              Progress cannot be saved right now; keep Fauna open while it retries
-            </p>
-          ) : null}
-          {!view.cloud.blocking ? (
-            <>
-              {route === "home" ? <HomeScreen>{menuItems(true)}</HomeScreen> : null}
-              {route === "unlocks" && reveals[0] ? (
-                <UnlockScreen
-                  game={game}
-                  kind={reveals[0]}
-                  inspect={setInspection}
-                  onHome={() => setRoute("home")}
-                  onContinue={() => {
-                    setReveals((old) => old.slice(1));
-                    if (reveals.length === 1) setRoute("home");
-                  }}
-                />
-              ) : null}
-              {route === "talents" ? (
-                <Talents game={game} send={send} openMenu={backFromPage} controls={talentControls} />
-              ) : null}
-              {route === "collection" ? (
-                <Collection game={game} controls={collectionControls} openMenu={backFromPage} />
-              ) : null}
-              {route === "glossary" ? <GlossaryScreen back={backFromPage} /> : null}
-              {route === "settings" ? (
-                <Screen className="menu-screen settings-screen" aria-labelledby="menu-screen-title">
-                  <header className="collection-heading">
-                    <ScreenHeading id="menu-screen-title" back={backFromPage} openMenu={backFromPage}>
-                      Settings
-                    </ScreenHeading>
-                  </header>
-                  <Settings
-                    session={session}
-                    audio={audioPreferences}
-                    updateAudio={updateAudioPreferences}
-                    scale={scale}
-                    setScale={setScale}
-                    tooltipScale={tooltipScale}
-                    setTooltipScale={setTooltipScale}
-                    desktop={desktop}
-                    autoEndTurn={autoEndTurn}
-                    setAutoEndTurn={setAutoEndTurn}
+    <EffectScope name={route}>
+      <EffectsScene
+        scope={
+          inspection
+            ? "inspection"
+            : (modal ?? (replacement && route === "play" && !menu ? "replacement" : menu ? "menu" : route))
+        }
+        scene={
+          route === "play"
+            ? game.phase === "draft"
+              ? "none"
+              : game.phase === "battle"
+                ? bossEncounter(game)
+                  ? "boss"
+                  : "battle"
+                : game.phase === "campfire"
+                  ? "campfire"
+                  : "default"
+            : "default"
+        }
+        glow={effectPreferences.glow}
+        particles={effectPreferences.particles}
+      />
+      <SurfaceTransition
+        token={`${route}:${game.phase}`}
+        battle={route === "play" && game.phase === "battle"}
+      >
+        <Popover modal open={menu && !modal && !inspection} onOpenChange={setMenu}>
+          <PopoverAnchor virtualRef={menuAnchor} />
+          <div
+            ref={root}
+            className={`app ${route === "play" && game.phase === "battle" ? "in-battle" : ""}`}
+            data-input={mode}
+            data-focus={navigation ? "visible" : "hidden"}
+            data-route={route}
+            data-phase={game.phase}
+            data-paused={paused || undefined}
+            data-save-status={view.saveStatus}
+          >
+            {view.saveUnavailable ? (
+              <p className="save-notice" role="status">
+                Progress cannot be saved right now; keep Fauna open while it retries
+              </p>
+            ) : null}
+            {!view.cloud.blocking ? (
+              <>
+                {route === "home" ? <HomeScreen>{menuItems(true)}</HomeScreen> : null}
+                {route === "unlocks" && reveals[0] ? (
+                  <UnlockScreen
+                    game={game}
+                    kind={reveals[0]}
+                    inspect={setInspection}
+                    onHome={() => setRoute("home")}
+                    onContinue={() => {
+                      setReveals((old) => old.slice(1));
+                      if (reveals.length === 1) setRoute("home");
+                    }}
                   />
-                </Screen>
-              ) : null}
-              <div className="play-surface" hidden={route !== "play"} inert={route !== "play"}>
-                <HeaderNavigation.Provider
-                  value={{
-                    back: () => setRoute("home"),
-                    openMenu,
-                    deck: ["draft", "teamSelection", "recruit", "boon", "support", "campfire"].includes(
-                      game.phase,
-                    )
-                      ? () => openModal("deck")
-                      : undefined,
-                  }}
-                >
-                  {game.phase === "battle" ? (
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="menu-button compact-icon-control"
-                      aria-label="Open menu"
-                      onClick={openMenu}
-                    >
-                      <Menu aria-hidden="true" />
-                    </Button>
-                  ) : null}
-                  {import.meta.env.DEV && game.phase === "battle" ? (
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="skip-combat-control compact-icon-control"
-                      aria-label="Skip combat"
-                      onClick={() => send({ type: "devWinBattle" })}
-                    >
-                      <FastForward aria-hidden="true" className="menu-icon-skip" />
-                    </Button>
-                  ) : null}
-                  {game.phase === "battle" ? (
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="autoplay-control compact-icon-control"
-                      aria-label="Auto-play"
-                      aria-pressed={autoplay}
-                      onClick={() => setAutoplay(!autoplay)}
-                    >
-                      {autoplay ? <Pause aria-hidden="true" /> : <Repeat aria-hidden="true" />}
-                    </Button>
-                  ) : null}
-                  {game.phase === "draft" ? (
-                    <Draft game={game} send={send} inspect={setInspection} />
-                  ) : game.phase === "teamSelection" ? (
-                    <TeamSelection
-                      game={game}
-                      send={send}
-                      inspect={setInspection}
-                      recovery={view.committedCommand?.type === "rest" ? view.events : undefined}
+                ) : null}
+                {route === "talents" ? (
+                  <Talents game={game} send={send} openMenu={backFromPage} controls={talentControls} />
+                ) : null}
+                {route === "collection" ? (
+                  <Collection game={game} controls={collectionControls} openMenu={backFromPage} />
+                ) : null}
+                {route === "glossary" ? <GlossaryScreen back={backFromPage} /> : null}
+                {route === "settings" ? (
+                  <Screen className="menu-screen settings-screen" aria-labelledby="menu-screen-title">
+                    <header className="collection-heading">
+                      <ScreenHeading id="menu-screen-title" back={backFromPage} openMenu={backFromPage}>
+                        Settings
+                      </ScreenHeading>
+                    </header>
+                    <Settings
+                      effects={effectPreferences}
+                      session={session}
+                      audio={audioPreferences}
+                      updateAudio={updateAudioPreferences}
+                      scale={scale}
+                      setScale={setScale}
+                      tooltipScale={tooltipScale}
+                      setTooltipScale={setTooltipScale}
+                      desktop={desktop}
+                      autoEndTurn={autoEndTurn}
+                      setAutoEndTurn={setAutoEndTurn}
                     />
-                  ) : game.phase === "support" ? (
-                    <SupportScreen game={game} send={send} />
-                  ) : game.phase === "campfire" ? (
-                    <Campfire game={game} send={send} />
-                  ) : game.phase === "battle" ? (
-                    <BattleScreen
-                      key={game.encounter}
-                      clearSelection={
-                        view.overlayActive ||
-                        menu ||
-                        modal !== null ||
-                        inspection !== null ||
-                        autoplay ||
-                        !!replacement
-                      }
-                      onManualStart={() => setAutoplay(false)}
-                      openPile={(pile) => openModal(pile)}
-                      openingDraw={view.committedCommand?.type === "beginBattle"}
-                      game={game}
-                      send={send}
-                      controls={gameControls}
-                      bursts={bursts}
-                      onDenied={deny}
-                      controller={mode === "controller"}
-                      navigateFocus={navigation}
-                    />
-                  ) : game.phase === "recruit" || game.phase === "boon" ? (
-                    <Rewards
-                      key={`${game.encounter}-${game.phase}`}
-                      game={game}
-                      send={send}
-                      inspect={setInspection}
-                    />
-                  ) : (
-                    <JourneyResults game={game} home={leaveResults} />
-                  )}
-                </HeaderNavigation.Provider>
-                <div className="sr-only" role="log" aria-live="polite">
-                  {view.events.map((event) => event.text).join(" ")}
-                </div>
-              </div>
-            </>
-          ) : (
-            <Loading />
-          )}
-          {!modal && !inspection ? (
-            <PopoverContent
-              key={menuInstance}
-              className="menu-panel"
-              aria-label="Pause menu"
-              onOpenAutoFocus={(event) => {
-                const label = menuReturnLabel.current;
-                if (!label) return;
-                menuReturnLabel.current = null;
-                const opener = Array.from(
-                  (event.currentTarget as HTMLElement).querySelectorAll<HTMLButtonElement>("button"),
-                ).find((button) => (button.getAttribute("aria-label") ?? button.textContent) === label);
-                if (opener) {
+                  </Screen>
+                ) : null}
+                <EffectScope name="play">
+                  <div className="play-surface" hidden={route !== "play"} inert={route !== "play"}>
+                    <HeaderNavigation.Provider
+                      value={{
+                        back: () => setRoute("home"),
+                        openMenu,
+                        deck: ["draft", "teamSelection", "recruit", "boon", "support", "campfire"].includes(
+                          game.phase,
+                        )
+                          ? () => openModal("deck")
+                          : undefined,
+                      }}
+                    >
+                      {game.phase === "battle" ? (
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="menu-button compact-icon-control"
+                          aria-label="Open menu"
+                          onClick={openMenu}
+                        >
+                          <Menu aria-hidden="true" />
+                        </Button>
+                      ) : null}
+                      {import.meta.env.DEV && game.phase === "battle" ? (
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="skip-combat-control compact-icon-control"
+                          aria-label="Skip combat"
+                          onClick={() => send({ type: "devWinBattle" })}
+                        >
+                          <FastForward aria-hidden="true" className="menu-icon-skip" />
+                        </Button>
+                      ) : null}
+                      {game.phase === "battle" ? (
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="autoplay-control compact-icon-control"
+                          aria-label="Auto-play"
+                          aria-pressed={autoplay}
+                          onClick={() => setAutoplay(!autoplay)}
+                        >
+                          {autoplay ? <Pause aria-hidden="true" /> : <Repeat aria-hidden="true" />}
+                        </Button>
+                      ) : null}
+                      {game.phase === "draft" ? (
+                        <Draft game={game} send={send} inspect={setInspection} />
+                      ) : game.phase === "teamSelection" ? (
+                        <TeamSelection
+                          game={game}
+                          send={send}
+                          inspect={setInspection}
+                          recovery={view.committedCommand?.type === "rest" ? view.events : undefined}
+                        />
+                      ) : game.phase === "support" ? (
+                        <SupportScreen game={game} send={send} />
+                      ) : game.phase === "campfire" ? (
+                        <Campfire game={game} send={send} />
+                      ) : game.phase === "battle" ? (
+                        <BattleScreen
+                          key={game.encounter}
+                          clearSelection={
+                            view.overlayActive ||
+                            menu ||
+                            modal !== null ||
+                            inspection !== null ||
+                            autoplay ||
+                            !!replacement
+                          }
+                          onManualStart={() => setAutoplay(false)}
+                          openPile={(pile) => openModal(pile)}
+                          openingDraw={view.committedCommand?.type === "beginBattle"}
+                          game={game}
+                          send={send}
+                          controls={gameControls}
+                          bursts={bursts}
+                          onDenied={deny}
+                          controller={mode === "controller"}
+                          navigateFocus={navigation}
+                        />
+                      ) : game.phase === "recruit" || game.phase === "boon" ? (
+                        <Rewards
+                          key={`${game.encounter}-${game.phase}`}
+                          game={game}
+                          send={send}
+                          inspect={setInspection}
+                        />
+                      ) : (
+                        <JourneyResults game={game} home={leaveResults} />
+                      )}
+                    </HeaderNavigation.Provider>
+                    <div className="sr-only" role="log" aria-live="polite">
+                      {view.events.map((event) => event.text).join(" ")}
+                    </div>
+                  </div>
+                </EffectScope>
+              </>
+            ) : (
+              <Loading />
+            )}
+            {!modal && !inspection ? (
+              <PopoverContent
+                key={menuInstance}
+                className="menu-panel"
+                aria-label="Pause menu"
+                onOpenAutoFocus={(event) => {
+                  const label = menuReturnLabel.current;
+                  if (!label) return;
+                  menuReturnLabel.current = null;
+                  const opener = Array.from(
+                    (event.currentTarget as HTMLElement).querySelectorAll<HTMLButtonElement>("button"),
+                  ).find((button) => (button.getAttribute("aria-label") ?? button.textContent) === label);
+                  if (opener) {
+                    event.preventDefault();
+                    opener.focus();
+                  }
+                }}
+                onCloseAutoFocus={(event) => {
                   event.preventDefault();
-                  opener.focus();
-                }
-              }}
-              onCloseAutoFocus={(event) => {
-                event.preventDefault();
-                if (menuGeneration.current !== menuInstance || modal || inspection) return;
-                if (route === "play") returnFocus(pauseOpener.current);
-                else {
-                  // A page may already have focused a deeper destination during the exit fade.
-                  const focused = document.activeElement as HTMLElement | null;
-                  if (focused !== document.body && isAvailableFocusTarget(focused)) return;
-                  returnFocus(
-                    root.current?.querySelector<HTMLElement>(
-                      route === "settings"
-                        ? '.settings-screen [role="tab"][aria-selected="true"]'
-                        : "main button:not(:disabled)",
-                    ) ?? null,
-                  );
-                }
-              }}
-            >
-              <nav className="pause-menu-choices" aria-label="Pause menu">
-                {menuItems(false)}
-              </nav>
-            </PopoverContent>
-          ) : null}
-          <ShellOverlays
-            modal={modal}
-            modalInstance={modalInstance}
-            menu={menu}
-            modalOpener={modalOpener}
-            game={game}
-            send={send}
-            setModal={setModal}
-            inspection={inspection}
-            setInspection={setInspection}
-            session={session}
-            inspectionControls={inspectionControls}
-            route={route}
-          />
-        </div>
-      </Popover>
-    </SurfaceTransition>
+                  if (menuGeneration.current !== menuInstance || modal || inspection) return;
+                  if (route === "play") returnFocus(pauseOpener.current);
+                  else {
+                    // A page may already have focused a deeper destination during the exit fade.
+                    const focused = document.activeElement as HTMLElement | null;
+                    if (focused !== document.body && isAvailableFocusTarget(focused)) return;
+                    returnFocus(
+                      root.current?.querySelector<HTMLElement>(
+                        route === "settings"
+                          ? '.settings-screen [role="tab"][aria-selected="true"]'
+                          : "main button:not(:disabled)",
+                      ) ?? null,
+                    );
+                  }
+                }}
+              >
+                <EffectScope name="menu">
+                  <nav className="pause-menu-choices" aria-label="Pause menu">
+                    {menuItems(false)}
+                  </nav>
+                </EffectScope>
+              </PopoverContent>
+            ) : null}
+            <ShellOverlays
+              modal={modal}
+              modalInstance={modalInstance}
+              menu={menu}
+              modalOpener={modalOpener}
+              game={game}
+              send={send}
+              setModal={setModal}
+              inspection={inspection}
+              setInspection={setInspection}
+              session={session}
+              inspectionControls={inspectionControls}
+              route={route}
+            />
+          </div>
+        </Popover>
+      </SurfaceTransition>
+    </EffectScope>
   );
 }

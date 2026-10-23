@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { assetUrl } from "../shared/assets";
+import { type CSSProperties, useState } from "react";
 import { Button } from "../../components/ui/button";
 /** Adapted from Alchemy's ManaPanel: independent full/spent art and masked hover glints. */
 export function ManaCrystals({
@@ -19,6 +20,12 @@ export function ManaCrystals({
     });
   return (
     <Button
+      style={
+        {
+          "--mana-full-image": `url("${assetUrl("mana.full")}")`,
+          "--mana-empty-image": `url("${assetUrl("mana.empty")}")`,
+        } as CSSProperties
+      }
       variant="ghost"
       className="mana"
       aria-label={`Mana ${mana} of ${maximum}`}

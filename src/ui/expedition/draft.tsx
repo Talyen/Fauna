@@ -6,7 +6,8 @@ import { starterCount } from "../../game/progression";
 import { StarterDetails } from "../shared/cards/card-details";
 
 import { Check } from "lucide-react";
-import { Button } from "../../components/ui/button";
+import { EffectButton as Button } from "../shared/effects/treatments";
+import { creatureKeywords } from "../shared/effects/palettes";
 import { CreatureCard } from "../shared/cards/cards";
 
 import { species } from "../../game/content";
@@ -59,6 +60,7 @@ export function Draft({ game, send, inspect }: Props) {
                   </span>
                 ) : (
                   <Button
+                    effectKeywords={creatureKeywords(s.id, game)}
                     className="recruit-button"
                     aria-label={`Recruit ${s.name}`}
                     onClick={() => {

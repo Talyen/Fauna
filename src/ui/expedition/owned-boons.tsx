@@ -1,3 +1,5 @@
+import { ShineText } from "../shared/effects/treatments";
+import { visualKeywords } from "../shared/effects/palettes";
 import { BOONS, type BoonId } from "../../game/content";
 import { ArtCard } from "../shared/cards/art-card";
 import { assetUrl } from "../shared/assets";
@@ -17,7 +19,9 @@ export function OwnedBoons({ boons }: { boons: readonly BoonId[] }) {
               presentation
               aria-label={boon.name}
             />
-            <h2>{boon.name}</h2>
+            <h2>
+              <ShineText keywords={visualKeywords(boon.text)}>{boon.name}</ShineText>
+            </h2>
             <p>
               <KeywordText text={boon.text} />
             </p>

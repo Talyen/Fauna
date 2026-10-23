@@ -1,5 +1,6 @@
+import { EffectButton as Button } from "../shared/effects/treatments";
 import { Swords, Sparkles, PawPrint, Gift, BookOpen, Settings2, LogOut, House } from "lucide-react";
-import { Button } from "../../components/ui/button";
+
 export type MenuPage = "talents" | "collection" | "settings" | "glossary";
 interface MenuActionsProps {
   home: boolean;
@@ -31,12 +32,19 @@ export function MenuActions({
 }: MenuActionsProps) {
   return (
     <>
-      <Button variant={home ? "default" : "ghost"} className="primary-menu-action" onClick={onContinue}>
+      <Button
+        effectTone="play"
+        variant={home ? "default" : "ghost"}
+        className="primary-menu-action"
+        onClick={onContinue}
+      >
         <Swords aria-hidden="true" />
         {home && !active ? "Play" : "Continue"}
       </Button>
       <Button
         variant="ghost"
+        effectTone="talents"
+        attention={talentPoints > 0}
         aria-label="Talents"
         aria-describedby={talentPoints > 0 ? `menu-talent-points-${home}` : undefined}
         onClick={() => onNavigate("talents")}
@@ -53,21 +61,21 @@ export function MenuActions({
           </span>
         ) : null}
       </Button>
-      <Button variant="ghost" onClick={() => onNavigate("collection")}>
+      <Button effectTone="gold" variant="ghost" onClick={() => onNavigate("collection")}>
         <PawPrint aria-hidden="true" className="menu-icon-collection" />
         Collection
       </Button>
       {active && hasBoons ? (
-        <Button variant="ghost" onClick={onBoons}>
+        <Button effectTone="talents" variant="ghost" onClick={onBoons}>
           <Gift aria-hidden="true" className="menu-icon-boons" />
           Boons
         </Button>
       ) : null}
-      <Button variant="ghost" onClick={() => onNavigate("glossary")}>
+      <Button effectTone="gold" variant="ghost" onClick={() => onNavigate("glossary")}>
         <BookOpen aria-hidden="true" className="menu-icon-glossary" />
         Glossary
       </Button>
-      <Button variant="ghost" onClick={() => onNavigate("settings")}>
+      <Button effectTone="settings" variant="ghost" onClick={() => onNavigate("settings")}>
         <Settings2 aria-hidden="true" className="menu-icon-settings" />
         Settings
       </Button>

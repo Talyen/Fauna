@@ -11,3 +11,9 @@ This replaced the 670,024-byte UI/recovery baseline for `be2510d`, recorded in [
 ## Stable stack upgrade
 
 The stable-stack upgrade measured 774,677 uncompressed JavaScript bytes in [hosted CI](https://github.com/Talyen/Fauna/actions/runs/39725532685) for `a70dd37`. The production build succeeded before the previous allowance rejected it. Inspection of the published package contents found React DOM client production code growing from 536,016 to 625,168 bytes between 19.2.5 and 19.3.1, with additional Zod and Immer growth. The upgrade adds no production dependencies. The measured allowance became 800 KiB (about 5.7% headroom); all chunks remain counted. This is bundle evidence only, not performance acceptance.
+
+## Keyword visual effects
+
+A local production comparison on October 22, 2026 used the same Node/npm dependencies and Vite configuration. A read-only archived snapshot of committed `c695e34` measured 812,706 uncompressed JavaScript bytes. The keyword effects implementation measured 836,542 bytes, an increase of 23,836 bytes (2.9%). The additions are the native WebGL plasma shader and context lifecycle, Canvas 2D ember lifecycle, scoped presentation sources, palette resolution, CSS shine compositions and device controls; no production dependency was added. The small Mana artwork fix reuses prepared asset URLs.
+
+The allowance is 864 KiB, retaining about 5.8% headroom above this local feature measurement with the existing 95% warning. Both builds count every JavaScript chunk; the archived baseline and build logs remain in the task checkout's ignored reports. The measured source was reviewed for duplicate renderers and unnecessary dependencies. This is local bundle evidence, not hosted CI or physical GPU acceptance; CI still measures the exact pushed commit.

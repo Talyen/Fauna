@@ -2,6 +2,11 @@ import { expect } from "@playwright/test";
 
 export const SCENARIOS = [
   "home",
+  "campfire",
+  "boon",
+  "journey-results",
+  "death-door",
+  "inspection",
   "settings",
   "collection",
   "battle",
@@ -27,7 +32,7 @@ export const SCENARIOS = [
 export async function reviewScenario(server, name) {
   if (!SCENARIOS.includes(name))
     throw new Error(`Unknown scenario: ${name}. Choose ${SCENARIOS.join(", ")}.`);
-  const { run, winBattle, merchantDestination, accept } =
+  const { run, winBattle, merchantDestination, accept, bossReward } =
     await server.ssrLoadModule("/tests/support/game.ts");
   const { encodeSave, decodeSave } = await server.ssrLoadModule("/src/game/save.ts");
   let game = name.startsWith("merchant")
@@ -56,6 +61,20 @@ export async function reviewScenario(server, name) {
   }
   if (name.startsWith("merchant")) game = accept(game, { type: "enterSupport", visit: game.support.id });
   if (name === "merchant-unavailable") game = { ...game, currency: 0 };
+  if (name === "boon") game = bossReward();
+  if (name === "inspection") game = winBattle();
+  if (name === "death-door")
+    game = {
+      ...game,
+      team: game.team.map((unit, index) =>
+        index ? unit : { ...unit, health: 1, combat: { ...unit.combat, deathDoorUsed: true, grace: 2 } },
+      ),
+    };
+  if (name === "campfire") {
+    game = merchantDestination();
+    game = { ...game, team: game.team.map((unit, index) => (index ? unit : { ...unit, health: 1 })) };
+    game = accept(game, { type: "visitCampfire" });
+  }
   const save = encodeSave(game);
   decodeSave(save);
   return { name, save, seed: name.startsWith("merchant") ? 7 : 42, fixture: "tests/support/game.ts" };
@@ -110,6 +129,16 @@ export async function openReviewScenario(page, origin, scenario, scale) {
       if (scenario.name === "recruit-team-preview")
         await page.locator(".recruit-team-roster .creature-card").first().click();
     }
+  }
+  if (scenario.name === "journey-results") {
+    await button("Open menu").click();
+    await button("End journey").click();
+    await expect(page.getByRole("heading", { name: "Returned home", exact: true })).toBeVisible();
+  }
+  if (scenario.name === "inspection") {
+    await button("Continue").click();
+    await page.locator(".recruit-options .creature-card").first().click();
+    await expect(page.locator(".inspection")).toBeVisible();
   }
   if (scenario.name === "battle-rewards")
     await expect(page.getByRole("heading", { name: "Victory", exact: true })).toBeVisible();
