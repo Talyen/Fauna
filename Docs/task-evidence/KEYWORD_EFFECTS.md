@@ -49,6 +49,19 @@ The final diff was reviewed through `npm run review:diff`, including the complet
 
 The focused Chromium comparison uses 120 requestAnimationFrame intervals per menu/battle condition at 1280×800, with normal motion and each background intensity set to 0% or 100%. The initial combined-source sample had p50 **16.7 ms** and p95 **16.8 ms** in all four conditions. Zero intensity left zero background canvases; full intensity ran two. Three conditions had no interval over 33.3 ms; full-intensity battle had one. Exact samples remain in `reports/effects-browser-combined/performance.json`; subsequent effects runs also attach their own samples.
 
+The final rebuilt-source sample is retained separately in `reports/effects-browser-combined/final-performance.json`:
+
+| Scene  | Intensity | p50     | p95     | Intervals over 33.3 ms / 120 | Background canvases |
+| ------ | --------- | ------- | ------- | ---------------------------- | ------------------- |
+| Menu   | 0%        | 16.7 ms | 16.8 ms | 0                            | 0                   |
+| Battle | 0%        | 16.7 ms | 16.8 ms | 0                            | 0                   |
+| Menu   | 100%      | 16.7 ms | 16.8 ms | 4                            | 2                   |
+| Battle | 100%      | 16.7 ms | 33.4 ms | 8                            | 2                   |
+
+The final software-WebGL battle sample therefore did show more slow intervals at full intensity. Shared-machine load was not controlled across these short sequential samples, so the reports do not establish how much came from the effects or predict hardware-GPU performance. Both the initial and final observations are retained rather than treating the faster sample as universal.
+
+The first protected gate stopped on an existing tooling test's five-second timeout, with no documentation assertion failure; the unchanged case passed in isolation in 2.82 seconds. The gate was retried through the repository's shared lock rather than changing timeouts or bypassing verification.
+
 These are short observations from one shared Mac, with Chromium's software WebGL path and a separate Electron menu sample. They do not measure GPU cost, battery use, steady-state device performance or establish a statistically meaningful speed difference. The plasma renderer retains Alchemy's 30 FPS and backing-pixel budgets; renderer cleanup/parking is covered separately by contract tests.
 
 ## Boundaries
