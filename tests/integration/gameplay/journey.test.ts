@@ -3,8 +3,9 @@ import { freshCombat } from "../../../src/game/combat/index";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../../src/game/engine";
-import { SPECIES, species, BOONS } from "../../../src/game/content";
+import { SPECIES, species, speciesCards, BOONS } from "../../../src/game/content";
 import { decodeSave, encodeSave } from "../../../src/game/save";
+import { starterCount } from "../../../src/game/progression";
 import { previewPlay } from "../../../src/game/preview";
 import {
   prepareDestination,
@@ -180,7 +181,14 @@ describe("journey earnings and results", () => {
     expect(s.journey).toBeNull();
     expect(s.keywordXP).toEqual(oldXP);
     expect(s.currency).toBe(200);
-    for (let pick = 0; pick < 3; pick++) s = accept(s, { type: "draft", species: s.starterOffers[0]! });
+    // Controlled victories below need ordinary attackers, independent of offer ordering.
+    while (s.selected.length < starterCount(s)) {
+      const starter = s.starterOffers.find(
+        (kind) => !species(kind).legendary && speciesCards(kind).some((card) => card.effect === "attack"),
+      );
+      expect(starter).toBeDefined();
+      s = accept(s, { type: "draft", species: starter! });
+    }
     s = accept(s, { type: "start" });
     expect(s.journey).toMatchObject({ outcome: null, victories: 0, currency: 0, xp: {} });
     for (let i = 0; i < 8; i++) {
