@@ -171,7 +171,7 @@ it("reaches every authored talent row without sending commands", () => {
     const talents = TALENTS.filter((talent) => talent.keyword === keyword);
     const rows = [...new Set(talents.map((talent) => talent.row))];
     for (const [index, row] of rows.entries()) {
-      const names = talents.filter((entry) => entry.row === row).map((talent) => talent.name);
+      const names: string[] = talents.filter((entry) => entry.row === row).map((talent) => talent.name);
       expect(
         tree
           .getAllByRole("button", { name: (name) => names.includes(name) })
