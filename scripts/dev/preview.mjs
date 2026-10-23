@@ -7,6 +7,7 @@ import { spawn } from "node:child_process";
 import { reviewOptions } from "./review-options.mjs";
 import { reviewScenario, openReviewScenario } from "./review-scenarios.mjs";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { previewDesktopEnvironment } from "../lib/desktop-environment.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 
@@ -113,11 +114,7 @@ export async function preview(args = process.argv.slice(2)) {
       if (stopped) throw new Error("Preview canceled.");
       desktop = spawn(electron, [ROOT], {
         stdio: "inherit",
-        env: {
-          ...process.env,
-          FAUNA_DEV_URL: session.url,
-          FAUNA_PREVIEW_USER_DATA: path.join(session.directory, "profile"),
-        },
+        env: previewDesktopEnvironment(path.join(session.directory, "profile"), session.url),
       });
       desktop.once("error", () => void close());
       desktop.once("exit", () => void close());

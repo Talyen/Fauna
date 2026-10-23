@@ -1,12 +1,14 @@
 # Journey balance: first pass
 
-October 22, 2026. This pass improves the first solo draft and establishes a reproducible balance baseline. It does **not** qualify the complete journey as balanced. The [roadmap](ROADMAP.md#next-finish-and-validate-the-current-experience) keeps that work open; [journey rules](EXPEDITION_DESIGN.md) remain the canonical gameplay contract.
+Historical measurement and implementation record; [current journey rules](../EXPEDITION_DESIGN.md) take precedence over earlier reward and recruitment flows described here
+
+October 22, 2026. This pass improves the first solo draft and establishes a reproducible balance baseline. It does **not** qualify the complete journey as balanced. The [roadmap](../ROADMAP.md#next-finish-and-validate-the-current-experience) keeps that work open; [journey rules](../EXPEDITION_DESIGN.md) remain the canonical gameplay contract.
 
 ## Goals and method
 
 Working goals for this pass: early fights should teach the starter without requiring a rare teammate or Boon; recruitment should open useful combinations; bosses should test those combinations; recovery and purchases should change meaningful decisions. Treat an opening averaging over ten turns and the existing 120-turn career warning as investigation triggers, not accepted human difficulty or duration targets. No target human win rate or journey duration in minutes was established.
 
-Baseline source commit: `1a19fe1c5a7084b5b5e0f810b13d02d44ad30522`. Retained [structured evidence](../design/journey-balance/evidence.json) records gameplay/application fingerprints, scenarios, outcomes and fixture grants. Full command journals, checkpoints, investigation scripts and rendered captures live under the task's ignored reports and are preserved by worktree integration archiving.
+Baseline source commit: `1a19fe1c5a7084b5b5e0f810b13d02d44ad30522`. Retained [structured evidence](../../design/journey-balance/evidence.json) records gameplay/application fingerprints, scenarios, outcomes and fixture grants. Full command journals, checkpoints, investigation scripts and rendered captures live under the task's ignored reports and are preserved by worktree integration archiving.
 
 - **Openings:** every eligible starter against each of the 23 distinct species that can lead an ordinary pack, using seeds 0, 1 and 2. These fixtures explicitly select the starter and pack, use production commands and Auto-play, and stop after 40 turns or 1,000 actions. This weights enemy species equally; production packs have different weights. No talents, Boons or earned ranks are granted.
 - **Careers:** three naturally offered starts per species, selecting the first qualifying seeds from 10 upward. Production application commands, serialized saves, periodic resume, a 100-turn battle budget and 5,000-action career budget are retained. The baseline covers 19 starters in 57 cases; the curated pool covers 14 in 42 cases. These use different starting checkpoints and are not a paired treatment estimate.

@@ -1,6 +1,6 @@
 # Fauna roadmap
 
-Last inventoried: October 22, 2026
+Last inventoried: October 23, 2026
 
 Fauna has a complete short playable journey. Checked items below are implemented in the repository; they do not imply release readiness or fresh verification on every platform. Unchecked items are future work. Suggestions are not approved commitments or dated promises. Detailed rules remain in the linked design documents; [release readiness](RELEASE.md) owns shipping acceptance.
 
@@ -10,7 +10,7 @@ Fauna has a complete short playable journey. Checked items below are implemented
 - [x] Eight combat encounters, with bosses fourth and last, ordinary enemy groups growing from one to three creatures and solo Legendary bosses
 - [x] Recruitment from defeated enemies, including duplicate species with independent Health and battle state
 - [x] Five-creature roster with up to three ordinary deployed creatures or one Legendary, with the remaining creatures in backup
-- [x] Full-roster recruitment with a cancellable release choice before committing a replacement
+- [x] Full-roster recruitment that banks Collection progress before a reversible team preview and explicit Confirm
 - [x] Saved lineup that follows committed formation changes into later battles
 - [x] Required knockout replacements preserving Health, effects and reusable card slots without bonus draws or Mana costs; ability-driven swaps shuffle incoming kits into Draw
 - [x] Persistent Health and knockouts between battles; defeat requires the entire roster to fall
@@ -49,7 +49,7 @@ Rules: [keywords](KEYWORDS.md), [architecture](ARCHITECTURE.md)
 - [x] Wickwaltz, Sternshell, Neradora, Stillara and Cadenza
 - [x] Rookhaven, Euphera, Tournelle and the Legendary Memento
 - [x] Six distinct passive tiers per species, from zero to five stars, improved through permanent recruitment counts
-- [x] Collection browsing with artwork, active traits, all three base abilities and rank progression
+- [x] Collection browsing with artwork, the active passive, all three base abilities and permanent progress stars
 - [x] Separate encountered and recruited discovery records; recruitment determines the collected roster
 - [x] Shared permanent keyword XP earned through accepted plays and banked on victory, defeat or return home
 - [x] Fifteen talent categories with 135 distinct talents, row unlocks and immediate effects
@@ -63,7 +63,7 @@ Catalogs: [content](CONTENT.md), [progression](EXPEDITION_DESIGN.md)
 
 - [x] Production creature and action illustrations; prepared portraits for Boons and talent categories
 - [x] Landscape creature and portrait action ArtCards, with names and rules outside the artwork
-- [x] Hover/focus rules, keyword explanations and out-of-battle pinned inspection with rank pages and ability browsing
+- [x] Hover/focus rules, keyword explanations and out-of-battle pinned inspection with the active passive, progress stars and ability browsing
 - [x] Visible targeting, unavailable-action feedback, Health/status readouts and knockout states
 - [x] Combat numbers and impacts, hand draw/discard flights, swap motion and Campfire recovery feedback
 - [x] Reduced-motion support and visible outcomes that remain understandable with sound muted
@@ -103,7 +103,7 @@ Tools: [development tools](DEVELOPMENT_TOOLS.md), [verification policy](../CONTR
 
 These are known completion needs before substantial expansion:
 
-- [ ] **Balance the complete journey:** playtest starter strength, team combinations, passive ranks, talents, Boons, Merchant value and Campfire recovery and optional-event frequency against clear difficulty and journey-length goals; the [first pass](JOURNEY_BALANCE.md) curates solo starters and records the remaining attrition problems
+- [ ] **Balance the complete journey:** playtest starter strength, team combinations, passive ranks, talents, Boons, Merchant value and Campfire recovery and optional-event frequency against clear difficulty and journey-length goals; the [first pass](archive/JOURNEY_BALANCE.md) curates solo starters and records the remaining attrition problems
 - [ ] **Finish encounter and support artwork:** replace remaining placeholders through the prepared-media workflow and review them in the actual screens
 - [ ] **Approve media and audio:** confirm source rights, track/effect selections, relative volumes and long-session listening comfort
 - [ ] **Qualify rendered flows:** inspect exact-commit CI evidence for the complete journey, minimum viewport, enlarged text, tooltips and keyboard/controller navigation

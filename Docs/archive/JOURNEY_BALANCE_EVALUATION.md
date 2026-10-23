@@ -1,8 +1,10 @@
 # Runner and Memento evaluation
 
+Historical measurement and implementation record; [current journey rules](../EXPEDITION_DESIGN.md) take precedence over earlier reward and recruitment flows described here
+
 October 22, 2026. The initial evaluation found runner draw loops and excessive Court pressure in some controlled matchups. The approved policy 25 follow-up below fixes those loops, improves recruitment and replacement, and raises controlled career victories from thirteen to twenty-three with no incomplete current-content careers. Memento balance remains an open design question. Merchant stock and prices remain random within their existing range.
 
-The initial evaluation changed no gameplay; the later approved implementation adds runner fixes and optional post-battle recruitment. The user requested the runner comparison, isolated Memento comparison and manual stalled-case investigation, explicitly skipping full CI. It follows the [balance pass](JOURNEY_BALANCE.md), and retains [structured results](../design/journey-balance/runner-memento-evaluation.json) for all 426 cases.
+The initial evaluation changed no gameplay; the later approved implementation adds runner fixes and optional post-battle recruitment. The user requested the runner comparison, isolated Memento comparison and manual stalled-case investigation, explicitly skipping full CI. It follows the [balance pass](JOURNEY_BALANCE.md), and retains [structured results](../../design/journey-balance/runner-memento-evaluation.json) for all 426 cases.
 
 ## Controlled method
 
@@ -124,7 +126,7 @@ The four content arms with the new runner produce:
 | Recycling, Court 3–8        |        23 |      13 |          6 |
 | Consume, Court 3–8, current |        23 |      19 |          0 |
 
-The higher Court damage still trades fewer incomplete careers for more defeats with the improved runner. The approved 3-damage start remains in place; these descriptive fixtures do not establish a replacement number or justify an attack cap. All remaining incomplete experimental careers exhausted the turn budget, rather than repeating an action until the action budget. The [repeat evidence](../design/journey-balance/runner-followup.json) retains the complete matched cohort and source fingerprints.
+The higher Court damage still trades fewer incomplete careers for more defeats with the improved runner. The approved 3-damage start remains in place; these descriptive fixtures do not establish a replacement number or justify an attack cap. All remaining incomplete experimental careers exhausted the turn budget, rather than repeating an action until the action budget. The [repeat evidence](../../design/journey-balance/runner-followup.json) retains the complete matched cohort and source fingerprints.
 
 The boss outcome totals remain 30 wins/18 incomplete for either 1–6 treatment, 27 wins/13 defeats/8 incomplete for recycling at 3–8, and 25 wins/23 defeats for the approved treatment. All twenty-four ordinary Memento fixtures win. The unchanged boss outcome counts after the runner fixes keep the pressure concern open; low-damage defensive stalemates also remain in experimental content arms.
 

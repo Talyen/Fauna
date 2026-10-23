@@ -18,7 +18,10 @@ import {
 import { review } from "../../../scripts/agent/agent-review.mjs";
 import { context, sections, taskContext } from "../../../scripts/agent/agent-context.mjs";
 import { performanceBuildIdentity } from "../../../scripts/performance/run-performance.mjs";
-import { isolatedDesktopEnvironment } from "../../../scripts/lib/desktop-environment.mjs";
+import {
+  isolatedDesktopEnvironment,
+  previewDesktopEnvironment,
+} from "../../../scripts/lib/desktop-environment.mjs";
 
 it("finds gameplay and presentation owners from current modules and focused suites", () => {
   const root = path.resolve(import.meta.dirname, "../../..");
@@ -100,6 +103,12 @@ it("launches desktop verification against its own profile and built renderer des
   expect(isolatedDesktopEnvironment("owned-profile", inherited)).toEqual({
     PATH: "tools",
     FAUNA_SMOKE_USER_DATA: "owned-profile",
+    FAUNA_DISABLE_STEAM: "1",
+  });
+  expect(previewDesktopEnvironment("owned-preview", "http://127.0.0.1:12345", inherited)).toEqual({
+    PATH: "tools",
+    FAUNA_PREVIEW_USER_DATA: "owned-preview",
+    FAUNA_DEV_URL: "http://127.0.0.1:12345",
     FAUNA_DISABLE_STEAM: "1",
   });
   expect(inherited).toEqual(before);

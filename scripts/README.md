@@ -34,6 +34,7 @@ Additional opt-in tools:
 - `npm run assets:check:bundle`: [active media inventory and size budgets](assets/active-assets.mjs) against an existing build.
 - `npm run balance:findings`: [ranked findings](balance/balance-findings.mjs), [analysis and thresholds](balance/findings.mjs); analyzes existing reports without simulations.
 - `npm run verify:release-version`, `npm run verify:release`: [read-only release gate](release/verify-release.mjs), [build identity](lib/release-identity.mjs); no build or publication.
+- Signed candidate CI prerequisite: [require-ci.mjs](release/require-ci.mjs) checks the exact commit and successful final verification job in a pinned run attempt, excluding suppressed duplicate runs.
 - `npm run generate:patch-notes`: [history filtering and draft generation](release/generate-patch-notes.mjs); see [release workflow](../Docs/RELEASE.md#release-verification-and-player-notes).
 - `npm run balance:compare`: [balance-compare.mjs](balance/balance-compare.mjs), [paired report math](balance/paired-balance.mjs), [production cases](../src/tooling/balance.ts).
 - `npm run perf`, `npm run perf:replay`, `npm run perf:compare`: [capture driver](performance/run-performance.mjs), [metrics](performance/metrics.mjs), [validated fixtures](../src/tooling/performance.ts).
@@ -47,7 +48,7 @@ Additional opt-in tools:
 - `npm run test:interactions`: [rendered seeded runner](performance/run-interactions.mjs), [bounded reducer and replay validation](lib/interaction-replay.mjs).
 - Shared source identities, report-directory confinement and Node module loading: [tool-runtime.mjs](lib/tool-runtime.mjs).
 - Playthrough and balance worker deadlines, cancellation and exit ownership: [worker.mjs](lib/worker.mjs).
-- Isolated smoke and performance desktop launch environments: [desktop-environment.mjs](lib/desktop-environment.mjs).
+- Isolated smoke, preview and performance desktop launch environments: [desktop-environment.mjs](lib/desktop-environment.mjs).
 
 See [Development tools](../Docs/DEVELOPMENT_TOOLS.md) for scenarios, defaults, evidence and limitations, [verification](../CONTRIBUTING.md#verification) for local completion, and [CI](../Docs/CI.md) for hosted pipeline details. [Import-related test discovery](checks/affected-tests.mjs) is available with `verify:changed -- --plan --related` for coverage investigations.
 
@@ -55,7 +56,7 @@ Documentation parsing, measured bundle checks, worktree setup, integration safeg
 
 ## Bundle allowance
 
-[bundle-budget.mjs](checks/bundle-budget.mjs) owns the current baseline (774,677 uncompressed JavaScript bytes), allowance (800 KiB) and warning threshold (95%). The [measurement history](../Docs/archive/BUNDLE_SIZE_HISTORY.md) retains build identities and the reasons for previous changes. CI measures the exact pushed commit; the recorded baseline establishes size only.
+[bundle-budget.mjs](checks/bundle-budget.mjs) owns the current baseline (836,542 uncompressed JavaScript bytes), allowance (864 KiB) and warning threshold (95%). The [measurement history](../Docs/archive/BUNDLE_SIZE_HISTORY.md) retains build identities and the reasons for previous changes. CI measures the exact pushed commit; the recorded baseline establishes size only.
 
 The checker sums all JavaScript files recursively and rejects missing or empty entry bundles. Chunk splits do not create extra allowance. Investigate unexpected growth before raising the ceiling; update the measured baseline and reason together when intentional growth needs a new allowance. This gate measures JavaScript size, not artwork downloads, frame pacing or device performance. Run it against an existing build; build execution follows [the single verification policy](../CONTRIBUTING.md#execution-and-evidence).
 
@@ -71,7 +72,7 @@ Selection uses the recorded worktree base, including committed and working chang
 
 The plan prints formatting batches, compiler environments, documentation coverage and required suites with their boundary rationale. Import-related suggestions and unresolved imports appear only with `--related`. Formatting and lint batch at most 50 files, 256,000 source bytes and 8,000 argument bytes; larger single files run alone. Selected source receives architecture/UI contracts across all batches. Deleted sources still select their compiler environment; dependency/configuration changes select all environments.
 
-Changed suites, filename-matched suites and the longest matching prefix in [test-owners.json](checks/test-owners.json) form the required set. Each registry entry explains its boundary rationale; update it when moving an owner or its contract suites. Import discovery is opt-in and only suggests additional suites; timing history never changes the gate. Explicit `--test` suites are recorded in [task intent](lib/task-intent.mjs) and always run at integration without repeating arguments. Intent survives failed checks; `--forget-test` removes obsolete selectors. Plan mode is read-only. Tests run together with one worker, fail-fast and a five-minute deadline; results go to ignored `reports/task-tests.json`. Changed non-documentation files without matching suites fall back to labeled smoke; documentation-only changes need no tests. An empty changed-file selection runs no checks.
+Changed suites, filename-matched suites and the longest matching prefix in [test-owners.json](checks/test-owners.json) form the required set. Each registry entry explains its boundary rationale; update it when moving an owner or its contract suites. A missing required suite blocks verification; plan mode reports the gap without running checks. Import discovery is opt-in and only suggests additional suites; timing history never changes the gate. Explicit `--test` suites are recorded in [task intent](lib/task-intent.mjs) and always run at integration without repeating arguments. Intent survives failed checks; `--forget-test` removes obsolete selectors. Plan mode is read-only. Tests run together with one worker, fail-fast and a five-minute deadline; results go to ignored `reports/task-tests.json`. Changed non-documentation files without matching suites fall back to labeled smoke; documentation-only changes need no tests. An empty changed-file selection runs no checks.
 
 The diagnostic launcher accepts `types`, `static`, `build`, `unit [suite files]`, `browser <route>` and `performance <scenario>`. Omitting unit suite paths selects the full unit/DOM set. It validates named files/routes before launching, uses one unit worker, a 2 GiB Node heap and a five-minute deadline, and owns cancellation of its command tree. Browser routes are battle, settings, collection, progression and persistence; performance scenarios are battle, swap and menus. Build first for production browser/performance diagnostics. These limits are enforced by tooling rather than additional approval steps.
 

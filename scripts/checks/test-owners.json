@@ -71,6 +71,14 @@
     "reason": "Agent workflow and bounded diagnostics",
     "suites": ["tests/unit/tooling/agent-workflow.test.mjs", "tests/unit/tooling/adoption-tools.test.mjs"]
   },
+  "scripts/release/": {
+    "reason": "Release source/artifact identity, full CI prerequisites and dependency provenance",
+    "suites": [
+      "tests/unit/tooling/release.test.mjs",
+      "tests/unit/tooling/platform-tools.test.mjs",
+      "tests/unit/tooling/dependency-inventory.test.mjs"
+    ]
+  },
   "scripts/lib/": {
     "reason": "Task scope, process lifetime and runtime identity",
     "suites": ["tests/unit/tooling/agent-workflow.test.mjs", "tests/unit/tooling/tool-runtime.test.mjs"]

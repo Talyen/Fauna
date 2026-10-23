@@ -11,6 +11,45 @@ import {
   releaseIdentityPlugin,
 } from "../../../scripts/lib/release-identity.mjs";
 import { releaseArgs, verifyRelease } from "../../../scripts/release/verify-release.mjs";
+import { requireVerifiedCI } from "../../../scripts/release/require-ci.mjs";
+
+it("requires the exact commit's successful final CI gate, excluding suppressed duplicate runs", () => {
+  const commit = "a".repeat(40);
+  const run = { databaseId: 123, headSha: commit, conclusion: "success", attempt: 2 };
+  const complete = {
+    ...run,
+    jobs: [{ name: "verify", status: "completed", conclusion: "success" }],
+    url: "https://example.invalid/run/123/attempts/2",
+  };
+  const check = (detail, runs = [run]) =>
+    requireVerifiedCI(commit, {
+      repository: "owner/fauna",
+      runner: (_command, args) => JSON.stringify(args[1] === "list" ? runs : detail),
+    });
+  expect(check(complete)).toEqual(complete);
+  for (const detail of [
+    { ...complete, jobs: [] },
+    { ...complete, jobs: [{ name: "verify", status: "completed", conclusion: "skipped" }] },
+    { ...complete, jobs: [{ name: "verify", status: "completed", conclusion: "failure" }] },
+    { ...complete, jobs: [{ name: "verify", status: "in_progress", conclusion: null }] },
+    { ...complete, jobs: [...complete.jobs, ...complete.jobs] },
+    { ...complete, headSha: "b".repeat(40) },
+    { ...complete, attempt: 3 },
+    { ...complete, conclusion: "failure" },
+  ])
+    expect(() => check(detail)).toThrow("successful full CI");
+  expect(() => check(complete, [])).toThrow("successful full CI");
+  expect(() => check(complete, [{ ...run, headSha: "b".repeat(40) }])).toThrow("successful full CI");
+  expect(() =>
+    requireVerifiedCI(commit, {
+      repository: "owner/fauna",
+      runner: () => {
+        throw new Error("GitHub unavailable");
+      },
+    }),
+  ).toThrow("GitHub unavailable");
+  expect(() => requireVerifiedCI("branch", { repository: "owner/fauna" })).toThrow("full release commit");
+});
 async function repository(test) {
   const root = mkdtempSync(path.join(os.tmpdir(), "fauna-release-"));
   const git = (...args) => execFileSync("git", args, { cwd: root, encoding: "utf8" });

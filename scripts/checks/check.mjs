@@ -118,6 +118,11 @@ export function checkPlan(root, paths, namedTests = [], { related = false } = {}
           `tests/unit/${filenameOwner[1] ?? `tooling/${path.posix.basename(filenameOwner[2])}`}.test.${extension}`,
         );
   }
+  const missingContracts = [...contracts].flatMap((owner) =>
+    owners[owner].suites
+      .filter((suite) => !lstatSync(path.join(root, suite), { throwIfNoEntry: false })?.isFile())
+      .map((suite) => ({ owner, suite })),
+  );
   const primary = [...tests].filter((file) => existsSync(path.join(root, file))).sort();
   const files =
     related && paths.some((file) => /\.(?:[cm]?[jt]sx?|json|css)$/.test(file))
@@ -133,6 +138,7 @@ export function checkPlan(root, paths, namedTests = [], { related = false } = {}
   return {
     configs: [...configs],
     tests: primary,
+    missingContracts,
     contracts: [...contracts].map((owner) => ({ owner, reason: owners[owner].reason })),
     relatedTests: affected.tests.filter((file) => !primary.includes(file)),
     unresolved: affected.unresolved,
@@ -173,13 +179,19 @@ export function runCheck(args = [], { root = ROOT, runner = spawnSync, log = con
   log(
     plan.tests.length
       ? `Focused suites: ${plan.tests.join(", ")}`
-      : docsOnly
-        ? "Documentation only; no tests needed."
-        : paths.length
-          ? "No matching suite; running fixed Node smoke (not affected-behavior coverage)."
-          : "EMPTY CHECK: no changed files selected; no checks ran. Use npm test for unit/DOM tests, npm run check for full static checks, or --base to select a task range.",
+      : plan.missingContracts.length
+        ? "Verification blocked: required owner suites are missing."
+        : docsOnly
+          ? "Documentation only; no tests needed."
+          : paths.length
+            ? "No matching suite; running fixed Node smoke (not affected-behavior coverage)."
+            : "EMPTY CHECK: no changed files selected; no checks ran. Use npm test for unit/DOM tests, npm run check for full static checks, or --base to select a task range.",
   );
   for (const { owner, reason } of plan.contracts) log(`Contract ${owner}: ${reason}`);
+  for (const { owner, suite } of plan.missingContracts)
+    log(
+      `Missing required suite ${suite} for ${owner}; repair scripts/checks/test-owners.json or restore the suite.`,
+    );
   if (plan.relatedTests.length)
     log(`Related suites (optional --test additions; full coverage in CI): ${plan.relatedTests.join(", ")}`);
   if (plan.unresolved.length)
@@ -192,6 +204,7 @@ export function runCheck(args = [], { root = ROOT, runner = spawnSync, log = con
     return 0;
   }
   if (requested.length || forget.length) recordTaskIntent(root, { tests: requested, forget });
+  if (plan.missingContracts.length) return 1;
   if (!paths.length) return 0;
   const modules = path.join(root, "node_modules");
   if (

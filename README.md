@@ -31,11 +31,11 @@ Between battles, recruit teammates, buy journey Boons, or recover at a Campfire 
 - Keyboard: W/A/S/D navigate, Enter/Space activate, I opens inspection outside battle, Escape cancels or opens the menu. Tab remains available.
 - Standard controller: D-pad/left stick navigate, south/A confirms, east/B backs out, west/X inspects outside battle, north/Y ends the turn. Button mapping follows standard Xbox-style positions. Non-standard mappings are not yet supported.
 
-Gameplay settles before visual feedback. Accepted commands automatically save; failed writes retry automatically in the background without player-facing notices. Desktop close requests wait for queued saves. Browsers show no save warning on exit; abrupt browser/process termination cannot guarantee completion of queued writes.
+Gameplay settles before visual feedback. Accepted commands automatically save; failed writes retry automatically in the background, with a nonmodal notice after repeated failures. Desktop close requests wait for queued saves. Browsers show no save warning on exit; abrupt browser/process termination cannot guarantee completion of queued writes.
 
 ## Verify
 
-[Contributing](CONTRIBUTING.md#verification) owns the verification commands, local resource limits and CI policy. Default local checks cover selected static checks and affected regression suites; full static, unit/DOM, build, browser and packaged Windows verification belong to CI, with bounded task diagnostics authorized by the contribution policy. See [release boundaries](Docs/RELEASE.md) for the remaining shipping gates.
+[Contributing](CONTRIBUTING.md#verification) owns the verification commands, local resource limits and CI policy. The final local integration gate covers selected static checks and affected regression suites. Broader local checks are available within the contribution policy’s resource limits; CI retains complete static, unit/DOM, build, browser and packaged Windows coverage. See [release boundaries](Docs/RELEASE.md) for the remaining shipping gates.
 
 ## Architecture and authoring
 
@@ -62,5 +62,6 @@ Historical records retain earlier proposals and rollout evidence; the current co
 - [Shared ability resolution and approved rule alignment](Docs/archive/COMBAT_RESOLUTION_PLAN.md)
 - [Combat reaction ordering and implementation record](Docs/archive/COMBAT_REACTIONS_PLAN.md)
 - [Journey lifecycle implementation record](Docs/archive/GAME_STATE_PLAN.md)
+- [Journey balance measurements](Docs/archive/JOURNEY_BALANCE.md) and [runner/Memento evaluation](Docs/archive/JOURNEY_BALANCE_EVALUATION.md)
 
 Alchemy informed the technology choices and architectural patterns. Fauna has its own implementation and no runtime dependency on Alchemy. Mana crystal UI sprites are adapted from Alchemy; provenance is recorded in the battle-layout sample README.

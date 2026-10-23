@@ -49,11 +49,7 @@ jobs:
       - name: Require complete verification for the tagged commit
         env:
           GH_TOKEN: ${{ github.token }}
-        shell: pwsh
-        run: |
-          $sha = git rev-parse HEAD
-          $runs = gh run list --workflow ci.yml --commit $sha --limit 50 --json conclusion,headSha | ConvertFrom-Json
-          if (!($runs | Where-Object { $_.headSha -eq $sha -and $_.conclusion -eq "success" })) { throw "Tagged commit requires successful full CI" }
+        run: node scripts/release/require-ci.mjs
       - name: Build signed installer
         env:
           CSC_LINK: ${{ secrets.WINDOWS_CSC_LINK }}

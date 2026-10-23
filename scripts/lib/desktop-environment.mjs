@@ -10,3 +10,9 @@ export function isolatedDesktopEnvironment(profile, inherited = process.env) {
     delete env[key];
   return env;
 }
+
+export function previewDesktopEnvironment(profile, url, inherited = process.env) {
+  const env = isolatedDesktopEnvironment(profile, inherited);
+  delete env.FAUNA_SMOKE_USER_DATA;
+  return { ...env, FAUNA_PREVIEW_USER_DATA: profile, FAUNA_DEV_URL: url };
+}

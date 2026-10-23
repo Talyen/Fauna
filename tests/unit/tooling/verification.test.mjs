@@ -252,6 +252,28 @@ describe("lightweight local verification", () => {
         expect(readFileSync(path.join(repo, file), "utf8").length).toBeGreaterThan(0);
   });
 
+  it("blocks verification when a required owner suite is deleted or replaced by a directory", () => {
+    const root = fixture();
+    const suite = "tests/unit/game/engine.test.ts";
+    mkdirSync(path.join(root, "src/game"), { recursive: true });
+    writeFileSync(path.join(root, "src/game/value.ts"), "export const value = 1;\n");
+    mkdirSync(path.dirname(path.join(root, suite)), { recursive: true });
+    writeFileSync(path.join(root, suite), "export {};\n");
+    expect(checkPlan(root, ["src/game/value.ts"]).missingContracts).toEqual([]);
+    rmSync(path.join(root, suite));
+    for (const directory of [false, true]) {
+      if (directory) mkdirSync(path.join(root, suite));
+      const runner = vi.fn(() => ({ status: 0 }));
+      const messages = [];
+      const options = { root, runner, log: (message) => messages.push(message) };
+      expect(runCheck(["src/game/value.ts"], options)).toBe(1);
+      expect(runner).not.toHaveBeenCalled();
+      expect(messages.join("\n")).toContain(`Missing required suite ${suite} for src/game/`);
+      expect(runCheck(["--plan", "src/game/value.ts"], options)).toBe(0);
+      expect(runner).not.toHaveBeenCalled();
+    }
+  });
+
   it("runs named regressions alongside the changed selection and dispatches bounded diagnostics", async () => {
     const root = fixture();
     mkdirSync(path.join(root, "tests/unit"), { recursive: true });

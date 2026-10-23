@@ -1,6 +1,6 @@
 node_modules
-dist
-release
+/dist/
+/release/
 package-lock.json
 reports
 playwright-report
