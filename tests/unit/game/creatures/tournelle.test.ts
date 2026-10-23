@@ -6,7 +6,7 @@ import { cardText, enemyCanUse } from "../../../../src/game/card-rules";
 import { cardKeywords } from "../../../../src/game/progression";
 import { freshCombat, hit } from "../../../../src/game/combat/index";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
-import { authoredPack, accept, prepareDestination, teamRun } from "../../../support/game";
+import { addBackups, authoredPack, accept, prepareDestination, teamRun } from "../../../support/game";
 import { COMBAT_PACKS } from "../../../../src/game/encounters";
 import type { GameEvent } from "../../../../src/game/types";
 
@@ -103,7 +103,7 @@ describe("Tournelle", () => {
   });
   it("swaps the lowest current-Health ally before drawing, retaining effects and the new formation", () => {
     const game = produce(fixture("tournelle-swapLowest"), (d) => {
-      d.reserves.push({
+      addBackups(d, {
         id: "backup",
         species: "mossguard",
         health: 25,
@@ -135,7 +135,7 @@ describe("Tournelle", () => {
   it("can swap Tournelle itself and still complete the draw", () => {
     const game = produce(fixture("tournelle-swapLowest"), (d) => {
       d.team[0]!.health = 1;
-      d.reserves.push({
+      addBackups(d, {
         id: "backup",
         species: "mossguard",
         health: 20,
@@ -170,7 +170,7 @@ describe("Tournelle", () => {
         if (mode === "knockout") d.team[0]!.health = 0;
         if (mode === "backup") {
           const unit = d.team.shift()!;
-          d.reserves.push(unit);
+          addBackups(d, unit);
         }
         const target = d.team.find((c) => c.id === "ally-1")!;
         hit(d, d.battle!.enemies[0]!, target, 2, "light", events, {

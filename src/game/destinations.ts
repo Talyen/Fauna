@@ -37,6 +37,7 @@ export function canRecruitDestination(state: GameState) {
     state.phase === "teamSelection" &&
     state.expedition.lastRoom !== "recruit" &&
     state.team.length + state.reserves.length < 5 &&
-    !!state.expedition.recruit
+    !!state.expedition.recruit &&
+    !species(state.expedition.recruit).legendary
   );
 }

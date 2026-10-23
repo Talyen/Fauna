@@ -21,11 +21,10 @@ Primitives and infrastructure cannot import higher-level owners. Screen styles c
 
 ## Presentation owners
 
+[Shared layout recipes](UI.md#shared-layout-recipes) locate Screen, pagination and ArtCard and explain their use. Other presentation owners:
+
 | Behavior                                  | Entry point                                                                                                        |
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| Screen stage and headers                  | [screen.tsx](../src/ui/shared/navigation/screen.tsx)                                                               |
-| Pagination and adaptive browsing          | [pagination.tsx](../src/ui/shared/navigation/pagination.tsx)                                                       |
-| Artwork                                   | [ArtCard](../src/ui/shared/cards/art-card.tsx)                                                                     |
 | Closing modal inertness and focus handoff | [modal-surface-ref.ts](../src/ui/infrastructure/modal-surface-ref.ts)                                              |
 | Combat impact and feedback                | [combat-impact.ts](../src/ui/battle/combat-impact.ts), [combat-feedback.tsx](../src/ui/battle/combat-feedback.tsx) |
 | Hand transfers                            | [hand-motion.tsx](../src/ui/battle/hand-motion.tsx)                                                                |

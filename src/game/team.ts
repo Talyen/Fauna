@@ -174,6 +174,10 @@ export function swapBackup(
   }
   state.team[index] = incoming;
   state.reserves[backupIndex] = outgoing;
+  const removed = new Set(
+    state.cards.filter((card) => card.ownerId === outgoing.id && card.temporary).map((card) => card.id),
+  );
+  state.cards = state.cards.filter((card) => !removed.has(card.id));
   const oldDefs = speciesCards(outgoing.species);
   const newDefs = speciesCards(incoming.species);
   const replaced = state.cards.filter((card) => card.ownerId === outgoing.id);
@@ -183,6 +187,8 @@ export function swapBackup(
     card.level = 0;
   }
   if (state.battle) {
+    for (const zone of ["draw", "hand", "buffer", "discard"] as const)
+      state.battle[zone] = state.battle[zone].filter((id) => !removed.has(id));
     for (const enemy of state.battle.enemies)
       if (enemy.targetId === outgoing.id) enemy.targetId = incoming.id;
     if (fromCard) {
@@ -192,7 +198,10 @@ export function swapBackup(
       state.battle.draw = shuffle(state, [...state.battle.draw, ...ids]);
     }
   }
-  if (state.battle) recycleDiscard(state);
+  if (state.battle) {
+    fillHand(state);
+    recycleDiscard(state);
+  }
   events.push({
     kind: "action",
     actionType: "swap",

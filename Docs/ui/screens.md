@@ -1,10 +1,10 @@
 # Screen specifications
 
-[UI contracts](../UI.md) own shared controls, layout, accessibility and rendered review. [Menu design](../MENU_DESIGN.md) owns navigation and Back; [journey design](../EXPEDITION_DESIGN.md) owns progression. Read only the affected screen below.
+[UI contracts](../UI.md) own shared controls, layout, accessibility and rendered review. [Menu design](../MENU_DESIGN.md) owns navigation and Back; [journey design](../EXPEDITION_DESIGN.md) owns progression. Read only the affected screen below; shared [focus/availability](../UI.md#interaction-states-and-accessibility), [scrolling](../UI.md#layout-artwork-size-and-spacing) and [presentation lifetime](../UI.md#presentation-lifetime) rules apply throughout.
 
 ## Screen headings
 
-Use a balanced header frame up to 640px wide: Back leads, Open menu trails, and the title centers independently. Journey screens add Deck beside Back, with a 12px gap and equal side reservations. Deck opens read-only inspection; during drafting it previews chosen starters' cards. Closing restores its opener.
+Use a balanced header frame up to 640px wide: Back leads, Open menu trails, and the title centers independently. Journey screens add Deck beside Back, with a 12px gap and equal side reservations. Deck follows [menu inspection rules](../MENU_DESIGN.md#back-and-focus-return), previewing chosen starters during drafting.
 
 Header and battle corner controls use 32px visible surfaces and 16px icons within 44px hit areas. Use 24px section gaps. Main menu keeps its Fauna title; battle has no main heading. Team confirmation omits Back.
 
@@ -26,11 +26,11 @@ Starter hover/focus adds kit keywords and the three action names/current Mana co
 
 Outside battle, use one shadcn Dialog on an opaque warm near-black backdrop. Center the creature name above landscape artwork, then a wider centered row of three native portrait abilities with 12px gaps. Show the current named trait, five progress stars and active passive description below. Stars fill left to right from zero to five; no rank controls or separate rank view appear. Ability names and rules are available through hover or intentional navigation focus. Keep accessible dialog titles.
 
-[Inspection CSS](../../src/ui/inspection/inspection.css) owns `--inspection-art-width`, fitted to the viewport and capped by the 480px `--inspection-art-max-width`. Creature width uses `--inspection-creature-scale` (0.8); individual abilities use `--inspection-ability-scale` (1.2) after accounting for gaps. Preserve selected typography, hit areas, native ratios and the common center axis.
+[Inspection CSS](../../src/ui/inspection/inspection.css) owns `--inspection-art-width`, fitted to the viewport and capped by the 480px `--inspection-art-max-width`. Creature width uses `--inspection-creature-scale` (0.8); individual abilities use `--inspection-ability-scale` (1.2) after accounting for gaps. Keep the common center axis and [shared layout constraints](../UI.md#layout-artwork-size-and-spacing).
 
-Activating a thumbnail pins its enlarged artwork in the same Dialog. A/D and controller left/right cycle the three actions without Previous/Next buttons. Card rules show final effects without a bonus breakdown or embedded Glossary definitions. Inspection never contains Recruit/Choose or commits gameplay.
+Activating a thumbnail pins its enlarged artwork in the same Dialog. A/D and controller left/right cycle the three actions without Previous/Next buttons. Card rules show final effects without a bonus breakdown or embedded Glossary definitions. Inspection has no Recruit/Choose action.
 
-Every creature/action inspection has an accessible icon-only Back button. [Back behavior](../MENU_DESIGN.md#back-and-focus-return) distinguishes creature-parent inspection from direct hand/deck inspection; X/outside click closes the whole Dialog. Battle, piles opened in battle and required replacement use hover/focus details without nested pinned inspection. Enemy details show current effects and never reveal intents; full species kits belong in Collection.
+Every creature/action inspection has an accessible icon-only Back button; [menu rules](../MENU_DESIGN.md#back-and-focus-return) own nesting, Back and whole-dialog dismissal. Battle, piles opened in battle and required replacement use hover/focus details without nested pinned inspection. Enemy details show current effects and never reveal intents; full species kits belong in Collection.
 
 ## Collection
 
@@ -48,13 +48,13 @@ The overview shows every category in centered rows of at most five, with 12px co
 
 Selecting artwork opens a dedicated tree. Show available points, exact XP and Progress above compact icon/name cards with visible effects and availability requirements. Authored rows contain two talents, with a possible single final talent. Measure remaining height to page up to three rows. The category-named header reset immediately refunds that category and is disabled without allocations. Purchases are immediate; definitions belong to the gameplay catalog.
 
-Owned borders are gold. Icons use keyword color at 65% while unowned and full strength when owned, without checkmarks. Only available icons brighten 20% on hover, without growth. Ownership transitions over 150ms; purchase flashes the existing border gold then fades over 250ms. Focus takes priority over the flash; reduced motion settles immediately. Distinguish missing points from incomplete earlier rows while keeping unavailable talents inspectable and unable to purchase.
+Owned borders are gold. Icons use keyword color at 65% while unowned and full strength when owned, without checkmarks. Only available icons brighten 20% on hover, without growth. Ownership transitions over 150ms; purchase flashes the existing border gold then fades over 250ms. Focus takes priority over the flash; shared availability rules distinguish missing points from incomplete earlier rows.
 
 ## Victory, recruitment and team confirmation
 
 ### Earnings and choices
 
-Show centered Victory earnings: keyword-colored icons/level labels with compact progress bars, then a separate Gold row. Continue opens Choose a Recruit without repeating earnings beside offers. This presentation step never grants rewards or changes game revision. An unchosen recruitment resumes through earnings; a banked full-roster recruit resumes directly at team confirmation.
+Show centered Victory earnings: keyword-colored icons/level labels with compact progress bars, then a separate Gold row. Continue opens Choose a Recruit without repeating earnings beside offers. An unchosen recruitment resumes through earnings; a banked full-roster recruit resumes directly at team confirmation.
 
 [Reward rules](../EXPEDITION_DESIGN.md#recruitment) own the exact defeated-species offers and boss cadence. Recruitment has no Skip. Recruit buttons commit below artwork; artwork only inspects. A first Collection unlock uses a small New! chip; otherwise show five stars, with earned ranks filled and the incoming star outlined with a plus. At maximum rank show five filled stars without a caption. Keep the group compact without unused pagination space. Boon choices retain their reserved choice area, external names and hover/focus effects; choose or Skip advances directly. An empty Boon pool advances automatically.
 
@@ -62,7 +62,7 @@ Show centered Victory earnings: keyword-colored icons/level labels with compact 
 
 For a full roster, center the incoming exchange artwork and opposing-arrow icon above one quiet Team tray of all five current individuals. Omit at-rest names, Health, pagination, Back and Cancel; hover/focus and inspection retain details.
 
-Artwork activation previews one exchange using shared swap motion. Retargeting restores the previous individual; activating the selected member or upper artwork reverses the preview. One centered Confirm commits the displayed team, including keeping it unchanged. Input remains available during motion. [Recruitment rules](../EXPEDITION_DESIGN.md#recruitment) own banking, preview isolation and reload behavior.
+Artwork activation previews one exchange using shared swap motion. Retargeting restores the previous individual; activating the selected member or upper artwork reverses the preview. One centered Confirm commits the displayed team, including keeping it unchanged. [Recruitment rules](../EXPEDITION_DESIGN.md#recruitment) own banking, preview isolation and reload behavior.
 
 ## Journey results
 
@@ -72,7 +72,7 @@ Show only outcome and permanent gains. Keywords use names, levels (earned points
 
 Show a quiet encounter number out of eight and keep compact last-battle earnings visible until the next battle begins. Ordinary combat uses one blank landscape ArtCard labeled Combat. Boss entrances show the authored name/species artwork and base-trait hover/focus details. Activating either starts the saved battle directly, without previews or visible intents. Keep Deck available. No free Swap or Lineup control appears.
 
-When deployed knockouts have living backup, show a centered, nondismissible Choose a replacement Dialog. Put the knocked-out creature above living backup at shared sizes, separated by an up/down icon. Only backup choices commit, immediately. Focus the first living choice; successive knockouts receive successive prompts, then focus returns to the hand or End turn. Escape/outside click cannot bypass the choice. Backup stays hidden on the battlefield. Reload reconstructs prompts from committed roster state.
+When deployed knockouts have living backup, show a centered, nondismissible Choose a replacement Dialog. Put the knocked-out creature above living backup at shared sizes, separated by an up/down icon. Only backup choices commit, immediately. Focus the first living choice; successive knockouts receive successive prompts, then focus returns to the hand or End turn. Escape/outside click cannot bypass the choice. Backup stays hidden on the battlefield. [Replacement rules](../EXPEDITION_DESIGN.md#knockout-replacement-and-ability-swaps) own resume.
 
 ## Optional Recruit destination
 
@@ -80,9 +80,9 @@ Show creature artwork, Recruit and its species name. Its hover/focus details inc
 
 ## Settings
 
-Use a centered full screen up to 640px wide, native Display/Sound/Battle tabs and a stable header/tab row. Mounted inactive panels reserve the tallest category's natural height and remain invisible, inert and hidden from assistive technology. Do not add a fixed minimum or panel fade/movement. Long secondary content may use a named, focusable vertical reading region while tabs and Back stay reachable.
+Use a centered full screen up to 640px wide, native Display/Sound/Battle tabs and a stable header/tab row. Mounted inactive panels reserve the tallest category's natural height and remain invisible, inert and hidden from assistive technology. Do not add a fixed minimum or panel fade/movement. Use the shared secondary-scrolling recipe for long panels.
 
-Use distinct Lucide icons, a 24px semibold light title, body-size pale-gold section headings with fading rules, 16px light option labels and muted supporting text. Respect selected text size. Align labels/controls in columns and values to control edges; wrap controls below labels when needed. Shared control styling belongs to [UI contracts](../UI.md#shared-control-states-and-feedback).
+Use distinct Lucide icons, a 24px semibold light title, body-size pale-gold section headings with fading rules, 16px light option labels and muted supporting text. Align labels/controls in columns and values to control edges; wrap controls below labels when needed. Shared control styling belongs to [UI contracts](../UI.md#shared-control-states-and-feedback).
 
 | Category             | Controls                                                                                                                                     |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -97,17 +97,17 @@ Cloud and diagnostics have no Settings surface, status or Retry control. [Recove
 
 ## Glossary
 
-Use one bounded, named and focusable vertical reading region. Wheel, keyboard and simulated-controller navigation must reach its final rule. Definitions come from the [gameplay glossary](../GLOSSARY.md). Menus and Back remain reachable outside the region.
+Use the shared secondary-scrolling recipe, keeping menus and Back outside the reading region and its final rule reachable. Definitions come from the [gameplay glossary](../GLOSSARY.md).
 
 ## Deck, piles and owned Boons
 
-Deck and owned Boons use the existing modal owner and bounded pages. Draw/Discard Piles use shared portrait ArtCards beside the hand and open Deck-style viewers with accessible inspection names and empty states. Sort cards by definition/instance identity, never draw order; inspection consumes no RNG or saves. Battle viewers use hover/focus details without nested action inspection. Escape restores the connected opener.
+Deck and owned Boons use the existing modal owner and bounded pages. Draw/Discard Piles use shared portrait ArtCards beside the hand and open Deck-style viewers with accessible inspection names and empty states. Sort cards by definition/instance identity, never draw order; browsing follows the [read-only inspection contract](../MENU_DESIGN.md#back-and-focus-return). Battle viewers use hover/focus details without nested action inspection.
 
 ## Campfire
 
 The Campfire destination uses location artwork with Rest beneath it. Inside the visit, page the whole roster on one measured row, showing current Health and exact capped recovery before a single Rest action. Use the [eligibility and recovery rules](../EXPEDITION_DESIGN.md#encounters).
 
-Rest returns immediately to the same combat offers, briefly presenting committed before/after meters and actual recovery for healed creatures, including backup. Navigation and battle remain available. Reduced motion settles meters directly; teardown cancels animation/expiry work.
+Rest returns immediately to the same combat offers, briefly presenting committed before/after meters and actual recovery for healed creatures, including backup. Navigation and battle remain available; reduced motion shows final meters.
 
 ## Boon Merchant
 

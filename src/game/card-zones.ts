@@ -22,7 +22,7 @@ export function receiveCard(state: GameState, id: string) {
 function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
   const battle = state.battle!;
   (battle.hand.length < MAX_HAND_SIZE ? battle.hand : battle.buffer).push(id);
-  const original = state.cards.find((entry) => entry.id === id)!;
+  let original: GameState["cards"][number] | undefined;
   // Copy insertion and buffer promotion are not draws and cannot recursively copy.
   for (const reader of state.team) {
     if (
@@ -36,6 +36,7 @@ function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
       0,
     );
     if (!succeeds(state, chance / 100, false, events)) continue;
+    original ??= state.cards.find((entry) => entry.id === id)!;
     const copy = { ...original, id: `copy-${battle.copySerial++}`, temporary: true as const };
     state.cards.push(copy);
     (battle.hand.length < MAX_HAND_SIZE ? battle.hand : battle.buffer).push(copy.id);
@@ -51,7 +52,8 @@ function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
 
 export function fillHand(state: GameState) {
   const battle = state.battle!;
-  while (battle.hand.length < MAX_HAND_SIZE && battle.buffer.length) battle.hand.push(battle.buffer.shift()!);
+  const count = Math.min(MAX_HAND_SIZE - battle.hand.length, battle.buffer.length);
+  if (count > 0) battle.hand.push(...battle.buffer.splice(0, count));
 }
 
 function recycleEligibleDiscard(state: GameState, eligible: (id: string) => boolean) {
@@ -63,21 +65,29 @@ function recycleEligibleDiscard(state: GameState, eligible: (id: string) => bool
   battle.draw.push(...shuffle(state, available));
 }
 
+function lastEligibleIndex(ids: readonly string[], eligible: (id: string) => boolean) {
+  let index = ids.length - 1;
+  while (index >= 0 && !eligible(ids[index]!)) index--;
+  return index;
+}
+
 export function draw(state: GameState, count: number, events: GameEvent[] = []) {
   fillHand(state);
   const b = state.battle!;
   recycleDiscard(state);
   // Knocked-out owners retain inert slots, so replacing them cannot refresh spent cards.
-  const alive = state.team.filter((c) => c.health > 0);
-  const eligible = (id: string) => {
-    if (!alive.length) return true;
-    const ownerId = state.cards.find((card) => card.id === id)?.ownerId;
-    return alive.some((unit) => unit.id === ownerId);
-  };
+  const alive = new Set(state.team.filter((c) => c.health > 0).map((c) => c.id));
+  const eligibleCards = new Set<string>();
+  // Well Read only inserts copies into the hand/buffer; draw/discard ownership
+  // stays fixed throughout this draw, including recycling between draws.
+  if (alive.size) for (const card of state.cards) if (alive.has(card.ownerId)) eligibleCards.add(card.id);
+  const eligible = (id: string) => !alive.size || eligibleCards.has(id);
   for (let i = 0; i < count; i++) {
-    if (!b.draw.some(eligible)) recycleEligibleDiscard(state, eligible);
-    let index = b.draw.length - 1;
-    while (index >= 0 && !eligible(b.draw[index]!)) index--;
+    let index = lastEligibleIndex(b.draw, eligible);
+    if (index < 0) {
+      recycleEligibleDiscard(state, eligible);
+      index = lastEligibleIndex(b.draw, eligible);
+    }
     if (index < 0) break;
     const card = b.draw.splice(index, 1)[0]!;
     receiveDraw(state, card, events);
@@ -99,9 +109,11 @@ export function drawKeyword(
       state.team.some((c) => c.id === card.ownerId && c.health > 0) && cardKeywords(card).includes(keyword)
     );
   };
-  if (!battle.draw.some(eligible)) recycleEligibleDiscard(state, eligible);
-  let index = battle.draw.length - 1;
-  while (index >= 0 && !eligible(battle.draw[index]!)) index--;
+  let index = lastEligibleIndex(battle.draw, eligible);
+  if (index < 0) {
+    recycleEligibleDiscard(state, eligible);
+    index = lastEligibleIndex(battle.draw, eligible);
+  }
   if (index >= 0) {
     const id = battle.draw.splice(index, 1)[0]!;
     receiveDraw(state, id, events);

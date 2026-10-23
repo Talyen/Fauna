@@ -8,11 +8,11 @@ Dunefox is a 24 Health evasive support creature available through ordinary encou
 - **Dune Whirl:** Deal 1 Physical damage to all enemies; Blind all enemies
 - **Mirage Step:** Gain 30% Dodge until your next turn; Draw 1 card
 
-**Shifting Sands** reads "Allies gain 15% of your Dodge chance" at zero stars and scales to 20%, 25%, 30%, 35% and 40% at one through five stars. Other living deployed allies receive that fraction of Dunefox's intrinsic current Dodge chance, including the ordinary 5%, talents and temporary bonuses, before adding received Shifting Sands bonuses. Multiple providers contribute independently without recursive amplification; Dunefox does not benefit from its own aura. Total Dodge remains capped at 75%. For example, Mirage Step raises an otherwise unmodified Dunefox to 35% Dodge, sharing 5.25 percentage points at the base tier. Knockouts and backup providers contribute nothing; swaps, control and expiring bonuses update the live aura automatically. Enemies use the base tier.
+**Shifting Sands** reads "Allies gain 15% of your Dodge chance" at zero stars and scales to 20%, 25%, 30%, 35% and 40% at one through five stars. Other living deployed allies receive that fraction of Dunefox's intrinsic current Dodge chance, including the ordinary 5%, talents and temporary bonuses, before adding received Shifting Sands bonuses. Multiple providers contribute independently without recursive amplification; Dunefox does not benefit from its own aura. Total Dodge remains capped at 75%. For example, Mirage Step raises an otherwise unmodified Dunefox to 35% Dodge, sharing 5.25 percentage points at the base tier. Knockouts and backup providers contribute nothing; swaps, control and expiring bonuses update the live aura automatically.
 
-[Blind](../../KEYWORDS.md#combat-rules) follows the shared attack-wide miss, expiry, Dodge-reward, Cleanse and reflection rules. Dune Whirl applies Blind to surviving enemies after its damage, including enemies that Dodged that damage.
+Dune Whirl applies [Blind](../../KEYWORDS.md#blind) to surviving enemies after damage, including those that Dodged it.
 
-Mirage Step grants a separate temporary Dodge bonus, removed at the start of the owner's next turn, including in backup or on a skipped turn. Purge removes both ordinary and temporary granted Dodge together; unrelated permanent Dodge survives ordinary expiry. Enemy Mirage Step grants the same 30% Dodge and omits the player-only draw. The current save format stores Blind and temporary Dodge.
+Mirage Step uses the shared [temporary Dodge rules](../../KEYWORDS.md#temporary-dodge). Enemies retain its 30% Dodge without the player-only draw.
 
 ## Artwork provenance and validation record
 

@@ -49,6 +49,24 @@ afterEach(() => {
   vi.unstubAllEnvs();
 });
 
+it.skipIf(process.platform === "win32")(
+  "reports a denied final process-group signal without crashing deadline cleanup",
+  async () => {
+    const kill = process.kill.bind(process);
+    vi.spyOn(process, "kill").mockImplementation((pid, signal) => {
+      if (pid < 0 && signal === "SIGKILL") throw Object.assign(new Error("denied"), { code: "EPERM" });
+      return kill(pid, signal);
+    });
+    const result = await runInvestigation(process.execPath, ["-e", "setInterval(() => {}, 1000)"], {
+      timeout: 100,
+      stdio: "ignore",
+    });
+    expect(result.error.message).toContain("Command deadline exhausted");
+    expect(result.error.message).toContain("cleanup failed (EPERM)");
+    expect(result.signal).toBe("SIGTERM");
+  },
+);
+
 it("defaults check and review to committed task work without importing concurrent main changes", () => {
   const root = fixture();
   git(root, "checkout", "-qb", "task/example");

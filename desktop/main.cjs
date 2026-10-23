@@ -40,7 +40,11 @@ function requestClose() {
 function finishClose() {
   if (closing) return;
   closing = true;
-  void Promise.all([storage?.drain(), display?.dispose(), steam?.dispose()]).then(() => {
+  // Admit every independent cleanup even when another one throws synchronously.
+  const resources = [() => storage?.drain(), () => display?.dispose(), () => steam?.dispose()];
+  void Promise.allSettled(resources.map((cleanup) => Promise.resolve().then(cleanup))).then((results) => {
+    for (const result of results)
+      if (result.status === "rejected") console.error("[shutdown] Native cleanup failed.");
     quitting = true;
     app.quit();
   });

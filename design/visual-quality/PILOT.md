@@ -1,8 +1,10 @@
 # Boon Merchant pilot
 
-## Evidence scope
-
-All observations below concern their recorded rollout snapshots. Checks were task-scoped: full static analysis, build, exhaustive viewport/input/state journeys, hosted CI, native desktop, Windows packaging, physical controllers, live Steam and Steam Deck remained unverified throughout this pilot. Reduced-motion frames do not qualify animation or listening/mix quality. No new artwork generation is claimed. Each stage below retains its source identity, focused checks, observed interactions and evidence paths; none establishes aesthetic approval.
+> **Status/source:** historical Merchant rollout snapshots; each attempt below retains its source identity, focused checks, observed interactions and evidence paths
+>
+> **Current owners:** [UI contracts](../../Docs/UI.md), [reference index](README.md) and [decision records](DECISIONS.md#merchant)
+>
+> **Evidence:** task-scoped checks only; full static analysis, build, exhaustive viewport/input/state journeys, hosted CI, native desktop, Windows packaging, physical controllers, live Steam and Steam Deck remained unverified throughout; reduced-motion frames qualify neither animation nor listening/mix quality; no new artwork generation or aesthetic approval is claimed
 
 ## Direction and status
 

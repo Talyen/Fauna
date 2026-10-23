@@ -1,6 +1,22 @@
 import { expect, it, vi } from "vitest";
 import { createDiagnostics } from "../../../src/application/diagnostics";
 
+it.each([
+  "Authorization: Bearer private-credential",
+  'request failed: {"token":"private-credential"}',
+  'request failed: {"access_token":"private-credential"}',
+  'secret="private \\"credential\\""',
+  "password='private credential with spaces'",
+])("redacts complete credentials before publication and persistence: %s", (message) => {
+  const write = vi.fn();
+  const diagnostics = createDiagnostics({ read: () => null, write });
+  diagnostics.record("global", message);
+  expect(JSON.stringify(diagnostics.snapshot())).not.toContain("private");
+  expect(write.mock.calls[0]![0]).not.toContain("private");
+  expect(write.mock.calls[0]![0]).not.toContain("credential");
+  expect(diagnostics.snapshot()[0]!.message).toContain("[redacted]");
+});
+
 it("prevents diagnostic consumers from corrupting retained and persisted evidence", () => {
   const write = vi.fn();
   const diagnostics = createDiagnostics({

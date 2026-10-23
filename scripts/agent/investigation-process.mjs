@@ -19,7 +19,11 @@ export function runInvestigation(
         try {
           process.kill(-child.pid, signal);
         } catch (error) {
-          if (error.code !== "ESRCH") throw error;
+          if (error.code !== "ESRCH")
+            failure = new Error(
+              `${failure?.message ?? "Command interrupted."} Command cleanup failed (${error.code}).`,
+              { cause: error },
+            );
         }
       } else child.kill(signal);
     };

@@ -65,7 +65,9 @@ export function decodeSave(raw: string): GameState {
       );
     if (route.recruit !== null)
       invalid(
-        s.team.length + s.reserves.length >= 5 || !["teamSelection", "support", "campfire"].includes(s.phase),
+        species(route.recruit).legendary === true ||
+          s.team.length + s.reserves.length >= 5 ||
+          !["teamSelection", "support", "campfire"].includes(s.phase),
       );
   }
   invalid(
@@ -80,6 +82,7 @@ export function decodeSave(raw: string): GameState {
       !unique(s.boons),
   );
   invalid(s.team.length + s.reserves.length > 5);
+  invalid([...s.team, ...s.reserves].some((creature) => !collected.includes(creature.species)));
   invalid([...s.team, ...s.reserves].some((c) => c.health > species(c.species).health));
   invalid(
     s.cards.some(

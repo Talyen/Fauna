@@ -1,13 +1,15 @@
 import { pendingReplacement, formationForSwap } from "../game/team";
 import { coverageScore, offenseValue } from "./team-policy";
 import { battlefield } from "../game/battlefield";
-import { hasTalent } from "../game/progression";
+import { MAX_BATTLE_CARDS } from "../game/card-zones";
+import { creaturePassive, hasTalent } from "../game/progression";
 import { controlled, hasHarmfulEffects, mostInjured } from "../game/combat/index";
+import { maximumHealth } from "../game/combat/state";
 import { actionValue, cardCost, physicalBonus } from "../game/ability-rules";
 import { definition, species } from "../game/content";
-import type { Command, GameState } from "../game/types";
+import type { Card, Command, Enemy, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 27;
+export const BATTLE_POLICY_VERSION = 28;
 const BATTLE_FINISH_PRIORITY = 1_000_000_000;
 export interface BattleChoice {
   command: Command;
@@ -17,59 +19,76 @@ export interface BattleChoice {
 /** Only visible information enters scoring; no forecasts or gameplay RNG are sampled. */
 export function rankedBattleChoices(state: GameState, autoEndTurn = true): BattleChoice[] {
   if (state.phase !== "battle") return [];
-  const order = <T extends { id: string }>(items: T[]) => [...items].sort((a, b) => a.id.localeCompare(b.id));
   const outgoing = pendingReplacement(state);
-  const remaining = state.team.filter((unit) => unit.health > 0 && !controlled(unit));
-  const needsDamage = !remaining.some((unit) => offenseValue(state, unit.species) > 0);
-  const incoming = order(outgoing ? state.reserves : [])
-    .filter((unit) => unit.health > 0)
-    .map((unit) => {
-      const all = [...state.team, ...state.reserves];
-      const ids = formationForSwap(
-        all,
-        state.team.map((unit) => unit.id),
-        outgoing?.id ?? "",
-        unit.id,
-      );
-      const lineup = ids
-        .map((id) => all.find((entry) => entry.id === id)!)
-        .filter((entry) => entry.health > 0);
-      const kinds = lineup.map((entry) => entry.species);
-      const score =
-        (needsDamage && offenseValue(state, unit.species) > 0 ? 1_000_000 : 0) +
-        (!controlled(unit) ? 100_000 : 0) +
-        coverageScore(state, kinds) +
-        (needsDamage ? offenseValue(state, unit.species) * 100 : 0) +
-        (unit.health / species(unit.species).health) * 100;
-      return { unit, score };
-    })
-    .sort((a, b) => b.score - a.score)[0]?.unit;
-  if (outgoing && incoming)
-    return [
-      {
-        command: {
-          type: "swap",
-          activeId: outgoing.id,
-          reserve: incoming.id,
-          ...(autoEndTurn ? {} : { autoEndTurn: false }),
+  if (outgoing) {
+    const remaining = state.team.filter((unit) => unit.health > 0 && !controlled(unit));
+    const needsDamage = !remaining.some((unit) => offenseValue(state, unit.species) > 0);
+    const all = [...state.team, ...state.reserves];
+    const active = state.team.map((unit) => unit.id);
+    const incoming = [...state.reserves]
+      .sort((a, b) => a.id.localeCompare(b.id))
+      .filter((unit) => unit.health > 0)
+      .map((unit) => {
+        const ids = formationForSwap(all, active, outgoing.id, unit.id);
+        const lineup = ids
+          .map((id) => all.find((entry) => entry.id === id)!)
+          .filter((entry) => entry.health > 0);
+        const kinds = lineup.map((entry) => entry.species);
+        const damage = needsDamage ? offenseValue(state, unit.species) : 0;
+        const score =
+          (damage > 0 ? 1_000_000 : 0) +
+          (!controlled(unit) ? 100_000 : 0) +
+          coverageScore(state, kinds) +
+          damage * 100 +
+          (unit.health / species(unit.species).health) * 100;
+        return { unit, score };
+      })
+      .sort((a, b) => b.score - a.score)[0]?.unit;
+    if (incoming)
+      return [
+        {
+          command: {
+            type: "swap",
+            activeId: outgoing.id,
+            reserve: incoming.id,
+            ...(autoEndTurn ? {} : { autoEndTurn: false }),
+          },
+          score: BATTLE_FINISH_PRIORITY,
+          reason:
+            "Replace a knocked-out creature; restore missing deployed damage, then favor usable complementary backups",
         },
-        score: BATTLE_FINISH_PRIORITY,
-        reason:
-          "Replace a knocked-out creature; restore missing deployed damage, then favor usable complementary backups",
-      },
-    ];
+      ];
+  }
+  const injuredAllies = battlefield(state, "player").some(
+    (unit) => unit.health > 0 && unit.health < maximumHealth(unit),
+  );
+  // A capped resource can still be worth playing to deliver a once-per-turn healing trigger.
+  const healingOnPlay =
+    injuredAllies &&
+    ((state.battle.cardsPlayedThisTurn === 1 &&
+      state.team.some(
+        (unit) =>
+          unit.health > 0 &&
+          creaturePassive(state, unit.species).effects.some(
+            (effect) => effect.kind === "livingChorus" && effect.amount > 0,
+          ),
+      )) ||
+      (state.battle.cardsPlayedThisTurn === 2 &&
+        state.boons.includes("resonant-chimes") &&
+        hasTalent(state, "mana.arcane-mending")));
   const options: (BattleChoice & { key: string })[] = [];
-  const add = (cardId: string, score: number, targetId?: string, reason?: string) => {
+  const add = (card: Card, score: number, targetId?: string, reason?: string) => {
     if (score > 0)
       options.push({
-        command: { type: "play", cardId, targetId, autoEndTurn },
+        command: { type: "play", cardId: card.id, targetId, autoEndTurn },
         score,
-        reason:
-          reason ??
-          `Use ${definition(state.cards.find((card) => card.id === cardId)!.definitionId).name} for its visible benefit`,
-        key: `${cardId}:${targetId ?? ""}`,
+        reason: reason ?? `Use ${definition(card.definitionId).name} for its visible benefit`,
+        key: `${card.id}:${targetId ?? ""}`,
       });
   };
+  // Ranking only reads this snapshot; share target discovery across hand cards.
+  let enemies: Enemy[] | undefined;
+  const livingEnemies = () => (enemies ??= battlefield(state, "enemy").filter((enemy) => enemy.health > 0));
   for (const id of state.battle.hand) {
     const card = state.cards.find((c) => c.id === id)!;
     const actor = state.team.find((c) => c.id === card.ownerId);
@@ -77,6 +96,38 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
     if (!actor || actor.health === 0 || controlled(actor) || cardCost(card, state) > state.battle.mana)
       continue;
     const value = actionValue(card, actor, state);
+    // Drawing only this card back cannot justify an already capped Dodge grant.
+    const usefulDraw = () =>
+      !!def.effects?.some((effect) => effect.kind === "draw" && effect.amount > 0) &&
+      ([...state.battle.draw, ...state.battle.discard, ...state.battle.buffer].some((id) => {
+        const drawn = state.cards.find((entry) => entry.id === id)!;
+        return state.team.some((unit) => unit.id === drawn.ownerId && unit.health > 0);
+      }) ||
+        (state.cards.length < MAX_BATTLE_CARDS &&
+          state.team.some(
+            (unit) =>
+              unit.health > 0 &&
+              creaturePassive(state, unit.species).effects.some(
+                (effect) => effect.kind === "wellRead" && effect.amount > 0,
+              ),
+          )));
+    const protection =
+      def.effects?.reduce((sum, effect) => {
+        if (effect.kind === "reflect")
+          return (
+            sum + Number(!(effect.status === "burn" ? actor.combat?.reflectBurn : actor.combat?.reflect))
+          );
+        if (effect.kind === "nullifyFreeze") return sum + Number(!actor.combat?.nullifyFreeze);
+        if (effect.kind === "status")
+          return (
+            sum +
+            Math.min(
+              effect.amount,
+              (effect.status === "dodge" ? 70 : 1_000_000) - (actor.combat?.[effect.status] ?? 0),
+            )
+          );
+        return sum;
+      }, 0) ?? 0;
     const healing = Math.min(
       species(actor.species).health - actor.health,
       def.effects?.reduce(
@@ -92,12 +143,12 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
       const echoes = (state.battle.minions ?? []).filter(
         (unit) => unit.minion.ownerId === actor.id && unit.health > 0,
       );
-      add(id, echoes.length < 2 ? 1600 : echoes.some((unit) => unit.health < unit.maxHealth) ? 1200 : 100);
+      add(card, echoes.length < 2 ? 1600 : echoes.some((unit) => unit.health < unit.maxHealth) ? 1200 : 100);
     } else if (def.effect === "createPearls" || def.effect === "pearl") {
-      add(id, def.effect === "pearl" ? 500 : state.cards.length < 256 ? 400 : 0);
+      add(card, def.effect === "pearl" ? 500 : state.cards.length < MAX_BATTLE_CARDS ? 400 : 0);
     } else if (def.effect === "attack") {
-      const enemies = battlefield(state, "enemy").filter((e) => e.health > 0);
-      const progress = (enemy: (typeof enemies)[number]) => {
+      const enemies = livingEnemies();
+      const attacks = enemies.map((enemy) => {
         // Ordinary primary hits only; chance effects and hidden RNG are never forecast.
         const outcomes = [def.damageType, ...(def.alternateDamageType ? [def.alternateDamageType] : [])].map(
           (type) => {
@@ -133,24 +184,24 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
           },
         );
         return {
+          enemy,
           score: outcomes.reduce((sum, outcome) => sum + outcome.score, 0) / outcomes.length,
           lethal: outcomes.every((outcome) => outcome.lethal),
         };
-      };
-      const remaining = state.battle.enemies.filter((enemy) => enemy.health > 0);
+      });
+      const remaining = attacks.filter(({ enemy }) => !enemy.minion);
       const winning =
         !actor.combat?.blind &&
         remaining.length > 0 &&
         (def.target === "allEnemies"
-          ? remaining.every((enemy) => progress(enemy).lethal)
+          ? remaining.every((attack) => attack.lethal)
           : def.target === "randomEnemy"
-            ? enemies.every((enemy) => !enemy.minion && progress(enemy).lethal) && remaining.length === 1
+            ? attacks.every(({ enemy, lethal }) => !enemy.minion && lethal) && remaining.length === 1
             : false);
       if (def.target === "allEnemies")
         add(
-          id,
-          (winning ? BATTLE_FINISH_PRIORITY : 0) +
-            enemies.reduce((sum, enemy) => sum + progress(enemy).score, 0),
+          card,
+          (winning ? BATTLE_FINISH_PRIORITY : 0) + attacks.reduce((sum, attack) => sum + attack.score, 0),
           undefined,
           winning
             ? "Attempt to finish every remaining enemy on ordinary hits"
@@ -158,21 +209,18 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
         );
       else if (def.target === "randomEnemy")
         add(
-          id,
+          card,
           (winning ? BATTLE_FINISH_PRIORITY : 0) +
-            (enemies.length
-              ? enemies.reduce((sum, enemy) => sum + progress(enemy).score, 0) / enemies.length
-              : 0),
+            (attacks.length ? attacks.reduce((sum, attack) => sum + attack.score, 0) / attacks.length : 0),
           undefined,
           "Use the average visible benefit across random targets",
         );
       else
-        for (const enemy of enemies) {
-          const finish =
-            !actor.combat?.blind && remaining.length === 1 && !enemy.minion && progress(enemy).lethal;
+        for (const { enemy, lethal, score } of attacks) {
+          const finish = !actor.combat?.blind && remaining.length === 1 && !enemy.minion && lethal;
           add(
-            id,
-            (finish ? BATTLE_FINISH_PRIORITY : 0) + progress(enemy).score,
+            card,
+            (finish ? BATTLE_FINISH_PRIORITY : 0) + score,
             enemy.id,
             finish
               ? "Attempt to finish the last enemy before healing or attacking Minions"
@@ -202,7 +250,7 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
         const restored = benefits.reduce((sum, benefit) => sum + benefit.restored, 0);
         const utility = benefits.reduce((sum, benefit) => sum + benefit.utility, 0);
         add(
-          id,
+          card,
           restored > 0
             ? 3000 + restored
             : utility > 0
@@ -222,37 +270,43 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
             : allies) {
           const { restored, utility } = healingBenefit(ally);
           add(
-            id,
+            card,
             restored > 0 ? 3000 + restored : utility > 0 ? 150 + utility : 0,
             def.target ? undefined : ally.id,
           );
         }
     } else if (def.effect === "mana") {
-      add(id, 400 + Math.min(value, state.battle.maxMana - state.battle.mana + cardCost(card, state)));
+      const cost = cardCost(card, state);
+      const regained = Math.min(value, state.battle.maxMana - state.battle.mana + cost);
+      const net = regained - cost;
+      const mending = regained > 0 && hasTalent(state, "mana.arcane-mending") && injuredAllies;
+      add(card, net > 0 ? 400 + net : mending || healingOnPlay ? 3000 + regained : 0);
     } else if (def.effect === "teamClearBlind") {
-      add(id, 200 + state.team.filter((unit) => unit.health > 0 && unit.combat?.blind).length * 100);
+      add(card, 200 + state.team.filter((unit) => unit.health > 0 && unit.combat?.blind).length * 100);
     } else if (def.effect === "teamThaw") {
       const useful = state.team.filter((unit) => unit.health > 0 && (unit.combat?.freeze ?? 0) > 0).length;
-      add(id, 200 + useful * 100);
+      add(card, 200 + useful * 100);
     } else if (def.effect === "recover") {
       const recoverable = state.battle.discard.some((discarded) => {
         const card = state.cards.find((card) => card.id === discarded)!;
         return state.team.some((unit) => unit.id === card.ownerId && unit.health > 0);
       });
-      add(id, recoverable ? 200 : 0);
+      add(card, recoverable ? 200 : 0);
     } else if (def.effect === "teamDodge") {
-      add(id, 150 + value);
+      const useful = battlefield(state, "player")
+        .filter((unit) => unit.health > 0)
+        .reduce((sum, unit) => sum + Math.min(value, 70 - (unit.combat?.temporaryDodge ?? 0)), 0);
+      add(card, useful > 0 ? 150 + useful : healingOnPlay ? 3000 : usefulDraw() ? 200 : 0);
     } else if (def.effect === "redraw") {
-      add(id, state.battle.hand.length > 1 ? 190 : 0);
+      add(card, state.battle.hand.length > 1 ? 190 : 0);
     } else if (def.effect === "draw") {
-      add(id, healing > 0 ? 3000 + healing : 200 + value);
+      add(card, healing > 0 ? 3000 + healing : 200 + value);
     } else if (def.effect === "teamBlind") {
-      const useful = battlefield(state, "enemy").filter(
-        (enemy) => enemy.health > 0 && !enemy.combat.blind && !enemy.combat.nullify,
-      ).length;
-      add(id, useful > 0 ? 150 + useful : 0);
+      const useful = livingEnemies().filter((enemy) => !enemy.combat.blind && !enemy.combat.nullify).length;
+      add(card, useful > 0 ? 150 + useful : 0);
     } else if (def.effect === "teamPurge") {
-      const useful = state.battle.enemies.filter(
+      const enemies = livingEnemies();
+      const useful = enemies.filter(
         (enemy) =>
           enemy.health > 0 &&
           (enemy.block > 0 ||
@@ -266,17 +320,17 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
             enemy.combat.nullify ||
             enemy.combat.nullifyFreeze),
       ).length;
-      const defense = state.battle.enemies.some(
+      const defense = enemies.some(
         (enemy) => enemy.health > 0 && (enemy.block > 0 || enemy.combat.armor > 0),
       );
       add(
-        id,
+        card,
         useful > 0 ? (defense ? 1700 : 160) + useful : 0,
         undefined,
         "Remove visible defenses before spending Mana on blocked attacks",
       );
     } else if (def.effect === "teamCleanse") {
-      add(id, 150);
+      add(card, 150);
     } else if (
       def.effect === "teamGuard" ||
       def.effect === "redistributeBlock" ||
@@ -291,23 +345,24 @@ export function rankedBattleChoices(state: GameState, autoEndTurn = true): Battl
             (def.effect === "teamProtection" ? Math.min(value, 1_000_000 - (c.combat?.thorns ?? 0)) : 0),
           0,
         );
-      add(id, useful > 0 ? 100 + useful : 0);
+      add(card, useful > 0 ? 100 + useful : 0);
     } else if (def.effect === "nullify") {
       const useful = state.team.filter((c) => c.health > 0 && !c.combat?.nullify).length;
-      add(id, useful > 0 ? 150 + useful : 0);
+      add(card, useful > 0 ? 150 + useful : 0);
     } else if (def.effect === "waterThorns") {
       const useful = Math.min(value, 1_000_000 - (actor.combat?.waterThorns ?? 0));
-      add(id, useful > 0 ? 100 + useful : 0);
+      add(card, useful > 0 ? 100 + useful : 0);
     } else if (def.effect === "dodge") {
-      add(id, 150 + Math.max(0, value - (actor.combat?.temporaryDodge ?? 0)));
+      const useful = Math.min(value, 70 - (actor.combat?.temporaryDodge ?? 0));
+      add(card, useful > 0 ? 150 + useful : healingOnPlay ? 3000 : usefulDraw() ? 200 : 0);
     } else if (def.effect === "swap" || def.effect === "swapLowest") {
-      add(id, 150);
+      add(card, 150);
     } else {
       for (const ally of def.target === "self" ? [actor] : state.team.filter((c) => c.health > 0)) {
         const useful = Math.min(value, 1_000_000 - ally.block);
         add(
-          id,
-          healing > 0 ? 3000 + healing : useful > 0 ? 100 + useful : 0,
+          card,
+          healing > 0 ? 3000 + healing : useful + protection > 0 ? 100 + useful + protection : 0,
           def.target === "self" ? undefined : ally.id,
         );
       }
@@ -321,5 +376,5 @@ export function battleChoices(state: GameState, autoEndTurn = true): Command[] {
   return rankedBattleChoices(state, autoEndTurn).map((choice) => choice.command);
 }
 export function chooseBattleCommand(state: GameState, autoEndTurn = true): Command {
-  return battleChoices(state, autoEndTurn)[0] ?? { type: "endTurn" };
+  return rankedBattleChoices(state, autoEndTurn)[0]?.command ?? { type: "endTurn" };
 }

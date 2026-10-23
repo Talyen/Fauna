@@ -1,13 +1,57 @@
-import { swapFixture } from "../../support/game";
+import { addBackups, swapFixture } from "../../support/game";
 import { freshCombat } from "../../../src/game/combat/index";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { dispatch } from "../../../src/game/engine";
 import { previewPlay } from "../../../src/game/preview";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { prepareDestination, accept, run } from "../../support/game";
-import { draw } from "../../../src/game/card-zones";
+import { prepareDestination, accept, run, teamRun } from "../../support/game";
+import { draw, drawKeyword } from "../../../src/game/card-zones";
 import { shuffle } from "../../../src/game/random";
+import type { GameEvent } from "../../../src/game/types";
+
+it("keeps draw eligibility and seeded recycling stable while Well Read grows a large deck", () => {
+  const initial = produce(teamRun(42, ["rookhaven", "reedstag", "reedstag"]), (state) => {
+    state.discovery.recruited.rookhaven = 6;
+    state.team[1]!.health = 0;
+    state.team[2]!.health = 0;
+    state.cards = state.cards.filter((card) => !card.temporary);
+    const inert = state.cards.find((card) => card.ownerId === state.team[1]!.id)!;
+    for (let index = 0; index < 200; index++)
+      state.cards.push({ ...inert, id: `copy-${index}`, temporary: true });
+    const active = state.cards.filter((card) => card.ownerId === state.team[0]!.id);
+    state.battle!.copySerial = 200;
+    state.battle!.hand = [];
+    state.battle!.buffer = [];
+    state.battle!.draw = [
+      active[0]!.id,
+      ...state.cards.filter((card) => card.ownerId !== state.team[0]!.id).map((card) => card.id),
+    ];
+    state.battle!.discard = active.slice(1).map((card) => card.id);
+    state.rng = 17;
+  });
+  expect(decodeSave(encodeSave(initial))).toEqual(initial);
+  const random = { ...initial };
+  const recycled = shuffle(random, [...initial.battle!.discard]).reverse();
+  const drawn = [initial.battle!.draw[0]!, ...recycled];
+  const events: GameEvent[] = [];
+  const result = produce(initial, (state) => draw(state, 3, events));
+  expect(result.battle!.hand).toEqual(drawn.flatMap((id, index) => [id, `copy-${200 + index}`]));
+  expect(result.battle!.draw).toEqual(initial.battle!.draw.slice(1));
+  expect(result.battle!.discard).toEqual([]);
+  expect(result.cards).toHaveLength(initial.cards.length + 3);
+  expect(decodeSave(encodeSave(result))).toEqual(result);
+  expect(result.rng).toBe(random.rng);
+  expect(events).toHaveLength(3);
+  expect(initial.cards).toHaveLength(209);
+
+  const revived = produce(result, (state) => {
+    state.team[1]!.health = 1;
+    draw(state, 1);
+  });
+  expect(revived.battle!.buffer).toEqual(["copy-199", "copy-203"]);
+  expect(revived.rng).toBe(result.rng);
+});
 
 it.each([false, true])("preserves seeded draw recycling with all owners knocked out: %s", (allDead) => {
   const initial = produce(run(), (state) => {
@@ -29,6 +73,39 @@ it.each([false, true])("preserves seeded draw recycling with all owners knocked 
   expect(result.battle!.draw).toEqual(allDead ? [] : [ids[3]!]);
   expect(result.battle!.discard).toEqual(allDead ? [] : [ids[4]!, ids[5]!]);
   expect(result.rng).toBe(random.rng);
+});
+
+it("keyword draws prefer the last eligible slot and recycle only living owners' matching cards", () => {
+  const initial = produce(teamRun(42, ["reedstag", "reedstag", "reedstag"]), (state) => {
+    state.team[1]!.health = 0;
+    const [first, inert, recycled] = state.cards.filter((card) => card.definitionId === "reedstag-attack");
+    const second = state.cards.find((card) => card.definitionId === "reedstag-guard")!;
+    const unrelated = state.cards.find((card) => card.definitionId === "reedstag-heal")!;
+    const retained = state.cards.filter(
+      (card) =>
+        (card.ownerId === state.team[1]!.id && card.definitionId === "reedstag-guard") ||
+        (card.ownerId === state.team[2]!.id && card.definitionId === "reedstag-heal"),
+    );
+    state.battle!.hand = [];
+    state.battle!.buffer = [];
+    state.battle!.draw = [first!.id, second.id, unrelated.id, inert!.id];
+    state.battle!.discard = [recycled!.id, ...retained.map((card) => card.id)];
+  });
+  const first = produce(initial, (state) => drawKeyword(state, "nature"));
+  expect(first.battle!.hand).toEqual([initial.battle!.draw[1]]);
+  expect(first.battle!.discard).toEqual(initial.battle!.discard);
+  expect(first.rng).toBe(initial.rng);
+  const second = produce(first, (state) => drawKeyword(state, "nature"));
+  expect(second.battle!.hand).toEqual([initial.battle!.draw[1], initial.battle!.draw[0]]);
+  const third = produce(second, (state) => drawKeyword(state, "nature"));
+  expect(third.battle!.hand).toEqual([
+    initial.battle!.draw[1],
+    initial.battle!.draw[0],
+    initial.battle!.discard[0],
+  ]);
+  expect(third.battle!.draw).toEqual(initial.battle!.draw.slice(2));
+  expect(third.battle!.discard).toEqual(initial.battle!.discard.slice(1));
+  expect(third.rng).toBe(initial.rng);
 });
 
 function buffered() {
@@ -101,7 +178,7 @@ describe("hidden hand overflow", () => {
 
   it("preserves buffered card slots and switches their owner during a reserve swap", () => {
     const s = produce(run(), (d) => {
-      d.reserves.push({
+      addBackups(d, {
         id: "recruit-pollenmoth",
         species: "pollenmoth",
         health: 23,
