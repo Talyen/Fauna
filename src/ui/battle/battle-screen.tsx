@@ -8,7 +8,7 @@ import { motionValue } from "../shared/motion-values";
 import { ActionDetails } from "../shared/cards/card-details";
 import { cardCost } from "../../game/ability-rules";
 import { controlled } from "../../game/combat/index";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Button } from "../../components/ui/button";
 import { ActionCard, AllyCard, EnemyCard } from "../shared/cards/cards";
 import { definition, species } from "../../game/content";
@@ -22,6 +22,12 @@ import { ManaCrystals } from "./mana-crystals";
 import { ArtCard } from "../shared/cards/art-card";
 import { assetUrl } from "../shared/assets";
 import type { Controls } from "../shared/navigation/input";
+function usePlayPreview(game: BattleState, cardId: string | null, targetId?: string) {
+  return useMemo(
+    () => (cardId && targetId ? previewPlay(game, cardId, targetId) : null),
+    [game, cardId, targetId],
+  );
+}
 function FanSlot({ index, count, children }: { index: number; count: number; children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {
@@ -113,7 +119,7 @@ export function BattleScreen({
     const side = enemyTarget ? "enemy" : "ally";
     setRemembered((old) => (old[side] === id ? old : { ...old, [side]: id }));
   };
-  const preview = selected && target ? previewPlay(game, selected, target) : null;
+  const preview = usePlayPreview(game, selected, target);
   const affected = new Set(
     preview?.events.flatMap((event) => (event.targetId ? [event.targetId] : [])) ?? [],
   );

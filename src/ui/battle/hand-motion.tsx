@@ -179,6 +179,7 @@ export class HandMotion extends Component<Props> {
     }
     if (!flights.length || !start) return;
     const now = performance.now();
+    const drawSource = board.querySelector<HTMLElement>('[data-pile="draw"]')?.getBoundingClientRect();
     const surfaces = flights.map((flight) => {
       const clone = flight.pose.clone;
       const card = flight.pose.node;
@@ -197,16 +198,28 @@ export class HandMotion extends Component<Props> {
       clone.style.translate = "none";
       document.body.append(clone);
       this.overlays.add(clone);
-      const source = flight.draw
-        ? board.querySelector<HTMLElement>('[data-pile="draw"]')!.getBoundingClientRect()
-        : flight.pose.rect;
+      const source = flight.draw ? drawSource! : flight.pose.rect;
       const face = clone.querySelector("img");
       return { ...flight, clone, source, face, completed: false, front: face?.getAttribute("src") ?? "" };
     });
     const tick = () => {
       if (this.disposed) return;
       const elapsed = performance.now() - now;
-      for (const f of surfaces) {
+      // Every destination remains live while the fan reflows. Read all geometry
+      // before any overlay writes so simultaneous flights share one layout pass.
+      const destinations = surfaces.map((f) => {
+        if (f.completed || (elapsed < f.start && f.draw)) return null;
+        const destination = f.destination?.getBoundingClientRect();
+        if (!destination?.width) return null;
+        const end = f.draw ? destination : discardRect(destination);
+        const scale = Number.parseFloat(getComputedStyle(f.destination!).scale) || 1;
+        return {
+          end,
+          width: f.draw ? f.destination!.offsetWidth * scale || end.width : end.width,
+          height: f.draw ? f.destination!.offsetHeight * scale || end.height : end.height,
+        };
+      });
+      for (const [index, f] of surfaces.entries()) {
         if (f.completed) continue;
         if (elapsed < f.start && f.draw) {
           f.clone.style.opacity = "0";
@@ -214,15 +227,12 @@ export class HandMotion extends Component<Props> {
         }
         const t = Math.max(0, Math.min(1, (elapsed - f.start) / f.duration)),
           p = 1 - (1 - t) ** 3;
-        const destination = f.destination?.getBoundingClientRect();
-        if (!destination?.width) {
+        const destination = destinations[index];
+        if (!destination) {
           this.finish();
           return;
         }
-        const end = f.draw ? destination : discardRect(destination);
-        const endScale = Number.parseFloat(getComputedStyle(f.destination!).scale) || 1;
-        const endWidth = f.draw ? f.destination!.offsetWidth * endScale || end.width : end.width,
-          endHeight = f.draw ? f.destination!.offsetHeight * endScale || end.height : end.height;
+        const { end, width: endWidth, height: endHeight } = destination;
         const startWidth = f.draw ? f.source.width : f.pose.width,
           startHeight = f.draw ? f.source.height : f.pose.height;
         const width = startWidth + (endWidth - startWidth) * p,
@@ -242,7 +252,8 @@ export class HandMotion extends Component<Props> {
           flip = 180 * (f.draw ? 1 - eased : eased);
         if (f.face) {
           const back = flip > 90;
-          f.face.src = back ? assetUrl(f.draw ? "card.back" : "pile.discard") : f.front;
+          const src = back ? assetUrl(f.draw ? "card.back" : "pile.discard") : f.front;
+          if (f.face.getAttribute("src") !== src) f.face.src = src;
           f.face.classList.toggle("discard-card-back", back && !f.draw);
         }
         f.clone.style.opacity = t >= 1 ? "0" : "1";

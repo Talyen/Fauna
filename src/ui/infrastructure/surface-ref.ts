@@ -13,7 +13,8 @@ export function useSurfaceRef<T extends HTMLElement>(forwardedRef?: Ref<T>) {
         if (active && width > 0 && height > 0)
           node.style.setProperty("--surface-short-side", `${Math.min(width, height)}px`);
       };
-      update(node.offsetWidth, node.offsetHeight);
+      // ResizeObserver supplies the initial border box before paint. Reading offsets
+      // here would force layout between every sibling's mount-time style writes.
       const observer =
         typeof ResizeObserver === "undefined"
           ? null
@@ -22,6 +23,7 @@ export function useSurfaceRef<T extends HTMLElement>(forwardedRef?: Ref<T>) {
               if (size) update(size.inlineSize, size.blockSize);
             });
       observer?.observe(node, { box: "border-box" });
+      if (!observer) update(node.offsetWidth, node.offsetHeight);
       return () => {
         active = false;
         observer?.disconnect();

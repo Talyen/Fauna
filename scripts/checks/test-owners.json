@@ -78,5 +78,13 @@
   "scripts/integrate.mjs": {
     "reason": "Combined verification, clean-main protection, integration locking and cleanup",
     "suites": ["tests/unit/tooling/agent-workflow.test.mjs", "tests/unit/tooling/worktree.test.mjs"]
+  },
+  "scripts/local.mjs": {
+    "reason": "Ordinary command resource budgets and complete verification recipes",
+    "suites": [
+      "tests/unit/tooling/agent-workflow.test.mjs",
+      "tests/unit/tooling/verification.test.mjs",
+      "tests/unit/tooling/dependencies.test.mjs"
+    ]
   }
 }
