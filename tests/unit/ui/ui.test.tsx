@@ -1,6 +1,6 @@
 import { TargetPreview } from "../../../src/ui/battle/target-preview";
 import { species, BOONS } from "../../../src/game/content";
-import { freshCombat, combat, hit } from "../../../src/game/combat/index";
+import { freshCombat, ensureCombat, hit } from "../../../src/game/combat/index";
 import { assetUrl } from "../../../src/ui/shared/assets";
 import { ActionCard } from "../../../src/ui/shared/cards/cards";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
@@ -393,7 +393,7 @@ it("previews Block depletion, exact health loss and knockout without visible HP 
     });
   });
   const after = produce(before, (d) => {
-    combat(d.team[0]!).deathDoorUsed = true;
+    ensureCombat(d.team[0]!).deathDoorUsed = true;
     d.rng = 1;
     hit(d, d.battle!.enemies[0]!, d.team[0]!, 8, "nature", []);
   });

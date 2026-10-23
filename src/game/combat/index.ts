@@ -4,7 +4,7 @@ export {
   TURN_MANA,
   TURN_DRAW,
   freshCombat,
-  combat,
+  ensureCombat,
   controlled,
   mostInjured,
   hasHarmfulEffects,

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { previewPlay } from "../../../src/game/preview";
-import { combat, hit } from "../../../src/game/combat/index";
+import { ensureCombat, hit } from "../../../src/game/combat/index";
 import { dispatch } from "../../../src/game/engine";
 import { appendFeedback, feedbackFrames } from "../../../src/ui/battle/combat-feedback-model";
 import type { GameEvent, DamageEvent } from "../../../src/game/types";
@@ -37,7 +37,7 @@ describe("uncommitted previews", () => {
     const events: Parameters<typeof hit>[5] = [];
     produce(state, (d) => {
       d.rng = 1;
-      combat(d.team[0]!).deathDoorUsed = true;
+      ensureCombat(d.team[0]!).deathDoorUsed = true;
       hit(d, d.battle!.enemies[0]!, d.team[0]!, 4, "nature", events);
     });
     expect(events.filter((e) => e.targetId === "ally-0").map((e) => [e.kind, e.amount])).toEqual([

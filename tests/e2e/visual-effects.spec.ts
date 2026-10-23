@@ -2,7 +2,7 @@ import { test, expect, type Page } from "@playwright/test";
 import { produce } from "immer";
 import { run, winBattle } from "../support/game";
 import { decodeSave } from "../../src/game/save";
-import { combat } from "../../src/game/combat/index";
+import { ensureCombat } from "../../src/game/combat/index";
 import { seed, resume, state } from "./support/session";
 import { captureScreen } from "./support/rendered-evidence";
 
@@ -19,8 +19,8 @@ test("keyword effects follow battle hover, Death's Door, inspection, settings an
   page,
 }) => {
   const game = produce(run(), (draft) => {
-    combat(draft.team[0]!).grace = 2;
-    combat(draft.team[0]!).deathDoorUsed = true;
+    ensureCombat(draft.team[0]!).grace = 2;
+    ensureCombat(draft.team[0]!).deathDoorUsed = true;
     draft.team[0]!.health = 1;
   });
   decodeSave(JSON.stringify(game));

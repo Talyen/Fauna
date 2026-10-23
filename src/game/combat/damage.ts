@@ -7,7 +7,7 @@ import { hasTalent, creaturePassive } from "../progression";
 import type { DamageType } from "../content";
 import type { GameEvent, GameState } from "../types";
 import {
-  combat,
+  ensureCombat,
   maximumHealth,
   unitName,
   mostInjured,
@@ -170,7 +170,7 @@ export function* resolveHit(
   const leech = "leech" in options && options.leech;
   const alliedSource = !isEnemy(source),
     alliedTarget = !isEnemy(target);
-  const stats = combat(target),
+  const stats = ensureCombat(target),
     before = target.health;
   const depletions: ArmorDepletion[] = [];
   const erode = (amount: number) => {
@@ -206,8 +206,8 @@ export function* resolveHit(
     });
     return { outcome: "landed", lost: 0 };
   }
-  const nextPhysical = direct && alliedSource ? combat(source).nextPhysical : 0;
-  if (nextPhysical) combat(source).nextPhysical = 0;
+  const nextPhysical = direct && alliedSource ? ensureCombat(source).nextPhysical : 0;
+  if (nextPhysical) ensureCombat(source).nextPhysical = 0;
   let damage = value;
   if (
     direct &&
@@ -221,14 +221,14 @@ export function* resolveHit(
     damage *= 2;
   }
   damage = modifiedDamage(state, source, target, damage, type, options);
-  const riposte = direct && alliedSource && type === "physical" && combat(source).riposte;
+  const riposte = direct && alliedSource && type === "physical" && ensureCombat(source).riposte;
   const criticalChance =
     0.05 + ((options.origin === "ability" ? options.criticalBonus : undefined) ?? 0) / 100;
   const critical =
     direct && (riposte || (criticalChance > 0 && succeeds(state, criticalChance, !alliedSource, events)));
-  if (riposte) combat(source).riposte = false;
-  const partingCut = direct && alliedSource && type === "physical" && combat(source).partingCut;
-  if (partingCut) combat(source).partingCut = false;
+  if (riposte) ensureCombat(source).riposte = false;
+  const partingCut = direct && alliedSource && type === "physical" && ensureCombat(source).partingCut;
+  if (partingCut) ensureCombat(source).partingCut = false;
   if (critical) damage *= 2;
   const blockRatio = alliedTarget && type === "physical" && hasTalent(state, "block.reinforce") ? 1.1 : 1;
   const payment = blockPayment(damage, target.block, blockRatio, policy.bypassBlock);

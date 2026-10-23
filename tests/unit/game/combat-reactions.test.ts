@@ -1,8 +1,47 @@
 import { expect, it } from "vitest";
-import { freshCombat, hit, removeEffects, tickStatuses } from "../../../src/game/combat/index";
+import { freshCombat, hit, removeEffects, tickStatuses, startAction } from "../../../src/game/combat/index";
 import { species } from "../../../src/game/content";
 import type { GameEvent } from "../../../src/game/types";
 import { run } from "../../support/game";
+
+it("keeps the last controlled turn skipped through recovery and resumes on the following turn", () => {
+  const state = structuredClone(run());
+  const ally = state.team[0]!;
+  ally.combat = { ...freshCombat(), controlled: "freeze", controlTurns: 1 };
+  const events: GameEvent[] = [];
+  expect(startAction(ally, events, state)).toBe(false);
+  expect(ally.combat).toMatchObject({ controlled: null, controlTurns: 0, skipped: true, cooldown: 3 });
+  expect(startAction(ally, events, state)).toBe(true);
+  expect(ally.combat).toMatchObject({ controlled: null, controlTurns: 0, skipped: false, cooldown: 2 });
+  expect(events.filter((event) => event.kind === "status" && event.outcome === "skip")).toHaveLength(1);
+});
+
+it("Clean Getaway trims the oldest Bleed obligation without granting a Cleanse reward", () => {
+  const state = structuredClone(run());
+  state.talents = ["dodge.clean-getaway", "health.renewal"];
+  const ally = state.team[0]!;
+  const enemy = state.battle!.enemies[0]!;
+  ally.health = 5;
+  ally.combat = {
+    ...freshCombat(),
+    bleed: 3,
+    statusSources: { bleed: enemy.id },
+    bleedLeech: [
+      { sourceId: enemy.id, amount: 1 },
+      { sourceId: ally.id, amount: 2 },
+    ],
+  };
+  const events: GameEvent[] = [];
+  hit(state, enemy, ally, 1, "physical", events, { origin: "ability", blindMiss: true });
+  expect(ally.health).toBe(5);
+  expect(ally.combat.bleed).toBe(2);
+  expect(ally.combat.bleedLeech).toEqual([{ sourceId: ally.id, amount: 2 }]);
+  expect(ally.combat.statusSources.bleed).toBe(enemy.id);
+  removeEffects(ally, "cleanse", 1, events, state);
+  expect(ally.health).toBe(7);
+  expect(ally.combat.bleedLeech).toEqual([]);
+  expect(ally.combat.statusSources.bleed).toBeUndefined();
+});
 
 it("Open Flank breaking Armor before Erosion triggers Molten Shell only once", () => {
   const state = structuredClone(run());

@@ -7,10 +7,9 @@ import { hasTalent, creaturePassive } from "../progression";
 import type { DamageType } from "../content";
 import type { GameEvent, GameState } from "../types";
 import {
-  combat,
+  ensureCombat,
   maximumHealth,
   unitName,
-  deferLeech,
   harmfulStatuses,
   STACK_LIMIT,
   removeArmor,
@@ -19,6 +18,13 @@ import {
 } from "./state";
 
 import { reaction, type Resolution } from "./operations";
+import {
+  enterControl,
+  cleanseControl,
+  clearHarmfulStatus,
+  addPeriodicStacks,
+  deferLeech,
+} from "./status-state";
 
 interface StatusResult {
   depletions: ArmorDepletion[];
@@ -35,7 +41,7 @@ export function* grantStatus(
   sharing = true,
 ): Resolution<void> {
   if (unit.health <= 0) return;
-  const stats = combat(unit),
+  const stats = ensureCombat(unit),
     before = stats[status];
   stats[status] = Math.min(status === "dodge" ? 70 : STACK_LIMIT, before + amount);
   const gain = stats[status] - before;
@@ -83,10 +89,10 @@ export function* removeControlBuildup(
   status: "stun" | "freeze",
   events: GameEvent[],
 ): Resolution<void> {
-  const stats = combat(unit);
+  const stats = ensureCombat(unit);
   if (stats[status] <= 0) return;
   const amount = stats[status];
-  stats[status] = 0;
+  clearHarmfulStatus(stats, status);
   events.push({
     kind: "status",
     targetId: unit.id,
@@ -106,7 +112,7 @@ export function* removeEffects(
   state?: GameState,
   onlyStatus?: (typeof harmfulStatuses)[number],
 ): Resolution<void> {
-  const stats = combat(unit);
+  const stats = ensureCombat(unit);
   let depletion: ArmorDepletion | null = null;
   let cleansed = 0;
   const removedStatuses: NonNullable<import("../types").StatusEvent["affectedStatus"]>[] = [];
@@ -137,11 +143,8 @@ export function* removeEffects(
     (!onlyStatus || onlyStatus === stats.controlled)
   ) {
     removedStatuses.push(stats.controlled);
-    stats.controlled = null;
-    stats.controlTurns = 0;
+    cleanseControl(stats);
     cleansed++;
-    stats.skipped = false;
-    stats.cooldown = 3;
     count--;
   }
   for (const status of statuses)
@@ -156,12 +159,9 @@ export function* removeEffects(
       )
         stats[status] = false;
       else if (status === "armor") depletion = removeArmor(unit, stats.armor).depletion;
-      else stats[status] = 0;
-      if (kind === "cleanse") {
-        cleansed++;
-        delete stats.statusSources[status as "burn" | "poison" | "bleed"];
-      }
-      if (status === "bleed") stats.bleedLeech = [];
+      else if (status === "thorns" || status === "waterThorns" || status === "dodge") stats[status] = 0;
+      else clearHarmfulStatus(stats, status);
+      if (kind === "cleanse") cleansed++;
       count--;
       removedStatuses.push(
         status === "reflectBurn" ? "reflect" : status === "nullifyFreeze" ? "nullify" : status,
@@ -194,7 +194,7 @@ export function* cleanseRewards(
   cleansed: number,
   events: GameEvent[],
 ): Resolution<void> {
-  const stats = combat(unit);
+  const stats = ensureCombat(unit);
   if (!isEnemy(unit)) {
     if (hasTalent(state, "light.divine-favor")) stats.freeLight = true;
     const healing =
@@ -220,7 +220,7 @@ export function* applyHarmfulStatus(
     type !== "blind"
   )
     return { depletions: [], appliedControl: false, suppressed: false };
-  const stats = combat(target);
+  const stats = ensureCombat(target);
   const alliedSource = !isEnemy(source),
     alliedTarget = !isEnemy(target);
   let appliedControl = false;
@@ -307,17 +307,15 @@ export function* applyHarmfulStatus(
     });
   }
   if (type === "burn" || type === "poison" || type === "bleed") {
-    const beforeStacks = stats[type];
-    stats[type] = Math.min(STACK_LIMIT, stats[type] + damage);
-    stats.statusSources[type] = source.id;
-    if (type === "bleed" && options.leech) deferLeech(target, source, stats.bleed - beforeStacks);
+    const gained = addPeriodicStacks(stats, type, damage, source.id);
+    if (type === "bleed" && options.leech) deferLeech(stats, source.id, gained);
     events.push({
       kind: "status",
       targetId: target.id,
       status: type,
       outcome: "gain",
-      amount: stats[type] - beforeStacks,
-      text: `${unitName(target)} gains ${stats[type] - beforeStacks} ${type}.`,
+      amount: gained,
+      text: `${unitName(target)} gains ${gained} ${type}.`,
     });
   }
   if (
@@ -362,13 +360,12 @@ export function* applyHarmfulStatus(
         ? 0.4
         : 0.5);
     if (stats[type] >= threshold) {
-      stats[type] = 0;
-      stats.controlled = type;
-      stats.controlTurns =
+      const turns =
         (type === "stun" && alliedSource && hasTalent(state, "stun.extended-stun")) ||
         (type === "freeze" && alliedSource && !alliedTarget && state.boons.includes("frozen-pocketwatch"))
           ? 2
           : 1;
+      enterControl(stats, type, turns);
       appliedControl = true;
       if (alliedSource && !alliedTarget) {
         if (type === "freeze" && hasTalent(state, "freeze.icebound")) target.block = 0;
@@ -376,7 +373,7 @@ export function* applyHarmfulStatus(
           const { depletion } = removeArmor(target, stats.armor);
           if (depletion) depletions.push(depletion);
         }
-        if (type === "stun" && hasTalent(state, "stun.free-follow-up")) combat(source).freeCard = true;
+        if (type === "stun" && hasTalent(state, "stun.free-follow-up")) ensureCombat(source).freeCard = true;
         if (type === "stun" && hasTalent(state, "stun.stun-insight")) draw(state, 1, events);
         if (type === "stun" && hasTalent(state, "stun.stun-surge") && state.battle?.mana === 0)
           yield* reaction("gainMana", state, 1, events);

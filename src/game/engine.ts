@@ -11,7 +11,7 @@ import {
   cardKeywords,
   canBuyTalent,
 } from "./progression";
-import { combat, gainMana, restoreHealth, controlled } from "./combat/index";
+import { ensureCombat, gainMana, restoreHealth, controlled } from "./combat/index";
 import { battlefield } from "./battlefield";
 import { courtRemembers, removeDepartedMinions } from "./combat/legendary";
 import { fillHand, recycleDiscard } from "./card-zones";
@@ -266,9 +266,9 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
           draft.battleXP[keyword] = Math.min(1_000_000, (draft.battleXP[keyword] ?? 0) + 1);
         battle.mana -= cardCost(card, draft);
         const keywords = cardKeywords(card);
-        combat(actor).freeCard = false;
-        if (keywords.includes("nature")) combat(actor).freeNature = false;
-        if (keywords.includes("light")) combat(actor).freeLight = false;
+        ensureCombat(actor).freeCard = false;
+        if (keywords.includes("nature")) ensureCombat(actor).freeNature = false;
+        if (keywords.includes("light")) ensureCombat(actor).freeLight = false;
         if (keywords.includes("burn")) battle.freeBurnUsed = true;
         battle.hand.splice(battle.hand.indexOf(card.id), 1);
         if (!def.consume) battle.discard.push(card.id);

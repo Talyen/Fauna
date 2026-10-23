@@ -5,9 +5,10 @@ import { draw, drawKeyword } from "../card-zones";
 import { hasTalent, creaturePassive } from "../progression";
 import type { DamageType } from "../content";
 import type { GameEvent, GameState } from "../types";
-import { combat, unitName, deferLeech, STACK_LIMIT, gainGold, type Combatant } from "./state";
+import { ensureCombat, unitName, STACK_LIMIT, gainGold, type Combatant } from "./state";
 import { packetPolicy, type DamagePacket } from "./policy";
 import { reaction, type Resolution } from "./operations";
+import { reducePeriodicStacks, deferLeech, detonateBleedStacks, bleedPayments } from "./status-state";
 
 export interface HitContext {
   state: GameState;
@@ -25,7 +26,7 @@ export interface HitPayment {
   readonly critical: boolean;
 }
 export function* dodgeResponse({ state, source, target, events }: HitContext): Resolution<void> {
-  const stats = combat(target),
+  const stats = ensureCombat(target),
     alliedTarget = !isEnemy(target);
   events.push({
     kind: "status",
@@ -41,18 +42,7 @@ export function* dodgeResponse({ state, source, target, events }: HitContext): R
     if (hasTalent(state, "dodge.thornstep"))
       yield* reaction("grantStatus", target, "thorns", 1, events, state);
     if (hasTalent(state, "dodge.clean-getaway")) {
-      for (const status of ["burn", "poison", "bleed"] as const) {
-        stats[status] = Math.max(0, stats[status] - 1);
-        if (status === "bleed" && stats.bleedLeech.length) {
-          const payout = stats.bleedLeech[0]!;
-          payout.amount--;
-          if (!payout.amount) stats.bleedLeech.shift();
-        }
-        if (!stats[status]) {
-          delete stats.statusSources[status];
-          if (status === "bleed") stats.bleedLeech = [];
-        }
-      }
+      for (const status of ["burn", "poison", "bleed"] as const) reducePeriodicStacks(stats, status, 1);
     }
     if (hasTalent(state, "dodge.open-flank")) stats.nextPhysical = 2;
     if (hasTalent(state, "dodge.unburdened")) {
@@ -66,7 +56,7 @@ export function* dodgeResponse({ state, source, target, events }: HitContext): R
     if (hasTalent(state, "bleed.parting-cut")) stats.partingCut = true;
     if (hasTalent(state, "physical.riposte")) stats.riposte = true;
     if (hasTalent(state, "nature.windstep")) stats.freeNature = true;
-    if (hasTalent(state, "burn.smoke-screen") && combat(source).burn > 0)
+    if (hasTalent(state, "burn.smoke-screen") && ensureCombat(source).burn > 0)
       yield* reaction("hit", state, target, source, 2, "burn", events, { origin: "proc" });
   }
   const cinderstep = creaturePassive(alliedTarget ? state : undefined, target.species).effects.reduce(
@@ -128,7 +118,7 @@ export function* damageRewards(
     { attack } = policy;
   const alliedSource = !isEnemy(source),
     alliedTarget = !isEnemy(target),
-    stats = combat(target);
+    stats = ensureCombat(target);
   if (
     target.health === 0 &&
     !alliedTarget &&
@@ -193,7 +183,7 @@ export function* attackProcs(
   },
   erode: (amount: number) => void,
 ): Resolution<void> {
-  const stats = combat(target);
+  const stats = ensureCombat(target);
   if (source.health > 0) {
     if (type === "nature" && hasTalent(state, "nature.bramblegrowth") && succeeds(state, 0.1, false, events))
       yield* reaction("grantStatus", source, "thorns", damage, events, state);
@@ -259,7 +249,7 @@ export function* attackProcs(
       (type === "poison" && proc("leech.virulent-leech", 0.1)) ||
       (type === "nature" && proc("nature.verdant-cycle", 0.1));
     if (chanceLeech && type === "bleed" && !leech) {
-      if (!suppressed) deferLeech(target, source, Math.max(0, stats.bleed - bleedBefore));
+      if (!suppressed) deferLeech(stats, source.id, Math.max(0, stats.bleed - bleedBefore));
     } else if (chanceLeech && !leech && !blessedLeech)
       yield* reaction("leechHealth", state, source, lost, events, stats.poison > 0 || stats.bleed > 0);
   }
@@ -268,7 +258,7 @@ export function* thornRetaliation(
   { state, source, target, events }: HitContext,
   lost: number,
 ): Resolution<void> {
-  const stats = combat(target);
+  const stats = ensureCombat(target);
   // Captured damage remains valid even if retaliation later removes the attacker.
   if (lost > 0 && target.health > 0) {
     for (const [status, type] of [
@@ -313,19 +303,13 @@ export function* detonateBleed(
   target: Combatant,
   events: GameEvent[],
 ): Resolution<void> {
-  const stats = combat(target);
+  const stats = ensureCombat(target);
   if (stats.bleed <= 0) return;
-  const bleed = stats.bleed;
-  const payouts = stats.bleedLeech;
-  stats.bleed = 0;
-  stats.bleedLeech = [];
-  delete stats.statusSources.bleed;
-  let remaining =
-    (yield* reaction("hit", state, source, target, bleed, "bleed", events, { origin: "periodic" })) ?? 0;
-  for (const payout of payouts) {
+  const { amount, payouts } = detonateBleedStacks(stats);
+  const lost =
+    (yield* reaction("hit", state, source, target, amount, "bleed", events, { origin: "periodic" })) ?? 0;
+  for (const payout of bleedPayments(payouts, lost)) {
     const owner = [...state.team, ...state.reserves].find((unit) => unit.id === payout.sourceId);
-    const paid = Math.min(remaining, payout.amount);
-    if (owner) yield* reaction("leechHealth", state, owner, paid, events, true);
-    remaining -= paid;
+    if (owner) yield* reaction("leechHealth", state, owner, payout.amount, events, true);
   }
 }

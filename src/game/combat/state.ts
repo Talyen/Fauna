@@ -1,5 +1,5 @@
 import { chance as succeeds } from "../chance";
-import { isEnemy, battlefield } from "../battlefield";
+import { isEnemy, isRosterCreature, battlefield } from "../battlefield";
 import { hasTalent, creaturePassive } from "../progression";
 import { species } from "../content";
 import type { CombatState, Creature, Enemy, GameEvent, GameState } from "../types";
@@ -45,7 +45,7 @@ export function freshCombat(): CombatState {
     statusSources: {},
   };
 }
-export function combat(unit: Combatant): CombatState {
+export function ensureCombat(unit: Combatant): CombatState {
   return unit.combat ?? (unit.combat = freshCombat());
 }
 export const maximumHealth = (unit: Combatant) =>
@@ -68,11 +68,10 @@ export function mostInjured<T extends Combatant>(units: readonly T[]): T | undef
 }
 export function loseHealth(state: GameState, unit: Combatant, amount: number, events: GameEvent[]) {
   const before = unit.health,
-    stats = combat(unit);
+    stats = ensureCombat(unit);
   unit.health = Math.max(0, before - amount);
   if (
-    !isEnemy(unit) &&
-    !("minion" in unit && unit.minion) &&
+    isRosterCreature(unit) &&
     unit.health === 0 &&
     before > 0 &&
     (!stats.deathDoorUsed || stats.grace > 0)
@@ -97,14 +96,6 @@ export const harmfulStatuses = ["burn", "poison", "bleed", "stun", "freeze", "bl
 export function hasHarmfulEffects(unit: Combatant): boolean {
   const stats = unit.combat;
   return !!stats && (!!stats.controlled || harmfulStatuses.some((status) => Number(stats[status]) > 0));
-}
-export function deferLeech(target: Combatant, source: Combatant, amount: number) {
-  const stats = combat(target);
-  const entry = stats.bleedLeech.find((payout) => payout.sourceId === source.id);
-  const available = Math.max(0, stats.bleed - stats.bleedLeech.reduce((sum, row) => sum + row.amount, 0));
-  const gained = Math.min(amount, available);
-  if (entry) entry.amount += gained;
-  else if (gained) stats.bleedLeech.push({ sourceId: source.id, amount: gained });
 }
 function ownDodgeChance(state: GameState, unit: Combatant): number {
   if (unit.health <= 0 || unit.combat?.controlled) return 0;
@@ -144,7 +135,7 @@ export function dodgeChance(state: GameState, target: Combatant): number {
 }
 export function grantTemporaryDodge(unit: Combatant, amount: number, events: GameEvent[]) {
   if (unit.health <= 0) return;
-  const stats = combat(unit),
+  const stats = ensureCombat(unit),
     before = stats.temporaryDodge;
   stats.temporaryDodge = Math.min(70, before + amount);
   const gained = stats.temporaryDodge - before;
@@ -160,14 +151,14 @@ export function grantTemporaryDodge(unit: Combatant, amount: number, events: Gam
 }
 /** One Blind roll owns the attack, including area targets and authored extra packets. */
 export function beginAttack(state: GameState, source: Combatant, events: GameEvent[] = []): boolean {
-  const stats = combat(source);
+  const stats = ensureCombat(source);
   if (!stats.blind) return false;
   stats.blind = false;
   return !succeeds(state, 0.5, isEnemy(source), events, true);
 }
 /** Capture once per attack so every area target receives the same opening bonus. */
 export function openingCriticalBonus(state: GameState, source: Combatant): number {
-  const stats = combat(source);
+  const stats = ensureCombat(source);
   if (stats.firstAttackUsed) return 0;
   stats.firstAttackUsed = true;
   return creaturePassive(isEnemy(source) ? undefined : state, source.species).effects.reduce(
@@ -182,7 +173,7 @@ export interface ArmorDepletion {
   delivered: boolean;
 }
 export function removeArmor(unit: Combatant, amount: number) {
-  const stats = combat(unit);
+  const stats = ensureCombat(unit);
   const before = stats.armor;
   const removed = Math.min(before, Math.max(0, amount));
   stats.armor -= removed;

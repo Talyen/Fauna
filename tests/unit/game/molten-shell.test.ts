@@ -1,7 +1,7 @@
 import { authoredPack, swapFixture } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
-import { combat, freshCombat, hit, removeEffects, tickStatuses } from "../../../src/game/combat/index";
+import { ensureCombat, freshCombat, hit, removeEffects, tickStatuses } from "../../../src/game/combat/index";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { creaturePassive } from "../../../src/game/progression";
@@ -33,9 +33,9 @@ it.each([1, 2, 3, 4, 5, 6])(
   "scales Molten Shell with %i collected copies and preserves the active tier across resume",
   (copies) => {
     const game = produce(battle(copies), (draft) => {
-      combat(draft.team[0]!).armor = 1;
-      combat(draft.team[0]!).controlled = "freeze";
-      combat(draft.team[0]!).controlTurns = 1;
+      ensureCombat(draft.team[0]!).armor = 1;
+      ensureCombat(draft.team[0]!).controlled = "freeze";
+      ensureCombat(draft.team[0]!).controlTurns = 1;
     });
     expect(creaturePassive(game, "emberback").description).toBe(
       `When your Armor breaks, deal ${copies} Burn damage to all enemies`,
@@ -64,13 +64,13 @@ it("requires an actual break, can trigger again after gaining new Armor, and nev
   produce(battle(), (draft) => {
     const unit = draft.team[0]!;
     const enemy = draft.battle!.enemies[0]!;
-    combat(unit).controlled = "freeze";
-    combat(unit).controlTurns = 1;
-    combat(unit).armor = 2;
+    ensureCombat(unit).controlled = "freeze";
+    ensureCombat(unit).controlTurns = 1;
+    ensureCombat(unit).armor = 2;
     hit(draft, enemy, unit, 2, "physical", events);
-    expect(combat(unit).armor).toBe(2);
+    expect(ensureCombat(unit).armor).toBe(2);
     hit(draft, enemy, unit, 3, "physical", events);
-    expect(combat(unit).armor).toBe(1);
+    expect(ensureCombat(unit).armor).toBe(1);
     expect(events.filter((event) => event.kind === "damage" && event.damageType === "burn")).toHaveLength(0);
     hit(draft, enemy, unit, 2, "physical", events);
     expect(
@@ -86,7 +86,7 @@ it("requires an actual break, can trigger again after gaining new Armor, and nev
           event.kind === "damage" && event.damageType === "burn",
       ),
     ).toHaveLength(3);
-    combat(unit).armor = 1;
+    ensureCombat(unit).armor = 1;
     removeEffects(unit, "purge", 1, events, draft);
     expect(
       events.filter(
@@ -94,8 +94,8 @@ it("requires an actual break, can trigger again after gaining new Armor, and nev
           event.kind === "damage" && event.damageType === "burn",
       ),
     ).toHaveLength(6);
-    combat(unit).armor = 1;
-    combat(unit).deathDoorUsed = true;
+    ensureCombat(unit).armor = 1;
+    ensureCombat(unit).deathDoorUsed = true;
     unit.health = 1;
     hit(draft, enemy, unit, 3, "physical", events);
     expect(unit.health).toBe(0);
@@ -128,8 +128,8 @@ it("keeps enemy Molten Shell at its base tier and excludes reserves", () => {
 it("does not activate Molten Shell when periodic damage breaks Armor after swapping into backup", () => {
   const game = produce(battle(6), (draft) => {
     draft.reserves.push({ ...draft.team[1]!, id: "backup-moss", combat: freshCombat() });
-    combat(draft.team[0]!).armor = 1;
-    combat(draft.team[0]!).burn = 1;
+    ensureCombat(draft.team[0]!).armor = 1;
+    ensureCombat(draft.team[0]!).burn = 1;
   });
   const swapped = swapFixture(game, { type: "swap", activeId: "ally-0", reserve: "backup-moss" });
   const events: GameEvent[] = [];
@@ -143,7 +143,7 @@ it("does not activate Molten Shell when periodic damage breaks Armor after swapp
 it("resolves opposing Molten Shells once each without a retaliation loop", () => {
   const events: GameEvent[] = [];
   const next = produce(battle(), (draft) => {
-    combat(draft.team[0]!).armor = 1;
+    ensureCombat(draft.team[0]!).armor = 1;
     const enemy = draft.battle!.enemies[0]!;
     enemy.combat.armor = 1;
     enemy.combat.controlled = "freeze";

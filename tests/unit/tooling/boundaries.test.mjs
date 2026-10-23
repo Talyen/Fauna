@@ -136,6 +136,7 @@ it("keeps combat continuations below public entry points and outside presentatio
     "src/game/combat/state.ts",
     "src/game/combat/policy.ts",
     "src/game/combat/damage-values.ts",
+    "src/game/combat/status-state.ts",
   ])
     expect(boundaryViolations(file, 'export * from "./resolution"')).toHaveLength(1);
   expect(
@@ -161,6 +162,7 @@ it("keeps extracted command helpers outside presentation", () => {
     "team",
     "combat/damage",
     "combat/damage-reactions",
+    "combat/status-state",
     "combat/protection",
     "combat/statuses",
     "combat/lifecycle",

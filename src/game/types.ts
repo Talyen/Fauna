@@ -2,42 +2,7 @@ import type { KeywordId } from "./keywords";
 import type { SpeciesId, DamageType, BoonId } from "./content";
 import type { Keyword } from "./progression";
 
-export interface CombatState {
-  controlTurns: number;
-  rhythm: number;
-  nextPhysical: number;
-  partingCut: boolean;
-  riposte: boolean;
-  freeNature: boolean;
-  freeLight: boolean;
-  freeCard: boolean;
-  reflect: boolean;
-  reflectBurn: boolean;
-  nullify: boolean;
-  nullifyFreeze: boolean;
-  cardsPlayedThisTurn: number;
-  encoreUsed: boolean;
-  firstAttackUsed: boolean;
-  desperateGuardUsed: boolean;
-  armor: number;
-  thorns: number;
-  waterThorns: number;
-  dodge: number;
-  temporaryDodge: number;
-  blind: boolean;
-  burn: number;
-  poison: number;
-  bleed: number;
-  stun: number;
-  freeze: number;
-  controlled: "stun" | "freeze" | null;
-  cooldown: number;
-  skipped: boolean;
-  deathDoorUsed: boolean;
-  grace: number;
-  statusSources: Partial<Record<"burn" | "poison" | "bleed", string>>;
-  bleedLeech: { sourceId: string; amount: number }[];
-}
+export type CombatState = import("zod").infer<typeof import("./state-schema").combatStateSchema>;
 export interface Creature {
   id: string;
   species: SpeciesId;

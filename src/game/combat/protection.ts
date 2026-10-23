@@ -5,7 +5,7 @@ import { hasTalent, creaturePassive } from "../progression";
 
 import type { GameEvent, GameState } from "../types";
 import {
-  combat,
+  ensureCombat,
   maximumHealth,
   unitName,
   mostInjured,
@@ -144,7 +144,7 @@ export function* grantArmor(
 ): Resolution<void> {
   if (unit.health <= 0 || amount <= 0) return;
   const allied = !isEnemy(unit),
-    before = combat(unit).armor;
+    before = ensureCombat(unit).armor;
   if (allied) {
     if (hasTalent(state, "armor.last-stand") && unit.health < maximumHealth(unit) / 2) amount *= 1.25;
     if (hasTalent(state, "armor.reinforced") && succeeds(state, 0.1, false, events)) amount *= 2;
@@ -152,7 +152,7 @@ export function* grantArmor(
   yield* reaction("grantStatus", unit, "armor", Math.round(amount), events, state);
   if (
     allied &&
-    combat(unit).armor > before &&
+    ensureCombat(unit).armor > before &&
     hasTalent(state, "armor.purification") &&
     succeeds(state, 0.1, false, events)
   )
@@ -196,7 +196,7 @@ export function* healthThresholds(
   before: number,
   events: GameEvent[],
 ): Resolution<void> {
-  const stats = combat(unit);
+  const stats = ensureCombat(unit);
   if (!isEnemy(unit) && unit.health > 0) {
     if (before >= maximumHealth(unit) / 2 && unit.health < maximumHealth(unit) / 2) {
       if (hasTalent(state, "armor.steadfast")) yield* reaction("grantArmor", state, unit, 3, events);
