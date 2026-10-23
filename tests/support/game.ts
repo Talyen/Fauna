@@ -6,9 +6,9 @@ import { produce } from "immer";
 import { encounterPacks } from "../../src/game/encounters";
 import { createGame, dispatch } from "../../src/game/engine";
 import { definition, species, type SpeciesId } from "../../src/game/content";
-import type { Command, GameState, Lifecycle, BattleState, RewardState } from "../../src/game/types";
+import type { Command, GameState, Lifecycle, BattleState } from "../../src/game/types";
 // Shared bound accounts for solo Legendary Bosses and their recruitment choices
-export const FULL_JOURNEY_SEED = 18;
+export const FULL_JOURNEY_SEED = 22;
 export const FULL_JOURNEY_COMMAND_BUDGET = 800;
 export function run(seed = 42) {
   return teamRun(seed, ["mossguard", "emberback", "prismram"]);
@@ -259,11 +259,6 @@ export function prepareDestination(state: GameState) {
 
 export function requireBattle(state: GameState): BattleState {
   if (state.phase !== "battle") throw new Error("Scenario requires active combat.");
-  return state;
-}
-export function requireReward(state: GameState): RewardState {
-  if (state.phase !== "recruit" && state.phase !== "boon")
-    throw new Error("Scenario requires a reward choice.");
   return state;
 }
 

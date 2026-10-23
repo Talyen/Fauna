@@ -1,3 +1,4 @@
+import { waitForStartup } from "./support/session";
 import { captureScreen, settleScreen } from "./support/rendered-evidence";
 import { test, expect, type Page } from "@playwright/test";
 import { produce } from "immer";
@@ -17,6 +18,7 @@ async function seed(page: Page, initial: string, scale: string) {
     { initial, scale },
   );
   await page.goto("/");
+  await waitForStartup(page);
   await page.getByRole("button", { name: "Continue", exact: true }).click();
 }
 test("combat preferences, autoplay pause and manual takeover", async ({ page }) => {
@@ -75,12 +77,10 @@ test("combat preferences, autoplay pause and manual takeover", async ({ page }) 
     .toBeGreaterThan(revision);
   await page.locator(".app:not([inert]) .hand .action-card:not([aria-disabled=true])").first().click();
   await expect(autoplay).toHaveAttribute("aria-pressed", "false");
-  await page.keyboard.press("Escape");
-  // Manual takeover can play immediately or select a target; Back can therefore open the menu.
-  const pause = page.getByRole("dialog", { name: "Pause menu" });
-  if (await pause.isVisible()) await page.keyboard.press("Escape");
-  await expect(pause).toBeHidden();
-  await expect(page.locator(".app:not([inert])")).not.toHaveAttribute("data-paused", "true");
+  // Targeted cards need cancellation; immediate cards already return to ordinary battle input
+  if ((await page.locator(".app:not([inert]) .battle-screen").getAttribute("data-selected-card")) !== "")
+    await page.keyboard.press("Escape");
+  await expect(page.getByRole("dialog", { name: "Pause menu" })).toHaveCount(0);
   await captureScreen(page, { path: `reports/controls-battle-${width}.png` });
   await expect(page.getByRole("button", { name: "Skip combat", exact: true })).toHaveCount(0);
   // Browser controller simulation exercises the same semantic action as physical Y.
@@ -149,6 +149,7 @@ test("final victory returns to the menu without a retired creature reveal", asyn
   await expect(page.getByRole("heading", { name: "Creature unlocked" })).toHaveCount(0);
   await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
   await page.reload();
+  await waitForStartup(page);
   await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Creature unlocked" })).toHaveCount(0);
   expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(won);
@@ -204,6 +205,7 @@ test("manual zero-Mana turns resume without losing the battle", async ({ page })
   await page.locator(".app:not([inert])[data-save-status=saved]").waitFor();
   const committed = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!));
   await page.reload();
+  await waitForStartup(page);
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
   expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(committed);

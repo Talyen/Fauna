@@ -3,6 +3,10 @@ import { createGame } from "../../../src/game/engine";
 import type { GameState } from "../../../src/game/types";
 
 export const key = "fauna.save.v1";
+export async function waitForStartup(page: Page) {
+  await expect(page.locator("#startup-splash")).toHaveCount(0, { timeout: 30000 });
+  await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
+}
 export async function seed(page: Page, game = createGame(7)) {
   const initial = page.url() === "about:blank";
   const data = JSON.stringify(game);
@@ -28,7 +32,7 @@ export async function seed(page: Page, game = createGame(7)) {
     );
     await page.reload();
   }
-  await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
+  await waitForStartup(page);
 }
 
 export async function saved(page: Page) {
@@ -41,5 +45,6 @@ export async function state(page: Page): Promise<GameState> {
 }
 
 export async function resume(page: Page) {
+  await waitForStartup(page);
   await page.getByRole("button", { name: "Continue", exact: true }).click();
 }

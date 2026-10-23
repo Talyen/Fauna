@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { produce } from "immer";
 import { species, BOONS } from "../../src/game/content";
 import { accept, winBattle, run, bossReward } from "../support/game";
-import { key, seed, saved, state, resume } from "./support/session";
+import { key, seed, saved, state, resume, waitForStartup } from "./support/session";
 import { continueToRecruit } from "./support/journey";
 
 test("last mana saves the full turn before immediate close and does not replay on resume", async ({
@@ -71,6 +71,7 @@ test("rewards resume without duplicate XP, currency, recruitment or boons", asyn
 
 test("corrupt saves recover backups and all-invalid saves continue silently", async ({ page }) => {
   await page.goto("/");
+  await waitForStartup(page);
   await page.evaluate(
     ({ key, game }) => {
       localStorage.setItem(key, "broken");
@@ -79,6 +80,7 @@ test("corrupt saves recover backups and all-invalid saves continue silently", as
     { key, game: JSON.stringify(run()) },
   );
   await page.reload();
+  await waitForStartup(page);
   await expect(page.getByRole("button", { name: "Continue", exact: true })).toBeVisible();
   await resume(page);
   await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
@@ -93,6 +95,7 @@ test("corrupt saves recover backups and all-invalid saves continue silently", as
     localStorage.setItem(key, "broken");
   }, key);
   await page.reload();
+  await waitForStartup(page);
   await expect(page.getByRole("alert")).toHaveCount(0);
   await expect(page.getByRole("button", { name: "Play", exact: true })).toBeVisible();
 });
@@ -105,9 +108,11 @@ test("fresh fixture seeding preserves init preferences and never resets a later 
   expect(await page.evaluate(() => localStorage.getItem("fauna.text-scale"))).toBe("1.25");
   await seed(page, run(8));
   await page.reload();
+  await waitForStartup(page);
   expect(await state(page)).toEqual(run(8));
   await page.evaluate(() => localStorage.clear());
   await page.reload();
+  await waitForStartup(page);
   await expect(page.getByRole("button", { name: "Play", exact: true })).toBeVisible();
   await expect(page.getByRole("button", { name: "Continue", exact: true })).toHaveCount(0);
 });

@@ -1,4 +1,4 @@
-import { chooseBattleCommand } from "../../../src/application/battle-policy";
+import { createBattleActor } from "../../../src/application/battle-actor";
 import { freshCombat } from "../../../src/game/combat/index";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
@@ -237,6 +237,7 @@ describe("journey earnings and results", () => {
 });
 
 it("completes the one-starter recruitment path through the final boss within the browser journey budget", () => {
+  const actor = createBattleActor();
   const initial = createGame(FULL_JOURNEY_SEED);
   let game = accept(accept(initial, { type: "draft", species: initial.starterOffers[0]! }), {
     type: "start",
@@ -254,7 +255,7 @@ it("completes the one-starter recruitment path through the final boss within the
               game.reward!.recruits.find((kind) => !game.roster.includes(kind)) ?? game.reward!.recruits[0]!,
           }
         : game.phase === "battle"
-          ? chooseBattleCommand(game)
+          ? actor.choose(game).command
           : policy(game);
     game = accept(game, command);
   }

@@ -175,7 +175,7 @@ async function capture(browser, url, scenario, measured, native = false, cold = 
       await page.goto(url);
     }
     page.setDefaultTimeout(15000);
-    await page.getByRole("button", { name: "Continue", exact: true }).waitFor();
+    await page.getByRole("button", { name: "Continue", exact: true }).waitFor({ timeout: 30000 });
     const startupMs = performance.now() - launched;
     if (scenario.id !== "menus" && scenario.id !== "startup")
       await page.getByRole("button", { name: "Continue", exact: true }).click();

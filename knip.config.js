@@ -2,6 +2,7 @@
 export default {
   entry: [
     "src/ui/styles.css", // Tailwind is consumed through stylesheet imports, not JavaScript.
+    "src/ui/startup/splash.css", // The HTML shell loads this before JavaScript starts.
     "desktop/preload.cjs",
     "desktop/after-pack.cjs",
     "desktop/steam-worker.cjs",

@@ -292,46 +292,54 @@ it("discovers and recruits Chimecricket into the normal roster", () => {
   expect(decodeSave(encodeSave(game))).toEqual(game);
 });
 
-it.each(["Resonant Leap", "Hush Dome", "Lullaby Drift"])(
-  "enemy %s uses base Encore and the correct side",
-  (name) => {
-    let found = false;
-    for (let seed = 0; seed < 2000 && !found; seed++) {
-      const game = produce(ready("chimecricket-nullify", seed), (draft) => {
-        draft.discovery.recruited.chimecricket = 6;
-        const enemies = draft.battle!.enemies;
-        enemies[0]!.species = "chimecricket";
-        enemies[0]!.name = "Chimecricket";
-        // Enemy selection uses the first roll, Encore the second
-        for (const unit of draft.team) unit.block = 100;
-        enemies[1]!.health = 8;
-        enemies[1]!.combat.blind = true;
-        enemies[1]!.combat.controlled = "freeze";
-        enemies[1]!.combat.controlTurns = 1;
-        enemies[2]!.health = 0;
-      });
-      const a = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
-      const b = (Math.imul(a, 1664525) + 1013904223) >>> 0;
-      const result = dispatch(game, { type: "endTurn" });
-      if (!result.events.some((e) => e.actorId === "enemy-0" && e.text.includes(`uses ${name}`))) continue;
-      const repeats = result.events.some((e) => e.actorId === "enemy-0" && e.text.includes("with Encore"));
-      expect(repeats).toBe(b / 4294967296 < 0.1);
-      if (!repeats) continue;
-      if (name === "Resonant Leap") {
-        expect(result.events.filter((e) => e.kind === "damage" && e.actorId === "enemy-0")).toHaveLength(2);
-      } else if (name === "Hush Dome") {
-        expect(result.state.battle!.enemies.map((e) => e.combat.nullify)).toEqual([true, true, false]);
-        expect(result.state.team.every((e) => !e.combat!.nullify)).toBe(true);
-      } else {
-        expect(
-          result.events.filter((e) => e.kind === "heal" && e.targetId === "enemy-1" && e.amount === 4),
-        ).toHaveLength(2);
-        expect(result.state.battle!.enemies[1]!.combat.blind).toBe(false);
-        expect(result.state.battle!.enemies[1]!.combat.controlled).toBeNull();
-      }
-      found = true;
+// Fixed checkpoints cover base-tier successes and misses below the player's maximum Encore chance
+it.each([
+  ["Resonant Leap", 0, false],
+  ["Resonant Leap", 8, true],
+  ["Hush Dome", 252, false],
+  ["Hush Dome", 251, true],
+  ["Lullaby Drift", 1112, false],
+  ["Lullaby Drift", 1122, true],
+] as const)(
+  "enemy %s uses base Encore and the correct side at seed %s (repeat: %s)",
+  (name, seed, repeats) => {
+    const game = produce(ready("chimecricket-nullify", seed), (draft) => {
+      draft.discovery.recruited.chimecricket = 6;
+      const enemies = draft.battle!.enemies;
+      enemies[0]!.species = "chimecricket";
+      enemies[0]!.name = "Chimecricket";
+      for (const unit of draft.team) unit.block = 100;
+      enemies[1]!.health = 8;
+      enemies[1]!.combat.blind = true;
+      enemies[1]!.combat.controlled = "freeze";
+      enemies[1]!.combat.controlTurns = 1;
+      enemies[2]!.health = 0;
+    });
+    const result = dispatch(game, { type: "endTurn" });
+    expect(result.accepted).toBe(true);
+    expect(
+      result.events.some((event) => event.actorId === "enemy-0" && event.text.includes(`uses ${name}`)),
+    ).toBe(true);
+    expect(
+      result.events.some((event) => event.actorId === "enemy-0" && event.text.includes("with Encore")),
+    ).toBe(repeats);
+    const resolutions = repeats ? 2 : 1;
+    if (name === "Resonant Leap") {
+      expect(
+        result.events.filter((event) => event.kind === "damage" && event.actorId === "enemy-0"),
+      ).toHaveLength(resolutions);
+    } else if (name === "Hush Dome") {
+      expect(result.state.battle!.enemies.map((enemy) => enemy.combat.nullify)).toEqual([true, true, false]);
+      expect(result.state.team.every((ally) => !ally.combat!.nullify)).toBe(true);
+    } else {
+      expect(
+        result.events.filter(
+          (event) => event.kind === "heal" && event.targetId === "enemy-1" && event.amount === 4,
+        ),
+      ).toHaveLength(resolutions);
+      expect(result.state.battle!.enemies[1]!.combat.blind).toBe(false);
+      expect(result.state.battle!.enemies[1]!.combat.controlled).toBeNull();
     }
-    expect(found).toBe(true);
   },
 );
 

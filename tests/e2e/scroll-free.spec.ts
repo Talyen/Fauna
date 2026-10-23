@@ -7,7 +7,7 @@ import { run } from "../support/game";
 import { SPECIES } from "../../src/game/content";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { expectScrollFree, layoutViolations, LAYOUT_CASES } from "./support/layout-contract";
-import { state } from "./support/session";
+import { state, waitForStartup } from "./support/session";
 import { expectBattleGeometry } from "./support/battle-layout";
 import { captureScreen, settleScreen } from "./support/rendered-evidence";
 import { snapshot, cloudName } from "../../src/application/cloud";
@@ -60,6 +60,7 @@ for (const [width, height] of [
       { identity, files, save: encodeSave(run(7)) },
     );
     await page.goto("/");
+    await waitForStartup(page);
     await expect(page.getByRole("button", { name: "Continue", exact: true })).toBeVisible();
     await expect(page.getByRole("alert")).toHaveCount(0);
     await captureScreen(page, { path: `reports/scroll-free/cloud-${width}.png` });
@@ -101,6 +102,7 @@ for (const [width, height, scale] of LAYOUT_CASES) {
         { save, scale },
       );
       await page.goto("/");
+      await waitForStartup(page);
       await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
     });
 
@@ -241,6 +243,7 @@ for (const [width, height, scale] of LAYOUT_CASES) {
           await expectScrollFree(page);
           // The fixture's init script restores this same hand and text preferences on reload.
           await page.reload();
+          await waitForStartup(page);
           await page.getByRole("button", { name: "Continue", exact: true }).click();
         }
       }

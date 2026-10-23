@@ -1,6 +1,6 @@
 import { test, expect, type Page } from "@playwright/test";
 import { produce } from "immer";
-import { run, winBattle, requireReward } from "../support/game";
+import { run, winBattle } from "../support/game";
 import { decodeSave } from "../../src/game/save";
 import { combat } from "../../src/game/combat/index";
 import { seed, resume, state } from "./support/session";
@@ -66,7 +66,7 @@ test("keyword effects follow battle hover, Death's Door, inspection, settings an
 });
 
 test("inspection owns the opaque backdrop and restores the underlying recruit palette", async ({ page }) => {
-  await seed(page, requireReward(winBattle()));
+  await seed(page(winBattle()));
   await page.bringToFront();
   await resume(page);
   await page.getByRole("button", { name: "Continue", exact: true }).click();

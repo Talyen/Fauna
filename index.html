@@ -3,15 +3,73 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#101b18" />
+    <meta name="theme-color" content="#080807" />
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'"
     />
     <title>Fauna</title>
+    <link rel="stylesheet" href="/src/ui/startup/splash.css" />
+    <link
+      rel="preload"
+      href="/node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <script data-startup-preferences></script>
   </head>
   <body>
+    <div id="startup-splash" role="status" aria-label="Loading Fauna" aria-busy="true">
+      <h1 class="startup-title" aria-hidden="true">
+        <span class="startup-leaves">
+          <img
+            class="startup-leaf"
+            data-startup-leaf="green"
+            alt=""
+            width="12"
+            height="16"
+            style="--leaf-delay: -0.2s; --leaf-y: -90px; --leaf-turn: 0deg; --leaf-scale: 1"
+          />
+          <img
+            class="startup-leaf"
+            data-startup-leaf="gold"
+            alt=""
+            width="12"
+            height="16"
+            style="--leaf-delay: -0.75s; --leaf-y: -76px; --leaf-turn: 63deg; --leaf-scale: 0.72"
+          />
+          <img
+            class="startup-leaf"
+            data-startup-leaf="green"
+            alt=""
+            width="12"
+            height="16"
+            style="--leaf-delay: -1.425s; --leaf-y: -62px; --leaf-turn: 126deg; --leaf-scale: 1"
+          />
+          <img
+            class="startup-leaf"
+            data-startup-leaf="gold"
+            alt=""
+            width="12"
+            height="16"
+            style="--leaf-delay: -2.025s; --leaf-y: -48px; --leaf-turn: 189deg; --leaf-scale: 0.72"
+          />
+          <img
+            class="startup-leaf"
+            data-startup-leaf="green"
+            alt=""
+            width="12"
+            height="16"
+            style="--leaf-delay: -2.35s; --leaf-y: -34px; --leaf-turn: 252deg; --leaf-scale: 1"
+          />
+        </span>
+        <span class="startup-logo-base">Fauna</span>
+        <span class="startup-logo-fill"><span class="startup-logo-fill-text">Fauna</span></span>
+      </h1>
+      <p id="startup-splash-phrase" aria-hidden="true">Adventure awaits…</p>
+    </div>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="/src/startup.ts"></script>
   </body>
 </html>

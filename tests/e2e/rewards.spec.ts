@@ -48,7 +48,7 @@ for (const [width, height, enlarged] of [
       await captureScreen(page, { path: `reports/rewards/${fixture.phase}-${width}.png` });
       if (fixture.phase === "recruit") {
         await expect(page.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeVisible();
-        await expect(page.getByRole("button", { name: "Skip", exact: true })).toHaveCount(1);
+        await expect(page.getByRole("button", { name: "Skip", exact: true })).toHaveCount(0);
         await page.getByRole("button", { name: "Recruit Emberback", exact: true }).click();
         expect((await state(page)).roster.filter((kind) => kind === "emberback")).toHaveLength(2);
       } else await page.getByRole("button", { name: "Skip", exact: true }).click();

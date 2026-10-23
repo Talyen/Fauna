@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { run } from "../support/game";
-import { seed, state, resume } from "./support/session";
+import { seed, state, resume, waitForStartup } from "./support/session";
 
 test("settings and glossary return to the pause menu; End journey immediately shows results", async ({
   page,
@@ -61,6 +61,7 @@ test("shadcn tabs and settings retain native keyboard behavior and game navigati
   await page.keyboard.press("Escape");
   await expect(page.getByRole("button", { name: "Settings", exact: true })).toBeFocused();
   await page.reload();
+  await waitForStartup(page);
   await page.getByRole("button", { name: "Settings", exact: true }).click();
   await expect(page.getByRole("radio", { name: "125%", exact: true })).toBeChecked();
   await page.getByRole("tab", { name: "Sound", exact: true }).click();

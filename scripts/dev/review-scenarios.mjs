@@ -92,7 +92,8 @@ export async function openReviewScenario(page, origin, scenario, scale) {
     { save: scenario.save, scale },
   );
   await page.goto(origin);
-  await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible({ timeout: 30000 });
+  await expect(page.locator("#startup-splash")).toHaveCount(0);
   const button = (name) => page.getByRole("button", { name, exact: true });
   const menu = scenario.name === "talent-tree" ? "talents" : scenario.name.split("-")[0];
   if (["settings", "collection", "talents", "glossary"].includes(menu)) {
