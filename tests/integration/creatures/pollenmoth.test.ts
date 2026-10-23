@@ -99,15 +99,17 @@ it("uses seeded random targets and gives identical previews without consuming li
   expect(rejected.state.rng).toBe(game.rng);
 });
 
-it("protects living deployed allies and never reserves or knockouts", () => {
+it.each(["backup", "knockout"] as const)("protects living deployed allies without buffing %s", (excluded) => {
   const game = produce(ready("pollenmoth-teamGuard"), (draft) => {
-    draft.team[2]!.health = 0;
-    draft.reserves.push({ ...draft.team[1]!, id: "reserve" });
-    draft.roster.push("mossguard");
+    if (excluded === "knockout") draft.team[2]!.health = 0;
+    else {
+      draft.reserves.push({ ...draft.team[1]!, id: "reserve" });
+      draft.roster.push("mossguard");
+    }
   });
   const next = accept(game, { type: "play", cardId: game.battle!.hand[0]!, autoEndTurn: false });
   expect(next.team.map((ally) => ally.block)).toEqual(
-    game.team.map((ally, index) => ally.block + (index < 2 ? 2 : 0)),
+    game.team.map((ally) => ally.block + (ally.health > 0 ? 2 : 0)),
   );
   expect(next.reserves).toEqual(game.reserves);
 });
