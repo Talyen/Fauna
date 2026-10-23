@@ -8,7 +8,7 @@ import type { BattleState, Command, GameState, RewardState } from "../../../src/
 
 // Compare gameplay, RNG and ordered output across the current journey rules.
 function fingerprint(state: GameState, events: unknown) {
-  const { version: _version, unlocked: _unlocked, roster: _roster, lineup: _lineup, battle, ...rest } = state;
+  const { version: _version, battle, ...rest } = state;
   const projected = {
     ...rest,
     journey: state.journey
@@ -72,7 +72,7 @@ describe("journey lifecycle behavior baseline", () => {
         step({ type: "buyBoon", visit: visit.id, slot: slot.slot });
         step({ type: "leaveSupport", visit: visit.id });
       }
-      if (state.expedition?.recruit && state.roster.length < 5)
+      if (state.expedition?.recruit && state.team.length + state.reserves.length < 5)
         step({ type: "recruitDestination", species: state.expedition.recruit });
       step({ type: "beginBattle" });
       const command = chooseBattleCommand(state, false);
@@ -92,7 +92,7 @@ describe("journey lifecycle behavior baseline", () => {
         });
       }
       if (state.phase === "recruit" && state.reward.selectedRecruit !== undefined)
-        step({ type: "confirmRecruit", replace: state.lineup[0]! });
+        step({ type: "confirmRecruit", replace: state.team.map((unit) => unit.id)[0]! });
       if (state.phase === "boon") step({ type: "chooseBoon", boon: state.reward!.boons[0]! });
       if (state.phase === "victory" || state.phase === "defeat") break;
       state = produce(state, (draft) => {

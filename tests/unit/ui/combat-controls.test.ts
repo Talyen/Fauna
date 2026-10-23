@@ -3,11 +3,8 @@ import { produce } from "immer";
 import { dispatch, previewCard } from "../../../src/game/engine";
 import { encodeSave, decodeSave } from "../../../src/game/save";
 import { chooseBattleCommand } from "../../../src/application/battle-policy";
-import { createSession } from "../../../src/application/session";
-import { observeUnlocks } from "../../../src/ui/expedition/unlock-reveals";
 import { scheduleAutoplay } from "../../../src/ui/battle/autoplay";
 import {
-  authoredPack,
   prepareDestination,
   accept,
   run,
@@ -127,48 +124,5 @@ describe("combat controls", () => {
     cancel();
     callback();
     expect(action).not.toHaveBeenCalled();
-  });
-  it("does not reveal a retired victory unlock or replay completed checkpoints", async () => {
-    const starting = accept(
-      produce(run(), (d) => {
-        d.journey = { outcome: null, victories: 7, currency: 0, xp: {}, unlocks: [], lastBattle: null };
-        d.encounter = 7;
-        d.journey!.victories = d.encounter;
-        prepareDestination(d);
-        d.expedition = { pack: authoredPack(d.encounter), recruit: null, lastRoom: null };
-      }),
-      { type: "beginBattle" },
-    );
-    const platform = {
-      desktop: false,
-      steam: { available: false },
-      saves: {
-        readCandidates: async () => [{ source: "primary" as const, data: encodeSave(starting) }],
-        write: async () => {},
-      },
-    };
-    expect(decodeSave(encodeSave(starting))).toEqual(starting);
-    const session = createSession(platform, 1, { development: true });
-    await session.load();
-    const reveal = vi.fn();
-    const stop = observeUnlocks(session, reveal);
-    expect(session.command({ type: "devWinBattle" })).toBe(true);
-    expect(reveal).not.toHaveBeenCalled();
-    const completed = encodeSave(session.store.getState().game);
-    stop();
-    await session.dispose();
-    const restored = createSession({
-      ...platform,
-      saves: {
-        ...platform.saves,
-        readCandidates: async () => [{ source: "primary" as const, data: completed }],
-      },
-    });
-    const replay = vi.fn();
-    const cleanup = observeUnlocks(restored, replay);
-    await restored.load();
-    expect(replay).not.toHaveBeenCalled();
-    cleanup();
-    await restored.dispose();
   });
 });

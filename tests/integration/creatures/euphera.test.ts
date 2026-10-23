@@ -128,12 +128,12 @@ it("purges both Thorns pools before the chosen enemy can retaliate, retaining ot
     nullify: true,
     poison: 2,
   });
-  expect(result.events.filter((event) => event.kind === "damage")).toEqual([
-    expect.objectContaining({ targetId: "enemy-0", damageType: "light", amount: 5 }),
-  ]);
-  expect(result.events.findIndex((event) => event.status === "purge")).toBeLessThan(
-    result.events.findIndex((event) => event.kind === "damage"),
-  );
+  expect(
+    result.events.filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage"),
+  ).toEqual([expect.objectContaining({ targetId: "enemy-0", damageType: "light", amount: 5 })]);
+  expect(
+    result.events.findIndex((event) => event.kind === "status" && event.status === "purge"),
+  ).toBeLessThan(result.events.findIndex((event) => event.kind === "damage"));
 });
 
 it("purges on a missed Lance without removing other enemies' Thorns", () => {

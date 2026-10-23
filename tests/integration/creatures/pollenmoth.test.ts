@@ -54,7 +54,9 @@ it.each([1, 2, 3, 4, 5, 6])("resolves tier %i damage bounces without revisits or
     draft.rng = 1;
     hit(draft, draft.team[0]!, draft.battle!.enemies[0]!, 3, "light", events);
   });
-  const damage = events.filter((event) => event.kind === "damage");
+  const damage = events.filter(
+    (event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage",
+  );
   expect(damage.length).toBe(copies === 1 ? 2 : copies === 2 ? 2 : 3);
   expect(new Set(damage.map((event) => event.targetId)).size).toBe(damage.length);
   expect(damage.every((event) => event.amount === 3)).toBe(true);
@@ -70,7 +72,9 @@ it.each([1, 2, 3, 4, 5, 6])("resolves tier %i healing bounces including self", (
   });
   const result = dispatch(game, { type: "play", cardId: game.battle!.hand[0]!, autoEndTurn: false });
   expect(result.accepted).toBe(true);
-  const heals = result.events.filter((event) => event.kind === "heal");
+  const heals = result.events.filter(
+    (event): event is Extract<GameEvent, { kind: "heal" }> => event.kind === "heal",
+  );
   expect(heals.length).toBe(copies < 4 ? 1 : copies === 4 ? 2 : 3);
   expect(heals[0]!.targetId).toBe("ally-0");
   expect(new Set(heals.map((event) => event.targetId)).size).toBe(heals.length);
@@ -104,7 +108,6 @@ it.each(["backup", "knockout"] as const)("protects living deployed allies withou
     if (excluded === "knockout") draft.team[2]!.health = 0;
     else {
       draft.reserves.push({ ...draft.team[1]!, id: "reserve" });
-      draft.roster.push("mossguard");
     }
   });
   const next = accept(game, { type: "play", cardId: game.battle!.hand[0]!, autoEndTurn: false });
@@ -122,7 +125,9 @@ it("does not bounce healing to healthy allies or consume RNG without eligible re
   const next = produce(game, (draft) => {
     restoreHealth(draft.team[0]!, 3, events, false, draft, true, draft.team[0]!);
   });
-  expect(events.filter((event) => event.kind === "heal")).toHaveLength(1);
+  expect(
+    events.filter((event): event is Extract<GameEvent, { kind: "heal" }> => event.kind === "heal"),
+  ).toHaveLength(1);
   expect(next.rng).toBe(game.rng);
 });
 
@@ -134,7 +139,9 @@ it("honors the probabilistic healing tier and stops damage bounces after actor k
     });
   });
   const result = dispatch(game, { type: "play", cardId: game.battle!.hand[0]!, autoEndTurn: false });
-  expect(result.events.filter((event) => event.kind === "heal")).toHaveLength(1);
+  expect(
+    result.events.filter((event): event is Extract<GameEvent, { kind: "heal" }> => event.kind === "heal"),
+  ).toHaveLength(1);
   const events: GameEvent[] = [];
   produce(ready("pollenmoth-attack", 6), (draft) => {
     draft.team[0]!.health = 1;
@@ -143,7 +150,12 @@ it("honors the probabilistic healing tier and stops damage bounces after actor k
     draft.rng = 1;
     hit(draft, draft.team[0]!, draft.battle!.enemies[0]!, 3, "light", events);
   });
-  expect(events.filter((event) => event.kind === "damage" && event.actorId === "ally-0")).toHaveLength(1);
+  expect(
+    events.filter(
+      (event): event is Extract<GameEvent, { kind: "damage" }> =>
+        event.kind === "damage" && event.actorId === "ally-0",
+    ),
+  ).toHaveLength(1);
 });
 
 it("discovers and recruits Pollenmoth with its complete kit", () => {
@@ -179,7 +191,9 @@ it.each([
     draft.rng = seed;
     hit(draft, draft.team[0]!, draft.battle!.enemies[0]!, 3, "light", events);
   });
-  expect(events.filter((event) => event.kind === "damage")).toHaveLength(count);
+  expect(
+    events.filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage"),
+  ).toHaveLength(count);
 });
 
 it("uses the enemy's base bounce tier against allies regardless of collected stars", () => {
@@ -210,5 +224,10 @@ it("uses the enemy's base bounce tier against allies regardless of collected sta
     });
     hit(draft, enemy, draft.team[0]!, 1, "light", events);
   });
-  expect(events.filter((event) => event.kind === "damage" && event.actorId === "enemy-0")).toHaveLength(2);
+  expect(
+    events.filter(
+      (event): event is Extract<GameEvent, { kind: "damage" }> =>
+        event.kind === "damage" && event.actorId === "enemy-0",
+    ),
+  ).toHaveLength(2);
 });

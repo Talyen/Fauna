@@ -6,7 +6,6 @@ import { ShellOverlays } from "./overlays";
 import { routeInput } from "./input";
 import { useActivationAudio } from "../audio/activation-audio";
 import { useDisplayPreferences } from "../settings/display-preferences";
-import { UnlockScreen } from "../expedition/unlock-screen";
 import { HomeScreen } from "../menu/home-screen";
 import { GlossaryScreen } from "../menu/glossary-screen";
 import { MenuActions, type MenuPage } from "../menu/menu-actions";
@@ -17,13 +16,12 @@ import { Loading } from "../shared/loading";
 import { SupportScreen } from "../expedition/support-screen";
 import { KEYWORDS, availablePoints } from "../../game/progression";
 import { useAutoplay } from "../battle/autoplay";
-import { observeUnlocks } from "../expedition/unlock-reveals";
 import { Campfire } from "../expedition/campfire";
 import { Settings } from "../settings/settings";
 import { useAudioPreferences } from "../settings/audio-preferences";
 import { useGameAudio } from "../audio/game-audio";
 import { JourneyResults } from "../expedition/journey-results";
-import { useCallback, useEffect, useEffectEvent, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useReducer, useRef, useState } from "react";
 import { useStore } from "zustand";
 import { flushSync } from "react-dom";
 import { Menu, Repeat, Pause, FastForward } from "lucide-react";
@@ -39,12 +37,12 @@ import { Rewards } from "../expedition/rewards";
 import { Talents } from "../talents/talents";
 import { Collection } from "../collection/collection";
 
-import { isAvailableFocusTarget, returnFocus } from "../shared/navigation/focus";
+import { activeSurface, initialNavigation, shellNavigation } from "./navigation";
+import { useShellFocus } from "./focus";
 import { useCombatFeedback } from "../battle/combat-feedback";
 import type { Command } from "../../game/types";
-import type { SpeciesId } from "../../game/content";
 import "../battle/mana-crystals.css";
-import type { Route, Modal } from "./types";
+import type { Modal } from "./types";
 export function GameShell({ session, desktop = false }: { session: Session; desktop?: boolean }) {
   const view = useStore(session.store),
     game = view.game;
@@ -56,18 +54,14 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
     collectionControls: Controls = useRef(null);
   const effectPreferences = useEffectPreferences();
   const [draftStarted, setDraftStarted] = useState(false);
-  const [route, setRoute] = useState<Route>("home"),
-    [menu, setMenu] = useState(false),
-    [modal, setModal] = useState<Modal>(null),
-    [modalInstance, setModalInstance] = useState(0),
-    [menuInstance, setMenuInstance] = useState(0),
-    [inspection, setInspection] = useState<Inspection | null>(null);
+  const [navigationState, transition] = useReducer(shellNavigation, initialNavigation);
+  const { route } = navigationState.page;
+  const { menuInstance, modalInstance } = navigationState;
   const menuGeneration = useRef(0);
-  const showMenu = useCallback(() => {
-    // Reopening during an exit fade needs a fresh focus scope and revokes the old return callback.
-    setMenuInstance(++menuGeneration.current);
-    setMenu(true);
-  }, []);
+  const showMenu = useCallback(
+    () => transition({ type: "openPause", instance: ++menuGeneration.current }),
+    [],
+  );
   const [mode, setMode] = useState<"pointer" | "keyboard" | "controller">("pointer");
   const [navigation, setNavigation] = useState(false);
   const [audioPreferences, updateAudioPreferences] = useAudioPreferences();
@@ -75,27 +69,31 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
   useActivationAudio(playSound);
   const { scale, setScale, tooltipScale, setTooltipScale, autoEndTurn, setAutoEndTurn } =
     useDisplayPreferences();
-  const origin = useRef<Route>("home"),
-    pauseOpener = useRef<HTMLElement | null>(null),
-    modalOpener = useRef<HTMLElement | null>(null);
   const active =
     !["victory", "defeat"].includes(game.phase) &&
     (game.team.length > 0 || game.selected.length > 0 || (game.phase === "draft" && draftStarted));
-  const [pendingUnlocks, setPendingUnlocks] = useState<SpeciesId[]>([]);
-  const [reveals, setReveals] = useState<SpeciesId[]>([]);
-  useEffect(
-    () => observeUnlocks(session, (ids) => setPendingUnlocks((old) => [...new Set([...old, ...ids])])),
-    [session],
-  );
   const replacement = pendingReplacement(game);
-  const paused =
-    !!replacement ||
-    view.overlayActive ||
-    view.cloud.blocking ||
-    route !== "play" ||
-    menu ||
-    modal !== null ||
-    inspection !== null;
+  const surface = activeSurface(navigationState, !!replacement, view.overlayActive || view.cloud.blocking);
+  const { modal, menu, inspection, paused } = surface;
+  const focus = useShellFocus({
+    root,
+    route,
+    obscured: !!modal || !!inspection,
+    menu,
+    ready: view.ready,
+    pointer: mode === "pointer",
+    phase: game.phase,
+    blocking: view.cloud.blocking,
+    status: view.cloud.status,
+    generation: menuGeneration,
+    instance: menuInstance,
+  });
+  const inspect = useCallback(
+    (item: Inspection | null) => transition(item ? { type: "inspect", item } : { type: "closeInspection" }),
+    [],
+  );
+  const closeDialog = () => transition({ type: "closeDialog" });
+  const closePause = () => transition({ type: "closePause" });
   const [autoplay, setAutoplay] = useAutoplay(session, paused, autoEndTurn);
   useEffect(() => {
     if (route !== "play") setAutoplay(false);
@@ -119,13 +117,7 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
     },
     [session, autoEndTurn, setAutoplay],
   );
-  const leaveResults = () => {
-    const remaining = [...new Set([...reveals, ...pendingUnlocks])];
-    setReveals(remaining);
-    setPendingUnlocks([]);
-    setRoute(remaining.length ? "unlocks" : "home");
-  };
-  const menuReturnLabel = useRef<string | null>(null);
+  const leaveResults = () => transition({ type: "home" });
   const menuAnchor = useRef({
     getBoundingClientRect: () =>
       root.current
@@ -133,39 +125,23 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
         ?.getBoundingClientRect() ?? new DOMRect(),
   });
   const openMenu = () => {
-    pauseOpener.current = document.activeElement as HTMLElement | null;
+    focus.rememberPauseOpener();
     showMenu();
   };
-  const openModal = (next: Modal) => {
-    if (menu) menuReturnLabel.current = document.activeElement?.textContent ?? null;
-    modalOpener.current = document.activeElement as HTMLElement | null;
-    // Reopening during an exit fade needs a fresh Radix focus scope.
-    setModalInstance((instance) => instance + 1);
-    setModal(next);
+  const openModal = (next: NonNullable<Modal>) => {
+    focus.rememberDialogOpener(menu);
+    transition({ type: "openDialog", modal: next });
   };
-  const navigate = (next: MenuPage) => {
-    origin.current = menu ? "play" : route;
-    // Menu pages unmount their opener; retain its label for the recreated menu.
-    menuReturnLabel.current = {
-      talents: "Talents",
-      collection: "Collection",
-      settings: "Settings",
-      glossary: "Glossary",
-    }[next];
-    setMenu(false);
-    setRoute(next);
+  const navigate = (page: MenuPage) => {
+    focus.rememberAction(page);
+    transition({ type: "openMenuPage", page });
   };
-  const backFromPage = () => {
-    setRoute(origin.current);
-    if (origin.current === "play") showMenu();
-  };
+  const backFromPage = () => transition({ type: "backFromPage", instance: ++menuGeneration.current });
   useEffect(
     () =>
       session.store.subscribe((current, previous) => {
         if (!current.cloud.blocking || previous.cloud.blocking) return;
-        setModal(null);
-        setInspection(null);
-        setMenu(false);
+        transition({ type: "externalBlock" });
         setAutoplay(false);
       }),
     [session, setAutoplay],
@@ -188,9 +164,10 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
       gameControls,
       paused,
       game,
-      setInspection,
-      setModal,
-      setMenu,
+      inspect,
+      closeDialog,
+      closePause,
+      surface: surface.top,
       backFromPage,
       openMenu,
     });
@@ -226,34 +203,6 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
       else document.documentElement.dataset.focus = previousFocus;
     };
   }, [session.store]);
-  const focusScreen = useEffectEvent(() => {
-    if (!view.ready || menu || modal || inspection || (route === "play" && mode === "pointer")) return;
-    const buttons = Array.from(
-      root.current?.querySelectorAll<HTMLElement>("main button:not(:disabled)") ?? [],
-    ).filter((el) => el.getClientRects().length > 0);
-    if (route === "home" && menuReturnLabel.current) {
-      const opener = buttons.find(
-        (el) => (el.getAttribute("aria-label") ?? el.textContent) === menuReturnLabel.current,
-      );
-      menuReturnLabel.current = null;
-      if (opener) {
-        opener.focus();
-        return;
-      }
-    }
-    if (route === "settings") {
-      root.current
-        ?.querySelector<HTMLElement>('.settings-screen [role="tab"][aria-selected="true"]')
-        ?.focus();
-      return;
-    }
-    // Screen transitions must not replace focus the player already moved onto the new screen.
-    if (buttons.includes(document.activeElement as HTMLElement)) return;
-    (buttons.find((el) => el.classList.contains("primary-menu-action")) ?? buttons[0])?.focus();
-  });
-  useLayoutEffect(() => {
-    focusScreen();
-  }, [route, game.phase, view.ready, view.cloud.blocking, view.cloud.status]);
   if (!view.ready)
     return (
       <Screen className="loading">
@@ -270,40 +219,29 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
       closing={view.closing}
       onContinue={() => {
         if (!home || active) {
-          setRoute("play");
-          setMenu(false);
+          transition({ type: "play" });
         } else if (send({ type: "newRun", seed: Date.now() >>> 0 })) {
           setDraftStarted(true);
-          setRoute("play");
-          setMenu(false);
+          transition({ type: "play" });
         }
       }}
       onBoons={() => openModal("boons")}
       onNavigate={navigate}
       onEndJourney={() => {
         if (send({ type: "abandon" })) {
-          menuReturnLabel.current = null;
+          focus.rememberAction(null);
           setDraftStarted(false);
-          setMenu(false);
-          setRoute(game.phase === "draft" ? "home" : "play");
+          transition({ type: game.phase === "draft" ? "home" : "play" });
         }
       }}
-      onHome={() => {
-        setMenu(false);
-        if (["victory", "defeat"].includes(game.phase)) leaveResults();
-        else setRoute("home");
-      }}
+      onHome={() => transition({ type: "home" })}
       onQuit={() => void session.quit()}
     />
   );
   return (
     <EffectScope name={route}>
       <EffectsScene
-        scope={
-          inspection
-            ? "inspection"
-            : (modal ?? (replacement && route === "play" && !menu ? "replacement" : menu ? "menu" : route))
-        }
+        scope={surface.scope}
         scene={
           route === "play"
             ? game.phase === "draft"
@@ -324,7 +262,11 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
         token={`${route}:${game.phase}`}
         battle={route === "play" && game.phase === "battle"}
       >
-        <Popover modal open={menu && !modal && !inspection} onOpenChange={setMenu}>
+        <Popover
+          modal
+          open={surface.top === "pause"}
+          onOpenChange={(open) => (open ? showMenu() : closePause())}
+        >
           <PopoverAnchor virtualRef={menuAnchor} />
           <div
             ref={root}
@@ -344,18 +286,6 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
             {!view.cloud.blocking ? (
               <>
                 {route === "home" ? <HomeScreen>{menuItems(true)}</HomeScreen> : null}
-                {route === "unlocks" && reveals[0] ? (
-                  <UnlockScreen
-                    game={game}
-                    kind={reveals[0]}
-                    inspect={setInspection}
-                    onHome={() => setRoute("home")}
-                    onContinue={() => {
-                      setReveals((old) => old.slice(1));
-                      if (reveals.length === 1) setRoute("home");
-                    }}
-                  />
-                ) : null}
                 {route === "talents" ? (
                   <Talents game={game} send={send} openMenu={backFromPage} controls={talentControls} />
                 ) : null}
@@ -364,7 +294,7 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                     game={game}
                     controls={collectionControls}
                     openMenu={backFromPage}
-                    inspect={setInspection}
+                    inspect={inspect}
                   />
                 ) : null}
                 {route === "glossary" ? <GlossaryScreen back={backFromPage} /> : null}
@@ -394,7 +324,7 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                   <div className="play-surface" hidden={route !== "play"} inert={route !== "play"}>
                     <HeaderNavigation.Provider
                       value={{
-                        back: () => setRoute("home"),
+                        back: () => transition({ type: "home" }),
                         openMenu,
                         deck: ["draft", "teamSelection", "recruit", "boon", "support", "campfire"].includes(
                           game.phase,
@@ -438,12 +368,12 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                         </Button>
                       ) : null}
                       {game.phase === "draft" ? (
-                        <Draft game={game} send={send} inspect={setInspection} />
+                        <Draft game={game} send={send} inspect={inspect} />
                       ) : game.phase === "teamSelection" ? (
                         <TeamSelection
                           game={game}
                           send={send}
-                          inspect={setInspection}
+                          inspect={inspect}
                           recovery={view.committedCommand?.type === "rest" ? view.events : undefined}
                         />
                       ) : game.phase === "support" ? (
@@ -453,14 +383,7 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                       ) : game.phase === "battle" ? (
                         <BattleScreen
                           key={game.encounter}
-                          clearSelection={
-                            view.overlayActive ||
-                            menu ||
-                            modal !== null ||
-                            inspection !== null ||
-                            autoplay ||
-                            !!replacement
-                          }
+                          clearSelection={surface.clearSelection || autoplay}
                           onManualStart={() => setAutoplay(false)}
                           openPile={(pile) => openModal(pile)}
                           openingDraw={view.committedCommand?.type === "beginBattle"}
@@ -477,7 +400,7 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                           key={`${game.encounter}-${game.phase}`}
                           game={game}
                           send={send}
-                          inspect={setInspection}
+                          inspect={inspect}
                         />
                       ) : (
                         <JourneyResults game={game} home={leaveResults} />
@@ -497,35 +420,8 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                 key={menuInstance}
                 className="menu-panel"
                 aria-label="Pause menu"
-                onOpenAutoFocus={(event) => {
-                  const label = menuReturnLabel.current;
-                  if (!label) return;
-                  menuReturnLabel.current = null;
-                  const opener = Array.from(
-                    (event.currentTarget as HTMLElement).querySelectorAll<HTMLButtonElement>("button"),
-                  ).find((button) => (button.getAttribute("aria-label") ?? button.textContent) === label);
-                  if (opener) {
-                    event.preventDefault();
-                    opener.focus();
-                  }
-                }}
-                onCloseAutoFocus={(event) => {
-                  event.preventDefault();
-                  if (menuGeneration.current !== menuInstance || modal || inspection) return;
-                  if (route === "play") returnFocus(pauseOpener.current);
-                  else {
-                    // A page may already have focused a deeper destination during the exit fade.
-                    const focused = document.activeElement as HTMLElement | null;
-                    if (focused !== document.body && isAvailableFocusTarget(focused)) return;
-                    returnFocus(
-                      root.current?.querySelector<HTMLElement>(
-                        route === "settings"
-                          ? '.settings-screen [role="tab"][aria-selected="true"]'
-                          : "main button:not(:disabled)",
-                      ) ?? null,
-                    );
-                  }
-                }}
+                onOpenAutoFocus={focus.openMenuFocus}
+                onCloseAutoFocus={focus.closeMenuFocus}
               >
                 <EffectScope name="menu">
                   <nav className="pause-menu-choices" aria-label="Pause menu">
@@ -538,15 +434,15 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
               modal={modal}
               modalInstance={modalInstance}
               menu={menu}
-              modalOpener={modalOpener}
+              modalOpener={focus.modalOpener}
               game={game}
               send={send}
-              setModal={setModal}
+              closeDialog={closeDialog}
               inspection={inspection}
-              setInspection={setInspection}
+              inspect={inspect}
               session={session}
               inspectionControls={inspectionControls}
-              route={route}
+              surface={surface.top}
             />
           </div>
         </Popover>

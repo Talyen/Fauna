@@ -17,7 +17,7 @@ import { shuffle, roll } from "./random";
 import { draw, drawKeyword } from "./card-zones";
 import { bossEncounter, encounterSource, finalEncounter, generateEncounterPack } from "./encounters";
 import type { GameEvent, GameState, Lifecycle, BattleState, RewardState, StateAt } from "./types";
-import { rebuildCards, prepareLineup } from "./team";
+import { rebuildCards } from "./team";
 const OPTIONAL_DESTINATION_CHANCE = 0.25;
 
 export function offerStarters(state: GameState) {
@@ -33,7 +33,7 @@ export function offerStarters(state: GameState) {
   state.starterOffers = Array.from({ length: 3 }, (_, index) => shuffled[index % shuffled.length]!);
 }
 function prepareEncounter(state: GameState) {
-  const route = state.expedition!;
+  const route = state.expedition;
   route.pack = generateEncounterPack(state);
   const prices = merchantPriceRange(state);
   const kind =
@@ -41,7 +41,9 @@ function prepareEncounter(state: GameState) {
       ? "merchant"
       : null;
   route.recruit =
-    route.lastRoom !== "recruit" && state.roster.length < 5 && roll(state) < OPTIONAL_DESTINATION_CHANCE
+    route.lastRoom !== "recruit" &&
+    state.team.length + state.reserves.length < 5 &&
+    roll(state) < OPTIONAL_DESTINATION_CHANCE
       ? SPECIES.filter((entry) => !entry.legendary)[
           Math.floor(roll(state) * SPECIES.filter((entry) => !entry.legendary).length)
         ]!.id
@@ -82,9 +84,6 @@ export function beginBattle(state: StateAt<"teamSelection">, events: GameEvent[]
   const encounter = encounterSource(state);
   for (const enemy of encounter.enemies)
     if (!state.discovery.encountered.includes(enemy.species)) state.discovery.encountered.push(enemy.species);
-  const all = [...state.team, ...state.reserves];
-  state.team = state.lineup.map((id) => all.find((c) => c.id === id)!);
-  state.reserves = all.filter((c) => !state.lineup.includes(c.id));
   rebuildCards(state);
   for (const c of [...state.team, ...state.reserves]) {
     c.combat = freshCombat();
@@ -266,9 +265,9 @@ export function afterRewards(state: RewardState) {
 }
 function advanceEncounter(state: BattleState | RewardState) {
   state.encounter++;
-  if (state.expedition) prepareEncounter(state);
+  prepareEncounter(state);
   enterDestination(state);
-  prepareLineup(state);
+  rebuildCards(state);
 }
 
 /** Only complete lifecycle payloads cross this synchronous draft mutation boundary. */
@@ -299,12 +298,12 @@ export function startJourney(state: StateAt<"draft">) {
     reward: null,
     support: null,
     expedition: state.expedition,
-    journey: { outcome: null, victories: 0, currency: 0, xp: {}, unlocks: [], lastBattle: null },
+    journey: { outcome: null, victories: 0, currency: 0, xp: {}, lastBattle: null },
   });
-  if (state.expedition) prepareEncounter(state);
+  prepareEncounter(state);
 }
 export function enterMerchant(state: StateAt<"teamSelection">) {
-  if (!state.support || !state.expedition) throw new Error("Missing Merchant visit.");
+  if (!state.support) throw new Error("Missing Merchant visit.");
   enterPhase(state, { ...state, phase: "support", support: state.support, expedition: state.expedition });
 }
 export function leaveMerchant(state: StateAt<"support">) {
@@ -314,7 +313,6 @@ export function leaveMerchant(state: StateAt<"support">) {
   enterDestination(state);
 }
 export function enterCampfire(state: StateAt<"teamSelection">) {
-  if (!state.expedition) throw new Error("Missing Campfire route.");
   enterPhase(state, { ...state, phase: "campfire", expedition: state.expedition });
 }
 export function leaveCampfire(state: StateAt<"campfire">) {
@@ -322,7 +320,7 @@ export function leaveCampfire(state: StateAt<"campfire">) {
   enterDestination(state);
 }
 export function returnHome(state: Exclude<GameState, StateAt<"draft" | "victory" | "defeat">>) {
-  if (state.expedition) state.expedition.recruit = null;
+  state.expedition.recruit = null;
   bankBattleXP(state);
   clearCombat(state);
   enterPhase(state, {

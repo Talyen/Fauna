@@ -143,7 +143,7 @@ export async function runJourney(
         bundle.battles.push({
           encounter: before.encounter,
           turns: before.battle!.turn,
-          roster: before.roster,
+          roster: [...before.team, ...before.reserves].map((unit) => unit.species),
           outcome: after.phase === "defeat" ? "defeat" : "victory",
         });
       if (
@@ -162,7 +162,7 @@ export async function runJourney(
           actions: index + 1,
           currency: after.currency,
           xp: after.keywordXP,
-          roster: after.roster,
+          roster: [...after.team, ...after.reserves].map((unit) => unit.species),
         });
         if (bundle.results.length >= config.runs) {
           bundle.complete = true;

@@ -1,5 +1,5 @@
 {
-  "version": 52,
+  "version": 53,
   "discovery": {
     "encountered": [
       "reedstag",
@@ -28,36 +28,9 @@
   },
   "revision": 5000,
   "rng": 726000974,
-  "unlocked": [
-    "rookhaven",
-    "cadenza",
-    "stillara",
-    "neradora",
-    "sternshell",
-    "wickwaltz",
-    "mossguard",
-    "emberback",
-    "pollenmoth",
-    "prismram",
-    "captoad",
-    "dunefox",
-    "reedstag",
-    "cindernewt",
-    "coralcurl",
-    "chimecricket",
-    "dawncall",
-    "bloomquail",
-    "ringpalm",
-    "shadebrim",
-    "glintstride",
-    "memento",
-    "euphera",
-    "tournelle"
-  ],
   "wins": 0,
   "selected": ["reedstag"],
   "starterOffers": [],
-  "roster": ["prismram", "captoad", "cadenza", "prismram", "bloomquail"],
   "team": [
     {
       "id": "recruit-19",
@@ -277,7 +250,6 @@
       }
     }
   ],
-  "lineup": ["recruit-19"],
   "cards": [
     {
       "id": "recruit-415:prismram-attack",
@@ -551,7 +523,6 @@
       "armor": 11,
       "light": 24
     },
-    "unlocks": [],
     "lastBattle": null
   },
   "expedition": {

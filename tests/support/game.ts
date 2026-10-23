@@ -30,7 +30,7 @@ export function teamRun(seed: number, kinds: SpeciesId[]) {
       encountered: [...new Set(kinds)],
       recruited: Object.fromEntries(kinds.map((kind) => [kind, 1])),
     };
-    d.roster = [...kinds];
+
     d.team = kinds.map((kind, i) => ({
       id: `ally-${i}`,
       species: kind,
@@ -39,7 +39,7 @@ export function teamRun(seed: number, kinds: SpeciesId[]) {
       combat: freshCombat(),
       attacked: false,
     }));
-    d.lineup = d.team.map((c) => c.id);
+
     d.cards = d.team.flatMap((c) => ownedCards(c.id, c.species));
     prepareDestination(d);
     d.encounter = 2;
@@ -91,9 +91,8 @@ export function fullRosterReward(state = winBattle()) {
   if (state.phase !== "recruit") throw new Error("Expected a Recruit reward");
   return produce(state, (draft) => {
     const kinds = ["pollenmoth", "prismram"] as const;
-    for (let index = 0; draft.roster.length < 5; index++) {
+    for (let index = 0; draft.team.length + draft.reserves.length < 5; index++) {
       const kind = kinds[index % kinds.length]!;
-      draft.roster.push(kind);
       draft.reserves.push({
         id: `reward-reserve-${index}`,
         species: kind,
@@ -250,7 +249,6 @@ export function prepareDestination(state: GameState) {
     journey: {
       currency: state.journey?.currency ?? 0,
       xp: state.journey?.xp ?? {},
-      unlocks: [],
       outcome: null,
       victories: state.encounter,
       lastBattle: null,

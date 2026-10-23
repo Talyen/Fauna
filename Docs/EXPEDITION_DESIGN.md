@@ -18,7 +18,7 @@ These are the agreed directions from the design review. They supersede the proto
 - If the deployed row falls, remaining enemy attacks stop and the next player turn begins with restored Mana. A required replacement choice brings in living backup. Defeat requires the whole roster to fall.
 - Knocked-out card slots remain inert in saved battle zones and are skipped by ordinary draws. When the entire deployed row falls, the next hand reserves slots for incoming creatures so recovery does not require a free extra draw. These slots never render as playable cards for knocked-out owners.
 - Victory preserves roster Health and knockouts. The next battle deploys the saved current formation; combat effects reset.
-- Recruitment at five banks Collection progress before a team confirmation step. Players may replace one creature or keep the original roster; replacing a starting creature updates that individual’s lineup entry.
+- Recruitment at five banks Collection progress before a team confirmation step. Players may replace one creature or keep the original roster; replacing a deployed creature updates the saved team directly.
 
 ## Encounters
 
@@ -93,7 +93,7 @@ See [UI design system](UI.md) for composition and interaction rules.
 
 ## Turn and combat foundation
 
-Each turn normally restores four shared Mana and draws four cards, with explicit talent and Boon modifiers. The hand holds six cards; FIFO overflow persists across turns. Block halves rather than clearing. Creatures share Alchemy's core packet, status and crowd-control rules through the [keyword contract](KEYWORDS.md), with no elemental reactions. Their individual effects persist while in backup and cannot be refreshed by swaps. Ordinary enemies use a species repertoire without immediate repeats; enemy Legendaries cycle their own cards. Neither shows the next ability. Draw and discard piles are inspectable without revealing draw order or changing gameplay.
+Leaving results returns directly home. All species are available to encounter and recruit; Collection and later starter eligibility depend on actual recruitment. Reopening results grants no new progress.
 
 ## Combat assistance
 
@@ -101,7 +101,7 @@ Auto-end turn is enabled by default and advances only when Mana reaches zero. It
 
 Auto-play is explicitly enabled for one battle. It uses visible information to choose legal recovery swaps, healing, finishing attacks, other attacks and useful defenses, then ends turns when no useful play remains. Actions occur no faster than every 700 ms. Menus, inspection, focus loss and hidden pages pause it; manual play stops it. Rewards, encounters, recruitment and talents always remain player choices. It stops on completion, home navigation and shutdown; save retries remain independent of combat assistance.
 
-Leaving newly completed results opens each newly unlocked creature's portrait and inspectable kit before Main menu. The reveal grants no progress and does not repeat when loading an existing completed journey. Results otherwise retain the earnings-only design.
+Leaving results returns directly home. All species are available to encounter and recruit; Collection and later starter eligibility depend on actual recruitment. Reopening results grants no new progress.
 
 Development builds add a Skip combat icon beside the battle menu and Auto-play controls. It settles a normal victory with normal rewards and only XP already earned by actual plays; roster Health is preserved. It is unavailable in production and rejects repeated settlement.
 

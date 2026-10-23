@@ -68,8 +68,10 @@ it.each(["burn", "poison", "bleed", "stun", "freeze"] as const)(
     expect(result.battle!.enemies.map((enemy) => enemy.health)).toEqual(
       ready().battle!.enemies.map((enemy) => enemy.health),
     );
-    expect(events.filter((event) => event.kind === "damage")).toHaveLength(1);
-    expect(events.filter((event) => event.status === "reflect")).toHaveLength(1);
+    expect(
+      events.filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage"),
+    ).toHaveLength(1);
+    expect(events.filter((event) => event.kind === "status" && event.status === "reflect")).toHaveLength(1);
     if (["burn", "poison", "bleed"].includes(type)) {
       expect(recipients[0]!.combat.statusSources[type as "burn" | "poison" | "bleed"]).toBe("ally-0");
       expect(recipients[0]!.combat.bleedLeech).toEqual([]);
@@ -222,7 +224,6 @@ it("refreshes one Ward, preserves it through swaps and turn changes, and resets 
       health: 24,
       combat: freshCombat(),
     });
-    draft.roster.push("emberback");
   });
   game = accept(game, { type: "play", cardId: game.battle!.hand[0]!, autoEndTurn: false });
   expect(game.team[0]!.combat!.reflect).toBe(true);
@@ -236,7 +237,6 @@ it("refreshes one Ward, preserves it through swaps and turn changes, and resets 
       health: 24,
       combat: freshCombat(),
     });
-    draft.roster.push("emberback");
     draft.battle!.enemies.forEach((enemy) => {
       enemy.combat.controlled = "freeze";
       enemy.combat.controlTurns = 2;

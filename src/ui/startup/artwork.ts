@@ -51,7 +51,7 @@ export function immediateArtwork(game: GameState) {
     case "teamSelection":
       if (canVisitMerchant(game)) ids.add("location.silken-clearing");
       if (canVisitCampfire(game)) ids.add("location.ember-grove");
-      if (canRecruitDestination(game)) creature(game.expedition!.recruit!);
+      if (canRecruitDestination(game)) creature(game.expedition.recruit!);
       if (bossEncounter(game)) creature(encounterSource(game).enemies[0]!.species);
       else ids.add("encounter.combat");
       break;

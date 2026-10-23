@@ -1,3 +1,4 @@
+import type { ShellSurface } from "./navigation";
 import { EffectScope } from "../shared/effects/effects";
 import type { RefObject } from "react";
 import type { Session } from "../../application/session";
@@ -11,7 +12,7 @@ import { Inspector } from "../inspection/inspection";
 import type { Inspection } from "../shared/inspection-model";
 import type { Controls } from "../shared/navigation/input";
 import { returnFocus } from "../shared/navigation/focus";
-import type { Route, Modal } from "./types";
+import type { Modal } from "./types";
 interface ShellOverlaysProps {
   modal: Modal;
   modalInstance: number;
@@ -19,12 +20,12 @@ interface ShellOverlaysProps {
   modalOpener: RefObject<HTMLElement | null>;
   game: GameState;
   send: (command: Command) => boolean;
-  setModal: (value: Modal) => void;
+  closeDialog: () => void;
   inspection: Inspection | null;
-  setInspection: (value: Inspection | null) => void;
+  inspect: (value: Inspection | null) => void;
   session: Session;
   inspectionControls: Controls;
-  route: Route;
+  surface: ShellSurface;
 }
 export function ShellOverlays({
   modal,
@@ -33,12 +34,12 @@ export function ShellOverlays({
   modalOpener,
   game,
   send,
-  setModal,
+  closeDialog,
   inspection,
-  setInspection,
+  inspect,
   session,
   inspectionControls,
-  route,
+  surface,
 }: ShellOverlaysProps) {
   const replacement = pendingReplacement(game);
   return (
@@ -48,7 +49,7 @@ export function ShellOverlays({
         key={`modal-${modalInstance}`}
         open={modal !== null}
         onOpenChange={(open) => {
-          if (!open) setModal(null);
+          if (!open) closeDialog();
         }}
       >
         <DialogContent
@@ -83,7 +84,7 @@ export function ShellOverlays({
             {modal === "deck" || modal === "draw" || modal === "discard" ? (
               <DeckCards
                 game={game}
-                inspect={game.phase === "battle" ? undefined : setInspection}
+                inspect={game.phase === "battle" ? undefined : inspect}
                 pile={modal === "deck" ? undefined : modal}
               />
             ) : modal === "boons" ? (
@@ -95,12 +96,12 @@ export function ShellOverlays({
               item={inspection}
               session={session}
               controls={inspectionControls}
-              onClose={() => setInspection(null)}
+              onClose={() => inspect(null)}
             />
           ) : null}
         </DialogContent>
       </Dialog>
-      {replacement && route === "play" && !menu && !modal && !inspection ? (
+      {replacement && surface === "replacement" ? (
         <Dialog key={replacement.id} open>
           <DialogContent
             className="swap-dialog"
@@ -139,7 +140,7 @@ export function ShellOverlays({
           item={inspection}
           session={session}
           controls={inspectionControls}
-          onClose={() => setInspection(null)}
+          onClose={() => inspect(null)}
         />
       ) : null}
     </>

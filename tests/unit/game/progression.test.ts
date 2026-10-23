@@ -1,11 +1,11 @@
 import {
+  prepareDestination,
   swapFixture,
   completeRecruitment,
   teamRun,
   accept,
   run,
   winBattle,
-  policy,
   bossReward,
 } from "../../support/game";
 import { freshCombat } from "../../../src/game/combat/index";
@@ -98,7 +98,7 @@ describe("keyword progression and rewards", () => {
     let s = winBattle();
     expect(dispatch(s, { type: "recruit", species: "prismram" }).accepted).toBe(false);
     s = accept(s, { type: "recruit", species: "emberback" });
-    expect(s.roster).toContain("emberback");
+    expect([...s.team, ...s.reserves].map((unit) => unit.species)).toContain("emberback");
     expect(s.team.map((c) => c.species)).toEqual(["mossguard", "emberback", "prismram"]);
     expect(decodeSave(encodeSave(s))).toEqual(s);
     s = swapFixture(s, {
@@ -116,7 +116,6 @@ describe("keyword progression and rewards", () => {
   it("confirms either deployed or reserved replacements after committing recruitment", () => {
     for (const replace of ["ally-0", "recruit-pollenmoth"] as const) {
       let s = produce(winBattle(), (d) => {
-        d.roster.push("pollenmoth", "prismram");
         d.reserves = ["pollenmoth", "prismram"].map((kind) => ({
           id: `recruit-${kind}`,
           species: kind as "pollenmoth" | "prismram",
@@ -132,9 +131,9 @@ describe("keyword progression and rewards", () => {
       expect(dispatch(s, { type: "confirmRecruit", replace: "emberback" }).accepted).toBe(false);
       const released = [...s.team, ...s.reserves].find((c) => c.id === replace)!.species;
       s = accept(s, { type: "confirmRecruit", replace });
-      expect(s.roster).toHaveLength(5);
+      expect([...s.team, ...s.reserves].map((unit) => unit.species)).toHaveLength(5);
       expect(new Set([...s.team, ...s.reserves].map((c) => c.id)).size).toBe(5);
-      expect(s.roster).not.toContain(released);
+      expect([...s.team, ...s.reserves].map((unit) => unit.species)).not.toContain(released);
       expect(decodeSave(encodeSave(s))).toEqual(s);
     }
     const s = winBattle();
@@ -172,9 +171,6 @@ describe("keyword progression and rewards", () => {
       },
       (s: Record<string, unknown>) => {
         s.phase = "boon";
-      },
-      (s: Record<string, unknown>) => {
-        s.roster = ["mossguard", "mossguard", "emberback"];
       },
     ]) {
       const data = JSON.parse(encodeSave(run()));
@@ -224,15 +220,12 @@ it("consumes Flashpoint once and does not refresh it on talent reset or resume",
 });
 
 it("final victory banks rewards once before recruitment and offers no run-only Boons", () => {
-  let s = run();
-  for (let i = 0; i < 3; i++) {
-    s = winBattle(s);
-    if (i < 2) {
-      for (let choice = 0; choice < 3 && s.phase !== "teamSelection"; choice++) s = accept(s, policy(s));
-      expect(s.phase).toBe("teamSelection");
-      s = accept(s, { type: "beginBattle" });
-    }
-  }
+  const ready = produce(run(), (draft) => {
+    draft.encounter = 7;
+    prepareDestination(draft);
+    draft.expedition = { pack: ["memento"], recruit: null, lastRoom: null };
+  });
+  let s = winBattle(accept(ready, { type: "beginBattle" }));
   expect(s.reward!.outcome).toBe("victory");
   expect(s.phase).toBe("recruit");
   expect(s.reward!.recruits).toEqual(["memento"]);

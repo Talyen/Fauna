@@ -109,7 +109,7 @@ export function* removeEffects(
   const stats = combat(unit);
   let depletion: ArmorDepletion | null = null;
   let cleansed = 0;
-  const removedStatuses: NonNullable<GameEvent["affectedStatus"]>[] = [];
+  const removedStatuses: NonNullable<import("../types").StatusEvent["affectedStatus"]>[] = [];
   const statuses =
     kind === "cleanse"
       ? onlyStatus

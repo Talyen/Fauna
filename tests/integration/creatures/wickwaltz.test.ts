@@ -56,9 +56,11 @@ it("adds the approved three-card kit to drafts, encounters and current-format sa
     expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
     expect(repeats(result.events)).toHaveLength(0);
     if (card.effect === "attack") {
-      expect(result.events.filter((event) => event.kind === "damage").map((event) => event.amount)).toEqual([
-        2, 2, 2,
-      ]);
+      expect(
+        result.events
+          .filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage")
+          .map((event) => event.amount),
+      ).toEqual([2, 2, 2]);
       expect(result.state.battle!.enemies[0]!.combat.burn).toBe(2);
     } else if (card.effect === "guard") {
       expect(result.state.team[0]!.block).toBe(3);
@@ -112,9 +114,11 @@ it("repeats the whole second attack across all living enemies for one cost and X
   let game = play(ready(), "wickwaltz-guard").state;
   const result = play(game, "wickwaltz-attack");
   expect(repeats(result.events)).toHaveLength(1);
-  expect(result.events.filter((event) => event.kind === "damage").map((event) => event.amount)).toEqual([
-    2, 2, 2, 2, 2, 2,
-  ]);
+  expect(
+    result.events
+      .filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage")
+      .map((event) => event.amount),
+  ).toEqual([2, 2, 2, 2, 2, 2]);
   expect(result.state.battle!.enemies[0]!.combat.burn).toBe(4);
   expect(result.state.battle!.mana).toBe(2);
   expect(result.state.battleXP.burn).toBe(1);
@@ -123,7 +127,11 @@ it("repeats the whole second attack across all living enemies for one cost and X
       enemy.health = i === 0 ? 1 : 0;
     });
   });
-  expect(play(game, "wickwaltz-attack").events.filter((event) => event.kind === "damage")).toHaveLength(1);
+  expect(
+    play(game, "wickwaltz-attack").events.filter(
+      (event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage",
+    ),
+  ).toHaveLength(1);
 });
 
 it("repeats Saffron Screen's Block without stacking Freeze wards", () => {
@@ -141,7 +149,6 @@ it("does not count teammate plays or rejected commands and retains the count acr
     draft.battle!.hand.push(card.id);
     const backup = { ...draft.team[1]!, id: "backup", combat: freshCombat() };
     draft.reserves.push(backup);
-    draft.roster.push(backup.species);
   });
   game = play(game, "mossguard-guard").state;
   expect(repeats(play(game, "wickwaltz-guard").events)).toHaveLength(0);
@@ -239,7 +246,10 @@ it("shares the two-resolution limit with other repeat sources", () => {
   const result = play(game, "wickwaltz-attack");
   expect(repeats(result.events)).toHaveLength(1);
   expect(
-    result.events.filter((event) => event.kind === "damage" && event.actorId === "ally-0").length,
+    result.events.filter(
+      (event): event is Extract<GameEvent, { kind: "damage" }> =>
+        event.kind === "damage" && event.actorId === "ally-0",
+    ).length,
   ).toBeLessThanOrEqual(6);
   expect(result.state.battleXP.burn).toBe(1);
 });

@@ -44,7 +44,7 @@ it.each(cases)("preserves committed command traces for $name", ({ seed, team }) 
     // Normalize only retired lifecycle data; compare live combat and all ordered events.
     const combatOnly = (units: typeof state.team) =>
       units.map(({ combat: _combat, block: _block, ...unit }) => unit);
-    const { roster: _roster, lineup: _lineup, unlocked: _unlocked, ...committed } = result.state;
+    const committed = result.state;
     const baselineResult = {
       ...result,
       state: {

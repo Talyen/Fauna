@@ -42,7 +42,7 @@ test("one starter grows a lineup through a full expedition", async ({ page }) =>
   const chosen = (await state(page)).starterOffers[0]!;
   const name = species(chosen).name;
   await activate(page.getByRole("button", { name: `Recruit ${name}`, exact: true }));
-  expect((await state(page)).lineup).toEqual(["ally-0"]);
+  expect((await state(page)).team.map((unit) => unit.id)).toEqual(["ally-0"]);
   let deployedThree = false;
   const actor = createBattleActor();
   for (let i = 0; i < FULL_JOURNEY_COMMAND_BUDGET; i++) {
@@ -51,19 +51,21 @@ test("one starter grows a lineup through a full expedition", async ({ page }) =>
     if (s.phase === "victory") break;
     expect(s.phase).not.toBe("defeat");
     expect(s.reward?.outcome).not.toBe("defeat");
-    if (s.phase === "recruit" && s.roster.length < 5) {
+    if (s.phase === "recruit" && s.team.length + s.reserves.length < 5) {
       await continueToRecruit(page, activate);
       await activate(
         page
           .getByRole("button", {
-            name: `Recruit ${species(s.reward!.recruits.find((kind) => !s.roster.includes(kind)) ?? s.reward!.recruits[0]!).name}`,
+            name: `Recruit ${species(s.reward!.recruits.find((kind) => ![...s.team, ...s.reserves].map((unit) => unit.species).includes(kind)) ?? s.reward!.recruits[0]!).name}`,
             exact: true,
           })
           .first(),
       );
       const recruited = await state(page);
-      expect(recruited.lineup).toEqual(recruited.team.map((creature) => creature.id));
-      expect(recruited.reserves).toHaveLength(Math.max(0, recruited.roster.length - 3));
+      expect(recruited.team.map((unit) => unit.id)).toEqual(recruited.team.map((creature) => creature.id));
+      expect(recruited.reserves).toHaveLength(
+        Math.max(0, recruited.team.length + recruited.reserves.length - 3),
+      );
     } else await step(page, activate, s, s.phase === "battle" ? actor.choose(s).command : policy(s));
   }
   await expect(page.getByRole("heading", { name: "Journey complete", exact: true })).toBeVisible();

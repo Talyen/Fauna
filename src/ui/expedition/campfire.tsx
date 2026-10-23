@@ -89,7 +89,10 @@ export function RestRecovery({ game, events }: { game: GameState; events: GameEv
     <section ref={root} className="rest-recovery" aria-label="Rest recovery" role="status">
       {[...game.team, ...game.reserves].map((creature) => {
         const amount = events
-          .filter((event) => event.kind === "heal" && event.targetId === creature.id)
+          .filter(
+            (event): event is Extract<GameEvent, { kind: "heal" }> =>
+              event.kind === "heal" && event.targetId === creature.id,
+          )
           .reduce((total, event) => total + (event.amount ?? 0), 0);
         if (!amount) return null;
         const name = species(creature.species).name;

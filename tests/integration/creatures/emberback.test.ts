@@ -1,3 +1,4 @@
+import type { GameEvent } from "../../../src/game/types";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, definition } from "../../../src/game/content";
@@ -98,9 +99,12 @@ it("settles an area victory after every opponent is hit and stops when retaliati
   const result = dispatch(game, { type: "play", cardId: game.battle!.hand[0]! });
   expect(result.accepted).toBe(true);
   expect(result.state.phase).toBe("recruit");
-  expect(result.events.filter((event) => event.kind === "damage" && event.actorId === "ally-0")).toHaveLength(
-    3,
-  );
+  expect(
+    result.events.filter(
+      (event): event is Extract<GameEvent, { kind: "damage" }> =>
+        event.kind === "damage" && event.actorId === "ally-0",
+    ),
+  ).toHaveLength(3);
   expect(result.state.reward!.recruits).toHaveLength(3);
   const retaliation = produce(ready("emberback-furnace-breath"), (draft) => {
     draft.team[0]!.health = 1;
@@ -165,7 +169,6 @@ it("uses an enemy area ability against deployed allies while leaving reserves un
           COMBAT_PACKS.findIndex((pack) => pack[0] === "emberback"),
         ),
       };
-      draft.roster.push("mossguard");
       draft.reserves.push({ ...draft.team[0]!, id: "reserve", combat: freshCombat() });
     }),
     { type: "beginBattle" },
@@ -187,7 +190,10 @@ it("uses an enemy area ability against deployed allies while leaving reserves un
   const next = result.events.findIndex((event, index) => index > first && event.kind === "action");
   const packets = result.events
     .slice(first, next < 0 ? undefined : next)
-    .filter((event) => event.kind === "damage" && event.actorId === "enemy-0" && !event.periodic);
+    .filter(
+      (event): event is Extract<GameEvent, { kind: "damage" }> =>
+        event.kind === "damage" && event.actorId === "enemy-0" && !event.periodic,
+    );
   expect(packets.map((event) => event.targetId)).toEqual(game.team.map((ally) => ally.id));
   expect(packets.every((event) => event.amount === 2)).toBe(true);
   expect(result.state.reserves).toEqual(game.reserves);

@@ -224,5 +224,7 @@ it("applies healing talents without card-only overhealing rewards or recursive c
   expect(result.team[0]!.health).toBe(26);
   expect(result.team[0]!.block).toBe(0);
   expect(result.team[0]!.combat!.poison).toBe(2);
-  expect(events.filter((event) => event.kind === "heal")).toHaveLength(1);
+  expect(
+    events.filter((event): event is Extract<GameEvent, { kind: "heal" }> => event.kind === "heal"),
+  ).toHaveLength(1);
 });

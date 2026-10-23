@@ -124,7 +124,6 @@ it("captures Block break before Second Wind or another defense restores protecti
 
 it("swaps the incoming kit into draw and Blinds enemies after leaving the battlefield", () => {
   const game = produce(ready("coralcurl-swap"), (draft) => {
-    draft.roster.push("reedstag");
     draft.discovery.recruited.reedstag = 1;
     draft.discovery.encountered.push("reedstag");
     draft.reserves.push({
@@ -143,9 +142,9 @@ it("swaps the incoming kit into draw and Blinds enemies after leaving the battle
   expect(result.state.reserves[0]!.species).toBe("coralcurl");
   expect(result.state.cards.filter((card) => card.ownerId === "backup")).toHaveLength(3);
   expect(result.state.battle!.enemies.every((enemy) => enemy.combat.blind)).toBe(true);
-  expect(result.events.findIndex((event) => event.actionType === "swap")).toBeLessThan(
-    result.events.findIndex((event) => event.status === "blind"),
-  );
+  expect(
+    result.events.findIndex((event) => event.kind === "action" && event.actionType === "swap"),
+  ).toBeLessThan(result.events.findIndex((event) => event.kind === "status" && event.status === "blind"));
   expect(previewCard(game, cardId)).toEqual(result);
   expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
 });

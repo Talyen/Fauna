@@ -9,7 +9,7 @@ import { ArtCard } from "../../src/ui/shared/cards/art-card";
 import { ActionCard } from "../../src/ui/shared/cards/cards";
 import { ManaCrystals } from "./mana-crystals";
 import { ActionDetails, CreatureDetails } from "../../src/ui/shared/cards/card-details";
-import { definition, species, ENCOUNTERS, type SpeciesId } from "../../src/game/content";
+import { definition, species, type SpeciesId } from "../../src/game/content";
 import { actionValue } from "../../src/game/ability-rules";
 import type { Card, Creature } from "../../src/game/types";
 import "@fontsource-variable/inter/wght.css";
@@ -35,11 +35,13 @@ const hand: Card[] = [
   level: 0,
   ownerId: team.find((creature) => creature.species === definition(id).species)!.id,
 }));
-const enemies = ENCOUNTERS[1]!.enemies.map((enemy, index) => ({
-  ...enemy,
-  id: `enemy-${index}`,
-  current: [19, 15, 12][index]!,
-}));
+const enemies = (["prismram", "pollenmoth", "mossguard"] as const)
+  .map((kind) => ({ species: kind, name: species(kind).name, health: species(kind).health }))
+  .map((enemy, index) => ({
+    ...enemy,
+    id: `enemy-${index}`,
+    current: [19, 15, 12][index]!,
+  }));
 const params = new URLSearchParams(location.search);
 
 // A rotated 3:4 rectangle has visible height H*cos(a) + W*abs(sin(a)).

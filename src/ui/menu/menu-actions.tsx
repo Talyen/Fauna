@@ -36,6 +36,7 @@ export function MenuActions({
         effectTone="play"
         variant={home ? "default" : "ghost"}
         className="primary-menu-action"
+        data-menu-action="continue"
         onClick={onContinue}
       >
         <Swords aria-hidden="true" />
@@ -44,6 +45,7 @@ export function MenuActions({
       <Button
         variant="ghost"
         effectTone="talents"
+        data-menu-action="talents"
         attention={talentPoints > 0}
         aria-label="Talents"
         aria-describedby={talentPoints > 0 ? `menu-talent-points-${home}` : undefined}
@@ -61,21 +63,36 @@ export function MenuActions({
           </span>
         ) : null}
       </Button>
-      <Button effectTone="gold" variant="ghost" onClick={() => onNavigate("collection")}>
+      <Button
+        effectTone="gold"
+        variant="ghost"
+        data-menu-action="collection"
+        onClick={() => onNavigate("collection")}
+      >
         <PawPrint aria-hidden="true" className="menu-icon-collection" />
         Collection
       </Button>
       {active && hasBoons ? (
-        <Button effectTone="talents" variant="ghost" onClick={onBoons}>
+        <Button effectTone="talents" variant="ghost" data-menu-action="boons" onClick={onBoons}>
           <Gift aria-hidden="true" className="menu-icon-boons" />
           Boons
         </Button>
       ) : null}
-      <Button effectTone="gold" variant="ghost" onClick={() => onNavigate("glossary")}>
+      <Button
+        effectTone="gold"
+        variant="ghost"
+        data-menu-action="glossary"
+        onClick={() => onNavigate("glossary")}
+      >
         <BookOpen aria-hidden="true" className="menu-icon-glossary" />
         Glossary
       </Button>
-      <Button effectTone="settings" variant="ghost" onClick={() => onNavigate("settings")}>
+      <Button
+        effectTone="settings"
+        variant="ghost"
+        data-menu-action="settings"
+        onClick={() => onNavigate("settings")}
+      >
         <Settings2 aria-hidden="true" className="menu-icon-settings" />
         Settings
       </Button>

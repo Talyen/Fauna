@@ -94,5 +94,9 @@
       "tests/unit/tooling/verification.test.mjs",
       "tests/unit/tooling/dependencies.test.mjs"
     ]
+  },
+  "tests/exhaustive/": {
+    "reason": "Extended matrices run in full Vitest and hosted CI; local integration retains the command and save boundary contract",
+    "suites": ["tests/unit/game/engine.test.ts"]
   }
 }

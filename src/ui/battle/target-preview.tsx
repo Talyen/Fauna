@@ -1,3 +1,4 @@
+import type { GameEvent } from "../../game/types";
 import { battlefield } from "../../game/battlefield";
 import { KeywordIcon } from "../shared/keyword-icon";
 import { sharedDodgeChance } from "../../game/combat/index";
@@ -26,7 +27,7 @@ export function TargetPreview({
     (unit) => unit.id === targetId,
   );
   if (!old || !next) return null;
-  const events = result.events.filter((e) => e.targetId === targetId);
+  const events = result.events.filter((e) => "targetId" in e && e.targetId === targetId);
   const previousStatuses = combatStatuses(old.combat, sharedDodgeChance(before, old));
   const nextStatuses = combatStatuses(next.combat, sharedDodgeChance(result.state, next));
   const changes = [...new Set([...previousStatuses, ...nextStatuses].map((status) => status.id))].flatMap(
@@ -45,7 +46,10 @@ export function TargetPreview({
     },
   );
   const absorbed = -events
-    .filter((event) => event.kind === "block" && (event.amount ?? 0) < 0)
+    .filter(
+      (event): event is Extract<GameEvent, { kind: "block" }> =>
+        event.kind === "block" && (event.amount ?? 0) < 0,
+    )
     .reduce((sum, event) => sum + (event.amount ?? 0), 0);
   const max = "maxHealth" in old ? old.maxHealth : species(old.species).health;
   return (
@@ -67,7 +71,7 @@ export function TargetPreview({
           .map((e, i) => (
             <span key={i}>
               {e.kind === "damage" ? (
-                <DamageValue type={e.damageType ?? "physical"} amount={e.amount ?? 0} signed />
+                <DamageValue type={e.damageType} amount={e.amount} signed />
               ) : (
                 <span data-combat-tone="health">
                   <Heart aria-hidden="true" />+{e.amount}
@@ -87,7 +91,13 @@ export function TargetPreview({
           </span>
         ))}
         {events
-          .filter((event) => event.kind === "status" && event.status === "dodge" && event.outcome === "dodge")
+          .filter(
+            (event): event is Extract<GameEvent, { kind: "status" }> =>
+              event.kind === "status" &&
+              "status" in event &&
+              event.status === "dodge" &&
+              event.outcome === "dodge",
+          )
           .map((event, index) => (
             <span key={`dodge-${index}`} data-combat-tone="dodge">
               <KeywordIcon id="dodge" />

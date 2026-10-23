@@ -13,7 +13,6 @@ for (const [width, height] of [
   test(`rendered gameplay, rewards and menus fit ${width}×${height}`, async ({ page }) => {
     await page.setViewportSize({ width, height });
     const fixture = produce(run(7), (d) => {
-      d.roster.push("pollenmoth", "emberback");
       d.reserves = ["pollenmoth", "emberback"].map((kind) => ({
         id: `recruit-${kind}`,
         species: kind as "pollenmoth" | "emberback",
@@ -89,7 +88,7 @@ test("five-card hand with hidden overflow, three enemies and a full bench preser
   s = produce(s, (d) => {
     d.boons = ["tattered-pages"];
     d.wins = 1;
-    d.roster = ["mossguard", "emberback", "prismram", "pollenmoth", "emberback"];
+
     d.reserves = ["pollenmoth", "emberback"].map((kind) => ({
       id: `recruit-${kind}`,
       species: kind as "pollenmoth" | "emberback",

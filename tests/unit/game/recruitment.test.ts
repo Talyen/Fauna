@@ -48,7 +48,7 @@ describe("recruiting creature copies", () => {
       ),
     ).toThrow();
     const next = accept(reward, { type: "recruit", species: "prismram" });
-    expect(next.roster).toEqual(["prismram", "prismram"]);
+    expect([...next.team, ...next.reserves].map((unit) => unit.species)).toEqual(["prismram", "prismram"]);
     expect(new Set(next.team.map((c) => c.id)).size).toBe(2);
     expect(decodeSave(encodeSave(next))).toEqual(next);
   });
@@ -58,7 +58,7 @@ describe("recruiting creature copies", () => {
     const copy = s.reserves[0]!;
     expect(copy.id).not.toBe("ally-1");
     s = swapFixture(s, { type: "swap", activeId: "ally-1", reserve: copy.id });
-    expect(s.lineup[1]).toBe(copy.id);
+    expect(s.team.map((unit) => unit.id)[1]).toBe(copy.id);
     s = accept(decodeSave(encodeSave(s)), { type: "beginBattle" });
     s = produce(s, (d) => {
       d.team[1]!.health = 9;
@@ -74,28 +74,28 @@ describe("recruiting creature copies", () => {
     expect(s.cards.filter((c) => c.ownerId === "ally-1")).toHaveLength(3);
     expect(s.cards.some((c) => c.ownerId === copy.id)).toBe(false);
     expect([s.battle!.hand, s.battle!.draw, s.battle!.discard]).toEqual(zones);
-    expect(s.lineup[1]).toBe("ally-1");
+    expect(s.team.map((unit) => unit.id)[1]).toBe("ally-1");
     expect(decodeSave(encodeSave(s))).toEqual(s);
   });
 
   it("releases only the chosen copy at five and updates its lineup entry", () => {
-    let s = accept(winBattle(), { type: "recruit", species: "emberback" });
-    s = accept(s, { type: "beginBattle" });
-    s = accept(winBattle(s), { type: "recruit", species: "mossguard" });
-    const copies = s.reserves.map((c) => c.id);
-    s = accept(s, { type: "beginBattle" });
-    // Replay an ordinary combat for the replacement decision.
-    s = winBattle(
+    const replayBattle = (state: ReturnType<typeof run>) =>
       accept(
-        produce(s, (d) => {
-          prepareDestination(d);
-          d.encounter = 0;
-          d.journey!.victories = d.encounter;
-          d.journey!.victories = 0;
+        produce(state, (draft) => {
+          draft.encounter = 2;
+          prepareDestination(draft);
+          draft.expedition = {
+            pack: ["emberback", "pollenmoth", "mossguard"],
+            recruit: null,
+            lastRoom: null,
+          };
         }),
         { type: "beginBattle" },
-      ),
-    );
+      );
+    let s = accept(winBattle(), { type: "recruit", species: "emberback" });
+    s = accept(winBattle(replayBattle(s)), { type: "recruit", species: "mossguard" });
+    const copies = s.reserves.map((c) => c.id);
+    s = winBattle(replayBattle(s));
     expect(s.discovery.recruited.emberback).toBe(2);
     s = accept(s, { type: "recruit", species: "emberback" });
     s = accept(s, { type: "confirmRecruit", replace: "ally-1" });
@@ -105,7 +105,8 @@ describe("recruiting creature copies", () => {
     expect(all.some((c) => c.id === "ally-1")).toBe(false);
     expect(copies.every((id) => all.some((c) => c.id === id))).toBe(true);
     expect(all.filter((c) => c.species === "emberback")).toHaveLength(2);
-    expect(s.lineup[1]).toBe(s.team[1]!.id);
+    expect(s.team[1]!.id).not.toBe("ally-1");
+    expect(s.team[1]!.species).toBe("emberback");
     expect(new Set(all.map((c) => c.id)).size).toBe(5);
     expect(decodeSave(encodeSave(s))).toEqual(s);
   });
@@ -117,11 +118,13 @@ it("banks a full-roster recruit once, before the saved team decision", () => {
   const selected = accept(reward, { type: "recruit", species: "emberback" });
   expect(selected.phase).toBe("recruit");
   expect(selected.discovery.recruited.emberback).toBe((reward.discovery.recruited.emberback ?? 0) + 1);
-  expect(selected.roster).toEqual(reward.roster);
+  expect([...selected.team, ...selected.reserves].map((unit) => unit.species)).toEqual(
+    [...reward.team, ...reward.reserves].map((unit) => unit.species),
+  );
   expect(selected.team).toEqual(reward.team);
   expect(selected.reserves).toEqual(reward.reserves);
   expect(selected.cards).toEqual(reward.cards);
-  expect(selected.lineup).toEqual(reward.lineup);
+  expect(selected.team.map((unit) => unit.id)).toEqual(reward.team.map((unit) => unit.id));
   expect(selected.rng).toBe(reward.rng);
   const resumed = decodeSave(encodeSave(selected));
   expect(resumed).toEqual(selected);
@@ -136,11 +139,13 @@ it("banks a full-roster recruit once, before the saved team decision", () => {
   expect(invalid.state).toBe(resumed);
   const kept = accept(resumed, { type: "confirmRecruit" });
   expect(kept.phase).toBe("teamSelection");
-  expect(kept.roster).toEqual(reward.roster);
+  expect([...kept.team, ...kept.reserves].map((unit) => unit.species)).toEqual(
+    [...reward.team, ...reward.reserves].map((unit) => unit.species),
+  );
   expect(kept.team).toEqual(reward.team);
   expect(kept.reserves).toEqual(reward.reserves);
   expect(kept.cards).toEqual(reward.cards);
-  expect(kept.lineup).toEqual(reward.lineup);
+  expect(kept.team.map((unit) => unit.id)).toEqual(reward.team.map((unit) => unit.id));
   expect(kept.discovery).toEqual(selected.discovery);
   expect(decodeSave(encodeSave(kept))).toEqual(kept);
   expect(dispatch(kept, { type: "confirmRecruit" }).state).toBe(kept);
@@ -172,7 +177,9 @@ it.each([3, 7])(
     const selected = accept(reward, { type: "recruit", species: reward.reward.recruits[0]! });
     const next = accept(decodeSave(encodeSave(selected)), { type: "confirmRecruit" });
     expect(next.phase).toBe(encounter === 7 ? "victory" : "boon");
-    expect(next.roster).toEqual(reward.roster);
+    expect([...next.team, ...next.reserves].map((unit) => unit.species)).toEqual(
+      [...reward.team, ...reward.reserves].map((unit) => unit.species),
+    );
     expect(next.discovery).toEqual(selected.discovery);
     expect(next.currency).toBe(reward.currency);
     expect(decodeSave(encodeSave(next))).toEqual(next);

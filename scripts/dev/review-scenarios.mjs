@@ -50,7 +50,7 @@ export async function reviewScenario(server, name) {
     }));
     game = {
       ...game,
-      roster: [...game.roster, ...reserves.map((unit) => unit.species)],
+
       reserves,
       discovery: {
         ...game.discovery,

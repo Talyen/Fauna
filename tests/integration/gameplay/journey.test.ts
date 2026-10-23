@@ -89,11 +89,12 @@ describe("journey earnings and results", () => {
   it("offers defeated creatures even when every species is already collected", () => {
     const started = startedJourney();
     const s = produce(run(), (d) => {
+      d.encounter = started.encounter;
       d.expedition = started.expedition;
       d.journey = started.journey;
       d.discovery.encountered = SPECIES.map((entry) => entry.id);
       d.discovery.recruited = Object.fromEntries(SPECIES.map((entry) => [entry.id, 1]));
-      d.roster = [...d.team.map((unit) => unit.species), "pollenmoth", "captoad"];
+
       d.reserves = (["pollenmoth", "captoad"] as const).map((kind) => ({
         id: kind,
         species: kind,
@@ -169,7 +170,6 @@ describe("journey earnings and results", () => {
       outcome: "victory",
       victories: 8,
       currency: 200,
-      unlocks: [],
     });
     expect(s.journey!.xp).toEqual(
       Object.fromEntries(Object.entries(s.keywordXP).filter(([, value]) => value > 0)),
@@ -182,13 +182,12 @@ describe("journey earnings and results", () => {
     expect(s.currency).toBe(200);
     for (let pick = 0; pick < 3; pick++) s = accept(s, { type: "draft", species: s.starterOffers[0]! });
     s = accept(s, { type: "start" });
-    expect(s.journey).toMatchObject({ outcome: null, victories: 0, currency: 0, xp: {}, unlocks: [] });
+    expect(s.journey).toMatchObject({ outcome: null, victories: 0, currency: 0, xp: {} });
     for (let i = 0; i < 8; i++) {
       s = winBattle(accept(s, { type: "beginBattle" }));
       if (s.phase === "recruit") s = completeRecruitment(s);
       if (s.phase === "boon") s = accept(s, { type: "skipBoon" });
     }
-    expect(s.journey!.unlocks).toEqual([]);
     expect(s.journey!.currency).toBe(200);
     expect(s.currency).toBe(400);
   });
@@ -197,7 +196,7 @@ describe("journey earnings and results", () => {
     expect(() => decodeSave(JSON.stringify({ ...startedJourney(), version }))).toThrow();
   });
 
-  it("rejects summaries with impossible earnings, wins, unlocks, or outcomes", () => {
+  it("rejects summaries with impossible earnings, wins, or outcomes", () => {
     const s = winBattle(accept(startedJourney(), { type: "beginBattle" }));
     for (const mutate of [
       (d: typeof s) => {
@@ -208,9 +207,6 @@ describe("journey earnings and results", () => {
       },
       (d: typeof s) => {
         d.journey!.victories = 8;
-      },
-      (d: typeof s) => {
-        d.journey!.unlocks = ["prismram"];
       },
       (d: typeof s) => {
         d.journey!.outcome = "victory";
@@ -236,28 +232,34 @@ describe("journey earnings and results", () => {
   });
 });
 
-it("completes the one-starter recruitment path through the final boss within the browser journey budget", () => {
+it("deterministically replays the complete one-starter journey through the final boss within the browser budget", () => {
   const actor = createBattleActor();
   const initial = createGame(FULL_JOURNEY_SEED);
   let game = accept(accept(initial, { type: "draft", species: initial.starterOffers[0]! }), {
     type: "start",
   });
+  let replay = game;
   let deployedThree = false;
   for (let step = 0; step < FULL_JOURNEY_COMMAND_BUDGET && game.phase !== "victory"; step++) {
     deployedThree ||= game.team.length === 3;
     expect(game.phase).not.toBe("defeat");
     expect(game.reward?.outcome).not.toBe("defeat");
     const command =
-      game.phase === "recruit" && game.roster.length < 5
+      game.phase === "recruit" && game.team.length + game.reserves.length < 5
         ? {
             type: "recruit" as const,
             species:
-              game.reward!.recruits.find((kind) => !game.roster.includes(kind)) ?? game.reward!.recruits[0]!,
+              game.reward!.recruits.find(
+                (kind) => ![...game.team, ...game.reserves].map((unit) => unit.species).includes(kind),
+              ) ?? game.reward!.recruits[0]!,
           }
         : game.phase === "battle"
           ? actor.choose(game).command
           : policy(game);
     game = accept(game, command);
+    replay = accept(replay, command);
+    expect(replay).toEqual(game);
+    expect(decodeSave(encodeSave(game))).toEqual(game);
   }
   expect(game.phase).toBe("victory");
   expect(deployedThree).toBe(true);
@@ -265,7 +267,6 @@ it("completes the one-starter recruitment path through the final boss within the
   expect(game.team.length).toBeGreaterThanOrEqual(1);
   expect(game.team.length).toBeLessThanOrEqual(3);
   if (game.team.some((unit) => species(unit.species).legendary)) expect(game.team).toHaveLength(1);
-  expect(game.team.map((unit) => unit.id)).toEqual(game.lineup);
-  expect(game.roster).toHaveLength(5);
+  expect([...game.team, ...game.reserves].map((unit) => unit.species)).toHaveLength(5);
   expect(decodeSave(encodeSave(game))).toEqual(game);
-});
+}, 20_000);
