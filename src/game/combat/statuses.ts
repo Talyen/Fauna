@@ -131,6 +131,7 @@ export function* removeEffects(
           "nullify",
           "nullifyFreeze",
           "negate",
+          "attackReflection",
         ] as const);
   if (kind === "purge" && unit.block > 0 && count > 0) {
     unit.block = 0;
@@ -157,6 +158,7 @@ export function* removeEffects(
         status === "blind" ||
         status === "nullify" ||
         status === "negate" ||
+        status === "attackReflection" ||
         status === "nullifyFreeze"
       )
         stats[status] = false;

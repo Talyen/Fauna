@@ -25,9 +25,11 @@ export type SpeciesId =
   | "memento"
   | "euphera"
   | "tournelle"
-  | "reverie";
+  | "reverie"
+  | "oathara";
 export type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
+  | { kind: "unfinishedJourney"; amount: number }
   | { kind: "unhurried"; amount: number }
   | { kind: "gallantry"; amount: number }
   | { kind: "goodFortune"; amount: number }

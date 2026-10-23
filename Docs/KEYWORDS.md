@@ -44,7 +44,7 @@ Leech restores half actual Health lost, capped by overkill and maximum Health. B
 
 ### Cleanse and Purge
 
-Cleanse removes harmful categories in Burn, Poison, Bleed, Stun, Freeze, Blind order, handling active control first. Purge removes Block first, then Armor, Thorns, Water Thorns, bonus Dodge, Reflect, Burn-only Reflect, Nullify, the Freeze-damage ward and Negate, each as a separate beneficial category. Both remove up to the card's stated number of categories.
+Cleanse removes harmful categories in Burn, Poison, Bleed, Stun, Freeze, Blind order, handling active control first. Purge removes Block first, then Armor, Thorns, Water Thorns, bonus Dodge, Reflect, Burn-only Reflect, Nullify, the Freeze-damage ward, Negate and Attack Reflection, each as a separate beneficial category. Both remove up to the card's stated number of categories.
 
 ### Reflection
 
@@ -59,6 +59,16 @@ A pending Reflect charge guarantees the next eligible reflection before passive 
 ### Negate
 
 **Negate** cancels the next incoming ability attack against its recipient after interception and before Dodge, preserving Block and Armor and preventing that attack's harmful follow-ups on that recipient. Thorns and Water Thorns still retaliate once with their normal decay. A Blind miss leaves protection intact; other recipients of an area attack and a subsequent repeat resolve independently. Periodic, proc and retaliation packets do not consume it. Protection does not stack, lasts until consumed or Purged and persists through swaps and resume. Dream Double grants it to its actor. Negate awards no separate keyword XP
+
+### Attack Reflection
+
+Attack Reflection returns the next incoming ability attack to its attacker after interception and Negate, before Dodge, Block or Armor. The protected recipient takes none of that attack’s damage or harmful authored follow-ups. Other area recipients remain affected. The returning attack uses the ward bearer as its source and ordinary damage resolution; it cannot reflect again. Harmful follow-ups return only if the attacker survives and does not Negate the returned attack. The original attacker retains self-directed support effects if alive
+
+One protection lasts until consumed or Purged, survives swaps and resume and resets each battle. Repeated grants refresh it without stacking. Blind misses, periodic, proc and retaliation damage do not consume it. Repeated attacks resolve separately. This is separate from harmful-status Reflect and awards no separate keyword XP
+
+### Resurrection
+
+Resurrect returns a knocked-out roster ally with 20% of maximum Health, rounded normally with a minimum of one. It can target deployed allies or backups; their positions and card ownership stay intact. Living allies and Minions are not recipients. Resurrection is direct restoration of life, unaffected by healing modifiers and without healing-trigger rewards. Existing combat effects and per-battle counters remain; spent Death’s Door is not renewed and grace does not restart. Resurrect awards Health XP on the accepted card play
 
 ### Consume
 

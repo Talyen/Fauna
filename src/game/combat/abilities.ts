@@ -1,3 +1,6 @@
+import { takeAttackReflection } from "./attack-reflection";
+import { resurrect } from "./resurrection";
+import { drawableOwnerIds } from "../card-actors";
 import { cardTargeting } from "../card-rules";
 import { interceptAttack } from "./interception";
 import { battlefield, isRosterCreature } from "../battlefield";
@@ -67,7 +70,7 @@ function recoverDiscard(state: GameState, events: GameEvent[]) {
   const battle = state.battle!;
   const available = battle.discard.filter((id) => {
     const card = state.cards.find((entry) => entry.id === id)!;
-    return state.team.some((unit) => unit.id === card.ownerId && unit.health > 0);
+    return drawableOwnerIds(state).has(card.ownerId);
   });
   if (!available.length) return;
   const id = available[Math.floor(roll(state) * available.length)]!;
@@ -341,6 +344,52 @@ export function executeAbility(
             negated.add(recipient.id);
             continue;
           }
+          if (!blindMiss && takeAttackReflection(actor, recipient, events)) {
+            negated.add(recipient.id);
+            if (negateAttack(state, recipient, actor, events)) continue;
+            if (def.purgeThorns) {
+              ensureCombat(actor).thorns = 0;
+              ensureCombat(actor).waterThorns = 0;
+            }
+            hit(
+              state,
+              recipient,
+              actor,
+              value * (def.doubleAgainstHealthier && recipient.health > actor.health ? 2 : 1),
+              damageType,
+              events,
+              {
+                origin: "ability",
+                delivery: "reflection",
+                interceptionChecked: true,
+                blindMiss: false,
+                leech: def.leech,
+                cardLeech: keywords.includes("leech"),
+              },
+            );
+            // Only harmful attack extras return; the attacker's own support effects keep their owner.
+            for (const effect of abilityExtras(def, power)) {
+              if (actor.health <= 0 || recipient.health <= 0) break;
+              if (effect.kind === "damage")
+                hit(state, recipient, actor, effect.amount, effect.damageType, events, {
+                  origin: "ability",
+                  delivery: "reflection",
+                  interceptionChecked: true,
+                  blindMiss: false,
+                  leech: effect.leech,
+                });
+              else if (effect.kind === "blind") applyBlind(state, recipient, actor, events);
+              else if (effect.kind === "purge") removeEffects(actor, "purge", effect.amount, events, state);
+              else if (effect.kind === "meltArmor") {
+                const { depletion } = removeArmor(
+                  actor,
+                  Math.ceil((ensureCombat(actor).armor * effect.amount) / 100),
+                );
+                triggerArmorBreak(state, depletion, events);
+              }
+            }
+            continue;
+          }
           if (def.purgeThorns) {
             const stats = ensureCombat(recipient);
             for (const status of ["thorns", "waterThorns"] as const) {
@@ -404,6 +453,23 @@ export function executeAbility(
           restoreHealth(recipient, value, events, false, state, true, actor);
           applyExtras(state, action, events, { target: recipient, recipientOnly: true });
         }
+        break;
+      }
+      case "reflectAttack":
+        stats.attackReflection = true;
+        events.push({
+          kind: "status",
+          status: "attackReflection",
+          outcome: "apply",
+          actorId: actor.id,
+          targetId: actor.id,
+          text: `${name} reflects the next attack`,
+        });
+        break;
+      case "resurrect": {
+        const recipients = enemy ? state.battle.enemies : [...state.team, ...state.reserves];
+        const recipient = recipients.find((unit) => unit.id === action.allyTargetId && unit.health === 0);
+        if (recipient) resurrect(recipient, actor, events);
         break;
       }
       case "dreamDouble":

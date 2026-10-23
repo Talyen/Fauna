@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useReducer, useRef, useState, type RefObject } from "react";
 import { battlefield } from "../../game/battlefield";
+import { drawableOwnerIds } from "../../game/card-actors";
 import { chosenRecipients } from "../../game/play-queries";
 import { cardTargeting } from "../../game/card-rules";
 import { definition, species } from "../../game/content";
@@ -91,17 +92,20 @@ export function useBattleInteraction({
   const focusAfterCommand = useRef<number | null>(null);
   const enemyRow = battlefield(game, "enemy"),
     playerRow = battlefield(game, "player");
+  const drawable = drawableOwnerIds(game);
   const visibleHand = game.battle.hand.filter((id) =>
-    game.team.some(
-      (unit) => unit.health > 0 && unit.id === game.cards.find((card) => card.id === id)?.ownerId,
-    ),
+    drawable.has(game.cards.find((card) => card.id === id)!.ownerId),
   );
   const card = game.cards.find((entry) => entry.id === selected);
   const def = card ? definition(card.definitionId) : null;
   const mode = def ? cardTargeting(def) : "automatic";
   const enemyTarget = mode === "enemy",
     allyTarget = mode === "ally";
-  const row = enemyTarget ? enemyRow : playerRow;
+  const row = enemyTarget
+    ? enemyRow
+    : def?.effect === "resurrect"
+      ? [...playerRow, ...game.reserves]
+      : playerRow;
   // Visual order belongs to the UI; filter legal recipients after ordering the complete row.
   const ordered =
     row.length > 1 &&
@@ -165,7 +169,11 @@ export function useBattleInteraction({
             targets.length
         ]!;
       setTarget(next);
-      board.current?.querySelector<HTMLElement>(`[data-actor-id="${next}"] .creature-card`)?.focus();
+      board.current
+        ?.querySelector<HTMLElement>(
+          `[data-actor-id="${next}"] .creature-card, [data-resurrection-target="${next}"]`,
+        )
+        ?.focus();
       return true;
     }
     return false;
@@ -178,7 +186,11 @@ export function useBattleInteraction({
   });
   useLayoutEffect(() => {
     if (selected && target && navigateFocus)
-      board.current?.querySelector<HTMLElement>(`[data-actor-id="${target}"] .creature-card`)?.focus();
+      board.current
+        ?.querySelector<HTMLElement>(
+          `[data-actor-id="${target}"] .creature-card, [data-resurrection-target="${target}"]`,
+        )
+        ?.focus();
   }, [selected, target, navigateFocus, board]);
 
   const chooseCard = (cardId: string) => {
@@ -201,6 +213,7 @@ export function useBattleInteraction({
     enemyRow,
     playerRow,
     visibleHand,
+    legalTargets: legal,
     setTarget,
     leaveTarget: (id: string) => update({ type: "leave", id }),
     deny: (message: string) => update({ type: "denial", message }),

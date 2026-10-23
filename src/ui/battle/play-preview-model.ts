@@ -32,10 +32,11 @@ export function playPreviewModel(
   const units = new Map<string, TargetForecast>();
   if (!result?.accepted) return { affected, units };
   const nextUnits = new Map(
-    [...battlefield(result.state, "player"), ...battlefield(result.state, "enemy")].map((unit) => [
-      unit.id,
-      unit,
-    ]),
+    [
+      ...battlefield(result.state, "player"),
+      ...battlefield(result.state, "enemy"),
+      ...result.state.reserves,
+    ].map((unit) => [unit.id, unit]),
   );
   const grouped = new Map<string, GameEvent[]>();
   for (const event of result.events) {
@@ -44,7 +45,7 @@ export function playPreviewModel(
     events.push(event);
     grouped.set(event.targetId, events);
   }
-  for (const old of [...battlefield(before, "player"), ...battlefield(before, "enemy")]) {
+  for (const old of [...battlefield(before, "player"), ...battlefield(before, "enemy"), ...before.reserves]) {
     const next = nextUnits.get(old.id);
     if (!next) continue;
     const previous = combatStatuses(old.combat, sharedDodgeChance(before, old));

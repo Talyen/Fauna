@@ -13,6 +13,9 @@ export function cardTargeting(def: CardDefinition): "enemy" | "ally" | "self" | 
       return def.target === "self" ? "self" : "ally";
     case "heal":
       return def.target === "self" ? "self" : def.target ? "automatic" : "ally";
+    case "resurrect":
+      return "ally";
+    case "reflectAttack":
     case "dreamDouble":
     case "dodge":
       return "self";
@@ -70,6 +73,8 @@ export function enemyCanUse(card: CardDefinition): boolean {
     case "redraw":
     case "swapLowest":
       return false;
+    case "reflectAttack":
+    case "resurrect":
     case "attack":
     case "guard":
     case "heal":
@@ -130,6 +135,12 @@ export function cardText(
         card.target === "self"
           ? `Restore ${value} Health`
           : `Restore ${value} Health to ${card.target === "allAllies" ? "all allies" : card.target === "mostInjured" ? "the most injured ally" : "a living ally"}`;
+      break;
+    case "reflectAttack":
+      text = "Reflect the next attack";
+      break;
+    case "resurrect":
+      text = "Resurrect an ally";
       break;
     case "dreamDouble":
       text = `Gain ${value} Thorns / Negate the next attack against you`;

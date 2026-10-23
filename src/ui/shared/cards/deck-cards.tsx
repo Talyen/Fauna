@@ -4,6 +4,7 @@ import { EmptyState } from "../empty-state";
 
 import { ActionCard } from "./cards";
 
+import { cardActor } from "../../../game/card-actors";
 import { CARDS, species } from "../../../game/content";
 import type { Command, GameState } from "../../../game/types";
 import type { Inspection } from "../inspection-model";
@@ -52,7 +53,7 @@ export function DeckCards({
       ) : null}
       <PagedItems items={cards} pageSize={compact ? 3 : 6} className="deck-grid" label="Deck pages">
         {(card) => {
-          const owner = owners.find((c) => c.id === card.ownerId)!;
+          const owner = cardActor(game, card) ?? owners.find((c) => c.id === card.ownerId)!;
           return (
             <ActionCard
               key={card.id}

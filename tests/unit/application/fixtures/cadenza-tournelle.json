@@ -1,5 +1,5 @@
 {
-  "version": 54,
+  "version": 55,
   "discovery": {
     "encountered": [
       "tournelle",
@@ -75,7 +75,9 @@
         "grace": 0,
         "statusSources": {},
         "bleedLeech": [],
-        "negate": false
+        "negate": false,
+        "attackReflection": false,
+        "fallenCardsPlayedThisTurn": 0
       }
     }
   ],
@@ -121,7 +123,9 @@
         "grace": 0,
         "statusSources": {},
         "bleedLeech": [],
-        "negate": false
+        "negate": false,
+        "attackReflection": false,
+        "fallenCardsPlayedThisTurn": 0
       }
     },
     {
@@ -165,7 +169,9 @@
         "grace": 0,
         "statusSources": {},
         "bleedLeech": [],
-        "negate": false
+        "negate": false,
+        "attackReflection": false,
+        "fallenCardsPlayedThisTurn": 0
       }
     },
     {
@@ -209,7 +215,9 @@
         "grace": 0,
         "statusSources": {},
         "bleedLeech": [],
-        "negate": false
+        "negate": false,
+        "attackReflection": false,
+        "fallenCardsPlayedThisTurn": 0
       }
     },
     {
@@ -253,7 +261,9 @@
         "grace": 0,
         "statusSources": {},
         "bleedLeech": [],
-        "negate": false
+        "negate": false,
+        "attackReflection": false,
+        "fallenCardsPlayedThisTurn": 0
       }
     }
   ],
@@ -367,7 +377,9 @@
           "grace": 0,
           "statusSources": {},
           "bleedLeech": [],
-          "negate": false
+          "negate": false,
+          "attackReflection": false,
+          "fallenCardsPlayedThisTurn": 0
         },
         "lastAbility": null,
         "minion": {
@@ -419,7 +431,9 @@
           "grace": 0,
           "statusSources": {},
           "bleedLeech": [],
-          "negate": false
+          "negate": false,
+          "attackReflection": false,
+          "fallenCardsPlayedThisTurn": 0
         },
         "lastAbility": null,
         "minion": {
@@ -491,7 +505,9 @@
             "burn": "recruit-371"
           },
           "bleedLeech": [],
-          "negate": false
+          "negate": false,
+          "attackReflection": false,
+          "fallenCardsPlayedThisTurn": 0
         },
         "lastAbility": null,
         "deck": {

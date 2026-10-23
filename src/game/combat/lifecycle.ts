@@ -97,6 +97,7 @@ export function* startAction(
   if (resetTemporaryDodge) stats.temporaryDodge = 0;
   stats.encoreUsed = false;
   stats.cardsPlayedThisTurn = 0;
+  stats.fallenCardsPlayedThisTurn = 0;
   stats.firstAttackUsed = false;
   beginControlTurn(stats);
   if (state?.phase === "battle" && state.battle && unit.health > 0) {

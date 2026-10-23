@@ -6,7 +6,7 @@ interface AttackValues {
 export type DamagePacket =
   | (AttackValues & {
       origin: "ability";
-      delivery?: "bounce";
+      delivery?: "bounce" | "reflection";
       blindMiss?: boolean;
       interceptionChecked?: true;
       criticalBonus?: number;
@@ -31,9 +31,9 @@ export function packetPolicy(packet: DamagePacket) {
       return {
         ...attacking,
         direct: true,
-        wrongFoot: packet.delivery !== "bounce",
-        resonance: true,
-        bounce: packet.delivery !== "bounce",
+        wrongFoot: !packet.delivery,
+        resonance: packet.delivery !== "reflection",
+        bounce: !packet.delivery,
       };
     case "proc":
     case "resonance":

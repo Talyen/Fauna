@@ -24,6 +24,8 @@ const combatStateSchema = z
     nullify: z.boolean(),
     nullifyFreeze: z.boolean(),
     negate: z.boolean(),
+    attackReflection: z.boolean(),
+    fallenCardsPlayedThisTurn: z.number().int().min(0).max(6),
     cardsPlayedThisTurn: z.number().int().min(0).max(2),
     encoreUsed: z.boolean(),
     firstAttackUsed: z.boolean(),

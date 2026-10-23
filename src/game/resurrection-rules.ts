@@ -1,0 +1,1 @@
+export const RESURRECTION_HEALTH_PERCENT = 20;

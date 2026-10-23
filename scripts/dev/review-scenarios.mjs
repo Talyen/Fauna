@@ -1,6 +1,9 @@
 import { expect } from "@playwright/test";
 
 export const SCENARIOS = [
+  "oathara-battle",
+  "oathara-collection",
+  "oathara-resurrection",
   "home",
   "campfire",
   "boon",
@@ -74,6 +77,10 @@ export async function reviewScenario(server, name) {
     game = { ...game, team: game.team.map((unit, index) => (index ? unit : { ...unit, health: 1 })) };
     game = accept(game, { type: "visitCampfire" });
   }
+  if (name.startsWith("oathara-")) {
+    const { oatharaBattle } = await server.ssrLoadModule("/tests/support/oathara.ts");
+    game = oatharaBattle();
+  }
   const save = encodeSave(game);
   decodeSave(save);
   return { name, save, seed: name.startsWith("merchant") ? 7 : 42, fixture: "tests/support/game.ts" };
@@ -95,11 +102,17 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   await expect(page.locator("#startup-splash")).toHaveCount(0);
   const button = (name) => page.getByRole("button", { name, exact: true });
   const menu = scenario.name === "talent-tree" ? "talents" : scenario.name.split("-")[0];
-  if (["settings", "collection", "talents", "glossary"].includes(menu)) {
+  if (scenario.name === "oathara-collection") {
+    await button("Collection").click();
+    await button("Inspect Oathara").click();
+  } else if (["settings", "collection", "talents", "glossary"].includes(menu)) {
     await button(menu[0].toUpperCase() + menu.slice(1)).click();
   } else if (scenario.name !== "home") {
     await button("Continue").click();
     if (scenario.name === "pause") await button("Open menu").click();
+  }
+  if (scenario.name === "oathara-resurrection") {
+    await page.locator('.hand [data-card-id="ally-0:oathara-vow-of-return"]').click();
   }
   if (scenario.name === "collection-creature") {
     await button("Inspect Mossguard").click();

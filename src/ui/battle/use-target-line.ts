@@ -13,7 +13,9 @@ export function useTargetLine(
     const update = () => {
       const root = board.current;
       const actor = root?.querySelector(`[data-actor-id="${actorId}"] .creature-card`);
-      const recipient = root?.querySelector(`[data-actor-id="${target}"] .creature-card`);
+      const recipient = root?.querySelector(
+        `[data-actor-id="${target}"] .creature-card, [data-resurrection-target="${target}"]`,
+      );
       if (!root || !actor || !recipient || !selected || !target) {
         setLine("");
         return;

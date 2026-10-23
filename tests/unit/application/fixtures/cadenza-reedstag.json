@@ -1,5 +1,5 @@
 {
-  "version": 54,
+  "version": 55,
   "discovery": {
     "encountered": [
       "reedstag",
@@ -73,7 +73,9 @@
         "grace": 0,
         "statusSources": {},
         "bleedLeech": [],
-        "negate": false
+        "negate": false,
+        "attackReflection": false,
+        "fallenCardsPlayedThisTurn": 0
       }
     }
   ],
@@ -119,7 +121,9 @@
         "grace": 0,
         "statusSources": {},
         "bleedLeech": [],
-        "negate": false
+        "negate": false,
+        "attackReflection": false,
+        "fallenCardsPlayedThisTurn": 0
       }
     },
     {
@@ -163,7 +167,9 @@
         "grace": 0,
         "statusSources": {},
         "bleedLeech": [],
-        "negate": false
+        "negate": false,
+        "attackReflection": false,
+        "fallenCardsPlayedThisTurn": 0
       }
     },
     {
@@ -207,7 +213,9 @@
         "grace": 0,
         "statusSources": {},
         "bleedLeech": [],
-        "negate": false
+        "negate": false,
+        "attackReflection": false,
+        "fallenCardsPlayedThisTurn": 0
       }
     },
     {
@@ -251,7 +259,9 @@
         "grace": 0,
         "statusSources": {},
         "bleedLeech": [],
-        "negate": false
+        "negate": false,
+        "attackReflection": false,
+        "fallenCardsPlayedThisTurn": 0
       }
     }
   ],
@@ -370,7 +380,9 @@
             "poison": "recruit-157"
           },
           "bleedLeech": [],
-          "negate": false
+          "negate": false,
+          "attackReflection": false,
+          "fallenCardsPlayedThisTurn": 0
         },
         "lastAbility": null,
         "minion": {
@@ -424,7 +436,9 @@
             "poison": "recruit-157"
           },
           "bleedLeech": [],
-          "negate": false
+          "negate": false,
+          "attackReflection": false,
+          "fallenCardsPlayedThisTurn": 0
         },
         "lastAbility": null,
         "minion": {
@@ -494,7 +508,9 @@
           "grace": 0,
           "statusSources": {},
           "bleedLeech": [],
-          "negate": false
+          "negate": false,
+          "attackReflection": false,
+          "fallenCardsPlayedThisTurn": 0
         },
         "lastAbility": null,
         "deck": {

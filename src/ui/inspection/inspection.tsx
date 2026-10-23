@@ -1,5 +1,6 @@
 import { EffectScope, EffectBaseline, EffectBackdropHost } from "../shared/effects/effects";
 import { creatureKeywords, effectPalette, visualKeywords } from "../shared/effects/palettes";
+import { cardActor } from "../../game/card-actors";
 import { cardText } from "../../game/card-rules";
 import { ShineText } from "../shared/effects/treatments";
 import { sharedDodgeChance } from "../../game/combat/index";
@@ -38,7 +39,7 @@ export function Inspector({
   const ally = creatureId ? [...game.team, ...game.reserves].find((c) => c.id === creatureId) : undefined;
   const enemy = "enemyId" in item ? game.battle?.enemies.find((e) => e.id === item.enemyId) : undefined;
   const speciesKit = "speciesKit" in item && item.speciesKit;
-  const actor = enemy || speciesKit ? undefined : ally;
+  const actor = enemy || speciesKit ? undefined : rootCard ? (cardActor(game, rootCard) ?? ally) : ally;
   const modifiers = enemy || speciesKit ? undefined : game;
   const rank = enemy ? 0 : creatureStars(game, kind);
   const passive = creaturePassive(enemy ? undefined : game, kind);

@@ -1,3 +1,4 @@
+import { takeAttackReflection } from "./attack-reflection";
 import { interceptAttack } from "./interception";
 import { chance as succeeds } from "../chance";
 import { isEnemy, battlefield } from "../battlefield";
@@ -135,6 +136,20 @@ export function* hit(
     (yield* reaction("negateAttack", state, source, target, events))
   )
     return undefined;
+  if (
+    value > 0 &&
+    options.origin === "ability" &&
+    !options.blindMiss &&
+    options.delivery !== "reflection" &&
+    takeAttackReflection(source, target, events)
+  ) {
+    return yield* reaction("hit", state, target, source, value, type, events, {
+      ...options,
+      delivery: "reflection",
+      interceptionChecked: true,
+      blindMiss: false,
+    });
+  }
   const policy = packetPolicy(options);
   const wrongFoot =
     target.combat?.blind && policy.wrongFoot

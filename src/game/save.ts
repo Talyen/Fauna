@@ -1,3 +1,4 @@
+import { unfinishedJourneyLimit } from "./card-actors";
 import { PEARL } from "./content/creatures/memento";
 import { battlefield } from "./battlefield";
 import { needsCampfire, merchantPriceRange } from "./destinations";
@@ -203,7 +204,13 @@ export function decodeSave(raw: string): GameState {
           enemy.power !== original.power ||
           enemy.health > enemy.maxHealth ||
           (enemy.lastAbility !== null &&
-            !speciesCards(enemy.species).some((card) => card.id === enemy.lastAbility)) ||
+            !speciesCards(enemy.species).some((card) => card.id === enemy.lastAbility) &&
+            !(
+              unfinishedJourneyLimit(undefined, enemy) > 0 &&
+              b.enemies.some((owner) =>
+                speciesCards(owner.species).some((card) => card.id === enemy.lastAbility),
+              )
+            )) ||
           enemy.combat.deathDoorUsed ||
           enemy.combat.grace > 0 ||
           (!battlefield(s, "player").some((c) => c.id === enemy.targetId) &&
@@ -280,6 +287,9 @@ export function decodeSave(raw: string): GameState {
   for (const unit of allCombatants)
     if (unit.combat) {
       const stats = unit.combat;
+      invalid(
+        stats.fallenCardsPlayedThisTurn > unfinishedJourneyLimit("maxHealth" in unit ? undefined : s, unit),
+      );
       invalid((stats.controlled === null) !== (stats.controlTurns === 0));
       invalid((stats.grace > 0 && !stats.deathDoorUsed) || (stats.controlled !== null && stats.cooldown > 0));
       invalid(

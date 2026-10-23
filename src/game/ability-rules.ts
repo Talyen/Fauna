@@ -1,3 +1,4 @@
+import { cardActor } from "./card-actors";
 import { primaryAbilityValue } from "./combat/ability-values";
 import { definition, type CardDefinition, type PassiveTier } from "./content";
 import { enemyCard } from "./card-rules";
@@ -49,7 +50,7 @@ export function cardCost(
   card: Pick<Card, "definitionId"> & Partial<Pick<Card, "ownerId">>,
   state: GameState,
 ) {
-  const actor = state.team.find((c) => c.id === ("ownerId" in card ? card.ownerId : undefined));
+  const actor = card.ownerId === undefined ? undefined : cardActor(state, { ownerId: card.ownerId });
   const def = definition(card.definitionId);
   if (actor?.combat?.freeCard) return 0;
   const freeNature = actor?.combat?.freeNature;

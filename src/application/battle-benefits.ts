@@ -1,3 +1,5 @@
+import { drawableOwnerIds } from "../game/card-actors";
+import { RESURRECTION_HEALTH_PERCENT } from "../game/resurrection-rules";
 import { MAX_BATTLE_CARDS } from "../game/card-zones";
 import { battlefield } from "../game/battlefield";
 import { creaturePassive, hasTalent } from "../game/progression";
@@ -105,7 +107,7 @@ export function battleBenefits(
     !!def.effects?.some((effect) => effect.kind === "draw" && effect.amount > 0) &&
     ([...state.battle.draw, ...state.battle.discard, ...state.battle.buffer].some((id) => {
       const drawn = state.cards.find((entry) => entry.id === id)!;
-      return allies.some((unit) => unit.id === drawn.ownerId);
+      return drawableOwnerIds(state).has(drawn.ownerId);
     }) ||
       (state.cards.length < MAX_BATTLE_CARDS &&
         allies.some((unit) =>
@@ -149,17 +151,22 @@ export function battleBenefits(
             : 0;
           const payment = blockPayment(damage, enemy.block);
           const lost =
-            enemy.combat.negate || (type === "freeze" && enemy.combat.nullifyFreeze)
+            enemy.combat.negate ||
+            enemy.combat.attackReflection ||
+            (type === "freeze" && enemy.combat.nullifyFreeze)
               ? 0
               : armoredDamage(payment.remaining, armor);
           const eroded =
-            !enemy.combat.negate && armored && state.boons.includes("sundering-charm")
+            !enemy.combat.negate &&
+            !enemy.combat.attackReflection &&
+            armored &&
+            state.boons.includes("sundering-charm")
               ? Math.min(2, enemy.combat.armor)
               : 0;
           return {
-            negated: enemy.combat.negate,
+            negated: enemy.combat.negate || enemy.combat.attackReflection,
             lost,
-            blocked: enemy.combat.negate ? 0 : payment.absorbed,
+            blocked: enemy.combat.negate || enemy.combat.attackReflection ? 0 : payment.absorbed,
             eroded,
             health: enemy.health,
             main: !enemy.minion,
@@ -262,7 +269,7 @@ export function battleBenefits(
     case "recover": {
       const useful = state.battle.discard.some((id) => {
         const card = state.cards.find((entry) => entry.id === id)!;
-        return allies.some((unit) => unit.id === card.ownerId);
+        return drawableOwnerIds(state).has(card.ownerId);
       });
       return support(useful ? "standardUtility" : "none");
     }
@@ -297,7 +304,8 @@ export function battleBenefits(
             enemy.combat.reflectBurn ||
             enemy.combat.nullify ||
             enemy.combat.nullifyFreeze ||
-            enemy.combat.negate),
+            enemy.combat.negate ||
+            enemy.combat.attackReflection),
       ).length;
       const defense = enemies.some(
         (enemy) => enemy.health > 0 && (enemy.block > 0 || enemy.combat.armor > 0),
@@ -309,6 +317,18 @@ export function battleBenefits(
         "Remove visible defenses before spending Mana on blocked attacks",
       );
     }
+    case "reflectAttack":
+      return support(actor.combat?.attackReflection ? "none" : "protection", 1);
+    case "resurrect":
+      return [...state.team, ...state.reserves]
+        .filter((unit) => unit.health === 0)
+        .flatMap((unit) =>
+          support(
+            "healing",
+            Math.max(1, Math.round((maximumHealth(unit) * RESURRECTION_HEALTH_PERCENT) / 100)),
+            unit.id,
+          ),
+        );
     case "dreamDouble":
       return support(actor.combat?.negate ? "protection" : "resource", value);
     case "nightmareHarvest": {

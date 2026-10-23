@@ -1,3 +1,4 @@
+import { oathara } from "./creatures/oathara";
 import { reverie } from "./creatures/reverie";
 import { euphera } from "./creatures/euphera";
 import { tournelle } from "./creatures/tournelle";
@@ -52,6 +53,7 @@ const kits = [
   euphera,
   tournelle,
   reverie,
+  oathara,
 ];
 freeze(kits, true);
 export const SPECIES: readonly Species[] = kits.map((kit) => kit.species);
@@ -81,6 +83,7 @@ export const CARDS: readonly CardDefinition[] = [
   euphera,
   tournelle,
   reverie,
+  oathara,
 ].flatMap((kit) => kit.cards);
 const speciesById = new Map(SPECIES.map((entry) => [entry.id, entry]));
 const cardsBySpecies = new Map<SpeciesId, CardDefinition[]>();

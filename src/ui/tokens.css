@@ -244,6 +244,10 @@
   --keyword-purge: #e879f9;
   --keyword-reflect: #c4b5fd;
   --keyword-nullify: #c4b5fd;
+  --keyword-attackReflection: var(--keyword-reflect);
+  --keyword-attackReflection-deep: var(--keyword-reflect-deep);
+  --keyword-resurrect: var(--keyword-health);
+  --keyword-resurrect-deep: var(--keyword-health-deep);
   --keyword-negate: #c4b5fd;
   --keyword-consume: #a78bfa;
   --damage-physical: var(--keyword-physical);

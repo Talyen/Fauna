@@ -1,3 +1,4 @@
+import { drawableOwnerIds } from "./card-actors";
 import { definition, species } from "./content";
 import type { GameEvent, GameState } from "./types";
 import { chance as succeeds } from "./chance";
@@ -76,7 +77,7 @@ export function draw(state: GameState, count: number, events: GameEvent[] = []) 
   const b = state.battle!;
   recycleDiscard(state);
   // Knocked-out owners retain inert slots, so replacing them cannot refresh spent cards.
-  const alive = new Set(state.team.filter((c) => c.health > 0).map((c) => c.id));
+  const alive = drawableOwnerIds(state);
   const eligibleCards = new Set<string>();
   // Well Read only inserts copies into the hand/buffer; draw/discard ownership
   // stays fixed throughout this draw, including recycling between draws.
@@ -105,9 +106,7 @@ export function drawKeyword(
   fillHand(state);
   const eligible = (id: string) => {
     const card = state.cards.find((c) => c.id === id)!;
-    return (
-      state.team.some((c) => c.id === card.ownerId && c.health > 0) && cardKeywords(card).includes(keyword)
-    );
+    return drawableOwnerIds(state).has(card.ownerId) && cardKeywords(card).includes(keyword);
   };
   let index = lastEligibleIndex(battle.draw, eligible);
   if (index < 0) {

@@ -1932,6 +1932,50 @@
       "aspect": [3, 4],
       "provenance": "Unchanged user-selected Reverie artwork from Google Drive: https://drive.google.com/file/d/1a-GcsGV1azUwAPpjml_21Pp7ZTYYZMrZ/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "creature.oathara",
+      "origin": "repository",
+      "source": "public/art/oathara/portrait.png",
+      "output": "art/oathara/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged user-selected Oathara artwork from Google Drive: https://drive.google.com/file/d/1kWxKfgL9BHOvdrHxyfUnXxnvRYaHwyFc/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.oathara.never-lost",
+      "origin": "repository",
+      "source": "public/art/oathara/never-lost.png",
+      "output": "art/oathara/never-lost.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged user-selected Oathara artwork from Google Drive: https://drive.google.com/file/d/1vuc2BoKTT4BrTnn9j5NBZx_-_YqSnOjF/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.oathara.travelers-ward",
+      "origin": "repository",
+      "source": "public/art/oathara/travelers-ward.png",
+      "output": "art/oathara/travelers-ward.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged user-selected Oathara artwork from Google Drive: https://drive.google.com/file/d/1_MQZPYIR1sMbLRRnIKv06TRIGumCODWd/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.oathara.vow-of-return",
+      "origin": "repository",
+      "source": "public/art/oathara/vow-of-return.png",
+      "output": "art/oathara/vow-of-return.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged user-selected Oathara artwork from Google Drive: https://drive.google.com/file/d/1l3IfYmrUVyjw3NBHHoBRFZOz39RIyaW-/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

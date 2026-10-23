@@ -13,6 +13,7 @@ import { authoredPack, prepareDestination, run } from "../../support/game";
 import { Talents } from "../../../src/ui/talents/talents";
 import { TooltipProvider } from "../../../src/components/ui/tooltip";
 import type { GameState } from "../../../src/game/types";
+import { oatharaBattle } from "../../support/oathara";
 
 screenTestEnvironment({ visible: true });
 
@@ -25,6 +26,39 @@ async function open(game: GameState, resume = true) {
   if (resume) await user.click(screen.getByRole("button", { name: "Continue" }));
   return { session, user };
 }
+it("keeps fallen cards visible, uses Oathara's allowance and permits targeting a knockout for resurrection", async () => {
+  const { session, user } = await open(oatharaBattle());
+  try {
+    await user.click(screen.getByRole("button", { name: /^Ember Charge, Oathara,/ }));
+    await user.click(screen.getByRole("button", { name: "Target Emberback", exact: true }));
+    const borrowed = session.store.getState().game;
+    expect(borrowed.battle!.mana).toBe(3);
+    expect(borrowed.team[0]!.combat!.fallenCardsPlayedThisTurn).toBe(1);
+    expect(borrowed.team[1]!.health).toBe(0);
+    const unavailable = screen.getByRole("button", { name: /^Furnace Breath, Oathara,/ });
+    expect(unavailable.getAttribute("aria-disabled")).toBe("true");
+    await user.click(unavailable);
+    expect(screen.getByText("Unfinished Journey’s limit is spent this turn.")).toBeTruthy();
+    await user.click(screen.getByRole("button", { name: /^Vow of Return,/ }));
+    const target = screen.getByRole("button", { name: "Target Emberback", exact: true });
+    await user.hover(target);
+    expect(session.store.getState().game).toBe(borrowed);
+    await user.click(screen.getByRole("button", { name: "Cancel", exact: true }));
+    expect(session.store.getState().game).toBe(borrowed);
+    await user.click(screen.getByRole("button", { name: /^Vow of Return,/ }));
+    await user.click(screen.getByRole("button", { name: "Target Emberback", exact: true }));
+    expect(session.store.getState().game.team[1]!.health).toBe(6);
+    expect(session.store.getState().game.team[0]!.combat!.fallenCardsPlayedThisTurn).toBe(1);
+    expect(
+      screen.getByRole("button", { name: /^Furnace Breath, Emberback,/ }).getAttribute("aria-disabled"),
+    ).toBe("false");
+    await session.flush();
+    expect(JSON.parse(localStorage.getItem("fauna.save.v1")!).team[1].health).toBe(6);
+  } finally {
+    await act(() => session.dispose());
+  }
+});
+
 it("inspects draw and discard piles without changing state or exposing draw order, and keeps card details on hover", async () => {
   const { session, user } = await open(
     produce(run(), (s) => {

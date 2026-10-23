@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "manifestHash": "2a49dc75b890c312c6b8c50e42decc8e9699d8b63a4800b68272135176d55d27",
-  "generation": "d7befff3890b79ae4f6810e2efb1d58317fe40e3d6f0dba8480a53760e008ce2",
+  "manifestHash": "1b69527c75cdfde3f4ced18eea8b2a9fe1c8b5603d31e8e3e4434bc49f2597e9",
+  "generation": "fbaffd2234a46b66a310a3fc5f249382b9c83ebde4cf9fc151227db04e2bb06d",
   "records": {
     "keyword.block": {
       "url": "./prepared/objects/735558c0801082a6bfbeabec58de75ff3b1ad59643b686fac19e7a169691902e/asset.webp",
@@ -2212,6 +2212,58 @@
       "outputHash": "bd725e0e85cdd584d69fe1ffee023b4926804221753e09cbf7c883e6423c9fd0",
       "sourceBytes": 2363430,
       "outputBytes": 956974,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "creature.oathara": {
+      "url": "./prepared/objects/92a18ecfca8551bbfbd64b6db8f6a55e14a219a5c186b782d477483b8f38e334/asset.webp",
+      "sourceHash": "e83538843e16be6e8f8c1a8e0fbc66de01908b378198e47c26e834840c24a2c0",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "0028ada4b93be4d2613099b6f9925f8d7f1e799692a14a018fe236f4d0950e9c",
+      "sourceBytes": 2569000,
+      "outputBytes": 982020,
+      "width": 960,
+      "height": 720,
+      "alpha": false
+    },
+    "action.oathara.never-lost": {
+      "url": "./prepared/objects/d7ca502e64879aab19e9adca177434628f8a15e147a1164f467db78ea5b5d74a/asset.webp",
+      "sourceHash": "c50d1b946e20d9be53e72826a46d9a3594c6fa465d6883ebb339c16f3f6e4dc2",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "0aecd07328551b7244f2e0f3fc6da2eacd09b88a81256e97d55f5618f89248da",
+      "sourceBytes": 2456330,
+      "outputBytes": 969366,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "action.oathara.travelers-ward": {
+      "url": "./prepared/objects/1f08b41a5a94c4ea112dd486051147eca89d19afb8de1ed575347446c0dc631d/asset.webp",
+      "sourceHash": "e2d13d185cd39b04133f46b196369402e1c9428143648930c3eb478b8991b7aa",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "6979bab18b9c6ce3b918939e376d33bc601649b1646df97d230c9c870aa079ae",
+      "sourceBytes": 2507535,
+      "outputBytes": 992600,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "action.oathara.vow-of-return": {
+      "url": "./prepared/objects/816e7282f24454f1f55a2fb7592902eb6424574958b234578877fa544431b2ea/asset.webp",
+      "sourceHash": "d4dafad7539a76d332cda81f70498fd7a70ee3bbbe199663346a5048bd17e5b9",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "a9a9d28bf0e0532625ffa2de6d7b6e1b330938758da8fa44bfd345cc85b8ee1b",
+      "sourceBytes": 2534715,
+      "outputBytes": 1012914,
       "width": 720,
       "height": 960,
       "alpha": false

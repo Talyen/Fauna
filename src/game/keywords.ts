@@ -1,3 +1,4 @@
+import { RESURRECTION_HEALTH_PERCENT } from "./resurrection-rules";
 import { freeze } from "immer";
 
 export interface KeywordDefinition {
@@ -123,6 +124,20 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Cleansed",
       "Cleansing",
     ]),
+    resurrect: entry(
+      "Resurrect",
+      "effect",
+      "active",
+      `Return a knocked-out ally with ${RESURRECTION_HEALTH_PERCENT}% of their maximum Health, rounded normally with a minimum of 1; Does not renew Death’s Door`,
+      ["Resurrects", "Resurrected", "Resurrection"],
+    ),
+    attackReflection: entry(
+      "Attack Reflection",
+      "effect",
+      "active",
+      "Return the next attack against you to its attacker; Prevents that attack’s damage and harmful effects on you; Reflected attacks cannot reflect again; Lasts until consumed or Purged; Does not stack",
+      ["Reflect the next attack"],
+    ),
     negate: entry(
       "Negate",
       "effect",
@@ -213,6 +228,8 @@ export const EFFECT_KEYWORDS = freeze(
     teamGuard: ["block"],
     redistributeBlock: ["block"],
     redraw: [],
+    reflectAttack: [],
+    resurrect: ["health"],
     teamProtection: ["block", "nature"],
     waterThorns: ["water"],
     teamCleanse: ["health"],

@@ -1,3 +1,4 @@
+import { cardActor } from "./card-actors";
 import { inspectCardPlay, playTargetError } from "./play-queries";
 import { commandPhases } from "./command-phases";
 import { executeAbility } from "./combat/abilities";
@@ -239,12 +240,13 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         const battle = draft.battle;
         const card = draft.cards.find((c) => c.id === command.cardId)!;
         const def = definition(card.definitionId);
-        const actor = draft.team.find((c) => c.id === card.ownerId)!;
+        const actor = cardActor(draft, card)!;
         const value = actionValue(card, actor, draft);
         const keywords = cardKeywords(card);
         for (const keyword of keywords)
           draft.battleXP[keyword] = Math.min(1_000_000, (draft.battleXP[keyword] ?? 0) + 1);
         battle.mana -= cardCost(card, draft);
+        if (actor.id !== card.ownerId) ensureCombat(actor).fallenCardsPlayedThisTurn++;
         ensureCombat(actor).freeCard = false;
         if (keywords.includes("nature")) ensureCombat(actor).freeNature = false;
         if (keywords.includes("light")) ensureCombat(actor).freeLight = false;

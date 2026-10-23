@@ -1,3 +1,4 @@
+import { cardActor, unfinishedJourneyLimit } from "./card-actors";
 import { cardTargeting } from "./card-rules";
 import { definition, type CardDefinition } from "./content";
 import { cardCost } from "./ability-rules";
@@ -10,7 +11,10 @@ import type { BattleState, Card, Creature, Command } from "./types";
 export function chosenRecipients(state: BattleState, def: CardDefinition) {
   const mode = cardTargeting(def);
   return mode === "enemy" || mode === "ally"
-    ? battlefield(state, mode === "enemy" ? "enemy" : "player").filter((unit) => unit.health > 0)
+    ? (def.effect === "resurrect"
+        ? [...state.team, ...state.reserves]
+        : battlefield(state, mode === "enemy" ? "enemy" : "player")
+      ).filter((unit) => (def.effect === "resurrect" ? unit.health === 0 : unit.health > 0))
     : [];
 }
 
@@ -20,7 +24,11 @@ export function playTargetError(state: BattleState, def: CardDefinition, actorId
     (mode === "enemy" || mode === "ally") &&
     !chosenRecipients(state, def).some((unit) => unit.id === targetId)
   )
-    return mode === "enemy" ? "Choose a living enemy." : "Choose a living ally.";
+    return def.effect === "resurrect"
+      ? "Choose a knocked-out ally."
+      : mode === "enemy"
+        ? "Choose a living enemy."
+        : "Choose a living ally.";
   if (mode === "self" && targetId !== undefined && targetId !== actorId)
     return "This ability targets its acting creature.";
   return null;
@@ -40,10 +48,17 @@ export function inspectCardPlay(
   const card = state.cards.find((entry) => entry.id === cardId);
   if (!card || !state.battle.hand.includes(card.id))
     return { allowed: false, reason: "That card is not in your hand." };
-  const actor = state.team.find((unit) => unit.id === card.ownerId);
+  const actor = cardActor(state, card);
   if (!actor || actor.health <= 0) return { allowed: false, reason: "That creature is knocked out." };
   if (controlled(actor)) return { allowed: false, reason: "That creature is Stunned or Frozen." };
+  if (
+    actor.id !== card.ownerId &&
+    (actor.combat?.fallenCardsPlayedThisTurn ?? 0) >= unfinishedJourneyLimit(state, actor)
+  )
+    return { allowed: false, reason: "Unfinished Journey’s limit is spent this turn." };
   const def = definition(card.definitionId);
+  if (def.effect === "resurrect" && !chosenRecipients(state, def).length)
+    return { allowed: false, reason: "There are no knocked-out allies." };
   if (state.battle.mana < cardCost(card, state)) return { allowed: false, reason: "Not enough mana." };
   return { allowed: true, card, actor, def };
 }

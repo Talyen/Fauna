@@ -1,3 +1,4 @@
+import { unfinishedJourneyLimit } from "../card-actors";
 import { battlefield } from "../battlefield";
 import { definition, speciesCards, SPECIES } from "../content";
 import { drawBossCards, bossCardPriority, courtRemembers, removeDepartedMinions } from "./legendary";
@@ -139,11 +140,20 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
         }
         continue;
       }
-      const abilities = enemyAbilities.get(enemy.species)!;
+      const fallen = battle.enemies.filter((unit) => unit.health <= 0);
+      const inherited =
+        unfinishedJourneyLimit(undefined, enemy) > ensureCombat(enemy).fallenCardsPlayedThisTurn
+          ? fallen
+              .flatMap((unit) => enemyAbilities.get(unit.species)!)
+              .filter((card) => card.species !== enemy.species)
+          : [];
+      const choices = [...enemyAbilities.get(enemy.species)!, ...inherited];
+      const abilities = choices.filter((card) => card.effect !== "resurrect" || fallen.length > 0);
       const alternatives = abilities.filter((card) => card.id !== enemy.lastAbility);
       const pool = alternatives.length ? alternatives : abilities;
       const def = pool[Math.floor(roll(draft) * pool.length)]!;
       enemy.lastAbility = def.id;
+      if (inherited.includes(def)) ensureCombat(enemy).fallenCardsPlayedThisTurn++;
       executeAbility(
         draft,
         {
@@ -152,7 +162,12 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
           def,
           value: enemyAbilityValue(enemy, def),
           targetId: target.id,
-          allyTargetId: def.effect === "heal" ? mostInjured(battle.enemies)?.id : enemy.id,
+          allyTargetId:
+            def.effect === "resurrect"
+              ? fallen[0]?.id
+              : def.effect === "heal"
+                ? mostInjured(battle.enemies)?.id
+                : enemy.id,
         },
         events,
         { swap: swapFromCard },

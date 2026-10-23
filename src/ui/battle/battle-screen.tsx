@@ -5,7 +5,8 @@ import { Screen } from "../shared/navigation/screen";
 import { HandMotion } from "./hand-motion";
 import { ActionDetails } from "../shared/cards/card-details";
 import { cardCost } from "../../game/ability-rules";
-import { controlled } from "../../game/combat/index";
+import { cardActor } from "../../game/card-actors";
+import { inspectCardPlay } from "../../game/play-queries";
 import { useLayoutEffect, useMemo, useRef, type ReactNode } from "react";
 import { Button } from "../../components/ui/button";
 import { ActionCard, AllyCard, EnemyCard } from "../shared/cards/cards";
@@ -91,6 +92,7 @@ export function BattleScreen({
     enemyRow,
     playerRow,
     visibleHand,
+    legalTargets,
     setTarget,
     leaveTarget,
     deny,
@@ -101,9 +103,10 @@ export function BattleScreen({
   const battle = game.battle;
   const preview = usePlayPreview(game, selected, target);
   const model = useMemo(() => playPreviewModel(game, preview, target), [game, preview, target]);
-  const recipientUnit = [...enemyRow, ...playerRow].find((unit) => unit.id === target);
+  const recipientUnit = [...enemyRow, ...playerRow, ...game.reserves].find((unit) => unit.id === target);
   const recipient = recipientUnit ? unitName(recipientUnit) : undefined;
-  const line = useTargetLine(board, card?.ownerId, selected, target, allyTarget);
+  const acting = card ? cardActor(game, card) : undefined;
+  const line = useTargetLine(board, acting?.id, selected, target, allyTarget);
   return (
     <Screen
       ref={board}
@@ -162,13 +165,13 @@ export function BattleScreen({
               creature={creature}
               sharedDodge={sharedDodgeChance(game, creature)}
               tooltips={!selected}
-              acting={card?.ownerId === creature.id}
-              validTarget={!!selected && creature.health > 0 && allyTarget}
-              activeTarget={!!selected && creature.health > 0 && target === creature.id}
+              acting={acting?.id === creature.id}
+              validTarget={!!selected && legalTargets.has(creature.id) && allyTarget}
+              activeTarget={!!selected && legalTargets.has(creature.id) && target === creature.id}
               onPreviewEnd={() => leaveTarget(creature.id)}
-              invalidTarget={!!selected && (!allyTarget || creature.health <= 0)}
+              invalidTarget={!!selected && (!allyTarget || !legalTargets.has(creature.id))}
               onPreview={() => {
-                if (selected && allyTarget && creature.health > 0) setTarget(creature.id);
+                if (selected && allyTarget && legalTargets.has(creature.id)) setTarget(creature.id);
               }}
               preview={
                 selected && model.affected.has(creature.id) ? (
@@ -177,13 +180,13 @@ export function BattleScreen({
               }
               onClick={(element) => {
                 if (selected) {
-                  if (allyTarget && creature.health > 0)
+                  if (allyTarget && legalTargets.has(creature.id))
                     play({ type: "play", cardId: selected, targetId: creature.id });
                   else onDenied(element);
                 }
               }}
               label={
-                selected && allyTarget && creature.health > 0
+                selected && allyTarget && legalTargets.has(creature.id)
                   ? `Target ${"name" in creature ? creature.name : species(creature.species).name}`
                   : "name" in creature
                     ? creature.name
@@ -199,16 +202,34 @@ export function BattleScreen({
           ) : card && def ? (
             <>
               <p>
-                {species(def.species).name} ·{" "}
+                {acting ? species(acting.species).name : species(def.species).name} ·{" "}
                 {recipient ?? (enemyTarget ? "Choose an enemy" : "Choose an ally")}
               </p>
               <ActionDetails
                 compact
                 card={card}
-                ownerName={species(def.species).name}
-                actor={game.team.find((unit) => unit.id === card.ownerId)}
+                ownerName={acting ? species(acting.species).name : species(def.species).name}
+                actor={acting}
                 modifiers={game}
               />
+              {def.effect === "resurrect"
+                ? game.reserves
+                    .filter((unit) => legalTargets.has(unit.id))
+                    .map((unit) => (
+                      <Button
+                        key={unit.id}
+                        variant="outline"
+                        data-resurrection-target={unit.id}
+                        aria-label={`Resurrect ${species(unit.species).name} from backup`}
+                        onFocus={() => setTarget(unit.id)}
+                        onMouseEnter={() => setTarget(unit.id)}
+                        onMouseLeave={() => leaveTarget(unit.id)}
+                        onClick={() => play({ type: "play", cardId: card.id, targetId: unit.id })}
+                      >
+                        {species(unit.species).name} (backup)
+                      </Button>
+                    ))
+                : null}
               {preview?.events
                 .filter(
                   (event): event is Extract<GameEvent, { kind: "status" }> =>
@@ -254,7 +275,8 @@ export function BattleScreen({
             <div className="hand">
               {visibleHand.map((id, index, hand) => {
                 const card = game.cards.find((c) => c.id === id)!,
-                  owner = game.team.find((c) => c.id === card.ownerId)!;
+                  owner = cardActor(game, card)!,
+                  admission = inspectCardPlay(game, card.id);
                 return (
                   <FanSlot key={id} index={index} count={hand.length}>
                     <ActionCard
@@ -263,13 +285,9 @@ export function BattleScreen({
                       modifiers={game}
                       ownerName={species(owner.species).name}
                       selected={selected === id}
-                      disabled={battle.mana < cardCost(card, game) || controlled(owner)}
+                      disabled={!admission.allowed}
                       onDenied={(element) => {
-                        deny(
-                          controlled(owner)
-                            ? `${species(owner.species).name} cannot act ${owner.combat?.controlled ? `while ${owner.combat.controlled === "freeze" ? "Frozen" : "Stunned"}` : "this turn"}.`
-                            : "Not enough Mana.",
-                        );
+                        deny(admission.allowed ? "" : admission.reason);
                         onDenied(element);
                       }}
                       onClick={() => {
