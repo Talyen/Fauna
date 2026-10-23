@@ -38,13 +38,13 @@ export function livingChorus(state: GameState, enemy: boolean, events: GameEvent
 }
 export function finishTurn(draft: BattleState, events: GameEvent[]) {
   const battle = draft.battle;
-  const bonusMana = Number(
-    battle.mana > 0 ? hasTalent(draft, "mana.wellspring") : hasTalent(draft, "mana.dark-recovery"),
-  );
   // Enemy-phase draws and existing overflow survive into the next player turn.
   battle.discard.push(...battle.hand.splice(0));
   recycleDiscard(draft);
   for (let pass = 0; pass < 3; pass++) {
+    const bonusMana = Number(
+      battle.mana > 0 ? hasTalent(draft, "mana.wellspring") : hasTalent(draft, "mana.dark-recovery"),
+    );
     // Swaps can reorder the battlefield; each enemy keeps its single action window.
     const actionOrder = battle.enemies.slice();
     // Expire the previous round before an ally can grant Dodge for this round.

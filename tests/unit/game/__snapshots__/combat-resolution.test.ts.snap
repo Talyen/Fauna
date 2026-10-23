@@ -638,64 +638,47 @@ exports[`preserves committed command traces for retaliation and exact absorption
       "cardId": "ally-1:captoad-guard",
       "type": "play",
     },
-    "digest": "1182e4d2b227111ef6172f7c1c00ad0f43e1cfe0b0921a9ff0e2e09da24efe08",
+    "digest": "9200e98d966e0cfceba6d97c557dfdb2267ac29ded5d2a800e6a0c7a4dac2b4f",
     "phase": "battle",
-    "rng": 2575649523,
+    "rng": 3979493644,
+  },
+  {
+    "command": {
+      "cardId": "ally-0:coralcurl-attack",
+      "targetId": "enemy-0",
+      "type": "play",
+    },
+    "digest": "93be383a06b01ab589d41741c1c311d08c469c1849fce311c31b5fb904327fd9",
+    "phase": "battle",
+    "rng": 2278424320,
   },
   {
     "command": {
       "cardId": "ally-2:emberback-attack",
-      "targetId": "enemy-0",
+      "targetId": "enemy-2",
       "type": "play",
     },
-    "digest": "030ccc0d5cc563fadfee7490775a5dce4d560563890d57abaa871d70d408d19d",
+    "digest": "dd0fe74f9502e34c86de041c4784aec5b75cfe24238216effa442bf277044f55",
     "phase": "battle",
-    "rng": 3328065057,
+    "rng": 2232552838,
   },
   {
     "command": {
-      "cardId": "ally-2:emberback-magma-stomp",
+      "cardId": "ally-1:captoad-attack",
       "type": "play",
     },
-    "digest": "1d9044e46e272d03e38691a6844f2dcd180848451dacbeb6f456d7005b60d8c1",
+    "digest": "0782a4ba0c1d57559fd049355c913a5445fced843b4439229fa6985e1c77a633",
     "phase": "battle",
-    "rng": 2819819771,
+    "rng": 4033177692,
   },
   {
     "command": {
       "cardId": "ally-2:emberback-furnace-breath",
       "type": "play",
     },
-    "digest": "5f4c5b48c8cbb947e110691362135f9855a96792c1fb25d476aa132dbd76b7b4",
-    "phase": "battle",
-    "rng": 2278424320,
-  },
-  {
-    "command": {
-      "cardId": "ally-1:captoad-swap",
-      "type": "play",
-    },
-    "digest": "100c4754565d58af7a3c5add02d71ce4d54d9f6e803aa2d93d1e72afc5d75830",
-    "phase": "battle",
-    "rng": 478078559,
-  },
-  {
-    "command": {
-      "cardId": "ally-0:coralcurl-attack",
-      "targetId": "enemy-2",
-      "type": "play",
-    },
-    "digest": "c0361cb9a1efdc192cc0b31c507b5e982de4ad863c98439bd4b74677fc3eed6b",
-    "phase": "battle",
-    "rng": 2325776387,
-  },
-  {
-    "command": {
-      "type": "endTurn",
-    },
-    "digest": "f63be7e3b2eae709592b0665d2d336404a3c7fd067fde2f368d62094e58b63d3",
+    "digest": "a3db4126bd361309bd6f5974a36b7ac3344668e94a9e2a9a6b77c53943a28788",
     "phase": "recruit",
-    "rng": 2232552838,
+    "rng": 1495420021,
   },
 ]
 `;

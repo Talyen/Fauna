@@ -38,14 +38,10 @@ export function* bounce(
   if (!state.battle) return;
   const { effect } = action;
   const allied = !isEnemy(source);
-  const pool =
-    effect === "heal"
-      ? allied
-        ? state.team
-        : state.battle.enemies
-      : allied
-        ? state.battle.enemies
-        : state.team;
+  const pool = battlefield(
+    state,
+    effect === "heal" ? (allied ? "player" : "enemy") : allied ? "enemy" : "player",
+  );
   const visited = new Set([first.id]);
   for (const entry of creaturePassive(allied ? state : undefined, source.species).effects) {
     if (entry.kind !== "bounce" || entry.effect !== effect) continue;
@@ -163,6 +159,11 @@ export function* resolveHit(
   const cardLeech = "cardLeech" in options && options.cardLeech;
   const alliedSource = !isEnemy(source),
     alliedTarget = !isEnemy(target);
+  const virulentLeech = () =>
+    source.health > 0 &&
+    type === "poison" &&
+    hasTalent(state, "leech.virulent-leech") &&
+    succeeds(state, 0.1, false, events);
   const stats = combat(target),
     before = target.health;
   const depletions: ArmorDepletion[] = [];
@@ -424,6 +425,8 @@ export function* resolveHit(
     if (type === "bleed" && state.boons.includes("cutpurse-knife")) gainGold(state, 1, events);
     if (type === "poison" && state.boons.includes("parasitic-bloom") && succeeds(state, 0.1, false, events))
       yield* reaction("leechHealth", state, source, lost, events, true);
+    // Poison ticks and triggered damage carry the same Leech talent as direct Poison hits.
+    if (!direct && virulentLeech()) yield* reaction("leechHealth", state, source, lost, events, true);
     if (
       attack &&
       type === "nature" &&
@@ -540,7 +543,7 @@ export function* resolveHit(
       }
       const chanceLeech =
         (type === "bleed" && proc("bleed.sanguine", 0.1)) ||
-        (type === "poison" && proc("leech.virulent-leech", 0.1)) ||
+        virulentLeech() ||
         (type === "nature" && proc("nature.verdant-cycle", 0.1));
       if (chanceLeech && type === "bleed" && !leech) {
         if (!statusResult.suppressed) deferLeech(target, source, Math.max(0, stats.bleed - bleedBefore));
@@ -553,6 +556,7 @@ export function* resolveHit(
         ["thorns", "nature"],
         ["waterThorns", "water"],
       ] as const) {
+        if (source.health <= 0) break;
         const reflected = stats[status];
         if (reflected <= 0) continue;
         stats[status]--;
