@@ -20,8 +20,7 @@ function legendaryTeam() {
     };
     draft.team = [legendary];
     draft.reserves = [...previous, { ...legendary, id: "second-legend", combat: freshCombat() }];
-    draft.roster = [...draft.team, ...draft.reserves].map((unit) => unit.species);
-    draft.lineup = [legendary.id];
+
     draft.discovery.encountered.push("memento");
     draft.discovery.recruited.memento = 1;
     draft.cards = ownedCards(legendary.id, legendary.species);
@@ -78,7 +77,9 @@ test("enemy Echoes are targetable without being roster creatures", async ({ page
   await page.getByRole("button", { name: /^Ember Charge,/ }).click();
   await page.getByRole("button", { name: "Target Echo", exact: true }).click();
   const committed = await state(page);
-  expect(committed.roster).toEqual(fixture.roster);
+  expect([...committed.team, ...committed.reserves].map((unit) => unit.species)).toEqual(
+    [...fixture.team, ...fixture.reserves].map((unit) => unit.species),
+  );
   expect(committed.battle!.minions![0]!.health).toBeLessThan(6);
 });
 

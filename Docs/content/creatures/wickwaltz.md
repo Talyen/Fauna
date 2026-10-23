@@ -2,7 +2,7 @@
 
 [Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
 
-Wickwaltz has 28 Health and is available through starter drafts, ordinary encounters and recruitment. Its three abilities each cost 1 Mana:
+Wickwaltz has 28 Health and is available through starter drafts, ordinary encounters and recruitment. Its abilities:
 
 - **Ember Pirouette:** Deal 2 Burn damage to all enemies
 - **Saffron Screen:** Gain 3 Block; Nullify the next Freeze damage

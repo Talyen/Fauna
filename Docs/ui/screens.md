@@ -18,7 +18,7 @@ Both menus show spendable talent points beside Talents with an accessible descri
 
 ## Starter draft
 
-Show three offers at shared artwork sizes, with content-width Recruit buttons beneath. Artwork opens inspection; Recruit commits the choice. The final required pick immediately starts the journey without a Begin journey button. Inspecting/canceling preserves the offer; reload preserves committed picks and offers and starts a completed draft automatically. [Starter rules](../EXPEDITION_DESIGN.md#roster-and-battles) own pools and Legendary eligibility.
+Show three offers at shared artwork sizes, with content-width Recruit buttons beneath. Artwork opens inspection; Recruit commits the choice. Omit a Begin journey button: [starter rules](../EXPEDITION_DESIGN.md#roster-and-battles) own automatic start, saved choices, pools and Legendary eligibility.
 
 Starter hover/focus adds kit keywords and the three action names/current Mana costs. Other ordinary creature hover/focus details show name, Block, effects and passive without action lists; the optional Recruit destination below is an explicit exception.
 
@@ -60,17 +60,17 @@ Show centered Victory earnings: keyword-colored icons/level labels with compact 
 
 ### Choose your team
 
-At five creatures, Recruit banks Collection progress before showing the original roster preview. Center the incoming exchange artwork and opposing-arrow icon above one quiet Team tray of all five current individuals. Omit at-rest names, Health, pagination, Back and Cancel; hover/focus and inspection retain details.
+For a full roster, center the incoming exchange artwork and opposing-arrow icon above one quiet Team tray of all five current individuals. Omit at-rest names, Health, pagination, Back and Cancel; hover/focus and inspection retain details.
 
-Artwork activation previews one exchange using shared swap motion. Retargeting restores the previous individual; activating the selected member or upper artwork reverses the preview. One centered Confirm commits the displayed team, including keeping it unchanged. Input remains available during motion. Previews never save, consume RNG or grant progress; reload restores the original roster preview around the saved recruit.
+Artwork activation previews one exchange using shared swap motion. Retargeting restores the previous individual; activating the selected member or upper artwork reverses the preview. One centered Confirm commits the displayed team, including keeping it unchanged. Input remains available during motion. [Recruitment rules](../EXPEDITION_DESIGN.md#recruitment) own banking, preview isolation and reload behavior.
 
 ## Journey results
 
-Show only outcome and permanent gains. Keywords use names, levels and progress bars without numeric XP gains/fractions or talent-point prompts. Omit teams, unlocks, statistics and temporary Boons. One centered Main menu action leaves results; there is no menu entry to reopen them. [Journey results](../EXPEDITION_DESIGN.md#screen-flow-and-journey-results) own banking and ending behavior.
+Show only outcome and permanent gains. Keywords use names, levels (earned points + 1) and progress bars without numeric XP gains/fractions or talent-point prompts. Omit teams, unlocks, statistics and temporary Boons. One centered Main menu action leaves results; there is no menu entry to reopen them. [Journey results](../EXPEDITION_DESIGN.md#screen-flow-and-journey-results) own banking and ending behavior.
 
 ## Encounter and required replacement
 
-Ordinary combat uses one blank landscape ArtCard labeled Combat. Boss entrances show the authored name/species artwork and base-trait hover/focus details. Activating either starts the saved battle directly, without previews or visible intents. Keep Deck available. No free Swap or Lineup control appears.
+Show a quiet encounter number out of eight and keep compact last-battle earnings visible until the next battle begins. Ordinary combat uses one blank landscape ArtCard labeled Combat. Boss entrances show the authored name/species artwork and base-trait hover/focus details. Activating either starts the saved battle directly, without previews or visible intents. Keep Deck available. No free Swap or Lineup control appears.
 
 When deployed knockouts have living backup, show a centered, nondismissible Choose a replacement Dialog. Put the knocked-out creature above living backup at shared sizes, separated by an up/down icon. Only backup choices commit, immediately. Focus the first living choice; successive knockouts receive successive prompts, then focus returns to the hand or End turn. Escape/outside click cannot bypass the choice. Backup stays hidden on the battlefield. Reload reconstructs prompts from committed roster state.
 
@@ -105,7 +105,7 @@ Deck and owned Boons use the existing modal owner and bounded pages. Draw/Discar
 
 ## Campfire
 
-Page the whole roster on one measured row, showing current Health and exact capped recovery before a single Rest action. Use the [eligibility and recovery rules](../EXPEDITION_DESIGN.md#encounters).
+The Campfire destination uses location artwork with Rest beneath it. Inside the visit, page the whole roster on one measured row, showing current Health and exact capped recovery before a single Rest action. Use the [eligibility and recovery rules](../EXPEDITION_DESIGN.md#encounters).
 
 Rest returns immediately to the same combat offers, briefly presenting committed before/after meters and actual recovery for healed creatures, including backup. Navigation and battle remain available. Reduced motion settles meters directly; teardown cancels animation/expiry work.
 
@@ -113,7 +113,7 @@ Rest returns immediately to the same combat offers, briefly presenting committed
 
 Open directly from its existing landscape location ArtCard; source selection remains an explicit placeholder. Center up to three prepared portrait Boons with names/rules/journey duration in hover/focus details. Put the Gold wallet in the heading row, and “Limit 1 per customer - No Refunds!” centered in italics above the shelf. Align secondary purchase Buttons below artwork and center Leave. Wallet/prices use shared gold Coins icons.
 
-Unaffordable purchases remain focusable, explain Not enough Gold and cannot issue commands. Buying replaces the shelf with one purchased Boon, name, rules, For this journey and Continue; move focus to Continue. The grant/spend is already committed and survives reload. Menus preserve shelf/reward. [Support visits](../EXPEDITION_DESIGN.md#optional-support-visits) own saved prices, eligibility, leaving and rerolls.
+Unaffordable purchases remain focusable, explain Not enough Gold and cannot issue commands. Buying replaces the shelf with one purchased Boon, name, rules, For this journey and Continue; move focus to Continue. [Support visits](../EXPEDITION_DESIGN.md#optional-support-visits) own purchase commitment, resume, prices, eligibility, leaving and rerolls.
 
 ## Startup loading
 

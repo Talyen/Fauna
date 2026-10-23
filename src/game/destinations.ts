@@ -25,7 +25,7 @@ export function canVisitCampfire(state: GameState) {
 export function canVisitMerchant(state: GameState) {
   return (
     state.phase === "teamSelection" &&
-    state.expedition?.lastRoom !== "merchant" &&
+    state.expedition.lastRoom !== "merchant" &&
     !!state.support &&
     !state.support.resolved &&
     state.support.stock.some((slot) => slot.price <= state.currency)
@@ -35,8 +35,8 @@ export function canVisitMerchant(state: GameState) {
 export function canRecruitDestination(state: GameState) {
   return (
     state.phase === "teamSelection" &&
-    state.expedition?.lastRoom !== "recruit" &&
-    state.roster.length < 5 &&
-    !!state.expedition?.recruit
+    state.expedition.lastRoom !== "recruit" &&
+    state.team.length + state.reserves.length < 5 &&
+    !!state.expedition.recruit
   );
 }

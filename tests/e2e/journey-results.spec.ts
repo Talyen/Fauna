@@ -34,7 +34,7 @@ for (const [width, enlarged, outcome] of [
         game = winBattle(accept(game, { type: "beginBattle" }));
         if (game.phase === "recruit")
           game =
-            game.roster.length < 5
+            game.team.length + game.reserves.length < 5
               ? accept(game, { type: "recruit", species: game.reward!.recruits[0]! })
               : completeRecruitment(game);
         if (game.phase === "boon") game = accept(game, { type: "chooseBoon", boon: game.reward!.boons[0]! });
@@ -113,7 +113,7 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
           draft.journey!.victories = draft.encounter;
           prepareDestination(draft);
           draft.expedition = { pack: authoredPack(draft.encounter), recruit: null, lastRoom: null };
-          draft.journey = { outcome: null, victories: 7, currency: 0, xp: {}, unlocks: [], lastBattle: null };
+          draft.journey = { outcome: null, victories: 7, currency: 0, xp: {}, lastBattle: null };
         }),
         { type: "beginBattle" },
       ),
@@ -140,7 +140,6 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     await expect(page.getByRole("heading", { name: "Journey complete", exact: true })).toBeVisible();
     const won = await state(page);
     expect(won.wins).toBe(1);
-    expect(won.unlocked).toContain("prismram");
     expect(won.currency).toBe(fixture.currency + 40);
     expect(Object.values(won.keywordXP).reduce((a, b) => a + b, 0)).toBeGreaterThan(0);
     await page.reload();

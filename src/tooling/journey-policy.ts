@@ -220,7 +220,7 @@ export function createJourneyActor(config: Pick<JourneyConfig, "seed" | "starter
           );
         if (canRecruitDestination(state))
           return decision(
-            { type: "recruitDestination", species: state.expedition!.recruit! },
+            { type: "recruitDestination", species: state.expedition.recruit! },
             "Fill a free roster slot with the saved recruit",
           );
         if (canVisitMerchant(state))

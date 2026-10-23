@@ -16,7 +16,7 @@ import { battlefield } from "./battlefield";
 import { courtRemembers, removeDepartedMinions } from "./combat/legendary";
 import { fillHand, recycleDiscard } from "./card-zones";
 import { actionValue, cardCost } from "./ability-rules";
-import { SPECIES, definition, species } from "./content";
+import { definition, species } from "./content";
 import { bossEncounter, generateEncounterPack } from "./encounters";
 import type { Command, CommandResult, GameEvent, GameState } from "./types";
 import {
@@ -42,13 +42,10 @@ export function createGame(seed = 1): GameState {
     revision: 0,
     rng: seed >>> 0,
     phase: "draft",
-    unlocked: SPECIES.map((entry) => entry.id),
     wins: 0,
     selected: [],
     starterOffers: [],
-    roster: [],
     reserves: [],
-    lineup: [],
     keywordXP: {},
     battleXP: {},
     talents: [],
@@ -148,14 +145,14 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
     command.type === "confirmRecruit" &&
     (state.phase !== "recruit" ||
       state.reward.selectedRecruit === undefined ||
-      state.roster.length !== 5 ||
+      state.team.length + state.reserves.length !== 5 ||
       (command.replace !== undefined &&
         ![...state.team, ...state.reserves].some((creature) => creature.id === command.replace)))
   )
     return reject(state, "Confirm the current team or choose a creature to replace.");
   if (
     command.type === "recruitDestination" &&
-    (!canRecruitDestination(state) || state.expedition?.recruit !== command.species)
+    (!canRecruitDestination(state) || state.expedition.recruit !== command.species)
   )
     return reject(state, "That recruit is unavailable.");
   if (
@@ -215,8 +212,6 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
           attacked: false,
         }));
         draft.cards = draft.team.flatMap((c) => ownedCards(c.id, c.species));
-        draft.roster = [...draft.selected];
-        draft.lineup = draft.team.map((c) => c.id);
         if (draft.phase !== "draft") throw new Error("Invalid starter transition.");
         startJourney(draft);
         break;
@@ -240,10 +235,8 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
       case "beginBattle":
         if (draft.phase !== "teamSelection") throw new Error("Invalid battle transition.");
         draft.support = null;
-        if (draft.expedition) {
-          draft.expedition.recruit = null;
-          draft.expedition.lastRoom = bossEncounter(draft) ? "boss" : "combat";
-        }
+        draft.expedition.recruit = null;
+        draft.expedition.lastRoom = bossEncounter(draft) ? "boss" : "combat";
         draft.journey.lastBattle = null;
         beginBattle(draft, events);
         events.push({ kind: "turn", text: "Your journey begins." });
@@ -344,16 +337,16 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
           MAX_CREATURE_STARS + 1,
           (draft.discovery.recruited[command.species] ?? 0) + 1,
         );
-        if (command.type === "recruit" && draft.roster.length === 5) {
+        if (command.type === "recruit" && draft.team.length + draft.reserves.length === 5) {
           if (draft.phase !== "recruit") throw new Error("Invalid Recruit choice.");
           draft.reward.selectedRecruit = command.species;
           break;
         }
         addRecruit(draft, command.species);
         if (command.type === "recruitDestination") {
-          draft.expedition!.recruit = null;
-          draft.expedition!.pack = generateEncounterPack(draft, draft.expedition!.pack!);
-          draft.expedition!.lastRoom = "recruit";
+          draft.expedition.recruit = null;
+          draft.expedition.pack = generateEncounterPack(draft, draft.expedition.pack!);
+          draft.expedition.lastRoom = "recruit";
           events.push({ kind: "reward", text: `${species(command.species).name} joined your roster.` });
         } else {
           if (draft.phase !== "recruit") throw new Error("Invalid Recruit choice.");
@@ -387,7 +380,6 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         Object.assign(draft, fresh, {
           revision: state.revision + 1,
           rng: command.seed >>> 0,
-          unlocked: [...state.unlocked],
           discovery: {
             encountered: [...state.discovery.encountered],
             recruited: { ...state.discovery.recruited },
@@ -402,7 +394,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
       }
       case "abandon":
         draft.support = null;
-        if (draft.expedition) draft.expedition.recruit = null;
+        draft.expedition.recruit = null;
         if (draft.phase === "draft") {
           draft.selected = [];
           offerStarters(draft);

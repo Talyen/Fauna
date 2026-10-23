@@ -1,11 +1,11 @@
 import { motionValue } from "../shared/motion-values";
-import type { GameEvent } from "../../game/types";
+import type { GameEvent, DamageEvent } from "../../game/types";
 /** Positive health loss recoils; absorbed and ineffective hits keep numbers/audio only. */
 export function impactTargets(events: readonly GameEvent[]): string[] {
   return [
     ...new Set(
       events
-        .filter((e) => e.kind === "damage" && e.impact !== false && (e.amount ?? 0) > 0 && e.targetId)
+        .filter((e): e is DamageEvent => e.kind === "damage" && e.impact !== false && e.amount > 0)
         .map((e) => e.targetId!),
     ),
   ];
@@ -43,8 +43,7 @@ export function createCombatImpacts(root: () => HTMLElement | null) {
     present(events: readonly GameEvent[]) {
       if (disposed || reduced?.matches) return;
       for (const event of events) {
-        if (event.kind !== "action" || !event.actorId || !event.actionType || event.actionType === "swap")
-          continue;
+        if (event.kind !== "action" || event.actionType === "swap") continue;
         const element = root()?.querySelector<HTMLElement>(
           `[data-actor-id="${event.actorId}"] .combatant-motion`,
         );
@@ -78,10 +77,9 @@ export function createCombatImpacts(root: () => HTMLElement | null) {
       for (const id of impactTargets(events)) {
         if (performance.now() - (last.get(id) ?? -Infinity) < motionValue("--motion-hit")) continue;
         const actor = root()?.querySelector<HTMLElement>(`[data-actor-id="${id}"]`);
-        const damage = events.filter((e) => e.kind === "damage" && e.targetId === id);
-        const loss =
-          damage.reduce((n, e) => n + (e.amount ?? 0), 0) / (Number(actor?.dataset.maxHealth) || 1);
-        const periodic = damage.every((e) => ["burn", "poison", "bleed"].includes(e.damageType ?? ""));
+        const damage = events.filter((e): e is DamageEvent => e.kind === "damage" && e.targetId === id);
+        const loss = damage.reduce((n, e) => n + e.amount, 0) / (Number(actor?.dataset.maxHealth) || 1);
+        const periodic = damage.every((e) => ["burn", "poison", "bleed"].includes(e.damageType));
         const strength = periodic || loss < 0.05 ? 3 : loss < 0.2 ? 6 : 10;
         const recoil = strength * (id.startsWith("enemy-") ? -1 : 1);
         last.set(id, performance.now());

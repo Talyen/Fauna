@@ -50,12 +50,11 @@ it.each([1, 2, 3, 4, 5, 6])(
       next.battle!.enemies.map((enemy, index) => game.battle!.enemies[index]!.health - enemy.health),
     ).toEqual([copies, copies, copies]);
     expect(next.battle!.enemies.map((enemy) => enemy.combat.burn)).toEqual([copies, copies, copies]);
-    expect(events.filter((event) => event.kind === "damage").map((event) => event.targetId)).toEqual([
-      "ally-0",
-      "enemy-0",
-      "enemy-1",
-      "enemy-2",
-    ]);
+    expect(
+      events
+        .filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage")
+        .map((event) => event.targetId),
+    ).toEqual(["ally-0", "enemy-0", "enemy-1", "enemy-2"]);
     expect(decodeSave(encodeSave(next))).toEqual(next);
   },
 );
@@ -72,20 +71,40 @@ it("requires an actual break, can trigger again after gaining new Armor, and nev
     expect(combat(unit).armor).toBe(2);
     hit(draft, enemy, unit, 3, "physical", events);
     expect(combat(unit).armor).toBe(1);
-    expect(events.filter((event) => event.damageType === "burn")).toHaveLength(0);
+    expect(events.filter((event) => event.kind === "damage" && event.damageType === "burn")).toHaveLength(0);
     hit(draft, enemy, unit, 2, "physical", events);
-    expect(events.filter((event) => event.kind === "damage" && event.damageType === "burn")).toHaveLength(3);
+    expect(
+      events.filter(
+        (event): event is Extract<GameEvent, { kind: "damage" }> =>
+          event.kind === "damage" && event.damageType === "burn",
+      ),
+    ).toHaveLength(3);
     hit(draft, enemy, unit, 1, "physical", events);
-    expect(events.filter((event) => event.kind === "damage" && event.damageType === "burn")).toHaveLength(3);
+    expect(
+      events.filter(
+        (event): event is Extract<GameEvent, { kind: "damage" }> =>
+          event.kind === "damage" && event.damageType === "burn",
+      ),
+    ).toHaveLength(3);
     combat(unit).armor = 1;
     removeEffects(unit, "purge", 1, events, draft);
-    expect(events.filter((event) => event.kind === "damage" && event.damageType === "burn")).toHaveLength(6);
+    expect(
+      events.filter(
+        (event): event is Extract<GameEvent, { kind: "damage" }> =>
+          event.kind === "damage" && event.damageType === "burn",
+      ),
+    ).toHaveLength(6);
     combat(unit).armor = 1;
     combat(unit).deathDoorUsed = true;
     unit.health = 1;
     hit(draft, enemy, unit, 3, "physical", events);
     expect(unit.health).toBe(0);
-    expect(events.filter((event) => event.kind === "damage" && event.damageType === "burn")).toHaveLength(6);
+    expect(
+      events.filter(
+        (event): event is Extract<GameEvent, { kind: "damage" }> =>
+          event.kind === "damage" && event.damageType === "burn",
+      ),
+    ).toHaveLength(6);
   });
 });
 
@@ -95,7 +114,6 @@ it("keeps enemy Molten Shell at its base tier and excludes reserves", () => {
     enemy.combat.armor = 1;
     enemy.combat.controlled = "freeze";
     enemy.combat.controlTurns = 1;
-    draft.roster.push("mossguard");
     draft.reserves.push({ ...draft.team[1]!, id: "reserve", combat: freshCombat() });
   });
   const events: GameEvent[] = [];
@@ -109,7 +127,6 @@ it("keeps enemy Molten Shell at its base tier and excludes reserves", () => {
 
 it("does not activate Molten Shell when periodic damage breaks Armor after swapping into backup", () => {
   const game = produce(battle(6), (draft) => {
-    draft.roster.push("mossguard");
     draft.reserves.push({ ...draft.team[1]!, id: "backup-moss", combat: freshCombat() });
     combat(draft.team[0]!).armor = 1;
     combat(draft.team[0]!).burn = 1;
@@ -135,7 +152,12 @@ it("resolves opposing Molten Shells once each without a retaliation loop", () =>
   });
   expect(next.team[0]!.combat!.armor).toBe(0);
   expect(next.battle!.enemies[0]!.combat.armor).toBe(0);
-  expect(events.filter((event) => event.kind === "damage" && event.damageType === "burn")).toHaveLength(6);
+  expect(
+    events.filter(
+      (event): event is Extract<GameEvent, { kind: "damage" }> =>
+        event.kind === "damage" && event.damageType === "burn",
+    ),
+  ).toHaveLength(6);
 });
 
 it.each(["physical", "poison", "freeze", "stun"] as const)(

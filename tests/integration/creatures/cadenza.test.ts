@@ -1,3 +1,4 @@
+import type { GameEvent } from "../../../src/game/types";
 import { authoredPack, swapFixture } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
@@ -122,7 +123,6 @@ it("Echoes Remember preserves overflow ordering and recovers exactly one card wh
 it("Rousing Refrain protects only living deployed allies and expires at their next turn", () => {
   const game = produce(ready("rousing-refrain"), (draft) => {
     draft.team[2]!.health = 0;
-    draft.roster.push("coralcurl");
     draft.reserves.push({
       id: "backup",
       species: "coralcurl",
@@ -231,7 +231,10 @@ it.each([0, 2])(
       const result = dispatch(game, { type: "endTurn" });
       expect(result.accepted).toBe(true);
       expect(
-        result.events.filter((event) => event.kind === "heal" && event.targetId === "enemy-1").length,
+        result.events.filter(
+          (event): event is Extract<GameEvent, { kind: "heal" }> =>
+            event.kind === "heal" && event.targetId === "enemy-1",
+        ).length,
       ).toBeGreaterThan(0);
       expect(result.state.battle!.enemies[position]!.lastAbility).toBe("cadenza-rousing-refrain");
       expect(
@@ -292,7 +295,6 @@ it("Living Chorus does not count repeated resolutions as additional cards", () =
 });
 it("swapping Cadenza out and back does not reset the team's second-card cadence", () => {
   const game = produce(ready("echoes-remember"), (draft) => {
-    draft.roster.push("coralcurl");
     draft.reserves.push({
       id: "backup",
       species: "coralcurl",

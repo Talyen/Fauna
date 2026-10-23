@@ -1,11 +1,5 @@
 # Gameplay glossary
 
-Keyword definitions live in [src/game/keywords.ts](../src/game/keywords.ts); the complete gameplay glossary is assembled in [src/game/glossary.ts](../src/game/glossary.ts) and is available in-game under **Menu → Glossary**. Keep terminology in card text and feedback consistent with those definitions.
+[src/game/keywords.ts](../src/game/keywords.ts) owns keyword definitions; [src/game/glossary.ts](../src/game/glossary.ts) assembles the complete in-game **Menu → Glossary**. Keep card text and feedback consistent with those owners.
 
-Terms currently defined: Health, Block, Mana, Action card, Attack, Damage, Hit, Turn, Battle, Draw / discard, Knockout, Keyword XP, Talents, Backup, Starting lineup, Swap cards, Boons, Currency, Thorns, Water Thorns, Death's Door, defenses, periodic statuses, crowd control, Blind, Nullify, Reflect, removal effects and each damage type.
-
-Damage, status, defense and keyword contracts are defined in [Keywords](KEYWORDS.md). There are no elemental reactions. Gold is permanent battle-earned currency spent at Merchants, rather than a keyword or talent category. Consume removes a played card from the battle; unplayed cards discard normally. Wish, Companion and Archery are excluded.
-
-See [Keywords](KEYWORDS.md) for the Alchemy-derived catalog, color identity and current rules.
-
-Boon replaces the old relic label for passive journey items. Burn, Freeze, Stun and Health are the canonical keyword and talent identities. Thorns, Water Thorns, Cleanse and Purge remain combat vocabulary but use Nature, Water, Health and Light progression respectively. Forge is retired.
+[Keywords](KEYWORDS.md) explains combat rules and progression classification. Use Boon for passive journey items, Gold for permanent currency and Journey for a run. Current labels supersede historical relic, Holy and expedition wording in design records; internal identifiers need not change.

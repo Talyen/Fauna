@@ -31,7 +31,7 @@ export function parseCheckArgs(args) {
     else if (arg === "--diff" || arg === "--working-tree") diff = true;
     else if (arg === "--test" || arg === "--forget-test") {
       if (!args[i + 1] || args[i + 1].startsWith("-"))
-        throw new Error(`${arg} requires a unit/integration suite path.`);
+        throw new Error(`${arg} requires a unit/integration/exhaustive suite path.`);
       (arg === "--test" ? tests : forget).push(args[++i]);
     } else if (arg === "--base") {
       if (base || !args[i + 1] || args[i + 1].startsWith("-"))
@@ -112,7 +112,7 @@ export function checkPlan(root, paths, namedTests = [], { related = false } = {}
         "tsconfig.desktop-boundary.json",
       ])
         configs.add(config);
-    if (/^tests\/(?:unit|integration)\/.*\.test\.[cm]?[jt]sx?$/.test(file)) tests.add(file);
+    if (/^tests\/(?:unit|integration|exhaustive)\/.*\.test\.[cm]?[jt]sx?$/.test(file)) tests.add(file);
     const filenameOwner = /^(?:src\/(.+)|scripts\/(.+))\.[cm]?[jt]sx?$/.exec(file);
     if (filenameOwner)
       for (const extension of ["ts", "tsx", "mjs", "js"])
@@ -161,11 +161,11 @@ export function runCheck(args = [], { root = ROOT, runner = spawnSync, log = con
     .map((file) => {
       const relative = path.relative(root, path.resolve(root, file)).split(path.sep).join("/");
       if (
-        !/^tests\/(?:unit|integration)\/.+\.test\.[cm]?[jt]sx?$/.test(relative) ||
+        !/^tests\/(?:unit|integration|exhaustive)\/.+\.test\.[cm]?[jt]sx?$/.test(relative) ||
         !existsSync(path.join(root, relative))
       )
         throw new Error(
-          `Choose an existing unit/integration suite: ${file}. Remove an obsolete selection with --forget-test ${file}.`,
+          `Choose an existing unit/integration/exhaustive suite: ${file}. Remove an obsolete selection with --forget-test ${file}.`,
         );
       return relative;
     });

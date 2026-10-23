@@ -167,7 +167,9 @@ it.each(["player", "enemy"] as const)(
       }
       game.rng = seed;
       hit(game, actor, target, 2, "physical", events);
-      expect(events.find((event) => event.kind === "damage")).toMatchObject({ amount: 4, critical: true });
+      expect(
+        events.find((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage"),
+      ).toMatchObject({ amount: 4, critical: true });
       target.health = 20;
       target.combat = freshCombat();
       game.rng = 1;
@@ -249,9 +251,9 @@ it("applies room power once to primary Block and supplemental damage/healing bef
   });
   expect(next.battle!.enemies[0]!.block).toBe(9);
   expect(next.battle!.enemies[0]!.health).toBe(initial.battle!.enemies[0]!.maxHealth - 5);
-  expect(events.filter((event) => event.kind === "damage")).toEqual([
-    expect.objectContaining({ amount: 3, damageType: "burn" }),
-  ]);
+  expect(
+    events.filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage"),
+  ).toEqual([expect.objectContaining({ amount: 3, damageType: "burn" })]);
   expect(next.team[0]!.combat!.burn).toBe(3);
   expect(next.battle!.hand).toEqual(initial.battle!.hand);
   expect(next.battle!.mana).toBe(initial.battle!.mana);
@@ -331,7 +333,10 @@ it.each(["player", "enemy"] as const)(
         { swap() {} },
       );
       expect(actor.health).toBe(survives ? 1 : 0);
-      const hits = events.filter((event) => event.kind === "damage" && event.actorId === actor.id);
+      const hits = events.filter(
+        (event): event is Extract<GameEvent, { kind: "damage" }> =>
+          event.kind === "damage" && event.actorId === actor.id,
+      );
       if (survives) expect(hits.length).toBeGreaterThanOrEqual(targets.length * 2);
       else expect(hits).toHaveLength(1);
       expect(actor.combat!.armor).toBe(survives ? 2 : 0);

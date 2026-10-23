@@ -1,7 +1,8 @@
 import { describe, it } from "vitest";
-import { expectSupportedLineup, ordinaryLineups } from "../../support/lineups";
+import { expectSupportedLineup, ordinaryLineups } from "../support/lineups";
 
-describe("every ordinary three-creature lineup", () => {
+// Full CI retains every combination and every intermediate save boundary.
+describe("all ordinary creature combinations", () => {
   for (const scenario of ordinaryLineups())
     it(`supports ${scenario.name} without engine failures or invalid saves`, () => {
       expectSupportedLineup(scenario);

@@ -57,7 +57,7 @@ export function createBattleActor() {
     choose(state: GameState, autoEndTurn = true): BattleChoice {
       const currentScope =
         state.phase === "battle"
-          ? JSON.stringify([state.encounter, state.expedition?.pack, state.battle.turn])
+          ? JSON.stringify([state.encounter, state.expedition.pack, state.battle.turn])
           : "";
       if (
         !currentScope ||

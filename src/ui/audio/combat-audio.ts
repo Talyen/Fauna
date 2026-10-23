@@ -13,7 +13,8 @@ export type CombatCue =
 export function selectCombatCue(events: readonly GameEvent[]): CombatCue | undefined {
   let best: { cue: CombatCue; amount: number; priority: number } | undefined;
   for (const event of events) {
-    const amount = Math.abs(event.amount ?? 0);
+    if (event.kind !== "damage" && event.kind !== "heal" && event.kind !== "block") continue;
+    const amount = Math.abs(event.amount);
     if (amount === 0) continue;
     const cue =
       event.kind === "damage"
@@ -25,11 +26,11 @@ export function selectCombatCue(events: readonly GameEvent[]): CombatCue | undef
               ? "physical"
               : event.damageType === "stun"
                 ? "lightning"
-                : (event.damageType ?? "physical")
+                : event.damageType
         : event.kind === "heal"
           ? "heal"
           : event.kind === "block"
-            ? event.amount! < 0
+            ? event.amount < 0
               ? "absorb"
               : "block"
             : undefined;

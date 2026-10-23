@@ -15,6 +15,7 @@ import { runLocalTests } from "../../../scripts/checks/run-local-tests.mjs";
 import owners from "../../../scripts/checks/test-owners.json" with { type: "json" };
 import localConfig from "../../../vitest.local.config.mjs";
 import { localCommands } from "../../../scripts/local.mjs";
+import { investigationArgs } from "../../../scripts/agent/investigate.mjs";
 
 const roots = [];
 const repo = path.resolve(import.meta.dirname, "../../..");
@@ -44,6 +45,15 @@ afterEach(() => {
 });
 
 describe("lightweight local verification", () => {
+  it("keeps exhaustive matrices in full CI while local changes verify their owning contract", () => {
+    const plan = checkPlan(repo, ["tests/exhaustive/roster-combinations.test.ts"]);
+    expect(plan.tests).toEqual(["tests/unit/game/engine.test.ts", "tests/unit/game/lineups.test.ts"]);
+    expect(plan.configs).toContain("tsconfig.test.json");
+    expect(readFileSync(path.join(repo, "vitest.config.ts"), "utf8")).toContain(
+      "unit,integration,exhaustive",
+    );
+  });
+
   it("rejects unknown options and ambiguous or incomplete selections", () => {
     expect(parseCheckArgs([])).toEqual({ paths: [], base: null });
     expect(parseCheckArgs(["--working-tree"])).toEqual({ paths: [], base: "HEAD" });
@@ -276,26 +286,27 @@ describe("lightweight local verification", () => {
 
   it("defers registered extended suites while retaining local contracts and explicit requests", () => {
     const root = fixture();
-    const extended = "tests/unit/simulation/engine-lineups.test.ts";
-    const local = "tests/unit/game/engine.test.ts";
-    for (const file of [extended, local]) {
+    const extended = "tests/exhaustive/roster-combinations.test.ts";
+    const local = ["tests/unit/game/engine.test.ts", "tests/unit/game/lineups.test.ts"];
+    for (const file of [extended, ...local]) {
       mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
       writeFileSync(path.join(root, file), "export {};\n");
     }
     const plan = checkPlan(root, [extended, "src/game/engine.ts"]);
-    expect(plan.tests).toEqual([local]);
+    expect(plan.tests).toEqual(local);
     expect(plan.ciTests).toContain(extended);
     const runner = vi.fn(() => ({ status: 0 }));
     const messages = [];
     expect(runCheck([extended], { root, runner, log: (message) => messages.push(message) })).toBe(0);
     const testCall = runner.mock.calls.find((call) => call[1][0].endsWith("vitest.mjs"));
-    expect(testCall[1]).toContain(local);
+    for (const suite of local) expect(testCall[1]).toContain(suite);
     expect(testCall[1]).not.toContain(extended);
     expect(messages.join("\n")).toContain(`CI-owned extended suite (not run by this gate): ${extended}`);
-    expect(checkPlan(root, [extended], [extended]).tests).toEqual([local, extended]);
+    expect(checkPlan(root, [extended], [extended]).tests).toEqual([...local, extended].sort());
     const explicit = vi.fn(() => ({ status: 0 }));
     expect(runCheck(["--test", extended], { root, runner: explicit, log: () => {} })).toBe(0);
     expect(explicit.mock.calls.at(-1)[1]).toContain(extended);
+    expect(investigationArgs(root, ["unit", extended]).at(-1)).toBe(extended);
     rmSync(path.join(root, extended));
     expect(checkPlan(root, [extended]).missingContracts).toContainEqual({
       owner: extended,
@@ -311,7 +322,7 @@ describe("lightweight local verification", () => {
     for (const [file, owner] of Object.entries(owners)) {
       if (owner.tier === undefined) continue;
       expect(owner.tier).toBe("ci");
-      expect(file).toMatch(/^tests\/(?:unit|integration)\/.+\.test\.[cm]?[jt]sx?$/);
+      expect(file).toMatch(/^tests\/(?:unit|integration|exhaustive)\/.+\.test\.[cm]?[jt]sx?$/);
       expect(owner.reason.length).toBeGreaterThan(0);
       expect(owner.suites.length).toBeGreaterThan(0);
       for (const local of owner.suites) expect(owners[local]?.tier).not.toBe("ci");

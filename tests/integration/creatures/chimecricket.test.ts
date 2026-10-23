@@ -1,3 +1,4 @@
+import type { GameEvent } from "../../../src/game/types";
 import { authoredPack, swapFixture } from "../../support/game";
 import { cardText } from "../../../src/game/card-rules";
 import { expect, it } from "vitest";
@@ -87,7 +88,11 @@ it.each([1, 2, 3, 4, 5, 6])(
       );
     }
     const repeated = outcome(chance - 0.005);
-    expect(repeated.events.filter((e) => e.kind === "damage" && e.actorId === "ally-0")).toHaveLength(2);
+    expect(
+      repeated.events.filter(
+        (e): e is Extract<GameEvent, { kind: "damage" }> => e.kind === "damage" && e.actorId === "ally-0",
+      ),
+    ).toHaveLength(2);
     expect(repeated.state.battle!.hand).toHaveLength(2);
     expect(repeated.state.battle!.mana).toBe(3);
     expect(repeated.state.battle!.cardsPlayedThisTurn).toBe(1);
@@ -105,7 +110,6 @@ it("reselects the most injured ally for the repeated heal and fully Cleanses eac
     draft.team[1]!.health = 14;
     for (const unit of draft.team) Object.assign(unit.combat!, { poison: 2, burn: 1, bleed: 1, blind: true });
     draft.reserves.push({ ...draft.team[2]!, id: "backup", health: 1 });
-    draft.roster.push("emberback");
   });
   const result = play(game);
   expect(result.state.team.map((unit) => unit.health)).toEqual([14, 18, 30]);
@@ -139,7 +143,6 @@ it("refreshes one Nullify on living deployed allies and exposes visible status f
   const game = produce(ready("chimecricket-nullify", 1972), (draft) => {
     draft.team[2]!.health = 0;
     draft.reserves.push({ ...draft.team[1]!, id: "backup", combat: freshCombat() });
-    draft.roster.push("mossguard");
     draft.reserves[0]!.health = 0;
   });
   const result = play(game);
@@ -221,7 +224,6 @@ it("retains Nullify and spent Encore through swapping and resume, and resets the
   let game = produce(ready("chimecricket-nullify"), (draft) => {
     const backup = { ...draft.team[1]!, id: "backup", combat: freshCombat() };
     draft.reserves.push(backup);
-    draft.roster.push(backup.species);
   });
   game = play(game).state;
   game = swapFixture(game, { type: "swap", activeId: "ally-0", reserve: "backup" });
@@ -244,7 +246,9 @@ it("stops the repeated attack when its target falls and does not grant its extra
     draft.battle!.enemies[0]!.health = 1;
   });
   const result = play(game, "enemy-0");
-  expect(result.events.filter((e) => e.kind === "damage")).toHaveLength(1);
+  expect(
+    result.events.filter((e): e is Extract<GameEvent, { kind: "damage" }> => e.kind === "damage"),
+  ).toHaveLength(1);
   expect(result.state.battle!.hand).toHaveLength(1);
 });
 
@@ -258,7 +262,9 @@ it("caps combined talent and Encore repeats at two complete resolutions", () => 
       draft.talents = ["stun.jarring-blow"];
     });
     const result = play(game, "enemy-0");
-    expect(result.events.filter((e) => e.kind === "damage")).toHaveLength(2);
+    expect(
+      result.events.filter((e): e is Extract<GameEvent, { kind: "damage" }> => e.kind === "damage"),
+    ).toHaveLength(2);
     expect(result.state.battle!.mana).toBe(3);
     found = true;
   }
@@ -326,7 +332,10 @@ it.each([
     const resolutions = repeats ? 2 : 1;
     if (name === "Resonant Leap") {
       expect(
-        result.events.filter((event) => event.kind === "damage" && event.actorId === "enemy-0"),
+        result.events.filter(
+          (event): event is Extract<GameEvent, { kind: "damage" }> =>
+            event.kind === "damage" && event.actorId === "enemy-0",
+        ),
       ).toHaveLength(resolutions);
     } else if (name === "Hush Dome") {
       expect(result.state.battle!.enemies.map((enemy) => enemy.combat.nullify)).toEqual([true, true, false]);
@@ -334,7 +343,10 @@ it.each([
     } else {
       expect(
         result.events.filter(
-          (event) => event.kind === "heal" && event.targetId === "enemy-1" && event.amount === 4,
+          (event) =>
+            event.kind === "heal" &&
+            event.targetId === "enemy-1" &&
+            event.amount === Math.round(4 * game.battle!.enemies[0]!.power),
         ),
       ).toHaveLength(resolutions);
       expect(result.state.battle!.enemies[1]!.combat.blind).toBe(false);
@@ -351,7 +363,11 @@ it("stops Encore when retaliation knocks out its actor", () => {
   });
   const result = play(game, "enemy-0");
   expect(result.state.team[0]!.health).toBe(0);
-  expect(result.events.filter((e) => e.kind === "damage" && e.actorId === "ally-0")).toHaveLength(1);
+  expect(
+    result.events.filter(
+      (e): e is Extract<GameEvent, { kind: "damage" }> => e.kind === "damage" && e.actorId === "ally-0",
+    ),
+  ).toHaveLength(1);
   expect(result.events.some((e) => e.text.includes("with Encore"))).toBe(false);
 });
 

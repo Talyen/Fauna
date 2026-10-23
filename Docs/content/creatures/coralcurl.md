@@ -2,7 +2,7 @@
 
 [Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
 
-Coralcurl has 28 Health and is available through ordinary encounters, recruitment and starter drafts. All abilities cost 1 Mana:
+Coralcurl has 28 Health and is available through ordinary encounters, recruitment and starter drafts. Its abilities:
 
 - **Bubble Ward:** Gain 6 Block
 - **Reef Jet:** Deal 6 Water damage

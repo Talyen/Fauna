@@ -4,7 +4,6 @@ import {
   SPECIES,
   definition,
   species,
-  ENCOUNTERS,
   FIRST_RUN_STARTERS,
   BOONS,
   TALENTS,
@@ -29,7 +28,6 @@ it("keeps shared authored rules immutable across lookup and direct catalog acces
     [definition("cadenza-resonant-well").effects![0]!, "amount", 999],
     [BOONS[0], "text", "Changed rules"],
     [TALENTS[0], "row", 99],
-    [ENCOUNTERS[0]!.enemies[0]!, "health", 999],
     [COMBAT_PACKS[0], "0", "cadenza"],
     [BOSSES[0].pack, "0", "cadenza"],
   ];
@@ -46,7 +44,6 @@ it("keeps shared authored rules immutable across lookup and direct catalog acces
     BOONS,
     TALENTS,
     TALENT_EFFECTS,
-    ENCOUNTERS,
     FIRST_RUN_STARTERS,
     COMBAT_PACKS,
     BOSSES,

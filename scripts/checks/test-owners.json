@@ -3,10 +3,10 @@
     "reason": "Seeded command acceptance and engine state transitions",
     "suites": ["tests/unit/game/engine.test.ts"]
   },
-  "tests/unit/simulation/engine-lineups.test.ts": {
+  "tests/exhaustive/roster-combinations.test.ts": {
     "reason": "Exhaustive ordinary lineups, seeded commands and save round trips remain in full CI",
     "tier": "ci",
-    "suites": ["tests/unit/game/engine.test.ts"]
+    "suites": ["tests/unit/game/engine.test.ts", "tests/unit/game/lineups.test.ts"]
   },
   "tests/support/lineups.ts": {
     "reason": "Shared lineup generation retains exhaustive coverage and representative journey assertions",
@@ -103,5 +103,9 @@
       "tests/unit/tooling/verification.test.mjs",
       "tests/unit/tooling/dependencies.test.mjs"
     ]
+  },
+  "tests/exhaustive/": {
+    "reason": "Extended matrices run in full Vitest and hosted CI; local integration retains the command and save boundary contract",
+    "suites": ["tests/unit/game/engine.test.ts"]
   }
 }

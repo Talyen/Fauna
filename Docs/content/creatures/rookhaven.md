@@ -2,7 +2,7 @@
 
 [Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
 
-Rookhaven is the keeper of forgotten stories, with 26 Health. It joins ordinary encounter packs, recruitment and the starter pool. All three abilities cost 1 Mana:
+Rookhaven is the keeper of forgotten stories, with 26 Health. It joins ordinary encounter packs, recruitment and the starter pool. Its abilities:
 
 - **Borrowed Brilliance:** Deal 1 Light damage to all enemies; Blind all enemies
 - **Unwritten Ending:** Purge all enemies

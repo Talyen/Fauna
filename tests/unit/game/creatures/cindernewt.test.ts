@@ -63,7 +63,9 @@ it.each([
   expect(rejected.accepted).toBe(false);
   expect(rejected.state).toBe(game);
   const result = dispatch(game, { type: "play", cardId, targetId: "enemy-0", autoEndTurn: false });
-  const damage = result.events.filter((event) => event.kind === "damage");
+  const damage = result.events.filter(
+    (event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage",
+  );
   expect(damage).toHaveLength(1);
   expect(damage[0]).toMatchObject({ damageType, amount: 6 });
   expect(result.state.battle!.enemies[0]!.combat.burn).toBe(damageType === "burn" ? 6 : 0);
@@ -79,15 +81,19 @@ it.each(["cindernewt-ember-breath", "cindernewt-ashen-veil"])(
       });
     });
     const result = dispatch(game, { type: "play", cardId: game.battle!.hand[0]!, autoEndTurn: false });
-    expect(result.events.filter((event) => event.outcome === "dodge")).toHaveLength(3);
+    expect(
+      result.events.filter((event) => event.kind === "status" && event.outcome === "dodge"),
+    ).toHaveLength(3);
     expect(result.state.battle!.enemies.map((enemy) => enemy.health)).toEqual(
       game.battle!.enemies.map((enemy) => enemy.health),
     );
     if (id === "cindernewt-ember-breath") {
       expect(result.state.battle!.enemies.map((enemy) => enemy.combat.armor)).toEqual([2, 1, 0]);
-      expect(result.events.filter((event) => event.status === "armor").map((event) => event.amount)).toEqual([
-        3, 1, 1,
-      ]);
+      expect(
+        result.events
+          .filter((event) => event.kind === "status" && event.status === "armor")
+          .map((event) => event.amount),
+      ).toEqual([3, 1, 1]);
     } else expect(result.state.battle!.enemies.every((enemy) => enemy.combat.blind)).toBe(true);
   },
 );
@@ -125,7 +131,9 @@ it.each([1, 2, 3, 4, 5, 6])(
       expect(target.health).toBe(health);
       expect(source.combat.burn).toBe(copies);
       expect(source.combat.statusSources.burn).toBe(target.id);
-      expect(events.filter((event) => event.kind === "damage")).toEqual([
+      expect(
+        events.filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage"),
+      ).toEqual([
         expect.objectContaining({
           actorId: target.id,
           targetId: source.id,
@@ -225,7 +233,6 @@ it.each([
         combat: { ...freshCombat(), armor: 5 },
       },
     ];
-    draft.roster.push("captoad");
     draft.discovery.encountered.push("captoad");
     draft.discovery.recruited.captoad = 1;
   });
@@ -237,7 +244,10 @@ it.each([
   expect(
     firstAction
       .filter(
-        (event) => event.status === status && event.outcome === (status === "armor" ? "remove" : "apply"),
+        (event) =>
+          event.kind === "status" &&
+          event.status === status &&
+          event.outcome === (status === "armor" ? "remove" : "apply"),
       )
       .map((event) => event.targetId),
   ).toEqual(game.team.map((unit) => unit.id));
@@ -281,10 +291,15 @@ it.each([
   });
   const result = dispatch(game, { type: "endTurn" });
   expect(result.accepted).toBe(true);
-  expect(result.events.find((event) => event.kind === "action")?.text).toContain("uses Cinder Lash");
-  expect(result.events.find((event) => event.kind === "damage")).toMatchObject({
+  expect(
+    result.events.find((event): event is Extract<GameEvent, { kind: "action" }> => event.kind === "action")
+      ?.text,
+  ).toContain("uses Cinder Lash");
+  expect(
+    result.events.find((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage"),
+  ).toMatchObject({
     actorId: "enemy-0",
     damageType,
-    amount: 6,
+    amount: Math.round(6 * game.battle!.enemies[0]!.power),
   });
 });

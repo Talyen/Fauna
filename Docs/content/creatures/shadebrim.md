@@ -2,7 +2,7 @@
 
 [Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
 
-Shadebrim has 28 Health and is available through starter drafts, ordinary encounters and recruitment. All three abilities cost 1 Mana:
+Shadebrim has 28 Health and is available through starter drafts, ordinary encounters and recruitment. Its abilities:
 
 - **Noonward:** Gain 4 Block; Reflect the next Burn
 - **Coolfront:** Deal 1 Freeze damage to all enemies; Cleanse all allies

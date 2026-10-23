@@ -68,7 +68,6 @@ it.each([0, 1, 2])("heals and fully Cleanses the same most injured ally at posit
     Object.assign(target.combat!, { burn: 2, bleed: 3, stun: 1, freeze: 1, blind: true });
     if (index !== 0) Object.assign(target.combat!, { controlled: "stun", controlTurns: 1 });
     draft.reserves.push({ ...draft.team[1]!, id: "backup", health: 1 });
-    draft.roster.push("mossguard");
   });
   const result = accept(game, { type: "play", cardId: game.battle!.hand[0]!, autoEndTurn: false });
   expect(result.team[index]!.health).toBe(game.team[index]!.health + 4);

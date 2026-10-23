@@ -63,7 +63,6 @@ it("returns a knockout replacement after one round even when its backup skipped 
     attacked: false,
     combat: { ...freshCombat(), controlled: "freeze", controlTurns: 1, poison: 2 },
   });
-  state.roster.push("pollenmoth");
   for (const enemy of state.battle!.enemies) {
     enemy.combat.controlled = "stun";
     enemy.combat.controlTurns = 1;

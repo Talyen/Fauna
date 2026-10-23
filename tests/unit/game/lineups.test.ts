@@ -29,7 +29,7 @@ it("collects every generated lineup in the full suite without executing the simu
       [
         path.join(root, "node_modules/vitest/vitest.mjs"),
         "list",
-        "tests/unit/simulation/engine-lineups.test.ts",
+        "tests/exhaustive/roster-combinations.test.ts",
         "--json",
         "--staticParse=false",
         "--maxWorkers=1",
@@ -47,7 +47,7 @@ it("collects every generated lineup in the full suite without executing the simu
     ordinaryLineups()
       .map(
         ({ name }) =>
-          `every ordinary three-creature lineup > supports ${name} without engine failures or invalid saves`,
+          `all ordinary creature combinations > supports ${name} without engine failures or invalid saves`,
       )
       .sort(),
   );

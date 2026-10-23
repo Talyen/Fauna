@@ -1,3 +1,4 @@
+import type { GameEvent } from "../../../src/game/types";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, species } from "../../../src/game/content";
@@ -52,9 +53,11 @@ it("plays the one-Mana kit with preview parity, accurate XP and current-format r
       expect(result.state.battle!.draw).toHaveLength(6);
       expect(result.state.battleXP.mana).toBe(1);
     } else {
-      expect(result.events.filter((event) => event.kind === "damage").map((event) => event.amount)).toEqual([
-        1, 1, 1,
-      ]);
+      expect(
+        result.events
+          .filter((event): event is Extract<GameEvent, { kind: "damage" }> => event.kind === "damage")
+          .map((event) => event.amount),
+      ).toEqual([1, 1, 1]);
       expect(result.state.battle!.enemies.map((enemy) => enemy.combat.freeze)).toEqual([1, 1, 1]);
       expect(result.state.battleXP.freeze).toBe(1);
       expect(result.state.battleXP.health).toBe(1);
@@ -211,7 +214,9 @@ it("Coolfront fully Cleanses deployed allies after damage, even when its attack 
   });
   const result = dispatch(game, { type: "play", cardId: game.battle!.hand[0]!, autoEndTurn: false });
   expect(result.accepted).toBe(true);
-  expect(result.events.filter((event) => event.outcome === "dodge")).toHaveLength(3);
+  expect(result.events.filter((event) => event.kind === "status" && event.outcome === "dodge")).toHaveLength(
+    3,
+  );
   for (const unit of result.state.team) {
     expect(unit.combat).toMatchObject({
       burn: 0,
@@ -269,7 +274,9 @@ it("enemy Shadebrim alternates useful abilities, Cleanses its own side and never
     expect.objectContaining({ status: "cleanse", targetId: "enemy-1", affectedStatus: "blind" }),
   );
   expect(
-    result.events.filter((event) => event.actorId === "enemy-0" && event.damageType === "freeze"),
+    result.events.filter(
+      (event) => event.kind === "damage" && event.actorId === "enemy-0" && event.damageType === "freeze",
+    ),
   ).toHaveLength(3);
 });
 

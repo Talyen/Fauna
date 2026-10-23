@@ -23,7 +23,7 @@ function fixture(): BattleState {
   if (game.phase !== "battle") throw new Error("Preview requires an active battle.");
   return {
     ...game,
-    roster: ["mossguard", "emberback", "prismram", "pollenmoth", "emberback"],
+
     team: game.team.map((creature, index) => ({
       ...creature,
       health: index === 1 && new URLSearchParams(location.search).has("ko") ? 0 : [26, 12, 19][index]!,

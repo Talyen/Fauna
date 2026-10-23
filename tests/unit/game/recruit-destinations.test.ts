@@ -8,7 +8,7 @@ import { accept, starterJourney, winBattle, completeRecruitment } from "../../su
 
 function offer(size = 1) {
   let game = starterJourney(7, "mossguard");
-  while (game.roster.length < size) {
+  while (game.team.length + game.reserves.length < size) {
     game = produce(game, (draft) => {
       draft.expedition!.recruit = "emberback";
       draft.expedition!.lastRoom = "combat";
@@ -35,8 +35,8 @@ it.each([1, 2, 3, 4])(
     expect(next.expedition).toEqual({ ...before.expedition, recruit: null, lastRoom: "recruit" });
     expect(next.currency).toBe(before.currency);
     expect(next.journey).toEqual(before.journey);
-    expect(next.roster).toHaveLength(size + 1);
-    expect(next.lineup).toHaveLength(Math.min(size + 1, 3));
+    expect([...next.team, ...next.reserves].map((unit) => unit.species)).toHaveLength(size + 1);
+    expect(next.team.map((unit) => unit.id)).toHaveLength(Math.min(size + 1, 3));
     const newcomer = [...next.team, ...next.reserves].find((creature) => creature.species === "cadenza")!;
     expect(newcomer.health).toBe(species("cadenza").health);
     expect(next.discovery.recruited.cadenza).toBe(1);

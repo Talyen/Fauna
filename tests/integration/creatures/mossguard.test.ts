@@ -76,7 +76,6 @@ it("renews the living deployed team including self, caps healing and leaves knoc
     draft.team[1]!.health -= 1;
     draft.team[2]!.health = 0;
     draft.reserves.push({ ...draft.team[0]!, id: "reserve", health: 10 });
-    draft.roster.push("mossguard");
   });
   const cardId = game.battle!.hand[0]!;
   const command = { type: "play", cardId, autoEndTurn: false } as const;
@@ -105,7 +104,6 @@ it.each([1, 2, 3, 4, 5, 6])("retains Overgrowth Block at copy count %i across tu
       ally.block = 100;
     });
     draft.reserves.push({ ...draft.team[0]!, id: "reserve", block: 100 });
-    draft.roster.push("mossguard");
     draft.battle!.enemies.forEach((enemy) => {
       enemy.combat.controlled = "stun";
       enemy.combat.controlTurns = 1;

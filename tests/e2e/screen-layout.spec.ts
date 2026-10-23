@@ -2,7 +2,7 @@ import { captureScreen } from "./support/rendered-evidence";
 import { freshCombat } from "../../src/game/combat/index";
 import { test, expect } from "@playwright/test";
 import { produce } from "immer";
-import { accept, policy, winBattle, run, bossReward } from "../support/game";
+import { prepareDestination, winBattle, run, bossReward } from "../support/game";
 import { seed, resume } from "./support/session";
 import { fits } from "./support/layout";
 
@@ -13,7 +13,6 @@ for (const [width, height] of [
   test(`rendered gameplay, rewards and menus fit ${width}×${height}`, async ({ page }) => {
     await page.setViewportSize({ width, height });
     const fixture = produce(run(7), (d) => {
-      d.roster.push("pollenmoth", "emberback");
       d.reserves = ["pollenmoth", "emberback"].map((kind) => ({
         id: `recruit-${kind}`,
         species: kind as "pollenmoth" | "emberback",
@@ -84,12 +83,11 @@ for (const [width, height] of [
 test("five-card hand with hidden overflow, three enemies and a full bench preserve fit and original artwork ratios", async ({
   page,
 }) => {
-  let s = winBattle();
-  while (s.phase !== "teamSelection") s = accept(s, policy(s));
-  s = produce(s, (d) => {
+  const s = produce(run(), (d) => {
+    prepareDestination(d);
     d.boons = ["tattered-pages"];
     d.wins = 1;
-    d.roster = ["mossguard", "emberback", "prismram", "pollenmoth", "emberback"];
+
     d.reserves = ["pollenmoth", "emberback"].map((kind) => ({
       id: `recruit-${kind}`,
       species: kind as "pollenmoth" | "emberback",

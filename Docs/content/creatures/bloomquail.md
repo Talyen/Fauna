@@ -2,7 +2,7 @@
 
 [Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
 
-Bloomquail is a 26 Health support creature available through ordinary encounters, recruitment and later three-creature starter drafts. Each ability costs 1 Mana:
+Bloomquail is a 26 Health support creature available through ordinary encounters, recruitment and later three-creature starter drafts. Its abilities:
 
 - **Petal Rampart:** Gain 6 Block
 - **Bloom Cradle:** Draw 2 cards; Restore 2 Health

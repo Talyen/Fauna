@@ -152,7 +152,9 @@ describe("remaining Alchemy talents adapted to creatures", () => {
     hit(f.state, f.target, f.source, 12, "physical", f.events);
     expect(f.source.health).toBe(9);
     expect(f.target.health).toBe(997);
-    expect(f.events.filter((e) => e.kind === "damage")).toHaveLength(2);
+    expect(
+      f.events.filter((e): e is Extract<GameEvent, { kind: "damage" }> => e.kind === "damage"),
+    ).toHaveLength(2);
   });
   it("Dodge grants owned follow-ups, clears buildup, draws and resets rhythm", () => {
     anyProc(
@@ -302,7 +304,9 @@ describe("remaining Alchemy talents adapted to creatures", () => {
       expect(f.target.combat.statusSources[status as "burn" | "poison" | "bleed"] ?? f.source.id).toBe(
         f.source.id,
       );
-      expect(f.events.filter((e) => e.kind === "damage")).toHaveLength(2);
+      expect(
+        f.events.filter((e): e is Extract<GameEvent, { kind: "damage" }> => e.kind === "damage"),
+      ).toHaveLength(2);
       return true;
     });
   });
@@ -473,7 +477,11 @@ it.each([
       const preview = previewPlay(state, card.id, target.id);
       const result = dispatch(state, command);
       expect(result.accepted).toBe(true);
-      if (result.events.filter((e) => e.kind === "damage").length < 4) continue;
+      if (
+        result.events.filter((e): e is Extract<GameEvent, { kind: "damage" }> => e.kind === "damage").length <
+        4
+      )
+        continue;
       expect(result.state.battle!.mana).toBe(state.battle!.mana - cardCost(card, state));
       expect(result.state.battleXP[keyword]).toBe(1);
       expect(preview.state).toEqual(result.state);

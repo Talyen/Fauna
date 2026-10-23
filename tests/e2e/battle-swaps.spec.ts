@@ -10,7 +10,6 @@ import { fits } from "./support/layout";
 function fixture(fallen = true) {
   return produce(run(7), (d) => {
     for (const kind of ["pollenmoth", "emberback"] as const) {
-      d.roster.push(kind);
       d.reserves.push({
         id: `recruit-${kind}`,
         species: kind,
@@ -48,7 +47,7 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     expect(next.battle!.mana).toBe(initial.battle!.mana);
     expect(next.battle!.turn).toBe(initial.battle!.turn);
     expect(next.battle!.hand).toEqual(initial.battle!.hand);
-    expect(next.lineup[0]).toBe("recruit-pollenmoth");
+    expect(next.team.map((unit) => unit.id)[0]).toBe("recruit-pollenmoth");
     await page.reload();
     await resume(page);
     expect(await state(page)).toEqual(next);

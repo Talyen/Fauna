@@ -101,7 +101,6 @@ describe("hidden hand overflow", () => {
 
   it("preserves buffered card slots and switches their owner during a reserve swap", () => {
     const s = produce(run(), (d) => {
-      d.roster.push("pollenmoth");
       d.reserves.push({
         id: "recruit-pollenmoth",
         species: "pollenmoth",
