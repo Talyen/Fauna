@@ -5,7 +5,7 @@ import { produce } from "immer";
 import { definition } from "../../src/game/content";
 import { run, teamRun } from "../support/game";
 import { SPECIES } from "../../src/game/content";
-import { decodeSave, encodeSave } from "../../src/game/save";
+import { encodeSave } from "../../src/game/save";
 import { expectScrollFree, layoutViolations, LAYOUT_CASES } from "./support/layout-contract";
 import { openHome, test, seed, state } from "./support/session";
 import { expectBattleGeometry } from "./support/battle-layout";
@@ -96,7 +96,6 @@ function layoutGame(targetedHand = false) {
     draft.battle!.draw = [];
     draft.battle!.discard = [];
   });
-  expect(decodeSave(encodeSave(game))).toEqual(game);
   return game;
 }
 

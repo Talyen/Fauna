@@ -2,7 +2,7 @@ import { captureScreen } from "./support/rendered-evidence";
 import { freshCombat } from "../../src/game/combat/index";
 import { expect } from "@playwright/test";
 import { produce } from "immer";
-import { run } from "../support/game";
+import { addBackups, run } from "../support/game";
 import { reloadHome, test, seed, state, resume } from "./support/session";
 import { gamepad } from "./support/gamepad";
 import { fits } from "./support/layout";
@@ -10,7 +10,7 @@ import { fits } from "./support/layout";
 function fixture(fallen = true) {
   return produce(run(7), (d) => {
     for (const kind of ["pollenmoth", "emberback"] as const) {
-      d.reserves.push({
+      addBackups(d, {
         id: `recruit-${kind}`,
         species: kind,
         health: 20,

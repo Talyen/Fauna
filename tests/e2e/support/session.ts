@@ -1,5 +1,6 @@
 import { test as base, expect, type Page, type BrowserContext } from "@playwright/test";
 import { createGame } from "../../../src/game/engine";
+import { decodeSave } from "../../../src/game/save";
 import type { GameState } from "../../../src/game/types";
 
 const fastContexts = new WeakSet<BrowserContext>();
@@ -58,6 +59,7 @@ export async function waitForStartup(page: Page) {
 export async function seed(page: Page, game = createGame(7)) {
   const initial = page.url() === "about:blank";
   const data = JSON.stringify(game);
+  decodeSave(data);
   if (initial) {
     // Init scripts survive reloads; the per-page marker prevents restoring an old
     // fixture over a save committed by the persistence tests.

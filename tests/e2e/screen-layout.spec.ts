@@ -1,7 +1,7 @@
 import { freshCombat } from "../../src/game/combat/index";
 import { expect } from "@playwright/test";
 import { produce } from "immer";
-import { prepareDestination, run } from "../support/game";
+import { addBackups, prepareDestination, run } from "../support/game";
 import { test, seed, resume } from "./support/session";
 import { fits } from "./support/layout";
 
@@ -13,14 +13,17 @@ test("five-card hand with hidden overflow, three enemies and a full bench preser
     d.boons = ["tattered-pages"];
     d.wins = 1;
 
-    d.reserves = ["pollenmoth", "emberback"].map((kind) => ({
-      id: `recruit-${kind}`,
-      species: kind as "pollenmoth" | "emberback",
-      health: 20,
-      block: 0,
-      combat: freshCombat(),
-      attacked: false,
-    }));
+    addBackups(
+      d,
+      ...(["pollenmoth", "emberback"] as const).map((kind) => ({
+        id: `recruit-${kind}`,
+        species: kind,
+        health: 20,
+        block: 0,
+        combat: freshCombat(),
+        attacked: false,
+      })),
+    );
   });
   await seed(page, s);
   await resume(page);
