@@ -16,7 +16,7 @@ Unrelated processes and player profiles were preserved.
 - Production renderer build and dependency notice generation passed
 - Changed-file formatting, lint, boundaries, all six TypeScript configurations, documentation
   checks and 14 unit/DOM suites passed, covering 114 tests before integration
-- All four controller browser scenarios passed across focused runs against the production
+- All four controller browser scenarios passed together against the combined production
   renderer; the new journey covers persisted PlayStation prompts, disconnect pausing,
   stopped autoplay, unchanged progression while paused and reconnect without automatic resume
 - Unpackaged macOS Electron smoke passed startup, draft, Collection browsing, knockout
@@ -25,6 +25,12 @@ Unrelated processes and player profiles were preserved.
   Steam; unit coverage exercises callback payload decoding, dispatch, cleanup and early startup
 - The smoke fixture now records discovery for its synthetic grown formation, satisfying current
   save validation instead of falling back to an older save
+
+After incorporating current main, the production build, all four controller scenarios and
+the complete macOS desktop smoke passed again. An integration attempt stopped on a five-second
+menu DOM test timeout without advancing main. Its simulated pointer checks were narrowed to
+preserve the focus/combat-ownership assertions; the full 20-test menu suite then passed.
+Browser pointer interaction coverage remains enabled.
 
 Settings before captures are retained in the main checkout's ignored
 `reports/review/steam-before-ac8f9cdc-9f49-484e-a9a4-cf01b54f7329` directory. Accepted after
