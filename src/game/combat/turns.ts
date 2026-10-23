@@ -23,7 +23,11 @@ import type { GameEvent, GameState, BattleState } from "../types";
 import { living, pendingReplacement, swapFromCard } from "../team";
 import { settle, intents } from "../journey";
 
-const enemyAbilities = new Map(SPECIES.map(({ id }) => [id, speciesCards(id).filter(enemyCanUse)]));
+// Adapt immutable authored kits once; selection order and RNG consumption stay
+// the same, while enemy turns reuse their read-only ability definitions.
+const enemyAbilities = new Map(
+  SPECIES.map(({ id }) => [id, speciesCards(id).filter(enemyCanUse).map(enemyCard)]),
+);
 
 export function livingChorus(state: GameState, enemy: boolean, events: GameEvent[]) {
   const row = enemy ? state.battle!.enemies : state.team;
@@ -37,6 +41,19 @@ export function livingChorus(state: GameState, enemy: boolean, events: GameEvent
     if (recipient) restoreHealth(recipient, amount, events, false, state, false, singer);
   }
 }
+export function unhurried(state: BattleState, enemy: boolean, events: GameEvent[]) {
+  const row = battlefield(state, enemy ? "enemy" : "player").filter((unit) => unit.health > 0);
+  for (const dreamer of row) {
+    const amount = creaturePassive(enemy ? undefined : state, dreamer.species).effects.reduce(
+      (sum, effect) => sum + (effect.kind === "unhurried" ? effect.amount : 0),
+      0,
+    );
+    if (amount <= 0) continue;
+    for (const recipient of row)
+      if (combat(recipient).cardsPlayedThisTurn === 0)
+        restoreHealth(recipient, amount, events, false, state, false, dreamer);
+  }
+}
 export function finishTurn(draft: BattleState, events: GameEvent[]) {
   const battle = draft.battle;
   const bonusMana = Number(
@@ -46,6 +63,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
   battle.discard.push(...battle.hand.splice(0));
   recycleDiscard(draft);
   for (let pass = 0; pass < 3; pass++) {
+    unhurried(draft, false, events);
     // Swaps can reorder the battlefield; each enemy keeps its single action window.
     const actionOrder = battle.enemies.slice();
     // Expire the previous round before an ally can grant Dodge for this round.
@@ -71,7 +89,8 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
       }
       if (!canAct) continue;
       const targets = () => battlefield(draft, "player").filter((unit) => unit.health > 0);
-      const target = targets().find((c) => c.id === enemy.targetId) ?? targets()[0];
+      const availableTargets = targets();
+      const target = availableTargets.find((c) => c.id === enemy.targetId) ?? availableTargets[0];
       if (!target) continue;
       if (enemy.deck) {
         const deck = enemy.deck;
@@ -123,7 +142,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
       const abilities = enemyAbilities.get(enemy.species)!;
       const alternatives = abilities.filter((card) => card.id !== enemy.lastAbility);
       const pool = alternatives.length ? alternatives : abilities;
-      const def = enemyCard(pool[Math.floor(roll(draft) * pool.length)]!);
+      const def = pool[Math.floor(roll(draft) * pool.length)]!;
       enemy.lastAbility = def.id;
       executeAbility(
         draft,
@@ -141,6 +160,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
       if (++enemyCardsPlayed === 2) livingChorus(draft, true, events);
       if (settle(draft, events)) return;
     }
+    unhurried(draft, true, events);
     for (const c of [...battlefield(draft, "player"), ...draft.reserves]) {
       if (c.health <= 0) continue;
       tickStatuses(draft, c, events);

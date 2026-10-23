@@ -2,9 +2,11 @@
 
 The user chose Alchemy's card draw, discard and hand reflow animations on 2026-10-20 instead of selecting new motion independently. The production choreography is implemented in `src/ui/battle/hand-motion.tsx`. Retain Fauna's shadcn controls, ArtCard ownership, fixed card dimensions and current hand fan geometry.
 
-## Evidence scope
-
-These notes record the October 20, 2026 adoption. Full viewport, desktop, physical-controller and CI acceptance were pending; implementation does not establish visual acceptance of current main. The source identities, choreography and checks below retain that historical scope.
+> **Status/source:** historical Alchemy adoption, October 20, 2026; source identities and choreography follow below
+>
+> **Current owners:** [design system](../../Docs/DESIGN_SYSTEM.md) and [required rendered review](../../Docs/UI.md#required-review)
+>
+> **Evidence:** full viewport, desktop, physical-controller and CI acceptance were pending; implementation does not establish visual acceptance of current main
 
 ## Inspected source
 
@@ -38,7 +40,3 @@ Keep Fauna's resting artwork dimensions and aspect ratio; any transfer scaling i
 Reduced motion skips flight, flip and reflow. Leaving battle, pause, disposal, interruption and live reduced-motion changes clear owned overlays and stale callbacks, reveal the current committed hand and never replay cancelled sequences. Missing measurements settle directly to the committed layout.
 
 Cover repeated draws/discards, overlapping reflows, variable/full/empty hands, accepted input during flight, cancellation and disposal, reduced motion, focus return, correct face/back handoff and unchanged command/save behavior. Review rendered motion at Fauna's fixed card size and short viewports before acceptance.
-
-## Production adoption
-
-Current implementation ownership is mapped in the [design system](../../Docs/DESIGN_SYSTEM.md); new work follows [required rendered review](../../Docs/UI.md#required-review).

@@ -21,6 +21,7 @@ export function freshCombat(): CombatState {
     reflectBurn: false,
     nullify: false,
     nullifyFreeze: false,
+    negate: false,
     cardsPlayedThisTurn: 0,
     encoreUsed: false,
     firstAttackUsed: false,
@@ -128,15 +129,16 @@ export function sharedDodgeChance(state: GameState, target: Combatant): number {
   const allied = !isEnemy(target);
   const row = battlefield(state, allied ? "player" : "enemy");
   if (target.health <= 0 || !row.some((unit) => unit.id === target.id)) return 0;
-  return row
-    .filter((unit) => unit.id !== target.id && unit.health > 0)
-    .reduce((total, unit) => {
-      const share = creaturePassive(allied ? state : undefined, unit.species).effects.reduce(
-        (sum, effect) => sum + (effect.kind === "shareDodge" ? effect.amount : 0),
-        0,
-      );
-      return total + (ownDodgeChance(state, unit) * share) / 100;
-    }, 0);
+  let total = 0;
+  for (const unit of row) {
+    if (unit.id === target.id || unit.health <= 0) continue;
+    const share = creaturePassive(allied ? state : undefined, unit.species).effects.reduce(
+      (sum, effect) => sum + (effect.kind === "shareDodge" ? effect.amount : 0),
+      0,
+    );
+    total += (ownDodgeChance(state, unit) * share) / 100;
+  }
+  return total;
 }
 export function dodgeChance(state: GameState, target: Combatant): number {
   const own = ownDodgeChance(state, target);

@@ -1,4 +1,4 @@
-import type { bounce, hit, resolveHit } from "./damage";
+import type { bounce, hit, resolveHit, negateAttack } from "./damage";
 import type {
   restoreHealth,
   shareProtection,
@@ -24,6 +24,7 @@ export type Operations = {
   bounce: typeof bounce;
   hit: typeof hit;
   resolveHit: typeof resolveHit;
+  negateAttack: typeof negateAttack;
   restoreHealth: typeof restoreHealth;
   shareProtection: typeof shareProtection;
   grantBlock: typeof grantBlock;

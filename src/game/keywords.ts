@@ -123,6 +123,13 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Cleansed",
       "Cleansing",
     ]),
+    negate: entry(
+      "Negate",
+      "effect",
+      "active",
+      "Negate the next attack against you before Dodge, preventing its damage and harmful effects; Thorns still retaliate; Lasts until consumed or Purged; Does not stack",
+      ["Negated", "Negates"],
+    ),
     nullify: entry(
       "Nullify",
       "effect",
@@ -209,6 +216,8 @@ export const EFFECT_KEYWORDS = freeze(
     teamProtection: ["block", "nature"],
     waterThorns: ["water"],
     teamCleanse: ["health"],
+    dreamDouble: ["nature"],
+    nightmareHarvest: ["health", "mana"],
     teamPurge: ["light"],
     teamThaw: ["health"],
     teamClearBlind: ["health"],

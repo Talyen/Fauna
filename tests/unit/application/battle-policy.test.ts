@@ -361,3 +361,43 @@ it("Auto-play values Mushroom Guard's healing ahead of ordinary group protection
     cardId: state.cards.find((card) => card.definitionId === "captoad-guard")!.id,
   });
 });
+
+it("Auto-play uses Nightmare Harvest for actual afflictions and preserves Mana when none remain", () => {
+  const healthy = produce(teamRun(42, ["reverie", "emberback"]), (game) => {
+    const card = game.cards.find((c) => c.definitionId === "reverie-nightmare-harvest")!;
+    game.battle!.hand = [card.id];
+    game.battle!.buffer = [];
+    game.battle!.discard = [];
+    game.battle!.draw = game.cards.filter((c) => c.id !== card.id).map((c) => c.id);
+  });
+  expect(chooseBattleCommand(healthy, false)).toEqual({ type: "endTurn" });
+  const afflicted = produce(healthy, (game) => {
+    game.team[1]!.combat!.poison = 30;
+  });
+  expect(chooseBattleCommand(afflicted, false)).toMatchObject({
+    type: "play",
+    cardId: afflicted.battle!.hand[0],
+  });
+});
+
+it("Auto-play spends an attack to consume Negate without predicting a blocked final blow", () => {
+  const game = produce(teamRun(42, ["glintstride"]), (d) => {
+    const card = d.cards.find((c) => c.definitionId === "glintstride-attack")!;
+    d.battle!.hand = [card.id];
+    d.battle!.draw = d.cards.filter((c) => c.id !== card.id).map((c) => c.id);
+    d.battle!.buffer = [];
+    d.battle!.discard = [];
+    d.battle!.enemies.forEach((enemy, index) => {
+      enemy.health = index === 0 ? 1 : 0;
+      enemy.block = 0;
+      enemy.combat.negate = index === 0;
+    });
+  });
+  const command = chooseBattleCommand(game, false);
+  expect(command).toMatchObject({ type: "play", cardId: game.battle!.hand[0] });
+  const result = dispatch(game, command);
+  expect(result.accepted).toBe(true);
+  expect(result.state.phase).toBe("battle");
+  expect(result.state.battle!.enemies[0]!.health).toBe(1);
+  expect(result.state.battle!.enemies[0]!.combat.negate).toBe(false);
+});

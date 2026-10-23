@@ -19,6 +19,7 @@ import {
   beginAttack,
   openingCriticalBonus,
   hit,
+  negateAttack,
   mostInjured,
   grantTemporaryDodge,
   removeControlBuildup,
@@ -55,10 +56,6 @@ function encore(state: GameState, actor: Combatant, events: GameEvent[]) {
   return succeeds(state, chance / 100, "maxHealth" in actor, events);
 }
 function kindlingFlourish(state: GameState, actor: Combatant, events: GameEvent[]) {
-  const stats = combat(actor);
-  if (stats.cardsPlayedThisTurn >= 2) return false;
-  stats.cardsPlayedThisTurn++;
-  if (stats.cardsPlayedThisTurn !== 2) return false;
   const chance = creaturePassive("maxHealth" in actor ? undefined : state, actor.species).effects.reduce(
     (total, effect) => total + (effect.kind === "kindlingFlourish" ? effect.amount : 0),
     0,
@@ -117,7 +114,13 @@ function applyExtras(
   state: GameState,
   action: AbilityAction,
   events: GameEvent[],
-  options: { target?: Combatant; blindMiss?: boolean; criticalBonus?: number; recipientOnly?: boolean } = {},
+  options: {
+    target?: Combatant;
+    blindMiss?: boolean;
+    criticalBonus?: number;
+    recipientOnly?: boolean;
+    negated?: ReadonlySet<string>;
+  } = {},
 ) {
   const { actor, def } = action;
   const enemy = action.side === "enemy";
@@ -130,7 +133,7 @@ function applyExtras(
     const kind = effect.kind;
     switch (kind) {
       case "damage":
-        if (target)
+        if (target && !options.negated?.has(target.id))
           hit(state, actor, target, effect.amount, effect.damageType, events, {
             origin: "ability",
             interceptionChecked: true,
@@ -147,7 +150,7 @@ function applyExtras(
       case "meltArmor":
         for (const recipient of battlefield(state, enemy ? "player" : "enemy")) {
           if (actor.health <= 0) break;
-          if (recipient.health <= 0) continue;
+          if (recipient.health <= 0 || options.negated?.has(recipient.id)) continue;
           const stats = combat(recipient);
           const { removed, depletion } = removeArmor(
             recipient,
@@ -168,7 +171,8 @@ function applyExtras(
         break;
       case "blind":
         for (const recipient of battlefield(state, enemy ? "player" : "enemy"))
-          if (recipient.health > 0) applyBlind(state, actor, recipient, events);
+          if (recipient.health > 0 && !options.negated?.has(recipient.id))
+            applyBlind(state, actor, recipient, events);
         break;
       case "nullifyFreeze":
         combat(actor).nullifyFreeze = true;
@@ -198,7 +202,8 @@ function applyExtras(
           removeEffects(recipient, "cleanse", effect.amount, events, state);
         break;
       case "purge":
-        if (target) removeEffects(target, "purge", effect.amount, events, state);
+        if (target && !options.negated?.has(target.id))
+          removeEffects(target, "purge", effect.amount, events, state);
         break;
       case "heal":
         restoreHealth(actor, effect.amount, events, false, state, true, actor);
@@ -264,7 +269,10 @@ export function executeAbility(
       grantArmor(state, actor, 6, events);
   }
   if (actor.health <= 0) return;
-  const flourishRepeat = kindlingFlourish(state, actor, events);
+  const stats = combat(actor);
+  const previousPlays = stats.cardsPlayedThisTurn;
+  stats.cardsPlayedThisTurn = Math.min(2, previousPlays + 1);
+  const flourishRepeat = previousPlays === 1 && kindlingFlourish(state, actor, events);
   const encoreRepeat = encore(state, actor, events);
   const abilityRepeat =
     def.repeatChance !== undefined && succeeds(state, def.repeatChance / 100, enemy, events);
@@ -298,6 +306,7 @@ export function executeAbility(
         text: `${name} repeats ${def.name}${flourishRepeat ? " with Kindling Flourish" : encoreRepeat ? " with Encore" : ""}`,
       });
     let attackTarget = target;
+    const negated = new Set<string>();
     const criticalBonus = def.effect === "attack" ? openingCriticalBonus(state, actor) : 0;
     const blindMiss = def.effect === "attack" ? beginAttack(state, actor, events) : false;
     const kind = def.effect;
@@ -327,6 +336,10 @@ export function executeAbility(
           if (actor.health <= 0) break;
           const recipient = blindMiss ? intended : interceptAttack(state, actor, intended, events);
           if (def.target !== "allEnemies") attackTarget = recipient;
+          if (!blindMiss && negateAttack(state, actor, recipient, events)) {
+            negated.add(recipient.id);
+            continue;
+          }
           if (def.purgeThorns) {
             const stats = combat(recipient);
             for (const status of ["thorns", "waterThorns"] as const) {
@@ -390,6 +403,27 @@ export function executeAbility(
           restoreHealth(recipient, value, events, false, state, true, actor);
           applyExtras(state, action, events, { target: recipient, recipientOnly: true });
         }
+        break;
+      }
+      case "dreamDouble":
+        grantStatus(actor, "thorns", value, events, state);
+        combat(actor).negate = true;
+        events.push({
+          kind: "status",
+          actorId: actor.id,
+          targetId: actor.id,
+          status: "negate",
+          outcome: "apply",
+          text: `${name} negates the next attack against them`,
+        });
+        break;
+      case "nightmareHarvest": {
+        let removed = 0;
+        for (const recipient of alive(friendlyRow(state, action)))
+          removed += removeEffects(recipient, "cleanse", Number.MAX_SAFE_INTEGER, events, state);
+        if (!enemy) gainMana(state, removed * value, events);
+        else if (action.side === "enemy" && action.actor.deck)
+          action.actor.deck.mana = Math.min(4, action.actor.deck.mana + removed * value);
         break;
       }
       case "waterThorns":
@@ -480,6 +514,6 @@ export function executeAbility(
         throw new Error(`Unhandled ability effect: ${unhandled}`);
       }
     }
-    applyExtras(state, action, events, { target: attackTarget, blindMiss, criticalBonus });
+    applyExtras(state, action, events, { target: attackTarget, blindMiss, criticalBonus, negated });
   }
 }

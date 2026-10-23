@@ -115,7 +115,8 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
     )
       return reject(state, "Choose a living ally.");
     if (
-      (def.effect === "dodge" ||
+      (def.effect === "dreamDouble" ||
+        def.effect === "dodge" ||
         ((def.effect === "guard" || def.effect === "heal") && def.target === "self")) &&
       command.targetId !== undefined &&
       command.targetId !== actor.id

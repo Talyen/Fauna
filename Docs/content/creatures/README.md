@@ -1,6 +1,6 @@
 # Creature references
 
-[Content](../../CONTENT.md) defines shared costs, six complete passive tiers and media preparation. [Keywords](../../KEYWORDS.md) defines ordinary effects; [Journey](../../EXPEDITION_DESIGN.md) defines scaling, formation and recruitment. Individual references summarize kits and document distinctive timing, stacking and ownership. Shared rules apply unless a reference states an exception; player passives use permanent rank, enemies the base tier. Keep common mechanics in these guides and link from the kit.
+[Content](../../CONTENT.md) defines shared costs, six complete passive tiers and media preparation. [Keywords](../../KEYWORDS.md#combat-rules) defines defenses, statuses, reflection and removal; its [execution rules](../../KEYWORDS.md#classification-and-progression) cover repeats, modifiers and attribution; [Journey](../../EXPEDITION_DESIGN.md) defines scaling, formation and recruitment. Individual references summarize kits and document distinctive timing, stacking and ownership. Shared rules apply unless a reference states an exception; player passives use permanent rank, enemies the base tier. Keep common mechanics in these guides and link from the kit.
 
 ## Shared artwork and evidence scope
 
@@ -34,3 +34,5 @@ For new kits, use the [creature design workflow](../../CREATURE_DESIGN.md) and [
 - [Memento](memento.md) · [implementation](../../../src/game/content/creatures/memento.ts) — Legendary; Echoes and Pearls
 - [Euphera](euphera.md) · [implementation](../../../src/game/content/creatures/euphera.ts)
 - [Tournelle](tournelle.md) · [implementation](../../../src/game/content/creatures/tournelle.ts)
+
+- [Reverie](reverie.md) · [implementation](../../../src/game/content/creatures/reverie.ts)

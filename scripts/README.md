@@ -64,7 +64,7 @@ Dependency audit policy lives in [CI](../Docs/CI.md); release inventory, package
 
 ## Task check implementation
 
-[Contributing](../CONTRIBUTING.md#verification) owns selection semantics, extra suites and command scope. Implementation details:
+[Tool selection](../Docs/DEVELOPMENT_TOOLS.md#task-selection-and-diagnostics) owns base/option semantics; [Contributing](../CONTRIBUTING.md#verification) owns coverage. Implementation details:
 
 | Concern            | Owner and behavior                                                                                                                                                                                    |
 | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

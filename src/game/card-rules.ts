@@ -57,6 +57,8 @@ export function enemyCanUse(card: CardDefinition): boolean {
     case "attack":
     case "guard":
     case "heal":
+    case "dreamDouble":
+    case "nightmareHarvest":
     case "waterThorns":
     case "teamDodge":
     case "dodge":
@@ -112,6 +114,12 @@ export function cardText(
         card.target === "self"
           ? `Restore ${value} Health`
           : `Restore ${value} Health to ${card.target === "allAllies" ? "all allies" : card.target === "mostInjured" ? "the most injured ally" : "a living ally"}`;
+      break;
+    case "dreamDouble":
+      text = `Gain ${value} Thorns / Negate the next attack against you`;
+      break;
+    case "nightmareHarvest":
+      text = `Cleanse all allies / Gain ${value} Mana per effect removed`;
       break;
     case "waterThorns":
       text = `Gain ${value} Water Thorns`;

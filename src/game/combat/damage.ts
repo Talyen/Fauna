@@ -25,6 +25,45 @@ import {
 } from "./state";
 import { reaction, type Resolution } from "./operations";
 
+function* retaliateThorns(
+  state: GameState,
+  source: Combatant,
+  target: Combatant,
+  events: GameEvent[],
+): Resolution<void> {
+  const stats = combat(target);
+  for (const [status, type] of [
+    ["thorns", "nature"],
+    ["waterThorns", "water"],
+  ] as const) {
+    const amount = stats[status];
+    if (amount <= 0) continue;
+    stats[status]--;
+    yield* reaction("hit", state, target, source, amount, type, events, { origin: "retaliation" });
+  }
+}
+
+/** Consumed once per incoming attack, before its target's defenses or harmful follow-ups. */
+export function* negateAttack(
+  state: GameState,
+  source: Combatant,
+  target: Combatant,
+  events: GameEvent[],
+): Resolution<boolean> {
+  if (source.health <= 0 || target.health <= 0 || !combat(target).negate) return false;
+  combat(target).negate = false;
+  events.push({
+    kind: "status",
+    actorId: source.id,
+    targetId: target.id,
+    status: "negate",
+    outcome: "immune",
+    text: `${unitName(target)} negates the attack; Thorns still retaliate`,
+  });
+  yield* retaliateThorns(state, source, target, events);
+  return true;
+}
+
 type HitResult = { outcome: "ignored" | "miss" } | { outcome: "landed"; lost: number };
 
 export function* bounce(
@@ -38,25 +77,29 @@ export function* bounce(
   if (!state.battle) return;
   const { effect } = action;
   const allied = !isEnemy(source);
-  const pool = battlefield(
-    state,
-    effect === "heal" ? (allied ? "player" : "enemy") : allied ? "enemy" : "player",
-  );
-  const visited = new Set([first.id]);
+  let pool: Combatant[] | undefined;
+  let visited: Set<string> | undefined;
   for (const entry of creaturePassive(allied ? state : undefined, source.species).effects) {
     if (entry.kind !== "bounce" || entry.effect !== effect) continue;
+    // Ordinary hits and heals need no bounce snapshot or visited-target tracking.
+    pool ??= battlefield(
+      state,
+      effect === "heal" ? (allied ? "player" : "enemy") : allied ? "enemy" : "player",
+    );
+    visited ??= new Set([first.id]);
+    const visitedTargets = visited;
     for (let i = 0; i < entry.amount; i++) {
       const eligible = pool.filter(
         (unit) =>
           unit.health > 0 &&
-          !visited.has(unit.id) &&
+          !visitedTargets.has(unit.id) &&
           (effect !== "heal" || unit.health < maximumHealth(unit)),
       );
       if (source.health <= 0 || !eligible.length) return;
       if (entry.chance !== undefined && !succeeds(state, entry.chance, !allied, action.events)) return;
       const target =
         effect === "heal" ? mostInjured(eligible)! : eligible[Math.floor(roll(state) * eligible.length)]!;
-      visited.add(target.id);
+      visitedTargets.add(target.id);
       if (action.effect === "heal")
         yield* reaction(
           "restoreHealth",
@@ -95,6 +138,13 @@ export function* hit(
     if (!options.interceptionChecked && !options.blindMiss)
       target = interceptAttack(state, source, target, events);
   }
+  if (
+    value > 0 &&
+    options.origin === "ability" &&
+    !options.blindMiss &&
+    (yield* reaction("negateAttack", state, source, target, events))
+  )
+    return undefined;
   const policy = packetPolicy(options);
   const wrongFoot =
     target.combat?.blind && policy.wrongFoot
@@ -530,15 +580,7 @@ export function* resolveHit(
     }
     // Captured damage remains valid even if retaliation later removes the attacker.
     if (direct && lost > 0 && target.health > 0) {
-      for (const [status, type] of [
-        ["thorns", "nature"],
-        ["waterThorns", "water"],
-      ] as const) {
-        const reflected = stats[status];
-        if (reflected <= 0) continue;
-        stats[status]--;
-        yield* reaction("hit", state, target, source, reflected, type, events, { origin: "retaliation" });
-      }
+      yield* retaliateThorns(state, source, target, events);
     }
     if ((leech || blessedLeech) && type !== "bleed" && source.health > 0)
       yield* reaction("leechHealth", state, source, lost, events, stats.poison > 0 || stats.bleed > 0);

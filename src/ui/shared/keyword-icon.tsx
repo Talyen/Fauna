@@ -16,6 +16,7 @@ import {
   Sparkles,
   Eraser,
   EyeOff,
+  ShieldOff,
 } from "lucide-react";
 import type { KeywordId } from "../../game/keywords";
 const icons = {
@@ -41,6 +42,7 @@ const icons = {
   purge: Eraser,
   reflect: Shield,
   nullify: Shield,
+  negate: ShieldOff,
 };
 export function KeywordIcon({ id, className }: { id: KeywordId; className?: string }) {
   const Icon = icons[id as keyof typeof icons] ?? Sparkles;
