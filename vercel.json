@@ -3,7 +3,7 @@
   "framework": "vite",
   "git": { "deploymentEnabled": false },
   "installCommand": "npm install --global npm@12.2.1 --ignore-scripts --no-audit --no-fund && ELECTRON_SKIP_BINARY_DOWNLOAD=1 npm ci --no-audit --no-fund",
-  "buildCommand": "npm run check:types && npm run build",
+  "buildCommand": "node scripts/release/vercel-build.mjs",
   "outputDirectory": "dist",
   "headers": [
     {

@@ -47,7 +47,7 @@ Missing, empty, corrupt, mismatched or escaping resources fail. The runtime inve
 
 ## Vercel web QA
 
-The Vercel project `talyen-s-projects/fauna` connects to `Talyen/Fauna` with Node 24, the Vite preset and `dist` output. [Deployment configuration](../vercel.json) installs pinned npm 12.2.1 and lockfile dependencies, skips the Electron binary download, then runs type checks and the ordinary production build. The launcher recognizes Vercel's hosted `VERCEL=1` environment for these two commands; local execution limits still apply.
+The Vercel project `talyen-s-projects/fauna` connects to `Talyen/Fauna` with Node 24, the Vite preset and `dist` output. [Deployment configuration](../vercel.json) installs pinned npm 12.2.1 and lockfile dependencies and skips the Electron binary download. The [hosted build entrypoint](../scripts/release/vercel-build.mjs) restores Vercel's formatting-only minification of `vercel.json` after comparing exact parsed values, then runs type checks and the ordinary production build. Meaningful configuration edits fail instead of being overwritten; other source edits still mark the build receipt dirty. The launcher recognizes Vercel's hosted `VERCEL=1` environment for these two commands; local execution limits still apply.
 
 Git push deployments are disabled, matching Alchemy's deliberate QA deployment pattern. After the configuration reaches GitHub, deploy a reviewed `main` commit deliberately through Vercel. The project-level Ignored Build Step, `test ! -f vercel.json`, skips source revisions without this configuration. Vercel Authentication protects the default deployment URLs. Do not add a public custom domain without an explicit publication decision.
 

@@ -20,17 +20,13 @@ export function releaseVersion(root, tag) {
   return pkg.version;
 }
 export function buildIdentity(root) {
-  const changes = git(root, ["status", "--porcelain", "--untracked-files=all"]).trim();
-  if (changes) console.warn(`Build checkout changes:\n${changes}`);
-  if (process.env.VERCEL === "1" && changes.includes("vercel.json"))
-    console.warn(git(root, ["diff", "--", "vercel.json"]));
   return {
     format: 1,
     name: "fauna",
     version: releaseVersion(root),
     commit: git(root, ["rev-parse", "HEAD"]).trim(),
     tree: git(root, ["rev-parse", "HEAD^{tree}"]).trim(),
-    dirty: !!changes,
+    dirty: !!git(root, ["status", "--porcelain", "--untracked-files=all"]).trim(),
   };
 }
 export function verifyBuildIdentity(record, expected) {

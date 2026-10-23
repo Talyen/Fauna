@@ -239,47 +239,6 @@ describe("journey earnings and results", () => {
   });
 });
 
-it("diagnoses a representative journey seed after catalog changes", () => {
-  const observations = [];
-  for (const seed of Array.from({ length: 200 }, (_, index) => index)) {
-    const initial = createGame(seed);
-    let game = accept(accept(initial, { type: "draft", species: initial.starterOffers[0]! }), {
-      type: "start",
-    });
-    const actor = createBattleActor();
-    let deployedThree = false;
-    let steps = 0;
-    while (steps++ < FULL_JOURNEY_COMMAND_BUDGET && !["victory", "defeat"].includes(game.phase)) {
-      deployedThree ||= game.team.length === 3;
-      const command =
-        game.phase === "recruit" && game.team.length + game.reserves.length < 5
-          ? {
-              type: "recruit" as const,
-              species:
-                game.reward!.recruits.find(
-                  (kind) => ![...game.team, ...game.reserves].some((unit) => unit.species === kind),
-                ) ?? game.reward!.recruits[0]!,
-            }
-          : game.phase === "battle"
-            ? actor.choose(game).command
-            : policy(game);
-      game = accept(game, command);
-    }
-    const result = {
-      seed,
-      phase: game.phase,
-      encounter: game.encounter,
-      deployedThree,
-      team: game.team.length,
-      roster: game.team.length + game.reserves.length,
-      steps,
-    };
-    observations.push(result);
-    if (game.phase === "victory" && deployedThree && result.roster === 5) break;
-  }
-  console.info("JOURNEY_FIXTURE_DIAGNOSTIC", JSON.stringify(observations));
-}, 120000);
-
 it("deterministically replays the complete one-starter journey through the final boss within the browser budget", () => {
   const actor = createBattleActor();
   const initial = createGame(FULL_JOURNEY_SEED);
