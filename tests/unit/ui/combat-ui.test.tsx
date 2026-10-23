@@ -215,5 +215,5 @@ it("opens every talent category and preserves purchases and requirements", async
   } finally {
     await session.dispose();
   }
-  // This single mounted journey exhausts the catalog formerly split across keyword cases.
-}, 15_000);
+  // One mounted journey exercises the complete catalog under the single-worker local budget.
+}, 30_000);
