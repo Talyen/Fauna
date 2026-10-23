@@ -57,9 +57,7 @@ export function cardCost(
     (actor?.combat?.freeLight && keywords.includes("light"))
   )
     return 0;
-  return hasTalent(state, "burn.flashpoint") &&
-    !state.battle?.freeBurnUsed &&
-    cardKeywords(card).includes("burn")
+  return hasTalent(state, "burn.flashpoint") && !state.battle?.freeBurnUsed && keywords.includes("burn")
     ? 0
     : definition(card.definitionId).cost;
 }
