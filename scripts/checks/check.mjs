@@ -157,7 +157,7 @@ export function runCheck(
   args = [],
   { root = ROOT, runner = spawnSync, log = console.log, env = process.env } = {},
 ) {
-  const detailed = env.CI === "true" || env.FAUNA_LOCAL_HEAVY === "1";
+  const detailed = env.GITHUB_ACTIONS === "true" || env.FAUNA_LOCAL_HEAVY === "1";
   const selection = parseCheckArgs(args);
   const base = taskBase(root, selection.base);
   const normalize = (file) => path.relative(root, path.resolve(root, file)).split(path.sep).join("/");

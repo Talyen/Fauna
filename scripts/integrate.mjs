@@ -23,7 +23,7 @@ export async function integrate(
     throw new Error("Main and task branches must have separate registered worktrees.");
   if (
     ensureDependencies(task, {
-      allowInstall: process.env.CI === "true" || process.env.FAUNA_LOCAL_HEAVY === "1",
+      allowInstall: process.env.GITHUB_ACTIONS === "true" || process.env.FAUNA_LOCAL_HEAVY === "1",
     }) !== 0
   )
     throw new Error("Could not prepare task dependencies; main was not advanced.");

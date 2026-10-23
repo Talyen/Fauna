@@ -49,32 +49,35 @@ afterEach(() => {
 });
 
 describe("lightweight local verification", () => {
-  it("defers compilers, automatic and remembered suites without disabling source checks", () => {
-    const root = fixture();
-    const suite = "tests/unit/game/engine.test.ts";
-    mkdirSync(path.dirname(path.join(root, suite)), { recursive: true });
-    writeFileSync(path.join(root, suite), "export {};\n");
-    mkdirSync(path.join(root, "src/game"));
-    writeFileSync(path.join(root, "src/game/value.ts"), "export const value = 1;\n");
-    const runner = vi.fn(() => ({ status: 0 }));
-    const messages = [];
-    expect(
-      runDefaultCheck(["src/game/value.ts", "--test", suite], {
-        root,
-        runner,
-        env: {},
-        log: (message) => messages.push(message),
-      }),
-    ).toBe(0);
-    expect(runner.mock.calls.map((call) => path.basename(call[1][0]))).toEqual(["prettier.cjs", "oxlint"]);
-    expect(runner.mock.calls[1][1]).not.toContain("--type-aware");
-    expect(messages.join(" ")).toContain("Deferred suites (CI)");
-    runner.mockClear();
-    expect(runDefaultCheck(["src/game/value.ts"], { root, runner, env: {}, log: () => {} })).toBe(0);
-    expect(runner.mock.calls).toHaveLength(2);
-    const failed = vi.fn((_command, args) => ({ status: path.basename(args[0]) === "oxlint" ? 7 : 0 }));
-    expect(runDefaultCheck(["src/game/value.ts"], { root, runner: failed, env: {}, log: () => {} })).toBe(7);
-  });
+  it.each([{}, { CI: "true" }])(
+    "defers compilers, automatic and remembered suites without disabling source checks with %j",
+    (env) => {
+      const root = fixture();
+      const suite = "tests/unit/game/engine.test.ts";
+      mkdirSync(path.dirname(path.join(root, suite)), { recursive: true });
+      writeFileSync(path.join(root, suite), "export {};\n");
+      mkdirSync(path.join(root, "src/game"));
+      writeFileSync(path.join(root, "src/game/value.ts"), "export const value = 1;\n");
+      const runner = vi.fn(() => ({ status: 0 }));
+      const messages = [];
+      expect(
+        runDefaultCheck(["src/game/value.ts", "--test", suite], {
+          root,
+          runner,
+          env,
+          log: (message) => messages.push(message),
+        }),
+      ).toBe(0);
+      expect(runner.mock.calls.map((call) => path.basename(call[1][0]))).toEqual(["prettier.cjs", "oxlint"]);
+      expect(runner.mock.calls[1][1]).not.toContain("--type-aware");
+      expect(messages.join(" ")).toContain("Deferred suites (CI)");
+      runner.mockClear();
+      expect(runDefaultCheck(["src/game/value.ts"], { root, runner, env, log: () => {} })).toBe(0);
+      expect(runner.mock.calls).toHaveLength(2);
+      const failed = vi.fn((_command, args) => ({ status: path.basename(args[0]) === "oxlint" ? 7 : 0 }));
+      expect(runDefaultCheck(["src/game/value.ts"], { root, runner: failed, env, log: () => {} })).toBe(7);
+    },
+  );
 
   it("keeps exhaustive matrices in full CI while local changes verify their owning contract", () => {
     const plan = checkPlan(repo, ["tests/exhaustive/roster-combinations.test.ts"]);
