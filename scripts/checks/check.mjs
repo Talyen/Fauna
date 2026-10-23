@@ -81,6 +81,8 @@ export function formatSelection(root, paths) {
 export function checkPlan(root, paths, namedTests = [], { related = false } = {}) {
   const configs = new Set();
   const tests = new Set(namedTests);
+  const explicit = new Set(namedTests);
+  const ciSuites = new Set(Object.keys(owners).filter((file) => owners[file].tier === "ci"));
   const contracts = new Set();
   for (const file of paths) {
     const owner = Object.keys(owners)
@@ -119,11 +121,13 @@ export function checkPlan(root, paths, namedTests = [], { related = false } = {}
         );
   }
   const missingContracts = [...contracts].flatMap((owner) =>
-    owners[owner].suites
+    [...owners[owner].suites, ...(owners[owner].tier === "ci" ? [owner] : [])]
       .filter((suite) => !lstatSync(path.join(root, suite), { throwIfNoEntry: false })?.isFile())
       .map((suite) => ({ owner, suite })),
   );
-  const primary = [...tests].filter((file) => existsSync(path.join(root, file))).sort();
+  const primary = [...tests]
+    .filter((file) => existsSync(path.join(root, file)) && (!ciSuites.has(file) || explicit.has(file)))
+    .sort();
   const files =
     related && paths.some((file) => /\.(?:[cm]?[jt]sx?|json|css)$/.test(file))
       ? git(root, ["ls-files", "-z", "--cached", "--others", "--exclude-standard"])
@@ -138,9 +142,10 @@ export function checkPlan(root, paths, namedTests = [], { related = false } = {}
   return {
     configs: [...configs],
     tests: primary,
+    ciTests: [...ciSuites].filter((file) => !primary.includes(file)),
     missingContracts,
     contracts: [...contracts].map((owner) => ({ owner, reason: owners[owner].reason })),
-    relatedTests: affected.tests.filter((file) => !primary.includes(file)),
+    relatedTests: affected.tests.filter((file) => !primary.includes(file) && !ciSuites.has(file)),
     unresolved: affected.unresolved,
   };
 }
@@ -188,6 +193,9 @@ export function runCheck(args = [], { root = ROOT, runner = spawnSync, log = con
             : "EMPTY CHECK: no changed files selected; no checks ran. Use npm test for unit/DOM tests, npm run check for full static checks, or --base to select a task range.",
   );
   for (const { owner, reason } of plan.contracts) log(`Contract ${owner}: ${reason}`);
+  if (paths.length && !docsOnly)
+    for (const suite of plan.ciTests)
+      log(`CI-owned extended suite (not run by this gate): ${suite}. ${owners[suite].reason}.`);
   for (const { owner, suite } of plan.missingContracts)
     log(
       `Missing required suite ${suite} for ${owner}; repair scripts/checks/test-owners.json or restore the suite.`,

@@ -274,6 +274,73 @@ describe("lightweight local verification", () => {
     }
   });
 
+  it("defers registered extended suites while retaining local contracts and explicit requests", () => {
+    const root = fixture();
+    const extended = "tests/unit/simulation/engine-lineups.test.ts";
+    const local = "tests/unit/game/engine.test.ts";
+    for (const file of [extended, local]) {
+      mkdirSync(path.dirname(path.join(root, file)), { recursive: true });
+      writeFileSync(path.join(root, file), "export {};\n");
+    }
+    const plan = checkPlan(root, [extended, "src/game/engine.ts"]);
+    expect(plan.tests).toEqual([local]);
+    expect(plan.ciTests).toContain(extended);
+    const runner = vi.fn(() => ({ status: 0 }));
+    const messages = [];
+    expect(runCheck([extended], { root, runner, log: (message) => messages.push(message) })).toBe(0);
+    const testCall = runner.mock.calls.find((call) => call[1][0].endsWith("vitest.mjs"));
+    expect(testCall[1]).toContain(local);
+    expect(testCall[1]).not.toContain(extended);
+    expect(messages.join("\n")).toContain(`CI-owned extended suite (not run by this gate): ${extended}`);
+    expect(checkPlan(root, [extended], [extended]).tests).toEqual([local, extended]);
+    const explicit = vi.fn(() => ({ status: 0 }));
+    expect(runCheck(["--test", extended], { root, runner: explicit, log: () => {} })).toBe(0);
+    expect(explicit.mock.calls.at(-1)[1]).toContain(extended);
+    rmSync(path.join(root, extended));
+    expect(checkPlan(root, [extended]).missingContracts).toContainEqual({
+      owner: extended,
+      suite: extended,
+    });
+  });
+
+  it("discovers every declared CI-owned suite through the unchanged full unit command", () => {
+    const extended = Object.entries(owners)
+      .filter(([, owner]) => owner.tier === "ci")
+      .map(([file]) => file);
+    expect(extended.length).toBeGreaterThan(0);
+    for (const [file, owner] of Object.entries(owners)) {
+      if (owner.tier === undefined) continue;
+      expect(owner.tier).toBe("ci");
+      expect(file).toMatch(/^tests\/(?:unit|integration)\/.+\.test\.[cm]?[jt]sx?$/);
+      expect(owner.reason.length).toBeGreaterThan(0);
+      expect(owner.suites.length).toBeGreaterThan(0);
+      for (const local of owner.suites) expect(owners[local]?.tier).not.toBe("ci");
+      expect(checkPlan(repo, [file]).tests).toEqual(expect.arrayContaining(owner.suites));
+      expect(readFileSync(path.join(repo, file), "utf8").length).toBeGreaterThan(0);
+    }
+    const discovered = JSON.parse(
+      execFileSync(
+        process.execPath,
+        [
+          path.join(repo, "node_modules/vitest/vitest.mjs"),
+          "list",
+          ...extended,
+          "--filesOnly",
+          "--json",
+          "--maxWorkers=1",
+          "--no-file-parallelism",
+        ],
+        {
+          cwd: repo,
+          encoding: "utf8",
+          timeout: 30_000,
+          env: { ...process.env, NODE_OPTIONS: "--max-old-space-size=1024" },
+        },
+      ),
+    );
+    expect(discovered.map(({ file }) => path.relative(repo, file)).sort()).toEqual(extended.sort());
+  });
+
   it("runs named regressions alongside the changed selection and dispatches bounded diagnostics", async () => {
     const root = fixture();
     mkdirSync(path.join(root, "tests/unit"), { recursive: true });

@@ -3,6 +3,15 @@
     "reason": "Seeded command acceptance and engine state transitions",
     "suites": ["tests/unit/game/engine.test.ts"]
   },
+  "tests/unit/simulation/engine-lineups.test.ts": {
+    "reason": "Exhaustive ordinary lineups, seeded commands and save round trips remain in full CI",
+    "tier": "ci",
+    "suites": ["tests/unit/game/engine.test.ts"]
+  },
+  "tests/support/lineups.ts": {
+    "reason": "Shared lineup generation retains exhaustive coverage and representative journey assertions",
+    "suites": ["tests/unit/game/engine.test.ts", "tests/unit/game/lineups.test.ts"]
+  },
   "src/game/combat/": {
     "reason": "Combat resolution order and reaction ownership",
     "suites": ["tests/unit/game/combat-resolution.test.ts", "tests/unit/game/combat-reactions.test.ts"]
