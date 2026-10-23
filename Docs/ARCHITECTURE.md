@@ -63,7 +63,7 @@ Enemy targeting is policy over the shared executor. The pure [battle policy](../
 
 ## Save contract
 
-Follow the [development-save policy](../AGENTS.md#development-saves). [save-format.json](../src/game/save-format.json) is the single version shared by gameplay validation, native storage and the package. Update schemas, semantic validation and current-format fixtures together.
+Desktop saves use Electron’s Fauna user-data `saves/expedition.json`; browser saves use `fauna.save.v1`. Both keep two backups. Follow the [development-save policy](../AGENTS.md#development-saves). [save-format.json](../src/game/save-format.json) is the single version shared by gameplay validation, native storage and the package. Update schemas, semantic validation and current-format fixtures together.
 
 [Save validation](../src/game/save.ts) checks content IDs, individual/card ownership, unique zones, Health bounds, lineup completeness, saved enemy packs with exact initial Health/room power, and phase/outcome coherence. Support visits validate stock, price bounds, visit/slot identities and purchase receipts with their phases. It validates FIFO overflow and rejects a waiting buffer alongside an unfilled hand. Generated copies require distinct IDs, valid battle ownership and complete permanent kits. Discovery rejects duplicates, unknown species, recruitment without encounter records, and invalid starter offers/selections. [Content validation](../src/game/content-validation.ts) is a separate startup/authoring boundary.
 
@@ -91,7 +91,7 @@ An owned utility process contains blocking Steam calls and stops on app shutdown
 
 [Steam](../desktop/steam.cjs) pins an account and isolates its local profile. A new Steam profile may adopt valid standalone progress while preserving the original. Account changes reject transport and require restart. Without a client, ordinary launch continues the last local Steam profile offline; isolated automation ignores that pointer. A newly identified account always selects its own directory. Browser, preview, smoke and performance profiles never access live Steam. Fauna's [App ID](../desktop/steam-config.json) defaults to null; live setup and qualification belong to [Release](RELEASE.md#steam-qualification).
 
-Overlay activation synchronously revokes commands, cancels targeting/Auto-play and opens Pause; closing it does not resume. Display, sound and other device preferences remain separate from progression and Cloud. [Display](../desktop/display.cjs) owns reachable native bounds and Windowed/Fullscreen through validated preload capabilities; automation uses isolated geometry.
+Overlay activation synchronously revokes commands, cancels targeting/Auto-play and opens Pause; closing it does not resume. Display, sound and other device preferences remain separate from progression and Cloud; native display preferences use the profile’s `display.json`. [Display](../desktop/display.cjs) owns reachable native bounds and Windowed/Fullscreen through validated preload capabilities; automation uses isolated geometry.
 
 The packaged renderer uses `fauna://app/` confined to `dist/`, rejecting foreign authorities, traversal, symlink escapes and writes. Permission requests/checks deny access. Production CSP denies network connections; development permits loopback HMR only. File-protocol privileges and Node inspection are disabled. [Package integrity](RELEASE.md#packaged-integrity) checks actual executable fuses and browser snapshots before renderer smoke.
 

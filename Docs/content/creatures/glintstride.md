@@ -2,7 +2,7 @@
 
 [Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
 
-Glintstride has 24 Health and three abilities, each costing 1 Mana:
+Glintstride has 24 Health and three abilities:
 
 | Ability       | Base effect                                      |
 | ------------- | ------------------------------------------------ |

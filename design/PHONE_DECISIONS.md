@@ -2,7 +2,7 @@
 
 This preserves the original October 20 choices. Later decisions in the canonical [UI rules](../Docs/UI.md) supersede panel scrolling/scrollbars, visible failure/Retry and Cloud status, Health totals in tooltips, first-page resets for Collection filters, and the original combat-number timing. Current Collection filters remember their page anchors; technical recovery is silent. Use the [shared design system](../Docs/DESIGN_SYSTEM.md) for current implementation ownership. Historical choices below do not override those contracts.
 
-User choices from the text review on 2026-10-20. These supplement the earlier interactive studies. Approved interaction decisions are now adopted through the [shared design system](../Docs/DESIGN_SYSTEM.md); complete rendered/context acceptance remains pending. Continue with short text options while the user is on a phone; do not require HTML access or screenshots for each decision. Preserve registered shadcn/ui controls and their native behavior.
+User choices from the text review on 2026-10-20. These supplement the earlier interactive studies. Approved interaction decisions are now adopted through the [shared design system](../Docs/DESIGN_SYSTEM.md); complete rendered/context acceptance remains pending. The phone review used short text choices without requiring HTML or screenshots. Current review follows [UI](../Docs/UI.md#required-review).
 
 ## Tabs
 
@@ -204,7 +204,7 @@ User choices from the text review on 2026-10-20. These supplement the earlier in
 
 ## Shared preferences
 
-Continue the phone review in batches of independent questions so the user can answer several choices per turn.
+The phone review grouped independent questions into batches so the user could answer several choices per turn.
 
 Reduced motion makes switch/radio/dialog/progress transitions immediate and disables spatial combat movement. Essential state remains visible without sound. None of these choices authorizes dropping keyboard accessibility, native control behavior, fixed artwork dimensions or the single highlighted-boundary treatment for selected-plus-hovered controls. Fine visual details still need review at a computer.
 

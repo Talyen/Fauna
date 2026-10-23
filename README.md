@@ -1,67 +1,39 @@
 # Fauna
 
-A single-player creature-collecting card battler for Steam. Choose a starter and recruit companions, combining their cards in one shared deck. Find combinations, recruit new teammates, and reach the heart of the wilds.
-
-Creatures and abilities use production illustrations; some encounter/location artwork remains placeholder. See the [roadmap](Docs/ROADMAP.md) for current capabilities and open work.
+A single-player creature-collecting card battler for Steam. Choose a starter, recruit companions and combine their cards in one shared deck through an eight-encounter journey. Creature and ability illustrations are in place; some encounter/location art remains placeholder. See the [roadmap](Docs/ROADMAP.md) for current capabilities and open work.
 
 ## Run
 
-Use the Node 24 LTS patch pinned in `.node-version` and npm 12.2.1, as specified in `package.json`. See [setup and verification](CONTRIBUTING.md) for installation requirements.
+Use the Node version in `.node-version` and npm version in `package.json`:
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Open http://127.0.0.1:48209. Prepared outputs are checked before startup; media authoring uses `npm run assets:prepare`. To use the Electron shell instead:
+Open http://127.0.0.1:48209. Use `npm run dev:desktop` for the Electron shell. Development/build commands validate prepared media; [media authoring](Docs/CONTENT.md#prepared-assets) uses `npm run assets:prepare`.
 
-```sh
-npm run dev:desktop
-```
-
-Task previews use isolated ports and disposable profiles; `dev:desktop` opens a quiet preview. Browser and normal desktop saves are separate. [Architecture](Docs/ARCHITECTURE.md#save-contract) owns saving/recovery and [development tools](Docs/DEVELOPMENT_TOOLS.md#task-checkouts-and-previews) explains previews.
+For isolated task checkouts, previews and verification, start with [Contributing](CONTRIBUTING.md). Desktop previews are quiet and use disposable profiles; browser and ordinary desktop saves are separate.
 
 ## Play
 
-Choose your starter, recruit creatures into a five-member roster, and combine your deployed creatures' abilities in one shared deck. Every ability has a base cost of 1 Mana. Replace knocked-out deployed creatures with living backup, and use abilities to change formation during combat. Deploy up to three ordinary creatures or one Legendary, using their passives and keyword combinations to win eight encounters, with bosses fourth and last.
+Build a five-creature roster, deploying up to three ordinary creatures or one Legendary. Each ability has a base cost of 1 Mana. Recruit teammates, buy journey Boons and recover at Campfires between battles. Collection, keyword XP, talents and Gold persist between journeys. [Journey rules](Docs/EXPEDITION_DESIGN.md) explain formation, encounters and progression.
 
-Between battles, recruit teammates, buy journey Boons, or recover at a Campfire when available. Keyword XP, Collection discoveries, talents and Gold provide permanent progression. See [Journey progression](Docs/EXPEDITION_DESIGN.md) for the complete roster, combat, reward and destination rules, and [content authoring](Docs/CONTENT.md) for ability and artwork contracts.
+- Mouse: select cards and targets; hover over artwork for details; right-click pins inspection outside battle
+- Keyboard: W/A/S/D navigate, Enter/Space activate, I inspects outside battle, Escape cancels or opens the menu; Tab remains available
+- Standard controller: D-pad/left stick navigate, south/A confirms, east/B returns, west/X inspects outside battle and north/Y ends the turn; prompts use Xbox-style positions and non-standard mappings are unsupported
 
-- Mouse: select cards and targets. Hover over artwork for details; right-click to pin inspection outside battle.
-- Keyboard: W/A/S/D navigate, Enter/Space activate, I opens inspection outside battle, Escape cancels or opens the menu. Tab remains available.
-- Standard controller: D-pad/left stick navigate, south/A confirms, east/B backs out, west/X inspects outside battle, north/Y ends the turn. Button mapping follows standard Xbox-style positions. Non-standard mappings are not yet supported.
+Accepted commands save automatically. Desktop close drains queued saves; abrupt browser/process termination cannot guarantee pending writes. See the [save contract](Docs/ARCHITECTURE.md#save-contract) and [development-save policy](AGENTS.md#development-saves).
 
-Accepted commands save automatically. Desktop close drains queued saves; abrupt browser/process termination cannot guarantee pending writes. Desktop saves live under Electron’s Fauna user-data `saves/expedition.json`; browser saves use `fauna.save.v1`. Both keep two backups. Follow the [development-save policy](AGENTS.md#development-saves); use fresh browser contexts for experiments.
+## Guides
 
-## Verify
+- [Contributing](CONTRIBUTING.md): setup, worktrees, verification and integration; [AGENTS.md](AGENTS.md): authorization and invariants
+- [Architecture](Docs/ARCHITECTURE.md): runtime boundaries, commands and saving
+- [Content](Docs/CONTENT.md) and [creature design](Docs/CREATURE_DESIGN.md): authoring, artwork and kit design
+- [Keywords](Docs/KEYWORDS.md), [Glossary](Docs/GLOSSARY.md) and [Journey design](Docs/EXPEDITION_DESIGN.md): gameplay rules
+- [UI](Docs/UI.md): shared appearance, accessibility and review; [menus](Docs/MENU_DESIGN.md), [screens](Docs/ui/screens.md) and [battle](Docs/ui/battle.md): affected flows
+- [Development tools](Docs/DEVELOPMENT_TOOLS.md): previews, replay, balance and performance; [script map](scripts/README.md): implementations
+- [Release](Docs/RELEASE.md): shipping gates and platform qualification
+- [History](Docs/archive/README.md) and [design references](design/README.md): implementation records, measurements and scoped user choices
 
-[Contributing](CONTRIBUTING.md#verification) owns the verification commands, local resource limits and CI policy. The final local integration gate covers selected static checks and affected regression suites. Broader local checks are available within the contribution policy’s resource limits; CI retains complete static, unit/DOM, build, browser and packaged Windows coverage. See [release boundaries](Docs/RELEASE.md) for the remaining shipping gates.
-
-## Architecture and authoring
-
-Current contracts and workflows live directly under `Docs/`; completed implementation, adoption and rollout records live under `Docs/archive/`. Archiving records implementation history and does not establish CI, rendered or release acceptance.
-
-Current contracts and workflows:
-
-- [Feature roadmap: completed work and future suggestions](Docs/ROADMAP.md)
-- [Contribution workflow and verification](CONTRIBUTING.md), [agent instructions](AGENTS.md) and [script implementation map](scripts/README.md)
-- [Architecture, commands and saves](Docs/ARCHITECTURE.md)
-- [Content, ability costs and artwork](Docs/CONTENT.md)
-- [Keywords and combat rules](Docs/KEYWORDS.md) and [gameplay glossary](Docs/GLOSSARY.md)
-- [Journey progression and rewards](Docs/EXPEDITION_DESIGN.md)
-- [UI, layout and accessibility](Docs/UI.md), [menus and inspection](Docs/MENU_DESIGN.md) and [shared design system](Docs/DESIGN_SYSTEM.md)
-- [Development tools, previews, playthroughs and diagnostics](Docs/DEVELOPMENT_TOOLS.md)
-- [Release and platform verification boundaries](Docs/RELEASE.md)
-
-Historical records retain earlier proposals and rollout evidence; the current contracts above take precedence:
-
-- [Design studies and decisions](design/README.md)
-- [Alchemy feature adoption](Docs/archive/ALCHEMY_ADOPTION_PLAN.md)
-- [Alchemy tools and platform adoption](Docs/archive/ALCHEMY_PLATFORM_PLAN.md)
-- [CI speed plan and rollout measurements](Docs/archive/CI_SPEED_PLAN.md)
-- [Shared ability resolution and approved rule alignment](Docs/archive/COMBAT_RESOLUTION_PLAN.md)
-- [Combat reaction ordering and implementation record](Docs/archive/COMBAT_REACTIONS_PLAN.md)
-- [Journey lifecycle implementation record](Docs/archive/GAME_STATE_PLAN.md)
-- [Journey balance measurements](Docs/archive/JOURNEY_BALANCE.md) and [runner/Memento evaluation](Docs/archive/JOURNEY_BALANCE_EVALUATION.md)
-
-Alchemy informed the technology choices and architectural patterns. Fauna has its own implementation and no runtime dependency on Alchemy. Mana crystal UI sprites are adapted from Alchemy; provenance is recorded in the battle-layout sample README.
+Alchemy informed the technology and some selected media; Fauna has its own implementation and no runtime dependency on Alchemy. Asset provenance lives in the manifest and linked source records.

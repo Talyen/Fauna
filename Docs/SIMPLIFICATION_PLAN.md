@@ -69,7 +69,7 @@ Use the existing [encounter](../tests/unit/game/encounters.test.ts), [journey li
 
 A validated current-format session cannot produce a fresh reveal through these rules. The pipeline contributes live subscription and navigation code without a reachable current gameplay outcome. Static unused-code tools cannot catch this because the components and functions still reference one another.
 
-There is also a documentation contradiction: [expedition design](EXPEDITION_DESIGN.md) still describes post-results creature reveals. Resolve that contradiction explicitly in the implementation record. The recommended contract is the one current creation, decoding and recruitment implement: all species are available to encounter and recruit; Collection and starter eligibility come from actual recruitment.
+[Journey design](EXPEDITION_DESIGN.md#catalog-availability) now explicitly identifies the reveal pipeline as dormant: all species are available to encounter and recruit; Collection and starter eligibility come from actual recruitment. Preserve that contract when removing the unreachable code.
 
 ### Implementation
 
@@ -283,41 +283,12 @@ There are smaller readability opportunities in [card rule formatting](../src/gam
 
 ## Delivery sequence and review gates
 
-### Before changing runtime behavior
+Implement in the priority order above, using current committed main and rechecking the snapshot evidence. Each initiative retains its own acceptance criteria and named regressions; shared [verification and protected integration](../CONTRIBUTING.md#verification) apply throughout.
 
-Use the current committed main when implementation begins and recheck these findings; this assessment's line references are a snapshot. Work in an isolated task checkout and preserve unrelated work. For each initiative, identify affected contracts and retain a small set of production-path command traces and named player-outcome assertions. Do not write a second combat or save interpreter as a comparison oracle.
+Convert legacy fixtures first, then capture current-route command traces before changing runtime owners. Compare acceptance, RNG, offers, earnings, card slots and ordered events. Project away only explicitly removed fields, save-version metadata and changed fixture identity; do not build a second resolver as an oracle.
 
-Convert legacy fixture setup first. Capture baselines for the resulting current-route scenarios before changing their runtime owners. Keep removed-state projections narrow and explicit: save version, deleted redundant fields and fixture identity are legitimate differences; RNG, reward counts, card slots and event order are not.
+Each increment must leave a working game and remove its transitional code. Save changes follow the [development-save policy](../AGENTS.md#development-saves) independently. Cloud may be delivered independently when it does not consume earlier changed fields.
 
-### Suggested increments
+Use [rendered review](UI.md#required-review) for affected presentation in items 1, 2, 4 and 5, and item 3 if roster/swap presentation changes. Preserve input, focus, artwork, effects, timing and readable feedback. Report actual checks and relevant unverified platforms.
 
-1. **One journey model:** convert fixtures, remove the legacy route, update format and contracts
-2. **Reachable progression only:** remove the dormant unlock pipeline and reconcile its stale documentation
-3. **One roster authority:** remove species and lineup mirrors while preserving ordered creature arrays and card reconciliation
-4. **One shell transition owner:** introduce the reducer, focus adapter and shared active-surface derivation, then delete old setters and priority formulas
-5. **Typed event facts:** tighten event families and simplify consumers without changing their output
-6. **Cloud policy and lifecycle:** extract deterministic policy first, then transfer queue/cancellation ownership in small reviewed steps
-
-Each increment should leave a working game and remove its transitional code before completion. Save-shape increments follow the disposable-development-save policy independently; do not keep old shapes alive to avoid a format bump. Cloud can be delivered independently after these earlier items if it does not consume their changed fields directly.
-
-### Verification during implementation
-
-Follow [Contributing](../CONTRIBUTING.md#verification) for focused checks, remembered extra suites and protected integration. For UI changes in items 1, 2, 4 and 5, use the [required rendered review](UI.md#required-review), preserving input, focus, art, effects, timing and readable feedback. Item 3 also needs rendered review if roster/swap presentation changes. Passing source checks or a loading-state capture cannot establish parity.
-
-### Definition of success
-
-Assess each change by removed responsibilities and preserved behavior, not a promised line-count reduction:
-
-- One supported journey model and no unreachable unlock subsystem
-- Roster membership and deployment have no independently persisted mirrors
-- Shell callers use named transitions and share one overlay-priority decision
-- Event producers establish the facts their consumers require
-- Cloud conflict policy is deterministic and independent of asynchronous transport ownership
-- No temporary compatibility layers, new general-purpose framework or runtime dependencies
-- Seeded gameplay, collection, card ownership, save ordering and recovery retain their tested contracts
-
-Report actual verification separately for unit/DOM tests, browser simulation and rendered review, desktop execution, Windows packaging, physical controllers, Steam client and Steam Deck. Unrun gates remain unverified.
-
-## Assessment delivery
-
-This planning change edits documentation only. It introduces no runtime or visual change and requires no new tests. Documentation formatting, maintained links and protected integration are the relevant delivery checks; gameplay, rendered and platform verification belong to the eventual implementation increments above.
+This assessment changes documentation only. Its delivery checks are formatting, maintained references, review and protected integration; runtime and rendered verification belong to implementation.

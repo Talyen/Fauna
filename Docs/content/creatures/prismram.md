@@ -2,7 +2,7 @@
 
 [Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
 
-Prismram is a 30 Health crystal defender found in ordinary combat packs and collected through recruitment. All three abilities cost 1 Mana:
+Prismram is a 30 Health crystal defender found in ordinary combat packs and collected through recruitment. Its abilities:
 
 - **Prism Charge:** Deal 6 Physical damage
 - **Faceted Ward:** Gain 3 Block; Reflect the next harmful status effect

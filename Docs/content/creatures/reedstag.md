@@ -2,7 +2,7 @@
 
 [Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
 
-Reedstag is a 30 Health marsh guardian available through starter drafts, ordinary encounters and recruitment. All three abilities cost 1 Mana:
+Reedstag is a 30 Health marsh guardian available through starter drafts, ordinary encounters and recruitment. Its abilities:
 
 - **Reed Rush:** Deal 6 Nature damage
 - **Reed Shelter:** Gain 3 Block and 3 Thorns

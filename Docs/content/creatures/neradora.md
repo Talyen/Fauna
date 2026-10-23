@@ -2,7 +2,7 @@
 
 [Creature index](README.md) · [Authoring contracts](../../CONTENT.md)
 
-Neradora has 28 Health and is available through ordinary encounters, recruitment and later three-creature drafts. Its support kit excludes it from the first solo starter pool. Each ability costs 1 Mana:
+Neradora has 28 Health and is available through ordinary encounters, recruitment and later three-creature drafts. Its support kit excludes it from the first solo starter pool. Its abilities:
 
 - **Undertow Knot:** Gain 3 Water Thorns
 - **Bloom Shelter:** Restore 2 Health to all allies

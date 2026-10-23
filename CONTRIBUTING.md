@@ -53,4 +53,6 @@ Input fingerprints detect repository changes during checks; captures retain repr
 
 Markdown changes check maintained links, anchors, file references and npm examples across the repository. Reachability from README or AGENTS is advisory and never blocks a task. Link durable guides where useful for discovery. Historical records belong under `Docs/archive/` or `Docs/task-evidence/<task>.md`; ignored runtime reports and screenshots belong under `reports/`. Historical records cannot be the sole owner of a current rule. Prefix foreign file references with their repository.
 
-For maintenance details, see [script owners](scripts/README.md) or [test maintenance](tests/README.md). These are references, not extra steps for ordinary tasks.
+Keep each rule in its owning guide; link to it elsewhere. Current guides explain behavior and procedure; dated records retain source identity, observations and limitations. Prefer source links for catalog values and one evidence-scope block per record, retaining any differences between attempts. Preserve historical decisions and evidence when shortening prose.
+
+See [script owners](scripts/README.md) and [test maintenance](tests/README.md) when changing their infrastructure.

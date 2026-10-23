@@ -18,7 +18,7 @@ Work independently. Do not discover or message other chats for routine coordinat
 
 Task-scoped branch/worktree creation, commits, local integration and hosted CI execution are authorized unless the task restricts them. Pushes, PRs, releases, deployments, destructive cleanup and changes outside this game require an explicit user request. This file is the repository's authority for Git authorization; other workflow documents link here instead of defining separate permissions.
 
-After review and required rendered evidence, commit task-owned paths and run `npm run finish` from the task checkout. It is the single final local gate: under the shared lock, incorporate current main, verify the combined result and advance clean main. Never disturb another lock owner or overwrite dirty main. Resolve understood conflicts in the task checkout; preserve ambiguous conflicts and blocked work. Retain the checkout, branch and evidence. Optional retirement requires the cleanup authorization above and is separate from completion. See [workflow and recovery](CONTRIBUTING.md#worktrees-and-integration).
+Follow [Contributing](CONTRIBUTING.md#worktrees-and-integration) for review, commits and the protected integration gate. Integration must preserve dirty main, other lock owners and ambiguous conflicts; retain the task checkout, branch and evidence. Optional retirement requires separate cleanup authorization.
 
 ## Find the owner
 
@@ -39,7 +39,7 @@ Development saves are disposable. There are no released player saves to preserve
 - Gameplay in `src/game/` is platform independent. Keep I/O, clocks and ambient randomness outside it. Seeded randomness and committed plain immutable data determine outcomes; rejected commands retain state and RNG.
 - Application orchestration in `src/application/` owns commands and save ordering. Presentation consumes committed events and never settles gameplay, grants rewards, or saves previews. Animations cannot block command acceptance.
 - Change current save schemas, validation and affected fixtures together; follow the disposable-development-save policy above. Preserve current-format resume paths, backup recovery and serialized writes. Disposal revokes new commands while draining admitted saves; test lifecycle and ordering changes at their owning boundary.
-- Every ability has a base cost of exactly 1 Mana. Balance abilities through their effects and values, never higher or lower authored Mana costs. Existing explicit gameplay modifiers may make a play free. See [ability costs](Docs/CONTENT.md#ability-costs).
+- Every authored ability costs exactly 1 Mana; explicit gameplay modifiers may make plays free. [Content](Docs/CONTENT.md#ability-costs) owns the complete authoring rule.
 - Every creature must define all six passive tiers with different gameplay effects at each tier, typically by scaling values. Changed wording or effect order alone does not count; each tier replaces the complete previous passive.
 - Effect descriptions never contain periods; use concise clauses separated by semicolons when needed. This applies to abilities, passives, talents, Boons and keyword/glossary rules.
 - Keep displayed rules consistent with effects, preserve accessible names and make outcomes clear without sound. Reuse the [recovery owners](Docs/UI.md#recovery-owners) for failure handling; screens must not invent retries or save recovery.
@@ -49,8 +49,8 @@ Development saves are disposable. There are no released player saves to preserve
 
 Review the final diff and integration. Express behavior through names, types and valuable tests; comments explain non-obvious reasons, ordering or compatibility. Justify lint suppressions.
 
-Follow [Contributing](CONTRIBUTING.md#verification) for command selection, extra regression suites, resource limits and evidence. Review with `npm run review:diff`, commit task-owned paths and finish through protected integration. Documentation-only changes need no new tests.
+Use [Contributing](CONTRIBUTING.md#verification) for verification and local completion.
 
-For visual changes, follow the single [rendered review procedure](Docs/UI.md#required-review). Task-owned focused preview/review is authorized by default. Integrate only after current rendered evidence is inspected; preserve work on its branch if that evidence is unavailable.
+For visual changes, follow the [rendered review procedure](Docs/UI.md#required-review). Task-owned focused preview/review is authorized by default; unavailable evidence blocks integration.
 
 Report completion, checks run, limitations, incidental fixes and unresolved decisions without log or diff dumps. Distinguish browser simulation, desktop, Windows packaging, physical controller, Steam client and Steam Deck verification; do not claim unrun gates passed. Stop after completion.

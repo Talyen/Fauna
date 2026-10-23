@@ -4,7 +4,7 @@
 
 Emberback is an armored brawler with 30 Health. Its unique passive, Molten Shell, reads: "When your Armor breaks, deal 1 Burn damage to all enemies" Damage scales from 1 through 6 at zero through five stars, replacing the previous tier. It grants no starting Armor. It appears in ordinary combat packs and becomes collectible through the existing recruitment flow.
 
-All three abilities cost 1 Mana:
+Abilities:
 
 - **Ember Charge:** Deal 4 Physical damage; Gain 2 Armor
 - **Furnace Breath:** Deal 2 Burn damage to all enemies
