@@ -8,7 +8,7 @@ import {
   selectedPaths,
   formatSelection,
   checkPlan,
-  runCheck,
+  runCheck as runDefaultCheck,
   verify,
 } from "../../../scripts/checks/check.mjs";
 import { runLocalTests } from "../../../scripts/checks/run-local-tests.mjs";
@@ -16,6 +16,10 @@ import owners from "../../../scripts/checks/test-owners.json" with { type: "json
 import localConfig from "../../../vitest.local.config.mjs";
 import { localCommands } from "../../../scripts/local.mjs";
 import { investigationArgs } from "../../../scripts/agent/investigate.mjs";
+
+// Detailed execution remains available only through the explicit local opt-in.
+const runCheck = (args, options = {}) =>
+  runDefaultCheck(args, { ...options, env: { FAUNA_LOCAL_HEAVY: "1" } });
 
 const roots = [];
 const repo = path.resolve(import.meta.dirname, "../../..");
@@ -45,6 +49,33 @@ afterEach(() => {
 });
 
 describe("lightweight local verification", () => {
+  it("defers compilers, automatic and remembered suites without disabling source checks", () => {
+    const root = fixture();
+    const suite = "tests/unit/game/engine.test.ts";
+    mkdirSync(path.dirname(path.join(root, suite)), { recursive: true });
+    writeFileSync(path.join(root, suite), "export {};\n");
+    mkdirSync(path.join(root, "src/game"));
+    writeFileSync(path.join(root, "src/game/value.ts"), "export const value = 1;\n");
+    const runner = vi.fn(() => ({ status: 0 }));
+    const messages = [];
+    expect(
+      runDefaultCheck(["src/game/value.ts", "--test", suite], {
+        root,
+        runner,
+        env: {},
+        log: (message) => messages.push(message),
+      }),
+    ).toBe(0);
+    expect(runner.mock.calls.map((call) => path.basename(call[1][0]))).toEqual(["prettier.cjs", "oxlint"]);
+    expect(runner.mock.calls[1][1]).not.toContain("--type-aware");
+    expect(messages.join(" ")).toContain("Deferred suites (CI)");
+    runner.mockClear();
+    expect(runDefaultCheck(["src/game/value.ts"], { root, runner, env: {}, log: () => {} })).toBe(0);
+    expect(runner.mock.calls).toHaveLength(2);
+    const failed = vi.fn((_command, args) => ({ status: path.basename(args[0]) === "oxlint" ? 7 : 0 }));
+    expect(runDefaultCheck(["src/game/value.ts"], { root, runner: failed, env: {}, log: () => {} })).toBe(7);
+  });
+
   it("keeps exhaustive matrices in full CI while local changes verify their owning contract", () => {
     const plan = checkPlan(repo, ["tests/exhaustive/roster-combinations.test.ts"]);
     expect(plan.tests).toEqual(["tests/unit/game/engine.test.ts", "tests/unit/game/lineups.test.ts"]);
@@ -362,7 +393,9 @@ describe("lightweight local verification", () => {
     ).toBe(0);
     expect(runner.mock.calls.at(-1)[1]).toContain("tests/unit/named.test.mjs");
     expect(() => runCheck(["--test", "../outside.test.mjs"], { root, runner })).toThrow();
-    expect(await verify(["--diagnostic", "types"], { root, runner })).toBe(0);
+    expect(await verify(["--diagnostic", "types"], { root, runner, env: { FAUNA_LOCAL_HEAVY: "1" } })).toBe(
+      0,
+    );
     expect(runner.mock.calls.at(-1)[1].slice(-2)).toEqual(["run", "check:types"]);
   });
 

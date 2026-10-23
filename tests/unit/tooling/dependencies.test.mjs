@@ -141,3 +141,16 @@ it("detects a stale owned installation against the resolved lockfile", () => {
   expect(ensureDependencies(main, { runner, log: () => {} })).toBe(7);
   expect(runner).toHaveBeenCalledOnce();
 });
+
+it("preserves mismatched links and never launches implicit installs in routine verification", () => {
+  const { main, task } = fixture();
+  const runner = vi.fn();
+  expect(ensureDependencies(task, { runner, allowInstall: false, log: () => {} })).toBe(0);
+  writeFileSync(path.join(task, "package.json"), JSON.stringify({ dependencies: { example: "2" } }));
+  expect(ensureDependencies(task, { runner, allowInstall: false, log: () => {} })).toBe(1);
+  expect(lstatSync(path.join(task, "node_modules")).isSymbolicLink()).toBe(true);
+  expect(readFileSync(path.join(main, "node_modules/keep"), "utf8")).toBe("main dependencies");
+  rmSync(path.join(task, "node_modules"));
+  expect(ensureDependencies(task, { runner, allowInstall: false, log: () => {} })).toBe(1);
+  expect(runner).not.toHaveBeenCalled();
+});
