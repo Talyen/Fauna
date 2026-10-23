@@ -650,9 +650,9 @@ exports[`preserves committed command traces for retaliation and exact absorption
       "cardId": "ally-1:captoad-guard",
       "type": "play",
     },
-    "digest": "0afef234c5fbb6b324747e6f816359190f383d220454063897bf141449d57b17",
+    "digest": "dc159f75519f1f793e76487f25ceff235f5c2cd25c5bb68da26c810512ddd9bb",
     "phase": "battle",
-    "rng": 3186720818,
+    "rng": 2678612457,
   },
   {
     "command": {
@@ -660,7 +660,7 @@ exports[`preserves committed command traces for retaliation and exact absorption
       "targetId": "enemy-0",
       "type": "play",
     },
-    "digest": "f6a6cd130583690c9168bf85a760765a522838dade55f85b700b70a59e05bc69",
+    "digest": "ad74313b0518a18a7e9ab275f648f142c9c00e51400df509541b7ca814f6a0f6",
     "phase": "battle",
     "rng": 1863061991,
   },
@@ -669,27 +669,35 @@ exports[`preserves committed command traces for retaliation and exact absorption
       "cardId": "ally-1:captoad-attack",
       "type": "play",
     },
-    "digest": "b0e99d360ac91b493720b0101151d7b44c702baa7cfc61919f32a3d4b8722878",
+    "digest": "ddfddf3d3643f39289c293e5716ec65313b74ede7a7733e4fd59dd2100a2c55c",
     "phase": "battle",
-    "rng": 782190867,
+    "rng": 2452083588,
   },
   {
     "command": {
       "cardId": "ally-2:emberback-furnace-breath",
       "type": "play",
     },
-    "digest": "b150484d665989747ebcdf2485dddb1f113d478bc5bd96c1d1a861ad8c1e4fba",
+    "digest": "39e0b43cd5f71c03cce30ef79bf56198c679c161ff368cae21559835871e4fc5",
     "phase": "battle",
-    "rng": 13122808,
+    "rng": 4259461821,
   },
   {
     "command": {
-      "cardId": "ally-2:emberback-magma-stomp",
+      "cardId": "ally-0:coralcurl-guard",
       "type": "play",
     },
-    "digest": "41fa5f80750a0ed251a16606f341e0497fe98fb2ca4dfe8d1c839a37c2fadf4c",
-    "phase": "recruit",
+    "digest": "f447cb69368acf3408e0c03e282976c54a354e8debb30356cd4abcbab763a827",
+    "phase": "battle",
     "rng": 57811777,
+  },
+  {
+    "command": {
+      "type": "endTurn",
+    },
+    "digest": "ef09b84615df048c875ce310bf3fd82e0bcc217493227b77aa62eae9f590adde",
+    "phase": "recruit",
+    "rng": 2401759749,
   },
 ]
 `;

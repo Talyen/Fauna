@@ -132,6 +132,15 @@ export function* damageRewards(
     if (type === "bleed" && state.boons.includes("cutpurse-knife")) gainGold(state, 1, events);
     if (type === "poison" && state.boons.includes("parasitic-bloom") && succeeds(state, 0.1, false, events))
       yield* reaction("leechHealth", state, source, lost, events, true);
+    // Poison ticks and triggered damage carry the same Leech talent as direct Poison hits.
+    if (
+      !policy.direct &&
+      source.health > 0 &&
+      type === "poison" &&
+      hasTalent(state, "leech.virulent-leech") &&
+      succeeds(state, 0.1, false, events)
+    )
+      yield* reaction("leechHealth", state, source, lost, events, true);
     if (
       attack &&
       type === "nature" &&
@@ -264,6 +273,7 @@ export function* thornRetaliation({
     ["thorns", "nature"],
     ["waterThorns", "water"],
   ] as const) {
+    if (source.health <= 0) break;
     const reflected = stats[status];
     if (reflected <= 0) continue;
     stats[status]--;

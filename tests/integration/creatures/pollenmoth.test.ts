@@ -8,8 +8,9 @@ import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { validateCatalog } from "../../../src/game/content-validation";
 import { battleChoices } from "../../../src/application/battle-policy";
+import { summonEcho } from "../../../src/game/combat/legendary";
 import type { GameEvent } from "../../../src/game/types";
-import { authoredPack, accept, teamRun, winBattle } from "../../support/game";
+import { authoredPack, accept, teamRun, winBattle, requireBattle } from "../../support/game";
 
 function ready(id: string, copies = 1) {
   return produce(teamRun(1, ["pollenmoth", "mossguard", "prismram"]), (game) => {
@@ -28,6 +29,27 @@ function ready(id: string, copies = 1) {
     });
   });
 }
+
+it("bounces enemy Light damage from a Legendary to its living Echo", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["memento"])));
+  const source = state.battle.enemies.find((unit) => unit.species === "pollenmoth")!;
+  expect(source).toBeDefined();
+  const target = state.team[0]!;
+  summonEcho(state, target, "player", 6, []);
+  target.combat = { ...freshCombat(), controlled: "stun", controlTurns: 1 };
+  const echo = state.battle.minions![0]!;
+  echo.combat.controlled = "stun";
+  echo.combat.controlTurns = 1;
+  state.rng = 42;
+  const events: GameEvent[] = [];
+  hit(state, source, target, 1, "light", events);
+  expect(events.filter((event) => event.kind === "damage").map((event) => event.targetId)).toEqual([
+    target.id,
+    echo.id,
+  ]);
+  expect(echo.health).toBe(5);
+  expect(decodeSave(encodeSave(state))).toEqual(state);
+});
 
 it("authors the agreed kit and six complete passive tiers", () => {
   const cards = CARDS.filter((card) => card.species === "pollenmoth");

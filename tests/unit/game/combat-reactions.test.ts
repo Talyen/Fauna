@@ -1,5 +1,7 @@
 import { expect, it } from "vitest";
 import { freshCombat, hit, removeEffects, tickStatuses, startAction } from "../../../src/game/combat/index";
+import { finishTurn } from "../../../src/game/combat/turns";
+import { requireBattle } from "../../support/game";
 import { species } from "../../../src/game/content";
 import type { GameEvent } from "../../../src/game/types";
 import { run } from "../../support/game";
@@ -41,6 +43,90 @@ it("Clean Getaway trims the oldest Bleed obligation without granting a Cleanse r
   expect(ally.health).toBe(7);
   expect(ally.combat.bleedLeech).toEqual([]);
   expect(ally.combat.statusSources.bleed).toBeUndefined();
+});
+
+it("preserves Water Thorns when Nature Thorns already knocked out the attacker", () => {
+  const state = structuredClone(run());
+  const source = state.team[0]!;
+  const target = state.battle!.enemies[0]!;
+  source.health = 1;
+  source.block = 0;
+  source.combat = { ...freshCombat(), deathDoorUsed: true };
+  target.block = 0;
+  target.combat = { ...freshCombat(), thorns: 2, waterThorns: 3, controlled: "stun", controlTurns: 1 };
+  state.rng = 42;
+  const events: GameEvent[] = [];
+  hit(state, source, target, 1, "water", events);
+  expect(source.health).toBe(0);
+  expect(target.combat.thorns).toBe(1);
+  expect(target.combat.waterThorns).toBe(3);
+  expect(events.filter((event) => event.kind === "damage").map((event) => event.damageType)).toEqual([
+    "water",
+    "nature",
+  ]);
+});
+
+it.each([
+  ["mana.dark-recovery", 0, 4],
+  ["mana.wellspring", 0, 5],
+] as const)("recalculates %s after an automatically skipped turn", (talent, mana, expected) => {
+  const state = requireBattle(structuredClone(run()));
+  state.talents = [talent];
+  state.battle.mana = mana;
+  for (const unit of state.team) unit.combat = { ...freshCombat(), controlled: "freeze", controlTurns: 1 };
+  for (const enemy of state.battle.enemies)
+    enemy.combat = { ...freshCombat(), controlled: "stun", controlTurns: 2 };
+  finishTurn(state, []);
+  expect(state.battle.turn).toBe(3);
+  expect(state.battle.maxMana).toBe(expected);
+  expect(state.battle.mana).toBe(expected);
+});
+
+it("lets Virulent Leech heal from attributed Poison ticks without adding Poison", () => {
+  const state = structuredClone(run());
+  state.talents = ["leech.virulent-leech"];
+  const source = state.team[0]!;
+  const target = state.battle!.enemies[0]!;
+  source.health = 10;
+  target.health = target.maxHealth;
+  target.combat = { ...freshCombat(), poison: 6, statusSources: { poison: source.id } };
+  state.rng = 1972; // First production roll succeeds at 10%.
+  const events: GameEvent[] = [];
+  tickStatuses(state, target, events);
+  expect(events.filter((event) => event.kind === "damage")).toHaveLength(1);
+  expect(target.combat.poison).toBe(5);
+  expect(source.health).toBe(13);
+});
+
+it.each(["proc", "statusRetaliation"] as const)(
+  "lets Virulent Leech heal once from %s Poison damage",
+  (origin) => {
+    const state = structuredClone(run());
+    state.talents = ["leech.virulent-leech"];
+    const source = state.team[0]!;
+    const target = state.battle!.enemies[0]!;
+    source.health = 10;
+    target.block = 0;
+    target.combat = freshCombat();
+    state.rng = 1972;
+    const events: GameEvent[] = [];
+    hit(state, source, target, 6, "poison", events, { origin });
+    expect(source.health).toBe(13);
+    expect(events.filter((event) => event.kind === "heal")).toHaveLength(1);
+    expect(target.combat.poison).toBe(6);
+  },
+);
+
+it("does not grant Virulent Leech to enemy Poison sources", () => {
+  const state = structuredClone(run());
+  state.talents = ["leech.virulent-leech"];
+  const source = state.battle!.enemies[0]!;
+  source.health = 10;
+  state.rng = 1972;
+  const events: GameEvent[] = [];
+  hit(state, source, state.team[0]!, 6, "poison", events, { origin: "periodic" });
+  expect(source.health).toBe(10);
+  expect(events.filter((event) => event.kind === "heal")).toEqual([]);
 });
 
 it("Open Flank breaking Armor before Erosion triggers Molten Shell only once", () => {

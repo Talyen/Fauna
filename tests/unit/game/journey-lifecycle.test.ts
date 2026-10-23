@@ -44,6 +44,7 @@ function fingerprint(state: GameState, events: unknown) {
 }
 
 import { accept, starterJourney, winBattle } from "../../support/game";
+import { generateEncounterPack } from "../../../src/game/encounters";
 
 describe("journey lifecycle behavior baseline", () => {
   it.each([3, 10, 98])("preserves seeded commands and outputs for seed %s", (seed) => {
@@ -176,4 +177,21 @@ it("exposes required phase payloads in the shared schema types", () => {
   expectTypeOf<BattleState["reward"]>().toEqualTypeOf<null>();
   expectTypeOf<RewardState["battle"]>().toEqualTypeOf<null>();
   expectTypeOf<RewardState["reward"]>().toEqualTypeOf<NonNullable<RewardState["reward"]>>();
+});
+
+it("resumes a return home from the final Recruit reward without losing the earned victory", () => {
+  const ready = produce(starterJourney(3, "captoad"), (draft) => {
+    draft.encounter = 7;
+    draft.journey!.victories = 7;
+    draft.expedition!.pack = generateEncounterPack(draft);
+  });
+  const won = winBattle(accept(ready, { type: "beginBattle" }));
+  expect(won.phase).toBe("recruit");
+  expect(decodeSave(encodeSave(won))).toEqual(won);
+  const returned = accept(won, { type: "abandon" });
+  expect(returned.journey!.outcome).toBe("returned");
+  expect(returned.journey!.lastBattle).toEqual(won.journey!.lastBattle);
+  expect(returned.wins).toBe(won.wins);
+  expect(returned.currency).toBe(won.currency);
+  expect(decodeSave(encodeSave(returned))).toEqual(returned);
 });
