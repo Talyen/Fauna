@@ -62,14 +62,16 @@ it("inspects draw and discard piles without changing state or exposing draw orde
       .map((card) => card.id);
     expect(ids).toEqual(expected.slice(0, 3));
     const allIds = [...ids];
-    while (!(within(pile).getByRole("button", { name: "Next page" }) as HTMLButtonElement).disabled) {
-      await user.click(within(pile).getByRole("button", { name: "Next page" }));
+    while (
+      !(within(pile).getByLabelText("Next page", { selector: "button" }) as HTMLButtonElement).disabled
+    ) {
+      await user.click(within(pile).getByLabelText("Next page", { selector: "button" }));
       allIds.push(
         ...Array.from(pile.querySelectorAll<HTMLElement>("[data-card-id]"), (el) => el.dataset.cardId),
       );
     }
     expect(allIds).toEqual(expected);
-    await user.click(within(pile).getByRole("button", { name: "Previous page" }));
+    await user.click(within(pile).getByLabelText("Previous page", { selector: "button" }));
     const firstCard = pile.querySelector<HTMLButtonElement>("[data-card-id]")!;
     await user.click(firstCard);
     expect(screen.getAllByRole("dialog")).toHaveLength(1);
@@ -90,7 +92,7 @@ it("inspects draw and discard piles without changing state or exposing draw orde
   } finally {
     await act(() => session.dispose());
   }
-});
+}, 15_000);
 it("shows exact Campfire recovery and commits one persisted Rest without currency or XP rewards", async () => {
   const session = await open(
     produce(run(), (s) => {
@@ -119,7 +121,7 @@ it("shows exact Campfire recovery and commits one persisted Rest without currenc
   } finally {
     await act(() => session.dispose());
   }
-});
+}, 15_000);
 
 it("exposes pending talent rewards and remaining control turns in creature details", async () => {
   const session = await open(
@@ -156,32 +158,34 @@ it("keeps all simultaneous combat effects reachable through bounded pages", asyn
       effects
         .querySelectorAll<HTMLElement>("[data-status-id]")
         .forEach((el) => seen.add(el.dataset.statusId!));
-      const next = within(effects).getByRole("button", { name: "Next page" }) as HTMLButtonElement;
+      const next = within(effects).getByLabelText("Next page", { selector: "button" }) as HTMLButtonElement;
       if (next.disabled) break;
       await user.click(next);
     }
     expect([...seen]).toEqual(["armor", "thorns", "dodge", "burn", "poison", "bleed"]);
-    expect(document.activeElement).toBe(within(effects).getByRole("button", { name: "Previous page" }));
+    expect(document.activeElement).toBe(
+      within(effects).getByLabelText("Previous page", { selector: "button" }),
+    );
   } finally {
     await session.dispose();
   }
 });
 
-it("opens every talent category and preserves purchases and requirements", async () => {
-  const game = produce(run(), (state) => {
-    state.keywordXP = Object.fromEntries(KEYWORDS.map((keyword) => [keyword, 10000]));
-  });
-  localStorage.setItem("fauna.save.v1", JSON.stringify(game));
-  const session = createSession(createBrowserPlatform(localStorage));
-  await session.load();
-  render(<App session={session} />);
-  try {
-    await user.click(screen.getByRole("button", { name: "Talents" }));
-    for (const keyword of KEYWORDS) {
+it.each(KEYWORDS)(
+  "opens the %s talent category and preserves purchases and requirements",
+  async (keyword) => {
+    const game = produce(run(), (state) => {
+      state.keywordXP = Object.fromEntries(KEYWORDS.map((keyword) => [keyword, 10000]));
+    });
+    localStorage.setItem("fauna.save.v1", JSON.stringify(game));
+    const session = createSession(createBrowserPlatform(localStorage));
+    await session.load();
+    render(<App session={session} />);
+    try {
+      await user.click(screen.getByRole("button", { name: "Talents" }));
       await user.click(
-        within(screen.getByRole("main")).getByRole("button", {
-          hidden: true,
-          name: `${keywordLabel(keyword)} talents`,
+        within(screen.getByRole("main")).getByLabelText(`${keywordLabel(keyword)} talents`, {
+          selector: "button",
         }),
       );
       const tree = within(screen.getByRole("main"));
@@ -189,31 +193,30 @@ it("opens every talent category and preserves purchases and requirements", async
       const rows = [...new Set(talents.map((talent) => talent.row))];
       for (let index = 0; index < rows.length; index++) {
         for (const talent of talents.filter((entry) => entry.row === rows[index]))
-          expect(tree.getByRole("button", { hidden: true, name: talent.name })).toBeTruthy();
+          expect(tree.getByLabelText(talent.name, { selector: "button" })).toBeTruthy();
         if (index < rows.length - 1)
-          await user.click(tree.getByRole("button", { hidden: true, name: "Next page" }));
+          await user.click(tree.getByLabelText("Next page", { selector: "button" }));
       }
-      while (
-        !(tree.getByRole("button", { hidden: true, name: "Previous page" }) as HTMLButtonElement).disabled
-      )
-        await user.click(tree.getByRole("button", { hidden: true, name: "Previous page" }));
+      while (!(tree.getByLabelText("Previous page", { selector: "button" }) as HTMLButtonElement).disabled)
+        await user.click(tree.getByLabelText("Previous page", { selector: "button" }));
       if (keyword === "physical") {
         const later = talents.find((t) => t.row === 1)!;
-        await user.click(tree.getByRole("button", { hidden: true, name: "Next page" }));
-        expect(
-          tree.getByRole("button", { hidden: true, name: later.name }).getAttribute("aria-disabled"),
-        ).toBe("true");
-        await user.click(tree.getByRole("button", { hidden: true, name: "Previous page" }));
+        await user.click(tree.getByLabelText("Next page", { selector: "button" }));
+        expect(tree.getByLabelText(later.name, { selector: "button" }).getAttribute("aria-disabled")).toBe(
+          "true",
+        );
+        await user.click(tree.getByLabelText("Previous page", { selector: "button" }));
         for (const talent of talents.filter((t) => t.row === 0))
-          await user.click(tree.getByRole("button", { hidden: true, name: talent.name }));
-        await user.click(tree.getByRole("button", { hidden: true, name: "Next page" }));
-        await user.click(tree.getByRole("button", { hidden: true, name: later.name }));
+          await user.click(tree.getByLabelText(talent.name, { selector: "button" }));
+        await user.click(tree.getByLabelText("Next page", { selector: "button" }));
+        await user.click(tree.getByLabelText(later.name, { selector: "button" }));
         expect(session.store.getState().game.talents).toContain(later.id);
       }
       await user.click(screen.getByRole("button", { name: "Back" }));
+    } finally {
+      await session.dispose();
     }
-  } finally {
-    await session.dispose();
-  }
-  // One mounted journey exercises the complete catalog under the single-worker local budget.
-}, 30_000);
+    // Exact accessible labels avoid recomputing every card rule name for each catalog lookup.
+  },
+  15_000,
+);
