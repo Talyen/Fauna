@@ -1,3 +1,4 @@
+import { healingValue, restoration, overflowBlock } from "./healing-values";
 import { chance as succeeds } from "../chance";
 import { isEnemy, battlefield } from "../battlefield";
 import { drawKeyword } from "../card-zones";
@@ -27,18 +28,13 @@ export function* restoreHealth(
   source?: Combatant,
 ): Resolution<void> {
   const baseAmount = amount;
-  if (state?.phase === "battle") {
-    if (!isEnemy(unit) && hasTalent(state, "health.mending")) amount *= 1.1;
-    if (isEnemy(unit) && unit.combat.poison > 0 && hasTalent(state, "poison.necrosis")) amount *= 0.5;
-    if (isEnemy(unit) && unit.combat.bleed > 0 && hasTalent(state, "bleed.mortal-wound")) amount *= 0.5;
-  }
+  amount = healingValue(state, unit, amount);
   if (unit.health === 0 && !revive) return;
-  const gain = Math.min(Math.max(0, Math.round(amount)), maximumHealth(unit) - unit.health);
-  const excess = Math.max(0, Math.round(amount) - gain);
+  const { gain, excess } = restoration(unit, amount);
   unit.health += gain;
   if (cardHealing && state && !isEnemy(unit) && excess > 0) {
     if (hasTalent(state, "health.overflow"))
-      yield* reaction("grantBlock", state, unit, Math.round(excess * 0.25), events);
+      yield* reaction("grantBlock", state, unit, overflowBlock(excess), events);
     if (hasTalent(state, "health.clean-slate"))
       yield* reaction("removeEffects", unit, "cleanse", 1, events, state);
   }

@@ -49,6 +49,18 @@ it.each(SPECIES)("preserves visible rankings and legal choices for $id", ({ id }
   expect(rankings).toMatchSnapshot();
 });
 
+it("ignores hidden draw order and RNG while ranking a partly hidden deck", () => {
+  const state = teamRun(42, ["prismram", "emberback", "mossguard"]);
+  expect(state.battle!.draw.length).toBeGreaterThan(1);
+  const ranked = rankedBattleChoices(state, false);
+  const saved = encodeSave(state);
+  const hidden = produce(state, (game) => {
+    game.rng ^= 0x7fffffff;
+    game.battle!.draw.reverse();
+  });
+  expect(rankedBattleChoices(hidden, false)).toEqual(ranked);
+  expect(encodeSave(state)).toBe(saved);
+});
 it("Auto-play prioritizes Bloom Cradle's healing over an ordinary attack", () => {
   const state = produce(teamRun(42, ["bloomquail", "emberback"]), (game) => {
     const heal = game.cards.find((card) => card.definitionId === "bloomquail-draw")!;

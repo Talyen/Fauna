@@ -101,6 +101,7 @@ export function boundaryViolations(file, source) {
       "damage",
       "damage-reactions",
       "damage-values",
+      "healing-values",
       "status-state",
       "protection",
       "statuses",
@@ -119,8 +120,10 @@ export function boundaryViolations(file, source) {
     )
       fail("Combat internals cannot import their public entry points or command owners.");
     if (
-      ["state", "policy", "damage-values", "status-state"].includes(combatModule) &&
-      /^src\/game\/combat\/(?:resolution|operations|damage|protection|statuses|lifecycle)$/.test(combatTarget)
+      ["state", "policy", "damage-values", "healing-values", "status-state"].includes(combatModule) &&
+      /^src\/game\/combat\/(?:resolution|operations|damage(?:-reactions)?|protection|statuses|lifecycle)$/.test(
+        combatTarget,
+      )
     )
       fail("Combat foundations cannot schedule reactions.");
     if (
@@ -172,7 +175,9 @@ export function boundaryViolations(file, source) {
       ui &&
       within("game") &&
       declaration?.specifiers?.some((s) =>
-        ["dispatch", "createGame", "encodeSave"].includes(s.imported?.value ?? s.local?.value),
+        ["dispatch", "createGame", "encodeSave", "ensureCombat"].includes(
+          s.imported?.value ?? s.local?.value,
+        ),
       )
     )
       fail("UI must use application commands and read-only previews.");

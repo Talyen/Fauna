@@ -137,6 +137,7 @@ it("keeps combat continuations below public entry points and outside presentatio
     "src/game/combat/policy.ts",
     "src/game/combat/damage-values.ts",
     "src/game/combat/status-state.ts",
+    "src/game/combat/healing-values.ts",
   ])
     expect(boundaryViolations(file, 'export * from "./resolution"')).toHaveLength(1);
   expect(
@@ -186,4 +187,13 @@ it("allows the read-only replacement selector without admitting team mutations",
     'const team = await import("../../game/team");',
   ])
     expect(boundaryViolations(file, source)).toHaveLength(1);
+});
+
+it("keeps the explicit combat initializer out of presentation", () => {
+  expect(
+    boundaryViolations("src/ui/battle/fixture.ts", 'import {ensureCombat} from "@/game/combat/state"'),
+  ).toHaveLength(1);
+  expect(
+    boundaryViolations("src/game/combat/damage-values.ts", 'import {attackProcs} from "./damage-reactions"'),
+  ).toHaveLength(1);
 });
