@@ -1888,6 +1888,50 @@
       "kind": "interface",
       "provenance": "Alchemy: public/artwork/loading/leaf-gold.png; independent loading leaf decoration",
       "rights": "Existing shared project artwork; copied from Alchemy"
+    },
+    {
+      "id": "creature.reverie",
+      "origin": "repository",
+      "source": "public/art/reverie/portrait.png",
+      "output": "art/reverie/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged user-selected Reverie artwork from Google Drive: https://drive.google.com/file/d/1N1s0Hjwre_678myVTqBJL8gaq0ZjO6re/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.reverie.waking-wonder",
+      "origin": "repository",
+      "source": "public/art/reverie/waking-wonder.png",
+      "output": "art/reverie/waking-wonder.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged user-selected Reverie artwork from Google Drive: https://drive.google.com/file/d/10tWq1tD4xMTdDSH-SIyCA-4FqHgIvzJb/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.reverie.dream-double",
+      "origin": "repository",
+      "source": "public/art/reverie/dream-double.png",
+      "output": "art/reverie/dream-double.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged user-selected Reverie artwork from Google Drive: https://drive.google.com/file/d/19Yw-AvCXWvPxVK2Ol80iNAVuj_l2txAt/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.reverie.nightmare-harvest",
+      "origin": "repository",
+      "source": "public/art/reverie/nightmare-harvest.png",
+      "output": "art/reverie/nightmare-harvest.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged user-selected Reverie artwork from Google Drive: https://drive.google.com/file/d/1a-GcsGV1azUwAPpjml_21Pp7ZTYYZMrZ/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

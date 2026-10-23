@@ -1,4 +1,4 @@
-import { bounce, hit, resolveHit } from "./damage";
+import { bounce, hit, resolveHit, negateAttack } from "./damage";
 import {
   restoreHealth,
   shareProtection,
@@ -47,6 +47,7 @@ const handlers = {
   applyBlind,
   hit,
   resolveHit,
+  negateAttack,
   tickStatuses,
   startAction,
 } satisfies Operations;

@@ -18,6 +18,7 @@ export function capabilities(state: GameState, kinds: readonly SpeciesId[]) {
           result.add("armorBypass");
       }
       if (
+        card.effect === "dreamDouble" ||
         card.effect === "waterThorns" ||
         card.effect === "teamProtection" ||
         card.effects?.some(
@@ -28,7 +29,11 @@ export function capabilities(state: GameState, kinds: readonly SpeciesId[]) {
         result.add("armorBypass");
       if (card.effect === "teamPurge" || card.effects?.some((effect) => effect.kind === "purge"))
         result.add("purge");
-      if (card.effect === "teamCleanse" || card.effects?.some((effect) => effect.kind === "cleanse"))
+      if (
+        card.effect === "nightmareHarvest" ||
+        card.effect === "teamCleanse" ||
+        card.effects?.some((effect) => effect.kind === "cleanse")
+      )
         result.add("cleanse");
     }
     for (const effect of creaturePassive(state, kind).effects) {
@@ -37,7 +42,12 @@ export function capabilities(state: GameState, kinds: readonly SpeciesId[]) {
         result.add("water");
         result.add("armorBypass");
       }
-      if (effect.kind === "livingChorus" || effect.kind === "tidalRegeneration") result.add("health");
+      if (
+        effect.kind === "unhurried" ||
+        effect.kind === "livingChorus" ||
+        effect.kind === "tidalRegeneration"
+      )
+        result.add("health");
       if (effect.kind === "dodgeBurn") {
         result.add("burn");
         result.add("armorBypass");
@@ -82,7 +92,11 @@ export function offenseValue(state: GameState, kind: SpeciesId): number {
     0,
   );
   const reactive = cards.reduce(
-    (sum, card) => sum + (card.effect === "waterThorns" || card.effect === "teamProtection" ? card.value : 0),
+    (sum, card) =>
+      sum +
+      (card.effect === "dreamDouble" || card.effect === "waterThorns" || card.effect === "teamProtection"
+        ? card.value
+        : 0),
     0,
   );
   return (authored + passive + reactive) * (species(kind).legendary ? 2 : 1);

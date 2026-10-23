@@ -111,7 +111,7 @@ export function* removeEffects(
   events: GameEvent[],
   state?: GameState,
   onlyStatus?: (typeof harmfulStatuses)[number],
-): Resolution<void> {
+): Resolution<number> {
   const stats = ensureCombat(unit);
   let depletion: ArmorDepletion | null = null;
   let cleansed = 0;
@@ -130,6 +130,7 @@ export function* removeEffects(
           "reflectBurn",
           "nullify",
           "nullifyFreeze",
+          "negate",
         ] as const);
   if (kind === "purge" && unit.block > 0 && count > 0) {
     unit.block = 0;
@@ -155,6 +156,7 @@ export function* removeEffects(
         status === "reflectBurn" ||
         status === "blind" ||
         status === "nullify" ||
+        status === "negate" ||
         status === "nullifyFreeze"
       )
         stats[status] = false;
@@ -187,6 +189,7 @@ export function* removeEffects(
     });
   if (cleansed > 0 && state) yield* reaction("cleanseRewards", state, unit, cleansed, events);
   if (state) yield* reaction("triggerArmorBreak", state, depletion, events);
+  return new Set(removedStatuses).size;
 }
 export function* cleanseRewards(
   state: GameState,

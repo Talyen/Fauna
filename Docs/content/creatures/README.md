@@ -34,3 +34,5 @@ For new kits, use the [creature design workflow](../../CREATURE_DESIGN.md) and [
 - [Memento](memento.md) · [implementation](../../../src/game/content/creatures/memento.ts) — Legendary; Echoes and Pearls
 - [Euphera](euphera.md) · [implementation](../../../src/game/content/creatures/euphera.ts)
 - [Tournelle](tournelle.md) · [implementation](../../../src/game/content/creatures/tournelle.ts)
+
+- [Reverie](reverie.md) · [implementation](../../../src/game/content/creatures/reverie.ts)

@@ -12,7 +12,7 @@ import {
 } from "./battle-benefits";
 import type { Command, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 28;
+export const BATTLE_POLICY_VERSION = 29;
 const BATTLE_FINISH_PRIORITY = 1_000_000_000;
 const priorities = {
   none: 0,
@@ -28,6 +28,7 @@ const priorities = {
   redraw: 190,
   defensePurge: 1700,
   purge: 160,
+  statusHarvest: 2000,
 } satisfies Record<SupportPriority, number>;
 export interface BattleChoice {
   command: Command;
@@ -38,8 +39,11 @@ export interface BattleChoice {
 function ordinaryHitScore(hit: OrdinaryHit) {
   const damagePriority = hit.main ? 1000 : 250;
   const defensePriority = hit.main ? 500 : 125;
-  const progress =
-    hit.lost > 0
+  const progress = hit.negated
+    ? hit.main
+      ? 400
+      : 100
+    : hit.lost > 0
       ? damagePriority + (hit.lethal ? damagePriority : 0) + Math.min(hit.lost, hit.health)
       : hit.blocked > 0
         ? defensePriority + hit.blocked

@@ -21,8 +21,10 @@ export type SupportPriority =
   | "controlRemoval"
   | "redraw"
   | "defensePurge"
-  | "purge";
+  | "purge"
+  | "statusHarvest";
 export interface OrdinaryHit {
+  readonly negated: boolean;
   readonly lost: number;
   readonly blocked: number;
   readonly eroded: number;
@@ -147,12 +149,17 @@ export function battleBenefits(
             : 0;
           const payment = blockPayment(damage, enemy.block);
           const lost =
-            type === "freeze" && enemy.combat.nullifyFreeze ? 0 : armoredDamage(payment.remaining, armor);
+            enemy.combat.negate || (type === "freeze" && enemy.combat.nullifyFreeze)
+              ? 0
+              : armoredDamage(payment.remaining, armor);
           const eroded =
-            armored && state.boons.includes("sundering-charm") ? Math.min(2, enemy.combat.armor) : 0;
+            !enemy.combat.negate && armored && state.boons.includes("sundering-charm")
+              ? Math.min(2, enemy.combat.armor)
+              : 0;
           return {
+            negated: enemy.combat.negate,
             lost,
-            blocked: payment.absorbed,
+            blocked: enemy.combat.negate ? 0 : payment.absorbed,
             eroded,
             health: enemy.health,
             main: !enemy.minion,
@@ -289,7 +296,8 @@ export function battleBenefits(
             enemy.combat.reflect ||
             enemy.combat.reflectBurn ||
             enemy.combat.nullify ||
-            enemy.combat.nullifyFreeze),
+            enemy.combat.nullifyFreeze ||
+            enemy.combat.negate),
       ).length;
       const defense = enemies.some(
         (enemy) => enemy.health > 0 && (enemy.block > 0 || enemy.combat.armor > 0),
@@ -300,6 +308,14 @@ export function battleBenefits(
         undefined,
         "Remove visible defenses before spending Mana on blocked attacks",
       );
+    }
+    case "dreamDouble":
+      return support(actor.combat?.negate ? "protection" : "resource", value);
+    case "nightmareHarvest": {
+      const useful = battlefield(state, "player").filter(
+        (unit) => unit.health > 0 && hasHarmfulEffects(unit),
+      ).length;
+      return support(useful > 0 ? "statusHarvest" : "none", useful);
     }
     case "teamCleanse":
       return support("utility");

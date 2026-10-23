@@ -33,6 +33,27 @@ import {
   type HitPayment,
 } from "./damage-reactions";
 
+/** Consumed once per incoming attack, before its target's defenses or harmful follow-ups. */
+export function* negateAttack(
+  state: GameState,
+  source: Combatant,
+  target: Combatant,
+  events: GameEvent[],
+): Resolution<boolean> {
+  if (source.health <= 0 || target.health <= 0 || !ensureCombat(target).negate) return false;
+  ensureCombat(target).negate = false;
+  events.push({
+    kind: "status",
+    actorId: source.id,
+    targetId: target.id,
+    status: "negate",
+    outcome: "immune",
+    text: `${unitName(target)} negates the attack; Thorns still retaliate`,
+  });
+  yield* thornRetaliation({ state, source, target, events });
+  return true;
+}
+
 type HitResult = { outcome: "ignored" | "miss" } | { outcome: "landed"; lost: number };
 
 export function* bounce(
@@ -107,6 +128,13 @@ export function* hit(
     if (!options.interceptionChecked && !options.blindMiss)
       target = interceptAttack(state, source, target, events);
   }
+  if (
+    value > 0 &&
+    options.origin === "ability" &&
+    !options.blindMiss &&
+    (yield* reaction("negateAttack", state, source, target, events))
+  )
+    return undefined;
   const policy = packetPolicy(options);
   const wrongFoot =
     target.combat?.blind && policy.wrongFoot
@@ -287,7 +315,8 @@ export function* resolveHit(
         },
         erode,
       );
-    if (direct) yield* thornRetaliation(context, lost);
+    // Captured damage remains valid even if retaliation later removes the attacker.
+    if (direct && lost > 0 && target.health > 0) yield* thornRetaliation(context);
     if ((leech || blessedLeech) && type !== "bleed" && source.health > 0)
       yield* reaction("leechHealth", state, source, lost, events, stats.poison > 0 || stats.bleed > 0);
     if (statusResult.appliedControl && source.health > 0)

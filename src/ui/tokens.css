@@ -244,6 +244,7 @@
   --keyword-purge: #e879f9;
   --keyword-reflect: #c4b5fd;
   --keyword-nullify: #c4b5fd;
+  --keyword-negate: #c4b5fd;
   --keyword-consume: #a78bfa;
   --damage-physical: var(--keyword-physical);
   --damage-poison: var(--keyword-poison);
@@ -292,6 +293,7 @@
   --keyword-cleanse-deep: color-mix(in srgb, var(--keyword-cleanse) 55%, var(--background));
   --keyword-purge-deep: color-mix(in srgb, var(--keyword-purge) 55%, var(--background));
   --keyword-reflect-deep: color-mix(in srgb, var(--keyword-reflect) 55%, var(--background));
+  --keyword-negate-deep: color-mix(in srgb, var(--keyword-negate) 55%, var(--background));
   --keyword-nullify-deep: color-mix(in srgb, var(--keyword-nullify) 55%, var(--background));
   --keyword-consume-deep: #6d28d9;
   --effect-highlight: #fff;

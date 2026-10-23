@@ -253,22 +253,21 @@ export function* attackProcs(
       yield* reaction("leechHealth", state, source, lost, events, stats.poison > 0 || stats.bleed > 0);
   }
 }
-export function* thornRetaliation(
-  { state, source, target, events }: HitContext,
-  lost: number,
-): Resolution<void> {
+export function* thornRetaliation({
+  state,
+  source,
+  target,
+  events,
+}: Pick<HitContext, "state" | "source" | "target" | "events">): Resolution<void> {
   const stats = ensureCombat(target);
-  // Captured damage remains valid even if retaliation later removes the attacker.
-  if (lost > 0 && target.health > 0) {
-    for (const [status, type] of [
-      ["thorns", "nature"],
-      ["waterThorns", "water"],
-    ] as const) {
-      const reflected = stats[status];
-      if (reflected <= 0) continue;
-      stats[status]--;
-      yield* reaction("hit", state, target, source, reflected, type, events, { origin: "retaliation" });
-    }
+  for (const [status, type] of [
+    ["thorns", "nature"],
+    ["waterThorns", "water"],
+  ] as const) {
+    const reflected = stats[status];
+    if (reflected <= 0) continue;
+    stats[status]--;
+    yield* reaction("hit", state, target, source, reflected, type, events, { origin: "retaliation" });
   }
 }
 export function* passiveRetaliation(

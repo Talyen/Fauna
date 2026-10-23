@@ -21,6 +21,7 @@ export function freshCombat(): CombatState {
     reflectBurn: false,
     nullify: false,
     nullifyFreeze: false,
+    negate: false,
     cardsPlayedThisTurn: 0,
     encoreUsed: false,
     firstAttackUsed: false,
