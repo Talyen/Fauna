@@ -156,7 +156,7 @@ test("controller menu journey at minimum size with enlarged text", async ({ page
   await captureScreen(page, { path: `reports/menu-collection-${width}.png` });
   await pad.press(2);
   await expect(page.locator(".creature-inspection")).toBeVisible();
-  await expect(page.getByRole("button", { name: "Back", exact: true })).toBeFocused();
+  await expect(page.locator(".inspection-thumbnails .action-card").first()).toBeFocused();
   await expect(page.locator(".inspection-thumbnails .action-card")).toHaveCount(3);
   await expect(page.getByRole("button", { name: /^Rooted Stomp,/ })).toHaveAttribute(
     "aria-label",

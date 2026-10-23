@@ -97,7 +97,7 @@ describe("menu browsing", () => {
       expect(screen.getByRole("dialog", { name: creature.name })).toBeTruthy();
       expect(screen.getByRole("heading", { name: creature.name })).toBeTruthy();
       expect(document.querySelectorAll(".inspection-thumbnails .action-card")).toHaveLength(3);
-      await user.click(screen.getByRole("button", { name: "Back" }));
+      await user.click(screen.getByRole("button", { name: "Close inspection" }));
       expect(document.activeElement).toBe(card);
       expect(session.store.getState().game).toBe(game);
     } finally {
