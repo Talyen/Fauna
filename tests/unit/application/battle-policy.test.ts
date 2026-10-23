@@ -44,7 +44,7 @@ it.each(SPECIES)("preserves visible rankings and legal choices for $id", ({ id }
     expect(rankedBattleChoices(hidden, false)).toEqual(ranked);
     expect(rankedBattleChoices(decodeSave(saved), false)).toEqual(ranked);
     expect(encodeSave(state)).toBe(saved);
-    return [condition, ranked];
+    return [condition, ranked.map((choice) => JSON.stringify(choice))];
   });
   expect(rankings).toMatchSnapshot();
 });
