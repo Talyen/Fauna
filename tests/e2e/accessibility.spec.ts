@@ -3,6 +3,7 @@ import { test, expect, type Page } from "@playwright/test";
 import { run, winBattle } from "../support/game";
 import { seed, resume } from "./support/session";
 import { captureScreen, settleScreen } from "./support/rendered-evidence";
+import { continueToRecruit } from "./support/journey";
 
 async function scan(page: Page, name: string) {
   await settleScreen(page);
@@ -37,6 +38,8 @@ test("home, settings, battle, pause and rewards meet automated accessibility che
   await page.keyboard.press("Escape");
   await seed(page, winBattle());
   await resume(page);
+  await scan(page, "battle-rewards");
+  await continueToRecruit(page);
   await expect(page.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeVisible();
   await scan(page, "recruit");
 });

@@ -9,16 +9,16 @@ export function BattleEarnings({ game, detailed = false }: { game: GameState; de
   if (!receipt.currency && !xp) return null;
   return (
     <div className="battle-earnings-receipt" aria-label="Last battle earnings">
-      {receipt.currency > 0 ? (
-        <p className="battle-earnings">
-          <Coins className="gold-icon" aria-hidden="true" />+<AnimatedNumber value={receipt.currency} /> Gold
-        </p>
-      ) : null}
       {detailed ? (
         <KeywordProgressGrid earned={receipt.xp} totals={game.keywordXP} />
       ) : xp > 0 ? (
         <p className="battle-earnings">
           +<AnimatedNumber value={xp} /> keyword XP
+        </p>
+      ) : null}
+      {receipt.currency > 0 ? (
+        <p className="battle-earnings">
+          <Coins className="gold-icon" aria-hidden="true" />+<AnimatedNumber value={receipt.currency} /> Gold
         </p>
       ) : null}
     </div>

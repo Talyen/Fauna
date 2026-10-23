@@ -47,10 +47,16 @@ function RecruitProgress({ game, kind }: { game: RewardState; kind: SpeciesId })
   );
 }
 export function Rewards({ game, send, inspect }: Props) {
+  const [choosing, setChoosing] = useState(game.phase === "boon");
   const [incoming, setIncoming] = useState<SpeciesId | null>(null);
+  const proceed = useRef<HTMLButtonElement>(null);
   const choices = useRef<HTMLElement>(null);
   const returnTo = useRef<number | null>(null);
   useLayoutEffect(() => {
+    if (!choosing) {
+      returnFocus(proceed.current);
+      return;
+    }
     const buttons = choices.current?.querySelectorAll<HTMLButtonElement>(
       incoming ? ".recruit-options .creature-card" : ".recruit-options .recruit-button",
     );
@@ -58,20 +64,32 @@ export function Rewards({ game, send, inspect }: Props) {
     else if (returnTo.current !== null) {
       returnFocus(buttons?.[returnTo.current] ?? null);
       returnTo.current = null;
-    }
-  }, [incoming]);
+    } else returnFocus(buttons?.[0] ?? null);
+  }, [incoming, choosing]);
   const reward = game.reward;
   const recruiting = game.phase === "recruit";
+  if (!choosing)
+    return (
+      <ResultPresentation>
+        <Screen className="battle-rewards-screen">
+          <ScreenHeading>Victory</ScreenHeading>
+          <BattleEarnings game={game} detailed />
+          <Button ref={proceed} onClick={() => setChoosing(true)}>
+            Continue
+          </Button>
+        </Screen>
+      </ResultPresentation>
+    );
   return (
     <ResultPresentation>
       <Screen className="reward-screen">
         <header className="reward-heading">
-          <ScreenHeading back={incoming ? () => setIncoming(null) : undefined}>Victory</ScreenHeading>
-          <BattleEarnings game={game} detailed />
+          <ScreenHeading back={incoming ? () => setIncoming(null) : undefined}>
+            {recruiting ? (incoming ? "Replace a creature" : "Choose a Recruit") : "Choose a Boon"}
+          </ScreenHeading>
         </header>
         <section className="reward-choices" ref={choices}>
           <div className="reward-choice-content">
-            <h2>{recruiting ? (incoming ? "Replace a creature" : "Choose a Recruit") : "Choose a Boon"}</h2>
             {recruiting ? (
               <div className={incoming ? "recruit-comparison" : undefined}>
                 {incoming ? (

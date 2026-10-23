@@ -67,7 +67,7 @@ describe("player interface", () => {
     render(<App session={session} />);
     const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: "Continue" }));
-    expect(screen.getByRole("heading", { name: "Victory", level: 1 })).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "Choose a Boon", level: 1 })).toBeTruthy();
     expect(screen.queryByRole("button", { name: "Continue" })).toBeNull();
     for (const id of game.reward!.boons) {
       const boon = BOONS.find((entry) => entry.id === id)!;
@@ -87,7 +87,7 @@ describe("player interface", () => {
     expect(session.store.getState().game.phase).toBe("teamSelection");
     await session.dispose();
   });
-  it("shows stacked currency and Journey-style keyword level progress on Victory", async () => {
+  it("shows earnings before recruitment without committing or granting rewards again", async () => {
     const started = starterJourney(7, "emberback");
     const battle = produce(accept(started, { type: "beginBattle" }), (d) => {
       d.keywordXP.physical = 23;
@@ -100,8 +100,8 @@ describe("player interface", () => {
     const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: "Continue" }));
     expect(screen.getByRole("heading", { name: "Victory", level: 1 })).toBeTruthy();
-    expect(screen.getByRole("heading", { name: "Choose a Recruit" })).toBeTruthy();
-    expect(document.querySelectorAll(".recruit-options .creature-card")).toHaveLength(1);
+    expect(screen.queryByRole("heading", { name: "Choose a Recruit" })).toBeNull();
+    expect(document.querySelectorAll(".recruit-options .creature-card")).toHaveLength(0);
     expect(screen.getByText("20", { selector: ".sr-only" })).toBeTruthy();
     await waitFor(() =>
       expect(
@@ -113,7 +113,12 @@ describe("player interface", () => {
     expect(progress.getAttribute("aria-valuenow")).toBe("14");
     expect(progress.getAttribute("aria-valuemax")).toBe("30");
     expect(screen.queryByText(/keyword XP|talent point|4 \/ 40 XP/)).toBeNull();
-    expect(screen.queryByRole("button", { name: "Continue" })).toBeNull();
+    const committed = session.store.getState().game;
+    await user.click(screen.getByRole("button", { name: "Continue" }));
+    expect(session.store.getState().game).toBe(committed);
+    expect(screen.queryByLabelText("Last battle earnings")).toBeNull();
+    expect(screen.getByRole("heading", { name: "Choose a Recruit", level: 1 })).toBeTruthy();
+    expect(document.querySelectorAll(".recruit-options .creature-card")).toHaveLength(1);
     expect(screen.getByRole("button", { name: "Skip" })).toBeTruthy();
     await user.click(screen.getByRole("button", { name: /^Recruit / }));
     expect(session.store.getState().game.phase).toBe("teamSelection");
@@ -437,6 +442,7 @@ it("declines a recruit without collecting or releasing a creature and resumes th
   await session.load();
   render(<App session={session} />);
   const user = userEvent.setup();
+  await user.click(screen.getByRole("button", { name: "Continue" }));
   await user.click(screen.getByRole("button", { name: "Continue" }));
   await user.click(screen.getByRole("button", { name: "Skip" }));
   await session.flush();

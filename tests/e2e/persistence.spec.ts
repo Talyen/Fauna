@@ -3,6 +3,7 @@ import { produce } from "immer";
 import { species, BOONS } from "../../src/game/content";
 import { accept, winBattle, run, bossReward } from "../support/game";
 import { key, seed, saved, state, resume } from "./support/session";
+import { continueToRecruit } from "./support/journey";
 
 test("last mana saves the full turn before immediate close and does not replay on resume", async ({
   page,
@@ -35,6 +36,8 @@ test("rewards resume without duplicate XP, currency, recruitment or boons", asyn
   await resume(page);
   await page.reload();
   await resume(page);
+  expect(await state(page)).toEqual(recruitReward);
+  await continueToRecruit(page);
   expect(await state(page)).toEqual(recruitReward);
   const recruit = recruitReward.reward!.recruits[0]!;
   await page.getByRole("button", { name: `Recruit ${species(recruit).name}`, exact: true }).click();

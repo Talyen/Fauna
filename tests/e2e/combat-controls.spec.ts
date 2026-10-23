@@ -3,6 +3,7 @@ import { test, expect, type Page } from "@playwright/test";
 import { produce } from "immer";
 import { prepareDestination, accept, run, victoryReady } from "../support/game";
 import { decodeSave, encodeSave } from "../../src/game/save";
+import { continueToRecruit } from "./support/journey";
 async function seed(page: Page, initial: string, scale: string) {
   await page.addInitScript(
     ({ initial, scale }) => {
@@ -133,6 +134,7 @@ test("final victory returns to the menu without a retired creature reveal", asyn
   );
   await seed(page, encodeSave(final), width === 1280 ? "1.25" : "1");
   await page.locator(`[data-card-id=${JSON.stringify(final.battle!.hand[0])}]`).click();
+  await continueToRecruit(page);
   await page.getByRole("button", { name: "Recruit Memento", exact: true }).click();
   await page.getByRole("heading", { name: "Journey complete" }).waitFor();
   await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
@@ -158,6 +160,7 @@ test("development skip wins once through normal rewards", async ({ page }) => {
   expect(skipBounds!.y).toBe(autoBounds!.y);
   expect(skipBounds!.x + skipBounds!.width).toBeLessThan(autoBounds!.x);
   await skip.click();
+  await continueToRecruit(page);
   await expect(page.getByRole("heading", { name: "Choose a Recruit" })).toBeVisible();
   await expect
     .poll(() => page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!).currency))

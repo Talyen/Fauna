@@ -7,6 +7,7 @@ export const SCENARIOS = [
   "battle",
   "pause",
   "recruit",
+  "battle-rewards",
   "merchant",
   "merchant-unavailable",
   "glossary",
@@ -27,7 +28,11 @@ export async function reviewScenario(server, name) {
   const { run, winBattle, merchantDestination, accept } =
     await server.ssrLoadModule("/tests/support/game.ts");
   const { encodeSave, decodeSave } = await server.ssrLoadModule("/src/game/save.ts");
-  let game = name.startsWith("merchant") ? merchantDestination() : name === "recruit" ? winBattle() : run();
+  let game = name.startsWith("merchant")
+    ? merchantDestination()
+    : ["recruit", "battle-rewards"].includes(name)
+      ? winBattle()
+      : run();
   if (name.startsWith("merchant")) game = accept(game, { type: "enterSupport", visit: game.support.id });
   if (name === "merchant-unavailable") game = { ...game, currency: 0 };
   const save = encodeSave(game);
@@ -72,8 +77,15 @@ export async function openReviewScenario(page, origin, scenario, scale) {
     await button(scenario.name === "draw-pile" ? "Inspect Draw Pile" : "Inspect Discard Pile").click();
   if (["battle", "pause"].includes(scenario.name))
     await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
-  if (scenario.name === "recruit")
+  if (scenario.name === "recruit") {
+    await page
+      .locator(".battle-rewards-screen")
+      .getByRole("button", { name: "Continue", exact: true })
+      .click();
     await expect(page.getByRole("heading", { name: "Choose a Recruit", exact: true })).toBeVisible();
+  }
+  if (scenario.name === "battle-rewards")
+    await expect(page.getByRole("heading", { name: "Victory", exact: true })).toBeVisible();
   if (scenario.name.startsWith("merchant"))
     await expect(page.getByRole("region", { name: "Boon Merchant stock" })).toBeVisible();
 }

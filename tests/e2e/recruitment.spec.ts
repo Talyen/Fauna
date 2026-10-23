@@ -4,10 +4,12 @@ import { test, expect } from "@playwright/test";
 import { produce } from "immer";
 import { winBattle } from "../support/game";
 import { seed, state, resume } from "./support/session";
+import { continueToRecruit } from "./support/journey";
 
 test("recruitment adds a backup without exposing free lineup changes", async ({ page }) => {
   await seed(page, winBattle());
   await resume(page);
+  await continueToRecruit(page);
   const beforeInspection = await state(page);
   const artwork = page.getByRole("button", { name: "Inspect Emberback", exact: true });
   await artwork.click();
@@ -48,6 +50,7 @@ test("recruitment at five requires replacement and updates a released starter's 
   });
   await seed(page, fixture);
   await resume(page);
+  await continueToRecruit(page);
   await page.getByRole("button", { name: "Recruit Emberback", exact: true }).click();
   expect((await state(page)).roster).toEqual(fixture.roster);
   await expect(page.getByRole("heading", { name: "Replace a creature", exact: true })).toBeVisible();

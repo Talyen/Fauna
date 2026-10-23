@@ -3,7 +3,7 @@ import { test, expect, type Locator } from "@playwright/test";
 import { definition, species } from "../../src/game/content";
 import { policy, FULL_JOURNEY_SEED, FULL_JOURNEY_COMMAND_BUDGET } from "../support/game";
 import { seed, state } from "./support/session";
-import { step } from "./support/journey";
+import { continueToRecruit, step } from "./support/journey";
 
 test("main menu, draft and pre-battle deck lead into the first battle", async ({ page }) => {
   await seed(page);
@@ -52,6 +52,7 @@ test("one starter grows a lineup through a full expedition", async ({ page }) =>
     expect(s.phase).not.toBe("defeat");
     expect(s.reward?.outcome).not.toBe("defeat");
     if (s.phase === "recruit" && s.roster.length < 5) {
+      await continueToRecruit(page, activate);
       await activate(
         page
           .getByRole("button", {

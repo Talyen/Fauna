@@ -28,7 +28,7 @@ export function KeywordProgressGrid({ earned, totals }: { earned: KeywordXP; tot
             }
           >
             <div className="reward-keyword-label">
-              <span className="reward-keyword-identity">
+              <span className="reward-keyword-identity" data-keyword={keyword}>
                 <KeywordIcon id={keyword} />
                 <KeywordLabel id={keyword} />
               </span>

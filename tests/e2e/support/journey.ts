@@ -4,6 +4,16 @@ import type { Command, GameState } from "../../../src/game/types";
 import { policy } from "../../support/game";
 import { state } from "./session";
 
+export async function continueToRecruit(
+  page: Page,
+  activate: (el: Locator) => Promise<void> = (el) => el.click(),
+) {
+  if (await page.getByRole("heading", { name: "Choose a Recruit", exact: true }).isVisible()) return;
+  await activate(
+    page.locator(".battle-rewards-screen").getByRole("button", { name: "Continue", exact: true }),
+  );
+}
+
 export async function step(
   page: Page,
   activate: (el: Locator) => Promise<void> = (el) => el.click(),
@@ -19,7 +29,7 @@ export async function step(
   } else if (c.type === "rest") {
     await activate(page.getByRole("button", { name: /^Rest/ }));
   } else if (c.type === "recruit") {
-    await expect(page.getByRole("button", { name: "Skip", exact: true })).toHaveCount(0);
+    await continueToRecruit(page, activate);
     await expect(page.locator(".boon-choice")).toHaveCount(0);
     await activate(
       page.getByRole("button", { name: `Recruit ${species(c.species).name}`, exact: true }).first(),
@@ -35,6 +45,9 @@ export async function step(
       }
       await activate(replacement);
     }
+  } else if (c.type === "skipRecruit") {
+    await continueToRecruit(page, activate);
+    await activate(page.getByRole("button", { name: "Skip", exact: true }));
   } else if (c.type === "swap") {
     const dialog = page.getByRole("dialog", { name: "Choose a replacement" });
     await activate(dialog.locator(`[data-actor-id="${c.reserve}"] .creature-card`));

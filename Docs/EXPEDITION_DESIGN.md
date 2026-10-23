@@ -76,7 +76,7 @@ These are the agreed directions from the design review. They supersede the proto
 
 Journey is the player-facing name. Internal command IDs, route fields, filenames, and storage paths retain their existing names.
 
-Ordinary victory → shared Victory screen with recruitment (if available) → the next encounter. Intermediate boss victory → the same Victory screen with Legendary recruitment followed by boon choices (if available) → the next encounter. Compact last-battle currency and keyword XP earnings appear beside choices and remain visible on the encounter screen until the next battle. No separate acknowledgement screen interrupts new journeys. If neither decision is available, proceed directly to the next encounter.
+Ordinary victory → Victory earnings step → Continue → recruitment → the next encounter. Intermediate boss victory → Victory earnings step → Continue → Legendary recruitment → boon choices (if available) → the next encounter. The earnings step shows keyword progress and a separate Gold row; choice steps omit earnings. Compact last-battle earnings remain visible on the encounter screen until the next battle. If neither decision is available, proceed directly to the next encounter.
 
 Final victory or defeat → Journey results. Ending a started journey voluntarily also opens results, labeled Returned home. Ending an unfinished starter choice simply returns to the main menu.
 
@@ -86,7 +86,7 @@ Final victory or defeat → Journey results. Ending a started journey voluntaril
 - Results offer a single centered Main menu action. Start a new journey only from the main menu.
 - Play resets journey totals and roster/boons while preserving permanent progress. Results appear only when ending the journey; returning to the main menu or loading a completed journey does not reopen them.
 - Development saves are disposable; obsolete formats are rejected rather than migrated. Journey totals are recorded from current-format journeys, never inferred from lifetime XP or currency.
-- Material types remain undefined and are not shown. The shared Victory shell shows compact automatic earnings and one encounter-specific choice: recruitment or boons. Recruitment and Boon choices each have a Skip action. There is no Continue action. Full-roster replacement changes the contents of that same screen and may be canceled before committing.
+- Material types remain undefined and are not shown. Victory shows automatic earnings before Continue opens a separate recruitment step; intermediate Boss Boon choices follow recruitment. Recruitment and Boon choices each have a Skip action. Continue leaves the already committed Gold, XP and reward offers unchanged. Full-roster replacement changes the contents of that same screen and may be canceled before committing.
 
 See [UI design system](UI.md) for composition and interaction rules.
 
