@@ -45,6 +45,14 @@ This checks an existing artifact without building or modifying it. Windows CI ru
 
 Missing, empty, corrupt, mismatched or escaping resources fail. The runtime inventory follows Electron 45's Windows archive, including `electron_wer.dll`, without requiring obsolete ANGLE/DXIL DLL names. The confined `fauna://app/` protocol replaces file-protocol privileges. Startup/resume and distribution acceptance use the candidate record. [Native performance captures](DEVELOPMENT_TOOLS.md#native-and-reachable-performance-scenarios) use isolated unpackaged profiles and ordinary OS caches, not the Windows candidate.
 
+## Vercel web QA
+
+The Vercel project `talyen-s-projects/fauna` connects to `Talyen/Fauna` with Node 24, the Vite preset and `dist` output. [Deployment configuration](../vercel.json) installs pinned npm 12.2.1 and lockfile dependencies, skips the Electron binary download, then runs type checks and the ordinary production build. The launcher recognizes Vercel's hosted `VERCEL=1` environment for these two commands; local execution limits still apply.
+
+Git push deployments are disabled, matching Alchemy's deliberate QA deployment pattern. After the configuration reaches GitHub, deploy a reviewed `main` commit deliberately through Vercel. The project-level Ignored Build Step, `test ! -f vercel.json`, skips source revisions without this configuration. Vercel Authentication protects the default deployment URLs. Do not add a public custom domain without an explicit publication decision.
+
+The SPA fallback serves the application entry point for browser navigation. Saves remain in that browser's local storage; desktop Steam Cloud, native controls and packaged Windows behavior require their own qualification. A Vercel build establishes web build evidence, not the complete GitHub CI or native release gate. Release-tag Deploy Hook automation is not configured.
+
 ## Steam qualification
 
 Configure application-managed Cloud in Fauna's versioned device-slot namespace: 32 streams, two slots each, at most 1 MiB per slot. Do not also Auto-Cloud those progression directories. [Architecture](ARCHITECTURE.md#cloud-reconciliation-and-device-preferences) owns ancestry, preservation, profile separation and offline behavior.

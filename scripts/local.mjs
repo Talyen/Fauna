@@ -10,6 +10,10 @@ import { ensureDependencies } from "./dependencies.mjs";
 const ROOT = path.resolve(import.meta.dirname, "..");
 const require = createRequire(import.meta.url);
 
+function hostedExecution(kind, env) {
+  return env.GITHUB_ACTIONS === "true" || (env.VERCEL === "1" && ["build", "check:types"].includes(kind));
+}
+
 const heavyScripts = {
   "test:desktop": "scripts/release/smoke-desktop.mjs",
   "test:e2e:route": "scripts/performance/test-route.mjs",
@@ -20,7 +24,7 @@ const heavyScripts = {
 };
 
 export function localPolicy(kind, args, { root = ROOT, env = process.env } = {}) {
-  if (env.GITHUB_ACTIONS === "true" || env.FAUNA_LOCAL_HEAVY === "1") return null;
+  if (hostedExecution(kind, env) || env.FAUNA_LOCAL_HEAVY === "1") return null;
   if (["integrate", "verify:changed"].includes(kind)) return null;
   if (kind === "test") {
     if (!args.length) return null;
@@ -98,7 +102,7 @@ export async function runLocal(
   args = [],
   { root = ROOT, env = process.env, runner = runInvestigation } = {},
 ) {
-  const ci = env.GITHUB_ACTIONS === "true";
+  const ci = hostedExecution(kind, env);
   const denied = localPolicy(kind, args, { root, env });
   if (denied) {
     console.error(denied);

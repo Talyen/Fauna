@@ -565,6 +565,22 @@ it("blocks expensive local entrypoints before launching work and bounds one exac
   expect(runner.mock.calls[0][1][0]).toMatch(/run-local-tests\.mjs$/);
 });
 
+it("allows Vercel hosted builds without granting a general local heavy override", async () => {
+  const root = fixture();
+  const runner = vi.fn(async () => ({ status: 0 }));
+  for (const kind of ["check:types", "build"]) {
+    expect(await runLocal(kind, [], { root, env: { VERCEL: "1" }, runner })).toBe(0);
+    expect(localPolicy(kind, [], { root, env: { CI: "true" } })).toContain("CI-owned");
+    expect(localPolicy(kind, [], { root, env: { VERCEL: "0" } })).toContain("CI-owned");
+  }
+  expect(runner).toHaveBeenCalledTimes(3);
+  for (const [, , options] of runner.mock.calls) {
+    expect(options.timeout).toBeUndefined();
+    expect(options.env.NODE_OPTIONS).toBeUndefined();
+  }
+  expect(localPolicy("test:full", [], { root, env: { VERCEL: "1" } })).toContain("CI-owned");
+});
+
 it("enforces ordinary local command budgets while retaining CI parallelism and failing recipes early", async () => {
   const root = fixture();
   const runner = vi.fn(async () => ({ status: 0 }));
