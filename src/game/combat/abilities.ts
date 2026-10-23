@@ -131,8 +131,12 @@ function applyExtras(
   const power = enemy ? actorPower(action) : 1;
   const { target, blindMiss = false, criticalBonus = 0, recipientOnly = false } = options;
   for (const effect of abilityExtras(def, power)) {
-    // Targeted Cleanse follows each healed ally; global extras run once after the primary effect
-    if (recipientOnly !== (effect.kind === "cleanse" && effect.target === "recipient")) continue;
+    // Recipient effects follow the primary recipient; global extras resolve separately.
+    if (
+      recipientOnly !==
+      ((effect.kind === "cleanse" || effect.kind === "heal") && effect.target === "recipient")
+    )
+      continue;
     if (actor.health <= 0) break;
     const kind = effect.kind;
     switch (kind) {
@@ -209,9 +213,11 @@ function applyExtras(
         if (target && !options.negated?.has(target.id))
           removeEffects(target, "purge", effect.amount, events, state);
         break;
-      case "heal":
-        restoreHealth(actor, effect.amount, events, false, state, true, actor);
+      case "heal": {
+        const recipient = effect.target === "recipient" ? target : actor;
+        if (recipient) restoreHealth(recipient, effect.amount, events, false, state, true, actor);
         break;
+      }
       case "drawKeyword":
         if (!enemy) for (let i = 0; i < effect.amount; i++) drawKeyword(state, effect.keyword, events);
         break;
@@ -529,6 +535,12 @@ export function executeAbility(
         break;
       case "recover":
         if (!enemy) recoverDiscard(state, events);
+        applyExtras(state, action, events, {
+          target: friendlyRow(state, action).find(
+            (unit) => unit.id === action.allyTargetId && unit.health > 0,
+          ),
+          recipientOnly: true,
+        });
         break;
       case "mana":
         if (!enemy) gainMana(state, value, events);

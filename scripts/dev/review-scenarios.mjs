@@ -1,6 +1,10 @@
 import { expect } from "@playwright/test";
 
 export const SCENARIOS = [
+  "almanelle-battle",
+  "almanelle-collection",
+  "almanelle-rank-five",
+  "almanelle-targeting",
   "oathara-battle",
   "oathara-collection",
   "oathara-resurrection",
@@ -81,9 +85,23 @@ export async function reviewScenario(server, name) {
     const { oatharaBattle } = await server.ssrLoadModule("/tests/support/oathara.ts");
     game = oatharaBattle();
   }
+  if (name.startsWith("almanelle-")) {
+    const { almanelleBattle } = await server.ssrLoadModule("/tests/support/almanelle.ts");
+    game = almanelleBattle();
+    if (name === "almanelle-rank-five")
+      game = {
+        ...game,
+        discovery: { ...game.discovery, recruited: { ...game.discovery.recruited, almanelle: 6 } },
+      };
+  }
   const save = encodeSave(game);
   decodeSave(save);
-  return { name, save, seed: name.startsWith("merchant") ? 7 : 42, fixture: "tests/support/game.ts" };
+  return {
+    name,
+    save,
+    seed: name.startsWith("merchant") ? 7 : 42,
+    fixture: name.startsWith("almanelle-") ? "tests/support/almanelle.ts" : "tests/support/game.ts",
+  };
 }
 
 export async function openReviewScenario(page, origin, scenario, scale) {
@@ -102,7 +120,10 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   await expect(page.locator("#startup-splash")).toHaveCount(0);
   const button = (name) => page.getByRole("button", { name, exact: true });
   const menu = scenario.name === "talent-tree" ? "talents" : scenario.name.split("-")[0];
-  if (scenario.name === "oathara-collection") {
+  if (["almanelle-collection", "almanelle-rank-five"].includes(scenario.name)) {
+    await button("Collection").click();
+    await button("Inspect Almanelle").click();
+  } else if (scenario.name === "oathara-collection") {
     await button("Collection").click();
     await button("Inspect Oathara").click();
   } else if (["settings", "collection", "talents", "glossary"].includes(menu)) {
@@ -114,6 +135,8 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   if (scenario.name === "oathara-resurrection") {
     await page.locator('.hand [data-card-id="ally-0:oathara-vow-of-return"]').click();
   }
+  if (scenario.name === "almanelle-targeting")
+    await page.locator('.hand [data-card-id="ally-0:almanelle-autumn-insight"]').click();
   if (scenario.name === "collection-creature") {
     await button("Inspect Mossguard").click();
     await expect(page.getByRole("heading", { name: "Mossguard", exact: true })).toBeVisible();

@@ -1976,6 +1976,50 @@
       "aspect": [3, 4],
       "provenance": "Unchanged user-selected Oathara artwork from Google Drive: https://drive.google.com/file/d/1l3IfYmrUVyjw3NBHHoBRFZOz39RIyaW-/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "creature.almanelle",
+      "origin": "repository",
+      "source": "public/art/creatures/almanelle/Almanelle_02.png",
+      "output": "art/almanelle/almanelle.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Almanelle artwork from Google Drive: https://drive.google.com/file/d/1c38i8eEKL_xx-Ge9KIOmVQd1SaZrPXAY/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.almanelle.spring-current",
+      "origin": "repository",
+      "source": "public/art/creatures/almanelle/Almanelle_Ability-Utility-03_WinterPause.png",
+      "output": "art/almanelle/spring-current.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Almanelle artwork from Google Drive: https://drive.google.com/file/d/1F6ra5V0H2DGp7IjfKwMuc3Yb0zaEy7gQ/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.almanelle.autumn-insight",
+      "origin": "repository",
+      "source": "public/art/creatures/almanelle/Almanelle_Ability-Utility-04_AutumnInsight.png",
+      "output": "art/almanelle/autumn-insight.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Almanelle artwork from Google Drive: https://drive.google.com/file/d/1vLezcKwd2AWYhEnNWkK7_LOpEns7t2XN/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.almanelle.rooted-year",
+      "origin": "repository",
+      "source": "public/art/creatures/almanelle/Almanelle_Ability-Utility-05_RootedYear.png",
+      "output": "art/almanelle/rooted-year.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Almanelle artwork from Google Drive: https://drive.google.com/file/d/1HLZ6FCMzkYdhqhWQTplkq1Q_koT0Y9Zo/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

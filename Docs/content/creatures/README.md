@@ -38,3 +38,5 @@ For new kits, use the [creature design workflow](../../CREATURE_DESIGN.md) and [
 - [Reverie](reverie.md) · [implementation](../../../src/game/content/creatures/reverie.ts)
 
 - [Oathara](oathara.md) · [implementation](../../../src/game/content/creatures/oathara.ts)
+
+- [Almanelle](almanelle.md) · [implementation](../../../src/game/content/creatures/almanelle.ts)

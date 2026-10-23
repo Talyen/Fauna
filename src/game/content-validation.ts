@@ -70,6 +70,8 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
     }
     for (const tier of entry.passiveTiers)
       for (const effect of tier?.effects ?? []) {
+        if (effect.kind === "fallenLeaves" && effect.amount > 100)
+          error(entry.id, "passiveTiers", "Block decay conversion cannot exceed 100 percent");
         if (
           (effect.kind === "wellRead" || effect.kind === "goodFortune" || effect.kind === "gallantry") &&
           effect.amount > 100
@@ -133,6 +135,8 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
         error(card.id, "effects", "Unknown supplemental damage type.");
       if (effect.kind === "status" && !["armor", "thorns", "dodge"].includes(effect.status))
         error(card.id, "effects", "Unknown granted status.");
+      if (effect.kind === "heal" && effect.target !== undefined && effect.target !== "recipient")
+        error(card.id, "effects", "Unknown healing recipient.");
     }
     if (!Object.hasOwn(EFFECT_KEYWORDS, card.effect)) error(card.id, "effect", "Unknown effect.");
     else if (card.effect === "attack" && !DAMAGE_TYPES.includes(card.damageType))

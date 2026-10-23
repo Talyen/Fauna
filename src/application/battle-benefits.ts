@@ -91,7 +91,9 @@ export function battleBenefits(
     def.effects?.reduce(
       (sum, effect) =>
         sum +
-        (effect.kind === "heal" ? restoration(actor, healingValue(state, actor, effect.amount)).rounded : 0),
+        (effect.kind === "heal" && effect.target !== "recipient"
+          ? restoration(actor, healingValue(state, actor, effect.amount)).rounded
+          : 0),
       0,
     ) ?? 0,
   ).gain;
@@ -271,6 +273,22 @@ export function battleBenefits(
         const card = state.cards.find((entry) => entry.id === id)!;
         return drawableOwnerIds(state).has(card.ownerId);
       });
+      if (def.target === "ally") {
+        const healing =
+          def.effects?.reduce(
+            (sum, effect) =>
+              sum + (effect.kind === "heal" && effect.target === "recipient" ? effect.amount : 0),
+            0,
+          ) ?? 0;
+        return allies.flatMap((ally) => {
+          const { restored, utility } = healBenefit(state, ally, healing, play);
+          return support(
+            restored > 0 ? "healing" : useful ? "standardUtility" : utility > 0 ? "utility" : "none",
+            restored > 0 ? restored : utility,
+            ally.id,
+          );
+        });
+      }
       return support(useful ? "standardUtility" : "none");
     }
     case "teamDodge":

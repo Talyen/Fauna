@@ -1,5 +1,5 @@
 import { unfinishedJourneyLimit } from "../card-actors";
-import { battlefield } from "../battlefield";
+import { battlefield, isEnemy } from "../battlefield";
 import { definition, speciesCards, SPECIES } from "../content";
 import { drawBossCards, bossCardPriority, courtRemembers, removeDepartedMinions } from "./legendary";
 import { recycleDiscard, MAX_BATTLE_CARDS, MAX_HAND_SIZE } from "../card-zones";
@@ -12,10 +12,12 @@ import {
   restoreHealth,
   mostInjured,
   startAction,
+  grantStatus,
   tickStatuses,
   controlled,
   TURN_MANA,
   TURN_DRAW,
+  type Combatant,
 } from "./index";
 import { draw } from "../card-zones";
 import { retainedBlock, enemyAbilityValue } from "../ability-rules";
@@ -29,6 +31,20 @@ import { settle, intents } from "../journey";
 const enemyAbilities = new Map(
   SPECIES.map(({ id }) => [id, speciesCards(id).filter(enemyCanUse).map(enemyCard)]),
 );
+
+/** Convert only Block lost to ordinary turn decay, using the owner's passive tier. */
+export function decayBlock(state: GameState, unit: Combatant, events: GameEvent[]) {
+  const before = unit.block;
+  const allied = !isEnemy(unit);
+  unit.block = retainedBlock(unit, allied ? state : undefined);
+  const lost = before - unit.block;
+  if (lost <= 0 || unit.health <= 0) return;
+  const percent = creaturePassive(allied ? state : undefined, unit.species).effects.reduce(
+    (sum, effect) => sum + (effect.kind === "fallenLeaves" ? effect.amount : 0),
+    0,
+  );
+  if (percent > 0) grantStatus(unit, "thorns", Math.round((lost * percent) / 100), events, state);
+}
 
 export function livingChorus(state: GameState, enemy: boolean, events: GameEvent[]) {
   const row = enemy ? state.battle!.enemies : state.team;
@@ -72,7 +88,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
     for (const minion of battlefield(draft, "enemy").filter((unit) => unit.minion && unit.health > 0)) {
       tickStatuses(draft, minion, events);
       if (settle(draft, events)) return;
-      minion.block = retainedBlock(minion);
+      decayBlock(draft, minion, events);
       startAction(minion, events, draft);
     }
     let enemyCardsPlayed = 0;
@@ -81,7 +97,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
       tickStatuses(draft, enemy, events);
       if (settle(draft, events)) return;
       if (enemy.health <= 0) continue;
-      enemy.block = retainedBlock(enemy);
+      decayBlock(draft, enemy, events);
       const canAct = startAction(enemy, events, draft, false);
       if (enemy.deck) {
         enemy.deck.discard.push(...enemy.deck.hand.splice(0));
@@ -184,7 +200,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
     for (const c of [...battlefield(draft, "player"), ...draft.reserves]) {
       const stats = ensureCombat(c);
       if (stats.grace > 0) stats.grace--;
-      c.block = retainedBlock(c, draft);
+      decayBlock(draft, c, events);
       if ("attacked" in c) c.attacked = false;
       startAction(c, events, draft);
     }

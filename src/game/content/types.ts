@@ -26,9 +26,11 @@ export type SpeciesId =
   | "euphera"
   | "tournelle"
   | "reverie"
-  | "oathara";
+  | "oathara"
+  | "almanelle";
 export type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
+  | { kind: "fallenLeaves"; amount: number }
   | { kind: "unfinishedJourney"; amount: number }
   | { kind: "unhurried"; amount: number }
   | { kind: "gallantry"; amount: number }
@@ -77,7 +79,8 @@ type CardEffect =
   | { kind: "status"; status: "armor" | "thorns" | "dodge"; amount: number }
   | { kind: "cleanse"; amount: number; target?: "recipient" | "allAllies" }
   | { kind: "reflect"; amount: number; status?: "burn" }
-  | { kind: "draw" | "mana" | "purge" | "heal" | "blind" | "meltArmor"; amount: number };
+  | { kind: "heal"; amount: number; target?: "recipient" }
+  | { kind: "draw" | "mana" | "purge" | "blind" | "meltArmor"; amount: number };
 export interface CardBase {
   id: string;
   species: SpeciesId;
@@ -103,7 +106,8 @@ export type CardDefinition = CardBase &
       }
     | { effect: "guard"; target?: "self" }
     | { effect: "heal"; target?: "allAllies" | "mostInjured" | "self" }
-    | { effect: Exclude<Effect, "attack" | "guard" | "heal">; target?: never }
+    | { effect: "recover"; target?: "ally" }
+    | { effect: Exclude<Effect, "attack" | "guard" | "heal" | "recover">; target?: never }
   );
 
 export interface CreatureKit {

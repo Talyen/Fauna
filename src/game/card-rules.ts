@@ -13,6 +13,8 @@ export function cardTargeting(def: CardDefinition): "enemy" | "ally" | "self" | 
       return def.target === "self" ? "self" : "ally";
     case "heal":
       return def.target === "self" ? "self" : def.target ? "automatic" : "ally";
+    case "recover":
+      return def.target === "ally" ? "ally" : "automatic";
     case "resurrect":
       return "ally";
     case "reflectAttack":
@@ -25,10 +27,17 @@ export function cardTargeting(def: CardDefinition): "enemy" | "ally" | "self" | 
 }
 
 export function enemyCard(card: CardDefinition): CardDefinition {
-  // Enemies have no hand; retain the self-healing half of a draw ability
-  if (card.effect === "draw") {
+  // Ordinary enemies have no hand; retain the self-healing half of card-flow abilities
+  if (card.effect === "draw" || card.effect === "recover") {
     const healing = card.effects?.find((effect) => effect.kind === "heal");
-    if (healing) return { ...card, effect: "heal", target: "self", value: healing.amount, effects: [] };
+    if (healing)
+      return {
+        ...card,
+        effect: "heal",
+        target: healing.target === "recipient" ? undefined : "self",
+        value: healing.amount,
+        effects: [],
+      };
   }
   return {
     ...card,
@@ -60,7 +69,10 @@ export function enemyCard(card: CardDefinition): CardDefinition {
 /** Enemies have no shared hand, Mana pool or discard pile. Decide support for every primary kind. */
 export function enemyCanUse(card: CardDefinition): boolean {
   const effect =
-    card.effect === "draw" && card.effects?.some((effect) => effect.kind === "heal") ? "heal" : card.effect;
+    (card.effect === "draw" || card.effect === "recover") &&
+    card.effects?.some((effect) => effect.kind === "heal")
+      ? "heal"
+      : card.effect;
   switch (effect) {
     case "createPearls":
     case "pearl":
@@ -152,7 +164,10 @@ export function cardText(
       text = `Gain ${value} Water Thorns`;
       break;
     case "recover":
-      text = "Return a random discarded card from a living ally to your hand";
+      text =
+        card.target === "ally"
+          ? "Return a random discarded card to your hand"
+          : "Return a random discarded card from a living ally to your hand";
       break;
     case "teamDodge":
       text = `Give all allies ${value}% Dodge until your next turn`;
@@ -224,7 +239,7 @@ export function cardText(
                 : effect.kind === "mana"
                   ? `Gain ${effect.amount} Mana`
                   : effect.kind === "heal"
-                    ? `Restore ${effect.amount} Health`
+                    ? `Restore ${effect.amount} Health${effect.target === "recipient" ? " to an injured ally" : ""}`
                     : effect.kind === "blind"
                       ? "Blind all enemies"
                       : effect.kind === "meltArmor"
