@@ -1,3 +1,4 @@
+import { waitForStartup } from "./support/session";
 import { captureScreen, settleScreen } from "./support/rendered-evidence";
 import { test, expect, type Page } from "@playwright/test";
 import { produce } from "immer";
@@ -17,6 +18,7 @@ async function seed(page: Page, initial: string, scale: string) {
     { initial, scale },
   );
   await page.goto("/");
+  await waitForStartup(page);
   await page.getByRole("button", { name: "Continue", exact: true }).click();
 }
 test("combat preferences, autoplay pause and manual takeover", async ({ page }) => {
@@ -147,6 +149,7 @@ test("final victory returns to the menu without a retired creature reveal", asyn
   await expect(page.getByRole("heading", { name: "Creature unlocked" })).toHaveCount(0);
   await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
   await page.reload();
+  await waitForStartup(page);
   await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Creature unlocked" })).toHaveCount(0);
   expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(won);
@@ -202,6 +205,7 @@ test("manual zero-Mana turns resume without losing the battle", async ({ page })
   await page.locator(".app:not([inert])[data-save-status=saved]").waitFor();
   const committed = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!));
   await page.reload();
+  await waitForStartup(page);
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
   expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(committed);

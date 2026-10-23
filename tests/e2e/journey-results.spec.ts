@@ -13,7 +13,7 @@ import {
   run,
   completeRecruitment,
 } from "../support/game";
-import { seed, state, resume } from "./support/session";
+import { seed, state, resume, waitForStartup } from "./support/session";
 import { gamepad } from "./support/gamepad";
 import { step } from "./support/journey";
 
@@ -94,6 +94,7 @@ for (const [width, enlarged, outcome] of [
     await page.getByRole("button", { name: "Main menu", exact: true }).click();
     await expect(page.getByRole("button", { name: "Journey results", exact: true })).toHaveCount(0);
     await page.reload();
+    await waitForStartup(page);
     await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
     await expect(page.getByRole("button", { name: "Journey results", exact: true })).toHaveCount(0);
     expect(await state(page)).toEqual(game);
@@ -143,6 +144,7 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
     expect(won.currency).toBe(fixture.currency + 40);
     expect(Object.values(won.keywordXP).reduce((a, b) => a + b, 0)).toBeGreaterThan(0);
     await page.reload();
+    await waitForStartup(page);
     await expect(page.getByRole("navigation", { name: "Main menu" })).toBeVisible();
     expect(await state(page)).toEqual(won);
     await page.getByRole("button", { name: "Collection", exact: true }).click();

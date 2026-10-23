@@ -1,3 +1,4 @@
+import { waitForStartup } from "./support/session";
 import { captureScreen } from "./support/rendered-evidence";
 import { test, expect, type Page } from "@playwright/test";
 import { produce } from "immer";
@@ -10,6 +11,7 @@ async function seed(page: Page, game: GameState) {
     sessionStorage.setItem("fauna.combat.seeded", "true");
   }, game);
   await page.goto("/");
+  await waitForStartup(page);
   await page.getByRole("button", { name: "Continue", exact: true }).click();
 }
 for (const width of [1280, 1920]) {
@@ -69,6 +71,7 @@ for (const width of [1280, 1920]) {
     const rested = await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!) as GameState);
     expect(rested.team.map((creature) => creature.health)).toEqual([10, 16, 30]);
     await page.reload();
+    await waitForStartup(page);
     await page.getByRole("button", { name: "Continue", exact: true }).click();
     await expect(page.getByRole("button", { name: /^Boss: / })).toBeVisible();
     expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(rested);

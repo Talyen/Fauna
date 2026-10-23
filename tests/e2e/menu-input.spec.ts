@@ -1,3 +1,4 @@
+import { waitForStartup } from "./support/session";
 import { captureScreen } from "./support/rendered-evidence";
 import { test, expect, type Page, type Locator } from "@playwright/test";
 import { accept, run } from "../support/game";
@@ -34,6 +35,7 @@ async function expectCenteredMenu(choices: Locator) {
 
 test("pointer menu transitions never display focus indicators", async ({ page }) => {
   await page.goto("/");
+  await waitForStartup(page);
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Open menu" }).click();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
@@ -60,6 +62,7 @@ test("pointer menu transitions never display focus indicators", async ({ page })
 
 test("held Escape closes only the current menu level", async ({ page }) => {
   await page.goto("/");
+  await waitForStartup(page);
   await page.getByRole("button", { name: "Play", exact: true }).click();
   await page.getByRole("button", { name: "Open menu" }).click();
   await page.getByRole("button", { name: "Settings", exact: true }).click();
@@ -86,6 +89,7 @@ test("minimum-size enlarged menus fit every action without scrolling", async ({ 
     localStorage.setItem("fauna.save.v1", value);
   }, JSON.stringify(game));
   await page.goto("/");
+  await waitForStartup(page);
   const homeChoices = page.getByRole("navigation", { name: "Main menu" });
   await expectCenteredMenu(homeChoices);
   await page.getByRole("button", { name: "Continue", exact: true }).click();
@@ -173,6 +177,7 @@ test("controller menu journey at minimum size with enlarged text", async ({ page
   await page.addInitScript((save) => localStorage.setItem("fauna.save.v1", save), JSON.stringify(collection));
   if (enlarged) await page.addInitScript(() => localStorage.setItem("fauna.text-scale", "1.25"));
   await page.goto("/");
+  await waitForStartup(page);
   await expect(page.getByRole("button", { name: "Play", exact: true })).toBeFocused();
   await pad.frames();
   await pad.press(13);
@@ -207,9 +212,11 @@ test("controller menu journey at minimum size with enlarged text", async ({ page
   await pad.press(0);
   const glossary = page.getByRole("main", { name: "Glossary & controls" });
   await pad.press(13);
-  await glossary.getByRole("button", { name: "Next page" }).click();
+  const entries = glossary.getByRole("region", { name: "Glossary entries" });
+  await expect(entries).toBeFocused();
+  await pad.press(13);
+  await expect.poll(() => entries.evaluate((el) => el.scrollTop)).toBeGreaterThan(0);
   expect(await glossary.evaluate((el) => el.scrollTop)).toBe(0);
-  await expect(glossary.getByRole("status")).toHaveText(/^2 \/ /);
   await pad.press(1);
   await expect(page.getByRole("button", { name: "Glossary", exact: true })).toBeFocused();
   await pad.press(15);
@@ -254,6 +261,7 @@ test("controller reconnection and background input cannot activate journey comma
   const pad = await controller(page);
   await page.addInitScript((value) => localStorage.setItem("fauna.save.v1", value), JSON.stringify(run()));
   await page.goto("/");
+  await waitForStartup(page);
   await pad.frames();
   await pad.press(0);
   await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-phase", "battle");
@@ -292,12 +300,14 @@ test("controller reconnection and background input cannot activate journey comma
 test("mouse use cancels held-stick navigation until release", async ({ page }) => {
   const pad = await controller(page);
   await page.goto("/");
+  await waitForStartup(page);
   const fresh = createGame(7);
   const collected = fresh.starterOffers[0]!;
   const started = accept(accept(fresh, { type: "draft", species: collected }), { type: "start" });
   const later = accept(accept(started, { type: "abandon" }), { type: "newRun", seed: 7 });
   await page.evaluate((data) => localStorage.setItem("fauna.save.v1", data), JSON.stringify(later));
   await page.reload();
+  await waitForStartup(page);
   await expect(page.getByRole("button", { name: "Play", exact: true })).toBeFocused();
   await pad.frames();
   await page.evaluate(() => {
@@ -323,6 +333,7 @@ test("controller can dismiss Pause or end the journey immediately", async ({ pag
   const pad = await controller(page);
   await page.addInitScript((value) => localStorage.setItem("fauna.save.v1", value), JSON.stringify(run()));
   await page.goto("/");
+  await waitForStartup(page);
   await expect(page.getByRole("button", { name: "Continue", exact: true })).toBeFocused();
   await pad.frames();
   await pad.press(0);
@@ -348,6 +359,7 @@ test("controller can dismiss Pause or end the journey immediately", async ({ pag
 test("pointer use has no native or shadcn focus decoration in settings, tabs or pause", async ({ page }) => {
   await page.addInitScript((value) => localStorage.setItem("fauna.save.v1", value), JSON.stringify(run()));
   await page.goto("/");
+  await waitForStartup(page);
   const noDecoration = async () => {
     const styles = await page.locator(":focus").evaluateAll((elements) =>
       elements.map((element) => {

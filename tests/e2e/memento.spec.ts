@@ -5,7 +5,7 @@ import { ownedCards } from "../../src/game/team";
 import { freshCombat } from "../../src/game/combat/index";
 import { createPearls, summonEcho } from "../../src/game/combat/legendary";
 import type { BattleState } from "../../src/game/types";
-import { seed, state } from "./support/session";
+import { seed, state, waitForStartup } from "./support/session";
 
 function legendaryTeam() {
   return produce(run(), (draft) => {
@@ -53,6 +53,7 @@ test("Legendary stays centered and only unplayed Pearls survive reload", async (
   expect(saved.cards.filter((card) => card.definitionId === "memento-pearl")).toHaveLength(1);
   expect(saved.cards.some((card) => card.id === consumed)).toBe(false);
   await page.reload();
+  await waitForStartup(page);
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   expect(await state(page)).toEqual(saved);
 });
@@ -101,6 +102,7 @@ test("a knocked-out Legendary offers all four living backups and clears its summ
   expect(next.battle!.minions).toEqual([]);
   expect(next.cards.some((card) => card.temporary)).toBe(false);
   await page.reload();
+  await waitForStartup(page);
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   expect(await state(page)).toEqual(next);
 });

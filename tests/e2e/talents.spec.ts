@@ -5,7 +5,7 @@ import { createGame } from "../../src/game/engine";
 import { KEYWORDS } from "../../src/game/progression";
 import { TALENTS } from "../../src/game/content";
 import { run } from "../support/game";
-import { seed, state, resume } from "./support/session";
+import { seed, state, resume, waitForStartup } from "./support/session";
 import { fits } from "./support/layout";
 
 test("talents purchase immediately, gate rows, reset a category, and return to the paused battle", async ({
@@ -71,6 +71,7 @@ for (const [width, height] of [
     for (const scale of [1, 1.25]) {
       await page.evaluate((value) => localStorage.setItem("fauna.text-scale", String(value)), scale);
       await page.reload();
+      await waitForStartup(page);
       await page.getByRole("button", { name: "Talents", exact: true }).click();
       const cards = page.locator(".talent-overview .action-card");
       await expect(cards).toHaveCount(KEYWORDS.length);

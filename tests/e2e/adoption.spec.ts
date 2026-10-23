@@ -2,10 +2,11 @@ import { expectControlColors } from "./support/control-colors";
 import { LAYOUT_CASES, REVIEW_VIEWPORTS } from "./support/layout-contract";
 import { captureScreen } from "./support/rendered-evidence";
 import { test, expect } from "@playwright/test";
-import { seed, state } from "./support/session";
+import { seed, state, waitForStartup } from "./support/session";
 import { SPECIES } from "../../src/game/content";
 test("switch thumbs stay within their tracks in both states", async ({ page }) => {
   await page.goto("/");
+  await waitForStartup(page);
   await page.getByRole("button", { name: "Settings", exact: true }).click();
   await page.getByRole("tab", { name: "Sound", exact: true }).click();
   const sound = page.getByRole("switch", { name: "Sound", exact: true });
@@ -28,6 +29,7 @@ test("switch thumbs stay within their tracks in both states", async ({ page }) =
 });
 test("Collection filtering, audio preferences, and settings remain menu-driven", async ({ page }) => {
   await page.goto("/");
+  await waitForStartup(page);
   await page.getByRole("button", { name: "Collection", exact: true }).click();
   await page.getByRole("tab", { name: "Uncollected", exact: true }).click();
   const firstPage = await page.getByRole("img", { name: "Locked species" }).count();
@@ -51,6 +53,7 @@ test("Collection filtering, audio preferences, and settings remain menu-driven",
   await expect(page.getByRole("button", { name: "Copy diagnostics", exact: true })).toHaveCount(0);
   await captureScreen(page, { path: "reports/adoption-settings.png", fullPage: true });
   await page.reload();
+  await waitForStartup(page);
   await page.getByRole("button", { name: "Settings", exact: true }).click();
   await page.getByRole("tab", { name: "Sound", exact: true }).click();
   await expect(page.getByLabel("Master volume value", { exact: true })).toHaveText("40%");
@@ -62,6 +65,7 @@ test("settings categories remain reachable at minimum size with enlarged text", 
   await page.setViewportSize({ width, height });
   await page.addInitScript((scale) => localStorage.setItem("fauna.text-scale", scale), textScale);
   await page.goto("/");
+  await waitForStartup(page);
   await page.getByRole("button", { name: "Settings", exact: true }).click();
   for (const category of ["Display", "Sound", "Battle"]) {
     await page.getByRole("tab", { name: category, exact: true }).click();
@@ -147,6 +151,7 @@ for (const [width, height] of REVIEW_VIEWPORTS)
     expect(await page.evaluate(() => JSON.parse(localStorage.getItem("fauna.save.v1")!))).toEqual(fixture);
     if (exhaustive) {
       await page.reload();
+      await waitForStartup(page);
       await page.getByRole("button", { name: "Settings", exact: true }).click();
       await expect(page.getByRole("radio", { name: "Tooltip 125%", exact: true })).toBeChecked();
       await expect(page.getByRole("radio", { name: "125%", exact: true })).toBeChecked();
@@ -169,6 +174,7 @@ for (const [width, height, scale] of LAYOUT_CASES)
       { save: JSON.stringify(fixture), scale },
     );
     await page.goto("/");
+    await waitForStartup(page);
     await expectControlColors(
       page.getByRole("button", { name: "Continue", exact: true }),
       "--primary-foreground",
@@ -205,6 +211,7 @@ for (const [width, height, scale] of LAYOUT_CASES)
     if (width === 1280 && height === 720 && scale === 1.25) {
       // Save/resume is viewport independent; keep it once alongside all shelf/receipt layouts.
       await page.reload();
+      await waitForStartup(page);
       await page.getByRole("button", { name: "Continue", exact: true }).click();
       await expect(page.getByRole("heading", { name: "Boon received", exact: true })).toBeVisible();
       await expect(page.getByRole("region", { name: "Purchased Boon" })).toBeVisible();
@@ -225,6 +232,7 @@ for (const [width, height, scale] of LAYOUT_CASES)
 
 test("Settings panel switches preserve screen, tab and icon geometry", async ({ page }) => {
   await page.goto("/");
+  await waitForStartup(page);
   await page.getByRole("button", { name: "Settings", exact: true }).click();
   await page.evaluate(() => document.fonts.ready);
   const dialog = page.getByRole("main", { name: "Settings", exact: true });
