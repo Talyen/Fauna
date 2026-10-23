@@ -4,6 +4,7 @@ import { produce } from "immer";
 import { createGame } from "../../src/game/engine";
 import type { Command } from "../../src/game/types";
 import {
+  authoredPack,
   prepareDestination,
   recruitChoice,
   accept,
@@ -110,7 +111,7 @@ for (const input of ["mouse", "keyboard", "controller"] as const)
           draft.encounter = 7;
           draft.journey!.victories = draft.encounter;
           prepareDestination(draft);
-          draft.expedition = { pack: 0, recruit: null, lastRoom: null };
+          draft.expedition = { pack: authoredPack(draft.encounter), recruit: null, lastRoom: null };
           draft.journey = { outcome: null, victories: 7, currency: 0, xp: {}, unlocks: [], lastBattle: null };
         }),
         { type: "beginBattle" },

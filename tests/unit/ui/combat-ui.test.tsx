@@ -8,7 +8,7 @@ import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import { KEYWORDS, keywordLabel } from "../../../src/game/progression";
 import { TALENTS } from "../../../src/game/content";
-import { prepareDestination, run } from "../../support/game";
+import { authoredPack, prepareDestination, run } from "../../support/game";
 import type { GameState } from "../../../src/game/types";
 
 beforeEach(() => {
@@ -93,7 +93,7 @@ it("shows exact Campfire recovery and commits one persisted Rest without currenc
       prepareDestination(s);
       s.encounter = 3;
       s.journey!.victories = s.encounter;
-      s.expedition = { pack: 0, recruit: null, lastRoom: null };
+      s.expedition = { pack: authoredPack(s.encounter), recruit: null, lastRoom: null };
       s.team[0]!.health = 0;
     }),
   );

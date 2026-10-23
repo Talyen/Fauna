@@ -1,4 +1,4 @@
-import { swapFixture } from "../../support/game";
+import { authoredPack, swapFixture } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, definition, species, type DamageType } from "../../../src/game/content";
@@ -195,7 +195,10 @@ it("discovers and recruits Prismram with its complete kit and rejects obsolete s
   );
   game = accept(
     produce(game, (draft) => {
-      draft.expedition!.pack = COMBAT_PACKS.findIndex((pack) => pack[0] === "prismram");
+      draft.expedition!.pack = authoredPack(
+        draft.encounter,
+        COMBAT_PACKS.findIndex((pack) => pack[0] === "prismram"),
+      );
     }),
     { type: "beginBattle" },
   );

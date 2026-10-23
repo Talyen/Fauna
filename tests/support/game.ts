@@ -3,6 +3,7 @@ import { ownedCards, swapBackup } from "../../src/game/team";
 import { freshCombat, combat } from "../../src/game/combat/index";
 import { controlled } from "../../src/game/combat/index";
 import { produce } from "immer";
+import { encounterPacks } from "../../src/game/encounters";
 import { createGame, dispatch } from "../../src/game/engine";
 import { definition, species, type SpeciesId } from "../../src/game/content";
 import type { Command, GameState, Lifecycle, BattleState, RewardState } from "../../src/game/types";
@@ -200,7 +201,7 @@ export function bossReward() {
     d.encounter = 3;
     d.journey!.victories = d.encounter;
     d.journey!.victories = 3;
-    d.expedition = { pack: 0, recruit: null, lastRoom: null };
+    d.expedition = { pack: authoredPack(d.encounter), recruit: null, lastRoom: null };
   });
   const recruit = winBattle(accept(ready, { type: "beginBattle" }));
   return accept(recruit, recruitChoice(recruit));
@@ -281,4 +282,9 @@ export function merchantDestination() {
   const ready = accept(state, recruitChoice(state));
   if (ready.phase !== "teamSelection" || !ready.support) throw new Error("Expected seeded Merchant stock.");
   return ready;
+}
+
+/** Choose an authored battle explicitly for kit and boundary fixtures. */
+export function authoredPack(encounter: number, index = 0): SpeciesId[] {
+  return [...encounterPacks(encounter)[index]!.slice(0, Math.min(3, encounter + 1))];
 }

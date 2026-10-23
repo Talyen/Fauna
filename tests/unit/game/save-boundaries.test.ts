@@ -4,6 +4,7 @@ import { createSession } from "../../../src/application/session";
 import { dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import {
+  authoredPack,
   accept,
   bossReward,
   recruitChoice,
@@ -101,7 +102,7 @@ it("rejects a final victory receipt on a Boon choice screen", () => {
   const destinations = produce(starterJourney(3, "captoad"), (draft) => {
     draft.encounter = 7;
     draft.journey!.victories = 7;
-    draft.expedition!.pack = 0;
+    draft.expedition!.pack = authoredPack(draft.encounter);
   });
   const battle = accept(destinations, { type: "beginBattle" });
   const won = dispatch(battle, { type: "devWinBattle" }, true).state;
@@ -164,7 +165,7 @@ it.each(["control", "reward", "price"])(
 it.each([999_999, 1_000_000])("keeps final victory saveable with %s previous wins", (wins) => {
   const ready = produce(starterJourney(3, "captoad"), (draft) => {
     draft.encounter = 7;
-    draft.expedition = { pack: 0, recruit: null, lastRoom: null };
+    draft.expedition = { pack: authoredPack(draft.encounter), recruit: null, lastRoom: null };
     draft.wins = wins;
     draft.journey!.victories = 7;
   });

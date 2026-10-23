@@ -1,4 +1,4 @@
-import { swapFixture } from "../../support/game";
+import { authoredPack, swapFixture } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, FIRST_RUN_STARTERS, species } from "../../../src/game/content";
@@ -63,7 +63,10 @@ it("registers the support kit, recruitment, preview parity and current saves", (
     draft.expedition = {
       recruit: null,
       lastRoom: null,
-      pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "stillara"),
+      pack: authoredPack(
+        draft.encounter,
+        COMBAT_PACKS.findIndex((pack) => pack[0] === "stillara"),
+      ),
     };
   });
   game = accept(game, { type: "beginBattle" });

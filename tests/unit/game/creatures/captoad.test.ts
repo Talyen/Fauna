@@ -8,7 +8,7 @@ import { COMBAT_PACKS, encounterSource } from "../../../../src/game/encounters";
 import { definitionKeywords } from "../../../../src/game/keywords";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
 import type { GameEvent } from "../../../../src/game/types";
-import { prepareDestination, accept, teamRun, winBattle } from "../../../support/game";
+import { authoredPack, prepareDestination, accept, teamRun, winBattle } from "../../../support/game";
 
 function ready(kinds: SpeciesId[] = ["captoad"], cardId = "captoad-swap") {
   return produce(teamRun(1, kinds), (game) => {
@@ -262,7 +262,10 @@ it("enemy Leaps reorder the battlefield without extra actions, and saves retain 
         draft.expedition = {
           recruit: null,
           lastRoom: null,
-          pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "captoad"),
+          pack: authoredPack(
+            draft.encounter,
+            COMBAT_PACKS.findIndex((pack) => pack[0] === "captoad"),
+          ),
         };
       }),
       { type: "beginBattle" },

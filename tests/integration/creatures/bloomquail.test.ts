@@ -8,7 +8,7 @@ import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { battleChoices } from "../../../src/application/battle-policy";
 import type { GameEvent } from "../../../src/game/types";
-import { accept, teamRun, winBattle } from "../../support/game";
+import { authoredPack, accept, teamRun, winBattle } from "../../support/game";
 
 function ready(id = "bloomquail-guard", copies = 1) {
   return produce(teamRun(1, ["bloomquail", "mossguard", "prismram"]), (game) => {
@@ -198,7 +198,10 @@ it("discovers, recruits and resumes Bloomquail with its complete kit", () => {
   );
   game = accept(
     produce(game, (draft) => {
-      draft.expedition!.pack = COMBAT_PACKS.findIndex((pack) => pack[0] === "bloomquail");
+      draft.expedition!.pack = authoredPack(
+        draft.encounter,
+        COMBAT_PACKS.findIndex((pack) => pack[0] === "bloomquail"),
+      );
     }),
     { type: "beginBattle" },
   );

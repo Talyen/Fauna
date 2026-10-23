@@ -170,7 +170,7 @@ const shared = z.object({
 
 const expedition = z
   .object({
-    pack: z.number().int().min(0).max(100).nullable(),
+    pack: z.array(speciesId).min(1).max(3).nullable(),
     recruit: speciesId.nullable(),
     lastRoom: z.enum(["combat", "boss", "merchant", "campfire", "recruit"]).nullable(),
   })

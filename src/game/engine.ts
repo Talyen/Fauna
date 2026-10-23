@@ -17,7 +17,7 @@ import { courtRemembers, removeDepartedMinions } from "./combat/legendary";
 import { fillHand, recycleDiscard } from "./card-zones";
 import { actionValue, cardCost } from "./ability-rules";
 import { SPECIES, definition, species } from "./content";
-import { bossEncounter } from "./encounters";
+import { bossEncounter, generateEncounterPack } from "./encounters";
 import type { Command, CommandResult, GameEvent, GameState } from "./types";
 import {
   offerStarters,
@@ -352,6 +352,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         addRecruit(draft, command.species);
         if (command.type === "recruitDestination") {
           draft.expedition!.recruit = null;
+          draft.expedition!.pack = generateEncounterPack(draft, draft.expedition!.pack!);
           draft.expedition!.lastRoom = "recruit";
           events.push({ kind: "reward", text: `${species(command.species).name} joined your roster.` });
         } else {

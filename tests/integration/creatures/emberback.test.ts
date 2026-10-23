@@ -8,7 +8,7 @@ import { freshCombat } from "../../../src/game/combat/index";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { battleChoices } from "../../../src/application/battle-policy";
-import { prepareDestination, accept, teamRun, winBattle } from "../../support/game";
+import { authoredPack, prepareDestination, accept, teamRun, winBattle } from "../../support/game";
 
 function ready(definitionId: string) {
   return produce(teamRun(1, ["emberback", "mossguard", "prismram"]), (game) => {
@@ -126,7 +126,10 @@ it("discovers and recruits Emberback from an ordinary encounter and resumes its 
   });
   game = accept(
     produce(game, (draft) => {
-      draft.expedition!.pack = COMBAT_PACKS.findIndex((pack) => pack[0] === "emberback");
+      draft.expedition!.pack = authoredPack(
+        draft.encounter,
+        COMBAT_PACKS.findIndex((pack) => pack[0] === "emberback"),
+      );
     }),
     { type: "beginBattle" },
   );
@@ -157,7 +160,10 @@ it("uses an enemy area ability against deployed allies while leaving reserves un
       draft.expedition = {
         recruit: null,
         lastRoom: null,
-        pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "emberback"),
+        pack: authoredPack(
+          draft.encounter,
+          COMBAT_PACKS.findIndex((pack) => pack[0] === "emberback"),
+        ),
       };
       draft.roster.push("mossguard");
       draft.reserves.push({ ...draft.team[0]!, id: "reserve", combat: freshCombat() });

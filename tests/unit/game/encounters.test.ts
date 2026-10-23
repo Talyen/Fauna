@@ -1,10 +1,23 @@
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { createGame, dispatch } from "../../../src/game/engine";
-import { JOURNEY_LENGTH, encounterSource, encounterPacks } from "../../../src/game/encounters";
+import {
+  JOURNEY_LENGTH,
+  encounterSource,
+  encounterPacks,
+  generateEncounterPack,
+} from "../../../src/game/encounters";
 import { ENCOUNTERS, species } from "../../../src/game/content";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { completeRecruitment, accept, winBattle } from "../../support/game";
+import {
+  authoredPack,
+  completeRecruitment,
+  accept,
+  winBattle,
+  starterJourney,
+  teamRun,
+  prepareDestination,
+} from "../../support/game";
 
 function start(seed = 7) {
   return accept(accept(createGame(seed), { type: "draft", species: createGame(seed).starterOffers[0]! }), {
@@ -38,6 +51,74 @@ describe("journey encounters", () => {
     expect(decodeSave(encodeSave(battle))).toEqual(battle);
   });
 
+  it("excludes the full roster from generated packs, including backups and knocked-out creatures", () => {
+    for (const kinds of [
+      ["mossguard", "emberback", "prismram", "pollenmoth", "captoad"],
+      ["memento", "dunefox", "reedstag", "cadenza", "coralcurl"],
+    ] as const) {
+      for (let encounter = 0; encounter < JOURNEY_LENGTH; encounter++) {
+        for (let seed = 0; seed < 32; seed++) {
+          const state = produce(teamRun(seed, [...kinds]), (draft) => {
+            prepareDestination(draft);
+            draft.encounter = encounter;
+            draft.journey!.victories = encounter;
+            draft.team[0]!.health = 0;
+            draft.reserves = draft.team.splice(1);
+            draft.lineup = draft.team.map((creature) => creature.id);
+            draft.expedition = { pack: generateEncounterPack(draft), recruit: null, lastRoom: null };
+          });
+          const pack = state.expedition!.pack!;
+          expect(pack).toHaveLength([3, 7].includes(encounter) ? 1 : Math.min(3, encounter + 1));
+          expect(pack.every((kind) => !state.roster.includes(kind))).toBe(true);
+          expect(enter(state).battle!.enemies.map((enemy) => enemy.species)).toEqual(pack);
+        }
+      }
+    }
+  });
+
+  it("uses an eligible ordinary Boss when the player's roster contains Memento", () => {
+    const started = starterJourney(7, "memento");
+    const ready = produce(started, (draft) => {
+      draft.encounter = 3;
+      draft.journey!.victories = 3;
+      draft.expedition!.pack = generateEncounterPack(draft);
+    });
+    const source = encounterSource(ready);
+    expect(source.name).toBe("Boss");
+    expect(source.enemies).toHaveLength(1);
+    expect(source.enemies[0]!.species).not.toBe("memento");
+    expect(source.enemies[0]!.name).toBe(species(source.enemies[0]!.species).name);
+    const battle = enter(decodeSave(encodeSave(ready)));
+    expect(decodeSave(encodeSave(battle))).toEqual(battle);
+    const result = dispatch(battle, { type: "devWinBattle" }, true);
+    expect(result.accepted).toBe(true);
+    const reward = result.state;
+    expect(reward.reward!.currency).toBe(40);
+    expect(reward.reward!.recruits).toEqual(ready.expedition!.pack);
+    expect(decodeSave(encodeSave(reward))).toEqual(reward);
+  });
+
+  it("replaces only conflicting enemies after an optional recruit and persists the new pack", () => {
+    const ready = produce(start(), (draft) => {
+      draft.encounter = 2;
+      draft.journey!.victories = 2;
+      draft.expedition!.pack = ["captoad", "dunefox", "captoad"];
+      draft.expedition!.recruit = "captoad";
+      draft.expedition!.lastRoom = "combat";
+    });
+    const command = { type: "recruitDestination", species: "captoad" } as const;
+    const recruited = accept(ready, command);
+    expect(accept(ready, command)).toEqual(recruited);
+    const pack = recruited.expedition!.pack!;
+    expect(pack).toHaveLength(3);
+    expect(pack[1]).toBe("dunefox");
+    expect(pack.every((kind) => !recruited.roster.includes(kind))).toBe(true);
+    expect(decodeSave(encodeSave(recruited))).toEqual(recruited);
+    const battle = enter(recruited);
+    expect(battle.battle!.enemies.map((enemy) => enemy.species)).toEqual(pack);
+    expect(decodeSave(encodeSave(battle))).toEqual(battle);
+  });
+
   it("persists explicit room power and scales base Health by 10 percent per room", () => {
     const initial = start();
     for (let encounter = 0; encounter < JOURNEY_LENGTH; encounter++) {
@@ -45,7 +126,7 @@ describe("journey encounters", () => {
         const state = produce(initial, (draft) => {
           draft.encounter = encounter;
           draft.journey!.victories = draft.encounter;
-          draft.expedition!.pack = pack;
+          draft.expedition!.pack = authoredPack(draft.encounter, pack);
         });
         const battle = enter(state);
         for (const enemy of battle.battle!.enemies) {
@@ -85,6 +166,7 @@ describe("journey encounters", () => {
       if (s.support) expect(s.support.encounter).toBe(index);
       expect(encounterSource(s).name).toBe(index % 4 === 3 ? "Boss" : "Combat");
       expect(encounterSource(s).enemies).toHaveLength(index % 4 === 3 ? 1 : Math.min(3, index + 1));
+      expect(encounterSource(s).enemies.every((enemy) => !s.roster.includes(enemy.species))).toBe(true);
       expect(decodeSave(encodeSave(enter(s)))).toEqual(enter(s));
       const route = enter(s).expedition;
       s = winBattle(enter(s));
@@ -116,7 +198,7 @@ describe("journey encounters", () => {
     const s = enter();
     for (const mutate of [
       (d: typeof s) => {
-        d.expedition!.pack = 100;
+        d.expedition!.pack = ["memento"];
       },
       (d: typeof s) => {
         d.encounter = 2;
@@ -136,7 +218,7 @@ describe("journey encounters", () => {
   });
 
   it("rejects obsolete destination and biome saves", () => {
-    for (const version of [16, 17, 18, 38])
+    for (const version of [16, 17, 18, 38, 51])
       expect(() => decodeSave(JSON.stringify({ ...start(), version }))).toThrow();
   });
 

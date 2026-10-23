@@ -7,6 +7,7 @@ import { TooltipProvider } from "../../../src/components/ui/tooltip";
 import { produce } from "immer";
 import { createGame } from "../../../src/game/engine";
 import {
+  authoredPack,
   accept,
   run,
   teamRun,
@@ -181,7 +182,7 @@ describe("player interface", () => {
       (draft) => {
         draft.encounter = encounter;
         draft.journey!.victories = draft.encounter;
-        draft.expedition!.pack = 0;
+        draft.expedition!.pack = authoredPack(draft.encounter);
         draft.journey!.victories = encounter;
       },
     );

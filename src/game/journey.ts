@@ -15,7 +15,7 @@ import {
 } from "./combat/index";
 import { shuffle, roll } from "./random";
 import { draw, drawKeyword } from "./card-zones";
-import { bossEncounter, encounterSource, finalEncounter, encounterPacks } from "./encounters";
+import { bossEncounter, encounterSource, finalEncounter, generateEncounterPack } from "./encounters";
 import type { GameEvent, GameState, Lifecycle, BattleState, RewardState, StateAt } from "./types";
 import { rebuildCards, prepareLineup } from "./team";
 const OPTIONAL_DESTINATION_CHANCE = 0.25;
@@ -34,7 +34,7 @@ export function offerStarters(state: GameState) {
 }
 function prepareEncounter(state: GameState) {
   const route = state.expedition!;
-  route.pack = Math.floor(roll(state) * encounterPacks(state.encounter).length);
+  route.pack = generateEncounterPack(state);
   const prices = merchantPriceRange(state);
   const kind =
     route.lastRoom !== "merchant" && state.currency >= prices.min && roll(state) < OPTIONAL_DESTINATION_CHANCE

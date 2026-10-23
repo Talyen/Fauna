@@ -1,7 +1,7 @@
 import { captureScreen, settleScreen } from "./support/rendered-evidence";
 import { test, expect, type Page } from "@playwright/test";
 import { produce } from "immer";
-import { prepareDestination, accept, run, victoryReady } from "../support/game";
+import { authoredPack, prepareDestination, accept, run, victoryReady } from "../support/game";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { continueToRecruit } from "./support/journey";
 async function seed(page: Page, initial: string, scale: string) {
@@ -127,7 +127,7 @@ test("final victory returns to the menu without a retired creature reveal", asyn
         d.journey!.victories = d.encounter;
         prepareDestination(d);
         d.journey = { outcome: null, victories: 7, currency: 0, xp: {}, unlocks: [], lastBattle: null };
-        d.expedition = { pack: 0, recruit: null, lastRoom: null };
+        d.expedition = { pack: authoredPack(d.encounter), recruit: null, lastRoom: null };
       }),
       { type: "beginBattle" },
     ),

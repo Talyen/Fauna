@@ -1,7 +1,7 @@
 import { captureScreen } from "./support/rendered-evidence";
 import { test, expect, type Page } from "@playwright/test";
 import { produce } from "immer";
-import { prepareDestination, run } from "../support/game";
+import { authoredPack, prepareDestination, run } from "../support/game";
 import type { GameState } from "../../src/game/types";
 async function seed(page: Page, game: GameState) {
   await page.addInitScript((game) => {
@@ -55,7 +55,7 @@ for (const width of [1280, 1920]) {
       prepareDestination(s);
       s.encounter = 3;
       s.journey!.victories = s.encounter;
-      s.expedition = { pack: 0, recruit: null, lastRoom: null };
+      s.expedition = { pack: authoredPack(s.encounter), recruit: null, lastRoom: null };
       s.team[0]!.health = 0;
       s.team[1]!.health = 7;
     });

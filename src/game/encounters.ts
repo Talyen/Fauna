@@ -1,6 +1,7 @@
 import { freeze } from "immer";
-import { ENCOUNTERS, species, type SpeciesId } from "./content";
+import { ENCOUNTERS, SPECIES, species, type SpeciesId } from "./content";
 import type { GameState } from "./types";
+import { roll } from "./random";
 
 export const JOURNEY_LENGTH = 8;
 export const COMBAT_PACKS = [
@@ -70,6 +71,18 @@ export function encounterPacks(encounter: number) {
   return boss ? [boss.pack] : COMBAT_PACKS;
 }
 
+/** Commit exact species so later roster changes cannot rewrite a battle or its rewards. */
+export function generateEncounterPack(state: GameState, savedPack?: readonly SpeciesId[]): SpeciesId[] {
+  const packs = encounterPacks(state.encounter);
+  const pack = savedPack ?? packs[Math.floor(roll(state) * packs.length)]!;
+  const eligible = SPECIES.filter((entry) => !entry.legendary && !state.roster.includes(entry.id));
+  return pack
+    .slice(0, Math.min(3, state.encounter + 1))
+    .map((kind) =>
+      state.roster.includes(kind) ? eligible[Math.floor(roll(state) * eligible.length)]!.id : kind,
+    );
+}
+
 function scaleEnemyStat(base: number, encounter: number) {
   return Math.round((base * (10 + encounter)) / 10);
 }
@@ -96,13 +109,13 @@ export function encounterSource(game: Pick<GameState, "expedition" | "encounter"
       })),
     };
   }
-  const pack = route.pack === null ? undefined : encounterPacks(game.encounter)[route.pack];
+  const pack = route.pack;
   if (!pack) throw new Error("Missing encounter pack.");
   const boss = BOSSES.find((entry) => entry.encounter === game.encounter);
   return {
     name: boss ? "Boss" : "Combat",
-    enemies: pack.slice(0, Math.min(3, game.encounter + 1)).map((kind, index) => ({
-      name: boss && index === 0 ? boss.name : species(kind).name,
+    enemies: pack.map((kind, index) => ({
+      name: boss && index === 0 && kind === boss.pack[0] ? boss.name : species(kind).name,
       species: kind,
       health: scaleEnemyStat(species(kind).health, game.encounter),
       power: 1 + game.encounter / 10,

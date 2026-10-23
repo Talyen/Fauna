@@ -7,7 +7,7 @@ import { MAX_HAND_SIZE } from "./card-zones";
 import { starterCount, collectedSpecies, KEYWORDS, talentPoints } from "./progression";
 import { gameStateSchema } from "./state-schema";
 import { CARDS, SPECIES, FIRST_RUN_STARTERS, species, TALENTS } from "./content";
-import { encounterPacks, encounterSource, finalEncounter, bossEncounter } from "./encounters";
+import { encounterSource, finalEncounter, bossEncounter } from "./encounters";
 import type { GameState } from "./types";
 const unique = (values: unknown[]) => new Set(values).size === values.length;
 export function decodeSave(raw: string): GameState {
@@ -57,7 +57,12 @@ export function decodeSave(raw: string): GameState {
     const route = s.expedition;
     if (s.phase === "draft")
       invalid(route.pack !== null || route.recruit !== null || route.lastRoom !== null || s.encounter !== 0);
-    else invalid(route.pack === null || !encounterPacks(s.encounter)[route.pack]);
+    else
+      invalid(
+        route.pack === null ||
+          route.pack.length !== (bossEncounter(s) ? 1 : Math.min(3, s.encounter + 1)) ||
+          route.pack.some((kind) => species(kind).legendary && !bossEncounter(s)),
+      );
     if (route.recruit !== null)
       invalid(s.roster.length >= 5 || !["teamSelection", "support", "campfire"].includes(s.phase));
   } else invalid(s.encounter > 2);

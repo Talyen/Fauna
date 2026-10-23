@@ -1,4 +1,4 @@
-import { swapFixture } from "../../support/game";
+import { authoredPack, swapFixture } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, FIRST_RUN_STARTERS, definition, species } from "../../../src/game/content";
@@ -60,7 +60,10 @@ it("registers the agreed kit, ranks, recruitment and enemy support", () => {
     draft.expedition = {
       recruit: null,
       lastRoom: null,
-      pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "rookhaven"),
+      pack: authoredPack(
+        draft.encounter,
+        COMBAT_PACKS.findIndex((pack) => pack[0] === "rookhaven"),
+      ),
     };
   });
   game = accept(game, { type: "beginBattle" });

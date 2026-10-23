@@ -1,4 +1,4 @@
-import { swapFixture } from "../../../support/game";
+import { authoredPack, swapFixture } from "../../../support/game";
 import { describe, expect, it } from "vitest";
 import { produce } from "immer";
 import { accept, run, teamRun, prepareDestination } from "../../../support/game";
@@ -201,7 +201,7 @@ describe("Memento and Legendary formations", () => {
   it("runs a solo Boss with a six-card deck and offers its recruitment before a Boon", () => {
     let state: GameState = produce(run(), (draft) => {
       draft.encounter = 3;
-      draft.expedition = { pack: 0, recruit: null, lastRoom: "boss" };
+      draft.expedition = { pack: authoredPack(draft.encounter), recruit: null, lastRoom: "boss" };
       prepareDestination(draft);
       draft.journey!.victories = 3;
     });
@@ -235,7 +235,7 @@ describe("Memento and Legendary formations", () => {
   it("consumes boss Pearls, retaining the core kit and an accurate resumable live count", () => {
     const destination = produce(run(), (draft) => {
       draft.encounter = 3;
-      draft.expedition = { pack: 0, recruit: null, lastRoom: "boss" };
+      draft.expedition = { pack: authoredPack(draft.encounter), recruit: null, lastRoom: "boss" };
       prepareDestination(draft);
       draft.journey!.victories = 3;
     });
@@ -347,7 +347,7 @@ describe("Memento and Legendary formations", () => {
       prepareDestination(draft);
       draft.encounter = 3;
       draft.journey!.victories = 3;
-      draft.expedition = { pack: 0, recruit: null, lastRoom: "boss" };
+      draft.expedition = { pack: authoredPack(draft.encounter), recruit: null, lastRoom: "boss" };
     });
     const battle = produce(accept(destination, { type: "beginBattle" }), (draft) => {
       const enemy = draft.battle!.enemies[0]!;

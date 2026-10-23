@@ -1,4 +1,4 @@
-import { swapFixture } from "../../../support/game";
+import { authoredPack, swapFixture } from "../../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, definition, FIRST_RUN_STARTERS, species } from "../../../../src/game/content";
@@ -160,7 +160,10 @@ it("grants enemy Shelter at base rank and does not grant opening Armor to backup
     draft.expedition = {
       recruit: null,
       lastRoom: null,
-      pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "sternshell"),
+      pack: authoredPack(
+        draft.encounter,
+        COMBAT_PACKS.findIndex((pack) => pack[0] === "sternshell"),
+      ),
     };
     draft.discovery.recruited.sternshell = 6;
     draft.roster.push("coralcurl");

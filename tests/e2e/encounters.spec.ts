@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 import { produce } from "immer";
 import { encounterSource } from "../../src/game/encounters";
 import { createGame } from "../../src/game/engine";
-import { accept } from "../support/game";
+import { authoredPack, accept } from "../support/game";
 import { seed, state, resume } from "./support/session";
 import { fits } from "./support/layout";
 
@@ -21,7 +21,7 @@ for (const [width, enlarged, encounter] of [
       }),
       (draft) => {
         draft.encounter = encounter;
-        draft.expedition!.pack = 0;
+        draft.expedition!.pack = authoredPack(draft.encounter);
         draft.journey!.victories = encounter;
       },
     );
@@ -56,7 +56,7 @@ for (const [width, enlarged, encounter] of [
     await page.keyboard.press("Enter");
     await expect(page.getByRole("dialog")).toHaveCount(0);
     await expect(page.getByRole("main", { name: "Battlefield" })).toBeVisible();
-    expect((await state(page)).expedition!.pack).toBe(game.expedition!.pack);
+    expect((await state(page)).expedition!.pack).toEqual(game.expedition!.pack);
     // Battle inspection shortcuts are inert; current effects remain on hover/focus.
     const enemy = page.locator(".app:not([inert]) .enemy-row .creature-card").first();
     const before = await state(page);

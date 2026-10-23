@@ -1,4 +1,4 @@
-import { swapFixture } from "../../support/game";
+import { authoredPack, swapFixture } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { combat, freshCombat, hit, removeEffects, tickStatuses } from "../../../src/game/combat/index";
@@ -19,7 +19,10 @@ function battle(copies = 1) {
       game.expedition = {
         recruit: null,
         lastRoom: null,
-        pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "emberback"),
+        pack: authoredPack(
+          game.encounter,
+          COMBAT_PACKS.findIndex((pack) => pack[0] === "emberback"),
+        ),
       };
     }),
     { type: "beginBattle" },
@@ -176,7 +179,10 @@ it("previews Armor theft and commits the same passive burst without mutating the
       draft.expedition = {
         recruit: null,
         lastRoom: null,
-        pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "emberback"),
+        pack: authoredPack(
+          draft.encounter,
+          COMBAT_PACKS.findIndex((pack) => pack[0] === "emberback"),
+        ),
       };
       draft.talents.push("leech.armor-siphon");
     }),

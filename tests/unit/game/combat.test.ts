@@ -1,4 +1,5 @@
 import {
+  authoredPack,
   swapFixture,
   completeRecruitment,
   prepareDestination,
@@ -216,7 +217,7 @@ describe("combat commands and journey health", () => {
       prepareDestination(d);
       d.encounter = 3;
       d.journey!.victories = d.encounter;
-      d.expedition = { pack: 0, recruit: null, lastRoom: null };
+      d.expedition = { pack: authoredPack(d.encounter), recruit: null, lastRoom: null };
       d.team[0]!.health = 0;
       d.team[1]!.health = 7;
     });
@@ -280,7 +281,7 @@ it("keeps a formation changed by a mechanic resumable through Campfire Rest", ()
     prepareDestination(s);
     s.encounter = 3;
     s.journey!.victories = s.encounter;
-    s.expedition = { pack: 0, recruit: null, lastRoom: null };
+    s.expedition = { pack: authoredPack(s.encounter), recruit: null, lastRoom: null };
     s.roster.push("pollenmoth");
     s.reserves.push({ id: "reserve-moth", species: "pollenmoth", health: 5, block: 0, attacked: false });
   });

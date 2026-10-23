@@ -5,7 +5,7 @@ import { starterCount } from "../../../src/game/progression";
 import { CARDS, FIRST_RUN_STARTERS, SPECIES } from "../../../src/game/content";
 import { encounterPacks } from "../../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../../src/game/save";
-import { accept, completeRecruitment, winBattle } from "../../support/game";
+import { authoredPack, accept, completeRecruitment, winBattle } from "../../support/game";
 
 function firstJourney(seed = 7) {
   const game = createGame(seed);
@@ -24,7 +24,10 @@ describe("collected starter drafts", () => {
         expect(dispatch(fresh, { type: "draft", species: kind }).state).toBe(fresh);
       }
       const encounter = produce(firstJourney(42), (draft) => {
-        draft.expedition!.pack = encounterPacks(0).findIndex((pack) => pack[0] === kind);
+        draft.expedition!.pack = authoredPack(
+          draft.encounter,
+          encounterPacks(0).findIndex((pack) => pack[0] === kind),
+        );
       });
       const won = winBattle(accept(encounter, { type: "beginBattle" }));
       expect(won.reward!.recruits).toContain(kind);

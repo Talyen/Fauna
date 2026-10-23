@@ -14,7 +14,7 @@ import { swapFromCard } from "../../../src/game/team";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { battleChoices } from "../../../src/application/battle-policy";
 import type { GameEvent, GameState } from "../../../src/game/types";
-import { accept, prepareDestination, teamRun, winBattle } from "../../support/game";
+import { authoredPack, accept, prepareDestination, teamRun, winBattle } from "../../support/game";
 
 function ready(ability = "wish-exchange") {
   return produce(teamRun(1, ["euphera", "mossguard", "prismram"]), (draft) => {
@@ -64,7 +64,10 @@ it("registers exactly the selected kit, six fortune tiers and recruitment", () =
     draft.expedition = {
       recruit: null,
       lastRoom: null,
-      pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "euphera"),
+      pack: authoredPack(
+        draft.encounter,
+        COMBAT_PACKS.findIndex((pack) => pack[0] === "euphera"),
+      ),
     };
   });
   game = accept(game, { type: "beginBattle" });

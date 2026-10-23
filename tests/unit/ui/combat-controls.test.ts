@@ -7,6 +7,7 @@ import { createSession } from "../../../src/application/session";
 import { observeUnlocks } from "../../../src/ui/expedition/unlock-reveals";
 import { scheduleAutoplay } from "../../../src/ui/battle/autoplay";
 import {
+  authoredPack,
   prepareDestination,
   accept,
   run,
@@ -134,7 +135,7 @@ describe("combat controls", () => {
         d.encounter = 7;
         d.journey!.victories = d.encounter;
         prepareDestination(d);
-        d.expedition = { pack: 0, recruit: null, lastRoom: null };
+        d.expedition = { pack: authoredPack(d.encounter), recruit: null, lastRoom: null };
       }),
       { type: "beginBattle" },
     );

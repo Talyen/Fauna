@@ -6,7 +6,7 @@ import { cardText, enemyCanUse } from "../../../../src/game/card-rules";
 import { cardKeywords } from "../../../../src/game/progression";
 import { freshCombat, hit } from "../../../../src/game/combat/index";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
-import { accept, prepareDestination, teamRun } from "../../../support/game";
+import { authoredPack, accept, prepareDestination, teamRun } from "../../../support/game";
 import { COMBAT_PACKS } from "../../../../src/game/encounters";
 import type { GameEvent } from "../../../../src/game/types";
 
@@ -228,7 +228,10 @@ describe("Tournelle", () => {
       draft.encounter = 2;
       draft.journey!.victories = 2;
       draft.expedition = {
-        pack: COMBAT_PACKS.findIndex((pack) => pack[1] === "tournelle"),
+        pack: authoredPack(
+          draft.encounter,
+          COMBAT_PACKS.findIndex((pack) => pack[1] === "tournelle"),
+        ),
         recruit: null,
         lastRoom: null,
       };
@@ -256,7 +259,10 @@ describe("Tournelle", () => {
         draft.encounter = 2;
         draft.journey!.victories = 2;
         draft.expedition = {
-          pack: COMBAT_PACKS.findIndex((pack) => pack[1] === "tournelle"),
+          pack: authoredPack(
+            draft.encounter,
+            COMBAT_PACKS.findIndex((pack) => pack[1] === "tournelle"),
+          ),
           recruit: null,
           lastRoom: null,
         };

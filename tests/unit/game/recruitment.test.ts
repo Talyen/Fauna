@@ -1,4 +1,5 @@
 import {
+  authoredPack,
   swapFixture,
   prepareDestination,
   accept,
@@ -26,7 +27,10 @@ describe("recruiting creature copies", () => {
         d.expedition = {
           recruit: null,
           lastRoom: null,
-          pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "prismram" && pack[1] === "prismram"),
+          pack: authoredPack(
+            d.encounter,
+            COMBAT_PACKS.findIndex((pack) => pack[0] === "prismram" && pack[1] === "prismram"),
+          ),
         };
       }),
       { type: "beginBattle" },
@@ -162,7 +166,7 @@ it.each([3, 7])(
     const ready = produce(teamRun(42, ["prismram"]), (game) => {
       game.encounter = encounter;
       prepareDestination(game);
-      game.expedition = { pack: 0, recruit: null, lastRoom: "boss" };
+      game.expedition = { pack: authoredPack(game.encounter), recruit: null, lastRoom: "boss" };
     });
     const reward = fullRosterReward(winBattle(accept(ready, { type: "beginBattle" })));
     const selected = accept(reward, { type: "recruit", species: reward.reward.recruits[0]! });

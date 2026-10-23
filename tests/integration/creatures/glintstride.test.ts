@@ -8,7 +8,7 @@ import { decodeSave, encodeSave } from "../../../src/game/save";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { battleChoices } from "../../../src/application/battle-policy";
 import type { GameEvent } from "../../../src/game/types";
-import { prepareDestination, accept, teamRun, winBattle } from "../../support/game";
+import { authoredPack, prepareDestination, accept, teamRun, winBattle } from "../../support/game";
 
 function ready(id = "glintstride-attack", copies = 1) {
   return produce(teamRun(1, ["glintstride", "mossguard", "prismram"]), (game) => {
@@ -165,7 +165,10 @@ it("encounters, recruits and resumes Glintstride with its complete kit", () => {
     draft.expedition = {
       recruit: null,
       lastRoom: null,
-      pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "glintstride"),
+      pack: authoredPack(
+        draft.encounter,
+        COMBAT_PACKS.findIndex((pack) => pack[0] === "glintstride"),
+      ),
     };
     prepareDestination(draft);
     delete draft.discovery.recruited.glintstride;

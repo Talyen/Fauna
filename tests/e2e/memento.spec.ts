@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { produce } from "immer";
-import { accept, prepareDestination, run } from "../support/game";
+import { authoredPack, accept, prepareDestination, run } from "../support/game";
 import { ownedCards } from "../../src/game/team";
 import { freshCombat } from "../../src/game/combat/index";
 import { createPearls, summonEcho } from "../../src/game/combat/legendary";
@@ -62,7 +62,7 @@ test("enemy Echoes are targetable without being roster creatures", async ({ page
     prepareDestination(draft);
     draft.encounter = 3;
     draft.journey!.victories = 3;
-    draft.expedition = { pack: 0, recruit: null, lastRoom: "boss" };
+    draft.expedition = { pack: authoredPack(draft.encounter), recruit: null, lastRoom: "boss" };
   });
   const fixture = produce(accept(destination, { type: "beginBattle" }), (draft) => {
     summonEcho(draft as BattleState, draft.battle!.enemies[0]!, "enemy", 6, []);

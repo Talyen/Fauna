@@ -3,7 +3,7 @@ import { produce } from "immer";
 import { createGame, dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { creatureStars, talentPoints, xpThreshold, keywordProgress } from "../../../src/game/progression";
-import { accept, teamRun, winBattle } from "../../support/game";
+import { authoredPack, accept, teamRun, winBattle } from "../../support/game";
 
 it("discovers only committed encounters and retains knowledge independently of starter unlocks", () => {
   const fresh = createGame();
@@ -56,7 +56,7 @@ it("collects only accepted recruits, caps stars at five, and retains ranks acros
     state = winBattle(
       accept(
         produce(state, (draft) => {
-          draft.expedition!.pack = 0;
+          draft.expedition!.pack = authoredPack(draft.encounter);
         }),
         { type: "beginBattle" },
       ),

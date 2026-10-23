@@ -69,7 +69,7 @@ it("preserves offers through Campfire and reload, then suppresses consecutive Ca
   const visiting = accept(before, { type: "visitCampfire" });
   const rested = accept(decodeSave(encodeSave(visiting)), { type: "rest" });
   expect(rested.expedition!.recruit).toBe(before.expedition!.recruit);
-  expect(rested.expedition!.pack).toBe(before.expedition!.pack);
+  expect(rested.expedition!.pack).toEqual(before.expedition!.pack);
   expect(rested.rng).toBe(before.rng);
   expect(canVisitCampfire(rested)).toBe(false);
   expect(dispatch(rested, { type: "visitCampfire" }).state).toBe(rested);

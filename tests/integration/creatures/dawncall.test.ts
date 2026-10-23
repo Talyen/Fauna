@@ -1,4 +1,4 @@
-import { swapFixture } from "../../support/game";
+import { authoredPack, swapFixture } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, species } from "../../../src/game/content";
@@ -268,7 +268,10 @@ it("discovers and recruits Dawncall through ordinary encounters", () => {
   );
   game = accept(
     produce(game, (draft) => {
-      draft.expedition!.pack = COMBAT_PACKS.findIndex((pack) => pack[0] === "dawncall");
+      draft.expedition!.pack = authoredPack(
+        draft.encounter,
+        COMBAT_PACKS.findIndex((pack) => pack[0] === "dawncall"),
+      );
     }),
     { type: "beginBattle" },
   );

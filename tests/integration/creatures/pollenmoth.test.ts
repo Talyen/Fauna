@@ -9,7 +9,7 @@ import { decodeSave, encodeSave } from "../../../src/game/save";
 import { validateCatalog } from "../../../src/game/content-validation";
 import { battleChoices } from "../../../src/application/battle-policy";
 import type { GameEvent } from "../../../src/game/types";
-import { accept, teamRun, winBattle } from "../../support/game";
+import { authoredPack, accept, teamRun, winBattle } from "../../support/game";
 
 function ready(id: string, copies = 1) {
   return produce(teamRun(1, ["pollenmoth", "mossguard", "prismram"]), (game) => {
@@ -156,7 +156,10 @@ it("discovers and recruits Pollenmoth with its complete kit", () => {
   );
   game = accept(
     produce(game, (draft) => {
-      draft.expedition!.pack = COMBAT_PACKS.findIndex((pack) => pack[0] === "pollenmoth");
+      draft.expedition!.pack = authoredPack(
+        draft.encounter,
+        COMBAT_PACKS.findIndex((pack) => pack[0] === "pollenmoth"),
+      );
     }),
     { type: "beginBattle" },
   );
@@ -186,9 +189,12 @@ it("uses the enemy's base bounce tier against allies regardless of collected sta
   });
   game = accept(
     produce(game, (draft) => {
-      draft.expedition!.pack = COMBAT_PACKS.findIndex((pack) => pack[0] === "pollenmoth");
       draft.encounter = 2;
       draft.journey!.victories = draft.encounter;
+      draft.expedition!.pack = authoredPack(
+        draft.encounter,
+        COMBAT_PACKS.findIndex((pack) => pack[0] === "pollenmoth"),
+      );
     }),
     { type: "beginBattle" },
   );

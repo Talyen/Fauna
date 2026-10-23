@@ -6,7 +6,7 @@ import { freshCombat, grantBlock, grantStatus, restoreHealth } from "../../../..
 import { createGame, dispatch, previewCard } from "../../../../src/game/engine";
 import { COMBAT_PACKS } from "../../../../src/game/encounters";
 import { decodeSave, encodeSave } from "../../../../src/game/save";
-import { accept, teamRun, winBattle } from "../../../support/game";
+import { authoredPack, accept, teamRun, winBattle } from "../../../support/game";
 
 function ready(id = "reedstag-guard") {
   return produce(teamRun(1, ["reedstag", "mossguard", "reedstag"]), (game) => {
@@ -232,7 +232,10 @@ it("discovers, recruits and resumes Reedstag with all three cards", () => {
   );
   game = accept(
     produce(game, (draft) => {
-      draft.expedition!.pack = COMBAT_PACKS.findIndex((pack) => pack[0] === "reedstag");
+      draft.expedition!.pack = authoredPack(
+        draft.encounter,
+        COMBAT_PACKS.findIndex((pack) => pack[0] === "reedstag"),
+      );
     }),
     { type: "beginBattle" },
   );

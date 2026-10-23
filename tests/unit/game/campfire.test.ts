@@ -3,7 +3,7 @@ import { produce } from "immer";
 import { dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { canVisitCampfire } from "../../../src/game/destinations";
-import { prepareDestination, accept, run, starterJourney } from "../../support/game";
+import { authoredPack, prepareDestination, accept, run, starterJourney } from "../../support/game";
 function destinations() {
   return starterJourney(3, "captoad");
 }
@@ -21,7 +21,7 @@ it.each([0, 1, 2, 3, 4, 5, 6, 7])("offers Campfire at encounter %s without rerol
     d.encounter = encounter;
     d.journey!.victories = d.encounter;
     d.journey!.victories = encounter;
-    d.expedition = { pack: 0, recruit: null, lastRoom: null };
+    d.expedition = { pack: authoredPack(d.encounter), recruit: null, lastRoom: null };
     d.team[0]!.health = 21;
   });
   const rested = accept(accept(s, { type: "visitCampfire" }), { type: "rest" });

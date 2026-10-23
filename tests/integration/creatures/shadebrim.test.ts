@@ -7,7 +7,7 @@ import { dispatch, previewCard } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { combatStatuses } from "../../../src/ui/shared/combat/combat-status";
-import { prepareDestination, accept, teamRun, winBattle } from "../../support/game";
+import { authoredPack, prepareDestination, accept, teamRun, winBattle } from "../../support/game";
 
 function ready(id = "shadebrim-guard") {
   return produce(teamRun(1, ["shadebrim", "mossguard", "prismram"]), (game) => {
@@ -279,7 +279,10 @@ it("encounters and recruits Shadebrim through the ordinary journey pool", () => 
     draft.expedition = {
       recruit: null,
       lastRoom: null,
-      pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "shadebrim"),
+      pack: authoredPack(
+        draft.encounter,
+        COMBAT_PACKS.findIndex((pack) => pack[0] === "shadebrim"),
+      ),
     };
   });
   game = accept(game, { type: "beginBattle" });

@@ -1,4 +1,4 @@
-import { swapFixture } from "../../support/game";
+import { authoredPack, swapFixture } from "../../support/game";
 import { expect, it } from "vitest";
 import { produce } from "immer";
 import { CARDS, FIRST_RUN_STARTERS } from "../../../src/game/content";
@@ -56,7 +56,10 @@ it("registers Cadenza's kit, recruitment, automatic targeting and save/preview p
     draft.expedition = {
       recruit: null,
       lastRoom: null,
-      pack: COMBAT_PACKS.findIndex((pack) => pack[0] === "cadenza"),
+      pack: authoredPack(
+        draft.encounter,
+        COMBAT_PACKS.findIndex((pack) => pack[0] === "cadenza"),
+      ),
     };
   });
   game = accept(game, { type: "beginBattle" });
