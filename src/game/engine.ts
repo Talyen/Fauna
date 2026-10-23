@@ -262,10 +262,10 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         const def = definition(card.definitionId);
         const actor = draft.team.find((c) => c.id === card.ownerId)!;
         const value = actionValue(card, actor, draft);
-        for (const keyword of cardKeywords(card))
+        const keywords = cardKeywords(card);
+        for (const keyword of keywords)
           draft.battleXP[keyword] = Math.min(1_000_000, (draft.battleXP[keyword] ?? 0) + 1);
         battle.mana -= cardCost(card, draft);
-        const keywords = cardKeywords(card);
         combat(actor).freeCard = false;
         if (keywords.includes("nature")) combat(actor).freeNature = false;
         if (keywords.includes("light")) combat(actor).freeLight = false;
