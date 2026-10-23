@@ -79,13 +79,21 @@ it("renews the living deployed team including self, caps healing and leaves knoc
     draft.roster.push("mossguard");
   });
   const cardId = game.battle!.hand[0]!;
-  const result = dispatch(game, { type: "play", cardId, autoEndTurn: false });
+  const command = { type: "play", cardId, autoEndTurn: false } as const;
+  const pending = dispatch(game, command);
+  expect(pending.accepted).toBe(false);
+  expect(pending.state).toBe(game);
+  // With no living replacement, the remaining deployed creatures may act normally
+  const withoutReplacement = produce(game, (draft) => {
+    draft.reserves[0]!.health = 0;
+  });
+  const result = dispatch(withoutReplacement, command);
   expect(result.accepted).toBe(true);
   expect(result.state.team.map((ally) => ally.health)).toEqual([29, 30, 0]);
-  expect(result.state.reserves).toEqual(game.reserves);
+  expect(result.state.reserves).toEqual(withoutReplacement.reserves);
   expect(result.state.battleXP.health).toBe(1);
   expect(result.state.battle!.mana).toBe(game.battle!.mana - 1);
-  expect(previewCard(game, cardId).state).toEqual(result.state);
+  expect(previewCard(withoutReplacement, cardId).state).toEqual(result.state);
   expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
   expect(cardText(definition("mossguard-heal"))).toBe("Restore 2 Health to all allies");
 });

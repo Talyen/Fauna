@@ -1,5 +1,5 @@
 {
-  "version": 50,
+  "version": 52,
   "discovery": {
     "encountered": [
       "tournelle",
@@ -392,7 +392,10 @@
           "bleedLeech": []
         },
         "lastAbility": null,
-        "minion": { "ownerId": "enemy-0", "side": "enemy" }
+        "minion": {
+          "ownerId": "enemy-0",
+          "side": "enemy"
+        }
       },
       {
         "id": "echo-enemy-0-1",
@@ -440,7 +443,10 @@
           "bleedLeech": []
         },
         "lastAbility": null,
-        "minion": { "ownerId": "enemy-0", "side": "enemy" }
+        "minion": {
+          "ownerId": "enemy-0",
+          "side": "enemy"
+        }
       }
     ],
     "copySerial": 0,
@@ -502,7 +508,9 @@
           "skipped": false,
           "deathDoorUsed": false,
           "grace": 0,
-          "statusSources": { "burn": "recruit-371" },
+          "statusSources": {
+            "burn": "recruit-371"
+          },
           "bleedLeech": []
         },
         "lastAbility": null,
@@ -528,10 +536,22 @@
     "outcome": null,
     "victories": 7,
     "currency": 160,
-    "xp": { "physical": 97, "light": 86, "health": 30, "dodge": 38, "mana": 55, "water": 5, "block": 81 },
+    "xp": {
+      "physical": 97,
+      "light": 86,
+      "health": 30,
+      "dodge": 38,
+      "mana": 55,
+      "water": 5,
+      "block": 81
+    },
     "unlocks": [],
     "lastBattle": null
   },
-  "expedition": { "pack": 0, "recruit": null, "lastRoom": "boss" },
+  "expedition": {
+    "pack": ["memento"],
+    "recruit": null,
+    "lastRoom": "boss"
+  },
   "support": null
 }
