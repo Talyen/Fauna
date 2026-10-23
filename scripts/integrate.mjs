@@ -21,7 +21,11 @@ export async function integrate(
   const task = trees.find((entry) => entry.branch === `refs/heads/${branch}`)?.path;
   if (!main || !task || task === main)
     throw new Error("Main and task branches must have separate registered worktrees.");
-  if (ensureDependencies(task) !== 0)
+  if (
+    ensureDependencies(task, {
+      allowInstall: process.env.CI === "true" || process.env.FAUNA_LOCAL_HEAVY === "1",
+    }) !== 0
+  )
     throw new Error("Could not prepare task dependencies; main was not advanced.");
   root = main;
   const release = await acquireIntegrationLock(root, {

@@ -49,7 +49,7 @@ Development saves are disposable. There are no released player saves to preserve
 
 Review the final diff and integration. Express behavior through names, types and valuable tests; comments explain non-obvious reasons, ordering or compatibility. Justify lint suppressions.
 
-Use [Contributing](CONTRIBUTING.md#verification) for verification and local completion.
+Use [Contributing](CONTRIBUTING.md#verification) for verification and local completion. Keep routine local work lightweight: do not run full tests, compilers, type-aware lint, builds, browser/desktop suites, simulations or performance captures on this Mac unless the user explicitly requests that local execution. Use hosted CI for those checks; never bypass the launcher with direct tools or a locally set `CI=true`. A single exact unit/integration regression and focused visual preview/capture remain available under the documented limits.
 
 For visual changes, follow the [rendered review procedure](Docs/UI.md#required-review). Task-owned focused preview/review is authorized by default; unavailable evidence blocks integration.
 

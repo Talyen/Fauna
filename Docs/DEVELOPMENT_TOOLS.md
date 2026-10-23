@@ -156,17 +156,17 @@ The [session-owned collector](ARCHITECTURE.md#discovery-and-diagnostics) records
 
 Verification, context and review share the base recorded in worktree-local Git metadata, surviving commits and branch renames. Unregistered non-main branches and detached checkouts use their common ancestor with local main; main defaults to HEAD. Empty selections explicitly run no checks or review.
 
-| Option                  | Behavior                                                                                                                                          |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Explicit paths          | Narrow the selection                                                                                                                              |
-| `--base <commit>`       | Override the base                                                                                                                                 |
-| `--working-tree`        | Select only uncommitted changes                                                                                                                   |
-| Review `--layers`       | Show committed, staged and unstaged patches, including reverted edits; default review shows the net task change                                   |
-| `--test <suite>`        | Run and remember extra suites for integration, including failed attempts; explicitly requested CI-owned suites run locally within the same limits |
-| `--forget-test <suite>` | Remove an obsolete extra selection                                                                                                                |
-| `--plan`                | Preview selection without changing remembered intent                                                                                              |
-| `--plan --related`      | Suggest import-related tests for coverage investigation; suggestions never displace required or explicit suites                                   |
-| `--diagnostic <mode>`   | Run a [bounded investigation](../scripts/README.md#task-check-implementation), such as `npm run verify:changed -- --diagnostic build`             |
+| Option                  | Behavior                                                                                                                |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Explicit paths          | Narrow the selection                                                                                                    |
+| `--base <commit>`       | Override the base                                                                                                       |
+| `--working-tree`        | Select only uncommitted changes                                                                                         |
+| Review `--layers`       | Show committed, staged and unstaged patches, including reverted edits; default review shows the net task change         |
+| `--test <suite>`        | Record extra coverage for the integration plan, including failed attempts; execution is deferred to CI by default       |
+| `--forget-test <suite>` | Remove an obsolete extra selection                                                                                      |
+| `--plan`                | Preview selection without changing remembered intent                                                                    |
+| `--plan --related`      | Suggest import-related tests for coverage investigation; suggestions never displace required or explicit suites         |
+| `--diagnostic <mode>`   | Run a [bounded investigation](../scripts/README.md#task-check-implementation), subject to the local/CI execution policy |
 
 Only the base and extra suite paths are stored, never passing results. Test and static commands have the same scope on every branch; [Contributing](../CONTRIBUTING.md#verification) owns required coverage and suite maintenance.
 
