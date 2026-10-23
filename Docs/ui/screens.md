@@ -4,7 +4,7 @@
 
 ## Screen headings
 
-Use a balanced header frame up to 640px wide: Back leads, Open menu trails, and the title centers independently. Journey screens add Deck beside Back, with a 12px gap and equal side reservations. Deck opens read-only inspection; during drafting it previews chosen starters' cards. Closing restores its opener.
+Use a balanced header frame up to 640px wide: Back leads, Open menu trails, and the title centers independently. Journey screens add Deck beside Back, with a 12px gap and equal side reservations. Deck follows [menu inspection rules](../MENU_DESIGN.md#back-and-focus-return), previewing chosen starters during drafting.
 
 Header and battle corner controls use 32px visible surfaces and 16px icons within 44px hit areas. Use 24px section gaps. Main menu keeps its Fauna title; battle has no main heading. Team confirmation omits Back.
 
@@ -26,11 +26,11 @@ Starter hover/focus adds kit keywords and the three action names/current Mana co
 
 Outside battle, use one shadcn Dialog on an opaque warm near-black backdrop. Center the creature name above landscape artwork, then a wider centered row of three native portrait abilities with 12px gaps. Show the current named trait, five progress stars and active passive description below. Stars fill left to right from zero to five; no rank controls or separate rank view appear. Ability names and rules are available through hover or intentional navigation focus. Keep accessible dialog titles.
 
-[Inspection CSS](../../src/ui/inspection/inspection.css) owns `--inspection-art-width`, fitted to the viewport and capped by the 480px `--inspection-art-max-width`. Creature width uses `--inspection-creature-scale` (0.8); individual abilities use `--inspection-ability-scale` (1.2) after accounting for gaps. Preserve selected typography, hit areas, native ratios and the common center axis.
+[Inspection CSS](../../src/ui/inspection/inspection.css) owns `--inspection-art-width`, fitted to the viewport and capped by the 480px `--inspection-art-max-width`. Creature width uses `--inspection-creature-scale` (0.8); individual abilities use `--inspection-ability-scale` (1.2) after accounting for gaps. Keep the common center axis and [shared layout constraints](../UI.md#layout-artwork-size-and-spacing).
 
-Activating a thumbnail pins its enlarged artwork in the same Dialog. A/D and controller left/right cycle the three actions without Previous/Next buttons. Card rules show final effects without a bonus breakdown or embedded Glossary definitions. Inspection never contains Recruit/Choose or commits gameplay.
+Activating a thumbnail pins its enlarged artwork in the same Dialog. A/D and controller left/right cycle the three actions without Previous/Next buttons. Card rules show final effects without a bonus breakdown or embedded Glossary definitions. Inspection has no Recruit/Choose action.
 
-Every creature/action inspection has an accessible icon-only Back button. [Back behavior](../MENU_DESIGN.md#back-and-focus-return) distinguishes creature-parent inspection from direct hand/deck inspection; X/outside click closes the whole Dialog. Battle, piles opened in battle and required replacement use hover/focus details without nested pinned inspection. Enemy details show current effects and never reveal intents; full species kits belong in Collection.
+Every creature/action inspection has an accessible icon-only Back button; [menu rules](../MENU_DESIGN.md#back-and-focus-return) own nesting, Back and whole-dialog dismissal. Battle, piles opened in battle and required replacement use hover/focus details without nested pinned inspection. Enemy details show current effects and never reveal intents; full species kits belong in Collection.
 
 ## Collection
 
