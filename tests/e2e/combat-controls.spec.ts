@@ -75,7 +75,10 @@ test("combat preferences, autoplay pause and manual takeover", async ({ page }) 
     .toBeGreaterThan(revision);
   await page.locator(".app:not([inert]) .hand .action-card:not([aria-disabled=true])").first().click();
   await expect(autoplay).toHaveAttribute("aria-pressed", "false");
-  await page.keyboard.press("Escape");
+  // Targeted cards need cancellation; immediate cards already return to ordinary battle input
+  if ((await page.locator(".app:not([inert]) .battle-screen").getAttribute("data-selected-card")) !== "")
+    await page.keyboard.press("Escape");
+  await expect(page.getByRole("dialog", { name: "Pause menu" })).toHaveCount(0);
   await captureScreen(page, { path: `reports/controls-battle-${width}.png` });
   await expect(page.getByRole("button", { name: "Skip combat", exact: true })).toHaveCount(0);
   // Browser controller simulation exercises the same semantic action as physical Y.
