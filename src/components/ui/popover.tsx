@@ -2,7 +2,6 @@
 import * as React from "react";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { cn } from "@/lib/utils";
-import { useSurfaceRef } from "../../ui/infrastructure/surface-ref";
 import { useModalSurfaceRef } from "../../ui/infrastructure/modal-surface-ref";
 
 export const Popover = PopoverPrimitive.Root;
@@ -11,7 +10,7 @@ export const PopoverContent = React.forwardRef<
   React.ElementRef<typeof PopoverPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>
 >(({ className, align = "end", sideOffset = 8, collisionPadding = 16, ...props }, ref) => {
-  const surface = useSurfaceRef(useModalSurfaceRef(ref));
+  const surface = useModalSurfaceRef(ref);
   return (
     <PopoverPrimitive.Portal>
       <PopoverPrimitive.Content
