@@ -244,6 +244,8 @@ test("controller reconnection and background input cannot activate journey comma
     window.testPad.connected = false;
   });
   await pad.frames();
+  const pause = page.getByRole("dialog", { name: "Pause menu" });
+  await expect(pause).toBeVisible();
   await page.evaluate(() => {
     window.testPad.buttons[3]!.pressed = true;
     window.testPad.connected = true;
@@ -254,6 +256,11 @@ test("controller reconnection and background input cannot activate journey comma
     window.testPad.buttons[3]!.pressed = false;
   });
   await pad.frames();
+  await pad.press(3);
+  await expect(pause).toBeVisible();
+  expect(await revision()).toBe(before);
+  await pad.press(1);
+  await expect(pause).toHaveCount(0);
   await pad.press(3);
   await expect(page.locator(".app:not([inert])")).toHaveAttribute("data-save-status", "saved");
   await expect.poll(revision).toBe(before + 1);
