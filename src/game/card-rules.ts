@@ -40,7 +40,8 @@ export function enemyCard(card: CardDefinition): CardDefinition {
 }
 /** Enemies have no shared hand, Mana pool or discard pile. Decide support for every primary kind. */
 export function enemyCanUse(card: CardDefinition): boolean {
-  const effect = enemyCard(card).effect;
+  const effect =
+    card.effect === "draw" && card.effects?.some((effect) => effect.kind === "heal") ? "heal" : card.effect;
   switch (effect) {
     case "createPearls":
     case "pearl":

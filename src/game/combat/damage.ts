@@ -328,17 +328,13 @@ export function* resolveHit(
   if (type === "burn" || type === "freeze") {
     const protectors = battlefield(state, alliedTarget ? "player" : "enemy");
     // Use the strongest deployed protection; swaps and knockouts change it immediately.
-    const resistance = protectors.reduce((best, unit) => {
-      if (unit.health <= 0) return best;
-      return Math.max(
-        best,
-        ...creaturePassive(alliedTarget ? state : undefined, unit.species).effects.map((effect) =>
-          effect.kind === (type === "burn" ? "teamBurnResistance" : "teamFreezeResistance")
-            ? effect.amount
-            : 0,
-        ),
-      );
-    }, 0);
+    const resistanceKind = type === "burn" ? "teamBurnResistance" : "teamFreezeResistance";
+    let resistance = 0;
+    for (const unit of protectors) {
+      if (unit.health <= 0) continue;
+      for (const effect of creaturePassive(alliedTarget ? state : undefined, unit.species).effects)
+        if (effect.kind === resistanceKind) resistance = Math.max(resistance, effect.amount);
+    }
     if (protectors.some((unit) => unit.id === target.id)) damage *= 1 - Math.min(100, resistance) / 100;
   }
   damage = Math.round(damage);
