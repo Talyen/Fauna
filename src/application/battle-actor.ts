@@ -22,7 +22,8 @@ function tacticalState(state: GameState): string {
     battle.hand.map((id) => JSON.stringify(card(state.cards.find((entry) => entry.id === id)!))).sort(),
     state.cards.map((entry) => JSON.stringify(card(entry))).sort(),
     battle.draw.length,
-    battle.discard.length,
+    // Recovery choices depend on visible discard composition, even at an unchanged pile size.
+    battle.discard.map((id) => JSON.stringify(card(state.cards.find((entry) => entry.id === id)!))).sort(),
     battle.buffer.length,
     battle.mana,
     battle.maxMana,

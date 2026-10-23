@@ -23,7 +23,11 @@ import type { GameEvent, GameState, BattleState } from "../types";
 import { living, pendingReplacement, swapFromCard } from "../team";
 import { settle, intents } from "../journey";
 
-const enemyAbilities = new Map(SPECIES.map(({ id }) => [id, speciesCards(id).filter(enemyCanUse)]));
+// Adapt immutable authored kits once; selection order and RNG consumption stay
+// the same, while enemy turns reuse their read-only ability definitions.
+const enemyAbilities = new Map(
+  SPECIES.map(({ id }) => [id, speciesCards(id).filter(enemyCanUse).map(enemyCard)]),
+);
 
 export function livingChorus(state: GameState, enemy: boolean, events: GameEvent[]) {
   const row = enemy ? state.battle!.enemies : state.team;
@@ -85,7 +89,8 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
       }
       if (!canAct) continue;
       const targets = () => battlefield(draft, "player").filter((unit) => unit.health > 0);
-      const target = targets().find((c) => c.id === enemy.targetId) ?? targets()[0];
+      const availableTargets = targets();
+      const target = availableTargets.find((c) => c.id === enemy.targetId) ?? availableTargets[0];
       if (!target) continue;
       if (enemy.deck) {
         const deck = enemy.deck;
@@ -137,7 +142,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
       const abilities = enemyAbilities.get(enemy.species)!;
       const alternatives = abilities.filter((card) => card.id !== enemy.lastAbility);
       const pool = alternatives.length ? alternatives : abilities;
-      const def = enemyCard(pool[Math.floor(roll(draft) * pool.length)]!);
+      const def = pool[Math.floor(roll(draft) * pool.length)]!;
       enemy.lastAbility = def.id;
       executeAbility(
         draft,

@@ -1,6 +1,6 @@
 # Architecture
 
-This guide owns runtime boundaries, command transactions and persistence. [Journey design](EXPEDITION_DESIGN.md) owns progression, [Keywords](KEYWORDS.md) owns combat rules, [Content](CONTENT.md) owns authoring, and [UI](UI.md) owns presentation. Use `npm run context` to locate affected owners.
+This guide owns runtime boundaries, command transactions and persistence. [Journey design](EXPEDITION_DESIGN.md) owns progression, [Keywords](KEYWORDS.md) owns combat rules, [Content](CONTENT.md) owns authoring, and [UI](UI.md) owns presentation. Start with command resolution and saving below; implementation maps and validation details follow. Use `npm run context` to locate affected owners.
 
 ## Repository organization
 
@@ -14,32 +14,6 @@ This guide owns runtime boundaries, command transactions and persistence. [Journ
 | `src/tooling/`     | Playthrough, balance and performance harnesses                           | Consumes runtime contracts; runtime cannot import harnesses                                          |
 
 [Boundary checks](../scripts/checks/boundaries.mjs) enforce imports and ambient-capability restrictions. Knip checks unused code. [Test maintenance](../tests/README.md) and the [script map](../scripts/README.md) own their respective organization.
-
-### Gameplay owners
-
-| Contract                                        | Owner                                                                                                             |
-| ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| State shape and derived types                   | [state-schema.ts](../src/game/state-schema.ts), [types.ts](../src/game/types.ts)                                  |
-| Command admission and transaction               | [command-phases.ts](../src/game/command-phases.ts), [engine.ts](../src/game/engine.ts)                            |
-| Encounter preparation, setup and settlement     | [journey.ts](../src/game/journey.ts), [encounters.ts](../src/game/encounters.ts)                                  |
-| Creature identity, card ownership and formation | [team.ts](../src/game/team.ts)                                                                                    |
-| Draw, discard and FIFO overflow                 | [card-zones.ts](../src/game/card-zones.ts)                                                                        |
-| Shared player, preview and enemy execution      | [combat/abilities.ts](../src/game/combat/abilities.ts), [ability-values.ts](../src/game/combat/ability-values.ts) |
-| Turn scheduling and Legendary decisions         | [turns.ts](../src/game/combat/turns.ts), [legendary.ts](../src/game/combat/legendary.ts)                          |
-| Recovery, affordability and Recruit eligibility | [destinations.ts](../src/game/destinations.ts)                                                                    |
-| Catalogs, effect descriptions and progression   | [Content](CONTENT.md), [Keywords](KEYWORDS.md)                                                                    |
-
-Preserve independently authored species, card and talent order: seeded selection consumes them. Stable definition IDs differ from journey creature IDs and card-instance slot IDs. Duplicate species remain separate individuals. Formation changes must preserve the distinct [replacement and swap rules](EXPEDITION_DESIGN.md#roster-and-battles), including Legendary kit sizes and [generated copies](content/creatures/rookhaven.md).
-
-### Presentation owners
-
-The shell [navigation reducer](../src/ui/shell/navigation.ts) owns page and overlay transitions and supplies one active-surface priority for rendering, input, effects and Auto-play. Its [focus adapter](../src/ui/shell/focus.ts) owns DOM references and semantic menu-action restoration.
-
-[App](../src/ui/App.tsx) mounts the tooltip provider and [game shell](../src/ui/shell/game-shell.tsx). The shell alone owns transient navigation, command callbacks and modal focus restoration. Its [input router](../src/ui/shell/input.ts) receives state/callbacks; controlled [overlays](../src/ui/shell/overlays.tsx) render without acquiring navigation ownership. Extracted content receives data and callbacks.
-
-Feature folders own their layouts; `shared/` owns reusable cards, combat readouts, rewards, navigation and effects. Shared presentation may consume gameplay queries and infrastructure, but cannot import UI feature folders. [Inspection requests](../src/ui/shared/inspection-model.ts) remain independent of the inspection feature. Registered controls, React infrastructure and dependency-light utilities have the lower-level boundaries described in the [design-system map](DESIGN_SYSTEM.md).
-
-`src/ui/styles.css` owns stylesheet order. Preserve shared declarations and repeated-selector order when moving CSS; unchanged declarations alone do not prove rendering parity. Result presentation shares one completion context so input and reduced motion finish the same animation from any consumer.
 
 ## Command resolution and previews
 
@@ -71,8 +45,6 @@ Enemy targeting is policy over the shared executor. The pure [battle policy](../
 
 Desktop saves use Electron’s Fauna user-data `saves/expedition.json`; browser saves use `fauna.save.v1`. Both keep two backups. Follow the [development-save policy](../AGENTS.md#development-saves). [save-format.json](../src/game/save-format.json) is the single version shared by gameplay validation, native storage and the package. Update schemas, semantic validation and current-format fixtures together.
 
-[Save validation](../src/game/save.ts) checks content IDs, individual/card ownership, unique zones, Health bounds, formation limits, saved enemy packs with exact initial Health/room power, and phase/outcome coherence. Support visits validate stock, price bounds, visit/slot identities and purchase receipts with their phases. It validates FIFO overflow and rejects a waiting buffer alongside an unfilled hand. Generated copies require distinct IDs, valid battle ownership and complete permanent kits. Discovery rejects duplicates, unknown species, recruitment without encounter records, roster species absent from Collection, and invalid starter offers/selections. Optional Recruit destinations admit only ordinary creatures. [Content validation](../src/game/content-validation.ts) is a separate startup/authoring boundary.
-
 ### Loading and writes
 
 [The session](../src/application/session.ts) keeps commands unavailable through local loading and bounded Cloud startup. Load tries the primary and then current-format backups. All-invalid development candidates silently start fresh. Read failures retry once, then allow in-memory play; writes must regain read access before rotating unknown data.
@@ -93,6 +65,8 @@ Renderer crash recovery drains admitted native writes before ordinary validated 
 
 Local saves remain authoritative offline. Metadata becomes durable after the gameplay save and before upload; transport never holds the local save lane. Background retries preserve alternatives and cannot replace the active journey. Startup continues locally after failure or five seconds; late reads cannot install after offline takeover. Shutdown drains local writes and allows at most two seconds for uploads.
 
+### Native transport, profiles and protocol
+
 An owned utility process contains blocking Steam calls and stops on app shutdown. Failed sends retire both request and timeout. Steam teardown has one shared completion, immediately revokes overlay callbacks, and continues independent cleanup/metadata draining if native cleanup throws.
 
 [Steam](../desktop/steam.cjs) pins an account and isolates its local profile. A new Steam profile may adopt valid standalone progress while preserving the original. Account changes reject transport and require restart. Without a client, ordinary launch continues the last local Steam profile offline; isolated automation ignores that pointer. A newly identified account always selects its own directory. Browser, preview, smoke and performance profiles never access live Steam. Fauna's [App ID](../desktop/steam-config.json) defaults to null; live setup and qualification belong to [Release](RELEASE.md#steam-qualification).
@@ -100,6 +74,38 @@ An owned utility process contains blocking Steam calls and stops on app shutdown
 Overlay activation synchronously revokes commands, cancels targeting/Auto-play and opens Pause; closing it does not resume. Display, sound and other device preferences remain separate from progression and Cloud; native display preferences use the profile’s `display.json`. [Display](../desktop/display.cjs) owns reachable native bounds and Windowed/Fullscreen through validated preload capabilities; automation uses isolated geometry.
 
 The packaged renderer uses `fauna://app/` confined to `dist/`, rejecting foreign authorities, traversal, symlink escapes and writes. Permission requests/checks deny access. Production CSP denies network connections; development permits loopback HMR only. File-protocol privileges and Node inspection are disabled. [Package integrity](RELEASE.md#packaged-integrity) checks actual executable fuses and browser snapshots before renderer smoke.
+
+## Implementation reference
+
+### Gameplay owners
+
+| Contract                                        | Owner                                                                                                             |
+| ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| State shape and derived types                   | [state-schema.ts](../src/game/state-schema.ts), [types.ts](../src/game/types.ts)                                  |
+| Command admission and transaction               | [command-phases.ts](../src/game/command-phases.ts), [engine.ts](../src/game/engine.ts)                            |
+| Encounter preparation, setup and settlement     | [journey.ts](../src/game/journey.ts), [encounters.ts](../src/game/encounters.ts)                                  |
+| Creature identity, card ownership and formation | [team.ts](../src/game/team.ts)                                                                                    |
+| Draw, discard and FIFO overflow                 | [card-zones.ts](../src/game/card-zones.ts)                                                                        |
+| Shared player, preview and enemy execution      | [combat/abilities.ts](../src/game/combat/abilities.ts), [ability-values.ts](../src/game/combat/ability-values.ts) |
+| Turn scheduling and Legendary decisions         | [turns.ts](../src/game/combat/turns.ts), [legendary.ts](../src/game/combat/legendary.ts)                          |
+| Recovery, affordability and Recruit eligibility | [destinations.ts](../src/game/destinations.ts)                                                                    |
+| Catalogs, effect descriptions and progression   | [Content](CONTENT.md), [Keywords](KEYWORDS.md)                                                                    |
+
+Preserve independently authored species, card and talent order: seeded selection consumes them. Stable definition IDs differ from journey creature IDs and card-instance slot IDs. Duplicate species remain separate individuals. Formation changes must preserve the distinct [replacement and swap rules](EXPEDITION_DESIGN.md#roster-and-battles), including Legendary kit sizes and [generated copies](content/creatures/rookhaven.md).
+
+### Presentation owners
+
+The shell [navigation reducer](../src/ui/shell/navigation.ts) owns page and overlay transitions and supplies one active-surface priority for rendering, input, effects and Auto-play. Its [focus adapter](../src/ui/shell/focus.ts) owns DOM references and semantic menu-action restoration.
+
+[App](../src/ui/App.tsx) mounts the tooltip provider and [game shell](../src/ui/shell/game-shell.tsx). The shell alone owns transient navigation, command callbacks and modal focus restoration. Its [input router](../src/ui/shell/input.ts) receives state/callbacks; controlled [overlays](../src/ui/shell/overlays.tsx) render without acquiring navigation ownership. Extracted content receives data and callbacks.
+
+Feature folders own their layouts; `shared/` owns reusable cards, combat readouts, rewards, navigation and effects. Shared presentation may consume gameplay queries and infrastructure, but cannot import UI feature folders. [Inspection requests](../src/ui/shared/inspection-model.ts) remain independent of the inspection feature. Registered controls, React infrastructure and dependency-light utilities have the lower-level boundaries described in the [design-system map](DESIGN_SYSTEM.md).
+
+`src/ui/styles.css` owns stylesheet order. Preserve shared declarations and repeated-selector order when moving CSS; unchanged declarations alone do not prove rendering parity. Result presentation shares one completion context so input and reduced motion finish the same animation from any consumer.
+
+### Save validation details
+
+[Save validation](../src/game/save.ts) checks content IDs, individual/card ownership, unique zones, Health bounds, formation limits, saved enemy packs with exact initial Health/room power, and phase/outcome coherence. Support visits validate stock, price bounds, visit/slot identities and purchase receipts with their phases. It validates FIFO overflow and rejects a waiting buffer alongside an unfilled hand. Generated copies require distinct IDs, valid battle ownership and complete permanent kits. Discovery rejects duplicates, unknown species, recruitment without encounter records, roster species absent from Collection, and invalid starter offers/selections. Optional Recruit destinations admit only ordinary creatures. [Content validation](../src/game/content-validation.ts) is a separate startup/authoring boundary.
 
 ## Discovery and diagnostics
 

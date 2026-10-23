@@ -1,8 +1,12 @@
 # Phone design decisions
 
-This preserves the original October 20 choices. Later decisions in the canonical [UI rules](../Docs/UI.md) supersede panel scrolling/scrollbars, visible failure/Retry and Cloud status, Health totals in tooltips, first-page resets for Collection filters, and the original combat-number timing. Current Collection filters remember their page anchors; technical recovery is silent. Use the [shared design system](../Docs/DESIGN_SYSTEM.md) for current implementation ownership. Historical choices below do not override those contracts.
+> **Status/source:** historical text choices, 2026-10-20; supplements the interactive studies
+>
+> **Current owners:** [UI contracts](../Docs/UI.md), [implementation map](../Docs/DESIGN_SYSTEM.md) and [rendered review](../Docs/UI.md#required-review)
+>
+> **Evidence:** phone/text review without HTML or screenshots; approved choices were adopted, while complete rendered/context acceptance and fine visual review remained pending
 
-User choices from the text review on 2026-10-20. These supplement the earlier interactive studies. Approved interaction decisions are now adopted through the [shared design system](../Docs/DESIGN_SYSTEM.md); complete rendered/context acceptance remains pending. The phone review used short text choices without requiring HTML or screenshots. Current review follows [UI](../Docs/UI.md#required-review).
+Later UI contracts supersede the original panel scrolling/scrollbars, visible failure/Retry and Cloud status, Health totals in tooltips, Collection filter resets and combat-number timing. Collection now remembers page anchors and technical recovery is automatic. The decisions below retain their original scope.
 
 ## Tabs
 
