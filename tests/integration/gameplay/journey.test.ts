@@ -241,7 +241,7 @@ describe("journey earnings and results", () => {
 
 it("diagnoses a representative journey seed after catalog changes", () => {
   const observations = [];
-  for (const seed of [7, 22, 42, 98, 3, 10, 12, 13]) {
+  for (const seed of Array.from({ length: 200 }, (_, index) => index)) {
     const initial = createGame(seed);
     let game = accept(accept(initial, { type: "draft", species: initial.starterOffers[0]! }), {
       type: "start",
@@ -278,7 +278,7 @@ it("diagnoses a representative journey seed after catalog changes", () => {
     if (game.phase === "victory" && deployedThree && result.roster === 5) break;
   }
   console.info("JOURNEY_FIXTURE_DIAGNOSTIC", JSON.stringify(observations));
-}, 20000);
+}, 120000);
 
 it("deterministically replays the complete one-starter journey through the final boss within the browser budget", () => {
   const actor = createBattleActor();

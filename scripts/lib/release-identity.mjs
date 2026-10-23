@@ -22,6 +22,8 @@ export function releaseVersion(root, tag) {
 export function buildIdentity(root) {
   const changes = git(root, ["status", "--porcelain", "--untracked-files=all"]).trim();
   if (changes) console.warn(`Build checkout changes:\n${changes}`);
+  if (process.env.VERCEL === "1" && changes.includes("vercel.json"))
+    console.warn(git(root, ["diff", "--", "vercel.json"]));
   return {
     format: 1,
     name: "fauna",
