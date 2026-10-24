@@ -159,6 +159,8 @@ Feature folders own their layouts; `shared/` owns reusable cards, combat readout
 
 ## Plans and history
 
+The proposed [startup simplification](STARTUP_SIMPLIFICATION_PLAN.md) removes repeated validation of immutable bundled content and adds an explicit terminal outcome through the existing splash owner.
+
 The [combat and interaction implementation](COMPLEXITY_REDUCTION_PLAN.md) records the completed damage, status, targeting and Auto-play simplification and links its assessment and evidence.
 
 The [simplification implementation record](archive/SIMPLIFICATION_IMPLEMENTATION.md) documents the six changes and links the approved assessment, verification boundaries and retained evidence. Historical records retain [lifecycle](archive/GAME_STATE_PLAN.md), [ability resolution](archive/COMBAT_RESOLUTION_PLAN.md) and [reaction ordering](archive/COMBAT_REACTIONS_PLAN.md) decisions and their original verification scope.
