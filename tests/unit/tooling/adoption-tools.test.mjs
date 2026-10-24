@@ -141,8 +141,10 @@ it("pairs matched samples, reports uncertainty and refuses incomplete or mismatc
 });
 it("rejects empty performance segments and incompatible replays", () => {
   const sample = {
-    frames: Array(80).fill(16.7),
-    segments: [{ complete: true, duration: 1400, frames: 80 }],
+    frames: Array.from({ length: 80 }, (_, i) => ({ start: i * 16.7, end: (i + 1) * 16.7, duration: 16.7 })),
+    focused: true,
+    visibility: "visible",
+    segments: [{ complete: true, start: 0, end: 1400, duration: 1400, frames: 80 }],
     longTasks: null,
     input: null,
   };
@@ -152,7 +154,7 @@ it("rejects empty performance segments and incompatible replays", () => {
     summarizeSample({ ...sample, segments: [{ complete: true, duration: 10, frames: 0 }] }),
   ).toThrow();
   const report = {
-    format: 2,
+    format: 3,
     complete: true,
     environment: { viewport: 1280 },
     cases: [{ id: "battle", checkpointHash: "a", actionHash: "b", fixture: "v1", sample }],

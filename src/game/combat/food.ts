@@ -13,7 +13,8 @@ export function createFood(state: BattleState, actor: Creature, count: number, e
     state.cards.length < MAX_BATTLE_CARDS &&
     state.battle.copySerial < Number.MAX_SAFE_INTEGER
   ) {
-    const def = FOOD_CARDS[Math.floor(roll(state) * FOOD_CARDS.length)]!;
+    const def =
+      FOOD_CARDS[Math.floor(roll(state, { kind: "index", size: FOOD_CARDS.length }) * FOOD_CARDS.length)]!;
     const card = {
       id: `copy-${state.battle.copySerial++}`,
       definitionId: def.id,

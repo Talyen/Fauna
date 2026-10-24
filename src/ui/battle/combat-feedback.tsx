@@ -1,3 +1,4 @@
+import { startPerformanceSpan, measurePerformance, type SpanEnd } from "../../lib/performance";
 import { motionValue } from "../shared/motion-values";
 import type { SoundCue } from "../audio/audio-runtime";
 import { useEffect, useState, useRef, useCallback, type RefObject } from "react";
@@ -51,7 +52,10 @@ export function useCombatFeedback(
       };
     };
     const pending = new Map<ReturnType<typeof setTimeout>, () => void>();
+    let endSequence: SpanEnd = () => {};
     const cancelPending = (reveal = false) => {
+      endSequence("interrupted");
+      endSequence = () => {};
       pending.forEach((numbers, timer) => {
         clearTimeout(timer);
         if (reveal) numbers();
@@ -78,7 +82,11 @@ export function useCombatFeedback(
 
         return;
       }
-      feedbackFrames(current.events).forEach((events, index) => {
+      const frames = measurePerformance("feedback-adaptation", () => feedbackFrames(current.events), {
+        revision: current.game.revision,
+      });
+      endSequence = startPerformanceSpan("feedback-dispatch-sequence", { revision: current.game.revision });
+      frames.forEach((events, index) => {
         const numbers = () => {
           setBursts((items) =>
             appendFeedback(
@@ -92,10 +100,13 @@ export function useCombatFeedback(
         };
         const show = () => {
           numbers();
-          impacts.present(events);
+          measurePerformance("feedback-presentation", () => impacts.present(events), {
+            revision: current.game.revision,
+          });
           const cue = selectCombatCue(events);
           if (cue) playSound(cue);
           else if (events.some((event) => event.kind === "knockout")) playSound("knockout");
+          if (index === frames.length - 1) endSequence();
         };
         if (index === 0 || motion?.matches) show();
         else {
@@ -109,6 +120,7 @@ export function useCombatFeedback(
           pending.set(timer, numbers);
         }
       });
+      if (!frames.length) endSequence();
     });
     const interval = setInterval(
       () =>

@@ -154,7 +154,7 @@ export function* damageRewards(
       state.boons.includes("brass-censer") &&
       succeeds(state, 0.2, false, events)
     ) {
-      if (roll(state) < 0.5)
+      if (roll(state, { kind: "chance", threshold: 0.5 }) < 0.5)
         yield* reaction("hit", state, source, target, damage, "burn", events, { origin: "proc" });
       else yield* reaction("leechHealth", state, source, lost, events, stats.poison > 0 || stats.bleed > 0);
     }

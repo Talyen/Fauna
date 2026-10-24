@@ -1,3 +1,4 @@
+import { startPerformanceSpan, measurePerformance, type SpanEnd } from "../../lib/performance";
 import { motionValue } from "../shared/motion-values";
 import { Component, createRef, type ReactNode } from "react";
 import { assetUrl } from "../shared/assets";
@@ -55,44 +56,51 @@ export class HandMotion extends Component<Props> {
   private frame = 0;
   private reduced: MediaQueryList | undefined;
   private disposed = false;
+  private endMotion: SpanEnd = () => {};
   private measure(): Snapshot {
-    return new Map(
-      Array.from(this.root.current?.querySelectorAll<HTMLElement>(".hand [data-card-id]") ?? []).map(
-        (node) => {
-          const slot = node.closest<HTMLElement>(".hand-slot");
-          const transform = slot ? getComputedStyle(slot).transform : "none";
-          const matrix =
-            !transform || transform === "none" || typeof DOMMatrixReadOnly === "undefined"
-              ? null
-              : new DOMMatrixReadOnly(transform);
-          const ownTransform = getComputedStyle(node).transform;
-          const own =
-            !ownTransform || ownTransform === "none" || typeof DOMMatrixReadOnly === "undefined"
-              ? null
-              : new DOMMatrixReadOnly(ownTransform);
-          const scale = Number.parseFloat(getComputedStyle(node).scale) || 1;
-          const reflow = slot?.querySelector<HTMLElement>(".hand-reflow");
-          const reflowAngle = reflow ? Number.parseFloat(getComputedStyle(reflow).rotate) || 0 : 0;
-          return [
-            node.dataset.cardId!,
-            {
-              node,
-              clone: visualClone(node),
-              rect: node.getBoundingClientRect(),
-              angle:
-                (((matrix ? Math.atan2(matrix.b, matrix.a) : 0) + (own ? Math.atan2(own.b, own.a) : 0)) *
-                  180) /
-                  Math.PI +
-                reflowAngle,
-              width: node.offsetWidth * scale || node.getBoundingClientRect().width,
-              height: node.offsetHeight * scale || node.getBoundingClientRect().height,
+    return measurePerformance(
+      "hand-geometry",
+      () =>
+        new Map(
+          Array.from(this.root.current?.querySelectorAll<HTMLElement>(".hand [data-card-id]") ?? []).map(
+            (node) => {
+              const slot = node.closest<HTMLElement>(".hand-slot");
+              const transform = slot ? getComputedStyle(slot).transform : "none";
+              const matrix =
+                !transform || transform === "none" || typeof DOMMatrixReadOnly === "undefined"
+                  ? null
+                  : new DOMMatrixReadOnly(transform);
+              const ownTransform = getComputedStyle(node).transform;
+              const own =
+                !ownTransform || ownTransform === "none" || typeof DOMMatrixReadOnly === "undefined"
+                  ? null
+                  : new DOMMatrixReadOnly(ownTransform);
+              const scale = Number.parseFloat(getComputedStyle(node).scale) || 1;
+              const reflow = slot?.querySelector<HTMLElement>(".hand-reflow");
+              const reflowAngle = reflow ? Number.parseFloat(getComputedStyle(reflow).rotate) || 0 : 0;
+              return [
+                node.dataset.cardId!,
+                {
+                  node,
+                  clone: visualClone(node),
+                  rect: node.getBoundingClientRect(),
+                  angle:
+                    (((matrix ? Math.atan2(matrix.b, matrix.a) : 0) + (own ? Math.atan2(own.b, own.a) : 0)) *
+                      180) /
+                      Math.PI +
+                    reflowAngle,
+                  width: node.offsetWidth * scale || node.getBoundingClientRect().width,
+                  height: node.offsetHeight * scale || node.getBoundingClientRect().height,
+                },
+              ];
             },
-          ];
-        },
-      ),
+          ),
+        ),
     );
   }
-  private finish = () => {
+  private finish = (event: Event | boolean = false) => {
+    this.endMotion(event ? "interrupted" : "complete");
+    this.endMotion = () => {};
     cancelAnimationFrame(this.frame);
     this.animations.forEach((a) => a.cancel());
     this.animations.clear();
@@ -102,7 +110,7 @@ export class HandMotion extends Component<Props> {
     this.hidden.clear();
   };
   private motionChange = () => {
-    if (this.reduced?.matches) this.finish();
+    if (this.reduced?.matches) this.finish(true);
   };
   componentDidMount() {
     this.disposed = false;
@@ -117,17 +125,18 @@ export class HandMotion extends Component<Props> {
   }
   componentDidUpdate(previous: Readonly<Props>, _: unknown, before: Snapshot) {
     if (previous.revision === this.props.revision) {
-      if (this.props.paused) this.finish();
+      if (this.props.paused) this.finish(true);
       return;
     }
     this.present(before, previous.turn !== this.props.turn);
   }
   private present(before: Snapshot, newTurn = false) {
-    this.finish();
+    this.finish(true);
     const after = this.measure();
     if (this.disposed || this.props.paused || this.reduced?.matches) return;
     const board = this.root.current?.closest(".battle-screen");
     if (!board) return;
+    this.endMotion = startPerformanceSpan("hand-motion", { revision: this.props.revision });
     const removed = [...before].filter(([id]) => newTurn || !after.has(id)).reverse();
     const added = [...after].filter(([id]) => newTurn || !before.has(id));
     for (const [id, pose] of after) {
@@ -229,7 +238,7 @@ export class HandMotion extends Component<Props> {
           p = 1 - (1 - t) ** 3;
         const destination = destinations[index];
         if (!destination) {
-          this.finish();
+          this.finish(true);
           return;
         }
         const { end, width: endWidth, height: endHeight } = destination;
@@ -275,7 +284,7 @@ export class HandMotion extends Component<Props> {
   }
   componentWillUnmount() {
     this.disposed = true;
-    this.finish();
+    this.finish(true);
     this.reduced?.removeEventListener?.("change", this.motionChange);
     for (const type of ["pointerdown", "keydown", "click", "resize", "blur"])
       window.removeEventListener(type, this.finish, true);

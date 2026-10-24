@@ -1,12 +1,12 @@
 # Performance hitch attribution plan
 
-Status: proposed; this document does not implement instrumentation or establish a performance baseline
+Status: implemented; focused regressions and rendered preview evidence are recorded below; full CI and native/performance captures remain pending
 
 ## Goal and scope
 
 Turn an observation such as “the battle had three frame gaps over 50 ms” into a reproducible explanation: which action was active, which application or presentation work overlapped the gap, what the browser recorded, and what remains unexplained.
 
-Extend the existing harness rather than introducing another runner. Preserve gameplay, seeded outcomes, command/save ordering, audio, animation timing and visual quality. Keep `npm run perf`, `perf:replay` and `perf:compare` as the entrypoints. This plan does not implement uncertainty-aware previews or optimize suspected bottlenecks before measurement.
+Extend the existing harness rather than introducing another runner. Preserve gameplay, seeded outcomes, command/save ordering, audio, animation timing and visual quality. Keep `npm run perf`, `perf:replay` and `perf:compare` as the entrypoints. The accompanying change implements uncertainty-aware previews through the authoritative resolver; this instrumentation does not claim an optimization or a measured baseline.
 
 [Development tools](DEVELOPMENT_TOOLS.md#reproducible-performance-captures) owns current capture behavior and [Contributing](../CONTRIBUTING.md#execution-and-evidence) owns execution permissions. `Alchemy: Docs/PERFORMANCE.md` is a sibling reference for phase correlation and trace analysis, not a runtime dependency.
 
@@ -101,7 +101,7 @@ Acceptance: replay preserves every state/checkpoint invariant while retaining in
 5. Extend the weekly/manual workflow to upload summaries, raw timelines and optional trace evidence even on failure; keep expensive tracing manual initially and preserve the existing compiler comparison
 6. Measure recording overhead with equivalent controls, fixed inputs and the same runner; record the recorder version/settings and publish overhead separately from optimization results
 
-Routine local completion uses the repository's lightweight gate. No new tests are needed for this plan-only change. Future implementation starts with one exact focused regression within the local budget; builds, browser/Electron captures, broader suites and performance trials belong in hosted CI unless explicitly authorized for local execution. Follow the shared Mac resource lane for authorized heavy work.
+Routine local completion uses the repository's lightweight gate. Future implementation starts with one exact focused regression within the local budget; builds, browser/Electron captures, broader suites and performance trials belong in hosted CI unless explicitly authorized for local execution. Follow the shared Mac resource lane for authorized heavy work.
 
 ## Completion criteria and delivery order
 
@@ -110,3 +110,13 @@ Land timeline/schema support first, semantic spans second, hitch summaries/Long 
 The extension is complete when a selected hitch can be opened from a summary, tied to replayable input and a valid checkpoint, inspected against its semantic timeline, and investigated with supported browser/trace attribution or an explicit explanation of unavailable evidence. Correctness and capture completeness are gates; timing targets remain advisory until repeated observations justify a separate policy change.
 
 Report Chromium, unpackaged Electron, packaged Windows, physical controller, Steam client and Steam Deck evidence separately. Browser rAF timing measures renderer cadence, not hardware GPU presentation. Hosted-runner timing does not establish desktop/Deck smoothness, and instrumentation alone does not prove a performance improvement.
+
+## Implementation and verification record
+
+All six delivery areas have source implementations: format-3 frame/segment timelines and bounded observers; failure-isolated semantic spans; linked hitch summaries and Long Animation Frames; opt-in CDP traces with exclusive accounting; preview, reaction and repeat/overflow fixtures; and hosted diagnostic/overhead coverage with optional manual traces. Source owners remain linked above. The initial startup-hitch extension remains deliberately deferred as specified in stage 5.
+
+The preview change explores at most 128 replays, 64 pending/completed alternatives, 64 branching decisions per replay and 4,096 combat scheduler steps. It retains complete correlated worlds only while projecting, caches twelve presentation models per immutable snapshot, and does not change saved state, format or live RNG ordering. Hidden draws, unclassified random sampling and exhausted budgets retain authored rules with an unresolved readout.
+
+Local focused regression coverage lives in [uncertain-preview-attribution.test.tsx](../tests/unit/ui/uncertain-preview-attribution.test.tsx). It covers seed-independent projection, Dodge/retaliation correlation, conditional knockouts, hidden/bounded fallback, recorder failure isolation, reentrant save ordering, fixture replay, timestamp correlation, incompatible comparisons and exclusive trace accounting.
+
+Focused rendered evidence and interaction checks are retained under task-owned ignored reports; the [task evidence](task-evidence/2026-10-23-uncertainty-and-attribution.md) records paths and conditions. Broader unit/type/build validation, real performance/overhead measurements, CDP runtime captures and native/device qualification remain separate pending gates; synthetic unit traces do not establish native trace support or frame pacing.

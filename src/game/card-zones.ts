@@ -2,7 +2,7 @@ import { drawableOwnerIds } from "./card-actors";
 import { definition, species } from "./content";
 import type { BattleState, GameEvent, GameState } from "./types";
 import { chance as succeeds } from "./chance";
-import { shuffle } from "./random";
+import { shuffle, hiddenDecision } from "./random";
 import { cardKeywords, creaturePassive } from "./progression";
 
 export const MAX_HAND_SIZE = 6;
@@ -81,6 +81,7 @@ function lastEligibleIndex(ids: readonly string[], eligible: (id: string) => boo
 }
 
 export function draw(state: GameState, count: number, events: GameEvent[] = []) {
+  if (count > 0) hiddenDecision(state);
   fillHand(state);
   const b = state.battle!;
   recycleDiscard(state);

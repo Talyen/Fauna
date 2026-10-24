@@ -1,3 +1,4 @@
+import { measurePerformance, startPerformanceSpan } from "../../lib/performance";
 import { EffectScope, EffectsScene } from "../shared/effects/effects";
 import { useDevicePreferences } from "../settings/preferences";
 import { bossEncounter } from "../../game/encounters";
@@ -54,7 +55,11 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
   const [preferences, updatePreferences] = useDevicePreferences();
   const { audio, autoEndTurn, controller } = preferences;
   const [draftStarted, setDraftStarted] = useState(false);
-  const [navigationState, transition] = useReducer(shellNavigation, initialNavigation);
+  const [navigationState, transition] = useReducer(
+    (state: Parameters<typeof shellNavigation>[0], action: Parameters<typeof shellNavigation>[1]) =>
+      measurePerformance("navigation-intent", () => shellNavigation(state, action), { action: action.type }),
+    initialNavigation,
+  );
   const { route } = navigationState.page;
   const { menuInstance, modalInstance } = navigationState;
   const menuGeneration = useRef(0);
@@ -74,6 +79,13 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
   const replacement = pendingReplacement(game);
   const surface = activeSurface(navigationState, !!replacement, view.overlayActive || view.cloud.blocking);
   const { modal, menu, inspection, paused } = surface;
+  useEffect(() => {
+    startPerformanceSpan("surface-committed", {
+      route,
+      modal: String(modal ?? "none"),
+      revision: game.revision,
+    })();
+  }, [route, modal, game.revision]);
   const focus = useShellFocus({
     root,
     route,

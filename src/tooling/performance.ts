@@ -3,10 +3,11 @@ import { CARDS, species, type SpeciesId, definition } from "../game/content";
 import { freshCombat } from "../game/combat/index";
 import { encodeSave, decodeSave } from "../game/save";
 import { createBattleActor } from "../application/battle-actor";
+import { ownedCards } from "../game/team";
 import { battleChoices } from "../application/battle-policy";
 import type { Command, GameState } from "../game/types";
 
-export function performanceCases(seed = 42) {
+export function performanceCases(seed = 42, diagnostic = false) {
   const fixture = structuredClone(createGame(seed));
   const kinds: SpeciesId[] = ["mossguard", "emberback", "prismram", "pollenmoth"];
 
@@ -69,7 +70,24 @@ export function performanceCases(seed = 42) {
   const played = step(started.state, attack);
   const knockedOut = structuredClone(started.state);
   knockedOut.team[0]!.health = 0;
+  const previewActions = [
+    { kind: "select", cardId: attack.cardId, checkpoint: initial },
+    { kind: "target", targetId: attack.targetId, checkpoint: initial },
+    { kind: "targetKey", key: "d", checkpoint: initial },
+    { kind: "cancel", checkpoint: initial },
+  ];
+  if (diagnostic)
+    return [
+      {
+        id: "diagnostic-stall",
+        initial,
+        fixture: "synthetic-stall-v1",
+        actions: [{ kind: "stall", checkpoint: initial }],
+      },
+    ];
   return [
+    { id: "preview", initial, fixture: "target-preview-v1", actions: previewActions },
+    ...workloadCases(initial),
     {
       id: "battle",
       initial,
@@ -160,6 +178,62 @@ export async function reachablePerformanceCases(seed = 42) {
       inventory,
       journey,
       actions,
+    };
+  });
+}
+
+/** Explicit stress fixtures remain separate from earned reachable-journey evidence. */
+function workloadCases(initial: string) {
+  return ["area-reactions", "draw-repeat"].map((id) => {
+    const state = structuredClone(decodeSave(initial));
+    const first = state.team[0]!;
+    if (id === "draw-repeat") {
+      first.species = "chimecricket";
+      first.health = species("chimecricket").health;
+      first.block = 0;
+      first.combat = freshCombat();
+      state.discovery.encountered.push("chimecricket");
+      state.discovery.recruited.chimecricket = 6;
+      state.cards = state.team.flatMap((unit) => ownedCards(unit.id, unit.species));
+      state.rng = 1;
+    } else {
+      for (const enemy of state.battle!.enemies) enemy.combat.reflect = true;
+    }
+    const card = state.cards.find(
+      (entry) =>
+        definition(entry.definitionId).name === (id === "draw-repeat" ? "Resonant Leap" : "Magma Stomp"),
+    )!;
+    const rest = state.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+    state.battle!.hand = [card.id, ...rest.splice(0, 5)];
+    state.battle!.buffer = rest.splice(0, 2);
+    state.battle!.draw = rest;
+    state.battle!.discard = [];
+    const command = {
+      type: "play" as const,
+      cardId: card.id,
+      ...(id === "draw-repeat" ? { targetId: "enemy-0" } : {}),
+      autoEndTurn: false,
+    };
+    const checkpoint = encodeSave(decodeSave(encodeSave(state)));
+    const result = dispatch(decodeSave(checkpoint), command);
+    if (!result.accepted) throw new Error(result.reason);
+    if (
+      id === "draw-repeat" &&
+      !result.events.some((event) => event.kind === "action" && event.text.includes("repeats"))
+    )
+      throw new Error("Repeat fixture did not exercise repeat feedback");
+    return {
+      id,
+      fixture: "explicit-reactions-overflow-v1",
+      initial: checkpoint,
+      inventory: {
+        roster: state.team.map((unit) => unit.species),
+        talents: state.talents,
+        boons: state.boons,
+        hand: state.battle!.hand.length,
+        overflow: state.battle!.buffer.length,
+      },
+      actions: [{ kind: "play", command, checkpoint: encodeSave(decodeSave(encodeSave(result.state))) }],
     };
   });
 }

@@ -74,7 +74,8 @@ function recoverDiscard(state: GameState, events: GameEvent[]) {
     return card.ownerId === null || drawableOwnerIds(state).has(card.ownerId);
   });
   if (!available.length) return;
-  const id = available[Math.floor(roll(state) * available.length)]!;
+  const id =
+    available[Math.floor(roll(state, { kind: "index", size: available.length }) * available.length)]!;
   battle.discard.splice(battle.discard.indexOf(id), 1);
   fillHand(state);
   (battle.hand.length < MAX_HAND_SIZE ? battle.hand : battle.buffer).push(id);
@@ -107,7 +108,7 @@ function teamProtection(
   events: GameEvent[],
   power: number,
 ) {
-  const block = roll(state) < 0.5;
+  const block = roll(state, { kind: "chance", threshold: 0.5 }) < 0.5;
   for (const unit of battlefield(state, enemy ? "enemy" : "player")) {
     if (unit.health <= 0) continue;
     if (block) grantBlock(state, unit, scalePower(amount, power), events);
@@ -249,7 +250,7 @@ export function executeAbility(
   // Select once for the whole ability, including repeats. Group targets are read again per resolution.
   const target =
     def.effect === "attack" && def.target === "randomEnemy"
-      ? opponents[Math.floor(roll(state) * opponents.length)]
+      ? opponents[Math.floor(roll(state, { kind: "index", size: opponents.length }) * opponents.length)]
       : def.effect === "attack" && def.target === "allEnemies"
         ? undefined
         : opponents.find((unit) => unit.id === action.targetId);
@@ -332,14 +333,17 @@ export function executeAbility(
         createPearls(state, actor, action.side, value, events);
         break;
       case "pearl":
-        if (roll(state) < 0.5) grantBlock(state, actor, scalePower(value, power), events);
+        if (roll(state, { kind: "chance", threshold: 0.5 }) < 0.5)
+          grantBlock(state, actor, scalePower(value, power), events);
         else if (action.side === "enemy" && action.actor.deck)
           action.actor.deck.mana = Math.min(4, action.actor.deck.mana + value);
         else gainMana(state, value, events);
         break;
       case "attack": {
         const damageType =
-          def.alternateDamageType && roll(state) < 0.5 ? def.alternateDamageType : def.damageType;
+          def.alternateDamageType && roll(state, { kind: "chance", threshold: 0.5 }) < 0.5
+            ? def.alternateDamageType
+            : def.damageType;
         const targets =
           def.target === "allEnemies"
             ? alive(opposingRow(state, action))

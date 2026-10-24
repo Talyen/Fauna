@@ -6,6 +6,7 @@ import { createGame, dispatch } from "../game/engine";
 import { decodeSave, encodeSave } from "../game/save";
 import type { Command, GameEvent, GameState } from "../game/types";
 import type { Platform } from "../platform/ports";
+import { startPerformanceSpan, type PerformanceRecorder } from "../lib/performance";
 export interface SessionView {
   game: GameState;
   cloud: CloudView;
@@ -19,7 +20,13 @@ export interface SessionView {
   events: GameEvent[];
   committedCommand: Command | null;
 }
-export function createSession(platform: Platform, seed = 1, capabilities: { development?: boolean } = {}) {
+export function createSession(
+  platform: Platform,
+  seed = 1,
+  capabilities: { development?: boolean; performance?: PerformanceRecorder } = {},
+) {
+  const span = (name: string, revision: number) =>
+    startPerformanceSpan(name, { revision }, capabilities.performance ?? (() => undefined));
   const development = capabilities.development === true;
   const diagnostics = createDiagnostics(platform.diagnostics);
   const store = createStore<SessionView>(() =>
@@ -41,8 +48,13 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
     ),
   );
   const publish = (patch: Partial<SessionView>) => {
+    const end = span("state-publication", patch.game?.revision ?? store.getState().game.revision);
     // Replace the complete view so Zustand does not merge into a mutable snapshot.
-    store.setState(freeze({ ...store.getState(), ...patch }, true), true);
+    try {
+      store.setState(freeze({ ...store.getState(), ...patch }, true), true);
+    } finally {
+      end();
+    }
   };
   let writes = Promise.resolve();
   let disposed = false;
@@ -129,9 +141,26 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
     if (!disposed) publish({ overlayActive });
   });
   const save = (game: GameState, committed: Partial<SessionView> = {}) => {
-    const data = encodeSave(game);
+    const encoded = span("save-encoding", game.revision);
+    let data: string;
+    try {
+      data = encodeSave(game);
+    } finally {
+      encoded();
+    }
+    const queued = span("save-queue-wait", game.revision);
     writes = writes
-      .then(() => writeLocal(data))
+      .then(async () => {
+        queued();
+        const written = span("save-write-wait", game.revision);
+        try {
+          await writeLocal(data);
+          written();
+        } catch (error) {
+          written("failed");
+          throw error;
+        }
+      })
       .then(() => {
         saveFailures = 0;
         if (!disposed && store.getState().game.revision === game.revision) {
@@ -251,7 +280,19 @@ export function createSession(platform: Platform, seed = 1, capabilities: { deve
     command(command: Command) {
       const view = store.getState();
       if (disposed || view.closing || view.overlayActive || view.cloud.blocking || !view.ready) return false;
-      const result = dispatch(view.game, command, development);
+      const end = startPerformanceSpan(
+        "command-resolution",
+        { command: command.type, revision: view.game.revision },
+        capabilities.performance ?? (() => undefined),
+      );
+      let result: ReturnType<typeof dispatch>;
+      try {
+        result = dispatch(view.game, command, development);
+        end();
+      } catch (error) {
+        end("failed");
+        throw error;
+      }
       if (!result.accepted) {
         publish({ error: result.reason }); // Internal command diagnostics only.
         return false;
