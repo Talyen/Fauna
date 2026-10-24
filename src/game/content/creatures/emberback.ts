@@ -1,3 +1,4 @@
+import { sixPassiveTiers } from "../passive-tiers";
 import { attack } from "../card-builders";
 import type { CreatureKit } from "../types";
 export const emberback: CreatureKit = {
@@ -8,32 +9,10 @@ export const emberback: CreatureKit = {
     health: 30,
     color: "#ed9c65",
     trait: "Molten Shell",
-    passiveTiers: [
-      {
-        description: "When your Armor breaks, deal 1 Burn damage to all enemies",
-        effects: [{ kind: "armorBreak", amount: 1 }],
-      },
-      {
-        description: "When your Armor breaks, deal 2 Burn damage to all enemies",
-        effects: [{ kind: "armorBreak", amount: 2 }],
-      },
-      {
-        description: "When your Armor breaks, deal 3 Burn damage to all enemies",
-        effects: [{ kind: "armorBreak", amount: 3 }],
-      },
-      {
-        description: "When your Armor breaks, deal 4 Burn damage to all enemies",
-        effects: [{ kind: "armorBreak", amount: 4 }],
-      },
-      {
-        description: "When your Armor breaks, deal 5 Burn damage to all enemies",
-        effects: [{ kind: "armorBreak", amount: 5 }],
-      },
-      {
-        description: "When your Armor breaks, deal 6 Burn damage to all enemies",
-        effects: [{ kind: "armorBreak", amount: 6 }],
-      },
-    ],
+    passiveTiers: sixPassiveTiers([1, 2, 3, 4, 5, 6], (amount) => ({
+      description: `When your Armor breaks, deal ${amount} Burn damage to all enemies`,
+      effects: [{ kind: "armorBreak", amount }],
+    })),
   },
   cards: [
     {

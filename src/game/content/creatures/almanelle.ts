@@ -1,3 +1,4 @@
+import { sixPassiveTiers } from "../passive-tiers";
 import { attack, card } from "../card-builders";
 import type { CreatureKit } from "../types";
 
@@ -9,32 +10,11 @@ export const almanelle: CreatureKit = {
     health: 28,
     color: "#d99457",
     trait: "Fallen Leaves",
-    passiveTiers: [
-      {
-        description: "50% of decaying Block becomes Thorns",
-        effects: [{ kind: "fallenLeaves", amount: 50 }],
-      },
-      {
-        description: "60% of decaying Block becomes Thorns",
-        effects: [{ kind: "fallenLeaves", amount: 60 }],
-      },
-      {
-        description: "70% of decaying Block becomes Thorns",
-        effects: [{ kind: "fallenLeaves", amount: 70 }],
-      },
-      {
-        description: "80% of decaying Block becomes Thorns",
-        effects: [{ kind: "fallenLeaves", amount: 80 }],
-      },
-      {
-        description: "90% of decaying Block becomes Thorns",
-        effects: [{ kind: "fallenLeaves", amount: 90 }],
-      },
-      {
-        description: "Decaying Block becomes Thorns",
-        effects: [{ kind: "fallenLeaves", amount: 100 }],
-      },
-    ],
+    passiveTiers: sixPassiveTiers([50, 60, 70, 80, 90, 100], (amount) => ({
+      description:
+        amount === 100 ? "Decaying Block becomes Thorns" : `${amount}% of decaying Block becomes Thorns`,
+      effects: [{ kind: "fallenLeaves", amount }],
+    })),
   },
   cards: [
     {

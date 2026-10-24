@@ -1,3 +1,4 @@
+import { sixPassiveTiers } from "../passive-tiers";
 import { card, attack } from "../card-builders";
 import type { CreatureKit } from "../types";
 export const glintstride: CreatureKit = {
@@ -8,32 +9,10 @@ export const glintstride: CreatureKit = {
     health: 24,
     color: "#83c9ce",
     trait: "Wrong Foot",
-    passiveTiers: [
-      {
-        description: "Glintstride’s attacks deal 1 additional Light damage to Blinded enemies",
-        effects: [{ kind: "wrongFoot", amount: 1 }],
-      },
-      {
-        description: "Glintstride’s attacks deal 2 additional Light damage to Blinded enemies",
-        effects: [{ kind: "wrongFoot", amount: 2 }],
-      },
-      {
-        description: "Glintstride’s attacks deal 3 additional Light damage to Blinded enemies",
-        effects: [{ kind: "wrongFoot", amount: 3 }],
-      },
-      {
-        description: "Glintstride’s attacks deal 4 additional Light damage to Blinded enemies",
-        effects: [{ kind: "wrongFoot", amount: 4 }],
-      },
-      {
-        description: "Glintstride’s attacks deal 5 additional Light damage to Blinded enemies",
-        effects: [{ kind: "wrongFoot", amount: 5 }],
-      },
-      {
-        description: "Glintstride’s attacks deal 6 additional Light damage to Blinded enemies",
-        effects: [{ kind: "wrongFoot", amount: 6 }],
-      },
-    ],
+    passiveTiers: sixPassiveTiers([1, 2, 3, 4, 5, 6], (amount) => ({
+      description: `Glintstride’s attacks deal ${amount} additional Light damage to Blinded enemies`,
+      effects: [{ kind: "wrongFoot", amount }],
+    })),
   },
   cards: [
     {

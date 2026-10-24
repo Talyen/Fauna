@@ -1,3 +1,4 @@
+import { sixPassiveTiers } from "../passive-tiers";
 import { card, attack } from "../card-builders";
 import type { CreatureKit } from "../types";
 export const captoad: CreatureKit = {
@@ -8,32 +9,10 @@ export const captoad: CreatureKit = {
     health: 30,
     color: "#cb8051",
     trait: "Sporecoat",
-    passiveTiers: [
-      {
-        description: "Retaliate with 1 Poison damage when hit",
-        effects: [{ kind: "poisonRetaliation", amount: 1 }],
-      },
-      {
-        description: "Retaliate with 2 Poison damage when hit",
-        effects: [{ kind: "poisonRetaliation", amount: 2 }],
-      },
-      {
-        description: "Retaliate with 3 Poison damage when hit",
-        effects: [{ kind: "poisonRetaliation", amount: 3 }],
-      },
-      {
-        description: "Retaliate with 4 Poison damage when hit",
-        effects: [{ kind: "poisonRetaliation", amount: 4 }],
-      },
-      {
-        description: "Retaliate with 5 Poison damage when hit",
-        effects: [{ kind: "poisonRetaliation", amount: 5 }],
-      },
-      {
-        description: "Retaliate with 6 Poison damage when hit",
-        effects: [{ kind: "poisonRetaliation", amount: 6 }],
-      },
-    ],
+    passiveTiers: sixPassiveTiers([1, 2, 3, 4, 5, 6], (amount) => ({
+      description: `Retaliate with ${amount} Poison damage when hit`,
+      effects: [{ kind: "poisonRetaliation", amount }],
+    })),
   },
   cards: [
     {

@@ -101,6 +101,17 @@ Portraits are unchanged WebP selections copied from `Alchemy: src/assets/optimiz
 
 Each species defines six complete `passiveTiers`, indexed by zero through five stars. Every tier must differ in gameplay effects from every other tier: amounts, chances or mechanics may change; wording, property order and effect order alone do not qualify. Each tier replaces the entire previous passive, so retain all intended effects explicitly. Types require six entries and catalog validation rejects duplicate effect sets.
 
+When only an amount or chance changes, use [sixPassiveTiers](../src/game/content/passive-tiers.ts) with six explicit values and one builder for the complete tier:
+
+```ts
+passiveTiers: sixPassiveTiers([10, 20, 30, 40, 50, 60], (amount) => ({
+  description: `Retain ${amount}% more Block between turns`,
+  effects: [{ kind: "blockRetention", amount }],
+})),
+```
+
+The helper expands the progression into the same six plain tier objects before catalog publication. Keep uneven values explicit and preserve special descriptions at guaranteed chances. When mechanics change between ranks, keep the six authored tiers explicit, as in [Pollenmoth](../src/game/content/creatures/pollenmoth.ts). Each builder call must create its complete effects; tiers never inherit from previous ranks. The catalog owns freezing and validation for both forms.
+
 Favor species-exclusive mechanics independent of named abilities. Add new mechanics to the typed passive contract, execution, descriptions and focused regressions together. Player rules and previews use permanent rank; enemies use the base tier. [Journey progression](EXPEDITION_DESIGN.md#collection-and-passive-ranks) owns copy counts and ranks; [inspection](ui/screens.md#creature-and-action-inspection) owns disclosure.
 
 ## Shared Food cards

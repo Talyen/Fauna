@@ -1,3 +1,4 @@
+import { sixPassiveTiers } from "../passive-tiers";
 import { card, attack } from "../card-builders";
 import type { CreatureKit } from "../types";
 export const euphera: CreatureKit = {
@@ -8,32 +9,10 @@ export const euphera: CreatureKit = {
     health: 26,
     color: "#e7bd79",
     trait: "Good Fortune",
-    passiveTiers: [
-      {
-        description: "Failed allied chance effects have a 10% chance to reroll once",
-        effects: [{ kind: "goodFortune", amount: 10 }],
-      },
-      {
-        description: "Failed allied chance effects have a 20% chance to reroll once",
-        effects: [{ kind: "goodFortune", amount: 20 }],
-      },
-      {
-        description: "Failed allied chance effects have a 30% chance to reroll once",
-        effects: [{ kind: "goodFortune", amount: 30 }],
-      },
-      {
-        description: "Failed allied chance effects have a 40% chance to reroll once",
-        effects: [{ kind: "goodFortune", amount: 40 }],
-      },
-      {
-        description: "Failed allied chance effects have a 50% chance to reroll once",
-        effects: [{ kind: "goodFortune", amount: 50 }],
-      },
-      {
-        description: "Failed allied chance effects have a 60% chance to reroll once",
-        effects: [{ kind: "goodFortune", amount: 60 }],
-      },
-    ],
+    passiveTiers: sixPassiveTiers([10, 20, 30, 40, 50, 60], (amount) => ({
+      description: `Failed allied chance effects have a ${amount}% chance to reroll once`,
+      effects: [{ kind: "goodFortune", amount }],
+    })),
   },
   cards: [
     {

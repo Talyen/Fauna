@@ -1,3 +1,4 @@
+import { sixPassiveTiers } from "../passive-tiers";
 import { card, attack } from "../card-builders";
 import type { CreatureKit } from "../types";
 export const shadebrim: CreatureKit = {
@@ -8,32 +9,10 @@ export const shadebrim: CreatureKit = {
     health: 28,
     color: "#dbaf52",
     trait: "Cool Refuge",
-    passiveTiers: [
-      {
-        description: "Allies take 10% less Burn damage",
-        effects: [{ kind: "teamBurnResistance", amount: 10 }],
-      },
-      {
-        description: "Allies take 20% less Burn damage",
-        effects: [{ kind: "teamBurnResistance", amount: 20 }],
-      },
-      {
-        description: "Allies take 30% less Burn damage",
-        effects: [{ kind: "teamBurnResistance", amount: 30 }],
-      },
-      {
-        description: "Allies take 40% less Burn damage",
-        effects: [{ kind: "teamBurnResistance", amount: 40 }],
-      },
-      {
-        description: "Allies take 50% less Burn damage",
-        effects: [{ kind: "teamBurnResistance", amount: 50 }],
-      },
-      {
-        description: "Allies take 60% less Burn damage",
-        effects: [{ kind: "teamBurnResistance", amount: 60 }],
-      },
-    ],
+    passiveTiers: sixPassiveTiers([10, 20, 30, 40, 50, 60], (amount) => ({
+      description: `Allies take ${amount}% less Burn damage`,
+      effects: [{ kind: "teamBurnResistance", amount }],
+    })),
   },
   cards: [
     {

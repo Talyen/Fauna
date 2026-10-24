@@ -1,3 +1,4 @@
+import { sixPassiveTiers } from "../passive-tiers";
 import { card, attack } from "../card-builders";
 import type { CreatureKit } from "../types";
 export const chimecricket: CreatureKit = {
@@ -8,32 +9,10 @@ export const chimecricket: CreatureKit = {
     health: 24,
     color: "#c2b66c",
     trait: "Encore",
-    passiveTiers: [
-      {
-        description: "Your first ability each turn has a 10% chance to repeat",
-        effects: [{ kind: "encore", amount: 10 }],
-      },
-      {
-        description: "Your first ability each turn has a 20% chance to repeat",
-        effects: [{ kind: "encore", amount: 20 }],
-      },
-      {
-        description: "Your first ability each turn has a 30% chance to repeat",
-        effects: [{ kind: "encore", amount: 30 }],
-      },
-      {
-        description: "Your first ability each turn has a 40% chance to repeat",
-        effects: [{ kind: "encore", amount: 40 }],
-      },
-      {
-        description: "Your first ability each turn has a 50% chance to repeat",
-        effects: [{ kind: "encore", amount: 50 }],
-      },
-      {
-        description: "Your first ability each turn has a 60% chance to repeat",
-        effects: [{ kind: "encore", amount: 60 }],
-      },
-    ],
+    passiveTiers: sixPassiveTiers([10, 20, 30, 40, 50, 60], (amount) => ({
+      description: `Your first ability each turn has a ${amount}% chance to repeat`,
+      effects: [{ kind: "encore", amount }],
+    })),
   },
   cards: [
     {

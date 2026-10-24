@@ -1,3 +1,4 @@
+import { sixPassiveTiers } from "../passive-tiers";
 import { card, attack } from "../card-builders";
 import type { CreatureKit } from "../types";
 export const ringpalm: CreatureKit = {
@@ -8,32 +9,10 @@ export const ringpalm: CreatureKit = {
     health: 30,
     color: "#9ead70",
     trait: "Resonance",
-    passiveTiers: [
-      {
-        description: "Ringpalm’s Stun damage has a 10% chance to repeat",
-        effects: [{ kind: "resonance", amount: 10 }],
-      },
-      {
-        description: "Ringpalm’s Stun damage has a 20% chance to repeat",
-        effects: [{ kind: "resonance", amount: 20 }],
-      },
-      {
-        description: "Ringpalm’s Stun damage has a 30% chance to repeat",
-        effects: [{ kind: "resonance", amount: 30 }],
-      },
-      {
-        description: "Ringpalm’s Stun damage has a 40% chance to repeat",
-        effects: [{ kind: "resonance", amount: 40 }],
-      },
-      {
-        description: "Ringpalm’s Stun damage has a 50% chance to repeat",
-        effects: [{ kind: "resonance", amount: 50 }],
-      },
-      {
-        description: "Ringpalm’s Stun damage has a 60% chance to repeat",
-        effects: [{ kind: "resonance", amount: 60 }],
-      },
-    ],
+    passiveTiers: sixPassiveTiers([10, 20, 30, 40, 50, 60], (amount) => ({
+      description: `Ringpalm’s Stun damage has a ${amount}% chance to repeat`,
+      effects: [{ kind: "resonance", amount }],
+    })),
   },
   cards: [
     {

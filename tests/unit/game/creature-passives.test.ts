@@ -23,6 +23,22 @@ it("resolves the complete passive at the exact collected star rank", () => {
   }
 });
 
+it("keeps all passive ranks independently owned and immutable", () => {
+  for (const entry of content.SPECIES) {
+    const tiers = entry.passiveTiers;
+    expect(new Set(tiers).size, entry.id).toBe(6);
+    expect(new Set(tiers.map((tier) => tier.effects)).size, entry.id).toBe(6);
+    const effects = tiers.flatMap((tier) => tier.effects);
+    expect(new Set(effects).size, entry.id).toBe(effects.length);
+    expect(Object.isFrozen(tiers), entry.id).toBe(true);
+    for (const tier of tiers) {
+      expect(Object.isFrozen(tier), entry.id).toBe(true);
+      expect(Object.isFrozen(tier.effects), entry.id).toBe(true);
+      for (const effect of tier.effects) expect(Object.isFrozen(effect), entry.id).toBe(true);
+    }
+  }
+});
+
 it("uses the exact tier for card rules and battle start without scaling enemies", () => {
   const base = content.species;
   vi.spyOn(content, "species").mockImplementation((kind) => {
