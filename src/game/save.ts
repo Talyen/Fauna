@@ -17,87 +17,118 @@ import {
 import { gameStateSchema } from "./state-schema";
 import { speciesCards, SPECIES, species } from "./content";
 import { encounterSource, finalEncounter, bossEncounter } from "./encounters";
-import type { GameState } from "./types";
-const unique = (values: unknown[]) => new Set(values).size === values.length;
+import type { BattleState, GameState } from "./types";
+const unique = (values: readonly unknown[]) => new Set(values).size === values.length;
+function invalid(condition: boolean) {
+  if (condition) throw new Error("Save contains inconsistent game data.");
+}
+
 export function decodeSave(raw: string): GameState {
   if (raw.length > 100_000) throw new Error("Save exceeds the supported size.");
-  const s = gameStateSchema.parse(JSON.parse(raw));
-  const invalid = (condition: boolean) => {
-    if (condition) throw new Error("Save contains inconsistent game data.");
-  };
-  invalid(!unique(s.discovery.encountered));
+  const state = gameStateSchema.parse(JSON.parse(raw));
+  validateCollection(state);
+  validateJourney(state);
+  validateExpedition(state);
+  validateRoster(state);
+  validateSupport(state);
+  validateRewards(state);
+  if (state.phase === "battle") validateBattle(state);
+  validateCombatants(state);
+  return freeze(state, true);
+}
+
+export function encodeSave(state: GameState) {
+  return JSON.stringify(state);
+}
+
+function validateCollection(state: GameState) {
+  invalid(!unique(state.discovery.encountered) || !unique(state.boons));
   invalid(
     SPECIES.some(
-      ({ id }) => s.discovery.recruited[id] !== undefined && !s.discovery.encountered.includes(id),
+      ({ id }) => state.discovery.recruited[id] !== undefined && !state.discovery.encountered.includes(id),
     ),
   );
-  const collected = collectedSpecies(s);
-  const starterPool = starterSpecies(s);
-  const offerPool = starterOfferPool(s);
-  const drafting = s.phase === "draft" && s.selected.length < starterCount(s);
+  const starterPool = starterSpecies(state);
+  const offerPool = starterOfferPool(state);
+  const drafting = state.phase === "draft" && state.selected.length < starterCount(state);
   invalid(
-    new Set(s.starterOffers).size !== (drafting ? Math.min(STARTER_OFFER_COUNT, offerPool.length) : 0) ||
-      s.starterOffers.some((kind) => !offerPool.includes(kind)) ||
-      s.starterOffers.length !== (drafting ? STARTER_OFFER_COUNT : 0),
+    new Set(state.starterOffers).size !== (drafting ? Math.min(STARTER_OFFER_COUNT, offerPool.length) : 0) ||
+      state.starterOffers.some((kind) => !offerPool.includes(kind)) ||
+      state.starterOffers.length !== (drafting ? STARTER_OFFER_COUNT : 0),
   );
-  if (s.journey) {
-    const summary = s.journey;
-    invalid(KEYWORDS.some((keyword) => (summary.xp[keyword] ?? 0) > (s.keywordXP[keyword] ?? 0)));
+  invalid(
+    state.selected.some((kind) => !starterPool.includes(kind)) ||
+      (state.phase === "draft" && state.selected.length > starterCount(state)) ||
+      (state.phase !== "draft" && !collectedSpecies(state).length),
+  );
+}
+
+function validateJourney(state: GameState) {
+  if (state.journey) {
+    const summary = state.journey;
+    invalid(KEYWORDS.some((keyword) => (summary.xp[keyword] ?? 0) > (state.keywordXP[keyword] ?? 0)));
     const receipt = summary.lastBattle;
-    const justWon = receipt?.encounter === s.encounter && receipt.outcome !== "defeat";
-    invalid(summary.victories !== s.encounter + Number(justWon));
+    const justWon = receipt?.encounter === state.encounter && receipt.outcome !== "defeat";
+    invalid(summary.victories !== state.encounter + Number(justWon));
     if (receipt)
       invalid(
-        receipt.encounter > s.encounter ||
-          receipt.encounter < s.encounter - 1 ||
-          s.phase === "battle" ||
-          (receipt.encounter === s.encounter - 1 && receipt.outcome !== "next") ||
+        receipt.encounter > state.encounter ||
+          receipt.encounter < state.encounter - 1 ||
+          state.phase === "battle" ||
+          (receipt.encounter === state.encounter - 1 && receipt.outcome !== "next") ||
           (receipt.outcome === "victory" &&
-            !["victory", "recruit", "boon"].includes(s.phase) &&
-            !(s.phase === "defeat" && summary.outcome === "returned" && finalEncounter(s) && s.wins > 0)) ||
-          (receipt.outcome === "defeat" && (s.phase !== "defeat" || s.journey.outcome !== "defeat")),
+            !["victory", "recruit", "boon"].includes(state.phase) &&
+            !(
+              state.phase === "defeat" &&
+              summary.outcome === "returned" &&
+              finalEncounter(state) &&
+              state.wins > 0
+            )) ||
+          (receipt.outcome === "defeat" && (state.phase !== "defeat" || state.journey.outcome !== "defeat")),
       );
-    if (summary.lastBattle)
+    if (receipt)
       invalid(
-        summary.lastBattle.currency > summary.currency ||
-          KEYWORDS.some((keyword) => (summary.lastBattle!.xp[keyword] ?? 0) > (summary.xp[keyword] ?? 0)),
+        receipt.currency > summary.currency ||
+          KEYWORDS.some((keyword) => (receipt.xp[keyword] ?? 0) > (summary.xp[keyword] ?? 0)),
       );
   }
-  {
-    const route = s.expedition;
-    if (s.phase === "draft")
-      invalid(route.pack !== null || route.recruit !== null || route.lastRoom !== null || s.encounter !== 0);
-    else
-      invalid(
-        route.pack === null ||
-          route.pack.length !== (bossEncounter(s) ? 1 : Math.min(3, s.encounter + 1)) ||
-          route.pack.some((kind) => species(kind).legendary && !bossEncounter(s)),
-      );
-    if (route.recruit !== null)
-      invalid(
-        species(route.recruit).legendary === true ||
-          s.team.length + s.reserves.length >= 5 ||
-          !["teamSelection", "support", "campfire"].includes(s.phase),
-      );
-  }
+  invalid(state.phase === "victory" && (!finalEncounter(state) || state.wins === 0));
+  if (state.phase !== "battle") invalid(Object.values(state.battleXP).some((n) => n !== 0));
+}
+
+function validateExpedition(state: GameState) {
+  const route = state.expedition;
+  if (state.phase === "draft")
+    invalid(
+      route.pack !== null || route.recruit !== null || route.lastRoom !== null || state.encounter !== 0,
+    );
+  else
+    invalid(
+      route.pack === null ||
+        route.pack.length !== (bossEncounter(state) ? 1 : Math.min(3, state.encounter + 1)) ||
+        route.pack.some((kind) => species(kind).legendary && !bossEncounter(state)),
+    );
+  if (route.recruit !== null)
+    invalid(
+      species(route.recruit).legendary === true ||
+        state.team.length + state.reserves.length >= 5 ||
+        !["teamSelection", "support", "campfire"].includes(state.phase),
+    );
+}
+
+function validateRoster(state: GameState) {
+  const collected = collectedSpecies(state);
   invalid(
-    s.selected.some((kind) => !starterPool.includes(kind)) ||
-      (s.phase === "draft" && s.selected.length > starterCount(s)) ||
-      (s.phase !== "draft" && !collected.length),
+    !unique([...state.team, ...state.reserves].map((c) => c.id)) || !unique(state.cards.map((c) => c.id)),
   );
+  invalid(state.team.length + state.reserves.length > 5);
+  invalid([...state.team, ...state.reserves].some((creature) => !collected.includes(creature.species)));
+  invalid([...state.team, ...state.reserves].some((c) => c.health > species(c.species).health));
   invalid(
-    !unique([...s.team, ...s.reserves].map((c) => c.id)) ||
-      !unique(s.cards.map((c) => c.id)) ||
-      !unique(s.boons),
-  );
-  invalid(s.team.length + s.reserves.length > 5);
-  invalid([...s.team, ...s.reserves].some((creature) => !collected.includes(creature.species)));
-  invalid([...s.team, ...s.reserves].some((c) => c.health > species(c.species).health));
-  invalid(
-    s.cards.some((c) =>
+    state.cards.some((c) =>
       c.ownerId === null
         ? !(c.temporary && c.level === 0 && isFood(c.definitionId))
-        : !s.team.some(
+        : !state.team.some(
             (t) =>
               t.id === c.ownerId &&
               (speciesCards(t.species).some((d) => d.id === c.definitionId) ||
@@ -105,20 +136,20 @@ export function decodeSave(raw: string): GameState {
           ),
     ),
   );
-  const permanentCards = s.cards.filter((card) => !card.temporary);
+  const permanentCards = state.cards.filter((card) => !card.temporary);
   invalid(
-    s.cards.some(
+    state.cards.some(
       (card) =>
         card.temporary &&
-        (s.phase !== "battle" ||
+        (state.phase !== "battle" ||
           !/^copy-(0|[1-9]\d*)$/.test(card.id) ||
-          Number(card.id.slice(5)) >= s.battle.copySerial),
+          Number(card.id.slice(5)) >= state.battle.copySerial),
     ),
   );
   invalid(permanentCards.some((card) => card.id.startsWith("copy-")));
 
   let expectedPermanentCards = 0;
-  for (const creature of s.team) {
+  for (const creature of state.team) {
     const copies = species(creature.species).legendary ? 2 : 1;
     for (const def of speciesCards(creature.species)) {
       expectedPermanentCards += copies;
@@ -128,171 +159,184 @@ export function decodeSave(raw: string): GameState {
       );
     }
   }
-  invalid(!validTalentSelection(s));
-  if (s.phase === "draft") invalid(s.team.length !== 0 || s.cards.length !== 0 || s.reserves.length !== 0);
-  else invalid(s.team.length < 1 || permanentCards.length !== expectedPermanentCards);
-  invalid(
-    (s.team.length === 0 && s.phase !== "draft") ||
-      (s.team.some((unit) => species(unit.species).legendary) && s.team.length !== 1),
-  );
-  invalid(s.selected.some((kind) => species(kind).legendary) && s.selected.length !== 1);
-  if (s.support) {
-    const v = s.support;
+  invalid(!validTalentSelection(state));
+  if (state.phase === "draft")
+    invalid(state.team.length !== 0 || state.cards.length !== 0 || state.reserves.length !== 0);
+  else invalid(state.team.length < 1 || permanentCards.length !== expectedPermanentCards);
+  invalid(state.team.some((unit) => species(unit.species).legendary) && state.team.length !== 1);
+  invalid(state.selected.some((kind) => species(kind).legendary) && state.selected.length !== 1);
+}
+
+function validateSupport(state: GameState) {
+  if (state.support) {
+    const visit = state.support;
     // Stock keeps its original price when this visit sells Merchant's Favor.
-    const prices = merchantPriceRange({ boons: s.boons.filter((boon) => boon !== v.purchased) });
+    const prices = merchantPriceRange({ boons: state.boons.filter((boon) => boon !== visit.purchased) });
     invalid(
-      v.encounter !== s.encounter ||
-        v.id !== `support-${v.encounter}` ||
-        !["teamSelection", "support", "campfire"].includes(s.phase) ||
-        !v.stock.length ||
-        !unique(v.stock.map((r) => r.slot)) ||
-        !unique(v.stock.map((r) => r.boon)) ||
-        v.stock.some(
+      visit.encounter !== state.encounter ||
+        visit.id !== `support-${visit.encounter}` ||
+        !visit.stock.length ||
+        !unique(visit.stock.map((r) => r.slot)) ||
+        !unique(visit.stock.map((r) => r.boon)) ||
+        visit.stock.some(
           (r, i) =>
             r.slot !== `slot-${i}` ||
             r.price < prices.min ||
             r.price > prices.max ||
-            (s.boons.includes(r.boon) && v.purchased !== r.boon),
+            (state.boons.includes(r.boon) && visit.purchased !== r.boon),
         ) ||
-        (v.purchased !== null &&
-          (!v.resolved || !s.boons.includes(v.purchased) || !v.stock.some((r) => r.boon === v.purchased))),
+        (visit.purchased !== null &&
+          (!visit.resolved ||
+            !state.boons.includes(visit.purchased) ||
+            !visit.stock.some((r) => r.boon === visit.purchased))),
     );
   }
-  if (s.phase === "campfire") invalid(s.expedition.lastRoom === "campfire" || !needsCampfire(s));
-  if (s.phase !== "battle") invalid(Object.values(s.battleXP).some((n) => n !== 0));
-  if (s.reward) {
-    const receipt = s.journey!.lastBattle;
+  if (state.phase === "campfire") invalid(state.expedition.lastRoom === "campfire" || !needsCampfire(state));
+}
+
+function validateRewards(state: GameState) {
+  if (state.reward) {
+    const reward = state.reward;
+    const receipt = state.journey?.lastBattle;
     invalid(
       !receipt ||
-        receipt.encounter !== s.encounter ||
-        receipt.outcome !== s.reward.outcome ||
-        receipt.currency !== s.reward.currency ||
-        KEYWORDS.some((keyword) => (receipt.xp[keyword] ?? 0) !== (s.reward!.xp[keyword] ?? 0)),
+        receipt.encounter !== state.encounter ||
+        receipt.outcome !== reward.outcome ||
+        receipt.currency !== reward.currency ||
+        KEYWORDS.some((keyword) => (receipt.xp[keyword] ?? 0) !== (reward.xp[keyword] ?? 0)),
     );
-    invalid((!bossEncounter(s) || finalEncounter(s)) && s.reward.boons.length > 0);
+    invalid((!bossEncounter(state) || finalEncounter(state)) && reward.boons.length > 0);
+    const enemies = encounterSource(state).enemies;
     invalid(
-      !unique(s.reward.boons) ||
-        (s.reward.recruits.length > 0 &&
-          JSON.stringify(s.reward.recruits) !==
-            JSON.stringify(encounterSource(s).enemies.map((e) => e.species))),
+      !unique(reward.boons) ||
+        (reward.recruits.length > 0 &&
+          (reward.recruits.length !== enemies.length ||
+            reward.recruits.some((kind, index) => kind !== enemies[index]?.species))),
     );
     invalid(
-      (s.reward.outcome === "next" && finalEncounter(s)) ||
-        (s.reward.outcome === "victory" && !finalEncounter(s)),
+      (reward.outcome === "next" && finalEncounter(state)) ||
+        (reward.outcome === "victory" && !finalEncounter(state)),
     );
-    if (s.phase === "recruit") {
-      invalid(s.reward.recruits.length !== encounterSource(s).enemies.length);
-      const selected = s.reward.selectedRecruit;
+    if (state.phase === "recruit") {
+      invalid(reward.recruits.length !== enemies.length);
+      const selected = state.reward.selectedRecruit;
       if (selected !== undefined)
         invalid(
-          s.team.length + s.reserves.length !== 5 ||
-            !s.reward.recruits.includes(selected) ||
-            s.discovery.recruited[selected] === undefined,
+          state.team.length + state.reserves.length !== 5 ||
+            !reward.recruits.includes(selected) ||
+            state.discovery.recruited[selected] === undefined,
         );
     }
-    if (s.phase === "boon") invalid(s.reward.boons.some((r) => s.boons.includes(r)));
-    if (s.reward.outcome === "defeat") invalid([...s.team, ...s.reserves].some((c) => c.health > 0));
+    if (state.phase === "boon") invalid(reward.boons.some((r) => state.boons.includes(r)));
+    if (reward.outcome === "defeat") invalid([...state.team, ...state.reserves].some((c) => c.health > 0));
   }
-  if (s.battle) {
-    const b = s.battle,
-      source = encounterSource(s);
-    invalid(b.enemies.length !== source.enemies.length || !unique(b.enemies.map((e) => e.id)));
-    b.enemies.forEach((enemy) => {
-      const original = source.enemies[Number(enemy.id.replace(/^enemy-/, ""))];
-      invalid(
-        !original ||
-          !source.enemies.some((_, index) => enemy.id === `enemy-${index}`) ||
-          enemy.species !== original.species ||
-          enemy.name !== original.name ||
-          enemy.maxHealth !== original.health ||
-          enemy.power !== original.power ||
-          enemy.health > enemy.maxHealth ||
-          (enemy.lastAbility !== null &&
-            !speciesCards(enemy.species).some((card) => card.id === enemy.lastAbility) &&
-            !(
-              unfinishedJourneyLimit(undefined, enemy) > 0 &&
-              b.enemies.some((owner) =>
-                speciesCards(owner.species).some((card) => card.id === enemy.lastAbility),
-              )
-            )) ||
-          enemy.combat.deathDoorUsed ||
-          enemy.combat.grace > 0 ||
-          (!battlefield(s, "player").some((c) => c.id === enemy.targetId) &&
-            !s.team.some((c) => c.id === enemy.targetId)),
-      );
-    });
-    const zones = [...b.draw, ...b.hand, ...b.buffer, ...b.discard];
-    // The current turn capacity survives a category reset.
+}
+
+function validateBattle(state: BattleState) {
+  const battle = state.battle,
+    source = encounterSource(state);
+  invalid(battle.enemies.length !== source.enemies.length || !unique(battle.enemies.map((e) => e.id)));
+  battle.enemies.forEach((enemy) => {
+    const original = source.enemies[Number(enemy.id.replace(/^enemy-/, ""))];
     invalid(
-      b.mana > b.maxMana ||
-        b.earnedGold > s.currency ||
-        (s.journey !== null && b.earnedGold > s.journey.currency),
+      !original ||
+        !source.enemies.some((_, index) => enemy.id === `enemy-${index}`) ||
+        enemy.species !== original.species ||
+        enemy.name !== original.name ||
+        enemy.maxHealth !== original.health ||
+        enemy.power !== original.power ||
+        enemy.health > enemy.maxHealth ||
+        (enemy.lastAbility !== null &&
+          !speciesCards(enemy.species).some((card) => card.id === enemy.lastAbility) &&
+          !(
+            unfinishedJourneyLimit(undefined, enemy) > 0 &&
+            battle.enemies.some((owner) =>
+              speciesCards(owner.species).some((card) => card.id === enemy.lastAbility),
+            )
+          )) ||
+        enemy.combat.deathDoorUsed ||
+        enemy.combat.grace > 0 ||
+        (!battlefield(state, "player").some((c) => c.id === enemy.targetId) &&
+          !state.team.some((c) => c.id === enemy.targetId)),
     );
-    invalid(!unique(zones) || zones.some((id) => !s.cards.some((c) => c.id === id)));
-    if (s.phase === "battle") {
-      invalid([...s.team, ...s.reserves].some((creature) => !creature.combat));
-      const liveCards = s.cards;
+  });
+  const zones = [...battle.draw, ...battle.hand, ...battle.buffer, ...battle.discard];
+  // The current turn capacity survives a category reset.
+  invalid(
+    battle.mana > battle.maxMana ||
+      battle.earnedGold > state.currency ||
+      battle.earnedGold > state.journey.currency,
+  );
+  invalid(!unique(zones) || zones.some((id) => !state.cards.some((c) => c.id === id)));
+  invalid([...state.team, ...state.reserves].some((creature) => !creature.combat));
+  invalid(
+    ![...state.team, ...state.reserves].some((c) => c.health > 0) ||
+      !battle.enemies.some((e) => e.health > 0) ||
+      (battle.buffer.length > 0 && battle.hand.length < MAX_HAND_SIZE) ||
+      zones.length !== state.cards.length ||
+      state.cards.some((c) => !zones.includes(c.id)),
+  );
+  validateEnemyDecks(state);
+  validateMinions(state);
+}
+
+function validateEnemyDecks(state: BattleState) {
+  for (const enemy of state.battle.enemies) {
+    invalid(!!species(enemy.species).legendary !== !!enemy.deck);
+    if (enemy.deck) {
+      const deck = enemy.deck;
+      const zones = [...deck.draw, ...deck.hand, ...deck.buffer, ...deck.discard];
+      const defs = speciesCards(enemy.species);
       invalid(
-        ![...s.team, ...s.reserves].some((c) => c.health > 0) ||
-          !b.enemies.some((e) => e.health > 0) ||
-          (b.buffer.length > 0 && b.hand.length < MAX_HAND_SIZE) ||
-          zones.length !== liveCards.length ||
-          liveCards.some((c) => !zones.includes(c.id)),
+        zones.length !== 6 + deck.pearls ||
+          zones.filter((id) => id === PEARL.id).length !== deck.pearls ||
+          (deck.buffer.length > 0 && deck.hand.length < MAX_HAND_SIZE),
       );
+      for (const def of defs) invalid(zones.filter((id) => id === def.id).length !== 2);
+      invalid(zones.some((id) => id !== PEARL.id && !defs.some((def) => def.id === id)));
     }
   }
-  invalid(s.phase === "victory" && (!finalEncounter(s) || s.wins === 0));
+}
+
+function validateMinions(state: BattleState) {
+  for (const unit of state.battle.minions ?? []) {
+    const owners = unit.minion.side === "player" ? [...state.team, ...state.reserves] : state.battle.enemies;
+    const owner = owners.find((entry) => entry.id === unit.minion.ownerId);
+    invalid(
+      !owner ||
+        owner.species !== "memento" ||
+        unit.health > unit.maxHealth ||
+        ![6, 8, 10, 12].includes(unit.maxHealth) ||
+        ![0, 1].some((slot) => unit.id === `echo-${unit.minion.ownerId}-${slot}`) ||
+        unit.combat.deathDoorUsed ||
+        unit.combat.grace > 0,
+    );
+    invalid(
+      (state.battle.minions ?? []).filter((other) => other.minion.ownerId === unit.minion.ownerId).length > 2,
+    );
+    invalid(
+      unit.health > 0 &&
+        (!owner ||
+          owner.health === 0 ||
+          (unit.minion.side === "player" && !state.team.some((entry) => entry.id === owner.id))),
+    );
+  }
+}
+
+function validateCombatants(state: GameState) {
   const allCombatants = [
-    ...s.team,
-    ...s.reserves,
-    ...(s.battle?.enemies ?? []),
-    ...(s.battle?.minions ?? []),
+    ...state.team,
+    ...state.reserves,
+    ...(state.battle?.enemies ?? []),
+    ...(state.battle?.minions ?? []),
   ];
-  if (s.battle) {
-    for (const enemy of s.battle.enemies) {
-      invalid(!!species(enemy.species).legendary !== !!enemy.deck);
-      if (enemy.deck) {
-        const deck = enemy.deck;
-        const zones = [...deck.draw, ...deck.hand, ...deck.buffer, ...deck.discard];
-        const defs = speciesCards(enemy.species);
-        invalid(
-          zones.length !== 6 + deck.pearls ||
-            zones.filter((id) => id === PEARL.id).length !== deck.pearls ||
-            (deck.buffer.length > 0 && deck.hand.length < MAX_HAND_SIZE),
-        );
-        for (const def of defs) invalid(zones.filter((id) => id === def.id).length !== 2);
-        invalid(zones.some((id) => id !== PEARL.id && !defs.some((def) => def.id === id)));
-      }
-    }
-    for (const unit of s.battle.minions ?? []) {
-      const owners = unit.minion.side === "player" ? [...s.team, ...s.reserves] : s.battle.enemies;
-      const owner = owners.find((entry) => entry.id === unit.minion.ownerId);
-      invalid(
-        !owner ||
-          owner.species !== "memento" ||
-          unit.health > unit.maxHealth ||
-          ![6, 8, 10, 12].includes(unit.maxHealth) ||
-          ![0, 1].some((slot) => unit.id === `echo-${unit.minion.ownerId}-${slot}`) ||
-          unit.combat.deathDoorUsed ||
-          unit.combat.grace > 0,
-      );
-      invalid(
-        (s.battle.minions ?? []).filter((other) => other.minion.ownerId === unit.minion.ownerId).length > 2,
-      );
-      invalid(
-        unit.health > 0 &&
-          (!owner ||
-            owner.health === 0 ||
-            (unit.minion.side === "player" && !s.team.some((entry) => entry.id === owner.id))),
-      );
-    }
-  }
   invalid(!unique(allCombatants.map((unit) => unit.id)));
   for (const unit of allCombatants)
     if (unit.combat) {
       const stats = unit.combat;
       invalid(
-        stats.fallenCardsPlayedThisTurn > unfinishedJourneyLimit("maxHealth" in unit ? undefined : s, unit),
+        stats.fallenCardsPlayedThisTurn >
+          unfinishedJourneyLimit("maxHealth" in unit ? undefined : state, unit),
       );
       invalid((stats.controlled === null) !== (stats.controlTurns === 0));
       invalid((stats.grace > 0 && !stats.deathDoorUsed) || (stats.controlled !== null && stats.cooldown > 0));
@@ -302,8 +346,4 @@ export function decodeSave(raw: string): GameState {
           stats.bleedLeech.some((row) => !allCombatants.some((source) => source.id === row.sourceId)),
       );
     }
-  return freeze(s, true);
-}
-export function encodeSave(state: GameState) {
-  return JSON.stringify(state);
 }
