@@ -29,6 +29,8 @@ Evidence paths are relative to the retained task worktree under ignored reports:
 
 The baseline predates this creature and provides existing battle composition context; it is not a pixel-parity comparison with the new lineup. Capture directories retain checkpoint hashes, render-input identities, conditions and completion status.
 
+After incorporating main's shared artwork-border fix, the combined tree at `239a1f8` repeated the complete six-frame rendered review and the six live interaction checks successfully. The repeated capture directories are `reports/review/orifable-after-bb1eea79-7358-4329-b18f-ea68545ff4ec/` for final-tier inspection, `reports/review/orifable-after-69d99b7e-765f-4b43-8e8b-fb66fcd7f7d6/` for the Food hand and `reports/review/orifable-after-83db9a25-caea-4fbb-a345-84ed99b8b344/` for targeting. All frames were inspected; all layout/error lists remained empty. Idle cards retain the new shared border behavior, while selected Food and legal recipients remain clear. The interaction report and created-Food screenshot above contain the repeated combined-tree results.
+
 ## Boundaries
 
 Full hosted CI, owning TypeScript compilers, broad balance simulations, native desktop, Windows packaging, physical controllers, Steam client and Steam Deck were not run for this change. Local browser results do not qualify those platforms. The existing ordinary-enemy no-hand model remains as documented in the creature reference; this change adds no enemy Food inventory.
