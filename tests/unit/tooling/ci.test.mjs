@@ -3,11 +3,15 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { identity } from "../../../scripts/lib/tool-runtime.mjs";
+import { summarizeReport } from "../../../scripts/ci/ci-summarize.mjs";
+import { LINEUP_SHARDS, lineupShard } from "../../../scripts/ci/unit-shards.mjs";
 import { afterEach, describe, expect, it } from "vitest";
 import {
   validateBrowserCoverage,
   validateJobs,
   validateUnit,
+  validateUnitCoverage,
+  mergeUnitReports,
   validateInteraction,
   planBrowserShards,
   browserDurations,
@@ -38,6 +42,91 @@ const test = (id, overrides = {}) => ({
   errors: [],
 });
 const combine = (...reports) => ({ suites: reports.flatMap((report) => report.suites), errors: [] });
+
+function unitReport(file, titles) {
+  return {
+    success: true,
+    startTime: 1000,
+    numFailedTests: 0,
+    numFailedTestSuites: 0,
+    numPendingTests: 0,
+    numPendingTestSuites: 0,
+    numTotalTests: titles.length,
+    numPassedTests: titles.length,
+    testResults: [
+      {
+        name: `/runner/${file}`,
+        status: "passed",
+        startTime: 1000,
+        endTime: 2000,
+        assertionResults: titles.map((title) => ({
+          status: "passed",
+          title,
+          ancestorTitles: ["journey"],
+          duration: 500,
+        })),
+      },
+    ],
+  };
+}
+
+it("partitions lineup scenarios without omissions or duplication and rejects invalid selectors", () => {
+  const scenarios = Array.from({ length: 11 }, (_, seed) => ({ seed }));
+  const groups = Array.from({ length: LINEUP_SHARDS }, (_, index) =>
+    lineupShard(scenarios, String(index + 1)),
+  );
+  expect(new Set(groups.flat())).toEqual(new Set(scenarios));
+  expect(groups.flat()).toHaveLength(scenarios.length);
+  expect(groups.map((group) => group.length)).toEqual([3, 3, 3, 2]);
+  expect(lineupShard(scenarios, undefined)).toBe(scenarios);
+  for (const selector of ["", "0", "5", "01", "1.5", "wrong"])
+    expect(() => lineupShard(scenarios, selector)).toThrow("Invalid lineup shard");
+});
+
+it("requires the exact discovered unit cases across reports, including parameterized titles", () => {
+  const file = "tests/unit/contract.test.ts";
+  const lineupFile = "tests/exhaustive/roster-combinations.test.ts";
+  const contract = unitReport(file, ["resume", "resume"]);
+  const lineup = unitReport(lineupFile, ["team one"]);
+  const discovery = [
+    { file, name: "journey > resume" },
+    { file, name: "journey > resume" },
+    { file: lineupFile, name: "journey > team one" },
+  ];
+  expect(validateUnitCoverage(discovery, [contract, lineup])).toBe(3);
+  expect(mergeUnitReports(discovery, [contract, lineup]).numPassedTests).toBe(3);
+  expect(() => validateUnitCoverage(discovery, [contract])).toThrow("Incomplete unit coverage");
+  expect(() => validateUnitCoverage(discovery, [contract, lineup, lineup])).toThrow("duplicate");
+  expect(() => validateUnitCoverage(discovery, [contract, unitReport(lineupFile, ["team two"])])).toThrow(
+    "Unexpected",
+  );
+  expect(() => validateUnitCoverage(discovery, [contract, unitReport(file, ["team one"])])).toThrow(
+    "Unexpected",
+  );
+  expect(() => validateUnitCoverage([], [contract])).toThrow("Empty unit discovery");
+  expect(() => validateUnitCoverage(discovery, [{ ...contract, numPendingTests: 1 }, lineup])).toThrow(
+    "Incomplete or failed",
+  );
+});
+
+it("shows bounded, sorted unit durations and sanitizes diagnostic names", () => {
+  const report = unitReport(
+    "tests/unit/<unsafe>.test.ts",
+    Array.from({ length: 12 }, (_, i) => `case ${i}`),
+  );
+  report.testResults[0].assertionResults.forEach((test, i) => {
+    test.duration = i * 1000;
+  });
+  const summary = summarizeReport("vitest", report);
+  expect(summary).toContain("Slowest test files");
+  expect(summary).toContain("1.00s — tests/unit/&#60;unsafe&#62;.test.ts");
+  expect(summary).toContain("Slowest tests");
+  expect(summary.indexOf("11.00s")).toBeLessThan(summary.indexOf("10.00s"));
+  expect(summary).not.toContain("<unsafe>");
+  expect(summary).not.toContain("— case 0\n");
+  report.testResults[0].assertionResults[0].duration = NaN;
+  expect(summarizeReport("vitest", report)).not.toContain("NaNs");
+});
 describe("CI coverage gate", () => {
   it("accounts for each discovered case exactly once across shards", () => {
     const a = test("a"),
@@ -78,7 +167,7 @@ describe("CI coverage gate", () => {
   });
   it("requires every upstream job even when reports are green", () => {
     const jobs = Object.fromEntries(
-      ["prepare", "static", "unit", "build", "browser", "interactions", "windows"].map((name) => [
+      ["prepare", "static", "unit", "lineups", "build", "browser", "interactions", "windows"].map((name) => [
         name,
         { result: "success", outputs: { attempt: "1" } },
       ]),
@@ -181,6 +270,44 @@ const gateRoots = [];
 afterEach(() => {
   for (const root of gateRoots.splice(0)) rmSync(root, { recursive: true, force: true });
 });
+
+it("defaults browser consumers to the version-matched container while retaining install comparison", () => {
+  const root = mkdtempSync(path.join(tmpdir(), "fauna-ci-prepare-"));
+  gateRoots.push(root);
+  const event = path.join(root, "event.json");
+  const output = path.join(root, "output.txt");
+  writeFileSync(
+    path.join(root, "package-lock.json"),
+    JSON.stringify({ packages: { "node_modules/@playwright/test": { version: "1.64.1" } } }),
+  );
+  const run = (inputs) => {
+    writeFileSync(event, JSON.stringify({ inputs }));
+    writeFileSync(output, "");
+    return spawnSync(
+      process.execPath,
+      [path.resolve(import.meta.dirname, "../../../scripts/ci/ci.mjs"), "prepare"],
+      {
+        cwd: root,
+        encoding: "utf8",
+        env: {
+          ...process.env,
+          GITHUB_EVENT_PATH: event,
+          GITHUB_OUTPUT: output,
+          GITHUB_EVENT_NAME: "workflow_dispatch",
+          GITHUB_RUN_ATTEMPT: "1",
+        },
+      },
+    );
+  };
+  expect(run({}).status).toBe(0);
+  expect(readFileSync(output, "utf8")).toContain(
+    "browser_image=mcr.microsoft.com/playwright:v1.64.1-noble\n",
+  );
+  expect(run({ browser_runtime: "install" }).status).toBe(0);
+  expect(readFileSync(output, "utf8")).toContain("browser_image=\n");
+  expect(run({ browser_runtime: "unknown" }).status).not.toBe(0);
+});
+
 async function gateFixture() {
   const root = mkdtempSync(path.join(tmpdir(), "fauna-ci-gate-"));
   gateRoots.push(root);
@@ -189,7 +316,7 @@ async function gateFixture() {
   const manifest = { ...ids, files: { "dist/index.js": "a".repeat(64) } };
   const build = buildFingerprint(manifest);
   const jobs = Object.fromEntries(
-    ["prepare", "static", "unit", "build", "browser", "interactions", "windows"].map((name) => [
+    ["prepare", "static", "unit", "lineups", "build", "browser", "interactions", "windows"].map((name) => [
       name,
       { result: "success", outputs: { attempt: "1" } },
     ]),
@@ -227,8 +354,29 @@ async function gateFixture() {
     numPendingTestSuites: 0,
     numTotalTests: 1,
     numPassedTests: 1,
-    testResults: [{ status: "passed", assertionResults: [{ status: "passed" }] }],
+    startTime: 1000,
+    testResults: [
+      {
+        name: "/runner/tests/unit/example.test.ts",
+        startTime: 1000,
+        endTime: 2000,
+        status: "passed",
+        assertionResults: [{ status: "passed", title: "contract" }],
+      },
+    ],
   });
+  const unitDiscovery = [{ file: "/runner/tests/unit/example.test.ts", name: "contract" }];
+  for (let shard = 1; shard <= 4; shard++) {
+    const file = "/runner/tests/exhaustive/roster-combinations.test.ts";
+    const title = `lineup ${shard}`;
+    const report = JSON.parse(readFileSync(path.join(root, "reports/vitest.json"), "utf8"));
+    report.testResults[0].name = file;
+    report.testResults[0].assertionResults[0].title = title;
+    put(`reports/lineups/lineup-results-${shard}/vitest.json`, report);
+    put(`reports/lineups/lineup-results-${shard}/ci/lineup.json`, { ...ids, shard, total: 4 });
+    unitDiscovery.push({ file, name: title });
+  }
+  put("reports/ci/unit-discovery.json", unitDiscovery);
   put("reports/interactions/ci/report.json", {
     format: 1,
     family: "mixed",
@@ -251,6 +399,7 @@ it("accepts mixed successful attempts of the same run and records their build ev
   expect(run(jobs, "2").status).toBe(0);
   // A failed consumer reruns against the unchanged build while other successful jobs are reused.
   put("reports/ci/unit.json", { ...ids, attempt: "2" });
+  put("reports/lineups/lineup-results-1/ci/lineup.json", { ...ids, attempt: "2", shard: 1, total: 4 });
   put("reports/interactions/ci/evidence.json", { ...ids, attempt: "2", build });
   put(shardPath, {
     ...ids,
@@ -268,6 +417,11 @@ it("accepts mixed successful attempts of the same run and records their build ev
   const record = JSON.parse(readFileSync(path.join(root, "reports/ci/evidence.json"), "utf8"));
   expect(record.build.attempt).toBe("1");
   expect(record.interaction.attempt).toBe("2");
+  expect(record.lineups.map((shard) => shard.attempt)).toEqual(["2", "1", "1", "1"]);
+  expect(JSON.parse(readFileSync(path.join(root, "reports/vitest-merged.json"), "utf8")).numPassedTests).toBe(
+    5,
+  );
+  expect(readFileSync(path.join(root, "summary.md"), "utf8")).toContain("Lineup spread: 0.0s");
   expect(readFileSync(path.join(root, "summary.md"), "utf8")).toContain("All required jobs succeeded");
 });
 
@@ -288,10 +442,13 @@ it("rejects unrelated, future and mismatched executable gate evidence", async ()
 
 it("fails the executable gate for upstream failures and missing reports", async () => {
   const { root, jobs, run } = await gateFixture();
-  for (const job of ["static", "browser", "windows"])
+  for (const job of ["static", "browser", "lineups", "windows"])
     expect(run({ ...jobs, [job]: { result: "failure" } }).status).not.toBe(0);
   for (const file of [
     "reports/ci/unit.json",
+    "reports/ci/unit-discovery.json",
+    "reports/lineups/lineup-results-1/vitest.json",
+    "reports/lineups/lineup-results-4/ci/lineup.json",
     "reports/interactions/ci/evidence.json",
     "reports/vitest.json",
     "reports/ci/discovery.json",
@@ -303,6 +460,21 @@ it("fails the executable gate for upstream failures and missing reports", async 
     expect(run().status).not.toBe(0);
     writeFileSync(path.join(root, file), original);
   }
+});
+
+it("rejects stale lineup evidence, swapped shards and duplicate lineup results", async () => {
+  const { root, ids, put, run } = await gateFixture();
+  const metadata = "reports/lineups/lineup-results-1/ci/lineup.json";
+  for (const change of [{ sha: "other" }, { run: "other" }, { attempt: "2" }, { shard: 2 }, { total: 3 }]) {
+    put(metadata, { ...ids, shard: 1, total: 4, ...change });
+    expect(run().status).not.toBe(0);
+  }
+  put(metadata, { ...ids, shard: 1, total: 4 });
+  const report = JSON.parse(
+    readFileSync(path.join(root, "reports/lineups/lineup-results-1/vitest.json"), "utf8"),
+  );
+  put("reports/lineups/lineup-results-2/vitest.json", report);
+  expect(run().stderr).toContain("duplicate unit case");
 });
 
 it("rejects interrupted executable shards and invalid attempt identities", async () => {

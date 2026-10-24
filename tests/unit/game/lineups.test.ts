@@ -3,6 +3,24 @@ import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { SPECIES } from "../../../src/game/content";
 import { ordinaryLineups } from "../../support/lineups";
+import { LINEUP_SHARDS, lineupShard } from "../../../scripts/ci/unit-shards.mjs";
+
+it("partitions every ordinary lineup once without changing seeds, order or scenarios", () => {
+  const scenarios = ordinaryLineups();
+  expect(lineupShard(scenarios, undefined)).toBe(scenarios);
+  const shards = Array.from({ length: LINEUP_SHARDS }, (_, index) =>
+    lineupShard(scenarios, String(index + 1)),
+  );
+  const combined = shards.flat();
+  expect(combined).toHaveLength(scenarios.length);
+  expect(new Set(combined).size).toBe(scenarios.length);
+  expect(new Set(combined)).toEqual(new Set(scenarios));
+  expect(
+    Math.max(...shards.map((shard) => shard.length)) - Math.min(...shards.map((shard) => shard.length)),
+  ).toBeLessThanOrEqual(1);
+  for (const shard of ["", "0", "5", "1.5", "01", "wrong"])
+    expect(() => lineupShard(scenarios, shard)).toThrow("Invalid lineup shard");
+});
 
 it("covers every distinct ordinary trio once with stable seeded identities", () => {
   const ordinary = SPECIES.filter((entry) => !entry.legendary).map((entry) => entry.id);
