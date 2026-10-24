@@ -67,4 +67,4 @@ Poor draws contain recovery without a useful discard or healing with no missing 
 
 [Almanelle's focused suite](../../../tests/unit/game/creatures/almanelle.test.ts) protects all six tiers, rounding, real turn ordering, reserve/knockout boundaries, caps, enemy use, authoritative previews, targeted recovery/healing, repeats, upgrades, save/resume and normal recruitment. [The review fixture](../../../tests/support/almanelle.ts) supplies a damaged party, Burn, all three cards and a recoverable discarded card
 
-Rendered evidence and platform boundaries are recorded in the implementation handoff. Source inspection and passing asset hashes do not establish artistic acceptance, measured balance, native input or platform qualification
+The [rendered review record](../../task-evidence/almanelle.md) retains source identity, evidence paths, exercised interactions and platform boundaries. Source inspection and passing asset hashes do not establish artistic acceptance, measured balance, native input or platform qualification
