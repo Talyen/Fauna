@@ -13,7 +13,7 @@ on:
         description: Compare headless-shell installation with the version-matched Playwright image
         type: choice
         options: ["install", "container"]
-        default: "install"
+        default: "container"
 permissions:
   contents: read
   pull-requests: read
@@ -43,6 +43,7 @@ jobs:
             scripts/ci/ci.mjs
             scripts/lib/tool-runtime.mjs
             scripts/lib/interaction-replay.mjs
+            scripts/ci/unit-shards.mjs
           sparse-checkout-cone-mode: false
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
@@ -143,8 +144,10 @@ jobs:
       - name: Install dependencies
         timeout-minutes: 3
         run: npm ci --no-audit --no-fund
+      - name: Discover complete unit and exhaustive coverage
+        run: npx vitest list --json=reports/ci/unit-discovery.json --staticParse=false
       - name: Unit and DOM suites
-        run: npm run test:full -- --reporter=default --reporter=json --outputFile.json=reports/vitest.json
+        run: npm run test:full -- --exclude='tests/exhaustive/**' --reporter=default --reporter=json --outputFile.json=reports/vitest.json
       - name: Summarize unit results
         if: always()
         run: node scripts/ci/ci-summarize.mjs vitest reports/vitest.json
@@ -163,9 +166,53 @@ jobs:
           path: |
             reports/vitest.json
             reports/ci/unit.json
+            reports/ci/unit-discovery.json
       - id: complete
         name: Record successful workflow attempt
         run: node scripts/ci/ci.mjs stamp
+
+  lineups:
+    needs: [prepare]
+    if: ${{ !cancelled() && needs.prepare.result == 'success' && needs.prepare.outputs.run == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
+    env:
+      FAUNA_LINEUP_SHARD: ${{ matrix.shard }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - name: Select pinned npm
+        run: npm install --global npm@12.2.1 --ignore-scripts --no-audit --no-fund
+      - name: Install dependencies
+        timeout-minutes: 3
+        run: npm ci --no-audit --no-fund
+      - name: Exhaustive lineup shard
+        run: npm run test:full -- tests/exhaustive/roster-combinations.test.ts --reporter=default --reporter=json --outputFile.json=reports/vitest.json
+      - name: Summarize lineup results
+        if: always()
+        run: node scripts/ci/ci-summarize.mjs vitest reports/vitest.json
+      - name: Record lineup evidence identity
+        if: always()
+        run: node scripts/ci/ci.mjs lineup
+      - name: Upload lineup-results-${{ matrix.shard }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: lineup-results-${{ matrix.shard }}
+          overwrite: true
+          retention-days: 7
+          if-no-files-found: error
+          compression-level: 0
+          path: |
+            reports/vitest.json
+            reports/ci/lineup.json
 
   build:
     needs: [prepare]
@@ -406,7 +453,7 @@ jobs:
         run: node scripts/ci/ci.mjs stamp
 
   verify:
-    needs: [prepare, static, unit, build, browser, interactions, windows]
+    needs: [prepare, static, unit, lineups, build, browser, interactions, windows]
     if: ${{ !cancelled() && needs.prepare.outputs.run != 'false' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -454,6 +501,12 @@ jobs:
         with:
           name: unit-results
           path: reports
+      - name: Download lineup-results-*
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        if: always()
+        with:
+          pattern: lineup-results-*
+          path: reports/lineups
       - name: Download interaction-results
         uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         if: always()
@@ -480,6 +533,21 @@ jobs:
       - name: Require every job and complete first-attempt results
         if: always()
         run: node scripts/ci/ci.mjs gate
+      - name: Summarize complete unit results
+        if: always()
+        run: node scripts/ci/ci-summarize.mjs vitest reports/vitest-merged.json
+      - name: Upload unit-review
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: always()
+        with:
+          name: unit-review
+          overwrite: true
+          retention-days: 7
+          if-no-files-found: warn
+          compression-level: 0
+          path: |
+            reports/vitest-merged.json
+            reports/ci/unit-timings.json
       - name: Upload browser-review
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: always()

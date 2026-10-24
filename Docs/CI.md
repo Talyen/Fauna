@@ -4,9 +4,9 @@
 
 ## Pipeline
 
-After a small planning job, static/content checks, unit/DOM tests, the Linux browser build and Windows packaging run independently. Eight duration-balanced browser shards use one worker each; interaction replay consumes the same Linux build. Consumers verify its commit, run, attempt and file hashes. Windows retains its own build, package verification and packaged startup/save/resume/isolation checks.
+After a small planning job, static/content checks, unit/DOM tests, four exhaustive lineup workers, the Linux browser build and Windows packaging run independently. Eight duration-balanced browser shards use one worker each; interaction replay consumes the same Linux build. Consumers verify its commit, run, attempt and file hashes. Windows retains its own build, package verification and packaged startup/save/resume/isolation checks.
 
-Unit CI retains every extended simulation, including all ordinary three-creature combinations, through full Vitest discovery. Focused regressions protect complete case registration and the shared journey assertions. [Contributing](../CONTRIBUTING.md#verification) owns the explicit local/CI selection policy; [test maintenance](../tests/README.md#test-organization) locates the scenarios.
+Unit CI discovers every unit, DOM and exhaustive case without filtering. Regular contracts run in the unit job; four lineup jobs partition the complete ordinary three-creature matrix by stable scenario index, preserving seeds and every intermediate save check. The final gate requires the exact discovered cases across all five reports, including the multiplicity of parameterized tests with shared titles. Missing, extra, duplicate, failed or skipped results fail the gate; every lineup artifact carries its shard, commit, run and attempt. An ordinary `test:full` command without the internal `FAUNA_LINEUP_SHARD` selection still runs the entire matrix. Focused regressions protect complete case registration and the shared journey assertions. [Contributing](../CONTRIBUTING.md#verification) owns the explicit local/CI selection policy; [test maintenance](../tests/README.md#test-organization) locates the scenarios.
 
 Static CI runs types, lint, formatting, boundaries and unused-code checks independently, retaining each failure while reporting all categories. `npm run check:full` remains their sequential entrypoint.
 
@@ -18,7 +18,7 @@ CI installs with the pinned npm version and lockfile, omitting non-gating audit/
 
 The final `verify` job runs despite upstream failure while allowing workflow cancellation. It requires:
 
-- Every upstream job and shard, unit totals matching their recorded passing assertions and a complete seeded interaction trace with valid actions and checkpoint hashes for every step
+- Every upstream job and shard, unit totals matching their recorded passing assertions, every discovered unit case accounted for, and a complete seeded interaction trace with valid actions and checkpoint hashes for every step
 - Every discovered production browser identity exactly once; only the named development-preview case is intentionally excluded
 - No `.only`, unexpected skips, retries, duplicates, missing cases or interrupted suites; the five-failure cap applies per browser shard
 - Evidence from this run and commit, with positive attempts no later than the current attempt; unit evidence must match its successful job
@@ -30,11 +30,11 @@ Branch pushes with an open PR defer to PR verification; main pushes, tags and fo
 
 ## Reports and scheduling
 
-CI retains unit JSON, browser blob/JSON/HTML reports, player notes and Windows output for seven days. `browser-review` contains the merged report; `browser-shard-N` retains raw blob attachments. JSON shares the HTML report's `browser-html/data/` attachments instead of duplicating `test-results/`. Collection and merging run on failure where the runner remains available; missing reports never substitute a passing summary.
+CI retains unit JSON, browser blob/JSON/HTML reports, player notes and Windows output for seven days. `unit-results` contains regular contracts and unfiltered discovery; `lineup-results-N` contains each exhaustive shard. `unit-review` contains the coverage-checked combined unit report and shard durations. Unit summaries show the ten slowest files and tests; the final gate reports each group's duration and the spread between fastest and slowest lineup workers. File timings measure each shard separately rather than adding concurrent times. `browser-review` contains the merged browser report; `browser-shard-N` retains raw blob attachments. JSON shares the HTML report's `browser-html/data/` attachments instead of duplicating `test-results/`. Collection and merging run on failure where the runner remains available; missing reports never substitute a passing summary.
 
 Complete discovery assigns longest estimated browser cases first to the lightest shard. [Duration estimates](../scripts/ci/browser-durations.json) affect scheduling only; new cases receive a default weight and remain required. Successful gates export refreshed `ci/browser-durations.json` in `browser-review` for copying back to the checked-in baseline.
 
-Manual runs support one, four or eight shards and a `browser_runtime` comparison between normal headless-shell installation and the official lockfile-matched Playwright container. Include initialization costs before changing the default. Headed local review needs full Chromium.
+Browser and interaction jobs default to the official lockfile-matched Playwright container to avoid per-job Chromium installation variability. Manual runs retain one, four or eight browser shards and a `browser_runtime` comparison with normal headless-shell installation. Compare the same commit and include container initialization and runner costs when measuring gains. Headed local review needs full Chromium.
 
 Read completed-run timing with `node scripts/ci/ci-timings.mjs <run-id> [attempt]`, using authenticated GitHub CLI. Timing from inside the final job remains provisional until it finishes. CI checks bundle allowance after the existing production build rather than building twice.
 
