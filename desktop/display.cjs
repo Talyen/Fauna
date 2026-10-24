@@ -49,6 +49,8 @@ async function createDisplay({
     disposed = false,
     lane = Promise.resolve(),
     transition = /** @type {Promise<unknown>} */ (Promise.resolve());
+  /** @type {Promise<void> | undefined} */
+  let disposal;
   const publishState = (/** @type {import("../src/platform/ports").DisplayState} */ state) => {
     if (disposed) return;
     try {
@@ -159,23 +161,27 @@ async function createDisplay({
           publishState({ ...read(), error: "Could not restore fullscreen." }),
         );
     },
-    async dispose() {
+    dispose() {
+      if (disposal) return disposal;
       disposed = true;
-      clearTimeout(timer);
-      screen.removeListener?.("display-removed", recover);
-      screen.removeListener?.("display-metrics-changed", recover);
-      if (window && !window.isDestroyed()) {
-        window.removeListener("move", remember);
-        window.removeListener("resize", remember);
-        window.removeListener("enter-full-screen", publish);
-        window.removeListener("leave-full-screen", publish);
-      }
-      // Native fullscreen completion can still update preferences and enqueue a write.
-      // Drain it before taking the final snapshot or declaring teardown complete.
-      await transition;
-      preferences.mode = read().mode;
-      write();
-      await lane;
+      disposal = Promise.resolve().then(async () => {
+        clearTimeout(timer);
+        screen.removeListener?.("display-removed", recover);
+        screen.removeListener?.("display-metrics-changed", recover);
+        if (window && !window.isDestroyed()) {
+          window.removeListener("move", remember);
+          window.removeListener("resize", remember);
+          window.removeListener("enter-full-screen", publish);
+          window.removeListener("leave-full-screen", publish);
+        }
+        // Native fullscreen completion can still update preferences and enqueue a write.
+        // Drain it before taking the final snapshot or declaring teardown complete.
+        await transition;
+        preferences.mode = read().mode;
+        write();
+        await lane;
+      });
+      return disposal;
     },
   };
 }

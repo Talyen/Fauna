@@ -51,6 +51,13 @@ export function createAudioRuntime(
   makeMedia: (url: string) => MediaVoice = (url) => new Audio(url),
   quiet = false,
 ) {
+  const reportFailure = (error: unknown) => {
+    try {
+      report(error);
+    } catch {
+      // Optional diagnostics must not interrupt voice cleanup or escape media callbacks.
+    }
+  };
   let preferences = defaultAudioPreferences;
   let disposed = false,
     unlocked = false,
@@ -100,7 +107,7 @@ export function createAudioRuntime(
     const failure = (error: unknown) => {
       record.starting = false;
       if (!disposed && !record.released && (effects.has(record) || music === record)) {
-        report(error);
+        reportFailure(error);
         failed();
       }
     };
@@ -151,14 +158,14 @@ export function createAudioRuntime(
       record.media.volume = 0;
       record.media.onerror = () => {
         if (!disposed && music === record) {
-          report(new Error(`Music could not play: ${record.cue}`));
+          reportFailure(new Error(`Music could not play: ${record.cue}`));
           release(record);
         }
       };
       fade(record, 1);
       start(record, () => release(record));
     } catch (error) {
-      report(error);
+      reportFailure(error);
     }
   }
   return {
@@ -177,7 +184,7 @@ export function createAudioRuntime(
           record.media.preload = "auto";
           record.media.load();
         } catch (error) {
-          report(error);
+          reportFailure(error);
         }
       }
       updateMusic();
@@ -216,13 +223,13 @@ export function createAudioRuntime(
         media.onended = () => release(record);
         media.onerror = () => {
           if (effects.has(record)) {
-            report(new Error(`Sound could not play: ${cue}`));
+            reportFailure(new Error(`Sound could not play: ${cue}`));
             release(record);
           }
         };
         start(record, () => release(record));
       } catch (error) {
-        report(error);
+        reportFailure(error);
       }
     },
     dispose() {

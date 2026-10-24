@@ -250,14 +250,14 @@ async function createSteam({
           await atomic(path.join(profileDir, "recovery", `${hash}.json`), raw);
         }
       }, true),
-    importStandalone: async (use) => {
-      requireAvailable();
-      if (typeof use !== "boolean") throw new Error("Invalid import choice.");
-      const candidates = use ? await offlineStorage.readCandidates() : [];
-      /* The application chooses the first valid current-format candidate. */ if (!use)
-        await atomic(importMarker, "separate");
-      return candidates;
-    },
+    importStandalone: (use) =>
+      serial(async () => {
+        if (typeof use !== "boolean") throw new Error("Invalid import choice.");
+        const candidates = use ? await offlineStorage.readCandidates() : [];
+        // The application chooses the first valid current-format candidate.
+        if (!use) await atomic(importMarker, "separate");
+        return candidates;
+      }, true),
     list: async () => {
       requireAvailable();
       return request("list", []);
