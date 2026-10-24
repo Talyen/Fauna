@@ -1,7 +1,6 @@
 import { createHash, randomUUID } from "node:crypto";
 import { readFile, writeFile, mkdir, rename, realpath, stat, rm } from "node:fs/promises";
 import path from "node:path";
-import os from "node:os";
 import net from "node:net";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { recipeSettings, prepareBytes, rasterMetadata } from "./art-recipes.mjs";
@@ -63,7 +62,7 @@ export function validateManifest(manifest) {
       !safeRelative(entry.output) ||
       outputs.has(entry.output.toLowerCase()) ||
       !safeRelative(entry.source) ||
-      !["repository", "library"].includes(entry.origin) ||
+      entry.origin !== "repository" ||
       !["copy", "card-webp"].includes(entry.recipe) ||
       !["art", "sound", "music", "interface"].includes(entry.kind) ||
       !entry.provenance ||
@@ -113,11 +112,11 @@ async function checkBytes(entry, bytes, extension = path.extname(entry.output)) 
       throw new Error(`Invalid audio header ${entry.id}`);
   }
 }
-async function readSource(entry, repository, library) {
-  const base = await realpath(entry.origin === "repository" ? repository : library);
+async function readSource(entry, repository) {
+  const base = await realpath(repository);
   const source = await realpath(path.join(base, entry.source));
   if (!source.startsWith(base + path.sep) || !(await stat(source)).isFile())
-    throw new Error(`Source escapes library: ${entry.id}`);
+    throw new Error(`Source escapes repository: ${entry.id}`);
   const bytes = await readFile(source);
   await checkBytes(entry, bytes, path.extname(entry.source));
   return bytes;
@@ -225,11 +224,7 @@ export async function assets(options = {}) {
   }
 }
 
-async function runAssets({
-  repository = root,
-  library = process.env.ASSET_LIBRARY_ROOT ?? path.join(os.homedir(), "Documents", "Asset Library"),
-  mode = "outputs",
-} = {}) {
+async function runAssets({ repository = root, mode = "outputs" } = {}) {
   const manifest = JSON.parse(await readFile(path.join(repository, "assets/manifest.json"), "utf8"));
   validateManifest(manifest);
   const manifestHash = hash(JSON.stringify(manifest));
@@ -240,7 +235,7 @@ async function runAssets({
     // pointer is the only publication boundary and always switches last.
     const selections = [];
     for (const entry of manifest.assets) {
-      const bytes = await readSource(entry, repository, library);
+      const bytes = await readSource(entry, repository);
       selections.push({ entry, bytes });
     }
     const records = {};
@@ -311,7 +306,7 @@ async function runAssets({
   await validateReceipt(manifest, receipt, repository);
   if (mode === "sources") {
     for (const entry of manifest.assets) {
-      if (hash(await readSource(entry, repository, library)) !== receipt.records[entry.id].sourceHash)
+      if (hash(await readSource(entry, repository)) !== receipt.records[entry.id].sourceHash)
         throw new Error(`Source changed: ${entry.id}`);
     }
   }

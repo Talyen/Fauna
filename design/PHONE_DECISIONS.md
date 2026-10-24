@@ -105,7 +105,7 @@ Later UI contracts supersede the original panel scrolling/scrollbars, visible fa
 
 - Menu and settings activation uses a quiet, soft click. Hover and keyboard/controller focus navigation remain silent.
 - Rejected actions use a short, soft denial cue distinct from activation. All cues respect the Sound setting.
-- Audition candidates from the existing local library at `~/Documents/Asset Library/Sounds/Game Sources`; preserve source originals and use the project's asset manifest/preparation workflow. Verified candidates include Alchemy's `interface/toggles/toggle_on_02.wav`, `toggle_off_02.wav` and `interface/feedback/denied.wav` under `Projects/Alchemy/Sound Effects`. Discovery does not constitute listening approval or selection of a specific clip.
+- Audition the repository-owned selections through the [Sound desk](../Docs/DEVELOPMENT_TOOLS.md#prepared-media-and-sound-desk). Activation and denial sources live under `assets/source/audio/sounds/`; new candidates must be explicitly imported with their provenance through the [asset workflow](../Docs/CONTENT.md#prepared-assets). Discovery does not constitute listening approval or selection of a specific clip.
 
 ## Error messages
 

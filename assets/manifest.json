@@ -232,223 +232,243 @@
     },
     {
       "id": "sound.physical",
-      "origin": "library",
-      "source": "Sounds/Game Sources/Sound Effects/combat/attacks/hit_01.wav",
+      "origin": "repository",
+      "source": "assets/source/audio/sounds/physical.wav",
       "output": "sounds/physical.wav",
       "recipe": "copy",
       "kind": "sound",
       "provenance": "Shared Asset Library; selected by Alchemy sound registry",
       "rights": "Shared project library selection; retain original library license metadata",
-      "listening": "pending"
+      "listening": "pending",
+      "originalSource": "Sounds/Game Sources/Sound Effects/combat/attacks/hit_01.wav"
     },
     {
       "id": "sound.fire",
-      "origin": "library",
-      "source": "Sounds/Game Sources/Sound Effects/magic/elemental/fire/fireball_01.ogg",
+      "origin": "repository",
+      "source": "assets/source/audio/sounds/fire.ogg",
       "output": "sounds/fire.ogg",
       "recipe": "copy",
       "kind": "sound",
       "provenance": "Shared Asset Library; selected by Alchemy sound registry",
       "rights": "Shared project library selection; retain original library license metadata",
-      "listening": "pending"
+      "listening": "pending",
+      "originalSource": "Sounds/Game Sources/Sound Effects/magic/elemental/fire/fireball_01.ogg"
     },
     {
       "id": "sound.ice",
-      "origin": "library",
-      "source": "Sounds/Game Sources/Sound Effects/magic/elemental/ice/ice_throw_01.ogg",
+      "origin": "repository",
+      "source": "assets/source/audio/sounds/ice.ogg",
       "output": "sounds/ice.ogg",
       "recipe": "copy",
       "kind": "sound",
       "provenance": "Shared Asset Library; selected by Alchemy sound registry",
       "rights": "Shared project library selection; retain original library license metadata",
-      "listening": "pending"
+      "listening": "pending",
+      "originalSource": "Sounds/Game Sources/Sound Effects/magic/elemental/ice/ice_throw_01.ogg"
     },
     {
       "id": "sound.lightning",
-      "origin": "library",
-      "source": "Sounds/Game Sources/Projects/Alchemy/Sound Effects/approved/lightning-impact-ac84ed8a-0-2000.wav",
+      "origin": "repository",
+      "source": "assets/source/audio/sounds/lightning.wav",
       "output": "sounds/lightning.wav",
       "recipe": "copy",
       "kind": "sound",
       "provenance": "Shared Asset Library; selected by Alchemy sound registry",
       "rights": "Shared project library selection; retain original library license metadata",
-      "listening": "pending"
+      "listening": "pending",
+      "originalSource": "Sounds/Game Sources/Projects/Alchemy/Sound Effects/approved/lightning-impact-ac84ed8a-0-2000.wav"
     },
     {
       "id": "sound.poison",
-      "origin": "library",
-      "source": "Sounds/Game Sources/Sound Effects/combat/attacks/sword_impact_01.ogg",
+      "origin": "repository",
+      "source": "assets/source/audio/sounds/poison.ogg",
       "output": "sounds/poison.ogg",
       "recipe": "copy",
       "kind": "sound",
       "provenance": "Shared Asset Library; selected by Alchemy sound registry",
       "rights": "Shared project library selection; retain original library license metadata",
-      "listening": "pending"
+      "listening": "pending",
+      "originalSource": "Sounds/Game Sources/Sound Effects/combat/attacks/sword_impact_01.ogg"
     },
     {
       "id": "sound.nature",
-      "origin": "library",
-      "source": "Sounds/Game Sources/Sound Effects/combat/attacks/hit_01.wav",
+      "origin": "repository",
+      "source": "assets/source/audio/sounds/physical.wav",
       "output": "sounds/nature.wav",
       "recipe": "copy",
       "kind": "sound",
       "provenance": "Shared Asset Library; selected by Alchemy sound registry",
       "rights": "Shared project library selection; retain original library license metadata",
-      "listening": "pending"
+      "listening": "pending",
+      "originalSource": "Sounds/Game Sources/Sound Effects/combat/attacks/hit_01.wav"
     },
     {
       "id": "sound.light",
-      "origin": "library",
-      "source": "Sounds/Game Sources/Projects/Trinket/Sound Effects/combat/attacks/hit_holy_01.ogg",
+      "origin": "repository",
+      "source": "assets/source/audio/sounds/light.ogg",
       "output": "sounds/light.ogg",
       "recipe": "copy",
       "kind": "sound",
       "provenance": "Shared Asset Library; selected by Alchemy sound registry",
       "rights": "Shared project library selection; retain original library license metadata",
-      "listening": "pending"
+      "listening": "pending",
+      "originalSource": "Sounds/Game Sources/Projects/Trinket/Sound Effects/combat/attacks/hit_holy_01.ogg"
     },
     {
       "id": "sound.heal",
-      "origin": "library",
-      "source": "Sounds/Game Sources/Projects/Trinket/Sound Effects/magic/support/heal_01.wav",
+      "origin": "repository",
+      "source": "assets/source/audio/sounds/heal.wav",
       "output": "sounds/heal.wav",
       "recipe": "copy",
       "kind": "sound",
       "provenance": "Shared Asset Library; selected by Alchemy sound registry",
       "rights": "Shared project library selection; retain original library license metadata",
-      "listening": "pending"
+      "listening": "pending",
+      "originalSource": "Sounds/Game Sources/Projects/Trinket/Sound Effects/magic/support/heal_01.wav"
     },
     {
       "id": "sound.block",
-      "origin": "library",
-      "source": "Sounds/Game Sources/Sound Effects/combat/defense/block_01.ogg",
+      "origin": "repository",
+      "source": "assets/source/audio/sounds/block.ogg",
       "output": "sounds/block.ogg",
       "recipe": "copy",
       "kind": "sound",
       "provenance": "Shared Asset Library; selected by Alchemy sound registry",
       "rights": "Shared project library selection; retain original library license metadata",
-      "listening": "pending"
+      "listening": "pending",
+      "originalSource": "Sounds/Game Sources/Sound Effects/combat/defense/block_01.ogg"
     },
     {
       "id": "sound.absorb",
-      "origin": "library",
-      "source": "Sounds/Game Sources/Sound Effects/combat/defense/block_01.ogg",
+      "origin": "repository",
+      "source": "assets/source/audio/sounds/block.ogg",
       "output": "sounds/absorb.ogg",
       "recipe": "copy",
       "kind": "sound",
       "provenance": "Shared Asset Library; selected by Alchemy sound registry",
       "rights": "Shared project library selection; retain original library license metadata",
-      "listening": "pending"
+      "listening": "pending",
+      "originalSource": "Sounds/Game Sources/Sound Effects/combat/defense/block_01.ogg"
     },
     {
       "id": "sound.deny",
-      "origin": "library",
-      "source": "Sounds/Game Sources/Projects/Alchemy/Sound Effects/interface/feedback/denied.wav",
+      "origin": "repository",
+      "source": "assets/source/audio/sounds/deny.wav",
       "output": "sounds/deny.wav",
       "recipe": "copy",
       "kind": "sound",
       "provenance": "Shared Asset Library; selected by Alchemy sound registry",
       "rights": "Shared project library selection; retain original library license metadata",
-      "listening": "pending"
+      "listening": "pending",
+      "originalSource": "Sounds/Game Sources/Projects/Alchemy/Sound Effects/interface/feedback/denied.wav"
     },
     {
       "id": "sound.victory",
-      "origin": "library",
-      "source": "Sounds/Game Sources/Projects/Trinket/Sound Effects/outcomes/victory/victory_01.wav",
+      "origin": "repository",
+      "source": "assets/source/audio/sounds/victory.wav",
       "output": "sounds/victory.wav",
       "recipe": "copy",
       "kind": "sound",
       "provenance": "Shared Asset Library; selected by Alchemy sound registry",
       "rights": "Shared project library selection; retain original library license metadata",
-      "listening": "pending"
+      "listening": "pending",
+      "originalSource": "Sounds/Game Sources/Projects/Trinket/Sound Effects/outcomes/victory/victory_01.wav"
     },
     {
       "id": "sound.defeat",
-      "origin": "library",
-      "source": "Sounds/Game Sources/Projects/Alchemy/Sound Effects/outcomes/defeat/harpsichord_defeated.wav",
+      "origin": "repository",
+      "source": "assets/source/audio/sounds/defeat.wav",
       "output": "sounds/defeat.wav",
       "recipe": "copy",
       "kind": "sound",
       "provenance": "Shared Asset Library; selected by Alchemy sound registry",
       "rights": "Shared project library selection; retain original library license metadata",
-      "listening": "pending"
+      "listening": "pending",
+      "originalSource": "Sounds/Game Sources/Projects/Alchemy/Sound Effects/outcomes/defeat/harpsichord_defeated.wav"
     },
     {
       "id": "sound.recruit",
-      "origin": "library",
-      "source": "Sounds/Game Sources/Projects/Trinket/Sound Effects/progression/talent_unlock_01.wav",
+      "origin": "repository",
+      "source": "assets/source/audio/sounds/recruit.wav",
       "output": "sounds/recruit.wav",
       "recipe": "copy",
       "kind": "sound",
       "provenance": "Shared Asset Library; selected by Alchemy sound registry",
       "rights": "Shared project library selection; retain original library license metadata",
-      "listening": "pending"
+      "listening": "pending",
+      "originalSource": "Sounds/Game Sources/Projects/Trinket/Sound Effects/progression/talent_unlock_01.wav"
     },
     {
       "id": "sound.talent",
-      "origin": "library",
-      "source": "Sounds/Game Sources/Projects/Trinket/Sound Effects/progression/talent_unlock_01.wav",
+      "origin": "repository",
+      "source": "assets/source/audio/sounds/recruit.wav",
       "output": "sounds/talent.wav",
       "recipe": "copy",
       "kind": "sound",
       "provenance": "Shared Asset Library; selected by Alchemy sound registry",
       "rights": "Shared project library selection; retain original library license metadata",
-      "listening": "pending"
+      "listening": "pending",
+      "originalSource": "Sounds/Game Sources/Projects/Trinket/Sound Effects/progression/talent_unlock_01.wav"
     },
     {
       "id": "sound.knockout",
-      "origin": "library",
-      "source": "Sounds/Game Sources/Projects/Alchemy/Sound Effects/combat/weapons/sword_slice.wav",
+      "origin": "repository",
+      "source": "assets/source/audio/sounds/knockout.wav",
       "output": "sounds/knockout.wav",
       "recipe": "copy",
       "kind": "sound",
       "provenance": "Shared Asset Library; selected by Alchemy sound registry",
       "rights": "Shared project library selection; retain original library license metadata",
-      "listening": "pending"
+      "listening": "pending",
+      "originalSource": "Sounds/Game Sources/Projects/Alchemy/Sound Effects/combat/weapons/sword_slice.wav"
     },
     {
       "id": "music.menu",
-      "origin": "library",
-      "source": "Sounds/Game Sources/Music/Menu 1.mp3",
+      "origin": "repository",
+      "source": "assets/source/audio/music/menu.mp3",
       "output": "music/menu.mp3",
       "recipe": "copy",
       "kind": "music",
       "provenance": "Shared Asset Library; Alchemy soundtrack selection",
       "rights": "Shared project music; original source retained in library",
-      "listening": "pending"
+      "listening": "pending",
+      "originalSource": "Sounds/Game Sources/Music/Menu 1.mp3"
     },
     {
       "id": "music.fernwood",
-      "origin": "library",
-      "source": "Sounds/Game Sources/Music/Battle 1.mp3",
+      "origin": "repository",
+      "source": "assets/source/audio/music/fernwood.mp3",
       "output": "music/fernwood.mp3",
       "recipe": "copy",
       "kind": "music",
       "provenance": "Shared Asset Library; Alchemy soundtrack selection",
       "rights": "Shared project music; original source retained in library",
-      "listening": "pending"
+      "listening": "pending",
+      "originalSource": "Sounds/Game Sources/Music/Battle 1.mp3"
     },
     {
       "id": "music.marsh",
-      "origin": "library",
-      "source": "Sounds/Game Sources/Music/Battle 3.mp3",
+      "origin": "repository",
+      "source": "assets/source/audio/music/marsh.mp3",
       "output": "music/marsh.mp3",
       "recipe": "copy",
       "kind": "music",
       "provenance": "Shared Asset Library; Alchemy soundtrack selection",
       "rights": "Shared project music; original source retained in library",
-      "listening": "pending"
+      "listening": "pending",
+      "originalSource": "Sounds/Game Sources/Music/Battle 3.mp3"
     },
     {
       "id": "music.boss",
-      "origin": "library",
-      "source": "Sounds/Game Sources/Music/The Blight Treant.mp3",
+      "origin": "repository",
+      "source": "assets/source/audio/music/boss.mp3",
       "output": "music/boss.mp3",
       "recipe": "copy",
       "kind": "music",
       "provenance": "Shared Asset Library; Alchemy soundtrack selection",
       "rights": "Shared project music; original source retained in library",
-      "listening": "pending"
+      "listening": "pending",
+      "originalSource": "Sounds/Game Sources/Music/The Blight Treant.mp3"
     },
     {
       "id": "boon.tattered-pages",
@@ -540,14 +560,15 @@
     },
     {
       "id": "sound.activate",
-      "origin": "library",
-      "source": "Sounds/Game Sources/Projects/Alchemy/Sound Effects/interface/toggles/toggle_on_02.wav",
+      "origin": "repository",
+      "source": "assets/source/audio/sounds/activate.wav",
       "output": "sounds/activate.wav",
       "recipe": "copy",
       "kind": "sound",
       "provenance": "Shared Asset Library; quiet activation candidate from Alchemy interface library",
       "rights": "Shared project library selection; retain original library license metadata",
-      "listening": "pending"
+      "listening": "pending",
+      "originalSource": "Sounds/Game Sources/Projects/Alchemy/Sound Effects/interface/toggles/toggle_on_02.wav"
     },
     {
       "id": "encounter.combat",

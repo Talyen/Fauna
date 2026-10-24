@@ -47,7 +47,7 @@ On October 23, 2026, the project owner confirmed that all player-facing content 
 - **Boon cards: 3:4 portrait, matching hand cards.** Boon displays use dedicated portraits in `public/art/boons/`; keep names and effects outside the artwork.
 - **Action cards: 3:4 portrait, full bleed.** Each creature has three dedicated production PNG illustrations.
 
-Use native aspect ratios without stretching or converting one composition into another. Preserve selected originals under `public/art/` or the source library, register them in `assets/manifest.json` and prepare outputs explicitly. Names and rules are UI text; never bake them into art. Branding alone may contain the Fauna wordmark.
+Use native aspect ratios without stretching or converting one composition into another. Preserve selected artwork originals under `public/art/`, register them in `assets/manifest.json` and prepare outputs explicitly. Names and rules are UI text; never bake them into art. Branding alone may contain the Fauna wordmark.
 
 [UI contracts](UI.md#layout-artwork-size-and-spacing) own displayed dimensions, contain rendering and overlay exceptions. [Inspection](ui/screens.md#creature-and-action-inspection) owns the current passive, stars and ability disclosure. Source resolution is independent of CSS display size.
 
@@ -61,17 +61,19 @@ The [manifest](../assets/manifest.json) identifies keyword/category portraits, c
 
 ## Prepared assets
 
-The [manifest](../assets/manifest.json) owns stable media IDs, source selections, versioned recipes, aspect ratios, provenance and rights notes. Artwork sources stay under `public/art/`; sound/music sources use `~/Documents/Asset Library` or `ASSET_LIBRARY_ROOT` with library-relative selections.
+The [manifest](../assets/manifest.json) owns stable media IDs, source selections, versioned recipes, aspect ratios, provenance and rights notes. All sources belong to this repository: artwork stays under `public/art/`, interface sprites under `public/ui/`, and sound/music originals under `assets/source/audio/`. Preparation rejects external origins and sources that resolve outside the checkout. No asset command requires an external library or uses `ASSET_LIBRARY_ROOT`.
+
+Audio selections retain their historical library-relative paths in `originalSource` for provenance only; tooling never reads those paths. Shared cues reuse one local source. To update a selection, explicitly import the new source and its rights metadata into the repository, update the manifest and prepare it; upstream edits never update Fauna automatically. Imported audio preserves the previously selected bytes, provenance, rights notes and pending listening status.
 
 | Stage    | Action and result                                                                                                                                                                                                                                             |
 | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Author   | Register source selections and recipes in the manifest; preserve upstream license metadata                                                                                                                                                                    |
 | Prepare  | `npm run assets:prepare` validates all sources and publishes a complete generation                                                                                                                                                                            |
-| Validate | After authoring, run `npm run assets:check` for selected source bytes, recipes and output hashes; `npm run assets:check:outputs` checks committed outputs without the library                                                                                 |
+| Validate | After authoring, run `npm run assets:check` for selected source bytes, recipes and output hashes; `npm run assets:check:outputs` checks committed outputs without reading originals                                                                           |
 | Review   | `npm run assets:review` writes original/prepared comparisons, a contact sheet and size summary under `reports/art-review/index.html`; inspect at 2× density, then review hand, creature, Collection and inspection through [UI review](UI.md#required-review) |
-| Build    | Ordinary dev/build commands run output-only checks and consume prepared outputs without regeneration or library access; `npm run assets:check:bundle` validates an existing build's active media inventory and budgets                                        |
+| Build    | Ordinary dev/build commands run output-only checks and consume prepared outputs without regeneration; `npm run assets:check:bundle` validates an existing build's active media inventory and budgets                                                          |
 
-Preparation preserves originals, library files and historical generations. Never edit generated files by hand. Explicit cleanup may retire unreferenced tracked outputs only after validating the active lookup and checking all repository references; preserve originals and active objects, with retired outputs recoverable from Git.
+Preparation preserves repository originals and historical generations. Never edit generated files by hand. Explicit cleanup may retire unreferenced tracked outputs only after validating the active lookup and checking all repository references; preserve originals and active objects, with retired outputs recoverable from Git.
 
 Immutable objects live under `public/prepared/objects/<fingerprint>/`, with hash receipts. Fingerprints include source bytes, recipe settings, output format and encoder toolchain; unchanged objects are reused without rewriting or re-encoding. The generated `src/assets/prepared.json` lookup and publication receipt changes atomically only after every output validates. Missing sources, corrupt objects or encoding failures leave the previous pointer intact. Output-only checks enforce recipes without requiring the preparing machine's exact native encoder versions; source checks also verify source bytes.
 

@@ -1,9 +1,50 @@
-import { mkdtemp, mkdir, writeFile, readFile, rm, stat } from "node:fs/promises";
+import { mkdtemp, mkdir, writeFile, readFile, rm, stat, copyFile } from "node:fs/promises";
 import sharp from "sharp";
 import os from "node:os";
 import path from "node:path";
-import { expect, it } from "vitest";
+import { expect, it, vi } from "vitest";
 import { assets, validateManifest, imageDimensions } from "../../../scripts/assets/assets.mjs";
+
+it("prepares and checks the selected audio from a standalone checkout without changing its bytes", async () => {
+  const repository = await mkdtemp(path.join(os.tmpdir(), "fauna-standalone-audio-"));
+  try {
+    const root = new URL("../../../", import.meta.url);
+    const manifest = JSON.parse(await readFile(new URL("assets/manifest.json", root), "utf8"));
+    const published = JSON.parse(await readFile(new URL("src/assets/prepared.json", root), "utf8"));
+    expect(manifest.assets.every((entry) => entry.origin === "repository")).toBe(true);
+    const audio = manifest.assets.filter((entry) => ["sound", "music"].includes(entry.kind));
+    expect(audio.length).toBeGreaterThan(0);
+    await mkdir(path.join(repository, "assets"));
+    const manifestPath = path.join(repository, "assets/manifest.json");
+    await writeFile(manifestPath, JSON.stringify({ ...manifest, assets: audio }));
+    for (const source of new Set(audio.map((entry) => entry.source))) {
+      const destination = path.join(repository, source);
+      await mkdir(path.dirname(destination), { recursive: true });
+      await copyFile(new URL(source, root), destination);
+    }
+    vi.stubEnv("ASSET_LIBRARY_ROOT", path.join(repository, "missing-library"));
+    const prepared = await assets({ repository, mode: "prepare" });
+    expect(prepared.records).toEqual(
+      Object.fromEntries(audio.map((entry) => [entry.id, published.records[entry.id]])),
+    );
+    for (const record of Object.values(prepared.records)) expect(record.sourceHash).toBe(record.outputHash);
+    expect(await assets({ repository, mode: "sources" })).toEqual(prepared);
+    expect(await assets({ repository, mode: "outputs" })).toEqual(prepared);
+
+    await writeFile(
+      manifestPath,
+      JSON.stringify({ ...manifest, assets: [{ ...audio[0], origin: "library" }] }),
+    );
+    await expect(assets({ repository, mode: "prepare" })).rejects.toThrow("Invalid or duplicate selection");
+    expect(JSON.parse(await readFile(path.join(repository, "src/assets/prepared.json"), "utf8"))).toEqual(
+      prepared,
+    );
+  } finally {
+    vi.unstubAllEnvs();
+    await rm(repository, { recursive: true, force: true });
+  }
+});
+
 it("preserves the published generation after a missing or invalid source and detects changed bytes", async () => {
   const repository = await mkdtemp(path.join(os.tmpdir(), "fauna-assets-"));
   try {
