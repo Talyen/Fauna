@@ -19,7 +19,7 @@ import {
   TURN_DRAW,
   type Combatant,
 } from "./index";
-import { draw } from "../card-zones";
+import { draw, expressDelivery } from "../card-zones";
 import { retainedBlock, enemyAbilityValue } from "../ability-rules";
 import { enemyCard, enemyCanUse } from "../card-rules";
 import type { GameEvent, GameState, BattleState } from "../types";
@@ -218,5 +218,6 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
       break;
   }
   draw(draft, TURN_DRAW, events);
+  expressDelivery(draft, events);
   events.push({ kind: "turn", text: `Turn ${battle.turn}. ${battle.maxMana} Mana restored.` });
 }

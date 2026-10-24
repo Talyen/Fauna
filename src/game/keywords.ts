@@ -164,6 +164,13 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Purged",
       "Purging",
     ]),
+    food: entry(
+      "Food",
+      "card",
+      "active",
+      "Shared consumables; Apple restores 6 Health; Mana Berries grant 2 Mana; Trail Bread grants 6 Block; Each costs 1 Mana and has Consume",
+      ["Foods"],
+    ),
     consume: entry(
       "Consume",
       "card",
@@ -220,6 +227,7 @@ export const progressionLabel = (id: ProgressionKeyword) => keywordLabel(id);
 export const EFFECT_KEYWORDS = freeze(
   {
     procession: ["health"],
+    createFood: [],
     createPearls: ["mana", "block"],
     pearl: ["mana", "block"],
     attack: [],

@@ -14,7 +14,7 @@ import {
   TURN_DRAW,
 } from "./combat/index";
 import { shuffle, roll } from "./random";
-import { draw, drawKeyword } from "./card-zones";
+import { draw, drawKeyword, expressDelivery } from "./card-zones";
 import { bossEncounter, encounterSource, finalEncounter, generateEncounterPack } from "./encounters";
 import type { GameEvent, GameState, Lifecycle, BattleState, RewardState, StateAt } from "./types";
 import { rebuildCards } from "./team";
@@ -140,6 +140,7 @@ export function beginBattle(state: StateAt<"teamSelection">, events: GameEvent[]
       enemy.deck = bossDeck(active, enemy);
     }
   draw(active, TURN_DRAW + (state.boons.includes("tattered-pages") ? 1 : 0), events);
+  expressDelivery(active, events);
   if (hasTalent(state, "nature.ecosystem")) drawKeyword(active, "nature", events);
   for (const unit of state.team) {
     if (hasTalent(state, "armor.bulwark")) grantArmor(state, unit, 2, events);

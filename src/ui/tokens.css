@@ -257,6 +257,7 @@
   --keyword-resurrect-deep: var(--keyword-health-deep);
   --keyword-negate: #c4b5fd;
   --keyword-consume: #a78bfa;
+  --keyword-food: #e5ba73;
   --damage-physical: var(--keyword-physical);
   --damage-poison: var(--keyword-poison);
   --damage-water: var(--keyword-water);
@@ -307,6 +308,7 @@
   --keyword-negate-deep: color-mix(in srgb, var(--keyword-negate) 55%, var(--background));
   --keyword-nullify-deep: color-mix(in srgb, var(--keyword-nullify) 55%, var(--background));
   --keyword-consume-deep: #6d28d9;
+  --keyword-food-deep: #8b5e34;
   --effect-highlight: #fff;
   --effect-black: #000;
   --effect-gold-primary: #fbbf24;

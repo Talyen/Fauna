@@ -70,6 +70,10 @@ One protection lasts until consumed or Purged, survives swaps and resume and res
 
 Resurrect returns a knocked-out roster ally with 20% of maximum Health, rounded normally with a minimum of one. It can target deployed allies or backups; their positions and card ownership stay intact. Living allies and Minions are not recipients. Resurrection is direct restoration of life, unaffected by healing modifiers and without healing-trigger rewards. Existing combat effects and per-battle counters remain; spent Death’s Door is not renewed and grace does not restart. Resurrect awards Health XP on the accepted card play
 
+### Food
+
+Food cards are shared consumables without a creature owner. They cost 1 Mana and have Consume. Apple and Trail Bread target a living ally; Mana Berries add shared Mana. They survive creator departure and recycle when unplayed. [The Food owner](../src/game/content/food.ts) defines the pool; [Orifable](content/creatures/orifable.md#shared-food) records full ownership and targeting rules. Food is card vocabulary and awards no separate keyword XP.
+
 ### Consume
 
 **Consume** removes a card from the battle after its accepted play resolves, including repeated effects and the one court trigger. Played Pearls never enter Discard; unplayed Pearls discard and recycle normally. Consumption frees space under the battle card limit. Rejected plays retain the card and RNG unchanged.

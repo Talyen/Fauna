@@ -109,7 +109,7 @@ export function battleBenefits(
     !!def.effects?.some((effect) => effect.kind === "draw" && effect.amount > 0) &&
     ([...state.battle.draw, ...state.battle.discard, ...state.battle.buffer].some((id) => {
       const drawn = state.cards.find((entry) => entry.id === id)!;
-      return drawableOwnerIds(state).has(drawn.ownerId);
+      return drawn.ownerId === null || drawableOwnerIds(state).has(drawn.ownerId);
     }) ||
       (state.cards.length < MAX_BATTLE_CARDS &&
         allies.some((unit) =>
@@ -135,6 +135,7 @@ export function battleBenefits(
             : "protection",
       );
     }
+    case "createFood":
     case "createPearls":
       return support(state.cards.length < MAX_BATTLE_CARDS ? "resource" : "none");
     case "pearl":
@@ -271,7 +272,7 @@ export function battleBenefits(
     case "recover": {
       const useful = state.battle.discard.some((id) => {
         const card = state.cards.find((entry) => entry.id === id)!;
-        return drawableOwnerIds(state).has(card.ownerId);
+        return card.ownerId === null || drawableOwnerIds(state).has(card.ownerId);
       });
       if (def.target === "ally") {
         const healing =

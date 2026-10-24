@@ -1,6 +1,7 @@
+import { cardActor, drawableOwnerIds } from "../card-actors";
+import { createFood } from "./food";
 import { takeAttackReflection } from "./attack-reflection";
 import { resurrect } from "./resurrection";
-import { drawableOwnerIds } from "../card-actors";
 import { cardTargeting } from "../card-rules";
 import { interceptAttack } from "./interception";
 import { battlefield, isRosterCreature } from "../battlefield";
@@ -70,7 +71,7 @@ function recoverDiscard(state: GameState, events: GameEvent[]) {
   const battle = state.battle!;
   const available = battle.discard.filter((id) => {
     const card = state.cards.find((entry) => entry.id === id)!;
-    return drawableOwnerIds(state).has(card.ownerId);
+    return card.ownerId === null || drawableOwnerIds(state).has(card.ownerId);
   });
   if (!available.length) return;
   const id = available[Math.floor(roll(state) * available.length)]!;
@@ -81,7 +82,7 @@ function recoverDiscard(state: GameState, events: GameEvent[]) {
   events.push({
     kind: "action",
     actionType: "support",
-    actorId: card.ownerId,
+    actorId: card.ownerId ?? cardActor(state, card)!.id,
     text: `${definition(card.definitionId).name} returns to your hand`,
   });
 }
@@ -323,6 +324,9 @@ export function executeAbility(
     switch (kind) {
       case "procession":
         summonEcho(state, actor, action.side, value, events);
+        break;
+      case "createFood":
+        if (action.side === "player") createFood(state, action.actor, value, events);
         break;
       case "createPearls":
         createPearls(state, actor, action.side, value, events);

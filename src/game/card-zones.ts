@@ -45,7 +45,7 @@ function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
       kind: "action",
       actionType: "support",
       actorId: reader.id,
-      targetId: original.ownerId,
+      targetId: original.ownerId ?? undefined,
       text: `${species(reader.species).name} copies ${definition(original.definitionId).name} with Well Read`,
     });
   }
@@ -81,8 +81,11 @@ export function draw(state: GameState, count: number, events: GameEvent[] = []) 
   const eligibleCards = new Set<string>();
   // Well Read only inserts copies into the hand/buffer; draw/discard ownership
   // stays fixed throughout this draw, including recycling between draws.
-  if (alive.size) for (const card of state.cards) if (alive.has(card.ownerId)) eligibleCards.add(card.id);
+  if (alive.size)
+    for (const card of state.cards)
+      if (card.ownerId === null || alive.has(card.ownerId)) eligibleCards.add(card.id);
   const eligible = (id: string) => !alive.size || eligibleCards.has(id);
+  let drawn = 0;
   for (let i = 0; i < count; i++) {
     let index = lastEligibleIndex(b.draw, eligible);
     if (index < 0) {
@@ -92,7 +95,27 @@ export function draw(state: GameState, count: number, events: GameEvent[] = []) 
     if (index < 0) break;
     const card = b.draw.splice(index, 1)[0]!;
     receiveDraw(state, card, events);
+    drawn++;
     recycleDiscard(state);
+  }
+  return drawn;
+}
+
+/** One delivery per living deployed courier at each turn start, including the opening. */
+export function expressDelivery(state: GameState, events: GameEvent[]) {
+  for (const courier of state.team) {
+    if (courier.health <= 0) continue;
+    const chance = creaturePassive(state, courier.species).effects.reduce(
+      (sum, effect) => sum + (effect.kind === "expressDelivery" ? effect.amount : 0),
+      0,
+    );
+    if (succeeds(state, chance / 100, false, events) && draw(state, 1, events))
+      events.push({
+        kind: "action",
+        actionType: "support",
+        actorId: courier.id,
+        text: "Express Delivery draws an extra card",
+      });
   }
 }
 
@@ -106,7 +129,10 @@ export function drawKeyword(
   fillHand(state);
   const eligible = (id: string) => {
     const card = state.cards.find((c) => c.id === id)!;
-    return drawableOwnerIds(state).has(card.ownerId) && cardKeywords(card).includes(keyword);
+    return (
+      (card.ownerId === null || drawableOwnerIds(state).has(card.ownerId)) &&
+      cardKeywords(card).includes(keyword)
+    );
   };
   let index = lastEligibleIndex(battle.draw, eligible);
   if (index < 0) {

@@ -2020,6 +2020,83 @@
       "aspect": [3, 4],
       "provenance": "Unchanged Almanelle artwork from Google Drive: https://drive.google.com/file/d/1HLZ6FCMzkYdhqhWQTplkq1Q_koT0Y9Zo/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "creature.orifable",
+      "origin": "repository",
+      "source": "public/art/creatures/orifable/portrait.png",
+      "output": "art/orifable/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Orifable artwork from Google Drive: https://drive.google.com/file/d/1uRbVYn1LT6G_7gg65mN-zLsBFZZk4e3l/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.orifable.care-package",
+      "origin": "repository",
+      "source": "public/art/creatures/orifable/care-package.png",
+      "output": "art/orifable/care-package.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Orifable artwork from Google Drive: https://drive.google.com/file/d/10F-sy4aL0O3B3YWcF1hp4gqIRtErj3cp/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.orifable.good-tidings",
+      "origin": "repository",
+      "source": "public/art/creatures/orifable/good-tidings.png",
+      "output": "art/orifable/good-tidings.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Orifable artwork from Google Drive: https://drive.google.com/file/d/1skK3N1iwDHd5cCPcq4sJetkdJyPMcO_q/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.orifable.postal-swarm",
+      "origin": "repository",
+      "source": "public/art/creatures/orifable/postal-swarm.png",
+      "output": "art/orifable/postal-swarm.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Orifable artwork from Google Drive: https://drive.google.com/file/d/1AMG-3DWaEpNC0GXPq3GZ9jr4giX_hPC1/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "food.apple",
+      "origin": "repository",
+      "source": "public/art/food/apple.png",
+      "output": "art/food/apple.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Generated with built-in ImageGen using owner-provided Fauna style prompts; exact prompt in Docs/content/creatures/orifable-art-prompts.md",
+      "rights": "Fauna owner-requested AI-generated artwork; see assets/content-provenance.json"
+    },
+    {
+      "id": "food.mana-berries",
+      "origin": "repository",
+      "source": "public/art/food/mana-berries.png",
+      "output": "art/food/mana-berries.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Generated with built-in ImageGen using owner-provided Fauna style prompts; exact prompt in Docs/content/creatures/orifable-art-prompts.md",
+      "rights": "Fauna owner-requested AI-generated artwork; see assets/content-provenance.json"
+    },
+    {
+      "id": "food.trail-bread",
+      "origin": "repository",
+      "source": "public/art/food/trail-bread.png",
+      "output": "art/food/trail-bread.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Generated with built-in ImageGen using owner-provided Fauna style prompts; exact prompt in Docs/content/creatures/orifable-art-prompts.md",
+      "rights": "Fauna owner-requested AI-generated artwork; see assets/content-provenance.json"
     }
   ]
 }

@@ -1,3 +1,5 @@
+import { FOOD_CARDS } from "./content/food";
+export { FOOD_CARDS } from "./content/food";
 import { PEARL } from "./content/creatures/memento";
 import { freeze } from "immer";
 import { CARDS } from "./content/creatures";
@@ -22,7 +24,7 @@ export const FIRST_RUN_STARTERS: readonly SpeciesId[] = [
   "euphera",
   "tournelle",
 ];
-const cardsById = new Map(CARDS.map((card) => [card.id, card]));
+const cardsById = new Map([...CARDS, ...FOOD_CARDS].map((card) => [card.id, card]));
 export function definition(id: string): CardDefinition {
   const result = id === PEARL.id ? PEARL : cardsById.get(id);
   if (!result) throw new Error(`Unknown card: ${id}`);

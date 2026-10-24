@@ -27,9 +27,11 @@ export type SpeciesId =
   | "tournelle"
   | "reverie"
   | "oathara"
-  | "almanelle";
+  | "almanelle"
+  | "orifable";
 export type Effect = keyof typeof EFFECT_KEYWORDS;
 type PassiveEffect =
+  | { kind: "expressDelivery"; amount: number }
   | { kind: "fallenLeaves"; amount: number }
   | { kind: "unfinishedJourney"; amount: number }
   | { kind: "unhurried"; amount: number }
@@ -83,7 +85,7 @@ type CardEffect =
   | { kind: "draw" | "mana" | "purge" | "blind" | "meltArmor"; amount: number };
 export interface CardBase {
   id: string;
-  species: SpeciesId;
+  species: SpeciesId | null;
   name: string;
   value: number;
   cost: 1;

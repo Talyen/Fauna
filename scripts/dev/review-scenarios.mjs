@@ -1,6 +1,11 @@
 import { expect } from "@playwright/test";
 
 export const SCENARIOS = [
+  "orifable-battle",
+  "orifable-food",
+  "orifable-targeting",
+  "orifable-collection",
+  "orifable-rank-five",
   "almanelle-battle",
   "almanelle-collection",
   "almanelle-rank-five",
@@ -94,13 +99,26 @@ export async function reviewScenario(server, name) {
         discovery: { ...game.discovery, recruited: { ...game.discovery.recruited, almanelle: 6 } },
       };
   }
+  if (name.startsWith("orifable-")) {
+    const { orifableBattle } = await server.ssrLoadModule("/tests/support/orifable.ts");
+    game = orifableBattle(["orifable-food", "orifable-targeting"].includes(name));
+    if (name === "orifable-rank-five")
+      game = {
+        ...game,
+        discovery: { ...game.discovery, recruited: { ...game.discovery.recruited, orifable: 6 } },
+      };
+  }
   const save = encodeSave(game);
   decodeSave(save);
   return {
     name,
     save,
     seed: name.startsWith("merchant") ? 7 : 42,
-    fixture: name.startsWith("almanelle-") ? "tests/support/almanelle.ts" : "tests/support/game.ts",
+    fixture: name.startsWith("orifable-")
+      ? "tests/support/orifable.ts"
+      : name.startsWith("almanelle-")
+        ? "tests/support/almanelle.ts"
+        : "tests/support/game.ts",
   };
 }
 
@@ -120,7 +138,10 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   await expect(page.locator("#startup-splash")).toHaveCount(0);
   const button = (name) => page.getByRole("button", { name, exact: true });
   const menu = scenario.name === "talent-tree" ? "talents" : scenario.name.split("-")[0];
-  if (["almanelle-collection", "almanelle-rank-five"].includes(scenario.name)) {
+  if (["orifable-collection", "orifable-rank-five"].includes(scenario.name)) {
+    await button("Collection").click();
+    await button("Inspect Orifable").click();
+  } else if (["almanelle-collection", "almanelle-rank-five"].includes(scenario.name)) {
     await button("Collection").click();
     await button("Inspect Almanelle").click();
   } else if (scenario.name === "oathara-collection") {
@@ -131,6 +152,9 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   } else if (scenario.name !== "home") {
     await button("Continue").click();
     if (scenario.name === "pause") await button("Open menu").click();
+  }
+  if (scenario.name === "orifable-targeting") {
+    await page.locator('.hand [aria-label^="Apple,"]').click();
   }
   if (scenario.name === "oathara-resurrection") {
     await page.locator('.hand [data-card-id="ally-0:oathara-vow-of-return"]').click();

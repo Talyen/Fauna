@@ -7,11 +7,14 @@ import type { Card, Creature, GameState } from "./types";
 /** Intrinsic effect value; healing caps resolve in the command. */
 export function actionValue(
   card: Card,
-  actor: Pick<Creature, "species" | "attacked"> & Partial<Pick<Creature, "block" | "combat">>,
+  actor: { species: Creature["species"] | null; attacked: boolean } & Partial<
+    Pick<Creature, "block" | "combat">
+  >,
   state?: Pick<GameState, "talents" | "boons" | "discovery">,
 ): number {
   const def = definition(card.definitionId);
-  return intrinsicAbilityValue(def, actor, card.level, creaturePassive(state, actor.species));
+  if (def.species === null) return def.value;
+  return intrinsicAbilityValue(def, actor, card.level, creaturePassive(state, actor.species!));
 }
 function intrinsicAbilityValue(
   def: CardDefinition,
@@ -52,6 +55,7 @@ export function cardCost(
 ) {
   const actor = card.ownerId === undefined ? undefined : cardActor(state, { ownerId: card.ownerId });
   const def = definition(card.definitionId);
+  if (def.species === null) return def.cost;
   if (actor?.combat?.freeCard) return 0;
   const freeNature = actor?.combat?.freeNature;
   const freeLight = actor?.combat?.freeLight;

@@ -89,6 +89,10 @@ Each species defines six complete `passiveTiers`, indexed by zero through five s
 
 Favor species-exclusive mechanics independent of named abilities. Add new mechanics to the typed passive contract, execution, descriptions and focused regressions together. Player rules and previews use permanent rank; enemies use the base tier. [Journey progression](EXPEDITION_DESIGN.md#collection-and-passive-ranks) owns copy counts and ranks; [inspection](ui/screens.md#creature-and-action-inspection) owns disclosure.
 
+## Shared Food cards
+
+[Food definitions](../src/game/content/food.ts) own species-independent Apple, Mana Berries and Trail Bread. They cost 1 Mana, have Consume and are generated as temporary, level-zero cards with no creature owner. Keep them outside species kits and starter decks. [Orifable](content/creatures/orifable.md#shared-food) records targeting, generation, ownership and progression; [Food execution](../src/game/combat/food.ts) owns creation and use. Neutral cards remain usable after creator departure, participate in ordinary draw/overflow and expire with the battle. Save validation admits neutral ownership only for supported Food.
+
 ## Battle pile artwork
 
 The user authorized unchanged 420×560 Alchemy copies for `pile.draw`, `pile.discard` and `card.back`. The manifest records their sources under `public/art/battle/`; preserve source-library originals and placeholders; earlier prepared outputs remain recoverable from Git. Flying discards match the source top-card bounds: x=25/420, y=25/560, width=328/420, height=432/560. Display keeps the 3:4 ratio.

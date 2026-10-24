@@ -93,9 +93,10 @@ export function useBattleInteraction({
   const enemyRow = battlefield(game, "enemy"),
     playerRow = battlefield(game, "player");
   const drawable = drawableOwnerIds(game);
-  const visibleHand = game.battle.hand.filter((id) =>
-    drawable.has(game.cards.find((card) => card.id === id)!.ownerId),
-  );
+  const visibleHand = game.battle.hand.filter((id) => {
+    const ownerId = game.cards.find((card) => card.id === id)!.ownerId;
+    return ownerId === null || drawable.has(ownerId);
+  });
   const card = game.cards.find((entry) => entry.id === selected);
   const def = card ? definition(card.definitionId) : null;
   const mode = def ? cardTargeting(def) : "automatic";

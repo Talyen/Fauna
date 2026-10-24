@@ -14,7 +14,7 @@ export interface Creature {
 export interface Card {
   id: string;
   definitionId: string;
-  ownerId: string;
+  ownerId: string | null;
   level: number;
   temporary?: true;
 }

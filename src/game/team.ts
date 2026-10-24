@@ -98,8 +98,10 @@ function setFormation(state: GameState, ids: string[], events: GameEvent[] = [],
   const departing = new Set(state.team.filter((unit) => !ids.includes(unit.id)).map((unit) => unit.id));
   state.team = ids.map((id) => all.find((unit) => unit.id === id)!);
   state.reserves = all.filter((unit) => !ids.includes(unit.id));
-  const retained = previous.filter((card) => ids.includes(card.ownerId));
-  const slots = previous.filter((card) => departing.has(card.ownerId) && !card.temporary);
+  const retained = previous.filter((card) => card.ownerId === null || ids.includes(card.ownerId));
+  const slots = previous.filter(
+    (card) => card.ownerId !== null && departing.has(card.ownerId) && !card.temporary,
+  );
   const needed = state.team
     .filter((unit) => !previous.some((card) => card.ownerId === unit.id))
     .flatMap((unit) => ownedCards(unit.id, unit.species));

@@ -11,6 +11,8 @@ export function unfinishedJourneyLimit(state: GameState | undefined, unit: Pick<
 
 /** Availability never changes card ownership or its position in the ordinary piles. */
 export function cardActor(state: GameState, card: Pick<Card, "ownerId">): Creature | undefined {
+  // Shared items need a living presenter; their resolver does not inherit creature ability modifiers.
+  if (card.ownerId === null) return state.team.find((unit) => unit.health > 0);
   const owner = state.team.find((unit) => unit.id === card.ownerId);
   if (!owner || owner.health > 0 || state.phase !== "battle") return owner;
   const guides = state.team.filter((unit) => unit.health > 0 && unfinishedJourneyLimit(state, unit) > 0);

@@ -202,13 +202,23 @@ export function BattleScreen({
           ) : card && def ? (
             <>
               <p>
-                {acting ? species(acting.species).name : species(def.species).name} ·{" "}
-                {recipient ?? (enemyTarget ? "Choose an enemy" : "Choose an ally")}
+                {def.species === null
+                  ? "Food"
+                  : acting
+                    ? species(acting.species).name
+                    : species(def.species).name}{" "}
+                · {recipient ?? (enemyTarget ? "Choose an enemy" : "Choose an ally")}
               </p>
               <ActionDetails
                 compact
                 card={card}
-                ownerName={acting ? species(acting.species).name : species(def.species).name}
+                ownerName={
+                  def.species === null
+                    ? "Food"
+                    : acting
+                      ? species(acting.species).name
+                      : species(def.species).name
+                }
                 actor={acting}
                 modifiers={game}
               />
@@ -283,7 +293,7 @@ export function BattleScreen({
                       card={card}
                       actor={owner}
                       modifiers={game}
-                      ownerName={species(owner.species).name}
+                      ownerName={card.ownerId === null ? "Food" : species(owner.species).name}
                       selected={selected === id}
                       disabled={!admission.allowed}
                       onDenied={(element) => {

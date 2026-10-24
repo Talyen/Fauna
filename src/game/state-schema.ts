@@ -145,7 +145,7 @@ const shared = z.object({
       z.object({
         id,
         definitionId: id,
-        ownerId: id,
+        ownerId: id.nullable(),
         level: z.number().int().min(0).max(3),
         temporary: z.literal(true).optional(),
       }),

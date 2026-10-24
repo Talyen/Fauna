@@ -80,6 +80,7 @@ export function enemyCanUse(card: CardDefinition): boolean {
       return true;
     case "draw":
       return card.species === "memento";
+    case "createFood":
     case "mana":
     case "recover":
     case "redraw":
@@ -123,6 +124,9 @@ export function cardText(
   switch (card.effect) {
     case "procession":
       text = "Summon an Echo / Restore your Minions to full Health";
+      break;
+    case "createFood":
+      text = `Create ${value} Food cards`;
       break;
     case "createPearls":
       text = `Create ${value} Pearls`;
@@ -256,6 +260,10 @@ export function cardText(
   }
   if (card.leech) text += "; Leech";
   if (card.repeatChance) text += `; ${card.repeatChance}% chance to repeat`;
-  if (card.consume) text = `Consume; ${text}`;
+  if (card.species === null) {
+    if (card.effect === "heal") text = `Restore ${value} Health`;
+    if (card.effect === "guard") text = `Gain ${value} Block`;
+    if (card.consume) text += "; Consume";
+  } else if (card.consume) text = `Consume; ${text}`;
   return text;
 }

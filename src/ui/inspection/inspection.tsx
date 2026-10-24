@@ -32,25 +32,30 @@ export function Inspector({
   const game = useStore(session.store, (s) => s.game);
   const rootCard = "card" in item ? item.card : null;
   const kind = "card" in item ? definition(item.card.definitionId).species : item.species;
-  const creature = species(kind);
+  const creature = kind === null ? null : species(kind);
   const creatureId = rootCard?.ownerId ?? ("creatureId" in item ? item.creatureId : undefined);
   const ally = creatureId ? [...game.team, ...game.reserves].find((c) => c.id === creatureId) : undefined;
   const enemy = "enemyId" in item ? game.battle?.enemies.find((e) => e.id === item.enemyId) : undefined;
   const speciesKit = "speciesKit" in item && item.speciesKit;
   const actor = enemy || speciesKit ? undefined : rootCard ? (cardActor(game, rootCard) ?? ally) : ally;
   const modifiers = enemy || speciesKit ? undefined : game;
-  const rank = enemy ? 0 : creatureStars(game, kind);
-  const passive = creaturePassive(enemy ? undefined : game, kind);
-  const cards: Card[] = CARDS.filter((c) => c.species === kind).map((def) =>
-    rootCard?.definitionId === def.id
-      ? rootCard
-      : (game.cards.find((card) => !enemy && card.ownerId === actor?.id && card.definitionId === def.id) ?? {
-          id: `inspect-${def.id}`,
-          definitionId: def.id,
-          ownerId: actor?.id ?? kind,
-          level: 0,
-        }),
-  );
+  const rank = enemy || kind === null ? 0 : creatureStars(game, kind);
+  const passive = kind === null ? null : creaturePassive(enemy ? undefined : game, kind);
+  const cards: Card[] =
+    kind === null && rootCard
+      ? [rootCard]
+      : CARDS.filter((c) => c.species === kind).map((def) =>
+          rootCard?.definitionId === def.id
+            ? rootCard
+            : (game.cards.find(
+                (card) => !enemy && card.ownerId === actor?.id && card.definitionId === def.id,
+              ) ?? {
+                id: `inspect-${def.id}`,
+                definitionId: def.id,
+                ownerId: actor?.id ?? kind,
+                level: 0,
+              }),
+        );
   const [selected, setSelected] = useState<number | null>(() =>
     rootCard ? cards.findIndex((c) => c.definitionId === rootCard.definitionId) : null,
   );
@@ -128,7 +133,9 @@ export function Inspector({
             palette={effectPalette(
               card
                 ? visualKeywords(cardText(definition(card.definitionId), card.level))
-                : creatureKeywords(kind, enemy ? undefined : game),
+                : kind === null
+                  ? []
+                  : creatureKeywords(kind, enemy ? undefined : game),
             )}
           />
           {card ? (
@@ -139,7 +146,7 @@ export function Inspector({
               </DialogDescription>
               <ActionCard
                 card={card}
-                ownerName={creature.name}
+                ownerName={creature?.name ?? "Food"}
                 actor={actor}
                 modifiers={modifiers}
                 enemy={!!enemy}
@@ -148,7 +155,7 @@ export function Inspector({
                 onClick={() => {}}
               />
             </>
-          ) : (
+          ) : creature && passive ? (
             <>
               <header className="inspection-heading">
                 <DialogTitle>{enemy?.name ?? creature.name}</DialogTitle>
@@ -162,7 +169,7 @@ export function Inspector({
                     <ActionCard
                       key={action.id}
                       card={action}
-                      ownerName={creature.name}
+                      ownerName={creature?.name ?? "Food"}
                       actor={actor}
                       modifiers={modifiers}
                       enemy={!!enemy}
@@ -194,7 +201,7 @@ export function Inspector({
                 </p>
               </section>
             </>
-          )}
+          ) : null}
         </DialogContent>
       </Dialog>
     </EffectScope>

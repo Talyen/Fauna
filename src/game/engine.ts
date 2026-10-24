@@ -1,3 +1,4 @@
+import { useFood } from "./combat/food";
 import { cardActor } from "./card-actors";
 import { inspectCardPlay, playTargetError } from "./play-queries";
 import { commandPhases } from "./command-phases";
@@ -246,26 +247,30 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
         for (const keyword of keywords)
           draft.battleXP[keyword] = Math.min(1_000_000, (draft.battleXP[keyword] ?? 0) + 1);
         battle.mana -= cardCost(card, draft);
-        if (actor.id !== card.ownerId) ensureCombat(actor).fallenCardsPlayedThisTurn++;
-        ensureCombat(actor).freeCard = false;
-        if (keywords.includes("nature")) ensureCombat(actor).freeNature = false;
-        if (keywords.includes("light")) ensureCombat(actor).freeLight = false;
-        if (keywords.includes("burn")) battle.freeBurnUsed = true;
+        if (card.ownerId !== null) {
+          if (actor.id !== card.ownerId) ensureCombat(actor).fallenCardsPlayedThisTurn++;
+          ensureCombat(actor).freeCard = false;
+          if (keywords.includes("nature")) ensureCombat(actor).freeNature = false;
+          if (keywords.includes("light")) ensureCombat(actor).freeLight = false;
+          if (keywords.includes("burn")) battle.freeBurnUsed = true;
+        }
         battle.hand.splice(battle.hand.indexOf(card.id), 1);
         if (!def.consume) battle.discard.push(card.id);
-        executeAbility(
-          draft,
-          {
-            side: "player",
-            actor,
-            def,
-            value,
-            targetId: command.targetId,
-            allyTargetId: command.targetId,
-          },
-          events,
-          { swap: swapFromCard },
-        );
+        if (def.species === null) useFood(draft, def, command.targetId, events);
+        else
+          executeAbility(
+            draft,
+            {
+              side: "player",
+              actor,
+              def,
+              value,
+              targetId: command.targetId,
+              allyTargetId: command.targetId,
+            },
+            events,
+            { swap: swapFromCard },
+          );
         courtRemembers(draft, actor, events);
         if (def.consume) draft.cards = draft.cards.filter((entry) => entry.id !== card.id);
         removeDepartedMinions(draft);

@@ -60,7 +60,7 @@ export function DeckCards({
               card={card}
               actor={owner}
               modifiers={game}
-              ownerName={species(owner.species).name}
+              ownerName={card.ownerId === null ? "Food" : species(owner.species).name}
               onClick={() => inspect?.({ card })}
               onInspect={inspect ? () => inspect({ card }) : undefined}
             />

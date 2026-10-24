@@ -118,6 +118,9 @@
 [data-keyword="consume"] {
   color: var(--keyword-consume);
 }
+[data-keyword="food"] {
+  color: var(--keyword-food);
+}
 
 [data-effect-art] {
   --art-keyword-color: var(--muted-foreground);

@@ -1,10 +1,10 @@
-import { CARDS, SPECIES, FIRST_RUN_STARTERS, BOONS, TALENTS, TALENT_EFFECTS } from "./content";
+import { FOOD_CARDS, CARDS, SPECIES, FIRST_RUN_STARTERS, BOONS, TALENTS, TALENT_EFFECTS } from "./content";
 import { cardText } from "./card-rules";
 import { BOSSES, COMBAT_PACKS, JOURNEY_LENGTH } from "./encounters";
 import { DAMAGE_TYPES, EFFECT_KEYWORDS, PROGRESSION_KEYWORDS, definitionKeywords } from "./keywords";
 
 export const contentCatalog = {
-  cards: CARDS,
+  cards: [...CARDS, ...FOOD_CARDS],
   species: SPECIES,
   bosses: BOSSES,
   combatPacks: COMBAT_PACKS,
@@ -73,7 +73,10 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
         if (effect.kind === "fallenLeaves" && effect.amount > 100)
           error(entry.id, "passiveTiers", "Block decay conversion cannot exceed 100 percent");
         if (
-          (effect.kind === "wellRead" || effect.kind === "goodFortune" || effect.kind === "gallantry") &&
+          (effect.kind === "expressDelivery" ||
+            effect.kind === "wellRead" ||
+            effect.kind === "goodFortune" ||
+            effect.kind === "gallantry") &&
           effect.amount > 100
         )
           error(entry.id, "passiveTiers", "Passive chance cannot exceed 100 percent");
@@ -92,7 +95,8 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
   for (const card of catalog.cards) {
     if (Object.hasOwn(EFFECT_KEYWORDS, card.effect) && cardText(card).includes("."))
       error(card.id, "description", "Effect descriptions must omit periods");
-    if (!species.has(card.species)) error(card.id, "species", "Unknown owner.");
+    if (card.species === null ? !card.consume : !species.has(card.species))
+      error(card.id, "species", "Unknown owner.");
     if (card.cost !== 1) error(card.id, "cost", "Every ability must cost exactly 1 Mana.");
     if (!Number.isSafeInteger(card.value) || card.value < 1 || card.value > 1_000_000)
       error(card.id, "value", "Unsupported effect amount.");

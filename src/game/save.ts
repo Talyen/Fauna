@@ -1,3 +1,4 @@
+import { isFood } from "./content/food";
 import { unfinishedJourneyLimit } from "./card-actors";
 import { PEARL } from "./content/creatures/memento";
 import { battlefield } from "./battlefield";
@@ -86,14 +87,15 @@ export function decodeSave(raw: string): GameState {
   invalid([...s.team, ...s.reserves].some((creature) => !collected.includes(creature.species)));
   invalid([...s.team, ...s.reserves].some((c) => c.health > species(c.species).health));
   invalid(
-    s.cards.some(
-      (c) =>
-        !s.team.some(
-          (t) =>
-            t.id === c.ownerId &&
-            (speciesCards(t.species).some((d) => d.id === c.definitionId) ||
-              (c.temporary && c.definitionId === PEARL.id && t.species === "memento")),
-        ),
+    s.cards.some((c) =>
+      c.ownerId === null
+        ? !(c.temporary && c.level === 0 && isFood(c.definitionId))
+        : !s.team.some(
+            (t) =>
+              t.id === c.ownerId &&
+              (speciesCards(t.species).some((d) => d.id === c.definitionId) ||
+                (c.temporary && c.definitionId === PEARL.id && t.species === "memento")),
+          ),
     ),
   );
   const permanentCards = s.cards.filter((card) => !card.temporary);
