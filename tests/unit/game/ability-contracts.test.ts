@@ -49,19 +49,21 @@ const scenarios: { name: string; species: SpeciesId; effect: string; reflection?
 ];
 
 it.each(scenarios)("preserves commands, previews, save/resume and rankings: $name", (scenario) => {
-  const game = requireBattle(produce(teamRun(42, [scenario.species]), (draft) => {
-    const card = draft.cards.find((entry) => definition(entry.definitionId).effect === scenario.effect)!;
-    expect(card).toBeDefined();
-    draft.battle!.hand = [card.id];
-    draft.battle!.buffer = [];
-    draft.battle!.discard = [];
-    draft.battle!.draw = draft.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
-    draft.team[0]!.health = 5;
-    draft.team[0]!.combat!.poison = 2;
-    if (scenario.reflection) {
-      for (const enemy of draft.battle!.enemies) enemy.combat.attackReflection = true;
-    }
-  }));
+  const game = requireBattle(
+    produce(teamRun(42, [scenario.species]), (draft) => {
+      const card = draft.cards.find((entry) => definition(entry.definitionId).effect === scenario.effect)!;
+      expect(card).toBeDefined();
+      draft.battle!.hand = [card.id];
+      draft.battle!.buffer = [];
+      draft.battle!.discard = [];
+      draft.battle!.draw = draft.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+      draft.team[0]!.health = 5;
+      draft.team[0]!.combat!.poison = 2;
+      if (scenario.reflection) {
+        for (const enemy of draft.battle!.enemies) enemy.combat.attackReflection = true;
+      }
+    }),
+  );
   const before = encodeSave(game);
   const command = availablePlays(game, false)[0]!.commands[0]!;
   const result = dispatch(game, command);

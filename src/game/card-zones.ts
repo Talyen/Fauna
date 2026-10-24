@@ -155,3 +155,26 @@ export function redrawHand(state: GameState, events: GameEvent[]) {
   shuffle(state, battle.draw);
   draw(state, returned.length, events);
 }
+
+/** Shared capacity query for generated cards and visible policy assessment. */
+export function battleCardCapacity(state: Pick<GameState, "cards">): number {
+  return Math.max(0, MAX_BATTLE_CARDS - state.cards.length);
+}
+/** Called while the played card is still in hand; hidden draw order is irrelevant. */
+export function drawHasAnotherCard(state: GameState): boolean {
+  if (!state.battle) return false;
+  return (
+    [...state.battle.draw, ...state.battle.discard, ...state.battle.buffer].some((id) => {
+      const card = state.cards.find((entry) => entry.id === id)!;
+      return card.ownerId === null || drawableOwnerIds(state).has(card.ownerId);
+    }) ||
+    (battleCardCapacity(state) > 0 &&
+      state.team.some(
+        (unit) =>
+          unit.health > 0 &&
+          creaturePassive(state, unit.species).effects.some(
+            (effect) => effect.kind === "wellRead" && effect.amount > 0,
+          ),
+      ))
+  );
+}
