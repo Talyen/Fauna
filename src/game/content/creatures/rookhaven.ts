@@ -1,3 +1,4 @@
+import { sixPassiveTiers } from "../passive-tiers";
 import { card, attack } from "../card-builders";
 import type { CreatureKit } from "../types";
 export const rookhaven: CreatureKit = {
@@ -8,32 +9,13 @@ export const rookhaven: CreatureKit = {
     health: 26,
     color: "#8da9bc",
     trait: "Well Read",
-    passiveTiers: [
-      {
-        description: "Drawing a card has a 20% chance to copy it",
-        effects: [{ kind: "wellRead", amount: 20 }],
-      },
-      {
-        description: "Drawing a card has a 35% chance to copy it",
-        effects: [{ kind: "wellRead", amount: 35 }],
-      },
-      {
-        description: "Drawing a card has a 50% chance to copy it",
-        effects: [{ kind: "wellRead", amount: 50 }],
-      },
-      {
-        description: "Drawing a card has a 70% chance to copy it",
-        effects: [{ kind: "wellRead", amount: 70 }],
-      },
-      {
-        description: "Drawing a card has an 85% chance to copy it",
-        effects: [{ kind: "wellRead", amount: 85 }],
-      },
-      {
-        description: "Drawing a card copies it",
-        effects: [{ kind: "wellRead", amount: 100 }],
-      },
-    ],
+    passiveTiers: sixPassiveTiers([20, 35, 50, 70, 85, 100], (amount) => ({
+      description:
+        amount === 100
+          ? "Drawing a card copies it"
+          : `Drawing a card has ${amount === 85 ? "an" : "a"} ${amount}% chance to copy it`,
+      effects: [{ kind: "wellRead", amount }],
+    })),
   },
   cards: [
     {

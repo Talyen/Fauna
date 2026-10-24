@@ -1,3 +1,4 @@
+import { sixPassiveTiers } from "../passive-tiers";
 import { card } from "../card-builders";
 import type { CreatureKit } from "../types";
 export const bloomquail: CreatureKit = {
@@ -8,32 +9,13 @@ export const bloomquail: CreatureKit = {
     health: 26,
     color: "#ed9c9b",
     trait: "Full Bloom",
-    passiveTiers: [
-      {
-        description: "Convert 50% of your Block into Health for the most injured ally",
-        effects: [{ kind: "blockConversion", amount: 50 }],
-      },
-      {
-        description: "Convert 60% of your Block into Health for the most injured ally",
-        effects: [{ kind: "blockConversion", amount: 60 }],
-      },
-      {
-        description: "Convert 70% of your Block into Health for the most injured ally",
-        effects: [{ kind: "blockConversion", amount: 70 }],
-      },
-      {
-        description: "Convert 80% of your Block into Health for the most injured ally",
-        effects: [{ kind: "blockConversion", amount: 80 }],
-      },
-      {
-        description: "Convert 90% of your Block into Health for the most injured ally",
-        effects: [{ kind: "blockConversion", amount: 90 }],
-      },
-      {
-        description: "Convert your Block into Health for the most injured ally",
-        effects: [{ kind: "blockConversion", amount: 100 }],
-      },
-    ],
+    passiveTiers: sixPassiveTiers([50, 60, 70, 80, 90, 100], (amount) => ({
+      description:
+        amount === 100
+          ? "Convert your Block into Health for the most injured ally"
+          : `Convert ${amount}% of your Block into Health for the most injured ally`,
+      effects: [{ kind: "blockConversion", amount }],
+    })),
   },
   cards: [
     {

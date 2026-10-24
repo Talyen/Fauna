@@ -1,3 +1,4 @@
+import { sixPassiveTiers } from "../passive-tiers";
 import { card, attack } from "../card-builders";
 import type { CreatureKit } from "../types";
 export const dunefox: CreatureKit = {
@@ -8,14 +9,10 @@ export const dunefox: CreatureKit = {
     health: 24,
     color: "#d9aa57",
     trait: "Shifting Sands",
-    passiveTiers: [
-      { description: "Allies gain 15% of your Dodge chance", effects: [{ kind: "shareDodge", amount: 15 }] },
-      { description: "Allies gain 20% of your Dodge chance", effects: [{ kind: "shareDodge", amount: 20 }] },
-      { description: "Allies gain 25% of your Dodge chance", effects: [{ kind: "shareDodge", amount: 25 }] },
-      { description: "Allies gain 30% of your Dodge chance", effects: [{ kind: "shareDodge", amount: 30 }] },
-      { description: "Allies gain 35% of your Dodge chance", effects: [{ kind: "shareDodge", amount: 35 }] },
-      { description: "Allies gain 40% of your Dodge chance", effects: [{ kind: "shareDodge", amount: 40 }] },
-    ],
+    passiveTiers: sixPassiveTiers([15, 20, 25, 30, 35, 40], (amount) => ({
+      description: `Allies gain ${amount}% of your Dodge chance`,
+      effects: [{ kind: "shareDodge", amount }],
+    })),
   },
   cards: [
     {

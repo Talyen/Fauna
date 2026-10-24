@@ -37,11 +37,12 @@ export type SupplementalEffect =
   | { kind: "cleanse"; amount: number; target?: "recipient" | "allAllies" }
   | { kind: "reflect"; amount: number; status?: "burn" }
   | { kind: "heal"; amount: number; target?: "recipient" }
-  | { kind: "draw" | "mana" | "purge" | "blind" | "meltArmor"; amount: number };
+  | { kind: "draw"; amount: number }
+  | { kind: "mana" | "purge" | "blind" | "meltArmor"; amount: number };
 
 export type SupplementalKind = SupplementalEffect["kind"];
 
-export interface AbilityParameters {
+interface AbilityParameters {
   attack: {
     damageType: DamageType;
     alternateDamageType?: DamageType;

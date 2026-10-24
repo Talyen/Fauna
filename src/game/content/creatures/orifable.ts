@@ -1,3 +1,4 @@
+import { sixPassiveTiers } from "../passive-tiers";
 import { card, attack } from "../card-builders";
 import type { CreatureKit } from "../types";
 
@@ -9,29 +10,11 @@ export const orifable: CreatureKit = {
     health: 26,
     color: "#d6a65e",
     trait: "Express Delivery",
-    passiveTiers: [
-      {
-        description: "50% chance to draw an extra card each turn",
-        effects: [{ kind: "expressDelivery", amount: 50 }],
-      },
-      {
-        description: "60% chance to draw an extra card each turn",
-        effects: [{ kind: "expressDelivery", amount: 60 }],
-      },
-      {
-        description: "70% chance to draw an extra card each turn",
-        effects: [{ kind: "expressDelivery", amount: 70 }],
-      },
-      {
-        description: "80% chance to draw an extra card each turn",
-        effects: [{ kind: "expressDelivery", amount: 80 }],
-      },
-      {
-        description: "90% chance to draw an extra card each turn",
-        effects: [{ kind: "expressDelivery", amount: 90 }],
-      },
-      { description: "Draw an extra card each turn", effects: [{ kind: "expressDelivery", amount: 100 }] },
-    ],
+    passiveTiers: sixPassiveTiers([50, 60, 70, 80, 90, 100], (amount) => ({
+      description:
+        amount === 100 ? "Draw an extra card each turn" : `${amount}% chance to draw an extra card each turn`,
+      effects: [{ kind: "expressDelivery", amount }],
+    })),
   },
   cards: [
     { ...card("orifable", "Care Package", "createFood", 2), artwork: "action.orifable.care-package" },

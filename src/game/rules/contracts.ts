@@ -3,7 +3,7 @@ import type { KeywordId, ProgressionKeyword } from "../keywords";
 import type { AbilityKind } from "./ability-types";
 
 export type AbilityCard<K extends AbilityKind = AbilityKind> = CardDefinition & { effect: K };
-export interface DescriptionContext {
+interface DescriptionContext {
   value: number;
   level: number;
   power: number;

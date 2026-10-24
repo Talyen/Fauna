@@ -64,10 +64,20 @@ export function resolveCombat<K extends OperationName>(
   kind: K,
   ...args: CombatArguments<K>
 ): CombatResult<K> {
-  const stack: Resolution<unknown>[] = [frame({ kind, args } as CombatOperation)];
+  const operation = { kind, args } as CombatOperation;
+  // Unit-first operations carry their optional state after the event list.
+  const state =
+    operation.kind === "restoreHealth" ||
+    operation.kind === "grantStatus" ||
+    operation.kind === "removeEffects"
+      ? operation.args[4]
+      : operation.kind === "startAction"
+        ? operation.args[2]
+        : operation.args[0];
+  const stack: Resolution<unknown>[] = [frame(operation)];
   let result: unknown;
   while (stack.length) {
-    previewWork(args[0]);
+    if (state) previewWork(state);
     const step = stack[stack.length - 1]!.next(result);
     result = undefined;
     if (step.done) {

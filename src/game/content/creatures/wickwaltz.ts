@@ -1,3 +1,4 @@
+import { sixPassiveTiers } from "../passive-tiers";
 import { card, attack } from "../card-builders";
 import type { CreatureKit } from "../types";
 export const wickwaltz: CreatureKit = {
@@ -8,32 +9,13 @@ export const wickwaltz: CreatureKit = {
     health: 28,
     color: "#c96d39",
     trait: "Kindling Flourish",
-    passiveTiers: [
-      {
-        description: "Wickwaltz’s second card each turn has a 20% chance to repeat",
-        effects: [{ kind: "kindlingFlourish", amount: 20 }],
-      },
-      {
-        description: "Wickwaltz’s second card each turn has a 36% chance to repeat",
-        effects: [{ kind: "kindlingFlourish", amount: 36 }],
-      },
-      {
-        description: "Wickwaltz’s second card each turn has a 52% chance to repeat",
-        effects: [{ kind: "kindlingFlourish", amount: 52 }],
-      },
-      {
-        description: "Wickwaltz’s second card each turn has a 68% chance to repeat",
-        effects: [{ kind: "kindlingFlourish", amount: 68 }],
-      },
-      {
-        description: "Wickwaltz’s second card each turn has an 84% chance to repeat",
-        effects: [{ kind: "kindlingFlourish", amount: 84 }],
-      },
-      {
-        description: "Wickwaltz’s second card each turn repeats",
-        effects: [{ kind: "kindlingFlourish", amount: 100 }],
-      },
-    ],
+    passiveTiers: sixPassiveTiers([20, 36, 52, 68, 84, 100], (amount) => ({
+      description:
+        amount === 100
+          ? "Wickwaltz’s second card each turn repeats"
+          : `Wickwaltz’s second card each turn has ${amount === 84 ? "an" : "a"} ${amount}% chance to repeat`,
+      effects: [{ kind: "kindlingFlourish", amount }],
+    })),
   },
   cards: [
     {

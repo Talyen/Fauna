@@ -74,10 +74,10 @@ it("heals the lowest living Health fraction, retaining battlefield order on ties
   expect(mostInjured(enemies)).toBe(enemies[0]);
 });
 
-it.each(CARDS.filter((card) => enemyCanUse(card) && card.effect !== "draw"))(
+it.each(CARDS.filter((card) => card.species !== null && enemyCanUse(card) && card.effect !== "draw"))(
   "$id resolves the same combat effects on either side at base room power",
   (authored) => {
-    const game = produce(teamRun(1, [authored.species, "prismram", "mossguard"]), (draft) => {
+    const game = produce(teamRun(1, [authored.species!, "prismram", "mossguard"]), (draft) => {
       draft.rng = 1;
       draft.team.forEach((unit) => {
         unit.health = species(unit.species).health - 5;
@@ -110,11 +110,15 @@ it.each(CARDS.filter((card) => enemyCanUse(card) && card.effect !== "draw"))(
               side,
               def,
               actor: draft.team[0]!,
-              value: actionValue(
-                { id: "test", ownerId: "ally-0", definitionId: authored.id, level: 0 },
-                draft.team[0]!,
-                draft,
-              ),
+              // Recovery becomes an authored heal for enemies; compare that adapted value on both sides.
+              value:
+                def.effect !== authored.effect
+                  ? enemyAbilityValue({ species: authored.species!, power: 1 }, def)
+                  : actionValue(
+                      { id: "test", ownerId: "ally-0", definitionId: authored.id, level: 0 },
+                      draft.team[0]!,
+                      draft,
+                    ),
               targetId: "enemy-0",
               allyTargetId: "ally-0",
             },
@@ -343,7 +347,7 @@ it.each([
         unit.combat = freshCombat();
       });
       const actor = draft.battle!.enemies[0]!;
-      actor.species = def.species;
+      actor.species = def.species!;
       actor.power = 1.5;
       executeAbility(
         requireBattle(draft),

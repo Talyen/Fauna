@@ -82,7 +82,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "e6ac0774e6248603b680b8fd4e00c142f048311737343a5f67faeae02c2b0632",
+    "8326d5f57accb34e1133450cf5549cbfdb263d26551897fd97445e0e5bf26f0f",
   ],
   [
     {
@@ -90,7 +90,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "campfire",
-    "47c8c672c4d643fa1a563a2a59ca070a9daf87574aea2313722f5ead0f932a06",
+    "65a4d7e8d52b55900823cebef7f78e5221bf1375af1805ff0f2daa7a7299281e",
   ],
   [
     {
@@ -98,7 +98,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "303eb37da612ff102fdb071a5963ead087d68cfe0058bf60b185bb799648eeeb",
+    "57d922f3dcf1b6fed200f347cc1a531b60124fe1f10b37d3bb2036295d6b256a",
   ],
   [
     {
@@ -106,12 +106,12 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "a47908cfb4eec661d5feb69b94c8bd1a28eddef97342cebd37131810d23f6cb6",
+    "defc006a668fa344220eb2d1f41f979adf614edadaaaeed7149d109d119281f9",
   ],
   [
     "preview",
     false,
-    "f5271e88e2679235ffd4602afd4a54e3d2ce540e68831a11e1f784aca9571e41",
+    "38731cce1c000ab00a8ab15adda570ef744faef52e5ce54adb7f2d6074e20b43",
   ],
   [
     {
@@ -122,7 +122,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "battle",
-    "f5271e88e2679235ffd4602afd4a54e3d2ce540e68831a11e1f784aca9571e41",
+    "38731cce1c000ab00a8ab15adda570ef744faef52e5ce54adb7f2d6074e20b43",
   ],
   [
     {
@@ -130,7 +130,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "afebb8add9f5030590ff18b9a592079a449f9e8a3472c4124919a6043bad65ac",
+    "1f4f76e6a595558004a83a5517e5ce12f0c1a22b4dcd0fc93e573edfebc70cc1",
   ],
   [
     {
@@ -138,7 +138,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "198063aa9ee13ce5028c471c92065986146a481764cc2033c252a76343947d50",
+    "1c0c042ffedc0901b80b06b1e230a44ca55c9d95bedf2ae00de3f20c5c763d84",
   ],
   [
     {
@@ -146,16 +146,16 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "recruit",
-    "45b8da17b50ba62c15180a0df187f50ee452fb28e4c1118ac7b0ba767744a65d",
+    "c9b86373fb7aa93e57c37fba87f87a8c837e2f28e363a19f3778d75168e85611",
   ],
   [
     {
-      "species": "shadebrim",
+      "species": "euphera",
       "type": "recruit",
     },
     true,
     "teamSelection",
-    "60814c169dc95eff310e056875db8ab1ad55ee9b419a0e29febc46746ab35b5c",
+    "9532e5fc8577bd4ca2c9811304fbf9feab8bfe2587b7d64815e3edd6dffd67f9",
   ],
   [
     {
@@ -163,7 +163,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "campfire",
-    "ee734727bd47556a3ede0f9f2785c56b06dae940ed939896c1bc744f119b3d7d",
+    "012515ec512c56a0f7087e6cf75a7b9bd21fdfb81a2b130c83fff54eb5146ef5",
   ],
   [
     {
@@ -171,54 +171,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "c211b41336f65d52b3ca248eeed80034f2bfde670f8e8a3c1264183c75153cb9",
-  ],
-  [
-    {
-      "type": "enterSupport",
-      "visit": "support-2",
-    },
-    true,
-    "support",
-    "5f6d4c705692f5d2ae03facebfe6a01ffe6e4ad90fdf0567fed0a7d5755e7d84",
-  ],
-  [
-    {
-      "slot": "slot-0",
-      "type": "buyBoon",
-      "visit": "support-2",
-    },
-    true,
-    "support",
-    "44b8be20db025cc3422bb6cee882fd603155575d4f2b2f88a683bfb7f6c8c0e2",
-  ],
-  [
-    {
-      "slot": "slot-0",
-      "type": "buyBoon",
-      "visit": "support-2",
-    },
-    false,
-    "support",
-    "788dfca6d3c23e100edc0d92bf7ad40358acc18a031c7c6b57764189ab4caa17",
-  ],
-  [
-    {
-      "type": "leaveSupport",
-      "visit": "support-2",
-    },
-    true,
-    "teamSelection",
-    "bdac93b6d6086fba76324c64bc9a1cb7b7fbb1a9a4d89647b3ac52456a5e0ece",
-  ],
-  [
-    {
-      "species": "glintstride",
-      "type": "recruitDestination",
-    },
-    true,
-    "teamSelection",
-    "a4f18c9c6e5f0dfbe682eadb9e32062bb7c7ba48450b4ed473cd6e9f1e5ea912",
+    "e4a8eab72fa912cdca82c3321c75561b25fc7c2c1543860c2b8d69b19bfc6352",
   ],
   [
     {
@@ -226,12 +179,12 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "9b4e0b488b4e2751f5ffb1ae478c9a95c698ff768a196a8e9d96d8d0af5246d8",
+    "737ba3aea28c61a0051d706df4fc1e1dc517e6016bd339adef95cceaefc52c96",
   ],
   [
     "preview",
     false,
-    "a5a5acae58da3c62a67370e35b74e7b4094c2a3d5dfb505d8df032b940aef443",
+    "fbed431b089cec54954128381e9df1ef4140efe9eb4b2afa8b8899493de0259a",
   ],
   [
     {
@@ -242,7 +195,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "battle",
-    "a5a5acae58da3c62a67370e35b74e7b4094c2a3d5dfb505d8df032b940aef443",
+    "fbed431b089cec54954128381e9df1ef4140efe9eb4b2afa8b8899493de0259a",
   ],
   [
     {
@@ -250,7 +203,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "e532764a32b603979169e9ae8b030c63eac5a67e788d3c752a5c4dce8bf2053c",
+    "0953b78e24bd048d59162b53436702d7257d8d81869328271ab2aed28f5b5209",
   ],
   [
     {
@@ -258,7 +211,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "9c1faba1eadd2ef257879e3a73b437f978e158d560d4c007e369867c68b9fefc",
+    "b44ad057a7dca71fb6bb046e127b13fd875174a953a64770e8824fef899fcf8c",
   ],
   [
     {
@@ -266,16 +219,16 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "recruit",
-    "4bab3edbb144e07f252f32a99e0c250e78ba3335a80eda1c3dece775fd369346",
+    "6378ae06c9f17c7cb51cafb48cc0b9c39ec1d4012d04ea506d3e93a11ec3fc0e",
   ],
   [
     {
-      "species": "cindernewt",
+      "species": "reedstag",
       "type": "recruit",
     },
     true,
     "teamSelection",
-    "d273e8b1d7a5548acdc3c09592cb2bc1c74b846f29632baa7ebb00afccacc0ed",
+    "1a45c1cf9ec0a87e11f126f251bdce5b08b131d0f724a0c7e0e236edfa2ef029",
   ],
   [
     {
@@ -283,7 +236,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "campfire",
-    "f27f2ef67071b6253a78840106ccb72acb222a74aba1bdc7e5ae6154072f5fa0",
+    "ee39098d773afce83a282fea6a62e6b978030288145ae84dc5215c168adaadb6",
   ],
   [
     {
@@ -291,7 +244,16 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "5ec45e2343cc5fd48943df82145dc75246afa2e4331795a3e8aa7399b1081a4c",
+    "30e4e60729481c251ab18f914433e36a3285cc58d5477a972983add62e1c567b",
+  ],
+  [
+    {
+      "species": "rookhaven",
+      "type": "recruitDestination",
+    },
+    true,
+    "teamSelection",
+    "f73ebda6bea081d72432fd30322b2daca8d23632ac84f7e9eddf17891f1a703c",
   ],
   [
     {
@@ -299,12 +261,12 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "d9494a8278cdf0ea34dd50dd79ec11e985c8bcf6c5d6d2323b59078120745a67",
+    "94c4d967bef5f43abc2a93ac2e1f9b1ef1aec69725bb307e9783a462ea9a0bb7",
   ],
   [
     "preview",
     false,
-    "dfdbbaf6038d72330809afe761c6199ae4438df5fe711b114f6cf0d8fba31fa7",
+    "3d85b1ada9b03c4b41bf10f6742e9654ff32b3c612e0ed438714b4c047b2ead8",
   ],
   [
     {
@@ -315,7 +277,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "battle",
-    "dfdbbaf6038d72330809afe761c6199ae4438df5fe711b114f6cf0d8fba31fa7",
+    "3d85b1ada9b03c4b41bf10f6742e9654ff32b3c612e0ed438714b4c047b2ead8",
   ],
   [
     {
@@ -323,7 +285,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "a8a5970947fd98fe761d3e6160ecd8295dadbf63797dacd2c36af118f2714b88",
+    "04643b839f9154dee41c6d7f8c46d5de508d392141da896be0f37a1164c83a5b",
   ],
   [
     {
@@ -331,7 +293,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "be1edf39a9b8ce9951c3b3029063f68ad4cec735477b9bbbca306e8c31496fc1",
+    "e86b6c9493719916bd73ea344918e412d46a8d4162ea674ec90902825a8d1dff",
   ],
   [
     {
@@ -339,7 +301,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "recruit",
-    "39cbeeb326bc13f08c290638786a340d906166c35de7e87f32355069030014b7",
+    "8704dd5c0e1e0acf8e8e7b4fb239be610b555b34c02ab85c5a7f314bdab1e5d9",
   ],
   [
     {
@@ -348,7 +310,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "c310468236f0bcf1d813c3b8c3e2b9f5c5d91d1d39b07829de68355a176fdbfd",
+    "c09ce57d5f83adeba7f3356b36196fe38698921ee71a53c2bed39f5415a6e968",
   ],
   [
     {
@@ -357,16 +319,16 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "boon",
-    "97616cfc291f74db21b0fe8d56772ea604ec8f3885d2bae03b72832e5ca66e6a",
+    "eaa13f980a4b3d53d10758c02451349198dd7b8b1ad5cd71c6229337933d33c4",
   ],
   [
     {
-      "boon": "thunderstone",
+      "boon": "meteorite",
       "type": "chooseBoon",
     },
     true,
     "teamSelection",
-    "d4ead1e4cdb9e104e52d48a957f27f54131ac2bb0e1283bc11c8c1a21721ceb7",
+    "e774676d5f9bf71fe147aebe1cca8b6c2f3bfc8fec2c7cda529d94e63c1c36d2",
   ],
   [
     {
@@ -374,7 +336,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "campfire",
-    "a75fd1274667ceac455f86ea1e8a40f669608e3c219d48ab97dfbc95832680fd",
+    "2184e0e8d920965c521c5f3ad7c5690ee895037f45dda315c6665116e33f6141",
   ],
   [
     {
@@ -382,7 +344,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "c218643b030bf8d67f6725fb41eafc92e357175385db1e296e8b47ee113def5f",
+    "41eb6ee0032c3233291d15b0fb4eba3acc245e15435690c9befc7a0bd1f5ab8a",
   ],
   [
     {
@@ -390,12 +352,12 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "a5d574b49b2103fee28e7fdd2c9a5d9eaa5750974c42c0f55e7286040810cdf5",
+    "e9b653adf4608cd6a8b3acbf1d5a898b396f9a75f09ad545d933d819a0d71e82",
   ],
   [
     "preview",
     false,
-    "cdcd41845edbd862a157904e094f90c1dd05ceeb65dd33c8eeb61b24f880a298",
+    "419ce4acc6eccad2b1189e01109ee3c852e0a6e171195f5c72a129e4a36b348a",
   ],
   [
     {
@@ -406,7 +368,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "battle",
-    "cdcd41845edbd862a157904e094f90c1dd05ceeb65dd33c8eeb61b24f880a298",
+    "419ce4acc6eccad2b1189e01109ee3c852e0a6e171195f5c72a129e4a36b348a",
   ],
   [
     {
@@ -414,7 +376,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "f694eb61b2213f4653851135874ac2930c4cb7cf3c99a80e5e82950cb80e40dc",
+    "9847ce0bedce2cad7353af16a09d0c2372484fa3d0f0e736c24b00ad00e5ee5b",
   ],
   [
     {
@@ -422,7 +384,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "524c0b8b3218aab0d361bd2b4d0d90496f573c1b6768d8c47664410420ebc540",
+    "340a75411eac212b5cd87573f7ee64c2359f5e78952fd66ece5aa657d89392fd",
   ],
   [
     {
@@ -430,25 +392,25 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "recruit",
-    "9fafa4e3afa0501f0fec76e633f0ec9b540e406b042671c0407b917402b0521f",
+    "d51de2851b9fb815a5098eefb73c35c9e69006be28d0b11d1a8a5213c64cd24f",
   ],
   [
     {
-      "species": "ringpalm",
+      "species": "shadebrim",
       "type": "recruit",
     },
     true,
     "recruit",
-    "6acf337279b585a74d2f5c9601548292039529d079f5479298e22ea3ca01cf79",
+    "7f0d33bafa8f09611510193d109dd086f29d26ef0fecc0691965df41f7970fa3",
   ],
   [
     {
-      "replace": "recruit-30",
+      "replace": "recruit-27",
       "type": "confirmRecruit",
     },
     true,
     "teamSelection",
-    "cf5b7d00af7d8c6acfa6339c47a96da090807ffa64032dc3e9f9a18b89ebe44c",
+    "6a60b255f2018dcab31614d2b500525c5b7026bcc4552ec63413de1c0c4f4fab",
   ],
   [
     {
@@ -456,7 +418,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "campfire",
-    "b4081b522da2b1fe1a546905d7b304212c729770faa5241bb3b971a0837a90d4",
+    "e0e358c236c8d8d99cc4e5651966c1aaf4fb584079a5d386a7908495c92a021f",
   ],
   [
     {
@@ -464,7 +426,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "8052c03eb73421308e44d1b0fcd811b5608e168fb462ec1b3fb5eaf091ea9ee4",
+    "9daf2a2311f37381ce7c30f70b7afee08180584a0451ce9707e95edfc5fdc0d6",
   ],
   [
     {
@@ -472,12 +434,12 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "2d4d379483a9823e9aa08e3c3d4c1fc635565b74b981e300de270d59070aa93a",
+    "0cf0b115fbccbf715dc4bc32248480a235345fe582f4233a42a9dd6c15f68581",
   ],
   [
     "preview",
     false,
-    "1f98037700f46098345f5d0c6385bdf7f2b376557da01a5947df9ef9d8d14e46",
+    "dabf4a0647cb61271988a5c86773062852f2c30bc3a01eeed40ea2de7a9da59b",
   ],
   [
     {
@@ -488,7 +450,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "battle",
-    "1f98037700f46098345f5d0c6385bdf7f2b376557da01a5947df9ef9d8d14e46",
+    "dabf4a0647cb61271988a5c86773062852f2c30bc3a01eeed40ea2de7a9da59b",
   ],
   [
     {
@@ -496,7 +458,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "ce120445cb81936aba77bda08102d3cc77216ba3d15a6a1a3b14f6c07f1a0428",
+    "6a6dd7867dc044df4069e3b1239138d40b2d6acc9a661ac90dbeacd243b4f054",
   ],
   [
     {
@@ -504,7 +466,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "ce680b96a69b9c550d7ef08a950d6ef51ea65ee5ae26b229cf80d194e3c5c38a",
+    "4ab07ed58d689e2ac849c410df361c02e937119904be5d543360a5eb1b84bc1d",
   ],
   [
     {
@@ -512,25 +474,25 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "recruit",
-    "c8a6bd34921afdcf928e09945b7321783892e8c16e1df6c2b913370baa0ec581",
+    "c59ab23ea7e4881640e2cd31f5fdaf74486d1ec70db00b6726601590f025f041",
   ],
   [
     {
-      "species": "wickwaltz",
+      "species": "captoad",
       "type": "recruit",
     },
     true,
     "recruit",
-    "e5155ed64a77565faa707c0aef048859354264d81a2af690ec717c93f3adbd30",
+    "d27bfe55a567092e87cbbc86e6657ae3d1ef63dc2f80043ba6bbe6769b08860c",
   ],
   [
     {
-      "replace": "recruit-38",
+      "replace": "recruit-35",
       "type": "confirmRecruit",
     },
     true,
     "teamSelection",
-    "096d3394b2856f07f8fbb8f6792643a30f2f4cbf3730bb65f96d6f9fbd9d779c",
+    "0007f2d9513547375ce4ad58f5a5cf1432341c4c53ebd42ffb458972ebe6aa6b",
   ],
   [
     {
@@ -538,7 +500,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "campfire",
-    "2affb47229a7022ac567e6565d2b713d841f67fcdf864a0b4af66bb5ddb5379e",
+    "afb917f0a4800617b63a4fa7f08df6ff8aa69e6925cd0a27cfb836baeba42214",
   ],
   [
     {
@@ -546,45 +508,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "43f344e359cc0e1f70eb729dcb53f22d196a8a8f6d19f163459c9aa45cf60a34",
-  ],
-  [
-    {
-      "type": "enterSupport",
-      "visit": "support-6",
-    },
-    true,
-    "support",
-    "f4b59bdd57ee48425eb765240eaf194334b5603bf280a03c3c917781a98efc8b",
-  ],
-  [
-    {
-      "slot": "slot-0",
-      "type": "buyBoon",
-      "visit": "support-6",
-    },
-    true,
-    "support",
-    "f626fdb556b8becd21b818ba85090eec6e52e9e3eab3533934d67d398761c5ea",
-  ],
-  [
-    {
-      "slot": "slot-0",
-      "type": "buyBoon",
-      "visit": "support-6",
-    },
-    false,
-    "support",
-    "795f20ec6693eef0900b5796374552270691b89faf0e27b577a05821a932eea0",
-  ],
-  [
-    {
-      "type": "leaveSupport",
-      "visit": "support-6",
-    },
-    true,
-    "teamSelection",
-    "090d791a2b467e5518f4f3f0d20f7868424ba81ddc6360e37f47f1214f1d9c0a",
+    "5214b04c29932561b4119f79c453cfa358a5b4ad59e149106b29bcd48b786db8",
   ],
   [
     {
@@ -592,12 +516,12 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "4aac5aefb8d4e3da33cae7ca7e542383fcda4cd5fb5d943655240180ad9574ba",
+    "6494b69995f894a7454f94ab641acbb30460cf47cefe1f30c2238a5541bc9412",
   ],
   [
     "preview",
     false,
-    "5a564b7306e23cd728d42eab1f0bf1c9ede3df81d52d6a16814040b247022354",
+    "2fd9f165841763049a84b0bfeed0dafe171f41c463f5ed267281be34a0bb3e16",
   ],
   [
     {
@@ -608,7 +532,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "battle",
-    "5a564b7306e23cd728d42eab1f0bf1c9ede3df81d52d6a16814040b247022354",
+    "2fd9f165841763049a84b0bfeed0dafe171f41c463f5ed267281be34a0bb3e16",
   ],
   [
     {
@@ -616,7 +540,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "67cb171e0ac42aad76b1862a4203e418538029fd9815e9167812c88bcf356833",
+    "c1737a4d2f50aa75749f222995d9aabc1500b5db455846e444bc9c8318bd67d8",
   ],
   [
     {
@@ -624,7 +548,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "111bde90d36260f9c9a4e32eb4334af2884b6df761ddeb555828f3aef7981c5c",
+    "c2fe4c1e55652ae1bc9ec082a72776c50ce778012cc1083913c0a4bd1584bc1a",
   ],
   [
     {
@@ -632,25 +556,25 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "recruit",
-    "f0833c61e7f3c848e9a2e93c7c958893142394802e7381696eba7981d841ab1b",
+    "86465c64083dc808c5cab15c2c3cab5a8dc52a45a8bb9b35b299b26f18a8f838",
   ],
   [
     {
-      "species": "bloomquail",
+      "species": "tournelle",
       "type": "recruit",
     },
     true,
     "recruit",
-    "80b30e29c91f5b50a2844c6d5c03205793d9249c86eeda297e86de117dbb9389",
+    "ce0592e0531ff1a78b5e3bf839fa153dda670aa63a81cefbc8b958bab10368ff",
   ],
   [
     {
-      "replace": "recruit-45",
+      "replace": "recruit-42",
       "type": "confirmRecruit",
     },
     true,
     "teamSelection",
-    "2d0326c2e10cf59d59528d68ed886caa7fae3608c79e91200a740902cb5ce362",
+    "25c516853a3e51b8da6d4a988de5f50d7082dc0781da9d67dada50135844c806",
   ],
   [
     {
@@ -658,7 +582,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "campfire",
-    "308f401ff992f7ff1a3cc5648f5fe8025f4f2d0f846ea707eb1cd09127c7542c",
+    "5718c4bbe2a427c243d21236fdfe5e07ee2961cbe8953383be3aa8b34814ed05",
   ],
   [
     {
@@ -666,7 +590,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "e1aac4e86b941a26e52004e2cf83b97e5bd9df6d06e3c644f0218d2a3ecbc0e6",
+    "2bb41879f7c7fa0f4f76f6abc0ec8e0c49c3b76ee4452c0719ac3483c66aac82",
   ],
   [
     {
@@ -674,12 +598,12 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "fad398e2e45c66cb356dfa71d48fd5ff8e392aa88a38ad3ea9cfe458f0dee952",
+    "b22562cd8eb36f2ea683c4fc73e355a8f697527d2b587838d82f59ee4d64c54e",
   ],
   [
     "preview",
     false,
-    "f5a1958814db6ccb5db88b60dcde5ed18153f24feeeb502602b0a926f599ee5a",
+    "a7647dd476900ce5db9f651934a3822e4bb77bae014ae5397a5e8700fa71932c",
   ],
   [
     {
@@ -690,7 +614,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "battle",
-    "f5a1958814db6ccb5db88b60dcde5ed18153f24feeeb502602b0a926f599ee5a",
+    "a7647dd476900ce5db9f651934a3822e4bb77bae014ae5397a5e8700fa71932c",
   ],
   [
     {
@@ -698,7 +622,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "f525231318ceea05f35c2a876ea331f6adfdc21ff5ab99ced78eb6148e60685b",
+    "0e64ca630bb91146d9b62ff16239544afec490a13a08909a8f40f5b5372aff63",
   ],
   [
     {
@@ -706,7 +630,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "8544dc6adf5d923f04e8528b4f375ed73938578670a16642012b8aa739e071f9",
+    "05db4d221bcf3bbabb2b05527554910d441026edb9be4147889d819d7ca300e4",
   ],
   [
     {
@@ -714,7 +638,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "recruit",
-    "3e7b8eba33d50b0035119a95b77abcb4b92d04c05738187016007add59692408",
+    "05de065fc666c4555aba3352601c3c0f2f673fa8269568d4edabff84805fdffd",
   ],
   [
     {
@@ -723,16 +647,16 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "36c5e9946867aa845597957b5c19c576ad2a6c2ebdd3f358e8eb7e8c6668eb80",
+    "bcee150a5c767e3b181c464c338b70a492f87b3dde992d5de9c5ab6c817d60d6",
   ],
   [
     {
-      "replace": "recruit-55",
+      "replace": "recruit-49",
       "type": "confirmRecruit",
     },
     true,
     "victory",
-    "5756ad3d449b5c6491394904a9fc346fd64e5e6110d6d55c2c348c2a611d380d",
+    "c553a5ce3e20d22ee457b5884ddc418305a9299276834e48140a89ab806037b6",
   ],
   [
     {
@@ -741,16 +665,16 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "draft",
-    "abcd4cb60f808d05881232626375a9f1be67abc0df7a86e3bbcfb242561ee045",
+    "a7a2d204965ab2274cfbaa66f7579619883870fbdbea536288c80b93cf91cebf",
   ],
   [
     {
-      "species": "mossguard",
+      "species": "captoad",
       "type": "draft",
     },
     true,
     "draft",
-    "baf78723d2a06ffaf5b6af61582a415b3b1a89e8f911a5e42f698fe3a3b758cf",
+    "fd7c87bc5379a81fde0003f5abc13ed58393da2de123b001be13eaf85377dc97",
   ],
   [
     {
@@ -758,16 +682,16 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "draft",
-    "73721121f195ac1748d81247876ae636d14bba6033cb1b0984a31bbdd1e94cf4",
+    "114fcd20f71bc2e55e7cdd053e88a23133e8470526cc956a059d622304db427d",
   ],
   [
     {
-      "species": "ringpalm",
+      "species": "tournelle",
       "type": "draft",
     },
     true,
     "draft",
-    "0b43a87070715804dece0a93696f40554d5f83e5ccbdc56ebd299004fcd1255c",
+    "41359a042d8698c06d5ff93749b9f308ed786fc68e24c05c5646dfb1d980f81c",
   ],
   [
     {
@@ -775,7 +699,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "draft",
-    "0b43a87070715804dece0a93696f40554d5f83e5ccbdc56ebd299004fcd1255c",
+    "41359a042d8698c06d5ff93749b9f308ed786fc68e24c05c5646dfb1d980f81c",
   ],
   [
     {
@@ -783,7 +707,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "draft",
-    "a8453e873d3112ba12750964355aad7e65f3dcefe99b96d87f52df8be72f7aeb",
+    "813edf97df783cf5bc5009e9d7ac33deba7003bbd8b2de781cf42bfa95dda766",
   ],
 ]
 `;
@@ -813,7 +737,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "a904e356fb13c94771f617ae3391d292d769c2bb9725a11150e2c39a9a7fbf7e",
+    "b5bd3fdc128ccc5df04d3b96c4d7184b7c6f02fa05bf16c640e2e3bf767c1eb1",
   ],
   [
     {
@@ -821,12 +745,12 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "16799383591f1bbfec9892051bec741e98708bbcebc7c33654d5302b05d877a3",
+    "1097477958645b35bd84fb9716011a541bf8d9f4d75accc3b683505164e741a0",
   ],
   [
     "preview",
     true,
-    "57ed9d154dcf7a6a0b8bf42e9de7d466ae2aa42d5691e8b81aec46e8a56ee982",
+    "225644a7bf88c15de7d61d1c9ad336577236247c96433beeb612341eed11cd1a",
   ],
   [
     {
@@ -837,7 +761,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "57ed9d154dcf7a6a0b8bf42e9de7d466ae2aa42d5691e8b81aec46e8a56ee982",
+    "225644a7bf88c15de7d61d1c9ad336577236247c96433beeb612341eed11cd1a",
   ],
   [
     {
@@ -845,7 +769,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "94cdc2786b1939cfb5229c114c7e5c7aa6abd86caa53ce371f11f1fc32dd0944",
+    "402b8334fe8cf66fabf14cec2eac4cd4c14b711dd815ae517c73d31cf4ae1c6f",
   ],
   [
     {
@@ -853,7 +777,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "6f3a2a004fb1a5acef1fe6930d5d8f6b8ad372b08d9ff6382e1675f420bff876",
+    "78dff24d8af8ea01ecfef4f27129ec00bef103a56befffa84cc25147c1d0b936",
   ],
   [
     {
@@ -861,16 +785,16 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "recruit",
-    "9c5d87f74e710f5ff84e7f88d7747899fa6b4499d2a497ba66e83dd0a167a07f",
+    "64ae0f1fea7d5211e4387b1446ff96c1095d4ffe88bdb8fe1d6b6104a36d0f0e",
   ],
   [
     {
-      "species": "dawncall",
+      "species": "mossguard",
       "type": "recruit",
     },
     true,
     "teamSelection",
-    "63a4d2febeb3e67aa9632d0e4d5e3dbc955a512fc6dfd63da9d651b99b03d8be",
+    "c73838e3c5d9f4c42fc2d3cee0df53efdf412d8dd1db89eeb67b2ca1af495cd7",
   ],
   [
     {
@@ -878,7 +802,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "campfire",
-    "f4c2234525a72dfcfdf0d13bf8e66ddb1fec2304c34906b670faaf755e758b68",
+    "82737aca6fdadd04f06d455777ef20a4d1c7193b89676ff30d4902fcbdbd3752",
   ],
   [
     {
@@ -886,7 +810,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "ad1e638e315cae2cb2099acf56c14e1034d9619d63ffe4ef9c433d4c49563257",
+    "8307059e098d013edf95b1a0bc66250cf8ef43d95406a5f053f2de2588bc37cf",
   ],
   [
     {
@@ -894,12 +818,12 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "252b7c17100192bb4bd11d6ba29edbf48c522c5a2724490cf8c942b146021396",
+    "15d3a2f29d342e96fcbb6fcc7ddd8d2943ef5f809f93420b3d51867e81125b8a",
   ],
   [
     "preview",
     true,
-    "81763d056620190baa01ca09a580555a6e0de3ef1510ebd467c74a2e7b3e84e7",
+    "801adf1a3b958465831abb9783a7b1387b700367718c6f9fed1d103d0dfe58dc",
   ],
   [
     {
@@ -910,7 +834,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "81763d056620190baa01ca09a580555a6e0de3ef1510ebd467c74a2e7b3e84e7",
+    "801adf1a3b958465831abb9783a7b1387b700367718c6f9fed1d103d0dfe58dc",
   ],
   [
     {
@@ -918,7 +842,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "2526a26a9e5a62d168deec20198bc674fbd74cad57ca7feb5cc5c8f91154856e",
+    "275e7aeb9846796a94f06e76df8fe5c4b3432386efb9b073d2ed5e10626a2a2c",
   ],
   [
     {
@@ -926,7 +850,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "fabb1cc3704c1581158650487bb7435ac5b50f71101d2f69f7c9a5de26a79280",
+    "ac5f89a36a26b81f4f0ac0746794458a61f25ade95bfbab69583cb5caf46e05d",
   ],
   [
     {
@@ -934,16 +858,16 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "recruit",
-    "124552dbcc1c1a4743c9cf9bdd3d74bcf2ffd47a5ae15d7d6e8fa1abe6f33616",
+    "ecdf2d373b20ec2475fb316870a431f5acf46cb7ec3b9cd79cba721ab10425aa",
   ],
   [
     {
-      "species": "captoad",
+      "species": "reedstag",
       "type": "recruit",
     },
     true,
     "teamSelection",
-    "e565e8b54a70ab6d37801d701bdfa626a46ad1f263db3f1fdf2df5ae2ecd7a27",
+    "bdde85cf3c1337104a11c507d4ef9bcc505aa5def29144abafebac4a9d964cc5",
   ],
   [
     {
@@ -951,7 +875,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "campfire",
-    "a3e8d9d4aa98808152d1f5b20499b7e36b7cecb4a17c82e963298708d9e89bb3",
+    "1a9f5c9966f04dac76f83265485e1991ff1de1c87a3a8937d633619386d7eee0",
   ],
   [
     {
@@ -959,45 +883,16 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "8b0740b782e3d96f7879492dda159b5982070d27fc026431ddd5a51fa0ca107b",
+    "e0d1311b36e988a4c28adca2db04a3bd0135f8878f2ba94ac27f6fb9889ab860",
   ],
   [
     {
-      "type": "enterSupport",
-      "visit": "support-2",
-    },
-    true,
-    "support",
-    "61ef316e23a93aaae475760b8ab6f8a927807ebcffdee71cd17edb08eada5921",
-  ],
-  [
-    {
-      "slot": "slot-0",
-      "type": "buyBoon",
-      "visit": "support-2",
-    },
-    true,
-    "support",
-    "c8cbf8b283821f3396ceaead4b1ee965713ff3da51f6d9d45c20735aab83e546",
-  ],
-  [
-    {
-      "slot": "slot-0",
-      "type": "buyBoon",
-      "visit": "support-2",
-    },
-    false,
-    "support",
-    "d859e86dbe9e02b731299f8981fd3e2350cda045888efee3cb8bd49e43836e91",
-  ],
-  [
-    {
-      "type": "leaveSupport",
-      "visit": "support-2",
+      "species": "cadenza",
+      "type": "recruitDestination",
     },
     true,
     "teamSelection",
-    "24aae5e042937b41eadb8d19306dd8a31e8019b999ea095dbf08bc24831291f0",
+    "246064a893e57b56ee4788a24fbe755c21cd1ff9968c755bd00689c0d5612fdd",
   ],
   [
     {
@@ -1005,12 +900,12 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "d5f0d9599815556c3120f1666665540d85d256739afe9b06a45e88fb59f5cf14",
+    "5370112b9885268e0a5317a124bd2a10bc615f2ae811e3f41f68a2e84ac67741",
   ],
   [
     "preview",
     false,
-    "dcda6c3cc92f6cc36ce1806cbacd6ea4cb4d6a65a14f81183bcec54eec6acbce",
+    "4565ea889ce97668cdcb88a388b3c9df6f572ea60cf39f9312d7e9a59937d727",
   ],
   [
     {
@@ -1021,7 +916,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "battle",
-    "dcda6c3cc92f6cc36ce1806cbacd6ea4cb4d6a65a14f81183bcec54eec6acbce",
+    "4565ea889ce97668cdcb88a388b3c9df6f572ea60cf39f9312d7e9a59937d727",
   ],
   [
     {
@@ -1029,7 +924,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "360e14b45905d6adfcd61a9809a046e9e609afe5e277a04479cf1cea9023e2fb",
+    "9844426b2386e5c2c5e1497ea0294e56b0dda41b39c12437d8fa6da5f9e8d6b8",
   ],
   [
     {
@@ -1037,7 +932,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "775bfc79f99843dcb813209c347a6060fe49c2bcfd1ccae8f5cc3b63ea068c29",
+    "93a97383a302e1d086713fe5c8b5a8747f5a1df215f373a8649d25075cfc37ab",
   ],
   [
     {
@@ -1045,16 +940,16 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "recruit",
-    "110f3efe2467f913abc23f8920f455c3860215c9aa49ed98ad71165f8452aa0a",
+    "6ba37f25a6079c220d1b2fb9c84e2f6d8de938a040870c70088564bb25d25d4c",
   ],
   [
     {
-      "species": "mossguard",
+      "species": "prismram",
       "type": "recruit",
     },
     true,
     "teamSelection",
-    "f35550624606e8398400ab1828ca5a1ef2bdfbabbcaf7420be94919044d0ca6d",
+    "6602ff383627c99eb4de5ebdc7f3059b74b6aa7bb4350edb9ead3e127ff7c545",
   ],
   [
     {
@@ -1062,7 +957,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "campfire",
-    "0c5794129c708749406772407f53e9ad1cbd1c70a9de7ddb7b898a6037214def",
+    "738597b2f4c236b1aa09309dd9e320b5bcf63de1c056d6f805360f6f9c37ab47",
   ],
   [
     {
@@ -1070,16 +965,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "5557a13df0aa70eadf3f6bf10a1ff792a18f1a715b4312551a0d47bff9f664de",
-  ],
-  [
-    {
-      "species": "pollenmoth",
-      "type": "recruitDestination",
-    },
-    true,
-    "teamSelection",
-    "caa43fdd6f018237d58122fa775e6504c36e8fc1ad94fb48fd79531586eb9a03",
+    "59707aed0b75bc93e025056b8ce73f0af2f84237cb82d2b68cd32ca21c3a425d",
   ],
   [
     {
@@ -1087,12 +973,12 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "d5bee6e55d8b83cdf94f0d6a23b662997ed2d13bb955b803863665313ec62eec",
+    "9ed419173186b2ef7a17bb79e2a375e7e84957cd3cf13604913b3e20300879a7",
   ],
   [
     "preview",
     false,
-    "c0f265232d5d90de6ea86da780963c76268d4f3e3e4c96e91e5a8a34a7b5b227",
+    "4b8e39adfd97c67482596c456c4f56c2779e340b6b47e9f283198a61ef8d287f",
   ],
   [
     {
@@ -1103,7 +989,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "battle",
-    "c0f265232d5d90de6ea86da780963c76268d4f3e3e4c96e91e5a8a34a7b5b227",
+    "4b8e39adfd97c67482596c456c4f56c2779e340b6b47e9f283198a61ef8d287f",
   ],
   [
     {
@@ -1111,7 +997,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "64222adb6b037fb478896b7b8fd7707ad043ff69dbd2b3490642e09998eebfb3",
+    "6f0f0e41bddd1dedf2a74144259166bd3717d02f19e83f7ccb4e86d3ac3a76d2",
   ],
   [
     {
@@ -1119,7 +1005,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "11bee89ca212a85cf8637fb9bf7ade63ab8b01aa108ffd9aea65680466e1f56c",
+    "d214f0c1221374baa1e72a355029ec1aca0327a3c8d813e0ea4db1c7a2053151",
   ],
   [
     {
@@ -1127,7 +1013,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "recruit",
-    "8dd59db51245f7a25fef92c436735f39862d39a3e4587edc2eb735f2c7684fdd",
+    "dd56f159c5bd77007524887a12dbd71644217f145f7c1bf574beb5e2f5e6d7c4",
   ],
   [
     {
@@ -1136,7 +1022,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "5d4bfdf425af7ec23fef4cdf971c18929926ae9709d304e8fa00f5b9b67ee1ac",
+    "5be1621f243a37ad675125239542b16eeaae5fec8bc2548d3ec2f6d97d5fb69e",
   ],
   [
     {
@@ -1145,16 +1031,16 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "boon",
-    "610e8d3eea0531afe5aa2c13df8aec15ec8b21dafab162b1b923c5aca5660210",
+    "d11d64a8728e65efe5a4642aa9a75adf2c5e2279212ed8c520f4da91aae30303",
   ],
   [
     {
-      "boon": "meteorite",
+      "boon": "thunderstone",
       "type": "chooseBoon",
     },
     true,
     "teamSelection",
-    "a9731ad2057cab7179707527f78a0cf816d2718dd7b246ea2694d4c569e86a50",
+    "c2963606f9404b606db1eeb9bb0640f4246558a070f35b01a4028d3a43a4b467",
   ],
   [
     {
@@ -1162,7 +1048,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "campfire",
-    "72be12837028c600f9fee8730257d64c217894ccbe24b35b29936cd6d6340816",
+    "ac1530f1521b39215be11e29cca300984dc58dda73dc4c86638e590ab2a414c9",
   ],
   [
     {
@@ -1170,45 +1056,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "9a4c87a2bafa1d6cd8ffdde0290826fa06081d00cbc9cf048e51247595a81dc9",
-  ],
-  [
-    {
-      "type": "enterSupport",
-      "visit": "support-4",
-    },
-    true,
-    "support",
-    "53ce449fe7907ee72afb2bb51432ef9847b2d51a9ef2a7c7aeae789df1f25eaa",
-  ],
-  [
-    {
-      "slot": "slot-0",
-      "type": "buyBoon",
-      "visit": "support-4",
-    },
-    true,
-    "support",
-    "0b3ac1491d3ac00763809d8b6067991c6e79fa0042ec573e025edb050b842716",
-  ],
-  [
-    {
-      "slot": "slot-0",
-      "type": "buyBoon",
-      "visit": "support-4",
-    },
-    false,
-    "support",
-    "d6069c14f01aaeb0287cd593acb0c09931cc4a321b58754f0d4fd88ab5b0dac0",
-  ],
-  [
-    {
-      "type": "leaveSupport",
-      "visit": "support-4",
-    },
-    true,
-    "teamSelection",
-    "3630a22eaae50ab46934bdf628fa273d713569321d3ded98d271ea4355965338",
+    "2eb856b7bf17f720e4903f2da58e063f95d734584c3de76abbf8233e69b1212c",
   ],
   [
     {
@@ -1216,12 +1064,12 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "b85a738501025867db1388daeb61926af01dd79cecca365bcd01b1c7d8b1d165",
+    "0921cad5b78791282e601ff6bac26a0f7bb420a10f4ce7334725f84ecc702c09",
   ],
   [
     "preview",
     false,
-    "5142adbb87c1e618323d234f2d8a62d4b978eeae9d4b71af6a07c0f3744707f2",
+    "928f5d4adebc8fecb07bf4659c857ce9ea29b192761135eac7809392a7f82598",
   ],
   [
     {
@@ -1232,7 +1080,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "battle",
-    "5142adbb87c1e618323d234f2d8a62d4b978eeae9d4b71af6a07c0f3744707f2",
+    "928f5d4adebc8fecb07bf4659c857ce9ea29b192761135eac7809392a7f82598",
   ],
   [
     {
@@ -1240,7 +1088,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "2ce2a65e0c2d515637fee7fa61219bfe41e58e593e426b380a6b763d04f68aaa",
+    "72562f41f517b2f8da36c0585a1c306de252484fa25e8a37f95a15fc4667c6fb",
   ],
   [
     {
@@ -1248,7 +1096,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "dea249fa6e7289cfc9521f0dda37271b28c69beca0d08bec05efa44fac7874df",
+    "cd9177a6584af840e8ba1a01e46b9062b32ae341dccfe4edc57a6fb2c32b5ec9",
   ],
   [
     {
@@ -1256,25 +1104,25 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "recruit",
-    "d7dd43fc11f9c93700585148718031b7cb95e61feeedd6d8b6d4e53056b00b45",
+    "90235a5668b12e5066b14889b512da47de6012c3c9629a65d0e905028e69916e",
   ],
   [
     {
-      "species": "bloomquail",
+      "species": "cindernewt",
       "type": "recruit",
     },
     true,
     "recruit",
-    "eeea911a34e7932eaa16f888fad792b1f54e68eda0d504ef11a93ff93d01c814",
+    "c639e7106f36a66d5d5851f4ea4abf70e429b303514cd25d063925b7f798de74",
   ],
   [
     {
-      "replace": "recruit-31",
+      "replace": "recruit-28",
       "type": "confirmRecruit",
     },
     true,
     "teamSelection",
-    "f862725bf9f9dfcc96ce8325e4121412e8615d2ee761fe2aeda20cf2c2ac98a3",
+    "992c728d74835ed8975f03fcf24a68d6b7fd1790e276a9971d4d8aaf041260cf",
   ],
   [
     {
@@ -1282,7 +1130,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "campfire",
-    "848fe933f69450163d66f4713e23ae178e7da7550042dc45037eb30b43b6fc24",
+    "cb659ec71702f0ecdf23097fa69be6e5dd2352db757a10ff838ce57662f51dab",
   ],
   [
     {
@@ -1290,7 +1138,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "b2102207115b8b374ebe293ab301098a5940dfa59ce4ab75738151f90bc7146e",
+    "1d36eeab3519009c3b3921c50a046cd919cfb717f2564f7cc94749d4324405d1",
   ],
   [
     {
@@ -1298,12 +1146,12 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "9f116c400188893542d68f50dfa4ab5a21fed9b360a66ae9b20efd3e57750f32",
+    "b48ae253090be2b5227477cf9a561b1745a37abd51c65c66e8cac2a9d0cd1947",
   ],
   [
     "preview",
     false,
-    "23d0e0165432952f68422a34f80939dacb5e0f634dd7e092dbf26efe0186d5c3",
+    "35f7a72a6992cef43e76d5f6a5545d8eb9909a9420ee570f6ca1054e9894a1d4",
   ],
   [
     {
@@ -1314,7 +1162,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "battle",
-    "23d0e0165432952f68422a34f80939dacb5e0f634dd7e092dbf26efe0186d5c3",
+    "35f7a72a6992cef43e76d5f6a5545d8eb9909a9420ee570f6ca1054e9894a1d4",
   ],
   [
     {
@@ -1322,7 +1170,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "9576e877b834b0427c1d4acbe8af261aae2dbd23e450f8f7fba5c39104b39ddc",
+    "532c34ee2ffe965f039e05e568f68a7fb1dd05ff6dada53f29b553a5328e160f",
   ],
   [
     {
@@ -1330,7 +1178,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "efa42ef2bbbb834c862f40b20f8f849676e5cc45fc99ccfc276d75080a002bcb",
+    "66a62d2a1c294d239fa8fc4a5c91ea376c420f24dbafb23b2d7d7bf0e5367fbd",
   ],
   [
     {
@@ -1338,25 +1186,25 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "recruit",
-    "a3540ea807a2c404ac8d53f8b18cc68799a11ac27f74e110b8b032683907b34b",
+    "c60b9b0391538bcec2eeeb5088c655e43d7a8ddebe46943c5f4ac9be034c221d",
   ],
   [
     {
-      "species": "shadebrim",
+      "species": "orifable",
       "type": "recruit",
     },
     true,
     "recruit",
-    "01f24e247875e0930ed54658cabad7bd62cbb2d48e782adb70e918cc5fea999f",
+    "457d1a07989ebcadbf1e3c4805b683e333b0ec5b5fc262e4153071da332159a7",
   ],
   [
     {
-      "replace": "recruit-42",
+      "replace": "recruit-36",
       "type": "confirmRecruit",
     },
     true,
     "teamSelection",
-    "a653b3cc6e9011f332f6af1c4a0fc7f455b33dcfcd414c2cf394597e2f765d45",
+    "526ea8592f0fd4bc1e76d15f364ecee2a9d94b40aa43cf6c70f32b80f2b4bab0",
   ],
   [
     {
@@ -1364,7 +1212,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "campfire",
-    "30a4e8106a772ecc90fe650a5262e7f2e5bfce72ca9652b16a08c1c5d4fbe755",
+    "2c5c3085eff60b8f7f1e9d2fd8da73742cbc2c181eba1b1921fdd6a9ac08cb75",
   ],
   [
     {
@@ -1372,7 +1220,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "f320b27ec4dda6762bfff06639cf21d905a6689f50d1a5f3e2d3e958e634dc50",
+    "839aea88ff5261db7868444a2b6b6df525e8385e9ab7860a825648227bfdc591",
   ],
   [
     {
@@ -1380,12 +1228,12 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "a28fdfec9598796d622477555dcbbdfca54d46e2f361aff4baff0932dc146abc",
+    "45af3f0b5546023919509e11544143f21b744fba8c79834e12fd94f6b57344ae",
   ],
   [
     "preview",
     false,
-    "5589a99687050773e1cfbdecfd6088acd2586d235fca3e5b30065e5fa66de57f",
+    "20fea7cda73925ac0aa706a7604f5e4eff9f906eb7629570e9dd6675b2850015",
   ],
   [
     {
@@ -1396,7 +1244,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "battle",
-    "5589a99687050773e1cfbdecfd6088acd2586d235fca3e5b30065e5fa66de57f",
+    "20fea7cda73925ac0aa706a7604f5e4eff9f906eb7629570e9dd6675b2850015",
   ],
   [
     {
@@ -1404,7 +1252,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "106ef29a511fe8e8888f17cd04106dbbd45b02be687587967108d79531601548",
+    "20297084058a9ca8cba34daeff0d37a4e16846305763d31fddf7be7fe12694f2",
   ],
   [
     {
@@ -1412,7 +1260,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "82c3b799c670575687b1463bf26e7cf1304f0dbc855e4fef00b3da9cf34453d9",
+    "cc3ba1682367906b1943eabaf51eb7433a07d5da5fddbe39edb4cbdd48a31a29",
   ],
   [
     {
@@ -1420,25 +1268,25 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "recruit",
-    "ff5e233dd082a4814b4c433d35477f758609e6a03d7b4c4dbda3c3a3b1a0f7b5",
+    "41cc6c4df03cf841c37b21a3998e6bec08c5443a419f55443858d0297f2523b0",
   ],
   [
     {
-      "species": "reverie",
+      "species": "oathara",
       "type": "recruit",
     },
     true,
     "recruit",
-    "39b00a65123076ecc949b285c1d1426d0065c380daec318cf22ba41ad49c0f07",
+    "1b02981f11e53a98e384e525c44ff643c6c2f064bdf58bec95ee288479deb07a",
   ],
   [
     {
-      "replace": "recruit-49",
+      "replace": "recruit-43",
       "type": "confirmRecruit",
     },
     true,
     "teamSelection",
-    "c40957d65da460c67003e67626680972e8af7f077db510e624fc290e50490f42",
+    "385bb1073394bc32def03b179510cf842dc53b28f05f44fb07018028c3ed8b64",
   ],
   [
     {
@@ -1446,7 +1294,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "campfire",
-    "ae72bbe1e7fd700bce7f74901ac725232b4252c11d3496bc39d908e7b9b0a89c",
+    "1c2409473ffa0ab1925e321aac87f2f77813bf67ffabe311e234112449dc8981",
   ],
   [
     {
@@ -1454,7 +1302,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "471d7aa0c10e501e744d5bf474af20ba6fc6b352b5b1f20fccae149e89732eba",
+    "78ab26cdae5aafc94d54c25c3264324facdc7d815ba6a56f91bea9de58ad2dfb",
   ],
   [
     {
@@ -1462,12 +1310,12 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "ff26a348a98cb16536394bcd084c99441d5402c87cf66257d852723845501c40",
+    "fc72c7072b6785d1354d6cfd23c9e2cc9e9ee3afa954d908a1297ba3a7c2c8de",
   ],
   [
     "preview",
     false,
-    "6989c94af8d9ca2e82d40360a58a327386bf19a9c513a37c3883d8f546d6272f",
+    "ff6f234c795b942106047af7bfc0e6b47850e16d2cd637d5653960a927e83de4",
   ],
   [
     {
@@ -1478,7 +1326,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "battle",
-    "6989c94af8d9ca2e82d40360a58a327386bf19a9c513a37c3883d8f546d6272f",
+    "ff6f234c795b942106047af7bfc0e6b47850e16d2cd637d5653960a927e83de4",
   ],
   [
     {
@@ -1486,7 +1334,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "bc0c29bcb278c31d3859bd6707b5d8d2bb4e8e8d55bb0181c8be7d770c2b9ae3",
+    "452b2326555944e5fff074047cb31379fe9fcada30ec7d1d4fbb5c88bb26e2a7",
   ],
   [
     {
@@ -1494,7 +1342,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "49453cf748448f7301191c289a77e361bd13bd27053547cf6f2432df2db70fef",
+    "21808d56cab3b8a56ce6d4efcbec3d1e6123ea3a7cf01644433cd81c0db2d783",
   ],
   [
     {
@@ -1502,7 +1350,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "recruit",
-    "f5bdd039a0438d88766da7f4f008e4fad592f9a7f407ac3df8e2091c713ec55e",
+    "15a801bb8573a8dc7da858f410492092bb3468177b2caaec6c85339cc6c98055",
   ],
   [
     {
@@ -1511,16 +1359,16 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "4c32908b1fdd48333f7dcccaeba5006b98df554e2870996030dc6b06b0b61d14",
+    "9805f32d1a0879336d71a2a4bf27e8e5a2a382c0049247384e988bc0791e699b",
   ],
   [
     {
-      "replace": "recruit-56",
+      "replace": "recruit-50",
       "type": "confirmRecruit",
     },
     true,
     "victory",
-    "1b094eca53c1d4d82e9c3c31d0779d7f2df8c1877a928f0ce4f318ab8ce610f7",
+    "7a740b0b5a454f790bd0ad5bae6307c1569089f6bcae7cf76ba267b98e7db220",
   ],
   [
     {
@@ -1529,16 +1377,16 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "draft",
-    "ec8f17a8302d6824f22247c6cc089bb887f07f0d4c9e63baa0fad6305ca976c4",
+    "3464084939f6c5cfb753517b1c54914c5e0446289eb682a7557d135336ee767b",
   ],
   [
     {
-      "species": "memento",
+      "species": "euphera",
       "type": "draft",
     },
     true,
     "draft",
-    "8147b3e93e4ec98f16cf9b6516748b67a446ea10c5808aa874a87abcd64ebcfe",
+    "5c9d665cf8e36f40a85c4171b51613e60c23216eb72ec941607261bdb19ddd68",
   ],
   [
     {
@@ -1546,16 +1394,16 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "draft",
-    "d750964ede687c7c57d29c9b1786775b6f9143abde563ce00724892dc9102bba",
+    "a8b2039a887357c12a3b432d796c7324e67ad96ee6efb659ff8405f04a145fc5",
   ],
   [
     {
-      "species": "reverie",
+      "species": "euphera",
       "type": "draft",
     },
     true,
     "draft",
-    "ef7f18a7ce556cfe1c1091b3584dca355680334c1b41c0be86eba50fcf7aba71",
+    "28bf6c208e2c1c9cb42dac18f86dbf864147b1ca86ce8e0bbdb02d4d4caa6c09",
   ],
   [
     {
@@ -1563,7 +1411,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "draft",
-    "ef7f18a7ce556cfe1c1091b3584dca355680334c1b41c0be86eba50fcf7aba71",
+    "28bf6c208e2c1c9cb42dac18f86dbf864147b1ca86ce8e0bbdb02d4d4caa6c09",
   ],
   [
     {
@@ -1571,7 +1419,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "draft",
-    "755ad3c5723104a85c18ee7084724db16dc2d2619f9c38903df27f832dbaf337",
+    "fc3b870b23f3ddaf2d08910570f19c1d0328c7e469d883b16f1ca901d9890f55",
   ],
 ]
 `;
@@ -1658,7 +1506,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "13bb5b75893e1965c520a3bbb1948ff3ceb97f468239f56b7a939e454ea5296a",
+    "b745db595f55e3779c0dab029d4bc02f0c8530f634b6a00c628b1e40648d7149",
   ],
   [
     {
@@ -1666,7 +1514,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "campfire",
-    "9d87caeed4723900d1cbe6fad253f0c68c28205866d85aa40d4cd55647a5e922",
+    "b374361c72715660b5456fdba622f00af9ad03c3c3890dffc5d669dbd24de414",
   ],
   [
     {
@@ -1674,7 +1522,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "73065e6ff4253d6300fbc8a1ac5857a97bc4730ce8e5adbc90552c9da26443df",
+    "7ed542b8d2674a85ea392b237a60e0778844caeaa4f2804ffc9ae57069424152",
   ],
   [
     {
@@ -1682,12 +1530,12 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "7a44aeacbe147ff4022dd33f12a48309db03a0a0660a498f96ade8477f5b8c7d",
+    "0d88ac47c69d1d328ab68e12e816b077d0efd6d105fb90f64b8cbc0afbd7df7f",
   ],
   [
     "preview",
     false,
-    "0638062ceb08533fc4daebdbff469fe9a93049810c3de38036312ed04c563426",
+    "d7530827618236c23527c46c904649e006596e1e3f8f63994d06d747a7936036",
   ],
   [
     {
@@ -1698,7 +1546,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "battle",
-    "0638062ceb08533fc4daebdbff469fe9a93049810c3de38036312ed04c563426",
+    "d7530827618236c23527c46c904649e006596e1e3f8f63994d06d747a7936036",
   ],
   [
     {
@@ -1706,7 +1554,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "a228c7b36fa81bf92ccc9c732ef379dae278065032d6b69c50605f8604935763",
+    "ec46185d63b6a73c8ae33b1d951caecfeae9c75a87b713e70e6451b994ad4f8d",
   ],
   [
     {
@@ -1714,7 +1562,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "72b2946281973a33ffc2cdc14b925e0c8cc3edc5ad9fc5ab46e6f5e998998637",
+    "e5cfcd69047b033bb13e556505d940ef64ed96398cf4ef56941d2692547edcf6",
   ],
   [
     {
@@ -1722,7 +1570,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "recruit",
-    "d4644eb9b09a3ded610290c84102b7e3efd2757ccaa0bd3b6c101b19de0341bc",
+    "3116fea3e967799d7d8fcc34b83c4a8eadf3aeec433dfef171a02a784cec7623",
   ],
   [
     {
@@ -1731,7 +1579,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "811accb5bd0fd4c9c48ae5ac9a246d24be0b493d47698113c2f6290a996ebf56",
+    "c281b18f5033960f2fc014bff07a6404a4fb3f438da22fd6dbd7b4760ec2f6ef",
   ],
   [
     {
@@ -1739,7 +1587,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "campfire",
-    "fbf08c0d911fa21bf6bb9e6139becd737ba0ab16055e324fb17a94576165fc6a",
+    "6acf42895ff8a1e157821a2aad33b5118cbb06d8c3766cf55cabecea4598f7f7",
   ],
   [
     {
@@ -1747,7 +1595,45 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "046c4212834cd4e534dddc05510c873be4074c65952a926847f682ce764cef87",
+    "63cee21476674736ee1238a5b0994fc74130d2dc00d7c96c08fca1897a61c202",
+  ],
+  [
+    {
+      "type": "enterSupport",
+      "visit": "support-2",
+    },
+    true,
+    "support",
+    "5a7940c63bd1bda034a00d11fc576893167e2ddb6aa6a75f9c502add7384701a",
+  ],
+  [
+    {
+      "slot": "slot-0",
+      "type": "buyBoon",
+      "visit": "support-2",
+    },
+    true,
+    "support",
+    "6002cba2a7894c6ce9bf1a7182a873bd9f7f44761aa3393797533ab9deb4dd8e",
+  ],
+  [
+    {
+      "slot": "slot-0",
+      "type": "buyBoon",
+      "visit": "support-2",
+    },
+    false,
+    "support",
+    "e00f40ddceed0fdb25f383f6d52dd9963d4b45cf3b1bd8080be5c002f47191f3",
+  ],
+  [
+    {
+      "type": "leaveSupport",
+      "visit": "support-2",
+    },
+    true,
+    "teamSelection",
+    "c77a77a47e59febf32a6ce39f186959394148a5983182fda0720fbd526584318",
   ],
   [
     {
@@ -1755,12 +1641,12 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "35c80673553bdfce0d2fed04f7f6d6f051ede40dd664ba939070601d7fa9311d",
+    "1b0f300f9354891b3046d98b4a85e834a606215493e9c53d3dec8c179d3e93fb",
   ],
   [
     "preview",
-    true,
-    "c2199bb29bad328110f26d5a89fcd290ba56c5859fdd7ae5d599c046c04f7d49",
+    false,
+    "24db7be57ddb3fbbb80869b1491aed6c13eed7918b8029dfbe78f68cd52ccafa",
   ],
   [
     {
@@ -1769,9 +1655,9 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
       "targetId": "enemy-0",
       "type": "play",
     },
-    true,
+    false,
     "battle",
-    "c2199bb29bad328110f26d5a89fcd290ba56c5859fdd7ae5d599c046c04f7d49",
+    "24db7be57ddb3fbbb80869b1491aed6c13eed7918b8029dfbe78f68cd52ccafa",
   ],
   [
     {
@@ -1779,7 +1665,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "33f8860cb5f5862c3eb78a8b9d6cc156f584280852afb07a89987ce773baf448",
+    "e0006d570f6c9ce98d14ed65e11a4ffdfa215bf8ab1061aa84440063648d0cba",
   ],
   [
     {
@@ -1787,7 +1673,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "efd6494c0b55f539042365ca7d3c414f4cb2f48502cd35c47dfacb3fd40cae2d",
+    "31c5812f76de4009a196e1939b786ebd2d7fda2a6deb63cdd6b8f584db1bbb30",
   ],
   [
     {
@@ -1795,16 +1681,16 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "recruit",
-    "b3e32b01965f5f5f8af615322509cb86150aa4312312827374748a8c67d31dd3",
+    "ddf8d4989d810e4002f1450dead45d20d4a075213a61190ea07958125098390b",
   ],
   [
     {
-      "species": "prismram",
+      "species": "reverie",
       "type": "recruit",
     },
     true,
     "teamSelection",
-    "9d22327667dde317d2c2e1c0cec5bd41a3b7e165ec617e8fbf8ec8319361e71c",
+    "b6d6a3ce51f78d81797f37f123129320e0e54cbdc84aeae4c7dda1891c374d40",
   ],
   [
     {
@@ -1812,7 +1698,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "campfire",
-    "860f0f23f59d9643afd47f08162b1873abbfd889f5000a1e0e4acc5e119981c5",
+    "4196dd24338e80edfb1ceb527364fb4d152264c76f8e0a1cbda972f56b965010",
   ],
   [
     {
@@ -1820,16 +1706,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "2455da7e5c5bb1f2fbd5a62f36a8e8ef002d297ea18df4cf642eee03110f6082",
-  ],
-  [
-    {
-      "species": "ringpalm",
-      "type": "recruitDestination",
-    },
-    true,
-    "teamSelection",
-    "ba8fa4dd02c172562bf7ad2b87fd50645239e141d9d5b305ca96b8e2a43052cc",
+    "19bb90fc68e992f10f522202025b8108ce64933589543e7009d433e94e269aaf",
   ],
   [
     {
@@ -1837,12 +1714,12 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "f72f470294c028f9284b37e5a6d9f066cbbd2d3a1d82250ab01a9e813f9a1c1a",
+    "9ab848d01266ad68047aed0b3db143f8ae43143a18109737201e9df0b09320d5",
   ],
   [
     "preview",
     false,
-    "f715b9e0741aba0dc6f13c3b0e02501d8fe173eac28e2089a9fdf49dd871867d",
+    "6a24166f5bad23661c2b048c38c6dfd9c8b0543b9454a3d56533212ac0a2b893",
   ],
   [
     {
@@ -1853,7 +1730,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "battle",
-    "f715b9e0741aba0dc6f13c3b0e02501d8fe173eac28e2089a9fdf49dd871867d",
+    "6a24166f5bad23661c2b048c38c6dfd9c8b0543b9454a3d56533212ac0a2b893",
   ],
   [
     {
@@ -1861,7 +1738,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "02f55e0f9c712babaeb207bbf3f86ce9a91a4f4214cf036d3ffa3f50b7d9c80f",
+    "d072cc46989b16473abde2212df295c5cddcc8101c0dcb16c611355738e52f3c",
   ],
   [
     {
@@ -1869,7 +1746,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "3716c5bcab6c86d1b027ec56d42cf2d1bcdd4466670e502b925ae9930faa525a",
+    "6c0783a15160954d4bd179b039e7ac06f1cc5593859cbdf3b17e35d5cf4f13d1",
   ],
   [
     {
@@ -1877,7 +1754,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "recruit",
-    "17d3c9a4b84f211969dff4b8ccf2aae591082ba564f7929a8a381ffcb84baebb",
+    "a2c8a7f5f3b56936ca67c73e5bab47c4ba21d047d7ed25ea15bfe3e1a97c26d0",
   ],
   [
     {
@@ -1885,26 +1762,17 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
       "type": "recruit",
     },
     true,
-    "recruit",
-    "e3c1e637018996d8597ac9865eb09911ca480eb6be0fe0a53c34f39f5d159139",
-  ],
-  [
-    {
-      "replace": "ally-0",
-      "type": "confirmRecruit",
-    },
-    true,
     "boon",
-    "5a639ddcb0cf5fb08a1d7e3cb6e311422326ac1724bf39c4cbd5bf6a470769e5",
+    "8a7c7012dcd20cd0f19ce8787977abd92b3d1ff4272089dee7ddb3e11fb2a094",
   ],
   [
     {
-      "boon": "sundering-charm",
+      "boon": "icy-heart",
       "type": "chooseBoon",
     },
     true,
     "teamSelection",
-    "669877154f9319c83bfde69f2931b42f2668150d756b81715d56c5bc2786ba7a",
+    "3ac0ad475a312a6668523f089f3ffce9a2184b28045246659da0a440c78b089c",
   ],
   [
     {
@@ -1912,7 +1780,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "campfire",
-    "39bcdb4bcc485c12cca2e981d7b542b2331c81c3ba662202d03f9af4cd4f3433",
+    "bbf71d8fa35ad4227c1268ec3d4fc6fb94814f1022a364c90e2f4e5abb2f41fa",
   ],
   [
     {
@@ -1920,7 +1788,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "bad0652930dc5dad04dd9f87794ccf6c29a71cfdb8927b20871a6ab4779ce54b",
+    "6796fc793e77fc075e6b7dfda6d2f215bcc8277b7a8d22d5bfbba45178db00ea",
   ],
   [
     {
@@ -1928,12 +1796,12 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "fa87ec9563c133ab4f1537ef366820b9474102c1bdd94360e6450c9ab1144af6",
+    "699796ea74506a5d96a584f48e84c7eaef76f2ffd2a868e0eacda7a0e828684f",
   ],
   [
     "preview",
     false,
-    "ec1830c06263a35844f89c7fbab92d05acca3a4f873ef22754667c534ad01d13",
+    "01305b135541df31f2b8ad41119e7574badf18310bbc92cbf599db048b3cd3fe",
   ],
   [
     {
@@ -1944,7 +1812,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "battle",
-    "ec1830c06263a35844f89c7fbab92d05acca3a4f873ef22754667c534ad01d13",
+    "01305b135541df31f2b8ad41119e7574badf18310bbc92cbf599db048b3cd3fe",
   ],
   [
     {
@@ -1952,7 +1820,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "21b8a8816c55a9d2bdf62d28643922db9d3186f24eedb421c243c0fd2aff2b1b",
+    "29b32f8afbfee593606e95d1ebfc6ccf1cb757e932c670f5a2e48bb0dee79c49",
   ],
   [
     {
@@ -1960,7 +1828,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "9757f1c58522b3da1cd4349d92e8a782c807d9a6b09ce270f159db7a9ae09fca",
+    "7f29294ab599399d559099f6b9e1b65d382924318f365e843057e4a3638c7fb9",
   ],
   [
     {
@@ -1968,25 +1836,25 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "recruit",
-    "22c20b7e256473fa5b201f29a02439feabf9cbbc5c19c9afb649e9f680a6298f",
+    "3fe86fbfa599bac387b4949184a1570ed25b35b0d1bbd21c34039e0f2caea2b9",
   ],
   [
     {
-      "species": "emberback",
+      "species": "tournelle",
       "type": "recruit",
     },
     true,
     "recruit",
-    "f901ea0cbc7e39c1f12f0becf86b3a258ab52121b7f5c6060822f05eab5ec44f",
+    "8189d6dc759de1af040f7e5b34d29373d9d81a46285b1a33db94bbc81973ce31",
   ],
   [
     {
-      "replace": "recruit-28",
+      "replace": "ally-0",
       "type": "confirmRecruit",
     },
     true,
     "teamSelection",
-    "2576dd9ed9e8abf7c45f23e7b94777f82bdce9fb66726809fe06b5ef3e374c34",
+    "a19f19ffe24fac17f9a8e2acad353d4068a9a266f9db5f72e4daac5919f9a429",
   ],
   [
     {
@@ -1994,7 +1862,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "campfire",
-    "5e78ea1950631d6307c81c827114a740da56d519985c8cd299e8276e297ed1da",
+    "620843647cc3a216aa91bcc0bb9f20d96f2b5024290665f6f51d5c56f2b96c0a",
   ],
   [
     {
@@ -2002,7 +1870,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "34717c143defaa2c8c009b1e724d3733df4fa74a0bc57f5f4627c2c3ed733331",
+    "fef50944c5d7a5e2d614f1466032ad7029d7d55f706fc2d43c97f4b98adc7525",
   ],
   [
     {
@@ -2010,12 +1878,12 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "39698c8ba28adf5d0b2141b62c76ec6045367549dc9fba568c668db8595d1f53",
+    "897a6f69754bd62bdf76876e1fd29fba11c19ebd923b3474509ec7fa396ef9d8",
   ],
   [
     "preview",
     false,
-    "592094c7b105999b41c4b181dd4e8bfe571f16ba9a6e4d430c0e80f93fd203ed",
+    "7e7c3cf8a41823be27397925d44fca08a77eb3b2736b1aa82b7bc5e0b35869ab",
   ],
   [
     {
@@ -2026,7 +1894,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "battle",
-    "592094c7b105999b41c4b181dd4e8bfe571f16ba9a6e4d430c0e80f93fd203ed",
+    "7e7c3cf8a41823be27397925d44fca08a77eb3b2736b1aa82b7bc5e0b35869ab",
   ],
   [
     {
@@ -2034,7 +1902,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "c7402ae8571efbbf5ebe556f20b4a9d0c53e6ee3af8892a5ef9f28e63aecc05d",
+    "7fc8d88645ab52821efe2debe0693f2b865e4a1ba6a489316b1dff7079316997",
   ],
   [
     {
@@ -2042,7 +1910,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "41c58ba67b6e6af809702a99a2fec4db58e393aa3c546751e0eae3b5146f8db4",
+    "75e5fb589e060a6d8d8b5478136f0f96f6dd924f99ff23ce343cc44d0f2dafcf",
   ],
   [
     {
@@ -2050,16 +1918,16 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "recruit",
-    "8254b1b8c347a3858a29b95b2621820170d058db05a7b0a5599619dd882bfac3",
+    "e22bc7a09a8d037c01e8ee528b4072d090befe3c8b30344c56a7d41c9c35f345",
   ],
   [
     {
-      "species": "neradora",
+      "species": "sternshell",
       "type": "recruit",
     },
     true,
     "recruit",
-    "81a6f616cfb16ff593dbcd4967569e0d28610a10e31b680904520884d450a0e1",
+    "90db6a22a826bfc2607bf215701ab91b999304f16d92e0d1ec7c5f860ff07be2",
   ],
   [
     {
@@ -2068,7 +1936,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "49c72f9c5836f95e7c5f231871ac7a8dec176a07c4aac1375acba723791fb52e",
+    "5fbcfb8142ad712dd5088db5899c9a225904a6274e935972339e0fb4c99d8cd5",
   ],
   [
     {
@@ -2076,7 +1944,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "campfire",
-    "41eeb0115da903a561d4b2dc0e1becabdef0d7e1fd327791ac5b6f39279e54cf",
+    "67bb20342b11c44b4ebd443e0c40b96701732cd293769c44fa00d383c893b7d5",
   ],
   [
     {
@@ -2084,7 +1952,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "de5737ebe29f37031c62eee33306757d5ea9c6f9a79c724cdb1270c4583c37a4",
+    "e9cb1489ddc99d237b708f1a25480c56735916b9722c79394d2e55a0d1d7ed8c",
   ],
   [
     {
@@ -2092,12 +1960,12 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "dbd8ed2036a15a1e53f0b4efa5cecd7bedc6c345d3217fd1f324adf4d6098be0",
+    "f04f2f46cf4370421272da43a771ac451297e40d67cbde40bb45a41163bc188c",
   ],
   [
     "preview",
     false,
-    "d043438558840b52a0f7f999c1f73558f431d4c5111fa8ea41099624f221b80b",
+    "c641427e5b209d390bc13dee7d10672bcdfb1405910a190fae795866a5a18b9c",
   ],
   [
     {
@@ -2108,7 +1976,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "battle",
-    "d043438558840b52a0f7f999c1f73558f431d4c5111fa8ea41099624f221b80b",
+    "c641427e5b209d390bc13dee7d10672bcdfb1405910a190fae795866a5a18b9c",
   ],
   [
     {
@@ -2116,7 +1984,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "fa937994b080a5ab757754f90418cfd46e874a8448d3556329d9d2865e140560",
+    "31e8c751968dd1db240b140dd427f27a4c4ebc29920d8e44aaea9a2a0151c73f",
   ],
   [
     {
@@ -2124,7 +1992,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "5e2e69dd979da1775dacf4d09b5d470afbc911bc8e2e6045b4e19131ab56b63e",
+    "2c7ae93ca4a47871ac488fc24e9ea0ea81abc351cd005300a319aa57c74b6b67",
   ],
   [
     {
@@ -2132,16 +2000,16 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "recruit",
-    "b1f731673855d74166c5f0a63250348f90a511bfd31de9a6d9d86a0d2d24b86a",
+    "6f12d8db39ac2da1a5423e579748df60f7247d9d8a70b2d5de62113b717cce41",
   ],
   [
     {
-      "species": "bloomquail",
+      "species": "almanelle",
       "type": "recruit",
     },
     true,
     "recruit",
-    "fc4d0aeeff6fefabe4b6fe826e5b6b3a8bed31bbdb74809b70bf2bdc04907f71",
+    "f90e165ae06862f4f6e5aed7c5c53fe49534f200f9bd579e602560783faa9ab0",
   ],
   [
     {
@@ -2150,7 +2018,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "44008e4cb036bad2e0a79c4d49da73779b23d3ff7003fecbbf27331a3941bc60",
+    "55b69a41d939f9370577bf9e60b1c2f4f1ab10aba4fe954fede16af7d19d1f8e",
   ],
   [
     {
@@ -2158,7 +2026,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "campfire",
-    "b92f955fc7ba899005d226ca13d37290c0a45425f8b731ed4367d2c5c1761fd7",
+    "0186f892432215676cadf1edecfed9bfde7c2eaadacb233ccc3adc1e6096bef5",
   ],
   [
     {
@@ -2166,7 +2034,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "teamSelection",
-    "27010091a4ad48917083afe10f8b3b8d803db53100a987487e2d1b4bf955122a",
+    "2dd73361e5acc57f6fcf3f9784d3f622cd449312ad57cc2fd22b18d81ee5c0dd",
   ],
   [
     {
@@ -2174,12 +2042,12 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "bab72c7692daf5e336f3dca04ba914e136e4d7db584fa86268688a66fb332ada",
+    "bfb12a242c1322fa692543278ea34c236214d0fddeab74917f783510d5d84057",
   ],
   [
     "preview",
     false,
-    "932cf91274ea6f6dbefc6321f4777305b770d1376de06e5fea60d0b17d6e8e40",
+    "2f766026c58861da12578215ae3e750e31a7115b57f1027bbf96ef72a55fbc7c",
   ],
   [
     {
@@ -2190,7 +2058,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "battle",
-    "932cf91274ea6f6dbefc6321f4777305b770d1376de06e5fea60d0b17d6e8e40",
+    "2f766026c58861da12578215ae3e750e31a7115b57f1027bbf96ef72a55fbc7c",
   ],
   [
     {
@@ -2198,7 +2066,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "battle",
-    "6a46ce435bfc8a8b3806dc41080424df51cdd75d4443faf3cfecbe29765ec275",
+    "b49fa1d31c129f8f82d607140c3f49859732fe1e7bcd29eb9e54def9d5c8c541",
   ],
   [
     {
@@ -2206,7 +2074,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "recruit",
-    "4061c277ca0a4d93a1796d04a4e65b71b783d9a2109752e79ff46271ae5a9790",
+    "4080eb3b37ba6d42cd73fd10e160b1585da122bfa7c86a64799eaf474b6d229a",
   ],
   [
     {
@@ -2214,16 +2082,16 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "recruit",
-    "68e0a82effb51c5cbd8057e58b6f692f93239f731054a79027f12e40ad14c6ef",
+    "764ab36e9c95e791fde538876b789b9254af3c4c2424c22bb82f6ee85af6b727",
   ],
   [
     {
-      "species": "memento",
+      "species": "sternshell",
       "type": "recruit",
     },
     true,
     "recruit",
-    "a5a234a20d23e80fff63e2023c06e524b49ed29b0d2edd9e153d253f81d89e36",
+    "134e94b59415cb260142a9eba6fe6b41111b884d4fea65eaa9c981a46a1dedf3",
   ],
   [
     {
@@ -2232,7 +2100,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "victory",
-    "34f866e3012cc6e678200b7dd570d633619065514365ab7d0e43505a9533e479",
+    "62115041c0d2c139d3c7019565693cd70bf708cd208f3b0d76743fa035057d87",
   ],
   [
     {
@@ -2241,16 +2109,16 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "draft",
-    "5f67711aa6b10073e178b44782b463994951134fca404aae1977736463495845",
+    "5e367cff371815759653e683e3ed55ba3196e53a847e378df9824f586c2561f9",
   ],
   [
     {
-      "species": "memento",
+      "species": "almanelle",
       "type": "draft",
     },
     true,
     "draft",
-    "b552345749bfc4fe625ea2d13b512cc3483997cdd8635fe10ed82b851b418114",
+    "5e89e6551721aac10b0e98f64764c3281b54aed3bf526fe4d1e7c07d7f28b3ae",
   ],
   [
     {
@@ -2258,16 +2126,16 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "draft",
-    "2e9ebfde4e3b41af5ea411764a4a7ceb6f1b7720b91c352314e6037737a47b38",
+    "8769b749229e9756cc7cd8a5c0b24c6415dfe211ea9418cd05057c1b2a7c7e6b",
   ],
   [
     {
-      "species": "bloomquail",
+      "species": "mossguard",
       "type": "draft",
     },
     true,
     "draft",
-    "0b2b686ccceac289b967bfb62a3e5d61ecfbf9d48b83e4b2ec7aa1955dedfe5b",
+    "77af1b5c28a8472d5c454e731dea6a744a1e405ad83a683c6789f5924d5f7f10",
   ],
   [
     {
@@ -2275,7 +2143,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     false,
     "draft",
-    "0b2b686ccceac289b967bfb62a3e5d61ecfbf9d48b83e4b2ec7aa1955dedfe5b",
+    "77af1b5c28a8472d5c454e731dea6a744a1e405ad83a683c6789f5924d5f7f10",
   ],
   [
     {
@@ -2283,7 +2151,7 @@ exports[`journey lifecycle behavior baseline > preserves seeded commands and out
     },
     true,
     "draft",
-    "b607af091b829230a9c6bebe74a3da3359512cd3f36ffea782c6b98875825083",
+    "fe68c2e330b7a574c31ea283f4678abb428d88074639b78d80ebe28c5f76b3e5",
   ],
 ]
 `;

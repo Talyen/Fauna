@@ -15,18 +15,52 @@ import { KeywordText } from "../../src/ui/shared/keyword-text";
 import { KEYWORD_DEFINITIONS } from "../../src/game/keywords";
 import { Settings } from "../../src/ui/settings/settings";
 import { returnFocus } from "../../src/ui/shared/navigation/focus";
-import { defaultAudioPreferences, type AudioPreferences } from "../../src/ui/settings/audio-preferences";
+import {
+  defaultAudioPreferences,
+  type DevicePreferences,
+  type PreferencesPatch,
+} from "../../src/ui/settings/preferences";
+import { createSession } from "../../src/application/session";
 import "@fontsource-variable/inter/wght.css";
 import "../../src/ui/styles.css";
 import "../button-interactions/study.css";
 import "./study.css";
 
+function freshPreferences(): DevicePreferences {
+  return {
+    audio: { ...defaultAudioPreferences },
+    scale: 1,
+    tooltipScale: 1,
+    autoEndTurn: true,
+    glow: 100,
+    particles: 100,
+    controller: "auto",
+  };
+}
+
 function SettingsReview() {
   const [open, setOpen] = useState(true);
-  const [audio, setAudio] = useState<AudioPreferences>(() => ({ ...defaultAudioPreferences }));
-  const [scale, setScale] = useState(1);
-  const [tooltipScale, setTooltipScale] = useState(1);
-  const [autoEndTurn, setAutoEndTurn] = useState(true);
+  const [preferences, setPreferences] = useState(freshPreferences);
+  const { scale, tooltipScale } = preferences;
+  const [session] = useState(() =>
+    createSession({
+      desktop: false,
+      steam: { available: false },
+      saves: { readCandidates: async () => [], write: async () => {} },
+    }),
+  );
+  useEffect(
+    () => () => {
+      void session.dispose();
+    },
+    [session],
+  );
+  const update = (patch: PreferencesPatch) =>
+    setPreferences((previous) => ({
+      ...previous,
+      ...patch,
+      audio: { ...previous.audio, ...patch.audio },
+    }));
   const [reduced, setReduced] = useState(false);
   const [narrow, setNarrow] = useState(false);
   const [short, setShort] = useState(false);
@@ -83,10 +117,7 @@ function SettingsReview() {
     };
   }, []);
   const reset = () => {
-    setAudio({ ...defaultAudioPreferences });
-    setScale(1);
-    setTooltipScale(1);
-    setAutoEndTurn(true);
+    setPreferences(freshPreferences());
     setFailed(false);
     setRevision((value) => value + 1);
   };
@@ -141,18 +172,7 @@ function SettingsReview() {
               </Button>
             </div>
           ) : null}
-          <Settings
-            key={revision}
-            audio={audio}
-            updateAudio={(patch) => setAudio((previous) => ({ ...previous, ...patch }))}
-            scale={scale}
-            setScale={setScale}
-            tooltipScale={tooltipScale}
-            setTooltipScale={setTooltipScale}
-            desktop={false}
-            autoEndTurn={autoEndTurn}
-            setAutoEndTurn={setAutoEndTurn}
-          />
+          <Settings key={revision} session={session} preferences={preferences} update={update} />
           <section className="settings-preview-tools" aria-label="Preview tools">
             <h2>Preview tools</h2>
             <div className="preview-toggles">

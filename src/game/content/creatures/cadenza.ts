@@ -1,3 +1,4 @@
+import { sixPassiveTiers } from "../passive-tiers";
 import { card } from "../card-builders";
 import type { CreatureKit } from "../types";
 export const cadenza: CreatureKit = {
@@ -8,32 +9,10 @@ export const cadenza: CreatureKit = {
     health: 28,
     color: "#d4a855",
     trait: "Living Chorus",
-    passiveTiers: [
-      {
-        description: "After your second card each turn, restore 1 Health to the most injured ally",
-        effects: [{ kind: "livingChorus", amount: 1 }],
-      },
-      {
-        description: "After your second card each turn, restore 2 Health to the most injured ally",
-        effects: [{ kind: "livingChorus", amount: 2 }],
-      },
-      {
-        description: "After your second card each turn, restore 3 Health to the most injured ally",
-        effects: [{ kind: "livingChorus", amount: 3 }],
-      },
-      {
-        description: "After your second card each turn, restore 4 Health to the most injured ally",
-        effects: [{ kind: "livingChorus", amount: 4 }],
-      },
-      {
-        description: "After your second card each turn, restore 5 Health to the most injured ally",
-        effects: [{ kind: "livingChorus", amount: 5 }],
-      },
-      {
-        description: "After your second card each turn, restore 6 Health to the most injured ally",
-        effects: [{ kind: "livingChorus", amount: 6 }],
-      },
-    ],
+    passiveTiers: sixPassiveTiers([1, 2, 3, 4, 5, 6], (amount) => ({
+      description: `After your second card each turn, restore ${amount} Health to the most injured ally`,
+      effects: [{ kind: "livingChorus", amount }],
+    })),
   },
   cards: [
     {

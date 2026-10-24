@@ -1,3 +1,4 @@
+import { sixPassiveTiers } from "../passive-tiers";
 import { card, attack } from "../card-builders";
 import type { CreatureKit } from "../types";
 export const coralcurl: CreatureKit = {
@@ -8,32 +9,10 @@ export const coralcurl: CreatureKit = {
     health: 28,
     color: "#f89983",
     trait: "Bubbleburst",
-    passiveTiers: [
-      {
-        description: "Deal 1 Water damage when your Block breaks",
-        effects: [{ kind: "blockBreak", amount: 1 }],
-      },
-      {
-        description: "Deal 2 Water damage when your Block breaks",
-        effects: [{ kind: "blockBreak", amount: 2 }],
-      },
-      {
-        description: "Deal 3 Water damage when your Block breaks",
-        effects: [{ kind: "blockBreak", amount: 3 }],
-      },
-      {
-        description: "Deal 4 Water damage when your Block breaks",
-        effects: [{ kind: "blockBreak", amount: 4 }],
-      },
-      {
-        description: "Deal 5 Water damage when your Block breaks",
-        effects: [{ kind: "blockBreak", amount: 5 }],
-      },
-      {
-        description: "Deal 6 Water damage when your Block breaks",
-        effects: [{ kind: "blockBreak", amount: 6 }],
-      },
-    ],
+    passiveTiers: sixPassiveTiers([1, 2, 3, 4, 5, 6], (amount) => ({
+      description: `Deal ${amount} Water damage when your Block breaks`,
+      effects: [{ kind: "blockBreak", amount }],
+    })),
   },
   cards: [
     {

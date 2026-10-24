@@ -1,3 +1,4 @@
+import { sixPassiveTiers } from "../passive-tiers";
 import { card, attack } from "../card-builders";
 import type { CreatureKit } from "../types";
 export const mossguard: CreatureKit = {
@@ -8,32 +9,10 @@ export const mossguard: CreatureKit = {
     health: 32,
     color: "#9ead70",
     trait: "Overgrowth",
-    passiveTiers: [
-      {
-        description: "Retain 10% more Block between turns",
-        effects: [{ kind: "blockRetention", amount: 10 }],
-      },
-      {
-        description: "Retain 20% more Block between turns",
-        effects: [{ kind: "blockRetention", amount: 20 }],
-      },
-      {
-        description: "Retain 30% more Block between turns",
-        effects: [{ kind: "blockRetention", amount: 30 }],
-      },
-      {
-        description: "Retain 40% more Block between turns",
-        effects: [{ kind: "blockRetention", amount: 40 }],
-      },
-      {
-        description: "Retain 50% more Block between turns",
-        effects: [{ kind: "blockRetention", amount: 50 }],
-      },
-      {
-        description: "Retain 60% more Block between turns",
-        effects: [{ kind: "blockRetention", amount: 60 }],
-      },
-    ],
+    passiveTiers: sixPassiveTiers([10, 20, 30, 40, 50, 60], (amount) => ({
+      description: `Retain ${amount}% more Block between turns`,
+      effects: [{ kind: "blockRetention", amount }],
+    })),
   },
   cards: [
     {

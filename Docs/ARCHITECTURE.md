@@ -65,11 +65,15 @@ Armor depletion records a once-delivered receipt at each positive-to-zero transi
 
 Enemy targeting is policy over the shared executor. The pure [battle policy](../src/application/battle-policy.ts) is shared by player Auto-play and headless heuristics; it reads only visible state, uses stable identity tie breaks and consumes no gameplay RNG. Its [benefit assessment](../src/application/battle-benefits.ts) consumes [legal play candidates](../src/game/play-queries.ts) and retains explicit ordinary-hit approximations; ranking weights and tie breaks remain in the policy. Rankings expose reasons for automation journals rather than claiming complete forecasts. Ordinary enemies select supported abilities without immediate repeats; adaptation omits player-only hand/Mana extras and unsupported resource-only abilities, retaining healing in draw-plus-heal cards. Legendary enemies own their deck/Mana rules. Enemy selection occurs at the action window, never inspection. Scaling and player-only exceptions belong to [journey rules](EXPEDITION_DESIGN.md#encounters) and [Keywords](KEYWORDS.md).
 
+The proposed [modifier execution plan](MODIFIER_RULES_PLAN.md) assesses the remaining distributed ownership of passive, Talent and Boon behavior and stages exhaustive registrations over these existing timing owners. It is a proposal, not an implemented runtime contract.
+
 ## Save contract
 
 Desktop saves use Electron’s Fauna user-data `saves/expedition.json`; browser saves use `fauna.save.v1`. Both keep two backups. Follow the [development-save policy](../AGENTS.md#development-saves). [save-format.json](../src/game/save-format.json) is the single version shared by gameplay validation, native storage and the package. Update schemas, semantic validation and current-format fixtures together.
 
 ### Loading and writes
+
+Bundled content validation runs once inside [startup preparation](../src/ui/startup/prepare.ts), before session loading. Preparation rejects on fatal failure; [mounting](../src/main.tsx) cancels its owned work and settles the existing splash under the [startup UI contract](ui/screens.md#startup-loading). Disposal suppresses late success and failure callbacks.
 
 [The session](../src/application/session.ts) keeps commands unavailable through local loading and bounded Cloud startup. Load tries the primary and then current-format backups. All-invalid development candidates silently start fresh. Read failures retry once, then allow in-memory play; writes must regain read access before rotating unknown data.
 
@@ -166,6 +170,8 @@ Feature folders own their layouts; `shared/` owns reusable cards, combat readout
 `npm run check:types` checks all six; broader desktop callbacks retain the ordinary checked-JavaScript inference. [Contributing](../CONTRIBUTING.md#verification) owns execution policy.
 
 ## Plans and history
+
+The [startup simplification](STARTUP_SIMPLIFICATION_PLAN.md) records the completed removal of repeated bundled-content validation, terminal splash behavior and verification evidence.
 
 The [combat and interaction implementation](COMPLEXITY_REDUCTION_PLAN.md) records the completed damage, status, targeting and Auto-play simplification and links its assessment and evidence.
 

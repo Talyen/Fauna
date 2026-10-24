@@ -108,9 +108,10 @@ export function playPreviewModel(
   if (!result || "accepted" in result) return resolvedPreviewModel(before, result, targetId);
   if (result.kind === "unknown") {
     const model = resolvedPreviewModel(before, { accepted: true, state: before, events: [] }, targetId);
-    if (targetId && model.units.has(targetId))
-      model.units.set(targetId, { ...model.units.get(targetId)!, unresolved: true });
-    return model;
+    if (!targetId || !model.units.has(targetId)) return model;
+    const units = new Map(model.units);
+    units.set(targetId, { ...units.get(targetId)!, unresolved: true });
+    return { ...model, units };
   }
   const worlds = result.outcomes.map((outcome) => resolvedPreviewModel(before, outcome, targetId));
   const affected = new Set(worlds.flatMap((world) => [...world.affected]));

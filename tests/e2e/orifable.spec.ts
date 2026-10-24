@@ -9,7 +9,7 @@ test("Food uses shared targeting, consumes only after a play and resumes without
   const game = orifableBattle(true);
   await seed(page, game);
   await resume(page);
-  const apple = page.locator('.hand [aria-label^="Apple,"]');
+  const apple = page.locator('.app:not([inert]) .hand [aria-label^="Apple,"]');
   await expect(apple).toHaveAccessibleName(/Apple, Food, 1 mana, Restore 6 Health; Consume/);
   const before = await state(page);
   await apple.click();
@@ -26,20 +26,20 @@ test("Food uses shared targeting, consumes only after a play and resumes without
   await page.reload();
   await page.getByRole("navigation", { name: "Main menu" }).waitFor();
   await resume(page);
-  await expect(page.locator('.hand [aria-label^="Mana Berries,"]')).toBeVisible();
-  await expect(page.locator('.hand [aria-label^="Trail Bread,"]')).toBeVisible();
-  await expect(page.locator('.hand [aria-label^="Apple,"]')).toHaveCount(0);
+  await expect(page.locator('.app:not([inert]) .hand [aria-label^="Mana Berries,"]')).toBeVisible();
+  await expect(page.locator('.app:not([inert]) .hand [aria-label^="Trail Bread,"]')).toBeVisible();
+  await expect(page.locator('.app:not([inert]) .hand [aria-label^="Apple,"]')).toHaveCount(0);
 });
 
 test("Care Package visibly creates two random neutral consumables", async ({ page }) => {
   await seed(page, orifableBattle());
   await resume(page);
   const before = await state(page);
-  await page.locator('.hand [aria-label^="Care Package,"]').click();
+  await page.locator('.app:not([inert]) .hand [aria-label^="Care Package,"]').click();
   await expect
     .poll(async () => (await state(page)).cards.filter((card) => card.ownerId === null).length)
     .toBe(2);
   const after = await state(page);
   expect(after.battle!.mana).toBe(before.battle!.mana - 1);
-  await expect(page.locator('.hand [aria-label*=", Food,"]')).toHaveCount(2);
+  await expect(page.locator('.app:not([inert]) .hand [aria-label*=", Food,"]')).toHaveCount(2);
 });

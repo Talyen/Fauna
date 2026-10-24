@@ -1,3 +1,4 @@
+import { sixPassiveTiers } from "../passive-tiers";
 import { card } from "../card-builders";
 import type { CreatureKit } from "../types";
 
@@ -9,32 +10,10 @@ export const reverie: CreatureKit = {
     health: 28,
     color: "#a9b775",
     trait: "Unhurried",
-    passiveTiers: [
-      {
-        description: "At the end of your turn, each ally that played no cards restores 1 Health",
-        effects: [{ kind: "unhurried", amount: 1 }],
-      },
-      {
-        description: "At the end of your turn, each ally that played no cards restores 2 Health",
-        effects: [{ kind: "unhurried", amount: 2 }],
-      },
-      {
-        description: "At the end of your turn, each ally that played no cards restores 3 Health",
-        effects: [{ kind: "unhurried", amount: 3 }],
-      },
-      {
-        description: "At the end of your turn, each ally that played no cards restores 4 Health",
-        effects: [{ kind: "unhurried", amount: 4 }],
-      },
-      {
-        description: "At the end of your turn, each ally that played no cards restores 5 Health",
-        effects: [{ kind: "unhurried", amount: 5 }],
-      },
-      {
-        description: "At the end of your turn, each ally that played no cards restores 6 Health",
-        effects: [{ kind: "unhurried", amount: 6 }],
-      },
-    ],
+    passiveTiers: sixPassiveTiers([1, 2, 3, 4, 5, 6], (amount) => ({
+      description: `At the end of your turn, each ally that played no cards restores ${amount} Health`,
+      effects: [{ kind: "unhurried", amount }],
+    })),
   },
   cards: [
     {
