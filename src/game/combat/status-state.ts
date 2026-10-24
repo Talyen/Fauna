@@ -54,8 +54,9 @@ export function addPeriodicStacks(
 ) {
   const before = stats[status];
   stats[status] = Math.min(STACK_LIMIT, before + amount);
-  stats.statusSources[status] = sourceId;
-  return stats[status] - before;
+  const gained = stats[status] - before;
+  if (gained > 0) stats.statusSources[status] = sourceId;
+  return gained;
 }
 
 /** Partial stack reduction has no Cleanse rewards; Bleed obligations remain FIFO. */

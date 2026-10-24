@@ -336,3 +336,58 @@ it.each([999_999, 1_000_000])(
     expect(ally.health - before).toBe(bleed === 999_999 ? 1 : 0);
   },
 );
+
+it("keeps capped Burn attributed to its contributor for periodic kill rewards", () => {
+  const state = structuredClone(run());
+  state.boons = ["bone-charm"];
+  const contributor = state.team[0]!;
+  const attacker = state.team[1]!;
+  const target = state.battle!.enemies[0]!;
+  contributor.health = attacker.health = 5;
+  target.block = 0;
+  target.combat = {
+    ...freshCombat(),
+    burn: 1_000_000,
+    statusSources: { burn: contributor.id },
+  };
+  const events: GameEvent[] = [];
+
+  hit(state, attacker, target, 1, "burn", events, { origin: "proc" });
+  expect(target.combat.statusSources.burn).toBe(contributor.id);
+  tickStatuses(state, target, events);
+
+  expect(target.health).toBe(0);
+  expect(contributor.health).toBe(8);
+  expect(attacker.health).toBe(5);
+});
+
+it("combines Leech and received-healing modifiers before rounding odd Health loss", () => {
+  const state = structuredClone(run());
+  state.talents = ["leech.desperate-siphon", "health.mending"];
+  const source = state.team[0]!;
+  const target = state.battle!.enemies[0]!;
+  source.health = 5;
+  target.block = 0;
+  target.combat = freshCombat();
+  const events: GameEvent[] = [];
+
+  hit(state, source, target, 3, "water", events, { origin: "proc", leech: true });
+
+  // Half of 3, doubled by Desperate Siphon, then increased by Mending: 3.3 rounds to 3
+  expect(source.health).toBe(8);
+  expect(events.find((event) => event.kind === "heal" && event.targetId === source.id)?.amount).toBe(3);
+});
+
+it.each([
+  ["reflect", "reflectBurn"],
+  ["nullify", "nullifyFreeze"],
+] as const)("counts %s and %s as separate Purge categories", (ordinary, typed) => {
+  const state = structuredClone(run());
+  const target = state.battle!.enemies[0]!;
+  target.block = 0;
+  target.combat = { ...freshCombat(), [ordinary]: true, [typed]: true };
+
+  expect(removeEffects(target, "purge", 2, [], state)).toBe(2);
+  expect(target.combat[ordinary]).toBe(false);
+  expect(target.combat[typed]).toBe(false);
+});
