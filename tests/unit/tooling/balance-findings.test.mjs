@@ -78,31 +78,43 @@ it("does not attribute fallback drafts or unknown draft evidence to the preferre
   expect(findings.some((finding) => finding.id === "mossguard-length")).toBe(false);
 });
 
-it("records the accepted draft in a career report instead of inferring it from the preference", async () => {
+it.each(["failures", "full"])("records the accepted draft with %s evidence", async (evidence) => {
   const directory = path.join(ROOT, "reports", `balance-draft-${randomUUID()}`);
   try {
-    await main(["run", "--starters", "mossguard", "--seeds", "1", "--out", directory], {
-      runCase: async (_input, output) => {
-        await writeFile(
-          output,
-          JSON.stringify({
-            complete: true,
-            base: "base",
-            initial: "initial",
-            settings: {},
-            metrics: row("mossguard", 1).metrics,
-            replay: {
-              steps: [
-                { command: { type: "draft", species: "mossguard" }, accepted: false },
-                { command: { type: "draft", species: "emberback" }, accepted: true },
-              ],
-            },
-          }),
-        );
+    await main(
+      ["run", "--starters", "mossguard", "--seeds", "1", "--evidence", evidence, "--out", directory],
+      {
+        runCase: async (_input, output) => {
+          await writeFile(
+            output,
+            JSON.stringify({
+              complete: true,
+              base: "base",
+              initial: "initial",
+              settings: {},
+              metrics: row("mossguard", 1).metrics,
+              replay: {
+                steps: [
+                  { command: { type: "draft", species: "mossguard" }, accepted: false },
+                  { command: { type: "draft", species: "emberback" }, accepted: true },
+                ],
+              },
+            }),
+          );
+          await writeFile(`${output}.journal.jsonl`, "completed attempt\n");
+        },
       },
-    });
+    );
     const result = JSON.parse(await readFile(path.join(directory, "report.json"), "utf8"));
     expect(result.cases[0]).toMatchObject({ starter: "mossguard", actualStarter: "emberback" });
+    const detail = JSON.parse(await readFile(path.join(directory, "case-0.json"), "utf8"));
+    expect(Boolean(detail.replay)).toBe(evidence === "full");
+    if (evidence === "failures")
+      await expect(readFile(path.join(directory, "case-0.json.journal.jsonl"))).rejects.toThrow();
+    else
+      expect(await readFile(path.join(directory, "case-0.json.journal.jsonl"), "utf8")).toContain(
+        "completed",
+      );
     expect(rankBalanceFindings(result).findings.map((finding) => finding.id)).toEqual(["starter-coverage"]);
   } finally {
     await rm(directory, { recursive: true, force: true });

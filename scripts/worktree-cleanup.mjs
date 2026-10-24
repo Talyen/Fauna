@@ -1,10 +1,11 @@
-import { cpSync, mkdirSync, mkdtempSync, realpathSync, writeFileSync } from "node:fs";
+import { constants, cpSync, mkdirSync, mkdtempSync, realpathSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { assertClean, git, worktrees } from "./lib/git.mjs";
 import { acquireIntegrationLock } from "./lib/integration-lock.mjs";
 
 const taskBranch = /^(?:task|codex)\//;
+const rebuildable = new Set(["node_modules", "dist"]);
 
 // The caller holds the integration lock. Git still independently refuses dirty/locked removal.
 export function removeMergedTask(root, branch) {
@@ -27,7 +28,7 @@ export function removeMergedTask(root, branch) {
       "-z",
     ])
       .split("\0")
-      .filter((file) => file && file !== "node_modules/" && file !== "node_modules");
+      .filter((file) => file && !rebuildable.has(file.replace(/\/$/u, "")));
     if (ignored.length) {
       const common = path.resolve(root, git(root, ["rev-parse", "--git-common-dir"]).trim());
       const archives = path.join(common, "fauna-worktree-archives");
@@ -40,7 +41,12 @@ export function removeMergedTask(root, branch) {
       for (const file of ignored) {
         const target = path.join(archive, "files", file);
         mkdirSync(path.dirname(target), { recursive: true });
-        cpSync(path.join(task.path, file), target, { recursive: true, verbatimSymlinks: true });
+        cpSync(path.join(task.path, file), target, {
+          recursive: true,
+          verbatimSymlinks: true,
+          mode: constants.COPYFILE_FICLONE,
+          preserveTimestamps: true,
+        });
       }
     }
     assertClean(task.path, branch);

@@ -93,7 +93,7 @@ Each run has a 60-second external watchdog, 5,000-action budget and 100-turn-per
 Run identical suites from two code versions in hosted execution, then compare their reports. If heavy local execution is explicitly authorized, choose a bounded subset within its command budget:
 
 ```sh
-npm run balance:compare -- run --starters emberback --seeds 0,1 --out reports/balance/smoke
+npm run balance:compare -- run --starters emberback --seeds 0,1 --evidence full --out reports/balance/smoke
 npm run balance:compare -- compare reports/balance/before/report.json reports/balance/after/report.json
 npm run balance:compare -- replay reports/balance/smoke/case-0.json
 ```
@@ -118,6 +118,24 @@ npm run balance:compare -- experiment --checkpoint reports/checkpoint.json --loa
 The JSON defines `baseline` and `treatment`, each with explicit `talents` and `boons` ID arrays. Both retain XP budgets and all other checkpoint fields; invalid IDs, prerequisites or budgets fail. Grants are fixtures, not earned progression. Injecting an active battle does not replay settled opening effects; choose the intended combat checkpoint. Each arm writes command/checkpoint evidence and a paired comparison.
 
 Replay requires matching code identity, checkpoints and complete execution. Balance and playthrough fingerprints cover gameplay/application source and save-format JSON; changing these inputs requires fresh journals. [playthrough.ts](../src/tooling/playthrough.ts) rejects obsolete journal/policy versions. All output stays under ignored `reports/`.
+
+Balance runs default to `--evidence failures`: completed cases keep compact metrics
+and diagnostics, while failed or interrupted cases retain full checkpoints and
+attempt journals. Use `--evidence full` for an intentional exact-replay or timing
+investigation. Comparison reports retain the same metrics under either policy.
+Choose a fresh output directory; rerunning into existing evidence is refused.
+This policy applies to new balance captures, not historical archives or unique assets.
+
+Completed machine-generated bundles directly under `reports/balance/` receive an
+explicit retention receipt. The next balance capture expires unchanged successful
+bundles after 24 hours and failed bundles after 72 hours. Above a 1 GiB combined
+budget, the oldest eligible bundles expire after at least 24 hours; a budget filled
+by fresh evidence blocks another capture instead of discarding fresh failures.
+The same receipt-based collection includes copies inside retired worktree archives,
+so retirement cannot turn a short-lived generated report into permanent history.
+Legacy/unmarked bundles, custom output locations, symlinks, modified bundles and
+bundles with added files (including `.retention-keep`) are preserved. Keep deliberate
+longer investigations outside that managed collection or add `.retention-keep`.
 
 For an otherwise authorized playthrough, `FAUNA_PLAYTHROUGH_PROFILE=1` adds stage timings and awaited journal append time to `summary.json`; it does not authorize local simulations. Journal append time overlaps fixture/journey stages and must not be added to them. The worker keeps one journal handle open and awaits each record before advancing, retaining attempt/completion order without buffering records between commands. The CLI regression retains a complete career and real subprocess replay, and CI uploads its profile under [CI reports](CI.md#reports-and-scheduling).
 

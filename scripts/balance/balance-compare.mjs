@@ -1,10 +1,11 @@
-import { readFile, writeFile, appendFile } from "node:fs/promises";
+import { readFile, writeFile, appendFile, readdir, rm } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { ROOT, runtime, identity, hash, reportDirectory } from "../lib/tool-runtime.mjs";
 import { runOwnedWorker } from "../lib/worker.mjs";
 import { compareBalance } from "./paired-balance.mjs";
 import { writeBalanceFindings } from "./balance-findings.mjs";
+import { pruneBalanceReports, sealBalanceReport } from "./report-retention.mjs";
 const load = async (file) => JSON.parse(await readFile(path.resolve(file), "utf8"));
 export async function worker(input, output) {
   if (!output || !path.resolve(output).startsWith(path.join(ROOT, "reports") + path.sep))
@@ -46,6 +47,10 @@ export async function main(args = process.argv.slice(2), { runCase = runWorker }
   }
   if (mode === "replay") {
     const record = await load(args[0]);
+    if (!record.replay)
+      throw new Error(
+        "This case retains summary evidence only. Record with --evidence full for exact replay.",
+      );
     const server = await runtime();
     try {
       if (record.identity !== (await identity())) throw new Error("Replay code/content identity differs.");
@@ -76,14 +81,19 @@ export async function main(args = process.argv.slice(2), { runCase = runWorker }
   const options = {};
   for (let i = 0; i < args.length; i += 2) {
     if (
-      !["--starters", "--seeds", "--out", "--checkpoint", "--loadouts"].includes(args[i]) ||
+      !["--starters", "--seeds", "--out", "--checkpoint", "--loadouts", "--evidence"].includes(args[i]) ||
       !args[i + 1] ||
       Object.hasOwn(options, args[i])
     )
       throw new Error(`Invalid option: ${args[i]}`);
     options[args[i]] = args[i + 1];
   }
+  const evidencePolicy = options["--evidence"] ?? "failures";
+  if (!["failures", "full"].includes(evidencePolicy)) throw new Error("--evidence must be failures or full.");
+  await pruneBalanceReports(ROOT, { includeArchives: true });
   const out = await reportDirectory(options["--out"], `reports/balance/${mode}-${Date.now()}`);
+  if ((await readdir(out)).length)
+    throw new Error("Choose an empty --out directory; existing balance evidence is preserved.");
   const code = await identity();
   const report = {
     format: 1,
@@ -93,6 +103,7 @@ export async function main(args = process.argv.slice(2), { runCase = runWorker }
     settings: null,
     cases: [],
     failures: [],
+    evidencePolicy,
   };
   const manifest = path.join(out, "report.json");
   await writeFile(manifest, JSON.stringify(report));
@@ -175,6 +186,24 @@ export async function main(args = process.argv.slice(2), { runCase = runWorker }
             evidence: output,
             journal: `${output}.journal.jsonl`,
           });
+        else if (evidencePolicy !== "full") {
+          // The aggregate report owns comparison metrics. Keep a small case
+          // record; successful replay checkpoints and the duplicate journal
+          // are opt-in. Failed/interrupted workers retain their full evidence.
+          await writeFile(
+            output,
+            JSON.stringify({
+              complete: true,
+              identity: code,
+              config,
+              settings: result.settings,
+              metrics: result.metrics,
+              diagnostics: result.diagnostics,
+              replayRetained: false,
+            }),
+          );
+          await rm(`${output}.journal.jsonl`, { force: true });
+        }
       } catch (error) {
         report.failures.push({
           key,
@@ -202,6 +231,7 @@ export async function main(args = process.argv.slice(2), { runCase = runWorker }
   console.log(
     `${report.complete ? "Complete" : "Incomplete"}: ${report.cases.length}/${configs.length} cases. ${manifest}`,
   );
+  await sealBalanceReport(out, report.complete, { root: ROOT });
   if (!report.complete) process.exitCode = 1;
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) await main();
