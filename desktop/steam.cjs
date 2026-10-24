@@ -33,6 +33,22 @@ async function createSteam({
   let lane = Promise.resolve();
   /** @type {Promise<void> | undefined} */
   let disposal;
+  /** @param {Error} error */
+  function stopTransport(error) {
+    const shouldKill = !transportStopped;
+    transportStopped = true;
+    for (const entry of requests.values()) {
+      clearTimeout(entry.timer);
+      entry.reject(error);
+    }
+    requests.clear();
+    if (shouldKill)
+      try {
+        worker?.kill();
+      } catch {
+        // Retire requests even when the native process can no longer be signalled.
+      }
+  }
   /** @param {string} file @param {string} data */
   async function atomic(file, data) {
     await fs.mkdir(path.dirname(file), { recursive: true });
@@ -56,10 +72,9 @@ async function createSteam({
     const id = ++sequence;
     return new Promise((resolve, reject) => {
       const timer = setTimeout(() => {
-        requests.delete(id);
-        transportStopped = true;
-        worker?.kill();
-        reject(new Error("Steam Cloud timed out. Local saves remain available; restart to reconnect."));
+        stopTransport(
+          new Error("Steam Cloud timed out. Local saves remain available; restart to reconnect."),
+        );
       }, 5000);
       requests.set(id, {
         resolve: (value) => {
@@ -121,6 +136,8 @@ async function createSteam({
         available = true;
       }
     } catch {
+      stopTransport(new Error("Steam initialization failed."));
+      worker = undefined;
       console.warn("[steam] Steam unavailable; local play remains available.");
     }
   }
@@ -172,8 +189,11 @@ async function createSteam({
       throw e;
     }
   }
-  /** @template T @param {() => Promise<T>} fn */
-  const serial = (fn) => {
+  /** @template T @param {() => Promise<T>} fn @param {boolean} [requiresCloud] */
+  const serial = (fn, requiresCloud = false) => {
+    // Revoke admission on disposal; already queued metadata must still reach disk.
+    if (dead || (requiresCloud && !available))
+      return Promise.reject(new Error("Steam Cloud is unavailable."));
     const operation = lane.then(fn);
     lane = operation.then(
       () => {},
@@ -204,20 +224,17 @@ async function createSteam({
     readLocal: () => serial(() => readOptional(metadata)),
     writeLocal: (data) =>
       serial(async () => {
-        requireAvailable();
         if (typeof data !== "string" || Buffer.byteLength(data) > 1_048_576)
           throw new Error("Invalid cloud metadata.");
         await atomic(metadata, data);
-      }),
+      }, true),
     acknowledge: (id) =>
       serial(async () => {
-        requireAvailable();
         if (typeof id !== "string" || !/^[a-f0-9]{64}$/.test(id)) throw new Error("Invalid acknowledgement.");
         await atomic(path.join(profileDir, "cloud-ack"), id);
-      }),
+      }, true),
     preserve: (records) =>
       serial(async () => {
-        requireAvailable();
         // The bounded remote inventory can conflict with one additional local head.
         if (!Array.isArray(records) || records.length > 65) throw new Error("Invalid recovery set.");
         for (const raw of records) {
@@ -226,7 +243,7 @@ async function createSteam({
           const hash = createHash("sha256").update(raw).digest("hex");
           await atomic(path.join(profileDir, "recovery", `${hash}.json`), raw);
         }
-      }),
+      }, true),
     importStandalone: async (use) => {
       requireAvailable();
       if (typeof use !== "boolean") throw new Error("Invalid import choice.");
