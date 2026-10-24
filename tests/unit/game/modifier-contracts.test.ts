@@ -1,3 +1,6 @@
+import { contentCatalog, validateCatalog } from "../../../src/game/content-validation";
+import { modifierImplementations, modifierQueries } from "../../../src/game/modifier-bindings";
+import { boonRule } from "../../../src/game/rules/boons";
 import { createHash } from "node:crypto";
 import { produce } from "immer";
 import { expect, it } from "vitest";
@@ -144,4 +147,62 @@ it("preserves modifier command, preview, reaction, RNG and save/resume traces", 
 
 it("preserves initial journey and seeded start state", () => {
   expect(digest(createGame(42))).toMatchSnapshot();
+});
+
+it("requires actual implementation bindings for authored modifiers, including future content", () => {
+  expect(validateCatalog().filter((issue) => issue.severity === "error")).toEqual([]);
+  expect(Object.keys(modifierImplementations.talents).sort()).toEqual(
+    TALENTS.map((talent) => talent.id).sort(),
+  );
+  expect(Object.keys(modifierImplementations.boons).sort()).toEqual(BOONS.map((boon) => boon.id).sort());
+  const authoredPassives = [
+    ...new Set(
+      SPECIES.flatMap((species) =>
+        species.passiveTiers.flatMap((tier) => tier.effects.map((effect) => effect.kind)),
+      ),
+    ),
+  ];
+  expect(Object.keys(modifierImplementations.passives)).toEqual(expect.arrayContaining(authoredPassives));
+  const talent = structuredClone(contentCatalog);
+  Reflect.set(talent.talents[0]!, "id", "water.future");
+  Reflect.set(talent.talents[0]!, "effect", "future");
+  expect(validateCatalog(talent)).toContainEqual(
+    expect.objectContaining({ id: "water.future", field: "effect", severity: "error" }),
+  );
+  const boon = structuredClone(contentCatalog);
+  Reflect.set(boon.boons[0]!, "id", "future-boon");
+  expect(validateCatalog(boon)).toContainEqual(
+    expect.objectContaining({ id: "future-boon", field: "effect", severity: "error" }),
+  );
+  const passive = structuredClone(contentCatalog);
+  Reflect.set(passive.species[0]!.passiveTiers[0].effects[0]!, "kind", "futurePassive");
+  expect(validateCatalog(passive)).toContainEqual(
+    expect.objectContaining({
+      field: "passiveTiers",
+      message: "Passive effect needs an implementation binding",
+    }),
+  );
+});
+it("keeps implementation bindings and shared Boon parameters immutable", () => {
+  for (const catalog of [modifierImplementations, modifierQueries]) {
+    expect(Object.isFrozen(catalog)).toBe(true);
+    expect(structuredClone(catalog)).toEqual(catalog);
+    for (const group of Object.values(catalog)) {
+      expect(Object.isFrozen(group)).toBe(true);
+      for (const binding of Object.values(group)) {
+        expect(Object.isFrozen(binding)).toBe(true);
+        expect(
+          binding.every(
+            (handler: { module: string; name: string }) =>
+              typeof handler.module === "string" &&
+              typeof handler.name === "string" &&
+              Object.isFrozen(handler),
+          ),
+        ).toBe(true);
+      }
+    }
+  }
+  const icy = boonRule("icy-heart");
+  expect(Reflect.set(icy, "damage", 99)).toBe(false);
+  expect(icy.text).toContain(String(icy.damage));
 });

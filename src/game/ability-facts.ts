@@ -1,3 +1,4 @@
+import { boonRule } from "./rules/boons";
 import { supplementalRule } from "./rules/supplemental";
 import type { CardDefinition } from "./content/types";
 import type { BattleState, Creature, Enemy } from "./types";
@@ -50,7 +51,11 @@ export function ordinaryAttackFacts(
       (type === "physical" ? physicalBonus(actor, state) : 0);
     const armored = type === "physical" || type === "stun";
     const armor = armored
-      ? Math.max(0, enemy.combat.armor - (state.boons.includes("sundering-charm") ? 2 : 0))
+      ? Math.max(
+          0,
+          enemy.combat.armor -
+            (state.boons.includes("sundering-charm") ? boonRule("sundering-charm").armor : 0),
+        )
       : 0;
     const payment = blockPayment(damage, enemy.block);
     const lost =
@@ -64,7 +69,7 @@ export function ordinaryAttackFacts(
       !enemy.combat.attackReflection &&
       armored &&
       state.boons.includes("sundering-charm")
-        ? Math.min(2, enemy.combat.armor)
+        ? Math.min(boonRule("sundering-charm").armor, enemy.combat.armor)
         : 0;
     return {
       negated: enemy.combat.negate || enemy.combat.attackReflection,

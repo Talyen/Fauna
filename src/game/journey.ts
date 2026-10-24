@@ -1,27 +1,18 @@
+import {
+  battleMana,
+  enemyBattleStart,
+  playerBattleStart,
+  victoryRecovery,
+  victoryGoldBonus,
+} from "./combat/battle-modifiers";
 import { battlefield } from "./battlefield";
 import { bossDeck, removeDepartedMinions } from "./combat/legendary";
 import { species } from "./content";
 import { merchantPriceRange } from "./destinations";
-import {
-  starterCount,
-  starterOfferPool,
-  STARTER_OFFER_COUNT,
-  creaturePassive,
-  KEYWORDS,
-  hasTalent,
-} from "./progression";
+import { starterCount, starterOfferPool, STARTER_OFFER_COUNT, KEYWORDS } from "./progression";
 import { BOONS, SPECIES } from "./content";
-import {
-  grantArmor,
-  freshCombat,
-  grantStatus,
-  grantBlock,
-  restoreHealth,
-  TURN_MANA,
-  TURN_DRAW,
-} from "./combat/index";
+import { freshCombat } from "./combat/index";
 import { shuffle, roll } from "./random";
-import { draw, drawKeyword, expressDelivery } from "./card-zones";
 import { bossEncounter, encounterSource, finalEncounter, generateEncounterPack } from "./encounters";
 import type { GameEvent, GameState, Lifecycle, BattleState, RewardState, StateAt } from "./types";
 import { rebuildCards } from "./team";
@@ -104,8 +95,8 @@ export function beginBattle(state: StateAt<"teamSelection">, events: GameEvent[]
     meteoriteUsed: false,
     cardsPlayedThisTurn: 0,
     turn: 1,
-    mana: TURN_MANA + Number(hasTalent(state, "mana.leyline-attunement")),
-    maxMana: TURN_MANA + Number(hasTalent(state, "mana.leyline-attunement")),
+    mana: battleMana(state),
+    maxMana: battleMana(state),
     draw: shuffle(
       state,
       state.cards.map((c) => c.id),
@@ -126,11 +117,7 @@ export function beginBattle(state: StateAt<"teamSelection">, events: GameEvent[]
         combat: freshCombat(),
         lastAbility: null,
       };
-      for (const effect of creaturePassive(undefined, e.species).effects) {
-        if (effect.kind !== "battleStart") continue;
-        if (effect.effect === "block") enemy.block += effect.amount;
-        else enemy.combat[effect.effect] += effect.amount;
-      }
+      enemyBattleStart(enemy);
       return enemy;
     }),
   };
@@ -146,21 +133,7 @@ export function beginBattle(state: StateAt<"teamSelection">, events: GameEvent[]
     if (species(enemy.species).legendary) {
       enemy.deck = bossDeck(active, enemy);
     }
-  draw(active, TURN_DRAW + (state.boons.includes("tattered-pages") ? 1 : 0), events);
-  expressDelivery(active, events);
-  if (hasTalent(state, "nature.ecosystem")) drawKeyword(active, "nature", events);
-  for (const unit of state.team) {
-    if (hasTalent(state, "armor.bulwark")) grantArmor(state, unit, 2, events);
-    for (const effect of creaturePassive(state, unit.species).effects) {
-      if (effect.kind !== "battleStart") continue;
-      if (effect.effect === "block") grantBlock(state, unit, effect.amount, events);
-      else if (effect.effect === "armor") grantArmor(state, unit, effect.amount, events);
-      else grantStatus(unit, "thorns", effect.amount, events, state);
-    }
-    if (hasTalent(state, "mana.mana-bulwark")) grantBlock(state, unit, active.battle.maxMana, events);
-    if (hasTalent(state, "mana.mana-shell")) grantArmor(state, unit, active.battle.maxMana, events);
-    if (hasTalent(state, "health.combat-surge")) restoreHealth(unit, 4, events, false, state);
-  }
+  playerBattleStart(active, events);
   state.battleXP = {};
   intents(active);
 }
@@ -184,8 +157,7 @@ function finishBattle(state: BattleState, defeated: boolean) {
   const previousCurrency = state.currency;
   state.currency = Math.min(
     1_000_000,
-    state.currency +
-      (defeated ? 0 : (bossEncounter(state) ? 40 : 20) + (state.boons.includes("smugglers-map") ? 2 : 0)),
+    state.currency + (defeated ? 0 : (bossEncounter(state) ? 40 : 20) + victoryGoldBonus(state)),
   );
   const currency = state.currency - previousCurrency + earnedGold;
   const outcome = defeated ? "defeat" : finalEncounter(state) ? "victory" : "next";
@@ -237,7 +209,7 @@ export function settle(state: BattleState, events: GameEvent[]): boolean {
   }
   if (state.battle.enemies.every((e) => e.health <= 0)) {
     for (const creature of [...state.team, ...state.reserves]) {
-      if (hasTalent(state, "health.vitality")) restoreHealth(creature, 4, events, false, state);
+      victoryRecovery(state, creature, events);
       creature.block = 0;
       creature.combat = freshCombat();
     }

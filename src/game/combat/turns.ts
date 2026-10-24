@@ -1,3 +1,4 @@
+import { battleMana, renewalManaBonus } from "./battle-modifiers";
 import { unfinishedJourneyLimit } from "../card-actors";
 import { battlefield, isEnemy } from "../battlefield";
 import { definition, speciesCards, SPECIES } from "../content";
@@ -5,7 +6,7 @@ import { drawBossCards, bossCardPriority, courtRemembers, removeDepartedMinions 
 import { recycleDiscard, MAX_BATTLE_CARDS, MAX_HAND_SIZE } from "../card-zones";
 import { roll } from "../random";
 import { executeAbility } from "./abilities";
-import { creaturePassive, hasTalent } from "../progression";
+import { creaturePassive } from "../progression";
 import {
   ensureCombat,
   gainMana,
@@ -77,9 +78,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
   battle.discard.push(...battle.hand.splice(0));
   recycleDiscard(draft);
   for (let pass = 0; pass < 3; pass++) {
-    const bonusMana = Number(
-      battle.mana > 0 ? hasTalent(draft, "mana.wellspring") : hasTalent(draft, "mana.dark-recovery"),
-    );
+    const bonusMana = renewalManaBonus(draft);
     unhurried(draft, false, events);
     // Swaps can reorder the battlefield; each enemy keeps its single action window.
     const actionOrder = battle.enemies.slice();
@@ -204,7 +203,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
       if ("attacked" in c) c.attacked = false;
       startAction(c, events, draft);
     }
-    battle.maxMana = TURN_MANA + Number(hasTalent(draft, "mana.leyline-attunement")) + bonusMana;
+    battle.maxMana = battleMana(draft) + bonusMana;
     battle.mana = 0;
     gainMana(draft, battle.maxMana, events);
     battle.turn++;

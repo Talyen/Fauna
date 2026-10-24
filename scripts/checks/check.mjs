@@ -4,6 +4,7 @@ import { pathToFileURL } from "node:url";
 import { spawnSync } from "node:child_process";
 import { boundaryViolations } from "./boundaries.mjs";
 import { sourceViolations } from "./ui-contract.mjs";
+import { modifierContractViolations, readModifierSources } from "./modifier-contracts.mjs";
 import { taskBase, taskPaths } from "../lib/task-selection.mjs";
 import { verificationIdentity } from "./input-identity.mjs";
 import owners from "./test-owners.json" with { type: "json" };
@@ -240,6 +241,17 @@ export function runCheck(
     return 1;
   }
   const identity = verificationIdentity(root, base, [...new Set([...paths, ...plan.tests])]);
+  if (
+    paths.some((file) => file.startsWith("src/game/") || file === "scripts/checks/modifier-contracts.mjs") &&
+    (existsSync(path.join(root, "src/game/modifier-bindings.ts")) ||
+      paths.includes("src/game/modifier-bindings.ts"))
+  ) {
+    const violations = modifierContractViolations(readModifierSources(root));
+    if (violations.length) {
+      log(violations.join("\n"));
+      return 1;
+    }
+  }
   const run = (script, argv = [], timeout = 60_000) => {
     const result = runner(process.execPath, [path.join(root, script), ...argv], {
       cwd: root,

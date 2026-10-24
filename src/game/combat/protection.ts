@@ -1,3 +1,4 @@
+import { boonRule } from "../rules/boons";
 import { healingValue, restoration, overflowBlock } from "./healing-values";
 import { chance as succeeds } from "../chance";
 import { isEnemy, battlefield } from "../battlefield";
@@ -46,7 +47,7 @@ export function* restoreHealth(
       text: `${unitName(unit)} restores ${gain} Health.`,
     });
     if (gain > 0 && state?.phase === "battle" && !isEnemy(unit) && state.boons.includes("groves-favor"))
-      yield* reaction("grantStatus", unit, "thorns", 1, events, state);
+      yield* reaction("grantStatus", unit, "thorns", boonRule("groves-favor").thorns, events, state);
   }
   if (gain > 0 && source && state?.phase === "battle")
     yield* reaction("bounce", state, source, unit, {
@@ -121,7 +122,15 @@ export function* grantBlock(
   if (!isEnemy(unit) && hasTalent(state, "light.radiant-guard") && succeeds(state, 0.1, false, events))
     drawKeyword(state, "light", events);
   if (!isEnemy(unit) && state.boons.includes("ironwood-buckler"))
-    yield* reaction("grantStatus", unit, "thorns", 1, events, state, sharing);
+    yield* reaction(
+      "grantStatus",
+      unit,
+      "thorns",
+      boonRule("ironwood-buckler").thorns,
+      events,
+      state,
+      sharing,
+    );
   if (sharing) yield* reaction("shareProtection", state, unit, "block", gained, events);
 }
 export function* gainMana(state: GameState, amount: number, events: GameEvent[]): Resolution<void> {

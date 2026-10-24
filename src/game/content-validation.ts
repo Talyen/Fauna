@@ -1,6 +1,7 @@
+import { modifierImplementations } from "./modifier-bindings";
 import { isAbilityKind } from "./rules/abilities";
 import { isSupplementalKind } from "./rules/supplemental";
-import { FOOD_CARDS, CARDS, SPECIES, FIRST_RUN_STARTERS, BOONS, TALENTS, TALENT_EFFECTS } from "./content";
+import { FOOD_CARDS, CARDS, SPECIES, FIRST_RUN_STARTERS, BOONS, TALENTS } from "./content";
 import { cardText } from "./card-rules";
 import { BOSSES, COMBAT_PACKS, JOURNEY_LENGTH } from "./encounters";
 import { DAMAGE_TYPES, PROGRESSION_KEYWORDS, definitionKeywords } from "./keywords";
@@ -72,6 +73,8 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
     }
     for (const tier of entry.passiveTiers)
       for (const effect of tier?.effects ?? []) {
+        if (!Object.hasOwn(modifierImplementations.passives, effect.kind))
+          error(entry.id, "passiveTiers", "Passive effect needs an implementation binding");
         if (effect.kind === "fallenLeaves" && effect.amount > 100)
           error(entry.id, "passiveTiers", "Block decay conversion cannot exceed 100 percent");
         if (
@@ -160,7 +163,10 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
   }
   for (const talent of catalog.talents) {
     if (talent.text.includes(".")) error(talent.id, "description", "Effect descriptions must omit periods");
-    if (!PROGRESSION_KEYWORDS.includes(talent.keyword) || !TALENT_EFFECTS.includes(talent.effect))
+    if (
+      !PROGRESSION_KEYWORDS.includes(talent.keyword) ||
+      !Object.hasOwn(modifierImplementations.talents, talent.id)
+    )
       error(talent.id, "effect", "Unknown keyword or talent effect.");
     if (
       !Number.isSafeInteger(talent.row) ||
@@ -172,9 +178,12 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
     if (talent.id !== `${talent.keyword}.${talent.effect}` || !talent.text.trim())
       error(talent.id, "description", "Talent identity or description is inconsistent.");
   }
-  for (const boon of catalog.boons)
+  for (const boon of catalog.boons) {
+    if (!Object.hasOwn(modifierImplementations.boons, boon.id))
+      error(boon.id, "effect", "Boon needs an implementation binding");
     if (!boon.name.trim() || !boon.text.trim() || boon.text.includes("."))
       error(boon.id, "description", "Boon needs a name and effect description.");
+  }
   for (const keyword of PROGRESSION_KEYWORDS)
     if (
       !catalog.cards.some(

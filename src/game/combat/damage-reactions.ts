@@ -1,3 +1,4 @@
+import { boonRule } from "../rules/boons";
 import { chance as succeeds } from "../chance";
 import { isEnemy } from "../battlefield";
 import { roll } from "../random";
@@ -127,10 +128,15 @@ export function* damageRewards(
   )
     gainGold(state, 3, events);
   if (target.health === 0 && !alliedTarget && alliedSource && state.boons.includes("bone-charm"))
-    yield* reaction("restoreHealth", source, 3, events, false, state);
+    yield* reaction("restoreHealth", source, boonRule("bone-charm").healing, events, false, state);
   if (alliedSource && !alliedTarget && lost > 0 && (source.health > 0 || policy.deadSource)) {
-    if (type === "bleed" && state.boons.includes("cutpurse-knife")) gainGold(state, 1, events);
-    if (type === "poison" && state.boons.includes("parasitic-bloom") && succeeds(state, 0.1, false, events))
+    if (type === "bleed" && state.boons.includes("cutpurse-knife"))
+      gainGold(state, boonRule("cutpurse-knife").gold, events);
+    if (
+      type === "poison" &&
+      state.boons.includes("parasitic-bloom") &&
+      succeeds(state, boonRule("parasitic-bloom").chance, false, events)
+    )
       yield* reaction("leechHealth", state, source, lost, events, true);
     // Poison ticks and triggered damage carry the same Leech talent as direct Poison hits.
     if (
@@ -145,16 +151,19 @@ export function* damageRewards(
       attack &&
       type === "nature" &&
       state.boons.includes("lucky-clover") &&
-      succeeds(state, 0.1, false, events)
+      succeeds(state, boonRule("lucky-clover").chance, false, events)
     )
       gainGold(state, lost, events);
     if (
       attack &&
       type === "light" &&
       state.boons.includes("brass-censer") &&
-      succeeds(state, 0.2, false, events)
+      succeeds(state, boonRule("brass-censer").chance, false, events)
     ) {
-      if (roll(state, { kind: "chance", threshold: 0.5 }) < 0.5)
+      if (
+        roll(state, { kind: "chance", threshold: boonRule("brass-censer").burnChance }) <
+        boonRule("brass-censer").burnChance
+      )
         yield* reaction("hit", state, source, target, damage, "burn", events, { origin: "proc" });
       else yield* reaction("leechHealth", state, source, lost, events, stats.poison > 0 || stats.bleed > 0);
     }

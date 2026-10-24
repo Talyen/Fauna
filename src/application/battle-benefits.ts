@@ -1,3 +1,4 @@
+import { boonRule } from "../game/rules/boons";
 import { healingBenefit, ordinaryAttackFacts, type OrdinaryHit } from "../game/ability-facts";
 export type { OrdinaryHit } from "../game/ability-facts";
 import { battleCardCapacity, drawHasAnotherCard } from "../game/card-zones";
@@ -46,7 +47,7 @@ export function battleBenefitFacts(state: BattleState) {
             (effect) => effect.kind === "livingChorus" && effect.amount > 0,
           ),
       )) ||
-      (state.battle.cardsPlayedThisTurn === 2 &&
+      (state.battle.cardsPlayedThisTurn === boonRule("resonant-chimes").cards - 1 &&
         state.boons.includes("resonant-chimes") &&
         hasTalent(state, "mana.arcane-mending")));
   let enemies: Enemy[] | undefined;

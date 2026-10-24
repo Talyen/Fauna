@@ -45,6 +45,16 @@ Rule modules import only other rule modules, Immer and types. Description labels
 
 [Ability contract snapshots](../tests/unit/game/ability-contracts.test.ts) were recorded before extraction: authored descriptions, scaling, keywords and enemy adaptation plus representative command, preview, event/state, RNG, save/resume and Auto-play outcomes. Preserve the baseline during behavior-preserving changes; intentional mechanic changes need reviewed expectations. Existing combat and policy suites retain broader coverage.
 
+### Modifier ownership
+
+[Modifier bindings](../src/game/modifier-bindings.ts) connect every Talent ID, Boon ID and supported passive kind to its actual named implementation functions. The typed maps are exhaustive and contain typed module/export references; they do not dispatch gameplay or determine reaction order. Existing command and combat owners call these functions explicitly. Read-only interpretations in gameplay queries have a separate binding map; application ranking and deliberate approximations stay in application policy.
+
+[The source contract](../scripts/checks/modifier-contracts.mjs) checks that each authored identity has a binding, each bound function selects that rule, and each function has a runtime caller or an entry in the existing typed combat scheduler. It follows named import aliases and re-exports. Adding another gameplay interpretation requires declaring that owner too. These are structural guarantees, not proof of effect correctness; [modifier behavior baselines](../tests/unit/game/modifier-contracts.test.ts) and focused mechanics regressions protect outcomes. Both the lightweight changed-file gate and full CI architecture checks enforce the contract. Runtime content validation rejects unbound authored modifiers.
+
+[Boon rules](../src/game/rules/boons.ts) own shared numeric parameters and the descriptions derived from them. Content keeps Boon identity, name and catalog order. Execution and visible assessments read the same parameters. Creature tiers remain six explicit complete definitions; modifier ownership does not introduce passive inheritance or rank generation.
+
+[Battle modifiers](../src/game/combat/battle-modifiers.ts) own battle-start grants, victory recovery and Mana rules. [Card modifiers](../src/game/combat/card-modifiers.ts) own accepted-card counter reactions; [ability modifiers](../src/game/combat/ability-modifiers.ts) own pre-ability grants and repeat decisions. Damage, status, protection, turn and card-zone owners retain their existing specialized implementations. All run at their existing synchronous insertion points, with live liveness checks, numeric expression order and RNG order preserved. The binding catalog contains only immutable data and type-only implementation references; content validation never imports mutation handlers. Execution and presentation cannot import the catalog.
+
 ### Combat execution
 
 The ability executor owns repeats, targets, primary effects and extras inside the engine's Immer draft. Typed catalogs require complete pure policies and mutation handlers for each effect. The engine retains validation, Mana, zones, accepted-play counters, XP and scheduling; application publication and saving remain outside gameplay.

@@ -32,7 +32,7 @@ function intrinsicAbilityValue(
   );
 }
 
-function passiveCardBonus(def: CardDefinition, passive: PassiveTier, attacked: boolean) {
+export function passiveCardBonus(def: CardDefinition, passive: PassiveTier, attacked: boolean) {
   return passive.effects.reduce((total, effect) => {
     if (effect.kind !== "cardBonus") return total;
     const applies =

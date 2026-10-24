@@ -1,3 +1,4 @@
+import { encore, kindlingFlourish, beforeAbility, talentRepeat } from "./ability-modifiers";
 import { executePrimary } from "./ability-handlers";
 import { applyExtras } from "./ability-extras";
 import {
@@ -7,40 +8,13 @@ import {
   type AbilityAction,
   type AbilityOperations,
 } from "./ability-context";
-import { isRosterCreature } from "../battlefield";
 import { species } from "../content";
-import { creaturePassive, hasTalent } from "../progression";
 import { definitionKeywords } from "../keywords";
-import {
-  ensureCombat,
-  grantArmor,
-  triggerArmorBreak,
-  removeArmor,
-  beginAttack,
-  openingCriticalBonus,
-  type Combatant,
-} from "./index";
+import { ensureCombat, beginAttack, openingCriticalBonus } from "./index";
 import { chance as succeeds } from "../chance";
 import { roll } from "../random";
-import type { GameState, GameEvent, BattleState } from "../types";
+import type { GameEvent, BattleState } from "../types";
 
-function encore(state: GameState, actor: Combatant, events: GameEvent[]) {
-  const stats = ensureCombat(actor);
-  const chance = creaturePassive(isRosterCreature(actor) ? state : undefined, actor.species).effects.reduce(
-    (total, effect) => total + (effect.kind === "encore" ? effect.amount : 0),
-    0,
-  );
-  if (chance <= 0 || stats.encoreUsed) return false;
-  stats.encoreUsed = true;
-  return succeeds(state, chance / 100, !isRosterCreature(actor), events);
-}
-function kindlingFlourish(state: GameState, actor: Combatant, events: GameEvent[]) {
-  const chance = creaturePassive(isRosterCreature(actor) ? state : undefined, actor.species).effects.reduce(
-    (total, effect) => total + (effect.kind === "kindlingFlourish" ? effect.amount : 0),
-    0,
-  );
-  return succeeds(state, chance / 100, !isRosterCreature(actor), events);
-}
 /** Runs inside the command draft; command costs, counters and settlement stay with the caller. */
 export function executeAbility(
   state: BattleState,
@@ -72,19 +46,7 @@ export function executeAbility(
     text: `${name} uses ${def.name}.`,
   });
   const keywords = definitionKeywords(def);
-  if (!enemy) {
-    if (target && keywords.includes("leech") && hasTalent(state, "leech.armor-siphon")) {
-      const { removed: stolen, depletion } = removeArmor(target, 1);
-      grantArmor(state, actor, stolen, events);
-      triggerArmorBreak(state, depletion, events);
-    }
-    if (
-      keywords.includes("block") &&
-      hasTalent(state, "armor.armored-surge") &&
-      succeeds(state, 0.1, enemy, events)
-    )
-      grantArmor(state, actor, 6, events);
-  }
+  beforeAbility(state, actor, target, keywords, enemy, events);
   if (actor.health <= 0) return;
   const stats = ensureCombat(actor);
   const previousPlays = stats.cardsPlayedThisTurn;
@@ -93,19 +55,7 @@ export function executeAbility(
   const encoreRepeat = encore(state, actor, events);
   const abilityRepeat =
     def.repeatChance !== undefined && succeeds(state, def.repeatChance / 100, enemy, events);
-  const repeatTalents = [
-    ["burn", "burn.flash-fire"],
-    ["freeze", "freeze.winter-s-grasp"],
-    ["nature", "nature.overgrowth"],
-    ["poison", "poison.venom-strike"],
-    ["stun", "stun.jarring-blow"],
-  ] as const;
-  const repeat =
-    !enemy &&
-    repeatTalents.some(
-      ([keyword, talent]) =>
-        keywords.includes(keyword) && hasTalent(state, talent) && succeeds(state, 0.1, enemy, events),
-    );
+  const repeat = talentRepeat(state, keywords, enemy, events);
   for (let play = 0; play < (repeat || encoreRepeat || abilityRepeat || flourishRepeat ? 2 : 1); play++) {
     if (
       actor.health <= 0 ||

@@ -29,7 +29,7 @@ export function receiveCard(state: GameState, id: string) {
   fillHand(state);
   queueCard(state.battle!, id);
 }
-function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
+export function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
   const battle = state.battle!;
   queueCard(battle, id);
   let original: GameState["cards"][number] | undefined;

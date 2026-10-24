@@ -1,3 +1,4 @@
+import { afterPlayerCard } from "./combat/card-modifiers";
 import { observeDecisions } from "./random";
 import { useFood } from "./combat/food";
 import { cardActor } from "./card-actors";
@@ -16,7 +17,7 @@ import {
   cardKeywords,
   canBuyTalent,
 } from "./progression";
-import { ensureCombat, gainMana, restoreHealth } from "./combat/index";
+import { ensureCombat, restoreHealth } from "./combat/index";
 import { courtRemembers, removeDepartedMinions } from "./combat/legendary";
 import { fillHand, recycleDiscard } from "./card-zones";
 import { actionValue, cardCost } from "./ability-rules";
@@ -36,7 +37,7 @@ import {
   returnHome,
 } from "./journey";
 import { ownedCards, addRecruit, swapBackup, swapFromCard, pendingReplacement } from "./team";
-import { finishTurn, livingChorus } from "./combat/turns";
+import { finishTurn } from "./combat/turns";
 
 export function createGame(seed = 1): GameState {
   const state: GameState = {
@@ -289,12 +290,7 @@ function resolve(
         if (def.consume) draft.cards = draft.cards.filter((entry) => entry.id !== card.id);
         removeDepartedMinions(draft);
         recycleDiscard(draft);
-        if (battle.cardsPlayedThisTurn < 3) {
-          battle.cardsPlayedThisTurn++;
-          if (battle.cardsPlayedThisTurn === 2) livingChorus(draft, false, events);
-          if (battle.cardsPlayedThisTurn === 3 && draft.boons.includes("resonant-chimes"))
-            gainMana(draft, 1, events);
-        }
+        afterPlayerCard(draft, events);
         fillHand(draft);
         if (!preview) settle(draft, events);
         if (

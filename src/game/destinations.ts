@@ -1,7 +1,8 @@
+import { boonRule } from "./rules/boons";
 import { species } from "./content";
 import type { GameState } from "./types";
 export function merchantPriceRange(state: Pick<GameState, "boons">) {
-  const discount = state.boons.includes("merchants-favor") ? 7 : 0;
+  const discount = state.boons.includes("merchants-favor") ? boonRule("merchants-favor").discount : 0;
   return { min: 20 - discount, max: 40 - discount };
 }
 export function campfireRecovery(creature: GameState["team"][number]) {

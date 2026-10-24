@@ -1,3 +1,4 @@
+import { boonRule } from "../rules/boons";
 import { chance as succeeds } from "../chance";
 import { isEnemy, battlefield } from "../battlefield";
 import { draw } from "../card-zones";
@@ -21,7 +22,7 @@ import {
 export function* tickStatuses(state: GameState, unit: Combatant, events: GameEvent[]): Resolution<void> {
   const stats = ensureCombat(unit);
   if (!isEnemy(unit) && unit.health > 0 && stats.poison > 0 && state.boons.includes("plague-doctors-mask")) {
-    const removed = reducePeriodicStacks(stats, "poison", 2);
+    const removed = reducePeriodicStacks(stats, "poison", boonRule("plague-doctors-mask").removed);
     events.push({
       kind: "status",
       targetId: unit.id,
@@ -36,9 +37,18 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
     }
     const target = state.battle!.enemies.find((enemy) => enemy.health > 0);
     if (target)
-      yield* reaction("hit", state, unit, target, Math.round(removed / 2), "poison", events, {
-        origin: "proc",
-      });
+      yield* reaction(
+        "hit",
+        state,
+        unit,
+        target,
+        Math.round(removed / boonRule("plague-doctors-mask").divisor),
+        "poison",
+        events,
+        {
+          origin: "proc",
+        },
+      );
     if (state.battle!.enemies.every((enemy) => enemy.health <= 0)) return;
   }
   for (const status of ["burn", "poison", "bleed"] as const) {

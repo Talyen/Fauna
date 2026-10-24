@@ -100,7 +100,7 @@ export function hasHarmfulEffects(unit: Combatant): boolean {
   const stats = unit.combat;
   return !!stats && (!!stats.controlled || harmfulStatuses.some((status) => Number(stats[status]) > 0));
 }
-function ownDodgeChance(state: GameState, unit: Combatant): number {
+export function ownDodgeChance(state: GameState, unit: Combatant): number {
   if (unit.health <= 0 || unit.combat?.controlled) return 0;
   const allied = !isEnemy(unit);
   const stats = unit.combat;

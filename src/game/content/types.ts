@@ -60,6 +60,8 @@ type PassiveEffect =
   | { kind: "shareProtection"; amount: number }
   | { kind: "shareDodge"; amount: number }
   | { kind: "bounce"; effect: "light" | "heal"; amount: number; chance?: number };
+export type PassiveKind = PassiveEffect["kind"];
+
 export interface PassiveTier {
   description: string;
   effects: readonly PassiveEffect[];

@@ -1,3 +1,4 @@
+import { PLAYER_CARD_TRIGGER_LIMIT } from "./rules/boons";
 import { z } from "zod";
 import saveFormat from "./save-format.json" with { type: "json" };
 import { MAX_BATTLE_CARDS, MAX_HAND_SIZE } from "./card-zones";
@@ -82,7 +83,7 @@ const battle = z.object({
   earnedGold: natural,
   freeBurnUsed: z.boolean(),
   meteoriteUsed: z.boolean(),
-  cardsPlayedThisTurn: z.number().int().min(0).max(3),
+  cardsPlayedThisTurn: z.number().int().min(0).max(PLAYER_CARD_TRIGGER_LIMIT),
   turn: z.number().int().min(1).max(1_000_000),
   mana: z.number().int().min(0).max(6),
   maxMana: z.number().int().min(4).max(6),

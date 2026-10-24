@@ -1,3 +1,4 @@
+import { boonRule } from "../rules/boons";
 import { chance as succeeds } from "../chance";
 import { isEnemy, battlefield } from "../battlefield";
 import { roll } from "../random";
@@ -205,7 +206,8 @@ export function* cleanseRewards(
   if (!isEnemy(unit)) {
     if (hasTalent(state, "light.divine-favor")) stats.freeLight = true;
     const healing =
-      Number(hasTalent(state, "health.renewal")) * 2 + (state.boons.includes("sin-eaters-lantern") ? 6 : 0);
+      Number(hasTalent(state, "health.renewal")) * 2 +
+      (state.boons.includes("sin-eaters-lantern") ? boonRule("sin-eaters-lantern").healing : 0);
     if (healing) yield* reaction("restoreHealth", unit, healing * cleansed, events, false, state);
   }
 }
@@ -369,10 +371,11 @@ export function* applyHarmfulStatus(
         : 0.5);
     if (stats[type] >= threshold) {
       const turns =
-        (type === "stun" && alliedSource && hasTalent(state, "stun.extended-stun")) ||
-        (type === "freeze" && alliedSource && !alliedTarget && state.boons.includes("frozen-pocketwatch"))
+        type === "stun" && alliedSource && hasTalent(state, "stun.extended-stun")
           ? 2
-          : 1;
+          : type === "freeze" && alliedSource && !alliedTarget && state.boons.includes("frozen-pocketwatch")
+            ? 1 + boonRule("frozen-pocketwatch").turns
+            : 1;
       enterControl(stats, type, turns);
       appliedControl = true;
       if (alliedSource && !alliedTarget) {
@@ -414,9 +417,13 @@ export function* controlRewards(
 ): Resolution<void> {
   if (!isEnemy(source) && isEnemy(target)) {
     if (type === "freeze" && state.boons.includes("icy-heart"))
-      yield* reaction("hit", state, source, target, 6, "physical", events, { origin: "derived" });
+      yield* reaction("hit", state, source, target, boonRule("icy-heart").damage, "physical", events, {
+        origin: "derived",
+      });
     if (type === "stun" && state.boons.includes("thunderstone"))
-      yield* reaction("hit", state, source, target, 6, "nature", events, { origin: "derived" });
+      yield* reaction("hit", state, source, target, boonRule("thunderstone").damage, "nature", events, {
+        origin: "derived",
+      });
   }
 }
 export function* applyBlind(

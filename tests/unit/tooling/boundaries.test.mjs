@@ -215,3 +215,34 @@ it("keeps the explicit combat initializer out of presentation", () => {
     boundaryViolations("src/game/combat/damage-values.ts", 'import {attackProcs} from "./damage-reactions"'),
   ).toHaveLength(1);
 });
+
+it("keeps modifier implementations behind gameplay execution and the authoring boundary", () => {
+  for (const module of ["ability-modifiers", "battle-modifiers", "card-modifiers"]) {
+    expect(
+      boundaryViolations("src/ui/fixture.ts", `import * as effects from "../game/combat/${module}"`),
+    ).toHaveLength(1);
+    expect(
+      boundaryViolations("src/game/combat/state.ts", `import * as effects from "./${module}"`),
+    ).toHaveLength(1);
+  }
+  expect(
+    boundaryViolations("src/game/engine.ts", 'import {modifierImplementations} from "./modifier-bindings"'),
+  ).toHaveLength(1);
+  expect(
+    boundaryViolations(
+      "src/game/content-validation.ts",
+      'import {modifierImplementations} from "./modifier-bindings"',
+    ),
+  ).toEqual([]);
+  expect(boundaryViolations("src/ui/fixture.ts", 'import {boonRule} from "../game/rules/boons"')).toEqual([]);
+});
+
+it("keeps the modifier catalog independent of mutation implementations", () => {
+  expect(
+    boundaryViolations("src/game/modifier-bindings.ts", 'import {hit} from "./combat/damage"'),
+  ).toHaveLength(1);
+  expect(
+    boundaryViolations("src/game/modifier-bindings.ts", 'import type {GameState} from "./types"'),
+  ).toEqual([]);
+  expect(boundaryViolations("src/game/modifier-bindings.ts", 'import {freeze} from "immer"')).toEqual([]);
+});

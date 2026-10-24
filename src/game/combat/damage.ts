@@ -1,3 +1,4 @@
+import { boonRule } from "../rules/boons";
 import { takeAttackReflection } from "./attack-reflection";
 import { interceptAttack } from "./interception";
 import { chance as succeeds } from "../chance";
@@ -271,7 +272,7 @@ export function* resolveHit(
     !state.battle.meteoriteUsed
   ) {
     state.battle.meteoriteUsed = true;
-    damage *= 2;
+    damage *= boonRule("meteorite").multiplier;
   }
   damage = modifiedDamage(state, source, target, damage, type, options, attack);
   const riposte = direct && alliedSource && type === "physical" && ensureCombat(source).riposte;
@@ -297,7 +298,7 @@ export function* resolveHit(
     state.boons.includes("sundering-charm") &&
     (type === "physical" || type === "stun")
   )
-    erode(2);
+    erode(boonRule("sundering-charm").armor);
   if (armorApplies(state, target, type)) damage = armoredDamage(damage, stats.armor);
   const lost = loseHealth(state, target, damage, events);
   if (damage > 0) {

@@ -1,7 +1,7 @@
 {
   "src/game/": {
     "reason": "Seeded command acceptance and engine state transitions",
-    "suites": ["tests/unit/game/engine.test.ts"]
+    "suites": ["tests/unit/game/engine.test.ts", "tests/unit/game/modifier-contracts.test.ts"]
   },
   "tests/exhaustive/roster-combinations.test.ts": {
     "reason": "Exhaustive ordinary lineups, seeded commands and save round trips remain in full CI",
@@ -17,7 +17,8 @@
     "suites": [
       "tests/unit/game/ability-contracts.test.ts",
       "tests/unit/game/keywords.test.ts",
-      "tests/unit/tooling/boundaries.test.mjs"
+      "tests/unit/tooling/boundaries.test.mjs",
+      "tests/unit/game/modifier-contracts.test.ts"
     ]
   },
   "src/game/ability-facts.ts": {
@@ -29,11 +30,19 @@
   },
   "src/game/combat/": {
     "reason": "Combat resolution order and reaction ownership",
-    "suites": ["tests/unit/game/combat-resolution.test.ts", "tests/unit/game/combat-reactions.test.ts"]
+    "suites": [
+      "tests/unit/game/combat-resolution.test.ts",
+      "tests/unit/game/combat-reactions.test.ts",
+      "tests/unit/game/modifier-contracts.test.ts"
+    ]
   },
   "src/game/content/": {
     "reason": "Content catalog ownership and all six passive tiers",
-    "suites": ["tests/unit/game/content-ownership.test.ts", "tests/unit/game/creature-passives.test.ts"]
+    "suites": [
+      "tests/unit/game/content-ownership.test.ts",
+      "tests/unit/game/creature-passives.test.ts",
+      "tests/unit/game/modifier-contracts.test.ts"
+    ]
   },
   "src/application/": {
     "reason": "Command lifecycle and serialized save ordering",
@@ -122,5 +131,9 @@
   "tests/exhaustive/": {
     "reason": "Extended matrices run in full Vitest and hosted CI; local integration retains the command and save boundary contract",
     "suites": ["tests/unit/game/engine.test.ts"]
+  },
+  "src/game/modifier-bindings.ts": {
+    "reason": "Exhaustive authored modifier bindings and actual runtime implementation ownership",
+    "suites": ["tests/unit/game/modifier-contracts.test.ts", "tests/unit/tooling/modifier-contracts.test.mjs"]
   }
 }

@@ -8,7 +8,6 @@ import {
   FIRST_RUN_STARTERS,
   BOONS,
   TALENTS,
-  TALENT_EFFECTS,
 } from "../../../src/game/content";
 import { BOSSES, COMBAT_PACKS } from "../../../src/game/encounters";
 import { PEARL } from "../../../src/game/content/creatures/memento";
@@ -39,16 +38,7 @@ it("keeps shared authored rules immutable across lookup and direct catalog acces
     expect(changed, `Shared rule ${key} must reject mutation`).toBe(false);
     expect(Reflect.get(target, key)).toEqual(original);
   }
-  for (const catalog of [
-    CARDS,
-    SPECIES,
-    BOONS,
-    TALENTS,
-    TALENT_EFFECTS,
-    FIRST_RUN_STARTERS,
-    COMBAT_PACKS,
-    BOSSES,
-  ])
+  for (const catalog of [CARDS, SPECIES, BOONS, TALENTS, FIRST_RUN_STARTERS, COMBAT_PACKS, BOSSES])
     expect(Object.isFrozen(catalog)).toBe(true);
 });
 

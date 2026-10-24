@@ -47,6 +47,4 @@ export const TALENTS = [
   ...STUN_TALENTS.slice(2),
 ] as const;
 export type TalentId = (typeof TALENTS)[number]["id"];
-export const TALENT_EFFECTS = TALENTS.map((talent) => talent.effect);
 freeze(TALENTS, true);
-freeze(TALENT_EFFECTS, true);

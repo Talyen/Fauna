@@ -2,6 +2,7 @@ import { parseSync } from "@swc/core";
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import { modifierContractViolations, readModifierSources } from "./modifier-contracts.mjs";
 const ambient = new Set([
   "window",
   "document",
@@ -69,6 +70,14 @@ export function boundaryViolations(file, source) {
         ? path.posix.normalize(path.posix.join(path.posix.dirname(file), specifier))
         : specifier;
     const within = (dir) => target.startsWith(`src/${dir}/`);
+    if (file === "src/game/modifier-bindings.ts" && !declaration?.typeOnly && target !== "immer")
+      fail("Modifier bindings contain pure registration data; import only Immer and types.");
+    if (
+      target.replace(/\.ts$/, "") === "src/game/modifier-bindings" &&
+      file !== "src/game/content-validation.ts" &&
+      !declaration?.typeOnly
+    )
+      fail("Modifier bindings are an authoring boundary; runtime uses named implementation owners.");
     if (
       file.startsWith("src/game/rules/") &&
       !declaration?.typeOnly &&
@@ -122,6 +131,9 @@ export function boundaryViolations(file, source) {
         "src/game/combat/ability-handlers",
         "src/game/combat/ability-extras",
         "src/game/combat/ability-context",
+        "src/game/combat/ability-modifiers",
+        "src/game/combat/battle-modifiers",
+        "src/game/combat/card-modifiers",
         "src/game/combat/turns",
         "src/game/engine",
         "src/game/journey",
@@ -165,7 +177,7 @@ export function boundaryViolations(file, source) {
     if (
       ui &&
       !declaration?.typeOnly &&
-      /^src\/game\/(?:(?:journey|team)|combat\/(?:abilit(?:ies|y-(?:handlers|extras|context))|resolution|operations|damage(?:-reactions)?|status-state|protection|statuses|lifecycle|turns))(?:\.ts)?$/.test(
+      /^src\/game\/(?:(?:journey|team)|combat\/(?:abilit(?:ies|y-(?:handlers|extras|context|modifiers))|(?:battle|card)-modifiers|resolution|operations|damage(?:-reactions)?|status-state|protection|statuses|lifecycle|turns))(?:\.ts)?$/.test(
         target,
       ) &&
       // This selector reads committed state; importing its module's mutators remains forbidden.
@@ -286,6 +298,7 @@ export async function checkBoundaries(directory = "src") {
     }
   }
   await walk(directory);
+  violations.push(...modifierContractViolations(readModifierSources(process.cwd())));
   if (violations.length) throw new Error(violations.join("\n"));
   console.log("Parser-based architecture boundaries passed.");
 }
