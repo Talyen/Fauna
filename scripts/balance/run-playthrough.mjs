@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { readFile, writeFile, appendFile } from "node:fs/promises";
+import { readFile, writeFile, open } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { runOwnedWorker } from "../lib/worker.mjs";
@@ -46,6 +46,16 @@ export async function runPlaythrough(args, { timeout = 60_000, spawnWorker } = {
 
 async function worker(args) {
   const options = parsePlaythroughArgs(args);
+  const profile =
+    process.env.FAUNA_PLAYTHROUGH_PROFILE === "1"
+      ? { stages: {}, journalMs: 0, journalRecords: 0 }
+      : undefined;
+  let checkpoint = performance.now();
+  const mark = (name) => {
+    const now = performance.now();
+    if (profile) profile.stages[name] = now - checkpoint;
+    checkpoint = now;
+  };
   const { createServer } = await import("vite");
   const server = await createServer({
     root,
@@ -54,11 +64,15 @@ async function worker(args) {
     server: { middlewareMode: true },
     appType: "custom",
   });
+  mark("viteSetupMs");
+  let journal;
   try {
     const value = (name, fallback) => options[name] ?? fallback;
     const identity = await sourceIdentity();
+    mark("identityMs");
     const { runJourney } = await server.ssrLoadModule("/src/tooling/playthrough.ts");
     const { FIRST_RUN_STARTERS } = await server.ssrLoadModule("/src/game/content.ts");
+    mark("moduleLoadMs");
     const replay = value("--replay") ? JSON.parse(await readFile(value("--replay"), "utf8")) : undefined;
     const config = replay?.config ?? {
       seed: Number(value("--seed", 42)),
@@ -83,11 +97,21 @@ async function worker(args) {
     const output = await reportDirectory(value("--out"), "reports/playthrough");
     const baseline = value("--compare") ? JSON.parse(await readFile(value("--compare"), "utf8")) : undefined;
     const journalPath = path.join(output, `journal-${randomUUID()}.jsonl`);
+    journal = await open(journalPath, "a");
     const { createGame } = await server.ssrLoadModule("/src/game/engine.ts");
     const initial =
       replay?.initial ??
       (value("--save") ? await readFile(value("--save"), "utf8") : JSON.stringify(createGame(config.seed)));
-    await appendFile(journalPath, JSON.stringify({ type: "initial", identity, config, initial }) + "\n");
+    const appendRecord = async (record) => {
+      const started = performance.now();
+      // Every record is still awaited before the next command; keep no user-space batch buffer.
+      await journal.appendFile(JSON.stringify(record) + "\n");
+      if (profile) {
+        profile.journalMs += performance.now() - started;
+        profile.journalRecords++;
+      }
+    };
+    await appendRecord({ type: "initial", identity, config, initial });
     await writeFile(
       path.join(output, "summary.json"),
       JSON.stringify({
@@ -97,9 +121,9 @@ async function worker(args) {
       }),
     );
     console.log(`Journal: ${journalPath}`);
-    const bundle = await runJourney(config, identity, initial, replay, (record) =>
-      appendFile(journalPath, JSON.stringify(record) + "\n"),
-    );
+    mark("fixtureSetupMs");
+    const bundle = await runJourney(config, identity, initial, replay, appendRecord);
+    mark("journeyMs");
     await writeFile(path.join(output, "journey.json"), JSON.stringify(bundle));
     if (
       baseline &&
@@ -121,6 +145,7 @@ async function worker(args) {
       battles: bundle.battles,
       milestones: bundle.milestones,
       journal: path.basename(journalPath),
+      profile,
       comparison: baseline
         ? {
             baselineIdentity: baseline.identity,
@@ -135,7 +160,11 @@ async function worker(args) {
     console.log(JSON.stringify(summary, null, 2));
     if (!bundle.complete) process.exitCode = 1;
   } finally {
-    await server.close();
+    try {
+      await journal?.close();
+    } finally {
+      await server.close();
+    }
   }
 }
 

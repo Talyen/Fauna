@@ -61,7 +61,8 @@ function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?
   const board = useRef<HTMLDivElement>(null);
   const acting = team.find((creature) => creature.id === selected?.ownerId);
   const def = selected ? definition(selected.definitionId) : null;
-  const allyTarget = def?.effect === "heal" || def?.effect === "guard";
+  const groupGuard = def?.effect === "guard" && def.target === "allAllies";
+  const allyTarget = def?.effect === "heal" || (def?.effect === "guard" && !groupGuard);
   const targetKey = allyTarget
     ? target.startsWith("ally")
       ? target
@@ -74,7 +75,7 @@ function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?
       const root = board.current;
       const actor = root?.querySelector<HTMLElement>(`[data-sample-actor="${acting?.id}"] .creature-card`);
       const recipient = root?.querySelector<HTMLElement>(`[data-sample-actor="${targetKey}"] .creature-card`);
-      if (!root || !actor || !recipient || !selected || def?.effect === "teamGuard") {
+      if (!root || !actor || !recipient || !selected || groupGuard) {
         setLine("");
         return;
       }
@@ -96,7 +97,7 @@ function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?
     const observer = new ResizeObserver(update);
     if (board.current) observer.observe(board.current);
     return () => observer.disconnect();
-  }, [acting, targetKey, selected, allyTarget, def]);
+  }, [acting, targetKey, selected, allyTarget, def, groupGuard]);
   useEffect(() => {
     const keys = (event: KeyboardEvent) => {
       if (inspection || pause) return;
@@ -129,7 +130,7 @@ function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?
       content: <CreatureDetails kind={kind} name={name} />,
     });
   const stats = (id: string, health: number, max: number, block = 0) => {
-    const previewing = !!selected && targetKey === id && def?.effect !== "teamGuard";
+    const previewing = !!selected && targetKey === id && !groupGuard;
     let next = health;
     if (previewing && selected && acting && def) {
       const value = actionValue(selected, acting);
@@ -198,7 +199,7 @@ function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?
                   }}
                   onClick={() =>
                     selected
-                      ? !allyTarget && def?.effect !== "teamGuard"
+                      ? !allyTarget && !groupGuard
                         ? setSelected(null)
                         : undefined
                       : inspectCreature(enemy.species, enemy.name)
@@ -221,9 +222,7 @@ function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?
             <span>
               {def.name} · {def.cost} mana
             </span>
-            {def.effect === "teamGuard" ? (
-              <Button onClick={() => setSelected(null)}>Play · Enter</Button>
-            ) : null}
+            {groupGuard ? <Button onClick={() => setSelected(null)}>Play · Enter</Button> : null}
             <Button variant="outline" onClick={() => setSelected(null)}>
               Cancel
             </Button>

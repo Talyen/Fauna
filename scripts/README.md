@@ -40,7 +40,7 @@ Additional opt-in tools:
 - `npm run perf`, `npm run perf:replay`, `npm run perf:compare`: [capture driver](performance/run-performance.mjs), [bounded sampler](performance/sampler.mjs), [trace capture/accounting](performance/trace.mjs), [metrics](performance/metrics.mjs), [validated fixtures](../src/tooling/performance.ts).
 - `npm run verify:package`: [package gate](release/verify-package.mjs), [after-pack hardening](../desktop/after-pack.cjs), [packaged renderer launcher](lib/packaged-desktop.mjs).
 - `npm run check:types`: the gameplay, renderer, Node tooling and test/design compiler environments described in [architecture](../Docs/ARCHITECTURE.md#typescript-environments); selected environments are reported by `verify:changed`; all environments run in CI as part of `npm run check:full`.
-- `npm run deadcode`: [Knip entrypoints](../knip.config.js); included in full CI static verification; available for bounded local investigation.
+- `npm run deadcode`: [Knip entrypoints](../knip.config.js); included in full CI static verification; local investigation requires explicit heavy-local authorization.
 - `npm run investigate`: [bounded diagnostic launcher](agent/investigate.mjs); authorization and budgets live in [Contributing](../CONTRIBUTING.md#execution-and-evidence).
 - `npm run context`: [owner lookup](agent/agent-context.mjs), including runtime guidance for focused unit suites alongside test policy.
 - `npm run review:status`, `npm run review:diff`: [bounded patch review](agent/agent-review.mjs).
@@ -78,7 +78,7 @@ Dependency audit policy lives in [CI](../Docs/CI.md); release inventory, package
 
 The plan prints batches, compiler environments, documentation coverage and required-suite rationale. Import suggestions and unresolved imports appear only with `--related`; timing history never changes coverage. Empty selections run no checks.
 
-The diagnostic launcher accepts `types`, `static`, `build`, `unit [suite files]`, `browser <route>` and `performance <scenario>`. Omitting unit paths selects the full unit/DOM set and is blocked locally without explicit heavy-local authorization. Browser routes are battle, settings, collection, progression and persistence; performance scenarios are battle, swap and menus. Names are validated before launch; build first for production browser/performance diagnostics. The launcher owns cancellation under the [shared resource policy](../CONTRIBUTING.md#execution-and-evidence).
+The diagnostic launcher accepts `types`, `static`, `build`, `unit [suite files]`, `browser <route>` and `performance <scenario>`. All modes are CI-owned and blocked locally without explicit heavy-local authorization, including `unit` with exact paths; omitting paths selects the full unit/DOM/exhaustive set. Use `npm test -- <suite>` for one bounded local regression. Browser routes are battle, settings, collection, progression and persistence; performance scenarios are battle, swap and menus. Names are validated before launch; build first for production browser/performance diagnostics. The launcher owns cancellation under the [shared resource policy](../CONTRIBUTING.md#execution-and-evidence).
 
 ## Worktree operations
 

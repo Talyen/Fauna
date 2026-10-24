@@ -12,6 +12,21 @@
     "reason": "Shared lineup generation retains exhaustive coverage and representative journey assertions",
     "suites": ["tests/unit/game/engine.test.ts", "tests/unit/game/lineups.test.ts"]
   },
+  "src/game/rules/": {
+    "reason": "Complete ability policies, descriptions, adaptations and committed behavior parity",
+    "suites": [
+      "tests/unit/game/ability-contracts.test.ts",
+      "tests/unit/game/keywords.test.ts",
+      "tests/unit/tooling/boundaries.test.mjs"
+    ]
+  },
+  "src/game/ability-facts.ts": {
+    "reason": "Visible gameplay facts preserve Auto-play rankings without hidden-state sampling",
+    "suites": [
+      "tests/unit/application/battle-policy.test.ts",
+      "tests/unit/application/battle-policy-regressions.test.ts"
+    ]
+  },
   "src/game/combat/": {
     "reason": "Combat resolution order and reaction ownership",
     "suites": ["tests/unit/game/combat-resolution.test.ts", "tests/unit/game/combat-reactions.test.ts"]

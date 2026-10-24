@@ -1,3 +1,4 @@
+import { battleCardCapacity } from "../card-zones";
 import { speciesCards, definition, species } from "../content";
 import { PEARL } from "../content/creatures/memento";
 import { creaturePassive } from "../progression";
@@ -46,7 +47,7 @@ export function createPearls(
       deck.pearls++;
       (deck.hand.length < MAX_HAND_SIZE ? deck.hand : deck.buffer).push(PEARL.id);
     } else {
-      if (state.cards.length >= MAX_BATTLE_CARDS || state.battle.copySerial >= Number.MAX_SAFE_INTEGER) break;
+      if (battleCardCapacity(state) === 0 || state.battle.copySerial >= Number.MAX_SAFE_INTEGER) break;
       const card = {
         id: `copy-${state.battle.copySerial++}`,
         definitionId: PEARL.id,

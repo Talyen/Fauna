@@ -1,5 +1,7 @@
 # Further codebase simplification
 
+Historical assessment; the [implementation summary](../COMPLEXITY_REDUCTION_PLAN.md) records completion and links verification evidence. The proposal below retains its original baseline and acceptance criteria; current contracts belong to [Architecture](../ARCHITECTURE.md).
+
 Assessment date: October 23, 2026. Source baseline: `f0d462e9bddb74d15668a132ca253ac64620447c` on local main; findings rechecked against main through `18e54964e6ab32cf999e19e9824b4dad2c6e9894` during integration. This is a proposed implementation plan; this assessment changes documentation only.
 
 The main cost is reasoning about combat order and battle interaction, not file length. Reduce duplicated interpretations and coordinated writes without adding frameworks.

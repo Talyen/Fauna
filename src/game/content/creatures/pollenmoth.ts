@@ -107,7 +107,9 @@ export const pollenmoth: CreatureKit = {
       target: "randomEnemy",
     },
     {
-      ...card("pollenmoth", "Petal Shelter", "teamGuard", 2),
+      ...card("pollenmoth", "Petal Shelter", "guard", 2),
+      id: "pollenmoth-teamGuard",
+      target: "allAllies",
       artwork: "action.pollenmoth.petal-shelter",
     },
     {

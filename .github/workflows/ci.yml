@@ -14,6 +14,11 @@ on:
         type: choice
         options: ["install", "container"]
         default: "container"
+      browser_workers:
+        description: Workers per browser job; compare eight jobs with one worker against four jobs with two
+        type: choice
+        options: ["1", "2"]
+        default: "1"
 permissions:
   contents: read
   pull-requests: read
@@ -33,6 +38,7 @@ jobs:
       attempt: ${{ steps.plan.outputs.attempt }}
       shards: ${{ steps.plan.outputs.shards }}
       total: ${{ steps.plan.outputs.total }}
+      workers: ${{ steps.plan.outputs.workers }}
       browser_image: ${{ steps.plan.outputs.browser_image }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -167,6 +173,7 @@ jobs:
             reports/vitest.json
             reports/ci/unit.json
             reports/ci/unit-discovery.json
+            reports/ci/playthrough-timings.json
       - id: complete
         name: Record successful workflow attempt
         run: node scripts/ci/ci.mjs stamp
@@ -221,6 +228,7 @@ jobs:
     timeout-minutes: 20
     env:
       CI_SHARDS: ${{ needs.prepare.outputs.total }}
+      CI_BROWSER_WORKERS: ${{ needs.prepare.outputs.workers }}
     outputs:
       attempt: ${{ steps.complete.outputs.attempt }}
     steps:
@@ -286,6 +294,7 @@ jobs:
       FAUNA_BROWSER_IMAGE: ${{ needs.prepare.outputs.browser_image }}
       CI_SHARD: ${{ matrix.shard }}
       CI_SHARDS: ${{ needs.prepare.outputs.total }}
+      CI_BROWSER_WORKERS: ${{ needs.prepare.outputs.workers }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -321,7 +330,7 @@ jobs:
         if: ${{ needs.prepare.outputs.browser_image == '' }}
         run: npx playwright install --with-deps --only-shell chromium
       - name: Browser shard
-        run: npx playwright test --test-list=reports/ci/shard-$CI_SHARD.txt
+        run: npx playwright test --workers=$CI_BROWSER_WORKERS --test-list=reports/ci/shard-$CI_SHARD.txt
       - name: Record shard identity
         if: always()
         run: node scripts/ci/ci.mjs shard
@@ -459,6 +468,7 @@ jobs:
     timeout-minutes: 10
     env:
       CI_SHARDS: ${{ needs.prepare.outputs.total }}
+      CI_BROWSER_WORKERS: ${{ needs.prepare.outputs.workers }}
       CI_NEEDS: ${{ toJSON(needs) }}
       PLAYWRIGHT_JSON_OUTPUT_FILE: reports/playwright.json
       PLAYWRIGHT_HTML_OUTPUT_DIR: reports/browser-html

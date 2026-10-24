@@ -127,6 +127,65 @@ it("keyword draws leave fallen owners' matching cards in place when no owner can
   expect(result).toEqual(initial);
 });
 
+it.each([false, true])("preserves empty-pile reshuffle rules for keyword draw: %s", (keyword) => {
+  const initial = produce(teamRun(42, ["reedstag", "reedstag", "reedstag"]), (state) => {
+    state.team[1]!.health = 0;
+    state.battle!.hand = [];
+    state.battle!.buffer = [];
+    state.battle!.draw = [];
+    state.battle!.discard = state.cards.map((card) => card.id);
+    state.rng = 17;
+  });
+  const matching = initial.cards
+    .filter((card) => card.ownerId !== initial.team[1]!.id && card.definitionId !== "reedstag-heal")
+    .map((card) => card.id);
+  const drawable = initial.cards
+    .filter((card) => card.ownerId !== initial.team[1]!.id)
+    .map((card) => card.id);
+  const random = { ...initial };
+  const shuffled = shuffle(random, keyword ? [...matching] : [...initial.battle!.discard]);
+  const drawn = [...shuffled].reverse().find((id) => keyword || drawable.includes(id))!;
+  const result = produce(initial, (state) => {
+    if (keyword) drawKeyword(state, "nature");
+    else expect(draw(state, 1)).toBe(1);
+  });
+  expect(result.battle!.hand).toEqual([drawn]);
+  expect(result.battle!.draw).toEqual(shuffled.filter((id) => id !== drawn));
+  expect(result.battle!.discard).toEqual(
+    keyword ? initial.battle!.discard.filter((id) => !matching.includes(id)) : [],
+  );
+  expect(result.rng).toBe(random.rng);
+  expect(decodeSave(encodeSave(result))).toEqual(result);
+});
+
+it("queues a keyword draw and its Well Read copy behind existing overflow without copying queued cards", () => {
+  const initial = produce(teamRun(42, ["rookhaven", "reedstag", "reedstag"]), (state) => {
+    state.discovery.recruited.rookhaven = 6;
+    state.cards = state.cards.filter((card) => !card.temporary);
+    const ids = state.cards.map((card) => card.id);
+    state.battle!.hand = ids.slice(0, 6);
+    state.battle!.buffer = ids.slice(6, 7);
+    state.battle!.draw = ids.slice(7);
+    state.battle!.discard = [];
+  });
+  const events: GameEvent[] = [];
+  const result = produce(initial, (state) => drawKeyword(state, "nature", events));
+  const drawn = initial.battle!.draw[0]!;
+  const copyId = `copy-${initial.battle!.copySerial}`;
+  expect(result.battle!.hand).toEqual(initial.battle!.hand);
+  expect(result.battle!.buffer).toEqual([...initial.battle!.buffer, drawn, copyId]);
+  expect(result.battle!.draw).toEqual(initial.battle!.draw.slice(1));
+  expect(result.cards.at(-1)).toEqual({
+    ...initial.cards.find((card) => card.id === drawn),
+    id: copyId,
+    temporary: true,
+  });
+  expect(events).toHaveLength(1);
+  expect(events[0]).toMatchObject({ kind: "action", actorId: initial.team[0]!.id });
+  expect(result.rng).toBe(initial.rng);
+  expect(decodeSave(encodeSave(result))).toEqual(result);
+});
+
 function buffered() {
   return produce(run(), (d) => {
     d.battle!.hand = d.cards.slice(0, 6).map((card) => card.id);

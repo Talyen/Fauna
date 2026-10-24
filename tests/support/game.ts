@@ -185,10 +185,14 @@ export function policy(s: GameState): Command {
       ...(def.effect === "heal" && !def.target ? { targetId: injured.id } : {}),
     };
   }
-  const teamGuard = cards.find((c) =>
-    ["teamGuard", "teamProtection", "nullify"].includes(definition(c.definitionId).effect),
-  );
-  if (teamGuard) return { type: "play", cardId: teamGuard.id };
+  const groupProtection = cards.find((c) => {
+    const def = definition(c.definitionId);
+    return (
+      (def.effect === "guard" && def.target === "allAllies") ||
+      ["teamProtection", "nullify"].includes(def.effect)
+    );
+  });
+  if (groupProtection) return { type: "play", cardId: groupProtection.id };
   const guard = cards.find((c) => definition(c.definitionId).effect === "guard");
   if (guard) {
     const def = definition(guard.definitionId);
@@ -274,10 +278,8 @@ export function requireBattle(state: GameState): BattleState {
 
 /** A saved Merchant destination funded for any baseline offer; journey earnings stay exact. */
 export function merchantDestination() {
-  const initial = createGame(7);
-  let state = accept(accept(initial, { type: "draft", species: initial.starterOffers[0]! }), {
-    type: "start",
-  });
+  // Starter identity affects roster exclusions and the number of destination RNG draws.
+  let state = starterJourney(3, "captoad");
   state = winBattle(accept(state, { type: "beginBattle" }));
   // Fix this scenario's destination roll independently of the changing recruit catalog.
   state = produce(state, (draft) => {

@@ -1,6 +1,7 @@
+import type { SupplementalEffect } from "./rules/ability-types";
 import { drawableOwnerIds } from "./card-actors";
 import { definition, species } from "./content";
-import type { BattleState, GameEvent, GameState } from "./types";
+import type { BattleState, Card, GameEvent, GameState } from "./types";
 import { chance as succeeds } from "./chance";
 import { shuffle, hiddenDecision } from "./random";
 import { cardKeywords, creaturePassive } from "./progression";
@@ -80,10 +81,26 @@ function lastEligibleIndex(ids: readonly string[], eligible: (id: string) => boo
   return index;
 }
 
+/** Deliver one actual draw, including copies and overflow, without disturbing ineligible slots. */
+function drawEligibleCard(state: GameState, eligible: (id: string) => boolean, events: GameEvent[]) {
+  hiddenDecision(state);
+  const battle = state.battle!;
+  let index = lastEligibleIndex(battle.draw, eligible);
+  if (index < 0) {
+    recycleEligibleDiscard(state, eligible);
+    index = lastEligibleIndex(battle.draw, eligible);
+  }
+  if (index < 0) return false;
+  const id = battle.draw.splice(index, 1)[0]!;
+  receiveDraw(state, id, events);
+  recycleDiscard(state);
+  return true;
+}
+
 export function draw(state: GameState, count: number, events: GameEvent[] = []) {
   if (count > 0) hiddenDecision(state);
   fillHand(state);
-  const b = state.battle!;
+  // Ordinary draws reshuffle the whole empty pile first; keyword draws only recycle matches.
   recycleDiscard(state);
   // Knocked-out owners retain inert slots, so replacing them cannot refresh spent cards.
   const alive = drawableOwnerIds(state);
@@ -96,16 +113,8 @@ export function draw(state: GameState, count: number, events: GameEvent[] = []) 
   const eligible = (id: string) => !alive.size || eligibleCards.has(id);
   let drawn = 0;
   for (let i = 0; i < count; i++) {
-    let index = lastEligibleIndex(b.draw, eligible);
-    if (index < 0) {
-      recycleEligibleDiscard(state, eligible);
-      index = lastEligibleIndex(b.draw, eligible);
-    }
-    if (index < 0) break;
-    const card = b.draw.splice(index, 1)[0]!;
-    receiveDraw(state, card, events);
+    if (!drawEligibleCard(state, eligible, events)) break;
     drawn++;
-    recycleDiscard(state);
   }
   return drawn;
 }
@@ -133,8 +142,7 @@ export function drawKeyword(
   keyword: "light" | "nature" | "water",
   events: GameEvent[] = [],
 ) {
-  const battle = state.battle;
-  if (!battle) return;
+  if (!state.battle) return;
   fillHand(state);
   const owners = drawableOwnerIds(state);
   const eligibleCards = new Set(
@@ -144,17 +152,7 @@ export function drawKeyword(
       )
       .map((card) => card.id),
   );
-  const eligible = (id: string) => eligibleCards.has(id);
-  let index = lastEligibleIndex(battle.draw, eligible);
-  if (index < 0) {
-    recycleEligibleDiscard(state, eligible);
-    index = lastEligibleIndex(battle.draw, eligible);
-  }
-  if (index >= 0) {
-    const id = battle.draw.splice(index, 1)[0]!;
-    receiveDraw(state, id, events);
-    recycleDiscard(state);
-  }
+  drawEligibleCard(state, (id) => eligibleCards.has(id), events);
 }
 
 /** Only the visible hand is exchanged; buffered draws retain their FIFO ownership. */
@@ -165,4 +163,38 @@ export function redrawHand(state: GameState, events: GameEvent[]) {
   battle.draw.push(...returned);
   shuffle(state, battle.draw);
   draw(state, returned.length, events);
+}
+
+/** Shared capacity query for generated cards and visible policy assessment. */
+export function battleCardCapacity(state: Pick<GameState, "cards">): number {
+  return Math.max(0, MAX_BATTLE_CARDS - state.cards.length);
+}
+/** Called while the played card is still in hand; hidden draw order is irrelevant.
+ * Buffered cards fill the hand before keyword filtering; consumed cards cannot be copied on redraw. */
+export function drawHasAnotherCard(
+  state: BattleState,
+  played: Card,
+  effect: SupplementalEffect & { kind: "draw" | "drawKeyword" },
+): boolean {
+  return (
+    [...state.battle.draw, ...state.battle.discard, ...state.battle.buffer].some((id) => {
+      const drawn = state.cards.find((entry) => entry.id === id)!;
+      return (
+        (drawn.ownerId === null || drawableOwnerIds(state).has(drawn.ownerId)) &&
+        (state.battle.buffer.includes(id) ||
+          effect.kind === "draw" ||
+          cardKeywords(drawn).includes(effect.keyword))
+      );
+    }) ||
+    (!definition(played.definitionId).consume &&
+      (effect.kind === "draw" || cardKeywords(played).includes(effect.keyword)) &&
+      battleCardCapacity(state) > 0 &&
+      state.team.some(
+        (unit) =>
+          unit.health > 0 &&
+          creaturePassive(state, unit.species).effects.some(
+            (passive) => passive.kind === "wellRead" && passive.amount > 0,
+          ),
+      ))
+  );
 }

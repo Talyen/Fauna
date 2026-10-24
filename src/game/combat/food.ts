@@ -1,6 +1,7 @@
+import { battleCardCapacity } from "../card-zones";
 import { FOOD_CARDS } from "../content/food";
 import { species, type CardDefinition } from "../content";
-import { MAX_BATTLE_CARDS, receiveCard } from "../card-zones";
+import { receiveCard } from "../card-zones";
 import { roll } from "../random";
 import { gainMana, grantBlock, restoreHealth } from "./index";
 import { battlefield } from "../battlefield";
@@ -10,7 +11,7 @@ export function createFood(state: BattleState, actor: Creature, count: number, e
   let created = 0;
   while (
     created < count &&
-    state.cards.length < MAX_BATTLE_CARDS &&
+    battleCardCapacity(state) > 0 &&
     state.battle.copySerial < Number.MAX_SAFE_INTEGER
   ) {
     const def =

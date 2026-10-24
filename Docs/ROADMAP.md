@@ -38,7 +38,7 @@ The groups below are in recommended order. Each proposal needs design and playte
 - [ ] **Short interactive introduction:** teach targeting, the shared deck, reserves and swapping with contextual moments, a Skip option and no repeated prompts for returning players
 - [ ] **Creature synergy guide:** show concise collection examples of complementary keywords, passives and teammates
 - [ ] **Recent battle history:** let players inspect recent actions and outcomes to understand an unexpected knockout or combo
-- [ ] **Remappable controls and device prompts:** support custom bindings and broader controller layouts while retaining keyboard and mouse parity
+- [ ] **Remappable controls and broader controller layouts:** add custom bindings and support beyond standard mappings while retaining keyboard and mouse parity; controller-family detection and manual prompt selection already exist in [Settings](ui/screens.md#settings)
 
 ### 2. Add reasons to replay
 

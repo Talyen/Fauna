@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { readFileSync, rmSync } from "node:fs";
+import { readFileSync, rmSync, mkdirSync, writeFileSync } from "node:fs";
 import { randomUUID } from "node:crypto";
 import path from "node:path";
 import { afterEach, expect, it, vi } from "vitest";
@@ -82,6 +82,7 @@ it("writes a durable journal and replays the CLI's recorded production career", 
       execFileSync(process.execPath, ["scripts/balance/run-playthrough.mjs", ...args], {
         encoding: "utf8",
         timeout: 10_000,
+        env: { ...process.env, FAUNA_PLAYTHROUGH_PROFILE: "1" },
       });
     // Policy changes can stall a particular career; this fixture owns successful CLI replay.
     invoke(["--seed", "15", "--starter", "captoad", "--runs", "1", "--out", directory]);
@@ -98,9 +99,42 @@ it("writes a durable journal and replays the CLI's recorded production career", 
       .map((line) => JSON.parse(line));
     expect(journal.filter((record) => record.type === "attempt")).toHaveLength(bundle.steps.length);
     expect(journal.filter((record) => record.type === "completed")).toHaveLength(bundle.steps.length);
+    expect(journal[0]).toMatchObject({ type: "initial", identity: bundle.identity, initial: bundle.initial });
+    for (const [index, step] of bundle.steps.entries()) {
+      expect(journal[index * 2 + 1]).toMatchObject({ type: "attempt", index, command: step.command });
+      expect(journal[index * 2 + 2]).toEqual({ type: "completed", index, ...step });
+    }
     invoke(["--replay", path.join(directory, "journey.json"), "--out", replayDirectory]);
     expect(JSON.parse(readFileSync(path.join(replayDirectory, "journey.json"), "utf8")).steps).toEqual(
       bundle.steps,
+    );
+    const replaySummary = JSON.parse(readFileSync(path.join(replayDirectory, "summary.json"), "utf8"));
+    for (const { profile } of [summary, replaySummary]) {
+      expect(profile.journalRecords).toBe(1 + 2 * bundle.steps.length);
+      expect(Object.keys(profile.stages)).toEqual([
+        "viteSetupMs",
+        "identityMs",
+        "moduleLoadMs",
+        "fixtureSetupMs",
+        "journeyMs",
+      ]);
+      expect(
+        [profile.journalMs, ...Object.values(profile.stages)].every((ms) => Number.isFinite(ms) && ms >= 0),
+      ).toBe(true);
+    }
+    mkdirSync("reports/ci", { recursive: true });
+    writeFileSync(
+      "reports/ci/playthrough-timings.json",
+      JSON.stringify(
+        {
+          identity: bundle.identity,
+          sha: process.env.GITHUB_SHA ?? null,
+          generation: summary.profile,
+          replay: replaySummary.profile,
+        },
+        null,
+        2,
+      ) + "\n",
     );
   } finally {
     rmSync(directory, { recursive: true, force: true });

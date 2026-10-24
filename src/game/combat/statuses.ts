@@ -191,7 +191,9 @@ export function* removeEffects(
     });
   if (cleansed > 0 && state) yield* reaction("cleanseRewards", state, unit, cleansed, events);
   if (state) yield* reaction("triggerArmorBreak", state, depletion, events);
-  return new Set(removedStatuses).size;
+  // Typed wards share feedback labels but spend separate Purge categories;
+  // Cleanse still coalesces active control with buildup of the same status
+  return kind === "purge" ? removedStatuses.length : new Set(removedStatuses).size;
 }
 export function* cleanseRewards(
   state: GameState,
