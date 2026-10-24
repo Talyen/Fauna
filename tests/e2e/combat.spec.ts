@@ -106,9 +106,11 @@ for (const width of [1280, 1920]) {
     const enemy = game.battle!.enemies[0]!;
     await expect(recipientPreview).toHaveAttribute(
       "aria-label",
-      `Target preview for ${enemy.name}: Health ${enemy.health} to ${enemy.health - 6}, Block 0 to 0`,
+      `Possible outcomes for ${enemy.name}: 6 Physical or Critical 12 Physical or Dodge`,
     );
-    await expect(recipientPreview).toContainText("−6");
+    await expect(recipientPreview).toHaveAttribute("data-conditional", "true");
+    await expect(recipientPreview).toContainText("May be Dodged");
+    await expect(recipientPreview).toContainText("Critical possible");
     await expect(page.locator(".target-preview")).toHaveCount(1);
     expect(
       await row.evaluate((element) => ({

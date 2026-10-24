@@ -26,9 +26,8 @@ import "../../src/ui/styles.css";
 import "../button-interactions/study.css";
 import "./study.css";
 
-function SettingsReview() {
-  const [open, setOpen] = useState(true);
-  const [preferences, setPreferences] = useState<DevicePreferences>(() => ({
+function freshPreferences(): DevicePreferences {
+  return {
     audio: { ...defaultAudioPreferences },
     scale: 1,
     tooltipScale: 1,
@@ -36,7 +35,12 @@ function SettingsReview() {
     glow: 100,
     particles: 100,
     controller: "auto",
-  }));
+  };
+}
+
+function SettingsReview() {
+  const [open, setOpen] = useState(true);
+  const [preferences, setPreferences] = useState(freshPreferences);
   const { scale, tooltipScale } = preferences;
   const [session] = useState(() =>
     createSession({
@@ -113,10 +117,7 @@ function SettingsReview() {
     };
   }, []);
   const reset = () => {
-    setAudio({ ...defaultAudioPreferences });
-    setScale(1);
-    setTooltipScale(1);
-    setAutoEndTurn(true);
+    setPreferences(freshPreferences());
     setFailed(false);
     setRevision((value) => value + 1);
   };

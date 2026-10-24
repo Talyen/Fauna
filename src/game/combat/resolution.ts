@@ -71,7 +71,9 @@ export function resolveCombat<K extends OperationName>(
     operation.kind === "grantStatus" ||
     operation.kind === "removeEffects"
       ? operation.args[4]
-      : operation.args[0];
+      : operation.kind === "startAction"
+        ? operation.args[2]
+        : operation.args[0];
   const stack: Resolution<unknown>[] = [frame(operation)];
   let result: unknown;
   while (stack.length) {

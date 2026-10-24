@@ -1,5 +1,48 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`preserves visible rankings and legal choices for almanelle 1`] = `
+[
+  [
+    "ordinary",
+    [
+      "{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-0","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}",
+      "{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-1","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}",
+      "{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-2","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}",
+      "{"command":{"type":"play","cardId":"ally-0:almanelle-rooted-year","autoEndTurn":false},"score":106,"reason":"Use Rooted Year for its visible benefit"}",
+    ],
+  ],
+  [
+    "injured",
+    [
+      "{"command":{"type":"play","cardId":"ally-0:almanelle-autumn-insight","targetId":"ally-0","autoEndTurn":false},"score":3003,"reason":"Use Autumn Insight for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-0","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}",
+      "{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-1","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}",
+      "{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-2","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}",
+      "{"command":{"type":"play","cardId":"ally-0:almanelle-rooted-year","autoEndTurn":false},"score":106,"reason":"Use Rooted Year for its visible benefit"}",
+    ],
+  ],
+  [
+    "defended",
+    [
+      "{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-0","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}",
+      "{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-1","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}",
+      "{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-2","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}",
+      "{"command":{"type":"play","cardId":"ally-0:almanelle-rooted-year","autoEndTurn":false},"score":106,"reason":"Use Rooted Year for its visible benefit"}",
+    ],
+  ],
+  [
+    "talented",
+    [
+      "{"command":{"type":"play","cardId":"ally-0:almanelle-autumn-insight","targetId":"ally-0","autoEndTurn":false},"score":3003,"reason":"Use Autumn Insight for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-0","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}",
+      "{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-1","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}",
+      "{"command":{"type":"play","cardId":"ally-0:almanelle-spring-current","targetId":"enemy-2","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}",
+      "{"command":{"type":"play","cardId":"ally-0:almanelle-rooted-year","autoEndTurn":false},"score":106,"reason":"Use Rooted Year for its visible benefit"}",
+    ],
+  ],
+]
+`;
+
 exports[`preserves visible rankings and legal choices for bloomquail 1`] = `
 [
   [
@@ -572,6 +615,74 @@ exports[`preserves visible rankings and legal choices for neradora 1`] = `
 ]
 `;
 
+exports[`preserves visible rankings and legal choices for oathara 1`] = `
+[
+  [
+    "ordinary",
+    [
+      "{"command":{"type":"play","cardId":"ally-0:oathara-never-lost","autoEndTurn":false},"score":190,"reason":"Use Never Lost for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:oathara-travelers-ward","autoEndTurn":false},"score":101,"reason":"Use Traveler’s Ward for its visible benefit"}",
+    ],
+  ],
+  [
+    "injured",
+    [
+      "{"command":{"type":"play","cardId":"ally-0:oathara-never-lost","autoEndTurn":false},"score":190,"reason":"Use Never Lost for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:oathara-travelers-ward","autoEndTurn":false},"score":101,"reason":"Use Traveler’s Ward for its visible benefit"}",
+    ],
+  ],
+  [
+    "defended",
+    [
+      "{"command":{"type":"play","cardId":"ally-0:oathara-never-lost","autoEndTurn":false},"score":190,"reason":"Use Never Lost for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:oathara-travelers-ward","autoEndTurn":false},"score":101,"reason":"Use Traveler’s Ward for its visible benefit"}",
+    ],
+  ],
+  [
+    "talented",
+    [
+      "{"command":{"type":"play","cardId":"ally-0:oathara-never-lost","autoEndTurn":false},"score":190,"reason":"Use Never Lost for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:oathara-travelers-ward","autoEndTurn":false},"score":101,"reason":"Use Traveler’s Ward for its visible benefit"}",
+    ],
+  ],
+]
+`;
+
+exports[`preserves visible rankings and legal choices for orifable 1`] = `
+[
+  [
+    "ordinary",
+    [
+      "{"command":{"type":"play","cardId":"ally-0:orifable-attack","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}",
+      "{"command":{"type":"play","cardId":"ally-0:orifable-createFood","autoEndTurn":false},"score":400,"reason":"Use Care Package for its visible benefit"}",
+    ],
+  ],
+  [
+    "injured",
+    [
+      "{"command":{"type":"play","cardId":"ally-0:orifable-attack","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}",
+      "{"command":{"type":"play","cardId":"ally-0:orifable-heal","autoEndTurn":false},"score":3006,"reason":"Use Good Tidings for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:orifable-createFood","autoEndTurn":false},"score":400,"reason":"Use Care Package for its visible benefit"}",
+    ],
+  ],
+  [
+    "defended",
+    [
+      "{"command":{"type":"play","cardId":"ally-0:orifable-attack","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}",
+      "{"command":{"type":"play","cardId":"ally-0:orifable-createFood","autoEndTurn":false},"score":400,"reason":"Use Care Package for its visible benefit"}",
+    ],
+  ],
+  [
+    "talented",
+    [
+      "{"command":{"type":"play","cardId":"ally-0:orifable-heal","autoEndTurn":false},"score":3007,"reason":"Use Good Tidings for its visible benefit"}",
+      "{"command":{"type":"play","cardId":"ally-0:orifable-attack","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}",
+      "{"command":{"type":"play","cardId":"ally-0:orifable-createFood","autoEndTurn":false},"score":400,"reason":"Use Care Package for its visible benefit"}",
+    ],
+  ],
+]
+`;
+
 exports[`preserves visible rankings and legal choices for pollenmoth 1`] = `
 [
   [
@@ -1009,39 +1120,6 @@ exports[`preserves visible rankings and legal choices for wickwaltz 1`] = `
       "{"command":{"type":"play","cardId":"ally-0:wickwaltz-attack","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}",
       "{"command":{"type":"play","cardId":"ally-0:wickwaltz-draw","autoEndTurn":false},"score":202,"reason":"Use Thermal Rise for its visible benefit"}",
       "{"command":{"type":"play","cardId":"ally-0:wickwaltz-guard","autoEndTurn":false},"score":104,"reason":"Use Saffron Screen for its visible benefit"}",
-    ],
-  ],
-]
-`;
-
-exports[`preserves visible rankings and legal choices for oathara 1`] = `
-[
-  [
-    "ordinary",
-    [
-      "{"command":{"type":"play","cardId":"ally-0:oathara-never-lost","autoEndTurn":false},"score":190,"reason":"Use Never Lost for its visible benefit"}",
-      "{"command":{"type":"play","cardId":"ally-0:oathara-travelers-ward","autoEndTurn":false},"score":101,"reason":"Use Traveler’s Ward for its visible benefit"}",
-    ],
-  ],
-  [
-    "injured",
-    [
-      "{"command":{"type":"play","cardId":"ally-0:oathara-never-lost","autoEndTurn":false},"score":190,"reason":"Use Never Lost for its visible benefit"}",
-      "{"command":{"type":"play","cardId":"ally-0:oathara-travelers-ward","autoEndTurn":false},"score":101,"reason":"Use Traveler’s Ward for its visible benefit"}",
-    ],
-  ],
-  [
-    "defended",
-    [
-      "{"command":{"type":"play","cardId":"ally-0:oathara-never-lost","autoEndTurn":false},"score":190,"reason":"Use Never Lost for its visible benefit"}",
-      "{"command":{"type":"play","cardId":"ally-0:oathara-travelers-ward","autoEndTurn":false},"score":101,"reason":"Use Traveler’s Ward for its visible benefit"}",
-    ],
-  ],
-  [
-    "talented",
-    [
-      "{"command":{"type":"play","cardId":"ally-0:oathara-never-lost","autoEndTurn":false},"score":190,"reason":"Use Never Lost for its visible benefit"}",
-      "{"command":{"type":"play","cardId":"ally-0:oathara-travelers-ward","autoEndTurn":false},"score":101,"reason":"Use Traveler’s Ward for its visible benefit"}",
     ],
   ],
 ]

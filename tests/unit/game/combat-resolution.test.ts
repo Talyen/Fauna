@@ -14,7 +14,14 @@ import { executeAbility } from "../../../src/game/combat/abilities";
 import { summonEcho } from "../../../src/game/combat/legendary";
 import { swapFromCard } from "../../../src/game/team";
 import type { GameEvent } from "../../../src/game/types";
-import { freshCombat, startAction } from "../../../src/game/combat/index";
+import {
+  freshCombat,
+  startAction,
+  restoreHealth,
+  grantStatus,
+  removeEffects,
+} from "../../../src/game/combat/index";
+import { observeDecisions } from "../../../src/game/random";
 import { addBackups, policy, requireBattle, teamRun, victoryReady } from "../../support/game";
 
 const cases: { name: string; seed: number; team: SpeciesId[] }[] = [
@@ -23,6 +30,32 @@ const cases: { name: string; seed: number; team: SpeciesId[] }[] = [
   { name: "bounce and healing", seed: 1, team: ["glintstride", "ringpalm", "dawncall"] },
   { name: "repeats and control", seed: 123, team: ["chimecricket", "cadenza", "wickwaltz"] },
 ];
+
+it.each(["heal", "status", "cleanse", "turn"] as const)(
+  "honors preview work cancellation before a unit-first %s operation",
+  (operation) => {
+    const game = teamRun(42, ["mossguard"]);
+    const saved = encodeSave(game);
+    expect(() =>
+      produce(game, (draft) => {
+        observeDecisions(
+          draft,
+          Object.assign(() => 0, {
+            step: () => {
+              throw new Error("preview budget");
+            },
+          }),
+        );
+        const unit = draft.team[0]!;
+        if (operation === "heal") restoreHealth(unit, 1, [], false, draft);
+        else if (operation === "status") grantStatus(unit, "thorns", 1, [], draft);
+        else if (operation === "cleanse") removeEffects(unit, "cleanse", 1, [], draft);
+        else startAction(unit, [], draft);
+      }),
+    ).toThrow("preview budget");
+    expect(encodeSave(game)).toBe(saved);
+  },
+);
 
 it.each(cases)("preserves committed command traces for $name", ({ seed, team }) => {
   let state = produce(teamRun(seed, team), (draft) => {

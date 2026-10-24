@@ -1,7 +1,8 @@
 import { openHome, reloadHome, test } from "./support/session";
 import { expect } from "@playwright/test";
 import { produce } from "immer";
-import { CARDS } from "../../src/game/content";
+import { species } from "../../src/game/content";
+import { creaturePassive } from "../../src/game/progression";
 import { decodeSave, encodeSave } from "../../src/game/save";
 import { accept, merchantDestination } from "../support/game";
 import { expectScrollFree } from "./support/layout-contract";
@@ -29,8 +30,9 @@ test("Recruit details and four destination options fit enlarged text and recruit
   await recruit.hover();
   const tooltip = page.locator(".game-tooltip");
   await expect(tooltip).toBeVisible();
-  for (const card of CARDS.filter((card) => card.species === "cadenza"))
-    await expect(tooltip.getByText(card.name, { exact: true }).first()).toBeVisible();
+  await expect(tooltip.getByText(species("cadenza").name, { exact: true })).toBeVisible();
+  await expect(tooltip.getByText(species("cadenza").trait, { exact: true })).toBeVisible();
+  await expect(tooltip).toContainText(creaturePassive(game, "cadenza").description);
   await captureScreen(page, { path: "reports/recruit-destinations/details-1280.png" });
   await page.keyboard.press("Tab");
   await recruit.focus();

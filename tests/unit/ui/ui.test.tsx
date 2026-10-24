@@ -332,7 +332,8 @@ describe("player interface", () => {
         act(() => reserve.focus());
       }
       const reserveTooltip = (await screen.findByRole("tooltip")).textContent!;
-      expect(reserveTooltip).toContain("2 block");
+      expect(reserveTooltip).not.toMatch(/\d+ block/);
+      expect(document.querySelector('[data-actor-id="reserve-copy"] [aria-label="Block 2"]')).toBeTruthy();
       expect(reserveTooltip).not.toMatch(/\d+\/\d+ health/i);
       expect(session.store.getState().game).toEqual(fallen);
       await session.dispose();
