@@ -23,9 +23,11 @@ This guide owns runtime boundaries, command transactions and persistence. [Journ
 
 `dispatch(state, command)` returns an accepted immutable snapshot with ordered events, or rejects with the original state and RNG. The exhaustive phase table admits commands before command-specific validation; all validation precedes mutation and RNG consumption. An explicit linear-congruential RNG makes equal seeds and accepted command sequences reproducible.
 
+Command admission and save decoding share the supported revision ceiling; exhaustion rejects the command before mutation. Automatic turn skipping pauses while shared Food remains in battle, preserving its use during controlled turns.
+
 The schema is a discriminated lifecycle union. Battle carries active combat; Recruit and Boon phases carry completed reward receipts without combat; destinations and terminal results carry their own payloads. Every non-draft phase requires a journey summary. Local capabilities, device preferences and transient presentation metadata never come from saved progression. Journey transitions install complete payloads inside the command transaction.
 
-Settlement banks retained earnings once, clears combat and retains the completed encounter, outcome and earnings receipt. Pending offers never require defeated enemies or card zones to remain valid. Full-roster Recruit saves `reward.selectedRecruit` and Collection progress before presentation previews an exchange; only Confirm changes the roster. Browsing and previews never publish or save state.
+Settlement banks retained earnings once, clears combat and retains the completed encounter, outcome and earnings receipt. Pending offers never require defeated enemies or card zones to remain valid. Pending Boons must remain distinct and unowned throughout recruitment and Boon choice; invalid offers fall back to an intact save candidate. Full-roster Recruit saves `reward.selectedRecruit` and Collection progress before presentation previews an exchange; only Confirm changes the roster. Browsing and previews never publish or save state.
 
 Auto-end turn records its effective preference in the play command. Spending the last Mana can resolve the enemy turn within that same revision; disabling it leaves a resumable zero-Mana player turn. Victory takes precedence. Card previews use the same effect resolver on detached state without advancing the enemy turn or settling rewards, retaining the final Health forecast even when commitment leaves battle.
 

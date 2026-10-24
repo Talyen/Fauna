@@ -4,6 +4,7 @@ import { MAX_BATTLE_CARDS, MAX_HAND_SIZE } from "./card-zones";
 import { MAX_CREATURE_STARS, KEYWORDS } from "./progression";
 import { SPECIES, BOONS, TALENTS } from "./content";
 import { JOURNEY_LENGTH } from "./encounters";
+import { MAX_REVISION } from "./state-limits";
 const natural = z.number().int().min(0).max(1_000_000);
 const id = z.string().min(1).max(120);
 const speciesId = z.enum(SPECIES.map((entry) => entry.id));
@@ -129,11 +130,7 @@ const shared = z.object({
         .max(MAX_CREATURE_STARS + 1),
     ),
   }),
-  revision: z
-    .number()
-    .int()
-    .nonnegative()
-    .max(Number.MAX_SAFE_INTEGER - 1),
+  revision: z.number().int().nonnegative().max(MAX_REVISION),
   rng: z.number().int().min(0).max(0xffffffff),
   wins: natural,
   selected: z.array(speciesId).max(3),

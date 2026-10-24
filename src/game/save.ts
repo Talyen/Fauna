@@ -209,6 +209,7 @@ function validateRewards(state: GameState) {
     const enemies = encounterSource(state).enemies;
     invalid(
       !unique(reward.boons) ||
+        reward.boons.some((boon) => state.boons.includes(boon)) ||
         (reward.recruits.length > 0 &&
           (reward.recruits.length !== enemies.length ||
             reward.recruits.some((kind, index) => kind !== enemies[index]?.species))),
@@ -227,7 +228,6 @@ function validateRewards(state: GameState) {
             state.discovery.recruited[selected] === undefined,
         );
     }
-    if (state.phase === "boon") invalid(reward.boons.some((r) => state.boons.includes(r)));
     if (reward.outcome === "defeat") invalid([...state.team, ...state.reserves].some((c) => c.health > 0));
   }
 }

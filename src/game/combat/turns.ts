@@ -212,6 +212,8 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
     intents(draft);
     if (
       pendingReplacement(draft) ||
+      // Food may be drawn next and stays playable even when every creature must skip
+      draft.cards.some((card) => card.ownerId === null) ||
       living(draft).some((c) => !controlled(c)) ||
       draft.reserves.some((c) => c.health > 0 && !controlled(c))
     )
