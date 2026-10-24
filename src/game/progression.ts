@@ -1,4 +1,12 @@
-import { TALENTS, type TalentId, type SpeciesId, definition, species, SPECIES } from "./content";
+import {
+  TALENTS,
+  type TalentId,
+  type SpeciesId,
+  definition,
+  species,
+  SPECIES,
+  FIRST_RUN_STARTERS,
+} from "./content";
 import { PROGRESSION_KEYWORDS, definitionKeywords, type ProgressionKeyword } from "./keywords";
 export { progressionLabel as keywordLabel } from "./keywords";
 import type { Card, GameState } from "./types";
@@ -22,6 +30,25 @@ const talentsById = new Map<string, (typeof TALENTS)[number]>(TALENTS.map((talen
 const talentsByKeyword = new Map(
   KEYWORDS.map((keyword) => [keyword, TALENTS.filter((talent) => talent.keyword === keyword)]),
 );
+function hasTalentPrerequisites(state: Pick<GameState, "talents">, talent: (typeof TALENTS)[number]) {
+  return talentsByKeyword
+    .get(talent.keyword)!
+    .every((earlier) => earlier.row >= talent.row || state.talents.includes(earlier.id));
+}
+
+/** Validate the complete selection, including purchases restored from a save. */
+export function validTalentSelection(state: Pick<GameState, "talents" | "keywordXP">): boolean {
+  if (new Set(state.talents).size !== state.talents.length) return false;
+  const spent = new Map<Keyword, number>();
+  for (const id of state.talents) {
+    const talent = talentsById.get(id);
+    if (!talent || !hasTalentPrerequisites(state, talent)) return false;
+    const points = (spent.get(talent.keyword) ?? 0) + 1;
+    if (points > talentPoints(state.keywordXP[talent.keyword] ?? 0)) return false;
+    spent.set(talent.keyword, points);
+  }
+  return true;
+}
 export function cardKeywords(card: Pick<Card, "definitionId">): Keyword[] {
   return definitionKeywords(definition(card.definitionId));
 }
@@ -59,8 +86,17 @@ export function canBuyTalent(state: Pick<GameState, "talents" | "keywordXP">, id
     !!talent &&
     !state.talents.includes(id) &&
     availablePoints(state, talent.keyword) > 0 &&
-    talentsByKeyword.get(talent.keyword)!.every((t) => t.row >= talent.row || state.talents.includes(t.id))
+    hasTalentPrerequisites(state, talent)
   );
+}
+
+export const STARTER_OFFER_COUNT = 3;
+export function starterSpecies(state: Pick<GameState, "discovery">): readonly SpeciesId[] {
+  const collected = collectedSpecies(state);
+  return collected.length ? collected : FIRST_RUN_STARTERS;
+}
+export function starterOfferPool(state: Pick<GameState, "discovery" | "selected">): SpeciesId[] {
+  return starterSpecies(state).filter((kind) => !state.selected.length || !species(kind).legendary);
 }
 
 export function starterCount(state: Pick<GameState, "discovery"> & Partial<Pick<GameState, "selected">>) {

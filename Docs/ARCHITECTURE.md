@@ -93,6 +93,8 @@ The packaged renderer uses `fauna://app/` confined to `dist/`, rejecting foreign
 
 Preserve independently authored species, card and talent order: seeded selection consumes them. Stable definition IDs differ from journey creature IDs and card-instance slot IDs. Duplicate species remain separate individuals. Formation changes must preserve the distinct [replacement and swap rules](EXPEDITION_DESIGN.md#roster-and-battles), including Legendary kit sizes and [generated copies](content/creatures/rookhaven.md).
 
+[Progression](../src/game/progression.ts) owns starter eligibility and offer count for both journey generation and save validation. It also owns Talent selection validation and the prerequisites shared by purchases and saves; decoding does not reimplement category budgets or earlier-row requirements.
+
 ### Presentation owners
 
 The shell [navigation reducer](../src/ui/shell/navigation.ts) owns page and overlay transitions and supplies one active-surface priority for rendering, input, effects and Auto-play. Its [focus adapter](../src/ui/shell/focus.ts) owns DOM references and semantic menu-action restoration.

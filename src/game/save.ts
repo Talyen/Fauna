@@ -5,9 +5,17 @@ import { battlefield } from "./battlefield";
 import { needsCampfire, merchantPriceRange } from "./destinations";
 import { freeze } from "immer";
 import { MAX_HAND_SIZE } from "./card-zones";
-import { starterCount, collectedSpecies, KEYWORDS, talentPoints } from "./progression";
+import {
+  starterCount,
+  starterSpecies,
+  starterOfferPool,
+  STARTER_OFFER_COUNT,
+  collectedSpecies,
+  KEYWORDS,
+  validTalentSelection,
+} from "./progression";
 import { gameStateSchema } from "./state-schema";
-import { speciesCards, SPECIES, FIRST_RUN_STARTERS, species, TALENTS } from "./content";
+import { speciesCards, SPECIES, species } from "./content";
 import { encounterSource, finalEncounter, bossEncounter } from "./encounters";
 import type { GameState } from "./types";
 const unique = (values: unknown[]) => new Set(values).size === values.length;
@@ -24,13 +32,13 @@ export function decodeSave(raw: string): GameState {
     ),
   );
   const collected = collectedSpecies(s);
-  const starterPool = collected.length ? collected : FIRST_RUN_STARTERS;
-  const offerPool = starterPool.filter((kind) => !s.selected.length || !species(kind).legendary);
+  const starterPool = starterSpecies(s);
+  const offerPool = starterOfferPool(s);
   const drafting = s.phase === "draft" && s.selected.length < starterCount(s);
   invalid(
-    new Set(s.starterOffers).size !== (drafting ? Math.min(3, offerPool.length) : 0) ||
+    new Set(s.starterOffers).size !== (drafting ? Math.min(STARTER_OFFER_COUNT, offerPool.length) : 0) ||
       s.starterOffers.some((kind) => !offerPool.includes(kind)) ||
-      s.starterOffers.length !== (drafting ? 3 : 0),
+      s.starterOffers.length !== (drafting ? STARTER_OFFER_COUNT : 0),
   );
   if (s.journey) {
     const summary = s.journey;
@@ -80,7 +88,6 @@ export function decodeSave(raw: string): GameState {
   invalid(
     !unique([...s.team, ...s.reserves].map((c) => c.id)) ||
       !unique(s.cards.map((c) => c.id)) ||
-      !unique(s.talents) ||
       !unique(s.boons),
   );
   invalid(s.team.length + s.reserves.length > 5);
@@ -121,12 +128,7 @@ export function decodeSave(raw: string): GameState {
       );
     }
   }
-  for (const keyword of KEYWORDS) {
-    const bought = TALENTS.filter((t) => t.keyword === keyword && s.talents.includes(t.id));
-    invalid(bought.length > talentPoints(s.keywordXP[keyword] ?? 0));
-    for (const talent of bought)
-      invalid(TALENTS.some((t) => t.keyword === keyword && t.row < talent.row && !s.talents.includes(t.id)));
-  }
+  invalid(!validTalentSelection(s));
   if (s.phase === "draft") invalid(s.team.length !== 0 || s.cards.length !== 0 || s.reserves.length !== 0);
   else invalid(s.team.length < 1 || permanentCards.length !== expectedPermanentCards);
   invalid(
