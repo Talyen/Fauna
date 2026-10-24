@@ -2,6 +2,8 @@
 
 [UI contracts](UI.md) own shared appearance, accessibility and review. [Menu design](MENU_DESIGN.md) owns navigation; [battle](ui/battle.md) and [screen specifications](ui/screens.md) own compositions. This map locates their implementation.
 
+Shared components follow the [copy and layout rule](UI.md#copy-and-layout): resolve unclear composition through layout rather than taglines, helper text or secondary labels.
+
 ## Canonical owners
 
 | Concern                                                          | Owner                                                                                                            |

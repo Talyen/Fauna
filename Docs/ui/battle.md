@@ -4,6 +4,8 @@ Read the relevant section for the changed flow. [Shared UI rules](../UI.md) own 
 
 ## Battle composition
 
+Apply the [copy and layout rule](../UI.md#copy-and-layout): communicate combat choices through grouping and action placement without taglines, helper text or secondary labels.
+
 - Horizontally centered enemy row above horizontally centered active creatures, with a compact overlapping fan at the bottom. Hand cards match creature artwork-frame height even while rotated, raised, or selected. Uniform compensation preserves each original aspect ratio. Keep the chosen overlap.
 - Creature-first scale and spacing follow the reviewed A composition. Selection stays raised in its hand slot. Hover/focus lifts a card; selected cards lift further.
 - Thin 4px health bars sit inside battlefield frames, aligned with the bottom border. Status icons sit below each frame, with horizontal pagination for more than three effects. Numeric health totals never appear in hover/focus tooltips, including pinned inspection. Block retains its external icon and count. Guaranteed forecasts show health-bar changes and exact effect amounts without visible HP totals. Chance forecasts retain the current Health bar or Block count whenever alternatives disagree, showing short possible outcomes or Dodge/Critical notices instead. Possible knockout is distinct from guaranteed knockout. Hidden draws or exhausted projection budgets show Outcome varies, while the selected action retains its authored rules. Previews, cancellation and target changes never consume live RNG or save progression.

@@ -4,6 +4,8 @@
 
 ## Screen headings
 
+Apply the [copy and layout rule](../UI.md#copy-and-layout) throughout these screens; headings and action placement must make the flow clear without taglines, helper text or secondary labels.
+
 Use a balanced header frame up to 640px wide: Back leads, Open menu trails, and the title centers independently. Journey screens add Deck beside Back, with a 12px gap and equal side reservations. Deck follows [menu inspection rules](../MENU_DESIGN.md#back-and-focus-return), previewing chosen starters during drafting.
 
 Header and battle corner controls use 32px visible surfaces and 16px icons within 44px hit areas. Use 24px section gaps. Main menu keeps its Fauna title; battle has no main heading. Team confirmation omits Back.

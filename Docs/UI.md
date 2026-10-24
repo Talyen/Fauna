@@ -23,6 +23,12 @@ Apply these rules to every UI change, then read only the affected sections below
 
 These contracts remain applicable when a shared change affects several flows; selective reading does not exempt affected behavior.
 
+## Copy and layout
+
+Avoid taglines, avoid helper text, avoid secondary labels - if a screen needs them to make sense, fix the layout instead.
+
+Make the player's decision clear through composition, grouping, reading order and action placement. Keep gameplay rules, availability, outcomes and accessible names in their intended disclosure layers.
+
 ## Shared components and enforcement
 
 Use source-owned shadcn/ui for standard controls: Button, Dialog, Popover, Tooltip, Tabs, Switch, RadioGroup, Slider and Progress. Preserve their native keyboard, focus-trap and focus-return behavior; W/A/S/D and gamepad input adapt to it.
@@ -193,7 +199,7 @@ This is the single task procedure for UI design, implementation and critique. Re
 
 1. Identify the player's decision and the information available at rest versus through inspection. Preserve the requested disclosure layout and action roles; equally valid choices may have equal emphasis
 2. For layout or artwork work, inspect the current rendered flow and relevant [reference images](../design/visual-quality/README.md) before editing. References carry their recorded acceptance scope; existing screens and agent candidates do not imply user approval
-3. Compose around artwork, reading order and a bounded content group using the [shared recipes](#shared-layout-recipes). Remove redundant copy while retaining rules, availability, outcomes and accessible names
+3. Compose around artwork, reading order and a bounded content group using the [shared recipes](#shared-layout-recipes). Apply the [copy and layout rule](#copy-and-layout); fix unclear layout and remove redundant copy while retaining rules, availability, outcomes and accessible names
 4. Capture and inspect the evidence for the applicable row below. Exercise changed interactions separately from capture. Inspect the full frame independently of the implementation rationale: composition, copy, artwork, contrast, fit, focus and committed outcomes. Correct observed defects and inspect fresh captures
 5. Record evidence paths, conditions, exercised interactions and relevant limitations in the handoff or an existing evidence record. If artistic direction remains unresolved, present comparable A/B options without persuasive labels. Only the user's explicit choice establishes artistic approval; record its date and scope
 6. Integrate visual or interaction changes only after current rendered evidence is inspected. If evidence is unavailable, commit the task on its branch and report the blocker

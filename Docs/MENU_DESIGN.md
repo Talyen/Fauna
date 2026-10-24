@@ -2,6 +2,8 @@
 
 This guide owns routes, actions and focus return. [Screen specifications](ui/screens.md) own composition; [UI contracts](UI.md) own shared interaction behavior. Navigation never changes game revision or undoes committed gameplay.
 
+Apply the [copy and layout rule](UI.md#copy-and-layout) to menus: make choices clear through layout and action placement without taglines, helper text or secondary labels.
+
 ## Menu actions
 
 Launch opens Main menu, selecting Continue when a journey exists; never resume automatically. Offer Play only without a journey, Continue while one exists.

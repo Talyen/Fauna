@@ -44,6 +44,7 @@ Development saves are disposable. There are no released player saves to preserve
 - Effect descriptions never contain periods; use concise clauses separated by semicolons when needed. This applies to abilities, passives, talents, Boons and keyword/glossary rules.
 - Keep displayed rules consistent with effects, preserve accessible names and make outcomes clear without sound. Reuse the [recovery owners](Docs/UI.md#recovery-owners) for failure handling; screens must not invent retries or save recovery.
 - Use the [shared layout recipes](Docs/UI.md#shared-layout-recipes), tokens, ArtCard and registered shadcn controls. The [UI contract](Docs/UI.md) owns viewport fit, artwork, typography, spacing and interaction details; change a shared owner when a screen needs a reusable capability.
+- Avoid taglines, avoid helper text, avoid secondary labels - if a screen needs them to make sense, fix the layout instead. Follow the [UI copy rule](Docs/UI.md#copy-and-layout).
 
 ## Review and verification
 
