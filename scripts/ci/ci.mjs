@@ -13,6 +13,7 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { validateInteractionReport } from "../lib/interaction-replay.mjs";
 import { identity as interactionIdentity } from "../lib/tool-runtime.mjs";
+import { LINEUP_SHARDS } from "./unit-shards.mjs";
 
 const read = (file) => JSON.parse(readFileSync(file, "utf8"));
 const write = (file, value) => {
@@ -176,11 +177,11 @@ export function validateBrowserCoverage(discovery, reports) {
 }
 export function validateJobs(needs, attempt) {
   if (!attempt) throw new Error("Missing workflow attempt");
-  const names = ["prepare", "static", "unit", "build", "browser", "interactions", "windows"];
+  const names = ["prepare", "static", "unit", "lineups", "build", "browser", "interactions", "windows"];
   for (const name of names) {
     if (needs[name]?.result !== "success")
       throw new Error(`Required job ${name}: ${needs[name]?.result ?? "missing"}`);
-    if (name !== "browser" && !validAttempt(needs[name].outputs?.attempt, attempt))
+    if (!["browser", "lineups"].includes(name) && !validAttempt(needs[name].outputs?.attempt, attempt))
       throw new Error(`Required job ${name} has an invalid workflow attempt`);
   }
 }
@@ -202,6 +203,61 @@ export function validateUnit(report) {
   )
     throw new Error("Incomplete or failed unit results");
 }
+
+function unitCase(file, name) {
+  const normalized = file?.replaceAll("\\", "/");
+  const relative = normalized?.slice(normalized.lastIndexOf("/tests/") + 1);
+  if (!relative?.startsWith("tests/") || typeof name !== "string" || !name)
+    throw new Error("Invalid unit case identity");
+  return JSON.stringify([relative, name]);
+}
+
+/** Parameterized tests may share titles; require their exact discovered multiplicity. */
+export function validateUnitCoverage(discovery, reports) {
+  if (!Array.isArray(discovery) || !discovery.length) throw new Error("Empty unit discovery");
+  const expected = new Map();
+  for (const row of discovery) {
+    const id = unitCase(row.file, row.name);
+    expected.set(id, (expected.get(id) ?? 0) + 1);
+  }
+  let observed = 0;
+  for (const report of reports) {
+    validateUnit(report);
+    for (const suite of report.testResults)
+      for (const test of suite.assertionResults) {
+        const id = unitCase(suite.name, [...(test.ancestorTitles ?? []), test.title].join(" > "));
+        const remaining = expected.get(id) ?? 0;
+        if (!remaining) throw new Error(`Unexpected or duplicate unit case: ${id}`);
+        expected.set(id, remaining - 1);
+        observed++;
+      }
+  }
+  if ([...expected.values()].some((remaining) => remaining !== 0))
+    throw new Error(`Incomplete unit coverage: ${observed}/${discovery.length}`);
+  return observed;
+}
+
+export function mergeUnitReports(discovery, reports) {
+  validateUnitCoverage(discovery, reports);
+  const merged = {
+    ...reports[0],
+    startTime: Math.min(...reports.map((report) => report.startTime)),
+    testResults: reports.flatMap((report) => report.testResults),
+  };
+  for (const key of [
+    "numTotalTestSuites",
+    "numPassedTestSuites",
+    "numFailedTestSuites",
+    "numPendingTestSuites",
+    "numTotalTests",
+    "numPassedTests",
+    "numFailedTests",
+    "numPendingTests",
+    "numTodoTests",
+  ])
+    merged[key] = reports.reduce((sum, report) => sum + (report[key] ?? 0), 0);
+  return merged;
+}
 export function validateInteraction(report, expectedIdentity) {
   validateInteractionReport(report);
   if (
@@ -220,7 +276,7 @@ async function main(command) {
     const event = read(process.env.GITHUB_EVENT_PATH);
     const count = Number(event.inputs?.shards ?? 8);
     if (![1, 4, 8].includes(count)) throw new Error("Expected 1, 4 or 8 shards");
-    const runtime = event.inputs?.browser_runtime ?? "install";
+    const runtime = event.inputs?.browser_runtime ?? "container";
     if (!["install", "container"].includes(runtime)) throw new Error("Invalid browser runtime");
     const version = read("package-lock.json").packages["node_modules/@playwright/test"].version;
     const image = runtime === "container" ? `mcr.microsoft.com/playwright:v${version}-noble` : "";
@@ -268,6 +324,11 @@ async function main(command) {
       throw new Error("Downloaded build differs from this run's build");
   } else if (command === "unit") {
     write("reports/ci/unit.json", identity());
+  } else if (command === "lineup") {
+    const shard = Number(process.env.FAUNA_LINEUP_SHARD);
+    if (!Number.isInteger(shard) || shard < 1 || shard > LINEUP_SHARDS)
+      throw new Error("Invalid lineup shard");
+    write("reports/ci/lineup.json", { ...identity(), shard, total: LINEUP_SHARDS });
   } else if (command === "interaction") {
     const manifest = read("reports/ci/build.json");
     assertIdentity(manifest);
@@ -322,7 +383,24 @@ async function main(command) {
     assertIdentity(interaction, needs.interactions.outputs.attempt);
     validateBuildEvidence(interaction, manifest);
     const reports = [];
-    const evidence = { ...identity(), build: manifest, unit, interaction, shards: [] };
+    const evidence = { ...identity(), build: manifest, unit, interaction, lineups: [], shards: [] };
+    const unitReports = [read("reports/vitest.json")];
+    for (let shard = 1; shard <= LINEUP_SHARDS; shard++) {
+      const root = `reports/lineups/lineup-results-${shard}`;
+      const metadata = read(`${root}/ci/lineup.json`);
+      assertIdentity(metadata);
+      if (metadata.shard !== shard || metadata.total !== LINEUP_SHARDS)
+        throw new Error("Wrong lineup shard identity");
+      evidence.lineups.push(metadata);
+      unitReports.push(read(`${root}/vitest.json`));
+    }
+    const mergedUnit = mergeUnitReports(read("reports/ci/unit-discovery.json"), unitReports);
+    write("reports/vitest-merged.json", mergedUnit);
+    const unitShards = unitReports.map((report, index) => ({
+      group: index === 0 ? "contracts" : `lineups-${index}`,
+      duration: Math.max(...report.testResults.map((suite) => suite.endTime)) - report.startTime,
+    }));
+    write("reports/ci/unit-timings.json", { ...identity(), shards: unitShards });
     for (let shard = 1; shard <= total; shard++) {
       const root = `reports/shards/browser-shard-${shard}`;
       const metadata = read(`${root}/reports/ci/shard.json`);
@@ -335,7 +413,7 @@ async function main(command) {
     const discovery = read("reports/ci/discovery.json");
     const count = validateBrowserCoverage(discovery, reports);
     validateBrowserCoverage(discovery, [read("reports/playwright.json")]);
-    validateUnit(read("reports/vitest.json"));
+    validateUnit(mergedUnit);
     validateInteraction(read("reports/interactions/ci/report.json"), await interactionIdentity());
     write("reports/ci/evidence.json", evidence);
     write("reports/ci/browser-durations.json", browserDurations(read("reports/playwright.json")));
@@ -355,7 +433,10 @@ async function main(command) {
     });
     appendFileSync(
       process.env.GITHUB_STEP_SUMMARY,
-      `\nAll required jobs succeeded; ${count} browser cases accounted for across ${total} shards\n`,
+      `\nAll required jobs succeeded; ${count} browser cases accounted for across ${total} shards\n` +
+        `\nUnit coverage: ${mergedUnit.numTotalTests} cases across contracts and ${LINEUP_SHARDS} lineup shards\n` +
+        unitShards.map((shard) => `- ${shard.group}: ${(shard.duration / 1000).toFixed(1)}s`).join("\n") +
+        `\nLineup spread: ${((Math.max(...unitShards.slice(1).map((shard) => shard.duration)) - Math.min(...unitShards.slice(1).map((shard) => shard.duration))) / 1000).toFixed(1)}s\n`,
     );
   } else throw new Error(`Unknown CI command: ${command}`);
 }

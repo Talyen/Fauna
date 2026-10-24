@@ -1,13 +1,35 @@
+import { z } from "zod";
 import type { DiagnosticPort } from "../platform/ports";
-export type DiagnosticSource =
-  "startup" | "render" | "save-read" | "save-write" | "validation" | "audio" | "cloud" | "global";
+const diagnosticSource = z.enum([
+  "startup",
+  "render",
+  "save-read",
+  "save-write",
+  "validation",
+  "audio",
+  "cloud",
+  "global",
+]);
+export type DiagnosticSource = z.infer<typeof diagnosticSource>;
 export interface Diagnostic {
-  source: DiagnosticSource;
-  message: string;
-  count: number;
-  revision?: number;
-  phase?: string;
+  readonly source: DiagnosticSource;
+  readonly message: string;
+  readonly count: number;
+  readonly revision?: number;
+  readonly phase?: string;
 }
+const MAX_ENTRIES = 50;
+const MAX_COUNT = 1_000_000;
+const MAX_STORED_LENGTH = 100_000;
+const MAX_MESSAGE_LENGTH = 1200;
+const MAX_PHASE_LENGTH = 40;
+const storedDiagnostic = z.object({
+  source: diagnosticSource,
+  message: z.string(),
+  count: z.number().int().positive().catch(1),
+  revision: z.number().int().optional().catch(undefined),
+  phase: z.string().optional().catch(undefined),
+});
 const sanitize = (value: string) =>
   value
     .replace(/(?:\/[\w .-]+){2,}\/|[A-Z]:\\(?:[^\\\n]+\\)+/g, "[path]/")
@@ -15,7 +37,28 @@ const sanitize = (value: string) =>
       /(?:token|password|secret|authorization)["']?\s*[:=]\s*(?:(?:Bearer|Basic)\s+)?(?:"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\S+)/gi,
       "[redacted]",
     )
-    .slice(0, 1200);
+    .slice(0, MAX_MESSAGE_LENGTH);
+
+function readEntries(raw: string | null | undefined): Diagnostic[] {
+  if (!raw || raw.length >= MAX_STORED_LENGTH) return [];
+  const parsed: unknown = JSON.parse(raw);
+  if (!Array.isArray(parsed)) return [];
+  return parsed.slice(-MAX_ENTRIES).flatMap((entry: unknown) => {
+    const result = storedDiagnostic.safeParse(entry);
+    if (!result.success) return [];
+    const { source, message, count, revision, phase } = result.data;
+    return [
+      {
+        source,
+        message: sanitize(message),
+        count: Math.min(count, MAX_COUNT),
+        ...(revision !== undefined && phase !== undefined
+          ? { revision, phase: phase.slice(0, MAX_PHASE_LENGTH) }
+          : {}),
+      },
+    ];
+  });
+}
 
 function errorMessage(error: unknown): string {
   try {
@@ -34,41 +77,7 @@ export function createDiagnostics(port?: DiagnosticPort) {
     writing = false;
   const listeners = new Set<() => void>();
   try {
-    const raw = port?.read();
-    if (raw && raw.length < 100_000) {
-      const parsed: unknown = JSON.parse(raw);
-      if (Array.isArray(parsed))
-        entries = retain(
-          parsed.slice(-50).flatMap((entry) => {
-            if (
-              !entry ||
-              typeof entry.message !== "string" ||
-              ![
-                "startup",
-                "render",
-                "save-read",
-                "save-write",
-                "validation",
-                "audio",
-                "cloud",
-                "global",
-              ].includes(entry.source)
-            )
-              return [];
-            return [
-              {
-                source: entry.source,
-                message: sanitize(entry.message),
-                count:
-                  Number.isSafeInteger(entry.count) && entry.count > 0 ? Math.min(entry.count, 1_000_000) : 1,
-                ...(Number.isSafeInteger(entry.revision) && typeof entry.phase === "string"
-                  ? { revision: entry.revision, phase: entry.phase.slice(0, 40) }
-                  : {}),
-              },
-            ];
-          }),
-        );
-    }
+    entries = retain(readEntries(port?.read()));
   } catch {
     /* Diagnostics remain usable when optional persistence fails. */
   }
@@ -96,10 +105,12 @@ export function createDiagnostics(port?: DiagnosticPort) {
             {
               source,
               message,
-              count: Math.min((match?.count ?? 0) + 1, 1_000_000),
-              ...(context ? { revision: context.revision, phase: context.phase } : {}),
+              count: Math.min((match?.count ?? 0) + 1, MAX_COUNT),
+              ...(context
+                ? { revision: context.revision, phase: context.phase.slice(0, MAX_PHASE_LENGTH) }
+                : {}),
             },
-          ].slice(-50),
+          ].slice(-MAX_ENTRIES),
         );
         try {
           port?.write(JSON.stringify(entries));

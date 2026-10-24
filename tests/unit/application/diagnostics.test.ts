@@ -1,6 +1,62 @@
 import { expect, it, vi } from "vitest";
 import { createDiagnostics } from "../../../src/application/diagnostics";
 
+it("recovers valid diagnostic entries without trusting malformed fields or retaining extra data", () => {
+  const diagnostics = createDiagnostics({
+    read: () =>
+      JSON.stringify([
+        null,
+        true,
+        { source: "unknown", message: "ignore", count: 1 },
+        { source: "global", message: {}, count: 1 },
+        {
+          source: "cloud",
+          message: "token=private-credential",
+          count: 2_000_000,
+          revision: 12,
+          phase: "battle".repeat(10),
+          payload: "unvalidated data",
+        },
+        { source: "save-read", message: "retry", count: -1, revision: "12", phase: "battle" },
+        { source: "audio", message: "unavailable", count: 1.5, revision: 12, phase: null },
+      ]),
+    write: vi.fn(),
+  });
+
+  expect(diagnostics.snapshot()).toEqual([
+    {
+      source: "cloud",
+      message: "[redacted]",
+      count: 1_000_000,
+      revision: 12,
+      phase: "battle".repeat(10).slice(0, 40),
+    },
+    { source: "save-read", message: "retry", count: 1 },
+    { source: "audio", message: "unavailable", count: 1 },
+  ]);
+});
+
+it("keeps diagnostic history and live context within the same bounds after reloading", () => {
+  let stored = JSON.stringify(
+    Array.from({ length: 55 }, (_, index) => ({ source: "global", message: `failure ${index}`, count: 1 })),
+  );
+  const port = {
+    read: () => stored,
+    write: (data: string) => {
+      stored = data;
+    },
+  };
+  const diagnostics = createDiagnostics(port);
+  expect(diagnostics.snapshot()).toHaveLength(50);
+  expect(diagnostics.snapshot()[0]!.message).toBe("failure 5");
+
+  diagnostics.record("save-write", "disk full", { revision: 12, phase: "battle".repeat(10) });
+
+  expect(diagnostics.snapshot()).toHaveLength(50);
+  expect(diagnostics.snapshot().at(-1)?.phase).toHaveLength(40);
+  expect(createDiagnostics(port).snapshot()).toEqual(diagnostics.snapshot());
+});
+
 it.each([
   "Authorization: Bearer private-credential",
   'request failed: {"token":"private-credential"}',

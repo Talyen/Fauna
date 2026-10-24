@@ -1,9 +1,6 @@
 import { afterEach, expect, it, vi } from "vitest";
 import { createAudioRuntime, type MediaVoice } from "../../../src/ui/audio/audio-runtime";
-import {
-  defaultAudioPreferences,
-  normalizeAudioPreferences,
-} from "../../../src/ui/settings/audio-preferences";
+import { defaultAudioPreferences, normalizeAudioPreferences } from "../../../src/ui/settings/preferences";
 
 function fixture(quiet = false, beforeCreate = (_url: string) => {}) {
   const media: (MediaVoice & { url: string })[] = [];

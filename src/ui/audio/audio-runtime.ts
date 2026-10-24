@@ -3,7 +3,7 @@ import {
   defaultAudioPreferences,
   normalizeAudioPreferences,
   type AudioPreferences,
-} from "../settings/audio-preferences";
+} from "../settings/preferences";
 export type SoundCue =
   | "activate"
   | "physical"

@@ -1,7 +1,7 @@
 import { bossEncounter } from "../../game/encounters";
 import { useCallback, useEffect, useRef } from "react";
 import type { Session } from "../../application/session";
-import type { AudioPreferences } from "../settings/audio-preferences";
+import type { AudioPreferences } from "../settings/preferences";
 import { createAudioRuntime, type MusicCue, type SoundCue } from "./audio-runtime";
 export function useGameAudio(session: Session, preferences: AudioPreferences, home: boolean) {
   const owner = useRef<ReturnType<typeof createAudioRuntime> | null>(null);

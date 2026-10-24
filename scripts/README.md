@@ -26,7 +26,7 @@ Implementation folders follow workflows: `agent/`, `assets/`, `balance/`, `check
 | `npm run test:desktop`                                                           | [smoke-desktop.mjs](release/smoke-desktop.mjs)                                                                                                                                                                         |
 | Placeholder authoring                                                            | [create-location-placeholders.mjs](assets/create-location-placeholders.mjs); [artwork policy](../Docs/CONTENT.md)                                                                                                      |
 
-[CI](../Docs/CI.md) owns scheduling, completeness, reruns and artifacts. Its implementations are [ci.mjs](ci/ci.mjs), the [workflow](../.github/workflows/ci.yml), [duration estimates](ci/browser-durations.json) and [timing reader](ci/ci-timings.mjs).
+[CI](../Docs/CI.md) owns scheduling, completeness, reruns and artifacts. Its implementations are [ci.mjs](ci/ci.mjs), the [lineup partition](ci/unit-shards.mjs), the [workflow](../.github/workflows/ci.yml), [duration estimates](ci/browser-durations.json) and [timing reader](ci/ci-timings.mjs).
 
 Additional opt-in tools:
 

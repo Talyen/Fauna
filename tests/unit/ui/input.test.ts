@@ -258,7 +258,7 @@ it("checks browser focus even if a blur event was missed", () => {
 
 it("moves through settings rows without skipping the offset Sound switch", () => {
   const root = document.createElement("div");
-  root.className = "settings-controls";
+  root.dataset.navLayout = "rows";
   root.innerHTML = `<section data-nav-row><button id="diagnostic">Diagnostics</button></section>
     <label data-nav-row><button id="sound" role="switch">Sound</button></label>
     <div data-nav-row><button id="less">Decrease</button><button id="more">Increase</button></div>`;
@@ -291,7 +291,7 @@ it("moves through settings rows without skipping the offset Sound switch", () =>
 
 it("moves vertically from switches through slider rows without changing their values", () => {
   const root = document.createElement("div");
-  root.className = "settings-controls";
+  root.dataset.navLayout = "rows";
   root.innerHTML = `<div data-nav-row><button id="sound" role="switch">Sound</button></div>
     <div data-nav-row><span id="master" role="slider" tabindex="0" aria-orientation="horizontal"></span></div>
     <div data-nav-row><span id="music" role="slider" tabindex="0" aria-orientation="horizontal"></span></div>`;
@@ -318,7 +318,7 @@ it("moves vertically from switches through slider rows without changing their va
 
 it("keeps inspection actions reachable across a long passive list", () => {
   const root = document.createElement("div");
-  root.className = "inspection";
+  root.dataset.navLayout = "rows";
   root.setAttribute("role", "dialog");
   root.dataset.state = "open";
   root.innerHTML = `<header data-nav-row><button id="back">Back</button></header>
@@ -352,7 +352,7 @@ it("keeps inspection actions reachable across a long passive list", () => {
 
 it("skips mounted inactive settings panels during vertical navigation", () => {
   const root = document.createElement("div");
-  root.className = "settings-controls";
+  root.dataset.navLayout = "rows";
   root.innerHTML = `<div data-nav-row><button id="category">Sound category</button></div>
     <section inert aria-hidden="true"><div data-nav-row><button id="inactive">Text size</button></div></section>
     <div data-nav-row><button id="active">Sound</button></div>`;

@@ -1,6 +1,6 @@
 import { drawableOwnerIds } from "./card-actors";
 import { definition, species } from "./content";
-import type { GameEvent, GameState } from "./types";
+import type { BattleState, GameEvent, GameState } from "./types";
 import { chance as succeeds } from "./chance";
 import { shuffle } from "./random";
 import { cardKeywords, creaturePassive } from "./progression";
@@ -8,6 +8,15 @@ import { cardKeywords, creaturePassive } from "./progression";
 export const MAX_HAND_SIZE = 6;
 // Bound generated cards and their overflow within the supported save size.
 export const MAX_BATTLE_CARDS = 256;
+
+/** Preserve pile order while retiring or relocating slots across the whole battle. */
+export function filterCardZones(battle: BattleState["battle"], keep: (id: string) => boolean) {
+  for (const zone of ["draw", "hand", "buffer", "discard"] as const) battle[zone] = battle[zone].filter(keep);
+}
+
+function queueCard(battle: BattleState["battle"], id: string) {
+  (battle.hand.length < MAX_HAND_SIZE ? battle.hand : battle.buffer).push(id);
+}
 
 export function recycleDiscard(
   state: GameState,
@@ -17,12 +26,11 @@ export function recycleDiscard(
 }
 export function receiveCard(state: GameState, id: string) {
   fillHand(state);
-  const battle = state.battle!;
-  (battle.hand.length < MAX_HAND_SIZE ? battle.hand : battle.buffer).push(id);
+  queueCard(state.battle!, id);
 }
 function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
   const battle = state.battle!;
-  (battle.hand.length < MAX_HAND_SIZE ? battle.hand : battle.buffer).push(id);
+  queueCard(battle, id);
   let original: GameState["cards"][number] | undefined;
   // Copy insertion and buffer promotion are not draws and cannot recursively copy.
   for (const reader of state.team) {
@@ -40,7 +48,7 @@ function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
     original ??= state.cards.find((entry) => entry.id === id)!;
     const copy = { ...original, id: `copy-${battle.copySerial++}`, temporary: true as const };
     state.cards.push(copy);
-    (battle.hand.length < MAX_HAND_SIZE ? battle.hand : battle.buffer).push(copy.id);
+    queueCard(battle, copy.id);
     events.push({
       kind: "action",
       actionType: "support",
@@ -127,13 +135,15 @@ export function drawKeyword(
   const battle = state.battle;
   if (!battle) return;
   fillHand(state);
-  const eligible = (id: string) => {
-    const card = state.cards.find((c) => c.id === id)!;
-    return (
-      (card.ownerId === null || drawableOwnerIds(state).has(card.ownerId)) &&
-      cardKeywords(card).includes(keyword)
-    );
-  };
+  const owners = drawableOwnerIds(state);
+  const eligibleCards = new Set(
+    state.cards
+      .filter(
+        (card) => (card.ownerId === null || owners.has(card.ownerId)) && cardKeywords(card).includes(keyword),
+      )
+      .map((card) => card.id),
+  );
+  const eligible = (id: string) => eligibleCards.has(id);
   let index = lastEligibleIndex(battle.draw, eligible);
   if (index < 0) {
     recycleEligibleDiscard(state, eligible);

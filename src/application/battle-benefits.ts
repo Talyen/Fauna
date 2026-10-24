@@ -175,7 +175,7 @@ export function battleBenefits(
         if (utility > 0) return support("utility", utility);
         if (
           def.effects?.some((effect) => effect.kind === "blind") &&
-          state.battle.enemies.some((enemy) => enemy.health > 0 && !enemy.combat.blind)
+          facts.livingEnemies().some((enemy) => !enemy.combat.blind)
         )
           return support("utility");
         return support(def.effects?.some((effect) => effect.kind === "draw") ? "standardUtility" : "none");
@@ -285,8 +285,10 @@ export function battleBenefits(
             unit.id,
           ),
         );
-    case "dreamDouble":
-      return support(actor.combat?.negate ? "protection" : "resource", value);
+    case "dreamDouble": {
+      const thorns = Math.min(value, STACK_LIMIT - (actor.combat?.thorns ?? 0));
+      return support(!actor.combat?.negate ? "resource" : thorns > 0 ? "protection" : "none", thorns);
+    }
     case "nightmareHarvest": {
       const useful = battlefield(state, "player").filter(
         (unit) => unit.health > 0 && hasHarmfulEffects(unit),
@@ -294,7 +296,15 @@ export function battleBenefits(
       return support(useful > 0 ? "statusHarvest" : "none", useful);
     }
     case "teamCleanse":
-      return support("utility");
+      return support(
+        battlefield(state, "player").some((unit) => unit.health > 0 && hasHarmfulEffects(unit))
+          ? "utility"
+          : facts.healingOnPlay
+            ? "healing"
+            : usefulDraw()
+              ? "utility"
+              : "none",
+      );
     case "teamGuard":
     case "redistributeBlock":
     case "teamProtection": {
