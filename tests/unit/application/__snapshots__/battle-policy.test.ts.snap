@@ -246,7 +246,6 @@ exports[`preserves visible rankings and legal choices for dawncall 1`] = `
     "ordinary",
     [
       "{"command":{"type":"play","cardId":"ally-0:dawncall-attack","autoEndTurn":false},"score":3006,"reason":"Damage enemies; give roster creatures priority over Minions"}",
-      "{"command":{"type":"play","cardId":"ally-0:dawncall-teamCleanse","autoEndTurn":false},"score":150,"reason":"Use Dawn Cry for its visible benefit"}",
     ],
   ],
   [
@@ -261,7 +260,6 @@ exports[`preserves visible rankings and legal choices for dawncall 1`] = `
     "defended",
     [
       "{"command":{"type":"play","cardId":"ally-0:dawncall-attack","autoEndTurn":false},"score":1506,"reason":"Damage enemies; give roster creatures priority over Minions"}",
-      "{"command":{"type":"play","cardId":"ally-0:dawncall-teamCleanse","autoEndTurn":false},"score":150,"reason":"Use Dawn Cry for its visible benefit"}",
     ],
   ],
   [
