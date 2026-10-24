@@ -85,6 +85,8 @@ Portraits are unchanged WebP selections copied from `Alchemy: src/assets/optimiz
 
 ## Creature passive tiers
 
+The [passive authoring proposal](PASSIVE_AUTHORING_PLAN.md) describes reducing repeated scaled-tier declarations while preserving the complete expanded rules. It is a plan, not the current authoring API.
+
 Each species defines six complete `passiveTiers`, indexed by zero through five stars. Every tier must differ in gameplay effects from every other tier: amounts, chances or mechanics may change; wording, property order and effect order alone do not qualify. Each tier replaces the entire previous passive, so retain all intended effects explicitly. Types require six entries and catalog validation rejects duplicate effect sets.
 
 Favor species-exclusive mechanics independent of named abilities. Add new mechanics to the typed passive contract, execution, descriptions and focused regressions together. Player rules and previews use permanent rank; enemies use the base tier. [Journey progression](EXPEDITION_DESIGN.md#collection-and-passive-ranks) owns copy counts and ranks; [inspection](ui/screens.md#creature-and-action-inspection) owns disclosure.
