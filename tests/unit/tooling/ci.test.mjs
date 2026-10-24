@@ -303,12 +303,18 @@ it("defaults browser consumers to the version-matched container while retaining 
   expect(readFileSync(output, "utf8")).toContain(
     "browser_image=mcr.microsoft.com/playwright:v1.64.1-noble\n",
   );
+  expect(readFileSync(output, "utf8")).toContain("workers=1\n");
+  expect(run({ shards: "4", browser_workers: "2" }).status).toBe(0);
+  expect(readFileSync(output, "utf8")).toContain("total=4\nworkers=2\n");
+  expect(run({ shards: "8", browser_workers: "2" }).status).not.toBe(0);
+  for (const browser_workers of ["0", "3", "1.5", "wrong"])
+    expect(run({ browser_workers }).status).not.toBe(0);
   expect(run({ browser_runtime: "install" }).status).toBe(0);
   expect(readFileSync(output, "utf8")).toContain("browser_image=\n");
   expect(run({ browser_runtime: "unknown" }).status).not.toBe(0);
 });
 
-async function gateFixture() {
+async function gateFixture(workers = 1) {
   const root = mkdtempSync(path.join(tmpdir(), "fauna-ci-gate-"));
   gateRoots.push(root);
   const script = path.resolve(import.meta.dirname, "../../../scripts/ci/ci.mjs");
@@ -336,6 +342,7 @@ async function gateFixture() {
         GITHUB_RUN_ATTEMPT: attempt,
         GITHUB_STEP_SUMMARY: path.join(root, "summary.md"),
         CI_SHARDS: "1",
+        CI_BROWSER_WORKERS: String(workers),
         CI_NEEDS: JSON.stringify(needs),
       },
     });
@@ -344,7 +351,13 @@ async function gateFixture() {
   put("reports/interactions/ci/evidence.json", { ...ids, build });
   put("reports/ci/discovery.json", test("a"));
   put("reports/playwright.json", test("a"));
-  put("reports/shards/browser-shard-1/reports/ci/shard.json", { ...ids, build, shard: 1, total: 1 });
+  put("reports/shards/browser-shard-1/reports/ci/shard.json", {
+    ...ids,
+    build,
+    shard: 1,
+    workers,
+    total: 1,
+  });
   put("reports/shards/browser-shard-1/reports/playwright.json", test("a"));
   put("reports/vitest.json", {
     success: true,
@@ -406,6 +419,7 @@ it("accepts mixed successful attempts of the same run and records their build ev
     attempt: "2",
     build,
     shard: 1,
+    workers: 1,
     total: 1,
   });
   const mixed = {
@@ -427,17 +441,33 @@ it("accepts mixed successful attempts of the same run and records their build ev
 
 it("rejects unrelated, future and mismatched executable gate evidence", async () => {
   const { ids, build, jobs, put, run, shardPath } = await gateFixture();
-  for (const change of [{ sha: "other" }, { run: "other" }, { attempt: "3" }, { build: "b".repeat(64) }]) {
-    put(shardPath, { ...ids, build, shard: 1, total: 1, ...change });
+  for (const change of [
+    { sha: "other" },
+    { run: "other" },
+    { attempt: "3" },
+    { build: "b".repeat(64) },
+    { workers: 2 },
+  ]) {
+    put(shardPath, { ...ids, build, shard: 1, workers: 1, total: 1, ...change });
     expect(run(jobs, "2").status).not.toBe(0);
   }
-  put(shardPath, { ...ids, build, shard: 1, total: 1 });
+  put(shardPath, { ...ids, build, shard: 1, workers: 1, total: 1 });
   put("reports/ci/unit.json", { ...ids, attempt: "2" });
   expect(run(jobs, "2").status).not.toBe(0);
   put("reports/ci/unit.json", ids);
   put("reports/interactions/ci/evidence.json", { ...ids, build: "b".repeat(64) });
   expect(run(jobs, "2").status).not.toBe(0);
   put("reports/interactions/ci/evidence.json", { ...ids, build });
+});
+
+it("accepts and records a complete two-worker browser benchmark", async () => {
+  const { root, run } = await gateFixture(2);
+  const result = run();
+  expect(result.stderr).toBe("");
+  expect(result.status).toBe(0);
+  expect(
+    JSON.parse(readFileSync(path.join(root, "reports/ci/browser-timings.json"), "utf8")).workersPerJob,
+  ).toBe(2);
 });
 
 it("fails the executable gate for upstream failures and missing reports", async () => {
@@ -489,6 +519,7 @@ it("rejects interrupted executable shards and invalid attempt identities", async
     ...ids,
     attempt: "old",
     shard: 1,
+    workers: 1,
     total: 1,
   });
   expect(run().status).not.toBe(0);
@@ -566,11 +597,13 @@ it("rejects modified or stale downloaded builds before starting browser consumer
     expect(
       JSON.parse(readFileSync(path.join(root, "reports/interactions/ci/evidence.json"), "utf8")).build,
     ).toBe(buildFingerprint(JSON.parse(readFileSync(path.join(root, "reports/ci/build.json"), "utf8"))));
+    writeFileSync(path.join(root, "reports/playwright.json"), JSON.stringify({ config: { workers: 2 } }));
     expect(run("shard", { GITHUB_RUN_ATTEMPT: "2", CI_SHARD: "1", CI_SHARDS: "8" }).status).toBe(0);
     expect(JSON.parse(readFileSync(path.join(root, "reports/ci/shard.json"), "utf8"))).toMatchObject({
       attempt: "2",
       shard: 1,
       total: 8,
+      workers: 2,
     });
     expect(run("verify-build", { GITHUB_RUN_ATTEMPT: "2" }).status).toBe(0);
     expect(run("verify-build", { GITHUB_RUN_ATTEMPT: "0" }).status).not.toBe(0);

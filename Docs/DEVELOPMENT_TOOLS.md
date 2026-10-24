@@ -117,6 +117,8 @@ The JSON defines `baseline` and `treatment`, each with explicit `talents` and `b
 
 Replay requires matching code identity, checkpoints and complete execution. Balance and playthrough fingerprints cover gameplay/application source and save-format JSON; changing these inputs requires fresh journals. [playthrough.ts](../src/tooling/playthrough.ts) rejects obsolete journal/policy versions. All output stays under ignored `reports/`.
 
+For an otherwise authorized playthrough, `FAUNA_PLAYTHROUGH_PROFILE=1` adds stage timings and awaited journal append time to `summary.json`; it does not authorize local simulations. Journal append time overlaps fixture/journey stages and must not be added to them. The worker keeps one journal handle open and awaits each record before advancing, retaining attempt/completion order without buffering records between commands. The CLI regression retains a complete career and real subprocess replay, and CI uploads its profile under [CI reports](CI.md#reports-and-scheduling).
+
 ## Ranked balance findings
 
 Balance runs, experiments and comparisons now write ranked `findings.json` and `findings.md` beside their evidence. `npm run balance:findings -- reports/balance/smoke/report.json` reanalyzes an existing suite without running simulations; an optional second argument selects a directory under ignored reports. It also accepts a generated `comparison.json`. No finding changes gameplay or tuning automatically.

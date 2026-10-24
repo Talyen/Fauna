@@ -5,20 +5,21 @@ import { expect, test, type Page } from "@playwright/test";
 export async function settleScreen(page: Page) {
   await page.evaluate(() => document.fonts.ready.then(() => undefined));
   await expect(page.locator("body > .app[inert], .card-transfer")).toHaveCount(0);
-  await expect
-    .poll(() =>
-      page.evaluate(
-        () =>
-          document
-            .getAnimations()
-            .filter(
-              (animation) =>
-                animation.playState === "running" &&
-                animation.effect?.getComputedTiming().iterations !== Infinity,
-            ).length,
-      ),
-    )
-    .toBe(0);
+  // Sample in the renderer each frame instead of making a driver round trip per sample.
+  // Rediscovery retains replacement/cancelled transitions; infinite decoration never blocks capture.
+  const settled = await page.waitForFunction(
+    () =>
+      !document
+        .getAnimations()
+        .some(
+          (animation) =>
+            (animation.playState === "running" || animation.pending) &&
+            animation.effect?.getComputedTiming().iterations !== Infinity,
+        ),
+    undefined,
+    { polling: "raf", timeout: 5000 },
+  );
+  await settled.dispose();
 }
 
 /** Capture the settled screen, not an outgoing decorative navigation snapshot. */

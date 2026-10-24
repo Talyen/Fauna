@@ -55,6 +55,8 @@ Replacement and boss-victory activation/focus run with mouse, keyboard and simul
 
 Playwright listing verifies discovery only. Report measured execution time separately from case-count reductions; the CI browser report remains the runtime and rendered evidence source.
 
+Rendered evidence waits for finite animations inside the browser on each frame, with a five-second deadline. It rediscovers chained and replacement transitions while ignoring infinite decoration; it does not fast-forward ordinary transitions. [The evidence regression](e2e/evidence.spec.ts) reads completion markers once after settling so retrying assertions cannot hide an early return. Real startup, held-input, autoplay and audio timing contracts retain their existing waits. Hosted job/worker comparisons follow [CI scheduling](../Docs/CI.md#reports-and-scheduling).
+
 ## Static and accessibility checks
 
 The lint gate enforces Hooks, accessibility, promise ownership and React Compiler immutability/ref/effect diagnostics. Any exception must be local, explain the specific ownership or DOM lifecycle requirement, and preserve behavioral coverage; mutable DOM nodes do not justify disabling checks across the application. Native ARIA roles remain valid where changing tags could alter layout or control contracts. Type-aware template coercion, string-sort style and test mock method binding are outside this gate. Prototype design labels are excluded from label association checks; player UI keeps those checks.

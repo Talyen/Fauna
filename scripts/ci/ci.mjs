@@ -276,6 +276,9 @@ async function main(command) {
     const event = read(process.env.GITHUB_EVENT_PATH);
     const count = Number(event.inputs?.shards ?? 8);
     if (![1, 4, 8].includes(count)) throw new Error("Expected 1, 4 or 8 shards");
+    const workers = Number(event.inputs?.browser_workers ?? 1);
+    if (![1, 2].includes(workers)) throw new Error("Expected 1 or 2 browser workers");
+    if (count * workers > 8) throw new Error("Browser comparison supports at most eight total workers");
     const runtime = event.inputs?.browser_runtime ?? "container";
     if (!["install", "container"].includes(runtime)) throw new Error("Invalid browser runtime");
     const version = read("package-lock.json").packages["node_modules/@playwright/test"].version;
@@ -303,7 +306,7 @@ async function main(command) {
     }
     appendFileSync(
       process.env.GITHUB_OUTPUT,
-      `browser_image=${image}\nattempt=${process.env.GITHUB_RUN_ATTEMPT}\nrun=${run}\nshards=${JSON.stringify(Array.from({ length: count }, (_, i) => i + 1))}\ntotal=${count}\n`,
+      `browser_image=${image}\nattempt=${process.env.GITHUB_RUN_ATTEMPT}\nrun=${run}\nshards=${JSON.stringify(Array.from({ length: count }, (_, i) => i + 1))}\ntotal=${count}\nworkers=${workers}\n`,
     );
   } else if (command === "stamp") {
     appendFileSync(process.env.GITHUB_OUTPUT, `attempt=${process.env.GITHUB_RUN_ATTEMPT}\n`);
@@ -341,6 +344,7 @@ async function main(command) {
       build: buildFingerprint(manifest),
       shard: Number(process.env.CI_SHARD),
       total: Number(process.env.CI_SHARDS),
+      workers: read("reports/playwright.json").config.workers,
       environment: {
         node: process.version,
         image: process.env.ImageOS,
@@ -362,7 +366,11 @@ async function main(command) {
       read("scripts/ci/browser-durations.json"),
       Number(process.env.CI_SHARDS),
     );
-    write("reports/ci/browser-plan.json", { ...identity(), shards });
+    write("reports/ci/browser-plan.json", {
+      ...identity(),
+      workers: Number(process.env.CI_BROWSER_WORKERS ?? 1),
+      shards,
+    });
     for (const shard of shards)
       writeFileSync(
         `reports/ci/shard-${shard.shard}.txt`,
@@ -407,6 +415,8 @@ async function main(command) {
       assertIdentity(metadata);
       validateBuildEvidence(metadata, manifest);
       if (metadata.shard !== shard || metadata.total !== total) throw new Error("Wrong shard identity");
+      if (metadata.workers !== Number(process.env.CI_BROWSER_WORKERS ?? 1))
+        throw new Error("Wrong browser worker count");
       evidence.shards.push(metadata);
       reports.push(read(`${root}/reports/playwright.json`));
     }
@@ -428,6 +438,7 @@ async function main(command) {
       .slice(0, 10);
     write("reports/ci/browser-timings.json", {
       ...identity(),
+      workersPerJob: Number(process.env.CI_BROWSER_WORKERS ?? 1),
       shards: reports.map((report, index) => ({ shard: index + 1, duration: report.stats?.duration })),
       slowest,
     });
