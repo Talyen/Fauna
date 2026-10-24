@@ -81,9 +81,24 @@ function lastEligibleIndex(ids: readonly string[], eligible: (id: string) => boo
   return index;
 }
 
+/** Deliver one actual draw, including copies and overflow, without disturbing ineligible slots. */
+function drawEligibleCard(state: GameState, eligible: (id: string) => boolean, events: GameEvent[]) {
+  const battle = state.battle!;
+  let index = lastEligibleIndex(battle.draw, eligible);
+  if (index < 0) {
+    recycleEligibleDiscard(state, eligible);
+    index = lastEligibleIndex(battle.draw, eligible);
+  }
+  if (index < 0) return false;
+  const id = battle.draw.splice(index, 1)[0]!;
+  receiveDraw(state, id, events);
+  recycleDiscard(state);
+  return true;
+}
+
 export function draw(state: GameState, count: number, events: GameEvent[] = []) {
   fillHand(state);
-  const b = state.battle!;
+  // Ordinary draws reshuffle the whole empty pile first; keyword draws only recycle matches.
   recycleDiscard(state);
   // Knocked-out owners retain inert slots, so replacing them cannot refresh spent cards.
   const alive = drawableOwnerIds(state);
@@ -96,16 +111,8 @@ export function draw(state: GameState, count: number, events: GameEvent[] = []) 
   const eligible = (id: string) => !alive.size || eligibleCards.has(id);
   let drawn = 0;
   for (let i = 0; i < count; i++) {
-    let index = lastEligibleIndex(b.draw, eligible);
-    if (index < 0) {
-      recycleEligibleDiscard(state, eligible);
-      index = lastEligibleIndex(b.draw, eligible);
-    }
-    if (index < 0) break;
-    const card = b.draw.splice(index, 1)[0]!;
-    receiveDraw(state, card, events);
+    if (!drawEligibleCard(state, eligible, events)) break;
     drawn++;
-    recycleDiscard(state);
   }
   return drawn;
 }
@@ -133,8 +140,7 @@ export function drawKeyword(
   keyword: "light" | "nature" | "water",
   events: GameEvent[] = [],
 ) {
-  const battle = state.battle;
-  if (!battle) return;
+  if (!state.battle) return;
   fillHand(state);
   const owners = drawableOwnerIds(state);
   const eligibleCards = new Set(
@@ -144,17 +150,7 @@ export function drawKeyword(
       )
       .map((card) => card.id),
   );
-  const eligible = (id: string) => eligibleCards.has(id);
-  let index = lastEligibleIndex(battle.draw, eligible);
-  if (index < 0) {
-    recycleEligibleDiscard(state, eligible);
-    index = lastEligibleIndex(battle.draw, eligible);
-  }
-  if (index >= 0) {
-    const id = battle.draw.splice(index, 1)[0]!;
-    receiveDraw(state, id, events);
-    recycleDiscard(state);
-  }
+  drawEligibleCard(state, (id) => eligibleCards.has(id), events);
 }
 
 /** Only the visible hand is exchanged; buffered draws retain their FIFO ownership. */
