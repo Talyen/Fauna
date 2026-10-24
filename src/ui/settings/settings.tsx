@@ -2,50 +2,29 @@ import { Slider } from "../../components/ui/slider";
 import { Eclipse, Sparkles, Gamepad2 } from "lucide-react";
 import { EffectBaseline } from "../shared/effects/effects";
 import { effectPalette } from "../shared/effects/palettes";
-import type { useEffectPreferences } from "./effect-preferences";
 import { useState } from "react";
 import type { Session } from "../../application/session";
 import { DisplaySettings } from "./platform-settings";
 import { Monitor, Headphones, Swords, CaseSensitive, MessageSquareText, StepForward } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs";
 import { RadioGroup, RadioGroupItem } from "../../components/ui/radio-group";
-import type { AudioPreferences } from "./audio-preferences";
+import { TEXT_SCALES, type DevicePreferences, type PreferencesPatch } from "./preferences";
 import { AudioSettings } from "./audio-settings";
 import { SettingRow, SettingToggle } from "./settings-controls";
-import type { ControllerPreference } from "../shared/navigation/controller-prompts";
-export const TEXT_SCALES = [0.75, 1, 1.25] as const;
 
 export function Settings({
-  effects,
   session,
-  audio,
-  updateAudio,
-  scale,
-  setScale,
-  tooltipScale,
-  setTooltipScale,
-  autoEndTurn,
-  setAutoEndTurn,
-  controller = "auto",
-  setController,
+  preferences,
+  update,
 }: {
-  effects?: ReturnType<typeof useEffectPreferences>;
-  session?: Session;
-  audio: AudioPreferences;
-  updateAudio: (patch: Partial<AudioPreferences>) => void;
-  scale: number;
-  setScale: (value: number) => void;
-  tooltipScale: number;
-  setTooltipScale: (value: number) => void;
-  desktop: boolean;
-  autoEndTurn: boolean;
-  setAutoEndTurn: (value: boolean) => void;
-  controller?: ControllerPreference;
-  setController?: (value: ControllerPreference) => void;
+  session: Session;
+  preferences: DevicePreferences;
+  update: (patch: PreferencesPatch) => void;
 }) {
+  const { audio, scale, tooltipScale, autoEndTurn, controller } = preferences;
   const [tab, setTab] = useState("display");
   return (
-    <Tabs value={tab} onValueChange={setTab} className="settings-controls">
+    <Tabs value={tab} onValueChange={setTab} className="settings-controls" data-nav-layout="rows">
       <EffectBaseline palette={effectPalette([], "gold")} />
       <TabsList data-nav-row aria-label="Settings categories" className="settings-tabs">
         <TabsTrigger value="display">
@@ -69,14 +48,14 @@ export function Settings({
         className="settings-panel"
       >
         <h2 className="settings-heading">Display</h2>
-        {session ? <DisplaySettings session={session} /> : null}
+        <DisplaySettings session={session} />
         <SettingRow icon={CaseSensitive} label="Text size">
           <RadioGroup
             orientation="horizontal"
             className="text-size-options"
             aria-label="Text size"
             value={String(scale)}
-            onValueChange={(value) => setScale(Number(value))}
+            onValueChange={(value) => update({ scale: Number(value) })}
           >
             {TEXT_SCALES.map((value) => (
               <label key={value} className="text-size-option">
@@ -92,7 +71,7 @@ export function Settings({
             className="text-size-options"
             aria-label="Tooltip size"
             value={String(tooltipScale)}
-            onValueChange={(value) => setTooltipScale(Number(value))}
+            onValueChange={(value) => update({ tooltipScale: Number(value) })}
           >
             {TEXT_SCALES.map((value) => (
               <label key={value} className="text-size-option">
@@ -114,14 +93,14 @@ export function Settings({
                 min={0}
                 max={100}
                 step={1}
-                value={[effects?.[key] ?? 100]}
+                value={[preferences[key]]}
                 onValueChange={([value]) => {
-                  if (value !== undefined) effects?.update(key, value);
+                  if (value !== undefined) update({ [key]: value });
                 }}
                 aria-label={label}
-                aria-valuetext={`${effects?.[key] ?? 100}%`}
+                aria-valuetext={`${preferences[key]}%`}
               />
-              <output aria-label={`${label} value`}>{effects?.[key] ?? 100}%</output>
+              <output aria-label={`${label} value`}>{preferences[key]}%</output>
             </div>
           </SettingRow>
         ))}
@@ -133,7 +112,7 @@ export function Settings({
         aria-hidden={tab !== "sound"}
         className="settings-panel"
       >
-        <AudioSettings value={audio} update={updateAudio} />
+        <AudioSettings value={audio} update={(patch) => update({ audio: patch })} />
       </TabsContent>
       <TabsContent
         value="battle"
@@ -151,7 +130,7 @@ export function Settings({
             value={controller}
             onValueChange={(value) => {
               if (value === "auto" || value === "xbox" || value === "playstation" || value === "nintendo")
-                setController?.(value);
+                update({ controller: value });
             }}
           >
             {(
@@ -173,7 +152,7 @@ export function Settings({
           icon={StepForward}
           label="Auto-end turn"
           checked={autoEndTurn}
-          onChange={setAutoEndTurn}
+          onChange={(value) => update({ autoEndTurn: value })}
         />
       </TabsContent>
     </Tabs>

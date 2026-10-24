@@ -27,6 +27,10 @@ These contracts remain applicable when a shared change affects several flows; se
 
 Use source-owned shadcn/ui for standard controls: Button, Dialog, Popover, Tooltip, Tabs, Switch, RadioGroup, Slider and Progress. Preserve their native keyboard, focus-trap and focus-return behavior; W/A/S/D and gamepad input adapt to it.
 
+Row-based directional navigation is declared by `data-nav-layout="rows"` on its region and `data-nav-row` on each row. Shared input follows those declarations without screen or styling selectors; controls outside declared rows retain spatial navigation, and native composite controls retain their own arrow behavior.
+
+[Device preferences](../src/ui/settings/preferences.ts) own defaults, normalization, existing storage keys and updates for sound, effects, text size and battle controls. Settings consumes that owner; DOM text scaling and audio configuration apply the committed preferences separately. Native display state remains owned by the desktop adapter.
+
 Register new controls through the [source checks and registration policy](DESIGN_SYSTEM.md#source-checks-and-registration), which prohibits competing widgets/libraries and direct Radix imports.
 
 Artwork cards, the hand fan, targeting, Mana crystals, combat feedback and forecasts on shadcn Progress are explicit gameplay compositions. They use shared tokens and shadcn controls where interactive; this exception permits no general-purpose custom widgets. Theme and minimum hit areas follow the sections below.

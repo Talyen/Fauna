@@ -58,13 +58,12 @@ export function moveFocus(direction: "left" | "right" | "up" | "down") {
     buttons[0]!.focus({ preventScroll: true });
     return;
   }
-  if (
-    (root === document && current.closest(".battle-screen, .team-selection, .talents-screen")) ||
-    current.closest(".swap-roster, .settings-controls, .inspection")
-  ) {
-    const rowSelector = ".enemy-row, .player-row, .hand-toolbar, [data-nav-row]";
-    const rows = Array.from(root.querySelectorAll<HTMLElement>(rowSelector)).filter(
+  const region = current.closest<HTMLElement>('[data-nav-layout="rows"]');
+  if (region && (root === document || root.contains(region))) {
+    const rowSelector = "[data-nav-row]";
+    const rows = Array.from(region.querySelectorAll<HTMLElement>(rowSelector)).filter(
       (row) =>
+        row.closest('[data-nav-layout="rows"]') === region &&
         row.getClientRects().length > 0 &&
         buttons.some((button) => row.contains(button)) &&
         !row.parentElement?.closest(rowSelector),

@@ -1,11 +1,10 @@
 import { EffectScope, EffectsScene } from "../shared/effects/effects";
-import { useEffectPreferences } from "../settings/effect-preferences";
+import { useDevicePreferences } from "../settings/preferences";
 import { bossEncounter } from "../../game/encounters";
 import { pendingReplacement } from "../../game/team";
 import { ShellOverlays } from "./overlays";
 import { routeInput } from "./input";
 import { useActivationAudio } from "../audio/activation-audio";
-import { useDisplayPreferences } from "../settings/display-preferences";
 import { HomeScreen } from "../menu/home-screen";
 import { GlossaryScreen } from "../menu/glossary-screen";
 import { MenuActions, type MenuPage } from "../menu/menu-actions";
@@ -18,7 +17,6 @@ import { KEYWORDS, availablePoints } from "../../game/progression";
 import { useAutoplay } from "../battle/autoplay";
 import { Campfire } from "../expedition/campfire";
 import { Settings } from "../settings/settings";
-import { useAudioPreferences } from "../settings/audio-preferences";
 import { useGameAudio } from "../audio/game-audio";
 import { JourneyResults } from "../expedition/journey-results";
 import { useCallback, useEffect, useReducer, useRef, useState } from "react";
@@ -53,7 +51,8 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
     inspectionControls: Controls = useRef(null),
     talentControls: Controls = useRef(null),
     collectionControls: Controls = useRef(null);
-  const effectPreferences = useEffectPreferences();
+  const [preferences, updatePreferences] = useDevicePreferences();
+  const { audio, autoEndTurn, controller } = preferences;
   const [draftStarted, setDraftStarted] = useState(false);
   const [navigationState, transition] = useReducer(shellNavigation, initialNavigation);
   const { route } = navigationState.page;
@@ -66,19 +65,8 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
   const [mode, setMode] = useState<"pointer" | "keyboard" | "controller">("pointer");
   const [detectedController, setDetectedController] = useState<ControllerFamily>("xbox");
   const [navigation, setNavigation] = useState(false);
-  const [audioPreferences, updateAudioPreferences] = useAudioPreferences();
-  const playSound = useGameAudio(session, audioPreferences, route === "home");
+  const playSound = useGameAudio(session, audio, route === "home");
   useActivationAudio(playSound);
-  const {
-    scale,
-    setScale,
-    tooltipScale,
-    setTooltipScale,
-    autoEndTurn,
-    setAutoEndTurn,
-    controller,
-    setController,
-  } = useDisplayPreferences();
   const controllerPrompts = CONTROLLER_PROMPTS[controller === "auto" ? detectedController : controller];
   const active =
     !["victory", "defeat"].includes(game.phase) &&
@@ -274,8 +262,8 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                   : "default"
             : "default"
         }
-        glow={effectPreferences.glow}
-        particles={effectPreferences.particles}
+        glow={preferences.glow}
+        particles={preferences.particles}
       />
       <SurfaceTransition
         token={`${route}:${game.phase}`}
@@ -330,21 +318,7 @@ export function GameShell({ session, desktop = false }: { session: Session; desk
                         Settings
                       </ScreenHeading>
                     </header>
-                    <Settings
-                      effects={effectPreferences}
-                      session={session}
-                      audio={audioPreferences}
-                      updateAudio={updateAudioPreferences}
-                      scale={scale}
-                      setScale={setScale}
-                      tooltipScale={tooltipScale}
-                      setTooltipScale={setTooltipScale}
-                      desktop={desktop}
-                      autoEndTurn={autoEndTurn}
-                      setAutoEndTurn={setAutoEndTurn}
-                      controller={controller}
-                      setController={setController}
-                    />
+                    <Settings session={session} preferences={preferences} update={updatePreferences} />
                   </Screen>
                 ) : null}
                 <EffectScope name="play">

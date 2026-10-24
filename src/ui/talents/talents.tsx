@@ -146,7 +146,12 @@ export function Talents({
     mana: "mana",
   };
   return (
-    <Screen className="talents-screen" data-view={keyword ? "tree" : "overview"} ref={screen}>
+    <Screen
+      data-nav-layout="rows"
+      className="talents-screen"
+      data-view={keyword ? "tree" : "overview"}
+      ref={screen}
+    >
       <EffectBaseline palette={keyword ? effectPalette([keyword]) : null} />
       <header className="page-heading talents-heading">
         <ScreenHeading back={keyword ? () => setKeyword(null) : openMenu} openMenu={openMenu}>

@@ -115,6 +115,7 @@ export function Inspector({
         <DialogContent
           ref={dialog}
           overlayClassName="inspection-overlay"
+          data-nav-layout="rows"
           overlayChildren={<EffectBackdropHost scope="inspection" />}
           onOverlayClick={(event) => {
             // A reopened inspection must close on its first backdrop click, even before Radix dismisses it.
