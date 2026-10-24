@@ -2,8 +2,15 @@ import { battlefield } from "./battlefield";
 import { bossDeck, removeDepartedMinions } from "./combat/legendary";
 import { species } from "./content";
 import { merchantPriceRange } from "./destinations";
-import { collectedSpecies, starterCount, creaturePassive, KEYWORDS, hasTalent } from "./progression";
-import { BOONS, SPECIES, FIRST_RUN_STARTERS } from "./content";
+import {
+  starterCount,
+  starterOfferPool,
+  STARTER_OFFER_COUNT,
+  creaturePassive,
+  KEYWORDS,
+  hasTalent,
+} from "./progression";
+import { BOONS, SPECIES } from "./content";
 import {
   grantArmor,
   freshCombat,
@@ -21,16 +28,16 @@ import { rebuildCards } from "./team";
 const OPTIONAL_DESTINATION_CHANCE = 0.25;
 
 export function offerStarters(state: GameState) {
-  const collected = collectedSpecies(state);
-  const pool = (collected.length ? collected : FIRST_RUN_STARTERS).filter(
-    (kind) => !state.selected.length || !species(kind).legendary,
-  );
+  const pool = starterOfferPool(state);
   if (state.selected.length === starterCount(state)) {
     state.starterOffers = [];
     return;
   }
   const shuffled = shuffle(state, [...pool]);
-  state.starterOffers = Array.from({ length: 3 }, (_, index) => shuffled[index % shuffled.length]!);
+  state.starterOffers = Array.from(
+    { length: STARTER_OFFER_COUNT },
+    (_, index) => shuffled[index % shuffled.length]!,
+  );
 }
 function prepareEncounter(state: GameState) {
   const route = state.expedition;

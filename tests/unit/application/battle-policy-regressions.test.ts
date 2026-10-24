@@ -21,6 +21,86 @@ function withHand(state: GameState, definitions: string[]) {
   });
 }
 
+it("Auto-play preserves Dawn Cry's Mana when it would only redraw itself", () => {
+  const state = produce(teamRun(42, ["dawncall"]), (game) => {
+    game.battle!.hand = game.cards.map((card) => card.id);
+    game.battle!.draw = [];
+    game.battle!.buffer = [];
+    game.battle!.discard = [];
+  });
+  expect(decodeSave(encodeSave(state))).toEqual(state);
+  const cleanse = state.cards.find((card) => card.definitionId === "dawncall-teamCleanse")!;
+  const choice = (game: GameState) =>
+    rankedBattleChoices(game, false).find(
+      (entry) => entry.command.type === "play" && entry.command.cardId === cleanse.id,
+    );
+  expect(choice(state)).toBeUndefined();
+
+  const afflicted = produce(state, (game) => {
+    game.team[0]!.combat!.poison = 8;
+  });
+  const cleansing = choice(afflicted)!;
+  expect(cleansing).toBeDefined();
+  expect(dispatch(afflicted, cleansing.command).state.team[0]!.combat!.poison).toBe(0);
+
+  const drawable = produce(state, (game) => {
+    const other = game.battle!.hand.find((id) => id !== cleanse.id)!;
+    game.battle!.hand = game.battle!.hand.filter((id) => id !== other);
+    game.battle!.draw = [other];
+  });
+  const drawing = choice(drawable)!;
+  expect(drawing).toBeDefined();
+  expect(dispatch(drawable, drawing.command).state.battle!.hand).toContain(drawable.battle!.draw[0]);
+});
+
+it("Auto-play uses Petal Veil to Blind enemy Echoes after their summoner is already Blind", () => {
+  const destination = produce(teamRun(42, ["bloomquail"]), (game) => {
+    prepareDestination(game);
+    game.encounter = 3;
+    game.journey!.victories = 3;
+    game.expedition = { pack: authoredPack(3), recruit: null, lastRoom: "boss" };
+  });
+  const state = produce(
+    withHand(accept(destination, { type: "beginBattle" }), ["bloomquail-heal"]),
+    (game) => {
+      const boss = game.battle!.enemies[0]!;
+      boss.combat.blind = true;
+      summonEcho(requireBattle(game), boss, "enemy", 6, []);
+    },
+  );
+  expect(decodeSave(encodeSave(state))).toEqual(state);
+  const command = chooseBattleCommand(state, false);
+  expect(command).toMatchObject({ type: "play", cardId: state.battle!.hand[0] });
+  const result = dispatch(state, command);
+  expect(result.accepted).toBe(true);
+  expect(result.state.battle!.minions![0]!.combat.blind).toBe(true);
+  expect(result.state.team[0]!.health).toBe(state.team[0]!.health);
+  expect(chooseBattleCommand(withHand(result.state, ["bloomquail-heal"]), false)).toEqual({
+    type: "endTurn",
+  });
+});
+
+it("Auto-play preserves Dream Double when both Thorns and Negate are already full", () => {
+  const state = produce(withHand(teamRun(42, ["reverie"]), ["reverie-dream-double"]), (game) => {
+    game.team[0]!.combat!.thorns = 1_000_000;
+    game.team[0]!.combat!.negate = true;
+  });
+  expect(decodeSave(encodeSave(state))).toEqual(state);
+  expect(chooseBattleCommand(state, false)).toEqual({ type: "endTurn" });
+  for (const missing of ["thorns", "negate"] as const) {
+    const useful = produce(state, (game) => {
+      if (missing === "thorns") game.team[0]!.combat!.thorns--;
+      else game.team[0]!.combat!.negate = false;
+    });
+    const command = chooseBattleCommand(useful, false);
+    expect(command).toMatchObject({ type: "play", cardId: useful.battle!.hand[0] });
+    const result = dispatch(useful, command);
+    expect(result.accepted).toBe(true);
+    expect(result.state.team[0]!.combat).toMatchObject({ thorns: 1_000_000, negate: true });
+    expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
+  }
+});
+
 it("Auto-play Purges a protected enemy Echo when its summoner has no removable effects", () => {
   const destination = produce(teamRun(42, ["rookhaven"]), (game) => {
     prepareDestination(game);
