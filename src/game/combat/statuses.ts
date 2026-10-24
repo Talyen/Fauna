@@ -271,7 +271,8 @@ export function* applyHarmfulStatus(
       enemies.length &&
       (burnReflection || stats.reflect || succeeds(state, chance / 100, !alliedTarget, events))
     ) {
-      const recipient = enemies[Math.floor(roll(state) * enemies.length)]!;
+      const recipient =
+        enemies[Math.floor(roll(state, { kind: "index", size: enemies.length }) * enemies.length)]!;
       if (burnReflection) stats.reflectBurn = false;
       else stats.reflect = false;
       events.push({

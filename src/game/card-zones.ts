@@ -3,7 +3,7 @@ import { drawableOwnerIds } from "./card-actors";
 import { definition, species } from "./content";
 import type { BattleState, Card, GameEvent, GameState } from "./types";
 import { chance as succeeds } from "./chance";
-import { shuffle } from "./random";
+import { shuffle, hiddenDecision } from "./random";
 import { cardKeywords, creaturePassive } from "./progression";
 
 export const MAX_HAND_SIZE = 6;
@@ -83,6 +83,7 @@ function lastEligibleIndex(ids: readonly string[], eligible: (id: string) => boo
 
 /** Deliver one actual draw, including copies and overflow, without disturbing ineligible slots. */
 function drawEligibleCard(state: GameState, eligible: (id: string) => boolean, events: GameEvent[]) {
+  hiddenDecision(state);
   const battle = state.battle!;
   let index = lastEligibleIndex(battle.draw, eligible);
   if (index < 0) {
@@ -97,6 +98,7 @@ function drawEligibleCard(state: GameState, eligible: (id: string) => boolean, e
 }
 
 export function draw(state: GameState, count: number, events: GameEvent[] = []) {
+  if (count > 0) hiddenDecision(state);
   fillHand(state);
   // Ordinary draws reshuffle the whole empty pile first; keyword draws only recycle matches.
   recycleDiscard(state);

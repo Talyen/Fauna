@@ -3,6 +3,11 @@ on:
   schedule:
     - cron: "17 9 * * 1"
   workflow_dispatch:
+    inputs:
+      trace:
+        description: Capture a bounded deep trace for the preview scenario
+        type: boolean
+        default: false
 permissions:
   contents: read
 concurrency:
@@ -30,6 +35,16 @@ jobs:
         run: npm run build
       - name: Observe background effects in battle and menus
         run: npx playwright test --config=playwright.performance.config.ts
+      - name: Prove synthetic hitch attribution
+        run: npm run perf -- --scenario diagnostic-stall --out reports/performance/diagnostic-stall
+      - name: Compare span recorder overhead
+        run: |
+          npm run perf -- --scenario preview --spans off --out reports/performance/recorder-inactive
+          npm run perf -- --scenario preview --out reports/performance/recorder-active
+          npm run perf -- overhead reports/performance/recorder-inactive/report.json reports/performance/recorder-active/report.json reports/performance/recorder-overhead
+      - name: Capture requested deep trace
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.trace }}
+        run: npm run perf -- --scenario preview --trace --out reports/performance/preview-trace
       - name: Capture baseline on this runner
         run: |
           for trial in 1 2 3; do

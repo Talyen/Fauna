@@ -4,6 +4,8 @@ import { GameErrorBoundary } from "./ui/shared/diagnostics";
 import { createRoot } from "react-dom/client";
 import { createSession } from "./application/session";
 import { createPlatform } from "./platform";
+import { rendererPerformanceRecorder } from "./platform/performance";
+import { installPerformanceRecorder } from "./lib/performance";
 import { validateContent } from "./game/content-validation";
 import { App } from "./ui/App";
 import { prepareStartup } from "./ui/startup/prepare";
@@ -14,7 +16,11 @@ for (const name of ["full", "empty"])
   document.documentElement.style.setProperty(`--mana-${name}-image`, `url("${assetUrl(`mana.${name}`)}")`);
 export function mountGame(splash: StartupSplash) {
   const platform = createPlatform();
-  const session = createSession(platform, Date.now() >>> 0, { development: import.meta.env.DEV });
+  const releasePerformance = installPerformanceRecorder(rendererPerformanceRecorder);
+  const session = createSession(platform, Date.now() >>> 0, {
+    development: import.meta.env.DEV,
+    performance: rendererPerformanceRecorder,
+  });
   const startup = prepareStartup(session, splash, validateContent);
   let disposed = false;
   function Game() {
@@ -35,6 +41,7 @@ export function mountGame(splash: StartupSplash) {
   const onPageHide = (event: PageTransitionEvent) => {
     if (event.persisted) return;
     disposed = true;
+    releasePerformance();
     startup.dispose();
     splash.dispose();
     window.removeEventListener("error", onError);
@@ -47,6 +54,7 @@ export function mountGame(splash: StartupSplash) {
   });
   const dispose = async () => {
     disposed = true;
+    releasePerformance();
     startup.dispose();
     splash.dispose();
     root.unmount();

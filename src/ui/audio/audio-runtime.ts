@@ -27,52 +27,28 @@ export interface MediaVoice {
   readonly paused?: boolean;
   volume: number;
   loop: boolean;
-  preload: string;
-  onended: (() => void) | null;
-  onerror: (() => void) | null;
+  preload: HTMLMediaElement["preload"];
+  onended: ((event: Event) => void) | null;
+  onerror: ((event: Event) => void) | null;
   play(): Promise<void>;
   pause(): void;
   removeAttribute(name: string): void;
   load(): void;
 }
-function browserMedia(url: string): MediaVoice {
-  const media = new Audio(url);
-  const voice: MediaVoice = {
-    get paused() {
-      return media.paused;
-    },
-    get volume() {
-      return media.volume;
-    },
-    set volume(value) {
-      media.volume = value;
-    },
-    get loop() {
-      return media.loop;
-    },
-    set loop(value) {
-      media.loop = value;
-    },
-    get preload() {
-      return media.preload;
-    },
-    set preload(value) {
-      media.preload = value as HTMLMediaElement["preload"];
-    },
-    onended: null,
-    onerror: null,
-    play: () => media.play(),
-    pause: () => media.pause(),
-    removeAttribute: (name) => media.removeAttribute(name),
-    load: () => media.load(),
-  };
-  media.onended = () => voice.onended?.();
-  media.onerror = () => voice.onerror?.();
-  return voice;
+interface Voice {
+  media: MediaVoice;
+  gain: number;
+  starting: boolean;
+  released: boolean;
+  timer?: ReturnType<typeof setInterval>;
+}
+interface MusicVoice extends Voice {
+  cue: MusicCue;
+  fade: number;
 }
 export function createAudioRuntime(
   report: (error: unknown) => void,
-  makeMedia: (url: string) => MediaVoice = browserMedia,
+  makeMedia: (url: string) => MediaVoice = (url) => new Audio(url),
   quiet = false,
 ) {
   let preferences = defaultAudioPreferences;
@@ -80,12 +56,15 @@ export function createAudioRuntime(
     unlocked = false,
     background = false;
   let requested: MusicCue = "menu";
-  let music: { cue: MusicCue; media: MediaVoice; fade: number } | undefined;
-  const voices = new Set<MediaVoice>();
-  const starting = new WeakSet<MediaVoice>();
-  const voiceGain = new WeakMap<MediaVoice, number>();
-  const fading = new Map<MediaVoice, ReturnType<typeof setInterval>>();
-  const warm = new Set<MediaVoice>();
+  let music: MusicVoice | undefined, outgoing: MusicVoice | undefined;
+  const effects = new Set<Voice>();
+  const warm = new Set<Voice>();
+  const voice = (url: string, gain = 1): Voice => ({
+    media: makeMedia(url),
+    gain,
+    starting: false,
+    released: false,
+  });
   const audible = () =>
     !disposed &&
     !quiet &&
@@ -93,13 +72,16 @@ export function createAudioRuntime(
     preferences.enabled &&
     preferences.master > 0 &&
     !(background && preferences.muteInBackground);
-  const release = (media: MediaVoice) => {
-    const timer = fading.get(media);
-    if (timer) clearInterval(timer);
-    fading.delete(media);
-    voices.delete(media);
-    starting.delete(media);
-    warm.delete(media);
+  const release = (record: Voice) => {
+    if (record.released) return;
+    record.released = true;
+    clearInterval(record.timer);
+    record.timer = undefined;
+    effects.delete(record);
+    warm.delete(record);
+    if (music === record) music = undefined;
+    if (outgoing === record) outgoing = undefined;
+    const { media } = record;
     media.onended = null;
     media.onerror = null;
     try {
@@ -112,21 +94,33 @@ export function createAudioRuntime(
   };
   const volume = (kind: "music" | "effects") =>
     audible() ? ((preferences.master / 100) * preferences[kind]) / 100 : 0;
-  const start = (media: MediaVoice, failed: () => void) => {
-    if (media.paused === false || starting.has(media)) return;
-    starting.add(media);
+  const start = (record: Voice, failed: () => void) => {
+    if (record.released || record.media.paused === false || record.starting) return;
+    record.starting = true;
     const failure = (error: unknown) => {
-      starting.delete(media);
-      if (!disposed && (voices.has(media) || music?.media === media)) {
+      record.starting = false;
+      if (!disposed && !record.released && (effects.has(record) || music === record)) {
         report(error);
         failed();
       }
     };
     try {
-      void Promise.resolve(media.play()).then(() => starting.delete(media), failure);
+      void Promise.resolve(record.media.play()).then(() => (record.starting = false), failure);
     } catch (error) {
       failure(error);
     }
+  };
+  const fade = (record: MusicVoice, target: 0 | 1) => {
+    clearInterval(record.timer);
+    record.timer = setInterval(() => {
+      record.fade = target === 1 ? Math.min(1, record.fade + 0.2) : Math.max(0, record.fade - 0.2);
+      record.media.volume = volume("music") * record.fade;
+      if (record.fade === target) {
+        clearInterval(record.timer);
+        record.timer = undefined;
+        if (target === 0) release(record);
+      }
+    }, 30);
   };
   function updateMusic() {
     if (!audible() || preferences.music === 0) {
@@ -135,31 +129,20 @@ export function createAudioRuntime(
     }
     if (music?.cue === requested) {
       music.media.volume = volume("music") * music.fade;
-      start(music.media, () => {});
+      start(music, () => {});
       return;
     }
     if (music) {
-      const old = music;
-      // The outgoing voice belongs to its fade even if creating its successor fails.
+      if (outgoing) release(outgoing);
+      outgoing = music;
       music = undefined;
-      // Each fade owns only its captured voice; completion cannot stop a successor.
-      for (const media of fading.keys()) {
-        if (media === old.media) {
-          clearInterval(fading.get(media));
-          fading.delete(media);
-        } else release(media);
-      }
-      const timer = setInterval(() => {
-        old.fade = Math.max(0, old.fade - 0.2);
-        old.media.volume = volume("music") * old.fade;
-        if (old.fade === 0) release(old.media);
-      }, 30);
-      fading.set(old.media, timer);
+      // The outgoing track completes its fade even if creating the next track fails.
+      fade(outgoing, 0);
     }
     try {
-      const record = {
+      const record: MusicVoice = {
+        ...voice(assetUrl(`music.${requested === "combat" ? "fernwood" : requested}`)),
         cue: requested,
-        media: makeMedia(assetUrl(`music.${requested === "combat" ? "fernwood" : requested}`)),
         fade: 0,
       };
       music = record;
@@ -169,29 +152,11 @@ export function createAudioRuntime(
       record.media.onerror = () => {
         if (!disposed && music === record) {
           report(new Error(`Music could not play: ${record.cue}`));
-          release(record.media);
-          music = undefined;
+          release(record);
         }
       };
-      const timer = setInterval(() => {
-        if (disposed || music !== record) {
-          clearInterval(timer);
-          return;
-        }
-        record.fade = Math.min(1, record.fade + 0.2);
-        record.media.volume = volume("music") * record.fade;
-        if (record.fade === 1) {
-          clearInterval(timer);
-          fading.delete(record.media);
-        }
-      }, 30);
-      fading.set(record.media, timer);
-      start(record.media, () => {
-        if (music === record) {
-          release(record.media);
-          music = undefined;
-        }
-      });
+      fade(record, 1);
+      start(record, () => release(record));
     } catch (error) {
       report(error);
     }
@@ -207,10 +172,10 @@ export function createAudioRuntime(
       // A bounded warm set; startup never waits for decoding or network work.
       for (const cue of ["physical", "block", "heal"] as const) {
         try {
-          const media = makeMedia(assetUrl(`sound.${cue}`));
-          media.preload = "auto";
-          warm.add(media);
-          media.load();
+          const record = voice(assetUrl(`sound.${cue}`));
+          warm.add(record);
+          record.media.preload = "auto";
+          record.media.load();
         } catch (error) {
           report(error);
         }
@@ -220,14 +185,11 @@ export function createAudioRuntime(
     configure(value: AudioPreferences) {
       if (disposed) return;
       preferences = normalizeAudioPreferences(value);
-      for (const media of voices) {
-        media.volume = volume("effects") * (voiceGain.get(media) ?? 1);
-        if (!audible()) release(media);
+      for (const record of effects) {
+        record.media.volume = volume("effects") * record.gain;
+        if (!audible()) release(record);
       }
-      for (const media of fading.keys())
-        if (media !== music?.media) {
-          if (!audible()) release(media);
-        }
+      if (outgoing && !audible()) release(outgoing);
       if (music) music.media.volume = volume("music") * music.fade;
       updateMusic();
     },
@@ -244,31 +206,29 @@ export function createAudioRuntime(
     play(cue: SoundCue) {
       if (!audible() || preferences.effects === 0) return;
       try {
-        if (voices.size >= 6) release(voices.values().next().value!);
-        const media = makeMedia(assetUrl(`sound.${cue}`));
-        const gain = cue === "activate" ? 0.35 : 1;
-        voiceGain.set(media, gain);
-        media.volume = volume("effects") * gain;
+        if (effects.size >= 6) release(effects.values().next().value!);
+        const record = voice(assetUrl(`sound.${cue}`), cue === "activate" ? 0.35 : 1);
+        effects.add(record);
+        const { media } = record;
+        media.volume = volume("effects") * record.gain;
         media.loop = false;
         media.preload = "auto";
-        voices.add(media);
-        media.onended = () => release(media);
+        media.onended = () => release(record);
         media.onerror = () => {
-          if (voices.has(media)) {
+          if (effects.has(record)) {
             report(new Error(`Sound could not play: ${cue}`));
-            release(media);
+            release(record);
           }
         };
-        start(media, () => release(media));
+        start(record, () => release(record));
       } catch (error) {
         report(error);
       }
     },
     dispose() {
       disposed = true;
-      for (const media of [...voices, ...warm, ...fading.keys(), ...(music ? [music.media] : [])])
-        release(media);
-      music = undefined;
+      for (const record of [...effects, ...warm, ...(music ? [music] : []), ...(outgoing ? [outgoing] : [])])
+        release(record);
     },
   };
 }
