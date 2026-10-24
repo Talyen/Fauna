@@ -120,6 +120,8 @@ Feature folders own their layouts; `shared/` owns reusable cards, combat readout
 
 [Battle interaction](../src/ui/battle/battle-interaction.ts) owns transient selection, input and focus. [Target geometry](../src/ui/battle/use-target-line.ts) measures the existing layout; one [preview presentation model](../src/ui/battle/play-preview-model.ts) supplies affected units and per-recipient readouts from the authoritative preview. [Card rules](../src/game/card-rules.ts) classify targets, and gameplay queries supply legal explicit recipients without choosing random or future group targets.
 
+[Audio playback](../src/ui/audio/audio-runtime.ts) owns each media voice's pending start, gain, fade timer and release state together. Music keeps explicit current and outgoing tracks; replacing a fade cancels its previous timer. One idempotent release path revokes callbacks and media resources, so late playback results cannot affect a replacement track or a disposed runtime. The runtime retains the six-effect limit, bounded warmup, gesture retry and device mute preferences.
+
 `src/ui/styles.css` owns stylesheet order. Preserve shared declarations and repeated-selector order when moving CSS; unchanged declarations alone do not prove rendering parity. Result presentation shares one completion context so input and reduced motion finish the same animation from any consumer.
 
 ### Save validation details
