@@ -243,7 +243,6 @@ export function Talents({
                       <TooltipTrigger asChild>
                         <Button
                           effectKeywords={[keyword]}
-                          attention={available}
                           variant="outline"
                           className="talent-node"
                           aria-label={`${t.name}${owned ? ", unlocked" : ""}`}

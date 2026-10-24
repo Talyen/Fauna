@@ -1,6 +1,5 @@
 import { useEffectBaseline } from "../effects/effects";
 import { creatureKeywords, effectPalette, visualKeywords } from "../effects/palettes";
-import { ShineBorder } from "../effects/treatments";
 import { CombatStatus } from "../combat/combat-status";
 import { assetUrl } from "../assets";
 import { useState, type ComponentProps, type ReactNode } from "react";
@@ -145,10 +144,7 @@ export function CreatureCard({
               </TooltipContent>
             </Tooltip>
           )}
-          <div className={`combatant-details ${health !== 0 && combat?.grace ? "effect-readout-frame" : ""}`}>
-            {health !== 0 && combat?.grace ? (
-              <ShineBorder colors={effectPalette([], "death").border} duration={4} />
-            ) : null}
+          <div className="combatant-details">
             {preview ? (
               preview
             ) : readout && health !== undefined && (actorId || enemyId) ? (

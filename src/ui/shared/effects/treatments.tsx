@@ -80,22 +80,17 @@ export function ShineIcon({
 export function EffectButton({
   effectKeywords,
   effectTone,
-  attention = false,
   children,
   ...props
 }: ButtonProps & {
   ref?: Ref<HTMLButtonElement>;
   effectKeywords?: readonly KeywordId[];
   effectTone?: EffectTone;
-  attention?: boolean;
 }) {
   const metadata = useEffectMetadata(effectKeywords, effectTone);
   return (
     <Button {...props} {...metadata}>
       {children}
-      {attention && !props.disabled && !props["aria-disabled"] ? (
-        <ShineBorder colors={effectPalette(effectKeywords, effectTone).border} duration={8} />
-      ) : null}
     </Button>
   );
 }
