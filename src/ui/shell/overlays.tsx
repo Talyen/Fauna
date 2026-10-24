@@ -105,6 +105,7 @@ export function ShellOverlays({
         <Dialog key={replacement.id} open>
           <DialogContent
             className="swap-dialog"
+            data-nav-layout="rows"
             showCloseButton={false}
             onOpenAutoFocus={(event) => {
               const first = document.querySelector<HTMLElement>('.swap-dialog [aria-label="Backup"] button');

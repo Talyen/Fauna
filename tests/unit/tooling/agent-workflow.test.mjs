@@ -612,40 +612,67 @@ it("enforces ordinary local command budgets while retaining CI parallelism and f
   expect(runner).toHaveBeenCalledTimes(1);
 });
 
-it(
-  "migrates the old socket lock once and then ignores unrelated services on its former port",
-  { timeout: 45000 },
-  async () => {
-    const root = fixture();
-    put(root, "scripts/lib/integration-lock.mjs", "// previous integration entrypoint\n");
-    const common = git(root, "rev-parse", "--absolute-git-dir");
-    const port = 20000 + (createHash("sha256").update(common).digest().readUInt32BE(0) % 40000);
-    const unrelated = net.createServer();
-    const listen = () =>
-      new Promise((resolve, reject) => {
-        unrelated.once("error", reject);
-        unrelated.listen({ host: "127.0.0.1", port, exclusive: true }, resolve);
-      });
-    const close = () =>
-      new Promise((resolve, reject) => unrelated.close((error) => (error ? reject(error) : resolve())));
-    await listen();
-    try {
-      await expect(acquireIntegrationLock(root)).rejects.toThrow("one-time upgrade");
-    } finally {
-      await close();
-    }
-    const release = await acquireIntegrationLock(root);
+it("migrates the old socket lock once and then ignores unrelated services on its former port", async () => {
+  const root = fixture();
+  put(root, "scripts/lib/integration-lock.mjs", "// previous integration entrypoint\n");
+  const common = git(root, "rev-parse", "--absolute-git-dir");
+  const port = 20000 + (createHash("sha256").update(common).digest().readUInt32BE(0) % 40000);
+  const unrelated = net.createServer();
+  const listen = () =>
+    new Promise((resolve, reject) => {
+      unrelated.once("error", reject);
+      unrelated.listen({ host: "127.0.0.1", port, exclusive: true }, resolve);
+    });
+  const close = () =>
+    new Promise((resolve, reject) => unrelated.close((error) => (error ? reject(error) : resolve())));
+  await listen();
+  try {
+    await expect(acquireIntegrationLock(root)).rejects.toThrow("one-time upgrade");
+  } finally {
+    await close();
+  }
+  let now = 1000;
+  let advance;
+  const clock = {
+    now: () => now,
+    delay: vi.fn(
+      (ms) =>
+        new Promise((resolve) => {
+          advance = () => {
+            now += ms;
+            resolve();
+          };
+        }),
+    ),
+  };
+  const release = await acquireIntegrationLock(root, { clock });
+  await expect(acquireIntegrationLock(root)).rejects.toThrow("Integration lock is occupied");
+  const releasing = release();
+  try {
+    expect(clock.delay).toHaveBeenCalledWith(30_000);
+    expect(readFileSync(path.join(common, "fauna-integration.lock"), "utf8")).toBe("");
     await expect(acquireIntegrationLock(root)).rejects.toThrow("Integration lock is occupied");
-    await release();
-    await listen();
-    try {
-      const finish = await acquireIntegrationLock(root);
-      await finish();
-    } finally {
-      await close();
-    }
-  },
-);
+    const waiter = net.createServer();
+    const error = await new Promise((resolve) => {
+      waiter.once("error", resolve);
+      waiter.once("listening", () => waiter.close(() => resolve(null)));
+      waiter.listen({ host: "127.0.0.1", port, exclusive: true });
+    });
+    expect(error?.code).toBe("EADDRINUSE");
+  } finally {
+    advance();
+    await releasing;
+  }
+  expect(now).toBe(31_000);
+  expect(readFileSync(path.join(common, "fauna-integration.lock"), "utf8")).toBe("1");
+  await listen();
+  try {
+    const finish = await acquireIntegrationLock(root);
+    await finish();
+  } finally {
+    await close();
+  }
+});
 
 it("admits outer heavy commands before setup, preserves busy status and avoids nested admission", async () => {
   if (process.platform !== "darwin") return;

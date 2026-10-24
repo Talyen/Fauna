@@ -18,6 +18,37 @@ function count(value) {
   return value;
 }
 
+function slowUnitTests(report) {
+  const fileName = (file) => {
+    const normalized = String(file ?? "").replaceAll("\\", "/");
+    return text(normalized.slice(normalized.lastIndexOf("/tests/") + 1));
+  };
+  const slowest = (rows) =>
+    rows
+      .filter((row) => Number.isFinite(row.duration) && row.duration >= 0)
+      .sort((a, b) => b.duration - a.duration || a.name.localeCompare(b.name))
+      .slice(0, 10)
+      .map((row) => `- ${(row.duration / 1000).toFixed(2)}s — ${row.name}`);
+  const suites = slowest(
+    report.testResults.map((suite) => ({
+      name: fileName(suite.name),
+      duration: suite.endTime - suite.startTime,
+    })),
+  );
+  const tests = slowest(
+    report.testResults.flatMap((suite) =>
+      (suite.assertionResults ?? []).map((test) => ({
+        name: `${fileName(suite.name)} — ${text(test.fullName ?? test.title)}`,
+        duration: test.duration,
+      })),
+    ),
+  );
+  return [
+    ...(suites.length ? ["", "Slowest test files (each shard measured separately):", ...suites] : []),
+    ...(tests.length ? ["", "Slowest tests:", ...tests] : []),
+  ];
+}
+
 export function summarizeReport(kind, report) {
   if (!report || typeof report !== "object") throw new Error("Invalid report object.");
   const failures = [],
@@ -88,6 +119,7 @@ export function summarizeReport(kind, report) {
       ...errors.slice(0, 10).map((error) => `- Runner error: ${error}`),
       ...failures.slice(0, 10).map((failure) => `- ${failure}`),
       ...(failures.length > 10 ? [`- ${failures.length - 10} more failures; see the JSON report.`] : []),
+      ...(kind === "vitest" ? slowUnitTests(report) : []),
       ...(kind === "playwright"
         ? [
             "",

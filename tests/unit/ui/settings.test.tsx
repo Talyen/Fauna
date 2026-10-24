@@ -2,13 +2,61 @@ import userEvent, { PointerEventsCheckLevel } from "@testing-library/user-event"
 import { screenTestEnvironment } from "../../support/ui";
 // @vitest-environment jsdom
 import { expect, it, vi } from "vitest";
-import { act, render, screen, waitFor } from "@testing-library/react";
+import { act, render, renderHook, screen, waitFor } from "@testing-library/react";
 import { App } from "../../../src/ui/App";
 import { createSession } from "../../../src/application/session";
 import { createBrowserPlatform } from "../../../src/platform/browser";
 import { moveFocus } from "../../../src/ui/shared/navigation/input";
 
+import { useDevicePreferences } from "../../../src/ui/settings/preferences";
+
 screenTestEnvironment();
+
+it("retains independent changes batched through the shared preference owner", () => {
+  const hook = renderHook(useDevicePreferences);
+  act(() => {
+    hook.result.current[1]({ audio: { master: 30 }, scale: 1.25 });
+    hook.result.current[1]({ audio: { music: 80 }, glow: 0, controller: "nintendo" });
+    hook.result.current[1]({ tooltipScale: 0.75, autoEndTurn: false });
+  });
+  expect(hook.result.current[0]).toEqual({
+    audio: { enabled: true, master: 30, music: 80, effects: 50, muteInBackground: true },
+    glow: 0,
+    particles: 100,
+    scale: 1.25,
+    tooltipScale: 0.75,
+    controller: "nintendo",
+    autoEndTurn: false,
+  });
+  const audio = hook.result.current[0].audio;
+  act(() => hook.result.current[1]({ particles: 100 }));
+  expect(hook.result.current[0].audio).toBe(audio);
+  hook.unmount();
+  const restored = renderHook(useDevicePreferences);
+  expect(restored.result.current[0]).toEqual({
+    audio: JSON.parse(localStorage.getItem("fauna.audio.v1")!),
+    glow: 0,
+    particles: 100,
+    scale: 1.25,
+    tooltipScale: 0.75,
+    controller: "nintendo",
+    autoEndTurn: false,
+  });
+});
+
+it("keeps preferences usable when optional storage is unavailable", () => {
+  vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => {
+    throw new Error("Unavailable");
+  });
+  vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => {
+    throw new Error("Full");
+  });
+  const hook = renderHook(useDevicePreferences);
+  expect(hook.result.current[0].audio.master).toBe(50);
+  act(() => hook.result.current[1]({ audio: { master: 150, music: Number.NaN }, glow: -4 }));
+  expect(hook.result.current[0].audio).toMatchObject({ master: 100, music: 50 });
+  expect(hook.result.current[0].glow).toBe(0);
+});
 
 it("applies slider and switch changes live, persists preferences, and preserves gameplay", async () => {
   vi.spyOn(HTMLElement.prototype, "getClientRects").mockReturnValue([{}] as unknown as DOMRectList);
