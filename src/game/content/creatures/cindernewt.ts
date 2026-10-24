@@ -1,3 +1,4 @@
+import { sixPassiveTiers } from "../passive-tiers";
 import { attack } from "../card-builders";
 import type { CreatureKit } from "../types";
 export const cindernewt: CreatureKit = {
@@ -8,32 +9,10 @@ export const cindernewt: CreatureKit = {
     health: 24,
     color: "#ed9c65",
     trait: "Cinderstep",
-    passiveTiers: [
-      {
-        description: "When you Dodge, deal 1 Burn damage to the attacker",
-        effects: [{ kind: "dodgeBurn", amount: 1 }],
-      },
-      {
-        description: "When you Dodge, deal 2 Burn damage to the attacker",
-        effects: [{ kind: "dodgeBurn", amount: 2 }],
-      },
-      {
-        description: "When you Dodge, deal 3 Burn damage to the attacker",
-        effects: [{ kind: "dodgeBurn", amount: 3 }],
-      },
-      {
-        description: "When you Dodge, deal 4 Burn damage to the attacker",
-        effects: [{ kind: "dodgeBurn", amount: 4 }],
-      },
-      {
-        description: "When you Dodge, deal 5 Burn damage to the attacker",
-        effects: [{ kind: "dodgeBurn", amount: 5 }],
-      },
-      {
-        description: "When you Dodge, deal 6 Burn damage to the attacker",
-        effects: [{ kind: "dodgeBurn", amount: 6 }],
-      },
-    ],
+    passiveTiers: sixPassiveTiers([1, 2, 3, 4, 5, 6], (amount) => ({
+      description: `When you Dodge, deal ${amount} Burn damage to the attacker`,
+      effects: [{ kind: "dodgeBurn", amount }],
+    })),
   },
   cards: [
     {

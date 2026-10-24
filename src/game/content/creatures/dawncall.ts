@@ -1,3 +1,4 @@
+import { sixPassiveTiers } from "../passive-tiers";
 import { card, attack } from "../card-builders";
 import type { CreatureKit } from "../types";
 export const dawncall: CreatureKit = {
@@ -8,32 +9,13 @@ export const dawncall: CreatureKit = {
     health: 24,
     color: "#eab75b",
     trait: "Early Bird",
-    passiveTiers: [
-      {
-        description: "Your first attack each turn gains 20% Critical hit chance",
-        effects: [{ kind: "earlyBird", amount: 20 }],
-      },
-      {
-        description: "Your first attack each turn gains 35% Critical hit chance",
-        effects: [{ kind: "earlyBird", amount: 35 }],
-      },
-      {
-        description: "Your first attack each turn gains 50% Critical hit chance",
-        effects: [{ kind: "earlyBird", amount: 50 }],
-      },
-      {
-        description: "Your first attack each turn gains 65% Critical hit chance",
-        effects: [{ kind: "earlyBird", amount: 65 }],
-      },
-      {
-        description: "Your first attack each turn gains 80% Critical hit chance",
-        effects: [{ kind: "earlyBird", amount: 80 }],
-      },
-      {
-        description: "Your first attack each turn is a Critical Hit",
-        effects: [{ kind: "earlyBird", amount: 100 }],
-      },
-    ],
+    passiveTiers: sixPassiveTiers([20, 35, 50, 65, 80, 100], (amount) => ({
+      description:
+        amount === 100
+          ? "Your first attack each turn is a Critical Hit"
+          : `Your first attack each turn gains ${amount}% Critical hit chance`,
+      effects: [{ kind: "earlyBird", amount }],
+    })),
   },
   cards: [
     {

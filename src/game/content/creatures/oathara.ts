@@ -1,3 +1,4 @@
+import { sixPassiveTiers } from "../passive-tiers";
 import { card } from "../card-builders";
 import type { CreatureKit } from "../types";
 
@@ -9,32 +10,10 @@ export const oathara: CreatureKit = {
     health: 30,
     color: "#e5b85a",
     trait: "Unfinished Journey",
-    passiveTiers: [
-      {
-        description: "Oathara can play 1 fallen ally card per turn",
-        effects: [{ kind: "unfinishedJourney", amount: 1 }],
-      },
-      {
-        description: "Oathara can play 2 fallen ally cards per turn",
-        effects: [{ kind: "unfinishedJourney", amount: 2 }],
-      },
-      {
-        description: "Oathara can play 3 fallen ally cards per turn",
-        effects: [{ kind: "unfinishedJourney", amount: 3 }],
-      },
-      {
-        description: "Oathara can play 4 fallen ally cards per turn",
-        effects: [{ kind: "unfinishedJourney", amount: 4 }],
-      },
-      {
-        description: "Oathara can play 5 fallen ally cards per turn",
-        effects: [{ kind: "unfinishedJourney", amount: 5 }],
-      },
-      {
-        description: "Oathara can play 6 fallen ally cards per turn",
-        effects: [{ kind: "unfinishedJourney", amount: 6 }],
-      },
-    ],
+    passiveTiers: sixPassiveTiers([1, 2, 3, 4, 5, 6], (amount) => ({
+      description: `Oathara can play ${amount} fallen ally card${amount === 1 ? "" : "s"} per turn`,
+      effects: [{ kind: "unfinishedJourney", amount }],
+    })),
   },
   cards: [
     {

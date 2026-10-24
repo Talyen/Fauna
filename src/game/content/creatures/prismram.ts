@@ -1,3 +1,4 @@
+import { sixPassiveTiers } from "../passive-tiers";
 import { card, attack } from "../card-builders";
 import type { CreatureKit } from "../types";
 export const prismram: CreatureKit = {
@@ -8,38 +9,10 @@ export const prismram: CreatureKit = {
     health: 30,
     color: "#b7b2e2",
     trait: "Refraction",
-    passiveTiers: [
-      {
-        description:
-          "Harmful status effects you receive have a 10% chance to be redirected to a random enemy",
-        effects: [{ kind: "statusReflection", amount: 10 }],
-      },
-      {
-        description:
-          "Harmful status effects you receive have a 20% chance to be redirected to a random enemy",
-        effects: [{ kind: "statusReflection", amount: 20 }],
-      },
-      {
-        description:
-          "Harmful status effects you receive have a 30% chance to be redirected to a random enemy",
-        effects: [{ kind: "statusReflection", amount: 30 }],
-      },
-      {
-        description:
-          "Harmful status effects you receive have a 40% chance to be redirected to a random enemy",
-        effects: [{ kind: "statusReflection", amount: 40 }],
-      },
-      {
-        description:
-          "Harmful status effects you receive have a 50% chance to be redirected to a random enemy",
-        effects: [{ kind: "statusReflection", amount: 50 }],
-      },
-      {
-        description:
-          "Harmful status effects you receive have a 60% chance to be redirected to a random enemy",
-        effects: [{ kind: "statusReflection", amount: 60 }],
-      },
-    ],
+    passiveTiers: sixPassiveTiers([10, 20, 30, 40, 50, 60], (amount) => ({
+      description: `Harmful status effects you receive have a ${amount}% chance to be redirected to a random enemy`,
+      effects: [{ kind: "statusReflection", amount }],
+    })),
   },
   cards: [
     {

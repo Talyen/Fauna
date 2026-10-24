@@ -1,3 +1,4 @@
+import { sixPassiveTiers } from "../passive-tiers";
 import { card, attack } from "../card-builders";
 import type { CreatureKit } from "../types";
 
@@ -9,32 +10,10 @@ export const tournelle: CreatureKit = {
     health: 30,
     color: "#b7453b",
     trait: "Gallantry",
-    passiveTiers: [
-      {
-        description: "10% chance to intercept attacks against a more injured ally",
-        effects: [{ kind: "gallantry", amount: 10 }],
-      },
-      {
-        description: "20% chance to intercept attacks against a more injured ally",
-        effects: [{ kind: "gallantry", amount: 20 }],
-      },
-      {
-        description: "30% chance to intercept attacks against a more injured ally",
-        effects: [{ kind: "gallantry", amount: 30 }],
-      },
-      {
-        description: "40% chance to intercept attacks against a more injured ally",
-        effects: [{ kind: "gallantry", amount: 40 }],
-      },
-      {
-        description: "50% chance to intercept attacks against a more injured ally",
-        effects: [{ kind: "gallantry", amount: 50 }],
-      },
-      {
-        description: "60% chance to intercept attacks against a more injured ally",
-        effects: [{ kind: "gallantry", amount: 60 }],
-      },
-    ],
+    passiveTiers: sixPassiveTiers([10, 20, 30, 40, 50, 60], (amount) => ({
+      description: `${amount}% chance to intercept attacks against a more injured ally`,
+      effects: [{ kind: "gallantry", amount }],
+    })),
   },
   cards: [
     {

@@ -1,3 +1,4 @@
+import { sixPassiveTiers } from "../passive-tiers";
 import { card } from "../card-builders";
 import type { CreatureKit } from "../types";
 export const stillara: CreatureKit = {
@@ -8,32 +9,10 @@ export const stillara: CreatureKit = {
     health: 26,
     color: "#94aabd",
     trait: "First Thaw",
-    passiveTiers: [
-      {
-        description: "Allies take 10% less Freeze damage",
-        effects: [{ kind: "teamFreezeResistance", amount: 10 }],
-      },
-      {
-        description: "Allies take 20% less Freeze damage",
-        effects: [{ kind: "teamFreezeResistance", amount: 20 }],
-      },
-      {
-        description: "Allies take 30% less Freeze damage",
-        effects: [{ kind: "teamFreezeResistance", amount: 30 }],
-      },
-      {
-        description: "Allies take 40% less Freeze damage",
-        effects: [{ kind: "teamFreezeResistance", amount: 40 }],
-      },
-      {
-        description: "Allies take 50% less Freeze damage",
-        effects: [{ kind: "teamFreezeResistance", amount: 50 }],
-      },
-      {
-        description: "Allies take 60% less Freeze damage",
-        effects: [{ kind: "teamFreezeResistance", amount: 60 }],
-      },
-    ],
+    passiveTiers: sixPassiveTiers([10, 20, 30, 40, 50, 60], (amount) => ({
+      description: `Allies take ${amount}% less Freeze damage`,
+      effects: [{ kind: "teamFreezeResistance", amount }],
+    })),
   },
   cards: [
     {
