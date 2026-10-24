@@ -276,7 +276,7 @@ describe("player interface", () => {
     await session.dispose();
   });
   it.each(["hover", "keyboard"])(
-    "shows each creature copy with current Block and no Health totals using %s",
+    "keeps creature details focused on identity and rules while live Block stays on the battlefield using %s",
     async (input) => {
       const game = produce(teamRun(7, ["mossguard", "mossguard", "prismram"]), (d) => {
         d.team[0]!.health = 7;
@@ -309,8 +309,9 @@ describe("player interface", () => {
         else act(() => creature.focus());
         const tooltip = (await screen.findByRole("tooltip")).textContent!;
         expect(tooltip).not.toMatch(/\d+\/\d+ health/i);
-        if (block) expect(tooltip).toContain(`${block} block`);
-        else expect(tooltip).not.toMatch(/\d+ block/);
+        expect(tooltip).not.toMatch(/\d+ block/);
+        const frame = document.querySelector<HTMLElement>(`.player-row [data-actor-id="${id}"]`)!;
+        if (block) expect(frame.querySelector(`[aria-label="Block ${block}"]`)).toBeTruthy();
         if (input === "hover") await user.unhover(creature);
       }
       const fallen = produce(game, (draft) => {

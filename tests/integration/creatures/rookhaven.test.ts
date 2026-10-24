@@ -297,7 +297,7 @@ it("copies survive play, discard, reshuffle, save/resume and copying a previousl
     draw(draft, 1);
   });
   const copy = copies(game)[0]!;
-  game = accept(game, { type: "play", cardId: copy.id, targetId: copy.ownerId, autoEndTurn: false });
+  game = accept(game, { type: "play", cardId: copy.id, targetId: copy.ownerId!, autoEndTurn: false });
   expect(game.battle!.discard).toContain(copy.id);
   roundTrip(game);
   game = produce(game, (draft) => {

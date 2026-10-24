@@ -255,7 +255,7 @@ function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?
               </TooltipTrigger>
               {!selected ? (
                 <TooltipContent>
-                  <CreatureDetails kind={creature.species} block={creature.block} />
+                  <CreatureDetails kind={creature.species} />
                 </TooltipContent>
               ) : null}
             </Tooltip>
@@ -284,7 +284,7 @@ function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?
             >
               <ActionCard
                 card={card}
-                ownerName={species(definition(card.definitionId).species).name}
+                ownerName={species(definition(card.definitionId).species!).name}
                 actor={team.find((creature) => creature.id === card.ownerId)}
                 tooltips={!selected}
                 selected={selected?.id === card.id}
@@ -303,7 +303,7 @@ function Battle({ variant, targeting = false }: { variant: "a" | "b"; targeting?
                     content: (
                       <ActionDetails
                         card={card}
-                        ownerName={species(definition(card.definitionId).species).name}
+                        ownerName={species(definition(card.definitionId).species!).name}
                         actor={team.find((creature) => creature.id === card.ownerId)}
                       />
                     ),

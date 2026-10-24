@@ -262,7 +262,7 @@ it("counts accepted cards once across previews and resume, refunds before auto-e
   state.battle!.buffer = [];
   state.battle!.discard = [];
   state.battle!.mana = definition(card.definitionId).cost;
-  const targetId = card.ownerId;
+  const targetId = card.ownerId!;
   const preview = previewCard(state, card.id, targetId);
   expect(preview.accepted && preview.state.battle!.mana).toBe(1);
   expect(state.battle!.cardsPlayedThisTurn).toBe(2);

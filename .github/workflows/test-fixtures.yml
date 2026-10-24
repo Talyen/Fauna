@@ -1,0 +1,37 @@
+name: Test fixture diagnostic
+on:
+  push:
+    branches: [task/test-suite-followup]
+    paths: [scripts/ci/fixture-diagnostic.mjs, .github/workflows/test-fixtures.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  fixtures:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      ELECTRON_SKIP_BINARY_DOWNLOAD: "1"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - run: npm install --global npm@12.2.1 --ignore-scripts --no-audit --no-fund
+      - run: npm ci --no-audit --no-fund
+      - name: Find a bounded winning expedition fixture
+        run: node scripts/ci/fixture-diagnostic.mjs
+      - name: Generate current-catalog snapshot candidates for review
+        run: npm run test:full -- tests/unit/application/battle-policy.test.ts tests/unit/game/journey-lifecycle.test.ts --update
+      - name: Retain diagnostic evidence and snapshot candidates
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: fixture-diagnostic
+          retention-days: 7
+          if-no-files-found: error
+          path: |
+            reports/fixture-diagnostic/
+            tests/unit/application/__snapshots__/battle-policy.test.ts.snap
+            tests/unit/game/__snapshots__/journey-lifecycle.test.ts.snap

@@ -171,6 +171,7 @@ it("a broken performance sink cannot change application results, save ordering o
   const session = createSession(
     {
       desktop: false,
+      steam: { available: false },
       saves: {
         readCandidates: async () => [{ source: "primary", data }],
         write: async (value) => {
@@ -271,7 +272,7 @@ it("finds small hitches without long tasks and correlates a cross-action gap by 
   expect(summary.hitches.map((gap: { duration: number }) => gap.duration)).toEqual([80, 35]);
   expect(summary.hitches[0]!.actions).toEqual(["play", "feedback"]);
   expect(summary.hitches[0]!.spans[0]!.name).toBe("preview");
-  expect(summary.hitches[0].longAnimationFrames).toBeNull();
+  expect(summary.hitches[0]!.longAnimationFrames).toBeNull();
   for (const changed of [{ truncated: true }, { interrupted: true }, { focused: false }])
     expect(() => summarizeSample({ ...sample(), ...changed })).toThrow();
 });

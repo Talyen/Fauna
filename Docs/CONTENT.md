@@ -75,7 +75,7 @@ Lossless encoding preserves resized pixels and alpha, but downsampling changes p
 
 ### Build inventory
 
-Runtime artwork/audio resolves IDs through the generated lookup. Builds disable automatic public-directory copying and emit only active media plus the build receipt; originals, cache receipts and old generations stay out of the renderer. Validation rejects extra/missing media, changed bytes and unapproved public resources. Limits are 128 MiB total media and 3 MiB per image; JavaScript has its [separate budget](../scripts/README.md#bundle-allowance). Retained historical generations do not enlarge new builds.
+Runtime artwork/audio resolves IDs through the generated lookup. Builds disable automatic public-directory copying and emit only active media plus the build receipt; originals, cache receipts and old generations stay out of the renderer. Validation rejects extra/missing media, changed bytes and unapproved public resources. Limits are 144 MiB total media and 3 MiB per image; JavaScript has its [separate budget](../scripts/README.md#bundle-allowance). The current 186 active objects measure 134.57 MiB, up from 124.95 MiB for 175 objects in green CI commit `cac9c181`; the entire 9.62 MiB increase is eleven Almanelle, Orifable and Food images. This allowance preserves their existing lossless bytes, hashes and dimensions. Retained historical generations do not enlarge new builds.
 
 ### Audio selections
 
