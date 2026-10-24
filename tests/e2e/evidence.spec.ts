@@ -1,4 +1,5 @@
-import { test, expect } from "./support/session";
+import { expect } from "@playwright/test";
+import { test } from "./support/session";
 import { settleScreen } from "./support/rendered-evidence";
 
 test("rendered evidence waits for chained and replacement transitions while decoration continues", async ({

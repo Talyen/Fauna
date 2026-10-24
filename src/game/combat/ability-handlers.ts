@@ -43,7 +43,8 @@ function recoverDiscard(state: GameState, events: GameEvent[]) {
     return card.ownerId === null || drawableOwnerIds(state).has(card.ownerId);
   });
   if (!available.length) return;
-  const id = available[Math.floor(roll(state) * available.length)]!;
+  const id =
+    available[Math.floor(roll(state, { kind: "index", size: available.length }) * available.length)]!;
   battle.discard.splice(battle.discard.indexOf(id), 1);
   receiveCard(state, id);
   const card = state.cards.find((entry) => entry.id === id)!;
@@ -75,7 +76,7 @@ function teamProtection(
   events: GameEvent[],
   power: number,
 ) {
-  const block = roll(state) < 0.5;
+  const block = roll(state, { kind: "chance", threshold: 0.5 }) < 0.5;
   for (const unit of battlefield(state, enemy ? "enemy" : "player")) {
     if (unit.health <= 0) continue;
     if (block) grantBlock(state, unit, scalePower(amount, power), events);
@@ -100,7 +101,8 @@ const createPearlsAbility: PrimaryHandler<"createPearls"> = (context) => {
 
 const pearlAbility: PrimaryHandler<"pearl"> = (context) => {
   const { state, action, actor, value, events, power } = context;
-  if (roll(state) < 0.5) grantBlock(state, actor, scalePower(value, power), events);
+  if (roll(state, { kind: "chance", threshold: 0.5 }) < 0.5)
+    grantBlock(state, actor, scalePower(value, power), events);
   else if (action.side === "enemy" && action.actor.deck)
     action.actor.deck.mana = Math.min(4, action.actor.deck.mana + value);
   else gainMana(state, value, events);
@@ -122,7 +124,10 @@ const attackAbility: PrimaryHandler<"attack"> = (context) => {
     negated,
   } = context;
   let { attackTarget } = context;
-  const damageType = def.alternateDamageType && roll(state) < 0.5 ? def.alternateDamageType : def.damageType;
+  const damageType =
+    def.alternateDamageType && roll(state, { kind: "chance", threshold: 0.5 }) < 0.5
+      ? def.alternateDamageType
+      : def.damageType;
   const targets =
     def.target === "allEnemies"
       ? alive(opposingRow(state, action))

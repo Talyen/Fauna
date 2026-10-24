@@ -89,7 +89,9 @@ export function* bounce(
       if (source.health <= 0 || !eligible.length) return;
       if (entry.chance !== undefined && !succeeds(state, entry.chance, !allied, action.events)) return;
       const target =
-        effect === "heal" ? mostInjured(eligible)! : eligible[Math.floor(roll(state) * eligible.length)]!;
+        effect === "heal"
+          ? mostInjured(eligible)!
+          : eligible[Math.floor(roll(state, { kind: "index", size: eligible.length }) * eligible.length)]!;
       visitedTargets.add(target.id);
       if (action.effect === "heal")
         yield* reaction(

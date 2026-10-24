@@ -1,4 +1,5 @@
 import { bounce, hit, resolveHit, negateAttack } from "./damage";
+import { previewWork } from "../random";
 import {
   restoreHealth,
   shareProtection,
@@ -66,6 +67,7 @@ export function resolveCombat<K extends OperationName>(
   const stack: Resolution<unknown>[] = [frame({ kind, args } as CombatOperation)];
   let result: unknown;
   while (stack.length) {
+    previewWork(args[0]);
     const step = stack[stack.length - 1]!.next(result);
     result = undefined;
     if (step.done) {

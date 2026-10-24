@@ -55,7 +55,7 @@ export function executeAbility(
   // Select once for the whole ability, including repeats. Group targets are read again per resolution.
   const target =
     def.effect === "attack" && def.target === "randomEnemy"
-      ? opponents[Math.floor(roll(state) * opponents.length)]
+      ? opponents[Math.floor(roll(state, { kind: "index", size: opponents.length }) * opponents.length)]
       : def.effect === "attack" && def.target === "allEnemies"
         ? undefined
         : opponents.find((unit) => unit.id === action.targetId);

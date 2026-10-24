@@ -1,3 +1,4 @@
+import { observeDecisions } from "./random";
 import { useFood } from "./combat/food";
 import { cardActor } from "./card-actors";
 import { inspectCardPlay, playTargetError } from "./play-queries";
@@ -75,11 +76,21 @@ export function dispatch(state: GameState, command: Command, development = false
   return resolve(state, command, false);
 }
 
-export function previewCard(state: GameState, cardId: string, targetId?: string): CommandResult {
-  return resolve(state, { type: "play", cardId, targetId }, true);
+export function previewCard(
+  state: GameState,
+  cardId: string,
+  targetId?: string,
+  decisions?: import("./random").DecisionSource,
+): CommandResult {
+  return resolve(state, { type: "play", cardId, targetId }, true, decisions);
 }
 
-function resolve(state: GameState, command: Command, preview: boolean): CommandResult {
+function resolve(
+  state: GameState,
+  command: Command,
+  preview: boolean,
+  decisions?: import("./random").DecisionSource,
+): CommandResult {
   if (!Object.hasOwn(commandPhases, command.type)) return reject(state, "Unknown command.");
   const phases: readonly GameState["phase"][] = commandPhases[command.type];
   if (!phases.includes(state.phase)) return reject(state, "That action is unavailable here.");
@@ -172,6 +183,7 @@ function resolve(state: GameState, command: Command, preview: boolean): CommandR
   }
   const events: GameEvent[] = [];
   const next = produce(state, (draft) => {
+    if (decisions) observeDecisions(draft, decisions);
     draft.revision++;
     switch (command.type) {
       case "draft": {

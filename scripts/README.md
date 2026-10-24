@@ -37,7 +37,7 @@ Additional opt-in tools:
 - Signed candidate CI prerequisite: [require-ci.mjs](release/require-ci.mjs) checks the exact commit and successful final verification job in a pinned run attempt, excluding suppressed duplicate runs.
 - `npm run generate:patch-notes`: [history filtering and draft generation](release/generate-patch-notes.mjs); see [release workflow](../Docs/RELEASE.md#release-verification-and-player-notes).
 - `npm run balance:compare`: [balance-compare.mjs](balance/balance-compare.mjs), [paired report math](balance/paired-balance.mjs), [production cases](../src/tooling/balance.ts).
-- `npm run perf`, `npm run perf:replay`, `npm run perf:compare`: [capture driver](performance/run-performance.mjs), [metrics](performance/metrics.mjs), [validated fixtures](../src/tooling/performance.ts).
+- `npm run perf`, `npm run perf:replay`, `npm run perf:compare`: [capture driver](performance/run-performance.mjs), [bounded sampler](performance/sampler.mjs), [trace capture/accounting](performance/trace.mjs), [metrics](performance/metrics.mjs), [validated fixtures](../src/tooling/performance.ts).
 - `npm run verify:package`: [package gate](release/verify-package.mjs), [after-pack hardening](../desktop/after-pack.cjs), [packaged renderer launcher](lib/packaged-desktop.mjs).
 - `npm run check:types`: the gameplay, renderer, Node tooling and test/design compiler environments described in [architecture](../Docs/ARCHITECTURE.md#typescript-environments); selected environments are reported by `verify:changed`; all environments run in CI as part of `npm run check:full`.
 - `npm run deadcode`: [Knip entrypoints](../knip.config.js); included in full CI static verification; local investigation requires explicit heavy-local authorization.
