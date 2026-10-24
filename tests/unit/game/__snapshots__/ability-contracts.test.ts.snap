@@ -1,0 +1,586 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`preserves authored text, targeting, scaling, keywords and enemy adaptations 1`] = `
+[
+  {
+    "digest": "aec53bee8c8a20a0fb54bf008105d738be2e82fb0376c0582196ca3607c04e56",
+    "id": "rookhaven-borrowed-brilliance",
+  },
+  {
+    "digest": "f5c4a6c0a0b5daa9cd650d328bcb0fde7e7af9da482baa23d8fd691bc3875943",
+    "id": "rookhaven-unwritten-ending",
+  },
+  {
+    "digest": "3020c06e63534341e076972a527e2a228d43f814893c519300dbd14397f5f9ec",
+    "id": "rookhaven-margin-of-possibility",
+  },
+  {
+    "digest": "409bc27e892d28e5f1e3e3b7226940d205b7f5814240d3b7b19640f0d8eb41c6",
+    "id": "cadenza-resonant-well",
+  },
+  {
+    "digest": "d96038277e29f7789f815e3ce15ad23cb2c134c3b73c210343e8627afd23c371",
+    "id": "cadenza-echoes-remember",
+  },
+  {
+    "digest": "8c680d3ebba5a9e3eae3f934ceaa77aa53cdf39e5ece4ed2d5bcf1ea59ccbeb3",
+    "id": "cadenza-rousing-refrain",
+  },
+  {
+    "digest": "0ccea852760c1e5851eb646433bd2369b50bc36cd1538dc94ce02b51909cfb24",
+    "id": "stillara-reed-reservoir",
+  },
+  {
+    "digest": "8a8c310bae17703188c4736a63626473f1b98196dd53b00555f21d79c586418f",
+    "id": "stillara-thaw-path",
+  },
+  {
+    "digest": "843b0bb548d485573a32234dd6db18875d4a3df7e7f8a922096c40ec1faca295",
+    "id": "stillara-water-remembers",
+  },
+  {
+    "digest": "85920d912d4a8ccaa14235801e9374077b9b5341ee435a5e60600c0de7879b25",
+    "id": "neradora-undertow-knot",
+  },
+  {
+    "digest": "7700c5c27b794a1fa185f48de5e8d17a945665953e76a1a91f19ea96f2a40cb5",
+    "id": "neradora-bloom-shelter",
+  },
+  {
+    "digest": "39012655e2cc424349f31924b473c5a968537ef3cf567e8ee051e352906fa5c0",
+    "id": "neradora-tide-cup",
+  },
+  {
+    "digest": "6054594941b98fb919c4a25c836aeadef8cb5e9f97bad78c376a7fe501ac9b2d",
+    "id": "sternshell-attack",
+  },
+  {
+    "digest": "67322100266d31115da2262dc4072dc081f558c0dad6951bf59460481314ba04",
+    "id": "sternshell-swap",
+  },
+  {
+    "digest": "c333747b0070ee05ceb6a3445c448c3914c4f2321f10d9e5b8dc3a357941dd4c",
+    "id": "sternshell-spiral-return",
+  },
+  {
+    "digest": "9ac8e5e442e774b603a4546bd32d000c040f7f50030ff9300da26df8d8df121d",
+    "id": "wickwaltz-attack",
+  },
+  {
+    "digest": "78353e1403b0ccb8bc3f9be831ea5bd8356ce922f3990932e21b40f7e5ef147d",
+    "id": "wickwaltz-guard",
+  },
+  {
+    "digest": "7514b4561f4ca2c8dda36bf66f33c617b1cb64e3366da8add76983d4c7e6de22",
+    "id": "wickwaltz-draw",
+  },
+  {
+    "digest": "2ad680c20701cbce171ecb379007bef018a5536deb0524447da0eda6c2cfadcd",
+    "id": "glintstride-attack",
+  },
+  {
+    "digest": "d958e52fb2c567f4e3d2f5a2a2c0b580cdf05471641cc996a42a28a546cb2207",
+    "id": "glintstride-dodge",
+  },
+  {
+    "digest": "bb4b2c567db3a35f3f4f028360dfc2c1f4ea59ee10cf1c7e47d6f44b563fb763",
+    "id": "glintstride-teamBlind",
+  },
+  {
+    "digest": "a15fa2935a93dc062873bdb2e5d0438c954def06e75e82d4738e28bd85a8ef19",
+    "id": "ringpalm-attack",
+  },
+  {
+    "digest": "bddbaa993230e16d18ec467f2acb9fe4b6ed119760e42ca37467319f8b85dbc0",
+    "id": "ringpalm-harmonic-set",
+  },
+  {
+    "digest": "17343334e90d080f3ffa46af433aed47a3955d44fa9fcbb79a43a342c7921333",
+    "id": "ringpalm-teamProtection",
+  },
+  {
+    "digest": "b49c3fb61e6c33984547638fccc3de86dfccde2e2278e151fb808dae71360975",
+    "id": "dawncall-teamCleanse",
+  },
+  {
+    "digest": "8c3020d3a2688dc68a8642ff36eeafd3c83dae935b777a93fa8b92b592707b51",
+    "id": "dawncall-attack",
+  },
+  {
+    "digest": "9465c2651500558b03cb72afee8e8163993e759ae676d72be018fac4ec0097af",
+    "id": "dawncall-heal",
+  },
+  {
+    "digest": "0b1b6b4841d4eace0020742e74517beedf4c4d4d64317cdf11358e210defb1c1",
+    "id": "coralcurl-guard",
+  },
+  {
+    "digest": "b69af47021189bebb6004416d4abe9aefdf11814952ec8243fbb6ac902860d8a",
+    "id": "coralcurl-attack",
+  },
+  {
+    "digest": "527848c54a2c8375066a87b52f87867bcefbcf29f9392c6d14b1cfc1b292625d",
+    "id": "coralcurl-swap",
+  },
+  {
+    "digest": "91eaf39696b6b3322de96ea9e8dd2eea236e871f7f03437eca0d7c32c4405358",
+    "id": "cindernewt-attack",
+  },
+  {
+    "digest": "dd37562ac08800e9407ef491a8f30e16e211b3c18ba3cdbf72b778f05e632cda",
+    "id": "cindernewt-ember-breath",
+  },
+  {
+    "digest": "c56e4f3d413b3977501293e79f9f5566eba85b4ba0bcf750acfddaf9987315d2",
+    "id": "cindernewt-ashen-veil",
+  },
+  {
+    "digest": "ba88bed5a41acec2eaf827abbb5fd0540cf365579ab0389d0cb1b3742819b458",
+    "id": "reedstag-attack",
+  },
+  {
+    "digest": "d51341b4f4164536fe469a570d94e105447192c6b1636ac5ff975cce52ff46f8",
+    "id": "reedstag-guard",
+  },
+  {
+    "digest": "7c6ba18bcb6fdfa113b1fcf1c4753dd27e6cda0a8375a79dcd23a564773cd293",
+    "id": "reedstag-heal",
+  },
+  {
+    "digest": "6a6b5278a71bc895edce7e046d2a5edfb3b4bf7ab46c82d6a0ac70121a530af5",
+    "id": "dunefox-attack",
+  },
+  {
+    "digest": "381f665e17ab4158dd012d4c4990d766617eca7c03287a3b9ce70b6a7b68c281",
+    "id": "dunefox-dune-whirl",
+  },
+  {
+    "digest": "a7fd3d004c3ef5837b5838e4c8f8a8fa1a4f936c01e75ba95d7abb0e51a5caa1",
+    "id": "dunefox-dodge",
+  },
+  {
+    "digest": "717b9812a030d2a79514e78e9c740eab5f7bec2b9c696e417451a956e93d04ba",
+    "id": "mossguard-guard",
+  },
+  {
+    "digest": "1840f2885e05f4ecd3a08fdba4e68d4453a445a442e9058fa3a24ff79ea91234",
+    "id": "mossguard-attack",
+  },
+  {
+    "digest": "36d26f434e3608018d8078bc64d841c6ebf8b715b1dd7595e370605c3bd59eba",
+    "id": "mossguard-heal",
+  },
+  {
+    "digest": "e11284869136e872c5df4527f70f6562a514dc1e5d5726342dd717542ec41b43",
+    "id": "emberback-attack",
+  },
+  {
+    "digest": "4a20502119bbde47dffa2f032690557659a7aec2c3a0de42c049425052ea7108",
+    "id": "emberback-furnace-breath",
+  },
+  {
+    "digest": "234383a2820d9ff21aaa2e8b6430577ba29606d41f2852f81ad75a6e7998484f",
+    "id": "emberback-magma-stomp",
+  },
+  {
+    "digest": "adbdcbe05949fee26485a8d6085424d9e8e2779d21a86ab6ea547e08933f3ddb",
+    "id": "pollenmoth-attack",
+  },
+  {
+    "digest": "d1d56b44af418d1a62ea4507fbf7f69acca25b2a45f0a542c666b9bd25122c78",
+    "id": "pollenmoth-teamGuard",
+  },
+  {
+    "digest": "af6e438d1da6dc2bb0c416c21601d1414d990e4d8d2eab873a8206cb33f3e6af",
+    "id": "pollenmoth-heal",
+  },
+  {
+    "digest": "6c0c5191125d8c70e130151141e51ccffae053eb7a4b9a4b13d154d494f14342",
+    "id": "prismram-attack",
+  },
+  {
+    "digest": "2894e955401efd7aaa6155e0066aa4feaab348d737486c21455105e33584e6ec",
+    "id": "prismram-guard",
+  },
+  {
+    "digest": "982bad76fb6e086f553485395cd56bacc72013ef4910f8033eef67828e5e0e53",
+    "id": "prismram-spectrum-lance",
+  },
+  {
+    "digest": "8743dbd51fcdca3604f0bb580b4dde52a973de0eb5c34936249ab0a9cf841ed7",
+    "id": "captoad-attack",
+  },
+  {
+    "digest": "f70550a009600705dcbf68659d3e9377fe06e45669ec5fb5b12a4c0d2c459ccc",
+    "id": "captoad-guard",
+  },
+  {
+    "digest": "e6a114449cb10d103087081d4b0f6ec1c95a8d9924219ae00f895c307ab14c97",
+    "id": "captoad-swap",
+  },
+  {
+    "digest": "5df60f3f0dd34c7e1c73efa53fc5b6965ffb68f2d2d8b64bd9311ebd6d169373",
+    "id": "chimecricket-attack",
+  },
+  {
+    "digest": "5abdb9b0f5c1a1eb9754a21fc6461d66035b28ecf82d84477f07dfe7b7f7869a",
+    "id": "chimecricket-nullify",
+  },
+  {
+    "digest": "d0cf763d424cb712012dbaf681851b7e02cc9f363d9489bff29783bb00ab46bc",
+    "id": "chimecricket-heal",
+  },
+  {
+    "digest": "888f46e071c3668013224ac42052c853c2bb3d79a42270417e34f931ef244c80",
+    "id": "bloomquail-guard",
+  },
+  {
+    "digest": "007ff2c44a963d479546d289ec70d75b656702ce61fc8b30bf3c25b961b5cce5",
+    "id": "bloomquail-draw",
+  },
+  {
+    "digest": "a94bfa09703c54d5006fceb536c700a033665096eedad0e3e6b29e318810c59f",
+    "id": "bloomquail-heal",
+  },
+  {
+    "digest": "d02d2a4f709177974688631bfbfa3c7852185bc3755dd8a3c0b32988e3dab919",
+    "id": "shadebrim-guard",
+  },
+  {
+    "digest": "cfb6a3f27ab5484e5cf638f79be5e3b28bb9251ecfedff5e8a976b2d2cb55ec0",
+    "id": "shadebrim-attack",
+  },
+  {
+    "digest": "6590122f19d479356d1e712e8990844490cf26c0d2111e08b15d12cdce0eb6d6",
+    "id": "shadebrim-draw",
+  },
+  {
+    "digest": "7f306dcfa3c63b29dabf3c8d175b0dc9280bcbf5bff282f6eb19349c61474441",
+    "id": "memento-lost-procession",
+  },
+  {
+    "digest": "923a798228bd9d2d391471e95d5016e6b1dd6cbadea25d2ee89691564ef0d417",
+    "id": "memento-treasury-echo",
+  },
+  {
+    "digest": "497e16c36bffb66db82b9e65ad7c5905e9c9e22b46ceb81b75b1085da37768d4",
+    "id": "memento-drowned-revelation",
+  },
+  {
+    "digest": "b2f2c874682f343d12193a4e6a9d1312835633ccfa0f3c7e868cafd7615250da",
+    "id": "euphera-twilight-lance",
+  },
+  {
+    "digest": "7c00ed82fa78d682ce8806a5d3ae82f16202f49881299dc9aa93b42a62ea4152",
+    "id": "euphera-wish-exchange",
+  },
+  {
+    "digest": "98fc6656fc51e072445858c945acecb0da5326338075eb0c7f320721d1146d44",
+    "id": "euphera-possible-path",
+  },
+  {
+    "digest": "b82f8157558da38c1b980369ea2939d6c4e17a12da1f585eabc1fc2a4a82e692",
+    "id": "tournelle-teamClearBlind",
+  },
+  {
+    "digest": "98825f94cad46ad82a9fa5afa31729de5fff69e69a54e362b64c1516e7b358a2",
+    "id": "tournelle-attack",
+  },
+  {
+    "digest": "bdc92ec476a69dcefc2cff0bebdeadfd16f62f40d02629a48239fc40d9619a41",
+    "id": "tournelle-swapLowest",
+  },
+  {
+    "digest": "d628c14d7958b52c47b1c0852e5d8be7b0e8a86f8a119acabb7fc1d8f25319e7",
+    "id": "reverie-waking-wonder",
+  },
+  {
+    "digest": "d0fdf0005a3d51d71a3093562efbd961a464d5b3aa4de90740dfa88f4cec58a7",
+    "id": "reverie-dream-double",
+  },
+  {
+    "digest": "0359a88652ab71fa990a3b9490ef1ba8113bccb615b92d7549037323257a67b9",
+    "id": "reverie-nightmare-harvest",
+  },
+  {
+    "digest": "31aafc30c1aa64208dad8bb624aea33b65a32728ced4043fb7e012e7f8afd9d5",
+    "id": "oathara-never-lost",
+  },
+  {
+    "digest": "eb2fcd107d65ccfced5621cff4a21b2597390ead2f02a7488acf4ead88d83d85",
+    "id": "oathara-travelers-ward",
+  },
+  {
+    "digest": "f3b5575e73e99d8d64529bc530fa8fc5747a7ddd0a76ec57df871d138abb5d79",
+    "id": "oathara-vow-of-return",
+  },
+  {
+    "digest": "4034ecca01933786a7a13073909776346f7fb161e1e435079ed785b46589d339",
+    "id": "almanelle-spring-current",
+  },
+  {
+    "digest": "373a6d4bc8213d372bba7c9629b21681d4d6f4f30e098c92801a2dda70f34e18",
+    "id": "almanelle-autumn-insight",
+  },
+  {
+    "digest": "85eca97d59f6758b558bf1ba25f4e1aa82067e10e169e737c2cdc2501046c656",
+    "id": "almanelle-rooted-year",
+  },
+  {
+    "digest": "151576a89dffb9a984cd4133b4e0a8f697996fd4d14d723d7b742a44d2c5161f",
+    "id": "orifable-createFood",
+  },
+  {
+    "digest": "2a4a2b2c28208a8db9c624bc74591ad6bff14b309e27fb0779477be6a6a16e1b",
+    "id": "orifable-heal",
+  },
+  {
+    "digest": "de8dd654b34c4e550dc169fd5eba263f3c94cf9fd43b689fa5307ae8ed693270",
+    "id": "orifable-attack",
+  },
+  {
+    "digest": "4658c8f25b4e362c48000c851d2bb86c36579d8dcb6f3ca56bf15bb3a9f9e993",
+    "id": "memento-pearl",
+  },
+  {
+    "digest": "fea348b30e22f7ade9745a3f135c73a2223509353481eaaa1dc7d2ee8da672a6",
+    "id": "food-apple",
+  },
+  {
+    "digest": "98647f42c2ac9210972341172ebb271a0d6554daac17001b7c36ef3d73a4ee5d",
+    "id": "food-mana-berries",
+  },
+  {
+    "digest": "99ab5c02983f3b880ed6a89df07e02bd034ae01a74a55c8c7c74b3929ece33e6",
+    "id": "food-trail-bread",
+  },
+]
+`;
+
+exports[`preserves commands, previews, save/resume and rankings: attack reflection grant 1`] = `
+{
+  "command": {
+    "autoEndTurn": false,
+    "cardId": "ally-0:oathara-travelers-ward",
+    "targetId": undefined,
+    "type": "play",
+  },
+  "committed": "83ca0823e396dbdc077af1536c10231e8d3118efd26b55bf7da0de3402534786",
+  "enemyTurn": "8bf8410c8329dd2fbb74f4a3a6a8b0adaeb1d7bf71c3e8b9478a470e0807b9d8",
+  "preview": "83ca0823e396dbdc077af1536c10231e8d3118efd26b55bf7da0de3402534786",
+  "rankings": [
+    {
+      "command": {
+        "autoEndTurn": false,
+        "cardId": "ally-0:oathara-travelers-ward",
+        "targetId": undefined,
+        "type": "play",
+      },
+      "reason": "Use Traveler’s Ward for its visible benefit",
+      "score": 101,
+    },
+  ],
+}
+`;
+
+exports[`preserves commands, previews, save/resume and rankings: generated Food 1`] = `
+{
+  "command": {
+    "autoEndTurn": false,
+    "cardId": "ally-0:orifable-createFood",
+    "targetId": undefined,
+    "type": "play",
+  },
+  "committed": "525bdec72e277f5434ea7b4e7dfe76aa510389fc1bbefff384f9ef5eb3856d5f",
+  "enemyTurn": "3eaa8164983f1bd1516cacd3951d16be1f2c097a854f2a20ec6a2fdc53092b15",
+  "preview": "525bdec72e277f5434ea7b4e7dfe76aa510389fc1bbefff384f9ef5eb3856d5f",
+  "rankings": [
+    {
+      "command": {
+        "autoEndTurn": false,
+        "cardId": "ally-0:orifable-createFood",
+        "targetId": undefined,
+        "type": "play",
+      },
+      "reason": "Use Care Package for its visible benefit",
+      "score": 400,
+    },
+  ],
+}
+`;
+
+exports[`preserves commands, previews, save/resume and rankings: generated Pearls 1`] = `
+{
+  "command": {
+    "autoEndTurn": false,
+    "cardId": "ally-0:memento-treasury-echo",
+    "targetId": undefined,
+    "type": "play",
+  },
+  "committed": "e59c1465b41b23d50d438cc0ab587073c34a8583b70eebe88a85da37ad2fd85e",
+  "enemyTurn": "81a7bef9490821977a0441c4795371296974489096663a4cc89bd798b75dfbb1",
+  "preview": "e59c1465b41b23d50d438cc0ab587073c34a8583b70eebe88a85da37ad2fd85e",
+  "rankings": [
+    {
+      "command": {
+        "autoEndTurn": false,
+        "cardId": "ally-0:memento-treasury-echo",
+        "targetId": undefined,
+        "type": "play",
+      },
+      "reason": "Use Treasury Echo for its visible benefit",
+      "score": 400,
+    },
+  ],
+}
+`;
+
+exports[`preserves commands, previews, save/resume and rankings: group protection 1`] = `
+{
+  "command": {
+    "autoEndTurn": false,
+    "cardId": "ally-0:ringpalm-teamProtection",
+    "targetId": undefined,
+    "type": "play",
+  },
+  "committed": "b5147b1ec4c8da5b8ea5a5a885d55c00c719815b7324499d49b4a83c4fafe184",
+  "enemyTurn": "084f861e6e477729a8dece43d6cde4680d8b13e917199b80cdc5450548df9ad8",
+  "preview": "b5147b1ec4c8da5b8ea5a5a885d55c00c719815b7324499d49b4a83c4fafe184",
+  "rankings": [
+    {
+      "command": {
+        "autoEndTurn": false,
+        "cardId": "ally-0:ringpalm-teamProtection",
+        "targetId": undefined,
+        "type": "play",
+      },
+      "reason": "Use Seedling Circle for its visible benefit",
+      "score": 104,
+    },
+  ],
+}
+`;
+
+exports[`preserves commands, previews, save/resume and rankings: random attack 1`] = `
+{
+  "command": {
+    "autoEndTurn": false,
+    "cardId": "ally-0:pollenmoth-attack",
+    "targetId": undefined,
+    "type": "play",
+  },
+  "committed": "9f6a3f9ba442d71214a079bb0e46468aeee792fbe3ab1438e2920a4e59949978",
+  "enemyTurn": "0a042f25860b1a7b469c8e0b7ed2dc3dbee83f4ba028450647bfed573fd5c602",
+  "preview": "9f6a3f9ba442d71214a079bb0e46468aeee792fbe3ab1438e2920a4e59949978",
+  "rankings": [
+    {
+      "command": {
+        "autoEndTurn": false,
+        "cardId": "ally-0:pollenmoth-attack",
+        "targetId": undefined,
+        "type": "play",
+      },
+      "reason": "Use the average visible benefit across random targets",
+      "score": 1003,
+    },
+  ],
+}
+`;
+
+exports[`preserves commands, previews, save/resume and rankings: recipient healing and cleanse 1`] = `
+{
+  "command": {
+    "autoEndTurn": false,
+    "cardId": "ally-0:reedstag-heal",
+    "targetId": undefined,
+    "type": "play",
+  },
+  "committed": "60d515ddd676622f7f02db53f1a552e514d9469459bae9d73f0da5c25da1edcc",
+  "enemyTurn": "9907d7604c23d59db5e5a8ca28a8c8b1e52be7610bfd224092a0e2573c09bcd6",
+  "preview": "60d515ddd676622f7f02db53f1a552e514d9469459bae9d73f0da5c25da1edcc",
+  "rankings": [
+    {
+      "command": {
+        "autoEndTurn": false,
+        "cardId": "ally-0:reedstag-heal",
+        "targetId": undefined,
+        "type": "play",
+      },
+      "reason": "Use Mending Spring for its visible benefit",
+      "score": 3004,
+    },
+  ],
+}
+`;
+
+exports[`preserves commands, previews, save/resume and rankings: recovery and recipient healing 1`] = `
+{
+  "command": {
+    "autoEndTurn": false,
+    "cardId": "ally-0:almanelle-autumn-insight",
+    "targetId": "ally-0",
+    "type": "play",
+  },
+  "committed": "4f52c2b7c7becde88a804c142706ac54e6e4f3fbec5a56c440e77204e263daae",
+  "enemyTurn": "6c600bcf94b3d5bb8cb56d71c08f2a73133fce0149b2138b2fdacb6bf5b6ddc4",
+  "preview": "4f52c2b7c7becde88a804c142706ac54e6e4f3fbec5a56c440e77204e263daae",
+  "rankings": [
+    {
+      "command": {
+        "autoEndTurn": false,
+        "cardId": "ally-0:almanelle-autumn-insight",
+        "targetId": "ally-0",
+        "type": "play",
+      },
+      "reason": "Use Autumn Insight for its visible benefit",
+      "score": 3003,
+    },
+  ],
+}
+`;
+
+exports[`preserves commands, previews, save/resume and rankings: reflected attack and extras 1`] = `
+{
+  "command": {
+    "autoEndTurn": false,
+    "cardId": "ally-0:emberback-attack",
+    "targetId": "enemy-0",
+    "type": "play",
+  },
+  "committed": "a9a3f47d2cc897642a3ac8b45c9c8702fdddea8897e833c1c2167dbb05079883",
+  "enemyTurn": "c937b78cddc8386965df999e00dfe295a0af749729a0173ff9d82d78d46eaef0",
+  "preview": "a9a3f47d2cc897642a3ac8b45c9c8702fdddea8897e833c1c2167dbb05079883",
+  "rankings": [
+    {
+      "command": {
+        "autoEndTurn": false,
+        "cardId": "ally-0:emberback-attack",
+        "targetId": "enemy-0",
+        "type": "play",
+      },
+      "reason": "Make progress against an enemy creature",
+      "score": 400,
+    },
+    {
+      "command": {
+        "autoEndTurn": false,
+        "cardId": "ally-0:emberback-attack",
+        "targetId": "enemy-1",
+        "type": "play",
+      },
+      "reason": "Make progress against an enemy creature",
+      "score": 400,
+    },
+    {
+      "command": {
+        "autoEndTurn": false,
+        "cardId": "ally-0:emberback-attack",
+        "targetId": "enemy-2",
+        "type": "play",
+      },
+      "reason": "Make progress against an enemy creature",
+      "score": 400,
+    },
+  ],
+}
+`;
