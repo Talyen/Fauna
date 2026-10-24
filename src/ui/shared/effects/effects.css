@@ -54,33 +54,22 @@
   height: 100%;
   background-clip: border-box;
 }
-.game-button:has(> .effect-shine-border) {
-  position: relative;
-}
-.creature-card > .effect-shine-border {
+:is(.action-card, .creature-card) > .effect-shine-border {
   opacity: 0;
   transition: opacity var(--motion-hover);
 }
-.creature-card:hover > .effect-shine-border,
-:root[data-focus="visible"] .creature-card:focus > .effect-shine-border,
-.creature-card[data-effect-urgent="true"] > .effect-shine-border,
-.creature-card[data-effect-acting="true"] > .effect-shine-border {
+:is(.action-card, .creature-card):hover > .effect-shine-border {
   opacity: 1;
 }
 .game-button:is(.action-card, .creature-card):has(> .effect-shine-border)::after {
   border-color: transparent;
 }
-.game-button:is(.action-card, .creature-card):hover > .effect-shine-border,
-:root[data-focus="visible"] .game-button:is(.action-card, .creature-card):focus > .effect-shine-border {
+.game-button:is(.action-card, .creature-card):hover > .effect-shine-border {
   --shine-width: 3px;
 }
 .game-button[aria-disabled="true"] > .effect-shine-border,
 .knocked-out .effect-shine-border {
   display: none;
-}
-.effect-readout-frame {
-  position: relative;
-  border-radius: var(--radius);
 }
 @keyframes effect-border-shine {
   0%,

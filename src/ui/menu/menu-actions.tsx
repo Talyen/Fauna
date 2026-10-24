@@ -46,7 +46,6 @@ export function MenuActions({
         variant="ghost"
         effectTone="talents"
         data-menu-action="talents"
-        attention={talentPoints > 0}
         aria-label="Talents"
         aria-describedby={talentPoints > 0 ? `menu-talent-points-${home}` : undefined}
         onClick={() => onNavigate("talents")}
