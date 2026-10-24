@@ -1,6 +1,7 @@
+import type { SupplementalEffect } from "./rules/ability-types";
 import { drawableOwnerIds } from "./card-actors";
 import { definition, species } from "./content";
-import type { BattleState, GameEvent, GameState } from "./types";
+import type { BattleState, Card, GameEvent, GameState } from "./types";
 import { chance as succeeds } from "./chance";
 import { shuffle } from "./random";
 import { cardKeywords, creaturePassive } from "./progression";
@@ -170,20 +171,31 @@ export function redrawHand(state: GameState, events: GameEvent[]) {
 export function battleCardCapacity(state: Pick<GameState, "cards">): number {
   return Math.max(0, MAX_BATTLE_CARDS - state.cards.length);
 }
-/** Called while the played card is still in hand; hidden draw order is irrelevant. */
-export function drawHasAnotherCard(state: GameState): boolean {
-  if (!state.battle) return false;
+/** Called while the played card is still in hand; hidden draw order is irrelevant.
+ * Buffered cards fill the hand before keyword filtering; consumed cards cannot be copied on redraw. */
+export function drawHasAnotherCard(
+  state: BattleState,
+  played: Card,
+  effect: SupplementalEffect & { kind: "draw" | "drawKeyword" },
+): boolean {
   return (
     [...state.battle.draw, ...state.battle.discard, ...state.battle.buffer].some((id) => {
-      const card = state.cards.find((entry) => entry.id === id)!;
-      return card.ownerId === null || drawableOwnerIds(state).has(card.ownerId);
+      const drawn = state.cards.find((entry) => entry.id === id)!;
+      return (
+        (drawn.ownerId === null || drawableOwnerIds(state).has(drawn.ownerId)) &&
+        (state.battle.buffer.includes(id) ||
+          effect.kind === "draw" ||
+          cardKeywords(drawn).includes(effect.keyword))
+      );
     }) ||
-    (battleCardCapacity(state) > 0 &&
+    (!definition(played.definitionId).consume &&
+      (effect.kind === "draw" || cardKeywords(played).includes(effect.keyword)) &&
+      battleCardCapacity(state) > 0 &&
       state.team.some(
         (unit) =>
           unit.health > 0 &&
           creaturePassive(state, unit.species).effects.some(
-            (effect) => effect.kind === "wellRead" && effect.amount > 0,
+            (passive) => passive.kind === "wellRead" && passive.amount > 0,
           ),
       ))
   );

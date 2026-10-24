@@ -127,6 +127,8 @@ At least five samples are needed for review-level statistical findings. Extreme 
 
 ## Reproducible performance captures
 
+The [hitch attribution plan](PERFORMANCE_ATTRIBUTION_PLAN.md) proposes timestamped frame timelines, semantic spans and optional deep traces; those extensions are not implemented yet.
+
 The [October 22 frame pacing investigation](task-evidence/2026-10-22-frame-pacing.md) records
 shared layout and animation optimizations, visual parity evidence and remaining device qualification.
 

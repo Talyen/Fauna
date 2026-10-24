@@ -83,9 +83,25 @@ export function battleBenefits(
     reason?: string,
   ): BattleBenefit[] => [{ kind: "support", priority, amount, targetId, reason }];
   const allies = state.team.filter((unit) => unit.health > 0);
-  // Drawing only this card back cannot justify an already capped Dodge grant.
+  // Drawing only this card back cannot justify a spent protection or Cleanse.
   const usefulDraw = () =>
-    !!def.effects?.some((effect) => effect.kind === "draw" && effect.amount > 0) && drawHasAnotherCard(state);
+    !!def.effects?.some(
+      (effect) =>
+        (effect.kind === "draw" || effect.kind === "drawKeyword") &&
+        effect.amount > 0 &&
+        drawHasAnotherCard(state, card, effect),
+    );
+  const controlRemoval = (amount: number) =>
+    support(
+      amount > 0
+        ? "controlRemoval"
+        : facts.healingOnPlay
+          ? "healing"
+          : usefulDraw()
+            ? "standardUtility"
+            : "none",
+      amount,
+    );
   const dodgeSupport = (useful: number) =>
     support(
       useful > 0 ? "utility" : facts.healingOnPlay ? "healing" : usefulDraw() ? "standardUtility" : "none",
@@ -201,9 +217,9 @@ export function battleBenefits(
       );
     }
     case "teamClearBlind":
-      return support("controlRemoval", allies.filter((unit) => unit.combat?.blind).length);
+      return controlRemoval(allies.filter((unit) => unit.combat?.blind).length);
     case "teamThaw":
-      return support("controlRemoval", allies.filter((unit) => (unit.combat?.freeze ?? 0) > 0).length);
+      return controlRemoval(allies.filter((unit) => (unit.combat?.freeze ?? 0) > 0).length);
     case "recover": {
       const useful = state.battle.discard.some((id) => {
         const card = state.cards.find((entry) => entry.id === id)!;
@@ -272,7 +288,10 @@ export function battleBenefits(
       );
     }
     case "reflectAttack":
-      return support(actor.combat?.attackReflection ? "none" : "protection", 1);
+      return support(
+        actor.combat?.attackReflection ? (facts.healingOnPlay ? "healing" : "none") : "protection",
+        1,
+      );
     case "resurrect":
       return [...state.team, ...state.reserves]
         .filter((unit) => unit.health === 0)
