@@ -4,8 +4,11 @@ import { maximumHealth, unitName } from "../../game/combat/state";
 import { KEYWORD_DEFINITIONS } from "../../game/keywords";
 import type { CommandResult, GameEvent, GameState } from "../../game/types";
 import { combatStatuses } from "../shared/combat/combat-status";
+import type { PlayProjection } from "../../game/preview";
 
 export interface TargetForecast {
+  readonly alternatives?: readonly TargetForecast[];
+  readonly unresolved?: boolean;
   readonly name: string;
   readonly health: number;
   readonly previousHealth: number;
@@ -17,12 +20,13 @@ export interface TargetForecast {
   readonly events: readonly GameEvent[];
 }
 export interface PlayPreviewModel {
+  readonly messages: readonly string[];
   readonly affected: ReadonlySet<string>;
   readonly units: ReadonlyMap<string, TargetForecast>;
 }
 
 /** One projection supplies both highlights and per-recipient readouts from authoritative output. */
-export function playPreviewModel(
+function resolvedPreviewModel(
   before: GameState,
   result: CommandResult | null,
   targetId?: string,
@@ -30,7 +34,7 @@ export function playPreviewModel(
   const affected = new Set(result?.events.flatMap((event) => (event.targetId ? [event.targetId] : [])) ?? []);
   if (targetId) affected.add(targetId);
   const units = new Map<string, TargetForecast>();
-  if (!result?.accepted) return { affected, units };
+  if (!result?.accepted) return { affected, units, messages: [] };
   const nextUnits = new Map(
     [
       ...battlefield(result.state, "player"),
@@ -46,8 +50,7 @@ export function playPreviewModel(
     grouped.set(event.targetId, events);
   }
   for (const old of [...battlefield(before, "player"), ...battlefield(before, "enemy"), ...before.reserves]) {
-    const next = nextUnits.get(old.id);
-    if (!next) continue;
+    const next = nextUnits.get(old.id) ?? { ...old, health: 0, block: 0 };
     const previous = combatStatuses(old.combat, sharedDodgeChance(before, old));
     const current = combatStatuses(next.combat, sharedDodgeChance(result.state, next));
     const statusesChanged =
@@ -88,5 +91,38 @@ export function playPreviewModel(
       events,
     });
   }
-  return { affected, units };
+  return {
+    affected,
+    units,
+    messages: result.events
+      .filter((event) => event.kind === "status" && !event.targetId)
+      .map((event) => event.text),
+  };
+}
+
+export function playPreviewModel(
+  before: GameState,
+  result: CommandResult | PlayProjection | null,
+  targetId?: string,
+): PlayPreviewModel {
+  if (!result || "accepted" in result) return resolvedPreviewModel(before, result, targetId);
+  if (result.kind === "unknown") {
+    const model = resolvedPreviewModel(before, { accepted: true, state: before, events: [] }, targetId);
+    if (targetId && model.units.has(targetId))
+      model.units.set(targetId, { ...model.units.get(targetId)!, unresolved: true });
+    return model;
+  }
+  const worlds = result.outcomes.map((outcome) => resolvedPreviewModel(before, outcome, targetId));
+  const affected = new Set(worlds.flatMap((world) => [...world.affected]));
+  const units = new Map<string, TargetForecast>();
+  for (const id of affected) {
+    const possibilities = worlds.flatMap((world) => (world.units.has(id) ? [world.units.get(id)!] : []));
+    // Keep complete per-recipient outcomes together; never synthesize a world from independent extrema.
+    const distinct = [...new Map(possibilities.map((value) => [JSON.stringify(value), value])).values()];
+    const first = distinct[0];
+    if (first) units.set(id, distinct.length === 1 ? first : { ...first, alternatives: distinct });
+  }
+  const messages =
+    worlds[0]?.messages.filter((message) => worlds.every((world) => world.messages.includes(message))) ?? [];
+  return { affected, units, messages };
 }

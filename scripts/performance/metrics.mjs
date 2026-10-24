@@ -2,19 +2,59 @@ export function summarizeSample(sample) {
   if (
     !Array.isArray(sample.frames) ||
     sample.frames.length < 60 ||
-    sample.frames.some((frame) => !Number.isFinite(frame) || frame <= 0)
+    sample.frames.some(
+      (frame, index) =>
+        !Number.isFinite(frame.start) ||
+        !Number.isFinite(frame.end) ||
+        !Number.isFinite(frame.duration) ||
+        frame.duration <= 0 ||
+        Math.abs(frame.end - frame.start - frame.duration) > 0.01 ||
+        (index > 0 && frame.start < sample.frames[index - 1].end),
+    )
   )
     throw new Error("Incomplete: fewer than 60 usable frame samples.");
+  if (sample.truncated || sample.interrupted || sample.focused !== true || sample.visibility !== "visible")
+    throw new Error("Incomplete or interrupted foreground timeline.");
+  const observations = [sample.longTasks, sample.input, sample.longAnimationFrames ?? null];
+  if (
+    observations.some(
+      (entries) =>
+        entries !== null &&
+        (!Array.isArray(entries) ||
+          entries.length > 12000 ||
+          entries.some(
+            (entry) =>
+              !Number.isFinite(entry.start) || !Number.isFinite(entry.duration) || entry.duration < 0,
+          )),
+    )
+  )
+    throw new Error("Invalid observer timeline.");
+  if (
+    (sample.spans ?? []).some(
+      (span) => !Number.isFinite(span.start) || !Number.isFinite(span.end) || span.end < span.start,
+    ) ||
+    (sample.spans?.length ?? 0) > 12000
+  )
+    throw new Error("Invalid semantic span timeline.");
   if (
     !sample.segments?.length ||
     sample.segments.some(
-      (s) => !s.complete || !Number.isFinite(s.duration) || s.duration <= 0 || s.frames < 10,
+      (s) =>
+        !s.complete ||
+        !Number.isFinite(s.start) ||
+        !Number.isFinite(s.end) ||
+        !Number.isFinite(s.duration) ||
+        Math.abs(s.end - s.start - s.duration) > 0.1 ||
+        s.end <= s.start ||
+        s.duration <= 0 ||
+        s.frames < 10,
     )
   )
     throw new Error("Incomplete action segment.");
-  const sorted = [...sample.frames].sort((a, b) => a - b);
+  const sorted = sample.frames.map((frame) => frame.duration).sort((a, b) => a - b);
   const percentile = (p) => sorted[Math.min(sorted.length - 1, Math.floor(sorted.length * p))];
   return {
+    hitches: hitchInventory(sample),
     startupMs: sample.startupMs ?? null,
     frames: sorted.length,
     p50: percentile(0.5),
@@ -29,8 +69,8 @@ export function summarizeSample(sample) {
 }
 export function comparePerformance(before, after) {
   if (
-    before.format !== 2 ||
-    after.format !== 2 ||
+    before.format !== 3 ||
+    after.format !== 3 ||
     !before.complete ||
     !after.complete ||
     JSON.stringify(before.environment) !== JSON.stringify(after.environment)
@@ -55,7 +95,8 @@ export function comparePerformance(before, after) {
       throw new Error(`Incompatible performance case: ${left.id}`);
     const a = summarizeSample(left.sample),
       b = summarizeSample(right.sample);
-    const rate = (sample, count) => (count / sample.frames.reduce((sum, n) => sum + n, 0)) * 30_000;
+    const rate = (sample, count) =>
+      (count / sample.frames.reduce((sum, frame) => sum + frame.duration, 0)) * 30_000;
     return {
       id: left.id,
       baseline: a,
@@ -70,4 +111,58 @@ export function comparePerformance(before, after) {
       ),
     };
   });
+}
+
+const overlaps = (entry, gap) =>
+  entry.start < gap.end && (entry.end ?? entry.start + entry.duration) > gap.start;
+export function hitchInventory(sample) {
+  return sample.frames
+    .filter((frame) => frame.duration > 20)
+    .sort((a, b) => b.duration - a.duration)
+    .slice(0, 20)
+    .map((gap) => ({
+      ...gap,
+      actions: sample.segments.filter((segment) => overlaps(segment, gap)).map((segment) => segment.name),
+      spans: (sample.spans ?? [])
+        .filter((span) => overlaps(span, gap))
+        .map((span) => ({ name: span.name, details: span.details, outcome: span.outcome })),
+      longTasks: sample.longTasks === null ? null : sample.longTasks.filter((entry) => overlaps(entry, gap)),
+      input: sample.input === null ? null : sample.input.filter((entry) => overlaps(entry, gap)),
+      longAnimationFrames:
+        sample.longAnimationFrames == null
+          ? null
+          : sample.longAnimationFrames.filter((entry) => overlaps(entry, gap)),
+    }));
+}
+export function hitchMarkdown(id, summary, trace) {
+  const safe = (value) => String(value).replaceAll("|", "\\|").replaceAll("\n", " ");
+  const rows = summary.hitches.map((gap, index) => {
+    const work = trace?.available ? trace.hitches[index] : null;
+    return `| ${gap.start.toFixed(1)}–${gap.end.toFixed(1)} | ${gap.duration.toFixed(1)} ms | ${safe(gap.actions.join(", ") || "between actions")} | ${safe([...new Set(gap.spans.map((span) => span.name))].join(", ") || "unattributed")} | ${
+      work
+        ? safe(
+            work.work
+              .slice(0, 3)
+              .map((entry) => `${entry.name}: ${entry.selfMs.toFixed(1)} ms`)
+              .join("; "),
+          ) + `; unexplained ${work.unaccountedMs.toFixed(1)} ms`
+        : "Trace unavailable"
+    } |`;
+  });
+  return `# ${safe(id)} hitch evidence\n\n[Raw timeline](${id}-sample.json) · [Summary](${id}-summary.json)${trace?.available ? ` · [Deep trace](${id}-trace.json)` : ""}\n\nIntervals share the renderer clock. Overlapping spans are context, not additive CPU totals or proof of a cause. Unsupported browser observations are unavailable, not zero. Trace timings include diagnostic overhead.\n\n| Interval (ms) | Gap | Action | Overlapping work | Trace observations |\n| --- | --- | --- | --- | --- |\n${rows.join("\n")}\n${rows.length ? "" : "\nNo frame gaps above 20 ms were observed\n"}`;
+}
+
+export function compareRecorderOverhead(inactive, active) {
+  if (!inactive.buildIdentity || inactive.buildIdentity !== active.buildIdentity)
+    throw new Error("Recorder overhead requires the identical renderer build");
+  if (inactive.environment.recordSpans !== false || active.environment.recordSpans !== true)
+    throw new Error("Overhead comparison requires inactive then active span recording");
+  return {
+    kind: "recorder-overhead",
+    note: "Diagnostic recording overhead, not optimization evidence",
+    cases: comparePerformance(
+      { ...inactive, environment: { ...inactive.environment, recordSpans: true } },
+      active,
+    ),
+  };
 }

@@ -257,6 +257,13 @@
 .battle-screen .combat-stats:empty {
   display: none;
 }
+.battle-screen .target-preview[data-conditional] .combat-stats {
+  flex-direction: column;
+  flex-shrink: 0;
+}
+.battle-screen .target-preview[data-conditional] .combat-stats > span {
+  white-space: nowrap;
+}
 .target-line marker path {
   stroke: var(--selected);
 }

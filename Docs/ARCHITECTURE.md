@@ -27,7 +27,7 @@ The schema is a discriminated lifecycle union. Battle carries active combat; Rec
 
 Settlement banks retained earnings once, clears combat and retains the completed encounter, outcome and earnings receipt. Pending offers never require defeated enemies or card zones to remain valid. Full-roster Recruit saves `reward.selectedRecruit` and Collection progress before presentation previews an exchange; only Confirm changes the roster. Browsing and previews never publish or save state.
 
-Auto-end turn records its effective preference in the play command. Spending the last Mana can resolve the enemy turn within that same revision; disabling it leaves a resumable zero-Mana player turn. Victory takes precedence. Card previews use the same effect resolver on detached state without advancing the enemy turn or settling rewards, retaining the final Health forecast even when commitment leaves battle.
+Auto-end turn records its effective preference in the play command. Spending the last Mana can resolve the enemy turn within that same revision; disabling it leaves a resumable zero-Mana player turn. Victory takes precedence. Card previews use the same effect resolver on detached state without advancing the enemy turn or settling rewards. Player-facing projection explores finite chance and recipient decisions without consulting the saved RNG, retaining correlated outcomes. Hidden draws, unclassified randomness or exhausted replay/decision/work budgets produce an unresolved forecast rather than partial bounds. The presentation cache retains twelve projected models per immutable snapshot. Exact isolated resolution remains available to gameplay regressions.
 
 Development victory requires a capability supplied only by development startup; ordinary dispatch rejects it. It reuses settlement, events and saves without inventing XP or restoring roster Health. Packaged startup ignores development URLs.
 
@@ -118,7 +118,7 @@ The shell [navigation reducer](../src/ui/shell/navigation.ts) owns page and over
 
 Feature folders own their layouts; `shared/` owns reusable cards, combat readouts, rewards, navigation and effects. Shared presentation may consume gameplay queries and infrastructure, but cannot import UI feature folders. [Inspection requests](../src/ui/shared/inspection-model.ts) remain independent of the inspection feature. Registered controls, React infrastructure and dependency-light utilities have the lower-level boundaries described in the [design-system map](DESIGN_SYSTEM.md).
 
-[Battle interaction](../src/ui/battle/battle-interaction.ts) owns transient selection, input and focus. [Target geometry](../src/ui/battle/use-target-line.ts) measures the existing layout; one [preview presentation model](../src/ui/battle/play-preview-model.ts) supplies affected units and per-recipient readouts from the authoritative preview. [Card rules](../src/game/card-rules.ts) classify targets, and gameplay queries supply legal explicit recipients without choosing random or future group targets.
+[Battle interaction](../src/ui/battle/battle-interaction.ts) owns transient selection, input and focus. [Target geometry](../src/ui/battle/use-target-line.ts) measures the existing layout; one [preview presentation model](../src/ui/battle/play-preview-model.ts) supplies affected units, guaranteed messages and exact or conditional readouts from authoritative alternatives. [Card rules](../src/game/card-rules.ts) classify targets, and gameplay queries supply legal explicit recipients without choosing random or future group targets.
 
 `src/ui/styles.css` owns stylesheet order. Preserve shared declarations and repeated-selector order when moving CSS; unchanged declarations alone do not prove rendering parity. Result presentation shares one completion context so input and reduced motion finish the same animation from any consumer.
 
@@ -131,6 +131,10 @@ Feature folders own their layouts; `shared/` owns reusable cards, combat readout
 [Diagnostics](../src/application/diagnostics.ts) is a bounded session-owned collector with a separate persistence port. It records selected revision/phase fields rather than saves or arbitrary objects, truncates errors and redacts common paths/credentials. Sink failures, unavailable storage and recursive logging cannot affect gameplay. Disposal revokes collection. There is no player report/clipboard export or automatic upload.
 
 `committedCommand` is transient session presentation metadata. Loading a checkpoint cannot manufacture a committed action or replay audio. Collection discovery and passive ranks belong to [journey progression](EXPEDITION_DESIGN.md); local browsing never grants them.
+
+## Optional performance recording
+
+[The recorder capability](../src/lib/performance.ts) isolates sink failures and idempotent span completion. Renderer startup supplies [the capture bridge](../src/platform/performance.ts) to the session and presentation; ordinary play installs no collector, clocks or retained performance log. Command resolution, encoding, publication and asynchronous queue/write waits have separate spans. Preview computation, hand geometry/motion, feedback dispatch and navigation supply presentation context without changing gameplay or motion ownership. Runtime cannot import the Node capture harness. [Performance tools](DEVELOPMENT_TOOLS.md#hitch-attribution-and-deep-traces) own capture format, budgets, trace interpretation and limitations.
 
 ## TypeScript environments
 

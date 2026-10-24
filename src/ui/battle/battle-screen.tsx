@@ -1,4 +1,4 @@
-import type { GameEvent } from "../../game/types";
+import { measurePerformance } from "../../lib/performance";
 import { useBattleArtworkSize } from "./use-battle-artwork-size";
 import { sharedDodgeChance } from "../../game/combat/index";
 import { Screen } from "../shared/navigation/screen";
@@ -12,7 +12,7 @@ import { Button } from "../../components/ui/button";
 import { ActionCard, AllyCard, EnemyCard } from "../shared/cards/cards";
 import { species } from "../../game/content";
 import type { Command, BattleState } from "../../game/types";
-import { previewPlay } from "../../game/preview";
+import { projectPlay } from "../../game/preview";
 import { TargetPreview } from "./target-preview";
 import { useBattleInteraction } from "./battle-interaction";
 import { useTargetLine } from "./use-target-line";
@@ -25,9 +25,38 @@ import { assetUrl } from "../shared/assets";
 import type { Controls } from "../shared/navigation/input";
 function usePlayPreview(game: BattleState, cardId: string | null, targetId?: string) {
   return useMemo(
-    () => (cardId && targetId ? previewPlay(game, cardId, targetId) : null),
+    () => (cardId && targetId ? cachedPreview(game, cardId, targetId) : null),
     [game, cardId, targetId],
   );
+}
+const emptyPreview: ReturnType<typeof playPreviewModel> = {
+  affected: new Set<string>(),
+  units: new Map(),
+  messages: [] as readonly string[],
+};
+const previewCache = new WeakMap<BattleState, Map<string, ReturnType<typeof playPreviewModel>>>();
+function cachedPreview(game: BattleState, cardId: string, targetId: string) {
+  let cache = previewCache.get(game);
+  if (!cache) {
+    cache = new Map();
+    previewCache.set(game, cache);
+  }
+  const key = JSON.stringify([cardId, targetId]);
+  const prior = cache.get(key);
+  if (prior) return prior;
+  const result = measurePerformance(
+    "target-preview",
+    () => {
+      const projection = projectPlay(game, cardId, targetId);
+      return measurePerformance("preview-model", () => playPreviewModel(game, projection, targetId), {
+        revision: game.revision,
+      });
+    },
+    { revision: game.revision, cardId, targetId },
+  );
+  if (cache.size >= 12) cache.delete(cache.keys().next().value!);
+  cache.set(key, result);
+  return result;
 }
 function FanSlot({ index, count, children }: { index: number; count: number; children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -102,7 +131,7 @@ export function BattleScreen({
   } = interaction;
   const battle = game.battle;
   const preview = usePlayPreview(game, selected, target);
-  const model = useMemo(() => playPreviewModel(game, preview, target), [game, preview, target]);
+  const model = preview ?? emptyPreview;
   const recipientUnit = [...enemyRow, ...playerRow, ...game.reserves].find((unit) => unit.id === target);
   const recipient = recipientUnit ? unitName(recipientUnit) : undefined;
   const acting = card ? cardActor(game, card) : undefined;
@@ -243,14 +272,9 @@ export function BattleScreen({
                       </Button>
                     ))
                 : null}
-              {preview?.events
-                .filter(
-                  (event): event is Extract<GameEvent, { kind: "status" }> =>
-                    event.kind === "status" && !event.targetId,
-                )
-                .map((event, index) => (
-                  <p key={index}>{event.text}</p>
-                ))}
+              {model.messages.map((message, index) => (
+                <p key={index}>{message}</p>
+              ))}
             </>
           ) : null}
         </div>

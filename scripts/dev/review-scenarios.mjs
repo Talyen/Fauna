@@ -22,6 +22,8 @@ export const SCENARIOS = [
   "settings",
   "collection",
   "battle",
+  "uncertain-targeting",
+  "unknown-targeting",
   "pause",
   "recruit",
   "recruit-replacement",
@@ -108,6 +110,10 @@ export async function reviewScenario(server, name) {
         discovery: { ...game.discovery, recruited: { ...game.discovery.recruited, orifable: 6 } },
       };
   }
+  if (["uncertain-targeting", "unknown-targeting"].includes(name)) {
+    const { uncertainBattle } = await server.ssrLoadModule("/tests/support/uncertainty.ts");
+    game = uncertainBattle(name === "unknown-targeting");
+  }
   const save = encodeSave(game);
   decodeSave(save);
   return {
@@ -155,6 +161,11 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   }
   if (scenario.name === "orifable-targeting") {
     await page.locator('.hand [aria-label^="Apple,"]').click();
+  }
+  if (["uncertain-targeting", "unknown-targeting"].includes(scenario.name)) {
+    await page.locator(".hand .action-card").first().focus();
+    await page.keyboard.press("Enter");
+    await expect(page.locator(".target-preview .combat-stats").first()).toBeVisible();
   }
   if (scenario.name === "oathara-resurrection") {
     await page.locator('.hand [data-card-id="ally-0:oathara-vow-of-return"]').click();

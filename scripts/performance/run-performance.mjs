@@ -6,7 +6,9 @@ import os from "node:os";
 import { performance } from "node:perf_hooks";
 import { pathToFileURL } from "node:url";
 import { ROOT, runtime, identity, hash, reportDirectory } from "../lib/tool-runtime.mjs";
-import { comparePerformance, summarizeSample } from "./metrics.mjs";
+import { comparePerformance, summarizeSample, hitchMarkdown, compareRecorderOverhead } from "./metrics.mjs";
+import { installSampler } from "./sampler.mjs";
+import { beginTrace, attributeTrace } from "./trace.mjs";
 import { isolatedDesktopEnvironment } from "../lib/desktop-environment.mjs";
 const read = async (file) => JSON.parse(await readFile(path.resolve(file), "utf8"));
 export async function performanceBuildIdentity(repository = ROOT) {
@@ -28,78 +30,23 @@ export async function performanceBuildIdentity(repository = ROOT) {
     files.push(`${name}:${hash(await readFile(path.join(repository, name)))}`);
   return hash(files.join("\n"));
 }
-async function startSampler(page) {
-  await page.evaluate(async () => {
-    const supported = PerformanceObserver.supportedEntryTypes ?? [];
-    const snapshot = () => ({
-      heap: performance.memory?.usedJSHeapSize ?? null,
-      dom: document.querySelectorAll("*").length,
-      media: document.querySelectorAll("audio,video").length,
-    });
-    const sample = {
-      frames: [],
-      longTasks: supported.includes("longtask") ? [] : null,
-      input: supported.includes("event") ? [] : null,
-      segments: [],
-      before: snapshot(),
-      after: null,
-    };
-    const observers = [];
-    for (const type of ["longtask", "event"])
-      if (supported.includes(type)) {
-        const observer = new PerformanceObserver((list) => {
-          for (const entry of list.getEntries())
-            (type === "event" ? sample.input : sample.longTasks).push({
-              start: entry.startTime,
-              duration: entry.duration,
-              inputDelay: type === "event" ? entry.processingStart - entry.startTime : null,
-            });
-        });
-        observer.observe({ type, buffered: false, ...(type === "event" ? { durationThreshold: 16 } : {}) });
-        observers.push({ observer, type });
-      }
-    let previous = null,
-      handle;
-    const frame = (now) => {
-      if (previous !== null) sample.frames.push(now - previous);
-      previous = now;
-      handle = requestAnimationFrame(frame);
-    };
-    window.faunaPerf = {
-      sample,
-      segment: (name) => {
-        window.faunaPerf.pending = { name, start: performance.now(), frame: sample.frames.length };
-      },
-      end: () => {
-        const pending = window.faunaPerf.pending;
-        sample.segments.push({
-          name: pending.name,
-          duration: performance.now() - pending.start,
-          frames: sample.frames.length - pending.frame,
-          complete: true,
-        });
-      },
-      stop: () => {
-        cancelAnimationFrame(handle);
-        for (const { observer, type } of observers) {
-          for (const entry of observer.takeRecords())
-            (type === "event" ? sample.input : sample.longTasks).push({
-              start: entry.startTime,
-              duration: entry.duration,
-              inputDelay: type === "event" ? entry.processingStart - entry.startTime : null,
-            });
-          observer.disconnect();
-        }
-        sample.after = snapshot();
-        return sample;
-      },
-    };
-    handle = requestAnimationFrame(frame);
-    await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
-  });
-}
 export async function action(page, step) {
-  if (step.kind === "click") await page.getByRole("button", { name: step.name, exact: true }).click();
+  if (step.kind === "select")
+    await page.locator(`.hand [data-card-id=${JSON.stringify(step.cardId)}]`).click();
+  else if (step.kind === "target")
+    await page.locator(`[data-actor-id=${JSON.stringify(step.targetId)}] .creature-card`).hover();
+  else if (step.kind === "targetKey") await page.keyboard.press(step.key);
+  else if (step.kind === "cancel") await page.keyboard.press("Escape");
+  else if (step.kind === "stall")
+    await page.evaluate(() => {
+      const end = window.faunaPerformanceCapture?.begin("synthetic-stall");
+      const until = performance.now() + 80;
+      while (performance.now() < until) {
+        /* Deliberate diagnostic fixture only. */
+      }
+      end?.();
+    });
+  else if (step.kind === "click") await page.getByRole("button", { name: step.name, exact: true }).click();
   else if (step.kind === "play") {
     await page
       .locator(`.app:not([inert]) .hand [data-card-id=${JSON.stringify(step.command.cardId)}]`)
@@ -116,6 +63,7 @@ export async function action(page, step) {
       .locator(`[data-actor-id=${JSON.stringify(step.command.reserve)}] .creature-card`)
       .click();
   } else throw new Error(`Unknown performance action: ${step.kind}`);
+  await page.locator(".app:not([inert])[data-save-status=saved]").waitFor();
   await page.waitForFunction(async (checkpoint) => {
     const saved = window.faunaDesktop
       ? (await window.faunaDesktop.readCandidates()).find((row) => row.source === "primary")?.data
@@ -133,11 +81,21 @@ export async function action(page, step) {
     return saved && canonical(JSON.parse(saved)) === canonical(JSON.parse(checkpoint));
   }, step.checkpoint);
 }
-async function capture(browser, url, scenario, measured, native = false, cold = false) {
-  let context, app, profile;
+async function capture(
+  browser,
+  url,
+  scenario,
+  measured,
+  native = false,
+  cold = false,
+  artifactBase,
+  traceMode = false,
+  recordSpans = true,
+) {
+  let context, app, profile, stopTrace, page, sample, captureError, value;
+  let failed = false;
   const launched = performance.now();
   try {
-    let page;
     const initialize = (initial) => {
       if (!window.faunaDesktop) localStorage.setItem("fauna.save.v1", initial);
       localStorage.setItem("fauna.auto-end-turn", "false");
@@ -186,32 +144,62 @@ async function capture(browser, url, scenario, measured, native = false, cold = 
       dpr: devicePixelRatio,
       reducedMotion: matchMedia("(prefers-reduced-motion: reduce)").matches,
     }));
-    if (measured) await startSampler(page);
+    await page.bringToFront();
+    if (measured && traceMode) stopTrace = await beginTrace(page, `${artifactBase}-trace.json`);
+    if (measured) await page.evaluate(installSampler, { recordSpans });
     for (const [i, step] of scenario.actions.entries()) {
       if (measured) await page.evaluate((name) => window.faunaPerf.segment(name), `${i}-${step.kind}`);
       if (step.kind !== "idle") await action(page, step);
       await page.waitForTimeout(1200);
       if (measured) await page.evaluate(() => window.faunaPerf.end());
     }
-    if (measured)
-      return {
-        ...(await page.evaluate(() => window.faunaPerf.stop())),
+    if (measured) {
+      sample = await page.evaluate(() => window.faunaPerf.stop());
+      const trace = stopTrace ? await stopTrace() : null;
+      value = {
+        ...sample,
+        trace: trace ? attributeTrace(trace, sample, summarizeSample(sample).hitches) : null,
         startupMs: cold ? startupMs : null,
         nativeVersion: app ? await app.evaluate(() => process.versions.electron) : null,
         environment,
       };
+    }
+  } catch (error) {
+    captureError = error;
+    failed = true;
   } finally {
-    await context?.close();
-    await app?.close();
-    if (profile) await rm(profile, { recursive: true, force: true });
+    const remaining = await page?.evaluate(() => window.faunaPerf?.stop()).catch(() => null);
+    // Flush tracing before closing the measured target, then attempt every owned cleanup.
+    const traceCleanup = await Promise.allSettled([Promise.resolve().then(() => stopTrace?.())]);
+    const cleanup = await Promise.allSettled([context?.close(), app?.close()]);
+    const evidence = await Promise.allSettled([
+      measured && artifactBase && (sample || remaining)
+        ? writeFile(`${artifactBase}-sample.json`, JSON.stringify(sample || remaining))
+        : undefined,
+      profile && cleanup[1].status === "fulfilled"
+        ? rm(profile, { recursive: true, force: true })
+        : undefined,
+    ]);
+    const errors = [...traceCleanup, ...cleanup, ...evidence]
+      .filter((result) => result.status === "rejected")
+      .map((result) => result.reason?.message ?? "Capture cleanup failed");
+    if (errors.length && measured && artifactBase)
+      await writeFile(`${artifactBase}-cleanup.json`, JSON.stringify(errors)).catch(() => {});
+    if (!failed && errors.length) {
+      captureError = new Error(errors.join("; "));
+      failed = true;
+    }
   }
+  if (failed) throw captureError;
+  return value;
 }
 export async function main(args = process.argv.slice(2)) {
-  if (args[0] === "compare") {
+  if (args[0] === "compare" || args[0] === "overhead") {
     const before = await read(args[1]),
       after = await read(args[2]);
     const out = await reportDirectory(args[3], `reports/performance/comparison-${Date.now()}`);
-    const result = comparePerformance(before, after);
+    const result =
+      args[0] === "overhead" ? compareRecorderOverhead(before, after) : comparePerformance(before, after);
     await writeFile(path.join(out, "comparison.json"), JSON.stringify(result, null, 2));
     console.log(`Performance comparison: ${out}`);
     return;
@@ -222,6 +210,8 @@ export async function main(args = process.argv.slice(2)) {
     output,
     native = false,
     cold = false,
+    traceMode = false,
+    recordSpans = true,
     suite = "fixed",
     seed = 42;
   if (replayMode) {
@@ -229,14 +219,18 @@ export async function main(args = process.argv.slice(2)) {
     output = args[2];
     native = prior.environment.runtime === "electron";
     cold = prior.environment.cold;
+    traceMode = prior.environment.trace;
+    recordSpans = prior.environment.recordSpans;
     suite = prior.environment.suite;
     seed = prior.environment.seed;
-    if (!prior.complete || prior.format !== 2) throw new Error("Cannot replay incomplete report.");
+    if (!prior.complete || prior.format !== 3)
+      throw new Error("Cannot replay incomplete or old performance report; recapture with format 3.");
   } else {
     for (let i = 0; i < args.length; i++) {
       if (args[i] === "--electron") native = true;
       else if (args[i] === "--cold") cold = true;
-      else if (["--scenario", "--out", "--suite", "--seed"].includes(args[i])) {
+      else if (args[i] === "--trace") traceMode = true;
+      else if (["--scenario", "--out", "--suite", "--seed", "--spans"].includes(args[i])) {
         const flag = args[i],
           value = args[++i];
         if (!value) throw new Error("Missing option value.");
@@ -244,20 +238,26 @@ export async function main(args = process.argv.slice(2)) {
         if (flag === "--out") output = value;
         if (flag === "--suite") suite = value;
         if (flag === "--seed") seed = Number(value);
+        if (flag === "--spans") {
+          if (!["on", "off"].includes(value)) throw new Error("Choose --spans on or off");
+          recordSpans = value === "on";
+        }
       } else
         throw new Error(
-          "Usage: perf -- [--electron] [--cold] [--suite fixed|reachable] [--seed N] [--scenario ID] [--out reports/path]",
+          "Usage: perf -- [--electron] [--cold] [--trace] [--spans on|off] [--suite fixed|reachable] [--seed N] [--scenario ID] [--out reports/path]",
         );
     }
   }
   if (!["fixed", "reachable"].includes(suite) || !Number.isInteger(seed) || seed < 0 || seed > 0xffffffff)
     throw new Error("Invalid performance suite or seed.");
+  if (typeof traceMode !== "boolean" || typeof recordSpans !== "boolean")
+    throw new Error("Invalid replay recording mode; recapture with format 3");
   if (cold && (!native || suite !== "fixed" || (scenarioId && scenarioId !== "startup")))
     throw new Error("Cold capture requires --electron and the fixed startup scenario.");
   if (cold) scenarioId = "startup";
   const out = await reportDirectory(output, `reports/performance/capture-${Date.now()}`);
   const report = {
-    format: 2,
+    format: 3,
     complete: false,
     identity: await identity(),
     buildIdentity: await performanceBuildIdentity(),
@@ -283,13 +283,14 @@ export async function main(args = process.argv.slice(2)) {
               {
                 id: "startup",
                 fixture: "cold-process-fresh-profile-v1",
-                initial: performanceCases(seed)[0].initial,
+                initial: performanceCases(seed).find((row) => row.id === "battle").initial,
                 actions: [{ kind: "idle" }],
               },
             ]
-          : (suite === "reachable" ? await reachablePerformanceCases(seed) : performanceCases(seed)).filter(
-              (row) => !scenarioId || row.id === scenarioId,
-            );
+          : (suite === "reachable"
+              ? await reachablePerformanceCases(seed)
+              : performanceCases(seed, scenarioId === "diagnostic-stall")
+            ).filter((row) => !scenarioId || row.id === scenarioId);
     } finally {
       await loader.close();
     }
@@ -307,6 +308,22 @@ export async function main(args = process.argv.slice(2)) {
         ? (await import("electron/package.json", { with: { type: "json" } })).default.version
         : browser.version(),
       cold,
+      trace: traceMode,
+      recordSpans,
+      recorderVersion: 1,
+      harnessIdentity: hash(
+        (
+          await Promise.all(
+            [
+              "scripts/performance/run-performance.mjs",
+              "scripts/performance/metrics.mjs",
+              "scripts/performance/sampler.mjs",
+              "scripts/performance/trace.mjs",
+              "src/tooling/performance.ts",
+            ].map(async (file) => `${file}:${hash(await readFile(path.join(ROOT, file)))}`),
+          )
+        ).join("\n"),
+      ),
       windowFrame: !native,
       suite,
       seed,
@@ -332,7 +349,17 @@ export async function main(args = process.argv.slice(2)) {
       };
       try {
         await capture(browser, url, scenario, false, native, cold);
-        record.sample = await capture(browser, url, scenario, true, native, cold);
+        record.sample = await capture(
+          browser,
+          url,
+          scenario,
+          true,
+          native,
+          cold,
+          path.join(out, scenario.id),
+          traceMode,
+          recordSpans,
+        );
         if (
           JSON.stringify(record.sample.environment.viewport) !==
             JSON.stringify(report.environment.viewport) ||
@@ -344,9 +371,21 @@ export async function main(args = process.argv.slice(2)) {
         report.environment.dpr = record.sample.environment.dpr;
         if (record.sample.nativeVersion) report.environment.browser = record.sample.nativeVersion;
         const summary = summarizeSample(record.sample);
+        if (traceMode && !record.sample.trace?.available)
+          throw new Error(record.sample.trace?.reason ?? "Trace attribution unavailable");
+        if (
+          scenario.id === "diagnostic-stall" &&
+          recordSpans &&
+          !summary.hitches.some((gap) => gap.spans.some((span) => span.name === "synthetic-stall"))
+        )
+          throw new Error("Synthetic stall was not retained in hitch attribution");
         report.cases.push(record);
         await writeFile(path.join(out, `${scenario.id}-sample.json`), JSON.stringify(record.sample));
         await writeFile(path.join(out, `${scenario.id}-summary.json`), JSON.stringify(summary, null, 2));
+        await writeFile(
+          path.join(out, `${scenario.id}-hitches.md`),
+          hitchMarkdown(scenario.id, summary, record.sample.trace),
+        );
       } catch (error) {
         report.failures.push({ id: scenario.id, reason: error.message });
         if (record.sample) report.cases.push(record);

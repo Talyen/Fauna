@@ -218,7 +218,7 @@ export function swapFromCard(
   const allied = isRosterCreature(actor);
   const backup = allied ? state.reserves.filter((unit) => unit.health > 0) : [];
   if (backup.length) {
-    const incoming = backup[Math.floor(roll(state) * backup.length)]!;
+    const incoming = backup[Math.floor(roll(state, { kind: "index", size: backup.length }) * backup.length)]!;
     swapBackup(state, actor.id, incoming.id, events, true);
     return;
   }
@@ -226,7 +226,7 @@ export function swapFromCard(
   const row = allied ? state.team : state.battle!.enemies;
   const others = row.filter((unit) => unit.id !== actor.id && unit.health > 0);
   if (!others.length) return;
-  const other = others[Math.floor(roll(state) * others.length)]!;
+  const other = others[Math.floor(roll(state, { kind: "index", size: others.length }) * others.length)]!;
   const from = row.findIndex((unit) => unit.id === actor.id);
   const to = row.findIndex((unit) => unit.id === other.id);
   [row[from], row[to]] = [row[to]!, row[from]!];
