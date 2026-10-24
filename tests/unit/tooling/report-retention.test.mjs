@@ -1,5 +1,5 @@
 import { it, expect } from "vitest";
-import { mkdtemp, mkdir, writeFile, access, rm, cp } from "node:fs/promises";
+import { mkdtemp, mkdir, writeFile, readFile, readdir, access, rm, cp } from "node:fs/promises";
 import { execFileSync } from "node:child_process";
 import os from "node:os";
 import path from "node:path";
@@ -9,9 +9,18 @@ const day = 86_400_000;
 async function bundle(root, name, complete, finished) {
   const directory = path.join(root, "reports/balance", name);
   await mkdir(directory, { recursive: true });
-  await writeFile(path.join(directory, "report.json"), "{}");
+  await writeFile(path.join(directory, "report.json"), JSON.stringify({ name, complete }));
   await sealBalanceReport(directory, complete, { root, now: finished });
   return directory;
+}
+
+async function recoveries(quarantine) {
+  return Promise.all(
+    (await readdir(quarantine)).map(async (name) => {
+      const entry = path.join(quarantine, name);
+      return { entry, ...JSON.parse(await readFile(path.join(entry, "recovery.json"), "utf8")) };
+    }),
+  );
 }
 
 it("keeps expiry effective after a generated report is archived with a retired worktree", async () => {
@@ -22,25 +31,43 @@ it("keeps expiry effective after a generated report is archived with a retired w
     const original = await bundle(root, "passed", true, now - 2 * day);
     const archived = path.join(root, ".git/fauna-worktree-archives/task/files/reports/balance/passed");
     await cp(original, archived, { recursive: true, preserveTimestamps: true });
-    await pruneBalanceReports(root, { now, includeArchives: true });
+    const result = await pruneBalanceReports(root, { now, includeArchives: true });
     await expect(access(original)).rejects.toThrow();
     await expect(access(archived)).rejects.toThrow();
+    const retained = await recoveries(result.quarantine);
+    expect(retained.map((item) => item.original).sort()).toEqual([original, archived].sort());
+    for (const item of retained)
+      expect(JSON.parse(await readFile(path.join(item.entry, "bundle/report.json"), "utf8"))).toEqual({
+        name: path.basename(item.original),
+        complete: item.complete,
+      });
   } finally {
     await rm(root, { recursive: true, force: true });
   }
 });
 
-it("expires successful records sooner while retaining recent failure diagnostics", async () => {
+it("quarantines old records without losing unique failure evidence", async () => {
   const root = await mkdtemp(path.join(os.tmpdir(), "fauna-retention-"));
   const now = Date.now();
   try {
     const passed = await bundle(root, "passed", true, now - 2 * day);
     const recentFailure = await bundle(root, "failure", false, now - 2 * day);
     const oldFailure = await bundle(root, "old-failure", false, now - 4 * day);
-    await pruneBalanceReports(root, { now });
+    const result = await pruneBalanceReports(root, { now });
     await expect(access(passed)).rejects.toThrow();
     await expect(access(oldFailure)).rejects.toThrow();
     await expect(access(recentFailure)).resolves.toBeUndefined();
+    const retained = await recoveries(result.quarantine);
+    expect(retained.map((item) => item.original).sort()).toEqual([passed, oldFailure].sort());
+    for (const item of retained) {
+      expect(item.permanentDeletionApproved).toBe(false);
+      expect(JSON.parse(await readFile(path.join(item.entry, "bundle/report.json"), "utf8"))).toEqual({
+        name: path.basename(item.original),
+        complete: item.complete,
+      });
+    }
+    await expect(pruneBalanceReports(root, { now, budget: 1 })).rejects.toThrow("budget");
+    expect((await recoveries(result.quarantine)).length).toBe(3);
   } finally {
     await rm(root, { recursive: true, force: true });
   }

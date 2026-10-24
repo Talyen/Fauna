@@ -1,4 +1,4 @@
-import { lstat, readdir, readFile, writeFile, rm } from "node:fs/promises";
+import { lstat, readdir, readFile, writeFile, mkdir, mkdtemp, rename } from "node:fs/promises";
 import path from "node:path";
 import { git } from "../lib/git.mjs";
 
@@ -6,6 +6,28 @@ const receiptName = ".balance-retention.json";
 const day = 86_400_000;
 const generatedName =
   /^(?:case-\d+(?:-config)?\.json(?:\.journal\.jsonl)?|report\.json|comparison\.json|findings\.(?:json|md))$/u;
+
+async function quarantineBytes(directory) {
+  let bytes = 0,
+    entries = 0;
+  async function visit(file) {
+    if (++entries > 100_000)
+      throw new Error("Quarantine inventory is too large; review it before another capture.");
+    const item = await lstat(file);
+    if (item.isSymbolicLink())
+      throw new Error("Quarantine contains a symlink; review it before another capture.");
+    if (item.isDirectory()) {
+      for (const name of await readdir(file)) await visit(path.join(file, name));
+    } else if (item.isFile()) bytes += item.size;
+    else throw new Error("Quarantine contains an unexpected file type; review required.");
+  }
+  try {
+    await visit(directory);
+  } catch (error) {
+    if (error.code !== "ENOENT") throw error;
+  }
+  return bytes;
+}
 
 export async function sealBalanceReport(directory, complete, { root, now = Date.now() } = {}) {
   if (path.dirname(directory) !== path.join(root, "reports/balance")) return;
@@ -34,8 +56,10 @@ export async function pruneBalanceReports(
   { now = Date.now(), budget = 1024 ** 3, includeArchives = false } = {},
 ) {
   const roots = [root];
+  let quarantine = path.join(root, "reports/balance-quarantine");
   if (includeArchives) {
     const common = path.resolve(root, git(root, ["rev-parse", "--git-common-dir"]).trim());
+    quarantine = path.join(common, "fauna-balance-quarantine");
     const archives = path.join(common, "fauna-worktree-archives");
     const info = await lstat(archives).catch((error) => {
       if (error.code === "ENOENT") return null;
@@ -109,7 +133,7 @@ export async function pruneBalanceReports(
             !item.isFile() ||
             item.isSymbolicLink() ||
             item.size !== file.bytes ||
-            Math.trunc(item.mtimeMs) !== file.modified
+            Math.abs(item.mtimeMs - file.modified) >= 2
           ) {
             unchanged = false;
             break;
@@ -129,7 +153,8 @@ export async function pruneBalanceReports(
       }
     }
   }
-  let retained = bundles.reduce((sum, item) => sum + item.bytes, 0);
+  const retained = bundles.reduce((sum, item) => sum + item.bytes, 0) + (await quarantineBytes(quarantine));
+  const moved = [];
   for (const bundle of bundles.sort((a, b) => a.finished - b.finished)) {
     const age = now - bundle.finished;
     const expired = age >= (bundle.complete ? day : 3 * day);
@@ -156,16 +181,36 @@ export async function pruneBalanceReports(
           item?.isFile() &&
           !item.isSymbolicLink() &&
           item.size === file.bytes &&
-          Math.trunc(item.mtimeMs) === file.modified
+          Math.abs(item.mtimeMs - file.modified) < 2
         );
       }),
     );
     if (checks.some((matches) => !matches)) continue;
-    await rm(bundle.directory, { recursive: true, force: true });
-    retained -= bundle.bytes;
+    await mkdir(quarantine, { recursive: true });
+    const destination = await lstat(quarantine);
+    if (!destination.isDirectory() || destination.isSymbolicLink())
+      throw new Error("Unsafe quarantine directory.");
+    const entry = await mkdtemp(path.join(quarantine, "retained-"));
+    await writeFile(
+      path.join(entry, "recovery.json"),
+      JSON.stringify({
+        schema: 1,
+        original: bundle.directory,
+        quarantinedAt: now,
+        complete: bundle.complete,
+        reason: expired ? "age policy" : "size budget",
+        permanentDeletionApproved: false,
+      }),
+      { flag: "wx" },
+    );
+    // Same-filesystem rename retains every byte and never empties quarantine.
+    // If it fails, the original bundle remains and the capture stops.
+    await rename(bundle.directory, path.join(entry, "bundle"));
+    moved.push(entry);
   }
   if (retained >= budget)
     throw new Error(
-      "Fresh balance evidence fills the 1 GiB budget. Review retained reports before another capture; nothing fresh was removed.",
+      "Retained and quarantined balance evidence fills the 1 GiB budget. Review an exact deletion batch before another capture; no diagnostics were permanently removed.",
     );
+  return { quarantine, moved, retainedBytes: retained };
 }

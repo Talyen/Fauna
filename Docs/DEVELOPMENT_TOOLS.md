@@ -127,12 +127,16 @@ Choose a fresh output directory; rerunning into existing evidence is refused.
 This policy applies to new balance captures, not historical archives or unique assets.
 
 Completed machine-generated bundles directly under `reports/balance/` receive an
-explicit retention receipt. The next balance capture expires unchanged successful
-bundles after 24 hours and failed bundles after 72 hours. Above a 1 GiB combined
-budget, the oldest eligible bundles expire after at least 24 hours; a budget filled
-by fresh evidence blocks another capture instead of discarding fresh failures.
-The same receipt-based collection includes copies inside retired worktree archives,
-so retirement cannot turn a short-lived generated report into permanent history.
+explicit retention receipt. The next balance capture moves unchanged successful
+bundles older than 24 hours and failed bundles older than 72 hours into recoverable
+`fauna-balance-quarantine/` inside the shared Git directory. Each entry retains the
+entire bundle and a `recovery.json` with its original absolute path. There is no
+automatic permanent deletion. Quarantine still occupies disk space and counts
+toward the combined 1 GiB budget. Above that budget, the oldest eligible bundles
+can move after at least 24 hours, but another capture is blocked until a reviewed,
+exact deletion batch is separately approved; fresh evidence is never sacrificed.
+The same policy includes copies inside retired worktree archives. Reclaiming
+space requires a separately approved purge, not simply moving a bundle.
 Legacy/unmarked bundles, custom output locations, symlinks, modified bundles and
 bundles with added files (including `.retention-keep`) are preserved. Keep deliberate
 longer investigations outside that managed collection or add `.retention-keep`.
