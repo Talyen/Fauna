@@ -1,7 +1,9 @@
+import { isAbilityKind } from "./rules/abilities";
+import { isSupplementalKind } from "./rules/supplemental";
 import { FOOD_CARDS, CARDS, SPECIES, FIRST_RUN_STARTERS, BOONS, TALENTS, TALENT_EFFECTS } from "./content";
 import { cardText } from "./card-rules";
 import { BOSSES, COMBAT_PACKS, JOURNEY_LENGTH } from "./encounters";
-import { DAMAGE_TYPES, EFFECT_KEYWORDS, PROGRESSION_KEYWORDS, definitionKeywords } from "./keywords";
+import { DAMAGE_TYPES, PROGRESSION_KEYWORDS, definitionKeywords } from "./keywords";
 
 export const contentCatalog = {
   cards: [...CARDS, ...FOOD_CARDS],
@@ -93,7 +95,7 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
       error(entry.id, "cards", "Species must contribute exactly three cards.");
   }
   for (const card of catalog.cards) {
-    if (Object.hasOwn(EFFECT_KEYWORDS, card.effect) && cardText(card).includes("."))
+    if (isAbilityKind(card.effect) && cardText(card).includes("."))
       error(card.id, "description", "Effect descriptions must omit periods");
     if (card.species === null ? !card.consume : !species.has(card.species))
       error(card.id, "species", "Unknown owner.");
@@ -116,23 +118,7 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
     for (const effect of card.effects ?? []) {
       if (!Number.isSafeInteger(effect.amount) || effect.amount < 1 || effect.amount > 100)
         error(card.id, "effects", "Unsupported supplemental amount.");
-      if (
-        ![
-          "damage",
-          "status",
-          "draw",
-          "drawKeyword",
-          "mana",
-          "cleanse",
-          "purge",
-          "reflect",
-          "heal",
-          "blind",
-          "meltArmor",
-          "nullifyFreeze",
-        ].includes(effect.kind)
-      )
-        error(card.id, "effects", "Unknown supplemental effect.");
+      if (!isSupplementalKind(effect.kind)) error(card.id, "effects", "Unknown supplemental effect.");
       if (effect.kind === "drawKeyword" && !["light", "nature", "water"].includes(effect.keyword))
         error(card.id, "effects", "Unknown draw keyword.");
       if (effect.kind === "damage" && !DAMAGE_TYPES.includes(effect.damageType))
@@ -142,7 +128,7 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
       if (effect.kind === "heal" && effect.target !== undefined && effect.target !== "recipient")
         error(card.id, "effects", "Unknown healing recipient.");
     }
-    if (!Object.hasOwn(EFFECT_KEYWORDS, card.effect)) error(card.id, "effect", "Unknown effect.");
+    if (!isAbilityKind(card.effect)) error(card.id, "effect", "Unknown effect.");
     else if (card.effect === "attack" && !DAMAGE_TYPES.includes(card.damageType))
       error(card.id, "damageType", "Unknown damage type.");
     else {
@@ -193,7 +179,7 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
     if (
       !catalog.cards.some(
         (card) =>
-          Object.hasOwn(EFFECT_KEYWORDS, card.effect) &&
+          isAbilityKind(card.effect) &&
           (card.effect !== "attack" || DAMAGE_TYPES.includes(card.damageType)) &&
           definitionKeywords(card).includes(keyword),
       )

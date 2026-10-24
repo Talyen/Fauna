@@ -107,7 +107,7 @@ Deck and owned Boons use the existing modal owner and bounded pages. Draw/Discar
 
 ## Campfire
 
-The Campfire destination uses location artwork with Rest beneath it. Inside the visit, page the whole roster on one measured row, showing current Health and exact capped recovery before a single Rest action. Use the [eligibility and recovery rules](../EXPEDITION_DESIGN.md#encounters).
+The Campfire destination uses location artwork with Rest beneath it. Inside the visit, page the whole roster on one measured row, showing current Health and exact capped recovery before a single Rest action. Use the [eligibility and recovery rules](../EXPEDITION_DESIGN.md#campfire).
 
 Rest returns immediately to the same combat offers, briefly presenting committed before/after meters and actual recovery for healed creatures, including backup. Navigation and battle remain available; reduced motion shows final meters.
 

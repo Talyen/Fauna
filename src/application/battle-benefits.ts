@@ -1,14 +1,15 @@
+import { healingBenefit, ordinaryAttackFacts, type OrdinaryHit } from "../game/ability-facts";
+export type { OrdinaryHit } from "../game/ability-facts";
+import { battleCardCapacity, drawHasAnotherCard } from "../game/card-zones";
 import { drawableOwnerIds } from "../game/card-actors";
 import { RESURRECTION_HEALTH_PERCENT } from "../game/resurrection-rules";
-import { MAX_BATTLE_CARDS } from "../game/card-zones";
 import { battlefield } from "../game/battlefield";
-import { cardKeywords, creaturePassive, hasTalent } from "../game/progression";
+import { creaturePassive, hasTalent } from "../game/progression";
 import { hasHarmfulEffects, mostInjured, maximumHealth, STACK_LIMIT } from "../game/combat/state";
-import { actionValue, cardCost, physicalBonus } from "../game/ability-rules";
-import { armoredDamage, blockPayment } from "../game/combat/damage-values";
-import { healingValue, restoration, overflowBlock } from "../game/combat/healing-values";
+import { actionValue, cardCost } from "../game/ability-rules";
+import { healingValue, restoration } from "../game/combat/healing-values";
 import type { AvailablePlay } from "../game/play-queries";
-import type { BattleState, Creature, Enemy } from "../game/types";
+import type { BattleState, Enemy } from "../game/types";
 
 export type SupportPriority =
   | "none"
@@ -25,32 +26,10 @@ export type SupportPriority =
   | "defensePurge"
   | "purge"
   | "statusHarvest";
-export interface OrdinaryHit {
-  readonly negated: boolean;
-  readonly lost: number;
-  readonly blocked: number;
-  readonly eroded: number;
-  readonly health: number;
-  readonly main: boolean;
-  readonly lethal: boolean;
-  readonly usefulExtras: boolean;
-}
 export type BattleBenefit = { targetId?: string; reason?: string } & (
   | { kind: "attack"; groups: OrdinaryHit[][]; aggregate: "sum" | "mean"; finish: boolean }
   | { kind: "support"; priority: SupportPriority; amount: number }
 );
-
-function healBenefit(state: BattleState, ally: Creature, value: number, play: AvailablePlay) {
-  const { gain, excess } = restoration(ally, healingValue(state, ally, value));
-  const overflow = hasTalent(state, "health.overflow")
-    ? Math.min(overflowBlock(excess), STACK_LIMIT - ally.block)
-    : 0;
-  const cleanses =
-    hasHarmfulEffects(ally) &&
-    ((excess > 0 && hasTalent(state, "health.clean-slate")) ||
-      !!play.def.effects?.some((effect) => effect.kind === "cleanse" && effect.target === "recipient"));
-  return { restored: gain, utility: overflow + Number(cleanses) };
-}
 
 /** Share visible target discovery across the hand, without caching mutable state across commands. */
 export function battleBenefitFacts(state: BattleState) {
@@ -110,23 +89,7 @@ export function battleBenefits(
       (effect) =>
         (effect.kind === "draw" || effect.kind === "drawKeyword") &&
         effect.amount > 0 &&
-        ([...state.battle.draw, ...state.battle.discard, ...state.battle.buffer].some((id) => {
-          const drawn = state.cards.find((entry) => entry.id === id)!;
-          return (
-            (drawn.ownerId === null || drawableOwnerIds(state).has(drawn.ownerId)) &&
-            (state.battle.buffer.includes(id) ||
-              effect.kind === "draw" ||
-              cardKeywords(drawn).includes(effect.keyword))
-          );
-        }) ||
-          (!def.consume &&
-            (effect.kind === "draw" || cardKeywords(card).includes(effect.keyword)) &&
-            state.cards.length < MAX_BATTLE_CARDS &&
-            allies.some((unit) =>
-              creaturePassive(state, unit.species).effects.some(
-                (effect) => effect.kind === "wellRead" && effect.amount > 0,
-              ),
-            ))),
+        drawHasAnotherCard(state, card, effect),
     );
   const controlRemoval = (amount: number) =>
     support(
@@ -159,49 +122,15 @@ export function battleBenefits(
     }
     case "createFood":
     case "createPearls":
-      return support(state.cards.length < MAX_BATTLE_CARDS ? "resource" : "none");
+      return support(battleCardCapacity(state) > 0 ? "resource" : "none");
     case "pearl":
       return support("pearl");
     case "attack": {
       const enemies = facts.livingEnemies();
-      const outcomes = (enemy: (typeof enemies)[number]): OrdinaryHit[] =>
-        [def.damageType, ...(def.alternateDamageType ? [def.alternateDamageType] : [])].map((type) => {
-          // Ordinary primary packets omit chance effects and most talent reactions deliberately.
-          const damage =
-            value * (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1) +
-            (type === "physical" ? physicalBonus(actor, state) : 0);
-          const armored = type === "physical" || type === "stun";
-          const armor = armored
-            ? Math.max(0, enemy.combat.armor - (state.boons.includes("sundering-charm") ? 2 : 0))
-            : 0;
-          const payment = blockPayment(damage, enemy.block);
-          const lost =
-            enemy.combat.negate ||
-            enemy.combat.attackReflection ||
-            (type === "freeze" && enemy.combat.nullifyFreeze)
-              ? 0
-              : armoredDamage(payment.remaining, armor);
-          const eroded =
-            !enemy.combat.negate &&
-            !enemy.combat.attackReflection &&
-            armored &&
-            state.boons.includes("sundering-charm")
-              ? Math.min(2, enemy.combat.armor)
-              : 0;
-          return {
-            negated: enemy.combat.negate || enemy.combat.attackReflection,
-            lost,
-            blocked: enemy.combat.negate || enemy.combat.attackReflection ? 0 : payment.absorbed,
-            eroded,
-            health: enemy.health,
-            main: !enemy.minion,
-            lethal: lost >= enemy.health,
-            usefulExtras: !!def.effects?.some((effect) =>
-              ["damage", "purge", "meltArmor", "blind", "draw", "mana", "status"].includes(effect.kind),
-            ),
-          };
-        });
-      const attacks = enemies.map((enemy) => ({ enemy, outcomes: outcomes(enemy) }));
+      const attacks = enemies.map((enemy) => ({
+        enemy,
+        outcomes: ordinaryAttackFacts(state, actor, def, value, enemy),
+      }));
       const remaining = attacks.filter(({ enemy }) => !enemy.minion);
       const lethal = (attack: (typeof attacks)[number]) => attack.outcomes.every((outcome) => outcome.lethal);
       const winning =
@@ -253,7 +182,7 @@ export function battleBenefits(
     }
     case "heal": {
       if (def.target === "allAllies") {
-        const benefits = allies.map((ally) => healBenefit(state, ally, value, play));
+        const benefits = allies.map((ally) => healingBenefit(state, ally, value, play.def.effects));
         const restored = benefits.reduce((sum, benefit) => sum + benefit.restored, 0);
         const utility = benefits.reduce((sum, benefit) => sum + benefit.utility, 0);
         if (restored > 0) return support("healing", restored);
@@ -269,7 +198,7 @@ export function battleBenefits(
       const recipients =
         def.target === "self" ? [actor] : def.target === "mostInjured" ? [mostInjured(allies)!] : allies;
       return recipients.flatMap((ally) => {
-        const { restored, utility } = healBenefit(state, ally, value, play);
+        const { restored, utility } = healingBenefit(state, ally, value, play.def.effects);
         return support(
           restored > 0 ? "healing" : utility > 0 ? "utility" : "none",
           restored > 0 ? restored : utility,
@@ -304,7 +233,7 @@ export function battleBenefits(
             0,
           ) ?? 0;
         return allies.flatMap((ally) => {
-          const { restored, utility } = healBenefit(state, ally, healing, play);
+          const { restored, utility } = healingBenefit(state, ally, healing, play.def.effects);
           return support(
             restored > 0 ? "healing" : useful ? "standardUtility" : utility > 0 ? "utility" : "none",
             restored > 0 ? restored : utility,
@@ -314,11 +243,12 @@ export function battleBenefits(
       }
       return support(useful ? "standardUtility" : "none");
     }
-    case "teamDodge":
+    case "dodge":
       return dodgeSupport(
-        battlefield(state, "player")
-          .filter((unit) => unit.health > 0)
-          .reduce((sum, unit) => sum + Math.min(value, 70 - (unit.combat?.temporaryDodge ?? 0)), 0),
+        (def.target === "allAllies"
+          ? battlefield(state, "player").filter((unit) => unit.health > 0)
+          : [actor]
+        ).reduce((sum, unit) => sum + Math.min(value, 70 - (unit.combat?.temporaryDodge ?? 0)), 0),
       );
     case "redraw":
       return support(state.battle.hand.length > 1 ? "redraw" : "none");
@@ -393,9 +323,36 @@ export function battleBenefits(
               ? "utility"
               : "none",
       );
-    case "teamGuard":
+    case "guard":
     case "redistributeBlock":
     case "teamProtection": {
+      if (def.effect === "guard" && def.target !== "allAllies") {
+        const protection =
+          def.effects?.reduce((sum, effect) => {
+            if (effect.kind === "reflect")
+              return (
+                sum + Number(!(effect.status === "burn" ? actor.combat?.reflectBurn : actor.combat?.reflect))
+              );
+            if (effect.kind === "nullifyFreeze") return sum + Number(!actor.combat?.nullifyFreeze);
+            if (effect.kind === "status")
+              return (
+                sum +
+                Math.min(
+                  effect.amount,
+                  (effect.status === "dodge" ? 70 : STACK_LIMIT) - (actor.combat?.[effect.status] ?? 0),
+                )
+              );
+            return sum;
+          }, 0) ?? 0;
+        return (def.target === "self" ? [actor] : allies).flatMap((ally) => {
+          const useful = Math.min(value, STACK_LIMIT - ally.block);
+          return support(
+            healing > 0 ? "healing" : useful + protection > 0 ? "protection" : "none",
+            healing > 0 ? healing : useful + protection,
+            def.target === "self" ? undefined : ally.id,
+          );
+        });
+      }
       const useful = allies.reduce(
         (sum, ally) =>
           sum +
@@ -413,38 +370,9 @@ export function battleBenefits(
       const useful = Math.min(value, STACK_LIMIT - (actor.combat?.waterThorns ?? 0));
       return support(useful > 0 ? "protection" : "none", useful);
     }
-    case "dodge":
-      return dodgeSupport(Math.min(value, 70 - (actor.combat?.temporaryDodge ?? 0)));
     case "swap":
     case "swapLowest":
       return support("utility");
-    case "guard": {
-      const protection =
-        def.effects?.reduce((sum, effect) => {
-          if (effect.kind === "reflect")
-            return (
-              sum + Number(!(effect.status === "burn" ? actor.combat?.reflectBurn : actor.combat?.reflect))
-            );
-          if (effect.kind === "nullifyFreeze") return sum + Number(!actor.combat?.nullifyFreeze);
-          if (effect.kind === "status")
-            return (
-              sum +
-              Math.min(
-                effect.amount,
-                (effect.status === "dodge" ? 70 : STACK_LIMIT) - (actor.combat?.[effect.status] ?? 0),
-              )
-            );
-          return sum;
-        }, 0) ?? 0;
-      return (def.target === "self" ? [actor] : allies).flatMap((ally) => {
-        const useful = Math.min(value, STACK_LIMIT - ally.block);
-        return support(
-          healing > 0 ? "healing" : useful + protection > 0 ? "protection" : "none",
-          healing > 0 ? healing : useful + protection,
-          def.target === "self" ? undefined : ally.id,
-        );
-      });
-    }
     default: {
       const unhandled: never = def;
       throw new Error(`Unhandled battle benefit: ${unhandled}`);

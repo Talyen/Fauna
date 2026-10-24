@@ -42,10 +42,7 @@ function passiveCardBonus(def: CardDefinition, passive: PassiveTier, attacked: b
           ? def.effect === "attack" && def.damageType === "stun"
           : effect.trigger === "heal"
             ? def.effect === "heal"
-            : def.effect === "guard" ||
-              def.effect === "teamGuard" ||
-              def.effect === "redistributeBlock" ||
-              def.effect === "teamProtection";
+            : def.effect === "guard" || def.effect === "redistributeBlock" || def.effect === "teamProtection";
     return total + (applies ? effect.amount : 0);
   }, 0);
 }

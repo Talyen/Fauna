@@ -21,7 +21,7 @@ Build a five-creature roster, deploying up to three ordinary creatures or one Le
 
 - Mouse: select cards and targets; hover over artwork for details; right-click pins inspection outside battle
 - Keyboard: W/A/S/D navigate, Enter/Space activate, I inspects outside battle, Escape cancels or opens the menu; Tab remains available
-- Standard controller: D-pad/left stick navigate, south/A confirms, east/B returns, west/X inspects outside battle and north/Y ends the turn; prompts use Xbox-style positions and non-standard mappings are unsupported
+- Standard controller: D-pad/left stick navigate, south confirms, east returns, west inspects outside battle and north ends the turn; prompts detect Xbox/Deck, PlayStation or Nintendo labels, with a manual override in [Settings](Docs/ui/screens.md#settings); non-standard mappings are unsupported
 
 Accepted commands save automatically. Desktop close drains queued saves; abrupt browser/process termination cannot guarantee pending writes. See the [save contract](Docs/ARCHITECTURE.md#save-contract) and [development-save policy](AGENTS.md#development-saves).
 
