@@ -12,7 +12,7 @@ import {
 } from "./battle-benefits";
 import type { Command, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 31;
+export const BATTLE_POLICY_VERSION = 32;
 const BATTLE_FINISH_PRIORITY = 1_000_000_000;
 const priorities = {
   none: 0,
@@ -54,6 +54,7 @@ function ordinaryHitScore(hit: OrdinaryHit) {
 }
 function benefitScore(benefit: BattleBenefit) {
   if (benefit.kind === "support") {
+    if (benefit.priority === "none") return 0;
     const unitValue = benefit.priority === "controlRemoval" ? 100 : 1;
     return priorities[benefit.priority] + benefit.amount * unitValue;
   }

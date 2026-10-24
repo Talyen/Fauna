@@ -21,6 +21,60 @@ function withHand(state: GameState, definitions: string[]) {
   });
 }
 
+it("Auto-play preserves Traveler's Ward while its attack reflection is still active", () => {
+  const state = produce(withHand(teamRun(42, ["oathara"]), ["oathara-travelers-ward"]), (game) => {
+    game.team[0]!.combat!.attackReflection = true;
+  });
+  expect(decodeSave(encodeSave(state))).toEqual(state);
+  expect(chooseBattleCommand(state, false)).toEqual({ type: "endTurn" });
+
+  const unprotected = produce(state, (game) => {
+    game.team[0]!.combat!.attackReflection = false;
+  });
+  const command = chooseBattleCommand(unprotected, false);
+  expect(command).toMatchObject({ type: "play", cardId: state.battle!.hand[0] });
+  expect(dispatch(unprotected, command).state.team[0]!.combat!.attackReflection).toBe(true);
+});
+
+it.each([
+  ["tournelle", "tournelle-teamClearBlind", "blind", "tournelle-attack"],
+  ["stillara", "stillara-thaw-path", "freeze", "stillara-reed-reservoir"],
+] as const)(
+  "Auto-play saves %s's Cleanse unless removal or its draw is useful",
+  (kind, id, status, drawn) => {
+    const state = produce(teamRun(42, [kind]), (game) => {
+      game.battle!.hand = game.cards.map((card) => card.id);
+      game.battle!.draw = [];
+      game.battle!.buffer = [];
+      game.battle!.discard = [];
+    });
+    const cleanse = state.cards.find((card) => card.definitionId === id)!;
+    const choice = (game: GameState) =>
+      rankedBattleChoices(game, false).find(
+        (entry) => entry.command.type === "play" && entry.command.cardId === cleanse.id,
+      );
+    expect(decodeSave(encodeSave(state))).toEqual(state);
+    expect(choice(state)).toBeUndefined();
+
+    const afflicted = produce(state, (game) => {
+      if (status === "blind") game.team[0]!.combat!.blind = true;
+      else game.team[0]!.combat!.freeze = 2;
+    });
+    const cleansing = choice(afflicted)!;
+    expect(cleansing).toBeDefined();
+    expect(Number(dispatch(afflicted, cleansing.command).state.team[0]!.combat![status])).toBe(0);
+
+    const drawable = produce(state, (game) => {
+      const card = game.cards.find((card) => card.definitionId === drawn)!;
+      game.battle!.hand = game.battle!.hand.filter((id) => id !== card.id);
+      game.battle!.draw = [card.id];
+    });
+    const drawing = choice(drawable)!;
+    expect(drawing).toBeDefined();
+    expect(dispatch(drawable, drawing.command).state.battle!.hand).toContain(drawable.battle!.draw[0]);
+  },
+);
+
 it("Auto-play preserves Dawn Cry's Mana when it would only redraw itself", () => {
   const state = produce(teamRun(42, ["dawncall"]), (game) => {
     game.battle!.hand = game.cards.map((card) => card.id);
