@@ -911,7 +911,6 @@ exports[`preserves visible rankings and legal choices for stillara 1`] = `
   [
     "ordinary",
     [
-      "{"command":{"type":"play","cardId":"ally-0:stillara-thaw-path","autoEndTurn":false},"score":200,"reason":"Use Thaw Path for its visible benefit"}",
       "{"command":{"type":"play","cardId":"ally-0:stillara-water-remembers","autoEndTurn":false},"score":200,"reason":"Use Water Remembers for its visible benefit"}",
     ],
   ],
@@ -919,13 +918,11 @@ exports[`preserves visible rankings and legal choices for stillara 1`] = `
     "injured",
     [
       "{"command":{"type":"play","cardId":"ally-0:stillara-water-remembers","autoEndTurn":false},"score":3001,"reason":"Use Water Remembers for its visible benefit"}",
-      "{"command":{"type":"play","cardId":"ally-0:stillara-thaw-path","autoEndTurn":false},"score":200,"reason":"Use Thaw Path for its visible benefit"}",
     ],
   ],
   [
     "defended",
     [
-      "{"command":{"type":"play","cardId":"ally-0:stillara-thaw-path","autoEndTurn":false},"score":200,"reason":"Use Thaw Path for its visible benefit"}",
       "{"command":{"type":"play","cardId":"ally-0:stillara-water-remembers","autoEndTurn":false},"score":200,"reason":"Use Water Remembers for its visible benefit"}",
     ],
   ],
@@ -934,7 +931,6 @@ exports[`preserves visible rankings and legal choices for stillara 1`] = `
     [
       "{"command":{"type":"play","cardId":"ally-0:stillara-reed-reservoir","autoEndTurn":false},"score":3001,"reason":"Use Reed Reservoir for its visible benefit"}",
       "{"command":{"type":"play","cardId":"ally-0:stillara-water-remembers","autoEndTurn":false},"score":3001,"reason":"Use Water Remembers for its visible benefit"}",
-      "{"command":{"type":"play","cardId":"ally-0:stillara-thaw-path","autoEndTurn":false},"score":200,"reason":"Use Thaw Path for its visible benefit"}",
     ],
   ],
 ]
@@ -948,7 +944,6 @@ exports[`preserves visible rankings and legal choices for tournelle 1`] = `
       "{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-0","autoEndTurn":false},"score":1008,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-2","autoEndTurn":false},"score":1008,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-1","autoEndTurn":false},"score":1004,"reason":"Make progress against an enemy creature"}",
-      "{"command":{"type":"play","cardId":"ally-0:tournelle-teamClearBlind","autoEndTurn":false},"score":200,"reason":"Use Kindled Courage for its visible benefit"}",
       "{"command":{"type":"play","cardId":"ally-0:tournelle-swapLowest","autoEndTurn":false},"score":150,"reason":"Use Safe Passage for its visible benefit"}",
     ],
   ],
@@ -958,7 +953,6 @@ exports[`preserves visible rankings and legal choices for tournelle 1`] = `
       "{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-0","autoEndTurn":false},"score":1008,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-1","autoEndTurn":false},"score":1008,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-2","autoEndTurn":false},"score":1008,"reason":"Make progress against an enemy creature"}",
-      "{"command":{"type":"play","cardId":"ally-0:tournelle-teamClearBlind","autoEndTurn":false},"score":200,"reason":"Use Kindled Courage for its visible benefit"}",
       "{"command":{"type":"play","cardId":"ally-0:tournelle-swapLowest","autoEndTurn":false},"score":150,"reason":"Use Safe Passage for its visible benefit"}",
     ],
   ],
@@ -968,7 +962,6 @@ exports[`preserves visible rankings and legal choices for tournelle 1`] = `
       "{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-0","autoEndTurn":false},"score":508,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-2","autoEndTurn":false},"score":508,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-1","autoEndTurn":false},"score":504,"reason":"Make progress against an enemy creature"}",
-      "{"command":{"type":"play","cardId":"ally-0:tournelle-teamClearBlind","autoEndTurn":false},"score":200,"reason":"Use Kindled Courage for its visible benefit"}",
       "{"command":{"type":"play","cardId":"ally-0:tournelle-swapLowest","autoEndTurn":false},"score":150,"reason":"Use Safe Passage for its visible benefit"}",
     ],
   ],
@@ -978,7 +971,6 @@ exports[`preserves visible rankings and legal choices for tournelle 1`] = `
       "{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-0","autoEndTurn":false},"score":508,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-1","autoEndTurn":false},"score":508,"reason":"Make progress against an enemy creature"}",
       "{"command":{"type":"play","cardId":"ally-0:tournelle-attack","targetId":"enemy-2","autoEndTurn":false},"score":508,"reason":"Make progress against an enemy creature"}",
-      "{"command":{"type":"play","cardId":"ally-0:tournelle-teamClearBlind","autoEndTurn":false},"score":200,"reason":"Use Kindled Courage for its visible benefit"}",
       "{"command":{"type":"play","cardId":"ally-0:tournelle-swapLowest","autoEndTurn":false},"score":150,"reason":"Use Safe Passage for its visible benefit"}",
     ],
   ],

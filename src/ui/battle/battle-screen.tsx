@@ -111,12 +111,14 @@ export function BattleScreen({
     <Screen
       ref={board}
       className="battle-screen"
+      data-nav-layout="rows"
       aria-label="Battlefield"
       data-selected-card={selected ?? ""}
     >
       <CombatFeedback bursts={bursts} root={board} />
       <section
         className="enemy-row"
+        data-nav-row
         aria-label="Enemy row"
         data-legendary={battle.enemies.some((unit) => species(unit.species).legendary) || undefined}
       >
@@ -153,6 +155,7 @@ export function BattleScreen({
       </section>
       <section
         className="player-row"
+        data-nav-row
         aria-label="Player row"
         data-legendary={game.team.some((unit) => species(unit.species).legendary) || undefined}
       >

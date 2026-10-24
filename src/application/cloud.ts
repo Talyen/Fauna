@@ -87,6 +87,8 @@ export function createCloud(
       const item = pending;
       pending = null;
       update({ status: "Syncing", error: "" });
+      // Status subscribers can synchronously revoke transport admission.
+      if (!alive() || !remoteReady) return;
       try {
         await port.write(cloudName(item), JSON.stringify(item));
         if (!alive() || !remoteReady) return;
@@ -247,6 +249,7 @@ export function createCloud(
     if (!port) return;
     try {
       update({ blocking: !background, status: "Syncing" });
+      if (!owns(starting)) return;
       const nextIdentity = await port.identity();
       if (!owns(starting)) return;
       identity = Object.freeze({ ...nextIdentity });

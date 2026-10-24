@@ -10,7 +10,7 @@ import {
   VisualEffectsProvider,
 } from "../../../src/ui/shared/effects/effects";
 import { ArtCard } from "../../../src/ui/shared/cards/art-card";
-import { normalizeEffectIntensity } from "../../../src/ui/settings/effect-preferences";
+import { normalizeEffectIntensity } from "../../../src/ui/settings/preferences";
 
 vi.mock("../../../src/ui/shared/effects/effect-background", () => ({
   EffectBackground: ({ palette }: { palette: ReturnType<typeof effectPalette> | null }) => (

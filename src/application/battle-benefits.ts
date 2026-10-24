@@ -2,7 +2,7 @@ import { drawableOwnerIds } from "../game/card-actors";
 import { RESURRECTION_HEALTH_PERCENT } from "../game/resurrection-rules";
 import { MAX_BATTLE_CARDS } from "../game/card-zones";
 import { battlefield } from "../game/battlefield";
-import { creaturePassive, hasTalent } from "../game/progression";
+import { cardKeywords, creaturePassive, hasTalent } from "../game/progression";
 import { hasHarmfulEffects, mostInjured, maximumHealth, STACK_LIMIT } from "../game/combat/state";
 import { actionValue, cardCost, physicalBonus } from "../game/ability-rules";
 import { armoredDamage, blockPayment } from "../game/combat/damage-values";
@@ -104,19 +104,41 @@ export function battleBenefits(
     reason?: string,
   ): BattleBenefit[] => [{ kind: "support", priority, amount, targetId, reason }];
   const allies = state.team.filter((unit) => unit.health > 0);
-  // Drawing only this card back cannot justify an already capped Dodge grant.
+  // Drawing only this card back cannot justify a spent protection or Cleanse.
   const usefulDraw = () =>
-    !!def.effects?.some((effect) => effect.kind === "draw" && effect.amount > 0) &&
-    ([...state.battle.draw, ...state.battle.discard, ...state.battle.buffer].some((id) => {
-      const drawn = state.cards.find((entry) => entry.id === id)!;
-      return drawn.ownerId === null || drawableOwnerIds(state).has(drawn.ownerId);
-    }) ||
-      (state.cards.length < MAX_BATTLE_CARDS &&
-        allies.some((unit) =>
-          creaturePassive(state, unit.species).effects.some(
-            (effect) => effect.kind === "wellRead" && effect.amount > 0,
-          ),
-        )));
+    !!def.effects?.some(
+      (effect) =>
+        (effect.kind === "draw" || effect.kind === "drawKeyword") &&
+        effect.amount > 0 &&
+        ([...state.battle.draw, ...state.battle.discard, ...state.battle.buffer].some((id) => {
+          const drawn = state.cards.find((entry) => entry.id === id)!;
+          return (
+            (drawn.ownerId === null || drawableOwnerIds(state).has(drawn.ownerId)) &&
+            (state.battle.buffer.includes(id) ||
+              effect.kind === "draw" ||
+              cardKeywords(drawn).includes(effect.keyword))
+          );
+        }) ||
+          (!def.consume &&
+            (effect.kind === "draw" || cardKeywords(card).includes(effect.keyword)) &&
+            state.cards.length < MAX_BATTLE_CARDS &&
+            allies.some((unit) =>
+              creaturePassive(state, unit.species).effects.some(
+                (effect) => effect.kind === "wellRead" && effect.amount > 0,
+              ),
+            ))),
+    );
+  const controlRemoval = (amount: number) =>
+    support(
+      amount > 0
+        ? "controlRemoval"
+        : facts.healingOnPlay
+          ? "healing"
+          : usefulDraw()
+            ? "standardUtility"
+            : "none",
+      amount,
+    );
   const dodgeSupport = (useful: number) =>
     support(
       useful > 0 ? "utility" : facts.healingOnPlay ? "healing" : usefulDraw() ? "standardUtility" : "none",
@@ -266,9 +288,9 @@ export function battleBenefits(
       );
     }
     case "teamClearBlind":
-      return support("controlRemoval", allies.filter((unit) => unit.combat?.blind).length);
+      return controlRemoval(allies.filter((unit) => unit.combat?.blind).length);
     case "teamThaw":
-      return support("controlRemoval", allies.filter((unit) => (unit.combat?.freeze ?? 0) > 0).length);
+      return controlRemoval(allies.filter((unit) => (unit.combat?.freeze ?? 0) > 0).length);
     case "recover": {
       const useful = state.battle.discard.some((id) => {
         const card = state.cards.find((entry) => entry.id === id)!;
@@ -337,7 +359,10 @@ export function battleBenefits(
       );
     }
     case "reflectAttack":
-      return support(actor.combat?.attackReflection ? "none" : "protection", 1);
+      return support(
+        actor.combat?.attackReflection ? (facts.healingOnPlay ? "healing" : "none") : "protection",
+        1,
+      );
     case "resurrect":
       return [...state.team, ...state.reserves]
         .filter((unit) => unit.health === 0)
