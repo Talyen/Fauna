@@ -7,7 +7,6 @@ import { interceptAttack } from "./interception";
 import { battlefield } from "../battlefield";
 import { summonEcho, createPearls, drawBossCards } from "./legendary";
 import { definition, species } from "../content";
-
 import { scalePower } from "./ability-values";
 import {
   ensureCombat,
@@ -23,11 +22,9 @@ import {
   grantTemporaryDodge,
   removeControlBuildup,
 } from "./index";
-
 import { roll } from "../random";
-import { fillHand, MAX_HAND_SIZE, draw, redrawHand } from "../card-zones";
+import { receiveCard, draw, redrawHand } from "../card-zones";
 import type { GameState, GameEvent } from "../types";
-
 import { applyExtras, reflectExtras } from "./ability-extras";
 import {
   friendlyRow,
@@ -48,8 +45,7 @@ function recoverDiscard(state: GameState, events: GameEvent[]) {
   if (!available.length) return;
   const id = available[Math.floor(roll(state) * available.length)]!;
   battle.discard.splice(battle.discard.indexOf(id), 1);
-  fillHand(state);
-  (battle.hand.length < MAX_HAND_SIZE ? battle.hand : battle.buffer).push(id);
+  receiveCard(state, id);
   const card = state.cards.find((entry) => entry.id === id)!;
   events.push({
     kind: "action",

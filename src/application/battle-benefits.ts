@@ -3,12 +3,10 @@ export type { OrdinaryHit } from "../game/ability-facts";
 import { battleCardCapacity, drawHasAnotherCard } from "../game/card-zones";
 import { drawableOwnerIds } from "../game/card-actors";
 import { RESURRECTION_HEALTH_PERCENT } from "../game/resurrection-rules";
-
 import { battlefield } from "../game/battlefield";
 import { creaturePassive, hasTalent } from "../game/progression";
 import { hasHarmfulEffects, mostInjured, maximumHealth, STACK_LIMIT } from "../game/combat/state";
 import { actionValue, cardCost } from "../game/ability-rules";
-
 import { healingValue, restoration } from "../game/combat/healing-values";
 import type { AvailablePlay } from "../game/play-queries";
 import type { BattleState, Enemy } from "../game/types";

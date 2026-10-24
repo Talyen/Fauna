@@ -7,13 +7,10 @@ import {
   type AbilityAction,
   type AbilityOperations,
 } from "./ability-context";
-
 import { isRosterCreature } from "../battlefield";
-
 import { species } from "../content";
 import { creaturePassive, hasTalent } from "../progression";
 import { definitionKeywords } from "../keywords";
-
 import {
   ensureCombat,
   grantArmor,
@@ -25,7 +22,6 @@ import {
 } from "./index";
 import { chance as succeeds } from "../chance";
 import { roll } from "../random";
-
 import type { GameState, GameEvent, BattleState } from "../types";
 
 function encore(state: GameState, actor: Combatant, events: GameEvent[]) {
