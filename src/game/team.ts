@@ -1,5 +1,5 @@
 import { isRosterCreature } from "./battlefield";
-import { recycleDiscard, fillHand, MAX_BATTLE_CARDS } from "./card-zones";
+import { recycleDiscard, fillHand, filterCardZones, MAX_BATTLE_CARDS } from "./card-zones";
 import { removeDepartedMinions } from "./combat/legendary";
 import { shuffle, roll } from "./random";
 import { speciesCards, species } from "./content";
@@ -126,8 +126,7 @@ function setFormation(state: GameState, ids: string[], events: GameEvent[] = [],
   if (state.battle) {
     const kept = new Set(state.cards.map((card) => card.id));
     const changed = new Set(mapped.map((card) => card.id));
-    for (const zone of ["draw", "hand", "buffer", "discard"] as const)
-      state.battle[zone] = state.battle[zone].filter((id) => kept.has(id) && (!fromCard || !changed.has(id)));
+    filterCardZones(state.battle, (id) => kept.has(id) && (!fromCard || !changed.has(id)));
     const zoned = new Set([
       ...state.battle.draw,
       ...state.battle.hand,
@@ -190,14 +189,12 @@ export function swapBackup(
     card.level = 0;
   }
   if (state.battle) {
-    for (const zone of ["draw", "hand", "buffer", "discard"] as const)
-      state.battle[zone] = state.battle[zone].filter((id) => !removed.has(id));
+    filterCardZones(state.battle, (id) => !removed.has(id));
     for (const enemy of state.battle.enemies)
       if (enemy.targetId === outgoing.id) enemy.targetId = incoming.id;
     if (fromCard) {
       const ids = new Set(replaced.map((card) => card.id));
-      for (const zone of ["draw", "hand", "buffer", "discard"] as const)
-        state.battle[zone] = state.battle[zone].filter((id) => !ids.has(id));
+      filterCardZones(state.battle, (id) => !ids.has(id));
       state.battle.draw = shuffle(state, [...state.battle.draw, ...ids]);
     }
   }

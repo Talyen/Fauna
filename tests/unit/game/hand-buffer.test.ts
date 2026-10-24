@@ -6,7 +6,7 @@ import { dispatch } from "../../../src/game/engine";
 import { previewPlay } from "../../../src/game/preview";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { prepareDestination, accept, run, teamRun } from "../../support/game";
-import { draw, drawKeyword } from "../../../src/game/card-zones";
+import { draw, drawKeyword, receiveCard } from "../../../src/game/card-zones";
 import { shuffle } from "../../../src/game/random";
 import type { GameEvent } from "../../../src/game/types";
 
@@ -35,7 +35,9 @@ it("keeps draw eligibility and seeded recycling stable while Well Read grows a l
   const recycled = shuffle(random, [...initial.battle!.discard]).reverse();
   const drawn = [initial.battle!.draw[0]!, ...recycled];
   const events: GameEvent[] = [];
-  const result = produce(initial, (state) => draw(state, 3, events));
+  const result = produce(initial, (state) => {
+    draw(state, 3, events);
+  });
   expect(result.battle!.hand).toEqual(drawn.flatMap((id, index) => [id, `copy-${200 + index}`]));
   expect(result.battle!.draw).toEqual(initial.battle!.draw.slice(1));
   expect(result.battle!.discard).toEqual([]);
@@ -68,7 +70,9 @@ it.each([false, true])("preserves seeded draw recycling with all owners knocked 
   const ids = initial.cards.map((card) => card.id);
   const random = { ...initial };
   const recycled = shuffle(random, allDead ? [ids[1]!, ids[4]!, ids[2]!, ids[5]!] : [ids[1]!, ids[2]!]);
-  const result = produce(initial, (state) => draw(state, allDead ? 6 : 3));
+  const result = produce(initial, (state) => {
+    draw(state, allDead ? 6 : 3);
+  });
   expect(result.battle!.hand).toEqual([...(allDead ? [ids[3]!, ids[0]!] : [ids[0]!]), ...recycled.reverse()]);
   expect(result.battle!.draw).toEqual(allDead ? [] : [ids[3]!]);
   expect(result.battle!.discard).toEqual(allDead ? [] : [ids[4]!, ids[5]!]);
@@ -108,6 +112,21 @@ it("keyword draws prefer the last eligible slot and recycle only living owners' 
   expect(third.rng).toBe(initial.rng);
 });
 
+it("keyword draws leave fallen owners' matching cards in place when no owner can draw", () => {
+  const initial = produce(teamRun(42, ["reedstag", "reedstag", "reedstag"]), (state) => {
+    state.team.forEach((unit) => {
+      unit.health = 0;
+    });
+    const ids = state.cards.map((card) => card.id);
+    state.battle!.hand = [];
+    state.battle!.buffer = [];
+    state.battle!.draw = ids.slice(0, 3);
+    state.battle!.discard = ids.slice(3);
+  });
+  const result = produce(initial, (state) => drawKeyword(state, "nature"));
+  expect(result).toEqual(initial);
+});
+
 function buffered() {
   return produce(run(), (d) => {
     d.battle!.hand = d.cards.slice(0, 6).map((card) => card.id);
@@ -118,6 +137,29 @@ function buffered() {
 }
 
 describe("hidden hand overflow", () => {
+  it("receives a generated card behind queued cards without triggering Well Read", () => {
+    const initial = produce(teamRun(42, ["rookhaven", "reedstag", "reedstag"]), (state) => {
+      state.discovery.recruited.rookhaven = 6;
+      state.cards = state.cards.filter((card) => !card.temporary);
+      const ids = state.cards.map((card) => card.id);
+      state.battle!.hand = ids.slice(0, 5);
+      state.battle!.buffer = ids.slice(5, 8);
+      state.battle!.discard = ids.slice(8);
+      state.battle!.draw = [];
+    });
+    const id = `copy-${initial.battle!.copySerial}`;
+    const result = produce(initial, (state) => {
+      state.cards.push({ ...state.cards[0]!, id, temporary: true });
+      state.battle!.copySerial++;
+      receiveCard(state, id);
+    });
+    expect(result.battle!.hand).toEqual([...initial.battle!.hand, initial.battle!.buffer[0]]);
+    expect(result.battle!.buffer).toEqual([...initial.battle!.buffer.slice(1), id]);
+    expect(result.cards).toHaveLength(initial.cards.length + 1);
+    expect(result.rng).toBe(initial.rng);
+    expect(decodeSave(encodeSave(result))).toEqual(result);
+  });
+
   it("draws four opening cards plus Wind Feather without exceeding the six-card hand", () => {
     const s = accept(
       produce(run(), (d) => {
