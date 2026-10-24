@@ -188,7 +188,12 @@ it("requires actual implementation bindings for authored modifiers, including fu
   );
 });
 it("keeps implementation bindings and shared Boon parameters immutable", () => {
-  for (const catalog of [modifierImplementations, modifierQueries]) {
+  type BindingGroup = Readonly<Record<string, readonly { module: string; name: string }[]>>;
+  const catalogs: readonly Readonly<Record<string, BindingGroup>>[] = [
+    modifierImplementations,
+    modifierQueries,
+  ];
+  for (const catalog of catalogs) {
     expect(Object.isFrozen(catalog)).toBe(true);
     expect(structuredClone(catalog)).toEqual(catalog);
     for (const group of Object.values(catalog)) {

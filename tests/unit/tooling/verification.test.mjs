@@ -55,7 +55,8 @@ describe("lightweight local verification", () => {
       const root = fixture();
       const suite = "tests/unit/game/engine.test.ts";
       mkdirSync(path.dirname(path.join(root, suite)), { recursive: true });
-      writeFileSync(path.join(root, suite), "export {};\n");
+      for (const required of owners["src/game/"].suites)
+        writeFileSync(path.join(root, required), "export {};\n");
       mkdirSync(path.join(root, "src/game"));
       writeFileSync(path.join(root, "src/game/value.ts"), "export const value = 1;\n");
       const runner = vi.fn(() => ({ status: 0 }));
@@ -302,7 +303,8 @@ describe("lightweight local verification", () => {
     mkdirSync(path.join(root, "src/game"), { recursive: true });
     writeFileSync(path.join(root, "src/game/value.ts"), "export const value = 1;\n");
     mkdirSync(path.dirname(path.join(root, suite)), { recursive: true });
-    writeFileSync(path.join(root, suite), "export {};\n");
+    for (const required of owners["src/game/"].suites)
+      writeFileSync(path.join(root, required), "export {};\n");
     expect(checkPlan(root, ["src/game/value.ts"]).missingContracts).toEqual([]);
     rmSync(path.join(root, suite));
     for (const directory of [false, true]) {

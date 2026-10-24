@@ -1,12 +1,24 @@
 import { freeze } from "immer";
 import type { TalentId, BoonId } from "./content";
 import type { PassiveKind } from "./content/types";
+import type { cardCost, passiveCardBonus, physicalBonus, retainedBlock } from "./ability-rules";
+import type { drawHasAnotherCard, expressDelivery, receiveDraw } from "./card-zones";
+import type { loseHealth, openingCriticalBonus, ownDodgeChance, sharedDodgeChance } from "./combat/state";
 
 type Modules = {
   "./ability-facts": typeof import("./ability-facts");
-  "./ability-rules": typeof import("./ability-rules");
+  "./ability-rules": {
+    cardCost: typeof cardCost;
+    passiveCardBonus: typeof passiveCardBonus;
+    physicalBonus: typeof physicalBonus;
+    retainedBlock: typeof retainedBlock;
+  };
   "./card-actors": typeof import("./card-actors");
-  "./card-zones": typeof import("./card-zones");
+  "./card-zones": {
+    drawHasAnotherCard: typeof drawHasAnotherCard;
+    expressDelivery: typeof expressDelivery;
+    receiveDraw: typeof receiveDraw;
+  };
   "./chance": typeof import("./chance");
   "./combat/ability-modifiers": typeof import("./combat/ability-modifiers");
   "./combat/battle-modifiers": typeof import("./combat/battle-modifiers");
@@ -19,7 +31,12 @@ type Modules = {
   "./combat/legendary": typeof import("./combat/legendary");
   "./combat/lifecycle": typeof import("./combat/lifecycle");
   "./combat/protection": typeof import("./combat/protection");
-  "./combat/state": typeof import("./combat/state");
+  "./combat/state": {
+    loseHealth: typeof loseHealth;
+    openingCriticalBonus: typeof openingCriticalBonus;
+    ownDodgeChance: typeof ownDodgeChance;
+    sharedDodgeChance: typeof sharedDodgeChance;
+  };
   "./combat/statuses": typeof import("./combat/statuses");
   "./combat/turns": typeof import("./combat/turns");
   "./destinations": typeof import("./destinations");

@@ -1,6 +1,6 @@
 # Outstanding changes review
 
-Reviewed the combined change from remote main `cac9c18109acfe2afc5cef760560bdaf677c5d04` through local main `64dc6f8`, comprising 74 outstanding commits. Scope includes creature content and prepared artwork, shared Food, ability and modifier ownership, draw delivery, save validation, cloud and Steam lifetime, audio ownership, startup, navigation/preferences, conditional combat previews and CI/performance tooling. No additional actionable code defect was identified in this review.
+Reviewed the combined change from remote main `cac9c18109acfe2afc5cef760560bdaf677c5d04` through local main `64dc6f8`, comprising 74 outstanding commits. Scope includes creature content and prepared artwork, shared Food, ability and modifier ownership, draw delivery, save validation, cloud and Steam lifetime, audio ownership, startup, navigation/preferences, conditional combat previews and CI/performance tooling. Source/rendered review found no additional player-facing defect; hosted qualification exposed the static and fixture issues recorded below.
 
 ## Local evidence
 
@@ -26,3 +26,9 @@ Each capture directory retains its source/checkpoint identity, conditions, frame
 ## Qualification boundary
 
 The final local source gate and protected integration use pinned Node 24.22.1 and npm 12.2.1. Full compilers, broad unit/DOM tests, exhaustive lineup shards, builds, browser suites and Windows packaging/startup remain hosted-CI gates for the pushed revision. Physical controllers, Steam client/overlay and Steam Deck are untested. This record precedes that final hosted run; its result belongs to the exact pushed commit and run URL in the handoff.
+
+## Hosted follow-up
+
+Initial pushed revision `9e0e8cd` exposed a test-only TypeScript inference failure in nested ownership-map enumeration and three ownership-only function exports that unused-code analysis could not recognize through generic module indexing. The repair gives the test its shared readonly binding shape and names those type-only function references explicitly. It preserves the typed ownership/source contracts and runtime behavior, without excluding exports from analysis. These repairs are qualified by the subsequent pushed revision's complete CI run.
+
+The same run passed all four exhaustive lineup shards and 1,814 regular tests, with three verification tests failing because their temporary repositories omitted the new required modifier suite. Those fixtures now create the declared game-owner suites before checking compiler deferral and missing-suite rejection. Browser execution was blocked by the bundle gate: Linux measured 887,239 bytes and Windows 887,248, against the previous 884,736-byte ceiling. The reviewed modifier-only growth and revised measured allowance are recorded in [bundle history](../archive/BUNDLE_SIZE_HISTORY.md#modifier-ownership-and-shared-parameters). No runtime rules, visual behavior or coverage gate were removed to repair these failures.
