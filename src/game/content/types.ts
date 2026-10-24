@@ -1,4 +1,4 @@
-import type { DamageType, EFFECT_KEYWORDS } from "../keywords";
+import type { AbilityDefinition, AbilityKind, SupplementalEffect } from "../rules/ability-types";
 export type { DamageType } from "../keywords";
 export type SpeciesId =
   | "mossguard"
@@ -29,7 +29,7 @@ export type SpeciesId =
   | "oathara"
   | "almanelle"
   | "orifable";
-export type Effect = keyof typeof EFFECT_KEYWORDS;
+export type Effect = AbilityKind;
 type PassiveEffect =
   | { kind: "expressDelivery"; amount: number }
   | { kind: "fallenLeaves"; amount: number }
@@ -74,15 +74,6 @@ export interface Species {
   trait: string;
   passiveTiers: readonly [PassiveTier, PassiveTier, PassiveTier, PassiveTier, PassiveTier, PassiveTier];
 }
-type CardEffect =
-  | { kind: "drawKeyword"; keyword: "light" | "nature" | "water"; amount: number }
-  | { kind: "nullifyFreeze"; amount: number }
-  | { kind: "damage"; damageType: DamageType; amount: number; leech?: boolean }
-  | { kind: "status"; status: "armor" | "thorns" | "dodge"; amount: number }
-  | { kind: "cleanse"; amount: number; target?: "recipient" | "allAllies" }
-  | { kind: "reflect"; amount: number; status?: "burn" }
-  | { kind: "heal"; amount: number; target?: "recipient" }
-  | { kind: "draw" | "mana" | "purge" | "blind" | "meltArmor"; amount: number };
 export interface CardBase {
   id: string;
   species: SpeciesId | null;
@@ -93,25 +84,9 @@ export interface CardBase {
   leech?: boolean;
   consume?: boolean;
   repeatChance?: number;
-  effects?: readonly CardEffect[];
+  effects?: readonly SupplementalEffect[];
 }
-export type CardDefinition = CardBase &
-  (
-    | {
-        effect: "attack";
-        damageType: DamageType;
-        alternateDamageType?: DamageType;
-        doubleWithArmor?: boolean;
-        doubleAgainstHealthier?: true;
-        purgeThorns?: true;
-        target?: "allEnemies" | "randomEnemy";
-      }
-    | { effect: "guard"; target?: "self" | "allAllies" }
-    | { effect: "dodge"; target?: "self" | "allAllies" }
-    | { effect: "heal"; target?: "allAllies" | "mostInjured" | "self" }
-    | { effect: "recover"; target?: "ally" }
-    | { effect: Exclude<Effect, "attack" | "guard" | "dodge" | "heal" | "recover">; target?: never }
-  );
+export type CardDefinition = CardBase & AbilityDefinition;
 
 export interface CreatureKit {
   species: Species;

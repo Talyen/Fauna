@@ -1,3 +1,6 @@
+import type { AbilityKind } from "./rules/ability-types";
+import { abilityRule } from "./rules/abilities";
+import { isSupplementalKind, supplementalRule } from "./rules/supplemental";
 import { RESURRECTION_HEALTH_PERCENT } from "./resurrection-rules";
 import { freeze } from "immer";
 
@@ -224,40 +227,8 @@ const progressionCategory: Partial<Record<KeywordId, ProgressionKeyword>> = {
   purge: "light",
 };
 export const progressionLabel = (id: ProgressionKeyword) => keywordLabel(id);
-export const EFFECT_KEYWORDS = freeze(
-  {
-    procession: ["health"],
-    createFood: [],
-    createPearls: ["mana", "block"],
-    pearl: ["mana", "block"],
-    attack: [],
-    guard: ["block"],
-    heal: ["health"],
-    redistributeBlock: ["block"],
-    redraw: [],
-    reflectAttack: [],
-    resurrect: ["health"],
-    teamProtection: ["block", "nature"],
-    waterThorns: ["water"],
-    teamCleanse: ["health"],
-    dreamDouble: ["nature"],
-    nightmareHarvest: ["health", "mana"],
-    teamPurge: ["light"],
-    teamThaw: ["health"],
-    teamClearBlind: ["health"],
-    swapLowest: [],
-    recover: [],
-    mana: ["mana"],
-    teamBlind: [],
-    swap: [],
-    draw: [],
-    nullify: [],
-    dodge: ["dodge"],
-  } as const,
-  true,
-);
 export function definitionKeywords(definition: {
-  effect: keyof typeof EFFECT_KEYWORDS;
+  effect: AbilityKind;
   damageType?: DamageType;
   alternateDamageType?: DamageType;
   leech?: boolean;
@@ -269,20 +240,13 @@ export function definitionKeywords(definition: {
     if (PROGRESSION_KEYWORDS.includes(keyword) && !keywords.includes(keyword)) keywords.push(keyword);
   };
   if (definition.effect === "attack") add(definition.damageType!);
-  else for (const keyword of EFFECT_KEYWORDS[definition.effect]) add(keyword);
+  else for (const keyword of abilityRule(definition.effect).keywords) add(keyword);
   if (definition.effect === "attack" && definition.alternateDamageType) add(definition.alternateDamageType);
   for (const effect of definition.effects ?? []) {
-    add(
-      effect.kind === "heal"
-        ? "health"
-        : effect.kind === "damage"
-          ? effect.damageType!
-          : effect.kind === "status"
-            ? effect.status!
-            : effect.kind === "meltArmor"
-              ? "purge"
-              : effect.kind,
-    );
+    if (!isSupplementalKind(effect.kind)) add(effect.kind);
+    const keyword = isSupplementalKind(effect.kind) ? supplementalRule(effect.kind).keyword : null;
+    if (keyword)
+      add(keyword === "damageType" ? effect.damageType! : keyword === "status" ? effect.status! : keyword);
     if (effect.leech) add("leech");
   }
   if (definition.leech) add("leech");

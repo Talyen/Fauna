@@ -278,10 +278,8 @@ export function requireBattle(state: GameState): BattleState {
 
 /** A saved Merchant destination funded for any baseline offer; journey earnings stay exact. */
 export function merchantDestination() {
-  const initial = createGame(7);
-  let state = accept(accept(initial, { type: "draft", species: initial.starterOffers[0]! }), {
-    type: "start",
-  });
+  // Starter identity affects roster exclusions and the number of destination RNG draws.
+  let state = starterJourney(3, "captoad");
   state = winBattle(accept(state, { type: "beginBattle" }));
   // Fix this scenario's destination roll independently of the changing recruit catalog.
   state = produce(state, (draft) => {
