@@ -28,7 +28,7 @@ Only living deployed creatures act and provide passives. Formation changes throu
 
 After an action or turn resolves, replace knocked-out deployed creatures in deployment order while living backup remain, before another card or End turn. Reload reconstructs these required choices from saved roster state. Replacement cannot rotate healthy or controlled creatures.
 
-If the deployed row falls, stop remaining enemy attacks and begin the next player turn with restored Mana and required replacements. Defeat requires the whole roster to fall. Knocked-out card slots remain inert in saved zones and ordinary draws skip them. The next hand reserves incoming slots after a whole-row knockout, avoiding a free extra draw; knocked-out slots never appear as playable cards.
+If the deployed row falls, stop remaining enemy attacks and begin the next player turn with restored Mana and required replacements. Defeat requires the whole roster to fall. Knocked-out owners retain their card slots in saved zones; ordinary draws skip them unless a living deployed [Oathara](content/creatures/oathara.md#identity-and-ownership) supplies Unfinished Journey. That passive keeps fallen allies' cards drawable and permits a bounded number of borrowed plays without changing ownership. Required replacement still takes priority over card play. The next hand reserves incoming slots after a whole-row knockout, avoiding a free extra draw.
 
 [Captoad](content/creatures/captoad.md) illustrates ordinary swap abilities. [Tournelle](content/creatures/tournelle.md) instead swaps the lowest current-Health ally with random living backup and draws one; without backup it only draws. [Legendary formation changes](#legendaries-and-minions) adjust kit sizes separately. [Recruitment](#recruitment) defines full-roster confirmation and deployed replacements.
 
@@ -52,7 +52,7 @@ Shared ability values, including area attacks and supplemental damage/healing, s
 
 ## Keyword XP and talents
 
-Keyword XP and talents are permanent and shared across species. Each accepted card play earns 1 XP per distinct eligible keyword regardless of magnitude: Burn + Block earns one of each. Repeats resolve at most once and grant no extra accepted-play XP. Auto-play uses ordinary accepted commands.
+Keyword XP and talents are permanent and shared across species. Each accepted card play earns 1 XP per distinct eligible keyword regardless of magnitude: Burn + Block earns one of each. An ability can resolve at most twice per play; repeats grant no extra accepted-play XP. Auto-play uses ordinary accepted commands.
 
 Battle settlement banks XP even on defeat. Returning home banks pending accepted-play XP without victory currency or Boons. Talents remain menu-driven; never interrupt a journey or prompt spending.
 
@@ -146,7 +146,7 @@ Purchase commits one Boon and opens its saved reward screen. Continue or Back co
 
 Legendaries appear as enemies only in Boss encounters and remain ordinary recruitable roster individuals. The five-creature roster accepts any combination of Legendaries and ordinary creatures. A Legendary starter fills the starting lineup alone. Deploying one returns every deployed creature to backup; replacing it with an ordinary creature leaves two vacant positions; later recruits may fill them under the ordinary recruitment rules. No manual formation editing is available.
 
-Each deployed Legendary supplies two copies of each of its three abilities. Formation changes preserve existing spent zone positions, remove surplus slots, and shuffle additional slots into Draw without granting cards to hand. Generated cards disappear when their owner leaves the field.
+Each deployed Legendary supplies two copies of each of its three abilities. Formation changes preserve existing spent zone positions, remove surplus slots, and shuffle additional slots into Draw without granting cards to hand. Creature-owned generated cards disappear when their owner leaves the field. Shared [Food](CONTENT.md#shared-food-cards) has no creature owner and survives creator departure; adding a permanent kit at the 256-card battle limit may retire the newest temporary cards to make room.
 
 Minions belong only to the active battle, have Health and combat effects, and can be attacked or affected by group abilities. They have no roster slots, backup, cards, autonomous turns or Death's Door. They disappear when their summoner falls or leaves the field. Defeating an enemy Legendary wins even if its Minions remain.
 

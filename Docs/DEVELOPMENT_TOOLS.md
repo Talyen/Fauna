@@ -10,6 +10,8 @@
 
 Reports remain under ignored `reports/`; retain their source/checkpoint identities and actual completion status. Failed/incomplete captures are diagnostics, never accepted evidence. Browser automation simulates input; [Release](RELEASE.md) owns native, package and hardware qualification. [UI review](UI.md#required-review) owns rendered acceptance.
 
+Command examples describe tool interfaces, not permission to run heavy work locally. Production builds, browser/desktop suites, balance simulations, performance captures and every diagnostic mode are CI-owned; local execution requires the explicit user request described in [Contributing](../CONTRIBUTING.md#execution-and-evidence). The launcher also guards read-only subcommands of those entrypoints, including route `--list`, `balance:compare -- compare` and `perf:compare`. Task-owned focused visual preview/capture remains authorized under UI review. For one exact local regression, use `npm test -- <suite>` rather than diagnostic mode; `balance:findings` can analyze an existing report without running simulations.
+
 ## Task checkouts and previews
 
 Start a browser preview, then capture matching before/after states:
@@ -84,11 +86,11 @@ The opt-in runner uses production application commands, current save validation,
 | Replay          | Matching code/content identity and exact checkpoints required; any divergence fails                                                           |
 | Comparison      | Completed careers with matching initial checkpoints/settings; changed code identity is explicit; changed save formats require fresh baselines |
 
-Each run has a 60-second external watchdog, 5,000-action budget and 100-turn-per-battle limit. Cancellation/watchdog stops the owned worker and waits for exit; it fails even if that worker exits zero. Missing, duplicate or unknown options fail before launch. Incomplete runs fail rather than becoming wins or defeats. CI runs focused replay tests; larger sweeps are opt-in. These are automated-policy observations, not human win rates or rendered acceptance.
+Each run has a 60-second external watchdog, 5,000-action budget and 100-turn-per-battle limit. Cancellation/watchdog stops the owned worker and waits for exit; it fails even if that worker exits zero. Missing, duplicate or unknown options fail before launch. Incomplete runs fail rather than becoming wins or defeats. CI runs focused replay tests; larger sweeps need a deliberate hosted run or explicit heavy-local authorization. These are automated-policy observations, not human win rates or rendered acceptance.
 
 ## Paired balance reports
 
-Use a bounded local subset, then compare identical suites from two code versions:
+Run identical suites from two code versions in hosted execution, then compare their reports. If heavy local execution is explicitly authorized, choose a bounded subset within its command budget:
 
 ```sh
 npm run balance:compare -- run --starters emberback --seeds 0,1 --out reports/balance/smoke
@@ -96,14 +98,14 @@ npm run balance:compare -- compare reports/balance/before/report.json reports/ba
 npm run balance:compare -- replay reports/balance/smoke/case-0.json
 ```
 
-| Setting             | Contract                                                                                                                                                        |
-| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Default suite       | Five preferences (Emberback, Prismram, Captoad, Dunefox, Cindernewt) × seeds 0–9, run serially; a fixed benchmark subset, not full starter coverage             |
-| Custom suite        | Up to five distinct preferences and ten distinct seeds                                                                                                          |
-| Each case           | Production heuristic, Auto-end turn on, 5,000 actions, 100 turns per battle, save/resume every 17 actions, 60-second watchdog                                   |
-| Suite deadline      | Internal 15 minutes; local commands still have the [five-minute limit](../CONTRIBUTING.md#execution-and-evidence); use bounded subsets or hosted CI             |
-| Interruption        | Stop/wait for the owned worker before another case; preserve incomplete reports rather than counting timeouts as defeats                                        |
-| Species attribution | Record requested `starter` and first accepted `actualStarter`; fallback or unrecorded drafts become coverage watch items, not results for the requested species |
+| Setting             | Contract                                                                                                                                                                          |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Default suite       | Five preferences (Emberback, Prismram, Captoad, Dunefox, Cindernewt) × seeds 0–9, run serially; a fixed benchmark subset, not full starter coverage                               |
+| Custom suite        | Up to five distinct preferences and ten distinct seeds                                                                                                                            |
+| Each case           | Production heuristic, Auto-end turn on, 5,000 actions, 100 turns per battle, save/resume every 17 actions, 60-second watchdog                                                     |
+| Suite deadline      | Internal 15 minutes; explicitly authorized heavy local commands still have the [five-minute limit](../CONTRIBUTING.md#execution-and-evidence) unless a larger budget is requested |
+| Interruption        | Stop/wait for the owned worker before another case; preserve incomplete reports rather than counting timeouts as defeats                                                          |
+| Species attribution | Record requested `starter` and first accepted `actualStarter`; fallback or unrecorded drafts become coverage watch items, not results for the requested species                   |
 
 More preferences on the same seeds do not establish independent opening matchups. Comparisons require matching settings and initial checkpoint hashes; explicitly identified code/content changes are allowed. `comparison.json` reports paired mean differences and standard errors for wins, turns, remaining roster Health, encounter reached, swaps, retained Gold and XP. Effects within two standard errors are noisy; a single pair cannot estimate uncertainty. These are automated-policy observations.
 
@@ -132,7 +134,7 @@ The [hitch attribution plan](PERFORMANCE_ATTRIBUTION_PLAN.md) proposes timestamp
 The [October 22 frame pacing investigation](task-evidence/2026-10-22-frame-pacing.md) records
 shared layout and animation optimizations, visual parity evidence and remaining device qualification.
 
-For a bounded battle investigation, build with `npm run verify:changed -- --diagnostic build`, then run `npm run verify:changed -- --diagnostic performance battle`. The capture/replay commands below expose the full harness.
+For a bounded battle investigation in hosted execution or explicitly authorized heavy local execution, build with `npm run verify:changed -- --diagnostic build`, then run `npm run verify:changed -- --diagnostic performance battle`. Diagnostic mode uses the same execution policy as the capture/replay commands below.
 
 Build once with `npm run build`, then run `npm run perf -- --out reports/performance/baseline`. The three scenarios cover card play/enemy turns, required knockout replacements, and Collection/menu transitions. `--scenario battle`, `swap`, or `menus` selects one. A named fixture explicitly grants three deployed creatures and one reserve; it is validated as a current-format save, not claimed to be earned progression. The driver uses normal controls in fresh browser contexts, an owned production preview on a free port, and muted speaker output.
 

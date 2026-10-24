@@ -79,19 +79,22 @@ The packaged renderer uses `fauna://app/` confined to `dist/`, rejecting foreign
 
 ### Gameplay owners
 
-| Contract                                        | Owner                                                                                                                                  |
-| ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| State shape and derived types                   | [state-schema.ts](../src/game/state-schema.ts), [types.ts](../src/game/types.ts)                                                       |
-| Command admission and transaction               | [command-phases.ts](../src/game/command-phases.ts), [play-queries.ts](../src/game/play-queries.ts), [engine.ts](../src/game/engine.ts) |
-| Encounter preparation, setup and settlement     | [journey.ts](../src/game/journey.ts), [encounters.ts](../src/game/encounters.ts)                                                       |
-| Creature identity, card ownership and formation | [team.ts](../src/game/team.ts)                                                                                                         |
-| Draw, discard and FIFO overflow                 | [card-zones.ts](../src/game/card-zones.ts)                                                                                             |
-| Shared player, preview and enemy execution      | [combat/abilities.ts](../src/game/combat/abilities.ts), [ability-values.ts](../src/game/combat/ability-values.ts)                      |
-| Turn scheduling and Legendary decisions         | [turns.ts](../src/game/combat/turns.ts), [legendary.ts](../src/game/combat/legendary.ts)                                               |
-| Recovery, affordability and Recruit eligibility | [destinations.ts](../src/game/destinations.ts)                                                                                         |
-| Catalogs, effect descriptions and progression   | [Content](CONTENT.md), [Keywords](KEYWORDS.md)                                                                                         |
+| Contract                                                    | Owner                                                                                                                                  |
+| ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| State shape and derived types                               | [state-schema.ts](../src/game/state-schema.ts), [types.ts](../src/game/types.ts)                                                       |
+| Command admission and transaction                           | [command-phases.ts](../src/game/command-phases.ts), [play-queries.ts](../src/game/play-queries.ts), [engine.ts](../src/game/engine.ts) |
+| Encounter preparation, setup and settlement                 | [journey.ts](../src/game/journey.ts), [encounters.ts](../src/game/encounters.ts)                                                       |
+| Creature identity, card ownership and formation             | [team.ts](../src/game/team.ts)                                                                                                         |
+| Card owner versus acting creature and drawable fallen cards | [card-actors.ts](../src/game/card-actors.ts)                                                                                           |
+| Draw, discard and FIFO overflow                             | [card-zones.ts](../src/game/card-zones.ts)                                                                                             |
+| Shared player, preview and enemy execution                  | [combat/abilities.ts](../src/game/combat/abilities.ts), [ability-values.ts](../src/game/combat/ability-values.ts)                      |
+| Turn scheduling and Legendary decisions                     | [turns.ts](../src/game/combat/turns.ts), [legendary.ts](../src/game/combat/legendary.ts)                                               |
+| Recovery, affordability and Recruit eligibility             | [destinations.ts](../src/game/destinations.ts)                                                                                         |
+| Catalogs, effect descriptions and progression               | [Content](CONTENT.md), [Keywords](KEYWORDS.md)                                                                                         |
 
 Preserve independently authored species, card and talent order: seeded selection consumes them. Stable definition IDs differ from journey creature IDs and card-instance slot IDs. Duplicate species remain separate individuals. Formation changes must preserve the distinct [replacement and swap rules](EXPEDITION_DESIGN.md#roster-and-battles), including Legendary kit sizes and [generated copies](content/creatures/rookhaven.md).
+
+Card ownership and the acting creature are distinct. [Oathara](content/creatures/oathara.md#identity-and-ownership) can act for a fallen deployed owner without changing the card's identity or zones; admission and execution use the shared actor query. Shared [Food](CONTENT.md#shared-food-cards) uses explicit neutral ownership and its own resolver, without inheriting a presenter's creature-specific card modifiers. Target queries include knocked-out roster allies for Resurrect; ordinary ally targeting uses living battlefield recipients.
 
 [Progression](../src/game/progression.ts) owns starter eligibility and offer count for both journey generation and save validation. It also owns Talent selection validation and the prerequisites shared by purchases and saves; decoding does not reimplement category budgets or earlier-row requirements.
 
@@ -109,7 +112,7 @@ Feature folders own their layouts; `shared/` owns reusable cards, combat readout
 
 ### Save validation details
 
-[Save validation](../src/game/save.ts) checks content IDs, individual/card ownership, unique zones, Health bounds, formation limits, saved enemy packs with exact initial Health/room power, and phase/outcome coherence. Support visits validate stock, price bounds, visit/slot identities and purchase receipts with their phases. It validates FIFO overflow and rejects a waiting buffer alongside an unfilled hand. Generated copies require distinct IDs, valid battle ownership and complete permanent kits. Discovery rejects duplicates, unknown species, recruitment without encounter records, roster species absent from Collection, and invalid starter offers/selections. Optional Recruit destinations admit only ordinary creatures. [Content validation](../src/game/content-validation.ts) is a separate startup/authoring boundary.
+[Save validation](../src/game/save.ts) checks content IDs, individual/card ownership, unique zones, Health bounds, formation limits, saved enemy packs with exact initial Health/room power, and phase/outcome coherence. Support visits validate stock, price bounds, visit/slot identities and purchase receipts with their phases. It validates FIFO overflow and rejects a waiting buffer alongside an unfilled hand. Generated cards require distinct IDs alongside complete permanent kits; creature-owned copies require valid battle ownership, while neutral ownership is restricted to supported temporary, level-zero Food. Discovery rejects duplicates, unknown species, recruitment without encounter records, roster species absent from Collection, and invalid starter offers/selections. Optional Recruit destinations admit only ordinary creatures. [Content validation](../src/game/content-validation.ts) is a separate startup/authoring boundary.
 
 ## Discovery and diagnostics
 
