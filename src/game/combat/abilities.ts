@@ -438,10 +438,9 @@ export function executeAbility(
         if (action.side === "player") action.actor.attacked = true;
         break;
       }
-      case "guard":
-      case "teamGuard": {
+      case "guard": {
         const targets =
-          def.effect === "teamGuard"
+          def.target === "allAllies"
             ? alive(friendlyRow(state, action))
             : cardTargeting(def) === "self"
               ? [actor]
@@ -549,11 +548,9 @@ export function executeAbility(
       case "mana":
         if (!enemy) gainMana(state, value, events);
         break;
-      case "teamDodge":
-        for (const unit of alive(friendlyRow(state, action))) grantTemporaryDodge(unit, value, events);
-        break;
       case "dodge":
-        grantTemporaryDodge(actor, value, events);
+        for (const unit of def.target === "allAllies" ? alive(friendlyRow(state, action)) : [actor])
+          grantTemporaryDodge(unit, value, events);
         break;
       case "teamClearBlind":
         for (const unit of alive(friendlyRow(state, action)))

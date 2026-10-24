@@ -106,10 +106,11 @@ export type CardDefinition = CardBase &
         purgeThorns?: true;
         target?: "allEnemies" | "randomEnemy";
       }
-    | { effect: "guard"; target?: "self" }
+    | { effect: "guard"; target?: "self" | "allAllies" }
+    | { effect: "dodge"; target?: "self" | "allAllies" }
     | { effect: "heal"; target?: "allAllies" | "mostInjured" | "self" }
     | { effect: "recover"; target?: "ally" }
-    | { effect: Exclude<Effect, "attack" | "guard" | "heal" | "recover">; target?: never }
+    | { effect: Exclude<Effect, "attack" | "guard" | "dodge" | "heal" | "recover">; target?: never }
   );
 
 export interface CreatureKit {

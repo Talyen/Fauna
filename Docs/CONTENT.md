@@ -14,6 +14,12 @@ All authored abilities cost exactly **1 Mana**, including generated cards and up
 
 Use the [ability budget](CREATURE_DESIGN.md#ability-budgets) as a flexible design guideline, without retroactively rebalancing existing kits. Single chosen targets are implicit in descriptions; group targets and self-granted effects are explicit. Area attacks need no chosen target, resolve living opponents in board order and stop on actor knockout. Enemy targets exclude backup. [Journey rules](EXPEDITION_DESIGN.md#encounters) own room scaling, including extras and mixed Block/Thorns branches.
 
+Guard and Dodge use the definition's `target` field for recipient scope: `allAllies`
+resolves automatically over living allies, including Minions. Guard defaults to a
+chosen ally and also supports `self`; Dodge defaults to self. Stable card IDs are
+independent of effect names. [Card rules](../src/game/card-rules.ts) own targeting
+and descriptions; [execution](../src/game/combat/abilities.ts) owns recipients.
+
 ## Content provenance
 
 On October 23, 2026, the project owner confirmed that all player-facing content was produced by them using AI. The [owner declaration](../assets/content-provenance.json) covers artwork, music, sound effects and text; per-asset source locations and hashes remain in the manifest, including copies from Alchemy. This is pre-generated content; no live generation service runs in the game. [Store preparation](STEAM_STORE.md) owns the disclosure draft. Retain applicable generation-service terms and required attribution with source materials; this declaration does not itself grant rights.

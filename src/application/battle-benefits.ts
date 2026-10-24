@@ -314,11 +314,12 @@ export function battleBenefits(
       }
       return support(useful ? "standardUtility" : "none");
     }
-    case "teamDodge":
+    case "dodge":
       return dodgeSupport(
-        battlefield(state, "player")
-          .filter((unit) => unit.health > 0)
-          .reduce((sum, unit) => sum + Math.min(value, 70 - (unit.combat?.temporaryDodge ?? 0)), 0),
+        (def.target === "allAllies"
+          ? battlefield(state, "player").filter((unit) => unit.health > 0)
+          : [actor]
+        ).reduce((sum, unit) => sum + Math.min(value, 70 - (unit.combat?.temporaryDodge ?? 0)), 0),
       );
     case "redraw":
       return support(state.battle.hand.length > 1 ? "redraw" : "none");
@@ -393,9 +394,36 @@ export function battleBenefits(
               ? "utility"
               : "none",
       );
-    case "teamGuard":
+    case "guard":
     case "redistributeBlock":
     case "teamProtection": {
+      if (def.effect === "guard" && def.target !== "allAllies") {
+        const protection =
+          def.effects?.reduce((sum, effect) => {
+            if (effect.kind === "reflect")
+              return (
+                sum + Number(!(effect.status === "burn" ? actor.combat?.reflectBurn : actor.combat?.reflect))
+              );
+            if (effect.kind === "nullifyFreeze") return sum + Number(!actor.combat?.nullifyFreeze);
+            if (effect.kind === "status")
+              return (
+                sum +
+                Math.min(
+                  effect.amount,
+                  (effect.status === "dodge" ? 70 : STACK_LIMIT) - (actor.combat?.[effect.status] ?? 0),
+                )
+              );
+            return sum;
+          }, 0) ?? 0;
+        return (def.target === "self" ? [actor] : allies).flatMap((ally) => {
+          const useful = Math.min(value, STACK_LIMIT - ally.block);
+          return support(
+            healing > 0 ? "healing" : useful + protection > 0 ? "protection" : "none",
+            healing > 0 ? healing : useful + protection,
+            def.target === "self" ? undefined : ally.id,
+          );
+        });
+      }
       const useful = allies.reduce(
         (sum, ally) =>
           sum +
@@ -413,38 +441,9 @@ export function battleBenefits(
       const useful = Math.min(value, STACK_LIMIT - (actor.combat?.waterThorns ?? 0));
       return support(useful > 0 ? "protection" : "none", useful);
     }
-    case "dodge":
-      return dodgeSupport(Math.min(value, 70 - (actor.combat?.temporaryDodge ?? 0)));
     case "swap":
     case "swapLowest":
       return support("utility");
-    case "guard": {
-      const protection =
-        def.effects?.reduce((sum, effect) => {
-          if (effect.kind === "reflect")
-            return (
-              sum + Number(!(effect.status === "burn" ? actor.combat?.reflectBurn : actor.combat?.reflect))
-            );
-          if (effect.kind === "nullifyFreeze") return sum + Number(!actor.combat?.nullifyFreeze);
-          if (effect.kind === "status")
-            return (
-              sum +
-              Math.min(
-                effect.amount,
-                (effect.status === "dodge" ? 70 : STACK_LIMIT) - (actor.combat?.[effect.status] ?? 0),
-              )
-            );
-          return sum;
-        }, 0) ?? 0;
-      return (def.target === "self" ? [actor] : allies).flatMap((ally) => {
-        const useful = Math.min(value, STACK_LIMIT - ally.block);
-        return support(
-          healing > 0 ? "healing" : useful + protection > 0 ? "protection" : "none",
-          healing > 0 ? healing : useful + protection,
-          def.target === "self" ? undefined : ally.id,
-        );
-      });
-    }
     default: {
       const unhandled: never = def;
       throw new Error(`Unhandled battle benefit: ${unhandled}`);

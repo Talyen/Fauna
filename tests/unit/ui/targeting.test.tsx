@@ -67,8 +67,12 @@ function open(game = fixture(), navigation = false) {
       />
     </TooltipProvider>,
   );
-  const card = (effect: string) =>
-    view.container.querySelector<HTMLButtonElement>(`.hand [data-effect="${effect}"]`)!;
+  const card = (effectOrId: string) => {
+    const instance = game.cards.find((card) => card.definitionId === effectOrId);
+    return view.container.querySelector<HTMLButtonElement>(
+      instance ? `.hand [data-card-id="${instance.id}"]` : `.hand [data-effect="${effectOrId}"]`,
+    )!;
+  };
   return { ...view, send, controls, card };
 }
 it("mouse selection waits for hover, clears on leave, switches cards, and cancels without commands", async () => {
@@ -238,16 +242,22 @@ it.each([
 
 it("plays an automatic card on Enter without a confirmation control", async () => {
   const { card, send } = open(fixture(), true);
-  card("teamGuard").focus();
+  card("pollenmoth-teamGuard").focus();
   await userEvent.keyboard("{Enter}");
-  expect(send).toHaveBeenCalledExactlyOnceWith({ type: "play", cardId: card("teamGuard").dataset.cardId });
+  expect(send).toHaveBeenCalledExactlyOnceWith({
+    type: "play",
+    cardId: card("pollenmoth-teamGuard").dataset.cardId,
+  });
 });
 
 it("plays an automatic card directly while replacing a pending chosen target", async () => {
   const { container, card, send } = open();
   await userEvent.click(card("attack"));
-  await userEvent.click(card("teamGuard"));
-  expect(send).toHaveBeenCalledExactlyOnceWith({ type: "play", cardId: card("teamGuard").dataset.cardId });
+  await userEvent.click(card("pollenmoth-teamGuard"));
+  expect(send).toHaveBeenCalledExactlyOnceWith({
+    type: "play",
+    cardId: card("pollenmoth-teamGuard").dataset.cardId,
+  });
   expect(container.querySelector(".battle-screen")?.getAttribute("data-selected-card")).toBe("");
 });
 
@@ -257,7 +267,7 @@ it("keeps automatic cards unavailable when Mana is insufficient", async () => {
       game.battle!.mana = 0;
     }),
   );
-  await userEvent.click(card("teamGuard"));
+  await userEvent.click(card("pollenmoth-teamGuard"));
   expect(send).not.toHaveBeenCalled();
   expect(screen.getByText("Not enough Mana.")).toBeTruthy();
 });

@@ -10,7 +10,6 @@ export function cardTargeting(def: CardDefinition): "enemy" | "ally" | "self" | 
     case "attack":
       return def.target ? "automatic" : "enemy";
     case "guard":
-      return def.target === "self" ? "self" : "ally";
     case "heal":
       return def.target === "self" ? "self" : def.target ? "automatic" : "ally";
     case "recover":
@@ -19,8 +18,9 @@ export function cardTargeting(def: CardDefinition): "enemy" | "ally" | "self" | 
       return "ally";
     case "reflectAttack":
     case "dreamDouble":
-    case "dodge":
       return "self";
+    case "dodge":
+      return def.target === "allAllies" ? "automatic" : "self";
     default:
       return "automatic";
   }
@@ -94,7 +94,6 @@ export function enemyCanUse(card: CardDefinition): boolean {
     case "dreamDouble":
     case "nightmareHarvest":
     case "waterThorns":
-    case "teamDodge":
     case "dodge":
     case "teamBlind":
     case "teamClearBlind":
@@ -103,7 +102,6 @@ export function enemyCanUse(card: CardDefinition): boolean {
     case "teamCleanse":
     case "nullify":
     case "swap":
-    case "teamGuard":
     case "redistributeBlock":
     case "teamProtection":
       return true;
@@ -144,7 +142,12 @@ export function cardText(
       if (card.doubleWithArmor) text += "; Doubled if you have Armor";
       break;
     case "guard":
-      text = card.target === "self" ? `Gain ${value} Block` : `Give an ally ${value} Block`;
+      text =
+        card.target === "allAllies"
+          ? `Allies gain ${value} Block`
+          : card.target === "self"
+            ? `Gain ${value} Block`
+            : `Give an ally ${value} Block`;
       break;
     case "heal":
       text =
@@ -173,11 +176,11 @@ export function cardText(
           ? "Return a random discarded card to your hand"
           : "Return a random discarded card from a living ally to your hand";
       break;
-    case "teamDodge":
-      text = `Give all allies ${value}% Dodge until your next turn`;
-      break;
     case "dodge":
-      text = `Gain ${value}% Dodge until your next turn`;
+      text =
+        card.target === "allAllies"
+          ? `Give all allies ${value}% Dodge until your next turn`
+          : `Gain ${value}% Dodge until your next turn`;
       break;
     case "teamBlind":
       text = "Blind all enemies";
@@ -214,9 +217,6 @@ export function cardText(
       break;
     case "redistributeBlock":
       text = `Redistribute allied Block evenly; Allies gain ${value} Block`;
-      break;
-    case "teamGuard":
-      text = `Allies gain ${value} Block`;
       break;
     case "teamProtection":
       text =

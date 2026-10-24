@@ -27,14 +27,14 @@ describe("keyword foundation", () => {
     for (const damageType of DAMAGE_TYPES)
       expect(definitionKeywords({ effect: "attack", damageType })).toEqual([damageType]);
     for (const [effects, expected] of [
-      [["guard", "teamGuard", "redistributeBlock"], ["block"]],
+      [["guard", "redistributeBlock"], ["block"]],
       [["heal", "procession", "teamCleanse", "teamThaw", "teamClearBlind"], ["health"]],
       [
         ["createPearls", "pearl"],
         ["mana", "block"],
       ],
       [["redraw", "swapLowest", "recover", "teamBlind", "swap", "draw", "nullify"], []],
-      [["teamDodge", "dodge"], ["dodge"]],
+      [["dodge"], ["dodge"]],
       [["mana"], ["mana"]],
       [["waterThorns"], ["water"]],
       [["teamPurge"], ["light"]],
