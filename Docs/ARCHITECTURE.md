@@ -63,6 +63,8 @@ Desktop saves use Electron’s Fauna user-data `saves/expedition.json`; browser 
 
 ### Loading and writes
 
+Bundled content validation runs once inside [startup preparation](../src/ui/startup/prepare.ts), before session loading. Preparation rejects on fatal failure; [mounting](../src/main.tsx) cancels its owned work and settles the existing splash under the [startup UI contract](ui/screens.md#startup-loading). Disposal suppresses late success and failure callbacks.
+
 [The session](../src/application/session.ts) keeps commands unavailable through local loading and bounded Cloud startup. Load tries the primary and then current-format backups. All-invalid development candidates silently start fresh. Read failures retry once, then allow in-memory play; writes must regain read access before rotating unknown data.
 
 Accepted commands admit their encoded save to the serialized queue **before publication**. Reentrant subscribers therefore cannot reorder saves or dispose before an accepted save is admitted. Failed writes retain live play and retry the newest state every five seconds. Disposal revokes readiness and new commands, unsubscribes the close handshake and drains admitted writes. [UI recovery](UI.md#recovery-and-persistent-failures) owns notices.
@@ -158,6 +160,8 @@ Feature folders own their layouts; `shared/` owns reusable cards, combat readout
 `npm run check:types` checks all six; broader desktop callbacks retain the ordinary checked-JavaScript inference. [Contributing](../CONTRIBUTING.md#verification) owns execution policy.
 
 ## Plans and history
+
+The [startup simplification](STARTUP_SIMPLIFICATION_PLAN.md) records the completed removal of repeated bundled-content validation, terminal splash behavior and verification evidence.
 
 The [combat and interaction implementation](COMPLEXITY_REDUCTION_PLAN.md) records the completed damage, status, targeting and Auto-play simplification and links its assessment and evidence.
 

@@ -73,7 +73,62 @@ it("waits for session, essentials, fonts and minimum while deferred artwork neve
   expect(read).toHaveBeenCalledOnce();
   deferredArt.resolve();
 });
-it("retries invalid content at its existing cadence before loading, and cancellation clears the retry", async () => {
+it("rejects invalid content once without waiting for the splash minimum or accessing saves", async () => {
+  const read = vi.fn(async () => []);
+  const write = vi.fn(async () => {});
+  session = createSession(
+    {
+      desktop: false,
+      steam: { available: false },
+      saves: { readCandidates: read, write },
+    },
+    7,
+  );
+  const error = new Error("content");
+  const validate = vi.fn(() => {
+    throw error;
+  });
+  startup = prepareStartup(session, splash, validate);
+  await expect(startup.ready).rejects.toBe(error);
+  startup.dispose();
+  await vi.advanceTimersByTimeAsync(20000);
+  expect(validate).toHaveBeenCalledOnce();
+  expect(read).not.toHaveBeenCalled();
+  expect(write).not.toHaveBeenCalled();
+  expect(session.store.getState().ready).toBe(false);
+  expect(session.diagnostics.snapshot()).toEqual([{ source: "validation", message: "content", count: 1 }]);
+  expect(warmImages).toHaveBeenCalledOnce();
+  expect(vi.mocked(warmImages).mock.calls[0]![1].aborted).toBe(true);
+});
+it("cancels preparation during loading without warming or revealing a late saved screen", async () => {
+  const saved = deferred();
+  session = createSession(
+    {
+      desktop: false,
+      steam: { available: false },
+      saves: {
+        readCandidates: async () => {
+          await saved.promise;
+          return [];
+        },
+        write: async () => {},
+      },
+    },
+    7,
+  );
+  const validate = vi.fn();
+  startup = prepareStartup(session, splash, validate);
+  await vi.advanceTimersByTimeAsync(0);
+  startup.dispose();
+  splash.dispose();
+  await session.dispose();
+  saved.resolve();
+  await startup.ready;
+  expect(validate).toHaveBeenCalledOnce();
+  expect(warmImages).toHaveBeenCalledOnce();
+  expect(session.store.getState().ready).toBe(false);
+});
+it("diagnoses an unexpected preparation failure without calling it invalid content", async () => {
   session = createSession(
     {
       desktop: false,
@@ -82,24 +137,10 @@ it("retries invalid content at its existing cadence before loading, and cancella
     },
     7,
   );
-  const validate = vi.fn().mockImplementationOnce(() => {
-    throw new Error("content");
+  vi.mocked(warmImages).mockImplementation(async (urls) => {
+    if (urls !== startupBaseArtwork) throw new Error("preparation");
   });
-  startup = prepareStartup(session, splash, validate);
-  await vi.advanceTimersByTimeAsync(4999);
-  expect(session.store.getState().ready).toBe(false);
-  await vi.advanceTimersByTimeAsync(1);
-  await startup.ready;
-  expect(validate).toHaveBeenCalledTimes(2);
-  expect(session.store.getState().ready).toBe(true);
-  expect(session.diagnostics.snapshot()[0]!.source).toBe("validation");
-  startup.dispose();
-  const broken = vi.fn(() => {
-    throw new Error("content");
-  });
-  startup = prepareStartup(session, splash, broken);
-  startup.dispose();
-  await vi.advanceTimersByTimeAsync(15000);
-  expect(broken).toHaveBeenCalledOnce();
-  await startup.ready;
+  startup = prepareStartup(session, splash, vi.fn());
+  await expect(startup.ready).rejects.toThrow("preparation");
+  expect(session.diagnostics.snapshot()).toEqual([{ source: "startup", message: "preparation", count: 1 }]);
 });
