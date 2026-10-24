@@ -3,6 +3,7 @@ import { produce } from "immer";
 import { createSession } from "../../../src/application/session";
 import { dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
+import type { GameState } from "../../../src/game/types";
 import {
   authoredPack,
   accept,
@@ -14,6 +15,51 @@ import {
   completeRecruitment,
   run,
 } from "../../support/game";
+
+it.each([
+  [
+    "duplicate Collection record",
+    (state: GameState) => state.discovery.encountered.push(state.team[0]!.species),
+  ],
+  ["unearned journey currency", (state: GameState) => state.journey!.lastBattle!.currency++],
+  ["reordered Recruit offers", (state: GameState) => state.reward!.recruits.reverse()],
+  ["missing Recruit offer", (state: GameState) => state.reward!.recruits.pop()],
+] as const)("rejects %s without altering the intact reward checkpoint", (_, corrupt) => {
+  const good = winBattle();
+  const saved = encodeSave(good);
+  const broken = produce(good, (draft) => {
+    corrupt(draft);
+  });
+  expect(() => decodeSave(encodeSave(broken))).toThrow("Save contains inconsistent game data.");
+  const resumed = decodeSave(saved);
+  expect(resumed).toEqual(good);
+  expect(encodeSave(good)).toBe(saved);
+  expect(Object.isFrozen(resumed)).toBe(true);
+  expect(Object.isFrozen(resumed.reward!.recruits)).toBe(true);
+});
+
+it.each([
+  ["missing card zone", (state: GameState) => state.battle!.hand.pop()],
+  [
+    "foreign enemy target",
+    (state: GameState) => {
+      state.battle!.enemies[0]!.targetId = "missing";
+    },
+  ],
+  [
+    "foreign status source",
+    (state: GameState) => {
+      state.team[0]!.combat!.statusSources.burn = "missing";
+    },
+  ],
+] as const)("rejects %s before resuming combat", (_, corrupt) => {
+  const good = run();
+  expect(decodeSave(encodeSave(good))).toEqual(good);
+  const broken = produce(good, (draft) => {
+    corrupt(draft);
+  });
+  expect(() => decodeSave(encodeSave(broken))).toThrow("Save contains inconsistent game data.");
+});
 
 it.each(["roster", "destination"] as const)(
   "recovers a backup instead of loading inconsistent %s ownership",
