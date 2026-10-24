@@ -1,10 +1,11 @@
+import { talentRule } from "../../rules/talents";
 export const BLOCK_TALENTS = [
   {
     id: "block.second-wind",
     keyword: "block",
     effect: "second-wind",
     name: "Second Wind",
-    text: "Restore 2 Health when your Block is depleted",
+    text: `Restore ${talentRule("block.second-wind").amount} Health when your Block is depleted`,
     row: 0,
   },
   {
@@ -20,7 +21,7 @@ export const BLOCK_TALENTS = [
     keyword: "block",
     effect: "reinforce",
     name: "Reinforce",
-    text: "Block absorbs 10% more Physical damage",
+    text: `Block absorbs ${talentRule("block.reinforce").percent}% more Physical damage`,
     row: 1,
   },
   {
@@ -28,7 +29,7 @@ export const BLOCK_TALENTS = [
     keyword: "block",
     effect: "sacred-shield",
     name: "Sacred Shield",
-    text: "Light damage is increased by 10% of your Block",
+    text: `Light damage is increased by ${talentRule("block.sacred-shield").percent}% of your Block`,
     row: 1,
   },
   {
@@ -36,7 +37,7 @@ export const BLOCK_TALENTS = [
     keyword: "block",
     effect: "impact-guard",
     name: "Impact Guard",
-    text: "Stun damage is increased by 10% of your Block",
+    text: `Stun damage is increased by ${talentRule("block.impact-guard").percent}% of your Block`,
     row: 2,
   },
   {
@@ -44,7 +45,7 @@ export const BLOCK_TALENTS = [
     keyword: "block",
     effect: "weighted-guard",
     name: "Weighted Guard",
-    text: "Physical damage is increased by 10% of your Block",
+    text: `Physical damage is increased by ${talentRule("block.weighted-guard").percent}% of your Block`,
     row: 2,
   },
   {
@@ -52,7 +53,7 @@ export const BLOCK_TALENTS = [
     keyword: "block",
     effect: "sun-struck-shield",
     name: "Sun-Struck Shield",
-    text: "When attacks deplete your Block, reflect 30% of Block lost as Light damage",
+    text: `When attacks deplete your Block, reflect ${talentRule("block.sun-struck-shield").percent}% of Block lost as Light damage`,
     row: 3,
   },
   {
@@ -60,7 +61,7 @@ export const BLOCK_TALENTS = [
     keyword: "block",
     effect: "footwork",
     name: "Footwork",
-    text: "Gain 2 Block when you Dodge",
+    text: `Gain ${talentRule("block.footwork").amount} Block when you Dodge`,
     row: 3,
   },
   {

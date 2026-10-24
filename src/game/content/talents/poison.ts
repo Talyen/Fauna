@@ -1,3 +1,4 @@
+import { talentRule } from "../../rules/talents";
 export const POISON_TALENTS = [
   {
     id: "poison.necrosis",
@@ -20,7 +21,7 @@ export const POISON_TALENTS = [
     keyword: "poison",
     effect: "hemotoxin",
     name: "Hemotoxin",
-    text: "Poison has a 10% chance to also deal Bleed damage",
+    text: `Poison has a ${talentRule("poison.hemotoxin").percent}% chance to also deal Bleed damage`,
     row: 1,
   },
   {
@@ -28,7 +29,7 @@ export const POISON_TALENTS = [
     keyword: "poison",
     effect: "corrosive",
     name: "Corrosive",
-    text: "Poisoned enemies take 1 additional damage",
+    text: `Poisoned enemies take ${talentRule("poison.corrosive").amount} additional damage`,
     row: 1,
   },
   {
@@ -52,7 +53,7 @@ export const POISON_TALENTS = [
     keyword: "poison",
     effect: "toxic-profit",
     name: "Toxic Profit",
-    text: "Gain 3 Gold when you defeat a Poisoned enemy",
+    text: `Gain ${talentRule("poison.toxic-profit").amount} Gold when you defeat a Poisoned enemy`,
     row: 3,
   },
   {
@@ -60,7 +61,7 @@ export const POISON_TALENTS = [
     keyword: "poison",
     effect: "paralytic-venom",
     name: "Paralytic Venom",
-    text: "Poison damage has a 10% chance to Stun",
+    text: `Poison damage has a ${talentRule("poison.paralytic-venom").percent}% chance to Stun`,
     row: 3,
   },
   {
@@ -68,7 +69,7 @@ export const POISON_TALENTS = [
     keyword: "poison",
     effect: "virulent",
     name: "Virulent",
-    text: "Poison has a 10% chance to gain instead of lose a stack",
+    text: `Poison has a ${talentRule("poison.virulent").percent}% chance to gain instead of lose a stack`,
     row: 4,
   },
   {
@@ -76,7 +77,7 @@ export const POISON_TALENTS = [
     keyword: "poison",
     effect: "venom-strike",
     name: "Venom Strike",
-    text: "Poison cards have a 10% chance to play twice",
+    text: `Poison cards have a ${talentRule("poison.venom-strike").percent}% chance to play twice`,
     row: 4,
   },
 ] as const;

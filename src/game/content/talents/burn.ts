@@ -1,3 +1,4 @@
+import { talentRule } from "../../rules/talents";
 export const BURN_TALENTS = [
   {
     id: "burn.flashpoint",
@@ -20,7 +21,7 @@ export const BURN_TALENTS = [
     keyword: "burn",
     effect: "smoke-screen",
     name: "Smoke Screen",
-    text: "When you Dodge a Burning enemy, deal 2 Burn damage",
+    text: `When you Dodge a Burning enemy, deal ${talentRule("burn.smoke-screen").amount} Burn damage`,
     row: 1,
   },
   {
@@ -28,7 +29,7 @@ export const BURN_TALENTS = [
     keyword: "burn",
     effect: "flash-fire",
     name: "Flash Fire",
-    text: "Burn cards have a 10% chance to play twice",
+    text: `Burn cards have a ${talentRule("burn.flash-fire").percent}% chance to play twice`,
     row: 1,
   },
   {
@@ -36,7 +37,7 @@ export const BURN_TALENTS = [
     keyword: "burn",
     effect: "heat-exhaustion",
     name: "Heat Exhaustion",
-    text: "Burn hits have a 10% chance to also deal Stun damage",
+    text: `Burn hits have a ${talentRule("burn.heat-exhaustion").percent}% chance to also deal Stun damage`,
     row: 2,
   },
   {
@@ -44,7 +45,7 @@ export const BURN_TALENTS = [
     keyword: "burn",
     effect: "smoldering",
     name: "Smoldering",
-    text: "Burn has a 10% chance to not decay",
+    text: `Burn has a ${talentRule("burn.smoldering").percent}% chance to not decay`,
     row: 2,
   },
   {

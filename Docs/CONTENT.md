@@ -20,6 +20,8 @@ Add a Talent, Boon or passive kind together with its named implementation bindin
 
 Keep effect order explicit in the owning coordinator. Adding or reordering catalog entries must not establish reaction order. Preserve live side/deployment checks and actor-liveness checks between child reactions. Add a focused regression for observable behavior; preserve the recorded [modifier baseline](../tests/unit/game/modifier-contracts.test.ts) during refactors. Intentional mechanic changes require reviewed expectations. Every passive tier remains a complete replacement; the passive-tier authoring procedure below applies.
 
+Use the pure [Talent parameters](../src/game/rules/talents.ts) for explicit numeric Talent copy and execution. `percent` is a whole percentage; divide by 100 for a chance or ratio. The [Boon rule owner](../src/game/rules/boons.ts) supplies Boon parameters and descriptions. Preserve authored non-numeric clauses and complete passive tier objects. When a modifier grants a saved effect, bind its producer, later consumption and relevant queries; consumers spend the existing grant without rechecking current Talent ownership. Finding Rhythm's accumulation, reset and chance read are the worked example in [modifier ownership](ARCHITECTURE.md#modifier-ownership).
+
 ## Ability costs
 
 All authored abilities cost exactly **1 Mana**, including generated cards and upgrades. Balance their effects and values instead of their cost. Explicit gameplay modifiers may make a play free.

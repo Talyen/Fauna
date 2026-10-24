@@ -1,10 +1,11 @@
+import { talentRule } from "../../rules/talents";
 export const WATER_TALENTS = [
   {
     id: "water.pressure",
     keyword: "water",
     effect: "pressure",
     name: "Pressure",
-    text: "Water attacks deal 1 more damage",
+    text: `Water attacks deal ${talentRule("water.pressure").amount} more damage`,
     row: 0,
   },
   {
@@ -12,7 +13,7 @@ export const WATER_TALENTS = [
     keyword: "water",
     effect: "seafoam",
     name: "Seafoam",
-    text: "Water hits grant 2 Block",
+    text: `Water hits grant ${talentRule("water.seafoam").amount} Block`,
     row: 0,
   },
   {
@@ -20,7 +21,7 @@ export const WATER_TALENTS = [
     keyword: "water",
     effect: "high-tide",
     name: "High Tide",
-    text: "Water attacks deal 25% more damage while you have Block",
+    text: `Water attacks deal ${talentRule("water.high-tide").percent}% more damage while you have Block`,
     row: 1,
   },
   {
@@ -28,7 +29,7 @@ export const WATER_TALENTS = [
     keyword: "water",
     effect: "erosion",
     name: "Erosion",
-    text: "Water hits remove 2 Armor",
+    text: `Water hits remove ${talentRule("water.erosion").amount} Armor`,
     row: 1,
   },
   {
@@ -36,7 +37,7 @@ export const WATER_TALENTS = [
     keyword: "water",
     effect: "cleansing-current",
     name: "Cleansing Current",
-    text: "Water hits have a 20% chance to Cleanse 1 harmful effect from you",
+    text: `Water hits have a ${talentRule("water.cleansing-current").percent}% chance to Cleanse ${talentRule("water.cleansing-current").amount} harmful effect from you`,
     row: 2,
   },
   {
@@ -44,7 +45,7 @@ export const WATER_TALENTS = [
     keyword: "water",
     effect: "riptide",
     name: "Riptide",
-    text: "Water hits have a 20% chance to draw a Water card",
+    text: `Water hits have a ${talentRule("water.riptide").percent}% chance to draw a Water card`,
     row: 2,
   },
 ] as const;

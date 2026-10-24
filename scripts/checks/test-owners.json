@@ -135,5 +135,19 @@
   "src/game/modifier-bindings.ts": {
     "reason": "Exhaustive authored modifier bindings and actual runtime implementation ownership",
     "suites": ["tests/unit/game/modifier-contracts.test.ts", "tests/unit/tooling/modifier-contracts.test.mjs"]
+  },
+  "src/game/rules/talents.ts": {
+    "reason": "Shared Talent copy values, saved-effect consumers and unchanged seeded modifier behavior",
+    "suites": [
+      "tests/unit/game/modifier-contracts.test.ts",
+      "tests/unit/game/combat-resolution.test.ts",
+      "tests/unit/game/distinct-talents.test.ts",
+      "tests/unit/game/remaining-talents.test.ts",
+      "tests/unit/tooling/modifier-contracts.test.mjs"
+    ]
+  },
+  "scripts/checks/modifier-contracts.mjs": {
+    "reason": "Complete modifier implementation/query bindings, including aliased pure parameter consumers",
+    "suites": ["tests/unit/tooling/modifier-contracts.test.mjs", "tests/unit/tooling/verification.test.mjs"]
   }
 }

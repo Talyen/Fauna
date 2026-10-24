@@ -1,3 +1,4 @@
+import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { takeAttackReflection } from "./attack-reflection";
 import { interceptAttack } from "./interception";
@@ -260,8 +261,9 @@ export function* resolveHit(
     });
     return { outcome: "landed", lost: 0 };
   }
-  const nextPhysical = direct && alliedSource ? ensureCombat(source).nextPhysical : 0;
-  if (nextPhysical) ensureCombat(source).nextPhysical = 0;
+  const nextPhysical =
+    direct && alliedSource ? ensureCombat(source)[talentRule("dodge.open-flank").state] : 0;
+  if (nextPhysical) ensureCombat(source)[talentRule("dodge.open-flank").state] = 0;
   let damage = value;
   if (
     direct &&
@@ -275,16 +277,27 @@ export function* resolveHit(
     damage *= boonRule("meteorite").multiplier;
   }
   damage = modifiedDamage(state, source, target, damage, type, options, attack);
-  const riposte = direct && alliedSource && type === "physical" && ensureCombat(source).riposte;
+  const riposte =
+    direct &&
+    alliedSource &&
+    type === "physical" &&
+    ensureCombat(source)[talentRule("physical.riposte").state];
   const criticalChance =
     0.05 + ((options.origin === "ability" ? options.criticalBonus : undefined) ?? 0) / 100;
   const critical =
     direct && (riposte || (criticalChance > 0 && succeeds(state, criticalChance, !alliedSource, events)));
-  if (riposte) ensureCombat(source).riposte = false;
-  const partingCut = direct && alliedSource && type === "physical" && ensureCombat(source).partingCut;
-  if (partingCut) ensureCombat(source).partingCut = false;
+  if (riposte) ensureCombat(source)[talentRule("physical.riposte").state] = false;
+  const partingCut =
+    direct &&
+    alliedSource &&
+    type === "physical" &&
+    ensureCombat(source)[talentRule("bleed.parting-cut").state];
+  if (partingCut) ensureCombat(source)[talentRule("bleed.parting-cut").state] = false;
   if (critical) damage *= 2;
-  const blockRatio = alliedTarget && type === "physical" && hasTalent(state, "block.reinforce") ? 1.1 : 1;
+  const blockRatio =
+    alliedTarget && type === "physical" && hasTalent(state, "block.reinforce")
+      ? 1 + talentRule("block.reinforce").percent / 100
+      : 1;
   const payment = blockPayment(damage, target.block, blockRatio, policy.bypassBlock);
   const blocked = payment.absorbed,
     blockSpent = payment.spent;
@@ -308,7 +321,10 @@ export function* resolveHit(
   }
   if (lost > 0) yield* reaction("healthThresholds", state, target, before, events);
   if (alliedTarget && lost > 0 && hasTalent(state, "dodge.finding-rhythm"))
-    stats.rhythm = Math.min(70, stats.rhythm + 5);
+    stats.rhythm = Math.min(
+      talentRule("dodge.finding-rhythm").maximum,
+      stats.rhythm + talentRule("dodge.finding-rhythm").amount,
+    );
   const facts: HitPayment = { damage, lost, blocked, blockSpent, depletedBlock, critical };
   yield* blockDepletionRewards(context, facts, attack);
   publishHit(context, facts, options);

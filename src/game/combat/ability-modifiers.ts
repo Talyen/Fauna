@@ -1,3 +1,4 @@
+import { talentRule } from "../rules/talents";
 import { isRosterCreature } from "../battlefield";
 import { creaturePassive, hasTalent } from "../progression";
 import { chance as succeeds } from "../chance";
@@ -32,16 +33,16 @@ export function beforeAbility(
 ) {
   if (!enemy) {
     if (target && keywords.includes("leech") && hasTalent(state, "leech.armor-siphon")) {
-      const { removed: stolen, depletion } = removeArmor(target, 1);
+      const { removed: stolen, depletion } = removeArmor(target, talentRule("leech.armor-siphon").amount);
       grantArmor(state, actor, stolen, events);
       triggerArmorBreak(state, depletion, events);
     }
     if (
       keywords.includes("block") &&
       hasTalent(state, "armor.armored-surge") &&
-      succeeds(state, 0.1, enemy, events)
+      succeeds(state, talentRule("armor.armored-surge").percent / 100, enemy, events)
     )
-      grantArmor(state, actor, 6, events);
+      grantArmor(state, actor, talentRule("armor.armored-surge").amount, events);
   }
 }
 export function talentRepeat(
@@ -61,7 +62,9 @@ export function talentRepeat(
     !enemy &&
     repeatTalents.some(
       ([keyword, talent]) =>
-        keywords.includes(keyword) && hasTalent(state, talent) && succeeds(state, 0.1, enemy, events),
+        keywords.includes(keyword) &&
+        hasTalent(state, talent) &&
+        succeeds(state, talentRule(talent).percent / 100, enemy, events),
     )
   );
 }

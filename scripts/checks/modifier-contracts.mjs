@@ -145,7 +145,10 @@ export function modifierContractViolations(sources) {
     walk(module, (entry, _parent, owner) => {
       if (entry.type !== "CallExpression" || entry.callee.type !== "Identifier") return;
       const target = moduleImports.get(entry.callee.value);
-      if (target?.file === "src/game/progression.ts" && target.name === "hasTalent")
+      if (
+        (target?.file === "src/game/progression.ts" && target.name === "hasTalent") ||
+        (target?.file === "src/game/rules/talents.ts" && target.name === "talentRule")
+      )
         talentSelectors.add(owner);
     });
     walk(module, (entry, parent, owner) => {

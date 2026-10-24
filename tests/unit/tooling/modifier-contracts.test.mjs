@@ -25,6 +25,23 @@ const fixture = () => ({
 it("accepts actual named implementations with aliased runtime callers", () => {
   expect(modifierContractViolations(fixture())).toEqual([]);
 });
+
+it("follows aliased pure parameter consumers through their declared query bindings", () => {
+  const sources = fixture();
+  sources["src/game/extra.ts"] =
+    'import {talentRule as rule} from "./rules/talents"; export function estimate(){return rule("water.pressure").amount}';
+  sources["src/game/entry.ts"] += 'import {estimate} from "./extra"; estimate();';
+  expect(modifierContractViolations(sources)).toContainEqual(
+    expect.stringContaining("has an undeclared owner: src/game/extra.ts#estimate"),
+  );
+  sources["src/game/modifier-bindings.ts"] = sources["src/game/modifier-bindings.ts"]
+    .replace("const owners = {", 'const owners = {estimate:bind("./extra","estimate"),')
+    .replace(
+      "talents: {}, boons: {}, passives: {}",
+      'talents: {"water.pressure":[owners.estimate]}, boons: {}, passives: {}',
+    );
+  expect(modifierContractViolations(sources)).toEqual([]);
+});
 it("rejects a new authored modifier without an implementation binding", () => {
   const sources = fixture();
   sources["src/game/content/talents/water.ts"] += 'export const added = {id: "water.future"};';

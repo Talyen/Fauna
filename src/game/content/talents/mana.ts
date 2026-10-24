@@ -1,10 +1,11 @@
+import { talentRule } from "../../rules/talents";
 export const MANA_TALENTS = [
   {
     id: "mana.wellspring",
     keyword: "mana",
     effect: "wellspring",
     name: "Wellspring",
-    text: "End your turn with unspent Mana to gain 1 extra Mana next turn",
+    text: `End your turn with unspent Mana to gain ${talentRule("mana.wellspring").amount} extra Mana next turn`,
     row: 0,
   },
   {
@@ -12,7 +13,7 @@ export const MANA_TALENTS = [
     keyword: "mana",
     effect: "dark-recovery",
     name: "Dark Recovery",
-    text: "End your turn with no Mana to gain 1 extra Mana next turn",
+    text: `End your turn with no Mana to gain ${talentRule("mana.dark-recovery").amount} extra Mana next turn`,
     row: 0,
   },
   {
@@ -28,7 +29,7 @@ export const MANA_TALENTS = [
     keyword: "mana",
     effect: "leyline-attunement",
     name: "Leyline Attunement",
-    text: "Gain 1 maximum Mana each battle",
+    text: `Gain ${talentRule("mana.leyline-attunement").amount} maximum Mana each battle`,
     row: 1,
   },
   {
@@ -36,7 +37,7 @@ export const MANA_TALENTS = [
     keyword: "mana",
     effect: "manaburn",
     name: "Manaburn",
-    text: "Burn damage is increased by 25% of your Mana",
+    text: `Burn damage is increased by ${talentRule("mana.manaburn").percent}% of your Mana`,
     row: 2,
   },
   {
@@ -44,7 +45,7 @@ export const MANA_TALENTS = [
     keyword: "mana",
     effect: "arcane-frost",
     name: "Arcane Frost",
-    text: "Freeze damage is increased by 25% of your Mana",
+    text: `Freeze damage is increased by ${talentRule("mana.arcane-frost").percent}% of your Mana`,
     row: 2,
   },
   {
@@ -60,7 +61,7 @@ export const MANA_TALENTS = [
     keyword: "mana",
     effect: "arcane-mending",
     name: "Arcane Mending",
-    text: "Each living deployed creature restores 1 Health per Mana gained",
+    text: `Each living deployed creature restores ${talentRule("mana.arcane-mending").amount} Health per Mana gained`,
     row: 3,
   },
 ] as const;

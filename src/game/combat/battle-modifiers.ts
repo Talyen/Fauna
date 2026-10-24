@@ -1,3 +1,4 @@
+import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { creaturePassive, hasTalent } from "../progression";
 import { draw, drawKeyword, expressDelivery } from "../card-zones";
@@ -5,7 +6,10 @@ import { grantArmor, grantStatus, grantBlock, restoreHealth, TURN_MANA, TURN_DRA
 import type { BattleState, Enemy, Creature, GameState, GameEvent } from "../types";
 
 export function battleMana(state: Pick<GameState, "talents">) {
-  return TURN_MANA + Number(hasTalent(state, "mana.leyline-attunement"));
+  return (
+    TURN_MANA +
+    Number(hasTalent(state, "mana.leyline-attunement")) * talentRule("mana.leyline-attunement").amount
+  );
 }
 export function enemyBattleStart(enemy: Enemy) {
   for (const effect of creaturePassive(undefined, enemy.species).effects) {
@@ -25,7 +29,8 @@ export function playerBattleStart(state: BattleState, events: GameEvent[]) {
   expressDelivery(state, events);
   if (hasTalent(state, "nature.ecosystem")) drawKeyword(state, "nature", events);
   for (const unit of state.team) {
-    if (hasTalent(state, "armor.bulwark")) grantArmor(state, unit, 2, events);
+    if (hasTalent(state, "armor.bulwark"))
+      grantArmor(state, unit, talentRule("armor.bulwark").amount, events);
     for (const effect of creaturePassive(state, unit.species).effects) {
       if (effect.kind !== "battleStart") continue;
       if (effect.effect === "block") grantBlock(state, unit, effect.amount, events);
@@ -34,11 +39,13 @@ export function playerBattleStart(state: BattleState, events: GameEvent[]) {
     }
     if (hasTalent(state, "mana.mana-bulwark")) grantBlock(state, unit, state.battle.maxMana, events);
     if (hasTalent(state, "mana.mana-shell")) grantArmor(state, unit, state.battle.maxMana, events);
-    if (hasTalent(state, "health.combat-surge")) restoreHealth(unit, 4, events, false, state);
+    if (hasTalent(state, "health.combat-surge"))
+      restoreHealth(unit, talentRule("health.combat-surge").amount, events, false, state);
   }
 }
 export function victoryRecovery(state: GameState, creature: Creature, events: GameEvent[]) {
-  if (hasTalent(state, "health.vitality")) restoreHealth(creature, 4, events, false, state);
+  if (hasTalent(state, "health.vitality"))
+    restoreHealth(creature, talentRule("health.vitality").amount, events, false, state);
 }
 export function victoryGoldBonus(state: Pick<GameState, "boons">) {
   return state.boons.includes("smugglers-map") ? boonRule("smugglers-map").gold : 0;
@@ -46,7 +53,7 @@ export function victoryGoldBonus(state: Pick<GameState, "boons">) {
 
 /** Captured before enemy actions, while the outgoing turn still owns its Mana. */
 export function renewalManaBonus(state: BattleState) {
-  return Number(
-    state.battle.mana > 0 ? hasTalent(state, "mana.wellspring") : hasTalent(state, "mana.dark-recovery"),
-  );
+  return state.battle.mana > 0
+    ? Number(hasTalent(state, "mana.wellspring")) * talentRule("mana.wellspring").amount
+    : Number(hasTalent(state, "mana.dark-recovery")) * talentRule("mana.dark-recovery").amount;
 }

@@ -1,3 +1,4 @@
+import { talentRule } from "../rules/talents";
 import { chance as succeeds } from "../chance";
 import { isEnemy, isRosterCreature, battlefield } from "../battlefield";
 import { hasTalent, creaturePassive } from "../progression";
@@ -81,7 +82,9 @@ export function loseHealth(state: GameState, unit: Combatant, amount: number, ev
   ) {
     if (!stats.deathDoorUsed) {
       stats.deathDoorUsed = true;
-      stats.grace = hasTalent(state, "health.will-to-live") ? 3 : 2;
+      stats.grace = hasTalent(state, "health.will-to-live")
+        ? 2 + talentRule("health.will-to-live").amount
+        : 2;
       events.push({
         kind: "status",
         targetId: unit.id,
@@ -111,9 +114,11 @@ export function ownDodgeChance(state: GameState, unit: Combatant): number {
       (stats?.dodge ?? 0) +
       (stats?.temporaryDodge ?? 0) +
       (allied
-        ? (stats?.rhythm ?? 0) +
-          Number(hasTalent(state, "dodge.lightfoot")) * 5 +
-          (hasTalent(state, "health.last-gasp") && unit.health < maximumHealth(unit) / 2 ? 10 : 0)
+        ? (stats?.[talentRule("dodge.finding-rhythm").state] ?? 0) +
+          Number(hasTalent(state, "dodge.lightfoot")) * talentRule("dodge.lightfoot").amount +
+          (hasTalent(state, "health.last-gasp") && unit.health < maximumHealth(unit) / 2
+            ? talentRule("health.last-gasp").percent
+            : 0)
         : 0),
   );
 }

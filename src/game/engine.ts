@@ -1,4 +1,4 @@
-import { afterPlayerCard } from "./combat/card-modifiers";
+import { afterPlayerCard, consumeCardGrants } from "./combat/card-modifiers";
 import { observeDecisions } from "./random";
 import { useFood } from "./combat/food";
 import { cardActor } from "./card-actors";
@@ -264,9 +264,7 @@ function resolve(
         battle.mana -= cardCost(card, draft);
         if (card.ownerId !== null) {
           if (actor.id !== card.ownerId) ensureCombat(actor).fallenCardsPlayedThisTurn++;
-          ensureCombat(actor).freeCard = false;
-          if (keywords.includes("nature")) ensureCombat(actor).freeNature = false;
-          if (keywords.includes("light")) ensureCombat(actor).freeLight = false;
+          consumeCardGrants(actor, keywords);
           if (keywords.includes("burn")) battle.freeBurnUsed = true;
         }
         battle.hand.splice(battle.hand.indexOf(card.id), 1);

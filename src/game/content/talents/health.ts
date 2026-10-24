@@ -1,10 +1,11 @@
+import { talentRule } from "../../rules/talents";
 export const HEALTH_TALENTS = [
   {
     id: "health.mending",
     keyword: "health",
     effect: "mending",
     name: "Mending",
-    text: "Receive 10% more healing during combat",
+    text: `Receive ${talentRule("health.mending").percent}% more healing during combat`,
     row: 0,
   },
   {
@@ -12,7 +13,7 @@ export const HEALTH_TALENTS = [
     keyword: "health",
     effect: "renewal",
     name: "Renewal",
-    text: "Cleansing a harmful status restores 2 Health",
+    text: `Cleansing a harmful status restores ${talentRule("health.renewal").amount} Health`,
     row: 0,
   },
   {
@@ -20,7 +21,7 @@ export const HEALTH_TALENTS = [
     keyword: "health",
     effect: "last-resort",
     name: "Last Resort",
-    text: "When your Health falls below 25%, cleanse all harmful status effects",
+    text: `When your Health falls below ${talentRule("health.last-resort").percent}%, cleanse all harmful status effects`,
     row: 1,
   },
   {
@@ -28,7 +29,7 @@ export const HEALTH_TALENTS = [
     keyword: "health",
     effect: "desperate-guard",
     name: "Desperate Guard",
-    text: "The first time your Health falls below half each combat, gain 6 Block",
+    text: `The first time your Health falls below half each combat, gain ${talentRule("health.desperate-guard").amount} Block`,
     row: 1,
   },
   {
@@ -36,7 +37,7 @@ export const HEALTH_TALENTS = [
     keyword: "health",
     effect: "will-to-live",
     name: "Will to Live",
-    text: "Death's Door lasts 1 turn longer",
+    text: `Death's Door lasts ${talentRule("health.will-to-live").amount} turn longer`,
     row: 2,
   },
   {
@@ -44,7 +45,7 @@ export const HEALTH_TALENTS = [
     keyword: "health",
     effect: "combat-surge",
     name: "Combat Surge",
-    text: "Restore 4 Health at the start of combat",
+    text: `Restore ${talentRule("health.combat-surge").amount} Health at the start of combat`,
     row: 2,
   },
   {
@@ -52,7 +53,7 @@ export const HEALTH_TALENTS = [
     keyword: "health",
     effect: "vitality",
     name: "Vitality",
-    text: "Restore 4 Health after every combat",
+    text: `Restore ${talentRule("health.vitality").amount} Health after every combat`,
     row: 3,
   },
   {
@@ -60,7 +61,7 @@ export const HEALTH_TALENTS = [
     keyword: "health",
     effect: "overflow",
     name: "Overflow",
-    text: "Gain 25% of excess healing from cards as Block",
+    text: `Gain ${talentRule("health.overflow").percent}% of excess healing from cards as Block`,
     row: 3,
   },
   {
@@ -68,7 +69,7 @@ export const HEALTH_TALENTS = [
     keyword: "health",
     effect: "last-gasp",
     name: "Last Gasp",
-    text: "While below half Health, gain 10% Dodge chance",
+    text: `While below half Health, gain ${talentRule("health.last-gasp").percent}% Dodge chance`,
     row: 4,
   },
   {

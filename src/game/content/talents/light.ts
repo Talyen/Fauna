@@ -1,10 +1,11 @@
+import { talentRule } from "../../rules/talents";
 export const LIGHT_TALENTS = [
   {
     id: "light.faith-barrier",
     keyword: "light",
     effect: "faith-barrier",
     name: "Faith Barrier",
-    text: "Light hits have a 10% chance to grant Block equal to enemy Health lost",
+    text: `Light hits have a ${talentRule("light.faith-barrier").percent}% chance to grant Block equal to enemy Health lost`,
     row: 0,
   },
   {
@@ -28,7 +29,7 @@ export const LIGHT_TALENTS = [
     keyword: "light",
     effect: "purge",
     name: "Searing Light",
-    text: "Light damage is increased by 10% against Burning enemies",
+    text: `Light damage is increased by ${talentRule("light.purge").percent}% against Burning enemies`,
     row: 1,
   },
   {
@@ -44,7 +45,7 @@ export const LIGHT_TALENTS = [
     keyword: "light",
     effect: "prosperity",
     name: "Prosperity",
-    text: "Light damage is increased by 1% of your Gold",
+    text: `Light damage is increased by ${talentRule("light.prosperity").percent}% of your Gold`,
     row: 2,
   },
   {
@@ -52,7 +53,7 @@ export const LIGHT_TALENTS = [
     keyword: "light",
     effect: "scorching-light",
     name: "Scorching Light",
-    text: "Light damage has a 10% chance to also deal Burn damage",
+    text: `Light damage has a ${talentRule("light.scorching-light").percent}% chance to also deal Burn damage`,
     row: 3,
   },
   {
@@ -60,7 +61,7 @@ export const LIGHT_TALENTS = [
     keyword: "light",
     effect: "tithe",
     name: "Tithe",
-    text: "Light damage has a 10% chance to grant Gold equal to enemy Health lost",
+    text: `Light damage has a ${talentRule("light.tithe").percent}% chance to grant Gold equal to enemy Health lost`,
     row: 3,
   },
   {
@@ -68,7 +69,7 @@ export const LIGHT_TALENTS = [
     keyword: "light",
     effect: "radiant-guard",
     name: "Radiant Guard",
-    text: "Gaining Block has a 10% chance to draw a Light card",
+    text: `Gaining Block has a ${talentRule("light.radiant-guard").percent}% chance to draw a Light card`,
     row: 4,
   },
 ] as const;

@@ -1,3 +1,4 @@
+import { talentRule } from "./rules/talents";
 import { cardActor } from "./card-actors";
 import { primaryAbilityValue } from "./combat/ability-values";
 import { definition, type CardDefinition, type PassiveTier } from "./content";
@@ -53,9 +54,9 @@ export function cardCost(
   const actor = card.ownerId === undefined ? undefined : cardActor(state, { ownerId: card.ownerId });
   const def = definition(card.definitionId);
   if (def.species === null) return def.cost;
-  if (actor?.combat?.freeCard) return 0;
-  const freeNature = actor?.combat?.freeNature;
-  const freeLight = actor?.combat?.freeLight;
+  if (actor?.combat?.[talentRule("stun.free-follow-up").state]) return 0;
+  const freeNature = actor?.combat?.[talentRule("nature.windstep").state];
+  const freeLight = actor?.combat?.[talentRule("light.divine-favor").state];
   const freeBurn = hasTalent(state, "burn.flashpoint") && !state.battle?.freeBurnUsed;
   if (freeNature || freeLight || freeBurn) {
     const keywords = cardKeywords(card);

@@ -1,10 +1,11 @@
+import { talentRule } from "../../rules/talents";
 export const BLEED_TALENTS = [
   {
     id: "bleed.first-blood",
     keyword: "bleed",
     effect: "first-blood",
     name: "First Blood",
-    text: "Deal 25% more Bleed damage against enemies that aren’t already Bleeding",
+    text: `Deal ${talentRule("bleed.first-blood").percent}% more Bleed damage against enemies that aren’t already Bleeding`,
     row: 0,
   },
   {
@@ -28,7 +29,7 @@ export const BLEED_TALENTS = [
     keyword: "bleed",
     effect: "sanguine",
     name: "Sanguine",
-    text: "Bleed hits have a 10% chance to Leech",
+    text: `Bleed hits have a ${talentRule("bleed.sanguine").percent}% chance to Leech`,
     row: 1,
   },
   {
@@ -44,7 +45,7 @@ export const BLEED_TALENTS = [
     keyword: "bleed",
     effect: "flay",
     name: "Flay",
-    text: "Bleed hits have a 20% chance to halve enemy Armor",
+    text: `Bleed hits have a ${talentRule("bleed.flay").percent}% chance to halve enemy Armor`,
     row: 2,
   },
   {
@@ -52,7 +53,7 @@ export const BLEED_TALENTS = [
     keyword: "bleed",
     effect: "bleeding-out",
     name: "Bleeding Out",
-    text: "Deal 25% more Bleed damage while below half Health",
+    text: `Deal ${talentRule("bleed.bleeding-out").percent}% more Bleed damage while below half Health`,
     row: 3,
   },
   {
@@ -60,7 +61,7 @@ export const BLEED_TALENTS = [
     keyword: "bleed",
     effect: "tainted-wound",
     name: "Tainted Wound",
-    text: "Bleed hits have a 10% chance to deal half their damage as Poison damage",
+    text: `Bleed hits have a ${talentRule("bleed.tainted-wound").percent}% chance to deal half their damage as Poison damage`,
     row: 3,
   },
   {
@@ -68,7 +69,7 @@ export const BLEED_TALENTS = [
     keyword: "bleed",
     effect: "septic-shock",
     name: "Septic Shock",
-    text: "Bleeding enemies take 10% more Poison damage",
+    text: `Bleeding enemies take ${talentRule("bleed.septic-shock").percent}% more Poison damage`,
     row: 4,
   },
   {
@@ -76,7 +77,7 @@ export const BLEED_TALENTS = [
     keyword: "bleed",
     effect: "bloodrush",
     name: "Bloodrush",
-    text: "Dealing Bleed damage has a 10% chance to draw a card",
+    text: `Dealing Bleed damage has a ${talentRule("bleed.bloodrush").percent}% chance to draw a card`,
     row: 4,
   },
 ] as const;

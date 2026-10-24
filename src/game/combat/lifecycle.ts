@@ -1,3 +1,4 @@
+import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { chance as succeeds } from "../chance";
 import { isEnemy, battlefield } from "../battlefield";
@@ -85,11 +86,18 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
             : Math.round(amount / 2)
           : Math.max(0, amount - Math.max(1, Math.round(amount * 0.2)));
     if (isEnemy(unit) && !isEnemy(source)) {
-      if (status === "burn" && hasTalent(state, "burn.smoldering") && succeeds(state, 0.1, false, events))
+      if (
+        status === "burn" &&
+        hasTalent(state, "burn.smoldering") &&
+        succeeds(state, talentRule("burn.smoldering").percent / 100, false, events)
+      )
         next = amount;
       if (status === "poison") {
         if (stats.controlled === "freeze" && hasTalent(state, "freeze.cryo-preservation")) next = amount;
-        if (hasTalent(state, "poison.virulent") && succeeds(state, 0.1, false, events))
+        if (
+          hasTalent(state, "poison.virulent") &&
+          succeeds(state, talentRule("poison.virulent").percent / 100, false, events)
+        )
           next = Math.min(STACK_LIMIT, amount + 1);
       }
     }

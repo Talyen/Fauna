@@ -1,10 +1,11 @@
+import { talentRule } from "../../rules/talents";
 export const FREEZE_TALENTS = [
   {
     id: "freeze.bitter-cold",
     keyword: "freeze",
     effect: "bitter-cold",
     name: "Bitter Cold",
-    text: "Reduce enemy Freeze thresholds by 10 percentage points",
+    text: `Reduce enemy Freeze thresholds by ${talentRule("freeze.bitter-cold").percent} percentage points`,
     row: 0,
   },
   {
@@ -12,7 +13,7 @@ export const FREEZE_TALENTS = [
     keyword: "freeze",
     effect: "glacial-barrier",
     name: "Glacial Barrier",
-    text: "Gain 3 Block when you Freeze an enemy",
+    text: `Gain ${talentRule("freeze.glacial-barrier").amount} Block when you Freeze an enemy`,
     row: 0,
   },
   {
@@ -20,7 +21,7 @@ export const FREEZE_TALENTS = [
     keyword: "freeze",
     effect: "brittle-ice",
     name: "Brittle Ice",
-    text: "Frozen enemies take 1 additional damage",
+    text: `Frozen enemies take ${talentRule("freeze.brittle-ice").amount} additional damage`,
     row: 1,
   },
   {
@@ -28,7 +29,7 @@ export const FREEZE_TALENTS = [
     keyword: "freeze",
     effect: "winter-s-grasp",
     name: "Winter's Grasp",
-    text: "Freeze cards have a 10% chance to play twice",
+    text: `Freeze cards have a ${talentRule("freeze.winter-s-grasp").percent}% chance to play twice`,
     row: 1,
   },
   {

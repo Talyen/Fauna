@@ -1,3 +1,4 @@
+import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { chance as succeeds } from "../chance";
 import { isEnemy } from "../battlefield";
@@ -37,28 +38,32 @@ export function* dodgeResponse({ state, source, target, events }: HitContext): R
     text: `${unitName(target)} Dodges.`,
   });
   if (alliedTarget && hasTalent(state, "dodge.catch-breath"))
-    yield* reaction("restoreHealth", target, 1, events, false, state);
+    yield* reaction("restoreHealth", target, talentRule("dodge.catch-breath").amount, events, false, state);
   if (alliedTarget) {
-    stats.rhythm = 0;
+    stats[talentRule("dodge.finding-rhythm").state] = 0;
     if (hasTalent(state, "dodge.thornstep"))
-      yield* reaction("grantStatus", target, "thorns", 1, events, state);
+      yield* reaction("grantStatus", target, "thorns", talentRule("dodge.thornstep").amount, events, state);
     if (hasTalent(state, "dodge.clean-getaway")) {
-      for (const status of ["burn", "poison", "bleed"] as const) reducePeriodicStacks(stats, status, 1);
+      for (const status of ["burn", "poison", "bleed"] as const)
+        reducePeriodicStacks(stats, status, talentRule("dodge.clean-getaway").amount);
     }
-    if (hasTalent(state, "dodge.open-flank")) stats.nextPhysical = 2;
+    if (hasTalent(state, "dodge.open-flank")) stats.nextPhysical = talentRule("dodge.open-flank").amount;
     if (hasTalent(state, "dodge.unburdened")) {
       yield* reaction("removeControlBuildup", state, target, "stun", events);
       yield* reaction("removeControlBuildup", state, target, "freeze", events);
     }
     if (hasTalent(state, "dodge.tailwind")) draw(state, 1, events);
     if (hasTalent(state, "dodge.perfect-timing") && stats.armor === 0)
-      yield* reaction("grantArmor", state, target, 2, events);
-    if (hasTalent(state, "block.footwork")) yield* reaction("grantBlock", state, target, 2, events);
-    if (hasTalent(state, "bleed.parting-cut")) stats.partingCut = true;
-    if (hasTalent(state, "physical.riposte")) stats.riposte = true;
-    if (hasTalent(state, "nature.windstep")) stats.freeNature = true;
+      yield* reaction("grantArmor", state, target, talentRule("dodge.perfect-timing").amount, events);
+    if (hasTalent(state, "block.footwork"))
+      yield* reaction("grantBlock", state, target, talentRule("block.footwork").amount, events);
+    if (hasTalent(state, "bleed.parting-cut")) stats[talentRule("bleed.parting-cut").state] = true;
+    if (hasTalent(state, "physical.riposte")) stats[talentRule("physical.riposte").state] = true;
+    if (hasTalent(state, "nature.windstep")) stats[talentRule("nature.windstep").state] = true;
     if (hasTalent(state, "burn.smoke-screen") && ensureCombat(source).burn > 0)
-      yield* reaction("hit", state, target, source, 2, "burn", events, { origin: "proc" });
+      yield* reaction("hit", state, target, source, talentRule("burn.smoke-screen").amount, "burn", events, {
+        origin: "proc",
+      });
   }
   const cinderstep = creaturePassive(alliedTarget ? state : undefined, target.species).effects.reduce(
     (sum, effect) => sum + (effect.kind === "dodgeBurn" ? effect.amount : 0),
@@ -77,12 +82,21 @@ export function* blockDepletionRewards(
 ): Resolution<void> {
   const alliedTarget = !isEnemy(target);
   if (alliedTarget && depletedBlock && attack && hasTalent(state, "block.sun-struck-shield"))
-    yield* reaction("hit", state, target, source, Math.round(blockSpent * 0.3), "light", events, {
-      origin: "derived",
-    });
+    yield* reaction(
+      "hit",
+      state,
+      target,
+      source,
+      Math.round(blockSpent * (talentRule("block.sun-struck-shield").percent / 100)),
+      "light",
+      events,
+      {
+        origin: "derived",
+      },
+    );
   // Depletion rewards use the original block payment, not any newly granted Block.
   if (alliedTarget && depletedBlock && hasTalent(state, "block.second-wind"))
-    yield* reaction("restoreHealth", target, 2, events, false, state);
+    yield* reaction("restoreHealth", target, talentRule("block.second-wind").amount, events, false, state);
 }
 export function publishHit(
   { source, target, type, events }: HitContext,
@@ -126,7 +140,7 @@ export function* damageRewards(
     stats.poison > 0 &&
     hasTalent(state, "poison.toxic-profit")
   )
-    gainGold(state, 3, events);
+    gainGold(state, talentRule("poison.toxic-profit").amount, events);
   if (target.health === 0 && !alliedTarget && alliedSource && state.boons.includes("bone-charm"))
     yield* reaction("restoreHealth", source, boonRule("bone-charm").healing, events, false, state);
   if (alliedSource && !alliedTarget && lost > 0 && (source.health > 0 || policy.deadSource)) {
@@ -144,7 +158,7 @@ export function* damageRewards(
       source.health > 0 &&
       type === "poison" &&
       hasTalent(state, "leech.virulent-leech") &&
-      succeeds(state, 0.1, false, events)
+      succeeds(state, talentRule("leech.virulent-leech").percent / 100, false, events)
     )
       yield* reaction("leechHealth", state, source, lost, events, true);
     if (
@@ -173,13 +187,27 @@ export function* waterFollowups(
   { state, source, events }: HitContext,
   erode: (amount: number) => void,
 ): Resolution<void> {
-  if (hasTalent(state, "water.seafoam")) yield* reaction("grantBlock", state, source, 2, events);
+  if (hasTalent(state, "water.seafoam"))
+    yield* reaction("grantBlock", state, source, talentRule("water.seafoam").amount, events);
   if (hasTalent(state, "water.erosion")) {
-    erode(2);
+    erode(talentRule("water.erosion").amount);
   }
-  if (hasTalent(state, "water.cleansing-current") && succeeds(state, 0.2, false, events))
-    yield* reaction("removeEffects", source, "cleanse", 1, events, state);
-  if (hasTalent(state, "water.riptide") && succeeds(state, 0.2, false, events))
+  if (
+    hasTalent(state, "water.cleansing-current") &&
+    succeeds(state, talentRule("water.cleansing-current").percent / 100, false, events)
+  )
+    yield* reaction(
+      "removeEffects",
+      source,
+      "cleanse",
+      talentRule("water.cleansing-current").amount,
+      events,
+      state,
+    );
+  if (
+    hasTalent(state, "water.riptide") &&
+    succeeds(state, talentRule("water.riptide").percent / 100, false, events)
+  )
     drawKeyword(state, "water", events);
 }
 export function* attackProcs(
@@ -202,13 +230,17 @@ export function* attackProcs(
 ): Resolution<void> {
   const stats = ensureCombat(target);
   if (source.health > 0) {
-    if (type === "nature" && hasTalent(state, "nature.bramblegrowth") && succeeds(state, 0.1, false, events))
+    if (
+      type === "nature" &&
+      hasTalent(state, "nature.bramblegrowth") &&
+      succeeds(state, talentRule("nature.bramblegrowth").percent / 100, false, events)
+    )
       yield* reaction("grantStatus", source, "thorns", damage, events, state);
     if (
       type === "light" &&
       lost > 0 &&
       hasTalent(state, "light.faith-barrier") &&
-      succeeds(state, 0.1, false, events)
+      succeeds(state, talentRule("light.faith-barrier").percent / 100, false, events)
     )
       yield* reaction("grantBlock", state, source, lost, events);
   }
@@ -217,11 +249,12 @@ export function* attackProcs(
       source.health > 0 && hasTalent(state, id) && succeeds(state, chance, false, events);
 
     if (type === "physical") {
-      if (proc("physical.heavy-blows", 0.1))
+      if (proc("physical.heavy-blows", talentRule("physical.heavy-blows").percent / 100))
         yield* reaction("hit", state, source, target, damage, "stun", events, { origin: "proc" });
-      if (proc("physical.lacerate", 0.1))
+      if (proc("physical.lacerate", talentRule("physical.lacerate").percent / 100))
         yield* reaction("hit", state, source, target, damage, "bleed", events, { origin: "proc" });
-      if (proc("armor.iron-guard", 0.1)) yield* reaction("grantArmor", state, source, damage, events);
+      if (proc("armor.iron-guard", talentRule("armor.iron-guard").percent / 100))
+        yield* reaction("grantArmor", state, source, damage, events);
       if (partingCut && source.health > 0)
         yield* reaction("hit", state, source, target, Math.round(damage / 2), "bleed", events, {
           origin: "proc",
@@ -230,41 +263,44 @@ export function* attackProcs(
         yield* detonateBleed(state, source, target, events);
     }
     if (type === "nature") {
-      if (proc("nature.thornskin", 0.1)) yield* reaction("grantArmor", state, source, damage, events);
-      if (proc("nature.photosynthesis", 0.1))
+      if (proc("nature.thornskin", talentRule("nature.thornskin").percent / 100))
+        yield* reaction("grantArmor", state, source, damage, events);
+      if (proc("nature.photosynthesis", talentRule("nature.photosynthesis").percent / 100))
         yield* reaction("restoreHealth", source, damage, events, false, state);
-      if (proc("nature.briar-patch", 0.1))
+      if (proc("nature.briar-patch", talentRule("nature.briar-patch").percent / 100))
         yield* reaction("hit", state, source, target, damage, "bleed", events, { origin: "proc" });
-      if (proc("nature.toxic-pollen", 0.1))
+      if (proc("nature.toxic-pollen", talentRule("nature.toxic-pollen").percent / 100))
         yield* reaction("hit", state, source, target, damage, "poison", events, { origin: "proc" });
-      if (proc("nature.entangle", 0.1))
+      if (proc("nature.entangle", talentRule("nature.entangle").percent / 100))
         yield* reaction("hit", state, source, target, damage, "stun", events, { origin: "proc" });
     }
-    if (type === "burn" && proc("burn.heat-exhaustion", 0.1))
+    if (type === "burn" && proc("burn.heat-exhaustion", talentRule("burn.heat-exhaustion").percent / 100))
       yield* reaction("hit", state, source, target, damage, "stun", events, { origin: "proc" });
     if (type === "poison") {
-      if (proc("poison.hemotoxin", 0.1))
+      if (proc("poison.hemotoxin", talentRule("poison.hemotoxin").percent / 100))
         yield* reaction("hit", state, source, target, damage, "bleed", events, { origin: "proc" });
-      if (proc("poison.paralytic-venom", 0.1))
+      if (proc("poison.paralytic-venom", talentRule("poison.paralytic-venom").percent / 100))
         yield* reaction("hit", state, source, target, damage, "stun", events, { origin: "proc" });
     }
     if (type === "bleed") {
-      if (proc("bleed.flay", 0.2)) erode(stats.armor - Math.round(stats.armor / 2));
-      if (proc("bleed.tainted-wound", 0.1))
+      if (proc("bleed.flay", talentRule("bleed.flay").percent / 100))
+        erode(stats.armor - Math.round(stats.armor / 2));
+      if (proc("bleed.tainted-wound", talentRule("bleed.tainted-wound").percent / 100))
         yield* reaction("hit", state, source, target, Math.round(damage / 2), "poison", events, {
           origin: "proc",
         });
-      if (proc("bleed.bloodrush", 0.1)) draw(state, 1, events);
+      if (proc("bleed.bloodrush", talentRule("bleed.bloodrush").percent / 100)) draw(state, 1, events);
     }
     if (type === "light") {
-      if (proc("light.scorching-light", 0.1))
+      if (proc("light.scorching-light", talentRule("light.scorching-light").percent / 100))
         yield* reaction("hit", state, source, target, damage, "burn", events, { origin: "proc" });
-      if (lost > 0 && proc("light.tithe", 0.1)) gainGold(state, lost, events);
+      if (lost > 0 && proc("light.tithe", talentRule("light.tithe").percent / 100))
+        gainGold(state, lost, events);
     }
     const chanceLeech =
-      (type === "bleed" && proc("bleed.sanguine", 0.1)) ||
-      (type === "poison" && proc("leech.virulent-leech", 0.1)) ||
-      (type === "nature" && proc("nature.verdant-cycle", 0.1));
+      (type === "bleed" && proc("bleed.sanguine", talentRule("bleed.sanguine").percent / 100)) ||
+      (type === "poison" && proc("leech.virulent-leech", talentRule("leech.virulent-leech").percent / 100)) ||
+      (type === "nature" && proc("nature.verdant-cycle", talentRule("nature.verdant-cycle").percent / 100));
     if (chanceLeech && type === "bleed" && !leech) {
       if (!suppressed) deferLeech(stats, source.id, Math.max(0, stats.bleed - bleedBefore));
     } else if (chanceLeech && !leech && !blessedLeech)

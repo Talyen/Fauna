@@ -1,10 +1,11 @@
+import { talentRule } from "../../rules/talents";
 export const ARMOR_TALENTS = [
   {
     id: "armor.bulwark",
     keyword: "armor",
     effect: "bulwark",
     name: "Bulwark",
-    text: "Start each battle with 2 Armor",
+    text: `Start each battle with ${talentRule("armor.bulwark").amount} Armor`,
     row: 0,
   },
   {
@@ -12,7 +13,7 @@ export const ARMOR_TALENTS = [
     keyword: "armor",
     effect: "reactive-guard",
     name: "Reactive Guard",
-    text: "Gain 3 Block when your Armor breaks",
+    text: `Gain ${talentRule("armor.reactive-guard").amount} Block when your Armor breaks`,
     row: 0,
   },
   {
@@ -20,7 +21,7 @@ export const ARMOR_TALENTS = [
     keyword: "armor",
     effect: "last-stand",
     name: "Last Stand",
-    text: "Gain 25% more Armor while below half Health",
+    text: `Gain ${talentRule("armor.last-stand").percent}% more Armor while below half Health`,
     row: 1,
   },
   {
@@ -28,7 +29,7 @@ export const ARMOR_TALENTS = [
     keyword: "armor",
     effect: "armored-surge",
     name: "Armored Surge",
-    text: "Playing a Block card has a 10% chance to grant 6 Armor",
+    text: `Playing a Block card has a ${talentRule("armor.armored-surge").percent}% chance to grant ${talentRule("armor.armored-surge").amount} Armor`,
     row: 1,
   },
   {
@@ -52,7 +53,7 @@ export const ARMOR_TALENTS = [
     keyword: "armor",
     effect: "iron-guard",
     name: "Iron Guard",
-    text: "Dealing Physical damage has a 10% chance to also grant that amount of Armor",
+    text: `Dealing Physical damage has a ${talentRule("armor.iron-guard").percent}% chance to also grant that amount of Armor`,
     row: 3,
   },
   {
@@ -60,7 +61,7 @@ export const ARMOR_TALENTS = [
     keyword: "armor",
     effect: "steadfast",
     name: "Steadfast",
-    text: "When your Health falls below half, gain 3 Armor",
+    text: `When your Health falls below half, gain ${talentRule("armor.steadfast").amount} Armor`,
     row: 3,
   },
   {
@@ -68,7 +69,7 @@ export const ARMOR_TALENTS = [
     keyword: "armor",
     effect: "purification",
     name: "Purification",
-    text: "Gaining Armor has a 10% chance to Cleanse a harmful status effect",
+    text: `Gaining Armor has a ${talentRule("armor.purification").percent}% chance to Cleanse a harmful status effect`,
     row: 4,
   },
   {
@@ -76,7 +77,7 @@ export const ARMOR_TALENTS = [
     keyword: "armor",
     effect: "reinforced",
     name: "Reinforced",
-    text: "10% chance to double Armor gained",
+    text: `${talentRule("armor.reinforced").percent}% chance to double Armor gained`,
     row: 4,
   },
 ] as const;

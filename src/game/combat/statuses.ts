@@ -1,3 +1,4 @@
+import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { chance as succeeds } from "../chance";
 import { isEnemy, battlefield } from "../battlefield";
@@ -69,7 +70,7 @@ export function* triggerArmorBreak(
   if (state.phase !== "battle" || unit.health <= 0 || !state.battle) return;
   const allied = !isEnemy(unit);
   if (allied && hasTalent(state, "armor.reactive-guard"))
-    yield* reaction("grantBlock", state, unit, 3, events);
+    yield* reaction("grantBlock", state, unit, talentRule("armor.reactive-guard").amount, events);
   const row = battlefield(state, allied ? "player" : "enemy");
   if (!row.some((deployed) => deployed.id === unit.id)) return;
   const amount = creaturePassive(allied ? state : undefined, unit.species).effects.reduce(
@@ -204,9 +205,9 @@ export function* cleanseRewards(
 ): Resolution<void> {
   const stats = ensureCombat(unit);
   if (!isEnemy(unit)) {
-    if (hasTalent(state, "light.divine-favor")) stats.freeLight = true;
+    if (hasTalent(state, "light.divine-favor")) stats[talentRule("light.divine-favor").state] = true;
     const healing =
-      Number(hasTalent(state, "health.renewal")) * 2 +
+      Number(hasTalent(state, "health.renewal")) * talentRule("health.renewal").amount +
       (state.boons.includes("sin-eaters-lantern") ? boonRule("sin-eaters-lantern").healing : 0);
     if (healing) yield* reaction("restoreHealth", unit, healing * cleansed, events, false, state);
   }
@@ -367,12 +368,16 @@ export function* applyHarmfulStatus(
       (alliedSource &&
       ((type === "freeze" && hasTalent(state, "freeze.bitter-cold")) ||
         (type === "stun" && hasTalent(state, "stun.concussive-force")))
-        ? 0.4
+        ? 0.5 -
+          (type === "freeze"
+            ? talentRule("freeze.bitter-cold").percent
+            : talentRule("stun.concussive-force").percent) /
+            100
         : 0.5);
     if (stats[type] >= threshold) {
       const turns =
         type === "stun" && alliedSource && hasTalent(state, "stun.extended-stun")
-          ? 2
+          ? 1 + talentRule("stun.extended-stun").amount
           : type === "freeze" && alliedSource && !alliedTarget && state.boons.includes("frozen-pocketwatch")
             ? 1 + boonRule("frozen-pocketwatch").turns
             : 1;
@@ -384,14 +389,15 @@ export function* applyHarmfulStatus(
           const { depletion } = removeArmor(target, stats.armor);
           if (depletion) depletions.push(depletion);
         }
-        if (type === "stun" && hasTalent(state, "stun.free-follow-up")) ensureCombat(source).freeCard = true;
+        if (type === "stun" && hasTalent(state, "stun.free-follow-up"))
+          ensureCombat(source)[talentRule("stun.free-follow-up").state] = true;
         if (type === "stun" && hasTalent(state, "stun.stun-insight")) draw(state, 1, events);
         if (type === "stun" && hasTalent(state, "stun.stun-surge") && state.battle?.mana === 0)
-          yield* reaction("gainMana", state, 1, events);
+          yield* reaction("gainMana", state, talentRule("stun.stun-surge").amount, events);
         if (type === "freeze" && hasTalent(state, "freeze.glacial-barrier"))
-          yield* reaction("grantBlock", state, source, 3, events);
+          yield* reaction("grantBlock", state, source, talentRule("freeze.glacial-barrier").amount, events);
         if (type === "stun" && hasTalent(state, "stun.guarded-counter") && source.block === 0)
-          yield* reaction("grantBlock", state, source, 4, events);
+          yield* reaction("grantBlock", state, source, talentRule("stun.guarded-counter").amount, events);
         if (type === "stun" && hasTalent(state, "stun.shatter-guard")) {
           const { depletion } = removeArmor(target, stats.armor);
           if (depletion) depletions.push(depletion);

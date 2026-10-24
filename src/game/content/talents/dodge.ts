@@ -1,10 +1,11 @@
+import { talentRule } from "../../rules/talents";
 export const DODGE_TALENTS = [
   {
     id: "dodge.lightfoot",
     keyword: "dodge",
     effect: "lightfoot",
     name: "Lightfoot",
-    text: "Gain 5% Dodge chance",
+    text: `Gain ${talentRule("dodge.lightfoot").amount}% Dodge chance`,
     row: 0,
   },
   {
@@ -12,7 +13,7 @@ export const DODGE_TALENTS = [
     keyword: "dodge",
     effect: "catch-breath",
     name: "Catch Breath",
-    text: "Restore 1 Health when you Dodge",
+    text: `Restore ${talentRule("dodge.catch-breath").amount} Health when you Dodge`,
     row: 0,
   },
   {
@@ -20,7 +21,7 @@ export const DODGE_TALENTS = [
     keyword: "dodge",
     effect: "thornstep",
     name: "Thornstep",
-    text: "Gain 1 Thorns when you Dodge",
+    text: `Gain ${talentRule("dodge.thornstep").amount} Thorns when you Dodge`,
     row: 1,
   },
   {
@@ -28,7 +29,7 @@ export const DODGE_TALENTS = [
     keyword: "dodge",
     effect: "clean-getaway",
     name: "Clean Getaway",
-    text: "When you Dodge, remove 1 stack each of Burn, Poison, and Bleed from yourself",
+    text: `When you Dodge, remove ${talentRule("dodge.clean-getaway").amount} stack each of Burn, Poison, and Bleed from yourself`,
     row: 1,
   },
   {
@@ -36,7 +37,7 @@ export const DODGE_TALENTS = [
     keyword: "dodge",
     effect: "open-flank",
     name: "Open Flank",
-    text: "When you Dodge, your next attack deals 2 additional Physical damage",
+    text: `When you Dodge, your next attack deals ${talentRule("dodge.open-flank").amount} additional Physical damage`,
     row: 2,
   },
   {
@@ -60,7 +61,7 @@ export const DODGE_TALENTS = [
     keyword: "dodge",
     effect: "finding-rhythm",
     name: "Finding Rhythm",
-    text: "Taking damage increases your Dodge chance by 5%, resetting when you Dodge",
+    text: `Taking damage increases your Dodge chance by ${talentRule("dodge.finding-rhythm").amount}%, resetting when you Dodge`,
     row: 3,
   },
   {
@@ -68,7 +69,7 @@ export const DODGE_TALENTS = [
     keyword: "dodge",
     effect: "perfect-timing",
     name: "Perfect Timing",
-    text: "When you Dodge without Armor, gain 2 Armor",
+    text: `When you Dodge without Armor, gain ${talentRule("dodge.perfect-timing").amount} Armor`,
     row: 4,
   },
 ] as const;

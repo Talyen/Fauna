@@ -1,3 +1,4 @@
+import { talentRule } from "../rules/talents";
 import { isEnemy, battlefield } from "../battlefield";
 import { hasTalent, creaturePassive } from "../progression";
 import { physicalBonus } from "../ability-rules";
@@ -23,16 +24,20 @@ export function modifiedDamage(
   let damage = value;
   if (attack && alliedSource) {
     if (type === "water") {
-      if (hasTalent(state, "water.pressure")) damage += 1;
-      if (source.block > 0 && hasTalent(state, "water.high-tide")) damage *= 1.25;
+      if (hasTalent(state, "water.pressure")) damage += talentRule("water.pressure").amount;
+      if (source.block > 0 && hasTalent(state, "water.high-tide"))
+        damage *= 1 + talentRule("water.high-tide").percent / 100;
     }
     if (type === "physical") damage += physicalBonus(source, state);
-    if (type === "physical" && hasTalent(state, "block.weighted-guard")) damage += source.block * 0.1;
-    if (type === "light" && hasTalent(state, "block.sacred-shield")) damage += source.block * 0.1;
-    if (type === "stun" && hasTalent(state, "block.impact-guard")) damage += source.block * 0.1;
+    if (type === "physical" && hasTalent(state, "block.weighted-guard"))
+      damage += source.block * (talentRule("block.weighted-guard").percent / 100);
+    if (type === "light" && hasTalent(state, "block.sacred-shield"))
+      damage += source.block * (talentRule("block.sacred-shield").percent / 100);
+    if (type === "stun" && hasTalent(state, "block.impact-guard"))
+      damage += source.block * (talentRule("block.impact-guard").percent / 100);
     if (
       type === "physical" &&
-      target.health < maximumHealth(target) / 4 &&
+      target.health < maximumHealth(target) / (100 / talentRule("physical.finish-him").percent) &&
       hasTalent(state, "physical.finish-him")
     )
       damage *= 2;
@@ -47,15 +52,19 @@ export function modifiedDamage(
       source.health < maximumHealth(source) / 2 &&
       hasTalent(state, "bleed.bleeding-out")
     )
-      damage *= 1.25;
-    if (type === "burn" && hasTalent(state, "mana.manaburn")) damage += (state.battle?.mana ?? 0) * 0.25;
+      damage *= 1 + talentRule("bleed.bleeding-out").percent / 100;
+    if (type === "burn" && hasTalent(state, "mana.manaburn"))
+      damage += (state.battle?.mana ?? 0) * (talentRule("mana.manaburn").percent / 100);
     if (type === "freeze" && hasTalent(state, "mana.arcane-frost"))
-      damage += (state.battle?.mana ?? 0) * 0.25;
-    if (type === "light" && hasTalent(state, "light.prosperity")) damage += state.currency * 0.01;
-    if (type === "light" && stats.burn > 0 && hasTalent(state, "light.purge")) damage *= 1.1;
+      damage += (state.battle?.mana ?? 0) * (talentRule("mana.arcane-frost").percent / 100);
+    if (type === "light" && hasTalent(state, "light.prosperity"))
+      damage += state.currency * (talentRule("light.prosperity").percent / 100);
+    if (type === "light" && stats.burn > 0 && hasTalent(state, "light.purge"))
+      damage *= 1 + talentRule("light.purge").percent / 100;
     if (cardLeech && target.health < maximumHealth(target) / 2 && hasTalent(state, "leech.cull-the-weak"))
-      damage *= 1.25;
-    if (type === "bleed" && stats.bleed === 0 && hasTalent(state, "bleed.first-blood")) damage *= 1.25;
+      damage *= 1 + talentRule("leech.cull-the-weak").percent / 100;
+    if (type === "bleed" && stats.bleed === 0 && hasTalent(state, "bleed.first-blood"))
+      damage *= 1 + talentRule("bleed.first-blood").percent / 100;
   }
   if (
     alliedSource &&
@@ -63,10 +72,13 @@ export function modifiedDamage(
     options.origin !== "retaliation" &&
     options.origin !== "statusRetaliation"
   ) {
-    if (stats.poison > 0 && hasTalent(state, "poison.corrosive")) damage++;
-    if (stats.controlled === "freeze" && hasTalent(state, "freeze.brittle-ice")) damage++;
+    if (stats.poison > 0 && hasTalent(state, "poison.corrosive"))
+      damage += talentRule("poison.corrosive").amount;
+    if (stats.controlled === "freeze" && hasTalent(state, "freeze.brittle-ice"))
+      damage += talentRule("freeze.brittle-ice").amount;
     if (stats.controlled === "stun" && hasTalent(state, "stun.exploit-weakness")) damage *= 2;
-    if (type === "poison" && stats.bleed > 0 && hasTalent(state, "bleed.septic-shock")) damage *= 1.1;
+    if (type === "poison" && stats.bleed > 0 && hasTalent(state, "bleed.septic-shock"))
+      damage *= 1 + talentRule("bleed.septic-shock").percent / 100;
   }
   if (alliedTarget) {
     if (

@@ -55,6 +55,8 @@ Rule modules import only other rule modules, Immer and types. Description labels
 
 [Battle modifiers](../src/game/combat/battle-modifiers.ts) own battle-start grants, victory recovery and Mana rules. [Card modifiers](../src/game/combat/card-modifiers.ts) own accepted-card counter reactions; [ability modifiers](../src/game/combat/ability-modifiers.ts) own pre-ability grants and repeat decisions. Damage, status, protection, turn and card-zone owners retain their existing specialized implementations. All run at their existing synchronous insertion points, with live liveness checks, numeric expression order and RNG order preserved. The binding catalog contains only immutable data and type-only implementation references; content validation never imports mutation handlers. Execution and presentation cannot import the catalog.
 
+The pure [Talent parameter owner](../src/game/rules/talents.ts) supplies explicit numeric copy and executable values, alongside the existing [Boon rules](../src/game/rules/boons.ts). Whole `percent` values become chances or ratios by dividing by 100. Named saved-flag keys connect producers to later consumers without making consumption conditional on a Talent still being selected. Finding Rhythm binds damage accumulation and Dodge reset in `modifierImplementations`, and its chance read in `modifierQueries`. Free-card grants similarly bind their producer, `cardCost` query and accepted-play consumption; generic combat initialization remains the lifetime reset owner. These bindings add no saved fields or runtime dispatcher.
+
 ### Combat execution
 
 The ability executor owns repeats, targets, primary effects and extras inside the engine's Immer draft. Typed catalogs require complete pure policies and mutation handlers for each effect. The engine retains validation, Mana, zones, accepted-play counters, XP and scheduling; application publication and saving remain outside gameplay.
@@ -66,6 +68,8 @@ Armor depletion records a once-delivered receipt at each positive-to-zero transi
 Enemy targeting is policy over the shared executor. The pure [battle policy](../src/application/battle-policy.ts) is shared by player Auto-play and headless heuristics; it reads only visible state, uses stable identity tie breaks and consumes no gameplay RNG. Its [benefit assessment](../src/application/battle-benefits.ts) consumes [legal play candidates](../src/game/play-queries.ts) and retains explicit ordinary-hit approximations; ranking weights and tie breaks remain in the policy. Rankings expose reasons for automation journals rather than claiming complete forecasts. Ordinary enemies select supported abilities without immediate repeats; adaptation omits player-only hand/Mana extras and unsupported resource-only abilities, retaining healing in draw-plus-heal cards. Legendary enemies own their deck/Mana rules. Enemy selection occurs at the action window, never inspection. Scaling and player-only exceptions belong to [journey rules](EXPEDITION_DESIGN.md#encounters) and [Keywords](KEYWORDS.md).
 
 The [modifier ownership assessment](MODIFIER_RULES_PLAN.md) retains the original proposal. The [implementation evidence](task-evidence/2026-10-23-modifier-contracts.md) records the local implementation, unchanged behavior comparisons, protected integration and pending hosted checks.
+
+The [follow-through record](task-evidence/2026-10-23-modifier-followthrough.md) records the reconciled Talent parameters, deferred-effect bindings and their verification scope.
 
 ## Save contract
 

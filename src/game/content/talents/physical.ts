@@ -1,3 +1,4 @@
+import { talentRule } from "../../rules/talents";
 export const PHYSICAL_TALENTS = [
   {
     id: "physical.shield-slam",
@@ -20,7 +21,7 @@ export const PHYSICAL_TALENTS = [
     keyword: "physical",
     effect: "heavy-blows",
     name: "Heavy Blows",
-    text: "Physical damage has a 10% chance to also Stun",
+    text: `Physical damage has a ${talentRule("physical.heavy-blows").percent}% chance to also Stun`,
     row: 1,
   },
   {
@@ -28,7 +29,7 @@ export const PHYSICAL_TALENTS = [
     keyword: "physical",
     effect: "finish-him",
     name: "Finishing Blow",
-    text: "Physical damage is doubled against enemies below 25% Health",
+    text: `Physical damage is doubled against enemies below ${talentRule("physical.finish-him").percent}% Health`,
     row: 1,
   },
   {
@@ -36,7 +37,7 @@ export const PHYSICAL_TALENTS = [
     keyword: "physical",
     effect: "lacerate",
     name: "Lacerate",
-    text: "Physical damage has a 10% chance to Bleed",
+    text: `Physical damage has a ${talentRule("physical.lacerate").percent}% chance to Bleed`,
     row: 2,
   },
   {

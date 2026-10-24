@@ -1,10 +1,11 @@
+import { talentRule } from "../../rules/talents";
 export const NATURE_TALENTS = [
   {
     id: "nature.bramblegrowth",
     keyword: "nature",
     effect: "bramblegrowth",
     name: "Bramblegrowth",
-    text: "Nature hits have a 10% chance to grant Thorns equal to damage dealt",
+    text: `Nature hits have a ${talentRule("nature.bramblegrowth").percent}% chance to grant Thorns equal to damage dealt`,
     row: 0,
   },
   {
@@ -20,7 +21,7 @@ export const NATURE_TALENTS = [
     keyword: "nature",
     effect: "overgrowth",
     name: "Overgrowth",
-    text: "Nature cards have a 10% chance to play twice",
+    text: `Nature cards have a ${talentRule("nature.overgrowth").percent}% chance to play twice`,
     row: 1,
   },
   {
@@ -28,7 +29,7 @@ export const NATURE_TALENTS = [
     keyword: "nature",
     effect: "thornskin",
     name: "Thornskin",
-    text: "Nature damage has a 10% chance to also grant Armor",
+    text: `Nature damage has a ${talentRule("nature.thornskin").percent}% chance to also grant Armor`,
     row: 1,
   },
   {
@@ -36,7 +37,7 @@ export const NATURE_TALENTS = [
     keyword: "nature",
     effect: "photosynthesis",
     name: "Photosynthesis",
-    text: "Nature damage has a 10% chance to also restore Health",
+    text: `Nature damage has a ${talentRule("nature.photosynthesis").percent}% chance to also restore Health`,
     row: 2,
   },
   {
@@ -52,7 +53,7 @@ export const NATURE_TALENTS = [
     keyword: "nature",
     effect: "briar-patch",
     name: "Briar Patch",
-    text: "Nature damage has a 10% chance to also Bleed",
+    text: `Nature damage has a ${talentRule("nature.briar-patch").percent}% chance to also Bleed`,
     row: 3,
   },
   {
@@ -60,7 +61,7 @@ export const NATURE_TALENTS = [
     keyword: "nature",
     effect: "toxic-pollen",
     name: "Toxic Pollen",
-    text: "Nature damage has a 10% chance to also Poison",
+    text: `Nature damage has a ${talentRule("nature.toxic-pollen").percent}% chance to also Poison`,
     row: 3,
   },
   {
@@ -68,7 +69,7 @@ export const NATURE_TALENTS = [
     keyword: "nature",
     effect: "verdant-cycle",
     name: "Verdant Cycle",
-    text: "Nature damage has a 10% chance to Leech",
+    text: `Nature damage has a ${talentRule("nature.verdant-cycle").percent}% chance to Leech`,
     row: 4,
   },
   {
@@ -76,7 +77,7 @@ export const NATURE_TALENTS = [
     keyword: "nature",
     effect: "entangle",
     name: "Entangle",
-    text: "Nature damage has a 10% chance to also Stun",
+    text: `Nature damage has a ${talentRule("nature.entangle").percent}% chance to also Stun`,
     row: 4,
   },
 ] as const;

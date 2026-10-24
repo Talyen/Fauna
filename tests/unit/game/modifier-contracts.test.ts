@@ -1,3 +1,7 @@
+import { dodgeChance } from "../../../src/game/combat/index";
+import { cardCost } from "../../../src/game/ability-rules";
+import { projectPlay } from "../../../src/game/preview";
+import { uncertainBattle } from "../../support/uncertainty";
 import { contentCatalog, validateCatalog } from "../../../src/game/content-validation";
 import { modifierImplementations, modifierQueries } from "../../../src/game/modifier-bindings";
 import { boonRule } from "../../../src/game/rules/boons";
@@ -205,4 +209,100 @@ it("keeps implementation bindings and shared Boon parameters immutable", () => {
   const icy = boonRule("icy-heart");
   expect(Reflect.set(icy, "damage", 99)).toBe(false);
   expect(icy.text).toContain(String(icy.damage));
+});
+
+it("preserves an admitted free-card grant across Talent reset and resume until its accepted use", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard"])));
+  state.talents = [];
+  state.team[0]!.combat = { ...freshCombat(), freeCard: true };
+  const resumed = requireBattle(decodeSave(encodeSave(state)));
+  const actor = resumed.team[0]!;
+  const play = availablePlays(resumed, false).find((entry) => entry.actor.id === actor.id)!;
+  expect(cardCost(play.card, resumed)).toBe(0);
+  const result = dispatch(resumed, play.commands[0]!);
+  expect(result.accepted).toBe(true);
+  expect(cardCost(play.card, result.state)).toBe(1);
+  expect(resumed.team[0]!.combat!.freeCard).toBe(true);
+});
+
+it("preserves Dodge response order when a cross-category reaction knocks out the attacker", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["cindernewt"])));
+  const ally = state.team[0]!,
+    enemy = state.battle.enemies[0]!;
+  state.talents = [
+    "dodge.catch-breath",
+    "dodge.thornstep",
+    "dodge.open-flank",
+    "block.footwork",
+    "physical.riposte",
+    "nature.windstep",
+    "burn.smoke-screen",
+  ];
+  state.boons = ["ironwood-buckler"];
+  ally.health = 5;
+  ally.block = 0;
+  ally.combat = { ...freshCombat(), rhythm: 20 };
+  enemy.health = 1;
+  enemy.block = 0;
+  enemy.combat = { ...freshCombat(), burn: 1 };
+  state.rng = 42;
+  const events: GameEvent[] = [];
+  hit(state, enemy, ally, 1, "physical", events, { origin: "ability", blindMiss: true });
+  expect(events.slice(0, 5).map((event) => [event.kind, "status" in event ? event.status : null])).toEqual([
+    ["status", "dodge"],
+    ["heal", null],
+    ["status", "thorns"],
+    ["block", null],
+    ["status", "thorns"],
+  ]);
+  expect(events.filter((event) => event.kind === "damage")).toHaveLength(1);
+  expect(enemy.health).toBe(0);
+  expect(ally.health).toBe(6);
+  expect(ally.combat).toMatchObject({
+    rhythm: 0,
+    nextPhysical: 2,
+    riposte: true,
+    freeNature: true,
+    thorns: 2,
+  });
+  expect(state.rng).toBe(42);
+});
+it("connects Finding Rhythm damage, chance and reset without consulting new randomness", () => {
+  const state = requireBattle(structuredClone(teamRun(42, ["mossguard"])));
+  state.talents = ["dodge.finding-rhythm"];
+  const ally = state.team[0]!,
+    enemy = state.battle.enemies[0]!;
+  ally.combat = freshCombat();
+  ally.block = 0;
+  state.rng = 42;
+  hit(state, enemy, ally, 1, "poison", [], { origin: "periodic" });
+  expect(ally.combat.rhythm).toBe(5);
+  expect(dodgeChance(state, ally)).toBe(10);
+  hit(state, enemy, ally, 1, "physical", [], { origin: "ability", blindMiss: true });
+  expect(ally.combat.rhythm).toBe(0);
+  expect(dodgeChance(state, ally)).toBe(5);
+  expect(state.rng).toBe(42);
+});
+it("keeps modifier chance projections seed-independent and the live checkpoint unchanged", () => {
+  const state = uncertainBattle();
+  const before = encodeSave(state);
+  const project = (input: typeof state) => {
+    const result = projectPlay(input, input.battle!.hand[0]!, "enemy-0");
+    expect(result.kind).toBe("complete");
+    if (result.kind !== "complete") throw new Error("Expected finite modifier projection");
+    return result.outcomes.map(({ events, state: outcome }) => ({
+      events,
+      battle: outcome.battle,
+      team: outcome.team,
+    }));
+  };
+  expect(project(state)).toEqual(
+    project(
+      produce(state, (draft) => {
+        draft.rng = 100003;
+      }),
+    ),
+  );
+  expect(encodeSave(state)).toBe(before);
+  expect(decodeSave(before)).toEqual(state);
 });

@@ -1,10 +1,11 @@
+import { talentRule } from "../../rules/talents";
 export const STUN_TALENTS = [
   {
     id: "stun.guarded-counter",
     keyword: "stun",
     effect: "guarded-counter",
     name: "Guarded Counter",
-    text: "Stunning an enemy grants 4 Block if you have none",
+    text: `Stunning an enemy grants ${talentRule("stun.guarded-counter").amount} Block if you have none`,
     row: 0,
   },
   {
@@ -28,7 +29,7 @@ export const STUN_TALENTS = [
     keyword: "stun",
     effect: "extended-stun",
     name: "Extended Stun",
-    text: "Stun effects last 1 turn longer",
+    text: `Stun effects last ${talentRule("stun.extended-stun").amount} turn longer`,
     row: 1,
   },
   {
@@ -36,7 +37,7 @@ export const STUN_TALENTS = [
     keyword: "stun",
     effect: "jarring-blow",
     name: "Jarring Blow",
-    text: "Stun cards have a 10% chance to play twice",
+    text: `Stun cards have a ${talentRule("stun.jarring-blow").percent}% chance to play twice`,
     row: 2,
   },
   {
@@ -52,7 +53,7 @@ export const STUN_TALENTS = [
     keyword: "stun",
     effect: "concussive-force",
     name: "Concussive Force",
-    text: "Enemy Stun threshold is reduced by 10 percentage points",
+    text: `Enemy Stun threshold is reduced by ${talentRule("stun.concussive-force").percent} percentage points`,
     row: 3,
   },
   {
@@ -68,7 +69,7 @@ export const STUN_TALENTS = [
     keyword: "stun",
     effect: "stun-surge",
     name: "Stun Surge",
-    text: "If you have no Mana, Stunning an enemy grants 1 Mana",
+    text: `If you have no Mana, Stunning an enemy grants ${talentRule("stun.stun-surge").amount} Mana`,
     row: 4,
   },
 ] as const;

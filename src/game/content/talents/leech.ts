@@ -1,10 +1,11 @@
+import { talentRule } from "../../rules/talents";
 export const LEECH_TALENTS = [
   {
     id: "leech.deep-siphon",
     keyword: "leech",
     effect: "deep-siphon",
     name: "Deep Siphon",
-    text: "Leech restores 1 additional Health",
+    text: `Leech restores ${talentRule("leech.deep-siphon").amount} additional Health`,
     row: 0,
   },
   {
@@ -20,7 +21,7 @@ export const LEECH_TALENTS = [
     keyword: "leech",
     effect: "blood-debt",
     name: "Blood Debt",
-    text: "Leech has a 10% chance to also grant Gold equal to Health restored",
+    text: `Leech has a ${talentRule("leech.blood-debt").percent}% chance to also grant Gold equal to Health restored`,
     row: 1,
   },
   {
@@ -28,7 +29,7 @@ export const LEECH_TALENTS = [
     keyword: "leech",
     effect: "affliction-siphon",
     name: "Affliction Siphon",
-    text: "Leech restores 10% more Health against Poisoned or Bleeding enemies",
+    text: `Leech restores ${talentRule("leech.affliction-siphon").percent}% more Health against Poisoned or Bleeding enemies`,
     row: 1,
   },
   {
@@ -36,7 +37,7 @@ export const LEECH_TALENTS = [
     keyword: "leech",
     effect: "cull-the-weak",
     name: "Cull the Weak",
-    text: "Leech cards deal 25% more damage against enemies below half Health",
+    text: `Leech cards deal ${talentRule("leech.cull-the-weak").percent}% more damage against enemies below half Health`,
     row: 2,
   },
   {
@@ -44,7 +45,7 @@ export const LEECH_TALENTS = [
     keyword: "leech",
     effect: "sanguine-overflow",
     name: "Sanguine Overflow",
-    text: "When Leech fills your Health, gain 1 Mana",
+    text: `When Leech fills your Health, gain ${talentRule("leech.sanguine-overflow").amount} Mana`,
     row: 2,
   },
   {
@@ -52,7 +53,7 @@ export const LEECH_TALENTS = [
     keyword: "leech",
     effect: "bloodletting",
     name: "Bloodletting",
-    text: "Leech has a 10% chance to cleanse a harmful status",
+    text: `Leech has a ${talentRule("leech.bloodletting").percent}% chance to cleanse a harmful status`,
     row: 3,
   },
   {
@@ -60,7 +61,7 @@ export const LEECH_TALENTS = [
     keyword: "leech",
     effect: "mana-siphon",
     name: "Mana Siphon",
-    text: "Leech has a 10% chance to gain 1 Mana",
+    text: `Leech has a ${talentRule("leech.mana-siphon").percent}% chance to gain ${talentRule("leech.mana-siphon").amount} Mana`,
     row: 3,
   },
   {
@@ -68,7 +69,7 @@ export const LEECH_TALENTS = [
     keyword: "leech",
     effect: "armor-siphon",
     name: "Armor Siphon",
-    text: "Your Leech cards steal 1 Armor before their effects resolve",
+    text: `Your Leech cards steal ${talentRule("leech.armor-siphon").amount} Armor before their effects resolve`,
     row: 4,
   },
   {
@@ -76,7 +77,7 @@ export const LEECH_TALENTS = [
     keyword: "leech",
     effect: "virulent-leech",
     name: "Virulent Leech",
-    text: "Poison damage has a 10% chance to Leech",
+    text: `Poison damage has a ${talentRule("leech.virulent-leech").percent}% chance to Leech`,
     row: 4,
   },
 ] as const;
