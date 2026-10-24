@@ -47,17 +47,20 @@ The [save and Cloud contracts](ARCHITECTURE.md#save-contract) own backup validat
 
 Optional features retain their last usable state or fall back silently. Rendering failures remount presentation at bounded frequency while retaining the session and never replaying commands/rewards. Use neutral loading for brief recovery; after three render failures in the recovery window, explain the consequence while retries continue. Thirty successful rendering seconds reset the window. A hidden notice does not repair lost durability or broken rendering; CI must exercise recovery and verify the resulting player flow.
 
+Bundled content validation runs once before session loading. Its inputs cannot recover with time. A fatal preparation failure settles the existing splash immediately with the accessible message Fauna could not start, stops its preparation animation and releases owned preparation work. It never retries validation, loads invalid content or offers a retry control. Normal startup and presentation recovery keep their existing timing and owners.
+
 ### Recovery owners
 
 Use the session/platform port rather than feature-specific retry loops or error screens. Inspect these owners when changing failure behavior; `npm run context -- --task recovery` locates them.
 
-| Failure                                                       | Existing owner                                                                    | Regression coverage                                               |
-| ------------------------------------------------------------- | --------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| Local loading, backup choice, save ordering and write retries | [Application session](../src/application/session.ts)                              | [Session tests](../tests/unit/application/session.test.ts)        |
-| Cloud reconciliation and background retries                   | [Cloud controller](../src/application/cloud.ts)                                   | [Cloud tests](../tests/unit/application/cloud.test.ts)            |
-| Native storage rotation and recovery snapshots                | [Storage](../desktop/storage.cjs) and [recovery](../desktop/recovery.cjs)         | [Desktop tests](../tests/unit/platform/desktop.test.ts)           |
-| Rendering failures                                            | [GameErrorBoundary](../src/ui/shared/diagnostics.tsx) around the existing session | [Recovery integration](../tests/integration/recovery/)            |
-| Bounded internal diagnostics                                  | [Session diagnostics](../src/application/diagnostics.ts)                          | [Diagnostic tests](../tests/unit/application/diagnostics.test.ts) |
+| Failure                                                       | Existing owner                                                                                                     | Regression coverage                                                         |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
+| Local loading, backup choice, save ordering and write retries | [Application session](../src/application/session.ts)                                                               | [Session tests](../tests/unit/application/session.test.ts)                  |
+| Cloud reconciliation and background retries                   | [Cloud controller](../src/application/cloud.ts)                                                                    | [Cloud tests](../tests/unit/application/cloud.test.ts)                      |
+| Native storage rotation and recovery snapshots                | [Storage](../desktop/storage.cjs) and [recovery](../desktop/recovery.cjs)                                          | [Desktop tests](../tests/unit/platform/desktop.test.ts)                     |
+| Rendering failures                                            | [GameErrorBoundary](../src/ui/shared/diagnostics.tsx) around the existing session                                  | [Recovery integration](../tests/integration/recovery/)                      |
+| Fatal startup preparation                                     | [Preparation](../src/ui/startup/prepare.ts), [mounting](../src/main.tsx) and [splash](../src/ui/startup/splash.ts) | [Startup recovery](../tests/integration/recovery/startup-recovery.test.tsx) |
+| Bounded internal diagnostics                                  | [Session diagnostics](../src/application/diagnostics.ts)                                                           | [Diagnostic tests](../tests/unit/application/diagnostics.test.ts)           |
 
 This policy does not authorize swallowing exceptions, replaying commands or inventing fallback progression. Change and verify the owning boundary when existing recovery cannot satisfy a new failure mode.
 

@@ -49,9 +49,16 @@ export function mountGame(splash: StartupSplash) {
   };
   window.addEventListener("pagehide", onPageHide);
   const root = createRoot(document.getElementById("root")!);
-  void startup.ready.then(() => {
-    if (!disposed && session.store.getState().ready) root.render(<Game />);
-  });
+  void startup.ready.then(
+    () => {
+      if (!disposed && session.store.getState().ready) root.render(<Game />);
+    },
+    () => {
+      if (disposed) return;
+      startup.dispose();
+      splash.fail();
+    },
+  );
   const dispose = async () => {
     disposed = true;
     releasePerformance();

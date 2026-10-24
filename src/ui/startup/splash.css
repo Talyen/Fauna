@@ -127,6 +127,13 @@ body {
       scale(var(--leaf-scale));
   }
 }
+#startup-splash.startup-failed .startup-leaves {
+  display: none;
+}
+#startup-splash.startup-failed :is(.startup-logo-fill, .startup-logo-fill-text, #startup-splash-phrase) {
+  animation: none;
+  transform: none;
+}
 @media (prefers-reduced-motion: reduce) {
   #startup-splash-phrase {
     animation: none;

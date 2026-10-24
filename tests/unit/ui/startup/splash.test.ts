@@ -65,6 +65,38 @@ it("keeps reduced motion static and dismisses immediately without a transition e
   expect(document.getElementById("startup-splash")).toBeNull();
   expect(vi.getTimerCount()).toBe(0);
 });
+it.each([false, true])(
+  "settles failure immediately and stops preparation with reduced motion %s",
+  async (reduced) => {
+    vi.mocked(matchMedia).mockReturnValue({
+      matches: reduced,
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+    } as unknown as MediaQueryList);
+    vi.spyOn(performance, "now").mockReturnValue(0);
+    splash = createStartupSplash();
+    splash.fail();
+    splash.fail();
+    await splash.minimum;
+    const element = document.getElementById("startup-splash")!;
+    const phrase = document.getElementById("startup-splash-phrase")!;
+    expect(element.classList.contains("startup-failed")).toBe(true);
+    expect(element.getAttribute("aria-busy")).toBe("false");
+    expect(element.getAttribute("aria-labelledby")).toBe(phrase.id);
+    expect(element.hasAttribute("aria-label")).toBe(false);
+    expect(phrase.hasAttribute("aria-hidden")).toBe(false);
+    expect(phrase.textContent).toBe("Fauna could not start");
+    expect(vi.getTimerCount()).toBe(0);
+    await vi.advanceTimersByTimeAsync(20000);
+    splash.dismiss();
+    expect(element.isConnected).toBe(true);
+    expect(phrase.textContent).toBe("Fauna could not start");
+    splash.dispose();
+    splash.fail();
+    expect(element.isConnected).toBe(false);
+    expect(vi.getTimerCount()).toBe(0);
+  },
+);
 it.each(["0.75", "1", "1.25", "invalid", "2"])(
   "applies only supported saved text sizes before modules: %s",
   (raw) => {

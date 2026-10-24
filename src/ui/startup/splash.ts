@@ -18,11 +18,11 @@ export function createStartupSplash() {
   let index = 0;
   let words: ReturnType<typeof setInterval> | undefined;
   let removal: ReturnType<typeof setTimeout> | undefined;
-  let dismissed = false;
+  let finished = false;
   const stopWords = () => clearInterval(words);
   const updateMotion = () => {
     stopWords();
-    if (motion?.matches || dismissed) return;
+    if (motion?.matches || finished) return;
     words = setInterval(() => {
       index = (index + 1) % PHRASES.length;
       if (phrase) {
@@ -48,14 +48,19 @@ export function createStartupSplash() {
   const onTransitionEnd = (event: TransitionEvent) => {
     if (event.target === element && event.propertyName === "opacity") remove();
   };
+  const finish = () => {
+    finished = true;
+    stopWords();
+    clearTimeout(timer);
+    finishMinimum();
+    motion?.removeEventListener("change", updateMotion);
+    element?.setAttribute("aria-busy", "false");
+  };
   return {
     minimum,
     dismiss() {
-      if (dismissed) return;
-      dismissed = true;
-      stopWords();
-      motion?.removeEventListener("change", updateMotion);
-      element?.setAttribute("aria-busy", "false");
+      if (finished) return;
+      finish();
       if (motion?.matches) remove();
       else {
         element?.classList.add("startup-dismissed");
@@ -63,11 +68,19 @@ export function createStartupSplash() {
         removal = setTimeout(remove, 400);
       }
     },
+    fail() {
+      if (finished) return;
+      element?.classList.add("startup-failed");
+      element?.removeAttribute("aria-label");
+      element?.setAttribute("aria-labelledby", "startup-splash-phrase");
+      if (phrase) {
+        phrase.removeAttribute("aria-hidden");
+        phrase.textContent = "Fauna could not start";
+      }
+      finish();
+    },
     dispose() {
-      stopWords();
-      clearTimeout(timer);
-      finishMinimum();
-      motion?.removeEventListener("change", updateMotion);
+      finish();
       remove();
     },
   };
