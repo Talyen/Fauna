@@ -40,3 +40,7 @@ For new kits, use the [creature design workflow](../../CREATURE_DESIGN.md) and [
 - [Oathara](oathara.md) · [implementation](../../../src/game/content/creatures/oathara.ts)
 
 - [Almanelle](almanelle.md) · [implementation](../../../src/game/content/creatures/almanelle.ts)
+
+## Kits in design
+
+- [Orifable and Food](orifable.md) — selected kit, proposed Food artwork and pending implementation
