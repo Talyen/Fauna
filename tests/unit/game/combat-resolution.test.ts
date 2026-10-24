@@ -4,9 +4,18 @@ import { expect, it } from "vitest";
 import { dispatch } from "../../../src/game/engine";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { KEYWORDS } from "../../../src/game/progression";
-import { BOONS, TALENTS, type SpeciesId } from "../../../src/game/content";
-import { freshCombat } from "../../../src/game/combat/index";
-import { policy, teamRun, victoryReady } from "../../support/game";
+import { BOONS, TALENTS, definition, species, type SpeciesId } from "../../../src/game/content";
+import { rankedBattleChoices } from "../../../src/application/battle-policy";
+import { cardTargeting, cardText, enemyCard, enemyCanUse } from "../../../src/game/card-rules";
+import { cardKeywords } from "../../../src/game/progression";
+import { playTargetError } from "../../../src/game/play-queries";
+import { enemyAbilityValue } from "../../../src/game/ability-rules";
+import { executeAbility } from "../../../src/game/combat/abilities";
+import { summonEcho } from "../../../src/game/combat/legendary";
+import { swapFromCard } from "../../../src/game/team";
+import type { GameEvent } from "../../../src/game/types";
+import { freshCombat, startAction } from "../../../src/game/combat/index";
+import { addBackups, policy, requireBattle, teamRun, victoryReady } from "../../support/game";
 
 const cases: { name: string; seed: number; team: SpeciesId[] }[] = [
   { name: "Armor bursts and status thresholds", seed: 42, team: ["emberback", "mossguard", "prismram"] },
@@ -84,4 +93,148 @@ it("keeps the shared victory checkpoint resumable before its final play", () => 
   ).toEqual([["stun", 1], ...resumed.battle!.enemies.slice(1).map(() => [null, 0])]);
   const command = { type: "play" as const, cardId: checkpoint.battle!.hand[0]!, targetId: "enemy-0" };
   expect(dispatch(resumed, command)).toEqual(dispatch(checkpoint, command));
+});
+
+it.each([
+  ["pollenmoth-teamGuard", "pollenmoth", "Allies gain 2 Block", "block", 2, 104],
+  [
+    "cadenza-rousing-refrain",
+    "cadenza",
+    "Give all allies 20% Dodge until your next turn; Draw 1 card",
+    "dodge",
+    20,
+    190,
+  ],
+] as const)(
+  "preserves automatic recipients, rankings and resume for %s",
+  (id, kind, text, effect, amount, score) => {
+    const game = requireBattle(
+      produce(teamRun(42, [kind, "emberback"]), (draft) => {
+        addBackups(draft, {
+          id: "backup",
+          species: "mossguard",
+          health: species("mossguard").health,
+          block: 0,
+          attacked: false,
+          combat: freshCombat(),
+        });
+        const card = draft.cards.find((card) => card.definitionId === id)!;
+        draft.battle!.hand = [card.id];
+        draft.battle!.buffer = [];
+        draft.battle!.discard = [];
+        draft.battle!.draw = draft.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+      }),
+    );
+    const def = definition(id);
+    expect(cardTargeting(def)).toBe("automatic");
+    expect(cardText(def)).toBe(text);
+    expect(cardKeywords({ definitionId: id })).toEqual([effect]);
+    const before = encodeSave(game);
+    const choice = rankedBattleChoices(game, false)[0]!;
+    expect(choice).toMatchObject({
+      command: { type: "play", cardId: game.battle.hand[0]!, autoEndTurn: false },
+      score,
+    });
+    expect(choice.command).not.toHaveProperty("targetId", expect.any(String));
+    const result = dispatch(game, choice.command);
+    expect(result.accepted).toBe(true);
+    expect(dispatch(decodeSave(before), choice.command)).toEqual(result);
+    expect(encodeSave(game)).toBe(before);
+    expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
+    expect(result.state.reserves).toEqual(game.reserves);
+    const grants = result.events.filter((event) =>
+      effect === "block"
+        ? event.kind === "block" && event.amount > 0
+        : event.kind === "status" && event.status === "dodge" && event.outcome === "gain",
+    );
+    expect(grants.map((event) => [event.targetId, event.amount])).toEqual([
+      [game.team[0]!.id, amount],
+      [game.team[1]!.id, amount],
+    ]);
+  },
+);
+
+it.each(["pollenmoth-teamGuard", "cadenza-rousing-refrain"])("includes living allied Minions in %s", (id) => {
+  const game = requireBattle(structuredClone(teamRun(42, ["memento"])));
+  const actor = game.team[0]!;
+  summonEcho(game, actor, "player", 6, []);
+  summonEcho(game, actor, "player", 6, []);
+  game.battle.minions![1]!.health = 0;
+  const before = encodeSave(game);
+  expect(decodeSave(before)).toEqual(game);
+  const def = definition(id);
+  const events: GameEvent[] = [];
+  executeAbility(game, { side: "player", actor, def, value: def.value }, events, { swap: swapFromCard });
+  expect(
+    events
+      .filter((event) => event.kind === "block" || (event.kind === "status" && event.status === "dodge"))
+      .map((event) => [event.targetId, event.amount]),
+  ).toEqual([
+    [actor.id, def.value],
+    [game.battle.minions![0]!.id, def.value],
+  ]);
+  expect(decodeSave(encodeSave(game))).toEqual(game);
+  for (const unit of [actor, ...game.battle.minions!]) startAction(unit, [], game);
+  expect([actor, ...game.battle.minions!].map((unit) => unit.combat!.temporaryDodge)).toEqual([0, 0, 0]);
+});
+
+it.each(["pollenmoth-teamGuard", "cadenza-rousing-refrain"])(
+  "preserves enemy recipients and scaling for %s",
+  (id) => {
+    const game = requireBattle(structuredClone(teamRun(42, ["mossguard"])));
+    const actor = game.battle.enemies[0]!;
+    const def = enemyCard(definition(id));
+    actor.power = 3;
+    game.battle.enemies[2]!.health = 0;
+    summonEcho(game, actor, "enemy", 6, []);
+    const events: GameEvent[] = [];
+    const value = enemyAbilityValue(actor, def);
+    expect(enemyCanUse(def)).toBe(true);
+    expect(value).toBe(def.effect === "guard" ? 6 : 20);
+    executeAbility(game, { side: "enemy", actor, def, value, allyTargetId: actor.id }, events, {
+      swap: swapFromCard,
+    });
+    const grants = events.filter(
+      (event) => event.kind === "block" || (event.kind === "status" && event.status === "dodge"),
+    );
+    expect(grants.map((event) => [event.targetId, event.amount])).toEqual([
+      [actor.id, value],
+      [game.battle.enemies[1]!.id, value],
+      [game.battle.minions![0]!.id, value],
+    ]);
+    expect(game.team[0]!.block).toBe(0);
+    expect(game.team[0]!.combat!.temporaryDodge).toBe(0);
+  },
+);
+
+it.each(["mossguard-guard", "dunefox-dodge"])("preserves self and chosen-ally boundaries for %s", (id) => {
+  const game = requireBattle(structuredClone(teamRun(42, ["mossguard", "dunefox"])));
+  const def = definition(id);
+  const actor = game.team[def.effect === "guard" ? 0 : 1]!;
+  const other = game.team.find((unit) => unit !== actor)!;
+  expect(cardTargeting(def)).toBe("self");
+  expect(playTargetError(game, def, actor.id, other.id)).toBe("This ability targets its acting creature.");
+  const events: GameEvent[] = [];
+  executeAbility(game, { side: "player", actor, def, value: def.value }, events, { swap: swapFromCard });
+  expect(
+    events
+      .filter((event) => event.kind === "block" || event.kind === "status")
+      .map((event) => event.targetId),
+  ).toEqual([actor.id]);
+  if (def.effect === "guard") {
+    const chosen = { ...def, target: undefined };
+    expect(cardTargeting(chosen)).toBe("ally");
+    expect(playTargetError(game, chosen, actor.id)).toBe("Choose a living ally.");
+    expect(playTargetError(game, chosen, actor.id, other.id)).toBeNull();
+    const targeted: GameEvent[] = [];
+    executeAbility(
+      game,
+      { side: "player", actor, def: chosen, value: def.value, allyTargetId: other.id },
+      targeted,
+      { swap: swapFromCard },
+    );
+    expect(targeted.filter((event) => event.kind === "block").map((event) => event.targetId)).toEqual([
+      other.id,
+    ]);
+  }
 });

@@ -31,9 +31,21 @@ Auto-end turn records its effective preference in the play command. Spending the
 
 Development victory requires a capability supplied only by development startup; ordinary dispatch rejects it. It reuses settlement, events and saves without inventing XP or restoring roster Health. Packaged startup ignores development URLs.
 
+### Ability rules
+
+[Ability kinds and parameters](../src/game/rules/ability-types.ts) own the gameplay catalog independently of vocabulary. Authored cards remain plain immutable data. The complete [rule catalog](../src/game/rules/abilities.ts) requires targeting, scaling, enemy support/adaptation, progression keywords and descriptions for every primary kind, grouped into healing, resources, protection, utility and attacks. [Supplemental rules](../src/game/rules/supplemental.ts) require scaling, enemy support, keyword classification, recipient/global delivery, descriptions and explicit ordinary-attack utility assessment for every extra.
+
+Rule modules import only other rule modules, Immer and types. Description labels arrive as a pure callback, keeping vocabulary and content initialization outside the rule catalog. Existing [card queries](../src/game/card-rules.ts) and [value queries](../src/game/combat/ability-values.ts) apply these policies; targeting has no fallback for an unregistered kind.
+
+[Primary handlers](../src/game/combat/ability-handlers.ts) and [supplemental handlers](../src/game/combat/ability-extras.ts) separately require execution for every kind. Supplemental reflection must explicitly provide a handler or retain the extra with its original actor. These registries cannot be imported by presentation or pure rule modules. The [ability orchestrator](../src/game/combat/abilities.ts) retains pre-play reactions, repeat decisions, once-per-ability random targeting and per-repeat attack setup; handlers retain live recipient discovery and use the existing combat scheduler.
+
+[Visible ability facts](../src/game/ability-facts.ts) own healing benefits and ordinary primary-hit approximations; [card-zone queries](../src/game/card-zones.ts) share generated-card capacity and useful-draw facts. Application Auto-play owns ranking weights, priorities, stable tie breaks and its deliberate roster-recipient preference. These queries consume no RNG, inspect no hidden order and do not imply complete combat forecasts.
+
+[Ability contract snapshots](../tests/unit/game/ability-contracts.test.ts) were recorded before extraction: authored descriptions, scaling, keywords and enemy adaptation plus representative command, preview, event/state, RNG, save/resume and Auto-play outcomes. Preserve the baseline during behavior-preserving changes; intentional mechanic changes need reviewed expectations. Existing combat and policy suites retain broader coverage.
+
 ### Combat execution
 
-The ability executor owns repeats, targets, primary effects and extras inside the engine's Immer draft. Exhaustive switches require execution, magnitude and enemy-support decisions for each effect. The engine retains validation, Mana, zones, accepted-play counters, XP and scheduling; application publication and saving remain outside gameplay.
+The ability executor owns repeats, targets, primary effects and extras inside the engine's Immer draft. Typed catalogs require complete pure policies and mutation handlers for each effect. The engine retains validation, Mana, zones, accepted-play counters, XP and scheduling; application publication and saving remain outside gameplay.
 
 [Combat policy](../src/game/combat/policy.ts) defines packet origins and reaction eligibility. [Resolution](../src/game/combat/resolution.ts) drives a synchronous, depth-first generator stack of [typed operations](../src/game/combat/operations.ts). Damage, protection, status and lifecycle handlers yield child operations without runtime imports between handlers or back into the scheduler. Children finish before parents resume; mutation handlers do not recurse into each other. [State helpers](../src/game/combat/state.ts) own basic mutations and queries; [status transitions](../src/game/combat/status-state.ts) own control, attribution and deferred Bleed bookkeeping. `ensureCombat` explicitly initializes mutable draft state; read-only consumers use committed combat data. Damage resolution coordinates [pure arithmetic](../src/game/combat/damage-values.ts), captured payments and [ordered reaction families](../src/game/combat/damage-reactions.ts); [healing arithmetic](../src/game/combat/healing-values.ts) is also shared with visible policy assessment.
 
@@ -87,7 +99,7 @@ The packaged renderer uses `fauna://app/` confined to `dist/`, rejecting foreign
 | Creature identity, card ownership and formation             | [team.ts](../src/game/team.ts)                                                                                                         |
 | Card owner versus acting creature and drawable fallen cards | [card-actors.ts](../src/game/card-actors.ts)                                                                                           |
 | Draw, discard and FIFO overflow                             | [card-zones.ts](../src/game/card-zones.ts)                                                                                             |
-| Shared player, preview and enemy execution                  | [combat/abilities.ts](../src/game/combat/abilities.ts), [ability-values.ts](../src/game/combat/ability-values.ts)                      |
+| Shared player, preview and enemy execution                  | [combat/abilities.ts](../src/game/combat/abilities.ts), [ability-handlers.ts](../src/game/combat/ability-handlers.ts)                  |
 | Turn scheduling and Legendary decisions                     | [turns.ts](../src/game/combat/turns.ts), [legendary.ts](../src/game/combat/legendary.ts)                                               |
 | Recovery, affordability and Recruit eligibility             | [destinations.ts](../src/game/destinations.ts)                                                                                         |
 | Catalogs, effect descriptions and progression               | [Content](CONTENT.md), [Keywords](KEYWORDS.md)                                                                                         |

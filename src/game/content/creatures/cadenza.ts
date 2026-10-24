@@ -48,7 +48,8 @@ export const cadenza: CreatureKit = {
       artwork: "action.cadenza.echoes-remember",
     },
     {
-      ...card("cadenza", "Rousing Refrain", "teamDodge", 20),
+      ...card("cadenza", "Rousing Refrain", "dodge", 20),
+      target: "allAllies",
       id: "cadenza-rousing-refrain",
       effects: [{ kind: "draw", amount: 1 }],
       artwork: "action.cadenza.rousing-refrain",

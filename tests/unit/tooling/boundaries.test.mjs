@@ -1,5 +1,23 @@
 import { expect, it } from "vitest";
 import { boundaryViolations } from "../../../scripts/checks/boundaries.mjs";
+it("keeps ability policies pure and execution behind the gameplay boundary", () => {
+  for (const target of ["../content", "../combat/ability-handlers", "../combat/ability-extras", "../engine"])
+    expect(
+      boundaryViolations("src/game/rules/fixture.ts", `import {value} from "${target}"`).length,
+    ).toBeGreaterThan(0);
+  for (const target of ["./contracts", "immer"])
+    expect(boundaryViolations("src/game/rules/fixture.ts", `import {value} from "${target}"`)).toEqual([]);
+  expect(
+    boundaryViolations("src/game/rules/fixture.ts", 'import type {CardDefinition} from "../content/types"'),
+  ).toEqual([]);
+  for (const target of ["ability-handlers", "ability-extras", "ability-context"])
+    expect(
+      boundaryViolations("src/ui/fixture.ts", `import {value} from "../game/combat/${target}"`).length,
+    ).toBeGreaterThan(0);
+  expect(
+    boundaryViolations("src/ui/fixture.ts", 'import {abilityRule} from "../game/rules/abilities"'),
+  ).toEqual([]);
+});
 it("resolves imports and reexports and rejects computed gameplay module access", () => {
   for (const source of [
     'export * from "../ui/App"',

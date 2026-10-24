@@ -185,10 +185,14 @@ export function policy(s: GameState): Command {
       ...(def.effect === "heal" && !def.target ? { targetId: injured.id } : {}),
     };
   }
-  const teamGuard = cards.find((c) =>
-    ["teamGuard", "teamProtection", "nullify"].includes(definition(c.definitionId).effect),
-  );
-  if (teamGuard) return { type: "play", cardId: teamGuard.id };
+  const groupProtection = cards.find((c) => {
+    const def = definition(c.definitionId);
+    return (
+      (def.effect === "guard" && def.target === "allAllies") ||
+      ["teamProtection", "nullify"].includes(def.effect)
+    );
+  });
+  if (groupProtection) return { type: "play", cardId: groupProtection.id };
   const guard = cards.find((c) => definition(c.definitionId).effect === "guard");
   if (guard) {
     const def = definition(guard.definitionId);

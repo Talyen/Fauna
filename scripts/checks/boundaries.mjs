@@ -70,6 +70,13 @@ export function boundaryViolations(file, source) {
         : specifier;
     const within = (dir) => target.startsWith(`src/${dir}/`);
     if (
+      file.startsWith("src/game/rules/") &&
+      !declaration?.typeOnly &&
+      target !== "immer" &&
+      !within("game/rules")
+    )
+      fail("Ability rules must remain pure; import only rule modules, Immer or types.");
+    if (
       file.startsWith("src/ui/shared/") &&
       within("ui") &&
       !within("ui/shared") &&
@@ -112,6 +119,9 @@ export function boundaryViolations(file, source) {
       [
         "src/game/combat/index",
         "src/game/combat/abilities",
+        "src/game/combat/ability-handlers",
+        "src/game/combat/ability-extras",
+        "src/game/combat/ability-context",
         "src/game/combat/turns",
         "src/game/engine",
         "src/game/journey",
@@ -155,7 +165,7 @@ export function boundaryViolations(file, source) {
     if (
       ui &&
       !declaration?.typeOnly &&
-      /^src\/game\/(?:(?:journey|team)|combat\/(?:abilities|resolution|operations|damage(?:-reactions)?|status-state|protection|statuses|lifecycle|turns))(?:\.ts)?$/.test(
+      /^src\/game\/(?:(?:journey|team)|combat\/(?:abilit(?:ies|y-(?:handlers|extras|context))|resolution|operations|damage(?:-reactions)?|status-state|protection|statuses|lifecycle|turns))(?:\.ts)?$/.test(
         target,
       ) &&
       // This selector reads committed state; importing its module's mutators remains forbidden.
