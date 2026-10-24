@@ -70,6 +70,65 @@ function fixture() {
   const manager = createCloud(port, () => {}, install);
   return { manager, port, files, local, install, preserve };
 }
+it.each(["offline", "dispose"] as const)(
+  "does not begin an identity lookup after a startup subscriber requests %s",
+  async (action) => {
+    const f = fixture();
+    const identify = (f.port.identity = vi.fn(f.port.identity));
+    let manager!: ReturnType<typeof createCloud>;
+    manager = createCloud(
+      f.port,
+      (view) => {
+        if (view.status === "Syncing") {
+          if (action === "offline") manager.offline();
+          else void manager.dispose();
+        }
+      },
+      f.install,
+    );
+    try {
+      await manager.start(initial);
+      expect(identify).not.toHaveBeenCalled();
+      expect(f.local.data).toBeNull();
+      expect(f.install).not.toHaveBeenCalled();
+    } finally {
+      await manager.dispose();
+      await f.manager.dispose();
+    }
+  },
+);
+it.each(["offline", "dispose"] as const)(
+  "does not begin an upload after a syncing subscriber requests %s",
+  async (action) => {
+    const f = fixture();
+    const write = (f.port.write = vi.fn(f.port.write));
+    let armed = false;
+    let syncing = 0;
+    let manager!: ReturnType<typeof createCloud>;
+    manager = createCloud(
+      f.port,
+      (view) => {
+        if (armed && view.status === "Syncing" && ++syncing === 2) {
+          armed = false;
+          if (action === "offline") manager.offline();
+          else void manager.dispose();
+        }
+      },
+      f.install,
+    );
+    try {
+      await manager.start(null);
+      armed = true;
+      await manager.commit(progress);
+      await manager.flush();
+      expect(write).not.toHaveBeenCalled();
+      expect((await parseSnapshot(f.local.data!, identity.profile)).payload).toBe(progress);
+    } finally {
+      await manager.dispose();
+      await f.manager.dispose();
+    }
+  },
+);
 it("round-trips valid snapshots and rejects changed payload bytes or another profile", async () => {
   const s = await snapshot(initial, identity, 1);
   expect(await parseSnapshot(JSON.stringify(s), identity.profile)).toEqual(s);
