@@ -165,7 +165,7 @@ export function* leechHealth(
   afflicted = false,
 ): Resolution<void> {
   if (lost <= 0) return;
-  let amount = Math.round(lost / 2);
+  let amount = lost / 2;
   if (!isEnemy(unit)) {
     if (afflicted && hasTalent(state, "leech.affliction-siphon")) amount *= 1.1;
     if (hasTalent(state, "leech.deep-siphon")) amount++;
