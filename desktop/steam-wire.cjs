@@ -33,4 +33,16 @@ function parseReply(operation, value) {
   if (!valid) throw new Error("Invalid Steam response.");
   return /** @type {import("./steam-types").SteamRequests[K]["result"]} */ (value);
 }
-module.exports = { parseRequest, parseReply };
+/** @param {unknown} value @returns {{id: number, value?: unknown, error?: string}} */
+function parseResponse(value) {
+  if (!value || typeof value !== "object") throw new Error("Invalid Steam response envelope.");
+  const response = /** @type {Record<string, unknown>} */ (value);
+  if (
+    !Number.isSafeInteger(response.id) ||
+    Number(response.id) <= 0 ||
+    (response.error !== undefined && typeof response.error !== "string")
+  )
+    throw new Error("Invalid Steam response envelope.");
+  return /** @type {{id: number, value?: unknown, error?: string}} */ (value);
+}
+module.exports = { parseRequest, parseReply, parseResponse };

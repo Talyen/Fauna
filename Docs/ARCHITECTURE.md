@@ -99,11 +99,13 @@ Local saves remain authoritative offline. Metadata becomes durable after the gam
 
 ### Native transport, profiles and protocol
 
-An owned utility process contains blocking Steam calls and stops on app shutdown. Failed sends retire both request and timeout. Steam teardown has one shared completion, immediately revokes overlay callbacks, and continues independent cleanup/metadata draining if native cleanup throws.
+An owned utility process contains blocking Steam calls and stops on app shutdown. Failed sends retire both request and timeout. The [wire boundary](../desktop/steam-wire.cjs) validates reply envelopes before matching requests; malformed envelopes retire transport and reject pending requests while local metadata remains available. Steam teardown has one shared completion, immediately revokes overlay callbacks, and continues independent cleanup/metadata draining if native cleanup throws.
 
 [Steam](../desktop/steam.cjs) pins an account and isolates its local profile. A new Steam profile may adopt valid standalone progress while preserving the original. Account changes reject transport and require restart. Without a client, ordinary launch continues the last local Steam profile offline; isolated automation ignores that pointer. A newly identified account always selects its own directory. Browser, preview, smoke and performance profiles never access live Steam. Fauna's [App ID](../desktop/steam-config.json) defaults to null; live setup and qualification belong to [Release](RELEASE.md#steam-qualification).
 
 Overlay activation synchronously revokes commands, cancels targeting/Auto-play and opens Pause; closing it does not resume. Display, sound and other device preferences remain separate from progression and Cloud; native display preferences use the profile’s `display.json`. [Display](../desktop/display.cjs) owns reachable native bounds and Windowed/Fullscreen through validated preload capabilities; automation uses isolated geometry.
+
+Overlay and display notifications contain observer failures. A failed native overlay pump stops its timer, clears activation and attempts shutdown once after releasing its borrowed callback; a failed display notification cannot reject the preference write lane or prevent later writes. Display disposal suppresses late notifications while draining admitted writes.
 
 The packaged renderer uses `fauna://app/` confined to `dist/`, rejecting foreign authorities, traversal, symlink escapes and writes. Permission requests/checks deny access. Production CSP denies network connections; development permits loopback HMR only. File-protocol privileges and Node inspection are disabled. [Package integrity](RELEASE.md#packaged-integrity) checks actual executable fuses and browser snapshots before renderer smoke.
 

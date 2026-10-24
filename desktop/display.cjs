@@ -49,6 +49,14 @@ async function createDisplay({
     disposed = false,
     lane = Promise.resolve(),
     transition = /** @type {Promise<unknown>} */ (Promise.resolve());
+  const publishState = (/** @type {import("../src/platform/ports").DisplayState} */ state) => {
+    if (disposed) return;
+    try {
+      notify(state);
+    } catch {
+      // Optional renderer notification must not poison the preference write lane.
+    }
+  };
   const bounds = () => clampBounds(preferences.bounds, screen.getAllDisplays(), minimumOuterSize(window));
   const write = () => {
     clearTimeout(timer);
@@ -62,7 +70,7 @@ async function createDisplay({
         await fs.rename(`${file}.tmp`, file);
       })
       .catch(() => {
-        notify({ ...read(), error: "Could not remember display preferences." });
+        publishState({ ...read(), error: "Could not remember display preferences." });
       });
   };
   /** @returns {import("../src/platform/ports").DisplayState} */
@@ -86,7 +94,7 @@ async function createDisplay({
   const publish = () => {
     if (disposed) return;
     preferences.mode = read().mode;
-    notify(read());
+    publishState(read());
     write();
   };
   const remember = () => {
@@ -147,7 +155,9 @@ async function createDisplay({
       window.on("enter-full-screen", publish);
       window.on("leave-full-screen", publish);
       if (!isolated && preferences.mode === "fullscreen")
-        void set("fullscreen").catch(() => notify({ ...read(), error: "Could not restore fullscreen." }));
+        void set("fullscreen").catch(() =>
+          publishState({ ...read(), error: "Could not restore fullscreen." }),
+        );
     },
     async dispose() {
       disposed = true;

@@ -47,10 +47,21 @@ function createOverlay(appId, notify, api = loadOverlayApi()) {
   let disposed = false;
   let dispatching = false;
   let closed = false;
+  const publish = (/** @type {boolean} */ active) => {
+    try {
+      notify(active);
+    } catch {
+      // A failed observer must not escape the native callback timer.
+    }
+  };
   const shutdown = () => {
     if (disposed && !dispatching && !closed) {
       closed = true;
-      api.shutdown();
+      try {
+        api.shutdown();
+      } catch {
+        // The optional native client is already retired; local play can continue.
+      }
     }
   };
   /** @type {ReturnType<typeof setInterval> | undefined} */
@@ -72,11 +83,17 @@ function createOverlay(appId, notify, api = loadOverlayApi()) {
         for (let count = 0; count < 256 && !disposed && api.next(pipe, message); count++) {
           try {
             // GameOverlayActivated_t::k_iCallback is 331; m_bActive is the first byte.
-            if (message.readInt32LE(4) === 331 && message.readInt32LE(16) >= 1) notify(api.active(message));
+            if (message.readInt32LE(4) === 331 && message.readInt32LE(16) >= 1) publish(api.active(message));
           } finally {
             api.free(pipe);
           }
         }
+      } catch {
+        const failed = !disposed;
+        disposed = true;
+        clearInterval(timer);
+        // A failed pump cannot deliver a later deactivation; clear its pause flag now.
+        if (failed) publish(false);
       } finally {
         // A listener may dispose synchronously; release the borrowed message first.
         dispatching = false;

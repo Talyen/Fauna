@@ -1,7 +1,7 @@
 const fs = require("node:fs/promises");
 const path = require("node:path");
 const { createHash, randomBytes } = require("node:crypto");
-const { parseReply } = require("./steam-wire.cjs");
+const { parseReply, parseResponse } = require("./steam-wire.cjs");
 const { createStorage } = require("./storage.cjs");
 /** @param {string} name */
 const validName = (name) => typeof name === "string" && /^fauna-v1-[a-f0-9]{32}-[01]\.json$/.test(name);
@@ -112,17 +112,23 @@ async function createSteam({
         worker = utilityProcess.fork(path.join(__dirname, "steam-worker.cjs"), [], {
           serviceName: "Fauna cloud",
         });
-        worker.on(
-          "message",
-          (/** @type {{id: number, value?: unknown, error?: unknown}} */ { id, value, error }) => {
-            const entry = requests.get(id);
-            if (!entry) return;
-            requests.delete(id);
-            clearTimeout(entry.timer);
-            if (error) entry.reject(new Error(typeof error === "string" ? error : "Steam operation failed."));
-            else entry.resolve(value);
-          },
-        );
+        worker.on("message", (/** @type {unknown} */ message) => {
+          if (dead || transportStopped) return;
+          let response;
+          try {
+            response = parseResponse(message);
+          } catch {
+            stopTransport(new Error("Invalid Steam response envelope."));
+            return;
+          }
+          const { id, value, error } = response;
+          const entry = requests.get(id);
+          if (!entry) return;
+          requests.delete(id);
+          clearTimeout(entry.timer);
+          if (error !== undefined) entry.reject(new Error(error || "Steam operation failed."));
+          else entry.resolve(value);
+        });
         worker.on("exit", () => {
           transportStopped = true;
           for (const entry of requests.values()) {
