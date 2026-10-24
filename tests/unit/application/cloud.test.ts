@@ -78,6 +78,24 @@ it("round-trips valid snapshots and rejects changed payload bytes or another pro
   ).rejects.toThrow();
   await expect(parseSnapshot(JSON.stringify(s), "wrong-account")).rejects.toThrow();
 });
+it("publishes only validated immutable snapshot fields", async () => {
+  const parent = await snapshot(initial, identity, 1);
+  const child = await snapshot(progress, identity, 2, [parent]);
+  const parsed = await parseSnapshot(
+    JSON.stringify({ ...child, unchecked: { payload: "unvalidated data" } }),
+    identity.profile,
+  );
+
+  expect(parsed).toEqual(child);
+  expect(Reflect.set(parsed, "sequence", 100)).toBe(false);
+  expect(Reflect.set(parsed.ancestors, "0", "d".repeat(64))).toBe(false);
+  expect(parsed.ancestors).toEqual([parent.id]);
+});
+it.each([null, [], true, 1, "metadata", {}])("rejects a non-snapshot JSON value: %j", async (value) => {
+  await expect(parseSnapshot(JSON.stringify(value), identity.profile)).rejects.toThrow(
+    "Invalid cloud metadata",
+  );
+});
 it.each([
   ["device", { device: "d".repeat(32) }],
   ["sequence", { sequence: 2 }],
@@ -97,6 +115,9 @@ it.each([
   ["zero sequence", { sequence: 0 }],
   ["fractional sequence", { sequence: 1.5 }],
   ["unsafe sequence", { sequence: Number.MAX_SAFE_INTEGER + 1 }],
+  ["non-string hash", { hash: ["d".repeat(64)] }],
+  ["non-string payload", { payload: {} }],
+  ["non-string ancestor", { ancestors: [1] }],
   ["duplicate ancestors", { ancestors: ["d".repeat(64), "d".repeat(64)] }],
   [
     "unbounded ancestry",
@@ -105,6 +126,12 @@ it.each([
 ] as const)("rejects %s metadata", async (_field, patch) => {
   const s = await snapshot(initial, identity, 1);
   await expect(parseSnapshot(JSON.stringify({ ...s, ...patch }), identity.profile)).rejects.toThrow(
+    "Invalid cloud metadata",
+  );
+});
+it("rejects snapshots that list themselves as an ancestor", async () => {
+  const s = await snapshot(initial, identity, 1);
+  await expect(parseSnapshot(JSON.stringify({ ...s, ancestors: [s.id] }), identity.profile)).rejects.toThrow(
     "Invalid cloud metadata",
   );
 });
