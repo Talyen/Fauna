@@ -150,7 +150,7 @@ describe("keyword foundation", () => {
 
   it("colors keyword inflections in Boon prose without changing the wording", () => {
     const text =
-      "Your Light hits Blind Burning enemies; Cards dodged by enemies return to your hand; Your allies cannot be Purged bare; Cleansed afflictions return to their sender; Water Thorns guard Armor and Block";
+      "Light hits Blind Burning enemies; Cards dodged by enemies return to hand; Allies keep their last beneficial effect when Purged; Cleansed effects return to their source; Water Thorns guard Armor and Block";
     const html = renderToStaticMarkup(<KeywordText text={text} />);
     const colored = Array.from(
       html.matchAll(/<span\b[^>]*\bdata-keyword="([^"]+)"[^>]*>([^<]+)<\/span>/g),
