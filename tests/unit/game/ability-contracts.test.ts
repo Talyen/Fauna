@@ -61,7 +61,7 @@ it("preserves authored text, targeting, scaling, keywords and enemy adaptations"
   expect(
     // New kits have direct contracts below or in creatures/*.test.ts; preserve the older oracle.
     [
-      ...CARDS.filter((card) => !["arabesca", "skybex", "pyrella"].includes(card.species ?? "")),
+      ...CARDS.filter((card) => !["arabesca", "skybex", "dulcera", "pyrella"].includes(card.species ?? "")),
       PEARL,
       ...FOOD_CARDS,
     ].map((card) => ({

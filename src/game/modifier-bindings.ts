@@ -54,6 +54,7 @@ function bind<M extends keyof Modules, N extends CallableName<M>>(module: M, nam
   return { module, name };
 }
 const owners = {
+  gentlePassage: bind("./team", "gentlePassage"),
   mountainGuide: bind("./team", "mountainGuide"),
   afterPlayerCard: bind("./combat/card-modifiers", "afterPlayerCard"),
   returnDodgedCard: bind("./combat/card-modifiers", "returnDodgedCard"),
@@ -295,6 +296,7 @@ export const modifierImplementations = freeze(
       "lucky-clover": [owners.damageRewards],
     } satisfies Record<BoonId, Binding>,
     passives: {
+      gentlePassage: [owners.gentlePassage],
       passingFlame: [owners.passingFlame],
       mountainGuide: [owners.mountainGuide],
       petalwake: [owners.dodgeResponse],

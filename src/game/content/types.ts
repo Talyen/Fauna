@@ -31,10 +31,12 @@ export type SpeciesId =
   | "orifable"
   | "arabesca"
   | "skybex"
+  | "dulcera"
   | "pyrella";
 export type Effect = AbilityKind;
 type PassiveEffect =
   | { kind: "passingFlame"; amount: number }
+  | { kind: "gentlePassage"; amount: number }
   | { kind: "mountainGuide"; amount: number }
   | { kind: "petalwake"; amount: number }
   | { kind: "expressDelivery"; amount: number }

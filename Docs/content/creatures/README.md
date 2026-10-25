@@ -47,4 +47,5 @@ For new kits, use the [creature design workflow](../../CREATURE_DESIGN.md) and [
 
 - [Skybex](skybex.md): Mountain Guide, Cloudstep and protection for incoming allies
 
+- [Dulcera](dulcera.md) · [implementation](../../../src/game/content/creatures/dulcera.ts) — Gentle Passage and restorative swaps
 - [Pyrella](pyrella.md): Passing Flame, Festival Burst, Ember Harvest and Spark Decoy

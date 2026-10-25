@@ -1,12 +1,28 @@
 import { isRosterCreature } from "./battlefield";
 import { recycleDiscard, fillHand, filterCardZones, MAX_BATTLE_CARDS } from "./card-zones";
 import { removeDepartedMinions } from "./combat/legendary";
-import { grantBlock } from "./combat/index";
+import { grantBlock, restoreHealth } from "./combat/index";
 import { unitName, type Combatant } from "./combat/state";
 import { creaturePassive } from "./progression";
 import { shuffle, roll } from "./random";
 import { speciesCards, species } from "./content";
 import type { Card, GameEvent, GameState } from "./types";
+
+/** Both sides of the exchange provide passage, including Dulcera's own departure or arrival. */
+export function gentlePassage(state: GameState, previous: GameState["team"], events: GameEvent[]) {
+  if (state.phase !== "battle") return;
+  const providers = new Map([...previous, ...state.team].map((unit) => [unit.id, unit]));
+  const entering = state.team.filter((unit) => !previous.some((old) => old.id === unit.id));
+  for (const provider of providers.values()) {
+    if (provider.health <= 0) continue;
+    const amount = creaturePassive(state, provider.species).effects.reduce(
+      (sum, effect) => sum + (effect.kind === "gentlePassage" ? effect.amount : 0),
+      0,
+    );
+    if (amount <= 0) continue;
+    for (const unit of entering) restoreHealth(unit, amount, events, false, state);
+  }
+}
 
 export function living(state: GameState) {
   return state.team.filter((c) => c.health > 0);
@@ -205,6 +221,7 @@ export function swapBackup(
       fromCard,
     );
     mountainGuide(state, incoming, previous, events);
+    gentlePassage(state, previous, events);
     return;
   }
   state.team[index] = incoming;
@@ -242,6 +259,7 @@ export function swapBackup(
     text: `${species(incoming.species).name} replaces ${species(outgoing.species).name}.`,
   });
   mountainGuide(state, incoming, previous, events);
+  gentlePassage(state, previous, events);
 }
 export function swapFromCard(
   state: GameState,

@@ -29,7 +29,9 @@ import { requireBattle, teamRun } from "../../support/game";
 
 // Preserve the recorded oracle across save versions and dormant combat fields.
 // New kits have direct behavioral coverage in ability-contracts.test.ts and creatures/*.test.ts.
-const recordedSpecies = SPECIES.filter((entry) => !["arabesca", "skybex", "pyrella"].includes(entry.id));
+const recordedSpecies = SPECIES.filter(
+  (entry) => !["arabesca", "skybex", "dulcera", "pyrella"].includes(entry.id),
+);
 const digest = (value: unknown) =>
   createHash("sha256")
     .update(

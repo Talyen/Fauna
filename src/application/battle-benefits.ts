@@ -396,6 +396,14 @@ export function battleBenefits(
           : "none",
       );
     case "swap":
+      if (def.backupOnly && !state.reserves.some((unit) => unit.health > 0))
+        return support(
+          def.effects?.some((effect) => effect.kind === "cleanse" && effect.target === "allAllies") &&
+            battlefield(state, "player").some((unit) => unit.health > 0 && hasHarmfulEffects(unit))
+            ? "utility"
+            : "none",
+        );
+      return support("utility");
     case "swapLowest":
       return support("utility");
     default: {

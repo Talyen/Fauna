@@ -114,7 +114,15 @@ async function checkBytes(entry, bytes, extension = path.extname(entry.output)) 
 }
 async function readSource(entry, repository) {
   const base = await realpath(repository);
-  const source = await realpath(path.join(base, entry.source));
+  let source;
+  try {
+    source = await realpath(path.join(base, entry.source));
+  } catch (cause) {
+    throw new Error(
+      `Cannot read repository asset source ${entry.source}; restore masters with git sparse-checkout disable before asset authoring. Existing outputs were preserved.`,
+      { cause },
+    );
+  }
   if (!source.startsWith(base + path.sep) || !(await stat(source)).isFile())
     throw new Error(`Source escapes repository: ${entry.id}`);
   const bytes = await readFile(source);
