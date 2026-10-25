@@ -2,6 +2,18 @@
 
 A creature's artwork, passive and three abilities should express one identity and give the player a distinct strategic choice. Use the [creature design skill](../.agents/skills/fauna-creature-design/SKILL.md); [Content](CONTENT.md) owns authoring contracts and [Journey design](EXPEDITION_DESIGN.md) owns encounters, deployment and recruitment.
 
+## Elegant abilities and passives
+
+Design mechanics that are elegant, thematic and immediately understandable at a glance. Start with one relationship suggested by the artwork: what the creature does, what changes and who benefits. Prefer a short, literal rule using familiar game terms. "Light damage bounces once" and "Give an ally 6 Block" communicate their effects directly; poetic names should not make the rules harder to understand.
+
+Avoid building concepts around card taxonomy, phase bookkeeping, trigger quotas or accumulated exceptions. Phrases such as "non-attack ability", "first time each turn", "until your next turn", "at the end of your turn" and "at the beginning of your turn" are signs to reconsider the design. Changing them to "support action", "once per round" or another shorthand does not remove the underlying complexity. A natural interaction such as Dodging, restoring Health or breaking Block usually gives a clearer foundation than tracking which numbered card was played in a particular window.
+
+This is a mechanic-design preference, not just a copy edit. If an effect needs a chain of qualifiers to stay fair, try a smaller value, a more focused thematic relationship or a different effect. Do not retain a complicated engine underneath a misleadingly simple sentence. Keep any restriction essential to the player's decision visible; when that makes the rule unwieldy, redesign it. Use an established keyword when its actual meaning fits, rather than inventing a keyword to conceal bookkeeping.
+
+Keep exact resolution order, tie-breaks and technical safeguards in design or implementation notes when they do not change what the player reasonably expects. Explain material balance concerns separately from the proposed effect text. Necessary timing can remain when it is the central, intuitive idea, but should not become a default balancing device attached to every proposal.
+
+Apply this standard to brainstorming alternatives as well as the selected kit. Distinctiveness should come from the core interaction, not a familiar effect decorated with conditions. Scale passive strength across all six tiers by changing clear values where possible, preserving the same understandable rule. Before presenting a candidate, check whether the player can predict its effect from one reading and whether its strategic choice survives removing unnecessary restrictions. Replace candidates that fail instead of filling a requested option count with wordy variants.
+
 ## Start with the artwork
 
 Inspect the actual portrait and every ability illustration through connected Google Drive tools or preserved local originals. Record source links/IDs or paths and selected variants. Filenames and prompts cannot replace looking at the images; keep dependent proposals provisional when essential art is inaccessible.
@@ -27,7 +39,7 @@ All six tiers must have different gameplay effects; each replaces the complete p
 
 ## Design abilities from their images
 
-Recommend one ability per illustration, including name, concise rules, target/timing, artwork rationale, approximate budget, nearest existing effects and tradeoff. Offer alternatives when requested or when a consequential unresolved choice materially changes the kit.
+Recommend one ability per illustration, including name, exact concise effect text, artwork rationale, approximate budget, nearest existing effects and tradeoff. Explain necessary targeting and timing separately without hiding restrictions the player needs to know. Offer alternatives when requested or when a consequential unresolved choice materially changes the kit.
 
 Compare complete behavior, including extras. Avoid exact overlap where the art supports a meaningful alternative; explain intentional overlap when a simple attack or shield serves the kit best. Do not attach unrelated utility just to make a card different.
 
