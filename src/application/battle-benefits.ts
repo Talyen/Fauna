@@ -4,10 +4,10 @@ export type { OrdinaryHit } from "../game/ability-facts";
 import { battleCardCapacity, drawHasAnotherCard } from "../game/card-zones";
 import { drawableOwnerIds } from "../game/card-actors";
 import { RESURRECTION_HEALTH_PERCENT } from "../game/resurrection-rules";
-import { battlefield } from "../game/battlefield";
+import { battlefield, healingAllies, isRosterCreature } from "../game/battlefield";
 import { creaturePassive, hasTalent } from "../game/progression";
 import { hasHarmfulEffects, mostInjured, maximumHealth, STACK_LIMIT } from "../game/combat/state";
-import { actionValue, cardCost } from "../game/ability-rules";
+import { actionValue, cardCost, manaCapacity } from "../game/ability-rules";
 import { healingValue, restoration } from "../game/combat/healing-values";
 import type { AvailablePlay } from "../game/play-queries";
 import type { BattleState, Enemy } from "../game/types";
@@ -34,7 +34,7 @@ export type BattleBenefit = { targetId?: string; reason?: string } & (
 
 /** Share visible target discovery across the hand, without caching mutable state across commands. */
 export function battleBenefitFacts(state: BattleState) {
-  const injuredAllies = battlefield(state, "player").some(
+  const injuredAllies = healingAllies(state).some(
     (unit) => unit.health > 0 && unit.health < maximumHealth(unit),
   );
   const healingOnPlay =
@@ -182,8 +182,11 @@ export function battleBenefits(
       });
     }
     case "heal": {
+      const automaticRecipients = healingAllies(state).filter(isRosterCreature);
       if (def.target === "allAllies") {
-        const benefits = allies.map((ally) => healingBenefit(state, ally, value, play.def.effects));
+        const benefits = automaticRecipients.map((ally) =>
+          healingBenefit(state, ally, value, play.def.effects),
+        );
         const restored = benefits.reduce((sum, benefit) => sum + benefit.restored, 0);
         const utility = benefits.reduce((sum, benefit) => sum + benefit.utility, 0);
         if (restored > 0) return support("healing", restored);
@@ -197,7 +200,11 @@ export function battleBenefits(
       }
       // Auto-play keeps its existing roster-recipient preference; manual play also permits summons.
       const recipients =
-        def.target === "self" ? [actor] : def.target === "mostInjured" ? [mostInjured(allies)!] : allies;
+        def.target === "self"
+          ? [actor]
+          : def.target === "mostInjured"
+            ? [mostInjured(automaticRecipients)!]
+            : allies;
       return recipients.flatMap((ally) => {
         const { restored, utility } = healingBenefit(state, ally, value, play.def.effects);
         return support(
@@ -209,7 +216,7 @@ export function battleBenefits(
     }
     case "mana": {
       const cost = cardCost(card, state);
-      const regained = Math.min(value, state.battle.maxMana - state.battle.mana + cost);
+      const regained = Math.min(value, manaCapacity(state) - state.battle.mana + cost);
       const net = regained - cost;
       const mending = regained > 0 && hasTalent(state, "mana.arcane-mending") && facts.injuredAllies;
       return support(
@@ -219,6 +226,14 @@ export function battleBenefits(
     }
     case "teamClearBlind":
       return controlRemoval(allies.filter((unit) => unit.combat?.blind).length);
+    case "repeatNextCard":
+      return support(state.battle.repeatNext.player ? "none" : "standardUtility");
+    case "springbound": {
+      const frozen = allies.filter((unit) => (unit.combat?.freeze ?? 0) > 0).length;
+      return frozen > 0
+        ? controlRemoval(frozen)
+        : dodgeSupport(Math.min(value, 70 - (actor.combat?.temporaryDodge ?? 0)));
+    }
     case "teamThaw":
       return controlRemoval(allies.filter((unit) => (unit.combat?.freeze ?? 0) > 0).length);
     case "recover": {

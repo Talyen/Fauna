@@ -17,3 +17,11 @@ export function battlefield(state: GameState, side: "player" | "enemy"): (Creatu
     if (unit.minion.side === side && owners.has(unit.minion.ownerId)) result.push(unit);
   return result;
 }
+
+/** Automatic healing can include backups; selectable targets remain the battlefield. */
+export function healingAllies(state: GameState, side: "player" | "enemy" = "player"): (Creature | Enemy)[] {
+  const row = battlefield(state, side);
+  if (side === "player" && state.phase === "battle" && state.boons.includes("camp-hammock"))
+    row.push(...state.reserves);
+  return row.filter((unit) => unit.health > 0);
+}

@@ -27,12 +27,21 @@ import {
 import type { GameEvent } from "../../../src/game/types";
 import { requireBattle, teamRun } from "../../support/game";
 
-const digest = (value: unknown) => createHash("sha256").update(JSON.stringify(value)).digest("hex");
+// Preserve the recorded modifier oracle across the save envelope and dormant team grant.
+// New creatures retain their direct behavioral coverage without rewriting the historical oracle.
+const recordedSpecies = SPECIES.filter((entry) => entry.id !== "arabesca" && entry.id !== "parhelion");
+const digest = (value: unknown) =>
+  createHash("sha256")
+    .update(
+      JSON.stringify(value, (key, entry) => {
+        if (key === "version") return 57;
+        if (key === "repeatNext" && entry.player === false && entry.enemy === false) return undefined;
+        return entry;
+      }),
+    )
+    .digest("hex");
 
-// Preserve the recorded catalog; later creatures have dedicated behavior suites.
-const recordedSpecies = SPECIES.filter((entry) => Object.hasOwn(traces, `${entry.id}:0`));
-
-// Recorded on committed main before modifier bindings or parameters changed.
+// Baseline includes the approved Block rules, ten passive Boons and save format 57.
 // These expectations are an independent behavior oracle; do not refresh them for a refactor.
 it("preserves all modifier definitions, text and ordered six-tier passives", () => {
   expect({

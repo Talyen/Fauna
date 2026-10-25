@@ -48,7 +48,7 @@ const combatStateSchema = z
     skipped: z.boolean(),
     deathDoorUsed: z.boolean(),
     grace: z.number().int().min(0).max(3),
-    statusSources: z.partialRecord(z.enum(["burn", "poison", "bleed"]), id),
+    statusSources: z.partialRecord(z.enum(["burn", "poison", "bleed", "stun", "freeze", "blind"]), id),
     bleedLeech: z.array(z.object({ sourceId: id, amount: natural })).max(9),
   })
   .strict();
@@ -78,6 +78,7 @@ const minion = z.object({
   minion: z.object({ ownerId: id, side: z.enum(["player", "enemy"]) }),
 });
 const battle = z.object({
+  repeatNext: z.object({ player: z.boolean(), enemy: z.boolean() }).strict(),
   minions: z.array(minion).max(12).optional(),
   copySerial: z.number().int().min(0).max(Number.MAX_SAFE_INTEGER),
   earnedGold: natural,
@@ -85,7 +86,7 @@ const battle = z.object({
   meteoriteUsed: z.boolean(),
   cardsPlayedThisTurn: z.number().int().min(0).max(PLAYER_CARD_TRIGGER_LIMIT),
   turn: z.number().int().min(1).max(1_000_000),
-  mana: z.number().int().min(0).max(6),
+  mana: z.number().int().min(0).max(8),
   maxMana: z.number().int().min(4).max(6),
   draw: z.array(id).max(MAX_BATTLE_CARDS),
   hand: z.array(id).max(MAX_HAND_SIZE),

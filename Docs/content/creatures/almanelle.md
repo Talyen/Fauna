@@ -49,7 +49,7 @@ Unchanged PNG originals are preserved in `public/art/creatures/almanelle/`. The 
 
 - **Spring Current:** four damage points plus self-Cleanse utility. The wave removes one harmful category after the attack, including when the target Dodges. It trades two points from a plain six-damage Water attack for recovery. Riptide, Seafoam and ordinary Cleanse rewards can amplify it
 - **Autumn Insight:** random discard recovery is provisionally worth three to four points of access, plus three healing points. This is a modest budget exception selected by the user, with random access and missing Health limiting its value. Recovery selects an eligible discarded card, including the just-played card, preserves identity and ownership, and uses the persistent buffer when the hand is full. Healing then goes to the selected living ally. It overlaps Cadenza's recovery and Bloomquail's draw/heal, but combines recycling with directed team recovery
-- **Rooted Year:** three immediate Block plus three Thorns. Thorns can deal three, then two, then one Nature retaliation damage across three successful Health hits, so their total value can exceed a simple three-damage estimate. Almanelle must lose Health to retaliate, and attacks that spend all its Block leave no decay for Fallen Leaves. This defense/retaliation tradeoff is integral to the selected kit
+- **Rooted Year:** three immediate Block plus three Thorns. Thorns can deal three, then two, then one Nature retaliation damage across three landed attacks, including attacks absorbed by Block, so their total value can exceed a simple three-damage estimate. Attacks that spend all Almanelle's Block leave no decay for Fallen Leaves; preserving Block supports both survival and future Thorns
 
 Upgrades add two to Spring Current's primary damage and Rooted Year's primary Block per level. Rooted Year's three supplemental Thorns, Spring Current's one Cleanse and Autumn Insight's one recovery plus three healing remain fixed. Enemy room power scales primary damage, Block and adapted healing, without increasing utility counts, Thorns extras or the passive percentage
 
@@ -61,7 +61,7 @@ A normal opening uses Rooted Year to gain shelter and Thorns. Spring Current rem
 
 For a stronger setup, reach twenty Block through repeated Rooted Year or allied protection. Ten remain after decay, while Fallen Leaves grows five to ten Thorns. Upgraded Rooted Year, Water's Seafoam, Ironwood Buckler and allied Block cards can support this buildup; the passive supplies no free Mana or cards
 
-Poor draws contain recovery without a useful discard or healing with no missing Health. Strong incoming attacks spend the stored Block before it can grow Thorns. Dodge and fully absorbed hits prevent Thorns retaliation, periodic damage bypasses Block and does not trigger it, and Purge can remove accumulated Thorns. Large piles of Thorns still require Almanelle to survive actual Health damage. The complete kit and higher-rank sustain require hosted balance qualification; no measured win-rate claim is made
+Poor draws contain recovery without a useful discard or healing with no missing Health. Strong incoming attacks spend the stored Block before it can grow Thorns. Dodge prevents Thorns retaliation; fully absorbed attacks still trigger it. Periodic damage bypasses Block and does not trigger Thorns, and Purge can remove accumulated Thorns. Almanelle must survive an attack to retaliate. The complete kit and higher-rank sustain require hosted balance qualification; no measured win-rate claim is made
 
 ## Verification
 

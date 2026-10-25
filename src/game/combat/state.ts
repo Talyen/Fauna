@@ -163,6 +163,7 @@ export function beginAttack(state: GameState, source: Combatant, events: GameEve
   const stats = ensureCombat(source);
   if (!stats.blind) return false;
   stats.blind = false;
+  delete stats.statusSources.blind;
   return !succeeds(state, 0.5, isEnemy(source), events, true);
 }
 /** Capture once per attack so every area target receives the same opening bonus. */

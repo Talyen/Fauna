@@ -43,4 +43,6 @@ For new kits, use the [creature design workflow](../../CREATURE_DESIGN.md) and [
 
 - [Orifable and Food](orifable.md) · [implementation](../../../src/game/content/creatures/orifable.ts) — shared consumables and Express Delivery
 
+- [Arabesca](arabesca.md): Petalwake, Springbound and the shared next-card repeat
+
 - [Parhelion](parhelion.md) · [implementation](../../../src/game/content/creatures/parhelion.ts) — Sunthaw and the light upon the snow

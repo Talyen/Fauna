@@ -1,6 +1,6 @@
 import { battleMana, renewalManaBonus } from "./battle-modifiers";
 import { unfinishedJourneyLimit } from "../card-actors";
-import { battlefield, isEnemy } from "../battlefield";
+import { battlefield, isEnemy, healingAllies } from "../battlefield";
 import { definition, speciesCards, SPECIES } from "../content";
 import { drawBossCards, bossCardPriority, courtRemembers, removeDepartedMinions } from "./legendary";
 import { recycleDiscard, MAX_BATTLE_CARDS, MAX_HAND_SIZE } from "../card-zones";
@@ -55,7 +55,10 @@ export function livingChorus(state: GameState, enemy: boolean, events: GameEvent
       (sum, effect) => sum + (effect.kind === "livingChorus" ? effect.amount : 0),
       0,
     );
-    const recipient = amount > 0 ? mostInjured<import("../combat/index").Combatant>(row) : undefined;
+    const recipient =
+      amount > 0
+        ? mostInjured<import("../combat/index").Combatant>(healingAllies(state, enemy ? "enemy" : "player"))
+        : undefined;
     if (recipient) restoreHealth(recipient, amount, events, false, state, false, singer);
   }
 }
@@ -67,7 +70,7 @@ export function unhurried(state: BattleState, enemy: boolean, events: GameEvent[
       0,
     );
     if (amount <= 0) continue;
-    for (const recipient of row)
+    for (const recipient of healingAllies(state, enemy ? "enemy" : "player"))
       if (ensureCombat(recipient).cardsPlayedThisTurn === 0)
         restoreHealth(recipient, amount, events, false, state, false, dreamer);
   }

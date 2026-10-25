@@ -16,6 +16,16 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 
+it("shows overflow Mana in the existing crystals and previews spending it", () => {
+  const view = render(<ManaCrystals mana={8} maximum={6} previewCost={1} />);
+  expect(view.getByRole("button", { name: "Mana 8 of 6" }).dataset.overflowRow).toBe("true");
+  expect(view.container.querySelectorAll('.mana-gem[data-filled="true"]')).toHaveLength(8);
+  expect(view.container.querySelectorAll('.mana-gem[data-preview-spent="true"]')).toHaveLength(1);
+  view.rerender(<ManaCrystals mana={5} maximum={6} />);
+  expect(view.container.querySelectorAll(".mana-gem")).toHaveLength(6);
+  expect(view.container.querySelectorAll('.mana-gem[data-filled="true"]')).toHaveLength(5);
+});
+
 it("lets mana glints finish after pointer exit or blur, and replays them on a new entry", () => {
   const view = render(<ManaCrystals mana={4} />);
   const gem = view.container.querySelector<HTMLElement>(".mana-gem")!;

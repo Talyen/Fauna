@@ -15,6 +15,11 @@
   display: block;
   flex: 0 0 auto;
 }
+.mana[data-overflow-row="true"] {
+  display: grid;
+  grid-template-columns: repeat(4, var(--mana-crystal-size));
+  height: auto;
+}
 .mana-socket {
   position: absolute;
   inset: -7%;

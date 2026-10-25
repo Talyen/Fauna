@@ -264,6 +264,24 @@ describe("Parhelion", () => {
     expect(decodeSave(encodeSave(game))).toEqual(game);
   });
 
+  it("preserves Sunthaw healing and status attribution when Orbit Armillary returns a cleansed Freeze", () => {
+    const events: GameEvent[] = [];
+    const game = produce(parhelionBattle(), (draft) => {
+      draft.boons = ["orbit-armillary"];
+      const ally = draft.team[0]!;
+      const enemy = draft.battle.enemies[0]!;
+      ally.combat!.statusSources.freeze = enemy.id;
+      removeControlBuildup(draft, ally, "freeze", events);
+      expect(ally.health).toBe(19);
+      expect(ally.combat!.freeze).toBe(0);
+      expect(ally.combat!.statusSources.freeze).toBeUndefined();
+      expect(enemy.combat.freeze).toBe(4);
+      expect(enemy.combat.statusSources.freeze).toBe(ally.id);
+    });
+    expect(events.filter((event) => event.kind === "heal" && event.amount > 0)).toHaveLength(1);
+    expect(decodeSave(encodeSave(game))).toEqual(game);
+  });
+
   it("encounters, recruits and resumes Parhelion through the existing journey boundary", () => {
     const ready = produce(teamRun(42, ["stillara", "emberback", "mossguard"]), (draft) => {
       draft.discovery.recruited.parhelion = 1;

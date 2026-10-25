@@ -1,4 +1,5 @@
 import { parhelion } from "./creatures/parhelion";
+import { arabesca } from "./creatures/arabesca";
 import { orifable } from "./creatures/orifable";
 import { almanelle } from "./creatures/almanelle";
 import { oathara } from "./creatures/oathara";
@@ -59,6 +60,7 @@ const kits = [
   oathara,
   almanelle,
   orifable,
+  arabesca,
   parhelion,
 ];
 freeze(kits, true);
@@ -92,6 +94,7 @@ export const CARDS: readonly CardDefinition[] = [
   oathara,
   almanelle,
   orifable,
+  arabesca,
   parhelion,
 ].flatMap((kit) => kit.cards);
 const speciesById = new Map(SPECIES.map((entry) => [entry.id, entry]));

@@ -1,4 +1,5 @@
 import { encore, kindlingFlourish, beforeAbility, talentRepeat } from "./ability-modifiers";
+import { takeCardRepeat } from "./card-repeat";
 import { executePrimary } from "./ability-handlers";
 import { applyExtras } from "./ability-extras";
 import {
@@ -23,6 +24,7 @@ export function executeAbility(
   operations: AbilityOperations,
 ) {
   const { actor, def, value } = action;
+  const grantedRepeat = takeCardRepeat(state, action.side);
   const enemy = action.side === "enemy";
   const power = actorPower(action);
   const opponents = alive(opposingRow(state, action));
@@ -56,7 +58,11 @@ export function executeAbility(
   const abilityRepeat =
     def.repeatChance !== undefined && succeeds(state, def.repeatChance / 100, enemy, events);
   const repeat = talentRepeat(state, keywords, enemy, events);
-  for (let play = 0; play < (repeat || encoreRepeat || abilityRepeat || flourishRepeat ? 2 : 1); play++) {
+  for (
+    let play = 0;
+    play < (grantedRepeat || repeat || encoreRepeat || abilityRepeat || flourishRepeat ? 2 : 1);
+    play++
+  ) {
     if (
       actor.health <= 0 ||
       (def.effect === "attack" &&
@@ -65,7 +71,7 @@ export function executeAbility(
           : !target || target.health <= 0))
     )
       break;
-    if (play === 1 && (encoreRepeat || abilityRepeat || flourishRepeat))
+    if (play === 1 && (grantedRepeat || encoreRepeat || abilityRepeat || flourishRepeat))
       events.push({
         kind: "action",
         actionType: "support",

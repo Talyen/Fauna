@@ -229,6 +229,8 @@
   --keyword-health: #f87171;
   --keyword-water: #60a5fa;
   --keyword-waterThorns: #60a5fa;
+  --keyword-criticalHit: #f59e0b;
+  --keyword-criticalHit-deep: color-mix(in srgb, var(--keyword-criticalHit) 55%, var(--background));
   --keyword-mana: #38bdf8;
   --keyword-block: #7dd3fc;
   --keyword-thorns: #059669;

@@ -5,6 +5,10 @@ export const SCENARIOS = [
   "parhelion-collection",
   "parhelion-rank-five",
   "parhelion-targeting",
+  "arabesca-battle",
+  "arabesca-collection",
+  "arabesca-rank-five",
+  "arabesca-double",
   "orifable-battle",
   "orifable-food",
   "orifable-targeting",
@@ -92,6 +96,19 @@ export async function reviewScenario(server, name) {
     game = { ...game, team: game.team.map((unit, index) => (index ? unit : { ...unit, health: 1 })) };
     game = accept(game, { type: "visitCampfire" });
   }
+  if (name.startsWith("arabesca-")) {
+    const { arabescaBattle } = await server.ssrLoadModule("/tests/support/arabesca.ts");
+    game = arabescaBattle();
+    if (name === "arabesca-rank-five")
+      game = {
+        ...game,
+        discovery: { ...game.discovery, recruited: { ...game.discovery.recruited, arabesca: 6 } },
+      };
+    if (name === "arabesca-double") {
+      const card = game.cards.find((card) => card.definitionId === "arabesca-dancing-double");
+      game = accept(game, { type: "play", cardId: card.id, autoEndTurn: false });
+    }
+  }
   if (name.startsWith("parhelion-")) {
     const { parhelionBattle } = await server.ssrLoadModule("/tests/support/parhelion.ts");
     game = parhelionBattle();
@@ -135,11 +152,13 @@ export async function reviewScenario(server, name) {
     seed: name.startsWith("merchant") ? 7 : 42,
     fixture: name.startsWith("parhelion-")
       ? "tests/support/parhelion.ts"
-      : name.startsWith("orifable-")
-        ? "tests/support/orifable.ts"
-        : name.startsWith("almanelle-")
-          ? "tests/support/almanelle.ts"
-          : "tests/support/game.ts",
+      : name.startsWith("arabesca-")
+        ? "tests/support/arabesca.ts"
+        : name.startsWith("orifable-")
+          ? "tests/support/orifable.ts"
+          : name.startsWith("almanelle-")
+            ? "tests/support/almanelle.ts"
+            : "tests/support/game.ts",
   };
 }
 
@@ -162,6 +181,15 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   if (["parhelion-collection", "parhelion-rank-five"].includes(scenario.name)) {
     await button("Collection").click();
     await button("Inspect Parhelion").click();
+  } else if (["arabesca-collection", "arabesca-rank-five"].includes(scenario.name)) {
+    await button("Collection").click();
+    const next = page.getByRole("button", { name: "Next page", exact: true });
+    while (
+      !(await page.getByRole("button", { name: "Inspect Arabesca", exact: true }).count()) &&
+      (await next.isVisible())
+    )
+      await next.click();
+    await button("Inspect Arabesca").click();
   } else if (["orifable-collection", "orifable-rank-five"].includes(scenario.name)) {
     await button("Collection").click();
     await button("Inspect Orifable").click();

@@ -32,6 +32,7 @@ export function capabilities(state: GameState, kinds: readonly SpeciesId[]) {
       if (
         card.effect === "nightmareHarvest" ||
         card.effect === "teamCleanse" ||
+        card.effect === "springbound" ||
         card.effects?.some((effect) => effect.kind === "cleanse")
       )
         result.add("cleanse");
@@ -45,7 +46,8 @@ export function capabilities(state: GameState, kinds: readonly SpeciesId[]) {
       if (
         effect.kind === "unhurried" ||
         effect.kind === "livingChorus" ||
-        effect.kind === "tidalRegeneration"
+        effect.kind === "tidalRegeneration" ||
+        effect.kind === "petalwake"
       )
         result.add("health");
       if (effect.kind === "dodgeBurn") {

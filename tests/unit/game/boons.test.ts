@@ -1,4 +1,12 @@
-import { swapFixture, completeRecruitment, accept, run, winBattle } from "../../support/game";
+import {
+  swapFixture,
+  completeRecruitment,
+  accept,
+  run,
+  winBattle,
+  requireBattle,
+  addBackups,
+} from "../../support/game";
 import { expect, it } from "vitest";
 import {
   freshCombat,
@@ -7,12 +15,18 @@ import {
   restoreHealth,
   startAction,
   tickStatuses,
+  gainMana,
+  applyBlind,
+  beginAttack,
 } from "../../../src/game/combat/index";
 import { decodeSave, encodeSave } from "../../../src/game/save";
 import { previewCard } from "../../../src/game/engine";
 import { BOONS, definition } from "../../../src/game/content";
 import { encounterSource } from "../../../src/game/encounters";
 import type { GameEvent } from "../../../src/game/types";
+import { executeAbility } from "../../../src/game/combat/abilities";
+import { playTargetError } from "../../../src/game/play-queries";
+import { species } from "../../../src/game/content";
 function fixture() {
   const state = structuredClone(run());
   const source = state.team[1]!,
@@ -26,6 +40,242 @@ function fixture() {
   state.rng = 42;
   return { state, source, target, events: [] as GameEvent[] };
 }
+
+it("Rainkeeper preserves bounded overflow through save/resume and rejects overflow without the Boon", () => {
+  const state = requireBattle(structuredClone(run()));
+  state.boons = ["rainkeeper"];
+  state.battle.mana = state.battle.maxMana;
+  gainMana(state, 50, []);
+  expect(state.battle.mana).toBe(state.battle.maxMana + 2);
+  expect(decodeSave(encodeSave(state)).battle!.mana).toBe(state.battle.mana);
+  state.boons = [];
+  expect(() => decodeSave(encodeSave(state))).toThrow();
+});
+
+it("Dream Yo-Yo returns a Dodged card once without copies, free Mana or extra XP, including previews", () => {
+  const state = requireBattle(structuredClone(run()));
+  state.boons = ["dream-yo-yo"];
+  const card = state.cards.find((card) => definition(card.definitionId).name === "Prism Charge")!;
+  state.team.find((ally) => ally.id === card.ownerId)!.combat!.blind = true;
+  state.rng = 1972;
+  state.battle.hand = [card.id];
+  state.battle.buffer = [];
+  state.battle.discard = [];
+  state.battle.draw = state.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+  const mana = state.battle.mana;
+  const xp = state.battleXP.physical ?? 0;
+  const preview = previewCard(state, card.id, "enemy-0");
+  expect(preview.accepted).toBe(true);
+  expect(preview.state.battle!.hand).toContain(card.id);
+  expect(state.team.find((ally) => ally.id === card.ownerId)!.combat!.blind).toBe(true);
+  const result = accept(state, { type: "play", cardId: card.id, targetId: "enemy-0", autoEndTurn: false });
+  expect(result.battle!.hand).toContain(card.id);
+  expect(result.battle!.mana).toBe(mana - 1);
+  expect(result.battleXP.physical).toBe(xp + 1);
+  expect(result.cards).toHaveLength(state.cards.length);
+  expect(decodeSave(encodeSave(result))).toEqual(result);
+  const zones = [
+    ...result.battle!.hand,
+    ...result.battle!.buffer,
+    ...result.battle!.draw,
+    ...result.battle!.discard,
+  ];
+  expect(zones.filter((id) => id === card.id)).toHaveLength(1);
+});
+
+it("Basalt Glass Bookmark preserves the final beneficial category through repeated and selective Purge", () => {
+  const { state, source, events } = fixture();
+  state.boons = ["basalt-glass-bookmark"];
+  source.block = 8;
+  source.combat = { ...freshCombat(), armor: 2, thorns: 3 };
+  removeEffects(source, "purge", 99, events, state);
+  expect(source.block).toBe(0);
+  expect(source.combat.armor).toBe(0);
+  expect(source.combat.thorns).toBe(3);
+  removeEffects(source, "purge", 1, events, state, "thorns");
+  expect(source.combat.thorns).toBe(3);
+});
+
+it("Wonder Domino conserves overkill across remaining enemies without new attacks or status buildup", () => {
+  const { state, source, events } = fixture();
+  state.boons = ["wonder-domino"];
+  state.battle!.enemies.forEach((enemy, index) => {
+    enemy.health = index === 0 ? 2 : index === 1 ? 3 : 30;
+    enemy.block = 0;
+    enemy.combat = { ...freshCombat(), controlled: "freeze", controlTurns: 1 };
+  });
+  hit(state, source, state.battle!.enemies[0]!, 10, "burn", events);
+  expect(state.battle!.enemies.map((enemy) => enemy.health)).toEqual([0, 0, 25]);
+  expect(state.battle!.enemies.slice(1).map((enemy) => enemy.combat.burn)).toEqual([0, 0]);
+  expect(events.filter((event) => event.kind === "damage").map((event) => event.amount)).toEqual([2, 3, 5]);
+});
+
+it("Furnace Prism Blinds Burning enemies through ordinary status protection", () => {
+  const { state, source, target, events } = fixture();
+  state.boons = ["furnace-prism"];
+  target.combat.burn = 2;
+  target.combat.nullify = true;
+  hit(state, source, target, 1, "light", events);
+  expect(target.combat.nullify).toBe(false);
+  expect(target.combat.blind).toBe(false);
+  hit(state, source, target, 1, "light", events);
+  expect(target.combat.blind).toBe(true);
+});
+
+it("Last Threshold shares overflow from ordinary Healing without reviving or recursively amplifying it", () => {
+  const { state, source, events } = fixture();
+  state.boons = ["last-threshold"];
+  source.health = species(source.species).health;
+  const injured = state.team[0]!;
+  injured.health = 1;
+  injured.combat = { ...freshCombat(), deathDoorUsed: true, grace: 2 };
+  const fallen = state.team[2]!;
+  fallen.health = 0;
+  fallen.combat = { ...freshCombat(), deathDoorUsed: true, grace: 1 };
+  restoreHealth(source, 10, events, false, state);
+  expect(source.health).toBe(species(source.species).health);
+  expect(injured.health).toBe(11);
+  expect(fallen.health).toBe(0);
+  expect(events.filter((event) => event.kind === "heal")).toHaveLength(2);
+});
+
+it("Last Threshold applies Healing bonuses once before sharing the overflow", () => {
+  const { state, source, events } = fixture();
+  state.boons = ["last-threshold"];
+  state.talents = ["health.mending"];
+  source.health = species(source.species).health;
+  const ally = state.team[0]!;
+  ally.health = 1;
+  ally.combat = { ...freshCombat(), deathDoorUsed: true, grace: 2 };
+  restoreHealth(source, 10, events, false, state);
+  expect(ally.health).toBe(12);
+});
+
+it("Camp Hammock includes living backups in automatic Healing while keeping them unselectable", () => {
+  const state = requireBattle(structuredClone(run()));
+  state.boons = ["camp-hammock"];
+  const backup = {
+    ...structuredClone(state.team[0]!),
+    id: "hammock-backup",
+    health: 1,
+    combat: freshCombat(),
+  };
+  addBackups(state, backup);
+  const card = state.cards.find((entry) => definition(entry.definitionId).name === "Moss Renewal")!;
+  const def = definition(card.definitionId);
+  executeAbility(state, { side: "player", actor: state.team[0]!, def, value: 2 }, [], { swap: () => {} });
+  expect(backup.health).toBe(3);
+  expect(playTargetError(state, definition("food-apple"), state.team[0]!.id, backup.id)).toBe(
+    "Choose a living ally.",
+  );
+  expect(decodeSave(encodeSave(state)).reserves[0]!.health).toBe(3);
+});
+
+it("Honeycomb Frame prevents Critical Hits on the armored ally itself", () => {
+  for (const protectedByBoon of [false, true]) {
+    const { state, target: enemy, events } = fixture();
+    state.boons = protectedByBoon ? ["honeycomb-frame"] : [];
+    const ally = state.team[0]!;
+    ally.block = 0;
+    ally.health = species(ally.species).health;
+    ally.combat = { ...freshCombat(), armor: 2, controlled: "freeze", controlTurns: 1 };
+    state.rng = 1972;
+    hit(state, enemy, ally, 4, "water", events);
+    const damage = events.find((event) => event.kind === "damage");
+    expect(damage).toMatchObject({ critical: !protectedByBoon, amount: protectedByBoon ? 4 : 8 });
+  }
+});
+
+it("Undertow Castanets combines both buildups toward one control and preserves recovery immunity", () => {
+  const { state, source, target, events } = fixture();
+  state.boons = ["undertow-castanets"];
+  target.combat = freshCombat();
+  state.rng = 1;
+  hit(state, source, target, 30, "stun", events, { origin: "proc" });
+  hit(state, source, target, 20, "freeze", events, { origin: "proc" });
+  expect(target.combat).toMatchObject({ controlled: "freeze", stun: 0, freeze: 0 });
+  startAction(target, events, state);
+  expect(target.combat.cooldown).toBe(3);
+  hit(state, source, target, 1, "stun", events, { origin: "proc" });
+  expect(target.combat.controlled).toBeNull();
+  expect(target.combat.stun).toBe(0);
+});
+
+it("Orbit Armillary returns removed effects to their source and respects Nullify without reflecting twice", () => {
+  const { state, target: enemy, events } = fixture();
+  state.boons = ["orbit-armillary"];
+  const ally = state.team[0]!;
+  ally.combat = freshCombat();
+  hit(state, enemy, ally, 2, "poison", events, { origin: "proc" });
+  enemy.combat.reflect = true;
+  removeEffects(ally, "cleanse", 1, events, state);
+  expect(ally.combat.poison).toBe(0);
+  expect(enemy.combat.poison).toBe(2);
+  expect(enemy.combat.reflect).toBe(true);
+  applyBlind(state, enemy, ally, events);
+  enemy.combat.nullify = true;
+  removeEffects(ally, "cleanse", 1, events, state);
+  expect(ally.combat.blind).toBe(false);
+  expect(enemy.combat.blind).toBe(false);
+  expect(enemy.combat.nullify).toBe(false);
+});
+
+it("Orbit Armillary persists the sources of control and Blind through save/resume", () => {
+  const state = requireBattle(structuredClone(run()));
+  state.boons = ["orbit-armillary"];
+  const ally = state.team[0]!;
+  ally.combat = freshCombat();
+  const enemy = state.battle.enemies[0]!;
+  applyBlind(state, enemy, ally, []);
+  expect(decodeSave(encodeSave(state)).team[0]!.combat!.statusSources.blind).toBe(enemy.id);
+  const events: GameEvent[] = [];
+  enemy.combat = freshCombat();
+  hit(state, enemy, ally, Math.ceil(species(ally.species).health / 2), "freeze", events, { origin: "proc" });
+  expect(ally.combat.controlled).toBe("freeze");
+  ally.combat.controlTurns = 2;
+  const resumed = requireBattle(structuredClone(decodeSave(encodeSave(state))));
+  removeEffects(resumed.team[0]!, "cleanse", 1, events, resumed);
+  expect(resumed.team[0]!.combat!.controlled).toBeNull();
+  expect(resumed.battle.enemies[0]!.combat).toMatchObject({ controlled: "freeze", controlTurns: 2 });
+  beginAttack(state, ally, events);
+  expect(ally.combat.statusSources.blind).toBeUndefined();
+});
+
+it("Last Threshold shares a finite overflow across eligible allies and cannot heal expired Death's Door", () => {
+  const { state, source, events } = fixture();
+  state.boons = ["last-threshold"];
+  source.health = species(source.species).health;
+  for (const ally of [state.team[0]!, state.team[2]!]) {
+    ally.health = species(ally.species).health - 2;
+    ally.combat = { ...freshCombat(), deathDoorUsed: true, grace: 1 };
+  }
+  restoreHealth(source, 3, events, false, state);
+  expect(state.team[0]!.health + state.team[2]!.health).toBe(
+    species(state.team[0]!.species).health + species(state.team[2]!.species).health - 1,
+  );
+  for (const ally of state.team) ally.combat!.grace = 0;
+  const health = state.team.map((ally) => ally.health);
+  restoreHealth(source, 99, events, false, state);
+  expect(state.team.map((ally) => ally.health)).toEqual(health);
+});
+
+it("Camp Hammock lets automatic Mana Healing reach living backups without reviving fallen backups", () => {
+  const state = requireBattle(structuredClone(run()));
+  state.boons = ["camp-hammock", "rainkeeper"];
+  state.talents = ["mana.arcane-mending"];
+  const backup = {
+    ...structuredClone(state.team[0]!),
+    id: "healing-backup",
+    health: 1,
+    combat: freshCombat(),
+  };
+  const fallen = { ...structuredClone(backup), id: "fallen-backup", health: 0 };
+  addBackups(state, backup, fallen);
+  state.battle.mana = state.battle.maxMana;
+  gainMana(state, 2, []);
+  expect(backup.health).toBeGreaterThan(1);
+  expect(fallen.health).toBe(0);
+});
 it("preserves Meteorite through triggered Burn for the next direct Burn hit", () => {
   const { state, source, target, events } = fixture();
   state.boons = ["meteorite"];
@@ -282,21 +532,22 @@ it("counts accepted cards once across previews and resume, refunds before auto-e
   expect(accept(played, { type: "endTurn" }).battle!.cardsPlayedThisTurn).toBe(0);
   expect(() => decodeSave(JSON.stringify({ ...played, version: 19 }))).toThrow();
 });
-it("does not pay Gold or roll offensive Boons on blocked damage or enemy packets", () => {
+it("allows blocked offensive effects while preserving Health-loss Gold rules and enemy ownership", () => {
   const { state, source, target, events } = fixture();
   state.boons = ["cutpurse-knife", "parasitic-bloom", "lucky-clover", "brass-censer"];
   source.health = 10;
   for (const type of ["bleed", "poison", "nature", "light"] as const) {
-    const before = state.rng;
+    const currency = state.currency;
     target.block = 100;
     hit(state, source, target, 5, type, events, { origin: "proc" as const });
-    expect(state.rng).toBe(before);
-    expect(state.currency).toBe(0);
-    expect(source.health).toBe(10);
+    expect(state.currency).toBe(currency + Number(type === "bleed"));
+    expect(source.health).toBeGreaterThanOrEqual(10);
+    const before = state.rng;
+    const paid = state.currency;
     source.block = 100;
     hit(state, target, source, 5, type, events, { origin: "proc" as const });
     expect(state.rng).toBe(before);
-    expect(state.currency).toBe(0);
+    expect(state.currency).toBe(paid);
     expect(target.health).toBe(100);
   }
 });

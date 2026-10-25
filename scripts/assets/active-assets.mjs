@@ -7,8 +7,8 @@ import { fileHash } from "../lib/file-integrity.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "../..");
 // Total prepared media, including music. JavaScript has its own measured budget.
-// 185 active objects measure 129.68 MiB without the unused Marsh track.
-const MAX_MEDIA_BYTES = 136 * 1024 * 1024;
+// 199 active objects measure 140.53 MiB, including the Boon and Arabesca selections.
+const MAX_MEDIA_BYTES = 144 * 1024 * 1024;
 const MAX_ART_BYTES = 3 * 1024 * 1024;
 const inventory = (receipt) =>
   [...new Set(Object.values(receipt.records).map((record) => record.url.slice(2)))].sort();
@@ -62,7 +62,7 @@ export async function verifyAssetBundle(directory, receipt) {
     total += size;
   }
   if (total > MAX_MEDIA_BYTES)
-    throw new Error("Prepared media exceeds 136 MiB; investigate growth before raising the budget.");
+    throw new Error("Prepared media exceeds 144 MiB; investigate growth before raising the budget.");
   return { files: expected.length - 1, bytes: total };
 }
 
@@ -125,6 +125,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.ar
   if (process.argv.length !== 2) throw new Error("Usage: npm run assets:check:bundle");
   const result = await verifyAssetBundle(path.join(ROOT, "dist"), await assets());
   console.log(
-    `Build media: ${result.files} active files; ${(result.bytes / 1048576).toFixed(2)} MiB; 136 MiB limit.`,
+    `Build media: ${result.files} active files; ${(result.bytes / 1048576).toFixed(2)} MiB; 144 MiB limit.`,
   );
 }

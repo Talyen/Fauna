@@ -2,6 +2,9 @@
 .rule-keyword {
   font-weight: 600;
 }
+[data-keyword="criticalHit"] {
+  color: var(--keyword-criticalHit);
+}
 
 [data-damage-type="physical"],
 [data-combat-tone="physical"],

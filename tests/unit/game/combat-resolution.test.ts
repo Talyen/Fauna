@@ -105,9 +105,19 @@ it.each(cases)("preserves committed command traces for $name", ({ seed, team }) 
       rng: result.state.rng,
       digest: createHash("sha256")
         .update(
-          JSON.stringify(baselineResult, (key, value: unknown) =>
-            key === "negate" && value === false ? undefined : value,
-          ),
+          JSON.stringify(baselineResult, (key, value: unknown) => {
+            if (
+              key === "repeatNext" &&
+              value &&
+              typeof value === "object" &&
+              "player" in value &&
+              "enemy" in value &&
+              value.player === false &&
+              value.enemy === false
+            )
+              return undefined;
+            return key === "negate" && value === false ? undefined : value;
+          }),
         )
         .digest("hex"),
     });

@@ -50,7 +50,7 @@ export const GLOSSARY = [
   {
     term: "Hit",
     definition:
-      "A landed attack, including one absorbed by Block; Dodges and periodic damage are not hits; Sporecoat retaliates when hit; Thorns require the attack to remove Health",
+      "A landed attack, including one absorbed by Block; Dodges and periodic damage are not hits; Thorns and Sporecoat retaliate when hit",
   },
   {
     term: "Turn",
