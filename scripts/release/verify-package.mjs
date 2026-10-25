@@ -87,7 +87,8 @@ export function verifyArchive(read, { expected, receipt, runtimeFiles, rendererF
     throw new Error("Release tag differs from package version.");
   for (const [name, bytes] of Object.entries(runtimeFiles))
     if (!required(name).equals(bytes)) throw new Error(`Packaged runtime differs: ${name}`);
-  for (const [name, bytes] of Object.entries(rendererFiles))
+  const rendererEntries = rendererFiles[Symbol.iterator] ? rendererFiles : Object.entries(rendererFiles);
+  for (const [name, bytes] of rendererEntries)
     if (!required(name).equals(bytes)) throw new Error(`Packaged renderer differs: ${name}`);
   const main = required("desktop/main.cjs").toString();
   for (const field of [
@@ -166,6 +167,11 @@ export async function verifyPackage(directory = path.join(ROOT, "release/win-unp
   });
   const archive = path.join(directory, "resources/app.asar");
   const names = listPackage(archive).map((name) => name.replaceAll("\\", "/").replace(/^\//, ""));
+  for (const name of names) {
+    const dependency = /^node_modules\/((?:@[^/]+\/)?[^/]+)\//.exec(name)?.[1];
+    if (dependency && !["steamworks.js", "koffi", "@koromix/koffi-win32-x64"].includes(dependency))
+      throw new Error(`Unexpected desktop dependency: ${dependency}`);
+  }
   if (
     names.some(
       (name) => path.posix.normalize(name) !== name || name.startsWith("../") || name.startsWith("/"),
@@ -179,18 +185,19 @@ export async function verifyPackage(directory = path.join(ROOT, "release/win-unp
       .map((name) => [`desktop/${name}`, readFileSync(path.join(ROOT, "desktop", name))]),
   );
   runtimeFiles["src/game/save-format.json"] = readFileSync(path.join(ROOT, "src/game/save-format.json"));
-  const rendererFiles = Object.fromEntries(
-    readdirSync(path.join(ROOT, "dist"), { recursive: true })
-      .filter((name) => statSync(path.join(ROOT, "dist", name)).isFile())
-      .map((name) => [`dist/${name.replaceAll("\\", "/")}`, readFileSync(path.join(ROOT, "dist", name))]),
-  );
+  function* rendererFiles() {
+    for (const name of readdirSync(path.join(ROOT, "dist"), { recursive: true })) {
+      const file = path.join(ROOT, "dist", name);
+      if (statSync(file).isFile()) yield [`dist/${name.replaceAll("\\", "/")}`, readFileSync(file)];
+    }
+  }
   // ASAR 3 traverses directories with the host separator, including on Windows.
   const readArchive = (name) => extractFile(archive, path.normalize(name));
   const result = verifyArchive(readArchive, {
     expected,
     receipt,
     runtimeFiles,
-    rendererFiles,
+    rendererFiles: rendererFiles(),
     releaseTag,
   });
   for (const name of names.filter((name) => name.startsWith("dist/") && name.endsWith(".js")))

@@ -18,6 +18,15 @@ it("retains replayable current-format performance checkpoints", () => {
     }
   }
 });
+it("repeats artwork navigation without changing gameplay checkpoints or broadening ordinary captures", () => {
+  const scenarios = performanceCases(42, false, true);
+  expect(scenarios).toHaveLength(1);
+  const scenario = scenarios[0]!;
+  expect(scenario.id).toBe("resource-menus");
+  expect(scenario.actions).toHaveLength(24);
+  expect(scenario.actions.every((action) => action.checkpoint === scenario.initial)).toBe(true);
+  expect(performanceCases().some((row) => row.id === "resource-menus")).toBe(false);
+});
 // Constructing and replaying three full journeys can exceed the default deadline on hosted CPUs
 it("derives reachable early and late inventories from replay evidence without fixture grants", async () => {
   const scenarios = await reachablePerformanceCases(15);

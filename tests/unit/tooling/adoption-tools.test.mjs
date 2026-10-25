@@ -227,6 +227,14 @@ it("rejects broken Windows headers, escaping resources and corrupt packaged medi
   expect(() =>
     verifyArchive(read, { ...options, rendererFiles: { "dist/app.js": Buffer.from("different") } }),
   ).toThrow("renderer differs");
+  expect(() =>
+    verifyArchive(read, {
+      ...options,
+      rendererFiles: (function* () {
+        yield ["dist/app.js", Buffer.from("different")];
+      })(),
+    }),
+  ).toThrow("renderer differs");
   entries["dist/prepared/art.svg"] = Buffer.from("corrupt");
   expect(() => verifyArchive(read, options)).toThrow();
   entries["dist/app.js"] = Buffer.from("Skip combat");

@@ -1,6 +1,6 @@
 import type { Session } from "../../application/session";
 import type { StartupSplash } from "./splash";
-import { allArtwork, immediateArtwork, startupBaseArtwork } from "./artwork";
+import { likelyArtwork, immediateArtwork, startupBaseArtwork } from "./artwork";
 import { warmImages, waitForFonts } from "./images";
 
 /** One navigation owns preparation; React recovery only observes its settled promise. */
@@ -8,7 +8,21 @@ export function prepareStartup(session: Session, splash: StartupSplash, validate
   const lifetime = new AbortController();
   const { signal } = lifetime;
   const retained = new Set<HTMLImageElement>();
+  let upcoming: AbortController | undefined;
+  let removeSubscription: (() => void) | undefined;
+  let selection = "";
   const report = (message: string) => session.diagnostics.record("startup", message);
+  const prefetch = () => {
+    const urls = document.hidden ? [] : likelyArtwork(session.store.getState().game);
+    const next = JSON.stringify(urls);
+    if (next === selection || signal.aborted) return;
+    selection = next;
+    upcoming?.abort();
+    upcoming = new AbortController();
+    void warmImages(urls, upcoming.signal, report).catch((error: unknown) =>
+      session.diagnostics.record("startup", error),
+    );
+  };
   const base = warmImages(startupBaseArtwork, signal, report, retained);
   const fonts = waitForFonts(signal, report);
   const resources = (async () => {
@@ -29,12 +43,11 @@ export function prepareStartup(session: Session, splash: StartupSplash, validate
         retained,
       );
       if (signal.aborted) return;
-      const selected = new Set(essential);
-      void warmImages(
-        allArtwork.filter((url) => !selected.has(url)),
-        signal,
-        report,
-      );
+      prefetch();
+      removeSubscription = session.store.subscribe((current, previous) => {
+        if (current.game !== previous.game) prefetch();
+      });
+      document.addEventListener("visibilitychange", prefetch);
     } catch (error) {
       if (!signal.aborted) session.diagnostics.record(source, error);
       throw error;
@@ -45,6 +58,9 @@ export function prepareStartup(session: Session, splash: StartupSplash, validate
     releaseImages: () => retained.clear(),
     dispose() {
       lifetime.abort();
+      upcoming?.abort();
+      removeSubscription?.();
+      document.removeEventListener("visibilitychange", prefetch);
       retained.clear();
     },
   };

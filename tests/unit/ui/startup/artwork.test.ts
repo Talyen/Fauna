@@ -1,6 +1,7 @@
 import { expect, it } from "vitest";
 import { produce } from "immer";
-import { immediateArtwork, allArtwork, startupBaseArtwork } from "../../../../src/ui/startup/artwork";
+import { immediateArtwork, likelyArtwork, startupBaseArtwork } from "../../../../src/ui/startup/artwork";
+import prepared from "../../../../src/assets/prepared.json" with { type: "json" };
 import { createGame } from "../../../../src/game/engine";
 import { definition } from "../../../../src/game/content";
 import { assetUrl } from "../../../../src/ui/shared/assets";
@@ -26,7 +27,8 @@ it("warms only offered starters and shared menu assets on a fresh start, without
   expect(urls.length).toBeLessThan(12);
   expect(new Set(urls).size).toBe(urls.length);
   expect(JSON.stringify(game)).toBe(before);
-  expect(allArtwork.every((url) => /\.(png|webp|svg)$/.test(url))).toBe(true);
+  expect(likelyArtwork(game).length).toBeLessThanOrEqual(8);
+  expect(likelyArtwork(game).every((url) => !urls.includes(url))).toBe(true);
 });
 it("warms the saved combat's visible hand, creatures and minions without loading the full deck", () => {
   const game = run();
@@ -50,7 +52,7 @@ it("warms the saved combat's visible hand, creatures and minions without loading
     ];
   });
   expect(immediateArtwork(minions)).toContain(assetUrl("minion.echo"));
-  expect(urls.length).toBeLessThan(allArtwork.length / 2);
+  expect(urls.length).toBeLessThan(Object.keys(prepared.records).length / 2);
 });
 it("covers recruitment, Boon and Merchant choices", () => {
   const reward = winBattle();

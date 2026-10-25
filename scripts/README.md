@@ -82,6 +82,8 @@ The diagnostic launcher accepts `types`, `static`, `build`, `unit [suite files]`
 
 ## Worktree operations
 
+[Resource efficiency](../Docs/RESOURCE_EFFICIENCY.md) owns disk/memory inventories, `npm run resources`, explicit `npm run assets:prune` maintenance and dependency reattachment with `npm run deps -- --share`.
+
 The [shared launcher](local.mjs) enforces [execution budgets](../CONTRIBUTING.md#execution-and-evidence) and checks dependency readiness without installing during routine verification. CSS guards use [PostCSS](https://github.com/postcss/postcss); primitive provenance lives in the registry.
 
 The command creates `.worktrees/<task-name>` on `task/<task-name>` from committed local main by default. An existing matching checkout is reused without resetting files. Existing branches without that checkout and conflicting directories are preserved and rejected. Dependencies are linked from main only when dependency manifests, install settings and lifecycle scripts match. Run `npm run deps` in the task checkout when dependencies are missing or change: it reuses a matching shared link or detaches only that link and runs `npm ci` locally, using the project-pinned npm without changing the global install. Never run `npm ci` through a shared dependency link. Changing ordinary npm task commands alone does not invalidate dependencies.

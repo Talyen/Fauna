@@ -7,7 +7,7 @@ import { ownedCards } from "../game/team";
 import { battleChoices } from "../application/battle-policy";
 import type { Command, GameState } from "../game/types";
 
-export function performanceCases(seed = 42, diagnostic = false) {
+export function performanceCases(seed = 42, diagnostic = false, resources = false) {
   const fixture = structuredClone(createGame(seed));
   const kinds: SpeciesId[] = ["mossguard", "emberback", "prismram", "pollenmoth"];
 
@@ -83,6 +83,24 @@ export function performanceCases(seed = 42, diagnostic = false) {
         initial,
         fixture: "synthetic-stall-v1",
         actions: [{ kind: "stall", checkpoint: initial }],
+      },
+    ];
+  if (resources)
+    return [
+      {
+        id: "resource-menus",
+        initial,
+        fixture: "repeated-artwork-navigation-v1",
+        actions: Array.from({ length: 3 }, () => [
+          { kind: "click", name: "Collection", checkpoint: initial },
+          { kind: "click", name: "Inspect Mossguard", checkpoint: initial },
+          { kind: "cancel", checkpoint: initial },
+          { kind: "click", name: "Next page", checkpoint: initial },
+          { kind: "click", name: "Previous page", checkpoint: initial },
+          { kind: "click", name: "Back", checkpoint: initial },
+          { kind: "click", name: "Talents", checkpoint: initial },
+          { kind: "click", name: "Back", checkpoint: initial },
+        ]).flat(),
       },
     ];
   return [

@@ -28,6 +28,8 @@
     "worktree": "node scripts/worktree.mjs",
     "integrate": "node scripts/local.mjs integrate",
     "deps": "node scripts/dependencies.mjs",
+    "resources": "node scripts/resources.mjs",
+    "assets:prune": "node scripts/assets/prune-assets.mjs",
     "worktree:cleanup": "node scripts/worktree-cleanup.mjs",
     "docs:check": "node scripts/checks/check-docs.mjs",
     "check:bundle": "node scripts/checks/check-bundle-budget.mjs",
@@ -131,7 +133,8 @@
       "dist/**/*",
       "desktop/**/*",
       "package.json",
-      "src/game/save-format.json"
+      "src/game/save-format.json",
+      "!node_modules/!(steamworks.js|koffi|@koromix)/**/*"
     ],
     "asar": true,
     "win": {

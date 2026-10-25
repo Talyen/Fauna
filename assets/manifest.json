@@ -447,18 +447,6 @@
       "originalSource": "Sounds/Game Sources/Music/Battle 1.mp3"
     },
     {
-      "id": "music.marsh",
-      "origin": "repository",
-      "source": "assets/source/audio/music/marsh.mp3",
-      "output": "music/marsh.mp3",
-      "recipe": "copy",
-      "kind": "music",
-      "provenance": "Shared Asset Library; Alchemy soundtrack selection",
-      "rights": "Shared project music; original source retained in library",
-      "listening": "pending",
-      "originalSource": "Sounds/Game Sources/Music/Battle 3.mp3"
-    },
-    {
       "id": "music.boss",
       "origin": "repository",
       "source": "assets/source/audio/music/boss.mp3",

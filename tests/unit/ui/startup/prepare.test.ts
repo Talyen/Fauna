@@ -144,3 +144,34 @@ it("diagnoses an unexpected preparation failure without calling it invalid conte
   await expect(startup.ready).rejects.toThrow("preparation");
   expect(session.diagnostics.snapshot()).toEqual([{ source: "startup", message: "preparation", count: 1 }]);
 });
+
+it("bounds optional warmup and cancels its work while hidden and on disposal", async () => {
+  const hidden = vi.spyOn(document, "hidden", "get").mockReturnValue(false);
+  session = createSession(
+    {
+      desktop: false,
+      steam: { available: false },
+      saves: { readCandidates: async () => [], write: async () => {} },
+    },
+    7,
+  );
+  startup = prepareStartup(session, splash, vi.fn());
+  await vi.advanceTimersByTimeAsync(5000);
+  await startup.ready;
+  const optional = vi.mocked(warmImages).mock.calls.filter((call) => !call[3]);
+  expect(optional).toHaveLength(1);
+  expect(optional[0]![0].length).toBeLessThanOrEqual(8);
+  const first = optional[0]![1];
+  hidden.mockReturnValue(true);
+  document.dispatchEvent(new Event("visibilitychange"));
+  expect(first.aborted).toBe(true);
+  hidden.mockReturnValue(false);
+  document.dispatchEvent(new Event("visibilitychange"));
+  const last = vi.mocked(warmImages).mock.calls.at(-1)![1];
+  expect(last.aborted).toBe(false);
+  startup.dispose();
+  expect(last.aborted).toBe(true);
+  const count = vi.mocked(warmImages).mock.calls.length;
+  document.dispatchEvent(new Event("visibilitychange"));
+  expect(warmImages).toHaveBeenCalledTimes(count);
+});

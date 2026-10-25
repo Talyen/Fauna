@@ -2,7 +2,7 @@ import { existsSync, mkdirSync, symlinkSync, realpathSync, lstatSync } from "nod
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { git, worktrees } from "./lib/git.mjs";
-import { matchingDependencies } from "./dependencies.mjs";
+import { matchingDependencies, dependenciesAvailable } from "./dependencies.mjs";
 import { recordTaskIntent, taskIntent } from "./lib/task-intent.mjs";
 
 export function createWorktree(root, slug, base = "main") {
@@ -38,7 +38,11 @@ export function createWorktree(root, slug, base = "main") {
   git(root, ["worktree", "add", "-b", branch, target, commit]);
   recordTaskIntent(target, { base: commit });
   let linked = false;
-  if (matchingDependencies(root, target) && existsSync(path.join(root, "node_modules"))) {
+  if (
+    matchingDependencies(root, target) &&
+    existsSync(path.join(root, "node_modules")) &&
+    dependenciesAvailable(root)
+  ) {
     try {
       symlinkSync(
         path.join(root, "node_modules"),

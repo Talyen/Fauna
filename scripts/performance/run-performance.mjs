@@ -93,6 +93,16 @@ async function capture(
   recordSpans = true,
 ) {
   let context, app, profile, stopTrace, page, sample, captureError, value;
+  const nativeMemory = [];
+  const observeMemory = async (label) => {
+    if (!measured || !app) return;
+    nativeMemory.push({
+      label,
+      processes: await app.evaluate(({ app }) =>
+        app.getAppMetrics().map(({ pid, type, memory }) => ({ pid, type, memory })),
+      ),
+    });
+  };
   let failed = false;
   const launched = performance.now();
   try {
@@ -135,7 +145,8 @@ async function capture(
     page.setDefaultTimeout(15000);
     await page.getByRole("button", { name: "Continue", exact: true }).waitFor({ timeout: 30000 });
     const startupMs = performance.now() - launched;
-    if (scenario.id !== "menus" && scenario.id !== "startup")
+    await observeMemory("ready");
+    if (!["menus", "resource-menus", "startup"].includes(scenario.id))
       await page.getByRole("button", { name: "Continue", exact: true }).click();
     await page.locator(".app:not([inert])[data-save-status=saved]").waitFor();
     await page.locator("img").evaluateAll((images) => Promise.all(images.map((img) => img.decode())));
@@ -147,14 +158,17 @@ async function capture(
     await page.bringToFront();
     if (measured && traceMode) stopTrace = await beginTrace(page, `${artifactBase}-trace.json`);
     if (measured) await page.evaluate(installSampler, { recordSpans });
+    await observeMemory("before-actions");
     for (const [i, step] of scenario.actions.entries()) {
       if (measured) await page.evaluate((name) => window.faunaPerf.segment(name), `${i}-${step.kind}`);
       if (step.kind !== "idle") await action(page, step);
       await page.waitForTimeout(1200);
       if (measured) await page.evaluate(() => window.faunaPerf.end());
+      await observeMemory(`${i}-${step.kind}`);
     }
     if (measured) {
       sample = await page.evaluate(() => window.faunaPerf.stop());
+      sample.nativeMemory = nativeMemory;
       const trace = stopTrace ? await stopTrace() : null;
       value = {
         ...sample,
@@ -289,7 +303,7 @@ export async function main(args = process.argv.slice(2)) {
             ]
           : (suite === "reachable"
               ? await reachablePerformanceCases(seed)
-              : performanceCases(seed, scenarioId === "diagnostic-stall")
+              : performanceCases(seed, scenarioId === "diagnostic-stall", scenarioId === "resource-menus")
             ).filter((row) => !scenarioId || row.id === scenarioId);
     } finally {
       await loader.close();
@@ -308,6 +322,7 @@ export async function main(args = process.argv.slice(2)) {
         ? (await import("electron/package.json", { with: { type: "json" } })).default.version
         : browser.version(),
       cold,
+      memoryObservation: native ? "process-working-set-KiB-at-actions-v1" : "renderer-heap-only",
       trace: traceMode,
       recordSpans,
       recorderVersion: 1,

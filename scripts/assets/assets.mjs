@@ -204,6 +204,11 @@ function recipeContract(entry) {
 export async function assets(options = {}) {
   if (options.mode !== "prepare") return runAssets(options);
   const repository = await realpath(options.repository ?? root);
+  return withAssetLock(repository, () => runAssets({ ...options, repository }));
+}
+
+export async function withAssetLock(repository, action) {
+  repository = await realpath(repository);
   const port =
     10000 + (createHash("sha256").update(`fauna-assets:${repository}`).digest().readUInt32BE(0) % 50000);
   const server = net.createServer((socket) => socket.destroy());
@@ -218,7 +223,7 @@ export async function assets(options = {}) {
     throw error;
   }
   try {
-    return await runAssets({ ...options, repository });
+    return await action();
   } finally {
     await new Promise((resolve, reject) => server.close((error) => (error ? reject(error) : resolve())));
   }
@@ -236,12 +241,14 @@ async function runAssets({ repository = root, mode = "outputs" } = {}) {
     const selections = [];
     for (const entry of manifest.assets) {
       const bytes = await readSource(entry, repository);
-      selections.push({ entry, bytes });
+      selections.push({ entry, sourceHash: hash(bytes) });
     }
     const records = {};
     let cacheHits = 0;
-    for (const { entry, bytes } of selections) {
-      const sourceHash = hash(bytes);
+    for (const { entry, sourceHash } of selections) {
+      // Keep one source buffer alive instead of retaining the entire authoring library.
+      const bytes = await readSource(entry, repository);
+      if (hash(bytes) !== sourceHash) throw new Error(`Source changed during preparation: ${entry.id}`);
       const settings = recipeSettings(entry);
       const recipeHash = hash(JSON.stringify(settings));
       const key = hash(JSON.stringify({ sourceHash, recipeHash, extension: path.extname(entry.output) }));

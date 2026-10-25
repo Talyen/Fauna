@@ -243,7 +243,17 @@ jobs:
         timeout-minutes: 3
         run: npm ci --no-audit --no-fund
       - name: Build production browser assets
-        run: npm run build
+        run: |
+          mkdir -p reports/resources
+          /usr/bin/time -v -o reports/resources/build-memory.txt npm run build
+          npm run resources -- --out reports/resources/browser.json
+      - name: Retain resource inventory
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: resource-inventory
+          retention-days: 7
+          path: reports/resources/
       - name: Bundle allowance
         run: npm run check:bundle
       - name: Bundled asset contract
@@ -437,6 +447,8 @@ jobs:
           CSC_IDENTITY_AUTO_DISCOVERY: "false"
       - name: Verify package
         run: npm run verify:package
+      - name: Inventory packaged size
+        run: npm run resources -- --out reports/resources/windows.json
       - name: Inventory packaged components
         run: npm run generate:release-inventory -- --package release/win-unpacked
       - name: Verify tagged release identity
@@ -454,6 +466,7 @@ jobs:
           compression-level: 0
           path: |
             release/win-unpacked
+            reports/resources/
             reports/release-inventory/
             dist/dependencies.cdx.json
             dist/THIRD-PARTY-NOTICES.txt

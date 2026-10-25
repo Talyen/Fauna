@@ -28,7 +28,7 @@ Each Vite build records the full commit, Git tree, package version and dirty sta
 
 ## Packaged integrity
 
-Windows packaging disables electron-builder publication. The hardening hook configures every Electron 45 fuse, including the Wasm trap handler, rejecting unknown or incomplete fuse wires.
+Windows packaging disables electron-builder publication. Renderer libraries already bundled by Vite are excluded from packaged node modules; Steamworks, Koffi and its target-platform binding remain. Package verification rejects unexpected desktop dependencies, while production build inputs retain license/SBOM coverage. [Resource efficiency](RESOURCE_EFFICIENCY.md#build-and-package-lifetimes) owns size and memory measurements. The hardening hook configures every Electron 45 fuse, including the Wasm trap handler, rejecting unknown or incomplete fuse wires.
 
 ```sh
 npm run verify:package -- release/win-unpacked

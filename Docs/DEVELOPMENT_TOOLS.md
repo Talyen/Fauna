@@ -6,6 +6,7 @@
 - [Content audit](#content-checks), [media and listening](#prepared-media-and-sound-desk)
 - [Headless journeys](#headless-journeys), [paired balance](#paired-balance-reports), [findings](#ranked-balance-findings)
 - [Performance](#reproducible-performance-captures), [native/reachable scenarios](#native-and-reachable-performance-scenarios), [compiler trial](#periodic-performance-and-compiler-trial)
+- [Disk and memory inventory, budgets and maintenance](RESOURCE_EFFICIENCY.md)
 - [Diagnostics](#local-diagnostics), [task selection](#task-selection-and-diagnostics), [review/lookup](#review-and-owner-lookup), [platform checks](#architecture-and-packaged-platform-checks)
 
 Reports remain under ignored `reports/`; retain their source/checkpoint identities and actual completion status. Failed/incomplete captures are diagnostics, never accepted evidence. Browser automation simulates input; [Release](RELEASE.md) owns native, package and hardware qualification. [UI review](UI.md#required-review) owns rendered acceptance.

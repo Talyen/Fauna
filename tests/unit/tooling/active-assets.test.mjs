@@ -43,13 +43,7 @@ it("emits exactly the active inventory without originals, old generations, recei
     expect(plugin.transform("unrelated", path.join(repository, "src/game/content.ts"))).toBeUndefined();
     const emitted = [];
     await plugin.generateBundle.call({ emitFile: (file) => emitted.push(file) });
-    expect(emitted.map((file) => file.fileName).sort()).toEqual(
-      [receipt.records[entry.id].url.slice(2), "prepared/manifest.json"].sort(),
-    );
-    for (const { fileName, source } of emitted) {
-      await mkdir(path.dirname(path.join(dist, fileName)), { recursive: true });
-      await writeFile(path.join(dist, fileName), source);
-    }
+    expect(emitted).toEqual([]);
     await plugin.writeBundle({ dir: dist });
     expect((await verifyAssetBundle(dist, receipt)).files).toBe(1);
     await mkdir(path.join(dist, "prepared/old-generation"));

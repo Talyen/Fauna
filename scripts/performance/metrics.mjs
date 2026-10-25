@@ -65,6 +65,7 @@ export function summarizeSample(sample) {
     input: sample.input,
     before: sample.before,
     after: sample.after,
+    nativeMemory: sample.nativeMemory ?? null,
   };
 }
 export function comparePerformance(before, after) {

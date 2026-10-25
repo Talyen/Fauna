@@ -29,6 +29,7 @@ export interface PerformanceSample {
   startupMs?: number | null;
   before?: unknown;
   after?: unknown;
+  nativeMemory?: unknown;
 }
 export interface Hitch extends FrameInterval {
   actions: Array<string | undefined>;
@@ -49,6 +50,7 @@ export interface PerformanceSummary {
   input: TimedObservation[] | null;
   before: unknown;
   after: unknown;
+  nativeMemory: unknown;
 }
 export interface PerformanceReport {
   buildIdentity?: string;

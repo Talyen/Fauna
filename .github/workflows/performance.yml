@@ -14,6 +14,33 @@ concurrency:
   group: performance-${{ github.ref }}
   cancel-in-progress: false
 jobs:
+  native-memory:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - name: Select pinned npm
+        run: npm install --global npm@12.2.1 --ignore-scripts --no-audit --no-fund
+      - name: Install dependencies and Electron
+        run: npm ci --no-audit --no-fund
+      - name: Build renderer
+        run: npm run build
+      - name: Observe native startup, battle and menu memory
+        run: |
+          npm run perf -- --electron --cold --out reports/performance/native-startup
+          npm run perf -- --electron --scenario battle --out reports/performance/native-battle
+          npm run perf -- --electron --scenario resource-menus --out reports/performance/native-menus
+      - name: Retain native observations
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: native-memory-${{ github.sha }}
+          retention-days: 30
+          path: reports/performance/
   paired:
     runs-on: ubuntu-latest
     timeout-minutes: 30

@@ -1,4 +1,14 @@
-import { existsSync, lstatSync, readFileSync, realpathSync, unlinkSync } from "node:fs";
+import {
+  existsSync,
+  lstatSync,
+  readFileSync,
+  realpathSync,
+  unlinkSync,
+  renameSync,
+  symlinkSync,
+  rmSync,
+} from "node:fs";
+import { randomUUID } from "node:crypto";
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
@@ -127,7 +137,42 @@ export function installDependencies(
   return result.status ?? 1;
 }
 
+/** Explicitly reattach this caller's private, rebuildable install; never alter a peer checkout. */
+export function shareDependencies(root) {
+  root = realpathSync(root);
+  const main = worktrees(root).find((tree) => tree.branch === "refs/heads/main")?.path;
+  if (
+    !main ||
+    realpathSync(main) === root ||
+    !worktrees(root).some((tree) => realpathSync(tree.path) === root)
+  )
+    throw new Error("Dependency sharing requires a registered task checkout.");
+  if (!matchingDependencies(root, main) || !dependenciesAvailable(main))
+    throw new Error("Main dependencies are missing or do not match; private dependencies preserved.");
+  const modules = path.join(root, "node_modules");
+  if (lstatSync(modules, { throwIfNoEntry: false })?.isSymbolicLink()) {
+    if (realpathSync(modules) !== realpathSync(path.join(main, "node_modules")))
+      throw new Error("Unexpected dependency link; preserved it.");
+    return;
+  }
+  const backup = `${modules}.fauna-${randomUUID()}`;
+  const existing = existsSync(modules);
+  if (existing) renameSync(modules, backup);
+  try {
+    symlinkSync(path.join(main, "node_modules"), modules, process.platform === "win32" ? "junction" : "dir");
+  } catch (error) {
+    if (existing) renameSync(backup, modules);
+    throw error;
+  }
+  if (existing) rmSync(backup, { recursive: true });
+}
+
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
-  if (process.argv.length !== 2) throw new Error("Usage: npm run deps");
-  process.exitCode = installDependencies(process.cwd());
+  if (process.argv.length === 3 && process.argv[2] === "--share") {
+    shareDependencies(process.cwd());
+    console.log("Task dependencies now share main's matching installation.");
+  } else {
+    if (process.argv.length !== 2) throw new Error("Usage: npm run deps -- [--share]");
+    process.exitCode = installDependencies(process.cwd());
+  }
 }
