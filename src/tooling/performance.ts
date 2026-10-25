@@ -59,6 +59,7 @@ export function performanceCases(seed = 42, diagnostic = false, resources = fals
   const attack = battleChoices(started.state, false).find(
     (c) =>
       c.type === "play" &&
+      c.targetId !== undefined &&
       definition(started.state.cards.find((card) => card.id === c.cardId)!.definitionId).effect === "attack",
   );
   if (!attack || attack.type !== "play") throw new Error("Performance fixture has no attack.");
