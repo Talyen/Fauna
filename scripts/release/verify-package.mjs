@@ -116,6 +116,14 @@ export function verifyArchive(read, { expected, receipt, runtimeFiles, rendererF
   }
   return { version: pkg.version, resources: resources.length, media: Object.keys(receipt.records).length };
 }
+export function verifyDesktopDependencies(names) {
+  for (const name of names) {
+    // ASAR listings include scope containers such as node_modules/@koromix/.
+    const dependency = /^node_modules\/(@[^/]+\/[^/]+|[^@/][^/]*)(?:\/|$)/.exec(name)?.[1];
+    if (dependency && !["steamworks.js", "koffi", "@koromix/koffi-win32-x64"].includes(dependency))
+      throw new Error(`Unexpected desktop dependency: ${dependency}`);
+  }
+}
 export async function verifyPackage(directory = path.join(ROOT, "release/win-unpacked"), releaseTag) {
   const expected = JSON.parse(readFileSync(path.join(ROOT, "package.json"), "utf8"));
   if (expected.build.appId !== "com.fauna.game" || expected.build.productName !== "Fauna")
@@ -167,11 +175,7 @@ export async function verifyPackage(directory = path.join(ROOT, "release/win-unp
   });
   const archive = path.join(directory, "resources/app.asar");
   const names = listPackage(archive).map((name) => name.replaceAll("\\", "/").replace(/^\//, ""));
-  for (const name of names) {
-    const dependency = /^node_modules\/((?:@[^/]+\/)?[^/]+)\//.exec(name)?.[1];
-    if (dependency && !["steamworks.js", "koffi", "@koromix/koffi-win32-x64"].includes(dependency))
-      throw new Error(`Unexpected desktop dependency: ${dependency}`);
-  }
+  verifyDesktopDependencies(names);
   if (
     names.some(
       (name) => path.posix.normalize(name) !== name || name.startsWith("../") || name.startsWith("/"),

@@ -10,6 +10,7 @@ import { pruneAssets } from "../../../scripts/assets/prune-assets.mjs";
 import { activeAssetsPlugin } from "../../../scripts/assets/active-assets.mjs";
 import { createWorktree } from "../../../scripts/worktree.mjs";
 import { shareDependencies } from "../../../scripts/dependencies.mjs";
+import { verifyDesktopDependencies } from "../../../scripts/release/verify-package.mjs";
 
 const configuration = JSON.parse(
   await readFile(new URL("../../../package.json", import.meta.url), "utf8"),
@@ -75,6 +76,19 @@ it("plans byte-identical bulk evidence without deleting files, small summaries o
 });
 
 it("uses the installed packager's filter to retain native dependencies and exclude bundled renderer modules", async () => {
+  expect(() =>
+    verifyDesktopDependencies([
+      "node_modules/@koromix/",
+      "node_modules/@koromix/koffi-win32-x64/",
+      "node_modules/@koromix/koffi-win32-x64/win32_x64/koffi.node",
+      "node_modules/koffi/index.cjs",
+      "node_modules/steamworks.js/index.js",
+    ]),
+  ).not.toThrow();
+  for (const name of ["react/index.js", "@radix-ui/react-dialog/index.js"])
+    expect(() => verifyDesktopDependencies([`node_modules/${name}`])).toThrow(
+      "Unexpected desktop dependency",
+    );
   const { root } = await fixture();
   try {
     const matcher = getNodeModuleFileMatcher(
