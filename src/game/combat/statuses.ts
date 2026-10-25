@@ -78,8 +78,16 @@ export function* grantStatus(
   sharing = true,
 ): Resolution<void> {
   if (unit.health <= 0) return;
-  const stats = ensureCombat(unit),
-    before = stats[status];
+  const stats = ensureCombat(unit);
+  if (
+    (status === "thorns" || status === "waterThorns" || status === "fireThorns") &&
+    isEnemy(unit) &&
+    stats.blind &&
+    state &&
+    state.boons.includes("apiary-smoker")
+  )
+    return;
+  const before = stats[status];
   stats[status] = Math.min(status === "dodge" ? 70 : STACK_LIMIT, before + amount);
   const gain = stats[status] - before;
   if (gain)
@@ -305,6 +313,23 @@ export function* cleanseRewards(
   freezeBuildupRemoved = false,
 ): Resolution<void> {
   const stats = ensureCombat(unit);
+  if (
+    cleansed > 0 &&
+    unit.health > 0 &&
+    !isEnemy(unit) &&
+    state.boons.includes("calendula-soap") &&
+    !stats.controlled &&
+    !harmfulStatuses.some((status) => Number(stats[status]) > 0)
+  ) {
+    stats.nullify = true;
+    events.push({
+      kind: "status",
+      targetId: unit.id,
+      status: "nullify",
+      outcome: "gain",
+      text: `${unitName(unit)} gains Nullify`,
+    });
+  }
   if (freezeBuildupRemoved && unit.health > 0) {
     const allied = !isEnemy(unit);
     const row = battlefield(state, allied ? "player" : "enemy");
@@ -331,6 +356,42 @@ export function* cleanseRewards(
     if (healing) yield* reaction("restoreHealth", unit, healing * cleansed, events, false, state);
   }
 }
+export function* puzzleEffect(
+  state: GameState,
+  source: Combatant,
+  target: Combatant,
+  status: (typeof harmfulStatuses)[number],
+  events: GameEvent[],
+): Resolution<void> {
+  if (
+    state.phase !== "battle" ||
+    isEnemy(source) ||
+    !isEnemy(target) ||
+    source.health <= 0 ||
+    target.health <= 0 ||
+    !state.boons.includes("story-puzzle-cube")
+  )
+    return;
+  const progress = state.battle.puzzleProgress;
+  if (progress.includes(status)) return;
+  const next = [...progress, status];
+  if (next.length < boonRule("story-puzzle-cube").effects) state.battle.puzzleProgress = next;
+  else {
+    // Clear before Purge reactions so a fresh trio cannot reuse the completed set
+    state.battle.puzzleProgress = [];
+    yield* reaction(
+      "removeEffects",
+      target,
+      "purge",
+      boonRule("story-puzzle-cube").purge,
+      events,
+      state,
+      undefined,
+      source,
+    );
+  }
+}
+
 export function* applyHarmfulStatus(
   state: GameState,
   source: Combatant,
@@ -353,6 +414,7 @@ export function* applyHarmfulStatus(
   const alliedSource = !isEnemy(source),
     alliedTarget = !isEnemy(target);
   let appliedControl = false;
+  let applied = false;
   const depletions: ArmorDepletion[] = [];
   const immune =
     (type === "stun" || type === "freeze") &&
@@ -430,6 +492,7 @@ export function* applyHarmfulStatus(
   }
   if (type === "blind" && target.health > 0 && !stats.blind) {
     stats.blind = true;
+    applied = true;
     stats.statusSources.blind = source.id;
     events.push({
       kind: "status",
@@ -442,6 +505,7 @@ export function* applyHarmfulStatus(
   }
   if (type === "burn" || type === "poison" || type === "bleed") {
     const gained = addPeriodicStacks(stats, type, damage, source.id);
+    applied = gained > 0;
     if (type === "bleed" && options.leech) deferLeech(stats, source.id, gained);
     events.push({
       kind: "status",
@@ -463,7 +527,8 @@ export function* applyHarmfulStatus(
   if ((type === "stun" || type === "freeze") && source.health > 0 && target.health > 0 && !immune) {
     const beforeStacks = stats[type];
     stats[type] = Math.min(STACK_LIMIT, stats[type] + damage);
-    if (stats[type] > beforeStacks) stats.statusSources[type] = source.id;
+    applied = stats[type] > beforeStacks;
+    if (applied) stats.statusSources[type] = source.id;
     events.push({
       kind: "status",
       targetId: target.id,
@@ -539,6 +604,7 @@ export function* applyHarmfulStatus(
       });
     }
   }
+  if (applied) yield* puzzleEffect(state, source, target, type, events);
   return { depletions, appliedControl, suppressed: false };
 }
 export function* controlRewards(

@@ -38,6 +38,7 @@ function fingerprint(state: GameState, events: unknown) {
                 ([key, entry]) =>
                   !(key === "fireThorns" && entry === 0) &&
                   !(key === "encoreProgress" && entry === 0) &&
+                  !(key === "puzzleProgress" && Array.isArray(entry) && entry.length === 0) &&
                   !(
                     key === "repeatNext" &&
                     entry &&

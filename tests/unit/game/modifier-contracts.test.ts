@@ -41,6 +41,7 @@ const digest = (value: unknown) =>
       JSON.stringify(value, (key, entry) => {
         if (key === "version") return 57;
         if (key === "fireThorns" && entry === 0) return undefined;
+        if (key === "puzzleProgress" && Array.isArray(entry) && entry.length === 0) return undefined;
         if (key === "encoreProgress" && entry === 0) return undefined;
         if (key === "repeatNext" && entry.player === false && entry.enemy === false) return undefined;
         return entry;

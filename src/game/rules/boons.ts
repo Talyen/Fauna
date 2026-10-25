@@ -6,6 +6,22 @@ function boon<P extends object>(parameters: P, describe: (parameters: P) => stri
 }
 const rules = freeze(
   {
+    "apiary-smoker": boon({}, () => "Blinded enemies cannot gain Thorns"),
+    "brookskip-disc": boon({}, () => "Water damage against enemy Block chains to a second enemy"),
+    "fallingstar-anvil": boon(
+      { divisor: 2 },
+      () => "Half the Block lost to enemy attacks becomes Stun buildup on the attacker",
+    ),
+    "pleated-pagoda": boon({ divisor: 2 }, () => "Half the Block lost through decay becomes Armor"),
+    "calendula-soap": boon({}, () => "Cleansing an ally’s last harmful effect grants them Nullify"),
+    "nectar-dipper": boon({ multiplier: 2 }, () => "Food cards are twice as effective"),
+    "saddle-pouch": boon({}, () => "Swapping an ally in from backup draws one of its cards"),
+    "dune-shuttle": boon({ block: 1 }, () => "Drawing an ally's card grants them 1 Block"),
+    "story-puzzle-cube": boon(
+      { effects: 3, purge: 1 },
+      () => "Every third harmful effect you apply Purges the enemy",
+    ),
+    "mineral-bookend": boon({ mana: 1 }, () => "Drawing the last card in your draw pile restores 1 Mana"),
     "briar-racquet": boon({ divisor: 2 }, () => "Thorns retaliates at half strength when you Dodge"),
     "lovers-knot": boon({}, () => "Healing an ally also heals yourself"),
     "thaw-spoon": boon({}, () => "Healing removes an equal amount of Freeze buildup"),

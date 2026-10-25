@@ -1,5 +1,5 @@
 {
-  "version": 60,
+  "version": 61,
   "discovery": {
     "encountered": [
       "reedstag",
@@ -540,7 +540,8 @@
     "repeatNext": {
       "player": false,
       "enemy": false
-    }
+    },
+    "puzzleProgress": []
   },
   "reward": null,
   "journey": {

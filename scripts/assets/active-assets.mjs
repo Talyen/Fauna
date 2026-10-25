@@ -7,8 +7,8 @@ import { fileHash } from "../lib/file-integrity.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "../..");
 // Total prepared media, including music. JavaScript has its own measured budget.
-// 217 active objects measure 154.40 MiB, including ten additional lossless Boon portraits.
-const MAX_MEDIA_BYTES = 160 * 1024 * 1024;
+// 239 active objects measure 172.03 MiB, including thirty lossless Drive Boon portraits.
+const MAX_MEDIA_BYTES = 176 * 1024 * 1024;
 const MAX_ART_BYTES = 3 * 1024 * 1024;
 const inventory = (receipt) =>
   [...new Set(Object.values(receipt.records).map((record) => record.url.slice(2)))].sort();
@@ -62,7 +62,7 @@ export async function verifyAssetBundle(directory, receipt) {
     total += size;
   }
   if (total > MAX_MEDIA_BYTES)
-    throw new Error("Prepared media exceeds 160 MiB; investigate growth before raising the budget.");
+    throw new Error("Prepared media exceeds 176 MiB; investigate growth before raising the budget.");
   return { files: expected.length - 1, bytes: total };
 }
 
