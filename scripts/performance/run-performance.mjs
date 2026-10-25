@@ -32,9 +32,11 @@ export async function performanceBuildIdentity(repository = ROOT) {
 }
 export async function action(page, step) {
   if (step.kind === "select")
-    await page.locator(`.hand [data-card-id=${JSON.stringify(step.cardId)}]`).click();
+    await page.locator(`.app:not([inert]) .hand [data-card-id=${JSON.stringify(step.cardId)}]`).click();
   else if (step.kind === "target")
-    await page.locator(`[data-actor-id=${JSON.stringify(step.targetId)}] .creature-card`).hover();
+    await page
+      .locator(`.app:not([inert]) [data-actor-id=${JSON.stringify(step.targetId)}] .creature-card`)
+      .hover();
   else if (step.kind === "targetKey") await page.keyboard.press(step.key);
   else if (step.kind === "cancel") await page.keyboard.press("Escape");
   else if (step.kind === "stall")
