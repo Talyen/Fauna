@@ -89,6 +89,7 @@ export function beginBattle(state: StateAt<"teamSelection">, events: GameEvent[]
     c.attacked = false;
   }
   const battle = {
+    encoreProgress: 0,
     repeatNext: { player: false, enemy: false },
     copySerial: 0,
     earnedGold: 0,

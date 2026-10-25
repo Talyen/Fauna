@@ -2262,6 +2262,116 @@
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     },
     {
+      "id": "boon.briar-racquet",
+      "origin": "repository",
+      "source": "public/art/boons/briar-racquet.png",
+      "output": "art/boons/briar-racquet.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Briar Racquet artwork copied unchanged from Google Drive https://drive.google.com/file/d/1jw8-TTb5xrjbjavd_KGLpaDmtpWJj7Xv/view?usp=drivesdk",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "boon.lovers-knot",
+      "origin": "repository",
+      "source": "public/art/boons/lovers-knot.png",
+      "output": "art/boons/lovers-knot.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Lovers Knot artwork copied unchanged from Google Drive https://drive.google.com/file/d/1eTC1r8BvdEzaI91fsenpDVEZoIr91N2h/view?usp=drivesdk",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "boon.thaw-spoon",
+      "origin": "repository",
+      "source": "public/art/boons/thaw-spoon.png",
+      "output": "art/boons/thaw-spoon.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Thaw Spoon artwork copied unchanged from Google Drive https://drive.google.com/file/d/1MR6EaVWB4KTQxfDIdXAtjRWT05wg8qJV/view?usp=drivesdk",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "boon.cinder-fan",
+      "origin": "repository",
+      "source": "public/art/boons/cinder-fan.png",
+      "output": "art/boons/cinder-fan.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Cinder Fan artwork copied unchanged from Google Drive https://drive.google.com/file/d/1ShITNZ_luKOfCjXyz0rv-5OO9GmRA-Hx/view?usp=drivesdk",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "boon.moss-oven-mitt",
+      "origin": "repository",
+      "source": "public/art/boons/moss-oven-mitt.png",
+      "output": "art/boons/moss-oven-mitt.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Moss Oven Mitt artwork copied unchanged from Google Drive https://drive.google.com/file/d/1-MAaWZbgvAitFso0rJaFLp8gnRVAoqqM/view?usp=drivesdk",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "boon.encore-baton",
+      "origin": "repository",
+      "source": "public/art/boons/encore-baton.png",
+      "output": "art/boons/encore-baton.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Encore Baton artwork copied unchanged from Google Drive https://drive.google.com/file/d/1NixLCCCIbphJcn_NfgjUfnVBCjLV3E6G/view?usp=drivesdk",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "boon.pruning-crescent",
+      "origin": "repository",
+      "source": "public/art/boons/pruning-crescent.png",
+      "output": "art/boons/pruning-crescent.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Pruning Crescent artwork copied unchanged from Google Drive https://drive.google.com/file/d/1B-QVL6AcyqLXhbWwk4iYj0_999vu_3V8/view?usp=drivesdk",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "boon.knot-comb",
+      "origin": "repository",
+      "source": "public/art/boons/knot-comb.png",
+      "output": "art/boons/knot-comb.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Knot Comb artwork copied unchanged from Google Drive https://drive.google.com/file/d/16tBzz_Pum0lhMpyUMCE4fKL3kjzWltxn/view?usp=drivesdk",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "boon.rain-cape",
+      "origin": "repository",
+      "source": "public/art/boons/rain-cape.png",
+      "output": "art/boons/rain-cape.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Rain Cape artwork copied unchanged from Google Drive https://drive.google.com/file/d/16x6trX7fKHyV8VD18w3RL9JOViHd6hra/view?usp=drivesdk",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "boon.tuning-fork-charm",
+      "origin": "repository",
+      "source": "public/art/boons/tuning-fork-charm.png",
+      "output": "art/boons/tuning-fork-charm.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Tuning Fork Charm artwork copied unchanged from Google Drive https://drive.google.com/file/d/1Dxlve5WyU91zkX2WPgpiM_uzI8MThuvN/view?usp=drivesdk",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
       "id": "creature.skybex",
       "origin": "repository",
       "source": "public/art/creatures/skybex/portrait.png",

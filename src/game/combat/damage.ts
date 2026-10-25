@@ -22,7 +22,7 @@ import {
   type Combatant,
 } from "./state";
 import { reaction, type Resolution } from "./operations";
-import { modifiedDamage, blockPayment, armoredDamage, armorApplies } from "./damage-values";
+import { modifiedDamage, blockPayment, blockEfficiency, armoredDamage, armorApplies } from "./damage-values";
 import {
   dodgeResponse,
   blockDepletionRewards,
@@ -104,6 +104,8 @@ export function* bounce(
           false,
           state,
           action.cardHealing,
+          source,
+          { bounce: false },
         );
       else
         yield* reaction("hit", state, source, target, action.amount, "light", action.events, {
@@ -299,10 +301,7 @@ export function* resolveHit(
     ensureCombat(source)[talentRule("bleed.parting-cut").state];
   if (partingCut) ensureCombat(source)[talentRule("bleed.parting-cut").state] = false;
   if (critical) damage *= 2;
-  const blockRatio =
-    alliedTarget && type === "physical" && hasTalent(state, "block.reinforce")
-      ? 1 + talentRule("block.reinforce").percent / 100
-      : 1;
+  const blockRatio = blockEfficiency(state, target, type);
   const payment = blockPayment(damage, target.block, blockRatio, policy.bypassBlock);
   const blocked = payment.absorbed,
     blockSpent = payment.spent;
@@ -318,14 +317,14 @@ export function* resolveHit(
   )
     erode(boonRule("sundering-charm").armor);
   // Other mechanics use the hit before Block; Armor still mitigates their damage.
-  const effectDamage = armorApplies(state, target, type)
+  const effectDamage = armorApplies(state, target, type, source)
     ? armoredDamage(damage + blocked, stats.armor)
     : damage + blocked;
-  if (armorApplies(state, target, type)) damage = armoredDamage(damage, stats.armor);
+  if (armorApplies(state, target, type, source)) damage = armoredDamage(damage, stats.armor);
   const lost = loseHealth(state, target, damage, events);
   const dealt = Math.min(effectDamage, blocked + lost);
   if (effectDamage > 0) {
-    erode(1);
+    if (!(alliedTarget && type === "water" && state.boons.includes("rain-cape"))) erode(1);
     if (alliedSource && type === "poison" && hasTalent(state, "poison.caustic")) erode(effectDamage);
     if (alliedSource && type === "burn" && hasTalent(state, "burn.melting-point")) erode(effectDamage);
   }

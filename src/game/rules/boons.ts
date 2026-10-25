@@ -6,6 +6,19 @@ function boon<P extends object>(parameters: P, describe: (parameters: P) => stri
 }
 const rules = freeze(
   {
+    "briar-racquet": boon({ divisor: 2 }, () => "Thorns retaliates at half strength when you Dodge"),
+    "lovers-knot": boon({}, () => "Healing an ally also heals yourself"),
+    "thaw-spoon": boon({}, () => "Healing removes an equal amount of Freeze buildup"),
+    "cinder-fan": boon(
+      {},
+      () => "Enemy Burn lost through decay deals that much Burn damage, split between other enemies",
+    ),
+    "moss-oven-mitt": boon({ multiplier: 2 }, () => "Block is twice as effective against Burn"),
+    "encore-baton": boon({ cards: 3, draw: 1 }, () => "Draw a card after playing three"),
+    "pruning-crescent": boon({}, () => "Purging enemy Thorns steals them for yourself"),
+    "knot-comb": boon({}, () => "Cleanse a random harmful effect each turn"),
+    "rain-cape": boon({}, () => "Water damage does not remove allied Armor"),
+    "tuning-fork-charm": boon({}, () => "Physical hits ignore Armor on enemies with Stun buildup"),
     rainkeeper: boon({ overflow: 2 }, () => "Mana can overflow"),
     "dream-yo-yo": boon({}, () => "Cards Dodged by enemies return to hand"),
     "basalt-glass-bookmark": boon({}, () => "Purge cannot remove an ally’s last beneficial effect"),
