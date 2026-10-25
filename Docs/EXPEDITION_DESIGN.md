@@ -50,6 +50,14 @@ Enemies, including Legendaries, start from authored species Health; recruits use
 
 Shared ability values, including area attacks and supplemental damage/healing, scale once through explicit room power. Chances, effect counts, resources and passive tiers do not scale; mixed Block-or-Thorns effects scale only Block. Enemy pools vary between runs. These values are playtest tuning, not final balance.
 
+### Enemy decisions
+
+Selectable attacks target the living player creature with the highest current Health, including Minions; ties retain battlefield order. Authored random and area attacks keep their targeting rules, and interception can redirect an attack.
+
+Ordinary enemies choose their highest-value usable ability; Legendary enemies rank their current hand again after each play. Value estimates immediate net combat gains: each point of actual Health restored, damage dealt, Block, status stacks or deck resources is worth one; protection flags are worth one. Overhealing and redundant effects add nothing, caps and mitigation apply, and retaliation reduces value. Ally-targeted support chooses the recipient with the greatest benefit. Equal values retain authored/hand order, preferring a different ordinary ability over the previous turn's ability; enemies skip plays with no positive benefit.
+
+The estimate runs the shared ability resolver on isolated drafts. Eight fixed probes approximate chance outcomes without consulting or advancing live RNG; this is an immediate-effect heuristic rather than a future-turn search. Card costs are paid before estimating resource restoration, while ranking uses the gross effect value. Legendary card-triggered Echo attacks contribute to value and retain their random targeting.
+
 ## Keyword XP and talents
 
 Keyword XP and talents are permanent and shared across species. Each accepted card play earns 1 XP per distinct eligible keyword regardless of magnitude: Burn + Block earns one of each. An ability can resolve at most twice per play; repeats grant no extra accepted-play XP. Auto-play uses ordinary accepted commands.

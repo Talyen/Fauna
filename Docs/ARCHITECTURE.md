@@ -122,7 +122,8 @@ The packaged renderer uses `fauna://app/` confined to `dist/`, rejecting foreign
 | Card owner versus acting creature and drawable fallen cards | [card-actors.ts](../src/game/card-actors.ts)                                                                                           |
 | Draw, discard and FIFO overflow                             | [card-zones.ts](../src/game/card-zones.ts)                                                                                             |
 | Shared player, preview and enemy execution                  | [combat/abilities.ts](../src/game/combat/abilities.ts), [ability-handlers.ts](../src/game/combat/ability-handlers.ts)                  |
-| Turn scheduling and Legendary decisions                     | [turns.ts](../src/game/combat/turns.ts), [legendary.ts](../src/game/combat/legendary.ts)                                               |
+| Turn scheduling and enemy decisions                         | [turns.ts](../src/game/combat/turns.ts), [enemy-policy.ts](../src/game/combat/enemy-policy.ts)                                         |
+| Legendary decks, summons and reactions                      | [legendary.ts](../src/game/combat/legendary.ts)                                                                                        |
 | Recovery, affordability and Recruit eligibility             | [destinations.ts](../src/game/destinations.ts)                                                                                         |
 | Catalogs, effect descriptions and progression               | [Content](CONTENT.md), [Keywords](KEYWORDS.md)                                                                                         |
 

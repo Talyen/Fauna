@@ -12,6 +12,7 @@ import { merchantPriceRange } from "./destinations";
 import { starterCount, starterOfferPool, STARTER_OFFER_COUNT, KEYWORDS } from "./progression";
 import { BOONS, SPECIES } from "./content";
 import { freshCombat } from "./combat/index";
+import { highestHealth } from "./combat/state";
 import { shuffle, roll } from "./random";
 import { bossEncounter, encounterSource, finalEncounter, generateEncounterPack } from "./encounters";
 import type { GameEvent, GameState, Lifecycle, BattleState, RewardState, StateAt } from "./types";
@@ -72,10 +73,9 @@ function prepareEncounter(state: GameState) {
       : null;
 }
 export function intents(state: BattleState) {
-  const alive = battlefield(state, "player").filter((unit) => unit.health > 0);
+  const target = highestHealth(battlefield(state, "player"));
   for (const enemy of state.battle.enemies) {
-    if (enemy.health > 0)
-      enemy.targetId = alive.length ? alive[Math.floor(roll(state) * alive.length)]!.id : state.team[0]!.id;
+    if (enemy.health > 0) enemy.targetId = target?.id ?? state.team[0]!.id;
   }
 }
 export function beginBattle(state: StateAt<"teamSelection">, events: GameEvent[] = []) {
