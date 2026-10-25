@@ -1,6 +1,6 @@
 ---
 name: fauna-boon-design
-description: Design or revise Fauna Boons from their names and artwork, with distinct thematic mechanics, strategic impact, restrained power and exact player-facing effect descriptions
+description: Design or revise artwork-led Fauna Boons that change gameplay rules and team-building strategy without downsides or power creep, with exact player-facing effect descriptions
 ---
 
 # Fauna Boon design
@@ -25,13 +25,19 @@ Prefer constraints inherent in the concept and the game's existing resources, ta
 
 ## Require a distinct strategic contribution
 
-Describe the choice the Boon changes: targeting, card order, preparation, team composition, defense, recovery or resource use. Give a plausible play sequence and identify when the effect is useful. A niche can be healthy; every Boon need not benefit every team. Avoid rewards that encourage stalling, farming helpless enemies, deliberately losing allies or repeatedly performing menu actions.
+Treat Boons as a place to change the game's rules. Prefer a new permission, interaction or relationship that opens a different way to play over a conditional numerical bonus. Explore what can target or protect what, how cards or resources can be used, and how creatures' existing mechanics can cooperate. Numbers should tune the rule's impact rather than supply its entire identity. A simple numerical Boon can still fit when its thematic and strategic case is strong; do not fill a set with variations on "+1 when X happens".
+
+Describe the choice the Boon changes: targeting, card order, preparation, team composition, defense, recovery or resource use. Give a plausible play sequence and identify when the effect is useful. For a team-building Boon, name the complementary roles or mechanics it brings together and explain a recruitment or deployment decision it would change. Favor bridges between existing kits over a bonus for bringing one named species or a required pair. A niche can be healthy; every Boon need not benefit every team. Avoid rewards that encourage stalling, farming helpless enemies, deliberately losing allies or repeatedly performing menu actions.
+
+Apply a strategy test: without quoting its numbers, explain what the player can now do differently and why a different team or sequence becomes attractive. "The same plan deals more damage" is a weak default answer. Rule changes should remain legible and faithful to the artifact; complexity and novelty alone do not establish strategic depth.
 
 Every Boon needs a unique mechanical identity among existing Boons and the proposed set. A new name, number, damage type or trigger attached to the same generic reward does not by itself establish uniqueness. Name the nearest overlap with a Boon, talent or passive and explain the different decision or interaction. Reuse existing mechanics where they serve the concept; do not invent a new subsystem solely to make an artifact seem special.
 
 ## Keep the benefit controlled
 
-Usually offer a benefit without an explicit penalty. Use specialization, opportunity cost and a modest payoff to restrain power; do not attach a thematic-looking punishment simply to offset an oversized reward. Check against existing Boons and Fauna's 1-Mana authored abilities. Avoid broadly replacing a creature's defining passive, trivializing enemy defenses or making a current Boon obsolete.
+Design beneficial rule changes without explicit penalties or hidden downsides. Prefer adding an option or useful interaction while preserving existing actions. A mandatory conversion, redirection, card return or resource transfer can weaken an established strategy even when its wording sounds positive; check what is lost and make the behavior optional or redesign when needed. Do not offset an oversized reward with a punishment.
+
+Aim for more viable strategies rather than a universally stronger baseline. Use natural specialization, player choice, bounded existing resources and a modest payoff to restrain power. Check against existing Boons and Fauna's 1-Mana authored abilities. Explain why the strongest benefiting team still faces meaningful combat decisions and why this does not become the automatic choice for most teams. Avoid broadly replacing a creature's defining passive, making a specific composition compulsory, trivializing enemy defenses or making a current Boon obsolete. Thematic rule changes may introduce supported exceptions to combat rules; they do not authorize bypassing ownership, deterministic resolution or save correctness.
 
 Trace the strongest plausible interactions: multi-hit and area attacks, repeats, free plays, draws and copies, healing and Leech, reflection, Minions, swaps, control immunity and other Boon reactions. Check whether the payoff can feed its own trigger directly or through another effect. Distinguish actual Health restored or lost from attempted values and overkill. Resolve dangerous feedback through the mechanic itself, smaller values or a precise, necessary restriction; redesign if the result needs a stack of exceptions or routine phase caps. Do not silently disable established synergies to make an attractive proposal appear safe.
 
@@ -43,6 +49,6 @@ Supply one exact, concise effect description with explicit values and establishe
 
 Make recipients, scope, resource source and consumption clear wherever they change the player's decision. Keep important limits visible. Do not use familiar words such as hit, attack, draw, Cleanse or Purge for a different rule. If the concept needs a new interaction, describe how the player chooses and sees its result; do not introduce a recurring prompt merely to administer the Boon.
 
-For each requested proposal, provide the Boon name and artwork link, exact effect text, the visual/thematic connection and strategic contribution. Include the nearest overlap and balance concern where material; keep straightforward entries concise. Review a batch together for repeated mechanics, excessive power and repetitive timing language. Do not preserve an earlier candidate just to fill a requested count if it fails these criteria.
+For each requested proposal, provide the Boon name and artwork link, exact effect text, the visual/thematic connection and the rule or strategic decision it changes. Include team-building implications, the nearest overlap and balance concern where material; keep straightforward entries concise. Review a batch together for repeated mechanics, numerical filler, hidden downsides, dominant compositions, excessive power and repetitive timing language. Do not preserve an earlier candidate just to fill a requested count if it fails these criteria.
 
 If implementation is requested, follow the existing [modifier ownership and asset contracts](../../../Docs/CONTENT.md#adding-gameplay-modifiers) and repository verification policy. New card interactions also use the [UI design skill](../fauna-ui-design/SKILL.md); asset selection or changes use the [art direction skill](../fauna-art-direction/SKILL.md). Separate implemented behavior, rendered evidence, artistic acceptance and measured balance.
