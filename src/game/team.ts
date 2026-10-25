@@ -20,7 +20,8 @@ export function gentlePassage(state: GameState, previous: GameState["team"], eve
       0,
     );
     if (amount <= 0) continue;
-    for (const unit of entering) restoreHealth(unit, amount, events, false, state);
+    for (const unit of entering)
+      restoreHealth(unit, amount, events, false, state, false, provider, { bounce: false });
   }
 }
 

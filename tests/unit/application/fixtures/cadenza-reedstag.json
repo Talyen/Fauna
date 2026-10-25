@@ -1,5 +1,5 @@
 {
-  "version": 59,
+  "version": 60,
   "discovery": {
     "encountered": [
       "reedstag",
@@ -536,6 +536,7 @@
         }
       }
     ],
+    "encoreProgress": 0,
     "repeatNext": {
       "player": false,
       "enemy": false

@@ -6,7 +6,7 @@ import { livingChorus } from "./turns";
 import type { BattleState, GameEvent, Card } from "../types";
 import { definition } from "../content";
 import { battlefield } from "../battlefield";
-import { receiveCard } from "../card-zones";
+import { receiveCard, draw } from "../card-zones";
 
 /** Reuse the played slot; no copies, free plays or extra accepted-play counts. */
 export function returnDodgedCard(state: BattleState, card: Card, events: GameEvent[], start: number) {
@@ -46,6 +46,13 @@ export function consumeCardGrants(actor: Combatant, keywords: readonly Progressi
 /** One accepted player card owns this counter, before refill and settlement. */
 export function afterPlayerCard(state: BattleState, events: GameEvent[]) {
   const battle = state.battle;
+  if (state.boons.includes("encore-baton")) {
+    battle.encoreProgress++;
+    if (battle.encoreProgress === boonRule("encore-baton").cards) {
+      battle.encoreProgress = 0;
+      draw(state, boonRule("encore-baton").draw, events);
+    }
+  }
   if (battle.cardsPlayedThisTurn < PLAYER_CARD_TRIGGER_LIMIT) {
     battle.cardsPlayedThisTurn++;
     if (battle.cardsPlayedThisTurn === 2) livingChorus(state, false, events);

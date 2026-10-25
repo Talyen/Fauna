@@ -1,5 +1,5 @@
 {
-  "version": 59,
+  "version": 60,
   "discovery": {
     "encountered": [
       "tournelle",
@@ -534,6 +534,7 @@
         }
       }
     ],
+    "encoreProgress": 0,
     "repeatNext": {
       "player": false,
       "enemy": false
