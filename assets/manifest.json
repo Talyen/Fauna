@@ -2106,6 +2106,116 @@
       "aspect": [3, 4],
       "provenance": "Generated with built-in ImageGen using owner-provided Fauna style prompts; exact prompt in Docs/content/creatures/orifable-art-prompts.md",
       "rights": "Fauna owner-requested AI-generated artwork; see assets/content-provenance.json"
+    },
+    {
+      "id": "boon.rainkeeper",
+      "origin": "repository",
+      "source": "public/art/boons/rainkeeper.png",
+      "output": "art/boons/rainkeeper.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Rainkeeper artwork copied unchanged from Google Drive https://drive.google.com/file/d/1h2Lp5WKETSAiDxIEQLutWrQnLyZIB2RD/view",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "boon.dream-yo-yo",
+      "origin": "repository",
+      "source": "public/art/boons/dream-yo-yo.png",
+      "output": "art/boons/dream-yo-yo.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Dream Yo-Yo artwork copied unchanged from Google Drive https://drive.google.com/file/d/1iy6q-Y_GwJN9qg730Fs20QZaMQ07rC8V/view",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "boon.basalt-glass-bookmark",
+      "origin": "repository",
+      "source": "public/art/boons/basalt-glass-bookmark.png",
+      "output": "art/boons/basalt-glass-bookmark.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Basalt Glass Bookmark artwork copied unchanged from Google Drive https://drive.google.com/file/d/1C7blvyHuZ6q3QXaam6slTn4QG3KmCeWp/view",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "boon.wonder-domino",
+      "origin": "repository",
+      "source": "public/art/boons/wonder-domino.png",
+      "output": "art/boons/wonder-domino.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Wonder Domino artwork copied unchanged from Google Drive https://drive.google.com/file/d/17-Rmyll6mWAlUGbEA6omcMpwXVCPse4R/view",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "boon.furnace-prism",
+      "origin": "repository",
+      "source": "public/art/boons/furnace-prism.png",
+      "output": "art/boons/furnace-prism.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Furnace Prism artwork copied unchanged from Google Drive https://drive.google.com/file/d/1kzg70tm_-9vGUo4agR7r2kWnnht19mxS/view",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "boon.last-threshold",
+      "origin": "repository",
+      "source": "public/art/boons/last-threshold.png",
+      "output": "art/boons/last-threshold.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Last Threshold artwork copied unchanged from Google Drive https://drive.google.com/file/d/1XDDbxy0_Uu5qE5QHAffMxo1C6cKE_-Kq/view",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "boon.camp-hammock",
+      "origin": "repository",
+      "source": "public/art/boons/camp-hammock.png",
+      "output": "art/boons/camp-hammock.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Camp Hammock artwork copied unchanged from Google Drive https://drive.google.com/file/d/1GDIdxp-wtU3U-pZWIZzjNYJrX6u5kdrK/view",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "boon.honeycomb-frame",
+      "origin": "repository",
+      "source": "public/art/boons/honeycomb-frame.png",
+      "output": "art/boons/honeycomb-frame.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Honeycomb Frame artwork copied unchanged from Google Drive https://drive.google.com/file/d/12_WhihzVtQu53N70_g8s2_bKLWk5uAyt/view",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "boon.undertow-castanets",
+      "origin": "repository",
+      "source": "public/art/boons/undertow-castanets.png",
+      "output": "art/boons/undertow-castanets.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Undertow Castanets artwork copied unchanged from Google Drive https://drive.google.com/file/d/1wZyeHdCFOvp84gRLCrutQkGYzaJbHQzx/view",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "boon.orbit-armillary",
+      "origin": "repository",
+      "source": "public/art/boons/orbit-armillary.png",
+      "output": "art/boons/orbit-armillary.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Orbit Armillary artwork copied unchanged from Google Drive https://drive.google.com/file/d/1yqYvHXt6Uwi0jyPKXBVSkHmGSd88FwO0/view",
+      "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
     }
   ]
 }

@@ -1,8 +1,9 @@
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
+import { manaCapacity } from "../ability-rules";
 import { healingValue, restoration, overflowBlock } from "./healing-values";
 import { chance as succeeds } from "../chance";
-import { isEnemy, battlefield } from "../battlefield";
+import { isEnemy, battlefield, healingAllies } from "../battlefield";
 import { drawKeyword } from "../card-zones";
 import { hasTalent, creaturePassive } from "../progression";
 
@@ -28,9 +29,11 @@ export function* restoreHealth(
   state?: GameState,
   cardHealing = false,
   source?: Combatant,
+  shareOverflow = true,
 ): Resolution<void> {
   const baseAmount = amount;
-  amount = healingValue(state, unit, amount);
+  // Shared overflow already includes Healing modifiers and cannot create another overflow share.
+  if (shareOverflow) amount = healingValue(state, unit, amount);
   if (unit.health === 0 && !revive) return;
   const { gain, excess } = restoration(unit, amount);
   unit.health += gain;
@@ -57,6 +60,26 @@ export function* restoreHealth(
       events,
       cardHealing,
     });
+  if (
+    shareOverflow &&
+    excess > 0 &&
+    state?.phase === "battle" &&
+    !isEnemy(unit) &&
+    state.boons.includes("last-threshold")
+  ) {
+    let remaining = excess;
+    const recipients = healingAllies(state).filter(
+      (ally) => ally.id !== unit.id && (ally.combat?.grace ?? 0) > 0 && ally.health < maximumHealth(ally),
+    );
+    while (remaining > 0) {
+      const recipient = mostInjured(recipients);
+      if (!recipient) break;
+      recipients.splice(recipients.indexOf(recipient), 1);
+      const amount = Math.min(remaining, maximumHealth(recipient) - recipient.health);
+      remaining -= amount;
+      yield* reaction("restoreHealth", recipient, amount, events, false, state, false, undefined, false);
+    }
+  }
 }
 export function* shareProtection(
   state: GameState,
@@ -100,7 +123,7 @@ export function* grantBlock(
     if (percent > 0) {
       const pool = battlefield(state, allied ? "player" : "enemy");
       const recipient = pool.some((recipient) => recipient.id === unit.id)
-        ? mostInjured<Combatant>(pool)
+        ? mostInjured<Combatant>(healingAllies(state, allied ? "player" : "enemy"))
         : undefined;
       if (recipient) {
         const converted = Math.min(
@@ -140,12 +163,13 @@ export function* grantBlock(
 }
 export function* gainMana(state: GameState, amount: number, events: GameEvent[]): Resolution<void> {
   if (!state.battle || amount <= 0) return;
-  const gained = Math.min(amount, state.battle.maxMana - state.battle.mana);
+  const capacity = manaCapacity(state);
+  const gained = Math.max(0, Math.min(amount, capacity - state.battle.mana));
   state.battle.mana += gained;
   if (gained > 0) {
     events.push({ kind: "status", amount: gained, text: `Gain ${gained} Mana.` });
     if (hasTalent(state, "mana.arcane-mending"))
-      for (const unit of battlefield(state, "player"))
+      for (const unit of healingAllies(state))
         yield* reaction(
           "restoreHealth",
           unit,

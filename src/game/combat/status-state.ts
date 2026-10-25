@@ -16,6 +16,7 @@ export function beginControlTurn(stats: CombatState) {
 }
 
 function recoverControl(stats: CombatState) {
+  if (stats.controlled) delete stats.statusSources[stats.controlled];
   stats.controlled = null;
   stats.controlTurns = 0;
   stats.cooldown = 3;
@@ -42,7 +43,7 @@ export function advanceControlImmunity(stats: CombatState) {
 export function clearHarmfulStatus(stats: CombatState, status: PeriodicStatus | Control | "blind") {
   if (status === "blind") stats.blind = false;
   else stats[status] = 0;
-  if (status === "burn" || status === "poison" || status === "bleed") delete stats.statusSources[status];
+  delete stats.statusSources[status];
   if (status === "bleed") stats.bleedLeech = [];
 }
 

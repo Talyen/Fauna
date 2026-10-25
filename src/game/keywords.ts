@@ -28,6 +28,10 @@ export const KEYWORD_DEFINITIONS = freeze(
       "active",
       "Physical damage is reduced by Armor after Block; Attacks have a 5% critical chance for double damage",
     ),
+    criticalHit: entry("Critical Hit", "effect", "active", "An attack that deals double damage", [
+      "Critical Hits",
+      "Critical",
+    ]),
     poison: entry(
       "Poison",
       "damage",
@@ -49,6 +53,7 @@ export const KEYWORD_DEFINITIONS = freeze(
       "resource",
       "active",
       "Remaining life; At zero Health a creature is knocked out; Restore Health up to its maximum; restoration cannot revive it during battle",
+      ["Heal", "Heals", "Healed", "Healing"],
     ),
     mana: entry(
       "Mana",
@@ -61,6 +66,7 @@ export const KEYWORD_DEFINITIONS = freeze(
       "status",
       "active",
       "Absorbs incoming damage before Health; Does not prevent hit effects, buildup or Leech unless specified; Remaining Block normally halves at the start of your next turn, rounded normally",
+      ["Blocks", "Blocked", "Blocking"],
     ),
     waterThorns: entry(
       "Water Thorns",
@@ -87,13 +93,14 @@ export const KEYWORD_DEFINITIONS = freeze(
       "status",
       "active",
       "50% chance to miss your next attack; Expires after that attack, whether it hits or misses; A miss counts as a Dodge by every recipient; Does not stack",
-      ["Blinded", "Blinding"],
+      ["Blinds", "Blinded", "Blinding"],
     ),
     armor: entry(
       "Armor",
       "status",
       "active",
       "Reduce incoming Physical and Stun damage; lose a stack when damaged",
+      ["Armored"],
     ),
     burn: entry("Burn", "damage", "active", "Deal damage each turn, then halve the stacks", [
       "Burns",
@@ -105,7 +112,7 @@ export const KEYWORD_DEFINITIONS = freeze(
       "status",
       "active",
       "Damage builds toward Frozen: skip one turn at half maximum Health; Recovery grants 3 turns of shared Stun/Freeze immunity",
-      ["Freezes", "Frozen"],
+      ["Freezes", "Frozen", "Freezing"],
     ),
     bleed: entry("Bleed", "damage", "active", "Repeat damage next turn, then clear", ["Bleeds", "Bleeding"]),
     stun: entry(
@@ -113,14 +120,14 @@ export const KEYWORD_DEFINITIONS = freeze(
       "status",
       "active",
       "Damage builds toward Stunned: skip one turn at half maximum Health; Recovery grants 3 turns of shared Stun/Freeze immunity",
-      ["Stunned"],
+      ["Stuns", "Stunned", "Stunning"],
     ),
     leech: entry(
       "Leech",
       "effect",
       "active",
       "Restore half the damage dealt, including damage absorbed by Block, rounded normally; Overkill does not count; Bleed pays Leech with its later tick",
-      ["Leeches", "Leeching"],
+      ["Leeches", "Leeched", "Leeching"],
     ),
     cleanse: entry("Cleanse", "effect", "active", "Remove harmful effects from an ally", [
       "Cleanses",

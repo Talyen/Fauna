@@ -85,7 +85,7 @@ Lossless encoding preserves resized pixels and alpha, but downsampling changes p
 
 ### Build inventory
 
-Runtime artwork/audio resolves IDs through the generated lookup. Builds disable automatic public-directory copying and copy only active media plus the build receipt; originals, cache receipts and old generations stay out of the renderer. Validation rejects extra/missing media, changed bytes and unapproved public resources. Limits are 136 MiB total media and 3 MiB per image; JavaScript has its [separate budget](../scripts/README.md#bundle-allowance). The current 185 active objects measure 129.68 MiB after excluding the unused Marsh recording; originals and all selected media bytes, hashes and dimensions remain unchanged. Aliased IDs already share files. [Resource efficiency](RESOURCE_EFFICIENCY.md) owns measurement and maintenance. Retained historical generations do not enlarge new builds.
+Runtime artwork/audio resolves IDs through the generated lookup. Builds disable automatic public-directory copying and copy only active media plus the build receipt; originals, cache receipts and old generations stay out of the renderer. Validation rejects extra/missing media, changed bytes and unapproved public resources. Limits are 144 MiB total media and 3 MiB per image; JavaScript has its [separate budget](../scripts/README.md#bundle-allowance). The current 195 active objects measure 136.79 MiB, including ten new lossless Boon portraits (7.11 MiB); the unused Marsh recording remains excluded. Aliased IDs already share files. [Resource efficiency](RESOURCE_EFFICIENCY.md) owns measurement and maintenance. Retained historical generations do not enlarge new builds.
 
 ### Audio selections
 
@@ -97,7 +97,26 @@ Use the [Boon design skill](../.agents/skills/fauna-boon-design/SKILL.md) for ar
 
 [boons.ts](../src/game/content/boons.ts) owns available Boons, IDs, names and catalog order. [Boon rules](../src/game/rules/boons.ts) own numeric parameters and their displayed descriptions; execution and visible assessments use those same parameters. [Modifier bindings](../src/game/modifier-bindings.ts) identify the implementation functions; [Boon regressions](../tests/unit/game/boons.test.ts) protect timing, caps, actual-outcome triggers and recursion limits.
 
-Portraits are unchanged WebP selections copied from `Alchemy: src/assets/optimized/`; the manifest records per-file sources, rights and hashes. Light replaces Alchemy's Holy terminology. Forge, Wish, Potion and Companion Boons are excluded because Fauna lacks their mechanics; Consume-dependent Boons and talents are excluded despite Pearls using Consume.
+The original portraits are unchanged WebP selections copied from `Alchemy: src/assets/optimized/`. New portraits use user-provided PNG originals from the Drive Boon collection, prepared through the shared card recipe; the manifest records per-file sources, rights and hashes. Light replaces Alchemy's Holy terminology. Forge, Wish, Potion and Companion Boons are excluded because Fauna lacks their mechanics; Consume-dependent Boons and talents are excluded despite Pearls using Consume.
+
+### Passive rule changes
+
+These Boons use existing card plays, recipients and feedback without adding battle controls. Their concise displayed rules are defined in the Boon rule owner; execution details are:
+
+| Boon                  | Execution contract                                                                                                                                                                                                 |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Rainkeeper            | Mana gains can fill two points above maximum Mana; ordinary turn refill still uses maximum Mana                                                                                                                    |
+| Dream Yo-Yo           | A card returns from discard when an enemy Dodges any of its own attacks; preserve the same card and normal Mana cost, with no additional play rewards; Consume still consumes                                      |
+| Basalt Glass Bookmark | Purge leaves at least one beneficial effect category on an ally, including selective removal of Thorns; ordinary depletion and consumption still work                                                              |
+| Wonder Domino         | Overkill from a direct attack spills to the first living enemy, retaining damage type and ordinary defenses; remaining overkill cascades without further attacks, critical rolls, buildup, Leech or attack rewards |
+| Furnace Prism         | Light attacks apply Blind to living Burning enemies through ordinary Nullify and reflection rules                                                                                                                  |
+| Last Threshold        | Overflow from any Healing is allocated to living injured allies at Death's Door, most injured first; each point is allocated once, with no recursive sharing or revival                                            |
+| Camp Hammock          | Group Healing, automatic most-injured Healing and Healing bounces can include living backup allies; explicit ally targeting and passive ownership still require deployment                                         |
+| Honeycomb Frame       | An ally with Armor cannot receive Critical Hits, regardless of damage type                                                                                                                                         |
+| Undertow Castanets    | Enemy Stun and Freeze buildup contribute their fractions of the respective control thresholds; the incoming type supplies control and spends both pools; normal protection and control immunity apply              |
+| Orbit Armillary       | Cleanse sends removed effects back to their last living enemy source, retaining removed strength or remaining control duration; normal protection and immunity apply, without a second reflection                  |
+
+Status source attribution for Blind and control is saved alongside periodic effects. Development save format 57 includes this attribution and Rainkeeper's Mana allowance; obsolete saves are rejected under the development-save policy.
 
 [Journey rules](EXPEDITION_DESIGN.md#currency-and-items) own reward pools and journey-only ownership; [Merchant rules](EXPEDITION_DESIGN.md#optional-support-visits) own stock and prices. Inspect new portraits through the UI review procedure.
 

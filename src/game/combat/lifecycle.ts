@@ -23,6 +23,7 @@ import {
 export function* tickStatuses(state: GameState, unit: Combatant, events: GameEvent[]): Resolution<void> {
   const stats = ensureCombat(unit);
   if (!isEnemy(unit) && unit.health > 0 && stats.poison > 0 && state.boons.includes("plague-doctors-mask")) {
+    const sourceId = stats.statusSources.poison;
     const removed = reducePeriodicStacks(stats, "poison", boonRule("plague-doctors-mask").removed);
     events.push({
       kind: "status",
@@ -36,6 +37,7 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
     if (stats.poison === 0) {
       yield* reaction("cleanseRewards", state, unit, 1, events);
     }
+    yield* reaction("returnCleansedEffect", state, unit, "poison", removed, sourceId, events);
     const target = state.battle!.enemies.find((enemy) => enemy.health > 0);
     if (target)
       yield* reaction(

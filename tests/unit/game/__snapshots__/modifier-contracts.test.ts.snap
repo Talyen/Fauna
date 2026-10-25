@@ -2,10 +2,10 @@
 
 exports[`preserves all modifier definitions, text and ordered six-tier passives 1`] = `
 {
-  "boons": "8f30747fc82deaabf0d8304e8d7b653606e72b413f92fb211e6dd1c4f44a8da9",
+  "boons": "75211afeb67d0d4f0e7082b05c0730b519599eee9abdbb3d6fde48a63344b5f4",
   "passives": "8a98b4f58325c37d13acd9a820cd88588da33317ee131af40e6af41a21f0f0f1",
   "talents": "2b74740215f68284666f45157762149933471ca7def683c171fb7bc496bbf411",
 }
 `;
 
-exports[`preserves initial journey and seeded start state 1`] = `"86331f46ded14d17c7beb333bab0b2a3f2cb63539f551f64758497bc7a5d61d6"`;
+exports[`preserves initial journey and seeded start state 1`] = `"4b91cea79e6f7f9a6bff2d86e8a850ada3ab3c835671268741b3d13e77bae31f"`;

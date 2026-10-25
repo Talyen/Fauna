@@ -137,6 +137,17 @@ export function* damageRewards(
     alliedTarget = !isEnemy(target),
     stats = ensureCombat(target);
   if (
+    policy.attack &&
+    alliedSource &&
+    !alliedTarget &&
+    source.health > 0 &&
+    target.health > 0 &&
+    type === "light" &&
+    stats.burn > 0 &&
+    state.boons.includes("furnace-prism")
+  )
+    yield* reaction("applyBlind", state, source, target, events);
+  if (
     target.health === 0 &&
     !alliedTarget &&
     alliedSource &&

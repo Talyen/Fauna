@@ -365,9 +365,9 @@ exports[`preserves commands, previews, save/resume and rankings: attack reflecti
     "targetId": undefined,
     "type": "play",
   },
-  "committed": "83ca0823e396dbdc077af1536c10231e8d3118efd26b55bf7da0de3402534786",
-  "enemyTurn": "8bf8410c8329dd2fbb74f4a3a6a8b0adaeb1d7bf71c3e8b9478a470e0807b9d8",
-  "preview": "83ca0823e396dbdc077af1536c10231e8d3118efd26b55bf7da0de3402534786",
+  "committed": "14ae16b68d6c2b82104693b9fbea4bedba9b63569d9f8b5212651b01614e1da0",
+  "enemyTurn": "cbccc81c58fd23682e2d9f9a2b09a7a12ce8244d9e8849467ea58e0ad56043da",
+  "preview": "14ae16b68d6c2b82104693b9fbea4bedba9b63569d9f8b5212651b01614e1da0",
   "rankings": [
     {
       "command": {
@@ -391,9 +391,9 @@ exports[`preserves commands, previews, save/resume and rankings: generated Food 
     "targetId": undefined,
     "type": "play",
   },
-  "committed": "525bdec72e277f5434ea7b4e7dfe76aa510389fc1bbefff384f9ef5eb3856d5f",
-  "enemyTurn": "3eaa8164983f1bd1516cacd3951d16be1f2c097a854f2a20ec6a2fdc53092b15",
-  "preview": "525bdec72e277f5434ea7b4e7dfe76aa510389fc1bbefff384f9ef5eb3856d5f",
+  "committed": "2f7e0e7110af7576ec27dd98a847db9b88910b31b7f11810861b58df00610078",
+  "enemyTurn": "8f1ca4845a2b1aa1c448569a91cff3a81820f4386419ae5fdfd838349b094f45",
+  "preview": "2f7e0e7110af7576ec27dd98a847db9b88910b31b7f11810861b58df00610078",
   "rankings": [
     {
       "command": {
@@ -417,9 +417,9 @@ exports[`preserves commands, previews, save/resume and rankings: generated Pearl
     "targetId": undefined,
     "type": "play",
   },
-  "committed": "e59c1465b41b23d50d438cc0ab587073c34a8583b70eebe88a85da37ad2fd85e",
-  "enemyTurn": "81a7bef9490821977a0441c4795371296974489096663a4cc89bd798b75dfbb1",
-  "preview": "e59c1465b41b23d50d438cc0ab587073c34a8583b70eebe88a85da37ad2fd85e",
+  "committed": "de630e2662cefcf956a45bfd7bb1f2ba1dea320f4f53f170e4fb381dd229e91b",
+  "enemyTurn": "4833734becbb0cc5302194e2ec9a8803246bf73d07c37b4bc8aeade09f527c2f",
+  "preview": "de630e2662cefcf956a45bfd7bb1f2ba1dea320f4f53f170e4fb381dd229e91b",
   "rankings": [
     {
       "command": {
@@ -443,9 +443,9 @@ exports[`preserves commands, previews, save/resume and rankings: group protectio
     "targetId": undefined,
     "type": "play",
   },
-  "committed": "b5147b1ec4c8da5b8ea5a5a885d55c00c719815b7324499d49b4a83c4fafe184",
-  "enemyTurn": "084f861e6e477729a8dece43d6cde4680d8b13e917199b80cdc5450548df9ad8",
-  "preview": "b5147b1ec4c8da5b8ea5a5a885d55c00c719815b7324499d49b4a83c4fafe184",
+  "committed": "411a6cb3d6810aad0f85cb7acd109e7cc9b7ff288635b725052d2042729190d7",
+  "enemyTurn": "2086525daa8c7bc20a607081845e0b072c6d8812ab89a5cc2be134c4d9d48718",
+  "preview": "411a6cb3d6810aad0f85cb7acd109e7cc9b7ff288635b725052d2042729190d7",
   "rankings": [
     {
       "command": {
@@ -469,9 +469,9 @@ exports[`preserves commands, previews, save/resume and rankings: random attack 1
     "targetId": undefined,
     "type": "play",
   },
-  "committed": "9f6a3f9ba442d71214a079bb0e46468aeee792fbe3ab1438e2920a4e59949978",
-  "enemyTurn": "0a042f25860b1a7b469c8e0b7ed2dc3dbee83f4ba028450647bfed573fd5c602",
-  "preview": "9f6a3f9ba442d71214a079bb0e46468aeee792fbe3ab1438e2920a4e59949978",
+  "committed": "1f02a58b742c3712934f747633f5eb0db89dcb653a2e50b7729574c32448edf4",
+  "enemyTurn": "c25d25b0b2c24e9b2d88b28960fc87ad0223a25d2ec2fa9a541437094ee1e33f",
+  "preview": "1f02a58b742c3712934f747633f5eb0db89dcb653a2e50b7729574c32448edf4",
   "rankings": [
     {
       "command": {
@@ -495,9 +495,9 @@ exports[`preserves commands, previews, save/resume and rankings: recipient heali
     "targetId": undefined,
     "type": "play",
   },
-  "committed": "60d515ddd676622f7f02db53f1a552e514d9469459bae9d73f0da5c25da1edcc",
-  "enemyTurn": "9907d7604c23d59db5e5a8ca28a8c8b1e52be7610bfd224092a0e2573c09bcd6",
-  "preview": "60d515ddd676622f7f02db53f1a552e514d9469459bae9d73f0da5c25da1edcc",
+  "committed": "cfcfe8e5e7eb5ee458841ef9dc5e5b57b33af1d41cbb5975d0da657daad8bab6",
+  "enemyTurn": "bac9870a719b75e5385d2fa591e37040de8c55a470ae20623d2f9fa75794b3cd",
+  "preview": "cfcfe8e5e7eb5ee458841ef9dc5e5b57b33af1d41cbb5975d0da657daad8bab6",
   "rankings": [
     {
       "command": {
@@ -521,9 +521,9 @@ exports[`preserves commands, previews, save/resume and rankings: recovery and re
     "targetId": "ally-0",
     "type": "play",
   },
-  "committed": "4f52c2b7c7becde88a804c142706ac54e6e4f3fbec5a56c440e77204e263daae",
-  "enemyTurn": "6c600bcf94b3d5bb8cb56d71c08f2a73133fce0149b2138b2fdacb6bf5b6ddc4",
-  "preview": "4f52c2b7c7becde88a804c142706ac54e6e4f3fbec5a56c440e77204e263daae",
+  "committed": "7467bc6e8599b12e19f3b85aad4dc5274b763081fe492ffdfad46579091cd200",
+  "enemyTurn": "6be1b28fabbe280238cfa14c05cd7a63509d66cde54ec5b38663c3c7c6412b97",
+  "preview": "7467bc6e8599b12e19f3b85aad4dc5274b763081fe492ffdfad46579091cd200",
   "rankings": [
     {
       "command": {
@@ -547,9 +547,9 @@ exports[`preserves commands, previews, save/resume and rankings: reflected attac
     "targetId": "enemy-0",
     "type": "play",
   },
-  "committed": "a9a3f47d2cc897642a3ac8b45c9c8702fdddea8897e833c1c2167dbb05079883",
-  "enemyTurn": "c937b78cddc8386965df999e00dfe295a0af749729a0173ff9d82d78d46eaef0",
-  "preview": "a9a3f47d2cc897642a3ac8b45c9c8702fdddea8897e833c1c2167dbb05079883",
+  "committed": "d08eeb718dfa8e06b6d3e1af61124754f1d03d1ea6390b48419e7f7919c2419a",
+  "enemyTurn": "c20a0aacdeb3d34032ecc4477a2e66ea094e532369d7fa668299cfe741a7cdc0",
+  "preview": "d08eeb718dfa8e06b6d3e1af61124754f1d03d1ea6390b48419e7f7919c2419a",
   "rankings": [
     {
       "command": {

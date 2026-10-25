@@ -12,7 +12,7 @@ import {
 } from "./battle-benefits";
 import type { Command, GameState } from "../game/types";
 
-export const BATTLE_POLICY_VERSION = 32;
+export const BATTLE_POLICY_VERSION = 33;
 const BATTLE_FINISH_PRIORITY = 1_000_000_000;
 const priorities = {
   none: 0,

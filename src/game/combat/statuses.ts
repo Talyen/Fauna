@@ -34,6 +34,41 @@ interface StatusResult {
   suppressed: boolean;
 }
 
+/** Returned effects use ordinary protection and immunity, with no second reflection. */
+export function* returnCleansedEffect(
+  state: GameState,
+  unit: Combatant,
+  status: (typeof harmfulStatuses)[number],
+  amount: number,
+  sourceId: string | undefined,
+  events: GameEvent[],
+  turns?: number,
+): Resolution<void> {
+  if (
+    state.phase !== "battle" ||
+    isEnemy(unit) ||
+    unit.health <= 0 ||
+    amount <= 0 ||
+    !state.boons.includes("orbit-armillary")
+  )
+    return;
+  const target = battlefield(state, "enemy").find((enemy) => enemy.id === sourceId && enemy.health > 0);
+  if (!target) return;
+  const result = yield* reaction(
+    "applyHarmfulStatus",
+    state,
+    unit,
+    target,
+    turns ? Math.ceil(maximumHealth(target) / 2) : amount,
+    status,
+    events,
+    { reflected: true, controlTurns: turns },
+  );
+  if (result.appliedControl && status !== "blind")
+    yield* reaction("controlRewards", state, unit, target, status, events);
+  for (const depletion of result.depletions) yield* reaction("triggerArmorBreak", state, depletion, events);
+}
+
 export function* grantStatus(
   unit: Combatant,
   status: "armor" | "thorns" | "waterThorns" | "dodge",
@@ -94,6 +129,7 @@ export function* removeControlBuildup(
   const stats = ensureCombat(unit);
   if (stats[status] <= 0) return;
   const amount = stats[status];
+  const sourceId = stats.statusSources[status];
   clearHarmfulStatus(stats, status);
   events.push({
     kind: "status",
@@ -105,6 +141,7 @@ export function* removeControlBuildup(
     text: `${unitName(unit)}: Cleanse ${status === "freeze" ? "Freeze" : "Stun"} build-up`,
   });
   yield* reaction("cleanseRewards", state, unit, 1, events);
+  yield* returnCleansedEffect(state, unit, status, amount, sourceId, events);
 }
 export function* removeEffects(
   unit: Combatant,
@@ -112,30 +149,47 @@ export function* removeEffects(
   count: number,
   events: GameEvent[],
   state?: GameState,
-  onlyStatus?: (typeof harmfulStatuses)[number],
+  onlyStatus?: (typeof harmfulStatuses)[number] | "thorns" | "waterThorns",
 ): Resolution<number> {
   const stats = ensureCombat(unit);
   let depletion: ArmorDepletion | null = null;
   let cleansed = 0;
   const removedStatuses: NonNullable<import("../types").StatusEvent["affectedStatus"]>[] = [];
-  const statuses =
-    kind === "cleanse"
-      ? onlyStatus
-        ? [onlyStatus]
-        : harmfulStatuses
-      : ([
-          "armor",
-          "thorns",
-          "waterThorns",
-          "dodge",
-          "reflect",
-          "reflectBurn",
-          "nullify",
-          "nullifyFreeze",
-          "negate",
-          "attackReflection",
-        ] as const);
-  if (kind === "purge" && unit.block > 0 && count > 0) {
+  const returned: {
+    status: (typeof harmfulStatuses)[number];
+    amount: number;
+    sourceId?: string;
+    turns?: number;
+  }[] = [];
+  const remember = (status: (typeof harmfulStatuses)[number], turns?: number) =>
+    returned.push({
+      status,
+      amount: status === "blind" || turns ? 1 : Number(stats[status]),
+      sourceId: stats.statusSources[status],
+      turns,
+    });
+  const beneficial = [
+    "armor",
+    "thorns",
+    "waterThorns",
+    "dodge",
+    "reflect",
+    "reflectBurn",
+    "nullify",
+    "nullifyFreeze",
+    "negate",
+    "attackReflection",
+  ] as const;
+  const statuses = onlyStatus ? [onlyStatus] : kind === "cleanse" ? harmfulStatuses : beneficial;
+  if (kind === "purge" && state && !isEnemy(unit) && state.boons.includes("basalt-glass-bookmark")) {
+    const remaining =
+      Number(unit.block > 0) +
+      beneficial.filter(
+        (status) => Number(stats[status]) > 0 || (status === "dodge" && stats.temporaryDodge > 0),
+      ).length;
+    count = Math.min(count, Math.max(0, remaining - 1));
+  }
+  if (kind === "purge" && !onlyStatus && unit.block > 0 && count > 0) {
     unit.block = 0;
     removedStatuses.push("block");
     count--;
@@ -146,6 +200,7 @@ export function* removeEffects(
     count > 0 &&
     (!onlyStatus || onlyStatus === stats.controlled)
   ) {
+    remember(stats.controlled, stats.controlTurns);
     removedStatuses.push(stats.controlled);
     cleanseControl(stats);
     cleansed++;
@@ -153,6 +208,8 @@ export function* removeEffects(
   }
   for (const status of statuses)
     if (count > 0 && (Number(stats[status]) > 0 || (status === "dodge" && stats.temporaryDodge > 0))) {
+      if (kind === "cleanse" && harmfulStatuses.includes(status as (typeof harmfulStatuses)[number]))
+        remember(status as (typeof harmfulStatuses)[number]);
       if (status === "dodge") stats.temporaryDodge = 0;
       if (
         status === "reflect" ||
@@ -167,7 +224,10 @@ export function* removeEffects(
       else if (status === "armor") depletion = removeArmor(unit, stats.armor).depletion;
       else if (status === "thorns" || status === "waterThorns" || status === "dodge") stats[status] = 0;
       else clearHarmfulStatus(stats, status);
-      if (kind === "cleanse") cleansed++;
+      if (kind === "cleanse") {
+        cleansed++;
+        delete stats.statusSources[status as (typeof harmfulStatuses)[number]];
+      }
       count--;
       removedStatuses.push(
         status === "reflectBurn" ? "reflect" : status === "nullifyFreeze" ? "nullify" : status,
@@ -192,6 +252,17 @@ export function* removeEffects(
       text: `${unitName(unit)}: ${kind === "cleanse" ? "Cleanse" : "Purge"} removes no effects.`,
     });
   if (cleansed > 0 && state) yield* reaction("cleanseRewards", state, unit, cleansed, events);
+  if (state)
+    for (const effect of returned)
+      yield* returnCleansedEffect(
+        state,
+        unit,
+        effect.status,
+        effect.amount,
+        effect.sourceId,
+        events,
+        effect.turns,
+      );
   if (state) yield* reaction("triggerArmorBreak", state, depletion, events);
   // Typed wards share feedback labels but spend separate Purge categories;
   // Cleanse still coalesces active control with buildup of the same status
@@ -219,7 +290,7 @@ export function* applyHarmfulStatus(
   damage: number,
   type: DamageType | "blind",
   events: GameEvent[],
-  options: { leech?: boolean; reflected?: boolean; blocked?: boolean } = {},
+  options: { leech?: boolean; reflected?: boolean; blocked?: boolean; controlTurns?: number } = {},
 ): Resolution<StatusResult> {
   if (
     type !== "burn" &&
@@ -311,6 +382,7 @@ export function* applyHarmfulStatus(
   }
   if (type === "blind" && target.health > 0 && !stats.blind) {
     stats.blind = true;
+    stats.statusSources.blind = source.id;
     events.push({
       kind: "status",
       actorId: source.id,
@@ -343,6 +415,7 @@ export function* applyHarmfulStatus(
   if ((type === "stun" || type === "freeze") && source.health > 0 && target.health > 0 && !immune) {
     const beforeStacks = stats[type];
     stats[type] = Math.min(STACK_LIMIT, stats[type] + damage);
+    if (stats[type] > beforeStacks) stats.statusSources[type] = source.id;
     events.push({
       kind: "status",
       targetId: target.id,
@@ -362,14 +435,32 @@ export function* applyHarmfulStatus(
             : talentRule("stun.concussive-force").percent) /
             100
         : 0.5);
-    if (stats[type] >= threshold) {
+    let reachesThreshold = stats[type] >= threshold;
+    if (alliedSource && !alliedTarget && state.boons.includes("undertow-castanets")) {
+      const other = type === "stun" ? "freeze" : "stun";
+      const otherThreshold =
+        maximumHealth(target) *
+        (0.5 -
+          (other === "freeze" && hasTalent(state, "freeze.bitter-cold")
+            ? talentRule("freeze.bitter-cold").percent
+            : other === "stun" && hasTalent(state, "stun.concussive-force")
+              ? talentRule("stun.concussive-force").percent
+              : 0) /
+            100);
+      reachesThreshold = stats[type] / threshold + stats[other] / otherThreshold >= 1;
+    }
+    if (reachesThreshold) {
       const turns =
         type === "stun" && alliedSource && hasTalent(state, "stun.extended-stun")
           ? 1 + talentRule("stun.extended-stun").amount
           : type === "freeze" && alliedSource && !alliedTarget && state.boons.includes("frozen-pocketwatch")
             ? 1 + boonRule("frozen-pocketwatch").turns
             : 1;
-      enterControl(stats, type, turns);
+      enterControl(stats, type, options.controlTurns ?? turns);
+      if (alliedSource && !alliedTarget && state.boons.includes("undertow-castanets")) {
+        const other = type === "stun" ? "freeze" : "stun";
+        clearHarmfulStatus(stats, other);
+      }
       appliedControl = true;
       if (alliedSource && !alliedTarget) {
         if (type === "freeze" && hasTalent(state, "freeze.icebound")) target.block = 0;

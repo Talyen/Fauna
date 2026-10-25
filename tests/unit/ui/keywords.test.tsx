@@ -132,6 +132,7 @@ describe("keyword foundation", () => {
     expect(parts.map((part) => part.text).join("")).toBe(text);
     expect(parts.filter((part) => part.keyword).map((part) => [part.text, part.keyword])).toEqual([
       ["Health", "health"],
+      ["Healing", "health"],
       ["Consume", "consume"],
       ["Burn", "burn"],
     ]);
@@ -150,7 +151,7 @@ describe("keyword foundation", () => {
 
   it("colors keyword inflections in Boon prose without changing the wording", () => {
     const text =
-      "Light hits Blind Burning enemies; Cards dodged by enemies return to hand; Allies keep their last beneficial effect when Purged; Cleansed effects return to their source; Water Thorns guard Armor and Block";
+      "Light hits Blind Burning enemies; Cards dodged by enemies return to hand; Allies keep their last beneficial effect when Purged; Cleansed effects return to their source; Water Thorns guard Armor and Block; Overflow Healing; Critical Hits";
     const html = renderToStaticMarkup(<KeywordText text={text} />);
     const colored = Array.from(
       html.matchAll(/<span\b[^>]*\bdata-keyword="([^"]+)"[^>]*>([^<]+)<\/span>/g),
@@ -166,6 +167,8 @@ describe("keyword foundation", () => {
       ["Water Thorns", "waterThorns"],
       ["Armor", "armor"],
       ["Block", "block"],
+      ["Healing", "health"],
+      ["Critical Hits", "criticalHit"],
     ]);
     expect(html.replace(/<[^>]+>/g, "")).toBe(text);
   });
