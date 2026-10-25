@@ -32,10 +32,12 @@ export type SpeciesId =
   | "arabesca"
   | "skybex"
   | "dulcera"
+  | "parhelion"
   | "pyrella";
 export type Effect = AbilityKind;
 type PassiveEffect =
   | { kind: "passingFlame"; amount: number }
+  | { kind: "sunthaw"; amount: number }
   | { kind: "gentlePassage"; amount: number }
   | { kind: "mountainGuide"; amount: number }
   | { kind: "petalwake"; amount: number }

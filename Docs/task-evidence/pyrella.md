@@ -10,9 +10,9 @@ Passing Flame triggers for the credited, living, deployed Pyrella. It divides th
 
 ## Checks observed
 
-- The exact `tests/unit/game/creatures/pyrella.test.ts` suite passed all 17 regressions with one worker under the 30-second local budget, including after combining current main's Dulcera and Boon changes
-- Coverage includes all tiers, conservation/remainders, credited and periodic defeats, inactive/dead sources, enemy base-tier use, Death's Door, Nullify, stack caps, preview parity, Mana refund before automatic end turn, Burn draw and no-draw behavior, rejected commands, Fire Thorns through Block and Negate, non-recursive retaliation, sharing, Purge, swap/resume and invalid current-format saves
-- Initial asset preparation encoded four new selections and reused the existing cache; the combined Dulcera generation verified 216 selections, then the combined Boon generation verified 226 selections with no re-encoding
+- The exact `tests/unit/game/creatures/pyrella.test.ts` suite passed all 18 regressions with one worker under the 30-second local budget, including after combining current main's Dulcera, Parhelion, Boon and shared enemy-policy changes
+- Coverage includes all tiers, conservation/remainders, credited and periodic defeats, inactive/dead sources, enemy base-tier use, Death's Door, Nullify, stack caps, preview parity, Mana refund before automatic end turn, Burn draw and no-draw behavior, rejected commands, Fire Thorns through Block and Negate, non-recursive retaliation, sharing, Purge, swap/resume and invalid current-format saves and shared enemy valuation of Fire Thorns
+- Initial asset preparation encoded four new selections and reused the existing cache; the combined Dulcera generation verified 216 selections, then the combined Boon generation verified 226 selections with no re-encoding; the final combined generation verified 230 selections, all cache hits
 - The initial changed-file gate passed formatting, syntax lint, source contracts and documentation checks; protected integration reruns the required gate on the combined result
 - Existing recorded behavior snapshots and hashes were preserved; dormant Fire Thorns is omitted only when zero by the baseline serializers, while Pyrella has direct behavior coverage
 
@@ -42,3 +42,5 @@ A separate fresh context defeated an enemy already carrying 20 Burn through Fest
 ## Evidence boundaries
 
 The user's 2026-10-25 choice establishes the selected source artwork and mechanics. Agent rendered inspection establishes the conditions above, without claiming broader artistic approval. Pure focused regressions, browser interactions, static gates and asset validation are separate evidence. Complete compilation, broad unit/integration suites, hosted CI, measured balance, native desktop, Windows packaging, physical controllers, Steam client and Steam Deck were not run by this task. No push or publication is authorized or performed.
+
+The final shared enemy-policy merge registers Fire Thorns as a beneficial stack and has a direct value/RNG-preservation regression. The focused browser interaction procedure was repeated successfully on the combined gameplay code. The latest Collection capture retains its recorded pre-Parhelion source identity; Parhelion adds catalog content without changing Pyrella artwork geometry or rules.

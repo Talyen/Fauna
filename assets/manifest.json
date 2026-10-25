@@ -2460,6 +2460,50 @@
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     },
     {
+      "id": "creature.parhelion",
+      "origin": "repository",
+      "source": "public/art/creatures/parhelion/portrait.png",
+      "output": "art/parhelion/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Parhelion artwork from Google Drive: https://drive.google.com/file/d/1qtZXFHXhxneEb1p6g4Y5XzoLjiV0v-yE/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.parhelion.polar-reprieve",
+      "origin": "repository",
+      "source": "public/art/creatures/parhelion/polar-reprieve.png",
+      "output": "art/parhelion/polar-reprieve.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Parhelion artwork from Google Drive: https://drive.google.com/file/d/1thk0OksUyyGCE66qbP4mZaeaxCNjoH2G/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.parhelion.sundog-reservoir",
+      "origin": "repository",
+      "source": "public/art/creatures/parhelion/sundog-reservoir.png",
+      "output": "art/parhelion/sundog-reservoir.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Parhelion artwork from Google Drive: https://drive.google.com/file/d/1qSczZBtr81b9c5S3iZ-PCWl2bU2PeOWJ/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.parhelion.whiteout-waltz",
+      "origin": "repository",
+      "source": "public/art/creatures/parhelion/whiteout-waltz.png",
+      "output": "art/parhelion/whiteout-waltz.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Parhelion artwork from Google Drive: https://drive.google.com/file/d/1N88fNI9oAMGRrPjD8vXhmiWjw4qhsQKB/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
       "id": "creature.pyrella",
       "origin": "repository",
       "source": "public/art/creatures/pyrella/portrait.png",

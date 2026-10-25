@@ -2,9 +2,9 @@ import { battleMana, renewalManaBonus } from "./battle-modifiers";
 import { unfinishedJourneyLimit } from "../card-actors";
 import { battlefield, isEnemy, healingAllies } from "../battlefield";
 import { definition, speciesCards, SPECIES } from "../content";
-import { drawBossCards, bossCardPriority, courtRemembers, removeDepartedMinions } from "./legendary";
+import { drawBossCards, courtRemembers, removeDepartedMinions } from "./legendary";
+import { chooseEnemyCard } from "./enemy-policy";
 import { recycleDiscard, MAX_BATTLE_CARDS, MAX_HAND_SIZE } from "../card-zones";
-import { roll } from "../random";
 import { executeAbility } from "./abilities";
 import { creaturePassive } from "../progression";
 import {
@@ -27,8 +27,7 @@ import type { GameEvent, GameState, BattleState } from "../types";
 import { living, pendingReplacement, swapFromCard } from "../team";
 import { settle, intents } from "../journey";
 
-// Adapt immutable authored kits once; selection order and RNG consumption stay
-// the same, while enemy turns reuse their read-only ability definitions.
+// Adapt immutable authored kits once for both value estimation and execution.
 const enemyAbilities = new Map(
   SPECIES.map(({ id }) => [id, speciesCards(id).filter(enemyCanUse).map(enemyCard)]),
 );
@@ -107,10 +106,7 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
         drawBossCards(draft, enemy.deck, TURN_DRAW);
       }
       if (!canAct) continue;
-      const targets = () => battlefield(draft, "player").filter((unit) => unit.health > 0);
-      const availableTargets = targets();
-      const target = availableTargets.find((c) => c.id === enemy.targetId) ?? availableTargets[0];
-      if (!target) continue;
+      if (!battlefield(draft, "player").some((unit) => unit.health > 0)) continue;
       if (enemy.deck) {
         const deck = enemy.deck;
         // Bound automatic decision work even in a long Pearl/Mana chain.
@@ -119,20 +115,11 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
           action < MAX_BATTLE_CARDS && deck.mana > 0 && deck.hand.length && enemy.health > 0;
           action++
         ) {
-          let id = deck.hand[0]!;
-          let priority = bossCardPriority(draft, enemy, id);
-          for (let index = 1; index < deck.hand.length; index++) {
-            const candidate = deck.hand[index]!;
-            const candidatePriority = bossCardPriority(draft, enemy, candidate);
-            if (candidatePriority > priority) {
-              id = candidate;
-              priority = candidatePriority;
-            }
-          }
-          const def = definition(id);
-          const targetsNow = targets();
-          if (!targetsNow.length) break;
-          const victim = targetsNow[Math.floor(roll(draft) * targetsNow.length)]!;
+          const choice = chooseEnemyCard(draft, enemy, deck.hand.map(definition));
+          if (!choice) break;
+          const { def, targetId, allyTargetId } = choice;
+          const id = def.id;
+          enemy.targetId = targetId ?? enemy.targetId;
           deck.hand.splice(deck.hand.indexOf(id), 1);
           if (!def.consume) deck.discard.push(id);
           deck.mana -= def.cost;
@@ -143,8 +130,8 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
               actor: enemy,
               def,
               value: enemyAbilityValue(enemy, def),
-              targetId: victim.id,
-              allyTargetId: enemy.id,
+              targetId,
+              allyTargetId,
             },
             events,
             { swap: swapFromCard },
@@ -167,9 +154,10 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
           : [];
       const choices = [...enemyAbilities.get(enemy.species)!, ...inherited];
       const abilities = choices.filter((card) => card.effect !== "resurrect" || fallen.length > 0);
-      const alternatives = abilities.filter((card) => card.id !== enemy.lastAbility);
-      const pool = alternatives.length ? alternatives : abilities;
-      const def = pool[Math.floor(roll(draft) * pool.length)]!;
+      const choice = chooseEnemyCard(draft, enemy, abilities);
+      if (!choice) continue;
+      const { def, targetId, allyTargetId } = choice;
+      enemy.targetId = targetId ?? enemy.targetId;
       enemy.lastAbility = def.id;
       if (inherited.includes(def)) ensureCombat(enemy).fallenCardsPlayedThisTurn++;
       executeAbility(
@@ -179,13 +167,8 @@ export function finishTurn(draft: BattleState, events: GameEvent[]) {
           actor: enemy,
           def,
           value: enemyAbilityValue(enemy, def),
-          targetId: target.id,
-          allyTargetId:
-            def.effect === "resurrect"
-              ? fallen[0]?.id
-              : def.effect === "heal"
-                ? mostInjured(battle.enemies)?.id
-                : enemy.id,
+          targetId,
+          allyTargetId,
         },
         events,
         { swap: swapFromCard },

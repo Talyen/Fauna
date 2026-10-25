@@ -316,6 +316,7 @@ export const modifierImplementations = freeze(
       "lucky-clover": [owners.damageRewards],
     } satisfies Record<BoonId, Binding>,
     passives: {
+      sunthaw: [owners.cleanseRewards],
       gentlePassage: [owners.gentlePassage],
       passingFlame: [owners.passingFlame],
       mountainGuide: [owners.mountainGuide],

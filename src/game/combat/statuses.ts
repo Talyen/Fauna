@@ -140,7 +140,7 @@ export function* removeControlBuildup(
     amount,
     text: `${unitName(unit)}: Cleanse ${status === "freeze" ? "Freeze" : "Stun"} build-up`,
   });
-  yield* reaction("cleanseRewards", state, unit, 1, events);
+  yield* reaction("cleanseRewards", state, unit, 1, events, status === "freeze");
   yield* returnCleansedEffect(state, unit, status, amount, sourceId, events);
 }
 export function* removeEffects(
@@ -156,6 +156,7 @@ export function* removeEffects(
   const thornsBefore = stats.thorns;
   let depletion: ArmorDepletion | null = null;
   let cleansed = 0;
+  const hadFreezeBuildup = stats.freeze > 0;
   const removedStatuses: NonNullable<import("../types").StatusEvent["affectedStatus"]>[] = [];
   const returned: {
     status: (typeof harmfulStatuses)[number];
@@ -260,7 +261,15 @@ export function* removeEffects(
       amount: 0,
       text: `${unitName(unit)}: ${kind === "cleanse" ? "Cleanse" : "Purge"} removes no effects.`,
     });
-  if (cleansed > 0 && state) yield* reaction("cleanseRewards", state, unit, cleansed, events);
+  if (cleansed > 0 && state)
+    yield* reaction(
+      "cleanseRewards",
+      state,
+      unit,
+      cleansed,
+      events,
+      hadFreezeBuildup && stats.freeze === 0 && removedStatuses.includes("freeze"),
+    );
   if (
     kind === "purge" &&
     state &&
@@ -293,8 +302,27 @@ export function* cleanseRewards(
   unit: Combatant,
   cleansed: number,
   events: GameEvent[],
+  freezeBuildupRemoved = false,
 ): Resolution<void> {
   const stats = ensureCombat(unit);
+  if (freezeBuildupRemoved && unit.health > 0) {
+    const allied = !isEnemy(unit);
+    const row = battlefield(state, allied ? "player" : "enemy");
+    const healing = row.some((ally) => ally.id === unit.id)
+      ? row.reduce(
+          (total, ally) =>
+            total +
+            (ally.health > 0
+              ? creaturePassive(allied ? state : undefined, ally.species).effects.reduce(
+                  (sum, effect) => sum + (effect.kind === "sunthaw" ? effect.amount : 0),
+                  0,
+                )
+              : 0),
+          0,
+        )
+      : 0;
+    if (healing) yield* reaction("restoreHealth", unit, healing, events, false, state);
+  }
   if (!isEnemy(unit)) {
     if (hasTalent(state, "light.divine-favor")) stats[talentRule("light.divine-favor").state] = true;
     const healing =

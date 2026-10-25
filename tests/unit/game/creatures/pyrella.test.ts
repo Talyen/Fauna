@@ -2,6 +2,7 @@ import { produce } from "immer";
 import { describe, expect, it } from "vitest";
 import { cardText, enemyCanUse } from "../../../../src/game/card-rules";
 import { definition, species, speciesCards } from "../../../../src/game/content";
+import { enemyCardValue } from "../../../../src/game/combat/enemy-policy";
 import { executeAbility } from "../../../../src/game/combat/abilities";
 import { grantStatus, hit, removeEffects, tickStatuses } from "../../../../src/game/combat/index";
 import { STACK_LIMIT } from "../../../../src/game/combat/state";
@@ -235,6 +236,16 @@ describe("Pyrella", () => {
       invalid.reserves.find((unit: { id: string }) => unit.id === "ally-0").combat.fireThorns = fireThorns;
       expect(() => decodeSave(JSON.stringify(invalid))).toThrow();
     }
+  });
+
+  it("values Fire Thorns in the shared enemy policy without changing the live state", () => {
+    const state = produce(pyrellaBattle(), (draft) => {
+      draft.battle.enemies[0]!.species = "pyrella";
+      draft.battle.enemies[0]!.combat.negate = true;
+    });
+    const before = encodeSave(state);
+    expect(enemyCardValue(state, state.battle.enemies[0]!, definition("pyrella-spark-decoy"))).toBe(3);
+    expect(encodeSave(state)).toBe(before);
   });
 
   it("lets enemies use Spark Decoy and refreshes Negate without stacking protections", () => {
