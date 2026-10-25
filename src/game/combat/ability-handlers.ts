@@ -382,8 +382,13 @@ const teamProtectionAbility: PrimaryHandler<"teamProtection"> = (context) => {
 };
 
 const swapAbility: PrimaryHandler<"swap"> = (context) => {
-  const { state, actor, events, operations } = context;
-  operations.swap(state, actor, events);
+  const { state, actor, def, events, operations } = context;
+  operations.swap(state, actor, events, def.backupOnly);
+};
+
+const swapDodgeAbility: PrimaryHandler<"swapDodge"> = ({ state, actor, value, events, operations }) => {
+  const incoming = operations.swap(state, actor, events);
+  if (incoming) grantTemporaryDodge(incoming, value, events);
 };
 
 const springboundAbility: PrimaryHandler<"springbound"> = (context) => {
@@ -396,6 +401,7 @@ const repeatNextCardAbility: PrimaryHandler<"repeatNextCard"> = ({ state, action
 };
 
 const handlers: PrimaryHandlers = {
+  swapDodge: swapDodgeAbility,
   springbound: springboundAbility,
   repeatNextCard: repeatNextCardAbility,
   procession: processionAbility,

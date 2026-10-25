@@ -1,6 +1,7 @@
 import type { DamageType } from "../keywords";
 
 export type AbilityKind =
+  | "swapDodge"
   | "springbound"
   | "repeatNextCard"
   | "procession"
@@ -45,6 +46,7 @@ export type SupplementalEffect =
 export type SupplementalKind = SupplementalEffect["kind"];
 
 interface AbilityParameters {
+  swap: { backupOnly?: true; target?: never };
   attack: {
     damageType: DamageType;
     alternateDamageType?: DamageType;

@@ -28,8 +28,8 @@ import type { GameEvent } from "../../../src/game/types";
 import { requireBattle, teamRun } from "../../support/game";
 
 // Preserve the recorded modifier oracle across the save envelope and dormant team grant.
-// Arabesca's new tiers are covered by direct behavioral assertions in ability-contracts.test.ts.
-const recordedSpecies = SPECIES.filter((entry) => entry.id !== "arabesca");
+// New kits have direct behavioral coverage in ability-contracts.test.ts and creatures/skybex.test.ts.
+const recordedSpecies = SPECIES.filter((entry) => !["arabesca", "skybex"].includes(entry.id));
 const digest = (value: unknown) =>
   createHash("sha256")
     .update(

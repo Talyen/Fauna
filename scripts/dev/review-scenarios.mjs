@@ -1,6 +1,13 @@
 import { expect } from "@playwright/test";
 
 export const SCENARIOS = [
+  "dulcera-battle",
+  "dulcera-collection",
+  "dulcera-rank-five",
+  "skybex-battle",
+  "skybex-collection",
+  "skybex-rank-five",
+  "skybex-incoming",
   "arabesca-battle",
   "arabesca-collection",
   "arabesca-rank-five",
@@ -92,6 +99,19 @@ export async function reviewScenario(server, name) {
     game = { ...game, team: game.team.map((unit, index) => (index ? unit : { ...unit, health: 1 })) };
     game = accept(game, { type: "visitCampfire" });
   }
+  if (name.startsWith("skybex-")) {
+    const { skybexBattle } = await server.ssrLoadModule("/tests/support/skybex.ts");
+    game = skybexBattle();
+    if (name === "skybex-rank-five")
+      game = {
+        ...game,
+        discovery: { ...game.discovery, recruited: { ...game.discovery.recruited, skybex: 6 } },
+      };
+    if (name === "skybex-incoming") {
+      const card = game.cards.find((card) => card.definitionId === "skybex-cloudstep");
+      game = accept(game, { type: "play", cardId: card.id, autoEndTurn: false });
+    }
+  }
   if (name.startsWith("arabesca-")) {
     const { arabescaBattle } = await server.ssrLoadModule("/tests/support/arabesca.ts");
     game = arabescaBattle();
@@ -131,19 +151,32 @@ export async function reviewScenario(server, name) {
     const { uncertainBattle } = await server.ssrLoadModule("/tests/support/uncertainty.ts");
     game = uncertainBattle(name === "unknown-targeting");
   }
+  if (name.startsWith("dulcera-")) {
+    const { dulceraBattle } = await server.ssrLoadModule("/tests/support/dulcera.ts");
+    game = dulceraBattle();
+    if (name === "dulcera-rank-five")
+      game = {
+        ...game,
+        discovery: { ...game.discovery, recruited: { ...game.discovery.recruited, dulcera: 6 } },
+      };
+  }
   const save = encodeSave(game);
   decodeSave(save);
   return {
     name,
     save,
     seed: name.startsWith("merchant") ? 7 : 42,
-    fixture: name.startsWith("arabesca-")
-      ? "tests/support/arabesca.ts"
-      : name.startsWith("orifable-")
-        ? "tests/support/orifable.ts"
-        : name.startsWith("almanelle-")
-          ? "tests/support/almanelle.ts"
-          : "tests/support/game.ts",
+    fixture: name.startsWith("dulcera-")
+      ? "tests/support/dulcera.ts"
+      : name.startsWith("skybex-")
+        ? "tests/support/skybex.ts"
+        : name.startsWith("arabesca-")
+          ? "tests/support/arabesca.ts"
+          : name.startsWith("orifable-")
+            ? "tests/support/orifable.ts"
+            : name.startsWith("almanelle-")
+              ? "tests/support/almanelle.ts"
+              : "tests/support/game.ts",
   };
 }
 
@@ -163,7 +196,23 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   await expect(page.locator("#startup-splash")).toHaveCount(0);
   const button = (name) => page.getByRole("button", { name, exact: true });
   const menu = scenario.name === "talent-tree" ? "talents" : scenario.name.split("-")[0];
-  if (["arabesca-collection", "arabesca-rank-five"].includes(scenario.name)) {
+  if (["dulcera-collection", "dulcera-rank-five"].includes(scenario.name)) {
+    await button("Collection").click();
+    const opener = button("Inspect Dulcera");
+    const next = button("Next page");
+    for (let index = 0; index < 32 && !(await opener.count()) && (await next.isEnabled()); index++)
+      await next.click();
+    await opener.click();
+  } else if (["skybex-collection", "skybex-rank-five"].includes(scenario.name)) {
+    await button("Collection").click();
+    const next = page.getByRole("button", { name: "Next page", exact: true });
+    while (
+      !(await page.getByRole("button", { name: "Inspect Skybex", exact: true }).count()) &&
+      (await next.isVisible())
+    )
+      await next.click();
+    await button("Inspect Skybex").click();
+  } else if (["arabesca-collection", "arabesca-rank-five"].includes(scenario.name)) {
     await button("Collection").click();
     const next = page.getByRole("button", { name: "Next page", exact: true });
     while (

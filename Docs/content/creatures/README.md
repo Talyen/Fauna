@@ -44,3 +44,7 @@ For new kits, use the [creature design workflow](../../CREATURE_DESIGN.md) and [
 - [Orifable and Food](orifable.md) · [implementation](../../../src/game/content/creatures/orifable.ts) — shared consumables and Express Delivery
 
 - [Arabesca](arabesca.md): Petalwake, Springbound and the shared next-card repeat
+
+- [Skybex](skybex.md): Mountain Guide, Cloudstep and protection for incoming allies
+
+- [Dulcera](dulcera.md) · [implementation](../../../src/game/content/creatures/dulcera.ts) — Gentle Passage and restorative swaps
