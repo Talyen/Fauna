@@ -135,14 +135,17 @@ export function performanceCases(seed = 42, diagnostic = false, resources = fals
     {
       id: "menus",
       initial,
-      fixture: "explicit-three-deployed-one-reserve-v2",
+      fixture: "inspection-and-pause-settings-v3",
       actions: [
         { kind: "click", name: "Collection", checkpoint: initial },
         { kind: "click", name: "Inspect Mossguard", checkpoint: initial },
+        { kind: "cancel", checkpoint: initial },
         { kind: "click", name: "Back", checkpoint: initial },
+        { kind: "click", name: "Continue", checkpoint: initial },
         { kind: "click", name: "Open menu", checkpoint: initial },
         { kind: "click", name: "Settings", checkpoint: initial },
-        { kind: "click", name: "Open menu", checkpoint: initial },
+        { kind: "click", name: "Back", checkpoint: initial },
+        { kind: "click", name: "Continue", checkpoint: initial },
       ],
     },
   ];
