@@ -178,10 +178,10 @@ it("Encore Baton counts accepted cards across turns and saves, excluding repeats
   state.battle.buffer = [];
   state.battle.discard = [];
   state.battle.draw = [
-    attack.id,
     ...state.cards
       .filter((card) => card.id !== attack.id && !state.battle.hand.includes(card.id))
       .map((card) => card.id),
+    attack.id,
   ];
   state.battle.enemies.forEach((enemy) => {
     enemy.combat.controlled = "freeze";
@@ -225,6 +225,34 @@ it("Encore Baton draws again after another three cards and respects the shared o
   for (let card = 0; card < 6; card++) afterPlayerCard(state, []);
   expect(state.battle.hand.length + state.battle.buffer.length).toBe(before + 2);
   expect(state.battle.encoreProgress).toBe(0);
+});
+
+it("combines the complete Boon catalog without mutating previews or duplicating accepted-play rewards", () => {
+  const state = requireBattle(structuredClone(run()));
+  state.boons = BOONS.map((boon) => boon.id);
+  state.battle.encoreProgress = 2;
+  state.battle.cardsPlayedThisTurn = 2;
+  const card = state.cards.find((entry) => entry.definitionId === "mossguard-heal")!;
+  state.battle.hand = [card.id];
+  state.battle.buffer = [];
+  state.battle.discard = [];
+  state.battle.draw = state.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+  for (const ally of state.team) {
+    ally.health -= 4;
+    ally.combat!.freeze = 5;
+  }
+  const encoded = encodeSave(state);
+  const preview = previewCard(state, card.id);
+  const result = dispatch(state, { type: "play", cardId: card.id, autoEndTurn: false });
+  expect(result.accepted).toBe(true);
+  expect(preview.state).toEqual(result.state);
+  expect(encodeSave(state)).toBe(encoded);
+  expect(result.state.battle!.encoreProgress).toBe(0);
+  expect(result.state.battle!.hand).toHaveLength(1);
+  expect(result.state.battle!.mana).toBe(state.battle.mana);
+  expect(result.state.battleXP.health).toBe((state.battleXP.health ?? 0) + 1);
+  expect(result.state.team.map((ally) => ally.combat!.freeze)).toEqual([1, 3, 3]);
+  expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
 });
 
 it("Pruning Crescent steals full Nature Thorns through an authored pre-attack Purge", () => {
