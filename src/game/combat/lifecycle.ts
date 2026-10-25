@@ -69,7 +69,7 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
     if (unit.health <= 0) break;
     if (stats[status] <= 0) continue;
     const { amount, sourceId, payouts } = periodicTick(stats, status);
-    // Ticks bypass Block and do not reapply their own buildup.
+    // Ticks use ordinary Block absorption without reapplying their own buildup.
     const source =
       [...battlefield(state, "player"), ...state.reserves, ...battlefield(state, "enemy")].find(
         (candidate) => candidate.id === sourceId,

@@ -302,7 +302,7 @@ export function* resolveHit(
   if (partingCut) ensureCombat(source)[talentRule("bleed.parting-cut").state] = false;
   if (critical) damage *= 2;
   const blockRatio = blockEfficiency(state, target, type);
-  const payment = blockPayment(damage, target.block, blockRatio, policy.bypassBlock);
+  const payment = blockPayment(damage, target.block, blockRatio);
   const blocked = payment.absorbed,
     blockSpent = payment.spent;
   target.block -= blockSpent;

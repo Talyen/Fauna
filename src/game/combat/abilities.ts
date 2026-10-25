@@ -79,7 +79,13 @@ export function executeAbility(
         text: `${name} repeats ${def.name}${flourishRepeat ? " with Kindling Flourish" : encoreRepeat ? " with Encore" : ""}`,
       });
     const negated = new Set<string>();
-    const criticalBonus = def.effect === "attack" ? openingCriticalBonus(state, actor) : 0;
+    const criticalBonus =
+      def.effect === "attack"
+        ? Math.max(
+            openingCriticalBonus(state, actor),
+            def.criticalWhenLastCard && action.lastCardInHand ? 100 : 0,
+          )
+        : 0;
     const blindMiss = def.effect === "attack" ? beginAttack(state, actor, events) : false;
     const context = {
       state,

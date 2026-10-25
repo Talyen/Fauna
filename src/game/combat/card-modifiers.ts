@@ -1,11 +1,12 @@
 import { boonRule, PLAYER_CARD_TRIGGER_LIMIT } from "../rules/boons";
 import { talentRule } from "../rules/talents";
-import { gainMana, ensureCombat, type Combatant } from "./index";
+import { gainMana, ensureCombat, restoreHealth, mostInjured, type Combatant } from "./index";
 import type { ProgressionKeyword } from "../keywords";
 import { livingChorus } from "./turns";
 import type { BattleState, GameEvent, Card } from "../types";
 import { definition } from "../content";
-import { battlefield } from "../battlefield";
+import { battlefield, healingAllies } from "../battlefield";
+import { creaturePassive } from "../progression";
 import { receiveCard, draw } from "../card-zones";
 
 /** Reuse the played slot; no copies, free plays or extra accepted-play counts. */
@@ -41,6 +42,20 @@ export function consumeCardGrants(actor: Combatant, keywords: readonly Progressi
   ensureCombat(actor)[talentRule("stun.free-follow-up").state] = false;
   if (keywords.includes("nature")) ensureCombat(actor)[talentRule("nature.windstep").state] = false;
   if (keywords.includes("light")) ensureCombat(actor)[talentRule("light.divine-favor").state] = false;
+}
+
+/** The command snapshots the last-card condition before effects, draws and repeats. */
+export function lastWarmth(state: BattleState, enemy: boolean, events: GameEvent[]) {
+  const side = enemy ? "enemy" : "player";
+  for (const source of battlefield(state, side)) {
+    if (source.health <= 0) continue;
+    const amount = creaturePassive(enemy ? undefined : state, source.species).effects.reduce(
+      (sum, effect) => sum + (effect.kind === "lastWarmth" ? effect.amount : 0),
+      0,
+    );
+    const recipient = amount > 0 ? mostInjured(healingAllies(state, side)) : undefined;
+    if (recipient) restoreHealth(recipient, amount, events, false, state, false, source);
+  }
 }
 
 /** One accepted player card owns this counter, before refill and settlement. */

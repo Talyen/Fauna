@@ -34,9 +34,11 @@ export type SpeciesId =
   | "dulcera"
   | "parhelion"
   | "pyrella"
-  | "aerostat";
+  | "aerostat"
+  | "alpenglen";
 export type Effect = AbilityKind;
 type PassiveEffect =
+  | { kind: "lastWarmth"; amount: number }
   | { kind: "wellProvisioned"; amount: number }
   | { kind: "passingFlame"; amount: number }
   | { kind: "sunthaw"; amount: number }

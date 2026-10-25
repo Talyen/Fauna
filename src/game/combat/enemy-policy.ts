@@ -7,6 +7,7 @@ import { observeDecisions } from "../random";
 import { swapFromCard } from "../team";
 import type { BattleState, CombatState, Enemy } from "../types";
 import { executeAbility } from "./abilities";
+import { lastWarmth } from "./card-modifiers";
 import { courtRemembers } from "./legendary";
 import { highestHealth, type Combatant } from "./state";
 
@@ -84,6 +85,7 @@ export function enemyCardValue(
       let decision = 0;
       observeDecisions(draft, () => ((probe + 0.5) / 8 + decision++ * 0.618033988749895) % 1);
       const actor = draft.battle.enemies.find((unit) => unit.id === enemy.id)!;
+      const lastCardInHand = spentCard > 0 && actor.deck?.hand.length === 1;
       if (actor.deck) {
         actor.deck.mana -= def.cost;
         if (spentCard) {
@@ -100,11 +102,13 @@ export function enemyCardValue(
           value: enemyAbilityValue(actor, def),
           targetId,
           allyTargetId,
+          lastCardInHand,
         },
         [],
         { swap: swapFromCard },
       );
       if (actor.deck) courtRemembers(draft, actor, []);
+      if (lastCardInHand) lastWarmth(draft, true, []);
     });
     // Rank effect value, with Mana paid before restoration so resource caps are accurate.
     total += positionValue(after) - before + (enemy.deck ? def.cost + spentCard : 0);

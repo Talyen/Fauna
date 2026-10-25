@@ -68,6 +68,7 @@ const owners = {
   gentlePassage: bind("./team", "gentlePassage"),
   mountainGuide: bind("./team", "mountainGuide"),
   afterPlayerCard: bind("./combat/card-modifiers", "afterPlayerCard"),
+  lastWarmth: bind("./combat/card-modifiers", "lastWarmth"),
   returnDodgedCard: bind("./combat/card-modifiers", "returnDodgedCard"),
   manaCapacity: bind("./ability-rules", "manaCapacity"),
   healingAllies: bind("./battlefield", "healingAllies"),
@@ -318,6 +319,7 @@ export const modifierImplementations = freeze(
       "lucky-clover": [owners.damageRewards],
     } satisfies Record<BoonId, Binding>,
     passives: {
+      lastWarmth: [owners.lastWarmth],
       sunthaw: [owners.cleanseRewards],
       wellProvisioned: [owners.wellProvisioned],
       gentlePassage: [owners.gentlePassage],

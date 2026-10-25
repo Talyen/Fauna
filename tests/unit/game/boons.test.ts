@@ -176,8 +176,8 @@ it("Moss Oven Mitt absorbs two Burn damage per Block while retaining buildup and
   expect(source.combat.burn).toBe(7);
   source.block = 3;
   tickStatuses(state, source, events);
-  expect(source.block).toBe(3);
-  expect(source.health).toBe(health - 8);
+  expect(source.block).toBe(0);
+  expect(source.health).toBe(health - 2);
 });
 
 it("Encore Baton counts accepted cards across turns and saves, excluding repeats and rejections", () => {

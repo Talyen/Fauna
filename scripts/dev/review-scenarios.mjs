@@ -1,6 +1,9 @@
 import { expect } from "@playwright/test";
 
 export const SCENARIOS = [
+  "alpenglen-battle",
+  "alpenglen-collection",
+  "alpenglen-rank-five",
   "aerostat-battle",
   "aerostat-collection",
   "aerostat-rank-five",
@@ -143,6 +146,10 @@ export async function reviewScenario(server, name) {
       game = accept(game, { type: "play", cardId: card.id, autoEndTurn: false });
     }
   }
+  if (name.startsWith("alpenglen-")) {
+    const { alpenglenBattle } = await server.ssrLoadModule("/tests/support/alpenglen.ts");
+    game = alpenglenBattle(name === "alpenglen-rank-five" ? 5 : 0);
+  }
   if (name.startsWith("aerostat-")) {
     const { aerostatBattle } = await server.ssrLoadModule("/tests/support/aerostat.ts");
     game = aerostatBattle(name === "aerostat-rank-five" ? 5 : 0);
@@ -223,23 +230,25 @@ export async function reviewScenario(server, name) {
     name,
     save,
     seed: name.startsWith("merchant") ? 7 : 42,
-    fixture: name.startsWith("aerostat-")
-      ? "tests/support/aerostat.ts"
-      : name.startsWith("parhelion-")
-        ? "tests/support/parhelion.ts"
-        : name.startsWith("dulcera-")
-          ? "tests/support/dulcera.ts"
-          : name.startsWith("pyrella-")
-            ? "tests/support/pyrella.ts"
-            : name.startsWith("skybex-")
-              ? "tests/support/skybex.ts"
-              : name.startsWith("arabesca-")
-                ? "tests/support/arabesca.ts"
-                : name.startsWith("orifable-")
-                  ? "tests/support/orifable.ts"
-                  : name.startsWith("almanelle-")
-                    ? "tests/support/almanelle.ts"
-                    : "tests/support/game.ts",
+    fixture: name.startsWith("alpenglen-")
+      ? "tests/support/alpenglen.ts"
+      : name.startsWith("aerostat-")
+        ? "tests/support/aerostat.ts"
+        : name.startsWith("parhelion-")
+          ? "tests/support/parhelion.ts"
+          : name.startsWith("dulcera-")
+            ? "tests/support/dulcera.ts"
+            : name.startsWith("pyrella-")
+              ? "tests/support/pyrella.ts"
+              : name.startsWith("skybex-")
+                ? "tests/support/skybex.ts"
+                : name.startsWith("arabesca-")
+                  ? "tests/support/arabesca.ts"
+                  : name.startsWith("orifable-")
+                    ? "tests/support/orifable.ts"
+                    : name.startsWith("almanelle-")
+                      ? "tests/support/almanelle.ts"
+                      : "tests/support/game.ts",
   };
 }
 
@@ -259,7 +268,14 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   await expect(page.locator("#startup-splash")).toHaveCount(0);
   const button = (name) => page.getByRole("button", { name, exact: true });
   const menu = scenario.name === "talent-tree" ? "talents" : scenario.name.split("-")[0];
-  if (["aerostat-collection", "aerostat-rank-five"].includes(scenario.name)) {
+  if (["alpenglen-collection", "alpenglen-rank-five"].includes(scenario.name)) {
+    await button("Collection").click();
+    const opener = button("Inspect Alpenglen");
+    const next = button("Next page");
+    for (let index = 0; index < 32 && !(await opener.count()) && (await next.isEnabled()); index++)
+      await next.click();
+    await opener.click();
+  } else if (["aerostat-collection", "aerostat-rank-five"].includes(scenario.name)) {
     await button("Collection").click();
     const opener = button("Inspect Aerostat");
     const next = button("Next page");

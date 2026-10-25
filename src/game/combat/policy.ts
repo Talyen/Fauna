@@ -18,7 +18,6 @@ const inactive = {
   attack: false,
   direct: false,
   buildup: false,
-  bypassBlock: false,
   deadSource: false,
   wrongFoot: false,
   resonance: false,
@@ -43,7 +42,7 @@ export function packetPolicy(packet: DamagePacket) {
         bounce: packet.delivery !== "bounce",
       };
     case "periodic":
-      return { ...inactive, bypassBlock: true, deadSource: true };
+      return { ...inactive, deadSource: true };
     case "retaliation":
     case "statusRetaliation":
     case "derived":

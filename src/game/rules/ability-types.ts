@@ -55,6 +55,7 @@ interface AbilityParameters {
     alternateDamageType?: DamageType;
     doubleWithArmor?: boolean;
     doubleAgainstHealthier?: true;
+    criticalWhenLastCard?: true;
     purgeThorns?: true;
     target?: "allEnemies" | "randomEnemy";
   };
