@@ -11,6 +11,7 @@ export function ManaCrystals({
   maximum?: number;
   previewCost?: number;
 }) {
+  const slots = Math.max(mana, maximum);
   const [glints, setGlints] = useState<number[]>([]);
   const glint = (index: number) =>
     setGlints((previous) => {
@@ -29,13 +30,14 @@ export function ManaCrystals({
       }
       variant="ghost"
       className="mana"
+      data-overflow-row={slots > 6}
       aria-label={`Mana ${mana} of ${maximum}`}
       onFocus={() => {
         if (document.documentElement.dataset.focus === "visible")
-          setGlints((previous) => Array.from({ length: maximum }, (_, index) => (previous[index] ?? 0) + 1));
+          setGlints((previous) => Array.from({ length: slots }, (_, index) => (previous[index] ?? 0) + 1));
       }}
     >
-      {Array.from({ length: maximum }, (_, index) => (
+      {Array.from({ length: slots }, (_, index) => (
         <span
           className="mana-gem"
           key={index}

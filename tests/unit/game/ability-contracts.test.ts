@@ -29,13 +29,13 @@ import { COMBAT_PACKS } from "../../../src/game/encounters";
 import { battleChoices } from "../../../src/application/battle-policy";
 import type { BattleState, GameEvent } from "../../../src/game/types";
 
-// Keep the pre-existing gameplay oracle anchored to its format-56 envelope.
+// Keep the pre-existing gameplay oracle anchored to its format-57 envelope.
 // A dormant team repeat is neutral; active grants remain part of the oracle.
 const digest = (value: unknown) =>
   createHash("sha256")
     .update(
       JSON.stringify(value, (key, entry) => {
-        if (key === "version") return 56;
+        if (key === "version") return 57;
         if (key === "repeatNext" && entry.player === false && entry.enemy === false) return undefined;
         return entry;
       }),
@@ -217,6 +217,26 @@ describe("Arabesca's selected ability contracts", () => {
     });
     expect(game.team.map((unit) => unit.health)).toEqual([9, 11, 0]);
     expect(game.reserves[0]!.health).toBe(5);
+  });
+
+  it("uses Camp Hammock's shared healing recipients for Petalwake", () => {
+    const game = produce(arabescaBattle(), (draft) => {
+      draft.boons = ["camp-hammock"];
+      addBackups(draft, {
+        id: "backup",
+        species: "prismram",
+        health: 5,
+        block: 0,
+        attacked: false,
+        combat: freshCombat(),
+      });
+      hit(draft, draft.battle.enemies[0]!, draft.team[0]!, 6, "physical", [], {
+        origin: "ability",
+        blindMiss: true,
+      });
+    });
+    expect(game.reserves[0]!.health).toBe(6);
+    expect(game.team.map((unit) => unit.health)).toEqual([11, 11, 11]);
   });
 
   it("uses the base passive for an enemy Arabesca and heals only her side", () => {
@@ -452,11 +472,11 @@ describe("Arabesca's selected ability contracts", () => {
 
   it("validates repeat flags and rejects the obsolete development save", () => {
     const raw = JSON.parse(encodeSave(arabescaBattle()));
-    expect(raw.version).toBe(57);
+    expect(raw.version).toBe(58);
     raw.battle.repeatNext.player = "true";
     expect(() => decodeSave(JSON.stringify(raw))).toThrow();
     raw.battle.repeatNext.player = false;
-    raw.version = 56;
+    raw.version = 57;
     expect(() => decodeSave(JSON.stringify(raw))).toThrow();
   });
 });

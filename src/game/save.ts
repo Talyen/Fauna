@@ -1,4 +1,5 @@
 import { isFood } from "./content/food";
+import { manaCapacity } from "./ability-rules";
 import { unfinishedJourneyLimit } from "./card-actors";
 import { PEARL } from "./content/creatures/memento";
 import { battlefield } from "./battlefield";
@@ -263,7 +264,7 @@ function validateBattle(state: BattleState) {
   const zones = [...battle.draw, ...battle.hand, ...battle.buffer, ...battle.discard];
   // The current turn capacity survives a category reset.
   invalid(
-    battle.mana > battle.maxMana ||
+    battle.mana > manaCapacity(state) ||
       battle.earnedGold > state.currency ||
       battle.earnedGold > state.journey.currency,
   );

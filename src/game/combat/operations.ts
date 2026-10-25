@@ -13,6 +13,7 @@ import type {
   triggerArmorBreak,
   removeControlBuildup,
   removeEffects,
+  returnCleansedEffect,
   cleanseRewards,
   applyHarmfulStatus,
   controlRewards,
@@ -36,6 +37,7 @@ export type Operations = {
   triggerArmorBreak: typeof triggerArmorBreak;
   removeControlBuildup: typeof removeControlBuildup;
   removeEffects: typeof removeEffects;
+  returnCleansedEffect: typeof returnCleansedEffect;
   cleanseRewards: typeof cleanseRewards;
   applyHarmfulStatus: typeof applyHarmfulStatus;
   controlRewards: typeof controlRewards;

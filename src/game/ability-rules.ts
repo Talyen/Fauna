@@ -1,10 +1,16 @@
 import { talentRule } from "./rules/talents";
+import { boonRule } from "./rules/boons";
 import { cardActor } from "./card-actors";
 import { primaryAbilityValue } from "./combat/ability-values";
 import { definition, type CardDefinition, type PassiveTier } from "./content";
 import { enemyCard } from "./card-rules";
 import { creaturePassive, cardKeywords, hasTalent } from "./progression";
 import type { Card, Creature, GameState } from "./types";
+
+export function manaCapacity(state: GameState): number {
+  if (!state.battle) return 0;
+  return state.battle.maxMana + (state.boons.includes("rainkeeper") ? boonRule("rainkeeper").overflow : 0);
+}
 /** Intrinsic effect value; healing caps resolve in the command. */
 export function actionValue(
   card: Card,

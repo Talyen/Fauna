@@ -17,7 +17,7 @@ Restore X Health to allies when you Dodge
 | 4     | 5                            |
 | 5     | 6                            |
 
-Each tier replaces the complete previous passive. Every Arabesca Dodge heals her living deployed side, including herself and allied Minions. Backups and knocked-out creatures are excluded. Another creature's Dodge does not activate her passive. Duplicate Arabescas each heal only when that individual Dodges. Enemy Arabescas use the base tier and heal their own side.
+Each tier replaces the complete previous passive. Every Arabesca Dodge heals her living deployed side, including herself and allied Minions. Knocked-out creatures are excluded; the shared automatic-healing owner includes backups when Camp Hammock is owned. Another creature's Dodge does not activate her passive. Duplicate Arabescas each heal only when that individual Dodges. Enemy Arabescas use the base tier and heal their own side.
 
 Blind misses already resolve as Dodge and activate Petalwake. Negate, Block and periodic damage do not. Healing uses ordinary recipient modifiers, Health caps and healing-triggered Boons, without card-only overhealing rewards. Catch Breath restores Health to the Dodging creature; Petalwake also restores her companions. Cindernewt retaliates on Dodge instead of healing.
 
@@ -43,7 +43,7 @@ Dancing Double exchanges a card and Mana for one additional resolution of a late
 
 Dancing Double does not repeat itself when initially played. If an existing grant doubles it, its resolutions refresh one future grant rather than stacking charges or recursing. Shared Food can consume the grant, resolves twice and is Consumed once; creature-specific Food exclusions remain unchanged. The grant survives turns, creator departure, swaps and save/resume, and resets with a new battle. Rejected commands and detached previews cannot consume the live grant. The battle shows Next card ×2 while the player's grant is pending.
 
-Save format 57 records both side grants and rejects obsolete development saves without migrations. Existing ability snapshots retain their format-56 metadata envelope and omit dormant repeat flags for comparison; active grants and the new mechanics have direct regression assertions.
+Save format 58 records both side grants and rejects obsolete development saves without migrations. Existing ability snapshots retain their format-57 metadata envelope and omit dormant repeat flags for comparison; active grants and the new mechanics have direct regression assertions.
 
 ## Play pattern and availability
 

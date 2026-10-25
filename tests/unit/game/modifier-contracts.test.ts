@@ -34,14 +34,14 @@ const digest = (value: unknown) =>
   createHash("sha256")
     .update(
       JSON.stringify(value, (key, entry) => {
-        if (key === "version") return 56;
+        if (key === "version") return 57;
         if (key === "repeatNext" && entry.player === false && entry.enemy === false) return undefined;
         return entry;
       }),
     )
     .digest("hex");
 
-// Recorded on committed main before modifier bindings or parameters changed.
+// Baseline includes the approved Block rules, ten passive Boons and save format 57.
 // These expectations are an independent behavior oracle; do not refresh them for a refactor.
 it("preserves all modifier definitions, text and ordered six-tier passives", () => {
   expect({

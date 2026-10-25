@@ -6,6 +6,16 @@ function boon<P extends object>(parameters: P, describe: (parameters: P) => stri
 }
 const rules = freeze(
   {
+    rainkeeper: boon({ overflow: 2 }, () => "Mana can overflow"),
+    "dream-yo-yo": boon({}, () => "Cards Dodged by enemies return to hand"),
+    "basalt-glass-bookmark": boon({}, () => "Purge cannot remove an ally’s last beneficial effect"),
+    "wonder-domino": boon({}, () => "Overkill damage spreads to other enemies"),
+    "furnace-prism": boon({}, () => "Light hits Blind Burning enemies"),
+    "last-threshold": boon({}, () => "Overflow Healing is shared with allies at Death's Door"),
+    "camp-hammock": boon({}, () => "Backup allies can receive Healing"),
+    "honeycomb-frame": boon({}, () => "Armor prevents Critical Hits"),
+    "undertow-castanets": boon({}, () => "Stun and Freeze buildup combines on enemies"),
+    "orbit-armillary": boon({}, () => "Cleansed effects return to their source"),
     "tattered-pages": boon({ draw: 1 }, (p) => `Draw ${p.draw} additional card at battle start`),
     "bone-charm": boon({ healing: 3 }, (p) => `Restore ${p.healing} Health when you defeat an enemy`),
     "ironwood-buckler": boon({ thorns: 1 }, (p) => `Gain ${p.thorns} Thorns whenever you gain Block`),

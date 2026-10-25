@@ -1,4 +1,4 @@
-import { afterPlayerCard, consumeCardGrants } from "./combat/card-modifiers";
+import { afterPlayerCard, consumeCardGrants, returnDodgedCard } from "./combat/card-modifiers";
 import { observeDecisions } from "./random";
 import { useFood } from "./combat/food";
 import { cardActor } from "./card-actors";
@@ -269,6 +269,7 @@ function resolve(
         }
         battle.hand.splice(battle.hand.indexOf(card.id), 1);
         if (!def.consume) battle.discard.push(card.id);
+        const abilityEvents = events.length;
         if (def.species === null) useFood(draft, def, command.targetId, events);
         else
           executeAbility(
@@ -284,6 +285,7 @@ function resolve(
             events,
             { swap: swapFromCard },
           );
+        returnDodgedCard(draft, card, events, abilityEvents);
         courtRemembers(draft, actor, events);
         if (def.consume) draft.cards = draft.cards.filter((entry) => entry.id !== card.id);
         removeDepartedMinions(draft);

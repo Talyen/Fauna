@@ -43,6 +43,20 @@ export const BOONS = [
     name: "Lucky Clover",
     text: boonRule("lucky-clover").text,
   },
+  { id: "rainkeeper", name: "Rainkeeper", text: boonRule("rainkeeper").text },
+  { id: "dream-yo-yo", name: "Dream Yo-Yo", text: boonRule("dream-yo-yo").text },
+  {
+    id: "basalt-glass-bookmark",
+    name: "Basalt Glass Bookmark",
+    text: boonRule("basalt-glass-bookmark").text,
+  },
+  { id: "wonder-domino", name: "Wonder Domino", text: boonRule("wonder-domino").text },
+  { id: "furnace-prism", name: "Furnace Prism", text: boonRule("furnace-prism").text },
+  { id: "last-threshold", name: "Last Threshold", text: boonRule("last-threshold").text },
+  { id: "camp-hammock", name: "Camp Hammock", text: boonRule("camp-hammock").text },
+  { id: "honeycomb-frame", name: "Honeycomb Frame", text: boonRule("honeycomb-frame").text },
+  { id: "undertow-castanets", name: "Undertow Castanets", text: boonRule("undertow-castanets").text },
+  { id: "orbit-armillary", name: "Orbit Armillary", text: boonRule("orbit-armillary").text },
 ] as const;
 export type BoonId = (typeof BOONS)[number]["id"];
 

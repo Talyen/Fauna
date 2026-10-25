@@ -1,5 +1,6 @@
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
+import { healingAllies } from "../battlefield";
 import { creaturePassive, hasTalent } from "../progression";
 import { draw, drawKeyword, expressDelivery } from "../card-zones";
 import { grantArmor, grantStatus, grantBlock, restoreHealth, TURN_MANA, TURN_DRAW } from "./index";
@@ -42,6 +43,10 @@ export function playerBattleStart(state: BattleState, events: GameEvent[]) {
     if (hasTalent(state, "health.combat-surge"))
       restoreHealth(unit, talentRule("health.combat-surge").amount, events, false, state);
   }
+  if (hasTalent(state, "health.combat-surge"))
+    for (const unit of healingAllies(state))
+      if (state.reserves.some((backup) => backup.id === unit.id))
+        restoreHealth(unit, talentRule("health.combat-surge").amount, events, false, state);
 }
 export function victoryRecovery(state: GameState, creature: Creature, events: GameEvent[]) {
   if (hasTalent(state, "health.vitality"))

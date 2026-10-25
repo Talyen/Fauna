@@ -1,14 +1,16 @@
 import { freeze } from "immer";
 import type { TalentId, BoonId } from "./content";
 import type { PassiveKind } from "./content/types";
-import type { cardCost, passiveCardBonus, physicalBonus, retainedBlock } from "./ability-rules";
+import type { cardCost, manaCapacity, passiveCardBonus, physicalBonus, retainedBlock } from "./ability-rules";
 import type { drawHasAnotherCard, expressDelivery, receiveDraw } from "./card-zones";
 import type { loseHealth, openingCriticalBonus, ownDodgeChance, sharedDodgeChance } from "./combat/state";
 
 type Modules = {
+  "./battlefield": typeof import("./battlefield");
   "./ability-facts": typeof import("./ability-facts");
   "./ability-rules": {
     cardCost: typeof cardCost;
+    manaCapacity: typeof manaCapacity;
     passiveCardBonus: typeof passiveCardBonus;
     physicalBonus: typeof physicalBonus;
     retainedBlock: typeof retainedBlock;
@@ -52,6 +54,11 @@ function bind<M extends keyof Modules, N extends CallableName<M>>(module: M, nam
 }
 const owners = {
   afterPlayerCard: bind("./combat/card-modifiers", "afterPlayerCard"),
+  returnDodgedCard: bind("./combat/card-modifiers", "returnDodgedCard"),
+  manaCapacity: bind("./ability-rules", "manaCapacity"),
+  healingAllies: bind("./battlefield", "healingAllies"),
+  removeEffects: bind("./combat/statuses", "removeEffects"),
+  returnCleansedEffect: bind("./combat/statuses", "returnCleansedEffect"),
   consumeCardGrants: bind("./combat/card-modifiers", "consumeCardGrants"),
   applyHarmfulStatus: bind("./combat/statuses", "applyHarmfulStatus"),
   armorApplies: bind("./combat/damage-values", "armorApplies"),
@@ -255,6 +262,16 @@ export const modifierImplementations = freeze(
       "water.riptide": [owners.waterFollowups],
     } satisfies Record<TalentId, Binding>,
     boons: {
+      rainkeeper: [owners.manaCapacity],
+      "dream-yo-yo": [owners.returnDodgedCard],
+      "basalt-glass-bookmark": [owners.removeEffects],
+      "wonder-domino": [owners.resolveHit],
+      "furnace-prism": [owners.damageRewards],
+      "last-threshold": [owners.restoreHealth],
+      "camp-hammock": [owners.healingAllies],
+      "honeycomb-frame": [owners.resolveHit],
+      "undertow-castanets": [owners.applyHarmfulStatus],
+      "orbit-armillary": [owners.returnCleansedEffect],
       "tattered-pages": [owners.playerBattleStart],
       "bone-charm": [owners.damageRewards],
       "ironwood-buckler": [owners.grantBlock],
@@ -323,6 +340,7 @@ export const modifierQueries = freeze(
     } satisfies Partial<Record<TalentId, Binding>>,
     boons: {
       "sundering-charm": [owners.ordinaryAttackFacts],
+      rainkeeper: [owners.manaCapacity],
     } satisfies Partial<Record<BoonId, Binding>>,
     passives: {
       wellRead: [owners.drawHasAnotherCard],

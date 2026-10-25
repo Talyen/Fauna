@@ -5,7 +5,7 @@ import { takeAttackReflection } from "./attack-reflection";
 import { resurrect } from "./resurrection";
 import { cardTargeting } from "../card-rules";
 import { interceptAttack } from "./interception";
-import { battlefield } from "../battlefield";
+import { battlefield, healingAllies } from "../battlefield";
 import { summonEcho, createPearls, drawBossCards } from "./legendary";
 import { definition, species } from "../content";
 import { scalePower } from "./ability-values";
@@ -36,6 +36,12 @@ import {
   type PrimaryContext,
 } from "./ability-context";
 import type { AbilityKind } from "../rules/ability-types";
+import type { Combatant } from "./state";
+
+function purgeAttackThorns(state: GameState, unit: Combatant, events: GameEvent[]) {
+  for (const status of ["thorns", "waterThorns"] as const)
+    if (ensureCombat(unit)[status] > 0) removeEffects(unit, "purge", 1, events, state, status);
+}
 
 function recoverDiscard(state: GameState, events: GameEvent[]) {
   const battle = state.battle!;
@@ -147,8 +153,7 @@ const attackAbility: PrimaryHandler<"attack"> = (context) => {
       negated.add(recipient.id);
       if (negateAttack(state, recipient, actor, events)) continue;
       if (def.purgeThorns) {
-        ensureCombat(actor).thorns = 0;
-        ensureCombat(actor).waterThorns = 0;
+        purgeAttackThorns(state, actor, events);
       }
       hit(
         state,
@@ -170,22 +175,7 @@ const attackAbility: PrimaryHandler<"attack"> = (context) => {
       continue;
     }
     if (def.purgeThorns) {
-      const stats = ensureCombat(recipient);
-      for (const status of ["thorns", "waterThorns"] as const) {
-        const removed = stats[status];
-        stats[status] = 0;
-        if (removed)
-          events.push({
-            kind: "status",
-            actorId: actor.id,
-            targetId: recipient.id,
-            status: "purge",
-            affectedStatus: status,
-            outcome: "remove",
-            amount: -removed,
-            text: `Purge ${status === "thorns" ? "Thorns" : "Water Thorns"}`,
-          });
-      }
+      purgeAttackThorns(state, recipient, events);
     }
     hit(
       state,
@@ -221,7 +211,7 @@ const guardAbility: PrimaryHandler<"guard"> = (context) => {
 
 const healAbility: PrimaryHandler<"heal"> = (context) => {
   const { state, action, actor, def, value, events } = context;
-  const allies = friendlyRow(state, action);
+  const allies = healingAllies(state, action.side);
   const targets =
     def.target === "allAllies"
       ? alive(allies)
@@ -229,7 +219,7 @@ const healAbility: PrimaryHandler<"heal"> = (context) => {
         ? [actor]
         : def.target === "mostInjured"
           ? [mostInjured(allies)!]
-          : allies.filter((unit) => unit.id === action.allyTargetId && unit.health > 0);
+          : friendlyRow(state, action).filter((unit) => unit.id === action.allyTargetId && unit.health > 0);
   for (const recipient of targets) {
     restoreHealth(recipient, value, events, false, state, true, actor);
     applyExtras(state, action, events, { target: recipient, recipientOnly: true });
@@ -356,7 +346,10 @@ const swapLowestAbility: PrimaryHandler<"swapLowest"> = (context) => {
 };
 
 function thawAllies({ state, action, events }: Pick<PrimaryContext, "state" | "action" | "events">) {
-  for (const unit of alive(friendlyRow(state, action))) removeControlBuildup(state, unit, "freeze", events);
+  for (const unit of alive(friendlyRow(state, action))) {
+    if (action.actor.health <= 0) break;
+    removeControlBuildup(state, unit, "freeze", events);
+  }
 }
 const teamThawAbility: PrimaryHandler<"teamThaw"> = thawAllies;
 
