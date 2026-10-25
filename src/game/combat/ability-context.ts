@@ -12,7 +12,12 @@ export type AbilityAction = {
   allyTargetId?: string;
 } & ({ side: "player"; actor: Creature } | { side: "enemy"; actor: Enemy });
 export interface AbilityOperations {
-  swap: (state: GameState, actor: Combatant, events: GameEvent[], backupOnly?: boolean) => void;
+  swap: (
+    state: GameState,
+    actor: Combatant,
+    events: GameEvent[],
+    backupOnly?: boolean,
+  ) => Combatant | undefined;
 }
 export const actorPower = (action: AbilityAction) => (action.side === "enemy" ? action.actor.power : 1);
 export const friendlyRow = (state: GameState, action: AbilityAction): Combatant[] =>

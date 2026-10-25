@@ -3,9 +3,10 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { git, worktrees } from "./lib/git.mjs";
 import { matchingDependencies, dependenciesAvailable } from "./dependencies.mjs";
+import { storageProfile, populateWorktree } from "./lib/worktree-storage.mjs";
 import { recordTaskIntent, taskIntent } from "./lib/task-intent.mjs";
 
-export function createWorktree(root, slug, base = "main") {
+export function createWorktree(root, slug, base = "main", options = {}) {
   root = realpathSync(root);
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug ?? "") || slug.length > 64)
     throw new Error(
@@ -35,7 +36,8 @@ export function createWorktree(root, slug, base = "main") {
   if (git(root, ["branch", "--list", branch]).trim())
     throw new Error("Task branch already exists; inspect it before choosing another name.");
   mkdirSync(path.dirname(target), { recursive: true });
-  git(root, ["worktree", "add", "-b", branch, target, commit]);
+  git(root, ["worktree", "add", "--no-checkout", "-b", branch, target, commit]);
+  populateWorktree(root, target, storageProfile(root, commit, options));
   recordTaskIntent(target, { base: commit });
   let linked = false;
   if (
@@ -58,9 +60,12 @@ export function createWorktree(root, slug, base = "main") {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
-  const [slug, base, ...extra] = process.argv.slice(2);
-  if (!slug || extra.length) throw new Error("Usage: npm run worktree -- <task-name> [base-ref]");
-  const result = createWorktree(process.cwd(), slug, base);
+  const args = process.argv.slice(2);
+  const fullAssets = args.includes("--full-assets");
+  const [slug, base, ...extra] = args.filter((arg) => arg !== "--full-assets");
+  if (!slug || extra.length)
+    throw new Error("Usage: npm run worktree -- <task-name> [base-ref] [--full-assets]");
+  const result = createWorktree(process.cwd(), slug, base, { fullAssets });
   console.log(`${result.reused ? "Reusing" : "Created"} ${result.path} on ${result.branch}.`);
   console.log(
     existsSync(path.join(result.path, "node_modules"))

@@ -3,6 +3,7 @@ import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, realpathSy
 import path from "node:path";
 import os from "node:os";
 import { expect, it } from "vitest";
+import { checkDocumentation } from "../../../scripts/checks/check-docs.mjs";
 import { createWorktree } from "../../../scripts/worktree.mjs";
 it("creates and reuses a task checkout from committed main while preserving dirty files", () => {
   const directory = mkdtempSync(path.join(os.tmpdir(), "fauna-worktrees-"));
@@ -76,3 +77,46 @@ it(
     }
   },
 );
+
+it("verifies automatic storage defaults and independent tracked clones", { timeout: 30_000 }, () => {
+  const result = spawnSync(
+    process.execPath,
+    [
+      new URL("../../fixtures/worktree-storage-check.mjs", import.meta.url).pathname,
+      new URL("../../../scripts/lib/worktree-storage.mjs", import.meta.url).pathname,
+    ],
+    { encoding: "utf8", timeout: 25_000 },
+  );
+  expect(result.status, result.stdout + result.stderr).toBe(0);
+});
+
+it("validates sparse documentation references without hiding deleted files or broken anchors", () => {
+  const root = mkdtempSync(path.join(os.tmpdir(), "fauna-sparse-docs-"));
+  const git = (...args) =>
+    execFileSync("git", ["-c", "commit.gpgsign=false", ...args], { cwd: root, encoding: "utf8" });
+  try {
+    git("init", "-q", "-b", "main");
+    git("config", "user.name", "Fixture");
+    git("config", "user.email", "fixture@example.invalid");
+    mkdirSync(path.join(root, "public/art"), { recursive: true });
+    writeFileSync(path.join(root, "package.json"), "{}");
+    writeFileSync(path.join(root, "public/art/master.png"), "source");
+    writeFileSync(path.join(root, "public/art/guide.md"), "# Source master\n");
+    writeFileSync(
+      path.join(root, "README.md"),
+      "[Art](public/art/master.png) [Guide](public/art/guide.md#source-master)\n`public/art/`\n",
+    );
+    git("add", ".");
+    git("commit", "-qm", "fixture");
+    git("sparse-checkout", "set", "--no-cone", "/*", "!/public/art/");
+    expect(checkDocumentation(root)).toEqual([]);
+    writeFileSync(path.join(root, "README.md"), "[Guide](public/art/guide.md#absent)\n");
+    expect(checkDocumentation(root)).toEqual(["README.md: missing heading public/art/guide.md#absent"]);
+    git("sparse-checkout", "disable");
+    writeFileSync(path.join(root, "README.md"), "[Art](public/art/master.png)\n");
+    rmSync(path.join(root, "public/art/master.png"));
+    expect(checkDocumentation(root)).toEqual(["README.md: missing link public/art/master.png"]);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});

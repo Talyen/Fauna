@@ -150,8 +150,10 @@ export function* removeEffects(
   events: GameEvent[],
   state?: GameState,
   onlyStatus?: (typeof harmfulStatuses)[number] | "thorns" | "waterThorns",
+  source?: Combatant,
 ): Resolution<number> {
   const stats = ensureCombat(unit);
+  const thornsBefore = stats.thorns;
   let depletion: ArmorDepletion | null = null;
   let cleansed = 0;
   const hadFreezeBuildup = stats.freeze > 0;
@@ -261,6 +263,17 @@ export function* removeEffects(
       events,
       hadFreezeBuildup && stats.freeze === 0 && removedStatuses.includes("freeze"),
     );
+  if (
+    kind === "purge" &&
+    state &&
+    isEnemy(unit) &&
+    source &&
+    !isEnemy(source) &&
+    source.health > 0 &&
+    thornsBefore > stats.thorns &&
+    state.boons.includes("pruning-crescent")
+  )
+    yield* reaction("grantStatus", source, "thorns", thornsBefore - stats.thorns, events, state);
   if (state)
     for (const effect of returned)
       yield* returnCleansedEffect(

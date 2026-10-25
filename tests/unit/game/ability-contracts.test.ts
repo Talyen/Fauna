@@ -36,6 +36,7 @@ const digest = (value: unknown) =>
     .update(
       JSON.stringify(value, (key, entry) => {
         if (key === "version") return 57;
+        if (key === "encoreProgress" && entry === 0) return undefined;
         if (key === "repeatNext" && entry.player === false && entry.enemy === false) return undefined;
         return entry;
       }),
@@ -59,7 +60,11 @@ function recordedEnemy(card: (typeof CARDS)[number]) {
 it("preserves authored text, targeting, scaling, keywords and enemy adaptations", () => {
   expect(
     // New kit authoring is asserted directly below; preserve every older card's recorded contract.
-    [...CARDS.filter((card) => card.species !== "arabesca"), PEARL, ...FOOD_CARDS].map((card) => ({
+    [
+      ...CARDS.filter((card) => !["arabesca", "skybex", "dulcera"].includes(card.species ?? "")),
+      PEARL,
+      ...FOOD_CARDS,
+    ].map((card) => ({
       id: card.id,
       digest: digest({
         targeting: cardTargeting(card),
@@ -472,11 +477,11 @@ describe("Arabesca's selected ability contracts", () => {
 
   it("validates repeat flags and rejects the obsolete development save", () => {
     const raw = JSON.parse(encodeSave(arabescaBattle()));
-    expect(raw.version).toBe(58);
+    expect(raw.version).toBe(59);
     raw.battle.repeatNext.player = "true";
     expect(() => decodeSave(JSON.stringify(raw))).toThrow();
     raw.battle.repeatNext.player = false;
-    raw.version = 57;
+    raw.version = 58;
     expect(() => decodeSave(JSON.stringify(raw))).toThrow();
   });
 });

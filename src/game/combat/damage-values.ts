@@ -1,4 +1,5 @@
 import { talentRule } from "../rules/talents";
+import { boonRule } from "../rules/boons";
 import { isEnemy, battlefield } from "../battlefield";
 import { hasTalent, creaturePassive } from "../progression";
 import { physicalBonus } from "../ability-rules";
@@ -117,7 +118,25 @@ export function blockPayment(damage: number, block: number, ratio = 1, bypass = 
   return { absorbed, spent: Math.min(block, Math.ceil(absorbed / ratio)), remaining: damage - absorbed };
 }
 export const armoredDamage = (damage: number, armor: number) => Math.max(0, damage - armor);
-export function armorApplies(state: GameState, target: Combatant, type: DamageType) {
+export function blockEfficiency(state: GameState, target: Combatant, type: DamageType) {
+  if (!isEnemy(target)) {
+    if (type === "burn" && state.boons.includes("moss-oven-mitt"))
+      return boonRule("moss-oven-mitt").multiplier;
+    if (type === "physical" && hasTalent(state, "block.reinforce"))
+      return 1 + talentRule("block.reinforce").percent / 100;
+  }
+  return 1;
+}
+export function armorApplies(state: GameState, target: Combatant, type: DamageType, source?: Combatant) {
+  if (
+    type === "physical" &&
+    source &&
+    !isEnemy(source) &&
+    isEnemy(target) &&
+    (target.combat?.stun ?? 0) > 0 &&
+    state.boons.includes("tuning-fork-charm")
+  )
+    return false;
   return (
     type === "physical" ||
     type === "stun" ||

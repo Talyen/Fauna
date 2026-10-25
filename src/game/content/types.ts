@@ -30,10 +30,14 @@ export type SpeciesId =
   | "almanelle"
   | "orifable"
   | "arabesca"
+  | "skybex"
+  | "dulcera"
   | "parhelion";
 export type Effect = AbilityKind;
 type PassiveEffect =
   | { kind: "sunthaw"; amount: number }
+  | { kind: "gentlePassage"; amount: number }
+  | { kind: "mountainGuide"; amount: number }
   | { kind: "petalwake"; amount: number }
   | { kind: "expressDelivery"; amount: number }
   | { kind: "fallenLeaves"; amount: number }

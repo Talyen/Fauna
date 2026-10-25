@@ -3,10 +3,11 @@ import { boonRule } from "../rules/boons";
 import { chance as succeeds } from "../chance";
 import { isEnemy, battlefield } from "../battlefield";
 import { draw } from "../card-zones";
+import { roll } from "../random";
 import { hasTalent, creaturePassive } from "../progression";
 
 import type { GameEvent, GameState } from "../types";
-import { ensureCombat, unitName, STACK_LIMIT, type Combatant } from "./state";
+import { ensureCombat, unitName, STACK_LIMIT, harmfulStatuses, type Combatant } from "./state";
 
 import { reaction, type Resolution } from "./operations";
 import {
@@ -22,6 +23,16 @@ import {
 
 export function* tickStatuses(state: GameState, unit: Combatant, events: GameEvent[]): Resolution<void> {
   const stats = ensureCombat(unit);
+  if (!isEnemy(unit) && unit.health > 0 && state.boons.includes("knot-comb")) {
+    const effects = harmfulStatuses.filter(
+      (status) => stats.controlled === status || Number(stats[status]) > 0,
+    );
+    const effect =
+      effects.length > 1
+        ? effects[Math.floor(roll(state, { kind: "index", size: effects.length }) * effects.length)]
+        : effects[0];
+    if (effect) yield* reaction("removeEffects", unit, "cleanse", 1, events, state, effect);
+  }
   if (!isEnemy(unit) && unit.health > 0 && stats.poison > 0 && state.boons.includes("plague-doctors-mask")) {
     const sourceId = stats.statusSources.poison;
     const removed = reducePeriodicStacks(stats, "poison", boonRule("plague-doctors-mask").removed);
@@ -104,6 +115,21 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
       }
     }
     setPeriodicStacks(stats, status, next);
+    if (
+      status === "burn" &&
+      isEnemy(unit) &&
+      !isEnemy(source) &&
+      state.boons.includes("cinder-fan") &&
+      amount > next
+    ) {
+      const targets = battlefield(state, "enemy").filter((enemy) => enemy.id !== unit.id && enemy.health > 0);
+      const lost = amount - next;
+      for (const [index, target] of targets.entries()) {
+        const damage = Math.floor(lost / targets.length) + Number(index < lost % targets.length);
+        if (damage > 0)
+          yield* reaction("hit", state, source, target, damage, "burn", events, { origin: "derived" });
+      }
+    }
   }
 }
 /** Called once at the start of the owner's turn, including while in reserve. */

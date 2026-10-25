@@ -135,9 +135,9 @@ const cleanseExtra: ExtraHandler<"cleanse"> = (context) => {
 };
 
 const purgeExtra: ExtraHandler<"purge"> = (context) => {
-  const { state, target, events, options, effect } = context;
+  const { state, actor, target, events, options, effect } = context;
   if (target && !options.negated?.has(target.id))
-    removeEffects(target, "purge", effect.amount, events, state);
+    removeEffects(target, "purge", effect.amount, events, state, undefined, actor);
 };
 
 const healExtra: ExtraHandler<"heal"> = (context) => {
@@ -193,8 +193,8 @@ const handlers: ExtraHandlers = {
   cleanse: { execute: cleanseExtra, reflect: null },
   purge: {
     execute: purgeExtra,
-    reflect: ({ state, actor, effect, events }) => {
-      removeEffects(actor, "purge", effect.amount, events, state);
+    reflect: ({ state, actor, reflectedBy, effect, events }) => {
+      removeEffects(actor, "purge", effect.amount, events, state, undefined, reflectedBy);
     },
   },
   heal: { execute: healExtra, reflect: null },
