@@ -5,7 +5,7 @@ import type { BattleState, Creature, Enemy } from "./types";
 import { hasTalent } from "./progression";
 import { hasHarmfulEffects, STACK_LIMIT } from "./combat/state";
 import { physicalBonus } from "./ability-rules";
-import { armoredDamage, blockPayment } from "./combat/damage-values";
+import { armoredDamage, blockPayment, armorApplies } from "./combat/damage-values";
 import { healingValue, restoration, overflowBlock } from "./combat/healing-values";
 
 export interface OrdinaryHit {
@@ -49,7 +49,7 @@ export function ordinaryAttackFacts(
     const damage =
       value * (def.doubleAgainstHealthier && enemy.health > actor.health ? 2 : 1) +
       (type === "physical" ? physicalBonus(actor, state) : 0);
-    const armored = type === "physical" || type === "stun";
+    const armored = armorApplies(state, enemy, type, actor);
     const armor = armored
       ? Math.max(
           0,

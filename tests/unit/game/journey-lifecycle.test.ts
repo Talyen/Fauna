@@ -36,6 +36,7 @@ function fingerprint(state: GameState, events: unknown) {
             Object.entries(value)
               .filter(
                 ([key, entry]) =>
+                  !(key === "encoreProgress" && entry === 0) &&
                   !(
                     key === "repeatNext" &&
                     entry &&

@@ -11,6 +11,9 @@ export function manaCapacity(state: GameState): number {
   if (!state.battle) return 0;
   return state.battle.maxMana + (state.boons.includes("rainkeeper") ? boonRule("rainkeeper").overflow : 0);
 }
+export function encoreProgressLimit(state: Pick<GameState, "boons">): number {
+  return state.boons.includes("encore-baton") ? boonRule("encore-baton").cards - 1 : 0;
+}
 /** Intrinsic effect value; healing caps resolve in the command. */
 export function actionValue(
   card: Card,

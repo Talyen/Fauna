@@ -1,4 +1,5 @@
 import traces from "./fixtures/modifier-traces.json" with { type: "json" };
+import { NEW_BOON_EFFECTS } from "../../support/boons";
 import { dodgeChance } from "../../../src/game/combat/index";
 import { cardCost } from "../../../src/game/ability-rules";
 import { projectPlay } from "../../../src/game/preview";
@@ -30,11 +31,15 @@ import { requireBattle, teamRun } from "../../support/game";
 // Preserve the recorded modifier oracle across the save envelope and dormant team grant.
 // Arabesca's new tiers are covered by direct behavioral assertions in ability-contracts.test.ts.
 const recordedSpecies = SPECIES.filter((entry) => entry.id !== "arabesca");
+// Keep the recorded combat oracle independent of newly approved Boon behavior.
+// Every new Boon has direct outcome assertions in boons.test.ts.
+const recordedBoons = BOONS.filter((boon) => !Object.hasOwn(NEW_BOON_EFFECTS, boon.id));
 const digest = (value: unknown) =>
   createHash("sha256")
     .update(
       JSON.stringify(value, (key, entry) => {
         if (key === "version") return 57;
+        if (key === "encoreProgress" && entry === 0) return undefined;
         if (key === "repeatNext" && entry.player === false && entry.enemy === false) return undefined;
         return entry;
       }),
@@ -46,7 +51,7 @@ const digest = (value: unknown) =>
 it("preserves all modifier definitions, text and ordered six-tier passives", () => {
   expect({
     talents: digest(TALENTS),
-    boons: digest(BOONS),
+    boons: digest(recordedBoons),
     passives: digest(recordedSpecies.map(({ id, passiveTiers }) => ({ id, passiveTiers }))),
   }).toMatchSnapshot();
 });
@@ -59,7 +64,7 @@ const cases = [
     species: "mossguard" as SpeciesId,
     rank: 0,
   })),
-  ...BOONS.map((boon) => ({
+  ...recordedBoons.map((boon) => ({
     name: boon.id,
     talent: undefined,
     boon,
@@ -109,7 +114,7 @@ it.each(cases)(
         if (scenario.name === "combined reactions") {
           draft.talents = TALENTS.map((talent) => talent.id);
           for (const talent of TALENTS) draft.keywordXP[talent.keyword] = 100000;
-          draft.boons = BOONS.map((boon) => boon.id);
+          draft.boons = recordedBoons.map((boon) => boon.id);
         }
       }),
     );

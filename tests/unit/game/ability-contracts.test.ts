@@ -36,6 +36,7 @@ const digest = (value: unknown) =>
     .update(
       JSON.stringify(value, (key, entry) => {
         if (key === "version") return 57;
+        if (key === "encoreProgress" && entry === 0) return undefined;
         if (key === "repeatNext" && entry.player === false && entry.enemy === false) return undefined;
         return entry;
       }),
@@ -472,11 +473,11 @@ describe("Arabesca's selected ability contracts", () => {
 
   it("validates repeat flags and rejects the obsolete development save", () => {
     const raw = JSON.parse(encodeSave(arabescaBattle()));
-    expect(raw.version).toBe(58);
+    expect(raw.version).toBe(59);
     raw.battle.repeatNext.player = "true";
     expect(() => decodeSave(JSON.stringify(raw))).toThrow();
     raw.battle.repeatNext.player = false;
-    raw.version = 57;
+    raw.version = 58;
     expect(() => decodeSave(JSON.stringify(raw))).toThrow();
   });
 });

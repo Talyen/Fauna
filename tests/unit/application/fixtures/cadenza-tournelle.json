@@ -1,5 +1,5 @@
 {
-  "version": 56,
+  "version": 59,
   "discovery": {
     "encountered": [
       "tournelle",
@@ -525,7 +525,12 @@
           "pearls": 1
         }
       }
-    ]
+    ],
+    "encoreProgress": 0,
+    "repeatNext": {
+      "player": false,
+      "enemy": false
+    }
   },
   "reward": null,
   "journey": {

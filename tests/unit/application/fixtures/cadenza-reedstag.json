@@ -1,5 +1,5 @@
 {
-  "version": 56,
+  "version": 59,
   "discovery": {
     "encountered": [
       "reedstag",
@@ -527,7 +527,12 @@
           "pearls": 0
         }
       }
-    ]
+    ],
+    "encoreProgress": 0,
+    "repeatNext": {
+      "player": false,
+      "enemy": false
+    }
   },
   "reward": null,
   "journey": {

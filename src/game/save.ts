@@ -1,5 +1,5 @@
 import { isFood } from "./content/food";
-import { manaCapacity } from "./ability-rules";
+import { manaCapacity, encoreProgressLimit } from "./ability-rules";
 import { unfinishedJourneyLimit } from "./card-actors";
 import { PEARL } from "./content/creatures/memento";
 import { battlefield } from "./battlefield";
@@ -236,6 +236,7 @@ function validateRewards(state: GameState) {
 function validateBattle(state: BattleState) {
   const battle = state.battle,
     source = encounterSource(state);
+  invalid(battle.encoreProgress > encoreProgressLimit(state));
   invalid(battle.enemies.length !== source.enemies.length || !unique(battle.enemies.map((e) => e.id)));
   battle.enemies.forEach((enemy) => {
     const original = source.enemies[Number(enemy.id.replace(/^enemy-/, ""))];
