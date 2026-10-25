@@ -30,6 +30,8 @@ Verify first-use battle, Collection, inspection and paging with uncached browser
 
 The weekly/manual [performance workflow](../.github/workflows/performance.yml) includes native Windows startup, battle and menu observations. `npm run perf -- --electron --scenario resource-menus` repeats Collection, inspection, paging and Talents three times without changing gameplay checkpoints; this longer case is opt-in and does not widen ordinary captures. Captures record per-process working-set and peak-working-set values in KiB at readiness and action boundaries, plus Windows private bytes where available. GPU-process host RAM is not dedicated GPU memory. Browser heap, unpackaged Electron, Windows packaging, physical controls and Steam Deck remain separate verification scopes.
 
+For a comparison, supply a full `memory_baseline` commit to the manual workflow. The native job captures three baseline/treatment pairs on one Windows runner with matching capture instrumentation and fixtures. Only capture tooling is overlaid in the baseline checkout; its production sources remain unchanged. Retain the overlay manifest and compare matching process types and action labels across trials; report medians and ranges without adding shared process working sets together. A single ordinary capture establishes observations, not a measured saving.
+
 ## Explicit maintenance
 
 - `npm run assets:prune` plans removal of obsolete prepared objects after validating active outputs and checking source references; `-- --apply` removes only that exact eligible set under asset-preparation admission. Originals, active objects, referenced historical objects, symlinks and unexpected files survive. Retired tracked bytes remain recoverable from Git; this does not rewrite history

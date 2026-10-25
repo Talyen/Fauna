@@ -4,6 +4,10 @@ on:
     - cron: "17 9 * * 1"
   workflow_dispatch:
     inputs:
+      memory_baseline:
+        description: Optional commit for three paired native-memory trials on this runner
+        type: string
+        default: ""
       trace:
         description: Capture a bounded deep trace for the preview scenario
         type: boolean
@@ -16,7 +20,7 @@ concurrency:
 jobs:
   native-memory:
     runs-on: windows-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
@@ -34,6 +38,41 @@ jobs:
           npm run perf -- --electron --cold --out reports/performance/native-startup
           npm run perf -- --electron --scenario battle --out reports/performance/native-battle
           npm run perf -- --electron --scenario resource-menus --out reports/performance/native-menus
+      - name: Compare optional baseline with matching capture instrumentation
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.memory_baseline != '' }}
+        env:
+          BASELINE_REF: ${{ inputs.memory_baseline }}
+        run: |
+          $current = $PWD.Path
+          $baseline = Join-Path $env:RUNNER_TEMP 'fauna-memory-baseline'
+          git fetch --no-tags origin $env:BASELINE_REF --depth=1
+          if ($LASTEXITCODE) { throw 'Baseline fetch failed' }
+          $source = git rev-parse FETCH_HEAD
+          git worktree add --detach $baseline $source
+          if ($LASTEXITCODE) { throw 'Baseline checkout failed' }
+          # Overlay capture-only tooling; production UI, game and desktop sources stay at baseline.
+          $harness = @('scripts/performance/run-performance.mjs', 'scripts/performance/metrics.mjs', 'scripts/performance/metrics.d.mts', 'src/tooling/performance.ts')
+          foreach ($file in $harness) { Copy-Item (Join-Path $current $file) (Join-Path $baseline $file) }
+          Push-Location $baseline
+          npm ci --no-audit --no-fund
+          if ($LASTEXITCODE) { throw 'Baseline dependency installation failed' }
+          npm run build
+          if ($LASTEXITCODE) { throw 'Baseline build failed' }
+          Pop-Location
+          @{ baseline = $source; treatment = '${{ github.sha }}'; instrumentationOverlay = $harness; trials = 3; order = 'baseline then treatment within each trial' } | ConvertTo-Json -Depth 3 | Set-Content reports/performance/memory-comparison.json
+          for ($trial = 1; $trial -le 3; $trial++) {
+            foreach ($variant in @('baseline', 'treatment')) {
+              Push-Location $(if ($variant -eq 'baseline') { $baseline } else { $current })
+              npm run perf -- --electron --cold --out "reports/performance/paired/$variant/trial-$trial/startup"
+              if ($LASTEXITCODE) { throw 'Startup capture failed' }
+              npm run perf -- --electron --scenario battle --out "reports/performance/paired/$variant/trial-$trial/battle"
+              if ($LASTEXITCODE) { throw 'Battle capture failed' }
+              npm run perf -- --electron --scenario resource-menus --out "reports/performance/paired/$variant/trial-$trial/menus"
+              if ($LASTEXITCODE) { throw 'Menu capture failed' }
+              Pop-Location
+            }
+          }
+          Copy-Item -Recurse (Join-Path $baseline 'reports/performance/paired/baseline') reports/performance/paired/baseline
       - name: Retain native observations
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

@@ -20,4 +20,7 @@ export default {
     "tests/**/*.{ts,tsx,mjs}",
   ],
   ignore: ["src/components/ui/**"], // Registered upstream primitive public props are intentionally retained.
+  // The regression verifies the matcher shipped inside our pinned electron-builder installation.
+  ignoreDependencies: ["app-builder-lib"],
+  ignoreBinaries: ["du"], // System disk-allocation utility, not an npm binary.
 };
