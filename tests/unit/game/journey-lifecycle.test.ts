@@ -34,6 +34,18 @@ function fingerprint(state: GameState, events: unknown) {
       : value && typeof value === "object"
         ? Object.fromEntries(
             Object.entries(value)
+              .filter(
+                ([key, entry]) =>
+                  !(
+                    key === "repeatNext" &&
+                    entry &&
+                    typeof entry === "object" &&
+                    "player" in entry &&
+                    "enemy" in entry &&
+                    entry.player === false &&
+                    entry.enemy === false
+                  ),
+              )
               .sort(([a], [b]) => a.localeCompare(b))
               .map(([k, v]) => [k, canonical(v)]),
           )

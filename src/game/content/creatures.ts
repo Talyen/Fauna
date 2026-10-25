@@ -1,5 +1,7 @@
-import { orifable } from "./creatures/orifable";
 import { dulcera } from "./creatures/dulcera";
+import { arabesca } from "./creatures/arabesca";
+import { skybex } from "./creatures/skybex";
+import { orifable } from "./creatures/orifable";
 import { almanelle } from "./creatures/almanelle";
 import { oathara } from "./creatures/oathara";
 import { reverie } from "./creatures/reverie";
@@ -59,6 +61,8 @@ const kits = [
   oathara,
   almanelle,
   orifable,
+  arabesca,
+  skybex,
   dulcera,
 ];
 freeze(kits, true);
@@ -92,6 +96,8 @@ export const CARDS: readonly CardDefinition[] = [
   oathara,
   almanelle,
   orifable,
+  arabesca,
+  skybex,
   dulcera,
 ].flatMap((kit) => kit.cards);
 const speciesById = new Map(SPECIES.map((entry) => [entry.id, entry]));

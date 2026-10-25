@@ -52,6 +52,9 @@ test("Dulcera's Collection inspection presents the concise rules and restores fo
   await seed(page, dulceraBattle());
   await page.getByRole("button", { name: "Collection", exact: true }).click();
   const opener = page.getByRole("button", { name: "Inspect Dulcera", exact: true });
+  const next = page.getByRole("button", { name: "Next page", exact: true });
+  for (let index = 0; index < 32 && !(await opener.count()) && (await next.isEnabled()); index++)
+    await next.click();
   await opener.click();
   const details = page.locator(".creature-inspection");
   await expect(details).toContainText("Allies restore 1 Health when they swap in");

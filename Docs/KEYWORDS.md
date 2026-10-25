@@ -104,7 +104,7 @@ Leyline Attunement raises base Mana from four to five each battle; Wellspring an
 
 ### Repeats and derived effects
 
-Creature-owned Dodge follow-ups, free-card charges and once-per-battle defenses persist through swaps and resume. Repeated cards resolve their full effects at most twice and stop if their actor or attack target falls. Ability and damage repeats spend no extra Mana and grant no extra XP or accepted-play count. Supplemental talent damage can build statuses and control but cannot Dodge, critically hit, retaliate or trigger another chance-damage chain.
+Creature-owned Dodge follow-ups, free-card charges and once-per-battle defenses persist through swaps and resume. Repeated cards resolve their full effects at most twice and stop if their actor or attack target falls. Ability and damage repeats spend no extra Mana and grant no extra XP or accepted-play count. Dancing Double prepares the side’s next card, including shared Food, to resolve twice; the pending grant survives turns, swaps and resume and never stacks with other repeats beyond two resolutions. Supplemental talent damage can build statuses and control but cannot Dodge, critically hit, retaliate or trigger another chance-damage chain.
 
 Card-only overhealing can grant Block or Cleanse; ordinary healing and Leech cannot. Passive healing uses ordinary healing modifiers and healing-triggered Boons, without card-only overhealing rewards or ability-only healing bounces.
 

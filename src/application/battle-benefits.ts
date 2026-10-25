@@ -226,6 +226,14 @@ export function battleBenefits(
     }
     case "teamClearBlind":
       return controlRemoval(allies.filter((unit) => unit.combat?.blind).length);
+    case "repeatNextCard":
+      return support(state.battle.repeatNext.player ? "none" : "standardUtility");
+    case "springbound": {
+      const frozen = allies.filter((unit) => (unit.combat?.freeze ?? 0) > 0).length;
+      return frozen > 0
+        ? controlRemoval(frozen)
+        : dodgeSupport(Math.min(value, 70 - (actor.combat?.temporaryDodge ?? 0)));
+    }
     case "teamThaw":
       return controlRemoval(allies.filter((unit) => (unit.combat?.freeze ?? 0) > 0).length);
     case "recover": {
@@ -378,6 +386,12 @@ export function battleBenefits(
       const useful = Math.min(value, STACK_LIMIT - (actor.combat?.waterThorns ?? 0));
       return support(useful > 0 ? "protection" : "none", useful);
     }
+    case "swapDodge":
+      return support(
+        state.reserves.some((unit) => unit.health > 0) || allies.some((unit) => unit.id !== actor.id)
+          ? "utility"
+          : "none",
+      );
     case "swap":
       if (def.backupOnly && !state.reserves.some((unit) => unit.health > 0))
         return support(

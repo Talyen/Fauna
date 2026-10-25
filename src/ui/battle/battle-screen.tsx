@@ -339,6 +339,11 @@ export function BattleScreen({
           </section>
           <div className="battle-dock">
             <div className="battle-actions">
+              {battle.repeatNext.player ? (
+                <span className="next-card-repeat" role="status">
+                  Next card ×2
+                </span>
+              ) : null}
               <Button className="end-turn" onClick={() => play({ type: "endTurn" })}>
                 End turn{controller ? ` · ${endTurnPrompt}` : ""}
               </Button>

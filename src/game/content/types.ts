@@ -29,10 +29,14 @@ export type SpeciesId =
   | "oathara"
   | "almanelle"
   | "orifable"
+  | "arabesca"
+  | "skybex"
   | "dulcera";
 export type Effect = AbilityKind;
 type PassiveEffect =
   | { kind: "gentlePassage"; amount: number }
+  | { kind: "mountainGuide"; amount: number }
+  | { kind: "petalwake"; amount: number }
   | { kind: "expressDelivery"; amount: number }
   | { kind: "fallenLeaves"; amount: number }
   | { kind: "unfinishedJourney"; amount: number }

@@ -20,3 +20,11 @@ Current Dulcera review did not launch: the required shared host lane returned bu
 ## Verification boundaries
 
 Focused browser evidence uses Chromium simulation and a Vite development preview. Full static/type checks, broader unit/DOM/browser suites, builds, balance sweeps and hosted CI remain pending. Native desktop, Windows packaging, physical controllers, Steam and Steam Deck were not exercised.
+
+## Main synchronization and render retry
+
+The resumed review incorporated main through `7ef51c3`, retaining Arabesca's shared repeats and Skybex's incoming protection. Catalogs and encounter packs keep current main's order and append Dulcera. The shared swap owner retains both creatures' grants, and the historical ability oracle continues excluding the separately tested new kits without regenerating older expectations.
+
+The focused Dulcera suite then ran 19 cases: 18 passed, including the new combined protection/healing/repeat case. One fixture failed because `swapFromCard` now returns the incoming creature and its old expression-bodied Immer producer both mutated and returned a value. The producer was corrected to return nothing; further unit execution remains deferred under the focused local budget. No player behavior was changed by that fixture repair.
+
+Two bounded render-admission attempts returned busy with both slots occupied by Trinket work; neither launched the preview. The task preserved both owners and their locks. Collection scenarios and browser coverage now navigate to Dulcera's catalog page before opening inspection. Asset publication was refreshed from 212 existing cached objects, with no new image encoding.

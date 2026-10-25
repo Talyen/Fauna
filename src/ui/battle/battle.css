@@ -508,3 +508,9 @@
   left: var(--discard-back-left);
   top: var(--discard-back-top);
 }
+
+.next-card-repeat {
+  color: var(--foreground);
+  font-weight: 600;
+  text-align: center;
+}

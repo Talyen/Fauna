@@ -85,7 +85,7 @@ Lossless encoding preserves resized pixels and alpha, but downsampling changes p
 
 ### Build inventory
 
-Runtime artwork/audio resolves IDs through the generated lookup. Builds disable automatic public-directory copying and copy only active media plus the build receipt; originals, cache receipts and old generations stay out of the renderer. Validation rejects extra/missing media, changed bytes and unapproved public resources. Limits are 144 MiB total media and 3 MiB per image; JavaScript has its [separate budget](../scripts/README.md#bundle-allowance). The current 195 active objects measure 136.79 MiB, including ten new lossless Boon portraits (7.11 MiB); the unused Marsh recording remains excluded. Aliased IDs already share files. [Resource efficiency](RESOURCE_EFFICIENCY.md) owns measurement and maintenance. Retained historical generations do not enlarge new builds.
+Runtime artwork/audio resolves IDs through the generated lookup. Builds disable automatic public-directory copying and copy only active media plus the build receipt; originals, cache receipts and old generations stay out of the renderer. Validation rejects extra/missing media, changed bytes and unapproved public resources. Limits are 144 MiB total media and 3 MiB per image; JavaScript has its [separate budget](../scripts/README.md#bundle-allowance). The current 203 active objects measure 143.96 MiB, including ten lossless Boon portraits and four images each for Arabesca and Skybex; the unused Marsh recording remains excluded. Aliased IDs already share files. [Resource efficiency](RESOURCE_EFFICIENCY.md) owns measurement and maintenance. Retained historical generations do not enlarge new builds.
 
 ### Audio selections
 
@@ -116,7 +116,7 @@ These Boons use existing card plays, recipients and feedback without adding batt
 | Undertow Castanets    | Enemy Stun and Freeze buildup contribute their fractions of the respective control thresholds; the incoming type supplies control and spends both pools; normal protection and control immunity apply              |
 | Orbit Armillary       | Cleanse sends removed effects back to their last living enemy source, retaining removed strength or remaining control duration; normal protection and immunity apply, without a second reflection                  |
 
-Status source attribution for Blind and control is saved alongside periodic effects. Development save format 57 includes this attribution and Rainkeeper's Mana allowance; obsolete saves are rejected under the development-save policy.
+Status source attribution for Blind and control is saved alongside periodic effects. Development save format 58 includes this attribution, Rainkeeper's Mana allowance and the shared next-card repeat grant; obsolete saves are rejected under the development-save policy.
 
 [Journey rules](EXPEDITION_DESIGN.md#currency-and-items) own reward pools and journey-only ownership; [Merchant rules](EXPEDITION_DESIGN.md#optional-support-visits) own stock and prices. Inspect new portraits through the UI review procedure.
 

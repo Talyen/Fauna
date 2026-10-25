@@ -1,4 +1,5 @@
 import { cardActor, drawableOwnerIds } from "../card-actors";
+import { grantCardRepeat } from "./card-repeat";
 import { createFood } from "./food";
 import { takeAttackReflection } from "./attack-reflection";
 import { resurrect } from "./resurrection";
@@ -344,10 +345,13 @@ const swapLowestAbility: PrimaryHandler<"swapLowest"> = (context) => {
   if (outgoing) operations.swap(state, outgoing, events, true);
 };
 
-const teamThawAbility: PrimaryHandler<"teamThaw"> = (context) => {
-  const { state, action, events } = context;
-  for (const unit of alive(friendlyRow(state, action))) removeControlBuildup(state, unit, "freeze", events);
-};
+function thawAllies({ state, action, events }: Pick<PrimaryContext, "state" | "action" | "events">) {
+  for (const unit of alive(friendlyRow(state, action))) {
+    if (action.actor.health <= 0) break;
+    removeControlBuildup(state, unit, "freeze", events);
+  }
+}
+const teamThawAbility: PrimaryHandler<"teamThaw"> = thawAllies;
 
 const teamBlindAbility: PrimaryHandler<"teamBlind"> = (context) => {
   const { state, action, actor, events } = context;
@@ -382,7 +386,24 @@ const swapAbility: PrimaryHandler<"swap"> = (context) => {
   operations.swap(state, actor, events, def.backupOnly);
 };
 
+const swapDodgeAbility: PrimaryHandler<"swapDodge"> = ({ state, actor, value, events, operations }) => {
+  const incoming = operations.swap(state, actor, events);
+  if (incoming) grantTemporaryDodge(incoming, value, events);
+};
+
+const springboundAbility: PrimaryHandler<"springbound"> = (context) => {
+  thawAllies(context);
+  grantTemporaryDodge(context.actor, context.value, context.events);
+};
+
+const repeatNextCardAbility: PrimaryHandler<"repeatNextCard"> = ({ state, action, actor, events }) => {
+  grantCardRepeat(state, action.side, actor.id, events);
+};
+
 const handlers: PrimaryHandlers = {
+  swapDodge: swapDodgeAbility,
+  springbound: springboundAbility,
+  repeatNextCard: repeatNextCardAbility,
   procession: processionAbility,
   createFood: createFoodAbility,
   createPearls: createPearlsAbility,

@@ -2,6 +2,16 @@ import type { AbilityRuleCatalog } from "./contracts";
 import { scalePower } from "./contracts";
 
 export const resourcesRules = {
+  repeatNextCard: {
+    targeting: "automatic",
+    scaling: "authored",
+    enemy: "supported",
+    adaptation: "extras",
+    keywords: [],
+    describe(_card) {
+      return "Your next card is played twice";
+    },
+  },
   procession: {
     targeting: "automatic",
     scaling: "level",
@@ -86,5 +96,13 @@ export const resourcesRules = {
   },
 } satisfies Pick<
   AbilityRuleCatalog,
-  "procession" | "createFood" | "createPearls" | "pearl" | "draw" | "recover" | "redraw" | "mana"
+  | "repeatNextCard"
+  | "procession"
+  | "createFood"
+  | "createPearls"
+  | "pearl"
+  | "draw"
+  | "recover"
+  | "redraw"
+  | "mana"
 >;

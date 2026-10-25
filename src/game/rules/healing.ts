@@ -1,6 +1,16 @@
 import type { AbilityRuleCatalog } from "./contracts";
 
 export const healingRules = {
+  springbound: {
+    targeting: "automatic",
+    scaling: "level",
+    enemy: "supported",
+    adaptation: "extras",
+    keywords: ["health", "dodge"],
+    describe(_card, { value }) {
+      return `Cleanse all Freeze build-up from allies / Gain ${value}% Dodge until next turn`;
+    },
+  },
   heal: {
     targeting: "heal",
     scaling: "power",
@@ -65,5 +75,5 @@ export const healingRules = {
   },
 } satisfies Pick<
   AbilityRuleCatalog,
-  "heal" | "resurrect" | "nightmareHarvest" | "teamCleanse" | "teamThaw" | "teamClearBlind"
+  "springbound" | "heal" | "resurrect" | "nightmareHarvest" | "teamCleanse" | "teamThaw" | "teamClearBlind"
 >;

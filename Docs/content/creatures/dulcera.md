@@ -21,6 +21,8 @@ This is ordinary passive healing: maximum Health, Mending and healing-triggered 
 
 Tournelle intercepts attacks and Reedstag shares protection; Gentle Passage makes changing the lineup restorative. It works with other creatures' swap abilities and required replacements. Its weakness is the need for living backups and opportunities to exchange creatures; it supplies no damage or automatic recovery while the lineup stays unchanged.
 
+Skybex's Mountain Guide grants incoming protection at the same swap boundary. The combined result grants that protection before Gentle Passage restores Health. Arabesca's shared card double can repeat Hushed Waters' Cleanse, while the existing deployed-actor check prevents exchanging an actor that already left the formation again.
+
 ## Abilities
 
 All three abilities cost 1 Mana.

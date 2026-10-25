@@ -35,6 +35,40 @@ function play(game: BattleState, id: string) {
 }
 
 describe("Dulcera", () => {
+  it("combines passage with Mountain Guide and repeats Cleanse without exchanging the departed actor again", () => {
+    const game = produce(requireBattle(teamRun(42, ["dulcera", "skybex", "mossguard"])), (draft) => {
+      addBackups(draft, {
+        id: "backup",
+        species: "coralcurl",
+        health: 12,
+        block: 0,
+        attacked: false,
+        combat: { ...freshCombat(), poison: 4 },
+      });
+      draft.battle.repeatNext.player = true;
+      const card = draft.cards.find((entry) => entry.definitionId === hush)!;
+      draft.battle.hand = [card.id];
+      draft.battle.buffer = [];
+      draft.battle.discard = [];
+      draft.battle.draw = draft.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+    });
+    const result = play(game, hush);
+    expect(result.accepted).toBe(true);
+    expect(result.state.team[0]!).toMatchObject({
+      id: "backup",
+      health: 13,
+      block: 1,
+      combat: { poison: 0 },
+    });
+    expect(
+      result.events.filter((event) => event.kind === "action" && event.actionType === "swap"),
+    ).toHaveLength(1);
+    expect(result.events.filter((event) => event.kind === "heal")).toHaveLength(1);
+    expect(result.state.battle!.repeatNext.player).toBe(false);
+    expect(previewCard(game, game.battle.hand[0]!)).toEqual(result);
+    expect(decodeSave(encodeSave(result.state))).toEqual(result.state);
+  });
+
   it.each([1, 2, 3, 4, 5, 6])("heals an arriving ally by %i with preview and resume parity", (amount) => {
     const game = produce(dulceraBattle(), (draft) => {
       draft.discovery.recruited.dulcera = amount;
@@ -183,7 +217,9 @@ describe("Dulcera", () => {
     });
     expect(resting.team[1]!.health).toBe(10);
     const events: GameEvent[] = [];
-    produce(dulceraBattle(false), (draft) => swapFromCard(draft, draft.team[1]!, events));
+    produce(dulceraBattle(false), (draft) => {
+      swapFromCard(draft, draft.team[1]!, events);
+    });
     expect(events.some((event) => event.kind === "heal")).toBe(false);
     const opened = requireBattle(teamRun(42, ["dulcera", "mossguard"]));
     expect(opened.team[0]!.health).toBe(30);
