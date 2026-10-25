@@ -1,5 +1,5 @@
 import { battleCardCapacity } from "../card-zones";
-import { speciesCards, definition, species } from "../content";
+import { speciesCards, species } from "../content";
 import { PEARL } from "../content/creatures/memento";
 import { creaturePassive } from "../progression";
 import { roll, shuffle } from "../random";
@@ -143,25 +143,4 @@ export function removeDepartedMinions(state: GameState) {
   for (const unit of battlefield(state, "player")) targets.add(unit.id);
   for (const enemy of state.battle.enemies)
     if (!targets.has(enemy.targetId)) enemy.targetId = state.team[0]!.id;
-}
-export function bossCardPriority(state: BattleState, enemy: Enemy, id: string) {
-  const def = definition(id);
-  if (def.effect === "procession") {
-    let count = 0;
-    let injured = false;
-    for (const unit of state.battle.minions ?? []) {
-      if (unit.minion.ownerId !== enemy.id || unit.health <= 0) continue;
-      count++;
-      if (unit.health < unit.maxHealth) injured = true;
-    }
-    return count < MINION_LIMIT ? 5 : injured ? 4 : 1;
-  }
-  return def.effect === "draw" &&
-    !(state.battle.minions ?? []).some((unit) => unit.minion.ownerId === enemy.id && unit.health > 0)
-    ? 4
-    : def.effect === "pearl"
-      ? 3
-      : def.effect === "createPearls"
-        ? 2
-        : 1;
 }
