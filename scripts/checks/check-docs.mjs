@@ -13,13 +13,39 @@ export function checkDocumentation(root, { warn = () => {} } = {}) {
       git(root, ["ls-files", "-z", "--cached", "--others", "--exclude-standard"]).split("\0").filter(Boolean),
     ),
   ];
-  const available = files.filter((file) =>
-    lstatSync(path.join(root, file), { throwIfNoEntry: false })?.isFile(),
+  // Sparse omission is different from a deleted working file: only Git's
+  // skip-worktree entries may resolve through the index for docs/link checks.
+  const omitted = new Set(
+    git(root, ["ls-files", "-t", "-z"])
+      .split("\0")
+      .filter((entry) => entry.startsWith("S "))
+      .map((entry) => entry.slice(2)),
+  );
+  const omittedDirectories = new Set();
+  for (const file of omitted) {
+    let directory = path.posix.dirname(file);
+    while (directory !== ".") {
+      omittedDirectories.add(directory);
+      directory = path.posix.dirname(directory);
+    }
+  }
+  const exists = (absolute) => {
+    if (existsSync(absolute)) return true;
+    const relative = path.relative(root, absolute).split(path.sep).join("/");
+    return omitted.has(relative) || omittedDirectories.has(relative);
+  };
+  const available = files.filter(
+    (file) => omitted.has(file) || lstatSync(path.join(root, file), { throwIfNoEntry: false })?.isFile(),
   );
   const docs = new Map(
     available
       .filter((file) => /\.md$/i.test(file))
-      .map((file) => [file, readFileSync(path.join(root, file), "utf8")]),
+      .map((file) => [
+        file,
+        existsSync(path.join(root, file))
+          ? readFileSync(path.join(root, file), "utf8")
+          : git(root, ["show", `:${file}`]),
+      ]),
   );
   const scripts = JSON.parse(readFileSync(path.join(root, "package.json"), "utf8")).scripts ?? {};
   const failures = [];
@@ -47,7 +73,7 @@ export function checkDocumentation(root, { warn = () => {} } = {}) {
         fail(file, `link escapes repository: ${target}`);
         continue;
       }
-      if (!existsSync(absolute)) {
+      if (!exists(absolute)) {
         fail(file, `missing link ${target}`);
         continue;
       }
@@ -66,7 +92,7 @@ export function checkDocumentation(root, { warn = () => {} } = {}) {
       // Ignore command fragments and generated artifacts rather than inventing missing files.
       if (/^(?:reports|release|dist|test-results)\//.test(candidate)) continue;
       const resolved = path.resolve(root, isRelative ? path.dirname(file) : ".", candidate);
-      if (!existsSync(resolved)) fail(file, `missing file reference ${reference}`);
+      if (!exists(resolved)) fail(file, `missing file reference ${reference}`);
     }
     // Commands in fenced examples are contracts too; prose-only link/path checking avoids sample paths.
     for (const match of source.matchAll(/\bnpm\s+(?:--silent\s+)?run\s+([a-z][a-z0-9:-]*)/g)) {

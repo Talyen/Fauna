@@ -88,6 +88,23 @@ The [shared launcher](local.mjs) enforces [execution budgets](../CONTRIBUTING.md
 
 The command creates `.worktrees/<task-name>` on `task/<task-name>` from committed local main by default. An existing matching checkout is reused without resetting files. Existing branches without that checkout and conflicting directories are preserved and rejected. Dependencies are linked from main only when dependency manifests, install settings and lifecycle scripts match. Run `npm run deps` in the task checkout when dependencies are missing or change: it reuses a matching shared link or detaches only that link and runs `npm ci` locally, using the project-pinned npm without changing the global install. Never run `npm ci` through a shared dependency link. Changing ordinary npm task commands alone does not invalidate dependencies.
 
+New tasks default to code-only checkouts when the target revision declares
+output-only dev/build checks and includes committed prepared media. This omits
+`public/art/`, `public/ui/` and `assets/source/`; `public/prepared/`, manifests,
+runtime code and tests remain present. Older/incomplete revisions keep full assets.
+Use `npm run worktree -- <task-name> --full-assets` for source-asset work, or run
+`git sparse-checkout disable` in the task before preparation, source checks or art
+review. Missing-source preparation preserves published outputs and prints this command.
+
+Large retained tracked assets (at least 256 KiB) automatically use per-file APFS
+copy-on-write from clean same-commit files in main. An optional Python standard-library
+bridge calls Apple's `clonefile` directly. Unsupported platforms/volumes, absent Python,
+dirty/mismatched sources and checkout filters use ordinary Git. Cloned bytes/modes
+are checked against target blobs, with fresh Git indexes and normal status checks.
+No dependency or build-cache copying is added. Creation reports logical bytes omitted
+and cloned, plus population/first-status time; APFS extent sharing means these are
+not measured physical savings. Existing task checkouts retain their configuration.
+
 [Contributing](../CONTRIBUTING.md#worktrees-and-integration) owns the review/commit/finish procedure. Implementation details for integration:
 
 - The repository-wide OS file lock releases on process exit; a separate owner record contains PID, checkout, branch and start time. The development-only `fs-native-extensions` dependency supplies cross-platform locking
