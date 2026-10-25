@@ -88,8 +88,11 @@ it("preserves the published generation after a missing or invalid source and det
 });
 
 it("reads native PNG dimensions and rejects truncated or invalid PNG headers", async () => {
-  const bytes = await readFile(new URL("../../../public/art/emberback/emberback.png", import.meta.url));
-  expect(imageDimensions(bytes, ".png")).toEqual([1448, 1086]);
+  const bytes = Buffer.from(
+    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aL1sAAAAASUVORK5CYII=",
+    "base64",
+  );
+  expect(imageDimensions(bytes, ".png")).toEqual([1, 1]);
   expect(() => imageDimensions(bytes.subarray(0, 24), ".png")).toThrow();
   const invalid = Buffer.from(bytes);
   invalid.writeUInt32BE(0, 16);
