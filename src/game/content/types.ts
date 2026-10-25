@@ -29,9 +29,11 @@ export type SpeciesId =
   | "oathara"
   | "almanelle"
   | "orifable"
-  | "arabesca";
+  | "arabesca"
+  | "skybex";
 export type Effect = AbilityKind;
 type PassiveEffect =
+  | { kind: "mountainGuide"; amount: number }
   | { kind: "petalwake"; amount: number }
   | { kind: "expressDelivery"; amount: number }
   | { kind: "fallenLeaves"; amount: number }
