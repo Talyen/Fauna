@@ -1,6 +1,10 @@
 import { expect } from "@playwright/test";
 
 export const SCENARIOS = [
+  "arabesca-battle",
+  "arabesca-collection",
+  "arabesca-rank-five",
+  "arabesca-double",
   "orifable-battle",
   "orifable-food",
   "orifable-targeting",
@@ -88,6 +92,19 @@ export async function reviewScenario(server, name) {
     game = { ...game, team: game.team.map((unit, index) => (index ? unit : { ...unit, health: 1 })) };
     game = accept(game, { type: "visitCampfire" });
   }
+  if (name.startsWith("arabesca-")) {
+    const { arabescaBattle } = await server.ssrLoadModule("/tests/support/arabesca.ts");
+    game = arabescaBattle();
+    if (name === "arabesca-rank-five")
+      game = {
+        ...game,
+        discovery: { ...game.discovery, recruited: { ...game.discovery.recruited, arabesca: 6 } },
+      };
+    if (name === "arabesca-double") {
+      const card = game.cards.find((card) => card.definitionId === "arabesca-dancing-double");
+      game = accept(game, { type: "play", cardId: card.id, autoEndTurn: false });
+    }
+  }
   if (name.startsWith("oathara-")) {
     const { oatharaBattle } = await server.ssrLoadModule("/tests/support/oathara.ts");
     game = oatharaBattle();
@@ -120,11 +137,13 @@ export async function reviewScenario(server, name) {
     name,
     save,
     seed: name.startsWith("merchant") ? 7 : 42,
-    fixture: name.startsWith("orifable-")
-      ? "tests/support/orifable.ts"
-      : name.startsWith("almanelle-")
-        ? "tests/support/almanelle.ts"
-        : "tests/support/game.ts",
+    fixture: name.startsWith("arabesca-")
+      ? "tests/support/arabesca.ts"
+      : name.startsWith("orifable-")
+        ? "tests/support/orifable.ts"
+        : name.startsWith("almanelle-")
+          ? "tests/support/almanelle.ts"
+          : "tests/support/game.ts",
   };
 }
 
@@ -144,7 +163,16 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   await expect(page.locator("#startup-splash")).toHaveCount(0);
   const button = (name) => page.getByRole("button", { name, exact: true });
   const menu = scenario.name === "talent-tree" ? "talents" : scenario.name.split("-")[0];
-  if (["orifable-collection", "orifable-rank-five"].includes(scenario.name)) {
+  if (["arabesca-collection", "arabesca-rank-five"].includes(scenario.name)) {
+    await button("Collection").click();
+    const next = page.getByRole("button", { name: "Next page", exact: true });
+    while (
+      !(await page.getByRole("button", { name: "Inspect Arabesca", exact: true }).count()) &&
+      (await next.isVisible())
+    )
+      await next.click();
+    await button("Inspect Arabesca").click();
+  } else if (["orifable-collection", "orifable-rank-five"].includes(scenario.name)) {
     await button("Collection").click();
     await button("Inspect Orifable").click();
   } else if (["almanelle-collection", "almanelle-rank-five"].includes(scenario.name)) {

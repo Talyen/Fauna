@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "manifestHash": "63724195dd4293890ea3e7f678c61cc2b3d62390de2f4449f31f3ae02d95c0c2",
-  "generation": "0d7447dbc09eb50664fd67aaf17c728ff7e53a801eeea74ac5b9f9205ff585c8",
+  "manifestHash": "6b4579b0f47d1a98cbd9d1160d89e5724f6713d87f43a469471391d3c4bc4761",
+  "generation": "592cc968aa51bf268e9cbbf6ea1d016d7713c4bb9b468ebc4aa207d48ea092c6",
   "records": {
     "keyword.block": {
       "url": "./prepared/objects/735558c0801082a6bfbeabec58de75ff3b1ad59643b686fac19e7a169691902e/asset.webp",
@@ -2397,6 +2397,58 @@
       "outputHash": "597a114118894c2eb6083d3655fce616a882d8d1cfa21940a591c9107e33048e",
       "sourceBytes": 2375821,
       "outputBytes": 885146,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "creature.arabesca": {
+      "url": "./prepared/objects/a831d6d3521e69c591e1f74e04a29cf429b7007f46af13353536eb12cc8fdb3b/asset.webp",
+      "sourceHash": "7741367aeaf53d0ee4f779e208517688e5c687337ee8729fef46ca03f3168c27",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "b5bf3c9a7c0ca1707e1ce658d0b206c1aebec925e209c2eef82428663cef3bb2",
+      "sourceBytes": 2501140,
+      "outputBytes": 952536,
+      "width": 960,
+      "height": 720,
+      "alpha": false
+    },
+    "action.arabesca.ribbon-snare": {
+      "url": "./prepared/objects/82b5fbffcf62676658c39a03b9a41f78b5faab1a8205427b436e7e366bac9e6d/asset.webp",
+      "sourceHash": "80a4e1255a06416fe6ef3d903efda86ea31385c8ee28d547ce36ea638c09df8c",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "365e51fe5be7cc3e05babdf440c677454b6bc8ef5151d740fed281cc1ccfbcab",
+      "sourceBytes": 2708282,
+      "outputBytes": 1078762,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "action.arabesca.springbound": {
+      "url": "./prepared/objects/e482a037f44432c779abf54e28cae63d61141cfb684202f14114df6fd97e114f/asset.webp",
+      "sourceHash": "4c40741e87239b8967b2a9b01dea73bc321198d319740d6590b36e87aa5cb2ed",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "e4212c666a52f74ed831bee8a490a3e522aa2567bcf795f1315bdc0ce113748b",
+      "sourceBytes": 2439890,
+      "outputBytes": 939950,
+      "width": 720,
+      "height": 960,
+      "alpha": false
+    },
+    "action.arabesca.dancing-double": {
+      "url": "./prepared/objects/6dab891a7fec347713f63225c207b65f7d1837ed2261e7a9412c4809a431e197/asset.webp",
+      "sourceHash": "007297dea2109310a14b69068f7c1764b3065722410e4d25260e5a87e7b3b1f7",
+      "recipeHash": "80a8b13f0e3abaa68b4760f43c164f80385b46ea3a57fd42b0c467262133313d",
+      "recipe": "card-webp",
+      "settingsHash": "2a6977fccead92bee56b2b30072e2713fec1f2a07ab1780f67c8de109a7e4227",
+      "outputHash": "f937a80f45bf356f037c87cec8b1c30ec045091aeb9ebb817955ef6ea7d08b53",
+      "sourceBytes": 2448846,
+      "outputBytes": 955234,
       "width": 720,
       "height": 960,
       "alpha": false

@@ -275,6 +275,7 @@ export const modifierImplementations = freeze(
       "lucky-clover": [owners.damageRewards],
     } satisfies Record<BoonId, Binding>,
     passives: {
+      petalwake: [owners.dodgeResponse],
       expressDelivery: [owners.expressDelivery],
       fallenLeaves: [owners.decayBlock],
       unfinishedJourney: [owners.unfinishedJourneyLimit],

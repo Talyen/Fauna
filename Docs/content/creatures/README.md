@@ -42,3 +42,5 @@ For new kits, use the [creature design workflow](../../CREATURE_DESIGN.md) and [
 - [Almanelle](almanelle.md) · [implementation](../../../src/game/content/creatures/almanelle.ts)
 
 - [Orifable and Food](orifable.md) · [implementation](../../../src/game/content/creatures/orifable.ts) — shared consumables and Express Delivery
+
+- [Arabesca](arabesca.md): Petalwake, Springbound and the shared next-card repeat

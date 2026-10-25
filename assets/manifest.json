@@ -2106,6 +2106,50 @@
       "aspect": [3, 4],
       "provenance": "Generated with built-in ImageGen using owner-provided Fauna style prompts; exact prompt in Docs/content/creatures/orifable-art-prompts.md",
       "rights": "Fauna owner-requested AI-generated artwork; see assets/content-provenance.json"
+    },
+    {
+      "id": "creature.arabesca",
+      "origin": "repository",
+      "source": "public/art/creatures/arabesca/portrait.png",
+      "output": "art/arabesca/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Arabesca artwork from Google Drive: https://drive.google.com/file/d/1gbmzXPBJco03g9FgBHk7TM3rA3GuLep6/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.arabesca.ribbon-snare",
+      "origin": "repository",
+      "source": "public/art/creatures/arabesca/ribbon-snare.png",
+      "output": "art/arabesca/ribbon-snare.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Arabesca artwork from Google Drive: https://drive.google.com/file/d/1TWxkx_BpDc0p1m4MdkqZr5cp4KLzVKuG/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.arabesca.springbound",
+      "origin": "repository",
+      "source": "public/art/creatures/arabesca/springbound.png",
+      "output": "art/arabesca/springbound.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Arabesca artwork from Google Drive: https://drive.google.com/file/d/1huJRQZDH_YlI9frn4IzE8NhZ4-WWa7Ji/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.arabesca.dancing-double",
+      "origin": "repository",
+      "source": "public/art/creatures/arabesca/dancing-double.png",
+      "output": "art/arabesca/dancing-double.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Arabesca artwork from Google Drive: https://drive.google.com/file/d/1Ec4K0wytqKvA-HiJ6VdJ9wWoZGC7xz4s/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

@@ -47,9 +47,9 @@ Ordinary enemies retain the existing no-hand model. Their Orifable can use Good 
 
 Food costs 1 Mana, has no species or creature owner, and lasts only for the battle. Apple and Trail Bread use ordinary living-ally targeting, including allied Minions; Mana Berries resolve immediately into shared Mana. A Berry therefore gains one net Mana before the shared cap. Escape cancels targeting without consuming Food or Mana.
 
-Food survives its creator falling, swapping out, or a Legendary formation change. It remains drawable and recoverable, and Well Read copies retain neutral ownership. Unplayed Food discards and recycles normally. An accepted play resolves once, then Consumes the played card; rejection preserves the card and RNG. Preview uses the same resolution on detached state.
+Food survives its creator falling, swapping out, or a Legendary formation change. It remains drawable and recoverable, and Well Read copies retain neutral ownership. Unplayed Food discards and recycles normally. An accepted play Consumes the played card after resolution; a pending Dancing Double resolves its effects twice before that single consumption. Rejection preserves the card and RNG. Preview uses the same resolution on detached state.
 
-Food does not spend creature free-card charges, use creature-specific ability repeats or increment an acting creature's card counters. It remains usable while creatures are controlled; general team accepted-play effects, keyword XP, recipient modifiers, talents and Boons retain their ordinary rules. Neutral cards are represented explicitly in the save schema; only supported, temporary, level-zero Food can have no owner. Save format 56 rejects older development saves rather than migrating them.
+Food does not spend creature free-card charges, use creature-specific ability repeats or increment an acting creature's card counters. It remains usable while creatures are controlled; general team accepted-play effects, keyword XP, recipient modifiers, talents and Boons retain their ordinary rules. Neutral cards are represented explicitly in the save schema; only supported, temporary, level-zero Food can have no owner. Food was introduced with save format 56; the current [save format](../../../src/game/save-format.json) rejects obsolete development saves rather than migrating them.
 
 ## Play pattern
 

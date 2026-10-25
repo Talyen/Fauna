@@ -1,4 +1,5 @@
 import { cardActor, drawableOwnerIds } from "../card-actors";
+import { grantCardRepeat } from "./card-repeat";
 import { createFood } from "./food";
 import { takeAttackReflection } from "./attack-reflection";
 import { resurrect } from "./resurrection";
@@ -354,10 +355,10 @@ const swapLowestAbility: PrimaryHandler<"swapLowest"> = (context) => {
   if (outgoing) operations.swap(state, outgoing, events, true);
 };
 
-const teamThawAbility: PrimaryHandler<"teamThaw"> = (context) => {
-  const { state, action, events } = context;
+function thawAllies({ state, action, events }: Pick<PrimaryContext, "state" | "action" | "events">) {
   for (const unit of alive(friendlyRow(state, action))) removeControlBuildup(state, unit, "freeze", events);
-};
+}
+const teamThawAbility: PrimaryHandler<"teamThaw"> = thawAllies;
 
 const teamBlindAbility: PrimaryHandler<"teamBlind"> = (context) => {
   const { state, action, actor, events } = context;
@@ -392,7 +393,18 @@ const swapAbility: PrimaryHandler<"swap"> = (context) => {
   operations.swap(state, actor, events);
 };
 
+const springboundAbility: PrimaryHandler<"springbound"> = (context) => {
+  thawAllies(context);
+  grantTemporaryDodge(context.actor, context.value, context.events);
+};
+
+const repeatNextCardAbility: PrimaryHandler<"repeatNextCard"> = ({ state, action, actor, events }) => {
+  grantCardRepeat(state, action.side, actor.id, events);
+};
+
 const handlers: PrimaryHandlers = {
+  springbound: springboundAbility,
+  repeatNextCard: repeatNextCardAbility,
   procession: processionAbility,
   createFood: createFoodAbility,
   createPearls: createPearlsAbility,

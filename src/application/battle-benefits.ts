@@ -219,6 +219,14 @@ export function battleBenefits(
     }
     case "teamClearBlind":
       return controlRemoval(allies.filter((unit) => unit.combat?.blind).length);
+    case "repeatNextCard":
+      return support(state.battle.repeatNext.player ? "none" : "standardUtility");
+    case "springbound": {
+      const frozen = allies.filter((unit) => (unit.combat?.freeze ?? 0) > 0).length;
+      return frozen > 0
+        ? controlRemoval(frozen)
+        : dodgeSupport(Math.min(value, 70 - (actor.combat?.temporaryDodge ?? 0)));
+    }
     case "teamThaw":
       return controlRemoval(allies.filter((unit) => (unit.combat?.freeze ?? 0) > 0).length);
     case "recover": {

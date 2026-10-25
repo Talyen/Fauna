@@ -1,7 +1,7 @@
 import { talentRule } from "../rules/talents";
 import { boonRule } from "../rules/boons";
 import { chance as succeeds } from "../chance";
-import { isEnemy } from "../battlefield";
+import { battlefield, isEnemy } from "../battlefield";
 import { roll } from "../random";
 import { draw, drawKeyword } from "../card-zones";
 import { hasTalent, creaturePassive } from "../progression";
@@ -64,6 +64,19 @@ export function* dodgeResponse({ state, source, target, events }: HitContext): R
       yield* reaction("hit", state, target, source, talentRule("burn.smoke-screen").amount, "burn", events, {
         origin: "proc",
       });
+  }
+  const petals = creaturePassive(alliedTarget ? state : undefined, target.species).effects.reduce(
+    (sum, effect) => sum + (effect.kind === "petalwake" ? effect.amount : 0),
+    0,
+  );
+  if (petals > 0 && target.health > 0) {
+    const side = alliedTarget ? "player" : "enemy";
+    if (battlefield(state, side).some((unit) => unit.id === target.id))
+      for (const ally of battlefield(state, side)) {
+        if (target.health <= 0) break;
+        if (ally.health > 0)
+          yield* reaction("restoreHealth", ally, petals, events, false, state, false, target);
+      }
   }
   const cinderstep = creaturePassive(alliedTarget ? state : undefined, target.species).effects.reduce(
     (sum, effect) => sum + (effect.kind === "dodgeBurn" ? effect.amount : 0),
