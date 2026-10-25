@@ -306,7 +306,7 @@ describe("Block against periodic damage", () => {
     });
   });
 
-  it("pays deferred Bleed Leech from absorbed damage without inflating Armor or overkill", () => {
+  it("pays deferred Bleed Leech from absorbed damage once", () => {
     produce(alpenglenBattle(), (draft) => {
       const source = draft.team[0]!;
       const target = draft.battle.enemies[0]!;
