@@ -446,7 +446,9 @@ it("Camp Hammock includes living backups in automatic Healing while keeping them
   addBackups(state, backup);
   const card = state.cards.find((entry) => definition(entry.definitionId).name === "Moss Renewal")!;
   const def = definition(card.definitionId);
-  executeAbility(state, { side: "player", actor: state.team[0]!, def, value: 2 }, [], { swap: () => {} });
+  executeAbility(state, { side: "player", actor: state.team[0]!, def, value: 2 }, [], {
+    swap: () => undefined,
+  });
   expect(backup.health).toBe(3);
   expect(playTargetError(state, definition("food-apple"), state.team[0]!.id, backup.id)).toBe(
     "Choose a living ally.",

@@ -2370,6 +2370,50 @@
       "aspect": [3, 4],
       "provenance": "Tuning Fork Charm artwork copied unchanged from Google Drive https://drive.google.com/file/d/1Dxlve5WyU91zkX2WPgpiM_uzI8MThuvN/view?usp=drivesdk",
       "rights": "User-provided Fauna artwork; imported at user request. Original Drive files preserved."
+    },
+    {
+      "id": "creature.skybex",
+      "origin": "repository",
+      "source": "public/art/creatures/skybex/portrait.png",
+      "output": "art/skybex/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Skybex artwork from Google Drive: https://drive.google.com/file/d/1wqwVGx9SjPLUFBukcBOx9Ew_cbSd2dBl/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.skybex.far-horizon",
+      "origin": "repository",
+      "source": "public/art/creatures/skybex/far-horizon.png",
+      "output": "art/skybex/far-horizon.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Skybex artwork from Google Drive: https://drive.google.com/file/d/1pc6Cqq3LkFNAiWLUY2o7zGmfACyIsLjO/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.skybex.cloudstep",
+      "origin": "repository",
+      "source": "public/art/creatures/skybex/cloudstep.png",
+      "output": "art/skybex/cloudstep.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Skybex artwork from Google Drive: https://drive.google.com/file/d/1W5WK3vAlYaCsm6aIbsdcvjF4oMK7buTI/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.skybex.sky-shepherd",
+      "origin": "repository",
+      "source": "public/art/creatures/skybex/sky-shepherd.png",
+      "output": "art/skybex/sky-shepherd.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Skybex artwork from Google Drive: https://drive.google.com/file/d/1v59fZy8YS-MJuzoZGUcFaphkYlKc-fmg/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

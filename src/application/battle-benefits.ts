@@ -386,6 +386,12 @@ export function battleBenefits(
       const useful = Math.min(value, STACK_LIMIT - (actor.combat?.waterThorns ?? 0));
       return support(useful > 0 ? "protection" : "none", useful);
     }
+    case "swapDodge":
+      return support(
+        state.reserves.some((unit) => unit.health > 0) || allies.some((unit) => unit.id !== actor.id)
+          ? "utility"
+          : "none",
+      );
     case "swap":
     case "swapLowest":
       return support("utility");

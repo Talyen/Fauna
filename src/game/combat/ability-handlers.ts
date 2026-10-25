@@ -386,6 +386,11 @@ const swapAbility: PrimaryHandler<"swap"> = (context) => {
   operations.swap(state, actor, events);
 };
 
+const swapDodgeAbility: PrimaryHandler<"swapDodge"> = ({ state, actor, value, events, operations }) => {
+  const incoming = operations.swap(state, actor, events);
+  if (incoming) grantTemporaryDodge(incoming, value, events);
+};
+
 const springboundAbility: PrimaryHandler<"springbound"> = (context) => {
   thawAllies(context);
   grantTemporaryDodge(context.actor, context.value, context.events);
@@ -396,6 +401,7 @@ const repeatNextCardAbility: PrimaryHandler<"repeatNextCard"> = ({ state, action
 };
 
 const handlers: PrimaryHandlers = {
+  swapDodge: swapDodgeAbility,
   springbound: springboundAbility,
   repeatNextCard: repeatNextCardAbility,
   procession: processionAbility,

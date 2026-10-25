@@ -7,7 +7,7 @@ import { fileHash } from "../lib/file-integrity.mjs";
 
 const ROOT = path.resolve(import.meta.dirname, "../..");
 // Total prepared media, including music. JavaScript has its own measured budget.
-// 209 active objects measure 147.59 MiB, including ten additional lossless Boon portraits.
+// 213 active objects measure 151.02 MiB, including ten additional lossless Boon portraits.
 const MAX_MEDIA_BYTES = 152 * 1024 * 1024;
 const MAX_ART_BYTES = 3 * 1024 * 1024;
 const inventory = (receipt) =>

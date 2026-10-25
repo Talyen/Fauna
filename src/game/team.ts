@@ -1,6 +1,9 @@
 import { isRosterCreature } from "./battlefield";
 import { recycleDiscard, fillHand, filterCardZones, MAX_BATTLE_CARDS } from "./card-zones";
 import { removeDepartedMinions } from "./combat/legendary";
+import { grantBlock } from "./combat/index";
+import { unitName, type Combatant } from "./combat/state";
+import { creaturePassive } from "./progression";
 import { shuffle, roll } from "./random";
 import { speciesCards, species } from "./content";
 import type { Card, GameEvent, GameState } from "./types";
@@ -148,6 +151,34 @@ export function pendingReplacement(state: GameState) {
     ? state.team.find((unit) => unit.health <= 0)
     : undefined;
 }
+/** The guide can lead the arrival or accompany it; inactive backups supply no protection. */
+export function mountainGuide(
+  state: GameState,
+  incoming: Combatant,
+  previous: readonly Combatant[],
+  events: GameEvent[],
+) {
+  if (state.phase !== "battle" || incoming.health <= 0) return;
+  const allied = isRosterCreature(incoming);
+  const row = allied ? state.team : state.battle.enemies;
+  const guides = [...row, ...previous.filter((unit) => !row.some((current) => current.id === unit.id))];
+  for (const guide of guides) {
+    if (guide.health <= 0) continue;
+    const amount = creaturePassive(allied ? state : undefined, guide.species).effects.reduce(
+      (sum, effect) => sum + (effect.kind === "mountainGuide" ? effect.amount : 0),
+      0,
+    );
+    if (!amount) continue;
+    events.push({
+      kind: "action",
+      actionType: "support",
+      actorId: guide.id,
+      targetId: incoming.id,
+      text: `Mountain Guide protects ${unitName(incoming)}`,
+    });
+    grantBlock(state, incoming, amount, events);
+  }
+}
 /** Knockout replacements retain slots; abilities shuffle the incoming kit into the draw pile. */
 export function swapBackup(
   state: GameState,
@@ -160,6 +191,7 @@ export function swapBackup(
   const backupIndex = state.reserves.findIndex((unit) => unit.id === backupId);
   const outgoing = state.team[index];
   const incoming = state.reserves[backupIndex]!;
+  const previous = [...state.team];
   if (!outgoing || species(incoming.species).legendary || species(outgoing.species).legendary) {
     setFormation(
       state,
@@ -172,6 +204,7 @@ export function swapBackup(
       events,
       fromCard,
     );
+    mountainGuide(state, incoming, previous, events);
     return;
   }
   state.team[index] = incoming;
@@ -208,6 +241,7 @@ export function swapBackup(
     actorId: incoming.id,
     text: `${species(incoming.species).name} replaces ${species(outgoing.species).name}.`,
   });
+  mountainGuide(state, incoming, previous, events);
 }
 export function swapFromCard(
   state: GameState,
@@ -216,14 +250,16 @@ export function swapFromCard(
   backupOnly = false,
 ) {
   const allied = isRosterCreature(actor);
+  const row = allied ? state.team : state.battle!.enemies;
+  // A repeat cannot swap an actor that already left the deployed formation.
+  if (!row.some((unit) => unit.id === actor.id)) return;
   const backup = allied ? state.reserves.filter((unit) => unit.health > 0) : [];
   if (backup.length) {
     const incoming = backup[Math.floor(roll(state, { kind: "index", size: backup.length }) * backup.length)]!;
     swapBackup(state, actor.id, incoming.id, events, true);
-    return;
+    return incoming;
   }
   if (backupOnly) return;
-  const row = allied ? state.team : state.battle!.enemies;
   const others = row.filter((unit) => unit.id !== actor.id && unit.health > 0);
   if (!others.length) return;
   const other = others[Math.floor(roll(state, { kind: "index", size: others.length }) * others.length)]!;
@@ -237,4 +273,6 @@ export function swapFromCard(
     targetId: other.id,
     text: `${species(actor.species).name} swaps positions with ${species(other.species).name}.`,
   });
+  mountainGuide(state, other, row, events);
+  return other;
 }

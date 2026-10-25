@@ -13,6 +13,7 @@ import type { drawHasAnotherCard, expressDelivery, receiveDraw } from "./card-zo
 import type { loseHealth, openingCriticalBonus, ownDodgeChance, sharedDodgeChance } from "./combat/state";
 
 type Modules = {
+  "./team": typeof import("./team");
   "./battlefield": typeof import("./battlefield");
   "./ability-facts": typeof import("./ability-facts");
   "./ability-rules": {
@@ -62,6 +63,7 @@ function bind<M extends keyof Modules, N extends CallableName<M>>(module: M, nam
 }
 const owners = {
   encoreProgressLimit: bind("./ability-rules", "encoreProgressLimit"),
+  mountainGuide: bind("./team", "mountainGuide"),
   afterPlayerCard: bind("./combat/card-modifiers", "afterPlayerCard"),
   returnDodgedCard: bind("./combat/card-modifiers", "returnDodgedCard"),
   manaCapacity: bind("./ability-rules", "manaCapacity"),
@@ -312,6 +314,7 @@ export const modifierImplementations = freeze(
       "lucky-clover": [owners.damageRewards],
     } satisfies Record<BoonId, Binding>,
     passives: {
+      mountainGuide: [owners.mountainGuide],
       petalwake: [owners.dodgeResponse],
       expressDelivery: [owners.expressDelivery],
       fallenLeaves: [owners.decayBlock],

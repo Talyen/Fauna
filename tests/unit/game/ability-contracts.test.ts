@@ -60,7 +60,11 @@ function recordedEnemy(card: (typeof CARDS)[number]) {
 it("preserves authored text, targeting, scaling, keywords and enemy adaptations", () => {
   expect(
     // New kit authoring is asserted directly below; preserve every older card's recorded contract.
-    [...CARDS.filter((card) => card.species !== "arabesca"), PEARL, ...FOOD_CARDS].map((card) => ({
+    [
+      ...CARDS.filter((card) => !["arabesca", "skybex"].includes(card.species ?? "")),
+      PEARL,
+      ...FOOD_CARDS,
+    ].map((card) => ({
       id: card.id,
       digest: digest({
         targeting: cardTargeting(card),
