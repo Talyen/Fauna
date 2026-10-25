@@ -1,9 +1,27 @@
 import { isRosterCreature } from "./battlefield";
 import { recycleDiscard, fillHand, filterCardZones, MAX_BATTLE_CARDS } from "./card-zones";
 import { removeDepartedMinions } from "./combat/legendary";
+import { restoreHealth } from "./combat/index";
+import { creaturePassive } from "./progression";
 import { shuffle, roll } from "./random";
 import { speciesCards, species } from "./content";
 import type { Card, GameEvent, GameState } from "./types";
+
+/** Both sides of the exchange provide passage, including Dulcera's own departure or arrival. */
+export function gentlePassage(state: GameState, previous: GameState["team"], events: GameEvent[]) {
+  if (state.phase !== "battle") return;
+  const providers = new Map([...previous, ...state.team].map((unit) => [unit.id, unit]));
+  const entering = state.team.filter((unit) => !previous.some((old) => old.id === unit.id));
+  for (const provider of providers.values()) {
+    if (provider.health <= 0) continue;
+    const amount = creaturePassive(state, provider.species).effects.reduce(
+      (sum, effect) => sum + (effect.kind === "gentlePassage" ? effect.amount : 0),
+      0,
+    );
+    if (amount <= 0) continue;
+    for (const unit of entering) restoreHealth(unit, amount, events, false, state);
+  }
+}
 
 export function living(state: GameState) {
   return state.team.filter((c) => c.health > 0);
@@ -93,6 +111,7 @@ export function formationForSwap(
   return ids;
 }
 function setFormation(state: GameState, ids: string[], events: GameEvent[] = [], fromCard = false) {
+  const previousTeam = [...state.team];
   const all = [...state.team, ...state.reserves];
   const previous = state.cards;
   const departing = new Set(state.team.filter((unit) => !ids.includes(unit.id)).map((unit) => unit.id));
@@ -141,6 +160,7 @@ function setFormation(state: GameState, ids: string[], events: GameEvent[] = [],
     recycleDiscard(state);
   }
   events.push({ kind: "action", actionType: "swap", actorId: ids[0]!, text: "Your formation changes" });
+  gentlePassage(state, previousTeam, events);
 }
 /** Knockout replacement is derived from the committed roster, including after resume. */
 export function pendingReplacement(state: GameState) {
@@ -156,6 +176,7 @@ export function swapBackup(
   events: GameEvent[],
   fromCard = false,
 ) {
+  const previousTeam = [...state.team];
   const index = state.team.findIndex((unit) => unit.id === activeId);
   const backupIndex = state.reserves.findIndex((unit) => unit.id === backupId);
   const outgoing = state.team[index];
@@ -208,6 +229,7 @@ export function swapBackup(
     actorId: incoming.id,
     text: `${species(incoming.species).name} replaces ${species(outgoing.species).name}.`,
   });
+  gentlePassage(state, previousTeam, events);
 }
 export function swapFromCard(
   state: GameState,

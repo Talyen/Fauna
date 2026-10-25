@@ -378,8 +378,8 @@ const teamProtectionAbility: PrimaryHandler<"teamProtection"> = (context) => {
 };
 
 const swapAbility: PrimaryHandler<"swap"> = (context) => {
-  const { state, actor, events, operations } = context;
-  operations.swap(state, actor, events);
+  const { state, actor, def, events, operations } = context;
+  operations.swap(state, actor, events, def.backupOnly);
 };
 
 const handlers: PrimaryHandlers = {

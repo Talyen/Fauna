@@ -30,23 +30,26 @@ function recordedEnemy(card: (typeof CARDS)[number]) {
 // Recorded before moving ability policies or handlers. Never regenerate these to accept a refactor.
 it("preserves authored text, targeting, scaling, keywords and enemy adaptations", () => {
   expect(
-    [...CARDS, PEARL, ...FOOD_CARDS].map((card) => ({
-      id: card.id,
-      digest: digest({
-        targeting: cardTargeting(card),
-        keywords: definitionKeywords(card),
-        enemy: recordedEnemy(card),
-        enemySupported: enemyCanUse(card),
-        variants: [1, 1.6].flatMap((power) =>
-          [0, 2].map((level) => ({
-            text: cardText(card, level, undefined, power),
-            resolvedText: cardText(card, level, 19, power),
-            value: primaryAbilityValue(card, card.value + level * 2, power),
-            extras: abilityExtras(card, power),
-          })),
-        ),
-      }),
-    })),
+    // Dulcera's new contracts live in creatures/dulcera.test.ts; retain the original oracle.
+    [...CARDS, PEARL, ...FOOD_CARDS]
+      .filter((card) => card.species !== "dulcera")
+      .map((card) => ({
+        id: card.id,
+        digest: digest({
+          targeting: cardTargeting(card),
+          keywords: definitionKeywords(card),
+          enemy: recordedEnemy(card),
+          enemySupported: enemyCanUse(card),
+          variants: [1, 1.6].flatMap((power) =>
+            [0, 2].map((level) => ({
+              text: cardText(card, level, undefined, power),
+              resolvedText: cardText(card, level, 19, power),
+              value: primaryAbilityValue(card, card.value + level * 2, power),
+              extras: abilityExtras(card, power),
+            })),
+          ),
+        }),
+      })),
   ).toMatchSnapshot();
 });
 

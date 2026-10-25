@@ -6,6 +6,7 @@ import type { drawHasAnotherCard, expressDelivery, receiveDraw } from "./card-zo
 import type { loseHealth, openingCriticalBonus, ownDodgeChance, sharedDodgeChance } from "./combat/state";
 
 type Modules = {
+  "./team": typeof import("./team");
   "./battlefield": typeof import("./battlefield");
   "./ability-facts": typeof import("./ability-facts");
   "./ability-rules": {
@@ -53,6 +54,7 @@ function bind<M extends keyof Modules, N extends CallableName<M>>(module: M, nam
   return { module, name };
 }
 const owners = {
+  gentlePassage: bind("./team", "gentlePassage"),
   afterPlayerCard: bind("./combat/card-modifiers", "afterPlayerCard"),
   returnDodgedCard: bind("./combat/card-modifiers", "returnDodgedCard"),
   manaCapacity: bind("./ability-rules", "manaCapacity"),
@@ -292,6 +294,7 @@ export const modifierImplementations = freeze(
       "lucky-clover": [owners.damageRewards],
     } satisfies Record<BoonId, Binding>,
     passives: {
+      gentlePassage: [owners.gentlePassage],
       expressDelivery: [owners.expressDelivery],
       fallenLeaves: [owners.decayBlock],
       unfinishedJourney: [owners.unfinishedJourneyLimit],

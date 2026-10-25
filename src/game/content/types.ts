@@ -28,9 +28,11 @@ export type SpeciesId =
   | "reverie"
   | "oathara"
   | "almanelle"
-  | "orifable";
+  | "orifable"
+  | "dulcera";
 export type Effect = AbilityKind;
 type PassiveEffect =
+  | { kind: "gentlePassage"; amount: number }
   | { kind: "expressDelivery"; amount: number }
   | { kind: "fallenLeaves"; amount: number }
   | { kind: "unfinishedJourney"; amount: number }

@@ -1,6 +1,9 @@
 import { expect } from "@playwright/test";
 
 export const SCENARIOS = [
+  "dulcera-battle",
+  "dulcera-collection",
+  "dulcera-rank-five",
   "orifable-battle",
   "orifable-food",
   "orifable-targeting",
@@ -110,6 +113,15 @@ export async function reviewScenario(server, name) {
         discovery: { ...game.discovery, recruited: { ...game.discovery.recruited, orifable: 6 } },
       };
   }
+  if (name.startsWith("dulcera-")) {
+    const { dulceraBattle } = await server.ssrLoadModule("/tests/support/dulcera.ts");
+    game = dulceraBattle();
+    if (name === "dulcera-rank-five")
+      game = {
+        ...game,
+        discovery: { ...game.discovery, recruited: { ...game.discovery.recruited, dulcera: 6 } },
+      };
+  }
   if (["uncertain-targeting", "unknown-targeting"].includes(name)) {
     const { uncertainBattle } = await server.ssrLoadModule("/tests/support/uncertainty.ts");
     game = uncertainBattle(name === "unknown-targeting");
@@ -120,11 +132,13 @@ export async function reviewScenario(server, name) {
     name,
     save,
     seed: name.startsWith("merchant") ? 7 : 42,
-    fixture: name.startsWith("orifable-")
-      ? "tests/support/orifable.ts"
-      : name.startsWith("almanelle-")
-        ? "tests/support/almanelle.ts"
-        : "tests/support/game.ts",
+    fixture: name.startsWith("dulcera-")
+      ? "tests/support/dulcera.ts"
+      : name.startsWith("orifable-")
+        ? "tests/support/orifable.ts"
+        : name.startsWith("almanelle-")
+          ? "tests/support/almanelle.ts"
+          : "tests/support/game.ts",
   };
 }
 
@@ -144,7 +158,10 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   await expect(page.locator("#startup-splash")).toHaveCount(0);
   const button = (name) => page.getByRole("button", { name, exact: true });
   const menu = scenario.name === "talent-tree" ? "talents" : scenario.name.split("-")[0];
-  if (["orifable-collection", "orifable-rank-five"].includes(scenario.name)) {
+  if (["dulcera-collection", "dulcera-rank-five"].includes(scenario.name)) {
+    await button("Collection").click();
+    await button("Inspect Dulcera").click();
+  } else if (["orifable-collection", "orifable-rank-five"].includes(scenario.name)) {
     await button("Collection").click();
     await button("Inspect Orifable").click();
   } else if (["almanelle-collection", "almanelle-rank-five"].includes(scenario.name)) {
