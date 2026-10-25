@@ -139,7 +139,7 @@ export function expressDelivery(state: GameState, events: GameEvent[]) {
 
 export function drawKeyword(
   state: GameState,
-  keyword: "light" | "nature" | "water",
+  keyword: "light" | "nature" | "water" | "burn",
   events: GameEvent[] = [],
 ) {
   if (!state.battle) return;

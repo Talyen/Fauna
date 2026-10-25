@@ -36,6 +36,16 @@ export const protectionRules = {
       return `Gain ${value} Thorns / Negate the next attack against you`;
     },
   },
+  sparkDecoy: {
+    targeting: "self",
+    scaling: "level",
+    enemy: "supported",
+    adaptation: "extras",
+    keywords: ["burn"],
+    describe(_card, { value }) {
+      return `Gain ${value} Fire Thorns / Gain Negate`;
+    },
+  },
   waterThorns: {
     targeting: "automatic",
     scaling: "level",
@@ -97,6 +107,7 @@ export const protectionRules = {
   | "teamProtection"
   | "reflectAttack"
   | "dreamDouble"
+  | "sparkDecoy"
   | "waterThorns"
   | "dodge"
   | "nullify"

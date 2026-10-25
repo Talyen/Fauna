@@ -19,6 +19,7 @@ export function capabilities(state: GameState, kinds: readonly SpeciesId[]) {
       }
       if (
         card.effect === "dreamDouble" ||
+        card.effect === "sparkDecoy" ||
         card.effect === "waterThorns" ||
         card.effect === "teamProtection" ||
         card.effects?.some(
@@ -96,7 +97,10 @@ export function offenseValue(state: GameState, kind: SpeciesId): number {
   const reactive = cards.reduce(
     (sum, card) =>
       sum +
-      (card.effect === "dreamDouble" || card.effect === "waterThorns" || card.effect === "teamProtection"
+      (card.effect === "dreamDouble" ||
+      card.effect === "sparkDecoy" ||
+      card.effect === "waterThorns" ||
+      card.effect === "teamProtection"
         ? card.value
         : 0),
     0,

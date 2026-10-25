@@ -285,6 +285,7 @@ export function battleBenefits(
             enemy.combat.armor > 0 ||
             enemy.combat.thorns > 0 ||
             enemy.combat.waterThorns > 0 ||
+            enemy.combat.fireThorns > 0 ||
             enemy.combat.dodge > 0 ||
             enemy.combat.temporaryDodge > 0 ||
             enemy.combat.reflect ||
@@ -319,8 +320,10 @@ export function battleBenefits(
             unit.id,
           ),
         );
+    case "sparkDecoy":
     case "dreamDouble": {
-      const thorns = Math.min(value, STACK_LIMIT - (actor.combat?.thorns ?? 0));
+      const status = def.effect === "sparkDecoy" ? "fireThorns" : "thorns";
+      const thorns = Math.min(value, STACK_LIMIT - (actor.combat?.[status] ?? 0));
       return support(!actor.combat?.negate ? "resource" : thorns > 0 ? "protection" : "none", thorns);
     }
     case "nightmareHarvest": {

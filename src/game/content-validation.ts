@@ -75,8 +75,8 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
       for (const effect of tier?.effects ?? []) {
         if (!Object.hasOwn(modifierImplementations.passives, effect.kind))
           error(entry.id, "passiveTiers", "Passive effect needs an implementation binding");
-        if (effect.kind === "fallenLeaves" && effect.amount > 100)
-          error(entry.id, "passiveTiers", "Block decay conversion cannot exceed 100 percent");
+        if ((effect.kind === "fallenLeaves" || effect.kind === "passingFlame") && effect.amount > 100)
+          error(entry.id, "passiveTiers", "Passive conversion cannot exceed 100 percent");
         if (
           (effect.kind === "expressDelivery" ||
             effect.kind === "wellRead" ||
@@ -122,7 +122,7 @@ export function validateCatalog(catalog: typeof contentCatalog = contentCatalog)
       if (!Number.isSafeInteger(effect.amount) || effect.amount < 1 || effect.amount > 100)
         error(card.id, "effects", "Unsupported supplemental amount.");
       if (!isSupplementalKind(effect.kind)) error(card.id, "effects", "Unknown supplemental effect.");
-      if (effect.kind === "drawKeyword" && !["light", "nature", "water"].includes(effect.keyword))
+      if (effect.kind === "drawKeyword" && !["light", "nature", "water", "burn"].includes(effect.keyword))
         error(card.id, "effects", "Unknown draw keyword.");
       if (effect.kind === "damage" && !DAMAGE_TYPES.includes(effect.damageType))
         error(card.id, "effects", "Unknown supplemental damage type.");

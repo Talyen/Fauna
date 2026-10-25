@@ -116,6 +116,7 @@ it.each(cases)("preserves committed command traces for $name", ({ seed, team }) 
               value.enemy === false
             )
               return undefined;
+            if (key === "fireThorns" && value === 0) return undefined;
             return key === "negate" && value === false ? undefined : value;
           }),
         )

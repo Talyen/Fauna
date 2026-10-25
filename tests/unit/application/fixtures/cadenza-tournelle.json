@@ -1,5 +1,5 @@
 {
-  "version": 56,
+  "version": 59,
   "discovery": {
     "encountered": [
       "tournelle",
@@ -60,6 +60,7 @@
         "armor": 0,
         "thorns": 0,
         "waterThorns": 0,
+        "fireThorns": 0,
         "dodge": 0,
         "temporaryDodge": 0,
         "blind": false,
@@ -108,6 +109,7 @@
         "armor": 0,
         "thorns": 0,
         "waterThorns": 0,
+        "fireThorns": 0,
         "dodge": 0,
         "temporaryDodge": 0,
         "blind": false,
@@ -154,6 +156,7 @@
         "armor": 0,
         "thorns": 0,
         "waterThorns": 0,
+        "fireThorns": 0,
         "dodge": 0,
         "temporaryDodge": 0,
         "blind": false,
@@ -200,6 +203,7 @@
         "armor": 0,
         "thorns": 0,
         "waterThorns": 0,
+        "fireThorns": 0,
         "dodge": 0,
         "temporaryDodge": 0,
         "blind": false,
@@ -246,6 +250,7 @@
         "armor": 0,
         "thorns": 0,
         "waterThorns": 0,
+        "fireThorns": 0,
         "dodge": 0,
         "temporaryDodge": 0,
         "blind": false,
@@ -362,6 +367,7 @@
           "armor": 0,
           "thorns": 0,
           "waterThorns": 0,
+          "fireThorns": 0,
           "dodge": 0,
           "temporaryDodge": 0,
           "blind": false,
@@ -416,6 +422,7 @@
           "armor": 0,
           "thorns": 0,
           "waterThorns": 0,
+          "fireThorns": 0,
           "dodge": 0,
           "temporaryDodge": 0,
           "blind": false,
@@ -488,6 +495,7 @@
           "armor": 0,
           "thorns": 0,
           "waterThorns": 0,
+          "fireThorns": 0,
           "dodge": 0,
           "temporaryDodge": 0,
           "blind": true,
@@ -525,7 +533,11 @@
           "pearls": 1
         }
       }
-    ]
+    ],
+    "repeatNext": {
+      "player": false,
+      "enemy": false
+    }
   },
   "reward": null,
   "journey": {

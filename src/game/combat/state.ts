@@ -32,6 +32,7 @@ export function freshCombat(): CombatState {
     armor: 0,
     thorns: 0,
     waterThorns: 0,
+    fireThorns: 0,
     dodge: 0,
     temporaryDodge: 0,
     blind: false,

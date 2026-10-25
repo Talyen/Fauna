@@ -68,6 +68,12 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Absorbs incoming damage before Health; Does not prevent hit effects, buildup or Leech unless specified; Remaining Block normally halves at the start of your next turn, rounded normally",
       ["Blocks", "Blocked", "Blocking"],
     ),
+    fireThorns: entry(
+      "Fire Thorns",
+      "effect",
+      "active",
+      "Fire Thorns retaliate with Burn damage and buildup when hit, even through Block or Negate, then lose 1 stack; Separate from Nature and Water Thorns",
+    ),
     waterThorns: entry(
       "Water Thorns",
       "effect",
@@ -230,6 +236,7 @@ export const PROGRESSION_KEYWORDS = freeze([
 export type ProgressionKeyword = (typeof PROGRESSION_KEYWORDS)[number];
 const progressionCategory: Partial<Record<KeywordId, ProgressionKeyword>> = {
   thorns: "nature",
+  fireThorns: "burn",
   cleanse: "health",
   purge: "light",
 };

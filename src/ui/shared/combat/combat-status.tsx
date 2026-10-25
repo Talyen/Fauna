@@ -15,6 +15,7 @@ const stats = [
   "armor",
   "thorns",
   "waterThorns",
+  "fireThorns",
   "dodge",
   "burn",
   "poison",

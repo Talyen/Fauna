@@ -71,7 +71,7 @@ export function* returnCleansedEffect(
 
 export function* grantStatus(
   unit: Combatant,
-  status: "armor" | "thorns" | "waterThorns" | "dodge",
+  status: "armor" | "thorns" | "waterThorns" | "fireThorns" | "dodge",
   amount: number,
   events: GameEvent[],
   state?: GameState,
@@ -89,9 +89,9 @@ export function* grantStatus(
       amount: gain,
       status,
       outcome: "gain",
-      text: `${unitName(unit)} gains ${gain} ${status === "waterThorns" ? "Water Thorns" : status}.`,
+      text: `${unitName(unit)} gains ${gain} ${status === "waterThorns" ? "Water Thorns" : status === "fireThorns" ? "Fire Thorns" : status}.`,
     });
-  if ((status === "thorns" || status === "waterThorns") && state && sharing)
+  if ((status === "thorns" || status === "waterThorns" || status === "fireThorns") && state && sharing)
     yield* reaction("shareProtection", state, unit, status, gain, events);
 }
 export function* triggerArmorBreak(
@@ -149,7 +149,7 @@ export function* removeEffects(
   count: number,
   events: GameEvent[],
   state?: GameState,
-  onlyStatus?: (typeof harmfulStatuses)[number] | "thorns" | "waterThorns",
+  onlyStatus?: (typeof harmfulStatuses)[number] | "thorns" | "waterThorns" | "fireThorns",
 ): Resolution<number> {
   const stats = ensureCombat(unit);
   let depletion: ArmorDepletion | null = null;
@@ -172,6 +172,7 @@ export function* removeEffects(
     "armor",
     "thorns",
     "waterThorns",
+    "fireThorns",
     "dodge",
     "reflect",
     "reflectBurn",
@@ -222,7 +223,13 @@ export function* removeEffects(
       )
         stats[status] = false;
       else if (status === "armor") depletion = removeArmor(unit, stats.armor).depletion;
-      else if (status === "thorns" || status === "waterThorns" || status === "dodge") stats[status] = 0;
+      else if (
+        status === "thorns" ||
+        status === "waterThorns" ||
+        status === "fireThorns" ||
+        status === "dodge"
+      )
+        stats[status] = 0;
       else clearHarmfulStatus(stats, status);
       if (kind === "cleanse") {
         cleansed++;
@@ -240,7 +247,7 @@ export function* removeEffects(
       status: kind,
       outcome: "remove",
       affectedStatus,
-      text: `${unitName(unit)}: ${kind === "cleanse" ? "Cleanse" : "Purge"} ${affectedStatus === "waterThorns" ? "Water Thorns" : affectedStatus}.`,
+      text: `${unitName(unit)}: ${kind === "cleanse" ? "Cleanse" : "Purge"} ${affectedStatus === "waterThorns" ? "Water Thorns" : affectedStatus === "fireThorns" ? "Fire Thorns" : affectedStatus}.`,
     });
   if (removedStatuses.length === 0)
     events.push({

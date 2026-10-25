@@ -229,6 +229,7 @@
   --keyword-health: #f87171;
   --keyword-water: #60a5fa;
   --keyword-waterThorns: #60a5fa;
+  --keyword-fireThorns: var(--keyword-burn);
   --keyword-criticalHit: #f59e0b;
   --keyword-criticalHit-deep: color-mix(in srgb, var(--keyword-criticalHit) 55%, var(--background));
   --keyword-mana: #38bdf8;
@@ -292,6 +293,7 @@
   --keyword-light-deep: #d97706;
   --keyword-health-deep: #b91c1c;
   --keyword-water-deep: color-mix(in srgb, var(--keyword-water) 55%, var(--background));
+  --keyword-fireThorns-deep: color-mix(in srgb, var(--keyword-fireThorns) 55%, var(--background));
   --keyword-waterThorns-deep: color-mix(in srgb, var(--keyword-waterThorns) 55%, var(--background));
   --keyword-mana-deep: #0284c7;
   --keyword-block-deep: #0ea5e9;

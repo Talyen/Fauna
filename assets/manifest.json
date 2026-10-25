@@ -2304,6 +2304,50 @@
       "aspect": [3, 4],
       "provenance": "Unchanged Skybex artwork from Google Drive: https://drive.google.com/file/d/1v59fZy8YS-MJuzoZGUcFaphkYlKc-fmg/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "creature.pyrella",
+      "origin": "repository",
+      "source": "public/art/creatures/pyrella/portrait.png",
+      "output": "art/pyrella/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Pyrella artwork from Google Drive: https://drive.google.com/file/d/1JPxrntSp3xOl7EAh3f-QeA3w1Qt0XSqp/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.pyrella.festival-burst",
+      "origin": "repository",
+      "source": "public/art/creatures/pyrella/festival-burst.png",
+      "output": "art/pyrella/festival-burst.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Pyrella artwork from Google Drive: https://drive.google.com/file/d/1S5rt1ZQWSeq6b0YOSRrp2JcUMEF6Wc0L/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.pyrella.ember-harvest",
+      "origin": "repository",
+      "source": "public/art/creatures/pyrella/ember-harvest.png",
+      "output": "art/pyrella/ember-harvest.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Pyrella artwork from Google Drive: https://drive.google.com/file/d/1tWwJGdixFry8L1xkwYjxuQtJne3w3sW7/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.pyrella.spark-decoy",
+      "origin": "repository",
+      "source": "public/art/creatures/pyrella/spark-decoy.png",
+      "output": "art/pyrella/spark-decoy.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Pyrella artwork from Google Drive: https://drive.google.com/file/d/1QsahvRmVYOtXNXiCfsuB_aiZ4MCEx-n2/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

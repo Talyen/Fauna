@@ -27,14 +27,15 @@ import {
 import type { GameEvent } from "../../../src/game/types";
 import { requireBattle, teamRun } from "../../support/game";
 
-// Preserve the recorded modifier oracle across the save envelope and dormant team grant.
-// New kits have direct behavioral coverage in ability-contracts.test.ts and creatures/skybex.test.ts.
-const recordedSpecies = SPECIES.filter((entry) => !["arabesca", "skybex"].includes(entry.id));
+// Preserve the recorded oracle across save versions and dormant combat fields.
+// New kits have direct behavioral coverage in ability-contracts.test.ts and creatures/*.test.ts.
+const recordedSpecies = SPECIES.filter((entry) => !["arabesca", "skybex", "pyrella"].includes(entry.id));
 const digest = (value: unknown) =>
   createHash("sha256")
     .update(
       JSON.stringify(value, (key, entry) => {
         if (key === "version") return 57;
+        if (key === "fireThorns" && entry === 0) return undefined;
         if (key === "repeatNext" && entry.player === false && entry.enemy === false) return undefined;
         return entry;
       }),

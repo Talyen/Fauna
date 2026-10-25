@@ -1,6 +1,11 @@
 import { expect } from "@playwright/test";
 
 export const SCENARIOS = [
+  "pyrella-battle",
+  "pyrella-collection",
+  "pyrella-rank-five",
+  "pyrella-decoy",
+  "pyrella-spread",
   "skybex-battle",
   "skybex-collection",
   "skybex-rank-five",
@@ -96,6 +101,38 @@ export async function reviewScenario(server, name) {
     game = { ...game, team: game.team.map((unit, index) => (index ? unit : { ...unit, health: 1 })) };
     game = accept(game, { type: "visitCampfire" });
   }
+  if (name.startsWith("pyrella-")) {
+    const { pyrellaBattle } = await server.ssrLoadModule("/tests/support/pyrella.ts");
+    game = pyrellaBattle();
+    if (name === "pyrella-rank-five")
+      game = {
+        ...game,
+        discovery: { ...game.discovery, recruited: { ...game.discovery.recruited, pyrella: 6 } },
+      };
+    if (name === "pyrella-decoy") {
+      const card = game.cards.find((card) => card.definitionId === "pyrella-spark-decoy");
+      game = accept(game, { type: "play", cardId: card.id, autoEndTurn: false });
+    }
+    if (name === "pyrella-spread") {
+      game = {
+        ...game,
+        battle: {
+          ...game.battle,
+          enemies: game.battle.enemies.map((enemy, index) =>
+            index
+              ? enemy
+              : {
+                  ...enemy,
+                  health: 1,
+                  combat: { ...enemy.combat, burn: 20, controlled: "stun", controlTurns: 1 },
+                },
+          ),
+        },
+      };
+      const card = game.cards.find((card) => card.definitionId === "pyrella-festival-burst");
+      game = accept(game, { type: "play", cardId: card.id, autoEndTurn: false });
+    }
+  }
   if (name.startsWith("skybex-")) {
     const { skybexBattle } = await server.ssrLoadModule("/tests/support/skybex.ts");
     game = skybexBattle();
@@ -154,15 +191,17 @@ export async function reviewScenario(server, name) {
     name,
     save,
     seed: name.startsWith("merchant") ? 7 : 42,
-    fixture: name.startsWith("skybex-")
-      ? "tests/support/skybex.ts"
-      : name.startsWith("arabesca-")
-        ? "tests/support/arabesca.ts"
-        : name.startsWith("orifable-")
-          ? "tests/support/orifable.ts"
-          : name.startsWith("almanelle-")
-            ? "tests/support/almanelle.ts"
-            : "tests/support/game.ts",
+    fixture: name.startsWith("pyrella-")
+      ? "tests/support/pyrella.ts"
+      : name.startsWith("skybex-")
+        ? "tests/support/skybex.ts"
+        : name.startsWith("arabesca-")
+          ? "tests/support/arabesca.ts"
+          : name.startsWith("orifable-")
+            ? "tests/support/orifable.ts"
+            : name.startsWith("almanelle-")
+              ? "tests/support/almanelle.ts"
+              : "tests/support/game.ts",
   };
 }
 
@@ -182,7 +221,16 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   await expect(page.locator("#startup-splash")).toHaveCount(0);
   const button = (name) => page.getByRole("button", { name, exact: true });
   const menu = scenario.name === "talent-tree" ? "talents" : scenario.name.split("-")[0];
-  if (["skybex-collection", "skybex-rank-five"].includes(scenario.name)) {
+  if (["pyrella-collection", "pyrella-rank-five"].includes(scenario.name)) {
+    await button("Collection").click();
+    const next = page.getByRole("button", { name: "Next page", exact: true });
+    while (
+      !(await page.getByRole("button", { name: "Inspect Pyrella", exact: true }).count()) &&
+      (await next.isVisible())
+    )
+      await next.click();
+    await button("Inspect Pyrella").click();
+  } else if (["skybex-collection", "skybex-rank-five"].includes(scenario.name)) {
     await button("Collection").click();
     const next = page.getByRole("button", { name: "Next page", exact: true });
     while (

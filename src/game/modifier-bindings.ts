@@ -74,6 +74,7 @@ const owners = {
   cleanseRewards: bind("./combat/statuses", "cleanseRewards"),
   controlRewards: bind("./combat/statuses", "controlRewards"),
   courtRemembers: bind("./combat/legendary", "courtRemembers"),
+  passingFlame: bind("./combat/damage-reactions", "passingFlame"),
   damageRewards: bind("./combat/damage-reactions", "damageRewards"),
   decayBlock: bind("./combat/turns", "decayBlock"),
   dodgeResponse: bind("./combat/damage-reactions", "dodgeResponse"),
@@ -294,6 +295,7 @@ export const modifierImplementations = freeze(
       "lucky-clover": [owners.damageRewards],
     } satisfies Record<BoonId, Binding>,
     passives: {
+      passingFlame: [owners.passingFlame],
       mountainGuide: [owners.mountainGuide],
       petalwake: [owners.dodgeResponse],
       expressDelivery: [owners.expressDelivery],
@@ -346,6 +348,7 @@ export const modifierQueries = freeze(
       rainkeeper: [owners.manaCapacity],
     } satisfies Partial<Record<BoonId, Binding>>,
     passives: {
+      passingFlame: [owners.passingFlame],
       wellRead: [owners.drawHasAnotherCard],
     } satisfies Partial<Record<PassiveKind, Binding>>,
   },

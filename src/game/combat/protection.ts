@@ -84,7 +84,7 @@ export function* restoreHealth(
 export function* shareProtection(
   state: GameState,
   source: Combatant,
-  effect: "block" | "thorns" | "waterThorns",
+  effect: "block" | "thorns" | "waterThorns" | "fireThorns",
   amount: number,
   events: GameEvent[],
 ): Resolution<void> {

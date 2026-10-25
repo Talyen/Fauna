@@ -30,9 +30,11 @@ export type SpeciesId =
   | "almanelle"
   | "orifable"
   | "arabesca"
-  | "skybex";
+  | "skybex"
+  | "pyrella";
 export type Effect = AbilityKind;
 type PassiveEffect =
+  | { kind: "passingFlame"; amount: number }
   | { kind: "mountainGuide"; amount: number }
   | { kind: "petalwake"; amount: number }
   | { kind: "expressDelivery"; amount: number }

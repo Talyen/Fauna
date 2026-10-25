@@ -19,6 +19,7 @@ export type AbilityKind =
   | "waterThorns"
   | "teamCleanse"
   | "dreamDouble"
+  | "sparkDecoy"
   | "nightmareHarvest"
   | "teamPurge"
   | "teamThaw"
@@ -33,7 +34,7 @@ export type AbilityKind =
   | "dodge";
 
 export type SupplementalEffect =
-  | { kind: "drawKeyword"; keyword: "light" | "nature" | "water"; amount: number }
+  | { kind: "drawKeyword"; keyword: "light" | "nature" | "water" | "burn"; amount: number }
   | { kind: "nullifyFreeze"; amount: number }
   | { kind: "damage"; damageType: DamageType; amount: number; leech?: boolean }
   | { kind: "status"; status: "armor" | "thorns" | "dodge"; amount: number }
@@ -46,6 +47,7 @@ export type SupplementalEffect =
 export type SupplementalKind = SupplementalEffect["kind"];
 
 interface AbilityParameters {
+  mana: { target?: never; restore?: true };
   attack: {
     damageType: DamageType;
     alternateDamageType?: DamageType;

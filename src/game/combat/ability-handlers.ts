@@ -39,7 +39,7 @@ import type { AbilityKind } from "../rules/ability-types";
 import type { Combatant } from "./state";
 
 function purgeAttackThorns(state: GameState, unit: Combatant, events: GameEvent[]) {
-  for (const status of ["thorns", "waterThorns"] as const)
+  for (const status of ["thorns", "waterThorns", "fireThorns"] as const)
     if (ensureCombat(unit)[status] > 0) removeEffects(unit, "purge", 1, events, state, status);
 }
 
@@ -260,6 +260,20 @@ const dreamDoubleAbility: PrimaryHandler<"dreamDouble"> = (context) => {
   });
 };
 
+const sparkDecoyAbility: PrimaryHandler<"sparkDecoy"> = (context) => {
+  const { state, actor, value, events, name } = context;
+  grantStatus(actor, "fireThorns", value, events, state);
+  ensureCombat(actor).negate = true;
+  events.push({
+    kind: "status",
+    actorId: actor.id,
+    targetId: actor.id,
+    status: "negate",
+    outcome: "apply",
+    text: `${name} gains Negate`,
+  });
+};
+
 const nightmareHarvestAbility: PrimaryHandler<"nightmareHarvest"> = (context) => {
   const { state, action, value, events, enemy } = context;
   let removed = 0;
@@ -414,6 +428,7 @@ const handlers: PrimaryHandlers = {
   reflectAttack: reflectAttackAbility,
   resurrect: resurrectAbility,
   dreamDouble: dreamDoubleAbility,
+  sparkDecoy: sparkDecoyAbility,
   nightmareHarvest: nightmareHarvestAbility,
   waterThorns: waterThornsAbility,
   draw: drawAbility,

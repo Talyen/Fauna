@@ -72,8 +72,11 @@ export function cardText(
   let text = abilityRule(card.effect).describe(card, { value, level, power, label: keywordLabel });
   for (const effect of abilityExtras(card, power)) {
     text +=
-      (card.effect === "teamClearBlind" || card.effect === "swapLowest" ? " / " : "; ") +
-      supplementalRule(effect.kind).describe(effect, card, keywordLabel);
+      (card.effect === "teamClearBlind" ||
+      card.effect === "swapLowest" ||
+      (card.effect === "mana" && card.restore)
+        ? " / "
+        : "; ") + supplementalRule(effect.kind).describe(effect, card, keywordLabel);
   }
   if (card.leech) text += "; Leech";
   if (card.repeatChance) text += `; ${card.repeatChance}% chance to repeat`;
