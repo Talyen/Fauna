@@ -10,7 +10,7 @@ Fauna adapts Alchemy's combat foundations to individual creatures. Physical, Nat
 
 ### Periodic damage
 
-Burn, Poison and Bleed hits deal immediate damage and add their resolved damage as stacks. At the owner's turn window, Burn deals its stacks and halves (one clears); Poison deals its stacks and loses 20%, rounded normally with a minimum decay of one; Bleed deals its stacks once and clears. Ticks bypass Block, cannot Dodge or crit, do not add stacks, and stop on knockout. Different statuses do not trigger elemental reactions.
+Burn, Poison and Bleed hits deal immediate damage and add damage before Block as stacks, with applicable Armor mitigation. At the owner's turn window, Burn deals its stacks and halves (one clears); Poison deals its stacks and loses 20%, rounded normally with a minimum decay of one; Bleed deals its stacks once and clears. Ticks bypass Block, cannot Dodge or crit, do not add stacks, and stop on knockout. Different statuses do not trigger elemental reactions.
 
 ### Stun and Freeze
 
@@ -22,11 +22,13 @@ Attacks have a base 5% Dodge chance before defenses and attacks on both sides ha
 
 ### Block and Armor
 
-Block absorbs damage before Health and halves at the owner's next turn, rounded normally. Armor reduces Physical and Stun damage after Block and loses one stack when positive damage gets through.
+Block absorbs damage before Health and halves at the owner's next turn, rounded normally. Armor reduces Physical and Stun damage after Block when calculating Health loss. Armor loses one stack when the hit has positive damage after applicable Armor mitigation, including damage absorbed by Block.
+
+Block protects Health without suppressing hit effects, status buildup, Leech or damage-based reactions. Those mechanics use damage before Block, with applicable Armor mitigation. Leech includes absorbed damage and actual Health lost, capped by that mitigated hit so neither Armor nor overkill can inflate it. Rules explicitly based on Health lost continue to use actual Health loss. Grounding, Blood Ward and Venom Ward retain their explicit Block-dependent rules. Dodge and Negate remain separate from Block.
 
 ### Thorns and Water Thorns
 
-Thorns retaliate for their current stack count as Nature damage after an attack removes Health, then lose one stack; retaliation cannot trigger another retaliation. Water Thorns follow the same trigger and decay but deal Water damage from a separate stack pool; both can retaliate from one qualifying attack while the defender survives. Neither triggers from Dodge, full absorption, periodic/derived damage or retaliation.
+Thorns retaliate for their current stack count as Nature damage when an opposing attack hits, including attacks fully absorbed by Block or Armor, then lose one stack; retaliation cannot trigger another retaliation. Water Thorns follow the same trigger and decay but deal Water damage from a separate stack pool; both can retaliate from one qualifying attack while the defender survives. Neither triggers from Dodge, periodic/derived damage or retaliation. Negate retains its explicit Thorns retaliation rule.
 
 Water Thorns persist through turns, swaps and resume, use ordinary stack caps and protection sharing, and remain a separate Purge category after Nature Thorns.
 
@@ -40,7 +42,7 @@ Temporary Dodge expires at the owner's next turn, including in backup or on a sk
 
 ### Healing and Leech
 
-Leech restores half actual Health lost, capped by overkill and maximum Health. Bleed defers its Leech until the later Bleed tick; cleansing Bleed cancels that pending payout. Healing does not revive during combat. Enemies have no automatic round healing; healing requires an ability or passive.
+Leech restores half damage dealt, including damage absorbed by Block, capped by applicable Armor, overkill and maximum Health. Bleed defers its Leech until the later Bleed tick; cleansing Bleed cancels that pending payout. Healing does not revive during combat. Enemies have no automatic round healing; healing requires an ability or passive.
 
 ### Cleanse and Purge
 
@@ -50,11 +52,11 @@ Cleanse removes harmful categories in Burn, Poison, Bleed, Stun, Freeze, Blind o
 
 Reflection redirects Burn, Poison, Bleed, Stun, Freeze or Blind to a random living deployed opponent, including the attacker. Buildup retains its original post-mitigation strength; direct damage still lands on the original target. The recipient uses ordinary control thresholds and immunity. The reflecting creature owns the reflected status, which cannot reflect again.
 
-A pending Reflect charge guarantees the next eligible reflection before passive chance is considered. Repeated grants refresh one charge; it survives turns, swaps and resume, resets each battle and can be Purged. Only a new eligible application spends protection or rolls passive reflection: immune/capped statuses and already present Blind do neither. Damage without status buildup, including Dodges, full absorption, periodic ticks and ordinary retaliation, cannot trigger reflection; independently applied Blind remains eligible. [Nullify](#nullify) is checked first. Burn-only Reflect is spent before unrestricted Reflect.
+A pending Reflect charge guarantees the next eligible reflection before passive chance is considered. Repeated grants refresh one charge; it survives turns, swaps and resume, resets each battle and can be Purged. Only a new eligible application spends protection or rolls passive reflection: immune/capped statuses and already present Blind do neither. Damage without status buildup, including Dodges, periodic ticks and ordinary retaliation, cannot trigger reflection; independently applied Blind remains eligible. Block does not suppress buildup or reflection. [Nullify](#nullify) is checked first. Burn-only Reflect is spent before unrestricted Reflect.
 
 ### Nullify
 
-**Nullify** prevents the next applicable Burn, Poison, Bleed, Stun, Freeze or Blind application while leaving direct damage intact and existing statuses unchanged. It is non-stacking, lasts until consumed or Purged, and survives turns, swaps and resume. Dodge, fully blocked damage, periodic ticks, immunity, capped buildup and already present non-stacking effects do not consume it. Nullify precedes reflection and can stop reflected statuses. Repeated grants refresh one protection rather than adding charges. It is combat vocabulary, not a progression category.
+**Nullify** prevents the next applicable Burn, Poison, Bleed, Stun, Freeze or Blind application while leaving direct damage intact and existing statuses unchanged. It is non-stacking, lasts until consumed or Purged, and survives turns, swaps and resume. Dodge, periodic ticks, immunity, capped buildup and already present non-stacking effects do not consume it. Hits absorbed by Block still apply statuses and can consume Nullify. Nullify precedes reflection and can stop reflected statuses. Repeated grants refresh one protection rather than adding charges. It is combat vocabulary, not a progression category.
 
 ### Negate
 

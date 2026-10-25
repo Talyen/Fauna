@@ -186,12 +186,12 @@ export function* grantArmor(
 export function* leechHealth(
   state: GameState,
   unit: Combatant,
-  lost: number,
+  dealt: number,
   events: GameEvent[],
   afflicted = false,
 ): Resolution<void> {
-  if (lost <= 0) return;
-  let amount = lost / 2;
+  if (dealt <= 0) return;
+  let amount = dealt / 2;
   if (!isEnemy(unit)) {
     if (afflicted && hasTalent(state, "leech.affliction-siphon"))
       amount *= 1 + talentRule("leech.affliction-siphon").percent / 100;

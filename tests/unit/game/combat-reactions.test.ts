@@ -6,6 +6,129 @@ import { species } from "../../../src/game/content";
 import type { GameEvent } from "../../../src/game/types";
 import { run } from "../../support/game";
 
+function blockedHitFixture(block = 20) {
+  const state = structuredClone(run());
+  state.rng = 1;
+  state.talents = [];
+  state.boons = [];
+  const source = state.team[0]!;
+  source.health = 10;
+  source.block = 0;
+  source.combat = freshCombat();
+  const target = state.battle!.enemies[0]!;
+  target.species = "mossguard";
+  target.health = target.maxHealth = 100;
+  target.block = block;
+  target.combat = freshCombat();
+  const events: GameEvent[] = [];
+  return { state, source, target, events };
+}
+
+it.each(["player", "enemy"] as const)(
+  "Block independence: both Thorns pools retaliate against a blocked %s attack and spend stacks",
+  (side) => {
+    const { state, source: ally, target: enemy, events } = blockedHitFixture();
+    const [source, target] = side === "player" ? [ally, enemy] : [enemy, ally];
+    source.block = 0;
+    target.block = 20;
+    target.combat = { ...freshCombat(), thorns: 2, waterThorns: 3 };
+    const before = source.health;
+    const health = target.health;
+    hit(state, source, target, 4, "nature", events);
+    expect(target.health).toBe(health);
+    expect(target.block).toBe(16);
+    expect(source.health).toBe(before - 5);
+    expect(target.combat).toMatchObject({ thorns: 1, waterThorns: 2 });
+    expect(events.filter((event) => event.kind === "damage").map((event) => event.damageType)).toEqual([
+      "nature",
+      "nature",
+      "water",
+    ]);
+  },
+);
+
+it("Block independence: Thorns also retaliate when Armor absorbs an attack", () => {
+  const { state, source, target, events } = blockedHitFixture(0);
+  target.combat = { ...freshCombat(), armor: 20, thorns: 2 };
+  hit(state, source, target, 4, "physical", events);
+  expect(target.health).toBe(100);
+  expect(source.health).toBe(8);
+  expect(target.combat.thorns).toBe(1);
+});
+
+it.each(["periodic", "derived", "retaliation"] as const)(
+  "Block independence: %s damage cannot start a Thorns chain",
+  (origin) => {
+    const { state, source, target, events } = blockedHitFixture();
+    target.combat.thorns = 3;
+    hit(state, source, target, 4, "water", events, { origin });
+    expect(source.health).toBe(10);
+    expect(target.combat.thorns).toBe(3);
+  },
+);
+
+it.each([0, 4, 20])("Block independence: Leech and Armor mitigation agree with %i Block", (block) => {
+  const { state, source, target, events } = blockedHitFixture(block);
+  target.combat.armor = 2;
+  hit(state, source, target, 10, "physical", events, { origin: "ability", leech: true });
+  expect(source.health).toBe(14);
+  expect(target.health).toBe(100 - Math.max(0, 10 - block - 2));
+  expect(target.combat.armor).toBe(1);
+});
+
+it("Block independence: Leech counts absorbed damage without claiming overkill", () => {
+  const { state, source, target, events } = blockedHitFixture(2);
+  target.health = 1;
+  hit(state, source, target, 100, "water", events, { origin: "ability", leech: true });
+  expect(source.health).toBe(12);
+  expect(target.health).toBe(0);
+});
+
+it.each(["burn", "poison", "bleed", "stun", "freeze"] as const)(
+  "Block independence: fully absorbed %s hits still apply buildup",
+  (type) => {
+    const { state, source, target, events } = blockedHitFixture();
+    hit(state, source, target, 6, type, events);
+    expect(target.health).toBe(100);
+    expect(target.block).toBe(14);
+    expect(target.combat[type]).toBe(6);
+  },
+);
+
+it.each(["nullify", "reflect"] as const)(
+  "Block independence: %s still handles statuses from absorbed hits",
+  (protection) => {
+    const { state, source, target, events } = blockedHitFixture();
+    target.combat[protection] = true;
+    hit(state, source, target, 6, "poison", events);
+    expect(target.health).toBe(100);
+    expect(target.combat.poison).toBe(0);
+    expect(target.combat[protection]).toBe(false);
+    expect(state.team.reduce((sum, ally) => sum + (ally.combat?.poison ?? 0), 0)).toBe(
+      protection === "reflect" ? 6 : 0,
+    );
+  },
+);
+
+it.each([4, 20])("Block independence: Grounding explicitly prevents Stun with %i Block", (block) => {
+  const { state, source: ally, target: enemy, events } = blockedHitFixture();
+  state.talents = ["block.grounding"];
+  ally.block = block;
+  hit(state, enemy, ally, 4, "stun", events);
+  expect(ally.health).toBe(10);
+  expect(ally.combat!.stun).toBe(0);
+});
+
+it("Block independence: Dodge still prevents Block spending, buildup, Leech and Thorns", () => {
+  const { state, source, target, events } = blockedHitFixture();
+  target.combat.thorns = 3;
+  hit(state, source, target, 6, "burn", events, { origin: "ability", leech: true, blindMiss: true });
+  expect(source.health).toBe(10);
+  expect(target.health).toBe(100);
+  expect(target.block).toBe(20);
+  expect(target.combat).toMatchObject({ burn: 0, thorns: 3 });
+});
+
 it("keeps the last controlled turn skipped through recovery and resumes on the following turn", () => {
   const state = structuredClone(run());
   const ally = state.team[0]!;

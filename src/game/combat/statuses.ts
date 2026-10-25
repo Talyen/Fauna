@@ -219,7 +219,7 @@ export function* applyHarmfulStatus(
   damage: number,
   type: DamageType | "blind",
   events: GameEvent[],
-  options: { leech?: boolean; reflected?: boolean } = {},
+  options: { leech?: boolean; reflected?: boolean; blocked?: boolean } = {},
 ): Resolution<StatusResult> {
   if (
     type !== "burn" &&
@@ -240,7 +240,10 @@ export function* applyHarmfulStatus(
     (stats.controlled ||
       stats.skipped ||
       stats.cooldown > 0 ||
-      (type === "stun" && alliedTarget && target.block > 0 && hasTalent(state, "block.grounding")));
+      (type === "stun" &&
+        alliedTarget &&
+        (target.block > 0 || options.blocked) &&
+        hasTalent(state, "block.grounding")));
   if (
     target.health > 0 &&
     !immune &&
@@ -329,14 +332,7 @@ export function* applyHarmfulStatus(
       text: `${unitName(target)} gains ${gained} ${type}.`,
     });
   }
-  if (
-    (type === "stun" || type === "freeze") &&
-    target.health > 0 &&
-    (stats.controlled ||
-      stats.skipped ||
-      stats.cooldown > 0 ||
-      (type === "stun" && alliedTarget && target.block > 0 && hasTalent(state, "block.grounding")))
-  )
+  if ((type === "stun" || type === "freeze") && target.health > 0 && immune)
     events.push({
       kind: "status",
       targetId: target.id,
@@ -344,15 +340,7 @@ export function* applyHarmfulStatus(
       outcome: "immune",
       text: `${unitName(target)} is immune to ${type} buildup.`,
     });
-  if (
-    (type === "stun" || type === "freeze") &&
-    source.health > 0 &&
-    target.health > 0 &&
-    !stats.controlled &&
-    !stats.skipped &&
-    stats.cooldown === 0 &&
-    !(type === "stun" && alliedTarget && target.block > 0 && hasTalent(state, "block.grounding"))
-  ) {
+  if ((type === "stun" || type === "freeze") && source.health > 0 && target.health > 0 && !immune) {
     const beforeStacks = stats[type];
     stats[type] = Math.min(STACK_LIMIT, stats[type] + damage);
     events.push({

@@ -283,7 +283,7 @@ describe("creature traits and deck circulation", () => {
     const healed = accept(knocked, { type: "play", cardId: heal.id });
     expect(healed.team[2]!.health).toBe(0);
   });
-  it("deals Thorns only for health damage", () => {
+  it("deals Thorns on landed attacks even when Block absorbs all damage", () => {
     let s = teamRun(3, ["emberback", "prismram", "mossguard"]);
     expect(s.team[1]!.block).toBe(0);
     const events: Parameters<typeof hit>[5] = [];
@@ -296,14 +296,14 @@ describe("creature traits and deck circulation", () => {
       d.team[0]!.block = 4;
       ensureCombat(d.team[0]!).thorns = 2;
       hit(d, d.battle!.enemies[0]!, d.team[0]!, 4, "nature", events);
-      expect(d.battle!.enemies[0]!.health).toBe(d.battle!.enemies[0]!.maxHealth);
-      expect(ensureCombat(d.team[0]!).thorns).toBe(2);
+      expect(d.battle!.enemies[0]!.health).toBe(d.battle!.enemies[0]!.maxHealth - 2);
+      expect(ensureCombat(d.team[0]!).thorns).toBe(1);
       expect(d.team[0]!.health).toBe(s.team[0]!.health);
       d.rng = 1;
       hit(d, d.battle!.enemies[1]!, d.team[0]!, 4, "burn", events);
     });
-    expect(s.battle!.enemies[1]!.health).toBe(s.battle!.enemies[1]!.maxHealth - 2);
-    expect(s.team[0]!.combat!.thorns).toBe(1);
+    expect(s.battle!.enemies[1]!.health).toBe(s.battle!.enemies[1]!.maxHealth - 1);
+    expect(s.team[0]!.combat!.thorns).toBe(0);
   });
   it("reshuffles deterministically and retains every live card exactly once across zones", () => {
     let s = run(8);

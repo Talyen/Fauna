@@ -20,8 +20,11 @@ export interface HitContext {
   events: GameEvent[];
 }
 export interface HitPayment {
+  /** Mitigated damage before Block, used by hit effects and buildup. */
   readonly damage: number;
   readonly lost: number;
+  /** Absorbed damage plus actual Health lost, capped by mitigated damage for Leech. */
+  readonly dealt: number;
   readonly blocked: number;
   readonly blockSpent: number;
   readonly depletedBlock: boolean;
@@ -126,7 +129,7 @@ export function publishHit(
 }
 export function* damageRewards(
   { state, source, target, type, events }: HitContext,
-  { damage, lost }: HitPayment,
+  { damage, lost, dealt }: HitPayment,
   policy: ReturnType<typeof packetPolicy>,
 ): Resolution<void> {
   const { attack } = policy;
@@ -143,7 +146,7 @@ export function* damageRewards(
     gainGold(state, talentRule("poison.toxic-profit").amount, events);
   if (target.health === 0 && !alliedTarget && alliedSource && state.boons.includes("bone-charm"))
     yield* reaction("restoreHealth", source, boonRule("bone-charm").healing, events, false, state);
-  if (alliedSource && !alliedTarget && lost > 0 && (source.health > 0 || policy.deadSource)) {
+  if (alliedSource && !alliedTarget && dealt > 0 && (source.health > 0 || policy.deadSource)) {
     if (type === "bleed" && state.boons.includes("cutpurse-knife"))
       gainGold(state, boonRule("cutpurse-knife").gold, events);
     if (
@@ -151,7 +154,7 @@ export function* damageRewards(
       state.boons.includes("parasitic-bloom") &&
       succeeds(state, boonRule("parasitic-bloom").chance, false, events)
     )
-      yield* reaction("leechHealth", state, source, lost, events, true);
+      yield* reaction("leechHealth", state, source, dealt, events, true);
     // Poison ticks and triggered damage carry the same Leech talent as direct Poison hits.
     if (
       !policy.direct &&
@@ -160,10 +163,11 @@ export function* damageRewards(
       hasTalent(state, "leech.virulent-leech") &&
       succeeds(state, talentRule("leech.virulent-leech").percent / 100, false, events)
     )
-      yield* reaction("leechHealth", state, source, lost, events, true);
+      yield* reaction("leechHealth", state, source, dealt, events, true);
     if (
       attack &&
       type === "nature" &&
+      lost > 0 &&
       state.boons.includes("lucky-clover") &&
       succeeds(state, boonRule("lucky-clover").chance, false, events)
     )
@@ -179,7 +183,7 @@ export function* damageRewards(
         boonRule("brass-censer").burnChance
       )
         yield* reaction("hit", state, source, target, damage, "burn", events, { origin: "proc" });
-      else yield* reaction("leechHealth", state, source, lost, events, stats.poison > 0 || stats.bleed > 0);
+      else yield* reaction("leechHealth", state, source, dealt, events, stats.poison > 0 || stats.bleed > 0);
     }
   }
 }
@@ -212,7 +216,7 @@ export function* waterFollowups(
 }
 export function* attackProcs(
   { state, source, target, type, events }: HitContext,
-  { damage, lost, critical }: HitPayment,
+  { damage, lost, dealt, critical }: HitPayment,
   {
     partingCut,
     bleedBefore,
@@ -304,7 +308,7 @@ export function* attackProcs(
     if (chanceLeech && type === "bleed" && !leech) {
       if (!suppressed) deferLeech(stats, source.id, Math.max(0, stats.bleed - bleedBefore));
     } else if (chanceLeech && !leech && !blessedLeech)
-      yield* reaction("leechHealth", state, source, lost, events, stats.poison > 0 || stats.bleed > 0);
+      yield* reaction("leechHealth", state, source, dealt, events, stats.poison > 0 || stats.bleed > 0);
   }
 }
 export function* thornRetaliation({

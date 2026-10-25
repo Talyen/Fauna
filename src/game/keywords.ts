@@ -60,19 +60,19 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Block",
       "status",
       "active",
-      "Absorbs incoming damage before health; Each point absorbs one damage and is spent; Remaining Block normally halves at the start of your next turn, rounded normally",
+      "Absorbs incoming damage before Health; Does not prevent hit effects, buildup or Leech unless specified; Remaining Block normally halves at the start of your next turn, rounded normally",
     ),
     waterThorns: entry(
       "Water Thorns",
       "effect",
       "active",
-      "Water Thorns retaliate with Water damage when an opposing attack removes Health, then lose 1 stack; Separate from Nature Thorns",
+      "Water Thorns retaliate with Water damage when hit, even through Block, then lose 1 stack; Separate from Nature Thorns",
     ),
     thorns: entry(
       "Thorns",
       "effect",
       "active",
-      "Thorns retaliate with Nature damage when an opposing attack removes Health, then lose 1 stack",
+      "Thorns retaliate with Nature damage when hit, even through Block, then lose 1 stack",
       ["Thorn"],
     ),
     dodge: entry(
@@ -119,7 +119,7 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Leech",
       "effect",
       "active",
-      "Restore half the Health damage dealt, rounded normally; Bleed pays Leech with its later tick",
+      "Restore half the damage dealt, including damage absorbed by Block, rounded normally; Overkill does not count; Bleed pays Leech with its later tick",
       ["Leeches", "Leeching"],
     ),
     cleanse: entry("Cleanse", "effect", "active", "Remove harmful effects from an ally", [

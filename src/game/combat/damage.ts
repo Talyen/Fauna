@@ -57,7 +57,7 @@ export function* negateAttack(
   return true;
 }
 
-type HitResult = { outcome: "ignored" | "miss" } | { outcome: "landed"; lost: number };
+type HitResult = { outcome: "ignored" | "miss" } | { outcome: "landed"; lost: number; dealt: number };
 
 export function* bounce(
   state: GameState,
@@ -168,7 +168,8 @@ export function* hit(
     yield* reaction("hit", state, source, target, wrongFoot, "light", events, { origin: "proc" });
   if (
     lost !== undefined &&
-    lost > 0 &&
+    result.outcome === "landed" &&
+    result.dealt > 0 &&
     type === "stun" &&
     source.health > 0 &&
     target.health > 0 &&
@@ -259,7 +260,7 @@ export function* resolveHit(
       affectedStatus: "freeze",
       text: `${unitName(target)} nullifies Freeze damage`,
     });
-    return { outcome: "landed", lost: 0 };
+    return { outcome: "landed", lost: 0, dealt: 0 };
   }
   const nextPhysical =
     direct && alliedSource ? ensureCombat(source)[talentRule("dodge.open-flank").state] : 0;
@@ -312,12 +313,17 @@ export function* resolveHit(
     (type === "physical" || type === "stun")
   )
     erode(boonRule("sundering-charm").armor);
+  // Other mechanics use the hit before Block; Armor still mitigates their damage.
+  const effectDamage = armorApplies(state, target, type)
+    ? armoredDamage(damage + blocked, stats.armor)
+    : damage + blocked;
   if (armorApplies(state, target, type)) damage = armoredDamage(damage, stats.armor);
   const lost = loseHealth(state, target, damage, events);
-  if (damage > 0) {
+  const dealt = Math.min(effectDamage, blocked + lost);
+  if (effectDamage > 0) {
     erode(1);
-    if (alliedSource && type === "poison" && hasTalent(state, "poison.caustic")) erode(damage);
-    if (alliedSource && type === "burn" && hasTalent(state, "burn.melting-point")) erode(damage);
+    if (alliedSource && type === "poison" && hasTalent(state, "poison.caustic")) erode(effectDamage);
+    if (alliedSource && type === "burn" && hasTalent(state, "burn.melting-point")) erode(effectDamage);
   }
   if (lost > 0) yield* reaction("healthThresholds", state, target, before, events);
   if (alliedTarget && lost > 0 && hasTalent(state, "dodge.finding-rhythm"))
@@ -325,7 +331,15 @@ export function* resolveHit(
       talentRule("dodge.finding-rhythm").maximum,
       stats.rhythm + talentRule("dodge.finding-rhythm").amount,
     );
-  const facts: HitPayment = { damage, lost, blocked, blockSpent, depletedBlock, critical };
+  const facts: HitPayment = {
+    damage: effectDamage,
+    lost,
+    dealt,
+    blocked,
+    blockSpent,
+    depletedBlock,
+    critical,
+  };
   yield* blockDepletionRewards(context, facts, attack);
   publishHit(context, facts, options);
   yield* damageRewards(context, facts, policy);
@@ -334,11 +348,21 @@ export function* resolveHit(
   if (direct && alliedSource && !alliedTarget && source.health > 0 && type === "water") {
     yield* waterFollowups(context, erode);
   }
-  if (policy.buildup && damage > 0 && source.health > 0) {
+  if (policy.buildup && effectDamage > 0 && source.health > 0) {
     const bleedBefore = stats.bleed;
-    const statusResult = yield* reaction("applyHarmfulStatus", state, source, target, damage, type, events, {
-      leech,
-    });
+    const statusResult = yield* reaction(
+      "applyHarmfulStatus",
+      state,
+      source,
+      target,
+      effectDamage,
+      type,
+      events,
+      {
+        leech,
+        blocked: blocked > 0,
+      },
+    );
     depletions.push(...statusResult.depletions);
     if (direct && alliedSource && !alliedTarget && source.health > 0)
       yield* attackProcs(
@@ -354,15 +378,15 @@ export function* resolveHit(
         erode,
       );
     // Captured damage remains valid even if retaliation later removes the attacker.
-    if (direct && lost > 0 && target.health > 0) yield* thornRetaliation(context);
+    if (direct && target.health > 0) yield* thornRetaliation(context);
     if ((leech || blessedLeech) && type !== "bleed" && source.health > 0)
-      yield* reaction("leechHealth", state, source, lost, events, stats.poison > 0 || stats.bleed > 0);
+      yield* reaction("leechHealth", state, source, dealt, events, stats.poison > 0 || stats.bleed > 0);
     if (statusResult.appliedControl && source.health > 0)
       yield* reaction("controlRewards", state, source, target, type, events);
   }
   // Absorbed critical hits still land; only damage-based procs require positive damage.
   if (
-    damage === 0 &&
+    effectDamage === 0 &&
     direct &&
     alliedSource &&
     !alliedTarget &&
@@ -372,7 +396,8 @@ export function* resolveHit(
     hasTalent(state, "physical.rupture")
   )
     yield* detonateBleed(state, source, target, events);
+  if (effectDamage === 0 && direct && target.health > 0) yield* thornRetaliation(context);
   if (direct) yield* passiveRetaliation(context, depletedBlock);
   for (const depletion of depletions) yield* reaction("triggerArmorBreak", state, depletion, events);
-  return { outcome: "landed", lost };
+  return { outcome: "landed", lost, dealt };
 }
