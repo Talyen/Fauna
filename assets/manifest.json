@@ -2348,6 +2348,50 @@
       "aspect": [3, 4],
       "provenance": "Unchanged Dulcera artwork from Google Drive: https://drive.google.com/file/d/101oV5XFxz3DMF5apa36E7nEbTk-_0Kel/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "creature.aerostat",
+      "origin": "repository",
+      "source": "public/art/creatures/aerostat/portrait.png",
+      "output": "art/aerostat/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Aerostat artwork from Google Drive: https://drive.google.com/file/d/1X-PzTKAuLvbA3TWVCqcIwKB-fq2PmIip/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.aerostat.voyagers-rest",
+      "origin": "repository",
+      "source": "public/art/creatures/aerostat/voyagers-rest.png",
+      "output": "art/aerostat/voyagers-rest.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Aerostat artwork from Google Drive: https://drive.google.com/file/d/1Fn5H6DydGDCJ_Q-y1nJ9tGvo-aDq-Kei/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.aerostat.true-bearing",
+      "origin": "repository",
+      "source": "public/art/creatures/aerostat/true-bearing.png",
+      "output": "art/aerostat/true-bearing.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Aerostat artwork from Google Drive: https://drive.google.com/file/d/1TDEiAbrOny7C9sDQuo5G-pSoQ69t_GVV/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.aerostat.parcel-drop",
+      "origin": "repository",
+      "source": "public/art/creatures/aerostat/parcel-drop.png",
+      "output": "art/aerostat/parcel-drop.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Aerostat artwork from Google Drive: https://drive.google.com/file/d/1-wi60sXxkABUNwlw3RdsbBC8z8Z7cVgn/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

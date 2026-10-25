@@ -332,7 +332,11 @@ const dodgeAbility: PrimaryHandler<"dodge"> = (context) => {
 };
 
 const teamClearBlindAbility: PrimaryHandler<"teamClearBlind"> = (context) => {
-  const { state, action, events } = context;
+  const { state, action, def, value, events } = context;
+  if (def.draw) {
+    if (action.side === "player") draw(state, value, events);
+    else if (action.actor.deck) drawBossCards(state, action.actor.deck, value);
+  }
   for (const unit of alive(friendlyRow(state, action)))
     if (ensureCombat(unit).blind) removeEffects(unit, "cleanse", 1, events, state, "blind");
 };

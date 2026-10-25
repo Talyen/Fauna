@@ -29,7 +29,7 @@ export const resourcesRules = {
     adaptation: "extras",
     keywords: [],
     describe(_card, { value }) {
-      return `Create ${value} Food cards`;
+      return `Add ${value} Food to your hand`;
     },
   },
   createPearls: {

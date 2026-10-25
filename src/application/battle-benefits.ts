@@ -224,8 +224,12 @@ export function battleBenefits(
         net > 0 ? net : mending || facts.healingOnPlay ? regained : 0,
       );
     }
-    case "teamClearBlind":
-      return controlRemoval(allies.filter((unit) => unit.combat?.blind).length);
+    case "teamClearBlind": {
+      const blinded = allies.filter((unit) => unit.combat?.blind).length;
+      return blinded > 0
+        ? controlRemoval(blinded)
+        : support(def.draw ? "standardUtility" : "none", def.draw ? value : 0);
+    }
     case "repeatNextCard":
       return support(state.battle.repeatNext.player ? "none" : "standardUtility");
     case "springbound": {

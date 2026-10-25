@@ -6,6 +6,7 @@ import {
   victoryGoldBonus,
 } from "./combat/battle-modifiers";
 import { battlefield } from "./battlefield";
+import { wellProvisioned } from "./combat/food";
 import { bossDeck, removeDepartedMinions } from "./combat/legendary";
 import { species } from "./content";
 import { merchantPriceRange } from "./destinations";
@@ -98,10 +99,7 @@ export function beginBattle(state: StateAt<"teamSelection">, events: GameEvent[]
     turn: 1,
     mana: battleMana(state),
     maxMana: battleMana(state),
-    draw: shuffle(
-      state,
-      state.cards.map((c) => c.id),
-    ),
+    draw: state.cards.map((c) => c.id),
     hand: [],
     buffer: [],
     discard: [],
@@ -130,6 +128,8 @@ export function beginBattle(state: StateAt<"teamSelection">, events: GameEvent[]
     expedition: state.expedition,
     journey: { ...state.journey, outcome: null },
   });
+  wellProvisioned(active, events);
+  active.battle.draw = shuffle(active, active.battle.draw);
   for (const enemy of active.battle.enemies)
     if (species(enemy.species).legendary) {
       enemy.deck = bossDeck(active, enemy);

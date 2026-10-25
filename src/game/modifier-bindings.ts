@@ -26,6 +26,7 @@ type Modules = {
   "./combat/ability-modifiers": typeof import("./combat/ability-modifiers");
   "./combat/battle-modifiers": typeof import("./combat/battle-modifiers");
   "./combat/card-modifiers": typeof import("./combat/card-modifiers");
+  "./combat/food": typeof import("./combat/food");
   "./combat/damage": typeof import("./combat/damage");
   "./combat/damage-reactions": typeof import("./combat/damage-reactions");
   "./combat/damage-values": typeof import("./combat/damage-values");
@@ -54,6 +55,7 @@ function bind<M extends keyof Modules, N extends CallableName<M>>(module: M, nam
   return { module, name };
 }
 const owners = {
+  wellProvisioned: bind("./combat/food", "wellProvisioned"),
   gentlePassage: bind("./team", "gentlePassage"),
   mountainGuide: bind("./team", "mountainGuide"),
   afterPlayerCard: bind("./combat/card-modifiers", "afterPlayerCard"),
@@ -295,6 +297,7 @@ export const modifierImplementations = freeze(
       "lucky-clover": [owners.damageRewards],
     } satisfies Record<BoonId, Binding>,
     passives: {
+      wellProvisioned: [owners.wellProvisioned],
       gentlePassage: [owners.gentlePassage],
       mountainGuide: [owners.mountainGuide],
       petalwake: [owners.dodgeResponse],

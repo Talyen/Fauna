@@ -185,7 +185,7 @@ export const KEYWORD_DEFINITIONS = freeze(
       "Consume",
       "card",
       "active",
-      "Remove this card from the battle after it is played; Unplayed cards discard normally",
+      "Remove this card for the rest of the battle after it is played; Your starting deck is restored each battle; Unplayed cards discard normally",
     ),
   },
   true,

@@ -27,7 +27,7 @@ Every authored ability costs 1 Mana.
 
 | Ability      | Base rule                                 |
 | ------------ | ----------------------------------------- |
-| Care Package | Create 2 Food cards                       |
+| Care Package | Add 2 Food to your hand                   |
 | Good Tidings | Restore 6 Health to the most injured ally |
 | Postal Swarm | Deal 2 Physical damage to all enemies     |
 

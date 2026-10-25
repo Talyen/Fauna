@@ -46,6 +46,7 @@ export type SupplementalEffect =
 export type SupplementalKind = SupplementalEffect["kind"];
 
 interface AbilityParameters {
+  teamClearBlind: { draw?: true };
   swap: { backupOnly?: true; target?: never };
   attack: {
     damageType: DamageType;

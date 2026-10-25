@@ -147,7 +147,7 @@ Favor species-exclusive mechanics independent of named abilities. Add new mechan
 
 ## Shared Food cards
 
-[Food definitions](../src/game/content/food.ts) own species-independent Apple, Mana Berries and Trail Bread. They cost 1 Mana, have Consume and are generated as temporary, level-zero cards with no creature owner. Keep them outside species kits and starter decks. [Orifable](content/creatures/orifable.md#shared-food) records targeting, generation, ownership and progression; [Food execution](../src/game/combat/food.ts) owns creation and use. Neutral cards remain usable after creator departure, participate in ordinary draw/overflow and expire with the battle. Save validation admits neutral ownership only for supported Food.
+[Food definitions](../src/game/content/food.ts) own species-independent Apple, Mana Berries and Trail Bread. They cost 1 Mana, have Consume and are generated as temporary, level-zero cards with no creature owner. Keep them outside species kits; Aerostat’s Well Provisioned shuffles temporary Food into each battle’s starting deck before opening draws. [Orifable](content/creatures/orifable.md#shared-food) records targeting, generation, ownership and progression; [Food execution](../src/game/combat/food.ts) owns creation and use. Neutral cards remain usable after creator departure, participate in ordinary draw/overflow and expire with the battle. Consume removes a played card for the remainder of that battle; Well Provisioned restores its tier’s starting supplies for every new battle, while extra Food created during combat expires with that combat. Save validation admits neutral ownership only for supported Food.
 
 ## Battle pile artwork
 

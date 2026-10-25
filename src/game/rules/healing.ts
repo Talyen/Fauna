@@ -49,8 +49,8 @@ export const healingRules = {
     enemy: "supported",
     adaptation: "extras",
     keywords: ["health"],
-    describe(_card) {
-      return "Cleanse allies Blind";
+    describe(card, { value }) {
+      return card.draw ? `Draw ${value} cards / Cleanse Blind from allies` : "Cleanse allies Blind";
     },
   },
   teamThaw: {

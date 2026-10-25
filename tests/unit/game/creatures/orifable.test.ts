@@ -29,7 +29,7 @@ function play(game: BattleState, definitionId: string, targetId?: string) {
 describe("Orifable and shared Food", () => {
   it("authors the selected kit, six delivery tiers and three neutral consumables", () => {
     expect(speciesCards("orifable").map((card) => [cardText(card), card.cost])).toEqual([
-      ["Create 2 Food cards", 1],
+      ["Add 2 Food to your hand", 1],
       ["Restore 6 Health to the most injured ally", 1],
       ["Deal 2 Physical damage to all enemies", 1],
     ]);

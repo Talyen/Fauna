@@ -31,9 +31,11 @@ export type SpeciesId =
   | "orifable"
   | "arabesca"
   | "skybex"
-  | "dulcera";
+  | "dulcera"
+  | "aerostat";
 export type Effect = AbilityKind;
 type PassiveEffect =
+  | { kind: "wellProvisioned"; amount: number }
   | { kind: "gentlePassage"; amount: number }
   | { kind: "mountainGuide"; amount: number }
   | { kind: "petalwake"; amount: number }
