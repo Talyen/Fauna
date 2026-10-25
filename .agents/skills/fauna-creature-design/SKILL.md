@@ -1,11 +1,13 @@
 ---
 name: fauna-creature-design
-description: Design and implement artwork-led Fauna creature kits with unique passives spanning six total tiers, coherent abilities, balance reasoning and Boss or Legendary behavior
+description: Design or revise Fauna abilities, passives and complete creature kits with elegant artwork-led mechanics, six passive tiers and coherent balance
 ---
 
 # Fauna creature design
 
-Use for new creatures and substantial kit redesigns. [Creature design](../../../Docs/CREATURE_DESIGN.md) owns the detailed design criteria, budgets and implementation boundaries; read the Boss section only when relevant.
+Use for individual abilities and passives, new creatures and substantial kit redesigns. [Creature design](../../../Docs/CREATURE_DESIGN.md) owns the detailed design criteria, budgets and implementation boundaries; read the Boss section only when relevant. For a focused ability or passive request, apply the relevant criteria without expanding it into a whole-kit redesign.
+
+Follow [elegant abilities and passives](../../../Docs/CREATURE_DESIGN.md#elegant-abilities-and-passives): create a thematic relationship the player understands at a glance. Avoid phase bookkeeping, card taxonomy, routine trigger caps and chains of exceptions, including phrases such as "non-attack ability", "first time each turn" and "until your next turn". Simplify the mechanic itself rather than disguising those restrictions with shorter copy or hiding them in notes. Balance through values and natural interactions before adding conditions. Keep necessary player decisions explicit and engine details in implementation notes.
 
 Inspect the portrait and ability images, then recommend one coherent kit faithful to their depicted actions. Keep every authored ability at exactly 1 Mana. Check caps, timing, upgrades and reachable payoffs.
 
