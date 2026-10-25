@@ -93,6 +93,8 @@ Recorded cues cover typed combat outcomes, healing, defense, rejection, knockout
 
 ## Boon selections
 
+Use the [Boon design skill](../.agents/skills/fauna-boon-design/SKILL.md) for artwork-led proposals and mechanic redesigns.
+
 [boons.ts](../src/game/content/boons.ts) owns available Boons, IDs, names and catalog order. [Boon rules](../src/game/rules/boons.ts) own numeric parameters and their displayed descriptions; execution and visible assessments use those same parameters. [Modifier bindings](../src/game/modifier-bindings.ts) identify the implementation functions; [Boon regressions](../tests/unit/game/boons.test.ts) protect timing, caps, actual-outcome triggers and recursion limits.
 
 Portraits are unchanged WebP selections copied from `Alchemy: src/assets/optimized/`; the manifest records per-file sources, rights and hashes. Light replaces Alchemy's Holy terminology. Forge, Wish, Potion and Companion Boons are excluded because Fauna lacks their mechanics; Consume-dependent Boons and talents are excluded despite Pearls using Consume.
