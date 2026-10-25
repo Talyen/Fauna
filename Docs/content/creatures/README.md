@@ -46,3 +46,5 @@ For new kits, use the [creature design workflow](../../CREATURE_DESIGN.md) and [
 - [Arabesca](arabesca.md): Petalwake, Springbound and the shared next-card repeat
 
 - [Skybex](skybex.md): Mountain Guide, Cloudstep and protection for incoming allies
+
+- [Dulcera](dulcera.md) · [implementation](../../../src/game/content/creatures/dulcera.ts) — Gentle Passage and restorative swaps

@@ -61,7 +61,7 @@ it("preserves authored text, targeting, scaling, keywords and enemy adaptations"
   expect(
     // New kit authoring is asserted directly below; preserve every older card's recorded contract.
     [
-      ...CARDS.filter((card) => !["arabesca", "skybex"].includes(card.species ?? "")),
+      ...CARDS.filter((card) => !["arabesca", "skybex", "dulcera"].includes(card.species ?? "")),
       PEARL,
       ...FOOD_CARDS,
     ].map((card) => ({

@@ -63,6 +63,8 @@ export const COMBAT_PACKS = [
   ["mossguard", "arabesca", "captoad"],
   ["skybex", "emberback", "prismram"],
   ["mossguard", "skybex", "captoad"],
+  ["dulcera", "emberback", "prismram"],
+  ["mossguard", "dulcera", "captoad"],
 ] as const;
 export const BOSSES = [
   {

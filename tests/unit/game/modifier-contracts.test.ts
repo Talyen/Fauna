@@ -30,7 +30,7 @@ import { requireBattle, teamRun } from "../../support/game";
 
 // Preserve the recorded modifier oracle across the save envelope and dormant team grant.
 // New kits have direct behavioral coverage in ability-contracts.test.ts and creatures/skybex.test.ts.
-const recordedSpecies = SPECIES.filter((entry) => !["arabesca", "skybex"].includes(entry.id));
+const recordedSpecies = SPECIES.filter((entry) => !["arabesca", "skybex", "dulcera"].includes(entry.id));
 // New Boons have direct outcome assertions in boons.test.ts
 const recordedBoons = BOONS.filter((boon) => !Object.hasOwn(NEW_BOON_EFFECTS, boon.id));
 const digest = (value: unknown) =>

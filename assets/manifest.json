@@ -2414,6 +2414,50 @@
       "aspect": [3, 4],
       "provenance": "Unchanged Skybex artwork from Google Drive: https://drive.google.com/file/d/1v59fZy8YS-MJuzoZGUcFaphkYlKc-fmg/view",
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "creature.dulcera",
+      "origin": "repository",
+      "source": "public/art/creatures/dulcera/portrait.png",
+      "output": "art/dulcera/portrait.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [4, 3],
+      "provenance": "Unchanged Dulcera artwork from Google Drive: https://drive.google.com/file/d/17yh8uw5uH7b7mkcxK0GfFalOMXrNz-J3/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.dulcera.chapel-light",
+      "origin": "repository",
+      "source": "public/art/creatures/dulcera/chapel-light.png",
+      "output": "art/dulcera/chapel-light.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Dulcera artwork from Google Drive: https://drive.google.com/file/d/1QJUZw-TEe59CFMOzf7_fmMfJgocDJMkQ/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.dulcera.meadow-shelter",
+      "origin": "repository",
+      "source": "public/art/creatures/dulcera/meadow-shelter.png",
+      "output": "art/dulcera/meadow-shelter.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Dulcera artwork from Google Drive: https://drive.google.com/file/d/12YKPTcxa0gPYJDE2yrV-T-VaaiRx2XZ3/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
+    },
+    {
+      "id": "action.dulcera.hushed-waters",
+      "origin": "repository",
+      "source": "public/art/creatures/dulcera/hushed-waters.png",
+      "output": "art/dulcera/hushed-waters.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "Unchanged Dulcera artwork from Google Drive: https://drive.google.com/file/d/101oV5XFxz3DMF5apa36E7nEbTk-_0Kel/view",
+      "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     }
   ]
 }

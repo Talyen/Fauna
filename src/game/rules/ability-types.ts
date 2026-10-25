@@ -46,6 +46,7 @@ export type SupplementalEffect =
 export type SupplementalKind = SupplementalEffect["kind"];
 
 interface AbilityParameters {
+  swap: { backupOnly?: true; target?: never };
   attack: {
     damageType: DamageType;
     alternateDamageType?: DamageType;

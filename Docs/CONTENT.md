@@ -85,7 +85,7 @@ Lossless encoding preserves resized pixels and alpha, but downsampling changes p
 
 ### Build inventory
 
-Runtime artwork/audio resolves IDs through the generated lookup. Builds disable automatic public-directory copying and copy only active media plus the build receipt; originals, cache receipts and old generations stay out of the renderer. Validation rejects extra/missing media, changed bytes and unapproved public resources. Limits are 152 MiB total media and 3 MiB per image; JavaScript has its [separate budget](../scripts/README.md#bundle-allowance). The current 213 active objects measure 151.02 MiB, including twenty lossless Boon portraits and four images each for Arabesca and Skybex; the unused Marsh recording remains excluded. Aliased IDs already share files. [Resource efficiency](RESOURCE_EFFICIENCY.md) owns measurement and maintenance. Retained historical generations do not enlarge new builds.
+Runtime artwork/audio resolves IDs through the generated lookup. Builds disable automatic public-directory copying and copy only active media plus the build receipt; originals, cache receipts and old generations stay out of the renderer. Validation rejects extra/missing media, changed bytes and unapproved public resources. Limits are 160 MiB total media and 3 MiB per image; JavaScript has its [separate budget](../scripts/README.md#bundle-allowance). The current 217 active objects measure 154.40 MiB, including twenty lossless Boon portraits and four images each for Arabesca, Skybex and Dulcera; the unused Marsh recording remains excluded. Aliased IDs already share files. [Resource efficiency](RESOURCE_EFFICIENCY.md) owns measurement and maintenance. Retained historical generations do not enlarge new builds.
 
 ### Audio selections
 

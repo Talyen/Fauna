@@ -63,6 +63,7 @@ function bind<M extends keyof Modules, N extends CallableName<M>>(module: M, nam
 }
 const owners = {
   encoreProgressLimit: bind("./ability-rules", "encoreProgressLimit"),
+  gentlePassage: bind("./team", "gentlePassage"),
   mountainGuide: bind("./team", "mountainGuide"),
   afterPlayerCard: bind("./combat/card-modifiers", "afterPlayerCard"),
   returnDodgedCard: bind("./combat/card-modifiers", "returnDodgedCard"),
@@ -314,6 +315,7 @@ export const modifierImplementations = freeze(
       "lucky-clover": [owners.damageRewards],
     } satisfies Record<BoonId, Binding>,
     passives: {
+      gentlePassage: [owners.gentlePassage],
       mountainGuide: [owners.mountainGuide],
       petalwake: [owners.dodgeResponse],
       expressDelivery: [owners.expressDelivery],

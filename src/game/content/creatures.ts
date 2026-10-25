@@ -1,3 +1,4 @@
+import { dulcera } from "./creatures/dulcera";
 import { arabesca } from "./creatures/arabesca";
 import { skybex } from "./creatures/skybex";
 import { orifable } from "./creatures/orifable";
@@ -62,6 +63,7 @@ const kits = [
   orifable,
   arabesca,
   skybex,
+  dulcera,
 ];
 freeze(kits, true);
 export const SPECIES: readonly Species[] = kits.map((kit) => kit.species);
@@ -96,6 +98,7 @@ export const CARDS: readonly CardDefinition[] = [
   orifable,
   arabesca,
   skybex,
+  dulcera,
 ].flatMap((kit) => kit.cards);
 const speciesById = new Map(SPECIES.map((entry) => [entry.id, entry]));
 const cardsBySpecies = new Map<SpeciesId, CardDefinition[]>();

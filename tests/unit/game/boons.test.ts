@@ -29,6 +29,7 @@ import { executeAbility } from "../../../src/game/combat/abilities";
 import { playTargetError } from "../../../src/game/play-queries";
 import { species } from "../../../src/game/content";
 import { NEW_BOON_EFFECTS } from "../../support/boons";
+import { dulceraBattle } from "../../support/dulcera";
 import { ordinaryAttackFacts } from "../../../src/game/ability-facts";
 import { afterPlayerCard } from "../../../src/game/combat/card-modifiers";
 import prepared from "../../../src/assets/prepared.json";
@@ -102,6 +103,16 @@ it("Lovers Knot retains Healing bounce attribution without bouncing the returned
   expect(ally!.health).toBe(species(ally!.species).health);
   expect(other!.health).toBe(species(other!.species).health - 2);
   expect(events.filter((event) => event.kind === "heal")).toHaveLength(5);
+});
+
+it("Lovers Knot attributes Gentle Passage to the departing healer after a swap", () => {
+  const state = structuredClone(dulceraBattle());
+  state.boons = ["lovers-knot", "thaw-spoon"];
+  const card = state.cards.find((entry) => entry.definitionId === "dulcera-hushed-waters")!;
+  const result = accept(state, { type: "play", cardId: card.id, autoEndTurn: false });
+  expect(result.team.find((ally) => ally.species === "coralcurl")!.health).toBe(13);
+  expect(result.reserves.find((ally) => ally.species === "dulcera")!.health).toBe(21);
+  expect(decodeSave(encodeSave(result))).toEqual(result);
 });
 
 it("Thaw Spoon removes buildup only for actual Health restored and retains active Freeze", () => {
