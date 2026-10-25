@@ -29,13 +29,16 @@ import { requireBattle, teamRun } from "../../support/game";
 
 const digest = (value: unknown) => createHash("sha256").update(JSON.stringify(value)).digest("hex");
 
+// Preserve the recorded catalog; later creatures have dedicated behavior suites.
+const recordedSpecies = SPECIES.filter((entry) => Object.hasOwn(traces, `${entry.id}:0`));
+
 // Recorded on committed main before modifier bindings or parameters changed.
 // These expectations are an independent behavior oracle; do not refresh them for a refactor.
 it("preserves all modifier definitions, text and ordered six-tier passives", () => {
   expect({
     talents: digest(TALENTS),
     boons: digest(BOONS),
-    passives: digest(SPECIES.map(({ id, passiveTiers }) => ({ id, passiveTiers }))),
+    passives: digest(recordedSpecies.map(({ id, passiveTiers }) => ({ id, passiveTiers }))),
   }).toMatchSnapshot();
 });
 
@@ -54,7 +57,7 @@ const cases = [
     species: "mossguard" as SpeciesId,
     rank: 0,
   })),
-  ...SPECIES.flatMap((species) =>
+  ...recordedSpecies.flatMap((species) =>
     Array.from({ length: 6 }, (_, rank) => ({
       name: `${species.id}:${rank}`,
       talent: undefined,

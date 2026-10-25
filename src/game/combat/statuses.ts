@@ -104,7 +104,7 @@ export function* removeControlBuildup(
     amount,
     text: `${unitName(unit)}: Cleanse ${status === "freeze" ? "Freeze" : "Stun"} build-up`,
   });
-  yield* reaction("cleanseRewards", state, unit, 1, events);
+  yield* reaction("cleanseRewards", state, unit, 1, events, status === "freeze");
 }
 export function* removeEffects(
   unit: Combatant,
@@ -117,6 +117,7 @@ export function* removeEffects(
   const stats = ensureCombat(unit);
   let depletion: ArmorDepletion | null = null;
   let cleansed = 0;
+  const hadFreezeBuildup = stats.freeze > 0;
   const removedStatuses: NonNullable<import("../types").StatusEvent["affectedStatus"]>[] = [];
   const statuses =
     kind === "cleanse"
@@ -191,7 +192,15 @@ export function* removeEffects(
       amount: 0,
       text: `${unitName(unit)}: ${kind === "cleanse" ? "Cleanse" : "Purge"} removes no effects.`,
     });
-  if (cleansed > 0 && state) yield* reaction("cleanseRewards", state, unit, cleansed, events);
+  if (cleansed > 0 && state)
+    yield* reaction(
+      "cleanseRewards",
+      state,
+      unit,
+      cleansed,
+      events,
+      hadFreezeBuildup && removedStatuses.includes("freeze"),
+    );
   if (state) yield* reaction("triggerArmorBreak", state, depletion, events);
   // Typed wards share feedback labels but spend separate Purge categories;
   // Cleanse still coalesces active control with buildup of the same status
@@ -202,8 +211,27 @@ export function* cleanseRewards(
   unit: Combatant,
   cleansed: number,
   events: GameEvent[],
+  freezeBuildupRemoved = false,
 ): Resolution<void> {
   const stats = ensureCombat(unit);
+  if (freezeBuildupRemoved && unit.health > 0) {
+    const allied = !isEnemy(unit);
+    const row = battlefield(state, allied ? "player" : "enemy");
+    const healing = row.some((ally) => ally.id === unit.id)
+      ? row.reduce(
+          (total, ally) =>
+            total +
+            (ally.health > 0
+              ? creaturePassive(allied ? state : undefined, ally.species).effects.reduce(
+                  (sum, effect) => sum + (effect.kind === "sunthaw" ? effect.amount : 0),
+                  0,
+                )
+              : 0),
+          0,
+        )
+      : 0;
+    if (healing) yield* reaction("restoreHealth", unit, healing, events, false, state);
+  }
   if (!isEnemy(unit)) {
     if (hasTalent(state, "light.divine-favor")) stats[talentRule("light.divine-favor").state] = true;
     const healing =

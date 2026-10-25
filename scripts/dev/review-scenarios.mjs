@@ -1,6 +1,10 @@
 import { expect } from "@playwright/test";
 
 export const SCENARIOS = [
+  "parhelion-battle",
+  "parhelion-collection",
+  "parhelion-rank-five",
+  "parhelion-targeting",
   "orifable-battle",
   "orifable-food",
   "orifable-targeting",
@@ -88,6 +92,15 @@ export async function reviewScenario(server, name) {
     game = { ...game, team: game.team.map((unit, index) => (index ? unit : { ...unit, health: 1 })) };
     game = accept(game, { type: "visitCampfire" });
   }
+  if (name.startsWith("parhelion-")) {
+    const { parhelionBattle } = await server.ssrLoadModule("/tests/support/parhelion.ts");
+    game = parhelionBattle();
+    if (name === "parhelion-rank-five")
+      game = {
+        ...game,
+        discovery: { ...game.discovery, recruited: { ...game.discovery.recruited, parhelion: 6 } },
+      };
+  }
   if (name.startsWith("oathara-")) {
     const { oatharaBattle } = await server.ssrLoadModule("/tests/support/oathara.ts");
     game = oatharaBattle();
@@ -120,11 +133,13 @@ export async function reviewScenario(server, name) {
     name,
     save,
     seed: name.startsWith("merchant") ? 7 : 42,
-    fixture: name.startsWith("orifable-")
-      ? "tests/support/orifable.ts"
-      : name.startsWith("almanelle-")
-        ? "tests/support/almanelle.ts"
-        : "tests/support/game.ts",
+    fixture: name.startsWith("parhelion-")
+      ? "tests/support/parhelion.ts"
+      : name.startsWith("orifable-")
+        ? "tests/support/orifable.ts"
+        : name.startsWith("almanelle-")
+          ? "tests/support/almanelle.ts"
+          : "tests/support/game.ts",
   };
 }
 
@@ -144,7 +159,10 @@ export async function openReviewScenario(page, origin, scenario, scale) {
   await expect(page.locator("#startup-splash")).toHaveCount(0);
   const button = (name) => page.getByRole("button", { name, exact: true });
   const menu = scenario.name === "talent-tree" ? "talents" : scenario.name.split("-")[0];
-  if (["orifable-collection", "orifable-rank-five"].includes(scenario.name)) {
+  if (["parhelion-collection", "parhelion-rank-five"].includes(scenario.name)) {
+    await button("Collection").click();
+    await button("Inspect Parhelion").click();
+  } else if (["orifable-collection", "orifable-rank-five"].includes(scenario.name)) {
     await button("Collection").click();
     await button("Inspect Orifable").click();
   } else if (["almanelle-collection", "almanelle-rank-five"].includes(scenario.name)) {
@@ -159,6 +177,8 @@ export async function openReviewScenario(page, origin, scenario, scale) {
     await button("Continue").click();
     if (scenario.name === "pause") await button("Open menu").click();
   }
+  if (scenario.name === "parhelion-targeting")
+    await page.locator('.hand [data-card-id="ally-0:parhelion-whiteout-waltz"]').click();
   if (scenario.name === "orifable-targeting") {
     await page.locator('.hand [aria-label^="Apple,"]').click();
   }
