@@ -1,3 +1,4 @@
+import traces from "./fixtures/modifier-traces.json" with { type: "json" };
 import { dodgeChance } from "../../../src/game/combat/index";
 import { cardCost } from "../../../src/game/ability-rules";
 import { projectPlay } from "../../../src/game/preview";
@@ -70,8 +71,14 @@ const cases = [
     rank: 5,
   },
 ];
-it("preserves modifier command, preview, reaction, RNG and save/resume traces", () => {
-  const results = cases.map((scenario) => {
+it("covers every recorded modifier trace", () => {
+  expect(cases.map(({ name }) => name).sort()).toEqual(Object.keys(traces).sort());
+});
+
+// Each independent scenario retains its original digest and its own bounded deadline.
+it.each(cases)(
+  "preserves modifier command, preview, reaction, RNG and save/resume traces for $name",
+  (scenario) => {
     const original = teamRun(
       42,
       species(scenario.species).legendary ? [scenario.species] : [scenario.species, "reedstag", "cindernewt"],
@@ -138,16 +145,15 @@ it("preserves modifier command, preview, reaction, RNG and save/resume traces", 
     expect(encodeSave(state)).toBe(encoded);
     const rejected = dispatch(state, { type: "play", cardId: "missing" });
     expect(rejected.state).toBe(state);
-    return {
-      name: scenario.name,
+    const trace = {
       commands,
       turn: digest(dispatch(state, { type: "endTurn" })),
       ranking: digest(rankedBattleChoices(state, false)),
       reactions: digest({ mutable, events }),
     };
-  });
-  expect(Object.fromEntries(results.map(({ name, ...trace }) => [name, digest(trace)]))).toMatchSnapshot();
-});
+    expect(digest(trace)).toBe(traces[scenario.name as keyof typeof traces]);
+  },
+);
 
 it("preserves initial journey and seeded start state", () => {
   expect(digest(createGame(42))).toMatchSnapshot();
