@@ -75,11 +75,13 @@ export function* tickStatuses(state: GameState, unit: Combatant, events: GameEve
         (candidate) => candidate.id === sourceId,
       ) ?? unit;
     // Cleanse reactions may remove the wound, but cannot revoke healing earned by this tick.
-    const lost =
-      (yield* reaction("hit", state, source, unit, amount, status, events, { origin: "periodic" })) ?? 0;
+    // Periodic packets have no attack delivery; retain the payment for deferred Leech.
+    const payment = yield* reaction("resolveHit", state, source, unit, amount, status, events, {
+      origin: "periodic",
+    });
     if (status === "bleed") {
       finishBleedTick(stats);
-      for (const payout of bleedPayments(payouts, lost)) {
+      for (const payout of bleedPayments(payouts, payment.outcome === "landed" ? payment.dealt : 0)) {
         const owner = [
           ...battlefield(state, "player"),
           ...state.reserves,

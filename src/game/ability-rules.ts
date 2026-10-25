@@ -14,6 +14,9 @@ export function manaCapacity(state: GameState): number {
 export function encoreProgressLimit(state: Pick<GameState, "boons">): number {
   return state.boons.includes("encore-baton") ? boonRule("encore-baton").cards - 1 : 0;
 }
+export function puzzleProgressLimit(state: Pick<GameState, "boons">): number {
+  return state.boons.includes("story-puzzle-cube") ? boonRule("story-puzzle-cube").effects - 1 : 0;
+}
 /** Intrinsic effect value; healing caps resolve in the command. */
 export function actionValue(
   card: Card,
@@ -23,7 +26,10 @@ export function actionValue(
   state?: Pick<GameState, "talents" | "boons" | "discovery">,
 ): number {
   const def = definition(card.definitionId);
-  if (def.species === null) return def.value;
+  if (def.species === null)
+    return (
+      def.value * (state && state.boons.includes("nectar-dipper") ? boonRule("nectar-dipper").multiplier : 1)
+    );
   return intrinsicAbilityValue(def, actor, card.level, creaturePassive(state, actor.species!));
 }
 function intrinsicAbilityValue(

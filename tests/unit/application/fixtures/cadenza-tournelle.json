@@ -1,5 +1,5 @@
 {
-  "version": 60,
+  "version": 61,
   "discovery": {
     "encountered": [
       "tournelle",
@@ -538,7 +538,8 @@
     "repeatNext": {
       "player": false,
       "enemy": false
-    }
+    },
+    "puzzleProgress": []
   },
   "reward": null,
   "journey": {

@@ -305,4 +305,21 @@ describe("Block against periodic damage", () => {
       expect(target.combat!.burn).toBe(4);
     });
   });
+
+  it("pays deferred Bleed Leech from absorbed damage without inflating Armor or overkill", () => {
+    produce(alpenglenBattle(), (draft) => {
+      const source = draft.team[0]!;
+      const target = draft.battle.enemies[0]!;
+      target.block = 6;
+      target.combat.bleed = 6;
+      target.combat.statusSources.bleed = source.id;
+      target.combat.bleedLeech = [{ sourceId: source.id, amount: 6 }];
+      const health = target.health;
+      tickStatuses(draft, target, []);
+      expect(target.health).toBe(health);
+      expect(target.block).toBe(0);
+      expect(source.health).toBe(23);
+      expect(target.combat.bleedLeech).toEqual([]);
+    });
+  });
 });

@@ -1,3 +1,8 @@
+import { actionValue } from "../../../src/game/ability-rules";
+import { draw, receiveCard, fillHand } from "../../../src/game/card-zones";
+import { swapBackup } from "../../../src/game/team";
+import { decayBlock } from "../../../src/game/combat/turns";
+import { resolveCombat } from "../../../src/game/combat/resolution";
 import {
   swapFixture,
   completeRecruitment,
@@ -11,6 +16,8 @@ import {
 import { expect, it } from "vitest";
 import {
   freshCombat,
+  grantStatus,
+  removeControlBuildup,
   hit,
   removeEffects,
   restoreHealth,
@@ -915,4 +922,263 @@ it("settles a Mask victory before remaining allied damage can knock out its wear
   const next = accept(state, { type: "endTurn" });
   expect(next.phase).toBe("recruit");
   expect(next.team[0]!.health).toBe(1);
+});
+
+it("Apiary Smoker prevents new enemy Thorns of every type while preserving existing retaliation", () => {
+  const { state, source, target, events } = fixture();
+  state.boons = ["apiary-smoker"];
+  target.combat.blind = true;
+  target.combat.thorns = 3;
+  for (const status of ["thorns", "waterThorns", "fireThorns"] as const)
+    grantStatus(target, status, 4, events, state);
+  expect([target.combat.thorns, target.combat.waterThorns, target.combat.fireThorns]).toEqual([3, 0, 0]);
+  source.combat = { ...freshCombat(), blind: true };
+  grantStatus(source, "thorns", 2, events, state);
+  expect(source.combat.thorns).toBe(2);
+  hit(state, source, target, 1, "water", events, { origin: "ability", blindMiss: false });
+  expect(target.combat.thorns).toBe(2);
+  target.combat.blind = false;
+  grantStatus(target, "waterThorns", 4, events, state);
+  expect(target.combat.waterThorns).toBe(4);
+});
+
+it("Brookskip Disc copies the absorbed Water amount once and retains both enemies' defenses", () => {
+  const { state, source, target, events } = fixture();
+  state.boons = ["brookskip-disc"];
+  const [other, last] = state.battle!.enemies.filter((enemy) => enemy.id !== target.id);
+  for (const enemy of [other!, last!]) {
+    enemy.health = enemy.maxHealth = 100;
+    enemy.block = 0;
+    enemy.combat = freshCombat();
+  }
+  target.block = 4;
+  other!.block = 2;
+  const rng = state.rng;
+  hit(state, source, target, 6, "water", events, { origin: "derived" });
+  expect([target.block, target.health, other!.block, other!.health, last!.health]).toEqual([
+    0, 98, 0, 98, 100,
+  ]);
+  expect(state.rng).toBe(rng);
+});
+
+it("Brookskip Disc does not chain unblocked or enemy Water damage", () => {
+  const { state, source, target, events } = fixture();
+  state.boons = ["brookskip-disc"];
+  hit(state, source, target, 5, "water", events, { origin: "derived" });
+  expect(events.filter((event) => event.kind === "damage")).toHaveLength(1);
+  source.block = 5;
+  hit(state, target, source, 4, "water", events, { origin: "derived" });
+  expect(events.filter((event) => event.kind === "damage")).toHaveLength(2);
+});
+
+it("Fallingstar Anvil returns spent Block as protected Stun buildup without extra damage", () => {
+  const { state, source, target, events } = fixture();
+  state.boons = ["fallingstar-anvil"];
+  target.combat = freshCombat();
+  source.combat = { ...freshCombat(), controlled: "freeze", controlTurns: 1 };
+  source.block = 6;
+  const before = target.health;
+  hit(state, target, source, 6, "physical", events, { origin: "ability", blindMiss: false });
+  expect(source.block).toBe(0);
+  expect(target.combat.stun).toBe(3);
+  expect(target.health).toBe(before);
+  target.combat.nullify = true;
+  source.block = 4;
+  hit(state, target, source, 4, "water", events, { origin: "ability", blindMiss: false });
+  expect(target.combat.nullify).toBe(false);
+  expect(target.combat.stun).toBe(3);
+});
+
+it("Fallingstar Anvil respects control immunity and ignores derived Block loss", () => {
+  const { state, source, target, events } = fixture();
+  state.boons = ["fallingstar-anvil"];
+  source.block = 8;
+  hit(state, target, source, 4, "water", events, { origin: "derived" });
+  expect(target.combat.stun).toBe(0);
+  source.combat = { ...freshCombat(), controlled: "freeze", controlTurns: 1 };
+  hit(state, target, source, 4, "water", events, { origin: "ability", blindMiss: false });
+  expect(target.combat.stun).toBe(0);
+});
+
+it("Pleated Pagoda grants Armor for actual decay without taking retained Block", () => {
+  const { state, source, target, events } = fixture();
+  state.boons = ["pleated-pagoda"];
+  source.block = target.block = 10;
+  source.combat = freshCombat();
+  decayBlock(state, source, events);
+  expect(source.block).toBe(5);
+  expect(source.combat.armor).toBe(3);
+  decayBlock(state, target, events);
+  expect(target.combat.armor).toBe(0);
+  source.block = 0;
+  decayBlock(state, source, events);
+  expect(source.combat.armor).toBe(3);
+});
+
+it("Calendula Soap requires successful complete removal and includes selective Cleanses", () => {
+  const { state, source, events } = fixture();
+  state.boons = ["calendula-soap"];
+  source.combat = { ...freshCombat(), burn: 3, freeze: 2 };
+  removeEffects(source, "cleanse", 1, events, state);
+  expect(source.combat.nullify).toBe(false);
+  removeControlBuildup(state, source, "freeze", events);
+  expect(source.combat.nullify).toBe(true);
+  source.combat.nullify = false;
+  removeEffects(source, "cleanse", 1, events, state);
+  expect(source.combat.nullify).toBe(false);
+});
+
+it.each(["food-apple", "food-trail-bread", "food-mana-berries"])(
+  "Nectar Dipper doubles %s in rules, preview and execution",
+  (id) => {
+    const state = structuredClone(run());
+    state.boons = ["nectar-dipper", "rainkeeper"];
+    const def = definition(id);
+    const card = { id: "test-food", definitionId: id, ownerId: null, level: 0, temporary: true as const };
+    state.cards.push(card);
+    state.battle!.hand = [card.id];
+    for (const zone of ["draw", "discard", "buffer"] as const)
+      state.battle![zone] = state.battle![zone].filter((entry) => entry !== card.id);
+    state.battle!.mana = 1;
+    const ally = state.team[0]!;
+    ally.health = 1;
+    ally.block = 0;
+    expect(actionValue(card, { species: null, attacked: false }, state)).toBe(def.value * 2);
+    const preview = previewCard(state, card.id, ally.id);
+    expect(preview).not.toBeNull();
+    const result = dispatch(state, {
+      type: "play",
+      cardId: card.id,
+      targetId: def.effect === "mana" ? undefined : ally.id,
+      autoEndTurn: false,
+    });
+    expect(result.accepted).toBe(true);
+    expect(result.state.battle!.mana).toBe(def.effect === "mana" ? 4 : 0);
+    expect(result.state.team[0]!.health).toBe(def.effect === "heal" ? 13 : 1);
+    expect(result.state.team[0]!.block).toBe(def.effect === "guard" ? 12 : 0);
+    expect(result.state.cards.some((entry) => entry.id === card.id)).toBe(false);
+  },
+);
+
+it("Dune Shuttle grants Block on actual draws, not copies, Food, returns or overflow promotion", () => {
+  const state = structuredClone(teamRun(42, ["rookhaven", "prismram", "reedstag"]));
+  state.boons = ["dune-shuttle"];
+  state.discovery.recruited.rookhaven = 6;
+  const owner = state.team[1]!;
+  owner.block = 0;
+  const card = state.cards.find((entry) => entry.ownerId === owner.id)!;
+  state.battle!.draw = [card.id];
+  state.battle!.hand = [];
+  state.battle!.buffer = [];
+  state.battle!.discard = state.cards.filter((entry) => entry.id !== card.id).map((entry) => entry.id);
+  draw(state, 1);
+  expect(owner.block).toBe(1);
+  expect(state.battle!.hand).toHaveLength(2);
+  receiveCard(state, state.battle!.hand.pop()!);
+  fillHand(state);
+  expect(owner.block).toBe(1);
+  const food = { id: "food-test", definitionId: "food-apple", ownerId: null, level: 0 };
+  state.cards.push(food);
+  state.battle!.draw = [food.id];
+  draw(state, 1);
+  expect(owner.block).toBe(1);
+});
+
+it("Saddle Pouch draws the incoming kit only on ability swaps and invokes draw rewards", () => {
+  const state = structuredClone(run());
+  addBackups(state, { id: "pouch-backup", species: "coralcurl", health: 28, block: 0, attacked: false });
+  state.boons = ["saddle-pouch", "dune-shuttle"];
+  const outgoing = state.team[0]!;
+  const incoming = state.reserves[0]!;
+  const before = incoming.block;
+  swapBackup(state, outgoing.id, incoming.id, [], true);
+  expect(
+    state.battle!.hand.some((id) => state.cards.find((card) => card.id === id)?.ownerId === incoming.id),
+  ).toBe(true);
+  expect(incoming.block).toBe(before + 1);
+  const control = structuredClone(run());
+  addBackups(control, { id: "pouch-control", species: "coralcurl", health: 28, block: 0, attacked: false });
+  control.boons = ["saddle-pouch"];
+  const count = control.battle!.hand.length;
+  swapBackup(control, control.team[0]!.id, control.reserves[0]!.id, [], false);
+  expect(control.battle!.hand.length).toBe(count);
+});
+
+it("Mineral Bookend rewards the actual last draw, respects the Mana cap and ignores returns", () => {
+  const state = structuredClone(run());
+  state.boons = ["mineral-bookend"];
+  const [a, b, ...rest] = state.cards.map((card) => card.id);
+  state.battle!.hand = [];
+  state.battle!.buffer = [];
+  state.battle!.draw = [a!, b!];
+  state.battle!.discard = rest;
+  state.battle!.mana = 0;
+  draw(state, 1);
+  expect(state.battle!.mana).toBe(0);
+  draw(state, 1);
+  expect(state.battle!.mana).toBe(1);
+  receiveCard(state, state.battle!.hand.pop()!);
+  expect(state.battle!.mana).toBe(1);
+  state.battle!.mana = state.battle!.maxMana;
+  draw(state, state.battle!.draw.length);
+  expect(state.battle!.mana).toBe(state.battle!.maxMana);
+});
+
+it("Story Puzzle Cube counts distinct successful applications across enemies, resets and survives resume", () => {
+  const state = structuredClone(run());
+  state.boons = ["story-puzzle-cube"];
+  const source = state.team[0]!;
+  const [target, other] = state.battle!.enemies;
+  const events: GameEvent[] = [];
+  target!.block = 6;
+  const apply = (status: "burn" | "poison" | "bleed", recipient = target!) =>
+    resolveCombat("applyHarmfulStatus", state, source, recipient, 1, status, events);
+  apply("burn");
+  apply("burn");
+  apply("poison", other!);
+  expect(state.battle!.puzzleProgress).toEqual(["burn", "poison"]);
+  apply("poison");
+  expect(decodeSave(encodeSave(state))).toEqual(state);
+  const decoded = structuredClone(decodeSave(encodeSave(state)));
+  resolveCombat(
+    "applyHarmfulStatus",
+    decoded,
+    decoded.team[0]!,
+    decoded.battle!.enemies[0]!,
+    1,
+    "bleed",
+    events,
+  );
+  expect(decoded.battle!.enemies[0]!.block).toBe(0);
+  expect(decoded.battle!.puzzleProgress).toEqual([]);
+  for (const status of ["burn", "poison", "bleed"] as const)
+    resolveCombat(
+      "applyHarmfulStatus",
+      decoded,
+      decoded.team[0]!,
+      decoded.battle!.enemies[0]!,
+      1,
+      status,
+      events,
+    );
+  expect(decoded.battle!.puzzleProgress).toEqual([]);
+  const invalid = structuredClone(state);
+  invalid.battle!.puzzleProgress = ["burn", "burn"];
+  expect(() => decodeSave(encodeSave(invalid))).toThrow();
+});
+
+it("Story Puzzle Cube ignores prevented effects and rejected commands preserve progress and RNG", () => {
+  const state = structuredClone(run());
+  state.boons = ["story-puzzle-cube"];
+  const source = state.team[0]!,
+    target = state.battle!.enemies[0]!;
+  target.combat.nullify = true;
+  resolveCombat("applyHarmfulStatus", state, source, target, 1, "burn", []);
+  expect(state.battle!.puzzleProgress).toEqual([]);
+  target.combat.cooldown = 1;
+  resolveCombat("applyHarmfulStatus", state, source, target, 1, "stun", []);
+  expect(state.battle!.puzzleProgress).toEqual([]);
+  const before = structuredClone(state);
+  expect(dispatch(state, { type: "play", cardId: "missing", autoEndTurn: false }).accepted).toBe(false);
+  expect(state).toEqual(before);
 });

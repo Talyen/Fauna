@@ -80,6 +80,7 @@ const minion = z.object({
 });
 const battle = z.object({
   encoreProgress: z.number().int().min(0).max(2),
+  puzzleProgress: z.array(z.enum(["burn", "poison", "bleed", "stun", "freeze", "blind"])).max(2),
   repeatNext: z.object({ player: z.boolean(), enemy: z.boolean() }).strict(),
   minions: z.array(minion).max(12).optional(),
   copySerial: z.number().int().min(0).max(Number.MAX_SAFE_INTEGER),

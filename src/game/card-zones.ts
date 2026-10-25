@@ -1,3 +1,5 @@
+import { boonRule } from "./rules/boons";
+import { gainMana, grantBlock } from "./combat/index";
 import type { SupplementalEffect } from "./rules/ability-types";
 import { drawableOwnerIds } from "./card-actors";
 import { definition, species } from "./content";
@@ -32,6 +34,11 @@ export function receiveCard(state: GameState, id: string) {
 export function receiveDraw(state: GameState, id: string, events: GameEvent[]) {
   const battle = state.battle!;
   queueCard(battle, id);
+  const owner = state.team.find(
+    (unit) => unit.id === state.cards.find((card) => card.id === id)?.ownerId && unit.health > 0,
+  );
+  if (owner && state.boons.includes("dune-shuttle"))
+    grantBlock(state, owner, boonRule("dune-shuttle").block, events);
   let original: GameState["cards"][number] | undefined;
   // Copy insertion and buffer promotion are not draws and cannot recursively copy.
   for (const reader of state.team) {
@@ -82,7 +89,7 @@ function lastEligibleIndex(ids: readonly string[], eligible: (id: string) => boo
 }
 
 /** Deliver one actual draw, including copies and overflow, without disturbing ineligible slots. */
-function drawEligibleCard(state: GameState, eligible: (id: string) => boolean, events: GameEvent[]) {
+export function drawEligibleCard(state: GameState, eligible: (id: string) => boolean, events: GameEvent[]) {
   hiddenDecision(state);
   const battle = state.battle!;
   let index = lastEligibleIndex(battle.draw, eligible);
@@ -92,7 +99,10 @@ function drawEligibleCard(state: GameState, eligible: (id: string) => boolean, e
   }
   if (index < 0) return false;
   const id = battle.draw.splice(index, 1)[0]!;
+  const last = battle.draw.length === 0;
   receiveDraw(state, id, events);
+  if (last && state.boons.includes("mineral-bookend"))
+    gainMana(state, boonRule("mineral-bookend").mana, events);
   recycleDiscard(state);
   return true;
 }
@@ -135,6 +145,12 @@ export function expressDelivery(state: GameState, events: GameEvent[]) {
         text: "Express Delivery draws an extra card",
       });
   }
+}
+
+export function drawOwner(state: GameState, ownerId: string, events: GameEvent[]) {
+  fillHand(state);
+  const eligible = new Set(state.cards.filter((card) => card.ownerId === ownerId).map((card) => card.id));
+  return drawEligibleCard(state, (id) => eligible.has(id), events);
 }
 
 export function drawKeyword(

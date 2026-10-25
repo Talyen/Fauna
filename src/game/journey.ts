@@ -91,6 +91,7 @@ export function beginBattle(state: StateAt<"teamSelection">, events: GameEvent[]
   }
   const battle = {
     encoreProgress: 0,
+    puzzleProgress: [],
     repeatNext: { player: false, enemy: false },
     copySerial: 0,
     earnedGold: 0,

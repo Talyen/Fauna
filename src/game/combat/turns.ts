@@ -1,3 +1,4 @@
+import { boonRule } from "../rules/boons";
 import { battleMana, renewalManaBonus } from "./battle-modifiers";
 import { unfinishedJourneyLimit } from "../card-actors";
 import { battlefield, isEnemy, healingAllies } from "../battlefield";
@@ -15,6 +16,7 @@ import {
   mostInjured,
   startAction,
   grantStatus,
+  grantArmor,
   tickStatuses,
   controlled,
   TURN_MANA,
@@ -45,6 +47,8 @@ export function decayBlock(state: GameState, unit: Combatant, events: GameEvent[
     0,
   );
   if (percent > 0) grantStatus(unit, "thorns", Math.round((lost * percent) / 100), events, state);
+  if (allied && state.boons.includes("pleated-pagoda"))
+    grantArmor(state, unit, Math.round(lost / boonRule("pleated-pagoda").divisor), events);
 }
 
 export function livingChorus(state: GameState, enemy: boolean, events: GameEvent[]) {

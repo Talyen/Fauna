@@ -1,5 +1,5 @@
 import { isRosterCreature } from "./battlefield";
-import { recycleDiscard, fillHand, filterCardZones, MAX_BATTLE_CARDS } from "./card-zones";
+import { drawOwner, recycleDiscard, fillHand, filterCardZones, MAX_BATTLE_CARDS } from "./card-zones";
 import { removeDepartedMinions } from "./combat/legendary";
 import { grantBlock, restoreHealth } from "./combat/index";
 import { unitName, type Combatant } from "./combat/state";
@@ -223,6 +223,7 @@ export function swapBackup(
     );
     mountainGuide(state, incoming, previous, events);
     gentlePassage(state, previous, events);
+    if (fromCard && state.boons.includes("saddle-pouch")) drawOwner(state, incoming.id, events);
     return;
   }
   state.team[index] = incoming;
@@ -261,6 +262,7 @@ export function swapBackup(
   });
   mountainGuide(state, incoming, previous, events);
   gentlePassage(state, previous, events);
+  if (fromCard && state.boons.includes("saddle-pouch")) drawOwner(state, incoming.id, events);
 }
 export function swapFromCard(
   state: GameState,

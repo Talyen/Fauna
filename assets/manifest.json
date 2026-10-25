@@ -2592,6 +2592,116 @@
       "rights": "User-provided Fauna artwork; original source retained in Google Drive"
     },
     {
+      "id": "boon.apiary-smoker",
+      "origin": "repository",
+      "source": "public/art/boons/apiary-smoker.png",
+      "output": "art/boons/apiary-smoker.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1_Sux3F1gOfiXyYMOzrkullTsAN_Xo6Hd/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.brookskip-disc",
+      "origin": "repository",
+      "source": "public/art/boons/brookskip-disc.png",
+      "output": "art/boons/brookskip-disc.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1tOP0Unru7xBsgLgIbzPkprxdnP-UegRy/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.fallingstar-anvil",
+      "origin": "repository",
+      "source": "public/art/boons/fallingstar-anvil.png",
+      "output": "art/boons/fallingstar-anvil.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1Gi5F4ZdZgUlikRnl8oOAHwHUHIePovg0/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.pleated-pagoda",
+      "origin": "repository",
+      "source": "public/art/boons/pleated-pagoda.png",
+      "output": "art/boons/pleated-pagoda.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1nmZxmGEfHdSnUeoVPyQ1MnqTokkC7Tqe/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.calendula-soap",
+      "origin": "repository",
+      "source": "public/art/boons/calendula-soap.png",
+      "output": "art/boons/calendula-soap.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1FJqVY1visSAawzIdrMyw6n2Ke-q_7-dh/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.nectar-dipper",
+      "origin": "repository",
+      "source": "public/art/boons/nectar-dipper.png",
+      "output": "art/boons/nectar-dipper.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1kqYWGDvS1KoHESDLLAx8401LoLxsq74b/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.saddle-pouch",
+      "origin": "repository",
+      "source": "public/art/boons/saddle-pouch.png",
+      "output": "art/boons/saddle-pouch.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1e63v7ALIKaiGumZJLD-sYQ3CEScokzXJ/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.dune-shuttle",
+      "origin": "repository",
+      "source": "public/art/boons/dune-shuttle.png",
+      "output": "art/boons/dune-shuttle.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1CzyGesaw3v5cJAWc7LcigamXgLZVpZMI/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.story-puzzle-cube",
+      "origin": "repository",
+      "source": "public/art/boons/story-puzzle-cube.png",
+      "output": "art/boons/story-puzzle-cube.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1WDMAMGQelmcLTd03E54g1Vn4A52hMpke/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
+      "id": "boon.mineral-bookend",
+      "origin": "repository",
+      "source": "public/art/boons/mineral-bookend.png",
+      "output": "art/boons/mineral-bookend.webp",
+      "recipe": "card-webp",
+      "kind": "art",
+      "aspect": [3, 4],
+      "provenance": "User-selected Google Drive Boon artwork: https://drive.google.com/file/d/1CdujgAfMg_EpCgFAlmmvRc0Fm82JzUSj/view; original PNG preserved unchanged",
+      "rights": "User-provided artwork selected for Fauna; upstream rights not independently verified"
+    },
+    {
       "id": "creature.alpenglen",
       "origin": "repository",
       "source": "public/art/creatures/alpenglen/portrait.png",
